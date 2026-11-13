@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SetIdentityNotificationTopicRequest, SetIdentityNotificationTopicResponse } from "../models/models_0";
-import {
-  deserializeAws_querySetIdentityNotificationTopicCommand,
-  serializeAws_querySetIdentityNotificationTopicCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetIdentityNotificationTopicRequest, SetIdentityNotificationTopicResponse } from "../models/models_0";
+import { SetIdentityNotificationTopic$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetIdentityNotificationTopicCommand}.
+ */
 export interface SetIdentityNotificationTopicCommandInput extends SetIdentityNotificationTopicRequest {}
-export interface SetIdentityNotificationTopicCommandOutput
-  extends SetIdentityNotificationTopicResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link SetIdentityNotificationTopicCommand}.
+ */
+export interface SetIdentityNotificationTopicCommandOutput extends SetIdentityNotificationTopicResponse, __MetadataBearer {}
 
 /**
  * <p>Sets an Amazon Simple Notification Service (Amazon SNS) topic to use when delivering notifications. When you use
@@ -30,79 +29,70 @@ export interface SetIdentityNotificationTopicCommandOutput
  *             notifications to the topic you specified. You can send bounce, complaint, or delivery
  *             notifications (or any combination of the three) to the Amazon SNS topic that you
  *             specify.</p>
- *         <p>You can execute this operation no more than once per second.</p>
- *         <p>For more information about feedback notification, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer
- *             Guide</a>.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
+ *          <p>For more information about feedback notification, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html">Amazon SES
+ *                 Developer Guide</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, SetIdentityNotificationTopicCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, SetIdentityNotificationTopicCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // SetIdentityNotificationTopicRequest
+ *   Identity: "STRING_VALUE", // required
+ *   NotificationType: "Bounce" || "Complaint" || "Delivery", // required
+ *   SnsTopic: "STRING_VALUE",
+ * };
  * const command = new SetIdentityNotificationTopicCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetIdentityNotificationTopicCommandInput - {@link SetIdentityNotificationTopicCommandInput}
+ * @returns {@link SetIdentityNotificationTopicCommandOutput}
  * @see {@link SetIdentityNotificationTopicCommandInput} for command's `input` shape.
  * @see {@link SetIdentityNotificationTopicCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @example SetIdentityNotificationTopic
+ * ```javascript
+ * // The following example sets the Amazon SNS topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with the specified identity as the Source:
+ * const input = {
+ *   Identity: "user@example.com",
+ *   NotificationType: "Bounce",
+ *   SnsTopic: "arn:aws:sns:us-west-2:111122223333:MyTopic"
+ * };
+ * const command = new SetIdentityNotificationTopicCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class SetIdentityNotificationTopicCommand extends $Command<
-  SetIdentityNotificationTopicCommandInput,
-  SetIdentityNotificationTopicCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetIdentityNotificationTopicCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetIdentityNotificationTopicCommandInput, SetIdentityNotificationTopicCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "SetIdentityNotificationTopicCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetIdentityNotificationTopicRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetIdentityNotificationTopicResponse.filterSensitiveLog,
+export class SetIdentityNotificationTopicCommand extends command<SetIdentityNotificationTopicCommandInput, SetIdentityNotificationTopicCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetIdentityNotificationTopic",
+  SetIdentityNotificationTopic$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetIdentityNotificationTopicRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetIdentityNotificationTopicCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_querySetIdentityNotificationTopicCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SetIdentityNotificationTopicCommandOutput> {
-    return deserializeAws_querySetIdentityNotificationTopicCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetIdentityNotificationTopicCommandInput;
+      output: SetIdentityNotificationTopicCommandOutput;
+    };
+  };
 }

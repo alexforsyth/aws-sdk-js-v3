@@ -1,2399 +1,2358 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { ApiGatewayV2Client } from "./ApiGatewayV2Client";
-import { CreateApiCommand, CreateApiCommandInput, CreateApiCommandOutput } from "./commands/CreateApiCommand";
+import { type CreateApiCommandInput, type CreateApiCommandOutput, CreateApiCommand } from "./commands/CreateApiCommand";
 import {
+  type CreateApiMappingCommandInput,
+  type CreateApiMappingCommandOutput,
   CreateApiMappingCommand,
-  CreateApiMappingCommandInput,
-  CreateApiMappingCommandOutput,
 } from "./commands/CreateApiMappingCommand";
 import {
+  type CreateAuthorizerCommandInput,
+  type CreateAuthorizerCommandOutput,
   CreateAuthorizerCommand,
-  CreateAuthorizerCommandInput,
-  CreateAuthorizerCommandOutput,
 } from "./commands/CreateAuthorizerCommand";
 import {
+  type CreateDeploymentCommandInput,
+  type CreateDeploymentCommandOutput,
   CreateDeploymentCommand,
-  CreateDeploymentCommandInput,
-  CreateDeploymentCommandOutput,
 } from "./commands/CreateDeploymentCommand";
 import {
+  type CreateDomainNameCommandInput,
+  type CreateDomainNameCommandOutput,
   CreateDomainNameCommand,
-  CreateDomainNameCommandInput,
-  CreateDomainNameCommandOutput,
 } from "./commands/CreateDomainNameCommand";
 import {
+  type CreateIntegrationCommandInput,
+  type CreateIntegrationCommandOutput,
   CreateIntegrationCommand,
-  CreateIntegrationCommandInput,
-  CreateIntegrationCommandOutput,
 } from "./commands/CreateIntegrationCommand";
 import {
+  type CreateIntegrationResponseCommandInput,
+  type CreateIntegrationResponseCommandOutput,
   CreateIntegrationResponseCommand,
-  CreateIntegrationResponseCommandInput,
-  CreateIntegrationResponseCommandOutput,
 } from "./commands/CreateIntegrationResponseCommand";
-import { CreateModelCommand, CreateModelCommandInput, CreateModelCommandOutput } from "./commands/CreateModelCommand";
-import { CreateRouteCommand, CreateRouteCommandInput, CreateRouteCommandOutput } from "./commands/CreateRouteCommand";
 import {
+  type CreateModelCommandInput,
+  type CreateModelCommandOutput,
+  CreateModelCommand,
+} from "./commands/CreateModelCommand";
+import {
+  type CreatePortalCommandInput,
+  type CreatePortalCommandOutput,
+  CreatePortalCommand,
+} from "./commands/CreatePortalCommand";
+import {
+  type CreatePortalProductCommandInput,
+  type CreatePortalProductCommandOutput,
+  CreatePortalProductCommand,
+} from "./commands/CreatePortalProductCommand";
+import {
+  type CreateProductPageCommandInput,
+  type CreateProductPageCommandOutput,
+  CreateProductPageCommand,
+} from "./commands/CreateProductPageCommand";
+import {
+  type CreateProductRestEndpointPageCommandInput,
+  type CreateProductRestEndpointPageCommandOutput,
+  CreateProductRestEndpointPageCommand,
+} from "./commands/CreateProductRestEndpointPageCommand";
+import {
+  type CreateRouteCommandInput,
+  type CreateRouteCommandOutput,
+  CreateRouteCommand,
+} from "./commands/CreateRouteCommand";
+import {
+  type CreateRouteResponseCommandInput,
+  type CreateRouteResponseCommandOutput,
   CreateRouteResponseCommand,
-  CreateRouteResponseCommandInput,
-  CreateRouteResponseCommandOutput,
 } from "./commands/CreateRouteResponseCommand";
-import { CreateStageCommand, CreateStageCommandInput, CreateStageCommandOutput } from "./commands/CreateStageCommand";
 import {
+  type CreateRoutingRuleCommandInput,
+  type CreateRoutingRuleCommandOutput,
+  CreateRoutingRuleCommand,
+} from "./commands/CreateRoutingRuleCommand";
+import {
+  type CreateStageCommandInput,
+  type CreateStageCommandOutput,
+  CreateStageCommand,
+} from "./commands/CreateStageCommand";
+import {
+  type CreateVpcLinkCommandInput,
+  type CreateVpcLinkCommandOutput,
   CreateVpcLinkCommand,
-  CreateVpcLinkCommandInput,
-  CreateVpcLinkCommandOutput,
 } from "./commands/CreateVpcLinkCommand";
 import {
+  type DeleteAccessLogSettingsCommandInput,
+  type DeleteAccessLogSettingsCommandOutput,
   DeleteAccessLogSettingsCommand,
-  DeleteAccessLogSettingsCommandInput,
-  DeleteAccessLogSettingsCommandOutput,
 } from "./commands/DeleteAccessLogSettingsCommand";
-import { DeleteApiCommand, DeleteApiCommandInput, DeleteApiCommandOutput } from "./commands/DeleteApiCommand";
+import { type DeleteApiCommandInput, type DeleteApiCommandOutput, DeleteApiCommand } from "./commands/DeleteApiCommand";
 import {
+  type DeleteApiMappingCommandInput,
+  type DeleteApiMappingCommandOutput,
   DeleteApiMappingCommand,
-  DeleteApiMappingCommandInput,
-  DeleteApiMappingCommandOutput,
 } from "./commands/DeleteApiMappingCommand";
 import {
+  type DeleteAuthorizerCommandInput,
+  type DeleteAuthorizerCommandOutput,
   DeleteAuthorizerCommand,
-  DeleteAuthorizerCommandInput,
-  DeleteAuthorizerCommandOutput,
 } from "./commands/DeleteAuthorizerCommand";
 import {
+  type DeleteCorsConfigurationCommandInput,
+  type DeleteCorsConfigurationCommandOutput,
   DeleteCorsConfigurationCommand,
-  DeleteCorsConfigurationCommandInput,
-  DeleteCorsConfigurationCommandOutput,
 } from "./commands/DeleteCorsConfigurationCommand";
 import {
+  type DeleteDeploymentCommandInput,
+  type DeleteDeploymentCommandOutput,
   DeleteDeploymentCommand,
-  DeleteDeploymentCommandInput,
-  DeleteDeploymentCommandOutput,
 } from "./commands/DeleteDeploymentCommand";
 import {
+  type DeleteDomainNameCommandInput,
+  type DeleteDomainNameCommandOutput,
   DeleteDomainNameCommand,
-  DeleteDomainNameCommandInput,
-  DeleteDomainNameCommandOutput,
 } from "./commands/DeleteDomainNameCommand";
 import {
+  type DeleteIntegrationCommandInput,
+  type DeleteIntegrationCommandOutput,
   DeleteIntegrationCommand,
-  DeleteIntegrationCommandInput,
-  DeleteIntegrationCommandOutput,
 } from "./commands/DeleteIntegrationCommand";
 import {
+  type DeleteIntegrationResponseCommandInput,
+  type DeleteIntegrationResponseCommandOutput,
   DeleteIntegrationResponseCommand,
-  DeleteIntegrationResponseCommandInput,
-  DeleteIntegrationResponseCommandOutput,
 } from "./commands/DeleteIntegrationResponseCommand";
-import { DeleteModelCommand, DeleteModelCommandInput, DeleteModelCommandOutput } from "./commands/DeleteModelCommand";
-import { DeleteRouteCommand, DeleteRouteCommandInput, DeleteRouteCommandOutput } from "./commands/DeleteRouteCommand";
 import {
+  type DeleteModelCommandInput,
+  type DeleteModelCommandOutput,
+  DeleteModelCommand,
+} from "./commands/DeleteModelCommand";
+import {
+  type DeletePortalCommandInput,
+  type DeletePortalCommandOutput,
+  DeletePortalCommand,
+} from "./commands/DeletePortalCommand";
+import {
+  type DeletePortalProductCommandInput,
+  type DeletePortalProductCommandOutput,
+  DeletePortalProductCommand,
+} from "./commands/DeletePortalProductCommand";
+import {
+  type DeletePortalProductSharingPolicyCommandInput,
+  type DeletePortalProductSharingPolicyCommandOutput,
+  DeletePortalProductSharingPolicyCommand,
+} from "./commands/DeletePortalProductSharingPolicyCommand";
+import {
+  type DeleteProductPageCommandInput,
+  type DeleteProductPageCommandOutput,
+  DeleteProductPageCommand,
+} from "./commands/DeleteProductPageCommand";
+import {
+  type DeleteProductRestEndpointPageCommandInput,
+  type DeleteProductRestEndpointPageCommandOutput,
+  DeleteProductRestEndpointPageCommand,
+} from "./commands/DeleteProductRestEndpointPageCommand";
+import {
+  type DeleteRouteCommandInput,
+  type DeleteRouteCommandOutput,
+  DeleteRouteCommand,
+} from "./commands/DeleteRouteCommand";
+import {
+  type DeleteRouteRequestParameterCommandInput,
+  type DeleteRouteRequestParameterCommandOutput,
   DeleteRouteRequestParameterCommand,
-  DeleteRouteRequestParameterCommandInput,
-  DeleteRouteRequestParameterCommandOutput,
 } from "./commands/DeleteRouteRequestParameterCommand";
 import {
+  type DeleteRouteResponseCommandInput,
+  type DeleteRouteResponseCommandOutput,
   DeleteRouteResponseCommand,
-  DeleteRouteResponseCommandInput,
-  DeleteRouteResponseCommandOutput,
 } from "./commands/DeleteRouteResponseCommand";
 import {
+  type DeleteRouteSettingsCommandInput,
+  type DeleteRouteSettingsCommandOutput,
   DeleteRouteSettingsCommand,
-  DeleteRouteSettingsCommandInput,
-  DeleteRouteSettingsCommandOutput,
 } from "./commands/DeleteRouteSettingsCommand";
-import { DeleteStageCommand, DeleteStageCommandInput, DeleteStageCommandOutput } from "./commands/DeleteStageCommand";
 import {
+  type DeleteRoutingRuleCommandInput,
+  type DeleteRoutingRuleCommandOutput,
+  DeleteRoutingRuleCommand,
+} from "./commands/DeleteRoutingRuleCommand";
+import {
+  type DeleteStageCommandInput,
+  type DeleteStageCommandOutput,
+  DeleteStageCommand,
+} from "./commands/DeleteStageCommand";
+import {
+  type DeleteVpcLinkCommandInput,
+  type DeleteVpcLinkCommandOutput,
   DeleteVpcLinkCommand,
-  DeleteVpcLinkCommandInput,
-  DeleteVpcLinkCommandOutput,
 } from "./commands/DeleteVpcLinkCommand";
-import { ExportApiCommand, ExportApiCommandInput, ExportApiCommandOutput } from "./commands/ExportApiCommand";
-import { GetApiCommand, GetApiCommandInput, GetApiCommandOutput } from "./commands/GetApiCommand";
 import {
+  type DisablePortalCommandInput,
+  type DisablePortalCommandOutput,
+  DisablePortalCommand,
+} from "./commands/DisablePortalCommand";
+import { type ExportApiCommandInput, type ExportApiCommandOutput, ExportApiCommand } from "./commands/ExportApiCommand";
+import { type GetApiCommandInput, type GetApiCommandOutput, GetApiCommand } from "./commands/GetApiCommand";
+import {
+  type GetApiMappingCommandInput,
+  type GetApiMappingCommandOutput,
   GetApiMappingCommand,
-  GetApiMappingCommandInput,
-  GetApiMappingCommandOutput,
 } from "./commands/GetApiMappingCommand";
 import {
+  type GetApiMappingsCommandInput,
+  type GetApiMappingsCommandOutput,
   GetApiMappingsCommand,
-  GetApiMappingsCommandInput,
-  GetApiMappingsCommandOutput,
 } from "./commands/GetApiMappingsCommand";
-import { GetApisCommand, GetApisCommandInput, GetApisCommandOutput } from "./commands/GetApisCommand";
+import { type GetApisCommandInput, type GetApisCommandOutput, GetApisCommand } from "./commands/GetApisCommand";
 import {
+  type GetAuthorizerCommandInput,
+  type GetAuthorizerCommandOutput,
   GetAuthorizerCommand,
-  GetAuthorizerCommandInput,
-  GetAuthorizerCommandOutput,
 } from "./commands/GetAuthorizerCommand";
 import {
+  type GetAuthorizersCommandInput,
+  type GetAuthorizersCommandOutput,
   GetAuthorizersCommand,
-  GetAuthorizersCommandInput,
-  GetAuthorizersCommandOutput,
 } from "./commands/GetAuthorizersCommand";
 import {
+  type GetDeploymentCommandInput,
+  type GetDeploymentCommandOutput,
   GetDeploymentCommand,
-  GetDeploymentCommandInput,
-  GetDeploymentCommandOutput,
 } from "./commands/GetDeploymentCommand";
 import {
+  type GetDeploymentsCommandInput,
+  type GetDeploymentsCommandOutput,
   GetDeploymentsCommand,
-  GetDeploymentsCommandInput,
-  GetDeploymentsCommandOutput,
 } from "./commands/GetDeploymentsCommand";
 import {
+  type GetDomainNameCommandInput,
+  type GetDomainNameCommandOutput,
   GetDomainNameCommand,
-  GetDomainNameCommandInput,
-  GetDomainNameCommandOutput,
 } from "./commands/GetDomainNameCommand";
 import {
+  type GetDomainNamesCommandInput,
+  type GetDomainNamesCommandOutput,
   GetDomainNamesCommand,
-  GetDomainNamesCommandInput,
-  GetDomainNamesCommandOutput,
 } from "./commands/GetDomainNamesCommand";
 import {
+  type GetIntegrationCommandInput,
+  type GetIntegrationCommandOutput,
   GetIntegrationCommand,
-  GetIntegrationCommandInput,
-  GetIntegrationCommandOutput,
 } from "./commands/GetIntegrationCommand";
 import {
+  type GetIntegrationResponseCommandInput,
+  type GetIntegrationResponseCommandOutput,
   GetIntegrationResponseCommand,
-  GetIntegrationResponseCommandInput,
-  GetIntegrationResponseCommandOutput,
 } from "./commands/GetIntegrationResponseCommand";
 import {
+  type GetIntegrationResponsesCommandInput,
+  type GetIntegrationResponsesCommandOutput,
   GetIntegrationResponsesCommand,
-  GetIntegrationResponsesCommandInput,
-  GetIntegrationResponsesCommandOutput,
 } from "./commands/GetIntegrationResponsesCommand";
 import {
+  type GetIntegrationsCommandInput,
+  type GetIntegrationsCommandOutput,
   GetIntegrationsCommand,
-  GetIntegrationsCommandInput,
-  GetIntegrationsCommandOutput,
 } from "./commands/GetIntegrationsCommand";
-import { GetModelCommand, GetModelCommandInput, GetModelCommandOutput } from "./commands/GetModelCommand";
-import { GetModelsCommand, GetModelsCommandInput, GetModelsCommandOutput } from "./commands/GetModelsCommand";
+import { type GetModelCommandInput, type GetModelCommandOutput, GetModelCommand } from "./commands/GetModelCommand";
+import { type GetModelsCommandInput, type GetModelsCommandOutput, GetModelsCommand } from "./commands/GetModelsCommand";
 import {
+  type GetModelTemplateCommandInput,
+  type GetModelTemplateCommandOutput,
   GetModelTemplateCommand,
-  GetModelTemplateCommandInput,
-  GetModelTemplateCommandOutput,
 } from "./commands/GetModelTemplateCommand";
-import { GetRouteCommand, GetRouteCommandInput, GetRouteCommandOutput } from "./commands/GetRouteCommand";
+import { type GetPortalCommandInput, type GetPortalCommandOutput, GetPortalCommand } from "./commands/GetPortalCommand";
 import {
+  type GetPortalProductCommandInput,
+  type GetPortalProductCommandOutput,
+  GetPortalProductCommand,
+} from "./commands/GetPortalProductCommand";
+import {
+  type GetPortalProductSharingPolicyCommandInput,
+  type GetPortalProductSharingPolicyCommandOutput,
+  GetPortalProductSharingPolicyCommand,
+} from "./commands/GetPortalProductSharingPolicyCommand";
+import {
+  type GetProductPageCommandInput,
+  type GetProductPageCommandOutput,
+  GetProductPageCommand,
+} from "./commands/GetProductPageCommand";
+import {
+  type GetProductRestEndpointPageCommandInput,
+  type GetProductRestEndpointPageCommandOutput,
+  GetProductRestEndpointPageCommand,
+} from "./commands/GetProductRestEndpointPageCommand";
+import { type GetRouteCommandInput, type GetRouteCommandOutput, GetRouteCommand } from "./commands/GetRouteCommand";
+import {
+  type GetRouteResponseCommandInput,
+  type GetRouteResponseCommandOutput,
   GetRouteResponseCommand,
-  GetRouteResponseCommandInput,
-  GetRouteResponseCommandOutput,
 } from "./commands/GetRouteResponseCommand";
 import {
+  type GetRouteResponsesCommandInput,
+  type GetRouteResponsesCommandOutput,
   GetRouteResponsesCommand,
-  GetRouteResponsesCommandInput,
-  GetRouteResponsesCommandOutput,
 } from "./commands/GetRouteResponsesCommand";
-import { GetRoutesCommand, GetRoutesCommandInput, GetRoutesCommandOutput } from "./commands/GetRoutesCommand";
-import { GetStageCommand, GetStageCommandInput, GetStageCommandOutput } from "./commands/GetStageCommand";
-import { GetStagesCommand, GetStagesCommandInput, GetStagesCommandOutput } from "./commands/GetStagesCommand";
-import { GetTagsCommand, GetTagsCommandInput, GetTagsCommandOutput } from "./commands/GetTagsCommand";
-import { GetVpcLinkCommand, GetVpcLinkCommandInput, GetVpcLinkCommandOutput } from "./commands/GetVpcLinkCommand";
-import { GetVpcLinksCommand, GetVpcLinksCommandInput, GetVpcLinksCommandOutput } from "./commands/GetVpcLinksCommand";
-import { ImportApiCommand, ImportApiCommandInput, ImportApiCommandOutput } from "./commands/ImportApiCommand";
-import { ReimportApiCommand, ReimportApiCommandInput, ReimportApiCommandOutput } from "./commands/ReimportApiCommand";
+import { type GetRoutesCommandInput, type GetRoutesCommandOutput, GetRoutesCommand } from "./commands/GetRoutesCommand";
 import {
+  type GetRoutingRuleCommandInput,
+  type GetRoutingRuleCommandOutput,
+  GetRoutingRuleCommand,
+} from "./commands/GetRoutingRuleCommand";
+import { type GetStageCommandInput, type GetStageCommandOutput, GetStageCommand } from "./commands/GetStageCommand";
+import { type GetStagesCommandInput, type GetStagesCommandOutput, GetStagesCommand } from "./commands/GetStagesCommand";
+import { type GetTagsCommandInput, type GetTagsCommandOutput, GetTagsCommand } from "./commands/GetTagsCommand";
+import {
+  type GetVpcLinkCommandInput,
+  type GetVpcLinkCommandOutput,
+  GetVpcLinkCommand,
+} from "./commands/GetVpcLinkCommand";
+import {
+  type GetVpcLinksCommandInput,
+  type GetVpcLinksCommandOutput,
+  GetVpcLinksCommand,
+} from "./commands/GetVpcLinksCommand";
+import { type ImportApiCommandInput, type ImportApiCommandOutput, ImportApiCommand } from "./commands/ImportApiCommand";
+import {
+  type ListPortalProductsCommandInput,
+  type ListPortalProductsCommandOutput,
+  ListPortalProductsCommand,
+} from "./commands/ListPortalProductsCommand";
+import {
+  type ListPortalsCommandInput,
+  type ListPortalsCommandOutput,
+  ListPortalsCommand,
+} from "./commands/ListPortalsCommand";
+import {
+  type ListProductPagesCommandInput,
+  type ListProductPagesCommandOutput,
+  ListProductPagesCommand,
+} from "./commands/ListProductPagesCommand";
+import {
+  type ListProductRestEndpointPagesCommandInput,
+  type ListProductRestEndpointPagesCommandOutput,
+  ListProductRestEndpointPagesCommand,
+} from "./commands/ListProductRestEndpointPagesCommand";
+import {
+  type ListRoutingRulesCommandInput,
+  type ListRoutingRulesCommandOutput,
+  ListRoutingRulesCommand,
+} from "./commands/ListRoutingRulesCommand";
+import {
+  type PreviewPortalCommandInput,
+  type PreviewPortalCommandOutput,
+  PreviewPortalCommand,
+} from "./commands/PreviewPortalCommand";
+import {
+  type PublishPortalCommandInput,
+  type PublishPortalCommandOutput,
+  PublishPortalCommand,
+} from "./commands/PublishPortalCommand";
+import {
+  type PutPortalProductSharingPolicyCommandInput,
+  type PutPortalProductSharingPolicyCommandOutput,
+  PutPortalProductSharingPolicyCommand,
+} from "./commands/PutPortalProductSharingPolicyCommand";
+import {
+  type PutRoutingRuleCommandInput,
+  type PutRoutingRuleCommandOutput,
+  PutRoutingRuleCommand,
+} from "./commands/PutRoutingRuleCommand";
+import {
+  type ReimportApiCommandInput,
+  type ReimportApiCommandOutput,
+  ReimportApiCommand,
+} from "./commands/ReimportApiCommand";
+import {
+  type ResetAuthorizersCacheCommandInput,
+  type ResetAuthorizersCacheCommandOutput,
   ResetAuthorizersCacheCommand,
-  ResetAuthorizersCacheCommandInput,
-  ResetAuthorizersCacheCommandOutput,
 } from "./commands/ResetAuthorizersCacheCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateApiCommand, UpdateApiCommandInput, UpdateApiCommandOutput } from "./commands/UpdateApiCommand";
+import { type UpdateApiCommandInput, type UpdateApiCommandOutput, UpdateApiCommand } from "./commands/UpdateApiCommand";
 import {
+  type UpdateApiMappingCommandInput,
+  type UpdateApiMappingCommandOutput,
   UpdateApiMappingCommand,
-  UpdateApiMappingCommandInput,
-  UpdateApiMappingCommandOutput,
 } from "./commands/UpdateApiMappingCommand";
 import {
+  type UpdateAuthorizerCommandInput,
+  type UpdateAuthorizerCommandOutput,
   UpdateAuthorizerCommand,
-  UpdateAuthorizerCommandInput,
-  UpdateAuthorizerCommandOutput,
 } from "./commands/UpdateAuthorizerCommand";
 import {
+  type UpdateDeploymentCommandInput,
+  type UpdateDeploymentCommandOutput,
   UpdateDeploymentCommand,
-  UpdateDeploymentCommandInput,
-  UpdateDeploymentCommandOutput,
 } from "./commands/UpdateDeploymentCommand";
 import {
+  type UpdateDomainNameCommandInput,
+  type UpdateDomainNameCommandOutput,
   UpdateDomainNameCommand,
-  UpdateDomainNameCommandInput,
-  UpdateDomainNameCommandOutput,
 } from "./commands/UpdateDomainNameCommand";
 import {
+  type UpdateIntegrationCommandInput,
+  type UpdateIntegrationCommandOutput,
   UpdateIntegrationCommand,
-  UpdateIntegrationCommandInput,
-  UpdateIntegrationCommandOutput,
 } from "./commands/UpdateIntegrationCommand";
 import {
+  type UpdateIntegrationResponseCommandInput,
+  type UpdateIntegrationResponseCommandOutput,
   UpdateIntegrationResponseCommand,
-  UpdateIntegrationResponseCommandInput,
-  UpdateIntegrationResponseCommandOutput,
 } from "./commands/UpdateIntegrationResponseCommand";
-import { UpdateModelCommand, UpdateModelCommandInput, UpdateModelCommandOutput } from "./commands/UpdateModelCommand";
-import { UpdateRouteCommand, UpdateRouteCommandInput, UpdateRouteCommandOutput } from "./commands/UpdateRouteCommand";
 import {
+  type UpdateModelCommandInput,
+  type UpdateModelCommandOutput,
+  UpdateModelCommand,
+} from "./commands/UpdateModelCommand";
+import {
+  type UpdatePortalCommandInput,
+  type UpdatePortalCommandOutput,
+  UpdatePortalCommand,
+} from "./commands/UpdatePortalCommand";
+import {
+  type UpdatePortalProductCommandInput,
+  type UpdatePortalProductCommandOutput,
+  UpdatePortalProductCommand,
+} from "./commands/UpdatePortalProductCommand";
+import {
+  type UpdateProductPageCommandInput,
+  type UpdateProductPageCommandOutput,
+  UpdateProductPageCommand,
+} from "./commands/UpdateProductPageCommand";
+import {
+  type UpdateProductRestEndpointPageCommandInput,
+  type UpdateProductRestEndpointPageCommandOutput,
+  UpdateProductRestEndpointPageCommand,
+} from "./commands/UpdateProductRestEndpointPageCommand";
+import {
+  type UpdateRouteCommandInput,
+  type UpdateRouteCommandOutput,
+  UpdateRouteCommand,
+} from "./commands/UpdateRouteCommand";
+import {
+  type UpdateRouteResponseCommandInput,
+  type UpdateRouteResponseCommandOutput,
   UpdateRouteResponseCommand,
-  UpdateRouteResponseCommandInput,
-  UpdateRouteResponseCommandOutput,
 } from "./commands/UpdateRouteResponseCommand";
-import { UpdateStageCommand, UpdateStageCommandInput, UpdateStageCommandOutput } from "./commands/UpdateStageCommand";
 import {
+  type UpdateStageCommandInput,
+  type UpdateStageCommandOutput,
+  UpdateStageCommand,
+} from "./commands/UpdateStageCommand";
+import {
+  type UpdateVpcLinkCommandInput,
+  type UpdateVpcLinkCommandOutput,
   UpdateVpcLinkCommand,
-  UpdateVpcLinkCommandInput,
-  UpdateVpcLinkCommandOutput,
 } from "./commands/UpdateVpcLinkCommand";
+import { paginateListRoutingRules } from "./pagination/ListRoutingRulesPaginator";
+
+const commands = {
+  CreateApiCommand,
+  CreateApiMappingCommand,
+  CreateAuthorizerCommand,
+  CreateDeploymentCommand,
+  CreateDomainNameCommand,
+  CreateIntegrationCommand,
+  CreateIntegrationResponseCommand,
+  CreateModelCommand,
+  CreatePortalCommand,
+  CreatePortalProductCommand,
+  CreateProductPageCommand,
+  CreateProductRestEndpointPageCommand,
+  CreateRouteCommand,
+  CreateRouteResponseCommand,
+  CreateRoutingRuleCommand,
+  CreateStageCommand,
+  CreateVpcLinkCommand,
+  DeleteAccessLogSettingsCommand,
+  DeleteApiCommand,
+  DeleteApiMappingCommand,
+  DeleteAuthorizerCommand,
+  DeleteCorsConfigurationCommand,
+  DeleteDeploymentCommand,
+  DeleteDomainNameCommand,
+  DeleteIntegrationCommand,
+  DeleteIntegrationResponseCommand,
+  DeleteModelCommand,
+  DeletePortalCommand,
+  DeletePortalProductCommand,
+  DeletePortalProductSharingPolicyCommand,
+  DeleteProductPageCommand,
+  DeleteProductRestEndpointPageCommand,
+  DeleteRouteCommand,
+  DeleteRouteRequestParameterCommand,
+  DeleteRouteResponseCommand,
+  DeleteRouteSettingsCommand,
+  DeleteRoutingRuleCommand,
+  DeleteStageCommand,
+  DeleteVpcLinkCommand,
+  DisablePortalCommand,
+  ExportApiCommand,
+  GetApiCommand,
+  GetApiMappingCommand,
+  GetApiMappingsCommand,
+  GetApisCommand,
+  GetAuthorizerCommand,
+  GetAuthorizersCommand,
+  GetDeploymentCommand,
+  GetDeploymentsCommand,
+  GetDomainNameCommand,
+  GetDomainNamesCommand,
+  GetIntegrationCommand,
+  GetIntegrationResponseCommand,
+  GetIntegrationResponsesCommand,
+  GetIntegrationsCommand,
+  GetModelCommand,
+  GetModelsCommand,
+  GetModelTemplateCommand,
+  GetPortalCommand,
+  GetPortalProductCommand,
+  GetPortalProductSharingPolicyCommand,
+  GetProductPageCommand,
+  GetProductRestEndpointPageCommand,
+  GetRouteCommand,
+  GetRouteResponseCommand,
+  GetRouteResponsesCommand,
+  GetRoutesCommand,
+  GetRoutingRuleCommand,
+  GetStageCommand,
+  GetStagesCommand,
+  GetTagsCommand,
+  GetVpcLinkCommand,
+  GetVpcLinksCommand,
+  ImportApiCommand,
+  ListPortalProductsCommand,
+  ListPortalsCommand,
+  ListProductPagesCommand,
+  ListProductRestEndpointPagesCommand,
+  ListRoutingRulesCommand,
+  PreviewPortalCommand,
+  PublishPortalCommand,
+  PutPortalProductSharingPolicyCommand,
+  PutRoutingRuleCommand,
+  ReimportApiCommand,
+  ResetAuthorizersCacheCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateApiCommand,
+  UpdateApiMappingCommand,
+  UpdateAuthorizerCommand,
+  UpdateDeploymentCommand,
+  UpdateDomainNameCommand,
+  UpdateIntegrationCommand,
+  UpdateIntegrationResponseCommand,
+  UpdateModelCommand,
+  UpdatePortalCommand,
+  UpdatePortalProductCommand,
+  UpdateProductPageCommand,
+  UpdateProductRestEndpointPageCommand,
+  UpdateRouteCommand,
+  UpdateRouteResponseCommand,
+  UpdateStageCommand,
+  UpdateVpcLinkCommand,
+};
+const paginators = {
+  paginateListRoutingRules,
+};
+
+/**
+ * @public
+ */
+export interface ApiGatewayV2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ApiGatewayV2 {
+  /**
+   * @see {@link CreateApiCommand}
+   */
+  createApi(
+    args: CreateApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateApiCommandOutput>;
+  createApi(
+    args: CreateApiCommandInput,
+    cb: (err: any, data?: CreateApiCommandOutput) => void
+  ): void;
+  createApi(
+    args: CreateApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateApiMappingCommand}
+   */
+  createApiMapping(
+    args: CreateApiMappingCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateApiMappingCommandOutput>;
+  createApiMapping(
+    args: CreateApiMappingCommandInput,
+    cb: (err: any, data?: CreateApiMappingCommandOutput) => void
+  ): void;
+  createApiMapping(
+    args: CreateApiMappingCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateApiMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAuthorizerCommand}
+   */
+  createAuthorizer(
+    args: CreateAuthorizerCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateAuthorizerCommandOutput>;
+  createAuthorizer(
+    args: CreateAuthorizerCommandInput,
+    cb: (err: any, data?: CreateAuthorizerCommandOutput) => void
+  ): void;
+  createAuthorizer(
+    args: CreateAuthorizerCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateAuthorizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDeploymentCommand}
+   */
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateDeploymentCommandOutput>;
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
+  ): void;
+  createDeployment(
+    args: CreateDeploymentCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainNameCommand}
+   */
+  createDomainName(
+    args: CreateDomainNameCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateDomainNameCommandOutput>;
+  createDomainName(
+    args: CreateDomainNameCommandInput,
+    cb: (err: any, data?: CreateDomainNameCommandOutput) => void
+  ): void;
+  createDomainName(
+    args: CreateDomainNameCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateDomainNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationCommand}
+   */
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateIntegrationCommandOutput>;
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
+  ): void;
+  createIntegration(
+    args: CreateIntegrationCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIntegrationResponseCommand}
+   */
+  createIntegrationResponse(
+    args: CreateIntegrationResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateIntegrationResponseCommandOutput>;
+  createIntegrationResponse(
+    args: CreateIntegrationResponseCommandInput,
+    cb: (err: any, data?: CreateIntegrationResponseCommandOutput) => void
+  ): void;
+  createIntegrationResponse(
+    args: CreateIntegrationResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateIntegrationResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelCommand}
+   */
+  createModel(
+    args: CreateModelCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateModelCommandOutput>;
+  createModel(
+    args: CreateModelCommandInput,
+    cb: (err: any, data?: CreateModelCommandOutput) => void
+  ): void;
+  createModel(
+    args: CreateModelCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePortalCommand}
+   */
+  createPortal(
+    args: CreatePortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreatePortalCommandOutput>;
+  createPortal(
+    args: CreatePortalCommandInput,
+    cb: (err: any, data?: CreatePortalCommandOutput) => void
+  ): void;
+  createPortal(
+    args: CreatePortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreatePortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePortalProductCommand}
+   */
+  createPortalProduct(
+    args: CreatePortalProductCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreatePortalProductCommandOutput>;
+  createPortalProduct(
+    args: CreatePortalProductCommandInput,
+    cb: (err: any, data?: CreatePortalProductCommandOutput) => void
+  ): void;
+  createPortalProduct(
+    args: CreatePortalProductCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreatePortalProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProductPageCommand}
+   */
+  createProductPage(
+    args: CreateProductPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateProductPageCommandOutput>;
+  createProductPage(
+    args: CreateProductPageCommandInput,
+    cb: (err: any, data?: CreateProductPageCommandOutput) => void
+  ): void;
+  createProductPage(
+    args: CreateProductPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateProductPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProductRestEndpointPageCommand}
+   */
+  createProductRestEndpointPage(
+    args: CreateProductRestEndpointPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateProductRestEndpointPageCommandOutput>;
+  createProductRestEndpointPage(
+    args: CreateProductRestEndpointPageCommandInput,
+    cb: (err: any, data?: CreateProductRestEndpointPageCommandOutput) => void
+  ): void;
+  createProductRestEndpointPage(
+    args: CreateProductRestEndpointPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateProductRestEndpointPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouteCommand}
+   */
+  createRoute(
+    args: CreateRouteCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateRouteCommandOutput>;
+  createRoute(
+    args: CreateRouteCommandInput,
+    cb: (err: any, data?: CreateRouteCommandOutput) => void
+  ): void;
+  createRoute(
+    args: CreateRouteCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouteResponseCommand}
+   */
+  createRouteResponse(
+    args: CreateRouteResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateRouteResponseCommandOutput>;
+  createRouteResponse(
+    args: CreateRouteResponseCommandInput,
+    cb: (err: any, data?: CreateRouteResponseCommandOutput) => void
+  ): void;
+  createRouteResponse(
+    args: CreateRouteResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateRouteResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRoutingRuleCommand}
+   */
+  createRoutingRule(
+    args: CreateRoutingRuleCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateRoutingRuleCommandOutput>;
+  createRoutingRule(
+    args: CreateRoutingRuleCommandInput,
+    cb: (err: any, data?: CreateRoutingRuleCommandOutput) => void
+  ): void;
+  createRoutingRule(
+    args: CreateRoutingRuleCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateRoutingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStageCommand}
+   */
+  createStage(
+    args: CreateStageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateStageCommandOutput>;
+  createStage(
+    args: CreateStageCommandInput,
+    cb: (err: any, data?: CreateStageCommandOutput) => void
+  ): void;
+  createStage(
+    args: CreateStageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVpcLinkCommand}
+   */
+  createVpcLink(
+    args: CreateVpcLinkCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<CreateVpcLinkCommandOutput>;
+  createVpcLink(
+    args: CreateVpcLinkCommandInput,
+    cb: (err: any, data?: CreateVpcLinkCommandOutput) => void
+  ): void;
+  createVpcLink(
+    args: CreateVpcLinkCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: CreateVpcLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccessLogSettingsCommand}
+   */
+  deleteAccessLogSettings(
+    args: DeleteAccessLogSettingsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteAccessLogSettingsCommandOutput>;
+  deleteAccessLogSettings(
+    args: DeleteAccessLogSettingsCommandInput,
+    cb: (err: any, data?: DeleteAccessLogSettingsCommandOutput) => void
+  ): void;
+  deleteAccessLogSettings(
+    args: DeleteAccessLogSettingsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteAccessLogSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApiCommand}
+   */
+  deleteApi(
+    args: DeleteApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteApiCommandOutput>;
+  deleteApi(
+    args: DeleteApiCommandInput,
+    cb: (err: any, data?: DeleteApiCommandOutput) => void
+  ): void;
+  deleteApi(
+    args: DeleteApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApiMappingCommand}
+   */
+  deleteApiMapping(
+    args: DeleteApiMappingCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteApiMappingCommandOutput>;
+  deleteApiMapping(
+    args: DeleteApiMappingCommandInput,
+    cb: (err: any, data?: DeleteApiMappingCommandOutput) => void
+  ): void;
+  deleteApiMapping(
+    args: DeleteApiMappingCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteApiMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAuthorizerCommand}
+   */
+  deleteAuthorizer(
+    args: DeleteAuthorizerCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteAuthorizerCommandOutput>;
+  deleteAuthorizer(
+    args: DeleteAuthorizerCommandInput,
+    cb: (err: any, data?: DeleteAuthorizerCommandOutput) => void
+  ): void;
+  deleteAuthorizer(
+    args: DeleteAuthorizerCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteAuthorizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCorsConfigurationCommand}
+   */
+  deleteCorsConfiguration(
+    args: DeleteCorsConfigurationCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteCorsConfigurationCommandOutput>;
+  deleteCorsConfiguration(
+    args: DeleteCorsConfigurationCommandInput,
+    cb: (err: any, data?: DeleteCorsConfigurationCommandOutput) => void
+  ): void;
+  deleteCorsConfiguration(
+    args: DeleteCorsConfigurationCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteCorsConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeploymentCommand}
+   */
+  deleteDeployment(
+    args: DeleteDeploymentCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteDeploymentCommandOutput>;
+  deleteDeployment(
+    args: DeleteDeploymentCommandInput,
+    cb: (err: any, data?: DeleteDeploymentCommandOutput) => void
+  ): void;
+  deleteDeployment(
+    args: DeleteDeploymentCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainNameCommand}
+   */
+  deleteDomainName(
+    args: DeleteDomainNameCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteDomainNameCommandOutput>;
+  deleteDomainName(
+    args: DeleteDomainNameCommandInput,
+    cb: (err: any, data?: DeleteDomainNameCommandOutput) => void
+  ): void;
+  deleteDomainName(
+    args: DeleteDomainNameCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteDomainNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationCommand}
+   */
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteIntegrationCommandOutput>;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationResponseCommand}
+   */
+  deleteIntegrationResponse(
+    args: DeleteIntegrationResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteIntegrationResponseCommandOutput>;
+  deleteIntegrationResponse(
+    args: DeleteIntegrationResponseCommandInput,
+    cb: (err: any, data?: DeleteIntegrationResponseCommandOutput) => void
+  ): void;
+  deleteIntegrationResponse(
+    args: DeleteIntegrationResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteIntegrationResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteModelCommand}
+   */
+  deleteModel(
+    args: DeleteModelCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteModelCommandOutput>;
+  deleteModel(
+    args: DeleteModelCommandInput,
+    cb: (err: any, data?: DeleteModelCommandOutput) => void
+  ): void;
+  deleteModel(
+    args: DeleteModelCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePortalCommand}
+   */
+  deletePortal(
+    args: DeletePortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeletePortalCommandOutput>;
+  deletePortal(
+    args: DeletePortalCommandInput,
+    cb: (err: any, data?: DeletePortalCommandOutput) => void
+  ): void;
+  deletePortal(
+    args: DeletePortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeletePortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePortalProductCommand}
+   */
+  deletePortalProduct(
+    args: DeletePortalProductCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeletePortalProductCommandOutput>;
+  deletePortalProduct(
+    args: DeletePortalProductCommandInput,
+    cb: (err: any, data?: DeletePortalProductCommandOutput) => void
+  ): void;
+  deletePortalProduct(
+    args: DeletePortalProductCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeletePortalProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePortalProductSharingPolicyCommand}
+   */
+  deletePortalProductSharingPolicy(
+    args: DeletePortalProductSharingPolicyCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeletePortalProductSharingPolicyCommandOutput>;
+  deletePortalProductSharingPolicy(
+    args: DeletePortalProductSharingPolicyCommandInput,
+    cb: (err: any, data?: DeletePortalProductSharingPolicyCommandOutput) => void
+  ): void;
+  deletePortalProductSharingPolicy(
+    args: DeletePortalProductSharingPolicyCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeletePortalProductSharingPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProductPageCommand}
+   */
+  deleteProductPage(
+    args: DeleteProductPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteProductPageCommandOutput>;
+  deleteProductPage(
+    args: DeleteProductPageCommandInput,
+    cb: (err: any, data?: DeleteProductPageCommandOutput) => void
+  ): void;
+  deleteProductPage(
+    args: DeleteProductPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteProductPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProductRestEndpointPageCommand}
+   */
+  deleteProductRestEndpointPage(
+    args: DeleteProductRestEndpointPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteProductRestEndpointPageCommandOutput>;
+  deleteProductRestEndpointPage(
+    args: DeleteProductRestEndpointPageCommandInput,
+    cb: (err: any, data?: DeleteProductRestEndpointPageCommandOutput) => void
+  ): void;
+  deleteProductRestEndpointPage(
+    args: DeleteProductRestEndpointPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteProductRestEndpointPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouteCommand}
+   */
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteRouteCommandOutput>;
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    cb: (err: any, data?: DeleteRouteCommandOutput) => void
+  ): void;
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouteRequestParameterCommand}
+   */
+  deleteRouteRequestParameter(
+    args: DeleteRouteRequestParameterCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteRouteRequestParameterCommandOutput>;
+  deleteRouteRequestParameter(
+    args: DeleteRouteRequestParameterCommandInput,
+    cb: (err: any, data?: DeleteRouteRequestParameterCommandOutput) => void
+  ): void;
+  deleteRouteRequestParameter(
+    args: DeleteRouteRequestParameterCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteRouteRequestParameterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouteResponseCommand}
+   */
+  deleteRouteResponse(
+    args: DeleteRouteResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteRouteResponseCommandOutput>;
+  deleteRouteResponse(
+    args: DeleteRouteResponseCommandInput,
+    cb: (err: any, data?: DeleteRouteResponseCommandOutput) => void
+  ): void;
+  deleteRouteResponse(
+    args: DeleteRouteResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteRouteResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouteSettingsCommand}
+   */
+  deleteRouteSettings(
+    args: DeleteRouteSettingsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteRouteSettingsCommandOutput>;
+  deleteRouteSettings(
+    args: DeleteRouteSettingsCommandInput,
+    cb: (err: any, data?: DeleteRouteSettingsCommandOutput) => void
+  ): void;
+  deleteRouteSettings(
+    args: DeleteRouteSettingsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteRouteSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRoutingRuleCommand}
+   */
+  deleteRoutingRule(
+    args: DeleteRoutingRuleCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteRoutingRuleCommandOutput>;
+  deleteRoutingRule(
+    args: DeleteRoutingRuleCommandInput,
+    cb: (err: any, data?: DeleteRoutingRuleCommandOutput) => void
+  ): void;
+  deleteRoutingRule(
+    args: DeleteRoutingRuleCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteRoutingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStageCommand}
+   */
+  deleteStage(
+    args: DeleteStageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteStageCommandOutput>;
+  deleteStage(
+    args: DeleteStageCommandInput,
+    cb: (err: any, data?: DeleteStageCommandOutput) => void
+  ): void;
+  deleteStage(
+    args: DeleteStageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVpcLinkCommand}
+   */
+  deleteVpcLink(
+    args: DeleteVpcLinkCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DeleteVpcLinkCommandOutput>;
+  deleteVpcLink(
+    args: DeleteVpcLinkCommandInput,
+    cb: (err: any, data?: DeleteVpcLinkCommandOutput) => void
+  ): void;
+  deleteVpcLink(
+    args: DeleteVpcLinkCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DeleteVpcLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisablePortalCommand}
+   */
+  disablePortal(
+    args: DisablePortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<DisablePortalCommandOutput>;
+  disablePortal(
+    args: DisablePortalCommandInput,
+    cb: (err: any, data?: DisablePortalCommandOutput) => void
+  ): void;
+  disablePortal(
+    args: DisablePortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: DisablePortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportApiCommand}
+   */
+  exportApi(
+    args: ExportApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ExportApiCommandOutput>;
+  exportApi(
+    args: ExportApiCommandInput,
+    cb: (err: any, data?: ExportApiCommandOutput) => void
+  ): void;
+  exportApi(
+    args: ExportApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ExportApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApiCommand}
+   */
+  getApi(
+    args: GetApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetApiCommandOutput>;
+  getApi(
+    args: GetApiCommandInput,
+    cb: (err: any, data?: GetApiCommandOutput) => void
+  ): void;
+  getApi(
+    args: GetApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApiMappingCommand}
+   */
+  getApiMapping(
+    args: GetApiMappingCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetApiMappingCommandOutput>;
+  getApiMapping(
+    args: GetApiMappingCommandInput,
+    cb: (err: any, data?: GetApiMappingCommandOutput) => void
+  ): void;
+  getApiMapping(
+    args: GetApiMappingCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetApiMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApiMappingsCommand}
+   */
+  getApiMappings(
+    args: GetApiMappingsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetApiMappingsCommandOutput>;
+  getApiMappings(
+    args: GetApiMappingsCommandInput,
+    cb: (err: any, data?: GetApiMappingsCommandOutput) => void
+  ): void;
+  getApiMappings(
+    args: GetApiMappingsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetApiMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApisCommand}
+   */
+  getApis(): Promise<GetApisCommandOutput>;
+  getApis(
+    args: GetApisCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetApisCommandOutput>;
+  getApis(
+    args: GetApisCommandInput,
+    cb: (err: any, data?: GetApisCommandOutput) => void
+  ): void;
+  getApis(
+    args: GetApisCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetApisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAuthorizerCommand}
+   */
+  getAuthorizer(
+    args: GetAuthorizerCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetAuthorizerCommandOutput>;
+  getAuthorizer(
+    args: GetAuthorizerCommandInput,
+    cb: (err: any, data?: GetAuthorizerCommandOutput) => void
+  ): void;
+  getAuthorizer(
+    args: GetAuthorizerCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetAuthorizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAuthorizersCommand}
+   */
+  getAuthorizers(
+    args: GetAuthorizersCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetAuthorizersCommandOutput>;
+  getAuthorizers(
+    args: GetAuthorizersCommandInput,
+    cb: (err: any, data?: GetAuthorizersCommandOutput) => void
+  ): void;
+  getAuthorizers(
+    args: GetAuthorizersCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetAuthorizersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeploymentCommand}
+   */
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetDeploymentCommandOutput>;
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    cb: (err: any, data?: GetDeploymentCommandOutput) => void
+  ): void;
+  getDeployment(
+    args: GetDeploymentCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeploymentsCommand}
+   */
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetDeploymentsCommandOutput>;
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
+  ): void;
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainNameCommand}
+   */
+  getDomainName(
+    args: GetDomainNameCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetDomainNameCommandOutput>;
+  getDomainName(
+    args: GetDomainNameCommandInput,
+    cb: (err: any, data?: GetDomainNameCommandOutput) => void
+  ): void;
+  getDomainName(
+    args: GetDomainNameCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetDomainNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainNamesCommand}
+   */
+  getDomainNames(): Promise<GetDomainNamesCommandOutput>;
+  getDomainNames(
+    args: GetDomainNamesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetDomainNamesCommandOutput>;
+  getDomainNames(
+    args: GetDomainNamesCommandInput,
+    cb: (err: any, data?: GetDomainNamesCommandOutput) => void
+  ): void;
+  getDomainNames(
+    args: GetDomainNamesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetDomainNamesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationCommand}
+   */
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetIntegrationCommandOutput>;
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    cb: (err: any, data?: GetIntegrationCommandOutput) => void
+  ): void;
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationResponseCommand}
+   */
+  getIntegrationResponse(
+    args: GetIntegrationResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetIntegrationResponseCommandOutput>;
+  getIntegrationResponse(
+    args: GetIntegrationResponseCommandInput,
+    cb: (err: any, data?: GetIntegrationResponseCommandOutput) => void
+  ): void;
+  getIntegrationResponse(
+    args: GetIntegrationResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetIntegrationResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationResponsesCommand}
+   */
+  getIntegrationResponses(
+    args: GetIntegrationResponsesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetIntegrationResponsesCommandOutput>;
+  getIntegrationResponses(
+    args: GetIntegrationResponsesCommandInput,
+    cb: (err: any, data?: GetIntegrationResponsesCommandOutput) => void
+  ): void;
+  getIntegrationResponses(
+    args: GetIntegrationResponsesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetIntegrationResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationsCommand}
+   */
+  getIntegrations(
+    args: GetIntegrationsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetIntegrationsCommandOutput>;
+  getIntegrations(
+    args: GetIntegrationsCommandInput,
+    cb: (err: any, data?: GetIntegrationsCommandOutput) => void
+  ): void;
+  getIntegrations(
+    args: GetIntegrationsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelCommand}
+   */
+  getModel(
+    args: GetModelCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetModelCommandOutput>;
+  getModel(
+    args: GetModelCommandInput,
+    cb: (err: any, data?: GetModelCommandOutput) => void
+  ): void;
+  getModel(
+    args: GetModelCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelsCommand}
+   */
+  getModels(
+    args: GetModelsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetModelsCommandOutput>;
+  getModels(
+    args: GetModelsCommandInput,
+    cb: (err: any, data?: GetModelsCommandOutput) => void
+  ): void;
+  getModels(
+    args: GetModelsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelTemplateCommand}
+   */
+  getModelTemplate(
+    args: GetModelTemplateCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetModelTemplateCommandOutput>;
+  getModelTemplate(
+    args: GetModelTemplateCommandInput,
+    cb: (err: any, data?: GetModelTemplateCommandOutput) => void
+  ): void;
+  getModelTemplate(
+    args: GetModelTemplateCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetModelTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPortalCommand}
+   */
+  getPortal(
+    args: GetPortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetPortalCommandOutput>;
+  getPortal(
+    args: GetPortalCommandInput,
+    cb: (err: any, data?: GetPortalCommandOutput) => void
+  ): void;
+  getPortal(
+    args: GetPortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetPortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPortalProductCommand}
+   */
+  getPortalProduct(
+    args: GetPortalProductCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetPortalProductCommandOutput>;
+  getPortalProduct(
+    args: GetPortalProductCommandInput,
+    cb: (err: any, data?: GetPortalProductCommandOutput) => void
+  ): void;
+  getPortalProduct(
+    args: GetPortalProductCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetPortalProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPortalProductSharingPolicyCommand}
+   */
+  getPortalProductSharingPolicy(
+    args: GetPortalProductSharingPolicyCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetPortalProductSharingPolicyCommandOutput>;
+  getPortalProductSharingPolicy(
+    args: GetPortalProductSharingPolicyCommandInput,
+    cb: (err: any, data?: GetPortalProductSharingPolicyCommandOutput) => void
+  ): void;
+  getPortalProductSharingPolicy(
+    args: GetPortalProductSharingPolicyCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetPortalProductSharingPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProductPageCommand}
+   */
+  getProductPage(
+    args: GetProductPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetProductPageCommandOutput>;
+  getProductPage(
+    args: GetProductPageCommandInput,
+    cb: (err: any, data?: GetProductPageCommandOutput) => void
+  ): void;
+  getProductPage(
+    args: GetProductPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetProductPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProductRestEndpointPageCommand}
+   */
+  getProductRestEndpointPage(
+    args: GetProductRestEndpointPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetProductRestEndpointPageCommandOutput>;
+  getProductRestEndpointPage(
+    args: GetProductRestEndpointPageCommandInput,
+    cb: (err: any, data?: GetProductRestEndpointPageCommandOutput) => void
+  ): void;
+  getProductRestEndpointPage(
+    args: GetProductRestEndpointPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetProductRestEndpointPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouteCommand}
+   */
+  getRoute(
+    args: GetRouteCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetRouteCommandOutput>;
+  getRoute(
+    args: GetRouteCommandInput,
+    cb: (err: any, data?: GetRouteCommandOutput) => void
+  ): void;
+  getRoute(
+    args: GetRouteCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouteResponseCommand}
+   */
+  getRouteResponse(
+    args: GetRouteResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetRouteResponseCommandOutput>;
+  getRouteResponse(
+    args: GetRouteResponseCommandInput,
+    cb: (err: any, data?: GetRouteResponseCommandOutput) => void
+  ): void;
+  getRouteResponse(
+    args: GetRouteResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetRouteResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouteResponsesCommand}
+   */
+  getRouteResponses(
+    args: GetRouteResponsesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetRouteResponsesCommandOutput>;
+  getRouteResponses(
+    args: GetRouteResponsesCommandInput,
+    cb: (err: any, data?: GetRouteResponsesCommandOutput) => void
+  ): void;
+  getRouteResponses(
+    args: GetRouteResponsesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetRouteResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRoutesCommand}
+   */
+  getRoutes(
+    args: GetRoutesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetRoutesCommandOutput>;
+  getRoutes(
+    args: GetRoutesCommandInput,
+    cb: (err: any, data?: GetRoutesCommandOutput) => void
+  ): void;
+  getRoutes(
+    args: GetRoutesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetRoutesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRoutingRuleCommand}
+   */
+  getRoutingRule(
+    args: GetRoutingRuleCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetRoutingRuleCommandOutput>;
+  getRoutingRule(
+    args: GetRoutingRuleCommandInput,
+    cb: (err: any, data?: GetRoutingRuleCommandOutput) => void
+  ): void;
+  getRoutingRule(
+    args: GetRoutingRuleCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetRoutingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStageCommand}
+   */
+  getStage(
+    args: GetStageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetStageCommandOutput>;
+  getStage(
+    args: GetStageCommandInput,
+    cb: (err: any, data?: GetStageCommandOutput) => void
+  ): void;
+  getStage(
+    args: GetStageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStagesCommand}
+   */
+  getStages(
+    args: GetStagesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetStagesCommandOutput>;
+  getStages(
+    args: GetStagesCommandInput,
+    cb: (err: any, data?: GetStagesCommandOutput) => void
+  ): void;
+  getStages(
+    args: GetStagesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetStagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTagsCommand}
+   */
+  getTags(
+    args: GetTagsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetTagsCommandOutput>;
+  getTags(
+    args: GetTagsCommandInput,
+    cb: (err: any, data?: GetTagsCommandOutput) => void
+  ): void;
+  getTags(
+    args: GetTagsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetTagsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVpcLinkCommand}
+   */
+  getVpcLink(
+    args: GetVpcLinkCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetVpcLinkCommandOutput>;
+  getVpcLink(
+    args: GetVpcLinkCommandInput,
+    cb: (err: any, data?: GetVpcLinkCommandOutput) => void
+  ): void;
+  getVpcLink(
+    args: GetVpcLinkCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetVpcLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVpcLinksCommand}
+   */
+  getVpcLinks(): Promise<GetVpcLinksCommandOutput>;
+  getVpcLinks(
+    args: GetVpcLinksCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<GetVpcLinksCommandOutput>;
+  getVpcLinks(
+    args: GetVpcLinksCommandInput,
+    cb: (err: any, data?: GetVpcLinksCommandOutput) => void
+  ): void;
+  getVpcLinks(
+    args: GetVpcLinksCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: GetVpcLinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportApiCommand}
+   */
+  importApi(
+    args: ImportApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ImportApiCommandOutput>;
+  importApi(
+    args: ImportApiCommandInput,
+    cb: (err: any, data?: ImportApiCommandOutput) => void
+  ): void;
+  importApi(
+    args: ImportApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ImportApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPortalProductsCommand}
+   */
+  listPortalProducts(): Promise<ListPortalProductsCommandOutput>;
+  listPortalProducts(
+    args: ListPortalProductsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ListPortalProductsCommandOutput>;
+  listPortalProducts(
+    args: ListPortalProductsCommandInput,
+    cb: (err: any, data?: ListPortalProductsCommandOutput) => void
+  ): void;
+  listPortalProducts(
+    args: ListPortalProductsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ListPortalProductsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPortalsCommand}
+   */
+  listPortals(): Promise<ListPortalsCommandOutput>;
+  listPortals(
+    args: ListPortalsCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ListPortalsCommandOutput>;
+  listPortals(
+    args: ListPortalsCommandInput,
+    cb: (err: any, data?: ListPortalsCommandOutput) => void
+  ): void;
+  listPortals(
+    args: ListPortalsCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ListPortalsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProductPagesCommand}
+   */
+  listProductPages(
+    args: ListProductPagesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ListProductPagesCommandOutput>;
+  listProductPages(
+    args: ListProductPagesCommandInput,
+    cb: (err: any, data?: ListProductPagesCommandOutput) => void
+  ): void;
+  listProductPages(
+    args: ListProductPagesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ListProductPagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProductRestEndpointPagesCommand}
+   */
+  listProductRestEndpointPages(
+    args: ListProductRestEndpointPagesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ListProductRestEndpointPagesCommandOutput>;
+  listProductRestEndpointPages(
+    args: ListProductRestEndpointPagesCommandInput,
+    cb: (err: any, data?: ListProductRestEndpointPagesCommandOutput) => void
+  ): void;
+  listProductRestEndpointPages(
+    args: ListProductRestEndpointPagesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ListProductRestEndpointPagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutingRulesCommand}
+   */
+  listRoutingRules(
+    args: ListRoutingRulesCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ListRoutingRulesCommandOutput>;
+  listRoutingRules(
+    args: ListRoutingRulesCommandInput,
+    cb: (err: any, data?: ListRoutingRulesCommandOutput) => void
+  ): void;
+  listRoutingRules(
+    args: ListRoutingRulesCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ListRoutingRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PreviewPortalCommand}
+   */
+  previewPortal(
+    args: PreviewPortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<PreviewPortalCommandOutput>;
+  previewPortal(
+    args: PreviewPortalCommandInput,
+    cb: (err: any, data?: PreviewPortalCommandOutput) => void
+  ): void;
+  previewPortal(
+    args: PreviewPortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: PreviewPortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PublishPortalCommand}
+   */
+  publishPortal(
+    args: PublishPortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<PublishPortalCommandOutput>;
+  publishPortal(
+    args: PublishPortalCommandInput,
+    cb: (err: any, data?: PublishPortalCommandOutput) => void
+  ): void;
+  publishPortal(
+    args: PublishPortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: PublishPortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutPortalProductSharingPolicyCommand}
+   */
+  putPortalProductSharingPolicy(
+    args: PutPortalProductSharingPolicyCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<PutPortalProductSharingPolicyCommandOutput>;
+  putPortalProductSharingPolicy(
+    args: PutPortalProductSharingPolicyCommandInput,
+    cb: (err: any, data?: PutPortalProductSharingPolicyCommandOutput) => void
+  ): void;
+  putPortalProductSharingPolicy(
+    args: PutPortalProductSharingPolicyCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: PutPortalProductSharingPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRoutingRuleCommand}
+   */
+  putRoutingRule(
+    args: PutRoutingRuleCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<PutRoutingRuleCommandOutput>;
+  putRoutingRule(
+    args: PutRoutingRuleCommandInput,
+    cb: (err: any, data?: PutRoutingRuleCommandOutput) => void
+  ): void;
+  putRoutingRule(
+    args: PutRoutingRuleCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: PutRoutingRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReimportApiCommand}
+   */
+  reimportApi(
+    args: ReimportApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ReimportApiCommandOutput>;
+  reimportApi(
+    args: ReimportApiCommandInput,
+    cb: (err: any, data?: ReimportApiCommandOutput) => void
+  ): void;
+  reimportApi(
+    args: ReimportApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ReimportApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResetAuthorizersCacheCommand}
+   */
+  resetAuthorizersCache(
+    args: ResetAuthorizersCacheCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<ResetAuthorizersCacheCommandOutput>;
+  resetAuthorizersCache(
+    args: ResetAuthorizersCacheCommandInput,
+    cb: (err: any, data?: ResetAuthorizersCacheCommandOutput) => void
+  ): void;
+  resetAuthorizersCache(
+    args: ResetAuthorizersCacheCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: ResetAuthorizersCacheCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApiCommand}
+   */
+  updateApi(
+    args: UpdateApiCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateApiCommandOutput>;
+  updateApi(
+    args: UpdateApiCommandInput,
+    cb: (err: any, data?: UpdateApiCommandOutput) => void
+  ): void;
+  updateApi(
+    args: UpdateApiCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateApiCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApiMappingCommand}
+   */
+  updateApiMapping(
+    args: UpdateApiMappingCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateApiMappingCommandOutput>;
+  updateApiMapping(
+    args: UpdateApiMappingCommandInput,
+    cb: (err: any, data?: UpdateApiMappingCommandOutput) => void
+  ): void;
+  updateApiMapping(
+    args: UpdateApiMappingCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateApiMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAuthorizerCommand}
+   */
+  updateAuthorizer(
+    args: UpdateAuthorizerCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateAuthorizerCommandOutput>;
+  updateAuthorizer(
+    args: UpdateAuthorizerCommandInput,
+    cb: (err: any, data?: UpdateAuthorizerCommandOutput) => void
+  ): void;
+  updateAuthorizer(
+    args: UpdateAuthorizerCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateAuthorizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDeploymentCommand}
+   */
+  updateDeployment(
+    args: UpdateDeploymentCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateDeploymentCommandOutput>;
+  updateDeployment(
+    args: UpdateDeploymentCommandInput,
+    cb: (err: any, data?: UpdateDeploymentCommandOutput) => void
+  ): void;
+  updateDeployment(
+    args: UpdateDeploymentCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDomainNameCommand}
+   */
+  updateDomainName(
+    args: UpdateDomainNameCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateDomainNameCommandOutput>;
+  updateDomainName(
+    args: UpdateDomainNameCommandInput,
+    cb: (err: any, data?: UpdateDomainNameCommandOutput) => void
+  ): void;
+  updateDomainName(
+    args: UpdateDomainNameCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateDomainNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIntegrationCommand}
+   */
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateIntegrationCommandOutput>;
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
+  ): void;
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIntegrationResponseCommand}
+   */
+  updateIntegrationResponse(
+    args: UpdateIntegrationResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateIntegrationResponseCommandOutput>;
+  updateIntegrationResponse(
+    args: UpdateIntegrationResponseCommandInput,
+    cb: (err: any, data?: UpdateIntegrationResponseCommandOutput) => void
+  ): void;
+  updateIntegrationResponse(
+    args: UpdateIntegrationResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateIntegrationResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateModelCommand}
+   */
+  updateModel(
+    args: UpdateModelCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateModelCommandOutput>;
+  updateModel(
+    args: UpdateModelCommandInput,
+    cb: (err: any, data?: UpdateModelCommandOutput) => void
+  ): void;
+  updateModel(
+    args: UpdateModelCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePortalCommand}
+   */
+  updatePortal(
+    args: UpdatePortalCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdatePortalCommandOutput>;
+  updatePortal(
+    args: UpdatePortalCommandInput,
+    cb: (err: any, data?: UpdatePortalCommandOutput) => void
+  ): void;
+  updatePortal(
+    args: UpdatePortalCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdatePortalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePortalProductCommand}
+   */
+  updatePortalProduct(
+    args: UpdatePortalProductCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdatePortalProductCommandOutput>;
+  updatePortalProduct(
+    args: UpdatePortalProductCommandInput,
+    cb: (err: any, data?: UpdatePortalProductCommandOutput) => void
+  ): void;
+  updatePortalProduct(
+    args: UpdatePortalProductCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdatePortalProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProductPageCommand}
+   */
+  updateProductPage(
+    args: UpdateProductPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateProductPageCommandOutput>;
+  updateProductPage(
+    args: UpdateProductPageCommandInput,
+    cb: (err: any, data?: UpdateProductPageCommandOutput) => void
+  ): void;
+  updateProductPage(
+    args: UpdateProductPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateProductPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProductRestEndpointPageCommand}
+   */
+  updateProductRestEndpointPage(
+    args: UpdateProductRestEndpointPageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateProductRestEndpointPageCommandOutput>;
+  updateProductRestEndpointPage(
+    args: UpdateProductRestEndpointPageCommandInput,
+    cb: (err: any, data?: UpdateProductRestEndpointPageCommandOutput) => void
+  ): void;
+  updateProductRestEndpointPage(
+    args: UpdateProductRestEndpointPageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateProductRestEndpointPageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouteCommand}
+   */
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateRouteCommandOutput>;
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    cb: (err: any, data?: UpdateRouteCommandOutput) => void
+  ): void;
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouteResponseCommand}
+   */
+  updateRouteResponse(
+    args: UpdateRouteResponseCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateRouteResponseCommandOutput>;
+  updateRouteResponse(
+    args: UpdateRouteResponseCommandInput,
+    cb: (err: any, data?: UpdateRouteResponseCommandOutput) => void
+  ): void;
+  updateRouteResponse(
+    args: UpdateRouteResponseCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateRouteResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStageCommand}
+   */
+  updateStage(
+    args: UpdateStageCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateStageCommandOutput>;
+  updateStage(
+    args: UpdateStageCommandInput,
+    cb: (err: any, data?: UpdateStageCommandOutput) => void
+  ): void;
+  updateStage(
+    args: UpdateStageCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVpcLinkCommand}
+   */
+  updateVpcLink(
+    args: UpdateVpcLinkCommandInput,
+    options?: ApiGatewayV2RequestOptions
+  ): Promise<UpdateVpcLinkCommandOutput>;
+  updateVpcLink(
+    args: UpdateVpcLinkCommandInput,
+    cb: (err: any, data?: UpdateVpcLinkCommandOutput) => void
+  ): void;
+  updateVpcLink(
+    args: UpdateVpcLinkCommandInput,
+    options: ApiGatewayV2RequestOptions,
+    cb: (err: any, data?: UpdateVpcLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutingRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutingRulesCommandOutput}.
+   */
+  paginateListRoutingRules(
+    args: ListRoutingRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutingRulesCommandOutput>;
+}
 
 /**
  * <p>Amazon API Gateway V2</p>
+ * @public
  */
-export class ApiGatewayV2 extends ApiGatewayV2Client {
-  /**
-   * <p>Creates an Api resource.</p>
-   */
-  public createApi(args: CreateApiCommandInput, options?: __HttpHandlerOptions): Promise<CreateApiCommandOutput>;
-  public createApi(args: CreateApiCommandInput, cb: (err: any, data?: CreateApiCommandOutput) => void): void;
-  public createApi(
-    args: CreateApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateApiCommandOutput) => void
-  ): void;
-  public createApi(
-    args: CreateApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateApiCommandOutput) => void),
-    cb?: (err: any, data?: CreateApiCommandOutput) => void
-  ): Promise<CreateApiCommandOutput> | void {
-    const command = new CreateApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an API mapping.</p>
-   */
-  public createApiMapping(
-    args: CreateApiMappingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateApiMappingCommandOutput>;
-  public createApiMapping(
-    args: CreateApiMappingCommandInput,
-    cb: (err: any, data?: CreateApiMappingCommandOutput) => void
-  ): void;
-  public createApiMapping(
-    args: CreateApiMappingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateApiMappingCommandOutput) => void
-  ): void;
-  public createApiMapping(
-    args: CreateApiMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateApiMappingCommandOutput) => void),
-    cb?: (err: any, data?: CreateApiMappingCommandOutput) => void
-  ): Promise<CreateApiMappingCommandOutput> | void {
-    const command = new CreateApiMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Authorizer for an API.</p>
-   */
-  public createAuthorizer(
-    args: CreateAuthorizerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateAuthorizerCommandOutput>;
-  public createAuthorizer(
-    args: CreateAuthorizerCommandInput,
-    cb: (err: any, data?: CreateAuthorizerCommandOutput) => void
-  ): void;
-  public createAuthorizer(
-    args: CreateAuthorizerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateAuthorizerCommandOutput) => void
-  ): void;
-  public createAuthorizer(
-    args: CreateAuthorizerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAuthorizerCommandOutput) => void),
-    cb?: (err: any, data?: CreateAuthorizerCommandOutput) => void
-  ): Promise<CreateAuthorizerCommandOutput> | void {
-    const command = new CreateAuthorizerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Deployment for an API.</p>
-   */
-  public createDeployment(
-    args: CreateDeploymentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDeploymentCommandOutput>;
-  public createDeployment(
-    args: CreateDeploymentCommandInput,
-    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
-  ): void;
-  public createDeployment(
-    args: CreateDeploymentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDeploymentCommandOutput) => void
-  ): void;
-  public createDeployment(
-    args: CreateDeploymentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDeploymentCommandOutput) => void),
-    cb?: (err: any, data?: CreateDeploymentCommandOutput) => void
-  ): Promise<CreateDeploymentCommandOutput> | void {
-    const command = new CreateDeploymentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a domain name.</p>
-   */
-  public createDomainName(
-    args: CreateDomainNameCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDomainNameCommandOutput>;
-  public createDomainName(
-    args: CreateDomainNameCommandInput,
-    cb: (err: any, data?: CreateDomainNameCommandOutput) => void
-  ): void;
-  public createDomainName(
-    args: CreateDomainNameCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDomainNameCommandOutput) => void
-  ): void;
-  public createDomainName(
-    args: CreateDomainNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainNameCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainNameCommandOutput) => void
-  ): Promise<CreateDomainNameCommandOutput> | void {
-    const command = new CreateDomainNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Integration.</p>
-   */
-  public createIntegration(
-    args: CreateIntegrationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateIntegrationCommandOutput>;
-  public createIntegration(
-    args: CreateIntegrationCommandInput,
-    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
-  ): void;
-  public createIntegration(
-    args: CreateIntegrationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateIntegrationCommandOutput) => void
-  ): void;
-  public createIntegration(
-    args: CreateIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: CreateIntegrationCommandOutput) => void
-  ): Promise<CreateIntegrationCommandOutput> | void {
-    const command = new CreateIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an IntegrationResponses.</p>
-   */
-  public createIntegrationResponse(
-    args: CreateIntegrationResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateIntegrationResponseCommandOutput>;
-  public createIntegrationResponse(
-    args: CreateIntegrationResponseCommandInput,
-    cb: (err: any, data?: CreateIntegrationResponseCommandOutput) => void
-  ): void;
-  public createIntegrationResponse(
-    args: CreateIntegrationResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateIntegrationResponseCommandOutput) => void
-  ): void;
-  public createIntegrationResponse(
-    args: CreateIntegrationResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIntegrationResponseCommandOutput) => void),
-    cb?: (err: any, data?: CreateIntegrationResponseCommandOutput) => void
-  ): Promise<CreateIntegrationResponseCommandOutput> | void {
-    const command = new CreateIntegrationResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Model for an API.</p>
-   */
-  public createModel(args: CreateModelCommandInput, options?: __HttpHandlerOptions): Promise<CreateModelCommandOutput>;
-  public createModel(args: CreateModelCommandInput, cb: (err: any, data?: CreateModelCommandOutput) => void): void;
-  public createModel(
-    args: CreateModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateModelCommandOutput) => void
-  ): void;
-  public createModel(
-    args: CreateModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateModelCommandOutput) => void),
-    cb?: (err: any, data?: CreateModelCommandOutput) => void
-  ): Promise<CreateModelCommandOutput> | void {
-    const command = new CreateModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Route for an API.</p>
-   */
-  public createRoute(args: CreateRouteCommandInput, options?: __HttpHandlerOptions): Promise<CreateRouteCommandOutput>;
-  public createRoute(args: CreateRouteCommandInput, cb: (err: any, data?: CreateRouteCommandOutput) => void): void;
-  public createRoute(
-    args: CreateRouteCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRouteCommandOutput) => void
-  ): void;
-  public createRoute(
-    args: CreateRouteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRouteCommandOutput) => void),
-    cb?: (err: any, data?: CreateRouteCommandOutput) => void
-  ): Promise<CreateRouteCommandOutput> | void {
-    const command = new CreateRouteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a RouteResponse for a Route.</p>
-   */
-  public createRouteResponse(
-    args: CreateRouteResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRouteResponseCommandOutput>;
-  public createRouteResponse(
-    args: CreateRouteResponseCommandInput,
-    cb: (err: any, data?: CreateRouteResponseCommandOutput) => void
-  ): void;
-  public createRouteResponse(
-    args: CreateRouteResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRouteResponseCommandOutput) => void
-  ): void;
-  public createRouteResponse(
-    args: CreateRouteResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRouteResponseCommandOutput) => void),
-    cb?: (err: any, data?: CreateRouteResponseCommandOutput) => void
-  ): Promise<CreateRouteResponseCommandOutput> | void {
-    const command = new CreateRouteResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Stage for an API.</p>
-   */
-  public createStage(args: CreateStageCommandInput, options?: __HttpHandlerOptions): Promise<CreateStageCommandOutput>;
-  public createStage(args: CreateStageCommandInput, cb: (err: any, data?: CreateStageCommandOutput) => void): void;
-  public createStage(
-    args: CreateStageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateStageCommandOutput) => void
-  ): void;
-  public createStage(
-    args: CreateStageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStageCommandOutput) => void),
-    cb?: (err: any, data?: CreateStageCommandOutput) => void
-  ): Promise<CreateStageCommandOutput> | void {
-    const command = new CreateStageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a VPC link.</p>
-   */
-  public createVpcLink(
-    args: CreateVpcLinkCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateVpcLinkCommandOutput>;
-  public createVpcLink(
-    args: CreateVpcLinkCommandInput,
-    cb: (err: any, data?: CreateVpcLinkCommandOutput) => void
-  ): void;
-  public createVpcLink(
-    args: CreateVpcLinkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateVpcLinkCommandOutput) => void
-  ): void;
-  public createVpcLink(
-    args: CreateVpcLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateVpcLinkCommandOutput) => void),
-    cb?: (err: any, data?: CreateVpcLinkCommandOutput) => void
-  ): Promise<CreateVpcLinkCommandOutput> | void {
-    const command = new CreateVpcLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.</p>
-   */
-  public deleteAccessLogSettings(
-    args: DeleteAccessLogSettingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteAccessLogSettingsCommandOutput>;
-  public deleteAccessLogSettings(
-    args: DeleteAccessLogSettingsCommandInput,
-    cb: (err: any, data?: DeleteAccessLogSettingsCommandOutput) => void
-  ): void;
-  public deleteAccessLogSettings(
-    args: DeleteAccessLogSettingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAccessLogSettingsCommandOutput) => void
-  ): void;
-  public deleteAccessLogSettings(
-    args: DeleteAccessLogSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAccessLogSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAccessLogSettingsCommandOutput) => void
-  ): Promise<DeleteAccessLogSettingsCommandOutput> | void {
-    const command = new DeleteAccessLogSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Api resource.</p>
-   */
-  public deleteApi(args: DeleteApiCommandInput, options?: __HttpHandlerOptions): Promise<DeleteApiCommandOutput>;
-  public deleteApi(args: DeleteApiCommandInput, cb: (err: any, data?: DeleteApiCommandOutput) => void): void;
-  public deleteApi(
-    args: DeleteApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteApiCommandOutput) => void
-  ): void;
-  public deleteApi(
-    args: DeleteApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteApiCommandOutput) => void),
-    cb?: (err: any, data?: DeleteApiCommandOutput) => void
-  ): Promise<DeleteApiCommandOutput> | void {
-    const command = new DeleteApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an API mapping.</p>
-   */
-  public deleteApiMapping(
-    args: DeleteApiMappingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteApiMappingCommandOutput>;
-  public deleteApiMapping(
-    args: DeleteApiMappingCommandInput,
-    cb: (err: any, data?: DeleteApiMappingCommandOutput) => void
-  ): void;
-  public deleteApiMapping(
-    args: DeleteApiMappingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteApiMappingCommandOutput) => void
-  ): void;
-  public deleteApiMapping(
-    args: DeleteApiMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteApiMappingCommandOutput) => void),
-    cb?: (err: any, data?: DeleteApiMappingCommandOutput) => void
-  ): Promise<DeleteApiMappingCommandOutput> | void {
-    const command = new DeleteApiMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Authorizer.</p>
-   */
-  public deleteAuthorizer(
-    args: DeleteAuthorizerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteAuthorizerCommandOutput>;
-  public deleteAuthorizer(
-    args: DeleteAuthorizerCommandInput,
-    cb: (err: any, data?: DeleteAuthorizerCommandOutput) => void
-  ): void;
-  public deleteAuthorizer(
-    args: DeleteAuthorizerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAuthorizerCommandOutput) => void
-  ): void;
-  public deleteAuthorizer(
-    args: DeleteAuthorizerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAuthorizerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAuthorizerCommandOutput) => void
-  ): Promise<DeleteAuthorizerCommandOutput> | void {
-    const command = new DeleteAuthorizerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a CORS configuration.</p>
-   */
-  public deleteCorsConfiguration(
-    args: DeleteCorsConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCorsConfigurationCommandOutput>;
-  public deleteCorsConfiguration(
-    args: DeleteCorsConfigurationCommandInput,
-    cb: (err: any, data?: DeleteCorsConfigurationCommandOutput) => void
-  ): void;
-  public deleteCorsConfiguration(
-    args: DeleteCorsConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCorsConfigurationCommandOutput) => void
-  ): void;
-  public deleteCorsConfiguration(
-    args: DeleteCorsConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCorsConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCorsConfigurationCommandOutput) => void
-  ): Promise<DeleteCorsConfigurationCommandOutput> | void {
-    const command = new DeleteCorsConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Deployment.</p>
-   */
-  public deleteDeployment(
-    args: DeleteDeploymentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDeploymentCommandOutput>;
-  public deleteDeployment(
-    args: DeleteDeploymentCommandInput,
-    cb: (err: any, data?: DeleteDeploymentCommandOutput) => void
-  ): void;
-  public deleteDeployment(
-    args: DeleteDeploymentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDeploymentCommandOutput) => void
-  ): void;
-  public deleteDeployment(
-    args: DeleteDeploymentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDeploymentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDeploymentCommandOutput) => void
-  ): Promise<DeleteDeploymentCommandOutput> | void {
-    const command = new DeleteDeploymentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a domain name.</p>
-   */
-  public deleteDomainName(
-    args: DeleteDomainNameCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDomainNameCommandOutput>;
-  public deleteDomainName(
-    args: DeleteDomainNameCommandInput,
-    cb: (err: any, data?: DeleteDomainNameCommandOutput) => void
-  ): void;
-  public deleteDomainName(
-    args: DeleteDomainNameCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDomainNameCommandOutput) => void
-  ): void;
-  public deleteDomainName(
-    args: DeleteDomainNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainNameCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainNameCommandOutput) => void
-  ): Promise<DeleteDomainNameCommandOutput> | void {
-    const command = new DeleteDomainNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Integration.</p>
-   */
-  public deleteIntegration(
-    args: DeleteIntegrationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteIntegrationCommandOutput>;
-  public deleteIntegration(
-    args: DeleteIntegrationCommandInput,
-    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
-  ): void;
-  public deleteIntegration(
-    args: DeleteIntegrationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
-  ): void;
-  public deleteIntegration(
-    args: DeleteIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIntegrationCommandOutput) => void
-  ): Promise<DeleteIntegrationCommandOutput> | void {
-    const command = new DeleteIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an IntegrationResponses.</p>
-   */
-  public deleteIntegrationResponse(
-    args: DeleteIntegrationResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteIntegrationResponseCommandOutput>;
-  public deleteIntegrationResponse(
-    args: DeleteIntegrationResponseCommandInput,
-    cb: (err: any, data?: DeleteIntegrationResponseCommandOutput) => void
-  ): void;
-  public deleteIntegrationResponse(
-    args: DeleteIntegrationResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteIntegrationResponseCommandOutput) => void
-  ): void;
-  public deleteIntegrationResponse(
-    args: DeleteIntegrationResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIntegrationResponseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIntegrationResponseCommandOutput) => void
-  ): Promise<DeleteIntegrationResponseCommandOutput> | void {
-    const command = new DeleteIntegrationResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Model.</p>
-   */
-  public deleteModel(args: DeleteModelCommandInput, options?: __HttpHandlerOptions): Promise<DeleteModelCommandOutput>;
-  public deleteModel(args: DeleteModelCommandInput, cb: (err: any, data?: DeleteModelCommandOutput) => void): void;
-  public deleteModel(
-    args: DeleteModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteModelCommandOutput) => void
-  ): void;
-  public deleteModel(
-    args: DeleteModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteModelCommandOutput) => void),
-    cb?: (err: any, data?: DeleteModelCommandOutput) => void
-  ): Promise<DeleteModelCommandOutput> | void {
-    const command = new DeleteModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Route.</p>
-   */
-  public deleteRoute(args: DeleteRouteCommandInput, options?: __HttpHandlerOptions): Promise<DeleteRouteCommandOutput>;
-  public deleteRoute(args: DeleteRouteCommandInput, cb: (err: any, data?: DeleteRouteCommandOutput) => void): void;
-  public deleteRoute(
-    args: DeleteRouteCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRouteCommandOutput) => void
-  ): void;
-  public deleteRoute(
-    args: DeleteRouteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRouteCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRouteCommandOutput) => void
-  ): Promise<DeleteRouteCommandOutput> | void {
-    const command = new DeleteRouteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a route request parameter.</p>
-   */
-  public deleteRouteRequestParameter(
-    args: DeleteRouteRequestParameterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRouteRequestParameterCommandOutput>;
-  public deleteRouteRequestParameter(
-    args: DeleteRouteRequestParameterCommandInput,
-    cb: (err: any, data?: DeleteRouteRequestParameterCommandOutput) => void
-  ): void;
-  public deleteRouteRequestParameter(
-    args: DeleteRouteRequestParameterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRouteRequestParameterCommandOutput) => void
-  ): void;
-  public deleteRouteRequestParameter(
-    args: DeleteRouteRequestParameterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRouteRequestParameterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRouteRequestParameterCommandOutput) => void
-  ): Promise<DeleteRouteRequestParameterCommandOutput> | void {
-    const command = new DeleteRouteRequestParameterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a RouteResponse.</p>
-   */
-  public deleteRouteResponse(
-    args: DeleteRouteResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRouteResponseCommandOutput>;
-  public deleteRouteResponse(
-    args: DeleteRouteResponseCommandInput,
-    cb: (err: any, data?: DeleteRouteResponseCommandOutput) => void
-  ): void;
-  public deleteRouteResponse(
-    args: DeleteRouteResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRouteResponseCommandOutput) => void
-  ): void;
-  public deleteRouteResponse(
-    args: DeleteRouteResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRouteResponseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRouteResponseCommandOutput) => void
-  ): Promise<DeleteRouteResponseCommandOutput> | void {
-    const command = new DeleteRouteResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the RouteSettings for a stage.</p>
-   */
-  public deleteRouteSettings(
-    args: DeleteRouteSettingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRouteSettingsCommandOutput>;
-  public deleteRouteSettings(
-    args: DeleteRouteSettingsCommandInput,
-    cb: (err: any, data?: DeleteRouteSettingsCommandOutput) => void
-  ): void;
-  public deleteRouteSettings(
-    args: DeleteRouteSettingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRouteSettingsCommandOutput) => void
-  ): void;
-  public deleteRouteSettings(
-    args: DeleteRouteSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRouteSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRouteSettingsCommandOutput) => void
-  ): Promise<DeleteRouteSettingsCommandOutput> | void {
-    const command = new DeleteRouteSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Stage.</p>
-   */
-  public deleteStage(args: DeleteStageCommandInput, options?: __HttpHandlerOptions): Promise<DeleteStageCommandOutput>;
-  public deleteStage(args: DeleteStageCommandInput, cb: (err: any, data?: DeleteStageCommandOutput) => void): void;
-  public deleteStage(
-    args: DeleteStageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteStageCommandOutput) => void
-  ): void;
-  public deleteStage(
-    args: DeleteStageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStageCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStageCommandOutput) => void
-  ): Promise<DeleteStageCommandOutput> | void {
-    const command = new DeleteStageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a VPC link.</p>
-   */
-  public deleteVpcLink(
-    args: DeleteVpcLinkCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteVpcLinkCommandOutput>;
-  public deleteVpcLink(
-    args: DeleteVpcLinkCommandInput,
-    cb: (err: any, data?: DeleteVpcLinkCommandOutput) => void
-  ): void;
-  public deleteVpcLink(
-    args: DeleteVpcLinkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteVpcLinkCommandOutput) => void
-  ): void;
-  public deleteVpcLink(
-    args: DeleteVpcLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteVpcLinkCommandOutput) => void),
-    cb?: (err: any, data?: DeleteVpcLinkCommandOutput) => void
-  ): Promise<DeleteVpcLinkCommandOutput> | void {
-    const command = new DeleteVpcLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public exportApi(args: ExportApiCommandInput, options?: __HttpHandlerOptions): Promise<ExportApiCommandOutput>;
-  public exportApi(args: ExportApiCommandInput, cb: (err: any, data?: ExportApiCommandOutput) => void): void;
-  public exportApi(
-    args: ExportApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportApiCommandOutput) => void
-  ): void;
-  public exportApi(
-    args: ExportApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExportApiCommandOutput) => void),
-    cb?: (err: any, data?: ExportApiCommandOutput) => void
-  ): Promise<ExportApiCommandOutput> | void {
-    const command = new ExportApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an Api resource.</p>
-   */
-  public getApi(args: GetApiCommandInput, options?: __HttpHandlerOptions): Promise<GetApiCommandOutput>;
-  public getApi(args: GetApiCommandInput, cb: (err: any, data?: GetApiCommandOutput) => void): void;
-  public getApi(
-    args: GetApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetApiCommandOutput) => void
-  ): void;
-  public getApi(
-    args: GetApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetApiCommandOutput) => void),
-    cb?: (err: any, data?: GetApiCommandOutput) => void
-  ): Promise<GetApiCommandOutput> | void {
-    const command = new GetApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an API mapping.</p>
-   */
-  public getApiMapping(
-    args: GetApiMappingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetApiMappingCommandOutput>;
-  public getApiMapping(
-    args: GetApiMappingCommandInput,
-    cb: (err: any, data?: GetApiMappingCommandOutput) => void
-  ): void;
-  public getApiMapping(
-    args: GetApiMappingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetApiMappingCommandOutput) => void
-  ): void;
-  public getApiMapping(
-    args: GetApiMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetApiMappingCommandOutput) => void),
-    cb?: (err: any, data?: GetApiMappingCommandOutput) => void
-  ): Promise<GetApiMappingCommandOutput> | void {
-    const command = new GetApiMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets API mappings.</p>
-   */
-  public getApiMappings(
-    args: GetApiMappingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetApiMappingsCommandOutput>;
-  public getApiMappings(
-    args: GetApiMappingsCommandInput,
-    cb: (err: any, data?: GetApiMappingsCommandOutput) => void
-  ): void;
-  public getApiMappings(
-    args: GetApiMappingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetApiMappingsCommandOutput) => void
-  ): void;
-  public getApiMappings(
-    args: GetApiMappingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetApiMappingsCommandOutput) => void),
-    cb?: (err: any, data?: GetApiMappingsCommandOutput) => void
-  ): Promise<GetApiMappingsCommandOutput> | void {
-    const command = new GetApiMappingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a collection of Api resources.</p>
-   */
-  public getApis(args: GetApisCommandInput, options?: __HttpHandlerOptions): Promise<GetApisCommandOutput>;
-  public getApis(args: GetApisCommandInput, cb: (err: any, data?: GetApisCommandOutput) => void): void;
-  public getApis(
-    args: GetApisCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetApisCommandOutput) => void
-  ): void;
-  public getApis(
-    args: GetApisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetApisCommandOutput) => void),
-    cb?: (err: any, data?: GetApisCommandOutput) => void
-  ): Promise<GetApisCommandOutput> | void {
-    const command = new GetApisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an Authorizer.</p>
-   */
-  public getAuthorizer(
-    args: GetAuthorizerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAuthorizerCommandOutput>;
-  public getAuthorizer(
-    args: GetAuthorizerCommandInput,
-    cb: (err: any, data?: GetAuthorizerCommandOutput) => void
-  ): void;
-  public getAuthorizer(
-    args: GetAuthorizerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAuthorizerCommandOutput) => void
-  ): void;
-  public getAuthorizer(
-    args: GetAuthorizerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAuthorizerCommandOutput) => void),
-    cb?: (err: any, data?: GetAuthorizerCommandOutput) => void
-  ): Promise<GetAuthorizerCommandOutput> | void {
-    const command = new GetAuthorizerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Authorizers for an API.</p>
-   */
-  public getAuthorizers(
-    args: GetAuthorizersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAuthorizersCommandOutput>;
-  public getAuthorizers(
-    args: GetAuthorizersCommandInput,
-    cb: (err: any, data?: GetAuthorizersCommandOutput) => void
-  ): void;
-  public getAuthorizers(
-    args: GetAuthorizersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAuthorizersCommandOutput) => void
-  ): void;
-  public getAuthorizers(
-    args: GetAuthorizersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAuthorizersCommandOutput) => void),
-    cb?: (err: any, data?: GetAuthorizersCommandOutput) => void
-  ): Promise<GetAuthorizersCommandOutput> | void {
-    const command = new GetAuthorizersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a Deployment.</p>
-   */
-  public getDeployment(
-    args: GetDeploymentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDeploymentCommandOutput>;
-  public getDeployment(
-    args: GetDeploymentCommandInput,
-    cb: (err: any, data?: GetDeploymentCommandOutput) => void
-  ): void;
-  public getDeployment(
-    args: GetDeploymentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDeploymentCommandOutput) => void
-  ): void;
-  public getDeployment(
-    args: GetDeploymentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeploymentCommandOutput) => void),
-    cb?: (err: any, data?: GetDeploymentCommandOutput) => void
-  ): Promise<GetDeploymentCommandOutput> | void {
-    const command = new GetDeploymentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Deployments for an API.</p>
-   */
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDeploymentsCommandOutput>;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): void;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): void;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeploymentsCommandOutput) => void),
-    cb?: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): Promise<GetDeploymentsCommandOutput> | void {
-    const command = new GetDeploymentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a domain name.</p>
-   */
-  public getDomainName(
-    args: GetDomainNameCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDomainNameCommandOutput>;
-  public getDomainName(
-    args: GetDomainNameCommandInput,
-    cb: (err: any, data?: GetDomainNameCommandOutput) => void
-  ): void;
-  public getDomainName(
-    args: GetDomainNameCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDomainNameCommandOutput) => void
-  ): void;
-  public getDomainName(
-    args: GetDomainNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainNameCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainNameCommandOutput) => void
-  ): Promise<GetDomainNameCommandOutput> | void {
-    const command = new GetDomainNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the domain names for an AWS account.</p>
-   */
-  public getDomainNames(
-    args: GetDomainNamesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDomainNamesCommandOutput>;
-  public getDomainNames(
-    args: GetDomainNamesCommandInput,
-    cb: (err: any, data?: GetDomainNamesCommandOutput) => void
-  ): void;
-  public getDomainNames(
-    args: GetDomainNamesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDomainNamesCommandOutput) => void
-  ): void;
-  public getDomainNames(
-    args: GetDomainNamesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainNamesCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainNamesCommandOutput) => void
-  ): Promise<GetDomainNamesCommandOutput> | void {
-    const command = new GetDomainNamesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an Integration.</p>
-   */
-  public getIntegration(
-    args: GetIntegrationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetIntegrationCommandOutput>;
-  public getIntegration(
-    args: GetIntegrationCommandInput,
-    cb: (err: any, data?: GetIntegrationCommandOutput) => void
-  ): void;
-  public getIntegration(
-    args: GetIntegrationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetIntegrationCommandOutput) => void
-  ): void;
-  public getIntegration(
-    args: GetIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: GetIntegrationCommandOutput) => void
-  ): Promise<GetIntegrationCommandOutput> | void {
-    const command = new GetIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an IntegrationResponses.</p>
-   */
-  public getIntegrationResponse(
-    args: GetIntegrationResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetIntegrationResponseCommandOutput>;
-  public getIntegrationResponse(
-    args: GetIntegrationResponseCommandInput,
-    cb: (err: any, data?: GetIntegrationResponseCommandOutput) => void
-  ): void;
-  public getIntegrationResponse(
-    args: GetIntegrationResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetIntegrationResponseCommandOutput) => void
-  ): void;
-  public getIntegrationResponse(
-    args: GetIntegrationResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIntegrationResponseCommandOutput) => void),
-    cb?: (err: any, data?: GetIntegrationResponseCommandOutput) => void
-  ): Promise<GetIntegrationResponseCommandOutput> | void {
-    const command = new GetIntegrationResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the IntegrationResponses for an Integration.</p>
-   */
-  public getIntegrationResponses(
-    args: GetIntegrationResponsesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetIntegrationResponsesCommandOutput>;
-  public getIntegrationResponses(
-    args: GetIntegrationResponsesCommandInput,
-    cb: (err: any, data?: GetIntegrationResponsesCommandOutput) => void
-  ): void;
-  public getIntegrationResponses(
-    args: GetIntegrationResponsesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetIntegrationResponsesCommandOutput) => void
-  ): void;
-  public getIntegrationResponses(
-    args: GetIntegrationResponsesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIntegrationResponsesCommandOutput) => void),
-    cb?: (err: any, data?: GetIntegrationResponsesCommandOutput) => void
-  ): Promise<GetIntegrationResponsesCommandOutput> | void {
-    const command = new GetIntegrationResponsesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Integrations for an API.</p>
-   */
-  public getIntegrations(
-    args: GetIntegrationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetIntegrationsCommandOutput>;
-  public getIntegrations(
-    args: GetIntegrationsCommandInput,
-    cb: (err: any, data?: GetIntegrationsCommandOutput) => void
-  ): void;
-  public getIntegrations(
-    args: GetIntegrationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetIntegrationsCommandOutput) => void
-  ): void;
-  public getIntegrations(
-    args: GetIntegrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIntegrationsCommandOutput) => void),
-    cb?: (err: any, data?: GetIntegrationsCommandOutput) => void
-  ): Promise<GetIntegrationsCommandOutput> | void {
-    const command = new GetIntegrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a Model.</p>
-   */
-  public getModel(args: GetModelCommandInput, options?: __HttpHandlerOptions): Promise<GetModelCommandOutput>;
-  public getModel(args: GetModelCommandInput, cb: (err: any, data?: GetModelCommandOutput) => void): void;
-  public getModel(
-    args: GetModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetModelCommandOutput) => void
-  ): void;
-  public getModel(
-    args: GetModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetModelCommandOutput) => void),
-    cb?: (err: any, data?: GetModelCommandOutput) => void
-  ): Promise<GetModelCommandOutput> | void {
-    const command = new GetModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Models for an API.</p>
-   */
-  public getModels(args: GetModelsCommandInput, options?: __HttpHandlerOptions): Promise<GetModelsCommandOutput>;
-  public getModels(args: GetModelsCommandInput, cb: (err: any, data?: GetModelsCommandOutput) => void): void;
-  public getModels(
-    args: GetModelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetModelsCommandOutput) => void
-  ): void;
-  public getModels(
-    args: GetModelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetModelsCommandOutput) => void),
-    cb?: (err: any, data?: GetModelsCommandOutput) => void
-  ): Promise<GetModelsCommandOutput> | void {
-    const command = new GetModelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a model template.</p>
-   */
-  public getModelTemplate(
-    args: GetModelTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetModelTemplateCommandOutput>;
-  public getModelTemplate(
-    args: GetModelTemplateCommandInput,
-    cb: (err: any, data?: GetModelTemplateCommandOutput) => void
-  ): void;
-  public getModelTemplate(
-    args: GetModelTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetModelTemplateCommandOutput) => void
-  ): void;
-  public getModelTemplate(
-    args: GetModelTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetModelTemplateCommandOutput) => void),
-    cb?: (err: any, data?: GetModelTemplateCommandOutput) => void
-  ): Promise<GetModelTemplateCommandOutput> | void {
-    const command = new GetModelTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a Route.</p>
-   */
-  public getRoute(args: GetRouteCommandInput, options?: __HttpHandlerOptions): Promise<GetRouteCommandOutput>;
-  public getRoute(args: GetRouteCommandInput, cb: (err: any, data?: GetRouteCommandOutput) => void): void;
-  public getRoute(
-    args: GetRouteCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRouteCommandOutput) => void
-  ): void;
-  public getRoute(
-    args: GetRouteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRouteCommandOutput) => void),
-    cb?: (err: any, data?: GetRouteCommandOutput) => void
-  ): Promise<GetRouteCommandOutput> | void {
-    const command = new GetRouteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a RouteResponse.</p>
-   */
-  public getRouteResponse(
-    args: GetRouteResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRouteResponseCommandOutput>;
-  public getRouteResponse(
-    args: GetRouteResponseCommandInput,
-    cb: (err: any, data?: GetRouteResponseCommandOutput) => void
-  ): void;
-  public getRouteResponse(
-    args: GetRouteResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRouteResponseCommandOutput) => void
-  ): void;
-  public getRouteResponse(
-    args: GetRouteResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRouteResponseCommandOutput) => void),
-    cb?: (err: any, data?: GetRouteResponseCommandOutput) => void
-  ): Promise<GetRouteResponseCommandOutput> | void {
-    const command = new GetRouteResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the RouteResponses for a Route.</p>
-   */
-  public getRouteResponses(
-    args: GetRouteResponsesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRouteResponsesCommandOutput>;
-  public getRouteResponses(
-    args: GetRouteResponsesCommandInput,
-    cb: (err: any, data?: GetRouteResponsesCommandOutput) => void
-  ): void;
-  public getRouteResponses(
-    args: GetRouteResponsesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRouteResponsesCommandOutput) => void
-  ): void;
-  public getRouteResponses(
-    args: GetRouteResponsesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRouteResponsesCommandOutput) => void),
-    cb?: (err: any, data?: GetRouteResponsesCommandOutput) => void
-  ): Promise<GetRouteResponsesCommandOutput> | void {
-    const command = new GetRouteResponsesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Routes for an API.</p>
-   */
-  public getRoutes(args: GetRoutesCommandInput, options?: __HttpHandlerOptions): Promise<GetRoutesCommandOutput>;
-  public getRoutes(args: GetRoutesCommandInput, cb: (err: any, data?: GetRoutesCommandOutput) => void): void;
-  public getRoutes(
-    args: GetRoutesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRoutesCommandOutput) => void
-  ): void;
-  public getRoutes(
-    args: GetRoutesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRoutesCommandOutput) => void),
-    cb?: (err: any, data?: GetRoutesCommandOutput) => void
-  ): Promise<GetRoutesCommandOutput> | void {
-    const command = new GetRoutesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a Stage.</p>
-   */
-  public getStage(args: GetStageCommandInput, options?: __HttpHandlerOptions): Promise<GetStageCommandOutput>;
-  public getStage(args: GetStageCommandInput, cb: (err: any, data?: GetStageCommandOutput) => void): void;
-  public getStage(
-    args: GetStageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetStageCommandOutput) => void
-  ): void;
-  public getStage(
-    args: GetStageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStageCommandOutput) => void),
-    cb?: (err: any, data?: GetStageCommandOutput) => void
-  ): Promise<GetStageCommandOutput> | void {
-    const command = new GetStageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Stages for an API.</p>
-   */
-  public getStages(args: GetStagesCommandInput, options?: __HttpHandlerOptions): Promise<GetStagesCommandOutput>;
-  public getStages(args: GetStagesCommandInput, cb: (err: any, data?: GetStagesCommandOutput) => void): void;
-  public getStages(
-    args: GetStagesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetStagesCommandOutput) => void
-  ): void;
-  public getStages(
-    args: GetStagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStagesCommandOutput) => void),
-    cb?: (err: any, data?: GetStagesCommandOutput) => void
-  ): Promise<GetStagesCommandOutput> | void {
-    const command = new GetStagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a collection of Tag resources.</p>
-   */
-  public getTags(args: GetTagsCommandInput, options?: __HttpHandlerOptions): Promise<GetTagsCommandOutput>;
-  public getTags(args: GetTagsCommandInput, cb: (err: any, data?: GetTagsCommandOutput) => void): void;
-  public getTags(
-    args: GetTagsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTagsCommandOutput) => void
-  ): void;
-  public getTags(
-    args: GetTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTagsCommandOutput) => void),
-    cb?: (err: any, data?: GetTagsCommandOutput) => void
-  ): Promise<GetTagsCommandOutput> | void {
-    const command = new GetTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a VPC link.</p>
-   */
-  public getVpcLink(args: GetVpcLinkCommandInput, options?: __HttpHandlerOptions): Promise<GetVpcLinkCommandOutput>;
-  public getVpcLink(args: GetVpcLinkCommandInput, cb: (err: any, data?: GetVpcLinkCommandOutput) => void): void;
-  public getVpcLink(
-    args: GetVpcLinkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetVpcLinkCommandOutput) => void
-  ): void;
-  public getVpcLink(
-    args: GetVpcLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetVpcLinkCommandOutput) => void),
-    cb?: (err: any, data?: GetVpcLinkCommandOutput) => void
-  ): Promise<GetVpcLinkCommandOutput> | void {
-    const command = new GetVpcLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a collection of VPC links.</p>
-   */
-  public getVpcLinks(args: GetVpcLinksCommandInput, options?: __HttpHandlerOptions): Promise<GetVpcLinksCommandOutput>;
-  public getVpcLinks(args: GetVpcLinksCommandInput, cb: (err: any, data?: GetVpcLinksCommandOutput) => void): void;
-  public getVpcLinks(
-    args: GetVpcLinksCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetVpcLinksCommandOutput) => void
-  ): void;
-  public getVpcLinks(
-    args: GetVpcLinksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetVpcLinksCommandOutput) => void),
-    cb?: (err: any, data?: GetVpcLinksCommandOutput) => void
-  ): Promise<GetVpcLinksCommandOutput> | void {
-    const command = new GetVpcLinksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports an API.</p>
-   */
-  public importApi(args: ImportApiCommandInput, options?: __HttpHandlerOptions): Promise<ImportApiCommandOutput>;
-  public importApi(args: ImportApiCommandInput, cb: (err: any, data?: ImportApiCommandOutput) => void): void;
-  public importApi(
-    args: ImportApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportApiCommandOutput) => void
-  ): void;
-  public importApi(
-    args: ImportApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportApiCommandOutput) => void),
-    cb?: (err: any, data?: ImportApiCommandOutput) => void
-  ): Promise<ImportApiCommandOutput> | void {
-    const command = new ImportApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Puts an Api resource.</p>
-   */
-  public reimportApi(args: ReimportApiCommandInput, options?: __HttpHandlerOptions): Promise<ReimportApiCommandOutput>;
-  public reimportApi(args: ReimportApiCommandInput, cb: (err: any, data?: ReimportApiCommandOutput) => void): void;
-  public reimportApi(
-    args: ReimportApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ReimportApiCommandOutput) => void
-  ): void;
-  public reimportApi(
-    args: ReimportApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ReimportApiCommandOutput) => void),
-    cb?: (err: any, data?: ReimportApiCommandOutput) => void
-  ): Promise<ReimportApiCommandOutput> | void {
-    const command = new ReimportApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Resets all authorizer cache entries on a stage. Supported only for HTTP APIs.</p>
-   */
-  public resetAuthorizersCache(
-    args: ResetAuthorizersCacheCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ResetAuthorizersCacheCommandOutput>;
-  public resetAuthorizersCache(
-    args: ResetAuthorizersCacheCommandInput,
-    cb: (err: any, data?: ResetAuthorizersCacheCommandOutput) => void
-  ): void;
-  public resetAuthorizersCache(
-    args: ResetAuthorizersCacheCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ResetAuthorizersCacheCommandOutput) => void
-  ): void;
-  public resetAuthorizersCache(
-    args: ResetAuthorizersCacheCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetAuthorizersCacheCommandOutput) => void),
-    cb?: (err: any, data?: ResetAuthorizersCacheCommandOutput) => void
-  ): Promise<ResetAuthorizersCacheCommandOutput> | void {
-    const command = new ResetAuthorizersCacheCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new Tag resource to represent a tag.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Tag.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Api resource.</p>
-   */
-  public updateApi(args: UpdateApiCommandInput, options?: __HttpHandlerOptions): Promise<UpdateApiCommandOutput>;
-  public updateApi(args: UpdateApiCommandInput, cb: (err: any, data?: UpdateApiCommandOutput) => void): void;
-  public updateApi(
-    args: UpdateApiCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateApiCommandOutput) => void
-  ): void;
-  public updateApi(
-    args: UpdateApiCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateApiCommandOutput) => void),
-    cb?: (err: any, data?: UpdateApiCommandOutput) => void
-  ): Promise<UpdateApiCommandOutput> | void {
-    const command = new UpdateApiCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>The API mapping.</p>
-   */
-  public updateApiMapping(
-    args: UpdateApiMappingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateApiMappingCommandOutput>;
-  public updateApiMapping(
-    args: UpdateApiMappingCommandInput,
-    cb: (err: any, data?: UpdateApiMappingCommandOutput) => void
-  ): void;
-  public updateApiMapping(
-    args: UpdateApiMappingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateApiMappingCommandOutput) => void
-  ): void;
-  public updateApiMapping(
-    args: UpdateApiMappingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateApiMappingCommandOutput) => void),
-    cb?: (err: any, data?: UpdateApiMappingCommandOutput) => void
-  ): Promise<UpdateApiMappingCommandOutput> | void {
-    const command = new UpdateApiMappingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Authorizer.</p>
-   */
-  public updateAuthorizer(
-    args: UpdateAuthorizerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateAuthorizerCommandOutput>;
-  public updateAuthorizer(
-    args: UpdateAuthorizerCommandInput,
-    cb: (err: any, data?: UpdateAuthorizerCommandOutput) => void
-  ): void;
-  public updateAuthorizer(
-    args: UpdateAuthorizerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateAuthorizerCommandOutput) => void
-  ): void;
-  public updateAuthorizer(
-    args: UpdateAuthorizerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAuthorizerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAuthorizerCommandOutput) => void
-  ): Promise<UpdateAuthorizerCommandOutput> | void {
-    const command = new UpdateAuthorizerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a Deployment.</p>
-   */
-  public updateDeployment(
-    args: UpdateDeploymentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDeploymentCommandOutput>;
-  public updateDeployment(
-    args: UpdateDeploymentCommandInput,
-    cb: (err: any, data?: UpdateDeploymentCommandOutput) => void
-  ): void;
-  public updateDeployment(
-    args: UpdateDeploymentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDeploymentCommandOutput) => void
-  ): void;
-  public updateDeployment(
-    args: UpdateDeploymentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDeploymentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDeploymentCommandOutput) => void
-  ): Promise<UpdateDeploymentCommandOutput> | void {
-    const command = new UpdateDeploymentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a domain name.</p>
-   */
-  public updateDomainName(
-    args: UpdateDomainNameCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDomainNameCommandOutput>;
-  public updateDomainName(
-    args: UpdateDomainNameCommandInput,
-    cb: (err: any, data?: UpdateDomainNameCommandOutput) => void
-  ): void;
-  public updateDomainName(
-    args: UpdateDomainNameCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDomainNameCommandOutput) => void
-  ): void;
-  public updateDomainName(
-    args: UpdateDomainNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDomainNameCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDomainNameCommandOutput) => void
-  ): Promise<UpdateDomainNameCommandOutput> | void {
-    const command = new UpdateDomainNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an Integration.</p>
-   */
-  public updateIntegration(
-    args: UpdateIntegrationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateIntegrationCommandOutput>;
-  public updateIntegration(
-    args: UpdateIntegrationCommandInput,
-    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
-  ): void;
-  public updateIntegration(
-    args: UpdateIntegrationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
-  ): void;
-  public updateIntegration(
-    args: UpdateIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIntegrationCommandOutput) => void
-  ): Promise<UpdateIntegrationCommandOutput> | void {
-    const command = new UpdateIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an IntegrationResponses.</p>
-   */
-  public updateIntegrationResponse(
-    args: UpdateIntegrationResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateIntegrationResponseCommandOutput>;
-  public updateIntegrationResponse(
-    args: UpdateIntegrationResponseCommandInput,
-    cb: (err: any, data?: UpdateIntegrationResponseCommandOutput) => void
-  ): void;
-  public updateIntegrationResponse(
-    args: UpdateIntegrationResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateIntegrationResponseCommandOutput) => void
-  ): void;
-  public updateIntegrationResponse(
-    args: UpdateIntegrationResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIntegrationResponseCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIntegrationResponseCommandOutput) => void
-  ): Promise<UpdateIntegrationResponseCommandOutput> | void {
-    const command = new UpdateIntegrationResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a Model.</p>
-   */
-  public updateModel(args: UpdateModelCommandInput, options?: __HttpHandlerOptions): Promise<UpdateModelCommandOutput>;
-  public updateModel(args: UpdateModelCommandInput, cb: (err: any, data?: UpdateModelCommandOutput) => void): void;
-  public updateModel(
-    args: UpdateModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateModelCommandOutput) => void
-  ): void;
-  public updateModel(
-    args: UpdateModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateModelCommandOutput) => void),
-    cb?: (err: any, data?: UpdateModelCommandOutput) => void
-  ): Promise<UpdateModelCommandOutput> | void {
-    const command = new UpdateModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a Route.</p>
-   */
-  public updateRoute(args: UpdateRouteCommandInput, options?: __HttpHandlerOptions): Promise<UpdateRouteCommandOutput>;
-  public updateRoute(args: UpdateRouteCommandInput, cb: (err: any, data?: UpdateRouteCommandOutput) => void): void;
-  public updateRoute(
-    args: UpdateRouteCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRouteCommandOutput) => void
-  ): void;
-  public updateRoute(
-    args: UpdateRouteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRouteCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRouteCommandOutput) => void
-  ): Promise<UpdateRouteCommandOutput> | void {
-    const command = new UpdateRouteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a RouteResponse.</p>
-   */
-  public updateRouteResponse(
-    args: UpdateRouteResponseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRouteResponseCommandOutput>;
-  public updateRouteResponse(
-    args: UpdateRouteResponseCommandInput,
-    cb: (err: any, data?: UpdateRouteResponseCommandOutput) => void
-  ): void;
-  public updateRouteResponse(
-    args: UpdateRouteResponseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRouteResponseCommandOutput) => void
-  ): void;
-  public updateRouteResponse(
-    args: UpdateRouteResponseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRouteResponseCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRouteResponseCommandOutput) => void
-  ): Promise<UpdateRouteResponseCommandOutput> | void {
-    const command = new UpdateRouteResponseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a Stage.</p>
-   */
-  public updateStage(args: UpdateStageCommandInput, options?: __HttpHandlerOptions): Promise<UpdateStageCommandOutput>;
-  public updateStage(args: UpdateStageCommandInput, cb: (err: any, data?: UpdateStageCommandOutput) => void): void;
-  public updateStage(
-    args: UpdateStageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateStageCommandOutput) => void
-  ): void;
-  public updateStage(
-    args: UpdateStageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStageCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStageCommandOutput) => void
-  ): Promise<UpdateStageCommandOutput> | void {
-    const command = new UpdateStageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a VPC link.</p>
-   */
-  public updateVpcLink(
-    args: UpdateVpcLinkCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateVpcLinkCommandOutput>;
-  public updateVpcLink(
-    args: UpdateVpcLinkCommandInput,
-    cb: (err: any, data?: UpdateVpcLinkCommandOutput) => void
-  ): void;
-  public updateVpcLink(
-    args: UpdateVpcLinkCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateVpcLinkCommandOutput) => void
-  ): void;
-  public updateVpcLink(
-    args: UpdateVpcLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateVpcLinkCommandOutput) => void),
-    cb?: (err: any, data?: UpdateVpcLinkCommandOutput) => void
-  ): Promise<UpdateVpcLinkCommandOutput> | void {
-    const command = new UpdateVpcLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class ApiGatewayV2 extends ApiGatewayV2Client implements ApiGatewayV2 {}
+createAggregatedClient(commands, ApiGatewayV2, { paginators });

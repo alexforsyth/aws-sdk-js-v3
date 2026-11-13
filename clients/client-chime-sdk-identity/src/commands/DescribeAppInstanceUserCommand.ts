@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ChimeSDKIdentityClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeSDKIdentityClient";
-import { DescribeAppInstanceUserRequest, DescribeAppInstanceUserResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAppInstanceUserCommand,
-  serializeAws_restJson1DescribeAppInstanceUserCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAppInstanceUserRequest, DescribeAppInstanceUserResponse } from "../models/models_0";
+import { DescribeAppInstanceUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAppInstanceUserCommand}.
+ */
 export interface DescribeAppInstanceUserCommandInput extends DescribeAppInstanceUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAppInstanceUserCommand}.
+ */
 export interface DescribeAppInstanceUserCommandOutput extends DescribeAppInstanceUserResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface DescribeAppInstanceUserCommandOutput extends DescribeAppInstanc
  * ```javascript
  * import { ChimeSDKIdentityClient, DescribeAppInstanceUserCommand } from "@aws-sdk/client-chime-sdk-identity"; // ES Modules import
  * // const { ChimeSDKIdentityClient, DescribeAppInstanceUserCommand } = require("@aws-sdk/client-chime-sdk-identity"); // CommonJS import
+ * // import type { ChimeSDKIdentityClientConfig } from "@aws-sdk/client-chime-sdk-identity";
+ * const config = {}; // type is ChimeSDKIdentityClientConfig
  * const client = new ChimeSDKIdentityClient(config);
+ * const input = { // DescribeAppInstanceUserRequest
+ *   AppInstanceUserArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAppInstanceUserCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAppInstanceUserResponse
+ * //   AppInstanceUser: { // AppInstanceUser
+ * //     AppInstanceUserArn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Metadata: "STRING_VALUE",
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //     LastUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //     ExpirationSettings: { // ExpirationSettings
+ * //       ExpirationDays: Number("int"), // required
+ * //       ExpirationCriterion: "CREATED_TIMESTAMP", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAppInstanceUserCommandInput - {@link DescribeAppInstanceUserCommandInput}
+ * @returns {@link DescribeAppInstanceUserCommandOutput}
  * @see {@link DescribeAppInstanceUserCommandInput} for command's `input` shape.
  * @see {@link DescribeAppInstanceUserCommandOutput} for command's `response` shape.
- * @see {@link ChimeSDKIdentityClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ChimeSDKIdentityClientResolvedConfig | config} for ChimeSDKIdentityClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKIdentityServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKIdentity service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAppInstanceUserCommand extends $Command<
-  DescribeAppInstanceUserCommandInput,
-  DescribeAppInstanceUserCommandOutput,
-  ChimeSDKIdentityClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAppInstanceUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKIdentityClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAppInstanceUserCommandInput, DescribeAppInstanceUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKIdentityClient";
-    const commandName = "DescribeAppInstanceUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAppInstanceUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAppInstanceUserResponse.filterSensitiveLog,
+export class DescribeAppInstanceUserCommand extends command<DescribeAppInstanceUserCommandInput, DescribeAppInstanceUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAppInstanceUser",
+  DescribeAppInstanceUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAppInstanceUserRequest;
+      output: DescribeAppInstanceUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAppInstanceUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAppInstanceUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAppInstanceUserCommandOutput> {
-    return deserializeAws_restJson1DescribeAppInstanceUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAppInstanceUserCommandInput;
+      output: DescribeAppInstanceUserCommandOutput;
+    };
+  };
 }

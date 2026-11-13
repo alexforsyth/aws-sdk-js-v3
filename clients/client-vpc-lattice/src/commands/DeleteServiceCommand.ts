@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteServiceRequest, DeleteServiceResponse } from "../models/models_0";
+import { DeleteService$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteServiceCommand}.
+ */
+export interface DeleteServiceCommandInput extends DeleteServiceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteServiceCommand}.
+ */
+export interface DeleteServiceCommandOutput extends DeleteServiceResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a service. A service can't be deleted if it's associated with a service network. If you delete a service, all resources related to the service, such as the resource policy, auth policy, listeners, listener rules, and access log subscriptions, are also deleted. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service">Delete a service</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { VPCLatticeClient, DeleteServiceCommand } from "@aws-sdk/client-vpc-lattice"; // ES Modules import
+ * // const { VPCLatticeClient, DeleteServiceCommand } = require("@aws-sdk/client-vpc-lattice"); // CommonJS import
+ * // import type { VPCLatticeClientConfig } from "@aws-sdk/client-vpc-lattice";
+ * const config = {}; // type is VPCLatticeClientConfig
+ * const client = new VPCLatticeClient(config);
+ * const input = { // DeleteServiceRequest
+ *   serviceIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteServiceCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteServiceResponse
+ * //   id: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   status: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteServiceCommandInput - {@link DeleteServiceCommandInput}
+ * @returns {@link DeleteServiceCommandOutput}
+ * @see {@link DeleteServiceCommandInput} for command's `input` shape.
+ * @see {@link DeleteServiceCommandOutput} for command's `response` shape.
+ * @see {@link VPCLatticeClientResolvedConfig | config} for VPCLatticeClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request conflicts with the current state of the resource. Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link VPCLatticeServiceException}
+ * <p>Base exception class for all service exceptions from VPCLattice service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteServiceCommand extends command<DeleteServiceCommandInput, DeleteServiceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteService",
+  DeleteService$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceRequest;
+      output: DeleteServiceResponse;
+    };
+    sdk: {
+      input: DeleteServiceCommandInput;
+      output: DeleteServiceCommandOutput;
+    };
+  };
+}

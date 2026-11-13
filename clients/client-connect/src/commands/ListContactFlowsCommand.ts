@@ -1,99 +1,109 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { ListContactFlowsRequest, ListContactFlowsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListContactFlowsCommand,
-  serializeAws_restJson1ListContactFlowsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListContactFlowsRequest, ListContactFlowsResponse } from "../models/models_2";
+import { ListContactFlows$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListContactFlowsCommand}.
+ */
 export interface ListContactFlowsCommandInput extends ListContactFlowsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListContactFlowsCommand}.
+ */
 export interface ListContactFlowsCommandOutput extends ListContactFlowsResponse, __MetadataBearer {}
 
 /**
- * <p>Provides information about the contact flows for the specified Amazon Connect instance.</p>
- *          <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
+ * <p>Provides information about the flows for the specified Connect Customer instance.</p>
+ *          <p>You can also create and update flows using the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html">Connect Customer
  *    Flow language</a>.</p>
- *          <p>For more information about contact flows, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html">Contact Flows</a> in the
- *     <i>Amazon Connect Administrator Guide</i>.</p>
+ *          <p>For more information about flows, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html">Flows</a> in the <i>Connect Customer
+ *     Administrator Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, ListContactFlowsCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, ListContactFlowsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // ListContactFlowsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactFlowTypes: [ // ContactFlowTypes
+ *     "CONTACT_FLOW" || "CUSTOMER_QUEUE" || "CUSTOMER_HOLD" || "CUSTOMER_WHISPER" || "AGENT_HOLD" || "AGENT_WHISPER" || "OUTBOUND_WHISPER" || "AGENT_TRANSFER" || "QUEUE_TRANSFER" || "CAMPAIGN",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListContactFlowsCommand(input);
  * const response = await client.send(command);
+ * // { // ListContactFlowsResponse
+ * //   ContactFlowSummaryList: [ // ContactFlowSummaryList
+ * //     { // ContactFlowSummary
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       ContactFlowType: "CONTACT_FLOW" || "CUSTOMER_QUEUE" || "CUSTOMER_HOLD" || "CUSTOMER_WHISPER" || "AGENT_HOLD" || "AGENT_WHISPER" || "OUTBOUND_WHISPER" || "AGENT_TRANSFER" || "QUEUE_TRANSFER" || "CAMPAIGN",
+ * //       ContactFlowState: "ACTIVE" || "ARCHIVED",
+ * //       ContactFlowStatus: "PUBLISHED" || "SAVED",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListContactFlowsCommandInput - {@link ListContactFlowsCommandInput}
+ * @returns {@link ListContactFlowsCommandOutput}
  * @see {@link ListContactFlowsCommandInput} for command's `input` shape.
  * @see {@link ListContactFlowsCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class ListContactFlowsCommand extends $Command<
-  ListContactFlowsCommandInput,
-  ListContactFlowsCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListContactFlowsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListContactFlowsCommandInput, ListContactFlowsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "ListContactFlowsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListContactFlowsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListContactFlowsResponse.filterSensitiveLog,
+export class ListContactFlowsCommand extends command<ListContactFlowsCommandInput, ListContactFlowsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListContactFlows",
+  ListContactFlows$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContactFlowsRequest;
+      output: ListContactFlowsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListContactFlowsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListContactFlowsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListContactFlowsCommandOutput> {
-    return deserializeAws_restJson1ListContactFlowsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListContactFlowsCommandInput;
+      output: ListContactFlowsCommandOutput;
+    };
+  };
 }

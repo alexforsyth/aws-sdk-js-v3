@@ -1,113 +1,173 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { CreateTaskRequest, CreateTaskResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateTaskCommand,
-  serializeAws_json1_1CreateTaskCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateTaskRequest, CreateTaskResponse } from "../models/models_0";
+import { CreateTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateTaskCommand}.
+ */
 export interface CreateTaskCommandInput extends CreateTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateTaskCommand}.
+ */
 export interface CreateTaskCommandOutput extends CreateTaskResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a task.</p>
- *          <p>A task includes a source location and a destination location, and a configuration
- *       that specifies how data is transferred. A task always transfers data from the source
- *       location to the destination location. The configuration specifies options such as
- *       task scheduling, bandwidth limits, etc. A task is the complete definition of a data
- *       transfer.</p>
- *          <p>When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions,
- *       one of the two locations that you specify must reside in the Region where DataSync is being
- *       used. The other location must be specified in a different Region.</p>
- *          <p>You can transfer data between commercial Amazon Web Services Regions except for China, or between
- *       Amazon Web Services GovCloud (US) Regions.</p>
- *
+ * <p>Configures a <i>task</i>, which defines where and how DataSync
+ *       transfers your data.</p>
+ *          <p>A task includes a source location, destination location, and transfer options (such as
+ *       bandwidth limits, scheduling, and more).</p>
  *          <important>
- *             <p>When you use DataSync to copy files or objects between Amazon Web Services Regions,
- *       you pay for data transfer between Regions. This is billed as data transfer OUT
- *       from your source Region to your destination Region. For more information,
- *       see <a href="http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer">Data Transfer pricing</a>.
- *     </p>
+ *             <p>If you're planning to transfer data to or from an Amazon S3 location, review
+ *           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests">how
+ *             DataSync can affect your S3 request charges</a> and the <a href="http://aws.amazon.com/datasync/pricing/">DataSync pricing page</a> before
+ *         you begin.</p>
  *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, CreateTaskCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, CreateTaskCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // CreateTaskRequest
+ *   SourceLocationArn: "STRING_VALUE", // required
+ *   DestinationLocationArn: "STRING_VALUE", // required
+ *   CloudWatchLogGroupArn: "STRING_VALUE",
+ *   Name: "STRING_VALUE",
+ *   Options: { // Options
+ *     VerifyMode: "POINT_IN_TIME_CONSISTENT" || "ONLY_FILES_TRANSFERRED" || "NONE",
+ *     OverwriteMode: "ALWAYS" || "NEVER",
+ *     Atime: "NONE" || "BEST_EFFORT",
+ *     Mtime: "NONE" || "PRESERVE",
+ *     Uid: "NONE" || "INT_VALUE" || "NAME" || "BOTH",
+ *     Gid: "NONE" || "INT_VALUE" || "NAME" || "BOTH",
+ *     PreserveDeletedFiles: "PRESERVE" || "REMOVE",
+ *     PreserveDevices: "NONE" || "PRESERVE",
+ *     PosixPermissions: "NONE" || "PRESERVE",
+ *     BytesPerSecond: Number("long"),
+ *     TaskQueueing: "ENABLED" || "DISABLED",
+ *     LogLevel: "OFF" || "BASIC" || "TRANSFER",
+ *     TransferMode: "CHANGED" || "ALL",
+ *     SecurityDescriptorCopyFlags: "NONE" || "OWNER_DACL" || "OWNER_DACL_SACL",
+ *     ObjectTags: "PRESERVE" || "NONE",
+ *     ObjectMetadata: "PRESERVE" || "NONE",
+ *   },
+ *   Excludes: [ // FilterList
+ *     { // FilterRule
+ *       FilterType: "SIMPLE_PATTERN",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Schedule: { // TaskSchedule
+ *     ScheduleExpression: "STRING_VALUE", // required
+ *     Status: "ENABLED" || "DISABLED",
+ *   },
+ *   Tags: [ // InputTagList
+ *     { // TagListEntry
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Includes: [
+ *     {
+ *       FilterType: "SIMPLE_PATTERN",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   ManifestConfig: { // ManifestConfig
+ *     Action: "TRANSFER",
+ *     Format: "CSV",
+ *     Source: { // SourceManifestConfig
+ *       S3: { // S3ManifestConfig
+ *         ManifestObjectPath: "STRING_VALUE", // required
+ *         BucketAccessRoleArn: "STRING_VALUE", // required
+ *         S3BucketArn: "STRING_VALUE", // required
+ *         ManifestObjectVersionId: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   TaskReportConfig: { // TaskReportConfig
+ *     Destination: { // ReportDestination
+ *       S3: { // ReportDestinationS3
+ *         Subdirectory: "STRING_VALUE",
+ *         S3BucketArn: "STRING_VALUE", // required
+ *         BucketAccessRoleArn: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     OutputType: "SUMMARY_ONLY" || "STANDARD",
+ *     ReportLevel: "ERRORS_ONLY" || "SUCCESSES_AND_ERRORS",
+ *     ObjectVersionIds: "INCLUDE" || "NONE",
+ *     Overrides: { // ReportOverrides
+ *       Transferred: { // ReportOverride
+ *         ReportLevel: "ERRORS_ONLY" || "SUCCESSES_AND_ERRORS",
+ *       },
+ *       Verified: {
+ *         ReportLevel: "ERRORS_ONLY" || "SUCCESSES_AND_ERRORS",
+ *       },
+ *       Deleted: {
+ *         ReportLevel: "ERRORS_ONLY" || "SUCCESSES_AND_ERRORS",
+ *       },
+ *       Skipped: {
+ *         ReportLevel: "ERRORS_ONLY" || "SUCCESSES_AND_ERRORS",
+ *       },
+ *     },
+ *   },
+ *   TaskMode: "BASIC" || "ENHANCED",
+ * };
  * const command = new CreateTaskCommand(input);
  * const response = await client.send(command);
+ * // { // CreateTaskResponse
+ * //   TaskArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateTaskCommandInput - {@link CreateTaskCommandInput}
+ * @returns {@link CreateTaskCommandOutput}
  * @see {@link CreateTaskCommandInput} for command's `input` shape.
  * @see {@link CreateTaskCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class CreateTaskCommand extends $Command<
-  CreateTaskCommandInput,
-  CreateTaskCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateTaskCommandInput, CreateTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "CreateTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateTaskResponse.filterSensitiveLog,
+export class CreateTaskCommand extends command<CreateTaskCommandInput, CreateTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateTask",
+  CreateTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTaskRequest;
+      output: CreateTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateTaskCommandOutput> {
-    return deserializeAws_json1_1CreateTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateTaskCommandInput;
+      output: CreateTaskCommandOutput;
+    };
+  };
 }

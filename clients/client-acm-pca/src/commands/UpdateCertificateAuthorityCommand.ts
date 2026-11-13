@@ -1,108 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMPCAClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMPCAClient";
-import { UpdateCertificateAuthorityRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateCertificateAuthorityCommand,
-  serializeAws_json1_1UpdateCertificateAuthorityCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCertificateAuthorityRequest } from "../models/models_0";
+import { UpdateCertificateAuthority$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCertificateAuthorityCommand}.
+ */
 export interface UpdateCertificateAuthorityCommandInput extends UpdateCertificateAuthorityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCertificateAuthorityCommand}.
+ */
 export interface UpdateCertificateAuthorityCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Updates the status or configuration of a private certificate authority (CA). Your
- * 			private CA must be in the <code>ACTIVE</code> or <code>DISABLED</code> state before you
- * 			can update it. You can disable a private CA that is in the <code>ACTIVE</code> state or
- * 			make a CA that is in the <code>DISABLED</code> state active again.</p>
- *          <note>
- *                         <p>Both PCA and the IAM principal must have permission to write to
- *                         the S3 bucket that you specify. If the IAM principal making the call
- *                         does not have permission to write to the bucket, then an exception is
- *                         thrown. For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html">Configure
- *                         Access to ACM Private CA</a>.</p>
- *                 </note>
+ * <p>Updates the status or configuration of a private certificate authority (CA). Your private CA must be in the <code>ACTIVE</code> or <code>DISABLED</code> state before you can update it. You can disable a private CA that is in the <code>ACTIVE</code> state or make a CA that is in the <code>DISABLED</code> state active again.</p> <note> <p>Both Amazon Web Services Private CA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies">Access policies for CRLs in Amazon S3</a>.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMPCAClient, UpdateCertificateAuthorityCommand } from "@aws-sdk/client-acm-pca"; // ES Modules import
  * // const { ACMPCAClient, UpdateCertificateAuthorityCommand } = require("@aws-sdk/client-acm-pca"); // CommonJS import
+ * // import type { ACMPCAClientConfig } from "@aws-sdk/client-acm-pca";
+ * const config = {}; // type is ACMPCAClientConfig
  * const client = new ACMPCAClient(config);
+ * const input = { // UpdateCertificateAuthorityRequest
+ *   CertificateAuthorityArn: "STRING_VALUE", // required
+ *   RevocationConfiguration: { // RevocationConfiguration
+ *     CrlConfiguration: { // CrlConfiguration
+ *       Enabled: true || false, // required
+ *       ExpirationInDays: Number("int"),
+ *       CustomCname: "STRING_VALUE",
+ *       S3BucketName: "STRING_VALUE",
+ *       S3ObjectAcl: "PUBLIC_READ" || "BUCKET_OWNER_FULL_CONTROL",
+ *       CrlDistributionPointExtensionConfiguration: { // CrlDistributionPointExtensionConfiguration
+ *         OmitExtension: true || false, // required
+ *       },
+ *       CrlType: "COMPLETE" || "PARTITIONED",
+ *       CustomPath: "STRING_VALUE",
+ *     },
+ *     OcspConfiguration: { // OcspConfiguration
+ *       Enabled: true || false, // required
+ *       OcspCustomCname: "STRING_VALUE",
+ *     },
+ *   },
+ *   Status: "CREATING" || "PENDING_CERTIFICATE" || "ACTIVE" || "DELETED" || "DISABLED" || "EXPIRED" || "FAILED",
+ * };
  * const command = new UpdateCertificateAuthorityCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateCertificateAuthorityCommandInput - {@link UpdateCertificateAuthorityCommandInput}
+ * @returns {@link UpdateCertificateAuthorityCommandOutput}
  * @see {@link UpdateCertificateAuthorityCommandInput} for command's `input` shape.
  * @see {@link UpdateCertificateAuthorityCommandOutput} for command's `response` shape.
- * @see {@link ACMPCAClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMPCAClientResolvedConfig | config} for ACMPCAClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>A previous update to your private CA is still ongoing.</p>
+ *
+ * @throws {@link InvalidArgsException} (client fault)
+ *  <p>One or more of the specified arguments was not valid.</p>
+ *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link InvalidPolicyException} (client fault)
+ *  <p>The resource policy is invalid or is missing a required statement. For general information about IAM policy and statement structure, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json">Overview of JSON Policies</a>.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>The state of the private CA does not allow this action to occur.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource such as a private CA, S3 bucket, certificate, audit report, or policy cannot be found.</p>
+ *
+ * @throws {@link ACMPCAServiceException}
+ * <p>Base exception class for all service exceptions from ACMPCA service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCertificateAuthorityCommand extends $Command<
-  UpdateCertificateAuthorityCommandInput,
-  UpdateCertificateAuthorityCommandOutput,
-  ACMPCAClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCertificateAuthorityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMPCAClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateCertificateAuthorityCommandInput, UpdateCertificateAuthorityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMPCAClient";
-    const commandName = "UpdateCertificateAuthorityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCertificateAuthorityRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateCertificateAuthorityCommand extends command<UpdateCertificateAuthorityCommandInput, UpdateCertificateAuthorityCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCertificateAuthority",
+  UpdateCertificateAuthority$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCertificateAuthorityRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateCertificateAuthorityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCertificateAuthorityCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateCertificateAuthorityCommandOutput> {
-    return deserializeAws_json1_1UpdateCertificateAuthorityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCertificateAuthorityCommandInput;
+      output: UpdateCertificateAuthorityCommandOutput;
+    };
+  };
 }

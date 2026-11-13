@@ -1,27 +1,37 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeTargetHealthCommand, DescribeTargetHealthCommandInput } from "../commands/DescribeTargetHealthCommand";
-import { ElasticLoadBalancingV2Client } from "../ElasticLoadBalancingV2Client";
+import {
+  type DescribeTargetHealthCommandInput,
+  type DescribeTargetHealthCommandOutput,
+  DescribeTargetHealthCommand,
+} from "../commands/DescribeTargetHealthCommand";
+import type { ElasticLoadBalancingV2Client } from "../ElasticLoadBalancingV2Client";
+import type { ElasticLoadBalancingV2ServiceException } from "../models/ElasticLoadBalancingV2ServiceException";
+import type { InvalidTargetException } from "../models/errors";
 
-const checkState = async (
-  client: ElasticLoadBalancingV2Client,
-  input: DescribeTargetHealthCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ElasticLoadBalancingV2Client, input: DescribeTargetHealthCommandInput): Promise<WaiterResult<DescribeTargetHealthCommandOutput | ElasticLoadBalancingV2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeTargetHealthCommand(input));
+    let result: DescribeTargetHealthCommandOutput & any = await client.send(new DescribeTargetHealthCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.TargetHealthDescriptions);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.TargetHealthDescriptions);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.TargetHealth.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "unused";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "unused")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -29,7 +39,7 @@ const checkState = async (
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InvalidTarget") {
+    if (exception.name === "InvalidTargetException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -42,7 +52,7 @@ const checkState = async (
 export const waitForTargetDeregistered = async (
   params: WaiterConfiguration<ElasticLoadBalancingV2Client>,
   input: DescribeTargetHealthCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeTargetHealthCommandOutput | ElasticLoadBalancingV2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -54,8 +64,8 @@ export const waitForTargetDeregistered = async (
 export const waitUntilTargetDeregistered = async (
   params: WaiterConfiguration<ElasticLoadBalancingV2Client>,
   input: DescribeTargetHealthCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeTargetHealthCommandOutput | InvalidTargetException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeTargetHealthCommandOutput | InvalidTargetException>;
 };

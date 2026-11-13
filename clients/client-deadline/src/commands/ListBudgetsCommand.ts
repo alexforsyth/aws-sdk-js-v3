@@ -1,0 +1,112 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBudgetsRequest, ListBudgetsResponse } from "../models/models_0";
+import { ListBudgets$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBudgetsCommand}.
+ */
+export interface ListBudgetsCommandInput extends ListBudgetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBudgetsCommand}.
+ */
+export interface ListBudgetsCommandOutput extends ListBudgetsResponse, __MetadataBearer {}
+
+/**
+ * A list of budgets in a farm.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListBudgetsCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListBudgetsCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListBudgetsRequest
+ *   farmId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   status: "ACTIVE" || "INACTIVE",
+ * };
+ * const command = new ListBudgetsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListBudgetsResponse
+ * //   budgets: [ // BudgetSummaries // required
+ * //     { // BudgetSummary
+ * //       budgetId: "STRING_VALUE", // required
+ * //       usageTrackingResource: { // UsageTrackingResource Union: only one key present
+ * //         queueId: "STRING_VALUE",
+ * //       },
+ * //       status: "ACTIVE" || "INACTIVE", // required
+ * //       displayName: "STRING_VALUE", // required
+ * //       approximateDollarLimit: Number("float"), // required
+ * //       usages: { // ConsumedUsages
+ * //         approximateDollarUsage: Number("float"), // required
+ * //       },
+ * //       createdBy: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       updatedBy: "STRING_VALUE",
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListBudgetsCommandInput - {@link ListBudgetsCommandInput}
+ * @returns {@link ListBudgetsCommandOutput}
+ * @see {@link ListBudgetsCommandInput} for command's `input` shape.
+ * @see {@link ListBudgetsCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListBudgetsCommand extends command<ListBudgetsCommandInput, ListBudgetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBudgets",
+  ListBudgets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBudgetsRequest;
+      output: ListBudgetsResponse;
+    };
+    sdk: {
+      input: ListBudgetsCommandInput;
+      output: ListBudgetsCommandOutput;
+    };
+  };
+}

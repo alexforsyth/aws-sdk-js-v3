@@ -1,30 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { DeploymentStrategy, GetDeploymentStrategyRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDeploymentStrategyCommand,
-  serializeAws_restJson1GetDeploymentStrategyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeploymentStrategy, GetDeploymentStrategyRequest } from "../models/models_0";
+import { GetDeploymentStrategy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDeploymentStrategyCommand}.
+ */
 export interface GetDeploymentStrategyCommandInput extends GetDeploymentStrategyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDeploymentStrategyCommand}.
+ */
 export interface GetDeploymentStrategyCommandOutput extends DeploymentStrategy, __MetadataBearer {}
 
 /**
- * <p>Retrieve information about a deployment strategy. A deployment strategy defines
+ * <p>Retrieves information about a deployment strategy. A deployment strategy defines
  *          important criteria for rolling out your configuration to the designated targets. A
- *          deployment strategy includes: the overall duration required, a percentage of targets to
+ *          deployment strategy includes the overall duration required, a percentage of targets to
  *          receive the deployment during each interval, an algorithm that defines how percentage
  *          grows, and bake time.</p>
  * @example
@@ -32,68 +33,84 @@ export interface GetDeploymentStrategyCommandOutput extends DeploymentStrategy, 
  * ```javascript
  * import { AppConfigClient, GetDeploymentStrategyCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, GetDeploymentStrategyCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // GetDeploymentStrategyRequest
+ *   DeploymentStrategyId: "STRING_VALUE", // required
+ * };
  * const command = new GetDeploymentStrategyCommand(input);
  * const response = await client.send(command);
+ * // { // DeploymentStrategy
+ * //   Id: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   DeploymentDurationInMinutes: Number("int"),
+ * //   GrowthType: "LINEAR" || "EXPONENTIAL",
+ * //   GrowthFactor: Number("float"),
+ * //   FinalBakeTimeInMinutes: Number("int"),
+ * //   ReplicateTo: "NONE" || "SSM_DOCUMENT",
+ * // };
+ *
  * ```
  *
+ * @param GetDeploymentStrategyCommandInput - {@link GetDeploymentStrategyCommandInput}
+ * @returns {@link GetDeploymentStrategyCommandOutput}
  * @see {@link GetDeploymentStrategyCommandInput} for command's `input` shape.
  * @see {@link GetDeploymentStrategyCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To retrieve details of a deployment strategy
+ * ```javascript
+ * // The following get-deployment-strategy example lists the details of the specified deployment strategy.
+ * const input = {
+ *   DeploymentStrategyId: "1225qzk"
+ * };
+ * const command = new GetDeploymentStrategyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DeploymentDurationInMinutes: 15,
+ *   FinalBakeTimeInMinutes: 0,
+ *   GrowthFactor: 25,
+ *   GrowthType: "LINEAR",
+ *   Id: "1225qzk",
+ *   Name: "Example-Deployment",
+ *   ReplicateTo: "SSM_DOCUMENT"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetDeploymentStrategyCommand extends $Command<
-  GetDeploymentStrategyCommandInput,
-  GetDeploymentStrategyCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDeploymentStrategyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDeploymentStrategyCommandInput, GetDeploymentStrategyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "GetDeploymentStrategyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDeploymentStrategyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeploymentStrategy.filterSensitiveLog,
+export class GetDeploymentStrategyCommand extends command<GetDeploymentStrategyCommandInput, GetDeploymentStrategyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDeploymentStrategy",
+  GetDeploymentStrategy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentStrategyRequest;
+      output: DeploymentStrategy;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDeploymentStrategyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDeploymentStrategyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDeploymentStrategyCommandOutput> {
-    return deserializeAws_restJson1GetDeploymentStrategyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDeploymentStrategyCommandInput;
+      output: GetDeploymentStrategyCommandOutput;
+    };
+  };
 }

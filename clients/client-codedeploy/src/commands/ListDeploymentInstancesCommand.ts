@@ -1,103 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { ListDeploymentInstancesInput, ListDeploymentInstancesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListDeploymentInstancesCommand,
-  serializeAws_json1_1ListDeploymentInstancesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDeploymentInstancesInput, ListDeploymentInstancesOutput } from "../models/models_0";
+import { ListDeploymentInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDeploymentInstancesCommand}.
+ */
 export interface ListDeploymentInstancesCommandInput extends ListDeploymentInstancesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListDeploymentInstancesCommand}.
+ */
 export interface ListDeploymentInstancesCommandOutput extends ListDeploymentInstancesOutput, __MetadataBearer {}
 
 /**
- * @deprecated
- *
  * <note>
  *             <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because
  *                 it works with all compute types. <code>ListDeploymentInstances</code> throws an
- *                 exception if it is used with a compute platform other than EC2/On-premises or AWS
- *                 Lambda. </p>
- *         </note>
- *         <p> Lists the instance for a deployment associated with the IAM user or AWS account. </p>
+ *                 exception if it is used with a compute platform other than EC2/On-premises or
+ *                     Lambda. </p>
+ *          </note>
+ *          <p> Lists the instance for a deployment associated with the user or Amazon Web Services account. </p>
+ *
+ * @deprecated This operation is deprecated, use ListDeploymentTargets instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, ListDeploymentInstancesCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, ListDeploymentInstancesCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // ListDeploymentInstancesInput
+ *   deploymentId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   instanceStatusFilter: [ // InstanceStatusList
+ *     "Pending" || "InProgress" || "Succeeded" || "Failed" || "Skipped" || "Unknown" || "Ready",
+ *   ],
+ *   instanceTypeFilter: [ // InstanceTypeList
+ *     "Blue" || "Green",
+ *   ],
+ * };
  * const command = new ListDeploymentInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // ListDeploymentInstancesOutput
+ * //   instancesList: [ // InstancesList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDeploymentInstancesCommandInput - {@link ListDeploymentInstancesCommandInput}
+ * @returns {@link ListDeploymentInstancesCommandOutput}
  * @see {@link ListDeploymentInstancesCommandInput} for command's `input` shape.
  * @see {@link ListDeploymentInstancesCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link ApplicationDoesNotExistException} (client fault)
+ *  <p>The application does not exist with the user or Amazon Web Services account.</p>
+ *
+ * @throws {@link DeploymentDoesNotExistException} (client fault)
+ *  <p>The deployment with the user or Amazon Web Services account does not exist.</p>
+ *
+ * @throws {@link DeploymentGroupDoesNotExistException} (client fault)
+ *  <p>The named deployment group with the user or Amazon Web Services account does not
+ *             exist.</p>
+ *
+ * @throws {@link DeploymentIdRequiredException} (client fault)
+ *  <p>At least one deployment ID must be specified.</p>
+ *
+ * @throws {@link DeploymentNotStartedException} (client fault)
+ *  <p>The specified deployment has not started.</p>
+ *
+ * @throws {@link InvalidComputePlatformException} (client fault)
+ *  <p>The computePlatform is invalid. The computePlatform should be <code>Lambda</code>, <code>Server</code>, or <code>ECS</code>.</p>
+ *
+ * @throws {@link InvalidDeploymentIdException} (client fault)
+ *  <p>At least one of the deployment IDs was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidDeploymentInstanceTypeException} (client fault)
+ *  <p>An instance type was specified for an in-place deployment. Instance types are
+ *             supported for blue/green deployments only.</p>
+ *
+ * @throws {@link InvalidInstanceStatusException} (client fault)
+ *  <p>The specified instance status does not exist.</p>
+ *
+ * @throws {@link InvalidInstanceTypeException} (client fault)
+ *  <p>An invalid instance type was specified for instances in a blue/green deployment. Valid
+ *             values include "Blue" for an original environment and "Green" for a replacement
+ *             environment.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidTargetFilterNameException} (client fault)
+ *  <p> The target filter name is invalid. </p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class ListDeploymentInstancesCommand extends $Command<
-  ListDeploymentInstancesCommandInput,
-  ListDeploymentInstancesCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDeploymentInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDeploymentInstancesCommandInput, ListDeploymentInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "ListDeploymentInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDeploymentInstancesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDeploymentInstancesOutput.filterSensitiveLog,
+export class ListDeploymentInstancesCommand extends command<ListDeploymentInstancesCommandInput, ListDeploymentInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDeploymentInstances",
+  ListDeploymentInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDeploymentInstancesInput;
+      output: ListDeploymentInstancesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDeploymentInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListDeploymentInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDeploymentInstancesCommandOutput> {
-    return deserializeAws_json1_1ListDeploymentInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDeploymentInstancesCommandInput;
+      output: ListDeploymentInstancesCommandOutput;
+    };
+  };
 }

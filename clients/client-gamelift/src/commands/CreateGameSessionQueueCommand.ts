@@ -1,69 +1,156 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { CreateGameSessionQueueInput, CreateGameSessionQueueOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateGameSessionQueueCommand,
-  serializeAws_json1_1CreateGameSessionQueueCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGameSessionQueueInput, CreateGameSessionQueueOutput } from "../models/models_0";
+import { CreateGameSessionQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGameSessionQueueCommand}.
+ */
 export interface CreateGameSessionQueueCommandInput extends CreateGameSessionQueueInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGameSessionQueueCommand}.
+ */
 export interface CreateGameSessionQueueCommandOutput extends CreateGameSessionQueueOutput, __MetadataBearer {}
 
 /**
- * <p>Creates a placement queue that processes requests for new game sessions. A queue uses
- *             FleetIQ algorithms to determine the best placement locations and find an
- *             available game server there, then prompts the game server process to start a new game
- *             session. </p>
- *         <p>A game session queue is configured with a set of destinations (GameLift fleets or
- *             aliases), which determine the locations where the queue can place new game sessions.
- *             These destinations can span multiple fleet types (Spot and On-Demand), instance types,
- *             and AWS Regions. If the queue includes multi-location fleets, the queue is able to place
- *             game sessions in all of a fleet's remote locations. You can opt to filter out individual
- *             locations if needed.</p>
- *         <p>The queue configuration also determines how FleetIQ selects the best available placement
- *             for a new game session. Before searching for an available game server, FleetIQ first
- *             prioritizes the queue's destinations and locations, with the best placement locations on
- *             top. You can set up the queue to use the FleetIQ default prioritization or provide an
- *             alternate set of priorities.</p>
- *         <p>To create a new queue, provide a name, timeout value, and a list of destinations.
- *             Optionally, specify a sort configuration and/or a filter, and define a set of latency
- *             cap policies. You can also include the ARN for an Amazon Simple Notification Service
- *             (SNS) topic to receive notifications of game session placement activity. Notifications
- *             using SNS or CloudWatch events is the preferred way to track placement activity.</p>
- *         <p>If successful, a new <code>GameSessionQueue</code> object is returned with an assigned
- *             queue ARN. New game session requests, which are submitted to the  queue with <a>StartGameSessionPlacement</a> or <a>StartMatchmaking</a>,
- *             reference a queue's name or ARN. </p>
- *         <p>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Creates a placement queue that processes requests for new game sessions. A queue
+ *             finds the best available game server, then prompts it to start a new game
+ *             session.</p>
+ *          <p>A game session queue is configured with a set of destinations (Amazon GameLift Servers fleets or
+ *             aliases) that determine where the queue can place new game sessions. These destinations
+ *             can span multiple Amazon Web Services Regions, can use different instance types, and can include both
+ *             Spot and On-Demand fleets. If the queue includes multi-location fleets, the queue can
+ *             place game sessions in any of a fleet's remote locations.</p>
+ *          <p>You can configure a queue to determine how it selects the best available placement for
+ *             a new game session. Queues can prioritize placement decisions based on a combination of
+ *             location, hosting cost, and player latency. You can set up the queue to use the default
+ *             prioritization or provide alternate instructions using
+ *                 <code>PriorityConfiguration</code>.</p>
+ *          <p>
+ *             <b>Request options</b>
+ *          </p>
+ *          <p>Use this operation to make these common types of requests. </p>
+ *          <ul>
+ *             <li>
+ *                <p>Create a queue with the minimum required parameters.</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>
+ *                         <code>Name</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>Destinations</code> (This parameter isn't required, but a queue
+ *                             can't make placements without at least one destination.)</p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>Create a queue with placement notification. Queues that have high placement
+ *                     activity must use a notification system, such as with Amazon Simple Notification Service (Amazon SNS) or Amazon CloudWatch.</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>Required parameters <code>Name</code> and
+ *                             <code>Destinations</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>NotificationTarget</code>
+ *                      </p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>Create a queue with custom prioritization settings. These custom settings
+ *                     replace the default prioritization configuration for a queue.</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>Required parameters <code>Name</code> and
+ *                             <code>Destinations</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>PriorityConfiguration</code>
+ *                      </p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>Create a queue with special rules for processing player latency data.</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>Required parameters <code>Name</code> and
+ *                             <code>Destinations</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>PlayerLatencyPolicies</code>
+ *                      </p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>Create a queue that delivers game session placement insight logs to one or
+ *                     more log destinations.</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>Required parameters <code>Name</code> and
+ *                             <code>Destinations</code>
+ *                      </p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <code>LogConfiguration</code>
+ *                      </p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *          </ul>
+ *          <p>
+ *             <b>Results</b>
+ *          </p>
+ *          <p>If successful, this operation returns a new <code>GameSessionQueue</code> object with
+ *             an assigned queue ARN. Use the queue's name or ARN when submitting new game session
+ *             requests with <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html">StartGameSessionPlacement</a> or <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html">StartMatchmaking</a>. </p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
+ *          <p>
  *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html">
- *             Design a game session queue</a>
- *         </p>
- *         <p>
+ *                 Design a game session queue</a>
+ *          </p>
+ *          <p>
  *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html">
- *             Create a game session queue</a>
- *         </p>
- *         <p>
+ *                 Create a game session queue</a>
+ *          </p>
+ *          <p>
  *             <b>Related actions</b>
  *          </p>
- *                     <p>
- *             <a>CreateGameSessionQueue</a> |
- *                     <a>DescribeGameSessionQueues</a> |
- *                     <a>UpdateGameSessionQueue</a> |
- *                     <a>DeleteGameSessionQueue</a> |
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html">CreateGameSessionQueue</a>
+ *                     |
+ *                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html">DescribeGameSessionQueues</a>
+ *                     |
+ *                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html">UpdateGameSessionQueue</a>
+ *                     |
+ *                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html">DeleteGameSessionQueue</a>
+ *                     |
  *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
  *          </p>
  * @example
@@ -71,68 +158,149 @@ export interface CreateGameSessionQueueCommandOutput extends CreateGameSessionQu
  * ```javascript
  * import { GameLiftClient, CreateGameSessionQueueCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, CreateGameSessionQueueCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // CreateGameSessionQueueInput
+ *   Name: "STRING_VALUE", // required
+ *   TimeoutInSeconds: Number("int"),
+ *   PlayerLatencyPolicies: [ // PlayerLatencyPolicyList
+ *     { // PlayerLatencyPolicy
+ *       MaximumIndividualPlayerLatencyMilliseconds: Number("int"),
+ *       PolicyDurationSeconds: Number("int"),
+ *     },
+ *   ],
+ *   Destinations: [ // GameSessionQueueDestinationList
+ *     { // GameSessionQueueDestination
+ *       DestinationArn: "STRING_VALUE",
+ *     },
+ *   ],
+ *   FilterConfiguration: { // FilterConfiguration
+ *     AllowedLocations: [ // LocationList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   PriorityConfiguration: { // PriorityConfiguration
+ *     PriorityOrder: [ // PriorityTypeList
+ *       "LATENCY" || "COST" || "DESTINATION" || "LOCATION",
+ *     ],
+ *     LocationOrder: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   CustomEventData: "STRING_VALUE",
+ *   NotificationTarget: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   LogConfiguration: { // GameSessionQueueLogConfiguration
+ *     DeliveryDestinations: [ // LogDeliveryDestinationList // required
+ *       { // LogDeliveryDestination
+ *         LogDestination: "CLOUDWATCH" || "S3" || "FIREHOSE", // required
+ *         DestinationArn: "STRING_VALUE",
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new CreateGameSessionQueueCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGameSessionQueueOutput
+ * //   GameSessionQueue: { // GameSessionQueue
+ * //     Name: "STRING_VALUE",
+ * //     GameSessionQueueArn: "STRING_VALUE",
+ * //     TimeoutInSeconds: Number("int"),
+ * //     PlayerLatencyPolicies: [ // PlayerLatencyPolicyList
+ * //       { // PlayerLatencyPolicy
+ * //         MaximumIndividualPlayerLatencyMilliseconds: Number("int"),
+ * //         PolicyDurationSeconds: Number("int"),
+ * //       },
+ * //     ],
+ * //     Destinations: [ // GameSessionQueueDestinationList
+ * //       { // GameSessionQueueDestination
+ * //         DestinationArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     FilterConfiguration: { // FilterConfiguration
+ * //       AllowedLocations: [ // LocationList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     PriorityConfiguration: { // PriorityConfiguration
+ * //       PriorityOrder: [ // PriorityTypeList
+ * //         "LATENCY" || "COST" || "DESTINATION" || "LOCATION",
+ * //       ],
+ * //       LocationOrder: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     CustomEventData: "STRING_VALUE",
+ * //     NotificationTarget: "STRING_VALUE",
+ * //     LogConfiguration: { // GameSessionQueueLogConfiguration
+ * //       DeliveryDestinations: [ // LogDeliveryDestinationList // required
+ * //         { // LogDeliveryDestination
+ * //           LogDestination: "CLOUDWATCH" || "S3" || "FIREHOSE", // required
+ * //           DestinationArn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateGameSessionQueueCommandInput - {@link CreateGameSessionQueueCommandInput}
+ * @returns {@link CreateGameSessionQueueCommandOutput}
  * @see {@link CreateGameSessionQueueCommandInput} for command's `input` shape.
  * @see {@link CreateGameSessionQueueCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested operation would cause the resource to exceed the allowed service limit.
+ *             Resolve the issue before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link TaggingFailedException} (client fault)
+ *  <p>The requested tagging operation did not succeed. This may be due to invalid tag format
+ *             or the maximum tag limit may have been exceeded. Resolve the issue before
+ *             retrying.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGameSessionQueueCommand extends $Command<
-  CreateGameSessionQueueCommandInput,
-  CreateGameSessionQueueCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGameSessionQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGameSessionQueueCommandInput, CreateGameSessionQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "CreateGameSessionQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGameSessionQueueInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGameSessionQueueOutput.filterSensitiveLog,
+export class CreateGameSessionQueueCommand extends command<CreateGameSessionQueueCommandInput, CreateGameSessionQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGameSessionQueue",
+  CreateGameSessionQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGameSessionQueueInput;
+      output: CreateGameSessionQueueOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGameSessionQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateGameSessionQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGameSessionQueueCommandOutput> {
-    return deserializeAws_json1_1CreateGameSessionQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGameSessionQueueCommandInput;
+      output: CreateGameSessionQueueCommandOutput;
+    };
+  };
 }

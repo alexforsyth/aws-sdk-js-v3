@@ -1,35 +1,35 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
-import { UpdateDistributionBundleRequest, UpdateDistributionBundleResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1UpdateDistributionBundleCommand,
-  serializeAws_json1_1UpdateDistributionBundleCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDistributionBundleRequest, UpdateDistributionBundleResult } from "../models/models_1";
+import { UpdateDistributionBundle$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDistributionBundleCommand}.
+ */
 export interface UpdateDistributionBundleCommandInput extends UpdateDistributionBundleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDistributionBundleCommand}.
+ */
 export interface UpdateDistributionBundleCommandOutput extends UpdateDistributionBundleResult, __MetadataBearer {}
 
 /**
  * <p>Updates the bundle of your Amazon Lightsail content delivery network (CDN)
  *       distribution.</p>
  *          <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of
- *       your dsitribution.</p>
+ *       your distribution.</p>
  *          <p>Update your distribution's bundle if your distribution is going over its monthly network
  *       transfer quota and is incurring an overage fee.</p>
- *          <p>You can update your distribution's bundle only one time within your monthly AWS billing
- *       cycle. To determine if you can update your distribution's bundle, use the
+ *          <p>You can update your distribution's bundle only one time within your monthly Amazon Web Services billing cycle. To determine if you can update your distribution's bundle, use the
  *         <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the
  *       result will indicate whether you can currently update your distribution's bundle.</p>
  * @example
@@ -37,68 +37,90 @@ export interface UpdateDistributionBundleCommandOutput extends UpdateDistributio
  * ```javascript
  * import { LightsailClient, UpdateDistributionBundleCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
  * // const { LightsailClient, UpdateDistributionBundleCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * // import type { LightsailClientConfig } from "@aws-sdk/client-lightsail";
+ * const config = {}; // type is LightsailClientConfig
  * const client = new LightsailClient(config);
+ * const input = { // UpdateDistributionBundleRequest
+ *   distributionName: "STRING_VALUE",
+ *   bundleId: "STRING_VALUE",
+ * };
  * const command = new UpdateDistributionBundleCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDistributionBundleResult
+ * //   operation: { // Operation
+ * //     id: "STRING_VALUE",
+ * //     resourceName: "STRING_VALUE",
+ * //     resourceType: "ContainerService" || "Instance" || "StaticIp" || "KeyPair" || "InstanceSnapshot" || "Domain" || "PeeredVpc" || "LoadBalancer" || "LoadBalancerTlsCertificate" || "Disk" || "DiskSnapshot" || "RelationalDatabase" || "RelationalDatabaseSnapshot" || "ExportSnapshotRecord" || "CloudFormationStackRecord" || "Alarm" || "ContactMethod" || "Distribution" || "Certificate" || "Bucket" || "Subdomain",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     location: { // ResourceLocation
+ * //       availabilityZone: "STRING_VALUE",
+ * //       regionName: "us-east-1" || "us-east-2" || "us-west-1" || "us-west-2" || "eu-west-1" || "eu-west-2" || "eu-west-3" || "eu-central-1" || "eu-north-1" || "eu-south-2" || "ca-central-1" || "ap-east-1" || "ap-south-1" || "ap-southeast-1" || "ap-southeast-2" || "ap-northeast-1" || "ap-northeast-2" || "ap-southeast-3" || "ap-southeast-5" || "sa-east-1",
+ * //     },
+ * //     isTerminal: true || false,
+ * //     operationDetails: "STRING_VALUE",
+ * //     operationType: "DeleteKnownHostKeys" || "DeleteInstance" || "CreateInstance" || "StopInstance" || "StartInstance" || "RebootInstance" || "OpenInstancePublicPorts" || "PutInstancePublicPorts" || "CloseInstancePublicPorts" || "AllocateStaticIp" || "ReleaseStaticIp" || "AttachStaticIp" || "DetachStaticIp" || "UpdateDomainEntry" || "DeleteDomainEntry" || "CreateDomain" || "DeleteDomain" || "CreateInstanceSnapshot" || "DeleteInstanceSnapshot" || "CreateInstancesFromSnapshot" || "CreateLoadBalancer" || "DeleteLoadBalancer" || "AttachInstancesToLoadBalancer" || "DetachInstancesFromLoadBalancer" || "UpdateLoadBalancerAttribute" || "CreateLoadBalancerTlsCertificate" || "DeleteLoadBalancerTlsCertificate" || "AttachLoadBalancerTlsCertificate" || "CreateDisk" || "DeleteDisk" || "AttachDisk" || "DetachDisk" || "CreateDiskSnapshot" || "DeleteDiskSnapshot" || "CreateDiskFromSnapshot" || "CreateRelationalDatabase" || "UpdateRelationalDatabase" || "DeleteRelationalDatabase" || "CreateRelationalDatabaseFromSnapshot" || "CreateRelationalDatabaseSnapshot" || "DeleteRelationalDatabaseSnapshot" || "UpdateRelationalDatabaseParameters" || "StartRelationalDatabase" || "RebootRelationalDatabase" || "StopRelationalDatabase" || "EnableAddOn" || "DisableAddOn" || "PutAlarm" || "GetAlarms" || "DeleteAlarm" || "TestAlarm" || "CreateContactMethod" || "GetContactMethods" || "SendContactMethodVerification" || "DeleteContactMethod" || "CreateDistribution" || "UpdateDistribution" || "DeleteDistribution" || "ResetDistributionCache" || "AttachCertificateToDistribution" || "DetachCertificateFromDistribution" || "UpdateDistributionBundle" || "SetIpAddressType" || "CreateCertificate" || "DeleteCertificate" || "CreateContainerService" || "UpdateContainerService" || "DeleteContainerService" || "CreateContainerServiceDeployment" || "CreateContainerServiceRegistryLogin" || "RegisterContainerImage" || "DeleteContainerImage" || "CreateBucket" || "DeleteBucket" || "CreateBucketAccessKey" || "DeleteBucketAccessKey" || "UpdateBucketBundle" || "UpdateBucket" || "SetResourceAccessForBucket" || "UpdateInstanceMetadataOptions" || "StartGUISession" || "StopGUISession" || "SetupInstanceHttps" || "GetProfile" || "CreateSubdomain" || "UpdateSubdomainAssociation" || "DeleteSubdomain",
+ * //     status: "NotStarted" || "Started" || "Failed" || "Completed" || "Succeeded",
+ * //     statusChangedAt: new Date("TIMESTAMP"),
+ * //     errorCode: "STRING_VALUE",
+ * //     errorDetails: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateDistributionBundleCommandInput - {@link UpdateDistributionBundleCommandInput}
+ * @returns {@link UpdateDistributionBundleCommandOutput}
  * @see {@link UpdateDistributionBundleCommandInput} for command's `input` shape.
  * @see {@link UpdateDistributionBundleCommandOutput} for command's `response` shape.
- * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for LightsailClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Lightsail throws this exception when the user cannot be authenticated or uses invalid
+ *       credentials to access a resource.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Lightsail throws this exception when user input does not conform to the validation rules
+ *       of an input field.</p>
+ *          <note>
+ *             <p>Domain and distribution APIs are only available in the N. Virginia
+ *           (<code>us-east-1</code>) Amazon Web Services Region. Please set your Amazon Web Services
+ *         Region configuration to <code>us-east-1</code> to create, view, or edit these
+ *         resources.</p>
+ *          </note>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Lightsail throws this exception when it cannot find a resource.</p>
+ *
+ * @throws {@link OperationFailureException} (client fault)
+ *  <p>Lightsail throws this exception when an operation fails to execute.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>A general service exception.</p>
+ *
+ * @throws {@link UnauthenticatedException} (client fault)
+ *  <p>Lightsail throws this exception when the user has not been authenticated.</p>
+ *
+ * @throws {@link LightsailServiceException}
+ * <p>Base exception class for all service exceptions from Lightsail service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDistributionBundleCommand extends $Command<
-  UpdateDistributionBundleCommandInput,
-  UpdateDistributionBundleCommandOutput,
-  LightsailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDistributionBundleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LightsailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDistributionBundleCommandInput, UpdateDistributionBundleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LightsailClient";
-    const commandName = "UpdateDistributionBundleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDistributionBundleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDistributionBundleResult.filterSensitiveLog,
+export class UpdateDistributionBundleCommand extends command<UpdateDistributionBundleCommandInput, UpdateDistributionBundleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDistributionBundle",
+  UpdateDistributionBundle$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDistributionBundleRequest;
+      output: UpdateDistributionBundleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDistributionBundleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateDistributionBundleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDistributionBundleCommandOutput> {
-    return deserializeAws_json1_1UpdateDistributionBundleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDistributionBundleCommandInput;
+      output: UpdateDistributionBundleCommandOutput;
+    };
+  };
 }

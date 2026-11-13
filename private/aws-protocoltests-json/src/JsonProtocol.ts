@@ -1,412 +1,450 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type ContentTypeParametersCommandInput,
+  type ContentTypeParametersCommandOutput,
+  ContentTypeParametersCommand,
+} from "./commands/ContentTypeParametersCommand";
+import {
+  type DatetimeOffsetsCommandInput,
+  type DatetimeOffsetsCommandOutput,
+  DatetimeOffsetsCommand,
+} from "./commands/DatetimeOffsetsCommand";
+import {
+  type EmptyOperationCommandInput,
+  type EmptyOperationCommandOutput,
   EmptyOperationCommand,
-  EmptyOperationCommandInput,
-  EmptyOperationCommandOutput,
 } from "./commands/EmptyOperationCommand";
 import {
+  type EndpointOperationCommandInput,
+  type EndpointOperationCommandOutput,
   EndpointOperationCommand,
-  EndpointOperationCommandInput,
-  EndpointOperationCommandOutput,
 } from "./commands/EndpointOperationCommand";
 import {
+  type EndpointWithHostLabelOperationCommandInput,
+  type EndpointWithHostLabelOperationCommandOutput,
   EndpointWithHostLabelOperationCommand,
-  EndpointWithHostLabelOperationCommandInput,
-  EndpointWithHostLabelOperationCommandOutput,
 } from "./commands/EndpointWithHostLabelOperationCommand";
 import {
+  type FractionalSecondsCommandInput,
+  type FractionalSecondsCommandOutput,
+  FractionalSecondsCommand,
+} from "./commands/FractionalSecondsCommand";
+import {
+  type GreetingWithErrorsCommandInput,
+  type GreetingWithErrorsCommandOutput,
   GreetingWithErrorsCommand,
-  GreetingWithErrorsCommandInput,
-  GreetingWithErrorsCommandOutput,
 } from "./commands/GreetingWithErrorsCommand";
 import {
+  type HostWithPathOperationCommandInput,
+  type HostWithPathOperationCommandOutput,
   HostWithPathOperationCommand,
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
 } from "./commands/HostWithPathOperationCommand";
-import { JsonEnumsCommand, JsonEnumsCommandInput, JsonEnumsCommandOutput } from "./commands/JsonEnumsCommand";
-import { JsonUnionsCommand, JsonUnionsCommandInput, JsonUnionsCommandOutput } from "./commands/JsonUnionsCommand";
+import { type JsonEnumsCommandInput, type JsonEnumsCommandOutput, JsonEnumsCommand } from "./commands/JsonEnumsCommand";
 import {
+  type JsonIntEnumsCommandInput,
+  type JsonIntEnumsCommandOutput,
+  JsonIntEnumsCommand,
+} from "./commands/JsonIntEnumsCommand";
+import {
+  type JsonUnionsCommandInput,
+  type JsonUnionsCommandOutput,
+  JsonUnionsCommand,
+} from "./commands/JsonUnionsCommand";
+import {
+  type KitchenSinkOperationCommandInput,
+  type KitchenSinkOperationCommandOutput,
   KitchenSinkOperationCommand,
-  KitchenSinkOperationCommandInput,
-  KitchenSinkOperationCommandOutput,
 } from "./commands/KitchenSinkOperationCommand";
 import {
+  type NullOperationCommandInput,
+  type NullOperationCommandOutput,
   NullOperationCommand,
-  NullOperationCommandInput,
-  NullOperationCommandOutput,
 } from "./commands/NullOperationCommand";
 import {
+  type OperationWithOptionalInputOutputCommandInput,
+  type OperationWithOptionalInputOutputCommandOutput,
   OperationWithOptionalInputOutputCommand,
-  OperationWithOptionalInputOutputCommandInput,
-  OperationWithOptionalInputOutputCommandOutput,
 } from "./commands/OperationWithOptionalInputOutputCommand";
 import {
+  type PutAndGetInlineDocumentsCommandInput,
+  type PutAndGetInlineDocumentsCommandOutput,
   PutAndGetInlineDocumentsCommand,
-  PutAndGetInlineDocumentsCommandInput,
-  PutAndGetInlineDocumentsCommandOutput,
 } from "./commands/PutAndGetInlineDocumentsCommand";
 import {
+  type PutWithContentEncodingCommandInput,
+  type PutWithContentEncodingCommandOutput,
+  PutWithContentEncodingCommand,
+} from "./commands/PutWithContentEncodingCommand";
+import {
+  type SimpleScalarPropertiesCommandInput,
+  type SimpleScalarPropertiesCommandOutput,
   SimpleScalarPropertiesCommand,
-  SimpleScalarPropertiesCommandInput,
-  SimpleScalarPropertiesCommandOutput,
 } from "./commands/SimpleScalarPropertiesCommand";
+import {
+  type SparseNullsOperationCommandInput,
+  type SparseNullsOperationCommandOutput,
+  SparseNullsOperationCommand,
+} from "./commands/SparseNullsOperationCommand";
 import { JsonProtocolClient } from "./JsonProtocolClient";
 
-export class JsonProtocol extends JsonProtocolClient {
-  public emptyOperation(
+const commands = {
+  ContentTypeParametersCommand,
+  DatetimeOffsetsCommand,
+  EmptyOperationCommand,
+  EndpointOperationCommand,
+  EndpointWithHostLabelOperationCommand,
+  FractionalSecondsCommand,
+  GreetingWithErrorsCommand,
+  HostWithPathOperationCommand,
+  JsonEnumsCommand,
+  JsonIntEnumsCommand,
+  JsonUnionsCommand,
+  KitchenSinkOperationCommand,
+  NullOperationCommand,
+  OperationWithOptionalInputOutputCommand,
+  PutAndGetInlineDocumentsCommand,
+  PutWithContentEncodingCommand,
+  SimpleScalarPropertiesCommand,
+  SparseNullsOperationCommand,
+};
+
+/**
+ * @public
+ */
+export interface JsonProtocolRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface JsonProtocol {
+  /**
+   * @see {@link ContentTypeParametersCommand}
+   */
+  contentTypeParameters(): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DatetimeOffsetsCommand}
+   */
+  datetimeOffsets(): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EmptyOperationCommand}
+   */
+  emptyOperation(): Promise<EmptyOperationCommandOutput>;
+  emptyOperation(
     args: EmptyOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JsonProtocolRequestOptions
   ): Promise<EmptyOperationCommandOutput>;
-  public emptyOperation(
+  emptyOperation(
     args: EmptyOperationCommandInput,
     cb: (err: any, data?: EmptyOperationCommandOutput) => void
   ): void;
-  public emptyOperation(
+  emptyOperation(
     args: EmptyOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: JsonProtocolRequestOptions,
     cb: (err: any, data?: EmptyOperationCommandOutput) => void
   ): void;
-  public emptyOperation(
-    args: EmptyOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EmptyOperationCommandOutput) => void),
-    cb?: (err: any, data?: EmptyOperationCommandOutput) => void
-  ): Promise<EmptyOperationCommandOutput> | void {
-    const command = new EmptyOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointOperation(
+  /**
+   * @see {@link EndpointOperationCommand}
+   */
+  endpointOperation(): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JsonProtocolRequestOptions
   ): Promise<EndpointOperationCommandOutput>;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: JsonProtocolRequestOptions,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
-    args: EndpointOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointOperationCommandOutput) => void
-  ): Promise<EndpointOperationCommandOutput> | void {
-    const command = new EndpointOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointWithHostLabelOperation(
+  /**
+   * @see {@link EndpointWithHostLabelOperationCommand}
+   */
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JsonProtocolRequestOptions
   ): Promise<EndpointWithHostLabelOperationCommandOutput>;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: JsonProtocolRequestOptions,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
-    args: EndpointWithHostLabelOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
-  ): Promise<EndpointWithHostLabelOperationCommandOutput> | void {
-    const command = new EndpointWithHostLabelOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation has three possible return values:
-   *
-   * 1. A successful response in the form of GreetingWithErrorsOutput
-   * 2. An InvalidGreeting error.
-   * 3. A ComplexError error.
-   *
-   * Implementations must be able to successfully take a response and
-   * properly deserialize successful and error responses.
+   * @see {@link FractionalSecondsCommand}
    */
-  public greetingWithErrors(
+  fractionalSeconds(): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GreetingWithErrorsCommand}
+   */
+  greetingWithErrors(): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JsonProtocolRequestOptions
   ): Promise<GreetingWithErrorsCommandOutput>;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: JsonProtocolRequestOptions,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
-    args: GreetingWithErrorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GreetingWithErrorsCommandOutput) => void),
-    cb?: (err: any, data?: GreetingWithErrorsCommandOutput) => void
-  ): Promise<GreetingWithErrorsCommandOutput> | void {
-    const command = new GreetingWithErrorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<HostWithPathOperationCommandOutput>;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HostWithPathOperationCommandOutput) => void),
-    cb?: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): Promise<HostWithPathOperationCommandOutput> | void {
-    const command = new HostWithPathOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example serializes enums as top level properties, in lists, sets, and maps.
+   * @see {@link HostWithPathOperationCommand}
    */
-  public jsonEnums(args: JsonEnumsCommandInput, options?: __HttpHandlerOptions): Promise<JsonEnumsCommandOutput>;
-  public jsonEnums(args: JsonEnumsCommandInput, cb: (err: any, data?: JsonEnumsCommandOutput) => void): void;
-  public jsonEnums(
+  hostWithPathOperation(): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
+  ): void;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link JsonEnumsCommand}
+   */
+  jsonEnums(): Promise<JsonEnumsCommandOutput>;
+  jsonEnums(
     args: JsonEnumsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: JsonProtocolRequestOptions
+  ): Promise<JsonEnumsCommandOutput>;
+  jsonEnums(
+    args: JsonEnumsCommandInput,
     cb: (err: any, data?: JsonEnumsCommandOutput) => void
   ): void;
-  public jsonEnums(
+  jsonEnums(
     args: JsonEnumsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonEnumsCommandOutput) => void),
-    cb?: (err: any, data?: JsonEnumsCommandOutput) => void
-  ): Promise<JsonEnumsCommandOutput> | void {
-    const command = new JsonEnumsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonEnumsCommandOutput) => void
+  ): void;
 
   /**
-   * This operation uses unions for inputs and outputs.
+   * @see {@link JsonIntEnumsCommand}
    */
-  public jsonUnions(args: JsonUnionsCommandInput, options?: __HttpHandlerOptions): Promise<JsonUnionsCommandOutput>;
-  public jsonUnions(args: JsonUnionsCommandInput, cb: (err: any, data?: JsonUnionsCommandOutput) => void): void;
-  public jsonUnions(
+  jsonIntEnums(): Promise<JsonIntEnumsCommandOutput>;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<JsonIntEnumsCommandOutput>;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    cb: (err: any, data?: JsonIntEnumsCommandOutput) => void
+  ): void;
+  jsonIntEnums(
+    args: JsonIntEnumsCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonIntEnumsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link JsonUnionsCommand}
+   */
+  jsonUnions(): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: JsonProtocolRequestOptions
+  ): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
+    args: JsonUnionsCommandInput,
     cb: (err: any, data?: JsonUnionsCommandOutput) => void
   ): void;
-  public jsonUnions(
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonUnionsCommandOutput) => void),
-    cb?: (err: any, data?: JsonUnionsCommandOutput) => void
-  ): Promise<JsonUnionsCommandOutput> | void {
-    const command = new JsonUnionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public kitchenSinkOperation(
-    args: KitchenSinkOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<KitchenSinkOperationCommandOutput>;
-  public kitchenSinkOperation(
-    args: KitchenSinkOperationCommandInput,
-    cb: (err: any, data?: KitchenSinkOperationCommandOutput) => void
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: JsonUnionsCommandOutput) => void
   ): void;
-  public kitchenSinkOperation(
-    args: KitchenSinkOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: KitchenSinkOperationCommandOutput) => void
-  ): void;
-  public kitchenSinkOperation(
-    args: KitchenSinkOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: KitchenSinkOperationCommandOutput) => void),
-    cb?: (err: any, data?: KitchenSinkOperationCommandOutput) => void
-  ): Promise<KitchenSinkOperationCommandOutput> | void {
-    const command = new KitchenSinkOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public nullOperation(
-    args: NullOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<NullOperationCommandOutput>;
-  public nullOperation(
-    args: NullOperationCommandInput,
-    cb: (err: any, data?: NullOperationCommandOutput) => void
-  ): void;
-  public nullOperation(
-    args: NullOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: NullOperationCommandOutput) => void
-  ): void;
-  public nullOperation(
-    args: NullOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NullOperationCommandOutput) => void),
-    cb?: (err: any, data?: NullOperationCommandOutput) => void
-  ): Promise<NullOperationCommandOutput> | void {
-    const command = new NullOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public operationWithOptionalInputOutput(
-    args: OperationWithOptionalInputOutputCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<OperationWithOptionalInputOutputCommandOutput>;
-  public operationWithOptionalInputOutput(
-    args: OperationWithOptionalInputOutputCommandInput,
-    cb: (err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void
-  ): void;
-  public operationWithOptionalInputOutput(
-    args: OperationWithOptionalInputOutputCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void
-  ): void;
-  public operationWithOptionalInputOutput(
-    args: OperationWithOptionalInputOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void),
-    cb?: (err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void
-  ): Promise<OperationWithOptionalInputOutputCommandOutput> | void {
-    const command = new OperationWithOptionalInputOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This example serializes an inline document as part of the payload.
+   * @see {@link KitchenSinkOperationCommand}
    */
-  public putAndGetInlineDocuments(
-    args: PutAndGetInlineDocumentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutAndGetInlineDocumentsCommandOutput>;
-  public putAndGetInlineDocuments(
-    args: PutAndGetInlineDocumentsCommandInput,
-    cb: (err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void
+  kitchenSinkOperation(): Promise<KitchenSinkOperationCommandOutput>;
+  kitchenSinkOperation(
+    args: KitchenSinkOperationCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<KitchenSinkOperationCommandOutput>;
+  kitchenSinkOperation(
+    args: KitchenSinkOperationCommandInput,
+    cb: (err: any, data?: KitchenSinkOperationCommandOutput) => void
   ): void;
-  public putAndGetInlineDocuments(
-    args: PutAndGetInlineDocumentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void
+  kitchenSinkOperation(
+    args: KitchenSinkOperationCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: KitchenSinkOperationCommandOutput) => void
   ): void;
-  public putAndGetInlineDocuments(
-    args: PutAndGetInlineDocumentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void),
-    cb?: (err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void
-  ): Promise<PutAndGetInlineDocumentsCommandOutput> | void {
-    const command = new PutAndGetInlineDocumentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public simpleScalarProperties(
+  /**
+   * @see {@link NullOperationCommand}
+   */
+  nullOperation(): Promise<NullOperationCommandOutput>;
+  nullOperation(
+    args: NullOperationCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<NullOperationCommandOutput>;
+  nullOperation(
+    args: NullOperationCommandInput,
+    cb: (err: any, data?: NullOperationCommandOutput) => void
+  ): void;
+  nullOperation(
+    args: NullOperationCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: NullOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithOptionalInputOutputCommand}
+   */
+  operationWithOptionalInputOutput(): Promise<OperationWithOptionalInputOutputCommandOutput>;
+  operationWithOptionalInputOutput(
+    args: OperationWithOptionalInputOutputCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<OperationWithOptionalInputOutputCommandOutput>;
+  operationWithOptionalInputOutput(
+    args: OperationWithOptionalInputOutputCommandInput,
+    cb: (err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void
+  ): void;
+  operationWithOptionalInputOutput(
+    args: OperationWithOptionalInputOutputCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: OperationWithOptionalInputOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAndGetInlineDocumentsCommand}
+   */
+  putAndGetInlineDocuments(): Promise<PutAndGetInlineDocumentsCommandOutput>;
+  putAndGetInlineDocuments(
+    args: PutAndGetInlineDocumentsCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<PutAndGetInlineDocumentsCommandOutput>;
+  putAndGetInlineDocuments(
+    args: PutAndGetInlineDocumentsCommandInput,
+    cb: (err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void
+  ): void;
+  putAndGetInlineDocuments(
+    args: PutAndGetInlineDocumentsCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: PutAndGetInlineDocumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWithContentEncodingCommand}
+   */
+  putWithContentEncoding(): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SimpleScalarPropertiesCommand}
+   */
+  simpleScalarProperties(): Promise<SimpleScalarPropertiesCommandOutput>;
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JsonProtocolRequestOptions
   ): Promise<SimpleScalarPropertiesCommandOutput>;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options: __HttpHandlerOptions,
+    options: JsonProtocolRequestOptions,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
-    args: SimpleScalarPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SimpleScalarPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
-  ): Promise<SimpleScalarPropertiesCommandOutput> | void {
-    const command = new SimpleScalarPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link SparseNullsOperationCommand}
+   */
+  sparseNullsOperation(): Promise<SparseNullsOperationCommandOutput>;
+  sparseNullsOperation(
+    args: SparseNullsOperationCommandInput,
+    options?: JsonProtocolRequestOptions
+  ): Promise<SparseNullsOperationCommandOutput>;
+  sparseNullsOperation(
+    args: SparseNullsOperationCommandInput,
+    cb: (err: any, data?: SparseNullsOperationCommandOutput) => void
+  ): void;
+  sparseNullsOperation(
+    args: SparseNullsOperationCommandInput,
+    options: JsonProtocolRequestOptions,
+    cb: (err: any, data?: SparseNullsOperationCommandOutput) => void
+  ): void;
 }
+
+/**
+ * @public
+ */
+export class JsonProtocol extends JsonProtocolClient implements JsonProtocol {}
+createAggregatedClient(commands, JsonProtocol);

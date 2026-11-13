@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RemoveKnowledgeBaseTemplateUriRequest, RemoveKnowledgeBaseTemplateUriResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RemoveKnowledgeBaseTemplateUriCommand,
-  serializeAws_restJson1RemoveKnowledgeBaseTemplateUriCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WisdomClientResolvedConfig } from "../WisdomClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveKnowledgeBaseTemplateUriRequest, RemoveKnowledgeBaseTemplateUriResponse } from "../models/models_0";
+import { RemoveKnowledgeBaseTemplateUri$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveKnowledgeBaseTemplateUriCommand}.
+ */
 export interface RemoveKnowledgeBaseTemplateUriCommandInput extends RemoveKnowledgeBaseTemplateUriRequest {}
-export interface RemoveKnowledgeBaseTemplateUriCommandOutput
-  extends RemoveKnowledgeBaseTemplateUriResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveKnowledgeBaseTemplateUriCommand}.
+ */
+export interface RemoveKnowledgeBaseTemplateUriCommandOutput extends RemoveKnowledgeBaseTemplateUriResponse, __MetadataBearer {}
 
 /**
  * <p>Removes a URI template from a knowledge base.</p>
@@ -30,74 +29,54 @@ export interface RemoveKnowledgeBaseTemplateUriCommandOutput
  * ```javascript
  * import { WisdomClient, RemoveKnowledgeBaseTemplateUriCommand } from "@aws-sdk/client-wisdom"; // ES Modules import
  * // const { WisdomClient, RemoveKnowledgeBaseTemplateUriCommand } = require("@aws-sdk/client-wisdom"); // CommonJS import
+ * // import type { WisdomClientConfig } from "@aws-sdk/client-wisdom";
+ * const config = {}; // type is WisdomClientConfig
  * const client = new WisdomClient(config);
+ * const input = { // RemoveKnowledgeBaseTemplateUriRequest
+ *   knowledgeBaseId: "STRING_VALUE", // required
+ * };
  * const command = new RemoveKnowledgeBaseTemplateUriCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveKnowledgeBaseTemplateUriCommandInput - {@link RemoveKnowledgeBaseTemplateUriCommandInput}
+ * @returns {@link RemoveKnowledgeBaseTemplateUriCommandOutput}
  * @see {@link RemoveKnowledgeBaseTemplateUriCommandInput} for command's `input` shape.
  * @see {@link RemoveKnowledgeBaseTemplateUriCommandOutput} for command's `response` shape.
- * @see {@link WisdomClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WisdomClientResolvedConfig | config} for WisdomClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by a service.</p>
+ *
+ * @throws {@link WisdomServiceException}
+ * <p>Base exception class for all service exceptions from Wisdom service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveKnowledgeBaseTemplateUriCommand extends $Command<
-  RemoveKnowledgeBaseTemplateUriCommandInput,
-  RemoveKnowledgeBaseTemplateUriCommandOutput,
-  WisdomClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveKnowledgeBaseTemplateUriCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WisdomClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveKnowledgeBaseTemplateUriCommandInput, RemoveKnowledgeBaseTemplateUriCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WisdomClient";
-    const commandName = "RemoveKnowledgeBaseTemplateUriCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveKnowledgeBaseTemplateUriRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveKnowledgeBaseTemplateUriResponse.filterSensitiveLog,
+export class RemoveKnowledgeBaseTemplateUriCommand extends command<RemoveKnowledgeBaseTemplateUriCommandInput, RemoveKnowledgeBaseTemplateUriCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveKnowledgeBaseTemplateUri",
+  RemoveKnowledgeBaseTemplateUri$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveKnowledgeBaseTemplateUriRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RemoveKnowledgeBaseTemplateUriCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1RemoveKnowledgeBaseTemplateUriCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveKnowledgeBaseTemplateUriCommandOutput> {
-    return deserializeAws_restJson1RemoveKnowledgeBaseTemplateUriCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveKnowledgeBaseTemplateUriCommandInput;
+      output: RemoveKnowledgeBaseTemplateUriCommandOutput;
+    };
+  };
 }

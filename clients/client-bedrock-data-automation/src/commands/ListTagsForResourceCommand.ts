@@ -1,0 +1,95 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
+import { ListTagsForResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsForResourceCommand}.
+ */
+export interface ListTagsForResourceCommandInput extends ListTagsForResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsForResourceCommand}.
+ */
+export interface ListTagsForResourceCommandOutput extends ListTagsForResourceResponse, __MetadataBearer {}
+
+/**
+ * List tags for an Amazon Bedrock Data Automation resource
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BedrockDataAutomationClient, ListTagsForResourceCommand } from "@aws-sdk/client-bedrock-data-automation"; // ES Modules import
+ * // const { BedrockDataAutomationClient, ListTagsForResourceCommand } = require("@aws-sdk/client-bedrock-data-automation"); // CommonJS import
+ * // import type { BedrockDataAutomationClientConfig } from "@aws-sdk/client-bedrock-data-automation";
+ * const config = {}; // type is BedrockDataAutomationClientConfig
+ * const client = new BedrockDataAutomationClient(config);
+ * const input = { // ListTagsForResourceRequest
+ *   resourceARN: "STRING_VALUE", // required
+ * };
+ * const command = new ListTagsForResourceCommand(input);
+ * const response = await client.send(command);
+ * // { // ListTagsForResourceResponse
+ * //   tags: [ // TagList
+ * //     { // Tag
+ * //       key: "STRING_VALUE", // required
+ * //       value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param ListTagsForResourceCommandInput - {@link ListTagsForResourceCommandInput}
+ * @returns {@link ListTagsForResourceCommandOutput}
+ * @see {@link ListTagsForResourceCommandInput} for command's `input` shape.
+ * @see {@link ListTagsForResourceCommandOutput} for command's `response` shape.
+ * @see {@link BedrockDataAutomationClientResolvedConfig | config} for BedrockDataAutomationClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  This exception is thrown when a request is denied per access permissions
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  This exception is thrown if there was an unexpected error during processing of request
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  This exception is thrown when a resource referenced by the operation does not exist
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  This exception is thrown when the number of requests exceeds the limit
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  This exception is thrown when the request's input validation fails
+ *
+ * @throws {@link BedrockDataAutomationServiceException}
+ * <p>Base exception class for all service exceptions from BedrockDataAutomation service.</p>
+ *
+ *
+ * @public
+ */
+export class ListTagsForResourceCommand extends command<ListTagsForResourceCommandInput, ListTagsForResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTagsForResource",
+  ListTagsForResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForResourceRequest;
+      output: ListTagsForResourceResponse;
+    };
+    sdk: {
+      input: ListTagsForResourceCommandInput;
+      output: ListTagsForResourceCommandOutput;
+    };
+  };
+}

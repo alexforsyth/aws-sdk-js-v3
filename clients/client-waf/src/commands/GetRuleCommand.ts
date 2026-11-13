@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRuleRequest, GetRuleResponse } from "../models/models_0";
-import { deserializeAws_json1_1GetRuleCommand, serializeAws_json1_1GetRuleCommand } from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRuleRequest, GetRuleResponse } from "../models/models_0";
+import { GetRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRuleCommand}.
+ */
 export interface GetRuleCommandInput extends GetRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRuleCommand}.
+ */
 export interface GetRuleCommandOutput extends GetRuleResponse, __MetadataBearer {}
 
 /**
@@ -33,64 +37,93 @@ export interface GetRuleCommandOutput extends GetRuleResponse, __MetadataBearer 
  * ```javascript
  * import { WAFClient, GetRuleCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, GetRuleCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // GetRuleRequest
+ *   RuleId: "STRING_VALUE", // required
+ * };
  * const command = new GetRuleCommand(input);
  * const response = await client.send(command);
+ * // { // GetRuleResponse
+ * //   Rule: { // Rule
+ * //     RuleId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     MetricName: "STRING_VALUE",
+ * //     Predicates: [ // Predicates // required
+ * //       { // Predicate
+ * //         Negated: true || false, // required
+ * //         Type: "IPMatch" || "ByteMatch" || "SqlInjectionMatch" || "GeoMatch" || "SizeConstraint" || "XssMatch" || "RegexMatch", // required
+ * //         DataId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRuleCommandInput - {@link GetRuleCommandInput}
+ * @returns {@link GetRuleCommandOutput}
  * @see {@link GetRuleCommandInput} for command's `input` shape.
  * @see {@link GetRuleCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @example To get a rule
+ * ```javascript
+ * // The following example returns the details of a rule with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+ * const input = {
+ *   RuleId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5"
+ * };
+ * const command = new GetRuleCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Rule: {
+ *     MetricName: "WAFByteHeaderRule",
+ *     Name: "WAFByteHeaderRule",
+ *     Predicates: [
+ *       {
+ *         DataId: "MyByteMatchSetID",
+ *         Negated: false,
+ *         Type: "ByteMatch"
+ *       }
+ *     ],
+ *     RuleId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetRuleCommand extends $Command<GetRuleCommandInput, GetRuleCommandOutput, WAFClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRuleCommandInput, GetRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "GetRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRuleResponse.filterSensitiveLog,
+export class GetRuleCommand extends command<GetRuleCommandInput, GetRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRule",
+  GetRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRuleRequest;
+      output: GetRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRuleCommandOutput> {
-    return deserializeAws_json1_1GetRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRuleCommandInput;
+      output: GetRuleCommandOutput;
+    };
+  };
 }

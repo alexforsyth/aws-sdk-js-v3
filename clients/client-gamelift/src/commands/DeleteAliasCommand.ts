@@ -1,109 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DeleteAliasInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteAliasCommand,
-  serializeAws_json1_1DeleteAliasCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAliasInput } from "../models/models_0";
+import { DeleteAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAliasCommand}.
+ */
 export interface DeleteAliasCommandInput extends DeleteAliasInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAliasCommand}.
+ */
 export interface DeleteAliasCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes an alias. This operation removes all record of the alias. Game clients
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Deletes an alias. This operation removes all record of the alias. Game clients
  *             attempting to access a server process using the deleted alias receive an error. To
  *             delete an alias, specify the alias ID to be deleted.</p>
- *         <p>
+ *          <p>
  *             <b>Related actions</b>
  *          </p>
- *                     <p>
- *             <a>CreateAlias</a> |
- *                     <a>ListAliases</a> |
- *                     <a>DescribeAlias</a> |
- *                     <a>UpdateAlias</a> |
- *                     <a>DeleteAlias</a> |
- *                     <a>ResolveAlias</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DeleteAliasCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DeleteAliasCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DeleteAliasInput
+ *   AliasId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteAliasCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAliasCommandInput - {@link DeleteAliasCommandInput}
+ * @returns {@link DeleteAliasCommandOutput}
  * @see {@link DeleteAliasCommandInput} for command's `input` shape.
  * @see {@link DeleteAliasCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link TaggingFailedException} (client fault)
+ *  <p>The requested tagging operation did not succeed. This may be due to invalid tag format
+ *             or the maximum tag limit may have been exceeded. Resolve the issue before
+ *             retrying.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAliasCommand extends $Command<
-  DeleteAliasCommandInput,
-  DeleteAliasCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAliasCommandInput, DeleteAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DeleteAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAliasInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteAliasCommand extends command<DeleteAliasCommandInput, DeleteAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAlias",
+  DeleteAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAliasInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAliasCommandOutput> {
-    return deserializeAws_json1_1DeleteAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAliasCommandInput;
+      output: DeleteAliasCommandOutput;
+    };
+  };
 }

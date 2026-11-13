@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { GetLifecyclePolicyInput, GetLifecyclePolicyOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetLifecyclePolicyCommand,
-  serializeAws_json1_1GetLifecyclePolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLifecyclePolicyInput, GetLifecyclePolicyOutput } from "../models/models_0";
+import { GetLifecyclePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLifecyclePolicyCommand}.
+ */
 export interface GetLifecyclePolicyCommandInput extends GetLifecyclePolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetLifecyclePolicyCommand}.
+ */
 export interface GetLifecyclePolicyCommandOutput extends GetLifecyclePolicyOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface GetLifecyclePolicyCommandOutput extends GetLifecyclePolicyOutpu
  * ```javascript
  * import { MediaStoreClient, GetLifecyclePolicyCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, GetLifecyclePolicyCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // GetLifecyclePolicyInput
+ *   ContainerName: "STRING_VALUE", // required
+ * };
  * const command = new GetLifecyclePolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetLifecyclePolicyOutput
+ * //   LifecyclePolicy: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param GetLifecyclePolicyCommandInput - {@link GetLifecyclePolicyCommandInput}
+ * @returns {@link GetLifecyclePolicyCommandOutput}
  * @see {@link GetLifecyclePolicyCommandInput} for command's `input` shape.
  * @see {@link GetLifecyclePolicyCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerInUseException} (client fault)
+ *  <p>The container that you specified in the request already exists or is being
+ *          updated.</p>
+ *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The container that you specified in the request does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link PolicyNotFoundException} (client fault)
+ *  <p>The policy that you specified in the request does not exist.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class GetLifecyclePolicyCommand extends $Command<
-  GetLifecyclePolicyCommandInput,
-  GetLifecyclePolicyCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLifecyclePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLifecyclePolicyCommandInput, GetLifecyclePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "GetLifecyclePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLifecyclePolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLifecyclePolicyOutput.filterSensitiveLog,
+export class GetLifecyclePolicyCommand extends command<GetLifecyclePolicyCommandInput, GetLifecyclePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLifecyclePolicy",
+  GetLifecyclePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLifecyclePolicyInput;
+      output: GetLifecyclePolicyOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLifecyclePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetLifecyclePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLifecyclePolicyCommandOutput> {
-    return deserializeAws_json1_1GetLifecyclePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLifecyclePolicyCommandInput;
+      output: GetLifecyclePolicyCommandOutput;
+    };
+  };
 }

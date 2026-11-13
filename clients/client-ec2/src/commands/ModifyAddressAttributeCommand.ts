@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyAddressAttributeRequest, ModifyAddressAttributeResult } from "../models/models_4";
-import {
-  deserializeAws_ec2ModifyAddressAttributeCommand,
-  serializeAws_ec2ModifyAddressAttributeCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyAddressAttributeRequest, ModifyAddressAttributeResult } from "../models/models_7";
+import { ModifyAddressAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyAddressAttributeCommand}.
+ */
 export interface ModifyAddressAttributeCommandInput extends ModifyAddressAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyAddressAttributeCommand}.
+ */
 export interface ModifyAddressAttributeCommandOutput extends ModifyAddressAttributeResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface ModifyAddressAttributeCommandOutput extends ModifyAddressAttrib
  * ```javascript
  * import { EC2Client, ModifyAddressAttributeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyAddressAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyAddressAttributeRequest
+ *   AllocationId: "STRING_VALUE", // required
+ *   DomainName: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyAddressAttributeCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyAddressAttributeResult
+ * //   Address: { // AddressAttribute
+ * //     PublicIp: "STRING_VALUE",
+ * //     AllocationId: "STRING_VALUE",
+ * //     PtrRecord: "STRING_VALUE",
+ * //     PtrRecordUpdate: { // PtrUpdateStatus
+ * //       Value: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Reason: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyAddressAttributeCommandInput - {@link ModifyAddressAttributeCommandInput}
+ * @returns {@link ModifyAddressAttributeCommandOutput}
  * @see {@link ModifyAddressAttributeCommandInput} for command's `input` shape.
  * @see {@link ModifyAddressAttributeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyAddressAttributeCommand extends $Command<
-  ModifyAddressAttributeCommandInput,
-  ModifyAddressAttributeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyAddressAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyAddressAttributeCommandInput, ModifyAddressAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyAddressAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyAddressAttributeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyAddressAttributeResult.filterSensitiveLog,
+export class ModifyAddressAttributeCommand extends command<ModifyAddressAttributeCommandInput, ModifyAddressAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyAddressAttribute",
+  ModifyAddressAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyAddressAttributeRequest;
+      output: ModifyAddressAttributeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyAddressAttributeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyAddressAttributeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyAddressAttributeCommandOutput> {
-    return deserializeAws_ec2ModifyAddressAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyAddressAttributeCommandInput;
+      output: ModifyAddressAttributeCommandOutput;
+    };
+  };
 }

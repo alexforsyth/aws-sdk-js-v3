@@ -1,25 +1,25 @@
-import { getIdNormalizerPlugin } from "@aws-sdk/middleware-sdk-route53";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateTrafficPolicyCommentRequest, UpdateTrafficPolicyCommentResponse } from "../models/models_0";
-import {
-  deserializeAws_restXmlUpdateTrafficPolicyCommentCommand,
-  serializeAws_restXmlUpdateTrafficPolicyCommentCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTrafficPolicyCommentRequest, UpdateTrafficPolicyCommentResponse } from "../models/models_0";
+import { UpdateTrafficPolicyComment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTrafficPolicyCommentCommand}.
+ */
 export interface UpdateTrafficPolicyCommentCommandInput extends UpdateTrafficPolicyCommentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTrafficPolicyCommentCommand}.
+ */
 export interface UpdateTrafficPolicyCommentCommandOutput extends UpdateTrafficPolicyCommentResponse, __MetadataBearer {}
 
 /**
@@ -29,72 +29,66 @@ export interface UpdateTrafficPolicyCommentCommandOutput extends UpdateTrafficPo
  * ```javascript
  * import { Route53Client, UpdateTrafficPolicyCommentCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, UpdateTrafficPolicyCommentCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // UpdateTrafficPolicyCommentRequest
+ *   Id: "STRING_VALUE", // required
+ *   Version: Number("int"), // required
+ *   Comment: "STRING_VALUE", // required
+ * };
  * const command = new UpdateTrafficPolicyCommentCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateTrafficPolicyCommentResponse
+ * //   TrafficPolicy: { // TrafficPolicy
+ * //     Id: "STRING_VALUE", // required
+ * //     Version: Number("int"), // required
+ * //     Name: "STRING_VALUE", // required
+ * //     Type: "SOA" || "A" || "TXT" || "NS" || "CNAME" || "MX" || "NAPTR" || "PTR" || "SRV" || "SPF" || "AAAA" || "CAA" || "DS" || "TLSA" || "SSHFP" || "SVCB" || "HTTPS", // required
+ * //     Document: "STRING_VALUE", // required
+ * //     Comment: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateTrafficPolicyCommentCommandInput - {@link UpdateTrafficPolicyCommentCommandInput}
+ * @returns {@link UpdateTrafficPolicyCommentCommandOutput}
  * @see {@link UpdateTrafficPolicyCommentCommandInput} for command's `input` shape.
  * @see {@link UpdateTrafficPolicyCommentCommandOutput} for command's `response` shape.
- * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link ConcurrentModification} (client fault)
+ *  <p>Another user submitted a request to create, update, or delete the object at the same
+ * 			time that you did. Retry the request. </p>
+ *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link NoSuchTrafficPolicy} (client fault)
+ *  <p>No traffic policy exists with the specified ID.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTrafficPolicyCommentCommand extends $Command<
-  UpdateTrafficPolicyCommentCommandInput,
-  UpdateTrafficPolicyCommentCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTrafficPolicyCommentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTrafficPolicyCommentCommandInput, UpdateTrafficPolicyCommentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getIdNormalizerPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "UpdateTrafficPolicyCommentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTrafficPolicyCommentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTrafficPolicyCommentResponse.filterSensitiveLog,
+export class UpdateTrafficPolicyCommentCommand extends command<UpdateTrafficPolicyCommentCommandInput, UpdateTrafficPolicyCommentCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTrafficPolicyComment",
+  UpdateTrafficPolicyComment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrafficPolicyCommentRequest;
+      output: UpdateTrafficPolicyCommentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTrafficPolicyCommentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlUpdateTrafficPolicyCommentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateTrafficPolicyCommentCommandOutput> {
-    return deserializeAws_restXmlUpdateTrafficPolicyCommentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTrafficPolicyCommentCommandInput;
+      output: UpdateTrafficPolicyCommentCommandOutput;
+    };
+  };
 }

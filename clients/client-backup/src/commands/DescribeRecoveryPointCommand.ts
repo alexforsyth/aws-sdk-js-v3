@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { DescribeRecoveryPointInput, DescribeRecoveryPointOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeRecoveryPointCommand,
-  serializeAws_restJson1DescribeRecoveryPointCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRecoveryPointInput, DescribeRecoveryPointOutput } from "../models/models_0";
+import { DescribeRecoveryPoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRecoveryPointCommand}.
+ */
 export interface DescribeRecoveryPointCommandInput extends DescribeRecoveryPointInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRecoveryPointCommand}.
+ */
 export interface DescribeRecoveryPointCommandOutput extends DescribeRecoveryPointOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,116 @@ export interface DescribeRecoveryPointCommandOutput extends DescribeRecoveryPoin
  * ```javascript
  * import { BackupClient, DescribeRecoveryPointCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, DescribeRecoveryPointCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // DescribeRecoveryPointInput
+ *   BackupVaultName: "STRING_VALUE", // required
+ *   RecoveryPointArn: "STRING_VALUE", // required
+ *   BackupVaultAccountId: "STRING_VALUE",
+ * };
  * const command = new DescribeRecoveryPointCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRecoveryPointOutput
+ * //   RecoveryPointArn: "STRING_VALUE",
+ * //   BackupVaultName: "STRING_VALUE",
+ * //   BackupVaultArn: "STRING_VALUE",
+ * //   SourceBackupVaultArn: "STRING_VALUE",
+ * //   ResourceArn: "STRING_VALUE",
+ * //   ResourceType: "STRING_VALUE",
+ * //   CreatedBy: { // RecoveryPointCreator
+ * //     BackupPlanId: "STRING_VALUE",
+ * //     BackupPlanArn: "STRING_VALUE",
+ * //     BackupPlanName: "STRING_VALUE",
+ * //     BackupPlanVersion: "STRING_VALUE",
+ * //     BackupRuleId: "STRING_VALUE",
+ * //     BackupRuleName: "STRING_VALUE",
+ * //     BackupRuleCron: "STRING_VALUE",
+ * //     BackupRuleTimezone: "STRING_VALUE",
+ * //   },
+ * //   IamRoleArn: "STRING_VALUE",
+ * //   Status: "COMPLETED" || "PARTIAL" || "DELETING" || "EXPIRED" || "AVAILABLE" || "STOPPED" || "CREATING",
+ * //   StatusMessage: "STRING_VALUE",
+ * //   CreationDate: new Date("TIMESTAMP"),
+ * //   InitiationDate: new Date("TIMESTAMP"),
+ * //   CompletionDate: new Date("TIMESTAMP"),
+ * //   BackupSizeInBytes: Number("long"),
+ * //   CalculatedLifecycle: { // CalculatedLifecycle
+ * //     MoveToColdStorageAt: new Date("TIMESTAMP"),
+ * //     DeleteAt: new Date("TIMESTAMP"),
+ * //   },
+ * //   Lifecycle: { // Lifecycle
+ * //     MoveToColdStorageAfterDays: Number("long"),
+ * //     DeleteAfterDays: Number("long"),
+ * //     OptInToArchiveForSupportedResources: true || false,
+ * //     DeleteAfterEvent: "DELETE_AFTER_COPY",
+ * //   },
+ * //   EncryptionKeyArn: "STRING_VALUE",
+ * //   IsEncrypted: true || false,
+ * //   StorageClass: "WARM" || "COLD" || "DELETED",
+ * //   LastRestoreTime: new Date("TIMESTAMP"),
+ * //   ParentRecoveryPointArn: "STRING_VALUE",
+ * //   CompositeMemberIdentifier: "STRING_VALUE",
+ * //   IsParent: true || false,
+ * //   ResourceName: "STRING_VALUE",
+ * //   VaultType: "BACKUP_VAULT" || "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" || "RESTORE_ACCESS_BACKUP_VAULT",
+ * //   IndexStatus: "PENDING" || "ACTIVE" || "FAILED" || "DELETING",
+ * //   IndexStatusMessage: "STRING_VALUE",
+ * //   EncryptionKeyType: "AWS_OWNED_KMS_KEY" || "CUSTOMER_MANAGED_KMS_KEY",
+ * //   ScanResults: [ // ScanResults
+ * //     { // ScanResult
+ * //       MalwareScanner: "GUARDDUTY",
+ * //       ScanJobState: "COMPLETED" || "COMPLETED_WITH_ISSUES" || "FAILED" || "CANCELED",
+ * //       LastScanTimestamp: new Date("TIMESTAMP"),
+ * //       Findings: [ // ScanFindings
+ * //         "MALWARE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeRecoveryPointCommandInput - {@link DescribeRecoveryPointCommandInput}
+ * @returns {@link DescribeRecoveryPointCommandOutput}
  * @see {@link DescribeRecoveryPointCommandInput} for command's `input` shape.
  * @see {@link DescribeRecoveryPointCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Indicates that a required parameter is missing.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRecoveryPointCommand extends $Command<
-  DescribeRecoveryPointCommandInput,
-  DescribeRecoveryPointCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRecoveryPointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRecoveryPointCommandInput, DescribeRecoveryPointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "DescribeRecoveryPointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRecoveryPointInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRecoveryPointOutput.filterSensitiveLog,
+export class DescribeRecoveryPointCommand extends command<DescribeRecoveryPointCommandInput, DescribeRecoveryPointCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRecoveryPoint",
+  DescribeRecoveryPoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRecoveryPointInput;
+      output: DescribeRecoveryPointOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRecoveryPointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeRecoveryPointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRecoveryPointCommandOutput> {
-    return deserializeAws_restJson1DescribeRecoveryPointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRecoveryPointCommandInput;
+      output: DescribeRecoveryPointCommandOutput;
+    };
+  };
 }

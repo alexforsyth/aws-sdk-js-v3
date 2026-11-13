@@ -1,96 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AssociateSubnetCidrBlockRequest, AssociateSubnetCidrBlockResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AssociateSubnetCidrBlockCommand,
-  serializeAws_ec2AssociateSubnetCidrBlockCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateSubnetCidrBlockRequest, AssociateSubnetCidrBlockResult } from "../models/models_0";
+import { AssociateSubnetCidrBlock$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateSubnetCidrBlockCommand}.
+ */
 export interface AssociateSubnetCidrBlockCommandInput extends AssociateSubnetCidrBlockRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateSubnetCidrBlockCommand}.
+ */
 export interface AssociateSubnetCidrBlockCommandOutput extends AssociateSubnetCidrBlockResult, __MetadataBearer {}
 
 /**
  * <p>Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR
- *             block with your subnet. An IPv6 CIDR block must have a prefix length of /64.</p>
+ *             block with your subnet.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, AssociateSubnetCidrBlockCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AssociateSubnetCidrBlockCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AssociateSubnetCidrBlockRequest
+ *   Ipv6IpamPoolId: "STRING_VALUE",
+ *   Ipv6NetmaskLength: Number("int"),
+ *   SubnetId: "STRING_VALUE", // required
+ *   Ipv6CidrBlock: "STRING_VALUE",
+ * };
  * const command = new AssociateSubnetCidrBlockCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateSubnetCidrBlockResult
+ * //   Ipv6CidrBlockAssociation: { // SubnetIpv6CidrBlockAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     Ipv6CidrBlock: "STRING_VALUE",
+ * //     Ipv6CidrBlockState: { // SubnetCidrBlockState
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //     Ipv6AddressAttribute: "public" || "private",
+ * //     IpSource: "amazon" || "byoip" || "none",
+ * //   },
+ * //   SubnetId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AssociateSubnetCidrBlockCommandInput - {@link AssociateSubnetCidrBlockCommandInput}
+ * @returns {@link AssociateSubnetCidrBlockCommandOutput}
  * @see {@link AssociateSubnetCidrBlockCommandInput} for command's `input` shape.
  * @see {@link AssociateSubnetCidrBlockCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateSubnetCidrBlockCommand extends $Command<
-  AssociateSubnetCidrBlockCommandInput,
-  AssociateSubnetCidrBlockCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateSubnetCidrBlockCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateSubnetCidrBlockCommandInput, AssociateSubnetCidrBlockCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AssociateSubnetCidrBlockCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateSubnetCidrBlockRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateSubnetCidrBlockResult.filterSensitiveLog,
+export class AssociateSubnetCidrBlockCommand extends command<AssociateSubnetCidrBlockCommandInput, AssociateSubnetCidrBlockCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateSubnetCidrBlock",
+  AssociateSubnetCidrBlock$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateSubnetCidrBlockRequest;
+      output: AssociateSubnetCidrBlockResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateSubnetCidrBlockCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AssociateSubnetCidrBlockCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateSubnetCidrBlockCommandOutput> {
-    return deserializeAws_ec2AssociateSubnetCidrBlockCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateSubnetCidrBlockCommandInput;
+      output: AssociateSubnetCidrBlockCommandOutput;
+    };
+  };
 }

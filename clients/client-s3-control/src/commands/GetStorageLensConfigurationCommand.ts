@@ -1,109 +1,215 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetStorageLensConfigurationRequest, GetStorageLensConfigurationResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetStorageLensConfigurationCommand,
-  serializeAws_restXmlGetStorageLensConfigurationCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { GetStorageLensConfigurationRequest, GetStorageLensConfigurationResult } from "../models/models_0";
+import { GetStorageLensConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetStorageLensConfigurationCommand}.
+ */
 export interface GetStorageLensConfigurationCommandInput extends GetStorageLensConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetStorageLensConfigurationCommand}.
+ */
 export interface GetStorageLensConfigurationCommandOutput extends GetStorageLensConfigurationResult, __MetadataBearer {}
 
 /**
- * <p>Gets the Amazon S3 Storage Lens configuration. For more information, see
- *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Gets the Amazon S3 Storage Lens configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
  *             activity and usage with Amazon S3 Storage Lens </a> in the
- *          <i>Amazon S3 User Guide</i>.</p>
+ *             <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>
  *          <note>
- *             <p>To use this action,
- *          you must have permission to perform the <code>s3:GetStorageLensConfiguration</code> action. For more
- *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
- *          <i>Amazon S3 User Guide</i>.</p>
+ *             <p>To use this action, you must have permission to perform the
+ *                <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
+ *                <i>Amazon S3 User Guide</i>.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3ControlClient, GetStorageLensConfigurationCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetStorageLensConfigurationCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetStorageLensConfigurationRequest
+ *   ConfigId: "STRING_VALUE", // required
+ *   AccountId: "STRING_VALUE",
+ * };
  * const command = new GetStorageLensConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetStorageLensConfigurationResult
+ * //   StorageLensConfiguration: { // StorageLensConfiguration
+ * //     Id: "STRING_VALUE", // required
+ * //     AccountLevel: { // AccountLevel
+ * //       ActivityMetrics: { // ActivityMetrics
+ * //         IsEnabled: true || false,
+ * //       },
+ * //       BucketLevel: { // BucketLevel
+ * //         ActivityMetrics: {
+ * //           IsEnabled: true || false,
+ * //         },
+ * //         PrefixLevel: { // PrefixLevel
+ * //           StorageMetrics: { // PrefixLevelStorageMetrics
+ * //             IsEnabled: true || false,
+ * //             SelectionCriteria: { // SelectionCriteria
+ * //               Delimiter: "STRING_VALUE",
+ * //               MaxDepth: Number("int"),
+ * //               MinStorageBytesPercentage: Number("double"),
+ * //             },
+ * //           },
+ * //         },
+ * //         AdvancedCostOptimizationMetrics: { // AdvancedCostOptimizationMetrics
+ * //           IsEnabled: true || false,
+ * //         },
+ * //         AdvancedDataProtectionMetrics: { // AdvancedDataProtectionMetrics
+ * //           IsEnabled: true || false,
+ * //         },
+ * //         DetailedStatusCodesMetrics: { // DetailedStatusCodesMetrics
+ * //           IsEnabled: true || false,
+ * //         },
+ * //         AdvancedPerformanceMetrics: { // AdvancedPerformanceMetrics
+ * //           IsEnabled: true || false,
+ * //         },
+ * //       },
+ * //       AdvancedCostOptimizationMetrics: {
+ * //         IsEnabled: true || false,
+ * //       },
+ * //       AdvancedDataProtectionMetrics: {
+ * //         IsEnabled: true || false,
+ * //       },
+ * //       DetailedStatusCodesMetrics: {
+ * //         IsEnabled: true || false,
+ * //       },
+ * //       AdvancedPerformanceMetrics: {
+ * //         IsEnabled: true || false,
+ * //       },
+ * //       StorageLensGroupLevel: { // StorageLensGroupLevel
+ * //         SelectionCriteria: { // StorageLensGroupLevelSelectionCriteria
+ * //           Include: [ // StorageLensGroupLevelInclude
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           Exclude: [ // StorageLensGroupLevelExclude
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //     Include: { // Include
+ * //       Buckets: [ // Buckets
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Regions: [ // Regions
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     Exclude: { // Exclude
+ * //       Buckets: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Regions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     DataExport: { // StorageLensDataExport
+ * //       S3BucketDestination: { // S3BucketDestination
+ * //         Format: "CSV" || "Parquet", // required
+ * //         OutputSchemaVersion: "V_1", // required
+ * //         AccountId: "STRING_VALUE",
+ * //         Arn: "STRING_VALUE", // required
+ * //         Prefix: "STRING_VALUE",
+ * //         Encryption: { // StorageLensDataExportEncryption
+ * //           SSES3: {},
+ * //           SSEKMS: { // SSEKMS
+ * //             KeyId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //       CloudWatchMetrics: { // CloudWatchMetrics
+ * //         IsEnabled: true || false, // required
+ * //       },
+ * //       StorageLensTableDestination: { // StorageLensTableDestination
+ * //         IsEnabled: true || false, // required
+ * //         Encryption: {
+ * //           SSES3: {},
+ * //           SSEKMS: {
+ * //             KeyId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     ExpandedPrefixesDataExport: { // StorageLensExpandedPrefixesDataExport
+ * //       S3BucketDestination: {
+ * //         Format: "CSV" || "Parquet", // required
+ * //         OutputSchemaVersion: "V_1", // required
+ * //         AccountId: "STRING_VALUE",
+ * //         Arn: "STRING_VALUE", // required
+ * //         Prefix: "STRING_VALUE",
+ * //         Encryption: {
+ * //           SSES3: {},
+ * //           SSEKMS: {
+ * //             KeyId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //       StorageLensTableDestination: {
+ * //         IsEnabled: true || false, // required
+ * //         Encryption: {
+ * //           SSES3: {},
+ * //           SSEKMS: {
+ * //             KeyId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     IsEnabled: true || false, // required
+ * //     AwsOrg: { // StorageLensAwsOrg
+ * //       Arn: "STRING_VALUE", // required
+ * //     },
+ * //     StorageLensArn: "STRING_VALUE",
+ * //     PrefixDelimiter: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetStorageLensConfigurationCommandInput - {@link GetStorageLensConfigurationCommandInput}
+ * @returns {@link GetStorageLensConfigurationCommandOutput}
  * @see {@link GetStorageLensConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetStorageLensConfigurationCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetStorageLensConfigurationCommand extends $Command<
-  GetStorageLensConfigurationCommandInput,
-  GetStorageLensConfigurationCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetStorageLensConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetStorageLensConfigurationCommandInput, GetStorageLensConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetStorageLensConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetStorageLensConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetStorageLensConfigurationResult.filterSensitiveLog,
+export class GetStorageLensConfigurationCommand extends command<GetStorageLensConfigurationCommandInput, GetStorageLensConfigurationCommandOutput>(
+  _ep0,
+  _mw1,
+  "GetStorageLensConfiguration",
+  GetStorageLensConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStorageLensConfigurationRequest;
+      output: GetStorageLensConfigurationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetStorageLensConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetStorageLensConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetStorageLensConfigurationCommandOutput> {
-    return deserializeAws_restXmlGetStorageLensConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetStorageLensConfigurationCommandInput;
+      output: GetStorageLensConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { ComprehendClientConfig } from "./ComprehendClient";
+// smithy-typescript generated code
+import type { ComprehendClientConfig } from "./ComprehendClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: ComprehendClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

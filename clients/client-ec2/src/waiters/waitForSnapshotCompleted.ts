@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeSnapshotsCommand, DescribeSnapshotsCommandInput } from "../commands/DescribeSnapshotsCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type DescribeSnapshotsCommandInput,
+  type DescribeSnapshotsCommandOutput,
+  DescribeSnapshotsCommand,
+} from "../commands/DescribeSnapshotsCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeSnapshotsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeSnapshotsCommandInput): Promise<WaiterResult<DescribeSnapshotsCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeSnapshotsCommand(input));
+    let result: DescribeSnapshotsCommandOutput & any = await client.send(new DescribeSnapshotsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Snapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Snapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "completed";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "completed")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,13 +38,13 @@ const checkState = async (client: EC2Client, input: DescribeSnapshotsCommandInpu
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Snapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Snapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "error") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -50,7 +62,7 @@ const checkState = async (client: EC2Client, input: DescribeSnapshotsCommandInpu
 export const waitForSnapshotCompleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSnapshotsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSnapshotsCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -62,8 +74,8 @@ export const waitForSnapshotCompleted = async (
 export const waitUntilSnapshotCompleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSnapshotsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSnapshotsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeSnapshotsCommandOutput>;
 };

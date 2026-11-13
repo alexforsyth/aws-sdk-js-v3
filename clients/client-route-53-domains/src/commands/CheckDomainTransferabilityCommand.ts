@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CheckDomainTransferabilityRequest, CheckDomainTransferabilityResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CheckDomainTransferabilityCommand,
-  serializeAws_json1_1CheckDomainTransferabilityCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53DomainsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53DomainsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CheckDomainTransferabilityRequest, CheckDomainTransferabilityResponse } from "../models/models_0";
+import { CheckDomainTransferability$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CheckDomainTransferabilityCommand}.
+ */
 export interface CheckDomainTransferabilityCommandInput extends CheckDomainTransferabilityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CheckDomainTransferabilityCommand}.
+ */
 export interface CheckDomainTransferabilityCommandOutput extends CheckDomainTransferabilityResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,68 @@ export interface CheckDomainTransferabilityCommandOutput extends CheckDomainTran
  * ```javascript
  * import { Route53DomainsClient, CheckDomainTransferabilityCommand } from "@aws-sdk/client-route-53-domains"; // ES Modules import
  * // const { Route53DomainsClient, CheckDomainTransferabilityCommand } = require("@aws-sdk/client-route-53-domains"); // CommonJS import
+ * // import type { Route53DomainsClientConfig } from "@aws-sdk/client-route-53-domains";
+ * const config = {}; // type is Route53DomainsClientConfig
  * const client = new Route53DomainsClient(config);
+ * const input = { // CheckDomainTransferabilityRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   AuthCode: "STRING_VALUE",
+ * };
  * const command = new CheckDomainTransferabilityCommand(input);
  * const response = await client.send(command);
+ * // { // CheckDomainTransferabilityResponse
+ * //   Transferability: { // DomainTransferability
+ * //     Transferable: "TRANSFERABLE" || "UNTRANSFERABLE" || "DONT_KNOW" || "DOMAIN_IN_OWN_ACCOUNT" || "DOMAIN_IN_ANOTHER_ACCOUNT" || "PREMIUM_DOMAIN" || "PENDING",
+ * //   },
+ * //   Message: "STRING_VALUE",
+ * //   Price: { // PriceWithCurrency
+ * //     Price: Number("double"), // required
+ * //     Currency: "STRING_VALUE", // required
+ * //     PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CheckDomainTransferabilityCommandInput - {@link CheckDomainTransferabilityCommandInput}
+ * @returns {@link CheckDomainTransferabilityCommandOutput}
  * @see {@link CheckDomainTransferabilityCommandInput} for command's `input` shape.
  * @see {@link CheckDomainTransferabilityCommandOutput} for command's `response` shape.
- * @see {@link Route53DomainsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53DomainsClientResolvedConfig | config} for Route53DomainsClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The requested item is not acceptable. For example, for APIs that accept a domain name,
+ * 			the request might specify a domain name that doesn't belong to the account that
+ * 			submitted the request. For <code>AcceptDomainTransferFromAnotherAwsAccount</code>, the
+ * 			password might be invalid.</p>
+ *
+ * @throws {@link TLDInMaintenance} (client fault)
+ *  <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+ *
+ * @throws {@link UnsupportedTLD} (client fault)
+ *  <p>Amazon Route 53 does not support this top-level domain (TLD).</p>
+ *
+ * @throws {@link Route53DomainsServiceException}
+ * <p>Base exception class for all service exceptions from Route53Domains service.</p>
+ *
+ *
+ * @public
  */
-export class CheckDomainTransferabilityCommand extends $Command<
-  CheckDomainTransferabilityCommandInput,
-  CheckDomainTransferabilityCommandOutput,
-  Route53DomainsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CheckDomainTransferabilityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53DomainsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CheckDomainTransferabilityCommandInput, CheckDomainTransferabilityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53DomainsClient";
-    const commandName = "CheckDomainTransferabilityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CheckDomainTransferabilityRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CheckDomainTransferabilityResponse.filterSensitiveLog,
+export class CheckDomainTransferabilityCommand extends command<CheckDomainTransferabilityCommandInput, CheckDomainTransferabilityCommandOutput>(
+  _ep0,
+  _mw0,
+  "CheckDomainTransferability",
+  CheckDomainTransferability$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CheckDomainTransferabilityRequest;
+      output: CheckDomainTransferabilityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CheckDomainTransferabilityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CheckDomainTransferabilityCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CheckDomainTransferabilityCommandOutput> {
-    return deserializeAws_json1_1CheckDomainTransferabilityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CheckDomainTransferabilityCommandInput;
+      output: CheckDomainTransferabilityCommandOutput;
+    };
+  };
 }

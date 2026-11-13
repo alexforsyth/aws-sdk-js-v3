@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["dom"],
+    "outDir": "dist-es",
+    "rootDir": "src",
+    "noCheck": true,
+    "paths": {
+      "@aws-sdk/lib-transfer-manager/worker": ["./src/submodules/worker/index.ts"],
+      "@aws-sdk/lib-transfer-manager/transfer-manager": ["./src/submodules/transfer-manager/index.ts"]
+    }
+  },
+  "extends": "../../tsconfig.es.json",
+  "include": ["src/"]
+}

@@ -1,97 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListStackResourcesInput, ListStackResourcesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryListStackResourcesCommand,
-  serializeAws_queryListStackResourcesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStackResourcesInput, ListStackResourcesOutput } from "../models/models_0";
+import { ListStackResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStackResourcesCommand}.
+ */
 export interface ListStackResourcesCommandInput extends ListStackResourcesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStackResourcesCommand}.
+ */
 export interface ListStackResourcesCommandOutput extends ListStackResourcesOutput, __MetadataBearer {}
 
 /**
  * <p>Returns descriptions of all resources of the specified stack.</p>
  *          <p>For deleted stacks, ListStackResources returns resource information for up to 90 days
- *          after the stack has been deleted.</p>
+ *       after the stack has been deleted.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, ListStackResourcesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListStackResourcesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListStackResourcesInput
+ *   StackName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListStackResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListStackResourcesOutput
+ * //   StackResourceSummaries: [ // StackResourceSummaries
+ * //     { // StackResourceSummary
+ * //       LogicalResourceId: "STRING_VALUE", // required
+ * //       PhysicalResourceId: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE", // required
+ * //       LastUpdatedTimestamp: new Date("TIMESTAMP"), // required
+ * //       ResourceStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "DELETE_IN_PROGRESS" || "DELETE_FAILED" || "DELETE_COMPLETE" || "DELETE_SKIPPED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED" || "UPDATE_COMPLETE" || "IMPORT_FAILED" || "IMPORT_COMPLETE" || "IMPORT_IN_PROGRESS" || "IMPORT_ROLLBACK_IN_PROGRESS" || "IMPORT_ROLLBACK_FAILED" || "IMPORT_ROLLBACK_COMPLETE" || "EXPORT_FAILED" || "EXPORT_COMPLETE" || "EXPORT_IN_PROGRESS" || "EXPORT_ROLLBACK_IN_PROGRESS" || "EXPORT_ROLLBACK_FAILED" || "EXPORT_ROLLBACK_COMPLETE" || "UPDATE_ROLLBACK_IN_PROGRESS" || "UPDATE_ROLLBACK_COMPLETE" || "UPDATE_ROLLBACK_FAILED" || "ROLLBACK_IN_PROGRESS" || "ROLLBACK_COMPLETE" || "ROLLBACK_FAILED", // required
+ * //       ResourceStatusReason: "STRING_VALUE",
+ * //       DriftInformation: { // StackResourceDriftInformationSummary
+ * //         StackResourceDriftStatus: "IN_SYNC" || "MODIFIED" || "DELETED" || "NOT_CHECKED" || "UNKNOWN" || "UNSUPPORTED", // required
+ * //         LastCheckTimestamp: new Date("TIMESTAMP"),
+ * //       },
+ * //       ModuleInfo: { // ModuleInfo
+ * //         TypeHierarchy: "STRING_VALUE",
+ * //         LogicalIdHierarchy: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStackResourcesCommandInput - {@link ListStackResourcesCommandInput}
+ * @returns {@link ListStackResourcesCommandOutput}
  * @see {@link ListStackResourcesCommandInput} for command's `input` shape.
  * @see {@link ListStackResourcesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListStackResourcesCommand extends $Command<
-  ListStackResourcesCommandInput,
-  ListStackResourcesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStackResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStackResourcesCommandInput, ListStackResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListStackResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStackResourcesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStackResourcesOutput.filterSensitiveLog,
+export class ListStackResourcesCommand extends command<ListStackResourcesCommandInput, ListStackResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStackResources",
+  ListStackResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStackResourcesInput;
+      output: ListStackResourcesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStackResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListStackResourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStackResourcesCommandOutput> {
-    return deserializeAws_queryListStackResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStackResourcesCommandInput;
+      output: ListStackResourcesCommandOutput;
+    };
+  };
 }

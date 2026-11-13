@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAccountBalanceRequest, GetAccountBalanceResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1GetAccountBalanceCommand,
-  serializeAws_json1_1GetAccountBalanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAccountBalanceRequest, GetAccountBalanceResponse } from "../models/models_0";
+import { GetAccountBalance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccountBalanceCommand}.
+ */
 export interface GetAccountBalanceCommandInput extends GetAccountBalanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccountBalanceCommand}.
+ */
 export interface GetAccountBalanceCommandOutput extends GetAccountBalanceResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,52 @@ export interface GetAccountBalanceCommandOutput extends GetAccountBalanceRespons
  * ```javascript
  * import { MTurkClient, GetAccountBalanceCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, GetAccountBalanceCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = {};
  * const command = new GetAccountBalanceCommand(input);
  * const response = await client.send(command);
+ * // { // GetAccountBalanceResponse
+ * //   AvailableBalance: "STRING_VALUE",
+ * //   OnHoldBalance: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetAccountBalanceCommandInput - {@link GetAccountBalanceCommandInput}
+ * @returns {@link GetAccountBalanceCommandOutput}
  * @see {@link GetAccountBalanceCommandInput} for command's `input` shape.
  * @see {@link GetAccountBalanceCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class GetAccountBalanceCommand extends $Command<
-  GetAccountBalanceCommandInput,
-  GetAccountBalanceCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAccountBalanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAccountBalanceCommandInput, GetAccountBalanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "GetAccountBalanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAccountBalanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAccountBalanceResponse.filterSensitiveLog,
+export class GetAccountBalanceCommand extends command<GetAccountBalanceCommandInput, GetAccountBalanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAccountBalance",
+  GetAccountBalance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAccountBalanceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAccountBalanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetAccountBalanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAccountBalanceCommandOutput> {
-    return deserializeAws_json1_1GetAccountBalanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAccountBalanceCommandInput;
+      output: GetAccountBalanceCommandOutput;
+    };
+  };
 }

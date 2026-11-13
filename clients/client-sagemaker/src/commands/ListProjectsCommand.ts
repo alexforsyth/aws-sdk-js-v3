@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListProjectsInput, ListProjectsOutput } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListProjectsCommand,
-  serializeAws_json1_1ListProjectsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProjectsInput, ListProjectsOutput } from "../models/models_4";
+import { ListProjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProjectsCommand}.
+ */
 export interface ListProjectsCommandInput extends ListProjectsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListProjectsCommand}.
+ */
 export interface ListProjectsCommandOutput extends ListProjectsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface ListProjectsCommandOutput extends ListProjectsOutput, __Metadat
  * ```javascript
  * import { SageMakerClient, ListProjectsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListProjectsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListProjectsInput
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ * };
  * const command = new ListProjectsCommand(input);
  * const response = await client.send(command);
+ * // { // ListProjectsOutput
+ * //   ProjectSummaryList: [ // ProjectSummaryList // required
+ * //     { // ProjectSummary
+ * //       ProjectName: "STRING_VALUE", // required
+ * //       ProjectDescription: "STRING_VALUE",
+ * //       ProjectArn: "STRING_VALUE", // required
+ * //       ProjectId: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       ProjectStatus: "Pending" || "CreateInProgress" || "CreateCompleted" || "CreateFailed" || "DeleteInProgress" || "DeleteFailed" || "DeleteCompleted" || "UpdateInProgress" || "UpdateCompleted" || "UpdateFailed", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProjectsCommandInput - {@link ListProjectsCommandInput}
+ * @returns {@link ListProjectsCommandOutput}
  * @see {@link ListProjectsCommandInput} for command's `input` shape.
  * @see {@link ListProjectsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListProjectsCommand extends $Command<
-  ListProjectsCommandInput,
-  ListProjectsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProjectsCommandInput, ListProjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListProjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProjectsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProjectsOutput.filterSensitiveLog,
+export class ListProjectsCommand extends command<ListProjectsCommandInput, ListProjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProjects",
+  ListProjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProjectsInput;
+      output: ListProjectsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListProjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProjectsCommandOutput> {
-    return deserializeAws_json1_1ListProjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProjectsCommandInput;
+      output: ListProjectsCommandOutput;
+    };
+  };
 }

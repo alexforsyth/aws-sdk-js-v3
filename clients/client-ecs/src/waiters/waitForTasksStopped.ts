@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeTasksCommand, DescribeTasksCommandInput } from "../commands/DescribeTasksCommand";
-import { ECSClient } from "../ECSClient";
+import {
+  type DescribeTasksCommandInput,
+  type DescribeTasksCommandOutput,
+  DescribeTasksCommand,
+} from "../commands/DescribeTasksCommand";
+import type { ECSClient } from "../ECSClient";
+import type { ECSServiceException } from "../models/ECSServiceException";
 
-const checkState = async (client: ECSClient, input: DescribeTasksCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ECSClient, input: DescribeTasksCommandInput): Promise<WaiterResult<DescribeTasksCommandOutput | ECSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeTasksCommand(input));
+    let result: DescribeTasksCommandOutput & any = await client.send(new DescribeTasksCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.tasks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.tasks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.lastStatus;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "STOPPED";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "STOPPED")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -36,8 +48,8 @@ const checkState = async (client: ECSClient, input: DescribeTasksCommandInput): 
 export const waitForTasksStopped = async (
   params: WaiterConfiguration<ECSClient>,
   input: DescribeTasksCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 6, maxDelay: 120 };
+): Promise<WaiterResult<DescribeTasksCommandOutput | ECSServiceException>> => {
+  const serviceDefaults = { minDelay: 6, maxDelay: 600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -48,8 +60,8 @@ export const waitForTasksStopped = async (
 export const waitUntilTasksStopped = async (
   params: WaiterConfiguration<ECSClient>,
   input: DescribeTasksCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 6, maxDelay: 120 };
+): Promise<WaiterResult<DescribeTasksCommandOutput>> => {
+  const serviceDefaults = { minDelay: 6, maxDelay: 600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeTasksCommandOutput>;
 };

@@ -1,96 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AttachInternetGatewayRequest } from "../models/models_0";
-import {
-  deserializeAws_ec2AttachInternetGatewayCommand,
-  serializeAws_ec2AttachInternetGatewayCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AttachInternetGatewayRequest } from "../models/models_0";
+import { AttachInternetGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AttachInternetGatewayCommand}.
+ */
 export interface AttachInternetGatewayCommandInput extends AttachInternetGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AttachInternetGatewayCommand}.
+ */
 export interface AttachInternetGatewayCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity between the internet and
- * 			the VPC. For more information about your VPC and internet gateway, see the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/">Amazon Virtual Private Cloud User Guide</a>.</p>
+ * <p>Attaches an internet gateway or a virtual private gateway to a VPC, enabling connectivity
+ * 		        between the internet and the VPC. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html">Internet gateways</a> in the
+ * 		        <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, AttachInternetGatewayCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AttachInternetGatewayCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AttachInternetGatewayRequest
+ *   DryRun: true || false,
+ *   InternetGatewayId: "STRING_VALUE", // required
+ *   VpcId: "STRING_VALUE", // required
+ * };
  * const command = new AttachInternetGatewayCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AttachInternetGatewayCommandInput - {@link AttachInternetGatewayCommandInput}
+ * @returns {@link AttachInternetGatewayCommandOutput}
  * @see {@link AttachInternetGatewayCommandInput} for command's `input` shape.
  * @see {@link AttachInternetGatewayCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To attach an Internet gateway to a VPC
+ * ```javascript
+ * // This example attaches the specified Internet gateway to the specified VPC.
+ * const input = {
+ *   InternetGatewayId: "igw-c0a643a9",
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new AttachInternetGatewayCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class AttachInternetGatewayCommand extends $Command<
-  AttachInternetGatewayCommandInput,
-  AttachInternetGatewayCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AttachInternetGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AttachInternetGatewayCommandInput, AttachInternetGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AttachInternetGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AttachInternetGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AttachInternetGatewayCommand extends command<AttachInternetGatewayCommandInput, AttachInternetGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "AttachInternetGateway",
+  AttachInternetGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AttachInternetGatewayRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AttachInternetGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AttachInternetGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AttachInternetGatewayCommandOutput> {
-    return deserializeAws_ec2AttachInternetGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AttachInternetGatewayCommandInput;
+      output: AttachInternetGatewayCommandOutput;
+    };
+  };
 }

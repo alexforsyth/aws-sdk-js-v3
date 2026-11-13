@@ -1,52 +1,44 @@
-# @aws-sdk/client-health
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-health/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-health)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-health.svg)](https://www.npmjs.com/package/@aws-sdk/client-health)
+# @aws-sdk/client-health
 
 ## Description
 
 AWS SDK for JavaScript Health Client for Node.js, Browser and React Native.
 
-<fullname>AWS Health</fullname>
-
-<p>The AWS Health API provides programmatic access to the AWS Health information that
-appears in the <a href="https://phd.aws.amazon.com/phd/home#/">AWS Personal Health Dashboard</a>. You
-can use the API operations to get information about AWS Health events that affect your
-AWS services and resources.</p>
-<note>
-<ul>
-<li>
-<p>You must have a Business or Enterprise Support plan from <a href="http://aws.amazon.com/premiumsupport/">AWS Support</a> to use the
-AWS Health API. If you call the AWS Health API from an AWS account that
-doesn't have a Business or Enterprise Support plan, you receive a
+<fullname>Health</fullname>
+<p>The Health API provides access to the Health information that appears in the
+<a href="https://health.aws.amazon.com/health/home">Health Dashboard</a>. You can use
+the API operations to get information about events that might affect your Amazon Web Services services and resources.</p>
+<p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan from <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a> to use the Health API. If you call the Health API from an
+Amazon Web Services account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, you receive a
 <code>SubscriptionRequiredException</code> error.</p>
-</li>
-<li>
-<p>You can use the AWS Health endpoint health.us-east-1.amazonaws.com (HTTPS) to
-call the AWS Health API operations. AWS Health supports a multi-Region
-application architecture and has two regional endpoints in an active-passive
-configuration. You can use the high availability endpoint example to determine
-which AWS Region is active, so that you can get the latest information from the
-API. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/health-api.html">Accessing the AWS Health API</a> in the
-<i>AWS Health User Guide</i>.</p>
-</li>
-</ul>
-</note>
-<p>For authentication of requests, AWS Health uses the <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing
+<p>For API access, you need an access key ID and a secret access key. Use temporary
+credentials instead of long-term access keys when possible. Temporary credentials include
+an access key ID, a secret access key, and a security token that indicates when the
+credentials expire. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html">Best practices for managing
+Amazon Web Services access keys</a> in the <i>Amazon Web Services General Reference</i>.</p>
+<p>You can use the Health endpoint health.us-east-1.amazonaws.com (HTTPS) to call the
+Health API operations. Health supports a multi-Region application architecture
+and has two regional endpoints in an active-passive configuration. You can use the high
+availability endpoint example to determine which Amazon Web Services Region is active, so that you can
+get the latest information from the API. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/health-api.html">Accessing the Health
+API</a> in the <i>Health User Guide</i>.</p>
+<p>For authentication of requests, Health uses the <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing
 Process</a>.</p>
-<p>If your AWS account is part of AWS Organizations, you can use the AWS Health organizational
-view feature. This feature provides a centralized view of AWS Health events across all
-accounts in your organization. You can aggregate AWS Health events in real time to
+<p>If your Amazon Web Services account is part of Organizations, you can use the Health organizational
+view feature. This feature provides a centralized view of Health events across all
+accounts in your organization. You can aggregate Health events in real time to
 identify accounts in your organization that are affected by an operational event or get
 notified of security vulnerabilities. Use the organizational view API operations to enable
 this feature and return event information. For more information, see <a href="https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html">Aggregating
-AWS Health events</a> in the <i>AWS Health User Guide</i>.</p>
+Health events</a> in the <i>Health User Guide</i>.</p>
 <note>
-<p>When you use the AWS Health API operations to return AWS Health events, see the
+<p>When you use the Health API operations to return Health events, see the
 following recommendations:</p>
 <ul>
 <li>
-<p>Use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode">eventScopeCode</a> parameter to specify whether to return AWS Health
+<p>Use the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode">eventScopeCode</a> parameter to specify whether to return Health
 events that are public or account-specific.</p>
 </li>
 <li>
@@ -60,8 +52,7 @@ organization, you might receive several page results. Specify the
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-health
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-health`
 - `yarn add @aws-sdk/client-health`
@@ -73,40 +64,77 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `HealthClient` and
-the commands you need, for example `DescribeAffectedAccountsForOrganizationCommand`:
+the commands you need, for example `DescribeEventsCommand`:
 
 ```js
 // ES5 example
-const { HealthClient, DescribeAffectedAccountsForOrganizationCommand } = require("@aws-sdk/client-health");
+const { HealthClient, DescribeEventsCommand } = require("@aws-sdk/client-health");
 ```
 
 ```ts
 // ES6+ example
-import { HealthClient, DescribeAffectedAccountsForOrganizationCommand } from "@aws-sdk/client-health";
+import { HealthClient, DescribeEventsCommand } from "@aws-sdk/client-health";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new HealthClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new DescribeAffectedAccountsForOrganizationCommand(params);
+const params = { /** input parameters */ };
+const command = new DescribeEventsCommand(params);
+```
+
+#### Supported Message Protocols
+
+This client supports multiple protocols.
+
+The default for this client is **AWS JSON (RPC) 1.1**.
+
+We have selected this default based on our evaluation of the
+performance characteristics of this protocol format in JavaScript. You don't need to change it,
+but you have the option to do so, for example to support existing integrations or tests.
+Selecting a non-default protocol changes the format
+of the data sent over the network, but does not affect how you interact with the
+client using JavaScript objects.
+
+Install the `@aws-sdk/config` package to access alternate protocols.
+
+See [AWS Protocols](https://smithy.io/2.0/aws/protocols/index.html) for more information.
+
+##### AWS JSON (RPC) 1.1
+
+This protocol uses JSON payloads.
+```js
+import { AwsJson1_1Protocol } from "@aws-sdk/config/protocol";
+
+const client = new HealthClient({
+  protocol: AwsJson1_1Protocol
+});
+```
+
+##### Smithy RPC v2 CBOR
+
+This protocol uses CBOR payloads.
+```js
+import { AwsSmithyRpcV2CborProtocol } from "@aws-sdk/config/protocol";
+
+const client = new HealthClient({
+  protocol: AwsSmithyRpcV2CborProtocol
+});
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -121,26 +149,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -156,31 +167,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Health` extends `HealthClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`HealthClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-health";
-const client = new AWS.Health({ region: "REGION" });
+import { Health } from "@aws-sdk/client-health";
+
+const client = new Health({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.describeAffectedAccountsForOrganization(params);
+  const data = await client.describeEvents(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -188,7 +193,7 @@ try {
 
 // Promises.
 client
-  .describeAffectedAccountsForOrganization(params)
+  .describeEvents(params)
   .then((data) => {
     // process data.
   })
@@ -196,9 +201,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.describeAffectedAccountsForOrganization(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.describeEvents(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -224,12 +229,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -250,3 +257,111 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+DescribeAffectedAccountsForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeAffectedAccountsForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedAccountsForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedAccountsForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeAffectedEntities
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeAffectedEntitiesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedEntitiesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedEntitiesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeAffectedEntitiesForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeAffectedEntitiesForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedEntitiesForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeAffectedEntitiesForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEntityAggregates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEntityAggregatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEntityAggregatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEntityAggregatesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEntityAggregatesForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEntityAggregatesForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEntityAggregatesForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEntityAggregatesForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEventAggregates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventAggregatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventAggregatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventAggregatesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEventDetails
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventDetailsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventDetailsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventDetailsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEventDetailsForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventDetailsForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventDetailsForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventDetailsForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEvents
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEventsForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventsForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventsForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventsForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEventTypes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeEventTypesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventTypesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeEventTypesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeHealthServiceStatusForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeHealthServiceStatusForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeHealthServiceStatusForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeHealthServiceStatusForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeServiceLifecycle
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DescribeServiceLifecycleCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeServiceLifecycleCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DescribeServiceLifecycleCommandOutput/)
+</details>
+<details>
+<summary>
+DisableHealthServiceAccessForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/DisableHealthServiceAccessForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DisableHealthServiceAccessForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/DisableHealthServiceAccessForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+EnableHealthServiceAccessForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/health/command/EnableHealthServiceAccessForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/EnableHealthServiceAccessForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-health/Interface/EnableHealthServiceAccessForOrganizationCommandOutput/)
+</details>

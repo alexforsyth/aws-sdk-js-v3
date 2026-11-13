@@ -1,108 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeConnectionAliasPermissionsRequest,
   DescribeConnectionAliasPermissionsResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConnectionAliasPermissionsCommand,
-  serializeAws_json1_1DescribeConnectionAliasPermissionsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
-
-export interface DescribeConnectionAliasPermissionsCommandInput extends DescribeConnectionAliasPermissionsRequest {}
-export interface DescribeConnectionAliasPermissionsCommandOutput
-  extends DescribeConnectionAliasPermissionsResult,
-    __MetadataBearer {}
+import { DescribeConnectionAliasPermissions$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for
- *          the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html">
- *             Cross-Region Redirection for Amazon WorkSpaces</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConnectionAliasPermissionsCommand}.
+ */
+export interface DescribeConnectionAliasPermissionsCommandInput extends DescribeConnectionAliasPermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConnectionAliasPermissionsCommand}.
+ */
+export interface DescribeConnectionAliasPermissionsCommandOutput extends DescribeConnectionAliasPermissionsResult, __MetadataBearer {}
+
+/**
+ * <p>Describes the permissions that the owner of a connection alias has granted to another
+ *             Amazon Web Services account for the specified connection alias. For more information, see
+ *             <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region
+ *             Redirection for Amazon WorkSpaces</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkSpacesClient, DescribeConnectionAliasPermissionsCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeConnectionAliasPermissionsCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeConnectionAliasPermissionsRequest
+ *   AliasId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeConnectionAliasPermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConnectionAliasPermissionsResult
+ * //   AliasId: "STRING_VALUE",
+ * //   ConnectionAliasPermissions: [ // ConnectionAliasPermissions
+ * //     { // ConnectionAliasPermission
+ * //       SharedAccountId: "STRING_VALUE", // required
+ * //       AllowAssociation: true || false, // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeConnectionAliasPermissionsCommandInput - {@link DescribeConnectionAliasPermissionsCommandInput}
+ * @returns {@link DescribeConnectionAliasPermissionsCommandOutput}
  * @see {@link DescribeConnectionAliasPermissionsCommandInput} for command's `input` shape.
  * @see {@link DescribeConnectionAliasPermissionsCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConnectionAliasPermissionsCommand extends $Command<
-  DescribeConnectionAliasPermissionsCommandInput,
-  DescribeConnectionAliasPermissionsCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConnectionAliasPermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConnectionAliasPermissionsCommandInput, DescribeConnectionAliasPermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeConnectionAliasPermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConnectionAliasPermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConnectionAliasPermissionsResult.filterSensitiveLog,
+export class DescribeConnectionAliasPermissionsCommand extends command<DescribeConnectionAliasPermissionsCommandInput, DescribeConnectionAliasPermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConnectionAliasPermissions",
+  DescribeConnectionAliasPermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConnectionAliasPermissionsRequest;
+      output: DescribeConnectionAliasPermissionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeConnectionAliasPermissionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConnectionAliasPermissionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConnectionAliasPermissionsCommandOutput> {
-    return deserializeAws_json1_1DescribeConnectionAliasPermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConnectionAliasPermissionsCommandInput;
+      output: DescribeConnectionAliasPermissionsCommandOutput;
+    };
+  };
 }

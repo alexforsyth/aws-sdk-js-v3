@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetProductsRequest, GetProductsResponse } from "../models/models_0";
-import { PricingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PricingClient";
-import {
-  deserializeAws_json1_1GetProductsCommand,
-  serializeAws_json1_1GetProductsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetProductsRequest, GetProductsResponse } from "../models/models_0";
+import { GetProducts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetProductsCommand}.
+ */
 export interface GetProductsCommandInput extends GetProductsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetProductsCommand}.
+ */
 export interface GetProductsCommandOutput extends GetProductsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface GetProductsCommandOutput extends GetProductsResponse, __Metadat
  * ```javascript
  * import { PricingClient, GetProductsCommand } from "@aws-sdk/client-pricing"; // ES Modules import
  * // const { PricingClient, GetProductsCommand } = require("@aws-sdk/client-pricing"); // CommonJS import
+ * // import type { PricingClientConfig } from "@aws-sdk/client-pricing";
+ * const config = {}; // type is PricingClientConfig
  * const client = new PricingClient(config);
+ * const input = { // GetProductsRequest
+ *   ServiceCode: "STRING_VALUE", // required
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Type: "TERM_MATCH" || "EQUALS" || "CONTAINS" || "ANY_OF" || "NONE_OF", // required
+ *       Field: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   FormatVersion: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new GetProductsCommand(input);
  * const response = await client.send(command);
+ * // { // GetProductsResponse
+ * //   FormatVersion: "STRING_VALUE",
+ * //   PriceList: [ // PriceListJsonItems
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetProductsCommandInput - {@link GetProductsCommandInput}
+ * @returns {@link GetProductsCommandOutput}
  * @see {@link GetProductsCommandInput} for command's `input` shape.
  * @see {@link GetProductsCommandOutput} for command's `response` shape.
- * @see {@link PricingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PricingClientResolvedConfig | config} for PricingClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>General authentication failure. The request wasn't signed correctly.</p>
+ *
+ * @throws {@link ExpiredNextTokenException} (client fault)
+ *  <p>The pagination token expired. Try again without a pagination token.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>An error on the server occurred during the processing of your request. Try again later.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The pagination token is invalid. Try again without a pagination token.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters had an invalid value.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You've made too many requests exceeding service quotas. </p>
+ *
+ * @throws {@link PricingServiceException}
+ * <p>Base exception class for all service exceptions from Pricing service.</p>
+ *
+ *
+ * @public
  */
-export class GetProductsCommand extends $Command<
-  GetProductsCommandInput,
-  GetProductsCommandOutput,
-  PricingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetProductsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PricingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetProductsCommandInput, GetProductsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PricingClient";
-    const commandName = "GetProductsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetProductsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetProductsResponse.filterSensitiveLog,
+export class GetProductsCommand extends command<GetProductsCommandInput, GetProductsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetProducts",
+  GetProducts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetProductsRequest;
+      output: GetProductsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetProductsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetProductsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetProductsCommandOutput> {
-    return deserializeAws_json1_1GetProductsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetProductsCommandInput;
+      output: GetProductsCommandOutput;
+    };
+  };
 }

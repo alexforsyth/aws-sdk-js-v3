@@ -1,53 +1,59 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
-
-import { AutoScalingClient } from "../AutoScalingClient";
+// smithy-typescript generated code
 import {
-  DescribeAutoScalingGroupsCommand,
-  DescribeAutoScalingGroupsCommandInput,
-} from "../commands/DescribeAutoScalingGroupsCommand";
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-const checkState = async (
-  client: AutoScalingClient,
-  input: DescribeAutoScalingGroupsCommandInput
-): Promise<WaiterResult> => {
+import type { AutoScalingClient } from "../AutoScalingClient";
+import {
+  type DescribeAutoScalingGroupsCommandInput,
+  type DescribeAutoScalingGroupsCommandOutput,
+  DescribeAutoScalingGroupsCommand,
+} from "../commands/DescribeAutoScalingGroupsCommand";
+import type { AutoScalingServiceException } from "../models/AutoScalingServiceException";
+
+const checkState = async (client: AutoScalingClient, input: DescribeAutoScalingGroupsCommandInput): Promise<WaiterResult<DescribeAutoScalingGroupsCommandOutput | AutoScalingServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeAutoScalingGroupsCommand(input));
+    let result: DescribeAutoScalingGroupsCommandOutput & any = await client.send(new DescribeAutoScalingGroupsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.AutoScalingGroups);
-        const projection_3 = flat_1.map((element_2: any) => {
-          const filterRes_5 = element_2.Instances.filter((element_4: any) => {
-            return element_4.LifecycleState == "InService";
+        let flat_1: any[] = [].concat(...result.AutoScalingGroups);
+        let projection_3 = flat_1.map((element_2: any) => {
+          let filterRes_5 = element_2.Instances.filter((element_4: any) => {
+            return (element_4.LifecycleState == "InService");
           });
-          const result_6 = [];
-          result_6.push(filterRes_5.length >= element_2.MinSize);
+          let result_6 = [];
+          result_6.push((filterRes_5.length >= element_2.MinSize));
           element_2 = result_6;
           return element_2;
         });
-        const flat_7: any[] = [].concat(...projection_3);
+        let flat_7: any[] = [].concat(...projection_3);
         return flat_7.includes(false);
-      };
+      }
       if (returnComparator() == false) {
         return { state: WaiterState.SUCCESS, reason };
       }
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.AutoScalingGroups);
-        const projection_3 = flat_1.map((element_2: any) => {
-          const filterRes_5 = element_2.Instances.filter((element_4: any) => {
-            return element_4.LifecycleState == "InService";
+        let flat_1: any[] = [].concat(...result.AutoScalingGroups);
+        let projection_3 = flat_1.map((element_2: any) => {
+          let filterRes_5 = element_2.Instances.filter((element_4: any) => {
+            return (element_4.LifecycleState == "InService");
           });
-          const result_6 = [];
-          result_6.push(filterRes_5.length >= element_2.MinSize);
+          let result_6 = [];
+          result_6.push((filterRes_5.length >= element_2.MinSize));
           element_2 = result_6;
           return element_2;
         });
-        const flat_7: any[] = [].concat(...projection_3);
+        let flat_7: any[] = [].concat(...projection_3);
         return flat_7.includes(false);
-      };
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.RETRY, reason };
       }
@@ -64,7 +70,7 @@ const checkState = async (
 export const waitForGroupInService = async (
   params: WaiterConfiguration<AutoScalingClient>,
   input: DescribeAutoScalingGroupsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAutoScalingGroupsCommandOutput | AutoScalingServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -76,8 +82,8 @@ export const waitForGroupInService = async (
 export const waitUntilGroupInService = async (
   params: WaiterConfiguration<AutoScalingClient>,
   input: DescribeAutoScalingGroupsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAutoScalingGroupsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeAutoScalingGroupsCommandOutput>;
 };

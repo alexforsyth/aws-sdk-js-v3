@@ -1,35 +1,35 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutBucketRequestPaymentRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlPutBucketRequestPaymentCommand,
-  serializeAws_restXmlPutBucketRequestPaymentCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw3, command } from "../commandBuilder";
+import type { PutBucketRequestPaymentRequest } from "../models/models_0";
+import { PutBucketRequestPayment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutBucketRequestPaymentCommand}.
+ */
 export interface PutBucketRequestPaymentCommandInput extends PutBucketRequestPaymentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutBucketRequestPaymentCommand}.
+ */
 export interface PutBucketRequestPaymentCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Sets the request payment configuration for a bucket. By default, the bucket owner pays
- *          for downloads from the bucket. This configuration parameter enables the bucket owner (only)
- *          to specify that the person requesting the download will be charged for the download. For
- *          more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html">Requester Pays
- *             Buckets</a>.</p>
- *
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads
+ *       from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person
+ *       requesting the download will be charged for the download. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html">Requester Pays
+ *         Buckets</a>.</p>
  *          <p>The following operations are related to <code>PutBucketRequestPayment</code>:</p>
  *          <ul>
  *             <li>
@@ -43,75 +43,75 @@ export interface PutBucketRequestPaymentCommandOutput extends __MetadataBearer {
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, PutBucketRequestPaymentCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, PutBucketRequestPaymentCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // PutBucketRequestPaymentRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ContentMD5: "STRING_VALUE",
+ *   ChecksumAlgorithm: "CRC32" || "CRC32C" || "SHA1" || "SHA256" || "CRC64NVME" || "SHA512" || "MD5" || "XXHASH64" || "XXHASH3" || "XXHASH128",
+ *   RequestPaymentConfiguration: { // RequestPaymentConfiguration
+ *     Payer: "Requester" || "BucketOwner", // required
+ *   },
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new PutBucketRequestPaymentCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutBucketRequestPaymentCommandInput - {@link PutBucketRequestPaymentCommandInput}
+ * @returns {@link PutBucketRequestPaymentCommandOutput}
  * @see {@link PutBucketRequestPaymentCommandInput} for command's `input` shape.
  * @see {@link PutBucketRequestPaymentCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @example Set request payment configuration on a bucket.
+ * ```javascript
+ * // The following example sets request payment configuration on a bucket so that person requesting the download is charged.
+ * const input = {
+ *   Bucket: "examplebucket",
+ *   RequestPaymentConfiguration: {
+ *     Payer: "Requester"
+ *   }
+ * };
+ * const command = new PutBucketRequestPaymentCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class PutBucketRequestPaymentCommand extends $Command<
-  PutBucketRequestPaymentCommandInput,
-  PutBucketRequestPaymentCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutBucketRequestPaymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutBucketRequestPaymentCommandInput, PutBucketRequestPaymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "PutBucketRequestPaymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutBucketRequestPaymentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutBucketRequestPaymentCommand extends command<PutBucketRequestPaymentCommandInput, PutBucketRequestPaymentCommandOutput>(
+  _ep3,
+  _mw3,
+  "PutBucketRequestPayment",
+  PutBucketRequestPayment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutBucketRequestPaymentRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutBucketRequestPaymentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlPutBucketRequestPaymentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutBucketRequestPaymentCommandOutput> {
-    return deserializeAws_restXmlPutBucketRequestPaymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutBucketRequestPaymentCommandInput;
+      output: PutBucketRequestPaymentCommandOutput;
+    };
+  };
 }

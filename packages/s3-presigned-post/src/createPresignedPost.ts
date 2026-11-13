@@ -1,8 +1,11 @@
-import { S3Client } from "@aws-sdk/client-s3";
-import { createScope, getSigningKey } from "@aws-sdk/signature-v4";
-import { HashConstructor, SourceData } from "@aws-sdk/types";
-import { formatUrl } from "@aws-sdk/util-format-url";
-import { toHex } from "@aws-sdk/util-hex-encoding";
+import type { S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { formatUrl } from "@aws-sdk/core/util";
+import type { EndpointParameterInstructionsSupplier } from "@smithy/core/endpoints";
+import { getEndpointFromInstructions, toEndpointV1 } from "@smithy/core/endpoints";
+import { toHex, toUint8Array } from "@smithy/core/serde";
+import { createScope, getSigningKey } from "@smithy/signature-v4";
+import type { ChecksumConstructor, HashConstructor, SourceData } from "@smithy/types";
 
 import {
   ALGORITHM_IDENTIFIER,
@@ -12,9 +15,9 @@ import {
   SIGNATURE_QUERY_PARAM,
   TOKEN_QUERY_PARAM,
 } from "./constants";
-import { Conditions as PolicyEntry } from "./types";
+import type { Conditions as PolicyEntry } from "./types";
 
-type Fields = { [key: string]: string };
+type Fields = Record<string, string>;
 
 export interface PresignedPostOptions {
   Bucket: string;
@@ -41,7 +44,7 @@ export const createPresignedPost = async (
 
   // signingDate in format like '20201028T070711Z'.
   const signingDate = iso8601(now).replace(/[\-:]/g, "");
-  const shortDate = signingDate.substr(0, 8);
+  const shortDate = signingDate.slice(0, 8);
   const clientRegion = await client.config.region();
 
   // Prepare credentials.
@@ -60,13 +63,26 @@ export const createPresignedPost = async (
 
   // Prepare policies.
   const expiration = new Date(now.valueOf() + Expires * 1000);
-  const conditions: PolicyEntry[] = [
-    ...Conditions,
-    ...Object.entries(fields).map(([k, v]) => ({ [k]: v })),
-    Key.endsWith("${filename}")
-      ? ["starts-with", "$key", Key.substring(0, Key.lastIndexOf("${filename}"))]
-      : { key: Key },
-  ];
+
+  const conditionsSet = new Set<string>();
+
+  for (const condition of Conditions) {
+    const stringifiedCondition = JSON.stringify(condition);
+    conditionsSet.add(stringifiedCondition);
+  }
+
+  for (const [k, v] of Object.entries(fields)) {
+    conditionsSet.add(JSON.stringify({ [k]: v }));
+  }
+
+  if (Key.endsWith("${filename}")) {
+    conditionsSet.add(JSON.stringify(["starts-with", "$key", Key.substring(0, Key.lastIndexOf("${filename}"))]));
+  } else {
+    conditionsSet.add(JSON.stringify({ key: Key }));
+  }
+
+  const conditions = Array.from(conditionsSet).map((item) => JSON.parse(item));
+
   const encodedPolicy = base64Encoder(
     utf8Decoder(
       JSON.stringify({
@@ -80,10 +96,18 @@ export const createPresignedPost = async (
   const signingKey = await getSigningKey(sha256, clientCredentials, shortDate, clientRegion, "s3");
   const signature = await hmac(sha256, signingKey, encodedPolicy);
 
-  const endpoint = await client.config.endpoint();
-  if (!client.config.bucketEndpoint) {
-    endpoint.path = `/${Bucket}`;
-  }
+  const endpoint = toEndpointV1(
+    await getEndpointFromInstructions(
+      { Bucket, Key },
+      PutObjectCommand as EndpointParameterInstructionsSupplier,
+      {
+        ...client.config,
+      },
+      {
+        logger: client.config.logger,
+      }
+    )
+  );
 
   return {
     url: formatUrl(endpoint),
@@ -98,8 +122,12 @@ export const createPresignedPost = async (
 
 const iso8601 = (date: Date) => date.toISOString().replace(/\.\d{3}Z$/, "Z");
 
-const hmac = (ctor: HashConstructor, secret: SourceData, data: SourceData): Promise<Uint8Array> => {
+const hmac = (
+  ctor: ChecksumConstructor | HashConstructor,
+  secret: SourceData,
+  data: SourceData
+): Promise<Uint8Array> => {
   const hash = new ctor(secret);
-  hash.update(data);
+  hash.update(toUint8Array(data));
   return hash.digest();
 };

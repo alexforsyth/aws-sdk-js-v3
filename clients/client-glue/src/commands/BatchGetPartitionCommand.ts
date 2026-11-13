@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { BatchGetPartitionRequest, BatchGetPartitionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetPartitionCommand,
-  serializeAws_json1_1BatchGetPartitionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetPartitionRequest, BatchGetPartitionResponse } from "../models/models_0";
+import { BatchGetPartition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetPartitionCommand}.
+ */
 export interface BatchGetPartitionCommandInput extends BatchGetPartitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetPartitionCommand}.
+ */
 export interface BatchGetPartitionCommandOutput extends BatchGetPartitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,174 @@ export interface BatchGetPartitionCommandOutput extends BatchGetPartitionRespons
  * ```javascript
  * import { GlueClient, BatchGetPartitionCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchGetPartitionCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchGetPartitionRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TableName: "STRING_VALUE", // required
+ *   PartitionsToGet: [ // BatchGetPartitionValueList // required
+ *     { // PartitionValueList
+ *       Values: [ // ValueStringList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   AuditContext: { // AuditContext
+ *     AdditionalAuditContext: "STRING_VALUE",
+ *     RequestedColumns: [ // AuditColumnNamesList
+ *       "STRING_VALUE",
+ *     ],
+ *     AllColumnsRequested: true || false,
+ *   },
+ *   QuerySessionContext: { // QuerySessionContext
+ *     QueryId: "STRING_VALUE",
+ *     QueryStartTime: new Date("TIMESTAMP"),
+ *     ClusterId: "STRING_VALUE",
+ *     QueryAuthorizationId: "STRING_VALUE",
+ *     AdditionalContext: { // AdditionalContextMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new BatchGetPartitionCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetPartitionResponse
+ * //   Partitions: [ // PartitionList
+ * //     { // Partition
+ * //       Values: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       DatabaseName: "STRING_VALUE",
+ * //       TableName: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastAccessTime: new Date("TIMESTAMP"),
+ * //       StorageDescriptor: { // StorageDescriptor
+ * //         Columns: [ // ColumnList
+ * //           { // Column
+ * //             Name: "STRING_VALUE", // required
+ * //             Type: "STRING_VALUE",
+ * //             Comment: "STRING_VALUE",
+ * //             Parameters: { // ParametersMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         Location: "STRING_VALUE",
+ * //         AdditionalLocations: [ // LocationStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         InputFormat: "STRING_VALUE",
+ * //         OutputFormat: "STRING_VALUE",
+ * //         Compressed: true || false,
+ * //         NumberOfBuckets: Number("int"),
+ * //         SerdeInfo: { // SerDeInfo
+ * //           Name: "STRING_VALUE",
+ * //           SerializationLibrary: "STRING_VALUE",
+ * //           Parameters: {
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         BucketColumns: [ // NameStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SortColumns: [ // OrderList
+ * //           { // Order
+ * //             Column: "STRING_VALUE", // required
+ * //             SortOrder: Number("int"), // required
+ * //           },
+ * //         ],
+ * //         Parameters: "<ParametersMap>",
+ * //         SkewedInfo: { // SkewedInfo
+ * //           SkewedColumnNames: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           SkewedColumnValues: [ // ColumnValueStringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           SkewedColumnValueLocationMaps: { // LocationMap
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         StoredAsSubDirectories: true || false,
+ * //         SchemaReference: { // SchemaReference
+ * //           SchemaId: { // SchemaId
+ * //             SchemaArn: "STRING_VALUE",
+ * //             SchemaName: "STRING_VALUE",
+ * //             RegistryName: "STRING_VALUE",
+ * //           },
+ * //           SchemaVersionId: "STRING_VALUE",
+ * //           SchemaVersionNumber: Number("long"),
+ * //         },
+ * //       },
+ * //       Parameters: "<ParametersMap>",
+ * //       LastAnalyzedTime: new Date("TIMESTAMP"),
+ * //       CatalogId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   UnprocessedKeys: [ // BatchGetPartitionValueList
+ * //     { // PartitionValueList
+ * //       Values: [ // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetPartitionCommandInput - {@link BatchGetPartitionCommandInput}
+ * @returns {@link BatchGetPartitionCommandOutput}
  * @see {@link BatchGetPartitionCommandInput} for command's `input` shape.
  * @see {@link BatchGetPartitionCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link FederationSourceException} (client fault)
+ *  <p>A federation source failed.</p>
+ *
+ * @throws {@link FederationSourceRetryableException} (client fault)
+ *  <p>A federation source failed, but the operation may be retried.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>An error that indicates your data is in an invalid state.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetPartitionCommand extends $Command<
-  BatchGetPartitionCommandInput,
-  BatchGetPartitionCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetPartitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetPartitionCommandInput, BatchGetPartitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchGetPartitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetPartitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetPartitionResponse.filterSensitiveLog,
+export class BatchGetPartitionCommand extends command<BatchGetPartitionCommandInput, BatchGetPartitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetPartition",
+  BatchGetPartition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetPartitionRequest;
+      output: BatchGetPartitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetPartitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetPartitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetPartitionCommandOutput> {
-    return deserializeAws_json1_1BatchGetPartitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetPartitionCommandInput;
+      output: BatchGetPartitionCommandOutput;
+    };
+  };
 }

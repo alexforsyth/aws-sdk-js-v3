@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAlgorithmsInput, ListAlgorithmsOutput } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListAlgorithmsCommand,
-  serializeAws_json1_1ListAlgorithmsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAlgorithmsInput, ListAlgorithmsOutput } from "../models/models_3";
+import { ListAlgorithms$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAlgorithmsCommand}.
+ */
 export interface ListAlgorithmsCommandInput extends ListAlgorithmsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListAlgorithmsCommand}.
+ */
 export interface ListAlgorithmsCommandOutput extends ListAlgorithmsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface ListAlgorithmsCommandOutput extends ListAlgorithmsOutput, __Met
  * ```javascript
  * import { SageMakerClient, ListAlgorithmsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListAlgorithmsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListAlgorithmsInput
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ * };
  * const command = new ListAlgorithmsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAlgorithmsOutput
+ * //   AlgorithmSummaryList: [ // AlgorithmSummaryList // required
+ * //     { // AlgorithmSummary
+ * //       AlgorithmName: "STRING_VALUE", // required
+ * //       AlgorithmArn: "STRING_VALUE", // required
+ * //       AlgorithmDescription: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       AlgorithmStatus: "Pending" || "InProgress" || "Completed" || "Failed" || "Deleting", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAlgorithmsCommandInput - {@link ListAlgorithmsCommandInput}
+ * @returns {@link ListAlgorithmsCommandOutput}
  * @see {@link ListAlgorithmsCommandInput} for command's `input` shape.
  * @see {@link ListAlgorithmsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListAlgorithmsCommand extends $Command<
-  ListAlgorithmsCommandInput,
-  ListAlgorithmsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAlgorithmsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAlgorithmsCommandInput, ListAlgorithmsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListAlgorithmsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAlgorithmsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAlgorithmsOutput.filterSensitiveLog,
+export class ListAlgorithmsCommand extends command<ListAlgorithmsCommandInput, ListAlgorithmsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAlgorithms",
+  ListAlgorithms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAlgorithmsInput;
+      output: ListAlgorithmsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAlgorithmsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAlgorithmsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAlgorithmsCommandOutput> {
-    return deserializeAws_json1_1ListAlgorithmsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAlgorithmsCommandInput;
+      output: ListAlgorithmsCommandOutput;
+    };
+  };
 }

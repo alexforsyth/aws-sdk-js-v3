@@ -1,0 +1,111 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ScalarTrustAnchorRequest, TrustAnchorDetailResponse } from "../models/models_0";
+import { DeleteTrustAnchor$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTrustAnchorCommand}.
+ */
+export interface DeleteTrustAnchorCommandInput extends ScalarTrustAnchorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTrustAnchorCommand}.
+ */
+export interface DeleteTrustAnchorCommandOutput extends TrustAnchorDetailResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteTrustAnchor</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RolesAnywhereClient, DeleteTrustAnchorCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
+ * // const { RolesAnywhereClient, DeleteTrustAnchorCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
+ * const client = new RolesAnywhereClient(config);
+ * const input = { // ScalarTrustAnchorRequest
+ *   trustAnchorId: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteTrustAnchorCommand(input);
+ * const response = await client.send(command);
+ * // { // TrustAnchorDetailResponse
+ * //   trustAnchor: { // TrustAnchorDetail
+ * //     trustAnchorId: "STRING_VALUE",
+ * //     trustAnchorArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     source: { // Source
+ * //       sourceType: "STRING_VALUE",
+ * //       sourceData: { // SourceData Union: only one key present
+ * //         x509CertificateData: "STRING_VALUE",
+ * //         acmPcaArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     enabled: true || false,
+ * //     crlDpRevocationEnabled: true || false,
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     notificationSettings: [ // NotificationSettingDetails
+ * //       { // NotificationSettingDetail
+ * //         enabled: true || false, // required
+ * //         event: "STRING_VALUE", // required
+ * //         threshold: Number("int"),
+ * //         channel: "STRING_VALUE",
+ * //         configuredBy: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteTrustAnchorCommandInput - {@link DeleteTrustAnchorCommandInput}
+ * @returns {@link DeleteTrustAnchorCommandOutput}
+ * @see {@link DeleteTrustAnchorCommandInput} for command's `input` shape.
+ * @see {@link DeleteTrustAnchorCommandOutput} for command's `response` shape.
+ * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteTrustAnchorCommand extends command<DeleteTrustAnchorCommandInput, DeleteTrustAnchorCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTrustAnchor",
+  DeleteTrustAnchor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ScalarTrustAnchorRequest;
+      output: TrustAnchorDetailResponse;
+    };
+    sdk: {
+      input: DeleteTrustAnchorCommandInput;
+      output: DeleteTrustAnchorCommandOutput;
+    };
+  };
+}

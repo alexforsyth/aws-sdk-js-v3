@@ -1,117 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CancelServiceInstanceDeploymentInput, CancelServiceInstanceDeploymentOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0CancelServiceInstanceDeploymentCommand,
-  serializeAws_json1_0CancelServiceInstanceDeploymentCommand,
-} from "../protocols/Aws_json1_0";
-import { ProtonClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ProtonClient";
-
-export interface CancelServiceInstanceDeploymentCommandInput extends CancelServiceInstanceDeploymentInput {}
-export interface CancelServiceInstanceDeploymentCommandOutput
-  extends CancelServiceInstanceDeploymentOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelServiceInstanceDeploymentInput, CancelServiceInstanceDeploymentOutput } from "../models/models_0";
+import { CancelServiceInstanceDeployment$ } from "../schemas/schemas_0";
 
 /**
- * <p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is
- *                 <code>IN_PROGRESS</code>. For more information, see <i>Update a service instance</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html">AWS Proton Administrator guide</a> or the <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html">AWS Proton User guide</a>.</p>
- *         <p>The following list includes potential cancellation scenarios.</p>
- *         <ul>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelServiceInstanceDeploymentCommand}.
+ */
+export interface CancelServiceInstanceDeploymentCommandInput extends CancelServiceInstanceDeploymentInput {}
+/**
+ * @public
+ *
+ * The output of {@link CancelServiceInstanceDeploymentCommand}.
+ */
+export interface CancelServiceInstanceDeploymentCommandOutput extends CancelServiceInstanceDeploymentOutput, __MetadataBearer {}
+
+/**
+ * <p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is <code>IN_PROGRESS</code>. For
+ *       more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html">Update a service instance</a>
+ *       in the <i>Proton User guide</i>.</p>
+ *          <p>The following list includes potential cancellation scenarios.</p>
+ *          <ul>
  *             <li>
- *                 <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>
+ *                <p>If the cancellation attempt succeeds, the resulting deployment state is
+ *             <code>CANCELLED</code>.</p>
  *             </li>
  *             <li>
- *                 <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>
+ *                <p>If the cancellation attempt fails, the resulting deployment state is
+ *             <code>FAILED</code>.</p>
  *             </li>
  *             <li>
- *                 <p>If the current <a>UpdateServiceInstance</a> action succeeds before the cancellation attempt starts, the resulting
- *                     deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>
+ *                <p>If the current <a>UpdateServiceInstance</a> action succeeds before the
+ *           cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and
+ *           the cancellation attempt has no effect.</p>
  *             </li>
  *          </ul>
+ *
+ * @deprecated (since 10/07/2025) AWS Proton is not accepting new customers.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ProtonClient, CancelServiceInstanceDeploymentCommand } from "@aws-sdk/client-proton"; // ES Modules import
  * // const { ProtonClient, CancelServiceInstanceDeploymentCommand } = require("@aws-sdk/client-proton"); // CommonJS import
+ * // import type { ProtonClientConfig } from "@aws-sdk/client-proton";
+ * const config = {}; // type is ProtonClientConfig
  * const client = new ProtonClient(config);
+ * const input = { // CancelServiceInstanceDeploymentInput
+ *   serviceInstanceName: "STRING_VALUE", // required
+ *   serviceName: "STRING_VALUE", // required
+ * };
  * const command = new CancelServiceInstanceDeploymentCommand(input);
  * const response = await client.send(command);
+ * // { // CancelServiceInstanceDeploymentOutput
+ * //   serviceInstance: { // ServiceInstance
+ * //     name: "STRING_VALUE", // required
+ * //     arn: "STRING_VALUE", // required
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     lastDeploymentAttemptedAt: new Date("TIMESTAMP"), // required
+ * //     lastDeploymentSucceededAt: new Date("TIMESTAMP"), // required
+ * //     serviceName: "STRING_VALUE", // required
+ * //     environmentName: "STRING_VALUE", // required
+ * //     templateName: "STRING_VALUE", // required
+ * //     templateMajorVersion: "STRING_VALUE", // required
+ * //     templateMinorVersion: "STRING_VALUE", // required
+ * //     deploymentStatus: "STRING_VALUE", // required
+ * //     deploymentStatusMessage: "STRING_VALUE",
+ * //     spec: "STRING_VALUE",
+ * //     lastClientRequestToken: "STRING_VALUE",
+ * //     lastAttemptedDeploymentId: "STRING_VALUE",
+ * //     lastSucceededDeploymentId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CancelServiceInstanceDeploymentCommandInput - {@link CancelServiceInstanceDeploymentCommandInput}
+ * @returns {@link CancelServiceInstanceDeploymentCommandOutput}
  * @see {@link CancelServiceInstanceDeploymentCommandInput} for command's `input` shape.
  * @see {@link CancelServiceInstanceDeploymentCommandOutput} for command's `response` shape.
- * @see {@link ProtonClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ProtonClientResolvedConfig | config} for ProtonClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>There <i>isn't</i> sufficient access for performing this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request <i>couldn't</i> be made due to a conflicting operation or resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed to register with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource <i>wasn't</i> found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ProtonServiceException}
+ * <p>Base exception class for all service exceptions from Proton service.</p>
+ *
+ *
+ * @public
  */
-export class CancelServiceInstanceDeploymentCommand extends $Command<
-  CancelServiceInstanceDeploymentCommandInput,
-  CancelServiceInstanceDeploymentCommandOutput,
-  ProtonClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelServiceInstanceDeploymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ProtonClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelServiceInstanceDeploymentCommandInput, CancelServiceInstanceDeploymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ProtonClient";
-    const commandName = "CancelServiceInstanceDeploymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelServiceInstanceDeploymentInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelServiceInstanceDeploymentOutput.filterSensitiveLog,
+export class CancelServiceInstanceDeploymentCommand extends command<CancelServiceInstanceDeploymentCommandInput, CancelServiceInstanceDeploymentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelServiceInstanceDeployment",
+  CancelServiceInstanceDeployment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelServiceInstanceDeploymentInput;
+      output: CancelServiceInstanceDeploymentOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CancelServiceInstanceDeploymentCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0CancelServiceInstanceDeploymentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CancelServiceInstanceDeploymentCommandOutput> {
-    return deserializeAws_json1_0CancelServiceInstanceDeploymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelServiceInstanceDeploymentCommandInput;
+      output: CancelServiceInstanceDeploymentCommandOutput;
+    };
+  };
 }

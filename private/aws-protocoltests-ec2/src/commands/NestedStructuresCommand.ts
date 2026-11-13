@@ -1,24 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
-import { NestedStructuresInput } from "../models/models_0";
-import {
-  deserializeAws_ec2NestedStructuresCommand,
-  serializeAws_ec2NestedStructuresCommand,
-} from "../protocols/Aws_ec2";
+import type { EC2ProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2ProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { NestedStructuresInput } from "../models/models_0";
+import { de_NestedStructuresCommand, se_NestedStructuresCommand } from "../protocols/Aws_ec2";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link NestedStructuresCommand}.
+ */
 export interface NestedStructuresCommandInput extends NestedStructuresInput {}
+/**
+ * @public
+ *
+ * The output of {@link NestedStructuresCommand}.
+ */
 export interface NestedStructuresCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +33,68 @@ export interface NestedStructuresCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2ProtocolClient, NestedStructuresCommand } from "@aws-sdk/aws-protocoltests-ec2"; // ES Modules import
  * // const { EC2ProtocolClient, NestedStructuresCommand } = require("@aws-sdk/aws-protocoltests-ec2"); // CommonJS import
+ * // import type { EC2ProtocolClientConfig } from "@aws-sdk/aws-protocoltests-ec2";
+ * const config = {}; // type is EC2ProtocolClientConfig
  * const client = new EC2ProtocolClient(config);
+ * const input = { // NestedStructuresInput
+ *   Nested: { // StructArg
+ *     StringArg: "STRING_VALUE",
+ *     OtherArg: true || false,
+ *     RecursiveArg: {
+ *       StringArg: "STRING_VALUE",
+ *       OtherArg: true || false,
+ *       RecursiveArg: "<StructArg>",
+ *     },
+ *   },
+ * };
  * const command = new NestedStructuresCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param NestedStructuresCommandInput - {@link NestedStructuresCommandInput}
+ * @returns {@link NestedStructuresCommandOutput}
  * @see {@link NestedStructuresCommandInput} for command's `input` shape.
  * @see {@link NestedStructuresCommandOutput} for command's `response` shape.
- * @see {@link EC2ProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ProtocolClientResolvedConfig | config} for EC2ProtocolClient's `config` shape.
  *
+ * @throws {@link EC2ProtocolServiceException}
+ * <p>Base exception class for all service exceptions from EC2Protocol service.</p>
+ *
+ *
+ * @public
  */
-export class NestedStructuresCommand extends $Command<
-  NestedStructuresCommandInput,
-  NestedStructuresCommandOutput,
-  EC2ProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: NestedStructuresCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<NestedStructuresCommandInput, NestedStructuresCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2ProtocolClient";
-    const commandName = "NestedStructuresCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: NestedStructuresInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class NestedStructuresCommand extends $Command
+  .classBuilder<
+    NestedStructuresCommandInput,
+    NestedStructuresCommandOutput,
+    EC2ProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: EC2ProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsEc2", "NestedStructures", {})
+  .n("EC2ProtocolClient", "NestedStructuresCommand")
+  .f(void 0, void 0)
+  .ser(se_NestedStructuresCommand)
+  .de(de_NestedStructuresCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: NestedStructuresInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: NestedStructuresCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2NestedStructuresCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<NestedStructuresCommandOutput> {
-    return deserializeAws_ec2NestedStructuresCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: NestedStructuresCommandInput;
+      output: NestedStructuresCommandOutput;
+    };
+  };
 }

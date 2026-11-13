@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListProvisioningArtifactsForServiceActionInput,
   ListProvisioningArtifactsForServiceActionOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListProvisioningArtifactsForServiceActionCommand,
-  serializeAws_json1_1ListProvisioningArtifactsForServiceActionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { ListProvisioningArtifactsForServiceAction$ } from "../schemas/schemas_0";
 
-export interface ListProvisioningArtifactsForServiceActionCommandInput
-  extends ListProvisioningArtifactsForServiceActionInput {}
-export interface ListProvisioningArtifactsForServiceActionCommandOutput
-  extends ListProvisioningArtifactsForServiceActionOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProvisioningArtifactsForServiceActionCommand}.
+ */
+export interface ListProvisioningArtifactsForServiceActionCommandInput extends ListProvisioningArtifactsForServiceActionInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListProvisioningArtifactsForServiceActionCommand}.
+ */
+export interface ListProvisioningArtifactsForServiceActionCommandOutput extends ListProvisioningArtifactsForServiceActionOutput, __MetadataBearer {}
 
 /**
  * <p>Lists all provisioning artifacts (also known as versions) for the specified self-service action.</p>
@@ -34,77 +32,80 @@ export interface ListProvisioningArtifactsForServiceActionCommandOutput
  * ```javascript
  * import { ServiceCatalogClient, ListProvisioningArtifactsForServiceActionCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, ListProvisioningArtifactsForServiceActionCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // ListProvisioningArtifactsForServiceActionInput
+ *   ServiceActionId: "STRING_VALUE", // required
+ *   PageSize: Number("int"),
+ *   PageToken: "STRING_VALUE",
+ *   AcceptLanguage: "STRING_VALUE",
+ * };
  * const command = new ListProvisioningArtifactsForServiceActionCommand(input);
  * const response = await client.send(command);
+ * // { // ListProvisioningArtifactsForServiceActionOutput
+ * //   ProvisioningArtifactViews: [ // ProvisioningArtifactViews
+ * //     { // ProvisioningArtifactView
+ * //       ProductViewSummary: { // ProductViewSummary
+ * //         Id: "STRING_VALUE",
+ * //         ProductId: "STRING_VALUE",
+ * //         Name: "STRING_VALUE",
+ * //         Owner: "STRING_VALUE",
+ * //         ShortDescription: "STRING_VALUE",
+ * //         Type: "CLOUD_FORMATION_TEMPLATE" || "MARKETPLACE" || "TERRAFORM_OPEN_SOURCE" || "TERRAFORM_CLOUD" || "EXTERNAL",
+ * //         Distributor: "STRING_VALUE",
+ * //         HasDefaultPath: true || false,
+ * //         SupportEmail: "STRING_VALUE",
+ * //         SupportDescription: "STRING_VALUE",
+ * //         SupportUrl: "STRING_VALUE",
+ * //       },
+ * //       ProvisioningArtifact: { // ProvisioningArtifact
+ * //         Id: "STRING_VALUE",
+ * //         Name: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         CreatedTime: new Date("TIMESTAMP"),
+ * //         Guidance: "DEFAULT" || "DEPRECATED",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProvisioningArtifactsForServiceActionCommandInput - {@link ListProvisioningArtifactsForServiceActionCommandInput}
+ * @returns {@link ListProvisioningArtifactsForServiceActionCommandOutput}
  * @see {@link ListProvisioningArtifactsForServiceActionCommandInput} for command's `input` shape.
  * @see {@link ListProvisioningArtifactsForServiceActionCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class ListProvisioningArtifactsForServiceActionCommand extends $Command<
-  ListProvisioningArtifactsForServiceActionCommandInput,
-  ListProvisioningArtifactsForServiceActionCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProvisioningArtifactsForServiceActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListProvisioningArtifactsForServiceActionCommandInput,
-    ListProvisioningArtifactsForServiceActionCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "ListProvisioningArtifactsForServiceActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProvisioningArtifactsForServiceActionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProvisioningArtifactsForServiceActionOutput.filterSensitiveLog,
+export class ListProvisioningArtifactsForServiceActionCommand extends command<ListProvisioningArtifactsForServiceActionCommandInput, ListProvisioningArtifactsForServiceActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProvisioningArtifactsForServiceAction",
+  ListProvisioningArtifactsForServiceAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProvisioningArtifactsForServiceActionInput;
+      output: ListProvisioningArtifactsForServiceActionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListProvisioningArtifactsForServiceActionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListProvisioningArtifactsForServiceActionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListProvisioningArtifactsForServiceActionCommandOutput> {
-    return deserializeAws_json1_1ListProvisioningArtifactsForServiceActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProvisioningArtifactsForServiceActionCommandInput;
+      output: ListProvisioningArtifactsForServiceActionCommandOutput;
+    };
+  };
 }

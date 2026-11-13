@@ -1,61 +1,91 @@
+// smithy-typescript generated code
 // @ts-ignore: package.json will be imported from dist folders
 import packageInfo from "../package.json"; // eslint-disable-line
 
-import { decorateDefaultCredentialProvider } from "@aws-sdk/client-sts";
 import {
+  NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS,
+  NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS,
+} from "@aws-sdk/checksums/flexible-checksums";
+import {
+  createDefaultUserAgentProvider,
+  emitWarningIfUnsupportedVersion as awsCheckVersion,
+  NODE_APP_ID_CONFIG_OPTIONS,
+} from "@aws-sdk/core/client";
+import { NODE_AUTH_SCHEME_PREFERENCE_OPTIONS, NODE_SIGV4A_CONFIG_OPTIONS } from "@aws-sdk/core/httpAuthSchemes";
+import { defaultProvider as credentialDefaultProvider } from "@aws-sdk/credential-provider-node";
+import {
+  NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_OPTIONS,
+  NODE_USE_ARN_REGION_CONFIG_OPTIONS,
+} from "@aws-sdk/middleware-sdk-s3/s3";
+import { readableStreamHasher as streamHasher } from "@smithy/core/checksum";
+import { emitWarningIfUnsupportedVersion, loadConfigsForDefaultMode } from "@smithy/core/client";
+import {
+  loadConfig as loadNodeConfig,
   NODE_REGION_CONFIG_FILE_OPTIONS,
   NODE_REGION_CONFIG_OPTIONS,
   NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS,
   NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS,
-} from "@aws-sdk/config-resolver";
-import { defaultProvider as credentialDefaultProvider } from "@aws-sdk/credential-provider-node";
-import { eventStreamSerdeProvider } from "@aws-sdk/eventstream-serde-node";
-import { Hash } from "@aws-sdk/hash-node";
-import { fileStreamHasher as streamHasher } from "@aws-sdk/hash-stream-node";
-import { NODE_USE_ARN_REGION_CONFIG_OPTIONS } from "@aws-sdk/middleware-bucket-endpoint";
-import { NODE_MAX_ATTEMPT_CONFIG_OPTIONS, NODE_RETRY_MODE_CONFIG_OPTIONS } from "@aws-sdk/middleware-retry";
-import { loadConfig as loadNodeConfig } from "@aws-sdk/node-config-provider";
-import { NodeHttpHandler, streamCollector } from "@aws-sdk/node-http-handler";
-import { HashConstructor as __HashConstructor } from "@aws-sdk/types";
-import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
-import { calculateBodyLength } from "@aws-sdk/util-body-length-node";
-import { defaultUserAgent } from "@aws-sdk/util-user-agent-node";
-import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-node";
-import { S3ClientConfig } from "./S3Client";
+  resolveDefaultsModeConfig,
+} from "@smithy/core/config";
+import { eventStreamSerdeProvider } from "@smithy/core/event-streams";
+import {
+  DEFAULT_RETRY_MODE,
+  NODE_MAX_ATTEMPT_CONFIG_OPTIONS,
+  NODE_RETRY_MODE_CONFIG_OPTIONS,
+} from "@smithy/core/retry";
+import { calculateBodyLength } from "@smithy/core/serde";
+import { NodeHttpHandler as RequestHandler, streamCollector } from "@smithy/node-http-handler";
+
 import { getRuntimeConfig as getSharedRuntimeConfig } from "./runtimeConfig.shared";
-import { emitWarningIfUnsupportedVersion } from "@aws-sdk/smithy-client";
+import type { S3ClientConfig } from "./S3Client";
 
 /**
  * @internal
  */
 export const getRuntimeConfig = (config: S3ClientConfig) => {
   emitWarningIfUnsupportedVersion(process.version);
+  const defaultsMode = resolveDefaultsModeConfig(config);
+  const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
+  awsCheckVersion(process.version);
+  const loaderConfig = {
+    profile: config?.profile,
+    logger: clientSharedValues.logger,
+  };
   return {
     ...clientSharedValues,
     ...config,
     runtime: "node",
-    base64Decoder: config?.base64Decoder ?? fromBase64,
-    base64Encoder: config?.base64Encoder ?? toBase64,
+    defaultsMode,
+    authSchemePreference: config?.authSchemePreference ?? loadNodeConfig(NODE_AUTH_SCHEME_PREFERENCE_OPTIONS, loaderConfig),
     bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
-    credentialDefaultProvider:
-      config?.credentialDefaultProvider ?? decorateDefaultCredentialProvider(credentialDefaultProvider),
-    defaultUserAgentProvider:
-      config?.defaultUserAgentProvider ??
-      defaultUserAgent({ serviceId: clientSharedValues.serviceId, clientVersion: packageInfo.version }),
+    credentialDefaultProvider: config?.credentialDefaultProvider ?? credentialDefaultProvider,
+    defaultUserAgentProvider: config?.defaultUserAgentProvider ?? createDefaultUserAgentProvider({serviceId: clientSharedValues.serviceId, clientVersion: packageInfo.version}),
+    disableS3ExpressSessionAuth: config?.disableS3ExpressSessionAuth ?? loadNodeConfig(NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_OPTIONS, loaderConfig),
     eventStreamSerdeProvider: config?.eventStreamSerdeProvider ?? eventStreamSerdeProvider,
-    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-    md5: config?.md5 ?? Hash.bind(null, "md5"),
-    region: config?.region ?? loadNodeConfig(NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS),
-    requestHandler: config?.requestHandler ?? new NodeHttpHandler(),
-    retryMode: config?.retryMode ?? loadNodeConfig(NODE_RETRY_MODE_CONFIG_OPTIONS),
-    sha256: config?.sha256 ?? Hash.bind(null, "sha256"),
+    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS, config),
+    region: config?.region ?? loadNodeConfig(
+        NODE_REGION_CONFIG_OPTIONS,
+        {...NODE_REGION_CONFIG_FILE_OPTIONS, ...loaderConfig}
+    ),
+    requestChecksumCalculation: config?.requestChecksumCalculation ?? loadNodeConfig(NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS, loaderConfig),
+    requestHandler: RequestHandler.create(config?.requestHandler ?? defaultConfigProvider),
+    responseChecksumValidation: config?.responseChecksumValidation ?? loadNodeConfig(NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS, loaderConfig),
+    retryMode:
+      config?.retryMode ??
+      loadNodeConfig(
+        {
+          ...NODE_RETRY_MODE_CONFIG_OPTIONS,
+          default: async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE,
+        },
+        config
+      ),
+    sigv4aSigningRegionSet: config?.sigv4aSigningRegionSet ?? loadNodeConfig(NODE_SIGV4A_CONFIG_OPTIONS, loaderConfig),
     streamCollector: config?.streamCollector ?? streamCollector,
     streamHasher: config?.streamHasher ?? streamHasher,
-    useArnRegion: config?.useArnRegion ?? loadNodeConfig(NODE_USE_ARN_REGION_CONFIG_OPTIONS),
-    useDualstackEndpoint: config?.useDualstackEndpoint ?? loadNodeConfig(NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-    useFipsEndpoint: config?.useFipsEndpoint ?? loadNodeConfig(NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
-    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+    useArnRegion: config?.useArnRegion ?? loadNodeConfig(NODE_USE_ARN_REGION_CONFIG_OPTIONS, loaderConfig),
+    useDualstackEndpoint: config?.useDualstackEndpoint ?? loadNodeConfig(NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS, loaderConfig),
+    useFipsEndpoint: config?.useFipsEndpoint ?? loadNodeConfig(NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS, loaderConfig),
+    userAgentAppId: config?.userAgentAppId ?? loadNodeConfig(NODE_APP_ID_CONFIG_OPTIONS, loaderConfig),
   };
 };

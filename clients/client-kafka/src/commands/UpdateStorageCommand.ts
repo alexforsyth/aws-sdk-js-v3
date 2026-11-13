@@ -1,0 +1,104 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateStorageRequest, UpdateStorageResponse } from "../models/models_0";
+import { UpdateStorage$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateStorageCommand}.
+ */
+export interface UpdateStorageCommandInput extends UpdateStorageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateStorageCommand}.
+ */
+export interface UpdateStorageCommandOutput extends UpdateStorageResponse, __MetadataBearer {}
+
+/**
+ * Updates cluster broker volume size (or) sets cluster storage mode to TIERED.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { KafkaClient, UpdateStorageCommand } from "@aws-sdk/client-kafka"; // ES Modules import
+ * // const { KafkaClient, UpdateStorageCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
+ * const client = new KafkaClient(config);
+ * const input = { // UpdateStorageRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   CurrentVersion: "STRING_VALUE", // required
+ *   ProvisionedThroughput: { // ProvisionedThroughput
+ *     Enabled: true || false,
+ *     VolumeThroughput: Number("int"),
+ *   },
+ *   StorageMode: "LOCAL" || "TIERED",
+ *   VolumeSizeGB: Number("int"),
+ * };
+ * const command = new UpdateStorageCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateStorageResponse
+ * //   ClusterArn: "STRING_VALUE",
+ * //   ClusterOperationArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateStorageCommandInput - {@link UpdateStorageCommandInput}
+ * @returns {@link UpdateStorageCommandOutput}
+ * @see {@link UpdateStorageCommandInput} for command's `input` shape.
+ * @see {@link UpdateStorageCommandOutput} for command's `response` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateStorageCommand extends command<UpdateStorageCommandInput, UpdateStorageCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateStorage",
+  UpdateStorage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateStorageRequest;
+      output: UpdateStorageResponse;
+    };
+    sdk: {
+      input: UpdateStorageCommandInput;
+      output: UpdateStorageCommandOutput;
+    };
+  };
+}

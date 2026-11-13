@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { GetApiCacheRequest, GetApiCacheResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApiCacheCommand,
-  serializeAws_restJson1GetApiCacheCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApiCacheRequest, GetApiCacheResponse } from "../models/models_0";
+import { GetApiCache$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApiCacheCommand}.
+ */
 export interface GetApiCacheCommandInput extends GetApiCacheRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApiCacheCommand}.
+ */
 export interface GetApiCacheCommandOutput extends GetApiCacheResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface GetApiCacheCommandOutput extends GetApiCacheResponse, __Metadat
  * ```javascript
  * import { AppSyncClient, GetApiCacheCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetApiCacheCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetApiCacheRequest
+ *   apiId: "STRING_VALUE", // required
+ * };
  * const command = new GetApiCacheCommand(input);
  * const response = await client.send(command);
+ * // { // GetApiCacheResponse
+ * //   apiCache: { // ApiCache
+ * //     ttl: Number("long"),
+ * //     apiCachingBehavior: "FULL_REQUEST_CACHING" || "PER_RESOLVER_CACHING" || "OPERATION_LEVEL_CACHING",
+ * //     transitEncryptionEnabled: true || false,
+ * //     atRestEncryptionEnabled: true || false,
+ * //     type: "T2_SMALL" || "T2_MEDIUM" || "R4_LARGE" || "R4_XLARGE" || "R4_2XLARGE" || "R4_4XLARGE" || "R4_8XLARGE" || "SMALL" || "MEDIUM" || "LARGE" || "XLARGE" || "LARGE_2X" || "LARGE_4X" || "LARGE_8X" || "LARGE_12X",
+ * //     status: "AVAILABLE" || "CREATING" || "DELETING" || "MODIFYING" || "FAILED",
+ * //     healthMetricsConfig: "ENABLED" || "DISABLED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetApiCacheCommandInput - {@link GetApiCacheCommandInput}
+ * @returns {@link GetApiCacheCommandOutput}
  * @see {@link GetApiCacheCommandInput} for command's `input` shape.
  * @see {@link GetApiCacheCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Another modification is in progress at this time and it must complete before you can
+ *          make your change.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetApiCacheCommand extends $Command<
-  GetApiCacheCommandInput,
-  GetApiCacheCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApiCacheCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApiCacheCommandInput, GetApiCacheCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetApiCacheCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApiCacheRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetApiCacheResponse.filterSensitiveLog,
+export class GetApiCacheCommand extends command<GetApiCacheCommandInput, GetApiCacheCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApiCache",
+  GetApiCache$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApiCacheRequest;
+      output: GetApiCacheResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApiCacheCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApiCacheCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApiCacheCommandOutput> {
-    return deserializeAws_restJson1GetApiCacheCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApiCacheCommandInput;
+      output: GetApiCacheCommandOutput;
+    };
+  };
 }

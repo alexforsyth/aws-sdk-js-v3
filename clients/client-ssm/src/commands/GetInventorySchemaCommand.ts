@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetInventorySchemaRequest, GetInventorySchemaResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetInventorySchemaCommand,
-  serializeAws_json1_1GetInventorySchemaCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInventorySchemaRequest, GetInventorySchemaResult } from "../models/models_0";
+import { GetInventorySchema$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInventorySchemaCommand}.
+ */
 export interface GetInventorySchemaCommandInput extends GetInventorySchemaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInventorySchemaCommand}.
+ */
 export interface GetInventorySchemaCommandOutput extends GetInventorySchemaResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,73 @@ export interface GetInventorySchemaCommandOutput extends GetInventorySchemaResul
  * ```javascript
  * import { SSMClient, GetInventorySchemaCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, GetInventorySchemaCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // GetInventorySchemaRequest
+ *   TypeName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Aggregator: true || false,
+ *   SubType: true || false,
+ * };
  * const command = new GetInventorySchemaCommand(input);
  * const response = await client.send(command);
+ * // { // GetInventorySchemaResult
+ * //   Schemas: [ // InventoryItemSchemaResultList
+ * //     { // InventoryItemSchema
+ * //       TypeName: "STRING_VALUE", // required
+ * //       Version: "STRING_VALUE",
+ * //       Attributes: [ // InventoryItemAttributeList // required
+ * //         { // InventoryItemAttribute
+ * //           Name: "STRING_VALUE", // required
+ * //           DataType: "string" || "number", // required
+ * //         },
+ * //       ],
+ * //       DisplayName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetInventorySchemaCommandInput - {@link GetInventorySchemaCommandInput}
+ * @returns {@link GetInventorySchemaCommandOutput}
  * @see {@link GetInventorySchemaCommandInput} for command's `input` shape.
  * @see {@link GetInventorySchemaCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link InvalidTypeNameException} (client fault)
+ *  <p>The parameter type name isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class GetInventorySchemaCommand extends $Command<
-  GetInventorySchemaCommandInput,
-  GetInventorySchemaCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInventorySchemaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInventorySchemaCommandInput, GetInventorySchemaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "GetInventorySchemaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInventorySchemaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInventorySchemaResult.filterSensitiveLog,
+export class GetInventorySchemaCommand extends command<GetInventorySchemaCommandInput, GetInventorySchemaCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInventorySchema",
+  GetInventorySchema$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInventorySchemaRequest;
+      output: GetInventorySchemaResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInventorySchemaCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetInventorySchemaCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInventorySchemaCommandOutput> {
-    return deserializeAws_json1_1GetInventorySchemaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInventorySchemaCommandInput;
+      output: GetInventorySchemaCommandOutput;
+    };
+  };
 }

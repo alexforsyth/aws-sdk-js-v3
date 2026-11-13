@@ -1,0 +1,909 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateCampaignCommandInput,
+  type CreateCampaignCommandOutput,
+  CreateCampaignCommand,
+} from "./commands/CreateCampaignCommand";
+import {
+  type DeleteCampaignChannelSubtypeConfigCommandInput,
+  type DeleteCampaignChannelSubtypeConfigCommandOutput,
+  DeleteCampaignChannelSubtypeConfigCommand,
+} from "./commands/DeleteCampaignChannelSubtypeConfigCommand";
+import {
+  type DeleteCampaignCommandInput,
+  type DeleteCampaignCommandOutput,
+  DeleteCampaignCommand,
+} from "./commands/DeleteCampaignCommand";
+import {
+  type DeleteCampaignCommunicationLimitsCommandInput,
+  type DeleteCampaignCommunicationLimitsCommandOutput,
+  DeleteCampaignCommunicationLimitsCommand,
+} from "./commands/DeleteCampaignCommunicationLimitsCommand";
+import {
+  type DeleteCampaignCommunicationTimeCommandInput,
+  type DeleteCampaignCommunicationTimeCommandOutput,
+  DeleteCampaignCommunicationTimeCommand,
+} from "./commands/DeleteCampaignCommunicationTimeCommand";
+import {
+  type DeleteCampaignEntryLimitsCommandInput,
+  type DeleteCampaignEntryLimitsCommandOutput,
+  DeleteCampaignEntryLimitsCommand,
+} from "./commands/DeleteCampaignEntryLimitsCommand";
+import {
+  type DeleteConnectInstanceConfigCommandInput,
+  type DeleteConnectInstanceConfigCommandOutput,
+  DeleteConnectInstanceConfigCommand,
+} from "./commands/DeleteConnectInstanceConfigCommand";
+import {
+  type DeleteConnectInstanceIntegrationCommandInput,
+  type DeleteConnectInstanceIntegrationCommandOutput,
+  DeleteConnectInstanceIntegrationCommand,
+} from "./commands/DeleteConnectInstanceIntegrationCommand";
+import {
+  type DeleteInstanceOnboardingJobCommandInput,
+  type DeleteInstanceOnboardingJobCommandOutput,
+  DeleteInstanceOnboardingJobCommand,
+} from "./commands/DeleteInstanceOnboardingJobCommand";
+import {
+  type DescribeCampaignCommandInput,
+  type DescribeCampaignCommandOutput,
+  DescribeCampaignCommand,
+} from "./commands/DescribeCampaignCommand";
+import {
+  type GetCampaignStateBatchCommandInput,
+  type GetCampaignStateBatchCommandOutput,
+  GetCampaignStateBatchCommand,
+} from "./commands/GetCampaignStateBatchCommand";
+import {
+  type GetCampaignStateCommandInput,
+  type GetCampaignStateCommandOutput,
+  GetCampaignStateCommand,
+} from "./commands/GetCampaignStateCommand";
+import {
+  type GetConnectInstanceConfigCommandInput,
+  type GetConnectInstanceConfigCommandOutput,
+  GetConnectInstanceConfigCommand,
+} from "./commands/GetConnectInstanceConfigCommand";
+import {
+  type GetInstanceCommunicationLimitsCommandInput,
+  type GetInstanceCommunicationLimitsCommandOutput,
+  GetInstanceCommunicationLimitsCommand,
+} from "./commands/GetInstanceCommunicationLimitsCommand";
+import {
+  type GetInstanceOnboardingJobStatusCommandInput,
+  type GetInstanceOnboardingJobStatusCommandOutput,
+  GetInstanceOnboardingJobStatusCommand,
+} from "./commands/GetInstanceOnboardingJobStatusCommand";
+import {
+  type ListCampaignsCommandInput,
+  type ListCampaignsCommandOutput,
+  ListCampaignsCommand,
+} from "./commands/ListCampaignsCommand";
+import {
+  type ListConnectInstanceIntegrationsCommandInput,
+  type ListConnectInstanceIntegrationsCommandOutput,
+  ListConnectInstanceIntegrationsCommand,
+} from "./commands/ListConnectInstanceIntegrationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PauseCampaignCommandInput,
+  type PauseCampaignCommandOutput,
+  PauseCampaignCommand,
+} from "./commands/PauseCampaignCommand";
+import {
+  type PutConnectInstanceIntegrationCommandInput,
+  type PutConnectInstanceIntegrationCommandOutput,
+  PutConnectInstanceIntegrationCommand,
+} from "./commands/PutConnectInstanceIntegrationCommand";
+import {
+  type PutInstanceCommunicationLimitsCommandInput,
+  type PutInstanceCommunicationLimitsCommandOutput,
+  PutInstanceCommunicationLimitsCommand,
+} from "./commands/PutInstanceCommunicationLimitsCommand";
+import {
+  type PutOutboundRequestBatchCommandInput,
+  type PutOutboundRequestBatchCommandOutput,
+  PutOutboundRequestBatchCommand,
+} from "./commands/PutOutboundRequestBatchCommand";
+import {
+  type PutProfileOutboundRequestBatchCommandInput,
+  type PutProfileOutboundRequestBatchCommandOutput,
+  PutProfileOutboundRequestBatchCommand,
+} from "./commands/PutProfileOutboundRequestBatchCommand";
+import {
+  type ResumeCampaignCommandInput,
+  type ResumeCampaignCommandOutput,
+  ResumeCampaignCommand,
+} from "./commands/ResumeCampaignCommand";
+import {
+  type StartCampaignCommandInput,
+  type StartCampaignCommandOutput,
+  StartCampaignCommand,
+} from "./commands/StartCampaignCommand";
+import {
+  type StartInstanceOnboardingJobCommandInput,
+  type StartInstanceOnboardingJobCommandOutput,
+  StartInstanceOnboardingJobCommand,
+} from "./commands/StartInstanceOnboardingJobCommand";
+import {
+  type StopCampaignCommandInput,
+  type StopCampaignCommandOutput,
+  StopCampaignCommand,
+} from "./commands/StopCampaignCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateCampaignChannelSubtypeConfigCommandInput,
+  type UpdateCampaignChannelSubtypeConfigCommandOutput,
+  UpdateCampaignChannelSubtypeConfigCommand,
+} from "./commands/UpdateCampaignChannelSubtypeConfigCommand";
+import {
+  type UpdateCampaignCommunicationLimitsCommandInput,
+  type UpdateCampaignCommunicationLimitsCommandOutput,
+  UpdateCampaignCommunicationLimitsCommand,
+} from "./commands/UpdateCampaignCommunicationLimitsCommand";
+import {
+  type UpdateCampaignCommunicationTimeCommandInput,
+  type UpdateCampaignCommunicationTimeCommandOutput,
+  UpdateCampaignCommunicationTimeCommand,
+} from "./commands/UpdateCampaignCommunicationTimeCommand";
+import {
+  type UpdateCampaignEntryLimitsCommandInput,
+  type UpdateCampaignEntryLimitsCommandOutput,
+  UpdateCampaignEntryLimitsCommand,
+} from "./commands/UpdateCampaignEntryLimitsCommand";
+import {
+  type UpdateCampaignFlowAssociationCommandInput,
+  type UpdateCampaignFlowAssociationCommandOutput,
+  UpdateCampaignFlowAssociationCommand,
+} from "./commands/UpdateCampaignFlowAssociationCommand";
+import {
+  type UpdateCampaignNameCommandInput,
+  type UpdateCampaignNameCommandOutput,
+  UpdateCampaignNameCommand,
+} from "./commands/UpdateCampaignNameCommand";
+import {
+  type UpdateCampaignScheduleCommandInput,
+  type UpdateCampaignScheduleCommandOutput,
+  UpdateCampaignScheduleCommand,
+} from "./commands/UpdateCampaignScheduleCommand";
+import {
+  type UpdateCampaignSourceCommandInput,
+  type UpdateCampaignSourceCommandOutput,
+  UpdateCampaignSourceCommand,
+} from "./commands/UpdateCampaignSourceCommand";
+import { ConnectCampaignsV2Client } from "./ConnectCampaignsV2Client";
+import { paginateListCampaigns } from "./pagination/ListCampaignsPaginator";
+import { paginateListConnectInstanceIntegrations } from "./pagination/ListConnectInstanceIntegrationsPaginator";
+
+const commands = {
+  CreateCampaignCommand,
+  DeleteCampaignCommand,
+  DeleteCampaignChannelSubtypeConfigCommand,
+  DeleteCampaignCommunicationLimitsCommand,
+  DeleteCampaignCommunicationTimeCommand,
+  DeleteCampaignEntryLimitsCommand,
+  DeleteConnectInstanceConfigCommand,
+  DeleteConnectInstanceIntegrationCommand,
+  DeleteInstanceOnboardingJobCommand,
+  DescribeCampaignCommand,
+  GetCampaignStateCommand,
+  GetCampaignStateBatchCommand,
+  GetConnectInstanceConfigCommand,
+  GetInstanceCommunicationLimitsCommand,
+  GetInstanceOnboardingJobStatusCommand,
+  ListCampaignsCommand,
+  ListConnectInstanceIntegrationsCommand,
+  ListTagsForResourceCommand,
+  PauseCampaignCommand,
+  PutConnectInstanceIntegrationCommand,
+  PutInstanceCommunicationLimitsCommand,
+  PutOutboundRequestBatchCommand,
+  PutProfileOutboundRequestBatchCommand,
+  ResumeCampaignCommand,
+  StartCampaignCommand,
+  StartInstanceOnboardingJobCommand,
+  StopCampaignCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCampaignChannelSubtypeConfigCommand,
+  UpdateCampaignCommunicationLimitsCommand,
+  UpdateCampaignCommunicationTimeCommand,
+  UpdateCampaignEntryLimitsCommand,
+  UpdateCampaignFlowAssociationCommand,
+  UpdateCampaignNameCommand,
+  UpdateCampaignScheduleCommand,
+  UpdateCampaignSourceCommand,
+};
+const paginators = {
+  paginateListCampaigns,
+  paginateListConnectInstanceIntegrations,
+};
+
+/**
+ * @public
+ */
+export interface ConnectCampaignsV2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ConnectCampaignsV2 {
+  /**
+   * @see {@link CreateCampaignCommand}
+   */
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<CreateCampaignCommandOutput>;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignCommand}
+   */
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteCampaignCommandOutput>;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignChannelSubtypeConfigCommand}
+   */
+  deleteCampaignChannelSubtypeConfig(
+    args: DeleteCampaignChannelSubtypeConfigCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteCampaignChannelSubtypeConfigCommandOutput>;
+  deleteCampaignChannelSubtypeConfig(
+    args: DeleteCampaignChannelSubtypeConfigCommandInput,
+    cb: (err: any, data?: DeleteCampaignChannelSubtypeConfigCommandOutput) => void
+  ): void;
+  deleteCampaignChannelSubtypeConfig(
+    args: DeleteCampaignChannelSubtypeConfigCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteCampaignChannelSubtypeConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignCommunicationLimitsCommand}
+   */
+  deleteCampaignCommunicationLimits(
+    args: DeleteCampaignCommunicationLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteCampaignCommunicationLimitsCommandOutput>;
+  deleteCampaignCommunicationLimits(
+    args: DeleteCampaignCommunicationLimitsCommandInput,
+    cb: (err: any, data?: DeleteCampaignCommunicationLimitsCommandOutput) => void
+  ): void;
+  deleteCampaignCommunicationLimits(
+    args: DeleteCampaignCommunicationLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteCampaignCommunicationLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignCommunicationTimeCommand}
+   */
+  deleteCampaignCommunicationTime(
+    args: DeleteCampaignCommunicationTimeCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteCampaignCommunicationTimeCommandOutput>;
+  deleteCampaignCommunicationTime(
+    args: DeleteCampaignCommunicationTimeCommandInput,
+    cb: (err: any, data?: DeleteCampaignCommunicationTimeCommandOutput) => void
+  ): void;
+  deleteCampaignCommunicationTime(
+    args: DeleteCampaignCommunicationTimeCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteCampaignCommunicationTimeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignEntryLimitsCommand}
+   */
+  deleteCampaignEntryLimits(
+    args: DeleteCampaignEntryLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteCampaignEntryLimitsCommandOutput>;
+  deleteCampaignEntryLimits(
+    args: DeleteCampaignEntryLimitsCommandInput,
+    cb: (err: any, data?: DeleteCampaignEntryLimitsCommandOutput) => void
+  ): void;
+  deleteCampaignEntryLimits(
+    args: DeleteCampaignEntryLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteCampaignEntryLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectInstanceConfigCommand}
+   */
+  deleteConnectInstanceConfig(
+    args: DeleteConnectInstanceConfigCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteConnectInstanceConfigCommandOutput>;
+  deleteConnectInstanceConfig(
+    args: DeleteConnectInstanceConfigCommandInput,
+    cb: (err: any, data?: DeleteConnectInstanceConfigCommandOutput) => void
+  ): void;
+  deleteConnectInstanceConfig(
+    args: DeleteConnectInstanceConfigCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteConnectInstanceConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectInstanceIntegrationCommand}
+   */
+  deleteConnectInstanceIntegration(
+    args: DeleteConnectInstanceIntegrationCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteConnectInstanceIntegrationCommandOutput>;
+  deleteConnectInstanceIntegration(
+    args: DeleteConnectInstanceIntegrationCommandInput,
+    cb: (err: any, data?: DeleteConnectInstanceIntegrationCommandOutput) => void
+  ): void;
+  deleteConnectInstanceIntegration(
+    args: DeleteConnectInstanceIntegrationCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteConnectInstanceIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceOnboardingJobCommand}
+   */
+  deleteInstanceOnboardingJob(
+    args: DeleteInstanceOnboardingJobCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DeleteInstanceOnboardingJobCommandOutput>;
+  deleteInstanceOnboardingJob(
+    args: DeleteInstanceOnboardingJobCommandInput,
+    cb: (err: any, data?: DeleteInstanceOnboardingJobCommandOutput) => void
+  ): void;
+  deleteInstanceOnboardingJob(
+    args: DeleteInstanceOnboardingJobCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DeleteInstanceOnboardingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCampaignCommand}
+   */
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<DescribeCampaignCommandOutput>;
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
+  ): void;
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCampaignStateCommand}
+   */
+  getCampaignState(
+    args: GetCampaignStateCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<GetCampaignStateCommandOutput>;
+  getCampaignState(
+    args: GetCampaignStateCommandInput,
+    cb: (err: any, data?: GetCampaignStateCommandOutput) => void
+  ): void;
+  getCampaignState(
+    args: GetCampaignStateCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: GetCampaignStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCampaignStateBatchCommand}
+   */
+  getCampaignStateBatch(
+    args: GetCampaignStateBatchCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<GetCampaignStateBatchCommandOutput>;
+  getCampaignStateBatch(
+    args: GetCampaignStateBatchCommandInput,
+    cb: (err: any, data?: GetCampaignStateBatchCommandOutput) => void
+  ): void;
+  getCampaignStateBatch(
+    args: GetCampaignStateBatchCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: GetCampaignStateBatchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectInstanceConfigCommand}
+   */
+  getConnectInstanceConfig(
+    args: GetConnectInstanceConfigCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<GetConnectInstanceConfigCommandOutput>;
+  getConnectInstanceConfig(
+    args: GetConnectInstanceConfigCommandInput,
+    cb: (err: any, data?: GetConnectInstanceConfigCommandOutput) => void
+  ): void;
+  getConnectInstanceConfig(
+    args: GetConnectInstanceConfigCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: GetConnectInstanceConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceCommunicationLimitsCommand}
+   */
+  getInstanceCommunicationLimits(
+    args: GetInstanceCommunicationLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<GetInstanceCommunicationLimitsCommandOutput>;
+  getInstanceCommunicationLimits(
+    args: GetInstanceCommunicationLimitsCommandInput,
+    cb: (err: any, data?: GetInstanceCommunicationLimitsCommandOutput) => void
+  ): void;
+  getInstanceCommunicationLimits(
+    args: GetInstanceCommunicationLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: GetInstanceCommunicationLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceOnboardingJobStatusCommand}
+   */
+  getInstanceOnboardingJobStatus(
+    args: GetInstanceOnboardingJobStatusCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<GetInstanceOnboardingJobStatusCommandOutput>;
+  getInstanceOnboardingJobStatus(
+    args: GetInstanceOnboardingJobStatusCommandInput,
+    cb: (err: any, data?: GetInstanceOnboardingJobStatusCommandOutput) => void
+  ): void;
+  getInstanceOnboardingJobStatus(
+    args: GetInstanceOnboardingJobStatusCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: GetInstanceOnboardingJobStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   */
+  listCampaigns(): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectInstanceIntegrationsCommand}
+   */
+  listConnectInstanceIntegrations(
+    args: ListConnectInstanceIntegrationsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<ListConnectInstanceIntegrationsCommandOutput>;
+  listConnectInstanceIntegrations(
+    args: ListConnectInstanceIntegrationsCommandInput,
+    cb: (err: any, data?: ListConnectInstanceIntegrationsCommandOutput) => void
+  ): void;
+  listConnectInstanceIntegrations(
+    args: ListConnectInstanceIntegrationsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: ListConnectInstanceIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PauseCampaignCommand}
+   */
+  pauseCampaign(
+    args: PauseCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<PauseCampaignCommandOutput>;
+  pauseCampaign(
+    args: PauseCampaignCommandInput,
+    cb: (err: any, data?: PauseCampaignCommandOutput) => void
+  ): void;
+  pauseCampaign(
+    args: PauseCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: PauseCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutConnectInstanceIntegrationCommand}
+   */
+  putConnectInstanceIntegration(
+    args: PutConnectInstanceIntegrationCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<PutConnectInstanceIntegrationCommandOutput>;
+  putConnectInstanceIntegration(
+    args: PutConnectInstanceIntegrationCommandInput,
+    cb: (err: any, data?: PutConnectInstanceIntegrationCommandOutput) => void
+  ): void;
+  putConnectInstanceIntegration(
+    args: PutConnectInstanceIntegrationCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: PutConnectInstanceIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutInstanceCommunicationLimitsCommand}
+   */
+  putInstanceCommunicationLimits(
+    args: PutInstanceCommunicationLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<PutInstanceCommunicationLimitsCommandOutput>;
+  putInstanceCommunicationLimits(
+    args: PutInstanceCommunicationLimitsCommandInput,
+    cb: (err: any, data?: PutInstanceCommunicationLimitsCommandOutput) => void
+  ): void;
+  putInstanceCommunicationLimits(
+    args: PutInstanceCommunicationLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: PutInstanceCommunicationLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutOutboundRequestBatchCommand}
+   */
+  putOutboundRequestBatch(
+    args: PutOutboundRequestBatchCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<PutOutboundRequestBatchCommandOutput>;
+  putOutboundRequestBatch(
+    args: PutOutboundRequestBatchCommandInput,
+    cb: (err: any, data?: PutOutboundRequestBatchCommandOutput) => void
+  ): void;
+  putOutboundRequestBatch(
+    args: PutOutboundRequestBatchCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: PutOutboundRequestBatchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutProfileOutboundRequestBatchCommand}
+   */
+  putProfileOutboundRequestBatch(
+    args: PutProfileOutboundRequestBatchCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<PutProfileOutboundRequestBatchCommandOutput>;
+  putProfileOutboundRequestBatch(
+    args: PutProfileOutboundRequestBatchCommandInput,
+    cb: (err: any, data?: PutProfileOutboundRequestBatchCommandOutput) => void
+  ): void;
+  putProfileOutboundRequestBatch(
+    args: PutProfileOutboundRequestBatchCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: PutProfileOutboundRequestBatchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeCampaignCommand}
+   */
+  resumeCampaign(
+    args: ResumeCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<ResumeCampaignCommandOutput>;
+  resumeCampaign(
+    args: ResumeCampaignCommandInput,
+    cb: (err: any, data?: ResumeCampaignCommandOutput) => void
+  ): void;
+  resumeCampaign(
+    args: ResumeCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: ResumeCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCampaignCommand}
+   */
+  startCampaign(
+    args: StartCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<StartCampaignCommandOutput>;
+  startCampaign(
+    args: StartCampaignCommandInput,
+    cb: (err: any, data?: StartCampaignCommandOutput) => void
+  ): void;
+  startCampaign(
+    args: StartCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: StartCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartInstanceOnboardingJobCommand}
+   */
+  startInstanceOnboardingJob(
+    args: StartInstanceOnboardingJobCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<StartInstanceOnboardingJobCommandOutput>;
+  startInstanceOnboardingJob(
+    args: StartInstanceOnboardingJobCommandInput,
+    cb: (err: any, data?: StartInstanceOnboardingJobCommandOutput) => void
+  ): void;
+  startInstanceOnboardingJob(
+    args: StartInstanceOnboardingJobCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: StartInstanceOnboardingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCampaignCommand}
+   */
+  stopCampaign(
+    args: StopCampaignCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<StopCampaignCommandOutput>;
+  stopCampaign(
+    args: StopCampaignCommandInput,
+    cb: (err: any, data?: StopCampaignCommandOutput) => void
+  ): void;
+  stopCampaign(
+    args: StopCampaignCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: StopCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignChannelSubtypeConfigCommand}
+   */
+  updateCampaignChannelSubtypeConfig(
+    args: UpdateCampaignChannelSubtypeConfigCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignChannelSubtypeConfigCommandOutput>;
+  updateCampaignChannelSubtypeConfig(
+    args: UpdateCampaignChannelSubtypeConfigCommandInput,
+    cb: (err: any, data?: UpdateCampaignChannelSubtypeConfigCommandOutput) => void
+  ): void;
+  updateCampaignChannelSubtypeConfig(
+    args: UpdateCampaignChannelSubtypeConfigCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignChannelSubtypeConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignCommunicationLimitsCommand}
+   */
+  updateCampaignCommunicationLimits(
+    args: UpdateCampaignCommunicationLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignCommunicationLimitsCommandOutput>;
+  updateCampaignCommunicationLimits(
+    args: UpdateCampaignCommunicationLimitsCommandInput,
+    cb: (err: any, data?: UpdateCampaignCommunicationLimitsCommandOutput) => void
+  ): void;
+  updateCampaignCommunicationLimits(
+    args: UpdateCampaignCommunicationLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignCommunicationLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignCommunicationTimeCommand}
+   */
+  updateCampaignCommunicationTime(
+    args: UpdateCampaignCommunicationTimeCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignCommunicationTimeCommandOutput>;
+  updateCampaignCommunicationTime(
+    args: UpdateCampaignCommunicationTimeCommandInput,
+    cb: (err: any, data?: UpdateCampaignCommunicationTimeCommandOutput) => void
+  ): void;
+  updateCampaignCommunicationTime(
+    args: UpdateCampaignCommunicationTimeCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignCommunicationTimeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignEntryLimitsCommand}
+   */
+  updateCampaignEntryLimits(
+    args: UpdateCampaignEntryLimitsCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignEntryLimitsCommandOutput>;
+  updateCampaignEntryLimits(
+    args: UpdateCampaignEntryLimitsCommandInput,
+    cb: (err: any, data?: UpdateCampaignEntryLimitsCommandOutput) => void
+  ): void;
+  updateCampaignEntryLimits(
+    args: UpdateCampaignEntryLimitsCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignEntryLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignFlowAssociationCommand}
+   */
+  updateCampaignFlowAssociation(
+    args: UpdateCampaignFlowAssociationCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignFlowAssociationCommandOutput>;
+  updateCampaignFlowAssociation(
+    args: UpdateCampaignFlowAssociationCommandInput,
+    cb: (err: any, data?: UpdateCampaignFlowAssociationCommandOutput) => void
+  ): void;
+  updateCampaignFlowAssociation(
+    args: UpdateCampaignFlowAssociationCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignFlowAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignNameCommand}
+   */
+  updateCampaignName(
+    args: UpdateCampaignNameCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignNameCommandOutput>;
+  updateCampaignName(
+    args: UpdateCampaignNameCommandInput,
+    cb: (err: any, data?: UpdateCampaignNameCommandOutput) => void
+  ): void;
+  updateCampaignName(
+    args: UpdateCampaignNameCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignScheduleCommand}
+   */
+  updateCampaignSchedule(
+    args: UpdateCampaignScheduleCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignScheduleCommandOutput>;
+  updateCampaignSchedule(
+    args: UpdateCampaignScheduleCommandInput,
+    cb: (err: any, data?: UpdateCampaignScheduleCommandOutput) => void
+  ): void;
+  updateCampaignSchedule(
+    args: UpdateCampaignScheduleCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignSourceCommand}
+   */
+  updateCampaignSource(
+    args: UpdateCampaignSourceCommandInput,
+    options?: ConnectCampaignsV2RequestOptions
+  ): Promise<UpdateCampaignSourceCommandOutput>;
+  updateCampaignSource(
+    args: UpdateCampaignSourceCommandInput,
+    cb: (err: any, data?: UpdateCampaignSourceCommandOutput) => void
+  ): void;
+  updateCampaignSource(
+    args: UpdateCampaignSourceCommandInput,
+    options: ConnectCampaignsV2RequestOptions,
+    cb: (err: any, data?: UpdateCampaignSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCampaignsCommandOutput}.
+   */
+  paginateListCampaigns(
+    args?: ListCampaignsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCampaignsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectInstanceIntegrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectInstanceIntegrationsCommandOutput}.
+   */
+  paginateListConnectInstanceIntegrations(
+    args: ListConnectInstanceIntegrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectInstanceIntegrationsCommandOutput>;
+}
+
+/**
+ * Provide APIs to create and manage Amazon Connect Campaigns.
+ * @public
+ */
+export class ConnectCampaignsV2 extends ConnectCampaignsV2Client implements ConnectCampaignsV2 {}
+createAggregatedClient(commands, ConnectCampaignsV2, { paginators });

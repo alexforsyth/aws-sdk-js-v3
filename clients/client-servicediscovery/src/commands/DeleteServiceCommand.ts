@@ -1,96 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteServiceRequest, DeleteServiceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteServiceCommand,
-  serializeAws_json1_1DeleteServiceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceDiscoveryClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceDiscoveryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteServiceRequest, DeleteServiceResponse } from "../models/models_0";
+import { DeleteService$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteServiceCommand}.
+ */
 export interface DeleteServiceCommandInput extends DeleteServiceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteServiceCommand}.
+ */
 export interface DeleteServiceCommandOutput extends DeleteServiceResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a specified service. If the service still contains one or more registered instances, the request
- *    fails.</p>
+ * <p>Deletes a specified service and all associated service attributes. If the service still
+ *    contains one or more registered instances, the request fails.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceDiscoveryClient, DeleteServiceCommand } from "@aws-sdk/client-servicediscovery"; // ES Modules import
  * // const { ServiceDiscoveryClient, DeleteServiceCommand } = require("@aws-sdk/client-servicediscovery"); // CommonJS import
+ * // import type { ServiceDiscoveryClientConfig } from "@aws-sdk/client-servicediscovery";
+ * const config = {}; // type is ServiceDiscoveryClientConfig
  * const client = new ServiceDiscoveryClient(config);
+ * const input = { // DeleteServiceRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteServiceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteServiceCommandInput - {@link DeleteServiceCommandInput}
+ * @returns {@link DeleteServiceCommandOutput}
  * @see {@link DeleteServiceCommandInput} for command's `input` shape.
  * @see {@link DeleteServiceCommandOutput} for command's `response` shape.
- * @see {@link ServiceDiscoveryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceDiscoveryClientResolvedConfig | config} for ServiceDiscoveryClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>One or more specified values aren't valid. For example, a required value might be missing, a
+ *    numeric value might be outside the allowed range, or a string value might exceed length
+ *    constraints.</p>
+ *
+ * @throws {@link ResourceInUse} (client fault)
+ *  <p>The specified resource can't be deleted because it contains other resources. For example,
+ *    you can't delete a service that contains any instances.</p>
+ *
+ * @throws {@link ServiceNotFound} (client fault)
+ *  <p>No service exists with the specified ID.</p>
+ *
+ * @throws {@link ServiceDiscoveryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceDiscovery service.</p>
+ *
+ *
+ * @example Example: Delete service
+ * ```javascript
+ * // Example: Delete service
+ * const input = {
+ *   Id: "srv-p5zdwlg5uvvzjita"
+ * };
+ * const command = new DeleteServiceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @example Delete service using service ARN
+ * ```javascript
+ * // Deletes a service using a service ARN instead of service ID, useful when working with shared namespaces.
+ * const input = {
+ *   Id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+ * };
+ * const command = new DeleteServiceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteServiceCommand extends $Command<
-  DeleteServiceCommandInput,
-  DeleteServiceCommandOutput,
-  ServiceDiscoveryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteServiceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceDiscoveryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteServiceCommandInput, DeleteServiceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceDiscoveryClient";
-    const commandName = "DeleteServiceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteServiceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteServiceResponse.filterSensitiveLog,
+export class DeleteServiceCommand extends command<DeleteServiceCommandInput, DeleteServiceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteService",
+  DeleteService$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteServiceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteServiceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteServiceCommandOutput> {
-    return deserializeAws_json1_1DeleteServiceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteServiceCommandInput;
+      output: DeleteServiceCommandOutput;
+    };
+  };
 }

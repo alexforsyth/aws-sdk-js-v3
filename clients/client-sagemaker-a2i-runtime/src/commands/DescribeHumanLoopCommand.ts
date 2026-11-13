@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeHumanLoopRequest, DescribeHumanLoopResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeHumanLoopCommand,
-  serializeAws_restJson1DescribeHumanLoopCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  SageMakerA2IRuntimeClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../SageMakerA2IRuntimeClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeHumanLoopRequest, DescribeHumanLoopResponse } from "../models/models_0";
+import { DescribeHumanLoop$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeHumanLoopCommand}.
+ */
 export interface DescribeHumanLoopCommandInput extends DescribeHumanLoopRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeHumanLoopCommand}.
+ */
 export interface DescribeHumanLoopCommandOutput extends DescribeHumanLoopResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +30,73 @@ export interface DescribeHumanLoopCommandOutput extends DescribeHumanLoopRespons
  * ```javascript
  * import { SageMakerA2IRuntimeClient, DescribeHumanLoopCommand } from "@aws-sdk/client-sagemaker-a2i-runtime"; // ES Modules import
  * // const { SageMakerA2IRuntimeClient, DescribeHumanLoopCommand } = require("@aws-sdk/client-sagemaker-a2i-runtime"); // CommonJS import
+ * // import type { SageMakerA2IRuntimeClientConfig } from "@aws-sdk/client-sagemaker-a2i-runtime";
+ * const config = {}; // type is SageMakerA2IRuntimeClientConfig
  * const client = new SageMakerA2IRuntimeClient(config);
+ * const input = { // DescribeHumanLoopRequest
+ *   HumanLoopName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeHumanLoopCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeHumanLoopResponse
+ * //   CreationTime: new Date("TIMESTAMP"), // required
+ * //   FailureReason: "STRING_VALUE",
+ * //   FailureCode: "STRING_VALUE",
+ * //   HumanLoopStatus: "InProgress" || "Failed" || "Completed" || "Stopped" || "Stopping", // required
+ * //   HumanLoopName: "STRING_VALUE", // required
+ * //   HumanLoopArn: "STRING_VALUE", // required
+ * //   FlowDefinitionArn: "STRING_VALUE", // required
+ * //   HumanLoopOutput: { // HumanLoopOutput
+ * //     OutputS3Uri: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeHumanLoopCommandInput - {@link DescribeHumanLoopCommandInput}
+ * @returns {@link DescribeHumanLoopCommandOutput}
  * @see {@link DescribeHumanLoopCommandInput} for command's `input` shape.
  * @see {@link DescribeHumanLoopCommandOutput} for command's `response` shape.
- * @see {@link SageMakerA2IRuntimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerA2IRuntimeClientResolvedConfig | config} for SageMakerA2IRuntimeClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We couldn't process your request because of an issue with the server. Try again
+ *       later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We couldn't find the requested resource. Check that your resources exists and were created
+ *       in the same AWS Region as your request, and try your request again. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded
+ *       the
+ *       maximum number of requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The
+ *       request isn't valid. Check the syntax and try again.</p>
+ *
+ * @throws {@link SageMakerA2IRuntimeServiceException}
+ * <p>Base exception class for all service exceptions from SageMakerA2IRuntime service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeHumanLoopCommand extends $Command<
-  DescribeHumanLoopCommandInput,
-  DescribeHumanLoopCommandOutput,
-  SageMakerA2IRuntimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeHumanLoopCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerA2IRuntimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeHumanLoopCommandInput, DescribeHumanLoopCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerA2IRuntimeClient";
-    const commandName = "DescribeHumanLoopCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeHumanLoopRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeHumanLoopResponse.filterSensitiveLog,
+export class DescribeHumanLoopCommand extends command<DescribeHumanLoopCommandInput, DescribeHumanLoopCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeHumanLoop",
+  DescribeHumanLoop$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeHumanLoopRequest;
+      output: DescribeHumanLoopResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeHumanLoopCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeHumanLoopCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeHumanLoopCommandOutput> {
-    return deserializeAws_restJson1DescribeHumanLoopCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeHumanLoopCommandInput;
+      output: DescribeHumanLoopCommandOutput;
+    };
+  };
 }

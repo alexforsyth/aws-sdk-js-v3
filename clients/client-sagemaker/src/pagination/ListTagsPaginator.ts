@@ -1,55 +1,20 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import { ListTagsCommand, ListTagsCommandInput, ListTagsCommandOutput } from "../commands/ListTagsCommand";
-import { SageMaker } from "../SageMaker";
 import { SageMakerClient } from "../SageMakerClient";
-import { SageMakerPaginationConfiguration } from "./Interfaces";
+import type { SageMakerPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: SageMakerClient,
-  input: ListTagsCommandInput,
-  ...args: any
-): Promise<ListTagsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListTagsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: SageMaker,
-  input: ListTagsCommandInput,
-  ...args: any
-): Promise<ListTagsCommandOutput> => {
-  // @ts-ignore
-  return await client.listTags(input, ...args);
-};
-export async function* paginateListTags(
+export const paginateListTags: (
   config: SageMakerPaginationConfiguration,
   input: ListTagsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListTagsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListTagsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof SageMaker) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof SageMakerClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected SageMaker | SageMakerClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListTagsCommandOutput> = createPaginator<
+  SageMakerPaginationConfiguration,
+  ListTagsCommandInput,
+  ListTagsCommandOutput
+>(SageMakerClient, ListTagsCommand, "NextToken", "NextToken", "MaxResults");

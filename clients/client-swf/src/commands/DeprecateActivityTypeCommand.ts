@@ -1,34 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeprecateActivityTypeInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DeprecateActivityTypeCommand,
-  serializeAws_json1_0DeprecateActivityTypeCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeprecateActivityTypeInput } from "../models/models_0";
+import { DeprecateActivityType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeprecateActivityTypeCommand}.
+ */
 export interface DeprecateActivityTypeCommandInput extends DeprecateActivityTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeprecateActivityTypeCommand}.
+ */
 export interface DeprecateActivityTypeCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Deprecates the specified <i>activity type</i>. After an activity type has
  *       been deprecated, you cannot create new tasks of that activity type. Tasks of this type that
  *       were scheduled before the type was deprecated continue to run.</p>
- *          <note>
- *             <p>This operation is eventually consistent. The results are best effort and may not
- *         exactly reflect recent updates and changes.</p>
- *          </note>
  *          <p>
  *             <b>Access Control</b>
  *          </p>
@@ -70,68 +67,58 @@ export interface DeprecateActivityTypeCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SWFClient, DeprecateActivityTypeCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, DeprecateActivityTypeCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // DeprecateActivityTypeInput
+ *   domain: "STRING_VALUE", // required
+ *   activityType: { // ActivityType
+ *     name: "STRING_VALUE", // required
+ *     version: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new DeprecateActivityTypeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeprecateActivityTypeCommandInput - {@link DeprecateActivityTypeCommandInput}
+ * @returns {@link DeprecateActivityTypeCommandOutput}
  * @see {@link DeprecateActivityTypeCommandInput} for command's `input` shape.
  * @see {@link DeprecateActivityTypeCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link TypeDeprecatedFault} (client fault)
+ *  <p>Returned when the specified activity or workflow type was already deprecated.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class DeprecateActivityTypeCommand extends $Command<
-  DeprecateActivityTypeCommandInput,
-  DeprecateActivityTypeCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeprecateActivityTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeprecateActivityTypeCommandInput, DeprecateActivityTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "DeprecateActivityTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeprecateActivityTypeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeprecateActivityTypeCommand extends command<DeprecateActivityTypeCommandInput, DeprecateActivityTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeprecateActivityType",
+  DeprecateActivityType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeprecateActivityTypeInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeprecateActivityTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeprecateActivityTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeprecateActivityTypeCommandOutput> {
-    return deserializeAws_json1_0DeprecateActivityTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeprecateActivityTypeCommandInput;
+      output: DeprecateActivityTypeCommandOutput;
+    };
+  };
 }

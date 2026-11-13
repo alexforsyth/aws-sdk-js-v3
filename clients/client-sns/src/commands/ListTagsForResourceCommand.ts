@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListTagsForResourceCommand,
-  serializeAws_queryListTagsForResourceCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
+import { ListTagsForResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsForResourceCommand}.
+ */
 export interface ListTagsForResourceCommandInput extends ListTagsForResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsForResourceCommand}.
+ */
 export interface ListTagsForResourceCommandOutput extends ListTagsForResourceResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,71 @@ export interface ListTagsForResourceCommandOutput extends ListTagsForResourceRes
  * ```javascript
  * import { SNSClient, ListTagsForResourceCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, ListTagsForResourceCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // ListTagsForResourceRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ * };
  * const command = new ListTagsForResourceCommand(input);
  * const response = await client.send(command);
+ * // { // ListTagsForResourceResponse
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListTagsForResourceCommandInput - {@link ListTagsForResourceCommandInput}
+ * @returns {@link ListTagsForResourceCommandOutput}
  * @see {@link ListTagsForResourceCommandInput} for command's `input` shape.
  * @see {@link ListTagsForResourceCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link ConcurrentAccessException} (client fault)
+ *  <p>Can't perform multiple operations on a tag simultaneously. Perform the operations
+ *             sequentially.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Can’t perform the action on the specified resource. Make sure that the resource
+ *             exists.</p>
+ *
+ * @throws {@link TagPolicyException} (client fault)
+ *  <p>The request doesn't comply with the IAM tag policy. Correct your request and then
+ *             retry it.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class ListTagsForResourceCommand extends $Command<
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTagsForResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTagsForResourceCommandInput, ListTagsForResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "ListTagsForResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTagsForResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTagsForResourceResponse.filterSensitiveLog,
+export class ListTagsForResourceCommand extends command<ListTagsForResourceCommandInput, ListTagsForResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTagsForResource",
+  ListTagsForResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForResourceRequest;
+      output: ListTagsForResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTagsForResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListTagsForResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTagsForResourceCommandOutput> {
-    return deserializeAws_queryListTagsForResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTagsForResourceCommandInput;
+      output: ListTagsForResourceCommandOutput;
+    };
+  };
 }

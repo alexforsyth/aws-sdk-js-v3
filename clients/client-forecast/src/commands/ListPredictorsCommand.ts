@@ -1,99 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { ListPredictorsRequest, ListPredictorsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListPredictorsCommand,
-  serializeAws_json1_1ListPredictorsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPredictorsRequest, ListPredictorsResponse } from "../models/models_0";
+import { ListPredictors$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPredictorsCommand}.
+ */
 export interface ListPredictorsCommandInput extends ListPredictorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPredictorsCommand}.
+ */
 export interface ListPredictorsCommandOutput extends ListPredictorsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of predictors created using the <a>CreatePredictor</a>
- *       operation. For each predictor, this operation returns a summary of its properties, including
- *       its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the
- *       ARN with the <a>DescribePredictor</a> operation. You can filter the list using an
- *       array of <a>Filter</a> objects.</p>
+ * <p>Returns a list of predictors created using the <a>CreateAutoPredictor</a> or
+ *         <a>CreatePredictor</a> operations. For each predictor, this operation returns a
+ *       summary of its properties, including its Amazon Resource Name (ARN). </p>
+ *          <p>You can retrieve the complete set of properties by using the ARN with the <a>DescribeAutoPredictor</a> and <a>DescribePredictor</a> operations. You
+ *       can filter the list using an array of <a>Filter</a> objects.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, ListPredictorsCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, ListPredictorsCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // ListPredictorsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *       Condition: "IS" || "IS_NOT", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListPredictorsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPredictorsResponse
+ * //   Predictors: [ // Predictors
+ * //     { // PredictorSummary
+ * //       PredictorArn: "STRING_VALUE",
+ * //       PredictorName: "STRING_VALUE",
+ * //       DatasetGroupArn: "STRING_VALUE",
+ * //       IsAutoPredictor: true || false,
+ * //       ReferencePredictorSummary: { // ReferencePredictorSummary
+ * //         Arn: "STRING_VALUE",
+ * //         State: "Active" || "Deleted",
+ * //       },
+ * //       Status: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModificationTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPredictorsCommandInput - {@link ListPredictorsCommandInput}
+ * @returns {@link ListPredictorsCommandOutput}
  * @see {@link ListPredictorsCommandInput} for command's `input` shape.
  * @see {@link ListPredictorsCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid. Tokens expire after 24 hours.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class ListPredictorsCommand extends $Command<
-  ListPredictorsCommandInput,
-  ListPredictorsCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPredictorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPredictorsCommandInput, ListPredictorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "ListPredictorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPredictorsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPredictorsResponse.filterSensitiveLog,
+export class ListPredictorsCommand extends command<ListPredictorsCommandInput, ListPredictorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPredictors",
+  ListPredictors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPredictorsRequest;
+      output: ListPredictorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPredictorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPredictorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPredictorsCommandOutput> {
-    return deserializeAws_json1_1ListPredictorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPredictorsCommandInput;
+      output: ListPredictorsCommandOutput;
+    };
+  };
 }

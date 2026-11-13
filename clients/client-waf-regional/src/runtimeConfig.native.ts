@@ -1,7 +1,6 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
+// smithy-typescript generated code
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
-import { WAFRegionalClientConfig } from "./WAFRegionalClient";
+import type { WAFRegionalClientConfig } from "./WAFRegionalClient";
 
 /**
  * @internal
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: WAFRegionalClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

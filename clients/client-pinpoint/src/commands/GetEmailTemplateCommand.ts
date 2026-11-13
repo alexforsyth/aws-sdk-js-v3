@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetEmailTemplateRequest } from "../models/models_0";
-import { GetEmailTemplateResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetEmailTemplateCommand,
-  serializeAws_restJson1GetEmailTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEmailTemplateRequest, GetEmailTemplateResponse } from "../models/models_0";
+import { GetEmailTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEmailTemplateCommand}.
+ */
 export interface GetEmailTemplateCommandInput extends GetEmailTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEmailTemplateCommand}.
+ */
 export interface GetEmailTemplateCommandOutput extends GetEmailTemplateResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +29,91 @@ export interface GetEmailTemplateCommandOutput extends GetEmailTemplateResponse,
  * ```javascript
  * import { PinpointClient, GetEmailTemplateCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetEmailTemplateCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetEmailTemplateRequest
+ *   TemplateName: "STRING_VALUE", // required
+ *   Version: "STRING_VALUE",
+ * };
  * const command = new GetEmailTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // GetEmailTemplateResponse
+ * //   EmailTemplateResponse: { // EmailTemplateResponse
+ * //     Arn: "STRING_VALUE",
+ * //     CreationDate: "STRING_VALUE", // required
+ * //     DefaultSubstitutions: "STRING_VALUE",
+ * //     HtmlPart: "STRING_VALUE",
+ * //     LastModifiedDate: "STRING_VALUE", // required
+ * //     RecommenderId: "STRING_VALUE",
+ * //     Subject: "STRING_VALUE",
+ * //     Headers: [ // ListOfMessageHeader
+ * //       { // MessageHeader
+ * //         Name: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     tags: { // MapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     TemplateDescription: "STRING_VALUE",
+ * //     TemplateName: "STRING_VALUE", // required
+ * //     TemplateType: "EMAIL" || "SMS" || "VOICE" || "PUSH" || "INAPP", // required
+ * //     TextPart: "STRING_VALUE",
+ * //     Version: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetEmailTemplateCommandInput - {@link GetEmailTemplateCommandInput}
+ * @returns {@link GetEmailTemplateCommandOutput}
  * @see {@link GetEmailTemplateCommandInput} for command's `input` shape.
  * @see {@link GetEmailTemplateCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetEmailTemplateCommand extends $Command<
-  GetEmailTemplateCommandInput,
-  GetEmailTemplateCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEmailTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetEmailTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEmailTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetEmailTemplateResponse.filterSensitiveLog,
+export class GetEmailTemplateCommand extends command<GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEmailTemplate",
+  GetEmailTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEmailTemplateRequest;
+      output: GetEmailTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEmailTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEmailTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEmailTemplateCommandOutput> {
-    return deserializeAws_restJson1GetEmailTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEmailTemplateCommandInput;
+      output: GetEmailTemplateCommandOutput;
+    };
+  };
 }

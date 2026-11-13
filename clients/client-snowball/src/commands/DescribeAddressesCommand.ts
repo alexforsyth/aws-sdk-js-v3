@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeAddressesRequest, DescribeAddressesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAddressesCommand,
-  serializeAws_json1_1DescribeAddressesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SnowballClientResolvedConfig } from "../SnowballClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAddressesRequest, DescribeAddressesResult } from "../models/models_0";
+import { DescribeAddresses$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAddressesCommand}.
+ */
 export interface DescribeAddressesCommandInput extends DescribeAddressesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAddressesCommand}.
+ */
 export interface DescribeAddressesCommandOutput extends DescribeAddressesResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,101 @@ export interface DescribeAddressesCommandOutput extends DescribeAddressesResult,
  * ```javascript
  * import { SnowballClient, DescribeAddressesCommand } from "@aws-sdk/client-snowball"; // ES Modules import
  * // const { SnowballClient, DescribeAddressesCommand } = require("@aws-sdk/client-snowball"); // CommonJS import
+ * // import type { SnowballClientConfig } from "@aws-sdk/client-snowball";
+ * const config = {}; // type is SnowballClientConfig
  * const client = new SnowballClient(config);
+ * const input = { // DescribeAddressesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAddressesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAddressesResult
+ * //   Addresses: [ // AddressList
+ * //     { // Address
+ * //       AddressId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Company: "STRING_VALUE",
+ * //       Street1: "STRING_VALUE",
+ * //       Street2: "STRING_VALUE",
+ * //       Street3: "STRING_VALUE",
+ * //       City: "STRING_VALUE",
+ * //       StateOrProvince: "STRING_VALUE",
+ * //       PrefectureOrDistrict: "STRING_VALUE",
+ * //       Landmark: "STRING_VALUE",
+ * //       Country: "STRING_VALUE",
+ * //       PostalCode: "STRING_VALUE",
+ * //       PhoneNumber: "STRING_VALUE",
+ * //       IsRestricted: true || false,
+ * //       Type: "CUST_PICKUP" || "AWS_SHIP",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAddressesCommandInput - {@link DescribeAddressesCommandInput}
+ * @returns {@link DescribeAddressesCommandOutput}
  * @see {@link DescribeAddressesCommandInput} for command's `input` shape.
  * @see {@link DescribeAddressesCommandOutput} for command's `response` shape.
- * @see {@link SnowballClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowballClientResolvedConfig | config} for SnowballClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> string was altered unexpectedly, and the operation has
+ *       stopped. Run the operation without changing the <code>NextToken</code> string, and try
+ *       again.</p>
+ *
+ * @throws {@link InvalidResourceException} (client fault)
+ *  <p>The specified resource can't be found. Check the information you provided in your last
+ *       request, and try again.</p>
+ *
+ * @throws {@link SnowballServiceException}
+ * <p>Base exception class for all service exceptions from Snowball service.</p>
+ *
+ *
+ * @example To describe all the addresses you've created for AWS Snowball
+ * ```javascript
+ * // This operation describes all the addresses that you've created for AWS Snowball. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeAddressesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Addresses: [
+ *     {
+ *       AddressId: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+ *       City: "Seattle",
+ *       Company: "My Company",
+ *       Country: "US",
+ *       Name: "My Name",
+ *       PhoneNumber: "425-555-5555",
+ *       PostalCode: "98101",
+ *       StateOrProvince: "WA",
+ *       Street1: "123 Main Street"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeAddressesCommand extends $Command<
-  DescribeAddressesCommandInput,
-  DescribeAddressesCommandOutput,
-  SnowballClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAddressesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowballClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAddressesCommandInput, DescribeAddressesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowballClient";
-    const commandName = "DescribeAddressesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAddressesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAddressesResult.filterSensitiveLog,
+export class DescribeAddressesCommand extends command<DescribeAddressesCommandInput, DescribeAddressesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAddresses",
+  DescribeAddresses$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAddressesRequest;
+      output: DescribeAddressesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAddressesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAddressesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAddressesCommandOutput> {
-    return deserializeAws_json1_1DescribeAddressesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAddressesCommandInput;
+      output: DescribeAddressesCommandOutput;
+    };
+  };
 }

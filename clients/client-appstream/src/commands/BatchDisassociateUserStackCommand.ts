@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { BatchDisassociateUserStackRequest, BatchDisassociateUserStackResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDisassociateUserStackCommand,
-  serializeAws_json1_1BatchDisassociateUserStackCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDisassociateUserStackRequest, BatchDisassociateUserStackResult } from "../models/models_0";
+import { BatchDisassociateUserStack$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDisassociateUserStackCommand}.
+ */
 export interface BatchDisassociateUserStackCommandInput extends BatchDisassociateUserStackRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDisassociateUserStackCommand}.
+ */
 export interface BatchDisassociateUserStackCommandOutput extends BatchDisassociateUserStackResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,71 @@ export interface BatchDisassociateUserStackCommandOutput extends BatchDisassocia
  * ```javascript
  * import { AppStreamClient, BatchDisassociateUserStackCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, BatchDisassociateUserStackCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // BatchDisassociateUserStackRequest
+ *   UserStackAssociations: [ // UserStackAssociationList // required
+ *     { // UserStackAssociation
+ *       StackName: "STRING_VALUE", // required
+ *       UserName: "STRING_VALUE", // required
+ *       AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD", // required
+ *       SendEmailNotification: true || false,
+ *     },
+ *   ],
+ * };
  * const command = new BatchDisassociateUserStackCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDisassociateUserStackResult
+ * //   errors: [ // UserStackAssociationErrorList
+ * //     { // UserStackAssociationError
+ * //       UserStackAssociation: { // UserStackAssociation
+ * //         StackName: "STRING_VALUE", // required
+ * //         UserName: "STRING_VALUE", // required
+ * //         AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD", // required
+ * //         SendEmailNotification: true || false,
+ * //       },
+ * //       ErrorCode: "STACK_NOT_FOUND" || "USER_NAME_NOT_FOUND" || "DIRECTORY_NOT_FOUND" || "INTERNAL_ERROR",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDisassociateUserStackCommandInput - {@link BatchDisassociateUserStackCommandInput}
+ * @returns {@link BatchDisassociateUserStackCommandOutput}
  * @see {@link BatchDisassociateUserStackCommandInput} for command's `input` shape.
  * @see {@link BatchDisassociateUserStackCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDisassociateUserStackCommand extends $Command<
-  BatchDisassociateUserStackCommandInput,
-  BatchDisassociateUserStackCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDisassociateUserStackCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDisassociateUserStackCommandInput, BatchDisassociateUserStackCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "BatchDisassociateUserStackCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDisassociateUserStackRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDisassociateUserStackResult.filterSensitiveLog,
+export class BatchDisassociateUserStackCommand extends command<BatchDisassociateUserStackCommandInput, BatchDisassociateUserStackCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDisassociateUserStack",
+  BatchDisassociateUserStack$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDisassociateUserStackRequest;
+      output: BatchDisassociateUserStackResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDisassociateUserStackCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDisassociateUserStackCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchDisassociateUserStackCommandOutput> {
-    return deserializeAws_json1_1BatchDisassociateUserStackCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDisassociateUserStackCommandInput;
+      output: BatchDisassociateUserStackCommandOutput;
+    };
+  };
 }

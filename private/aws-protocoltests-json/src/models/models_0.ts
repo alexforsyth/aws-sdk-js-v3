@@ -1,196 +1,109 @@
-import { LazyJsonString as __LazyJsonString } from "@aws-sdk/smithy-client";
-import {
-  DocumentType as __DocumentType,
-  MetadataBearer as $MetadataBearer,
-  SmithyException as __SmithyException,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { AutomaticJsonStringConversion as __AutomaticJsonStringConversion } from "@smithy/core/serde";
+import type { DocumentType as __DocumentType } from "@smithy/types";
 
-export interface ComplexNestedErrorData {
-  Foo?: string;
-}
+import type { FooEnum, IntegerEnum } from "./enums";
 
-export namespace ComplexNestedErrorData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ComplexNestedErrorData): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface GreetingStruct {
+  hi?: string | undefined;
 }
 
 /**
- * This error is thrown when a request is invalid.
+ * @public
  */
-export interface ComplexError extends __SmithyException, $MetadataBearer {
-  name: "ComplexError";
-  $fault: "client";
-  TopLevel?: string;
-  Nested?: ComplexNestedErrorData;
+export interface ComplexNestedErrorData {
+  Foo?: string | undefined;
 }
 
-export namespace ComplexError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ComplexError): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface ContentTypeParametersInput {
+  value?: number | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ContentTypeParametersOutput {}
+
+/**
+ * @public
+ */
+export interface DatetimeOffsetsOutput {
+  datetime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface EmptyStruct {}
 
-export namespace EmptyStruct {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EmptyStruct): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface HostLabelInput {
   label: string | undefined;
 }
 
-export namespace HostLabelInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HostLabelInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SimpleStruct {
-  Value?: string;
-}
-
-export namespace SimpleStruct {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SimpleStruct): any => ({
-    ...obj,
-  });
-}
-
-export interface StructWithLocationName {
-  Value?: string;
-}
-
-export namespace StructWithLocationName {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StructWithLocationName): any => ({
-    ...obj,
-  });
-}
-
-export interface ErrorWithoutMembers extends __SmithyException, $MetadataBearer {
-  name: "ErrorWithoutMembers";
-  $fault: "server";
-}
-
-export namespace ErrorWithoutMembers {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ErrorWithoutMembers): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
- * This error has test cases that test some of the dark corners of Amazon service
- * framework history. It should only be implemented by clients.
+ * @public
  */
-export interface FooError extends __SmithyException, $MetadataBearer {
-  name: "FooError";
-  $fault: "server";
+export interface StructWithJsonName {
+  Value?: string | undefined;
 }
 
-export namespace FooError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FooError): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface FractionalSecondsOutput {
+  datetime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GreetingWithErrorsOutput {
-  greeting?: string;
-}
-
-export namespace GreetingWithErrorsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GreetingWithErrorsOutput): any => ({
-    ...obj,
-  });
+  greeting?: string | undefined;
 }
 
 /**
- * This error is thrown when an invalid greeting value is provided.
+ * @public
  */
-export interface InvalidGreeting extends __SmithyException, $MetadataBearer {
-  name: "InvalidGreeting";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidGreeting {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidGreeting): any => ({
-    ...obj,
-  });
-}
-
-export enum FooEnum {
-  BAR = "Bar",
-  BAZ = "Baz",
-  FOO = "Foo",
-  ONE = "1",
-  ZERO = "0",
-}
-
 export interface JsonEnumsInputOutput {
-  fooEnum1?: FooEnum | string;
-  fooEnum2?: FooEnum | string;
-  fooEnum3?: FooEnum | string;
-  fooEnumList?: (FooEnum | string)[];
-  fooEnumSet?: (FooEnum | string)[];
-  fooEnumMap?: { [key: string]: FooEnum | string };
+  fooEnum1?: FooEnum | undefined;
+  fooEnum2?: FooEnum | undefined;
+  fooEnum3?: FooEnum | undefined;
+  fooEnumList?: FooEnum[] | undefined;
+  fooEnumSet?: FooEnum[] | undefined;
+  fooEnumMap?: Record<string, FooEnum> | undefined;
 }
 
-export namespace JsonEnumsInputOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JsonEnumsInputOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface GreetingStruct {
-  hi?: string;
-}
-
-export namespace GreetingStruct {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GreetingStruct): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface JsonIntEnumsInputOutput {
+  intEnum1?: IntegerEnum | undefined;
+  intEnum2?: IntegerEnum | undefined;
+  intEnum3?: IntegerEnum | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  intEnumSet?: IntegerEnum[] | undefined;
+  intEnumMap?: Record<string, IntegerEnum> | undefined;
 }
 
 /**
  * A union with a representative set of types for members.
+ * @public
  */
 export type MyUnion =
   | MyUnion.BlobValueMember
@@ -204,6 +117,9 @@ export type MyUnion =
   | MyUnion.TimestampValueMember
   | MyUnion.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace MyUnion {
   export interface StringValueMember {
     stringValue: string;
@@ -276,7 +192,7 @@ export namespace MyUnion {
     numberValue?: never;
     blobValue?: never;
     timestampValue?: never;
-    enumValue: FooEnum | string;
+    enumValue: FooEnum;
     listValue?: never;
     mapValue?: never;
     structureValue?: never;
@@ -304,7 +220,7 @@ export namespace MyUnion {
     timestampValue?: never;
     enumValue?: never;
     listValue?: never;
-    mapValue: { [key: string]: string };
+    mapValue: Record<string, string>;
     structureValue?: never;
     $unknown?: never;
   }
@@ -322,6 +238,9 @@ export namespace MyUnion {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     stringValue?: never;
     booleanValue?: never;
@@ -341,9 +260,9 @@ export namespace MyUnion {
     numberValue: (value: number) => T;
     blobValue: (value: Uint8Array) => T;
     timestampValue: (value: Date) => T;
-    enumValue: (value: FooEnum | string) => T;
+    enumValue: (value: FooEnum) => T;
     listValue: (value: string[]) => T;
-    mapValue: (value: { [key: string]: string }) => T;
+    mapValue: (value: Record<string, string>) => T;
     structureValue: (value: GreetingStruct) => T;
     _: (name: string, value: any) => T;
   }
@@ -360,145 +279,100 @@ export namespace MyUnion {
     if (value.structureValue !== undefined) return visitor.structureValue(value.structureValue);
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MyUnion): any => {
-    if (obj.stringValue !== undefined) return { stringValue: obj.stringValue };
-    if (obj.booleanValue !== undefined) return { booleanValue: obj.booleanValue };
-    if (obj.numberValue !== undefined) return { numberValue: obj.numberValue };
-    if (obj.blobValue !== undefined) return { blobValue: obj.blobValue };
-    if (obj.timestampValue !== undefined) return { timestampValue: obj.timestampValue };
-    if (obj.enumValue !== undefined) return { enumValue: obj.enumValue };
-    if (obj.listValue !== undefined) return { listValue: obj.listValue };
-    if (obj.mapValue !== undefined) return { mapValue: obj.mapValue };
-    if (obj.structureValue !== undefined)
-      return { structureValue: GreetingStruct.filterSensitiveLog(obj.structureValue) };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
 }
 
 /**
  * A shared structure that contains a single union member.
+ * @public
  */
 export interface UnionInputOutput {
   /**
    * A union with a representative set of types for members.
+   * @public
    */
-  contents?: MyUnion;
+  contents?: MyUnion | undefined;
 }
 
-export namespace UnionInputOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnionInputOutput): any => ({
-    ...obj,
-    ...(obj.contents && { contents: MyUnion.filterSensitiveLog(obj.contents) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface NullOperationInputOutput {
-  string?: string;
-  sparseStringList?: string[];
-  sparseStringMap?: { [key: string]: string };
+  string?: string | undefined;
 }
 
-export namespace NullOperationInputOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NullOperationInputOutput): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface OperationWithOptionalInputOutputInput {
+  Value?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface OperationWithOptionalInputOutputOutput {
+  Value?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface PutAndGetInlineDocumentsInputOutput {
-  inlineDocument?: __DocumentType;
+  inlineDocument?: __DocumentType | undefined;
 }
 
-export namespace PutAndGetInlineDocumentsInputOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutAndGetInlineDocumentsInputOutput): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string | undefined;
+  data?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface SimpleScalarPropertiesInputOutput {
-  floatValue?: number;
-  doubleValue?: number;
+  floatValue?: number | undefined;
+  doubleValue?: number | undefined;
 }
 
-export namespace SimpleScalarPropertiesInputOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SimpleScalarPropertiesInputOutput): any => ({
-    ...obj,
-  });
+/**
+ * @public
+ */
+export interface SparseNullsOperationInputOutput {
+  sparseStringList?: (string | null)[] | undefined;
+  sparseStringMap?: Record<string, string | null> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface KitchenSink {
-  Blob?: Uint8Array;
-  Boolean?: boolean;
-  Double?: number;
-  EmptyStruct?: EmptyStruct;
-  Float?: number;
-  HttpdateTimestamp?: Date;
-  Integer?: number;
-  Iso8601Timestamp?: Date;
-  JsonValue?: __LazyJsonString | string;
-  ListOfLists?: string[][];
-  ListOfMapsOfStrings?: { [key: string]: string }[];
-  ListOfStrings?: string[];
-  ListOfStructs?: SimpleStruct[];
-  Long?: number;
-  MapOfListsOfStrings?: { [key: string]: string[] };
-  MapOfMaps?: { [key: string]: { [key: string]: string } };
-  MapOfStrings?: { [key: string]: string };
-  MapOfStructs?: { [key: string]: SimpleStruct };
-  RecursiveList?: KitchenSink[];
-  RecursiveMap?: { [key: string]: KitchenSink };
-  RecursiveStruct?: KitchenSink;
-  SimpleStruct?: SimpleStruct;
-  String?: string;
-  StructWithLocationName?: StructWithLocationName;
-  Timestamp?: Date;
-  UnixTimestamp?: Date;
-}
-
-export namespace KitchenSink {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KitchenSink): any => ({
-    ...obj,
-  });
-}
-
-export interface ErrorWithMembers extends __SmithyException, $MetadataBearer {
-  name: "ErrorWithMembers";
-  $fault: "client";
-  Code?: string;
-  ComplexData?: KitchenSink;
-  IntegerField?: number;
-  ListField?: string[];
-  MapField?: { [key: string]: string };
-  Message?: string;
-  /**
-   * abc
-   */
-  StringField?: string;
-}
-
-export namespace ErrorWithMembers {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ErrorWithMembers): any => ({
-    ...obj,
-  });
+  Blob?: Uint8Array | undefined;
+  Boolean?: boolean | undefined;
+  Double?: number | undefined;
+  EmptyStruct?: EmptyStruct | undefined;
+  Float?: number | undefined;
+  HttpdateTimestamp?: Date | undefined;
+  Integer?: number | undefined;
+  Iso8601Timestamp?: Date | undefined;
+  JsonValue?: __AutomaticJsonStringConversion | string | undefined;
+  ListOfLists?: string[][] | undefined;
+  ListOfMapsOfStrings?: Record<string, string>[] | undefined;
+  ListOfStrings?: string[] | undefined;
+  ListOfStructs?: SimpleStruct[] | undefined;
+  Long?: number | undefined;
+  MapOfListsOfStrings?: Record<string, string[]> | undefined;
+  MapOfMaps?: Record<string, Record<string, string>> | undefined;
+  MapOfStrings?: Record<string, string> | undefined;
+  MapOfStructs?: Record<string, SimpleStruct> | undefined;
+  RecursiveList?: KitchenSink[] | undefined;
+  RecursiveMap?: Record<string, KitchenSink> | undefined;
+  RecursiveStruct?: KitchenSink | undefined;
+  SimpleStruct?: SimpleStruct | undefined;
+  String?: string | undefined;
+  StructWithJsonName?: StructWithJsonName | undefined;
+  Timestamp?: Date | undefined;
+  UnixTimestamp?: Date | undefined;
 }

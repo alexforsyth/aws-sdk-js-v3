@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { GetBotAliasRequest, GetBotAliasResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetBotAliasCommand,
-  serializeAws_restJson1GetBotAliasCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBotAliasRequest, GetBotAliasResponse } from "../models/models_0";
+import { GetBotAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBotAliasCommand}.
+ */
 export interface GetBotAliasCommandInput extends GetBotAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBotAliasCommand}.
+ */
 export interface GetBotAliasCommandOutput extends GetBotAliasResponse, __MetadataBearer {}
 
 /**
@@ -30,73 +27,88 @@ export interface GetBotAliasCommandOutput extends GetBotAliasResponse, __Metadat
  *       about aliases, see <a>versioning-aliases</a>.</p>
  *          <p>This operation requires permissions for the
  *         <code>lex:GetBotAlias</code> action.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, GetBotAliasCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, GetBotAliasCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // GetBotAliasRequest
+ *   name: "STRING_VALUE", // required
+ *   botName: "STRING_VALUE", // required
+ * };
  * const command = new GetBotAliasCommand(input);
  * const response = await client.send(command);
+ * // { // GetBotAliasResponse
+ * //   name: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   botVersion: "STRING_VALUE",
+ * //   botName: "STRING_VALUE",
+ * //   lastUpdatedDate: new Date("TIMESTAMP"),
+ * //   createdDate: new Date("TIMESTAMP"),
+ * //   checksum: "STRING_VALUE",
+ * //   conversationLogs: { // ConversationLogsResponse
+ * //     logSettings: [ // LogSettingsResponseList
+ * //       { // LogSettingsResponse
+ * //         logType: "AUDIO" || "TEXT",
+ * //         destination: "CLOUDWATCH_LOGS" || "S3",
+ * //         kmsKeyArn: "STRING_VALUE",
+ * //         resourceArn: "STRING_VALUE",
+ * //         resourcePrefix: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     iamRoleArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetBotAliasCommandInput - {@link GetBotAliasCommandInput}
+ * @returns {@link GetBotAliasCommandOutput}
  * @see {@link GetBotAliasCommandInput} for command's `input` shape.
  * @see {@link GetBotAliasCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @public
  */
-export class GetBotAliasCommand extends $Command<
-  GetBotAliasCommandInput,
-  GetBotAliasCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBotAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBotAliasCommandInput, GetBotAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "GetBotAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBotAliasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBotAliasResponse.filterSensitiveLog,
+export class GetBotAliasCommand extends command<GetBotAliasCommandInput, GetBotAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBotAlias",
+  GetBotAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBotAliasRequest;
+      output: GetBotAliasResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBotAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetBotAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBotAliasCommandOutput> {
-    return deserializeAws_restJson1GetBotAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBotAliasCommandInput;
+      output: GetBotAliasCommandOutput;
+    };
+  };
 }

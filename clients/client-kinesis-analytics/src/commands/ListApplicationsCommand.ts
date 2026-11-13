@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import { ListApplicationsRequest, ListApplicationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListApplicationsCommand,
-  serializeAws_json1_1ListApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationsRequest, ListApplicationsResponse } from "../models/models_0";
+import { ListApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandInput extends ListApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandOutput extends ListApplicationsResponse, __MetadataBearer {}
 
 /**
@@ -44,68 +45,55 @@ export interface ListApplicationsCommandOutput extends ListApplicationsResponse,
  * ```javascript
  * import { KinesisAnalyticsClient, ListApplicationsCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, ListApplicationsCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // ListApplicationsRequest
+ *   Limit: Number("int"),
+ *   ExclusiveStartApplicationName: "STRING_VALUE",
+ * };
  * const command = new ListApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListApplicationsResponse
+ * //   ApplicationSummaries: [ // ApplicationSummaries // required
+ * //     { // ApplicationSummary
+ * //       ApplicationName: "STRING_VALUE", // required
+ * //       ApplicationARN: "STRING_VALUE", // required
+ * //       ApplicationStatus: "DELETING" || "STARTING" || "STOPPING" || "READY" || "RUNNING" || "UPDATING", // required
+ * //     },
+ * //   ],
+ * //   HasMoreApplications: true || false, // required
+ * // };
+ *
  * ```
  *
+ * @param ListApplicationsCommandInput - {@link ListApplicationsCommandInput}
+ * @returns {@link ListApplicationsCommandOutput}
  * @see {@link ListApplicationsCommandInput} for command's `input` shape.
  * @see {@link ListApplicationsCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class ListApplicationsCommand extends $Command<
-  ListApplicationsCommandInput,
-  ListApplicationsCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListApplicationsCommandInput, ListApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "ListApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListApplicationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListApplicationsResponse.filterSensitiveLog,
+export class ListApplicationsCommand extends command<ListApplicationsCommandInput, ListApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplications",
+  ListApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationsRequest;
+      output: ListApplicationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListApplicationsCommandOutput> {
-    return deserializeAws_json1_1ListApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListApplicationsCommandInput;
+      output: ListApplicationsCommandOutput;
+    };
+  };
 }

@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { CloudHSMClientConfig } from "./CloudHSMClient";
+// smithy-typescript generated code
+import type { CloudHSMClientConfig } from "./CloudHSMClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: CloudHSMClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

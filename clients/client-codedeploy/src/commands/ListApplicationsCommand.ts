@@ -1,95 +1,81 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { ListApplicationsInput, ListApplicationsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListApplicationsCommand,
-  serializeAws_json1_1ListApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListApplicationsInput, ListApplicationsOutput } from "../models/models_0";
+import { ListApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandInput extends ListApplicationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListApplicationsCommand}.
+ */
 export interface ListApplicationsCommandOutput extends ListApplicationsOutput, __MetadataBearer {}
 
 /**
- * <p>Lists the applications registered with the IAM user or AWS account.</p>
+ * <p>Lists the applications registered with the user or Amazon Web Services account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, ListApplicationsCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, ListApplicationsCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // ListApplicationsInput
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListApplicationsOutput
+ * //   applications: [ // ApplicationsList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListApplicationsCommandInput - {@link ListApplicationsCommandInput}
+ * @returns {@link ListApplicationsCommandOutput}
  * @see {@link ListApplicationsCommandInput} for command's `input` shape.
  * @see {@link ListApplicationsCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token was specified in an invalid format.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class ListApplicationsCommand extends $Command<
-  ListApplicationsCommandInput,
-  ListApplicationsCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListApplicationsCommandInput, ListApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "ListApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListApplicationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListApplicationsOutput.filterSensitiveLog,
+export class ListApplicationsCommand extends command<ListApplicationsCommandInput, ListApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListApplications",
+  ListApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListApplicationsInput;
+      output: ListApplicationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListApplicationsCommandOutput> {
-    return deserializeAws_json1_1ListApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListApplicationsCommandInput;
+      output: ListApplicationsCommandOutput;
+    };
+  };
 }

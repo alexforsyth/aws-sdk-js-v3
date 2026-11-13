@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetServiceRequest, GetServiceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetServiceCommand,
-  serializeAws_json1_1GetServiceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceDiscoveryClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceDiscoveryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetServiceRequest, GetServiceResponse } from "../models/models_0";
+import { GetService$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetServiceCommand}.
+ */
 export interface GetServiceCommandInput extends GetServiceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetServiceCommand}.
+ */
 export interface GetServiceCommandOutput extends GetServiceResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,122 @@ export interface GetServiceCommandOutput extends GetServiceResponse, __MetadataB
  * ```javascript
  * import { ServiceDiscoveryClient, GetServiceCommand } from "@aws-sdk/client-servicediscovery"; // ES Modules import
  * // const { ServiceDiscoveryClient, GetServiceCommand } = require("@aws-sdk/client-servicediscovery"); // CommonJS import
+ * // import type { ServiceDiscoveryClientConfig } from "@aws-sdk/client-servicediscovery";
+ * const config = {}; // type is ServiceDiscoveryClientConfig
  * const client = new ServiceDiscoveryClient(config);
+ * const input = { // GetServiceRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new GetServiceCommand(input);
  * const response = await client.send(command);
+ * // { // GetServiceResponse
+ * //   Service: { // Service
+ * //     Id: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     ResourceOwner: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     NamespaceId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     InstanceCount: Number("int"),
+ * //     DnsConfig: { // DnsConfig
+ * //       NamespaceId: "STRING_VALUE",
+ * //       RoutingPolicy: "MULTIVALUE" || "WEIGHTED",
+ * //       DnsRecords: [ // DnsRecordList // required
+ * //         { // DnsRecord
+ * //           Type: "SRV" || "A" || "AAAA" || "CNAME", // required
+ * //           TTL: Number("long"), // required
+ * //         },
+ * //       ],
+ * //     },
+ * //     Type: "HTTP" || "DNS_HTTP" || "DNS",
+ * //     HealthCheckConfig: { // HealthCheckConfig
+ * //       Type: "HTTP" || "HTTPS" || "TCP", // required
+ * //       ResourcePath: "STRING_VALUE",
+ * //       FailureThreshold: Number("int"),
+ * //     },
+ * //     HealthCheckCustomConfig: { // HealthCheckCustomConfig
+ * //       FailureThreshold: Number("int"),
+ * //     },
+ * //     CreateDate: new Date("TIMESTAMP"),
+ * //     CreatorRequestId: "STRING_VALUE",
+ * //     CreatedByAccount: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetServiceCommandInput - {@link GetServiceCommandInput}
+ * @returns {@link GetServiceCommandOutput}
  * @see {@link GetServiceCommandInput} for command's `input` shape.
  * @see {@link GetServiceCommandOutput} for command's `response` shape.
- * @see {@link ServiceDiscoveryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceDiscoveryClientResolvedConfig | config} for ServiceDiscoveryClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>One or more specified values aren't valid. For example, a required value might be missing, a
+ *    numeric value might be outside the allowed range, or a string value might exceed length
+ *    constraints.</p>
+ *
+ * @throws {@link ServiceNotFound} (client fault)
+ *  <p>No service exists with the specified ID.</p>
+ *
+ * @throws {@link ServiceDiscoveryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceDiscovery service.</p>
+ *
+ *
+ * @example Get service using service ARN
+ * ```javascript
+ * // Gets service settings using a service ARN instead of service ID, useful when working with shared namespaces. Shows a service created by a sharee (111122223333) in a namespace owned by another account (123456789012).
+ * const input = {
+ *   Id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+ * };
+ * const command = new GetServiceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Service: {
+ *     Arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+ *     CreateDate: 1.7051616E9,
+ *     CreatedByAccount: "111122223333",
+ *     CreatorRequestId: "abcd1234-xmpl-5678-9012-abcd1234xmpl",
+ *     Description: "Example service",
+ *     DnsConfig: {
+ *       DnsRecords: [
+ *         {
+ *           TTL: 300,
+ *           Type: "A"
+ *         }
+ *       ],
+ *       NamespaceId: "ns-abcd1234xmpl5678",
+ *       RoutingPolicy: "MULTIVALUE"
+ *     },
+ *     Id: "srv-abcd1234xmpl5678",
+ *     InstanceCount: 2,
+ *     Name: "example-service",
+ *     NamespaceId: "ns-abcd1234xmpl5678",
+ *     ResourceOwner: "123456789012",
+ *     Type: "DNS_HTTP"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetServiceCommand extends $Command<
-  GetServiceCommandInput,
-  GetServiceCommandOutput,
-  ServiceDiscoveryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetServiceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceDiscoveryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetServiceCommandInput, GetServiceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceDiscoveryClient";
-    const commandName = "GetServiceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetServiceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetServiceResponse.filterSensitiveLog,
+export class GetServiceCommand extends command<GetServiceCommandInput, GetServiceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetService",
+  GetService$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceRequest;
+      output: GetServiceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetServiceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetServiceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetServiceCommandOutput> {
-    return deserializeAws_json1_1GetServiceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetServiceCommandInput;
+      output: GetServiceCommandOutput;
+    };
+  };
 }

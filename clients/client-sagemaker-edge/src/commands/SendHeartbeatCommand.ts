@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SendHeartbeatRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1SendHeartbeatCommand,
-  serializeAws_restJson1SendHeartbeatCommand,
-} from "../protocols/Aws_restJson1";
-import { SagemakerEdgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SagemakerEdgeClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendHeartbeatRequest } from "../models/models_0";
+import { SendHeartbeat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendHeartbeatCommand}.
+ */
 export interface SendHeartbeatCommandInput extends SendHeartbeatRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendHeartbeatCommand}.
+ */
 export interface SendHeartbeatCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,94 @@ export interface SendHeartbeatCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SagemakerEdgeClient, SendHeartbeatCommand } from "@aws-sdk/client-sagemaker-edge"; // ES Modules import
  * // const { SagemakerEdgeClient, SendHeartbeatCommand } = require("@aws-sdk/client-sagemaker-edge"); // CommonJS import
+ * // import type { SagemakerEdgeClientConfig } from "@aws-sdk/client-sagemaker-edge";
+ * const config = {}; // type is SagemakerEdgeClientConfig
  * const client = new SagemakerEdgeClient(config);
+ * const input = { // SendHeartbeatRequest
+ *   AgentMetrics: [ // EdgeMetrics
+ *     { // EdgeMetric
+ *       Dimension: "STRING_VALUE",
+ *       MetricName: "STRING_VALUE",
+ *       Value: Number("double"),
+ *       Timestamp: new Date("TIMESTAMP"),
+ *     },
+ *   ],
+ *   Models: [ // Models
+ *     { // Model
+ *       ModelName: "STRING_VALUE",
+ *       ModelVersion: "STRING_VALUE",
+ *       LatestSampleTime: new Date("TIMESTAMP"),
+ *       LatestInference: new Date("TIMESTAMP"),
+ *       ModelMetrics: [
+ *         {
+ *           Dimension: "STRING_VALUE",
+ *           MetricName: "STRING_VALUE",
+ *           Value: Number("double"),
+ *           Timestamp: new Date("TIMESTAMP"),
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   AgentVersion: "STRING_VALUE", // required
+ *   DeviceName: "STRING_VALUE", // required
+ *   DeviceFleetName: "STRING_VALUE", // required
+ *   DeploymentResult: { // DeploymentResult
+ *     DeploymentName: "STRING_VALUE",
+ *     DeploymentStatus: "STRING_VALUE",
+ *     DeploymentStatusMessage: "STRING_VALUE",
+ *     DeploymentStartTime: new Date("TIMESTAMP"),
+ *     DeploymentEndTime: new Date("TIMESTAMP"),
+ *     DeploymentModels: [ // DeploymentModels
+ *       { // DeploymentModel
+ *         ModelHandle: "STRING_VALUE",
+ *         ModelName: "STRING_VALUE",
+ *         ModelVersion: "STRING_VALUE",
+ *         DesiredState: "DEPLOY" || "UNDEPLOY",
+ *         State: "DEPLOY" || "UNDEPLOY",
+ *         Status: "SUCCESS" || "FAIL",
+ *         StatusReason: "STRING_VALUE",
+ *         RollbackFailureReason: "STRING_VALUE",
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new SendHeartbeatCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SendHeartbeatCommandInput - {@link SendHeartbeatCommandInput}
+ * @returns {@link SendHeartbeatCommandOutput}
  * @see {@link SendHeartbeatCommandInput} for command's `input` shape.
  * @see {@link SendHeartbeatCommandOutput} for command's `response` shape.
- * @see {@link SagemakerEdgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SagemakerEdgeClientResolvedConfig | config} for SagemakerEdgeClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (client fault)
+ *  <p>An internal failure occurred. Try your request again. If the problem
+ *       persists, contact Amazon Web Services customer support.</p>
+ *
+ * @throws {@link SagemakerEdgeServiceException}
+ * <p>Base exception class for all service exceptions from SagemakerEdge service.</p>
+ *
+ *
+ * @public
  */
-export class SendHeartbeatCommand extends $Command<
-  SendHeartbeatCommandInput,
-  SendHeartbeatCommandOutput,
-  SagemakerEdgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendHeartbeatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SagemakerEdgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendHeartbeatCommandInput, SendHeartbeatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SagemakerEdgeClient";
-    const commandName = "SendHeartbeatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendHeartbeatRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class SendHeartbeatCommand extends command<SendHeartbeatCommandInput, SendHeartbeatCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendHeartbeat",
+  SendHeartbeat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendHeartbeatRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendHeartbeatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SendHeartbeatCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendHeartbeatCommandOutput> {
-    return deserializeAws_restJson1SendHeartbeatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendHeartbeatCommandInput;
+      output: SendHeartbeatCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetComplianceSummaryByResourceTypeRequest,
   GetComplianceSummaryByResourceTypeResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetComplianceSummaryByResourceTypeCommand,
-  serializeAws_json1_1GetComplianceSummaryByResourceTypeCommand,
-} from "../protocols/Aws_json1_1";
+import { GetComplianceSummaryByResourceType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetComplianceSummaryByResourceTypeCommand}.
+ */
 export interface GetComplianceSummaryByResourceTypeCommandInput extends GetComplianceSummaryByResourceTypeRequest {}
-export interface GetComplianceSummaryByResourceTypeCommandOutput
-  extends GetComplianceSummaryByResourceTypeResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetComplianceSummaryByResourceTypeCommand}.
+ */
+export interface GetComplianceSummaryByResourceTypeCommandOutput extends GetComplianceSummaryByResourceTypeResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the number of resources that are compliant and the
@@ -36,74 +35,68 @@ export interface GetComplianceSummaryByResourceTypeCommandOutput
  * ```javascript
  * import { ConfigServiceClient, GetComplianceSummaryByResourceTypeCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, GetComplianceSummaryByResourceTypeCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // GetComplianceSummaryByResourceTypeRequest
+ *   ResourceTypes: [ // ResourceTypes
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new GetComplianceSummaryByResourceTypeCommand(input);
  * const response = await client.send(command);
+ * // { // GetComplianceSummaryByResourceTypeResponse
+ * //   ComplianceSummariesByResourceType: [ // ComplianceSummariesByResourceType
+ * //     { // ComplianceSummaryByResourceType
+ * //       ResourceType: "STRING_VALUE",
+ * //       ComplianceSummary: { // ComplianceSummary
+ * //         CompliantResourceCount: { // ComplianceContributorCount
+ * //           CappedCount: Number("int"),
+ * //           CapExceeded: true || false,
+ * //         },
+ * //         NonCompliantResourceCount: {
+ * //           CappedCount: Number("int"),
+ * //           CapExceeded: true || false,
+ * //         },
+ * //         ComplianceSummaryTimestamp: new Date("TIMESTAMP"),
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetComplianceSummaryByResourceTypeCommandInput - {@link GetComplianceSummaryByResourceTypeCommandInput}
+ * @returns {@link GetComplianceSummaryByResourceTypeCommandOutput}
  * @see {@link GetComplianceSummaryByResourceTypeCommandInput} for command's `input` shape.
  * @see {@link GetComplianceSummaryByResourceTypeCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more of the specified parameters are not valid. Verify
+ * 			that your parameters are valid and try again.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class GetComplianceSummaryByResourceTypeCommand extends $Command<
-  GetComplianceSummaryByResourceTypeCommandInput,
-  GetComplianceSummaryByResourceTypeCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetComplianceSummaryByResourceTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetComplianceSummaryByResourceTypeCommandInput, GetComplianceSummaryByResourceTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "GetComplianceSummaryByResourceTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetComplianceSummaryByResourceTypeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetComplianceSummaryByResourceTypeResponse.filterSensitiveLog,
+export class GetComplianceSummaryByResourceTypeCommand extends command<GetComplianceSummaryByResourceTypeCommandInput, GetComplianceSummaryByResourceTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetComplianceSummaryByResourceType",
+  GetComplianceSummaryByResourceType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetComplianceSummaryByResourceTypeRequest;
+      output: GetComplianceSummaryByResourceTypeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetComplianceSummaryByResourceTypeCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetComplianceSummaryByResourceTypeCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetComplianceSummaryByResourceTypeCommandOutput> {
-    return deserializeAws_json1_1GetComplianceSummaryByResourceTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetComplianceSummaryByResourceTypeCommandInput;
+      output: GetComplianceSummaryByResourceTypeCommandOutput;
+    };
+  };
 }

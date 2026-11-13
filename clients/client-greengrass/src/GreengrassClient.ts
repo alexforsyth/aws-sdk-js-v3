@@ -1,376 +1,408 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultGreengrassHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AssociateRoleToGroupCommandInput,
   AssociateRoleToGroupCommandOutput,
 } from "./commands/AssociateRoleToGroupCommand";
-import {
+import type {
   AssociateServiceRoleToAccountCommandInput,
   AssociateServiceRoleToAccountCommandOutput,
 } from "./commands/AssociateServiceRoleToAccountCommand";
-import {
+import type {
   CreateConnectorDefinitionCommandInput,
   CreateConnectorDefinitionCommandOutput,
 } from "./commands/CreateConnectorDefinitionCommand";
-import {
+import type {
   CreateConnectorDefinitionVersionCommandInput,
   CreateConnectorDefinitionVersionCommandOutput,
 } from "./commands/CreateConnectorDefinitionVersionCommand";
-import {
+import type {
   CreateCoreDefinitionCommandInput,
   CreateCoreDefinitionCommandOutput,
 } from "./commands/CreateCoreDefinitionCommand";
-import {
+import type {
   CreateCoreDefinitionVersionCommandInput,
   CreateCoreDefinitionVersionCommandOutput,
 } from "./commands/CreateCoreDefinitionVersionCommand";
-import { CreateDeploymentCommandInput, CreateDeploymentCommandOutput } from "./commands/CreateDeploymentCommand";
-import {
+import type { CreateDeploymentCommandInput, CreateDeploymentCommandOutput } from "./commands/CreateDeploymentCommand";
+import type {
   CreateDeviceDefinitionCommandInput,
   CreateDeviceDefinitionCommandOutput,
 } from "./commands/CreateDeviceDefinitionCommand";
-import {
+import type {
   CreateDeviceDefinitionVersionCommandInput,
   CreateDeviceDefinitionVersionCommandOutput,
 } from "./commands/CreateDeviceDefinitionVersionCommand";
-import {
+import type {
   CreateFunctionDefinitionCommandInput,
   CreateFunctionDefinitionCommandOutput,
 } from "./commands/CreateFunctionDefinitionCommand";
-import {
+import type {
   CreateFunctionDefinitionVersionCommandInput,
   CreateFunctionDefinitionVersionCommandOutput,
 } from "./commands/CreateFunctionDefinitionVersionCommand";
-import {
+import type {
   CreateGroupCertificateAuthorityCommandInput,
   CreateGroupCertificateAuthorityCommandOutput,
 } from "./commands/CreateGroupCertificateAuthorityCommand";
-import { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
-import { CreateGroupVersionCommandInput, CreateGroupVersionCommandOutput } from "./commands/CreateGroupVersionCommand";
-import {
+import type { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
+import type {
+  CreateGroupVersionCommandInput,
+  CreateGroupVersionCommandOutput,
+} from "./commands/CreateGroupVersionCommand";
+import type {
   CreateLoggerDefinitionCommandInput,
   CreateLoggerDefinitionCommandOutput,
 } from "./commands/CreateLoggerDefinitionCommand";
-import {
+import type {
   CreateLoggerDefinitionVersionCommandInput,
   CreateLoggerDefinitionVersionCommandOutput,
 } from "./commands/CreateLoggerDefinitionVersionCommand";
-import {
+import type {
   CreateResourceDefinitionCommandInput,
   CreateResourceDefinitionCommandOutput,
 } from "./commands/CreateResourceDefinitionCommand";
-import {
+import type {
   CreateResourceDefinitionVersionCommandInput,
   CreateResourceDefinitionVersionCommandOutput,
 } from "./commands/CreateResourceDefinitionVersionCommand";
-import {
+import type {
   CreateSoftwareUpdateJobCommandInput,
   CreateSoftwareUpdateJobCommandOutput,
 } from "./commands/CreateSoftwareUpdateJobCommand";
-import {
+import type {
   CreateSubscriptionDefinitionCommandInput,
   CreateSubscriptionDefinitionCommandOutput,
 } from "./commands/CreateSubscriptionDefinitionCommand";
-import {
+import type {
   CreateSubscriptionDefinitionVersionCommandInput,
   CreateSubscriptionDefinitionVersionCommandOutput,
 } from "./commands/CreateSubscriptionDefinitionVersionCommand";
-import {
+import type {
   DeleteConnectorDefinitionCommandInput,
   DeleteConnectorDefinitionCommandOutput,
 } from "./commands/DeleteConnectorDefinitionCommand";
-import {
+import type {
   DeleteCoreDefinitionCommandInput,
   DeleteCoreDefinitionCommandOutput,
 } from "./commands/DeleteCoreDefinitionCommand";
-import {
+import type {
   DeleteDeviceDefinitionCommandInput,
   DeleteDeviceDefinitionCommandOutput,
 } from "./commands/DeleteDeviceDefinitionCommand";
-import {
+import type {
   DeleteFunctionDefinitionCommandInput,
   DeleteFunctionDefinitionCommandOutput,
 } from "./commands/DeleteFunctionDefinitionCommand";
-import { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
-import {
+import type { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
+import type {
   DeleteLoggerDefinitionCommandInput,
   DeleteLoggerDefinitionCommandOutput,
 } from "./commands/DeleteLoggerDefinitionCommand";
-import {
+import type {
   DeleteResourceDefinitionCommandInput,
   DeleteResourceDefinitionCommandOutput,
 } from "./commands/DeleteResourceDefinitionCommand";
-import {
+import type {
   DeleteSubscriptionDefinitionCommandInput,
   DeleteSubscriptionDefinitionCommandOutput,
 } from "./commands/DeleteSubscriptionDefinitionCommand";
-import {
+import type {
   DisassociateRoleFromGroupCommandInput,
   DisassociateRoleFromGroupCommandOutput,
 } from "./commands/DisassociateRoleFromGroupCommand";
-import {
+import type {
   DisassociateServiceRoleFromAccountCommandInput,
   DisassociateServiceRoleFromAccountCommandOutput,
 } from "./commands/DisassociateServiceRoleFromAccountCommand";
-import { GetAssociatedRoleCommandInput, GetAssociatedRoleCommandOutput } from "./commands/GetAssociatedRoleCommand";
-import {
+import type {
+  GetAssociatedRoleCommandInput,
+  GetAssociatedRoleCommandOutput,
+} from "./commands/GetAssociatedRoleCommand";
+import type {
   GetBulkDeploymentStatusCommandInput,
   GetBulkDeploymentStatusCommandOutput,
 } from "./commands/GetBulkDeploymentStatusCommand";
-import {
+import type {
   GetConnectivityInfoCommandInput,
   GetConnectivityInfoCommandOutput,
 } from "./commands/GetConnectivityInfoCommand";
-import {
+import type {
   GetConnectorDefinitionCommandInput,
   GetConnectorDefinitionCommandOutput,
 } from "./commands/GetConnectorDefinitionCommand";
-import {
+import type {
   GetConnectorDefinitionVersionCommandInput,
   GetConnectorDefinitionVersionCommandOutput,
 } from "./commands/GetConnectorDefinitionVersionCommand";
-import { GetCoreDefinitionCommandInput, GetCoreDefinitionCommandOutput } from "./commands/GetCoreDefinitionCommand";
-import {
+import type {
+  GetCoreDefinitionCommandInput,
+  GetCoreDefinitionCommandOutput,
+} from "./commands/GetCoreDefinitionCommand";
+import type {
   GetCoreDefinitionVersionCommandInput,
   GetCoreDefinitionVersionCommandOutput,
 } from "./commands/GetCoreDefinitionVersionCommand";
-import {
+import type {
   GetDeploymentStatusCommandInput,
   GetDeploymentStatusCommandOutput,
 } from "./commands/GetDeploymentStatusCommand";
-import {
+import type {
   GetDeviceDefinitionCommandInput,
   GetDeviceDefinitionCommandOutput,
 } from "./commands/GetDeviceDefinitionCommand";
-import {
+import type {
   GetDeviceDefinitionVersionCommandInput,
   GetDeviceDefinitionVersionCommandOutput,
 } from "./commands/GetDeviceDefinitionVersionCommand";
-import {
+import type {
   GetFunctionDefinitionCommandInput,
   GetFunctionDefinitionCommandOutput,
 } from "./commands/GetFunctionDefinitionCommand";
-import {
+import type {
   GetFunctionDefinitionVersionCommandInput,
   GetFunctionDefinitionVersionCommandOutput,
 } from "./commands/GetFunctionDefinitionVersionCommand";
-import {
+import type {
   GetGroupCertificateAuthorityCommandInput,
   GetGroupCertificateAuthorityCommandOutput,
 } from "./commands/GetGroupCertificateAuthorityCommand";
-import {
+import type {
   GetGroupCertificateConfigurationCommandInput,
   GetGroupCertificateConfigurationCommandOutput,
 } from "./commands/GetGroupCertificateConfigurationCommand";
-import { GetGroupCommandInput, GetGroupCommandOutput } from "./commands/GetGroupCommand";
-import { GetGroupVersionCommandInput, GetGroupVersionCommandOutput } from "./commands/GetGroupVersionCommand";
-import {
+import type { GetGroupCommandInput, GetGroupCommandOutput } from "./commands/GetGroupCommand";
+import type { GetGroupVersionCommandInput, GetGroupVersionCommandOutput } from "./commands/GetGroupVersionCommand";
+import type {
   GetLoggerDefinitionCommandInput,
   GetLoggerDefinitionCommandOutput,
 } from "./commands/GetLoggerDefinitionCommand";
-import {
+import type {
   GetLoggerDefinitionVersionCommandInput,
   GetLoggerDefinitionVersionCommandOutput,
 } from "./commands/GetLoggerDefinitionVersionCommand";
-import {
+import type {
   GetResourceDefinitionCommandInput,
   GetResourceDefinitionCommandOutput,
 } from "./commands/GetResourceDefinitionCommand";
-import {
+import type {
   GetResourceDefinitionVersionCommandInput,
   GetResourceDefinitionVersionCommandOutput,
 } from "./commands/GetResourceDefinitionVersionCommand";
-import {
+import type {
   GetServiceRoleForAccountCommandInput,
   GetServiceRoleForAccountCommandOutput,
 } from "./commands/GetServiceRoleForAccountCommand";
-import {
+import type {
   GetSubscriptionDefinitionCommandInput,
   GetSubscriptionDefinitionCommandOutput,
 } from "./commands/GetSubscriptionDefinitionCommand";
-import {
+import type {
   GetSubscriptionDefinitionVersionCommandInput,
   GetSubscriptionDefinitionVersionCommandOutput,
 } from "./commands/GetSubscriptionDefinitionVersionCommand";
-import {
+import type {
   GetThingRuntimeConfigurationCommandInput,
   GetThingRuntimeConfigurationCommandOutput,
 } from "./commands/GetThingRuntimeConfigurationCommand";
-import {
+import type {
   ListBulkDeploymentDetailedReportsCommandInput,
   ListBulkDeploymentDetailedReportsCommandOutput,
 } from "./commands/ListBulkDeploymentDetailedReportsCommand";
-import {
+import type {
   ListBulkDeploymentsCommandInput,
   ListBulkDeploymentsCommandOutput,
 } from "./commands/ListBulkDeploymentsCommand";
-import {
+import type {
   ListConnectorDefinitionsCommandInput,
   ListConnectorDefinitionsCommandOutput,
 } from "./commands/ListConnectorDefinitionsCommand";
-import {
+import type {
   ListConnectorDefinitionVersionsCommandInput,
   ListConnectorDefinitionVersionsCommandOutput,
 } from "./commands/ListConnectorDefinitionVersionsCommand";
-import {
+import type {
   ListCoreDefinitionsCommandInput,
   ListCoreDefinitionsCommandOutput,
 } from "./commands/ListCoreDefinitionsCommand";
-import {
+import type {
   ListCoreDefinitionVersionsCommandInput,
   ListCoreDefinitionVersionsCommandOutput,
 } from "./commands/ListCoreDefinitionVersionsCommand";
-import { ListDeploymentsCommandInput, ListDeploymentsCommandOutput } from "./commands/ListDeploymentsCommand";
-import {
+import type { ListDeploymentsCommandInput, ListDeploymentsCommandOutput } from "./commands/ListDeploymentsCommand";
+import type {
   ListDeviceDefinitionsCommandInput,
   ListDeviceDefinitionsCommandOutput,
 } from "./commands/ListDeviceDefinitionsCommand";
-import {
+import type {
   ListDeviceDefinitionVersionsCommandInput,
   ListDeviceDefinitionVersionsCommandOutput,
 } from "./commands/ListDeviceDefinitionVersionsCommand";
-import {
+import type {
   ListFunctionDefinitionsCommandInput,
   ListFunctionDefinitionsCommandOutput,
 } from "./commands/ListFunctionDefinitionsCommand";
-import {
+import type {
   ListFunctionDefinitionVersionsCommandInput,
   ListFunctionDefinitionVersionsCommandOutput,
 } from "./commands/ListFunctionDefinitionVersionsCommand";
-import {
+import type {
   ListGroupCertificateAuthoritiesCommandInput,
   ListGroupCertificateAuthoritiesCommandOutput,
 } from "./commands/ListGroupCertificateAuthoritiesCommand";
-import { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
-import { ListGroupVersionsCommandInput, ListGroupVersionsCommandOutput } from "./commands/ListGroupVersionsCommand";
-import {
+import type { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
+import type {
+  ListGroupVersionsCommandInput,
+  ListGroupVersionsCommandOutput,
+} from "./commands/ListGroupVersionsCommand";
+import type {
   ListLoggerDefinitionsCommandInput,
   ListLoggerDefinitionsCommandOutput,
 } from "./commands/ListLoggerDefinitionsCommand";
-import {
+import type {
   ListLoggerDefinitionVersionsCommandInput,
   ListLoggerDefinitionVersionsCommandOutput,
 } from "./commands/ListLoggerDefinitionVersionsCommand";
-import {
+import type {
   ListResourceDefinitionsCommandInput,
   ListResourceDefinitionsCommandOutput,
 } from "./commands/ListResourceDefinitionsCommand";
-import {
+import type {
   ListResourceDefinitionVersionsCommandInput,
   ListResourceDefinitionVersionsCommandOutput,
 } from "./commands/ListResourceDefinitionVersionsCommand";
-import {
+import type {
   ListSubscriptionDefinitionsCommandInput,
   ListSubscriptionDefinitionsCommandOutput,
 } from "./commands/ListSubscriptionDefinitionsCommand";
-import {
+import type {
   ListSubscriptionDefinitionVersionsCommandInput,
   ListSubscriptionDefinitionVersionsCommandOutput,
 } from "./commands/ListSubscriptionDefinitionVersionsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ResetDeploymentsCommandInput, ResetDeploymentsCommandOutput } from "./commands/ResetDeploymentsCommand";
-import {
+import type { ResetDeploymentsCommandInput, ResetDeploymentsCommandOutput } from "./commands/ResetDeploymentsCommand";
+import type {
   StartBulkDeploymentCommandInput,
   StartBulkDeploymentCommandOutput,
 } from "./commands/StartBulkDeploymentCommand";
-import { StopBulkDeploymentCommandInput, StopBulkDeploymentCommandOutput } from "./commands/StopBulkDeploymentCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type {
+  StopBulkDeploymentCommandInput,
+  StopBulkDeploymentCommandOutput,
+} from "./commands/StopBulkDeploymentCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateConnectivityInfoCommandInput,
   UpdateConnectivityInfoCommandOutput,
 } from "./commands/UpdateConnectivityInfoCommand";
-import {
+import type {
   UpdateConnectorDefinitionCommandInput,
   UpdateConnectorDefinitionCommandOutput,
 } from "./commands/UpdateConnectorDefinitionCommand";
-import {
+import type {
   UpdateCoreDefinitionCommandInput,
   UpdateCoreDefinitionCommandOutput,
 } from "./commands/UpdateCoreDefinitionCommand";
-import {
+import type {
   UpdateDeviceDefinitionCommandInput,
   UpdateDeviceDefinitionCommandOutput,
 } from "./commands/UpdateDeviceDefinitionCommand";
-import {
+import type {
   UpdateFunctionDefinitionCommandInput,
   UpdateFunctionDefinitionCommandOutput,
 } from "./commands/UpdateFunctionDefinitionCommand";
-import {
+import type {
   UpdateGroupCertificateConfigurationCommandInput,
   UpdateGroupCertificateConfigurationCommandOutput,
 } from "./commands/UpdateGroupCertificateConfigurationCommand";
-import { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
-import {
+import type { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
+import type {
   UpdateLoggerDefinitionCommandInput,
   UpdateLoggerDefinitionCommandOutput,
 } from "./commands/UpdateLoggerDefinitionCommand";
-import {
+import type {
   UpdateResourceDefinitionCommandInput,
   UpdateResourceDefinitionCommandOutput,
 } from "./commands/UpdateResourceDefinitionCommand";
-import {
+import type {
   UpdateSubscriptionDefinitionCommandInput,
   UpdateSubscriptionDefinitionCommandOutput,
 } from "./commands/UpdateSubscriptionDefinitionCommand";
-import {
+import type {
   UpdateThingRuntimeConfigurationCommandInput,
   UpdateThingRuntimeConfigurationCommandOutput,
 } from "./commands/UpdateThingRuntimeConfigurationCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AssociateRoleToGroupCommandInput
   | AssociateServiceRoleToAccountCommandInput
@@ -465,6 +497,9 @@ export type ServiceInputTypes =
   | UpdateSubscriptionDefinitionCommandInput
   | UpdateThingRuntimeConfigurationCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AssociateRoleToGroupCommandOutput
   | AssociateServiceRoleToAccountCommandOutput
@@ -559,18 +594,21 @@ export type ServiceOutputTypes =
   | UpdateSubscriptionDefinitionCommandOutput
   | UpdateThingRuntimeConfigurationCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -582,7 +620,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -621,25 +659,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -652,63 +681,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type GreengrassClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of GreengrassClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type GreengrassClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of GreengrassClient class constructor that set the region, credentials and other options.
  */
 export interface GreengrassClientConfig extends GreengrassClientConfigType {}
 
-type GreengrassClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of GreengrassClient class. This is resolved and normalized from the {@link GreengrassClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type GreengrassClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of GreengrassClient class. This is resolved and normalized from the {@link GreengrassClientConfig | constructor configuration interface}.
  */
 export interface GreengrassClientResolvedConfig extends GreengrassClientResolvedConfigType {}
 
 /**
  * AWS IoT Greengrass seamlessly extends AWS onto physical devices so they can act locally on the data they generate, while still using the cloud for management, analytics, and durable storage. AWS IoT Greengrass ensures your devices can respond quickly to local events and operate with intermittent connectivity. AWS IoT Greengrass minimizes the cost of transmitting data to the cloud by allowing you to author AWS Lambda functions that execute locally.
+ * @public
  */
 export class GreengrassClient extends __Client<
   __HttpHandlerOptions,
@@ -721,22 +800,36 @@ export class GreengrassClient extends __Client<
    */
   readonly config: GreengrassClientResolvedConfig;
 
-  constructor(configuration: GreengrassClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<GreengrassClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultGreengrassHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: GreengrassClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

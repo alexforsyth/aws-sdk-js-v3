@@ -1,17 +1,53 @@
-import { Logger as __Logger } from "@aws-sdk/types";
-import { parseUrl } from "@aws-sdk/url-parser";
+// smithy-typescript generated code
+import { AwsSdkSigV4Signer } from "@aws-sdk/core/httpAuthSchemes";
+import { AwsRestXmlProtocol } from "@aws-sdk/core/protocols";
+import { Md5, Sha256 } from "@smithy/core/checksum";
+import { NoOpLogger } from "@smithy/core/client";
+import { parseUrl } from "@smithy/core/protocols";
+import { fromBase64, fromUtf8, toBase64, toUtf8 } from "@smithy/core/serde";
+import type { IdentityProviderConfig } from "@smithy/types";
 
-import { defaultRegionInfoProvider } from "./endpoints";
-import { S3ControlClientConfig } from "./S3ControlClient";
+import { defaultS3ControlHttpAuthSchemeProvider } from "./auth/httpAuthSchemeProvider";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
+import type { S3ControlClientConfig } from "./S3ControlClient";
+import { errorTypeRegistries } from "./schemas/schemas_0";
 
 /**
  * @internal
  */
-export const getRuntimeConfig = (config: S3ControlClientConfig) => ({
-  apiVersion: "2018-08-20",
-  disableHostPrefix: config?.disableHostPrefix ?? false,
-  logger: config?.logger ?? ({} as __Logger),
-  regionInfoProvider: config?.regionInfoProvider ?? defaultRegionInfoProvider,
-  serviceId: config?.serviceId ?? "S3 Control",
-  urlParser: config?.urlParser ?? parseUrl,
-});
+export const getRuntimeConfig = (config: S3ControlClientConfig) => {
+  return {
+    apiVersion: "2018-08-20",
+    base64Decoder: config?.base64Decoder ?? fromBase64,
+    base64Encoder: config?.base64Encoder ?? toBase64,
+    disableHostPrefix: config?.disableHostPrefix ?? false,
+    endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
+    extensions: config?.extensions ?? [],
+    httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultS3ControlHttpAuthSchemeProvider,
+    httpAuthSchemes: config?.httpAuthSchemes ?? [
+      {
+        schemeId: "aws.auth#sigv4",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4"),
+        signer: new AwsSdkSigV4Signer(),
+      },
+    ],
+    logger: config?.logger ?? new NoOpLogger(),
+    md5: config?.md5 ?? Md5,
+    protocol: config?.protocol ?? AwsRestXmlProtocol,
+    protocolSettings: config?.protocolSettings ?? {
+      defaultNamespace: "com.amazonaws.s3control",
+      errorTypeRegistries,
+      xmlNamespace: "http://awss3control.amazonaws.com/doc/2018-08-20/",
+      version: "2018-08-20",
+      serviceTarget: "AWSS3ControlServiceV20180820",
+    },
+    serviceId: config?.serviceId ?? "S3 Control",
+    sha256: config?.sha256 ?? Sha256,
+    signingEscapePath: config?.signingEscapePath ?? false,
+    urlParser: config?.urlParser ?? parseUrl,
+    useArnRegion: config?.useArnRegion ?? undefined,
+    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+  };
+};

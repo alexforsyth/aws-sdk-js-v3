@@ -1,20 +1,10 @@
 /*
- * Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 package software.amazon.smithy.aws.typescript.codegen;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,6 +13,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.codegen.core.SymbolReference;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
+import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.typescript.codegen.ApplicationProtocol;
@@ -46,10 +37,10 @@ final class DocumentAggregatedClientGenerator implements Runnable {
     private final String serviceName;
 
     DocumentAggregatedClientGenerator(
-            TypeScriptSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            TypeScriptWriter writer
+        TypeScriptSettings settings,
+        Model model,
+        SymbolProvider symbolProvider,
+        TypeScriptWriter writer
     ) {
         this.model = model;
         this.symbolProvider = symbolProvider;
@@ -62,31 +53,47 @@ final class DocumentAggregatedClientGenerator implements Runnable {
 
     @Override
     public void run() {
-        writer.addImport(DocumentClientUtils.CLIENT_NAME,
-            DocumentClientUtils.CLIENT_NAME, Paths.get(".", DocumentClientUtils.CLIENT_NAME).toString());
+        // Note: using addImport would register this dependency on the dynamodb client, which must be avoided.
+        writer.write("""
+                     import type { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+                     """);
+        writer.addRelativeImport(
+            DocumentClientUtils.CLIENT_NAME,
+            DocumentClientUtils.CLIENT_NAME,
+            Paths.get(".", DocumentClientUtils.CLIENT_NAME)
+        );
         writer.writeDocs(DocumentClientUtils.getClientDocs());
-        writer.openBlock("export class $L extends $L {", "}",
-            DocumentClientUtils.CLIENT_FULL_NAME, DocumentClientUtils.CLIENT_NAME, () -> {
+        writer.openBlock(
+            "export class $L extends $L {",
+            "}",
+            DocumentClientUtils.CLIENT_FULL_NAME,
+            DocumentClientUtils.CLIENT_NAME,
+            () -> {
 
-            generateStaticFactoryFrom();
-            writer.write("");
-            generateOperations();
-        });
+                generateStaticFactoryFrom();
+                writer.write("");
+                generateOperations();
+            }
+        );
     }
 
     private void generateStaticFactoryFrom() {
         String translateConfig = DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE;
-        writer.addImport(serviceName, serviceName, "@aws-sdk/client-dynamodb");
-        writer.addImport(translateConfig, translateConfig, Paths.get(".", DocumentClientUtils.CLIENT_NAME).toString());
-        writer.openBlock("static from(client: $L, translateConfig?: $L) {", "}",
-            serviceName, translateConfig, () -> {
+        writer.addRelativeImport(translateConfig, translateConfig, Paths.get(".", DocumentClientUtils.CLIENT_NAME));
+        writer.openBlock(
+            "static from(client: $L, translateConfig?: $L) {",
+            "}",
+            serviceName,
+            translateConfig,
+            () -> {
                 writer.write("return new $L(client, translateConfig);", DocumentClientUtils.CLIENT_FULL_NAME);
-            });
+            }
+        );
     }
 
     private void generateOperations() {
         Set<OperationShape> containedOperations =
-                new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
+            new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
 
         for (OperationShape operation : containedOperations) {
             if (DocumentClientUtils.containsAttributeValue(model, symbolProvider, operation)) {
@@ -101,11 +108,14 @@ final class DocumentAggregatedClientGenerator implements Runnable {
                 );
                 SymbolReference options = ApplicationProtocol.createDefaultHttpApplicationProtocol().getOptionsType();
 
-                String commandFileLocation = String.format("./%s/%s",
-                    DocumentClientUtils.CLIENT_COMMANDS_FOLDER, name);
-                writer.addImport(name, name, commandFileLocation);
-                writer.addImport(input, input, commandFileLocation);
-                writer.addImport(output, output, commandFileLocation);
+                Path commandFilePath = Paths.get(
+                    ".",
+                    DocumentClientUtils.CLIENT_COMMANDS_FOLDER,
+                    name
+                );
+                writer.addRelativeImport(name, name, commandFilePath);
+                writer.addRelativeTypeImport(input, input, commandFilePath);
+                writer.addRelativeTypeImport(output, output, commandFilePath);
 
                 String methodName = StringUtils.uncapitalize(
                     DocumentClientUtils.getModifiedName(operationSymbol.getName().replaceAll("Command$", ""))
@@ -113,41 +123,57 @@ final class DocumentAggregatedClientGenerator implements Runnable {
 
                 // Generate a multiple overloaded methods for each command.
                 writer.writeDocs(DocumentClientUtils.getCommandDocs(operationSymbol.getName()));
-                writer.write("public $L(\n"
-                            + "  args: $L,\n"
-                            + "  options?: $T,\n"
-                            + "): Promise<$L>;", methodName, input, options, output);
-                writer.write("public $L(\n"
-                             + "  args: $L,\n"
-                             + "  cb: (err: any, data?: $L) => void\n"
-                             + "): void;", methodName, input, output);
-                writer.write("public $L(\n"
-                            + "  args: $L,\n"
-                            + "  options: $T,\n"
-                            + "  cb: (err: any, data?: $L) => void\n"
-                            + "): void;", methodName, input, options, output);
-                writer.openBlock("public $1L(\n"
-                                 + "  args: $2L,\n"
-                                 + "  optionsOrCb?: $3T | ((err: any, data?: $4L) => void),\n"
-                                 + "  cb?: (err: any, data?: $4L) => void\n"
-                                 + "): Promise<$4L> | void { ", "}",
-                        methodName,
-                        input,
-                        options,
-                        output,
-                        () -> {
-                    writer.write("const command = new $L(args);\n"
-                                 + "if (typeof optionsOrCb === \"function\") {\n"
-                                 + "  this.send(command, optionsOrCb)\n"
-                                 + "} else if (typeof cb === \"function\") {\n"
-                                 + "  if (typeof optionsOrCb !== \"object\")\n"
-                                 + "    throw new Error(`Expect http options but get $${typeof optionsOrCb}`)\n"
-                                 + "  this.send(command, optionsOrCb || {}, cb)\n"
-                                 + "} else {\n"
-                                 + "  return this.send(command, optionsOrCb);\n"
-                                 + "}", name);
-                });
+                boolean inputOptional = model.getShape(operation.getInputShape())
+                    .map(
+                        shape -> shape.getAllMembers().values().stream().noneMatch(MemberShape::isRequired)
+                    )
+                    .orElse(true);
+                if (inputOptional) {
+                    writer.write("$L(): Promise<$T>;", methodName, output);
+                }
+                writer.write(
+                    """
+                    public $1L(
+                      args: $2L,
+                      options?: $3T
+                    ): Promise<$4L>;
+                    public $1L(
+                      args: $2L,
+                      cb: (err: any, data?: $4L) => void
+                    ): void;
+                    public $1L(
+                      args: $2L,
+                      options: $3T,
+                      cb: (err: any, data?: $4L) => void
+                    ): void;
+                    public $1L(
+                      args: $2L,
+                      optionsOrCb?: $3T | ((err: any, data?: $4L) => void),
+                      cb?: (err: any, data?: $4L) => void
+                    ): Promise<$4L> | void {
+                      const command = new $5L(args);
+                      if (typeof optionsOrCb === "function") {
+                        this.send(command, optionsOrCb);
+                      } else if (typeof cb === "function") {
+                        if (typeof optionsOrCb !== "object") {
+                          throw new Error(`Expect http options but get $${typeof optionsOrCb}`);
+                        }
+                        this.send(command, optionsOrCb || {}, cb);
+                      } else {
+                        return this.send(command, optionsOrCb);
+                      }
+                    }""",
+                    methodName,
+                    input,
+                    options,
+                    output,
+                    name
+                );
                 writer.write("");
+
+                if (DocumentClientUtils.getModifiedName(operation.getId().getName()).equals("BatchGet")) {
+                    BatchGetPaginatorGenerator.generateAggregatedClientMethod(writer, input, output);
+                }
             }
         }
     }

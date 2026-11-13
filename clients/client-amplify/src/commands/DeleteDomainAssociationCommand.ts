@@ -1,95 +1,118 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyClient";
-import { DeleteDomainAssociationRequest, DeleteDomainAssociationResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteDomainAssociationCommand,
-  serializeAws_restJson1DeleteDomainAssociationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDomainAssociationRequest, DeleteDomainAssociationResult } from "../models/models_0";
+import { DeleteDomainAssociation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDomainAssociationCommand}.
+ */
 export interface DeleteDomainAssociationCommandInput extends DeleteDomainAssociationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDomainAssociationCommand}.
+ */
 export interface DeleteDomainAssociationCommandOutput extends DeleteDomainAssociationResult, __MetadataBearer {}
 
 /**
- * <p> Deletes a domain association for an Amplify app. </p>
+ * <p>Deletes a domain association for an Amplify app. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmplifyClient, DeleteDomainAssociationCommand } from "@aws-sdk/client-amplify"; // ES Modules import
  * // const { AmplifyClient, DeleteDomainAssociationCommand } = require("@aws-sdk/client-amplify"); // CommonJS import
+ * // import type { AmplifyClientConfig } from "@aws-sdk/client-amplify";
+ * const config = {}; // type is AmplifyClientConfig
  * const client = new AmplifyClient(config);
+ * const input = { // DeleteDomainAssociationRequest
+ *   appId: "STRING_VALUE", // required
+ *   domainName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDomainAssociationCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteDomainAssociationResult
+ * //   domainAssociation: { // DomainAssociation
+ * //     domainAssociationArn: "STRING_VALUE", // required
+ * //     domainName: "STRING_VALUE", // required
+ * //     enableAutoSubDomain: true || false, // required
+ * //     autoSubDomainCreationPatterns: [ // AutoSubDomainCreationPatterns
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     autoSubDomainIAMRole: "STRING_VALUE",
+ * //     domainStatus: "PENDING_VERIFICATION" || "IN_PROGRESS" || "AVAILABLE" || "IMPORTING_CUSTOM_CERTIFICATE" || "PENDING_DEPLOYMENT" || "AWAITING_APP_CNAME" || "FAILED" || "CREATING" || "REQUESTING_CERTIFICATE" || "UPDATING", // required
+ * //     updateStatus: "REQUESTING_CERTIFICATE" || "PENDING_VERIFICATION" || "IMPORTING_CUSTOM_CERTIFICATE" || "PENDING_DEPLOYMENT" || "AWAITING_APP_CNAME" || "UPDATE_COMPLETE" || "UPDATE_FAILED",
+ * //     statusReason: "STRING_VALUE", // required
+ * //     certificateVerificationDNSRecord: "STRING_VALUE",
+ * //     subDomains: [ // SubDomains // required
+ * //       { // SubDomain
+ * //         subDomainSetting: { // SubDomainSetting
+ * //           prefix: "STRING_VALUE", // required
+ * //           branchName: "STRING_VALUE", // required
+ * //         },
+ * //         verified: true || false, // required
+ * //         dnsRecord: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     certificate: { // Certificate
+ * //       type: "AMPLIFY_MANAGED" || "CUSTOM", // required
+ * //       customCertificateArn: "STRING_VALUE",
+ * //       certificateVerificationDNSRecord: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteDomainAssociationCommandInput - {@link DeleteDomainAssociationCommandInput}
+ * @returns {@link DeleteDomainAssociationCommandOutput}
  * @see {@link DeleteDomainAssociationCommandInput} for command's `input` shape.
  * @see {@link DeleteDomainAssociationCommandOutput} for command's `response` shape.
- * @see {@link AmplifyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmplifyClientResolvedConfig | config} for AmplifyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A request contains unexpected data. </p>
+ *
+ * @throws {@link DependentServiceFailureException} (server fault)
+ *  <p>An operation failed because a dependent service threw an exception. </p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>The service failed to perform an operation due to an internal issue. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An entity was not found during an operation. </p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>An operation failed due to a lack of access. </p>
+ *
+ * @throws {@link AmplifyServiceException}
+ * <p>Base exception class for all service exceptions from Amplify service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDomainAssociationCommand extends $Command<
-  DeleteDomainAssociationCommandInput,
-  DeleteDomainAssociationCommandOutput,
-  AmplifyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDomainAssociationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDomainAssociationCommandInput, DeleteDomainAssociationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyClient";
-    const commandName = "DeleteDomainAssociationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDomainAssociationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteDomainAssociationResult.filterSensitiveLog,
+export class DeleteDomainAssociationCommand extends command<DeleteDomainAssociationCommandInput, DeleteDomainAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDomainAssociation",
+  DeleteDomainAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDomainAssociationRequest;
+      output: DeleteDomainAssociationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDomainAssociationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteDomainAssociationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDomainAssociationCommandOutput> {
-    return deserializeAws_restJson1DeleteDomainAssociationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDomainAssociationCommandInput;
+      output: DeleteDomainAssociationCommandOutput;
+    };
+  };
 }

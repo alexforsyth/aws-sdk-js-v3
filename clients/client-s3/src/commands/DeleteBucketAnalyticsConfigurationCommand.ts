@@ -1,41 +1,40 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteBucketAnalyticsConfigurationRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteBucketAnalyticsConfigurationCommand,
-  serializeAws_restXmlDeleteBucketAnalyticsConfigurationCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw4, command } from "../commandBuilder";
+import type { DeleteBucketAnalyticsConfigurationRequest } from "../models/models_0";
+import { DeleteBucketAnalyticsConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteBucketAnalyticsConfigurationCommand}.
+ */
 export interface DeleteBucketAnalyticsConfigurationCommandInput extends DeleteBucketAnalyticsConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteBucketAnalyticsConfigurationCommand}.
+ */
 export interface DeleteBucketAnalyticsConfigurationCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes an analytics configuration for the bucket (specified by the analytics
- *          configuration ID).</p>
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Deletes an analytics configuration for the bucket (specified by the analytics configuration
+ *       ID).</p>
  *          <p>To use this operation, you must have permissions to perform the
- *             <code>s3:PutAnalyticsConfiguration</code> action. The bucket owner has this permission
- *          by default. The bucket owner can grant this permission to others. For more information
- *          about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to Your Amazon S3
- *             Resources</a>.</p>
- *
+ *         <code>s3:PutAnalyticsConfiguration</code> action. The bucket owner has this permission by default. The
+ *       bucket owner can grant this permission to others. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to Your Amazon S3
+ *         Resources</a>.</p>
  *          <p>For information about the Amazon S3 analytics feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html">Amazon S3 Analytics – Storage Class
- *             Analysis</a>. </p>
- *
- *          <p>The following operations are related to
- *          <code>DeleteBucketAnalyticsConfiguration</code>:</p>
+ *       Analysis</a>. </p>
+ *          <p>The following operations are related to <code>DeleteBucketAnalyticsConfiguration</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -53,80 +52,55 @@ export interface DeleteBucketAnalyticsConfigurationCommandOutput extends __Metad
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, DeleteBucketAnalyticsConfigurationCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, DeleteBucketAnalyticsConfigurationCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // DeleteBucketAnalyticsConfigurationRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   Id: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new DeleteBucketAnalyticsConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteBucketAnalyticsConfigurationCommandInput - {@link DeleteBucketAnalyticsConfigurationCommandInput}
+ * @returns {@link DeleteBucketAnalyticsConfigurationCommandOutput}
  * @see {@link DeleteBucketAnalyticsConfigurationCommandInput} for command's `input` shape.
  * @see {@link DeleteBucketAnalyticsConfigurationCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteBucketAnalyticsConfigurationCommand extends $Command<
-  DeleteBucketAnalyticsConfigurationCommandInput,
-  DeleteBucketAnalyticsConfigurationCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteBucketAnalyticsConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteBucketAnalyticsConfigurationCommandInput, DeleteBucketAnalyticsConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "DeleteBucketAnalyticsConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteBucketAnalyticsConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteBucketAnalyticsConfigurationCommand extends command<DeleteBucketAnalyticsConfigurationCommandInput, DeleteBucketAnalyticsConfigurationCommandOutput>(
+  _ep3,
+  _mw4,
+  "DeleteBucketAnalyticsConfiguration",
+  DeleteBucketAnalyticsConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBucketAnalyticsConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteBucketAnalyticsConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteBucketAnalyticsConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteBucketAnalyticsConfigurationCommandOutput> {
-    return deserializeAws_restXmlDeleteBucketAnalyticsConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteBucketAnalyticsConfigurationCommandInput;
+      output: DeleteBucketAnalyticsConfigurationCommandOutput;
+    };
+  };
 }

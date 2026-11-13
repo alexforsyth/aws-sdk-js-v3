@@ -1,77 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  deserializeAws_restJson1HostWithPathOperationCommand,
-  serializeAws_restJson1HostWithPathOperationCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import { de_HostWithPathOperationCommand, se_HostWithPathOperationCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HostWithPathOperationCommand}.
+ */
 export interface HostWithPathOperationCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link HostWithPathOperationCommand}.
+ */
 export interface HostWithPathOperationCommandOutput extends __MetadataBearer {}
 
-export class HostWithPathOperationCommand extends $Command<
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HostWithPathOperationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HostWithPathOperationCommandInput, HostWithPathOperationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "HostWithPathOperationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, HostWithPathOperationCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, HostWithPathOperationCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = {};
+ * const command = new HostWithPathOperationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param HostWithPathOperationCommandInput - {@link HostWithPathOperationCommandInput}
+ * @returns {@link HostWithPathOperationCommandOutput}
+ * @see {@link HostWithPathOperationCommandInput} for command's `input` shape.
+ * @see {@link HostWithPathOperationCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class HostWithPathOperationCommand extends $Command
+  .classBuilder<
+    HostWithPathOperationCommandInput,
+    HostWithPathOperationCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "HostWithPathOperation", {})
+  .n("RestJsonProtocolClient", "HostWithPathOperationCommand")
+  .f(void 0, void 0)
+  .ser(se_HostWithPathOperationCommand)
+  .de(de_HostWithPathOperationCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: HostWithPathOperationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1HostWithPathOperationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<HostWithPathOperationCommandOutput> {
-    return deserializeAws_restJson1HostWithPathOperationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HostWithPathOperationCommandInput;
+      output: HostWithPathOperationCommandOutput;
+    };
+  };
 }

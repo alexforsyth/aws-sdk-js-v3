@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import { DescribeApplicationRequest, DescribeApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeApplicationCommand,
-  serializeAws_json1_1DescribeApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeApplicationRequest, DescribeApplicationResponse } from "../models/models_0";
+import { DescribeApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeApplicationCommand}.
+ */
 export interface DescribeApplicationCommandInput extends DescribeApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeApplicationCommand}.
+ */
 export interface DescribeApplicationCommandOutput extends DescribeApplicationResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +38,174 @@ export interface DescribeApplicationCommandOutput extends DescribeApplicationRes
  * ```javascript
  * import { KinesisAnalyticsClient, DescribeApplicationCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, DescribeApplicationCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // DescribeApplicationRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeApplicationResponse
+ * //   ApplicationDetail: { // ApplicationDetail
+ * //     ApplicationName: "STRING_VALUE", // required
+ * //     ApplicationDescription: "STRING_VALUE",
+ * //     ApplicationARN: "STRING_VALUE", // required
+ * //     ApplicationStatus: "DELETING" || "STARTING" || "STOPPING" || "READY" || "RUNNING" || "UPDATING", // required
+ * //     CreateTimestamp: new Date("TIMESTAMP"),
+ * //     LastUpdateTimestamp: new Date("TIMESTAMP"),
+ * //     InputDescriptions: [ // InputDescriptions
+ * //       { // InputDescription
+ * //         InputId: "STRING_VALUE",
+ * //         NamePrefix: "STRING_VALUE",
+ * //         InAppStreamNames: [ // InAppStreamNames
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         InputProcessingConfigurationDescription: { // InputProcessingConfigurationDescription
+ * //           InputLambdaProcessorDescription: { // InputLambdaProcessorDescription
+ * //             ResourceARN: "STRING_VALUE",
+ * //             RoleARN: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         KinesisStreamsInputDescription: { // KinesisStreamsInputDescription
+ * //           ResourceARN: "STRING_VALUE",
+ * //           RoleARN: "STRING_VALUE",
+ * //         },
+ * //         KinesisFirehoseInputDescription: { // KinesisFirehoseInputDescription
+ * //           ResourceARN: "STRING_VALUE",
+ * //           RoleARN: "STRING_VALUE",
+ * //         },
+ * //         InputSchema: { // SourceSchema
+ * //           RecordFormat: { // RecordFormat
+ * //             RecordFormatType: "JSON" || "CSV", // required
+ * //             MappingParameters: { // MappingParameters
+ * //               JSONMappingParameters: { // JSONMappingParameters
+ * //                 RecordRowPath: "STRING_VALUE", // required
+ * //               },
+ * //               CSVMappingParameters: { // CSVMappingParameters
+ * //                 RecordRowDelimiter: "STRING_VALUE", // required
+ * //                 RecordColumnDelimiter: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //           },
+ * //           RecordEncoding: "STRING_VALUE",
+ * //           RecordColumns: [ // RecordColumns // required
+ * //             { // RecordColumn
+ * //               Name: "STRING_VALUE", // required
+ * //               Mapping: "STRING_VALUE",
+ * //               SqlType: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //         InputParallelism: { // InputParallelism
+ * //           Count: Number("int"),
+ * //         },
+ * //         InputStartingPositionConfiguration: { // InputStartingPositionConfiguration
+ * //           InputStartingPosition: "NOW" || "TRIM_HORIZON" || "LAST_STOPPED_POINT",
+ * //         },
+ * //       },
+ * //     ],
+ * //     OutputDescriptions: [ // OutputDescriptions
+ * //       { // OutputDescription
+ * //         OutputId: "STRING_VALUE",
+ * //         Name: "STRING_VALUE",
+ * //         KinesisStreamsOutputDescription: { // KinesisStreamsOutputDescription
+ * //           ResourceARN: "STRING_VALUE",
+ * //           RoleARN: "STRING_VALUE",
+ * //         },
+ * //         KinesisFirehoseOutputDescription: { // KinesisFirehoseOutputDescription
+ * //           ResourceARN: "STRING_VALUE",
+ * //           RoleARN: "STRING_VALUE",
+ * //         },
+ * //         LambdaOutputDescription: { // LambdaOutputDescription
+ * //           ResourceARN: "STRING_VALUE",
+ * //           RoleARN: "STRING_VALUE",
+ * //         },
+ * //         DestinationSchema: { // DestinationSchema
+ * //           RecordFormatType: "JSON" || "CSV", // required
+ * //         },
+ * //       },
+ * //     ],
+ * //     ReferenceDataSourceDescriptions: [ // ReferenceDataSourceDescriptions
+ * //       { // ReferenceDataSourceDescription
+ * //         ReferenceId: "STRING_VALUE", // required
+ * //         TableName: "STRING_VALUE", // required
+ * //         S3ReferenceDataSourceDescription: { // S3ReferenceDataSourceDescription
+ * //           BucketARN: "STRING_VALUE", // required
+ * //           FileKey: "STRING_VALUE", // required
+ * //           ReferenceRoleARN: "STRING_VALUE", // required
+ * //         },
+ * //         ReferenceSchema: {
+ * //           RecordFormat: {
+ * //             RecordFormatType: "JSON" || "CSV", // required
+ * //             MappingParameters: {
+ * //               JSONMappingParameters: {
+ * //                 RecordRowPath: "STRING_VALUE", // required
+ * //               },
+ * //               CSVMappingParameters: {
+ * //                 RecordRowDelimiter: "STRING_VALUE", // required
+ * //                 RecordColumnDelimiter: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //           },
+ * //           RecordEncoding: "STRING_VALUE",
+ * //           RecordColumns: [ // required
+ * //             {
+ * //               Name: "STRING_VALUE", // required
+ * //               Mapping: "STRING_VALUE",
+ * //               SqlType: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     CloudWatchLoggingOptionDescriptions: [ // CloudWatchLoggingOptionDescriptions
+ * //       { // CloudWatchLoggingOptionDescription
+ * //         CloudWatchLoggingOptionId: "STRING_VALUE",
+ * //         LogStreamARN: "STRING_VALUE", // required
+ * //         RoleARN: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     ApplicationCode: "STRING_VALUE",
+ * //     ApplicationVersionId: Number("long"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeApplicationCommandInput - {@link DescribeApplicationCommandInput}
+ * @returns {@link DescribeApplicationCommandOutput}
  * @see {@link DescribeApplicationCommandInput} for command's `input` shape.
  * @see {@link DescribeApplicationCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Specified application can't be found.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation. </p>
+ *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeApplicationCommand extends $Command<
-  DescribeApplicationCommandInput,
-  DescribeApplicationCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeApplicationCommandInput, DescribeApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "DescribeApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeApplicationResponse.filterSensitiveLog,
+export class DescribeApplicationCommand extends command<DescribeApplicationCommandInput, DescribeApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeApplication",
+  DescribeApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeApplicationRequest;
+      output: DescribeApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeApplicationCommandOutput> {
-    return deserializeAws_json1_1DescribeApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeApplicationCommandInput;
+      output: DescribeApplicationCommandOutput;
+    };
+  };
 }

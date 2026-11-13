@@ -1,0 +1,652 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type CreateEnvironmentCommandInput,
+  type CreateEnvironmentCommandOutput,
+  CreateEnvironmentCommand,
+} from "./commands/CreateEnvironmentCommand";
+import {
+  type CreateRouteCommandInput,
+  type CreateRouteCommandOutput,
+  CreateRouteCommand,
+} from "./commands/CreateRouteCommand";
+import {
+  type CreateServiceCommandInput,
+  type CreateServiceCommandOutput,
+  CreateServiceCommand,
+} from "./commands/CreateServiceCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteEnvironmentCommandInput,
+  type DeleteEnvironmentCommandOutput,
+  DeleteEnvironmentCommand,
+} from "./commands/DeleteEnvironmentCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteRouteCommandInput,
+  type DeleteRouteCommandOutput,
+  DeleteRouteCommand,
+} from "./commands/DeleteRouteCommand";
+import {
+  type DeleteServiceCommandInput,
+  type DeleteServiceCommandOutput,
+  DeleteServiceCommand,
+} from "./commands/DeleteServiceCommand";
+import {
+  type GetApplicationCommandInput,
+  type GetApplicationCommandOutput,
+  GetApplicationCommand,
+} from "./commands/GetApplicationCommand";
+import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
+  GetEnvironmentCommand,
+} from "./commands/GetEnvironmentCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import { type GetRouteCommandInput, type GetRouteCommandOutput, GetRouteCommand } from "./commands/GetRouteCommand";
+import {
+  type GetServiceCommandInput,
+  type GetServiceCommandOutput,
+  GetServiceCommand,
+} from "./commands/GetServiceCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListEnvironmentsCommandInput,
+  type ListEnvironmentsCommandOutput,
+  ListEnvironmentsCommand,
+} from "./commands/ListEnvironmentsCommand";
+import {
+  type ListEnvironmentVpcsCommandInput,
+  type ListEnvironmentVpcsCommandOutput,
+  ListEnvironmentVpcsCommand,
+} from "./commands/ListEnvironmentVpcsCommand";
+import {
+  type ListRoutesCommandInput,
+  type ListRoutesCommandOutput,
+  ListRoutesCommand,
+} from "./commands/ListRoutesCommand";
+import {
+  type ListServicesCommandInput,
+  type ListServicesCommandOutput,
+  ListServicesCommand,
+} from "./commands/ListServicesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateRouteCommandInput,
+  type UpdateRouteCommandOutput,
+  UpdateRouteCommand,
+} from "./commands/UpdateRouteCommand";
+import { MigrationHubRefactorSpacesClient } from "./MigrationHubRefactorSpacesClient";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListEnvironments } from "./pagination/ListEnvironmentsPaginator";
+import { paginateListEnvironmentVpcs } from "./pagination/ListEnvironmentVpcsPaginator";
+import { paginateListRoutes } from "./pagination/ListRoutesPaginator";
+import { paginateListServices } from "./pagination/ListServicesPaginator";
+
+const commands = {
+  CreateApplicationCommand,
+  CreateEnvironmentCommand,
+  CreateRouteCommand,
+  CreateServiceCommand,
+  DeleteApplicationCommand,
+  DeleteEnvironmentCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRouteCommand,
+  DeleteServiceCommand,
+  GetApplicationCommand,
+  GetEnvironmentCommand,
+  GetResourcePolicyCommand,
+  GetRouteCommand,
+  GetServiceCommand,
+  ListApplicationsCommand,
+  ListEnvironmentsCommand,
+  ListEnvironmentVpcsCommand,
+  ListRoutesCommand,
+  ListServicesCommand,
+  ListTagsForResourceCommand,
+  PutResourcePolicyCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateRouteCommand,
+};
+const paginators = {
+  paginateListApplications,
+  paginateListEnvironments,
+  paginateListEnvironmentVpcs,
+  paginateListRoutes,
+  paginateListServices,
+};
+
+/**
+ * @public
+ */
+export interface MigrationHubRefactorSpacesRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MigrationHubRefactorSpaces {
+  /**
+   * @see {@link CreateApplicationCommand}
+   */
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEnvironmentCommand}
+   */
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<CreateEnvironmentCommandOutput>;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRouteCommand}
+   */
+  createRoute(
+    args: CreateRouteCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<CreateRouteCommandOutput>;
+  createRoute(
+    args: CreateRouteCommandInput,
+    cb: (err: any, data?: CreateRouteCommandOutput) => void
+  ): void;
+  createRoute(
+    args: CreateRouteCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: CreateRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateServiceCommand}
+   */
+  createService(
+    args: CreateServiceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<CreateServiceCommandOutput>;
+  createService(
+    args: CreateServiceCommandInput,
+    cb: (err: any, data?: CreateServiceCommandOutput) => void
+  ): void;
+  createService(
+    args: CreateServiceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: CreateServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationCommand}
+   */
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnvironmentCommand}
+   */
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<DeleteEnvironmentCommandOutput>;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRouteCommand}
+   */
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<DeleteRouteCommandOutput>;
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    cb: (err: any, data?: DeleteRouteCommandOutput) => void
+  ): void;
+  deleteRoute(
+    args: DeleteRouteCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: DeleteRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteServiceCommand}
+   */
+  deleteService(
+    args: DeleteServiceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<DeleteServiceCommandOutput>;
+  deleteService(
+    args: DeleteServiceCommandInput,
+    cb: (err: any, data?: DeleteServiceCommandOutput) => void
+  ): void;
+  deleteService(
+    args: DeleteServiceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: DeleteServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   */
+  getApplication(
+    args: GetApplicationCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<GetApplicationCommandOutput>;
+  getApplication(
+    args: GetApplicationCommandInput,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+  getApplication(
+    args: GetApplicationCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnvironmentCommand}
+   */
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<GetEnvironmentCommandOutput>;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouteCommand}
+   */
+  getRoute(
+    args: GetRouteCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<GetRouteCommandOutput>;
+  getRoute(
+    args: GetRouteCommandInput,
+    cb: (err: any, data?: GetRouteCommandOutput) => void
+  ): void;
+  getRoute(
+    args: GetRouteCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: GetRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceCommand}
+   */
+  getService(
+    args: GetServiceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<GetServiceCommandOutput>;
+  getService(
+    args: GetServiceCommandInput,
+    cb: (err: any, data?: GetServiceCommandOutput) => void
+  ): void;
+  getService(
+    args: GetServiceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: GetServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   */
+  listEnvironments(): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentVpcsCommand}
+   */
+  listEnvironmentVpcs(
+    args: ListEnvironmentVpcsCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListEnvironmentVpcsCommandOutput>;
+  listEnvironmentVpcs(
+    args: ListEnvironmentVpcsCommandInput,
+    cb: (err: any, data?: ListEnvironmentVpcsCommandOutput) => void
+  ): void;
+  listEnvironmentVpcs(
+    args: ListEnvironmentVpcsCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListEnvironmentVpcsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutesCommand}
+   */
+  listRoutes(
+    args: ListRoutesCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListRoutesCommandOutput>;
+  listRoutes(
+    args: ListRoutesCommandInput,
+    cb: (err: any, data?: ListRoutesCommandOutput) => void
+  ): void;
+  listRoutes(
+    args: ListRoutesCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListRoutesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServicesCommand}
+   */
+  listServices(
+    args: ListServicesCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListServicesCommandOutput>;
+  listServices(
+    args: ListServicesCommandInput,
+    cb: (err: any, data?: ListServicesCommandOutput) => void
+  ): void;
+  listServices(
+    args: ListServicesCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListServicesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRouteCommand}
+   */
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    options?: MigrationHubRefactorSpacesRequestOptions
+  ): Promise<UpdateRouteCommandOutput>;
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    cb: (err: any, data?: UpdateRouteCommandOutput) => void
+  ): void;
+  updateRoute(
+    args: UpdateRouteCommandInput,
+    options: MigrationHubRefactorSpacesRequestOptions,
+    cb: (err: any, data?: UpdateRouteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentsCommandOutput}.
+   */
+  paginateListEnvironments(
+    args?: ListEnvironmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentVpcsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentVpcsCommandOutput}.
+   */
+  paginateListEnvironmentVpcs(
+    args: ListEnvironmentVpcsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentVpcsCommandOutput>;
+
+  /**
+   * @see {@link ListRoutesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutesCommandOutput}.
+   */
+  paginateListRoutes(
+    args: ListRoutesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutesCommandOutput>;
+
+  /**
+   * @see {@link ListServicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServicesCommandOutput}.
+   */
+  paginateListServices(
+    args: ListServicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServicesCommandOutput>;
+}
+
+/**
+ * <fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname>
+ *          <p>This API reference provides descriptions, syntax, and other details about each of the
+ *       actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API
+ *       request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to
+ *       access an API that is tailored to the programming language or platform that you're using. For
+ *       more information, see <a href="https://aws.amazon.com/tools/#SDKs">Amazon Web Services SDKs</a>.</p>
+ *          <p>To share Refactor Spaces environments with other Amazon Web Services accounts or with Organizations
+ *       and their OUs, use Resource Access Manager's <code>CreateResourceShare</code> API. See <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> in the <i>Amazon Web Services RAM API Reference</i>.</p>
+ * @public
+ */
+export class MigrationHubRefactorSpaces extends MigrationHubRefactorSpacesClient implements MigrationHubRefactorSpaces {}
+createAggregatedClient(commands, MigrationHubRefactorSpaces, { paginators });

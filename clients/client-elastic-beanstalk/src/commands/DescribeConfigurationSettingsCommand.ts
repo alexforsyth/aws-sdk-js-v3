@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ConfigurationSettingsDescriptions, DescribeConfigurationSettingsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeConfigurationSettingsCommand,
-  serializeAws_queryDescribeConfigurationSettingsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigurationSettingsDescriptions, DescribeConfigurationSettingsMessage } from "../models/models_0";
+import { DescribeConfigurationSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConfigurationSettingsCommand}.
+ */
 export interface DescribeConfigurationSettingsCommandInput extends DescribeConfigurationSettingsMessage {}
-export interface DescribeConfigurationSettingsCommandOutput
-  extends ConfigurationSettingsDescriptions,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConfigurationSettingsCommand}.
+ */
+export interface DescribeConfigurationSettingsCommandOutput extends ConfigurationSettingsDescriptions, __MetadataBearer {}
 
 /**
  * <p>Returns a description of the settings for the specified configuration set, that is,
@@ -31,6 +30,18 @@ export interface DescribeConfigurationSettingsCommandOutput
  *       environment, it is possible to receive two sets of setting descriptions. One is the deployed
  *       configuration set, and the other is a draft configuration of an environment that is either in
  *       the process of deployment or that failed to deploy.</p>
+ *          <p>This action only returns information about resources that the calling principle has IAM permissions to
+ *       access. For example, consider a case where a user only has permission to access one of three
+ *       resources. When the user calls the this action, the
+ *       response will only include the one resource that the user has permission to access instead
+ *       of all three resources. If the user doesn’t have access to any of the resources an empty
+ *       result is returned.</p>
+ *          <note>
+ *             <p>The <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html">AWSElasticBeanstalkReadOnly</a>
+ *         managed policy allows operators to view information about resources related to Elastic Beanstalk. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html"> Managing Elastic Beanstalk user policies</a> in the <i>Elastic Beanstalk Developer
+ *             Guide</i>. For detailed instructions to attach a policy to a user or group, see the section <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed"> Controlling access with managed policies</a> in the
+ *         same topic.</p>
+ *          </note>
  *          <p>Related Topics</p>
  *          <ul>
  *             <li>
@@ -44,71 +55,124 @@ export interface DescribeConfigurationSettingsCommandOutput
  * ```javascript
  * import { ElasticBeanstalkClient, DescribeConfigurationSettingsCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, DescribeConfigurationSettingsCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // DescribeConfigurationSettingsMessage
+ *   ApplicationName: "STRING_VALUE", // required
+ *   TemplateName: "STRING_VALUE",
+ *   EnvironmentName: "STRING_VALUE",
+ * };
  * const command = new DescribeConfigurationSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigurationSettingsDescriptions
+ * //   ConfigurationSettings: [ // ConfigurationSettingsDescriptionList
+ * //     { // ConfigurationSettingsDescription
+ * //       SolutionStackName: "STRING_VALUE",
+ * //       PlatformArn: "STRING_VALUE",
+ * //       ApplicationName: "STRING_VALUE",
+ * //       TemplateName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       EnvironmentName: "STRING_VALUE",
+ * //       DeploymentStatus: "deployed" || "pending" || "failed",
+ * //       DateCreated: new Date("TIMESTAMP"),
+ * //       DateUpdated: new Date("TIMESTAMP"),
+ * //       OptionSettings: [ // ConfigurationOptionSettingsList
+ * //         { // ConfigurationOptionSetting
+ * //           ResourceName: "STRING_VALUE",
+ * //           Namespace: "STRING_VALUE",
+ * //           OptionName: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeConfigurationSettingsCommandInput - {@link DescribeConfigurationSettingsCommandInput}
+ * @returns {@link DescribeConfigurationSettingsCommandOutput}
  * @see {@link DescribeConfigurationSettingsCommandInput} for command's `input` shape.
  * @see {@link DescribeConfigurationSettingsCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link TooManyBucketsException} (client fault)
+ *  <p>The specified account has reached its limit of Amazon S3 buckets.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To view configurations settings for an environment
+ * ```javascript
+ * // The following operation retrieves configuration settings for an environment named my-env:
+ * const input = {
+ *   ApplicationName: "my-app",
+ *   EnvironmentName: "my-env"
+ * };
+ * const command = new DescribeConfigurationSettingsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ConfigurationSettings: [
+ *     {
+ *       ApplicationName: "my-app",
+ *       DateCreated: "2015-08-13T19:16:25Z",
+ *       DateUpdated: "2015-08-13T23:30:07Z",
+ *       DeploymentStatus: "deployed",
+ *       Description: `Environment created from the EB CLI using "eb create"`,
+ *       EnvironmentName: "my-env",
+ *       OptionSettings: [
+ *         {
+ *           Namespace: "aws:autoscaling:asg",
+ *           OptionName: "Availability Zones",
+ *           ResourceName: "AWSEBAutoScalingGroup",
+ *           Value: "Any"
+ *         },
+ *         {
+ *           Namespace: "aws:autoscaling:asg",
+ *           OptionName: "Cooldown",
+ *           ResourceName: "AWSEBAutoScalingGroup",
+ *           Value: "360"
+ *         },
+ *         {
+ *           Namespace: "aws:elb:policies",
+ *           OptionName: "ConnectionDrainingTimeout",
+ *           ResourceName: "AWSEBLoadBalancer",
+ *           Value: "20"
+ *         },
+ *         {
+ *           Namespace: "aws:elb:policies",
+ *           OptionName: "ConnectionSettingIdleTimeout",
+ *           ResourceName: "AWSEBLoadBalancer",
+ *           Value: "60"
+ *         }
+ *       ],
+ *       SolutionStackName: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeConfigurationSettingsCommand extends $Command<
-  DescribeConfigurationSettingsCommandInput,
-  DescribeConfigurationSettingsCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConfigurationSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConfigurationSettingsCommandInput, DescribeConfigurationSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "DescribeConfigurationSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConfigurationSettingsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigurationSettingsDescriptions.filterSensitiveLog,
+export class DescribeConfigurationSettingsCommand extends command<DescribeConfigurationSettingsCommandInput, DescribeConfigurationSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConfigurationSettings",
+  DescribeConfigurationSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationSettingsMessage;
+      output: ConfigurationSettingsDescriptions;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConfigurationSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeConfigurationSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConfigurationSettingsCommandOutput> {
-    return deserializeAws_queryDescribeConfigurationSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConfigurationSettingsCommandInput;
+      output: DescribeConfigurationSettingsCommandOutput;
+    };
+  };
 }

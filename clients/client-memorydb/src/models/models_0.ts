@@ -1,535 +1,448 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AuthenticationType,
+  AZStatus,
+  DataTieringStatus,
+  InputAuthenticationType,
+  IpDiscovery,
+  NetworkType,
+  ServiceUpdateStatus,
+  ServiceUpdateType,
+  SourceType,
+  UpdateStrategy,
+} from "./enums";
 
 /**
  * <p>Returns the updates being applied to the ACL.</p>
+ * @public
  */
 export interface ACLPendingChanges {
   /**
    * <p>A list of user names being removed from the ACL</p>
+   * @public
    */
-  UserNamesToRemove?: string[];
+  UserNamesToRemove?: string[] | undefined;
 
   /**
    * <p>A list of users being added to the ACL</p>
+   * @public
    */
-  UserNamesToAdd?: string[];
-}
-
-export namespace ACLPendingChanges {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACLPendingChanges): any => ({
-    ...obj,
-  });
+  UserNamesToAdd?: string[] | undefined;
 }
 
 /**
  * <p>An Access Control List. You can authenticate users with Access Contol Lists.
  *
  *          ACLs enable you to control cluster access by grouping users. These Access control lists are designed as a way to organize access to clusters.</p>
+ * @public
  */
 export interface ACL {
   /**
    * <p>The name of the Access Control List</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Indicates ACL status. Can be "creating", "active", "modifying", "deleting".</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>The list of user names that belong to the ACL.</p>
+   * @public
    */
-  UserNames?: string[];
+  UserNames?: string[] | undefined;
 
   /**
    * <p>The minimum engine version supported for the ACL</p>
+   * @public
    */
-  MinimumEngineVersion?: string;
+  MinimumEngineVersion?: string | undefined;
 
   /**
    * <p>A list of updates being applied to the ACL.</p>
+   * @public
    */
-  PendingChanges?: ACLPendingChanges;
+  PendingChanges?: ACLPendingChanges | undefined;
 
   /**
    * <p>A list of clusters associated with the ACL.</p>
+   * @public
    */
-  Clusters?: string[];
+  Clusters?: string[] | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the ACL</p>
+   * @public
    */
-  ARN?: string;
-}
-
-export namespace ACL {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACL): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ACLAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "ACLAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ACLAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACLAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ACLNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ACLNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ACLNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACLNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ACLQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ACLQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ACLQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACLQuotaExceededFault): any => ({
-    ...obj,
-  });
+  ARN?: string | undefined;
 }
 
 /**
  * <p>The status of the ACL update</p>
+ * @public
  */
 export interface ACLsUpdateStatus {
   /**
    * <p>A list of ACLs pending to be applied.</p>
+   * @public
    */
-  ACLToApply?: string;
-}
-
-export namespace ACLsUpdateStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ACLsUpdateStatus): any => ({
-    ...obj,
-  });
+  ACLToApply?: string | undefined;
 }
 
 /**
  * <p>A request to apply a service update</p>
+ * @public
  */
 export interface ServiceUpdateRequest {
   /**
    * <p>The unique ID of the service update</p>
+   * @public
    */
-  ServiceUpdateNameToApply?: string;
+  ServiceUpdateNameToApply?: string | undefined;
 }
 
-export namespace ServiceUpdateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUpdateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchUpdateClusterRequest {
   /**
    * <p>The cluster names to apply the updates.</p>
+   * @public
    */
   ClusterNames: string[] | undefined;
 
   /**
    * <p>The unique ID of the service update</p>
+   * @public
    */
-  ServiceUpdate?: ServiceUpdateRequest;
-}
-
-export namespace BatchUpdateClusterRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchUpdateClusterRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum AZStatus {
-  MultiAZ = "multiaz",
-  SingleAZ = "singleaz",
+  ServiceUpdate?: ServiceUpdateRequest | undefined;
 }
 
 /**
  * <p>Represents the information required for client programs to connect to the cluster and its nodes.</p>
+ * @public
  */
 export interface Endpoint {
   /**
    * <p>The DNS hostname of the node.</p>
+   * @public
    */
-  Address?: string;
+  Address?: string | undefined;
 
   /**
    * <p>The port number that the engine is listening on.</p>
+   * @public
    */
-  Port?: number;
-}
-
-export namespace Endpoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Endpoint): any => ({
-    ...obj,
-  });
+  Port?: number | undefined;
 }
 
 /**
  * <p>Represents the progress of an online resharding operation.</p>
+ * @public
  */
 export interface SlotMigration {
   /**
    * <p>The percentage of the slot migration that is complete.</p>
+   * @public
    */
-  ProgressPercentage?: number;
-}
-
-export namespace SlotMigration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SlotMigration): any => ({
-    ...obj,
-  });
+  ProgressPercentage?: number | undefined;
 }
 
 /**
  * <p>The status of the online resharding</p>
+ * @public
  */
 export interface ReshardingStatus {
   /**
    * <p>The status of the online resharding slot migration</p>
+   * @public
    */
-  SlotMigration?: SlotMigration;
-}
-
-export namespace ReshardingStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReshardingStatus): any => ({
-    ...obj,
-  });
-}
-
-export enum ServiceUpdateStatus {
-  COMPLETE = "complete",
-  IN_PROGRESS = "in-progress",
-  NOT_APPLIED = "available",
-  SCHEDULED = "scheduled",
+  SlotMigration?: SlotMigration | undefined;
 }
 
 /**
  * <p>Update action that has yet to be processed for the corresponding apply/stop request</p>
+ * @public
  */
 export interface PendingModifiedServiceUpdate {
   /**
    * <p>The unique ID of the service update</p>
+   * @public
    */
-  ServiceUpdateName?: string;
+  ServiceUpdateName?: string | undefined;
 
   /**
    * <p>The status of the service update</p>
+   * @public
    */
-  Status?: ServiceUpdateStatus | string;
-}
-
-export namespace PendingModifiedServiceUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PendingModifiedServiceUpdate): any => ({
-    ...obj,
-  });
+  Status?: ServiceUpdateStatus | undefined;
 }
 
 /**
  * <p>A list of updates being applied to the cluster</p>
+ * @public
  */
 export interface ClusterPendingUpdates {
   /**
    * <p>The status of an online resharding operation.</p>
+   * @public
    */
-  Resharding?: ReshardingStatus;
+  Resharding?: ReshardingStatus | undefined;
 
   /**
    * <p>A list of ACLs associated with the cluster that are being updated</p>
+   * @public
    */
-  ACLs?: ACLsUpdateStatus;
+  ACLs?: ACLsUpdateStatus | undefined;
 
   /**
    * <p>A list of service updates being applied to the cluster</p>
+   * @public
    */
-  ServiceUpdates?: PendingModifiedServiceUpdate[];
-}
-
-export namespace ClusterPendingUpdates {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterPendingUpdates): any => ({
-    ...obj,
-  });
+  ServiceUpdates?: PendingModifiedServiceUpdate[] | undefined;
 }
 
 /**
  * <p>Represents a single security group and its status.</p>
+ * @public
  */
 export interface SecurityGroupMembership {
   /**
    * <p>The identifier of the security group.</p>
+   * @public
    */
-  SecurityGroupId?: string;
+  SecurityGroupId?: string | undefined;
 
   /**
    * <p>The status of the security group membership. The status changes whenever a security group is modified, or when the security groups assigned to a cluster are modified.</p>
+   * @public
    */
-  Status?: string;
-}
-
-export namespace SecurityGroupMembership {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SecurityGroupMembership): any => ({
-    ...obj,
-  });
+  Status?: string | undefined;
 }
 
 /**
  * <p>Represents an individual node within a cluster. Each node runs its own instance of the cluster's protocol-compliant caching software.</p>
+ * @public
  */
 export interface Node {
   /**
    * <p>The  node identifier. A node name is a numeric identifier (0001, 0002, etc.). The combination of cluster name, shard name and node name uniquely identifies every node used in a customer's Amazon account.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The status of the service update on the node</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>The Availability Zone in which the node resides</p>
+   * @public
    */
-  AvailabilityZone?: string;
+  AvailabilityZone?: string | undefined;
 
   /**
    * <p>The date and time when the node was created.</p>
+   * @public
    */
-  CreateTime?: Date;
+  CreateTime?: Date | undefined;
 
   /**
    * <p>The hostname for connecting to this node.</p>
+   * @public
    */
-  Endpoint?: Endpoint;
-}
-
-export namespace Node {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Node): any => ({
-    ...obj,
-  });
+  Endpoint?: Endpoint | undefined;
 }
 
 /**
  * <p>Represents a collection of nodes in a cluster. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.</p>
+ * @public
  */
 export interface Shard {
   /**
    * <p>The name of the shard</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The current state of this replication group - creating, available, modifying, deleting.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>The keyspace for this shard.</p>
+   * @public
    */
-  Slots?: string;
+  Slots?: string | undefined;
 
   /**
    * <p>A list containing information about individual nodes within the shard</p>
+   * @public
    */
-  Nodes?: Node[];
+  Nodes?: Node[] | undefined;
 
   /**
    * <p>The number of nodes in the shard</p>
+   * @public
    */
-  NumberOfNodes?: number;
-}
-
-export namespace Shard {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Shard): any => ({
-    ...obj,
-  });
+  NumberOfNodes?: number | undefined;
 }
 
 /**
  * <p>Contains all of the attributes of a specific cluster.</p>
+ * @public
  */
 export interface Cluster {
   /**
    * <p>The user-supplied name of the cluster. This identifier is a unique key that identifies a cluster.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>A description of the cluster</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The status of the cluster. For example, Available, Updating, Creating.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>A group of settings that are currently being applied.</p>
+   * @public
    */
-  PendingUpdates?: ClusterPendingUpdates;
+  PendingUpdates?: ClusterPendingUpdates | undefined;
+
+  /**
+   * <p>The name of the multi-Region cluster that this cluster belongs to.</p>
+   * @public
+   */
+  MultiRegionClusterName?: string | undefined;
 
   /**
    * <p>The number of shards in the cluster</p>
+   * @public
    */
-  NumberOfShards?: number;
+  NumberOfShards?: number | undefined;
 
   /**
    * <p>A list of shards that are members of the cluster.</p>
+   * @public
    */
-  Shards?: Shard[];
+  Shards?: Shard[] | undefined;
 
   /**
    * <p>Indicates if the cluster has a Multi-AZ configuration (multiaz) or not (singleaz).</p>
+   * @public
    */
-  AvailabilityMode?: AZStatus | string;
+  AvailabilityMode?: AZStatus | undefined;
 
   /**
    * <p>The cluster's configuration endpoint</p>
+   * @public
    */
-  ClusterEndpoint?: Endpoint;
+  ClusterEndpoint?: Endpoint | undefined;
 
   /**
    * <p>The cluster's node type</p>
+   * @public
    */
-  NodeType?: string;
+  NodeType?: string | undefined;
 
   /**
-   * <p>The Redis engine version used by the cluster</p>
+   * <p>The name of the engine used by the cluster.</p>
+   * @public
    */
-  EngineVersion?: string;
+  Engine?: string | undefined;
 
   /**
-   * <p>The Redis engine patch version used by the cluster</p>
+   * <p>The Redis OSS engine version used by the cluster</p>
+   * @public
    */
-  EnginePatchVersion?: string;
+  EngineVersion?: string | undefined;
+
+  /**
+   * <p>The Redis OSS engine patch version used by the cluster</p>
+   * @public
+   */
+  EnginePatchVersion?: string | undefined;
 
   /**
    * <p>The name of the parameter group used by the cluster</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>The status of the parameter group used by the cluster, for example 'active' or 'applying'.</p>
+   * @public
    */
-  ParameterGroupStatus?: string;
+  ParameterGroupStatus?: string | undefined;
 
   /**
    * <p>A list of security groups used by the cluster</p>
+   * @public
    */
-  SecurityGroups?: SecurityGroupMembership[];
+  SecurityGroups?: SecurityGroupMembership[] | undefined;
 
   /**
    * <p>The name of the subnet group used by the cluster</p>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
    * <p>A flag to indicate if In-transit encryption is enabled</p>
+   * @public
    */
-  TLSEnabled?: boolean;
+  TLSEnabled?: boolean | undefined;
 
   /**
    * <p>The ID of the KMS key used to encrypt the cluster</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the cluster.</p>
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the SNS notification topic</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>The SNS topic must be in Active status to receive notifications</p>
+   * @public
    */
-  SnsTopicStatus?: string;
+  SnsTopicStatus?: string | undefined;
 
   /**
    * <p>The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p>
+   * @public
    */
-  SnapshotRetentionLimit?: number;
+  SnapshotRetentionLimit?: number | undefined;
 
   /**
    * <p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. </p>
+   * @public
    */
-  MaintenanceWindow?: string;
+  MaintenanceWindow?: string | undefined;
 
   /**
    * <p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard.
@@ -537,113 +450,81 @@ export interface Cluster {
    *          Example: 05:00-09:00
    *
    *          If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.</p>
+   * @public
    */
-  SnapshotWindow?: string;
+  SnapshotWindow?: string | undefined;
 
   /**
    * <p>The name of the Access Control List associated with this cluster.</p>
+   * @public
    */
-  ACLName?: string;
+  ACLName?: string | undefined;
 
   /**
    * <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
+   * @public
    */
-  AutoMinorVersionUpgrade?: boolean;
-}
+  AutoMinorVersionUpgrade?: boolean | undefined;
 
-export namespace Cluster {
   /**
-   * @internal
+   * <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+   *             This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Cluster): any => ({
-    ...obj,
-  });
+  DataTiering?: DataTieringStatus | undefined;
+
+  /**
+   * <p>The IP address type for the cluster. Returns 'ipv4' for IPv4 only, 'ipv6' for IPv6 only, or 'dual-stack' if the cluster supports both IPv4 and IPv6 addressing.</p>
+   * @public
+   */
+  NetworkType?: NetworkType | undefined;
+
+  /**
+   * <p>The mechanism that the cluster uses to discover IP addresses. Returns 'ipv4' when DNS endpoints resolve to IPv4 addresses, or 'ipv6' when DNS endpoints resolve to IPv6 addresses.</p>
+   * @public
+   */
+  IpDiscovery?: IpDiscovery | undefined;
 }
 
 /**
  * <p>A cluster whose updates have failed</p>
+ * @public
  */
 export interface UnprocessedCluster {
   /**
    * <p>The name of the cluster</p>
+   * @public
    */
-  ClusterName?: string;
+  ClusterName?: string | undefined;
 
   /**
    * <p>The error type associated with the update failure</p>
+   * @public
    */
-  ErrorType?: string;
+  ErrorType?: string | undefined;
 
   /**
    * <p>The error message associated with the update failure</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
-export namespace UnprocessedCluster {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnprocessedCluster): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchUpdateClusterResponse {
   /**
    * <p>The list of clusters that have been updated.</p>
+   * @public
    */
-  ProcessedClusters?: Cluster[];
+  ProcessedClusters?: Cluster[] | undefined;
 
   /**
    * <p>The list of clusters where updates have not been applied.</p>
+   * @public
    */
-  UnprocessedClusters?: UnprocessedCluster[];
-}
-
-export namespace BatchUpdateClusterResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchUpdateClusterResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface InvalidParameterValueException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterValueException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterValueException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterValueException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ServiceUpdateNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ServiceUpdateNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ServiceUpdateNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUpdateNotFoundFault): any => ({
-    ...obj,
-  });
+  UnprocessedClusters?: UnprocessedCluster[] | undefined;
 }
 
 /**
@@ -651,36 +532,35 @@ export namespace ServiceUpdateNotFoundFault {
  *          When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see
  *          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html">Tagging your MemoryDB resources</a>
  *          </p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>The key for the tag. May not be null.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The tag's value. May be null.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CopySnapshotRequest {
   /**
    * <p>The name of an existing snapshot from which to make a copy.</p>
+   * @public
    */
   SourceSnapshotName: string | undefined;
 
   /**
    * <p>A name for the snapshot copy. MemoryDB does not permit overwriting a snapshot, therefore this name must be unique within its context - MemoryDB or an Amazon S3 bucket if exporting.</p>
+   * @public
    */
   TargetSnapshotName: string | undefined;
 
@@ -692,1077 +572,836 @@ export interface CopySnapshotRequest {
    *        <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>.
    *
    *      </p>
+   * @public
    */
-  TargetBucket?: string;
+  TargetBucket?: string | undefined;
 
   /**
    * <p>The ID of the KMS key used to encrypt the target snapshot.</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CopySnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CopySnapshotRequest): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Shard configuration options. Each shard configuration has the following: Slots and ReplicaCount.</p>
+ * @public
  */
 export interface ShardConfiguration {
   /**
    * <p>A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey.</p>
+   * @public
    */
-  Slots?: string;
+  Slots?: string | undefined;
 
   /**
    * <p>The number of read replica nodes in this shard.</p>
+   * @public
    */
-  ReplicaCount?: number;
-}
-
-export namespace ShardConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShardConfiguration): any => ({
-    ...obj,
-  });
+  ReplicaCount?: number | undefined;
 }
 
 /**
  * <p>Provides details of a shard in a snapshot</p>
+ * @public
  */
 export interface ShardDetail {
   /**
    * <p>The name of the shard</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The configuration details of the shard</p>
+   * @public
    */
-  Configuration?: ShardConfiguration;
+  Configuration?: ShardConfiguration | undefined;
 
   /**
    * <p>The size of the shard's snapshot</p>
+   * @public
    */
-  Size?: string;
+  Size?: string | undefined;
 
   /**
    * <p>The date and time that the shard's snapshot was created</p>
+   * @public
    */
-  SnapshotCreationTime?: Date;
-}
-
-export namespace ShardDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShardDetail): any => ({
-    ...obj,
-  });
+  SnapshotCreationTime?: Date | undefined;
 }
 
 /**
  * <p>A list of cluster configuration options. </p>
+ * @public
  */
 export interface ClusterConfiguration {
   /**
    * <p>The name of the cluster</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The description of the cluster configuration</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The node type used for the cluster</p>
+   * @public
    */
-  NodeType?: string;
+  NodeType?: string | undefined;
 
   /**
-   * <p>The Redis engine version used by the cluster</p>
+   * <p>The name of the engine used by the cluster configuration.</p>
+   * @public
    */
-  EngineVersion?: string;
+  Engine?: string | undefined;
+
+  /**
+   * <p>The Redis OSS engine version used by the cluster</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
 
   /**
    * <p>The specified maintenance window for the cluster</p>
+   * @public
    */
-  MaintenanceWindow?: string;
+  MaintenanceWindow?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the SNS notification topic for the cluster</p>
+   * @public
    */
-  TopicArn?: string;
+  TopicArn?: string | undefined;
 
   /**
    * <p>The port used by the cluster</p>
+   * @public
    */
-  Port?: number;
+  Port?: number | undefined;
 
   /**
    * <p>The name of parameter group used by the cluster</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>The name of the subnet group used by the cluster</p>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
    * <p>The ID of the VPC the cluster belongs to</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>The snapshot retention limit set by the cluster</p>
+   * @public
    */
-  SnapshotRetentionLimit?: number;
+  SnapshotRetentionLimit?: number | undefined;
 
   /**
    * <p>The snapshot window set by the cluster</p>
+   * @public
    */
-  SnapshotWindow?: string;
+  SnapshotWindow?: string | undefined;
 
   /**
    * <p>The number of shards in the cluster</p>
+   * @public
    */
-  NumShards?: number;
+  NumShards?: number | undefined;
 
   /**
    * <p>The list of shards in the cluster</p>
+   * @public
    */
-  Shards?: ShardDetail[];
-}
+  Shards?: ShardDetail[] | undefined;
 
-export namespace ClusterConfiguration {
   /**
-   * @internal
+   * <p>The name of the multi-Region parameter group associated with the cluster configuration.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ClusterConfiguration): any => ({
-    ...obj,
-  });
+  MultiRegionParameterGroupName?: string | undefined;
+
+  /**
+   * <p>The name for the multi-Region cluster associated with the cluster configuration.</p>
+   * @public
+   */
+  MultiRegionClusterName?: string | undefined;
 }
 
 /**
  * <p>Represents a copy of an entire cluster as of the time when the snapshot was taken.</p>
+ * @public
  */
 export interface Snapshot {
   /**
    * <p>The name of the snapshot</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The status of the snapshot. Valid values: creating | available | restoring | copying | deleting.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual).</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>The ID of the KMS key used to encrypt the snapshot.</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 
   /**
    * <p>The ARN (Amazon Resource Name) of the snapshot.</p>
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 
   /**
    * <p>The configuration of the cluster from which the snapshot was taken</p>
+   * @public
    */
-  ClusterConfiguration?: ClusterConfiguration;
-}
+  ClusterConfiguration?: ClusterConfiguration | undefined;
 
-export namespace Snapshot {
   /**
-   * @internal
+   * <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+   *             This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Snapshot): any => ({
-    ...obj,
-  });
+  DataTiering?: DataTieringStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CopySnapshotResponse {
   /**
    * <p>Represents a copy of an entire cluster as of the time when the snapshot was taken.</p>
+   * @public
    */
-  Snapshot?: Snapshot;
-}
-
-export namespace CopySnapshotResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CopySnapshotResponse): any => ({
-    ...obj,
-  });
+  Snapshot?: Snapshot | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidParameterCombinationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterCombinationException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterCombinationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterCombinationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface InvalidSnapshotStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidSnapshotStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidSnapshotStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidSnapshotStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ServiceLinkedRoleNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ServiceLinkedRoleNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ServiceLinkedRoleNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceLinkedRoleNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SnapshotAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "SnapshotAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SnapshotAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnapshotAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SnapshotNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "SnapshotNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SnapshotNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnapshotNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SnapshotQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "SnapshotQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SnapshotQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnapshotQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface TagQuotaPerResourceExceeded extends __SmithyException, $MetadataBearer {
-  name: "TagQuotaPerResourceExceeded";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TagQuotaPerResourceExceeded {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagQuotaPerResourceExceeded): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateACLRequest {
   /**
    * <p>The name of the Access Control List.</p>
+   * @public
    */
   ACLName: string | undefined;
 
   /**
    * <p>The list of users that belong to the Access Control List.</p>
+   * @public
    */
-  UserNames?: string[];
+  UserNames?: string[] | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace CreateACLRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateACLRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateACLResponse {
   /**
    * <p>The newly-created Access Control List.</p>
+   * @public
    */
-  ACL?: ACL;
-}
-
-export namespace CreateACLResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateACLResponse): any => ({
-    ...obj,
-  });
+  ACL?: ACL | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface DefaultUserRequired extends __SmithyException, $MetadataBearer {
-  name: "DefaultUserRequired";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DefaultUserRequired {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DefaultUserRequired): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface DuplicateUserNameFault extends __SmithyException, $MetadataBearer {
-  name: "DuplicateUserNameFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DuplicateUserNameFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DuplicateUserNameFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface UserNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "UserNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace UserNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ClusterAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ClusterQuotaForCustomerExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterQuotaForCustomerExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterQuotaForCustomerExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterQuotaForCustomerExceededFault): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateClusterRequest {
   /**
    * <p>The name of the cluster. This value must be unique as it also serves as the cluster identifier.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>The compute and memory capacity of the nodes in the cluster.</p>
+   * @public
    */
   NodeType: string | undefined;
 
   /**
-   * <p>The name of the parameter group associated with the cluster.</p>
+   * <p>The name of the multi-Region cluster to be created.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  MultiRegionClusterName?: string | undefined;
+
+  /**
+   * <p>The name of the parameter group associated with the cluster.</p>
+   * @public
+   */
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>An optional description of the cluster.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The number of shards the cluster will contain. The default value is 1. </p>
+   * @public
    */
-  NumShards?: number;
+  NumShards?: number | undefined;
 
   /**
    * <p>The number of replicas to apply to each shard. The default value is 1. The maximum is 5. </p>
+   * @public
    */
-  NumReplicasPerShard?: number;
+  NumReplicasPerShard?: number | undefined;
 
   /**
    * <p>The name of the subnet group to be used for the cluster.</p>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
    * <p>A list of security group names to associate with this cluster.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 
   /**
-   * <p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format <code>ddd:hh24:mi-ddd:hh24:mi</code> (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p>
+   * <p>Specifies the weekly time range during which maintenance
+   *          on the cluster is performed. It is specified as a range in
+   *          the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
+   *          maintenance window is a 60 minute period.</p>
+   *          <p>Valid values for <code>ddd</code> are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>sun</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>tue</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>wed</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>thu</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>fri</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sat</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>sun:23:00-mon:01:30</code>
+   *          </p>
+   * @public
    */
-  MaintenanceWindow?: string;
+  MaintenanceWindow?: string | undefined;
 
   /**
    * <p>The port number on which each of the nodes accepts connections.</p>
+   * @public
    */
-  Port?: number;
+  Port?: number | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>A flag to enable in-transit encryption on the cluster.</p>
+   * @public
    */
-  TLSEnabled?: boolean;
+  TLSEnabled?: boolean | undefined;
 
   /**
    * <p>The ID of the KMS key used to encrypt the cluster.</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 
   /**
    * <p>A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.</p>
+   * @public
    */
-  SnapshotArns?: string[];
+  SnapshotArns?: string[] | undefined;
 
   /**
    * <p>The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.</p>
+   * @public
    */
-  SnapshotName?: string;
+  SnapshotName?: string | undefined;
 
   /**
    * <p>The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p>
+   * @public
    */
-  SnapshotRetentionLimit?: number;
+  SnapshotRetentionLimit?: number | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard.</p>
-   *
    *          <p>    Example: 05:00-09:00</p>
-   *
    *          <p>    If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.</p>
+   * @public
    */
-  SnapshotWindow?: string;
+  SnapshotWindow?: string | undefined;
 
   /**
    * <p>The name of the Access Control List to associate with the cluster.</p>
+   * @public
    */
   ACLName: string | undefined;
 
   /**
-   * <p>The version number of the Redis engine to be used for the cluster.</p>
+   * <p>The name of the engine to be used for the cluster.</p>
+   * @public
    */
-  EngineVersion?: string;
+  Engine?: string | undefined;
+
+  /**
+   * <p>The version number of the Redis OSS engine to be used for the cluster.</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
 
   /**
    * <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
+   * @public
    */
-  AutoMinorVersionUpgrade?: boolean;
-}
+  AutoMinorVersionUpgrade?: boolean | undefined;
 
-export namespace CreateClusterRequest {
   /**
-   * @internal
+   * <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+   *             This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateClusterRequest): any => ({
-    ...obj,
-  });
+  DataTiering?: boolean | undefined;
+
+  /**
+   * <p>Specifies the IP address type for the cluster. Valid values are 'ipv4', 'ipv6', or 'dual_stack'. When set to 'ipv4', the cluster will only be accessible via IPv4 addresses. When set to 'ipv6', the cluster will only be accessible via IPv6 addresses. When set to 'dual_stack', the cluster will be accessible via both IPv4 and IPv6 addresses. If not specified, the default is 'ipv4'.</p>
+   * @public
+   */
+  NetworkType?: NetworkType | undefined;
+
+  /**
+   * <p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>
+   * @public
+   */
+  IpDiscovery?: IpDiscovery | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateClusterResponse {
   /**
    * <p>The newly-created cluster.</p>
+   * @public
    */
-  Cluster?: Cluster;
-}
-
-export namespace CreateClusterResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateClusterResponse): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InsufficientClusterCapacityFault extends __SmithyException, $MetadataBearer {
-  name: "InsufficientClusterCapacityFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InsufficientClusterCapacityFault {
+export interface CreateMultiRegionClusterRequest {
   /**
-   * @internal
+   * <p>A suffix to be added to the Multi-Region cluster name. Amazon MemoryDB automatically applies a prefix to the Multi-Region cluster Name when it is created. Each Amazon Region has its own prefix. For instance, a Multi-Region cluster Name created in the US-West-1 region will begin with "virxk", along with the suffix name you provide. The suffix guarantees uniqueness of the Multi-Region cluster name across multiple regions.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InsufficientClusterCapacityFault): any => ({
-    ...obj,
-  });
+  MultiRegionClusterNameSuffix: string | undefined;
+
+  /**
+   * <p>A description for the multi-Region cluster.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The name of the engine to be used for the multi-Region cluster.</p>
+   * @public
+   */
+  Engine?: string | undefined;
+
+  /**
+   * <p>The version of the engine to be used for the multi-Region cluster.</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
+
+  /**
+   * <p>The node type to be used for the multi-Region cluster.</p>
+   * @public
+   */
+  NodeType: string | undefined;
+
+  /**
+   * <p>The name of the multi-Region parameter group to be associated with the cluster.</p>
+   * @public
+   */
+  MultiRegionParameterGroupName?: string | undefined;
+
+  /**
+   * <p>The number of shards for the multi-Region cluster.</p>
+   * @public
+   */
+  NumShards?: number | undefined;
+
+  /**
+   * <p>Whether to enable TLS encryption for the multi-Region cluster.</p>
+   * @public
+   */
+  TLSEnabled?: boolean | undefined;
+
+  /**
+   * <p>A list of tags to be applied to the multi-Region cluster.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p></p>
+ * <p>Represents a Regional cluster</p>
+ * @public
  */
-export interface InvalidACLStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidACLStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidACLStateFault {
+export interface RegionalCluster {
   /**
-   * @internal
+   * <p>The name of the Regional cluster</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidACLStateFault): any => ({
-    ...obj,
-  });
+  ClusterName?: string | undefined;
+
+  /**
+   * <p>The Region the current Regional cluster is assigned to.</p>
+   * @public
+   */
+  Region?: string | undefined;
+
+  /**
+   * <p>The status of the Regional cluster.</p>
+   * @public
+   */
+  Status?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) the Regional cluster</p>
+   * @public
+   */
+  ARN?: string | undefined;
 }
 
 /**
- * <p></p>
+ * <p>Represents a multi-Region cluster.</p>
+ * @public
  */
-export interface InvalidCredentialsException extends __SmithyException, $MetadataBearer {
-  name: "InvalidCredentialsException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidCredentialsException {
+export interface MultiRegionCluster {
   /**
-   * @internal
+   * <p>The name of the multi-Region cluster.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidCredentialsException): any => ({
-    ...obj,
-  });
+  MultiRegionClusterName?: string | undefined;
+
+  /**
+   * <p>The description of the multi-Region cluster.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The current status of the multi-Region cluster.</p>
+   * @public
+   */
+  Status?: string | undefined;
+
+  /**
+   * <p>The node type used by the multi-Region cluster.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>The name of the engine used by the multi-Region cluster.</p>
+   * @public
+   */
+  Engine?: string | undefined;
+
+  /**
+   * <p>The version of the engine used by the multi-Region cluster.</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
+
+  /**
+   * <p>The number of shards in the multi-Region cluster.</p>
+   * @public
+   */
+  NumberOfShards?: number | undefined;
+
+  /**
+   * <p>The clusters in this multi-Region cluster.</p>
+   * @public
+   */
+  Clusters?: RegionalCluster[] | undefined;
+
+  /**
+   * <p>The name of the multi-Region parameter group associated with the cluster.</p>
+   * @public
+   */
+  MultiRegionParameterGroupName?: string | undefined;
+
+  /**
+   * <p>Indiciates if the multi-Region cluster is TLS enabled.</p>
+   * @public
+   */
+  TLSEnabled?: boolean | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the multi-Region cluster.</p>
+   * @public
+   */
+  ARN?: string | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidVPCNetworkStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidVPCNetworkStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidVPCNetworkStateFault {
+export interface CreateMultiRegionClusterResponse {
   /**
-   * @internal
+   * <p>Details about the newly created multi-Region cluster.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidVPCNetworkStateFault): any => ({
-    ...obj,
-  });
+  MultiRegionCluster?: MultiRegionCluster | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface NodeQuotaForClusterExceededFault extends __SmithyException, $MetadataBearer {
-  name: "NodeQuotaForClusterExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NodeQuotaForClusterExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NodeQuotaForClusterExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface NodeQuotaForCustomerExceededFault extends __SmithyException, $MetadataBearer {
-  name: "NodeQuotaForCustomerExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NodeQuotaForCustomerExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NodeQuotaForCustomerExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ParameterGroupNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ShardsPerClusterQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ShardsPerClusterQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ShardsPerClusterQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShardsPerClusterQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SubnetGroupNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateParameterGroupRequest {
   /**
    * <p>The name of the parameter group.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>The name of the parameter group family that the parameter group can be used with.</p>
+   * @public
    */
   Family: string | undefined;
 
   /**
    * <p>An optional description of the parameter group.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateParameterGroupRequest): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Represents the output of a CreateParameterGroup operation. A parameter group represents a combination of specific values for the parameters that are passed to the engine software during startup.</p>
+ * @public
  */
 export interface ParameterGroup {
   /**
    * <p>The name of the parameter group</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The name of the parameter group family that this  parameter group is compatible with.</p>
+   * @public
    */
-  Family?: string;
+  Family?: string | undefined;
 
   /**
    * <p>A description of the parameter group</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the parameter group</p>
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 }
 
-export namespace ParameterGroup {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroup): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateParameterGroupResponse {
   /**
    * <p>The newly-created parameter group.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
-}
-
-export namespace CreateParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateParameterGroupResponse): any => ({
-    ...obj,
-  });
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidParameterGroupStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterGroupStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterGroupStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterGroupStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ParameterGroupAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ParameterGroupQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface ClusterNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateSnapshotRequest {
   /**
    * <p>The snapshot is created from this cluster.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>A name for the snapshot being created.</p>
+   * @public
    */
   SnapshotName: string | undefined;
 
   /**
    * <p>The ID of the KMS key used to encrypt the snapshot.</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSnapshotRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateSnapshotResponse {
-  /**
-   * <p>The newly-created snapshot.</p>
-   */
-  Snapshot?: Snapshot;
-}
-
-export namespace CreateSnapshotResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSnapshotResponse): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidClusterStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidClusterStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidClusterStateFault {
+export interface CreateSnapshotResponse {
   /**
-   * @internal
+   * <p>The newly-created snapshot.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidClusterStateFault): any => ({
-    ...obj,
-  });
+  Snapshot?: Snapshot | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSubnetGroupRequest {
   /**
    * <p>The name of the subnet group.</p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 
   /**
    * <p>A description for the subnet group.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A list of VPC subnet IDs for the subnet group.</p>
+   * @public
    */
   SubnetIds: string[] | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubnetGroupRequest): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Indicates if the cluster has a Multi-AZ configuration (multiaz) or not (singleaz).</p>
+ * @public
  */
 export interface AvailabilityZone {
   /**
    * <p>The name of the Availability Zone.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace AvailabilityZone {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AvailabilityZone): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with MemoryDB.</p>
+ * @public
  */
 export interface Subnet {
   /**
    * <p>The unique identifier for the subnet.</p>
+   * @public
    */
-  Identifier?: string;
+  Identifier?: string | undefined;
 
   /**
    * <p>The Availability Zone where the subnet resides</p>
+   * @public
    */
-  AvailabilityZone?: AvailabilityZone;
-}
+  AvailabilityZone?: AvailabilityZone | undefined;
 
-export namespace Subnet {
   /**
-   * @internal
+   * <p>The network types supported by this subnet. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating whether the subnet supports IPv4 only, IPv6 only, or dual-stack deployments.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Subnet): any => ({
-    ...obj,
-  });
+  SupportedNetworkTypes?: NetworkType[] | undefined;
 }
 
 /**
@@ -1776,2014 +1415,2102 @@ export namespace Subnet {
  *             </li>
  *          </ul>
  *          <p>A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.</p>
+ * @public
  */
 export interface SubnetGroup {
   /**
    * <p>The name of the subnet group</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>A description of the subnet group</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>A list of subnets associated with the subnet group.</p>
+   * @public
    */
-  Subnets?: Subnet[];
+  Subnets?: Subnet[] | undefined;
 
   /**
    * <p>The ARN (Amazon Resource Name) of the subnet group.</p>
+   * @public
    */
-  ARN?: string;
-}
+  ARN?: string | undefined;
 
-export namespace SubnetGroup {
   /**
-   * @internal
+   * <p>The network types supported by this subnet group. Returns an array of strings that can include 'ipv4', 'ipv6', or both, indicating the IP address types that can be used for clusters deployed in this subnet group.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SubnetGroup): any => ({
-    ...obj,
-  });
+  SupportedNetworkTypes?: NetworkType[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSubnetGroupResponse {
   /**
-   * <p>The newly-created subnet group</p>
+   * <p>The newly-created subnet group.</p>
+   * @public
    */
-  SubnetGroup?: SubnetGroup;
-}
-
-export namespace CreateSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubnetGroupResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface InvalidSubnet extends __SmithyException, $MetadataBearer {
-  name: "InvalidSubnet";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidSubnet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidSubnet): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SubnetGroupAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SubnetGroupQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SubnetNotAllowedFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetNotAllowedFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetNotAllowedFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetNotAllowedFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface SubnetQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-export enum InputAuthenticationType {
-  PASSWORD = "password",
+  SubnetGroup?: SubnetGroup | undefined;
 }
 
 /**
  * <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.</p>
+ * @public
  */
 export interface AuthenticationMode {
   /**
    * <p>Indicates whether the user requires a password to authenticate. All newly-created users require a password.</p>
+   * @public
    */
-  Type?: InputAuthenticationType | string;
+  Type?: InputAuthenticationType | undefined;
 
   /**
    * <p>The password(s) used for authentication</p>
+   * @public
    */
-  Passwords?: string[];
+  Passwords?: string[] | undefined;
 }
 
-export namespace AuthenticationMode {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthenticationMode): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateUserRequest {
   /**
    * <p>The name of the user. This value must be unique as it also serves as the user identifier.</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate.</p>
+   * @public
    */
   AuthenticationMode: AuthenticationMode | undefined;
 
   /**
    * <p>Access permissions string used for this user.</p>
+   * @public
    */
   AccessString: string | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateUserRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum AuthenticationType {
-  NO_PASSWORD = "no-password",
-  PASSWORD = "password",
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.</p>
+ * @public
  */
 export interface Authentication {
   /**
    * <p>Indicates whether the user requires a password to authenticate.</p>
+   * @public
    */
-  Type?: AuthenticationType | string;
+  Type?: AuthenticationType | undefined;
 
   /**
    * <p>The number of passwords belonging to the user. The maximum is two.</p>
+   * @public
    */
-  PasswordCount?: number;
-}
-
-export namespace Authentication {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Authentication): any => ({
-    ...obj,
-  });
+  PasswordCount?: number | undefined;
 }
 
 /**
  * <p>You create users and assign them specific permissions by using an access string. You assign the users to Access Control Lists aligned with a specific role (administrators, human resources) that are then deployed to one or more MemoryDB clusters.</p>
+ * @public
  */
 export interface User {
   /**
    * <p>The name of the user</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Indicates the user status. Can be "active", "modifying" or "deleting".</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>Access permissions string used for this user.</p>
+   * @public
    */
-  AccessString?: string;
+  AccessString?: string | undefined;
 
   /**
    * <p>The names of the Access Control Lists to which the user belongs</p>
+   * @public
    */
-  ACLNames?: string[];
+  ACLNames?: string[] | undefined;
 
   /**
    * <p>The minimum engine version supported for the user</p>
+   * @public
    */
-  MinimumEngineVersion?: string;
+  MinimumEngineVersion?: string | undefined;
 
   /**
    * <p>Denotes whether the user requires a password to authenticate.</p>
+   * @public
    */
-  Authentication?: Authentication;
+  Authentication?: Authentication | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the user.
    *
    *       </p>
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 }
 
-export namespace User {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: User): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateUserResponse {
   /**
    * <p>The newly-created user.</p>
+   * @public
    */
-  User?: User;
-}
-
-export namespace CreateUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateUserResponse): any => ({
-    ...obj,
-  });
+  User?: User | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface UserAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "UserAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace UserAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface UserQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "UserQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace UserQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteACLRequest {
   /**
-   * <p>The name of the Access Control List to delete</p>
+   * <p>The name of the Access Control List to delete.</p>
+   * @public
    */
   ACLName: string | undefined;
 }
 
-export namespace DeleteACLRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteACLRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteACLResponse {
   /**
    * <p>The Access Control List object that has been deleted.</p>
+   * @public
    */
-  ACL?: ACL;
+  ACL?: ACL | undefined;
 }
 
-export namespace DeleteACLResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteACLResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteClusterRequest {
   /**
    * <p>The name of the cluster to be deleted</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
-   * <p>The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.</p>
+   * <p>The name of the multi-Region cluster to be deleted.</p>
+   * @public
    */
-  FinalSnapshotName?: string;
-}
+  MultiRegionClusterName?: string | undefined;
 
-export namespace DeleteClusterRequest {
   /**
-   * @internal
+   * <p>The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteClusterRequest): any => ({
-    ...obj,
-  });
+  FinalSnapshotName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteClusterResponse {
   /**
-   * <p>The cluster object that has been deleted</p>
+   * <p>The cluster object that has been deleted.</p>
+   * @public
    */
-  Cluster?: Cluster;
+  Cluster?: Cluster | undefined;
 }
 
-export namespace DeleteClusterResponse {
+/**
+ * @public
+ */
+export interface DeleteMultiRegionClusterRequest {
   /**
-   * @internal
+   * <p>The name of the multi-Region cluster to be deleted.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteClusterResponse): any => ({
-    ...obj,
-  });
+  MultiRegionClusterName: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteMultiRegionClusterResponse {
+  /**
+   * <p>Details about the deleted multi-Region cluster.</p>
+   * @public
+   */
+  MultiRegionCluster?: MultiRegionCluster | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DeleteParameterGroupRequest {
   /**
    * <p>The name of the parameter group to delete.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 }
 
-export namespace DeleteParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteParameterGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteParameterGroupResponse {
   /**
    * <p>The parameter group that has been deleted.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
-export namespace DeleteParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteParameterGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSnapshotRequest {
   /**
-   * <p>The name of the snapshot to delete</p>
+   * <p>The name of the snapshot to delete.</p>
+   * @public
    */
   SnapshotName: string | undefined;
 }
 
-export namespace DeleteSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSnapshotRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSnapshotResponse {
   /**
    * <p>The snapshot object that has been deleted.</p>
+   * @public
    */
-  Snapshot?: Snapshot;
+  Snapshot?: Snapshot | undefined;
 }
 
-export namespace DeleteSnapshotResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSnapshotResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubnetGroupRequest {
   /**
-   * <p>The name of the subnet group to delete</p>
+   * <p>The name of the subnet group to delete.</p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 }
 
-export namespace DeleteSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubnetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubnetGroupResponse {
   /**
    * <p>The subnet group object that has been deleted.</p>
+   * @public
    */
-  SubnetGroup?: SubnetGroup;
-}
-
-export namespace DeleteSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubnetGroupResponse): any => ({
-    ...obj,
-  });
+  SubnetGroup?: SubnetGroup | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface SubnetGroupInUseFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupInUseFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupInUseFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupInUseFault): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteUserRequest {
   /**
    * <p>The name of the user to delete</p>
+   * @public
    */
   UserName: string | undefined;
 }
 
-export namespace DeleteUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteUserResponse {
   /**
    * <p>The user object that has been deleted.</p>
+   * @public
    */
-  User?: User;
-}
-
-export namespace DeleteUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserResponse): any => ({
-    ...obj,
-  });
+  User?: User | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidUserStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidUserStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidUserStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidUserStateFault): any => ({
-    ...obj,
-  });
-}
-
 export interface DescribeACLsRequest {
   /**
-   * <p>The name of the ACL</p>
+   * <p>The name of the ACL.</p>
+   * @public
    */
-  ACLName?: string;
+  ACLName?: string | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeACLsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeACLsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeACLsResponse {
   /**
-   * <p>The list of ACLs</p>
+   * <p>The list of ACLs.</p>
+   * @public
    */
-  ACLs?: ACL[];
+  ACLs?: ACL[] | undefined;
 
   /**
    * <p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeACLsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeACLsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeClustersRequest {
-  /**
-   * <p>The name of the cluster</p>
-   */
-  ClusterName?: string;
-
-  /**
-   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>An optional flag that can be included in the request to retrieve information about the individual shard(s).</p>
-   */
-  ShowShardDetails?: boolean;
-}
-
-export namespace DescribeClustersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClustersRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeClustersResponse {
-  /**
-   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>A list of clusters</p>
-   */
-  Clusters?: Cluster[];
-}
-
-export namespace DescribeClustersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClustersResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeEngineVersionsRequest {
-  /**
-   * <p>The Redis engine version</p>
-   */
-  EngineVersion?: string;
-
-  /**
-   * <p>The name of a specific parameter group family to return details for.</p>
-   */
-  ParameterGroupFamily?: string;
-
-  /**
-   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>If true, specifies that only the default version of the specified engine or engine and major version combination is to be returned.</p>
-   */
-  DefaultOnly?: boolean;
-}
-
-export namespace DescribeEngineVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEngineVersionsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>Provides details of the Redis engine version</p>
+ * @public
+ */
+export interface DescribeClustersRequest {
+  /**
+   * <p>The name of the cluster.</p>
+   * @public
+   */
+  ClusterName?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>An optional flag that can be included in the request to retrieve information about the individual shard(s).</p>
+   * @public
+   */
+  ShowShardDetails?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeClustersResponse {
+  /**
+   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>A list of clusters</p>
+   * @public
+   */
+  Clusters?: Cluster[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeEngineVersionsRequest {
+  /**
+   * <p>The name of the engine for which to list available versions.</p>
+   * @public
+   */
+  Engine?: string | undefined;
+
+  /**
+   * <p>The Redis OSS engine version</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
+
+  /**
+   * <p>The name of a specific parameter group family to return details for.</p>
+   * @public
+   */
+  ParameterGroupFamily?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>If true, specifies that only the default version of the specified engine or engine and major version combination is to be returned.</p>
+   * @public
+   */
+  DefaultOnly?: boolean | undefined;
+}
+
+/**
+ * <p>Provides details of the Redis OSS engine version</p>
+ * @public
  */
 export interface EngineVersionInfo {
   /**
-   * <p>The engine version</p>
+   * <p>The name of the engine for which version information is provided.</p>
+   * @public
    */
-  EngineVersion?: string;
+  Engine?: string | undefined;
+
+  /**
+   * <p>The engine version</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
 
   /**
    * <p>The patched engine version</p>
+   * @public
    */
-  EnginePatchVersion?: string;
+  EnginePatchVersion?: string | undefined;
 
   /**
    * <p>Specifies the name of the parameter group family to which the engine default parameters apply.</p>
+   * @public
    */
-  ParameterGroupFamily?: string;
+  ParameterGroupFamily?: string | undefined;
 }
 
-export namespace EngineVersionInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EngineVersionInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeEngineVersionsResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of engine version details. Each element in the list contains detailed information about one engine version.</p>
+   * @public
    */
-  EngineVersions?: EngineVersionInfo[];
+  EngineVersions?: EngineVersionInfo[] | undefined;
 }
 
-export namespace DescribeEngineVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEngineVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SourceType {
-  acl = "acl",
-  cluster = "cluster",
-  node = "node",
-  parameter_group = "parameter-group",
-  subnet_group = "subnet-group",
-  user = "user",
-}
-
+/**
+ * @public
+ */
 export interface DescribeEventsRequest {
   /**
    * <p>The identifier of the event source for which events are returned. If not specified, all sources are included in the response.</p>
+   * @public
    */
-  SourceName?: string;
+  SourceName?: string | undefined;
 
   /**
    * <p>The event source to retrieve events for. If no value is specified, all events are returned.</p>
+   * @public
    */
-  SourceType?: SourceType | string;
+  SourceType?: SourceType | undefined;
 
   /**
    * <p>The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
    *
    *          Example: 2017-03-30T07:03:49.555Z</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The end of the time interval for which to retrieve events, specified in ISO 8601 format.
    *
    *          Example: 2017-03-30T07:03:49.555Z</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 
   /**
    * <p>The number of minutes worth of events to retrieve.</p>
+   * @public
    */
-  Duration?: number;
+  Duration?: number | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeEventsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEventsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a
  *          node.</p>
+ * @public
  */
 export interface Event {
   /**
    * <p>The name for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.</p>
+   * @public
    */
-  SourceName?: string;
+  SourceName?: string | undefined;
 
   /**
    * <p>Specifies the origin of this event - a cluster, a parameter group, a security group, etc.</p>
+   * @public
    */
-  SourceType?: SourceType | string;
+  SourceType?: SourceType | undefined;
 
   /**
    * <p>The text of the event.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 
   /**
    * <p>The date and time when the event occurred.</p>
+   * @public
    */
-  Date?: Date;
+  Date?: Date | undefined;
 }
 
-export namespace Event {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Event): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeEventsResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of events. Each element in the list contains detailed information about one event.</p>
+   * @public
    */
-  Events?: Event[];
+  Events?: Event[] | undefined;
 }
 
-export namespace DescribeEventsResponse {
+/**
+ * @public
+ */
+export interface DescribeMultiRegionClustersRequest {
   /**
-   * @internal
+   * <p>The name of a specific multi-Region cluster to describe.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeEventsResponse): any => ({
-    ...obj,
-  });
+  MultiRegionClusterName?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>A token to specify where to start paginating.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Details about the multi-Region cluster.</p>
+   * @public
+   */
+  ShowClusterDetails?: boolean | undefined;
 }
 
-export interface DescribeParameterGroupsRequest {
+/**
+ * @public
+ */
+export interface DescribeMultiRegionClustersResponse {
   /**
-   * <p>The name of a specific  parameter group to return details for.</p>
+   * <p>A token to use to retrieve the next page of results.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  NextToken?: string | undefined;
+
+  /**
+   * <p>A list of multi-Region clusters.</p>
+   * @public
+   */
+  MultiRegionClusters?: MultiRegionCluster[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeMultiRegionParameterGroupsRequest {
+  /**
+   * <p>The request for information on a specific multi-region parameter group.</p>
+   * @public
+   */
+  MultiRegionParameterGroupName?: string | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Represents the output of a CreateMultiRegionParameterGroup operation. A multi-region parameter group represents a collection of parameters that can be applied to clusters across multiple regions.</p>
+ * @public
+ */
+export interface MultiRegionParameterGroup {
+  /**
+   * <p>The name of the multi-region parameter group.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The name of the parameter group family that this multi-region parameter group is compatible with.</p>
+   * @public
+   */
+  Family?: string | undefined;
+
+  /**
+   * <p>A description of the multi-region parameter group.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the multi-region parameter group.</p>
+   * @public
+   */
+  ARN?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeMultiRegionParameterGroupsResponse {
+  /**
+   * <p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>A list of multi-region parameter groups. Each element in the list contains detailed information about one parameter group.</p>
+   * @public
+   */
+  MultiRegionParameterGroups?: MultiRegionParameterGroup[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeMultiRegionParametersRequest {
+  /**
+   * <p>The name of the multi-region parameter group to return details for.</p>
+   * @public
+   */
+  MultiRegionParameterGroupName: string | undefined;
+
+  /**
+   * <p>The parameter types to return. Valid values: user | system | engine-default</p>
+   * @public
+   */
+  Source?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes an individual setting that controls some aspect of MemoryDB behavior across multiple regions.</p>
+ * @public
+ */
+export interface MultiRegionParameter {
+  /**
+   * <p>The name of the parameter.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The value of the parameter.</p>
+   * @public
+   */
+  Value?: string | undefined;
+
+  /**
+   * <p>A description of the parameter.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>Indicates the source of the parameter value. Valid values: user | system | engine-default</p>
+   * @public
+   */
+  Source?: string | undefined;
+
+  /**
+   * <p>The valid data type for the parameter.</p>
+   * @public
+   */
+  DataType?: string | undefined;
+
+  /**
+   * <p>The valid range of values for the parameter.</p>
+   * @public
+   */
+  AllowedValues?: string | undefined;
+
+  /**
+   * <p>The earliest engine version to which the parameter can apply.</p>
+   * @public
+   */
+  MinimumEngineVersion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeMultiRegionParametersResponse {
+  /**
+   * <p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>A list of parameters specific to a particular multi-region parameter group. Each element in the list contains detailed information about one parameter.</p>
+   * @public
+   */
+  MultiRegionParameters?: MultiRegionParameter[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeParameterGroupsRequest {
+  /**
+   * <p>The name of a specific  parameter group to return details for.</p>
+   * @public
+   */
+  ParameterGroupName?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeParameterGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParameterGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParameterGroupsResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of parameter groups. Each element in the list contains detailed information about one parameter group.</p>
+   * @public
    */
-  ParameterGroups?: ParameterGroup[];
+  ParameterGroups?: ParameterGroup[] | undefined;
 }
 
-export namespace DescribeParameterGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParameterGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParametersRequest {
   /**
    * <p>he name of a specific  parameter group to return details for.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeParametersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParametersRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes an individual setting that controls some aspect of MemoryDB behavior.</p>
+ * @public
  */
 export interface Parameter {
   /**
    * <p>The name of the parameter</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The value of the parameter</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>A description of the parameter</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The parameter's data type</p>
+   * @public
    */
-  DataType?: string;
+  DataType?: string | undefined;
 
   /**
    * <p>The valid range of values for the parameter.</p>
+   * @public
    */
-  AllowedValues?: string;
+  AllowedValues?: string | undefined;
 
   /**
    * <p>The earliest engine version to which the parameter can apply.</p>
+   * @public
    */
-  MinimumEngineVersion?: string;
+  MinimumEngineVersion?: string | undefined;
 }
 
-export namespace Parameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Parameter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParametersResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of parameters specific to a particular parameter group. Each element in the list contains detailed information about one parameter.</p>
+   * @public
    */
-  Parameters?: Parameter[];
+  Parameters?: Parameter[] | undefined;
 }
 
-export namespace DescribeParametersResponse {
+/**
+ * @public
+ */
+export interface DescribeReservedNodesRequest {
   /**
-   * @internal
+   * <p>The reserved node identifier filter value. Use this parameter to show only the reservation that matches the specified reservation ID.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeParametersResponse): any => ({
-    ...obj,
-  });
+  ReservationId?: string | undefined;
+
+  /**
+   * <p>The offering identifier filter value. Use this parameter to show only purchased reservations matching the specified offering identifier.</p>
+   * @public
+   */
+  ReservedNodesOfferingId?: string | undefined;
+
+  /**
+   * <p>The node type filter value. Use this parameter to show only those reservations matching the specified  node type. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.</p>
+   * @public
+   */
+  Duration?: string | undefined;
+
+  /**
+   * <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+   *          Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
+   * @public
+   */
+  OfferingType?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * <p>The recurring charge to run this reserved node.</p>
+ * @public
+ */
+export interface RecurringCharge {
+  /**
+   * <p>The amount of the recurring charge to run this reserved node.</p>
+   * @public
+   */
+  RecurringChargeAmount?: number | undefined;
+
+  /**
+   * <p>The frequency of the recurring price charged to run this reserved node.</p>
+   * @public
+   */
+  RecurringChargeFrequency?: string | undefined;
+}
+
+/**
+ * <p>Represents the output of a <code>PurchaseReservedNodesOffering</code> operation.</p>
+ * @public
+ */
+export interface ReservedNode {
+  /**
+   * <p>A customer-specified identifier to track this reservation.</p>
+   * @public
+   */
+  ReservationId?: string | undefined;
+
+  /**
+   * <p>The ID of the reserved node offering to purchase.</p>
+   * @public
+   */
+  ReservedNodesOfferingId?: string | undefined;
+
+  /**
+   * <p>The node type for the reserved nodes.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>The time the reservation started.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The duration of the reservation in seconds.</p>
+   * @public
+   */
+  Duration?: number | undefined;
+
+  /**
+   * <p>The fixed price charged for this reserved node.</p>
+   * @public
+   */
+  FixedPrice?: number | undefined;
+
+  /**
+   * <p>The number of nodes that have been reserved.</p>
+   * @public
+   */
+  NodeCount?: number | undefined;
+
+  /**
+   * <p>The offering type of this reserved node.</p>
+   * @public
+   */
+  OfferingType?: string | undefined;
+
+  /**
+   * <p>The state of the reserved node.</p>
+   * @public
+   */
+  State?: string | undefined;
+
+  /**
+   * <p>The recurring price charged to run this reserved node.</p>
+   * @public
+   */
+  RecurringCharges?: RecurringCharge[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the reserved node.</p>
+   * @public
+   */
+  ARN?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeReservedNodesResponse {
+  /**
+   * <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Returns information about reserved nodes for this account, or about a specified reserved node.</p>
+   * @public
+   */
+  ReservedNodes?: ReservedNode[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeReservedNodesOfferingsRequest {
+  /**
+   * <p>The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.</p>
+   * @public
+   */
+  ReservedNodesOfferingId?: string | undefined;
+
+  /**
+   * <p>The node type for the reserved nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.</p>
+   * @public
+   */
+  Duration?: string | undefined;
+
+  /**
+   * <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+   *          Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
+   * @public
+   */
+  OfferingType?: string | undefined;
+
+  /**
+   * <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>The offering type of this node.</p>
+ * @public
+ */
+export interface ReservedNodesOffering {
+  /**
+   * <p>The offering identifier.</p>
+   * @public
+   */
+  ReservedNodesOfferingId?: string | undefined;
+
+  /**
+   * <p>The node type for the reserved nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>The duration of the reservation in seconds.</p>
+   * @public
+   */
+  Duration?: number | undefined;
+
+  /**
+   * <p>The fixed price charged for this reserved node.</p>
+   * @public
+   */
+  FixedPrice?: number | undefined;
+
+  /**
+   * <p>The offering type of this reserved node.</p>
+   * @public
+   */
+  OfferingType?: string | undefined;
+
+  /**
+   * <p>The recurring price charged to run this reserved node.</p>
+   * @public
+   */
+  RecurringCharges?: RecurringCharge[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeReservedNodesOfferingsResponse {
+  /**
+   * <p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Lists available reserved node offerings.</p>
+   * @public
+   */
+  ReservedNodesOfferings?: ReservedNodesOffering[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DescribeServiceUpdatesRequest {
   /**
    * <p>The unique ID of the service update to describe.</p>
+   * @public
    */
-  ServiceUpdateName?: string;
+  ServiceUpdateName?: string | undefined;
 
   /**
-   * <p>The list of cluster names to identify service updates to apply</p>
+   * <p>The list of cluster names to identify service updates to apply.</p>
+   * @public
    */
-  ClusterNames?: string[];
+  ClusterNames?: string[] | undefined;
 
   /**
-   * <p>The status(es) of the service updates to filter on</p>
+   * <p>The status(es) of the service updates to filter on.</p>
+   * @public
    */
-  Status?: (ServiceUpdateStatus | string)[];
+  Status?: ServiceUpdateStatus[] | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeServiceUpdatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeServiceUpdatesRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ServiceUpdateType {
-  SECURITY_UPDATE = "security-update",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>An update that you can apply to your MemoryDB clusters.</p>
+ * @public
  */
 export interface ServiceUpdate {
   /**
    * <p>The name of the cluster to which the service update applies</p>
+   * @public
    */
-  ClusterName?: string;
+  ClusterName?: string | undefined;
 
   /**
    * <p>The unique ID of the service update</p>
+   * @public
    */
-  ServiceUpdateName?: string;
+  ServiceUpdateName?: string | undefined;
 
   /**
    * <p>The date when the service update is initially available</p>
+   * @public
    */
-  ReleaseDate?: Date;
+  ReleaseDate?: Date | undefined;
 
   /**
    * <p>Provides details of the service update</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The status of the service update</p>
+   * @public
    */
-  Status?: ServiceUpdateStatus | string;
+  Status?: ServiceUpdateStatus | undefined;
 
   /**
    * <p>Reflects the nature of the service update</p>
+   * @public
    */
-  Type?: ServiceUpdateType | string;
+  Type?: ServiceUpdateType | undefined;
+
+  /**
+   * <p>The name of the engine for which a service update is available.</p>
+   * @public
+   */
+  Engine?: string | undefined;
 
   /**
    * <p>A list of nodes updated by the service update</p>
+   * @public
    */
-  NodesUpdated?: string;
+  NodesUpdated?: string | undefined;
 
   /**
    * <p>The date at which the service update will be automatically applied</p>
+   * @public
    */
-  AutoUpdateStartDate?: Date;
+  AutoUpdateStartDate?: Date | undefined;
 }
 
-export namespace ServiceUpdate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUpdate): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeServiceUpdatesResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of service updates</p>
+   * @public
    */
-  ServiceUpdates?: ServiceUpdate[];
+  ServiceUpdates?: ServiceUpdate[] | undefined;
 }
 
-export namespace DescribeServiceUpdatesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeServiceUpdatesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSnapshotsRequest {
   /**
    * <p>A user-supplied cluster identifier. If this parameter is specified, only snapshots associated with that specific cluster are described.</p>
+   * @public
    */
-  ClusterName?: string;
+  ClusterName?: string | undefined;
 
   /**
    * <p>A user-supplied name of the snapshot. If this parameter is specified, only this named snapshot is described.</p>
+   * @public
    */
-  SnapshotName?: string;
+  SnapshotName?: string | undefined;
 
   /**
    * <p>If set to system, the output shows snapshots that were automatically created by MemoryDB. If set to user the output shows snapshots that were manually created. If omitted, the output shows both automatically and manually created snapshots.</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>A Boolean value which if true, the shard configuration is included in the snapshot description.</p>
+   * @public
    */
-  ShowDetail?: boolean;
+  ShowDetail?: boolean | undefined;
 }
 
-export namespace DescribeSnapshotsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSnapshotsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSnapshotsResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of snapshots. Each item in the list contains detailed information about one snapshot.</p>
+   * @public
    */
-  Snapshots?: Snapshot[];
+  Snapshots?: Snapshot[] | undefined;
 }
 
-export namespace DescribeSnapshotsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSnapshotsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSubnetGroupsRequest {
   /**
    * <p>The name of the subnet group to return details for.</p>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeSubnetGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSubnetGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSubnetGroupsResponse {
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of subnet groups. Each element in the list contains detailed information about one group.</p>
+   * @public
    */
-  SubnetGroups?: SubnetGroup[];
-}
-
-export namespace DescribeSubnetGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSubnetGroupsResponse): any => ({
-    ...obj,
-  });
+  SubnetGroups?: SubnetGroup[] | undefined;
 }
 
 /**
  * <p>Used to streamline results of a search based on the property being filtered.</p>
+ * @public
  */
 export interface Filter {
   /**
    * <p>The property being filtered. For example, UserName.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The property values to filter on. For example, "user-123".</p>
+   * @public
    */
   Values: string[] | undefined;
 }
 
-export namespace Filter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Filter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeUsersRequest {
   /**
-   * <p>The name of the user</p>
+   * <p>The name of the user.</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>Filter to determine the list of users to return.</p>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeUsersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeUsersRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeUsersResponse {
-  /**
-   * <p>A list of users.</p>
-   */
-  Users?: User[];
-
-  /**
-   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribeUsersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeUsersResponse): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface APICallRateForCustomerExceededFault extends __SmithyException, $MetadataBearer {
-  name: "APICallRateForCustomerExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace APICallRateForCustomerExceededFault {
+export interface DescribeUsersResponse {
   /**
-   * @internal
+   * <p>A list of users.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: APICallRateForCustomerExceededFault): any => ({
-    ...obj,
-  });
+  Users?: User[] | undefined;
+
+  /**
+   * <p>An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface FailoverShardRequest {
   /**
-   * <p>The cluster being failed over</p>
+   * <p>The cluster being failed over.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
-   * <p>The name of the shard</p>
+   * <p>The name of the shard.</p>
+   * @public
    */
   ShardName: string | undefined;
 }
 
-export namespace FailoverShardRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FailoverShardRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface FailoverShardResponse {
   /**
-   * <p>The cluster being failed over</p>
+   * <p>The cluster being failed over.</p>
+   * @public
    */
-  Cluster?: Cluster;
-}
-
-export namespace FailoverShardResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FailoverShardResponse): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidKMSKeyFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidKMSKeyFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidKMSKeyFault {
+export interface ListAllowedMultiRegionClusterUpdatesRequest {
   /**
-   * @internal
+   * <p>The name of the multi-Region cluster.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidKMSKeyFault): any => ({
-    ...obj,
-  });
+  MultiRegionClusterName: string | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface ShardNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ShardNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ShardNotFoundFault {
+export interface ListAllowedMultiRegionClusterUpdatesResponse {
   /**
-   * @internal
+   * <p>The node types that the cluster can be scaled up to.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ShardNotFoundFault): any => ({
-    ...obj,
-  });
+  ScaleUpNodeTypes?: string[] | undefined;
+
+  /**
+   * <p>The node types that the cluster can be scaled down to.</p>
+   * @public
+   */
+  ScaleDownNodeTypes?: string[] | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface TestFailoverNotAvailableFault extends __SmithyException, $MetadataBearer {
-  name: "TestFailoverNotAvailableFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TestFailoverNotAvailableFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TestFailoverNotAvailableFault): any => ({
-    ...obj,
-  });
-}
-
 export interface ListAllowedNodeTypeUpdatesRequest {
   /**
    * <p>The name of the cluster you want to scale. MemoryDB uses the cluster name to identify the current node type being used by this cluster, and from that to create a list of node types
    *          you can scale up to.</p>
+   * @public
    */
   ClusterName: string | undefined;
 }
 
-export namespace ListAllowedNodeTypeUpdatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAllowedNodeTypeUpdatesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAllowedNodeTypeUpdatesResponse {
   /**
    * <p>A list node types which you can use to scale up your cluster.</p>
+   * @public
    */
-  ScaleUpNodeTypes?: string[];
+  ScaleUpNodeTypes?: string[] | undefined;
 
   /**
    * <p>A list node types which you can use to scale down your cluster.</p>
+   * @public
    */
-  ScaleDownNodeTypes?: string[];
-}
-
-export namespace ListAllowedNodeTypeUpdatesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAllowedNodeTypeUpdatesResponse): any => ({
-    ...obj,
-  });
+  ScaleDownNodeTypes?: string[] | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface InvalidARNFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidARNFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidARNFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidARNFault): any => ({
-    ...obj,
-  });
-}
-
 export interface ListTagsRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags</p>
+   * <p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsResponse {
   /**
    * <p>A list of tags as key-value pairs.</p>
+   * @public
    */
-  TagList?: Tag[];
+  TagList?: Tag[] | undefined;
 }
 
-export namespace ListTagsResponse {
+/**
+ * @public
+ */
+export interface PurchaseReservedNodesOfferingRequest {
   /**
-   * @internal
+   * <p>The ID of the reserved node offering to purchase.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsResponse): any => ({
-    ...obj,
-  });
+  ReservedNodesOfferingId: string | undefined;
+
+  /**
+   * <p>A customer-specified identifier to track this reservation.</p>
+   * @public
+   */
+  ReservationId?: string | undefined;
+
+  /**
+   * <p>The number of node instances to reserve.</p>
+   * @public
+   */
+  NodeCount?: number | undefined;
+
+  /**
+   * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface PurchaseReservedNodesOfferingResponse {
+  /**
+   * <p>Represents the output of a <code>PurchaseReservedNodesOffering</code> operation.</p>
+   * @public
+   */
+  ReservedNode?: ReservedNode | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ResetParameterGroupRequest {
   /**
    * <p>The name of the parameter group to reset.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>If true, all parameters in the parameter group are reset to their default values. If false, only the parameters listed by ParameterNames are reset to their default values.</p>
+   * @public
    */
-  AllParameters?: boolean;
+  AllParameters?: boolean | undefined;
 
   /**
    * <p>An array of parameter names to reset to their default values. If AllParameters is true, do not use ParameterNames. If AllParameters is false, you must specify the name of at least one parameter to reset.</p>
+   * @public
    */
-  ParameterNames?: string[];
+  ParameterNames?: string[] | undefined;
 }
 
-export namespace ResetParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetParameterGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ResetParameterGroupResponse {
   /**
    * <p>The parameter group being reset.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
-export namespace ResetParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetParameterGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added</p>
+   * <p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {
   /**
    * <p>A list of tags as key-value pairs.</p>
+   * @public
    */
-  TagList?: Tag[];
-}
-
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
+  TagList?: Tag[] | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface TagNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "TagNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TagNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
 export interface UntagResourceRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) of the resource to which the tags are to be removed</p>
+   * <p>The Amazon Resource Name (ARN) of the resource to which the tags are to be removed.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * <p>The list of keys of the tags that are to be removed</p>
+   * <p>The list of keys of the tags that are to be removed.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {
   /**
-   * <p>The list of tags removed</p>
+   * <p>The list of tags removed.</p>
+   * @public
    */
-  TagList?: Tag[];
+  TagList?: Tag[] | undefined;
 }
 
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateACLRequest {
   /**
-   * <p>The name of the Access Control List</p>
+   * <p>The name of the Access Control List.</p>
+   * @public
    */
   ACLName: string | undefined;
 
   /**
-   * <p>The list of users to add to the Access Control List</p>
+   * <p>The list of users to add to the Access Control List.</p>
+   * @public
    */
-  UserNamesToAdd?: string[];
+  UserNamesToAdd?: string[] | undefined;
 
   /**
-   * <p>The list of users to remove from the Access Control List</p>
+   * <p>The list of users to remove from the Access Control List.</p>
+   * @public
    */
-  UserNamesToRemove?: string[];
+  UserNamesToRemove?: string[] | undefined;
 }
 
-export namespace UpdateACLRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateACLRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateACLResponse {
   /**
-   * <p>The updated Access Control List</p>
+   * <p>The updated Access Control List.</p>
+   * @public
    */
-  ACL?: ACL;
-}
-
-export namespace UpdateACLResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateACLResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface InvalidNodeStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidNodeStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidNodeStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidNodeStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface NoOperationFault extends __SmithyException, $MetadataBearer {
-  name: "NoOperationFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NoOperationFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NoOperationFault): any => ({
-    ...obj,
-  });
+  ACL?: ACL | undefined;
 }
 
 /**
  * <p>A request to configure the number of replicas in a shard</p>
+ * @public
  */
 export interface ReplicaConfigurationRequest {
   /**
    * <p>The number of replicas to scale up or down to</p>
+   * @public
    */
-  ReplicaCount?: number;
-}
-
-export namespace ReplicaConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReplicaConfigurationRequest): any => ({
-    ...obj,
-  });
+  ReplicaCount?: number | undefined;
 }
 
 /**
  * <p>A request to configure the sharding properties of a cluster</p>
+ * @public
  */
 export interface ShardConfigurationRequest {
   /**
    * <p>The number of shards in the cluster</p>
+   * @public
    */
-  ShardCount?: number;
+  ShardCount?: number | undefined;
 }
 
-export namespace ShardConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShardConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateClusterRequest {
   /**
-   * <p>The name of the cluster to update</p>
+   * <p>The name of the cluster to update.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
-   * <p>The description of the cluster to update</p>
+   * <p>The description of the cluster to update.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>The SecurityGroupIds to update</p>
+   * <p>The SecurityGroupIds to update.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 
   /**
-   * <p>The maintenance window to update</p>
+   * <p>Specifies the weekly time range during which maintenance
+   *          on the cluster is performed. It is specified as a range in
+   *          the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
+   *          maintenance window is a 60 minute period.</p>
+   *          <p>Valid values for <code>ddd</code> are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>sun</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>tue</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>wed</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>thu</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>fri</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sat</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>sun:23:00-mon:01:30</code>
+   *          </p>
+   * @public
    */
-  MaintenanceWindow?: string;
+  MaintenanceWindow?: string | undefined;
 
   /**
-   * <p>The SNS topic ARN to update</p>
+   * <p>The SNS topic ARN to update.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>The status of the Amazon SNS notification topic. Notifications are sent only if the status is active.</p>
+   * @public
    */
-  SnsTopicStatus?: string;
+  SnsTopicStatus?: string | undefined;
 
   /**
-   * <p>The name of the parameter group to update</p>
+   * <p>The name of the parameter group to update.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.</p>
+   * @public
    */
-  SnapshotWindow?: string;
+  SnapshotWindow?: string | undefined;
 
   /**
    * <p>The number of days for which MemoryDB retains automatic cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p>
+   * @public
    */
-  SnapshotRetentionLimit?: number;
+  SnapshotRetentionLimit?: number | undefined;
 
   /**
    * <p>A valid node type that you want to scale this cluster up or down to.</p>
+   * @public
    */
-  NodeType?: string;
+  NodeType?: string | undefined;
+
+  /**
+   * <p>The name of the engine to be used for the cluster.</p>
+   * @public
+   */
+  Engine?: string | undefined;
 
   /**
    * <p>The upgraded version of the engine to be run on the nodes. You can upgrade to a newer engine version, but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version.</p>
+   * @public
    */
-  EngineVersion?: string;
+  EngineVersion?: string | undefined;
 
   /**
-   * <p>The number of replicas that will reside in each shard</p>
+   * <p>The number of replicas that will reside in each shard.</p>
+   * @public
    */
-  ReplicaConfiguration?: ReplicaConfigurationRequest;
+  ReplicaConfiguration?: ReplicaConfigurationRequest | undefined;
 
   /**
-   * <p>The number of shards in the cluster</p>
+   * <p>The number of shards in the cluster.</p>
+   * @public
    */
-  ShardConfiguration?: ShardConfigurationRequest;
+  ShardConfiguration?: ShardConfigurationRequest | undefined;
 
   /**
-   * <p>The Access Control List that is associated with the cluster</p>
+   * <p>The Access Control List that is associated with the cluster.</p>
+   * @public
    */
-  ACLName?: string;
+  ACLName?: string | undefined;
+
+  /**
+   * <p>The mechanism for discovering IP addresses for the cluster discovery protocol. Valid values are 'ipv4' or 'ipv6'. When set to 'ipv4', cluster discovery functions such as cluster slots, cluster shards, and cluster nodes will return IPv4 addresses for cluster nodes. When set to 'ipv6', the cluster discovery functions return IPv6 addresses for cluster nodes. The value must be compatible with the NetworkType parameter. If not specified, the default is 'ipv4'.</p>
+   * @public
+   */
+  IpDiscovery?: IpDiscovery | undefined;
 }
 
-export namespace UpdateClusterRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateClusterRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateClusterResponse {
   /**
-   * <p>The updated cluster</p>
+   * <p>The updated cluster.</p>
+   * @public
    */
-  Cluster?: Cluster;
+  Cluster?: Cluster | undefined;
 }
 
-export namespace UpdateClusterResponse {
+/**
+ * @public
+ */
+export interface UpdateMultiRegionClusterRequest {
   /**
-   * @internal
+   * <p>The name of the multi-Region cluster to be updated.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateClusterResponse): any => ({
-    ...obj,
-  });
+  MultiRegionClusterName: string | undefined;
+
+  /**
+   * <p>The new node type to be used for the multi-Region cluster.</p>
+   * @public
+   */
+  NodeType?: string | undefined;
+
+  /**
+   * <p>A new description for the multi-Region cluster.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The new engine version to be used for the multi-Region cluster.</p>
+   * @public
+   */
+  EngineVersion?: string | undefined;
+
+  /**
+   * <p>A request to configure the sharding properties of a cluster</p>
+   * @public
+   */
+  ShardConfiguration?: ShardConfigurationRequest | undefined;
+
+  /**
+   * <p>The new multi-Region parameter group to be associated with the cluster.</p>
+   * @public
+   */
+  MultiRegionParameterGroupName?: string | undefined;
+
+  /**
+   * <p>The strategy to use for the update operation. Supported values are "coordinated" or "uncoordinated".</p>
+   * @public
+   */
+  UpdateStrategy?: UpdateStrategy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateMultiRegionClusterResponse {
+  /**
+   * <p>The status of updating the multi-Region cluster.</p>
+   * @public
+   */
+  MultiRegionCluster?: MultiRegionCluster | undefined;
 }
 
 /**
  * <p>Describes a name-value pair that is used to update the value of a parameter.</p>
+ * @public
  */
 export interface ParameterNameValue {
   /**
    * <p>The name of the parameter</p>
+   * @public
    */
-  ParameterName?: string;
+  ParameterName?: string | undefined;
 
   /**
    * <p>The value of the parameter</p>
+   * @public
    */
-  ParameterValue?: string;
+  ParameterValue?: string | undefined;
 }
 
-export namespace ParameterNameValue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterNameValue): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateParameterGroupRequest {
   /**
    * <p>The name of the parameter group to update.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>An array of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional. A maximum of 20 parameters may be updated per request.</p>
+   * @public
    */
   ParameterNameValues: ParameterNameValue[] | undefined;
 }
 
-export namespace UpdateParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateParameterGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateParameterGroupResponse {
   /**
    * <p>The updated parameter group</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
-}
-
-export namespace UpdateParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateParameterGroupResponse): any => ({
-    ...obj,
-  });
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
 /**
- * <p></p>
+ * @public
  */
-export interface SubnetInUse extends __SmithyException, $MetadataBearer {
-  name: "SubnetInUse";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetInUse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetInUse): any => ({
-    ...obj,
-  });
-}
-
 export interface UpdateSubnetGroupRequest {
   /**
    * <p>The name of the subnet group</p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 
   /**
    * <p>A description of the subnet group</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The EC2 subnet IDs for the subnet group.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 }
 
-export namespace UpdateSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubnetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSubnetGroupResponse {
   /**
    * <p>The updated subnet group</p>
+   * @public
    */
-  SubnetGroup?: SubnetGroup;
+  SubnetGroup?: SubnetGroup | undefined;
 }
 
-export namespace UpdateSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubnetGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateUserRequest {
   /**
    * <p>The name of the user</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate.</p>
+   * @public
    */
-  AuthenticationMode?: AuthenticationMode;
+  AuthenticationMode?: AuthenticationMode | undefined;
 
   /**
    * <p>Access permissions string used for this user.</p>
+   * @public
    */
-  AccessString?: string;
+  AccessString?: string | undefined;
 }
 
-export namespace UpdateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateUserRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateUserResponse {
   /**
    * <p>The updated user</p>
+   * @public
    */
-  User?: User;
-}
-
-export namespace UpdateUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateUserResponse): any => ({
-    ...obj,
-  });
+  User?: User | undefined;
 }

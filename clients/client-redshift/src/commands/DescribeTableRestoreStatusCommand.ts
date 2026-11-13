@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeTableRestoreStatusMessage, TableRestoreStatusMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeTableRestoreStatusCommand,
-  serializeAws_queryDescribeTableRestoreStatusCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTableRestoreStatusMessage, TableRestoreStatusMessage } from "../models/models_0";
+import { DescribeTableRestoreStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTableRestoreStatusCommand}.
+ */
 export interface DescribeTableRestoreStatusCommandInput extends DescribeTableRestoreStatusMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTableRestoreStatusCommand}.
+ */
 export interface DescribeTableRestoreStatusCommandOutput extends TableRestoreStatusMessage, __MetadataBearer {}
 
 /**
@@ -33,71 +34,75 @@ export interface DescribeTableRestoreStatusCommandOutput extends TableRestoreSta
  * ```javascript
  * import { RedshiftClient, DescribeTableRestoreStatusCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeTableRestoreStatusCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeTableRestoreStatusMessage
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   TableRestoreRequestId: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeTableRestoreStatusCommand(input);
  * const response = await client.send(command);
+ * // { // TableRestoreStatusMessage
+ * //   TableRestoreStatusDetails: [ // TableRestoreStatusList
+ * //     { // TableRestoreStatus
+ * //       TableRestoreRequestId: "STRING_VALUE",
+ * //       Status: "PENDING" || "IN_PROGRESS" || "SUCCEEDED" || "FAILED" || "CANCELED",
+ * //       Message: "STRING_VALUE",
+ * //       RequestTime: new Date("TIMESTAMP"),
+ * //       ProgressInMegaBytes: Number("long"),
+ * //       TotalDataInMegaBytes: Number("long"),
+ * //       ClusterIdentifier: "STRING_VALUE",
+ * //       SnapshotIdentifier: "STRING_VALUE",
+ * //       SourceDatabaseName: "STRING_VALUE",
+ * //       SourceSchemaName: "STRING_VALUE",
+ * //       SourceTableName: "STRING_VALUE",
+ * //       TargetDatabaseName: "STRING_VALUE",
+ * //       TargetSchemaName: "STRING_VALUE",
+ * //       NewTableName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTableRestoreStatusCommandInput - {@link DescribeTableRestoreStatusCommandInput}
+ * @returns {@link DescribeTableRestoreStatusCommandOutput}
  * @see {@link DescribeTableRestoreStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeTableRestoreStatusCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link TableRestoreNotFoundFault} (client fault)
+ *  <p>The specified <code>TableRestoreRequestId</code> value was not found.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTableRestoreStatusCommand extends $Command<
-  DescribeTableRestoreStatusCommandInput,
-  DescribeTableRestoreStatusCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTableRestoreStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTableRestoreStatusCommandInput, DescribeTableRestoreStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeTableRestoreStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTableRestoreStatusMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: TableRestoreStatusMessage.filterSensitiveLog,
+export class DescribeTableRestoreStatusCommand extends command<DescribeTableRestoreStatusCommandInput, DescribeTableRestoreStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTableRestoreStatus",
+  DescribeTableRestoreStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTableRestoreStatusMessage;
+      output: TableRestoreStatusMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTableRestoreStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeTableRestoreStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeTableRestoreStatusCommandOutput> {
-    return deserializeAws_queryDescribeTableRestoreStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTableRestoreStatusCommandInput;
+      output: DescribeTableRestoreStatusCommandOutput;
+    };
+  };
 }

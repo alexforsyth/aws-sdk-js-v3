@@ -1,18 +1,24 @@
-# @aws-sdk/client-iotdeviceadvisor
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-iotdeviceadvisor/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-iotdeviceadvisor)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-iotdeviceadvisor.svg)](https://www.npmjs.com/package/@aws-sdk/client-iotdeviceadvisor)
+# @aws-sdk/client-iotdeviceadvisor
 
 ## Description
 
 AWS SDK for JavaScript IotDeviceAdvisor Client for Node.js, Browser and React Native.
 
-<p>AWS IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT devices during device software development. Device Advisor provides pre-built tests that you can use to validate IoT devices for reliable and secure connectivity with AWS IoT Core before deploying devices to production. By using Device Advisor, you can confirm that your devices can connect to AWS IoT Core, follow security best practices and, if applicable, receive software updates from IoT Device Management. You can also download signed qualification reports to submit to the AWS Partner Network to get your device qualified for the AWS Partner Device Catalog without the need to send your device in and wait for it to be tested.</p>
+<p>Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT
+devices during device software development. Device Advisor provides pre-built tests that you
+can use to validate IoT devices for reliable and secure connectivity with Amazon Web Services IoT Core
+before deploying devices to production. By using Device Advisor, you can confirm that your
+devices can connect to Amazon Web Services IoT Core, follow security best practices and, if applicable,
+receive software updates from IoT Device Management. You can also download signed
+qualification reports to submit to the Amazon Web Services Partner Network to get your device
+qualified for the Amazon Web Services Partner Device Catalog without the need to send your device in
+and wait for it to be tested.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-iotdeviceadvisor
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-iotdeviceadvisor`
 - `yarn add @aws-sdk/client-iotdeviceadvisor`
@@ -24,40 +30,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `IotDeviceAdvisorClient` and
-the commands you need, for example `CreateSuiteDefinitionCommand`:
+the commands you need, for example `ListSuiteRunsCommand`:
 
 ```js
 // ES5 example
-const { IotDeviceAdvisorClient, CreateSuiteDefinitionCommand } = require("@aws-sdk/client-iotdeviceadvisor");
+const { IotDeviceAdvisorClient, ListSuiteRunsCommand } = require("@aws-sdk/client-iotdeviceadvisor");
 ```
 
 ```ts
 // ES6+ example
-import { IotDeviceAdvisorClient, CreateSuiteDefinitionCommand } from "@aws-sdk/client-iotdeviceadvisor";
+import { IotDeviceAdvisorClient, ListSuiteRunsCommand } from "@aws-sdk/client-iotdeviceadvisor";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new IotDeviceAdvisorClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateSuiteDefinitionCommand(params);
+const params = { /** input parameters */ };
+const command = new ListSuiteRunsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -72,26 +76,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -107,31 +94,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`IotDeviceAdvisor` extends `IotDeviceAdvisorClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`IotDeviceAdvisorClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-iotdeviceadvisor";
-const client = new AWS.IotDeviceAdvisor({ region: "REGION" });
+import { IotDeviceAdvisor } from "@aws-sdk/client-iotdeviceadvisor";
+
+const client = new IotDeviceAdvisor({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createSuiteDefinition(params);
+  const data = await client.listSuiteRuns(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -139,7 +120,7 @@ try {
 
 // Promises.
 client
-  .createSuiteDefinition(params)
+  .listSuiteRuns(params)
   .then((data) => {
     // process data.
   })
@@ -147,9 +128,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createSuiteDefinition(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listSuiteRuns(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -175,12 +156,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -201,3 +184,104 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CreateSuiteDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/CreateSuiteDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/CreateSuiteDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/CreateSuiteDefinitionCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteSuiteDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/DeleteSuiteDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/DeleteSuiteDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/DeleteSuiteDefinitionCommandOutput/)
+</details>
+<details>
+<summary>
+GetEndpoint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/GetEndpointCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetEndpointCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetEndpointCommandOutput/)
+</details>
+<details>
+<summary>
+GetSuiteDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/GetSuiteDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteDefinitionCommandOutput/)
+</details>
+<details>
+<summary>
+GetSuiteRun
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/GetSuiteRunCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteRunCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteRunCommandOutput/)
+</details>
+<details>
+<summary>
+GetSuiteRunReport
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/GetSuiteRunReportCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteRunReportCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/GetSuiteRunReportCommandOutput/)
+</details>
+<details>
+<summary>
+ListSuiteDefinitions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/ListSuiteDefinitionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListSuiteDefinitionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListSuiteDefinitionsCommandOutput/)
+</details>
+<details>
+<summary>
+ListSuiteRuns
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/ListSuiteRunsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListSuiteRunsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListSuiteRunsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+StartSuiteRun
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/StartSuiteRunCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/StartSuiteRunCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/StartSuiteRunCommandOutput/)
+</details>
+<details>
+<summary>
+StopSuiteRun
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/StopSuiteRunCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/StopSuiteRunCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/StopSuiteRunCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateSuiteDefinition
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iotdeviceadvisor/command/UpdateSuiteDefinitionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/UpdateSuiteDefinitionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-iotdeviceadvisor/Interface/UpdateSuiteDefinitionCommandOutput/)
+</details>

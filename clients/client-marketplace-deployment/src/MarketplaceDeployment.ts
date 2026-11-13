@@ -1,0 +1,119 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
+
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutDeploymentParameterCommandInput,
+  type PutDeploymentParameterCommandOutput,
+  PutDeploymentParameterCommand,
+} from "./commands/PutDeploymentParameterCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import { MarketplaceDeploymentClient } from "./MarketplaceDeploymentClient";
+
+const commands = {
+  ListTagsForResourceCommand,
+  PutDeploymentParameterCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+
+/**
+ * @public
+ */
+export interface MarketplaceDeploymentRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MarketplaceDeployment {
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MarketplaceDeploymentRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MarketplaceDeploymentRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDeploymentParameterCommand}
+   */
+  putDeploymentParameter(
+    args: PutDeploymentParameterCommandInput,
+    options?: MarketplaceDeploymentRequestOptions
+  ): Promise<PutDeploymentParameterCommandOutput>;
+  putDeploymentParameter(
+    args: PutDeploymentParameterCommandInput,
+    cb: (err: any, data?: PutDeploymentParameterCommandOutput) => void
+  ): void;
+  putDeploymentParameter(
+    args: PutDeploymentParameterCommandInput,
+    options: MarketplaceDeploymentRequestOptions,
+    cb: (err: any, data?: PutDeploymentParameterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MarketplaceDeploymentRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MarketplaceDeploymentRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MarketplaceDeploymentRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MarketplaceDeploymentRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+}
+
+/**
+ * <p>The AWS Marketplace Deployment Service supports the Quick Launch experience, which is a deployment option for software as a service (SaaS) products.
+ *       Quick Launch simplifies and reduces the time, resources, and steps required to configure, deploy, and launch a products.
+ *       The AWS Marketplace Deployment Service provides sellers with a secure method for passing deployment parameters, such as
+ *       API keys and external IDs, to buyers during the Quick Launch experience.</p>
+ * @public
+ */
+export class MarketplaceDeployment extends MarketplaceDeploymentClient implements MarketplaceDeployment {}
+createAggregatedClient(commands, MarketplaceDeployment);

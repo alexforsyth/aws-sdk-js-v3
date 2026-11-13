@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeGroupRequest, DescribeGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeGroupCommand,
-  serializeAws_json1_1DescribeGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGroupRequest, DescribeGroupResponse } from "../models/models_0";
+import { DescribeGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGroupCommand}.
+ */
 export interface DescribeGroupCommandInput extends DescribeGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGroupCommand}.
+ */
 export interface DescribeGroupCommandOutput extends DescribeGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface DescribeGroupCommandOutput extends DescribeGroupResponse, __Met
  * ```javascript
  * import { WorkMailClient, DescribeGroupCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, DescribeGroupCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // DescribeGroupRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   GroupId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGroupResponse
+ * //   GroupId: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Email: "STRING_VALUE",
+ * //   State: "ENABLED" || "DISABLED" || "DELETED",
+ * //   EnabledDate: new Date("TIMESTAMP"),
+ * //   DisabledDate: new Date("TIMESTAMP"),
+ * //   HiddenFromGlobalAddressList: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeGroupCommandInput - {@link DescribeGroupCommandInput}
+ * @returns {@link DescribeGroupCommandOutput}
  * @see {@link DescribeGroupCommandInput} for command's `input` shape.
  * @see {@link DescribeGroupCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>The identifier supplied for the user, group, or resource does not exist in your
+ *          organization.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link OrganizationNotFoundException} (client fault)
+ *  <p>An operation received a valid organization identifier that either doesn't belong or
+ *          exist in the system.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGroupCommand extends $Command<
-  DescribeGroupCommandInput,
-  DescribeGroupCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGroupCommandInput, DescribeGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "DescribeGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGroupResponse.filterSensitiveLog,
+export class DescribeGroupCommand extends command<DescribeGroupCommandInput, DescribeGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGroup",
+  DescribeGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGroupRequest;
+      output: DescribeGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeGroupCommandOutput> {
-    return deserializeAws_json1_1DescribeGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGroupCommandInput;
+      output: DescribeGroupCommandOutput;
+    };
+  };
 }

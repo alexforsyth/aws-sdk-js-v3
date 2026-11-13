@@ -1,34 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   UpdateSecurityGroupRuleDescriptionsEgressRequest,
   UpdateSecurityGroupRuleDescriptionsEgressResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2UpdateSecurityGroupRuleDescriptionsEgressCommand,
-  serializeAws_ec2UpdateSecurityGroupRuleDescriptionsEgressCommand,
-} from "../protocols/Aws_ec2";
-
-export interface UpdateSecurityGroupRuleDescriptionsEgressCommandInput
-  extends UpdateSecurityGroupRuleDescriptionsEgressRequest {}
-export interface UpdateSecurityGroupRuleDescriptionsEgressCommandOutput
-  extends UpdateSecurityGroupRuleDescriptionsEgressResult,
-    __MetadataBearer {}
+} from "../models/models_8";
+import { UpdateSecurityGroupRuleDescriptionsEgress$ } from "../schemas/schemas_0";
 
 /**
- * <p>[VPC only] Updates the description of an egress (outbound) security group rule. You
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSecurityGroupRuleDescriptionsEgressCommand}.
+ */
+export interface UpdateSecurityGroupRuleDescriptionsEgressCommandInput extends UpdateSecurityGroupRuleDescriptionsEgressRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSecurityGroupRuleDescriptionsEgressCommand}.
+ */
+export interface UpdateSecurityGroupRuleDescriptionsEgressCommandOutput extends UpdateSecurityGroupRuleDescriptionsEgressResult, __MetadataBearer {}
+
+/**
+ * <p>Updates the description of an egress (outbound) security group rule. You
  * 			can replace an existing description, or add a description to a rule that did not have one
  * 			previously. You can remove a description for a security group rule by omitting the
  * 			description parameter in the request.</p>
@@ -37,77 +35,117 @@ export interface UpdateSecurityGroupRuleDescriptionsEgressCommandOutput
  * ```javascript
  * import { EC2Client, UpdateSecurityGroupRuleDescriptionsEgressCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, UpdateSecurityGroupRuleDescriptionsEgressCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // UpdateSecurityGroupRuleDescriptionsEgressRequest
+ *   DryRun: true || false,
+ *   GroupId: "STRING_VALUE",
+ *   GroupName: "STRING_VALUE",
+ *   IpPermissions: [ // IpPermissionList
+ *     { // IpPermission
+ *       IpProtocol: "STRING_VALUE",
+ *       FromPort: Number("int"),
+ *       ToPort: Number("int"),
+ *       UserIdGroupPairs: [ // UserIdGroupPairList
+ *         { // UserIdGroupPair
+ *           Description: "STRING_VALUE",
+ *           UserId: "STRING_VALUE",
+ *           GroupName: "STRING_VALUE",
+ *           GroupId: "STRING_VALUE",
+ *           VpcId: "STRING_VALUE",
+ *           VpcPeeringConnectionId: "STRING_VALUE",
+ *           PeeringStatus: "STRING_VALUE",
+ *         },
+ *       ],
+ *       IpRanges: [ // IpRangeList
+ *         { // IpRange
+ *           Description: "STRING_VALUE",
+ *           CidrIp: "STRING_VALUE",
+ *         },
+ *       ],
+ *       Ipv6Ranges: [ // Ipv6RangeList
+ *         { // Ipv6Range
+ *           Description: "STRING_VALUE",
+ *           CidrIpv6: "STRING_VALUE",
+ *         },
+ *       ],
+ *       PrefixListIds: [ // PrefixListIdList
+ *         { // PrefixListId
+ *           Description: "STRING_VALUE",
+ *           PrefixListId: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   SecurityGroupRuleDescriptions: [ // SecurityGroupRuleDescriptionList
+ *     { // SecurityGroupRuleDescription
+ *       SecurityGroupRuleId: "STRING_VALUE",
+ *       Description: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateSecurityGroupRuleDescriptionsEgressCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateSecurityGroupRuleDescriptionsEgressResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param UpdateSecurityGroupRuleDescriptionsEgressCommandInput - {@link UpdateSecurityGroupRuleDescriptionsEgressCommandInput}
+ * @returns {@link UpdateSecurityGroupRuleDescriptionsEgressCommandOutput}
  * @see {@link UpdateSecurityGroupRuleDescriptionsEgressCommandInput} for command's `input` shape.
  * @see {@link UpdateSecurityGroupRuleDescriptionsEgressCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To update an outbound security group rule description
+ * ```javascript
+ * // This example updates the description for the specified security group rule.
+ * const input = {
+ *   GroupId: "sg-123abc12",
+ *   IpPermissions: [
+ *     {
+ *       FromPort: 80,
+ *       IpProtocol: "tcp",
+ *       IpRanges: [
+ *         {
+ *           CidrIp: "203.0.113.0/24",
+ *           Description: "Outbound HTTP access to server 2"
+ *         }
+ *       ],
+ *       ToPort: 80
+ *     }
+ *   ]
+ * };
+ * const command = new UpdateSecurityGroupRuleDescriptionsEgressCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateSecurityGroupRuleDescriptionsEgressCommand extends $Command<
-  UpdateSecurityGroupRuleDescriptionsEgressCommandInput,
-  UpdateSecurityGroupRuleDescriptionsEgressCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateSecurityGroupRuleDescriptionsEgressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    UpdateSecurityGroupRuleDescriptionsEgressCommandInput,
-    UpdateSecurityGroupRuleDescriptionsEgressCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "UpdateSecurityGroupRuleDescriptionsEgressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateSecurityGroupRuleDescriptionsEgressRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateSecurityGroupRuleDescriptionsEgressResult.filterSensitiveLog,
+export class UpdateSecurityGroupRuleDescriptionsEgressCommand extends command<UpdateSecurityGroupRuleDescriptionsEgressCommandInput, UpdateSecurityGroupRuleDescriptionsEgressCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSecurityGroupRuleDescriptionsEgress",
+  UpdateSecurityGroupRuleDescriptionsEgress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSecurityGroupRuleDescriptionsEgressRequest;
+      output: UpdateSecurityGroupRuleDescriptionsEgressResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateSecurityGroupRuleDescriptionsEgressCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2UpdateSecurityGroupRuleDescriptionsEgressCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateSecurityGroupRuleDescriptionsEgressCommandOutput> {
-    return deserializeAws_ec2UpdateSecurityGroupRuleDescriptionsEgressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateSecurityGroupRuleDescriptionsEgressCommandInput;
+      output: UpdateSecurityGroupRuleDescriptionsEgressCommandOutput;
+    };
+  };
 }

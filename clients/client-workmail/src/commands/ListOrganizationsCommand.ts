@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListOrganizationsRequest, ListOrganizationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListOrganizationsCommand,
-  serializeAws_json1_1ListOrganizationsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListOrganizationsRequest, ListOrganizationsResponse } from "../models/models_0";
+import { ListOrganizations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListOrganizationsCommand}.
+ */
 export interface ListOrganizationsCommandInput extends ListOrganizationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListOrganizationsCommand}.
+ */
 export interface ListOrganizationsCommandOutput extends ListOrganizationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface ListOrganizationsCommandOutput extends ListOrganizationsRespons
  * ```javascript
  * import { WorkMailClient, ListOrganizationsCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, ListOrganizationsCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // ListOrganizationsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListOrganizationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListOrganizationsResponse
+ * //   OrganizationSummaries: [ // OrganizationSummaries
+ * //     { // OrganizationSummary
+ * //       OrganizationId: "STRING_VALUE",
+ * //       Alias: "STRING_VALUE",
+ * //       DefaultMailDomain: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListOrganizationsCommandInput - {@link ListOrganizationsCommandInput}
+ * @returns {@link ListOrganizationsCommandOutput}
  * @see {@link ListOrganizationsCommandInput} for command's `input` shape.
  * @see {@link ListOrganizationsCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class ListOrganizationsCommand extends $Command<
-  ListOrganizationsCommandInput,
-  ListOrganizationsCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListOrganizationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListOrganizationsCommandInput, ListOrganizationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "ListOrganizationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListOrganizationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListOrganizationsResponse.filterSensitiveLog,
+export class ListOrganizationsCommand extends command<ListOrganizationsCommandInput, ListOrganizationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListOrganizations",
+  ListOrganizations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOrganizationsRequest;
+      output: ListOrganizationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListOrganizationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListOrganizationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListOrganizationsCommandOutput> {
-    return deserializeAws_json1_1ListOrganizationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListOrganizationsCommandInput;
+      output: ListOrganizationsCommandOutput;
+    };
+  };
 }

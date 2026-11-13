@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDiscoverersRequest, ListDiscoverersResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDiscoverersCommand,
-  serializeAws_restJson1ListDiscoverersCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDiscoverersRequest, ListDiscoverersResponse } from "../models/models_0";
+import { ListDiscoverers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDiscoverersCommand}.
+ */
 export interface ListDiscoverersCommandInput extends ListDiscoverersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDiscoverersCommand}.
+ */
 export interface ListDiscoverersCommandOutput extends ListDiscoverersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface ListDiscoverersCommandOutput extends ListDiscoverersResponse, _
  * ```javascript
  * import { SchemasClient, ListDiscoverersCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, ListDiscoverersCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // ListDiscoverersRequest
+ *   DiscovererIdPrefix: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   SourceArnPrefix: "STRING_VALUE",
+ * };
  * const command = new ListDiscoverersCommand(input);
  * const response = await client.send(command);
+ * // { // ListDiscoverersResponse
+ * //   Discoverers: [ // __listOfDiscovererSummary
+ * //     { // DiscovererSummary
+ * //       DiscovererArn: "STRING_VALUE",
+ * //       DiscovererId: "STRING_VALUE",
+ * //       SourceArn: "STRING_VALUE",
+ * //       State: "STARTED" || "STOPPED",
+ * //       CrossAccount: true || false,
+ * //       Tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDiscoverersCommandInput - {@link ListDiscoverersCommandInput}
+ * @returns {@link ListDiscoverersCommandOutput}
  * @see {@link ListDiscoverersCommandInput} for command's `input` shape.
  * @see {@link ListDiscoverersCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class ListDiscoverersCommand extends $Command<
-  ListDiscoverersCommandInput,
-  ListDiscoverersCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDiscoverersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDiscoverersCommandInput, ListDiscoverersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "ListDiscoverersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDiscoverersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDiscoverersResponse.filterSensitiveLog,
+export class ListDiscoverersCommand extends command<ListDiscoverersCommandInput, ListDiscoverersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDiscoverers",
+  ListDiscoverers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDiscoverersRequest;
+      output: ListDiscoverersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDiscoverersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDiscoverersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDiscoverersCommandOutput> {
-    return deserializeAws_restJson1ListDiscoverersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDiscoverersCommandInput;
+      output: ListDiscoverersCommandOutput;
+    };
+  };
 }

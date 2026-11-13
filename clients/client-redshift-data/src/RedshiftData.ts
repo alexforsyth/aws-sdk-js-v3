@@ -1,452 +1,414 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchExecuteStatementCommandInput,
+  type BatchExecuteStatementCommandOutput,
   BatchExecuteStatementCommand,
-  BatchExecuteStatementCommandInput,
-  BatchExecuteStatementCommandOutput,
 } from "./commands/BatchExecuteStatementCommand";
 import {
+  type CancelStatementCommandInput,
+  type CancelStatementCommandOutput,
   CancelStatementCommand,
-  CancelStatementCommandInput,
-  CancelStatementCommandOutput,
 } from "./commands/CancelStatementCommand";
 import {
+  type DescribeStatementCommandInput,
+  type DescribeStatementCommandOutput,
   DescribeStatementCommand,
-  DescribeStatementCommandInput,
-  DescribeStatementCommandOutput,
 } from "./commands/DescribeStatementCommand";
 import {
+  type DescribeTableCommandInput,
+  type DescribeTableCommandOutput,
   DescribeTableCommand,
-  DescribeTableCommandInput,
-  DescribeTableCommandOutput,
 } from "./commands/DescribeTableCommand";
 import {
+  type ExecuteStatementCommandInput,
+  type ExecuteStatementCommandOutput,
   ExecuteStatementCommand,
-  ExecuteStatementCommandInput,
-  ExecuteStatementCommandOutput,
 } from "./commands/ExecuteStatementCommand";
 import {
+  type GetStatementResultCommandInput,
+  type GetStatementResultCommandOutput,
   GetStatementResultCommand,
-  GetStatementResultCommandInput,
-  GetStatementResultCommandOutput,
 } from "./commands/GetStatementResultCommand";
 import {
-  ListDatabasesCommand,
-  ListDatabasesCommandInput,
-  ListDatabasesCommandOutput,
-} from "./commands/ListDatabasesCommand";
-import { ListSchemasCommand, ListSchemasCommandInput, ListSchemasCommandOutput } from "./commands/ListSchemasCommand";
+  type GetStatementResultV2CommandInput,
+  type GetStatementResultV2CommandOutput,
+  GetStatementResultV2Command,
+} from "./commands/GetStatementResultV2Command";
 import {
+  type ListDatabasesCommandInput,
+  type ListDatabasesCommandOutput,
+  ListDatabasesCommand,
+} from "./commands/ListDatabasesCommand";
+import {
+  type ListSchemasCommandInput,
+  type ListSchemasCommandOutput,
+  ListSchemasCommand,
+} from "./commands/ListSchemasCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListStatementsCommandInput,
+  type ListStatementsCommandOutput,
   ListStatementsCommand,
-  ListStatementsCommandInput,
-  ListStatementsCommandOutput,
 } from "./commands/ListStatementsCommand";
-import { ListTablesCommand, ListTablesCommandInput, ListTablesCommandOutput } from "./commands/ListTablesCommand";
+import {
+  type ListTablesCommandInput,
+  type ListTablesCommandOutput,
+  ListTablesCommand,
+} from "./commands/ListTablesCommand";
+import { paginateDescribeTable } from "./pagination/DescribeTablePaginator";
+import { paginateGetStatementResult } from "./pagination/GetStatementResultPaginator";
+import { paginateGetStatementResultV2 } from "./pagination/GetStatementResultV2Paginator";
+import { paginateListDatabases } from "./pagination/ListDatabasesPaginator";
+import { paginateListSchemas } from "./pagination/ListSchemasPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateListStatements } from "./pagination/ListStatementsPaginator";
+import { paginateListTables } from "./pagination/ListTablesPaginator";
 import { RedshiftDataClient } from "./RedshiftDataClient";
 
+const commands = {
+  BatchExecuteStatementCommand,
+  CancelStatementCommand,
+  DescribeStatementCommand,
+  DescribeTableCommand,
+  ExecuteStatementCommand,
+  GetStatementResultCommand,
+  GetStatementResultV2Command,
+  ListDatabasesCommand,
+  ListSchemasCommand,
+  ListSessionsCommand,
+  ListStatementsCommand,
+  ListTablesCommand,
+};
+const paginators = {
+  paginateDescribeTable,
+  paginateGetStatementResult,
+  paginateGetStatementResultV2,
+  paginateListDatabases,
+  paginateListSchemas,
+  paginateListSessions,
+  paginateListStatements,
+  paginateListTables,
+};
+
 /**
- * <p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You
- *       can run SQL statements, which are committed if the statement succeeds. </p>
- *          <p>For more information about the Amazon Redshift Data API, see
- *        <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the
- *        <i>Amazon Redshift Cluster Management Guide</i>. </p>
+ * @public
  */
-export class RedshiftData extends RedshiftDataClient {
+export interface RedshiftDataRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RedshiftData {
   /**
-   * <p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition
-   *       language (DDL).
-   *       Depending on the authorization
-   *       method, use one of the following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *         cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the
-   *           database user name. Permission to call the <code>redshift:GetClusterCredentials</code>
-   *           operation is required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link BatchExecuteStatementCommand}
    */
-  public batchExecuteStatement(
+  batchExecuteStatement(
     args: BatchExecuteStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<BatchExecuteStatementCommandOutput>;
-  public batchExecuteStatement(
+  batchExecuteStatement(
     args: BatchExecuteStatementCommandInput,
     cb: (err: any, data?: BatchExecuteStatementCommandOutput) => void
   ): void;
-  public batchExecuteStatement(
+  batchExecuteStatement(
     args: BatchExecuteStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: BatchExecuteStatementCommandOutput) => void
   ): void;
-  public batchExecuteStatement(
-    args: BatchExecuteStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchExecuteStatementCommandOutput) => void),
-    cb?: (err: any, data?: BatchExecuteStatementCommandOutput) => void
-  ): Promise<BatchExecuteStatementCommandOutput> | void {
-    const command = new BatchExecuteStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Cancels a running query. To be canceled, a query must be running. </p>
+   * @see {@link CancelStatementCommand}
    */
-  public cancelStatement(
+  cancelStatement(
     args: CancelStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<CancelStatementCommandOutput>;
-  public cancelStatement(
+  cancelStatement(
     args: CancelStatementCommandInput,
     cb: (err: any, data?: CancelStatementCommandOutput) => void
   ): void;
-  public cancelStatement(
+  cancelStatement(
     args: CancelStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: CancelStatementCommandOutput) => void
   ): void;
-  public cancelStatement(
-    args: CancelStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelStatementCommandOutput) => void),
-    cb?: (err: any, data?: CancelStatementCommandOutput) => void
-  ): Promise<CancelStatementCommandOutput> | void {
-    const command = new CancelStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information
-   *       includes when the query started, when it finished, the query status, the number of rows returned, and the SQL
-   *       statement. </p>
+   * @see {@link DescribeStatementCommand}
    */
-  public describeStatement(
+  describeStatement(
     args: DescribeStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<DescribeStatementCommandOutput>;
-  public describeStatement(
+  describeStatement(
     args: DescribeStatementCommandInput,
     cb: (err: any, data?: DescribeStatementCommandOutput) => void
   ): void;
-  public describeStatement(
+  describeStatement(
     args: DescribeStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: DescribeStatementCommandOutput) => void
   ): void;
-  public describeStatement(
-    args: DescribeStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStatementCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStatementCommandOutput) => void
-  ): Promise<DescribeStatementCommandOutput> | void {
-    const command = new DescribeStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the detailed information about a table from metadata in the cluster. The
-   *       information includes its columns.
-   *       A token is returned to page through the column list.
-   *       Depending on the authorization method, use one of the
-   *       following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *          cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the database
-   *           user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is
-   *           required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link DescribeTableCommand}
    */
-  public describeTable(
+  describeTable(
     args: DescribeTableCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<DescribeTableCommandOutput>;
-  public describeTable(
+  describeTable(
     args: DescribeTableCommandInput,
     cb: (err: any, data?: DescribeTableCommandOutput) => void
   ): void;
-  public describeTable(
+  describeTable(
     args: DescribeTableCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: DescribeTableCommandOutput) => void
   ): void;
-  public describeTable(
-    args: DescribeTableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTableCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTableCommandOutput) => void
-  ): Promise<DescribeTableCommandOutput> | void {
-    const command = new DescribeTableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Runs an SQL statement, which can be data manipulation language (DML) or data definition
-   *       language (DDL). This statement must be a single SQL statement.
-   *       Depending on the authorization
-   *       method, use one of the following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *          cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the
-   *           database user name. Permission to call the <code>redshift:GetClusterCredentials</code>
-   *           operation is required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link ExecuteStatementCommand}
    */
-  public executeStatement(
+  executeStatement(
     args: ExecuteStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<ExecuteStatementCommandOutput>;
-  public executeStatement(
+  executeStatement(
     args: ExecuteStatementCommandInput,
     cb: (err: any, data?: ExecuteStatementCommandOutput) => void
   ): void;
-  public executeStatement(
+  executeStatement(
     args: ExecuteStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: ExecuteStatementCommandOutput) => void
   ): void;
-  public executeStatement(
-    args: ExecuteStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExecuteStatementCommandOutput) => void),
-    cb?: (err: any, data?: ExecuteStatementCommandOutput) => void
-  ): Promise<ExecuteStatementCommandOutput> | void {
-    const command = new ExecuteStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Fetches the temporarily cached result of an SQL statement.
-   *        A token is returned to page through the statement results. </p>
+   * @see {@link GetStatementResultCommand}
    */
-  public getStatementResult(
+  getStatementResult(
     args: GetStatementResultCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<GetStatementResultCommandOutput>;
-  public getStatementResult(
+  getStatementResult(
     args: GetStatementResultCommandInput,
     cb: (err: any, data?: GetStatementResultCommandOutput) => void
   ): void;
-  public getStatementResult(
+  getStatementResult(
     args: GetStatementResultCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: GetStatementResultCommandOutput) => void
   ): void;
-  public getStatementResult(
-    args: GetStatementResultCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStatementResultCommandOutput) => void),
-    cb?: (err: any, data?: GetStatementResultCommandOutput) => void
-  ): Promise<GetStatementResultCommandOutput> | void {
-    const command = new GetStatementResultCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the databases in a cluster.
-   *       A token is returned to page through the database list.
-   *       Depending on the authorization method, use one of the
-   *       following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *          cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the
-   *           database user name. Permission to call the <code>redshift:GetClusterCredentials</code>
-   *           operation is required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link GetStatementResultV2Command}
    */
-  public listDatabases(
+  getStatementResultV2(
+    args: GetStatementResultV2CommandInput,
+    options?: RedshiftDataRequestOptions
+  ): Promise<GetStatementResultV2CommandOutput>;
+  getStatementResultV2(
+    args: GetStatementResultV2CommandInput,
+    cb: (err: any, data?: GetStatementResultV2CommandOutput) => void
+  ): void;
+  getStatementResultV2(
+    args: GetStatementResultV2CommandInput,
+    options: RedshiftDataRequestOptions,
+    cb: (err: any, data?: GetStatementResultV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatabasesCommand}
+   */
+  listDatabases(): Promise<ListDatabasesCommandOutput>;
+  listDatabases(
     args: ListDatabasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<ListDatabasesCommandOutput>;
-  public listDatabases(
+  listDatabases(
     args: ListDatabasesCommandInput,
     cb: (err: any, data?: ListDatabasesCommandOutput) => void
   ): void;
-  public listDatabases(
+  listDatabases(
     args: ListDatabasesCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: ListDatabasesCommandOutput) => void
   ): void;
-  public listDatabases(
-    args: ListDatabasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDatabasesCommandOutput) => void),
-    cb?: (err: any, data?: ListDatabasesCommandOutput) => void
-  ): Promise<ListDatabasesCommandOutput> | void {
-    const command = new ListDatabasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the schemas in a database.
-   *       A token is returned to page through the schema list.
-   *       Depending on the authorization method, use one of the
-   *       following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *          cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the
-   *           database user name. Permission to call the <code>redshift:GetClusterCredentials</code>
-   *           operation is required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link ListSchemasCommand}
    */
-  public listSchemas(args: ListSchemasCommandInput, options?: __HttpHandlerOptions): Promise<ListSchemasCommandOutput>;
-  public listSchemas(args: ListSchemasCommandInput, cb: (err: any, data?: ListSchemasCommandOutput) => void): void;
-  public listSchemas(
+  listSchemas(
     args: ListSchemasCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RedshiftDataRequestOptions
+  ): Promise<ListSchemasCommandOutput>;
+  listSchemas(
+    args: ListSchemasCommandInput,
     cb: (err: any, data?: ListSchemasCommandOutput) => void
   ): void;
-  public listSchemas(
+  listSchemas(
     args: ListSchemasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSchemasCommandOutput) => void),
-    cb?: (err: any, data?: ListSchemasCommandOutput) => void
-  ): Promise<ListSchemasCommandOutput> | void {
-    const command = new ListSchemasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftDataRequestOptions,
+    cb: (err: any, data?: ListSchemasCommandOutput) => void
+  ): void;
 
   /**
-   * <p>List of SQL statements. By default, only finished statements are shown.
-   *         A token is returned to page through the statement list. </p>
+   * @see {@link ListSessionsCommand}
    */
-  public listStatements(
+  listSessions(): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: RedshiftDataRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: RedshiftDataRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStatementsCommand}
+   */
+  listStatements(): Promise<ListStatementsCommandOutput>;
+  listStatements(
     args: ListStatementsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftDataRequestOptions
   ): Promise<ListStatementsCommandOutput>;
-  public listStatements(
+  listStatements(
     args: ListStatementsCommandInput,
     cb: (err: any, data?: ListStatementsCommandOutput) => void
   ): void;
-  public listStatements(
+  listStatements(
     args: ListStatementsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftDataRequestOptions,
     cb: (err: any, data?: ListStatementsCommandOutput) => void
   ): void;
-  public listStatements(
-    args: ListStatementsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStatementsCommandOutput) => void),
-    cb?: (err: any, data?: ListStatementsCommandOutput) => void
-  ): Promise<ListStatementsCommandOutput> | void {
-    const command = new ListStatementsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then
-   *        all tables in the database are returned.
-   *       A token is returned to page through the table list.
-   *       Depending on the authorization method, use one of the
-   *       following combinations of request parameters: </p>
-   *          <ul>
-   *             <li>
-   *                <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-   *          cluster identifier that matches the cluster in the secret. </p>
-   *             </li>
-   *             <li>
-   *                <p>Temporary credentials - specify the cluster identifier, the database name, and the
-   *           database user name. Permission to call the <code>redshift:GetClusterCredentials</code>
-   *           operation is required to use this method. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link ListTablesCommand}
    */
-  public listTables(args: ListTablesCommandInput, options?: __HttpHandlerOptions): Promise<ListTablesCommandOutput>;
-  public listTables(args: ListTablesCommandInput, cb: (err: any, data?: ListTablesCommandOutput) => void): void;
-  public listTables(
+  listTables(
     args: ListTablesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RedshiftDataRequestOptions
+  ): Promise<ListTablesCommandOutput>;
+  listTables(
+    args: ListTablesCommandInput,
     cb: (err: any, data?: ListTablesCommandOutput) => void
   ): void;
-  public listTables(
+  listTables(
     args: ListTablesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTablesCommandOutput) => void),
-    cb?: (err: any, data?: ListTablesCommandOutput) => void
-  ): Promise<ListTablesCommandOutput> | void {
-    const command = new ListTablesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftDataRequestOptions,
+    cb: (err: any, data?: ListTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTableCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeTableCommandOutput}.
+   */
+  paginateDescribeTable(
+    args: DescribeTableCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeTableCommandOutput>;
+
+  /**
+   * @see {@link GetStatementResultCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetStatementResultCommandOutput}.
+   */
+  paginateGetStatementResult(
+    args: GetStatementResultCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetStatementResultCommandOutput>;
+
+  /**
+   * @see {@link GetStatementResultV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetStatementResultV2CommandOutput}.
+   */
+  paginateGetStatementResultV2(
+    args: GetStatementResultV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetStatementResultV2CommandOutput>;
+
+  /**
+   * @see {@link ListDatabasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatabasesCommandOutput}.
+   */
+  paginateListDatabases(
+    args?: ListDatabasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatabasesCommandOutput>;
+
+  /**
+   * @see {@link ListSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSchemasCommandOutput}.
+   */
+  paginateListSchemas(
+    args: ListSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSchemasCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args?: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListStatementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStatementsCommandOutput}.
+   */
+  paginateListStatements(
+    args?: ListStatementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStatementsCommandOutput>;
+
+  /**
+   * @see {@link ListTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTablesCommandOutput}.
+   */
+  paginateListTables(
+    args: ListTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTablesCommandOutput>;
 }
+
+/**
+ * <p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>
+ * @public
+ */
+export class RedshiftData extends RedshiftDataClient implements RedshiftData {}
+createAggregatedClient(commands, RedshiftData, { paginators });

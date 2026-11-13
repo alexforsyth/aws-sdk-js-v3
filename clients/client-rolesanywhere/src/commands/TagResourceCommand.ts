@@ -1,0 +1,94 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagResourceRequest, TagResourceResponse } from "../models/models_0";
+import { TagResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandInput extends TagResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandOutput extends TagResourceResponse, __MetadataBearer {}
+
+/**
+ * <p>Attaches tags to a resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:TagResource</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RolesAnywhereClient, TagResourceCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
+ * // const { RolesAnywhereClient, TagResourceCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
+ * const client = new RolesAnywhereClient(config);
+ * const input = { // TagResourceRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   tags: [ // TagList // required
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
+ * const command = new TagResourceCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param TagResourceCommandInput - {@link TagResourceCommandInput}
+ * @returns {@link TagResourceCommandOutput}
+ * @see {@link TagResourceCommandInput} for command's `input` shape.
+ * @see {@link TagResourceCommandOutput} for command's `response` shape.
+ * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>Too many tags.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
+ */
+export class TagResourceCommand extends command<TagResourceCommandInput, TagResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagResource",
+  TagResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
+}

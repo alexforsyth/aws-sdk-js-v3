@@ -1,98 +1,159 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { GetInstanceProfileRequest, GetInstanceProfileResponse } from "../models/models_0";
-import {
-  deserializeAws_queryGetInstanceProfileCommand,
-  serializeAws_queryGetInstanceProfileCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInstanceProfileRequest, GetInstanceProfileResponse } from "../models/models_0";
+import { GetInstanceProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInstanceProfileCommand}.
+ */
 export interface GetInstanceProfileCommandInput extends GetInstanceProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInstanceProfileCommand}.
+ */
 export interface GetInstanceProfileCommandOutput extends GetInstanceProfileResponse, __MetadataBearer {}
 
 /**
  * <p> Retrieves information about the specified instance profile, including the instance
  *             profile's path, GUID, ARN, and role. For more information about instance profiles, see
- *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About
+ *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using
  *                 instance profiles</a> in the <i>IAM User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, GetInstanceProfileCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, GetInstanceProfileCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // GetInstanceProfileRequest
+ *   InstanceProfileName: "STRING_VALUE", // required
+ * };
  * const command = new GetInstanceProfileCommand(input);
  * const response = await client.send(command);
+ * // { // GetInstanceProfileResponse
+ * //   InstanceProfile: { // InstanceProfile
+ * //     Path: "STRING_VALUE", // required
+ * //     InstanceProfileName: "STRING_VALUE", // required
+ * //     InstanceProfileId: "STRING_VALUE", // required
+ * //     Arn: "STRING_VALUE", // required
+ * //     CreateDate: new Date("TIMESTAMP"), // required
+ * //     Roles: [ // roleListType // required
+ * //       { // Role
+ * //         Path: "STRING_VALUE", // required
+ * //         RoleName: "STRING_VALUE", // required
+ * //         RoleId: "STRING_VALUE", // required
+ * //         Arn: "STRING_VALUE", // required
+ * //         CreateDate: new Date("TIMESTAMP"), // required
+ * //         AssumeRolePolicyDocument: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         MaxSessionDuration: Number("int"),
+ * //         PermissionsBoundary: { // AttachedPermissionsBoundary
+ * //           PermissionsBoundaryType: "PermissionsBoundaryPolicy",
+ * //           PermissionsBoundaryArn: "STRING_VALUE",
+ * //         },
+ * //         Tags: [ // tagListType
+ * //           { // Tag
+ * //             Key: "STRING_VALUE", // required
+ * //             Value: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         RoleLastUsed: { // RoleLastUsed
+ * //           LastUsedDate: new Date("TIMESTAMP"),
+ * //           Region: "STRING_VALUE",
+ * //         },
+ * //         SourceRoleTemplate: { // SourceRoleTemplate
+ * //           TemplateArn: "STRING_VALUE", // required
+ * //           TemplateMinorVersion: Number("int"), // required
+ * //         },
+ * //       },
+ * //     ],
+ * //     Tags: [
+ * //       {
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetInstanceProfileCommandInput - {@link GetInstanceProfileCommandInput}
+ * @returns {@link GetInstanceProfileCommandOutput}
  * @see {@link GetInstanceProfileCommandInput} for command's `input` shape.
  * @see {@link GetInstanceProfileCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To get information about an instance profile
+ * ```javascript
+ * // The following command gets information about the instance profile named ExampleInstanceProfile.
+ * const input = {
+ *   InstanceProfileName: "ExampleInstanceProfile"
+ * };
+ * const command = new GetInstanceProfileCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   InstanceProfile: {
+ *     Arn: "arn:aws:iam::336924118301:instance-profile/ExampleInstanceProfile",
+ *     CreateDate: "2013-06-12T23:52:02Z",
+ *     InstanceProfileId: "AID2MAB8DPLSRHEXAMPLE",
+ *     InstanceProfileName: "ExampleInstanceProfile",
+ *     Path: "/",
+ *     Roles: [
+ *       {
+ *         Arn: "arn:aws:iam::336924118301:role/Test-Role",
+ *         AssumeRolePolicyDocument: "<URL-encoded-JSON>",
+ *         CreateDate: "2013-01-09T06:33:26Z",
+ *         Path: "/",
+ *         RoleId: "AIDGPMS9RO4H3FEXAMPLE",
+ *         RoleName: "Test-Role"
+ *       }
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetInstanceProfileCommand extends $Command<
-  GetInstanceProfileCommandInput,
-  GetInstanceProfileCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInstanceProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInstanceProfileCommandInput, GetInstanceProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "GetInstanceProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInstanceProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInstanceProfileResponse.filterSensitiveLog,
+export class GetInstanceProfileCommand extends command<GetInstanceProfileCommandInput, GetInstanceProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInstanceProfile",
+  GetInstanceProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceProfileRequest;
+      output: GetInstanceProfileResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInstanceProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetInstanceProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInstanceProfileCommandOutput> {
-    return deserializeAws_queryGetInstanceProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInstanceProfileCommandInput;
+      output: GetInstanceProfileCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { ListExclusionsRequest, ListExclusionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListExclusionsCommand,
-  serializeAws_json1_1ListExclusionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListExclusionsRequest, ListExclusionsResponse } from "../models/models_0";
+import { ListExclusions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListExclusionsCommand}.
+ */
 export interface ListExclusionsCommandInput extends ListExclusionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListExclusionsCommand}.
+ */
 export interface ListExclusionsCommandOutput extends ListExclusionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface ListExclusionsCommandOutput extends ListExclusionsResponse, __M
  * ```javascript
  * import { InspectorClient, ListExclusionsCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, ListExclusionsCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // ListExclusionsRequest
+ *   assessmentRunArn: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListExclusionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListExclusionsResponse
+ * //   exclusionArns: [ // ListReturnedArnList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListExclusionsCommandInput - {@link ListExclusionsCommandInput}
+ * @returns {@link ListExclusionsCommandOutput}
  * @see {@link ListExclusionsCommandInput} for command's `input` shape.
  * @see {@link ListExclusionsCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to access the requested resource.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced an entity that does not exist. The
+ *          error code describes the entity.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @public
  */
-export class ListExclusionsCommand extends $Command<
-  ListExclusionsCommandInput,
-  ListExclusionsCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListExclusionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListExclusionsCommandInput, ListExclusionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "ListExclusionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListExclusionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListExclusionsResponse.filterSensitiveLog,
+export class ListExclusionsCommand extends command<ListExclusionsCommandInput, ListExclusionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListExclusions",
+  ListExclusions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListExclusionsRequest;
+      output: ListExclusionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListExclusionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListExclusionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListExclusionsCommandOutput> {
-    return deserializeAws_json1_1ListExclusionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListExclusionsCommandInput;
+      output: ListExclusionsCommandOutput;
+    };
+  };
 }

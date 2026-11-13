@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { ListBackupJobsInput, ListBackupJobsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBackupJobsCommand,
-  serializeAws_restJson1ListBackupJobsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBackupJobsInput, ListBackupJobsOutput } from "../models/models_0";
+import { ListBackupJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBackupJobsCommand}.
+ */
 export interface ListBackupJobsCommandInput extends ListBackupJobsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBackupJobsCommand}.
+ */
 export interface ListBackupJobsCommandOutput extends ListBackupJobsOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,116 @@ export interface ListBackupJobsCommandOutput extends ListBackupJobsOutput, __Met
  * ```javascript
  * import { BackupClient, ListBackupJobsCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, ListBackupJobsCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // ListBackupJobsInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   ByResourceArn: "STRING_VALUE",
+ *   ByState: "CREATED" || "PENDING" || "RUNNING" || "ABORTING" || "ABORTED" || "COMPLETED" || "FAILED" || "EXPIRED" || "PARTIAL",
+ *   ByBackupVaultName: "STRING_VALUE",
+ *   ByCreatedBefore: new Date("TIMESTAMP"),
+ *   ByCreatedAfter: new Date("TIMESTAMP"),
+ *   ByResourceType: "STRING_VALUE",
+ *   ByAccountId: "STRING_VALUE",
+ *   ByCompleteAfter: new Date("TIMESTAMP"),
+ *   ByCompleteBefore: new Date("TIMESTAMP"),
+ *   ByParentJobId: "STRING_VALUE",
+ *   ByMessageCategory: "STRING_VALUE",
+ * };
  * const command = new ListBackupJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBackupJobsOutput
+ * //   BackupJobs: [ // BackupJobsList
+ * //     { // BackupJob
+ * //       AccountId: "STRING_VALUE",
+ * //       BackupJobId: "STRING_VALUE",
+ * //       BackupVaultName: "STRING_VALUE",
+ * //       BackupVaultArn: "STRING_VALUE",
+ * //       VaultType: "STRING_VALUE",
+ * //       VaultLockState: "STRING_VALUE",
+ * //       RecoveryPointArn: "STRING_VALUE",
+ * //       RecoveryPointLifecycle: { // Lifecycle
+ * //         MoveToColdStorageAfterDays: Number("long"),
+ * //         DeleteAfterDays: Number("long"),
+ * //         OptInToArchiveForSupportedResources: true || false,
+ * //         DeleteAfterEvent: "DELETE_AFTER_COPY",
+ * //       },
+ * //       EncryptionKeyArn: "STRING_VALUE",
+ * //       IsEncrypted: true || false,
+ * //       ResourceArn: "STRING_VALUE",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       CompletionDate: new Date("TIMESTAMP"),
+ * //       State: "CREATED" || "PENDING" || "RUNNING" || "ABORTING" || "ABORTED" || "COMPLETED" || "FAILED" || "EXPIRED" || "PARTIAL",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       PercentDone: "STRING_VALUE",
+ * //       BackupSizeInBytes: Number("long"),
+ * //       IamRoleArn: "STRING_VALUE",
+ * //       CreatedBy: { // RecoveryPointCreator
+ * //         BackupPlanId: "STRING_VALUE",
+ * //         BackupPlanArn: "STRING_VALUE",
+ * //         BackupPlanName: "STRING_VALUE",
+ * //         BackupPlanVersion: "STRING_VALUE",
+ * //         BackupRuleId: "STRING_VALUE",
+ * //         BackupRuleName: "STRING_VALUE",
+ * //         BackupRuleCron: "STRING_VALUE",
+ * //         BackupRuleTimezone: "STRING_VALUE",
+ * //       },
+ * //       ExpectedCompletionDate: new Date("TIMESTAMP"),
+ * //       StartBy: new Date("TIMESTAMP"),
+ * //       ResourceType: "STRING_VALUE",
+ * //       BytesTransferred: Number("long"),
+ * //       BackupOptions: { // BackupOptions
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       BackupType: "STRING_VALUE",
+ * //       ParentJobId: "STRING_VALUE",
+ * //       IsParent: true || false,
+ * //       ResourceName: "STRING_VALUE",
+ * //       InitiationDate: new Date("TIMESTAMP"),
+ * //       MessageCategory: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBackupJobsCommandInput - {@link ListBackupJobsCommandInput}
+ * @returns {@link ListBackupJobsCommandOutput}
  * @see {@link ListBackupJobsCommandInput} for command's `input` shape.
  * @see {@link ListBackupJobsCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class ListBackupJobsCommand extends $Command<
-  ListBackupJobsCommandInput,
-  ListBackupJobsCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBackupJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBackupJobsCommandInput, ListBackupJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "ListBackupJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBackupJobsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBackupJobsOutput.filterSensitiveLog,
+export class ListBackupJobsCommand extends command<ListBackupJobsCommandInput, ListBackupJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBackupJobs",
+  ListBackupJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBackupJobsInput;
+      output: ListBackupJobsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBackupJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBackupJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBackupJobsCommandOutput> {
-    return deserializeAws_restJson1ListBackupJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBackupJobsCommandInput;
+      output: ListBackupJobsCommandOutput;
+    };
+  };
 }

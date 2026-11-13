@@ -1,23 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
-
-import { CloudControlClient } from "../CloudControlClient";
+// smithy-typescript generated code
 import {
-  GetResourceRequestStatusCommand,
-  GetResourceRequestStatusCommandInput,
-} from "../commands/GetResourceRequestStatusCommand";
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-const checkState = async (
-  client: CloudControlClient,
-  input: GetResourceRequestStatusCommandInput
-): Promise<WaiterResult> => {
+import type { CloudControlClient } from "../CloudControlClient";
+import {
+  type GetResourceRequestStatusCommandInput,
+  type GetResourceRequestStatusCommandOutput,
+  GetResourceRequestStatusCommand,
+} from "../commands/GetResourceRequestStatusCommand";
+import type { CloudControlServiceException } from "../models/CloudControlServiceException";
+
+const checkState = async (client: CloudControlClient, input: GetResourceRequestStatusCommandInput): Promise<WaiterResult<GetResourceRequestStatusCommandOutput | CloudControlServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetResourceRequestStatusCommand(input));
+    let result: GetResourceRequestStatusCommandOutput & any = await client.send(new GetResourceRequestStatusCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.ProgressEvent.OperationStatus;
-      };
+      }
       if (returnComparator() === "SUCCESS") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -25,7 +31,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.ProgressEvent.OperationStatus;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -33,7 +39,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.ProgressEvent.OperationStatus;
-      };
+      }
       if (returnComparator() === "CANCEL_COMPLETE") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -50,7 +56,7 @@ const checkState = async (
 export const waitForResourceRequestSuccess = async (
   params: WaiterConfiguration<CloudControlClient>,
   input: GetResourceRequestStatusCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetResourceRequestStatusCommandOutput | CloudControlServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -62,8 +68,8 @@ export const waitForResourceRequestSuccess = async (
 export const waitUntilResourceRequestSuccess = async (
   params: WaiterConfiguration<CloudControlClient>,
   input: GetResourceRequestStatusCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetResourceRequestStatusCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetResourceRequestStatusCommandOutput>;
 };

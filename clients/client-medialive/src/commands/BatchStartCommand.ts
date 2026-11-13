@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { BatchStartRequest, BatchStartResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1BatchStartCommand,
-  serializeAws_restJson1BatchStartCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchStartRequest, BatchStartResponse } from "../models/models_1";
+import { BatchStart$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchStartCommand}.
+ */
 export interface BatchStartCommandInput extends BatchStartRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchStartCommand}.
+ */
 export interface BatchStartCommandOutput extends BatchStartResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,90 @@ export interface BatchStartCommandOutput extends BatchStartResponse, __MetadataB
  * ```javascript
  * import { MediaLiveClient, BatchStartCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, BatchStartCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // BatchStartRequest
+ *   ChannelIds: [ // __listOf__string
+ *     "STRING_VALUE",
+ *   ],
+ *   MultiplexIds: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchStartCommand(input);
  * const response = await client.send(command);
+ * // { // BatchStartResponse
+ * //   Failed: [ // __listOfBatchFailedResultModel
+ * //     { // BatchFailedResultModel
+ * //       Arn: "STRING_VALUE",
+ * //       Code: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Successful: [ // __listOfBatchSuccessfulResultModel
+ * //     { // BatchSuccessfulResultModel
+ * //       Arn: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchStartCommandInput - {@link BatchStartCommandInput}
+ * @returns {@link BatchStartCommandOutput}
  * @see {@link BatchStartCommandInput} for command's `input` shape.
  * @see {@link BatchStartCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Placeholder documentation for ConflictException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class BatchStartCommand extends $Command<
-  BatchStartCommandInput,
-  BatchStartCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchStartCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchStartCommandInput, BatchStartCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "BatchStartCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchStartRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchStartResponse.filterSensitiveLog,
+export class BatchStartCommand extends command<BatchStartCommandInput, BatchStartCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchStart",
+  BatchStart$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchStartRequest;
+      output: BatchStartResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchStartCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchStartCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchStartCommandOutput> {
-    return deserializeAws_restJson1BatchStartCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchStartCommandInput;
+      output: BatchStartCommandOutput;
+    };
+  };
 }

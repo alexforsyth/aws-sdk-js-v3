@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KMSClient";
-import { CreateGrantRequest, CreateGrantResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateGrantCommand,
-  serializeAws_json1_1CreateGrantCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGrantRequest, CreateGrantResponse } from "../models/models_0";
+import { CreateGrant$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGrantCommand}.
+ */
 export interface CreateGrantCommandInput extends CreateGrantRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGrantCommand}.
+ */
 export interface CreateGrantCommandOutput extends CreateGrantResponse, __MetadataBearer {}
 
 /**
@@ -28,11 +29,15 @@ export interface CreateGrantCommandOutput extends CreateGrantResponse, __Metadat
  *       grants are considered along with key policies and IAM policies. Grants are often used for
  *       temporary permissions because you can create one, use its permissions, and delete it without
  *       changing your key policies or IAM policies. </p>
- *          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Using grants</a> in the
+ *          <p>You can create a grant for an Amazon Web Services principal (IAM user, IAM role, or Amazon Web Services account) by
+ *       specifying the <code>GranteePrincipal</code> parameter. You can also create a grant for an
+ *       Amazon Web Services service principal by specifying the <code>GranteeServicePrincipal</code>
+ *       parameter.</p>
+ *          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Grants in KMS</a> in the
  *         <i>
  *                <i>Key Management Service Developer Guide</i>
- *             </i>. For examples of working with grants in several
- *       programming languages, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html">Programming grants</a>. </p>
+ *             </i>. For examples of creating grants in several
+ *       programming languages, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>
  *          <p>The <code>CreateGrant</code> operation returns a <code>GrantToken</code> and a
  *         <code>GrantId</code>.</p>
  *          <ul>
@@ -40,8 +45,8 @@ export interface CreateGrantCommandOutput extends CreateGrantResponse, __Metadat
  *                <p>When you create, retire, or revoke a grant, there might be a brief delay, usually less than five minutes, until the grant is available throughout KMS. This state is known as <i>eventual consistency</i>. Once the grant has achieved eventual consistency, the grantee
  *           principal can use the permissions in the grant without identifying the grant. </p>
  *                <p>However, to use the permissions in the grant immediately, use the
- *             <code>GrantToken</code> that <code>CreateGrant</code> returns. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a
- *             grant token</a> in the <i>
+ *             <code>GrantToken</code> that <code>CreateGrant</code> returns. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html">Using a grant
+ *             token</a> in the <i>
  *                      <i>Key Management Service Developer Guide</i>
  *                   </i>.</p>
  *             </li>
@@ -53,10 +58,9 @@ export interface CreateGrantCommandOutput extends CreateGrantResponse, __Metadat
  *             </li>
  *          </ul>
  *          <p>The KMS key that you use for this operation must be in a compatible key state. For
- * details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your KMS key</a> in the <i>Key Management Service Developer Guide</i>.</p>
+ * details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>
  *          <p>
- *             <b>Cross-account use</b>: Yes.
- *       To perform this operation on a KMS key in a different Amazon Web Services account, specify the key
+ *             <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key
  *   ARN in the value of the <code>KeyId</code> parameter. </p>
  *          <p>
  *             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:CreateGrant</a> (key policy)</p>
@@ -85,73 +89,175 @@ export interface CreateGrantCommandOutput extends CreateGrantResponse, __Metadat
  *                </p>
  *             </li>
  *          </ul>
+ *          <p>
+ *             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+ *   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KMSClient, CreateGrantCommand } from "@aws-sdk/client-kms"; // ES Modules import
  * // const { KMSClient, CreateGrantCommand } = require("@aws-sdk/client-kms"); // CommonJS import
+ * // import type { KMSClientConfig } from "@aws-sdk/client-kms";
+ * const config = {}; // type is KMSClientConfig
  * const client = new KMSClient(config);
+ * const input = { // CreateGrantRequest
+ *   KeyId: "STRING_VALUE", // required
+ *   GranteePrincipal: "STRING_VALUE",
+ *   RetiringPrincipal: "STRING_VALUE",
+ *   Operations: [ // GrantOperationList // required
+ *     "Decrypt" || "Encrypt" || "GenerateDataKey" || "GenerateDataKeyWithoutPlaintext" || "ReEncryptFrom" || "ReEncryptTo" || "Sign" || "Verify" || "GetPublicKey" || "CreateGrant" || "RetireGrant" || "DescribeKey" || "GenerateDataKeyPair" || "GenerateDataKeyPairWithoutPlaintext" || "GenerateMac" || "VerifyMac" || "DeriveSharedSecret" || "Encapsulate" || "Decapsulate",
+ *   ],
+ *   Constraints: { // GrantConstraints
+ *     EncryptionContextSubset: { // EncryptionContextType
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     EncryptionContextEquals: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     SourceArn: "STRING_VALUE",
+ *   },
+ *   GrantTokens: [ // GrantTokenList
+ *     "STRING_VALUE",
+ *   ],
+ *   Name: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   GranteeServicePrincipal: "STRING_VALUE",
+ *   RetiringServicePrincipal: "STRING_VALUE",
+ * };
  * const command = new CreateGrantCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGrantResponse
+ * //   GrantToken: "STRING_VALUE",
+ * //   GrantId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateGrantCommandInput - {@link CreateGrantCommandInput}
+ * @returns {@link CreateGrantCommandOutput}
  * @see {@link CreateGrantCommandInput} for command's `input` shape.
  * @see {@link CreateGrantCommandOutput} for command's `response` shape.
- * @see {@link KMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KMSClientResolvedConfig | config} for KMSClient's `config` shape.
  *
+ * @throws {@link DependencyTimeoutException} (server fault)
+ *  <p>The system timed out while trying to fulfill the request. You can retry the
+ *       request.</p>
+ *
+ * @throws {@link DisabledException} (client fault)
+ *  <p>The request was rejected because the specified KMS key is not enabled.</p>
+ *
+ * @throws {@link DryRunOperationException} (client fault)
+ *  <p> The request was rejected because the DryRun parameter was specified. </p>
+ *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The request was rejected because a specified ARN, or an ARN in a key policy, is not
+ *       valid.</p>
+ *
+ * @throws {@link InvalidGrantTokenException} (client fault)
+ *  <p>The request was rejected because the specified grant token is not valid.</p>
+ *
+ * @throws {@link KMSInternalException} (server fault)
+ *  <p>The request was rejected because an internal exception occurred. The request can be
+ *       retried.</p>
+ *
+ * @throws {@link KMSInvalidStateException} (client fault)
+ *  <p>The request was rejected because the state of the specified resource is not valid for this
+ *       request.</p>
+ *          <p>This exceptions means one of the following:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The key state of the KMS key is not compatible with the operation. </p>
+ *                <p>To find the key state, use the <a>DescribeKey</a> operation. For more
+ *           information about which key states are compatible with each KMS operation, see
+ *           <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>
+ *                      <i>Key Management Service Developer Guide</i>
+ *                   </i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>For cryptographic operations on KMS keys in custom key stores, this exception
+ *           represents a general failure with many possible causes. To identify the cause, see the
+ *           error message that accompanies the exception.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because a length constraint or quota was exceeded. For more
+ *       information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/limits.html">Quotas</a> in
+ *       the <i>Key Management Service Developer Guide</i>.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The request was rejected because the specified entity or resource could not be
+ *       found.</p>
+ *
+ * @throws {@link KMSServiceException}
+ * <p>Base exception class for all service exceptions from KMS service.</p>
+ *
+ *
+ * @example To create a grant
+ * ```javascript
+ * // The following example creates a grant that allows the specified IAM role to encrypt data with the specified KMS key.
+ * const input = {
+ *   GranteePrincipal: "arn:aws:iam::111122223333:role/ExampleRole",
+ *   KeyId: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+ *   Operations: [
+ *     "Encrypt",
+ *     "Decrypt"
+ *   ]
+ * };
+ * const command = new CreateGrantCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GrantId: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60",
+ *   GrantToken: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA"
+ * }
+ * *\/
+ * ```
+ *
+ * @example To create a grant for a service principal
+ * ```javascript
+ * // The following example creates a grant that allows the specified AWS service principal to encrypt and decrypt data with the specified KMS key. The grant includes a SourceArn constraint that restricts the grant permissions to requests associated with the specified DynamoDB table.
+ * const input = {
+ *   Constraints: {
+ *     SourceArn: "arn:aws:dynamodb:us-east-2:444455556666:table/ExampleTable"
+ *   },
+ *   GranteeServicePrincipal: "service-name.amazonaws.com",
+ *   KeyId: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+ *   Operations: [
+ *     "Encrypt",
+ *     "Decrypt",
+ *     "GenerateDataKey",
+ *     "DescribeKey"
+ *   ],
+ *   RetiringServicePrincipal: "service-name.amazonaws.com"
+ * };
+ * const command = new CreateGrantCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GrantId: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+ *   GrantToken: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW..."
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateGrantCommand extends $Command<
-  CreateGrantCommandInput,
-  CreateGrantCommandOutput,
-  KMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGrantCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGrantCommandInput, CreateGrantCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KMSClient";
-    const commandName = "CreateGrantCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGrantRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGrantResponse.filterSensitiveLog,
+export class CreateGrantCommand extends command<CreateGrantCommandInput, CreateGrantCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGrant",
+  CreateGrant$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGrantRequest;
+      output: CreateGrantResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGrantCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateGrantCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGrantCommandOutput> {
-    return deserializeAws_json1_1CreateGrantCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGrantCommandInput;
+      output: CreateGrantCommandOutput;
+    };
+  };
 }

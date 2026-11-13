@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DeleteUsageReportSubscriptionRequest, DeleteUsageReportSubscriptionResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteUsageReportSubscriptionCommand,
-  serializeAws_json1_1DeleteUsageReportSubscriptionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteUsageReportSubscriptionRequest, DeleteUsageReportSubscriptionResult } from "../models/models_0";
+import { DeleteUsageReportSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteUsageReportSubscriptionCommand}.
+ */
 export interface DeleteUsageReportSubscriptionCommandInput extends DeleteUsageReportSubscriptionRequest {}
-export interface DeleteUsageReportSubscriptionCommandOutput
-  extends DeleteUsageReportSubscriptionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteUsageReportSubscriptionCommand}.
+ */
+export interface DeleteUsageReportSubscriptionCommandOutput extends DeleteUsageReportSubscriptionResult, __MetadataBearer {}
 
 /**
  * <p>Disables usage report generation.</p>
@@ -30,71 +29,49 @@ export interface DeleteUsageReportSubscriptionCommandOutput
  * ```javascript
  * import { AppStreamClient, DeleteUsageReportSubscriptionCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DeleteUsageReportSubscriptionCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = {};
  * const command = new DeleteUsageReportSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteUsageReportSubscriptionCommandInput - {@link DeleteUsageReportSubscriptionCommandInput}
+ * @returns {@link DeleteUsageReportSubscriptionCommandOutput}
  * @see {@link DeleteUsageReportSubscriptionCommandInput} for command's `input` shape.
  * @see {@link DeleteUsageReportSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link InvalidAccountStatusException} (client fault)
+ *  <p>The resource cannot be created because your AWS account is suspended. For assistance, contact AWS Support. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteUsageReportSubscriptionCommand extends $Command<
-  DeleteUsageReportSubscriptionCommandInput,
-  DeleteUsageReportSubscriptionCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteUsageReportSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteUsageReportSubscriptionCommandInput, DeleteUsageReportSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DeleteUsageReportSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteUsageReportSubscriptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteUsageReportSubscriptionResult.filterSensitiveLog,
+export class DeleteUsageReportSubscriptionCommand extends command<DeleteUsageReportSubscriptionCommandInput, DeleteUsageReportSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteUsageReportSubscription",
+  DeleteUsageReportSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteUsageReportSubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteUsageReportSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteUsageReportSubscriptionCommandOutput> {
-    return deserializeAws_json1_1DeleteUsageReportSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteUsageReportSubscriptionCommandInput;
+      output: DeleteUsageReportSubscriptionCommandOutput;
+    };
+  };
 }

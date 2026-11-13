@@ -1,4 +1,15 @@
-export * from "./RestJsonProtocol";
+// smithy-typescript generated code
+/* eslint-disable */
 export * from "./RestJsonProtocolClient";
+export * from "./RestJsonProtocol";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { RestJsonProtocolExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { RestJsonProtocolServiceException } from "./models/RestJsonProtocolServiceException";

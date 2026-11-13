@@ -1,92 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { ListTasksRequest, ListTasksResponse } from "../models/models_0";
-import { deserializeAws_json1_1ListTasksCommand, serializeAws_json1_1ListTasksCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTasksRequest, ListTasksResponse } from "../models/models_0";
+import { ListTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTasksCommand}.
+ */
 export interface ListTasksCommandInput extends ListTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTasksCommand}.
+ */
 export interface ListTasksCommandOutput extends ListTasksResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of all the tasks.</p>
+ * <p>Returns a list of the DataSync tasks you created.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, ListTasksCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, ListTasksCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // ListTasksRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // TaskFilters
+ *     { // TaskFilter
+ *       Name: "LocationId" || "CreationTime", // required
+ *       Values: [ // FilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Operator: "Equals" || "NotEquals" || "In" || "LessThanOrEqual" || "LessThan" || "GreaterThanOrEqual" || "GreaterThan" || "Contains" || "NotContains" || "BeginsWith", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListTasksCommand(input);
  * const response = await client.send(command);
+ * // { // ListTasksResponse
+ * //   Tasks: [ // TaskList
+ * //     { // TaskListEntry
+ * //       TaskArn: "STRING_VALUE",
+ * //       Status: "AVAILABLE" || "CREATING" || "QUEUED" || "RUNNING" || "UNAVAILABLE",
+ * //       Name: "STRING_VALUE",
+ * //       TaskMode: "BASIC" || "ENHANCED",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTasksCommandInput - {@link ListTasksCommandInput}
+ * @returns {@link ListTasksCommandOutput}
  * @see {@link ListTasksCommandInput} for command's `input` shape.
  * @see {@link ListTasksCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class ListTasksCommand extends $Command<
-  ListTasksCommandInput,
-  ListTasksCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTasksCommandInput, ListTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "ListTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTasksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTasksResponse.filterSensitiveLog,
+export class ListTasksCommand extends command<ListTasksCommandInput, ListTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTasks",
+  ListTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTasksRequest;
+      output: ListTasksResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTasksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTasksCommandOutput> {
-    return deserializeAws_json1_1ListTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTasksCommandInput;
+      output: ListTasksCommandOutput;
+    };
+  };
 }

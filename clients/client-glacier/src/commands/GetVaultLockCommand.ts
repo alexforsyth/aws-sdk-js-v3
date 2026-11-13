@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { GetVaultLockInput, GetVaultLockOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetVaultLockCommand,
-  serializeAws_restJson1GetVaultLockCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetVaultLockInput, GetVaultLockOutput } from "../models/models_0";
+import { GetVaultLock$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetVaultLockCommand}.
+ */
 export interface GetVaultLockCommandInput extends GetVaultLockInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetVaultLockCommand}.
+ */
 export interface GetVaultLockCommandOutput extends GetVaultLockOutput, __MetadataBearer {}
 
 /**
@@ -55,68 +56,86 @@ export interface GetVaultLockCommandOutput extends GetVaultLockOutput, __Metadat
  * ```javascript
  * import { GlacierClient, GetVaultLockCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, GetVaultLockCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // GetVaultLockInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ * };
  * const command = new GetVaultLockCommand(input);
  * const response = await client.send(command);
+ * // { // GetVaultLockOutput
+ * //   Policy: "STRING_VALUE",
+ * //   State: "STRING_VALUE",
+ * //   ExpirationDate: "STRING_VALUE",
+ * //   CreationDate: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetVaultLockCommandInput - {@link GetVaultLockCommandInput}
+ * @returns {@link GetVaultLockCommandOutput}
  * @see {@link GetVaultLockCommandInput} for command's `input` shape.
  * @see {@link GetVaultLockCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To retrieve vault lock-policy related attributes that are set on a vault
+ * ```javascript
+ * // The example retrieves the attributes from the lock-policy subresource set on the vault named examplevault.
+ * const input = {
+ *   accountId: "-",
+ *   vaultName: "examplevault"
+ * };
+ * const command = new GetVaultLockCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   CreationDate: "exampledate",
+ *   ExpirationDate: "exampledate",
+ *   Policy: `{"Version":"2012-10-17","Statement":[{"Sid":"Define-vault-lock","Effect":"Deny","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault","Condition":{"NumericLessThanEquals":{"glacier:ArchiveAgeinDays":"365"}}}]}`,
+ *   State: "InProgress"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetVaultLockCommand extends $Command<
-  GetVaultLockCommandInput,
-  GetVaultLockCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetVaultLockCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetVaultLockCommandInput, GetVaultLockCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "GetVaultLockCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetVaultLockInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetVaultLockOutput.filterSensitiveLog,
+export class GetVaultLockCommand extends command<GetVaultLockCommandInput, GetVaultLockCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetVaultLock",
+  GetVaultLock$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVaultLockInput;
+      output: GetVaultLockOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetVaultLockCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetVaultLockCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetVaultLockCommandOutput> {
-    return deserializeAws_restJson1GetVaultLockCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetVaultLockCommandInput;
+      output: GetVaultLockCommandOutput;
+    };
+  };
 }

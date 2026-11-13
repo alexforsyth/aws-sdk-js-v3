@@ -1,96 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { DeleteCodeSigningConfigRequest, DeleteCodeSigningConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteCodeSigningConfigCommand,
-  serializeAws_restJson1DeleteCodeSigningConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCodeSigningConfigRequest, DeleteCodeSigningConfigResponse } from "../models/models_0";
+import { DeleteCodeSigningConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCodeSigningConfigCommand}.
+ */
 export interface DeleteCodeSigningConfigCommandInput extends DeleteCodeSigningConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCodeSigningConfigCommand}.
+ */
 export interface DeleteCodeSigningConfigCommandOutput extends DeleteCodeSigningConfigResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is
- *       using it. </p>
+ * <p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is using it. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, DeleteCodeSigningConfigCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, DeleteCodeSigningConfigCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // DeleteCodeSigningConfigRequest
+ *   CodeSigningConfigArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCodeSigningConfigCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteCodeSigningConfigCommandInput - {@link DeleteCodeSigningConfigCommandInput}
+ * @returns {@link DeleteCodeSigningConfigCommandOutput}
  * @see {@link DeleteCodeSigningConfigCommandInput} for command's `input` shape.
  * @see {@link DeleteCodeSigningConfigCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource already exists, or another operation is in progress.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCodeSigningConfigCommand extends $Command<
-  DeleteCodeSigningConfigCommandInput,
-  DeleteCodeSigningConfigCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCodeSigningConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCodeSigningConfigCommandInput, DeleteCodeSigningConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "DeleteCodeSigningConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCodeSigningConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCodeSigningConfigResponse.filterSensitiveLog,
+export class DeleteCodeSigningConfigCommand extends command<DeleteCodeSigningConfigCommandInput, DeleteCodeSigningConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCodeSigningConfig",
+  DeleteCodeSigningConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCodeSigningConfigRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCodeSigningConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteCodeSigningConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteCodeSigningConfigCommandOutput> {
-    return deserializeAws_restJson1DeleteCodeSigningConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCodeSigningConfigCommandInput;
+      output: DeleteCodeSigningConfigCommandOutput;
+    };
+  };
 }

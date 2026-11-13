@@ -1,0 +1,107 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourcePolicyRequest, GetResourcePolicyResponse } from "../models/models_0";
+import { GetResourcePolicy$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourcePolicyCommand}.
+ */
+export interface GetResourcePolicyCommandInput extends GetResourcePolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourcePolicyCommand}.
+ */
+export interface GetResourcePolicyCommandOutput extends GetResourcePolicyResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BillingClient, GetResourcePolicyCommand } from "@aws-sdk/client-billing"; // ES Modules import
+ * // const { BillingClient, GetResourcePolicyCommand } = require("@aws-sdk/client-billing"); // CommonJS import
+ * // import type { BillingClientConfig } from "@aws-sdk/client-billing";
+ * const config = {}; // type is BillingClientConfig
+ * const client = new BillingClient(config);
+ * const input = { // GetResourcePolicyRequest
+ *   resourceArn: "STRING_VALUE", // required
+ * };
+ * const command = new GetResourcePolicyCommand(input);
+ * const response = await client.send(command);
+ * // { // GetResourcePolicyResponse
+ * //   resourceArn: "STRING_VALUE", // required
+ * //   policy: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetResourcePolicyCommandInput - {@link GetResourcePolicyCommandInput}
+ * @returns {@link GetResourcePolicyCommandOutput}
+ * @see {@link GetResourcePolicyCommandInput} for command's `input` shape.
+ * @see {@link GetResourcePolicyCommandOutput} for command's `response` shape.
+ * @see {@link BillingClientResolvedConfig | config} for BillingClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing failed because of an unknown error, exception, or failure. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ARN in the request doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
+ *
+ * @throws {@link BillingServiceException}
+ * <p>Base exception class for all service exceptions from Billing service.</p>
+ *
+ *
+ * @example Invoke GetResourcePolicy
+ * ```javascript
+ * //
+ * const input = {
+ *   resourceArn: "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+ * };
+ * const command = new GetResourcePolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   policy: `{"Version":"2012-10-17","Id":"46f47cb2-a11d-43f3-983d-470b5708a899","Statement":[{"Sid":"ExampleStatement1","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::000000000000:root"},"Action":["ce:GetDimensionValues","ce:GetCostAndUsageWithResources","ce:GetCostAndUsage","ce:GetCostForecast","ce:GetTags","ce:GetUsageForecast","ce:GetCostCategories","billing:GetBillingView"],"Resource":"arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"}]}`,
+ *   resourceArn: "arn:aws:billing::123456789101:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class GetResourcePolicyCommand extends command<GetResourcePolicyCommandInput, GetResourcePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourcePolicy",
+  GetResourcePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourcePolicyRequest;
+      output: GetResourcePolicyResponse;
+    };
+    sdk: {
+      input: GetResourcePolicyCommandInput;
+      output: GetResourcePolicyCommandOutput;
+    };
+  };
+}

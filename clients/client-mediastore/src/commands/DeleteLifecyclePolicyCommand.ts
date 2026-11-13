@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { DeleteLifecyclePolicyInput, DeleteLifecyclePolicyOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteLifecyclePolicyCommand,
-  serializeAws_json1_1DeleteLifecyclePolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteLifecyclePolicyInput, DeleteLifecyclePolicyOutput } from "../models/models_0";
+import { DeleteLifecyclePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteLifecyclePolicyCommand}.
+ */
 export interface DeleteLifecyclePolicyCommandInput extends DeleteLifecyclePolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteLifecyclePolicyCommand}.
+ */
 export interface DeleteLifecyclePolicyCommandOutput extends DeleteLifecyclePolicyOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface DeleteLifecyclePolicyCommandOutput extends DeleteLifecyclePolic
  * ```javascript
  * import { MediaStoreClient, DeleteLifecyclePolicyCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, DeleteLifecyclePolicyCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // DeleteLifecyclePolicyInput
+ *   ContainerName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteLifecyclePolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteLifecyclePolicyCommandInput - {@link DeleteLifecyclePolicyCommandInput}
+ * @returns {@link DeleteLifecyclePolicyCommandOutput}
  * @see {@link DeleteLifecyclePolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteLifecyclePolicyCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerInUseException} (client fault)
+ *  <p>The container that you specified in the request already exists or is being
+ *          updated.</p>
+ *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The container that you specified in the request does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link PolicyNotFoundException} (client fault)
+ *  <p>The policy that you specified in the request does not exist.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteLifecyclePolicyCommand extends $Command<
-  DeleteLifecyclePolicyCommandInput,
-  DeleteLifecyclePolicyCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteLifecyclePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteLifecyclePolicyCommandInput, DeleteLifecyclePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "DeleteLifecyclePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteLifecyclePolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteLifecyclePolicyOutput.filterSensitiveLog,
+export class DeleteLifecyclePolicyCommand extends command<DeleteLifecyclePolicyCommandInput, DeleteLifecyclePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteLifecyclePolicy",
+  DeleteLifecyclePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLifecyclePolicyInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteLifecyclePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteLifecyclePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteLifecyclePolicyCommandOutput> {
-    return deserializeAws_json1_1DeleteLifecyclePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteLifecyclePolicyCommandInput;
+      output: DeleteLifecyclePolicyCommandOutput;
+    };
+  };
 }

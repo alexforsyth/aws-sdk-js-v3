@@ -1,97 +1,137 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { DeleteRepositoryRequest, DeleteRepositoryResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRepositoryCommand,
-  serializeAws_json1_1DeleteRepositoryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRepositoryRequest, DeleteRepositoryResponse } from "../models/models_0";
+import { DeleteRepository$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRepositoryCommand}.
+ */
 export interface DeleteRepositoryCommandInput extends DeleteRepositoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRepositoryCommand}.
+ */
 export interface DeleteRepositoryCommandOutput extends DeleteRepositoryResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a repository. If the repository contains images, you must either delete all
- *             images in the repository or use the <code>force</code> option to delete the
- *             repository.</p>
+ * <p>Deletes a repository. If the repository isn't empty, you must either delete the
+ *             contents of the repository or use the <code>force</code> option to delete the repository
+ *             and have Amazon ECR delete all of its contents on your behalf.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECRClient, DeleteRepositoryCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, DeleteRepositoryCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // DeleteRepositoryRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   force: true || false,
+ * };
  * const command = new DeleteRepositoryCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRepositoryResponse
+ * //   repository: { // Repository
+ * //     repositoryArn: "STRING_VALUE",
+ * //     registryId: "STRING_VALUE",
+ * //     repositoryName: "STRING_VALUE",
+ * //     repositoryUri: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     imageTagMutability: "MUTABLE" || "IMMUTABLE" || "IMMUTABLE_WITH_EXCLUSION" || "MUTABLE_WITH_EXCLUSION",
+ * //     imageTagMutabilityExclusionFilters: [ // ImageTagMutabilityExclusionFilters
+ * //       { // ImageTagMutabilityExclusionFilter
+ * //         filterType: "WILDCARD", // required
+ * //         filter: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     imageScanningConfiguration: { // ImageScanningConfiguration
+ * //       scanOnPush: true || false,
+ * //     },
+ * //     encryptionConfiguration: { // EncryptionConfiguration
+ * //       encryptionType: "AES256" || "KMS" || "KMS_DSSE", // required
+ * //       kmsKey: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteRepositoryCommandInput - {@link DeleteRepositoryCommandInput}
+ * @returns {@link DeleteRepositoryCommandOutput}
  * @see {@link DeleteRepositoryCommandInput} for command's `input` shape.
  * @see {@link DeleteRepositoryCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link KmsException} (client fault)
+ *  <p>The operation failed due to a KMS exception.</p>
+ *
+ * @throws {@link RepositoryNotEmptyException} (client fault)
+ *  <p>The specified repository contains images. To delete a repository that contains images,
+ *             you must force the deletion with the <code>force</code> parameter.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @example To force delete a repository
+ * ```javascript
+ * // This example force deletes a repository named ubuntu in the default registry for an account. The force parameter is required if the repository contains images.
+ * const input = {
+ *   force: true,
+ *   repositoryName: "ubuntu"
+ * };
+ * const command = new DeleteRepositoryCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   repository: {
+ *     registryId: "012345678901",
+ *     repositoryArn: "arn:aws:ecr:us-west-2:012345678901:repository/ubuntu",
+ *     repositoryName: "ubuntu"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteRepositoryCommand extends $Command<
-  DeleteRepositoryCommandInput,
-  DeleteRepositoryCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRepositoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "DeleteRepositoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRepositoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRepositoryResponse.filterSensitiveLog,
+export class DeleteRepositoryCommand extends command<DeleteRepositoryCommandInput, DeleteRepositoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRepository",
+  DeleteRepository$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRepositoryRequest;
+      output: DeleteRepositoryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRepositoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRepositoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRepositoryCommandOutput> {
-    return deserializeAws_json1_1DeleteRepositoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRepositoryCommandInput;
+      output: DeleteRepositoryCommandOutput;
+    };
+  };
 }

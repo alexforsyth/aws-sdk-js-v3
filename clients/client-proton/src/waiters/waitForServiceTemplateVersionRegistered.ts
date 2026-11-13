@@ -1,23 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type GetServiceTemplateVersionCommandInput,
+  type GetServiceTemplateVersionCommandOutput,
   GetServiceTemplateVersionCommand,
-  GetServiceTemplateVersionCommandInput,
 } from "../commands/GetServiceTemplateVersionCommand";
-import { ProtonClient } from "../ProtonClient";
+import type { ProtonServiceException } from "../models/ProtonServiceException";
+import type { ProtonClient } from "../ProtonClient";
 
-const checkState = async (
-  client: ProtonClient,
-  input: GetServiceTemplateVersionCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ProtonClient, input: GetServiceTemplateVersionCommandInput): Promise<WaiterResult<GetServiceTemplateVersionCommandOutput | ProtonServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetServiceTemplateVersionCommand(input));
+    let result: GetServiceTemplateVersionCommandOutput & any = await client.send(new GetServiceTemplateVersionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.serviceTemplateVersion.status;
-      };
+      }
       if (returnComparator() === "DRAFT") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -25,7 +31,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.serviceTemplateVersion.status;
-      };
+      }
       if (returnComparator() === "PUBLISHED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -33,7 +39,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.serviceTemplateVersion.status;
-      };
+      }
       if (returnComparator() === "REGISTRATION_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -50,7 +56,7 @@ const checkState = async (
 export const waitForServiceTemplateVersionRegistered = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetServiceTemplateVersionCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetServiceTemplateVersionCommandOutput | ProtonServiceException>> => {
   const serviceDefaults = { minDelay: 2, maxDelay: 300 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -62,8 +68,8 @@ export const waitForServiceTemplateVersionRegistered = async (
 export const waitUntilServiceTemplateVersionRegistered = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetServiceTemplateVersionCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetServiceTemplateVersionCommandOutput>> => {
   const serviceDefaults = { minDelay: 2, maxDelay: 300 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetServiceTemplateVersionCommandOutput>;
 };

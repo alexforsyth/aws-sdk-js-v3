@@ -1,36 +1,37 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type {
   GetAccessPointConfigurationForObjectLambdaRequest,
   GetAccessPointConfigurationForObjectLambdaResult,
 } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetAccessPointConfigurationForObjectLambdaCommand,
-  serializeAws_restXmlGetAccessPointConfigurationForObjectLambdaCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
-
-export interface GetAccessPointConfigurationForObjectLambdaCommandInput
-  extends GetAccessPointConfigurationForObjectLambdaRequest {}
-export interface GetAccessPointConfigurationForObjectLambdaCommandOutput
-  extends GetAccessPointConfigurationForObjectLambdaResult,
-    __MetadataBearer {}
+import { GetAccessPointConfigurationForObjectLambda$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns configuration for an Object Lambda Access Point.</p>
- *          <p>The following actions are related to <code>GetAccessPointConfigurationForObjectLambda</code>:</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccessPointConfigurationForObjectLambdaCommand}.
+ */
+export interface GetAccessPointConfigurationForObjectLambdaCommandInput extends GetAccessPointConfigurationForObjectLambdaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccessPointConfigurationForObjectLambdaCommand}.
+ */
+export interface GetAccessPointConfigurationForObjectLambdaCommandOutput extends GetAccessPointConfigurationForObjectLambdaResult, __MetadataBearer {}
+
+/**
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Returns configuration for an Object Lambda Access Point.</p>
+ *          <p>The following actions are related to
+ *             <code>GetAccessPointConfigurationForObjectLambda</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -43,78 +44,67 @@ export interface GetAccessPointConfigurationForObjectLambdaCommandOutput
  * ```javascript
  * import { S3ControlClient, GetAccessPointConfigurationForObjectLambdaCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetAccessPointConfigurationForObjectLambdaCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetAccessPointConfigurationForObjectLambdaRequest
+ *   AccountId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetAccessPointConfigurationForObjectLambdaCommand(input);
  * const response = await client.send(command);
+ * // { // GetAccessPointConfigurationForObjectLambdaResult
+ * //   Configuration: { // ObjectLambdaConfiguration
+ * //     SupportingAccessPoint: "STRING_VALUE", // required
+ * //     CloudWatchMetricsEnabled: true || false,
+ * //     AllowedFeatures: [ // ObjectLambdaAllowedFeaturesList
+ * //       "GetObject-Range" || "GetObject-PartNumber" || "HeadObject-Range" || "HeadObject-PartNumber",
+ * //     ],
+ * //     TransformationConfigurations: [ // ObjectLambdaTransformationConfigurationsList // required
+ * //       { // ObjectLambdaTransformationConfiguration
+ * //         Actions: [ // ObjectLambdaTransformationConfigurationActionsList // required
+ * //           "GetObject" || "HeadObject" || "ListObjects" || "ListObjectsV2",
+ * //         ],
+ * //         ContentTransformation: { // ObjectLambdaContentTransformation Union: only one key present
+ * //           AwsLambda: { // AwsLambdaTransformation
+ * //             FunctionArn: "STRING_VALUE", // required
+ * //             FunctionPayload: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAccessPointConfigurationForObjectLambdaCommandInput - {@link GetAccessPointConfigurationForObjectLambdaCommandInput}
+ * @returns {@link GetAccessPointConfigurationForObjectLambdaCommandOutput}
  * @see {@link GetAccessPointConfigurationForObjectLambdaCommandInput} for command's `input` shape.
  * @see {@link GetAccessPointConfigurationForObjectLambdaCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetAccessPointConfigurationForObjectLambdaCommand extends $Command<
-  GetAccessPointConfigurationForObjectLambdaCommandInput,
-  GetAccessPointConfigurationForObjectLambdaCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAccessPointConfigurationForObjectLambdaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetAccessPointConfigurationForObjectLambdaCommandInput,
-    GetAccessPointConfigurationForObjectLambdaCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetAccessPointConfigurationForObjectLambdaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAccessPointConfigurationForObjectLambdaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAccessPointConfigurationForObjectLambdaResult.filterSensitiveLog,
+export class GetAccessPointConfigurationForObjectLambdaCommand extends command<GetAccessPointConfigurationForObjectLambdaCommandInput, GetAccessPointConfigurationForObjectLambdaCommandOutput>(
+  _ep0,
+  _mw1,
+  "GetAccessPointConfigurationForObjectLambda",
+  GetAccessPointConfigurationForObjectLambda$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAccessPointConfigurationForObjectLambdaRequest;
+      output: GetAccessPointConfigurationForObjectLambdaResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetAccessPointConfigurationForObjectLambdaCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetAccessPointConfigurationForObjectLambdaCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetAccessPointConfigurationForObjectLambdaCommandOutput> {
-    return deserializeAws_restXmlGetAccessPointConfigurationForObjectLambdaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAccessPointConfigurationForObjectLambdaCommandInput;
+      output: GetAccessPointConfigurationForObjectLambdaCommandOutput;
+    };
+  };
 }

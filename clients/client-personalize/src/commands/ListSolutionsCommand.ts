@@ -1,98 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListSolutionsRequest, ListSolutionsResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1ListSolutionsCommand,
-  serializeAws_json1_1ListSolutionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSolutionsRequest, ListSolutionsResponse } from "../models/models_0";
+import { ListSolutions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSolutionsCommand}.
+ */
 export interface ListSolutionsCommandInput extends ListSolutionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSolutionsCommand}.
+ */
 export interface ListSolutionsCommandOutput extends ListSolutionsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of solutions that use the given dataset group.
+ * <p>Returns a list of solutions in a given dataset group.
  *       When a dataset group is not specified, all the solutions associated with the account are listed.
  *       The response provides the properties for each solution, including the Amazon Resource Name (ARN).
- *       For more information on solutions, see <a>CreateSolution</a>.</p>
+ *       For more information on solutions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html">CreateSolution</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeClient, ListSolutionsCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, ListSolutionsCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // ListSolutionsRequest
+ *   datasetGroupArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListSolutionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSolutionsResponse
+ * //   solutions: [ // Solutions
+ * //     { // SolutionSummary
+ * //       name: "STRING_VALUE",
+ * //       solutionArn: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //       recipeArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSolutionsCommandInput - {@link ListSolutionsCommandInput}
+ * @returns {@link ListSolutionsCommandOutput}
  * @see {@link ListSolutionsCommandInput} for command's `input` shape.
  * @see {@link ListSolutionsCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class ListSolutionsCommand extends $Command<
-  ListSolutionsCommandInput,
-  ListSolutionsCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSolutionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSolutionsCommandInput, ListSolutionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "ListSolutionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSolutionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSolutionsResponse.filterSensitiveLog,
+export class ListSolutionsCommand extends command<ListSolutionsCommandInput, ListSolutionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSolutions",
+  ListSolutions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSolutionsRequest;
+      output: ListSolutionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSolutionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSolutionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSolutionsCommandOutput> {
-    return deserializeAws_json1_1ListSolutionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSolutionsCommandInput;
+      output: ListSolutionsCommandOutput;
+    };
+  };
 }

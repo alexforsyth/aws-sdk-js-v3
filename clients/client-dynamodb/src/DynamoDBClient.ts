@@ -1,183 +1,264 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
+  AccountIdEndpointMode,
+  AccountIdEndpointModeInputConfig,
+  AccountIdEndpointModeResolvedConfig,
+  resolveAccountIdEndpointModeConfig,
+} from "@aws-sdk/core/account-id-endpoint";
 import {
-  EndpointDiscoveryInputConfig,
-  EndpointDiscoveryResolvedConfig,
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  type EndpointDiscoveryInputConfig,
+  type EndpointDiscoveryResolvedConfig,
   resolveEndpointDiscoveryConfig,
 } from "@aws-sdk/middleware-endpoint-discovery";
 import {
-  getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
 import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
-  getUserAgentPlugin,
-  resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
-import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultDynamoDBHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   BatchExecuteStatementCommandInput,
   BatchExecuteStatementCommandOutput,
 } from "./commands/BatchExecuteStatementCommand";
-import { BatchGetItemCommandInput, BatchGetItemCommandOutput } from "./commands/BatchGetItemCommand";
-import { BatchWriteItemCommandInput, BatchWriteItemCommandOutput } from "./commands/BatchWriteItemCommand";
-import { CreateBackupCommandInput, CreateBackupCommandOutput } from "./commands/CreateBackupCommand";
-import { CreateGlobalTableCommandInput, CreateGlobalTableCommandOutput } from "./commands/CreateGlobalTableCommand";
-import { CreateTableCommandInput, CreateTableCommandOutput } from "./commands/CreateTableCommand";
-import { DeleteBackupCommandInput, DeleteBackupCommandOutput } from "./commands/DeleteBackupCommand";
-import { DeleteItemCommandInput, DeleteItemCommandOutput } from "./commands/DeleteItemCommand";
-import { DeleteTableCommandInput, DeleteTableCommandOutput } from "./commands/DeleteTableCommand";
-import { DescribeBackupCommandInput, DescribeBackupCommandOutput } from "./commands/DescribeBackupCommand";
-import {
+import type { BatchGetItemCommandInput, BatchGetItemCommandOutput } from "./commands/BatchGetItemCommand";
+import type { BatchWriteItemCommandInput, BatchWriteItemCommandOutput } from "./commands/BatchWriteItemCommand";
+import type {
+  CancelBulkOperationCommandInput,
+  CancelBulkOperationCommandOutput,
+} from "./commands/CancelBulkOperationCommand";
+import type { CreateBackupCommandInput, CreateBackupCommandOutput } from "./commands/CreateBackupCommand";
+import type {
+  CreateGlobalTableCommandInput,
+  CreateGlobalTableCommandOutput,
+} from "./commands/CreateGlobalTableCommand";
+import type { CreateTableCommandInput, CreateTableCommandOutput } from "./commands/CreateTableCommand";
+import type { DeleteBackupCommandInput, DeleteBackupCommandOutput } from "./commands/DeleteBackupCommand";
+import type { DeleteItemCommandInput, DeleteItemCommandOutput } from "./commands/DeleteItemCommand";
+import type {
+  DeleteResourcePolicyCommandInput,
+  DeleteResourcePolicyCommandOutput,
+} from "./commands/DeleteResourcePolicyCommand";
+import type { DeleteTableCommandInput, DeleteTableCommandOutput } from "./commands/DeleteTableCommand";
+import type { DescribeBackupCommandInput, DescribeBackupCommandOutput } from "./commands/DescribeBackupCommand";
+import type {
+  DescribeBulkOperationCommandInput,
+  DescribeBulkOperationCommandOutput,
+} from "./commands/DescribeBulkOperationCommand";
+import type {
   DescribeContinuousBackupsCommandInput,
   DescribeContinuousBackupsCommandOutput,
 } from "./commands/DescribeContinuousBackupsCommand";
-import {
+import type {
   DescribeContributorInsightsCommandInput,
   DescribeContributorInsightsCommandOutput,
 } from "./commands/DescribeContributorInsightsCommand";
 import {
+  type DescribeEndpointsCommandInput,
+  type DescribeEndpointsCommandOutput,
   DescribeEndpointsCommand,
-  DescribeEndpointsCommandInput,
-  DescribeEndpointsCommandOutput,
 } from "./commands/DescribeEndpointsCommand";
-import { DescribeExportCommandInput, DescribeExportCommandOutput } from "./commands/DescribeExportCommand";
-import {
+import type { DescribeExportCommandInput, DescribeExportCommandOutput } from "./commands/DescribeExportCommand";
+import type {
   DescribeGlobalTableCommandInput,
   DescribeGlobalTableCommandOutput,
 } from "./commands/DescribeGlobalTableCommand";
-import {
+import type {
   DescribeGlobalTableSettingsCommandInput,
   DescribeGlobalTableSettingsCommandOutput,
 } from "./commands/DescribeGlobalTableSettingsCommand";
-import {
+import type { DescribeImportCommandInput, DescribeImportCommandOutput } from "./commands/DescribeImportCommand";
+import type {
   DescribeKinesisStreamingDestinationCommandInput,
   DescribeKinesisStreamingDestinationCommandOutput,
 } from "./commands/DescribeKinesisStreamingDestinationCommand";
-import { DescribeLimitsCommandInput, DescribeLimitsCommandOutput } from "./commands/DescribeLimitsCommand";
-import { DescribeTableCommandInput, DescribeTableCommandOutput } from "./commands/DescribeTableCommand";
-import {
+import type { DescribeLimitsCommandInput, DescribeLimitsCommandOutput } from "./commands/DescribeLimitsCommand";
+import type { DescribeTableCommandInput, DescribeTableCommandOutput } from "./commands/DescribeTableCommand";
+import type {
   DescribeTableReplicaAutoScalingCommandInput,
   DescribeTableReplicaAutoScalingCommandOutput,
 } from "./commands/DescribeTableReplicaAutoScalingCommand";
-import { DescribeTimeToLiveCommandInput, DescribeTimeToLiveCommandOutput } from "./commands/DescribeTimeToLiveCommand";
-import {
+import type {
+  DescribeTimeToLiveCommandInput,
+  DescribeTimeToLiveCommandOutput,
+} from "./commands/DescribeTimeToLiveCommand";
+import type {
   DisableKinesisStreamingDestinationCommandInput,
   DisableKinesisStreamingDestinationCommandOutput,
 } from "./commands/DisableKinesisStreamingDestinationCommand";
-import {
+import type {
   EnableKinesisStreamingDestinationCommandInput,
   EnableKinesisStreamingDestinationCommandOutput,
 } from "./commands/EnableKinesisStreamingDestinationCommand";
-import { ExecuteStatementCommandInput, ExecuteStatementCommandOutput } from "./commands/ExecuteStatementCommand";
-import { ExecuteTransactionCommandInput, ExecuteTransactionCommandOutput } from "./commands/ExecuteTransactionCommand";
-import {
+import type { ExecuteStatementCommandInput, ExecuteStatementCommandOutput } from "./commands/ExecuteStatementCommand";
+import type {
+  ExecuteTransactionCommandInput,
+  ExecuteTransactionCommandOutput,
+} from "./commands/ExecuteTransactionCommand";
+import type {
   ExportTableToPointInTimeCommandInput,
   ExportTableToPointInTimeCommandOutput,
 } from "./commands/ExportTableToPointInTimeCommand";
-import { GetItemCommandInput, GetItemCommandOutput } from "./commands/GetItemCommand";
-import { ListBackupsCommandInput, ListBackupsCommandOutput } from "./commands/ListBackupsCommand";
-import {
+import type { GetItemCommandInput, GetItemCommandOutput } from "./commands/GetItemCommand";
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type { ImportTableCommandInput, ImportTableCommandOutput } from "./commands/ImportTableCommand";
+import type { ListBackupsCommandInput, ListBackupsCommandOutput } from "./commands/ListBackupsCommand";
+import type {
+  ListBulkOperationsCommandInput,
+  ListBulkOperationsCommandOutput,
+} from "./commands/ListBulkOperationsCommand";
+import type {
   ListContributorInsightsCommandInput,
   ListContributorInsightsCommandOutput,
 } from "./commands/ListContributorInsightsCommand";
-import { ListExportsCommandInput, ListExportsCommandOutput } from "./commands/ListExportsCommand";
-import { ListGlobalTablesCommandInput, ListGlobalTablesCommandOutput } from "./commands/ListGlobalTablesCommand";
-import { ListTablesCommandInput, ListTablesCommandOutput } from "./commands/ListTablesCommand";
-import { ListTagsOfResourceCommandInput, ListTagsOfResourceCommandOutput } from "./commands/ListTagsOfResourceCommand";
-import { PutItemCommandInput, PutItemCommandOutput } from "./commands/PutItemCommand";
-import { QueryCommandInput, QueryCommandOutput } from "./commands/QueryCommand";
-import {
+import type { ListExportsCommandInput, ListExportsCommandOutput } from "./commands/ListExportsCommand";
+import type { ListGlobalTablesCommandInput, ListGlobalTablesCommandOutput } from "./commands/ListGlobalTablesCommand";
+import type { ListImportsCommandInput, ListImportsCommandOutput } from "./commands/ListImportsCommand";
+import type { ListTablesCommandInput, ListTablesCommandOutput } from "./commands/ListTablesCommand";
+import type {
+  ListTagsOfResourceCommandInput,
+  ListTagsOfResourceCommandOutput,
+} from "./commands/ListTagsOfResourceCommand";
+import type { PutItemCommandInput, PutItemCommandOutput } from "./commands/PutItemCommand";
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type { QueryCommandInput, QueryCommandOutput } from "./commands/QueryCommand";
+import type {
   RestoreTableFromBackupCommandInput,
   RestoreTableFromBackupCommandOutput,
 } from "./commands/RestoreTableFromBackupCommand";
-import {
+import type {
   RestoreTableToPointInTimeCommandInput,
   RestoreTableToPointInTimeCommandOutput,
 } from "./commands/RestoreTableToPointInTimeCommand";
-import { ScanCommandInput, ScanCommandOutput } from "./commands/ScanCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { TransactGetItemsCommandInput, TransactGetItemsCommandOutput } from "./commands/TransactGetItemsCommand";
-import { TransactWriteItemsCommandInput, TransactWriteItemsCommandOutput } from "./commands/TransactWriteItemsCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { ScanCommandInput, ScanCommandOutput } from "./commands/ScanCommand";
+import type { SearchVectorsCommandInput, SearchVectorsCommandOutput } from "./commands/SearchVectorsCommand";
+import type {
+  StartBulkPutItemsCommandInput,
+  StartBulkPutItemsCommandOutput,
+} from "./commands/StartBulkPutItemsCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { TransactGetItemsCommandInput, TransactGetItemsCommandOutput } from "./commands/TransactGetItemsCommand";
+import type {
+  TransactWriteItemsCommandInput,
+  TransactWriteItemsCommandOutput,
+} from "./commands/TransactWriteItemsCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateContinuousBackupsCommandInput,
   UpdateContinuousBackupsCommandOutput,
 } from "./commands/UpdateContinuousBackupsCommand";
-import {
+import type {
   UpdateContributorInsightsCommandInput,
   UpdateContributorInsightsCommandOutput,
 } from "./commands/UpdateContributorInsightsCommand";
-import { UpdateGlobalTableCommandInput, UpdateGlobalTableCommandOutput } from "./commands/UpdateGlobalTableCommand";
-import {
+import type {
+  UpdateGlobalTableCommandInput,
+  UpdateGlobalTableCommandOutput,
+} from "./commands/UpdateGlobalTableCommand";
+import type {
   UpdateGlobalTableSettingsCommandInput,
   UpdateGlobalTableSettingsCommandOutput,
 } from "./commands/UpdateGlobalTableSettingsCommand";
-import { UpdateItemCommandInput, UpdateItemCommandOutput } from "./commands/UpdateItemCommand";
-import { UpdateTableCommandInput, UpdateTableCommandOutput } from "./commands/UpdateTableCommand";
-import {
+import type { UpdateItemCommandInput, UpdateItemCommandOutput } from "./commands/UpdateItemCommand";
+import type {
+  UpdateKinesisStreamingDestinationCommandInput,
+  UpdateKinesisStreamingDestinationCommandOutput,
+} from "./commands/UpdateKinesisStreamingDestinationCommand";
+import type { UpdateTableCommandInput, UpdateTableCommandOutput } from "./commands/UpdateTableCommand";
+import type {
   UpdateTableReplicaAutoScalingCommandInput,
   UpdateTableReplicaAutoScalingCommandOutput,
 } from "./commands/UpdateTableReplicaAutoScalingCommand";
-import { UpdateTimeToLiveCommandInput, UpdateTimeToLiveCommandOutput } from "./commands/UpdateTimeToLiveCommand";
+import type { UpdateTimeToLiveCommandInput, UpdateTimeToLiveCommandOutput } from "./commands/UpdateTimeToLiveCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | BatchExecuteStatementCommandInput
   | BatchGetItemCommandInput
   | BatchWriteItemCommandInput
+  | CancelBulkOperationCommandInput
   | CreateBackupCommandInput
   | CreateGlobalTableCommandInput
   | CreateTableCommandInput
   | DeleteBackupCommandInput
   | DeleteItemCommandInput
+  | DeleteResourcePolicyCommandInput
   | DeleteTableCommandInput
   | DescribeBackupCommandInput
+  | DescribeBulkOperationCommandInput
   | DescribeContinuousBackupsCommandInput
   | DescribeContributorInsightsCommandInput
   | DescribeEndpointsCommandInput
   | DescribeExportCommandInput
   | DescribeGlobalTableCommandInput
   | DescribeGlobalTableSettingsCommandInput
+  | DescribeImportCommandInput
   | DescribeKinesisStreamingDestinationCommandInput
   | DescribeLimitsCommandInput
   | DescribeTableCommandInput
@@ -189,17 +270,24 @@ export type ServiceInputTypes =
   | ExecuteTransactionCommandInput
   | ExportTableToPointInTimeCommandInput
   | GetItemCommandInput
+  | GetResourcePolicyCommandInput
+  | ImportTableCommandInput
   | ListBackupsCommandInput
+  | ListBulkOperationsCommandInput
   | ListContributorInsightsCommandInput
   | ListExportsCommandInput
   | ListGlobalTablesCommandInput
+  | ListImportsCommandInput
   | ListTablesCommandInput
   | ListTagsOfResourceCommandInput
   | PutItemCommandInput
+  | PutResourcePolicyCommandInput
   | QueryCommandInput
   | RestoreTableFromBackupCommandInput
   | RestoreTableToPointInTimeCommandInput
   | ScanCommandInput
+  | SearchVectorsCommandInput
+  | StartBulkPutItemsCommandInput
   | TagResourceCommandInput
   | TransactGetItemsCommandInput
   | TransactWriteItemsCommandInput
@@ -209,27 +297,35 @@ export type ServiceInputTypes =
   | UpdateGlobalTableCommandInput
   | UpdateGlobalTableSettingsCommandInput
   | UpdateItemCommandInput
+  | UpdateKinesisStreamingDestinationCommandInput
   | UpdateTableCommandInput
   | UpdateTableReplicaAutoScalingCommandInput
   | UpdateTimeToLiveCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | BatchExecuteStatementCommandOutput
   | BatchGetItemCommandOutput
   | BatchWriteItemCommandOutput
+  | CancelBulkOperationCommandOutput
   | CreateBackupCommandOutput
   | CreateGlobalTableCommandOutput
   | CreateTableCommandOutput
   | DeleteBackupCommandOutput
   | DeleteItemCommandOutput
+  | DeleteResourcePolicyCommandOutput
   | DeleteTableCommandOutput
   | DescribeBackupCommandOutput
+  | DescribeBulkOperationCommandOutput
   | DescribeContinuousBackupsCommandOutput
   | DescribeContributorInsightsCommandOutput
   | DescribeEndpointsCommandOutput
   | DescribeExportCommandOutput
   | DescribeGlobalTableCommandOutput
   | DescribeGlobalTableSettingsCommandOutput
+  | DescribeImportCommandOutput
   | DescribeKinesisStreamingDestinationCommandOutput
   | DescribeLimitsCommandOutput
   | DescribeTableCommandOutput
@@ -241,17 +337,24 @@ export type ServiceOutputTypes =
   | ExecuteTransactionCommandOutput
   | ExportTableToPointInTimeCommandOutput
   | GetItemCommandOutput
+  | GetResourcePolicyCommandOutput
+  | ImportTableCommandOutput
   | ListBackupsCommandOutput
+  | ListBulkOperationsCommandOutput
   | ListContributorInsightsCommandOutput
   | ListExportsCommandOutput
   | ListGlobalTablesCommandOutput
+  | ListImportsCommandOutput
   | ListTablesCommandOutput
   | ListTagsOfResourceCommandOutput
   | PutItemCommandOutput
+  | PutResourcePolicyCommandOutput
   | QueryCommandOutput
   | RestoreTableFromBackupCommandOutput
   | RestoreTableToPointInTimeCommandOutput
   | ScanCommandOutput
+  | SearchVectorsCommandOutput
+  | StartBulkPutItemsCommandOutput
   | TagResourceCommandOutput
   | TransactGetItemsCommandOutput
   | TransactWriteItemsCommandOutput
@@ -261,22 +364,26 @@ export type ServiceOutputTypes =
   | UpdateGlobalTableCommandOutput
   | UpdateGlobalTableSettingsCommandOutput
   | UpdateItemCommandOutput
+  | UpdateKinesisStreamingDestinationCommandOutput
   | UpdateTableCommandOutput
   | UpdateTableReplicaAutoScalingCommandOutput
   | UpdateTimeToLiveCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -288,7 +395,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -327,25 +434,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -358,90 +456,145 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+  profile?: string;
 
   /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
+   * Defines if the AWS AccountId will be used for endpoint routing.
    */
-  regionInfoProvider?: RegionInfoProvider;
+  accountIdEndpointMode?: AccountIdEndpointMode | __Provider<AccountIdEndpointMode>;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
   /**
    * The provider which populates default for endpointDiscoveryEnabled configuration, if it's
    * not passed during client creation.
    * @internal
    */
   endpointDiscoveryEnabledProvider?: __Provider<boolean | undefined>;
+
 }
 
-type DynamoDBClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig &
-  EndpointDiscoveryInputConfig;
 /**
- * The configuration interface of DynamoDBClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type DynamoDBClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  AccountIdEndpointModeInputConfig &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  EndpointDiscoveryInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of DynamoDBClient class constructor that set the region, credentials and other options.
  */
 export interface DynamoDBClientConfig extends DynamoDBClientConfigType {}
 
-type DynamoDBClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig &
-  EndpointDiscoveryResolvedConfig;
 /**
- * The resolved configuration interface of DynamoDBClient class. This is resolved and normalized from the {@link DynamoDBClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type DynamoDBClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  AccountIdEndpointModeResolvedConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  EndpointDiscoveryResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of DynamoDBClient class. This is resolved and normalized from the {@link DynamoDBClientConfig | constructor configuration interface}.
  */
 export interface DynamoDBClientResolvedConfig extends DynamoDBClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon DynamoDB</fullname>
- *
- *
- *          <p>Amazon DynamoDB is a fully managed NoSQL database service that provides fast and
- *       predictable performance with seamless scalability. DynamoDB lets you offload the
- *       administrative burdens of operating and scaling a distributed database, so that you don't have
- *       to worry about hardware provisioning, setup and configuration, replication, software patching,
- *       or cluster scaling.</p>
- *
- *          <p>With DynamoDB, you can create database tables that can store and retrieve any amount of
- *       data, and serve any level of request traffic. You can scale up or scale down your tables'
- *       throughput capacity without downtime or performance degradation, and use the AWS Management
- *       Console to monitor resource utilization and performance metrics.</p>
- *
- *          <p>DynamoDB automatically spreads the data and traffic for your tables over a sufficient
- *       number of servers to handle your throughput and storage requirements, while maintaining
- *       consistent and fast performance. All of your data is stored on solid state disks (SSDs) and
- *       automatically replicated across multiple Availability Zones in an AWS region, providing
- *       built-in high availability and data durability. </p>
+ *          <p>Amazon DynamoDB is a fully managed NoSQL database service that provides fast
+ *             and predictable performance with seamless scalability. DynamoDB lets you
+ *             offload the administrative burdens of operating and scaling a distributed database, so
+ *             that you don't have to worry about hardware provisioning, setup and configuration,
+ *             replication, software patching, or cluster scaling.</p>
+ *          <p>With DynamoDB, you can create database tables that can store and retrieve
+ *             any amount of data, and serve any level of request traffic. You can scale up or scale
+ *             down your tables' throughput capacity without downtime or performance degradation, and
+ *             use the Amazon Web Services Management Console to monitor resource utilization and performance
+ *             metrics.</p>
+ *          <p>DynamoDB automatically spreads the data and traffic for your tables over
+ *             a sufficient number of servers to handle your throughput and storage requirements, while
+ *             maintaining consistent and fast performance. All of your data is stored on solid state
+ *             disks (SSDs) and automatically replicated across multiple Availability Zones in an
+ *                 Amazon Web Services Region, providing built-in high availability and data
+ *             durability.</p>
+ * @public
  */
 export class DynamoDBClient extends __Client<
   __HttpHandlerOptions,
@@ -454,25 +607,38 @@ export class DynamoDBClient extends __Client<
    */
   readonly config: DynamoDBClientResolvedConfig;
 
-  constructor(configuration: DynamoDBClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
-    const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    const _config_7 = resolveEndpointDiscoveryConfig(_config_6, {
-      endpointDiscoveryCommandCtor: DescribeEndpointsCommand,
-    });
-    super(_config_7);
-    this.config = _config_7;
+  constructor(...[configuration]: __CheckOptionalClientConfig<DynamoDBClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveAccountIdEndpointModeConfig(_config_1);
+    const _config_3 = resolveUserAgentConfig(_config_2);
+    const _config_4 = resolveRetryConfig(_config_3, { defaultBaseDelay: 25, defaultMaxAttempts: 4 });
+    const _config_5 = resolveRegionConfig(_config_4);
+    const _config_6 = resolveHostHeaderConfig(_config_5);
+    const _config_7 = resolveEndpointConfig(_config_6);
+    const _config_8 = resolveHttpAuthSchemeConfig(_config_7);
+    const _config_9 = resolveEndpointDiscoveryConfig(_config_8, { endpointDiscoveryCommandCtor: DescribeEndpointsCommand });
+    const _config_10 = resolveRuntimeExtensions(_config_9, configuration?.extensions || []);
+    this.config = _config_10;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultDynamoDBHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: DynamoDBClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MemoryDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MemoryDBClient";
-import { DescribeUsersRequest, DescribeUsersResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUsersCommand,
-  serializeAws_json1_1DescribeUsersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUsersRequest, DescribeUsersResponse } from "../models/models_0";
+import { DescribeUsers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUsersCommand}.
+ */
 export interface DescribeUsersCommandInput extends DescribeUsersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUsersCommand}.
+ */
 export interface DescribeUsersCommandOutput extends DescribeUsersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,79 @@ export interface DescribeUsersCommandOutput extends DescribeUsersResponse, __Met
  * ```javascript
  * import { MemoryDBClient, DescribeUsersCommand } from "@aws-sdk/client-memorydb"; // ES Modules import
  * // const { MemoryDBClient, DescribeUsersCommand } = require("@aws-sdk/client-memorydb"); // CommonJS import
+ * // import type { MemoryDBClientConfig } from "@aws-sdk/client-memorydb";
+ * const config = {}; // type is MemoryDBClientConfig
  * const client = new MemoryDBClient(config);
+ * const input = { // DescribeUsersRequest
+ *   UserName: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeUsersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUsersResponse
+ * //   Users: [ // UserList
+ * //     { // User
+ * //       Name: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       AccessString: "STRING_VALUE",
+ * //       ACLNames: [ // ACLNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MinimumEngineVersion: "STRING_VALUE",
+ * //       Authentication: { // Authentication
+ * //         Type: "password" || "no-password" || "iam",
+ * //         PasswordCount: Number("int"),
+ * //       },
+ * //       ARN: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUsersCommandInput - {@link DescribeUsersCommandInput}
+ * @returns {@link DescribeUsersCommandOutput}
  * @see {@link DescribeUsersCommandInput} for command's `input` shape.
  * @see {@link DescribeUsersCommandOutput} for command's `response` shape.
- * @see {@link MemoryDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MemoryDBClientResolvedConfig | config} for MemoryDBClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>The specified parameter combination is not valid.</p>
+ *
+ * @throws {@link UserNotFoundFault} (client fault)
+ *  <p>The specified user does not exist.</p>
+ *
+ * @throws {@link MemoryDBServiceException}
+ * <p>Base exception class for all service exceptions from MemoryDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUsersCommand extends $Command<
-  DescribeUsersCommandInput,
-  DescribeUsersCommandOutput,
-  MemoryDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUsersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MemoryDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUsersCommandInput, DescribeUsersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MemoryDBClient";
-    const commandName = "DescribeUsersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUsersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUsersResponse.filterSensitiveLog,
+export class DescribeUsersCommand extends command<DescribeUsersCommandInput, DescribeUsersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUsers",
+  DescribeUsers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUsersRequest;
+      output: DescribeUsersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUsersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUsersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUsersCommandOutput> {
-    return deserializeAws_json1_1DescribeUsersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUsersCommandInput;
+      output: DescribeUsersCommandOutput;
+    };
+  };
 }

@@ -1,112 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { GetMetricWidgetImageInput, GetMetricWidgetImageOutput } from "../models/models_0";
-import {
-  deserializeAws_queryGetMetricWidgetImageCommand,
-  serializeAws_queryGetMetricWidgetImageCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMetricWidgetImageInput, GetMetricWidgetImageOutput } from "../models/models_0";
+import { GetMetricWidgetImage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMetricWidgetImageCommand}.
+ */
 export interface GetMetricWidgetImageCommandInput extends GetMetricWidgetImageInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetMetricWidgetImageCommand}.
+ */
 export interface GetMetricWidgetImageCommandOutput extends GetMetricWidgetImageOutput, __MetadataBearer {}
 
 /**
- * <p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph of
- * 			one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this
- * 			image into your services and products, such as wiki pages, reports, and documents.
- * 			You could also retrieve images regularly, such as every minute, and create your own
- * 			custom live dashboard.</p>
- *
- * 		       <p>The graph you retrieve can include all CloudWatch metric graph features, including metric math
- * 		and horizontal and vertical annotations.</p>
- *
- * 		       <p>There is a limit of 20 transactions per second for this API. Each <code>GetMetricWidgetImage</code> action has the following limits:</p>
- * 		       <ul>
+ * <p>You can use the <code>GetMetricWidgetImage</code> API to retrieve a snapshot graph
+ *             of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this
+ *             image into your services and products, such as wiki pages, reports, and documents. You
+ *             could also retrieve images regularly, such as every minute, and create your own custom
+ *             live dashboard.</p>
+ *          <note>
+ *             <p>
+ *                <code>GetMetricWidgetImage</code> is not available in the Amazon Web Services
+ *                 GovCloud (US) Regions. In those Regions, calls to this operation fail. For the list
+ *                 of Amazon CloudWatch features that are not available in Amazon Web Services
+ *                 GovCloud (US), see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-cw.html">Amazon CloudWatch in
+ *                     Amazon Web Services GovCloud (US)</a>.</p>
+ *          </note>
+ *          <p>The graph you retrieve can include all CloudWatch metric graph features, including
+ *             metric math and horizontal and vertical annotations.</p>
+ *          <p>There is a limit of 20 transactions per second for this API. Each
+ *                 <code>GetMetricWidgetImage</code> action has the following limits:</p>
+ *          <ul>
  *             <li>
- * 				           <p>As many as 100 metrics in the graph.</p>
- * 			         </li>
+ *                <p>As many as 100 metrics in the graph.</p>
+ *             </li>
  *             <li>
- * 				           <p>Up to 100 KB uncompressed payload.</p>
- * 			         </li>
+ *                <p>Up to 100 KB uncompressed payload.</p>
+ *             </li>
  *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchClient, GetMetricWidgetImageCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, GetMetricWidgetImageCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // GetMetricWidgetImageInput
+ *   MetricWidget: "STRING_VALUE", // required
+ *   OutputFormat: "STRING_VALUE",
+ * };
  * const command = new GetMetricWidgetImageCommand(input);
  * const response = await client.send(command);
+ * // { // GetMetricWidgetImageOutput
+ * //   MetricWidgetImage: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param GetMetricWidgetImageCommandInput - {@link GetMetricWidgetImageCommandInput}
+ * @returns {@link GetMetricWidgetImageCommandOutput}
  * @see {@link GetMetricWidgetImageCommandInput} for command's `input` shape.
  * @see {@link GetMetricWidgetImageCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class GetMetricWidgetImageCommand extends $Command<
-  GetMetricWidgetImageCommandInput,
-  GetMetricWidgetImageCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMetricWidgetImageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMetricWidgetImageCommandInput, GetMetricWidgetImageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "GetMetricWidgetImageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMetricWidgetImageInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMetricWidgetImageOutput.filterSensitiveLog,
+export class GetMetricWidgetImageCommand extends command<GetMetricWidgetImageCommandInput, GetMetricWidgetImageCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMetricWidgetImage",
+  GetMetricWidgetImage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMetricWidgetImageInput;
+      output: GetMetricWidgetImageOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMetricWidgetImageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetMetricWidgetImageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMetricWidgetImageCommandOutput> {
-    return deserializeAws_queryGetMetricWidgetImageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMetricWidgetImageCommandInput;
+      output: GetMetricWidgetImageCommandOutput;
+    };
+  };
 }

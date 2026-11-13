@@ -1,99 +1,123 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUserCommand,
-  serializeAws_json1_1DescribeUserCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
+import { DescribeUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandInput extends DescribeUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandOutput extends DescribeUserResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the user assigned to the specific file transfer protocol-enabled server, as
- *       identified by its <code>ServerId</code> property.</p>
- *
- *          <p>The response from this call returns the properties of the user associated with the
- *         <code>ServerId</code> value that was specified.</p>
+ * <p>Describes the user assigned to the specific file transfer protocol-enabled server, as identified by its <code>ServerId</code> property.</p> <p>The response from this call returns the properties of the user associated with the <code>ServerId</code> value that was specified.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TransferClient, DescribeUserCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, DescribeUserCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // DescribeUserRequest
+ *   ServerId: "STRING_VALUE", // required
+ *   UserName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeUserCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserResponse
+ * //   ServerId: "STRING_VALUE", // required
+ * //   User: { // DescribedUser
+ * //     Arn: "STRING_VALUE", // required
+ * //     HomeDirectory: "STRING_VALUE",
+ * //     HomeDirectoryMappings: [ // HomeDirectoryMappings
+ * //       { // HomeDirectoryMapEntry
+ * //         Entry: "STRING_VALUE", // required
+ * //         Target: "STRING_VALUE", // required
+ * //         Type: "FILE" || "DIRECTORY",
+ * //       },
+ * //     ],
+ * //     HomeDirectoryType: "PATH" || "LOGICAL",
+ * //     Policy: "STRING_VALUE",
+ * //     PosixProfile: { // PosixProfile
+ * //       Uid: Number("long"), // required
+ * //       Gid: Number("long"), // required
+ * //       SecondaryGids: [ // SecondaryGids
+ * //         Number("long"),
+ * //       ],
+ * //     },
+ * //     Role: "STRING_VALUE",
+ * //     SshPublicKeys: [ // SshPublicKeys
+ * //       { // SshPublicKey
+ * //         DateImported: new Date("TIMESTAMP"), // required
+ * //         SshPublicKeyBody: "STRING_VALUE", // required
+ * //         SshPublicKeyId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     Tags: [ // Tags
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     UserName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserCommandInput - {@link DescribeUserCommandInput}
+ * @returns {@link DescribeUserCommandOutput}
  * @see {@link DescribeUserCommandInput} for command's `input` shape.
  * @see {@link DescribeUserCommandOutput} for command's `response` shape.
- * @see {@link TransferClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserCommand extends $Command<
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserCommandInput, DescribeUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "DescribeUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserResponse.filterSensitiveLog,
+export class DescribeUserCommand extends command<DescribeUserCommandInput, DescribeUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUser",
+  DescribeUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserRequest;
+      output: DescribeUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserCommandOutput> {
-    return deserializeAws_json1_1DescribeUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserCommandInput;
+      output: DescribeUserCommandOutput;
+    };
+  };
 }

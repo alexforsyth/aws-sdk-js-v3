@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeClientVpnConnectionsRequest, DescribeClientVpnConnectionsResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeClientVpnConnectionsCommand,
-  serializeAws_ec2DescribeClientVpnConnectionsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeClientVpnConnectionsRequest, DescribeClientVpnConnectionsResult } from "../models/models_3";
+import { DescribeClientVpnConnections$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClientVpnConnectionsCommand}.
+ */
 export interface DescribeClientVpnConnectionsCommandInput extends DescribeClientVpnConnectionsRequest {}
-export interface DescribeClientVpnConnectionsCommandOutput
-  extends DescribeClientVpnConnectionsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClientVpnConnectionsCommand}.
+ */
+export interface DescribeClientVpnConnectionsCommandOutput extends DescribeClientVpnConnectionsResult, __MetadataBearer {}
 
 /**
  * <p>Describes active client connections and connections that have been terminated within the last 60
@@ -31,71 +30,83 @@ export interface DescribeClientVpnConnectionsCommandOutput
  * ```javascript
  * import { EC2Client, DescribeClientVpnConnectionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeClientVpnConnectionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeClientVpnConnectionsRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeClientVpnConnectionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeClientVpnConnectionsResult
+ * //   Connections: [ // ClientVpnConnectionSet
+ * //     { // ClientVpnConnection
+ * //       ClientVpnEndpointId: "STRING_VALUE",
+ * //       Timestamp: "STRING_VALUE",
+ * //       ConnectionId: "STRING_VALUE",
+ * //       Username: "STRING_VALUE",
+ * //       ConnectionEstablishedTime: "STRING_VALUE",
+ * //       IngressBytes: "STRING_VALUE",
+ * //       EgressBytes: "STRING_VALUE",
+ * //       IngressPackets: "STRING_VALUE",
+ * //       EgressPackets: "STRING_VALUE",
+ * //       ClientIp: "STRING_VALUE",
+ * //       ClientIpv6Address: "STRING_VALUE",
+ * //       CommonName: "STRING_VALUE",
+ * //       Status: { // ClientVpnConnectionStatus
+ * //         Code: "active" || "failed-to-terminate" || "terminating" || "terminated",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //       ConnectionEndTime: "STRING_VALUE",
+ * //       PostureComplianceStatuses: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AuthorizationPolicyLastEvaluatedTime: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeClientVpnConnectionsCommandInput - {@link DescribeClientVpnConnectionsCommandInput}
+ * @returns {@link DescribeClientVpnConnectionsCommandOutput}
  * @see {@link DescribeClientVpnConnectionsCommandInput} for command's `input` shape.
  * @see {@link DescribeClientVpnConnectionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClientVpnConnectionsCommand extends $Command<
-  DescribeClientVpnConnectionsCommandInput,
-  DescribeClientVpnConnectionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClientVpnConnectionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClientVpnConnectionsCommandInput, DescribeClientVpnConnectionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeClientVpnConnectionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClientVpnConnectionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeClientVpnConnectionsResult.filterSensitiveLog,
+export class DescribeClientVpnConnectionsCommand extends command<DescribeClientVpnConnectionsCommandInput, DescribeClientVpnConnectionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeClientVpnConnections",
+  DescribeClientVpnConnections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClientVpnConnectionsRequest;
+      output: DescribeClientVpnConnectionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClientVpnConnectionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeClientVpnConnectionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeClientVpnConnectionsCommandOutput> {
-    return deserializeAws_ec2DescribeClientVpnConnectionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClientVpnConnectionsCommandInput;
+      output: DescribeClientVpnConnectionsCommandOutput;
+    };
+  };
 }

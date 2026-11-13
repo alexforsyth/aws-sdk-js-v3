@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { DBSubnetGroupMessage, DescribeDBSubnetGroupsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeDBSubnetGroupsCommand,
-  serializeAws_queryDescribeDBSubnetGroupsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DBSubnetGroupMessage, DescribeDBSubnetGroupsMessage } from "../models/models_0";
+import { DescribeDBSubnetGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDBSubnetGroupsCommand}.
+ */
 export interface DescribeDBSubnetGroupsCommandInput extends DescribeDBSubnetGroupsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDBSubnetGroupsCommand}.
+ */
 export interface DescribeDBSubnetGroupsCommandOutput extends DBSubnetGroupMessage, __MetadataBearer {}
 
 /**
@@ -29,68 +30,82 @@ export interface DescribeDBSubnetGroupsCommandOutput extends DBSubnetGroupMessag
  * ```javascript
  * import { DocDBClient, DescribeDBSubnetGroupsCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, DescribeDBSubnetGroupsCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // DescribeDBSubnetGroupsMessage
+ *   DBSubnetGroupName: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeDBSubnetGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // DBSubnetGroupMessage
+ * //   Marker: "STRING_VALUE",
+ * //   DBSubnetGroups: [ // DBSubnetGroups
+ * //     { // DBSubnetGroup
+ * //       DBSubnetGroupName: "STRING_VALUE",
+ * //       DBSubnetGroupDescription: "STRING_VALUE",
+ * //       VpcId: "STRING_VALUE",
+ * //       SubnetGroupStatus: "STRING_VALUE",
+ * //       Subnets: [ // SubnetList
+ * //         { // Subnet
+ * //           SubnetIdentifier: "STRING_VALUE",
+ * //           SubnetAvailabilityZone: { // AvailabilityZone
+ * //             Name: "STRING_VALUE",
+ * //           },
+ * //           SubnetStatus: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       DBSubnetGroupArn: "STRING_VALUE",
+ * //       SupportedNetworkTypes: [ // NetworkTypeList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeDBSubnetGroupsCommandInput - {@link DescribeDBSubnetGroupsCommandInput}
+ * @returns {@link DescribeDBSubnetGroupsCommandOutput}
  * @see {@link DescribeDBSubnetGroupsCommandInput} for command's `input` shape.
  * @see {@link DescribeDBSubnetGroupsCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBSubnetGroupNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBSubnetGroupName</code> doesn't refer to an existing subnet group. </p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDBSubnetGroupsCommand extends $Command<
-  DescribeDBSubnetGroupsCommandInput,
-  DescribeDBSubnetGroupsCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDBSubnetGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDBSubnetGroupsCommandInput, DescribeDBSubnetGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "DescribeDBSubnetGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDBSubnetGroupsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DBSubnetGroupMessage.filterSensitiveLog,
+export class DescribeDBSubnetGroupsCommand extends command<DescribeDBSubnetGroupsCommandInput, DescribeDBSubnetGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDBSubnetGroups",
+  DescribeDBSubnetGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDBSubnetGroupsMessage;
+      output: DBSubnetGroupMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDBSubnetGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDBSubnetGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDBSubnetGroupsCommandOutput> {
-    return deserializeAws_queryDescribeDBSubnetGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDBSubnetGroupsCommandInput;
+      output: DescribeDBSubnetGroupsCommandOutput;
+    };
+  };
 }

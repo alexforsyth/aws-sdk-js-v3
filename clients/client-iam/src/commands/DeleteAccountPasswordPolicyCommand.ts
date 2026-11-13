@@ -1,23 +1,24 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import {
-  deserializeAws_queryDeleteAccountPasswordPolicyCommand,
-  serializeAws_queryDeleteAccountPasswordPolicyCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import { DeleteAccountPasswordPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAccountPasswordPolicyCommand}.
+ */
 export interface DeleteAccountPasswordPolicyCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAccountPasswordPolicyCommand}.
+ */
 export interface DeleteAccountPasswordPolicyCommandOutput extends __MetadataBearer {}
 
 /**
@@ -27,71 +28,66 @@ export interface DeleteAccountPasswordPolicyCommandOutput extends __MetadataBear
  * ```javascript
  * import { IAMClient, DeleteAccountPasswordPolicyCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, DeleteAccountPasswordPolicyCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = {};
  * const command = new DeleteAccountPasswordPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAccountPasswordPolicyCommandInput - {@link DeleteAccountPasswordPolicyCommandInput}
+ * @returns {@link DeleteAccountPasswordPolicyCommandOutput}
  * @see {@link DeleteAccountPasswordPolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteAccountPasswordPolicyCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To delete the current account password policy
+ * ```javascript
+ * // The following command removes the password policy from the current AWS account:
+ * const input = { /* empty *\/ };
+ * const command = new DeleteAccountPasswordPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteAccountPasswordPolicyCommand extends $Command<
-  DeleteAccountPasswordPolicyCommandInput,
-  DeleteAccountPasswordPolicyCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAccountPasswordPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAccountPasswordPolicyCommandInput, DeleteAccountPasswordPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "DeleteAccountPasswordPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteAccountPasswordPolicyCommand extends command<DeleteAccountPasswordPolicyCommandInput, DeleteAccountPasswordPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAccountPasswordPolicy",
+  DeleteAccountPasswordPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAccountPasswordPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteAccountPasswordPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteAccountPasswordPolicyCommandOutput> {
-    return deserializeAws_queryDeleteAccountPasswordPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAccountPasswordPolicyCommandInput;
+      output: DeleteAccountPasswordPolicyCommandOutput;
+    };
+  };
 }

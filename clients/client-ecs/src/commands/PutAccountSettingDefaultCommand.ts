@@ -1,97 +1,113 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { PutAccountSettingDefaultRequest, PutAccountSettingDefaultResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutAccountSettingDefaultCommand,
-  serializeAws_json1_1PutAccountSettingDefaultCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAccountSettingDefaultRequest, PutAccountSettingDefaultResponse } from "../models/models_0";
+import { PutAccountSettingDefault$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAccountSettingDefaultCommand}.
+ */
 export interface PutAccountSettingDefaultCommandInput extends PutAccountSettingDefaultRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAccountSettingDefaultCommand}.
+ */
 export interface PutAccountSettingDefaultCommandOutput extends PutAccountSettingDefaultResponse, __MetadataBearer {}
 
 /**
- * <p>Modifies an account setting for all IAM users on an account for whom no individual
- * 			account setting has been specified. Account settings are set on a per-Region
- * 			basis.</p>
+ * <p>Modifies an account setting for all users on an account for whom no individual account setting has been specified. Account settings are set on a per-Region basis.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, PutAccountSettingDefaultCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, PutAccountSettingDefaultCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // PutAccountSettingDefaultRequest
+ *   name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows", // required
+ *   value: "STRING_VALUE", // required
+ * };
  * const command = new PutAccountSettingDefaultCommand(input);
  * const response = await client.send(command);
+ * // { // PutAccountSettingDefaultResponse
+ * //   setting: { // Setting
+ * //     name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows",
+ * //     value: "STRING_VALUE",
+ * //     principalArn: "STRING_VALUE",
+ * //     type: "user" || "aws_managed",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutAccountSettingDefaultCommandInput - {@link PutAccountSettingDefaultCommandInput}
+ * @returns {@link PutAccountSettingDefaultCommandOutput}
  * @see {@link PutAccountSettingDefaultCommandInput} for command's `input` shape.
  * @see {@link PutAccountSettingDefaultCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To modify the default account settings for all IAM users or roles on an account
+ * ```javascript
+ * // This example modifies the default account setting for the specified resource for all IAM users or roles on an account. These changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.
+ * const input = {
+ *   name: "serviceLongArnFormat",
+ *   value: "enabled"
+ * };
+ * const command = new PutAccountSettingDefaultCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   setting: {
+ *     name: "serviceLongArnFormat",
+ *     principalArn: "arn:aws:iam::<aws_account_id>:root",
+ *     value: "enabled"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class PutAccountSettingDefaultCommand extends $Command<
-  PutAccountSettingDefaultCommandInput,
-  PutAccountSettingDefaultCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAccountSettingDefaultCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAccountSettingDefaultCommandInput, PutAccountSettingDefaultCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "PutAccountSettingDefaultCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAccountSettingDefaultRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutAccountSettingDefaultResponse.filterSensitiveLog,
+export class PutAccountSettingDefaultCommand extends command<PutAccountSettingDefaultCommandInput, PutAccountSettingDefaultCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAccountSettingDefault",
+  PutAccountSettingDefault$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAccountSettingDefaultRequest;
+      output: PutAccountSettingDefaultResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAccountSettingDefaultCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutAccountSettingDefaultCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutAccountSettingDefaultCommandOutput> {
-    return deserializeAws_json1_1PutAccountSettingDefaultCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAccountSettingDefaultCommandInput;
+      output: PutAccountSettingDefaultCommandOutput;
+    };
+  };
 }

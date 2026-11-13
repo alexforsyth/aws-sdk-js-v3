@@ -1,98 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { DeleteUserRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteUserCommand,
-  serializeAws_restJson1DeleteUserCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteUserRequest } from "../models/models_1";
+import { DeleteUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteUserCommand}.
+ */
 export interface DeleteUserCommandInput extends DeleteUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteUserCommand}.
+ */
 export interface DeleteUserCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes a user account from the specified Amazon Connect instance.</p>
- *          <p>For information about what happens to a user's data when their account is deleted, see
- *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html">Delete Users from
- *     Your Amazon Connect Instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+ * <p>Deletes a user account from the specified Connect Customer instance.</p>
+ *          <p>For information about what happens to a user's data when their account is deleted, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html">Delete Users from Your Connect Customer
+ *     Instance</a> in the <i>Connect Customer Administrator Guide</i>.</p>
+ *          <important>
+ *             <p>After calling DeleteUser, call <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteQuickConnect.html">DeleteQuickConnect</a> to delete any records
+ *     related to the deleted users. This will help you:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>Avoid dangling resources that impact your service quotas.</p>
+ *                </li>
+ *                <li>
+ *                   <p>Remove deleted users so they don't appear to agents as transfer options.</p>
+ *                </li>
+ *                <li>
+ *                   <p>Avoid the disruption of other Connect Customer processes, such as instance replication and syncing if
+ *       you're using <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html">Connect Customer Global Resiliency</a>. </p>
+ *                </li>
+ *             </ul>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, DeleteUserCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DeleteUserCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DeleteUserRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   UserId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteUserCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteUserCommandInput - {@link DeleteUserCommandInput}
+ * @returns {@link DeleteUserCommandOutput}
  * @see {@link DeleteUserCommandInput} for command's `input` shape.
  * @see {@link DeleteUserCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteUserCommand extends $Command<
-  DeleteUserCommandInput,
-  DeleteUserCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteUserCommandInput, DeleteUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DeleteUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteUserCommand extends command<DeleteUserCommandInput, DeleteUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteUser",
+  DeleteUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteUserRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteUserCommandOutput> {
-    return deserializeAws_restJson1DeleteUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteUserCommandInput;
+      output: DeleteUserCommandOutput;
+    };
+  };
 }

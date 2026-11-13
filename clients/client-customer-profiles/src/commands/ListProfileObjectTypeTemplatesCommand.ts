@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { ListProfileObjectTypeTemplatesRequest, ListProfileObjectTypeTemplatesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProfileObjectTypeTemplatesCommand,
-  serializeAws_restJson1ListProfileObjectTypeTemplatesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProfileObjectTypeTemplatesRequest, ListProfileObjectTypeTemplatesResponse } from "../models/models_1";
+import { ListProfileObjectTypeTemplates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProfileObjectTypeTemplatesCommand}.
+ */
 export interface ListProfileObjectTypeTemplatesCommandInput extends ListProfileObjectTypeTemplatesRequest {}
-export interface ListProfileObjectTypeTemplatesCommandOutput
-  extends ListProfileObjectTypeTemplatesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListProfileObjectTypeTemplatesCommand}.
+ */
+export interface ListProfileObjectTypeTemplatesCommandOutput extends ListProfileObjectTypeTemplatesResponse, __MetadataBearer {}
 
 /**
  * <p>Lists all of the template information for object types.</p>
@@ -30,74 +29,70 @@ export interface ListProfileObjectTypeTemplatesCommandOutput
  * ```javascript
  * import { CustomerProfilesClient, ListProfileObjectTypeTemplatesCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, ListProfileObjectTypeTemplatesCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // ListProfileObjectTypeTemplatesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListProfileObjectTypeTemplatesCommand(input);
  * const response = await client.send(command);
+ * // { // ListProfileObjectTypeTemplatesResponse
+ * //   Items: [ // ProfileObjectTypeTemplateList
+ * //     { // ListProfileObjectTypeTemplateItem
+ * //       TemplateId: "STRING_VALUE",
+ * //       SourceName: "STRING_VALUE",
+ * //       SourceObject: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProfileObjectTypeTemplatesCommandInput - {@link ListProfileObjectTypeTemplatesCommandInput}
+ * @returns {@link ListProfileObjectTypeTemplatesCommandOutput}
  * @see {@link ListProfileObjectTypeTemplatesCommandInput} for command's `input` shape.
  * @see {@link ListProfileObjectTypeTemplatesCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class ListProfileObjectTypeTemplatesCommand extends $Command<
-  ListProfileObjectTypeTemplatesCommandInput,
-  ListProfileObjectTypeTemplatesCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProfileObjectTypeTemplatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProfileObjectTypeTemplatesCommandInput, ListProfileObjectTypeTemplatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "ListProfileObjectTypeTemplatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProfileObjectTypeTemplatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProfileObjectTypeTemplatesResponse.filterSensitiveLog,
+export class ListProfileObjectTypeTemplatesCommand extends command<ListProfileObjectTypeTemplatesCommandInput, ListProfileObjectTypeTemplatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProfileObjectTypeTemplates",
+  ListProfileObjectTypeTemplates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProfileObjectTypeTemplatesRequest;
+      output: ListProfileObjectTypeTemplatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListProfileObjectTypeTemplatesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProfileObjectTypeTemplatesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListProfileObjectTypeTemplatesCommandOutput> {
-    return deserializeAws_restJson1ListProfileObjectTypeTemplatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProfileObjectTypeTemplatesCommandInput;
+      output: ListProfileObjectTypeTemplatesCommandOutput;
+    };
+  };
 }

@@ -1,97 +1,86 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListSubscribedWorkteamsRequest, ListSubscribedWorkteamsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListSubscribedWorkteamsCommand,
-  serializeAws_json1_1ListSubscribedWorkteamsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSubscribedWorkteamsRequest, ListSubscribedWorkteamsResponse } from "../models/models_4";
+import { ListSubscribedWorkteams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSubscribedWorkteamsCommand}.
+ */
 export interface ListSubscribedWorkteamsCommandInput extends ListSubscribedWorkteamsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSubscribedWorkteamsCommand}.
+ */
 export interface ListSubscribedWorkteamsCommandOutput extends ListSubscribedWorkteamsResponse, __MetadataBearer {}
 
 /**
- * <p>Gets a list of the work teams that you are subscribed to in the Amazon Web Services Marketplace. The
- *             list may be empty if no work team satisfies the filter specified in the
- *                 <code>NameContains</code> parameter.</p>
+ * <p>Gets a list of the work teams that you are subscribed to in the Amazon Web Services Marketplace. The list may be empty if no work team satisfies the filter specified in the <code>NameContains</code> parameter.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, ListSubscribedWorkteamsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListSubscribedWorkteamsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListSubscribedWorkteamsRequest
+ *   NameContains: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListSubscribedWorkteamsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSubscribedWorkteamsResponse
+ * //   SubscribedWorkteams: [ // SubscribedWorkteams // required
+ * //     { // SubscribedWorkteam
+ * //       WorkteamArn: "STRING_VALUE", // required
+ * //       MarketplaceTitle: "STRING_VALUE",
+ * //       SellerName: "STRING_VALUE",
+ * //       MarketplaceDescription: "STRING_VALUE",
+ * //       ListingId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSubscribedWorkteamsCommandInput - {@link ListSubscribedWorkteamsCommandInput}
+ * @returns {@link ListSubscribedWorkteamsCommandOutput}
  * @see {@link ListSubscribedWorkteamsCommandInput} for command's `input` shape.
  * @see {@link ListSubscribedWorkteamsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListSubscribedWorkteamsCommand extends $Command<
-  ListSubscribedWorkteamsCommandInput,
-  ListSubscribedWorkteamsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSubscribedWorkteamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSubscribedWorkteamsCommandInput, ListSubscribedWorkteamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListSubscribedWorkteamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSubscribedWorkteamsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSubscribedWorkteamsResponse.filterSensitiveLog,
+export class ListSubscribedWorkteamsCommand extends command<ListSubscribedWorkteamsCommandInput, ListSubscribedWorkteamsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSubscribedWorkteams",
+  ListSubscribedWorkteams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSubscribedWorkteamsRequest;
+      output: ListSubscribedWorkteamsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSubscribedWorkteamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSubscribedWorkteamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSubscribedWorkteamsCommandOutput> {
-    return deserializeAws_json1_1ListSubscribedWorkteamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSubscribedWorkteamsCommandInput;
+      output: ListSubscribedWorkteamsCommandOutput;
+    };
+  };
 }

@@ -1,78 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SimpleScalarPropertiesInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1SimpleScalarPropertiesCommand,
-  serializeAws_restJson1SimpleScalarPropertiesCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { SimpleScalarPropertiesInputOutput } from "../models/models_0";
+import { de_SimpleScalarPropertiesCommand, se_SimpleScalarPropertiesCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SimpleScalarPropertiesCommand}.
+ */
 export interface SimpleScalarPropertiesCommandInput extends SimpleScalarPropertiesInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link SimpleScalarPropertiesCommand}.
+ */
 export interface SimpleScalarPropertiesCommandOutput extends SimpleScalarPropertiesInputOutput, __MetadataBearer {}
 
-export class SimpleScalarPropertiesCommand extends $Command<
-  SimpleScalarPropertiesCommandInput,
-  SimpleScalarPropertiesCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SimpleScalarPropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SimpleScalarPropertiesCommandInput, SimpleScalarPropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "SimpleScalarPropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SimpleScalarPropertiesInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: SimpleScalarPropertiesInputOutput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, SimpleScalarPropertiesCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, SimpleScalarPropertiesCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // SimpleScalarPropertiesInputOutput
+ *   foo: "STRING_VALUE",
+ *   stringValue: "STRING_VALUE",
+ *   trueBooleanValue: true || false,
+ *   falseBooleanValue: true || false,
+ *   byteValue: 0, // BYTE_VALUE
+ *   shortValue: Number("short"),
+ *   integerValue: Number("int"),
+ *   longValue: Number("long"),
+ *   floatValue: Number("float"),
+ *   doubleValue: Number("double"),
+ * };
+ * const command = new SimpleScalarPropertiesCommand(input);
+ * const response = await client.send(command);
+ * // { // SimpleScalarPropertiesInputOutput
+ * //   foo: "STRING_VALUE",
+ * //   stringValue: "STRING_VALUE",
+ * //   trueBooleanValue: true || false,
+ * //   falseBooleanValue: true || false,
+ * //   byteValue: 0, // BYTE_VALUE
+ * //   shortValue: Number("short"),
+ * //   integerValue: Number("int"),
+ * //   longValue: Number("long"),
+ * //   floatValue: Number("float"),
+ * //   doubleValue: Number("double"),
+ * // };
+ *
+ * ```
+ *
+ * @param SimpleScalarPropertiesCommandInput - {@link SimpleScalarPropertiesCommandInput}
+ * @returns {@link SimpleScalarPropertiesCommandOutput}
+ * @see {@link SimpleScalarPropertiesCommandInput} for command's `input` shape.
+ * @see {@link SimpleScalarPropertiesCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class SimpleScalarPropertiesCommand extends $Command
+  .classBuilder<
+    SimpleScalarPropertiesCommandInput,
+    SimpleScalarPropertiesCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "SimpleScalarProperties", {})
+  .n("RestJsonProtocolClient", "SimpleScalarPropertiesCommand")
+  .f(void 0, void 0)
+  .ser(se_SimpleScalarPropertiesCommand)
+  .de(de_SimpleScalarPropertiesCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SimpleScalarPropertiesInputOutput;
+      output: SimpleScalarPropertiesInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SimpleScalarPropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SimpleScalarPropertiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SimpleScalarPropertiesCommandOutput> {
-    return deserializeAws_restJson1SimpleScalarPropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SimpleScalarPropertiesCommandInput;
+      output: SimpleScalarPropertiesCommandOutput;
+    };
+  };
 }

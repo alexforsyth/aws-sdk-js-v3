@@ -1,95 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { DeleteAliasRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAliasCommand,
-  serializeAws_restJson1DeleteAliasCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAliasRequest } from "../models/models_0";
+import { DeleteAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAliasCommand}.
+ */
 export interface DeleteAliasCommandInput extends DeleteAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAliasCommand}.
+ */
 export interface DeleteAliasCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">alias</a>.</p>
+ * <p>Deletes a Lambda Event Function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, DeleteAliasCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, DeleteAliasCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // DeleteAliasRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteAliasCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAliasCommandInput - {@link DeleteAliasCommandInput}
+ * @returns {@link DeleteAliasCommandOutput}
  * @see {@link DeleteAliasCommandInput} for command's `input` shape.
  * @see {@link DeleteAliasCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource already exists, or another operation is in progress.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To delete a Lambda function alias
+ * ```javascript
+ * // The following example deletes an alias named BLUE from a function named my-function
+ * const input = {
+ *   FunctionName: "my-function",
+ *   Name: "BLUE"
+ * };
+ * const command = new DeleteAliasCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteAliasCommand extends $Command<
-  DeleteAliasCommandInput,
-  DeleteAliasCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAliasCommandInput, DeleteAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "DeleteAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAliasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteAliasCommand extends command<DeleteAliasCommandInput, DeleteAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAlias",
+  DeleteAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAliasRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAliasCommandOutput> {
-    return deserializeAws_restJson1DeleteAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAliasCommandInput;
+      output: DeleteAliasCommandOutput;
+    };
+  };
 }

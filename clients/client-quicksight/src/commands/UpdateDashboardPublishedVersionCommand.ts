@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateDashboardPublishedVersionRequest, UpdateDashboardPublishedVersionResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateDashboardPublishedVersionCommand,
-  serializeAws_restJson1UpdateDashboardPublishedVersionCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  UpdateDashboardPublishedVersionRequest,
+  UpdateDashboardPublishedVersionResponse,
+} from "../models/models_5";
+import { UpdateDashboardPublishedVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDashboardPublishedVersionCommand}.
+ */
 export interface UpdateDashboardPublishedVersionCommandInput extends UpdateDashboardPublishedVersionRequest {}
-export interface UpdateDashboardPublishedVersionCommandOutput
-  extends UpdateDashboardPublishedVersionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDashboardPublishedVersionCommand}.
+ */
+export interface UpdateDashboardPublishedVersionCommandOutput extends UpdateDashboardPublishedVersionResponse, __MetadataBearer {}
 
 /**
  * <p>Updates the published version of a dashboard.</p>
@@ -30,74 +32,73 @@ export interface UpdateDashboardPublishedVersionCommandOutput
  * ```javascript
  * import { QuickSightClient, UpdateDashboardPublishedVersionCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, UpdateDashboardPublishedVersionCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // UpdateDashboardPublishedVersionRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   DashboardId: "STRING_VALUE", // required
+ *   VersionNumber: Number("long"), // required
+ * };
  * const command = new UpdateDashboardPublishedVersionCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDashboardPublishedVersionResponse
+ * //   DashboardId: "STRING_VALUE",
+ * //   DashboardArn: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * //   RequestId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateDashboardPublishedVersionCommandInput - {@link UpdateDashboardPublishedVersionCommandInput}
+ * @returns {@link UpdateDashboardPublishedVersionCommandOutput}
  * @see {@link UpdateDashboardPublishedVersionCommandInput} for command's `input` shape.
  * @see {@link UpdateDashboardPublishedVersionCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDashboardPublishedVersionCommand extends $Command<
-  UpdateDashboardPublishedVersionCommandInput,
-  UpdateDashboardPublishedVersionCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDashboardPublishedVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDashboardPublishedVersionCommandInput, UpdateDashboardPublishedVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "UpdateDashboardPublishedVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDashboardPublishedVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDashboardPublishedVersionResponse.filterSensitiveLog,
+export class UpdateDashboardPublishedVersionCommand extends command<UpdateDashboardPublishedVersionCommandInput, UpdateDashboardPublishedVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDashboardPublishedVersion",
+  UpdateDashboardPublishedVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDashboardPublishedVersionRequest;
+      output: UpdateDashboardPublishedVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateDashboardPublishedVersionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDashboardPublishedVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateDashboardPublishedVersionCommandOutput> {
-    return deserializeAws_restJson1UpdateDashboardPublishedVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDashboardPublishedVersionCommandInput;
+      output: UpdateDashboardPublishedVersionCommandOutput;
+    };
+  };
 }

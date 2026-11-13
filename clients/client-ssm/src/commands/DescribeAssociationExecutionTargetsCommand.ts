@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeAssociationExecutionTargetsRequest,
   DescribeAssociationExecutionTargetsResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAssociationExecutionTargetsCommand,
-  serializeAws_json1_1DescribeAssociationExecutionTargetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { DescribeAssociationExecutionTargets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAssociationExecutionTargetsCommand}.
+ */
 export interface DescribeAssociationExecutionTargetsCommandInput extends DescribeAssociationExecutionTargetsRequest {}
-export interface DescribeAssociationExecutionTargetsCommandOutput
-  extends DescribeAssociationExecutionTargetsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAssociationExecutionTargetsCommand}.
+ */
+export interface DescribeAssociationExecutionTargetsCommandOutput extends DescribeAssociationExecutionTargetsResult, __MetadataBearer {}
 
 /**
  * <p>Views information about a specific execution of a specific association.</p>
@@ -33,74 +32,84 @@ export interface DescribeAssociationExecutionTargetsCommandOutput
  * ```javascript
  * import { SSMClient, DescribeAssociationExecutionTargetsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribeAssociationExecutionTargetsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribeAssociationExecutionTargetsRequest
+ *   AssociationId: "STRING_VALUE", // required
+ *   ExecutionId: "STRING_VALUE", // required
+ *   Filters: [ // AssociationExecutionTargetsFilterList
+ *     { // AssociationExecutionTargetsFilter
+ *       Key: "Status" || "ResourceId" || "ResourceType", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAssociationExecutionTargetsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAssociationExecutionTargetsResult
+ * //   AssociationExecutionTargets: [ // AssociationExecutionTargetsList
+ * //     { // AssociationExecutionTarget
+ * //       AssociationId: "STRING_VALUE",
+ * //       AssociationVersion: "STRING_VALUE",
+ * //       ExecutionId: "STRING_VALUE",
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       DetailedStatus: "STRING_VALUE",
+ * //       LastExecutionDate: new Date("TIMESTAMP"),
+ * //       OutputSource: { // OutputSource
+ * //         OutputSourceId: "STRING_VALUE",
+ * //         OutputSourceType: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAssociationExecutionTargetsCommandInput - {@link DescribeAssociationExecutionTargetsCommandInput}
+ * @returns {@link DescribeAssociationExecutionTargetsCommandOutput}
  * @see {@link DescribeAssociationExecutionTargetsCommandInput} for command's `input` shape.
  * @see {@link DescribeAssociationExecutionTargetsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link AssociationDoesNotExist} (client fault)
+ *  <p>The specified association doesn't exist.</p>
+ *
+ * @throws {@link AssociationExecutionDoesNotExist} (client fault)
+ *  <p>The specified execution ID doesn't exist. Verify the ID number and try again.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAssociationExecutionTargetsCommand extends $Command<
-  DescribeAssociationExecutionTargetsCommandInput,
-  DescribeAssociationExecutionTargetsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAssociationExecutionTargetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAssociationExecutionTargetsCommandInput, DescribeAssociationExecutionTargetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribeAssociationExecutionTargetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAssociationExecutionTargetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAssociationExecutionTargetsResult.filterSensitiveLog,
+export class DescribeAssociationExecutionTargetsCommand extends command<DescribeAssociationExecutionTargetsCommandInput, DescribeAssociationExecutionTargetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAssociationExecutionTargets",
+  DescribeAssociationExecutionTargets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAssociationExecutionTargetsRequest;
+      output: DescribeAssociationExecutionTargetsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeAssociationExecutionTargetsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAssociationExecutionTargetsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAssociationExecutionTargetsCommandOutput> {
-    return deserializeAws_json1_1DescribeAssociationExecutionTargetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAssociationExecutionTargetsCommandInput;
+      output: DescribeAssociationExecutionTargetsCommandOutput;
+    };
+  };
 }

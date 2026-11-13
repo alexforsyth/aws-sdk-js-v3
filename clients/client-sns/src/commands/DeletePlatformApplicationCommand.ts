@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeletePlatformApplicationInput } from "../models/models_0";
-import {
-  deserializeAws_queryDeletePlatformApplicationCommand,
-  serializeAws_queryDeletePlatformApplicationCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePlatformApplicationInput } from "../models/models_0";
+import { DeletePlatformApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePlatformApplicationCommand}.
+ */
 export interface DeletePlatformApplicationCommandInput extends DeletePlatformApplicationInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePlatformApplicationCommand}.
+ */
 export interface DeletePlatformApplicationCommandOutput extends __MetadataBearer {}
 
 /**
@@ -31,71 +32,55 @@ export interface DeletePlatformApplicationCommandOutput extends __MetadataBearer
  * ```javascript
  * import { SNSClient, DeletePlatformApplicationCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, DeletePlatformApplicationCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // DeletePlatformApplicationInput
+ *   PlatformApplicationArn: "STRING_VALUE", // required
+ * };
  * const command = new DeletePlatformApplicationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePlatformApplicationCommandInput - {@link DeletePlatformApplicationCommandInput}
+ * @returns {@link DeletePlatformApplicationCommandOutput}
  * @see {@link DeletePlatformApplicationCommandInput} for command's `input` shape.
  * @see {@link DeletePlatformApplicationCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePlatformApplicationCommand extends $Command<
-  DeletePlatformApplicationCommandInput,
-  DeletePlatformApplicationCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePlatformApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePlatformApplicationCommandInput, DeletePlatformApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "DeletePlatformApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePlatformApplicationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeletePlatformApplicationCommand extends command<DeletePlatformApplicationCommandInput, DeletePlatformApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePlatformApplication",
+  DeletePlatformApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePlatformApplicationInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePlatformApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeletePlatformApplicationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeletePlatformApplicationCommandOutput> {
-    return deserializeAws_queryDeletePlatformApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePlatformApplicationCommandInput;
+      output: DeletePlatformApplicationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetQueueAttributesRequest, GetQueueAttributesResult } from "../models/models_0";
-import {
-  deserializeAws_queryGetQueueAttributesCommand,
-  serializeAws_queryGetQueueAttributesCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SQSClientResolvedConfig } from "../SQSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetQueueAttributesRequest, GetQueueAttributesResult } from "../models/models_0";
+import { GetQueueAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetQueueAttributesCommand}.
+ */
 export interface GetQueueAttributesCommandInput extends GetQueueAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetQueueAttributesCommand}.
+ */
 export interface GetQueueAttributesCommandOutput extends GetQueueAttributesResult, __MetadataBearer {}
 
 /**
@@ -31,68 +32,82 @@ export interface GetQueueAttributesCommandOutput extends GetQueueAttributesResul
  * ```javascript
  * import { SQSClient, GetQueueAttributesCommand } from "@aws-sdk/client-sqs"; // ES Modules import
  * // const { SQSClient, GetQueueAttributesCommand } = require("@aws-sdk/client-sqs"); // CommonJS import
+ * // import type { SQSClientConfig } from "@aws-sdk/client-sqs";
+ * const config = {}; // type is SQSClientConfig
  * const client = new SQSClient(config);
+ * const input = { // GetQueueAttributesRequest
+ *   QueueUrl: "STRING_VALUE", // required
+ *   AttributeNames: [ // AttributeNameList
+ *     "All" || "Policy" || "VisibilityTimeout" || "MaximumMessageSize" || "MessageRetentionPeriod" || "ApproximateNumberOfMessages" || "ApproximateNumberOfMessagesNotVisible" || "CreatedTimestamp" || "LastModifiedTimestamp" || "QueueArn" || "ApproximateNumberOfMessagesDelayed" || "DelaySeconds" || "ReceiveMessageWaitTimeSeconds" || "RedrivePolicy" || "FifoQueue" || "ContentBasedDeduplication" || "KmsMasterKeyId" || "KmsDataKeyReusePeriodSeconds" || "DeduplicationScope" || "FifoThroughputLimit" || "RedriveAllowPolicy" || "SqsManagedSseEnabled",
+ *   ],
+ * };
  * const command = new GetQueueAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // GetQueueAttributesResult
+ * //   Attributes: { // QueueAttributeMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetQueueAttributesCommandInput - {@link GetQueueAttributesCommandInput}
+ * @returns {@link GetQueueAttributesCommandOutput}
  * @see {@link GetQueueAttributesCommandInput} for command's `input` shape.
  * @see {@link GetQueueAttributesCommandOutput} for command's `response` shape.
- * @see {@link SQSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SQSClientResolvedConfig | config} for SQSClient's `config` shape.
  *
+ * @throws {@link InvalidAddress} (client fault)
+ *  <p>The specified ID is invalid.</p>
+ *
+ * @throws {@link InvalidAttributeName} (client fault)
+ *  <p>The specified attribute doesn't exist.</p>
+ *
+ * @throws {@link InvalidSecurity} (client fault)
+ *  <p>The request was not made over HTTPS or did not use SigV4 for signing.</p>
+ *
+ * @throws {@link QueueDoesNotExist} (client fault)
+ *  <p>Ensure that the <code>QueueUrl</code> is correct and that the queue has not been
+ *             deleted.</p>
+ *
+ * @throws {@link RequestThrottled} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Exceeds the permitted request rate for the queue or for the recipient of the
+ *                     request.</p>
+ *             </li>
+ *             <li>
+ *                <p>Ensure that the request rate is within the Amazon SQS limits for
+ *                     sending messages. For more information, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-quotas.html#quotas-requests">Amazon SQS quotas</a> in the <i>Amazon SQS
+ *                         Developer Guide</i>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>Error code 400. Unsupported operation.</p>
+ *
+ * @throws {@link SQSServiceException}
+ * <p>Base exception class for all service exceptions from SQS service.</p>
+ *
+ *
+ * @public
  */
-export class GetQueueAttributesCommand extends $Command<
-  GetQueueAttributesCommandInput,
-  GetQueueAttributesCommandOutput,
-  SQSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetQueueAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SQSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetQueueAttributesCommandInput, GetQueueAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SQSClient";
-    const commandName = "GetQueueAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetQueueAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetQueueAttributesResult.filterSensitiveLog,
+export class GetQueueAttributesCommand extends command<GetQueueAttributesCommandInput, GetQueueAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetQueueAttributes",
+  GetQueueAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetQueueAttributesRequest;
+      output: GetQueueAttributesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetQueueAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetQueueAttributesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetQueueAttributesCommandOutput> {
-    return deserializeAws_queryGetQueueAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetQueueAttributesCommandInput;
+      output: GetQueueAttributesCommandOutput;
+    };
+  };
 }

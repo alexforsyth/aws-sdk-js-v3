@@ -1,103 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DisableSecurityHubRequest, DisableSecurityHubResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DisableSecurityHubCommand,
-  serializeAws_restJson1DisableSecurityHubCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisableSecurityHubRequest, DisableSecurityHubResponse } from "../models/models_2";
+import { DisableSecurityHub$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableSecurityHubCommand}.
+ */
 export interface DisableSecurityHubCommandInput extends DisableSecurityHubRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableSecurityHubCommand}.
+ */
 export interface DisableSecurityHubCommandOutput extends DisableSecurityHubResponse, __MetadataBearer {}
 
 /**
- * <p>Disables Security Hub in your account only in the current Region. To disable Security Hub in all
- *          Regions, you must submit one request per Region where you have enabled Security Hub.</p>
- *          <p>When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated
- *          member accounts.</p>
- *          <p>When you disable Security Hub, your existing findings and insights and any Security Hub configuration
+ * <p>Disables Security Hub CSPM in your account only in the current Amazon Web Services Region. To disable Security Hub CSPM in all
+ *          Regions, you must submit one request per Region where you have enabled Security Hub CSPM.</p>
+ *          <p>You can't disable Security Hub CSPM in an account that is currently the Security Hub CSPM administrator.</p>
+ *          <p>When you disable Security Hub CSPM, your existing findings and insights and any Security Hub CSPM configuration
  *          settings are deleted after 90 days and cannot be recovered. Any standards that were enabled
  *          are disabled, and your administrator and member account associations are removed.</p>
  *          <p>If you want to save your existing findings, you must export them before you disable
- *          Security Hub.</p>
+ *          Security Hub CSPM.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, DisableSecurityHubCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DisableSecurityHubCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = {};
  * const command = new DisableSecurityHubCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisableSecurityHubCommandInput - {@link DisableSecurityHubCommandInput}
+ * @returns {@link DisableSecurityHubCommandOutput}
  * @see {@link DisableSecurityHubCommandInput} for command's `input` shape.
  * @see {@link DisableSecurityHubCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action specified in the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To deactivate Security Hub
+ * ```javascript
+ * // The following example deactivates Security Hub for the current account and Region.
+ * const input = { /* empty *\/ };
+ * const command = new DisableSecurityHubCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisableSecurityHubCommand extends $Command<
-  DisableSecurityHubCommandInput,
-  DisableSecurityHubCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableSecurityHubCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableSecurityHubCommandInput, DisableSecurityHubCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DisableSecurityHubCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableSecurityHubRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisableSecurityHubResponse.filterSensitiveLog,
+export class DisableSecurityHubCommand extends command<DisableSecurityHubCommandInput, DisableSecurityHubCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableSecurityHub",
+  DisableSecurityHub$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableSecurityHubCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisableSecurityHubCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisableSecurityHubCommandOutput> {
-    return deserializeAws_restJson1DisableSecurityHubCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableSecurityHubCommandInput;
+      output: DisableSecurityHubCommandOutput;
+    };
+  };
 }

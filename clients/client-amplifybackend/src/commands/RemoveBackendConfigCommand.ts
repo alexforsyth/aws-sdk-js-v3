@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyBackendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyBackendClient";
-import { RemoveBackendConfigRequest, RemoveBackendConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RemoveBackendConfigCommand,
-  serializeAws_restJson1RemoveBackendConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveBackendConfigRequest, RemoveBackendConfigResponse } from "../models/models_0";
+import { RemoveBackendConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveBackendConfigCommand}.
+ */
 export interface RemoveBackendConfigCommandInput extends RemoveBackendConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveBackendConfigCommand}.
+ */
 export interface RemoveBackendConfigCommandOutput extends RemoveBackendConfigResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface RemoveBackendConfigCommandOutput extends RemoveBackendConfigRes
  * ```javascript
  * import { AmplifyBackendClient, RemoveBackendConfigCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
  * // const { AmplifyBackendClient, RemoveBackendConfigCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
  * const client = new AmplifyBackendClient(config);
+ * const input = { // RemoveBackendConfigRequest
+ *   AppId: "STRING_VALUE", // required
+ * };
  * const command = new RemoveBackendConfigCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveBackendConfigResponse
+ * //   Error: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RemoveBackendConfigCommandInput - {@link RemoveBackendConfigCommandInput}
+ * @returns {@link RemoveBackendConfigCommandOutput}
  * @see {@link RemoveBackendConfigCommandInput} for command's `input` shape.
  * @see {@link RemoveBackendConfigCommandOutput} for command's `response` shape.
- * @see {@link AmplifyBackendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveBackendConfigCommand extends $Command<
-  RemoveBackendConfigCommandInput,
-  RemoveBackendConfigCommandOutput,
-  AmplifyBackendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveBackendConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyBackendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveBackendConfigCommandInput, RemoveBackendConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyBackendClient";
-    const commandName = "RemoveBackendConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveBackendConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveBackendConfigResponse.filterSensitiveLog,
+export class RemoveBackendConfigCommand extends command<RemoveBackendConfigCommandInput, RemoveBackendConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveBackendConfig",
+  RemoveBackendConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveBackendConfigRequest;
+      output: RemoveBackendConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveBackendConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RemoveBackendConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveBackendConfigCommandOutput> {
-    return deserializeAws_restJson1RemoveBackendConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveBackendConfigCommandInput;
+      output: RemoveBackendConfigCommandOutput;
+    };
+  };
 }

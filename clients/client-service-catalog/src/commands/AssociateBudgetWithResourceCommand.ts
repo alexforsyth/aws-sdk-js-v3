@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociateBudgetWithResourceInput, AssociateBudgetWithResourceOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateBudgetWithResourceCommand,
-  serializeAws_json1_1AssociateBudgetWithResourceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateBudgetWithResourceInput, AssociateBudgetWithResourceOutput } from "../models/models_0";
+import { AssociateBudgetWithResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateBudgetWithResourceCommand}.
+ */
 export interface AssociateBudgetWithResourceCommandInput extends AssociateBudgetWithResourceInput {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateBudgetWithResourceCommand}.
+ */
 export interface AssociateBudgetWithResourceCommandOutput extends AssociateBudgetWithResourceOutput, __MetadataBearer {}
 
 /**
@@ -28,71 +29,59 @@ export interface AssociateBudgetWithResourceCommandOutput extends AssociateBudge
  * ```javascript
  * import { ServiceCatalogClient, AssociateBudgetWithResourceCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, AssociateBudgetWithResourceCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // AssociateBudgetWithResourceInput
+ *   BudgetName: "STRING_VALUE", // required
+ *   ResourceId: "STRING_VALUE", // required
+ * };
  * const command = new AssociateBudgetWithResourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateBudgetWithResourceCommandInput - {@link AssociateBudgetWithResourceCommandInput}
+ * @returns {@link AssociateBudgetWithResourceCommandOutput}
  * @see {@link AssociateBudgetWithResourceCommandInput} for command's `input` shape.
  * @see {@link AssociateBudgetWithResourceCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>The specified resource is a duplicate.</p>
+ *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateBudgetWithResourceCommand extends $Command<
-  AssociateBudgetWithResourceCommandInput,
-  AssociateBudgetWithResourceCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateBudgetWithResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateBudgetWithResourceCommandInput, AssociateBudgetWithResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "AssociateBudgetWithResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateBudgetWithResourceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateBudgetWithResourceOutput.filterSensitiveLog,
+export class AssociateBudgetWithResourceCommand extends command<AssociateBudgetWithResourceCommandInput, AssociateBudgetWithResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateBudgetWithResource",
+  AssociateBudgetWithResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateBudgetWithResourceInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateBudgetWithResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateBudgetWithResourceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateBudgetWithResourceCommandOutput> {
-    return deserializeAws_json1_1AssociateBudgetWithResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateBudgetWithResourceCommandInput;
+      output: AssociateBudgetWithResourceCommandOutput;
+    };
+  };
 }

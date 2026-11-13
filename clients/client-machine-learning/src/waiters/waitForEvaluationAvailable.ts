@@ -1,27 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeEvaluationsCommand, DescribeEvaluationsCommandInput } from "../commands/DescribeEvaluationsCommand";
-import { MachineLearningClient } from "../MachineLearningClient";
+import {
+  type DescribeEvaluationsCommandInput,
+  type DescribeEvaluationsCommandOutput,
+  DescribeEvaluationsCommand,
+} from "../commands/DescribeEvaluationsCommand";
+import type { MachineLearningClient } from "../MachineLearningClient";
+import type { MachineLearningServiceException } from "../models/MachineLearningServiceException";
 
-const checkState = async (
-  client: MachineLearningClient,
-  input: DescribeEvaluationsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: MachineLearningClient, input: DescribeEvaluationsCommandInput): Promise<WaiterResult<DescribeEvaluationsCommandOutput | MachineLearningServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeEvaluationsCommand(input));
+    let result: DescribeEvaluationsCommandOutput & any = await client.send(new DescribeEvaluationsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Results);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Results);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "COMPLETED";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "COMPLETED")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -29,13 +38,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Results);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Results);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "FAILED") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -53,7 +62,7 @@ const checkState = async (
 export const waitForEvaluationAvailable = async (
   params: WaiterConfiguration<MachineLearningClient>,
   input: DescribeEvaluationsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeEvaluationsCommandOutput | MachineLearningServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -65,8 +74,8 @@ export const waitForEvaluationAvailable = async (
 export const waitUntilEvaluationAvailable = async (
   params: WaiterConfiguration<MachineLearningClient>,
   input: DescribeEvaluationsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeEvaluationsCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeEvaluationsCommandOutput>;
 };

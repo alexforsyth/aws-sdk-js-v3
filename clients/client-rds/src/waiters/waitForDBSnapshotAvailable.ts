@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeDBSnapshotsCommand, DescribeDBSnapshotsCommandInput } from "../commands/DescribeDBSnapshotsCommand";
-import { RDSClient } from "../RDSClient";
+import {
+  type DescribeDBSnapshotsCommandInput,
+  type DescribeDBSnapshotsCommandOutput,
+  DescribeDBSnapshotsCommand,
+} from "../commands/DescribeDBSnapshotsCommand";
+import type { RDSServiceException } from "../models/RDSServiceException";
+import type { RDSClient } from "../RDSClient";
 
-const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandInput): Promise<WaiterResult<DescribeDBSnapshotsCommandOutput | RDSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeDBSnapshotsCommand(input));
+    let result: DescribeDBSnapshotsCommandOutput & any = await client.send(new DescribeDBSnapshotsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "available";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "available")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,13 +38,13 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleted") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -40,13 +52,13 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleting") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -54,13 +66,13 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "failed") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -68,13 +80,13 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "incompatible-restore") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -82,13 +94,13 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.DBSnapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.DBSnapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "incompatible-parameters") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -106,8 +118,8 @@ const checkState = async (client: RDSClient, input: DescribeDBSnapshotsCommandIn
 export const waitForDBSnapshotAvailable = async (
   params: WaiterConfiguration<RDSClient>,
   input: DescribeDBSnapshotsCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<DescribeDBSnapshotsCommandOutput | RDSServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -118,8 +130,8 @@ export const waitForDBSnapshotAvailable = async (
 export const waitUntilDBSnapshotAvailable = async (
   params: WaiterConfiguration<RDSClient>,
   input: DescribeDBSnapshotsCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 30, maxDelay: 120 };
+): Promise<WaiterResult<DescribeDBSnapshotsCommandOutput>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 1800 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeDBSnapshotsCommandOutput>;
 };

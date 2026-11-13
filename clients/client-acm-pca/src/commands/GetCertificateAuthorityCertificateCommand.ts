@@ -1,109 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMPCAClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMPCAClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetCertificateAuthorityCertificateRequest,
   GetCertificateAuthorityCertificateResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetCertificateAuthorityCertificateCommand,
-  serializeAws_json1_1GetCertificateAuthorityCertificateCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface GetCertificateAuthorityCertificateCommandInput extends GetCertificateAuthorityCertificateRequest {}
-export interface GetCertificateAuthorityCertificateCommandOutput
-  extends GetCertificateAuthorityCertificateResponse,
-    __MetadataBearer {}
+import { GetCertificateAuthorityCertificate$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves the certificate and certificate chain for your private certificate authority
- * 			(CA) or one that has been shared with you. Both the certificate and the chain are base64
- * 			PEM-encoded. The chain does not include the CA certificate. Each certificate in the
- * 			chain signs the one before it. </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCertificateAuthorityCertificateCommand}.
+ */
+export interface GetCertificateAuthorityCertificateCommandInput extends GetCertificateAuthorityCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCertificateAuthorityCertificateCommand}.
+ */
+export interface GetCertificateAuthorityCertificateCommandOutput extends GetCertificateAuthorityCertificateResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves the certificate and certificate chain for your private certificate authority (CA) or one that has been shared with you. Both the certificate and the chain are base64 PEM-encoded. The chain does not include the CA certificate. Each certificate in the chain signs the one before it. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMPCAClient, GetCertificateAuthorityCertificateCommand } from "@aws-sdk/client-acm-pca"; // ES Modules import
  * // const { ACMPCAClient, GetCertificateAuthorityCertificateCommand } = require("@aws-sdk/client-acm-pca"); // CommonJS import
+ * // import type { ACMPCAClientConfig } from "@aws-sdk/client-acm-pca";
+ * const config = {}; // type is ACMPCAClientConfig
  * const client = new ACMPCAClient(config);
+ * const input = { // GetCertificateAuthorityCertificateRequest
+ *   CertificateAuthorityArn: "STRING_VALUE", // required
+ * };
  * const command = new GetCertificateAuthorityCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // GetCertificateAuthorityCertificateResponse
+ * //   Certificate: "STRING_VALUE",
+ * //   CertificateChain: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCertificateAuthorityCertificateCommandInput - {@link GetCertificateAuthorityCertificateCommandInput}
+ * @returns {@link GetCertificateAuthorityCertificateCommandOutput}
  * @see {@link GetCertificateAuthorityCertificateCommandInput} for command's `input` shape.
  * @see {@link GetCertificateAuthorityCertificateCommandOutput} for command's `response` shape.
- * @see {@link ACMPCAClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMPCAClientResolvedConfig | config} for ACMPCAClient's `config` shape.
  *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>The state of the private CA does not allow this action to occur.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource such as a private CA, S3 bucket, certificate, audit report, or policy cannot be found.</p>
+ *
+ * @throws {@link ACMPCAServiceException}
+ * <p>Base exception class for all service exceptions from ACMPCA service.</p>
+ *
+ *
+ * @public
  */
-export class GetCertificateAuthorityCertificateCommand extends $Command<
-  GetCertificateAuthorityCertificateCommandInput,
-  GetCertificateAuthorityCertificateCommandOutput,
-  ACMPCAClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCertificateAuthorityCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMPCAClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCertificateAuthorityCertificateCommandInput, GetCertificateAuthorityCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMPCAClient";
-    const commandName = "GetCertificateAuthorityCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCertificateAuthorityCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCertificateAuthorityCertificateResponse.filterSensitiveLog,
+export class GetCertificateAuthorityCertificateCommand extends command<GetCertificateAuthorityCertificateCommandInput, GetCertificateAuthorityCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCertificateAuthorityCertificate",
+  GetCertificateAuthorityCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCertificateAuthorityCertificateRequest;
+      output: GetCertificateAuthorityCertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetCertificateAuthorityCertificateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCertificateAuthorityCertificateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetCertificateAuthorityCertificateCommandOutput> {
-    return deserializeAws_json1_1GetCertificateAuthorityCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCertificateAuthorityCertificateCommandInput;
+      output: GetCertificateAuthorityCertificateCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { GetIntegrationRequest, GetIntegrationResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetIntegrationCommand,
-  serializeAws_restJson1GetIntegrationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIntegrationRequest, GetIntegrationResult } from "../models/models_0";
+import { GetIntegration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIntegrationCommand}.
+ */
 export interface GetIntegrationCommandInput extends GetIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIntegrationCommand}.
+ */
 export interface GetIntegrationCommandOutput extends GetIntegrationResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface GetIntegrationCommandOutput extends GetIntegrationResult, __Met
  * ```javascript
  * import { ApiGatewayV2Client, GetIntegrationCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, GetIntegrationCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // GetIntegrationRequest
+ *   ApiId: "STRING_VALUE", // required
+ *   IntegrationId: "STRING_VALUE", // required
+ * };
  * const command = new GetIntegrationCommand(input);
  * const response = await client.send(command);
+ * // { // GetIntegrationResult
+ * //   ApiGatewayManaged: true || false,
+ * //   ConnectionId: "STRING_VALUE",
+ * //   ConnectionType: "INTERNET" || "VPC_LINK",
+ * //   ContentHandlingStrategy: "CONVERT_TO_BINARY" || "CONVERT_TO_TEXT",
+ * //   CredentialsArn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   IntegrationId: "STRING_VALUE",
+ * //   IntegrationMethod: "STRING_VALUE",
+ * //   IntegrationResponseSelectionExpression: "STRING_VALUE",
+ * //   IntegrationSubtype: "STRING_VALUE",
+ * //   IntegrationType: "AWS" || "HTTP" || "MOCK" || "HTTP_PROXY" || "AWS_PROXY",
+ * //   IntegrationUri: "STRING_VALUE",
+ * //   PassthroughBehavior: "WHEN_NO_MATCH" || "NEVER" || "WHEN_NO_TEMPLATES",
+ * //   PayloadFormatVersion: "STRING_VALUE",
+ * //   RequestParameters: { // IntegrationParameters
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   RequestTemplates: { // TemplateMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   ResponseParameters: { // ResponseParameters
+ * //     "<keys>": {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   TemplateSelectionExpression: "STRING_VALUE",
+ * //   TimeoutInMillis: Number("int"),
+ * //   TlsConfig: { // TlsConfig
+ * //     ServerNameToVerify: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetIntegrationCommandInput - {@link GetIntegrationCommandInput}
+ * @returns {@link GetIntegrationCommandOutput}
  * @see {@link GetIntegrationCommandInput} for command's `input` shape.
  * @see {@link GetIntegrationCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetIntegrationCommand extends $Command<
-  GetIntegrationCommandInput,
-  GetIntegrationCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIntegrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIntegrationCommandInput, GetIntegrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "GetIntegrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIntegrationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIntegrationResult.filterSensitiveLog,
+export class GetIntegrationCommand extends command<GetIntegrationCommandInput, GetIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIntegration",
+  GetIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIntegrationRequest;
+      output: GetIntegrationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIntegrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIntegrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIntegrationCommandOutput> {
-    return deserializeAws_restJson1GetIntegrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIntegrationCommandInput;
+      output: GetIntegrationCommandOutput;
+    };
+  };
 }

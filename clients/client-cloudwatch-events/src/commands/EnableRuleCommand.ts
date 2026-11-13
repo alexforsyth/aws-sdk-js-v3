@@ -1,29 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { EnableRuleRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1EnableRuleCommand,
-  serializeAws_json1_1EnableRuleCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableRuleRequest } from "../models/models_0";
+import { EnableRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableRuleCommand}.
+ */
 export interface EnableRuleCommandInput extends EnableRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableRuleCommand}.
+ */
 export interface EnableRuleCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Enables the specified rule. If the rule does not exist, the operation fails.</p>
- *
  *          <p>When you enable a rule, incoming events might not immediately start matching to a newly
  *       enabled rule. Allow a short period of time for changes to take effect.</p>
  * @example
@@ -31,68 +31,63 @@ export interface EnableRuleCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { CloudWatchEventsClient, EnableRuleCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, EnableRuleCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // EnableRuleRequest
+ *   Name: "STRING_VALUE", // required
+ *   EventBusName: "STRING_VALUE",
+ * };
  * const command = new EnableRuleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param EnableRuleCommandInput - {@link EnableRuleCommandInput}
+ * @returns {@link EnableRuleCommandOutput}
  * @see {@link EnableRuleCommandInput} for command's `input` shape.
  * @see {@link EnableRuleCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ManagedRuleException} (client fault)
+ *  <p>This rule was created by an Amazon Web Services service on behalf of your account. It is managed by that
+ *       service. If you see this error in response to <code>DeleteRule</code> or
+ *         <code>RemoveTargets</code>, you can use the <code>Force</code> parameter in those calls to
+ *       delete the rule or remove targets from the rule. You cannot modify these managed rules by
+ *       using <code>DisableRule</code>, <code>EnableRule</code>, <code>PutTargets</code>,
+ *         <code>PutRule</code>, <code>TagResource</code>, or <code>UntagResource</code>. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class EnableRuleCommand extends $Command<
-  EnableRuleCommandInput,
-  EnableRuleCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableRuleCommandInput, EnableRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "EnableRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class EnableRuleCommand extends command<EnableRuleCommandInput, EnableRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableRule",
+  EnableRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableRuleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EnableRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1EnableRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<EnableRuleCommandOutput> {
-    return deserializeAws_json1_1EnableRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableRuleCommandInput;
+      output: EnableRuleCommandOutput;
+    };
+  };
 }

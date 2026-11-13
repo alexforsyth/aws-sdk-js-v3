@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ModifyTransitGatewayPrefixListReferenceRequest,
   ModifyTransitGatewayPrefixListReferenceResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyTransitGatewayPrefixListReferenceCommand,
-  serializeAws_ec2ModifyTransitGatewayPrefixListReferenceCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_7";
+import { ModifyTransitGatewayPrefixListReference$ } from "../schemas/schemas_0";
 
-export interface ModifyTransitGatewayPrefixListReferenceCommandInput
-  extends ModifyTransitGatewayPrefixListReferenceRequest {}
-export interface ModifyTransitGatewayPrefixListReferenceCommandOutput
-  extends ModifyTransitGatewayPrefixListReferenceResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyTransitGatewayPrefixListReferenceCommand}.
+ */
+export interface ModifyTransitGatewayPrefixListReferenceCommandInput extends ModifyTransitGatewayPrefixListReferenceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyTransitGatewayPrefixListReferenceCommand}.
+ */
+export interface ModifyTransitGatewayPrefixListReferenceCommandOutput extends ModifyTransitGatewayPrefixListReferenceResult, __MetadataBearer {}
 
 /**
  * <p>Modifies a reference (route) to a prefix list in a specified transit gateway route table.</p>
@@ -34,77 +32,62 @@ export interface ModifyTransitGatewayPrefixListReferenceCommandOutput
  * ```javascript
  * import { EC2Client, ModifyTransitGatewayPrefixListReferenceCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyTransitGatewayPrefixListReferenceCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyTransitGatewayPrefixListReferenceRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   PrefixListId: "STRING_VALUE", // required
+ *   TransitGatewayAttachmentId: "STRING_VALUE",
+ *   Blackhole: true || false,
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyTransitGatewayPrefixListReferenceCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyTransitGatewayPrefixListReferenceResult
+ * //   TransitGatewayPrefixListReference: { // TransitGatewayPrefixListReference
+ * //     TransitGatewayRouteTableId: "STRING_VALUE",
+ * //     PrefixListId: "STRING_VALUE",
+ * //     PrefixListOwnerId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "modifying" || "deleting",
+ * //     Blackhole: true || false,
+ * //     TransitGatewayAttachment: { // TransitGatewayPrefixListAttachment
+ * //       TransitGatewayAttachmentId: "STRING_VALUE",
+ * //       ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //       ResourceId: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyTransitGatewayPrefixListReferenceCommandInput - {@link ModifyTransitGatewayPrefixListReferenceCommandInput}
+ * @returns {@link ModifyTransitGatewayPrefixListReferenceCommandOutput}
  * @see {@link ModifyTransitGatewayPrefixListReferenceCommandInput} for command's `input` shape.
  * @see {@link ModifyTransitGatewayPrefixListReferenceCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyTransitGatewayPrefixListReferenceCommand extends $Command<
-  ModifyTransitGatewayPrefixListReferenceCommandInput,
-  ModifyTransitGatewayPrefixListReferenceCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyTransitGatewayPrefixListReferenceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ModifyTransitGatewayPrefixListReferenceCommandInput,
-    ModifyTransitGatewayPrefixListReferenceCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyTransitGatewayPrefixListReferenceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyTransitGatewayPrefixListReferenceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyTransitGatewayPrefixListReferenceResult.filterSensitiveLog,
+export class ModifyTransitGatewayPrefixListReferenceCommand extends command<ModifyTransitGatewayPrefixListReferenceCommandInput, ModifyTransitGatewayPrefixListReferenceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyTransitGatewayPrefixListReference",
+  ModifyTransitGatewayPrefixListReference$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyTransitGatewayPrefixListReferenceRequest;
+      output: ModifyTransitGatewayPrefixListReferenceResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ModifyTransitGatewayPrefixListReferenceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyTransitGatewayPrefixListReferenceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyTransitGatewayPrefixListReferenceCommandOutput> {
-    return deserializeAws_ec2ModifyTransitGatewayPrefixListReferenceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyTransitGatewayPrefixListReferenceCommandInput;
+      output: ModifyTransitGatewayPrefixListReferenceCommandOutput;
+    };
+  };
 }

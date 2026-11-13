@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeTransitGatewayConnectsCommand,
   DescribeTransitGatewayConnectsCommandInput,
   DescribeTransitGatewayConnectsCommandOutput,
 } from "../commands/DescribeTransitGatewayConnectsCommand";
-import { EC2 } from "../EC2";
 import { EC2Client } from "../EC2Client";
-import { EC2PaginationConfiguration } from "./Interfaces";
+import type { EC2PaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: EC2Client,
-  input: DescribeTransitGatewayConnectsCommandInput,
-  ...args: any
-): Promise<DescribeTransitGatewayConnectsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeTransitGatewayConnectsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: EC2,
-  input: DescribeTransitGatewayConnectsCommandInput,
-  ...args: any
-): Promise<DescribeTransitGatewayConnectsCommandOutput> => {
-  // @ts-ignore
-  return await client.describeTransitGatewayConnects(input, ...args);
-};
-export async function* paginateDescribeTransitGatewayConnects(
+export const paginateDescribeTransitGatewayConnects: (
   config: EC2PaginationConfiguration,
   input: DescribeTransitGatewayConnectsCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeTransitGatewayConnectsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeTransitGatewayConnectsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof EC2) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof EC2Client) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected EC2 | EC2Client");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeTransitGatewayConnectsCommandOutput> = createPaginator<
+  EC2PaginationConfiguration,
+  DescribeTransitGatewayConnectsCommandInput,
+  DescribeTransitGatewayConnectsCommandOutput
+>(EC2Client, DescribeTransitGatewayConnectsCommand, "NextToken", "NextToken", "MaxResults");

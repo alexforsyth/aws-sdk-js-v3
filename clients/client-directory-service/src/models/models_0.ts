@@ -1,317 +1,176 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  CaEnrollmentPolicyStatus,
+  CertificateState,
+  CertificateType,
+  ClientAuthenticationStatus,
+  ClientAuthenticationType,
+  DataAccessStatus,
+  DirectoryConfigurationStatus,
+  DirectoryEdition,
+  DirectorySize,
+  DirectoryStage,
+  DirectoryType,
+  DomainControllerStatus,
+  HybridUpdateType,
+  IpRouteStatusMsg,
+  LDAPSStatus,
+  LDAPSType,
+  NetworkType,
+  OSVersion,
+  RadiusAuthenticationProtocol,
+  RadiusStatus,
+  RegionType,
+  ReplicationScope,
+  SchemaExtensionStatus,
+  SelectiveAuth,
+  ShareMethod,
+  ShareStatus,
+  SnapshotStatus,
+  SnapshotType,
+  TargetType,
+  TopicStatus,
+  TrustDirection,
+  TrustState,
+  TrustType,
+  UpdateStatus,
+  UpdateType,
+} from "./enums";
 
+/**
+ * @public
+ */
 export interface AcceptSharedDirectoryRequest {
   /**
    * <p>Identifier of the shared directory in the directory consumer account. This identifier is
    *       different for each directory owner account. </p>
+   * @public
    */
   SharedDirectoryId: string | undefined;
-}
-
-export namespace AcceptSharedDirectoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AcceptSharedDirectoryRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ShareMethod {
-  HANDSHAKE = "HANDSHAKE",
-  ORGANIZATIONS = "ORGANIZATIONS",
-}
-
-export enum ShareStatus {
-  DELETED = "Deleted",
-  DELETING = "Deleting",
-  PENDING_ACCEPTANCE = "PendingAcceptance",
-  REJECTED = "Rejected",
-  REJECTING = "Rejecting",
-  REJECT_FAILED = "RejectFailed",
-  SHARED = "Shared",
-  SHARE_FAILED = "ShareFailed",
-  SHARING = "Sharing",
 }
 
 /**
  * <p>Details about the shared directory in the directory owner account for which the share
  *       request in the directory consumer account has been accepted.</p>
+ * @public
  */
 export interface SharedDirectory {
   /**
    * <p>Identifier of the directory owner account, which contains the directory that has been
    *       shared to the consumer account.</p>
+   * @public
    */
-  OwnerAccountId?: string;
+  OwnerAccountId?: string | undefined;
 
   /**
    * <p>Identifier of the directory in the directory owner account. </p>
+   * @public
    */
-  OwnerDirectoryId?: string;
+  OwnerDirectoryId?: string | undefined;
 
   /**
    * <p>The method used when sharing a directory to determine whether the directory should be
-   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
-   *       sending a shared directory request (<code>HANDSHAKE</code>).</p>
+   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account
+   *       by sending a shared directory request (<code>HANDSHAKE</code>).</p>
+   * @public
    */
-  ShareMethod?: ShareMethod | string;
+  ShareMethod?: ShareMethod | undefined;
 
   /**
    * <p>Identifier of the directory consumer account that has access to the shared directory
    *         (<code>OwnerDirectoryId</code>) in the directory owner account.</p>
+   * @public
    */
-  SharedAccountId?: string;
+  SharedAccountId?: string | undefined;
 
   /**
    * <p>Identifier of the shared directory in the directory consumer account. This identifier is
    *       different for each directory owner account.</p>
+   * @public
    */
-  SharedDirectoryId?: string;
+  SharedDirectoryId?: string | undefined;
 
   /**
    * <p>Current directory status of the shared Managed Microsoft AD directory.</p>
+   * @public
    */
-  ShareStatus?: ShareStatus | string;
+  ShareStatus?: ShareStatus | undefined;
 
   /**
    * <p>A directory share request that is sent by the directory owner to the directory consumer.
    *       The request includes a typed message to help the directory consumer administrator determine
    *       whether to approve or reject the share invitation.</p>
+   * @public
    */
-  ShareNotes?: string;
+  ShareNotes?: string | undefined;
 
   /**
    * <p>The date and time that the shared directory was created.</p>
+   * @public
    */
-  CreatedDateTime?: Date;
+  CreatedDateTime?: Date | undefined;
 
   /**
    * <p>The date and time that the shared directory was last updated.</p>
+   * @public
    */
-  LastUpdatedDateTime?: Date;
+  LastUpdatedDateTime?: Date | undefined;
 }
 
-export namespace SharedDirectory {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SharedDirectory): any => ({
-    ...obj,
-    ...(obj.ShareNotes && { ShareNotes: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface AcceptSharedDirectoryResult {
   /**
    * <p>The shared directory in the directory consumer account.</p>
+   * @public
    */
-  SharedDirectory?: SharedDirectory;
-}
-
-export namespace AcceptSharedDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AcceptSharedDirectoryResult): any => ({
-    ...obj,
-    ...(obj.SharedDirectory && { SharedDirectory: SharedDirectory.filterSensitiveLog(obj.SharedDirectory) }),
-  });
+  SharedDirectory?: SharedDirectory | undefined;
 }
 
 /**
- * <p>A client exception has occurred.</p>
- */
-export interface ClientException extends __SmithyException, $MetadataBearer {
-  name: "ClientException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ClientException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClientException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified directory has already been shared with this Amazon Web Services account.</p>
- */
-export interface DirectoryAlreadySharedException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryAlreadySharedException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryAlreadySharedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryAlreadySharedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified entity could not be found.</p>
- */
-export interface EntityDoesNotExistException extends __SmithyException, $MetadataBearer {
-  name: "EntityDoesNotExistException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace EntityDoesNotExistException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EntityDoesNotExistException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more parameters are not valid.</p>
- */
-export interface InvalidParameterException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidParameterException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An exception has occurred in Directory Service.</p>
- */
-export interface ServiceException extends __SmithyException, $MetadataBearer {
-  name: "ServiceException";
-  $fault: "server";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace ServiceException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Client authentication is not available in this region at this time.</p>
- */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>IP address block. This is often the address block of the DNS server used for your
- *          self-managed domain. </p>
+ * <p>Contains the IP address block. This is often the address block of the DNS server used
+ *          for your self-managed domain. </p>
+ * @public
  */
 export interface IpRoute {
   /**
-   * <p>IP address block using CIDR format, for example 10.0.0.0/24. This is often the
-   *          address block of the DNS server used for your self-managed domain. For a single IP address
-   *          use a CIDR address block with /32. For example 10.0.0.0/32.</p>
+   * <p>IP address block in CIDR format, such as 10.0.0.0/24. This is often the address block of
+   *          the DNS server used for your self-managed domain. For a single IP address, use a CIDR
+   *          address block with /32. For example, 10.0.0.0/32.</p>
+   * @public
    */
-  CidrIp?: string;
+  CidrIp?: string | undefined;
+
+  /**
+   * <p>IPv6 address block in CIDR format, such as 2001:db8::/32. This is often the address
+   *          block of the DNS server used for your self-managed domain. For a single IPv6 address, use a
+   *          CIDR address block with /128. For example, 2001:db8::1/128.</p>
+   * @public
+   */
+  CidrIpv6?: string | undefined;
 
   /**
    * <p>Description of the address block.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace IpRoute {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IpRoute): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddIpRoutesRequest {
   /**
    * <p>Identifier (ID) of the directory to which to add the address block.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>IP address blocks, using CIDR format, of the traffic to route. This is often the IP
    *          address block of the DNS server used for your self-managed domain.</p>
+   * @public
    */
   IpRoutes: IpRoute[] | undefined;
 
@@ -322,60 +181,73 @@ export interface AddIpRoutesRequest {
    *          <p>Inbound:</p>
    *          <ul>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
-   *                0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: Managed Microsoft AD VPC
+   *                IPv4 CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
-   *                0.0.0.0/0</p>
+   *                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: Managed Microsoft AD VPC
+   *                IPv4 CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p>
+   *                <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p>
+   *                <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p>
+   *                <p>Type: LDAP, Protocol: TCP, Range: 389, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
    *             </li>
    *             <li>
-   *                <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p>
+   *                <p>Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft AD VPC IPv4
+   *                CIDR</p>
    *             </li>
    *          </ul>
-   *
    *          <p></p>
    *          <p>Outbound:</p>
    *          <ul>
@@ -385,806 +257,658 @@ export interface AddIpRoutesRequest {
    *          </ul>
    *          <p>These security rules impact an internal network interface that is not exposed
    *          publicly.</p>
+   * @public
    */
-  UpdateSecurityGroupForDirectoryControllers?: boolean;
+  UpdateSecurityGroupForDirectoryControllers?: boolean | undefined;
 }
 
-export namespace AddIpRoutesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddIpRoutesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddIpRoutesResult {}
 
-export namespace AddIpRoutesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddIpRoutesResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The specified directory is unavailable or could not be found.</p>
- */
-export interface DirectoryUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryUnavailableException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified entity already exists.</p>
- */
-export interface EntityAlreadyExistsException extends __SmithyException, $MetadataBearer {
-  name: "EntityAlreadyExistsException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace EntityAlreadyExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EntityAlreadyExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The maximum allowed number of IP addresses was exceeded. The default limit is 100 IP
- *          address blocks.</p>
- */
-export interface IpRouteLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "IpRouteLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace IpRouteLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IpRouteLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>
+ * <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
+ * @public
  */
 export interface DirectoryVpcSettings {
   /**
    * <p>The identifier of the VPC in which to create the directory.</p>
+   * @public
    */
   VpcId: string | undefined;
 
   /**
    * <p>The identifiers of the subnets for the directory servers. The two subnets must be in
-   *       different Availability Zones. Directory Service creates a directory server and a DNS
-   *       server in each of these subnets.</p>
+   *       different Availability Zones. Directory Service creates a directory server and a DNS server in each of
+   *       these subnets.</p>
+   * @public
    */
   SubnetIds: string[] | undefined;
 }
 
-export namespace DirectoryVpcSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryVpcSettings): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddRegionRequest {
   /**
    * <p>The identifier of the directory to which you want to add Region replication.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The name of the Region where you want to add domain controllers for replication. For
    *       example, <code>us-east-1</code>.</p>
+   * @public
    */
   RegionName: string | undefined;
 
   /**
-   * <p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>
+   * <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
+   * @public
    */
   VPCSettings: DirectoryVpcSettings | undefined;
 }
 
-export namespace AddRegionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddRegionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddRegionResult {}
-
-export namespace AddRegionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddRegionResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The Region you specified is the same Region where the Managed Microsoft AD directory
- *       was created. Specify a different Region and try again.</p>
- */
-export interface DirectoryAlreadyInRegionException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryAlreadyInRegionException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryAlreadyInRegionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryAlreadyInRegionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified directory does not exist in the system.</p>
- */
-export interface DirectoryDoesNotExistException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryDoesNotExistException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryDoesNotExistException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryDoesNotExistException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have reached the limit for maximum number of simultaneous Region replications per
- *       directory.</p>
- */
-export interface RegionLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "RegionLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace RegionLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegionLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The operation is not supported.</p>
- */
-export interface UnsupportedOperationException extends __SmithyException, $MetadataBearer {
-  name: "UnsupportedOperationException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace UnsupportedOperationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnsupportedOperationException): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>Metadata assigned to a directory consisting of a key-value pair.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>Required name of the tag. The string value can be Unicode characters and cannot be
    *       prefixed with "aws:". The string can contain only the set of Unicode letters, digits,
-   *       white-space, '_', '.', '/', '=', '+', '-' (Java regex:
-   *       "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").</p>
+   *       white-space, '_', '.', '/', '=', '+', '-', ':', '@'(Java regex:
+   *       "^([\\p\{L\}\\p\{Z\}\\p\{N\}_.:/=+\\-]*)$").</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>The optional value of the tag. The string value can be Unicode characters. The string
-   *       can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-'
-   *       (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").</p>
+   *       can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-', ':', '@'
+   *       (Java regex: "^([\\p\{L\}\\p\{Z\}\\p\{N\}_.:/=+\\-]*)$").</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddTagsToResourceRequest {
   /**
    * <p>Identifier (ID) for the directory to which to add the tag.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The tags to be assigned to the directory.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
-export namespace AddTagsToResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddTagsToResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddTagsToResourceResult {}
 
-export namespace AddTagsToResourceResult {
+/**
+ * <p>Contains detailed information about a directory assessment, including configuration
+ *             parameters, status, and validation results.</p>
+ * @public
+ */
+export interface Assessment {
   /**
-   * @internal
+   * <p>The unique identifier of the directory assessment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AddTagsToResourceResult): any => ({
-    ...obj,
-  });
+  AssessmentId?: string | undefined;
+
+  /**
+   * <p>The identifier of the directory associated with this assessment.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The fully qualified domain name (FQDN) of the Active Directory domain being
+   *             assessed.</p>
+   * @public
+   */
+  DnsName?: string | undefined;
+
+  /**
+   * <p>The date and time when the assessment was initiated.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The date and time when the assessment status was last updated.</p>
+   * @public
+   */
+  LastUpdateDateTime?: Date | undefined;
+
+  /**
+   * <p>The current status of the assessment. Valid values include <code>SUCCESS</code>,
+   *                 <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>
+   * @public
+   */
+  Status?: string | undefined;
+
+  /**
+   * <p>A detailed status code providing additional information about the assessment
+   *             state.</p>
+   * @public
+   */
+  StatusCode?: string | undefined;
+
+  /**
+   * <p>A human-readable description of the current assessment status, including any error
+   *             details or progress information.</p>
+   * @public
+   */
+  StatusReason?: string | undefined;
+
+  /**
+   * <p>The IP addresses of the DNS servers or domain controllers in your self-managed AD
+   *             environment.</p>
+   * @public
+   */
+  CustomerDnsIps?: string[] | undefined;
+
+  /**
+   * <p>Contains Amazon VPC information for the <code>StartADAssessment</code> operation. </p>
+   * @public
+   */
+  VpcId?: string | undefined;
+
+  /**
+   * <p>A list of subnet identifiers in the Amazon VPC in which the hybrid directory is
+   *             created.</p>
+   * @public
+   */
+  SubnetIds?: string[] | undefined;
+
+  /**
+   * <p>The security groups identifiers attached to the network interfaces.</p>
+   * @public
+   */
+  SecurityGroupIds?: string[] | undefined;
+
+  /**
+   * <p>The identifiers of the self-managed AD instances used to perform the
+   *             assessment.</p>
+   * @public
+   */
+  SelfManagedInstanceIds?: string[] | undefined;
+
+  /**
+   * <p>The type of assessment report generated. Valid values are <code>CUSTOMER</code> and
+   *                 <code>SYSTEM</code>.</p>
+   * @public
+   */
+  ReportType?: string | undefined;
+
+  /**
+   * <p>The version of the assessment framework used to evaluate your self-managed AD
+   *             environment.</p>
+   * @public
+   */
+  Version?: string | undefined;
 }
 
 /**
- * <p>The maximum allowed number of tags was exceeded.</p>
+ * <p>Contains configuration parameters required to perform a directory assessment.</p>
+ * @public
  */
-export interface TagLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "TagLimitExceededException";
-  $fault: "client";
+export interface AssessmentConfiguration {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>A list of IP addresses for the DNS servers or domain controllers in your self-managed
+   *             AD that are tested during the assessment.</p>
+   * @public
    */
-  Message?: string;
+  CustomerDnsIps: string[] | undefined;
 
   /**
-   * <p>The Amazon Web Services request identifier.</p>
+   * <p>The fully qualified domain name (FQDN) of the self-managed AD domain to assess.</p>
+   * @public
    */
-  RequestId?: string;
+  DnsName: string | undefined;
+
+  /**
+   * <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
+   * @public
+   */
+  VpcSettings: DirectoryVpcSettings | undefined;
+
+  /**
+   * <p>The identifiers of the self-managed instances with SSM that are used to perform
+   *             connectivity and validation tests.</p>
+   * @public
+   */
+  InstanceIds: string[] | undefined;
+
+  /**
+   * <p>By default, the service attaches a security group to allow network access to the
+   *             self-managed nodes in your Amazon VPC. You can optionally supply your own security group that
+   *             allows network traffic to and from your self-managed domain controllers outside of your
+   *             Amazon VPC. </p>
+   * @public
+   */
+  SecurityGroupIds?: string[] | undefined;
 }
 
-export namespace TagLimitExceededException {
+/**
+ * <p>Contains information about a specific validation test performed during a directory
+ *             assessment.</p>
+ * @public
+ */
+export interface AssessmentValidation {
   /**
-   * @internal
+   * <p>The category of the validation test.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TagLimitExceededException): any => ({
-    ...obj,
-  });
+  Category?: string | undefined;
+
+  /**
+   * <p>The name of the specific validation test performed within the category.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The result status of the validation test. Valid values include <code>SUCCESS</code>,
+   *                 <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>
+   * @public
+   */
+  Status?: string | undefined;
+
+  /**
+   * <p>A detailed status code providing additional information about the validation
+   *             result.</p>
+   * @public
+   */
+  StatusCode?: string | undefined;
+
+  /**
+   * <p>A human-readable description of the validation result, including any error details or
+   *             recommendations.</p>
+   * @public
+   */
+  StatusReason?: string | undefined;
+
+  /**
+   * <p>The date and time when the validation test was started.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The date and time when the validation test was completed or last updated.</p>
+   * @public
+   */
+  LastUpdateDateTime?: Date | undefined;
+}
+
+/**
+ * <p>Contains the results of validation tests performed against a specific domain
+ *             controller during a directory assessment.</p>
+ * @public
+ */
+export interface AssessmentReport {
+  /**
+   * <p>The IP address of the domain controller that was tested during the assessment.</p>
+   * @public
+   */
+  DomainControllerIp?: string | undefined;
+
+  /**
+   * <p>A list of validation results for different test categories performed against this
+   *             domain controller.</p>
+   * @public
+   */
+  Validations?: AssessmentValidation[] | undefined;
+}
+
+/**
+ * <p>Contains summary information about a directory assessment, providing a high-level
+ *             overview without detailed validation results.</p>
+ * @public
+ */
+export interface AssessmentSummary {
+  /**
+   * <p>The unique identifier of the directory assessment.</p>
+   * @public
+   */
+  AssessmentId?: string | undefined;
+
+  /**
+   * <p>The identifier of the directory associated with this assessment.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The fully qualified domain name (FQDN) of the Active Directory domain being
+   *             assessed.</p>
+   * @public
+   */
+  DnsName?: string | undefined;
+
+  /**
+   * <p>The date and time when the assessment was initiated.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The date and time when the assessment status was last updated.</p>
+   * @public
+   */
+  LastUpdateDateTime?: Date | undefined;
+
+  /**
+   * <p>The current status of the assessment. Valid values include <code>SUCCESS</code>,
+   *                 <code>FAILED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>
+   * @public
+   */
+  Status?: string | undefined;
+
+  /**
+   * <p>The IP addresses of the DNS servers or domain controllers in your self-managed AD
+   *             environment.</p>
+   * @public
+   */
+  CustomerDnsIps?: string[] | undefined;
+
+  /**
+   * <p>The type of assessment report generated. Valid values include <code>CUSTOMER</code>
+   *             and <code>SYSTEM</code>.</p>
+   * @public
+   */
+  ReportType?: string | undefined;
 }
 
 /**
  * <p>Represents a named directory attribute.</p>
+ * @public
  */
 export interface Attribute {
   /**
    * <p>The name of the attribute.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The value of the attribute.</p>
+   * @public
    */
-  Value?: string;
-}
-
-export namespace Attribute {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Attribute): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
- * <p>An authentication error occurred.</p>
+ * @public
  */
-export interface AuthenticationFailedException extends __SmithyException, $MetadataBearer {
-  name: "AuthenticationFailedException";
-  $fault: "client";
-  /**
-   * <p>The textual message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The identifier of the request that caused the exception.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace AuthenticationFailedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthenticationFailedException): any => ({
-    ...obj,
-  });
-}
-
 export interface CancelSchemaExtensionRequest {
   /**
    * <p>The identifier of the directory whose schema extension will be canceled.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The identifier of the schema extension that will be canceled.</p>
+   * @public
    */
   SchemaExtensionId: string | undefined;
 }
 
-export namespace CancelSchemaExtensionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelSchemaExtensionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelSchemaExtensionResult {}
 
-export namespace CancelSchemaExtensionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelSchemaExtensionResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. </p>
+ * <p>Contains information about the client certificate authentication settings for the
+ *         <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. </p>
+ * @public
  */
 export interface ClientCertAuthSettings {
   /**
-   * <p>Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.</p>
+   * <p>Specifies the URL of the default OCSP server used to check for revocation status. A
+   *       secondary value to any OCSP address found in the AIA extension of the user certificate.</p>
+   * @public
    */
-  OCSPUrl?: string;
-}
-
-export namespace ClientCertAuthSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClientCertAuthSettings): any => ({
-    ...obj,
-  });
-}
-
-export enum CertificateState {
-  DEREGISTERED = "Deregistered",
-  DEREGISTERING = "Deregistering",
-  DEREGISTER_FAILED = "DeregisterFailed",
-  REGISTERED = "Registered",
-  REGISTERING = "Registering",
-  REGISTER_FAILED = "RegisterFailed",
-}
-
-export enum CertificateType {
-  CLIENT_CERT_AUTH = "ClientCertAuth",
-  CLIENT_LDAPS = "ClientLDAPS",
+  OCSPUrl?: string | undefined;
 }
 
 /**
  * <p>Information about the certificate.</p>
+ * @public
  */
 export interface Certificate {
   /**
    * <p>The identifier of the certificate.</p>
+   * @public
    */
-  CertificateId?: string;
+  CertificateId?: string | undefined;
 
   /**
    * <p>The state of the certificate.</p>
+   * @public
    */
-  State?: CertificateState | string;
+  State?: CertificateState | undefined;
 
   /**
    * <p>Describes a state change for the certificate.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The common name for the certificate.</p>
+   * @public
    */
-  CommonName?: string;
+  CommonName?: string | undefined;
 
   /**
    * <p>The date and time that the certificate was registered.</p>
+   * @public
    */
-  RegisteredDateTime?: Date;
+  RegisteredDateTime?: Date | undefined;
 
   /**
    * <p>The date and time when the certificate will expire.</p>
+   * @public
    */
-  ExpiryDateTime?: Date;
+  ExpiryDateTime?: Date | undefined;
 
   /**
-   * <p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>
+   * <p>The function that the registered certificate performs. Valid values include
+   *         <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is
+   *         <code>ClientLDAPS</code>.</p>
+   * @public
    */
-  Type?: CertificateType | string;
+  Type?: CertificateType | undefined;
 
   /**
-   * <p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>
+   * <p>A <code>ClientCertAuthSettings</code> object that contains client certificate
+   *       authentication settings.</p>
+   * @public
    */
-  ClientCertAuthSettings?: ClientCertAuthSettings;
-}
-
-export namespace Certificate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Certificate): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The certificate has already been registered into the system.</p>
- */
-export interface CertificateAlreadyExistsException extends __SmithyException, $MetadataBearer {
-  name: "CertificateAlreadyExistsException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CertificateAlreadyExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateAlreadyExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The certificate is not present in the system for describe or deregister activities.</p>
- */
-export interface CertificateDoesNotExistException extends __SmithyException, $MetadataBearer {
-  name: "CertificateDoesNotExistException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CertificateDoesNotExistException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateDoesNotExistException): any => ({
-    ...obj,
-  });
+  ClientCertAuthSettings?: ClientCertAuthSettings | undefined;
 }
 
 /**
  * <p>Contains general information about a certificate.</p>
+ * @public
  */
 export interface CertificateInfo {
   /**
    * <p>The identifier of the certificate.</p>
+   * @public
    */
-  CertificateId?: string;
+  CertificateId?: string | undefined;
 
   /**
    * <p>The common name for the certificate.</p>
+   * @public
    */
-  CommonName?: string;
+  CommonName?: string | undefined;
 
   /**
    * <p>The state of the certificate.</p>
+   * @public
    */
-  State?: CertificateState | string;
+  State?: CertificateState | undefined;
 
   /**
    * <p>The date and time when the certificate will expire.</p>
+   * @public
    */
-  ExpiryDateTime?: Date;
+  ExpiryDateTime?: Date | undefined;
 
   /**
-   * <p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>
+   * <p>The function that the registered certificate performs. Valid values include
+   *         <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is
+   *         <code>ClientLDAPS</code>.</p>
+   * @public
    */
-  Type?: CertificateType | string;
-}
-
-export namespace CertificateInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The certificate is being used for the LDAP security connection and cannot be removed
- *       without disabling LDAP security.</p>
- */
-export interface CertificateInUseException extends __SmithyException, $MetadataBearer {
-  name: "CertificateInUseException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CertificateInUseException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateInUseException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The certificate could not be added because the certificate limit has been reached.</p>
- */
-export interface CertificateLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "CertificateLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace CertificateLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-export enum ClientAuthenticationStatus {
-  DISABLED = "Disabled",
-  ENABLED = "Enabled",
-}
-
-export enum ClientAuthenticationType {
-  SMART_CARD = "SmartCard",
+  Type?: CertificateType | undefined;
 }
 
 /**
  * <p>Contains information about a client authentication method for a directory.</p>
+ * @public
  */
 export interface ClientAuthenticationSettingInfo {
   /**
-   * <p>The type of client authentication for the specified directory. If no type is specified, a list of all client authentication types that are supported for the directory is retrieved. </p>
+   * <p>The type of client authentication for the specified directory. If no type is specified, a
+   *       list of all client authentication types that are supported for the directory is retrieved.
+   *     </p>
+   * @public
    */
-  Type?: ClientAuthenticationType | string;
+  Type?: ClientAuthenticationType | undefined;
 
   /**
-   * <p>Whether the client authentication type is enabled or disabled for the specified directory.</p>
+   * <p>Whether the client authentication type is enabled or disabled for the specified
+   *       directory.</p>
+   * @public
    */
-  Status?: ClientAuthenticationStatus | string;
+  Status?: ClientAuthenticationStatus | undefined;
 
   /**
-   * <p>The date and time when the status of the client authentication type was last updated.</p>
+   * <p>The date and time when the status of the client authentication type was last
+   *       updated.</p>
+   * @public
    */
-  LastUpdatedDateTime?: Date;
-}
-
-export namespace ClientAuthenticationSettingInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClientAuthenticationSettingInfo): any => ({
-    ...obj,
-  });
+  LastUpdatedDateTime?: Date | undefined;
 }
 
 /**
  * <p>Contains information about a computer account in a directory.</p>
+ * @public
  */
 export interface Computer {
   /**
    * <p>The identifier of the computer.</p>
+   * @public
    */
-  ComputerId?: string;
+  ComputerId?: string | undefined;
 
   /**
    * <p>The computer name.</p>
+   * @public
    */
-  ComputerName?: string;
+  ComputerName?: string | undefined;
 
   /**
    * <p>An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the
    *             computer account.</p>
+   * @public
    */
-  ComputerAttributes?: Attribute[];
-}
-
-export namespace Computer {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Computer): any => ({
-    ...obj,
-  });
-}
-
-export enum ReplicationScope {
-  Domain = "Domain",
+  ComputerAttributes?: Attribute[] | undefined;
 }
 
 /**
  * <p>Points to a remote domain with which you are setting up a trust relationship.
  *       Conditional forwarders are required in order to set up a trust relationship with another
  *       domain.</p>
+ * @public
  */
 export interface ConditionalForwarder {
   /**
    * <p>The fully qualified domain name (FQDN) of the remote domains pointed to by the
    *       conditional forwarder.</p>
+   * @public
    */
-  RemoteDomainName?: string;
+  RemoteDomainName?: string | undefined;
 
   /**
    * <p>The IP addresses of the remote DNS server associated with RemoteDomainName. This is the
    *       IP address of the DNS server that your conditional forwarder points to.</p>
+   * @public
    */
-  DnsIpAddrs?: string[];
+  DnsIpAddrs?: string[] | undefined;
+
+  /**
+   * <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName. This is the
+   *       IPv6 address of the DNS server that your conditional forwarder points to.</p>
+   * @public
+   */
+  DnsIpv6Addrs?: string[] | undefined;
 
   /**
    * <p>The replication scope of the conditional forwarder. The only allowed value is
    *         <code>Domain</code>, which will replicate the conditional forwarder to all of the domain
    *       controllers for your Amazon Web Services directory.</p>
+   * @public
    */
-  ReplicationScope?: ReplicationScope | string;
-}
-
-export namespace ConditionalForwarder {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConditionalForwarder): any => ({
-    ...obj,
-  });
+  ReplicationScope?: ReplicationScope | undefined;
 }
 
 /**
- * <p>Contains information for the <a>ConnectDirectory</a> operation when an AD
- *       Connector directory is being created.</p>
+ * <p>Contains connection settings for creating an AD
+ *       Connector with the <a>ConnectDirectory</a> action.</p>
+ * @public
  */
 export interface DirectoryConnectSettings {
   /**
    * <p>The identifier of the VPC in which the AD Connector is created.</p>
+   * @public
    */
   VpcId: string | undefined;
 
   /**
    * <p>A list of subnet identifiers in the VPC in which the AD Connector is created.</p>
+   * @public
    */
   SubnetIds: string[] | undefined;
 
   /**
-   * <p>A list of one or more IP addresses of DNS servers or domain controllers in your self-managed
-   *       directory.</p>
+   * <p>The IP addresses of DNS servers or domain controllers in your
+   *       self-managed directory.</p>
+   * @public
    */
-  CustomerDnsIps: string[] | undefined;
+  CustomerDnsIps?: string[] | undefined;
+
+  /**
+   * <p>The IPv6 addresses of DNS servers or domain controllers in your
+   *       self-managed directory.</p>
+   * @public
+   */
+  CustomerDnsIpsV6?: string[] | undefined;
 
   /**
    * <p>The user name of an account in your self-managed directory that is used to connect to the
@@ -1200,129 +924,88 @@ export interface DirectoryConnectSettings {
    *                <p>Join computers to the domain</p>
    *             </li>
    *          </ul>
+   * @public
    */
   CustomerUserName: string | undefined;
 }
 
-export namespace DirectoryConnectSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryConnectSettings): any => ({
-    ...obj,
-  });
-}
-
-export enum DirectorySize {
-  LARGE = "Large",
-  SMALL = "Small",
-}
-
 /**
  * <p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>
+ * @public
  */
 export interface ConnectDirectoryRequest {
   /**
    * <p>The fully qualified name of your self-managed directory, such as
    *         <code>corp.example.com</code>.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The NetBIOS name of your self-managed directory, such as <code>CORP</code>.</p>
+   * @public
    */
-  ShortName?: string;
+  ShortName?: string | undefined;
 
   /**
    * <p>The password for your self-managed user account.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>A description for the directory.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The size of the directory.</p>
+   * @public
    */
-  Size: DirectorySize | string | undefined;
+  Size: DirectorySize | undefined;
 
   /**
    * <p>A <a>DirectoryConnectSettings</a> object that contains additional information
    *       for the operation.</p>
+   * @public
    */
   ConnectSettings: DirectoryConnectSettings | undefined;
 
   /**
    * <p>The tags to be assigned to AD Connector.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace ConnectDirectoryRequest {
   /**
-   * @internal
+   * <p>The network type for your directory. The default value is <code>IPv4</code> or
+   *         <code>IPv6</code> based on the provided subnet capabilities.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ConnectDirectoryRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>ConnectDirectory</a> operation.</p>
+ * @public
  */
 export interface ConnectDirectoryResult {
   /**
    * <p>The identifier of the new directory.</p>
+   * @public
    */
-  DirectoryId?: string;
-}
-
-export namespace ConnectDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConnectDirectoryResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The maximum number of directories in the region has been reached. You can use the
- *                 <a>GetDirectoryLimits</a> operation to determine your directory limits in
- *             the region.</p>
- */
-export interface DirectoryLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryLimitExceededException): any => ({
-    ...obj,
-  });
+  DirectoryId?: string | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>CreateAlias</a> operation.</p>
+ * @public
  */
 export interface CreateAliasRequest {
   /**
    * <p>The identifier of the directory for which to create the alias.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -1330,163 +1013,134 @@ export interface CreateAliasRequest {
    * <p>The requested alias.</p>
    *          <p>The alias must be unique amongst all aliases in Amazon Web Services. This operation throws an
    *             <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>
+   * @public
    */
   Alias: string | undefined;
 }
 
-export namespace CreateAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAliasRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the results of the <a>CreateAlias</a> operation.</p>
+ * @public
  */
 export interface CreateAliasResult {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The alias for the directory.</p>
+   * @public
    */
-  Alias?: string;
-}
-
-export namespace CreateAliasResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAliasResult): any => ({
-    ...obj,
-  });
+  Alias?: string | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>CreateComputer</a> operation.</p>
+ * @public
  */
 export interface CreateComputerRequest {
   /**
    * <p>The identifier of the directory in which to create the computer account.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The name of the computer account.</p>
+   * @public
    */
   ComputerName: string | undefined;
 
   /**
    * <p>A one-time password that is used to join the computer to the directory. You should generate a random, strong password to use for this parameter.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>The fully-qualified distinguished name of the organizational unit to place the computer account in.</p>
+   * @public
    */
-  OrganizationalUnitDistinguishedName?: string;
+  OrganizationalUnitDistinguishedName?: string | undefined;
 
   /**
    * <p>An array of <a>Attribute</a> objects that contain any LDAP attributes to apply to the
    *             computer account.</p>
+   * @public
    */
-  ComputerAttributes?: Attribute[];
-}
-
-export namespace CreateComputerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateComputerRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  ComputerAttributes?: Attribute[] | undefined;
 }
 
 /**
  * <p>Contains the results for the <a>CreateComputer</a> operation.</p>
+ * @public
  */
 export interface CreateComputerResult {
   /**
    * <p>A <a>Computer</a> object that represents the computer account.</p>
+   * @public
    */
-  Computer?: Computer;
-}
-
-export namespace CreateComputerResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateComputerResult): any => ({
-    ...obj,
-  });
+  Computer?: Computer | undefined;
 }
 
 /**
  * <p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active
  *       Directory. Conditional forwarders are required in order to set up a trust relationship with
  *       another domain.</p>
+ * @public
  */
 export interface CreateConditionalForwarderRequest {
   /**
    * <p>The directory ID of the Amazon Web Services directory for which you are creating the conditional
    *       forwarder.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The fully qualified domain name (FQDN) of the remote domain with which you will set up
    *       a trust relationship.</p>
+   * @public
    */
   RemoteDomainName: string | undefined;
 
   /**
    * <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
+   * @public
    */
-  DnsIpAddrs: string[] | undefined;
-}
+  DnsIpAddrs?: string[] | undefined;
 
-export namespace CreateConditionalForwarderRequest {
   /**
-   * @internal
+   * <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateConditionalForwarderRequest): any => ({
-    ...obj,
-  });
+  DnsIpv6Addrs?: string[] | undefined;
 }
 
 /**
  * <p>The result of a CreateConditinalForwarder request.</p>
+ * @public
  */
 export interface CreateConditionalForwarderResult {}
 
-export namespace CreateConditionalForwarderResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConditionalForwarderResult): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>
+ * @public
  */
 export interface CreateDirectoryRequest {
   /**
    * <p>The fully qualified name for the directory, such as <code>corp.example.com</code>.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The NetBIOS name of the directory, such as <code>CORP</code>.</p>
+   * @public
    */
-  ShortName?: string;
+  ShortName?: string | undefined;
 
   /**
    * <p>The password for the directory administrator. The directory creation process creates a
@@ -1496,7 +1150,7 @@ export interface CreateDirectoryRequest {
    *          <p>The regex pattern for this string is made up of the following conditions:</p>
    *          <ul>
    *             <li>
-   *                <p>Length (?=^.{8,64}$) – Must be between 8 and 64 characters</p>
+   *                <p>Length (?=^.\{8,64\}$) – Must be between 8 and 64 characters</p>
    *             </li>
    *          </ul>
    *          <p>AND any 3 of the following password complexity rules required by Active Directory:</p>
@@ -1518,133 +1172,131 @@ export interface CreateDirectoryRequest {
    *             </li>
    *          </ul>
    *          <p>For additional information about how Active Directory passwords are enforced, see <a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements">Password must meet complexity requirements</a> on the Microsoft website.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>A description for the directory.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The size of the directory.</p>
+   * @public
    */
-  Size: DirectorySize | string | undefined;
+  Size: DirectorySize | undefined;
 
   /**
    * <p>A <a>DirectoryVpcSettings</a> object that contains additional information for
    *       the operation.</p>
+   * @public
    */
-  VpcSettings?: DirectoryVpcSettings;
+  VpcSettings?: DirectoryVpcSettings | undefined;
 
   /**
    * <p>The tags to be assigned to the Simple AD directory.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace CreateDirectoryRequest {
   /**
-   * @internal
+   * <p>The network type for your directory. Simple AD supports IPv4 and Dual-stack only.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateDirectoryRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>CreateDirectory</a> operation.</p>
+ * @public
  */
 export interface CreateDirectoryResult {
   /**
    * <p>The identifier of the directory that was created.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 }
 
-export namespace CreateDirectoryResult {
+/**
+ * @public
+ */
+export interface CreateHybridADRequest {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the
+   *             credentials for the service account used to join hybrid domain controllers to your
+   *             self-managed AD domain. This secret is used once and not stored.</p>
+   *          <p>The secret must contain key-value pairs with keys matching
+   *                 <code>customerAdAdminDomainUsername</code> and
+   *                 <code>customerAdAdminDomainPassword</code>. For example:
+   *                 <code>\{"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"\}</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateDirectoryResult): any => ({
-    ...obj,
-  });
+  SecretArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the successful directory assessment that validates your
+   *             self-managed AD environment. You must have a successful directory assessment before you
+   *             create a hybrid directory.</p>
+   * @public
+   */
+  AssessmentId: string | undefined;
+
+  /**
+   * <p>The tags to be assigned to the directory. Each tag consists of a key and value pair.
+   *             You can specify multiple tags as a list.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface CreateHybridADResult {
+  /**
+   * <p>The unique identifier of the newly created hybrid directory.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateLogSubscriptionRequest {
   /**
    * <p>Identifier of the directory to which you want to subscribe and receive real-time logs to
    *       your specified CloudWatch log group.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The name of the CloudWatch log group where the real-time domain controller logs are
    *       forwarded.</p>
+   * @public
    */
   LogGroupName: string | undefined;
 }
 
-export namespace CreateLogSubscriptionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLogSubscriptionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateLogSubscriptionResult {}
-
-export namespace CreateLogSubscriptionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLogSubscriptionResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The account does not have sufficient permission to perform the operation.</p>
+ * @public
  */
-export interface InsufficientPermissionsException extends __SmithyException, $MetadataBearer {
-  name: "InsufficientPermissionsException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InsufficientPermissionsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsufficientPermissionsException): any => ({
-    ...obj,
-  });
-}
-
-export enum DirectoryEdition {
-  ENTERPRISE = "Enterprise",
-  STANDARD = "Standard",
-}
+export interface CreateLogSubscriptionResult {}
 
 /**
  * <p>Creates an Managed Microsoft AD directory.</p>
+ * @public
  */
 export interface CreateMicrosoftADRequest {
   /**
    * <p>The fully qualified domain name for the Managed Microsoft AD directory, such as
    *         <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need
    *       to be publicly resolvable.</p>
+   * @public
    */
   Name: string | undefined;
 
@@ -1652,152 +1304,92 @@ export interface CreateMicrosoftADRequest {
    * <p>The NetBIOS name for your domain, such as <code>CORP</code>. If you don't specify a
    *       NetBIOS name, it will default to the first part of your directory DNS. For example,
    *         <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>
+   * @public
    */
-  ShortName?: string;
+  ShortName?: string | undefined;
 
   /**
    * <p>The password for the default administrative user named <code>Admin</code>.</p>
    *          <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>A description for the directory. This label will appear on the Amazon Web Services console
    *         <code>Directory Details</code> page after the directory is created.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>
+   * @public
    */
   VpcSettings: DirectoryVpcSettings | undefined;
 
   /**
    * <p>Managed Microsoft AD is available in two editions: <code>Standard</code> and
    *         <code>Enterprise</code>. <code>Enterprise</code> is the default.</p>
+   * @public
    */
-  Edition?: DirectoryEdition | string;
+  Edition?: DirectoryEdition | undefined;
 
   /**
    * <p>The tags to be assigned to the Managed Microsoft AD directory.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace CreateMicrosoftADRequest {
   /**
-   * @internal
+   * <p>
+   *       The network type for your domain. The default value is <code>IPv4</code> or <code>IPv6</code>
+   *       based on the provided subnet capabilities.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateMicrosoftADRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
  * <p>Result of a CreateMicrosoftAD request.</p>
+ * @public
  */
 export interface CreateMicrosoftADResult {
   /**
    * <p>The identifier of the directory that was created.</p>
+   * @public
    */
-  DirectoryId?: string;
-}
-
-export namespace CreateMicrosoftADResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateMicrosoftADResult): any => ({
-    ...obj,
-  });
+  DirectoryId?: string | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>
+ * @public
  */
 export interface CreateSnapshotRequest {
   /**
    * <p>The identifier of the directory of which to take a snapshot.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The descriptive name to apply to the snapshot.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace CreateSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSnapshotRequest): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>CreateSnapshot</a> operation.</p>
+ * @public
  */
 export interface CreateSnapshotResult {
   /**
    * <p>The identifier of the snapshot that was created.</p>
+   * @public
    */
-  SnapshotId?: string;
-}
-
-export namespace CreateSnapshotResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSnapshotResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The maximum number of manual snapshots for the directory has been reached. You can
- *             use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits
- *             for a directory.</p>
- */
-export interface SnapshotLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "SnapshotLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace SnapshotLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnapshotLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-export enum SelectiveAuth {
-  DISABLED = "Disabled",
-  ENABLED = "Enabled",
-}
-
-export enum TrustDirection {
-  ONE_WAY_INCOMING = "One-Way: Incoming",
-  ONE_WAY_OUTGOING = "One-Way: Outgoing",
-  TWO_WAY = "Two-Way",
-}
-
-export enum TrustType {
-  EXTERNAL = "External",
-  FOREST = "Forest",
+  SnapshotId?: string | undefined;
 }
 
 /**
@@ -1807,432 +1399,467 @@ export enum TrustType {
  *       access to resources in either domain, with a single set of credentials.</p>
  *          <p>This action initiates the creation of the Amazon Web Services side of a trust relationship between an
  *       Managed Microsoft AD directory and an external domain.</p>
+ * @public
  */
 export interface CreateTrustRequest {
   /**
    * <p>The Directory ID of the Managed Microsoft AD directory for which to establish the trust
    *       relationship.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The Fully Qualified Domain Name (FQDN) of the external domain for which to create the
    *       trust relationship.</p>
+   * @public
    */
   RemoteDomainName: string | undefined;
 
   /**
-   * <p>The trust password. The must be the same password that was used when creating the trust
+   * <p>The trust password. The trust password must be the same password that was used when creating the trust
    *       relationship on the external domain.</p>
+   * @public
    */
   TrustPassword: string | undefined;
 
   /**
    * <p>The direction of the trust relationship.</p>
+   * @public
    */
-  TrustDirection: TrustDirection | string | undefined;
+  TrustDirection: TrustDirection | undefined;
 
   /**
    * <p>The trust relationship type. <code>Forest</code> is the default.</p>
+   * @public
    */
-  TrustType?: TrustType | string;
+  TrustType?: TrustType | undefined;
 
   /**
    * <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
+   * @public
    */
-  ConditionalForwarderIpAddrs?: string[];
+  ConditionalForwarderIpAddrs?: string[] | undefined;
+
+  /**
+   * <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
+   * @public
+   */
+  ConditionalForwarderIpv6Addrs?: string[] | undefined;
 
   /**
    * <p>Optional parameter to enable selective authentication for the trust.</p>
+   * @public
    */
-  SelectiveAuth?: SelectiveAuth | string;
-}
-
-export namespace CreateTrustRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTrustRequest): any => ({
-    ...obj,
-    ...(obj.TrustPassword && { TrustPassword: SENSITIVE_STRING }),
-  });
+  SelectiveAuth?: SelectiveAuth | undefined;
 }
 
 /**
  * <p>The result of a CreateTrust request.</p>
+ * @public
  */
 export interface CreateTrustResult {
   /**
    * <p>A unique identifier for the trust relationship that was created.</p>
+   * @public
    */
-  TrustId?: string;
+  TrustId?: string | undefined;
 }
 
-export namespace CreateTrustResult {
+/**
+ * @public
+ */
+export interface DeleteADAssessmentRequest {
   /**
-   * @internal
+   * <p>The unique identifier of the directory assessment to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateTrustResult): any => ({
-    ...obj,
-  });
+  AssessmentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteADAssessmentResult {
+  /**
+   * <p>The unique identifier of the deleted directory assessment.</p>
+   * @public
+   */
+  AssessmentId?: string | undefined;
 }
 
 /**
  * <p>Deletes a conditional forwarder.</p>
+ * @public
  */
 export interface DeleteConditionalForwarderRequest {
   /**
    * <p>The directory ID for which you are deleting the conditional forwarder.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The fully qualified domain name (FQDN) of the remote domain with which you are deleting
    *       the conditional forwarder.</p>
+   * @public
    */
   RemoteDomainName: string | undefined;
 }
 
-export namespace DeleteConditionalForwarderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConditionalForwarderRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The result of a DeleteConditionalForwarder request.</p>
+ * @public
  */
 export interface DeleteConditionalForwarderResult {}
 
-export namespace DeleteConditionalForwarderResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConditionalForwarderResult): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>
+ * @public
  */
 export interface DeleteDirectoryRequest {
   /**
    * <p>The identifier of the directory to delete.</p>
+   * @public
    */
   DirectoryId: string | undefined;
-}
-
-export namespace DeleteDirectoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDirectoryRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>Contains the results of the <a>DeleteDirectory</a> operation.</p>
+ * @public
  */
 export interface DeleteDirectoryResult {
   /**
    * <p>The directory identifier.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 }
 
-export namespace DeleteDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDirectoryResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLogSubscriptionRequest {
   /**
    * <p>Identifier of the directory whose log subscription you want to delete.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 }
 
-export namespace DeleteLogSubscriptionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLogSubscriptionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLogSubscriptionResult {}
-
-export namespace DeleteLogSubscriptionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLogSubscriptionResult): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>
+ * @public
  */
 export interface DeleteSnapshotRequest {
   /**
    * <p>The identifier of the directory snapshot to be deleted.</p>
+   * @public
    */
   SnapshotId: string | undefined;
 }
 
-export namespace DeleteSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSnapshotRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>
+ * @public
  */
 export interface DeleteSnapshotResult {
   /**
    * <p>The identifier of the directory snapshot that was deleted.</p>
+   * @public
    */
-  SnapshotId?: string;
-}
-
-export namespace DeleteSnapshotResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSnapshotResult): any => ({
-    ...obj,
-  });
+  SnapshotId?: string | undefined;
 }
 
 /**
  * <p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD
  *       directory and the external domain.</p>
+ * @public
  */
 export interface DeleteTrustRequest {
   /**
    * <p>The Trust ID of the trust relationship to be deleted.</p>
+   * @public
    */
   TrustId: string | undefined;
 
   /**
    * <p>Delete a conditional forwarder as part of a DeleteTrustRequest.</p>
+   * @public
    */
-  DeleteAssociatedConditionalForwarder?: boolean;
-}
-
-export namespace DeleteTrustRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTrustRequest): any => ({
-    ...obj,
-  });
+  DeleteAssociatedConditionalForwarder?: boolean | undefined;
 }
 
 /**
  * <p>The result of a DeleteTrust request.</p>
+ * @public
  */
 export interface DeleteTrustResult {
   /**
    * <p>The Trust ID of the trust relationship that was deleted.</p>
+   * @public
    */
-  TrustId?: string;
+  TrustId?: string | undefined;
 }
 
-export namespace DeleteTrustResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteTrustResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterCertificateRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The identifier of the certificate.</p>
+   * @public
    */
   CertificateId: string | undefined;
 }
 
-export namespace DeregisterCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterCertificateResult {}
-
-export namespace DeregisterCertificateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterCertificateResult): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>Removes the specified directory as a publisher to the specified Amazon SNS topic.</p>
+ * @public
  */
 export interface DeregisterEventTopicRequest {
   /**
    * <p>The Directory ID to remove as a publisher. This directory will no longer send messages
    *       to the specified Amazon SNS topic.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The name of the Amazon SNS topic from which to remove the directory as a
    *       publisher.</p>
+   * @public
    */
   TopicName: string | undefined;
 }
 
-export namespace DeregisterEventTopicRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterEventTopicRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The result of a DeregisterEventTopic request.</p>
+ * @public
  */
 export interface DeregisterEventTopicResult {}
 
-export namespace DeregisterEventTopicResult {
+/**
+ * @public
+ */
+export interface DescribeADAssessmentRequest {
   /**
-   * @internal
+   * <p>The identifier of the directory assessment to describe.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeregisterEventTopicResult): any => ({
-    ...obj,
-  });
+  AssessmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DescribeADAssessmentResult {
+  /**
+   * <p>Detailed information about the self-managed instance settings (IDs and DNS
+   *             IPs).</p>
+   * @public
+   */
+  Assessment?: Assessment | undefined;
+
+  /**
+   * <p>A list of assessment reports containing validation results for each domain controller
+   *             and test category. Each report includes specific validation details and outcomes.</p>
+   * @public
+   */
+  AssessmentReports?: AssessmentReport[] | undefined;
+}
+
+/**
+ * <p>Contains the inputs for the <a>DescribeCAEnrollmentPolicy</a> operation.</p>
+ * @public
+ */
+export interface DescribeCAEnrollmentPolicyRequest {
+  /**
+   * <p>The identifier of the directory for which to retrieve the CA enrollment policy
+   *       information.</p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+}
+
+/**
+ * <p>Contains the results of the <a>DescribeCAEnrollmentPolicy</a> operation.</p>
+ * @public
+ */
+export interface DescribeCAEnrollmentPolicyResult {
+  /**
+   * <p>The identifier of the directory associated with this CA enrollment policy.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services Private Certificate Authority (PCA) connector
+   *       that is configured for automatic certificate enrollment in this directory.</p>
+   * @public
+   */
+  PcaConnectorArn?: string | undefined;
+
+  /**
+   * <p>The current status of the CA enrollment policy. This indicates if automatic certificate
+   *       enrollment is currently active, inactive, or in a transitional state.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>IN_PROGRESS</code> - The policy is being activated T</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SUCCESS</code> - The policy is active and automatic certificate enrollment is
+   *           operational</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED</code> - The policy activation or deactivation failed</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLING</code> - The policy is being deactivated</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLED</code> - The policy is inactive and automatic certificate enrollment is
+   *           not available</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>IMPAIRED</code> - Network connectivity is impaired.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  CaEnrollmentPolicyStatus?: CaEnrollmentPolicyStatus | undefined;
+
+  /**
+   * <p>The date and time when the CA enrollment policy was last modified or updated.</p>
+   * @public
+   */
+  LastUpdatedDateTime?: Date | undefined;
+
+  /**
+   * <p>Additional information explaining the current status of the CA enrollment policy,
+   *       particularly useful when the policy is in an error or transitional state.</p>
+   * @public
+   */
+  CaEnrollmentPolicyStatusReason?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DescribeCertificateRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The identifier of the certificate.</p>
+   * @public
    */
   CertificateId: string | undefined;
 }
 
-export namespace DescribeCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeCertificateResult {
   /**
    * <p>Information about the certificate, including registered date time, certificate state, the
    *       reason for the state, expiration date time, and certificate common name.</p>
+   * @public
    */
-  Certificate?: Certificate;
+  Certificate?: Certificate | undefined;
 }
 
-export namespace DescribeCertificateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCertificateResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeClientAuthenticationSettingsRequest {
   /**
    * <p>The identifier of the directory for which to retrieve information.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
-   * <p>The type of client authentication for which to retrieve information. If no type is specified, a list of all client authentication types that are supported for the specified directory is retrieved.</p>
+   * <p>The type of client authentication for which to retrieve information. If no type is
+   *       specified, a list of all client authentication types that are supported for the specified
+   *       directory is retrieved.</p>
+   * @public
    */
-  Type?: ClientAuthenticationType | string;
+  Type?: ClientAuthenticationType | undefined;
 
   /**
-   * <p>The <i>DescribeClientAuthenticationSettingsResult.NextToken</i> value from a previous call to <a>DescribeClientAuthenticationSettings</a>. Pass null if this is the first call.</p>
+   * <p>The <i>DescribeClientAuthenticationSettingsResult.NextToken</i> value from a
+   *       previous call to <a>DescribeClientAuthenticationSettings</a>. Pass null if this is
+   *       the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation. </p>
+   * <p>The maximum number of items to return. If this value is zero, the maximum number of items
+   *       is specified by the limitations of the operation. </p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
-export namespace DescribeClientAuthenticationSettingsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClientAuthenticationSettingsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeClientAuthenticationSettingsResult {
   /**
-   * <p>Information about the type of client authentication for the specified directory. The following information is retrieved: The date and time when the status of the client authentication type was last updated, whether the client authentication type is enabled or disabled, and the type of client authentication.</p>
+   * <p>Information about the type of client authentication for the specified directory. The
+   *       following information is retrieved: The date and time when the status of the client
+   *       authentication type was last updated, whether the client authentication type is enabled or
+   *       disabled, and the type of client authentication.</p>
+   * @public
    */
-  ClientAuthenticationSettingsInfo?: ClientAuthenticationSettingInfo[];
+  ClientAuthenticationSettingsInfo?: ClientAuthenticationSettingInfo[] | undefined;
 
   /**
-   * <p>The next token used to retrieve the client authentication settings if the number of setting types exceeds
-   *       page limit and there is another page.</p>
+   * <p>The next token used to retrieve the client authentication settings if the number of
+   *       setting types exceeds page limit and there is another page.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeClientAuthenticationSettingsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClientAuthenticationSettingsResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes a conditional forwarder.</p>
+ * @public
  */
 export interface DescribeConditionalForwardersRequest {
   /**
    * <p>The directory ID for which to get the list of associated conditional
    *       forwarders.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -2240,1123 +1867,1318 @@ export interface DescribeConditionalForwardersRequest {
    * <p>The fully qualified domain names (FQDN) of the remote domains for which to get the list
    *       of associated conditional forwarders. If this member is null, all conditional forwarders are
    *       returned.</p>
+   * @public
    */
-  RemoteDomainNames?: string[];
-}
-
-export namespace DescribeConditionalForwardersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConditionalForwardersRequest): any => ({
-    ...obj,
-  });
+  RemoteDomainNames?: string[] | undefined;
 }
 
 /**
  * <p>The result of a DescribeConditionalForwarder request.</p>
+ * @public
  */
 export interface DescribeConditionalForwardersResult {
   /**
    * <p>The list of conditional forwarders that have been created.</p>
+   * @public
    */
-  ConditionalForwarders?: ConditionalForwarder[];
-}
-
-export namespace DescribeConditionalForwardersResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConditionalForwardersResult): any => ({
-    ...obj,
-  });
+  ConditionalForwarders?: ConditionalForwarder[] | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>
+ * @public
  */
 export interface DescribeDirectoriesRequest {
   /**
    * <p>A list of identifiers of the directories for which to obtain the information. If this
    *       member is null, all directories that belong to the current account are returned.</p>
    *          <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>
+   * @public
    */
-  DirectoryIds?: string[];
+  DirectoryIds?: string[] | undefined;
 
   /**
    * <p>The <code>DescribeDirectoriesResult.NextToken</code> value from a previous call to <a>DescribeDirectories</a>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of items to return. If this value is zero, the maximum number of items
    *       is specified by the limitations of the operation.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace DescribeDirectoriesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDirectoriesRequest): any => ({
-    ...obj,
-  });
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Contains information about an AD Connector directory.</p>
+ * @public
  */
 export interface DirectoryConnectSettingsDescription {
   /**
    * <p>The identifier of the VPC that the AD Connector is in.</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>A list of subnet identifiers in the VPC that the AD Connector is in.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 
   /**
    * <p>The user name of the service account in your self-managed directory.</p>
+   * @public
    */
-  CustomerUserName?: string;
+  CustomerUserName?: string | undefined;
 
   /**
    * <p>The security group identifier for the AD Connector directory.</p>
+   * @public
    */
-  SecurityGroupId?: string;
+  SecurityGroupId?: string | undefined;
 
   /**
-   * <p>A list of the Availability Zones that the directory is in.</p>
+   * <p>The Availability Zones that the directory is in.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
+  AvailabilityZones?: string[] | undefined;
 
   /**
    * <p>The IP addresses of the AD Connector servers.</p>
+   * @public
    */
-  ConnectIps?: string[];
-}
+  ConnectIps?: string[] | undefined;
 
-export namespace DirectoryConnectSettingsDescription {
   /**
-   * @internal
+   * <p>The IPv6 addresses of the AD Connector servers.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DirectoryConnectSettingsDescription): any => ({
-    ...obj,
-  });
+  ConnectIpsV6?: string[] | undefined;
 }
 
-export enum RadiusAuthenticationProtocol {
-  CHAP = "CHAP",
-  MSCHAPV1 = "MS-CHAPv1",
-  MSCHAPV2 = "MS-CHAPv2",
-  PAP = "PAP",
+/**
+ * <p>Describes the current hybrid directory configuration settings for a directory.</p>
+ * @public
+ */
+export interface HybridSettingsDescription {
+  /**
+   * <p>The IP addresses of the DNS servers in your self-managed AD environment.</p>
+   * @public
+   */
+  SelfManagedDnsIpAddrs?: string[] | undefined;
+
+  /**
+   * <p>The identifiers of the self-managed instances with SSM used for hybrid directory
+   *             operations.</p>
+   * @public
+   */
+  SelfManagedInstanceIds?: string[] | undefined;
 }
 
 /**
  * <p>Contains information about a Remote Authentication Dial In User Service (RADIUS)
  *          server.</p>
+ * @public
  */
 export interface RadiusSettings {
   /**
-   * <p>An array of strings that contains the fully qualified domain name (FQDN) or IP
-   *          addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server
-   *          load balancer.</p>
+   * <p>The fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints,
+   *          or the FQDN or IP addresses of your RADIUS server load balancer.</p>
+   * @public
    */
-  RadiusServers?: string[];
+  RadiusServers?: string[] | undefined;
 
   /**
-   * <p>The port that your RADIUS server is using for communications. Your self-managed
-   *          network must allow inbound traffic over this port from the Directory Service servers.</p>
+   * <p>The IPv6 addresses of the RADIUS server endpoints or RADIUS server
+   *          load balancer.</p>
+   * @public
    */
-  RadiusPort?: number;
+  RadiusServersIpv6?: string[] | undefined;
+
+  /**
+   * <p>The port that your RADIUS server is using for communications. Your self-managed network
+   *          must allow inbound traffic over this port from the Directory Service servers.</p>
+   * @public
+   */
+  RadiusPort?: number | undefined;
 
   /**
    * <p>The amount of time, in seconds, to wait for the RADIUS server to respond.</p>
+   * @public
    */
-  RadiusTimeout?: number;
+  RadiusTimeout?: number | undefined;
 
   /**
-   * <p>The maximum number of times that communication with the RADIUS server is
-   *          attempted.</p>
+   * <p>The maximum number of times that communication with the RADIUS server is retried after
+   *          the initial attempt.</p>
+   * @public
    */
-  RadiusRetries?: number;
+  RadiusRetries?: number | undefined;
 
   /**
    * <p>Required for enabling RADIUS on the directory.</p>
+   * @public
    */
-  SharedSecret?: string;
+  SharedSecret?: string | undefined;
 
   /**
    * <p>The protocol specified for your RADIUS endpoints.</p>
+   * @public
    */
-  AuthenticationProtocol?: RadiusAuthenticationProtocol | string;
+  AuthenticationProtocol?: RadiusAuthenticationProtocol | undefined;
 
   /**
    * <p>Not currently used.</p>
+   * @public
    */
-  DisplayLabel?: string;
+  DisplayLabel?: string | undefined;
 
   /**
    * <p>Not currently used.</p>
+   * @public
    */
-  UseSameUsername?: boolean;
-}
-
-export namespace RadiusSettings {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RadiusSettings): any => ({
-    ...obj,
-    ...(obj.SharedSecret && { SharedSecret: SENSITIVE_STRING }),
-  });
-}
-
-export enum RadiusStatus {
-  COMPLETED = "Completed",
-  CREATING = "Creating",
-  FAILED = "Failed",
+  UseSameUsername?: boolean | undefined;
 }
 
 /**
  * <p>Contains information about the directory.</p>
+ * @public
  */
 export interface DirectoryVpcSettingsDescription {
   /**
    * <p>The identifier of the VPC that the directory is in.</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>The identifiers of the subnets for the directory servers.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 
   /**
    * <p>The domain controller security group identifier for the directory.</p>
+   * @public
    */
-  SecurityGroupId?: string;
+  SecurityGroupId?: string | undefined;
 
   /**
    * <p>The list of Availability Zones that the directory is in.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
-}
-
-export namespace DirectoryVpcSettingsDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryVpcSettingsDescription): any => ({
-    ...obj,
-  });
+  AvailabilityZones?: string[] | undefined;
 }
 
 /**
- * <p>Describes the directory owner account details that have been shared to the directory
- *       consumer account.</p>
+ * <p>Contains the directory owner account details shared with the directory consumer
+ *       account.</p>
+ * @public
  */
 export interface OwnerDirectoryDescription {
   /**
-   * <p>Identifier of the Managed Microsoft AD directory in the directory owner
-   *       account.</p>
+   * <p>Identifier of the Managed Microsoft AD directory in the directory owner account.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>Identifier of the directory owner account.</p>
+   * @public
    */
-  AccountId?: string;
+  AccountId?: string | undefined;
 
   /**
    * <p>IP address of the directory’s domain controllers.</p>
+   * @public
    */
-  DnsIpAddrs?: string[];
+  DnsIpAddrs?: string[] | undefined;
+
+  /**
+   * <p>IPv6 addresses of the directory’s domain controllers.</p>
+   * @public
+   */
+  DnsIpv6Addrs?: string[] | undefined;
 
   /**
    * <p>Information about the VPC settings for the directory.</p>
+   * @public
    */
-  VpcSettings?: DirectoryVpcSettingsDescription;
+  VpcSettings?: DirectoryVpcSettingsDescription | undefined;
 
   /**
-   * <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
-   *       server.</p>
+   * <p>Information about the <a>RadiusSettings</a> object server configuration.</p>
+   * @public
    */
-  RadiusSettings?: RadiusSettings;
+  RadiusSettings?: RadiusSettings | undefined;
 
   /**
-   * <p>Information about the status of the RADIUS server.</p>
+   * <p>The status of the RADIUS server.</p>
+   * @public
    */
-  RadiusStatus?: RadiusStatus | string;
-}
+  RadiusStatus?: RadiusStatus | undefined;
 
-export namespace OwnerDirectoryDescription {
   /**
-   * @internal
+   * <p>Network type of the directory in the directory owner account.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: OwnerDirectoryDescription): any => ({
-    ...obj,
-    ...(obj.RadiusSettings && { RadiusSettings: RadiusSettings.filterSensitiveLog(obj.RadiusSettings) }),
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
  * <p>Provides information about the Regions that are configured for multi-Region
  *       replication.</p>
+ * @public
  */
 export interface RegionsInfo {
   /**
    * <p>The Region where the Managed Microsoft AD directory was originally created.</p>
+   * @public
    */
-  PrimaryRegion?: string;
+  PrimaryRegion?: string | undefined;
 
   /**
    * <p>Lists the Regions where the directory has been replicated, excluding the primary
    *       Region.</p>
+   * @public
    */
-  AdditionalRegions?: string[];
-}
-
-export namespace RegionsInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegionsInfo): any => ({
-    ...obj,
-  });
-}
-
-export enum DirectoryStage {
-  ACTIVE = "Active",
-  CREATED = "Created",
-  CREATING = "Creating",
-  DELETED = "Deleted",
-  DELETING = "Deleting",
-  FAILED = "Failed",
-  IMPAIRED = "Impaired",
-  INOPERABLE = "Inoperable",
-  REQUESTED = "Requested",
-  RESTOREFAILED = "RestoreFailed",
-  RESTORING = "Restoring",
-}
-
-export enum DirectoryType {
-  AD_CONNECTOR = "ADConnector",
-  MICROSOFT_AD = "MicrosoftAD",
-  SHARED_MICROSOFT_AD = "SharedMicrosoftAD",
-  SIMPLE_AD = "SimpleAD",
+  AdditionalRegions?: string[] | undefined;
 }
 
 /**
  * <p>Contains information about an Directory Service directory.</p>
+ * @public
  */
 export interface DirectoryDescription {
   /**
    * <p>The directory identifier.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The fully qualified name of the directory.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The short name of the directory.</p>
+   * @public
    */
-  ShortName?: string;
+  ShortName?: string | undefined;
 
   /**
    * <p>The directory size.</p>
+   * @public
    */
-  Size?: DirectorySize | string;
+  Size?: DirectorySize | undefined;
 
   /**
    * <p>The edition associated with this directory.</p>
+   * @public
    */
-  Edition?: DirectoryEdition | string;
+  Edition?: DirectoryEdition | undefined;
 
   /**
-   * <p>The alias for the directory. If no alias has been created for the directory, the alias is
-   *       the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>
+   * <p>The alias for the directory. If no alias exists, the alias is the directory identifier,
+   *       such as <code>d-XXXXXXXXXX</code>.</p>
+   * @public
    */
-  Alias?: string;
+  Alias?: string | undefined;
 
   /**
    * <p>The access URL for the directory, such as
-   *         <code>http://<alias>.awsapps.com</code>. If no alias has been created for the
-   *       directory, <code><alias></code> is the directory identifier, such as
+   *         <code>http://<alias>.awsapps.com</code>. If no alias exists,
+   *         <code><alias></code> is the directory identifier, such as
    *         <code>d-XXXXXXXXXX</code>.</p>
+   * @public
    */
-  AccessUrl?: string;
+  AccessUrl?: string | undefined;
 
   /**
    * <p>The description for the directory.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD
-   *       directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For
-   *       an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers
-   *       in your self-managed directory to which the AD Connector is connected.</p>
+   *       directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers.
+   *       For an AD Connector directory, these are the IP addresses of self-managed directory to which
+   *       the AD Connector is connected.</p>
+   * @public
    */
-  DnsIpAddrs?: string[];
+  DnsIpAddrs?: string[] | undefined;
+
+  /**
+   * <p>The IPv6 addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD
+   *       directory, these are the IPv6 addresses of the Simple AD or Microsoft AD directory servers.
+   *       For an AD Connector directory, these are the IPv6 addresses of the DNS servers or domain
+   *       controllers in your self-managed directory to which the AD Connector is connected.</p>
+   * @public
+   */
+  DnsIpv6Addrs?: string[] | undefined;
 
   /**
    * <p>The current stage of the directory.</p>
+   * @public
    */
-  Stage?: DirectoryStage | string;
+  Stage?: DirectoryStage | undefined;
 
   /**
    * <p>Current directory status of the shared Managed Microsoft AD directory.</p>
+   * @public
    */
-  ShareStatus?: ShareStatus | string;
+  ShareStatus?: ShareStatus | undefined;
 
   /**
    * <p>The method used when sharing a directory to determine whether the directory should be
-   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
-   *       sending a shared directory request (<code>HANDSHAKE</code>).</p>
+   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account
+   *       by sending a shared directory request (<code>HANDSHAKE</code>).</p>
+   * @public
    */
-  ShareMethod?: ShareMethod | string;
+  ShareMethod?: ShareMethod | undefined;
 
   /**
    * <p>A directory share request that is sent by the directory owner to the directory consumer.
    *       The request includes a typed message to help the directory consumer administrator determine
    *       whether to approve or reject the share invitation.</p>
+   * @public
    */
-  ShareNotes?: string;
+  ShareNotes?: string | undefined;
 
   /**
-   * <p>Specifies when the directory was created.</p>
+   * <p>The date and time when the directory was created.</p>
+   * @public
    */
-  LaunchTime?: Date;
+  LaunchTime?: Date | undefined;
 
   /**
-   * <p>The date and time that the stage was last updated.</p>
+   * <p>The date and time when the stage was last updated.</p>
+   * @public
    */
-  StageLastUpdatedDateTime?: Date;
+  StageLastUpdatedDateTime?: Date | undefined;
 
   /**
-   * <p>The directory size.</p>
+   * <p>The directory type.</p>
+   * @public
    */
-  Type?: DirectoryType | string;
+  Type?: DirectoryType | undefined;
 
   /**
    * <p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional
-   *       information about a directory. This member is only present if the directory is a Simple AD or
-   *       Managed Microsoft AD directory.</p>
+   *       information about a directory. Present only for Simple AD and Managed Microsoft AD
+   *       directories.</p>
+   * @public
    */
-  VpcSettings?: DirectoryVpcSettingsDescription;
+  VpcSettings?: DirectoryVpcSettingsDescription | undefined;
 
   /**
-   * <p>A <a>DirectoryConnectSettingsDescription</a> object that contains additional
-   *       information about an AD Connector directory. This member is only present if the directory is
-   *       an AD Connector directory.</p>
+   * <p>
+   *             <a>DirectoryConnectSettingsDescription</a> object that contains additional
+   *       information about an AD Connector directory. Present only for AD Connector
+   *       directories.</p>
+   * @public
    */
-  ConnectSettings?: DirectoryConnectSettingsDescription;
+  ConnectSettings?: DirectoryConnectSettingsDescription | undefined;
 
   /**
-   * <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
-   *       server configured for this directory.</p>
+   * <p>Information about the <a>RadiusSettings</a> object configured for this
+   *       directory.</p>
+   * @public
    */
-  RadiusSettings?: RadiusSettings;
+  RadiusSettings?: RadiusSettings | undefined;
 
   /**
    * <p>The status of the RADIUS MFA server connection.</p>
+   * @public
    */
-  RadiusStatus?: RadiusStatus | string;
+  RadiusStatus?: RadiusStatus | undefined;
 
   /**
    * <p>Additional information about the directory stage.</p>
+   * @public
    */
-  StageReason?: string;
+  StageReason?: string | undefined;
 
   /**
-   * <p>Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>
+   * <p>Indicates whether single sign-on is enabled for the directory. For more information, see
+   *         <a>EnableSso</a> and <a>DisableSso</a>.</p>
+   * @public
    */
-  SsoEnabled?: boolean;
+  SsoEnabled?: boolean | undefined;
 
   /**
    * <p>The desired number of domain controllers in the directory if the directory is Microsoft
    *       AD.</p>
+   * @public
    */
-  DesiredNumberOfDomainControllers?: number;
+  DesiredNumberOfDomainControllers?: number | undefined;
 
   /**
    * <p>Describes the Managed Microsoft AD directory in the directory owner account.</p>
+   * @public
    */
-  OwnerDirectoryDescription?: OwnerDirectoryDescription;
+  OwnerDirectoryDescription?: OwnerDirectoryDescription | undefined;
 
   /**
    * <p>Lists the Regions where the directory has replicated.</p>
+   * @public
    */
-  RegionsInfo?: RegionsInfo;
-}
+  RegionsInfo?: RegionsInfo | undefined;
 
-export namespace DirectoryDescription {
   /**
-   * @internal
+   * <p>The operating system (OS) version of the directory.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DirectoryDescription): any => ({
-    ...obj,
-    ...(obj.ShareNotes && { ShareNotes: SENSITIVE_STRING }),
-    ...(obj.RadiusSettings && { RadiusSettings: RadiusSettings.filterSensitiveLog(obj.RadiusSettings) }),
-    ...(obj.OwnerDirectoryDescription && {
-      OwnerDirectoryDescription: OwnerDirectoryDescription.filterSensitiveLog(obj.OwnerDirectoryDescription),
-    }),
-  });
+  OsVersion?: OSVersion | undefined;
+
+  /**
+   * <p>Contains information about the hybrid directory configuration for the directory,
+   *             including Amazon Web Services System Manager managed node identifiers and DNS IPs.</p>
+   * @public
+   */
+  HybridSettings?: HybridSettingsDescription | undefined;
+
+  /**
+   * <p>The network type of the directory.</p>
+   * @public
+   */
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>DescribeDirectories</a> operation.</p>
+ * @public
  */
 export interface DescribeDirectoriesResult {
   /**
-   * <p>The list of <a>DirectoryDescription</a> objects that were retrieved.</p>
+   * <p>The list of available <a>DirectoryDescription</a> objects that were
+   *       retrieved.</p>
    *          <p>It is possible that this list contains less than the number of items specified in the
    *         <code>Limit</code> member of the request. This occurs if there are less than the requested
    *       number of items left to retrieve, or if the limitations of the operation have been
    *       exceeded.</p>
+   * @public
    */
-  DirectoryDescriptions?: DirectoryDescription[];
+  DirectoryDescriptions?: DirectoryDescription[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the <code>NextToken</code>
    *       parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next
    *       set of items.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeDirectoriesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDirectoriesResult): any => ({
-    ...obj,
-    ...(obj.DirectoryDescriptions && {
-      DirectoryDescriptions: obj.DirectoryDescriptions.map((item) => DirectoryDescription.filterSensitiveLog(item)),
-    }),
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>The <code>NextToken</code> value is not valid.</p>
+ * @public
  */
-export interface InvalidNextTokenException extends __SmithyException, $MetadataBearer {
-  name: "InvalidNextTokenException";
-  $fault: "client";
+export interface DescribeDirectoryDataAccessRequest {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>The directory identifier.</p>
+   * @public
    */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
+  DirectoryId: string | undefined;
 }
 
-export namespace InvalidNextTokenException {
+/**
+ * @public
+ */
+export interface DescribeDirectoryDataAccessResult {
   /**
-   * @internal
+   * <p>The current status of data access through the Directory Service Data API.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidNextTokenException): any => ({
-    ...obj,
-  });
+  DataAccessStatus?: DataAccessStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeDomainControllersRequest {
   /**
    * <p>Identifier of the directory for which to retrieve the domain controller
    *       information.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>A list of identifiers for the domain controllers whose information will be
    *       provided.</p>
+   * @public
    */
-  DomainControllerIds?: string[];
+  DomainControllerIds?: string[] | undefined;
 
   /**
    * <p>The <i>DescribeDomainControllers.NextToken</i> value from a previous call
    *       to <a>DescribeDomainControllers</a>. Pass null if this is the first call.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace DescribeDomainControllersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDomainControllersRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum DomainControllerStatus {
-  ACTIVE = "Active",
-  CREATING = "Creating",
-  DELETED = "Deleted",
-  DELETING = "Deleting",
-  FAILED = "Failed",
-  IMPAIRED = "Impaired",
-  RESTORING = "Restoring",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Contains information about the domain controllers for a specified directory.</p>
+ * @public
  */
 export interface DomainController {
   /**
    * <p>Identifier of the directory where the domain controller resides.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>Identifies a specific domain controller in the directory.</p>
+   * @public
    */
-  DomainControllerId?: string;
+  DomainControllerId?: string | undefined;
 
   /**
    * <p>The IP address of the domain controller.</p>
+   * @public
    */
-  DnsIpAddr?: string;
+  DnsIpAddr?: string | undefined;
+
+  /**
+   * <p>The IPv6 address of the domain controller.</p>
+   * @public
+   */
+  DnsIpv6Addr?: string | undefined;
 
   /**
    * <p>The identifier of the VPC that contains the domain controller.</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>Identifier of the subnet in the VPC that contains the domain controller.</p>
+   * @public
    */
-  SubnetId?: string;
+  SubnetId?: string | undefined;
 
   /**
    * <p>The Availability Zone where the domain controller is located.</p>
+   * @public
    */
-  AvailabilityZone?: string;
+  AvailabilityZone?: string | undefined;
 
   /**
    * <p>The status of the domain controller.</p>
+   * @public
    */
-  Status?: DomainControllerStatus | string;
+  Status?: DomainControllerStatus | undefined;
 
   /**
    * <p>A description of the domain controller state.</p>
+   * @public
    */
-  StatusReason?: string;
+  StatusReason?: string | undefined;
 
   /**
    * <p>Specifies when the domain controller was created.</p>
+   * @public
    */
-  LaunchTime?: Date;
+  LaunchTime?: Date | undefined;
 
   /**
    * <p>The date and time that the status was last updated.</p>
+   * @public
    */
-  StatusLastUpdatedDateTime?: Date;
+  StatusLastUpdatedDateTime?: Date | undefined;
 }
 
-export namespace DomainController {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DomainController): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDomainControllersResult {
   /**
    * <p>List of the <a>DomainController</a> objects that were retrieved.</p>
+   * @public
    */
-  DomainControllers?: DomainController[];
+  DomainControllers?: DomainController[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the <code>NextToken</code>
    *       parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the
    *       next set of items.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeDomainControllersResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDomainControllersResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes event topics.</p>
+ * @public
  */
 export interface DescribeEventTopicsRequest {
   /**
    * <p>The Directory ID for which to get the list of associated Amazon SNS topics. If this member
    *       is null, associations for all Directory IDs are returned.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>A list of Amazon SNS topic names for which to obtain the information. If this member is
    *       null, all associations for the specified Directory ID are returned.</p>
    *          <p>An empty list results in an <code>InvalidParameterException</code> being
    *       thrown.</p>
+   * @public
    */
-  TopicNames?: string[];
-}
-
-export namespace DescribeEventTopicsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEventTopicsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum TopicStatus {
-  DELETED = "Deleted",
-  FAILED = "Failed",
-  REGISTERED = "Registered",
-  TOPIC_NOT_FOUND = "Topic not found",
+  TopicNames?: string[] | undefined;
 }
 
 /**
  * <p>Information about Amazon SNS topic and Directory Service directory associations.</p>
+ * @public
  */
 export interface EventTopic {
   /**
    * <p>The Directory ID of an Directory Service directory that will publish status messages to an Amazon SNS
    *       topic.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The name of an Amazon SNS topic the receives status messages from the directory.</p>
+   * @public
    */
-  TopicName?: string;
+  TopicName?: string | undefined;
 
   /**
    * <p>The Amazon SNS topic ARN (Amazon Resource Name).</p>
+   * @public
    */
-  TopicArn?: string;
+  TopicArn?: string | undefined;
 
   /**
    * <p>The date and time of when you associated your directory with the Amazon SNS topic.</p>
+   * @public
    */
-  CreatedDateTime?: Date;
+  CreatedDateTime?: Date | undefined;
 
   /**
    * <p>The topic registration status.</p>
+   * @public
    */
-  Status?: TopicStatus | string;
-}
-
-export namespace EventTopic {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventTopic): any => ({
-    ...obj,
-  });
+  Status?: TopicStatus | undefined;
 }
 
 /**
  * <p>The result of a DescribeEventTopic request.</p>
+ * @public
  */
 export interface DescribeEventTopicsResult {
   /**
    * <p>A list of Amazon SNS topic names that receive status messages from the specified Directory
    *       ID.</p>
+   * @public
    */
-  EventTopics?: EventTopic[];
+  EventTopics?: EventTopic[] | undefined;
 }
 
-export namespace DescribeEventTopicsResult {
+/**
+ * @public
+ */
+export interface DescribeHybridADUpdateRequest {
   /**
-   * @internal
+   * <p>The identifier of the hybrid directory for which to retrieve update
+   *             information.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeEventTopicsResult): any => ({
-    ...obj,
-  });
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>The type of update activities to retrieve. Valid values include
+   *                 <code>SelfManagedInstances</code> and
+   *             <code>HybridAdministratorAccount</code>.</p>
+   * @public
+   */
+  UpdateType?: HybridUpdateType | undefined;
+
+  /**
+   * <p>The pagination token from a previous request to <a>DescribeHybridADUpdate</a>. Pass null if this is the first request.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
-export enum LDAPSType {
-  CLIENT = "Client",
+/**
+ * <p>Contains the configuration values for a hybrid directory update, including Amazon Web Services
+ *             System Manager managed node and DNS information.</p>
+ * @public
+ */
+export interface HybridUpdateValue {
+  /**
+   * <p>The identifiers of the self-managed instances with SSM in the hybrid directory
+   *             configuration.</p>
+   * @public
+   */
+  InstanceIds?: string[] | undefined;
+
+  /**
+   * <p>The IP addresses of the DNS servers or domain controllers in the hybrid directory
+   *             configuration.</p>
+   * @public
+   */
+  DnsIps?: string[] | undefined;
 }
 
+/**
+ * <p>Contains detailed information about a specific update activity for a hybrid directory
+ *             component.</p>
+ * @public
+ */
+export interface HybridUpdateInfoEntry {
+  /**
+   * <p>The current status of the update activity. Valid values include <code>UPDATED</code>,
+   *                 <code>UPDATING</code>, and <code>UPDATE_FAILED</code>.</p>
+   * @public
+   */
+  Status?: UpdateStatus | undefined;
+
+  /**
+   * <p>A human-readable description of the update status, including any error details or
+   *             progress information.</p>
+   * @public
+   */
+  StatusReason?: string | undefined;
+
+  /**
+   * <p>Specifies if the update was initiated by the customer or Amazon Web Services.</p>
+   * @public
+   */
+  InitiatedBy?: string | undefined;
+
+  /**
+   * <p>The new configuration values being applied in this update.</p>
+   * @public
+   */
+  NewValue?: HybridUpdateValue | undefined;
+
+  /**
+   * <p>The previous configuration values before this update was applied.</p>
+   * @public
+   */
+  PreviousValue?: HybridUpdateValue | undefined;
+
+  /**
+   * <p>The date and time when the update activity was initiated.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The date and time when the update activity status was last updated.</p>
+   * @public
+   */
+  LastUpdatedDateTime?: Date | undefined;
+
+  /**
+   * <p>The identifier of the assessment performed to validate this update
+   *             configuration.</p>
+   * @public
+   */
+  AssessmentId?: string | undefined;
+}
+
+/**
+ * <p>Contains information about update activities for different components of a hybrid
+ *             directory.</p>
+ * @public
+ */
+export interface HybridUpdateActivities {
+  /**
+   * <p>A list of update activities related to the self-managed instances with SSM in the
+   *             self-managed instances with SSM hybrid directory configuration.</p>
+   * @public
+   */
+  SelfManagedInstances?: HybridUpdateInfoEntry[] | undefined;
+
+  /**
+   * <p>A list of update activities related to hybrid directory administrator account
+   *             changes.</p>
+   * @public
+   */
+  HybridAdministratorAccount?: HybridUpdateInfoEntry[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeHybridADUpdateResult {
+  /**
+   * <p>Information about update activities for the hybrid directory, organized by update
+   *             type.</p>
+   * @public
+   */
+  UpdateActivities?: HybridUpdateActivities | undefined;
+
+  /**
+   * <p>If not null, more results are available. Pass this value for the
+   *                 <code>NextToken</code> parameter in a subsequent request to retrieve the next set of
+   *             items.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DescribeLDAPSSettingsRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The type of LDAP security to enable. Currently only the value <code>Client</code> is
    *       supported.</p>
+   * @public
    */
-  Type?: LDAPSType | string;
+  Type?: LDAPSType | undefined;
 
   /**
    * <p>The type of next token used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifies the number of items that should be displayed on one page.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace DescribeLDAPSSettingsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeLDAPSSettingsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum LDAPSStatus {
-  DISABLED = "Disabled",
-  ENABLED = "Enabled",
-  ENABLE_FAILED = "EnableFailed",
-  ENABLING = "Enabling",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Contains general information about the LDAPS settings.</p>
+ * @public
  */
 export interface LDAPSSettingInfo {
   /**
    * <p>The state of the LDAPS settings.</p>
+   * @public
    */
-  LDAPSStatus?: LDAPSStatus | string;
+  LDAPSStatus?: LDAPSStatus | undefined;
 
   /**
    * <p>Describes a state change for LDAPS.</p>
+   * @public
    */
-  LDAPSStatusReason?: string;
+  LDAPSStatusReason?: string | undefined;
 
   /**
    * <p>The date and time when the LDAPS settings were last updated.</p>
+   * @public
    */
-  LastUpdatedDateTime?: Date;
+  LastUpdatedDateTime?: Date | undefined;
 }
 
-export namespace LDAPSSettingInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LDAPSSettingInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeLDAPSSettingsResult {
   /**
    * <p>Information about LDAP security for the specified directory, including status of
    *       enablement, state last updated date time, and the reason for the state.</p>
+   * @public
    */
-  LDAPSSettingsInfo?: LDAPSSettingInfo[];
+  LDAPSSettingsInfo?: LDAPSSettingInfo[] | undefined;
 
   /**
    * <p>The next token used to retrieve the LDAPS settings if the number of setting types exceeds
    *       page limit and there is another page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeLDAPSSettingsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeLDAPSSettingsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRegionsRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The name of the Region. For example, <code>us-east-1</code>.</p>
+   * @public
    */
-  RegionName?: string;
+  RegionName?: string | undefined;
 
   /**
    * <p>The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeRegionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeRegionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum RegionType {
-  ADDITIONAL = "Additional",
-  PRIMARY = "Primary",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>The replicated Region information for a directory.</p>
+ * @public
  */
 export interface RegionDescription {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The name of the Region. For example, <code>us-east-1</code>.</p>
+   * @public
    */
-  RegionName?: string;
+  RegionName?: string | undefined;
 
   /**
    * <p>Specifies whether the Region is the primary Region or an additional Region.</p>
+   * @public
    */
-  RegionType?: RegionType | string;
+  RegionType?: RegionType | undefined;
 
   /**
    * <p>The status of the replication process for the specified Region.</p>
+   * @public
    */
-  Status?: DirectoryStage | string;
+  Status?: DirectoryStage | undefined;
 
   /**
-   * <p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>
+   * <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
+   * @public
    */
-  VpcSettings?: DirectoryVpcSettings;
+  VpcSettings?: DirectoryVpcSettings | undefined;
 
   /**
    * <p>The desired number of domain controllers in the specified Region for the specified
    *       directory.</p>
+   * @public
    */
-  DesiredNumberOfDomainControllers?: number;
+  DesiredNumberOfDomainControllers?: number | undefined;
 
   /**
    * <p>Specifies when the Region replication began.</p>
+   * @public
    */
-  LaunchTime?: Date;
+  LaunchTime?: Date | undefined;
 
   /**
    * <p>The date and time that the Region status was last updated.</p>
+   * @public
    */
-  StatusLastUpdatedDateTime?: Date;
+  StatusLastUpdatedDateTime?: Date | undefined;
 
   /**
    * <p>The date and time that the Region description was last updated.</p>
+   * @public
    */
-  LastUpdatedDateTime?: Date;
+  LastUpdatedDateTime?: Date | undefined;
 }
 
-export namespace RegionDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegionDescription): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRegionsResult {
   /**
    * <p>List of Region information related to the directory for each replicated Region.</p>
+   * @public
    */
-  RegionsDescription?: RegionDescription[];
+  RegionsDescription?: RegionDescription[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the <code>NextToken</code>
    *       parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set
    *       of items.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeRegionsResult {
+/**
+ * @public
+ */
+export interface DescribeSettingsRequest {
   /**
-   * @internal
+   * <p>The identifier of the directory for which to retrieve information.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeRegionsResult): any => ({
-    ...obj,
-  });
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>The status of the directory settings for which to retrieve information.</p>
+   * @public
+   */
+  Status?: DirectoryConfigurationStatus | undefined;
+
+  /**
+   * <p>The <code>DescribeSettingsResult.NextToken</code> value from a previous call to <a>DescribeSettings</a>. Pass null if this is the first call.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * <p>Contains information about the specified configurable setting for a directory.</p>
+ * @public
+ */
+export interface SettingEntry {
+  /**
+   * <p>The type, or category, of a directory setting. Similar settings have the same type. For
+   *       example, <code>Protocol</code>, <code>Cipher</code>, or <code>Certificate-Based
+   *         Authentication</code>.</p>
+   * @public
+   */
+  Type?: string | undefined;
+
+  /**
+   * <p>The name of the directory setting. For example:</p>
+   *          <p>
+   *             <code>TLS_1_0</code>
+   *          </p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The valid range of values for the directory setting. These values depend on the
+   *         <code>DataType</code> of your directory.</p>
+   * @public
+   */
+  AllowedValues?: string | undefined;
+
+  /**
+   * <p>The value of the directory setting that is applied to the directory.</p>
+   * @public
+   */
+  AppliedValue?: string | undefined;
+
+  /**
+   * <p>The value that was last requested for the directory setting.</p>
+   * @public
+   */
+  RequestedValue?: string | undefined;
+
+  /**
+   * <p>The overall status of the request to update the directory setting request. If the
+   *       directory setting is deployed in more than one region, and the request fails in any region,
+   *       the overall status is <code>Failed</code>.</p>
+   * @public
+   */
+  RequestStatus?: DirectoryConfigurationStatus | undefined;
+
+  /**
+   * <p>Details about the status of the request to update the directory setting. If the directory
+   *       setting is deployed in more than one region, status is returned for the request in each region
+   *       where the setting is deployed.</p>
+   * @public
+   */
+  RequestDetailedStatus?: Record<string, DirectoryConfigurationStatus> | undefined;
+
+  /**
+   * <p>The last status message for the directory status request.</p>
+   * @public
+   */
+  RequestStatusMessage?: string | undefined;
+
+  /**
+   * <p>The date and time when the directory setting was last updated.</p>
+   * @public
+   */
+  LastUpdatedDateTime?: Date | undefined;
+
+  /**
+   * <p>The date and time when the request to update a directory setting was last
+   *       submitted.</p>
+   * @public
+   */
+  LastRequestedDateTime?: Date | undefined;
+
+  /**
+   * <p>The data type of a directory setting. This is used to define the
+   *         <code>AllowedValues</code> of a setting. For example a data type can be
+   *       <code>Boolean</code>, <code>DurationInSeconds</code>, or <code>Enum</code>.</p>
+   * @public
+   */
+  DataType?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeSettingsResult {
+  /**
+   * <p>The identifier of the directory.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The list of <a>SettingEntry</a> objects that were retrieved.</p>
+   *          <p>It is possible that this list contains less than the number of items specified in the
+   *         <code>Limit</code> member of the request. This occurs if there are less than the requested
+   *       number of items left to retrieve, or if the limitations of the operation have been
+   *       exceeded.</p>
+   * @public
+   */
+  SettingEntries?: SettingEntry[] | undefined;
+
+  /**
+   * <p>If not null, token that indicates that more results are available. Pass this value for the
+   *         <code>NextToken</code> parameter in a subsequent call to <code>DescribeSettings</code> to
+   *       retrieve the next set of items. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DescribeSharedDirectoriesRequest {
   /**
    * <p>Returns the identifier of the directory in the directory owner account. </p>
+   * @public
    */
   OwnerDirectoryId: string | undefined;
 
   /**
    * <p>A list of identifiers of all shared directories in your account. </p>
+   * @public
    */
-  SharedDirectoryIds?: string[];
+  SharedDirectoryIds?: string[] | undefined;
 
   /**
    * <p>The <code>DescribeSharedDirectoriesResult.NextToken</code> value from a previous call to
    *         <a>DescribeSharedDirectories</a>. Pass null if this is the first call. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The number of shared directories to return in the response object.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
-export namespace DescribeSharedDirectoriesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSharedDirectoriesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSharedDirectoriesResult {
   /**
    * <p>A list of all shared directories in your account.</p>
+   * @public
    */
-  SharedDirectories?: SharedDirectory[];
+  SharedDirectories?: SharedDirectory[] | undefined;
 
   /**
    * <p>If not null, token that indicates that more results are available. Pass this value for the
    *         <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeSharedDirectoriesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSharedDirectoriesResult): any => ({
-    ...obj,
-    ...(obj.SharedDirectories && {
-      SharedDirectories: obj.SharedDirectories.map((item) => SharedDirectory.filterSensitiveLog(item)),
-    }),
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>
+ * @public
  */
 export interface DescribeSnapshotsRequest {
   /**
    * <p>The identifier of the directory for which to retrieve snapshot information.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>A list of identifiers of the snapshots to obtain the information for. If this member is
    *          null or empty, all snapshots are returned using the <i>Limit</i> and <i>NextToken</i>
    *          members.</p>
+   * @public
    */
-  SnapshotIds?: string[];
+  SnapshotIds?: string[] | undefined;
 
   /**
    * <p>The <i>DescribeSnapshotsResult.NextToken</i> value from a previous call to
    *             <a>DescribeSnapshots</a>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace DescribeSnapshotsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSnapshotsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SnapshotStatus {
-  COMPLETED = "Completed",
-  CREATING = "Creating",
-  FAILED = "Failed",
-}
-
-export enum SnapshotType {
-  AUTO = "Auto",
-  MANUAL = "Manual",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Describes a directory snapshot.</p>
+ * @public
  */
 export interface Snapshot {
   /**
    * <p>The directory identifier.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The snapshot identifier.</p>
+   * @public
    */
-  SnapshotId?: string;
+  SnapshotId?: string | undefined;
 
   /**
    * <p>The snapshot type.</p>
+   * @public
    */
-  Type?: SnapshotType | string;
+  Type?: SnapshotType | undefined;
 
   /**
    * <p>The descriptive name of the snapshot.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The snapshot status.</p>
+   * @public
    */
-  Status?: SnapshotStatus | string;
+  Status?: SnapshotStatus | undefined;
 
   /**
    * <p>The date and time that the snapshot was taken.</p>
+   * @public
    */
-  StartTime?: Date;
-}
-
-export namespace Snapshot {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Snapshot): any => ({
-    ...obj,
-  });
+  StartTime?: Date | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>
+ * @public
  */
 export interface DescribeSnapshotsResult {
   /**
@@ -3365,153 +3187,132 @@ export interface DescribeSnapshotsResult {
    *             <i>Limit</i> member of the request. This occurs if there are less than the requested
    *          number of items left to retrieve, or if the limitations of the operation have been
    *          exceeded.</p>
+   * @public
    */
-  Snapshots?: Snapshot[];
+  Snapshots?: Snapshot[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value in the <i>NextToken</i> member of
    *          a subsequent call to <a>DescribeSnapshots</a>.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeSnapshotsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSnapshotsResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input
  *       parameters are provided, such as directory ID or trust ID, this request describes all the
  *       trust relationships.</p>
+ * @public
  */
 export interface DescribeTrustsRequest {
   /**
    * <p>The Directory ID of the Amazon Web Services directory that is a part of the requested trust
    *       relationship.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>A list of identifiers of the trust relationships for which to obtain the information. If
    *       this member is null, all trust relationships that belong to the current account are
    *       returned.</p>
    *          <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>
+   * @public
    */
-  TrustIds?: string[];
+  TrustIds?: string[] | undefined;
 
   /**
    * <p>The <i>DescribeTrustsResult.NextToken</i> value from a previous call to
    *         <a>DescribeTrusts</a>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace DescribeTrustsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTrustsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum TrustState {
-  CREATED = "Created",
-  CREATING = "Creating",
-  DELETED = "Deleted",
-  DELETING = "Deleting",
-  FAILED = "Failed",
-  UPDATED = "Updated",
-  UPDATE_FAILED = "UpdateFailed",
-  UPDATING = "Updating",
-  VERIFIED = "Verified",
-  VERIFYING = "Verifying",
-  VERIFY_FAILED = "VerifyFailed",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Describes a trust relationship between an Managed Microsoft AD directory and an external
  *       domain.</p>
+ * @public
  */
 export interface Trust {
   /**
    * <p>The Directory ID of the Amazon Web Services directory involved in the trust relationship.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The unique ID of the trust relationship.</p>
+   * @public
    */
-  TrustId?: string;
+  TrustId?: string | undefined;
 
   /**
    * <p>The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust
    *       relationship.</p>
+   * @public
    */
-  RemoteDomainName?: string;
+  RemoteDomainName?: string | undefined;
 
   /**
    * <p>The trust relationship type. <code>Forest</code> is the default.</p>
+   * @public
    */
-  TrustType?: TrustType | string;
+  TrustType?: TrustType | undefined;
 
   /**
    * <p>The trust relationship direction.</p>
+   * @public
    */
-  TrustDirection?: TrustDirection | string;
+  TrustDirection?: TrustDirection | undefined;
 
   /**
    * <p>The trust relationship state.</p>
+   * @public
    */
-  TrustState?: TrustState | string;
+  TrustState?: TrustState | undefined;
 
   /**
    * <p>The date and time that the trust relationship was created.</p>
+   * @public
    */
-  CreatedDateTime?: Date;
+  CreatedDateTime?: Date | undefined;
 
   /**
    * <p>The date and time that the trust relationship was last updated.</p>
+   * @public
    */
-  LastUpdatedDateTime?: Date;
+  LastUpdatedDateTime?: Date | undefined;
 
   /**
    * <p>The date and time that the TrustState was last updated.</p>
+   * @public
    */
-  StateLastUpdatedDateTime?: Date;
+  StateLastUpdatedDateTime?: Date | undefined;
 
   /**
    * <p>The reason for the TrustState.</p>
+   * @public
    */
-  TrustStateReason?: string;
+  TrustStateReason?: string | undefined;
 
   /**
    * <p>Current state of selective authentication for the trust.</p>
+   * @public
    */
-  SelectiveAuth?: SelectiveAuth | string;
-}
-
-export namespace Trust {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Trust): any => ({
-    ...obj,
-  });
+  SelectiveAuth?: SelectiveAuth | undefined;
 }
 
 /**
  * <p>The result of a DescribeTrust request.</p>
+ * @public
  */
 export interface DescribeTrustsResult {
   /**
@@ -3520,267 +3321,311 @@ export interface DescribeTrustsResult {
    *         <i>Limit</i> member of the request. This occurs if there are less than the
    *       requested number of items left to retrieve, or if the limitations of the operation have been
    *       exceeded.</p>
+   * @public
    */
-  Trusts?: Trust[];
+  Trusts?: Trust[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the
    *         <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeTrustsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeTrustsResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>Contains directory limit information for a Region.</p>
+ * @public
  */
-export interface DirectoryLimits {
+export interface DescribeUpdateDirectoryRequest {
   /**
-   * <p>The maximum number of cloud directories allowed in the Region.</p>
-   */
-  CloudOnlyDirectoriesLimit?: number;
-
-  /**
-   * <p>The current number of cloud directories in the Region.</p>
-   */
-  CloudOnlyDirectoriesCurrentCount?: number;
-
-  /**
-   * <p>Indicates if the cloud directory limit has been reached.</p>
-   */
-  CloudOnlyDirectoriesLimitReached?: boolean;
-
-  /**
-   * <p>The maximum number of Managed Microsoft AD directories allowed in the region.</p>
-   */
-  CloudOnlyMicrosoftADLimit?: number;
-
-  /**
-   * <p>The current number of Managed Microsoft AD directories in the region.</p>
-   */
-  CloudOnlyMicrosoftADCurrentCount?: number;
-
-  /**
-   * <p>Indicates if the Managed Microsoft AD directory limit has been reached.</p>
-   */
-  CloudOnlyMicrosoftADLimitReached?: boolean;
-
-  /**
-   * <p>The maximum number of connected directories allowed in the Region.</p>
-   */
-  ConnectedDirectoriesLimit?: number;
-
-  /**
-   * <p>The current number of connected directories in the Region.</p>
-   */
-  ConnectedDirectoriesCurrentCount?: number;
-
-  /**
-   * <p>Indicates if the connected directory limit has been reached.</p>
-   */
-  ConnectedDirectoriesLimitReached?: boolean;
-}
-
-export namespace DirectoryLimits {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryLimits): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified directory has not been shared with this Amazon Web Services account.</p>
- */
-export interface DirectoryNotSharedException extends __SmithyException, $MetadataBearer {
-  name: "DirectoryNotSharedException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace DirectoryNotSharedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DirectoryNotSharedException): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableClientAuthenticationRequest {
-  /**
-   * <p>The identifier of the directory </p>
+   * <p> The unique identifier of the directory. </p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
-   * <p>The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.</p>
+   * <p> The type of updates you want to describe for the directory. </p>
+   * @public
    */
-  Type: ClientAuthenticationType | string | undefined;
-}
+  UpdateType: UpdateType | undefined;
 
-export namespace DisableClientAuthenticationRequest {
   /**
-   * @internal
+   * <p> The name of the Region. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisableClientAuthenticationRequest): any => ({
-    ...obj,
-  });
-}
+  RegionName?: string | undefined;
 
-export interface DisableClientAuthenticationResult {}
-
-export namespace DisableClientAuthenticationResult {
   /**
-   * @internal
+   * <p> The <code>DescribeUpdateDirectoryResult</code>. NextToken value from a previous call to
+   *         <a>DescribeUpdateDirectory</a>. Pass null if this is the first call. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisableClientAuthenticationResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>Client authentication is already enabled.</p>
+ * <p>OS version that the directory needs to be updated to.</p>
+ * @public
  */
-export interface InvalidClientAuthStatusException extends __SmithyException, $MetadataBearer {
-  name: "InvalidClientAuthStatusException";
-  $fault: "client";
+export interface OSUpdateSettings {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>OS version that the directory needs to be updated to.</p>
+   * @public
    */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
+  OSVersion?: OSVersion | undefined;
 }
 
-export namespace InvalidClientAuthStatusException {
+/**
+ * <p> The value for a given type of <code>UpdateSettings</code>. </p>
+ * @public
+ */
+export interface UpdateValue {
   /**
-   * @internal
+   * <p> The OS update related settings. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidClientAuthStatusException): any => ({
-    ...obj,
-  });
+  OSUpdateSettings?: OSUpdateSettings | undefined;
 }
 
+/**
+ * <p>An entry of update information related to a requested update type.</p>
+ * @public
+ */
+export interface UpdateInfoEntry {
+  /**
+   * <p> The name of the Region. </p>
+   * @public
+   */
+  Region?: string | undefined;
+
+  /**
+   * <p> The status of the update performed on the directory. </p>
+   * @public
+   */
+  Status?: UpdateStatus | undefined;
+
+  /**
+   * <p> The reason for the current status of the update type activity. </p>
+   * @public
+   */
+  StatusReason?: string | undefined;
+
+  /**
+   * <p> This specifies if the update was initiated by the customer or by the service team.
+   *     </p>
+   * @public
+   */
+  InitiatedBy?: string | undefined;
+
+  /**
+   * <p> The new value of the target setting. </p>
+   * @public
+   */
+  NewValue?: UpdateValue | undefined;
+
+  /**
+   * <p> The old value of the target setting. </p>
+   * @public
+   */
+  PreviousValue?: UpdateValue | undefined;
+
+  /**
+   * <p> The start time of the <code>UpdateDirectorySetup</code> for the particular type. </p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p> The last updated date and time of a particular directory setting. </p>
+   * @public
+   */
+  LastUpdatedDateTime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeUpdateDirectoryResult {
+  /**
+   * <p> The list of update activities on a directory for the requested update type. </p>
+   * @public
+   */
+  UpdateActivities?: UpdateInfoEntry[] | undefined;
+
+  /**
+   * <p> If not null, more results are available. Pass this value for the <code>NextToken</code>
+   *       parameter. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains directory limit information for a Region.</p>
+ * @public
+ */
+export interface DirectoryLimits {
+  /**
+   * <p>The maximum number of cloud directories allowed in the Region.</p>
+   * @public
+   */
+  CloudOnlyDirectoriesLimit?: number | undefined;
+
+  /**
+   * <p>The current number of cloud directories in the Region.</p>
+   * @public
+   */
+  CloudOnlyDirectoriesCurrentCount?: number | undefined;
+
+  /**
+   * <p>Indicates if the cloud directory limit has been reached.</p>
+   * @public
+   */
+  CloudOnlyDirectoriesLimitReached?: boolean | undefined;
+
+  /**
+   * <p>The maximum number of Managed Microsoft AD directories allowed in the region.</p>
+   * @public
+   */
+  CloudOnlyMicrosoftADLimit?: number | undefined;
+
+  /**
+   * <p>The current number of Managed Microsoft AD directories in the region.</p>
+   * @public
+   */
+  CloudOnlyMicrosoftADCurrentCount?: number | undefined;
+
+  /**
+   * <p>Indicates if the Managed Microsoft AD directory limit has been reached.</p>
+   * @public
+   */
+  CloudOnlyMicrosoftADLimitReached?: boolean | undefined;
+
+  /**
+   * <p>The maximum number of connected directories allowed in the Region.</p>
+   * @public
+   */
+  ConnectedDirectoriesLimit?: number | undefined;
+
+  /**
+   * <p>The current number of connected directories in the Region.</p>
+   * @public
+   */
+  ConnectedDirectoriesCurrentCount?: number | undefined;
+
+  /**
+   * <p>Indicates if the connected directory limit has been reached.</p>
+   * @public
+   */
+  ConnectedDirectoriesLimitReached?: boolean | undefined;
+}
+
+/**
+ * <p>Contains the inputs for the <a>DisableCAEnrollmentPolicy</a> operation.</p>
+ * @public
+ */
+export interface DisableCAEnrollmentPolicyRequest {
+  /**
+   * <p>The identifier of the directory for which to disable the CA enrollment policy.</p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+}
+
+/**
+ * <p>Contains the results of the <a>DisableCAEnrollmentPolicy</a> operation.</p>
+ * @public
+ */
+export interface DisableCAEnrollmentPolicyResult {}
+
+/**
+ * @public
+ */
+export interface DisableClientAuthenticationRequest {
+  /**
+   * <p>The identifier of the directory </p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>The type of client authentication to disable. Currently the only parameter
+   *         <code>"SmartCard"</code> is supported.</p>
+   * @public
+   */
+  Type: ClientAuthenticationType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisableClientAuthenticationResult {}
+
+/**
+ * @public
+ */
+export interface DisableDirectoryDataAccessRequest {
+  /**
+   * <p>The directory identifier.</p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisableDirectoryDataAccessResult {}
+
+/**
+ * @public
+ */
 export interface DisableLDAPSRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The type of LDAP security to enable. Currently only the value <code>Client</code> is
    *       supported.</p>
+   * @public
    */
-  Type: LDAPSType | string | undefined;
-}
-
-export namespace DisableLDAPSRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableLDAPSRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableLDAPSResult {}
-
-export namespace DisableLDAPSResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableLDAPSResult): any => ({
-    ...obj,
-  });
+  Type: LDAPSType | undefined;
 }
 
 /**
- * <p>The LDAP activities could not be performed because they are limited by the LDAPS
- *       status.</p>
+ * @public
  */
-export interface InvalidLDAPSStatusException extends __SmithyException, $MetadataBearer {
-  name: "InvalidLDAPSStatusException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidLDAPSStatusException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidLDAPSStatusException): any => ({
-    ...obj,
-  });
-}
+export interface DisableLDAPSResult {}
 
 /**
  * <p>Contains the inputs for the <a>DisableRadius</a> operation.</p>
+ * @public
  */
 export interface DisableRadiusRequest {
   /**
    * <p>The identifier of the directory for which to disable MFA.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 }
 
-export namespace DisableRadiusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableRadiusRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the results of the <a>DisableRadius</a> operation.</p>
+ * @public
  */
 export interface DisableRadiusResult {}
 
-export namespace DisableRadiusResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableRadiusResult): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the inputs for the <a>DisableSso</a> operation.</p>
+ * @public
  */
 export interface DisableSsoRequest {
   /**
    * <p>The identifier of the directory for which to disable single-sign on.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -3793,182 +3638,152 @@ export interface DisableSsoRequest {
    *       and <i>Password</i> parameters. These credentials are only used to disable
    *       single sign-on and are not stored by the service. The AD Connector service account is not
    *       changed.</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The password of an alternate account to use to disable single-sign on. This is only used
    *       for AD Connector directories. For more information, see the <i>UserName</i>
    *       parameter.</p>
+   * @public
    */
-  Password?: string;
-}
-
-export namespace DisableSsoRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableSsoRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  Password?: string | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>DisableSso</a> operation.</p>
+ * @public
  */
 export interface DisableSsoResult {}
 
-export namespace DisableSsoResult {
+/**
+ * <p>Contains the inputs for the <a>EnableCAEnrollmentPolicy</a> operation.</p>
+ * @public
+ */
+export interface EnableCAEnrollmentPolicyRequest {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableSsoResult): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableClientAuthenticationRequest {
-  /**
-   * <p>The identifier of the specified directory. </p>
+   * <p>The identifier of the directory for which to enable the CA enrollment policy.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
-   * <p>The type of client authentication to enable. Currently only the value <code>SmartCard</code> is
-   *       supported. Smart card authentication in AD Connector requires that you enable Kerberos
-   *       Constrained Delegation for the Service User to the LDAP service in your self-managed AD.
-   *     </p>
+   * <p>The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use
+   *       for automatic certificate enrollment. This connector must be properly configured and
+   *       accessible from the directory.</p>
+   *          <p>The ARN format is:
+   *       <code>arn:aws:pca-connector-ad:<i>region</i>:<i>account-id</i>:connector/<i>connector-id</i>
+   *             </code>
+   *          </p>
+   * @public
    */
-  Type: ClientAuthenticationType | string | undefined;
-}
-
-export namespace EnableClientAuthenticationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableClientAuthenticationRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableClientAuthenticationResult {}
-
-export namespace EnableClientAuthenticationResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableClientAuthenticationResult): any => ({
-    ...obj,
-  });
+  PcaConnectorArn: string | undefined;
 }
 
 /**
- * <p>Client authentication setup could not be completed because at least one valid certificate must be
- *       registered in the system.</p>
+ * <p>Contains the results of the <a>EnableCAEnrollmentPolicy</a> operation.</p>
+ * @public
  */
-export interface NoAvailableCertificateException extends __SmithyException, $MetadataBearer {
-  name: "NoAvailableCertificateException";
-  $fault: "client";
+export interface EnableCAEnrollmentPolicyResult {}
+
+/**
+ * @public
+ */
+export interface EnableClientAuthenticationRequest {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>The identifier of the specified directory. </p>
+   * @public
    */
-  Message?: string;
+  DirectoryId: string | undefined;
 
   /**
-   * <p>The Amazon Web Services request identifier.</p>
+   * <p>The type of client authentication to enable. Currently only the value
+   *         <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires
+   *       that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in
+   *       your self-managed AD. </p>
+   * @public
    */
-  RequestId?: string;
+  Type: ClientAuthenticationType | undefined;
 }
 
-export namespace NoAvailableCertificateException {
+/**
+ * @public
+ */
+export interface EnableClientAuthenticationResult {}
+
+/**
+ * @public
+ */
+export interface EnableDirectoryDataAccessRequest {
   /**
-   * @internal
+   * <p>The directory identifier.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: NoAvailableCertificateException): any => ({
-    ...obj,
-  });
+  DirectoryId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface EnableDirectoryDataAccessResult {}
+
+/**
+ * @public
+ */
 export interface EnableLDAPSRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The type of LDAP security to enable. Currently only the value <code>Client</code> is
    *       supported.</p>
+   * @public
    */
-  Type: LDAPSType | string | undefined;
-}
-
-export namespace EnableLDAPSRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableLDAPSRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableLDAPSResult {}
-
-export namespace EnableLDAPSResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableLDAPSResult): any => ({
-    ...obj,
-  });
+  Type: LDAPSType | undefined;
 }
 
 /**
+ * @public
+ */
+export interface EnableLDAPSResult {}
+
+/**
  * <p>Contains the inputs for the <a>EnableRadius</a> operation.</p>
+ * @public
  */
 export interface EnableRadiusRequest {
   /**
    * <p>The identifier of the directory for which to enable MFA.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
    *          server.</p>
+   * @public
    */
   RadiusSettings: RadiusSettings | undefined;
 }
 
-export namespace EnableRadiusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableRadiusRequest): any => ({
-    ...obj,
-    ...(obj.RadiusSettings && { RadiusSettings: RadiusSettings.filterSensitiveLog(obj.RadiusSettings) }),
-  });
-}
-
 /**
  * <p>Contains the results of the <a>EnableRadius</a> operation.</p>
+ * @public
  */
 export interface EnableRadiusResult {}
 
-export namespace EnableRadiusResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableRadiusResult): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the inputs for the <a>EnableSso</a> operation.</p>
+ * @public
  */
 export interface EnableSsoRequest {
   /**
    * <p>The identifier of the directory for which to enable single-sign on.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -3981,146 +3796,145 @@ export interface EnableSsoRequest {
    *         <i>Password</i> parameters. These credentials are only used to enable single
    *       sign-on and are not stored by the service. The AD Connector service account is not
    *       changed.</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The password of an alternate account to use to enable single-sign on. This is only used
    *       for AD Connector directories. For more information, see the <i>UserName</i>
    *       parameter.</p>
+   * @public
    */
-  Password?: string;
-}
-
-export namespace EnableSsoRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableSsoRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
+  Password?: string | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>EnableSso</a> operation.</p>
+ * @public
  */
 export interface EnableSsoResult {}
 
-export namespace EnableSsoResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableSsoResult): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>
+ * @public
  */
 export interface GetDirectoryLimitsRequest {}
 
-export namespace GetDirectoryLimitsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDirectoryLimitsRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>
+ * @public
  */
 export interface GetDirectoryLimitsResult {
   /**
    * <p>A <a>DirectoryLimits</a> object that contains the directory limits for the
    *       current Region.</p>
+   * @public
    */
-  DirectoryLimits?: DirectoryLimits;
-}
-
-export namespace GetDirectoryLimitsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDirectoryLimitsResult): any => ({
-    ...obj,
-  });
+  DirectoryLimits?: DirectoryLimits | undefined;
 }
 
 /**
  * <p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>
+ * @public
  */
 export interface GetSnapshotLimitsRequest {
   /**
    * <p>Contains the identifier of the directory to obtain the limits for.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 }
 
-export namespace GetSnapshotLimitsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSnapshotLimitsRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains manual snapshot limit information for a directory.</p>
+ * @public
  */
 export interface SnapshotLimits {
   /**
    * <p>The maximum number of manual snapshots allowed.</p>
+   * @public
    */
-  ManualSnapshotsLimit?: number;
+  ManualSnapshotsLimit?: number | undefined;
 
   /**
    * <p>The current number of manual snapshots of the directory.</p>
+   * @public
    */
-  ManualSnapshotsCurrentCount?: number;
+  ManualSnapshotsCurrentCount?: number | undefined;
 
   /**
    * <p>Indicates if the manual snapshot limit has been reached.</p>
+   * @public
    */
-  ManualSnapshotsLimitReached?: boolean;
-}
-
-export namespace SnapshotLimits {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnapshotLimits): any => ({
-    ...obj,
-  });
+  ManualSnapshotsLimitReached?: boolean | undefined;
 }
 
 /**
  * <p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>
+ * @public
  */
 export interface GetSnapshotLimitsResult {
   /**
    * <p>A <a>SnapshotLimits</a> object that contains the manual snapshot limits for the specified
    *          directory.</p>
+   * @public
    */
-  SnapshotLimits?: SnapshotLimits;
+  SnapshotLimits?: SnapshotLimits | undefined;
 }
 
-export namespace GetSnapshotLimitsResult {
+/**
+ * @public
+ */
+export interface ListADAssessmentsRequest {
   /**
-   * @internal
+   * <p>The identifier of the directory for which to list assessments. If not specified, all
+   *             assessments in your account are returned.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetSnapshotLimitsResult): any => ({
-    ...obj,
-  });
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The pagination token from a previous request to <a>ListADAssessments</a>.
+   *             Pass null if this is the first request.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of assessment summaries to return.</p>
+   * @public
+   */
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListADAssessmentsResult {
+  /**
+   * <p>A list of assessment summaries containing basic information about each directory
+   *             assessment.</p>
+   * @public
+   */
+  Assessments?: AssessmentSummary[] | undefined;
+
+  /**
+   * <p>If not null, more results are available. Pass this value for the
+   *                 <code>NextToken</code> parameter in a subsequent request to retrieve the next set of
+   *             items.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListCertificatesRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -4129,836 +3943,558 @@ export interface ListCertificatesRequest {
    *       element indicates that more certificates are available. Use the value of the returned
    *         <code>NextToken</code> element in your request until the token comes back as
    *         <code>null</code>. Pass <code>null</code> if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The number of items that should show up on one page</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
-export namespace ListCertificatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCertificatesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCertificatesResult {
   /**
    * <p>Indicates whether another page of certificates is available when the number of available
    *       certificates exceeds the page limit.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A list of certificates with basic details including certificate ID, certificate common
    *       name, certificate state.</p>
+   * @public
    */
-  CertificatesInfo?: CertificateInfo[];
+  CertificatesInfo?: CertificateInfo[] | undefined;
 }
 
-export namespace ListCertificatesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCertificatesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListIpRoutesRequest {
   /**
-   * <p>Identifier (ID) of the directory for which you want to retrieve the IP
-   *          addresses.</p>
+   * <p>Identifier (ID) of the directory for which you want to retrieve the IP addresses.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>Maximum number of items to return. If this value is zero, the maximum number of items
-   *          is specified by the limitations of the operation.</p>
+   * <p>Maximum number of items to return. If this value is zero, the maximum number of items is
+   *          specified by the limitations of the operation.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace ListIpRoutesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListIpRoutesRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum IpRouteStatusMsg {
-  ADDED = "Added",
-  ADDING = "Adding",
-  ADD_FAILED = "AddFailed",
-  REMOVED = "Removed",
-  REMOVE_FAILED = "RemoveFailed",
-  REMOVING = "Removing",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Information about one or more IP address blocks.</p>
+ * @public
  */
 export interface IpRouteInfo {
   /**
    * <p>Identifier (ID) of the directory associated with the IP addresses.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>IP address block in the <a>IpRoute</a>.</p>
+   * @public
    */
-  CidrIp?: string;
+  CidrIp?: string | undefined;
+
+  /**
+   * <p>IPv6 address block in the <a>IpRoute</a>.</p>
+   * @public
+   */
+  CidrIpv6?: string | undefined;
 
   /**
    * <p>The status of the IP address block.</p>
+   * @public
    */
-  IpRouteStatusMsg?: IpRouteStatusMsg | string;
+  IpRouteStatusMsg?: IpRouteStatusMsg | undefined;
 
   /**
    * <p>The date and time the address block was added to the directory.</p>
+   * @public
    */
-  AddedDateTime?: Date;
+  AddedDateTime?: Date | undefined;
 
   /**
    * <p>The reason for the IpRouteStatusMsg.</p>
+   * @public
    */
-  IpRouteStatusReason?: string;
+  IpRouteStatusReason?: string | undefined;
 
   /**
    * <p>Description of the <a>IpRouteInfo</a>.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace IpRouteInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IpRouteInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListIpRoutesResult {
   /**
    * <p>A list of <a>IpRoute</a>s.</p>
+   * @public
    */
-  IpRoutesInfo?: IpRouteInfo[];
+  IpRoutesInfo?: IpRouteInfo[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the
    *             <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListIpRoutesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListIpRoutesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLogSubscriptionsRequest {
   /**
    * <p>If a <i>DirectoryID</i> is provided, lists only the log subscription
    *       associated with that directory. If no <i>DirectoryId</i> is provided, lists all
-   *       log subscriptions associated with your Amazon Web Services account. If there are no log subscriptions for the
-   *       Amazon Web Services account or the directory, an empty list will be returned.</p>
+   *       log subscriptions associated with your Amazon Web Services account. If there are no log subscriptions for
+   *       the Amazon Web Services account or the directory, an empty list will be returned.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The token for the next set of items to return.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of items returned.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace ListLogSubscriptionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLogSubscriptionsRequest): any => ({
-    ...obj,
-  });
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Represents a log subscription, which tracks real-time data from a chosen log group to a
  *       specified destination.</p>
+ * @public
  */
 export interface LogSubscription {
   /**
    * <p>Identifier (ID) of the directory that you want to associate with the log
    *       subscription.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The name of the log group.</p>
+   * @public
    */
-  LogGroupName?: string;
+  LogGroupName?: string | undefined;
 
   /**
    * <p>The date and time that the log subscription was created.</p>
+   * @public
    */
-  SubscriptionCreatedDateTime?: Date;
+  SubscriptionCreatedDateTime?: Date | undefined;
 }
 
-export namespace LogSubscription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogSubscription): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListLogSubscriptionsResult {
   /**
-   * <p>A list of active <a>LogSubscription</a> objects for calling the Amazon Web Services account.</p>
+   * <p>A list of active <a>LogSubscription</a> objects for calling the
+   *       Amazon Web Services account.</p>
+   * @public
    */
-  LogSubscriptions?: LogSubscription[];
+  LogSubscriptions?: LogSubscription[] | undefined;
 
   /**
    * <p>The token for the next set of items to return.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListLogSubscriptionsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListLogSubscriptionsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemaExtensionsRequest {
   /**
    * <p>The identifier of the directory from which to retrieve the schema extension
    *       information.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The <code>ListSchemaExtensions.NextToken</code> value from a previous call to
    *         <code>ListSchemaExtensions</code>. Pass null if this is the first call.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace ListSchemaExtensionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemaExtensionsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SchemaExtensionStatus {
-  CANCELLED = "Cancelled",
-  CANCEL_IN_PROGRESS = "CancelInProgress",
-  COMPLETED = "Completed",
-  CREATING_SNAPSHOT = "CreatingSnapshot",
-  FAILED = "Failed",
-  INITIALIZING = "Initializing",
-  REPLICATING = "Replicating",
-  ROLLBACK_IN_PROGRESS = "RollbackInProgress",
-  UPDATING_SCHEMA = "UpdatingSchema",
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Information about a schema extension.</p>
+ * @public
  */
 export interface SchemaExtensionInfo {
   /**
    * <p>The identifier of the directory to which the schema extension is applied.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>The identifier of the schema extension.</p>
+   * @public
    */
-  SchemaExtensionId?: string;
+  SchemaExtensionId?: string | undefined;
 
   /**
    * <p>A description of the schema extension.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The current status of the schema extension.</p>
+   * @public
    */
-  SchemaExtensionStatus?: SchemaExtensionStatus | string;
+  SchemaExtensionStatus?: SchemaExtensionStatus | undefined;
 
   /**
    * <p>The reason for the <code>SchemaExtensionStatus</code>.</p>
+   * @public
    */
-  SchemaExtensionStatusReason?: string;
+  SchemaExtensionStatusReason?: string | undefined;
 
   /**
    * <p>The date and time that the schema extension started being applied to the
    *       directory.</p>
+   * @public
    */
-  StartDateTime?: Date;
+  StartDateTime?: Date | undefined;
 
   /**
    * <p>The date and time that the schema extension was completed.</p>
+   * @public
    */
-  EndDateTime?: Date;
+  EndDateTime?: Date | undefined;
 }
 
-export namespace SchemaExtensionInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SchemaExtensionInfo): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemaExtensionsResult {
   /**
    * <p>Information about the schema extensions applied to the directory.</p>
+   * @public
    */
-  SchemaExtensionsInfo?: SchemaExtensionInfo[];
+  SchemaExtensionsInfo?: SchemaExtensionInfo[] | undefined;
 
   /**
    * <p>If not null, more results are available. Pass this value for the <code>NextToken</code>
    *       parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set
    *       of items.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListSchemaExtensionsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemaExtensionsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>Identifier (ID) of the directory for which you want to retrieve tags.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>Reserved for future use.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Reserved for future use.</p>
+   * @public
    */
-  Limit?: number;
-}
-
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface ListTagsForResourceResult {
-  /**
-   * <p>List of tags returned by the ListTagsForResource operation.</p>
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>Reserved for future use.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace ListTagsForResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResult): any => ({
-    ...obj,
-  });
+  Limit?: number | undefined;
 }
 
 /**
- * <p>The certificate PEM that was provided has incorrect encoding.</p>
+ * @public
  */
-export interface InvalidCertificateException extends __SmithyException, $MetadataBearer {
-  name: "InvalidCertificateException";
-  $fault: "client";
+export interface ListTagsForResourceResult {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>List of tags returned by the ListTagsForResource operation.</p>
+   * @public
    */
-  Message?: string;
+  Tags?: Tag[] | undefined;
 
   /**
-   * <p>The Amazon Web Services request identifier.</p>
+   * <p>Reserved for future use.</p>
+   * @public
    */
-  RequestId?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace InvalidCertificateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidCertificateException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterCertificateRequest {
   /**
    * <p>The identifier of the directory.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The certificate PEM string that needs to be registered.</p>
+   * @public
    */
   CertificateData: string | undefined;
 
   /**
-   * <p>The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.</p>
+   * <p>The function that the registered certificate performs. Valid values include
+   *         <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is
+   *         <code>ClientLDAPS</code>.</p>
+   * @public
    */
-  Type?: CertificateType | string;
+  Type?: CertificateType | undefined;
 
   /**
-   * <p>A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.</p>
+   * <p>A <code>ClientCertAuthSettings</code> object that contains client certificate
+   *       authentication settings.</p>
+   * @public
    */
-  ClientCertAuthSettings?: ClientCertAuthSettings;
+  ClientCertAuthSettings?: ClientCertAuthSettings | undefined;
 }
 
-export namespace RegisterCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterCertificateResult {
   /**
    * <p>The identifier of the certificate.</p>
+   * @public
    */
-  CertificateId?: string;
-}
-
-export namespace RegisterCertificateResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterCertificateResult): any => ({
-    ...obj,
-  });
+  CertificateId?: string | undefined;
 }
 
 /**
  * <p>Registers a new event topic.</p>
+ * @public
  */
 export interface RegisterEventTopicRequest {
   /**
    * <p>The Directory ID that will publish status messages to the Amazon SNS topic.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The Amazon SNS topic name to which the directory will publish status messages. This Amazon SNS
    *       topic must be in the same region as the specified Directory ID.</p>
+   * @public
    */
   TopicName: string | undefined;
 }
 
-export namespace RegisterEventTopicRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterEventTopicRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The result of a RegisterEventTopic request.</p>
+ * @public
  */
 export interface RegisterEventTopicResult {}
 
-export namespace RegisterEventTopicResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterEventTopicResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectSharedDirectoryRequest {
   /**
    * <p>Identifier of the shared directory in the directory consumer account. This identifier is
    *       different for each directory owner account.</p>
+   * @public
    */
   SharedDirectoryId: string | undefined;
 }
 
-export namespace RejectSharedDirectoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectSharedDirectoryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectSharedDirectoryResult {
   /**
    * <p>Identifier of the shared directory in the directory consumer account.</p>
+   * @public
    */
-  SharedDirectoryId?: string;
+  SharedDirectoryId?: string | undefined;
 }
 
-export namespace RejectSharedDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectSharedDirectoryResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveIpRoutesRequest {
   /**
-   * <p>Identifier (ID) of the directory from which you want to remove the IP
-   *          addresses.</p>
+   * <p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>IP address blocks that you want to remove.</p>
+   * @public
    */
-  CidrIps: string[] | undefined;
-}
+  CidrIps?: string[] | undefined;
 
-export namespace RemoveIpRoutesRequest {
   /**
-   * @internal
+   * <p>IPv6 address blocks that you want to remove.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RemoveIpRoutesRequest): any => ({
-    ...obj,
-  });
+  CidrIpv6s?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RemoveIpRoutesResult {}
 
-export namespace RemoveIpRoutesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveIpRoutesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveRegionRequest {
   /**
    * <p>The identifier of the directory for which you want to remove Region replication.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 }
 
-export namespace RemoveRegionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveRegionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveRegionResult {}
 
-export namespace RemoveRegionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveRegionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveTagsFromResourceRequest {
   /**
    * <p>Identifier (ID) of the directory from which to remove the tag.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The tag key (name) of the tag to be removed.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace RemoveTagsFromResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveTagsFromResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveTagsFromResourceResult {}
 
-export namespace RemoveTagsFromResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveTagsFromResourceResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The new password provided by the user does not meet the password complexity
- *             requirements defined in your directory.</p>
+ * @public
  */
-export interface InvalidPasswordException extends __SmithyException, $MetadataBearer {
-  name: "InvalidPasswordException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidPasswordException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidPasswordException): any => ({
-    ...obj,
-  });
-}
-
 export interface ResetUserPasswordRequest {
   /**
-   * <p>Identifier of the Managed Microsoft AD or Simple AD directory in which the user
-   *       resides.</p>
+   * <p>Identifier of the Managed Microsoft AD or Simple AD directory in which the user resides.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The user name of the user whose password will be reset.</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>The new password that will be reset.</p>
+   * @public
    */
   NewPassword: string | undefined;
 }
 
-export namespace ResetUserPasswordRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetUserPasswordRequest): any => ({
-    ...obj,
-    ...(obj.NewPassword && { NewPassword: SENSITIVE_STRING }),
-  });
-}
-
-export interface ResetUserPasswordResult {}
-
-export namespace ResetUserPasswordResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResetUserPasswordResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The user provided a username that does not exist in your directory.</p>
+ * @public
  */
-export interface UserDoesNotExistException extends __SmithyException, $MetadataBearer {
-  name: "UserDoesNotExistException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace UserDoesNotExistException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserDoesNotExistException): any => ({
-    ...obj,
-  });
-}
+export interface ResetUserPasswordResult {}
 
 /**
  * <p>An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.</p>
+ * @public
  */
 export interface RestoreFromSnapshotRequest {
   /**
    * <p>The identifier of the snapshot to restore from.</p>
+   * @public
    */
   SnapshotId: string | undefined;
 }
 
-export namespace RestoreFromSnapshotRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RestoreFromSnapshotRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>
+ * @public
  */
 export interface RestoreFromSnapshotResult {}
 
-export namespace RestoreFromSnapshotResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RestoreFromSnapshotResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified shared target is not valid.</p>
- */
-export interface InvalidTargetException extends __SmithyException, $MetadataBearer {
-  name: "InvalidTargetException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace InvalidTargetException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidTargetException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception encountered while trying to access your Amazon Web Services organization.</p>
- */
-export interface OrganizationsException extends __SmithyException, $MetadataBearer {
-  name: "OrganizationsException";
-  $fault: "client";
-  /**
-   * <p>The descriptive message for the exception.</p>
-   */
-  Message?: string;
-
-  /**
-   * <p>The Amazon Web Services request identifier.</p>
-   */
-  RequestId?: string;
-}
-
-export namespace OrganizationsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OrganizationsException): any => ({
-    ...obj,
-  });
-}
-
-export enum TargetType {
-  ACCOUNT = "ACCOUNT",
-}
-
 /**
  * <p>Identifier that contains details about the directory consumer account.</p>
+ * @public
  */
 export interface ShareTarget {
   /**
    * <p>Identifier of the directory consumer account.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>Type of identifier to be used in the <code>Id</code> field.</p>
+   * @public
    */
-  Type: TargetType | string | undefined;
+  Type: TargetType | undefined;
 }
 
-export namespace ShareTarget {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShareTarget): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ShareDirectoryRequest {
   /**
-   * <p>Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.</p>
+   * <p>Identifier of the Managed Microsoft AD directory that you want to share with other
+   *       Amazon Web Services accounts.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
@@ -4966,87 +4502,86 @@ export interface ShareDirectoryRequest {
    * <p>A directory share request that is sent by the directory owner to the directory consumer.
    *       The request includes a typed message to help the directory consumer administrator determine
    *       whether to approve or reject the share invitation.</p>
+   * @public
    */
-  ShareNotes?: string;
+  ShareNotes?: string | undefined;
 
   /**
    * <p>Identifier for the directory consumer account with whom the directory is to be
    *       shared.</p>
+   * @public
    */
   ShareTarget: ShareTarget | undefined;
 
   /**
    * <p>The method used when sharing a directory to determine whether the directory should be
-   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
-   *       sending a directory sharing request (<code>HANDSHAKE</code>).</p>
+   *       shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account
+   *       by sending a directory sharing request (<code>HANDSHAKE</code>).</p>
+   * @public
    */
-  ShareMethod: ShareMethod | string | undefined;
+  ShareMethod: ShareMethod | undefined;
 }
 
-export namespace ShareDirectoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShareDirectoryRequest): any => ({
-    ...obj,
-    ...(obj.ShareNotes && { ShareNotes: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface ShareDirectoryResult {
   /**
    * <p>Identifier of the directory that is stored in the directory consumer account that is
    *       shared from the specified directory (<code>DirectoryId</code>).</p>
+   * @public
    */
-  SharedDirectoryId?: string;
-}
-
-export namespace ShareDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShareDirectoryResult): any => ({
-    ...obj,
-  });
+  SharedDirectoryId?: string | undefined;
 }
 
 /**
- * <p>The maximum number of Amazon Web Services accounts that you can share with this directory has been
- *             reached.</p>
+ * @public
  */
-export interface ShareLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ShareLimitExceededException";
-  $fault: "client";
+export interface StartADAssessmentRequest {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>Configuration parameters for the directory assessment, including DNS server
+   *             information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node
+   *             details.</p>
+   * @public
    */
-  Message?: string;
+  AssessmentConfiguration?: AssessmentConfiguration | undefined;
 
   /**
-   * <p>The Amazon Web Services request identifier.</p>
+   * <p>The identifier of the directory for which to perform the assessment. This should be an
+   *             existing directory. If the assessment is not for an existing directory, this parameter
+   *             should be omitted.</p>
+   * @public
    */
-  RequestId?: string;
+  DirectoryId?: string | undefined;
 }
 
-export namespace ShareLimitExceededException {
+/**
+ * @public
+ */
+export interface StartADAssessmentResult {
   /**
-   * @internal
+   * <p>The unique identifier of the newly started directory assessment. Use this identifier
+   *             to monitor assessment progress and retrieve results.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ShareLimitExceededException): any => ({
-    ...obj,
-  });
+  AssessmentId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartSchemaExtensionRequest {
   /**
    * <p>The identifier of the directory for which the schema extension will be applied
    *       to.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>If true, creates a snapshot of the directory before applying the schema
    *       extension.</p>
+   * @public
    */
   CreateSnapshotBeforeSchemaExtension: boolean | undefined;
 
@@ -5054,329 +4589,439 @@ export interface StartSchemaExtensionRequest {
    * <p>The LDIF file represented as a string. To construct the LdifContent string, precede
    *       each line as it would be formatted in an ldif file with \n. See the example request below for
    *       more details. The file size can be no larger than 1MB.</p>
+   * @public
    */
   LdifContent: string | undefined;
 
   /**
    * <p>A description of the schema extension.</p>
+   * @public
    */
   Description: string | undefined;
 }
 
-export namespace StartSchemaExtensionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSchemaExtensionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartSchemaExtensionResult {
   /**
    * <p>The identifier of the schema extension that will be applied.</p>
+   * @public
    */
-  SchemaExtensionId?: string;
-}
-
-export namespace StartSchemaExtensionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSchemaExtensionResult): any => ({
-    ...obj,
-  });
+  SchemaExtensionId?: string | undefined;
 }
 
 /**
  * <p>Identifier that contains details about the directory consumer account with whom the
  *       directory is being unshared.</p>
+ * @public
  */
 export interface UnshareTarget {
   /**
    * <p>Identifier of the directory consumer account.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>Type of identifier to be used in the <i>Id</i> field.</p>
+   * @public
    */
-  Type: TargetType | string | undefined;
+  Type: TargetType | undefined;
 }
 
-export namespace UnshareTarget {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnshareTarget): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UnshareDirectoryRequest {
   /**
-   * <p>The identifier of the Managed Microsoft AD directory that you want to stop
-   *       sharing.</p>
+   * <p>The identifier of the Managed Microsoft AD directory that you want to stop sharing.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>Identifier for the directory consumer account with whom the directory has to be
    *       unshared.</p>
+   * @public
    */
   UnshareTarget: UnshareTarget | undefined;
 }
 
-export namespace UnshareDirectoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnshareDirectoryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UnshareDirectoryResult {
   /**
    * <p>Identifier of the directory stored in the directory consumer account that is to be
    *       unshared from the specified directory (<code>DirectoryId</code>).</p>
+   * @public
    */
-  SharedDirectoryId?: string;
-}
-
-export namespace UnshareDirectoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnshareDirectoryResult): any => ({
-    ...obj,
-  });
+  SharedDirectoryId?: string | undefined;
 }
 
 /**
  * <p>Updates a conditional forwarder.</p>
+ * @public
  */
 export interface UpdateConditionalForwarderRequest {
   /**
    * <p>The directory ID of the Amazon Web Services directory for which to update the conditional
    *       forwarder.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The fully qualified domain name (FQDN) of the remote domain with which you will set up
    *       a trust relationship.</p>
+   * @public
    */
   RemoteDomainName: string | undefined;
 
   /**
    * <p>The updated IP addresses of the remote DNS server associated with the conditional
    *       forwarder.</p>
+   * @public
    */
-  DnsIpAddrs: string[] | undefined;
-}
+  DnsIpAddrs?: string[] | undefined;
 
-export namespace UpdateConditionalForwarderRequest {
   /**
-   * @internal
+   * <p>The updated IPv6 addresses of the remote DNS server associated with the conditional
+   *       forwarder.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConditionalForwarderRequest): any => ({
-    ...obj,
-  });
+  DnsIpv6Addrs?: string[] | undefined;
 }
 
 /**
  * <p>The result of an UpdateConditionalForwarder request.</p>
+ * @public
  */
 export interface UpdateConditionalForwarderResult {}
 
-export namespace UpdateConditionalForwarderResult {
+/**
+ * <p>Contains the directory size configuration for update operations.</p>
+ * @public
+ */
+export interface DirectorySizeUpdateSettings {
   /**
-   * @internal
+   * <p>The target directory size for the update operation.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConditionalForwarderResult): any => ({
-    ...obj,
-  });
+  DirectorySize?: DirectorySize | undefined;
 }
 
 /**
- * <p>The maximum allowed number of domain controllers per directory was exceeded. The
- *       default limit per directory is 20 domain controllers.</p>
+ * <p>Contains the network configuration for directory update operations.</p>
+ * @public
  */
-export interface DomainControllerLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "DomainControllerLimitExceededException";
-  $fault: "client";
+export interface NetworkUpdateSettings {
   /**
-   * <p>The descriptive message for the exception.</p>
+   * <p>The target network type for the directory update.</p>
+   * @public
    */
-  Message?: string;
+  NetworkType?: NetworkType | undefined;
 
   /**
-   * <p>The Amazon Web Services request identifier.</p>
+   * <p>IPv6 addresses of DNS servers or domain controllers in the self-managed directory.
+   *       Required only when updating an AD Connector directory.</p>
+   * @public
    */
-  RequestId?: string;
+  CustomerDnsIpsV6?: string[] | undefined;
 }
 
-export namespace DomainControllerLimitExceededException {
+/**
+ * @public
+ */
+export interface UpdateDirectorySetupRequest {
   /**
-   * @internal
+   * <p>The identifier of the directory to update.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DomainControllerLimitExceededException): any => ({
-    ...obj,
-  });
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>The type of update to perform on the directory.</p>
+   * @public
+   */
+  UpdateType: UpdateType | undefined;
+
+  /**
+   * <p>Operating system configuration to apply during the directory update operation.</p>
+   * @public
+   */
+  OSUpdateSettings?: OSUpdateSettings | undefined;
+
+  /**
+   * <p>Directory size configuration to apply during the update operation.</p>
+   * @public
+   */
+  DirectorySizeUpdateSettings?: DirectorySizeUpdateSettings | undefined;
+
+  /**
+   * <p>Network configuration to apply during the directory update operation.</p>
+   * @public
+   */
+  NetworkUpdateSettings?: NetworkUpdateSettings | undefined;
+
+  /**
+   * <p>Specifies whether to create a directory snapshot before performing the update.</p>
+   * @public
+   */
+  CreateSnapshotBeforeUpdate?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateDirectorySetupResult {}
+
+/**
+ * <p> Use to recover to the hybrid directory administrator account credentials.</p>
+ * @public
+ */
+export interface HybridAdministratorAccountUpdate {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the
+   *             credentials for the AD administrator user, and enables hybrid domain controllers to
+   *             join the managed AD domain. For example:</p>
+   *          <p>
+   *             <code>
+   *                 \{"customerAdAdminDomainUsername":"carlos_salazar","customerAdAdminDomainPassword":"ExamplePassword123!"\}.
+   *             </code>
+   *          </p>
+   * @public
+   */
+  SecretArn: string | undefined;
+}
+
+/**
+ * <p>Contains configuration settings for self-managed instances with SSM used in hybrid
+ *             directory operations.</p>
+ * @public
+ */
+export interface HybridCustomerInstancesSettings {
+  /**
+   * <p>The IP addresses of the DNS servers or domain controllers in your self-managed AD
+   *             environment.</p>
+   * @public
+   */
+  CustomerDnsIps: string[] | undefined;
+
+  /**
+   * <p>The identifiers of the self-managed instances with SSM used in hybrid
+   *             directory.</p>
+   * @public
+   */
+  InstanceIds: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateHybridADRequest {
+  /**
+   * <p>The identifier of the hybrid directory to update.</p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>We create a hybrid directory administrator account when we create a hybrid directory.
+   *             Use <code>HybridAdministratorAccountUpdate</code> to recover the hybrid directory
+   *             administrator account if you have deleted it.</p>
+   *          <p>To recover your hybrid directory administrator account, we need temporary access to a
+   *             user in your self-managed AD with administrator permissions in the form of a secret from
+   *             Amazon Web Services Secrets Manager. We use these credentials once during recovery and don't store them.</p>
+   *          <p>If your hybrid directory administrator account exists, then you don’t need to use
+   *                 <code>HybridAdministratorAccountUpdate</code>, even if you have updated your
+   *             self-managed AD administrator user.</p>
+   * @public
+   */
+  HybridAdministratorAccountUpdate?: HybridAdministratorAccountUpdate | undefined;
+
+  /**
+   * <p>Updates to the self-managed AD configuration, including DNS server IP addresses and
+   *             Amazon Web Services System Manager managed node identifiers.</p>
+   * @public
+   */
+  SelfManagedInstancesSettings?: HybridCustomerInstancesSettings | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateHybridADResult {
+  /**
+   * <p>The identifier of the updated hybrid directory.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+
+  /**
+   * <p>The identifier of the assessment performed to validate the update configuration. This
+   *             assessment ensures the updated settings are compatible with your environment.</p>
+   * @public
+   */
+  AssessmentId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateNumberOfDomainControllersRequest {
   /**
    * <p>Identifier of the directory to which the domain controllers will be added or
    *       removed.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>The number of domain controllers desired in the directory.</p>
+   * @public
    */
   DesiredNumber: number | undefined;
 }
 
-export namespace UpdateNumberOfDomainControllersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateNumberOfDomainControllersRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateNumberOfDomainControllersResult {}
-
-export namespace UpdateNumberOfDomainControllersResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateNumberOfDomainControllersResult): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>
+ * @public
  */
 export interface UpdateRadiusRequest {
   /**
    * <p>The identifier of the directory for which to update the RADIUS server
    *          information.</p>
+   * @public
    */
   DirectoryId: string | undefined;
 
   /**
    * <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
    *          server.</p>
+   * @public
    */
   RadiusSettings: RadiusSettings | undefined;
 }
 
-export namespace UpdateRadiusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRadiusRequest): any => ({
-    ...obj,
-    ...(obj.RadiusSettings && { RadiusSettings: RadiusSettings.filterSensitiveLog(obj.RadiusSettings) }),
-  });
-}
-
 /**
  * <p>Contains the results of the <a>UpdateRadius</a> operation.</p>
+ * @public
  */
 export interface UpdateRadiusResult {}
 
-export namespace UpdateRadiusResult {
+/**
+ * <p>Contains information about the configurable settings for a directory.</p>
+ * @public
+ */
+export interface Setting {
   /**
-   * @internal
+   * <p>The name of the directory setting. For example:</p>
+   *          <p>
+   *             <code>TLS_1_0</code>
+   *          </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateRadiusResult): any => ({
-    ...obj,
-  });
+  Name: string | undefined;
+
+  /**
+   * <p>The value of the directory setting for which to retrieve information. For example, for
+   *         <code>TLS_1_0</code>, the valid values are: <code>Enable</code> and
+   *       <code>Disable</code>.</p>
+   * @public
+   */
+  Value: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateSettingsRequest {
+  /**
+   * <p>The identifier of the directory for which to update settings.</p>
+   * @public
+   */
+  DirectoryId: string | undefined;
+
+  /**
+   * <p>The list of <a>Setting</a> objects.</p>
+   * @public
+   */
+  Settings: Setting[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateSettingsResult {
+  /**
+   * <p>The identifier of the directory.</p>
+   * @public
+   */
+  DirectoryId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateTrustRequest {
   /**
    * <p>Identifier of the trust relationship.</p>
+   * @public
    */
   TrustId: string | undefined;
 
   /**
    * <p>Updates selective authentication for the trust.</p>
+   * @public
    */
-  SelectiveAuth?: SelectiveAuth | string;
+  SelectiveAuth?: SelectiveAuth | undefined;
 }
 
-export namespace UpdateTrustRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateTrustRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateTrustResult {
   /**
    * <p>The Amazon Web Services request identifier.</p>
+   * @public
    */
-  RequestId?: string;
+  RequestId?: string | undefined;
 
   /**
    * <p>Identifier of the trust relationship.</p>
+   * @public
    */
-  TrustId?: string;
-}
-
-export namespace UpdateTrustResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateTrustResult): any => ({
-    ...obj,
-  });
+  TrustId?: string | undefined;
 }
 
 /**
  * <p>Initiates the verification of an existing trust relationship between an Managed Microsoft AD
  *       directory and an external domain.</p>
+ * @public
  */
 export interface VerifyTrustRequest {
   /**
    * <p>The unique Trust ID of the trust relationship to verify.</p>
+   * @public
    */
   TrustId: string | undefined;
 }
 
-export namespace VerifyTrustRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VerifyTrustRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Result of a VerifyTrust request.</p>
+ * @public
  */
 export interface VerifyTrustResult {
   /**
    * <p>The unique Trust ID of the trust relationship that was verified.</p>
+   * @public
    */
-  TrustId?: string;
-}
-
-export namespace VerifyTrustResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VerifyTrustResult): any => ({
-    ...obj,
-  });
+  TrustId?: string | undefined;
 }

@@ -3,6 +3,3750 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1168.0...v3.1169.0) (2026-11-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1167.0...v3.1168.0) (2026-11-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1166.0...v3.1167.0) (2026-11-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1166.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1165.0...v3.1166.0) (2026-11-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1164.0...v3.1165.0) (2026-11-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1164.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1163.0...v3.1164.0) (2026-11-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1162.0...v3.1163.0) (2026-11-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1161.0...v3.1162.0) (2026-11-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1160.0...v3.1161.0) (2026-10-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1159.0...v3.1160.0) (2026-10-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1158.0...v3.1159.0) (2026-10-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1158.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1157.0...v3.1158.0) (2026-10-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1157.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1156.0...v3.1157.0) (2026-10-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1156.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1155.0...v3.1156.0) (2026-10-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1155.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1154.0...v3.1155.0) (2026-10-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1153.0...v3.1154.0) (2026-10-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1153.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1152.0...v3.1153.0) (2026-10-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1152.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1151.0...v3.1152.0) (2026-10-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1151.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1150.0...v3.1151.0) (2026-10-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1149.0...v3.1150.0) (2026-10-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1149.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1148.0...v3.1149.0) (2026-10-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1148.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1147.0...v3.1148.0) (2026-10-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1147.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1146.0...v3.1147.0) (2026-10-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1146.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1145.0...v3.1146.0) (2026-10-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1144.0...v3.1145.0) (2026-10-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1144.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1143.0...v3.1144.0) (2026-09-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1143.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1142.0...v3.1143.0) (2026-09-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1141.0...v3.1142.0) (2026-09-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1140.0...v3.1141.0) (2026-09-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1140.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1139.0...v3.1140.0) (2026-09-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1139.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1138.0...v3.1139.0) (2026-09-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1138.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1137.0...v3.1138.0) (2026-09-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1136.0...v3.1137.0) (2026-09-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1135.0...v3.1136.0) (2026-09-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1135.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1134.0...v3.1135.0) (2026-09-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1134.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1133.0...v3.1134.0) (2026-09-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1133.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1132.0...v3.1133.0) (2026-09-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1132.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1131.0...v3.1132.0) (2026-09-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1130.0...v3.1131.0) (2026-09-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1129.0...v3.1130.0) (2026-09-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1129.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1128.0...v3.1129.0) (2026-09-09)
+
+
+### Features
+
+* **dynamic-client:** create untyped clients from Smithy JSON AST ([#8270](https://github.com/aws/aws-sdk-js-v3/issues/8270)) ([4334050](https://github.com/aws/aws-sdk-js-v3/commit/4334050c57723aac9e54611e1778f25454688e15))
+
+
+
+
+
+# [3.1128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1127.0...v3.1128.0) (2026-09-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1126.0...v3.1127.0) (2026-09-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1126.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1125.0...v3.1126.0) (2026-09-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1125.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1124.0...v3.1125.0) (2026-09-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1124.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1123.0...v3.1124.0) (2026-09-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1123.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1122.0...v3.1123.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1122.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1121.0...v3.1122.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1120.0...v3.1121.0) (2026-08-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1120.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1119.0...v3.1120.0) (2026-08-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1119.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1118.0...v3.1119.0) (2026-08-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1117.0...v3.1118.0) (2026-08-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1117.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1116.0...v3.1117.0) (2026-08-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1116.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1115.0...v3.1116.0) (2026-08-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1115.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1114.0...v3.1115.0) (2026-08-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1114.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1113.0...v3.1114.0) (2026-08-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1113.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1112.0...v3.1113.0) (2026-08-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1111.0...v3.1112.0) (2026-08-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1111.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1110.0...v3.1111.0) (2026-08-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1109.0...v3.1110.0) (2026-08-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1108.0...v3.1109.0) (2026-08-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1108.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1107.0...v3.1108.0) (2026-08-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1107.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1106.0...v3.1107.0) (2026-08-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1106.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1105.0...v3.1106.0) (2026-08-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1104.0...v3.1105.0) (2026-08-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1104.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1103.0...v3.1104.0) (2026-08-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1103.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1102.0...v3.1103.0) (2026-08-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1102.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1101.0...v3.1102.0) (2026-08-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1101.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1100.0...v3.1101.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1099.0...v3.1100.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1099.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1098.0...v3.1099.0) (2026-07-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1098.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1097.0...v3.1098.0) (2026-07-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1097.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1096.0...v3.1097.0) (2026-07-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1096.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1095.0...v3.1096.0) (2026-07-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1095.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1094.0...v3.1095.0) (2026-07-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1094.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1093.0...v3.1094.0) (2026-07-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1093.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1092.0...v3.1093.0) (2026-07-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1092.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1091.0...v3.1092.0) (2026-07-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1091.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1090.0...v3.1091.0) (2026-07-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1090.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1089.0...v3.1090.0) (2026-07-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1089.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1088.0...v3.1089.0) (2026-07-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1088.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1087.0...v3.1088.0) (2026-07-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1087.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1086.0...v3.1087.0) (2026-07-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1086.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1085.0...v3.1086.0) (2026-07-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1085.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1084.0...v3.1085.0) (2026-07-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1084.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1083.0...v3.1084.0) (2026-07-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1083.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1082.0...v3.1083.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1082.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1081.0...v3.1082.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1081.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1080.0...v3.1081.0) (2026-07-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1080.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1079.0...v3.1080.0) (2026-07-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1079.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1078.0...v3.1079.0) (2026-07-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1078.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1077.0...v3.1078.0) (2026-07-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1077.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1076.0...v3.1077.0) (2026-06-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1076.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1075.0...v3.1076.0) (2026-06-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1075.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1074.0...v3.1075.0) (2026-06-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1074.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1073.0...v3.1074.0) (2026-06-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1073.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1072.0...v3.1073.0) (2026-06-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1072.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1071.0...v3.1072.0) (2026-06-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1071.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1070.0...v3.1071.0) (2026-06-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1070.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1069.0...v3.1070.0) (2026-06-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1069.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1068.0...v3.1069.0) (2026-06-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1068.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1067.0...v3.1068.0) (2026-06-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1067.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1066.0...v3.1067.0) (2026-06-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1066.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1065.0...v3.1066.0) (2026-06-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1065.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1064.0...v3.1065.0) (2026-06-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1064.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1063.0...v3.1064.0) (2026-06-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1063.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1062.0...v3.1063.0) (2026-06-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1062.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1061.0...v3.1062.0) (2026-06-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1061.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1060.0...v3.1061.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1060.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1059.0...v3.1060.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1059.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1058.0...v3.1059.0) (2026-06-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1058.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1057.0...v3.1058.0) (2026-06-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1057.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1056.0...v3.1057.0) (2026-05-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1056.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1055.0...v3.1056.0) (2026-05-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1055.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1054.0...v3.1055.0) (2026-05-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1054.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1053.0...v3.1054.0) (2026-05-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1053.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1052.0...v3.1053.0) (2026-05-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1052.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1051.0...v3.1052.0) (2026-05-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1051.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1050.0...v3.1051.0) (2026-05-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1050.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1049.0...v3.1050.0) (2026-05-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1049.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1048.0...v3.1049.0) (2026-05-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1048.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1047.0...v3.1048.0) (2026-05-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1047.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1046.0...v3.1047.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1046.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1045.0...v3.1046.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1045.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1044.0...v3.1045.0) (2026-05-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1044.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1043.0...v3.1044.0) (2026-05-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1043.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1042.0...v3.1043.0) (2026-05-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1042.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1041.0...v3.1042.0) (2026-05-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1041.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1040.0...v3.1041.0) (2026-05-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1040.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1039.0...v3.1040.0) (2026-04-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1039.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1038.0...v3.1039.0) (2026-04-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1038.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1037.0...v3.1038.0) (2026-04-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1037.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1036.0...v3.1037.0) (2026-04-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1036.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1035.0...v3.1036.0) (2026-04-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1035.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1034.0...v3.1035.0) (2026-04-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1034.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1033.0...v3.1034.0) (2026-04-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1033.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1032.0...v3.1033.0) (2026-04-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1032.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1031.0...v3.1032.0) (2026-04-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1031.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1030.0...v3.1031.0) (2026-04-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1030.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1029.0...v3.1030.0) (2026-04-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1029.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1028.0...v3.1029.0) (2026-04-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1028.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1027.0...v3.1028.0) (2026-04-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1027.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1026.0...v3.1027.0) (2026-04-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1026.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1025.0...v3.1026.0) (2026-04-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1025.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1024.0...v3.1025.0) (2026-04-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1024.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1023.0...v3.1024.0) (2026-04-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1023.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1022.0...v3.1023.0) (2026-04-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1022.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1021.0...v3.1022.0) (2026-04-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1021.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1020.0...v3.1021.0) (2026-03-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1020.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1019.0...v3.1020.0) (2026-03-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1019.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1018.0...v3.1019.0) (2026-03-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1018.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1017.0...v3.1018.0) (2026-03-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1017.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1016.0...v3.1017.0) (2026-03-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1016.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1015.0...v3.1016.0) (2026-03-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1015.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1014.0...v3.1015.0) (2026-03-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1014.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1013.0...v3.1014.0) (2026-03-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1013.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1012.0...v3.1013.0) (2026-03-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1012.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1011.0...v3.1012.0) (2026-03-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1011.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1010.0...v3.1011.0) (2026-03-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1010.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1009.0...v3.1010.0) (2026-03-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1009.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1008.0...v3.1009.0) (2026-03-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1008.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1007.0...v3.1008.0) (2026-03-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1007.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1006.0...v3.1007.0) (2026-03-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1006.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1005.0...v3.1006.0) (2026-03-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1005.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1004.0...v3.1005.0) (2026-03-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1004.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1003.0...v3.1004.0) (2026-03-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1003.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1002.0...v3.1003.0) (2026-03-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1002.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1001.0...v3.1002.0) (2026-03-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1001.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1000.0...v3.1001.0) (2026-03-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.1000.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.999.0...v3.1000.0) (2026-02-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.999.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.998.0...v3.999.0) (2026-02-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.998.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.997.0...v3.998.0) (2026-02-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.997.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.996.0...v3.997.0) (2026-02-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.996.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.995.0...v3.996.0) (2026-02-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.995.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.994.0...v3.995.0) (2026-02-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.994.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.993.0...v3.994.0) (2026-02-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.993.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.992.0...v3.993.0) (2026-02-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.992.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.991.0...v3.992.0) (2026-02-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.991.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.990.0...v3.991.0) (2026-02-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.990.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.989.0...v3.990.0) (2026-02-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.989.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.988.0...v3.989.0) (2026-02-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.988.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.987.0...v3.988.0) (2026-02-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.987.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.986.0...v3.987.0) (2026-02-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.986.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.985.0...v3.986.0) (2026-02-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.985.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.984.0...v3.985.0) (2026-02-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.984.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.983.0...v3.984.0) (2026-02-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.983.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.982.0...v3.983.0) (2026-02-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.982.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.981.0...v3.982.0) (2026-02-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.981.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.980.0...v3.981.0) (2026-02-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.980.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.979.0...v3.980.0) (2026-01-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.971.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.970.0...v3.971.0) (2026-01-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.970.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.969.0...v3.970.0) (2026-01-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.967.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.966.0...v3.967.0) (2026-01-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.966.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.965.0...v3.966.0) (2026-01-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.964.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.963.0...v3.964.0) (2026-01-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.954.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.953.0...v3.954.0) (2025-12-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.947.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.946.0...v3.947.0) (2025-12-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.946.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.945.0...v3.946.0) (2025-12-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.943.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.942.0...v3.943.0) (2025-12-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.940.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.939.0...v3.940.0) (2025-11-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.939.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.938.0...v3.939.0) (2025-11-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.936.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.935.0...v3.936.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.935.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.934.0...v3.935.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.934.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.933.0...v3.934.0) (2025-11-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.932.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.931.0...v3.932.0) (2025-11-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.931.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.930.0...v3.931.0) (2025-11-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.928.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.927.0...v3.928.0) (2025-11-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.927.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.926.0...v3.927.0) (2025-11-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.926.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.925.0...v3.926.0) (2025-11-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.922.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.921.0...v3.922.0) (2025-10-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.920.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.919.0...v3.920.0) (2025-10-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.916.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.915.0...v3.916.0) (2025-10-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.911.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.910.0...v3.911.0) (2025-10-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.908.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.907.0...v3.908.0) (2025-10-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.907.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.906.0...v3.907.0) (2025-10-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.906.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.905.0...v3.906.0) (2025-10-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.899.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.898.0...v3.899.0) (2025-09-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.896.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.895.0...v3.896.0) (2025-09-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.895.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.894.0...v3.895.0) (2025-09-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.894.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.893.0...v3.894.0) (2025-09-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.891.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.890.0...v3.891.0) (2025-09-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.888.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.887.0...v3.888.0) (2025-09-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.887.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.886.0...v3.887.0) (2025-09-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.883.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.882.0...v3.883.0) (2025-09-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.882.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.881.0...v3.882.0) (2025-09-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.879.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.878.0...v3.879.0) (2025-08-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.876.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.875.0...v3.876.0) (2025-08-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.864.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.863.0...v3.864.0) (2025-08-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.863.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.862.0...v3.863.0) (2025-08-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.858.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.857.0...v3.858.0) (2025-07-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.857.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.856.0...v3.857.0) (2025-07-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.856.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.855.0...v3.856.0) (2025-07-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.855.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.854.0...v3.855.0) (2025-07-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.848.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.847.0...v3.848.0) (2025-07-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.846.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.845.0...v3.846.0) (2025-07-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.845.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.844.0...v3.845.0) (2025-07-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.844.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.843.0...v3.844.0) (2025-07-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.840.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.839.0...v3.840.0) (2025-06-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.839.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.838.0...v3.839.0) (2025-06-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.835.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.834.0...v3.835.0) (2025-06-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.828.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.827.1...v3.828.0) (2025-06-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.826.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.825.0...v3.826.0) (2025-06-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.825.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.824.0...v3.825.0) (2025-06-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.824.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.823.0...v3.824.0) (2025-06-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.823.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.822.0...v3.823.0) (2025-06-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.816.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.815.0...v3.816.0) (2025-05-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.812.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.811.0...v3.812.0) (2025-05-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.810.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.809.0...v3.810.0) (2025-05-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.808.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.807.0...v3.808.0) (2025-05-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.806.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.805.0...v3.806.0) (2025-05-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.803.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.802.0...v3.803.0) (2025-05-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.800.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.799.0...v3.800.0) (2025-04-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.799.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.798.0...v3.799.0) (2025-04-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.796.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.795.0...v3.796.0) (2025-04-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.787.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.786.0...v3.787.0) (2025-04-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.782.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.781.0...v3.782.0) (2025-04-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.775.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.774.0...v3.775.0) (2025-03-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.774.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.773.0...v3.774.0) (2025-03-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.758.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.757.0...v3.758.0) (2025-02-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.750.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.749.0...v3.750.0) (2025-02-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.749.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.748.0...v3.749.0) (2025-02-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.744.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.743.0...v3.744.0) (2025-02-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.743.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.742.1...v3.743.0) (2025-02-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.740.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.739.0...v3.740.0) (2025-01-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.734.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.733.0...v3.734.0) (2025-01-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.733.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.732.0...v3.733.0) (2025-01-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.731.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.730.0...v3.731.0) (2025-01-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.730.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.729.0...v3.730.0) (2025-01-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.726.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.725.0...v3.726.0) (2025-01-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.721.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.720.0...v3.721.0) (2025-01-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.716.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.715.0...v3.716.0) (2024-12-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.714.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.713.0...v3.714.0) (2024-12-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.713.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.712.0...v3.713.0) (2024-12-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.712.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.711.0...v3.712.0) (2024-12-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.709.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.708.0...v3.709.0) (2024-12-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.696.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.695.0...v3.696.0) (2024-11-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.692.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.691.0...v3.692.0) (2024-11-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.691.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.690.0...v3.691.0) (2024-11-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.687.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.686.0...v3.687.0) (2024-11-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.686.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.685.0...v3.686.0) (2024-11-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.685.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.684.0...v3.685.0) (2024-11-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.682.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.681.0...v3.682.0) (2024-10-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.677.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.676.0...v3.677.0) (2024-10-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.674.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.673.0...v3.674.0) (2024-10-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.669.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.668.0...v3.669.0) (2024-10-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.668.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.667.0...v3.668.0) (2024-10-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.665.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.664.0...v3.665.0) (2024-10-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.658.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.657.0...v3.658.0) (2024-09-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+## [3.651.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.0...v3.651.1) (2024-09-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.635.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.634.0...v3.635.0) (2024-08-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.633.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.632.0...v3.633.0) (2024-08-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.629.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.628.0...v3.629.0) (2024-08-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.626.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.625.0...v3.626.0) (2024-08-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.624.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.623.0...v3.624.0) (2024-08-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.622.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.621.0...v3.622.0) (2024-08-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.621.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.1...v3.621.0) (2024-07-30)
+
+
+### Bug Fixes
+
+* package.json `homepage` links to use the `main` branch ([#6336](https://github.com/aws/aws-sdk-js-v3/issues/6336)) ([e332230](https://github.com/aws/aws-sdk-js-v3/commit/e33223023c48451533cc0bd8dbe3dd2c62e12317))
+
+
+
+
+
+# [3.620.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.619.0...v3.620.0) (2024-07-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.617.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.616.0...v3.617.0) (2024-07-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.616.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.615.0...v3.616.0) (2024-07-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.614.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.613.0...v3.614.0) (2024-07-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.609.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.608.0...v3.609.0) (2024-07-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.598.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.597.0...v3.598.0) (2024-06-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.587.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.586.0...v3.587.0) (2024-05-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.582.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.581.0...v3.582.0) (2024-05-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.577.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.576.0...v3.577.0) (2024-05-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.575.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.574.0...v3.575.0) (2024-05-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.572.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.571.0...v3.572.0) (2024-05-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.569.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.568.0...v3.569.0) (2024-05-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.556.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.555.0...v3.556.0) (2024-04-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.552.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.551.0...v3.552.0) (2024-04-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.533.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.532.0...v3.533.0) (2024-03-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.525.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.524.0...v3.525.0) (2024-02-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.523.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.522.0...v3.523.0) (2024-02-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.521.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.520.0...v3.521.0) (2024-02-23)
+
+
+### Features
+
+* requestHandler ctor param pass-through ([#5820](https://github.com/aws/aws-sdk-js-v3/issues/5820)) ([9fec71d](https://github.com/aws/aws-sdk-js-v3/commit/9fec71d1933cd8e3db118c164bca16edc2305532))
+
+
+
+
+
+# [3.515.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.514.0...v3.515.0) (2024-02-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.511.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.510.0...v3.511.0) (2024-02-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.502.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.501.0...v3.502.0) (2024-01-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.499.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.498.0...v3.499.0) (2024-01-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.496.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.495.0...v3.496.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* get full list of exports for esm compat in dist-cjs ([#5694](https://github.com/aws/aws-sdk-js-v3/issues/5694)) ([5d26da6](https://github.com/aws/aws-sdk-js-v3/commit/5d26da6d07b593ae286ca674fb3cbff7c833cbb0))
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.489.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.488.0...v3.489.0) (2024-01-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.485.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.484.0...v3.485.0) (2024-01-03)
+
+
+### Features
+
+* **credential-providers:** add credentialScope field ([#5606](https://github.com/aws/aws-sdk-js-v3/issues/5606)) ([04c1459](https://github.com/aws/aws-sdk-js-v3/commit/04c14592898ac63ed87d47f2a53320ccaa991083))
+
+
+
+
+
+# [3.484.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.483.0...v3.484.0) (2023-12-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.481.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.480.0...v3.481.0) (2023-12-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.474.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.473.0...v3.474.0) (2023-12-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.470.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.469.0...v3.470.0) (2023-12-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.468.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.467.0...v3.468.0) (2023-12-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.461.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.460.0...v3.461.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.460.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.459.0...v3.460.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.451.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.450.0...v3.451.0) (2023-11-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.449.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.448.0...v3.449.0) (2023-11-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.438.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.437.0...v3.438.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **signature-v4-crt:** set min version of aws-crt to 1.18.3 ([#5426](https://github.com/aws/aws-sdk-js-v3/issues/5426)) ([5e5784f](https://github.com/aws/aws-sdk-js-v3/commit/5e5784fccaf45524cbb62c5691ea56c0456478e8))
+
+
+
+
+
+# [3.437.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.436.0...v3.437.0) (2023-10-26)
+
+
+### Bug Fixes
+
+* **signature-v4-crt:** remove dynamic imports (!) ([#5225](https://github.com/aws/aws-sdk-js-v3/issues/5225)) ([89f97b5](https://github.com/aws/aws-sdk-js-v3/commit/89f97b5cea8052510471cdad69acced9f5be60d1))
+
+
+
+
+
+# [3.433.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.432.0...v3.433.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* **codegen:** use partial record for enum keyed types ([#5391](https://github.com/aws/aws-sdk-js-v3/issues/5391)) ([70c2107](https://github.com/aws/aws-sdk-js-v3/commit/70c2107b970d035bfedb211278c88fdbfc2e5334))
+
+
+
+
+
+# [3.431.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.430.0...v3.431.0) (2023-10-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.428.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.427.0...v3.428.0) (2023-10-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.425.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.424.0...v3.425.0) (2023-10-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.418.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.417.0...v3.418.0) (2023-09-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.415.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.414.0...v3.415.0) (2023-09-18)
+
+
+### Bug Fixes
+
+* move devDeps into deps ([#5223](https://github.com/aws/aws-sdk-js-v3/issues/5223)) ([4afa515](https://github.com/aws/aws-sdk-js-v3/commit/4afa515408f212fca3e09dfd06960223c7d36ea8))
+
+
+
+
+
+# [3.413.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.412.0...v3.413.0) (2023-09-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.412.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.411.0...v3.412.0) (2023-09-13)
+
+
+### Bug Fixes
+
+* **signature-v4-multi-region:** make conditional require call in node.js only ([#5203](https://github.com/aws/aws-sdk-js-v3/issues/5203)) ([0a68c97](https://github.com/aws/aws-sdk-js-v3/commit/0a68c97cc1c987ff77a0c8c2696252126b1f71e6))
+
+
+
+
+
+# [3.410.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.409.0...v3.410.0) (2023-09-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.408.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.407.0...v3.408.0) (2023-09-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.398.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.397.0...v3.398.0) (2023-08-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.391.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.390.0...v3.391.0) (2023-08-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.387.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.386.0...v3.387.0) (2023-08-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.378.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.377.0...v3.378.0) (2023-07-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.370.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.369.0...v3.370.0) (2023-07-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.369.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.368.0...v3.369.0) (2023-07-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.357.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.356.0...v3.357.0) (2023-06-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.354.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.353.0...v3.354.0) (2023-06-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.347.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.346.0...v3.347.0) (2023-06-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.342.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.341.0...v3.342.0) (2023-05-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.341.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.340.0...v3.341.0) (2023-05-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.338.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.337.0...v3.338.0) (2023-05-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.337.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.336.0...v3.337.0) (2023-05-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.329.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.328.0...v3.329.0) (2023-05-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.310.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.309.0...v3.310.0) (2023-04-10)
+
+
+### Bug Fixes
+
+* use updated dist glob pattern in package.json ([#4628](https://github.com/aws/aws-sdk-js-v3/issues/4628)) ([352393d](https://github.com/aws/aws-sdk-js-v3/commit/352393dcdba5ba16dca589c265c40e22913c7f2b))
+
+
+
+
+
+# [3.306.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.305.0...v3.306.0) (2023-04-04)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.303.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.302.0...v3.303.0) (2023-03-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.299.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.298.0...v3.299.0) (2023-03-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.296.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.295.0...v3.296.0) (2023-03-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.295.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.294.0...v3.295.0) (2023-03-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.292.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.291.0...v3.292.0) (2023-03-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.290.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.289.0...v3.290.0) (2023-03-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.289.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.288.0...v3.289.0) (2023-03-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.282.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.281.0...v3.282.0) (2023-03-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.272.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.271.0...v3.272.0) (2023-02-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.271.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.270.0...v3.271.0) (2023-02-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.267.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.1...v3.267.0) (2023-02-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+## [3.266.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.0...v3.266.1) (2023-02-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.266.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.265.0...v3.266.0) (2023-02-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.264.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.263.0...v3.264.0) (2023-02-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.257.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.256.0...v3.257.0) (2023-01-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.254.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.253.0...v3.254.0) (2023-01-19)
+
+
+### Features
+
+* **checksum:** replace Hash with Checksum ([#4346](https://github.com/aws/aws-sdk-js-v3/issues/4346)) ([172b4f3](https://github.com/aws/aws-sdk-js-v3/commit/172b4f3475370b386271750436004706b36bc056))
+
+
+
+
+
+# [3.226.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.225.0...v3.226.0) (2022-12-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.224.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.223.0...v3.224.0) (2022-12-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.222.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.221.0...v3.222.0) (2022-12-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.215.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.214.0...v3.215.0) (2022-11-21)
+
+
+### Features
+
+* **types:** update identity types ([#4189](https://github.com/aws/aws-sdk-js-v3/issues/4189)) ([aa73203](https://github.com/aws/aws-sdk-js-v3/commit/aa73203585d4b13367bd482c41fb48053bb9e628))
+
+
+
+
+
+# [3.212.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.211.0...v3.212.0) (2022-11-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.208.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.207.0...v3.208.0) (2022-11-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.201.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.200.0...v3.201.0) (2022-11-01)
+
+
+### Features
+
+* end support for Node.js 12.x ([#4123](https://github.com/aws/aws-sdk-js-v3/issues/4123)) ([83f913e](https://github.com/aws/aws-sdk-js-v3/commit/83f913ec2ac3878d8726c6964f585550dc5caf3e))
+
+
+
+
+
+# [3.200.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.199.0...v3.200.0) (2022-10-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.198.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.197.0...v3.198.0) (2022-10-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.197.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.196.0...v3.197.0) (2022-10-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.193.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.192.0...v3.193.0) (2022-10-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.190.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.189.0...v3.190.0) (2022-10-17)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.188.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.187.0...v3.188.0) (2022-10-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.186.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.185.0...v3.186.0) (2022-10-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.183.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.182.0...v3.183.0) (2022-10-03)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.180.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.179.0...v3.180.0) (2022-09-27)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.178.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.177.0...v3.178.0) (2022-09-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.171.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.170.0...v3.171.0) (2022-09-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.170.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.169.0...v3.170.0) (2022-09-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.167.0...v3.168.0) (2022-09-09)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.162.0...v3.163.0) (2022-09-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.161.0...v3.162.0) (2022-08-31)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.159.0...v3.160.0) (2022-08-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.158.0...v3.159.0) (2022-08-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.129.0...v3.130.0) (2022-07-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.127.0...v3.128.0) (2022-07-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.126.0...v3.127.0) (2022-07-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.117.0...v3.118.0) (2022-06-24)
+
+
+### Bug Fixes
+
+* **signature-v4-crt:** bump aws-crt to 1.12.5 ([#3734](https://github.com/aws/aws-sdk-js-v3/issues/3734)) ([647d02e](https://github.com/aws/aws-sdk-js-v3/commit/647d02e9e3e7068828edf14372206fa926ae94dd))
+
+
+
+
+
+# [3.110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.109.0...v3.110.0) (2022-06-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.108.1...v3.109.0) (2022-06-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.88.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.87.0...v3.88.0) (2022-05-10)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.78.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.77.0...v3.78.0) (2022-04-26)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.66.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.65.0...v3.66.0) (2022-04-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.58.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.57.0...v3.58.0) (2022-03-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.56.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.55.0...v3.56.0) (2022-03-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.55.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.1...v3.55.0) (2022-03-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+## [3.54.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.0...v3.54.1) (2022-03-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.54.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.53.1...v3.54.0) (2022-03-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.53.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.52.0...v3.53.0) (2022-02-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.52.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.51.0...v3.52.0) (2022-02-18)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.50.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.49.0...v3.50.0) (2022-02-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.49.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.48.0...v3.49.0) (2022-01-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+## [3.47.2](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.1...v3.47.2) (2022-01-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+## [3.47.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.0-release-test-1...v3.47.1) (2022-01-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.47.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.46.0...v3.47.0) (2022-01-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.46.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.45.0...v3.46.0) (2022-01-07)
+
+
+### Features
+
+* **packages:** end support for Node.js 10.x ([#3141](https://github.com/aws/aws-sdk-js-v3/issues/3141)) ([1a62865](https://github.com/aws/aws-sdk-js-v3/commit/1a6286513f7cdb556708845c512861c5f92eb883))
+
+
+
+
+
+# [3.45.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.44.0...v3.45.0) (2021-12-23)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
+# [3.41.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.40.1...v3.41.0) (2021-11-11)
+
+
+### Bug Fixes
+
+* **signature-v4-crt:** notify this package is node.js only ([#3009](https://github.com/aws/aws-sdk-js-v3/issues/3009)) ([39e758c](https://github.com/aws/aws-sdk-js-v3/commit/39e758cc986aec660c119c6e8aa14a704d141a4c))
+
+
+
+
+
+# [3.40.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.39.0...v3.40.0) (2021-11-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4-crt
+
+
+
+
+
 # [3.39.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.38.0...v3.39.0) (2021-10-29)
 
 **Note:** Version bump only for package @aws-sdk/signature-v4-crt

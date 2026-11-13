@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteClusterSubnetGroupMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteClusterSubnetGroupCommand,
-  serializeAws_queryDeleteClusterSubnetGroupCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteClusterSubnetGroupMessage } from "../models/models_0";
+import { DeleteClusterSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteClusterSubnetGroupCommand}.
+ */
 export interface DeleteClusterSubnetGroupCommandInput extends DeleteClusterSubnetGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteClusterSubnetGroupCommand}.
+ */
 export interface DeleteClusterSubnetGroupCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,55 @@ export interface DeleteClusterSubnetGroupCommandOutput extends __MetadataBearer 
  * ```javascript
  * import { RedshiftClient, DeleteClusterSubnetGroupCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DeleteClusterSubnetGroupCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DeleteClusterSubnetGroupMessage
+ *   ClusterSubnetGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteClusterSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteClusterSubnetGroupCommandInput - {@link DeleteClusterSubnetGroupCommandInput}
+ * @returns {@link DeleteClusterSubnetGroupCommandOutput}
  * @see {@link DeleteClusterSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteClusterSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterSubnetGroupNotFoundFault} (client fault)
+ *  <p>The cluster subnet group name does not refer to an existing cluster subnet
+ *             group.</p>
+ *
+ * @throws {@link InvalidClusterSubnetGroupStateFault} (client fault)
+ *  <p>The cluster subnet group cannot be deleted because it is in use.</p>
+ *
+ * @throws {@link InvalidClusterSubnetStateFault} (client fault)
+ *  <p>The state of the subnet is invalid.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteClusterSubnetGroupCommand extends $Command<
-  DeleteClusterSubnetGroupCommandInput,
-  DeleteClusterSubnetGroupCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteClusterSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteClusterSubnetGroupCommandInput, DeleteClusterSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DeleteClusterSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteClusterSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteClusterSubnetGroupCommand extends command<DeleteClusterSubnetGroupCommandInput, DeleteClusterSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteClusterSubnetGroup",
+  DeleteClusterSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteClusterSubnetGroupMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteClusterSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteClusterSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteClusterSubnetGroupCommandOutput> {
-    return deserializeAws_queryDeleteClusterSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteClusterSubnetGroupCommandInput;
+      output: DeleteClusterSubnetGroupCommandOutput;
+    };
+  };
 }

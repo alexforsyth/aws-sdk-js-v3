@@ -1,99 +1,139 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ApplicationVersionDescriptionMessage, UpdateApplicationVersionMessage } from "../models/models_0";
-import {
-  deserializeAws_queryUpdateApplicationVersionCommand,
-  serializeAws_queryUpdateApplicationVersionCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ApplicationVersionDescriptionMessage, UpdateApplicationVersionMessage } from "../models/models_0";
+import { UpdateApplicationVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApplicationVersionCommand}.
+ */
 export interface UpdateApplicationVersionCommandInput extends UpdateApplicationVersionMessage {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApplicationVersionCommand}.
+ */
 export interface UpdateApplicationVersionCommandOutput extends ApplicationVersionDescriptionMessage, __MetadataBearer {}
 
 /**
  * <p>Updates the specified application version to have the specified properties.</p>
  *          <note>
- *             <p>If a property (for example, <code>description</code>) is not provided, the value
- *         remains unchanged. To clear properties, specify an empty string.</p>
+ *             <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty
+ *         string.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, UpdateApplicationVersionCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, UpdateApplicationVersionCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // UpdateApplicationVersionMessage
+ *   ApplicationName: "STRING_VALUE", // required
+ *   VersionLabel: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateApplicationVersionCommand(input);
  * const response = await client.send(command);
+ * // { // ApplicationVersionDescriptionMessage
+ * //   ApplicationVersion: { // ApplicationVersionDescription
+ * //     ApplicationVersionArn: "STRING_VALUE",
+ * //     ApplicationName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     VersionLabel: "STRING_VALUE",
+ * //     SourceBuildInformation: { // SourceBuildInformation
+ * //       SourceType: "Git" || "Zip", // required
+ * //       SourceRepository: "CodeCommit" || "S3", // required
+ * //       SourceLocation: "STRING_VALUE", // required
+ * //     },
+ * //     BuildArn: "STRING_VALUE",
+ * //     SourceBundle: { // S3Location
+ * //       S3Bucket: "STRING_VALUE",
+ * //       S3Key: "STRING_VALUE",
+ * //     },
+ * //     ImageSource: { // ImageSource
+ * //       Uri: "STRING_VALUE",
+ * //     },
+ * //     ImageBuildConfiguration: { // ImageBuildConfiguration
+ * //       Type: "docker" || "buildpack",
+ * //       DockerfileLocation: "STRING_VALUE",
+ * //       Buildpack: "STRING_VALUE",
+ * //       Architecture: "amd64" || "arm64",
+ * //       CodeBuildServiceRole: "STRING_VALUE",
+ * //       ComputeType: "BUILD_GENERAL1_SMALL" || "BUILD_GENERAL1_MEDIUM" || "BUILD_GENERAL1_LARGE",
+ * //       TimeoutInMinutes: Number("int"),
+ * //     },
+ * //     Process: true || false,
+ * //     DateCreated: new Date("TIMESTAMP"),
+ * //     DateUpdated: new Date("TIMESTAMP"),
+ * //     Status: "Processed" || "Unprocessed" || "Failed" || "Processing" || "Building",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateApplicationVersionCommandInput - {@link UpdateApplicationVersionCommandInput}
+ * @returns {@link UpdateApplicationVersionCommandOutput}
  * @see {@link UpdateApplicationVersionCommandInput} for command's `input` shape.
  * @see {@link UpdateApplicationVersionCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To change an application version's description
+ * ```javascript
+ * // The following operation updates the description of an application version named 22a0-stage-150819_185942:
+ * const input = {
+ *   ApplicationName: "my-app",
+ *   Description: "new description",
+ *   VersionLabel: "22a0-stage-150819_185942"
+ * };
+ * const command = new UpdateApplicationVersionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ApplicationVersion: {
+ *     ApplicationName: "my-app",
+ *     DateCreated: "2015-08-19T18:59:17.646Z",
+ *     DateUpdated: "2015-08-20T22:53:28.871Z",
+ *     Description: "new description",
+ *     SourceBundle: {
+ *       S3Bucket: "elasticbeanstalk-us-west-2-0123456789012",
+ *       S3Key: "my-app/22a0-stage-150819_185942.war"
+ *     },
+ *     VersionLabel: "22a0-stage-150819_185942"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateApplicationVersionCommand extends $Command<
-  UpdateApplicationVersionCommandInput,
-  UpdateApplicationVersionCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApplicationVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApplicationVersionCommandInput, UpdateApplicationVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "UpdateApplicationVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApplicationVersionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ApplicationVersionDescriptionMessage.filterSensitiveLog,
+export class UpdateApplicationVersionCommand extends command<UpdateApplicationVersionCommandInput, UpdateApplicationVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApplicationVersion",
+  UpdateApplicationVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationVersionMessage;
+      output: ApplicationVersionDescriptionMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApplicationVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryUpdateApplicationVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApplicationVersionCommandOutput> {
-    return deserializeAws_queryUpdateApplicationVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApplicationVersionCommandInput;
+      output: UpdateApplicationVersionCommandOutput;
+    };
+  };
 }

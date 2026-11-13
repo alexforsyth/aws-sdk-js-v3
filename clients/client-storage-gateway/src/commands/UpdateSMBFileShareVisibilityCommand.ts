@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateSMBFileShareVisibilityInput, UpdateSMBFileShareVisibilityOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateSMBFileShareVisibilityCommand,
-  serializeAws_json1_1UpdateSMBFileShareVisibilityCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateSMBFileShareVisibilityInput, UpdateSMBFileShareVisibilityOutput } from "../models/models_0";
+import { UpdateSMBFileShareVisibility$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSMBFileShareVisibilityCommand}.
+ */
 export interface UpdateSMBFileShareVisibilityCommandInput extends UpdateSMBFileShareVisibilityInput {}
-export interface UpdateSMBFileShareVisibilityCommandOutput
-  extends UpdateSMBFileShareVisibilityOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSMBFileShareVisibilityCommand}.
+ */
+export interface UpdateSMBFileShareVisibilityCommandOutput extends UpdateSMBFileShareVisibilityOutput, __MetadataBearer {}
 
 /**
  * <p>Controls whether the shares on an S3 File Gateway are visible in a net view or browse
@@ -31,71 +30,56 @@ export interface UpdateSMBFileShareVisibilityCommandOutput
  * ```javascript
  * import { StorageGatewayClient, UpdateSMBFileShareVisibilityCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, UpdateSMBFileShareVisibilityCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // UpdateSMBFileShareVisibilityInput
+ *   GatewayARN: "STRING_VALUE", // required
+ *   FileSharesVisible: true || false, // required
+ * };
  * const command = new UpdateSMBFileShareVisibilityCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateSMBFileShareVisibilityOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateSMBFileShareVisibilityCommandInput - {@link UpdateSMBFileShareVisibilityCommandInput}
+ * @returns {@link UpdateSMBFileShareVisibilityCommandOutput}
  * @see {@link UpdateSMBFileShareVisibilityCommandInput} for command's `input` shape.
  * @see {@link UpdateSMBFileShareVisibilityCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateSMBFileShareVisibilityCommand extends $Command<
-  UpdateSMBFileShareVisibilityCommandInput,
-  UpdateSMBFileShareVisibilityCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateSMBFileShareVisibilityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateSMBFileShareVisibilityCommandInput, UpdateSMBFileShareVisibilityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "UpdateSMBFileShareVisibilityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateSMBFileShareVisibilityInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateSMBFileShareVisibilityOutput.filterSensitiveLog,
+export class UpdateSMBFileShareVisibilityCommand extends command<UpdateSMBFileShareVisibilityCommandInput, UpdateSMBFileShareVisibilityCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSMBFileShareVisibility",
+  UpdateSMBFileShareVisibility$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSMBFileShareVisibilityInput;
+      output: UpdateSMBFileShareVisibilityOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateSMBFileShareVisibilityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateSMBFileShareVisibilityCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateSMBFileShareVisibilityCommandOutput> {
-    return deserializeAws_json1_1UpdateSMBFileShareVisibilityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateSMBFileShareVisibilityCommandInput;
+      output: UpdateSMBFileShareVisibilityCommandOutput;
+    };
+  };
 }

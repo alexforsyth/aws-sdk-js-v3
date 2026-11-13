@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { PutThirdPartyJobFailureResultInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutThirdPartyJobFailureResultCommand,
-  serializeAws_json1_1PutThirdPartyJobFailureResultCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutThirdPartyJobFailureResultInput } from "../models/models_0";
+import { PutThirdPartyJobFailureResult$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutThirdPartyJobFailureResultCommand}.
+ */
 export interface PutThirdPartyJobFailureResultCommandInput extends PutThirdPartyJobFailureResultInput {}
+/**
+ * @public
+ *
+ * The output of {@link PutThirdPartyJobFailureResultCommand}.
+ */
 export interface PutThirdPartyJobFailureResultCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,71 +30,63 @@ export interface PutThirdPartyJobFailureResultCommandOutput extends __MetadataBe
  * ```javascript
  * import { CodePipelineClient, PutThirdPartyJobFailureResultCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, PutThirdPartyJobFailureResultCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // PutThirdPartyJobFailureResultInput
+ *   jobId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE", // required
+ *   failureDetails: { // FailureDetails
+ *     type: "JobFailed" || "ConfigurationError" || "PermissionError" || "RevisionOutOfSync" || "RevisionUnavailable" || "SystemUnavailable", // required
+ *     message: "STRING_VALUE", // required
+ *     externalExecutionId: "STRING_VALUE",
+ *   },
+ * };
  * const command = new PutThirdPartyJobFailureResultCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutThirdPartyJobFailureResultCommandInput - {@link PutThirdPartyJobFailureResultCommandInput}
+ * @returns {@link PutThirdPartyJobFailureResultCommandOutput}
  * @see {@link PutThirdPartyJobFailureResultCommandInput} for command's `input` shape.
  * @see {@link PutThirdPartyJobFailureResultCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link InvalidClientTokenException} (client fault)
+ *  <p>The client token was specified in an invalid format</p>
+ *
+ * @throws {@link InvalidJobStateException} (client fault)
+ *  <p>The job state was specified in an invalid format.</p>
+ *
+ * @throws {@link JobNotFoundException} (client fault)
+ *  <p>The job was specified in an invalid format or cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class PutThirdPartyJobFailureResultCommand extends $Command<
-  PutThirdPartyJobFailureResultCommandInput,
-  PutThirdPartyJobFailureResultCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutThirdPartyJobFailureResultCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutThirdPartyJobFailureResultCommandInput, PutThirdPartyJobFailureResultCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "PutThirdPartyJobFailureResultCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutThirdPartyJobFailureResultInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PutThirdPartyJobFailureResultCommand extends command<PutThirdPartyJobFailureResultCommandInput, PutThirdPartyJobFailureResultCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutThirdPartyJobFailureResult",
+  PutThirdPartyJobFailureResult$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutThirdPartyJobFailureResultInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutThirdPartyJobFailureResultCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutThirdPartyJobFailureResultCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutThirdPartyJobFailureResultCommandOutput> {
-    return deserializeAws_json1_1PutThirdPartyJobFailureResultCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutThirdPartyJobFailureResultCommandInput;
+      output: PutThirdPartyJobFailureResultCommandOutput;
+    };
+  };
 }

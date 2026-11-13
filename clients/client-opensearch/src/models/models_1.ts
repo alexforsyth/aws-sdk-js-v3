@@ -1,0 +1,2299 @@
+// smithy-typescript generated code
+import type { DocumentType as __DocumentType } from "@smithy/types";
+
+import type {
+  ActionSeverity,
+  ActionStatus,
+  ActionType,
+  AWSServicePrincipal,
+  CapabilityStatus,
+  CutoverStatus,
+  CutoverTarget,
+  DataSourceStatus,
+  DeploymentStrategyOverride,
+  DomainUseCase,
+  DryRunMode,
+  EngineMode,
+  IndexStatus,
+  IPAddressType,
+  LogType,
+  MaintenanceType,
+  OpenSearchPartitionInstanceType,
+  PackageScopeOperationEnum,
+  ReplicationStatus,
+  RetentionAction,
+  ScheduleAt,
+  ScheduledBy,
+  TrafficSplitStatus,
+  TrafficStrategy,
+} from "./enums";
+import type {
+  AdvancedSecurityOptionsInput,
+  AIConfig,
+  AIMLOptionsInput,
+  AppConfig,
+  AuthorizedPrincipal,
+  AutomatedSnapshotPauseRequestOptions,
+  AutoTuneOptions,
+  ChangeProgressDetails,
+  ClusterConfig,
+  CognitoOptions,
+  DataSource,
+  DataSourceType,
+  DeploymentStrategyOptions,
+  DirectQueryDataSourceType,
+  DomainConfig,
+  DomainEndpointOptions,
+  DomainPackageDetails,
+  DryRunProgressStatus,
+  DryRunResults,
+  EBSOptions,
+  EncryptionAtRestOptions,
+  IamIdentityCenterOptions,
+  IamIdentityCenterOptionsInput,
+  IdentityCenterOptionsInput,
+  InboundConnection,
+  Insight,
+  LogPublishingOption,
+  MigrationError,
+  MigrationSource,
+  NodeToNodeEncryptionOptions,
+  OffPeakWindowOptions,
+  PackageConfiguration,
+  PackageDetails,
+  PackageEncryptionOptions,
+  PackageSource,
+  ServiceOptions,
+  ServiceSoftwareOptions,
+  SnapshotOptions,
+  SoftwareUpdateOptions,
+  Tag,
+  TrafficPercents,
+  VpcEndpoint,
+  VpcEndpointSummary,
+  VPCOptions,
+} from "./models_0";
+
+/**
+ * <p>The result of a <code>ListInsights</code> request. Contains the list of insights and
+ *             a pagination token for retrieving the next page of results.</p>
+ * @public
+ */
+export interface ListInsightsResponse {
+  /**
+   * <p>The list of insights returned for the specified entity.</p>
+   * @public
+   */
+  Insights?: Insight[] | undefined;
+
+  /**
+   * <p>When <code>NextToken</code> is returned, there are more results available. The value
+   *             of <code>NextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListInstanceTypeDetailsRequest {
+  /**
+   * <p>The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
+   *             OpenSearch_X.Y. Defaults to the latest version of OpenSearch.</p>
+   * @public
+   */
+  EngineVersion: string | undefined;
+
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName?: string | undefined;
+
+  /**
+   * <p>An optional parameter that specifies the maximum number of results to return. You can
+   *             use <code>nextToken</code> to get the next page of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>If your initial <code>ListInstanceTypeDetails</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListInstanceTypeDetails</code> operations, which returns results in the
+   *             next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>An optional parameter that specifies the Availability Zones for the domain.</p>
+   * @public
+   */
+  RetrieveAZs?: boolean | undefined;
+
+  /**
+   * <p>An optional parameter that lists information for a given instance type.</p>
+   * @public
+   */
+  InstanceType?: string | undefined;
+}
+
+/**
+ * <p>Lists all instance types and available features for a given OpenSearch or Elasticsearch
+ *    version.</p>
+ * @public
+ */
+export interface InstanceTypeDetails {
+  /**
+   * <p>The instance type.</p>
+   * @public
+   */
+  InstanceType?: OpenSearchPartitionInstanceType | undefined;
+
+  /**
+   * <p>Whether encryption at rest and node-to-node encryption are supported for the instance
+   *    type.</p>
+   * @public
+   */
+  EncryptionEnabled?: boolean | undefined;
+
+  /**
+   * <p>Whether Amazon Cognito access is supported for the instance type.</p>
+   * @public
+   */
+  CognitoEnabled?: boolean | undefined;
+
+  /**
+   * <p>Whether logging is supported for the instance type.</p>
+   * @public
+   */
+  AppLogsEnabled?: boolean | undefined;
+
+  /**
+   * <p>Whether fine-grained access control is supported for the instance type.</p>
+   * @public
+   */
+  AdvancedSecurityEnabled?: boolean | undefined;
+
+  /**
+   * <p>Whether UltraWarm is supported for the instance type.</p>
+   * @public
+   */
+  WarmEnabled?: boolean | undefined;
+
+  /**
+   * <p>Whether the instance acts as a data node, a dedicated master node, or an UltraWarm
+   *    node.</p>
+   * @public
+   */
+  InstanceRole?: string[] | undefined;
+
+  /**
+   * <p>The supported Availability Zones for the instance type.</p>
+   * @public
+   */
+  AvailabilityZones?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListInstanceTypeDetailsResponse {
+  /**
+   * <p>Lists all supported instance types and features for the given OpenSearch or
+   *             Elasticsearch version.</p>
+   * @public
+   */
+  InstanceTypeDetails?: InstanceTypeDetails[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMigrationsRequest {
+  /**
+   * <p>The unique identifier of the OpenSearch application to list migrations for.</p>
+   * @public
+   */
+  applicationId: string | undefined;
+
+  /**
+   * <p>Filters the results by migration status. Valid values are <code>PENDING</code>, <code>IN_PROGRESS</code>, <code>SUCCEEDED</code>, and <code>FAILED</code>.</p>
+   * @public
+   */
+  status?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in a single call.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>The pagination token from a previous call to retrieve the next set of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>A summary of a migration job, including its status and progress.</p>
+ * @public
+ */
+export interface MigrationSummary {
+  /**
+   * <p>The unique identifier of the migration job.</p>
+   * @public
+   */
+  migrationId?: string | undefined;
+
+  /**
+   * <p>The current status of the migration job.</p>
+   * @public
+   */
+  status?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the OpenSearch application associated with the migration.</p>
+   * @public
+   */
+  applicationId?: string | undefined;
+
+  /**
+   * <p>The source configuration for the migration.</p>
+   * @public
+   */
+  source?: MigrationSource | undefined;
+
+  /**
+   * <p>The number of saved objects exported from the source data source.</p>
+   * @public
+   */
+  exportedCount?: number | undefined;
+
+  /**
+   * <p>The number of saved objects successfully imported into the target workspace.</p>
+   * @public
+   */
+  importedCount?: number | undefined;
+
+  /**
+   * <p>Error details if the migration failed or completed with errors.</p>
+   * @public
+   */
+  error?: MigrationError | undefined;
+
+  /**
+   * <p>The date and time when the migration job was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The date and time when the migration job was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMigrationsResponse {
+  /**
+   * <p>A list of migration job summaries for the specified application.</p>
+   * @public
+   */
+  migrations?: MigrationSummary[] | undefined;
+
+  /**
+   * <p>The pagination token to use in a subsequent call to retrieve the next set of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>ListPackagesForDomain</code>
+ *             operation.</p>
+ * @public
+ */
+export interface ListPackagesForDomainRequest {
+  /**
+   * <p>The name of the domain for which you want to list associated packages.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>An optional parameter that specifies the maximum number of results to return. You can
+   *             use <code>nextToken</code> to get the next page of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>If your initial <code>ListPackagesForDomain</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListPackagesForDomain</code> operations, which returns results in the
+   *             next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for the response parameters to the <code>ListPackagesForDomain</code>
+ *             operation.</p>
+ * @public
+ */
+export interface ListPackagesForDomainResponse {
+  /**
+   * <p>List of all packages associated with a domain.</p>
+   * @public
+   */
+  DomainPackageDetailsList?: DomainPackageDetails[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListScheduledActionsRequest {
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>An optional parameter that specifies the maximum number of results to return. You can
+   *             use <code>nextToken</code> to get the next page of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>If your initial <code>ListScheduledActions</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListScheduledActions</code> operations, which returns results in the
+   *             next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a scheduled configuration change for an OpenSearch Service domain.
+ *             This actions can be a <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html">service
+ *                 software update</a> or a <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types">blue/green Auto-Tune enhancement</a>.</p>
+ * @public
+ */
+export interface ScheduledAction {
+  /**
+   * <p>The unique identifier of the scheduled action.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The type of action that will be taken on the domain.</p>
+   * @public
+   */
+  Type: ActionType | undefined;
+
+  /**
+   * <p>The severity of the action.</p>
+   * @public
+   */
+  Severity: ActionSeverity | undefined;
+
+  /**
+   * <p>The time when the change is scheduled to happen.</p>
+   * @public
+   */
+  ScheduledTime: number | undefined;
+
+  /**
+   * <p>A description of the action to be taken.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>Whether the action was scheduled manually (<code>CUSTOMER</code>, or by OpenSearch
+   *             Service automatically (<code>SYSTEM</code>).</p>
+   * @public
+   */
+  ScheduledBy?: ScheduledBy | undefined;
+
+  /**
+   * <p>The current status of the scheduled action.</p>
+   * @public
+   */
+  Status?: ActionStatus | undefined;
+
+  /**
+   * <p>Whether the action is required or optional.</p>
+   * @public
+   */
+  Mandatory?: boolean | undefined;
+
+  /**
+   * <p>Whether or not the scheduled action is cancellable.</p>
+   * @public
+   */
+  Cancellable?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListScheduledActionsResponse {
+  /**
+   * <p>A list of actions that are scheduled for the domain.</p>
+   * @public
+   */
+  ScheduledActions?: ScheduledAction[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for the parameters to the <code>ListTags</code> operation.</p>
+ * @public
+ */
+export interface ListTagsRequest {
+  /**
+   * <p>Amazon Resource Name (ARN) for the domain, data source, or application to view tags
+   *             for.</p>
+   * @public
+   */
+  ARN: string | undefined;
+}
+
+/**
+ * <p>The results of a <code>ListTags</code> operation.</p>
+ * @public
+ */
+export interface ListTagsResponse {
+  /**
+   * <p>List of resource tags associated with the specified domain, data source, or
+   *             application.</p>
+   * @public
+   */
+  TagList?: Tag[] | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>ListVersions</code>
+ *             operation.</p>
+ * @public
+ */
+export interface ListVersionsRequest {
+  /**
+   * <p>An optional parameter that specifies the maximum number of results to return. You can
+   *             use <code>nextToken</code> to get the next page of results.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>If your initial <code>ListVersions</code> operation returns a <code>nextToken</code>,
+   *             you can include the returned <code>nextToken</code> in subsequent
+   *                 <code>ListVersions</code> operations, which returns results in the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for the parameters for response received from the <code>ListVersions</code>
+ *             operation.</p>
+ * @public
+ */
+export interface ListVersionsResponse {
+  /**
+   * <p>A list of all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service
+   *             supports.</p>
+   * @public
+   */
+  Versions?: string[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointAccessRequest {
+  /**
+   * <p>The name of the OpenSearch Service domain to retrieve access information for.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>If your initial <code>ListVpcEndpointAccess</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListVpcEndpointAccess</code> operations, which returns results in the
+   *             next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointAccessResponse {
+  /**
+   * <p>A list of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">IAM
+   *                 principals</a> that can currently access the domain.</p>
+   * @public
+   */
+  AuthorizedPrincipalList: AuthorizedPrincipal[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointsRequest {
+  /**
+   * <p>If your initial <code>ListVpcEndpoints</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next
+   *             page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointsResponse {
+  /**
+   * <p>Information about each endpoint.</p>
+   * @public
+   */
+  VpcEndpointSummaryList: VpcEndpointSummary[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointsForDomainRequest {
+  /**
+   * <p>The name of the domain to list associated VPC endpoints for.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>If your initial <code>ListEndpointsForDomain</code> operation returns a
+   *                 <code>nextToken</code>, you can include the returned <code>nextToken</code> in
+   *             subsequent <code>ListEndpointsForDomain</code> operations, which returns results in the
+   *             next page.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListVpcEndpointsForDomainResponse {
+  /**
+   * <p>Information about each endpoint associated with the domain.</p>
+   * @public
+   */
+  VpcEndpointSummaryList: VpcEndpointSummary[] | undefined;
+
+  /**
+   * <p>When <code>nextToken</code> is returned, there are more results available. The value
+   *             of <code>nextToken</code> is a unique pagination token for each page. Send the request
+   *             again using the returned token to retrieve the next page.</p>
+   * @public
+   */
+  NextToken: string | undefined;
+}
+
+/**
+ * <p>Container for request parameters to the <code>PurchaseReservedInstanceOffering</code>
+ *             operation.</p>
+ * @public
+ */
+export interface PurchaseReservedInstanceOfferingRequest {
+  /**
+   * <p>The ID of the Reserved Instance offering to purchase.</p>
+   * @public
+   */
+  ReservedInstanceOfferingId: string | undefined;
+
+  /**
+   * <p>A customer-specified identifier to track this reservation.</p>
+   * @public
+   */
+  ReservationName: string | undefined;
+
+  /**
+   * <p>The number of OpenSearch instances to reserve.</p>
+   * @public
+   */
+  InstanceCount?: number | undefined;
+}
+
+/**
+ * <p>Represents the output of a <code>PurchaseReservedInstanceOffering</code>
+ *             operation.</p>
+ * @public
+ */
+export interface PurchaseReservedInstanceOfferingResponse {
+  /**
+   * <p>The ID of the Reserved Instance offering that was purchased.</p>
+   * @public
+   */
+  ReservedInstanceId?: string | undefined;
+
+  /**
+   * <p>The customer-specified identifier used to track this reservation.</p>
+   * @public
+   */
+  ReservationName?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutDefaultApplicationSettingRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain. See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html">Identifiers for IAM Entities </a> in
+   *                 <i>Using Amazon Web Services Identity and Access Management</i> for
+   *             more information. </p>
+   * @public
+   */
+  applicationArn: string | undefined;
+
+  /**
+   * <p>Set to true to set the specified ARN as the default application. Set to false to clear
+   *             the default application.</p>
+   * @public
+   */
+  setAsDefault: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutDefaultApplicationSettingResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain. See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html">Identifiers for IAM Entities </a> in
+   *                 <i>Using Amazon Web Services Identity and Access Management</i> for
+   *             more information. </p>
+   * @public
+   */
+  applicationArn?: string | undefined;
+}
+
+/**
+ * <p>The base configuration for registering a capability. Contains capability-specific configuration such as AI settings.</p>
+ * @public
+ */
+export type CapabilityBaseRequestConfig =
+  | CapabilityBaseRequestConfig.AiConfigMember
+  | CapabilityBaseRequestConfig.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CapabilityBaseRequestConfig {
+  /**
+   * <p>Configuration settings for AI-powered capabilities.</p>
+   * @public
+   */
+  export interface AiConfigMember {
+    aiConfig: AIConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    aiConfig?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    aiConfig: (value: AIConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Container for the parameters to the <code>RegisterCapability</code> operation.</p>
+ * @public
+ */
+export interface RegisterCapabilityRequest {
+  /**
+   * <p>The unique identifier of the OpenSearch UI application to register the capability for.</p>
+   * @public
+   */
+  applicationId: string | undefined;
+
+  /**
+   * <p>The name of the capability to register. Must be between 3 and 30 characters and contain only alphanumeric characters and hyphens. This identifies the type of capability being enabled for the application. For registering AI Assistant capability, use <code>ai-capability</code>
+   *          </p>
+   * @public
+   */
+  capabilityName: string | undefined;
+
+  /**
+   * <p>The configuration settings for the capability being registered. This includes capability-specific settings such as AI configuration.</p>
+   * @public
+   */
+  capabilityConfig: CapabilityBaseRequestConfig | undefined;
+}
+
+/**
+ * <p>The base configuration returned for a registered capability.</p>
+ * @public
+ */
+export type CapabilityBaseResponseConfig =
+  | CapabilityBaseResponseConfig.AiConfigMember
+  | CapabilityBaseResponseConfig.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CapabilityBaseResponseConfig {
+  /**
+   * <p>Configuration settings for AI-powered capabilities.</p>
+   * @public
+   */
+  export interface AiConfigMember {
+    aiConfig: AIConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    aiConfig?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    aiConfig: (value: AIConfig) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The result of a <code>RegisterCapability</code> request. Contains details about the registered capability.</p>
+ * @public
+ */
+export interface RegisterCapabilityResponse {
+  /**
+   * <p>The name of the registered capability.</p>
+   * @public
+   */
+  capabilityName?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the OpenSearch UI application.</p>
+   * @public
+   */
+  applicationId?: string | undefined;
+
+  /**
+   * <p>The current status of the capability. Possible values: <code>creating</code>, <code>create_failed</code>, <code>active</code>, <code>updating</code>, <code>update_failed</code>, <code>deleting</code>, <code>delete_failed</code>.</p>
+   * @public
+   */
+  status?: CapabilityStatus | undefined;
+
+  /**
+   * <p>The configuration settings for the registered capability.</p>
+   * @public
+   */
+  capabilityConfig?: CapabilityBaseResponseConfig | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>RejectInboundConnection</code>
+ *             operation.</p>
+ * @public
+ */
+export interface RejectInboundConnectionRequest {
+  /**
+   * <p>The unique identifier of the inbound connection to reject.</p>
+   * @public
+   */
+  ConnectionId: string | undefined;
+}
+
+/**
+ * <p>Represents the output of a <code>RejectInboundConnection</code> operation.</p>
+ * @public
+ */
+export interface RejectInboundConnectionResponse {
+  /**
+   * <p>Contains details about the rejected inbound connection.</p>
+   * @public
+   */
+  Connection?: InboundConnection | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RemoveReplicationPeerRequest {
+  /**
+   * <p>The name of an OpenSearch Service domain. Domain names are unique across the domains
+   *             owned by an account within an Amazon Web Services Region.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the peer to stop replicating with. Both domains are named
+   *   so that the request identifies exactly one replication relationship.</p>
+   * @public
+   */
+  PeerDomainArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RemoveReplicationPeerResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain that is no longer replicating.</p>
+   * @public
+   */
+  DomainArn?: string | undefined;
+
+  /**
+   * <p>The state of the replication relationship. This is <code>PENDING_REMOVAL</code> while
+   *   replication is being stopped.</p>
+   * @public
+   */
+  Status?: ReplicationStatus | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>RemoveTags</code> operation.</p>
+ * @public
+ */
+export interface RemoveTagsRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain, data source, or application from which
+   *             you want to delete the specified tags.</p>
+   * @public
+   */
+  ARN: string | undefined;
+
+  /**
+   * <p>The list of tag keys to remove from the domain, data source, or application.</p>
+   * @public
+   */
+  TagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RevokeVpcEndpointAccessRequest {
+  /**
+   * <p>The name of the OpenSearch Service domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The account ID to revoke access from.</p>
+   * @public
+   */
+  Account?: string | undefined;
+
+  /**
+   * <p>The service SP to revoke access from.</p>
+   * @public
+   */
+  Service?: AWSServicePrincipal | undefined;
+
+  /**
+   * <p>The options for the service, including the supported Regions for the endpoint
+   *             access.</p>
+   * @public
+   */
+  ServiceOptions?: ServiceOptions | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RevokeVpcEndpointAccessResponse {}
+
+/**
+ * <p>Container for the request parameters to the
+ *                 <code>RollbackServiceSoftwareUpdate</code> operation.</p>
+ * @public
+ */
+export interface RollbackServiceSoftwareUpdateRequest {
+  /**
+   * <p>The name of the domain to roll back the service software update on.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+}
+
+/**
+ * <p>Details about the rollback options for a service software update.</p>
+ * @public
+ */
+export interface RollbackServiceSoftwareOptions {
+  /**
+   * <p>The current service software version on the domain.</p>
+   * @public
+   */
+  CurrentVersion?: string | undefined;
+
+  /**
+   * <p>The service software version that the domain will roll back to.</p>
+   * @public
+   */
+  NewVersion?: string | undefined;
+
+  /**
+   * <p>Whether a service software rollback is available for the domain.</p>
+   * @public
+   */
+  RollbackAvailable?: boolean | undefined;
+
+  /**
+   * <p>A description of the rollback status.</p>
+   * @public
+   */
+  Description?: string | undefined;
+}
+
+/**
+ * <p>Contains details about the rolled-back service software update.</p>
+ * @public
+ */
+export interface RollbackServiceSoftwareUpdateResponse {
+  /**
+   * <p>The rollback options for the service software update.</p>
+   * @public
+   */
+  RollbackServiceSoftwareOptions?: RollbackServiceSoftwareOptions | undefined;
+}
+
+/**
+ * <p>Container for the parameters to the <code>StartDomainMaintenance</code>
+ *             operation.</p>
+ * @public
+ */
+export interface StartDomainMaintenanceRequest {
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The name of the action.</p>
+   * @public
+   */
+  Action: MaintenanceType | undefined;
+
+  /**
+   * <p>The ID of the data node.</p>
+   * @public
+   */
+  NodeId?: string | undefined;
+}
+
+/**
+ * <p>The result of a <code>StartDomainMaintenance</code> request that information about the
+ *             requested action. </p>
+ * @public
+ */
+export interface StartDomainMaintenanceResponse {
+  /**
+   * <p>The request ID of requested action.</p>
+   * @public
+   */
+  MaintenanceId?: string | undefined;
+}
+
+/**
+ * <p>Identifies a specific saved object by its type and unique identifier.</p>
+ * @public
+ */
+export interface SavedObjectIdentifier {
+  /**
+   * <p>The type of the saved object, such as <code>dashboard</code>, <code>visualization</code>, <code>index-pattern</code>, <code>search</code>, or <code>query</code>.</p>
+   * @public
+   */
+  type: string | undefined;
+
+  /**
+   * <p>The unique identifier of the saved object.</p>
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * <p>Options to filter the scope of saved objects to export during a migration.</p>
+ * @public
+ */
+export interface ExportOptions {
+  /**
+   * <p>A list of saved object types to include in the migration. Valid values include <code>dashboard</code>, <code>visualization</code>, <code>index-pattern</code>, <code>search</code>, and <code>query</code>.</p>
+   * @public
+   */
+  types?: string[] | undefined;
+
+  /**
+   * <p>A list of specific saved objects to include in the migration, identified by type and ID.</p>
+   * @public
+   */
+  objects?: SavedObjectIdentifier[] | undefined;
+
+  /**
+   * <p>Specifies whether to include all objects referenced by the exported objects, recursively.</p>
+   * @public
+   */
+  includeReferencesDeep?: boolean | undefined;
+}
+
+/**
+ * <p>The target workspace configuration for a migration. You can specify an existing workspace by ID or request creation of a new workspace.</p>
+ * @public
+ */
+export interface MigrationWorkspace {
+  /**
+   * <p>The unique identifier of an existing workspace to use as the migration target. Specify either this parameter or <code>createWorkspace</code>.</p>
+   * @public
+   */
+  workspaceId?: string | undefined;
+
+  /**
+   * <p>Specifies whether to create a new workspace as the migration target. If <code>true</code>, you must also specify <code>name</code>.</p>
+   * @public
+   */
+  createWorkspace?: boolean | undefined;
+
+  /**
+   * <p>The name of the new workspace to create. Required when <code>createWorkspace</code> is <code>true</code>.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The type of the new workspace to create.</p>
+   * @public
+   */
+  type?: string | undefined;
+}
+
+/**
+ * <p>The configuration options for a saved objects migration job.</p>
+ * @public
+ */
+export interface MigrationOptions {
+  /**
+   * <p>The data source from which to export saved objects.</p>
+   * @public
+   */
+  source: MigrationSource | undefined;
+
+  /**
+   * <p>The target workspace configuration for importing saved objects. You can specify an existing workspace or request creation of a new workspace.</p>
+   * @public
+   */
+  workspace: MigrationWorkspace | undefined;
+
+  /**
+   * <p>Options to filter the scope of saved objects to export from the source.</p>
+   * @public
+   */
+  exportOptions?: ExportOptions | undefined;
+
+  /**
+   * <p>The strategy for resolving conflicts when saved objects already exist in the target workspace. Valid values are <code>CREATE_NEW_COPIES</code>, which creates new objects with unique IDs, and <code>overwrite</code>, which replaces existing objects.</p>
+   * @public
+   */
+  conflictResolution?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartMigrationRequest {
+  /**
+   * <p>The unique identifier of the OpenSearch application to migrate saved objects into.</p>
+   * @public
+   */
+  applicationId: string | undefined;
+
+  /**
+   * <p>The configuration options for the migration, including the source data source, target workspace, export filters, and conflict resolution strategy.</p>
+   * @public
+   */
+  migrationOptions: MigrationOptions | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon OpenSearch Service ignores the request but does not return an error.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartMigrationResponse {
+  /**
+   * <p>The unique identifier of the migration job.</p>
+   * @public
+   */
+  migrationId?: string | undefined;
+
+  /**
+   * <p>The initial status of the migration job. The status is <code>PENDING</code> when a migration is first created.</p>
+   * @public
+   */
+  status?: string | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>StartServiceSoftwareUpdate</code>
+ *             operation.</p>
+ * @public
+ */
+export interface StartServiceSoftwareUpdateRequest {
+  /**
+   * <p>The name of the domain that you want to update to the latest service software.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>When to start the service software update.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NOW</code> - Immediately schedules the update to happen in the current
+   *                     hour if there's capacity available.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the
+   *                     update. If you specify this value, you must also provide a value for
+   *                         <code>DesiredStartTime</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>OFF_PEAK_WINDOW</code> - Marks the update to be picked up during an
+   *                     upcoming off-peak window. There's no guarantee that the update will happen
+   *                     during the next immediate window. Depending on capacity, it might happen in
+   *                     subsequent days.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Default: <code>NOW</code> if you don't specify a value for
+   *                 <code>DesiredStartTime</code>, and <code>TIMESTAMP</code> if you do.</p>
+   * @public
+   */
+  ScheduleAt?: ScheduleAt | undefined;
+
+  /**
+   * <p>The Epoch timestamp when you want the service software update to start. You only need
+   *             to specify this parameter if you set <code>ScheduleAt</code> to
+   *             <code>TIMESTAMP</code>.</p>
+   * @public
+   */
+  DesiredStartTime?: number | undefined;
+}
+
+/**
+ * <p>Represents the output of a <code>StartServiceSoftwareUpdate</code> operation. Contains
+ *             the status of the update.</p>
+ * @public
+ */
+export interface StartServiceSoftwareUpdateResponse {
+  /**
+   * <p>The current status of the OpenSearch Service software update.</p>
+   * @public
+   */
+  ServiceSoftwareOptions?: ServiceSoftwareOptions | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SwitchoverReplicationRequest {
+  /**
+   * <p>The name of an OpenSearch Service domain. Domain names are unique across the domains
+   *             owned by an account within an Amazon Web Services Region.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the relationship's current primary. The request is
+   *   rejected if this domain is no longer the peer of the domain you are calling.</p>
+   * @public
+   */
+  PeerDomainArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SwitchoverReplicationResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain being promoted.</p>
+   * @public
+   */
+  DomainArn?: string | undefined;
+
+  /**
+   * <p>The state of the replication relationship. This is <code>SWITCHING_OVER</code> while the
+   *   promotion is in progress.</p>
+   * @public
+   */
+  Status?: ReplicationStatus | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateApplicationRequest {
+  /**
+   * <p>The unique identifier for the OpenSearch application to be updated.</p>
+   * @public
+   */
+  id: string | undefined;
+
+  /**
+   * <p>The data sources to associate with the OpenSearch application.</p>
+   * @public
+   */
+  dataSources?: DataSource[] | undefined;
+
+  /**
+   * <p>The configuration settings to modify for the OpenSearch application.</p>
+   * @public
+   */
+  appConfigs?: AppConfig[] | undefined;
+
+  /**
+   * <p>Configuration settings for integrating IAM Identity Center with the OpenSearch
+   *             application.</p>
+   * @public
+   */
+  iamIdentityCenterOptions?: IamIdentityCenterOptionsInput | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateApplicationResponse {
+  /**
+   * <p>The unique identifier of the updated OpenSearch application.</p>
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * <p>The name of the updated OpenSearch application.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain. See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html">Identifiers for IAM Entities </a> in
+   *                 <i>Using Amazon Web Services Identity and Access Management</i> for
+   *             more information. </p>
+   * @public
+   */
+  arn?: string | undefined;
+
+  /**
+   * <p>The data sources associated with the updated OpenSearch application.</p>
+   * @public
+   */
+  dataSources?: DataSource[] | undefined;
+
+  /**
+   * <p>The IAM Identity Center configuration for the updated OpenSearch application.</p>
+   * @public
+   */
+  iamIdentityCenterOptions?: IamIdentityCenterOptions | undefined;
+
+  /**
+   * <p>The configuration settings for the updated OpenSearch application.</p>
+   * @public
+   */
+  appConfigs?: AppConfig[] | undefined;
+
+  /**
+   * <p>The timestamp when the OpenSearch application was originally created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the OpenSearch application was last updated.</p>
+   * @public
+   */
+  lastUpdatedAt?: Date | undefined;
+}
+
+/**
+ * <p>The cutover to perform for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface CutoverRequestOptions {
+  /**
+   * <p>The cluster to cut over to. <code>ClonedCluster</code> makes the cloned cluster serve the domain. <code>PrimaryCluster</code> keeps the primary cluster and ends the upgrade.</p>
+   * @public
+   */
+  Target: CutoverTarget | undefined;
+}
+
+/**
+ * <p>Controls how long the cluster that you cut over from is kept after cutover completes. Specify exactly one of <code>RetentionInHours</code> or <code>RetentionAction</code>.</p>
+ * @public
+ */
+export type RetentionOptions =
+  | RetentionOptions.RetentionActionMember
+  | RetentionOptions.RetentionInHoursMember
+  | RetentionOptions.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace RetentionOptions {
+  /**
+   * <p>The number of hours to keep the cluster that you cut over from. The retention period starts when cutover completes. The minimum is 1 hour. In an <code>UpdateClone</code> response after cutover completes, this value is the number of hours remaining in the retention period, rounded up.</p>
+   * @public
+   */
+  export interface RetentionInHoursMember {
+    RetentionInHours: number;
+    RetentionAction?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Ends the retention period now. Valid only after cutover completes.</p>
+   * @public
+   */
+  export interface RetentionActionMember {
+    RetentionInHours?: never;
+    RetentionAction: RetentionAction;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    RetentionInHours?: never;
+    RetentionAction?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    RetentionInHours: (value: number) => T;
+    RetentionAction: (value: RetentionAction) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The traffic shift to perform for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface TrafficSplitRequestOptions {
+  /**
+   * <p>The traffic shifting strategy. The only valid value is <code>ShiftReadTrafficPercent</code>.</p>
+   * @public
+   */
+  Strategy: TrafficStrategy | undefined;
+
+  /**
+   * <p>The percentage of search traffic, from 0 to 100, to send to the cloned cluster. The rest goes to the primary cluster.</p>
+   * @public
+   */
+  CloneReadTrafficPercent: number | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>UpdateClone</code> operation.</p>
+ * @public
+ */
+export interface UpdateCloneRequest {
+  /**
+   * <p>The name of the domain that has a cloned blue/green upgrade in progress.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>Shifts a percentage of search traffic from the primary cluster to the cloned cluster.</p>
+   * @public
+   */
+  TrafficSplitOptions?: TrafficSplitRequestOptions | undefined;
+
+  /**
+   * <p>Cuts the domain over to the cloned cluster or back to the primary cluster.</p>
+   * @public
+   */
+  CutoverOptions?: CutoverRequestOptions | undefined;
+
+  /**
+   * <p>Changes the retention period, or ends it after cutover completes.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
+}
+
+/**
+ * <p>The cutover target and status for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface CutoverOptions {
+  /**
+   * <p>The cluster that the domain is cutting over to.</p>
+   * @public
+   */
+  Target: CutoverTarget | undefined;
+
+  /**
+   * <p>The status of the cutover.</p>
+   * @public
+   */
+  Status: CutoverStatus | undefined;
+}
+
+/**
+ * <p>The traffic split and status for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface TrafficSplitOptions {
+  /**
+   * <p>The traffic split currently in effect.</p>
+   * @public
+   */
+  Current: TrafficPercents | undefined;
+
+  /**
+   * <p>The requested traffic split.</p>
+   * @public
+   */
+  Target: TrafficPercents | undefined;
+
+  /**
+   * <p>The status of the traffic shift.</p>
+   * @public
+   */
+  Status: TrafficSplitStatus | undefined;
+}
+
+/**
+ * <p>Container for the response returned by the <code>UpdateClone</code> operation.</p>
+ * @public
+ */
+export interface UpdateCloneResponse {
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The unique identifier of the configuration change. Use it with <code>DescribeDomainChangeProgress</code> to track the change.</p>
+   * @public
+   */
+  ChangeId: string | undefined;
+
+  /**
+   * <p>The requested cutover target and the status of the cutover.</p>
+   * @public
+   */
+  CutoverOptions?: CutoverOptions | undefined;
+
+  /**
+   * <p>The current and requested traffic split, and the status of the traffic shift.</p>
+   * @public
+   */
+  TrafficSplitOptions?: TrafficSplitOptions | undefined;
+
+  /**
+   * <p>The retention settings for the upgrade.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
+}
+
+/**
+ * <p>Container for the parameters to the <code>UpdateDataSource</code> operation.</p>
+ * @public
+ */
+export interface UpdateDataSourceRequest {
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The name of the data source to modify.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The type of data source.</p>
+   * @public
+   */
+  DataSourceType: DataSourceType | undefined;
+
+  /**
+   * <p>A new description of the data source.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The status of the data source update.</p>
+   * @public
+   */
+  Status?: DataSourceStatus | undefined;
+}
+
+/**
+ * <p>The result of an <code>UpdateDataSource</code> operation.</p>
+ * @public
+ */
+export interface UpdateDataSourceResponse {
+  /**
+   * <p>A message associated with the updated data source.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDirectQueryDataSourceRequest {
+  /**
+   * <p> A unique, user-defined label to identify the data source within your OpenSearch
+   *             Service environment. </p>
+   * @public
+   */
+  DataSourceName: string | undefined;
+
+  /**
+   * <p> The supported Amazon Web Services service that you want to use as the source for
+   *             direct queries in OpenSearch Service. </p>
+   * @public
+   */
+  DataSourceType: DirectQueryDataSourceType | undefined;
+
+  /**
+   * <p> An optional text field for providing additional context and details about the data
+   *             source. </p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p> An optional list of Amazon Resource Names (ARNs) for the OpenSearch collections that are
+   *             associated with the direct query data source. This field is required for CloudWatchLogs
+   *             and SecurityLake datasource types. </p>
+   * @public
+   */
+  OpenSearchArns?: string[] | undefined;
+
+  /**
+   * <p> An optional IAM access policy document that defines the updated permissions for accessing the direct query data source.
+   *             The policy document must be in valid JSON format and follow IAM policy syntax. If not specified, the existing access policy if present remains unchanged. </p>
+   * @public
+   */
+  DataSourceAccessPolicy?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDirectQueryDataSourceResponse {
+  /**
+   * <p> The unique, system-generated identifier that represents the data source. </p>
+   * @public
+   */
+  DataSourceArn?: string | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>UpdateDomain</code>
+ *             operation.</p>
+ * @public
+ */
+export interface UpdateDomainConfigRequest {
+  /**
+   * <p>The name of the domain that you're updating.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>Changes that you want to make to the cluster configuration, such as the instance type
+   *             and number of EC2 instances.</p>
+   * @public
+   */
+  ClusterConfig?: ClusterConfig | undefined;
+
+  /**
+   * <p>The type and size of the EBS volume to attach to instances in the domain.</p>
+   * @public
+   */
+  EBSOptions?: EBSOptions | undefined;
+
+  /**
+   * <p>Option to set the time, in UTC format, for the daily automated snapshot. Default value
+   *             is <code>0</code> hours. </p>
+   * @public
+   */
+  SnapshotOptions?: SnapshotOptions | undefined;
+
+  /**
+   * <p>Options to specify the subnets and security groups for a VPC endpoint. For more
+   *             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html">Launching your Amazon
+   *                 OpenSearch Service domains using a VPC</a>.</p>
+   * @public
+   */
+  VPCOptions?: VPCOptions | undefined;
+
+  /**
+   * <p>Key-value pairs to configure Amazon Cognito authentication for OpenSearch
+   *             Dashboards.</p>
+   * @public
+   */
+  CognitoOptions?: CognitoOptions | undefined;
+
+  /**
+   * <p>Key-value pairs to specify advanced configuration options. The following key-value
+   *             pairs are supported:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>"rest.action.multi.allow_explicit_index": "true" | "false"</code> - Note
+   *                     the use of a string rather than a boolean. Specifies whether explicit references
+   *                     to indexes are allowed inside the body of HTTP requests. If you want to
+   *                     configure access policies for domain sub-resources, such as specific indexes and
+   *                     domain APIs, you must disable this property. Default is true.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>"indices.fielddata.cache.size": "80" </code> - Note the use of a string
+   *                     rather than a boolean. Specifies the percentage of heap space allocated to field
+   *                     data. Default is unbounded.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>"indices.query.bool.max_clause_count": "1024"</code> - Note the use of a
+   *                     string rather than a boolean. Specifies the maximum number of clauses allowed in
+   *                     a Lucene boolean query. Default is 1,024. Queries with more than the permitted
+   *                     number of clauses result in a <code>TooManyClauses</code> error.</p>
+   *             </li>
+   *          </ul>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options">Advanced cluster parameters</a>.</p>
+   * @public
+   */
+  AdvancedOptions?: Record<string, string> | undefined;
+
+  /**
+   * <p>Identity and Access Management (IAM) access policy as a JSON-formatted string.</p>
+   * @public
+   */
+  AccessPolicies?: string | undefined;
+
+  /**
+   * <p>Specify either dual stack or IPv4 as your IP address type. Dual stack allows you to
+   *             share domain resources across IPv4 and IPv6 address types, and is the recommended
+   *             option. If your IP address type is currently set to dual stack, you can't change it.
+   *         </p>
+   * @public
+   */
+  IPAddressType?: IPAddressType | undefined;
+
+  /**
+   * <p>Options to publish OpenSearch logs to Amazon CloudWatch Logs.</p>
+   * @public
+   */
+  LogPublishingOptions?: Partial<Record<LogType, LogPublishingOption>> | undefined;
+
+  /**
+   * <p>Encryption at rest options for the domain.</p>
+   * @public
+   */
+  EncryptionAtRestOptions?: EncryptionAtRestOptions | undefined;
+
+  /**
+   * <p>Additional options for the domain endpoint, such as whether to require HTTPS for all
+   *             traffic.</p>
+   * @public
+   */
+  DomainEndpointOptions?: DomainEndpointOptions | undefined;
+
+  /**
+   * <p>Node-to-node encryption options for the domain.</p>
+   * @public
+   */
+  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions | undefined;
+
+  /**
+   * <p>Options for fine-grained access control.</p>
+   * @public
+   */
+  AdvancedSecurityOptions?: AdvancedSecurityOptionsInput | undefined;
+
+  /**
+   * <p>Configuration settings for enabling and managing IAM Identity Center.</p>
+   * @public
+   */
+  IdentityCenterOptions?: IdentityCenterOptionsInput | undefined;
+
+  /**
+   * <p>Options for Auto-Tune.</p>
+   * @public
+   */
+  AutoTuneOptions?: AutoTuneOptions | undefined;
+
+  /**
+   * <p>This flag, when set to True, specifies whether the <code>UpdateDomain</code> request
+   *             should return the results of a dry run analysis without actually applying the change. A
+   *             dry run determines what type of deployment the update will cause.</p>
+   * @public
+   */
+  DryRun?: boolean | undefined;
+
+  /**
+   * <p>The type of dry run to perform.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Basic</code> only returns the type of deployment (blue/green or dynamic)
+   *                     that the update will cause.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Verbose</code> runs an additional check to validate the changes you're
+   *                     making. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check">Validating a domain update</a>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  DryRunMode?: DryRunMode | undefined;
+
+  /**
+   * <p>Off-peak window options for the domain.</p>
+   * @public
+   */
+  OffPeakWindowOptions?: OffPeakWindowOptions | undefined;
+
+  /**
+   * <p>Service software update options for the domain.</p>
+   * @public
+   */
+  SoftwareUpdateOptions?: SoftwareUpdateOptions | undefined;
+
+  /**
+   * <p>Options for all machine learning features for the specified domain.</p>
+   * @public
+   */
+  AIMLOptions?: AIMLOptionsInput | undefined;
+
+  /**
+   * <p>Specifies the deployment strategy options for the domain.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOptions | undefined;
+
+  /**
+   * <p>Specifies the automated snapshot pause options for the domain.</p>
+   *          <important>
+   *             <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+   *                 points in time when snapshots are suspended. Use this feature only for short-term
+   *                 operational needs such as migrations or maintenance windows.</p>
+   *          </important>
+   *          <p>Maximum suspension duration: 3 days.</p>
+   * @public
+   */
+  AutomatedSnapshotPauseOptions?: AutomatedSnapshotPauseRequestOptions | undefined;
+
+  /**
+   * <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+   * @public
+   */
+  UseCase?: DomainUseCase | undefined;
+
+  /**
+   * <p>The engine mode for the domain. The engine mode can't be changed after the domain is created. For valid values, see <code>EngineMode</code>.</p>
+   * @public
+   */
+  EngineMode?: EngineMode | undefined;
+
+  /**
+   * <p>A list of advisory warning codes to accept for this configuration change. By default, any advisory warning blocks the change. Include the code of each warning you want to accept so the change can proceed. You can find warning codes in the <code>ValidationFailures</code> list returned by <code>DescribeDomainChangeProgress</code> and <code>DescribeDryRunProgress</code>. Critical validation failures cannot be accepted and always block the change. If you omit this parameter or pass an empty list, all warnings block the change. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check">Validating a domain update</a>.</p>
+   * @public
+   */
+  AcceptedWarnings?: string[] | undefined;
+}
+
+/**
+ * <p>The results of an <code>UpdateDomain</code> request. Contains the status of the domain
+ *             being updated.</p>
+ * @public
+ */
+export interface UpdateDomainConfigResponse {
+  /**
+   * <p>The status of the updated domain.</p>
+   * @public
+   */
+  DomainConfig: DomainConfig | undefined;
+
+  /**
+   * <p>Results of the dry run performed in the update domain request.</p>
+   * @public
+   */
+  DryRunResults?: DryRunResults | undefined;
+
+  /**
+   * <p>The status of the dry run being performed on the domain, if any.</p>
+   * @public
+   */
+  DryRunProgressStatus?: DryRunProgressStatus | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateIndexRequest {
+  /**
+   * <p>The name of an OpenSearch Service domain. Domain names are unique across the domains
+   *             owned by an account within an Amazon Web Services Region.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The name of the index to update.</p>
+   * @public
+   */
+  IndexName: string | undefined;
+
+  /**
+   * <p>The updated JSON schema for the index including any changes to mappings, settings, and semantic enrichment configuration.</p>
+   * @public
+   */
+  IndexSchema: __DocumentType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateIndexResponse {
+  /**
+   * <p>The status of the index update operation.</p>
+   * @public
+   */
+  Status: IndexStatus | undefined;
+}
+
+/**
+ * <p>Container for request parameters to the <code>UpdatePackage</code> operation.</p>
+ * @public
+ */
+export interface UpdatePackageRequest {
+  /**
+   * <p>The unique identifier for the package.</p>
+   * @public
+   */
+  PackageID: string | undefined;
+
+  /**
+   * <p>Amazon S3 bucket and key for the package.</p>
+   * @public
+   */
+  PackageSource: PackageSource | undefined;
+
+  /**
+   * <p>A new description of the package.</p>
+   * @public
+   */
+  PackageDescription?: string | undefined;
+
+  /**
+   * <p>Commit message for the updated file, which is shown as part of
+   *                 <code>GetPackageVersionHistoryResponse</code>.</p>
+   * @public
+   */
+  CommitMessage?: string | undefined;
+
+  /**
+   * <p>The updated configuration details for a package.</p>
+   * @public
+   */
+  PackageConfiguration?: PackageConfiguration | undefined;
+
+  /**
+   * <p>Encryption options for a package.</p>
+   * @public
+   */
+  PackageEncryptionOptions?: PackageEncryptionOptions | undefined;
+}
+
+/**
+ * <p>Container for the response returned by the <code>UpdatePackage</code>
+ *             operation.</p>
+ * @public
+ */
+export interface UpdatePackageResponse {
+  /**
+   * <p>Information about a package.</p>
+   * @public
+   */
+  PackageDetails?: PackageDetails | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdatePackageScopeRequest {
+  /**
+   * <p>ID of the package whose scope is being updated.</p>
+   * @public
+   */
+  PackageID: string | undefined;
+
+  /**
+   * <p> The operation to perform on the package scope (e.g., add/remove/override
+   *             users).</p>
+   * @public
+   */
+  Operation: PackageScopeOperationEnum | undefined;
+
+  /**
+   * <p> List of users to be added or removed from the package scope.</p>
+   * @public
+   */
+  PackageUserList: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdatePackageScopeResponse {
+  /**
+   * <p> ID of the package whose scope was updated.</p>
+   * @public
+   */
+  PackageID?: string | undefined;
+
+  /**
+   * <p>The operation that was performed on the package scope.</p>
+   * @public
+   */
+  Operation?: PackageScopeOperationEnum | undefined;
+
+  /**
+   * <p> List of users who have access to the package after the scope update.</p>
+   * @public
+   */
+  PackageUserList?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateScheduledActionRequest {
+  /**
+   * <p>The name of the domain to reschedule an action for.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The unique identifier of the action to reschedule. To retrieve this ID, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.</p>
+   * @public
+   */
+  ActionID: string | undefined;
+
+  /**
+   * <p>The type of action to reschedule. Can be one of <code>SERVICE_SOFTWARE_UPDATE</code>,
+   *                 <code>JVM_HEAP_SIZE_TUNING</code>, or <code>JVM_YOUNG_GEN_TUNING</code>. To retrieve
+   *             this value, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.</p>
+   * @public
+   */
+  ActionType: ActionType | undefined;
+
+  /**
+   * <p>When to schedule the action.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NOW</code> - Immediately schedules the update to happen in the current
+   *                     hour if there's capacity available.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the
+   *                     update. If you specify this value, you must also provide a value for
+   *                         <code>DesiredStartTime</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>OFF_PEAK_WINDOW</code> - Marks the action to be picked up during an
+   *                     upcoming off-peak window. There's no guarantee that the change will be
+   *                     implemented during the next immediate window. Depending on capacity, it might
+   *                     happen in subsequent days.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ScheduleAt: ScheduleAt | undefined;
+
+  /**
+   * <p>The time to implement the change, in Coordinated Universal Time (UTC). Only specify
+   *             this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.</p>
+   * @public
+   */
+  DesiredStartTime?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateScheduledActionResponse {
+  /**
+   * <p>Information about the rescheduled action.</p>
+   * @public
+   */
+  ScheduledAction?: ScheduledAction | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateVpcEndpointRequest {
+  /**
+   * <p>The unique identifier of the endpoint.</p>
+   * @public
+   */
+  VpcEndpointId: string | undefined;
+
+  /**
+   * <p>The security groups and/or subnets to add, remove, or modify.</p>
+   * @public
+   */
+  VpcOptions: VPCOptions | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateVpcEndpointResponse {
+  /**
+   * <p>The endpoint to be updated.</p>
+   * @public
+   */
+  VpcEndpoint: VpcEndpoint | undefined;
+}
+
+/**
+ * <p>Options for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface ClonedBlueGreenOptions {
+  /**
+   * <p>How long to keep the cluster that you cut over from after cutover completes. When you start the upgrade, only <code>RetentionInHours</code> is accepted.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
+}
+
+/**
+ * <p>Overrides the deployment strategy for a single operation, such as a version upgrade.</p>
+ * @public
+ */
+export interface DeploymentStrategyOverrideOptions {
+  /**
+   * <p>The deployment strategy to use for this operation. The only valid value is <code>ClonedBlueGreen</code>, which creates a cloned cluster on the target version next to the primary cluster so that you can validate it and shift traffic to it before you cut over.</p>
+   * @public
+   */
+  DeploymentStrategy: DeploymentStrategyOverride | undefined;
+
+  /**
+   * <p>Options that apply when <code>DeploymentStrategy</code> is <code>ClonedBlueGreen</code>.</p>
+   * @public
+   */
+  ClonedBlueGreenOptions?: ClonedBlueGreenOptions | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>UpgradeDomain</code>
+ *             operation.</p>
+ * @public
+ */
+export interface UpgradeDomainRequest {
+  /**
+   * <p>Name of the OpenSearch Service domain that you want to upgrade.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>OpenSearch or Elasticsearch version to which you want to upgrade, in the format
+   *             Opensearch_X.Y or Elasticsearch_X.Y.</p>
+   * @public
+   */
+  TargetVersion: string | undefined;
+
+  /**
+   * <p>When true, indicates that an upgrade eligibility check needs to be performed. Does not
+   *             actually perform the upgrade.</p>
+   * @public
+   */
+  PerformCheckOnly?: boolean | undefined;
+
+  /**
+   * <p>Only supports the <code>override_main_response_version</code> parameter and not other
+   *             advanced options. You can only include this option when upgrading to an OpenSearch
+   *             version. Specifies whether the domain reports its version as 7.10 so that it continues
+   *             to work with Elasticsearch OSS clients and plugins.</p>
+   * @public
+   */
+  AdvancedOptions?: Record<string, string> | undefined;
+
+  /**
+   * <p>Overrides the deployment strategy for this upgrade. To run a cloned blue/green upgrade, set <code>DeploymentStrategy</code> to <code>ClonedBlueGreen</code>.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOverrideOptions | undefined;
+}
+
+/**
+ * <p>Container for the response returned by <code>UpgradeDomain</code> operation.</p>
+ * @public
+ */
+export interface UpgradeDomainResponse {
+  /**
+   * <p>The unique identifier of the domain upgrade.</p>
+   * @public
+   */
+  UpgradeId?: string | undefined;
+
+  /**
+   * <p>The name of the domain that was upgraded.</p>
+   * @public
+   */
+  DomainName?: string | undefined;
+
+  /**
+   * <p>OpenSearch or Elasticsearch version that the domain was upgraded to.</p>
+   * @public
+   */
+  TargetVersion?: string | undefined;
+
+  /**
+   * <p>When true, indicates that an upgrade eligibility check was performed.</p>
+   * @public
+   */
+  PerformCheckOnly?: boolean | undefined;
+
+  /**
+   * <p>The advanced options configuration for the domain.</p>
+   * @public
+   */
+  AdvancedOptions?: Record<string, string> | undefined;
+
+  /**
+   * <p>The deployment strategy override used for the upgrade.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOverrideOptions | undefined;
+
+  /**
+   * <p>Container for information about a configuration change happening on a domain.</p>
+   * @public
+   */
+  ChangeProgressDetails?: ChangeProgressDetails | undefined;
+}

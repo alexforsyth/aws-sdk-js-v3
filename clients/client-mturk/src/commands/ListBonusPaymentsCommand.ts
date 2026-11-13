@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListBonusPaymentsRequest, ListBonusPaymentsResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1ListBonusPaymentsCommand,
-  serializeAws_json1_1ListBonusPaymentsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBonusPaymentsRequest, ListBonusPaymentsResponse } from "../models/models_0";
+import { ListBonusPayments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBonusPaymentsCommand}.
+ */
 export interface ListBonusPaymentsCommandInput extends ListBonusPaymentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBonusPaymentsCommand}.
+ */
 export interface ListBonusPaymentsCommandOutput extends ListBonusPaymentsResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +34,66 @@ export interface ListBonusPaymentsCommandOutput extends ListBonusPaymentsRespons
  * ```javascript
  * import { MTurkClient, ListBonusPaymentsCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, ListBonusPaymentsCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // ListBonusPaymentsRequest
+ *   HITId: "STRING_VALUE",
+ *   AssignmentId: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListBonusPaymentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBonusPaymentsResponse
+ * //   NumResults: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * //   BonusPayments: [ // BonusPaymentList
+ * //     { // BonusPayment
+ * //       WorkerId: "STRING_VALUE",
+ * //       BonusAmount: "STRING_VALUE",
+ * //       AssignmentId: "STRING_VALUE",
+ * //       Reason: "STRING_VALUE",
+ * //       GrantTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListBonusPaymentsCommandInput - {@link ListBonusPaymentsCommandInput}
+ * @returns {@link ListBonusPaymentsCommandOutput}
  * @see {@link ListBonusPaymentsCommandInput} for command's `input` shape.
  * @see {@link ListBonusPaymentsCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class ListBonusPaymentsCommand extends $Command<
-  ListBonusPaymentsCommandInput,
-  ListBonusPaymentsCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBonusPaymentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBonusPaymentsCommandInput, ListBonusPaymentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "ListBonusPaymentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBonusPaymentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBonusPaymentsResponse.filterSensitiveLog,
+export class ListBonusPaymentsCommand extends command<ListBonusPaymentsCommandInput, ListBonusPaymentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBonusPayments",
+  ListBonusPayments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBonusPaymentsRequest;
+      output: ListBonusPaymentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBonusPaymentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListBonusPaymentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBonusPaymentsCommandOutput> {
-    return deserializeAws_json1_1ListBonusPaymentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBonusPaymentsCommandInput;
+      output: ListBonusPaymentsCommandOutput;
+    };
+  };
 }

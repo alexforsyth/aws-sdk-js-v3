@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DisassociateAttributeGroupRequest, DisassociateAttributeGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateAttributeGroupCommand,
-  serializeAws_restJson1DisassociateAttributeGroupCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceCatalogAppRegistryClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ServiceCatalogAppRegistryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateAttributeGroupRequest, DisassociateAttributeGroupResponse } from "../models/models_0";
+import { DisassociateAttributeGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateAttributeGroupCommand}.
+ */
 export interface DisassociateAttributeGroupCommandInput extends DisassociateAttributeGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateAttributeGroupCommand}.
+ */
 export interface DisassociateAttributeGroupCommandOutput extends DisassociateAttributeGroupResponse, __MetadataBearer {}
 
 /**
@@ -32,71 +29,58 @@ export interface DisassociateAttributeGroupCommandOutput extends DisassociateAtt
  * ```javascript
  * import { ServiceCatalogAppRegistryClient, DisassociateAttributeGroupCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
  * // const { ServiceCatalogAppRegistryClient, DisassociateAttributeGroupCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * // import type { ServiceCatalogAppRegistryClientConfig } from "@aws-sdk/client-service-catalog-appregistry";
+ * const config = {}; // type is ServiceCatalogAppRegistryClientConfig
  * const client = new ServiceCatalogAppRegistryClient(config);
+ * const input = { // DisassociateAttributeGroupRequest
+ *   application: "STRING_VALUE", // required
+ *   attributeGroup: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateAttributeGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateAttributeGroupResponse
+ * //   applicationArn: "STRING_VALUE",
+ * //   attributeGroupArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DisassociateAttributeGroupCommandInput - {@link DisassociateAttributeGroupCommandInput}
+ * @returns {@link DisassociateAttributeGroupCommandOutput}
  * @see {@link DisassociateAttributeGroupCommandInput} for command's `input` shape.
  * @see {@link DisassociateAttributeGroupCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for ServiceCatalogAppRegistryClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service is experiencing internal problems.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has invalid or missing parameters.</p>
+ *
+ * @throws {@link ServiceCatalogAppRegistryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalogAppRegistry service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateAttributeGroupCommand extends $Command<
-  DisassociateAttributeGroupCommandInput,
-  DisassociateAttributeGroupCommandOutput,
-  ServiceCatalogAppRegistryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateAttributeGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogAppRegistryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateAttributeGroupCommandInput, DisassociateAttributeGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogAppRegistryClient";
-    const commandName = "DisassociateAttributeGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateAttributeGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateAttributeGroupResponse.filterSensitiveLog,
+export class DisassociateAttributeGroupCommand extends command<DisassociateAttributeGroupCommandInput, DisassociateAttributeGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateAttributeGroup",
+  DisassociateAttributeGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateAttributeGroupRequest;
+      output: DisassociateAttributeGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateAttributeGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateAttributeGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateAttributeGroupCommandOutput> {
-    return deserializeAws_restJson1DisassociateAttributeGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateAttributeGroupCommandInput;
+      output: DisassociateAttributeGroupCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { UpdateAssumeRolePolicyRequest } from "../models/models_1";
-import {
-  deserializeAws_queryUpdateAssumeRolePolicyCommand,
-  serializeAws_queryUpdateAssumeRolePolicyCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAssumeRolePolicyRequest } from "../models/models_1";
+import { UpdateAssumeRolePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAssumeRolePolicyCommand}.
+ */
 export interface UpdateAssumeRolePolicyCommandInput extends UpdateAssumeRolePolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAssumeRolePolicyCommand}.
+ */
 export interface UpdateAssumeRolePolicyCommandOutput extends __MetadataBearer {}
 
 /**
@@ -31,68 +32,82 @@ export interface UpdateAssumeRolePolicyCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IAMClient, UpdateAssumeRolePolicyCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, UpdateAssumeRolePolicyCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // UpdateAssumeRolePolicyRequest
+ *   RoleName: "STRING_VALUE", // required
+ *   PolicyDocument: "STRING_VALUE", // required
+ * };
  * const command = new UpdateAssumeRolePolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateAssumeRolePolicyCommandInput - {@link UpdateAssumeRolePolicyCommandInput}
+ * @returns {@link UpdateAssumeRolePolicyCommandOutput}
  * @see {@link UpdateAssumeRolePolicyCommandInput} for command's `input` shape.
  * @see {@link UpdateAssumeRolePolicyCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link MalformedPolicyDocumentException} (client fault)
+ *  <p>The request was rejected because the policy document was malformed. The error message
+ *       describes the specific error.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link UnmodifiableEntityException} (client fault)
+ *  <p>The request was rejected because service-linked roles are protected Amazon Web Services resources. Only
+ *       the service that depends on the service-linked role can modify or delete the role on your
+ *       behalf. The error message includes the name of the service that depends on this service-linked
+ *       role. You must request the change through that service.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To update the trust policy for an IAM role
+ * ```javascript
+ * // The following command updates the role trust policy for the role named Test-Role:
+ * const input = {
+ *   PolicyDocument: `{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":["ec2.amazonaws.com"]},"Action":["sts:AssumeRole"]}]}`,
+ *   RoleName: "S3AccessForEC2Instances"
+ * };
+ * const command = new UpdateAssumeRolePolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateAssumeRolePolicyCommand extends $Command<
-  UpdateAssumeRolePolicyCommandInput,
-  UpdateAssumeRolePolicyCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAssumeRolePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAssumeRolePolicyCommandInput, UpdateAssumeRolePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "UpdateAssumeRolePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAssumeRolePolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateAssumeRolePolicyCommand extends command<UpdateAssumeRolePolicyCommandInput, UpdateAssumeRolePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAssumeRolePolicy",
+  UpdateAssumeRolePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssumeRolePolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAssumeRolePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryUpdateAssumeRolePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateAssumeRolePolicyCommandOutput> {
-    return deserializeAws_queryUpdateAssumeRolePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAssumeRolePolicyCommandInput;
+      output: UpdateAssumeRolePolicyCommandOutput;
+    };
+  };
 }

@@ -1,7 +1,6 @@
-# @aws-sdk/client-polly
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-polly/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-polly)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-polly.svg)](https://www.npmjs.com/package/@aws-sdk/client-polly)
+# @aws-sdk/client-polly
 
 ## Description
 
@@ -13,11 +12,11 @@ text.</p>
 high-quality speech from plain text and Speech Synthesis Markup Language
 (SSML), along with managing pronunciations lexicons that enable you to get
 the best results for your application domain.</p>
+<p>Authenticated API calls must be signed using the Signature Version 4 Signing Process. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Signing Amazon Web Services API Requests</a> in the <i>IAM User Guide</i>.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-polly
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-polly`
 - `yarn add @aws-sdk/client-polly`
@@ -29,40 +28,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `PollyClient` and
-the commands you need, for example `DeleteLexiconCommand`:
+the commands you need, for example `ListLexiconsCommand`:
 
 ```js
 // ES5 example
-const { PollyClient, DeleteLexiconCommand } = require("@aws-sdk/client-polly");
+const { PollyClient, ListLexiconsCommand } = require("@aws-sdk/client-polly");
 ```
 
 ```ts
 // ES6+ example
-import { PollyClient, DeleteLexiconCommand } from "@aws-sdk/client-polly";
+import { PollyClient, ListLexiconsCommand } from "@aws-sdk/client-polly";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new PollyClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new DeleteLexiconCommand(params);
+const params = { /** input parameters */ };
+const command = new ListLexiconsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -77,26 +74,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -112,31 +92,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Polly` extends `PollyClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`PollyClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-polly";
-const client = new AWS.Polly({ region: "REGION" });
+import { Polly } from "@aws-sdk/client-polly";
+
+const client = new Polly({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.deleteLexicon(params);
+  const data = await client.listLexicons(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -144,7 +118,7 @@ try {
 
 // Promises.
 client
-  .deleteLexicon(params)
+  .listLexicons(params)
   .then((data) => {
     // process data.
   })
@@ -152,9 +126,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.deleteLexicon(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listLexicons(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -180,12 +154,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -206,3 +182,97 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+DeleteLexicon
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/DeleteLexiconCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/DeleteLexiconCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/DeleteLexiconCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeVoices
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/DescribeVoicesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/DescribeVoicesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/DescribeVoicesCommandOutput/)
+</details>
+<details>
+<summary>
+GetLexicon
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/GetLexiconCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/GetLexiconCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/GetLexiconCommandOutput/)
+</details>
+<details>
+<summary>
+GetSpeechSynthesisTask
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/GetSpeechSynthesisTaskCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/GetSpeechSynthesisTaskCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/GetSpeechSynthesisTaskCommandOutput/)
+</details>
+<details>
+<summary>
+ListLexicons
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/ListLexiconsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListLexiconsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListLexiconsCommandOutput/)
+</details>
+<details>
+<summary>
+ListSpeechSynthesisTasks
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/ListSpeechSynthesisTasksCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListSpeechSynthesisTasksCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListSpeechSynthesisTasksCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+PutLexicon
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/PutLexiconCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/PutLexiconCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/PutLexiconCommandOutput/)
+</details>
+<details>
+<summary>
+StartSpeechSynthesisStream
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/StartSpeechSynthesisStreamCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/StartSpeechSynthesisStreamCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/StartSpeechSynthesisStreamCommandOutput/)
+</details>
+<details>
+<summary>
+StartSpeechSynthesisTask
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/StartSpeechSynthesisTaskCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/StartSpeechSynthesisTaskCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/StartSpeechSynthesisTaskCommandOutput/)
+</details>
+<details>
+<summary>
+SynthesizeSpeech
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/SynthesizeSpeechCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/SynthesizeSpeechCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/SynthesizeSpeechCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/polly/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-polly/Interface/UntagResourceCommandOutput/)
+</details>

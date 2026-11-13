@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeCarrierGatewaysRequest, DescribeCarrierGatewaysResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeCarrierGatewaysCommand,
-  serializeAws_ec2DescribeCarrierGatewaysCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeCarrierGatewaysRequest, DescribeCarrierGatewaysResult } from "../models/models_3";
+import { DescribeCarrierGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeCarrierGatewaysCommand}.
+ */
 export interface DescribeCarrierGatewaysCommandInput extends DescribeCarrierGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeCarrierGatewaysCommand}.
+ */
 export interface DescribeCarrierGatewaysCommandOutput extends DescribeCarrierGatewaysResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface DescribeCarrierGatewaysCommandOutput extends DescribeCarrierGat
  * ```javascript
  * import { EC2Client, DescribeCarrierGatewaysCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeCarrierGatewaysCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeCarrierGatewaysRequest
+ *   CarrierGatewayIds: [ // CarrierGatewayIdSet
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeCarrierGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeCarrierGatewaysResult
+ * //   CarrierGateways: [ // CarrierGatewaySet
+ * //     { // CarrierGateway
+ * //       CarrierGatewayId: "STRING_VALUE",
+ * //       VpcId: "STRING_VALUE",
+ * //       State: "pending" || "available" || "deleting" || "deleted",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeCarrierGatewaysCommandInput - {@link DescribeCarrierGatewaysCommandInput}
+ * @returns {@link DescribeCarrierGatewaysCommandOutput}
  * @see {@link DescribeCarrierGatewaysCommandInput} for command's `input` shape.
  * @see {@link DescribeCarrierGatewaysCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeCarrierGatewaysCommand extends $Command<
-  DescribeCarrierGatewaysCommandInput,
-  DescribeCarrierGatewaysCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeCarrierGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeCarrierGatewaysCommandInput, DescribeCarrierGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeCarrierGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeCarrierGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeCarrierGatewaysResult.filterSensitiveLog,
+export class DescribeCarrierGatewaysCommand extends command<DescribeCarrierGatewaysCommandInput, DescribeCarrierGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCarrierGateways",
+  DescribeCarrierGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCarrierGatewaysRequest;
+      output: DescribeCarrierGatewaysResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeCarrierGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeCarrierGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeCarrierGatewaysCommandOutput> {
-    return deserializeAws_ec2DescribeCarrierGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeCarrierGatewaysCommandInput;
+      output: DescribeCarrierGatewaysCommandOutput;
+    };
+  };
 }

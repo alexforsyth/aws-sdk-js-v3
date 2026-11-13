@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MigrationHubConfigClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MigrationHubConfigClient";
-import { CreateHomeRegionControlRequest, CreateHomeRegionControlResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateHomeRegionControlCommand,
-  serializeAws_json1_1CreateHomeRegionControlCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateHomeRegionControlRequest, CreateHomeRegionControlResult } from "../models/models_0";
+import { CreateHomeRegionControl$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateHomeRegionControlCommand}.
+ */
 export interface CreateHomeRegionControlCommandInput extends CreateHomeRegionControlRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateHomeRegionControlCommand}.
+ */
 export interface CreateHomeRegionControlCommandOutput extends CreateHomeRegionControlResult, __MetadataBearer {}
 
 /**
@@ -32,68 +29,82 @@ export interface CreateHomeRegionControlCommandOutput extends CreateHomeRegionCo
  * ```javascript
  * import { MigrationHubConfigClient, CreateHomeRegionControlCommand } from "@aws-sdk/client-migrationhub-config"; // ES Modules import
  * // const { MigrationHubConfigClient, CreateHomeRegionControlCommand } = require("@aws-sdk/client-migrationhub-config"); // CommonJS import
+ * // import type { MigrationHubConfigClientConfig } from "@aws-sdk/client-migrationhub-config";
+ * const config = {}; // type is MigrationHubConfigClientConfig
  * const client = new MigrationHubConfigClient(config);
+ * const input = { // CreateHomeRegionControlRequest
+ *   HomeRegion: "STRING_VALUE", // required
+ *   Target: { // Target
+ *     Type: "ACCOUNT", // required
+ *     Id: "STRING_VALUE",
+ *   },
+ *   DryRun: true || false,
+ * };
  * const command = new CreateHomeRegionControlCommand(input);
  * const response = await client.send(command);
+ * // { // CreateHomeRegionControlResult
+ * //   HomeRegionControl: { // HomeRegionControl
+ * //     ControlId: "STRING_VALUE",
+ * //     HomeRegion: "STRING_VALUE",
+ * //     Target: { // Target
+ * //       Type: "ACCOUNT", // required
+ * //       Id: "STRING_VALUE",
+ * //     },
+ * //     RequestedTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateHomeRegionControlCommandInput - {@link CreateHomeRegionControlCommandInput}
+ * @returns {@link CreateHomeRegionControlCommandOutput}
  * @see {@link CreateHomeRegionControlCommandInput} for command's `input` shape.
  * @see {@link CreateHomeRegionControlCommandOutput} for command's `response` shape.
- * @see {@link MigrationHubConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MigrationHubConfigClientResolvedConfig | config} for MigrationHubConfigClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link DryRunOperation} (client fault)
+ *  <p>Exception raised to indicate that authorization of an action was successful, when the
+ *         <code>DryRun</code> flag is set to true.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Exception raised when an internal, configuration, or dependency error is
+ *       encountered.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Exception raised when the provided input violates a policy constraint or is entered in the
+ *       wrong format or data type.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Exception raised when a request fails due to temporary unavailability of the
+ *       service.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link MigrationHubConfigServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubConfig service.</p>
+ *
+ *
+ * @public
  */
-export class CreateHomeRegionControlCommand extends $Command<
-  CreateHomeRegionControlCommandInput,
-  CreateHomeRegionControlCommandOutput,
-  MigrationHubConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateHomeRegionControlCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MigrationHubConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateHomeRegionControlCommandInput, CreateHomeRegionControlCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MigrationHubConfigClient";
-    const commandName = "CreateHomeRegionControlCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateHomeRegionControlRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateHomeRegionControlResult.filterSensitiveLog,
+export class CreateHomeRegionControlCommand extends command<CreateHomeRegionControlCommandInput, CreateHomeRegionControlCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateHomeRegionControl",
+  CreateHomeRegionControl$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHomeRegionControlRequest;
+      output: CreateHomeRegionControlResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateHomeRegionControlCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateHomeRegionControlCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateHomeRegionControlCommandOutput> {
-    return deserializeAws_json1_1CreateHomeRegionControlCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateHomeRegionControlCommandInput;
+      output: CreateHomeRegionControlCommandOutput;
+    };
+  };
 }

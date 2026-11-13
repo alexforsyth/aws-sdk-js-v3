@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   BatchDisassociateApprovalRuleTemplateFromRepositoriesInput,
   BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand,
-  serializeAws_json1_1BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand,
-} from "../protocols/Aws_json1_1";
+import { BatchDisassociateApprovalRuleTemplateFromRepositories$ } from "../schemas/schemas_0";
 
-export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput
-  extends BatchDisassociateApprovalRuleTemplateFromRepositoriesInput {}
-export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput
-  extends BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand}.
+ */
+export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput extends BatchDisassociateApprovalRuleTemplateFromRepositoriesInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand}.
+ */
+export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput extends BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, __MetadataBearer {}
 
 /**
  * <p>Removes the association between an approval rule template and one or more specified repositories. </p>
@@ -34,77 +32,93 @@ export interface BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOut
  * ```javascript
  * import { CodeCommitClient, BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
+ *   approvalRuleTemplateName: "STRING_VALUE", // required
+ *   repositoryNames: [ // RepositoryNameList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput
+ * //   disassociatedRepositoryNames: [ // RepositoryNameList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   errors: [ // BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList // required
+ * //     { // BatchDisassociateApprovalRuleTemplateFromRepositoriesError
+ * //       repositoryName: "STRING_VALUE",
+ * //       errorCode: "STRING_VALUE",
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput - {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput}
+ * @returns {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput}
  * @see {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput} for command's `input` shape.
  * @see {@link BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link ApprovalRuleTemplateDoesNotExistException} (client fault)
+ *  <p>The specified approval rule template does not exist. Verify that the name is correct and that you are signed in to the Amazon Web Services Region where the template
+ *         was created, and then try again.</p>
+ *
+ * @throws {@link ApprovalRuleTemplateNameRequiredException} (client fault)
+ *  <p>An approval rule template name is required, but was not specified.</p>
+ *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link InvalidApprovalRuleTemplateNameException} (client fault)
+ *  <p>The name of the approval rule template is not valid. Template names must be between 1
+ *             and 100 valid characters in length. For more information about limits in CodeCommit,
+ *             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>
+ *                CodeCommit User Guide</i>.</p>
+ *
+ * @throws {@link MaximumRepositoryNamesExceededException} (client fault)
+ *  <p>The maximum number of allowed repository names was exceeded. Currently, this number is 100.</p>
+ *
+ * @throws {@link RepositoryNamesRequiredException} (client fault)
+ *  <p>At least one repository name object is required, but was not specified.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand extends $Command<
-  BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput,
-  BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput,
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput.filterSensitiveLog,
+export class BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand extends command<BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput, BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDisassociateApprovalRuleTemplateFromRepositories",
+  BatchDisassociateApprovalRuleTemplateFromRepositories$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDisassociateApprovalRuleTemplateFromRepositoriesInput;
+      output: BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput> {
-    return deserializeAws_json1_1BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandInput;
+      output: BatchDisassociateApprovalRuleTemplateFromRepositoriesCommandOutput;
+    };
+  };
 }

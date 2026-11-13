@@ -1,103 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FirehoseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FirehoseClient";
-import { TagDeliveryStreamInput, TagDeliveryStreamOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1TagDeliveryStreamCommand,
-  serializeAws_json1_1TagDeliveryStreamCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagDeliveryStreamInput, TagDeliveryStreamOutput } from "../models/models_0";
+import { TagDeliveryStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagDeliveryStreamCommand}.
+ */
 export interface TagDeliveryStreamCommandInput extends TagDeliveryStreamInput {}
+/**
+ * @public
+ *
+ * The output of {@link TagDeliveryStreamCommand}.
+ */
 export interface TagDeliveryStreamCommandOutput extends TagDeliveryStreamOutput, __MetadataBearer {}
 
 /**
- * <p>Adds or updates tags for the specified delivery stream. A tag is a key-value pair
- *          that you can define and assign to AWS resources. If you specify a tag that already exists,
- *          the tag value is replaced with the value that you specify in the request. Tags are
- *          metadata. For example, you can add friendly names and descriptions or other types of
- *          information that can help you distinguish the delivery stream. For more information about
- *          tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
- *             Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>
- *          <p>Each delivery stream can have up to 50 tags. </p>
+ * <p>Adds or updates tags for the specified Firehose stream. A tag is a key-value pair
+ *          that you can define and assign to Amazon Web Services resources. If you specify a tag that
+ *          already exists, the tag value is replaced with the value that you specify in the request.
+ *          Tags are metadata. For example, you can add friendly names and descriptions or other types
+ *          of information that can help you distinguish the Firehose stream. For more information
+ *          about tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+ *             Tags</a> in the <i>Amazon Web Services Billing and Cost Management User
+ *             Guide</i>. </p>
+ *          <p>Each Firehose stream can have up to 50 tags. </p>
  *          <p>This operation has a limit of five transactions per second per account. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FirehoseClient, TagDeliveryStreamCommand } from "@aws-sdk/client-firehose"; // ES Modules import
  * // const { FirehoseClient, TagDeliveryStreamCommand } = require("@aws-sdk/client-firehose"); // CommonJS import
+ * // import type { FirehoseClientConfig } from "@aws-sdk/client-firehose";
+ * const config = {}; // type is FirehoseClientConfig
  * const client = new FirehoseClient(config);
+ * const input = { // TagDeliveryStreamInput
+ *   DeliveryStreamName: "STRING_VALUE", // required
+ *   Tags: [ // TagDeliveryStreamInputTagList // required
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new TagDeliveryStreamCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param TagDeliveryStreamCommandInput - {@link TagDeliveryStreamCommandInput}
+ * @returns {@link TagDeliveryStreamCommandOutput}
  * @see {@link TagDeliveryStreamCommandInput} for command's `input` shape.
  * @see {@link TagDeliveryStreamCommandOutput} for command's `response` shape.
- * @see {@link FirehoseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FirehoseClientResolvedConfig | config} for FirehoseClient's `config` shape.
  *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter has a value that is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You have already reached the limit for a requested resource.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The resource is already in use and not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link FirehoseServiceException}
+ * <p>Base exception class for all service exceptions from Firehose service.</p>
+ *
+ *
+ * @public
  */
-export class TagDeliveryStreamCommand extends $Command<
-  TagDeliveryStreamCommandInput,
-  TagDeliveryStreamCommandOutput,
-  FirehoseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TagDeliveryStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FirehoseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TagDeliveryStreamCommandInput, TagDeliveryStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FirehoseClient";
-    const commandName = "TagDeliveryStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TagDeliveryStreamInput.filterSensitiveLog,
-      outputFilterSensitiveLog: TagDeliveryStreamOutput.filterSensitiveLog,
+export class TagDeliveryStreamCommand extends command<TagDeliveryStreamCommandInput, TagDeliveryStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagDeliveryStream",
+  TagDeliveryStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagDeliveryStreamInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TagDeliveryStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1TagDeliveryStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TagDeliveryStreamCommandOutput> {
-    return deserializeAws_json1_1TagDeliveryStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TagDeliveryStreamCommandInput;
+      output: TagDeliveryStreamCommandOutput;
+    };
+  };
 }

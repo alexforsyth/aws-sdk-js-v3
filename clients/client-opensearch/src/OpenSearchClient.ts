@@ -1,249 +1,602 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultOpenSearchHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AcceptInboundConnectionCommandInput,
   AcceptInboundConnectionCommandOutput,
 } from "./commands/AcceptInboundConnectionCommand";
-import { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
-import { AssociatePackageCommandInput, AssociatePackageCommandOutput } from "./commands/AssociatePackageCommand";
-import {
+import type { AddDataSourceCommandInput, AddDataSourceCommandOutput } from "./commands/AddDataSourceCommand";
+import type {
+  AddDirectQueryDataSourceCommandInput,
+  AddDirectQueryDataSourceCommandOutput,
+} from "./commands/AddDirectQueryDataSourceCommand";
+import type {
+  AddReplicationPeerCommandInput,
+  AddReplicationPeerCommandOutput,
+} from "./commands/AddReplicationPeerCommand";
+import type { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
+import type { AssociatePackageCommandInput, AssociatePackageCommandOutput } from "./commands/AssociatePackageCommand";
+import type {
+  AssociatePackagesCommandInput,
+  AssociatePackagesCommandOutput,
+} from "./commands/AssociatePackagesCommand";
+import type { AttachDataSourceCommandInput, AttachDataSourceCommandOutput } from "./commands/AttachDataSourceCommand";
+import type {
+  AuthorizeVpcEndpointAccessCommandInput,
+  AuthorizeVpcEndpointAccessCommandOutput,
+} from "./commands/AuthorizeVpcEndpointAccessCommand";
+import type {
+  CancelDomainConfigChangeCommandInput,
+  CancelDomainConfigChangeCommandOutput,
+} from "./commands/CancelDomainConfigChangeCommand";
+import type {
   CancelServiceSoftwareUpdateCommandInput,
   CancelServiceSoftwareUpdateCommandOutput,
 } from "./commands/CancelServiceSoftwareUpdateCommand";
-import { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
-import {
+import type {
+  CompareDomainConfigurationCommandInput,
+  CompareDomainConfigurationCommandOutput,
+} from "./commands/CompareDomainConfigurationCommand";
+import type {
+  CreateApplicationCommandInput,
+  CreateApplicationCommandOutput,
+} from "./commands/CreateApplicationCommand";
+import type { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
+import type { CreateIndexCommandInput, CreateIndexCommandOutput } from "./commands/CreateIndexCommand";
+import type {
   CreateOutboundConnectionCommandInput,
   CreateOutboundConnectionCommandOutput,
 } from "./commands/CreateOutboundConnectionCommand";
-import { CreatePackageCommandInput, CreatePackageCommandOutput } from "./commands/CreatePackageCommand";
-import { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
-import {
+import type { CreatePackageCommandInput, CreatePackageCommandOutput } from "./commands/CreatePackageCommand";
+import type {
+  CreateVpcEndpointCommandInput,
+  CreateVpcEndpointCommandOutput,
+} from "./commands/CreateVpcEndpointCommand";
+import type {
+  DeleteApplicationCommandInput,
+  DeleteApplicationCommandOutput,
+} from "./commands/DeleteApplicationCommand";
+import type { DeleteDataSourceCommandInput, DeleteDataSourceCommandOutput } from "./commands/DeleteDataSourceCommand";
+import type {
+  DeleteDirectQueryDataSourceCommandInput,
+  DeleteDirectQueryDataSourceCommandOutput,
+} from "./commands/DeleteDirectQueryDataSourceCommand";
+import type { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
+import type {
   DeleteInboundConnectionCommandInput,
   DeleteInboundConnectionCommandOutput,
 } from "./commands/DeleteInboundConnectionCommand";
-import {
+import type { DeleteIndexCommandInput, DeleteIndexCommandOutput } from "./commands/DeleteIndexCommand";
+import type {
   DeleteOutboundConnectionCommandInput,
   DeleteOutboundConnectionCommandOutput,
 } from "./commands/DeleteOutboundConnectionCommand";
-import { DeletePackageCommandInput, DeletePackageCommandOutput } from "./commands/DeletePackageCommand";
-import {
+import type { DeletePackageCommandInput, DeletePackageCommandOutput } from "./commands/DeletePackageCommand";
+import type {
+  DeleteVpcEndpointCommandInput,
+  DeleteVpcEndpointCommandOutput,
+} from "./commands/DeleteVpcEndpointCommand";
+import type {
+  DeregisterCapabilityCommandInput,
+  DeregisterCapabilityCommandOutput,
+} from "./commands/DeregisterCapabilityCommand";
+import type {
+  DescribeDataSourceAttachmentCommandInput,
+  DescribeDataSourceAttachmentCommandOutput,
+} from "./commands/DescribeDataSourceAttachmentCommand";
+import type {
   DescribeDomainAutoTunesCommandInput,
   DescribeDomainAutoTunesCommandOutput,
 } from "./commands/DescribeDomainAutoTunesCommand";
-import { DescribeDomainCommandInput, DescribeDomainCommandOutput } from "./commands/DescribeDomainCommand";
-import {
+import type {
+  DescribeDomainChangeProgressCommandInput,
+  DescribeDomainChangeProgressCommandOutput,
+} from "./commands/DescribeDomainChangeProgressCommand";
+import type { DescribeDomainCommandInput, DescribeDomainCommandOutput } from "./commands/DescribeDomainCommand";
+import type {
   DescribeDomainConfigCommandInput,
   DescribeDomainConfigCommandOutput,
 } from "./commands/DescribeDomainConfigCommand";
-import { DescribeDomainsCommandInput, DescribeDomainsCommandOutput } from "./commands/DescribeDomainsCommand";
-import {
+import type {
+  DescribeDomainHealthCommandInput,
+  DescribeDomainHealthCommandOutput,
+} from "./commands/DescribeDomainHealthCommand";
+import type {
+  DescribeDomainNodesCommandInput,
+  DescribeDomainNodesCommandOutput,
+} from "./commands/DescribeDomainNodesCommand";
+import type {
+  DescribeDomainReplicationCommandInput,
+  DescribeDomainReplicationCommandOutput,
+} from "./commands/DescribeDomainReplicationCommand";
+import type { DescribeDomainsCommandInput, DescribeDomainsCommandOutput } from "./commands/DescribeDomainsCommand";
+import type {
+  DescribeDryRunProgressCommandInput,
+  DescribeDryRunProgressCommandOutput,
+} from "./commands/DescribeDryRunProgressCommand";
+import type {
   DescribeInboundConnectionsCommandInput,
   DescribeInboundConnectionsCommandOutput,
 } from "./commands/DescribeInboundConnectionsCommand";
-import {
+import type {
+  DescribeInsightDetailsCommandInput,
+  DescribeInsightDetailsCommandOutput,
+} from "./commands/DescribeInsightDetailsCommand";
+import type {
   DescribeInstanceTypeLimitsCommandInput,
   DescribeInstanceTypeLimitsCommandOutput,
 } from "./commands/DescribeInstanceTypeLimitsCommand";
-import {
+import type {
   DescribeOutboundConnectionsCommandInput,
   DescribeOutboundConnectionsCommandOutput,
 } from "./commands/DescribeOutboundConnectionsCommand";
-import { DescribePackagesCommandInput, DescribePackagesCommandOutput } from "./commands/DescribePackagesCommand";
-import {
+import type { DescribePackagesCommandInput, DescribePackagesCommandOutput } from "./commands/DescribePackagesCommand";
+import type {
   DescribeReservedInstanceOfferingsCommandInput,
   DescribeReservedInstanceOfferingsCommandOutput,
 } from "./commands/DescribeReservedInstanceOfferingsCommand";
-import {
+import type {
   DescribeReservedInstancesCommandInput,
   DescribeReservedInstancesCommandOutput,
 } from "./commands/DescribeReservedInstancesCommand";
-import { DissociatePackageCommandInput, DissociatePackageCommandOutput } from "./commands/DissociatePackageCommand";
-import {
+import type {
+  DescribeVpcEndpointsCommandInput,
+  DescribeVpcEndpointsCommandOutput,
+} from "./commands/DescribeVpcEndpointsCommand";
+import type { DetachDataSourceCommandInput, DetachDataSourceCommandOutput } from "./commands/DetachDataSourceCommand";
+import type {
+  DissociatePackageCommandInput,
+  DissociatePackageCommandOutput,
+} from "./commands/DissociatePackageCommand";
+import type {
+  DissociatePackagesCommandInput,
+  DissociatePackagesCommandOutput,
+} from "./commands/DissociatePackagesCommand";
+import type {
+  FailoverReplicationCommandInput,
+  FailoverReplicationCommandOutput,
+} from "./commands/FailoverReplicationCommand";
+import type { GetApplicationCommandInput, GetApplicationCommandOutput } from "./commands/GetApplicationCommand";
+import type { GetCapabilityCommandInput, GetCapabilityCommandOutput } from "./commands/GetCapabilityCommand";
+import type {
   GetCompatibleVersionsCommandInput,
   GetCompatibleVersionsCommandOutput,
 } from "./commands/GetCompatibleVersionsCommand";
-import {
+import type { GetDataSourceCommandInput, GetDataSourceCommandOutput } from "./commands/GetDataSourceCommand";
+import type {
+  GetDefaultApplicationSettingCommandInput,
+  GetDefaultApplicationSettingCommandOutput,
+} from "./commands/GetDefaultApplicationSettingCommand";
+import type {
+  GetDirectQueryDataSourceCommandInput,
+  GetDirectQueryDataSourceCommandOutput,
+} from "./commands/GetDirectQueryDataSourceCommand";
+import type {
+  GetDomainMaintenanceStatusCommandInput,
+  GetDomainMaintenanceStatusCommandOutput,
+} from "./commands/GetDomainMaintenanceStatusCommand";
+import type { GetIndexCommandInput, GetIndexCommandOutput } from "./commands/GetIndexCommand";
+import type { GetMigrationCommandInput, GetMigrationCommandOutput } from "./commands/GetMigrationCommand";
+import type {
   GetPackageVersionHistoryCommandInput,
   GetPackageVersionHistoryCommandOutput,
 } from "./commands/GetPackageVersionHistoryCommand";
-import { GetUpgradeHistoryCommandInput, GetUpgradeHistoryCommandOutput } from "./commands/GetUpgradeHistoryCommand";
-import { GetUpgradeStatusCommandInput, GetUpgradeStatusCommandOutput } from "./commands/GetUpgradeStatusCommand";
-import { ListDomainNamesCommandInput, ListDomainNamesCommandOutput } from "./commands/ListDomainNamesCommand";
-import {
+import type {
+  GetUpgradeHistoryCommandInput,
+  GetUpgradeHistoryCommandOutput,
+} from "./commands/GetUpgradeHistoryCommand";
+import type { GetUpgradeStatusCommandInput, GetUpgradeStatusCommandOutput } from "./commands/GetUpgradeStatusCommand";
+import type { InsightFeedbackCommandInput, InsightFeedbackCommandOutput } from "./commands/InsightFeedbackCommand";
+import type { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
+import type {
+  ListDataSourceAttachmentsCommandInput,
+  ListDataSourceAttachmentsCommandOutput,
+} from "./commands/ListDataSourceAttachmentsCommand";
+import type { ListDataSourcesCommandInput, ListDataSourcesCommandOutput } from "./commands/ListDataSourcesCommand";
+import type {
+  ListDirectQueryDataSourcesCommandInput,
+  ListDirectQueryDataSourcesCommandOutput,
+} from "./commands/ListDirectQueryDataSourcesCommand";
+import type {
+  ListDomainMaintenancesCommandInput,
+  ListDomainMaintenancesCommandOutput,
+} from "./commands/ListDomainMaintenancesCommand";
+import type { ListDomainNamesCommandInput, ListDomainNamesCommandOutput } from "./commands/ListDomainNamesCommand";
+import type {
   ListDomainsForPackageCommandInput,
   ListDomainsForPackageCommandOutput,
 } from "./commands/ListDomainsForPackageCommand";
-import {
+import type { ListInsightsCommandInput, ListInsightsCommandOutput } from "./commands/ListInsightsCommand";
+import type {
   ListInstanceTypeDetailsCommandInput,
   ListInstanceTypeDetailsCommandOutput,
 } from "./commands/ListInstanceTypeDetailsCommand";
-import {
+import type { ListMigrationsCommandInput, ListMigrationsCommandOutput } from "./commands/ListMigrationsCommand";
+import type {
   ListPackagesForDomainCommandInput,
   ListPackagesForDomainCommandOutput,
 } from "./commands/ListPackagesForDomainCommand";
-import { ListTagsCommandInput, ListTagsCommandOutput } from "./commands/ListTagsCommand";
-import { ListVersionsCommandInput, ListVersionsCommandOutput } from "./commands/ListVersionsCommand";
-import {
+import type {
+  ListScheduledActionsCommandInput,
+  ListScheduledActionsCommandOutput,
+} from "./commands/ListScheduledActionsCommand";
+import type { ListTagsCommandInput, ListTagsCommandOutput } from "./commands/ListTagsCommand";
+import type { ListVersionsCommandInput, ListVersionsCommandOutput } from "./commands/ListVersionsCommand";
+import type {
+  ListVpcEndpointAccessCommandInput,
+  ListVpcEndpointAccessCommandOutput,
+} from "./commands/ListVpcEndpointAccessCommand";
+import type { ListVpcEndpointsCommandInput, ListVpcEndpointsCommandOutput } from "./commands/ListVpcEndpointsCommand";
+import type {
+  ListVpcEndpointsForDomainCommandInput,
+  ListVpcEndpointsForDomainCommandOutput,
+} from "./commands/ListVpcEndpointsForDomainCommand";
+import type {
   PurchaseReservedInstanceOfferingCommandInput,
   PurchaseReservedInstanceOfferingCommandOutput,
 } from "./commands/PurchaseReservedInstanceOfferingCommand";
-import {
+import type {
+  PutDefaultApplicationSettingCommandInput,
+  PutDefaultApplicationSettingCommandOutput,
+} from "./commands/PutDefaultApplicationSettingCommand";
+import type {
+  RegisterCapabilityCommandInput,
+  RegisterCapabilityCommandOutput,
+} from "./commands/RegisterCapabilityCommand";
+import type {
   RejectInboundConnectionCommandInput,
   RejectInboundConnectionCommandOutput,
 } from "./commands/RejectInboundConnectionCommand";
-import { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
-import {
+import type {
+  RemoveReplicationPeerCommandInput,
+  RemoveReplicationPeerCommandOutput,
+} from "./commands/RemoveReplicationPeerCommand";
+import type { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
+import type {
+  RevokeVpcEndpointAccessCommandInput,
+  RevokeVpcEndpointAccessCommandOutput,
+} from "./commands/RevokeVpcEndpointAccessCommand";
+import type {
+  RollbackServiceSoftwareUpdateCommandInput,
+  RollbackServiceSoftwareUpdateCommandOutput,
+} from "./commands/RollbackServiceSoftwareUpdateCommand";
+import type {
+  StartDomainMaintenanceCommandInput,
+  StartDomainMaintenanceCommandOutput,
+} from "./commands/StartDomainMaintenanceCommand";
+import type { StartMigrationCommandInput, StartMigrationCommandOutput } from "./commands/StartMigrationCommand";
+import type {
   StartServiceSoftwareUpdateCommandInput,
   StartServiceSoftwareUpdateCommandOutput,
 } from "./commands/StartServiceSoftwareUpdateCommand";
-import { UpdateDomainConfigCommandInput, UpdateDomainConfigCommandOutput } from "./commands/UpdateDomainConfigCommand";
-import { UpdatePackageCommandInput, UpdatePackageCommandOutput } from "./commands/UpdatePackageCommand";
-import { UpgradeDomainCommandInput, UpgradeDomainCommandOutput } from "./commands/UpgradeDomainCommand";
+import type {
+  SwitchoverReplicationCommandInput,
+  SwitchoverReplicationCommandOutput,
+} from "./commands/SwitchoverReplicationCommand";
+import type {
+  UpdateApplicationCommandInput,
+  UpdateApplicationCommandOutput,
+} from "./commands/UpdateApplicationCommand";
+import type { UpdateCloneCommandInput, UpdateCloneCommandOutput } from "./commands/UpdateCloneCommand";
+import type { UpdateDataSourceCommandInput, UpdateDataSourceCommandOutput } from "./commands/UpdateDataSourceCommand";
+import type {
+  UpdateDirectQueryDataSourceCommandInput,
+  UpdateDirectQueryDataSourceCommandOutput,
+} from "./commands/UpdateDirectQueryDataSourceCommand";
+import type {
+  UpdateDomainConfigCommandInput,
+  UpdateDomainConfigCommandOutput,
+} from "./commands/UpdateDomainConfigCommand";
+import type { UpdateIndexCommandInput, UpdateIndexCommandOutput } from "./commands/UpdateIndexCommand";
+import type { UpdatePackageCommandInput, UpdatePackageCommandOutput } from "./commands/UpdatePackageCommand";
+import type {
+  UpdatePackageScopeCommandInput,
+  UpdatePackageScopeCommandOutput,
+} from "./commands/UpdatePackageScopeCommand";
+import type {
+  UpdateScheduledActionCommandInput,
+  UpdateScheduledActionCommandOutput,
+} from "./commands/UpdateScheduledActionCommand";
+import type {
+  UpdateVpcEndpointCommandInput,
+  UpdateVpcEndpointCommandOutput,
+} from "./commands/UpdateVpcEndpointCommand";
+import type { UpgradeDomainCommandInput, UpgradeDomainCommandOutput } from "./commands/UpgradeDomainCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AcceptInboundConnectionCommandInput
+  | AddDataSourceCommandInput
+  | AddDirectQueryDataSourceCommandInput
+  | AddReplicationPeerCommandInput
   | AddTagsCommandInput
   | AssociatePackageCommandInput
+  | AssociatePackagesCommandInput
+  | AttachDataSourceCommandInput
+  | AuthorizeVpcEndpointAccessCommandInput
+  | CancelDomainConfigChangeCommandInput
   | CancelServiceSoftwareUpdateCommandInput
+  | CompareDomainConfigurationCommandInput
+  | CreateApplicationCommandInput
   | CreateDomainCommandInput
+  | CreateIndexCommandInput
   | CreateOutboundConnectionCommandInput
   | CreatePackageCommandInput
+  | CreateVpcEndpointCommandInput
+  | DeleteApplicationCommandInput
+  | DeleteDataSourceCommandInput
+  | DeleteDirectQueryDataSourceCommandInput
   | DeleteDomainCommandInput
   | DeleteInboundConnectionCommandInput
+  | DeleteIndexCommandInput
   | DeleteOutboundConnectionCommandInput
   | DeletePackageCommandInput
+  | DeleteVpcEndpointCommandInput
+  | DeregisterCapabilityCommandInput
+  | DescribeDataSourceAttachmentCommandInput
   | DescribeDomainAutoTunesCommandInput
+  | DescribeDomainChangeProgressCommandInput
   | DescribeDomainCommandInput
   | DescribeDomainConfigCommandInput
+  | DescribeDomainHealthCommandInput
+  | DescribeDomainNodesCommandInput
+  | DescribeDomainReplicationCommandInput
   | DescribeDomainsCommandInput
+  | DescribeDryRunProgressCommandInput
   | DescribeInboundConnectionsCommandInput
+  | DescribeInsightDetailsCommandInput
   | DescribeInstanceTypeLimitsCommandInput
   | DescribeOutboundConnectionsCommandInput
   | DescribePackagesCommandInput
   | DescribeReservedInstanceOfferingsCommandInput
   | DescribeReservedInstancesCommandInput
+  | DescribeVpcEndpointsCommandInput
+  | DetachDataSourceCommandInput
   | DissociatePackageCommandInput
+  | DissociatePackagesCommandInput
+  | FailoverReplicationCommandInput
+  | GetApplicationCommandInput
+  | GetCapabilityCommandInput
   | GetCompatibleVersionsCommandInput
+  | GetDataSourceCommandInput
+  | GetDefaultApplicationSettingCommandInput
+  | GetDirectQueryDataSourceCommandInput
+  | GetDomainMaintenanceStatusCommandInput
+  | GetIndexCommandInput
+  | GetMigrationCommandInput
   | GetPackageVersionHistoryCommandInput
   | GetUpgradeHistoryCommandInput
   | GetUpgradeStatusCommandInput
+  | InsightFeedbackCommandInput
+  | ListApplicationsCommandInput
+  | ListDataSourceAttachmentsCommandInput
+  | ListDataSourcesCommandInput
+  | ListDirectQueryDataSourcesCommandInput
+  | ListDomainMaintenancesCommandInput
   | ListDomainNamesCommandInput
   | ListDomainsForPackageCommandInput
+  | ListInsightsCommandInput
   | ListInstanceTypeDetailsCommandInput
+  | ListMigrationsCommandInput
   | ListPackagesForDomainCommandInput
+  | ListScheduledActionsCommandInput
   | ListTagsCommandInput
   | ListVersionsCommandInput
+  | ListVpcEndpointAccessCommandInput
+  | ListVpcEndpointsCommandInput
+  | ListVpcEndpointsForDomainCommandInput
   | PurchaseReservedInstanceOfferingCommandInput
+  | PutDefaultApplicationSettingCommandInput
+  | RegisterCapabilityCommandInput
   | RejectInboundConnectionCommandInput
+  | RemoveReplicationPeerCommandInput
   | RemoveTagsCommandInput
+  | RevokeVpcEndpointAccessCommandInput
+  | RollbackServiceSoftwareUpdateCommandInput
+  | StartDomainMaintenanceCommandInput
+  | StartMigrationCommandInput
   | StartServiceSoftwareUpdateCommandInput
+  | SwitchoverReplicationCommandInput
+  | UpdateApplicationCommandInput
+  | UpdateCloneCommandInput
+  | UpdateDataSourceCommandInput
+  | UpdateDirectQueryDataSourceCommandInput
   | UpdateDomainConfigCommandInput
+  | UpdateIndexCommandInput
   | UpdatePackageCommandInput
+  | UpdatePackageScopeCommandInput
+  | UpdateScheduledActionCommandInput
+  | UpdateVpcEndpointCommandInput
   | UpgradeDomainCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AcceptInboundConnectionCommandOutput
+  | AddDataSourceCommandOutput
+  | AddDirectQueryDataSourceCommandOutput
+  | AddReplicationPeerCommandOutput
   | AddTagsCommandOutput
   | AssociatePackageCommandOutput
+  | AssociatePackagesCommandOutput
+  | AttachDataSourceCommandOutput
+  | AuthorizeVpcEndpointAccessCommandOutput
+  | CancelDomainConfigChangeCommandOutput
   | CancelServiceSoftwareUpdateCommandOutput
+  | CompareDomainConfigurationCommandOutput
+  | CreateApplicationCommandOutput
   | CreateDomainCommandOutput
+  | CreateIndexCommandOutput
   | CreateOutboundConnectionCommandOutput
   | CreatePackageCommandOutput
+  | CreateVpcEndpointCommandOutput
+  | DeleteApplicationCommandOutput
+  | DeleteDataSourceCommandOutput
+  | DeleteDirectQueryDataSourceCommandOutput
   | DeleteDomainCommandOutput
   | DeleteInboundConnectionCommandOutput
+  | DeleteIndexCommandOutput
   | DeleteOutboundConnectionCommandOutput
   | DeletePackageCommandOutput
+  | DeleteVpcEndpointCommandOutput
+  | DeregisterCapabilityCommandOutput
+  | DescribeDataSourceAttachmentCommandOutput
   | DescribeDomainAutoTunesCommandOutput
+  | DescribeDomainChangeProgressCommandOutput
   | DescribeDomainCommandOutput
   | DescribeDomainConfigCommandOutput
+  | DescribeDomainHealthCommandOutput
+  | DescribeDomainNodesCommandOutput
+  | DescribeDomainReplicationCommandOutput
   | DescribeDomainsCommandOutput
+  | DescribeDryRunProgressCommandOutput
   | DescribeInboundConnectionsCommandOutput
+  | DescribeInsightDetailsCommandOutput
   | DescribeInstanceTypeLimitsCommandOutput
   | DescribeOutboundConnectionsCommandOutput
   | DescribePackagesCommandOutput
   | DescribeReservedInstanceOfferingsCommandOutput
   | DescribeReservedInstancesCommandOutput
+  | DescribeVpcEndpointsCommandOutput
+  | DetachDataSourceCommandOutput
   | DissociatePackageCommandOutput
+  | DissociatePackagesCommandOutput
+  | FailoverReplicationCommandOutput
+  | GetApplicationCommandOutput
+  | GetCapabilityCommandOutput
   | GetCompatibleVersionsCommandOutput
+  | GetDataSourceCommandOutput
+  | GetDefaultApplicationSettingCommandOutput
+  | GetDirectQueryDataSourceCommandOutput
+  | GetDomainMaintenanceStatusCommandOutput
+  | GetIndexCommandOutput
+  | GetMigrationCommandOutput
   | GetPackageVersionHistoryCommandOutput
   | GetUpgradeHistoryCommandOutput
   | GetUpgradeStatusCommandOutput
+  | InsightFeedbackCommandOutput
+  | ListApplicationsCommandOutput
+  | ListDataSourceAttachmentsCommandOutput
+  | ListDataSourcesCommandOutput
+  | ListDirectQueryDataSourcesCommandOutput
+  | ListDomainMaintenancesCommandOutput
   | ListDomainNamesCommandOutput
   | ListDomainsForPackageCommandOutput
+  | ListInsightsCommandOutput
   | ListInstanceTypeDetailsCommandOutput
+  | ListMigrationsCommandOutput
   | ListPackagesForDomainCommandOutput
+  | ListScheduledActionsCommandOutput
   | ListTagsCommandOutput
   | ListVersionsCommandOutput
+  | ListVpcEndpointAccessCommandOutput
+  | ListVpcEndpointsCommandOutput
+  | ListVpcEndpointsForDomainCommandOutput
   | PurchaseReservedInstanceOfferingCommandOutput
+  | PutDefaultApplicationSettingCommandOutput
+  | RegisterCapabilityCommandOutput
   | RejectInboundConnectionCommandOutput
+  | RemoveReplicationPeerCommandOutput
   | RemoveTagsCommandOutput
+  | RevokeVpcEndpointAccessCommandOutput
+  | RollbackServiceSoftwareUpdateCommandOutput
+  | StartDomainMaintenanceCommandOutput
+  | StartMigrationCommandOutput
   | StartServiceSoftwareUpdateCommandOutput
+  | SwitchoverReplicationCommandOutput
+  | UpdateApplicationCommandOutput
+  | UpdateCloneCommandOutput
+  | UpdateDataSourceCommandOutput
+  | UpdateDirectQueryDataSourceCommandOutput
   | UpdateDomainConfigCommandOutput
+  | UpdateIndexCommandOutput
   | UpdatePackageCommandOutput
+  | UpdatePackageScopeCommandOutput
+  | UpdateScheduledActionCommandOutput
+  | UpdateVpcEndpointCommandOutput
   | UpgradeDomainCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -255,7 +608,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -294,25 +647,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -325,74 +669,117 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type OpenSearchClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of OpenSearchClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type OpenSearchClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of OpenSearchClient class constructor that set the region, credentials and other options.
  */
 export interface OpenSearchClientConfig extends OpenSearchClientConfigType {}
 
-type OpenSearchClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of OpenSearchClient class. This is resolved and normalized from the {@link OpenSearchClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type OpenSearchClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of OpenSearchClient class. This is resolved and normalized from the {@link OpenSearchClientConfig | constructor configuration interface}.
  */
 export interface OpenSearchClientResolvedConfig extends OpenSearchClientResolvedConfigType {}
 
 /**
- * <fullname>Amazon OpenSearch Configuration Service</fullname>
- *     <p>Use the Amazon OpenSearch configuration API to create, configure, and manage Amazon OpenSearch Service domains.</p>
- *     <p>For sample code that uses the configuration API, see the <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-configuration-samples.html">
- *       Amazon OpenSearch Service Developer Guide</a>.
- *       The guide also contains <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/request-signing.html">
- *         sample
- *         code for sending signed HTTP requests to the OpenSearch APIs</a>.
- *     </p>
- *     <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com.
- *       For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,
- *       see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions" target="_blank">Regions and Endpoints</a>.
- *     </p>
+ * <p>Use the Amazon OpenSearch Service configuration API to create, configure, and manage
+ *             OpenSearch Service domains. The endpoint for configuration service requests is Region
+ *             specific: es.<i>region</i>.amazonaws.com. For example,
+ *             es.us-east-1.amazonaws.com. For a current list of supported Regions and endpoints, see
+ *                 <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions">Amazon Web Services service endpoints</a>.</p>
+ * @public
  */
 export class OpenSearchClient extends __Client<
   __HttpHandlerOptions,
@@ -405,22 +792,36 @@ export class OpenSearchClient extends __Client<
    */
   readonly config: OpenSearchClientResolvedConfig;
 
-  constructor(configuration: OpenSearchClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<OpenSearchClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultOpenSearchHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: OpenSearchClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

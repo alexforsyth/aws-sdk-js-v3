@@ -1,97 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import { ListSignalingChannelsInput, ListSignalingChannelsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSignalingChannelsCommand,
-  serializeAws_restJson1ListSignalingChannelsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSignalingChannelsInput, ListSignalingChannelsOutput } from "../models/models_0";
+import { ListSignalingChannels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSignalingChannelsCommand}.
+ */
 export interface ListSignalingChannelsCommandInput extends ListSignalingChannelsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListSignalingChannelsCommand}.
+ */
 export interface ListSignalingChannelsCommandOutput extends ListSignalingChannelsOutput, __MetadataBearer {}
 
 /**
  * <p>Returns an array of <code>ChannelInfo</code> objects. Each object describes a
- *             signaling channel. To retrieve only those channels that satisfy a specific condition, you can
- *             specify a <code>ChannelNameCondition</code>.</p>
+ *             signaling channel. To retrieve only those channels that satisfy a specific condition,
+ *             you can specify a <code>ChannelNameCondition</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KinesisVideoClient, ListSignalingChannelsCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, ListSignalingChannelsCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // ListSignalingChannelsInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   ChannelNameCondition: { // ChannelNameCondition
+ *     ComparisonOperator: "BEGINS_WITH",
+ *     ComparisonValue: "STRING_VALUE",
+ *   },
+ * };
  * const command = new ListSignalingChannelsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSignalingChannelsOutput
+ * //   ChannelInfoList: [ // ChannelInfoList
+ * //     { // ChannelInfo
+ * //       ChannelName: "STRING_VALUE",
+ * //       ChannelARN: "STRING_VALUE",
+ * //       ChannelType: "SINGLE_MASTER" || "FULL_MESH",
+ * //       ChannelStatus: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       SingleMasterConfiguration: { // SingleMasterConfiguration
+ * //         MessageTtlSeconds: Number("int"),
+ * //       },
+ * //       Version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSignalingChannelsCommandInput - {@link ListSignalingChannelsCommandInput}
+ * @returns {@link ListSignalingChannelsCommandOutput}
  * @see {@link ListSignalingChannelsCommandInput} for command's `input` shape.
  * @see {@link ListSignalingChannelsCommandOutput} for command's `response` shape.
- * @see {@link KinesisVideoClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to perform this operation.</p>
+ *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class ListSignalingChannelsCommand extends $Command<
-  ListSignalingChannelsCommandInput,
-  ListSignalingChannelsCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSignalingChannelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSignalingChannelsCommandInput, ListSignalingChannelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "ListSignalingChannelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSignalingChannelsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSignalingChannelsOutput.filterSensitiveLog,
+export class ListSignalingChannelsCommand extends command<ListSignalingChannelsCommandInput, ListSignalingChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSignalingChannels",
+  ListSignalingChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSignalingChannelsInput;
+      output: ListSignalingChannelsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSignalingChannelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSignalingChannelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSignalingChannelsCommandOutput> {
-    return deserializeAws_restJson1ListSignalingChannelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSignalingChannelsCommandInput;
+      output: ListSignalingChannelsCommandOutput;
+    };
+  };
 }

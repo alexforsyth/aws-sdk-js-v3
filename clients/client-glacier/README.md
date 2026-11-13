@@ -1,13 +1,12 @@
-# @aws-sdk/client-glacier
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-glacier/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-glacier)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-glacier.svg)](https://www.npmjs.com/package/@aws-sdk/client-glacier)
+# @aws-sdk/client-glacier
 
 ## Description
 
 AWS SDK for JavaScript Glacier Client for Node.js, Browser and React Native.
 
-<p> Amazon S3 Glacier (Glacier) is a storage solution for "cold data."</p>
+<p> Amazon Glacier (Glacier) is a storage solution for "cold data."</p>
 
 <p>Glacier is an extremely low-cost storage service that provides secure,
 durable, and easy-to-use storage for data backup and archival. With Glacier,
@@ -27,20 +26,20 @@ more information, see <a href="http://aws.amazon.com/s3/">Amazon Simple Storage 
 amount of data you can store in Glacier.</p>
 
 <p>If you are a first-time user of Glacier, we recommend that you begin by
-reading the following sections in the <i>Amazon S3 Glacier Developer
+reading the following sections in the <i>Amazon Glacier Developer
 Guide</i>:</p>
 <ul>
 <li>
 <p>
 <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html">What is
-Amazon S3 Glacier</a> - This section of the Developer Guide describes the
+Amazon Glacier</a> - This section of the Developer Guide describes the
 underlying data model, the operations it supports, and the AWS SDKs that you can use
 to interact with the service.</p>
 </li>
 <li>
 <p>
 <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html">Getting Started
-with Amazon S3 Glacier</a> - The Getting Started section walks you through the
+with Amazon Glacier</a> - The Getting Started section walks you through the
 process of creating a vault, uploading archives, creating jobs to download archives,
 retrieving the job output, and deleting archives.</p>
 </li>
@@ -48,8 +47,7 @@ retrieving the job output, and deleting archives.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-glacier
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-glacier`
 - `yarn add @aws-sdk/client-glacier`
@@ -61,40 +59,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `GlacierClient` and
-the commands you need, for example `AbortMultipartUploadCommand`:
+the commands you need, for example `ListVaultsCommand`:
 
 ```js
 // ES5 example
-const { GlacierClient, AbortMultipartUploadCommand } = require("@aws-sdk/client-glacier");
+const { GlacierClient, ListVaultsCommand } = require("@aws-sdk/client-glacier");
 ```
 
 ```ts
 // ES6+ example
-import { GlacierClient, AbortMultipartUploadCommand } from "@aws-sdk/client-glacier";
+import { GlacierClient, ListVaultsCommand } from "@aws-sdk/client-glacier";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new GlacierClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AbortMultipartUploadCommand(params);
+const params = { /** input parameters */ };
+const command = new ListVaultsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -109,26 +105,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -144,31 +123,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Glacier` extends `GlacierClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`GlacierClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-glacier";
-const client = new AWS.Glacier({ region: "REGION" });
+import { Glacier } from "@aws-sdk/client-glacier";
+
+const client = new Glacier({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.abortMultipartUpload(params);
+  const data = await client.listVaults(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -176,7 +149,7 @@ try {
 
 // Promises.
 client
-  .abortMultipartUpload(params)
+  .listVaults(params)
   .then((data) => {
     // process data.
   })
@@ -184,9 +157,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.abortMultipartUpload(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listVaults(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -212,12 +185,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -238,3 +213,237 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AbortMultipartUpload
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/AbortMultipartUploadCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AbortMultipartUploadCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AbortMultipartUploadCommandOutput/)
+</details>
+<details>
+<summary>
+AbortVaultLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/AbortVaultLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AbortVaultLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AbortVaultLockCommandOutput/)
+</details>
+<details>
+<summary>
+AddTagsToVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/AddTagsToVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AddTagsToVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/AddTagsToVaultCommandOutput/)
+</details>
+<details>
+<summary>
+CompleteMultipartUpload
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/CompleteMultipartUploadCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CompleteMultipartUploadCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CompleteMultipartUploadCommandOutput/)
+</details>
+<details>
+<summary>
+CompleteVaultLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/CompleteVaultLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CompleteVaultLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CompleteVaultLockCommandOutput/)
+</details>
+<details>
+<summary>
+CreateVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/CreateVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CreateVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/CreateVaultCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteArchive
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DeleteArchiveCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteArchiveCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteArchiveCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DeleteVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteVaultAccessPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DeleteVaultAccessPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultAccessPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultAccessPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteVaultNotifications
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DeleteVaultNotificationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultNotificationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DeleteVaultNotificationsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DescribeJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DescribeJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DescribeJobCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/DescribeVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DescribeVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/DescribeVaultCommandOutput/)
+</details>
+<details>
+<summary>
+GetDataRetrievalPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/GetDataRetrievalPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetDataRetrievalPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetDataRetrievalPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+GetJobOutput
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/GetJobOutputCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetJobOutputCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetJobOutputCommandOutput/)
+</details>
+<details>
+<summary>
+GetVaultAccessPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/GetVaultAccessPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultAccessPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultAccessPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+GetVaultLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/GetVaultLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultLockCommandOutput/)
+</details>
+<details>
+<summary>
+GetVaultNotifications
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/GetVaultNotificationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultNotificationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/GetVaultNotificationsCommandOutput/)
+</details>
+<details>
+<summary>
+InitiateJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/InitiateJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateJobCommandOutput/)
+</details>
+<details>
+<summary>
+InitiateMultipartUpload
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/InitiateMultipartUploadCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateMultipartUploadCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateMultipartUploadCommandOutput/)
+</details>
+<details>
+<summary>
+InitiateVaultLock
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/InitiateVaultLockCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateVaultLockCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/InitiateVaultLockCommandOutput/)
+</details>
+<details>
+<summary>
+ListJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListMultipartUploads
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListMultipartUploadsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListMultipartUploadsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListMultipartUploadsCommandOutput/)
+</details>
+<details>
+<summary>
+ListParts
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListPartsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListPartsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListPartsCommandOutput/)
+</details>
+<details>
+<summary>
+ListProvisionedCapacity
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListProvisionedCapacityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListProvisionedCapacityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListProvisionedCapacityCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListTagsForVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListTagsForVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListTagsForVaultCommandOutput/)
+</details>
+<details>
+<summary>
+ListVaults
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/ListVaultsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListVaultsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/ListVaultsCommandOutput/)
+</details>
+<details>
+<summary>
+PurchaseProvisionedCapacity
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/PurchaseProvisionedCapacityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/PurchaseProvisionedCapacityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/PurchaseProvisionedCapacityCommandOutput/)
+</details>
+<details>
+<summary>
+RemoveTagsFromVault
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/RemoveTagsFromVaultCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/RemoveTagsFromVaultCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/RemoveTagsFromVaultCommandOutput/)
+</details>
+<details>
+<summary>
+SetDataRetrievalPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/SetDataRetrievalPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetDataRetrievalPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetDataRetrievalPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+SetVaultAccessPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/SetVaultAccessPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetVaultAccessPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetVaultAccessPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+SetVaultNotifications
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/SetVaultNotificationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetVaultNotificationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/SetVaultNotificationsCommandOutput/)
+</details>
+<details>
+<summary>
+UploadArchive
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/UploadArchiveCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/UploadArchiveCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/UploadArchiveCommandOutput/)
+</details>
+<details>
+<summary>
+UploadMultipartPart
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/glacier/command/UploadMultipartPartCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/UploadMultipartPartCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-glacier/Interface/UploadMultipartPartCommandOutput/)
+</details>

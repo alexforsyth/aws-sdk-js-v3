@@ -1,0 +1,2219 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BedrockAgentClient } from "./BedrockAgentClient";
+import {
+  type AssociateAgentCollaboratorCommandInput,
+  type AssociateAgentCollaboratorCommandOutput,
+  AssociateAgentCollaboratorCommand,
+} from "./commands/AssociateAgentCollaboratorCommand";
+import {
+  type AssociateAgentKnowledgeBaseCommandInput,
+  type AssociateAgentKnowledgeBaseCommandOutput,
+  AssociateAgentKnowledgeBaseCommand,
+} from "./commands/AssociateAgentKnowledgeBaseCommand";
+import {
+  type CreateAgentActionGroupCommandInput,
+  type CreateAgentActionGroupCommandOutput,
+  CreateAgentActionGroupCommand,
+} from "./commands/CreateAgentActionGroupCommand";
+import {
+  type CreateAgentAliasCommandInput,
+  type CreateAgentAliasCommandOutput,
+  CreateAgentAliasCommand,
+} from "./commands/CreateAgentAliasCommand";
+import {
+  type CreateAgentCommandInput,
+  type CreateAgentCommandOutput,
+  CreateAgentCommand,
+} from "./commands/CreateAgentCommand";
+import {
+  type CreateDataSourceCommandInput,
+  type CreateDataSourceCommandOutput,
+  CreateDataSourceCommand,
+} from "./commands/CreateDataSourceCommand";
+import {
+  type CreateFlowAliasCommandInput,
+  type CreateFlowAliasCommandOutput,
+  CreateFlowAliasCommand,
+} from "./commands/CreateFlowAliasCommand";
+import {
+  type CreateFlowCommandInput,
+  type CreateFlowCommandOutput,
+  CreateFlowCommand,
+} from "./commands/CreateFlowCommand";
+import {
+  type CreateFlowVersionCommandInput,
+  type CreateFlowVersionCommandOutput,
+  CreateFlowVersionCommand,
+} from "./commands/CreateFlowVersionCommand";
+import {
+  type CreateKnowledgeBaseCommandInput,
+  type CreateKnowledgeBaseCommandOutput,
+  CreateKnowledgeBaseCommand,
+} from "./commands/CreateKnowledgeBaseCommand";
+import {
+  type CreatePromptCommandInput,
+  type CreatePromptCommandOutput,
+  CreatePromptCommand,
+} from "./commands/CreatePromptCommand";
+import {
+  type CreatePromptVersionCommandInput,
+  type CreatePromptVersionCommandOutput,
+  CreatePromptVersionCommand,
+} from "./commands/CreatePromptVersionCommand";
+import {
+  type CreateRetrievalInstructionCommandInput,
+  type CreateRetrievalInstructionCommandOutput,
+  CreateRetrievalInstructionCommand,
+} from "./commands/CreateRetrievalInstructionCommand";
+import {
+  type CreateRetrievalInstructionVersionCommandInput,
+  type CreateRetrievalInstructionVersionCommandOutput,
+  CreateRetrievalInstructionVersionCommand,
+} from "./commands/CreateRetrievalInstructionVersionCommand";
+import {
+  type CreateVpcConfigurationCommandInput,
+  type CreateVpcConfigurationCommandOutput,
+  CreateVpcConfigurationCommand,
+} from "./commands/CreateVpcConfigurationCommand";
+import {
+  type DeleteAgentActionGroupCommandInput,
+  type DeleteAgentActionGroupCommandOutput,
+  DeleteAgentActionGroupCommand,
+} from "./commands/DeleteAgentActionGroupCommand";
+import {
+  type DeleteAgentAliasCommandInput,
+  type DeleteAgentAliasCommandOutput,
+  DeleteAgentAliasCommand,
+} from "./commands/DeleteAgentAliasCommand";
+import {
+  type DeleteAgentCommandInput,
+  type DeleteAgentCommandOutput,
+  DeleteAgentCommand,
+} from "./commands/DeleteAgentCommand";
+import {
+  type DeleteAgentVersionCommandInput,
+  type DeleteAgentVersionCommandOutput,
+  DeleteAgentVersionCommand,
+} from "./commands/DeleteAgentVersionCommand";
+import {
+  type DeleteDataSourceCommandInput,
+  type DeleteDataSourceCommandOutput,
+  DeleteDataSourceCommand,
+} from "./commands/DeleteDataSourceCommand";
+import {
+  type DeleteFlowAliasCommandInput,
+  type DeleteFlowAliasCommandOutput,
+  DeleteFlowAliasCommand,
+} from "./commands/DeleteFlowAliasCommand";
+import {
+  type DeleteFlowCommandInput,
+  type DeleteFlowCommandOutput,
+  DeleteFlowCommand,
+} from "./commands/DeleteFlowCommand";
+import {
+  type DeleteFlowVersionCommandInput,
+  type DeleteFlowVersionCommandOutput,
+  DeleteFlowVersionCommand,
+} from "./commands/DeleteFlowVersionCommand";
+import {
+  type DeleteKnowledgeBaseCommandInput,
+  type DeleteKnowledgeBaseCommandOutput,
+  DeleteKnowledgeBaseCommand,
+} from "./commands/DeleteKnowledgeBaseCommand";
+import {
+  type DeleteKnowledgeBaseDocumentsCommandInput,
+  type DeleteKnowledgeBaseDocumentsCommandOutput,
+  DeleteKnowledgeBaseDocumentsCommand,
+} from "./commands/DeleteKnowledgeBaseDocumentsCommand";
+import {
+  type DeletePromptCommandInput,
+  type DeletePromptCommandOutput,
+  DeletePromptCommand,
+} from "./commands/DeletePromptCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteRetrievalInstructionCommandInput,
+  type DeleteRetrievalInstructionCommandOutput,
+  DeleteRetrievalInstructionCommand,
+} from "./commands/DeleteRetrievalInstructionCommand";
+import {
+  type DeleteVpcConfigurationCommandInput,
+  type DeleteVpcConfigurationCommandOutput,
+  DeleteVpcConfigurationCommand,
+} from "./commands/DeleteVpcConfigurationCommand";
+import {
+  type DisassociateAgentCollaboratorCommandInput,
+  type DisassociateAgentCollaboratorCommandOutput,
+  DisassociateAgentCollaboratorCommand,
+} from "./commands/DisassociateAgentCollaboratorCommand";
+import {
+  type DisassociateAgentKnowledgeBaseCommandInput,
+  type DisassociateAgentKnowledgeBaseCommandOutput,
+  DisassociateAgentKnowledgeBaseCommand,
+} from "./commands/DisassociateAgentKnowledgeBaseCommand";
+import {
+  type GetAgentActionGroupCommandInput,
+  type GetAgentActionGroupCommandOutput,
+  GetAgentActionGroupCommand,
+} from "./commands/GetAgentActionGroupCommand";
+import {
+  type GetAgentAliasCommandInput,
+  type GetAgentAliasCommandOutput,
+  GetAgentAliasCommand,
+} from "./commands/GetAgentAliasCommand";
+import {
+  type GetAgentCollaboratorCommandInput,
+  type GetAgentCollaboratorCommandOutput,
+  GetAgentCollaboratorCommand,
+} from "./commands/GetAgentCollaboratorCommand";
+import { type GetAgentCommandInput, type GetAgentCommandOutput, GetAgentCommand } from "./commands/GetAgentCommand";
+import {
+  type GetAgentKnowledgeBaseCommandInput,
+  type GetAgentKnowledgeBaseCommandOutput,
+  GetAgentKnowledgeBaseCommand,
+} from "./commands/GetAgentKnowledgeBaseCommand";
+import {
+  type GetAgentVersionCommandInput,
+  type GetAgentVersionCommandOutput,
+  GetAgentVersionCommand,
+} from "./commands/GetAgentVersionCommand";
+import {
+  type GetDataSourceCommandInput,
+  type GetDataSourceCommandOutput,
+  GetDataSourceCommand,
+} from "./commands/GetDataSourceCommand";
+import {
+  type GetFlowAliasCommandInput,
+  type GetFlowAliasCommandOutput,
+  GetFlowAliasCommand,
+} from "./commands/GetFlowAliasCommand";
+import { type GetFlowCommandInput, type GetFlowCommandOutput, GetFlowCommand } from "./commands/GetFlowCommand";
+import {
+  type GetFlowVersionCommandInput,
+  type GetFlowVersionCommandOutput,
+  GetFlowVersionCommand,
+} from "./commands/GetFlowVersionCommand";
+import {
+  type GetIngestionJobCommandInput,
+  type GetIngestionJobCommandOutput,
+  GetIngestionJobCommand,
+} from "./commands/GetIngestionJobCommand";
+import {
+  type GetKnowledgeBaseCommandInput,
+  type GetKnowledgeBaseCommandOutput,
+  GetKnowledgeBaseCommand,
+} from "./commands/GetKnowledgeBaseCommand";
+import {
+  type GetKnowledgeBaseDocumentsCommandInput,
+  type GetKnowledgeBaseDocumentsCommandOutput,
+  GetKnowledgeBaseDocumentsCommand,
+} from "./commands/GetKnowledgeBaseDocumentsCommand";
+import { type GetPromptCommandInput, type GetPromptCommandOutput, GetPromptCommand } from "./commands/GetPromptCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetRetrievalInstructionCommandInput,
+  type GetRetrievalInstructionCommandOutput,
+  GetRetrievalInstructionCommand,
+} from "./commands/GetRetrievalInstructionCommand";
+import {
+  type GetVpcConfigurationCommandInput,
+  type GetVpcConfigurationCommandOutput,
+  GetVpcConfigurationCommand,
+} from "./commands/GetVpcConfigurationCommand";
+import {
+  type IngestKnowledgeBaseDocumentsCommandInput,
+  type IngestKnowledgeBaseDocumentsCommandOutput,
+  IngestKnowledgeBaseDocumentsCommand,
+} from "./commands/IngestKnowledgeBaseDocumentsCommand";
+import {
+  type ListAgentActionGroupsCommandInput,
+  type ListAgentActionGroupsCommandOutput,
+  ListAgentActionGroupsCommand,
+} from "./commands/ListAgentActionGroupsCommand";
+import {
+  type ListAgentAliasesCommandInput,
+  type ListAgentAliasesCommandOutput,
+  ListAgentAliasesCommand,
+} from "./commands/ListAgentAliasesCommand";
+import {
+  type ListAgentCollaboratorsCommandInput,
+  type ListAgentCollaboratorsCommandOutput,
+  ListAgentCollaboratorsCommand,
+} from "./commands/ListAgentCollaboratorsCommand";
+import {
+  type ListAgentKnowledgeBasesCommandInput,
+  type ListAgentKnowledgeBasesCommandOutput,
+  ListAgentKnowledgeBasesCommand,
+} from "./commands/ListAgentKnowledgeBasesCommand";
+import {
+  type ListAgentsCommandInput,
+  type ListAgentsCommandOutput,
+  ListAgentsCommand,
+} from "./commands/ListAgentsCommand";
+import {
+  type ListAgentVersionsCommandInput,
+  type ListAgentVersionsCommandOutput,
+  ListAgentVersionsCommand,
+} from "./commands/ListAgentVersionsCommand";
+import {
+  type ListDataSourcesCommandInput,
+  type ListDataSourcesCommandOutput,
+  ListDataSourcesCommand,
+} from "./commands/ListDataSourcesCommand";
+import {
+  type ListFlowAliasesCommandInput,
+  type ListFlowAliasesCommandOutput,
+  ListFlowAliasesCommand,
+} from "./commands/ListFlowAliasesCommand";
+import { type ListFlowsCommandInput, type ListFlowsCommandOutput, ListFlowsCommand } from "./commands/ListFlowsCommand";
+import {
+  type ListFlowVersionsCommandInput,
+  type ListFlowVersionsCommandOutput,
+  ListFlowVersionsCommand,
+} from "./commands/ListFlowVersionsCommand";
+import {
+  type ListIngestionJobsCommandInput,
+  type ListIngestionJobsCommandOutput,
+  ListIngestionJobsCommand,
+} from "./commands/ListIngestionJobsCommand";
+import {
+  type ListKnowledgeBaseDocumentsCommandInput,
+  type ListKnowledgeBaseDocumentsCommandOutput,
+  ListKnowledgeBaseDocumentsCommand,
+} from "./commands/ListKnowledgeBaseDocumentsCommand";
+import {
+  type ListKnowledgeBasesCommandInput,
+  type ListKnowledgeBasesCommandOutput,
+  ListKnowledgeBasesCommand,
+} from "./commands/ListKnowledgeBasesCommand";
+import {
+  type ListPromptsCommandInput,
+  type ListPromptsCommandOutput,
+  ListPromptsCommand,
+} from "./commands/ListPromptsCommand";
+import {
+  type ListRetrievalInstructionsCommandInput,
+  type ListRetrievalInstructionsCommandOutput,
+  ListRetrievalInstructionsCommand,
+} from "./commands/ListRetrievalInstructionsCommand";
+import {
+  type ListRetrievalInstructionVersionsCommandInput,
+  type ListRetrievalInstructionVersionsCommandOutput,
+  ListRetrievalInstructionVersionsCommand,
+} from "./commands/ListRetrievalInstructionVersionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListVpcConfigurationsCommandInput,
+  type ListVpcConfigurationsCommandOutput,
+  ListVpcConfigurationsCommand,
+} from "./commands/ListVpcConfigurationsCommand";
+import {
+  type PrepareAgentCommandInput,
+  type PrepareAgentCommandOutput,
+  PrepareAgentCommand,
+} from "./commands/PrepareAgentCommand";
+import {
+  type PrepareFlowCommandInput,
+  type PrepareFlowCommandOutput,
+  PrepareFlowCommand,
+} from "./commands/PrepareFlowCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type StartIngestionJobCommandInput,
+  type StartIngestionJobCommandOutput,
+  StartIngestionJobCommand,
+} from "./commands/StartIngestionJobCommand";
+import {
+  type StopIngestionJobCommandInput,
+  type StopIngestionJobCommandOutput,
+  StopIngestionJobCommand,
+} from "./commands/StopIngestionJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAgentActionGroupCommandInput,
+  type UpdateAgentActionGroupCommandOutput,
+  UpdateAgentActionGroupCommand,
+} from "./commands/UpdateAgentActionGroupCommand";
+import {
+  type UpdateAgentAliasCommandInput,
+  type UpdateAgentAliasCommandOutput,
+  UpdateAgentAliasCommand,
+} from "./commands/UpdateAgentAliasCommand";
+import {
+  type UpdateAgentCollaboratorCommandInput,
+  type UpdateAgentCollaboratorCommandOutput,
+  UpdateAgentCollaboratorCommand,
+} from "./commands/UpdateAgentCollaboratorCommand";
+import {
+  type UpdateAgentCommandInput,
+  type UpdateAgentCommandOutput,
+  UpdateAgentCommand,
+} from "./commands/UpdateAgentCommand";
+import {
+  type UpdateAgentKnowledgeBaseCommandInput,
+  type UpdateAgentKnowledgeBaseCommandOutput,
+  UpdateAgentKnowledgeBaseCommand,
+} from "./commands/UpdateAgentKnowledgeBaseCommand";
+import {
+  type UpdateDataSourceCommandInput,
+  type UpdateDataSourceCommandOutput,
+  UpdateDataSourceCommand,
+} from "./commands/UpdateDataSourceCommand";
+import {
+  type UpdateFlowAliasCommandInput,
+  type UpdateFlowAliasCommandOutput,
+  UpdateFlowAliasCommand,
+} from "./commands/UpdateFlowAliasCommand";
+import {
+  type UpdateFlowCommandInput,
+  type UpdateFlowCommandOutput,
+  UpdateFlowCommand,
+} from "./commands/UpdateFlowCommand";
+import {
+  type UpdateKnowledgeBaseCommandInput,
+  type UpdateKnowledgeBaseCommandOutput,
+  UpdateKnowledgeBaseCommand,
+} from "./commands/UpdateKnowledgeBaseCommand";
+import {
+  type UpdatePromptCommandInput,
+  type UpdatePromptCommandOutput,
+  UpdatePromptCommand,
+} from "./commands/UpdatePromptCommand";
+import {
+  type UpdateRetrievalInstructionCommandInput,
+  type UpdateRetrievalInstructionCommandOutput,
+  UpdateRetrievalInstructionCommand,
+} from "./commands/UpdateRetrievalInstructionCommand";
+import {
+  type ValidateFlowDefinitionCommandInput,
+  type ValidateFlowDefinitionCommandOutput,
+  ValidateFlowDefinitionCommand,
+} from "./commands/ValidateFlowDefinitionCommand";
+import { paginateListAgentActionGroups } from "./pagination/ListAgentActionGroupsPaginator";
+import { paginateListAgentAliases } from "./pagination/ListAgentAliasesPaginator";
+import { paginateListAgentCollaborators } from "./pagination/ListAgentCollaboratorsPaginator";
+import { paginateListAgentKnowledgeBases } from "./pagination/ListAgentKnowledgeBasesPaginator";
+import { paginateListAgents } from "./pagination/ListAgentsPaginator";
+import { paginateListAgentVersions } from "./pagination/ListAgentVersionsPaginator";
+import { paginateListDataSources } from "./pagination/ListDataSourcesPaginator";
+import { paginateListFlowAliases } from "./pagination/ListFlowAliasesPaginator";
+import { paginateListFlows } from "./pagination/ListFlowsPaginator";
+import { paginateListFlowVersions } from "./pagination/ListFlowVersionsPaginator";
+import { paginateListIngestionJobs } from "./pagination/ListIngestionJobsPaginator";
+import { paginateListKnowledgeBaseDocuments } from "./pagination/ListKnowledgeBaseDocumentsPaginator";
+import { paginateListKnowledgeBases } from "./pagination/ListKnowledgeBasesPaginator";
+import { paginateListPrompts } from "./pagination/ListPromptsPaginator";
+import { paginateListRetrievalInstructions } from "./pagination/ListRetrievalInstructionsPaginator";
+import { paginateListRetrievalInstructionVersions } from "./pagination/ListRetrievalInstructionVersionsPaginator";
+import { paginateListVpcConfigurations } from "./pagination/ListVpcConfigurationsPaginator";
+
+const commands = {
+  AssociateAgentCollaboratorCommand,
+  AssociateAgentKnowledgeBaseCommand,
+  CreateAgentCommand,
+  CreateAgentActionGroupCommand,
+  CreateAgentAliasCommand,
+  CreateDataSourceCommand,
+  CreateFlowCommand,
+  CreateFlowAliasCommand,
+  CreateFlowVersionCommand,
+  CreateKnowledgeBaseCommand,
+  CreatePromptCommand,
+  CreatePromptVersionCommand,
+  CreateRetrievalInstructionCommand,
+  CreateRetrievalInstructionVersionCommand,
+  CreateVpcConfigurationCommand,
+  DeleteAgentCommand,
+  DeleteAgentActionGroupCommand,
+  DeleteAgentAliasCommand,
+  DeleteAgentVersionCommand,
+  DeleteDataSourceCommand,
+  DeleteFlowCommand,
+  DeleteFlowAliasCommand,
+  DeleteFlowVersionCommand,
+  DeleteKnowledgeBaseCommand,
+  DeleteKnowledgeBaseDocumentsCommand,
+  DeletePromptCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRetrievalInstructionCommand,
+  DeleteVpcConfigurationCommand,
+  DisassociateAgentCollaboratorCommand,
+  DisassociateAgentKnowledgeBaseCommand,
+  GetAgentCommand,
+  GetAgentActionGroupCommand,
+  GetAgentAliasCommand,
+  GetAgentCollaboratorCommand,
+  GetAgentKnowledgeBaseCommand,
+  GetAgentVersionCommand,
+  GetDataSourceCommand,
+  GetFlowCommand,
+  GetFlowAliasCommand,
+  GetFlowVersionCommand,
+  GetIngestionJobCommand,
+  GetKnowledgeBaseCommand,
+  GetKnowledgeBaseDocumentsCommand,
+  GetPromptCommand,
+  GetResourcePolicyCommand,
+  GetRetrievalInstructionCommand,
+  GetVpcConfigurationCommand,
+  IngestKnowledgeBaseDocumentsCommand,
+  ListAgentActionGroupsCommand,
+  ListAgentAliasesCommand,
+  ListAgentCollaboratorsCommand,
+  ListAgentKnowledgeBasesCommand,
+  ListAgentsCommand,
+  ListAgentVersionsCommand,
+  ListDataSourcesCommand,
+  ListFlowAliasesCommand,
+  ListFlowsCommand,
+  ListFlowVersionsCommand,
+  ListIngestionJobsCommand,
+  ListKnowledgeBaseDocumentsCommand,
+  ListKnowledgeBasesCommand,
+  ListPromptsCommand,
+  ListRetrievalInstructionsCommand,
+  ListRetrievalInstructionVersionsCommand,
+  ListTagsForResourceCommand,
+  ListVpcConfigurationsCommand,
+  PrepareAgentCommand,
+  PrepareFlowCommand,
+  PutResourcePolicyCommand,
+  StartIngestionJobCommand,
+  StopIngestionJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAgentCommand,
+  UpdateAgentActionGroupCommand,
+  UpdateAgentAliasCommand,
+  UpdateAgentCollaboratorCommand,
+  UpdateAgentKnowledgeBaseCommand,
+  UpdateDataSourceCommand,
+  UpdateFlowCommand,
+  UpdateFlowAliasCommand,
+  UpdateKnowledgeBaseCommand,
+  UpdatePromptCommand,
+  UpdateRetrievalInstructionCommand,
+  ValidateFlowDefinitionCommand,
+};
+const paginators = {
+  paginateListAgentActionGroups,
+  paginateListAgentAliases,
+  paginateListAgentCollaborators,
+  paginateListAgentKnowledgeBases,
+  paginateListAgents,
+  paginateListAgentVersions,
+  paginateListDataSources,
+  paginateListFlowAliases,
+  paginateListFlows,
+  paginateListFlowVersions,
+  paginateListIngestionJobs,
+  paginateListKnowledgeBaseDocuments,
+  paginateListKnowledgeBases,
+  paginateListPrompts,
+  paginateListRetrievalInstructions,
+  paginateListRetrievalInstructionVersions,
+  paginateListVpcConfigurations,
+};
+
+/**
+ * @public
+ */
+export interface BedrockAgentRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface BedrockAgent {
+  /**
+   * @see {@link AssociateAgentCollaboratorCommand}
+   */
+  associateAgentCollaborator(
+    args: AssociateAgentCollaboratorCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<AssociateAgentCollaboratorCommandOutput>;
+  associateAgentCollaborator(
+    args: AssociateAgentCollaboratorCommandInput,
+    cb: (err: any, data?: AssociateAgentCollaboratorCommandOutput) => void
+  ): void;
+  associateAgentCollaborator(
+    args: AssociateAgentCollaboratorCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: AssociateAgentCollaboratorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateAgentKnowledgeBaseCommand}
+   */
+  associateAgentKnowledgeBase(
+    args: AssociateAgentKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<AssociateAgentKnowledgeBaseCommandOutput>;
+  associateAgentKnowledgeBase(
+    args: AssociateAgentKnowledgeBaseCommandInput,
+    cb: (err: any, data?: AssociateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+  associateAgentKnowledgeBase(
+    args: AssociateAgentKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: AssociateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentCommand}
+   */
+  createAgent(
+    args: CreateAgentCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateAgentCommandOutput>;
+  createAgent(
+    args: CreateAgentCommandInput,
+    cb: (err: any, data?: CreateAgentCommandOutput) => void
+  ): void;
+  createAgent(
+    args: CreateAgentCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentActionGroupCommand}
+   */
+  createAgentActionGroup(
+    args: CreateAgentActionGroupCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateAgentActionGroupCommandOutput>;
+  createAgentActionGroup(
+    args: CreateAgentActionGroupCommandInput,
+    cb: (err: any, data?: CreateAgentActionGroupCommandOutput) => void
+  ): void;
+  createAgentActionGroup(
+    args: CreateAgentActionGroupCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateAgentActionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentAliasCommand}
+   */
+  createAgentAlias(
+    args: CreateAgentAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateAgentAliasCommandOutput>;
+  createAgentAlias(
+    args: CreateAgentAliasCommandInput,
+    cb: (err: any, data?: CreateAgentAliasCommandOutput) => void
+  ): void;
+  createAgentAlias(
+    args: CreateAgentAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateAgentAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataSourceCommand}
+   */
+  createDataSource(
+    args: CreateDataSourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateDataSourceCommandOutput>;
+  createDataSource(
+    args: CreateDataSourceCommandInput,
+    cb: (err: any, data?: CreateDataSourceCommandOutput) => void
+  ): void;
+  createDataSource(
+    args: CreateDataSourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateDataSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFlowCommand}
+   */
+  createFlow(
+    args: CreateFlowCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateFlowCommandOutput>;
+  createFlow(
+    args: CreateFlowCommandInput,
+    cb: (err: any, data?: CreateFlowCommandOutput) => void
+  ): void;
+  createFlow(
+    args: CreateFlowCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFlowAliasCommand}
+   */
+  createFlowAlias(
+    args: CreateFlowAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateFlowAliasCommandOutput>;
+  createFlowAlias(
+    args: CreateFlowAliasCommandInput,
+    cb: (err: any, data?: CreateFlowAliasCommandOutput) => void
+  ): void;
+  createFlowAlias(
+    args: CreateFlowAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFlowVersionCommand}
+   */
+  createFlowVersion(
+    args: CreateFlowVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateFlowVersionCommandOutput>;
+  createFlowVersion(
+    args: CreateFlowVersionCommandInput,
+    cb: (err: any, data?: CreateFlowVersionCommandOutput) => void
+  ): void;
+  createFlowVersion(
+    args: CreateFlowVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateFlowVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateKnowledgeBaseCommand}
+   */
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateKnowledgeBaseCommandOutput>;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePromptCommand}
+   */
+  createPrompt(
+    args: CreatePromptCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreatePromptCommandOutput>;
+  createPrompt(
+    args: CreatePromptCommandInput,
+    cb: (err: any, data?: CreatePromptCommandOutput) => void
+  ): void;
+  createPrompt(
+    args: CreatePromptCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreatePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePromptVersionCommand}
+   */
+  createPromptVersion(
+    args: CreatePromptVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreatePromptVersionCommandOutput>;
+  createPromptVersion(
+    args: CreatePromptVersionCommandInput,
+    cb: (err: any, data?: CreatePromptVersionCommandOutput) => void
+  ): void;
+  createPromptVersion(
+    args: CreatePromptVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreatePromptVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRetrievalInstructionCommand}
+   */
+  createRetrievalInstruction(
+    args: CreateRetrievalInstructionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateRetrievalInstructionCommandOutput>;
+  createRetrievalInstruction(
+    args: CreateRetrievalInstructionCommandInput,
+    cb: (err: any, data?: CreateRetrievalInstructionCommandOutput) => void
+  ): void;
+  createRetrievalInstruction(
+    args: CreateRetrievalInstructionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateRetrievalInstructionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRetrievalInstructionVersionCommand}
+   */
+  createRetrievalInstructionVersion(
+    args: CreateRetrievalInstructionVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateRetrievalInstructionVersionCommandOutput>;
+  createRetrievalInstructionVersion(
+    args: CreateRetrievalInstructionVersionCommandInput,
+    cb: (err: any, data?: CreateRetrievalInstructionVersionCommandOutput) => void
+  ): void;
+  createRetrievalInstructionVersion(
+    args: CreateRetrievalInstructionVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateRetrievalInstructionVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVpcConfigurationCommand}
+   */
+  createVpcConfiguration(
+    args: CreateVpcConfigurationCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<CreateVpcConfigurationCommandOutput>;
+  createVpcConfiguration(
+    args: CreateVpcConfigurationCommandInput,
+    cb: (err: any, data?: CreateVpcConfigurationCommandOutput) => void
+  ): void;
+  createVpcConfiguration(
+    args: CreateVpcConfigurationCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: CreateVpcConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentCommand}
+   */
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteAgentCommandOutput>;
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    cb: (err: any, data?: DeleteAgentCommandOutput) => void
+  ): void;
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentActionGroupCommand}
+   */
+  deleteAgentActionGroup(
+    args: DeleteAgentActionGroupCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteAgentActionGroupCommandOutput>;
+  deleteAgentActionGroup(
+    args: DeleteAgentActionGroupCommandInput,
+    cb: (err: any, data?: DeleteAgentActionGroupCommandOutput) => void
+  ): void;
+  deleteAgentActionGroup(
+    args: DeleteAgentActionGroupCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteAgentActionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentAliasCommand}
+   */
+  deleteAgentAlias(
+    args: DeleteAgentAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteAgentAliasCommandOutput>;
+  deleteAgentAlias(
+    args: DeleteAgentAliasCommandInput,
+    cb: (err: any, data?: DeleteAgentAliasCommandOutput) => void
+  ): void;
+  deleteAgentAlias(
+    args: DeleteAgentAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteAgentAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentVersionCommand}
+   */
+  deleteAgentVersion(
+    args: DeleteAgentVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteAgentVersionCommandOutput>;
+  deleteAgentVersion(
+    args: DeleteAgentVersionCommandInput,
+    cb: (err: any, data?: DeleteAgentVersionCommandOutput) => void
+  ): void;
+  deleteAgentVersion(
+    args: DeleteAgentVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteAgentVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataSourceCommand}
+   */
+  deleteDataSource(
+    args: DeleteDataSourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteDataSourceCommandOutput>;
+  deleteDataSource(
+    args: DeleteDataSourceCommandInput,
+    cb: (err: any, data?: DeleteDataSourceCommandOutput) => void
+  ): void;
+  deleteDataSource(
+    args: DeleteDataSourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteDataSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFlowCommand}
+   */
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteFlowCommandOutput>;
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    cb: (err: any, data?: DeleteFlowCommandOutput) => void
+  ): void;
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFlowAliasCommand}
+   */
+  deleteFlowAlias(
+    args: DeleteFlowAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteFlowAliasCommandOutput>;
+  deleteFlowAlias(
+    args: DeleteFlowAliasCommandInput,
+    cb: (err: any, data?: DeleteFlowAliasCommandOutput) => void
+  ): void;
+  deleteFlowAlias(
+    args: DeleteFlowAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFlowVersionCommand}
+   */
+  deleteFlowVersion(
+    args: DeleteFlowVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteFlowVersionCommandOutput>;
+  deleteFlowVersion(
+    args: DeleteFlowVersionCommandInput,
+    cb: (err: any, data?: DeleteFlowVersionCommandOutput) => void
+  ): void;
+  deleteFlowVersion(
+    args: DeleteFlowVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteFlowVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnowledgeBaseCommand}
+   */
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteKnowledgeBaseCommandOutput>;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnowledgeBaseDocumentsCommand}
+   */
+  deleteKnowledgeBaseDocuments(
+    args: DeleteKnowledgeBaseDocumentsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteKnowledgeBaseDocumentsCommandOutput>;
+  deleteKnowledgeBaseDocuments(
+    args: DeleteKnowledgeBaseDocumentsCommandInput,
+    cb: (err: any, data?: DeleteKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+  deleteKnowledgeBaseDocuments(
+    args: DeleteKnowledgeBaseDocumentsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePromptCommand}
+   */
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeletePromptCommandOutput>;
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    cb: (err: any, data?: DeletePromptCommandOutput) => void
+  ): void;
+  deletePrompt(
+    args: DeletePromptCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeletePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRetrievalInstructionCommand}
+   */
+  deleteRetrievalInstruction(
+    args: DeleteRetrievalInstructionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteRetrievalInstructionCommandOutput>;
+  deleteRetrievalInstruction(
+    args: DeleteRetrievalInstructionCommandInput,
+    cb: (err: any, data?: DeleteRetrievalInstructionCommandOutput) => void
+  ): void;
+  deleteRetrievalInstruction(
+    args: DeleteRetrievalInstructionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteRetrievalInstructionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVpcConfigurationCommand}
+   */
+  deleteVpcConfiguration(
+    args: DeleteVpcConfigurationCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DeleteVpcConfigurationCommandOutput>;
+  deleteVpcConfiguration(
+    args: DeleteVpcConfigurationCommandInput,
+    cb: (err: any, data?: DeleteVpcConfigurationCommandOutput) => void
+  ): void;
+  deleteVpcConfiguration(
+    args: DeleteVpcConfigurationCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DeleteVpcConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAgentCollaboratorCommand}
+   */
+  disassociateAgentCollaborator(
+    args: DisassociateAgentCollaboratorCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DisassociateAgentCollaboratorCommandOutput>;
+  disassociateAgentCollaborator(
+    args: DisassociateAgentCollaboratorCommandInput,
+    cb: (err: any, data?: DisassociateAgentCollaboratorCommandOutput) => void
+  ): void;
+  disassociateAgentCollaborator(
+    args: DisassociateAgentCollaboratorCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DisassociateAgentCollaboratorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAgentKnowledgeBaseCommand}
+   */
+  disassociateAgentKnowledgeBase(
+    args: DisassociateAgentKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<DisassociateAgentKnowledgeBaseCommandOutput>;
+  disassociateAgentKnowledgeBase(
+    args: DisassociateAgentKnowledgeBaseCommandInput,
+    cb: (err: any, data?: DisassociateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+  disassociateAgentKnowledgeBase(
+    args: DisassociateAgentKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: DisassociateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentCommand}
+   */
+  getAgent(
+    args: GetAgentCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentCommandOutput>;
+  getAgent(
+    args: GetAgentCommandInput,
+    cb: (err: any, data?: GetAgentCommandOutput) => void
+  ): void;
+  getAgent(
+    args: GetAgentCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentActionGroupCommand}
+   */
+  getAgentActionGroup(
+    args: GetAgentActionGroupCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentActionGroupCommandOutput>;
+  getAgentActionGroup(
+    args: GetAgentActionGroupCommandInput,
+    cb: (err: any, data?: GetAgentActionGroupCommandOutput) => void
+  ): void;
+  getAgentActionGroup(
+    args: GetAgentActionGroupCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentActionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentAliasCommand}
+   */
+  getAgentAlias(
+    args: GetAgentAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentAliasCommandOutput>;
+  getAgentAlias(
+    args: GetAgentAliasCommandInput,
+    cb: (err: any, data?: GetAgentAliasCommandOutput) => void
+  ): void;
+  getAgentAlias(
+    args: GetAgentAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentCollaboratorCommand}
+   */
+  getAgentCollaborator(
+    args: GetAgentCollaboratorCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentCollaboratorCommandOutput>;
+  getAgentCollaborator(
+    args: GetAgentCollaboratorCommandInput,
+    cb: (err: any, data?: GetAgentCollaboratorCommandOutput) => void
+  ): void;
+  getAgentCollaborator(
+    args: GetAgentCollaboratorCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentCollaboratorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentKnowledgeBaseCommand}
+   */
+  getAgentKnowledgeBase(
+    args: GetAgentKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentKnowledgeBaseCommandOutput>;
+  getAgentKnowledgeBase(
+    args: GetAgentKnowledgeBaseCommandInput,
+    cb: (err: any, data?: GetAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+  getAgentKnowledgeBase(
+    args: GetAgentKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentVersionCommand}
+   */
+  getAgentVersion(
+    args: GetAgentVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetAgentVersionCommandOutput>;
+  getAgentVersion(
+    args: GetAgentVersionCommandInput,
+    cb: (err: any, data?: GetAgentVersionCommandOutput) => void
+  ): void;
+  getAgentVersion(
+    args: GetAgentVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetAgentVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataSourceCommand}
+   */
+  getDataSource(
+    args: GetDataSourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetDataSourceCommandOutput>;
+  getDataSource(
+    args: GetDataSourceCommandInput,
+    cb: (err: any, data?: GetDataSourceCommandOutput) => void
+  ): void;
+  getDataSource(
+    args: GetDataSourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetDataSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFlowCommand}
+   */
+  getFlow(
+    args: GetFlowCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetFlowCommandOutput>;
+  getFlow(
+    args: GetFlowCommandInput,
+    cb: (err: any, data?: GetFlowCommandOutput) => void
+  ): void;
+  getFlow(
+    args: GetFlowCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFlowAliasCommand}
+   */
+  getFlowAlias(
+    args: GetFlowAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetFlowAliasCommandOutput>;
+  getFlowAlias(
+    args: GetFlowAliasCommandInput,
+    cb: (err: any, data?: GetFlowAliasCommandOutput) => void
+  ): void;
+  getFlowAlias(
+    args: GetFlowAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFlowVersionCommand}
+   */
+  getFlowVersion(
+    args: GetFlowVersionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetFlowVersionCommandOutput>;
+  getFlowVersion(
+    args: GetFlowVersionCommandInput,
+    cb: (err: any, data?: GetFlowVersionCommandOutput) => void
+  ): void;
+  getFlowVersion(
+    args: GetFlowVersionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetFlowVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngestionJobCommand}
+   */
+  getIngestionJob(
+    args: GetIngestionJobCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetIngestionJobCommandOutput>;
+  getIngestionJob(
+    args: GetIngestionJobCommandInput,
+    cb: (err: any, data?: GetIngestionJobCommandOutput) => void
+  ): void;
+  getIngestionJob(
+    args: GetIngestionJobCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetIngestionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKnowledgeBaseCommand}
+   */
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetKnowledgeBaseCommandOutput>;
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
+  ): void;
+  getKnowledgeBase(
+    args: GetKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKnowledgeBaseDocumentsCommand}
+   */
+  getKnowledgeBaseDocuments(
+    args: GetKnowledgeBaseDocumentsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetKnowledgeBaseDocumentsCommandOutput>;
+  getKnowledgeBaseDocuments(
+    args: GetKnowledgeBaseDocumentsCommandInput,
+    cb: (err: any, data?: GetKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+  getKnowledgeBaseDocuments(
+    args: GetKnowledgeBaseDocumentsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPromptCommand}
+   */
+  getPrompt(
+    args: GetPromptCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetPromptCommandOutput>;
+  getPrompt(
+    args: GetPromptCommandInput,
+    cb: (err: any, data?: GetPromptCommandOutput) => void
+  ): void;
+  getPrompt(
+    args: GetPromptCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetPromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRetrievalInstructionCommand}
+   */
+  getRetrievalInstruction(
+    args: GetRetrievalInstructionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetRetrievalInstructionCommandOutput>;
+  getRetrievalInstruction(
+    args: GetRetrievalInstructionCommandInput,
+    cb: (err: any, data?: GetRetrievalInstructionCommandOutput) => void
+  ): void;
+  getRetrievalInstruction(
+    args: GetRetrievalInstructionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetRetrievalInstructionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVpcConfigurationCommand}
+   */
+  getVpcConfiguration(
+    args: GetVpcConfigurationCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<GetVpcConfigurationCommandOutput>;
+  getVpcConfiguration(
+    args: GetVpcConfigurationCommandInput,
+    cb: (err: any, data?: GetVpcConfigurationCommandOutput) => void
+  ): void;
+  getVpcConfiguration(
+    args: GetVpcConfigurationCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: GetVpcConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link IngestKnowledgeBaseDocumentsCommand}
+   */
+  ingestKnowledgeBaseDocuments(
+    args: IngestKnowledgeBaseDocumentsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<IngestKnowledgeBaseDocumentsCommandOutput>;
+  ingestKnowledgeBaseDocuments(
+    args: IngestKnowledgeBaseDocumentsCommandInput,
+    cb: (err: any, data?: IngestKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+  ingestKnowledgeBaseDocuments(
+    args: IngestKnowledgeBaseDocumentsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: IngestKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentActionGroupsCommand}
+   */
+  listAgentActionGroups(
+    args: ListAgentActionGroupsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentActionGroupsCommandOutput>;
+  listAgentActionGroups(
+    args: ListAgentActionGroupsCommandInput,
+    cb: (err: any, data?: ListAgentActionGroupsCommandOutput) => void
+  ): void;
+  listAgentActionGroups(
+    args: ListAgentActionGroupsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentActionGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentAliasesCommand}
+   */
+  listAgentAliases(
+    args: ListAgentAliasesCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentAliasesCommandOutput>;
+  listAgentAliases(
+    args: ListAgentAliasesCommandInput,
+    cb: (err: any, data?: ListAgentAliasesCommandOutput) => void
+  ): void;
+  listAgentAliases(
+    args: ListAgentAliasesCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentAliasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentCollaboratorsCommand}
+   */
+  listAgentCollaborators(
+    args: ListAgentCollaboratorsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentCollaboratorsCommandOutput>;
+  listAgentCollaborators(
+    args: ListAgentCollaboratorsCommandInput,
+    cb: (err: any, data?: ListAgentCollaboratorsCommandOutput) => void
+  ): void;
+  listAgentCollaborators(
+    args: ListAgentCollaboratorsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentCollaboratorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentKnowledgeBasesCommand}
+   */
+  listAgentKnowledgeBases(
+    args: ListAgentKnowledgeBasesCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentKnowledgeBasesCommandOutput>;
+  listAgentKnowledgeBases(
+    args: ListAgentKnowledgeBasesCommandInput,
+    cb: (err: any, data?: ListAgentKnowledgeBasesCommandOutput) => void
+  ): void;
+  listAgentKnowledgeBases(
+    args: ListAgentKnowledgeBasesCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentKnowledgeBasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentsCommand}
+   */
+  listAgents(): Promise<ListAgentsCommandOutput>;
+  listAgents(
+    args: ListAgentsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentsCommandOutput>;
+  listAgents(
+    args: ListAgentsCommandInput,
+    cb: (err: any, data?: ListAgentsCommandOutput) => void
+  ): void;
+  listAgents(
+    args: ListAgentsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentVersionsCommand}
+   */
+  listAgentVersions(
+    args: ListAgentVersionsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListAgentVersionsCommandOutput>;
+  listAgentVersions(
+    args: ListAgentVersionsCommandInput,
+    cb: (err: any, data?: ListAgentVersionsCommandOutput) => void
+  ): void;
+  listAgentVersions(
+    args: ListAgentVersionsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListAgentVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataSourcesCommand}
+   */
+  listDataSources(
+    args: ListDataSourcesCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListDataSourcesCommandOutput>;
+  listDataSources(
+    args: ListDataSourcesCommandInput,
+    cb: (err: any, data?: ListDataSourcesCommandOutput) => void
+  ): void;
+  listDataSources(
+    args: ListDataSourcesCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListDataSourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowAliasesCommand}
+   */
+  listFlowAliases(
+    args: ListFlowAliasesCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListFlowAliasesCommandOutput>;
+  listFlowAliases(
+    args: ListFlowAliasesCommandInput,
+    cb: (err: any, data?: ListFlowAliasesCommandOutput) => void
+  ): void;
+  listFlowAliases(
+    args: ListFlowAliasesCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListFlowAliasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowsCommand}
+   */
+  listFlows(): Promise<ListFlowsCommandOutput>;
+  listFlows(
+    args: ListFlowsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListFlowsCommandOutput>;
+  listFlows(
+    args: ListFlowsCommandInput,
+    cb: (err: any, data?: ListFlowsCommandOutput) => void
+  ): void;
+  listFlows(
+    args: ListFlowsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListFlowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowVersionsCommand}
+   */
+  listFlowVersions(
+    args: ListFlowVersionsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListFlowVersionsCommandOutput>;
+  listFlowVersions(
+    args: ListFlowVersionsCommandInput,
+    cb: (err: any, data?: ListFlowVersionsCommandOutput) => void
+  ): void;
+  listFlowVersions(
+    args: ListFlowVersionsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListFlowVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngestionJobsCommand}
+   */
+  listIngestionJobs(
+    args: ListIngestionJobsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListIngestionJobsCommandOutput>;
+  listIngestionJobs(
+    args: ListIngestionJobsCommandInput,
+    cb: (err: any, data?: ListIngestionJobsCommandOutput) => void
+  ): void;
+  listIngestionJobs(
+    args: ListIngestionJobsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListIngestionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKnowledgeBaseDocumentsCommand}
+   */
+  listKnowledgeBaseDocuments(
+    args: ListKnowledgeBaseDocumentsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListKnowledgeBaseDocumentsCommandOutput>;
+  listKnowledgeBaseDocuments(
+    args: ListKnowledgeBaseDocumentsCommandInput,
+    cb: (err: any, data?: ListKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+  listKnowledgeBaseDocuments(
+    args: ListKnowledgeBaseDocumentsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListKnowledgeBaseDocumentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   */
+  listKnowledgeBases(): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPromptsCommand}
+   */
+  listPrompts(): Promise<ListPromptsCommandOutput>;
+  listPrompts(
+    args: ListPromptsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListPromptsCommandOutput>;
+  listPrompts(
+    args: ListPromptsCommandInput,
+    cb: (err: any, data?: ListPromptsCommandOutput) => void
+  ): void;
+  listPrompts(
+    args: ListPromptsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListPromptsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRetrievalInstructionsCommand}
+   */
+  listRetrievalInstructions(): Promise<ListRetrievalInstructionsCommandOutput>;
+  listRetrievalInstructions(
+    args: ListRetrievalInstructionsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListRetrievalInstructionsCommandOutput>;
+  listRetrievalInstructions(
+    args: ListRetrievalInstructionsCommandInput,
+    cb: (err: any, data?: ListRetrievalInstructionsCommandOutput) => void
+  ): void;
+  listRetrievalInstructions(
+    args: ListRetrievalInstructionsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListRetrievalInstructionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRetrievalInstructionVersionsCommand}
+   */
+  listRetrievalInstructionVersions(
+    args: ListRetrievalInstructionVersionsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListRetrievalInstructionVersionsCommandOutput>;
+  listRetrievalInstructionVersions(
+    args: ListRetrievalInstructionVersionsCommandInput,
+    cb: (err: any, data?: ListRetrievalInstructionVersionsCommandOutput) => void
+  ): void;
+  listRetrievalInstructionVersions(
+    args: ListRetrievalInstructionVersionsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListRetrievalInstructionVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVpcConfigurationsCommand}
+   */
+  listVpcConfigurations(
+    args: ListVpcConfigurationsCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ListVpcConfigurationsCommandOutput>;
+  listVpcConfigurations(
+    args: ListVpcConfigurationsCommandInput,
+    cb: (err: any, data?: ListVpcConfigurationsCommandOutput) => void
+  ): void;
+  listVpcConfigurations(
+    args: ListVpcConfigurationsCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ListVpcConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PrepareAgentCommand}
+   */
+  prepareAgent(
+    args: PrepareAgentCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<PrepareAgentCommandOutput>;
+  prepareAgent(
+    args: PrepareAgentCommandInput,
+    cb: (err: any, data?: PrepareAgentCommandOutput) => void
+  ): void;
+  prepareAgent(
+    args: PrepareAgentCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: PrepareAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PrepareFlowCommand}
+   */
+  prepareFlow(
+    args: PrepareFlowCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<PrepareFlowCommandOutput>;
+  prepareFlow(
+    args: PrepareFlowCommandInput,
+    cb: (err: any, data?: PrepareFlowCommandOutput) => void
+  ): void;
+  prepareFlow(
+    args: PrepareFlowCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: PrepareFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartIngestionJobCommand}
+   */
+  startIngestionJob(
+    args: StartIngestionJobCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<StartIngestionJobCommandOutput>;
+  startIngestionJob(
+    args: StartIngestionJobCommandInput,
+    cb: (err: any, data?: StartIngestionJobCommandOutput) => void
+  ): void;
+  startIngestionJob(
+    args: StartIngestionJobCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: StartIngestionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopIngestionJobCommand}
+   */
+  stopIngestionJob(
+    args: StopIngestionJobCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<StopIngestionJobCommandOutput>;
+  stopIngestionJob(
+    args: StopIngestionJobCommandInput,
+    cb: (err: any, data?: StopIngestionJobCommandOutput) => void
+  ): void;
+  stopIngestionJob(
+    args: StopIngestionJobCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: StopIngestionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentCommand}
+   */
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateAgentCommandOutput>;
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    cb: (err: any, data?: UpdateAgentCommandOutput) => void
+  ): void;
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentActionGroupCommand}
+   */
+  updateAgentActionGroup(
+    args: UpdateAgentActionGroupCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateAgentActionGroupCommandOutput>;
+  updateAgentActionGroup(
+    args: UpdateAgentActionGroupCommandInput,
+    cb: (err: any, data?: UpdateAgentActionGroupCommandOutput) => void
+  ): void;
+  updateAgentActionGroup(
+    args: UpdateAgentActionGroupCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateAgentActionGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentAliasCommand}
+   */
+  updateAgentAlias(
+    args: UpdateAgentAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateAgentAliasCommandOutput>;
+  updateAgentAlias(
+    args: UpdateAgentAliasCommandInput,
+    cb: (err: any, data?: UpdateAgentAliasCommandOutput) => void
+  ): void;
+  updateAgentAlias(
+    args: UpdateAgentAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateAgentAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentCollaboratorCommand}
+   */
+  updateAgentCollaborator(
+    args: UpdateAgentCollaboratorCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateAgentCollaboratorCommandOutput>;
+  updateAgentCollaborator(
+    args: UpdateAgentCollaboratorCommandInput,
+    cb: (err: any, data?: UpdateAgentCollaboratorCommandOutput) => void
+  ): void;
+  updateAgentCollaborator(
+    args: UpdateAgentCollaboratorCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateAgentCollaboratorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentKnowledgeBaseCommand}
+   */
+  updateAgentKnowledgeBase(
+    args: UpdateAgentKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateAgentKnowledgeBaseCommandOutput>;
+  updateAgentKnowledgeBase(
+    args: UpdateAgentKnowledgeBaseCommandInput,
+    cb: (err: any, data?: UpdateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+  updateAgentKnowledgeBase(
+    args: UpdateAgentKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateAgentKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataSourceCommand}
+   */
+  updateDataSource(
+    args: UpdateDataSourceCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateDataSourceCommandOutput>;
+  updateDataSource(
+    args: UpdateDataSourceCommandInput,
+    cb: (err: any, data?: UpdateDataSourceCommandOutput) => void
+  ): void;
+  updateDataSource(
+    args: UpdateDataSourceCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateDataSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFlowCommand}
+   */
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateFlowCommandOutput>;
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    cb: (err: any, data?: UpdateFlowCommandOutput) => void
+  ): void;
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFlowAliasCommand}
+   */
+  updateFlowAlias(
+    args: UpdateFlowAliasCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateFlowAliasCommandOutput>;
+  updateFlowAlias(
+    args: UpdateFlowAliasCommandInput,
+    cb: (err: any, data?: UpdateFlowAliasCommandOutput) => void
+  ): void;
+  updateFlowAlias(
+    args: UpdateFlowAliasCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateFlowAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateKnowledgeBaseCommand}
+   */
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateKnowledgeBaseCommandOutput>;
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    cb: (err: any, data?: UpdateKnowledgeBaseCommandOutput) => void
+  ): void;
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePromptCommand}
+   */
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdatePromptCommandOutput>;
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    cb: (err: any, data?: UpdatePromptCommandOutput) => void
+  ): void;
+  updatePrompt(
+    args: UpdatePromptCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdatePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRetrievalInstructionCommand}
+   */
+  updateRetrievalInstruction(
+    args: UpdateRetrievalInstructionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<UpdateRetrievalInstructionCommandOutput>;
+  updateRetrievalInstruction(
+    args: UpdateRetrievalInstructionCommandInput,
+    cb: (err: any, data?: UpdateRetrievalInstructionCommandOutput) => void
+  ): void;
+  updateRetrievalInstruction(
+    args: UpdateRetrievalInstructionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: UpdateRetrievalInstructionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ValidateFlowDefinitionCommand}
+   */
+  validateFlowDefinition(
+    args: ValidateFlowDefinitionCommandInput,
+    options?: BedrockAgentRequestOptions
+  ): Promise<ValidateFlowDefinitionCommandOutput>;
+  validateFlowDefinition(
+    args: ValidateFlowDefinitionCommandInput,
+    cb: (err: any, data?: ValidateFlowDefinitionCommandOutput) => void
+  ): void;
+  validateFlowDefinition(
+    args: ValidateFlowDefinitionCommandInput,
+    options: BedrockAgentRequestOptions,
+    cb: (err: any, data?: ValidateFlowDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentActionGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentActionGroupsCommandOutput}.
+   */
+  paginateListAgentActionGroups(
+    args: ListAgentActionGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentActionGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentAliasesCommandOutput}.
+   */
+  paginateListAgentAliases(
+    args: ListAgentAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListAgentCollaboratorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentCollaboratorsCommandOutput}.
+   */
+  paginateListAgentCollaborators(
+    args: ListAgentCollaboratorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentCollaboratorsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentKnowledgeBasesCommandOutput}.
+   */
+  paginateListAgentKnowledgeBases(
+    args: ListAgentKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link ListAgentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentsCommandOutput}.
+   */
+  paginateListAgents(
+    args?: ListAgentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentVersionsCommandOutput}.
+   */
+  paginateListAgentVersions(
+    args: ListAgentVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSourcesCommandOutput}.
+   */
+  paginateListDataSources(
+    args: ListDataSourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSourcesCommandOutput>;
+
+  /**
+   * @see {@link ListFlowAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowAliasesCommandOutput}.
+   */
+  paginateListFlowAliases(
+    args: ListFlowAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowsCommandOutput}.
+   */
+  paginateListFlows(
+    args?: ListFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowVersionsCommandOutput}.
+   */
+  paginateListFlowVersions(
+    args: ListFlowVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListIngestionJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngestionJobsCommandOutput}.
+   */
+  paginateListIngestionJobs(
+    args: ListIngestionJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngestionJobsCommandOutput>;
+
+  /**
+   * @see {@link ListKnowledgeBaseDocumentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKnowledgeBaseDocumentsCommandOutput}.
+   */
+  paginateListKnowledgeBaseDocuments(
+    args: ListKnowledgeBaseDocumentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKnowledgeBaseDocumentsCommandOutput>;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKnowledgeBasesCommandOutput}.
+   */
+  paginateListKnowledgeBases(
+    args?: ListKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link ListPromptsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPromptsCommandOutput}.
+   */
+  paginateListPrompts(
+    args?: ListPromptsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPromptsCommandOutput>;
+
+  /**
+   * @see {@link ListRetrievalInstructionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRetrievalInstructionsCommandOutput}.
+   */
+  paginateListRetrievalInstructions(
+    args?: ListRetrievalInstructionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRetrievalInstructionsCommandOutput>;
+
+  /**
+   * @see {@link ListRetrievalInstructionVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRetrievalInstructionVersionsCommandOutput}.
+   */
+  paginateListRetrievalInstructionVersions(
+    args: ListRetrievalInstructionVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRetrievalInstructionVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListVpcConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVpcConfigurationsCommandOutput}.
+   */
+  paginateListVpcConfigurations(
+    args: ListVpcConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVpcConfigurationsCommandOutput>;
+}
+
+/**
+ * <note> <p>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html">Amazon Bedrock Agents Classic availability change</a>.</p> </note> <p>Describes the API operations for creating and managing Amazon Bedrock agents.</p>
+ * @public
+ */
+export class BedrockAgent extends BedrockAgentClient implements BedrockAgent {}
+createAggregatedClient(commands, BedrockAgent, { paginators });

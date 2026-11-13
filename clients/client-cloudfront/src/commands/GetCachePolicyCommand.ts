@@ -1,108 +1,123 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { GetCachePolicyRequest, GetCachePolicyResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetCachePolicyCommand,
-  serializeAws_restXmlGetCachePolicyCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCachePolicyRequest, GetCachePolicyResult } from "../models/models_0";
+import { GetCachePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCachePolicyCommand}.
+ */
 export interface GetCachePolicyCommandInput extends GetCachePolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCachePolicyCommand}.
+ */
 export interface GetCachePolicyCommandOutput extends GetCachePolicyResult, __MetadataBearer {}
 
 /**
- * <p>Gets a cache policy, including the following metadata:</p>
- * 		       <ul>
- *             <li>
- * 				           <p>The policy’s identifier.</p>
- * 			         </li>
- *             <li>
- * 				           <p>The date and time when the policy was last modified.</p>
- * 			         </li>
- *          </ul>
- * 		       <p>To get a cache policy, you must provide the policy’s identifier. If the cache policy is
- * 			attached to a distribution’s cache behavior, you can get the policy’s identifier using
- * 			<code>ListDistributions</code> or <code>GetDistribution</code>. If the cache policy is
- * 			not attached to a cache behavior, you can get the identifier using
- * 			<code>ListCachePolicies</code>.</p>
+ * <p>Gets a cache policy, including the following metadata:</p> <ul> <li> <p>The policy's identifier.</p> </li> <li> <p>The date and time when the policy was last modified.</p> </li> </ul> <p>To get a cache policy, you must provide the policy's identifier. If the cache policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the cache policy is not attached to a cache behavior, you can get the identifier using <code>ListCachePolicies</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, GetCachePolicyCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, GetCachePolicyCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // GetCachePolicyRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new GetCachePolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetCachePolicyResult
+ * //   CachePolicy: { // CachePolicy
+ * //     Id: "STRING_VALUE", // required
+ * //     LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //     CachePolicyConfig: { // CachePolicyConfig
+ * //       Comment: "STRING_VALUE",
+ * //       Name: "STRING_VALUE", // required
+ * //       DefaultTTL: Number("long"),
+ * //       MaxTTL: Number("long"),
+ * //       MinTTL: Number("long"), // required
+ * //       ParametersInCacheKeyAndForwardedToOrigin: { // ParametersInCacheKeyAndForwardedToOrigin
+ * //         EnableAcceptEncodingGzip: true || false, // required
+ * //         EnableAcceptEncodingBrotli: true || false,
+ * //         HeadersConfig: { // CachePolicyHeadersConfig
+ * //           HeaderBehavior: "none" || "whitelist", // required
+ * //           Headers: { // Headers
+ * //             Quantity: Number("int"), // required
+ * //             Items: [ // HeaderList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         CookiesConfig: { // CachePolicyCookiesConfig
+ * //           CookieBehavior: "none" || "whitelist" || "allExcept" || "all", // required
+ * //           Cookies: { // CookieNames
+ * //             Quantity: Number("int"), // required
+ * //             Items: [ // CookieNameList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         QueryStringsConfig: { // CachePolicyQueryStringsConfig
+ * //           QueryStringBehavior: "none" || "whitelist" || "allExcept" || "all", // required
+ * //           QueryStrings: { // QueryStringNames
+ * //             Quantity: Number("int"), // required
+ * //             Items: [ // QueryStringNamesList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCachePolicyCommandInput - {@link GetCachePolicyCommandInput}
+ * @returns {@link GetCachePolicyCommandOutput}
  * @see {@link GetCachePolicyCommandInput} for command's `input` shape.
  * @see {@link GetCachePolicyCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link NoSuchCachePolicy} (client fault)
+ *  <p>The cache policy does not exist.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class GetCachePolicyCommand extends $Command<
-  GetCachePolicyCommandInput,
-  GetCachePolicyCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCachePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCachePolicyCommandInput, GetCachePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "GetCachePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCachePolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCachePolicyResult.filterSensitiveLog,
+export class GetCachePolicyCommand extends command<GetCachePolicyCommandInput, GetCachePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCachePolicy",
+  GetCachePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCachePolicyRequest;
+      output: GetCachePolicyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCachePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetCachePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCachePolicyCommandOutput> {
-    return deserializeAws_restXmlGetCachePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCachePolicyCommandInput;
+      output: GetCachePolicyCommandOutput;
+    };
+  };
 }

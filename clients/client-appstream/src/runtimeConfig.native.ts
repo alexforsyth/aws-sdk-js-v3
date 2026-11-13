@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { AppStreamClientConfig } from "./AppStreamClient";
+// smithy-typescript generated code
+import type { AppStreamClientConfig } from "./AppStreamClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: AppStreamClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

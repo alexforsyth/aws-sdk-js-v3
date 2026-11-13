@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { GetIntegrationRequest, GetIntegrationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetIntegrationCommand,
-  serializeAws_restJson1GetIntegrationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIntegrationRequest, GetIntegrationResponse } from "../models/models_0";
+import { GetIntegration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIntegrationCommand}.
+ */
 export interface GetIntegrationCommandInput extends GetIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIntegrationCommand}.
+ */
 export interface GetIntegrationCommandOutput extends GetIntegrationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface GetIntegrationCommandOutput extends GetIntegrationResponse, __M
  * ```javascript
  * import { CustomerProfilesClient, GetIntegrationCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, GetIntegrationCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // GetIntegrationRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   Uri: "STRING_VALUE", // required
+ * };
  * const command = new GetIntegrationCommand(input);
  * const response = await client.send(command);
+ * // { // GetIntegrationResponse
+ * //   DomainName: "STRING_VALUE", // required
+ * //   Uri: "STRING_VALUE", // required
+ * //   ObjectTypeName: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"), // required
+ * //   LastUpdatedAt: new Date("TIMESTAMP"), // required
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   ObjectTypeNames: { // ObjectTypeNames
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   WorkflowId: "STRING_VALUE",
+ * //   IsUnstructured: true || false,
+ * //   RoleArn: "STRING_VALUE",
+ * //   EventTriggerNames: [ // EventTriggerNames
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Scope: "PROFILE" || "DOMAIN",
+ * // };
+ *
  * ```
  *
+ * @param GetIntegrationCommandInput - {@link GetIntegrationCommandInput}
+ * @returns {@link GetIntegrationCommandOutput}
  * @see {@link GetIntegrationCommandInput} for command's `input` shape.
  * @see {@link GetIntegrationCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class GetIntegrationCommand extends $Command<
-  GetIntegrationCommandInput,
-  GetIntegrationCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIntegrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIntegrationCommandInput, GetIntegrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "GetIntegrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIntegrationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIntegrationResponse.filterSensitiveLog,
+export class GetIntegrationCommand extends command<GetIntegrationCommandInput, GetIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIntegration",
+  GetIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIntegrationRequest;
+      output: GetIntegrationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIntegrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIntegrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIntegrationCommandOutput> {
-    return deserializeAws_restJson1GetIntegrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIntegrationCommandInput;
+      output: GetIntegrationCommandOutput;
+    };
+  };
 }

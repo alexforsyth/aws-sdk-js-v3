@@ -1,37 +1,38 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetGroupQueryInput, GetGroupQueryOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetGroupQueryCommand,
-  serializeAws_restJson1GetGroupQueryCommand,
-} from "../protocols/Aws_restJson1";
-import { ResourceGroupsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResourceGroupsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetGroupQueryInput, GetGroupQueryOutput } from "../models/models_0";
+import { GetGroupQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetGroupQueryCommand}.
+ */
 export interface GetGroupQueryCommandInput extends GetGroupQueryInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetGroupQueryCommand}.
+ */
 export interface GetGroupQueryCommandOutput extends GetGroupQueryOutput, __MetadataBearer {}
 
 /**
  * <p>Retrieves the resource query associated with the specified resource group. For more
  *             information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create
  *                 a tag-based group in Resource Groups</a>.</p>
- *         <p>
+ *          <p>
  *             <b>Minimum permissions</b>
  *          </p>
  *          <p>To run this command, you must have the following permissions:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <code>resource-groups:GetGroupQuery</code>
  *                </p>
  *             </li>
@@ -41,68 +42,73 @@ export interface GetGroupQueryCommandOutput extends GetGroupQueryOutput, __Metad
  * ```javascript
  * import { ResourceGroupsClient, GetGroupQueryCommand } from "@aws-sdk/client-resource-groups"; // ES Modules import
  * // const { ResourceGroupsClient, GetGroupQueryCommand } = require("@aws-sdk/client-resource-groups"); // CommonJS import
+ * // import type { ResourceGroupsClientConfig } from "@aws-sdk/client-resource-groups";
+ * const config = {}; // type is ResourceGroupsClientConfig
  * const client = new ResourceGroupsClient(config);
+ * const input = { // GetGroupQueryInput
+ *   GroupName: "STRING_VALUE",
+ *   Group: "STRING_VALUE",
+ * };
  * const command = new GetGroupQueryCommand(input);
  * const response = await client.send(command);
+ * // { // GetGroupQueryOutput
+ * //   GroupQuery: { // GroupQuery
+ * //     GroupName: "STRING_VALUE", // required
+ * //     ResourceQuery: { // ResourceQuery
+ * //       Type: "TAG_FILTERS_1_0" || "CLOUDFORMATION_STACK_1_0", // required
+ * //       Query: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetGroupQueryCommandInput - {@link GetGroupQueryCommandInput}
+ * @returns {@link GetGroupQueryCommandOutput}
  * @see {@link GetGroupQueryCommandInput} for command's `input` shape.
  * @see {@link GetGroupQueryCommandOutput} for command's `response` shape.
- * @see {@link ResourceGroupsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ResourceGroupsClientResolvedConfig | config} for ResourceGroupsClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request includes one or more parameters that violate validation rules.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The caller isn't authorized to make the request. Check permissions.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal error occurred while processing the request. Try again later.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The request uses an HTTP method that isn't allowed for the specified resource.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the specified resources don't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>You've exceeded throttling limits by making too many requests in a period of
+ *             time.</p>
+ *
+ * @throws {@link ResourceGroupsServiceException}
+ * <p>Base exception class for all service exceptions from ResourceGroups service.</p>
+ *
+ *
+ * @public
  */
-export class GetGroupQueryCommand extends $Command<
-  GetGroupQueryCommandInput,
-  GetGroupQueryCommandOutput,
-  ResourceGroupsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetGroupQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResourceGroupsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetGroupQueryCommandInput, GetGroupQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResourceGroupsClient";
-    const commandName = "GetGroupQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetGroupQueryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetGroupQueryOutput.filterSensitiveLog,
+export class GetGroupQueryCommand extends command<GetGroupQueryCommandInput, GetGroupQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetGroupQuery",
+  GetGroupQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGroupQueryInput;
+      output: GetGroupQueryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetGroupQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetGroupQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetGroupQueryCommandOutput> {
-    return deserializeAws_restJson1GetGroupQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetGroupQueryCommandInput;
+      output: GetGroupQueryCommandOutput;
+    };
+  };
 }

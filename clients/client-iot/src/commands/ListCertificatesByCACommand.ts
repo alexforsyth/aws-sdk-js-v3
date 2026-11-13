@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListCertificatesByCARequest, ListCertificatesByCAResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListCertificatesByCACommand,
-  serializeAws_restJson1ListCertificatesByCACommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCertificatesByCARequest, ListCertificatesByCAResponse } from "../models/models_1";
+import { ListCertificatesByCA$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCertificatesByCACommand}.
+ */
 export interface ListCertificatesByCACommandInput extends ListCertificatesByCARequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCertificatesByCACommand}.
+ */
 export interface ListCertificatesByCACommandOutput extends ListCertificatesByCAResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,74 @@ export interface ListCertificatesByCACommandOutput extends ListCertificatesByCAR
  * ```javascript
  * import { IoTClient, ListCertificatesByCACommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListCertificatesByCACommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListCertificatesByCARequest
+ *   caCertificateId: "STRING_VALUE", // required
+ *   pageSize: Number("int"),
+ *   marker: "STRING_VALUE",
+ *   ascendingOrder: true || false,
+ * };
  * const command = new ListCertificatesByCACommand(input);
  * const response = await client.send(command);
+ * // { // ListCertificatesByCAResponse
+ * //   certificates: [ // Certificates
+ * //     { // Certificate
+ * //       certificateArn: "STRING_VALUE",
+ * //       certificateId: "STRING_VALUE",
+ * //       status: "ACTIVE" || "INACTIVE" || "REVOKED" || "PENDING_TRANSFER" || "REGISTER_INACTIVE" || "PENDING_ACTIVATION",
+ * //       certificateMode: "DEFAULT" || "SNI_ONLY",
+ * //       creationDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCertificatesByCACommandInput - {@link ListCertificatesByCACommandInput}
+ * @returns {@link ListCertificatesByCACommandOutput}
  * @see {@link ListCertificatesByCACommandInput} for command's `input` shape.
  * @see {@link ListCertificatesByCACommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListCertificatesByCACommand extends $Command<
-  ListCertificatesByCACommandInput,
-  ListCertificatesByCACommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCertificatesByCACommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCertificatesByCACommandInput, ListCertificatesByCACommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListCertificatesByCACommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCertificatesByCARequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListCertificatesByCAResponse.filterSensitiveLog,
+export class ListCertificatesByCACommand extends command<ListCertificatesByCACommandInput, ListCertificatesByCACommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCertificatesByCA",
+  ListCertificatesByCA$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCertificatesByCARequest;
+      output: ListCertificatesByCAResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCertificatesByCACommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListCertificatesByCACommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCertificatesByCACommandOutput> {
-    return deserializeAws_restJson1ListCertificatesByCACommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCertificatesByCACommandInput;
+      output: ListCertificatesByCACommandOutput;
+    };
+  };
 }

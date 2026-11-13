@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CancelArchivalInput, CancelArchivalOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CancelArchivalCommand,
-  serializeAws_json1_1CancelArchivalCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelArchivalInput, CancelArchivalOutput } from "../models/models_0";
+import { CancelArchival$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelArchivalCommand}.
+ */
 export interface CancelArchivalCommandInput extends CancelArchivalInput {}
+/**
+ * @public
+ *
+ * The output of {@link CancelArchivalCommand}.
+ */
 export interface CancelArchivalCommandOutput extends CancelArchivalOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,72 @@ export interface CancelArchivalCommandOutput extends CancelArchivalOutput, __Met
  * ```javascript
  * import { StorageGatewayClient, CancelArchivalCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, CancelArchivalCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // CancelArchivalInput
+ *   GatewayARN: "STRING_VALUE", // required
+ *   TapeARN: "STRING_VALUE", // required
+ * };
  * const command = new CancelArchivalCommand(input);
  * const response = await client.send(command);
+ * // { // CancelArchivalOutput
+ * //   TapeARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CancelArchivalCommandInput - {@link CancelArchivalCommandInput}
+ * @returns {@link CancelArchivalCommandOutput}
  * @see {@link CancelArchivalCommandInput} for command's `input` shape.
  * @see {@link CancelArchivalCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To cancel virtual tape archiving
+ * ```javascript
+ * // Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"
+ * };
+ * const command = new CancelArchivalCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CancelArchivalCommand extends $Command<
-  CancelArchivalCommandInput,
-  CancelArchivalCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelArchivalCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelArchivalCommandInput, CancelArchivalCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "CancelArchivalCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelArchivalInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelArchivalOutput.filterSensitiveLog,
+export class CancelArchivalCommand extends command<CancelArchivalCommandInput, CancelArchivalCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelArchival",
+  CancelArchival$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelArchivalInput;
+      output: CancelArchivalOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelArchivalCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CancelArchivalCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelArchivalCommandOutput> {
-    return deserializeAws_json1_1CancelArchivalCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelArchivalCommandInput;
+      output: CancelArchivalCommandOutput;
+    };
+  };
 }

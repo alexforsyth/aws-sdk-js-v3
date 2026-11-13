@@ -1,16 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeAssetCommand, DescribeAssetCommandInput } from "../commands/DescribeAssetCommand";
-import { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import {
+  type DescribeAssetCommandInput,
+  type DescribeAssetCommandOutput,
+  DescribeAssetCommand,
+} from "../commands/DescribeAssetCommand";
+import type { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import type { ResourceNotFoundException } from "../models/errors";
+import type { IoTSiteWiseServiceException } from "../models/IoTSiteWiseServiceException";
 
-const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetCommandInput): Promise<WaiterResult<DescribeAssetCommandOutput | IoTSiteWiseServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeAssetCommand(input));
+    let result: DescribeAssetCommandOutput & any = await client.send(new DescribeAssetCommand(input));
     reason = result;
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -23,7 +36,7 @@ const checkState = async (client: IoTSiteWiseClient, input: DescribeAssetCommand
 export const waitForAssetNotExists = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribeAssetCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAssetCommandOutput | IoTSiteWiseServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -35,8 +48,8 @@ export const waitForAssetNotExists = async (
 export const waitUntilAssetNotExists = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribeAssetCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

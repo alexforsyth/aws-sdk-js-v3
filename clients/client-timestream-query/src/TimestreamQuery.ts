@@ -1,121 +1,417 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
-import { CancelQueryCommand, CancelQueryCommandInput, CancelQueryCommandOutput } from "./commands/CancelQueryCommand";
 import {
+  type CancelQueryCommandInput,
+  type CancelQueryCommandOutput,
+  CancelQueryCommand,
+} from "./commands/CancelQueryCommand";
+import {
+  type CreateScheduledQueryCommandInput,
+  type CreateScheduledQueryCommandOutput,
+  CreateScheduledQueryCommand,
+} from "./commands/CreateScheduledQueryCommand";
+import {
+  type DeleteScheduledQueryCommandInput,
+  type DeleteScheduledQueryCommandOutput,
+  DeleteScheduledQueryCommand,
+} from "./commands/DeleteScheduledQueryCommand";
+import {
+  type DescribeAccountSettingsCommandInput,
+  type DescribeAccountSettingsCommandOutput,
+  DescribeAccountSettingsCommand,
+} from "./commands/DescribeAccountSettingsCommand";
+import {
+  type DescribeEndpointsCommandInput,
+  type DescribeEndpointsCommandOutput,
   DescribeEndpointsCommand,
-  DescribeEndpointsCommandInput,
-  DescribeEndpointsCommandOutput,
 } from "./commands/DescribeEndpointsCommand";
-import { QueryCommand, QueryCommandInput, QueryCommandOutput } from "./commands/QueryCommand";
+import {
+  type DescribeScheduledQueryCommandInput,
+  type DescribeScheduledQueryCommandOutput,
+  DescribeScheduledQueryCommand,
+} from "./commands/DescribeScheduledQueryCommand";
+import {
+  type ExecuteScheduledQueryCommandInput,
+  type ExecuteScheduledQueryCommandOutput,
+  ExecuteScheduledQueryCommand,
+} from "./commands/ExecuteScheduledQueryCommand";
+import {
+  type ListScheduledQueriesCommandInput,
+  type ListScheduledQueriesCommandOutput,
+  ListScheduledQueriesCommand,
+} from "./commands/ListScheduledQueriesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PrepareQueryCommandInput,
+  type PrepareQueryCommandOutput,
+  PrepareQueryCommand,
+} from "./commands/PrepareQueryCommand";
+import { type QueryCommandInput, type QueryCommandOutput, QueryCommand } from "./commands/QueryCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAccountSettingsCommandInput,
+  type UpdateAccountSettingsCommandOutput,
+  UpdateAccountSettingsCommand,
+} from "./commands/UpdateAccountSettingsCommand";
+import {
+  type UpdateScheduledQueryCommandInput,
+  type UpdateScheduledQueryCommandOutput,
+  UpdateScheduledQueryCommand,
+} from "./commands/UpdateScheduledQueryCommand";
+import { paginateListScheduledQueries } from "./pagination/ListScheduledQueriesPaginator";
+import { paginateListTagsForResource } from "./pagination/ListTagsForResourcePaginator";
+import { paginateQuery } from "./pagination/QueryPaginator";
 import { TimestreamQueryClient } from "./TimestreamQueryClient";
 
+const commands = {
+  CancelQueryCommand,
+  CreateScheduledQueryCommand,
+  DeleteScheduledQueryCommand,
+  DescribeAccountSettingsCommand,
+  DescribeEndpointsCommand,
+  DescribeScheduledQueryCommand,
+  ExecuteScheduledQueryCommand,
+  ListScheduledQueriesCommand,
+  ListTagsForResourceCommand,
+  PrepareQueryCommand,
+  QueryCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAccountSettingsCommand,
+  UpdateScheduledQueryCommand,
+};
+const paginators = {
+  paginateListScheduledQueries,
+  paginateListTagsForResource,
+  paginateQuery,
+};
+
 /**
- * <p>
- *
- *         </p>
+ * @public
  */
-export class TimestreamQuery extends TimestreamQueryClient {
+export interface TimestreamQueryRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface TimestreamQuery {
   /**
-   * <p>
-   *         Cancels a query that has been issued. Cancellation is guaranteed only if the query has not
-   *         completed execution before the cancellation request was issued. Because cancellation is an idempotent operation,
-   *         subsequent cancellation requests will return a <code>CancellationMessage</code>, indicating that the query has already been canceled.
-   *     </p>
+   * @see {@link CancelQueryCommand}
    */
-  public cancelQuery(args: CancelQueryCommandInput, options?: __HttpHandlerOptions): Promise<CancelQueryCommandOutput>;
-  public cancelQuery(args: CancelQueryCommandInput, cb: (err: any, data?: CancelQueryCommandOutput) => void): void;
-  public cancelQuery(
+  cancelQuery(
     args: CancelQueryCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<CancelQueryCommandOutput>;
+  cancelQuery(
+    args: CancelQueryCommandInput,
     cb: (err: any, data?: CancelQueryCommandOutput) => void
   ): void;
-  public cancelQuery(
+  cancelQuery(
     args: CancelQueryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelQueryCommandOutput) => void),
-    cb?: (err: any, data?: CancelQueryCommandOutput) => void
-  ): Promise<CancelQueryCommandOutput> | void {
-    const command = new CancelQueryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: CancelQueryCommandOutput) => void
+  ): void;
 
   /**
-   * <p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against.
-   *             This API is available through both Write and Query.</p>
-   *         <p>Because Timestream’s SDKs are designed to transparently work with the service’s architecture,
-   *             including the management and mapping of the service endpoints,
-   *             <i>it is not recommended that you use this API unless</i>:</p>
-   *         <ul>
-   *             <li>
-   *                <p>Your application uses a programming language that does not yet have SDK support</p>
-   *             </li>
-   *             <li>
-   *                <p>You require better control over the client-side implementation</p>
-   *             </li>
-   *          </ul>
-   *         <p>For detailed information on how to use DescribeEndpoints,
-   *             see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html">The Endpoint Discovery Pattern and REST APIs</a>.</p>
+   * @see {@link CreateScheduledQueryCommand}
    */
-  public describeEndpoints(
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<CreateScheduledQueryCommandOutput>;
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    cb: (err: any, data?: CreateScheduledQueryCommandOutput) => void
+  ): void;
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: CreateScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteScheduledQueryCommand}
+   */
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<DeleteScheduledQueryCommandOutput>;
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    cb: (err: any, data?: DeleteScheduledQueryCommandOutput) => void
+  ): void;
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: DeleteScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountSettingsCommand}
+   */
+  describeAccountSettings(): Promise<DescribeAccountSettingsCommandOutput>;
+  describeAccountSettings(
+    args: DescribeAccountSettingsCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<DescribeAccountSettingsCommandOutput>;
+  describeAccountSettings(
+    args: DescribeAccountSettingsCommandInput,
+    cb: (err: any, data?: DescribeAccountSettingsCommandOutput) => void
+  ): void;
+  describeAccountSettings(
+    args: DescribeAccountSettingsCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: DescribeAccountSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEndpointsCommand}
+   */
+  describeEndpoints(): Promise<DescribeEndpointsCommandOutput>;
+  describeEndpoints(
     args: DescribeEndpointsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TimestreamQueryRequestOptions
   ): Promise<DescribeEndpointsCommandOutput>;
-  public describeEndpoints(
+  describeEndpoints(
     args: DescribeEndpointsCommandInput,
     cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
   ): void;
-  public describeEndpoints(
+  describeEndpoints(
     args: DescribeEndpointsCommandInput,
-    options: __HttpHandlerOptions,
+    options: TimestreamQueryRequestOptions,
     cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
   ): void;
-  public describeEndpoints(
-    args: DescribeEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEndpointsCommandOutput) => void
-  ): Promise<DescribeEndpointsCommandOutput> | void {
-    const command = new DescribeEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             Query is a synchronous operation that enables you to execute a query. Query will timeout after 60 seconds. You must update the default timeout in the SDK to support a timeout of 60 seconds. The result set will be truncated to 1MB. Service quotas apply. For more information, see Quotas in the Timestream Developer Guide.
-   *         </p>
+   * @see {@link DescribeScheduledQueryCommand}
    */
-  public query(args: QueryCommandInput, options?: __HttpHandlerOptions): Promise<QueryCommandOutput>;
-  public query(args: QueryCommandInput, cb: (err: any, data?: QueryCommandOutput) => void): void;
-  public query(
+  describeScheduledQuery(
+    args: DescribeScheduledQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<DescribeScheduledQueryCommandOutput>;
+  describeScheduledQuery(
+    args: DescribeScheduledQueryCommandInput,
+    cb: (err: any, data?: DescribeScheduledQueryCommandOutput) => void
+  ): void;
+  describeScheduledQuery(
+    args: DescribeScheduledQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: DescribeScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExecuteScheduledQueryCommand}
+   */
+  executeScheduledQuery(
+    args: ExecuteScheduledQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<ExecuteScheduledQueryCommandOutput>;
+  executeScheduledQuery(
+    args: ExecuteScheduledQueryCommandInput,
+    cb: (err: any, data?: ExecuteScheduledQueryCommandOutput) => void
+  ): void;
+  executeScheduledQuery(
+    args: ExecuteScheduledQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: ExecuteScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScheduledQueriesCommand}
+   */
+  listScheduledQueries(): Promise<ListScheduledQueriesCommandOutput>;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<ListScheduledQueriesCommandOutput>;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    cb: (err: any, data?: ListScheduledQueriesCommandOutput) => void
+  ): void;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: ListScheduledQueriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PrepareQueryCommand}
+   */
+  prepareQuery(
+    args: PrepareQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<PrepareQueryCommandOutput>;
+  prepareQuery(
+    args: PrepareQueryCommandInput,
+    cb: (err: any, data?: PrepareQueryCommandOutput) => void
+  ): void;
+  prepareQuery(
+    args: PrepareQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: PrepareQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryCommand}
+   */
+  query(
     args: QueryCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<QueryCommandOutput>;
+  query(
+    args: QueryCommandInput,
     cb: (err: any, data?: QueryCommandOutput) => void
   ): void;
-  public query(
+  query(
     args: QueryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryCommandOutput) => void),
-    cb?: (err: any, data?: QueryCommandOutput) => void
-  ): Promise<QueryCommandOutput> | void {
-    const command = new QueryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: QueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAccountSettingsCommand}
+   */
+  updateAccountSettings(): Promise<UpdateAccountSettingsCommandOutput>;
+  updateAccountSettings(
+    args: UpdateAccountSettingsCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<UpdateAccountSettingsCommandOutput>;
+  updateAccountSettings(
+    args: UpdateAccountSettingsCommandInput,
+    cb: (err: any, data?: UpdateAccountSettingsCommandOutput) => void
+  ): void;
+  updateAccountSettings(
+    args: UpdateAccountSettingsCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: UpdateAccountSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateScheduledQueryCommand}
+   */
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    options?: TimestreamQueryRequestOptions
+  ): Promise<UpdateScheduledQueryCommandOutput>;
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    cb: (err: any, data?: UpdateScheduledQueryCommandOutput) => void
+  ): void;
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    options: TimestreamQueryRequestOptions,
+    cb: (err: any, data?: UpdateScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScheduledQueriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScheduledQueriesCommandOutput}.
+   */
+  paginateListScheduledQueries(
+    args?: ListScheduledQueriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScheduledQueriesCommandOutput>;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsForResourceCommandOutput}.
+   */
+  paginateListTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsForResourceCommandOutput>;
+
+  /**
+   * @see {@link QueryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link QueryCommandOutput}.
+   */
+  paginateQuery(
+    args: QueryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<QueryCommandOutput>;
 }
+
+/**
+ * <fullname>Amazon Timestream Query
+ *         </fullname>
+ *          <p></p>
+ * @public
+ */
+export class TimestreamQuery extends TimestreamQueryClient implements TimestreamQuery {}
+createAggregatedClient(commands, TimestreamQuery, { paginators });

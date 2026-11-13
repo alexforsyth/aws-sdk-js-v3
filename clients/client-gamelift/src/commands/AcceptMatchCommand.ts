@@ -1,133 +1,127 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { AcceptMatchInput, AcceptMatchOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1AcceptMatchCommand,
-  serializeAws_json1_1AcceptMatchCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptMatchInput, AcceptMatchOutput } from "../models/models_0";
+import { AcceptMatch$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptMatchCommand}.
+ */
 export interface AcceptMatchCommandInput extends AcceptMatchInput {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptMatchCommand}.
+ */
 export interface AcceptMatchCommandOutput extends AcceptMatchOutput, __MetadataBearer {}
 
 /**
- * <p>Registers a player's acceptance or rejection of a proposed FlexMatch match. A
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Registers a player's acceptance or rejection of a proposed FlexMatch match. A
  *             matchmaking configuration may require player acceptance; if so, then matches built with
  *             that configuration cannot be completed unless all players accept the proposed match
  *             within a specified time limit. </p>
- *         <p>When FlexMatch builds a match, all the matchmaking tickets involved in the proposed
+ *          <p>When FlexMatch builds a match, all the matchmaking tickets involved in the proposed
  *             match are placed into status <code>REQUIRES_ACCEPTANCE</code>. This is a trigger for
- *             your game to get acceptance from all players in the ticket. Acceptances are only valid
- *             for tickets when they are in this status; all other acceptances result in an
+ *             your game to get acceptance from all players in each ticket. Calls to this action are only valid
+ *             for tickets that are in this status; calls for tickets not in this status result in an
  *             error.</p>
- *         <p>To register acceptance, specify the ticket ID, a response, and one or more players.
- *             Once all players have registered acceptance, the matchmaking tickets advance to status
- *             <code>PLACING</code>, where a new game session is created for the match. </p>
- *         <p>If any player rejects the match, or if acceptances are not received before a specified
- *             timeout, the proposed match is dropped. The matchmaking tickets are then handled in one
- *             of two ways: For tickets where one or more players rejected the match, the ticket status
- *             is returned to <code>SEARCHING</code> to find a new match. For tickets where one or more
- *             players failed to respond, the ticket status is set to <code>CANCELLED</code>, and
- *             processing is terminated. A new matchmaking request for these players can be submitted
- *             as needed. </p>
- *         <p>
+ *          <p>To register acceptance, specify the ticket ID, one or more players, and an acceptance response.
+ *             When all players have accepted, Amazon GameLift Servers advances the matchmaking tickets to status
+ *                 <code>PLACING</code>, and attempts to create a new game session for the match. </p>
+ *          <p>If any player rejects the match, or if acceptances are not received before a specified
+ *             timeout, the proposed match is dropped. Each matchmaking ticket in the failed match is handled as follows: </p>
+ *          <ul>
+ *             <li>
+ *                <p>If the ticket has one or more players who rejected the match or failed to
+ *                 respond, the ticket status is set to <code>CANCELLED</code> and processing is
+ *                 terminated.</p>
+ *             </li>
+ *             <li>
+ *                <p>If all players in the ticket accepted the match, the ticket
+ *                 status is returned to <code>SEARCHING</code> to find a new match. </p>
+ *             </li>
+ *          </ul>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
+ *          <p>
  *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html">
  *                 Add FlexMatch to a game client</a>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html"> FlexMatch events</a> (reference)</p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>StartMatchmaking</a> |
- *                     <a>DescribeMatchmaking</a> |
- *                     <a>StopMatchmaking</a> |
- *                     <a>AcceptMatch</a> |
- *                     <a>StartMatchBackfill</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html">
+ *                 FlexMatch events</a> (reference)</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, AcceptMatchCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, AcceptMatchCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // AcceptMatchInput
+ *   TicketId: "STRING_VALUE", // required
+ *   PlayerIds: [ // PlayerIdsForAcceptMatch // required
+ *     "STRING_VALUE",
+ *   ],
+ *   AcceptanceType: "ACCEPT" || "REJECT", // required
+ * };
  * const command = new AcceptMatchCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AcceptMatchCommandInput - {@link AcceptMatchCommandInput}
+ * @returns {@link AcceptMatchCommandOutput}
  * @see {@link AcceptMatchCommandInput} for command's `input` shape.
  * @see {@link AcceptMatchCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptMatchCommand extends $Command<
-  AcceptMatchCommandInput,
-  AcceptMatchCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptMatchCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptMatchCommandInput, AcceptMatchCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "AcceptMatchCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptMatchInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptMatchOutput.filterSensitiveLog,
+export class AcceptMatchCommand extends command<AcceptMatchCommandInput, AcceptMatchCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptMatch",
+  AcceptMatch$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptMatchInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptMatchCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AcceptMatchCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AcceptMatchCommandOutput> {
-    return deserializeAws_json1_1AcceptMatchCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptMatchCommandInput;
+      output: AcceptMatchCommandOutput;
+    };
+  };
 }

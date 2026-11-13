@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { DescribeNotificationConfigurationsAnswer, DescribeNotificationConfigurationsType } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeNotificationConfigurationsCommand,
-  serializeAws_queryDescribeNotificationConfigurationsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeNotificationConfigurationsAnswer,
+  DescribeNotificationConfigurationsType,
+} from "../models/models_0";
+import { DescribeNotificationConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNotificationConfigurationsCommand}.
+ */
 export interface DescribeNotificationConfigurationsCommandInput extends DescribeNotificationConfigurationsType {}
-export interface DescribeNotificationConfigurationsCommandOutput
-  extends DescribeNotificationConfigurationsAnswer,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNotificationConfigurationsCommand}.
+ */
+export interface DescribeNotificationConfigurationsCommandOutput extends DescribeNotificationConfigurationsAnswer, __MetadataBearer {}
 
 /**
  * <p>Gets information about the Amazon SNS notifications that are configured for one or more
@@ -31,74 +33,94 @@ export interface DescribeNotificationConfigurationsCommandOutput
  * ```javascript
  * import { AutoScalingClient, DescribeNotificationConfigurationsCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, DescribeNotificationConfigurationsCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = { // DescribeNotificationConfigurationsType
+ *   AutoScalingGroupNames: [ // AutoScalingGroupNames
+ *     "STRING_VALUE",
+ *   ],
+ *   IncludeManagedResources: true || false,
+ *   NextToken: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribeNotificationConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeNotificationConfigurationsAnswer
+ * //   NotificationConfigurations: [ // NotificationConfigurations // required
+ * //     { // NotificationConfiguration
+ * //       AutoScalingGroupName: "STRING_VALUE",
+ * //       TopicARN: "STRING_VALUE",
+ * //       NotificationType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeNotificationConfigurationsCommandInput - {@link DescribeNotificationConfigurationsCommandInput}
+ * @returns {@link DescribeNotificationConfigurationsCommandOutput}
  * @see {@link DescribeNotificationConfigurationsCommandInput} for command's `input` shape.
  * @see {@link DescribeNotificationConfigurationsCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The <code>NextToken</code> value is not valid.</p>
+ *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @example To describe Auto Scaling notification configurations
+ * ```javascript
+ * // This example describes the notification configurations for the specified Auto Scaling group.
+ * const input = {
+ *   AutoScalingGroupNames: [
+ *     "my-auto-scaling-group"
+ *   ]
+ * };
+ * const command = new DescribeNotificationConfigurationsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   NotificationConfigurations: [
+ *     {
+ *       AutoScalingGroupName: "my-auto-scaling-group",
+ *       NotificationType: "autoscaling:TEST_NOTIFICATION",
+ *       TopicARN: "arn:aws:sns:us-west-2:123456789012:my-sns-topic-2"
+ *     },
+ *     {
+ *       AutoScalingGroupName: "my-auto-scaling-group",
+ *       NotificationType: "autoscaling:TEST_NOTIFICATION",
+ *       TopicARN: "arn:aws:sns:us-west-2:123456789012:my-sns-topic"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeNotificationConfigurationsCommand extends $Command<
-  DescribeNotificationConfigurationsCommandInput,
-  DescribeNotificationConfigurationsCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNotificationConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNotificationConfigurationsCommandInput, DescribeNotificationConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "DescribeNotificationConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNotificationConfigurationsType.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeNotificationConfigurationsAnswer.filterSensitiveLog,
+export class DescribeNotificationConfigurationsCommand extends command<DescribeNotificationConfigurationsCommandInput, DescribeNotificationConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNotificationConfigurations",
+  DescribeNotificationConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNotificationConfigurationsType;
+      output: DescribeNotificationConfigurationsAnswer;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeNotificationConfigurationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeNotificationConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeNotificationConfigurationsCommandOutput> {
-    return deserializeAws_queryDescribeNotificationConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNotificationConfigurationsCommandInput;
+      output: DescribeNotificationConfigurationsCommandOutput;
+    };
+  };
 }

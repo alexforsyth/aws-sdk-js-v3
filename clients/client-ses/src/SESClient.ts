@@ -1,277 +1,321 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultSESHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   CloneReceiptRuleSetCommandInput,
   CloneReceiptRuleSetCommandOutput,
 } from "./commands/CloneReceiptRuleSetCommand";
-import {
+import type {
   CreateConfigurationSetCommandInput,
   CreateConfigurationSetCommandOutput,
 } from "./commands/CreateConfigurationSetCommand";
-import {
+import type {
   CreateConfigurationSetEventDestinationCommandInput,
   CreateConfigurationSetEventDestinationCommandOutput,
 } from "./commands/CreateConfigurationSetEventDestinationCommand";
-import {
+import type {
   CreateConfigurationSetTrackingOptionsCommandInput,
   CreateConfigurationSetTrackingOptionsCommandOutput,
 } from "./commands/CreateConfigurationSetTrackingOptionsCommand";
-import {
+import type {
   CreateCustomVerificationEmailTemplateCommandInput,
   CreateCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/CreateCustomVerificationEmailTemplateCommand";
-import {
+import type {
   CreateReceiptFilterCommandInput,
   CreateReceiptFilterCommandOutput,
 } from "./commands/CreateReceiptFilterCommand";
-import { CreateReceiptRuleCommandInput, CreateReceiptRuleCommandOutput } from "./commands/CreateReceiptRuleCommand";
-import {
+import type {
+  CreateReceiptRuleCommandInput,
+  CreateReceiptRuleCommandOutput,
+} from "./commands/CreateReceiptRuleCommand";
+import type {
   CreateReceiptRuleSetCommandInput,
   CreateReceiptRuleSetCommandOutput,
 } from "./commands/CreateReceiptRuleSetCommand";
-import { CreateTemplateCommandInput, CreateTemplateCommandOutput } from "./commands/CreateTemplateCommand";
-import {
+import type { CreateTemplateCommandInput, CreateTemplateCommandOutput } from "./commands/CreateTemplateCommand";
+import type {
   DeleteConfigurationSetCommandInput,
   DeleteConfigurationSetCommandOutput,
 } from "./commands/DeleteConfigurationSetCommand";
-import {
+import type {
   DeleteConfigurationSetEventDestinationCommandInput,
   DeleteConfigurationSetEventDestinationCommandOutput,
 } from "./commands/DeleteConfigurationSetEventDestinationCommand";
-import {
+import type {
   DeleteConfigurationSetTrackingOptionsCommandInput,
   DeleteConfigurationSetTrackingOptionsCommandOutput,
 } from "./commands/DeleteConfigurationSetTrackingOptionsCommand";
-import {
+import type {
   DeleteCustomVerificationEmailTemplateCommandInput,
   DeleteCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/DeleteCustomVerificationEmailTemplateCommand";
-import { DeleteIdentityCommandInput, DeleteIdentityCommandOutput } from "./commands/DeleteIdentityCommand";
-import {
+import type { DeleteIdentityCommandInput, DeleteIdentityCommandOutput } from "./commands/DeleteIdentityCommand";
+import type {
   DeleteIdentityPolicyCommandInput,
   DeleteIdentityPolicyCommandOutput,
 } from "./commands/DeleteIdentityPolicyCommand";
-import {
+import type {
   DeleteReceiptFilterCommandInput,
   DeleteReceiptFilterCommandOutput,
 } from "./commands/DeleteReceiptFilterCommand";
-import { DeleteReceiptRuleCommandInput, DeleteReceiptRuleCommandOutput } from "./commands/DeleteReceiptRuleCommand";
-import {
+import type {
+  DeleteReceiptRuleCommandInput,
+  DeleteReceiptRuleCommandOutput,
+} from "./commands/DeleteReceiptRuleCommand";
+import type {
   DeleteReceiptRuleSetCommandInput,
   DeleteReceiptRuleSetCommandOutput,
 } from "./commands/DeleteReceiptRuleSetCommand";
-import { DeleteTemplateCommandInput, DeleteTemplateCommandOutput } from "./commands/DeleteTemplateCommand";
-import {
+import type { DeleteTemplateCommandInput, DeleteTemplateCommandOutput } from "./commands/DeleteTemplateCommand";
+import type {
   DeleteVerifiedEmailAddressCommandInput,
   DeleteVerifiedEmailAddressCommandOutput,
 } from "./commands/DeleteVerifiedEmailAddressCommand";
-import {
+import type {
   DescribeActiveReceiptRuleSetCommandInput,
   DescribeActiveReceiptRuleSetCommandOutput,
 } from "./commands/DescribeActiveReceiptRuleSetCommand";
-import {
+import type {
   DescribeConfigurationSetCommandInput,
   DescribeConfigurationSetCommandOutput,
 } from "./commands/DescribeConfigurationSetCommand";
-import {
+import type {
   DescribeReceiptRuleCommandInput,
   DescribeReceiptRuleCommandOutput,
 } from "./commands/DescribeReceiptRuleCommand";
-import {
+import type {
   DescribeReceiptRuleSetCommandInput,
   DescribeReceiptRuleSetCommandOutput,
 } from "./commands/DescribeReceiptRuleSetCommand";
-import {
+import type {
   GetAccountSendingEnabledCommandInput,
   GetAccountSendingEnabledCommandOutput,
 } from "./commands/GetAccountSendingEnabledCommand";
-import {
+import type {
   GetCustomVerificationEmailTemplateCommandInput,
   GetCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/GetCustomVerificationEmailTemplateCommand";
-import {
+import type {
   GetIdentityDkimAttributesCommandInput,
   GetIdentityDkimAttributesCommandOutput,
 } from "./commands/GetIdentityDkimAttributesCommand";
-import {
+import type {
   GetIdentityMailFromDomainAttributesCommandInput,
   GetIdentityMailFromDomainAttributesCommandOutput,
 } from "./commands/GetIdentityMailFromDomainAttributesCommand";
-import {
+import type {
   GetIdentityNotificationAttributesCommandInput,
   GetIdentityNotificationAttributesCommandOutput,
 } from "./commands/GetIdentityNotificationAttributesCommand";
-import {
+import type {
   GetIdentityPoliciesCommandInput,
   GetIdentityPoliciesCommandOutput,
 } from "./commands/GetIdentityPoliciesCommand";
-import {
+import type {
   GetIdentityVerificationAttributesCommandInput,
   GetIdentityVerificationAttributesCommandOutput,
 } from "./commands/GetIdentityVerificationAttributesCommand";
-import { GetSendQuotaCommandInput, GetSendQuotaCommandOutput } from "./commands/GetSendQuotaCommand";
-import { GetSendStatisticsCommandInput, GetSendStatisticsCommandOutput } from "./commands/GetSendStatisticsCommand";
-import { GetTemplateCommandInput, GetTemplateCommandOutput } from "./commands/GetTemplateCommand";
-import {
+import type { GetSendQuotaCommandInput, GetSendQuotaCommandOutput } from "./commands/GetSendQuotaCommand";
+import type {
+  GetSendStatisticsCommandInput,
+  GetSendStatisticsCommandOutput,
+} from "./commands/GetSendStatisticsCommand";
+import type { GetTemplateCommandInput, GetTemplateCommandOutput } from "./commands/GetTemplateCommand";
+import type {
   ListConfigurationSetsCommandInput,
   ListConfigurationSetsCommandOutput,
 } from "./commands/ListConfigurationSetsCommand";
-import {
+import type {
   ListCustomVerificationEmailTemplatesCommandInput,
   ListCustomVerificationEmailTemplatesCommandOutput,
 } from "./commands/ListCustomVerificationEmailTemplatesCommand";
-import { ListIdentitiesCommandInput, ListIdentitiesCommandOutput } from "./commands/ListIdentitiesCommand";
-import {
+import type { ListIdentitiesCommandInput, ListIdentitiesCommandOutput } from "./commands/ListIdentitiesCommand";
+import type {
   ListIdentityPoliciesCommandInput,
   ListIdentityPoliciesCommandOutput,
 } from "./commands/ListIdentityPoliciesCommand";
-import { ListReceiptFiltersCommandInput, ListReceiptFiltersCommandOutput } from "./commands/ListReceiptFiltersCommand";
-import {
+import type {
+  ListReceiptFiltersCommandInput,
+  ListReceiptFiltersCommandOutput,
+} from "./commands/ListReceiptFiltersCommand";
+import type {
   ListReceiptRuleSetsCommandInput,
   ListReceiptRuleSetsCommandOutput,
 } from "./commands/ListReceiptRuleSetsCommand";
-import { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
-import {
+import type { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
+import type {
   ListVerifiedEmailAddressesCommandInput,
   ListVerifiedEmailAddressesCommandOutput,
 } from "./commands/ListVerifiedEmailAddressesCommand";
-import {
+import type {
   PutConfigurationSetDeliveryOptionsCommandInput,
   PutConfigurationSetDeliveryOptionsCommandOutput,
 } from "./commands/PutConfigurationSetDeliveryOptionsCommand";
-import { PutIdentityPolicyCommandInput, PutIdentityPolicyCommandOutput } from "./commands/PutIdentityPolicyCommand";
-import {
+import type {
+  PutIdentityPolicyCommandInput,
+  PutIdentityPolicyCommandOutput,
+} from "./commands/PutIdentityPolicyCommand";
+import type {
   ReorderReceiptRuleSetCommandInput,
   ReorderReceiptRuleSetCommandOutput,
 } from "./commands/ReorderReceiptRuleSetCommand";
-import { SendBounceCommandInput, SendBounceCommandOutput } from "./commands/SendBounceCommand";
-import {
+import type { SendBounceCommandInput, SendBounceCommandOutput } from "./commands/SendBounceCommand";
+import type {
   SendBulkTemplatedEmailCommandInput,
   SendBulkTemplatedEmailCommandOutput,
 } from "./commands/SendBulkTemplatedEmailCommand";
-import {
+import type {
   SendCustomVerificationEmailCommandInput,
   SendCustomVerificationEmailCommandOutput,
 } from "./commands/SendCustomVerificationEmailCommand";
-import { SendEmailCommandInput, SendEmailCommandOutput } from "./commands/SendEmailCommand";
-import { SendRawEmailCommandInput, SendRawEmailCommandOutput } from "./commands/SendRawEmailCommand";
-import { SendTemplatedEmailCommandInput, SendTemplatedEmailCommandOutput } from "./commands/SendTemplatedEmailCommand";
-import {
+import type { SendEmailCommandInput, SendEmailCommandOutput } from "./commands/SendEmailCommand";
+import type { SendRawEmailCommandInput, SendRawEmailCommandOutput } from "./commands/SendRawEmailCommand";
+import type {
+  SendTemplatedEmailCommandInput,
+  SendTemplatedEmailCommandOutput,
+} from "./commands/SendTemplatedEmailCommand";
+import type {
   SetActiveReceiptRuleSetCommandInput,
   SetActiveReceiptRuleSetCommandOutput,
 } from "./commands/SetActiveReceiptRuleSetCommand";
-import {
+import type {
   SetIdentityDkimEnabledCommandInput,
   SetIdentityDkimEnabledCommandOutput,
 } from "./commands/SetIdentityDkimEnabledCommand";
-import {
+import type {
   SetIdentityFeedbackForwardingEnabledCommandInput,
   SetIdentityFeedbackForwardingEnabledCommandOutput,
 } from "./commands/SetIdentityFeedbackForwardingEnabledCommand";
-import {
+import type {
   SetIdentityHeadersInNotificationsEnabledCommandInput,
   SetIdentityHeadersInNotificationsEnabledCommandOutput,
 } from "./commands/SetIdentityHeadersInNotificationsEnabledCommand";
-import {
+import type {
   SetIdentityMailFromDomainCommandInput,
   SetIdentityMailFromDomainCommandOutput,
 } from "./commands/SetIdentityMailFromDomainCommand";
-import {
+import type {
   SetIdentityNotificationTopicCommandInput,
   SetIdentityNotificationTopicCommandOutput,
 } from "./commands/SetIdentityNotificationTopicCommand";
-import {
+import type {
   SetReceiptRulePositionCommandInput,
   SetReceiptRulePositionCommandOutput,
 } from "./commands/SetReceiptRulePositionCommand";
-import { TestRenderTemplateCommandInput, TestRenderTemplateCommandOutput } from "./commands/TestRenderTemplateCommand";
-import {
+import type {
+  TestRenderTemplateCommandInput,
+  TestRenderTemplateCommandOutput,
+} from "./commands/TestRenderTemplateCommand";
+import type {
   UpdateAccountSendingEnabledCommandInput,
   UpdateAccountSendingEnabledCommandOutput,
 } from "./commands/UpdateAccountSendingEnabledCommand";
-import {
+import type {
   UpdateConfigurationSetEventDestinationCommandInput,
   UpdateConfigurationSetEventDestinationCommandOutput,
 } from "./commands/UpdateConfigurationSetEventDestinationCommand";
-import {
+import type {
   UpdateConfigurationSetReputationMetricsEnabledCommandInput,
   UpdateConfigurationSetReputationMetricsEnabledCommandOutput,
 } from "./commands/UpdateConfigurationSetReputationMetricsEnabledCommand";
-import {
+import type {
   UpdateConfigurationSetSendingEnabledCommandInput,
   UpdateConfigurationSetSendingEnabledCommandOutput,
 } from "./commands/UpdateConfigurationSetSendingEnabledCommand";
-import {
+import type {
   UpdateConfigurationSetTrackingOptionsCommandInput,
   UpdateConfigurationSetTrackingOptionsCommandOutput,
 } from "./commands/UpdateConfigurationSetTrackingOptionsCommand";
-import {
+import type {
   UpdateCustomVerificationEmailTemplateCommandInput,
   UpdateCustomVerificationEmailTemplateCommandOutput,
 } from "./commands/UpdateCustomVerificationEmailTemplateCommand";
-import { UpdateReceiptRuleCommandInput, UpdateReceiptRuleCommandOutput } from "./commands/UpdateReceiptRuleCommand";
-import { UpdateTemplateCommandInput, UpdateTemplateCommandOutput } from "./commands/UpdateTemplateCommand";
-import { VerifyDomainDkimCommandInput, VerifyDomainDkimCommandOutput } from "./commands/VerifyDomainDkimCommand";
-import {
+import type {
+  UpdateReceiptRuleCommandInput,
+  UpdateReceiptRuleCommandOutput,
+} from "./commands/UpdateReceiptRuleCommand";
+import type { UpdateTemplateCommandInput, UpdateTemplateCommandOutput } from "./commands/UpdateTemplateCommand";
+import type { VerifyDomainDkimCommandInput, VerifyDomainDkimCommandOutput } from "./commands/VerifyDomainDkimCommand";
+import type {
   VerifyDomainIdentityCommandInput,
   VerifyDomainIdentityCommandOutput,
 } from "./commands/VerifyDomainIdentityCommand";
-import { VerifyEmailAddressCommandInput, VerifyEmailAddressCommandOutput } from "./commands/VerifyEmailAddressCommand";
-import {
+import type {
+  VerifyEmailAddressCommandInput,
+  VerifyEmailAddressCommandOutput,
+} from "./commands/VerifyEmailAddressCommand";
+import type {
   VerifyEmailIdentityCommandInput,
   VerifyEmailIdentityCommandOutput,
 } from "./commands/VerifyEmailIdentityCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CloneReceiptRuleSetCommandInput
   | CreateConfigurationSetCommandInput
@@ -345,6 +389,9 @@ export type ServiceInputTypes =
   | VerifyEmailAddressCommandInput
   | VerifyEmailIdentityCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CloneReceiptRuleSetCommandOutput
   | CreateConfigurationSetCommandOutput
@@ -418,18 +465,21 @@ export type ServiceOutputTypes =
   | VerifyEmailAddressCommandOutput
   | VerifyEmailIdentityCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -441,7 +491,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -480,25 +530,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -511,71 +552,146 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type SESClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of SESClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type SESClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of SESClient class constructor that set the region, credentials and other options.
  */
 export interface SESClientConfig extends SESClientConfigType {}
 
-type SESClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of SESClient class. This is resolved and normalized from the {@link SESClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type SESClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of SESClient class. This is resolved and normalized from the {@link SESClientConfig | constructor configuration interface}.
  */
 export interface SESClientResolvedConfig extends SESClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon Simple Email Service</fullname>
- *         <p> This document contains reference information for the <a href="https://aws.amazon.com/ses/">Amazon Simple Email Service</a> (Amazon SES) API, version
+ *          <p> This document contains reference information for the <a href="https://aws.amazon.com/ses/">Amazon Simple Email Service</a> (Amazon SES) API, version
  *             2010-12-01. This document is best used in conjunction with the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon SES Developer
  *                 Guide</a>. </p>
- *         <note>
+ *          <note>
  *             <p> For a list of Amazon SES endpoints to use in service requests, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html">Regions and
  *                     Amazon SES</a> in the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon SES Developer
  *                 Guide</a>.</p>
- *         </note>
+ *          </note>
+ *          <p>This documentation contains reference information related to the following:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_Operations.html">Amazon SES API Actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_Types.html">Amazon SES
+ *                         API Data Types</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/ses/latest/APIReference/CommonParameters.html">Common
+ *                         Parameters</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/ses/latest/APIReference/CommonErrors.html">Common Errors</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @public
  */
 export class SESClient extends __Client<
   __HttpHandlerOptions,
@@ -588,22 +704,36 @@ export class SESClient extends __Client<
    */
   readonly config: SESClientResolvedConfig;
 
-  constructor(configuration: SESClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<SESClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultSESHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: SESClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

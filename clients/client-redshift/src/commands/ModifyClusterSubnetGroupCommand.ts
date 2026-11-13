@@ -1,96 +1,155 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ModifyClusterSubnetGroupMessage, ModifyClusterSubnetGroupResult } from "../models/models_1";
-import {
-  deserializeAws_queryModifyClusterSubnetGroupCommand,
-  serializeAws_queryModifyClusterSubnetGroupCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyClusterSubnetGroupMessage, ModifyClusterSubnetGroupResult } from "../models/models_1";
+import { ModifyClusterSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyClusterSubnetGroupCommand}.
+ */
 export interface ModifyClusterSubnetGroupCommandInput extends ModifyClusterSubnetGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyClusterSubnetGroupCommand}.
+ */
 export interface ModifyClusterSubnetGroupCommandOutput extends ModifyClusterSubnetGroupResult, __MetadataBearer {}
 
 /**
  * <p>Modifies a cluster subnet group to include the specified list of VPC subnets. The
  *             operation replaces the existing list of subnets with the new list of subnets.</p>
+ *          <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that
+ *             you own in a Region from reaching or being reached from the internet through internet
+ *             gateways and egress-only internet gateways. If a subnet group for a
+ *             provisioned cluster is in an account with VPC BPA turned on, the following capabilities
+ *             are blocked:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Creating a public cluster</p>
+ *             </li>
+ *             <li>
+ *                <p>Restoring a public cluster</p>
+ *             </li>
+ *             <li>
+ *                <p>Modifying a private cluster to be public</p>
+ *             </li>
+ *             <li>
+ *                <p>Adding a subnet with VPC BPA turned on to the subnet group when there's at
+ *                     least one public cluster within the group</p>
+ *             </li>
+ *          </ul>
+ *          <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and
+ *             subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftClient, ModifyClusterSubnetGroupCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, ModifyClusterSubnetGroupCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // ModifyClusterSubnetGroupMessage
+ *   ClusterSubnetGroupName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   SubnetIds: [ // SubnetIdentifierList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyClusterSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyClusterSubnetGroupResult
+ * //   ClusterSubnetGroup: { // ClusterSubnetGroup
+ * //     ClusterSubnetGroupName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     SubnetGroupStatus: "STRING_VALUE",
+ * //     Subnets: [ // SubnetList
+ * //       { // Subnet
+ * //         SubnetIdentifier: "STRING_VALUE",
+ * //         SubnetAvailabilityZone: { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //           SupportedPlatforms: [ // SupportedPlatformsList
+ * //             { // SupportedPlatform
+ * //               Name: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //         SubnetStatus: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SupportedClusterIpAddressTypes: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyClusterSubnetGroupCommandInput - {@link ModifyClusterSubnetGroupCommandInput}
+ * @returns {@link ModifyClusterSubnetGroupCommandOutput}
  * @see {@link ModifyClusterSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyClusterSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterSubnetGroupNotFoundFault} (client fault)
+ *  <p>The cluster subnet group name does not refer to an existing cluster subnet
+ *             group.</p>
+ *
+ * @throws {@link ClusterSubnetQuotaExceededFault} (client fault)
+ *  <p>The request would result in user exceeding the allowed number of subnets in a
+ *             cluster subnet groups.
+ * For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
+ * in the <i>Amazon Redshift Cluster Management Guide</i>.
+ * </p>
+ *
+ * @throws {@link DependentServiceRequestThrottlingFault} (client fault)
+ *  <p>The request cannot be completed because a dependent service is throttling requests
+ *             made by Amazon Redshift on your behalf. Wait and retry the request.</p>
+ *
+ * @throws {@link InvalidSubnet} (client fault)
+ *  <p>The requested subnet is not valid, or not all of the subnets are in the same
+ *             VPC.</p>
+ *
+ * @throws {@link SubnetAlreadyInUse} (client fault)
+ *  <p>A specified subnet is already in use by another cluster.</p>
+ *
+ * @throws {@link UnauthorizedOperation} (client fault)
+ *  <p>Your account is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyClusterSubnetGroupCommand extends $Command<
-  ModifyClusterSubnetGroupCommandInput,
-  ModifyClusterSubnetGroupCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyClusterSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyClusterSubnetGroupCommandInput, ModifyClusterSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "ModifyClusterSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyClusterSubnetGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyClusterSubnetGroupResult.filterSensitiveLog,
+export class ModifyClusterSubnetGroupCommand extends command<ModifyClusterSubnetGroupCommandInput, ModifyClusterSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyClusterSubnetGroup",
+  ModifyClusterSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClusterSubnetGroupMessage;
+      output: ModifyClusterSubnetGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyClusterSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyClusterSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyClusterSubnetGroupCommandOutput> {
-    return deserializeAws_queryModifyClusterSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyClusterSubnetGroupCommandInput;
+      output: ModifyClusterSubnetGroupCommandOutput;
+    };
+  };
 }

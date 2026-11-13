@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListThingRegistrationTaskReportsRequest, ListThingRegistrationTaskReportsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListThingRegistrationTaskReportsCommand,
-  serializeAws_restJson1ListThingRegistrationTaskReportsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListThingRegistrationTaskReportsRequest,
+  ListThingRegistrationTaskReportsResponse,
+} from "../models/models_2";
+import { ListThingRegistrationTaskReports$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListThingRegistrationTaskReportsCommand}.
+ */
 export interface ListThingRegistrationTaskReportsCommandInput extends ListThingRegistrationTaskReportsRequest {}
-export interface ListThingRegistrationTaskReportsCommandOutput
-  extends ListThingRegistrationTaskReportsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListThingRegistrationTaskReportsCommand}.
+ */
+export interface ListThingRegistrationTaskReportsCommandOutput extends ListThingRegistrationTaskReportsResponse, __MetadataBearer {}
 
 /**
  * <p>Information about the thing registration tasks.</p>
@@ -30,74 +32,66 @@ export interface ListThingRegistrationTaskReportsCommandOutput
  * ```javascript
  * import { IoTClient, ListThingRegistrationTaskReportsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListThingRegistrationTaskReportsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListThingRegistrationTaskReportsRequest
+ *   taskId: "STRING_VALUE", // required
+ *   reportType: "ERRORS" || "RESULTS", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListThingRegistrationTaskReportsCommand(input);
  * const response = await client.send(command);
+ * // { // ListThingRegistrationTaskReportsResponse
+ * //   resourceLinks: [ // S3FileUrlList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   reportType: "ERRORS" || "RESULTS",
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListThingRegistrationTaskReportsCommandInput - {@link ListThingRegistrationTaskReportsCommandInput}
+ * @returns {@link ListThingRegistrationTaskReportsCommandOutput}
  * @see {@link ListThingRegistrationTaskReportsCommandInput} for command's `input` shape.
  * @see {@link ListThingRegistrationTaskReportsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListThingRegistrationTaskReportsCommand extends $Command<
-  ListThingRegistrationTaskReportsCommandInput,
-  ListThingRegistrationTaskReportsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListThingRegistrationTaskReportsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListThingRegistrationTaskReportsCommandInput, ListThingRegistrationTaskReportsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListThingRegistrationTaskReportsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListThingRegistrationTaskReportsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListThingRegistrationTaskReportsResponse.filterSensitiveLog,
+export class ListThingRegistrationTaskReportsCommand extends command<ListThingRegistrationTaskReportsCommandInput, ListThingRegistrationTaskReportsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListThingRegistrationTaskReports",
+  ListThingRegistrationTaskReports$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListThingRegistrationTaskReportsRequest;
+      output: ListThingRegistrationTaskReportsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListThingRegistrationTaskReportsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListThingRegistrationTaskReportsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListThingRegistrationTaskReportsCommandOutput> {
-    return deserializeAws_restJson1ListThingRegistrationTaskReportsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListThingRegistrationTaskReportsCommandInput;
+      output: ListThingRegistrationTaskReportsCommandOutput;
+    };
+  };
 }

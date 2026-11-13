@@ -1,102 +1,145 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ImportTerminologyRequest, ImportTerminologyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ImportTerminologyCommand,
-  serializeAws_json1_1ImportTerminologyCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TranslateClientResolvedConfig } from "../TranslateClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ImportTerminologyRequest, ImportTerminologyResponse } from "../models/models_0";
+import { ImportTerminology$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ImportTerminologyCommand}.
+ */
 export interface ImportTerminologyCommandInput extends ImportTerminologyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ImportTerminologyCommand}.
+ */
 export interface ImportTerminologyCommandOutput extends ImportTerminologyResponse, __MetadataBearer {}
 
 /**
- * <p>Creates or updates a custom terminology, depending on whether or not one already exists
- *       for the given terminology name. Importing a terminology with the same name as an existing one
- *       will merge the terminologies based on the chosen merge strategy. Currently, the only supported
- *       merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing
- *       terminology of the same name.</p>
- *          <p>If you import a terminology that overwrites an existing one, the new terminology take up
- *       to 10 minutes to fully propagate and be available for use in a translation due to cache
- *       policies with the DataPlane service that performs the translations.</p>
+ * <p>Creates or updates a custom terminology, depending on whether one already exists for the
+ *       given terminology name. Importing a terminology with the same name as an existing one will
+ *       merge the terminologies based on the chosen merge strategy. The only supported merge strategy
+ *       is OVERWRITE, where the imported terminology overwrites the existing terminology of the same
+ *       name.</p>
+ *          <p>If you import a terminology that overwrites an existing one, the new terminology takes up
+ *       to 10 minutes to fully propagate. After that, translations have access to the new
+ *       terminology.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TranslateClient, ImportTerminologyCommand } from "@aws-sdk/client-translate"; // ES Modules import
  * // const { TranslateClient, ImportTerminologyCommand } = require("@aws-sdk/client-translate"); // CommonJS import
+ * // import type { TranslateClientConfig } from "@aws-sdk/client-translate";
+ * const config = {}; // type is TranslateClientConfig
  * const client = new TranslateClient(config);
+ * const input = { // ImportTerminologyRequest
+ *   Name: "STRING_VALUE", // required
+ *   MergeStrategy: "OVERWRITE", // required
+ *   Description: "STRING_VALUE",
+ *   TerminologyData: { // TerminologyData
+ *     File: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")     // required
+ *     Format: "CSV" || "TMX" || "TSV", // required
+ *     Directionality: "UNI" || "MULTI",
+ *   },
+ *   EncryptionKey: { // EncryptionKey
+ *     Type: "KMS", // required
+ *     Id: "STRING_VALUE", // required
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new ImportTerminologyCommand(input);
  * const response = await client.send(command);
+ * // { // ImportTerminologyResponse
+ * //   TerminologyProperties: { // TerminologyProperties
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     SourceLanguageCode: "STRING_VALUE",
+ * //     TargetLanguageCodes: [ // LanguageCodeStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     EncryptionKey: { // EncryptionKey
+ * //       Type: "KMS", // required
+ * //       Id: "STRING_VALUE", // required
+ * //     },
+ * //     SizeBytes: Number("int"),
+ * //     TermCount: Number("int"),
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     LastUpdatedAt: new Date("TIMESTAMP"),
+ * //     Directionality: "UNI" || "MULTI",
+ * //     Message: "STRING_VALUE",
+ * //     SkippedTermCount: Number("int"),
+ * //     Format: "CSV" || "TMX" || "TSV",
+ * //   },
+ * //   AuxiliaryDataLocation: { // TerminologyDataLocation
+ * //     RepositoryType: "STRING_VALUE", // required
+ * //     Location: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ImportTerminologyCommandInput - {@link ImportTerminologyCommandInput}
+ * @returns {@link ImportTerminologyCommandOutput}
  * @see {@link ImportTerminologyCommandInput} for command's `input` shape.
  * @see {@link ImportTerminologyCommandOutput} for command's `response` shape.
- * @see {@link TranslateClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TranslateClientResolvedConfig | config} for TranslateClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Another modification is being made. That modification must complete before you can make
+ *       your change.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of the parameter is not valid. Review the value of the parameter you are using
+ *       to correct it, and then retry your operation.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The specified limit has been exceeded. Review your request and retry it with a quantity
+ *       below the stated limit.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>You have added too many tags to this resource. The maximum is 50 tags.</p>
+ *
+ * @throws {@link TranslateServiceException}
+ * <p>Base exception class for all service exceptions from Translate service.</p>
+ *
+ *
+ * @public
  */
-export class ImportTerminologyCommand extends $Command<
-  ImportTerminologyCommandInput,
-  ImportTerminologyCommandOutput,
-  TranslateClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ImportTerminologyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TranslateClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ImportTerminologyCommandInput, ImportTerminologyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TranslateClient";
-    const commandName = "ImportTerminologyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ImportTerminologyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ImportTerminologyResponse.filterSensitiveLog,
+export class ImportTerminologyCommand extends command<ImportTerminologyCommandInput, ImportTerminologyCommandOutput>(
+  _ep0,
+  _mw0,
+  "ImportTerminology",
+  ImportTerminology$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportTerminologyRequest;
+      output: ImportTerminologyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ImportTerminologyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ImportTerminologyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ImportTerminologyCommandOutput> {
-    return deserializeAws_json1_1ImportTerminologyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ImportTerminologyCommandInput;
+      output: ImportTerminologyCommandOutput;
+    };
+  };
 }

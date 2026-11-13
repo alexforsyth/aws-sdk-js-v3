@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeProductViewInput, DescribeProductViewOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeProductViewCommand,
-  serializeAws_json1_1DescribeProductViewCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeProductViewInput, DescribeProductViewOutput } from "../models/models_0";
+import { DescribeProductView$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeProductViewCommand}.
+ */
 export interface DescribeProductViewCommandInput extends DescribeProductViewInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeProductViewCommand}.
+ */
 export interface DescribeProductViewCommandOutput extends DescribeProductViewOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface DescribeProductViewCommandOutput extends DescribeProductViewOut
  * ```javascript
  * import { ServiceCatalogClient, DescribeProductViewCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, DescribeProductViewCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // DescribeProductViewInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DescribeProductViewCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeProductViewOutput
+ * //   ProductViewSummary: { // ProductViewSummary
+ * //     Id: "STRING_VALUE",
+ * //     ProductId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Owner: "STRING_VALUE",
+ * //     ShortDescription: "STRING_VALUE",
+ * //     Type: "CLOUD_FORMATION_TEMPLATE" || "MARKETPLACE" || "TERRAFORM_OPEN_SOURCE" || "TERRAFORM_CLOUD" || "EXTERNAL",
+ * //     Distributor: "STRING_VALUE",
+ * //     HasDefaultPath: true || false,
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportDescription: "STRING_VALUE",
+ * //     SupportUrl: "STRING_VALUE",
+ * //   },
+ * //   ProvisioningArtifacts: [ // ProvisioningArtifacts
+ * //     { // ProvisioningArtifact
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       Guidance: "DEFAULT" || "DEPRECATED",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeProductViewCommandInput - {@link DescribeProductViewCommandInput}
+ * @returns {@link DescribeProductViewCommandOutput}
  * @see {@link DescribeProductViewCommandInput} for command's `input` shape.
  * @see {@link DescribeProductViewCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeProductViewCommand extends $Command<
-  DescribeProductViewCommandInput,
-  DescribeProductViewCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeProductViewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeProductViewCommandInput, DescribeProductViewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "DescribeProductViewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeProductViewInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeProductViewOutput.filterSensitiveLog,
+export class DescribeProductViewCommand extends command<DescribeProductViewCommandInput, DescribeProductViewCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeProductView",
+  DescribeProductView$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProductViewInput;
+      output: DescribeProductViewOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeProductViewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeProductViewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeProductViewCommandOutput> {
-    return deserializeAws_json1_1DescribeProductViewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeProductViewCommandInput;
+      output: DescribeProductViewCommandOutput;
+    };
+  };
 }

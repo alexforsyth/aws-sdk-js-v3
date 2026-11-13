@@ -1,20 +1,18 @@
-# @aws-sdk/client-memorydb
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-memorydb/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-memorydb)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-memorydb.svg)](https://www.npmjs.com/package/@aws-sdk/client-memorydb)
+# @aws-sdk/client-memorydb
 
 ## Description
 
 AWS SDK for JavaScript MemoryDB Client for Node.js, Browser and React Native.
 
-<p>MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.
+<p>MemoryDB is a fully managed, Redis OSS-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.
 
-MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>
+MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis OSS, a popular open source data store, enabling you to leverage Redis OSS’ flexible and friendly data structures, APIs, and commands.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-memorydb
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-memorydb`
 - `yarn add @aws-sdk/client-memorydb`
@@ -26,40 +24,77 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `MemoryDBClient` and
-the commands you need, for example `BatchUpdateClusterCommand`:
+the commands you need, for example `ListTagsCommand`:
 
 ```js
 // ES5 example
-const { MemoryDBClient, BatchUpdateClusterCommand } = require("@aws-sdk/client-memorydb");
+const { MemoryDBClient, ListTagsCommand } = require("@aws-sdk/client-memorydb");
 ```
 
 ```ts
 // ES6+ example
-import { MemoryDBClient, BatchUpdateClusterCommand } from "@aws-sdk/client-memorydb";
+import { MemoryDBClient, ListTagsCommand } from "@aws-sdk/client-memorydb";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new MemoryDBClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new BatchUpdateClusterCommand(params);
+const params = { /** input parameters */ };
+const command = new ListTagsCommand(params);
+```
+
+#### Supported Message Protocols
+
+This client supports multiple protocols.
+
+The default for this client is **AWS JSON (RPC) 1.1**.
+
+We have selected this default based on our evaluation of the
+performance characteristics of this protocol format in JavaScript. You don't need to change it,
+but you have the option to do so, for example to support existing integrations or tests.
+Selecting a non-default protocol changes the format
+of the data sent over the network, but does not affect how you interact with the
+client using JavaScript objects.
+
+Install the `@aws-sdk/config` package to access alternate protocols.
+
+See [AWS Protocols](https://smithy.io/2.0/aws/protocols/index.html) for more information.
+
+##### AWS JSON (RPC) 1.1
+
+This protocol uses JSON payloads.
+```js
+import { AwsJson1_1Protocol } from "@aws-sdk/config/protocol";
+
+const client = new MemoryDBClient({
+  protocol: AwsJson1_1Protocol
+});
+```
+
+##### Smithy RPC v2 CBOR
+
+This protocol uses CBOR payloads.
+```js
+import { AwsSmithyRpcV2CborProtocol } from "@aws-sdk/config/protocol";
+
+const client = new MemoryDBClient({
+  protocol: AwsSmithyRpcV2CborProtocol
+});
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -74,26 +109,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -109,31 +127,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`MemoryDB` extends `MemoryDBClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`MemoryDBClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-memorydb";
-const client = new AWS.MemoryDB({ region: "REGION" });
+import { MemoryDB } from "@aws-sdk/client-memorydb";
+
+const client = new MemoryDB({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.batchUpdateCluster(params);
+  const data = await client.listTags(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -141,7 +153,7 @@ try {
 
 // Promises.
 client
-  .batchUpdateCluster(params)
+  .listTags(params)
   .then((data) => {
     // process data.
   })
@@ -149,9 +161,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.batchUpdateCluster(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listTags(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -177,12 +189,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -203,3 +217,321 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+BatchUpdateCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/BatchUpdateClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/BatchUpdateClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/BatchUpdateClusterCommandOutput/)
+</details>
+<details>
+<summary>
+CopySnapshot
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CopySnapshotCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CopySnapshotCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CopySnapshotCommandOutput/)
+</details>
+<details>
+<summary>
+CreateACL
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateACLCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateACLCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateACLCommandOutput/)
+</details>
+<details>
+<summary>
+CreateCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateClusterCommandOutput/)
+</details>
+<details>
+<summary>
+CreateMultiRegionCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateMultiRegionClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateMultiRegionClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateMultiRegionClusterCommandOutput/)
+</details>
+<details>
+<summary>
+CreateParameterGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateParameterGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateParameterGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateParameterGroupCommandOutput/)
+</details>
+<details>
+<summary>
+CreateSnapshot
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateSnapshotCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateSnapshotCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateSnapshotCommandOutput/)
+</details>
+<details>
+<summary>
+CreateSubnetGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateSubnetGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateSubnetGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateSubnetGroupCommandOutput/)
+</details>
+<details>
+<summary>
+CreateUser
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/CreateUserCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateUserCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/CreateUserCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteACL
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteACLCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteACLCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteACLCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteClusterCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteMultiRegionCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteMultiRegionClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteMultiRegionClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteMultiRegionClusterCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteParameterGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteParameterGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteParameterGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteParameterGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteSnapshot
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteSnapshotCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteSnapshotCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteSnapshotCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteSubnetGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteSubnetGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteSubnetGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteSubnetGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteUser
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DeleteUserCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteUserCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DeleteUserCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeACLs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeACLsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeACLsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeACLsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeClusters
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeClustersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeClustersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeClustersCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEngineVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeEngineVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeEngineVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeEngineVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEvents
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeEventsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeEventsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeEventsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeMultiRegionClusters
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeMultiRegionClustersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionClustersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionClustersCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeMultiRegionParameterGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeMultiRegionParameterGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionParameterGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionParameterGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeMultiRegionParameters
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeMultiRegionParametersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionParametersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeMultiRegionParametersCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeParameterGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeParameterGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeParameterGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeParameterGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeParameters
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeParametersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeParametersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeParametersCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeReservedNodes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeReservedNodesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeReservedNodesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeReservedNodesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeReservedNodesOfferings
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeReservedNodesOfferingsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeReservedNodesOfferingsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeReservedNodesOfferingsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeServiceUpdates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeServiceUpdatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeServiceUpdatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeServiceUpdatesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSnapshots
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeSnapshotsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeSnapshotsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeSnapshotsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSubnetGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeSubnetGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeSubnetGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeSubnetGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeUsers
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/DescribeUsersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeUsersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/DescribeUsersCommandOutput/)
+</details>
+<details>
+<summary>
+FailoverShard
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/FailoverShardCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/FailoverShardCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/FailoverShardCommandOutput/)
+</details>
+<details>
+<summary>
+ListAllowedMultiRegionClusterUpdates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/ListAllowedMultiRegionClusterUpdatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListAllowedMultiRegionClusterUpdatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListAllowedMultiRegionClusterUpdatesCommandOutput/)
+</details>
+<details>
+<summary>
+ListAllowedNodeTypeUpdates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/ListAllowedNodeTypeUpdatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListAllowedNodeTypeUpdatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListAllowedNodeTypeUpdatesCommandOutput/)
+</details>
+<details>
+<summary>
+ListTags
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/ListTagsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListTagsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ListTagsCommandOutput/)
+</details>
+<details>
+<summary>
+PurchaseReservedNodesOffering
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/PurchaseReservedNodesOfferingCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/PurchaseReservedNodesOfferingCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/PurchaseReservedNodesOfferingCommandOutput/)
+</details>
+<details>
+<summary>
+ResetParameterGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/ResetParameterGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ResetParameterGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/ResetParameterGroupCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateACL
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateACLCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateACLCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateACLCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateClusterCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateMultiRegionCluster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateMultiRegionClusterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateMultiRegionClusterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateMultiRegionClusterCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateParameterGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateParameterGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateParameterGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateParameterGroupCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateSubnetGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateSubnetGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateSubnetGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateSubnetGroupCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateUser
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/memorydb/command/UpdateUserCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateUserCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-memorydb/Interface/UpdateUserCommandOutput/)
+</details>

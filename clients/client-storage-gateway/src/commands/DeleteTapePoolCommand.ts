@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTapePoolInput, DeleteTapePoolOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteTapePoolCommand,
-  serializeAws_json1_1DeleteTapePoolCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTapePoolInput, DeleteTapePoolOutput } from "../models/models_0";
+import { DeleteTapePool$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTapePoolCommand}.
+ */
 export interface DeleteTapePoolCommandInput extends DeleteTapePoolInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTapePoolCommand}.
+ */
 export interface DeleteTapePoolCommandOutput extends DeleteTapePoolOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,55 @@ export interface DeleteTapePoolCommandOutput extends DeleteTapePoolOutput, __Met
  * ```javascript
  * import { StorageGatewayClient, DeleteTapePoolCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DeleteTapePoolCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DeleteTapePoolInput
+ *   PoolARN: "STRING_VALUE", // required
+ * };
  * const command = new DeleteTapePoolCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTapePoolOutput
+ * //   PoolARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteTapePoolCommandInput - {@link DeleteTapePoolCommandInput}
+ * @returns {@link DeleteTapePoolCommandOutput}
  * @see {@link DeleteTapePoolCommandInput} for command's `input` shape.
  * @see {@link DeleteTapePoolCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTapePoolCommand extends $Command<
-  DeleteTapePoolCommandInput,
-  DeleteTapePoolCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTapePoolCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTapePoolCommandInput, DeleteTapePoolCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DeleteTapePoolCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTapePoolInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTapePoolOutput.filterSensitiveLog,
+export class DeleteTapePoolCommand extends command<DeleteTapePoolCommandInput, DeleteTapePoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTapePool",
+  DeleteTapePool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTapePoolInput;
+      output: DeleteTapePoolOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTapePoolCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteTapePoolCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTapePoolCommandOutput> {
-    return deserializeAws_json1_1DeleteTapePoolCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTapePoolCommandInput;
+      output: DeleteTapePoolCommandOutput;
+    };
+  };
 }

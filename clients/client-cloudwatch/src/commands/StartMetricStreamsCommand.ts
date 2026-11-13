@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { StartMetricStreamsInput, StartMetricStreamsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryStartMetricStreamsCommand,
-  serializeAws_queryStartMetricStreamsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartMetricStreamsInput, StartMetricStreamsOutput } from "../models/models_0";
+import { StartMetricStreams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartMetricStreamsCommand}.
+ */
 export interface StartMetricStreamsCommandInput extends StartMetricStreamsInput {}
+/**
+ * @public
+ *
+ * The output of {@link StartMetricStreamsCommand}.
+ */
 export interface StartMetricStreamsCommandOutput extends StartMetricStreamsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,57 @@ export interface StartMetricStreamsCommandOutput extends StartMetricStreamsOutpu
  * ```javascript
  * import { CloudWatchClient, StartMetricStreamsCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, StartMetricStreamsCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // StartMetricStreamsInput
+ *   Names: [ // MetricStreamNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new StartMetricStreamsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartMetricStreamsCommandInput - {@link StartMetricStreamsCommandInput}
+ * @returns {@link StartMetricStreamsCommandOutput}
  * @see {@link StartMetricStreamsCommandInput} for command's `input` shape.
  * @see {@link StartMetricStreamsCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link InternalServiceFault} (server fault)
+ *  <p>Request processing has failed due to some unknown error, exception, or
+ *             failure.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of an input parameter is bad or out-of-range.</p>
+ *
+ * @throws {@link MissingRequiredParameterException} (client fault)
+ *  <p>An input parameter that is required is missing.</p>
+ *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class StartMetricStreamsCommand extends $Command<
-  StartMetricStreamsCommandInput,
-  StartMetricStreamsCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartMetricStreamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartMetricStreamsCommandInput, StartMetricStreamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "StartMetricStreamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartMetricStreamsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StartMetricStreamsOutput.filterSensitiveLog,
+export class StartMetricStreamsCommand extends command<StartMetricStreamsCommandInput, StartMetricStreamsCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartMetricStreams",
+  StartMetricStreams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMetricStreamsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartMetricStreamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryStartMetricStreamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartMetricStreamsCommandOutput> {
-    return deserializeAws_queryStartMetricStreamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartMetricStreamsCommandInput;
+      output: StartMetricStreamsCommandOutput;
+    };
+  };
 }

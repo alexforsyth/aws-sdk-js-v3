@@ -1,192 +1,554 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultMediaConnectHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddBridgeOutputsCommandInput, AddBridgeOutputsCommandOutput } from "./commands/AddBridgeOutputsCommand";
+import type { AddBridgeSourcesCommandInput, AddBridgeSourcesCommandOutput } from "./commands/AddBridgeSourcesCommand";
+import type {
   AddFlowMediaStreamsCommandInput,
   AddFlowMediaStreamsCommandOutput,
 } from "./commands/AddFlowMediaStreamsCommand";
-import { AddFlowOutputsCommandInput, AddFlowOutputsCommandOutput } from "./commands/AddFlowOutputsCommand";
-import { AddFlowSourcesCommandInput, AddFlowSourcesCommandOutput } from "./commands/AddFlowSourcesCommand";
-import {
+import type { AddFlowOutputsCommandInput, AddFlowOutputsCommandOutput } from "./commands/AddFlowOutputsCommand";
+import type { AddFlowSourcesCommandInput, AddFlowSourcesCommandOutput } from "./commands/AddFlowSourcesCommand";
+import type {
   AddFlowVpcInterfacesCommandInput,
   AddFlowVpcInterfacesCommandOutput,
 } from "./commands/AddFlowVpcInterfacesCommand";
-import { CreateFlowCommandInput, CreateFlowCommandOutput } from "./commands/CreateFlowCommand";
-import { DeleteFlowCommandInput, DeleteFlowCommandOutput } from "./commands/DeleteFlowCommand";
-import { DescribeFlowCommandInput, DescribeFlowCommandOutput } from "./commands/DescribeFlowCommand";
-import { DescribeOfferingCommandInput, DescribeOfferingCommandOutput } from "./commands/DescribeOfferingCommand";
-import {
+import type {
+  BatchGetDestinationEndpointCommandInput,
+  BatchGetDestinationEndpointCommandOutput,
+} from "./commands/BatchGetDestinationEndpointCommand";
+import type {
+  BatchGetRouterInputCommandInput,
+  BatchGetRouterInputCommandOutput,
+} from "./commands/BatchGetRouterInputCommand";
+import type {
+  BatchGetRouterNetworkInterfaceCommandInput,
+  BatchGetRouterNetworkInterfaceCommandOutput,
+} from "./commands/BatchGetRouterNetworkInterfaceCommand";
+import type {
+  BatchGetRouterOutputCommandInput,
+  BatchGetRouterOutputCommandOutput,
+} from "./commands/BatchGetRouterOutputCommand";
+import type {
+  BatchGetSourceEndpointCommandInput,
+  BatchGetSourceEndpointCommandOutput,
+} from "./commands/BatchGetSourceEndpointCommand";
+import type { ConnectEndpointsCommandInput, ConnectEndpointsCommandOutput } from "./commands/ConnectEndpointsCommand";
+import type { CreateBridgeCommandInput, CreateBridgeCommandOutput } from "./commands/CreateBridgeCommand";
+import type { CreateFlowCommandInput, CreateFlowCommandOutput } from "./commands/CreateFlowCommand";
+import type { CreateGatewayCommandInput, CreateGatewayCommandOutput } from "./commands/CreateGatewayCommand";
+import type {
+  CreateRouterInputCommandInput,
+  CreateRouterInputCommandOutput,
+} from "./commands/CreateRouterInputCommand";
+import type {
+  CreateRouterNetworkInterfaceCommandInput,
+  CreateRouterNetworkInterfaceCommandOutput,
+} from "./commands/CreateRouterNetworkInterfaceCommand";
+import type {
+  CreateRouterOutputCommandInput,
+  CreateRouterOutputCommandOutput,
+} from "./commands/CreateRouterOutputCommand";
+import type { DeleteBridgeCommandInput, DeleteBridgeCommandOutput } from "./commands/DeleteBridgeCommand";
+import type { DeleteFlowCommandInput, DeleteFlowCommandOutput } from "./commands/DeleteFlowCommand";
+import type { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
+import type {
+  DeleteRouterInputCommandInput,
+  DeleteRouterInputCommandOutput,
+} from "./commands/DeleteRouterInputCommand";
+import type {
+  DeleteRouterNetworkInterfaceCommandInput,
+  DeleteRouterNetworkInterfaceCommandOutput,
+} from "./commands/DeleteRouterNetworkInterfaceCommand";
+import type {
+  DeleteRouterOutputCommandInput,
+  DeleteRouterOutputCommandOutput,
+} from "./commands/DeleteRouterOutputCommand";
+import type {
+  DeregisterDestinationEndpointCommandInput,
+  DeregisterDestinationEndpointCommandOutput,
+} from "./commands/DeregisterDestinationEndpointCommand";
+import type {
+  DeregisterGatewayInstanceCommandInput,
+  DeregisterGatewayInstanceCommandOutput,
+} from "./commands/DeregisterGatewayInstanceCommand";
+import type {
+  DeregisterSourceEndpointCommandInput,
+  DeregisterSourceEndpointCommandOutput,
+} from "./commands/DeregisterSourceEndpointCommand";
+import type { DescribeBridgeCommandInput, DescribeBridgeCommandOutput } from "./commands/DescribeBridgeCommand";
+import type { DescribeFlowCommandInput, DescribeFlowCommandOutput } from "./commands/DescribeFlowCommand";
+import type {
+  DescribeFlowSourceMetadataCommandInput,
+  DescribeFlowSourceMetadataCommandOutput,
+} from "./commands/DescribeFlowSourceMetadataCommand";
+import type {
+  DescribeFlowSourceThumbnailCommandInput,
+  DescribeFlowSourceThumbnailCommandOutput,
+} from "./commands/DescribeFlowSourceThumbnailCommand";
+import type { DescribeGatewayCommandInput, DescribeGatewayCommandOutput } from "./commands/DescribeGatewayCommand";
+import type {
+  DescribeGatewayInstanceCommandInput,
+  DescribeGatewayInstanceCommandOutput,
+} from "./commands/DescribeGatewayInstanceCommand";
+import type { DescribeOfferingCommandInput, DescribeOfferingCommandOutput } from "./commands/DescribeOfferingCommand";
+import type {
   DescribeReservationCommandInput,
   DescribeReservationCommandOutput,
 } from "./commands/DescribeReservationCommand";
-import {
+import type {
+  DisconnectEndpointsCommandInput,
+  DisconnectEndpointsCommandOutput,
+} from "./commands/DisconnectEndpointsCommand";
+import type {
+  GetDestinationEndpointCommandInput,
+  GetDestinationEndpointCommandOutput,
+} from "./commands/GetDestinationEndpointCommand";
+import type { GetRouterInputCommandInput, GetRouterInputCommandOutput } from "./commands/GetRouterInputCommand";
+import type {
+  GetRouterInputSourceMetadataCommandInput,
+  GetRouterInputSourceMetadataCommandOutput,
+} from "./commands/GetRouterInputSourceMetadataCommand";
+import type {
+  GetRouterInputThumbnailCommandInput,
+  GetRouterInputThumbnailCommandOutput,
+} from "./commands/GetRouterInputThumbnailCommand";
+import type {
+  GetRouterNetworkInterfaceCommandInput,
+  GetRouterNetworkInterfaceCommandOutput,
+} from "./commands/GetRouterNetworkInterfaceCommand";
+import type { GetRouterOutputCommandInput, GetRouterOutputCommandOutput } from "./commands/GetRouterOutputCommand";
+import type {
+  GetSourceEndpointCommandInput,
+  GetSourceEndpointCommandOutput,
+} from "./commands/GetSourceEndpointCommand";
+import type {
   GrantFlowEntitlementsCommandInput,
   GrantFlowEntitlementsCommandOutput,
 } from "./commands/GrantFlowEntitlementsCommand";
-import { ListEntitlementsCommandInput, ListEntitlementsCommandOutput } from "./commands/ListEntitlementsCommand";
-import { ListFlowsCommandInput, ListFlowsCommandOutput } from "./commands/ListFlowsCommand";
-import { ListOfferingsCommandInput, ListOfferingsCommandOutput } from "./commands/ListOfferingsCommand";
-import { ListReservationsCommandInput, ListReservationsCommandOutput } from "./commands/ListReservationsCommand";
-import {
+import type { ListBridgesCommandInput, ListBridgesCommandOutput } from "./commands/ListBridgesCommand";
+import type {
+  ListDestinationEndpointsCommandInput,
+  ListDestinationEndpointsCommandOutput,
+} from "./commands/ListDestinationEndpointsCommand";
+import type { ListEntitlementsCommandInput, ListEntitlementsCommandOutput } from "./commands/ListEntitlementsCommand";
+import type { ListFlowsCommandInput, ListFlowsCommandOutput } from "./commands/ListFlowsCommand";
+import type {
+  ListGatewayInstancesCommandInput,
+  ListGatewayInstancesCommandOutput,
+} from "./commands/ListGatewayInstancesCommand";
+import type { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
+import type { ListOfferingsCommandInput, ListOfferingsCommandOutput } from "./commands/ListOfferingsCommand";
+import type { ListReservationsCommandInput, ListReservationsCommandOutput } from "./commands/ListReservationsCommand";
+import type { ListRouterInputsCommandInput, ListRouterInputsCommandOutput } from "./commands/ListRouterInputsCommand";
+import type {
+  ListRouterNetworkInterfacesCommandInput,
+  ListRouterNetworkInterfacesCommandOutput,
+} from "./commands/ListRouterNetworkInterfacesCommand";
+import type {
+  ListRouterOutputsCommandInput,
+  ListRouterOutputsCommandOutput,
+} from "./commands/ListRouterOutputsCommand";
+import type {
+  ListSourceEndpointsCommandInput,
+  ListSourceEndpointsCommandOutput,
+} from "./commands/ListSourceEndpointsCommand";
+import type {
+  ListTagsForGlobalResourceCommandInput,
+  ListTagsForGlobalResourceCommandOutput,
+} from "./commands/ListTagsForGlobalResourceCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { PurchaseOfferingCommandInput, PurchaseOfferingCommandOutput } from "./commands/PurchaseOfferingCommand";
-import {
+import type { PurchaseOfferingCommandInput, PurchaseOfferingCommandOutput } from "./commands/PurchaseOfferingCommand";
+import type {
+  RegisterDestinationEndpointCommandInput,
+  RegisterDestinationEndpointCommandOutput,
+} from "./commands/RegisterDestinationEndpointCommand";
+import type {
+  RegisterSourceEndpointCommandInput,
+  RegisterSourceEndpointCommandOutput,
+} from "./commands/RegisterSourceEndpointCommand";
+import type {
+  RemoveBridgeOutputCommandInput,
+  RemoveBridgeOutputCommandOutput,
+} from "./commands/RemoveBridgeOutputCommand";
+import type {
+  RemoveBridgeSourceCommandInput,
+  RemoveBridgeSourceCommandOutput,
+} from "./commands/RemoveBridgeSourceCommand";
+import type {
   RemoveFlowMediaStreamCommandInput,
   RemoveFlowMediaStreamCommandOutput,
 } from "./commands/RemoveFlowMediaStreamCommand";
-import { RemoveFlowOutputCommandInput, RemoveFlowOutputCommandOutput } from "./commands/RemoveFlowOutputCommand";
-import { RemoveFlowSourceCommandInput, RemoveFlowSourceCommandOutput } from "./commands/RemoveFlowSourceCommand";
-import {
+import type { RemoveFlowOutputCommandInput, RemoveFlowOutputCommandOutput } from "./commands/RemoveFlowOutputCommand";
+import type { RemoveFlowSourceCommandInput, RemoveFlowSourceCommandOutput } from "./commands/RemoveFlowSourceCommand";
+import type {
   RemoveFlowVpcInterfaceCommandInput,
   RemoveFlowVpcInterfaceCommandOutput,
 } from "./commands/RemoveFlowVpcInterfaceCommand";
-import {
+import type {
+  RestartRouterInputCommandInput,
+  RestartRouterInputCommandOutput,
+} from "./commands/RestartRouterInputCommand";
+import type {
+  RestartRouterOutputCommandInput,
+  RestartRouterOutputCommandOutput,
+} from "./commands/RestartRouterOutputCommand";
+import type {
   RevokeFlowEntitlementCommandInput,
   RevokeFlowEntitlementCommandOutput,
 } from "./commands/RevokeFlowEntitlementCommand";
-import { StartFlowCommandInput, StartFlowCommandOutput } from "./commands/StartFlowCommand";
-import { StopFlowCommandInput, StopFlowCommandOutput } from "./commands/StopFlowCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateFlowCommandInput, UpdateFlowCommandOutput } from "./commands/UpdateFlowCommand";
-import {
+import type { StartFlowCommandInput, StartFlowCommandOutput } from "./commands/StartFlowCommand";
+import type { StartRouterInputCommandInput, StartRouterInputCommandOutput } from "./commands/StartRouterInputCommand";
+import type {
+  StartRouterOutputCommandInput,
+  StartRouterOutputCommandOutput,
+} from "./commands/StartRouterOutputCommand";
+import type { StopFlowCommandInput, StopFlowCommandOutput } from "./commands/StopFlowCommand";
+import type { StopRouterInputCommandInput, StopRouterInputCommandOutput } from "./commands/StopRouterInputCommand";
+import type { StopRouterOutputCommandInput, StopRouterOutputCommandOutput } from "./commands/StopRouterOutputCommand";
+import type {
+  TagGlobalResourceCommandInput,
+  TagGlobalResourceCommandOutput,
+} from "./commands/TagGlobalResourceCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { TakeRouterInputCommandInput, TakeRouterInputCommandOutput } from "./commands/TakeRouterInputCommand";
+import type {
+  UntagGlobalResourceCommandInput,
+  UntagGlobalResourceCommandOutput,
+} from "./commands/UntagGlobalResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateBridgeCommandInput, UpdateBridgeCommandOutput } from "./commands/UpdateBridgeCommand";
+import type {
+  UpdateBridgeOutputCommandInput,
+  UpdateBridgeOutputCommandOutput,
+} from "./commands/UpdateBridgeOutputCommand";
+import type {
+  UpdateBridgeSourceCommandInput,
+  UpdateBridgeSourceCommandOutput,
+} from "./commands/UpdateBridgeSourceCommand";
+import type {
+  UpdateBridgeStateCommandInput,
+  UpdateBridgeStateCommandOutput,
+} from "./commands/UpdateBridgeStateCommand";
+import type {
+  UpdateDestinationEndpointCommandInput,
+  UpdateDestinationEndpointCommandOutput,
+} from "./commands/UpdateDestinationEndpointCommand";
+import type { UpdateFlowCommandInput, UpdateFlowCommandOutput } from "./commands/UpdateFlowCommand";
+import type {
   UpdateFlowEntitlementCommandInput,
   UpdateFlowEntitlementCommandOutput,
 } from "./commands/UpdateFlowEntitlementCommand";
-import {
+import type {
   UpdateFlowMediaStreamCommandInput,
   UpdateFlowMediaStreamCommandOutput,
 } from "./commands/UpdateFlowMediaStreamCommand";
-import { UpdateFlowOutputCommandInput, UpdateFlowOutputCommandOutput } from "./commands/UpdateFlowOutputCommand";
-import { UpdateFlowSourceCommandInput, UpdateFlowSourceCommandOutput } from "./commands/UpdateFlowSourceCommand";
+import type { UpdateFlowOutputCommandInput, UpdateFlowOutputCommandOutput } from "./commands/UpdateFlowOutputCommand";
+import type { UpdateFlowSourceCommandInput, UpdateFlowSourceCommandOutput } from "./commands/UpdateFlowSourceCommand";
+import type {
+  UpdateGatewayInstanceCommandInput,
+  UpdateGatewayInstanceCommandOutput,
+} from "./commands/UpdateGatewayInstanceCommand";
+import type {
+  UpdateRouterInputCommandInput,
+  UpdateRouterInputCommandOutput,
+} from "./commands/UpdateRouterInputCommand";
+import type {
+  UpdateRouterNetworkInterfaceCommandInput,
+  UpdateRouterNetworkInterfaceCommandOutput,
+} from "./commands/UpdateRouterNetworkInterfaceCommand";
+import type {
+  UpdateRouterOutputCommandInput,
+  UpdateRouterOutputCommandOutput,
+} from "./commands/UpdateRouterOutputCommand";
+import type {
+  UpdateSourceEndpointCommandInput,
+  UpdateSourceEndpointCommandOutput,
+} from "./commands/UpdateSourceEndpointCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AddBridgeOutputsCommandInput
+  | AddBridgeSourcesCommandInput
   | AddFlowMediaStreamsCommandInput
   | AddFlowOutputsCommandInput
   | AddFlowSourcesCommandInput
   | AddFlowVpcInterfacesCommandInput
+  | BatchGetDestinationEndpointCommandInput
+  | BatchGetRouterInputCommandInput
+  | BatchGetRouterNetworkInterfaceCommandInput
+  | BatchGetRouterOutputCommandInput
+  | BatchGetSourceEndpointCommandInput
+  | ConnectEndpointsCommandInput
+  | CreateBridgeCommandInput
   | CreateFlowCommandInput
+  | CreateGatewayCommandInput
+  | CreateRouterInputCommandInput
+  | CreateRouterNetworkInterfaceCommandInput
+  | CreateRouterOutputCommandInput
+  | DeleteBridgeCommandInput
   | DeleteFlowCommandInput
+  | DeleteGatewayCommandInput
+  | DeleteRouterInputCommandInput
+  | DeleteRouterNetworkInterfaceCommandInput
+  | DeleteRouterOutputCommandInput
+  | DeregisterDestinationEndpointCommandInput
+  | DeregisterGatewayInstanceCommandInput
+  | DeregisterSourceEndpointCommandInput
+  | DescribeBridgeCommandInput
   | DescribeFlowCommandInput
+  | DescribeFlowSourceMetadataCommandInput
+  | DescribeFlowSourceThumbnailCommandInput
+  | DescribeGatewayCommandInput
+  | DescribeGatewayInstanceCommandInput
   | DescribeOfferingCommandInput
   | DescribeReservationCommandInput
+  | DisconnectEndpointsCommandInput
+  | GetDestinationEndpointCommandInput
+  | GetRouterInputCommandInput
+  | GetRouterInputSourceMetadataCommandInput
+  | GetRouterInputThumbnailCommandInput
+  | GetRouterNetworkInterfaceCommandInput
+  | GetRouterOutputCommandInput
+  | GetSourceEndpointCommandInput
   | GrantFlowEntitlementsCommandInput
+  | ListBridgesCommandInput
+  | ListDestinationEndpointsCommandInput
   | ListEntitlementsCommandInput
   | ListFlowsCommandInput
+  | ListGatewayInstancesCommandInput
+  | ListGatewaysCommandInput
   | ListOfferingsCommandInput
   | ListReservationsCommandInput
+  | ListRouterInputsCommandInput
+  | ListRouterNetworkInterfacesCommandInput
+  | ListRouterOutputsCommandInput
+  | ListSourceEndpointsCommandInput
+  | ListTagsForGlobalResourceCommandInput
   | ListTagsForResourceCommandInput
   | PurchaseOfferingCommandInput
+  | RegisterDestinationEndpointCommandInput
+  | RegisterSourceEndpointCommandInput
+  | RemoveBridgeOutputCommandInput
+  | RemoveBridgeSourceCommandInput
   | RemoveFlowMediaStreamCommandInput
   | RemoveFlowOutputCommandInput
   | RemoveFlowSourceCommandInput
   | RemoveFlowVpcInterfaceCommandInput
+  | RestartRouterInputCommandInput
+  | RestartRouterOutputCommandInput
   | RevokeFlowEntitlementCommandInput
   | StartFlowCommandInput
+  | StartRouterInputCommandInput
+  | StartRouterOutputCommandInput
   | StopFlowCommandInput
+  | StopRouterInputCommandInput
+  | StopRouterOutputCommandInput
+  | TagGlobalResourceCommandInput
   | TagResourceCommandInput
+  | TakeRouterInputCommandInput
+  | UntagGlobalResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateBridgeCommandInput
+  | UpdateBridgeOutputCommandInput
+  | UpdateBridgeSourceCommandInput
+  | UpdateBridgeStateCommandInput
+  | UpdateDestinationEndpointCommandInput
   | UpdateFlowCommandInput
   | UpdateFlowEntitlementCommandInput
   | UpdateFlowMediaStreamCommandInput
   | UpdateFlowOutputCommandInput
-  | UpdateFlowSourceCommandInput;
+  | UpdateFlowSourceCommandInput
+  | UpdateGatewayInstanceCommandInput
+  | UpdateRouterInputCommandInput
+  | UpdateRouterNetworkInterfaceCommandInput
+  | UpdateRouterOutputCommandInput
+  | UpdateSourceEndpointCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AddBridgeOutputsCommandOutput
+  | AddBridgeSourcesCommandOutput
   | AddFlowMediaStreamsCommandOutput
   | AddFlowOutputsCommandOutput
   | AddFlowSourcesCommandOutput
   | AddFlowVpcInterfacesCommandOutput
+  | BatchGetDestinationEndpointCommandOutput
+  | BatchGetRouterInputCommandOutput
+  | BatchGetRouterNetworkInterfaceCommandOutput
+  | BatchGetRouterOutputCommandOutput
+  | BatchGetSourceEndpointCommandOutput
+  | ConnectEndpointsCommandOutput
+  | CreateBridgeCommandOutput
   | CreateFlowCommandOutput
+  | CreateGatewayCommandOutput
+  | CreateRouterInputCommandOutput
+  | CreateRouterNetworkInterfaceCommandOutput
+  | CreateRouterOutputCommandOutput
+  | DeleteBridgeCommandOutput
   | DeleteFlowCommandOutput
+  | DeleteGatewayCommandOutput
+  | DeleteRouterInputCommandOutput
+  | DeleteRouterNetworkInterfaceCommandOutput
+  | DeleteRouterOutputCommandOutput
+  | DeregisterDestinationEndpointCommandOutput
+  | DeregisterGatewayInstanceCommandOutput
+  | DeregisterSourceEndpointCommandOutput
+  | DescribeBridgeCommandOutput
   | DescribeFlowCommandOutput
+  | DescribeFlowSourceMetadataCommandOutput
+  | DescribeFlowSourceThumbnailCommandOutput
+  | DescribeGatewayCommandOutput
+  | DescribeGatewayInstanceCommandOutput
   | DescribeOfferingCommandOutput
   | DescribeReservationCommandOutput
+  | DisconnectEndpointsCommandOutput
+  | GetDestinationEndpointCommandOutput
+  | GetRouterInputCommandOutput
+  | GetRouterInputSourceMetadataCommandOutput
+  | GetRouterInputThumbnailCommandOutput
+  | GetRouterNetworkInterfaceCommandOutput
+  | GetRouterOutputCommandOutput
+  | GetSourceEndpointCommandOutput
   | GrantFlowEntitlementsCommandOutput
+  | ListBridgesCommandOutput
+  | ListDestinationEndpointsCommandOutput
   | ListEntitlementsCommandOutput
   | ListFlowsCommandOutput
+  | ListGatewayInstancesCommandOutput
+  | ListGatewaysCommandOutput
   | ListOfferingsCommandOutput
   | ListReservationsCommandOutput
+  | ListRouterInputsCommandOutput
+  | ListRouterNetworkInterfacesCommandOutput
+  | ListRouterOutputsCommandOutput
+  | ListSourceEndpointsCommandOutput
+  | ListTagsForGlobalResourceCommandOutput
   | ListTagsForResourceCommandOutput
   | PurchaseOfferingCommandOutput
+  | RegisterDestinationEndpointCommandOutput
+  | RegisterSourceEndpointCommandOutput
+  | RemoveBridgeOutputCommandOutput
+  | RemoveBridgeSourceCommandOutput
   | RemoveFlowMediaStreamCommandOutput
   | RemoveFlowOutputCommandOutput
   | RemoveFlowSourceCommandOutput
   | RemoveFlowVpcInterfaceCommandOutput
+  | RestartRouterInputCommandOutput
+  | RestartRouterOutputCommandOutput
   | RevokeFlowEntitlementCommandOutput
   | StartFlowCommandOutput
+  | StartRouterInputCommandOutput
+  | StartRouterOutputCommandOutput
   | StopFlowCommandOutput
+  | StopRouterInputCommandOutput
+  | StopRouterOutputCommandOutput
+  | TagGlobalResourceCommandOutput
   | TagResourceCommandOutput
+  | TakeRouterInputCommandOutput
+  | UntagGlobalResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateBridgeCommandOutput
+  | UpdateBridgeOutputCommandOutput
+  | UpdateBridgeSourceCommandOutput
+  | UpdateBridgeStateCommandOutput
+  | UpdateDestinationEndpointCommandOutput
   | UpdateFlowCommandOutput
   | UpdateFlowEntitlementCommandOutput
   | UpdateFlowMediaStreamCommandOutput
   | UpdateFlowOutputCommandOutput
-  | UpdateFlowSourceCommandOutput;
+  | UpdateFlowSourceCommandOutput
+  | UpdateGatewayInstanceCommandOutput
+  | UpdateRouterInputCommandOutput
+  | UpdateRouterNetworkInterfaceCommandOutput
+  | UpdateRouterOutputCommandOutput
+  | UpdateSourceEndpointCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -198,7 +560,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -237,25 +599,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -268,63 +621,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type MediaConnectClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of MediaConnectClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type MediaConnectClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of MediaConnectClient class constructor that set the region, credentials and other options.
  */
 export interface MediaConnectClientConfig extends MediaConnectClientConfigType {}
 
-type MediaConnectClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of MediaConnectClient class. This is resolved and normalized from the {@link MediaConnectClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type MediaConnectClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of MediaConnectClient class. This is resolved and normalized from the {@link MediaConnectClientConfig | constructor configuration interface}.
  */
 export interface MediaConnectClientResolvedConfig extends MediaConnectClientResolvedConfigType {}
 
 /**
- * API for AWS Elemental MediaConnect
+ * <p>Welcome to the Elemental MediaConnect API reference. </p> <p>MediaConnect is a service that lets you ingest live video content into the cloud and distribute it to destinations all over the world, both inside and outside the Amazon Web Services cloud. This API reference provides descriptions, syntax, and usage examples for each of the actions and data types that are supported by MediaConnect. </p> <p>Use the following links to get started with the MediaConnect API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/API_Operations.html">Actions</a>: An alphabetical list of all MediaConnect API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/API_Types.html">Data types</a>: An alphabetical list of all MediaConnect data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/CommonParameters.html">Common parameters</a>: Parameters that all operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mediaconnect/latest/api/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul>
+ * @public
  */
 export class MediaConnectClient extends __Client<
   __HttpHandlerOptions,
@@ -337,22 +740,36 @@ export class MediaConnectClient extends __Client<
    */
   readonly config: MediaConnectClientResolvedConfig;
 
-  constructor(configuration: MediaConnectClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<MediaConnectClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultMediaConnectHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: MediaConnectClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

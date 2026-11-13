@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteDBParameterGroupMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteDBParameterGroupCommand,
-  serializeAws_queryDeleteDBParameterGroupCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDBParameterGroupMessage } from "../models/models_0";
+import { DeleteDBParameterGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDBParameterGroupCommand}.
+ */
 export interface DeleteDBParameterGroupCommandInput extends DeleteDBParameterGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDBParameterGroupCommand}.
+ */
 export interface DeleteDBParameterGroupCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface DeleteDBParameterGroupCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { RDSClient, DeleteDBParameterGroupCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DeleteDBParameterGroupCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DeleteDBParameterGroupMessage
+ *   DBParameterGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDBParameterGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDBParameterGroupCommandInput - {@link DeleteDBParameterGroupCommandInput}
+ * @returns {@link DeleteDBParameterGroupCommandOutput}
  * @see {@link DeleteDBParameterGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteDBParameterGroupCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBParameterGroupNotFoundFault} (client fault)
+ *  <p> <code>DBParameterGroupName</code> doesn't refer to an existing DB parameter group.</p>
+ *
+ * @throws {@link InvalidDBParameterGroupStateFault} (client fault)
+ *  <p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you can't delete it when the parameter group is in this state.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To delete a DB parameter group
+ * ```javascript
+ * // The following example deletes a DB parameter group.
+ * const input = {
+ *   DBParameterGroupName: "mydbparametergroup"
+ * };
+ * const command = new DeleteDBParameterGroupCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteDBParameterGroupCommand extends $Command<
-  DeleteDBParameterGroupCommandInput,
-  DeleteDBParameterGroupCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDBParameterGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDBParameterGroupCommandInput, DeleteDBParameterGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DeleteDBParameterGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDBParameterGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteDBParameterGroupCommand extends command<DeleteDBParameterGroupCommandInput, DeleteDBParameterGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDBParameterGroup",
+  DeleteDBParameterGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDBParameterGroupMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDBParameterGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteDBParameterGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDBParameterGroupCommandOutput> {
-    return deserializeAws_queryDeleteDBParameterGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDBParameterGroupCommandInput;
+      output: DeleteDBParameterGroupCommandOutput;
+    };
+  };
 }

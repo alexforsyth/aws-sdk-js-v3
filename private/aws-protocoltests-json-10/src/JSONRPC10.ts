@@ -1,331 +1,405 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type ContentTypeParametersCommandInput,
+  type ContentTypeParametersCommandOutput,
+  ContentTypeParametersCommand,
+} from "./commands/ContentTypeParametersCommand";
+import {
+  type EmptyInputAndEmptyOutputCommandInput,
+  type EmptyInputAndEmptyOutputCommandOutput,
   EmptyInputAndEmptyOutputCommand,
-  EmptyInputAndEmptyOutputCommandInput,
-  EmptyInputAndEmptyOutputCommandOutput,
 } from "./commands/EmptyInputAndEmptyOutputCommand";
 import {
+  type EndpointOperationCommandInput,
+  type EndpointOperationCommandOutput,
   EndpointOperationCommand,
-  EndpointOperationCommandInput,
-  EndpointOperationCommandOutput,
 } from "./commands/EndpointOperationCommand";
 import {
+  type EndpointWithHostLabelOperationCommandInput,
+  type EndpointWithHostLabelOperationCommandOutput,
   EndpointWithHostLabelOperationCommand,
-  EndpointWithHostLabelOperationCommandInput,
-  EndpointWithHostLabelOperationCommandOutput,
 } from "./commands/EndpointWithHostLabelOperationCommand";
 import {
+  type GreetingWithErrorsCommandInput,
+  type GreetingWithErrorsCommandOutput,
   GreetingWithErrorsCommand,
-  GreetingWithErrorsCommandInput,
-  GreetingWithErrorsCommandOutput,
 } from "./commands/GreetingWithErrorsCommand";
 import {
+  type HostWithPathOperationCommandInput,
+  type HostWithPathOperationCommandOutput,
   HostWithPathOperationCommand,
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
 } from "./commands/HostWithPathOperationCommand";
-import { JsonUnionsCommand, JsonUnionsCommandInput, JsonUnionsCommandOutput } from "./commands/JsonUnionsCommand";
 import {
+  type JsonUnionsCommandInput,
+  type JsonUnionsCommandOutput,
+  JsonUnionsCommand,
+} from "./commands/JsonUnionsCommand";
+import {
+  type NoInputAndNoOutputCommandInput,
+  type NoInputAndNoOutputCommandOutput,
   NoInputAndNoOutputCommand,
-  NoInputAndNoOutputCommandInput,
-  NoInputAndNoOutputCommandOutput,
 } from "./commands/NoInputAndNoOutputCommand";
 import {
+  type NoInputAndOutputCommandInput,
+  type NoInputAndOutputCommandOutput,
   NoInputAndOutputCommand,
-  NoInputAndOutputCommandInput,
-  NoInputAndOutputCommandOutput,
 } from "./commands/NoInputAndOutputCommand";
 import {
+  type OperationWithDefaultsCommandInput,
+  type OperationWithDefaultsCommandOutput,
+  OperationWithDefaultsCommand,
+} from "./commands/OperationWithDefaultsCommand";
+import {
+  type OperationWithNestedStructureCommandInput,
+  type OperationWithNestedStructureCommandOutput,
+  OperationWithNestedStructureCommand,
+} from "./commands/OperationWithNestedStructureCommand";
+import {
+  type OperationWithRequiredMembersCommandInput,
+  type OperationWithRequiredMembersCommandOutput,
+  OperationWithRequiredMembersCommand,
+} from "./commands/OperationWithRequiredMembersCommand";
+import {
+  type OperationWithRequiredMembersWithDefaultsCommandInput,
+  type OperationWithRequiredMembersWithDefaultsCommandOutput,
+  OperationWithRequiredMembersWithDefaultsCommand,
+} from "./commands/OperationWithRequiredMembersWithDefaultsCommand";
+import {
+  type PutWithContentEncodingCommandInput,
+  type PutWithContentEncodingCommandOutput,
+  PutWithContentEncodingCommand,
+} from "./commands/PutWithContentEncodingCommand";
+import {
+  type QueryIncompatibleOperationCommandInput,
+  type QueryIncompatibleOperationCommandOutput,
+  QueryIncompatibleOperationCommand,
+} from "./commands/QueryIncompatibleOperationCommand";
+import {
+  type SimpleScalarPropertiesCommandInput,
+  type SimpleScalarPropertiesCommandOutput,
   SimpleScalarPropertiesCommand,
-  SimpleScalarPropertiesCommandInput,
-  SimpleScalarPropertiesCommandOutput,
 } from "./commands/SimpleScalarPropertiesCommand";
 import { JSONRPC10Client } from "./JSONRPC10Client";
 
-export class JSONRPC10 extends JSONRPC10Client {
+const commands = {
+  ContentTypeParametersCommand,
+  EmptyInputAndEmptyOutputCommand,
+  EndpointOperationCommand,
+  EndpointWithHostLabelOperationCommand,
+  GreetingWithErrorsCommand,
+  HostWithPathOperationCommand,
+  JsonUnionsCommand,
+  NoInputAndNoOutputCommand,
+  NoInputAndOutputCommand,
+  OperationWithDefaultsCommand,
+  OperationWithNestedStructureCommand,
+  OperationWithRequiredMembersCommand,
+  OperationWithRequiredMembersWithDefaultsCommand,
+  PutWithContentEncodingCommand,
+  QueryIncompatibleOperationCommand,
+  SimpleScalarPropertiesCommand,
+};
+
+/**
+ * @public
+ */
+export interface JSONRPC10RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface JSONRPC10 {
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has an empty input
-   * and empty output structure that reuses the same shape. While this should
-   * be rare, code generators must support this.
+   * @see {@link ContentTypeParametersCommand}
    */
-  public emptyInputAndEmptyOutput(
+  contentTypeParameters(): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<ContentTypeParametersCommandOutput>;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+  contentTypeParameters(
+    args: ContentTypeParametersCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: ContentTypeParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EmptyInputAndEmptyOutputCommand}
+   */
+  emptyInputAndEmptyOutput(): Promise<EmptyInputAndEmptyOutputCommandOutput>;
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<EmptyInputAndEmptyOutputCommandOutput>;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
-    args: EmptyInputAndEmptyOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void),
-    cb?: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
-  ): Promise<EmptyInputAndEmptyOutputCommandOutput> | void {
-    const command = new EmptyInputAndEmptyOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointOperation(
+  /**
+   * @see {@link EndpointOperationCommand}
+   */
+  endpointOperation(): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<EndpointOperationCommandOutput>;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
-    args: EndpointOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointOperationCommandOutput) => void
-  ): Promise<EndpointOperationCommandOutput> | void {
-    const command = new EndpointOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointWithHostLabelOperation(
+  /**
+   * @see {@link EndpointWithHostLabelOperationCommand}
+   */
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<EndpointWithHostLabelOperationCommandOutput>;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
-    args: EndpointWithHostLabelOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
-  ): Promise<EndpointWithHostLabelOperationCommandOutput> | void {
-    const command = new EndpointWithHostLabelOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation has three possible return values:
-   *
-   * 1. A successful response in the form of GreetingWithErrorsOutput
-   * 2. An InvalidGreeting error.
-   * 3. A ComplexError error.
-   *
-   * Implementations must be able to successfully take a response and
-   * properly deserialize successful and error responses.
+   * @see {@link GreetingWithErrorsCommand}
    */
-  public greetingWithErrors(
+  greetingWithErrors(): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<GreetingWithErrorsCommandOutput>;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
-    args: GreetingWithErrorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GreetingWithErrorsCommandOutput) => void),
-    cb?: (err: any, data?: GreetingWithErrorsCommandOutput) => void
-  ): Promise<GreetingWithErrorsCommandOutput> | void {
-    const command = new GreetingWithErrorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<HostWithPathOperationCommandOutput>;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HostWithPathOperationCommandOutput) => void),
-    cb?: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): Promise<HostWithPathOperationCommandOutput> | void {
-    const command = new HostWithPathOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation uses unions for inputs and outputs.
+   * @see {@link HostWithPathOperationCommand}
    */
-  public jsonUnions(args: JsonUnionsCommandInput, options?: __HttpHandlerOptions): Promise<JsonUnionsCommandOutput>;
-  public jsonUnions(args: JsonUnionsCommandInput, cb: (err: any, data?: JsonUnionsCommandOutput) => void): void;
-  public jsonUnions(
+  hostWithPathOperation(): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
+  ): void;
+  hostWithPathOperation(
+    args: HostWithPathOperationCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link JsonUnionsCommand}
+   */
+  jsonUnions(): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: JSONRPC10RequestOptions
+  ): Promise<JsonUnionsCommandOutput>;
+  jsonUnions(
+    args: JsonUnionsCommandInput,
     cb: (err: any, data?: JsonUnionsCommandOutput) => void
   ): void;
-  public jsonUnions(
+  jsonUnions(
     args: JsonUnionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: JsonUnionsCommandOutput) => void),
-    cb?: (err: any, data?: JsonUnionsCommandOutput) => void
-  ): Promise<JsonUnionsCommandOutput> | void {
-    const command = new JsonUnionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: JsonUnionsCommandOutput) => void
+  ): void;
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has no input or output.
-   * While this should be rare, code generators must support this.
+   * @see {@link NoInputAndNoOutputCommand}
    */
-  public noInputAndNoOutput(
+  noInputAndNoOutput(): Promise<NoInputAndNoOutputCommandOutput>;
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<NoInputAndNoOutputCommandOutput>;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
-    args: NoInputAndNoOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndNoOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
-  ): Promise<NoInputAndNoOutputCommandOutput> | void {
-    const command = new NoInputAndNoOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has no input and the
-   * output is empty. While this should be rare, code generators must support
-   * this.
+   * @see {@link NoInputAndOutputCommand}
    */
-  public noInputAndOutput(
+  noInputAndOutput(): Promise<NoInputAndOutputCommandOutput>;
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<NoInputAndOutputCommandOutput>;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
-    args: NoInputAndOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndOutputCommandOutput) => void
-  ): Promise<NoInputAndOutputCommandOutput> | void {
-    const command = new NoInputAndOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public simpleScalarProperties(
+  /**
+   * @see {@link OperationWithDefaultsCommand}
+   */
+  operationWithDefaults(): Promise<OperationWithDefaultsCommandOutput>;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<OperationWithDefaultsCommandOutput>;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    cb: (err: any, data?: OperationWithDefaultsCommandOutput) => void
+  ): void;
+  operationWithDefaults(
+    args: OperationWithDefaultsCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: OperationWithDefaultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithNestedStructureCommand}
+   */
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<OperationWithNestedStructureCommandOutput>;
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    cb: (err: any, data?: OperationWithNestedStructureCommandOutput) => void
+  ): void;
+  operationWithNestedStructure(
+    args: OperationWithNestedStructureCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: OperationWithNestedStructureCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithRequiredMembersCommand}
+   */
+  operationWithRequiredMembers(): Promise<OperationWithRequiredMembersCommandOutput>;
+  operationWithRequiredMembers(
+    args: OperationWithRequiredMembersCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<OperationWithRequiredMembersCommandOutput>;
+  operationWithRequiredMembers(
+    args: OperationWithRequiredMembersCommandInput,
+    cb: (err: any, data?: OperationWithRequiredMembersCommandOutput) => void
+  ): void;
+  operationWithRequiredMembers(
+    args: OperationWithRequiredMembersCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: OperationWithRequiredMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OperationWithRequiredMembersWithDefaultsCommand}
+   */
+  operationWithRequiredMembersWithDefaults(): Promise<OperationWithRequiredMembersWithDefaultsCommandOutput>;
+  operationWithRequiredMembersWithDefaults(
+    args: OperationWithRequiredMembersWithDefaultsCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<OperationWithRequiredMembersWithDefaultsCommandOutput>;
+  operationWithRequiredMembersWithDefaults(
+    args: OperationWithRequiredMembersWithDefaultsCommandInput,
+    cb: (err: any, data?: OperationWithRequiredMembersWithDefaultsCommandOutput) => void
+  ): void;
+  operationWithRequiredMembersWithDefaults(
+    args: OperationWithRequiredMembersWithDefaultsCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: OperationWithRequiredMembersWithDefaultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWithContentEncodingCommand}
+   */
+  putWithContentEncoding(): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryIncompatibleOperationCommand}
+   */
+  queryIncompatibleOperation(): Promise<QueryIncompatibleOperationCommandOutput>;
+  queryIncompatibleOperation(
+    args: QueryIncompatibleOperationCommandInput,
+    options?: JSONRPC10RequestOptions
+  ): Promise<QueryIncompatibleOperationCommandOutput>;
+  queryIncompatibleOperation(
+    args: QueryIncompatibleOperationCommandInput,
+    cb: (err: any, data?: QueryIncompatibleOperationCommandOutput) => void
+  ): void;
+  queryIncompatibleOperation(
+    args: QueryIncompatibleOperationCommandInput,
+    options: JSONRPC10RequestOptions,
+    cb: (err: any, data?: QueryIncompatibleOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SimpleScalarPropertiesCommand}
+   */
+  simpleScalarProperties(): Promise<SimpleScalarPropertiesCommandOutput>;
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: JSONRPC10RequestOptions
   ): Promise<SimpleScalarPropertiesCommandOutput>;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
+  simpleScalarProperties(
     args: SimpleScalarPropertiesCommandInput,
-    options: __HttpHandlerOptions,
+    options: JSONRPC10RequestOptions,
     cb: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
   ): void;
-  public simpleScalarProperties(
-    args: SimpleScalarPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SimpleScalarPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: SimpleScalarPropertiesCommandOutput) => void
-  ): Promise<SimpleScalarPropertiesCommandOutput> | void {
-    const command = new SimpleScalarPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 }
+
+/**
+ * @public
+ */
+export class JSONRPC10 extends JSONRPC10Client implements JSONRPC10 {}
+createAggregatedClient(commands, JSONRPC10);

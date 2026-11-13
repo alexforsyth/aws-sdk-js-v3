@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticsearchServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticsearchServiceClient";
-import { DissociatePackageRequest, DissociatePackageResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DissociatePackageCommand,
-  serializeAws_restJson1DissociatePackageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DissociatePackageRequest, DissociatePackageResponse } from "../models/models_0";
+import { DissociatePackage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DissociatePackageCommand}.
+ */
 export interface DissociatePackageCommandInput extends DissociatePackageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DissociatePackageCommand}.
+ */
 export interface DissociatePackageCommandOutput extends DissociatePackageResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,79 @@ export interface DissociatePackageCommandOutput extends DissociatePackageRespons
  * ```javascript
  * import { ElasticsearchServiceClient, DissociatePackageCommand } from "@aws-sdk/client-elasticsearch-service"; // ES Modules import
  * // const { ElasticsearchServiceClient, DissociatePackageCommand } = require("@aws-sdk/client-elasticsearch-service"); // CommonJS import
+ * // import type { ElasticsearchServiceClientConfig } from "@aws-sdk/client-elasticsearch-service";
+ * const config = {}; // type is ElasticsearchServiceClientConfig
  * const client = new ElasticsearchServiceClient(config);
+ * const input = { // DissociatePackageRequest
+ *   PackageID: "STRING_VALUE", // required
+ *   DomainName: "STRING_VALUE", // required
+ * };
  * const command = new DissociatePackageCommand(input);
  * const response = await client.send(command);
+ * // { // DissociatePackageResponse
+ * //   DomainPackageDetails: { // DomainPackageDetails
+ * //     PackageID: "STRING_VALUE",
+ * //     PackageName: "STRING_VALUE",
+ * //     PackageType: "TXT-DICTIONARY",
+ * //     LastUpdated: new Date("TIMESTAMP"),
+ * //     DomainName: "STRING_VALUE",
+ * //     DomainPackageStatus: "ASSOCIATING" || "ASSOCIATION_FAILED" || "ACTIVE" || "DISSOCIATING" || "DISSOCIATION_FAILED",
+ * //     PackageVersion: "STRING_VALUE",
+ * //     ReferencePath: "STRING_VALUE",
+ * //     ErrorDetails: { // ErrorDetails
+ * //       ErrorType: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DissociatePackageCommandInput - {@link DissociatePackageCommandInput}
+ * @returns {@link DissociatePackageCommandOutput}
  * @see {@link DissociatePackageCommandInput} for command's `input` shape.
  * @see {@link DissociatePackageCommandOutput} for command's `response` shape.
- * @see {@link ElasticsearchServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticsearchServiceClientResolvedConfig | config} for ElasticsearchServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An error occurred because user does not have permissions to access the resource. Returns HTTP status code 403.</p>
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>An error occurred because the client attempts to remove a resource that is currently in use. Returns HTTP status code 409.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for missing / invalid input fields. Gives http status code of 400.</p>
+ *
+ * @throws {@link ElasticsearchServiceServiceException}
+ * <p>Base exception class for all service exceptions from ElasticsearchService service.</p>
+ *
+ *
+ * @public
  */
-export class DissociatePackageCommand extends $Command<
-  DissociatePackageCommandInput,
-  DissociatePackageCommandOutput,
-  ElasticsearchServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DissociatePackageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticsearchServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DissociatePackageCommandInput, DissociatePackageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticsearchServiceClient";
-    const commandName = "DissociatePackageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DissociatePackageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DissociatePackageResponse.filterSensitiveLog,
+export class DissociatePackageCommand extends command<DissociatePackageCommandInput, DissociatePackageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DissociatePackage",
+  DissociatePackage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DissociatePackageRequest;
+      output: DissociatePackageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DissociatePackageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DissociatePackageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DissociatePackageCommandOutput> {
-    return deserializeAws_restJson1DissociatePackageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DissociatePackageCommandInput;
+      output: DissociatePackageCommandOutput;
+    };
+  };
 }

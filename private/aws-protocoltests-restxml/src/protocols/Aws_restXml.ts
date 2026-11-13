@@ -1,385 +1,461 @@
+// smithy-typescript generated code
 import {
+  loadRestXmlErrorCode,
+  parseXmlBody as parseBody,
+  parseXmlErrorBody as parseErrorBody,
+} from "@aws-sdk/core/protocols";
+import { XmlNode as __XmlNode, XmlText as __XmlText } from "@aws-sdk/xml-builder";
+import { requestBuilder as rb } from "@smithy/core";
+import {
+  convertMap,
+  decorateServiceException as __decorateServiceException,
+  getArrayIfSingleItem as __getArrayIfSingleItem,
+  isSerializableHeaderValue,
+  map,
+  serializeDateTime as __serializeDateTime,
+  withBaseException,
+} from "@smithy/core/client";
+import {
+  collectBody,
+  extendedEncodeURIComponent as __extendedEncodeURIComponent,
   HttpRequest as __HttpRequest,
   HttpResponse as __HttpResponse,
   isValidHostname as __isValidHostname,
-} from "@aws-sdk/protocol-http";
+  resolvedPath as __resolvedPath,
+} from "@smithy/core/protocols";
 import {
   dateToUtcString as __dateToUtcString,
   expectNonNull as __expectNonNull,
   expectObject as __expectObject,
   expectString as __expectString,
   expectUnion as __expectUnion,
-  extendedEncodeURIComponent as __extendedEncodeURIComponent,
-  getArrayIfSingleItem as __getArrayIfSingleItem,
-  getValueFromTextNode as __getValueFromTextNode,
   parseBoolean as __parseBoolean,
   parseEpochTimestamp as __parseEpochTimestamp,
-  parseRfc3339DateTime as __parseRfc3339DateTime,
+  parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
   parseRfc7231DateTime as __parseRfc7231DateTime,
+  quoteHeader as __quoteHeader,
   splitEvery as __splitEvery,
+  splitHeader as __splitHeader,
   strictParseByte as __strictParseByte,
   strictParseDouble as __strictParseDouble,
   strictParseFloat as __strictParseFloat,
   strictParseInt32 as __strictParseInt32,
   strictParseLong as __strictParseLong,
   strictParseShort as __strictParseShort,
-} from "@aws-sdk/smithy-client";
-import {
+  v4 as generateIdempotencyToken,
+} from "@smithy/core/serde";
+import type {
   Endpoint as __Endpoint,
-  MetadataBearer as __MetadataBearer,
   ResponseMetadata as __ResponseMetadata,
   SerdeContext as __SerdeContext,
-  SmithyException as __SmithyException,
-} from "@aws-sdk/types";
-import { XmlNode as __XmlNode, XmlText as __XmlText } from "@aws-sdk/xml-builder";
-import { decodeHTML } from "entities";
-import { parse as xmlParse } from "fast-xml-parser";
-import { v4 as generateIdempotencyToken } from "uuid";
+} from "@smithy/types";
 
-import {
+import type {
   AllQueryStringTypesCommandInput,
   AllQueryStringTypesCommandOutput,
 } from "../commands/AllQueryStringTypesCommand";
-import { BodyWithXmlNameCommandInput, BodyWithXmlNameCommandOutput } from "../commands/BodyWithXmlNameCommand";
-import {
+import type { BodyWithXmlNameCommandInput, BodyWithXmlNameCommandOutput } from "../commands/BodyWithXmlNameCommand";
+import type {
   ConstantAndVariableQueryStringCommandInput,
   ConstantAndVariableQueryStringCommandOutput,
 } from "../commands/ConstantAndVariableQueryStringCommand";
-import {
+import type {
   ConstantQueryStringCommandInput,
   ConstantQueryStringCommandOutput,
 } from "../commands/ConstantQueryStringCommand";
-import {
+import type {
+  ContentTypeParametersCommandInput,
+  ContentTypeParametersCommandOutput,
+} from "../commands/ContentTypeParametersCommand";
+import type { DatetimeOffsetsCommandInput, DatetimeOffsetsCommandOutput } from "../commands/DatetimeOffsetsCommand";
+import type {
   EmptyInputAndEmptyOutputCommandInput,
   EmptyInputAndEmptyOutputCommandOutput,
 } from "../commands/EmptyInputAndEmptyOutputCommand";
-import { EndpointOperationCommandInput, EndpointOperationCommandOutput } from "../commands/EndpointOperationCommand";
-import {
+import type {
+  EndpointOperationCommandInput,
+  EndpointOperationCommandOutput,
+} from "../commands/EndpointOperationCommand";
+import type {
   EndpointWithHostLabelHeaderOperationCommandInput,
   EndpointWithHostLabelHeaderOperationCommandOutput,
 } from "../commands/EndpointWithHostLabelHeaderOperationCommand";
-import {
+import type {
   EndpointWithHostLabelOperationCommandInput,
   EndpointWithHostLabelOperationCommandOutput,
 } from "../commands/EndpointWithHostLabelOperationCommand";
-import { FlattenedXmlMapCommandInput, FlattenedXmlMapCommandOutput } from "../commands/FlattenedXmlMapCommand";
-import {
+import type { FlattenedXmlMapCommandInput, FlattenedXmlMapCommandOutput } from "../commands/FlattenedXmlMapCommand";
+import type {
   FlattenedXmlMapWithXmlNameCommandInput,
   FlattenedXmlMapWithXmlNameCommandOutput,
 } from "../commands/FlattenedXmlMapWithXmlNameCommand";
-import {
+import type {
   FlattenedXmlMapWithXmlNamespaceCommandInput,
   FlattenedXmlMapWithXmlNamespaceCommandOutput,
 } from "../commands/FlattenedXmlMapWithXmlNamespaceCommand";
-import { GreetingWithErrorsCommandInput, GreetingWithErrorsCommandOutput } from "../commands/GreetingWithErrorsCommand";
-import { HttpPayloadTraitsCommandInput, HttpPayloadTraitsCommandOutput } from "../commands/HttpPayloadTraitsCommand";
-import {
+import type {
+  FractionalSecondsCommandInput,
+  FractionalSecondsCommandOutput,
+} from "../commands/FractionalSecondsCommand";
+import type {
+  GreetingWithErrorsCommandInput,
+  GreetingWithErrorsCommandOutput,
+} from "../commands/GreetingWithErrorsCommand";
+import type {
+  HttpEmptyPrefixHeadersCommandInput,
+  HttpEmptyPrefixHeadersCommandOutput,
+} from "../commands/HttpEmptyPrefixHeadersCommand";
+import type { HttpEnumPayloadCommandInput, HttpEnumPayloadCommandOutput } from "../commands/HttpEnumPayloadCommand";
+import type {
+  HttpPayloadTraitsCommandInput,
+  HttpPayloadTraitsCommandOutput,
+} from "../commands/HttpPayloadTraitsCommand";
+import type {
   HttpPayloadTraitsWithMediaTypeCommandInput,
   HttpPayloadTraitsWithMediaTypeCommandOutput,
 } from "../commands/HttpPayloadTraitsWithMediaTypeCommand";
-import {
+import type {
   HttpPayloadWithMemberXmlNameCommandInput,
   HttpPayloadWithMemberXmlNameCommandOutput,
 } from "../commands/HttpPayloadWithMemberXmlNameCommand";
-import {
+import type {
   HttpPayloadWithStructureCommandInput,
   HttpPayloadWithStructureCommandOutput,
 } from "../commands/HttpPayloadWithStructureCommand";
-import {
+import type {
+  HttpPayloadWithUnionCommandInput,
+  HttpPayloadWithUnionCommandOutput,
+} from "../commands/HttpPayloadWithUnionCommand";
+import type {
   HttpPayloadWithXmlNameCommandInput,
   HttpPayloadWithXmlNameCommandOutput,
 } from "../commands/HttpPayloadWithXmlNameCommand";
-import {
+import type {
   HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
   HttpPayloadWithXmlNamespaceAndPrefixCommandOutput,
 } from "../commands/HttpPayloadWithXmlNamespaceAndPrefixCommand";
-import {
+import type {
   HttpPayloadWithXmlNamespaceCommandInput,
   HttpPayloadWithXmlNamespaceCommandOutput,
 } from "../commands/HttpPayloadWithXmlNamespaceCommand";
-import { HttpPrefixHeadersCommandInput, HttpPrefixHeadersCommandOutput } from "../commands/HttpPrefixHeadersCommand";
-import {
+import type {
+  HttpPrefixHeadersCommandInput,
+  HttpPrefixHeadersCommandOutput,
+} from "../commands/HttpPrefixHeadersCommand";
+import type {
   HttpRequestWithFloatLabelsCommandInput,
   HttpRequestWithFloatLabelsCommandOutput,
 } from "../commands/HttpRequestWithFloatLabelsCommand";
-import {
+import type {
   HttpRequestWithGreedyLabelInPathCommandInput,
   HttpRequestWithGreedyLabelInPathCommandOutput,
 } from "../commands/HttpRequestWithGreedyLabelInPathCommand";
-import {
+import type {
   HttpRequestWithLabelsAndTimestampFormatCommandInput,
   HttpRequestWithLabelsAndTimestampFormatCommandOutput,
 } from "../commands/HttpRequestWithLabelsAndTimestampFormatCommand";
-import {
+import type {
   HttpRequestWithLabelsCommandInput,
   HttpRequestWithLabelsCommandOutput,
 } from "../commands/HttpRequestWithLabelsCommand";
-import { HttpResponseCodeCommandInput, HttpResponseCodeCommandOutput } from "../commands/HttpResponseCodeCommand";
-import {
+import type { HttpResponseCodeCommandInput, HttpResponseCodeCommandOutput } from "../commands/HttpResponseCodeCommand";
+import type {
+  HttpStringPayloadCommandInput,
+  HttpStringPayloadCommandOutput,
+} from "../commands/HttpStringPayloadCommand";
+import type {
   IgnoreQueryParamsInResponseCommandInput,
   IgnoreQueryParamsInResponseCommandOutput,
 } from "../commands/IgnoreQueryParamsInResponseCommand";
-import {
+import type {
   InputAndOutputWithHeadersCommandInput,
   InputAndOutputWithHeadersCommandOutput,
 } from "../commands/InputAndOutputWithHeadersCommand";
-import { NestedXmlMapsCommandInput, NestedXmlMapsCommandOutput } from "../commands/NestedXmlMapsCommand";
-import { NoInputAndNoOutputCommandInput, NoInputAndNoOutputCommandOutput } from "../commands/NoInputAndNoOutputCommand";
-import { NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput } from "../commands/NoInputAndOutputCommand";
-import {
+import type { NestedXmlMapsCommandInput, NestedXmlMapsCommandOutput } from "../commands/NestedXmlMapsCommand";
+import type {
+  NestedXmlMapWithXmlNameCommandInput,
+  NestedXmlMapWithXmlNameCommandOutput,
+} from "../commands/NestedXmlMapWithXmlNameCommand";
+import type {
+  NoInputAndNoOutputCommandInput,
+  NoInputAndNoOutputCommandOutput,
+} from "../commands/NoInputAndNoOutputCommand";
+import type { NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput } from "../commands/NoInputAndOutputCommand";
+import type {
   NullAndEmptyHeadersClientCommandInput,
   NullAndEmptyHeadersClientCommandOutput,
 } from "../commands/NullAndEmptyHeadersClientCommand";
-import {
+import type {
   NullAndEmptyHeadersServerCommandInput,
   NullAndEmptyHeadersServerCommandOutput,
 } from "../commands/NullAndEmptyHeadersServerCommand";
-import {
+import type {
   OmitsNullSerializesEmptyStringCommandInput,
   OmitsNullSerializesEmptyStringCommandOutput,
 } from "../commands/OmitsNullSerializesEmptyStringCommand";
-import {
+import type {
+  PutWithContentEncodingCommandInput,
+  PutWithContentEncodingCommandOutput,
+} from "../commands/PutWithContentEncodingCommand";
+import type {
   QueryIdempotencyTokenAutoFillCommandInput,
   QueryIdempotencyTokenAutoFillCommandOutput,
 } from "../commands/QueryIdempotencyTokenAutoFillCommand";
-import {
+import type {
   QueryParamsAsStringListMapCommandInput,
   QueryParamsAsStringListMapCommandOutput,
 } from "../commands/QueryParamsAsStringListMapCommand";
-import { QueryPrecedenceCommandInput, QueryPrecedenceCommandOutput } from "../commands/QueryPrecedenceCommand";
-import { RecursiveShapesCommandInput, RecursiveShapesCommandOutput } from "../commands/RecursiveShapesCommand";
-import {
+import type { QueryPrecedenceCommandInput, QueryPrecedenceCommandOutput } from "../commands/QueryPrecedenceCommand";
+import type { RecursiveShapesCommandInput, RecursiveShapesCommandOutput } from "../commands/RecursiveShapesCommand";
+import type {
   SimpleScalarPropertiesCommandInput,
   SimpleScalarPropertiesCommandOutput,
 } from "../commands/SimpleScalarPropertiesCommand";
-import {
+import type {
   TimestampFormatHeadersCommandInput,
   TimestampFormatHeadersCommandOutput,
 } from "../commands/TimestampFormatHeadersCommand";
-import { XmlAttributesCommandInput, XmlAttributesCommandOutput } from "../commands/XmlAttributesCommand";
-import {
+import type { XmlAttributesCommandInput, XmlAttributesCommandOutput } from "../commands/XmlAttributesCommand";
+import type {
+  XmlAttributesInMiddleCommandInput,
+  XmlAttributesInMiddleCommandOutput,
+} from "../commands/XmlAttributesInMiddleCommand";
+import type {
   XmlAttributesOnPayloadCommandInput,
   XmlAttributesOnPayloadCommandOutput,
 } from "../commands/XmlAttributesOnPayloadCommand";
-import { XmlBlobsCommandInput, XmlBlobsCommandOutput } from "../commands/XmlBlobsCommand";
-import { XmlEmptyBlobsCommandInput, XmlEmptyBlobsCommandOutput } from "../commands/XmlEmptyBlobsCommand";
-import { XmlEmptyListsCommandInput, XmlEmptyListsCommandOutput } from "../commands/XmlEmptyListsCommand";
-import { XmlEmptyMapsCommandInput, XmlEmptyMapsCommandOutput } from "../commands/XmlEmptyMapsCommand";
-import { XmlEmptyStringsCommandInput, XmlEmptyStringsCommandOutput } from "../commands/XmlEmptyStringsCommand";
-import { XmlEnumsCommandInput, XmlEnumsCommandOutput } from "../commands/XmlEnumsCommand";
-import { XmlListsCommandInput, XmlListsCommandOutput } from "../commands/XmlListsCommand";
-import { XmlMapsCommandInput, XmlMapsCommandOutput } from "../commands/XmlMapsCommand";
-import { XmlMapsXmlNameCommandInput, XmlMapsXmlNameCommandOutput } from "../commands/XmlMapsXmlNameCommand";
-import { XmlNamespacesCommandInput, XmlNamespacesCommandOutput } from "../commands/XmlNamespacesCommand";
-import { XmlTimestampsCommandInput, XmlTimestampsCommandOutput } from "../commands/XmlTimestampsCommand";
-import { XmlUnionsCommandInput, XmlUnionsCommandOutput } from "../commands/XmlUnionsCommand";
+import type { XmlBlobsCommandInput, XmlBlobsCommandOutput } from "../commands/XmlBlobsCommand";
+import type { XmlEmptyBlobsCommandInput, XmlEmptyBlobsCommandOutput } from "../commands/XmlEmptyBlobsCommand";
+import type { XmlEmptyListsCommandInput, XmlEmptyListsCommandOutput } from "../commands/XmlEmptyListsCommand";
+import type { XmlEmptyMapsCommandInput, XmlEmptyMapsCommandOutput } from "../commands/XmlEmptyMapsCommand";
+import type { XmlEmptyStringsCommandInput, XmlEmptyStringsCommandOutput } from "../commands/XmlEmptyStringsCommand";
+import type { XmlEnumsCommandInput, XmlEnumsCommandOutput } from "../commands/XmlEnumsCommand";
+import type { XmlIntEnumsCommandInput, XmlIntEnumsCommandOutput } from "../commands/XmlIntEnumsCommand";
+import type { XmlListsCommandInput, XmlListsCommandOutput } from "../commands/XmlListsCommand";
+import type { XmlMapsCommandInput, XmlMapsCommandOutput } from "../commands/XmlMapsCommand";
+import type { XmlMapsXmlNameCommandInput, XmlMapsXmlNameCommandOutput } from "../commands/XmlMapsXmlNameCommand";
+import type {
+  XmlMapWithXmlNamespaceCommandInput,
+  XmlMapWithXmlNamespaceCommandOutput,
+} from "../commands/XmlMapWithXmlNamespaceCommand";
+import type { XmlNamespacesCommandInput, XmlNamespacesCommandOutput } from "../commands/XmlNamespacesCommand";
+import type { XmlTimestampsCommandInput, XmlTimestampsCommandOutput } from "../commands/XmlTimestampsCommand";
+import type { XmlUnionsCommandInput, XmlUnionsCommandOutput } from "../commands/XmlUnionsCommand";
+import type { FooEnum, IntegerEnum } from "../models/enums";
+import { ComplexError, InvalidGreeting } from "../models/errors";
 import {
-  ComplexError,
-  ComplexNestedErrorData,
-  FooEnum,
-  GreetingStruct,
-  InvalidGreeting,
-  NestedPayload,
-  PayloadWithXmlName,
-  PayloadWithXmlNamespace,
-  PayloadWithXmlNamespaceAndPrefix,
-  RecursiveShapesInputOutputNested1,
-  RecursiveShapesInputOutputNested2,
-  StructureListMember,
-  XmlAttributesInputOutput,
-  XmlNamespaceNested,
-  XmlNestedUnionStruct,
+  type ComplexNestedErrorData,
+  type GreetingStruct,
+  type NestedPayload,
+  type PayloadWithXmlName,
+  type PayloadWithXmlNamespace,
+  type PayloadWithXmlNamespaceAndPrefix,
+  type RecursiveShapesInputOutputNested1,
+  type RecursiveShapesInputOutputNested2,
+  type StructureListMember,
+  type XmlAttributesInMiddlePayloadRequest,
+  type XmlAttributesInMiddlePayloadResponse,
+  type XmlAttributesPayloadRequest,
+  type XmlAttributesPayloadResponse,
+  type XmlNamespaceNested,
+  type XmlNestedUnionStruct,
+  UnionPayload,
   XmlUnionShape,
 } from "../models/models_0";
+import { RestXmlProtocolServiceException as __BaseException } from "../models/RestXmlProtocolServiceException";
 
-export const serializeAws_restXmlAllQueryStringTypesCommand = async (
+/**
+ * serializeAws_restXmlAllQueryStringTypesCommand
+ */
+export const se_AllQueryStringTypesCommand = async (
   input: AllQueryStringTypesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/AllQueryStringTypesInput";
-  const query: any = {
-    ...(input.queryParamsMapOfStrings !== undefined && input.queryParamsMapOfStrings),
-    ...(input.queryString !== undefined && { String: input.queryString }),
-    ...(input.queryStringList !== undefined && {
-      StringList: (input.queryStringList || []).map((_entry) => _entry as any),
-    }),
-    ...(input.queryStringSet !== undefined && {
-      StringSet: (Array.from(input.queryStringSet.values()) || []).map((_entry) => _entry as any),
-    }),
-    ...(input.queryByte !== undefined && { Byte: input.queryByte.toString() }),
-    ...(input.queryShort !== undefined && { Short: input.queryShort.toString() }),
-    ...(input.queryInteger !== undefined && { Integer: input.queryInteger.toString() }),
-    ...(input.queryIntegerList !== undefined && {
-      IntegerList: (input.queryIntegerList || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryIntegerSet !== undefined && {
-      IntegerSet: (Array.from(input.queryIntegerSet.values()) || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryLong !== undefined && { Long: input.queryLong.toString() }),
-    ...(input.queryFloat !== undefined && {
-      Float: input.queryFloat % 1 == 0 ? input.queryFloat + ".0" : input.queryFloat.toString(),
-    }),
-    ...(input.queryDouble !== undefined && {
-      Double: input.queryDouble % 1 == 0 ? input.queryDouble + ".0" : input.queryDouble.toString(),
-    }),
-    ...(input.queryDoubleList !== undefined && {
-      DoubleList: (input.queryDoubleList || []).map(
-        (_entry) => (_entry % 1 == 0 ? _entry + ".0" : _entry.toString()) as any
-      ),
-    }),
-    ...(input.queryBoolean !== undefined && { Boolean: input.queryBoolean.toString() }),
-    ...(input.queryBooleanList !== undefined && {
-      BooleanList: (input.queryBooleanList || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryTimestamp !== undefined && {
-      Timestamp: (input.queryTimestamp.toISOString().split(".")[0] + "Z").toString(),
-    }),
-    ...(input.queryTimestampList !== undefined && {
-      TimestampList: (input.queryTimestampList || []).map(
-        (_entry) => (_entry.toISOString().split(".")[0] + "Z").toString() as any
-      ),
-    }),
-    ...(input.queryEnum !== undefined && { Enum: input.queryEnum }),
-    ...(input.queryEnumList !== undefined && { EnumList: (input.queryEnumList || []).map((_entry) => _entry as any) }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/AllQueryStringTypesInput");
+  const query: any = map({
+    ...convertMap(input.queryParamsMapOfStrings),
+    [_S]: [,input[_qS]!],
+    [_SL]: [() => input.queryStringList !== void 0, () => ((input[_qSL]! || []))],
+    [_SS]: [() => input.queryStringSet !== void 0, () => ((input[_qSS]! || []))],
+    [_B]: [() => input.queryByte !== void 0, () => (input[_qB]!.toString())],
+    [_Sh]: [() => input.queryShort !== void 0, () => (input[_qSu]!.toString())],
+    [_I]: [() => input.queryInteger !== void 0, () => (input[_qI]!.toString())],
+    [_IL]: [() => input.queryIntegerList !== void 0, () => ((input[_qIL]! || []).map(_entry => _entry.toString() as any))],
+    [_IS]: [() => input.queryIntegerSet !== void 0, () => ((input[_qIS]! || []).map(_entry => _entry.toString() as any))],
+    [_L]: [() => input.queryLong !== void 0, () => (input[_qL]!.toString())],
+    [_F]: [() => input.queryFloat !== void 0, () => (((input[_qF]! % 1 == 0) ? input[_qF]! + ".0" : input[_qF]!.toString()))],
+    [_D]: [() => input.queryDouble !== void 0, () => (((input[_qD]! % 1 == 0) ? input[_qD]! + ".0" : input[_qD]!.toString()))],
+    [_DL]: [() => input.queryDoubleList !== void 0, () => ((input[_qDL]! || []).map(_entry => ((_entry % 1 == 0) ? _entry + ".0" : _entry.toString()) as any))],
+    [_Bo]: [() => input.queryBoolean !== void 0, () => (input[_qBu]!.toString())],
+    [_BL]: [() => input.queryBooleanList !== void 0, () => ((input[_qBL]! || []).map(_entry => _entry.toString() as any))],
+    [_T]: [() => input.queryTimestamp !== void 0, () => (__serializeDateTime(input[_qT]!).toString())],
+    [_TL]: [() => input.queryTimestampList !== void 0, () => ((input[_qTL]! || []).map(_entry => __serializeDateTime(_entry).toString() as any))],
+    [_E]: [,input[_qE]!],
+    [_EL]: [() => input.queryEnumList !== void 0, () => ((input[_qEL]! || []))],
+    [_IE]: [() => input.queryIntegerEnum !== void 0, () => (input[_qIE]!.toString())],
+    [_IEL]: [() => input.queryIntegerEnumList !== void 0, () => ((input[_qIEL]! || []).map(_entry => _entry.toString() as any))],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlBodyWithXmlNameCommand = async (
+/**
+ * serializeAws_restXmlBodyWithXmlNameCommand
+ */
+export const se_BodyWithXmlNameCommand = async (
   input: BodyWithXmlNameCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/BodyWithXmlName";
+  b.bp("/BodyWithXmlName");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("Ahoy");
-  if (input.nested !== undefined) {
-    const node = serializeAws_restXmlPayloadWithXmlName(input.nested, context).withName("nested");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_A);
+  if (input[_n] != null) {
+    bn.c(
+      se_PayloadWithXmlName(input[_n], context).n(_n)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlConstantAndVariableQueryStringCommand = async (
+/**
+ * serializeAws_restXmlConstantAndVariableQueryStringCommand
+ */
+export const se_ConstantAndVariableQueryStringCommand = async (
   input: ConstantAndVariableQueryStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/ConstantAndVariableQueryString";
-  const query: any = {
-    foo: "bar",
-    ...(input.baz !== undefined && { baz: input.baz }),
-    ...(input.maybeSet !== undefined && { maybeSet: input.maybeSet }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/ConstantAndVariableQueryString");
+  const query: any = map({
+    [_f]: [, "bar"],
+    [_b]: [,input[_b]!],
+    [_mS]: [,input[_mS]!],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlConstantQueryStringCommand = async (
+/**
+ * serializeAws_restXmlConstantQueryStringCommand
+ */
+export const se_ConstantQueryStringCommand = async (
   input: ConstantQueryStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/ConstantQueryString/{hello}";
-  if (input.hello !== undefined) {
-    const labelValue: string = input.hello;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: hello.");
-    }
-    resolvedPath = resolvedPath.replace("{hello}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: hello.");
-  }
-  const query: any = {
-    foo: "bar",
-    hello: "",
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/ConstantQueryString/{hello}");
+  b.p('hello', () => input.hello!, '{hello}', false)
+  const query: any = map({
+    [_f]: [, "bar"],
+    [_h]: [, ""],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlEmptyInputAndEmptyOutputCommand = async (
+/**
+ * serializeAws_restXmlContentTypeParametersCommand
+ */
+export const se_ContentTypeParametersCommand = async (
+  input: ContentTypeParametersCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/ContentTypeParameters");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_CTPI);
+  if (input[_v] != null) {
+    bn.c(
+      __XmlNode.of(_I, String(input[_v])).n(_v)
+    );
+  }
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlDatetimeOffsetsCommand
+ */
+export const se_DatetimeOffsetsCommand = async (
+  input: DatetimeOffsetsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/DatetimeOffsets");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlEmptyInputAndEmptyOutputCommand
+ */
+export const se_EmptyInputAndEmptyOutputCommand = async (
   input: EmptyInputAndEmptyOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EmptyInputAndEmptyOutput";
+  b.bp("/EmptyInputAndEmptyOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlEndpointOperationCommand = async (
+/**
+ * serializeAws_restXmlEndpointOperationCommand
+ */
+export const se_EndpointOperationCommand = async (
   input: EndpointOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EndpointOperation";
+  b.bp("/EndpointOperation");
   let body: any;
-  body = "";
   let { hostname: resolvedHostname } = await context.endpoint();
   if (context.disableHostPrefix !== true) {
     resolvedHostname = "foo." + resolvedHostname;
@@ -387,5835 +463,4802 @@ export const serializeAws_restXmlEndpointOperationCommand = async (
       throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
     }
   }
-  return new __HttpRequest({
-    protocol,
-    hostname: resolvedHostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.hn(resolvedHostname);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlEndpointWithHostLabelHeaderOperationCommand = async (
+/**
+ * serializeAws_restXmlEndpointWithHostLabelHeaderOperationCommand
+ */
+export const se_EndpointWithHostLabelHeaderOperationCommand = async (
   input: EndpointWithHostLabelHeaderOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.accountId) && { "x-amz-account-id": input.accountId! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EndpointWithHostLabelHeaderOperation";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xaai]: input[_aI]!,
+  });
+  b.bp("/EndpointWithHostLabelHeaderOperation");
   let body: any;
   let { hostname: resolvedHostname } = await context.endpoint();
   if (context.disableHostPrefix !== true) {
     resolvedHostname = "{accountId}." + resolvedHostname;
     if (input.accountId === undefined) {
-      throw new Error("Empty value provided for input host prefix: accountId.");
+      throw new Error('Empty value provided for input host prefix: accountId.');
     }
-    resolvedHostname = resolvedHostname.replace("{accountId}", input.accountId!);
+    resolvedHostname = resolvedHostname.replace("{accountId}", input.accountId!)
     if (!__isValidHostname(resolvedHostname)) {
       throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
     }
   }
-  return new __HttpRequest({
-    protocol,
-    hostname: resolvedHostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.hn(resolvedHostname);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlEndpointWithHostLabelOperationCommand = async (
+/**
+ * serializeAws_restXmlEndpointWithHostLabelOperationCommand
+ */
+export const se_EndpointWithHostLabelOperationCommand = async (
   input: EndpointWithHostLabelOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EndpointWithHostLabelOperation";
+  b.bp("/EndpointWithHostLabelOperation");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("HostLabelInput");
-  if (input.label !== undefined) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.label)).withName("label");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_EWHLOR);
+  if (input[_l] != null) {
+    bn.c(
+      __XmlNode.of(_S, input[_l]).n(_l)
+    );
   }
-  body += bodyNode.toString();
+  body += bn.toString();
   let { hostname: resolvedHostname } = await context.endpoint();
   if (context.disableHostPrefix !== true) {
     resolvedHostname = "foo.{label}." + resolvedHostname;
     if (input.label === undefined) {
-      throw new Error("Empty value provided for input host prefix: label.");
+      throw new Error('Empty value provided for input host prefix: label.');
     }
-    resolvedHostname = resolvedHostname.replace("{label}", input.label!);
+    resolvedHostname = resolvedHostname.replace("{label}", input.label!)
     if (!__isValidHostname(resolvedHostname)) {
       throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
     }
   }
-  return new __HttpRequest({
-    protocol,
-    hostname: resolvedHostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.hn(resolvedHostname);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlFlattenedXmlMapCommand = async (
+/**
+ * serializeAws_restXmlFlattenedXmlMapCommand
+ */
+export const se_FlattenedXmlMapCommand = async (
   input: FlattenedXmlMapCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/FlattenedXmlMap";
+  b.bp("/FlattenedXmlMap");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("FlattenedXmlMapInputOutput");
-  if (input.myMap !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumMap(input.myMap, context);
-    nodes.map((node: any) => {
-      node = node.withName("myMap");
-      bodyNode.addChildNode(node);
-    });
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_FXMR);
+  bn.l(input, "myMap", "myMap", () => se_FooEnumMap(input[_mM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlFlattenedXmlMapWithXmlNameCommand = async (
+/**
+ * serializeAws_restXmlFlattenedXmlMapWithXmlNameCommand
+ */
+export const se_FlattenedXmlMapWithXmlNameCommand = async (
   input: FlattenedXmlMapWithXmlNameCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/FlattenedXmlMapWithXmlName";
+  b.bp("/FlattenedXmlMapWithXmlName");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("FlattenedXmlMapWithXmlNameInputOutput");
-  if (input.myMap !== undefined) {
-    const nodes = serializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap(input.myMap, context);
-    nodes.map((node: any) => {
-      node = node.withName("KVP");
-      bodyNode.addChildNode(node);
-    });
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_FXMWXNR);
+  bn.l(input, "myMap", "KVP", () => se_FlattenedXmlMapWithXmlNameInputOutputMap(input[_mM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommand = async (
+/**
+ * serializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommand
+ */
+export const se_FlattenedXmlMapWithXmlNamespaceCommand = async (
   input: FlattenedXmlMapWithXmlNamespaceCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/FlattenedXmlMapWithXmlNamespace";
+  b.bp("/FlattenedXmlMapWithXmlNamespace");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlGreetingWithErrorsCommand = async (
+/**
+ * serializeAws_restXmlFractionalSecondsCommand
+ */
+export const se_FractionalSecondsCommand = async (
+  input: FractionalSecondsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/FractionalSeconds");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlGreetingWithErrorsCommand
+ */
+export const se_GreetingWithErrorsCommand = async (
   input: GreetingWithErrorsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/GreetingWithErrors";
+  b.bp("/GreetingWithErrors");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadTraitsCommand = async (
+/**
+ * serializeAws_restXmlHttpEmptyPrefixHeadersCommand
+ */
+export const se_HttpEmptyPrefixHeadersCommand = async (
+  input: HttpEmptyPrefixHeadersCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    ...(input.prefixHeaders !== undefined) && Object.keys(input.prefixHeaders).reduce(
+      (acc: any, suffix: string) => {
+        acc[`${suffix.toLowerCase()}`] = input.prefixHeaders![suffix];
+        return acc;
+      }, {}
+    ),
+    [_h]: input[_sH]!,
+  });
+  b.bp("/HttpEmptyPrefixHeaders");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlHttpEnumPayloadCommand
+ */
+export const se_HttpEnumPayloadCommand = async (
+  input: HttpEnumPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'text/plain',
+  };
+  b.bp("/EnumPayload");
+  let body: any;
+  let contents: any;
+  if (input.payload !== undefined) {
+    contents = input.payload;
+    body = contents;
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlHttpPayloadTraitsCommand
+ */
+export const se_HttpPayloadTraitsCommand = async (
   input: HttpPayloadTraitsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/octet-stream",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadTraits";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/octet-stream',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/HttpPayloadTraits");
   let body: any;
-  if (input.blob !== undefined) {
-    body = input.blob;
-  }
   let contents: any;
   if (input.blob !== undefined) {
     contents = input.blob;
     body = contents;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand
+ */
+export const se_HttpPayloadTraitsWithMediaTypeCommand = async (
   input: HttpPayloadTraitsWithMediaTypeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "text/plain",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadTraitsWithMediaType";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'text/plain',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/HttpPayloadTraitsWithMediaType");
   let body: any;
-  if (input.blob !== undefined) {
-    body = input.blob;
-  }
   let contents: any;
   if (input.blob !== undefined) {
     contents = input.blob;
     body = contents;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadWithMemberXmlNameCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadWithMemberXmlNameCommand
+ */
+export const se_HttpPayloadWithMemberXmlNameCommand = async (
   input: HttpPayloadWithMemberXmlNameCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithMemberXmlName";
+  b.bp("/HttpPayloadWithMemberXmlName");
   let body: any;
-  if (input.nested !== undefined) {
-    body = serializeAws_restXmlPayloadWithXmlName(input.nested, context);
-  }
   let contents: any;
   if (input.nested !== undefined) {
-    contents = serializeAws_restXmlPayloadWithXmlName(input.nested, context);
-    contents = contents.withName("Hola");
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
+    contents = se_PayloadWithXmlName(input.nested, context);
+    contents = contents.n("Hola");
+    body = _ve;
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadWithStructureCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadWithStructureCommand
+ */
+export const se_HttpPayloadWithStructureCommand = async (
   input: HttpPayloadWithStructureCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithStructure";
+  b.bp("/HttpPayloadWithStructure");
   let body: any;
-  if (input.nested !== undefined) {
-    body = serializeAws_restXmlNestedPayload(input.nested, context);
-  }
   let contents: any;
   if (input.nested !== undefined) {
-    contents = serializeAws_restXmlNestedPayload(input.nested, context);
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
+    contents = se_NestedPayload(input.nested, context);
+    body = _ve;
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadWithXmlNameCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadWithUnionCommand
+ */
+export const se_HttpPayloadWithUnionCommand = async (
+  input: HttpPayloadWithUnionCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/HttpPayloadWithUnion");
+  let body: any;
+  let contents: any;
+  if (input.nested !== undefined) {
+    contents = se_UnionPayload(input.nested, context);
+    body = _ve;
+    body += contents.toString();
+  }
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlHttpPayloadWithXmlNameCommand
+ */
+export const se_HttpPayloadWithXmlNameCommand = async (
   input: HttpPayloadWithXmlNameCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithXmlName";
+  b.bp("/HttpPayloadWithXmlName");
   let body: any;
-  if (input.nested !== undefined) {
-    body = serializeAws_restXmlPayloadWithXmlName(input.nested, context);
-  }
   let contents: any;
   if (input.nested !== undefined) {
-    contents = serializeAws_restXmlPayloadWithXmlName(input.nested, context);
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
+    contents = se_PayloadWithXmlName(input.nested, context);
+    body = _ve;
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadWithXmlNamespaceCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadWithXmlNamespaceCommand
+ */
+export const se_HttpPayloadWithXmlNamespaceCommand = async (
   input: HttpPayloadWithXmlNamespaceCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithXmlNamespace";
+  b.bp("/HttpPayloadWithXmlNamespace");
   let body: any;
-  if (input.nested !== undefined) {
-    body = serializeAws_restXmlPayloadWithXmlNamespace(input.nested, context);
-  }
   let contents: any;
   if (input.nested !== undefined) {
-    contents = serializeAws_restXmlPayloadWithXmlNamespace(input.nested, context);
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
-    contents.addAttribute("xmlns", "http://foo.com");
+    contents = se_PayloadWithXmlNamespace(input.nested, context);
+    body = _ve;
+    contents.a("xmlns", "http://foo.com");
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommand = async (
+/**
+ * serializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommand
+ */
+export const se_HttpPayloadWithXmlNamespaceAndPrefixCommand = async (
   input: HttpPayloadWithXmlNamespaceAndPrefixCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithXmlNamespaceAndPrefix";
+  b.bp("/HttpPayloadWithXmlNamespaceAndPrefix");
   let body: any;
-  if (input.nested !== undefined) {
-    body = serializeAws_restXmlPayloadWithXmlNamespaceAndPrefix(input.nested, context);
-  }
   let contents: any;
   if (input.nested !== undefined) {
-    contents = serializeAws_restXmlPayloadWithXmlNamespaceAndPrefix(input.nested, context);
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
-    contents.addAttribute("xmlns:baz", "http://foo.com");
+    contents = se_PayloadWithXmlNamespaceAndPrefix(input.nested, context);
+    body = _ve;
+    contents.a("xmlns:baz", "http://foo.com");
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpPrefixHeadersCommand = async (
+/**
+ * serializeAws_restXmlHttpPrefixHeadersCommand
+ */
+export const se_HttpPrefixHeadersCommand = async (
   input: HttpPrefixHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-    ...(input.fooMap !== undefined &&
-      Object.keys(input.fooMap).reduce(
-        (acc: any, suffix: string) => ({
-          ...acc,
-          [`x-foo-${suffix.toLowerCase()}`]: input.fooMap![suffix],
-        }),
-        {}
-      )),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPrefixHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    ...(input.fooMap !== undefined) && Object.keys(input.fooMap).reduce(
+      (acc: any, suffix: string) => {
+        acc[`x-foo-${suffix.toLowerCase()}`] = input.fooMap![suffix];
+        return acc;
+      }, {}
+    ),
+    [_xf]: input[_f]!,
   });
+  b.bp("/HttpPrefixHeaders");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpRequestWithFloatLabelsCommand = async (
+/**
+ * serializeAws_restXmlHttpRequestWithFloatLabelsCommand
+ */
+export const se_HttpRequestWithFloatLabelsCommand = async (
   input: HttpRequestWithFloatLabelsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/FloatHttpLabels/{float}/{double}";
-  if (input.float !== undefined) {
-    const labelValue: string = input.float % 1 == 0 ? input.float + ".0" : input.float.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: float.");
-    }
-    resolvedPath = resolvedPath.replace("{float}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: float.");
-  }
-  if (input.double !== undefined) {
-    const labelValue: string = input.double % 1 == 0 ? input.double + ".0" : input.double.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: double.");
-    }
-    resolvedPath = resolvedPath.replace("{double}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: double.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/FloatHttpLabels/{float}/{double}");
+  b.p('float', () => ((input.float! % 1 == 0) ? input.float! + ".0" : input.float!.toString()), '{float}', false)
+  b.p('double', () => ((input.double! % 1 == 0) ? input.double! + ".0" : input.double!.toString()), '{double}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpRequestWithGreedyLabelInPathCommand = async (
+/**
+ * serializeAws_restXmlHttpRequestWithGreedyLabelInPathCommand
+ */
+export const se_HttpRequestWithGreedyLabelInPathCommand = async (
   input: HttpRequestWithGreedyLabelInPathCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithGreedyLabelInPath/foo/{foo}/baz/{baz+}";
-  if (input.foo !== undefined) {
-    const labelValue: string = input.foo;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: foo.");
-    }
-    resolvedPath = resolvedPath.replace("{foo}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: foo.");
-  }
-  if (input.baz !== undefined) {
-    const labelValue: string = input.baz;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: baz.");
-    }
-    resolvedPath = resolvedPath.replace(
-      "{baz+}",
-      labelValue
-        .split("/")
-        .map((segment) => __extendedEncodeURIComponent(segment))
-        .join("/")
-    );
-  } else {
-    throw new Error("No value provided for input HTTP label: baz.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithGreedyLabelInPath/foo/{foo}/baz/{baz+}");
+  b.p('foo', () => input.foo!, '{foo}', false)
+  b.p('baz', () => input.baz!, '{baz+}', true)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpRequestWithLabelsCommand = async (
+/**
+ * serializeAws_restXmlHttpRequestWithLabelsCommand
+ */
+export const se_HttpRequestWithLabelsCommand = async (
   input: HttpRequestWithLabelsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}";
-  if (input.string !== undefined) {
-    const labelValue: string = input.string;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: string.");
-    }
-    resolvedPath = resolvedPath.replace("{string}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: string.");
-  }
-  if (input.short !== undefined) {
-    const labelValue: string = input.short.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: short.");
-    }
-    resolvedPath = resolvedPath.replace("{short}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: short.");
-  }
-  if (input.integer !== undefined) {
-    const labelValue: string = input.integer.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: integer.");
-    }
-    resolvedPath = resolvedPath.replace("{integer}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: integer.");
-  }
-  if (input.long !== undefined) {
-    const labelValue: string = input.long.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: long.");
-    }
-    resolvedPath = resolvedPath.replace("{long}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: long.");
-  }
-  if (input.float !== undefined) {
-    const labelValue: string = input.float % 1 == 0 ? input.float + ".0" : input.float.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: float.");
-    }
-    resolvedPath = resolvedPath.replace("{float}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: float.");
-  }
-  if (input.double !== undefined) {
-    const labelValue: string = input.double % 1 == 0 ? input.double + ".0" : input.double.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: double.");
-    }
-    resolvedPath = resolvedPath.replace("{double}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: double.");
-  }
-  if (input.boolean !== undefined) {
-    const labelValue: string = input.boolean.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: boolean.");
-    }
-    resolvedPath = resolvedPath.replace("{boolean}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: boolean.");
-  }
-  if (input.timestamp !== undefined) {
-    const labelValue: string = (input.timestamp.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: timestamp.");
-    }
-    resolvedPath = resolvedPath.replace("{timestamp}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: timestamp.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}");
+  b.p('string', () => input.string!, '{string}', false)
+  b.p('short', () => input.short!.toString(), '{short}', false)
+  b.p('integer', () => input.integer!.toString(), '{integer}', false)
+  b.p('long', () => input.long!.toString(), '{long}', false)
+  b.p('float', () => ((input.float! % 1 == 0) ? input.float! + ".0" : input.float!.toString()), '{float}', false)
+  b.p('double', () => ((input.double! % 1 == 0) ? input.double! + ".0" : input.double!.toString()), '{double}', false)
+  b.p('boolean', () => input.boolean!.toString(), '{boolean}', false)
+  b.p('timestamp', () => __serializeDateTime(input.timestamp!).toString(), '{timestamp}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommand = async (
+/**
+ * serializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommand
+ */
+export const se_HttpRequestWithLabelsAndTimestampFormatCommand = async (
   input: HttpRequestWithLabelsAndTimestampFormatCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithLabelsAndTimestampFormat/{memberEpochSeconds}/{memberHttpDate}/{memberDateTime}/{defaultFormat}/{targetEpochSeconds}/{targetHttpDate}/{targetDateTime}";
-  if (input.memberEpochSeconds !== undefined) {
-    const labelValue: string = Math.round(input.memberEpochSeconds.getTime() / 1000).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberEpochSeconds.");
-    }
-    resolvedPath = resolvedPath.replace("{memberEpochSeconds}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberEpochSeconds.");
-  }
-  if (input.memberHttpDate !== undefined) {
-    const labelValue: string = __dateToUtcString(input.memberHttpDate).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberHttpDate.");
-    }
-    resolvedPath = resolvedPath.replace("{memberHttpDate}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberHttpDate.");
-  }
-  if (input.memberDateTime !== undefined) {
-    const labelValue: string = (input.memberDateTime.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberDateTime.");
-    }
-    resolvedPath = resolvedPath.replace("{memberDateTime}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberDateTime.");
-  }
-  if (input.defaultFormat !== undefined) {
-    const labelValue: string = (input.defaultFormat.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: defaultFormat.");
-    }
-    resolvedPath = resolvedPath.replace("{defaultFormat}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: defaultFormat.");
-  }
-  if (input.targetEpochSeconds !== undefined) {
-    const labelValue: string = Math.round(input.targetEpochSeconds.getTime() / 1000).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetEpochSeconds.");
-    }
-    resolvedPath = resolvedPath.replace("{targetEpochSeconds}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetEpochSeconds.");
-  }
-  if (input.targetHttpDate !== undefined) {
-    const labelValue: string = __dateToUtcString(input.targetHttpDate).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetHttpDate.");
-    }
-    resolvedPath = resolvedPath.replace("{targetHttpDate}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetHttpDate.");
-  }
-  if (input.targetDateTime !== undefined) {
-    const labelValue: string = (input.targetDateTime.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetDateTime.");
-    }
-    resolvedPath = resolvedPath.replace("{targetDateTime}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetDateTime.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithLabelsAndTimestampFormat/{memberEpochSeconds}/{memberHttpDate}/{memberDateTime}/{defaultFormat}/{targetEpochSeconds}/{targetHttpDate}/{targetDateTime}");
+  b.p('memberEpochSeconds', () => (input.memberEpochSeconds!.getTime() / 1_000).toString(), '{memberEpochSeconds}', false)
+  b.p('memberHttpDate', () => __dateToUtcString(input.memberHttpDate!).toString(), '{memberHttpDate}', false)
+  b.p('memberDateTime', () => __serializeDateTime(input.memberDateTime!).toString(), '{memberDateTime}', false)
+  b.p('defaultFormat', () => __serializeDateTime(input.defaultFormat!).toString(), '{defaultFormat}', false)
+  b.p('targetEpochSeconds', () => (input.targetEpochSeconds!.getTime() / 1_000).toString(), '{targetEpochSeconds}', false)
+  b.p('targetHttpDate', () => __dateToUtcString(input.targetHttpDate!).toString(), '{targetHttpDate}', false)
+  b.p('targetDateTime', () => __serializeDateTime(input.targetDateTime!).toString(), '{targetDateTime}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlHttpResponseCodeCommand = async (
+/**
+ * serializeAws_restXmlHttpResponseCodeCommand
+ */
+export const se_HttpResponseCodeCommand = async (
   input: HttpResponseCodeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpResponseCode";
+  b.bp("/HttpResponseCode");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlIgnoreQueryParamsInResponseCommand = async (
+/**
+ * serializeAws_restXmlHttpStringPayloadCommand
+ */
+export const se_HttpStringPayloadCommand = async (
+  input: HttpStringPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'text/plain',
+  };
+  b.bp("/StringPayload");
+  let body: any;
+  let contents: any;
+  if (input.payload !== undefined) {
+    contents = input.payload;
+    body = contents;
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlIgnoreQueryParamsInResponseCommand
+ */
+export const se_IgnoreQueryParamsInResponseCommand = async (
   input: IgnoreQueryParamsInResponseCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/IgnoreQueryParamsInResponse";
+  b.bp("/IgnoreQueryParamsInResponse");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlInputAndOutputWithHeadersCommand = async (
+/**
+ * serializeAws_restXmlInputAndOutputWithHeadersCommand
+ */
+export const se_InputAndOutputWithHeadersCommand = async (
   input: InputAndOutputWithHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.headerString) && { "x-string": input.headerString! }),
-    ...(isSerializableHeaderValue(input.headerByte) && { "x-byte": input.headerByte!.toString() }),
-    ...(isSerializableHeaderValue(input.headerShort) && { "x-short": input.headerShort!.toString() }),
-    ...(isSerializableHeaderValue(input.headerInteger) && { "x-integer": input.headerInteger!.toString() }),
-    ...(isSerializableHeaderValue(input.headerLong) && { "x-long": input.headerLong!.toString() }),
-    ...(isSerializableHeaderValue(input.headerFloat) && {
-      "x-float": input.headerFloat! % 1 == 0 ? input.headerFloat! + ".0" : input.headerFloat!.toString(),
-    }),
-    ...(isSerializableHeaderValue(input.headerDouble) && {
-      "x-double": input.headerDouble! % 1 == 0 ? input.headerDouble! + ".0" : input.headerDouble!.toString(),
-    }),
-    ...(isSerializableHeaderValue(input.headerTrueBool) && { "x-boolean1": input.headerTrueBool!.toString() }),
-    ...(isSerializableHeaderValue(input.headerFalseBool) && { "x-boolean2": input.headerFalseBool!.toString() }),
-    ...(isSerializableHeaderValue(input.headerStringList) && {
-      "x-stringlist": (input.headerStringList! || []).map((_entry) => _entry as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerStringSet) && {
-      "x-stringset": (Array.from(input.headerStringSet!.values()) || []).map((_entry) => _entry as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerIntegerList) && {
-      "x-integerlist": (input.headerIntegerList! || []).map((_entry) => _entry.toString() as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerBooleanList) && {
-      "x-booleanlist": (input.headerBooleanList! || []).map((_entry) => _entry.toString() as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerTimestampList) && {
-      "x-timestamplist": (input.headerTimestampList! || [])
-        .map((_entry) => __dateToUtcString(_entry).toString() as any)
-        .join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerEnum) && { "x-enum": input.headerEnum! }),
-    ...(isSerializableHeaderValue(input.headerEnumList) && {
-      "x-enumlist": (input.headerEnumList! || []).map((_entry) => _entry as any).join(", "),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/InputAndOutputWithHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xs]: input[_hS]!,
+    [_xb]: [() => isSerializableHeaderValue(input[_hB]), () => input[_hB]!.toString()],
+    [_xs_]: [() => isSerializableHeaderValue(input[_hSe]), () => input[_hSe]!.toString()],
+    [_xi]: [() => isSerializableHeaderValue(input[_hI]), () => input[_hI]!.toString()],
+    [_xl]: [() => isSerializableHeaderValue(input[_hL]), () => input[_hL]!.toString()],
+    [_xf_]: [() => isSerializableHeaderValue(input[_hF]), () => ((input[_hF]! % 1 == 0) ? input[_hF]! + ".0" : input[_hF]!.toString())],
+    [_xd]: [() => isSerializableHeaderValue(input[_hD]), () => ((input[_hD]! % 1 == 0) ? input[_hD]! + ".0" : input[_hD]!.toString())],
+    [_xb_]: [() => isSerializableHeaderValue(input[_hTB]), () => input[_hTB]!.toString()],
+    [_xb__]: [() => isSerializableHeaderValue(input[_hFB]), () => input[_hFB]!.toString()],
+    [_xs__]: [() => isSerializableHeaderValue(input[_hSL]), () => (input[_hSL]! || []).map(__quoteHeader).join(', ')],
+    [_xs___]: [() => isSerializableHeaderValue(input[_hSS]), () => (input[_hSS]! || []).map(__quoteHeader).join(', ')],
+    [_xi_]: [() => isSerializableHeaderValue(input[_hIL]), () => (input[_hIL]! || []).map(_entry => _entry.toString() as any).join(', ')],
+    [_xb___]: [() => isSerializableHeaderValue(input[_hBL]), () => (input[_hBL]! || []).map(_entry => _entry.toString() as any).join(', ')],
+    [_xt]: [() => isSerializableHeaderValue(input[_hTL]), () => (input[_hTL]! || []).map(_entry => __dateToUtcString(_entry).toString() as any).join(', ')],
+    [_xe]: input[_hE]!,
+    [_xe_]: [() => isSerializableHeaderValue(input[_hEL]), () => (input[_hEL]! || []).map(__quoteHeader).join(', ')],
   });
+  b.bp("/InputAndOutputWithHeaders");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlNestedXmlMapsCommand = async (
+/**
+ * serializeAws_restXmlNestedXmlMapsCommand
+ */
+export const se_NestedXmlMapsCommand = async (
   input: NestedXmlMapsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NestedXmlMaps";
+  b.bp("/NestedXmlMaps");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("NestedXmlMapsInputOutput");
-  if (input.flatNestedMap !== undefined) {
-    const nodes = serializeAws_restXmlNestedMap(input.flatNestedMap, context);
-    nodes.map((node: any) => {
-      node = node.withName("flatNestedMap");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.nestedMap !== undefined) {
-    const nodes = serializeAws_restXmlNestedMap(input.nestedMap, context);
-    const containerNode = new __XmlNode("nestedMap");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_NXMR);
+  bn.l(input, "flatNestedMap", "flatNestedMap", () => se_NestedMap(input[_fNM]!, context))
+  bn.lc(input, "nestedMap", "nestedMap", () => se_NestedMap(input[_nM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlNoInputAndNoOutputCommand = async (
+/**
+ * serializeAws_restXmlNestedXmlMapWithXmlNameCommand
+ */
+export const se_NestedXmlMapWithXmlNameCommand = async (
+  input: NestedXmlMapWithXmlNameCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/NestedXmlMapWithXmlName");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_NXMWXNR);
+  bn.lc(input, "nestedXmlMapWithXmlNameMap", "nestedXmlMapWithXmlNameMap", () => se_NestedXmlMapWithXmlNameMap(input[_nXMWXNM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlNoInputAndNoOutputCommand
+ */
+export const se_NoInputAndNoOutputCommand = async (
   input: NoInputAndNoOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NoInputAndNoOutput";
+  b.bp("/NoInputAndNoOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlNoInputAndOutputCommand = async (
+/**
+ * serializeAws_restXmlNoInputAndOutputCommand
+ */
+export const se_NoInputAndOutputCommand = async (
   input: NoInputAndOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NoInputAndOutputOutput";
+  b.bp("/NoInputAndOutputOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlNullAndEmptyHeadersClientCommand = async (
+/**
+ * serializeAws_restXmlNullAndEmptyHeadersClientCommand
+ */
+export const se_NullAndEmptyHeadersClientCommand = async (
   input: NullAndEmptyHeadersClientCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.a) && { "x-a": input.a! }),
-    ...(isSerializableHeaderValue(input.b) && { "x-b": input.b! }),
-    ...(isSerializableHeaderValue(input.c) && { "x-c": (input.c! || []).map((_entry) => _entry as any).join(", ") }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NullAndEmptyHeadersClient";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xa]: input[_a]!,
+    [_xb____]: input[_b_]!,
+    [_xc]: [() => isSerializableHeaderValue(input[_c]), () => (input[_c]! || []).map(__quoteHeader).join(', ')],
   });
+  b.bp("/NullAndEmptyHeadersClient");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlNullAndEmptyHeadersServerCommand = async (
+/**
+ * serializeAws_restXmlNullAndEmptyHeadersServerCommand
+ */
+export const se_NullAndEmptyHeadersServerCommand = async (
   input: NullAndEmptyHeadersServerCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.a) && { "x-a": input.a! }),
-    ...(isSerializableHeaderValue(input.b) && { "x-b": input.b! }),
-    ...(isSerializableHeaderValue(input.c) && { "x-c": (input.c! || []).map((_entry) => _entry as any).join(", ") }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NullAndEmptyHeadersServer";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xa]: input[_a]!,
+    [_xb____]: input[_b_]!,
+    [_xc]: [() => isSerializableHeaderValue(input[_c]), () => (input[_c]! || []).map(__quoteHeader).join(', ')],
   });
+  b.bp("/NullAndEmptyHeadersServer");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlOmitsNullSerializesEmptyStringCommand = async (
+/**
+ * serializeAws_restXmlOmitsNullSerializesEmptyStringCommand
+ */
+export const se_OmitsNullSerializesEmptyStringCommand = async (
   input: OmitsNullSerializesEmptyStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/OmitsNullSerializesEmptyString";
-  const query: any = {
-    ...(input.nullValue !== undefined && { Null: input.nullValue }),
-    ...(input.emptyString !== undefined && { Empty: input.emptyString }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/OmitsNullSerializesEmptyString");
+  const query: any = map({
+    [_N]: [,input[_nV]!],
+    [_Em]: [,input[_eS]!],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlQueryIdempotencyTokenAutoFillCommand = async (
+/**
+ * serializeAws_restXmlPutWithContentEncodingCommand
+ */
+export const se_PutWithContentEncodingCommand = async (
+  input: PutWithContentEncodingCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/xml',
+    [_ce]: input[_e]!,
+  });
+  b.bp("/requestcompression/putcontentwithencoding");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_PWCEI);
+  if (input[_d] != null) {
+    bn.c(
+      __XmlNode.of(_S, input[_d]).n(_d)
+    );
+  }
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlQueryIdempotencyTokenAutoFillCommand
+ */
+export const se_QueryIdempotencyTokenAutoFillCommand = async (
   input: QueryIdempotencyTokenAutoFillCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/QueryIdempotencyTokenAutoFill";
-  const query: any = {
-    ...(input.token !== undefined && { token: input.token }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/QueryIdempotencyTokenAutoFill");
+  const query: any = map({
+    [_t]: [,input[_t] ?? generateIdempotencyToken()],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlQueryParamsAsStringListMapCommand = async (
+/**
+ * serializeAws_restXmlQueryParamsAsStringListMapCommand
+ */
+export const se_QueryParamsAsStringListMapCommand = async (
   input: QueryParamsAsStringListMapCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StringListMap";
-  const query: any = {
-    ...(input.foo !== undefined && input.foo),
-    ...(input.qux !== undefined && { corge: input.qux }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/StringListMap");
+  const query: any = map({
+    ...convertMap(input.foo),
+    [_co]: [,input[_q]!],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlQueryPrecedenceCommand = async (
+/**
+ * serializeAws_restXmlQueryPrecedenceCommand
+ */
+export const se_QueryPrecedenceCommand = async (
   input: QueryPrecedenceCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/Precedence";
-  const query: any = {
-    ...(input.baz !== undefined && input.baz),
-    ...(input.foo !== undefined && { bar: input.foo }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/Precedence");
+  const query: any = map({
+    ...convertMap(input.baz),
+    [_ba]: [,input[_f]!],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlRecursiveShapesCommand = async (
+/**
+ * serializeAws_restXmlRecursiveShapesCommand
+ */
+export const se_RecursiveShapesCommand = async (
   input: RecursiveShapesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/RecursiveShapes";
+  b.bp("/RecursiveShapes");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("RecursiveShapesInputOutput");
-  if (input.nested !== undefined) {
-    const node = serializeAws_restXmlRecursiveShapesInputOutputNested1(input.nested, context).withName("nested");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_RSR);
+  if (input[_n] != null) {
+    bn.c(
+      se_RecursiveShapesInputOutputNested1(input[_n], context).n(_n)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlSimpleScalarPropertiesCommand = async (
+/**
+ * serializeAws_restXmlSimpleScalarPropertiesCommand
+ */
+export const se_SimpleScalarPropertiesCommand = async (
   input: SimpleScalarPropertiesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/xml",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/SimpleScalarProperties";
-  let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("SimpleScalarPropertiesInputOutput");
-  if (input.byteValue !== undefined) {
-    const node = new __XmlNode("Byte").addChildNode(new __XmlText(String(input.byteValue))).withName("byteValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.doubleValue !== undefined) {
-    const node = new __XmlNode("Double")
-      .addChildNode(new __XmlText(String(input.doubleValue)))
-      .withName("DoubleDribble");
-    bodyNode.addChildNode(node);
-  }
-  if (input.falseBooleanValue !== undefined) {
-    const node = new __XmlNode("Boolean")
-      .addChildNode(new __XmlText(String(input.falseBooleanValue)))
-      .withName("falseBooleanValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.floatValue !== undefined) {
-    const node = new __XmlNode("Float").addChildNode(new __XmlText(String(input.floatValue))).withName("floatValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.integerValue !== undefined) {
-    const node = new __XmlNode("Integer")
-      .addChildNode(new __XmlText(String(input.integerValue)))
-      .withName("integerValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.longValue !== undefined) {
-    const node = new __XmlNode("Long").addChildNode(new __XmlText(String(input.longValue))).withName("longValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.shortValue !== undefined) {
-    const node = new __XmlNode("Short").addChildNode(new __XmlText(String(input.shortValue))).withName("shortValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.stringValue !== undefined) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.stringValue)).withName("stringValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.trueBooleanValue !== undefined) {
-    const node = new __XmlNode("Boolean")
-      .addChildNode(new __XmlText(String(input.trueBooleanValue)))
-      .withName("trueBooleanValue");
-    bodyNode.addChildNode(node);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/xml',
+    [_xf]: input[_f]!,
   });
+  b.bp("/SimpleScalarProperties");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_SSPR);
+  if (input[_bV] != null) {
+    bn.c(
+      __XmlNode.of(_B, String(input[_bV])).n(_bV)
+    );
+  }
+  if (input[_dV] != null) {
+    bn.c(
+      __XmlNode.of(_D, String(input[_dV])).n(_DD)
+    );
+  }
+  if (input[_fBV] != null) {
+    bn.c(
+      __XmlNode.of(_Bo, String(input[_fBV])).n(_fBV)
+    );
+  }
+  if (input[_fV] != null) {
+    bn.c(
+      __XmlNode.of(_F, String(input[_fV])).n(_fV)
+    );
+  }
+  if (input[_iV] != null) {
+    bn.c(
+      __XmlNode.of(_I, String(input[_iV])).n(_iV)
+    );
+  }
+  if (input[_lV] != null) {
+    bn.c(
+      __XmlNode.of(_L, String(input[_lV])).n(_lV)
+    );
+  }
+  if (input[_sV] != null) {
+    bn.c(
+      __XmlNode.of(_Sh, String(input[_sV])).n(_sV)
+    );
+  }
+  if (input[_sVt] != null) {
+    bn.c(
+      __XmlNode.of(_S, input[_sVt]).n(_sVt)
+    );
+  }
+  if (input[_tBV] != null) {
+    bn.c(
+      __XmlNode.of(_Bo, String(input[_tBV])).n(_tBV)
+    );
+  }
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlTimestampFormatHeadersCommand = async (
+/**
+ * serializeAws_restXmlTimestampFormatHeadersCommand
+ */
+export const se_TimestampFormatHeadersCommand = async (
   input: TimestampFormatHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.memberEpochSeconds) && {
-      "x-memberepochseconds": Math.round(input.memberEpochSeconds!.getTime() / 1000).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.memberHttpDate) && {
-      "x-memberhttpdate": __dateToUtcString(input.memberHttpDate!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.memberDateTime) && {
-      "x-memberdatetime": (input.memberDateTime!.toISOString().split(".")[0] + "Z").toString(),
-    }),
-    ...(isSerializableHeaderValue(input.defaultFormat) && {
-      "x-defaultformat": __dateToUtcString(input.defaultFormat!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetEpochSeconds) && {
-      "x-targetepochseconds": Math.round(input.targetEpochSeconds!.getTime() / 1000).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetHttpDate) && {
-      "x-targethttpdate": __dateToUtcString(input.targetHttpDate!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetDateTime) && {
-      "x-targetdatetime": (input.targetDateTime!.toISOString().split(".")[0] + "Z").toString(),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/TimestampFormatHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xm]: [() => isSerializableHeaderValue(input[_mES]), () => (input[_mES]!.getTime() / 1_000).toString()],
+    [_xm_]: [() => isSerializableHeaderValue(input[_mHD]), () => __dateToUtcString(input[_mHD]!).toString()],
+    [_xm__]: [() => isSerializableHeaderValue(input[_mDT]), () => __serializeDateTime(input[_mDT]!).toString()],
+    [_xd_]: [() => isSerializableHeaderValue(input[_dF]), () => __dateToUtcString(input[_dF]!).toString()],
+    [_xt_]: [() => isSerializableHeaderValue(input[_tES]), () => (input[_tES]!.getTime() / 1_000).toString()],
+    [_xt__]: [() => isSerializableHeaderValue(input[_tHD]), () => __dateToUtcString(input[_tHD]!).toString()],
+    [_xt___]: [() => isSerializableHeaderValue(input[_tDT]), () => __serializeDateTime(input[_tDT]!).toString()],
   });
+  b.bp("/TimestampFormatHeaders");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlAttributesCommand = async (
+/**
+ * serializeAws_restXmlXmlAttributesCommand
+ */
+export const se_XmlAttributesCommand = async (
   input: XmlAttributesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlAttributes";
+  b.bp("/XmlAttributes");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlAttributesInputOutput");
-  if (input.attr !== undefined) {
-    bodyNode.addAttribute("test", input.attr);
+  body = _ve;
+  const bn = new __XmlNode(_XAR);
+  bn.a("test", input[_at]);
+  if (input[_f] != null) {
+    bn.c(
+      __XmlNode.of(_S, input[_f]).n(_f)
+    );
   }
-  if (input.foo !== undefined) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.foo)).withName("foo");
-    bodyNode.addChildNode(node);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlAttributesOnPayloadCommand = async (
+/**
+ * serializeAws_restXmlXmlAttributesInMiddleCommand
+ */
+export const se_XmlAttributesInMiddleCommand = async (
+  input: XmlAttributesInMiddleCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/XmlAttributesInMiddle");
+  let body: any;
+  let contents: any;
+  if (input.payload !== undefined) {
+    contents = se_XmlAttributesInMiddlePayloadRequest(input.payload, context);
+    body = _ve;
+    body += contents.toString();
+  }
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlXmlAttributesOnPayloadCommand
+ */
+export const se_XmlAttributesOnPayloadCommand = async (
   input: XmlAttributesOnPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlAttributesOnPayload";
+  b.bp("/XmlAttributesOnPayload");
   let body: any;
-  if (input.payload !== undefined) {
-    body = serializeAws_restXmlXmlAttributesInputOutput(input.payload, context);
-  }
   let contents: any;
   if (input.payload !== undefined) {
-    contents = serializeAws_restXmlXmlAttributesInputOutput(input.payload, context);
-    body = '<?xml version="1.0" encoding="UTF-8"?>';
+    contents = se_XmlAttributesPayloadRequest(input.payload, context);
+    body = _ve;
     body += contents.toString();
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlBlobsCommand = async (
+/**
+ * serializeAws_restXmlXmlBlobsCommand
+ */
+export const se_XmlBlobsCommand = async (
   input: XmlBlobsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlBlobs";
+  b.bp("/XmlBlobs");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlBlobsInputOutput");
-  if (input.data !== undefined) {
-    const node = new __XmlNode("Blob").addChildNode(new __XmlText(context.base64Encoder(input.data))).withName("data");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XBR);
+  if (input[_d] != null) {
+    bn.c(
+      __XmlNode.of(_Bl, context.base64Encoder(input[_d])).n(_d)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlEmptyBlobsCommand = async (
+/**
+ * serializeAws_restXmlXmlEmptyBlobsCommand
+ */
+export const se_XmlEmptyBlobsCommand = async (
   input: XmlEmptyBlobsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlEmptyBlobs";
+  b.bp("/XmlEmptyBlobs");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlBlobsInputOutput");
-  if (input.data !== undefined) {
-    const node = new __XmlNode("Blob").addChildNode(new __XmlText(context.base64Encoder(input.data))).withName("data");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XEBR);
+  if (input[_d] != null) {
+    bn.c(
+      __XmlNode.of(_Bl, context.base64Encoder(input[_d])).n(_d)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlEmptyListsCommand = async (
+/**
+ * serializeAws_restXmlXmlEmptyListsCommand
+ */
+export const se_XmlEmptyListsCommand = async (
   input: XmlEmptyListsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlEmptyLists";
+  b.bp("/XmlEmptyLists");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlListsInputOutput");
-  if (input.booleanList !== undefined) {
-    const nodes = serializeAws_restXmlBooleanList(input.booleanList, context);
-    const containerNode = new __XmlNode("booleanList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.enumList !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumList(input.enumList, context);
-    const containerNode = new __XmlNode("enumList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.flattenedList !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.flattenedList, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedList");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedList2 !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.flattenedList2, context);
-    nodes.map((node: any) => {
-      node = node.withName("customName");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedListWithMemberNamespace !== undefined) {
-    const nodes = serializeAws_restXmlListWithMemberNamespace(input.flattenedListWithMemberNamespace, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedListWithMemberNamespace");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedListWithNamespace !== undefined) {
-    const nodes = serializeAws_restXmlListWithNamespace(input.flattenedListWithNamespace, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedListWithNamespace");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedStructureList !== undefined) {
-    const nodes = serializeAws_restXmlStructureList(input.flattenedStructureList, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedStructureList");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.integerList !== undefined) {
-    const nodes = serializeAws_restXmlIntegerList(input.integerList, context);
-    const containerNode = new __XmlNode("integerList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.nestedStringList !== undefined) {
-    const nodes = serializeAws_restXmlNestedStringList(input.nestedStringList, context);
-    const containerNode = new __XmlNode("nestedStringList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.renamedListMembers !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.renamedListMembers, context);
-    const containerNode = new __XmlNode("renamed");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.stringList !== undefined) {
-    const nodes = serializeAws_restXmlStringList(input.stringList, context);
-    const containerNode = new __XmlNode("stringList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.stringSet !== undefined) {
-    const nodes = serializeAws_restXmlStringSet(input.stringSet, context);
-    const containerNode = new __XmlNode("stringSet");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.structureList !== undefined) {
-    const nodes = serializeAws_restXmlStructureList(input.structureList, context);
-    const containerNode = new __XmlNode("myStructureList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.timestampList !== undefined) {
-    const nodes = serializeAws_restXmlTimestampList(input.timestampList, context);
-    const containerNode = new __XmlNode("timestampList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_XELR);
+  bn.lc(input, "booleanList", "booleanList", () => se_BooleanList(input[_bL]!, context))
+  bn.lc(input, "enumList", "enumList", () => se_FooEnumList(input[_eL]!, context))
+  bn.l(input, "flattenedList", "flattenedList", () => se_RenamedListMembers(input[_fL]!, context))
+  bn.l(input, "flattenedList2", "customName", () => se_RenamedListMembers(input[_fLl]!, context))
+  bn.l(input, "flattenedListWithMemberNamespace", "flattenedListWithMemberNamespace", () => se_ListWithMemberNamespace(input[_fLWMN]!, context))
+  bn.l(input, "flattenedListWithNamespace", "flattenedListWithNamespace", () => se_ListWithNamespace(input[_fLWN]!, context))
+  bn.l(input, "flattenedStructureList", "flattenedStructureList", () => se_StructureList(input[_fSL]!, context))
+  bn.lc(input, "intEnumList", "intEnumList", () => se_IntegerEnumList(input[_iEL]!, context))
+  bn.lc(input, "integerList", "integerList", () => se_IntegerList(input[_iL]!, context))
+  bn.lc(input, "nestedStringList", "nestedStringList", () => se_NestedStringList(input[_nSL]!, context))
+  bn.lc(input, "renamedListMembers", "renamed", () => se_RenamedListMembers(input[_rLM]!, context))
+  bn.lc(input, "stringList", "stringList", () => se_StringList(input[_sL]!, context))
+  bn.lc(input, "stringSet", "stringSet", () => se_StringSet(input[_sS]!, context))
+  bn.lc(input, "structureList", "myStructureList", () => se_StructureList(input[_sLt]!, context))
+  bn.lc(input, "timestampList", "timestampList", () => se_TimestampList(input[_tL]!, context))
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlEmptyMapsCommand = async (
+/**
+ * serializeAws_restXmlXmlEmptyMapsCommand
+ */
+export const se_XmlEmptyMapsCommand = async (
   input: XmlEmptyMapsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlEmptyMaps";
+  b.bp("/XmlEmptyMaps");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlMapsInputOutput");
-  if (input.myMap !== undefined) {
-    const nodes = serializeAws_restXmlXmlMapsInputOutputMap(input.myMap, context);
-    const containerNode = new __XmlNode("myMap");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_XEMR);
+  bn.lc(input, "myMap", "myMap", () => se_XmlMapsInputOutputMap(input[_mM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlEmptyStringsCommand = async (
+/**
+ * serializeAws_restXmlXmlEmptyStringsCommand
+ */
+export const se_XmlEmptyStringsCommand = async (
   input: XmlEmptyStringsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlEmptyStrings";
+  b.bp("/XmlEmptyStrings");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlEmptyStringsInputOutput");
-  if (input.emptyString !== undefined) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.emptyString)).withName("emptyString");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XESR);
+  if (input[_eS] != null) {
+    bn.c(
+      __XmlNode.of(_S, input[_eS]).n(_eS)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlEnumsCommand = async (
+/**
+ * serializeAws_restXmlXmlEnumsCommand
+ */
+export const se_XmlEnumsCommand = async (
   input: XmlEnumsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlEnums";
+  b.bp("/XmlEnums");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlEnumsInputOutput");
-  if (input.fooEnum1 !== undefined) {
-    const node = new __XmlNode("FooEnum").addChildNode(new __XmlText(input.fooEnum1)).withName("fooEnum1");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XER);
+  if (input[_fE] != null) {
+    bn.c(
+      __XmlNode.of(_FE, input[_fE]).n(_fE)
+    );
   }
-  if (input.fooEnum2 !== undefined) {
-    const node = new __XmlNode("FooEnum").addChildNode(new __XmlText(input.fooEnum2)).withName("fooEnum2");
-    bodyNode.addChildNode(node);
+  if (input[_fEo] != null) {
+    bn.c(
+      __XmlNode.of(_FE, input[_fEo]).n(_fEo)
+    );
   }
-  if (input.fooEnum3 !== undefined) {
-    const node = new __XmlNode("FooEnum").addChildNode(new __XmlText(input.fooEnum3)).withName("fooEnum3");
-    bodyNode.addChildNode(node);
+  if (input[_fEoo] != null) {
+    bn.c(
+      __XmlNode.of(_FE, input[_fEoo]).n(_fEoo)
+    );
   }
-  if (input.fooEnumList !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumList(input.fooEnumList, context);
-    const containerNode = new __XmlNode("fooEnumList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.fooEnumMap !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumMap(input.fooEnumMap, context);
-    const containerNode = new __XmlNode("fooEnumMap");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.fooEnumSet !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumSet(input.fooEnumSet, context);
-    const containerNode = new __XmlNode("fooEnumSet");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  bn.lc(input, "fooEnumList", "fooEnumList", () => se_FooEnumList(input[_fEL]!, context))
+  bn.lc(input, "fooEnumMap", "fooEnumMap", () => se_FooEnumMap(input[_fEM]!, context))
+  bn.lc(input, "fooEnumSet", "fooEnumSet", () => se_FooEnumSet(input[_fES]!, context))
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlListsCommand = async (
+/**
+ * serializeAws_restXmlXmlIntEnumsCommand
+ */
+export const se_XmlIntEnumsCommand = async (
+  input: XmlIntEnumsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/XmlIntEnums");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_XIER);
+  if (input[_iE] != null) {
+    bn.c(
+      __XmlNode.of(_IE, String(input[_iE])).n(_iE)
+    );
+  }
+  if (input[_iEn] != null) {
+    bn.c(
+      __XmlNode.of(_IE, String(input[_iEn])).n(_iEn)
+    );
+  }
+  if (input[_iEnt] != null) {
+    bn.c(
+      __XmlNode.of(_IE, String(input[_iEnt])).n(_iEnt)
+    );
+  }
+  bn.lc(input, "intEnumList", "intEnumList", () => se_IntegerEnumList(input[_iEL]!, context))
+  bn.lc(input, "intEnumMap", "intEnumMap", () => se_IntegerEnumMap(input[_iEM]!, context))
+  bn.lc(input, "intEnumSet", "intEnumSet", () => se_IntegerEnumSet(input[_iES]!, context))
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlXmlListsCommand
+ */
+export const se_XmlListsCommand = async (
   input: XmlListsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlLists";
+  b.bp("/XmlLists");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlListsInputOutput");
-  if (input.booleanList !== undefined) {
-    const nodes = serializeAws_restXmlBooleanList(input.booleanList, context);
-    const containerNode = new __XmlNode("booleanList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.enumList !== undefined) {
-    const nodes = serializeAws_restXmlFooEnumList(input.enumList, context);
-    const containerNode = new __XmlNode("enumList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.flattenedList !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.flattenedList, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedList");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedList2 !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.flattenedList2, context);
-    nodes.map((node: any) => {
-      node = node.withName("customName");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedListWithMemberNamespace !== undefined) {
-    const nodes = serializeAws_restXmlListWithMemberNamespace(input.flattenedListWithMemberNamespace, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedListWithMemberNamespace");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedListWithNamespace !== undefined) {
-    const nodes = serializeAws_restXmlListWithNamespace(input.flattenedListWithNamespace, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedListWithNamespace");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.flattenedStructureList !== undefined) {
-    const nodes = serializeAws_restXmlStructureList(input.flattenedStructureList, context);
-    nodes.map((node: any) => {
-      node = node.withName("flattenedStructureList");
-      bodyNode.addChildNode(node);
-    });
-  }
-  if (input.integerList !== undefined) {
-    const nodes = serializeAws_restXmlIntegerList(input.integerList, context);
-    const containerNode = new __XmlNode("integerList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.nestedStringList !== undefined) {
-    const nodes = serializeAws_restXmlNestedStringList(input.nestedStringList, context);
-    const containerNode = new __XmlNode("nestedStringList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.renamedListMembers !== undefined) {
-    const nodes = serializeAws_restXmlRenamedListMembers(input.renamedListMembers, context);
-    const containerNode = new __XmlNode("renamed");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.stringList !== undefined) {
-    const nodes = serializeAws_restXmlStringList(input.stringList, context);
-    const containerNode = new __XmlNode("stringList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.stringSet !== undefined) {
-    const nodes = serializeAws_restXmlStringSet(input.stringSet, context);
-    const containerNode = new __XmlNode("stringSet");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.structureList !== undefined) {
-    const nodes = serializeAws_restXmlStructureList(input.structureList, context);
-    const containerNode = new __XmlNode("myStructureList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  if (input.timestampList !== undefined) {
-    const nodes = serializeAws_restXmlTimestampList(input.timestampList, context);
-    const containerNode = new __XmlNode("timestampList");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_XLR);
+  bn.lc(input, "booleanList", "booleanList", () => se_BooleanList(input[_bL]!, context))
+  bn.lc(input, "enumList", "enumList", () => se_FooEnumList(input[_eL]!, context))
+  bn.l(input, "flattenedList", "flattenedList", () => se_RenamedListMembers(input[_fL]!, context))
+  bn.l(input, "flattenedList2", "customName", () => se_RenamedListMembers(input[_fLl]!, context))
+  bn.l(input, "flattenedListWithMemberNamespace", "flattenedListWithMemberNamespace", () => se_ListWithMemberNamespace(input[_fLWMN]!, context))
+  bn.l(input, "flattenedListWithNamespace", "flattenedListWithNamespace", () => se_ListWithNamespace(input[_fLWN]!, context))
+  bn.l(input, "flattenedStructureList", "flattenedStructureList", () => se_StructureList(input[_fSL]!, context))
+  bn.lc(input, "intEnumList", "intEnumList", () => se_IntegerEnumList(input[_iEL]!, context))
+  bn.lc(input, "integerList", "integerList", () => se_IntegerList(input[_iL]!, context))
+  bn.lc(input, "nestedStringList", "nestedStringList", () => se_NestedStringList(input[_nSL]!, context))
+  bn.lc(input, "renamedListMembers", "renamed", () => se_RenamedListMembers(input[_rLM]!, context))
+  bn.lc(input, "stringList", "stringList", () => se_StringList(input[_sL]!, context))
+  bn.lc(input, "stringSet", "stringSet", () => se_StringSet(input[_sS]!, context))
+  bn.lc(input, "structureList", "myStructureList", () => se_StructureList(input[_sLt]!, context))
+  bn.lc(input, "timestampList", "timestampList", () => se_TimestampList(input[_tL]!, context))
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlMapsCommand = async (
+/**
+ * serializeAws_restXmlXmlMapsCommand
+ */
+export const se_XmlMapsCommand = async (
   input: XmlMapsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlMaps";
+  b.bp("/XmlMaps");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlMapsInputOutput");
-  if (input.myMap !== undefined) {
-    const nodes = serializeAws_restXmlXmlMapsInputOutputMap(input.myMap, context);
-    const containerNode = new __XmlNode("myMap");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_XMR);
+  bn.lc(input, "myMap", "myMap", () => se_XmlMapsInputOutputMap(input[_mM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlMapsXmlNameCommand = async (
+/**
+ * serializeAws_restXmlXmlMapsXmlNameCommand
+ */
+export const se_XmlMapsXmlNameCommand = async (
   input: XmlMapsXmlNameCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlMapsXmlName";
+  b.bp("/XmlMapsXmlName");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlMapsXmlNameInputOutput");
-  if (input.myMap !== undefined) {
-    const nodes = serializeAws_restXmlXmlMapsXmlNameInputOutputMap(input.myMap, context);
-    const containerNode = new __XmlNode("myMap");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = _ve;
+  const bn = new __XmlNode(_XMXNR);
+  bn.lc(input, "myMap", "myMap", () => se_XmlMapsXmlNameInputOutputMap(input[_mM]!, context))
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlNamespacesCommand = async (
+/**
+ * serializeAws_restXmlXmlMapWithXmlNamespaceCommand
+ */
+export const se_XmlMapWithXmlNamespaceCommand = async (
+  input: XmlMapWithXmlNamespaceCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/xml',
+  };
+  b.bp("/XmlMapWithXmlNamespace");
+  let body: any;
+  body = _ve;
+  const bn = new __XmlNode(_XMWXNR);
+  if (input[_mM] != null) {
+    const ns = se_XmlMapWithXmlNamespaceInputOutputMap(input[_mM], context);
+    const containerNode = new __XmlNode(_KVP);
+    containerNode.a("xmlns", "https://the-member.example.com");
+    ns.map((n: any) => {
+      containerNode.c(n);
+    });
+    bn.c(containerNode);
+  }
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restXmlXmlNamespacesCommand
+ */
+export const se_XmlNamespacesCommand = async (
   input: XmlNamespacesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlNamespaces";
+  b.bp("/XmlNamespaces");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlNamespacesInputOutput");
-  bodyNode.addAttribute("xmlns", "http://foo.com");
-  if (input.nested !== undefined) {
-    const node = serializeAws_restXmlXmlNamespaceNested(input.nested, context).withName("nested");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XNR);
+  bn.a("xmlns", "http://foo.com");
+  if (input[_n] != null) {
+    bn.c(
+      se_XmlNamespaceNested(input[_n], context).n(_n)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlTimestampsCommand = async (
+/**
+ * serializeAws_restXmlXmlTimestampsCommand
+ */
+export const se_XmlTimestampsCommand = async (
   input: XmlTimestampsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlTimestamps";
+  b.bp("/XmlTimestamps");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlTimestampsInputOutput");
-  if (input.dateTime !== undefined) {
-    const node = new __XmlNode("Timestamp")
-      .addChildNode(new __XmlText((input.dateTime.toISOString().split(".")[0] + "Z").toString()))
-      .withName("dateTime");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XTR);
+  if (input[_dT] != null) {
+    bn.c(
+      __XmlNode.of(_T, __serializeDateTime(input[_dT]).toString()).n(_dT)
+    );
   }
-  if (input.epochSeconds !== undefined) {
-    const node = new __XmlNode("Timestamp")
-      .addChildNode(new __XmlText(Math.round(input.epochSeconds.getTime() / 1000).toString()))
-      .withName("epochSeconds");
-    bodyNode.addChildNode(node);
+  if (input[_dTOT] != null) {
+    bn.c(
+      __XmlNode.of(_DT, __serializeDateTime(input[_dTOT]).toString()).n(_dTOT)
+    );
   }
-  if (input.httpDate !== undefined) {
-    const node = new __XmlNode("Timestamp")
-      .addChildNode(new __XmlText(__dateToUtcString(input.httpDate).toString()))
-      .withName("httpDate");
-    bodyNode.addChildNode(node);
+  if (input[_eSp] != null) {
+    bn.c(
+      __XmlNode.of(_T, (input[_eSp].getTime() / 1_000).toString()).n(_eSp)
+    );
   }
-  if (input.normal !== undefined) {
-    const node = new __XmlNode("Timestamp")
-      .addChildNode(new __XmlText(input.normal.toISOString().split(".")[0] + "Z"))
-      .withName("normal");
-    bodyNode.addChildNode(node);
+  if (input[_eSOT] != null) {
+    bn.c(
+      __XmlNode.of(_ES, (input[_eSOT].getTime() / 1_000).toString()).n(_eSOT)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  if (input[_hDt] != null) {
+    bn.c(
+      __XmlNode.of(_T, __dateToUtcString(input[_hDt]).toString()).n(_hDt)
+    );
+  }
+  if (input[_hDOT] != null) {
+    bn.c(
+      __XmlNode.of(_HD, __dateToUtcString(input[_hDOT]).toString()).n(_hDOT)
+    );
+  }
+  if (input[_no] != null) {
+    bn.c(
+      __XmlNode.of(_T, __serializeDateTime(input[_no])).n(_no)
+    );
+  }
+  body += bn.toString();
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restXmlXmlUnionsCommand = async (
+/**
+ * serializeAws_restXmlXmlUnionsCommand
+ */
+export const se_XmlUnionsCommand = async (
   input: XmlUnionsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/xml",
+    'content-type': 'application/xml',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/XmlUnions";
+  b.bp("/XmlUnions");
   let body: any;
-  body = '<?xml version="1.0" encoding="UTF-8"?>';
-  const bodyNode = new __XmlNode("XmlUnionsInputOutput");
-  if (input.unionValue !== undefined) {
-    const node = serializeAws_restXmlXmlUnionShape(input.unionValue, context).withName("unionValue");
-    bodyNode.addChildNode(node);
+  body = _ve;
+  const bn = new __XmlNode(_XUR);
+  if (input[_uV] != null) {
+    bn.c(
+      se_XmlUnionShape(input[_uV], context).n(_uV)
+    );
   }
-  body += bodyNode.toString();
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body += bn.toString();
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const deserializeAws_restXmlAllQueryStringTypesCommand = async (
+/**
+ * deserializeAws_restXmlAllQueryStringTypesCommand
+ */
+export const de_AllQueryStringTypesCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<AllQueryStringTypesCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlAllQueryStringTypesCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: AllQueryStringTypesCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlAllQueryStringTypesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<AllQueryStringTypesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlBodyWithXmlNameCommand = async (
+/**
+ * deserializeAws_restXmlBodyWithXmlNameCommand
+ */
+export const de_BodyWithXmlNameCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<BodyWithXmlNameCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlBodyWithXmlNameCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: BodyWithXmlNameCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["nested"] !== undefined) {
-    contents.nested = deserializeAws_restXmlPayloadWithXmlName(data["nested"], context);
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (data[_n] != null) {
+    contents[_n] = de_PayloadWithXmlName(data[_n], context);
   }
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlBodyWithXmlNameCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<BodyWithXmlNameCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlConstantAndVariableQueryStringCommand = async (
+/**
+ * deserializeAws_restXmlConstantAndVariableQueryStringCommand
+ */
+export const de_ConstantAndVariableQueryStringCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<ConstantAndVariableQueryStringCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlConstantAndVariableQueryStringCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: ConstantAndVariableQueryStringCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlConstantAndVariableQueryStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<ConstantAndVariableQueryStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlConstantQueryStringCommand = async (
+/**
+ * deserializeAws_restXmlConstantQueryStringCommand
+ */
+export const de_ConstantQueryStringCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<ConstantQueryStringCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlConstantQueryStringCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: ConstantQueryStringCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlConstantQueryStringCommandError = async (
+/**
+ * deserializeAws_restXmlContentTypeParametersCommand
+ */
+export const de_ContentTypeParametersCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
-): Promise<ConstantQueryStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
+): Promise<ContentTypeParametersCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
   }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
 };
 
-export const deserializeAws_restXmlEmptyInputAndEmptyOutputCommand = async (
+/**
+ * deserializeAws_restXmlDatetimeOffsetsCommand
+ */
+export const de_DatetimeOffsetsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DatetimeOffsetsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (data[_da] != null) {
+    contents[_da] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_da]));
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_restXmlEmptyInputAndEmptyOutputCommand
+ */
+export const de_EmptyInputAndEmptyOutputCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<EmptyInputAndEmptyOutputCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlEmptyInputAndEmptyOutputCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: EmptyInputAndEmptyOutputCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlEmptyInputAndEmptyOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EmptyInputAndEmptyOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlEndpointOperationCommand = async (
+/**
+ * deserializeAws_restXmlEndpointOperationCommand
+ */
+export const de_EndpointOperationCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<EndpointOperationCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlEndpointOperationCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: EndpointOperationCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlEndpointOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlEndpointWithHostLabelHeaderOperationCommand = async (
+/**
+ * deserializeAws_restXmlEndpointWithHostLabelHeaderOperationCommand
+ */
+export const de_EndpointWithHostLabelHeaderOperationCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<EndpointWithHostLabelHeaderOperationCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlEndpointWithHostLabelHeaderOperationCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: EndpointWithHostLabelHeaderOperationCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlEndpointWithHostLabelHeaderOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointWithHostLabelHeaderOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlEndpointWithHostLabelOperationCommand = async (
+/**
+ * deserializeAws_restXmlEndpointWithHostLabelOperationCommand
+ */
+export const de_EndpointWithHostLabelOperationCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<EndpointWithHostLabelOperationCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlEndpointWithHostLabelOperationCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: EndpointWithHostLabelOperationCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlEndpointWithHostLabelOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointWithHostLabelOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlFlattenedXmlMapCommand = async (
+/**
+ * deserializeAws_restXmlFlattenedXmlMapCommand
+ */
+export const de_FlattenedXmlMapCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<FlattenedXmlMapCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlFlattenedXmlMapCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: FlattenedXmlMapCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.myMap === "") {
-    contents.myMap = {};
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (String(data.myMap).trim() === "") {
+    contents[_mM] = {};
   }
-  if (data["myMap"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlFooEnumMap(__getArrayIfSingleItem(data["myMap"]), context);
+  else if (data[_mM] != null) {
+    contents[_mM] = de_FooEnumMap(__getArrayIfSingleItem(data[_mM]), context);
   }
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlFlattenedXmlMapCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<FlattenedXmlMapCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlFlattenedXmlMapWithXmlNameCommand = async (
+/**
+ * deserializeAws_restXmlFlattenedXmlMapWithXmlNameCommand
+ */
+export const de_FlattenedXmlMapWithXmlNameCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<FlattenedXmlMapWithXmlNameCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlFlattenedXmlMapWithXmlNameCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: FlattenedXmlMapWithXmlNameCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.KVP === "") {
-    contents.myMap = {};
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (String(data.KVP).trim() === "") {
+    contents[_mM] = {};
   }
-  if (data["KVP"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap(
-      __getArrayIfSingleItem(data["KVP"]),
-      context
-    );
+  else if (data[_KVP] != null) {
+    contents[_mM] = de_FlattenedXmlMapWithXmlNameInputOutputMap(__getArrayIfSingleItem(data[_KVP]), context);
   }
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlFlattenedXmlMapWithXmlNameCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<FlattenedXmlMapWithXmlNameCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommand = async (
+/**
+ * deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommand
+ */
+export const de_FlattenedXmlMapWithXmlNamespaceCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: FlattenedXmlMapWithXmlNamespaceCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.KVP === "") {
-    contents.myMap = {};
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (String(data.KVP).trim() === "") {
+    contents[_mM] = {};
   }
-  if (data["KVP"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceOutputMap(
-      __getArrayIfSingleItem(data["KVP"]),
-      context
-    );
+  else if (data[_KVP] != null) {
+    contents[_mM] = de_FlattenedXmlMapWithXmlNamespaceOutputMap(__getArrayIfSingleItem(data[_KVP]), context);
   }
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceCommandError = async (
+/**
+ * deserializeAws_restXmlFractionalSecondsCommand
+ */
+export const de_FractionalSecondsCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
-): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
+): Promise<FractionalSecondsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
   }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  if (data[_da] != null) {
+    contents[_da] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_da]));
+  }
+  return contents;
 };
 
-export const deserializeAws_restXmlGreetingWithErrorsCommand = async (
+/**
+ * deserializeAws_restXmlGreetingWithErrorsCommand
+ */
+export const de_GreetingWithErrorsCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<GreetingWithErrorsCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlGreetingWithErrorsCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: GreetingWithErrorsCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    greeting: undefined,
-  };
-  if (output.headers["x-greeting"] !== undefined) {
-    contents.greeting = output.headers["x-greeting"];
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlGreetingWithErrorsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<GreetingWithErrorsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    case "ComplexError":
-    case "aws.protocoltests.restxml#ComplexError":
-      response = {
-        ...(await deserializeAws_restXmlComplexErrorResponse(parsedOutput, context)),
-        name: errorCode,
-        $metadata: deserializeMetadata(output),
-      };
-      break;
-    case "InvalidGreeting":
-    case "aws.protocoltests.restxml#InvalidGreeting":
-      response = {
-        ...(await deserializeAws_restXmlInvalidGreetingResponse(parsedOutput, context)),
-        name: errorCode,
-        $metadata: deserializeMetadata(output),
-      };
-      break;
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadTraitsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadTraitsCommandError(output, context);
-  }
-  const contents: HttpPayloadTraitsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = await collectBody(output.body, context);
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadTraitsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommandError(output, context);
-  }
-  const contents: HttpPayloadTraitsWithMediaTypeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = await collectBody(output.body, context);
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithMemberXmlNameCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommandError(output, context);
-  }
-  const contents: HttpPayloadWithMemberXmlNameCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restXmlPayloadWithXmlName(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithMemberXmlNameCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadWithStructureCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithStructureCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadWithStructureCommandError(output, context);
-  }
-  const contents: HttpPayloadWithStructureCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restXmlNestedPayload(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadWithStructureCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithStructureCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadWithXmlNameCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNameCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadWithXmlNameCommandError(output, context);
-  }
-  const contents: HttpPayloadWithXmlNameCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restXmlPayloadWithXmlName(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadWithXmlNameCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNameCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadWithXmlNamespaceCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNamespaceCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadWithXmlNamespaceCommandError(output, context);
-  }
-  const contents: HttpPayloadWithXmlNamespaceCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restXmlPayloadWithXmlNamespace(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadWithXmlNamespaceCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNamespaceCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNamespaceAndPrefixCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommandError(output, context);
-  }
-  const contents: HttpPayloadWithXmlNamespaceAndPrefixCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restXmlPayloadWithXmlNamespaceAndPrefix(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithXmlNamespaceAndPrefixCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpPrefixHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpPrefixHeadersCommandError(output, context);
-  }
-  const contents: HttpPrefixHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    foo: undefined,
-    fooMap: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  Object.keys(output.headers).forEach((header) => {
-    if (contents.fooMap === undefined) {
-      contents.fooMap = {};
-    }
-    if (header.startsWith("x-foo-")) {
-      contents.fooMap[header.substring(6)] = output.headers[header];
-    }
+    [_g]: [, output.headers[_xg]],
   });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpPrefixHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpRequestWithFloatLabelsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpRequestWithFloatLabelsCommandError(output, context);
-  }
-  const contents: HttpRequestWithFloatLabelsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpRequestWithFloatLabelsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpRequestWithGreedyLabelInPathCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpRequestWithGreedyLabelInPathCommandError(output, context);
-  }
-  const contents: HttpRequestWithGreedyLabelInPathCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpRequestWithGreedyLabelInPathCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpRequestWithLabelsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpRequestWithLabelsCommandError(output, context);
-  }
-  const contents: HttpRequestWithLabelsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpRequestWithLabelsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommandError(output, context);
-  }
-  const contents: HttpRequestWithLabelsAndTimestampFormatCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlHttpResponseCodeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpResponseCodeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlHttpResponseCodeCommandError(output, context);
-  }
-  const contents: HttpResponseCodeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    Status: undefined,
-  };
-  if (contents.Status === undefined) {
-    contents.Status = output.statusCode;
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlHttpResponseCodeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpResponseCodeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlIgnoreQueryParamsInResponseCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlIgnoreQueryParamsInResponseCommandError(output, context);
-  }
-  const contents: IgnoreQueryParamsInResponseCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    baz: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["baz"] !== undefined) {
-    contents.baz = __expectString(data["baz"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlIgnoreQueryParamsInResponseCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlInputAndOutputWithHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<InputAndOutputWithHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlInputAndOutputWithHeadersCommandError(output, context);
-  }
-  const contents: InputAndOutputWithHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    headerBooleanList: undefined,
-    headerByte: undefined,
-    headerDouble: undefined,
-    headerEnum: undefined,
-    headerEnumList: undefined,
-    headerFalseBool: undefined,
-    headerFloat: undefined,
-    headerInteger: undefined,
-    headerIntegerList: undefined,
-    headerLong: undefined,
-    headerShort: undefined,
-    headerString: undefined,
-    headerStringList: undefined,
-    headerStringSet: undefined,
-    headerTimestampList: undefined,
-    headerTrueBool: undefined,
-  };
-  if (output.headers["x-string"] !== undefined) {
-    contents.headerString = output.headers["x-string"];
-  }
-  if (output.headers["x-byte"] !== undefined) {
-    contents.headerByte = __strictParseByte(output.headers["x-byte"]);
-  }
-  if (output.headers["x-short"] !== undefined) {
-    contents.headerShort = __strictParseShort(output.headers["x-short"]);
-  }
-  if (output.headers["x-integer"] !== undefined) {
-    contents.headerInteger = __strictParseInt32(output.headers["x-integer"]);
-  }
-  if (output.headers["x-long"] !== undefined) {
-    contents.headerLong = __strictParseLong(output.headers["x-long"]);
-  }
-  if (output.headers["x-float"] !== undefined) {
-    contents.headerFloat = __strictParseFloat(output.headers["x-float"]);
-  }
-  if (output.headers["x-double"] !== undefined) {
-    contents.headerDouble = __strictParseDouble(output.headers["x-double"]);
-  }
-  if (output.headers["x-boolean1"] !== undefined) {
-    contents.headerTrueBool = __parseBoolean(output.headers["x-boolean1"]);
-  }
-  if (output.headers["x-boolean2"] !== undefined) {
-    contents.headerFalseBool = __parseBoolean(output.headers["x-boolean2"]);
-  }
-  if (output.headers["x-stringlist"] !== undefined) {
-    contents.headerStringList = (output.headers["x-stringlist"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  if (output.headers["x-stringset"] !== undefined) {
-    contents.headerStringSet = (output.headers["x-stringset"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  if (output.headers["x-integerlist"] !== undefined) {
-    contents.headerIntegerList = (output.headers["x-integerlist"] || "")
-      .split(",")
-      .map((_entry) => __strictParseInt32(_entry.trim()) as any);
-  }
-  if (output.headers["x-booleanlist"] !== undefined) {
-    contents.headerBooleanList = (output.headers["x-booleanlist"] || "")
-      .split(",")
-      .map((_entry) => __parseBoolean(_entry.trim()) as any);
-  }
-  if (output.headers["x-timestamplist"] !== undefined) {
-    contents.headerTimestampList = __splitEvery(output.headers["x-timestamplist"] || "", ",", 2).map(
-      (_entry) => __expectNonNull(__parseRfc7231DateTime(_entry.trim())) as any
-    );
-  }
-  if (output.headers["x-enum"] !== undefined) {
-    contents.headerEnum = output.headers["x-enum"];
-  }
-  if (output.headers["x-enumlist"] !== undefined) {
-    contents.headerEnumList = (output.headers["x-enumlist"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlInputAndOutputWithHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<InputAndOutputWithHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlNestedXmlMapsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NestedXmlMapsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlNestedXmlMapsCommandError(output, context);
-  }
-  const contents: NestedXmlMapsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    flatNestedMap: undefined,
-    nestedMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.flatNestedMap === "") {
-    contents.flatNestedMap = {};
-  }
-  if (data["flatNestedMap"] !== undefined) {
-    contents.flatNestedMap = deserializeAws_restXmlNestedMap(__getArrayIfSingleItem(data["flatNestedMap"]), context);
-  }
-  if (data.nestedMap === "") {
-    contents.nestedMap = {};
-  }
-  if (data["nestedMap"] !== undefined && data["nestedMap"]["entry"] !== undefined) {
-    contents.nestedMap = deserializeAws_restXmlNestedMap(__getArrayIfSingleItem(data["nestedMap"]["entry"]), context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlNestedXmlMapsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NestedXmlMapsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlNoInputAndNoOutputCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndNoOutputCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlNoInputAndNoOutputCommandError(output, context);
-  }
-  const contents: NoInputAndNoOutputCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlNoInputAndNoOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndNoOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlNoInputAndOutputCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndOutputCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlNoInputAndOutputCommandError(output, context);
-  }
-  const contents: NoInputAndOutputCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlNoInputAndOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlNullAndEmptyHeadersClientCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersClientCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlNullAndEmptyHeadersClientCommandError(output, context);
-  }
-  const contents: NullAndEmptyHeadersClientCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    a: undefined,
-    b: undefined,
-    c: undefined,
-  };
-  if (output.headers["x-a"] !== undefined) {
-    contents.a = output.headers["x-a"];
-  }
-  if (output.headers["x-b"] !== undefined) {
-    contents.b = output.headers["x-b"];
-  }
-  if (output.headers["x-c"] !== undefined) {
-    contents.c = (output.headers["x-c"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlNullAndEmptyHeadersClientCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersClientCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlNullAndEmptyHeadersServerCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersServerCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlNullAndEmptyHeadersServerCommandError(output, context);
-  }
-  const contents: NullAndEmptyHeadersServerCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    a: undefined,
-    b: undefined,
-    c: undefined,
-  };
-  if (output.headers["x-a"] !== undefined) {
-    contents.a = output.headers["x-a"];
-  }
-  if (output.headers["x-b"] !== undefined) {
-    contents.b = output.headers["x-b"];
-  }
-  if (output.headers["x-c"] !== undefined) {
-    contents.c = (output.headers["x-c"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlNullAndEmptyHeadersServerCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersServerCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlOmitsNullSerializesEmptyStringCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlOmitsNullSerializesEmptyStringCommandError(output, context);
-  }
-  const contents: OmitsNullSerializesEmptyStringCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlOmitsNullSerializesEmptyStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlQueryIdempotencyTokenAutoFillCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlQueryIdempotencyTokenAutoFillCommandError(output, context);
-  }
-  const contents: QueryIdempotencyTokenAutoFillCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlQueryIdempotencyTokenAutoFillCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlQueryParamsAsStringListMapCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryParamsAsStringListMapCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlQueryParamsAsStringListMapCommandError(output, context);
-  }
-  const contents: QueryParamsAsStringListMapCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlQueryParamsAsStringListMapCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryParamsAsStringListMapCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlQueryPrecedenceCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryPrecedenceCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlQueryPrecedenceCommandError(output, context);
-  }
-  const contents: QueryPrecedenceCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlQueryPrecedenceCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryPrecedenceCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlRecursiveShapesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<RecursiveShapesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlRecursiveShapesCommandError(output, context);
-  }
-  const contents: RecursiveShapesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["nested"] !== undefined) {
-    contents.nested = deserializeAws_restXmlRecursiveShapesInputOutputNested1(data["nested"], context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlRecursiveShapesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<RecursiveShapesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlSimpleScalarPropertiesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<SimpleScalarPropertiesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlSimpleScalarPropertiesCommandError(output, context);
-  }
-  const contents: SimpleScalarPropertiesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    byteValue: undefined,
-    doubleValue: undefined,
-    falseBooleanValue: undefined,
-    floatValue: undefined,
-    foo: undefined,
-    integerValue: undefined,
-    longValue: undefined,
-    shortValue: undefined,
-    stringValue: undefined,
-    trueBooleanValue: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["byteValue"] !== undefined) {
-    contents.byteValue = __strictParseByte(data["byteValue"]) as number;
-  }
-  if (data["DoubleDribble"] !== undefined) {
-    contents.doubleValue = __strictParseFloat(data["DoubleDribble"]) as number;
-  }
-  if (data["falseBooleanValue"] !== undefined) {
-    contents.falseBooleanValue = __parseBoolean(data["falseBooleanValue"]);
-  }
-  if (data["floatValue"] !== undefined) {
-    contents.floatValue = __strictParseFloat(data["floatValue"]) as number;
-  }
-  if (data["integerValue"] !== undefined) {
-    contents.integerValue = __strictParseInt32(data["integerValue"]) as number;
-  }
-  if (data["longValue"] !== undefined) {
-    contents.longValue = __strictParseLong(data["longValue"]) as number;
-  }
-  if (data["shortValue"] !== undefined) {
-    contents.shortValue = __strictParseShort(data["shortValue"]) as number;
-  }
-  if (data["stringValue"] !== undefined) {
-    contents.stringValue = __expectString(data["stringValue"]);
-  }
-  if (data["trueBooleanValue"] !== undefined) {
-    contents.trueBooleanValue = __parseBoolean(data["trueBooleanValue"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlSimpleScalarPropertiesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<SimpleScalarPropertiesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlTimestampFormatHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<TimestampFormatHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlTimestampFormatHeadersCommandError(output, context);
-  }
-  const contents: TimestampFormatHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    defaultFormat: undefined,
-    memberDateTime: undefined,
-    memberEpochSeconds: undefined,
-    memberHttpDate: undefined,
-    targetDateTime: undefined,
-    targetEpochSeconds: undefined,
-    targetHttpDate: undefined,
-  };
-  if (output.headers["x-memberepochseconds"] !== undefined) {
-    contents.memberEpochSeconds = __expectNonNull(__parseEpochTimestamp(output.headers["x-memberepochseconds"]));
-  }
-  if (output.headers["x-memberhttpdate"] !== undefined) {
-    contents.memberHttpDate = __expectNonNull(__parseRfc7231DateTime(output.headers["x-memberhttpdate"]));
-  }
-  if (output.headers["x-memberdatetime"] !== undefined) {
-    contents.memberDateTime = __expectNonNull(__parseRfc3339DateTime(output.headers["x-memberdatetime"]));
-  }
-  if (output.headers["x-defaultformat"] !== undefined) {
-    contents.defaultFormat = __expectNonNull(__parseRfc7231DateTime(output.headers["x-defaultformat"]));
-  }
-  if (output.headers["x-targetepochseconds"] !== undefined) {
-    contents.targetEpochSeconds = __expectNonNull(__parseEpochTimestamp(output.headers["x-targetepochseconds"]));
-  }
-  if (output.headers["x-targethttpdate"] !== undefined) {
-    contents.targetHttpDate = __expectNonNull(__parseRfc7231DateTime(output.headers["x-targethttpdate"]));
-  }
-  if (output.headers["x-targetdatetime"] !== undefined) {
-    contents.targetDateTime = __expectNonNull(__parseRfc3339DateTime(output.headers["x-targetdatetime"]));
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlTimestampFormatHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<TimestampFormatHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlAttributesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlAttributesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlAttributesCommandError(output, context);
-  }
-  const contents: XmlAttributesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    attr: undefined,
-    foo: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["test"] !== undefined) {
-    contents.attr = __expectString(data["test"]);
-  }
-  if (data["foo"] !== undefined) {
-    contents.foo = __expectString(data["foo"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlAttributesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlAttributesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlAttributesOnPayloadCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlAttributesOnPayloadCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlAttributesOnPayloadCommandError(output, context);
-  }
-  const contents: XmlAttributesOnPayloadCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    payload: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.payload = deserializeAws_restXmlXmlAttributesInputOutput(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlAttributesOnPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlAttributesOnPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlBlobsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlBlobsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlBlobsCommandError(output, context);
-  }
-  const contents: XmlBlobsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    data: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["data"] !== undefined) {
-    contents.data = context.base64Decoder(data["data"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlBlobsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlBlobsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlEmptyBlobsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyBlobsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlEmptyBlobsCommandError(output, context);
-  }
-  const contents: XmlEmptyBlobsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    data: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["data"] !== undefined) {
-    contents.data = context.base64Decoder(data["data"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlEmptyBlobsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyBlobsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlEmptyListsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyListsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlEmptyListsCommandError(output, context);
-  }
-  const contents: XmlEmptyListsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    booleanList: undefined,
-    enumList: undefined,
-    flattenedList: undefined,
-    flattenedList2: undefined,
-    flattenedListWithMemberNamespace: undefined,
-    flattenedListWithNamespace: undefined,
-    flattenedStructureList: undefined,
-    integerList: undefined,
-    nestedStringList: undefined,
-    renamedListMembers: undefined,
-    stringList: undefined,
-    stringSet: undefined,
-    structureList: undefined,
-    timestampList: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.booleanList === "") {
-    contents.booleanList = [];
-  }
-  if (data["booleanList"] !== undefined && data["booleanList"]["member"] !== undefined) {
-    contents.booleanList = deserializeAws_restXmlBooleanList(
-      __getArrayIfSingleItem(data["booleanList"]["member"]),
-      context
-    );
-  }
-  if (data.enumList === "") {
-    contents.enumList = [];
-  }
-  if (data["enumList"] !== undefined && data["enumList"]["member"] !== undefined) {
-    contents.enumList = deserializeAws_restXmlFooEnumList(__getArrayIfSingleItem(data["enumList"]["member"]), context);
-  }
-  if (data.flattenedList === "") {
-    contents.flattenedList = [];
-  }
-  if (data["flattenedList"] !== undefined) {
-    contents.flattenedList = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["flattenedList"]),
-      context
-    );
-  }
-  if (data.customName === "") {
-    contents.flattenedList2 = [];
-  }
-  if (data["customName"] !== undefined) {
-    contents.flattenedList2 = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["customName"]),
-      context
-    );
-  }
-  if (data.flattenedListWithMemberNamespace === "") {
-    contents.flattenedListWithMemberNamespace = [];
-  }
-  if (data["flattenedListWithMemberNamespace"] !== undefined) {
-    contents.flattenedListWithMemberNamespace = deserializeAws_restXmlListWithMemberNamespace(
-      __getArrayIfSingleItem(data["flattenedListWithMemberNamespace"]),
-      context
-    );
-  }
-  if (data.flattenedListWithNamespace === "") {
-    contents.flattenedListWithNamespace = [];
-  }
-  if (data["flattenedListWithNamespace"] !== undefined) {
-    contents.flattenedListWithNamespace = deserializeAws_restXmlListWithNamespace(
-      __getArrayIfSingleItem(data["flattenedListWithNamespace"]),
-      context
-    );
-  }
-  if (data.flattenedStructureList === "") {
-    contents.flattenedStructureList = [];
-  }
-  if (data["flattenedStructureList"] !== undefined) {
-    contents.flattenedStructureList = deserializeAws_restXmlStructureList(
-      __getArrayIfSingleItem(data["flattenedStructureList"]),
-      context
-    );
-  }
-  if (data.integerList === "") {
-    contents.integerList = [];
-  }
-  if (data["integerList"] !== undefined && data["integerList"]["member"] !== undefined) {
-    contents.integerList = deserializeAws_restXmlIntegerList(
-      __getArrayIfSingleItem(data["integerList"]["member"]),
-      context
-    );
-  }
-  if (data.nestedStringList === "") {
-    contents.nestedStringList = [];
-  }
-  if (data["nestedStringList"] !== undefined && data["nestedStringList"]["member"] !== undefined) {
-    contents.nestedStringList = deserializeAws_restXmlNestedStringList(
-      __getArrayIfSingleItem(data["nestedStringList"]["member"]),
-      context
-    );
-  }
-  if (data.renamed === "") {
-    contents.renamedListMembers = [];
-  }
-  if (data["renamed"] !== undefined && data["renamed"]["item"] !== undefined) {
-    contents.renamedListMembers = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["renamed"]["item"]),
-      context
-    );
-  }
-  if (data.stringList === "") {
-    contents.stringList = [];
-  }
-  if (data["stringList"] !== undefined && data["stringList"]["member"] !== undefined) {
-    contents.stringList = deserializeAws_restXmlStringList(
-      __getArrayIfSingleItem(data["stringList"]["member"]),
-      context
-    );
-  }
-  if (data.stringSet === "") {
-    contents.stringSet = [];
-  }
-  if (data["stringSet"] !== undefined && data["stringSet"]["member"] !== undefined) {
-    contents.stringSet = deserializeAws_restXmlStringSet(__getArrayIfSingleItem(data["stringSet"]["member"]), context);
-  }
-  if (data.myStructureList === "") {
-    contents.structureList = [];
-  }
-  if (data["myStructureList"] !== undefined && data["myStructureList"]["item"] !== undefined) {
-    contents.structureList = deserializeAws_restXmlStructureList(
-      __getArrayIfSingleItem(data["myStructureList"]["item"]),
-      context
-    );
-  }
-  if (data.timestampList === "") {
-    contents.timestampList = [];
-  }
-  if (data["timestampList"] !== undefined && data["timestampList"]["member"] !== undefined) {
-    contents.timestampList = deserializeAws_restXmlTimestampList(
-      __getArrayIfSingleItem(data["timestampList"]["member"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlEmptyListsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyListsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlEmptyMapsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyMapsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlEmptyMapsCommandError(output, context);
-  }
-  const contents: XmlEmptyMapsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.myMap === "") {
-    contents.myMap = {};
-  }
-  if (data["myMap"] !== undefined && data["myMap"]["entry"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlXmlMapsInputOutputMap(
-      __getArrayIfSingleItem(data["myMap"]["entry"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlEmptyMapsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyMapsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlEmptyStringsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyStringsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlEmptyStringsCommandError(output, context);
-  }
-  const contents: XmlEmptyStringsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    emptyString: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["emptyString"] !== undefined) {
-    contents.emptyString = __expectString(data["emptyString"]);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlEmptyStringsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEmptyStringsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlEnumsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEnumsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlEnumsCommandError(output, context);
-  }
-  const contents: XmlEnumsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    fooEnum1: undefined,
-    fooEnum2: undefined,
-    fooEnum3: undefined,
-    fooEnumList: undefined,
-    fooEnumMap: undefined,
-    fooEnumSet: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["fooEnum1"] !== undefined) {
-    contents.fooEnum1 = __expectString(data["fooEnum1"]);
-  }
-  if (data["fooEnum2"] !== undefined) {
-    contents.fooEnum2 = __expectString(data["fooEnum2"]);
-  }
-  if (data["fooEnum3"] !== undefined) {
-    contents.fooEnum3 = __expectString(data["fooEnum3"]);
-  }
-  if (data.fooEnumList === "") {
-    contents.fooEnumList = [];
-  }
-  if (data["fooEnumList"] !== undefined && data["fooEnumList"]["member"] !== undefined) {
-    contents.fooEnumList = deserializeAws_restXmlFooEnumList(
-      __getArrayIfSingleItem(data["fooEnumList"]["member"]),
-      context
-    );
-  }
-  if (data.fooEnumMap === "") {
-    contents.fooEnumMap = {};
-  }
-  if (data["fooEnumMap"] !== undefined && data["fooEnumMap"]["entry"] !== undefined) {
-    contents.fooEnumMap = deserializeAws_restXmlFooEnumMap(
-      __getArrayIfSingleItem(data["fooEnumMap"]["entry"]),
-      context
-    );
-  }
-  if (data.fooEnumSet === "") {
-    contents.fooEnumSet = [];
-  }
-  if (data["fooEnumSet"] !== undefined && data["fooEnumSet"]["member"] !== undefined) {
-    contents.fooEnumSet = deserializeAws_restXmlFooEnumSet(
-      __getArrayIfSingleItem(data["fooEnumSet"]["member"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlEnumsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlEnumsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlListsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlListsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlListsCommandError(output, context);
-  }
-  const contents: XmlListsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    booleanList: undefined,
-    enumList: undefined,
-    flattenedList: undefined,
-    flattenedList2: undefined,
-    flattenedListWithMemberNamespace: undefined,
-    flattenedListWithNamespace: undefined,
-    flattenedStructureList: undefined,
-    integerList: undefined,
-    nestedStringList: undefined,
-    renamedListMembers: undefined,
-    stringList: undefined,
-    stringSet: undefined,
-    structureList: undefined,
-    timestampList: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.booleanList === "") {
-    contents.booleanList = [];
-  }
-  if (data["booleanList"] !== undefined && data["booleanList"]["member"] !== undefined) {
-    contents.booleanList = deserializeAws_restXmlBooleanList(
-      __getArrayIfSingleItem(data["booleanList"]["member"]),
-      context
-    );
-  }
-  if (data.enumList === "") {
-    contents.enumList = [];
-  }
-  if (data["enumList"] !== undefined && data["enumList"]["member"] !== undefined) {
-    contents.enumList = deserializeAws_restXmlFooEnumList(__getArrayIfSingleItem(data["enumList"]["member"]), context);
-  }
-  if (data.flattenedList === "") {
-    contents.flattenedList = [];
-  }
-  if (data["flattenedList"] !== undefined) {
-    contents.flattenedList = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["flattenedList"]),
-      context
-    );
-  }
-  if (data.customName === "") {
-    contents.flattenedList2 = [];
-  }
-  if (data["customName"] !== undefined) {
-    contents.flattenedList2 = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["customName"]),
-      context
-    );
-  }
-  if (data.flattenedListWithMemberNamespace === "") {
-    contents.flattenedListWithMemberNamespace = [];
-  }
-  if (data["flattenedListWithMemberNamespace"] !== undefined) {
-    contents.flattenedListWithMemberNamespace = deserializeAws_restXmlListWithMemberNamespace(
-      __getArrayIfSingleItem(data["flattenedListWithMemberNamespace"]),
-      context
-    );
-  }
-  if (data.flattenedListWithNamespace === "") {
-    contents.flattenedListWithNamespace = [];
-  }
-  if (data["flattenedListWithNamespace"] !== undefined) {
-    contents.flattenedListWithNamespace = deserializeAws_restXmlListWithNamespace(
-      __getArrayIfSingleItem(data["flattenedListWithNamespace"]),
-      context
-    );
-  }
-  if (data.flattenedStructureList === "") {
-    contents.flattenedStructureList = [];
-  }
-  if (data["flattenedStructureList"] !== undefined) {
-    contents.flattenedStructureList = deserializeAws_restXmlStructureList(
-      __getArrayIfSingleItem(data["flattenedStructureList"]),
-      context
-    );
-  }
-  if (data.integerList === "") {
-    contents.integerList = [];
-  }
-  if (data["integerList"] !== undefined && data["integerList"]["member"] !== undefined) {
-    contents.integerList = deserializeAws_restXmlIntegerList(
-      __getArrayIfSingleItem(data["integerList"]["member"]),
-      context
-    );
-  }
-  if (data.nestedStringList === "") {
-    contents.nestedStringList = [];
-  }
-  if (data["nestedStringList"] !== undefined && data["nestedStringList"]["member"] !== undefined) {
-    contents.nestedStringList = deserializeAws_restXmlNestedStringList(
-      __getArrayIfSingleItem(data["nestedStringList"]["member"]),
-      context
-    );
-  }
-  if (data.renamed === "") {
-    contents.renamedListMembers = [];
-  }
-  if (data["renamed"] !== undefined && data["renamed"]["item"] !== undefined) {
-    contents.renamedListMembers = deserializeAws_restXmlRenamedListMembers(
-      __getArrayIfSingleItem(data["renamed"]["item"]),
-      context
-    );
-  }
-  if (data.stringList === "") {
-    contents.stringList = [];
-  }
-  if (data["stringList"] !== undefined && data["stringList"]["member"] !== undefined) {
-    contents.stringList = deserializeAws_restXmlStringList(
-      __getArrayIfSingleItem(data["stringList"]["member"]),
-      context
-    );
-  }
-  if (data.stringSet === "") {
-    contents.stringSet = [];
-  }
-  if (data["stringSet"] !== undefined && data["stringSet"]["member"] !== undefined) {
-    contents.stringSet = deserializeAws_restXmlStringSet(__getArrayIfSingleItem(data["stringSet"]["member"]), context);
-  }
-  if (data.myStructureList === "") {
-    contents.structureList = [];
-  }
-  if (data["myStructureList"] !== undefined && data["myStructureList"]["item"] !== undefined) {
-    contents.structureList = deserializeAws_restXmlStructureList(
-      __getArrayIfSingleItem(data["myStructureList"]["item"]),
-      context
-    );
-  }
-  if (data.timestampList === "") {
-    contents.timestampList = [];
-  }
-  if (data["timestampList"] !== undefined && data["timestampList"]["member"] !== undefined) {
-    contents.timestampList = deserializeAws_restXmlTimestampList(
-      __getArrayIfSingleItem(data["timestampList"]["member"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlListsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlListsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlMapsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlMapsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlMapsCommandError(output, context);
-  }
-  const contents: XmlMapsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.myMap === "") {
-    contents.myMap = {};
-  }
-  if (data["myMap"] !== undefined && data["myMap"]["entry"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlXmlMapsInputOutputMap(
-      __getArrayIfSingleItem(data["myMap"]["entry"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlMapsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlMapsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlMapsXmlNameCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlMapsXmlNameCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlMapsXmlNameCommandError(output, context);
-  }
-  const contents: XmlMapsXmlNameCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    myMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.myMap === "") {
-    contents.myMap = {};
-  }
-  if (data["myMap"] !== undefined && data["myMap"]["entry"] !== undefined) {
-    contents.myMap = deserializeAws_restXmlXmlMapsXmlNameInputOutputMap(
-      __getArrayIfSingleItem(data["myMap"]["entry"]),
-      context
-    );
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlMapsXmlNameCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlMapsXmlNameCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlNamespacesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlNamespacesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlNamespacesCommandError(output, context);
-  }
-  const contents: XmlNamespacesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["nested"] !== undefined) {
-    contents.nested = deserializeAws_restXmlXmlNamespaceNested(data["nested"], context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlNamespacesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlNamespacesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlTimestampsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlTimestampsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlTimestampsCommandError(output, context);
-  }
-  const contents: XmlTimestampsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    dateTime: undefined,
-    epochSeconds: undefined,
-    httpDate: undefined,
-    normal: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["dateTime"] !== undefined) {
-    contents.dateTime = __expectNonNull(__parseRfc3339DateTime(data["dateTime"]));
-  }
-  if (data["epochSeconds"] !== undefined) {
-    contents.epochSeconds = __expectNonNull(__parseEpochTimestamp(data["epochSeconds"]));
-  }
-  if (data["httpDate"] !== undefined) {
-    contents.httpDate = __expectNonNull(__parseRfc7231DateTime(data["httpDate"]));
-  }
-  if (data["normal"] !== undefined) {
-    contents.normal = __expectNonNull(__parseRfc3339DateTime(data["normal"]));
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlTimestampsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlTimestampsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restXmlXmlUnionsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlUnionsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restXmlXmlUnionsCommandError(output, context);
-  }
-  const contents: XmlUnionsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    unionValue: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data["unionValue"] !== undefined) {
-    contents.unionValue = deserializeAws_restXmlXmlUnionShape(__expectUnion(data["unionValue"]), context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restXmlXmlUnionsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<XmlUnionsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
-      response = {
-        ...parsedBody.Error,
-        name: `${errorCode}`,
-        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-const deserializeAws_restXmlComplexErrorResponse = async (
-  parsedOutput: any,
-  context: __SerdeContext
-): Promise<ComplexError> => {
-  const contents: ComplexError = {
-    name: "ComplexError",
-    $fault: "client",
-    $metadata: deserializeMetadata(parsedOutput),
-    Header: undefined,
-    Nested: undefined,
-    TopLevel: undefined,
-  };
-  if (parsedOutput.headers["x-header"] !== undefined) {
-    contents.Header = parsedOutput.headers["x-header"];
-  }
-  const data: any = parsedOutput.body.Error;
-  if (data["Nested"] !== undefined) {
-    contents.Nested = deserializeAws_restXmlComplexNestedErrorData(data["Nested"], context);
-  }
-  if (data["TopLevel"] !== undefined) {
-    contents.TopLevel = __expectString(data["TopLevel"]);
-  }
   return contents;
 };
 
-const deserializeAws_restXmlInvalidGreetingResponse = async (
-  parsedOutput: any,
+/**
+ * deserializeAws_restXmlHttpEmptyPrefixHeadersCommand
+ */
+export const de_HttpEmptyPrefixHeadersCommand = async (
+  output: __HttpResponse,
   context: __SerdeContext
-): Promise<InvalidGreeting> => {
-  const contents: InvalidGreeting = {
-    name: "InvalidGreeting",
-    $fault: "client",
-    $metadata: deserializeMetadata(parsedOutput),
-    Message: undefined,
+): Promise<HttpEmptyPrefixHeadersCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+    [_sH]: [, output.headers[_h]],
+    prefixHeaders: [,
+      Object.keys(output.headers).filter(header => header.startsWith(''))
+        .reduce((acc, header) => {
+          acc[header.substring(0)] = output.headers[header];
+          return acc;
+        }, {} as any)
+      ],
+    });
+    await collectBody(output.body, context);
+    return contents;
   };
-  const data: any = parsedOutput.body.Error;
-  if (data["Message"] !== undefined) {
-    contents.Message = __expectString(data["Message"]);
-  }
-  return contents;
-};
 
-const serializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap = (
-  input: { [key: string]: string },
-  context: __SerdeContext
-): any => {
-  return Object.keys(input)
-    .filter((key) => input[key] != null)
-    .map((key) => {
-      const entryNode = new __XmlNode("entry");
-      const keyNode = new __XmlNode("String").addChildNode(new __XmlText(key)).withName("K");
-      entryNode.addChildNode(keyNode);
-      let node;
-      node = new __XmlNode("String").addChildNode(new __XmlText(input[key]));
-      entryNode.addChildNode(node.withName("V"));
-      return entryNode;
-    });
-};
-
-const serializeAws_restXmlListWithMemberNamespace = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      node.addAttribute("xmlns", "https://xml-member.example.com");
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlListWithNamespace = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlNestedMap = (
-  input: { [key: string]: { [key: string]: FooEnum | string } },
-  context: __SerdeContext
-): any => {
-  return Object.keys(input)
-    .filter((key) => input[key] != null)
-    .map((key) => {
-      const entryNode = new __XmlNode("entry");
-      const keyNode = new __XmlNode("String").addChildNode(new __XmlText(key)).withName("key");
-      entryNode.addChildNode(keyNode);
-      let node;
-      node = serializeAws_restXmlFooEnumMap(input[key], context);
-      entryNode.addChildNode(
-        node.reduce((acc: __XmlNode, workingNode: any) => {
-          return acc.addChildNode(workingNode);
-        }, new __XmlNode("value"))
-      );
-      return entryNode;
-    });
-};
-
-const serializeAws_restXmlNestedPayload = (input: NestedPayload, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("NestedPayload");
-  if (input.greeting !== undefined && input.greeting !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.greeting)).withName("greeting");
-    bodyNode.addChildNode(node);
-  }
-  if (input.name !== undefined && input.name !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.name)).withName("name");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlPayloadWithXmlName = (input: PayloadWithXmlName, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("Hello");
-  if (input.name !== undefined && input.name !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.name)).withName("name");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlPayloadWithXmlNamespace = (input: PayloadWithXmlNamespace, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("PayloadWithXmlNamespace");
-  if (input.name !== undefined && input.name !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.name)).withName("name");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlPayloadWithXmlNamespaceAndPrefix = (
-  input: PayloadWithXmlNamespaceAndPrefix,
-  context: __SerdeContext
-): any => {
-  const bodyNode = new __XmlNode("PayloadWithXmlNamespaceAndPrefix");
-  if (input.name !== undefined && input.name !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.name)).withName("name");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlRecursiveShapesInputOutputNested1 = (
-  input: RecursiveShapesInputOutputNested1,
-  context: __SerdeContext
-): any => {
-  const bodyNode = new __XmlNode("RecursiveShapesInputOutputNested1");
-  if (input.foo !== undefined && input.foo !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.foo)).withName("foo");
-    bodyNode.addChildNode(node);
-  }
-  if (input.nested !== undefined && input.nested !== null) {
-    const node = serializeAws_restXmlRecursiveShapesInputOutputNested2(input.nested, context).withName("nested");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlRecursiveShapesInputOutputNested2 = (
-  input: RecursiveShapesInputOutputNested2,
-  context: __SerdeContext
-): any => {
-  const bodyNode = new __XmlNode("RecursiveShapesInputOutputNested2");
-  if (input.bar !== undefined && input.bar !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.bar)).withName("bar");
-    bodyNode.addChildNode(node);
-  }
-  if (input.recursiveMember !== undefined && input.recursiveMember !== null) {
-    const node = serializeAws_restXmlRecursiveShapesInputOutputNested1(input.recursiveMember, context).withName(
-      "recursiveMember"
-    );
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlRenamedListMembers = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      return node.withName("item");
-    });
-};
-
-const serializeAws_restXmlStructureList = (input: StructureListMember[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = serializeAws_restXmlStructureListMember(entry, context);
-      return node.withName("item");
-    });
-};
-
-const serializeAws_restXmlStructureListMember = (input: StructureListMember, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("StructureListMember");
-  if (input.a !== undefined && input.a !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.a)).withName("value");
-    bodyNode.addChildNode(node);
-  }
-  if (input.b !== undefined && input.b !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.b)).withName("other");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlXmlAttributesInputOutput = (
-  input: XmlAttributesInputOutput,
-  context: __SerdeContext
-): any => {
-  const bodyNode = new __XmlNode("XmlAttributesInputOutput");
-  if (input.foo !== undefined && input.foo !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.foo)).withName("foo");
-    bodyNode.addChildNode(node);
-  }
-  if (input.attr !== undefined && input.attr !== null) {
-    bodyNode.addAttribute("test", input.attr);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlXmlMapsInputOutputMap = (
-  input: { [key: string]: GreetingStruct },
-  context: __SerdeContext
-): any => {
-  return Object.keys(input)
-    .filter((key) => input[key] != null)
-    .map((key) => {
-      const entryNode = new __XmlNode("entry");
-      const keyNode = new __XmlNode("String").addChildNode(new __XmlText(key)).withName("key");
-      entryNode.addChildNode(keyNode);
-      let node;
-      node = serializeAws_restXmlGreetingStruct(input[key], context);
-      entryNode.addChildNode(node.withName("value"));
-      return entryNode;
-    });
-};
-
-const serializeAws_restXmlXmlMapsXmlNameInputOutputMap = (
-  input: { [key: string]: GreetingStruct },
-  context: __SerdeContext
-): any => {
-  return Object.keys(input)
-    .filter((key) => input[key] != null)
-    .map((key) => {
-      const entryNode = new __XmlNode("entry");
-      const keyNode = new __XmlNode("String").addChildNode(new __XmlText(key)).withName("Attribute");
-      entryNode.addChildNode(keyNode);
-      let node;
-      node = serializeAws_restXmlGreetingStruct(input[key], context);
-      entryNode.addChildNode(node.withName("Setting"));
-      return entryNode;
-    });
-};
-
-const serializeAws_restXmlXmlNamespacedList = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      node.addAttribute("xmlns", "http://bux.com");
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlXmlNamespaceNested = (input: XmlNamespaceNested, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("XmlNamespaceNested");
-  if (input.foo !== undefined && input.foo !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.foo)).withName("foo");
-    node.addAttribute("xmlns:baz", "http://baz.com");
-    bodyNode.addChildNode(node);
-  }
-  if (input.values !== undefined && input.values !== null) {
-    const nodes = serializeAws_restXmlXmlNamespacedList(input.values, context);
-    const containerNode = new __XmlNode("values");
-    containerNode.addAttribute("xmlns", "http://qux.com");
-    nodes.map((node: any) => {
-      containerNode.addChildNode(node);
-    });
-    bodyNode.addChildNode(containerNode);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlXmlNestedUnionStruct = (input: XmlNestedUnionStruct, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("XmlNestedUnionStruct");
-  if (input.stringValue !== undefined && input.stringValue !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.stringValue)).withName("stringValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.booleanValue !== undefined && input.booleanValue !== null) {
-    const node = new __XmlNode("Boolean")
-      .addChildNode(new __XmlText(String(input.booleanValue)))
-      .withName("booleanValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.byteValue !== undefined && input.byteValue !== null) {
-    const node = new __XmlNode("Byte").addChildNode(new __XmlText(String(input.byteValue))).withName("byteValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.shortValue !== undefined && input.shortValue !== null) {
-    const node = new __XmlNode("Short").addChildNode(new __XmlText(String(input.shortValue))).withName("shortValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.integerValue !== undefined && input.integerValue !== null) {
-    const node = new __XmlNode("Integer")
-      .addChildNode(new __XmlText(String(input.integerValue)))
-      .withName("integerValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.longValue !== undefined && input.longValue !== null) {
-    const node = new __XmlNode("Long").addChildNode(new __XmlText(String(input.longValue))).withName("longValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.floatValue !== undefined && input.floatValue !== null) {
-    const node = new __XmlNode("Float").addChildNode(new __XmlText(String(input.floatValue))).withName("floatValue");
-    bodyNode.addChildNode(node);
-  }
-  if (input.doubleValue !== undefined && input.doubleValue !== null) {
-    const node = new __XmlNode("Double").addChildNode(new __XmlText(String(input.doubleValue))).withName("doubleValue");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlXmlUnionShape = (input: XmlUnionShape, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("XmlUnionShape");
-  XmlUnionShape.visit(input, {
-    stringValue: (value) => {
-      const node = new __XmlNode("String").addChildNode(new __XmlText(value)).withName("stringValue");
-      bodyNode.addChildNode(node);
-    },
-    booleanValue: (value) => {
-      const node = new __XmlNode("Boolean").addChildNode(new __XmlText(String(value))).withName("booleanValue");
-      bodyNode.addChildNode(node);
-    },
-    byteValue: (value) => {
-      const node = new __XmlNode("Byte").addChildNode(new __XmlText(String(value))).withName("byteValue");
-      bodyNode.addChildNode(node);
-    },
-    shortValue: (value) => {
-      const node = new __XmlNode("Short").addChildNode(new __XmlText(String(value))).withName("shortValue");
-      bodyNode.addChildNode(node);
-    },
-    integerValue: (value) => {
-      const node = new __XmlNode("Integer").addChildNode(new __XmlText(String(value))).withName("integerValue");
-      bodyNode.addChildNode(node);
-    },
-    longValue: (value) => {
-      const node = new __XmlNode("Long").addChildNode(new __XmlText(String(value))).withName("longValue");
-      bodyNode.addChildNode(node);
-    },
-    floatValue: (value) => {
-      const node = new __XmlNode("Float").addChildNode(new __XmlText(String(value))).withName("floatValue");
-      bodyNode.addChildNode(node);
-    },
-    doubleValue: (value) => {
-      const node = new __XmlNode("Double").addChildNode(new __XmlText(String(value))).withName("doubleValue");
-      bodyNode.addChildNode(node);
-    },
-    unionValue: (value) => {
-      const node = serializeAws_restXmlXmlUnionShape(value, context).withName("unionValue");
-      bodyNode.addChildNode(node);
-    },
-    structValue: (value) => {
-      const node = serializeAws_restXmlXmlNestedUnionStruct(value, context).withName("structValue");
-      bodyNode.addChildNode(node);
-    },
-    _: (name: string, value: any) => {
-      if (!(value instanceof __XmlNode || value instanceof __XmlText)) {
-        throw new Error("Unable to serialize unknown union members in XML.");
-      }
-      bodyNode.addChildNode(new __XmlNode(name).addChildNode(value));
-    },
-  });
-  return bodyNode;
-};
-
-const serializeAws_restXmlBooleanList = (input: boolean[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("PrimitiveBoolean").addChildNode(new __XmlText(String(entry)));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlFooEnumList = (input: (FooEnum | string)[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("FooEnum").addChildNode(new __XmlText(entry));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlFooEnumMap = (input: { [key: string]: FooEnum | string }, context: __SerdeContext): any => {
-  return Object.keys(input)
-    .filter((key) => input[key] != null)
-    .map((key) => {
-      const entryNode = new __XmlNode("entry");
-      const keyNode = new __XmlNode("String").addChildNode(new __XmlText(key)).withName("key");
-      entryNode.addChildNode(keyNode);
-      let node;
-      node = new __XmlNode("FooEnum").addChildNode(new __XmlText(input[key]));
-      entryNode.addChildNode(node.withName("value"));
-      return entryNode;
-    });
-};
-
-const serializeAws_restXmlFooEnumSet = (input: (FooEnum | string)[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("FooEnum").addChildNode(new __XmlText(entry));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlGreetingStruct = (input: GreetingStruct, context: __SerdeContext): any => {
-  const bodyNode = new __XmlNode("GreetingStruct");
-  if (input.hi !== undefined && input.hi !== null) {
-    const node = new __XmlNode("String").addChildNode(new __XmlText(input.hi)).withName("hi");
-    bodyNode.addChildNode(node);
-  }
-  return bodyNode;
-};
-
-const serializeAws_restXmlIntegerList = (input: number[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("Integer").addChildNode(new __XmlText(String(entry)));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlNestedStringList = (input: string[][], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = serializeAws_restXmlStringList(entry, context);
-      return node.reduce((acc: __XmlNode, workingNode: any) => {
-        return acc.addChildNode(workingNode);
-      }, new __XmlNode("member"));
-    });
-};
-
-const serializeAws_restXmlStringList = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlStringSet = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("String").addChildNode(new __XmlText(entry));
-      return node.withName("member");
-    });
-};
-
-const serializeAws_restXmlTimestampList = (input: Date[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const node = new __XmlNode("Timestamp").addChildNode(new __XmlText(entry.toISOString().split(".")[0] + "Z"));
-      return node.withName("member");
-    });
-};
-
-const deserializeAws_restXmlComplexNestedErrorData = (output: any, context: __SerdeContext): ComplexNestedErrorData => {
-  const contents: any = {
-    Foo: undefined,
-  };
-  if (output["Foo"] !== undefined) {
-    contents.Foo = __expectString(output["Foo"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: string } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (pair["V"] === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpEnumPayloadCommand
+   */
+  export const de_HttpEnumPayloadCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpEnumPayloadCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["K"]]: __expectString(pair["V"]) as any,
-    };
-  }, {});
-};
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+    });
+    const data: any = await collectBodyString(output.body, context);
+    contents.payload = __expectString(data);
+    return contents;
+  };
 
-const deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceOutputMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: string } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (pair["V"] === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpPayloadTraitsCommand
+   */
+  export const de_HttpPayloadTraitsCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadTraitsCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["K"]]: __expectString(pair["V"]) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restXmlListWithMemberNamespace = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
     });
-};
+    const data: any = await collectBody(output.body, context);
+    contents.blob = data;
+    return contents;
+  };
 
-const deserializeAws_restXmlListWithNamespace = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
-    });
-};
-
-const deserializeAws_restXmlNestedMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: { [key: string]: FooEnum | string } } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (__getArrayIfSingleItem(pair["value"]["entry"]) === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand
+   */
+  export const de_HttpPayloadTraitsWithMediaTypeCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["key"]]: deserializeAws_restXmlFooEnumMap(__getArrayIfSingleItem(pair["value"]["entry"]), context),
-    };
-  }, {});
-};
-
-const deserializeAws_restXmlNestedPayload = (output: any, context: __SerdeContext): NestedPayload => {
-  const contents: any = {
-    greeting: undefined,
-    name: undefined,
-  };
-  if (output["greeting"] !== undefined) {
-    contents.greeting = __expectString(output["greeting"]);
-  }
-  if (output["name"] !== undefined) {
-    contents.name = __expectString(output["name"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlPayloadWithXmlName = (output: any, context: __SerdeContext): PayloadWithXmlName => {
-  const contents: any = {
-    name: undefined,
-  };
-  if (output["name"] !== undefined) {
-    contents.name = __expectString(output["name"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlPayloadWithXmlNamespace = (
-  output: any,
-  context: __SerdeContext
-): PayloadWithXmlNamespace => {
-  const contents: any = {
-    name: undefined,
-  };
-  if (output["name"] !== undefined) {
-    contents.name = __expectString(output["name"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlPayloadWithXmlNamespaceAndPrefix = (
-  output: any,
-  context: __SerdeContext
-): PayloadWithXmlNamespaceAndPrefix => {
-  const contents: any = {
-    name: undefined,
-  };
-  if (output["name"] !== undefined) {
-    contents.name = __expectString(output["name"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlRecursiveShapesInputOutputNested1 = (
-  output: any,
-  context: __SerdeContext
-): RecursiveShapesInputOutputNested1 => {
-  const contents: any = {
-    foo: undefined,
-    nested: undefined,
-  };
-  if (output["foo"] !== undefined) {
-    contents.foo = __expectString(output["foo"]);
-  }
-  if (output["nested"] !== undefined) {
-    contents.nested = deserializeAws_restXmlRecursiveShapesInputOutputNested2(output["nested"], context);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlRecursiveShapesInputOutputNested2 = (
-  output: any,
-  context: __SerdeContext
-): RecursiveShapesInputOutputNested2 => {
-  const contents: any = {
-    bar: undefined,
-    recursiveMember: undefined,
-  };
-  if (output["bar"] !== undefined) {
-    contents.bar = __expectString(output["bar"]);
-  }
-  if (output["recursiveMember"] !== undefined) {
-    contents.recursiveMember = deserializeAws_restXmlRecursiveShapesInputOutputNested1(
-      output["recursiveMember"],
-      context
-    );
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlRenamedListMembers = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
     });
-};
-
-const deserializeAws_restXmlStructureList = (output: any, context: __SerdeContext): StructureListMember[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return deserializeAws_restXmlStructureListMember(entry, context);
-    });
-};
-
-const deserializeAws_restXmlStructureListMember = (output: any, context: __SerdeContext): StructureListMember => {
-  const contents: any = {
-    a: undefined,
-    b: undefined,
+    const data: any = await collectBody(output.body, context);
+    contents.blob = data;
+    return contents;
   };
-  if (output["value"] !== undefined) {
-    contents.a = __expectString(output["value"]);
-  }
-  if (output["other"] !== undefined) {
-    contents.b = __expectString(output["other"]);
-  }
-  return contents;
-};
 
-const deserializeAws_restXmlXmlAttributesInputOutput = (
-  output: any,
-  context: __SerdeContext
-): XmlAttributesInputOutput => {
-  const contents: any = {
-    foo: undefined,
-    attr: undefined,
-  };
-  if (output["foo"] !== undefined) {
-    contents.foo = __expectString(output["foo"]);
-  }
-  if (output["test"] !== undefined) {
-    contents.attr = __expectString(output["test"]);
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlXmlMapsInputOutputMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: GreetingStruct } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (pair["value"] === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommand
+   */
+  export const de_HttpPayloadWithMemberXmlNameCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithMemberXmlNameCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["key"]]: deserializeAws_restXmlGreetingStruct(pair["value"], context),
-    };
-  }, {});
-};
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+    });
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = de_PayloadWithXmlName(data, context);
+    return contents;
+  };
 
-const deserializeAws_restXmlXmlMapsXmlNameInputOutputMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: GreetingStruct } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (pair["Setting"] === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpPayloadWithStructureCommand
+   */
+  export const de_HttpPayloadWithStructureCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithStructureCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["Attribute"]]: deserializeAws_restXmlGreetingStruct(pair["Setting"], context),
-    };
-  }, {});
-};
-
-const deserializeAws_restXmlXmlNamespacedList = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
     });
-};
-
-const deserializeAws_restXmlXmlNamespaceNested = (output: any, context: __SerdeContext): XmlNamespaceNested => {
-  const contents: any = {
-    foo: undefined,
-    values: undefined,
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = de_NestedPayload(data, context);
+    return contents;
   };
-  if (output["foo"] !== undefined) {
-    contents.foo = __expectString(output["foo"]);
-  }
-  if (output.values === "") {
-    contents.values = [];
-  }
-  if (output["values"] !== undefined && output["values"]["member"] !== undefined) {
-    contents.values = deserializeAws_restXmlXmlNamespacedList(
-      __getArrayIfSingleItem(output["values"]["member"]),
-      context
-    );
-  }
-  return contents;
-};
 
-const deserializeAws_restXmlXmlNestedUnionStruct = (output: any, context: __SerdeContext): XmlNestedUnionStruct => {
-  const contents: any = {
-    stringValue: undefined,
-    booleanValue: undefined,
-    byteValue: undefined,
-    shortValue: undefined,
-    integerValue: undefined,
-    longValue: undefined,
-    floatValue: undefined,
-    doubleValue: undefined,
-  };
-  if (output["stringValue"] !== undefined) {
-    contents.stringValue = __expectString(output["stringValue"]);
-  }
-  if (output["booleanValue"] !== undefined) {
-    contents.booleanValue = __parseBoolean(output["booleanValue"]);
-  }
-  if (output["byteValue"] !== undefined) {
-    contents.byteValue = __strictParseByte(output["byteValue"]) as number;
-  }
-  if (output["shortValue"] !== undefined) {
-    contents.shortValue = __strictParseShort(output["shortValue"]) as number;
-  }
-  if (output["integerValue"] !== undefined) {
-    contents.integerValue = __strictParseInt32(output["integerValue"]) as number;
-  }
-  if (output["longValue"] !== undefined) {
-    contents.longValue = __strictParseLong(output["longValue"]) as number;
-  }
-  if (output["floatValue"] !== undefined) {
-    contents.floatValue = __strictParseFloat(output["floatValue"]) as number;
-  }
-  if (output["doubleValue"] !== undefined) {
-    contents.doubleValue = __strictParseFloat(output["doubleValue"]) as number;
-  }
-  return contents;
-};
-
-const deserializeAws_restXmlXmlUnionShape = (output: any, context: __SerdeContext): XmlUnionShape => {
-  if (output["stringValue"] !== undefined) {
-    return {
-      stringValue: __expectString(output["stringValue"]) as any,
-    };
-  }
-  if (output["booleanValue"] !== undefined) {
-    return {
-      booleanValue: __parseBoolean(output["booleanValue"]),
-    };
-  }
-  if (output["byteValue"] !== undefined) {
-    return {
-      byteValue: __strictParseByte(output["byteValue"]) as number,
-    };
-  }
-  if (output["shortValue"] !== undefined) {
-    return {
-      shortValue: __strictParseShort(output["shortValue"]) as number,
-    };
-  }
-  if (output["integerValue"] !== undefined) {
-    return {
-      integerValue: __strictParseInt32(output["integerValue"]) as number,
-    };
-  }
-  if (output["longValue"] !== undefined) {
-    return {
-      longValue: __strictParseLong(output["longValue"]) as number,
-    };
-  }
-  if (output["floatValue"] !== undefined) {
-    return {
-      floatValue: __strictParseFloat(output["floatValue"]) as number,
-    };
-  }
-  if (output["doubleValue"] !== undefined) {
-    return {
-      doubleValue: __strictParseFloat(output["doubleValue"]) as number,
-    };
-  }
-  if (output["unionValue"] !== undefined) {
-    return {
-      unionValue: deserializeAws_restXmlXmlUnionShape(__expectUnion(output["unionValue"]), context),
-    };
-  }
-  if (output["structValue"] !== undefined) {
-    return {
-      structValue: deserializeAws_restXmlXmlNestedUnionStruct(output["structValue"], context),
-    };
-  }
-  return { $unknown: Object.entries(output)[0] };
-};
-
-const deserializeAws_restXmlBooleanList = (output: any, context: __SerdeContext): boolean[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __parseBoolean(entry);
-    });
-};
-
-const deserializeAws_restXmlFooEnumList = (output: any, context: __SerdeContext): (FooEnum | string)[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
-    });
-};
-
-const deserializeAws_restXmlFooEnumMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: FooEnum | string } => {
-  return output.reduce((acc: any, pair: any) => {
-    if (pair["value"] === null) {
-      return acc;
+  /**
+   * deserializeAws_restXmlHttpPayloadWithUnionCommand
+   */
+  export const de_HttpPayloadWithUnionCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithUnionCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
     }
-    return {
-      ...acc,
-      [pair["key"]]: __expectString(pair["value"]) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restXmlFooEnumSet = (output: any, context: __SerdeContext): (FooEnum | string)[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
     });
-};
-
-const deserializeAws_restXmlGreetingStruct = (output: any, context: __SerdeContext): GreetingStruct => {
-  const contents: any = {
-    hi: undefined,
+    const data: Record<string, any> | undefined = await parseBody(output.body, context);
+    if (Object.keys(data ?? {}).length) {
+      contents.nested = __expectUnion(de_UnionPayload(data, context));
+    }
+    return contents;
   };
-  if (output["hi"] !== undefined) {
-    contents.hi = __expectString(output["hi"]);
-  }
-  return contents;
-};
 
-const deserializeAws_restXmlIntegerList = (output: any, context: __SerdeContext): number[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __strictParseInt32(entry) as number;
+  /**
+   * deserializeAws_restXmlHttpPayloadWithXmlNameCommand
+   */
+  export const de_HttpPayloadWithXmlNameCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithXmlNameCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
     });
-};
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = de_PayloadWithXmlName(data, context);
+    return contents;
+  };
 
-const deserializeAws_restXmlNestedStringList = (output: any, context: __SerdeContext): string[][] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return deserializeAws_restXmlStringList(__getArrayIfSingleItem(entry["member"]), context);
+  /**
+   * deserializeAws_restXmlHttpPayloadWithXmlNamespaceCommand
+   */
+  export const de_HttpPayloadWithXmlNamespaceCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithXmlNamespaceCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
     });
-};
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = de_PayloadWithXmlNamespace(data, context);
+    return contents;
+  };
 
-const deserializeAws_restXmlStringList = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
+  /**
+   * deserializeAws_restXmlHttpPayloadWithXmlNamespaceAndPrefixCommand
+   */
+  export const de_HttpPayloadWithXmlNamespaceAndPrefixCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithXmlNamespaceAndPrefixCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
     });
-};
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = de_PayloadWithXmlNamespaceAndPrefix(data, context);
+    return contents;
+  };
 
-const deserializeAws_restXmlStringSet = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
-    });
-};
-
-const deserializeAws_restXmlTimestampList = (output: any, context: __SerdeContext): Date[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectNonNull(__parseRfc3339DateTime(entry));
-    });
-};
-
-const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
-  httpStatusCode: output.statusCode,
-  requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"],
-  extendedRequestId: output.headers["x-amz-id-2"],
-  cfId: output.headers["x-amz-cf-id"],
-});
-
-// Collect low-level response body stream to Uint8Array.
-const collectBody = (streamBody: any = new Uint8Array(), context: __SerdeContext): Promise<Uint8Array> => {
-  if (streamBody instanceof Uint8Array) {
-    return Promise.resolve(streamBody);
-  }
-  return context.streamCollector(streamBody) || Promise.resolve(new Uint8Array());
-};
-
-// Encode Uint8Array data into string with utf-8.
-const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
-  collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
-
-const parseBody = (streamBody: any, context: __SerdeContext): any =>
-  collectBodyString(streamBody, context).then((encoded) => {
-    if (encoded.length) {
-      const parsedObj = xmlParse(encoded, {
-        attributeNamePrefix: "",
-        ignoreAttributes: false,
-        parseNodeValue: false,
-        trimValues: false,
-        tagValueProcessor: (val) => (val.trim() === "" && val.includes("\n") ? "" : decodeHTML(val)),
+  /**
+   * deserializeAws_restXmlHttpPrefixHeadersCommand
+   */
+  export const de_HttpPrefixHeadersCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPrefixHeadersCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
+      fooMap: [,
+        Object.keys(output.headers).filter(header => header.startsWith('x-foo-'))
+          .reduce((acc, header) => {
+            acc[header.substring(6)] = output.headers[header];
+            return acc;
+          }, {} as any)
+        ],
       });
-      const textNodeName = "#text";
-      const key = Object.keys(parsedObj)[0];
-      const parsedObjToReturn = parsedObj[key];
-      if (parsedObjToReturn[textNodeName]) {
-        parsedObjToReturn[key] = parsedObjToReturn[textNodeName];
-        delete parsedObjToReturn[textNodeName];
-      }
-      return __getValueFromTextNode(parsedObjToReturn);
-    }
-    return {};
-  });
+      await collectBody(output.body, context);
+      return contents;
+    };
 
-const loadRestXmlErrorCode = (output: __HttpResponse, data: any): string => {
-  if (data.Error.Code !== undefined) {
-    return data.Error.Code;
-  }
-  if (output.statusCode == 404) {
-    return "NotFound";
-  }
-  return "";
-};
+    /**
+     * deserializeAws_restXmlHttpRequestWithFloatLabelsCommand
+     */
+    export const de_HttpRequestWithFloatLabelsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlHttpRequestWithGreedyLabelInPathCommand
+     */
+    export const de_HttpRequestWithGreedyLabelInPathCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlHttpRequestWithLabelsCommand
+     */
+    export const de_HttpRequestWithLabelsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpRequestWithLabelsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlHttpRequestWithLabelsAndTimestampFormatCommand
+     */
+    export const de_HttpRequestWithLabelsAndTimestampFormatCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlHttpResponseCodeCommand
+     */
+    export const de_HttpResponseCodeCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpResponseCodeCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      map(contents, {
+        Status: [, output.statusCode]
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlHttpStringPayloadCommand
+     */
+    export const de_HttpStringPayloadCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpStringPayloadCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: any = await collectBodyString(output.body, context);
+      contents.payload = __expectString(data);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlIgnoreQueryParamsInResponseCommand
+     */
+    export const de_IgnoreQueryParamsInResponseCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_b] != null) {
+        contents[_b] = __expectString(data[_b]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlInputAndOutputWithHeadersCommand
+     */
+    export const de_InputAndOutputWithHeadersCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<InputAndOutputWithHeadersCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        [_hS]: [, output.headers[_xs]],
+        [_hB]: [() => void 0 !== output.headers[_xb], () => __strictParseByte(output.headers[_xb])],
+        [_hSe]: [() => void 0 !== output.headers[_xs_], () => __strictParseShort(output.headers[_xs_])],
+        [_hI]: [() => void 0 !== output.headers[_xi], () => __strictParseInt32(output.headers[_xi])],
+        [_hL]: [() => void 0 !== output.headers[_xl], () => __strictParseLong(output.headers[_xl])],
+        [_hF]: [() => void 0 !== output.headers[_xf_], () => __strictParseFloat(output.headers[_xf_])],
+        [_hD]: [() => void 0 !== output.headers[_xd], () => __strictParseDouble(output.headers[_xd])],
+        [_hTB]: [() => void 0 !== output.headers[_xb_], () => __parseBoolean(output.headers[_xb_])],
+        [_hFB]: [() => void 0 !== output.headers[_xb__], () => __parseBoolean(output.headers[_xb__])],
+        [_hSL]: [() => void 0 !== output.headers[_xs__], () => __splitHeader((output.headers[_xs__] || "")).map(_entry => _entry.trim() as any)],
+        [_hSS]: [() => void 0 !== output.headers[_xs___], () => __splitHeader((output.headers[_xs___] || "")).map(_entry => _entry.trim() as any)],
+        [_hIL]: [() => void 0 !== output.headers[_xi_], () => __splitHeader((output.headers[_xi_] || "")).map(_entry => __strictParseInt32(_entry.trim()) as any)],
+        [_hBL]: [() => void 0 !== output.headers[_xb___], () => __splitHeader((output.headers[_xb___] || "")).map(_entry => __parseBoolean(_entry.trim()) as any)],
+        [_hTL]: [() => void 0 !== output.headers[_xt], () => __splitEvery((output.headers[_xt] || ""), ',', 2).map(_entry => __expectNonNull(__parseRfc7231DateTime(_entry.trim())) as any)],
+        [_hE]: [, output.headers[_xe]],
+        [_hEL]: [() => void 0 !== output.headers[_xe_], () => __splitHeader((output.headers[_xe_] || "")).map(_entry => _entry.trim() as any)],
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNestedXmlMapsCommand
+     */
+    export const de_NestedXmlMapsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NestedXmlMapsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.flatNestedMap).trim() === "") {
+        contents[_fNM] = {};
+      }
+      else if (data[_fNM] != null) {
+        contents[_fNM] = de_NestedMap(__getArrayIfSingleItem(data[_fNM]), context);
+      }
+      if (String(data.nestedMap).trim() === "") {
+        contents[_nM] = {};
+      }
+      else if (data[_nM] != null && data[_nM][_en] != null) {
+        contents[_nM] = de_NestedMap(__getArrayIfSingleItem(data[_nM][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNestedXmlMapWithXmlNameCommand
+     */
+    export const de_NestedXmlMapWithXmlNameCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NestedXmlMapWithXmlNameCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.nestedXmlMapWithXmlNameMap).trim() === "") {
+        contents[_nXMWXNM] = {};
+      }
+      else if (data[_nXMWXNM] != null && data[_nXMWXNM][_en] != null) {
+        contents[_nXMWXNM] = de_NestedXmlMapWithXmlNameMap(__getArrayIfSingleItem(data[_nXMWXNM][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNoInputAndNoOutputCommand
+     */
+    export const de_NoInputAndNoOutputCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NoInputAndNoOutputCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNoInputAndOutputCommand
+     */
+    export const de_NoInputAndOutputCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NoInputAndOutputCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNullAndEmptyHeadersClientCommand
+     */
+    export const de_NullAndEmptyHeadersClientCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NullAndEmptyHeadersClientCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        [_a]: [, output.headers[_xa]],
+        [_b_]: [, output.headers[_xb____]],
+        [_c]: [() => void 0 !== output.headers[_xc], () => __splitHeader((output.headers[_xc] || "")).map(_entry => _entry.trim() as any)],
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlNullAndEmptyHeadersServerCommand
+     */
+    export const de_NullAndEmptyHeadersServerCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<NullAndEmptyHeadersServerCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        [_a]: [, output.headers[_xa]],
+        [_b_]: [, output.headers[_xb____]],
+        [_c]: [() => void 0 !== output.headers[_xc], () => __splitHeader((output.headers[_xc] || "")).map(_entry => _entry.trim() as any)],
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlOmitsNullSerializesEmptyStringCommand
+     */
+    export const de_OmitsNullSerializesEmptyStringCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlPutWithContentEncodingCommand
+     */
+    export const de_PutWithContentEncodingCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<PutWithContentEncodingCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlQueryIdempotencyTokenAutoFillCommand
+     */
+    export const de_QueryIdempotencyTokenAutoFillCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlQueryParamsAsStringListMapCommand
+     */
+    export const de_QueryParamsAsStringListMapCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<QueryParamsAsStringListMapCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlQueryPrecedenceCommand
+     */
+    export const de_QueryPrecedenceCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<QueryPrecedenceCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlRecursiveShapesCommand
+     */
+    export const de_RecursiveShapesCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<RecursiveShapesCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_n] != null) {
+        contents[_n] = de_RecursiveShapesInputOutputNested1(data[_n], context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlSimpleScalarPropertiesCommand
+     */
+    export const de_SimpleScalarPropertiesCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<SimpleScalarPropertiesCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        [_f]: [, output.headers[_xf]],
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_bV] != null) {
+        contents[_bV] = __strictParseByte(data[_bV]) as number;
+      }
+      if (data[_DD] != null) {
+        contents[_dV] = __strictParseFloat(data[_DD]) as number;
+      }
+      if (data[_fBV] != null) {
+        contents[_fBV] = __parseBoolean(data[_fBV]);
+      }
+      if (data[_fV] != null) {
+        contents[_fV] = __strictParseFloat(data[_fV]) as number;
+      }
+      if (data[_iV] != null) {
+        contents[_iV] = __strictParseInt32(data[_iV]) as number;
+      }
+      if (data[_lV] != null) {
+        contents[_lV] = __strictParseLong(data[_lV]) as number;
+      }
+      if (data[_sV] != null) {
+        contents[_sV] = __strictParseShort(data[_sV]) as number;
+      }
+      if (data[_sVt] != null) {
+        contents[_sVt] = __expectString(data[_sVt]);
+      }
+      if (data[_tBV] != null) {
+        contents[_tBV] = __parseBoolean(data[_tBV]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlTimestampFormatHeadersCommand
+     */
+    export const de_TimestampFormatHeadersCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<TimestampFormatHeadersCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        [_mES]: [() => void 0 !== output.headers[_xm], () => __expectNonNull(__parseEpochTimestamp(output.headers[_xm]))],
+        [_mHD]: [() => void 0 !== output.headers[_xm_], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xm_]))],
+        [_mDT]: [() => void 0 !== output.headers[_xm__], () => __expectNonNull(__parseRfc3339DateTimeWithOffset(output.headers[_xm__]))],
+        [_dF]: [() => void 0 !== output.headers[_xd_], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xd_]))],
+        [_tES]: [() => void 0 !== output.headers[_xt_], () => __expectNonNull(__parseEpochTimestamp(output.headers[_xt_]))],
+        [_tHD]: [() => void 0 !== output.headers[_xt__], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xt__]))],
+        [_tDT]: [() => void 0 !== output.headers[_xt___], () => __expectNonNull(__parseRfc3339DateTimeWithOffset(output.headers[_xt___]))],
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlAttributesCommand
+     */
+    export const de_XmlAttributesCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlAttributesCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_te] != null) {
+        contents[_at] = __expectString(data[_te]);
+      }
+      if (data[_f] != null) {
+        contents[_f] = __expectString(data[_f]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlAttributesInMiddleCommand
+     */
+    export const de_XmlAttributesInMiddleCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlAttributesInMiddleCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+      contents.payload = de_XmlAttributesInMiddlePayloadResponse(data, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlAttributesOnPayloadCommand
+     */
+    export const de_XmlAttributesOnPayloadCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlAttributesOnPayloadCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+      contents.payload = de_XmlAttributesPayloadResponse(data, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlBlobsCommand
+     */
+    export const de_XmlBlobsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlBlobsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_d] != null) {
+        contents[_d] = context.base64Decoder(data[_d]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlEmptyBlobsCommand
+     */
+    export const de_XmlEmptyBlobsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlEmptyBlobsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_d] != null) {
+        contents[_d] = context.base64Decoder(data[_d]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlEmptyListsCommand
+     */
+    export const de_XmlEmptyListsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlEmptyListsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.booleanList).trim() === "") {
+        contents[_bL] = [];
+      }
+      else if (data[_bL] != null && data[_bL][_m] != null) {
+        contents[_bL] = de_BooleanList(__getArrayIfSingleItem(data[_bL][_m]), context);
+      }
+      if (String(data.enumList).trim() === "") {
+        contents[_eL] = [];
+      }
+      else if (data[_eL] != null && data[_eL][_m] != null) {
+        contents[_eL] = de_FooEnumList(__getArrayIfSingleItem(data[_eL][_m]), context);
+      }
+      if (String(data.flattenedList).trim() === "") {
+        contents[_fL] = [];
+      }
+      else if (data[_fL] != null) {
+        contents[_fL] = de_RenamedListMembers(__getArrayIfSingleItem(data[_fL]), context);
+      }
+      if (String(data.customName).trim() === "") {
+        contents[_fLl] = [];
+      }
+      else if (data[_cN] != null) {
+        contents[_fLl] = de_RenamedListMembers(__getArrayIfSingleItem(data[_cN]), context);
+      }
+      if (String(data.flattenedListWithMemberNamespace).trim() === "") {
+        contents[_fLWMN] = [];
+      }
+      else if (data[_fLWMN] != null) {
+        contents[_fLWMN] = de_ListWithMemberNamespace(__getArrayIfSingleItem(data[_fLWMN]), context);
+      }
+      if (String(data.flattenedListWithNamespace).trim() === "") {
+        contents[_fLWN] = [];
+      }
+      else if (data[_fLWN] != null) {
+        contents[_fLWN] = de_ListWithNamespace(__getArrayIfSingleItem(data[_fLWN]), context);
+      }
+      if (String(data.flattenedStructureList).trim() === "") {
+        contents[_fSL] = [];
+      }
+      else if (data[_fSL] != null) {
+        contents[_fSL] = de_StructureList(__getArrayIfSingleItem(data[_fSL]), context);
+      }
+      if (String(data.intEnumList).trim() === "") {
+        contents[_iEL] = [];
+      }
+      else if (data[_iEL] != null && data[_iEL][_m] != null) {
+        contents[_iEL] = de_IntegerEnumList(__getArrayIfSingleItem(data[_iEL][_m]), context);
+      }
+      if (String(data.integerList).trim() === "") {
+        contents[_iL] = [];
+      }
+      else if (data[_iL] != null && data[_iL][_m] != null) {
+        contents[_iL] = de_IntegerList(__getArrayIfSingleItem(data[_iL][_m]), context);
+      }
+      if (String(data.nestedStringList).trim() === "") {
+        contents[_nSL] = [];
+      }
+      else if (data[_nSL] != null && data[_nSL][_m] != null) {
+        contents[_nSL] = de_NestedStringList(__getArrayIfSingleItem(data[_nSL][_m]), context);
+      }
+      if (String(data.renamed).trim() === "") {
+        contents[_rLM] = [];
+      }
+      else if (data[_r] != null && data[_r][_i] != null) {
+        contents[_rLM] = de_RenamedListMembers(__getArrayIfSingleItem(data[_r][_i]), context);
+      }
+      if (String(data.stringList).trim() === "") {
+        contents[_sL] = [];
+      }
+      else if (data[_sL] != null && data[_sL][_m] != null) {
+        contents[_sL] = de_StringList(__getArrayIfSingleItem(data[_sL][_m]), context);
+      }
+      if (String(data.stringSet).trim() === "") {
+        contents[_sS] = [];
+      }
+      else if (data[_sS] != null && data[_sS][_m] != null) {
+        contents[_sS] = de_StringSet(__getArrayIfSingleItem(data[_sS][_m]), context);
+      }
+      if (String(data.myStructureList).trim() === "") {
+        contents[_sLt] = [];
+      }
+      else if (data[_mSL] != null && data[_mSL][_i] != null) {
+        contents[_sLt] = de_StructureList(__getArrayIfSingleItem(data[_mSL][_i]), context);
+      }
+      if (String(data.timestampList).trim() === "") {
+        contents[_tL] = [];
+      }
+      else if (data[_tL] != null && data[_tL][_m] != null) {
+        contents[_tL] = de_TimestampList(__getArrayIfSingleItem(data[_tL][_m]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlEmptyMapsCommand
+     */
+    export const de_XmlEmptyMapsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlEmptyMapsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.myMap).trim() === "") {
+        contents[_mM] = {};
+      }
+      else if (data[_mM] != null && data[_mM][_en] != null) {
+        contents[_mM] = de_XmlMapsInputOutputMap(__getArrayIfSingleItem(data[_mM][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlEmptyStringsCommand
+     */
+    export const de_XmlEmptyStringsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlEmptyStringsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_eS] != null) {
+        contents[_eS] = __expectString(data[_eS]);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlEnumsCommand
+     */
+    export const de_XmlEnumsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlEnumsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_fE] != null) {
+        contents[_fE] = __expectString(data[_fE]);
+      }
+      if (data[_fEo] != null) {
+        contents[_fEo] = __expectString(data[_fEo]);
+      }
+      if (data[_fEoo] != null) {
+        contents[_fEoo] = __expectString(data[_fEoo]);
+      }
+      if (String(data.fooEnumList).trim() === "") {
+        contents[_fEL] = [];
+      }
+      else if (data[_fEL] != null && data[_fEL][_m] != null) {
+        contents[_fEL] = de_FooEnumList(__getArrayIfSingleItem(data[_fEL][_m]), context);
+      }
+      if (String(data.fooEnumMap).trim() === "") {
+        contents[_fEM] = {};
+      }
+      else if (data[_fEM] != null && data[_fEM][_en] != null) {
+        contents[_fEM] = de_FooEnumMap(__getArrayIfSingleItem(data[_fEM][_en]), context);
+      }
+      if (String(data.fooEnumSet).trim() === "") {
+        contents[_fES] = [];
+      }
+      else if (data[_fES] != null && data[_fES][_m] != null) {
+        contents[_fES] = de_FooEnumSet(__getArrayIfSingleItem(data[_fES][_m]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlIntEnumsCommand
+     */
+    export const de_XmlIntEnumsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlIntEnumsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_iE] != null) {
+        contents[_iE] = __strictParseInt32(data[_iE]) as number;
+      }
+      if (data[_iEn] != null) {
+        contents[_iEn] = __strictParseInt32(data[_iEn]) as number;
+      }
+      if (data[_iEnt] != null) {
+        contents[_iEnt] = __strictParseInt32(data[_iEnt]) as number;
+      }
+      if (String(data.intEnumList).trim() === "") {
+        contents[_iEL] = [];
+      }
+      else if (data[_iEL] != null && data[_iEL][_m] != null) {
+        contents[_iEL] = de_IntegerEnumList(__getArrayIfSingleItem(data[_iEL][_m]), context);
+      }
+      if (String(data.intEnumMap).trim() === "") {
+        contents[_iEM] = {};
+      }
+      else if (data[_iEM] != null && data[_iEM][_en] != null) {
+        contents[_iEM] = de_IntegerEnumMap(__getArrayIfSingleItem(data[_iEM][_en]), context);
+      }
+      if (String(data.intEnumSet).trim() === "") {
+        contents[_iES] = [];
+      }
+      else if (data[_iES] != null && data[_iES][_m] != null) {
+        contents[_iES] = de_IntegerEnumSet(__getArrayIfSingleItem(data[_iES][_m]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlListsCommand
+     */
+    export const de_XmlListsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlListsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.booleanList).trim() === "") {
+        contents[_bL] = [];
+      }
+      else if (data[_bL] != null && data[_bL][_m] != null) {
+        contents[_bL] = de_BooleanList(__getArrayIfSingleItem(data[_bL][_m]), context);
+      }
+      if (String(data.enumList).trim() === "") {
+        contents[_eL] = [];
+      }
+      else if (data[_eL] != null && data[_eL][_m] != null) {
+        contents[_eL] = de_FooEnumList(__getArrayIfSingleItem(data[_eL][_m]), context);
+      }
+      if (String(data.flattenedList).trim() === "") {
+        contents[_fL] = [];
+      }
+      else if (data[_fL] != null) {
+        contents[_fL] = de_RenamedListMembers(__getArrayIfSingleItem(data[_fL]), context);
+      }
+      if (String(data.customName).trim() === "") {
+        contents[_fLl] = [];
+      }
+      else if (data[_cN] != null) {
+        contents[_fLl] = de_RenamedListMembers(__getArrayIfSingleItem(data[_cN]), context);
+      }
+      if (String(data.flattenedListWithMemberNamespace).trim() === "") {
+        contents[_fLWMN] = [];
+      }
+      else if (data[_fLWMN] != null) {
+        contents[_fLWMN] = de_ListWithMemberNamespace(__getArrayIfSingleItem(data[_fLWMN]), context);
+      }
+      if (String(data.flattenedListWithNamespace).trim() === "") {
+        contents[_fLWN] = [];
+      }
+      else if (data[_fLWN] != null) {
+        contents[_fLWN] = de_ListWithNamespace(__getArrayIfSingleItem(data[_fLWN]), context);
+      }
+      if (String(data.flattenedStructureList).trim() === "") {
+        contents[_fSL] = [];
+      }
+      else if (data[_fSL] != null) {
+        contents[_fSL] = de_StructureList(__getArrayIfSingleItem(data[_fSL]), context);
+      }
+      if (String(data.intEnumList).trim() === "") {
+        contents[_iEL] = [];
+      }
+      else if (data[_iEL] != null && data[_iEL][_m] != null) {
+        contents[_iEL] = de_IntegerEnumList(__getArrayIfSingleItem(data[_iEL][_m]), context);
+      }
+      if (String(data.integerList).trim() === "") {
+        contents[_iL] = [];
+      }
+      else if (data[_iL] != null && data[_iL][_m] != null) {
+        contents[_iL] = de_IntegerList(__getArrayIfSingleItem(data[_iL][_m]), context);
+      }
+      if (String(data.nestedStringList).trim() === "") {
+        contents[_nSL] = [];
+      }
+      else if (data[_nSL] != null && data[_nSL][_m] != null) {
+        contents[_nSL] = de_NestedStringList(__getArrayIfSingleItem(data[_nSL][_m]), context);
+      }
+      if (String(data.renamed).trim() === "") {
+        contents[_rLM] = [];
+      }
+      else if (data[_r] != null && data[_r][_i] != null) {
+        contents[_rLM] = de_RenamedListMembers(__getArrayIfSingleItem(data[_r][_i]), context);
+      }
+      if (String(data.stringList).trim() === "") {
+        contents[_sL] = [];
+      }
+      else if (data[_sL] != null && data[_sL][_m] != null) {
+        contents[_sL] = de_StringList(__getArrayIfSingleItem(data[_sL][_m]), context);
+      }
+      if (String(data.stringSet).trim() === "") {
+        contents[_sS] = [];
+      }
+      else if (data[_sS] != null && data[_sS][_m] != null) {
+        contents[_sS] = de_StringSet(__getArrayIfSingleItem(data[_sS][_m]), context);
+      }
+      if (String(data.myStructureList).trim() === "") {
+        contents[_sLt] = [];
+      }
+      else if (data[_mSL] != null && data[_mSL][_i] != null) {
+        contents[_sLt] = de_StructureList(__getArrayIfSingleItem(data[_mSL][_i]), context);
+      }
+      if (String(data.timestampList).trim() === "") {
+        contents[_tL] = [];
+      }
+      else if (data[_tL] != null && data[_tL][_m] != null) {
+        contents[_tL] = de_TimestampList(__getArrayIfSingleItem(data[_tL][_m]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlMapsCommand
+     */
+    export const de_XmlMapsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlMapsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.myMap).trim() === "") {
+        contents[_mM] = {};
+      }
+      else if (data[_mM] != null && data[_mM][_en] != null) {
+        contents[_mM] = de_XmlMapsInputOutputMap(__getArrayIfSingleItem(data[_mM][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlMapsXmlNameCommand
+     */
+    export const de_XmlMapsXmlNameCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlMapsXmlNameCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.myMap).trim() === "") {
+        contents[_mM] = {};
+      }
+      else if (data[_mM] != null && data[_mM][_en] != null) {
+        contents[_mM] = de_XmlMapsXmlNameInputOutputMap(__getArrayIfSingleItem(data[_mM][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlMapWithXmlNamespaceCommand
+     */
+    export const de_XmlMapWithXmlNamespaceCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlMapWithXmlNamespaceCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.KVP).trim() === "") {
+        contents[_mM] = {};
+      }
+      else if (data[_KVP] != null && data[_KVP][_en] != null) {
+        contents[_mM] = de_XmlMapWithXmlNamespaceInputOutputMap(__getArrayIfSingleItem(data[_KVP][_en]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlNamespacesCommand
+     */
+    export const de_XmlNamespacesCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlNamespacesCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_n] != null) {
+        contents[_n] = de_XmlNamespaceNested(data[_n], context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlTimestampsCommand
+     */
+    export const de_XmlTimestampsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlTimestampsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (data[_dT] != null) {
+        contents[_dT] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_dT]));
+      }
+      if (data[_dTOT] != null) {
+        contents[_dTOT] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_dTOT]));
+      }
+      if (data[_eSp] != null) {
+        contents[_eSp] = __expectNonNull(__parseEpochTimestamp(data[_eSp]));
+      }
+      if (data[_eSOT] != null) {
+        contents[_eSOT] = __expectNonNull(__parseEpochTimestamp(data[_eSOT]));
+      }
+      if (data[_hDt] != null) {
+        contents[_hDt] = __expectNonNull(__parseRfc7231DateTime(data[_hDt]));
+      }
+      if (data[_hDOT] != null) {
+        contents[_hDOT] = __expectNonNull(__parseRfc7231DateTime(data[_hDOT]));
+      }
+      if (data[_no] != null) {
+        contents[_no] = __expectNonNull(__parseRfc3339DateTimeWithOffset(data[_no]));
+      }
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restXmlXmlUnionsCommand
+     */
+    export const de_XmlUnionsCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<XmlUnionsCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+      });
+      const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+      if (String(data.unionValue).trim() === "") {
+        // Pass empty tags.
+      }
+      else if (data[_uV] != null) {
+        contents[_uV] = de_XmlUnionShape(__expectUnion(data[_uV]), context);
+      }
+      return contents;
+    };
+
+    /**
+     * deserialize_Aws_restXmlCommandError
+     */
+    const de_CommandError = async (
+      output: __HttpResponse,
+      context: __SerdeContext,
+    ): Promise<never> => {
+      const parsedOutput: any = {
+        ...output,
+        body: await parseErrorBody(output.body, context)
+      };
+      const errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
+      switch (errorCode) {
+        case "ComplexError":
+        case "aws.protocoltests.restxml#ComplexError":
+          throw await de_ComplexErrorRes(parsedOutput, context);
+        case "InvalidGreeting":
+        case "aws.protocoltests.restxml#InvalidGreeting":
+          throw await de_InvalidGreetingRes(parsedOutput, context);
+        default:
+          const parsedBody = parsedOutput.body;
+          return throwDefaultError({
+            output,
+            parsedBody: parsedBody.Error,
+            errorCode
+          }) as never;
+      }
+    }
+
+    const throwDefaultError = withBaseException(__BaseException);
+    /**
+     * deserializeAws_restXmlComplexErrorRes
+     */
+    const de_ComplexErrorRes = async (
+      parsedOutput: any,
+      context: __SerdeContext
+    ): Promise<ComplexError> => {
+      const contents: any = map({
+        [_H]: [, parsedOutput.headers[_xh]],
+      });
+      const data: any = parsedOutput.body.Error;
+      if (data[_Ne] != null) {
+        contents[_Ne] = de_ComplexNestedErrorData(data[_Ne], context);
+      }
+      if (data[_TLo] != null) {
+        contents[_TLo] = __expectString(data[_TLo]);
+      }
+      const exception = new ComplexError({
+        $metadata: deserializeMetadata(parsedOutput),
+        ...contents
+      });
+      return __decorateServiceException(exception, parsedOutput.body.Error);
+    };
+
+    /**
+     * deserializeAws_restXmlInvalidGreetingRes
+     */
+    const de_InvalidGreetingRes = async (
+      parsedOutput: any,
+      context: __SerdeContext
+    ): Promise<InvalidGreeting> => {
+      const contents: any = map({
+      });
+      const data: any = parsedOutput.body.Error;
+      if (data[_M] != null) {
+        contents[_M] = __expectString(data[_M]);
+      }
+      const exception = new InvalidGreeting({
+        $metadata: deserializeMetadata(parsedOutput),
+        ...contents
+      });
+      return __decorateServiceException(exception, parsedOutput.body.Error);
+    };
+
+    /**
+     * serializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap
+     */
+    const se_FlattenedXmlMapWithXmlNameInputOutputMap = (
+      input: Record<string, string>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("K");
+        entryNode.c(keyNode);
+        var n;
+        n = __XmlNode.of(_S, input[key as keyof typeof input]!);
+        entryNode.c(n.n(_V));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlListWithMemberNamespace
+     */
+    const se_ListWithMemberNamespace = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        n.a("xmlns", "https://xml-member.example.com");
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlListWithNamespace
+     */
+    const se_ListWithNamespace = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlNestedMap
+     */
+    const se_NestedMap = (
+      input: Record<string, Record<string, FooEnum>>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("key");
+        entryNode.c(keyNode);
+        var n;
+        n = se_FooEnumMap(input[key as keyof typeof input]!, context);
+        entryNode.c(
+          n.reduce((acc: __XmlNode, workingNode: any) => {
+            return acc.c(workingNode);
+          }
+          , new __XmlNode(_v))
+        );
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlNestedPayload
+     */
+    const se_NestedPayload = (
+      input: NestedPayload,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_NP);
+      if (input[_g] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_g]).n(_g)
+        );
+      }
+      if (input[_na] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_na]).n(_na)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlNestedXmlMapWithXmlNameInnerMap
+     */
+    const se_NestedXmlMapWithXmlNameInnerMap = (
+      input: Record<string, string>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("InnerKey");
+        entryNode.c(keyNode);
+        var n;
+        n = __XmlNode.of(_S, input[key as keyof typeof input]!);
+        entryNode.c(n.n(_IV));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlNestedXmlMapWithXmlNameMap
+     */
+    const se_NestedXmlMapWithXmlNameMap = (
+      input: Record<string, Record<string, string>>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("OuterKey");
+        entryNode.c(keyNode);
+        var n;
+        n = se_NestedXmlMapWithXmlNameInnerMap(input[key as keyof typeof input]!, context);
+        entryNode.c(
+          n.reduce((acc: __XmlNode, workingNode: any) => {
+            return acc.c(workingNode);
+          }
+          , new __XmlNode(_v))
+        );
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlPayloadWithXmlName
+     */
+    const se_PayloadWithXmlName = (
+      input: PayloadWithXmlName,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_He);
+      if (input[_na] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_na]).n(_na)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlPayloadWithXmlNamespace
+     */
+    const se_PayloadWithXmlNamespace = (
+      input: PayloadWithXmlNamespace,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_PWXN);
+      if (input[_na] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_na]).n(_na)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlPayloadWithXmlNamespaceAndPrefix
+     */
+    const se_PayloadWithXmlNamespaceAndPrefix = (
+      input: PayloadWithXmlNamespaceAndPrefix,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_PWXNAP);
+      if (input[_na] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_na]).n(_na)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlRecursiveShapesInputOutputNested1
+     */
+    const se_RecursiveShapesInputOutputNested1 = (
+      input: RecursiveShapesInputOutputNested1,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_RSION);
+      if (input[_f] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_f]).n(_f)
+        );
+      }
+      if (input[_n] != null) {
+        bn.c(
+          se_RecursiveShapesInputOutputNested2(input[_n], context).n(_n)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlRecursiveShapesInputOutputNested2
+     */
+    const se_RecursiveShapesInputOutputNested2 = (
+      input: RecursiveShapesInputOutputNested2,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_RSIONe);
+      if (input[_ba] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_ba]).n(_ba)
+        );
+      }
+      if (input[_rM] != null) {
+        bn.c(
+          se_RecursiveShapesInputOutputNested1(input[_rM], context).n(_rM)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlRenamedListMembers
+     */
+    const se_RenamedListMembers = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        return n.n(_i);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlStructureList
+     */
+    const se_StructureList = (
+      input: StructureListMember[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = se_StructureListMember(entry, context);
+        return n.n(_i);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlStructureListMember
+     */
+    const se_StructureListMember = (
+      input: StructureListMember,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_SLM);
+      if (input[_a] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_a]).n(_v)
+        );
+      }
+      if (input[_b_] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_b_]).n(_o)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlUnionPayload
+     */
+    const se_UnionPayload = (
+      input: UnionPayload,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_UP);
+      UnionPayload.visit(input, {
+        greeting: value => {
+          if (input[_g] != null) {
+            bn.c(
+              __XmlNode.of(_S, value).n(_g)
+            );
+          }
+        },
+        _: (name: string, value: any) => {
+          if (!(value instanceof __XmlNode || value instanceof __XmlText)) {
+            throw new Error("Unable to serialize unknown union members in XML.");
+          }
+          bn.c(new __XmlNode(name).c(value));
+        }
+      });
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlXmlAttributesInMiddlePayloadRequest
+     */
+    const se_XmlAttributesInMiddlePayloadRequest = (
+      input: XmlAttributesInMiddlePayloadRequest,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_XAIMPR);
+      if (input[_f] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_f]).n(_f)
+        );
+      }
+      bn.a("test", input[_at]);
+      if (input[_b] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_b]).n(_b)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlXmlAttributesPayloadRequest
+     */
+    const se_XmlAttributesPayloadRequest = (
+      input: XmlAttributesPayloadRequest,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_XAPR);
+      if (input[_f] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_f]).n(_f)
+        );
+      }
+      bn.a("test", input[_at]);
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlXmlMapsInputOutputMap
+     */
+    const se_XmlMapsInputOutputMap = (
+      input: Record<string, GreetingStruct>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("key");
+        entryNode.c(keyNode);
+        var n;
+        n = se_GreetingStruct(input[key as keyof typeof input]!, context);
+        entryNode.c(n.n(_v));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlXmlMapsXmlNameInputOutputMap
+     */
+    const se_XmlMapsXmlNameInputOutputMap = (
+      input: Record<string, GreetingStruct>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("Attribute");
+        entryNode.c(keyNode);
+        var n;
+        n = se_GreetingStruct(input[key as keyof typeof input]!, context);
+        entryNode.c(n.n(_Se));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlXmlMapWithXmlNamespaceInputOutputMap
+     */
+    const se_XmlMapWithXmlNamespaceInputOutputMap = (
+      input: Record<string, string>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("K");
+        keyNode.a("xmlns", "https://the-key.example.com");
+        entryNode.c(keyNode);
+        var n;
+        n = __XmlNode.of(_S, input[key as keyof typeof input]!);
+        n.a("xmlns", "https://the-value.example.com");
+        entryNode.c(n.n(_V));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlXmlNamespacedList
+     */
+    const se_XmlNamespacedList = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        n.a("xmlns", "http://bux.com");
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlXmlNamespaceNested
+     */
+    const se_XmlNamespaceNested = (
+      input: XmlNamespaceNested,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_XNN);
+      if (input[_f] != null) {
+        const n = __XmlNode.of(_S, input[_f]).n(_f);
+        n.a("xmlns:baz", "http://baz.com");
+        bn.c(n);
+      }
+      if (input[_va] != null) {
+        const ns = se_XmlNamespacedList(input[_va], context);
+        const containerNode = new __XmlNode(_va);
+        containerNode.a("xmlns", "http://qux.com");
+        ns.map((n: any) => {
+          containerNode.c(n);
+        });
+        bn.c(containerNode);
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlXmlNestedUnionStruct
+     */
+    const se_XmlNestedUnionStruct = (
+      input: XmlNestedUnionStruct,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_XNUS);
+      if (input[_sVt] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_sVt]).n(_sVt)
+        );
+      }
+      if (input[_bVo] != null) {
+        bn.c(
+          __XmlNode.of(_Bo, String(input[_bVo])).n(_bVo)
+        );
+      }
+      if (input[_bV] != null) {
+        bn.c(
+          __XmlNode.of(_B, String(input[_bV])).n(_bV)
+        );
+      }
+      if (input[_sV] != null) {
+        bn.c(
+          __XmlNode.of(_Sh, String(input[_sV])).n(_sV)
+        );
+      }
+      if (input[_iV] != null) {
+        bn.c(
+          __XmlNode.of(_I, String(input[_iV])).n(_iV)
+        );
+      }
+      if (input[_lV] != null) {
+        bn.c(
+          __XmlNode.of(_L, String(input[_lV])).n(_lV)
+        );
+      }
+      if (input[_fV] != null) {
+        bn.c(
+          __XmlNode.of(_F, String(input[_fV])).n(_fV)
+        );
+      }
+      if (input[_dV] != null) {
+        bn.c(
+          __XmlNode.of(_D, String(input[_dV])).n(_dV)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlXmlUnionShape
+     */
+    const se_XmlUnionShape = (
+      input: XmlUnionShape,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_XUS);
+      XmlUnionShape.visit(input, {
+        stringValue: value => {
+          if (input[_sVt] != null) {
+            bn.c(
+              __XmlNode.of(_S, value).n(_sVt)
+            );
+          }
+        },
+        booleanValue: value => {
+          if (input[_bVo] != null) {
+            bn.c(
+              __XmlNode.of(_Bo, String(value)).n(_bVo)
+            );
+          }
+        },
+        byteValue: value => {
+          if (input[_bV] != null) {
+            bn.c(
+              __XmlNode.of(_B, String(value)).n(_bV)
+            );
+          }
+        },
+        shortValue: value => {
+          if (input[_sV] != null) {
+            bn.c(
+              __XmlNode.of(_Sh, String(value)).n(_sV)
+            );
+          }
+        },
+        integerValue: value => {
+          if (input[_iV] != null) {
+            bn.c(
+              __XmlNode.of(_I, String(value)).n(_iV)
+            );
+          }
+        },
+        longValue: value => {
+          if (input[_lV] != null) {
+            bn.c(
+              __XmlNode.of(_L, String(value)).n(_lV)
+            );
+          }
+        },
+        floatValue: value => {
+          if (input[_fV] != null) {
+            bn.c(
+              __XmlNode.of(_F, String(value)).n(_fV)
+            );
+          }
+        },
+        doubleValue: value => {
+          if (input[_dV] != null) {
+            bn.c(
+              __XmlNode.of(_D, String(value)).n(_dV)
+            );
+          }
+        },
+        unionValue: value => {
+          if (input[_uV] != null) {
+            bn.c(
+              se_XmlUnionShape(value, context).n(_uV)
+            );
+          }
+        },
+        structValue: value => {
+          if (input[_sVtr] != null) {
+            bn.c(
+              se_XmlNestedUnionStruct(value, context).n(_sVtr)
+            );
+          }
+        },
+        _: (name: string, value: any) => {
+          if (!(value instanceof __XmlNode || value instanceof __XmlText)) {
+            throw new Error("Unable to serialize unknown union members in XML.");
+          }
+          bn.c(new __XmlNode(name).c(value));
+        }
+      });
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlBooleanList
+     */
+    const se_BooleanList = (
+      input: boolean[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_Bo, String(entry));
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlFooEnumList
+     */
+    const se_FooEnumList = (
+      input: FooEnum[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_FE, entry);
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlFooEnumMap
+     */
+    const se_FooEnumMap = (
+      input: Record<string, FooEnum>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("key");
+        entryNode.c(keyNode);
+        var n;
+        n = __XmlNode.of(_FE, input[key as keyof typeof input]!);
+        entryNode.c(n.n(_v));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlFooEnumSet
+     */
+    const se_FooEnumSet = (
+      input: FooEnum[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_FE, entry);
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlGreetingStruct
+     */
+    const se_GreetingStruct = (
+      input: GreetingStruct,
+      context: __SerdeContext
+    ): any => {
+      const bn = new __XmlNode(_GS);
+      if (input[_hi] != null) {
+        bn.c(
+          __XmlNode.of(_S, input[_hi]).n(_hi)
+        );
+      }
+      return bn;
+    }
+
+    /**
+     * serializeAws_restXmlIntegerEnumList
+     */
+    const se_IntegerEnumList = (
+      input: IntegerEnum[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_IE, String(entry));
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlIntegerEnumMap
+     */
+    const se_IntegerEnumMap = (
+      input: Record<string, IntegerEnum>,
+      context: __SerdeContext
+    ): any => {
+      return Object.keys(input).filter((key) => input[key as keyof typeof input] != null).map(key => {
+        const entryNode = new __XmlNode("entry");
+        const keyNode = __XmlNode.of(_S, key).n("key");
+        entryNode.c(keyNode);
+        var n;
+        n = __XmlNode.of(_IE, String(input[key as keyof typeof input]!));
+        entryNode.c(n.n(_v));
+        return entryNode;
+      });
+    }
+
+    /**
+     * serializeAws_restXmlIntegerEnumSet
+     */
+    const se_IntegerEnumSet = (
+      input: IntegerEnum[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_IE, String(entry));
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlIntegerList
+     */
+    const se_IntegerList = (
+      input: number[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_I, String(entry));
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlNestedStringList
+     */
+    const se_NestedStringList = (
+      input: string[][],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = se_StringList(entry, context);
+        return n.reduce((acc: __XmlNode, workingNode: any) => {
+          return acc.c(workingNode);
+        }
+        , new __XmlNode(_m));
+      });
+    }
+
+    /**
+     * serializeAws_restXmlStringList
+     */
+    const se_StringList = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlStringSet
+     */
+    const se_StringSet = (
+      input: string[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_S, entry);
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * serializeAws_restXmlTimestampList
+     */
+    const se_TimestampList = (
+      input: Date[],
+      context: __SerdeContext
+    ): any => {
+      return input.filter((e: any) => e != null).map(entry => {
+        const n = __XmlNode.of(_T, __serializeDateTime(entry));
+        return n.n(_m);
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlComplexNestedErrorData
+     */
+    const de_ComplexNestedErrorData = (
+      output: any,
+      context: __SerdeContext
+    ): ComplexNestedErrorData => {
+      let contents: any = {};
+      if (output[_Fo] != null) {
+        contents[_Fo] = __expectString(output[_Fo]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlFlattenedXmlMapWithXmlNameInputOutputMap
+     */
+    const de_FlattenedXmlMapWithXmlNameInputOutputMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, string> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["V"] === null) {
+          return acc;
+        }
+        acc[pair["K"]] = __expectString(pair["V"]) as any;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlFlattenedXmlMapWithXmlNamespaceOutputMap
+     */
+    const de_FlattenedXmlMapWithXmlNamespaceOutputMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, string> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["V"] === null) {
+          return acc;
+        }
+        acc[pair["K"]] = __expectString(pair["V"]) as any;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlListWithMemberNamespace
+     */
+    const de_ListWithMemberNamespace = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlListWithNamespace
+     */
+    const de_ListWithNamespace = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlNestedMap
+     */
+    const de_NestedMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, Record<string, FooEnum>> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (__getArrayIfSingleItem(pair["value"]["entry"]) === null) {
+          return acc;
+        }
+        acc[pair["key"]] = de_FooEnumMap(__getArrayIfSingleItem(pair["value"]["entry"]), context);
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlNestedPayload
+     */
+    const de_NestedPayload = (
+      output: any,
+      context: __SerdeContext
+    ): NestedPayload => {
+      let contents: any = {};
+      if (output[_g] != null) {
+        contents[_g] = __expectString(output[_g]);
+      }
+      if (output[_na] != null) {
+        contents[_na] = __expectString(output[_na]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlNestedXmlMapWithXmlNameInnerMap
+     */
+    const de_NestedXmlMapWithXmlNameInnerMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, string> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["InnerValue"] === null) {
+          return acc;
+        }
+        acc[pair["InnerKey"]] = __expectString(pair["InnerValue"]) as any;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlNestedXmlMapWithXmlNameMap
+     */
+    const de_NestedXmlMapWithXmlNameMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, Record<string, string>> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (__getArrayIfSingleItem(pair["value"]["entry"]) === null) {
+          return acc;
+        }
+        acc[pair["OuterKey"]] = de_NestedXmlMapWithXmlNameInnerMap(__getArrayIfSingleItem(pair["value"]["entry"]), context);
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlPayloadWithXmlName
+     */
+    const de_PayloadWithXmlName = (
+      output: any,
+      context: __SerdeContext
+    ): PayloadWithXmlName => {
+      let contents: any = {};
+      if (output[_na] != null) {
+        contents[_na] = __expectString(output[_na]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlPayloadWithXmlNamespace
+     */
+    const de_PayloadWithXmlNamespace = (
+      output: any,
+      context: __SerdeContext
+    ): PayloadWithXmlNamespace => {
+      let contents: any = {};
+      if (output[_na] != null) {
+        contents[_na] = __expectString(output[_na]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlPayloadWithXmlNamespaceAndPrefix
+     */
+    const de_PayloadWithXmlNamespaceAndPrefix = (
+      output: any,
+      context: __SerdeContext
+    ): PayloadWithXmlNamespaceAndPrefix => {
+      let contents: any = {};
+      if (output[_na] != null) {
+        contents[_na] = __expectString(output[_na]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlRecursiveShapesInputOutputNested1
+     */
+    const de_RecursiveShapesInputOutputNested1 = (
+      output: any,
+      context: __SerdeContext
+    ): RecursiveShapesInputOutputNested1 => {
+      let contents: any = {};
+      if (output[_f] != null) {
+        contents[_f] = __expectString(output[_f]);
+      }
+      if (output[_n] != null) {
+        contents[_n] = de_RecursiveShapesInputOutputNested2(output[_n], context);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlRecursiveShapesInputOutputNested2
+     */
+    const de_RecursiveShapesInputOutputNested2 = (
+      output: any,
+      context: __SerdeContext
+    ): RecursiveShapesInputOutputNested2 => {
+      let contents: any = {};
+      if (output[_ba] != null) {
+        contents[_ba] = __expectString(output[_ba]);
+      }
+      if (output[_rM] != null) {
+        contents[_rM] = de_RecursiveShapesInputOutputNested1(output[_rM], context);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlRenamedListMembers
+     */
+    const de_RenamedListMembers = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlStructureList
+     */
+    const de_StructureList = (
+      output: any,
+      context: __SerdeContext
+    ): StructureListMember[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return de_StructureListMember(entry, context);
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlStructureListMember
+     */
+    const de_StructureListMember = (
+      output: any,
+      context: __SerdeContext
+    ): StructureListMember => {
+      let contents: any = {};
+      if (output[_v] != null) {
+        contents[_a] = __expectString(output[_v]);
+      }
+      if (output[_o] != null) {
+        contents[_b_] = __expectString(output[_o]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlUnionPayload
+     */
+    const de_UnionPayload = (
+      output: any,
+      context: __SerdeContext
+    ): UnionPayload => {
+      if (output[_g] != null) {
+        return {
+          greeting: __expectString(output[_g]) as any
+        };
+      }
+      return { $unknown: Object.entries(output)[0] };
+    }
+
+    /**
+     * deserializeAws_restXmlXmlAttributesInMiddlePayloadResponse
+     */
+    const de_XmlAttributesInMiddlePayloadResponse = (
+      output: any,
+      context: __SerdeContext
+    ): XmlAttributesInMiddlePayloadResponse => {
+      let contents: any = {};
+      if (output[_f] != null) {
+        contents[_f] = __expectString(output[_f]);
+      }
+      if (output[_te] != null) {
+        contents[_at] = __expectString(output[_te]);
+      }
+      if (output[_b] != null) {
+        contents[_b] = __expectString(output[_b]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlXmlAttributesPayloadResponse
+     */
+    const de_XmlAttributesPayloadResponse = (
+      output: any,
+      context: __SerdeContext
+    ): XmlAttributesPayloadResponse => {
+      let contents: any = {};
+      if (output[_f] != null) {
+        contents[_f] = __expectString(output[_f]);
+      }
+      if (output[_te] != null) {
+        contents[_at] = __expectString(output[_te]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlXmlMapsInputOutputMap
+     */
+    const de_XmlMapsInputOutputMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, GreetingStruct> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["value"] === null) {
+          return acc;
+        }
+        acc[pair["key"]] = de_GreetingStruct(pair["value"], context);
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlXmlMapsXmlNameInputOutputMap
+     */
+    const de_XmlMapsXmlNameInputOutputMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, GreetingStruct> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["Setting"] === null) {
+          return acc;
+        }
+        acc[pair["Attribute"]] = de_GreetingStruct(pair["Setting"], context);
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlXmlMapWithXmlNamespaceInputOutputMap
+     */
+    const de_XmlMapWithXmlNamespaceInputOutputMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, string> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["V"] === null) {
+          return acc;
+        }
+        acc[pair["K"]] = __expectString(pair["V"]) as any;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlXmlNamespacedList
+     */
+    const de_XmlNamespacedList = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlXmlNamespaceNested
+     */
+    const de_XmlNamespaceNested = (
+      output: any,
+      context: __SerdeContext
+    ): XmlNamespaceNested => {
+      let contents: any = {};
+      if (output[_f] != null) {
+        contents[_f] = __expectString(output[_f]);
+      }
+      if (String(output.values).trim() === "") {
+        contents[_va] = [];
+      }
+      else if (output[_va] != null && output[_va][_m] != null) {
+        contents[_va] = de_XmlNamespacedList(__getArrayIfSingleItem(output[_va][_m]), context);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlXmlNestedUnionStruct
+     */
+    const de_XmlNestedUnionStruct = (
+      output: any,
+      context: __SerdeContext
+    ): XmlNestedUnionStruct => {
+      let contents: any = {};
+      if (output[_sVt] != null) {
+        contents[_sVt] = __expectString(output[_sVt]);
+      }
+      if (output[_bVo] != null) {
+        contents[_bVo] = __parseBoolean(output[_bVo]);
+      }
+      if (output[_bV] != null) {
+        contents[_bV] = __strictParseByte(output[_bV]) as number;
+      }
+      if (output[_sV] != null) {
+        contents[_sV] = __strictParseShort(output[_sV]) as number;
+      }
+      if (output[_iV] != null) {
+        contents[_iV] = __strictParseInt32(output[_iV]) as number;
+      }
+      if (output[_lV] != null) {
+        contents[_lV] = __strictParseLong(output[_lV]) as number;
+      }
+      if (output[_fV] != null) {
+        contents[_fV] = __strictParseFloat(output[_fV]) as number;
+      }
+      if (output[_dV] != null) {
+        contents[_dV] = __strictParseFloat(output[_dV]) as number;
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlXmlUnionShape
+     */
+    const de_XmlUnionShape = (
+      output: any,
+      context: __SerdeContext
+    ): XmlUnionShape => {
+      if (output[_sVt] != null) {
+        return {
+          stringValue: __expectString(output[_sVt]) as any
+        };
+      }
+      if (output[_bVo] != null) {
+        return {
+          booleanValue: __parseBoolean(output[_bVo])
+        };
+      }
+      if (output[_bV] != null) {
+        return {
+          byteValue: __strictParseByte(output[_bV]) as number
+        };
+      }
+      if (output[_sV] != null) {
+        return {
+          shortValue: __strictParseShort(output[_sV]) as number
+        };
+      }
+      if (output[_iV] != null) {
+        return {
+          integerValue: __strictParseInt32(output[_iV]) as number
+        };
+      }
+      if (output[_lV] != null) {
+        return {
+          longValue: __strictParseLong(output[_lV]) as number
+        };
+      }
+      if (output[_fV] != null) {
+        return {
+          floatValue: __strictParseFloat(output[_fV]) as number
+        };
+      }
+      if (output[_dV] != null) {
+        return {
+          doubleValue: __strictParseFloat(output[_dV]) as number
+        };
+      }
+      if (String(output.unionValue).trim() === "") {
+        // Pass empty tags.
+      }
+      else if (output[_uV] != null) {
+        return {
+          unionValue: de_XmlUnionShape(__expectUnion(output[_uV]), context)
+        };
+      }
+      if (output[_sVtr] != null) {
+        return {
+          structValue: de_XmlNestedUnionStruct(output[_sVtr], context)
+        };
+      }
+      return { $unknown: Object.entries(output)[0] };
+    }
+
+    /**
+     * deserializeAws_restXmlBooleanList
+     */
+    const de_BooleanList = (
+      output: any,
+      context: __SerdeContext
+    ): boolean[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __parseBoolean(entry);
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlFooEnumList
+     */
+    const de_FooEnumList = (
+      output: any,
+      context: __SerdeContext
+    ): FooEnum[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlFooEnumMap
+     */
+    const de_FooEnumMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, FooEnum> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["value"] === null) {
+          return acc;
+        }
+        acc[pair["key"]] = __expectString(pair["value"]) as any;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlFooEnumSet
+     */
+    const de_FooEnumSet = (
+      output: any,
+      context: __SerdeContext
+    ): FooEnum[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlGreetingStruct
+     */
+    const de_GreetingStruct = (
+      output: any,
+      context: __SerdeContext
+    ): GreetingStruct => {
+      let contents: any = {};
+      if (output[_hi] != null) {
+        contents[_hi] = __expectString(output[_hi]);
+      }
+      return contents;
+    }
+
+    /**
+     * deserializeAws_restXmlIntegerEnumList
+     */
+    const de_IntegerEnumList = (
+      output: any,
+      context: __SerdeContext
+    ): IntegerEnum[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __strictParseInt32(entry) as number;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlIntegerEnumMap
+     */
+    const de_IntegerEnumMap = (
+      output: any,
+      context: __SerdeContext
+    ): Record<string, IntegerEnum> => {
+      return output.reduce((acc: any, pair: any) => {
+        if (pair["value"] === null) {
+          return acc;
+        }
+        acc[pair["key"]] = __strictParseInt32(pair["value"]) as number;
+        return acc;
+      }, {});
+    }
+
+    /**
+     * deserializeAws_restXmlIntegerEnumSet
+     */
+    const de_IntegerEnumSet = (
+      output: any,
+      context: __SerdeContext
+    ): IntegerEnum[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __strictParseInt32(entry) as number;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlIntegerList
+     */
+    const de_IntegerList = (
+      output: any,
+      context: __SerdeContext
+    ): number[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __strictParseInt32(entry) as number;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlNestedStringList
+     */
+    const de_NestedStringList = (
+      output: any,
+      context: __SerdeContext
+    ): string[][] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return de_StringList(__getArrayIfSingleItem(entry["member"]), context);
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlStringList
+     */
+    const de_StringList = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlStringSet
+     */
+    const de_StringSet = (
+      output: any,
+      context: __SerdeContext
+    ): string[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectString(entry) as any;
+      });
+    }
+
+    /**
+     * deserializeAws_restXmlTimestampList
+     */
+    const de_TimestampList = (
+      output: any,
+      context: __SerdeContext
+    ): Date[] => {
+      return (output || []).filter((e: any) => e != null).map((entry: any) => {
+        return __expectNonNull(__parseRfc3339DateTimeWithOffset(entry));
+      });
+    }
+
+    const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
+      httpStatusCode: output.statusCode,
+      requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"] ?? output.headers["x-amz-request-id"],
+      extendedRequestId: output.headers["x-amz-id-2"],
+      cfId: output.headers["x-amz-cf-id"],
+    });
+
+    // Encode Uint8Array data into string with utf-8.
+    const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> => collectBody(streamBody, context).then(body => context.utf8Encoder(body))
+
+    const _A = "Ahoy";
+    const _B = "Byte";
+    const _BL = "BooleanList";
+    const _Bl = "Blob";
+    const _Bo = "Boolean";
+    const _CTPI = "ContentTypeParametersInput";
+    const _D = "Double";
+    const _DD = "DoubleDribble";
+    const _DL = "DoubleList";
+    const _DT = "DateTime";
+    const _E = "Enum";
+    const _EL = "EnumList";
+    const _ES = "EpochSeconds";
+    const _EWHLOR = "EndpointWithHostLabelOperationRequest";
+    const _Em = "Empty";
+    const _F = "Float";
+    const _FE = "FooEnum";
+    const _FXMR = "FlattenedXmlMapRequest";
+    const _FXMWXNR = "FlattenedXmlMapWithXmlNameRequest";
+    const _Fo = "Foo";
+    const _GS = "GreetingStruct";
+    const _H = "Header";
+    const _HD = "HttpDate";
+    const _He = "Hello";
+    const _I = "Integer";
+    const _IE = "IntegerEnum";
+    const _IEL = "IntegerEnumList";
+    const _IL = "IntegerList";
+    const _IS = "IntegerSet";
+    const _IV = "InnerValue";
+    const _KVP = "KVP";
+    const _L = "Long";
+    const _M = "Message";
+    const _N = "Null";
+    const _NP = "NestedPayload";
+    const _NXMR = "NestedXmlMapsRequest";
+    const _NXMWXNR = "NestedXmlMapWithXmlNameRequest";
+    const _Ne = "Nested";
+    const _PWCEI = "PutWithContentEncodingInput";
+    const _PWXN = "PayloadWithXmlNamespace";
+    const _PWXNAP = "PayloadWithXmlNamespaceAndPrefix";
+    const _RSION = "RecursiveShapesInputOutputNested1";
+    const _RSIONe = "RecursiveShapesInputOutputNested2";
+    const _RSR = "RecursiveShapesRequest";
+    const _S = "String";
+    const _SL = "StringList";
+    const _SLM = "StructureListMember";
+    const _SS = "StringSet";
+    const _SSPR = "SimpleScalarPropertiesRequest";
+    const _Se = "Setting";
+    const _Sh = "Short";
+    const _T = "Timestamp";
+    const _TL = "TimestampList";
+    const _TLo = "TopLevel";
+    const _UP = "UnionPayload";
+    const _V = "V";
+    const _XAIMPR = "XmlAttributesInMiddlePayloadRequest";
+    const _XAPR = "XmlAttributesPayloadRequest";
+    const _XAR = "XmlAttributesRequest";
+    const _XBR = "XmlBlobsRequest";
+    const _XEBR = "XmlEmptyBlobsRequest";
+    const _XELR = "XmlEmptyListsRequest";
+    const _XEMR = "XmlEmptyMapsRequest";
+    const _XER = "XmlEnumsRequest";
+    const _XESR = "XmlEmptyStringsRequest";
+    const _XIER = "XmlIntEnumsRequest";
+    const _XLR = "XmlListsRequest";
+    const _XMR = "XmlMapsRequest";
+    const _XMWXNR = "XmlMapWithXmlNamespaceRequest";
+    const _XMXNR = "XmlMapsXmlNameRequest";
+    const _XNN = "XmlNamespaceNested";
+    const _XNR = "XmlNamespacesRequest";
+    const _XNUS = "XmlNestedUnionStruct";
+    const _XTR = "XmlTimestampsRequest";
+    const _XUR = "XmlUnionsRequest";
+    const _XUS = "XmlUnionShape";
+    const _a = "a";
+    const _aI = "accountId";
+    const _at = "attr";
+    const _b = "baz";
+    const _bL = "booleanList";
+    const _bV = "byteValue";
+    const _bVo = "booleanValue";
+    const _b_ = "b";
+    const _ba = "bar";
+    const _c = "c";
+    const _cN = "customName";
+    const _ce = "content-encoding";
+    const _co = "corge";
+    const _d = "data";
+    const _dF = "defaultFormat";
+    const _dT = "dateTime";
+    const _dTOT = "dateTimeOnTarget";
+    const _dV = "doubleValue";
+    const _da = "datetime";
+    const _e = "encoding";
+    const _eL = "enumList";
+    const _eS = "emptyString";
+    const _eSOT = "epochSecondsOnTarget";
+    const _eSp = "epochSeconds";
+    const _en = "entry";
+    const _f = "foo";
+    const _fBV = "falseBooleanValue";
+    const _fE = "fooEnum1";
+    const _fEL = "fooEnumList";
+    const _fEM = "fooEnumMap";
+    const _fES = "fooEnumSet";
+    const _fEo = "fooEnum2";
+    const _fEoo = "fooEnum3";
+    const _fL = "flattenedList";
+    const _fLWMN = "flattenedListWithMemberNamespace";
+    const _fLWN = "flattenedListWithNamespace";
+    const _fLl = "flattenedList2";
+    const _fNM = "flatNestedMap";
+    const _fSL = "flattenedStructureList";
+    const _fV = "floatValue";
+    const _g = "greeting";
+    const _h = "hello";
+    const _hB = "headerByte";
+    const _hBL = "headerBooleanList";
+    const _hD = "headerDouble";
+    const _hDOT = "httpDateOnTarget";
+    const _hDt = "httpDate";
+    const _hE = "headerEnum";
+    const _hEL = "headerEnumList";
+    const _hF = "headerFloat";
+    const _hFB = "headerFalseBool";
+    const _hI = "headerInteger";
+    const _hIL = "headerIntegerList";
+    const _hL = "headerLong";
+    const _hS = "headerString";
+    const _hSL = "headerStringList";
+    const _hSS = "headerStringSet";
+    const _hSe = "headerShort";
+    const _hTB = "headerTrueBool";
+    const _hTL = "headerTimestampList";
+    const _hi = "hi";
+    const _i = "item";
+    const _iE = "intEnum1";
+    const _iEL = "intEnumList";
+    const _iEM = "intEnumMap";
+    const _iES = "intEnumSet";
+    const _iEn = "intEnum2";
+    const _iEnt = "intEnum3";
+    const _iL = "integerList";
+    const _iV = "integerValue";
+    const _l = "label";
+    const _lV = "longValue";
+    const _m = "member";
+    const _mDT = "memberDateTime";
+    const _mES = "memberEpochSeconds";
+    const _mHD = "memberHttpDate";
+    const _mM = "myMap";
+    const _mS = "maybeSet";
+    const _mSL = "myStructureList";
+    const _n = "nested";
+    const _nM = "nestedMap";
+    const _nSL = "nestedStringList";
+    const _nV = "nullValue";
+    const _nXMWXNM = "nestedXmlMapWithXmlNameMap";
+    const _na = "name";
+    const _no = "normal";
+    const _o = "other";
+    const _q = "qux";
+    const _qB = "queryByte";
+    const _qBL = "queryBooleanList";
+    const _qBu = "queryBoolean";
+    const _qD = "queryDouble";
+    const _qDL = "queryDoubleList";
+    const _qE = "queryEnum";
+    const _qEL = "queryEnumList";
+    const _qF = "queryFloat";
+    const _qI = "queryInteger";
+    const _qIE = "queryIntegerEnum";
+    const _qIEL = "queryIntegerEnumList";
+    const _qIL = "queryIntegerList";
+    const _qIS = "queryIntegerSet";
+    const _qL = "queryLong";
+    const _qS = "queryString";
+    const _qSL = "queryStringList";
+    const _qSS = "queryStringSet";
+    const _qSu = "queryShort";
+    const _qT = "queryTimestamp";
+    const _qTL = "queryTimestampList";
+    const _r = "renamed";
+    const _rLM = "renamedListMembers";
+    const _rM = "recursiveMember";
+    const _sH = "specificHeader";
+    const _sL = "stringList";
+    const _sLt = "structureList";
+    const _sS = "stringSet";
+    const _sV = "shortValue";
+    const _sVt = "stringValue";
+    const _sVtr = "structValue";
+    const _t = "token";
+    const _tBV = "trueBooleanValue";
+    const _tDT = "targetDateTime";
+    const _tES = "targetEpochSeconds";
+    const _tHD = "targetHttpDate";
+    const _tL = "timestampList";
+    const _te = "test";
+    const _uV = "unionValue";
+    const _v = "value";
+    const _va = "values";
+    const _ve = "<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>";
+    const _xa = "x-a";
+    const _xaai = "x-amz-account-id";
+    const _xb = "x-byte";
+    const _xb_ = "x-boolean1";
+    const _xb__ = "x-boolean2";
+    const _xb___ = "x-booleanlist";
+    const _xb____ = "x-b";
+    const _xc = "x-c";
+    const _xd = "x-double";
+    const _xd_ = "x-defaultformat";
+    const _xe = "x-enum";
+    const _xe_ = "x-enumlist";
+    const _xf = "x-foo";
+    const _xf_ = "x-float";
+    const _xg = "x-greeting";
+    const _xh = "x-header";
+    const _xi = "x-integer";
+    const _xi_ = "x-integerlist";
+    const _xl = "x-long";
+    const _xm = "x-memberepochseconds";
+    const _xm_ = "x-memberhttpdate";
+    const _xm__ = "x-memberdatetime";
+    const _xs = "x-string";
+    const _xs_ = "x-short";
+    const _xs__ = "x-stringlist";
+    const _xs___ = "x-stringset";
+    const _xt = "x-timestamplist";
+    const _xt_ = "x-targetepochseconds";
+    const _xt__ = "x-targethttpdate";
+    const _xt___ = "x-targetdatetime";

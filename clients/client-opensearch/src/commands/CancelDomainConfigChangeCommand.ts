@@ -1,0 +1,101 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelDomainConfigChangeRequest, CancelDomainConfigChangeResponse } from "../models/models_0";
+import { CancelDomainConfigChange$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelDomainConfigChangeCommand}.
+ */
+export interface CancelDomainConfigChangeCommandInput extends CancelDomainConfigChangeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelDomainConfigChangeCommand}.
+ */
+export interface CancelDomainConfigChangeCommandOutput extends CancelDomainConfigChangeResponse, __MetadataBearer {}
+
+/**
+ * <p>Cancels a pending configuration change on an Amazon OpenSearch Service domain.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpenSearchClient, CancelDomainConfigChangeCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
+ * // const { OpenSearchClient, CancelDomainConfigChangeCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
+ * const client = new OpenSearchClient(config);
+ * const input = { // CancelDomainConfigChangeRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new CancelDomainConfigChangeCommand(input);
+ * const response = await client.send(command);
+ * // { // CancelDomainConfigChangeResponse
+ * //   CancelledChangeIds: [ // GUIDList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   CancelledChangeProperties: [ // CancelledChangePropertyList
+ * //     { // CancelledChangeProperty
+ * //       PropertyName: "STRING_VALUE",
+ * //       CancelledValue: "STRING_VALUE",
+ * //       ActiveValue: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   DryRun: true || false,
+ * // };
+ *
+ * ```
+ *
+ * @param CancelDomainConfigChangeCommandInput - {@link CancelDomainConfigChangeCommandInput}
+ * @returns {@link CancelDomainConfigChangeCommandOutput}
+ * @see {@link CancelDomainConfigChangeCommandInput} for command's `input` shape.
+ * @see {@link CancelDomainConfigChangeCommandOutput} for command's `response` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access an unsupported operation.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
+ */
+export class CancelDomainConfigChangeCommand extends command<CancelDomainConfigChangeCommandInput, CancelDomainConfigChangeCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelDomainConfigChange",
+  CancelDomainConfigChange$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelDomainConfigChangeRequest;
+      output: CancelDomainConfigChangeResponse;
+    };
+    sdk: {
+      input: CancelDomainConfigChangeCommandInput;
+      output: CancelDomainConfigChangeCommandOutput;
+    };
+  };
+}

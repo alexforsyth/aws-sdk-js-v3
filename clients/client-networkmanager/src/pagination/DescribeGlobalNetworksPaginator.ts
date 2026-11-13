@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeGlobalNetworksCommand,
   DescribeGlobalNetworksCommandInput,
   DescribeGlobalNetworksCommandOutput,
 } from "../commands/DescribeGlobalNetworksCommand";
-import { NetworkManager } from "../NetworkManager";
 import { NetworkManagerClient } from "../NetworkManagerClient";
-import { NetworkManagerPaginationConfiguration } from "./Interfaces";
+import type { NetworkManagerPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: NetworkManagerClient,
-  input: DescribeGlobalNetworksCommandInput,
-  ...args: any
-): Promise<DescribeGlobalNetworksCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeGlobalNetworksCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: NetworkManager,
-  input: DescribeGlobalNetworksCommandInput,
-  ...args: any
-): Promise<DescribeGlobalNetworksCommandOutput> => {
-  // @ts-ignore
-  return await client.describeGlobalNetworks(input, ...args);
-};
-export async function* paginateDescribeGlobalNetworks(
+export const paginateDescribeGlobalNetworks: (
   config: NetworkManagerPaginationConfiguration,
   input: DescribeGlobalNetworksCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeGlobalNetworksCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeGlobalNetworksCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof NetworkManager) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof NetworkManagerClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected NetworkManager | NetworkManagerClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeGlobalNetworksCommandOutput> = createPaginator<
+  NetworkManagerPaginationConfiguration,
+  DescribeGlobalNetworksCommandInput,
+  DescribeGlobalNetworksCommandOutput
+>(NetworkManagerClient, DescribeGlobalNetworksCommand, "NextToken", "NextToken", "MaxResults");

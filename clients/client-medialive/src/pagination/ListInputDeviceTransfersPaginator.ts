@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListInputDeviceTransfersCommand,
   ListInputDeviceTransfersCommandInput,
   ListInputDeviceTransfersCommandOutput,
 } from "../commands/ListInputDeviceTransfersCommand";
-import { MediaLive } from "../MediaLive";
 import { MediaLiveClient } from "../MediaLiveClient";
-import { MediaLivePaginationConfiguration } from "./Interfaces";
+import type { MediaLivePaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: MediaLiveClient,
-  input: ListInputDeviceTransfersCommandInput,
-  ...args: any
-): Promise<ListInputDeviceTransfersCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListInputDeviceTransfersCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: MediaLive,
-  input: ListInputDeviceTransfersCommandInput,
-  ...args: any
-): Promise<ListInputDeviceTransfersCommandOutput> => {
-  // @ts-ignore
-  return await client.listInputDeviceTransfers(input, ...args);
-};
-export async function* paginateListInputDeviceTransfers(
+export const paginateListInputDeviceTransfers: (
   config: MediaLivePaginationConfiguration,
   input: ListInputDeviceTransfersCommandInput,
-  ...additionalArguments: any
-): Paginator<ListInputDeviceTransfersCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListInputDeviceTransfersCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof MediaLive) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof MediaLiveClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected MediaLive | MediaLiveClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListInputDeviceTransfersCommandOutput> = createPaginator<
+  MediaLivePaginationConfiguration,
+  ListInputDeviceTransfersCommandInput,
+  ListInputDeviceTransfersCommandOutput
+>(MediaLiveClient, ListInputDeviceTransfersCommand, "NextToken", "NextToken", "MaxResults");

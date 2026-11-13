@@ -1,101 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { DescribeResourceServerRequest, DescribeResourceServerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeResourceServerCommand,
-  serializeAws_json1_1DescribeResourceServerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeResourceServerRequest, DescribeResourceServerResponse } from "../models/models_0";
+import { DescribeResourceServer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeResourceServerCommand}.
+ */
 export interface DescribeResourceServerCommandInput extends DescribeResourceServerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeResourceServerCommand}.
+ */
 export interface DescribeResourceServerCommandOutput extends DescribeResourceServerResponse, __MetadataBearer {}
 
 /**
- * <p>Describes a resource server.</p>
+ * <p>Describes a resource server. For more information about resource servers, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html">Access control with resource servers</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, DescribeResourceServerCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, DescribeResourceServerCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // DescribeResourceServerRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   Identifier: "STRING_VALUE", // required
+ * };
  * const command = new DescribeResourceServerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeResourceServerResponse
+ * //   ResourceServer: { // ResourceServerType
+ * //     UserPoolId: "STRING_VALUE",
+ * //     Identifier: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Scopes: [ // ResourceServerScopeListType
+ * //       { // ResourceServerScopeType
+ * //         ScopeName: "STRING_VALUE", // required
+ * //         ScopeDescription: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     ManagedBy: "COGNITO",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeResourceServerCommandInput - {@link DescribeResourceServerCommandInput}
+ * @returns {@link DescribeResourceServerCommandOutput}
  * @see {@link DescribeResourceServerCommandInput} for command's `input` shape.
  * @see {@link DescribeResourceServerCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeResourceServerCommand extends $Command<
-  DescribeResourceServerCommandInput,
-  DescribeResourceServerCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeResourceServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeResourceServerCommandInput, DescribeResourceServerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "DescribeResourceServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeResourceServerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeResourceServerResponse.filterSensitiveLog,
+export class DescribeResourceServerCommand extends command<DescribeResourceServerCommandInput, DescribeResourceServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeResourceServer",
+  DescribeResourceServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeResourceServerRequest;
+      output: DescribeResourceServerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeResourceServerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeResourceServerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeResourceServerCommandOutput> {
-    return deserializeAws_json1_1DescribeResourceServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeResourceServerCommandInput;
+      output: DescribeResourceServerCommandOutput;
+    };
+  };
 }

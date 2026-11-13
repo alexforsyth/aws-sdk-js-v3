@@ -1,0 +1,43 @@
+{
+  "name": "@aws-sdk/crc64-nvme",
+  "version": "3.972.53",
+  "description": "A pure JS implementation of CRC64-NVME checksum",
+  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/crc64-nvme",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "AWS SDK for JavaScript Team",
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-sdk-js-v3.git",
+    "directory": "packages/crc64-nvme"
+  },
+  "files": [
+    "dist-*/**"
+  ],
+  "sideEffects": false,
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "types": "./dist-types/index.d.ts",
+  "scripts": {
+    "build": "concurrently 'yarn:build:types' 'yarn:build:es' && yarn build:cjs",
+    "build:cjs": "node ../../scripts/compilation/inline",
+    "build:es": "premove dist-es && tsc -p tsconfig.es.json",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "premove dist-types && tsc -p tsconfig.types.json",
+    "clean": "premove dist-cjs dist-es dist-types"
+  },
+  "dependencies": {
+    "@aws-sdk/checksums": "workspace:^3.1002.5",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "concurrently": "7.0.0",
+    "premove": "4.0.0",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

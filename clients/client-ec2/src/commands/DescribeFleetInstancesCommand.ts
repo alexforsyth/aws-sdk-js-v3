@@ -1,96 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeFleetInstancesRequest, DescribeFleetInstancesResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeFleetInstancesCommand,
-  serializeAws_ec2DescribeFleetInstancesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFleetInstancesRequest, DescribeFleetInstancesResult } from "../models/models_4";
+import { DescribeFleetInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFleetInstancesCommand}.
+ */
 export interface DescribeFleetInstancesCommandInput extends DescribeFleetInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFleetInstancesCommand}.
+ */
 export interface DescribeFleetInstancesCommandOutput extends DescribeFleetInstancesResult, __MetadataBearer {}
 
 /**
  * <p>Describes the running instances for the specified EC2 Fleet.</p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
+ *          <note>
+ *             <p>Currently, <code>DescribeFleetInstances</code> does not support fleets of type
+ *                <code>instant</code>. Instead, use <code>DescribeFleets</code>, specifying the
+ *                <code>instant</code> fleet ID in the request.</p>
+ *          </note>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet">Describe your
+ *             EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeFleetInstancesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeFleetInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeFleetInstancesRequest
+ *   DryRun: true || false,
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   FleetId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeFleetInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFleetInstancesResult
+ * //   ActiveInstances: [ // ActiveInstanceSet
+ * //     { // ActiveInstance
+ * //       InstanceId: "STRING_VALUE",
+ * //       InstanceType: "STRING_VALUE",
+ * //       SpotInstanceRequestId: "STRING_VALUE",
+ * //       InstanceHealth: "healthy" || "unhealthy",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   FleetId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeFleetInstancesCommandInput - {@link DescribeFleetInstancesCommandInput}
+ * @returns {@link DescribeFleetInstancesCommandOutput}
  * @see {@link DescribeFleetInstancesCommandInput} for command's `input` shape.
  * @see {@link DescribeFleetInstancesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFleetInstancesCommand extends $Command<
-  DescribeFleetInstancesCommandInput,
-  DescribeFleetInstancesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFleetInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFleetInstancesCommandInput, DescribeFleetInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeFleetInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFleetInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFleetInstancesResult.filterSensitiveLog,
+export class DescribeFleetInstancesCommand extends command<DescribeFleetInstancesCommandInput, DescribeFleetInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFleetInstances",
+  DescribeFleetInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFleetInstancesRequest;
+      output: DescribeFleetInstancesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFleetInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeFleetInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFleetInstancesCommandOutput> {
-    return deserializeAws_ec2DescribeFleetInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFleetInstancesCommandInput;
+      output: DescribeFleetInstancesCommandOutput;
+    };
+  };
 }

@@ -1,5 +1,5 @@
 {
-  "smithy": "1.0",
+  "smithy": "2.0",
   "metadata": {
     "suppressions": [
       {
@@ -40,6 +40,9 @@
           "target": "com.amazonaws.migrationhub#AssociateDiscoveredResource"
         },
         {
+          "target": "com.amazonaws.migrationhub#AssociateSourceResource"
+        },
+        {
           "target": "com.amazonaws.migrationhub#CreateProgressUpdateStream"
         },
         {
@@ -58,6 +61,9 @@
           "target": "com.amazonaws.migrationhub#DisassociateDiscoveredResource"
         },
         {
+          "target": "com.amazonaws.migrationhub#DisassociateSourceResource"
+        },
+        {
           "target": "com.amazonaws.migrationhub#ImportMigrationTask"
         },
         {
@@ -73,7 +79,13 @@
           "target": "com.amazonaws.migrationhub#ListMigrationTasks"
         },
         {
+          "target": "com.amazonaws.migrationhub#ListMigrationTaskUpdates"
+        },
+        {
           "target": "com.amazonaws.migrationhub#ListProgressUpdateStreams"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ListSourceResources"
         },
         {
           "target": "com.amazonaws.migrationhub#NotifyApplicationState"
@@ -91,6 +103,7 @@
           "arnNamespace": "mgh",
           "cloudFormationName": "MigrationHub",
           "cloudTrailEventSource": "migrationhub.amazonaws.com",
+          "docId": "AWSMigrationHub-2017-05-31",
           "endpointPrefix": "mgh"
         },
         "aws.auth#sigv4": {
@@ -98,7 +111,857 @@
         },
         "aws.protocols#awsJson1_1": {},
         "smithy.api#documentation": "<p>The AWS Migration Hub API methods help to obtain server and application migration status\n         and integrate your resource-specific migration tool by providing a programmatic interface\n         to Migration Hub.</p>\n         <p>Remember that you must set your AWS Migration Hub home region before you call any of\n         these APIs, or a <code>HomeRegionNotSetException</code> error will be returned. Also, you\n         must make the API calls while in your home region.</p>",
-        "smithy.api#title": "AWS Migration Hub"
+        "smithy.api#title": "AWS Migration Hub",
+        "smithy.rules#endpointBdd": {
+          "version": "1.1",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "conditions": [
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Endpoint"
+                }
+              ]
+            },
+            {
+              "fn": "isSet",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ]
+            },
+            {
+              "fn": "aws.partition",
+              "argv": [
+                {
+                  "ref": "Region"
+                }
+              ],
+              "assign": "PartitionResult"
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseFIPS"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "ref": "UseDualStack"
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsDualStack"
+                  ]
+                },
+                true
+              ]
+            },
+            {
+              "fn": "booleanEquals",
+              "argv": [
+                {
+                  "fn": "getAttr",
+                  "argv": [
+                    {
+                      "ref": "PartitionResult"
+                    },
+                    "supportsFIPS"
+                  ]
+                },
+                true
+              ]
+            }
+          ],
+          "results": [
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": {
+                  "ref": "Endpoint"
+                },
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://mgh-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://mgh-fips.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "FIPS is enabled but this partition does not support FIPS",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://mgh.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "DualStack is enabled but this partition does not support DualStack",
+              "type": "error"
+            },
+            {
+              "conditions": [],
+              "endpoint": {
+                "url": "https://mgh.{Region}.{PartitionResult#dnsSuffix}",
+                "properties": {},
+                "headers": {}
+              },
+              "type": "endpoint"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ],
+          "root": 2,
+          "nodeCount": 13,
+          "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "string"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "string"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://mgh-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://mgh-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://mgh.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://mgh.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mgh.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
       }
     },
     "com.amazonaws.migrationhub#AccessDeniedException": {
@@ -174,22 +1037,26 @@
       }
     },
     "com.amazonaws.migrationhub#ApplicationStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "NOT_STARTED",
-            "name": "NOT_STARTED"
-          },
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "COMPLETED",
-            "name": "COMPLETED"
+      "type": "enum",
+      "members": {
+        "NOT_STARTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_STARTED"
           }
-        ]
+        },
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
+          }
+        },
+        "COMPLETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETED"
+          }
+        }
       }
     },
     "com.amazonaws.migrationhub#AssociateCreatedArtifact": {
@@ -260,14 +1127,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#AssociateCreatedArtifactResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#AssociateDiscoveredResource": {
       "type": "operation",
@@ -340,14 +1214,102 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#AssociateDiscoveredResourceResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.migrationhub#AssociateSourceResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.migrationhub#AssociateSourceResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.migrationhub#AssociateSourceResourceResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.migrationhub#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#DryRunOperation"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#UnauthorizedOperation"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates a source resource with a migration task. For example, the source resource can\n         be a source server, an application, or a migration wave.</p>"
+      }
+    },
+    "com.amazonaws.migrationhub#AssociateSourceResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ProgressUpdateStream": {
+          "target": "com.amazonaws.migrationhub#ProgressUpdateStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the progress-update stream, which is used for access control as well as a\n         namespace for migration-task names that is implicitly linked to your AWS account. The\n         progress-update stream must uniquely identify the migration tool as it is used for all\n         updates made by the tool; however, it does not need to be unique for each AWS account\n         because it is scoped to the AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MigrationTaskName": {
+          "target": "com.amazonaws.migrationhub#MigrationTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that references the migration task. <i>Do not include\n            sensitive data in this field.</i>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SourceResource": {
+          "target": "com.amazonaws.migrationhub#SourceResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The source resource that you want to associate.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.migrationhub#DryRun",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>This is an optional parameter that you can use to test whether the call will succeed.\n         Set this parameter to <code>true</code> to verify that you have the permissions that are\n         required to make the call, and that you have specified the other parameters in the call\n         correctly.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.migrationhub#AssociateSourceResourceResult": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#ConfigurationId": {
       "type": "string",
@@ -410,14 +1372,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#CreateProgressUpdateStreamResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#CreatedArtifact": {
       "type": "structure",
@@ -463,7 +1432,7 @@
           "min": 1,
           "max": 1600
         },
-        "smithy.api#pattern": "arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):.*"
+        "smithy.api#pattern": "^arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):"
       }
     },
     "com.amazonaws.migrationhub#DeleteProgressUpdateStream": {
@@ -520,14 +1489,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#DeleteProgressUpdateStreamResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#DescribeApplicationState": {
       "type": "operation",
@@ -577,6 +1553,9 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#DescribeApplicationStateResult": {
@@ -594,6 +1573,9 @@
             "smithy.api#documentation": "<p>The timestamp when the application status was last updated.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#DescribeMigrationTask": {
@@ -648,6 +1630,9 @@
             "smithy.api#required": {}
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#DescribeMigrationTaskResult": {
@@ -659,6 +1644,9 @@
             "smithy.api#documentation": "<p>Object encapsulating information about the migration task.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#DisassociateCreatedArtifact": {
@@ -729,14 +1717,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#DisassociateCreatedArtifactResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#DisassociateDiscoveredResource": {
       "type": "operation",
@@ -806,14 +1801,102 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#DisassociateDiscoveredResourceResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.migrationhub#DisassociateSourceResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.migrationhub#DisassociateSourceResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.migrationhub#DisassociateSourceResourceResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.migrationhub#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#DryRunOperation"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#UnauthorizedOperation"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the association between a source resource and a migration task.</p>"
+      }
+    },
+    "com.amazonaws.migrationhub#DisassociateSourceResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ProgressUpdateStream": {
+          "target": "com.amazonaws.migrationhub#ProgressUpdateStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the progress-update stream, which is used for access control as well as a\n         namespace for migration-task names that is implicitly linked to your AWS account. The\n         progress-update stream must uniquely identify the migration tool as it is used for all\n         updates made by the tool; however, it does not need to be unique for each AWS account\n         because it is scoped to the AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MigrationTaskName": {
+          "target": "com.amazonaws.migrationhub#MigrationTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that references the migration task. <i>Do not include\n            sensitive data in this field.</i>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SourceResourceName": {
+          "target": "com.amazonaws.migrationhub#SourceResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name that was specified for the source resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.migrationhub#DryRun",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>This is an optional parameter that you can use to test whether the call will succeed.\n         Set this parameter to <code>true</code> to verify that you have the permissions that are\n         required to make the call, and that you have specified the other parameters in the call\n         correctly.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.migrationhub#DisassociateSourceResourceResult": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#DiscoveredResource": {
       "type": "structure",
@@ -853,7 +1936,10 @@
       }
     },
     "com.amazonaws.migrationhub#DryRun": {
-      "type": "boolean"
+      "type": "boolean",
+      "traits": {
+        "smithy.api#default": false
+      }
     },
     "com.amazonaws.migrationhub#DryRunOperation": {
       "type": "structure",
@@ -943,14 +2029,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ImportMigrationTaskResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#InternalServerError": {
       "type": "structure",
@@ -1047,6 +2140,9 @@
             "smithy.api#documentation": "<p>Maximum number of results to be returned per page.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ListApplicationStatesResult": {
@@ -1064,6 +2160,9 @@
             "smithy.api#documentation": "<p>If a <code>NextToken</code> was returned by a previous call, there are more results\n         available. To retrieve the next page of results, make the call again using the returned\n         token in <code>NextToken</code>.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#ListCreatedArtifacts": {
@@ -1136,6 +2235,9 @@
             "smithy.api#documentation": "<p>Maximum number of results to be returned per page.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ListCreatedArtifactsResult": {
@@ -1153,6 +2255,9 @@
             "smithy.api#documentation": "<p>List of created artifacts up to the maximum number of results specified in the\n         request.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#ListDiscoveredResources": {
@@ -1225,6 +2330,9 @@
             "smithy.api#documentation": "<p>The maximum number of results returned per page.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ListDiscoveredResourcesResult": {
@@ -1242,6 +2350,101 @@
             "smithy.api#documentation": "<p>Returned list of discovered resources associated with the given MigrationTask.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.migrationhub#ListMigrationTaskUpdates": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.migrationhub#ListMigrationTaskUpdatesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.migrationhub#ListMigrationTaskUpdatesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.migrationhub#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>This is a paginated API that returns all the migration-task states for the specified\n            <code>MigrationTaskName</code> and <code>ProgressUpdateStream</code>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "MigrationTaskUpdateList",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.migrationhub#ListMigrationTaskUpdatesRequest": {
+      "type": "structure",
+      "members": {
+        "ProgressUpdateStream": {
+          "target": "com.amazonaws.migrationhub#ProgressUpdateStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the progress-update stream, which is used for access control as well as a\n         namespace for migration-task names that is implicitly linked to your AWS account. The\n         progress-update stream must uniquely identify the migration tool as it is used for all\n         updates made by the tool; however, it does not need to be unique for each AWS account\n         because it is scoped to the AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MigrationTaskName": {
+          "target": "com.amazonaws.migrationhub#MigrationTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that references the migration task. <i>Do not include\n            sensitive data in this field.</i>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.migrationhub#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>NextToken</code> was returned by a previous call, there are more results\n         available. The value of <code>NextToken</code> is a unique pagination token for each page.\n         To retrieve the next page of results, specify the <code>NextToken</code> value that the\n         previous call returned. Keep all other arguments unchanged. Each pagination token expires\n         after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken\n         error.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.migrationhub#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than the\n         value that you specify here for <code>MaxResults</code>, the response will include a token\n         that you can use to retrieve the next set of results.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.migrationhub#ListMigrationTaskUpdatesResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.migrationhub#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If the response includes a <code>NextToken</code> value, that means that there are more\n         results available. The value of <code>NextToken</code> is a unique pagination token for\n         each page. To retrieve the next page of results, call this API again and specify this\n            <code>NextToken</code> value in the request. Keep all other arguments unchanged. Each\n         pagination token expires after 24 hours. Using an expired pagination token will return an\n         HTTP 400 InvalidToken error.</p>"
+          }
+        },
+        "MigrationTaskUpdateList": {
+          "target": "com.amazonaws.migrationhub#MigrationTaskUpdateList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of migration-task updates.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#ListMigrationTasks": {
@@ -1309,6 +2512,9 @@
             "smithy.api#documentation": "<p>Filter migration tasks by discovered resource name.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ListMigrationTasksResult": {
@@ -1326,6 +2532,9 @@
             "smithy.api#documentation": "<p>Lists the migration task's summary which includes: <code>MigrationTaskName</code>,\n            <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>,\n         and the <code>UpdateDateTime</code> for each task.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#ListProgressUpdateStreams": {
@@ -1381,6 +2590,9 @@
             "smithy.api#documentation": "<p>Filter to limit the maximum number of results to list per page.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#ListProgressUpdateStreamsResult": {
@@ -1398,12 +2610,106 @@
             "smithy.api#documentation": "<p>If there are more streams created than the max result, return the next token to be\n         passed to the next call as a bookmark of where to start from.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.migrationhub#ListSourceResources": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.migrationhub#ListSourceResourcesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.migrationhub#ListSourceResourcesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.migrationhub#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.migrationhub#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all the source resource that are associated with the specified\n            <code>MigrationTaskName</code> and <code>ProgressUpdateStream</code>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "SourceResourceList",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.migrationhub#ListSourceResourcesRequest": {
+      "type": "structure",
+      "members": {
+        "ProgressUpdateStream": {
+          "target": "com.amazonaws.migrationhub#ProgressUpdateStream",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the progress-update stream, which is used for access control as well as a\n         namespace for migration-task names that is implicitly linked to your AWS account. The\n         progress-update stream must uniquely identify the migration tool as it is used for all\n         updates made by the tool; however, it does not need to be unique for each AWS account\n         because it is scoped to the AWS account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MigrationTaskName": {
+          "target": "com.amazonaws.migrationhub#MigrationTaskName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that references the migration task. <i>Do not store\n            confidential data in this field.</i>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.migrationhub#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>NextToken</code> was returned by a previous call, there are more results\n         available. The value of <code>NextToken</code> is a unique pagination token for each page.\n         To retrieve the next page of results, specify the <code>NextToken</code> value that the\n         previous call returned. Keep all other arguments unchanged. Each pagination token expires\n         after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken\n         error.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.migrationhub#MaxResultsSourceResources",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than the\n         value that you specify here for <code>MaxResults</code>, the response will include a token\n         that you can use to retrieve the next set of results.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.migrationhub#ListSourceResourcesResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.migrationhub#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If the response includes a <code>NextToken</code> value, that means that there are more\n         results available. The value of <code>NextToken</code> is a unique pagination token for\n         each page. To retrieve the next page of results, call this API again and specify this\n            <code>NextToken</code> value in the request. Keep all other arguments unchanged. Each\n         pagination token expires after 24 hours. Using an expired pagination token will return an\n         HTTP 400 InvalidToken error.</p>"
+          }
+        },
+        "SourceResourceList": {
+          "target": "com.amazonaws.migrationhub#SourceResourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of source resources.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     },
     "com.amazonaws.migrationhub#MaxResults": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 100
@@ -1413,7 +2719,6 @@
     "com.amazonaws.migrationhub#MaxResultsCreatedArtifacts": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 1,
           "max": 10
@@ -1423,7 +2728,15 @@
     "com.amazonaws.migrationhub#MaxResultsResources": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.migrationhub#MaxResultsSourceResources": {
+      "type": "integer",
+      "traits": {
         "smithy.api#range": {
           "min": 1,
           "max": 10
@@ -1475,7 +2788,7 @@
           "min": 1,
           "max": 256
         },
-        "smithy.api#pattern": "[^:|]+"
+        "smithy.api#pattern": "^[^:|]+$"
       }
     },
     "com.amazonaws.migrationhub#MigrationTaskSummary": {
@@ -1528,9 +2841,39 @@
         "target": "com.amazonaws.migrationhub#MigrationTaskSummary"
       }
     },
+    "com.amazonaws.migrationhub#MigrationTaskUpdate": {
+      "type": "structure",
+      "members": {
+        "UpdateDateTime": {
+          "target": "com.amazonaws.migrationhub#UpdateDateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp for the update.</p>"
+          }
+        },
+        "UpdateType": {
+          "target": "com.amazonaws.migrationhub#UpdateType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the update.</p>"
+          }
+        },
+        "MigrationTaskState": {
+          "target": "com.amazonaws.migrationhub#Task"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A migration-task progress update.</p>"
+      }
+    },
+    "com.amazonaws.migrationhub#MigrationTaskUpdateList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.migrationhub#MigrationTaskUpdate"
+      }
+    },
     "com.amazonaws.migrationhub#NextUpdateSeconds": {
       "type": "integer",
       "traits": {
+        "smithy.api#default": 0,
         "smithy.api#range": {
           "min": 0
         }
@@ -1606,14 +2949,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#NotifyApplicationStateResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#NotifyMigrationTaskState": {
       "type": "operation",
@@ -1690,6 +3040,7 @@
         "NextUpdateSeconds": {
           "target": "com.amazonaws.migrationhub#NextUpdateSeconds",
           "traits": {
+            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>Number of seconds after the UpdateDateTime within which the Migration Hub can expect an\n         update. If Migration Hub does not receive an update within the specified interval, then the\n         migration task will be considered stale.</p>",
             "smithy.api#required": {}
           }
@@ -1697,14 +3048,21 @@
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#NotifyMigrationTaskStateResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#PolicyErrorException": {
       "type": "structure",
@@ -1721,7 +3079,6 @@
     "com.amazonaws.migrationhub#ProgressPercent": {
       "type": "integer",
       "traits": {
-        "smithy.api#box": {},
         "smithy.api#range": {
           "min": 0,
           "max": 100
@@ -1735,7 +3092,7 @@
           "min": 1,
           "max": 50
         },
-        "smithy.api#pattern": "[^/:|\\000-\\037]+"
+        "smithy.api#pattern": "^[^/:|\\000-\\037]+$"
       }
     },
     "com.amazonaws.migrationhub#ProgressUpdateStreamSummary": {
@@ -1796,7 +3153,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Provides identifying details of the resource being migrated so that it can be associated\n         in the Application Discovery Service repository. This association occurs asynchronously\n         after <code>PutResourceAttributes</code> returns.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Keep in mind that subsequent calls to PutResourceAttributes will override\n                  previously stored attributes. For example, if it is first called with a MAC\n                  address, but later, it is desired to <i>add</i> an IP address, it\n                  will then be required to call it with <i>both</i> the IP and MAC\n                  addresses to prevent overriding the MAC address.</p>\n               </li>\n               <li>\n                  <p>Note the instructions regarding the special use case of the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList\">\n                        <code>ResourceAttributeList</code>\n                     </a> parameter when specifying any\n                  \"VM\" related value.</p>\n               </li>\n            </ul>\n         </important>\n\n         <note>\n            <p>Because this is an asynchronous call, it will always return 200, whether an\n            association occurs or not. To confirm if an association was found based on the provided\n            details, call <code>ListDiscoveredResources</code>.</p>\n         </note>"
+        "smithy.api#documentation": "<p>Provides identifying details of the resource being migrated so that it can be associated\n         in the Application Discovery Service repository. This association occurs asynchronously\n         after <code>PutResourceAttributes</code> returns.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>Keep in mind that subsequent calls to PutResourceAttributes will override\n                  previously stored attributes. For example, if it is first called with a MAC\n                  address, but later, it is desired to <i>add</i> an IP address, it\n                  will then be required to call it with <i>both</i> the IP and MAC\n                  addresses to prevent overriding the MAC address.</p>\n               </li>\n               <li>\n                  <p>Note the instructions regarding the special use case of the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList\">\n                        <code>ResourceAttributeList</code>\n                     </a> parameter when specifying any\n                  \"VM\" related value.</p>\n               </li>\n            </ul>\n         </important>\n         <note>\n            <p>Because this is an asynchronous call, it will always return 200, whether an\n            association occurs or not. To confirm if an association was found based on the provided\n            details, call <code>ListDiscoveredResources</code>.</p>\n         </note>"
       }
     },
     "com.amazonaws.migrationhub#PutResourceAttributesRequest": {
@@ -1819,21 +3176,28 @@
         "ResourceAttributeList": {
           "target": "com.amazonaws.migrationhub#ResourceAttributeList",
           "traits": {
-            "smithy.api#documentation": "<p>Information about the resource that is being migrated. This data will be used to map the\n         task to a resource in the Application Discovery Service repository.</p>\n         <note>\n            <p>Takes the object array of <code>ResourceAttribute</code> where the <code>Type</code>\n            field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS |\n               MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH\n               | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code> where the identifying value can be a\n            string up to 256 characters.</p>\n         </note>\n         <important>\n            <ul>\n               <li>\n\n                  <p>If any \"VM\" related value is set for a <code>ResourceAttribute</code> object,\n                  it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If\n                     <code>VM_MANAGER_ID</code> is not set, then all \"VM\" fields will be discarded\n                  and \"VM\" fields will not be used for matching the migration task to a server in\n                  Application Discovery Service repository. See the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples\">Example</a> section below for a use case of specifying \"VM\" related\n                  values.</p>\n               </li>\n               <li>\n                  <p> If a server you are trying to match has multiple IP or MAC addresses, you\n                  should provide as many as you know in separate type/value pairs passed to the\n                     <code>ResourceAttributeList</code> parameter to maximize the chances of\n                  matching.</p>\n               </li>\n            </ul>\n         </important>",
+            "smithy.api#documentation": "<p>Information about the resource that is being migrated. This data will be used to map the\n         task to a resource in the Application Discovery Service repository.</p>\n         <note>\n            <p>Takes the object array of <code>ResourceAttribute</code> where the <code>Type</code>\n            field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS |\n               MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH\n               | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code> where the identifying value can be a\n            string up to 256 characters.</p>\n         </note>\n         <important>\n            <ul>\n               <li>\n                  <p>If any \"VM\" related value is set for a <code>ResourceAttribute</code> object,\n                  it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If\n                     <code>VM_MANAGER_ID</code> is not set, then all \"VM\" fields will be discarded\n                  and \"VM\" fields will not be used for matching the migration task to a server in\n                  Application Discovery Service repository. See the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples\">Example</a> section below for a use case of specifying \"VM\" related\n                  values.</p>\n               </li>\n               <li>\n                  <p> If a server you are trying to match has multiple IP or MAC addresses, you\n                  should provide as many as you know in separate type/value pairs passed to the\n                     <code>ResourceAttributeList</code> parameter to maximize the chances of\n                  matching.</p>\n               </li>\n            </ul>\n         </important>",
             "smithy.api#required": {}
           }
         },
         "DryRun": {
           "target": "com.amazonaws.migrationhub#DryRun",
           "traits": {
+            "smithy.api#default": false,
             "smithy.api#documentation": "<p>Optional boolean flag to indicate whether any effect should take place. Used to test if\n         the caller has permission to make the call.</p>"
           }
         }
+      },
+      "traits": {
+        "smithy.api#input": {}
       }
     },
     "com.amazonaws.migrationhub#PutResourceAttributesResult": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
     },
     "com.amazonaws.migrationhub#ResourceAttribute": {
       "type": "structure",
@@ -1854,7 +3218,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Attribute associated with a resource.</p>\n         <p>Note the corresponding format required per type listed below:</p>\n\n\n         <dl>\n            <dt>IPV4</dt>\n            <dd>\n               <p>\n                  <code>x.x.x.x</code>\n               </p>\n               <p>\n                  <i>where x is an integer in the range [0,255]</i>\n               </p>\n            </dd>\n            <dt>IPV6</dt>\n            <dd>\n               <p>\n                  <code>y : y : y : y : y : y : y : y</code>\n               </p>\n               <p>\n                  <i>where y is a hexadecimal between 0 and FFFF. [0,\n                  FFFF]</i>\n               </p>\n            </dd>\n            <dt>MAC_ADDRESS</dt>\n            <dd>\n               <p>\n                  <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code>\n               </p>\n            </dd>\n            <dt>FQDN</dt>\n            <dd>\n               <p>\n                  <code>^[^<>{}\\\\\\\\/?,=\\\\p{Cntrl}]{1,256}$</code>\n               </p>\n            </dd>\n         </dl>"
+        "smithy.api#documentation": "<p>Attribute associated with a resource.</p>\n         <p>Note the corresponding format required per type listed below:</p>\n         <dl>\n            <dt>IPV4</dt>\n            <dd>\n               <p>\n                  <code>x.x.x.x</code>\n               </p>\n               <p>\n                  <i>where x is an integer in the range [0,255]</i>\n               </p>\n            </dd>\n            <dt>IPV6</dt>\n            <dd>\n               <p>\n                  <code>y : y : y : y : y : y : y : y</code>\n               </p>\n               <p>\n                  <i>where y is a hexadecimal between 0 and FFFF. [0,\n                  FFFF]</i>\n               </p>\n            </dd>\n            <dt>MAC_ADDRESS</dt>\n            <dd>\n               <p>\n                  <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code>\n               </p>\n            </dd>\n            <dt>FQDN</dt>\n            <dd>\n               <p>\n                  <code>^[^<>{}\\\\\\\\/?,=\\\\p{Cntrl}]{1,256}$</code>\n               </p>\n            </dd>\n         </dl>"
       }
     },
     "com.amazonaws.migrationhub#ResourceAttributeList": {
@@ -1870,50 +3234,68 @@
       }
     },
     "com.amazonaws.migrationhub#ResourceAttributeType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IPV4_ADDRESS",
-            "name": "IPV4_ADDRESS"
-          },
-          {
-            "value": "IPV6_ADDRESS",
-            "name": "IPV6_ADDRESS"
-          },
-          {
-            "value": "MAC_ADDRESS",
-            "name": "MAC_ADDRESS"
-          },
-          {
-            "value": "FQDN",
-            "name": "FQDN"
-          },
-          {
-            "value": "VM_MANAGER_ID",
-            "name": "VM_MANAGER_ID"
-          },
-          {
-            "value": "VM_MANAGED_OBJECT_REFERENCE",
-            "name": "VM_MANAGED_OBJECT_REFERENCE"
-          },
-          {
-            "value": "VM_NAME",
-            "name": "VM_NAME"
-          },
-          {
-            "value": "VM_PATH",
-            "name": "VM_PATH"
-          },
-          {
-            "value": "BIOS_ID",
-            "name": "BIOS_ID"
-          },
-          {
-            "value": "MOTHERBOARD_SERIAL_NUMBER",
-            "name": "MOTHERBOARD_SERIAL_NUMBER"
+      "type": "enum",
+      "members": {
+        "IPV4_ADDRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IPV4_ADDRESS"
           }
-        ]
+        },
+        "IPV6_ADDRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IPV6_ADDRESS"
+          }
+        },
+        "MAC_ADDRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MAC_ADDRESS"
+          }
+        },
+        "FQDN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FQDN"
+          }
+        },
+        "VM_MANAGER_ID": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "VM_MANAGER_ID"
+          }
+        },
+        "VM_MANAGED_OBJECT_REFERENCE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "VM_MANAGED_OBJECT_REFERENCE"
+          }
+        },
+        "VM_NAME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "VM_NAME"
+          }
+        },
+        "VM_PATH": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "VM_PATH"
+          }
+        },
+        "BIOS_ID": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BIOS_ID"
+          }
+        },
+        "MOTHERBOARD_SERIAL_NUMBER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MOTHERBOARD_SERIAL_NUMBER"
+          }
+        }
       }
     },
     "com.amazonaws.migrationhub#ResourceAttributeValue": {
@@ -1949,7 +3331,10 @@
       }
     },
     "com.amazonaws.migrationhub#RetryAfterSeconds": {
-      "type": "integer"
+      "type": "integer",
+      "traits": {
+        "smithy.api#default": 0
+      }
     },
     "com.amazonaws.migrationhub#ServiceUnavailableException": {
       "type": "structure",
@@ -1963,30 +3348,34 @@
         "smithy.api#error": "server"
       }
     },
-    "com.amazonaws.migrationhub#Status": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "NOT_STARTED",
-            "name": "NOT_STARTED"
-          },
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "FAILED",
-            "name": "FAILED"
-          },
-          {
-            "value": "COMPLETED",
-            "name": "COMPLETED"
+    "com.amazonaws.migrationhub#SourceResource": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.migrationhub#SourceResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>This is the name that you want to use to identify the resource. If the resource is an\n         AWS resource, we recommend that you set this parameter to the ARN of the resource.</p>",
+            "smithy.api#required": {}
           }
-        ]
+        },
+        "Description": {
+          "target": "com.amazonaws.migrationhub#SourceResourceDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description that can be free-form text to record additional detail about the resource\n         for clarity or later reference.</p>"
+          }
+        },
+        "StatusDetail": {
+          "target": "com.amazonaws.migrationhub#StatusDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>A free-form description of the status of the resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A source resource can be a source server, a migration wave, an application, or any other\n         resource that you track.</p>"
       }
     },
-    "com.amazonaws.migrationhub#StatusDetail": {
+    "com.amazonaws.migrationhub#SourceResourceDescription": {
       "type": "string",
       "traits": {
         "smithy.api#length": {
@@ -1994,6 +3383,60 @@
           "max": 500
         },
         "smithy.api#pattern": "^.{0,500}$"
+      }
+    },
+    "com.amazonaws.migrationhub#SourceResourceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.migrationhub#SourceResource"
+      }
+    },
+    "com.amazonaws.migrationhub#SourceResourceName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1600
+        }
+      }
+    },
+    "com.amazonaws.migrationhub#Status": {
+      "type": "enum",
+      "members": {
+        "NOT_STARTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_STARTED"
+          }
+        },
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "COMPLETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.migrationhub#StatusDetail": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2500
+        },
+        "smithy.api#pattern": "^.{0,2500}$"
       }
     },
     "com.amazonaws.migrationhub#Task": {
@@ -2036,6 +3479,7 @@
         "RetryAfterSeconds": {
           "target": "com.amazonaws.migrationhub#RetryAfterSeconds",
           "traits": {
+            "smithy.api#default": 0,
             "smithy.api#documentation": "<p>The number of seconds the caller should wait before retrying.</p>",
             "smithy.api#httpHeader": "Retry-After"
           }
@@ -2071,6 +3515,17 @@
     },
     "com.amazonaws.migrationhub#UpdateDateTime": {
       "type": "timestamp"
+    },
+    "com.amazonaws.migrationhub#UpdateType": {
+      "type": "enum",
+      "members": {
+        "MigrationTaskStateUpdated": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MIGRATION_TASK_STATE_UPDATED"
+          }
+        }
+      }
     }
   }
 }

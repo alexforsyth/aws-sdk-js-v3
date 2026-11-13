@@ -1,97 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListAccountAliasesRequest, ListAccountAliasesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListAccountAliasesCommand,
-  serializeAws_queryListAccountAliasesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAccountAliasesRequest, ListAccountAliasesResponse } from "../models/models_0";
+import { ListAccountAliases$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAccountAliasesCommand}.
+ */
 export interface ListAccountAliasesCommandInput extends ListAccountAliasesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAccountAliasesCommand}.
+ */
 export interface ListAccountAliasesCommandOutput extends ListAccountAliasesResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the account alias associated with the Amazon Web Services account (Note: you can have only
- *             one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your
- *                 Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.</p>
+ *             one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias">Creating,
+ *                 deleting, and listing an Amazon Web Services account alias</a> in the
+ *                 <i>IAM User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, ListAccountAliasesCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListAccountAliasesCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListAccountAliasesRequest
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListAccountAliasesCommand(input);
  * const response = await client.send(command);
+ * // { // ListAccountAliasesResponse
+ * //   AccountAliases: [ // accountAliasListType // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAccountAliasesCommandInput - {@link ListAccountAliasesCommandInput}
+ * @returns {@link ListAccountAliasesCommandOutput}
  * @see {@link ListAccountAliasesCommandInput} for command's `input` shape.
  * @see {@link ListAccountAliasesCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To list account aliases
+ * ```javascript
+ * // The following command lists the aliases for the current account.
+ * const input = { /* empty *\/ };
+ * const command = new ListAccountAliasesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AccountAliases: [
+ *     "exmaple-corporation"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListAccountAliasesCommand extends $Command<
-  ListAccountAliasesCommandInput,
-  ListAccountAliasesCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAccountAliasesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAccountAliasesCommandInput, ListAccountAliasesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListAccountAliasesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAccountAliasesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAccountAliasesResponse.filterSensitiveLog,
+export class ListAccountAliasesCommand extends command<ListAccountAliasesCommandInput, ListAccountAliasesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAccountAliases",
+  ListAccountAliases$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccountAliasesRequest;
+      output: ListAccountAliasesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAccountAliasesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListAccountAliasesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAccountAliasesCommandOutput> {
-    return deserializeAws_queryListAccountAliasesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAccountAliasesCommandInput;
+      output: ListAccountAliasesCommandOutput;
+    };
+  };
 }

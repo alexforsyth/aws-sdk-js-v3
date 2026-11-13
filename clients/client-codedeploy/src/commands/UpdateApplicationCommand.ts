@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { UpdateApplicationInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateApplicationCommand,
-  serializeAws_json1_1UpdateApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateApplicationInput } from "../models/models_0";
+import { UpdateApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandInput extends UpdateApplicationInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface UpdateApplicationCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { CodeDeployClient, UpdateApplicationCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, UpdateApplicationCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // UpdateApplicationInput
+ *   applicationName: "STRING_VALUE",
+ *   newApplicationName: "STRING_VALUE",
+ * };
  * const command = new UpdateApplicationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateApplicationCommandInput - {@link UpdateApplicationCommandInput}
+ * @returns {@link UpdateApplicationCommandOutput}
  * @see {@link UpdateApplicationCommandInput} for command's `input` shape.
  * @see {@link UpdateApplicationCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link ApplicationAlreadyExistsException} (client fault)
+ *  <p>An application with the specified name with the user or Amazon Web Services account
+ *             already exists.</p>
+ *
+ * @throws {@link ApplicationDoesNotExistException} (client fault)
+ *  <p>The application does not exist with the user or Amazon Web Services account.</p>
+ *
+ * @throws {@link ApplicationNameRequiredException} (client fault)
+ *  <p>The minimum number of required application names was not specified.</p>
+ *
+ * @throws {@link InvalidApplicationNameException} (client fault)
+ *  <p>The application name was specified in an invalid format.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateApplicationCommand extends $Command<
-  UpdateApplicationCommandInput,
-  UpdateApplicationCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApplicationCommandInput, UpdateApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "UpdateApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApplicationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateApplicationCommand extends command<UpdateApplicationCommandInput, UpdateApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApplication",
+  UpdateApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApplicationCommandOutput> {
-    return deserializeAws_json1_1UpdateApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApplicationCommandInput;
+      output: UpdateApplicationCommandOutput;
+    };
+  };
 }

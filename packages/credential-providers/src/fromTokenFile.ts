@@ -1,13 +1,5 @@
-import { getDefaultRoleAssumerWithWebIdentity, STSClientConfig } from "@aws-sdk/client-sts";
-import {
-  fromTokenFile as _fromTokenFile,
-  FromTokenFileInit as _FromTokenFileInit,
-} from "@aws-sdk/credential-provider-web-identity";
-import { CredentialProvider } from "@aws-sdk/types";
-
-export interface FromTokenFileInit extends _FromTokenFileInit {
-  clientConfig?: STSClientConfig;
-}
+import type { FromTokenFileInit } from "@aws-sdk/credential-provider-web-identity";
+import type { AwsIdentityProperties, RuntimeConfigAwsCredentialIdentityProvider } from "@aws-sdk/types";
 
 /**
  * Creates a credential provider function that reads OIDC token from given file, then call STS.AssumeRoleWithWebIdentity
@@ -30,13 +22,18 @@ export interface FromTokenFileInit extends _FromTokenFileInit {
  *   credentials: fromTokenFile({
  *     // Optional. STS client config to make the assume role request.
  *     clientConfig: { region }
+ *     // Optional. Custom STS client middleware plugin to modify the client default behavior.
+ *     // e.g. adding custom headers.
+ *     clientPlugins: [addFooHeadersPlugin],
  *   });
  * });
  * ```
+ *
+ * @public
  */
-export const fromTokenFile = (init: FromTokenFileInit = {}): CredentialProvider =>
-  _fromTokenFile({
-    ...init,
-    roleAssumerWithWebIdentity:
-      init.roleAssumerWithWebIdentity ?? getDefaultRoleAssumerWithWebIdentity(init.clientConfig),
-  });
+export const fromTokenFile = (init: FromTokenFileInit = {}): RuntimeConfigAwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromTokenFile: _fromTokenFile } = await import("@aws-sdk/credential-provider-web-identity");
+    return _fromTokenFile({ ...init })(args);
+  };
+};

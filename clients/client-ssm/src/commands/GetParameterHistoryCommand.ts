@@ -1,101 +1,140 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetParameterHistoryRequest, GetParameterHistoryResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetParameterHistoryCommand,
-  serializeAws_json1_1GetParameterHistoryCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetParameterHistoryRequest, GetParameterHistoryResult } from "../models/models_1";
+import { GetParameterHistory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetParameterHistoryCommand}.
+ */
 export interface GetParameterHistoryCommandInput extends GetParameterHistoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetParameterHistoryCommand}.
+ */
 export interface GetParameterHistoryCommandOutput extends GetParameterHistoryResult, __MetadataBearer {}
 
 /**
  * <p>Retrieves the history of all changes to a parameter.</p>
+ *          <p>Parameter names can't contain spaces. The service removes any spaces specified for the
+ *    beginning or end of a parameter name. If the specified name for a parameter contains spaces
+ *    between characters, the request fails with a <code>ValidationException</code> error.</p>
  *          <important>
- *             <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must
- *     also update the key alias the parameter uses to reference KMS. Otherwise,
+ *             <p>If you change the KMS key alias for the KMS key used to encrypt a parameter,
+ *     then you must also update the key alias the parameter uses to reference KMS. Otherwise,
  *      <code>GetParameterHistory</code> retrieves whatever the original key alias was
  *     referencing.</p>
+ *          </important>
+ *          <important>
+ *             <p>This operation is authorized against the <code>ssm:GetParameterHistory</code> action, not
+ *     against <code>ssm:GetParameter</code>. Because parameter history includes every version of a
+ *     parameter, including the current one, a principal who is denied
+ *     <code>ssm:GetParameter</code>, <code>ssm:GetParameters</code>, and
+ *      <code>ssm:GetParametersByPath</code> but allowed <code>ssm:GetParameterHistory</code> can still
+ *     read the current value. To restrict access to a parameter value, deny every action that can
+ *     return it. For more information, see
+ *      <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html">How Parameter Store
+ *      authorizes parameter retrieval</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
  *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, GetParameterHistoryCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, GetParameterHistoryCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // GetParameterHistoryRequest
+ *   Name: "STRING_VALUE", // required
+ *   WithDecryption: true || false,
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetParameterHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // GetParameterHistoryResult
+ * //   Parameters: [ // ParameterHistoryList
+ * //     { // ParameterHistory
+ * //       Name: "STRING_VALUE",
+ * //       Type: "String" || "StringList" || "SecureString",
+ * //       KeyId: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       LastModifiedUser: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //       AllowedPattern: "STRING_VALUE",
+ * //       Version: Number("long"),
+ * //       Labels: [ // ParameterLabelList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Tier: "Standard" || "Advanced" || "Intelligent-Tiering",
+ * //       Policies: [ // ParameterPolicyList
+ * //         { // ParameterInlinePolicy
+ * //           PolicyText: "STRING_VALUE",
+ * //           PolicyType: "STRING_VALUE",
+ * //           PolicyStatus: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       DataType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetParameterHistoryCommandInput - {@link GetParameterHistoryCommandInput}
+ * @returns {@link GetParameterHistoryCommandOutput}
  * @see {@link GetParameterHistoryCommandInput} for command's `input` shape.
  * @see {@link GetParameterHistoryCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidKeyId} (client fault)
+ *  <p>The query key ID isn't valid.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link ParameterNotFound} (client fault)
+ *  <p>The parameter couldn't be found. Verify the name and try again.</p>
+ *          <note>
+ *             <p>For the <code>DeleteParameter</code> and <code>GetParameter</code> actions, if the
+ *     specified parameter doesn't exist, the <code>ParameterNotFound</code> exception is
+ *      <i>not</i> recorded in CloudTrail event logs.</p>
+ *          </note>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class GetParameterHistoryCommand extends $Command<
-  GetParameterHistoryCommandInput,
-  GetParameterHistoryCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetParameterHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetParameterHistoryCommandInput, GetParameterHistoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "GetParameterHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetParameterHistoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetParameterHistoryResult.filterSensitiveLog,
+export class GetParameterHistoryCommand extends command<GetParameterHistoryCommandInput, GetParameterHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetParameterHistory",
+  GetParameterHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetParameterHistoryRequest;
+      output: GetParameterHistoryResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetParameterHistoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetParameterHistoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetParameterHistoryCommandOutput> {
-    return deserializeAws_json1_1GetParameterHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetParameterHistoryCommandInput;
+      output: GetParameterHistoryCommandOutput;
+    };
+  };
 }

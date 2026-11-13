@@ -1,467 +1,390 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateSuiteDefinitionCommandInput,
+  type CreateSuiteDefinitionCommandOutput,
   CreateSuiteDefinitionCommand,
-  CreateSuiteDefinitionCommandInput,
-  CreateSuiteDefinitionCommandOutput,
 } from "./commands/CreateSuiteDefinitionCommand";
 import {
+  type DeleteSuiteDefinitionCommandInput,
+  type DeleteSuiteDefinitionCommandOutput,
   DeleteSuiteDefinitionCommand,
-  DeleteSuiteDefinitionCommandInput,
-  DeleteSuiteDefinitionCommandOutput,
 } from "./commands/DeleteSuiteDefinitionCommand";
 import {
-  GetSuiteDefinitionCommand,
-  GetSuiteDefinitionCommandInput,
-  GetSuiteDefinitionCommandOutput,
-} from "./commands/GetSuiteDefinitionCommand";
-import { GetSuiteRunCommand, GetSuiteRunCommandInput, GetSuiteRunCommandOutput } from "./commands/GetSuiteRunCommand";
+  type GetEndpointCommandInput,
+  type GetEndpointCommandOutput,
+  GetEndpointCommand,
+} from "./commands/GetEndpointCommand";
 import {
+  type GetSuiteDefinitionCommandInput,
+  type GetSuiteDefinitionCommandOutput,
+  GetSuiteDefinitionCommand,
+} from "./commands/GetSuiteDefinitionCommand";
+import {
+  type GetSuiteRunCommandInput,
+  type GetSuiteRunCommandOutput,
+  GetSuiteRunCommand,
+} from "./commands/GetSuiteRunCommand";
+import {
+  type GetSuiteRunReportCommandInput,
+  type GetSuiteRunReportCommandOutput,
   GetSuiteRunReportCommand,
-  GetSuiteRunReportCommandInput,
-  GetSuiteRunReportCommandOutput,
 } from "./commands/GetSuiteRunReportCommand";
 import {
+  type ListSuiteDefinitionsCommandInput,
+  type ListSuiteDefinitionsCommandOutput,
   ListSuiteDefinitionsCommand,
-  ListSuiteDefinitionsCommandInput,
-  ListSuiteDefinitionsCommandOutput,
 } from "./commands/ListSuiteDefinitionsCommand";
 import {
+  type ListSuiteRunsCommandInput,
+  type ListSuiteRunsCommandOutput,
   ListSuiteRunsCommand,
-  ListSuiteRunsCommandInput,
-  ListSuiteRunsCommandOutput,
 } from "./commands/ListSuiteRunsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type StartSuiteRunCommandInput,
+  type StartSuiteRunCommandOutput,
   StartSuiteRunCommand,
-  StartSuiteRunCommandInput,
-  StartSuiteRunCommandOutput,
 } from "./commands/StartSuiteRunCommand";
 import {
+  type StopSuiteRunCommandInput,
+  type StopSuiteRunCommandOutput,
   StopSuiteRunCommand,
-  StopSuiteRunCommandInput,
-  StopSuiteRunCommandOutput,
 } from "./commands/StopSuiteRunCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateSuiteDefinitionCommandInput,
+  type UpdateSuiteDefinitionCommandOutput,
   UpdateSuiteDefinitionCommand,
-  UpdateSuiteDefinitionCommandInput,
-  UpdateSuiteDefinitionCommandOutput,
 } from "./commands/UpdateSuiteDefinitionCommand";
 import { IotDeviceAdvisorClient } from "./IotDeviceAdvisorClient";
+import { paginateListSuiteDefinitions } from "./pagination/ListSuiteDefinitionsPaginator";
+import { paginateListSuiteRuns } from "./pagination/ListSuiteRunsPaginator";
+
+const commands = {
+  CreateSuiteDefinitionCommand,
+  DeleteSuiteDefinitionCommand,
+  GetEndpointCommand,
+  GetSuiteDefinitionCommand,
+  GetSuiteRunCommand,
+  GetSuiteRunReportCommand,
+  ListSuiteDefinitionsCommand,
+  ListSuiteRunsCommand,
+  ListTagsForResourceCommand,
+  StartSuiteRunCommand,
+  StopSuiteRunCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateSuiteDefinitionCommand,
+};
+const paginators = {
+  paginateListSuiteDefinitions,
+  paginateListSuiteRuns,
+};
 
 /**
- * <p>AWS IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT devices during device software development. Device Advisor provides pre-built tests that you can use to validate IoT devices for reliable and secure connectivity with AWS IoT Core before deploying devices to production. By using Device Advisor, you can confirm that your devices can connect to AWS IoT Core, follow security best practices and, if applicable, receive software updates from IoT Device Management. You can also download signed qualification reports to submit to the AWS Partner Network to get your device qualified for the AWS Partner Device Catalog without the need to send your device in and wait for it to be tested.</p>
+ * @public
  */
-export class IotDeviceAdvisor extends IotDeviceAdvisorClient {
+export interface IotDeviceAdvisorRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IotDeviceAdvisor {
   /**
-   * <p>Creates a Device Advisor test suite.</p>
+   * @see {@link CreateSuiteDefinitionCommand}
    */
-  public createSuiteDefinition(
+  createSuiteDefinition(
     args: CreateSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<CreateSuiteDefinitionCommandOutput>;
-  public createSuiteDefinition(
+  createSuiteDefinition(
     args: CreateSuiteDefinitionCommandInput,
     cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
   ): void;
-  public createSuiteDefinition(
+  createSuiteDefinition(
     args: CreateSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
   ): void;
-  public createSuiteDefinition(
-    args: CreateSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
-  ): Promise<CreateSuiteDefinitionCommandOutput> | void {
-    const command = new CreateSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a Device Advisor test suite.</p>
+   * @see {@link DeleteSuiteDefinitionCommand}
    */
-  public deleteSuiteDefinition(
+  deleteSuiteDefinition(
     args: DeleteSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<DeleteSuiteDefinitionCommandOutput>;
-  public deleteSuiteDefinition(
+  deleteSuiteDefinition(
     args: DeleteSuiteDefinitionCommandInput,
     cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
   ): void;
-  public deleteSuiteDefinition(
+  deleteSuiteDefinition(
     args: DeleteSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
   ): void;
-  public deleteSuiteDefinition(
-    args: DeleteSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
-  ): Promise<DeleteSuiteDefinitionCommandOutput> | void {
-    const command = new DeleteSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a Device Advisor test suite.</p>
+   * @see {@link GetEndpointCommand}
    */
-  public getSuiteDefinition(
+  getEndpoint(): Promise<GetEndpointCommandOutput>;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetEndpointCommandOutput>;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    cb: (err: any, data?: GetEndpointCommandOutput) => void
+  ): void;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSuiteDefinitionCommand}
+   */
+  getSuiteDefinition(
     args: GetSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<GetSuiteDefinitionCommandOutput>;
-  public getSuiteDefinition(
+  getSuiteDefinition(
     args: GetSuiteDefinitionCommandInput,
     cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
   ): void;
-  public getSuiteDefinition(
+  getSuiteDefinition(
     args: GetSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
   ): void;
-  public getSuiteDefinition(
-    args: GetSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
-  ): Promise<GetSuiteDefinitionCommandOutput> | void {
-    const command = new GetSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a Device Advisor test suite run.</p>
+   * @see {@link GetSuiteRunCommand}
    */
-  public getSuiteRun(args: GetSuiteRunCommandInput, options?: __HttpHandlerOptions): Promise<GetSuiteRunCommandOutput>;
-  public getSuiteRun(args: GetSuiteRunCommandInput, cb: (err: any, data?: GetSuiteRunCommandOutput) => void): void;
-  public getSuiteRun(
+  getSuiteRun(
     args: GetSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetSuiteRunCommandOutput>;
+  getSuiteRun(
+    args: GetSuiteRunCommandInput,
     cb: (err: any, data?: GetSuiteRunCommandOutput) => void
   ): void;
-  public getSuiteRun(
+  getSuiteRun(
     args: GetSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteRunCommandOutput) => void
-  ): Promise<GetSuiteRunCommandOutput> | void {
-    const command = new GetSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetSuiteRunCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a report download link for a successful Device Advisor qualifying test suite run.</p>
+   * @see {@link GetSuiteRunReportCommand}
    */
-  public getSuiteRunReport(
+  getSuiteRunReport(
     args: GetSuiteRunReportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<GetSuiteRunReportCommandOutput>;
-  public getSuiteRunReport(
+  getSuiteRunReport(
     args: GetSuiteRunReportCommandInput,
     cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
   ): void;
-  public getSuiteRunReport(
+  getSuiteRunReport(
     args: GetSuiteRunReportCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
   ): void;
-  public getSuiteRunReport(
-    args: GetSuiteRunReportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteRunReportCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteRunReportCommandOutput) => void
-  ): Promise<GetSuiteRunReportCommandOutput> | void {
-    const command = new GetSuiteRunReportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the Device Advisor test suites you have created.</p>
+   * @see {@link ListSuiteDefinitionsCommand}
    */
-  public listSuiteDefinitions(
+  listSuiteDefinitions(): Promise<ListSuiteDefinitionsCommandOutput>;
+  listSuiteDefinitions(
     args: ListSuiteDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<ListSuiteDefinitionsCommandOutput>;
-  public listSuiteDefinitions(
+  listSuiteDefinitions(
     args: ListSuiteDefinitionsCommandInput,
     cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
   ): void;
-  public listSuiteDefinitions(
+  listSuiteDefinitions(
     args: ListSuiteDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
   ): void;
-  public listSuiteDefinitions(
-    args: ListSuiteDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSuiteDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
-  ): Promise<ListSuiteDefinitionsCommandOutput> | void {
-    const command = new ListSuiteDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the runs of the specified Device Advisor test suite.
-   *             You can list all runs of the test suite, or the runs of a specific version of the test suite.</p>
+   * @see {@link ListSuiteRunsCommand}
    */
-  public listSuiteRuns(
+  listSuiteRuns(): Promise<ListSuiteRunsCommandOutput>;
+  listSuiteRuns(
     args: ListSuiteRunsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<ListSuiteRunsCommandOutput>;
-  public listSuiteRuns(
+  listSuiteRuns(
     args: ListSuiteRunsCommandInput,
     cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
   ): void;
-  public listSuiteRuns(
+  listSuiteRuns(
     args: ListSuiteRunsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
   ): void;
-  public listSuiteRuns(
-    args: ListSuiteRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSuiteRunsCommandOutput) => void),
-    cb?: (err: any, data?: ListSuiteRunsCommandOutput) => void
-  ): Promise<ListSuiteRunsCommandOutput> | void {
-    const command = new ListSuiteRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags attached to an IoT Device Advisor resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a Device Advisor test suite run.</p>
+   * @see {@link StartSuiteRunCommand}
    */
-  public startSuiteRun(
+  startSuiteRun(
     args: StartSuiteRunCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<StartSuiteRunCommandOutput>;
-  public startSuiteRun(
+  startSuiteRun(
     args: StartSuiteRunCommandInput,
     cb: (err: any, data?: StartSuiteRunCommandOutput) => void
   ): void;
-  public startSuiteRun(
+  startSuiteRun(
     args: StartSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: StartSuiteRunCommandOutput) => void
   ): void;
-  public startSuiteRun(
-    args: StartSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: StartSuiteRunCommandOutput) => void
-  ): Promise<StartSuiteRunCommandOutput> | void {
-    const command = new StartSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops a Device Advisor test suite run that is currently running.</p>
+   * @see {@link StopSuiteRunCommand}
    */
-  public stopSuiteRun(
+  stopSuiteRun(
     args: StopSuiteRunCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<StopSuiteRunCommandOutput>;
-  public stopSuiteRun(args: StopSuiteRunCommandInput, cb: (err: any, data?: StopSuiteRunCommandOutput) => void): void;
-  public stopSuiteRun(
+  stopSuiteRun(
     args: StopSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: StopSuiteRunCommandOutput) => void
   ): void;
-  public stopSuiteRun(
+  stopSuiteRun(
     args: StopSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: StopSuiteRunCommandOutput) => void
-  ): Promise<StopSuiteRunCommandOutput> | void {
-    const command = new StopSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: StopSuiteRunCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds to and modifies existing tags of an IoT Device Advisor resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from an IoT Device Advisor resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a Device Advisor test suite.</p>
+   * @see {@link UpdateSuiteDefinitionCommand}
    */
-  public updateSuiteDefinition(
+  updateSuiteDefinition(
     args: UpdateSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IotDeviceAdvisorRequestOptions
   ): Promise<UpdateSuiteDefinitionCommandOutput>;
-  public updateSuiteDefinition(
+  updateSuiteDefinition(
     args: UpdateSuiteDefinitionCommandInput,
     cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
   ): void;
-  public updateSuiteDefinition(
+  updateSuiteDefinition(
     args: UpdateSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IotDeviceAdvisorRequestOptions,
     cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
   ): void;
-  public updateSuiteDefinition(
-    args: UpdateSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
-  ): Promise<UpdateSuiteDefinitionCommandOutput> | void {
-    const command = new UpdateSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListSuiteDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSuiteDefinitionsCommandOutput}.
+   */
+  paginateListSuiteDefinitions(
+    args?: ListSuiteDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSuiteDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListSuiteRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSuiteRunsCommandOutput}.
+   */
+  paginateListSuiteRuns(
+    args?: ListSuiteRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSuiteRunsCommandOutput>;
 }
+
+/**
+ * <p>Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT
+ *             devices during device software development. Device Advisor provides pre-built tests that you
+ *             can use to validate IoT devices for reliable and secure connectivity with Amazon Web Services IoT Core
+ *             before deploying devices to production. By using Device Advisor, you can confirm that your
+ *             devices can connect to Amazon Web Services IoT Core, follow security best practices and, if applicable,
+ *             receive software updates from IoT Device Management. You can also download signed
+ *             qualification reports to submit to the Amazon Web Services Partner Network to get your device
+ *             qualified for the Amazon Web Services Partner Device Catalog without the need to send your device in
+ *             and wait for it to be tested.</p>
+ * @public
+ */
+export class IotDeviceAdvisor extends IotDeviceAdvisorClient implements IotDeviceAdvisor {}
+createAggregatedClient(commands, IotDeviceAdvisor, { paginators });

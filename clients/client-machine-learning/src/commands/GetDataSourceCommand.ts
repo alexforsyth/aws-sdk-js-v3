@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { GetDataSourceInput, GetDataSourceOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDataSourceCommand,
-  serializeAws_json1_1GetDataSourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDataSourceInput, GetDataSourceOutput } from "../models/models_0";
+import { GetDataSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDataSourceCommand}.
+ */
 export interface GetDataSourceCommandInput extends GetDataSourceInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetDataSourceCommand}.
+ */
 export interface GetDataSourceCommandOutput extends GetDataSourceOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +32,93 @@ export interface GetDataSourceCommandOutput extends GetDataSourceOutput, __Metad
  * ```javascript
  * import { MachineLearningClient, GetDataSourceCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, GetDataSourceCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // GetDataSourceInput
+ *   DataSourceId: "STRING_VALUE", // required
+ *   Verbose: true || false,
+ * };
  * const command = new GetDataSourceCommand(input);
  * const response = await client.send(command);
+ * // { // GetDataSourceOutput
+ * //   DataSourceId: "STRING_VALUE",
+ * //   DataLocationS3: "STRING_VALUE",
+ * //   DataRearrangement: "STRING_VALUE",
+ * //   CreatedByIamUser: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   LastUpdatedAt: new Date("TIMESTAMP"),
+ * //   DataSizeInBytes: Number("long"),
+ * //   NumberOfFiles: Number("long"),
+ * //   Name: "STRING_VALUE",
+ * //   Status: "PENDING" || "INPROGRESS" || "FAILED" || "COMPLETED" || "DELETED",
+ * //   LogUri: "STRING_VALUE",
+ * //   Message: "STRING_VALUE",
+ * //   RedshiftMetadata: { // RedshiftMetadata
+ * //     RedshiftDatabase: { // RedshiftDatabase
+ * //       DatabaseName: "STRING_VALUE", // required
+ * //       ClusterIdentifier: "STRING_VALUE", // required
+ * //     },
+ * //     DatabaseUserName: "STRING_VALUE",
+ * //     SelectSqlQuery: "STRING_VALUE",
+ * //   },
+ * //   RDSMetadata: { // RDSMetadata
+ * //     Database: { // RDSDatabase
+ * //       InstanceIdentifier: "STRING_VALUE", // required
+ * //       DatabaseName: "STRING_VALUE", // required
+ * //     },
+ * //     DatabaseUserName: "STRING_VALUE",
+ * //     SelectSqlQuery: "STRING_VALUE",
+ * //     ResourceRole: "STRING_VALUE",
+ * //     ServiceRole: "STRING_VALUE",
+ * //     DataPipelineId: "STRING_VALUE",
+ * //   },
+ * //   RoleARN: "STRING_VALUE",
+ * //   ComputeStatistics: true || false,
+ * //   ComputeTime: Number("long"),
+ * //   FinishedAt: new Date("TIMESTAMP"),
+ * //   StartedAt: new Date("TIMESTAMP"),
+ * //   DataSourceSchema: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDataSourceCommandInput - {@link GetDataSourceCommandInput}
+ * @returns {@link GetDataSourceCommandOutput}
  * @see {@link GetDataSourceCommandInput} for command's `input` shape.
  * @see {@link GetDataSourceCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource cannot be located.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class GetDataSourceCommand extends $Command<
-  GetDataSourceCommandInput,
-  GetDataSourceCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDataSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDataSourceCommandInput, GetDataSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "GetDataSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDataSourceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDataSourceOutput.filterSensitiveLog,
+export class GetDataSourceCommand extends command<GetDataSourceCommandInput, GetDataSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDataSource",
+  GetDataSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataSourceInput;
+      output: GetDataSourceOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDataSourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDataSourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDataSourceCommandOutput> {
-    return deserializeAws_json1_1GetDataSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDataSourceCommandInput;
+      output: GetDataSourceCommandOutput;
+    };
+  };
 }

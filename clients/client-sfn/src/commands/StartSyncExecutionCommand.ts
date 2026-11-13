@@ -1,95 +1,135 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StartSyncExecutionInput, StartSyncExecutionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0StartSyncExecutionCommand,
-  serializeAws_json1_0StartSyncExecutionCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartSyncExecutionInput, StartSyncExecutionOutput } from "../models/models_0";
+import { StartSyncExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartSyncExecutionCommand}.
+ */
 export interface StartSyncExecutionCommandInput extends StartSyncExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link StartSyncExecutionCommand}.
+ */
 export interface StartSyncExecutionCommandOutput extends StartSyncExecutionOutput, __MetadataBearer {}
 
 /**
- * <p>Starts a Synchronous Express state machine execution.</p>
+ * <p>Starts a Synchronous Express state machine execution. <code>StartSyncExecution</code>
+ * 			  is not available for <code>STANDARD</code> workflows.</p>
+ *          <note>
+ *             <p>
+ *                <code>StartSyncExecution</code> will return a <code>200 OK</code> response, even if your
+ *         execution fails, because the status code in the API response doesn't reflect function
+ *         errors. Error codes are reserved for errors that prevent your execution from running, such
+ *         as permissions errors, limit errors, or issues with your state machine code and
+ *         configuration. </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SFNClient, StartSyncExecutionCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, StartSyncExecutionCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // StartSyncExecutionInput
+ *   stateMachineArn: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   input: "STRING_VALUE",
+ *   traceHeader: "STRING_VALUE",
+ *   includedData: "ALL_DATA" || "METADATA_ONLY",
+ * };
  * const command = new StartSyncExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // StartSyncExecutionOutput
+ * //   executionArn: "STRING_VALUE", // required
+ * //   stateMachineArn: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   startDate: new Date("TIMESTAMP"), // required
+ * //   stopDate: new Date("TIMESTAMP"), // required
+ * //   status: "SUCCEEDED" || "FAILED" || "TIMED_OUT", // required
+ * //   error: "STRING_VALUE",
+ * //   cause: "STRING_VALUE",
+ * //   input: "STRING_VALUE",
+ * //   inputDetails: { // CloudWatchEventsExecutionDataDetails
+ * //     included: true || false,
+ * //   },
+ * //   output: "STRING_VALUE",
+ * //   outputDetails: {
+ * //     included: true || false,
+ * //   },
+ * //   traceHeader: "STRING_VALUE",
+ * //   billingDetails: { // BillingDetails
+ * //     billedMemoryUsedInMB: Number("long"),
+ * //     billedDurationInMilliseconds: Number("long"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartSyncExecutionCommandInput - {@link StartSyncExecutionCommandInput}
+ * @returns {@link StartSyncExecutionCommandOutput}
  * @see {@link StartSyncExecutionCommandInput} for command's `input` shape.
  * @see {@link StartSyncExecutionCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link InvalidArn} (client fault)
+ *  <p>The provided Amazon Resource Name (ARN) is not valid.</p>
+ *
+ * @throws {@link InvalidExecutionInput} (client fault)
+ *  <p>The provided JSON input data is not valid.</p>
+ *
+ * @throws {@link InvalidName} (client fault)
+ *  <p>The provided name is not valid.</p>
+ *
+ * @throws {@link KmsAccessDeniedException} (client fault)
+ *  <p>Either your KMS key policy or API caller does not have the required permissions.</p>
+ *
+ * @throws {@link KmsInvalidStateException} (client fault)
+ *  <p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>
+ *
+ * @throws {@link KmsThrottlingException} (client fault)
+ *  <p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>
+ *
+ * @throws {@link StateMachineDeleting} (client fault)
+ *  <p>The specified state machine is being deleted.</p>
+ *
+ * @throws {@link StateMachineDoesNotExist} (client fault)
+ *  <p>The specified state machine does not exist.</p>
+ *
+ * @throws {@link StateMachineTypeNotSupported} (client fault)
+ *  <p>State machine type is not supported.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class StartSyncExecutionCommand extends $Command<
-  StartSyncExecutionCommandInput,
-  StartSyncExecutionCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartSyncExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartSyncExecutionCommandInput, StartSyncExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "StartSyncExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartSyncExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StartSyncExecutionOutput.filterSensitiveLog,
+export class StartSyncExecutionCommand extends command<StartSyncExecutionCommandInput, StartSyncExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartSyncExecution",
+  StartSyncExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSyncExecutionInput;
+      output: StartSyncExecutionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartSyncExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0StartSyncExecutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartSyncExecutionCommandOutput> {
-    return deserializeAws_json1_0StartSyncExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartSyncExecutionCommandInput;
+      output: StartSyncExecutionCommandOutput;
+    };
+  };
 }

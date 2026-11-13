@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListLoggingConfigurationsRequest, ListLoggingConfigurationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListLoggingConfigurationsCommand,
-  serializeAws_json1_1ListLoggingConfigurationsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFV2ClientResolvedConfig } from "../WAFV2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLoggingConfigurationsRequest, ListLoggingConfigurationsResponse } from "../models/models_0";
+import { ListLoggingConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLoggingConfigurationsCommand}.
+ */
 export interface ListLoggingConfigurationsCommandInput extends ListLoggingConfigurationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLoggingConfigurationsCommand}.
+ */
 export interface ListLoggingConfigurationsCommandOutput extends ListLoggingConfigurationsResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,174 @@ export interface ListLoggingConfigurationsCommandOutput extends ListLoggingConfi
  * ```javascript
  * import { WAFV2Client, ListLoggingConfigurationsCommand } from "@aws-sdk/client-wafv2"; // ES Modules import
  * // const { WAFV2Client, ListLoggingConfigurationsCommand } = require("@aws-sdk/client-wafv2"); // CommonJS import
+ * // import type { WAFV2ClientConfig } from "@aws-sdk/client-wafv2";
+ * const config = {}; // type is WAFV2ClientConfig
  * const client = new WAFV2Client(config);
+ * const input = { // ListLoggingConfigurationsRequest
+ *   Scope: "CLOUDFRONT" || "REGIONAL", // required
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   LogScope: "CUSTOMER" || "SECURITY_LAKE" || "CLOUDWATCH_TELEMETRY_RULE_MANAGED",
+ * };
  * const command = new ListLoggingConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListLoggingConfigurationsResponse
+ * //   LoggingConfigurations: [ // LoggingConfigurations
+ * //     { // LoggingConfiguration
+ * //       ResourceArn: "STRING_VALUE", // required
+ * //       LogDestinationConfigs: [ // LogDestinationConfigs // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       RedactedFields: [ // RedactedFields
+ * //         { // FieldToMatch
+ * //           SingleHeader: { // SingleHeader
+ * //             Name: "STRING_VALUE", // required
+ * //           },
+ * //           SingleQueryArgument: { // SingleQueryArgument
+ * //             Name: "STRING_VALUE", // required
+ * //           },
+ * //           AllQueryArguments: {},
+ * //           UriPath: {},
+ * //           QueryString: {},
+ * //           Body: { // Body
+ * //             OversizeHandling: "CONTINUE" || "MATCH" || "NO_MATCH",
+ * //           },
+ * //           Method: {},
+ * //           JsonBody: { // JsonBody
+ * //             MatchPattern: { // JsonMatchPattern
+ * //               All: {},
+ * //               IncludedPaths: [ // JsonPointerPaths
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //             MatchScope: "ALL" || "KEY" || "VALUE", // required
+ * //             InvalidFallbackBehavior: "MATCH" || "NO_MATCH" || "EVALUATE_AS_STRING",
+ * //             OversizeHandling: "CONTINUE" || "MATCH" || "NO_MATCH",
+ * //           },
+ * //           Headers: { // Headers
+ * //             MatchPattern: { // HeaderMatchPattern
+ * //               All: {},
+ * //               IncludedHeaders: [ // HeaderNames
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               ExcludedHeaders: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //             MatchScope: "ALL" || "KEY" || "VALUE", // required
+ * //             OversizeHandling: "CONTINUE" || "MATCH" || "NO_MATCH", // required
+ * //           },
+ * //           Cookies: { // Cookies
+ * //             MatchPattern: { // CookieMatchPattern
+ * //               All: {},
+ * //               IncludedCookies: [ // CookieNames
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               ExcludedCookies: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //             MatchScope: "ALL" || "KEY" || "VALUE", // required
+ * //             OversizeHandling: "CONTINUE" || "MATCH" || "NO_MATCH", // required
+ * //           },
+ * //           HeaderOrder: { // HeaderOrder
+ * //             OversizeHandling: "CONTINUE" || "MATCH" || "NO_MATCH", // required
+ * //           },
+ * //           JA3Fingerprint: { // JA3Fingerprint
+ * //             FallbackBehavior: "MATCH" || "NO_MATCH", // required
+ * //           },
+ * //           JA4Fingerprint: { // JA4Fingerprint
+ * //             FallbackBehavior: "MATCH" || "NO_MATCH", // required
+ * //           },
+ * //           UriFragment: { // UriFragment
+ * //             FallbackBehavior: "MATCH" || "NO_MATCH",
+ * //           },
+ * //         },
+ * //       ],
+ * //       ManagedByFirewallManager: true || false,
+ * //       LoggingFilter: { // LoggingFilter
+ * //         Filters: [ // Filters // required
+ * //           { // Filter
+ * //             Behavior: "KEEP" || "DROP", // required
+ * //             Requirement: "MEETS_ALL" || "MEETS_ANY", // required
+ * //             Conditions: [ // Conditions // required
+ * //               { // Condition
+ * //                 ActionCondition: { // ActionCondition
+ * //                   Action: "ALLOW" || "BLOCK" || "COUNT" || "CAPTCHA" || "CHALLENGE" || "MONETIZE" || "EXCLUDED_AS_COUNT", // required
+ * //                 },
+ * //                 LabelNameCondition: { // LabelNameCondition
+ * //                   LabelName: "STRING_VALUE", // required
+ * //                 },
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //         DefaultBehavior: "KEEP" || "DROP", // required
+ * //       },
+ * //       LogType: "WAF_LOGS",
+ * //       LogScope: "CUSTOMER" || "SECURITY_LAKE" || "CLOUDWATCH_TELEMETRY_RULE_MANAGED",
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLoggingConfigurationsCommandInput - {@link ListLoggingConfigurationsCommandInput}
+ * @returns {@link ListLoggingConfigurationsCommandOutput}
  * @see {@link ListLoggingConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListLoggingConfigurationsCommandOutput} for command's `response` shape.
- * @see {@link WAFV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFV2ClientResolvedConfig | config} for WAFV2Client's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>Your request is valid, but WAF couldn’t perform the operation because of a system
+ *          problem. Retry your request. </p>
+ *
+ * @throws {@link WAFInvalidOperationException} (client fault)
+ *  <p>The operation isn't valid. </p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because WAF didn't recognize a parameter in the request. For
+ *          example: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified a parameter name or value that isn't valid.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your nested statement isn't valid. You might have tried to nest a statement that
+ *                can’t be nested. </p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that
+ *                isn't among the types available at <a>DefaultAction</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                with which a web ACL can't be associated.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFV2ServiceException}
+ * <p>Base exception class for all service exceptions from WAFV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListLoggingConfigurationsCommand extends $Command<
-  ListLoggingConfigurationsCommandInput,
-  ListLoggingConfigurationsCommandOutput,
-  WAFV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLoggingConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLoggingConfigurationsCommandInput, ListLoggingConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFV2Client";
-    const commandName = "ListLoggingConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLoggingConfigurationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLoggingConfigurationsResponse.filterSensitiveLog,
+export class ListLoggingConfigurationsCommand extends command<ListLoggingConfigurationsCommandInput, ListLoggingConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLoggingConfigurations",
+  ListLoggingConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLoggingConfigurationsRequest;
+      output: ListLoggingConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLoggingConfigurationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListLoggingConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListLoggingConfigurationsCommandOutput> {
-    return deserializeAws_json1_1ListLoggingConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLoggingConfigurationsCommandInput;
+      output: ListLoggingConfigurationsCommandOutput;
+    };
+  };
 }

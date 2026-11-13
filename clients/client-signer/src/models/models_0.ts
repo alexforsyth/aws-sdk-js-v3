@@ -1,294 +1,141 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  Category,
+  EncryptionAlgorithm,
+  HashAlgorithm,
+  ImageFormat,
+  SigningProfileStatus,
+  SigningStatus,
+  ValidityType,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient access to perform this action.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
 export interface AddProfilePermissionRequest {
   /**
    * <p>The human-readable name of the signing profile.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>The version of the signing profile.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
-   * <p>The AWS Signer action permitted as part of cross-account permissions.</p>
+   * <p>For cross-account signing. Grant a designated account permission to perform one or more of the following actions. Each action is associated with a specific API's operations. For more information about cross-account signing, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html">Using cross-account signing with signing profiles</a> in the <i>AWS Signer Developer Guide</i>.</p>
+   *          <p>You can designate the following actions to an account.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>signer:StartSigningJob</code>. This action isn't supported for container image workflows. For details, see <a>StartSigningJob</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>signer:SignPayload</code>. This action isn't supported for AWS Lambda workflows. For details, see <a>SignPayload</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>signer:GetSigningProfile</code>. For details, see <a>GetSigningProfile</a>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>signer:RevokeSignature</code>. For details, see <a>RevokeSignature</a>.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
   action: string | undefined;
 
   /**
-   * <p>The AWS principal receiving cross-account permissions. This may be an IAM role or
-   * 			another AWS account ID.</p>
+   * <p>The AWS principal receiving cross-account permissions. This may be an IAM role or another
+   * 			AWS account ID.</p>
+   * @public
    */
   principal: string | undefined;
 
   /**
    * <p>A unique identifier for the current profile revision.</p>
+   * @public
    */
-  revisionId?: string;
+  revisionId?: string | undefined;
 
   /**
    * <p>A unique identifier for the cross-account permission statement.</p>
+   * @public
    */
   statementId: string | undefined;
 }
 
-export namespace AddProfilePermissionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddProfilePermissionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddProfilePermissionResponse {
   /**
    * <p>A unique identifier for the current profile revision.</p>
+   * @public
    */
-  revisionId?: string;
-}
-
-export namespace AddProfilePermissionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddProfilePermissionResponse): any => ({
-    ...obj,
-  });
+  revisionId?: string | undefined;
 }
 
 /**
- * <p>The resource encountered a conflicting state.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An internal error occurred.</p>
- */
-export interface InternalServiceErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServiceErrorException";
-  $fault: "server";
-  message?: string;
-  code?: string;
-}
-
-export namespace InternalServiceErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServiceErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A specified resource could not be found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The client is making a request that exceeds service limits.</p>
- */
-export interface ServiceLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceLimitExceededException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace ServiceLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The allowed number of job-signing requests has been exceeded.</p>
- * 		       <p>This error supersedes the error <code>ThrottlingException</code>.</p>
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You signing certificate could not be validated.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request contains invalid parameters for the ARN or tags. This exception also
- * 			occurs when you call a tagging API on a cancelled signing profile.</p>
- */
-export interface BadRequestException extends __SmithyException, $MetadataBearer {
-  name: "BadRequestException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace BadRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BadRequestException): any => ({
-    ...obj,
-  });
-}
-
 export interface CancelSigningProfileRequest {
   /**
    * <p>The name of the signing profile to be canceled.</p>
+   * @public
    */
   profileName: string | undefined;
 }
 
-export namespace CancelSigningProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelSigningProfileRequest): any => ({
-    ...obj,
-  });
-}
-
-export type Category = "AWSIoT";
-
+/**
+ * @public
+ */
 export interface DescribeSigningJobRequest {
   /**
    * <p>The ID of the signing job on input.</p>
+   * @public
    */
   jobId: string | undefined;
 }
 
-export namespace DescribeSigningJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSigningJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export type EncryptionAlgorithm = "ECDSA" | "RSA";
-
-export type HashAlgorithm = "SHA1" | "SHA256";
-
 /**
  * <p>A signing configuration that overrides the default encryption or hash algorithm of a
  * 			signing job.</p>
+ * @public
  */
 export interface SigningConfigurationOverrides {
   /**
-   * <p>A specified override of the default encryption algorithm that is used in a code signing
+   * <p>A specified override of the default encryption algorithm that is used in a code-signing
    * 			job.</p>
+   * @public
    */
-  encryptionAlgorithm?: EncryptionAlgorithm | string;
+  encryptionAlgorithm?: EncryptionAlgorithm | undefined;
 
   /**
-   * <p>A specified override of the default hash algorithm that is used in a code signing
+   * <p>A specified override of the default hash algorithm that is used in a code-signing
    * 			job.</p>
+   * @public
    */
-  hashAlgorithm?: HashAlgorithm | string;
+  hashAlgorithm?: HashAlgorithm | undefined;
 }
-
-export namespace SigningConfigurationOverrides {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningConfigurationOverrides): any => ({
-    ...obj,
-  });
-}
-
-export type ImageFormat = "JSON" | "JSONDetached" | "JSONEmbedded";
 
 /**
- * <p>Any overrides that are applied to the signing configuration of a code signing
- * 			platform.</p>
+ * <p>Any overrides that are applied to the signing configuration of a signing platform.</p>
+ * @public
  */
 export interface SigningPlatformOverrides {
   /**
    * <p>A signing configuration that overrides the default encryption or hash algorithm of a
    * 			signing job.</p>
+   * @public
    */
-  signingConfiguration?: SigningConfigurationOverrides;
+  signingConfiguration?: SigningConfigurationOverrides | undefined;
 
   /**
    * <p>A signed image is a JSON object. When overriding the default signing platform
@@ -297,752 +144,732 @@ export interface SigningPlatformOverrides {
    * 				<code>JSON</code>, is reserved for future use.) With <code>JSONEmbedded</code>, the
    * 			signing image has the payload embedded in it. With <code>JSONDetached</code>, the
    * 			payload is not be embedded in the signing image.</p>
+   * @public
    */
-  signingImageFormat?: ImageFormat | string;
-}
-
-export namespace SigningPlatformOverrides {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningPlatformOverrides): any => ({
-    ...obj,
-  });
+  signingImageFormat?: ImageFormat | undefined;
 }
 
 /**
  * <p>Revocation information for a signing job.</p>
+ * @public
  */
 export interface SigningJobRevocationRecord {
   /**
    * <p>A caller-supplied reason for revocation.</p>
+   * @public
    */
-  reason?: string;
+  reason?: string | undefined;
 
   /**
    * <p>The time of revocation.</p>
+   * @public
    */
-  revokedAt?: Date;
+  revokedAt?: Date | undefined;
 
   /**
    * <p>The identity of the revoker.</p>
+   * @public
    */
-  revokedBy?: string;
-}
-
-export namespace SigningJobRevocationRecord {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningJobRevocationRecord): any => ({
-    ...obj,
-  });
+  revokedBy?: string | undefined;
 }
 
 /**
- * <p>The S3 bucket name and key where code signing saved your signed code image.</p>
+ * <p>The Amazon S3 bucket name and key where Signer saved your signed code image.</p>
+ * @public
  */
 export interface S3SignedObject {
   /**
    * <p>Name of the S3 bucket.</p>
+   * @public
    */
-  bucketName?: string;
+  bucketName?: string | undefined;
 
   /**
    * <p>Key name that uniquely identifies a signed code image in your bucket.</p>
+   * @public
    */
-  key?: string;
-}
-
-export namespace S3SignedObject {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3SignedObject): any => ({
-    ...obj,
-  });
+  key?: string | undefined;
 }
 
 /**
  * <p>Points to an <code>S3SignedObject</code> object that contains information about your
  * 			signed code image.</p>
+ * @public
  */
 export interface SignedObject {
   /**
    * <p>The <code>S3SignedObject</code>.</p>
+   * @public
    */
-  s3?: S3SignedObject;
-}
-
-export namespace SignedObject {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SignedObject): any => ({
-    ...obj,
-  });
+  s3?: S3SignedObject | undefined;
 }
 
 /**
  * <p>The ACM certificate that is used to sign your code.</p>
+ * @public
  */
 export interface SigningMaterial {
   /**
    * <p>The Amazon Resource Name (ARN) of the certificates that is used to sign your
    * 			code.</p>
+   * @public
    */
   certificateArn: string | undefined;
 }
 
-export namespace SigningMaterial {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningMaterial): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Information about the S3 bucket where you saved your unsigned code.</p>
+ * <p>Information about the Amazon S3 bucket where you saved your unsigned code.</p>
+ * @public
  */
 export interface S3Source {
   /**
    * <p>Name of the S3 bucket.</p>
+   * @public
    */
   bucketName: string | undefined;
 
   /**
    * <p>Key name of the bucket object that contains your unsigned code.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>Version of your source image in your version enabled S3 bucket.</p>
+   * @public
    */
   version: string | undefined;
-}
-
-export namespace S3Source {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Source): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>An <code>S3Source</code> object that contains information about the S3 bucket where
  * 			you saved your unsigned code.</p>
+ * @public
  */
 export interface Source {
   /**
    * <p>The <code>S3Source</code> object.</p>
+   * @public
    */
-  s3?: S3Source;
+  s3?: S3Source | undefined;
 }
 
-export namespace Source {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Source): any => ({
-    ...obj,
-  });
-}
-
-export type SigningStatus = "Failed" | "InProgress" | "Succeeded";
-
+/**
+ * @public
+ */
 export interface DescribeSigningJobResponse {
   /**
    * <p>The ID of the signing job on output.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>The object that contains the name of your S3 bucket or your raw code.</p>
+   * @public
    */
-  source?: Source;
+  source?: Source | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of your code signing certificate.</p>
+   * @public
    */
-  signingMaterial?: SigningMaterial;
+  signingMaterial?: SigningMaterial | undefined;
 
   /**
    * <p>The microcontroller platform to which your signed code image will be
    * 			distributed.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>A human-readable name for the signing platform associated with the signing job.</p>
+   * @public
    */
-  platformDisplayName?: string;
+  platformDisplayName?: string | undefined;
 
   /**
    * <p>The name of the profile that initiated the signing operation.</p>
+   * @public
    */
-  profileName?: string;
+  profileName?: string | undefined;
 
   /**
    * <p>The version of the signing profile used to initiate the signing job.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
    * <p>A list of any overrides that were applied to the signing operation.</p>
+   * @public
    */
-  overrides?: SigningPlatformOverrides;
+  overrides?: SigningPlatformOverrides | undefined;
 
   /**
    * <p>Map of user-assigned key-value pairs used during signing. These values contain any
    * 			information that you specified for use in your signing job. </p>
+   * @public
    */
-  signingParameters?: { [key: string]: string };
+  signingParameters?: Record<string, string> | undefined;
 
   /**
    * <p>Date and time that the signing job was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>Date and time that the signing job was completed.</p>
+   * @public
    */
-  completedAt?: Date;
+  completedAt?: Date | undefined;
 
   /**
    * <p>Thr expiration timestamp for the signature generated by the signing job.</p>
+   * @public
    */
-  signatureExpiresAt?: Date;
+  signatureExpiresAt?: Date | undefined;
 
   /**
    * <p>The IAM principal that requested the signing job.</p>
+   * @public
    */
-  requestedBy?: string;
+  requestedBy?: string | undefined;
 
   /**
    * <p>Status of the signing job.</p>
+   * @public
    */
-  status?: SigningStatus | string;
+  status?: SigningStatus | undefined;
 
   /**
    * <p>String value that contains the status reason.</p>
+   * @public
    */
-  statusReason?: string;
+  statusReason?: string | undefined;
 
   /**
    * <p>A revocation record if the signature generated by the signing job has been revoked.
    * 			Contains a timestamp and the ID of the IAM entity that revoked the signature.</p>
+   * @public
    */
-  revocationRecord?: SigningJobRevocationRecord;
+  revocationRecord?: SigningJobRevocationRecord | undefined;
 
   /**
-   * <p>Name of the S3 bucket where the signed code image is saved by code signing.</p>
+   * <p>Name of the S3 bucket where the signed code image is saved by AWS Signer.</p>
+   * @public
    */
-  signedObject?: SignedObject;
+  signedObject?: SignedObject | undefined;
 
   /**
    * <p>The AWS account ID of the job owner.</p>
+   * @public
    */
-  jobOwner?: string;
+  jobOwner?: string | undefined;
 
   /**
    * <p>The IAM entity that initiated the signing job.</p>
+   * @public
    */
-  jobInvoker?: string;
-}
-
-export namespace DescribeSigningJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSigningJobResponse): any => ({
-    ...obj,
-  });
+  jobInvoker?: string | undefined;
 }
 
 /**
- * <p>The name and prefix of the S3 bucket where code signing saves your signed objects.</p>
+ * <p>The name and prefix of the Amazon S3 bucket where AWS Signer saves your signed objects.</p>
+ * @public
  */
 export interface S3Destination {
   /**
    * <p>Name of the S3 bucket.</p>
+   * @public
    */
-  bucketName?: string;
+  bucketName?: string | undefined;
 
   /**
-   * <p>An Amazon S3 prefix that you can use to limit responses to those that begin with the
-   * 			specified prefix.</p>
+   * <p>An S3 prefix that you can use to limit responses to those that begin with the specified
+   * 			prefix.</p>
+   * @public
    */
-  prefix?: string;
-}
-
-export namespace S3Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Destination): any => ({
-    ...obj,
-  });
+  prefix?: string | undefined;
 }
 
 /**
  * <p>Points to an <code>S3Destination</code> object that contains information about your S3
  * 			bucket.</p>
+ * @public
  */
 export interface Destination {
   /**
    * <p>The <code>S3Destination</code> object.</p>
+   * @public
    */
-  s3?: S3Destination;
-}
-
-export namespace Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Destination): any => ({
-    ...obj,
-  });
+  s3?: S3Destination | undefined;
 }
 
 /**
- * <p>The encryption algorithm options that are available to a code signing job.</p>
+ * <p>The encryption algorithm options that are available to a code-signing job.</p>
+ * @public
  */
 export interface EncryptionAlgorithmOptions {
   /**
-   * <p>The set of accepted encryption algorithms that are allowed in a code signing job.</p>
+   * <p>The set of accepted encryption algorithms that are allowed in a code-signing job.</p>
+   * @public
    */
-  allowedValues: (EncryptionAlgorithm | string)[] | undefined;
+  allowedValues: EncryptionAlgorithm[] | undefined;
 
   /**
-   * <p>The default encryption algorithm that is used by a code signing job.</p>
+   * <p>The default encryption algorithm that is used by a code-signing job.</p>
+   * @public
    */
-  defaultValue: EncryptionAlgorithm | string | undefined;
+  defaultValue: EncryptionAlgorithm | undefined;
 }
 
-export namespace EncryptionAlgorithmOptions {
+/**
+ * @public
+ */
+export interface GetRevocationStatusRequest {
   /**
-   * @internal
+   * <p>The timestamp of the signature that validates the profile or job.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: EncryptionAlgorithmOptions): any => ({
-    ...obj,
-  });
+  signatureTimestamp: Date | undefined;
+
+  /**
+   * <p>The ID of a signing platform. </p>
+   * @public
+   */
+  platformId: string | undefined;
+
+  /**
+   * <p>The version of a signing profile.</p>
+   * @public
+   */
+  profileVersionArn: string | undefined;
+
+  /**
+   * <p>The ARN of a signing job.</p>
+   * @public
+   */
+  jobArn: string | undefined;
+
+  /**
+   * <p>A list of composite signed hashes that identify certificates.</p>
+   *          <p>A certificate identifier consists of a subject certificate TBS hash (signed by the
+   * 			parent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root
+   * 			certificates are defined as their own CA.</p>
+   *          <p>The following example shows how to calculate a hash for this parameter using OpenSSL
+   * 			commands: </p>
+   *          <p>
+   *             <code>openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs</code>
+   *          </p>
+   *          <p>
+   *             <code>openssl sha384 < childCert.tbs -binary > childCertTbsHash</code>
+   *          </p>
+   *          <p>
+   *             <code>openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs</code>
+   *          </p>
+   *          <p>
+   *             <code>openssl sha384 < parentCert.tbs -binary > parentCertTbsHash xxd -p
+   * 				childCertTbsHash > certificateHash.hex xxd -p parentCertTbsHash >>
+   * 				certificateHash.hex</code>
+   *          </p>
+   *          <p>
+   *             <code>cat certificateHash.hex | tr -d '\n'</code>
+   *          </p>
+   * @public
+   */
+  certificateHashes: string[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetRevocationStatusResponse {
+  /**
+   * <p>A list of revoked entities (including zero or more of the signing profile ARN, signing job
+   * 			ARN, and certificate hashes) supplied as input to the API.</p>
+   * @public
+   */
+  revokedEntities?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetSigningPlatformRequest {
   /**
    * <p>The ID of the target signing platform.</p>
+   * @public
    */
   platformId: string | undefined;
 }
 
-export namespace GetSigningPlatformRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSigningPlatformRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The hash algorithms that are available to a code signing job.</p>
+ * <p>The hash algorithms that are available to a code-signing job.</p>
+ * @public
  */
 export interface HashAlgorithmOptions {
   /**
-   * <p>The set of accepted hash algorithms allowed in a code signing job.</p>
+   * <p>The set of accepted hash algorithms allowed in a code-signing job.</p>
+   * @public
    */
-  allowedValues: (HashAlgorithm | string)[] | undefined;
+  allowedValues: HashAlgorithm[] | undefined;
 
   /**
-   * <p>The default hash algorithm that is used in a code signing job.</p>
+   * <p>The default hash algorithm that is used in a code-signing job.</p>
+   * @public
    */
-  defaultValue: HashAlgorithm | string | undefined;
-}
-
-export namespace HashAlgorithmOptions {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HashAlgorithmOptions): any => ({
-    ...obj,
-  });
+  defaultValue: HashAlgorithm | undefined;
 }
 
 /**
- * <p>The configuration of a code signing operation.</p>
+ * <p>The configuration of a signing operation.</p>
+ * @public
  */
 export interface SigningConfiguration {
   /**
-   * <p>The encryption algorithm options that are available for a code signing job.</p>
+   * <p>The encryption algorithm options that are available for a code-signing job.</p>
+   * @public
    */
   encryptionAlgorithmOptions: EncryptionAlgorithmOptions | undefined;
 
   /**
-   * <p>The hash algorithm options that are available for a code signing job.</p>
+   * <p>The hash algorithm options that are available for a code-signing job.</p>
+   * @public
    */
   hashAlgorithmOptions: HashAlgorithmOptions | undefined;
 }
 
-export namespace SigningConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningConfiguration): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The image format of a code signing platform or profile.</p>
+ * <p>The image format of a AWS Signer platform or profile.</p>
+ * @public
  */
 export interface SigningImageFormat {
   /**
-   * <p>The supported formats of a code signing image.</p>
+   * <p>The supported formats of a signing image.</p>
+   * @public
    */
-  supportedFormats: (ImageFormat | string)[] | undefined;
+  supportedFormats: ImageFormat[] | undefined;
 
   /**
-   * <p>The default format of a code signing image.</p>
+   * <p>The default format of a signing image.</p>
+   * @public
    */
-  defaultFormat: ImageFormat | string | undefined;
+  defaultFormat: ImageFormat | undefined;
 }
 
-export namespace SigningImageFormat {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningImageFormat): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSigningPlatformResponse {
   /**
    * <p>The ID of the target signing platform.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>The display name of the target signing platform.</p>
+   * @public
    */
-  displayName?: string;
+  displayName?: string | undefined;
 
   /**
    * <p>A list of partner entities that use the target signing platform.</p>
+   * @public
    */
-  partner?: string;
+  partner?: string | undefined;
 
   /**
    * <p>The validation template that is used by the target signing platform.</p>
+   * @public
    */
-  target?: string;
+  target?: string | undefined;
 
   /**
    * <p>The category type of the target signing platform.</p>
+   * @public
    */
-  category?: Category | string;
+  category?: Category | undefined;
 
   /**
    * <p>A list of configurations applied to the target platform at signing.</p>
+   * @public
    */
-  signingConfiguration?: SigningConfiguration;
+  signingConfiguration?: SigningConfiguration | undefined;
 
   /**
    * <p>The format of the target platform's signing image.</p>
+   * @public
    */
-  signingImageFormat?: SigningImageFormat;
+  signingImageFormat?: SigningImageFormat | undefined;
 
   /**
    * <p>The maximum size (in MB) of the payload that can be signed by the target
    * 			platform.</p>
+   * @public
    */
-  maxSizeInMB?: number;
+  maxSizeInMB?: number | undefined;
 
   /**
    * <p>A flag indicating whether signatures generated for the signing platform can be
    * 			revoked.</p>
+   * @public
    */
-  revocationSupported?: boolean;
+  revocationSupported?: boolean | undefined;
 }
 
-export namespace GetSigningPlatformResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSigningPlatformResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSigningProfileRequest {
   /**
    * <p>The name of the target signing profile.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>The AWS account ID of the profile owner.</p>
+   * @public
    */
-  profileOwner?: string;
-}
-
-export namespace GetSigningProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSigningProfileRequest): any => ({
-    ...obj,
-  });
+  profileOwner?: string | undefined;
 }
 
 /**
  * <p>Revocation information for a signing profile.</p>
+ * @public
  */
 export interface SigningProfileRevocationRecord {
   /**
    * <p>The time when revocation becomes effective.</p>
+   * @public
    */
-  revocationEffectiveFrom?: Date;
+  revocationEffectiveFrom?: Date | undefined;
 
   /**
    * <p>The time when the signing profile was revoked.</p>
+   * @public
    */
-  revokedAt?: Date;
+  revokedAt?: Date | undefined;
 
   /**
    * <p>The identity of the revoker.</p>
+   * @public
    */
-  revokedBy?: string;
+  revokedBy?: string | undefined;
 }
-
-export namespace SigningProfileRevocationRecord {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningProfileRevocationRecord): any => ({
-    ...obj,
-  });
-}
-
-export type ValidityType = "DAYS" | "MONTHS" | "YEARS";
 
 /**
  * <p>The validity period for a signing job.</p>
+ * @public
  */
 export interface SignatureValidityPeriod {
   /**
    * <p>The numerical value of the time unit for signature validity.</p>
+   * @public
    */
-  value?: number;
+  value?: number | undefined;
 
   /**
-   * <p>The time unit for signature
-   * 			validity.</p>
+   * <p>The time unit for signature validity.</p>
+   * @public
    */
-  type?: ValidityType | string;
+  type?: ValidityType | undefined;
 }
 
-export namespace SignatureValidityPeriod {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SignatureValidityPeriod): any => ({
-    ...obj,
-  });
-}
-
-export type SigningProfileStatus = "Active" | "Canceled" | "Revoked";
-
+/**
+ * @public
+ */
 export interface GetSigningProfileResponse {
   /**
    * <p>The name of the target signing profile.</p>
+   * @public
    */
-  profileName?: string;
+  profileName?: string | undefined;
 
   /**
    * <p>The current version of the signing profile.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
    * <p>The signing profile ARN, including the profile version.</p>
+   * @public
    */
-  profileVersionArn?: string;
+  profileVersionArn?: string | undefined;
 
   /**
    * <p>Revocation information for a signing profile.</p>
+   * @public
    */
-  revocationRecord?: SigningProfileRevocationRecord;
+  revocationRecord?: SigningProfileRevocationRecord | undefined;
 
   /**
    * <p>The ARN of the certificate that the target profile uses for signing operations.</p>
+   * @public
    */
-  signingMaterial?: SigningMaterial;
+  signingMaterial?: SigningMaterial | undefined;
 
   /**
    * <p>The ID of the platform that is used by the target signing profile.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>A human-readable name for the signing platform associated with the signing
    * 			profile.</p>
+   * @public
    */
-  platformDisplayName?: string;
+  platformDisplayName?: string | undefined;
 
   /**
    * <p>The validity period for a signing job.</p>
+   * @public
    */
-  signatureValidityPeriod?: SignatureValidityPeriod;
+  signatureValidityPeriod?: SignatureValidityPeriod | undefined;
 
   /**
    * <p>A list of overrides applied by the target signing profile for signing
    * 			operations.</p>
+   * @public
    */
-  overrides?: SigningPlatformOverrides;
+  overrides?: SigningPlatformOverrides | undefined;
 
   /**
    * <p>A map of key-value pairs for signing operations that is attached to the target signing
    * 			profile.</p>
+   * @public
    */
-  signingParameters?: { [key: string]: string };
+  signingParameters?: Record<string, string> | undefined;
 
   /**
    * <p>The status of the target signing profile.</p>
+   * @public
    */
-  status?: SigningProfileStatus | string;
+  status?: SigningProfileStatus | undefined;
 
   /**
    * <p>Reason for the status of the target signing profile.</p>
+   * @public
    */
-  statusReason?: string;
+  statusReason?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the signing profile.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>A list of tags associated with the signing profile.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetSigningProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSigningProfileResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListProfilePermissionsRequest {
   /**
    * <p>Name of the signing profile containing the cross-account permissions.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>String for specifying the next set of paginated results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListProfilePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfilePermissionsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>A cross-account permission for a signing profile.</p>
+ * @public
  */
 export interface Permission {
   /**
    * <p>An AWS Signer action permitted as part of cross-account permissions.</p>
+   * @public
    */
-  action?: string;
+  action?: string | undefined;
 
   /**
    * <p>The AWS principal that has been granted a cross-account permission.</p>
+   * @public
    */
-  principal?: string;
+  principal?: string | undefined;
 
   /**
    * <p>A unique identifier for a cross-account permission statement.</p>
+   * @public
    */
-  statementId?: string;
+  statementId?: string | undefined;
 
   /**
    * <p>The signing profile version that a permission applies to.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 }
 
-export namespace Permission {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Permission): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListProfilePermissionsResponse {
   /**
    * <p>The identifier for the current revision of profile permissions.</p>
+   * @public
    */
-  revisionId?: string;
+  revisionId?: string | undefined;
 
   /**
    * <p>Total size of the policy associated with the Signing Profile in bytes.</p>
+   * @public
    */
-  policySizeBytes?: number;
+  policySizeBytes?: number | undefined;
 
   /**
    * <p>List of permissions associated with the Signing Profile.</p>
+   * @public
    */
-  permissions?: Permission[];
+  permissions?: Permission[] | undefined;
 
   /**
    * <p>String for specifying the next set of paginated results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListProfilePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfilePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningJobsRequest {
   /**
    * <p>A status value with which to filter your results.</p>
+   * @public
    */
-  status?: SigningStatus | string;
+  status?: SigningStatus | undefined;
 
   /**
    * <p>The ID of microcontroller platform that you specified for the distribution of your
    * 			code image.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>The IAM principal that requested the signing job.</p>
+   * @public
    */
-  requestedBy?: string;
+  requestedBy?: string | undefined;
 
   /**
    * <p>Specifies the maximum number of items to return in the response. Use this parameter
@@ -1050,482 +877,453 @@ export interface ListSigningJobsRequest {
    * 				<code>nextToken</code> element is set in the response. Use the
    * 				<code>nextToken</code> value in a subsequent request to retrieve additional items.
    * 		</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>String for specifying the next set of paginated results to return. After you receive a
    * 			response with truncated results, use this parameter in a subsequent request. Set it to
    * 			the value of <code>nextToken</code> from the response that you just received.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>Filters results to return only signing jobs with revoked signatures.</p>
+   * @public
    */
-  isRevoked?: boolean;
+  isRevoked?: boolean | undefined;
 
   /**
    * <p>Filters results to return only signing jobs with signatures expiring before a
    * 			specified timestamp.</p>
+   * @public
    */
-  signatureExpiresBefore?: Date;
+  signatureExpiresBefore?: Date | undefined;
 
   /**
    * <p>Filters results to return only signing jobs with signatures expiring after a specified
    * 			timestamp.</p>
+   * @public
    */
-  signatureExpiresAfter?: Date;
+  signatureExpiresAfter?: Date | undefined;
 
   /**
    * <p>Filters results to return only signing jobs initiated by a specified IAM
    * 			entity.</p>
+   * @public
    */
-  jobInvoker?: string;
-}
-
-export namespace ListSigningJobsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningJobsRequest): any => ({
-    ...obj,
-  });
+  jobInvoker?: string | undefined;
 }
 
 /**
  * <p>Contains information about a signing job.</p>
+ * @public
  */
 export interface SigningJob {
   /**
    * <p>The ID of the signing job.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>A <code>Source</code> that contains information about a signing job's code image
    * 			source.</p>
+   * @public
    */
-  source?: Source;
+  source?: Source | undefined;
 
   /**
    * <p>A <code>SignedObject</code> structure that contains information about a signing job's
    * 			signed code image.</p>
+   * @public
    */
-  signedObject?: SignedObject;
+  signedObject?: SignedObject | undefined;
 
   /**
    * <p>A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of
    * 			the certificate used for the signing job.</p>
+   * @public
    */
-  signingMaterial?: SigningMaterial;
+  signingMaterial?: SigningMaterial | undefined;
 
   /**
    * <p>The date and time that the signing job was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>The status of the signing job.</p>
+   * @public
    */
-  status?: SigningStatus | string;
+  status?: SigningStatus | undefined;
 
   /**
    * <p>Indicates whether the signing job is revoked.</p>
+   * @public
    */
-  isRevoked?: boolean;
+  isRevoked?: boolean | undefined;
 
   /**
    * <p>The name of the signing profile that created a signing job.</p>
+   * @public
    */
-  profileName?: string;
+  profileName?: string | undefined;
 
   /**
    * <p>The version of the signing profile that created a signing job.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
    * <p>The unique identifier for a signing platform.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>The name of a signing platform.</p>
+   * @public
    */
-  platformDisplayName?: string;
+  platformDisplayName?: string | undefined;
 
   /**
    * <p>The time when the signature of a signing job expires.</p>
+   * @public
    */
-  signatureExpiresAt?: Date;
+  signatureExpiresAt?: Date | undefined;
 
   /**
    * <p>The AWS account ID of the job owner.</p>
+   * @public
    */
-  jobOwner?: string;
+  jobOwner?: string | undefined;
 
   /**
    * <p>The AWS account ID of the job invoker.</p>
+   * @public
    */
-  jobInvoker?: string;
+  jobInvoker?: string | undefined;
 }
 
-export namespace SigningJob {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningJob): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningJobsResponse {
   /**
    * <p>A list of your signing jobs.</p>
+   * @public
    */
-  jobs?: SigningJob[];
+  jobs?: SigningJob[] | undefined;
 
   /**
    * <p>String for specifying the next set of paginated results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListSigningJobsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningJobsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningPlatformsRequest {
   /**
    * <p>The category type of a signing platform.</p>
+   * @public
    */
-  category?: string;
+  category?: string | undefined;
 
   /**
    * <p>Any partner entities connected to a signing platform.</p>
+   * @public
    */
-  partner?: string;
+  partner?: string | undefined;
 
   /**
    * <p>The validation template that is used by the target signing platform.</p>
+   * @public
    */
-  target?: string;
+  target?: string | undefined;
 
   /**
    * <p>The maximum number of results to be returned by this operation.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Value for specifying the next set of paginated results to return. After you receive a
    * 			response with truncated results, use this parameter in a subsequent request. Set it to
    * 			the value of <code>nextToken</code> from the response that you just received.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListSigningPlatformsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningPlatformsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Contains information about the signing configurations and parameters that are used to
- * 			perform a code signing job.</p>
+ * 			perform a code-signing job.</p>
+ * @public
  */
 export interface SigningPlatform {
   /**
-   * <p>The ID of a code signing; platform.</p>
+   * <p>The ID of a signing platform.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
-   * <p>The display name of a code signing platform.</p>
+   * <p>The display name of a signing platform.</p>
+   * @public
    */
-  displayName?: string;
+  displayName?: string | undefined;
 
   /**
-   * <p>Any partner entities linked to a code signing platform.</p>
+   * <p>Any partner entities linked to a signing platform.</p>
+   * @public
    */
-  partner?: string;
+  partner?: string | undefined;
 
   /**
-   * <p>The types of targets that can be signed by a code signing platform.</p>
+   * <p>The types of targets that can be signed by a signing platform.</p>
+   * @public
    */
-  target?: string;
+  target?: string | undefined;
 
   /**
-   * <p>The category of a code signing platform.</p>
+   * <p>The category of a signing platform.</p>
+   * @public
    */
-  category?: Category | string;
+  category?: Category | undefined;
 
   /**
-   * <p>The configuration of a code signing platform. This includes the designated hash algorithm
-   * 			and encryption algorithm of a signing platform.</p>
+   * <p>The configuration of a signing platform. This includes the designated hash algorithm and
+   * 			encryption algorithm of a signing platform.</p>
+   * @public
    */
-  signingConfiguration?: SigningConfiguration;
+  signingConfiguration?: SigningConfiguration | undefined;
 
   /**
-   * <p>The image format of a code signing platform or profile.</p>
+   * <p>The image format of a AWS Signer platform or profile.</p>
+   * @public
    */
-  signingImageFormat?: SigningImageFormat;
+  signingImageFormat?: SigningImageFormat | undefined;
 
   /**
-   * <p>The maximum size (in MB) of code that can be signed by a code signing platform.</p>
+   * <p>The maximum size (in MB) of code that can be signed by a signing platform.</p>
+   * @public
    */
-  maxSizeInMB?: number;
+  maxSizeInMB?: number | undefined;
 
   /**
    * <p>Indicates whether revocation is supported for the platform.</p>
+   * @public
    */
-  revocationSupported?: boolean;
+  revocationSupported?: boolean | undefined;
 }
 
-export namespace SigningPlatform {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningPlatform): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningPlatformsResponse {
   /**
    * <p>A list of all platforms that match the request parameters.</p>
+   * @public
    */
-  platforms?: SigningPlatform[];
+  platforms?: SigningPlatform[] | undefined;
 
   /**
    * <p>Value for specifying the next set of paginated results to return.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListSigningPlatformsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningPlatformsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningProfilesRequest {
   /**
    * <p>Designates whether to include profiles with the status of
    * 			<code>CANCELED</code>.</p>
+   * @public
    */
-  includeCanceled?: boolean;
+  includeCanceled?: boolean | undefined;
 
   /**
    * <p>The maximum number of profiles to be returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Value for specifying the next set of paginated results to return. After you receive a
    * 			response with truncated results, use this parameter in a subsequent request. Set it to
    * 			the value of <code>nextToken</code> from the response that you just received.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>Filters results to return only signing jobs initiated for a specified signing
    * 			platform.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>Filters results to return only signing jobs with statuses in the specified
    * 			list.</p>
+   * @public
    */
-  statuses?: (SigningProfileStatus | string)[];
-}
-
-export namespace ListSigningProfilesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningProfilesRequest): any => ({
-    ...obj,
-  });
+  statuses?: SigningProfileStatus[] | undefined;
 }
 
 /**
- * <p>Contains information about the ACM certificates and code signing configuration parameters
- * 			that can be used by a given code signing user.</p>
+ * <p>Contains information about the ACM certificates and signing configuration parameters that
+ * 			can be used by a given code signing user.</p>
+ * @public
  */
 export interface SigningProfile {
   /**
    * <p>The name of the signing profile.</p>
+   * @public
    */
-  profileName?: string;
+  profileName?: string | undefined;
 
   /**
    * <p>The version of a signing profile.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
    * <p>The ARN of a signing profile, including the profile version.</p>
+   * @public
    */
-  profileVersionArn?: string;
+  profileVersionArn?: string | undefined;
 
   /**
    * <p>The ACM certificate that is available for use by a signing profile.</p>
+   * @public
    */
-  signingMaterial?: SigningMaterial;
+  signingMaterial?: SigningMaterial | undefined;
 
   /**
    * <p>The validity period for a signing job created using this signing profile.</p>
+   * @public
    */
-  signatureValidityPeriod?: SignatureValidityPeriod;
+  signatureValidityPeriod?: SignatureValidityPeriod | undefined;
 
   /**
    * <p>The ID of a platform that is available for use by a signing profile.</p>
+   * @public
    */
-  platformId?: string;
+  platformId?: string | undefined;
 
   /**
    * <p>The name of the signing platform.</p>
+   * @public
    */
-  platformDisplayName?: string;
+  platformDisplayName?: string | undefined;
 
   /**
-   * <p>The parameters that are available for use by a code signing user.</p>
+   * <p>The parameters that are available for use by a Signer user.</p>
+   * @public
    */
-  signingParameters?: { [key: string]: string };
+  signingParameters?: Record<string, string> | undefined;
 
   /**
-   * <p>The status of a code signing profile.</p>
+   * <p>The status of a signing profile.</p>
+   * @public
    */
-  status?: SigningProfileStatus | string;
+  status?: SigningProfileStatus | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the signing profile.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>A list of tags associated with the signing profile.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace SigningProfile {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningProfile): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSigningProfilesResponse {
   /**
    * <p>A list of profiles that are available in the AWS account. This includes profiles with
    * 			the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set
    * 			to <code>true</code>.</p>
+   * @public
    */
-  profiles?: SigningProfile[];
+  profiles?: SigningProfile[] | undefined;
 
   /**
    * <p>Value for specifying the next set of paginated results to return.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListSigningProfilesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSigningProfilesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) for the signing profile.</p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>A list of tags associated with the signing profile.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>The signing profile was not found.</p>
+ * @public
  */
-export interface NotFoundException extends __SmithyException, $MetadataBearer {
-  name: "NotFoundException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace NotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface PutSigningProfileRequest {
   /**
    * <p>The name of the signing profile to be created.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>The AWS Certificate Manager certificate that will be used to sign code with the new signing
    * 			profile.</p>
+   * @public
    */
-  signingMaterial?: SigningMaterial;
+  signingMaterial?: SigningMaterial | undefined;
 
   /**
    * <p>The default validity period override for any signature generated using this signing
    * 			profile. If unspecified, the default is 135 months.</p>
+   * @public
    */
-  signatureValidityPeriod?: SignatureValidityPeriod;
+  signatureValidityPeriod?: SignatureValidityPeriod | undefined;
 
   /**
    * <p>The ID of the signing platform to be created.</p>
+   * @public
    */
   platformId: string | undefined;
 
@@ -1533,137 +1331,123 @@ export interface PutSigningProfileRequest {
    * <p>A subfield of <code>platform</code>. This specifies any different configuration
    * 			options that you want to apply to the chosen platform (such as a different
    * 				<code>hash-algorithm</code> or <code>signing-algorithm</code>).</p>
+   * @public
    */
-  overrides?: SigningPlatformOverrides;
+  overrides?: SigningPlatformOverrides | undefined;
 
   /**
    * <p>Map of key-value pairs for signing. These can include any information that you want to
    * 			use during signing.</p>
+   * @public
    */
-  signingParameters?: { [key: string]: string };
+  signingParameters?: Record<string, string> | undefined;
 
   /**
    * <p>Tags to be associated with the signing profile that is being created.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace PutSigningProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutSigningProfileRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutSigningProfileResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the signing profile created.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>The version of the signing profile being created.</p>
+   * @public
    */
-  profileVersion?: string;
+  profileVersion?: string | undefined;
 
   /**
    * <p>The signing profile ARN, including the profile version.</p>
+   * @public
    */
-  profileVersionArn?: string;
+  profileVersionArn?: string | undefined;
 }
 
-export namespace PutSigningProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutSigningProfileResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveProfilePermissionRequest {
   /**
    * <p>A human-readable name for the signing profile with permissions to be removed.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>An identifier for the current revision of the signing profile permissions.</p>
+   * @public
    */
   revisionId: string | undefined;
 
   /**
    * <p>A unique identifier for the cross-account permissions statement.</p>
+   * @public
    */
   statementId: string | undefined;
 }
 
-export namespace RemoveProfilePermissionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveProfilePermissionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveProfilePermissionResponse {
   /**
    * <p>An identifier for the current revision of the profile permissions.</p>
+   * @public
    */
-  revisionId?: string;
+  revisionId?: string | undefined;
 }
 
-export namespace RemoveProfilePermissionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveProfilePermissionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RevokeSignatureRequest {
   /**
    * <p>ID of the signing job to be revoked.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>AWS account ID of the job owner.</p>
+   * @public
    */
-  jobOwner?: string;
+  jobOwner?: string | undefined;
 
   /**
    * <p>The reason for revoking the signing job.</p>
+   * @public
    */
   reason: string | undefined;
 }
 
-export namespace RevokeSignatureRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RevokeSignatureRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RevokeSigningProfileRequest {
   /**
    * <p>The name of the signing profile to be revoked.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>The version of the signing profile to be revoked.</p>
+   * @public
    */
   profileVersion: string | undefined;
 
   /**
    * <p>The reason for revoking a signing profile.</p>
+   * @public
    */
   reason: string | undefined;
 
@@ -1671,161 +1455,165 @@ export interface RevokeSigningProfileRequest {
    * <p>A timestamp for when revocation of a Signing Profile should become effective.
    * 			Signatures generated using the signing profile after this timestamp are not
    * 			trusted.</p>
+   * @public
    */
   effectiveTime: Date | undefined;
 }
 
-export namespace RevokeSigningProfileRequest {
+/**
+ * @public
+ */
+export interface SignPayloadRequest {
   /**
-   * @internal
+   * <p>The name of the signing profile.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RevokeSigningProfileRequest): any => ({
-    ...obj,
-  });
+  profileName: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the profile owner.</p>
+   * @public
+   */
+  profileOwner?: string | undefined;
+
+  /**
+   * <p>Specifies the object digest (hash) to sign.</p>
+   * @public
+   */
+  payload: Uint8Array | undefined;
+
+  /**
+   * <p>Payload content type. The single valid type is
+   * 				<code>application/vnd.cncf.notary.payload.v1+json</code>.</p>
+   * @public
+   */
+  payloadFormat: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface SignPayloadResponse {
+  /**
+   * <p>Unique identifier of the signing job.</p>
+   * @public
+   */
+  jobId?: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the job owner.</p>
+   * @public
+   */
+  jobOwner?: string | undefined;
+
+  /**
+   * <p>Information including the signing profile ARN and the signing job ID.</p>
+   * @public
+   */
+  metadata?: Record<string, string> | undefined;
+
+  /**
+   * <p>A cryptographic signature.</p>
+   * @public
+   */
+  signature?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
 export interface StartSigningJobRequest {
   /**
    * <p>The S3 bucket that contains the object to sign or a BLOB that contains your raw
    * 			code.</p>
+   * @public
    */
   source: Source | undefined;
 
   /**
    * <p>The S3 bucket in which to save your signed object. The destination contains the name
    * 			of your bucket and an optional prefix.</p>
+   * @public
    */
   destination: Destination | undefined;
 
   /**
    * <p>The name of the signing profile.</p>
+   * @public
    */
   profileName: string | undefined;
 
   /**
    * <p>String that identifies the signing request. All calls after the first that use this
    * 			token return the same response as the first call.</p>
+   * @public
    */
-  clientRequestToken?: string;
+  clientRequestToken?: string | undefined;
 
   /**
    * <p>The AWS account ID of the signing profile owner.</p>
+   * @public
    */
-  profileOwner?: string;
-}
-
-export namespace StartSigningJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSigningJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface StartSigningJobResponse {
-  /**
-   * <p>The ID of your signing job.</p>
-   */
-  jobId?: string;
-
-  /**
-   * <p>The AWS account ID of the signing job owner.</p>
-   */
-  jobOwner?: string;
-}
-
-export namespace StartSigningJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSigningJobResponse): any => ({
-    ...obj,
-  });
+  profileOwner?: string | undefined;
 }
 
 /**
- * @deprecated
- *
- * <p>The request was denied due to request throttling.</p>
- *         <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>
+ * @public
  */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  message?: string;
-  code?: string;
-}
-
-export namespace ThrottlingException {
+export interface StartSigningJobResponse {
   /**
-   * @internal
+   * <p>The ID of your signing job.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
+  jobId?: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the signing job owner.</p>
+   * @public
+   */
+  jobOwner?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) for the signing profile.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>One or more tags to be associated with the signing profile.</p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
+  tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) for the signing profile.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>A list of tag keys to be removed from the signing profile.</p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
-
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}

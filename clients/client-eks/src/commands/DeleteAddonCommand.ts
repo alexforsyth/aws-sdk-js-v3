@@ -1,97 +1,137 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { DeleteAddonRequest, DeleteAddonResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAddonCommand,
-  serializeAws_restJson1DeleteAddonCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAddonRequest, DeleteAddonResponse } from "../models/models_0";
+import { DeleteAddon$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAddonCommand}.
+ */
 export interface DeleteAddonCommandInput extends DeleteAddonRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAddonCommand}.
+ */
 export interface DeleteAddonCommandOutput extends DeleteAddonResponse, __MetadataBearer {}
 
 /**
- * <p>Delete an Amazon EKS add-on.</p>
- *         <p>When you remove the add-on, it will also be deleted from the cluster. You can always
- *             manually start an add-on on the cluster using the Kubernetes API.</p>
+ * <p>Deletes an Amazon EKS add-on.</p>
+ *          <p>When you remove an add-on, it's deleted from the cluster. You can always manually
+ *             start an add-on on the cluster using the Kubernetes API.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, DeleteAddonCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, DeleteAddonCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // DeleteAddonRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   addonName: "STRING_VALUE", // required
+ *   preserve: true || false,
+ * };
  * const command = new DeleteAddonCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteAddonResponse
+ * //   addon: { // Addon
+ * //     addonName: "STRING_VALUE",
+ * //     clusterName: "STRING_VALUE",
+ * //     status: "CREATING" || "ACTIVE" || "CREATE_FAILED" || "UPDATING" || "DELETING" || "DELETE_FAILED" || "DEGRADED" || "UPDATE_FAILED",
+ * //     addonVersion: "STRING_VALUE",
+ * //     health: { // AddonHealth
+ * //       issues: [ // AddonIssueList
+ * //         { // AddonIssue
+ * //           code: "AccessDenied" || "InternalFailure" || "ClusterUnreachable" || "InsufficientNumberOfReplicas" || "ConfigurationConflict" || "AdmissionRequestDenied" || "UnsupportedAddonModification" || "K8sResourceNotFound" || "AddonSubscriptionNeeded" || "AddonPermissionFailure",
+ * //           message: "STRING_VALUE",
+ * //           resourceIds: [ // StringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     addonArn: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     modifiedAt: new Date("TIMESTAMP"),
+ * //     serviceAccountRoleArn: "STRING_VALUE",
+ * //     tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     publisher: "STRING_VALUE",
+ * //     owner: "STRING_VALUE",
+ * //     marketplaceInformation: { // MarketplaceInformation
+ * //       productId: "STRING_VALUE",
+ * //       productUrl: "STRING_VALUE",
+ * //     },
+ * //     configurationValues: "STRING_VALUE",
+ * //     podIdentityAssociations: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     namespaceConfig: { // AddonNamespaceConfigResponse
+ * //       namespace: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteAddonCommandInput - {@link DeleteAddonCommandInput}
+ * @returns {@link DeleteAddonCommandOutput}
  * @see {@link DeleteAddonCommandInput} for command's `input` shape.
  * @see {@link DeleteAddonCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid given the state of the cluster. Check the state of the cluster
+ *             and the associated operations.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAddonCommand extends $Command<
-  DeleteAddonCommandInput,
-  DeleteAddonCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAddonCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAddonCommandInput, DeleteAddonCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "DeleteAddonCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAddonRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAddonResponse.filterSensitiveLog,
+export class DeleteAddonCommand extends command<DeleteAddonCommandInput, DeleteAddonCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAddon",
+  DeleteAddon$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAddonRequest;
+      output: DeleteAddonResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAddonCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAddonCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAddonCommandOutput> {
-    return deserializeAws_restJson1DeleteAddonCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAddonCommandInput;
+      output: DeleteAddonCommandOutput;
+    };
+  };
 }

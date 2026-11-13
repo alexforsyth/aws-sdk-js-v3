@@ -1,99 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateGroupRequest, CreateGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateGroupCommand,
-  serializeAws_restJson1CreateGroupCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGroupRequest, CreateGroupResponse } from "../models/models_3";
+import { CreateGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGroupCommand}.
+ */
 export interface CreateGroupCommandInput extends CreateGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGroupCommand}.
+ */
 export interface CreateGroupCommandOutput extends CreateGroupResponse, __MetadataBearer {}
 
 /**
- * <p>Creates an Amazon QuickSight group.</p>
- * 		       <p>The permissions resource is
- * 					<code>arn:aws:quicksight:us-east-1:<i><relevant-aws-account-id></i>:group/default/<i><group-name></i>
+ * <p>Use the <code>CreateGroup</code> operation to create a group in   Quick Sight. You can create up to 10,000 groups in a namespace. If you want to create more than 10,000 groups in a namespace, contact Amazon Web Services Support.</p>
+ *          <p>The permissions resource is
+ * 					<code>arn:aws:quicksight:<your-region>:<i><relevant-aws-account-id></i>:group/default/<i><group-name></i>
  *             </code>.</p>
- * 		       <p>The response is a group object.</p>
+ *          <p>The response is a group object.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { QuickSightClient, CreateGroupCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, CreateGroupCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // CreateGroupRequest
+ *   GroupName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   Namespace: "STRING_VALUE", // required
+ * };
  * const command = new CreateGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGroupResponse
+ * //   Group: { // Group
+ * //     Arn: "STRING_VALUE",
+ * //     GroupName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     PrincipalId: "STRING_VALUE",
+ * //   },
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param CreateGroupCommandInput - {@link CreateGroupCommandInput}
+ * @returns {@link CreateGroupCommandOutput}
  * @see {@link CreateGroupCommandInput} for command's `input` shape.
  * @see {@link CreateGroupCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit is exceeded.</p>
+ *
+ * @throws {@link PreconditionNotMetException} (client fault)
+ *  <p>One or more preconditions aren't met.</p>
+ *
+ * @throws {@link ResourceExistsException} (client fault)
+ *  <p>The resource specified already exists. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (server fault)
+ *  <p>This resource is currently unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGroupCommand extends $Command<
-  CreateGroupCommandInput,
-  CreateGroupCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGroupCommandInput, CreateGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "CreateGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGroupResponse.filterSensitiveLog,
+export class CreateGroupCommand extends command<CreateGroupCommandInput, CreateGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGroup",
+  CreateGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGroupRequest;
+      output: CreateGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGroupCommandOutput> {
-    return deserializeAws_restJson1CreateGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGroupCommandInput;
+      output: CreateGroupCommandOutput;
+    };
+  };
 }

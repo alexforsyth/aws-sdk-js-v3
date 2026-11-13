@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListRouterOutputsCommand,
+  ListRouterOutputsCommandInput,
+  ListRouterOutputsCommandOutput,
+} from "../commands/ListRouterOutputsCommand";
+import { MediaConnectClient } from "../MediaConnectClient";
+import type { MediaConnectPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListRouterOutputs: (
+  config: MediaConnectPaginationConfiguration,
+  input: ListRouterOutputsCommandInput,
+  ...rest: any[]
+) => Paginator<ListRouterOutputsCommandOutput> = createPaginator<
+  MediaConnectPaginationConfiguration,
+  ListRouterOutputsCommandInput,
+  ListRouterOutputsCommandOutput
+>(MediaConnectClient, ListRouterOutputsCommand, "NextToken", "NextToken", "MaxResults");

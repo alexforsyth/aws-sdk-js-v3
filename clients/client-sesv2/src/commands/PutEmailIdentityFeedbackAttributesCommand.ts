@@ -1,39 +1,38 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   PutEmailIdentityFeedbackAttributesRequest,
   PutEmailIdentityFeedbackAttributesResponse,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1PutEmailIdentityFeedbackAttributesCommand,
-  serializeAws_restJson1PutEmailIdentityFeedbackAttributesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+} from "../models/models_1";
+import { PutEmailIdentityFeedbackAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutEmailIdentityFeedbackAttributesCommand}.
+ */
 export interface PutEmailIdentityFeedbackAttributesCommandInput extends PutEmailIdentityFeedbackAttributesRequest {}
-export interface PutEmailIdentityFeedbackAttributesCommandOutput
-  extends PutEmailIdentityFeedbackAttributesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link PutEmailIdentityFeedbackAttributesCommand}.
+ */
+export interface PutEmailIdentityFeedbackAttributesCommandOutput extends PutEmailIdentityFeedbackAttributesResponse, __MetadataBearer {}
 
 /**
  * <p>Used to enable or disable feedback forwarding for an identity. This setting determines
  *             what happens when an identity is used to send an email that results in a bounce or
  *             complaint event.</p>
- *         <p>If the value is <code>true</code>, you receive email notifications when bounce or
+ *          <p>If the value is <code>true</code>, you receive email notifications when bounce or
  *             complaint events occur. These notifications are sent to the address that you specified
  *             in the <code>Return-Path</code> header of the original email.</p>
- *         <p>You're required to have a method of tracking bounces and complaints. If you haven't
+ *          <p>You're required to have a method of tracking bounces and complaints. If you haven't
  *             set up another mechanism for receiving bounce or complaint notifications (for example,
  *             by setting up an event destination), you receive an email notification when these events
  *             occur (even if this setting is disabled).</p>
@@ -42,74 +41,55 @@ export interface PutEmailIdentityFeedbackAttributesCommandOutput
  * ```javascript
  * import { SESv2Client, PutEmailIdentityFeedbackAttributesCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, PutEmailIdentityFeedbackAttributesCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // PutEmailIdentityFeedbackAttributesRequest
+ *   EmailIdentity: "STRING_VALUE", // required
+ *   EmailForwardingEnabled: true || false,
+ * };
  * const command = new PutEmailIdentityFeedbackAttributesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutEmailIdentityFeedbackAttributesCommandInput - {@link PutEmailIdentityFeedbackAttributesCommandInput}
+ * @returns {@link PutEmailIdentityFeedbackAttributesCommandOutput}
  * @see {@link PutEmailIdentityFeedbackAttributesCommandInput} for command's `input` shape.
  * @see {@link PutEmailIdentityFeedbackAttributesCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class PutEmailIdentityFeedbackAttributesCommand extends $Command<
-  PutEmailIdentityFeedbackAttributesCommandInput,
-  PutEmailIdentityFeedbackAttributesCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutEmailIdentityFeedbackAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutEmailIdentityFeedbackAttributesCommandInput, PutEmailIdentityFeedbackAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "PutEmailIdentityFeedbackAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutEmailIdentityFeedbackAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutEmailIdentityFeedbackAttributesResponse.filterSensitiveLog,
+export class PutEmailIdentityFeedbackAttributesCommand extends command<PutEmailIdentityFeedbackAttributesCommandInput, PutEmailIdentityFeedbackAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutEmailIdentityFeedbackAttributes",
+  PutEmailIdentityFeedbackAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutEmailIdentityFeedbackAttributesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutEmailIdentityFeedbackAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutEmailIdentityFeedbackAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutEmailIdentityFeedbackAttributesCommandOutput> {
-    return deserializeAws_restJson1PutEmailIdentityFeedbackAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutEmailIdentityFeedbackAttributesCommandInput;
+      output: PutEmailIdentityFeedbackAttributesCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { UpdateImagePermissionsRequest, UpdateImagePermissionsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateImagePermissionsCommand,
-  serializeAws_json1_1UpdateImagePermissionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateImagePermissionsRequest, UpdateImagePermissionsResult } from "../models/models_0";
+import { UpdateImagePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateImagePermissionsCommand}.
+ */
 export interface UpdateImagePermissionsCommandInput extends UpdateImagePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateImagePermissionsCommand}.
+ */
 export interface UpdateImagePermissionsCommandOutput extends UpdateImagePermissionsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface UpdateImagePermissionsCommandOutput extends UpdateImagePermissi
  * ```javascript
  * import { AppStreamClient, UpdateImagePermissionsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, UpdateImagePermissionsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // UpdateImagePermissionsRequest
+ *   Name: "STRING_VALUE", // required
+ *   SharedAccountId: "STRING_VALUE", // required
+ *   ImagePermissions: { // ImagePermissions
+ *     allowFleet: true || false,
+ *     allowImageBuilder: true || false,
+ *   },
+ * };
  * const command = new UpdateImagePermissionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateImagePermissionsCommandInput - {@link UpdateImagePermissionsCommandInput}
+ * @returns {@link UpdateImagePermissionsCommandOutput}
  * @see {@link UpdateImagePermissionsCommandInput} for command's `input` shape.
  * @see {@link UpdateImagePermissionsCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested limit exceeds the permitted limit for an account.</p>
+ *
+ * @throws {@link ResourceNotAvailableException} (client fault)
+ *  <p>The specified resource exists and is not in use, but isn't available.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateImagePermissionsCommand extends $Command<
-  UpdateImagePermissionsCommandInput,
-  UpdateImagePermissionsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateImagePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateImagePermissionsCommandInput, UpdateImagePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "UpdateImagePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateImagePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateImagePermissionsResult.filterSensitiveLog,
+export class UpdateImagePermissionsCommand extends command<UpdateImagePermissionsCommandInput, UpdateImagePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateImagePermissions",
+  UpdateImagePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateImagePermissionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateImagePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateImagePermissionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateImagePermissionsCommandOutput> {
-    return deserializeAws_json1_1UpdateImagePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateImagePermissionsCommandInput;
+      output: UpdateImagePermissionsCommandOutput;
+    };
+  };
 }

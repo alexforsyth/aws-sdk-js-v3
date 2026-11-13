@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DescribeStacksRequest, DescribeStacksResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeStacksCommand,
-  serializeAws_json1_1DescribeStacksCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStacksRequest, DescribeStacksResult } from "../models/models_0";
+import { DescribeStacks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStacksCommand}.
+ */
 export interface DescribeStacksCommandInput extends DescribeStacksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStacksCommand}.
+ */
 export interface DescribeStacksCommandOutput extends DescribeStacksResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,133 @@ export interface DescribeStacksCommandOutput extends DescribeStacksResult, __Met
  * ```javascript
  * import { AppStreamClient, DescribeStacksCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeStacksCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeStacksRequest
+ *   Names: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeStacksCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStacksResult
+ * //   Stacks: [ // StackList
+ * //     { // Stack
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       StorageConnectors: [ // StorageConnectorList
+ * //         { // StorageConnector
+ * //           ConnectorType: "HOMEFOLDERS" || "GOOGLE_DRIVE" || "ONE_DRIVE", // required
+ * //           ResourceIdentifier: "STRING_VALUE",
+ * //           Domains: [ // DomainList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           DomainsRequireAdminConsent: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       RedirectURL: "STRING_VALUE",
+ * //       FeedbackURL: "STRING_VALUE",
+ * //       StackErrors: [ // StackErrors
+ * //         { // StackError
+ * //           ErrorCode: "STORAGE_CONNECTOR_ERROR" || "INTERNAL_SERVICE_ERROR",
+ * //           ErrorMessage: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       UserSettings: [ // UserSettingList
+ * //         { // UserSetting
+ * //           Action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE" || "CLIPBOARD_COPY_TO_LOCAL_DEVICE" || "FILE_UPLOAD" || "FILE_DOWNLOAD" || "PRINTING_TO_LOCAL_DEVICE" || "DOMAIN_PASSWORD_SIGNIN" || "DOMAIN_SMART_CARD_SIGNIN" || "AUTO_TIME_ZONE_REDIRECTION", // required
+ * //           Permission: "ENABLED" || "DISABLED", // required
+ * //           MaximumLength: Number("int"),
+ * //         },
+ * //       ],
+ * //       ApplicationSettings: { // ApplicationSettingsResponse
+ * //         Enabled: true || false,
+ * //         SettingsGroup: "STRING_VALUE",
+ * //         S3BucketName: "STRING_VALUE",
+ * //       },
+ * //       AccessEndpoints: [ // AccessEndpointList
+ * //         { // AccessEndpoint
+ * //           EndpointType: "STREAMING", // required
+ * //           VpceId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       EmbedHostDomains: [ // EmbedHostDomains
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       StreamingExperienceSettings: { // StreamingExperienceSettings
+ * //         PreferredProtocol: "TCP" || "UDP",
+ * //       },
+ * //       ContentRedirection: { // ContentRedirection
+ * //         HostToClient: { // UrlRedirectionConfig
+ * //           Enabled: true || false, // required
+ * //           AllowedUrls: [ // UrlPatternList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           DeniedUrls: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //       AgentAccessConfig: { // AgentAccessConfig
+ * //         Settings: [ // AgentAccessSettingList // required
+ * //           { // AgentAccessSetting
+ * //             AgentAction: "COMPUTER_VISION" || "COMPUTER_INPUT" || "FORWARD_MCP_TOOLS", // required
+ * //             Permission: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //         ],
+ * //         S3BucketArn: "STRING_VALUE",
+ * //         ScreenshotsUploadEnabled: true || false,
+ * //         ReplaySessionEnabled: true || false,
+ * //         KmsKeyArn: "STRING_VALUE",
+ * //         ScreenResolution: "W_1280xH_720", // required
+ * //         ScreenImageFormat: "PNG" || "JPEG", // required
+ * //         UserControlMode: "VIEW_ONLY" || "VIEW_STOP" || "DISABLED",
+ * //       },
+ * //       StorageConnectorAuthentication: "FORCE_REAUTHENTICATION" || "REUSE_CREDENTIALS",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeStacksCommandInput - {@link DescribeStacksCommandInput}
+ * @returns {@link DescribeStacksCommandOutput}
  * @see {@link DescribeStacksCommandInput} for command's `input` shape.
  * @see {@link DescribeStacksCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStacksCommand extends $Command<
-  DescribeStacksCommandInput,
-  DescribeStacksCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStacksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStacksCommandInput, DescribeStacksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeStacksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStacksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStacksResult.filterSensitiveLog,
+export class DescribeStacksCommand extends command<DescribeStacksCommandInput, DescribeStacksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStacks",
+  DescribeStacks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStacksRequest;
+      output: DescribeStacksResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStacksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeStacksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeStacksCommandOutput> {
-    return deserializeAws_json1_1DescribeStacksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStacksCommandInput;
+      output: DescribeStacksCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDeviceEc2Input, DescribeDeviceEc2Output } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeDeviceEc2InstancesCommand,
-  serializeAws_restJson1DescribeDeviceEc2InstancesCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceInputTypes,
-  ServiceOutputTypes,
-  SnowDeviceManagementClientResolvedConfig,
-} from "../SnowDeviceManagementClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDeviceEc2Input, DescribeDeviceEc2Output } from "../models/models_0";
+import { DescribeDeviceEc2Instances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDeviceEc2InstancesCommand}.
+ */
 export interface DescribeDeviceEc2InstancesCommandInput extends DescribeDeviceEc2Input {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDeviceEc2InstancesCommand}.
+ */
 export interface DescribeDeviceEc2InstancesCommandOutput extends DescribeDeviceEc2Output, __MetadataBearer {}
 
 /**
@@ -34,71 +31,105 @@ export interface DescribeDeviceEc2InstancesCommandOutput extends DescribeDeviceE
  * ```javascript
  * import { SnowDeviceManagementClient, DescribeDeviceEc2InstancesCommand } from "@aws-sdk/client-snow-device-management"; // ES Modules import
  * // const { SnowDeviceManagementClient, DescribeDeviceEc2InstancesCommand } = require("@aws-sdk/client-snow-device-management"); // CommonJS import
+ * // import type { SnowDeviceManagementClientConfig } from "@aws-sdk/client-snow-device-management";
+ * const config = {}; // type is SnowDeviceManagementClientConfig
  * const client = new SnowDeviceManagementClient(config);
+ * const input = { // DescribeDeviceEc2Input
+ *   managedDeviceId: "STRING_VALUE", // required
+ *   instanceIds: [ // InstanceIdsList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeDeviceEc2InstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDeviceEc2Output
+ * //   instances: [ // InstanceSummaryList
+ * //     { // InstanceSummary
+ * //       instance: { // Instance
+ * //         imageId: "STRING_VALUE",
+ * //         amiLaunchIndex: Number("int"),
+ * //         instanceId: "STRING_VALUE",
+ * //         state: { // InstanceState
+ * //           code: Number("int"),
+ * //           name: "STRING_VALUE",
+ * //         },
+ * //         instanceType: "STRING_VALUE",
+ * //         privateIpAddress: "STRING_VALUE",
+ * //         publicIpAddress: "STRING_VALUE",
+ * //         createdAt: new Date("TIMESTAMP"),
+ * //         updatedAt: new Date("TIMESTAMP"),
+ * //         blockDeviceMappings: [ // InstanceBlockDeviceMappingList
+ * //           { // InstanceBlockDeviceMapping
+ * //             deviceName: "STRING_VALUE",
+ * //             ebs: { // EbsInstanceBlockDevice
+ * //               attachTime: new Date("TIMESTAMP"),
+ * //               deleteOnTermination: true || false,
+ * //               status: "STRING_VALUE",
+ * //               volumeId: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         securityGroups: [ // SecurityGroupIdentifierList
+ * //           { // SecurityGroupIdentifier
+ * //             groupId: "STRING_VALUE",
+ * //             groupName: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         cpuOptions: { // CpuOptions
+ * //           coreCount: Number("int"),
+ * //           threadsPerCore: Number("int"),
+ * //         },
+ * //         rootDeviceName: "STRING_VALUE",
+ * //       },
+ * //       lastUpdatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeDeviceEc2InstancesCommandInput - {@link DescribeDeviceEc2InstancesCommandInput}
+ * @returns {@link DescribeDeviceEc2InstancesCommandOutput}
  * @see {@link DescribeDeviceEc2InstancesCommandInput} for command's `input` shape.
  * @see {@link DescribeDeviceEc2InstancesCommandOutput} for command's `response` shape.
- * @see {@link SnowDeviceManagementClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowDeviceManagementClientResolvedConfig | config} for SnowDeviceManagementClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link SnowDeviceManagementServiceException}
+ * <p>Base exception class for all service exceptions from SnowDeviceManagement service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDeviceEc2InstancesCommand extends $Command<
-  DescribeDeviceEc2InstancesCommandInput,
-  DescribeDeviceEc2InstancesCommandOutput,
-  SnowDeviceManagementClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDeviceEc2InstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowDeviceManagementClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDeviceEc2InstancesCommandInput, DescribeDeviceEc2InstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowDeviceManagementClient";
-    const commandName = "DescribeDeviceEc2InstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDeviceEc2Input.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDeviceEc2Output.filterSensitiveLog,
+export class DescribeDeviceEc2InstancesCommand extends command<DescribeDeviceEc2InstancesCommandInput, DescribeDeviceEc2InstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDeviceEc2Instances",
+  DescribeDeviceEc2Instances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDeviceEc2Input;
+      output: DescribeDeviceEc2Output;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDeviceEc2InstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeDeviceEc2InstancesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDeviceEc2InstancesCommandOutput> {
-    return deserializeAws_restJson1DescribeDeviceEc2InstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDeviceEc2InstancesCommandInput;
+      output: DescribeDeviceEc2InstancesCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { StartBlueprintRunRequest, StartBlueprintRunResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1StartBlueprintRunCommand,
-  serializeAws_json1_1StartBlueprintRunCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartBlueprintRunRequest, StartBlueprintRunResponse } from "../models/models_3";
+import { StartBlueprintRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartBlueprintRunCommand}.
+ */
 export interface StartBlueprintRunCommandInput extends StartBlueprintRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartBlueprintRunCommand}.
+ */
 export interface StartBlueprintRunCommandOutput extends StartBlueprintRunResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface StartBlueprintRunCommandOutput extends StartBlueprintRunRespons
  * ```javascript
  * import { GlueClient, StartBlueprintRunCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, StartBlueprintRunCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // StartBlueprintRunRequest
+ *   BlueprintName: "STRING_VALUE", // required
+ *   Parameters: "STRING_VALUE",
+ *   RoleArn: "STRING_VALUE", // required
+ * };
  * const command = new StartBlueprintRunCommand(input);
  * const response = await client.send(command);
+ * // { // StartBlueprintRunResponse
+ * //   RunId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartBlueprintRunCommandInput - {@link StartBlueprintRunCommandInput}
+ * @returns {@link StartBlueprintRunCommandOutput}
  * @see {@link StartBlueprintRunCommandInput} for command's `input` shape.
  * @see {@link StartBlueprintRunCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link IllegalBlueprintStateException} (client fault)
+ *  <p>The blueprint is in an invalid state to perform a requested operation.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class StartBlueprintRunCommand extends $Command<
-  StartBlueprintRunCommandInput,
-  StartBlueprintRunCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartBlueprintRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartBlueprintRunCommandInput, StartBlueprintRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "StartBlueprintRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartBlueprintRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartBlueprintRunResponse.filterSensitiveLog,
+export class StartBlueprintRunCommand extends command<StartBlueprintRunCommandInput, StartBlueprintRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartBlueprintRun",
+  StartBlueprintRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartBlueprintRunRequest;
+      output: StartBlueprintRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartBlueprintRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartBlueprintRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartBlueprintRunCommandOutput> {
-    return deserializeAws_json1_1StartBlueprintRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartBlueprintRunCommandInput;
+      output: StartBlueprintRunCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { ACMClient } from "../ACMClient";
-import { DescribeCertificateCommand, DescribeCertificateCommandInput } from "../commands/DescribeCertificateCommand";
+import type { ACMClient } from "../ACMClient";
+import {
+  type DescribeCertificateCommandInput,
+  type DescribeCertificateCommandOutput,
+  DescribeCertificateCommand,
+} from "../commands/DescribeCertificateCommand";
+import type { ACMServiceException } from "../models/ACMServiceException";
 
-const checkState = async (client: ACMClient, input: DescribeCertificateCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ACMClient, input: DescribeCertificateCommandInput): Promise<WaiterResult<DescribeCertificateCommandOutput | ACMServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeCertificateCommand(input));
+    let result: DescribeCertificateCommandOutput & any = await client.send(new DescribeCertificateCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Certificate.DomainValidationOptions);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Certificate.DomainValidationOptions);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.ValidationStatus;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "SUCCESS";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "SUCCESS")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,13 +38,13 @@ const checkState = async (client: ACMClient, input: DescribeCertificateCommandIn
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Certificate.DomainValidationOptions);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Certificate.DomainValidationOptions);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.ValidationStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "PENDING_VALIDATION") {
           return { state: WaiterState.RETRY, reason };
         }
@@ -41,14 +53,14 @@ const checkState = async (client: ACMClient, input: DescribeCertificateCommandIn
     try {
       const returnComparator = () => {
         return result.Certificate.Status;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -61,7 +73,7 @@ const checkState = async (client: ACMClient, input: DescribeCertificateCommandIn
 export const waitForCertificateValidated = async (
   params: WaiterConfiguration<ACMClient>,
   input: DescribeCertificateCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCertificateCommandOutput | ACMServiceException>> => {
   const serviceDefaults = { minDelay: 60, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -73,8 +85,8 @@ export const waitForCertificateValidated = async (
 export const waitUntilCertificateValidated = async (
   params: WaiterConfiguration<ACMClient>,
   input: DescribeCertificateCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCertificateCommandOutput>> => {
   const serviceDefaults = { minDelay: 60, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeCertificateCommandOutput>;
 };

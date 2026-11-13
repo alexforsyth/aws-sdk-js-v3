@@ -1,45 +1,49 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { TagResourceRequest, TagResourceResponse } from "../models/models_0";
-import { deserializeAws_queryTagResourceCommand, serializeAws_queryTagResourceCommand } from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagResourceRequest, TagResourceResponse } from "../models/models_0";
+import { TagResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagResourceCommand}.
+ */
 export interface TagResourceCommandInput extends TagResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagResourceCommand}.
+ */
 export interface TagResourceCommandOutput extends TagResourceResponse, __MetadataBearer {}
 
 /**
  * <p>Add tags to the specified Amazon SNS topic. For an overview, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html">Amazon SNS Tags</a> in the
  *                 <i>Amazon SNS Developer Guide</i>.</p>
- *         <p>When you use topic tags, keep the following guidelines in mind:</p>
- *         <ul>
+ *          <p>When you use topic tags, keep the following guidelines in mind:</p>
+ *          <ul>
  *             <li>
- *                 <p>Adding more than 50 tags to a topic isn't recommended.</p>
+ *                <p>Adding more than 50 tags to a topic isn't recommended.</p>
  *             </li>
  *             <li>
- *                 <p>Tags don't have any semantic meaning. Amazon SNS interprets tags as character
+ *                <p>Tags don't have any semantic meaning. Amazon SNS interprets tags as character
  *                     strings.</p>
  *             </li>
  *             <li>
- *                 <p>Tags are case-sensitive.</p>
+ *                <p>Tags are case-sensitive.</p>
  *             </li>
  *             <li>
- *                 <p>A new tag with a key identical to that of an existing tag overwrites the
+ *                <p>A new tag with a key identical to that of an existing tag overwrites the
  *                     existing tag.</p>
  *             </li>
  *             <li>
- *                 <p>Tagging actions are limited to 10 TPS per account, per Region. If your
- *                     application requires a higher throughput, file a <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support request</a>.</p>
+ *                <p>Tagging actions are limited to 10 TPS per Amazon Web Services account, per Amazon Web Services Region. If
+ *                     your application requires a higher throughput, file a <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=technical">technical support request</a>.</p>
  *             </li>
  *          </ul>
  * @example
@@ -47,68 +51,77 @@ export interface TagResourceCommandOutput extends TagResourceResponse, __Metadat
  * ```javascript
  * import { SNSClient, TagResourceCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, TagResourceCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // TagResourceRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ *   Tags: [ // TagList // required
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new TagResourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param TagResourceCommandInput - {@link TagResourceCommandInput}
+ * @returns {@link TagResourceCommandOutput}
  * @see {@link TagResourceCommandInput} for command's `input` shape.
  * @see {@link TagResourceCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link ConcurrentAccessException} (client fault)
+ *  <p>Can't perform multiple operations on a tag simultaneously. Perform the operations
+ *             sequentially.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Can’t perform the action on the specified resource. Make sure that the resource
+ *             exists.</p>
+ *
+ * @throws {@link StaleTagException} (client fault)
+ *  <p>A tag has been added to a resource with the same ARN as a deleted resource. Wait a
+ *             short while and then retry the operation.</p>
+ *
+ * @throws {@link TagLimitExceededException} (client fault)
+ *  <p>Can't add more than 50 tags to a topic.</p>
+ *
+ * @throws {@link TagPolicyException} (client fault)
+ *  <p>The request doesn't comply with the IAM tag policy. Correct your request and then
+ *             retry it.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class TagResourceCommand extends $Command<
-  TagResourceCommandInput,
-  TagResourceCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TagResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TagResourceCommandInput, TagResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "TagResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TagResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: TagResourceResponse.filterSensitiveLog,
+export class TagResourceCommand extends command<TagResourceCommandInput, TagResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagResource",
+  TagResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TagResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryTagResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TagResourceCommandOutput> {
-    return deserializeAws_queryTagResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
 }

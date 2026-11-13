@@ -1,0 +1,127 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyGlobalClusterMessage, ModifyGlobalClusterResult } from "../models/models_0";
+import { ModifyGlobalCluster$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyGlobalClusterCommand}.
+ */
+export interface ModifyGlobalClusterCommandInput extends ModifyGlobalClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyGlobalClusterCommand}.
+ */
+export interface ModifyGlobalClusterCommandOutput extends ModifyGlobalClusterResult, __MetadataBearer {}
+
+/**
+ * <p>Modify a setting for an Amazon Neptune global cluster. You can change one
+ *       or more database configuration parameters by specifying these parameters
+ *       and their new values in the request.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NeptuneClient, ModifyGlobalClusterCommand } from "@aws-sdk/client-neptune"; // ES Modules import
+ * // const { NeptuneClient, ModifyGlobalClusterCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
+ * const client = new NeptuneClient(config);
+ * const input = { // ModifyGlobalClusterMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE", // required
+ *   NewGlobalClusterIdentifier: "STRING_VALUE",
+ *   DeletionProtection: true || false,
+ *   EngineVersion: "STRING_VALUE",
+ *   AllowMajorVersionUpgrade: true || false,
+ * };
+ * const command = new ModifyGlobalClusterCommand(input);
+ * const response = await client.send(command);
+ * // { // ModifyGlobalClusterResult
+ * //   GlobalCluster: { // GlobalCluster
+ * //     GlobalClusterIdentifier: "STRING_VALUE",
+ * //     GlobalClusterResourceId: "STRING_VALUE",
+ * //     GlobalClusterArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     StorageEncrypted: true || false,
+ * //     DeletionProtection: true || false,
+ * //     GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //       { // GlobalClusterMember
+ * //         DBClusterArn: "STRING_VALUE",
+ * //         Readers: [ // ReadersArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         IsWriter: true || false,
+ * //       },
+ * //     ],
+ * //     FailoverState: { // FailoverState
+ * //       Status: "pending" || "failing-over" || "cancelling",
+ * //       FromDbClusterArn: "STRING_VALUE",
+ * //       ToDbClusterArn: "STRING_VALUE",
+ * //       IsDataLossAllowed: true || false,
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param ModifyGlobalClusterCommandInput - {@link ModifyGlobalClusterCommandInput}
+ * @returns {@link ModifyGlobalClusterCommandOutput}
+ * @see {@link ModifyGlobalClusterCommandInput} for command's `input` shape.
+ * @see {@link ModifyGlobalClusterCommandOutput} for command's `response` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
+ *
+ * @throws {@link GlobalClusterAlreadyExistsFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>
+ *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>
+ *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The DB cluster is not in a valid state.</p>
+ *
+ * @throws {@link InvalidDBInstanceStateFault} (client fault)
+ *  <p>The specified DB instance is not in the <i>available</i> state.</p>
+ *
+ * @throws {@link InvalidGlobalClusterStateFault} (client fault)
+ *  <p>The global cluster is in an invalid state and can't perform the requested operation. </p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
+ */
+export class ModifyGlobalClusterCommand extends command<ModifyGlobalClusterCommandInput, ModifyGlobalClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyGlobalCluster",
+  ModifyGlobalCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyGlobalClusterMessage;
+      output: ModifyGlobalClusterResult;
+    };
+    sdk: {
+      input: ModifyGlobalClusterCommandInput;
+      output: ModifyGlobalClusterCommandOutput;
+    };
+  };
+}

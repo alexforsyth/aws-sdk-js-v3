@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeSpotFleetInstancesRequest, DescribeSpotFleetInstancesResponse } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeSpotFleetInstancesCommand,
-  serializeAws_ec2DescribeSpotFleetInstancesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSpotFleetInstancesRequest, DescribeSpotFleetInstancesResponse } from "../models/models_5";
+import { DescribeSpotFleetInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSpotFleetInstancesCommand}.
+ */
 export interface DescribeSpotFleetInstancesCommandInput extends DescribeSpotFleetInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSpotFleetInstancesCommand}.
+ */
 export interface DescribeSpotFleetInstancesCommandOutput extends DescribeSpotFleetInstancesResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,81 @@ export interface DescribeSpotFleetInstancesCommandOutput extends DescribeSpotFle
  * ```javascript
  * import { EC2Client, DescribeSpotFleetInstancesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeSpotFleetInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeSpotFleetInstancesRequest
+ *   DryRun: true || false,
+ *   SpotFleetRequestId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeSpotFleetInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSpotFleetInstancesResponse
+ * //   ActiveInstances: [ // ActiveInstanceSet
+ * //     { // ActiveInstance
+ * //       InstanceId: "STRING_VALUE",
+ * //       InstanceType: "STRING_VALUE",
+ * //       SpotInstanceRequestId: "STRING_VALUE",
+ * //       InstanceHealth: "healthy" || "unhealthy",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   SpotFleetRequestId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeSpotFleetInstancesCommandInput - {@link DescribeSpotFleetInstancesCommandInput}
+ * @returns {@link DescribeSpotFleetInstancesCommandOutput}
  * @see {@link DescribeSpotFleetInstancesCommandInput} for command's `input` shape.
  * @see {@link DescribeSpotFleetInstancesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe the Spot Instances associated with a Spot fleet
+ * ```javascript
+ * // This example lists the Spot Instances associated with the specified Spot fleet.
+ * const input = {
+ *   SpotFleetRequestId: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"
+ * };
+ * const command = new DescribeSpotFleetInstancesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ActiveInstances: [
+ *     {
+ *       InstanceId: "i-1234567890abcdef0",
+ *       InstanceType: "m3.medium",
+ *       SpotInstanceRequestId: "sir-08b93456"
+ *     }
+ *   ],
+ *   SpotFleetRequestId: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeSpotFleetInstancesCommand extends $Command<
-  DescribeSpotFleetInstancesCommandInput,
-  DescribeSpotFleetInstancesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSpotFleetInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSpotFleetInstancesCommandInput, DescribeSpotFleetInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeSpotFleetInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSpotFleetInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSpotFleetInstancesResponse.filterSensitiveLog,
+export class DescribeSpotFleetInstancesCommand extends command<DescribeSpotFleetInstancesCommandInput, DescribeSpotFleetInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSpotFleetInstances",
+  DescribeSpotFleetInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSpotFleetInstancesRequest;
+      output: DescribeSpotFleetInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSpotFleetInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeSpotFleetInstancesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSpotFleetInstancesCommandOutput> {
-    return deserializeAws_ec2DescribeSpotFleetInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSpotFleetInstancesCommandInput;
+      output: DescribeSpotFleetInstancesCommandOutput;
+    };
+  };
 }

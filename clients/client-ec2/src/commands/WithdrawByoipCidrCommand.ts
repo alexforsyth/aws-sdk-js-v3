@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { WithdrawByoipCidrRequest, WithdrawByoipCidrResult } from "../models/models_5";
-import {
-  deserializeAws_ec2WithdrawByoipCidrCommand,
-  serializeAws_ec2WithdrawByoipCidrCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { WithdrawByoipCidrRequest, WithdrawByoipCidrResult } from "../models/models_8";
+import { WithdrawByoipCidr$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link WithdrawByoipCidrCommand}.
+ */
 export interface WithdrawByoipCidrCommandInput extends WithdrawByoipCidrRequest {}
+/**
+ * @public
+ *
+ * The output of {@link WithdrawByoipCidrCommand}.
+ */
 export interface WithdrawByoipCidrCommandOutput extends WithdrawByoipCidrResult, __MetadataBearer {}
 
 /**
@@ -32,68 +33,65 @@ export interface WithdrawByoipCidrCommandOutput extends WithdrawByoipCidrResult,
  * ```javascript
  * import { EC2Client, WithdrawByoipCidrCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, WithdrawByoipCidrCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // WithdrawByoipCidrRequest
+ *   Cidr: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new WithdrawByoipCidrCommand(input);
  * const response = await client.send(command);
+ * // { // WithdrawByoipCidrResult
+ * //   ByoipCidr: { // ByoipCidr
+ * //     Cidr: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     AsnAssociations: [ // AsnAssociationSet
+ * //       { // AsnAssociation
+ * //         Asn: "STRING_VALUE",
+ * //         Cidr: "STRING_VALUE",
+ * //         StatusMessage: "STRING_VALUE",
+ * //         State: "disassociated" || "failed-disassociation" || "failed-association" || "pending-disassociation" || "pending-association" || "associated",
+ * //       },
+ * //     ],
+ * //     StatusMessage: "STRING_VALUE",
+ * //     State: "advertised" || "deprovisioned" || "failed-deprovision" || "failed-provision" || "pending-advertising" || "pending-deprovision" || "pending-provision" || "pending-withdrawal" || "provisioned" || "provisioned-not-publicly-advertisable",
+ * //     NetworkBorderGroup: "STRING_VALUE",
+ * //     AdvertisementType: "STRING_VALUE",
+ * //     PoolId: "STRING_VALUE",
+ * //     IpamPoolId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param WithdrawByoipCidrCommandInput - {@link WithdrawByoipCidrCommandInput}
+ * @returns {@link WithdrawByoipCidrCommandOutput}
  * @see {@link WithdrawByoipCidrCommandInput} for command's `input` shape.
  * @see {@link WithdrawByoipCidrCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class WithdrawByoipCidrCommand extends $Command<
-  WithdrawByoipCidrCommandInput,
-  WithdrawByoipCidrCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: WithdrawByoipCidrCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<WithdrawByoipCidrCommandInput, WithdrawByoipCidrCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "WithdrawByoipCidrCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: WithdrawByoipCidrRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: WithdrawByoipCidrResult.filterSensitiveLog,
+export class WithdrawByoipCidrCommand extends command<WithdrawByoipCidrCommandInput, WithdrawByoipCidrCommandOutput>(
+  _ep0,
+  _mw0,
+  "WithdrawByoipCidr",
+  WithdrawByoipCidr$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: WithdrawByoipCidrRequest;
+      output: WithdrawByoipCidrResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: WithdrawByoipCidrCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2WithdrawByoipCidrCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<WithdrawByoipCidrCommandOutput> {
-    return deserializeAws_ec2WithdrawByoipCidrCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: WithdrawByoipCidrCommandInput;
+      output: WithdrawByoipCidrCommandOutput;
+    };
+  };
 }

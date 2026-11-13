@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetGatewayInput, GetGatewayOutput } from "../models/models_0";
+import { GetGateway$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetGatewayCommand}.
+ */
+export interface GetGatewayCommandInput extends GetGatewayInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetGatewayCommand}.
+ */
+export interface GetGatewayCommandOutput extends GetGatewayOutput, __MetadataBearer {}
+
+/**
+ * <p>By providing the ARN (Amazon Resource Name), this API returns the gateway.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BackupGatewayClient, GetGatewayCommand } from "@aws-sdk/client-backup-gateway"; // ES Modules import
+ * // const { BackupGatewayClient, GetGatewayCommand } = require("@aws-sdk/client-backup-gateway"); // CommonJS import
+ * // import type { BackupGatewayClientConfig } from "@aws-sdk/client-backup-gateway";
+ * const config = {}; // type is BackupGatewayClientConfig
+ * const client = new BackupGatewayClient(config);
+ * const input = { // GetGatewayInput
+ *   GatewayArn: "STRING_VALUE", // required
+ * };
+ * const command = new GetGatewayCommand(input);
+ * const response = await client.send(command);
+ * // { // GetGatewayOutput
+ * //   Gateway: { // GatewayDetails
+ * //     GatewayArn: "STRING_VALUE",
+ * //     GatewayDisplayName: "STRING_VALUE",
+ * //     GatewayType: "STRING_VALUE",
+ * //     HypervisorId: "STRING_VALUE",
+ * //     LastSeenTime: new Date("TIMESTAMP"),
+ * //     MaintenanceStartTime: { // MaintenanceStartTime
+ * //       DayOfMonth: Number("int"),
+ * //       DayOfWeek: Number("int"),
+ * //       HourOfDay: Number("int"), // required
+ * //       MinuteOfHour: Number("int"), // required
+ * //     },
+ * //     NextUpdateAvailabilityTime: new Date("TIMESTAMP"),
+ * //     VpcEndpoint: "STRING_VALUE",
+ * //     DeprecationDate: new Date("TIMESTAMP"),
+ * //     SoftwareVersion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetGatewayCommandInput - {@link GetGatewayCommandInput}
+ * @returns {@link GetGatewayCommandOutput}
+ * @see {@link GetGatewayCommandInput} for command's `input` shape.
+ * @see {@link GetGatewayCommandOutput} for command's `response` shape.
+ * @see {@link BackupGatewayClientResolvedConfig | config} for BackupGatewayClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action wasn't found.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation did not succeed because an internal error occurred. Try again later.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation did not succeed because a validation error occurred.</p>
+ *
+ * @throws {@link BackupGatewayServiceException}
+ * <p>Base exception class for all service exceptions from BackupGateway service.</p>
+ *
+ *
+ * @public
+ */
+export class GetGatewayCommand extends command<GetGatewayCommandInput, GetGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetGateway",
+  GetGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGatewayInput;
+      output: GetGatewayOutput;
+    };
+    sdk: {
+      input: GetGatewayCommandInput;
+      output: GetGatewayCommandOutput;
+    };
+  };
+}

@@ -1,110 +1,185 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ConnectContactLensClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ConnectContactLensClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListRealtimeContactAnalysisSegmentsRequest,
   ListRealtimeContactAnalysisSegmentsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRealtimeContactAnalysisSegmentsCommand,
-  serializeAws_restJson1ListRealtimeContactAnalysisSegmentsCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface ListRealtimeContactAnalysisSegmentsCommandInput extends ListRealtimeContactAnalysisSegmentsRequest {}
-export interface ListRealtimeContactAnalysisSegmentsCommandOutput
-  extends ListRealtimeContactAnalysisSegmentsResponse,
-    __MetadataBearer {}
+import { ListRealtimeContactAnalysisSegments$ } from "../schemas/schemas_0";
 
 /**
- * <p>Provides a list of analysis segments for a real-time analysis session.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRealtimeContactAnalysisSegmentsCommand}.
+ */
+export interface ListRealtimeContactAnalysisSegmentsCommandInput extends ListRealtimeContactAnalysisSegmentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRealtimeContactAnalysisSegmentsCommand}.
+ */
+export interface ListRealtimeContactAnalysisSegmentsCommandOutput extends ListRealtimeContactAnalysisSegmentsResponse, __MetadataBearer {}
+
+/**
+ * <p>Provides a list of analysis segments for a real-time analysis session for
+ *             voice.</p>
+ *          <note>
+ *             <p>Voice data is retained for 24 hours. You must invoke this API during that
+ *                 time.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectContactLensClient, ListRealtimeContactAnalysisSegmentsCommand } from "@aws-sdk/client-connect-contact-lens"; // ES Modules import
  * // const { ConnectContactLensClient, ListRealtimeContactAnalysisSegmentsCommand } = require("@aws-sdk/client-connect-contact-lens"); // CommonJS import
+ * // import type { ConnectContactLensClientConfig } from "@aws-sdk/client-connect-contact-lens";
+ * const config = {}; // type is ConnectContactLensClientConfig
  * const client = new ConnectContactLensClient(config);
+ * const input = { // ListRealtimeContactAnalysisSegmentsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   ListFilter: { // RealTimeContactAnalysisSegmentsFilter
+ *     CategoriesAttributeFilter: { // CategoriesAttributeFilter
+ *       OrConditions: [ // CategoriesAttributeOrConditionList
+ *         { // CategoriesAttributeAndCondition
+ *           TagConditions: [ // TagAndConditionList
+ *             { // TagCondition
+ *               TagKey: "STRING_VALUE",
+ *               TagValue: "STRING_VALUE",
+ *               ComparisonType: "EQUALS" || "NOT_EQUALS",
+ *             },
+ *           ],
+ *         },
+ *       ],
+ *       AndCondition: {
+ *         TagConditions: [
+ *           {
+ *             TagKey: "STRING_VALUE",
+ *             TagValue: "STRING_VALUE",
+ *             ComparisonType: "EQUALS" || "NOT_EQUALS",
+ *           },
+ *         ],
+ *       },
+ *       TagCondition: "<TagCondition>",
+ *     },
+ *   },
+ * };
  * const command = new ListRealtimeContactAnalysisSegmentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRealtimeContactAnalysisSegmentsResponse
+ * //   Segments: [ // RealtimeContactAnalysisSegments // required
+ * //     { // RealtimeContactAnalysisSegment
+ * //       Transcript: { // Transcript
+ * //         Id: "STRING_VALUE", // required
+ * //         ParticipantId: "STRING_VALUE", // required
+ * //         ParticipantRole: "STRING_VALUE", // required
+ * //         Content: "STRING_VALUE", // required
+ * //         BeginOffsetMillis: Number("int"), // required
+ * //         EndOffsetMillis: Number("int"), // required
+ * //         Sentiment: "POSITIVE" || "NEUTRAL" || "NEGATIVE",
+ * //         IssuesDetected: [ // IssuesDetected
+ * //           { // IssueDetected
+ * //             CharacterOffsets: { // CharacterOffsets
+ * //               BeginOffsetChar: Number("int"), // required
+ * //               EndOffsetChar: Number("int"), // required
+ * //             },
+ * //           },
+ * //         ],
+ * //       },
+ * //       Categories: { // Categories
+ * //         MatchedCategories: [ // MatchedCategories // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         MatchedDetails: { // MatchedDetails // required
+ * //           "<keys>": { // CategoryDetails
+ * //             PointsOfInterest: [ // PointsOfInterest // required
+ * //               { // PointOfInterest
+ * //                 BeginOffsetMillis: Number("int"), // required
+ * //                 EndOffsetMillis: Number("int"), // required
+ * //               },
+ * //             ],
+ * //             RuleId: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //       PostContactSummary: { // PostContactSummary
+ * //         Content: "STRING_VALUE",
+ * //         Status: "FAILED" || "COMPLETED", // required
+ * //         FailureCode: "QUOTA_EXCEEDED" || "INSUFFICIENT_CONVERSATION_CONTENT" || "FAILED_SAFETY_GUIDELINES" || "INVALID_ANALYSIS_CONFIGURATION" || "INTERNAL_ERROR",
+ * //       },
+ * //       ExtractedInformation: { // ExtractedInformation
+ * //         ExtractionDefinitionId: "STRING_VALUE", // required
+ * //         ExtractionDefinitionName: "STRING_VALUE", // required
+ * //         ExtractionDefinitionDisplayLabel: "STRING_VALUE",
+ * //         ExtractedValues: [ // ExtractedInformationValues
+ * //           { // ExtractedInformationValue
+ * //             Content: "STRING_VALUE", // required
+ * //             PointsOfInterest: [ // required
+ * //               {
+ * //                 BeginOffsetMillis: Number("int"), // required
+ * //                 EndOffsetMillis: Number("int"), // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //         FailureCode: "QUOTA_EXCEEDED" || "INSUFFICIENT_CONVERSATION_CONTENT" || "FAILED_SAFETY_GUIDELINES" || "INTERNAL_ERROR" || "MAX_PACKAGE_FEATURE_ONLY",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRealtimeContactAnalysisSegmentsCommandInput - {@link ListRealtimeContactAnalysisSegmentsCommandInput}
+ * @returns {@link ListRealtimeContactAnalysisSegmentsCommandOutput}
  * @see {@link ListRealtimeContactAnalysisSegmentsCommandInput} for command's `input` shape.
  * @see {@link ListRealtimeContactAnalysisSegmentsCommandOutput} for command's `response` shape.
- * @see {@link ConnectContactLensClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectContactLensClientResolvedConfig | config} for ConnectContactLensClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed due to an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectContactLensServiceException}
+ * <p>Base exception class for all service exceptions from ConnectContactLens service.</p>
+ *
+ *
+ * @public
  */
-export class ListRealtimeContactAnalysisSegmentsCommand extends $Command<
-  ListRealtimeContactAnalysisSegmentsCommandInput,
-  ListRealtimeContactAnalysisSegmentsCommandOutput,
-  ConnectContactLensClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRealtimeContactAnalysisSegmentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectContactLensClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRealtimeContactAnalysisSegmentsCommandInput, ListRealtimeContactAnalysisSegmentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectContactLensClient";
-    const commandName = "ListRealtimeContactAnalysisSegmentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRealtimeContactAnalysisSegmentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRealtimeContactAnalysisSegmentsResponse.filterSensitiveLog,
+export class ListRealtimeContactAnalysisSegmentsCommand extends command<ListRealtimeContactAnalysisSegmentsCommandInput, ListRealtimeContactAnalysisSegmentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRealtimeContactAnalysisSegments",
+  ListRealtimeContactAnalysisSegments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRealtimeContactAnalysisSegmentsRequest;
+      output: ListRealtimeContactAnalysisSegmentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListRealtimeContactAnalysisSegmentsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRealtimeContactAnalysisSegmentsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListRealtimeContactAnalysisSegmentsCommandOutput> {
-    return deserializeAws_restJson1ListRealtimeContactAnalysisSegmentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRealtimeContactAnalysisSegmentsCommandInput;
+      output: ListRealtimeContactAnalysisSegmentsCommandOutput;
+    };
+  };
 }

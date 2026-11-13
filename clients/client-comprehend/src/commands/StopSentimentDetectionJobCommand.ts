@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { StopSentimentDetectionJobRequest, StopSentimentDetectionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopSentimentDetectionJobCommand,
-  serializeAws_json1_1StopSentimentDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopSentimentDetectionJobRequest, StopSentimentDetectionJobResponse } from "../models/models_0";
+import { StopSentimentDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopSentimentDetectionJobCommand}.
+ */
 export interface StopSentimentDetectionJobCommandInput extends StopSentimentDetectionJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopSentimentDetectionJobCommand}.
+ */
 export interface StopSentimentDetectionJobCommandOutput extends StopSentimentDetectionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Stops a sentiment detection job in progress.</p>
- *          <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put
+ *          <p>If the job state is <code>IN_PROGRESS</code>, the job is marked for termination and put
  *       into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it
  *       is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the
  *         <code>STOPPED</code> state.</p>
@@ -37,71 +38,57 @@ export interface StopSentimentDetectionJobCommandOutput extends StopSentimentDet
  * ```javascript
  * import { ComprehendClient, StopSentimentDetectionJobCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, StopSentimentDetectionJobCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // StopSentimentDetectionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new StopSentimentDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StopSentimentDetectionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StopSentimentDetectionJobCommandInput - {@link StopSentimentDetectionJobCommandInput}
+ * @returns {@link StopSentimentDetectionJobCommandOutput}
  * @see {@link StopSentimentDetectionJobCommandInput} for command's `input` shape.
  * @see {@link StopSentimentDetectionJobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link JobNotFoundException} (client fault)
+ *  <p>The specified job was not found. Check the job ID and try again.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class StopSentimentDetectionJobCommand extends $Command<
-  StopSentimentDetectionJobCommandInput,
-  StopSentimentDetectionJobCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopSentimentDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopSentimentDetectionJobCommandInput, StopSentimentDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "StopSentimentDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopSentimentDetectionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopSentimentDetectionJobResponse.filterSensitiveLog,
+export class StopSentimentDetectionJobCommand extends command<StopSentimentDetectionJobCommandInput, StopSentimentDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopSentimentDetectionJob",
+  StopSentimentDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopSentimentDetectionJobRequest;
+      output: StopSentimentDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopSentimentDetectionJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopSentimentDetectionJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StopSentimentDetectionJobCommandOutput> {
-    return deserializeAws_json1_1StopSentimentDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopSentimentDetectionJobCommandInput;
+      output: StopSentimentDetectionJobCommandOutput;
+    };
+  };
 }

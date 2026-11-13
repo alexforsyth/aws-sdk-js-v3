@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { DeleteArchiveInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteArchiveCommand,
-  serializeAws_restJson1DeleteArchiveCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteArchiveInput } from "../models/models_0";
+import { DeleteArchive$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteArchiveCommand}.
+ */
 export interface DeleteArchiveCommandInput extends DeleteArchiveInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteArchiveCommand}.
+ */
 export interface DeleteArchiveCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,12 +29,12 @@ export interface DeleteArchiveCommandOutput extends __MetadataBearer {}
  *          <ul>
  *             <li>
  *                <p>If the archive retrieval job is actively preparing the data for download when
- *                Amazon S3 Glacier receives the delete archive request, the archival retrieval operation
+ *                Amazon Glacier receives the delete archive request, the archival retrieval operation
  *                might fail.</p>
  *             </li>
  *             <li>
  *                <p>If the archive retrieval job has successfully prepared the archive for download
- *                when Amazon S3 Glacier receives the delete archive request, you will be able to download
+ *                when Amazon Glacier receives the delete archive request, you will be able to download
  *                the output.</p>
  *             </li>
  *          </ul>
@@ -54,68 +55,78 @@ export interface DeleteArchiveCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { GlacierClient, DeleteArchiveCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, DeleteArchiveCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // DeleteArchiveInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   archiveId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteArchiveCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteArchiveCommandInput - {@link DeleteArchiveCommandInput}
+ * @returns {@link DeleteArchiveCommandOutput}
  * @see {@link DeleteArchiveCommandInput} for command's `input` shape.
  * @see {@link DeleteArchiveCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To delete an archive
+ * ```javascript
+ * // The example deletes the archive specified by the archive ID.
+ * const input = {
+ *   accountId: "-",
+ *   archiveId: "NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId",
+ *   vaultName: "examplevault"
+ * };
+ * const command = new DeleteArchiveCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteArchiveCommand extends $Command<
-  DeleteArchiveCommandInput,
-  DeleteArchiveCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteArchiveCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteArchiveCommandInput, DeleteArchiveCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "DeleteArchiveCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteArchiveInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteArchiveCommand extends command<DeleteArchiveCommandInput, DeleteArchiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteArchive",
+  DeleteArchive$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteArchiveInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteArchiveCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteArchiveCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteArchiveCommandOutput> {
-    return deserializeAws_restJson1DeleteArchiveCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteArchiveCommandInput;
+      output: DeleteArchiveCommandOutput;
+    };
+  };
 }

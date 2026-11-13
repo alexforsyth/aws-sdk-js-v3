@@ -1,250 +1,82 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-export enum ActionGroup {
-  /**
-   * Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile
-   */
-  AGENT_PERMISSIONS = "agentPermissions",
-}
-
-export enum EventPublisher {
-  /**
-   * Notifications for Anomaly Detection
-   */
-  ANOMALY_DETECTION = "AnomalyDetection",
-}
+// smithy-typescript generated code
+import type {
+  ActionGroup,
+  AgentParameterField,
+  AggregationPeriod,
+  ComputePlatform,
+  EventPublisher,
+  FeedbackType,
+  MetadataField,
+  MetricType,
+  OrderBy,
+} from "./enums";
 
 /**
  * <p>Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.</p>
+ * @public
  */
 export interface Channel {
   /**
    * <p>Unique identifier for each <code>Channel</code> in the notification configuration of a Profiling Group. A random UUID for channelId is used when adding a channel to the notification configuration if not specified in the request.</p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p>Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.</p>
+   * @public
    */
   uri: string | undefined;
 
   /**
    * <p>List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.</p>
+   * @public
    */
-  eventPublishers: (EventPublisher | string)[] | undefined;
-}
-
-export namespace Channel {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Channel): any => ({
-    ...obj,
-  });
+  eventPublishers: EventPublisher[] | undefined;
 }
 
 /**
  * <p>The structure representing the AddNotificationChannelsRequest.</p>
+ * @public
  */
 export interface AddNotificationChannelsRequest {
   /**
    * <p>The name of the profiling group that we are setting up notifications for.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
   /**
    * <p>One or 2 channels to report to when anomalies are detected.</p>
+   * @public
    */
   channels: Channel[] | undefined;
-}
-
-export namespace AddNotificationChannelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddNotificationChannelsRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>The configuration for notifications stored for each profiling group. This includes up to
  *          to two channels and a list of event publishers associated with each channel.</p>
+ * @public
  */
 export interface NotificationConfiguration {
   /**
    * <p>List of up to two channels to be used for sending notifications for events detected from
    *          the application profile.</p>
+   * @public
    */
-  channels?: Channel[];
-}
-
-export namespace NotificationConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotificationConfiguration): any => ({
-    ...obj,
-  });
+  channels?: Channel[] | undefined;
 }
 
 /**
  * <p>The structure representing the AddNotificationChannelsResponse.</p>
+ * @public
  */
 export interface AddNotificationChannelsResponse {
   /**
    * <p>The new notification configuration for this profiling group.</p>
+   * @public
    */
-  notificationConfiguration?: NotificationConfiguration;
-}
-
-export namespace AddNotificationChannelsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddNotificationChannelsResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested operation would cause a conflict with the current state
- *         of a service resource associated with the request. Resolve the conflict
- *         before retrying this request.
- *       </p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The server encountered an internal error and is unable to complete the request.</p>
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  $retryable: {};
-  message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The resource specified in the request does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have exceeded your service quota. To perform the requested action,
- *         remove some of the relevant resources, or use <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">Service Quotas</a> to request a
- *         service quota increase.
- *       </p>
- */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
-  $retryable: {};
-  message: string | undefined;
-}
-
-export namespace ServiceQuotaExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was denied due to request throttling.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  $retryable: {};
-  message: string | undefined;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The parameter is not valid.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-export enum AgentParameterField {
-  /**
-   * Maximum stack depth to be captured by the CodeGuru Profiler.
-   */
-  MAX_STACK_DEPTH = "MaxStackDepth",
-  /**
-   * Percentage of memory to be used by CodeGuru profiler. Minimum of 30MB is required for the agent.
-   */
-  MEMORY_USAGE_LIMIT_PERCENT = "MemoryUsageLimitPercent",
-  /**
-   * Minimum time in milliseconds between sending reports.
-   */
-  MINIMUM_TIME_FOR_REPORTING_IN_MILLISECONDS = "MinimumTimeForReportingInMilliseconds",
-  /**
-   * Reporting interval in milliseconds used to report profiles.
-   */
-  REPORTING_INTERVAL_IN_MILLISECONDS = "ReportingIntervalInMilliseconds",
-  /**
-   * Sampling interval in milliseconds used to sample profiles.
-   */
-  SAMPLING_INTERVAL_IN_MILLISECONDS = "SamplingIntervalInMilliseconds",
+  notificationConfiguration?: NotificationConfiguration | undefined;
 }
 
 /**
@@ -254,6 +86,7 @@ export enum AgentParameterField {
  *             </a> that
  *          specifies if an agent profiles or not and for how long to return profiling data.
  *       </p>
+ * @public
  */
 export interface AgentConfiguration {
   /**
@@ -261,6 +94,7 @@ export interface AgentConfiguration {
    *          A <code>Boolean</code> that specifies whether the profiling agent collects profiling data or not. Set to <code>true</code>
    *         to enable profiling.
    *       </p>
+   * @public
    */
   shouldProfile: boolean | undefined;
 
@@ -275,6 +109,7 @@ export interface AgentConfiguration {
    *             </a>
    *          every 5 minutes to submit the profiled data collected during that period.
    *       </p>
+   * @public
    */
   periodInSeconds: number | undefined;
 
@@ -316,17 +151,9 @@ export interface AgentConfiguration {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  agentParameters?: { [key: string]: string };
-}
-
-export namespace AgentConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AgentConfiguration): any => ({
-    ...obj,
-  });
+  agentParameters?: Partial<Record<AgentParameterField, string>> | undefined;
 }
 
 /**
@@ -337,6 +164,7 @@ export namespace AgentConfiguration {
  *             </a>
  *          to enable or disable profiling for a profiling group.
  *       </p>
+ * @public
  */
 export interface AgentOrchestrationConfig {
   /**
@@ -344,32 +172,9 @@ export interface AgentOrchestrationConfig {
    *          A <code>Boolean</code> that specifies whether the profiling agent collects profiling data or not. Set to <code>true</code>
    *          to enable profiling.
    *       </p>
+   * @public
    */
   profilingEnabled: boolean | undefined;
-}
-
-export namespace AgentOrchestrationConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AgentOrchestrationConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum AggregationPeriod {
-  /**
-   * Period of one day.
-   */
-  P1D = "P1D",
-  /**
-   * Period of one hour.
-   */
-  PT1H = "PT1H",
-  /**
-   * Period of five minutes.
-   */
-  PT5M = "PT5M",
 }
 
 /**
@@ -379,6 +184,7 @@ export enum AggregationPeriod {
  *          during an aggregation period. There are three possible aggregation periods (1 day,
  *          1 hour, or 5 minutes).
  *       </p>
+ * @public
  */
 export interface AggregatedProfileTime {
   /**
@@ -392,8 +198,9 @@ export interface AggregatedProfileTime {
    *          Specify <code>start</code> using the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
-  start?: Date;
+  start?: Date | undefined;
 
   /**
    * <p>
@@ -418,59 +225,35 @@ export interface AggregatedProfileTime {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  period?: AggregationPeriod | string;
-}
-
-export namespace AggregatedProfileTime {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AggregatedProfileTime): any => ({
-    ...obj,
-  });
-}
-
-export enum FeedbackType {
-  /**
-   * Profiler recommendation flagged as not useful.
-   */
-  Negative = "Negative",
-  /**
-   * Profiler recommendation flagged as useful.
-   */
-  Positive = "Positive",
+  period?: AggregationPeriod | undefined;
 }
 
 /**
  * <p>Feedback that can be submitted for each instance of an anomaly by the user.
  *             Feedback is be used for improvements in generating recommendations for the application.</p>
+ * @public
  */
 export interface UserFeedback {
   /**
    * <p>Optional <code>Positive</code> or <code>Negative</code> feedback submitted by
    *             the user about whether the recommendation is useful or not.</p>
+   * @public
    */
-  type: FeedbackType | string | undefined;
-}
-
-export namespace UserFeedback {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserFeedback): any => ({
-    ...obj,
-  });
+  type: FeedbackType | undefined;
 }
 
 /**
  * <p>The specific duration in which the metric is flagged as anomalous.</p>
+ * @public
  */
 export interface AnomalyInstance {
   /**
    * <p>
    *             The universally unique identifier (UUID) of an instance of an anomaly in a metric.
    *         </p>
+   * @public
    */
   id: string | undefined;
 
@@ -481,6 +264,7 @@ export interface AnomalyInstance {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   startTime: Date | undefined;
 
@@ -491,29 +275,15 @@ export interface AnomalyInstance {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
    * <p>Feedback type on a specific instance of anomaly submitted by the user.</p>
+   * @public
    */
-  userFeedback?: UserFeedback;
-}
-
-export namespace AnomalyInstance {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnomalyInstance): any => ({
-    ...obj,
-  });
-}
-
-export enum MetricType {
-  /**
-   * Metric value aggregated for all instances of a frame name in a profile relative to the root frame.
-   */
-  AggregatedRelativeTotalTime = "AggregatedRelativeTotalTime",
+  userFeedback?: UserFeedback | undefined;
 }
 
 /**
@@ -523,12 +293,14 @@ export enum MetricType {
  *             frame that was analyzed and the type and thread states used to derive the metric
  *             value for that frame.
  *         </p>
+ * @public
  */
 export interface Metric {
   /**
    * <p>
    *             The name of the method that appears as a frame in any stack in a profile.
    *         </p>
+   * @public
    */
   frameName: string | undefined;
 
@@ -538,25 +310,18 @@ export interface Metric {
    *             The supported value <code>AggregatedRelativeTotalTime</code> is an
    *             aggregation of the metric value for one frame that is calculated across the
    *             occurences of all frames in a profile.</p>
+   * @public
    */
-  type: MetricType | string | undefined;
+  type: MetricType | undefined;
 
   /**
    * <p>
    *             The list of application runtime thread states that is used to calculate the
    *             metric value for the frame.
    *         </p>
+   * @public
    */
   threadStates: string[] | undefined;
-}
-
-export namespace Metric {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Metric): any => ({
-    ...obj,
-  });
 }
 
 /**
@@ -564,6 +329,7 @@ export namespace Metric {
  *             Details about an anomaly in a specific metric of application profile. The anomaly is detected using
  *             analysis of the metric data over a period of time.
  *         </p>
+ * @public
  */
 export interface Anomaly {
   /**
@@ -572,11 +338,13 @@ export interface Anomaly {
    *             The metric includes the name of the frame that was analyzed with the type and
    *             thread states used to derive the metric value for that frame.
    *         </p>
+   * @public
    */
   metric: Metric | undefined;
 
   /**
    * <p>The reason for which metric was flagged as anomalous.</p>
+   * @public
    */
   reason: string | undefined;
 
@@ -584,28 +352,22 @@ export interface Anomaly {
    * <p>
    *             A list of the instances of the detected anomalies during the requested period.
    *         </p>
+   * @public
    */
   instances: AnomalyInstance[] | undefined;
-}
-
-export namespace Anomaly {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Anomaly): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>
  *          The frame name, metric type, and thread states. These are used
  *          to derive the value of the metric for the frame.</p>
+ * @public
  */
 export interface FrameMetric {
   /**
    * <p> Name of the method common across the multiple occurrences of a frame in an application
    *          profile.</p>
+   * @public
    */
   frameName: string | undefined;
 
@@ -613,26 +375,20 @@ export interface FrameMetric {
    * <p> A type of aggregation that specifies how a metric for a frame is analyzed. The
    *          supported value <code>AggregatedRelativeTotalTime</code> is an aggregation of the metric
    *          value for one frame that is calculated across the occurrences of all frames in a profile. </p>
+   * @public
    */
-  type: MetricType | string | undefined;
+  type: MetricType | undefined;
 
   /**
    * <p>List of application runtime thread states used to get the counts for a frame a derive a metric value.</p>
+   * @public
    */
   threadStates: string[] | undefined;
 }
 
-export namespace FrameMetric {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FrameMetric): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the BatchGetFrameMetricDataRequest.</p>
+ * @public
  */
 export interface BatchGetFrameMetricDataRequest {
   /**
@@ -640,6 +396,7 @@ export interface BatchGetFrameMetricDataRequest {
    *          The name of the profiling group associated with the
    *          the frame metrics used to return the time series values.
    *       </p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -650,8 +407,9 @@ export interface BatchGetFrameMetricDataRequest {
    *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *          millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>
@@ -660,8 +418,9 @@ export interface BatchGetFrameMetricDataRequest {
    *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *          millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
    * <p>
@@ -669,8 +428,9 @@ export interface BatchGetFrameMetricDataRequest {
    *          Specify using the ISO 8601 format. The maximum period duration
    *          is one day (<code>PT24H</code> or <code>P1D</code>).
    *       </p>
+   * @public
    */
-  period?: string;
+  period?: string | undefined;
 
   /**
    * <p>The requested resolution of time steps for the returned time series of values.
@@ -695,25 +455,18 @@ export interface BatchGetFrameMetricDataRequest {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  targetResolution?: AggregationPeriod | string;
+  targetResolution?: AggregationPeriod | undefined;
 
   /**
    * <p>
    *          The details of the metrics that are used to request a time series of values. The metric includes
    *          the name of the frame, the aggregation type to calculate the metric value for the
    *          frame, and the thread states to use to get the count for the metric value of the frame.</p>
+   * @public
    */
-  frameMetrics?: FrameMetric[];
-}
-
-export namespace BatchGetFrameMetricDataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchGetFrameMetricDataRequest): any => ({
-    ...obj,
-  });
+  frameMetrics?: FrameMetric[] | undefined;
 }
 
 /**
@@ -722,6 +475,7 @@ export namespace BatchGetFrameMetricDataRequest {
  *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
  *          millisecond past June 1, 2020 1:15:02 PM UTC.
  *       </p>
+ * @public
  */
 export interface TimestampStructure {
   /**
@@ -730,29 +484,23 @@ export interface TimestampStructure {
    *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *          millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
   value: Date | undefined;
-}
-
-export namespace TimestampStructure {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimestampStructure): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>
  *          Information about a frame metric and its values.
  *       </p>
+ * @public
  */
 export interface FrameMetricDatum {
   /**
    * <p>
    *          The frame name, metric type, and thread states. These are used
    *          to derive the value of the metric for the frame.</p>
+   * @public
    */
   frameMetric: FrameMetric | undefined;
 
@@ -760,21 +508,14 @@ export interface FrameMetricDatum {
    * <p>
    *          A list of values that are associated with a frame metric.
    *       </p>
+   * @public
    */
   values: number[] | undefined;
 }
 
-export namespace FrameMetricDatum {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FrameMetricDatum): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the BatchGetFrameMetricDataResponse.</p>
+ * @public
  */
 export interface BatchGetFrameMetricDataResponse {
   /**
@@ -784,6 +525,7 @@ export interface BatchGetFrameMetricDataResponse {
    *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *          millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
   startTime: Date | undefined;
 
@@ -794,6 +536,7 @@ export interface BatchGetFrameMetricDataResponse {
    *          using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *          millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
   endTime: Date | undefined;
 
@@ -818,8 +561,9 @@ export interface BatchGetFrameMetricDataResponse {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  resolution: AggregationPeriod | string | undefined;
+  resolution: AggregationPeriod | undefined;
 
   /**
    * <p>
@@ -828,33 +572,28 @@ export interface BatchGetFrameMetricDataResponse {
    *          is five minutes (<code>PT5M</code>), then there are 288 <code>endTimes</code> in the
    *          list that are each five minutes appart.
    *       </p>
+   * @public
    */
   endTimes: TimestampStructure[] | undefined;
 
   /**
    * <p>List of instances which remained unprocessed. This will create a missing time step in the list of end times.</p>
+   * @public
    */
-  unprocessedEndTimes: { [key: string]: TimestampStructure[] } | undefined;
+  unprocessedEndTimes: Record<string, TimestampStructure[]> | undefined;
 
   /**
    * <p>Details of the metrics to request a time series of values. The metric includes
    *          the name of the frame, the aggregation type to calculate the metric value for the frame,
    *          and the thread states to use to get the count for the metric value of the frame.</p>
+   * @public
    */
   frameMetricData: FrameMetricDatum[] | undefined;
 }
 
-export namespace BatchGetFrameMetricDataResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchGetFrameMetricDataResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the GetFindingsReportAccountSummaryRequest.</p>
+ * @public
  */
 export interface GetFindingsReportAccountSummaryRequest {
   /**
@@ -866,8 +605,9 @@ export interface GetFindingsReportAccountSummaryRequest {
    *             <p>This token should be treated as an opaque identifier that is only used to retrieve
    *          the next items in a list and not for other programmatic purposes.</p>
    *          </note>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results returned by <code> GetFindingsReportAccountSummary</code> in paginated output.
@@ -875,24 +615,17 @@ export interface GetFindingsReportAccountSummaryRequest {
    *             results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial
    *             request can be seen by sending another <code>GetFindingsReportAccountSummary</code> request with the returned
    *             <code>nextToken</code> value.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>A <code>Boolean</code> value indicating whether to only return reports from daily profiles. If set
    *             to <code>True</code>, only analysis data from daily profiles is returned. If set to <code>False</code>,
    *             analysis data is returned from smaller time windows (for example, one hour).</p>
+   * @public
    */
-  dailyReportsOnly?: boolean;
-}
-
-export namespace GetFindingsReportAccountSummaryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFindingsReportAccountSummaryRequest): any => ({
-    ...obj,
-  });
+  dailyReportsOnly?: boolean | undefined;
 }
 
 /**
@@ -900,25 +633,29 @@ export namespace GetFindingsReportAccountSummaryRequest {
  *             Information about potential recommendations that might be created from the
  *             analysis of profiling data.
  *         </p>
+ * @public
  */
 export interface FindingsReportSummary {
   /**
    * <p>The universally unique identifier (UUID) of the recommendation report.</p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p>The name of the profiling group that is associated with the analysis data.</p>
+   * @public
    */
-  profilingGroupName?: string;
+  profilingGroupName?: string | undefined;
 
   /**
    * <p>The start time of the profile the analysis data is about.
    *             This is specified
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
-  profileStartTime?: Date;
+  profileStartTime?: Date | undefined;
 
   /**
    * <p>
@@ -927,26 +664,20 @@ export interface FindingsReportSummary {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
-  profileEndTime?: Date;
+  profileEndTime?: Date | undefined;
 
   /**
    * <p>The total number of different recommendations that were found by the analysis.</p>
+   * @public
    */
-  totalNumberOfFindings?: number;
-}
-
-export namespace FindingsReportSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FindingsReportSummary): any => ({
-    ...obj,
-  });
+  totalNumberOfFindings?: number | undefined;
 }
 
 /**
  * <p>The structure representing the GetFindingsReportAccountSummaryResponse.</p>
+ * @public
  */
 export interface GetFindingsReportAccountSummaryResponse {
   /**
@@ -955,6 +686,7 @@ export interface GetFindingsReportAccountSummaryResponse {
    *                <code>FindingsReportSummary</code>
    *             </a>
    *             objects taht contain summaries of analysis results for all profiling groups in your AWS account.</p>
+   * @public
    */
   reportSummaries: FindingsReportSummary[] | undefined;
 
@@ -963,103 +695,48 @@ export interface GetFindingsReportAccountSummaryResponse {
    *          When the results of a <code>GetFindingsReportAccountSummary</code> request exceed <code>maxResults</code>, this
    *          value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more
    *          results to return.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetFindingsReportAccountSummaryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFindingsReportAccountSummaryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>
    *          The Amazon Resource Name (ARN) of the resource that contains the tags to return.
    *       </p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>
    *          The list of tags assigned to the specified resource. This is the list of tags
    *          returned in the response.
    *       </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum MetadataField {
-  /**
-   * Unique identifier for the agent instance.
-   */
-  AGENT_ID = "AgentId",
-  /**
-   * AWS requestId of the Lambda invocation.
-   */
-  AWS_REQUEST_ID = "AwsRequestId",
-  /**
-   * Compute platform on which agent is running.
-   */
-  COMPUTE_PLATFORM = "ComputePlatform",
-  /**
-   * Execution environment on which Lambda function is running.
-   */
-  EXECUTION_ENVIRONMENT = "ExecutionEnvironment",
-  /**
-   * Function ARN that's used to invoke the Lambda function.
-   */
-  LAMBDA_FUNCTION_ARN = "LambdaFunctionArn",
-  /**
-   * Memory allocated for the Lambda function.
-   */
-  LAMBDA_MEMORY_LIMIT_IN_MB = "LambdaMemoryLimitInMB",
-  /**
-   * Time in milliseconds for the previous Lambda invocation.
-   */
-  LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS = "LambdaPreviousExecutionTimeInMilliseconds",
-  /**
-   * Time in milliseconds left before the execution times out.
-   */
-  LAMBDA_REMAINING_TIME_IN_MILLISECONDS = "LambdaRemainingTimeInMilliseconds",
-  /**
-   * Time in milliseconds between two invocations of the Lambda function.
-   */
-  LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS = "LambdaTimeGapBetweenInvokesInMilliseconds",
+  tags?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The structure representing the configureAgentRequest.</p>
+ * @public
  */
 export interface ConfigureAgentRequest {
   /**
    * <p>
    *          The name of the profiling group for which the configured agent is collecting profiling data.
    *       </p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1067,8 +744,9 @@ export interface ConfigureAgentRequest {
    * <p> A universally unique identifier (UUID) for a profiling instance. For example, if the
    *          profiling instance is an Amazon EC2 instance, it is the instance ID. If it is an AWS
    *          Fargate container, it is the container's task ID. </p>
+   * @public
    */
-  fleetInstanceId?: string;
+  fleetInstanceId?: string | undefined;
 
   /**
    * <p> Metadata captured about the compute platform the agent is running on. It includes
@@ -1120,21 +798,14 @@ export interface ConfigureAgentRequest {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  metadata?: { [key: string]: string };
-}
-
-export namespace ConfigureAgentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigureAgentRequest): any => ({
-    ...obj,
-  });
+  metadata?: Partial<Record<MetadataField, string>> | undefined;
 }
 
 /**
  * <p>The structure representing the configureAgentResponse.</p>
+ * @public
  */
 export interface ConfigureAgentResponse {
   /**
@@ -1144,36 +815,19 @@ export interface ConfigureAgentResponse {
    *             </a>
    *          object that specifies if an agent profiles or not and for how long to return profiling data.
    *       </p>
+   * @public
    */
   configuration: AgentConfiguration | undefined;
 }
 
-export namespace ConfigureAgentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigureAgentResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ComputePlatform {
-  /**
-   * Compute platform meant to used for AWS Lambda.
-   */
-  AWSLAMBDA = "AWSLambda",
-  /**
-   * Compute platform meant to used for all usecases (like EC2, Fargate, physical servers etc.) but AWS Lambda.
-   */
-  DEFAULT = "Default",
-}
-
 /**
  * <p>The structure representing the createProfiliingGroupRequest.</p>
+ * @public
  */
 export interface CreateProfilingGroupRequest {
   /**
    * <p>The name of the profiling group to create.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1184,37 +838,32 @@ export interface CreateProfilingGroupRequest {
    *          is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform.
    *          If not specified, <code>Default</code> is used.
    *       </p>
+   * @public
    */
-  computePlatform?: ComputePlatform | string;
+  computePlatform?: ComputePlatform | undefined;
 
   /**
    * <p> Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the
    *          accidental creation of duplicate profiling groups if there are failures and retries. </p>
+   * @public
    */
-  clientToken?: string;
+  clientToken?: string | undefined;
 
   /**
    * <p>
    *          Specifies whether profiling is enabled or disabled for the created profiling group.
    *       </p>
+   * @public
    */
-  agentOrchestrationConfig?: AgentOrchestrationConfig;
+  agentOrchestrationConfig?: AgentOrchestrationConfig | undefined;
 
   /**
    * <p>
    *          A list of tags to add to the created profiling group.
    *       </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace CreateProfilingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProfilingGroupRequest): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
@@ -1223,14 +872,16 @@ export namespace CreateProfilingGroupRequest {
  *          the last time a profile was received, and the aggregation period and start time for the
  *          most recent aggregated profile.
  *       </p>
+ * @public
  */
 export interface ProfilingStatus {
   /**
    * <p>The date and time when the most recent profile was received. Specify using
    *          the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
-  latestAgentProfileReportedAt?: Date;
+  latestAgentProfileReportedAt?: Date | undefined;
 
   /**
    * <p>
@@ -1239,36 +890,31 @@ export interface ProfilingStatus {
    *             </a>
    *          object that contains the aggregation period and start time for an aggregated profile.
    *       </p>
+   * @public
    */
-  latestAggregatedProfile?: AggregatedProfileTime;
+  latestAggregatedProfile?: AggregatedProfileTime | undefined;
 
   /**
    * <p>The date and time when the profiling agent most recently pinged back. Specify using
    *          the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
-  latestAgentOrchestratedAt?: Date;
-}
-
-export namespace ProfilingStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProfilingStatus): any => ({
-    ...obj,
-  });
+  latestAgentOrchestratedAt?: Date | undefined;
 }
 
 /**
  * <p>
  *          Contains information about a profiling group.
  *       </p>
+ * @public
  */
 export interface ProfilingGroupDescription {
   /**
    * <p>The name of the profiling group.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>
@@ -1277,21 +923,24 @@ export interface ProfilingGroupDescription {
    *             </a>
    *          object that indicates if the profiling group is enabled for profiled or not.
    *       </p>
+   * @public
    */
-  agentOrchestrationConfig?: AgentOrchestrationConfig;
+  agentOrchestrationConfig?: AgentOrchestrationConfig | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) identifying the profiling group resource.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>The time when the profiling group was created. Specify using
    *          the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>
@@ -1299,8 +948,9 @@ export interface ProfilingGroupDescription {
    *          the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
    *       </p>
+   * @public
    */
-  updatedAt?: Date;
+  updatedAt?: Date | undefined;
 
   /**
    * <p>
@@ -1311,8 +961,9 @@ export interface ProfilingGroupDescription {
    *          the last time a profile was received, and the aggregation period and start time for the
    *          most recent aggregated profile.
    *       </p>
+   * @public
    */
-  profilingStatus?: ProfilingStatus;
+  profilingStatus?: ProfilingStatus | undefined;
 
   /**
    * <p>
@@ -1321,28 +972,22 @@ export interface ProfilingGroupDescription {
    *          profiled application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance,
    *          an on-premises server, or a different platform. The default is <code>Default</code>.
    *       </p>
+   * @public
    */
-  computePlatform?: ComputePlatform | string;
+  computePlatform?: ComputePlatform | undefined;
 
   /**
    * <p>
    *          A list of the tags that belong to this profiling group.
    *       </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace ProfilingGroupDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProfilingGroupDescription): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The structure representing the createProfilingGroupResponse.</p>
+ * @public
  */
 export interface CreateProfilingGroupResponse {
   /**
@@ -1350,75 +995,46 @@ export interface CreateProfilingGroupResponse {
    *                <code>ProfilingGroupDescription</code>
    *             </a> object that contains information
    *          about the created profiling group. </p>
+   * @public
    */
   profilingGroup: ProfilingGroupDescription | undefined;
 }
 
-export namespace CreateProfilingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProfilingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the deleteProfilingGroupRequest.</p>
+ * @public
  */
 export interface DeleteProfilingGroupRequest {
   /**
    * <p>The name of the profiling group to delete.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 }
 
-export namespace DeleteProfilingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProfilingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the deleteProfilingGroupResponse.</p>
+ * @public
  */
 export interface DeleteProfilingGroupResponse {}
 
-export namespace DeleteProfilingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProfilingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the describeProfilingGroupRequest.</p>
+ * @public
  */
 export interface DescribeProfilingGroupRequest {
   /**
    * <p>
    *          The name of the profiling group to get information about.
    *       </p>
+   * @public
    */
   profilingGroupName: string | undefined;
 }
 
-export namespace DescribeProfilingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeProfilingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the describeProfilingGroupResponse.</p>
+ * @public
  */
 export interface DescribeProfilingGroupResponse {
   /**
@@ -1428,108 +1044,75 @@ export interface DescribeProfilingGroupResponse {
    *             </a>
    *          object that contains information about the requested profiling group.
    *       </p>
+   * @public
    */
   profilingGroup: ProfilingGroupDescription | undefined;
 }
 
-export namespace DescribeProfilingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeProfilingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the GetNotificationConfigurationRequest.</p>
+ * @public
  */
 export interface GetNotificationConfigurationRequest {
   /**
    * <p>The name of the profiling group we want to get the notification configuration for.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 }
 
-export namespace GetNotificationConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetNotificationConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the GetNotificationConfigurationResponse.</p>
+ * @public
  */
 export interface GetNotificationConfigurationResponse {
   /**
    * <p>The current notification configuration for this profiling group.</p>
+   * @public
    */
   notificationConfiguration: NotificationConfiguration | undefined;
-}
-
-export namespace GetNotificationConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetNotificationConfigurationResponse): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>
  *             The structure representing the <code>getPolicyRequest</code>.
  *         </p>
+ * @public
  */
 export interface GetPolicyRequest {
   /**
    * <p>The name of the profiling group.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 }
 
-export namespace GetPolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetPolicyRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the <code>getPolicyResponse</code>.</p>
+ * @public
  */
 export interface GetPolicyResponse {
   /**
    * <p>The JSON-formatted resource-based policy attached to the <code>ProfilingGroup</code>.</p>
+   * @public
    */
   policy: string | undefined;
 
   /**
    * <p>A unique identifier for the current revision of the returned policy.</p>
+   * @public
    */
   revisionId: string | undefined;
 }
 
-export namespace GetPolicyResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetPolicyResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the getProfileRequest.</p>
+ * @public
  */
 export interface GetProfileRequest {
   /**
    * <p>The name of the profiling group to get.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1542,8 +1125,9 @@ export interface GetProfileRequest {
    *          If you specify <code>startTime</code>, then you must also specify <code>period</code>
    *          or <code>endTime</code>, but not both.
    *       </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>
@@ -1555,8 +1139,9 @@ export interface GetProfileRequest {
    *          <p>
    *          To get the latest aggregated profile, specify only <code>period</code>.
    *       </p>
+   * @public
    */
-  period?: string;
+  period?: string | undefined;
 
   /**
    * <p>
@@ -1568,8 +1153,9 @@ export interface GetProfileRequest {
    *          If you specify <code>endTime</code>, then you must also specify <code>period</code>
    *          or <code>startTime</code>, but not both.
    *       </p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
    * <p>
@@ -1580,8 +1166,9 @@ export interface GetProfileRequest {
    *          set to 2, then the aggregated profile contains representations of methods <code>A</code>
    *          and <code>B</code>.
    *       </p>
+   * @public
    */
-  maxDepth?: number;
+  maxDepth?: number | undefined;
 
   /**
    * <p>
@@ -1604,25 +1191,19 @@ export interface GetProfileRequest {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  accept?: string;
-}
-
-export namespace GetProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetProfileRequest): any => ({
-    ...obj,
-  });
+  accept?: string | undefined;
 }
 
 /**
  * <p>The structure representing the getProfileResponse.</p>
+ * @public
  */
 export interface GetProfileResponse {
   /**
    * <p>Information about the profile.</p>
+   * @public
    */
   profile: Uint8Array | undefined;
 
@@ -1630,32 +1211,27 @@ export interface GetProfileResponse {
    * <p>The content type of the profile in the payload. It is
    *         either <code>application/json</code> or the default
    *         <code>application/x-amzn-ion</code>.</p>
+   * @public
    */
   contentType: string | undefined;
 
   /**
    * <p>The content encoding of the profile.</p>
+   * @public
    */
-  contentEncoding?: string;
-}
-
-export namespace GetProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetProfileResponse): any => ({
-    ...obj,
-  });
+  contentEncoding?: string | undefined;
 }
 
 /**
  * <p>The structure representing the GetRecommendationsRequest.</p>
+ * @public
  */
 export interface GetRecommendationsRequest {
   /**
    * <p>
    *             The name of the profiling group to get analysis data about.
    *         </p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1666,6 +1242,7 @@ export interface GetRecommendationsRequest {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   startTime: Date | undefined;
 
@@ -1676,6 +1253,7 @@ export interface GetRecommendationsRequest {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   endTime: Date | undefined;
 
@@ -1741,53 +1319,51 @@ export interface GetRecommendationsRequest {
    *                 </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  locale?: string;
-}
-
-export namespace GetRecommendationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecommendationsRequest): any => ({
-    ...obj,
-  });
+  locale?: string | undefined;
 }
 
 /**
  * <p>
  *             A set of rules used to make a recommendation during an analysis.
  *         </p>
+ * @public
  */
 export interface Pattern {
   /**
    * <p>The universally unique identifier (UUID) of this pattern.</p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p>The name for this pattern.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The description of the recommendation. This explains a potential
    *             inefficiency in a profiled application.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>
    *             A string that contains the steps recommended to address the potential inefficiency.
    *         </p>
+   * @public
    */
-  resolutionSteps?: string;
+  resolutionSteps?: string | undefined;
 
   /**
    * <p>A list of frame names that were searched during the analysis that generated
    *             a recommendation.</p>
+   * @public
    */
-  targetFrames?: string[][];
+  targetFrames?: string[][] | undefined;
 
   /**
    * <p>
@@ -1795,76 +1371,69 @@ export interface Pattern {
    *             a recommendation. The percentage of time is the same as the percentage of
    *             the total gathered sample counts during analysis.
    *         </p>
+   * @public
    */
-  thresholdPercent?: number;
+  thresholdPercent?: number | undefined;
 
   /**
    * <p>
    *             A list of the different counters used to determine if there is a match.
    *         </p>
+   * @public
    */
-  countersToAggregate?: string[];
-}
-
-export namespace Pattern {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Pattern): any => ({
-    ...obj,
-  });
+  countersToAggregate?: string[] | undefined;
 }
 
 /**
  * <p>The part of a profile that contains a recommendation found during analysis.</p>
+ * @public
  */
 export interface Match {
   /**
    * <p>The target frame that triggered a match.</p>
+   * @public
    */
-  targetFramesIndex?: number;
+  targetFramesIndex?: number | undefined;
 
   /**
    * <p>The location in the profiling graph that contains a recommendation found during analysis.</p>
+   * @public
    */
-  frameAddress?: string;
+  frameAddress?: string | undefined;
 
   /**
    * <p>The value in the profile data that exceeded the recommendation threshold.</p>
+   * @public
    */
-  thresholdBreachValue?: number;
-}
-
-export namespace Match {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Match): any => ({
-    ...obj,
-  });
+  thresholdBreachValue?: number | undefined;
 }
 
 /**
  * <p>A potential improvement that was found from analyzing the profiling data.</p>
+ * @public
  */
 export interface Recommendation {
   /**
    * <p>How many different places in the profile graph triggered a match.</p>
+   * @public
    */
   allMatchesCount: number | undefined;
 
   /**
    * <p>How much of the total sample count is potentially affected.</p>
+   * @public
    */
   allMatchesSum: number | undefined;
 
   /**
    * <p>The pattern that analysis recognized in the profile to make this recommendation.</p>
+   * @public
    */
   pattern: Pattern | undefined;
 
   /**
    * <p>List of the matches with most impact. </p>
+   * @public
    */
   topMatches: Match[] | undefined;
 
@@ -1873,6 +1442,7 @@ export interface Recommendation {
    *         This is specified
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
   startTime: Date | undefined;
 
@@ -1881,25 +1451,19 @@ export interface Recommendation {
    *             This is specified
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
   endTime: Date | undefined;
 }
 
-export namespace Recommendation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Recommendation): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the GetRecommendationsResponse.</p>
+ * @public
  */
 export interface GetRecommendationsResponse {
   /**
    * <p>The name of the profiling group the analysis data is about.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1909,6 +1473,7 @@ export interface GetRecommendationsResponse {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   profileStartTime: Date | undefined;
 
@@ -1918,11 +1483,13 @@ export interface GetRecommendationsResponse {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   profileEndTime: Date | undefined;
 
   /**
    * <p>The list of recommendations that the analysis found for this profile.</p>
+   * @public
    */
   recommendations: Recommendation[] | undefined;
 
@@ -1930,25 +1497,19 @@ export interface GetRecommendationsResponse {
    * <p>
    *             The list of anomalies that the analysis has found for this profile.
    *         </p>
+   * @public
    */
   anomalies: Anomaly[] | undefined;
 }
 
-export namespace GetRecommendationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecommendationsResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the ListFindingsReportsRequest.</p>
+ * @public
  */
 export interface ListFindingsReportsRequest {
   /**
    * <p>The name of the profiling group from which to search for analysis data.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -1959,6 +1520,7 @@ export interface ListFindingsReportsRequest {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   startTime: Date | undefined;
 
@@ -1969,6 +1531,7 @@ export interface ListFindingsReportsRequest {
    *             using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
    *             millisecond past June 1, 2020 1:15:02 PM UTC.
    *         </p>
+   * @public
    */
   endTime: Date | undefined;
 
@@ -1981,8 +1544,9 @@ export interface ListFindingsReportsRequest {
    *             <p>This token should be treated as an opaque identifier that is only used to retrieve
    *       the next items in a list and not for other programmatic purposes.</p>
    *          </note>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of report results returned by <code>ListFindingsReports</code>
@@ -1991,32 +1555,27 @@ export interface ListFindingsReportsRequest {
    *          element. The remaining results of the initial request
    *          can be seen by sending another <code>ListFindingsReports</code> request with the returned
    *          <code>nextToken</code> value.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>A <code>Boolean</code> value indicating whether to only return reports from daily profiles. If set
    *         to <code>True</code>, only analysis data from daily profiles is returned. If set to <code>False</code>,
    *         analysis data is returned from smaller time windows (for example, one hour).</p>
+   * @public
    */
-  dailyReportsOnly?: boolean;
-}
-
-export namespace ListFindingsReportsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFindingsReportsRequest): any => ({
-    ...obj,
-  });
+  dailyReportsOnly?: boolean | undefined;
 }
 
 /**
  * <p>The structure representing the ListFindingsReportsResponse.</p>
+ * @public
  */
 export interface ListFindingsReportsResponse {
   /**
    * <p>The list of analysis results summaries.</p>
+   * @public
    */
   findingsReportSummaries: FindingsReportSummary[] | undefined;
 
@@ -2025,46 +1584,31 @@ export interface ListFindingsReportsResponse {
    *          When the results of a <code>ListFindingsReports</code> request exceed <code>maxResults</code>, this
    *          value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more
    *          results to return.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListFindingsReportsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListFindingsReportsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum OrderBy {
-  /**
-   * Order by timestamp in ascending order.
-   */
-  TIMESTAMP_ASCENDING = "TimestampAscending",
-  /**
-   * Order by timestamp in descending order.
-   */
-  TIMESTAMP_DESCENDING = "TimestampDescending",
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The structure representing the listProfileTimesRequest.</p>
+ * @public
  */
 export interface ListProfileTimesRequest {
   /**
    * <p>The name of the profiling group.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
   /**
    * <p>The start time of the time range from which to list the profiles.</p>
+   * @public
    */
   startTime: Date | undefined;
 
   /**
    * <p>The end time of the time range from which to list the profiles.</p>
+   * @public
    */
   endTime: Date | undefined;
 
@@ -2090,15 +1634,17 @@ export interface ListProfileTimesRequest {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  period: AggregationPeriod | string | undefined;
+  period: AggregationPeriod | undefined;
 
   /**
    * <p>The order (ascending or descending by start time of the profile) to
    *         use when listing profiles. Defaults to <code>TIMESTAMP_DESCENDING</code>.
    *       </p>
+   * @public
    */
-  orderBy?: OrderBy | string;
+  orderBy?: OrderBy | undefined;
 
   /**
    * <p>The maximum number of profile time results returned by <code>ListProfileTimes</code>
@@ -2108,8 +1654,9 @@ export interface ListProfileTimesRequest {
    *          can be seen by sending another <code>ListProfileTimes</code> request with the returned
    *          <code>nextToken</code> value.
    *       </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>The <code>nextToken</code> value returned from a previous paginated
@@ -2121,50 +1668,37 @@ export interface ListProfileTimesRequest {
    *             <p>This token should be treated as an opaque identifier that is only used to retrieve
    *          the next items in a list and not for other programmatic purposes.</p>
    *          </note>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListProfileTimesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfileTimesRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>
  *          Contains the start time of a profile.
  *       </p>
+ * @public
  */
 export interface ProfileTime {
   /**
    * <p>The start time of a profile. It is specified using
    *          the ISO 8601 format. For example,
    *          2020-06-01T13:15:02.001Z  represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.</p>
+   * @public
    */
-  start?: Date;
-}
-
-export namespace ProfileTime {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProfileTime): any => ({
-    ...obj,
-  });
+  start?: Date | undefined;
 }
 
 /**
  * <p>The structure representing the listProfileTimesResponse.</p>
+ * @public
  */
 export interface ListProfileTimesResponse {
   /**
    * <p>The list of start times of the available profiles for the aggregation
    *         period in the specified time range.
    *       </p>
+   * @public
    */
   profileTimes: ProfileTime[] | undefined;
 
@@ -2173,21 +1707,14 @@ export interface ListProfileTimesResponse {
    *          When the results of a <code>ListProfileTimes</code> request exceed <code>maxResults</code>, this
    *          value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more
    *          results to return. </p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListProfileTimesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfileTimesResponse): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The structure representing the listProfilingGroupsRequest.</p>
+ * @public
  */
 export interface ListProfilingGroupsRequest {
   /**
@@ -2200,8 +1727,9 @@ export interface ListProfilingGroupsRequest {
    *             <p>This token should be treated as an opaque identifier that is only used to retrieve
    *          the next items in a list and not for other programmatic purposes.</p>
    *          </note>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of profiling groups results returned by <code>ListProfilingGroups</code>
@@ -2211,8 +1739,9 @@ export interface ListProfilingGroupsRequest {
    *          can be seen by sending another <code>ListProfilingGroups</code> request with the returned
    *          <code>nextToken</code> value.
    *       </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>A <code>Boolean</code> value indicating whether to include a description. If <code>true</code>,
@@ -2222,21 +1751,14 @@ export interface ListProfilingGroupsRequest {
    *             </a> objects
    *       that contain detailed information about profiling groups is returned. If <code>false</code>, then
    *       a list of profiling group names is returned.</p>
+   * @public
    */
-  includeDescription?: boolean;
-}
-
-export namespace ListProfilingGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfilingGroupsRequest): any => ({
-    ...obj,
-  });
+  includeDescription?: boolean | undefined;
 }
 
 /**
  * <p>The structure representing the listProfilingGroupsResponse.</p>
+ * @public
  */
 export interface ListProfilingGroupsResponse {
   /**
@@ -2248,6 +1770,7 @@ export interface ListProfilingGroupsResponse {
    *             </a> objects
    *          is returned.
    *       </p>
+   * @public
    */
   profilingGroupNames: string[] | undefined;
 
@@ -2263,29 +1786,23 @@ export interface ListProfilingGroupsResponse {
    *             </a>
    *          objects is returned only if <code>includeDescription</code> is <code>true</code>, otherwise a list of profiling group names is returned.
    *       </p>
+   * @public
    */
-  profilingGroups?: ProfilingGroupDescription[];
+  profilingGroups?: ProfilingGroupDescription[] | undefined;
 
   /**
    * <p>The <code>nextToken</code> value to include in a future <code>ListProfilingGroups</code> request.
    *          When the results of a <code>ListProfilingGroups</code> request exceed <code>maxResults</code>, this
    *          value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more
    *          results to return. </p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListProfilingGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListProfilingGroupsResponse): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The structure representing the postAgentProfileRequest.</p>
+ * @public
  */
 export interface PostAgentProfileRequest {
   /**
@@ -2293,6 +1810,7 @@ export interface PostAgentProfileRequest {
    *          The name of the profiling group with the aggregated profile that receives the
    *          submitted profiling data.
    *       </p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -2300,14 +1818,16 @@ export interface PostAgentProfileRequest {
    * <p>
    *          The submitted profiling data.
    *       </p>
+   * @public
    */
   agentProfile: Uint8Array | undefined;
 
   /**
    * <p> Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the
    *          accidental submission of duplicate profiling data if there are failures and retries. </p>
+   * @public
    */
-  profileToken?: string;
+  profileToken?: string | undefined;
 
   /**
    * <p>
@@ -2330,39 +1850,25 @@ export interface PostAgentProfileRequest {
    *             </p>
    *             </li>
    *          </ul>
+   * @public
    */
   contentType: string | undefined;
 }
 
-export namespace PostAgentProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PostAgentProfileRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the postAgentProfileResponse.</p>
+ * @public
  */
 export interface PostAgentProfileResponse {}
 
-export namespace PostAgentProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PostAgentProfileResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the <code>putPermissionRequest</code>.</p>
+ * @public
  */
 export interface PutPermissionRequest {
   /**
    * <p>The name of the profiling group to grant access to.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -2373,14 +1879,16 @@ export interface PutPermissionRequest {
    *             grants permission to perform actions required by the profiling agent, <code>ConfigureAgent</code>
    *             and <code>PostAgentProfile</code> permissions.
    *         </p>
+   * @public
    */
-  actionGroup: ActionGroup | string | undefined;
+  actionGroup: ActionGroup | undefined;
 
   /**
    * <p>
    *             A list ARNs for the roles and users you want to grant access to the profiling group.
    *             Wildcards are not are supported in the ARNs.
    *         </p>
+   * @public
    */
   principals: string[] | undefined;
 
@@ -2391,21 +1899,14 @@ export interface PutPermissionRequest {
    *             this when you add permissions to a profiling group for the first time. If a policy already exists on the
    *             profiling group, you must specify the <code>revisionId</code>.
    *         </p>
+   * @public
    */
-  revisionId?: string;
-}
-
-export namespace PutPermissionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutPermissionRequest): any => ({
-    ...obj,
-  });
+  revisionId?: string | undefined;
 }
 
 /**
  * <p>The structure representing the <code>putPermissionResponse</code>.</p>
+ * @public
  */
 export interface PutPermissionResponse {
   /**
@@ -2413,6 +1914,7 @@ export interface PutPermissionResponse {
    *             The JSON-formatted resource-based policy on the profiling group that includes the
    *             added permissions.
    *         </p>
+   * @public
    */
   policy: string | undefined;
 
@@ -2420,70 +1922,51 @@ export interface PutPermissionResponse {
    * <p> A universally unique identifier (UUID) for the revision of the resource-based policy
    *             that includes the added permissions. The JSON-formatted policy is in the
    *                 <code>policy</code> element of the response. </p>
+   * @public
    */
   revisionId: string | undefined;
 }
 
-export namespace PutPermissionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutPermissionResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the RemoveNotificationChannelRequest.</p>
+ * @public
  */
 export interface RemoveNotificationChannelRequest {
   /**
    * <p>The name of the profiling group we want to change notification configuration for.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
   /**
    * <p>The id of the channel that we want to stop receiving notifications.</p>
+   * @public
    */
   channelId: string | undefined;
 }
 
-export namespace RemoveNotificationChannelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveNotificationChannelRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the RemoveNotificationChannelResponse.</p>
+ * @public
  */
 export interface RemoveNotificationChannelResponse {
   /**
    * <p>The new notification configuration for this profiling group.</p>
+   * @public
    */
-  notificationConfiguration?: NotificationConfiguration;
-}
-
-export namespace RemoveNotificationChannelResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveNotificationChannelResponse): any => ({
-    ...obj,
-  });
+  notificationConfiguration?: NotificationConfiguration | undefined;
 }
 
 /**
  * <p>
  *
  *             The structure representing the <code>removePermissionRequest</code>.</p>
+ * @public
  */
 export interface RemovePermissionRequest {
   /**
    * <p>The name of the profiling group.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -2493,29 +1976,23 @@ export interface RemovePermissionRequest {
    *             a profiling group's resource-based policy. One action group is supported, <code>agentPermissions</code>, which
    *             grants <code>ConfigureAgent</code> and <code>PostAgentProfile</code> permissions.
    *         </p>
+   * @public
    */
-  actionGroup: ActionGroup | string | undefined;
+  actionGroup: ActionGroup | undefined;
 
   /**
    * <p>
    *             A universally unique identifier (UUID) for the revision of the resource-based policy from which
    *             you want to remove permissions.
    *         </p>
+   * @public
    */
   revisionId: string | undefined;
 }
 
-export namespace RemovePermissionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemovePermissionRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the <code>removePermissionResponse</code>.</p>
+ * @public
  */
 export interface RemovePermissionResponse {
   /**
@@ -2523,6 +2000,7 @@ export interface RemovePermissionResponse {
    *             The JSON-formatted resource-based policy on the profiling group after
    *             the specified permissions were removed.
    *         </p>
+   * @public
    */
   policy: string | undefined;
 
@@ -2530,25 +2008,19 @@ export interface RemovePermissionResponse {
    * <p> A universally unique identifier (UUID) for the revision of the resource-based policy
    *             after the specified permissions were removed. The updated JSON-formatted policy is in the
    *                 <code>policy</code> element of the response. </p>
+   * @public
    */
   revisionId: string | undefined;
 }
 
-export namespace RemovePermissionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemovePermissionResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the SubmitFeedbackRequest.</p>
+ * @public
  */
 export interface SubmitFeedbackRequest {
   /**
    * <p>The name of the profiling group that is associated with the analysis data.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -2558,6 +2030,7 @@ export interface SubmitFeedbackRequest {
    *                <code>AnomalyInstance</code>
    *             </a> object
    *             that is included in the analysis data.</p>
+   * @public
    */
   anomalyInstanceId: string | undefined;
 
@@ -2565,44 +2038,31 @@ export interface SubmitFeedbackRequest {
    * <p>
    *             The feedback tpye. Thee are two valid values, <code>Positive</code> and <code>Negative</code>.
    *         </p>
+   * @public
    */
-  type: FeedbackType | string | undefined;
+  type: FeedbackType | undefined;
 
   /**
    * <p>Optional feedback about this anomaly.</p>
+   * @public
    */
-  comment?: string;
-}
-
-export namespace SubmitFeedbackRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubmitFeedbackRequest): any => ({
-    ...obj,
-  });
+  comment?: string | undefined;
 }
 
 /**
  * <p>The structure representing the SubmitFeedbackResponse.</p>
+ * @public
  */
 export interface SubmitFeedbackResponse {}
 
-export namespace SubmitFeedbackResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubmitFeedbackResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the updateProfilingGroupRequest.</p>
+ * @public
  */
 export interface UpdateProfilingGroupRequest {
   /**
    * <p>The name of the profiling group to update.</p>
+   * @public
    */
   profilingGroupName: string | undefined;
 
@@ -2610,21 +2070,14 @@ export interface UpdateProfilingGroupRequest {
    * <p>
    *          Specifies whether profiling is enabled or disabled for a profiling group.
    *       </p>
+   * @public
    */
   agentOrchestrationConfig: AgentOrchestrationConfig | undefined;
 }
 
-export namespace UpdateProfilingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateProfilingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The structure representing the updateProfilingGroupResponse.</p>
+ * @public
  */
 export interface UpdateProfilingGroupResponse {
   /**
@@ -2634,24 +2087,20 @@ export interface UpdateProfilingGroupResponse {
    *             </a>
    *          that contains information about the returned updated profiling group.
    *       </p>
+   * @public
    */
   profilingGroup: ProfilingGroupDescription | undefined;
 }
 
-export namespace UpdateProfilingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateProfilingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>
    *          The Amazon Resource Name (ARN) of the resource that the tags are added to.
    *       </p>
+   * @public
    */
   resourceArn: string | undefined;
 
@@ -2659,35 +2108,25 @@ export interface TagResourceRequest {
    * <p>
    *          The list of tags that are added to the specified resource.
    *       </p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
+  tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>
    *          The Amazon Resource Name (ARN) of the resource that contains the tags to remove.
    *       </p>
+   * @public
    */
   resourceArn: string | undefined;
 
@@ -2696,26 +2135,12 @@ export interface UntagResourceRequest {
    *          A list of tag keys. Existing tags of resources with keys in this list are removed from
    *          the specified resource.
    *       </p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
-
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}

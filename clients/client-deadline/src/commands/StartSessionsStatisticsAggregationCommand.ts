@@ -1,0 +1,111 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  StartSessionsStatisticsAggregationRequest,
+  StartSessionsStatisticsAggregationResponse,
+} from "../models/models_1";
+import { StartSessionsStatisticsAggregation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartSessionsStatisticsAggregationCommand}.
+ */
+export interface StartSessionsStatisticsAggregationCommandInput extends StartSessionsStatisticsAggregationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartSessionsStatisticsAggregationCommand}.
+ */
+export interface StartSessionsStatisticsAggregationCommandOutput extends StartSessionsStatisticsAggregationResponse, __MetadataBearer {}
+
+/**
+ * Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the <code>GetSessionsStatisticsAggregation</code> operation. You can only have one running aggregation for your Deadline Cloud farm. Call the <code>GetSessionsStatisticsAggregation</code> operation and check the <code>status</code> field to see if an aggregation is running. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, StartSessionsStatisticsAggregationCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, StartSessionsStatisticsAggregationCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // StartSessionsStatisticsAggregationRequest
+ *   farmId: "STRING_VALUE", // required
+ *   resourceIds: { // SessionsStatisticsResources Union: only one key present
+ *     queueIds: [ // QueueIds
+ *       "STRING_VALUE",
+ *     ],
+ *     fleetIds: [ // FleetIds
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   startTime: new Date("TIMESTAMP"), // required
+ *   endTime: new Date("TIMESTAMP"), // required
+ *   timezone: "STRING_VALUE",
+ *   period: "HOURLY" || "DAILY" || "WEEKLY" || "MONTHLY",
+ *   groupBy: [ // UsageGroupBy // required
+ *     "QUEUE_ID" || "FLEET_ID" || "JOB_ID" || "USER_ID" || "USAGE_TYPE" || "INSTANCE_TYPE" || "LICENSE_PRODUCT",
+ *   ],
+ *   statistics: [ // UsageStatistics // required
+ *     "SUM" || "MIN" || "MAX" || "AVG",
+ *   ],
+ * };
+ * const command = new StartSessionsStatisticsAggregationCommand(input);
+ * const response = await client.send(command);
+ * // { // StartSessionsStatisticsAggregationResponse
+ * //   aggregationId: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param StartSessionsStatisticsAggregationCommandInput - {@link StartSessionsStatisticsAggregationCommandInput}
+ * @returns {@link StartSessionsStatisticsAggregationCommandOutput}
+ * @see {@link StartSessionsStatisticsAggregationCommandInput} for command's `input` shape.
+ * @see {@link StartSessionsStatisticsAggregationCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class StartSessionsStatisticsAggregationCommand extends command<StartSessionsStatisticsAggregationCommandInput, StartSessionsStatisticsAggregationCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartSessionsStatisticsAggregation",
+  StartSessionsStatisticsAggregation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartSessionsStatisticsAggregationRequest;
+      output: StartSessionsStatisticsAggregationResponse;
+    };
+    sdk: {
+      input: StartSessionsStatisticsAggregationCommandInput;
+      output: StartSessionsStatisticsAggregationCommandOutput;
+    };
+  };
+}

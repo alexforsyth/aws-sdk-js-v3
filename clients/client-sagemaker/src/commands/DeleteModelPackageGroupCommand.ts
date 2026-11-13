@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteModelPackageGroupInput } from "../models/models_1";
-import {
-  deserializeAws_json1_1DeleteModelPackageGroupCommand,
-  serializeAws_json1_1DeleteModelPackageGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteModelPackageGroupInput } from "../models/models_2";
+import { DeleteModelPackageGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteModelPackageGroupCommand}.
+ */
 export interface DeleteModelPackageGroupCommandInput extends DeleteModelPackageGroupInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteModelPackageGroupCommand}.
+ */
 export interface DeleteModelPackageGroupCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,48 @@ export interface DeleteModelPackageGroupCommandOutput extends __MetadataBearer {
  * ```javascript
  * import { SageMakerClient, DeleteModelPackageGroupCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DeleteModelPackageGroupCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DeleteModelPackageGroupInput
+ *   ModelPackageGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteModelPackageGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteModelPackageGroupCommandInput - {@link DeleteModelPackageGroupCommandInput}
+ * @returns {@link DeleteModelPackageGroupCommandOutput}
  * @see {@link DeleteModelPackageGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteModelPackageGroupCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when you attempted to modify a SageMaker entity such as an <code>Experiment</code> or <code>Artifact</code>.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteModelPackageGroupCommand extends $Command<
-  DeleteModelPackageGroupCommandInput,
-  DeleteModelPackageGroupCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteModelPackageGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteModelPackageGroupCommandInput, DeleteModelPackageGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DeleteModelPackageGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteModelPackageGroupInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteModelPackageGroupCommand extends command<DeleteModelPackageGroupCommandInput, DeleteModelPackageGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteModelPackageGroup",
+  DeleteModelPackageGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteModelPackageGroupInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteModelPackageGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteModelPackageGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteModelPackageGroupCommandOutput> {
-    return deserializeAws_json1_1DeleteModelPackageGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteModelPackageGroupCommandInput;
+      output: DeleteModelPackageGroupCommandOutput;
+    };
+  };
 }

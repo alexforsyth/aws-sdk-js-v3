@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { CreateScheduleRequest, CreateScheduleResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateScheduleCommand,
-  serializeAws_restJson1CreateScheduleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateScheduleRequest, CreateScheduleResponse } from "../models/models_0";
+import { CreateSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateScheduleCommand}.
+ */
 export interface CreateScheduleCommandInput extends CreateScheduleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateScheduleCommand}.
+ */
 export interface CreateScheduleCommandOutput extends CreateScheduleResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,63 @@ export interface CreateScheduleCommandOutput extends CreateScheduleResponse, __M
  * ```javascript
  * import { DataBrewClient, CreateScheduleCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, CreateScheduleCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // CreateScheduleRequest
+ *   JobNames: [ // JobNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   CronExpression: "STRING_VALUE", // required
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new CreateScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // CreateScheduleResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateScheduleCommandInput - {@link CreateScheduleCommandInput}
+ * @returns {@link CreateScheduleCommandOutput}
  * @see {@link CreateScheduleCommandInput} for command's `input` shape.
  * @see {@link CreateScheduleCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>A service quota is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class CreateScheduleCommand extends $Command<
-  CreateScheduleCommandInput,
-  CreateScheduleCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateScheduleCommandInput, CreateScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "CreateScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateScheduleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateScheduleResponse.filterSensitiveLog,
+export class CreateScheduleCommand extends command<CreateScheduleCommandInput, CreateScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSchedule",
+  CreateSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateScheduleRequest;
+      output: CreateScheduleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateScheduleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateScheduleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateScheduleCommandOutput> {
-    return deserializeAws_restJson1CreateScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateScheduleCommandInput;
+      output: CreateScheduleCommandOutput;
+    };
+  };
 }

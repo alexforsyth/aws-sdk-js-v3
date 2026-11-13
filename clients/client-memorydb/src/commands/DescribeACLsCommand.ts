@@ -1,95 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MemoryDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MemoryDBClient";
-import { DescribeACLsRequest, DescribeACLsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeACLsCommand,
-  serializeAws_json1_1DescribeACLsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeACLsRequest, DescribeACLsResponse } from "../models/models_0";
+import { DescribeACLs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeACLsCommand}.
+ */
 export interface DescribeACLsCommandInput extends DescribeACLsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeACLsCommand}.
+ */
 export interface DescribeACLsCommandOutput extends DescribeACLsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of ACLs</p>
+ * <p>Returns a list of ACLs.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MemoryDBClient, DescribeACLsCommand } from "@aws-sdk/client-memorydb"; // ES Modules import
  * // const { MemoryDBClient, DescribeACLsCommand } = require("@aws-sdk/client-memorydb"); // CommonJS import
+ * // import type { MemoryDBClientConfig } from "@aws-sdk/client-memorydb";
+ * const config = {}; // type is MemoryDBClientConfig
  * const client = new MemoryDBClient(config);
+ * const input = { // DescribeACLsRequest
+ *   ACLName: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeACLsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeACLsResponse
+ * //   ACLs: [ // ACLList
+ * //     { // ACL
+ * //       Name: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       UserNames: [ // UserNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MinimumEngineVersion: "STRING_VALUE",
+ * //       PendingChanges: { // ACLPendingChanges
+ * //         UserNamesToRemove: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         UserNamesToAdd: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Clusters: [ // ACLClusterNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ARN: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeACLsCommandInput - {@link DescribeACLsCommandInput}
+ * @returns {@link DescribeACLsCommandOutput}
  * @see {@link DescribeACLsCommandInput} for command's `input` shape.
  * @see {@link DescribeACLsCommandOutput} for command's `response` shape.
- * @see {@link MemoryDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MemoryDBClientResolvedConfig | config} for MemoryDBClient's `config` shape.
  *
+ * @throws {@link ACLNotFoundFault} (client fault)
+ *  <p>The specified ACL does not exist.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>The specified parameter combination is not valid.</p>
+ *
+ * @throws {@link MemoryDBServiceException}
+ * <p>Base exception class for all service exceptions from MemoryDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeACLsCommand extends $Command<
-  DescribeACLsCommandInput,
-  DescribeACLsCommandOutput,
-  MemoryDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeACLsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MemoryDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeACLsCommandInput, DescribeACLsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MemoryDBClient";
-    const commandName = "DescribeACLsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeACLsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeACLsResponse.filterSensitiveLog,
+export class DescribeACLsCommand extends command<DescribeACLsCommandInput, DescribeACLsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeACLs",
+  DescribeACLs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeACLsRequest;
+      output: DescribeACLsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeACLsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeACLsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeACLsCommandOutput> {
-    return deserializeAws_json1_1DescribeACLsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeACLsCommandInput;
+      output: DescribeACLsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { CreateDomainNameRequest, CreateDomainNameResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateDomainNameCommand,
-  serializeAws_restJson1CreateDomainNameCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDomainNameRequest, CreateDomainNameResponse } from "../models/models_0";
+import { CreateDomainName$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDomainNameCommand}.
+ */
 export interface CreateDomainNameCommandInput extends CreateDomainNameRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDomainNameCommand}.
+ */
 export interface CreateDomainNameCommandOutput extends CreateDomainNameResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,112 @@ export interface CreateDomainNameCommandOutput extends CreateDomainNameResponse,
  * ```javascript
  * import { ApiGatewayV2Client, CreateDomainNameCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, CreateDomainNameCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // CreateDomainNameRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   DomainNameConfigurations: [ // DomainNameConfigurations
+ *     { // DomainNameConfiguration
+ *       ApiGatewayDomainName: "STRING_VALUE",
+ *       CertificateArn: "STRING_VALUE",
+ *       CertificateName: "STRING_VALUE",
+ *       CertificateUploadDate: new Date("TIMESTAMP"),
+ *       DomainNameStatus: "AVAILABLE" || "UPDATING" || "PENDING_CERTIFICATE_REIMPORT" || "PENDING_OWNERSHIP_VERIFICATION",
+ *       DomainNameStatusMessage: "STRING_VALUE",
+ *       EndpointType: "REGIONAL" || "EDGE",
+ *       HostedZoneId: "STRING_VALUE",
+ *       IpAddressType: "ipv4" || "dualstack",
+ *       SecurityPolicy: "TLS_1_0" || "TLS_1_2",
+ *       OwnershipVerificationCertificateArn: "STRING_VALUE",
+ *     },
+ *   ],
+ *   MutualTlsAuthentication: { // MutualTlsAuthenticationInput
+ *     TruststoreUri: "STRING_VALUE",
+ *     TruststoreVersion: "STRING_VALUE",
+ *   },
+ *   RoutingMode: "API_MAPPING_ONLY" || "ROUTING_RULE_ONLY" || "ROUTING_RULE_THEN_API_MAPPING",
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateDomainNameCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDomainNameResponse
+ * //   ApiMappingSelectionExpression: "STRING_VALUE",
+ * //   DomainName: "STRING_VALUE",
+ * //   DomainNameArn: "STRING_VALUE",
+ * //   DomainNameConfigurations: [ // DomainNameConfigurations
+ * //     { // DomainNameConfiguration
+ * //       ApiGatewayDomainName: "STRING_VALUE",
+ * //       CertificateArn: "STRING_VALUE",
+ * //       CertificateName: "STRING_VALUE",
+ * //       CertificateUploadDate: new Date("TIMESTAMP"),
+ * //       DomainNameStatus: "AVAILABLE" || "UPDATING" || "PENDING_CERTIFICATE_REIMPORT" || "PENDING_OWNERSHIP_VERIFICATION",
+ * //       DomainNameStatusMessage: "STRING_VALUE",
+ * //       EndpointType: "REGIONAL" || "EDGE",
+ * //       HostedZoneId: "STRING_VALUE",
+ * //       IpAddressType: "ipv4" || "dualstack",
+ * //       SecurityPolicy: "TLS_1_0" || "TLS_1_2",
+ * //       OwnershipVerificationCertificateArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   MutualTlsAuthentication: { // MutualTlsAuthentication
+ * //     TruststoreUri: "STRING_VALUE",
+ * //     TruststoreVersion: "STRING_VALUE",
+ * //     TruststoreWarnings: [ // __listOf__string
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   RoutingMode: "API_MAPPING_ONLY" || "ROUTING_RULE_ONLY" || "ROUTING_RULE_THEN_API_MAPPING",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDomainNameCommandInput - {@link CreateDomainNameCommandInput}
+ * @returns {@link CreateDomainNameCommandOutput}
  * @see {@link CreateDomainNameCommandInput} for command's `input` shape.
  * @see {@link CreateDomainNameCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDomainNameCommand extends $Command<
-  CreateDomainNameCommandInput,
-  CreateDomainNameCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDomainNameCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDomainNameCommandInput, CreateDomainNameCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "CreateDomainNameCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDomainNameRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDomainNameResponse.filterSensitiveLog,
+export class CreateDomainNameCommand extends command<CreateDomainNameCommandInput, CreateDomainNameCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDomainName",
+  CreateDomainName$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDomainNameRequest;
+      output: CreateDomainNameResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDomainNameCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateDomainNameCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDomainNameCommandOutput> {
-    return deserializeAws_restJson1CreateDomainNameCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDomainNameCommandInput;
+      output: CreateDomainNameCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexRuntimeV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexRuntimeV2Client";
-import { DeleteSessionRequest, DeleteSessionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteSessionCommand,
-  serializeAws_restJson1DeleteSessionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSessionRequest, DeleteSessionResponse } from "../models/models_0";
+import { DeleteSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSessionCommand}.
+ */
 export interface DeleteSessionCommandInput extends DeleteSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSessionCommand}.
+ */
 export interface DeleteSessionCommandOutput extends DeleteSessionResponse, __MetadataBearer {}
 
 /**
@@ -41,68 +42,71 @@ export interface DeleteSessionCommandOutput extends DeleteSessionResponse, __Met
  * ```javascript
  * import { LexRuntimeV2Client, DeleteSessionCommand } from "@aws-sdk/client-lex-runtime-v2"; // ES Modules import
  * // const { LexRuntimeV2Client, DeleteSessionCommand } = require("@aws-sdk/client-lex-runtime-v2"); // CommonJS import
+ * // import type { LexRuntimeV2ClientConfig } from "@aws-sdk/client-lex-runtime-v2";
+ * const config = {}; // type is LexRuntimeV2ClientConfig
  * const client = new LexRuntimeV2Client(config);
+ * const input = { // DeleteSessionRequest
+ *   botId: "STRING_VALUE", // required
+ *   botAliasId: "STRING_VALUE", // required
+ *   localeId: "STRING_VALUE", // required
+ *   sessionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteSessionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSessionResponse
+ * //   botId: "STRING_VALUE",
+ * //   botAliasId: "STRING_VALUE",
+ * //   localeId: "STRING_VALUE",
+ * //   sessionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteSessionCommandInput - {@link DeleteSessionCommandInput}
+ * @returns {@link DeleteSessionCommandOutput}
  * @see {@link DeleteSessionCommandInput} for command's `input` shape.
  * @see {@link DeleteSessionCommandOutput} for command's `response` shape.
- * @see {@link LexRuntimeV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexRuntimeV2ClientResolvedConfig | config} for LexRuntimeV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link LexRuntimeV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexRuntimeV2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSessionCommand extends $Command<
-  DeleteSessionCommandInput,
-  DeleteSessionCommandOutput,
-  LexRuntimeV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexRuntimeV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSessionCommandInput, DeleteSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexRuntimeV2Client";
-    const commandName = "DeleteSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSessionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSessionResponse.filterSensitiveLog,
+export class DeleteSessionCommand extends command<DeleteSessionCommandInput, DeleteSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSession",
+  DeleteSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSessionRequest;
+      output: DeleteSessionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteSessionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSessionCommandOutput> {
-    return deserializeAws_restJson1DeleteSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSessionCommandInput;
+      output: DeleteSessionCommandOutput;
+    };
+  };
 }

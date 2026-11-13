@@ -1,96 +1,223 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { CreateAccessPreviewRequest, CreateAccessPreviewResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateAccessPreviewCommand,
-  serializeAws_restJson1CreateAccessPreviewCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAccessPreviewRequest, CreateAccessPreviewResponse } from "../models/models_0";
+import { CreateAccessPreview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAccessPreviewCommand}.
+ */
 export interface CreateAccessPreviewCommandInput extends CreateAccessPreviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAccessPreviewCommand}.
+ */
 export interface CreateAccessPreviewCommandOutput extends CreateAccessPreviewResponse, __MetadataBearer {}
 
 /**
- * <p>Creates an access preview that allows you to preview IAM Access Analyzer findings for your
- *          resource before deploying resource permissions.</p>
+ * <p>Creates an access preview that allows you to preview IAM Access Analyzer findings for your resource before deploying resource permissions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AccessAnalyzerClient, CreateAccessPreviewCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, CreateAccessPreviewCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // CreateAccessPreviewRequest
+ *   analyzerArn: "STRING_VALUE", // required
+ *   configurations: { // ConfigurationsMap // required
+ *     "<keys>": { // Configuration Union: only one key present
+ *       ebsSnapshot: { // EbsSnapshotConfiguration
+ *         userIds: [ // EbsUserIdList
+ *           "STRING_VALUE",
+ *         ],
+ *         groups: [ // EbsGroupList
+ *           "STRING_VALUE",
+ *         ],
+ *         kmsKeyId: "STRING_VALUE",
+ *       },
+ *       ecrRepository: { // EcrRepositoryConfiguration
+ *         repositoryPolicy: "STRING_VALUE",
+ *       },
+ *       iamRole: { // IamRoleConfiguration
+ *         trustPolicy: "STRING_VALUE",
+ *       },
+ *       efsFileSystem: { // EfsFileSystemConfiguration
+ *         fileSystemPolicy: "STRING_VALUE",
+ *       },
+ *       kmsKey: { // KmsKeyConfiguration
+ *         keyPolicies: { // KmsKeyPoliciesMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         grants: [ // KmsGrantConfigurationsList
+ *           { // KmsGrantConfiguration
+ *             operations: [ // KmsGrantOperationsList // required
+ *               "STRING_VALUE",
+ *             ],
+ *             granteePrincipal: "STRING_VALUE", // required
+ *             retiringPrincipal: "STRING_VALUE",
+ *             constraints: { // KmsGrantConstraints
+ *               encryptionContextEquals: { // KmsConstraintsMap
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *               encryptionContextSubset: {
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *             },
+ *             issuingAccount: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *       rdsDbClusterSnapshot: { // RdsDbClusterSnapshotConfiguration
+ *         attributes: { // RdsDbClusterSnapshotAttributesMap
+ *           "<keys>": { // RdsDbClusterSnapshotAttributeValue Union: only one key present
+ *             accountIds: [ // RdsDbClusterSnapshotAccountIdsList
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         },
+ *         kmsKeyId: "STRING_VALUE",
+ *       },
+ *       rdsDbSnapshot: { // RdsDbSnapshotConfiguration
+ *         attributes: { // RdsDbSnapshotAttributesMap
+ *           "<keys>": { // RdsDbSnapshotAttributeValue Union: only one key present
+ *             accountIds: [ // RdsDbSnapshotAccountIdsList
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         },
+ *         kmsKeyId: "STRING_VALUE",
+ *       },
+ *       secretsManagerSecret: { // SecretsManagerSecretConfiguration
+ *         kmsKeyId: "STRING_VALUE",
+ *         secretPolicy: "STRING_VALUE",
+ *       },
+ *       s3Bucket: { // S3BucketConfiguration
+ *         bucketPolicy: "STRING_VALUE",
+ *         bucketAclGrants: [ // S3BucketAclGrantConfigurationsList
+ *           { // S3BucketAclGrantConfiguration
+ *             permission: "STRING_VALUE", // required
+ *             grantee: { // AclGrantee Union: only one key present
+ *               id: "STRING_VALUE",
+ *               uri: "STRING_VALUE",
+ *             },
+ *           },
+ *         ],
+ *         bucketPublicAccessBlock: { // S3PublicAccessBlockConfiguration
+ *           ignorePublicAcls: true || false, // required
+ *           restrictPublicBuckets: true || false, // required
+ *         },
+ *         accessPoints: { // S3AccessPointConfigurationsMap
+ *           "<keys>": { // S3AccessPointConfiguration
+ *             accessPointPolicy: "STRING_VALUE",
+ *             publicAccessBlock: {
+ *               ignorePublicAcls: true || false, // required
+ *               restrictPublicBuckets: true || false, // required
+ *             },
+ *             networkOrigin: { // NetworkOriginConfiguration Union: only one key present
+ *               vpcConfiguration: { // VpcConfiguration
+ *                 vpcId: "STRING_VALUE", // required
+ *               },
+ *               internetConfiguration: {},
+ *             },
+ *           },
+ *         },
+ *       },
+ *       snsTopic: { // SnsTopicConfiguration
+ *         topicPolicy: "STRING_VALUE",
+ *       },
+ *       sqsQueue: { // SqsQueueConfiguration
+ *         queuePolicy: "STRING_VALUE",
+ *       },
+ *       s3ExpressDirectoryBucket: { // S3ExpressDirectoryBucketConfiguration
+ *         bucketPolicy: "STRING_VALUE",
+ *         accessPoints: { // S3ExpressDirectoryAccessPointConfigurationsMap
+ *           "<keys>": { // S3ExpressDirectoryAccessPointConfiguration
+ *             accessPointPolicy: "STRING_VALUE",
+ *             networkOrigin: {//  Union: only one key present
+ *               vpcConfiguration: {
+ *                 vpcId: "STRING_VALUE", // required
+ *               },
+ *               internetConfiguration: {},
+ *             },
+ *           },
+ *         },
+ *       },
+ *       dynamodbStream: { // DynamodbStreamConfiguration
+ *         streamPolicy: "STRING_VALUE",
+ *       },
+ *       dynamodbTable: { // DynamodbTableConfiguration
+ *         tablePolicy: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new CreateAccessPreviewCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAccessPreviewResponse
+ * //   id: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateAccessPreviewCommandInput - {@link CreateAccessPreviewCommandInput}
+ * @returns {@link CreateAccessPreviewCommandOutput}
  * @see {@link CreateAccessPreviewCommandInput} for command's `input` shape.
  * @see {@link CreateAccessPreviewCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflict exception error.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Service quote met error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAccessPreviewCommand extends $Command<
-  CreateAccessPreviewCommandInput,
-  CreateAccessPreviewCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAccessPreviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAccessPreviewCommandInput, CreateAccessPreviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "CreateAccessPreviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAccessPreviewRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAccessPreviewResponse.filterSensitiveLog,
+export class CreateAccessPreviewCommand extends command<CreateAccessPreviewCommandInput, CreateAccessPreviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAccessPreview",
+  CreateAccessPreview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAccessPreviewRequest;
+      output: CreateAccessPreviewResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAccessPreviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateAccessPreviewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAccessPreviewCommandOutput> {
-    return deserializeAws_restJson1CreateAccessPreviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAccessPreviewCommandInput;
+      output: CreateAccessPreviewCommandOutput;
+    };
+  };
 }

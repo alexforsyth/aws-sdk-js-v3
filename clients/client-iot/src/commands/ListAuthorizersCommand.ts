@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListAuthorizersRequest, ListAuthorizersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListAuthorizersCommand,
-  serializeAws_restJson1ListAuthorizersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAuthorizersRequest, ListAuthorizersResponse } from "../models/models_1";
+import { ListAuthorizers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAuthorizersCommand}.
+ */
 export interface ListAuthorizersCommandInput extends ListAuthorizersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAuthorizersCommand}.
+ */
 export interface ListAuthorizersCommandOutput extends ListAuthorizersResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,71 @@ export interface ListAuthorizersCommandOutput extends ListAuthorizersResponse, _
  * ```javascript
  * import { IoTClient, ListAuthorizersCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListAuthorizersCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListAuthorizersRequest
+ *   pageSize: Number("int"),
+ *   marker: "STRING_VALUE",
+ *   ascendingOrder: true || false,
+ *   status: "ACTIVE" || "INACTIVE",
+ * };
  * const command = new ListAuthorizersCommand(input);
  * const response = await client.send(command);
+ * // { // ListAuthorizersResponse
+ * //   authorizers: [ // Authorizers
+ * //     { // AuthorizerSummary
+ * //       authorizerName: "STRING_VALUE",
+ * //       authorizerArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAuthorizersCommandInput - {@link ListAuthorizersCommandInput}
+ * @returns {@link ListAuthorizersCommandOutput}
  * @see {@link ListAuthorizersCommandInput} for command's `input` shape.
  * @see {@link ListAuthorizersCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListAuthorizersCommand extends $Command<
-  ListAuthorizersCommandInput,
-  ListAuthorizersCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAuthorizersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAuthorizersCommandInput, ListAuthorizersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListAuthorizersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAuthorizersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAuthorizersResponse.filterSensitiveLog,
+export class ListAuthorizersCommand extends command<ListAuthorizersCommandInput, ListAuthorizersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAuthorizers",
+  ListAuthorizers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAuthorizersRequest;
+      output: ListAuthorizersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAuthorizersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAuthorizersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAuthorizersCommandOutput> {
-    return deserializeAws_restJson1ListAuthorizersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAuthorizersCommandInput;
+      output: ListAuthorizersCommandOutput;
+    };
+  };
 }

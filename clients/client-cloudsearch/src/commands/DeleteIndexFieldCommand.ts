@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DeleteIndexFieldRequest, DeleteIndexFieldResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteIndexFieldCommand,
-  serializeAws_queryDeleteIndexFieldCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteIndexFieldRequest, DeleteIndexFieldResponse } from "../models/models_0";
+import { DeleteIndexField$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIndexFieldCommand}.
+ */
 export interface DeleteIndexFieldCommandInput extends DeleteIndexFieldRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIndexFieldCommand}.
+ */
 export interface DeleteIndexFieldCommandOutput extends DeleteIndexFieldResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,159 @@ export interface DeleteIndexFieldCommandOutput extends DeleteIndexFieldResponse,
  * ```javascript
  * import { CloudSearchClient, DeleteIndexFieldCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DeleteIndexFieldCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DeleteIndexFieldRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   IndexFieldName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteIndexFieldCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteIndexFieldResponse
+ * //   IndexField: { // IndexFieldStatus
+ * //     Options: { // IndexField
+ * //       IndexFieldName: "STRING_VALUE", // required
+ * //       IndexFieldType: "int" || "double" || "literal" || "text" || "date" || "latlon" || "int-array" || "double-array" || "literal-array" || "text-array" || "date-array", // required
+ * //       IntOptions: { // IntOptions
+ * //         DefaultValue: Number("long"),
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       DoubleOptions: { // DoubleOptions
+ * //         DefaultValue: Number("double"),
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       LiteralOptions: { // LiteralOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       TextOptions: { // TextOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //         HighlightEnabled: true || false,
+ * //         AnalysisScheme: "STRING_VALUE",
+ * //       },
+ * //       DateOptions: { // DateOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       LatLonOptions: { // LatLonOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceField: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //         SortEnabled: true || false,
+ * //       },
+ * //       IntArrayOptions: { // IntArrayOptions
+ * //         DefaultValue: Number("long"),
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       DoubleArrayOptions: { // DoubleArrayOptions
+ * //         DefaultValue: Number("double"),
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       LiteralArrayOptions: { // LiteralArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //       TextArrayOptions: { // TextArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         ReturnEnabled: true || false,
+ * //         HighlightEnabled: true || false,
+ * //         AnalysisScheme: "STRING_VALUE",
+ * //       },
+ * //       DateArrayOptions: { // DateArrayOptions
+ * //         DefaultValue: "STRING_VALUE",
+ * //         SourceFields: "STRING_VALUE",
+ * //         FacetEnabled: true || false,
+ * //         SearchEnabled: true || false,
+ * //         ReturnEnabled: true || false,
+ * //       },
+ * //     },
+ * //     Status: { // OptionStatus
+ * //       CreationDate: new Date("TIMESTAMP"), // required
+ * //       UpdateDate: new Date("TIMESTAMP"), // required
+ * //       UpdateVersion: Number("int"),
+ * //       State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //       PendingDeletion: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteIndexFieldCommandInput - {@link DeleteIndexFieldCommandInput}
+ * @returns {@link DeleteIndexFieldCommandOutput}
  * @see {@link DeleteIndexFieldCommandInput} for command's `input` shape.
  * @see {@link DeleteIndexFieldCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link InvalidTypeException} (client fault)
+ *  <p>The request was rejected because it specified an invalid type definition.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was rejected because it has invalid parameters.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteIndexFieldCommand extends $Command<
-  DeleteIndexFieldCommandInput,
-  DeleteIndexFieldCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteIndexFieldCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteIndexFieldCommandInput, DeleteIndexFieldCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DeleteIndexFieldCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteIndexFieldRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteIndexFieldResponse.filterSensitiveLog,
+export class DeleteIndexFieldCommand extends command<DeleteIndexFieldCommandInput, DeleteIndexFieldCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIndexField",
+  DeleteIndexField$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIndexFieldRequest;
+      output: DeleteIndexFieldResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteIndexFieldCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteIndexFieldCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteIndexFieldCommandOutput> {
-    return deserializeAws_queryDeleteIndexFieldCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteIndexFieldCommandInput;
+      output: DeleteIndexFieldCommandOutput;
+    };
+  };
 }

@@ -1,20 +1,11 @@
 /*
- * Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 package software.amazon.smithy.aws.typescript.codegen;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -27,6 +18,8 @@ import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.typescript.codegen.ApplicationProtocol;
+import software.amazon.smithy.typescript.codegen.SmithyCoreSubmodules;
+import software.amazon.smithy.typescript.codegen.TypeScriptDependency;
 import software.amazon.smithy.typescript.codegen.TypeScriptSettings;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
 import software.amazon.smithy.utils.SmithyInternalApi;
@@ -47,10 +40,10 @@ final class DocumentBareBonesClientGenerator implements Runnable {
     private final String configType;
 
     DocumentBareBonesClientGenerator(
-            TypeScriptSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            TypeScriptWriter writer
+        TypeScriptSettings settings,
+        Model model,
+        SymbolProvider symbolProvider,
+        TypeScriptWriter writer
     ) {
         this.model = model;
         this.symbolProvider = symbolProvider;
@@ -68,40 +61,59 @@ final class DocumentBareBonesClientGenerator implements Runnable {
         String serviceOutputTypes = "ServiceOutputTypes";
 
         // Add required imports.
-        writer.addImport(serviceName, serviceName, "@aws-sdk/client-dynamodb");
-        writer.addImport(configType, configType, "@aws-sdk/client-dynamodb");
-        writer.addImport("Client", "__Client", "@aws-sdk/smithy-client");
+        // Note: using addImport would register these dependencies on the dynamodb client, which must be avoided.
+        writer.write("""
+                     import {
+                       DynamoDBClient,
+                       type DynamoDBClientConfig,
+                       type DynamoDBClientResolvedConfig,
+                       type ServiceInputTypes as __ServiceInputTypes,
+                       type ServiceOutputTypes as __ServiceOutputTypes,
+                     } from "@aws-sdk/client-dynamodb";
+                     import type { marshallOptions, unmarshallOptions } from "@aws-sdk/util-dynamodb";
+                     """);
+
+        writer.addImportSubmodule("Client", "__Client", TypeScriptDependency.SMITHY_CORE, SmithyCoreSubmodules.CLIENT);
+        writer.writeDocs("@public");
+        writer.write("export { __Client };");
         generateInputOutputImports(serviceInputTypes, serviceOutputTypes);
 
-        generateInputOutputTypeUnion(serviceInputTypes,
-            operationSymbol -> operationSymbol.expectProperty("inputType", Symbol.class).getName());
-        generateInputOutputTypeUnion(serviceOutputTypes,
-            operationSymbol -> operationSymbol.expectProperty("outputType", Symbol.class).getName());
+        generateInputOutputTypeUnion(
+            serviceInputTypes,
+            operationSymbol -> operationSymbol.expectProperty("inputType", Symbol.class).getName()
+        );
+        generateInputOutputTypeUnion(
+            serviceOutputTypes,
+            operationSymbol -> operationSymbol.expectProperty("outputType", Symbol.class).getName()
+        );
         writer.write("");
         generateConfiguration();
 
-        writer.writeDocs(DocumentClientUtils.getClientDocs());
-        writer.openBlock("export class $L extends __Client<$T, $L, $L, $L> {", "}",
+        writer.writeDocs(DocumentClientUtils.getClientDocs() + "\n\n@public");
+        writer.openBlock(
+            "export class $L extends __Client<$T, $L, $L, $L> {",
+            "}",
             DocumentClientUtils.CLIENT_NAME,
             ApplicationProtocol.createDefaultHttpApplicationProtocol().getOptionsType(),
-            serviceInputTypes, serviceOutputTypes,
-            DocumentClientUtils.CLIENT_CONFIG_NAME, () -> {
+            serviceInputTypes,
+            serviceOutputTypes,
+            DocumentClientUtils.CLIENT_CONFIG_NAME,
+            () -> {
 
-            generateClientProperties();
-            writer.write("");
-            generateClientConstructor();
-            writer.write("");
-            generateStaticFactoryFrom();
-            writer.write("");
-            generateDestroy();
-        });
+                generateClientProperties();
+                writer.write("");
+                generateClientConstructor();
+                writer.write("");
+                generateStaticFactoryFrom();
+                writer.write("");
+                generateDestroy();
+            }
+        );
     }
 
     private void generateInputOutputImports(String serviceInputTypes, String serviceOutputTypes) {
-        writer.addImport(serviceInputTypes, String.format("__%s", serviceInputTypes), "@aws-sdk/client-dynamodb");
-        writer.addImport(serviceOutputTypes, String.format("__%s", serviceOutputTypes), "@aws-sdk/client-dynamodb");
         Set<OperationShape> containedOperations =
-                new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
+            new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
 
         for (OperationShape operation : containedOperations) {
             if (DocumentClientUtils.containsAttributeValue(model, symbolProvider, operation)) {
@@ -115,27 +127,33 @@ final class DocumentBareBonesClientGenerator implements Runnable {
                     operationSymbol.expectProperty("outputType", Symbol.class).getName()
                 );
 
-                String commandFileLocation = String.format("./%s/%s",
-                    DocumentClientUtils.CLIENT_COMMANDS_FOLDER, name);
-                writer.addImport(input, input, commandFileLocation);
-                writer.addImport(output, output, commandFileLocation);
+                Path commandFileLocation = Paths.get(
+                    ".",
+                    DocumentClientUtils.CLIENT_COMMANDS_FOLDER,
+                    name
+                );
+                writer.addRelativeTypeImport(input, input, commandFileLocation);
+                writer.addRelativeTypeImport(output, output, commandFileLocation);
             }
         }
     }
 
     private void generateInputOutputTypeUnion(String typeName, Function<Symbol, String> mapper) {
+        writer.writeDocs("@public");
         Set<OperationShape> containedOperations =
-                new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
+            new TreeSet<>(TopDownIndex.of(model).getContainedOperations(service));
 
         List<String> operationTypeNames = containedOperations.stream()
-                .filter(operation -> DocumentClientUtils.containsAttributeValue(model, symbolProvider, operation))
-                .map(symbolProvider::toSymbol)
-                .map(operation -> mapper.apply(operation))
-                .map(operationtypeName -> DocumentClientUtils.getModifiedName(operationtypeName))
-                .collect(Collectors.toList());
+            .filter(operation -> DocumentClientUtils.containsAttributeValue(model, symbolProvider, operation))
+            .map(symbolProvider::toSymbol)
+            .map(operation -> mapper.apply(operation))
+            .map(operationtypeName -> DocumentClientUtils.getModifiedName(operationtypeName))
+            .collect(Collectors.toList());
 
-        writer.write("export type $L = $L", typeName, String.format("__%s", typeName));
+        writer.writeInline("export type $L =", typeName);
+        writer.write("");
         writer.indent();
+        writer.write("| $L", String.format("__%s", typeName));
         for (int i = 0; i < operationTypeNames.size(); i++) {
             writer.write("| $L$L", operationTypeNames.get(i), i == operationTypeNames.size() - 1 ? ";" : "");
         }
@@ -152,10 +170,15 @@ final class DocumentBareBonesClientGenerator implements Runnable {
     }
 
     private void generateStaticFactoryFrom() {
-        writer.openBlock("static from(client: $L, translateConfig?: $L) {", "}",
-            serviceName, DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE, () -> {
+        writer.openBlock(
+            "static from(client: $L, translateConfig?: $L) {",
+            "}",
+            serviceName,
+            DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE,
+            () -> {
                 writer.write("return new $L(client, translateConfig);", DocumentClientUtils.CLIENT_NAME);
-            });
+            }
+        );
     }
 
     private void generateClientProperties() {
@@ -165,35 +188,130 @@ final class DocumentBareBonesClientGenerator implements Runnable {
     }
 
     private void generateClientConstructor() {
-        writer.openBlock("protected constructor(client: $L, translateConfig?: $L){", "}",
-            symbol.getName(), DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE, () -> {
+        writer.openBlock(
+            "protected constructor(client: $L, translateConfig?: $L) {",
+            "}",
+            symbol.getName(),
+            DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE,
+            () -> {
                 writer.pushState(CLIENT_CONSTRUCTOR_SECTION);
                 writer.write("super(client.config);");
                 writer.write("this.config = client.config;");
                 writer.write("this.config.translateConfig = translateConfig;");
                 writer.write("this.middlewareStack = client.middlewareStack;");
+                writer.openBlock("if (this.config?.cacheMiddleware) {", "}", () -> {
+                    writer.write("throw new Error(");
+                    writer.indent();
+                    writer.write("\"@aws-sdk/lib-dynamodb - cacheMiddleware=true is not compatible with the\" +");
+                    writer.write("  \" DynamoDBDocumentClient. This option must be set to false.\"");
+                    writer.dedent();
+                    writer.write(");");
+                });
+                writer.writeDocs(
+                    """
+                    The code below checks for incompatibility between the supplied
+                    DynamoDBClient and this DynamoDBDocumentClient.
+
+                    This can happen when the dependency graph is invalid, including
+                    for example, a Lambda layer exposing certain packages being merged
+                    with the Node.js Lambda provided JS SDK.
+
+                    This is not supported and we can only make a best-effort attempt
+                    to repair the error if there is a 2nd client-dynamodb within the
+                    dependency enclosure."""
+                );
+                writer.write(
+                    "const middlewares = client.middlewareStack.identify?.() ?? [];"
+                );
+                writer.write(
+                    "const hasSerializer = middlewares.some((m) => m.includes?.(\"serializerMiddleware\"));"
+                );
+                writer.openBlock("if (!hasSerializer) {", "}", () -> {
+                    writer.write("const configuredLogger = this.config.logger;");
+                    writer.openBlock("const logger =", ";", () -> {
+                        writer.write(
+                            "configuredLogger && !configuredLogger.constructor?.name.includes(\"NoOp\")"
+                        );
+                        writer.indent();
+                        writer.write("? configuredLogger");
+                        writer.write(": console");
+                        writer.dedent();
+                    });
+                    writer.write(
+                        """
+                        const substituteClient = new DynamoDBClient(Object.assign(
+                          {}, this.config, {
+                            defaultUserAgentProvider: undefined,
+                            retryStrategy: undefined,
+                            extensions: undefined
+                          } satisfies DynamoDBClientConfig
+                        ) as DynamoDBClientConfig);"""
+                    );
+                    writer.write("const substituteClientHasSerializer = substituteClient.middlewareStack");
+                    writer.indent();
+                    writer.write(".identify?.()");
+                    writer.write(".some((m) => m.includes?.(\"serializerMiddleware\"));");
+                    writer.dedent();
+                    writer.openBlock("if (!substituteClientHasSerializer) {", "}", () -> {
+                        writer.write("throw new Error(");
+                        writer.indent();
+                        writer.write(
+                            "\"@aws-sdk/lib-dynamodb - ERROR: incompatible version of DynamoDBClient"
+                                + " given to DynamoDBDocumentClient. \" +"
+                        );
+                        writer.write("  \"Check @aws-sdk/lib-dynamodb package.json requirements.\"");
+                        writer.dedent();
+                        writer.write(");");
+                    });
+                    writer.openBlock("else {", "}", () -> {
+                        writer.write("this.middlewareStack = substituteClient.middlewareStack;");
+                        writer.write("this.config = substituteClient.config;");
+                        writer.write("this.config.translateConfig = translateConfig;");
+                        writer.write("logger.warn(");
+                        writer.indent();
+                        writer.write(
+                            "\"@aws-sdk/lib-dynamodb - WARN: incompatible version of DynamoDBClient"
+                                + " given to DynamoDBDocumentClient. \" +"
+                        );
+                        writer.write(
+                            "  \"We have forwarded your client's configuration to a newer version of DynamoDBClient in \" +"
+                        );
+                        writer.write(
+                            "  \"the dependency closure to instantiate DynamoDBDocumentClient.\""
+                        );
+                        writer.dedent();
+                        writer.write(");");
+                    });
+                });
                 writer.popState();
-            });
+            }
+        );
     }
 
     private void generateConfiguration() {
         writer.pushState(CLIENT_CONFIG_SECTION);
         String translateConfigType = DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_TYPE;
-        writer.openBlock("export type $L = {", "}", translateConfigType, () -> {
+        writer.writeDocs("@public");
+        writer.openBlock("export type $L = {", "};", translateConfigType, () -> {
             generateTranslateConfigOption(DocumentClientUtils.CLIENT_MARSHALL_OPTIONS);
             generateTranslateConfigOption(DocumentClientUtils.CLIENT_UNMARSHALL_OPTIONS);
         });
         writer.write("");
-        writer.openBlock("export type $L = $L & {", "};", DocumentClientUtils.CLIENT_CONFIG_NAME,
-            configType, () -> {
+        writer.writeDocs("@public");
+        writer.openBlock(
+            "export type $L = $L & {",
+            "};",
+            DocumentClientUtils.CLIENT_CONFIG_NAME,
+            configType,
+            () -> {
                 writer.write("$L?: $L;", DocumentClientUtils.CLIENT_TRANSLATE_CONFIG_KEY, translateConfigType);
-            });
+            }
+        );
         writer.write("");
         writer.popState();
     }
 
     private void generateTranslateConfigOption(String translateOption) {
-        writer.addImport(translateOption, translateOption, "@aws-sdk/util-dynamodb");
         writer.write("${1L}?: ${1L};", translateOption);
     }
 }

@@ -1,97 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { TestRenderTemplateRequest, TestRenderTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_queryTestRenderTemplateCommand,
-  serializeAws_queryTestRenderTemplateCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TestRenderTemplateRequest, TestRenderTemplateResponse } from "../models/models_0";
+import { TestRenderTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TestRenderTemplateCommand}.
+ */
 export interface TestRenderTemplateCommandInput extends TestRenderTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TestRenderTemplateCommand}.
+ */
 export interface TestRenderTemplateCommandOutput extends TestRenderTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a preview of the MIME content of an email when provided with a template and a
  *             set of replacement data.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, TestRenderTemplateCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, TestRenderTemplateCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // TestRenderTemplateRequest
+ *   TemplateName: "STRING_VALUE", // required
+ *   TemplateData: "STRING_VALUE", // required
+ * };
  * const command = new TestRenderTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // TestRenderTemplateResponse
+ * //   RenderedTemplate: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param TestRenderTemplateCommandInput - {@link TestRenderTemplateCommandInput}
+ * @returns {@link TestRenderTemplateCommandOutput}
  * @see {@link TestRenderTemplateCommandInput} for command's `input` shape.
  * @see {@link TestRenderTemplateCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link InvalidRenderingParameterException} (client fault)
+ *  <p>Indicates that one or more of the replacement values you provided is invalid. This
+ *             error may occur when the TemplateData object contains invalid JSON.</p>
+ *
+ * @throws {@link MissingRenderingAttributeException} (client fault)
+ *  <p>Indicates that one or more of the replacement values for the specified template was
+ *             not specified. Ensure that the TemplateData object contains references to all of the
+ *             replacement tags in the specified template.</p>
+ *
+ * @throws {@link TemplateDoesNotExistException} (client fault)
+ *  <p>Indicates that the Template object you specified does not exist in your Amazon SES
+ *             account.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @public
  */
-export class TestRenderTemplateCommand extends $Command<
-  TestRenderTemplateCommandInput,
-  TestRenderTemplateCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TestRenderTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TestRenderTemplateCommandInput, TestRenderTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "TestRenderTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TestRenderTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: TestRenderTemplateResponse.filterSensitiveLog,
+export class TestRenderTemplateCommand extends command<TestRenderTemplateCommandInput, TestRenderTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "TestRenderTemplate",
+  TestRenderTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TestRenderTemplateRequest;
+      output: TestRenderTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TestRenderTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryTestRenderTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TestRenderTemplateCommandOutput> {
-    return deserializeAws_queryTestRenderTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TestRenderTemplateCommandInput;
+      output: TestRenderTemplateCommandOutput;
+    };
+  };
 }

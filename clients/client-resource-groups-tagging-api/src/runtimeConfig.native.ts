@@ -1,6 +1,5 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { ResourceGroupsTaggingAPIClientConfig } from "./ResourceGroupsTaggingAPIClient";
+// smithy-typescript generated code
+import type { ResourceGroupsTaggingAPIClientConfig } from "./ResourceGroupsTaggingAPIClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +11,5 @@ export const getRuntimeConfig = (config: ResourceGroupsTaggingAPIClientConfig) =
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

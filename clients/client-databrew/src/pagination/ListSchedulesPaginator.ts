@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListSchedulesCommand,
   ListSchedulesCommandInput,
   ListSchedulesCommandOutput,
 } from "../commands/ListSchedulesCommand";
-import { DataBrew } from "../DataBrew";
 import { DataBrewClient } from "../DataBrewClient";
-import { DataBrewPaginationConfiguration } from "./Interfaces";
+import type { DataBrewPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: DataBrewClient,
-  input: ListSchedulesCommandInput,
-  ...args: any
-): Promise<ListSchedulesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListSchedulesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: DataBrew,
-  input: ListSchedulesCommandInput,
-  ...args: any
-): Promise<ListSchedulesCommandOutput> => {
-  // @ts-ignore
-  return await client.listSchedules(input, ...args);
-};
-export async function* paginateListSchedules(
+export const paginateListSchedules: (
   config: DataBrewPaginationConfiguration,
   input: ListSchedulesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListSchedulesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListSchedulesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof DataBrew) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof DataBrewClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected DataBrew | DataBrewClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListSchedulesCommandOutput> = createPaginator<
+  DataBrewPaginationConfiguration,
+  ListSchedulesCommandInput,
+  ListSchedulesCommandOutput
+>(DataBrewClient, ListSchedulesCommand, "NextToken", "NextToken", "MaxResults");

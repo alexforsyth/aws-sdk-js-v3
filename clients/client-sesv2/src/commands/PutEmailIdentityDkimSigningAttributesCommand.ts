@@ -1,54 +1,52 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   PutEmailIdentityDkimSigningAttributesRequest,
   PutEmailIdentityDkimSigningAttributesResponse,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1PutEmailIdentityDkimSigningAttributesCommand,
-  serializeAws_restJson1PutEmailIdentityDkimSigningAttributesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+} from "../models/models_1";
+import { PutEmailIdentityDkimSigningAttributes$ } from "../schemas/schemas_0";
 
-export interface PutEmailIdentityDkimSigningAttributesCommandInput
-  extends PutEmailIdentityDkimSigningAttributesRequest {}
-export interface PutEmailIdentityDkimSigningAttributesCommandOutput
-  extends PutEmailIdentityDkimSigningAttributesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutEmailIdentityDkimSigningAttributesCommand}.
+ */
+export interface PutEmailIdentityDkimSigningAttributesCommandInput extends PutEmailIdentityDkimSigningAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutEmailIdentityDkimSigningAttributesCommand}.
+ */
+export interface PutEmailIdentityDkimSigningAttributesCommandOutput extends PutEmailIdentityDkimSigningAttributesResponse, __MetadataBearer {}
 
 /**
  * <p>Used to configure or change the DKIM authentication settings for an email domain
  *             identity. You can use this operation to do any of the following:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>Update the signing attributes for an identity that uses Bring Your Own DKIM
+ *                <p>Update the signing attributes for an identity that uses Bring Your Own DKIM
  *                     (BYODKIM).</p>
  *             </li>
  *             <li>
- *                 <p>Update the key length that should be used for Easy DKIM.</p>
+ *                <p>Update the key length that should be used for Easy DKIM.</p>
  *             </li>
  *             <li>
- *                 <p>Change from using no DKIM authentication to using Easy DKIM.</p>
+ *                <p>Change from using no DKIM authentication to using Easy DKIM.</p>
  *             </li>
  *             <li>
- *                 <p>Change from using no DKIM authentication to using BYODKIM.</p>
+ *                <p>Change from using no DKIM authentication to using BYODKIM.</p>
  *             </li>
  *             <li>
- *                 <p>Change from using Easy DKIM to using BYODKIM.</p>
+ *                <p>Change from using Easy DKIM to using BYODKIM.</p>
  *             </li>
  *             <li>
- *                 <p>Change from using BYODKIM to using Easy DKIM.</p>
+ *                <p>Change from using BYODKIM to using Easy DKIM.</p>
  *             </li>
  *          </ul>
  * @example
@@ -56,74 +54,67 @@ export interface PutEmailIdentityDkimSigningAttributesCommandOutput
  * ```javascript
  * import { SESv2Client, PutEmailIdentityDkimSigningAttributesCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, PutEmailIdentityDkimSigningAttributesCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // PutEmailIdentityDkimSigningAttributesRequest
+ *   EmailIdentity: "STRING_VALUE", // required
+ *   SigningAttributesOrigin: "AWS_SES" || "EXTERNAL" || "AWS_SES_AF_SOUTH_1" || "AWS_SES_EU_NORTH_1" || "AWS_SES_AP_SOUTH_1" || "AWS_SES_EU_WEST_3" || "AWS_SES_EU_WEST_2" || "AWS_SES_EU_SOUTH_1" || "AWS_SES_EU_WEST_1" || "AWS_SES_AP_NORTHEAST_3" || "AWS_SES_AP_NORTHEAST_2" || "AWS_SES_ME_SOUTH_1" || "AWS_SES_AP_NORTHEAST_1" || "AWS_SES_IL_CENTRAL_1" || "AWS_SES_SA_EAST_1" || "AWS_SES_CA_CENTRAL_1" || "AWS_SES_AP_SOUTHEAST_1" || "AWS_SES_AP_SOUTHEAST_2" || "AWS_SES_AP_SOUTHEAST_3" || "AWS_SES_EU_CENTRAL_1" || "AWS_SES_US_EAST_1" || "AWS_SES_US_EAST_2" || "AWS_SES_US_WEST_1" || "AWS_SES_US_WEST_2" || "AWS_SES_ME_CENTRAL_1" || "AWS_SES_AP_SOUTH_2" || "AWS_SES_EU_CENTRAL_2" || "AWS_SES_AP_SOUTHEAST_5" || "AWS_SES_CA_WEST_1" || "AWS_SES_US_GOV_EAST_1" || "AWS_SES_US_GOV_WEST_1", // required
+ *   SigningAttributes: { // DkimSigningAttributes
+ *     DomainSigningSelector: "STRING_VALUE",
+ *     DomainSigningPrivateKey: "STRING_VALUE",
+ *     NextSigningKeyLength: "RSA_1024_BIT" || "RSA_2048_BIT",
+ *     DomainSigningAttributesOrigin: "AWS_SES" || "EXTERNAL" || "AWS_SES_AF_SOUTH_1" || "AWS_SES_EU_NORTH_1" || "AWS_SES_AP_SOUTH_1" || "AWS_SES_EU_WEST_3" || "AWS_SES_EU_WEST_2" || "AWS_SES_EU_SOUTH_1" || "AWS_SES_EU_WEST_1" || "AWS_SES_AP_NORTHEAST_3" || "AWS_SES_AP_NORTHEAST_2" || "AWS_SES_ME_SOUTH_1" || "AWS_SES_AP_NORTHEAST_1" || "AWS_SES_IL_CENTRAL_1" || "AWS_SES_SA_EAST_1" || "AWS_SES_CA_CENTRAL_1" || "AWS_SES_AP_SOUTHEAST_1" || "AWS_SES_AP_SOUTHEAST_2" || "AWS_SES_AP_SOUTHEAST_3" || "AWS_SES_EU_CENTRAL_1" || "AWS_SES_US_EAST_1" || "AWS_SES_US_EAST_2" || "AWS_SES_US_WEST_1" || "AWS_SES_US_WEST_2" || "AWS_SES_ME_CENTRAL_1" || "AWS_SES_AP_SOUTH_2" || "AWS_SES_EU_CENTRAL_2" || "AWS_SES_AP_SOUTHEAST_5" || "AWS_SES_CA_WEST_1" || "AWS_SES_US_GOV_EAST_1" || "AWS_SES_US_GOV_WEST_1",
+ *   },
+ * };
  * const command = new PutEmailIdentityDkimSigningAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // PutEmailIdentityDkimSigningAttributesResponse
+ * //   DkimStatus: "PENDING" || "SUCCESS" || "FAILED" || "TEMPORARY_FAILURE" || "NOT_STARTED",
+ * //   DkimTokens: [ // DnsTokenList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   SigningHostedZone: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param PutEmailIdentityDkimSigningAttributesCommandInput - {@link PutEmailIdentityDkimSigningAttributesCommandInput}
+ * @returns {@link PutEmailIdentityDkimSigningAttributesCommandOutput}
  * @see {@link PutEmailIdentityDkimSigningAttributesCommandInput} for command's `input` shape.
  * @see {@link PutEmailIdentityDkimSigningAttributesCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class PutEmailIdentityDkimSigningAttributesCommand extends $Command<
-  PutEmailIdentityDkimSigningAttributesCommandInput,
-  PutEmailIdentityDkimSigningAttributesCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutEmailIdentityDkimSigningAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutEmailIdentityDkimSigningAttributesCommandInput, PutEmailIdentityDkimSigningAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "PutEmailIdentityDkimSigningAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutEmailIdentityDkimSigningAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutEmailIdentityDkimSigningAttributesResponse.filterSensitiveLog,
+export class PutEmailIdentityDkimSigningAttributesCommand extends command<PutEmailIdentityDkimSigningAttributesCommandInput, PutEmailIdentityDkimSigningAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutEmailIdentityDkimSigningAttributes",
+  PutEmailIdentityDkimSigningAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutEmailIdentityDkimSigningAttributesRequest;
+      output: PutEmailIdentityDkimSigningAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutEmailIdentityDkimSigningAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutEmailIdentityDkimSigningAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutEmailIdentityDkimSigningAttributesCommandOutput> {
-    return deserializeAws_restJson1PutEmailIdentityDkimSigningAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutEmailIdentityDkimSigningAttributesCommandInput;
+      output: PutEmailIdentityDkimSigningAttributesCommandOutput;
+    };
+  };
 }

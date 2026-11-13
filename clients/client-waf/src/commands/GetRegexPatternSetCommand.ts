@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRegexPatternSetRequest, GetRegexPatternSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetRegexPatternSetCommand,
-  serializeAws_json1_1GetRegexPatternSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRegexPatternSetRequest, GetRegexPatternSetResponse } from "../models/models_0";
+import { GetRegexPatternSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRegexPatternSetCommand}.
+ */
 export interface GetRegexPatternSetCommandInput extends GetRegexPatternSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRegexPatternSetCommand}.
+ */
 export interface GetRegexPatternSetCommandOutput extends GetRegexPatternSetResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,62 @@ export interface GetRegexPatternSetCommandOutput extends GetRegexPatternSetRespo
  * ```javascript
  * import { WAFClient, GetRegexPatternSetCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, GetRegexPatternSetCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // GetRegexPatternSetRequest
+ *   RegexPatternSetId: "STRING_VALUE", // required
+ * };
  * const command = new GetRegexPatternSetCommand(input);
  * const response = await client.send(command);
+ * // { // GetRegexPatternSetResponse
+ * //   RegexPatternSet: { // RegexPatternSet
+ * //     RegexPatternSetId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     RegexPatternStrings: [ // RegexPatternStrings // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRegexPatternSetCommandInput - {@link GetRegexPatternSetCommandInput}
+ * @returns {@link GetRegexPatternSetCommandOutput}
  * @see {@link GetRegexPatternSetCommandInput} for command's `input` shape.
  * @see {@link GetRegexPatternSetCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class GetRegexPatternSetCommand extends $Command<
-  GetRegexPatternSetCommandInput,
-  GetRegexPatternSetCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRegexPatternSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRegexPatternSetCommandInput, GetRegexPatternSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "GetRegexPatternSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRegexPatternSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRegexPatternSetResponse.filterSensitiveLog,
+export class GetRegexPatternSetCommand extends command<GetRegexPatternSetCommandInput, GetRegexPatternSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRegexPatternSet",
+  GetRegexPatternSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRegexPatternSetRequest;
+      output: GetRegexPatternSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRegexPatternSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRegexPatternSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRegexPatternSetCommandOutput> {
-    return deserializeAws_json1_1GetRegexPatternSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRegexPatternSetCommandInput;
+      output: GetRegexPatternSetCommandOutput;
+    };
+  };
 }

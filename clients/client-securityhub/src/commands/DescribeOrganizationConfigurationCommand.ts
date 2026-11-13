@@ -1,107 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeOrganizationConfigurationRequest,
   DescribeOrganizationConfigurationResponse,
-} from "../models/models_1";
-import {
-  deserializeAws_restJson1DescribeOrganizationConfigurationCommand,
-  serializeAws_restJson1DescribeOrganizationConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
-
-export interface DescribeOrganizationConfigurationCommandInput extends DescribeOrganizationConfigurationRequest {}
-export interface DescribeOrganizationConfigurationCommandOutput
-  extends DescribeOrganizationConfigurationResponse,
-    __MetadataBearer {}
+} from "../models/models_2";
+import { DescribeOrganizationConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns information about the Organizations configuration for Security Hub. Can only be
- *          called from a Security Hub administrator account.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeOrganizationConfigurationCommand}.
+ */
+export interface DescribeOrganizationConfigurationCommandInput extends DescribeOrganizationConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeOrganizationConfigurationCommand}.
+ */
+export interface DescribeOrganizationConfigurationCommandOutput extends DescribeOrganizationConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns information about the way your organization is configured in Security Hub CSPM. Only the
+ *          Security Hub CSPM administrator account can invoke this operation.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, DescribeOrganizationConfigurationCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DescribeOrganizationConfigurationCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = {};
  * const command = new DescribeOrganizationConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeOrganizationConfigurationResponse
+ * //   AutoEnable: true || false,
+ * //   MemberAccountLimitReached: true || false,
+ * //   AutoEnableStandards: "NONE" || "DEFAULT",
+ * //   OrganizationConfiguration: { // OrganizationConfiguration
+ * //     ConfigurationType: "CENTRAL" || "LOCAL",
+ * //     Status: "PENDING" || "ENABLED" || "FAILED" || "DISABLED",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeOrganizationConfigurationCommandInput - {@link DescribeOrganizationConfigurationCommandInput}
+ * @returns {@link DescribeOrganizationConfigurationCommandOutput}
  * @see {@link DescribeOrganizationConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeOrganizationConfigurationCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To get information about organization configuration
+ * ```javascript
+ * // This operation provides information about the way your organization is configured in Security Hub. Only a Security Hub administrator account can invoke this operation.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeOrganizationConfigurationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AutoEnable: false,
+ *   AutoEnableStandards: "NONE",
+ *   MemberAccountLimitReached: false,
+ *   OrganizationConfiguration: {
+ *     ConfigurationType: "CENTRAL",
+ *     Status: "ENABLED"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeOrganizationConfigurationCommand extends $Command<
-  DescribeOrganizationConfigurationCommandInput,
-  DescribeOrganizationConfigurationCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeOrganizationConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeOrganizationConfigurationCommandInput, DescribeOrganizationConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DescribeOrganizationConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeOrganizationConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeOrganizationConfigurationResponse.filterSensitiveLog,
+export class DescribeOrganizationConfigurationCommand extends command<DescribeOrganizationConfigurationCommandInput, DescribeOrganizationConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeOrganizationConfiguration",
+  DescribeOrganizationConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeOrganizationConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeOrganizationConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeOrganizationConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeOrganizationConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeOrganizationConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeOrganizationConfigurationCommandInput;
+      output: DescribeOrganizationConfigurationCommandOutput;
+    };
+  };
 }

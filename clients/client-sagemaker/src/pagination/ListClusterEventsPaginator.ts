@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListClusterEventsCommand,
+  ListClusterEventsCommandInput,
+  ListClusterEventsCommandOutput,
+} from "../commands/ListClusterEventsCommand";
+import { SageMakerClient } from "../SageMakerClient";
+import type { SageMakerPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListClusterEvents: (
+  config: SageMakerPaginationConfiguration,
+  input: ListClusterEventsCommandInput,
+  ...rest: any[]
+) => Paginator<ListClusterEventsCommandOutput> = createPaginator<
+  SageMakerPaginationConfiguration,
+  ListClusterEventsCommandInput,
+  ListClusterEventsCommandOutput
+>(SageMakerClient, ListClusterEventsCommand, "NextToken", "NextToken", "MaxResults");

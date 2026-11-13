@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexRuntimeServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexRuntimeServiceClient";
-import { PostTextRequest, PostTextResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PostTextCommand,
-  serializeAws_restJson1PostTextCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PostTextRequest, PostTextResponse } from "../models/models_0";
+import { PostText$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PostTextCommand}.
+ */
 export interface PostTextCommandInput extends PostTextRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PostTextCommand}.
+ */
 export interface PostTextCommandOutput extends PostTextResponse, __MetadataBearer {}
 
 /**
@@ -107,68 +104,173 @@ export interface PostTextCommandOutput extends PostTextResponse, __MetadataBeare
  * ```javascript
  * import { LexRuntimeServiceClient, PostTextCommand } from "@aws-sdk/client-lex-runtime-service"; // ES Modules import
  * // const { LexRuntimeServiceClient, PostTextCommand } = require("@aws-sdk/client-lex-runtime-service"); // CommonJS import
+ * // import type { LexRuntimeServiceClientConfig } from "@aws-sdk/client-lex-runtime-service";
+ * const config = {}; // type is LexRuntimeServiceClientConfig
  * const client = new LexRuntimeServiceClient(config);
+ * const input = { // PostTextRequest
+ *   botName: "STRING_VALUE", // required
+ *   botAlias: "STRING_VALUE", // required
+ *   userId: "STRING_VALUE", // required
+ *   sessionAttributes: { // StringMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   requestAttributes: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   inputText: "STRING_VALUE", // required
+ *   activeContexts: [ // ActiveContextsList
+ *     { // ActiveContext
+ *       name: "STRING_VALUE", // required
+ *       timeToLive: { // ActiveContextTimeToLive
+ *         timeToLiveInSeconds: Number("int"),
+ *         turnsToLive: Number("int"),
+ *       },
+ *       parameters: { // ActiveContextParametersMap // required
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new PostTextCommand(input);
  * const response = await client.send(command);
+ * // { // PostTextResponse
+ * //   intentName: "STRING_VALUE",
+ * //   nluIntentConfidence: { // IntentConfidence
+ * //     score: Number("double"),
+ * //   },
+ * //   alternativeIntents: [ // IntentList
+ * //     { // PredictedIntent
+ * //       intentName: "STRING_VALUE",
+ * //       nluIntentConfidence: {
+ * //         score: Number("double"),
+ * //       },
+ * //       slots: { // StringMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   slots: {
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   sessionAttributes: {
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   message: "STRING_VALUE",
+ * //   sentimentResponse: { // SentimentResponse
+ * //     sentimentLabel: "STRING_VALUE",
+ * //     sentimentScore: "STRING_VALUE",
+ * //   },
+ * //   messageFormat: "PlainText" || "CustomPayload" || "SSML" || "Composite",
+ * //   dialogState: "ElicitIntent" || "ConfirmIntent" || "ElicitSlot" || "Fulfilled" || "ReadyForFulfillment" || "Failed",
+ * //   slotToElicit: "STRING_VALUE",
+ * //   responseCard: { // ResponseCard
+ * //     version: "STRING_VALUE",
+ * //     contentType: "application/vnd.amazonaws.card.generic",
+ * //     genericAttachments: [ // genericAttachmentList
+ * //       { // GenericAttachment
+ * //         title: "STRING_VALUE",
+ * //         subTitle: "STRING_VALUE",
+ * //         attachmentLinkUrl: "STRING_VALUE",
+ * //         imageUrl: "STRING_VALUE",
+ * //         buttons: [ // listOfButtons
+ * //           { // Button
+ * //             text: "STRING_VALUE", // required
+ * //             value: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * //   sessionId: "STRING_VALUE",
+ * //   botVersion: "STRING_VALUE",
+ * //   activeContexts: [ // ActiveContextsList
+ * //     { // ActiveContext
+ * //       name: "STRING_VALUE", // required
+ * //       timeToLive: { // ActiveContextTimeToLive
+ * //         timeToLiveInSeconds: Number("int"),
+ * //         turnsToLive: Number("int"),
+ * //       },
+ * //       parameters: { // ActiveContextParametersMap // required
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PostTextCommandInput - {@link PostTextCommandInput}
+ * @returns {@link PostTextCommandOutput}
  * @see {@link PostTextCommandInput} for command's `input` shape.
  * @see {@link PostTextCommandOutput} for command's `response` shape.
- * @see {@link LexRuntimeServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexRuntimeServiceClientResolvedConfig | config} for LexRuntimeServiceClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  <p>Either the Amazon Lex bot is still building, or one of the dependent
+ *       services (Amazon Polly, AWS Lambda) failed with an internal service
+ *       error.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p> Request validation failed, there is no usable message in the context,
+ *       or the bot build failed, is still in progress, or contains unbuilt
+ *       changes. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> Two clients are using the same AWS account, Amazon Lex bot, and user
+ *       ID. </p>
+ *
+ * @throws {@link DependencyFailedException} (client fault)
+ *  <p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
+ *       exception. For example, </p>
+ *          <ul>
+ *             <li>
+ *                <p>If Amazon Lex does not have sufficient permissions to call a Lambda
+ *           function.</p>
+ *             </li>
+ *             <li>
+ *                <p>If a Lambda function takes longer than 30 seconds to
+ *           execute.</p>
+ *             </li>
+ *             <li>
+ *                <p>If a fulfillment Lambda function returns a <code>Delegate</code>
+ *           dialog action without removing any slot values.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>Internal service error. Retry the call.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Exceeded a limit.</p>
+ *
+ * @throws {@link LoopDetectedException} (server fault)
+ *  <p>This exception is not used.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource (such as the Amazon Lex bot or an alias) that is referred
+ *       to is not found.</p>
+ *
+ * @throws {@link LexRuntimeServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexRuntimeService service.</p>
+ *
+ *
+ * @public
  */
-export class PostTextCommand extends $Command<
-  PostTextCommandInput,
-  PostTextCommandOutput,
-  LexRuntimeServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PostTextCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexRuntimeServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PostTextCommandInput, PostTextCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexRuntimeServiceClient";
-    const commandName = "PostTextCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PostTextRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PostTextResponse.filterSensitiveLog,
+export class PostTextCommand extends command<PostTextCommandInput, PostTextCommandOutput>(
+  _ep0,
+  _mw0,
+  "PostText",
+  PostText$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PostTextRequest;
+      output: PostTextResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PostTextCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PostTextCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PostTextCommandOutput> {
-    return deserializeAws_restJson1PostTextCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PostTextCommandInput;
+      output: PostTextCommandOutput;
+    };
+  };
 }

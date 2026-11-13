@@ -1,96 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateVocabularyRequest, UpdateVocabularyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateVocabularyCommand,
-  serializeAws_json1_1UpdateVocabularyCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TranscribeClientResolvedConfig } from "../TranscribeClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateVocabularyRequest, UpdateVocabularyResponse } from "../models/models_0";
+import { UpdateVocabulary$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateVocabularyCommand}.
+ */
 export interface UpdateVocabularyCommandInput extends UpdateVocabularyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateVocabularyCommand}.
+ */
 export interface UpdateVocabularyCommandOutput extends UpdateVocabularyResponse, __MetadataBearer {}
 
 /**
- * <p>Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites
- *             all of the existing information with the values that you provide in the request. </p>
+ * <p>Updates an existing custom vocabulary with new values. This operation overwrites all
+ *             existing information with your new values; you cannot append new terms onto an existing
+ *             custom vocabulary.</p>
+ *          <p>Your custom vocabulary must be in a terminal state (<code>READY</code> or
+ *             <code>FAILED</code>) before you can update it. You must include either
+ *             <code>Phrases</code> or <code>VocabularyFileUri</code> in your request.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TranscribeClient, UpdateVocabularyCommand } from "@aws-sdk/client-transcribe"; // ES Modules import
  * // const { TranscribeClient, UpdateVocabularyCommand } = require("@aws-sdk/client-transcribe"); // CommonJS import
+ * // import type { TranscribeClientConfig } from "@aws-sdk/client-transcribe";
+ * const config = {}; // type is TranscribeClientConfig
  * const client = new TranscribeClient(config);
+ * const input = { // UpdateVocabularyRequest
+ *   VocabularyName: "STRING_VALUE", // required
+ *   LanguageCode: "af-ZA" || "ar-AE" || "ar-SA" || "am-ET" || "cy-GB" || "da-DK" || "de-CH" || "de-DE" || "en-AB" || "en-AU" || "en-GB" || "en-IE" || "en-IN" || "en-US" || "en-WL" || "es-ES" || "es-MX" || "es-US" || "fa-AF" || "fa-IR" || "fr-CA" || "fr-FR" || "ga-IE" || "gd-GB" || "he-IL" || "hi-IN" || "ht-HT" || "id-ID" || "it-IT" || "ja-JP" || "jv-ID" || "km-KH" || "ko-KR" || "my-MM" || "ms-MY" || "nl-NL" || "pt-BR" || "pt-PT" || "ru-RU" || "ta-IN" || "te-IN" || "tr-TR" || "zh-CN" || "zh-TW" || "th-TH" || "en-ZA" || "en-NZ" || "vi-VN" || "sv-SE" || "ab-GE" || "ast-ES" || "az-AZ" || "ba-RU" || "be-BY" || "bg-BG" || "bn-IN" || "bs-BA" || "ca-ES" || "ckb-IQ" || "ckb-IR" || "cs-CZ" || "cy-WL" || "el-GR" || "et-EE" || "et-ET" || "eu-ES" || "fi-FI" || "gl-ES" || "gu-IN" || "ha-NG" || "hr-HR" || "hu-HU" || "hy-AM" || "is-IS" || "ka-GE" || "kab-DZ" || "kk-KZ" || "kn-IN" || "ky-KG" || "lg-IN" || "lt-LT" || "lv-LV" || "mhr-RU" || "mi-NZ" || "mk-MK" || "ml-IN" || "mn-MN" || "mr-IN" || "mt-MT" || "no-NO" || "ne-NP" || "or-IN" || "pa-IN" || "pl-PL" || "ps-AF" || "ro-RO" || "rw-RW" || "si-LK" || "sk-SK" || "sl-SI" || "so-SO" || "sq-AL" || "sr-RS" || "su-ID" || "sw-BI" || "sw-KE" || "sw-RW" || "sw-TZ" || "sw-UG" || "tl-PH" || "tt-RU" || "ug-CN" || "uk-UA" || "uz-UZ" || "wo-SN" || "zh-HK" || "zu-ZA", // required
+ *   Phrases: [ // Phrases
+ *     "STRING_VALUE",
+ *   ],
+ *   VocabularyFileUri: "STRING_VALUE",
+ *   DataAccessRoleArn: "STRING_VALUE",
+ *   EncryptionConfiguration: { // EncryptionConfiguration
+ *     KMSEncryptionContext: { // KMSEncryptionContextMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     KMSKey: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new UpdateVocabularyCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateVocabularyResponse
+ * //   VocabularyName: "STRING_VALUE",
+ * //   LanguageCode: "af-ZA" || "ar-AE" || "ar-SA" || "am-ET" || "cy-GB" || "da-DK" || "de-CH" || "de-DE" || "en-AB" || "en-AU" || "en-GB" || "en-IE" || "en-IN" || "en-US" || "en-WL" || "es-ES" || "es-MX" || "es-US" || "fa-AF" || "fa-IR" || "fr-CA" || "fr-FR" || "ga-IE" || "gd-GB" || "he-IL" || "hi-IN" || "ht-HT" || "id-ID" || "it-IT" || "ja-JP" || "jv-ID" || "km-KH" || "ko-KR" || "my-MM" || "ms-MY" || "nl-NL" || "pt-BR" || "pt-PT" || "ru-RU" || "ta-IN" || "te-IN" || "tr-TR" || "zh-CN" || "zh-TW" || "th-TH" || "en-ZA" || "en-NZ" || "vi-VN" || "sv-SE" || "ab-GE" || "ast-ES" || "az-AZ" || "ba-RU" || "be-BY" || "bg-BG" || "bn-IN" || "bs-BA" || "ca-ES" || "ckb-IQ" || "ckb-IR" || "cs-CZ" || "cy-WL" || "el-GR" || "et-EE" || "et-ET" || "eu-ES" || "fi-FI" || "gl-ES" || "gu-IN" || "ha-NG" || "hr-HR" || "hu-HU" || "hy-AM" || "is-IS" || "ka-GE" || "kab-DZ" || "kk-KZ" || "kn-IN" || "ky-KG" || "lg-IN" || "lt-LT" || "lv-LV" || "mhr-RU" || "mi-NZ" || "mk-MK" || "ml-IN" || "mn-MN" || "mr-IN" || "mt-MT" || "no-NO" || "ne-NP" || "or-IN" || "pa-IN" || "pl-PL" || "ps-AF" || "ro-RO" || "rw-RW" || "si-LK" || "sk-SK" || "sl-SI" || "so-SO" || "sq-AL" || "sr-RS" || "su-ID" || "sw-BI" || "sw-KE" || "sw-RW" || "sw-TZ" || "sw-UG" || "tl-PH" || "tt-RU" || "ug-CN" || "uk-UA" || "uz-UZ" || "wo-SN" || "zh-HK" || "zu-ZA",
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   VocabularyState: "PENDING" || "READY" || "FAILED",
+ * // };
+ *
  * ```
  *
+ * @param UpdateVocabularyCommandInput - {@link UpdateVocabularyCommandInput}
+ * @returns {@link UpdateVocabularyCommandOutput}
  * @see {@link UpdateVocabularyCommandInput} for command's `input` shape.
  * @see {@link UpdateVocabularyCommandOutput} for command's `response` shape.
- * @see {@link TranscribeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TranscribeClientResolvedConfig | config} for TranscribeClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Your request didn't pass one or more validation tests. This can occur when the entity
+ *             you're trying to delete doesn't exist or if it's in a non-terminal state (such as
+ *                 <code>IN PROGRESS</code>). See the exception message field for more
+ *             information.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A resource already exists with this name. Resource names must be unique within an
+ *                 Amazon Web Services account.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>There was an internal error. Check the error message, correct the issue, and try your
+ *             request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You've either sent too many requests or your input file is too long. Wait before
+ *             retrying your request, or use a smaller file and try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>We can't find the requested resource. Check that the specified name is correct and try
+ *             your request again.</p>
+ *
+ * @throws {@link TranscribeServiceException}
+ * <p>Base exception class for all service exceptions from Transcribe service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateVocabularyCommand extends $Command<
-  UpdateVocabularyCommandInput,
-  UpdateVocabularyCommandOutput,
-  TranscribeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateVocabularyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TranscribeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateVocabularyCommandInput, UpdateVocabularyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TranscribeClient";
-    const commandName = "UpdateVocabularyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateVocabularyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateVocabularyResponse.filterSensitiveLog,
+export class UpdateVocabularyCommand extends command<UpdateVocabularyCommandInput, UpdateVocabularyCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateVocabulary",
+  UpdateVocabulary$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateVocabularyRequest;
+      output: UpdateVocabularyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateVocabularyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateVocabularyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateVocabularyCommandOutput> {
-    return deserializeAws_json1_1UpdateVocabularyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateVocabularyCommandInput;
+      output: UpdateVocabularyCommandOutput;
+    };
+  };
 }

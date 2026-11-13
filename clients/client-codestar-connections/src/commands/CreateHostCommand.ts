@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodeStarConnectionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodeStarConnectionsClient";
-import { CreateHostInput, CreateHostOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0CreateHostCommand,
-  serializeAws_json1_0CreateHostCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateHostInput, CreateHostOutput } from "../models/models_0";
+import { CreateHost$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateHostCommand}.
+ */
 export interface CreateHostCommandInput extends CreateHostInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateHostCommand}.
+ */
 export interface CreateHostCommandOutput extends CreateHostOutput, __MetadataBearer {}
 
 /**
@@ -39,68 +36,74 @@ export interface CreateHostCommandOutput extends CreateHostOutput, __MetadataBea
  * ```javascript
  * import { CodeStarConnectionsClient, CreateHostCommand } from "@aws-sdk/client-codestar-connections"; // ES Modules import
  * // const { CodeStarConnectionsClient, CreateHostCommand } = require("@aws-sdk/client-codestar-connections"); // CommonJS import
+ * // import type { CodeStarConnectionsClientConfig } from "@aws-sdk/client-codestar-connections";
+ * const config = {}; // type is CodeStarConnectionsClientConfig
  * const client = new CodeStarConnectionsClient(config);
+ * const input = { // CreateHostInput
+ *   Name: "STRING_VALUE", // required
+ *   ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged", // required
+ *   ProviderEndpoint: "STRING_VALUE", // required
+ *   VpcConfiguration: { // VpcConfiguration
+ *     VpcId: "STRING_VALUE", // required
+ *     SubnetIds: [ // SubnetIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     SecurityGroupIds: [ // SecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     TlsCertificate: "STRING_VALUE",
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateHostCommand(input);
  * const response = await client.send(command);
+ * // { // CreateHostOutput
+ * //   HostArn: "STRING_VALUE",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateHostCommandInput - {@link CreateHostCommandInput}
+ * @returns {@link CreateHostCommandOutput}
  * @see {@link CreateHostCommandInput} for command's `input` shape.
  * @see {@link CreateHostCommandOutput} for command's `response` shape.
- * @see {@link CodeStarConnectionsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeStarConnectionsClientResolvedConfig | config} for CodeStarConnectionsClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Exceeded the maximum limit for connections.</p>
+ *
+ * @throws {@link CodeStarConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeStarConnections service.</p>
+ *
+ *
+ * @public
  */
-export class CreateHostCommand extends $Command<
-  CreateHostCommandInput,
-  CreateHostCommandOutput,
-  CodeStarConnectionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateHostCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeStarConnectionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateHostCommandInput, CreateHostCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeStarConnectionsClient";
-    const commandName = "CreateHostCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateHostInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateHostOutput.filterSensitiveLog,
+export class CreateHostCommand extends command<CreateHostCommandInput, CreateHostCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateHost",
+  CreateHost$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHostInput;
+      output: CreateHostOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateHostCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateHostCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateHostCommandOutput> {
-    return deserializeAws_json1_0CreateHostCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateHostCommandInput;
+      output: CreateHostCommandOutput;
+    };
+  };
 }

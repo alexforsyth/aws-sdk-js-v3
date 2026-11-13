@@ -1,0 +1,116 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUpdateDirectoryRequest, DescribeUpdateDirectoryResult } from "../models/models_0";
+import { DescribeUpdateDirectory$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUpdateDirectoryCommand}.
+ */
+export interface DescribeUpdateDirectoryCommandInput extends DescribeUpdateDirectoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUpdateDirectoryCommand}.
+ */
+export interface DescribeUpdateDirectoryCommandOutput extends DescribeUpdateDirectoryResult, __MetadataBearer {}
+
+/**
+ * <p> Describes the updates of a directory for a particular update type. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DirectoryServiceClient, DescribeUpdateDirectoryCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
+ * // const { DirectoryServiceClient, DescribeUpdateDirectoryCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
+ * const client = new DirectoryServiceClient(config);
+ * const input = { // DescribeUpdateDirectoryRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   UpdateType: "OS" || "NETWORK" || "SIZE", // required
+ *   RegionName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new DescribeUpdateDirectoryCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeUpdateDirectoryResult
+ * //   UpdateActivities: [ // UpdateActivities
+ * //     { // UpdateInfoEntry
+ * //       Region: "STRING_VALUE",
+ * //       Status: "Updated" || "Updating" || "UpdateFailed",
+ * //       StatusReason: "STRING_VALUE",
+ * //       InitiatedBy: "STRING_VALUE",
+ * //       NewValue: { // UpdateValue
+ * //         OSUpdateSettings: { // OSUpdateSettings
+ * //           OSVersion: "SERVER_2012" || "SERVER_2019",
+ * //         },
+ * //       },
+ * //       PreviousValue: {
+ * //         OSUpdateSettings: {
+ * //           OSVersion: "SERVER_2012" || "SERVER_2019",
+ * //         },
+ * //       },
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       LastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeUpdateDirectoryCommandInput - {@link DescribeUpdateDirectoryCommandInput}
+ * @returns {@link DescribeUpdateDirectoryCommandOutput}
+ * @see {@link DescribeUpdateDirectoryCommandInput} for command's `input` shape.
+ * @see {@link DescribeUpdateDirectoryCommandOutput} for command's `response` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryDoesNotExistException} (client fault)
+ *  <p>The specified directory does not exist in the system.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeUpdateDirectoryCommand extends command<DescribeUpdateDirectoryCommandInput, DescribeUpdateDirectoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUpdateDirectory",
+  DescribeUpdateDirectory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUpdateDirectoryRequest;
+      output: DescribeUpdateDirectoryResult;
+    };
+    sdk: {
+      input: DescribeUpdateDirectoryCommandInput;
+      output: DescribeUpdateDirectoryCommandOutput;
+    };
+  };
+}

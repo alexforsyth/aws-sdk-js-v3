@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { CreateDataSourceFromRDSInput, CreateDataSourceFromRDSOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateDataSourceFromRDSCommand,
-  serializeAws_json1_1CreateDataSourceFromRDSCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDataSourceFromRDSInput, CreateDataSourceFromRDSOutput } from "../models/models_0";
+import { CreateDataSourceFromRDS$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDataSourceFromRDSCommand}.
+ */
 export interface CreateDataSourceFromRDSCommandInput extends CreateDataSourceFromRDSInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDataSourceFromRDSCommand}.
+ */
 export interface CreateDataSourceFromRDSCommandOutput extends CreateDataSourceFromRDSOutput, __MetadataBearer {}
 
 /**
@@ -39,68 +40,80 @@ export interface CreateDataSourceFromRDSCommandOutput extends CreateDataSourceFr
  * ```javascript
  * import { MachineLearningClient, CreateDataSourceFromRDSCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, CreateDataSourceFromRDSCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // CreateDataSourceFromRDSInput
+ *   DataSourceId: "STRING_VALUE", // required
+ *   DataSourceName: "STRING_VALUE",
+ *   RDSData: { // RDSDataSpec
+ *     DatabaseInformation: { // RDSDatabase
+ *       InstanceIdentifier: "STRING_VALUE", // required
+ *       DatabaseName: "STRING_VALUE", // required
+ *     },
+ *     SelectSqlQuery: "STRING_VALUE", // required
+ *     DatabaseCredentials: { // RDSDatabaseCredentials
+ *       Username: "STRING_VALUE", // required
+ *       Password: "STRING_VALUE", // required
+ *     },
+ *     S3StagingLocation: "STRING_VALUE", // required
+ *     DataRearrangement: "STRING_VALUE",
+ *     DataSchema: "STRING_VALUE",
+ *     DataSchemaUri: "STRING_VALUE",
+ *     ResourceRole: "STRING_VALUE", // required
+ *     ServiceRole: "STRING_VALUE", // required
+ *     SubnetId: "STRING_VALUE", // required
+ *     SecurityGroupIds: [ // EDPSecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   RoleARN: "STRING_VALUE", // required
+ *   ComputeStatistics: true || false,
+ * };
  * const command = new CreateDataSourceFromRDSCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDataSourceFromRDSOutput
+ * //   DataSourceId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateDataSourceFromRDSCommandInput - {@link CreateDataSourceFromRDSCommandInput}
+ * @returns {@link CreateDataSourceFromRDSCommandOutput}
  * @see {@link CreateDataSourceFromRDSCommandInput} for command's `input` shape.
  * @see {@link CreateDataSourceFromRDSCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link IdempotentParameterMismatchException} (client fault)
+ *  <p>A second request to use or change an object was not allowed. This can result from retrying a request using a parameter that was not present in the original request.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDataSourceFromRDSCommand extends $Command<
-  CreateDataSourceFromRDSCommandInput,
-  CreateDataSourceFromRDSCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDataSourceFromRDSCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDataSourceFromRDSCommandInput, CreateDataSourceFromRDSCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "CreateDataSourceFromRDSCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDataSourceFromRDSInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDataSourceFromRDSOutput.filterSensitiveLog,
+export class CreateDataSourceFromRDSCommand extends command<CreateDataSourceFromRDSCommandInput, CreateDataSourceFromRDSCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDataSourceFromRDS",
+  CreateDataSourceFromRDS$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataSourceFromRDSInput;
+      output: CreateDataSourceFromRDSOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDataSourceFromRDSCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateDataSourceFromRDSCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDataSourceFromRDSCommandOutput> {
-    return deserializeAws_json1_1CreateDataSourceFromRDSCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDataSourceFromRDSCommandInput;
+      output: CreateDataSourceFromRDSCommandOutput;
+    };
+  };
 }

@@ -1,8 +1,27 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AssignmentStatus,
+  Comparator,
+  EventType,
+  HITAccessActions,
+  HITReviewStatus,
+  HITStatus,
+  NotificationTransport,
+  NotifyWorkersFailureCode,
+  QualificationStatus,
+  QualificationTypeStatus,
+  ReviewableHITStatus,
+  ReviewActionStatus,
+  ReviewPolicyLevel,
+} from "./enums";
 
+/**
+ * @public
+ */
 export interface AcceptQualificationRequestRequest {
   /**
    * <p>The ID of the Qualification request, as returned by the <code>GetQualificationRequests</code> operation.</p>
+   * @public
    */
   QualificationRequestId: string | undefined;
 
@@ -11,73 +30,25 @@ export interface AcceptQualificationRequestRequest {
    *             The value of the Qualification. You can omit this value if you are using the
    *             presence or absence of the Qualification as the basis for a HIT requirement.
    *         </p>
+   * @public
    */
-  IntegerValue?: number;
+  IntegerValue?: number | undefined;
 }
 
-export namespace AcceptQualificationRequestRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AcceptQualificationRequestRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AcceptQualificationRequestResponse {}
 
-export namespace AcceptQualificationRequestResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AcceptQualificationRequestResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Your request is invalid.</p>
+ * @public
  */
-export interface RequestError extends __SmithyException, $MetadataBearer {
-  name: "RequestError";
-  $fault: "client";
-  Message?: string;
-  TurkErrorCode?: string;
-}
-
-export namespace RequestError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RequestError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
- */
-export interface ServiceFault extends __SmithyException, $MetadataBearer {
-  name: "ServiceFault";
-  $fault: "server";
-  Message?: string;
-  TurkErrorCode?: string;
-}
-
-export namespace ServiceFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceFault): any => ({
-    ...obj,
-  });
-}
-
 export interface ApproveAssignmentRequest {
   /**
    * <p>
    *             The ID of the assignment. The assignment must correspond to a HIT created by the Requester.
    *         </p>
+   * @public
    */
   AssignmentId: string | undefined;
 
@@ -85,69 +56,55 @@ export interface ApproveAssignmentRequest {
    * <p>
    *             A message for the Worker, which the Worker can see in the Status section of the web site.
    *         </p>
+   * @public
    */
-  RequesterFeedback?: string;
+  RequesterFeedback?: string | undefined;
 
   /**
    * <p>
    *             A flag indicating that an assignment should be approved even if it was previously rejected. Defaults to <code>False</code>.
    *         </p>
+   * @public
    */
-  OverrideRejection?: boolean;
+  OverrideRejection?: boolean | undefined;
 }
 
-export namespace ApproveAssignmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApproveAssignmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ApproveAssignmentResponse {}
-
-export namespace ApproveAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApproveAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum AssignmentStatus {
-  Approved = "Approved",
-  Rejected = "Rejected",
-  Submitted = "Submitted",
-}
 
 /**
  * <p> The Assignment data structure represents a single assignment
  *             of a HIT to a Worker. The assignment tracks the Worker's efforts to
  *             complete the HIT, and contains the results for later retrieval.
  *         </p>
+ * @public
  */
 export interface Assignment {
   /**
    * <p> A unique identifier for the assignment.</p>
+   * @public
    */
-  AssignmentId?: string;
+  AssignmentId?: string | undefined;
 
   /**
    * <p> The ID of the Worker who accepted the HIT.</p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 
   /**
    * <p> The ID of the HIT.</p>
+   * @public
    */
-  HITId?: string;
+  HITId?: string | undefined;
 
   /**
    * <p> The status of the assignment.</p>
+   * @public
    */
-  AssignmentStatus?: AssignmentStatus | string;
+  AssignmentStatus?: AssignmentStatus | undefined;
 
   /**
    * <p> If results have been submitted, AutoApprovalTime is the date
@@ -157,71 +114,74 @@ export interface Assignment {
    *             auto-approval delay specified by the Requester in the HIT. This value
    *             is omitted from the assignment if the Worker has not yet submitted
    *             results.</p>
+   * @public
    */
-  AutoApprovalTime?: Date;
+  AutoApprovalTime?: Date | undefined;
 
   /**
    * <p> The date and time the Worker accepted the assignment.</p>
+   * @public
    */
-  AcceptTime?: Date;
+  AcceptTime?: Date | undefined;
 
   /**
    * <p> If the Worker has submitted results, SubmitTime is the date
    *             and time the assignment was submitted. This value is omitted from the
    *             assignment if the Worker has not yet submitted results.</p>
+   * @public
    */
-  SubmitTime?: Date;
+  SubmitTime?: Date | undefined;
 
   /**
    * <p> If the Worker has submitted results and the Requester has
    *             approved the results, ApprovalTime is the date and time the Requester
    *             approved the results. This value is omitted from the assignment if
    *             the Requester has not yet approved the results.</p>
+   * @public
    */
-  ApprovalTime?: Date;
+  ApprovalTime?: Date | undefined;
 
   /**
    * <p> If the Worker has submitted results and the Requester has
    *             rejected the results, RejectionTime is the date and time the
    *             Requester rejected the results.</p>
+   * @public
    */
-  RejectionTime?: Date;
+  RejectionTime?: Date | undefined;
 
   /**
    * <p> The date and time of the deadline for the assignment. This
    *             value is derived from the deadline specification for the HIT and the
    *             date and time the Worker accepted the HIT.</p>
+   * @public
    */
-  Deadline?: Date;
+  Deadline?: Date | undefined;
 
   /**
    * <p> The Worker's answers submitted for the HIT contained in a
    *             QuestionFormAnswers document, if the Worker provides an answer. If
    *             the Worker does not provide any answers, Answer may contain a
    *             QuestionFormAnswers document, or Answer may be empty.</p>
+   * @public
    */
-  Answer?: string;
+  Answer?: string | undefined;
 
   /**
    * <p> The feedback string included with the call to the
    *             ApproveAssignment operation or the RejectAssignment operation, if the
    *             Requester approved or rejected the assignment and specified feedback.</p>
+   * @public
    */
-  RequesterFeedback?: string;
+  RequesterFeedback?: string | undefined;
 }
 
-export namespace Assignment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Assignment): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateQualificationWithWorkerRequest {
   /**
    * <p>The ID of the Qualification type to use for the assigned Qualification.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
@@ -230,13 +190,15 @@ export interface AssociateQualificationWithWorkerRequest {
    *             The ID of the Worker to whom the Qualification is being assigned.
    *             Worker IDs are included with submitted HIT assignments and Qualification requests.
    *         </p>
+   * @public
    */
   WorkerId: string | undefined;
 
   /**
    * <p>The value of the Qualification to assign.</p>
+   * @public
    */
-  IntegerValue?: number;
+  IntegerValue?: number | undefined;
 
   /**
    * <p>
@@ -244,90 +206,65 @@ export interface AssociateQualificationWithWorkerRequest {
    *             saying that the qualification was assigned to the Worker.
    *             Note: this is true by default.
    *         </p>
+   * @public
    */
-  SendNotification?: boolean;
-}
-
-export namespace AssociateQualificationWithWorkerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateQualificationWithWorkerRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateQualificationWithWorkerResponse {}
-
-export namespace AssociateQualificationWithWorkerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateQualificationWithWorkerResponse): any => ({
-    ...obj,
-  });
+  SendNotification?: boolean | undefined;
 }
 
 /**
+ * @public
+ */
+export interface AssociateQualificationWithWorkerResponse {}
+
+/**
  * <p>An object representing a Bonus payment paid to a Worker.</p>
+ * @public
  */
 export interface BonusPayment {
   /**
    * <p>The ID of the Worker to whom the bonus was paid.</p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 
   /**
    * <p>A string representing a currency amount.</p>
+   * @public
    */
-  BonusAmount?: string;
+  BonusAmount?: string | undefined;
 
   /**
    * <p>The ID of the assignment associated with this bonus payment.</p>
+   * @public
    */
-  AssignmentId?: string;
+  AssignmentId?: string | undefined;
 
   /**
    * <p>The Reason text given when the bonus was granted, if any.</p>
+   * @public
    */
-  Reason?: string;
+  Reason?: string | undefined;
 
   /**
    * <p>The date and time of when the bonus was granted.</p>
+   * @public
    */
-  GrantTime?: Date;
+  GrantTime?: Date | undefined;
 }
 
-export namespace BonusPayment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BonusPayment): any => ({
-    ...obj,
-  });
-}
-
-export enum Comparator {
-  DoesNotExist = "DoesNotExist",
-  EqualTo = "EqualTo",
-  Exists = "Exists",
-  GreaterThan = "GreaterThan",
-  GreaterThanOrEqualTo = "GreaterThanOrEqualTo",
-  In = "In",
-  LessThan = "LessThan",
-  LessThanOrEqualTo = "LessThanOrEqualTo",
-  NotEqualTo = "NotEqualTo",
-  NotIn = "NotIn",
-}
-
+/**
+ * @public
+ */
 export interface CreateAdditionalAssignmentsForHITRequest {
   /**
    * <p>The ID of the HIT to extend.</p>
+   * @public
    */
   HITId: string | undefined;
 
   /**
    * <p>The number of additional assignments to request for this HIT.</p>
+   * @public
    */
   NumberOfAdditionalAssignments: number | undefined;
 
@@ -340,34 +277,21 @@ export interface CreateAdditionalAssignmentsForHITRequest {
    *             from a previous call using the same <code>UniqueRequestToken</code>,
    *             subsequent calls will return an error with a message containing the request ID.
    *         </p>
+   * @public
    */
-  UniqueRequestToken?: string;
+  UniqueRequestToken?: string | undefined;
 }
 
-export namespace CreateAdditionalAssignmentsForHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAdditionalAssignmentsForHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAdditionalAssignmentsForHITResponse {}
-
-export namespace CreateAdditionalAssignmentsForHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAdditionalAssignmentsForHITResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p> This data structure is the data type for the AnswerKey
  *             parameter of the ScoreMyKnownAnswers/2011-09-01 Review Policy.
  *         </p>
+ * @public
  */
 export interface ParameterMapEntry {
   /**
@@ -375,85 +299,67 @@ export interface ParameterMapEntry {
    *             question requires Mechanical Turk to score as part of the
    *             ScoreMyKnownAnswers/2011-09-01 Review Policy.
    *         </p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p> The list of answers to the question specified in the
    *             MapEntry Key element. The Worker must match all values in order for
    *             the answer to be scored correctly.
    *         </p>
+   * @public
    */
-  Values?: string[];
-}
-
-export namespace ParameterMapEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterMapEntry): any => ({
-    ...obj,
-  });
+  Values?: string[] | undefined;
 }
 
 /**
  * <p> Name of the parameter from the Review policy.
  *         </p>
+ * @public
  */
 export interface PolicyParameter {
   /**
    * <p> Name of the parameter from the list of Review Polices.
    *         </p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p> The list of values of the Parameter</p>
+   * @public
    */
-  Values?: string[];
+  Values?: string[] | undefined;
 
   /**
    * <p> List of ParameterMapEntry objects.
    *         </p>
+   * @public
    */
-  MapEntries?: ParameterMapEntry[];
-}
-
-export namespace PolicyParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PolicyParameter): any => ({
-    ...obj,
-  });
+  MapEntries?: ParameterMapEntry[] | undefined;
 }
 
 /**
  * <p> HIT Review Policy data structures represent HIT review
  *             policies, which you specify when you create a HIT.
  *         </p>
+ * @public
  */
 export interface ReviewPolicy {
   /**
    * <p> Name of a Review Policy: SimplePlurality/2011-09-01 or
    *             ScoreMyKnownAnswers/2011-09-01
    *         </p>
+   * @public
    */
   PolicyName: string | undefined;
 
   /**
    * <p>Name of the parameter from the Review policy.</p>
+   * @public
    */
-  Parameters?: PolicyParameter[];
-}
-
-export namespace ReviewPolicy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReviewPolicy): any => ({
-    ...obj,
-  });
+  Parameters?: PolicyParameter[] | undefined;
 }
 
 /**
@@ -462,11 +368,13 @@ export namespace ReviewPolicy {
  *             Mechanical Turk project template used to provide Human Intelligence
  *             Task (HIT) question data for CreateHIT.
  *         </p>
+ * @public
  */
 export interface HITLayoutParameter {
   /**
    * <p> The name of the parameter in the HITLayout.
    *         </p>
+   * @public
    */
   Name: string | undefined;
 
@@ -474,27 +382,14 @@ export interface HITLayoutParameter {
    * <p>The value substituted for the parameter referenced in the
    *             HITLayout.
    *         </p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace HITLayoutParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HITLayoutParameter): any => ({
-    ...obj,
-  });
-}
-
-export enum HITAccessActions {
-  Accept = "Accept",
-  DiscoverPreviewAndAccept = "DiscoverPreviewAndAccept",
-  PreviewAndAccept = "PreviewAndAccept",
-}
-
 /**
  * <p>The Locale data structure represents a geographical region or location.</p>
+ * @public
  */
 export interface Locale {
   /**
@@ -502,6 +397,7 @@ export interface Locale {
    *             code. For example, the code US refers to the United States of
    *             America.
    *         </p>
+   * @public
    */
   Country: string | undefined;
 
@@ -509,17 +405,9 @@ export interface Locale {
    * <p>The state or subdivision of the locale. A valid ISO 3166-2
    *             subdivision code. For example, the code WA refers to the state of
    *             Washington.</p>
+   * @public
    */
-  Subdivision?: string;
-}
-
-export namespace Locale {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Locale): any => ({
-    ...obj,
-  });
+  Subdivision?: string | undefined;
 }
 
 /**
@@ -529,10 +417,12 @@ export namespace Locale {
  *             A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or
  *             see the HIT in search results.
  *         </p>
+ * @public
  */
 export interface QualificationRequirement {
   /**
    * <p> The ID of the Qualification type for the requirement.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
@@ -550,8 +440,9 @@ export interface QualificationRequirement {
    *             DoesNotExist in the user's profile,
    *             regardless of its value.
    *         </p>
+   * @public
    */
-  Comparator: Comparator | string | undefined;
+  Comparator: Comparator | undefined;
 
   /**
    * <p> The integer value to compare against the Qualification's
@@ -562,8 +453,9 @@ export interface QualificationRequirement {
    *             In or the NotIn comparator, you can use up to 15 IntegerValue
    *             elements in a QualificationRequirement data structure.
    *         </p>
+   * @public
    */
-  IntegerValues?: number[];
+  IntegerValues?: number[] | undefined;
 
   /**
    * <p> The locale value to compare against the Qualification's
@@ -576,12 +468,11 @@ export interface QualificationRequirement {
    *             NotIn comparator, you can use up to 30 LocaleValue elements in a
    *             QualificationRequirement data structure.
    *         </p>
+   * @public
    */
-  LocaleValues?: Locale[];
+  LocaleValues?: Locale[] | undefined;
 
   /**
-   * @deprecated
-   *
    * <p> DEPRECATED: Use the <code>ActionsGuarded</code> field instead.
    *             If RequiredToPreview is true, the question data for the HIT will not be shown
    *             when a Worker whose Qualifications do not meet this requirement tries
@@ -594,8 +485,11 @@ export interface QualificationRequirement {
    *             to accept and complete the HIT. The default is false. This should not
    *             be used in combination with the <code>ActionsGuarded</code> field.
    *         </p>
+   *
+   * @deprecated deprecated.
+   * @public
    */
-  RequiredToPreview?: boolean;
+  RequiredToPreview?: boolean | undefined;
 
   /**
    * <p> Setting this attribute prevents Workers whose Qualifications do not meet
@@ -611,26 +505,22 @@ export interface QualificationRequirement {
    *             HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the
    *             <code>RequiredToPreview</code> field.
    *         </p>
+   * @public
    */
-  ActionsGuarded?: HITAccessActions | string;
+  ActionsGuarded?: HITAccessActions | undefined;
 }
 
-export namespace QualificationRequirement {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: QualificationRequirement): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITRequest {
   /**
    * <p>
    *             The number of times the HIT can be accepted and completed before the HIT becomes unavailable.
    *         </p>
+   * @public
    */
-  MaxAssignments?: number;
+  MaxAssignments?: number | undefined;
 
   /**
    * <p>
@@ -638,8 +528,9 @@ export interface CreateHITRequest {
    *             after which the assignment is considered Approved automatically
    *             unless the Requester explicitly rejects it.
    *         </p>
+   * @public
    */
-  AutoApprovalDelayInSeconds?: number;
+  AutoApprovalDelayInSeconds?: number | undefined;
 
   /**
    * <p>
@@ -647,6 +538,7 @@ export interface CreateHITRequest {
    *             After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches,
    *             even if not all of the assignments for the HIT have been accepted.
    *         </p>
+   * @public
    */
   LifetimeInSeconds: number | undefined;
 
@@ -658,6 +550,7 @@ export interface CreateHITRequest {
    *             (that is, its lifetime has not elapsed), the assignment becomes available
    *             for other users to find and accept.
    *         </p>
+   * @public
    */
   AssignmentDurationInSeconds: number | undefined;
 
@@ -665,6 +558,7 @@ export interface CreateHITRequest {
    * <p>
    *             The amount of money the Requester will pay a Worker for successfully completing the HIT.
    *         </p>
+   * @public
    */
   Reward: string | undefined;
 
@@ -674,6 +568,7 @@ export interface CreateHITRequest {
    *             On the Amazon Mechanical Turk web site, the HIT title appears in search results,
    *             and everywhere the HIT is mentioned.
    *         </p>
+   * @public
    */
   Title: string | undefined;
 
@@ -682,8 +577,9 @@ export interface CreateHITRequest {
    *             One or more words or phrases that describe the HIT, separated by commas.
    *             These words are used in searches to find HITs.
    *         </p>
+   * @public
    */
-  Keywords?: string;
+  Keywords?: string | undefined;
 
   /**
    * <p>
@@ -692,6 +588,7 @@ export interface CreateHITRequest {
    *             view of search results, and in the HIT and assignment screens. A good description gives the user enough
    *             information to evaluate the HIT before accepting it.
    *         </p>
+   * @public
    */
   Description: string | undefined;
 
@@ -705,8 +602,9 @@ export interface CreateHITRequest {
    *             64 kilobytes (65,535 bytes) in size, including whitespace.
    *         </p>
    *         <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>
+   * @public
    */
-  Question?: string;
+  Question?: string | undefined;
 
   /**
    * <p>
@@ -724,8 +622,9 @@ export interface CreateHITRequest {
    *             The RequesterAnnotation parameter may be different for each HIT you submit.
    *             It does not affect how your HITs are grouped.
    *         </p>
+   * @public
    */
-  RequesterAnnotation?: string;
+  RequesterAnnotation?: string | undefined;
 
   /**
    * <p>
@@ -736,8 +635,9 @@ export interface CreateHITRequest {
    *             actions can be restricted using the <code>ActionsGuarded</code>
    *             field on each <code>QualificationRequirement</code> structure.
    *         </p>
+   * @public
    */
-  QualificationRequirements?: QualificationRequirement[];
+  QualificationRequirements?: QualificationRequirement[] | undefined;
 
   /**
    * <p>
@@ -756,24 +656,27 @@ export interface CreateHITRequest {
    *                 UniqueRequestToken made after the 24 hour limit could create duplicate HITs.
    *             </p>
    *         </note>
+   * @public
    */
-  UniqueRequestToken?: string;
+  UniqueRequestToken?: string | undefined;
 
   /**
    * <p>
    *             The Assignment-level Review Policy applies to the assignments under the HIT.
    *             You can specify for Mechanical Turk to take various actions based on the policy.
    *         </p>
+   * @public
    */
-  AssignmentReviewPolicy?: ReviewPolicy;
+  AssignmentReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p>
    *             The HIT-level Review Policy applies to the HIT.
    *             You can specify for Mechanical Turk to take various actions based on the policy.
    *         </p>
+   * @public
    */
-  HITReviewPolicy?: ReviewPolicy;
+  HITReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p>
@@ -783,115 +686,106 @@ export interface CreateHITRequest {
    *         <p>
    *             Constraints: Either a Question parameter or a HITLayoutId parameter must be provided.
    *         </p>
+   * @public
    */
-  HITLayoutId?: string;
+  HITLayoutId?: string | undefined;
 
   /**
    * <p>
    *             If the HITLayoutId is provided, any placeholder values must be filled in with values
    *             using the HITLayoutParameter structure. For more information, see HITLayout.
    *         </p>
+   * @public
    */
-  HITLayoutParameters?: HITLayoutParameter[];
-}
-
-export namespace CreateHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum HITReviewStatus {
-  MarkedForReview = "MarkedForReview",
-  NotReviewed = "NotReviewed",
-  ReviewedAppropriate = "ReviewedAppropriate",
-  ReviewedInappropriate = "ReviewedInappropriate",
-}
-
-export enum HITStatus {
-  Assignable = "Assignable",
-  Disposed = "Disposed",
-  Reviewable = "Reviewable",
-  Reviewing = "Reviewing",
-  Unassignable = "Unassignable",
+  HITLayoutParameters?: HITLayoutParameter[] | undefined;
 }
 
 /**
  * <p> The HIT data structure represents a single HIT, including
  *             all the information necessary for a Worker to accept and complete the
  *             HIT.</p>
+ * @public
  */
 export interface HIT {
   /**
    * <p> A unique identifier for the HIT.</p>
+   * @public
    */
-  HITId?: string;
+  HITId?: string | undefined;
 
   /**
    * <p>The ID of the HIT type of this HIT</p>
+   * @public
    */
-  HITTypeId?: string;
+  HITTypeId?: string | undefined;
 
   /**
    * <p> The ID of the HIT Group of this HIT.</p>
+   * @public
    */
-  HITGroupId?: string;
+  HITGroupId?: string | undefined;
 
   /**
    * <p> The ID of the HIT Layout of this HIT.</p>
+   * @public
    */
-  HITLayoutId?: string;
+  HITLayoutId?: string | undefined;
 
   /**
    * <p> The date and time the HIT was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p> The title of the HIT.</p>
+   * @public
    */
-  Title?: string;
+  Title?: string | undefined;
 
   /**
    * <p> A general description of the HIT.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p> The data the Worker completing the HIT uses produce the
    *             results. This is either either a QuestionForm, HTMLQuestion or an
    *             ExternalQuestion data structure.</p>
+   * @public
    */
-  Question?: string;
+  Question?: string | undefined;
 
   /**
    * <p> One or more words or phrases that describe the HIT,
    *             separated by commas. Search terms similar to the keywords of a HIT
    *             are more likely to have the HIT in the search results.</p>
+   * @public
    */
-  Keywords?: string;
+  Keywords?: string | undefined;
 
   /**
    * <p>The status of the HIT and its assignments. Valid Values are
    *             Assignable | Unassignable | Reviewable | Reviewing | Disposed.
    *         </p>
+   * @public
    */
-  HITStatus?: HITStatus | string;
+  HITStatus?: HITStatus | undefined;
 
   /**
    * <p>The number of times the HIT can be accepted and completed
    *             before the HIT becomes unavailable.
    *         </p>
+   * @public
    */
-  MaxAssignments?: number;
+  MaxAssignments?: number | undefined;
 
   /**
    * <p>A string representing a currency amount.</p>
+   * @public
    */
-  Reward?: string;
+  Reward?: string | undefined;
 
   /**
    * <p>The amount of time, in seconds, after the Worker submits an
@@ -900,25 +794,29 @@ export interface HIT {
    *             to reject an assignment submitted by a Worker before the assignment
    *             is auto-approved and the Worker is paid.
    *         </p>
+   * @public
    */
-  AutoApprovalDelayInSeconds?: number;
+  AutoApprovalDelayInSeconds?: number | undefined;
 
   /**
    * <p>The date and time the HIT expires.</p>
+   * @public
    */
-  Expiration?: Date;
+  Expiration?: Date | undefined;
 
   /**
    * <p> The length of time, in seconds, that a Worker has to
    *             complete the HIT after accepting it.</p>
+   * @public
    */
-  AssignmentDurationInSeconds?: number;
+  AssignmentDurationInSeconds?: number | undefined;
 
   /**
    * <p> An arbitrary data field the Requester who created the HIT
    *             can use. This field is visible only to the creator of the HIT.</p>
+   * @public
    */
-  RequesterAnnotation?: string;
+  RequesterAnnotation?: string | undefined;
 
   /**
    * <p>
@@ -929,64 +827,58 @@ export interface HIT {
    *             actions can be restricted using the <code>ActionsGuarded</code>
    *             field on each <code>QualificationRequirement</code> structure.
    *         </p>
+   * @public
    */
-  QualificationRequirements?: QualificationRequirement[];
+  QualificationRequirements?: QualificationRequirement[] | undefined;
 
   /**
    * <p> Indicates the review status of the HIT. Valid Values are
    *             NotReviewed | MarkedForReview | ReviewedAppropriate |
    *             ReviewedInappropriate.</p>
+   * @public
    */
-  HITReviewStatus?: HITReviewStatus | string;
+  HITReviewStatus?: HITReviewStatus | undefined;
 
   /**
    * <p> The number of assignments for this HIT that are being
    *             previewed or have been accepted by Workers, but have not yet been
    *             submitted, returned, or abandoned.</p>
+   * @public
    */
-  NumberOfAssignmentsPending?: number;
+  NumberOfAssignmentsPending?: number | undefined;
 
   /**
    * <p> The number of assignments for this HIT that are available
    *             for Workers to accept.</p>
+   * @public
    */
-  NumberOfAssignmentsAvailable?: number;
+  NumberOfAssignmentsAvailable?: number | undefined;
 
   /**
    * <p> The number of assignments for this HIT that have been
    *             approved or rejected.</p>
+   * @public
    */
-  NumberOfAssignmentsCompleted?: number;
+  NumberOfAssignmentsCompleted?: number | undefined;
 }
 
-export namespace HIT {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HIT): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITResponse {
   /**
    * <p> Contains the newly created HIT data. For a description of
    *             the HIT data structure as it appears in responses, see the HIT Data
    *             Structure documentation.
    *         </p>
+   * @public
    */
-  HIT?: HIT;
+  HIT?: HIT | undefined;
 }
 
-export namespace CreateHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITTypeRequest {
   /**
    * <p>
@@ -994,8 +886,9 @@ export interface CreateHITTypeRequest {
    *             after which the assignment is considered Approved automatically
    *             unless the Requester explicitly rejects it.
    *         </p>
+   * @public
    */
-  AutoApprovalDelayInSeconds?: number;
+  AutoApprovalDelayInSeconds?: number | undefined;
 
   /**
    * <p>
@@ -1005,6 +898,7 @@ export interface CreateHITTypeRequest {
    *             (that is, its lifetime has not elapsed), the assignment becomes available
    *             for other users to find and accept.
    *         </p>
+   * @public
    */
   AssignmentDurationInSeconds: number | undefined;
 
@@ -1012,6 +906,7 @@ export interface CreateHITTypeRequest {
    * <p>
    *             The amount of money the Requester will pay a Worker for successfully completing the HIT.
    *         </p>
+   * @public
    */
   Reward: string | undefined;
 
@@ -1021,6 +916,7 @@ export interface CreateHITTypeRequest {
    *             On the Amazon Mechanical Turk web site, the HIT title appears in search results,
    *             and everywhere the HIT is mentioned.
    *         </p>
+   * @public
    */
   Title: string | undefined;
 
@@ -1029,8 +925,9 @@ export interface CreateHITTypeRequest {
    *             One or more words or phrases that describe the HIT, separated by commas.
    *             These words are used in searches to find HITs.
    *         </p>
+   * @public
    */
-  Keywords?: string;
+  Keywords?: string | undefined;
 
   /**
    * <p>
@@ -1039,6 +936,7 @@ export interface CreateHITTypeRequest {
    *             view of search results, and in the HIT and assignment screens. A good description gives the user enough
    *             information to evaluate the HIT before accepting it.
    *         </p>
+   * @public
    */
   Description: string | undefined;
 
@@ -1051,38 +949,29 @@ export interface CreateHITTypeRequest {
    *             actions can be restricted using the <code>ActionsGuarded</code>
    *             field on each <code>QualificationRequirement</code> structure.
    *         </p>
+   * @public
    */
-  QualificationRequirements?: QualificationRequirement[];
+  QualificationRequirements?: QualificationRequirement[] | undefined;
 }
 
-export namespace CreateHITTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITTypeResponse {
   /**
    * <p> The ID of the newly registered HIT type.</p>
+   * @public
    */
-  HITTypeId?: string;
+  HITTypeId?: string | undefined;
 }
 
-export namespace CreateHITTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITWithHITTypeRequest {
   /**
    * <p>The HIT type ID you want to create this HIT with.</p>
+   * @public
    */
   HITTypeId: string | undefined;
 
@@ -1090,8 +979,9 @@ export interface CreateHITWithHITTypeRequest {
    * <p>
    *             The number of times the HIT can be accepted and completed before the HIT becomes unavailable.
    *         </p>
+   * @public
    */
-  MaxAssignments?: number;
+  MaxAssignments?: number | undefined;
 
   /**
    * <p>
@@ -1099,6 +989,7 @@ export interface CreateHITWithHITTypeRequest {
    *             After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches,
    *             even if not all of the assignments for the HIT have been accepted.
    *         </p>
+   * @public
    */
   LifetimeInSeconds: number | undefined;
 
@@ -1112,8 +1003,9 @@ export interface CreateHITWithHITTypeRequest {
    *             64 kilobytes (65,535 bytes) in size, including whitespace.
    *         </p>
    *         <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>
+   * @public
    */
-  Question?: string;
+  Question?: string | undefined;
 
   /**
    * <p>
@@ -1131,8 +1023,9 @@ export interface CreateHITWithHITTypeRequest {
    *             The RequesterAnnotation parameter may be different for each HIT you submit.
    *             It does not affect how your HITs are grouped.
    *         </p>
+   * @public
    */
-  RequesterAnnotation?: string;
+  RequesterAnnotation?: string | undefined;
 
   /**
    * <p>
@@ -1151,24 +1044,27 @@ export interface CreateHITWithHITTypeRequest {
    *                 UniqueRequestToken made after the 24 hour limit could create duplicate HITs.
    *             </p>
    *         </note>
+   * @public
    */
-  UniqueRequestToken?: string;
+  UniqueRequestToken?: string | undefined;
 
   /**
    * <p>
    *             The Assignment-level Review Policy applies to the assignments under the HIT.
    *             You can specify for Mechanical Turk to take various actions based on the policy.
    *         </p>
+   * @public
    */
-  AssignmentReviewPolicy?: ReviewPolicy;
+  AssignmentReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p>
    *             The HIT-level Review Policy applies to the HIT.
    *             You can specify for Mechanical Turk to take various actions based on the policy.
    *         </p>
+   * @public
    */
-  HITReviewPolicy?: ReviewPolicy;
+  HITReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p>
@@ -1178,57 +1074,44 @@ export interface CreateHITWithHITTypeRequest {
    *         <p>
    *             Constraints: Either a Question parameter or a HITLayoutId parameter must be provided.
    *         </p>
+   * @public
    */
-  HITLayoutId?: string;
+  HITLayoutId?: string | undefined;
 
   /**
    * <p>
    *             If the HITLayoutId is provided, any placeholder values must be filled in with values
    *             using the HITLayoutParameter structure. For more information, see HITLayout.
    *         </p>
+   * @public
    */
-  HITLayoutParameters?: HITLayoutParameter[];
+  HITLayoutParameters?: HITLayoutParameter[] | undefined;
 }
 
-export namespace CreateHITWithHITTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITWithHITTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateHITWithHITTypeResponse {
   /**
    * <p> Contains the newly created HIT data. For a description of
    *             the HIT data structure as it appears in responses, see the HIT Data
    *             Structure documentation.
    *         </p>
+   * @public
    */
-  HIT?: HIT;
+  HIT?: HIT | undefined;
 }
 
-export namespace CreateHITWithHITTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateHITWithHITTypeResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum QualificationTypeStatus {
-  Active = "Active",
-  Inactive = "Inactive",
-}
-
+/**
+ * @public
+ */
 export interface CreateQualificationTypeRequest {
   /**
    * <p> The name you give to the Qualification type. The type name
    *             is used to represent the Qualification to Workers, and to find the
    *             type using a Qualification type search. It must be unique across all
    *             of your Qualification types.</p>
+   * @public
    */
   Name: string | undefined;
 
@@ -1236,21 +1119,24 @@ export interface CreateQualificationTypeRequest {
    * <p>One or more words or phrases that describe the Qualification
    *             type, separated by commas. The keywords of a type make the type
    *             easier to find during a search.</p>
+   * @public
    */
-  Keywords?: string;
+  Keywords?: string | undefined;
 
   /**
    * <p>A long description for the Qualification type. On the Amazon
    *             Mechanical Turk website, the long description is displayed when a
    *             Worker examines a Qualification type.</p>
+   * @public
    */
   Description: string | undefined;
 
   /**
    * <p>The initial status of the Qualification type.</p>
    *         <p>Constraints: Valid values are: Active | Inactive</p>
+   * @public
    */
-  QualificationTypeStatus: QualificationTypeStatus | string | undefined;
+  QualificationTypeStatus: QualificationTypeStatus | undefined;
 
   /**
    * <p>The number of seconds that a Worker must wait after
@@ -1263,8 +1149,9 @@ export interface CreateQualificationTypeRequest {
    *             with retries enabled. If you want to disable retries, you must delete
    *             existing retry-enabled Qualification type and then create a new
    *             Qualification type with retries disabled.</p>
+   * @public
    */
-  RetryDelayInSeconds?: number;
+  RetryDelayInSeconds?: number | undefined;
 
   /**
    * <p>
@@ -1279,8 +1166,9 @@ export interface CreateQualificationTypeRequest {
    *             AutoGranted is true.</p>
    *         <p>Constraints: None. If not specified, the Worker may request
    *             the Qualification without answering any questions.</p>
+   * @public
    */
-  Test?: string;
+  Test?: string | undefined;
 
   /**
    * <p>The answers to the Qualification test specified in the Test
@@ -1288,15 +1176,17 @@ export interface CreateQualificationTypeRequest {
    *         <p>Constraints: Must not be longer than 65535 bytes.</p>
    *         <p>Constraints: None. If not specified, you must process
    *             Qualification requests manually.</p>
+   * @public
    */
-  AnswerKey?: string;
+  AnswerKey?: string | undefined;
 
   /**
    * <p>The number of seconds the Worker has to complete the
    *             Qualification test, starting from the time the Worker requests the
    *             Qualification.</p>
+   * @public
    */
-  TestDurationInSeconds?: number;
+  TestDurationInSeconds?: number | undefined;
 
   /**
    * <p>Specifies whether requests for the Qualification type are
@@ -1304,24 +1194,17 @@ export interface CreateQualificationTypeRequest {
    *             Qualification test.</p>
    *         <p>Constraints: If the Test parameter is specified, this
    *             parameter cannot be true.</p>
+   * @public
    */
-  AutoGranted?: boolean;
+  AutoGranted?: boolean | undefined;
 
   /**
    * <p>The Qualification value to use for automatically granted
    *             Qualifications. This parameter is used only if the AutoGranted
    *             parameter is true.</p>
+   * @public
    */
-  AutoGrantedValue?: number;
-}
-
-export namespace CreateQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateQualificationTypeRequest): any => ({
-    ...obj,
-  });
+  AutoGrantedValue?: number | undefined;
 }
 
 /**
@@ -1331,6 +1214,7 @@ export namespace CreateQualificationTypeRequest {
  *             the HIT. The type also describes how a Worker can obtain a
  *             Qualification of that type, such as through a Qualification test.
  *         </p>
+ * @public
  */
 export interface QualificationType {
   /**
@@ -1338,36 +1222,41 @@ export interface QualificationType {
    *             Qualification type is given a Qualification type ID when you call the
    *             CreateQualificationType operation.
    *         </p>
+   * @public
    */
-  QualificationTypeId?: string;
+  QualificationTypeId?: string | undefined;
 
   /**
    * <p> The date and time the Qualification type was created.
    *         </p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p> The name of the Qualification type. The type name is used to
    *             identify the type, and to find the type using a Qualification type
    *             search.
    *         </p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p> A long description for the Qualification type.
    *         </p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p> One or more words or phrases that describe theQualification
    *             type, separated by commas. The Keywords make the type easier to find
    *             using a search.
    *         </p>
+   * @public
    */
-  Keywords?: string;
+  Keywords?: string | undefined;
 
   /**
    * <p> The status of the Qualification type. A Qualification type's
@@ -1375,8 +1264,9 @@ export interface QualificationType {
    *             this type, and if HITs can be created with requirements based on this
    *             type. Valid values are Active | Inactive.
    *         </p>
+   * @public
    */
-  QualificationTypeStatus?: QualificationTypeStatus | string;
+  QualificationTypeStatus?: QualificationTypeStatus | undefined;
 
   /**
    * <p> The questions for a Qualification test associated with this
@@ -1385,22 +1275,25 @@ export interface QualificationType {
    *             A Qualification type cannot have both a specified Test parameter and
    *             an AutoGranted value of true.
    *         </p>
+   * @public
    */
-  Test?: string;
+  Test?: string | undefined;
 
   /**
    * <p> The amount of time, in seconds, given to a Worker to
    *             complete the Qualification test, beginning from the time the Worker
    *             requests the Qualification.
    *         </p>
+   * @public
    */
-  TestDurationInSeconds?: number;
+  TestDurationInSeconds?: number | undefined;
 
   /**
    * <p>The answers to the Qualification test specified in the Test
    *             parameter.</p>
+   * @public
    */
-  AnswerKey?: string;
+  AnswerKey?: string | undefined;
 
   /**
    * <p> The amount of time, in seconds, Workers must wait after
@@ -1411,8 +1304,9 @@ export interface QualificationType {
    *             retries are disabled and Workers can request a Qualification only
    *             once.
    *         </p>
+   * @public
    */
-  RetryDelayInSeconds?: number;
+  RetryDelayInSeconds?: number | undefined;
 
   /**
    * <p> Specifies whether the Qualification type is one that a user
@@ -1420,407 +1314,286 @@ export interface QualificationType {
    *             taking a Qualification test. This value is False for Qualifications
    *             assigned automatically by the system. Valid values are True | False.
    *         </p>
+   * @public
    */
-  IsRequestable?: boolean;
+  IsRequestable?: boolean | undefined;
 
   /**
    * <p>Specifies that requests for the Qualification type are
    *             granted immediately, without prompting the Worker with a
    *             Qualification test. Valid values are True | False.</p>
+   * @public
    */
-  AutoGranted?: boolean;
+  AutoGranted?: boolean | undefined;
 
   /**
    * <p> The Qualification integer value to use for automatically
    *             granted Qualifications, if AutoGranted is true. This is 1 by default.
    *         </p>
+   * @public
    */
-  AutoGrantedValue?: number;
+  AutoGrantedValue?: number | undefined;
 }
 
-export namespace QualificationType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: QualificationType): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateQualificationTypeResponse {
   /**
    * <p>The created Qualification type, returned as a
    *             QualificationType data structure.</p>
+   * @public
    */
-  QualificationType?: QualificationType;
+  QualificationType?: QualificationType | undefined;
 }
 
-export namespace CreateQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateQualificationTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateWorkerBlockRequest {
   /**
    * <p>The ID of the Worker to block.</p>
+   * @public
    */
   WorkerId: string | undefined;
 
   /**
    * <p>A message explaining the reason for blocking the Worker. This parameter enables you to keep track of your Workers. The Worker does not see this message.</p>
+   * @public
    */
   Reason: string | undefined;
 }
 
-export namespace CreateWorkerBlockRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateWorkerBlockRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateWorkerBlockResponse {}
 
-export namespace CreateWorkerBlockResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateWorkerBlockResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteHITRequest {
   /**
    * <p>The ID of the HIT to be deleted.</p>
+   * @public
    */
   HITId: string | undefined;
 }
 
-export namespace DeleteHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteHITResponse {}
 
-export namespace DeleteHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteQualificationTypeRequest {
   /**
    * <p>The ID of the QualificationType to dispose.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 }
 
-export namespace DeleteQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteQualificationTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteQualificationTypeResponse {}
 
-export namespace DeleteQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteQualificationTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteWorkerBlockRequest {
   /**
    * <p>The ID of the Worker to unblock.</p>
+   * @public
    */
   WorkerId: string | undefined;
 
   /**
    * <p>A message that explains the reason for unblocking the Worker. The Worker does not see this message.</p>
+   * @public
    */
-  Reason?: string;
+  Reason?: string | undefined;
 }
 
-export namespace DeleteWorkerBlockRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteWorkerBlockRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteWorkerBlockResponse {}
 
-export namespace DeleteWorkerBlockResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteWorkerBlockResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateQualificationFromWorkerRequest {
   /**
    * <p>The ID of the Worker who possesses the Qualification to be revoked.</p>
+   * @public
    */
   WorkerId: string | undefined;
 
   /**
    * <p>The ID of the Qualification type of the Qualification to be revoked.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
   /**
    * <p>A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.</p>
+   * @public
    */
-  Reason?: string;
+  Reason?: string | undefined;
 }
 
-export namespace DisassociateQualificationFromWorkerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateQualificationFromWorkerRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateQualificationFromWorkerResponse {}
 
-export namespace DisassociateQualificationFromWorkerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateQualificationFromWorkerResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum EventType {
-  AssignmentAbandoned = "AssignmentAbandoned",
-  AssignmentAccepted = "AssignmentAccepted",
-  AssignmentApproved = "AssignmentApproved",
-  AssignmentRejected = "AssignmentRejected",
-  AssignmentReturned = "AssignmentReturned",
-  AssignmentSubmitted = "AssignmentSubmitted",
-  HITCreated = "HITCreated",
-  HITDisposed = "HITDisposed",
-  HITExpired = "HITExpired",
-  HITExtended = "HITExtended",
-  HITReviewable = "HITReviewable",
-  Ping = "Ping",
-}
-
+/**
+ * @public
+ */
 export interface GetAccountBalanceRequest {}
 
-export namespace GetAccountBalanceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAccountBalanceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAccountBalanceResponse {
   /**
    * <p>A string representing a currency amount.</p>
+   * @public
    */
-  AvailableBalance?: string;
+  AvailableBalance?: string | undefined;
 
   /**
    * <p>A string representing a currency amount.</p>
+   * @public
    */
-  OnHoldBalance?: string;
+  OnHoldBalance?: string | undefined;
 }
 
-export namespace GetAccountBalanceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAccountBalanceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssignmentRequest {
   /**
    * <p>The ID of the Assignment to be retrieved.</p>
+   * @public
    */
   AssignmentId: string | undefined;
 }
 
-export namespace GetAssignmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssignmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssignmentResponse {
   /**
    * <p> The assignment. The response includes one Assignment
    *             element.
    *         </p>
+   * @public
    */
-  Assignment?: Assignment;
+  Assignment?: Assignment | undefined;
 
   /**
    * <p> The HIT associated with this assignment. The response
    *             includes one HIT element.</p>
+   * @public
    */
-  HIT?: HIT;
+  HIT?: HIT | undefined;
 }
 
-export namespace GetAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFileUploadURLRequest {
   /**
    * <p>The ID of the assignment that contains the question with a
    *             FileUploadAnswer.</p>
+   * @public
    */
   AssignmentId: string | undefined;
 
   /**
    * <p>The identifier of the question with a FileUploadAnswer, as
    *             specified in the QuestionForm of the HIT.</p>
+   * @public
    */
   QuestionIdentifier: string | undefined;
 }
 
-export namespace GetFileUploadURLRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFileUploadURLRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFileUploadURLResponse {
   /**
    * <p> A temporary URL for the file that the Worker uploaded for
    *             the answer.
    *         </p>
+   * @public
    */
-  FileUploadURL?: string;
+  FileUploadURL?: string | undefined;
 }
 
-export namespace GetFileUploadURLResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFileUploadURLResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetHITRequest {
   /**
    * <p>The ID of the HIT to be retrieved.</p>
+   * @public
    */
   HITId: string | undefined;
 }
 
-export namespace GetHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetHITResponse {
   /**
    * <p> Contains the requested HIT data.</p>
+   * @public
    */
-  HIT?: HIT;
+  HIT?: HIT | undefined;
 }
 
-export namespace GetHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetQualificationScoreRequest {
   /**
    * <p>The ID of the QualificationType.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
   /**
    * <p>The ID of the Worker whose Qualification is being updated.</p>
+   * @public
    */
   WorkerId: string | undefined;
-}
-
-export namespace GetQualificationScoreRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetQualificationScoreRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum QualificationStatus {
-  Granted = "Granted",
-  Revoked = "Revoked",
 }
 
 /**
  * <p>The Qualification data structure represents a Qualification
  *             assigned to a user, including the Qualification type and the value
  *             (score).</p>
+ * @public
  */
 export interface Qualification {
   /**
    * <p> The ID of the Qualification type for the Qualification.</p>
+   * @public
    */
-  QualificationTypeId?: string;
+  QualificationTypeId?: string | undefined;
 
   /**
    * <p> The ID of the Worker who possesses the Qualification.
    *         </p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 
   /**
    * <p> The date and time the Qualification was granted to the
@@ -1828,357 +1601,309 @@ export interface Qualification {
    *             re-granted based on a new Qualification request, GrantTime is the
    *             date and time of the last call to the AcceptQualificationRequest
    *             operation.</p>
+   * @public
    */
-  GrantTime?: Date;
+  GrantTime?: Date | undefined;
 
   /**
    * <p> The value (score) of the Qualification, if the Qualification
    *             has an integer value.</p>
+   * @public
    */
-  IntegerValue?: number;
+  IntegerValue?: number | undefined;
 
   /**
    * <p>The Locale data structure represents a geographical region or location.</p>
+   * @public
    */
-  LocaleValue?: Locale;
+  LocaleValue?: Locale | undefined;
 
   /**
    * <p> The status of the Qualification. Valid values are Granted |
    *             Revoked.</p>
+   * @public
    */
-  Status?: QualificationStatus | string;
+  Status?: QualificationStatus | undefined;
 }
 
-export namespace Qualification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Qualification): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetQualificationScoreResponse {
   /**
    * <p> The Qualification data structure of the Qualification
    *             assigned to a user, including the Qualification type and the value
    *             (score).
    *         </p>
+   * @public
    */
-  Qualification?: Qualification;
+  Qualification?: Qualification | undefined;
 }
 
-export namespace GetQualificationScoreResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetQualificationScoreResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetQualificationTypeRequest {
   /**
    * <p>The ID of the QualificationType.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 }
 
-export namespace GetQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetQualificationTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetQualificationTypeResponse {
   /**
    * <p> The returned Qualification Type</p>
+   * @public
    */
-  QualificationType?: QualificationType;
+  QualificationType?: QualificationType | undefined;
 }
 
-export namespace GetQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetQualificationTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssignmentsForHITRequest {
   /**
    * <p>The ID of the HIT.</p>
+   * @public
    */
   HITId: string | undefined;
 
   /**
    * <p>Pagination token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
-  MaxResults?: number;
+  MaxResults?: number | undefined;
   /**
    * <p>The status of the assignments to return: Submitted | Approved
    *             | Rejected</p>
+   * @public
    */
-  AssignmentStatuses?: (AssignmentStatus | string)[];
+  AssignmentStatuses?: AssignmentStatus[] | undefined;
 }
 
-export namespace ListAssignmentsForHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssignmentsForHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssignmentsForHITResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The number of assignments on the page in the filtered
    *             results list, equivalent to the number of assignments returned by
    *             this call.</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The collection of Assignment data structures returned by
    *             this call.</p>
+   * @public
    */
-  Assignments?: Assignment[];
+  Assignments?: Assignment[] | undefined;
 }
 
-export namespace ListAssignmentsForHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssignmentsForHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBonusPaymentsRequest {
   /**
    * <p>The ID of the HIT associated with the bonus payments to
    *             retrieve. If not specified, all bonus payments for all assignments
    *             for the given HIT are returned. Either the HITId parameter or the
    *             AssignmentId parameter must be specified</p>
+   * @public
    */
-  HITId?: string;
+  HITId?: string | undefined;
 
   /**
    * <p>The ID of the assignment associated with the bonus payments
    *             to retrieve. If specified, only bonus payments for the given
    *             assignment are returned. Either the HITId parameter or the
    *             AssignmentId parameter must be specified</p>
+   * @public
    */
-  AssignmentId?: string;
+  AssignmentId?: string | undefined;
 
   /**
    * <p>Pagination token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListBonusPaymentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBonusPaymentsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListBonusPaymentsResponse {
   /**
    * <p>The number of bonus payments on this page in the filtered
    *             results list, equivalent to the number of bonus payments being
    *             returned by this call.
    *         </p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>A successful request to the ListBonusPayments operation
    *             returns a list of BonusPayment objects.
    *         </p>
+   * @public
    */
-  BonusPayments?: BonusPayment[];
+  BonusPayments?: BonusPayment[] | undefined;
 }
 
-export namespace ListBonusPaymentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListBonusPaymentsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHITsRequest {
   /**
    * <p>Pagination token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListHITsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHITsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHITsResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The number of HITs on this page in the filtered results list,
    *             equivalent to the number of HITs being returned by this call.</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The list of HIT elements returned by the query.</p>
+   * @public
    */
-  HITs?: HIT[];
+  HITs?: HIT[] | undefined;
 }
 
-export namespace ListHITsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHITsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHITsForQualificationTypeRequest {
   /**
    * <p>
    *             The ID of the Qualification type to use when querying HITs.
    *         </p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
   /**
    * <p>Pagination Token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>
    *             Limit the number of results returned.
    *         </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListHITsForQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHITsForQualificationTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListHITsForQualificationTypeResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The number of HITs on this page in the filtered results
    *             list, equivalent to the number of HITs being returned by this call.	</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The list of HIT elements returned by the query.</p>
+   * @public
    */
-  HITs?: HIT[];
+  HITs?: HIT[] | undefined;
 }
 
-export namespace ListHITsForQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListHITsForQualificationTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListQualificationRequestsRequest {
   /**
    * <p>The ID of the QualificationType.</p>
+   * @public
    */
-  QualificationTypeId?: string;
+  QualificationTypeId?: string | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The maximum number of results to return in a single call.
    *         </p>
+   * @public
    */
-  MaxResults?: number;
-}
-
-export namespace ListQualificationRequestsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListQualificationRequestsRequest): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
 }
 
 /**
  * <p> The QualificationRequest data structure represents a request
  *             a Worker has made for a Qualification.
  *         </p>
+ * @public
  */
 export interface QualificationRequest {
   /**
@@ -2186,20 +1911,23 @@ export interface QualificationRequest {
    *             generated when the request was submitted.
    *
    *         </p>
+   * @public
    */
-  QualificationRequestId?: string;
+  QualificationRequestId?: string | undefined;
 
   /**
    * <p> The ID of the Qualification type the Worker is requesting,
    *             as returned by the CreateQualificationType operation.
    *         </p>
+   * @public
    */
-  QualificationTypeId?: string;
+  QualificationTypeId?: string | undefined;
 
   /**
    * <p> The ID of the Worker requesting the Qualification.</p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 
   /**
    * <p> The contents of the Qualification test that was presented to
@@ -2207,8 +1935,9 @@ export interface QualificationRequest {
    *             answers. This value is identical to the QuestionForm associated with
    *             the Qualification type at the time the Worker requests the
    *             Qualification.</p>
+   * @public
    */
-  Test?: string;
+  Test?: string | undefined;
 
   /**
    * <p> The Worker's answers for the Qualification type's test
@@ -2216,8 +1945,9 @@ export interface QualificationRequest {
    *             and the Worker has submitted answers. If the Worker does not provide
    *             any answers, Answer may be empty.
    *         </p>
+   * @public
    */
-  Answer?: string;
+  Answer?: string | undefined;
 
   /**
    * <p>The date and time the Qualification request had a status of
@@ -2225,59 +1955,52 @@ export interface QualificationRequest {
    *             Qualification test, or the time the Worker requested the
    *             Qualification if the Qualification type does not have a test.
    *         </p>
+   * @public
    */
-  SubmitTime?: Date;
+  SubmitTime?: Date | undefined;
 }
 
-export namespace QualificationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: QualificationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListQualificationRequestsResponse {
   /**
    * <p>The number of Qualification requests on this page in the filtered results list,
    *             equivalent to the number of Qualification requests being returned by this call.</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The Qualification request. The response includes one
    *             QualificationRequest element
    *             for each Qualification request returned
    *             by the query.</p>
+   * @public
    */
-  QualificationRequests?: QualificationRequest[];
+  QualificationRequests?: QualificationRequest[] | undefined;
 }
 
-export namespace ListQualificationRequestsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListQualificationRequestsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListQualificationTypesRequest {
   /**
    * <p> A text query against all of the searchable attributes of
    *             Qualification types.
    *         </p>
+   * @public
    */
-  Query?: string;
+  Query?: string | undefined;
 
   /**
    * <p>Specifies that only Qualification types that a user can
@@ -2288,6 +2011,7 @@ export interface ListQualificationTypesRequest {
    *             Qualification types, including those managed by the system, are
    *             considered. Valid values are True | False.
    *         </p>
+   * @public
    */
   MustBeRequestable: boolean | undefined;
 
@@ -2296,150 +2020,130 @@ export interface ListQualificationTypesRequest {
    *             created are returned. If false, the operation returns all
    *             Qualification types.
    *         </p>
+   * @public
    */
-  MustBeOwnedByCaller?: boolean;
+  MustBeOwnedByCaller?: boolean | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The maximum number of results to return in a single call.
    *         </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListQualificationTypesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListQualificationTypesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListQualificationTypesResponse {
   /**
    * <p> The number of Qualification types on this page in the
    *             filtered results list, equivalent to the number of types this
    *             operation returns.
    *         </p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The list of QualificationType elements returned by the
    *             query.
    *         </p>
+   * @public
    */
-  QualificationTypes?: QualificationType[];
+  QualificationTypes?: QualificationType[] | undefined;
 }
 
-export namespace ListQualificationTypesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListQualificationTypesResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ReviewableHITStatus {
-  Reviewable = "Reviewable",
-  Reviewing = "Reviewing",
-}
-
+/**
+ * @public
+ */
 export interface ListReviewableHITsRequest {
   /**
    * <p>
    *             The ID of the HIT type of the HITs to consider for the query.
    *             If not specified, all HITs for the Reviewer are considered
    *         </p>
+   * @public
    */
-  HITTypeId?: string;
+  HITTypeId?: string | undefined;
 
   /**
    * <p>
    *             Can be either <code>Reviewable</code> or <code>Reviewing</code>.
    *             Reviewable is the default value.
    *         </p>
+   * @public
    */
-  Status?: ReviewableHITStatus | string;
+  Status?: ReviewableHITStatus | undefined;
 
   /**
    * <p>Pagination Token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>
    *             Limit the number of results returned.
    *         </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListReviewableHITsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReviewableHITsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListReviewableHITsResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The number of HITs on this page in the filtered results
    *             list, equivalent to the number of HITs being returned by this call.
    *         </p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The list of HIT elements returned by the query.</p>
+   * @public
    */
-  HITs?: HIT[];
+  HITs?: HIT[] | undefined;
 }
 
-export namespace ListReviewableHITsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReviewableHITsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ReviewPolicyLevel {
-  Assignment = "Assignment",
-  HIT = "HIT",
-}
-
+/**
+ * @public
+ */
 export interface ListReviewPolicyResultsForHITRequest {
   /**
    * <p>The unique identifier of the HIT to retrieve review results for.</p>
+   * @public
    */
   HITId: string | undefined;
 
@@ -2449,49 +2153,38 @@ export interface ListReviewPolicyResultsForHITRequest {
    *             If omitted, the default behavior is to retrieve all data for both policy levels.
    *             For a list of all the described policies, see Review Policies.
    *         </p>
+   * @public
    */
-  PolicyLevels?: (ReviewPolicyLevel | string)[];
+  PolicyLevels?: ReviewPolicyLevel[] | undefined;
 
   /**
    * <p>
    *             Specify if the operation should retrieve a list of the actions taken executing
    *             the Review Policies and their outcomes.
    *         </p>
+   * @public
    */
-  RetrieveActions?: boolean;
+  RetrieveActions?: boolean | undefined;
 
   /**
    * <p>
    *             Specify if the operation should retrieve a list of the results computed by the Review Policies.
    *         </p>
+   * @public
    */
-  RetrieveResults?: boolean;
+  RetrieveResults?: boolean | undefined;
 
   /**
    * <p>Pagination token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Limit the number of results returned.</p>
+   * @public
    */
-  MaxResults?: number;
-}
-
-export namespace ListReviewPolicyResultsForHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReviewPolicyResultsForHITRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ReviewActionStatus {
-  Cancelled = "Cancelled",
-  Failed = "Failed",
-  Intended = "Intended",
-  Succeeded = "Succeeded",
+  MaxResults?: number | undefined;
 }
 
 /**
@@ -2500,73 +2193,75 @@ export enum ReviewActionStatus {
  *             structure is returned multiple times for each action specified in the
  *             Review Policy.
  *         </p>
+ * @public
  */
 export interface ReviewActionDetail {
   /**
    * <p>The unique identifier for the action.</p>
+   * @public
    */
-  ActionId?: string;
+  ActionId?: string | undefined;
 
   /**
    * <p> The nature of the action itself. The Review Policy is
    *             responsible for examining the HIT and Assignments, emitting results,
    *             and deciding which other actions will be necessary. </p>
+   * @public
    */
-  ActionName?: string;
+  ActionName?: string | undefined;
 
   /**
    * <p> The specific HITId or AssignmentID targeted by the action.</p>
+   * @public
    */
-  TargetId?: string;
+  TargetId?: string | undefined;
 
   /**
    * <p> The type of object in TargetId.</p>
+   * @public
    */
-  TargetType?: string;
+  TargetType?: string | undefined;
 
   /**
    * <p> The current disposition of the action: INTENDED, SUCCEEDED,
    *             FAILED, or CANCELLED.
    *         </p>
+   * @public
    */
-  Status?: ReviewActionStatus | string;
+  Status?: ReviewActionStatus | undefined;
 
   /**
    * <p> The date when the action was completed.</p>
+   * @public
    */
-  CompleteTime?: Date;
+  CompleteTime?: Date | undefined;
 
   /**
    * <p> A description of the outcome of the review.</p>
+   * @public
    */
-  Result?: string;
+  Result?: string | undefined;
 
   /**
    * <p> Present only when the Results have a FAILED Status.</p>
+   * @public
    */
-  ErrorCode?: string;
-}
-
-export namespace ReviewActionDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReviewActionDetail): any => ({
-    ...obj,
-  });
+  ErrorCode?: string | undefined;
 }
 
 /**
  * <p> This data structure is returned multiple times for each
  *             result specified in the Review Policy.
  *         </p>
+ * @public
  */
 export interface ReviewResultDetail {
   /**
    * <p> A unique identifier of the Review action result.
    *         </p>
+   * @public
    */
-  ActionId?: string;
+  ActionId?: string | undefined;
 
   /**
    * <p>The HITID or AssignmentId about which this result was taken.
@@ -2575,13 +2270,15 @@ export interface ReviewResultDetail {
    *             review policies generally only emit results about the Assignment
    *             itself.
    *         </p>
+   * @public
    */
-  SubjectId?: string;
+  SubjectId?: string | undefined;
 
   /**
    * <p> The type of the object from the SubjectId field.</p>
+   * @public
    */
-  SubjectType?: string;
+  SubjectType?: string | undefined;
 
   /**
    * <p> Specifies the QuestionId the result is describing. Depending
@@ -2592,128 +2289,111 @@ export interface ReviewResultDetail {
    *             absent, then the result describes the Worker's performance on the
    *             HIT.
    *         </p>
+   * @public
    */
-  QuestionId?: string;
+  QuestionId?: string | undefined;
 
   /**
    * <p> Key identifies the particular piece of reviewed information.
    *         </p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p> The values of Key provided by the review policies you have
    *             selected.
    *         </p>
+   * @public
    */
-  Value?: string;
-}
-
-export namespace ReviewResultDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReviewResultDetail): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
  * <p> Contains both ReviewResult and ReviewAction elements for a
  *             particular HIT.
  *         </p>
+ * @public
  */
 export interface ReviewReport {
   /**
    * <p> A list of ReviewResults objects for each action specified in
    *             the Review Policy.
    *         </p>
+   * @public
    */
-  ReviewResults?: ReviewResultDetail[];
+  ReviewResults?: ReviewResultDetail[] | undefined;
 
   /**
    * <p> A list of ReviewAction objects for each action specified in
    *             the Review Policy.
    *         </p>
+   * @public
    */
-  ReviewActions?: ReviewActionDetail[];
+  ReviewActions?: ReviewActionDetail[] | undefined;
 }
 
-export namespace ReviewReport {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReviewReport): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListReviewPolicyResultsForHITResponse {
   /**
    * <p>The HITId of the HIT for which results have been returned.</p>
+   * @public
    */
-  HITId?: string;
+  HITId?: string | undefined;
 
   /**
    * <p> The name of the Assignment-level Review Policy. This
    *             contains only the PolicyName element.
    *         </p>
+   * @public
    */
-  AssignmentReviewPolicy?: ReviewPolicy;
+  AssignmentReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p>The name of the HIT-level Review Policy. This contains only
    *             the PolicyName element.</p>
+   * @public
    */
-  HITReviewPolicy?: ReviewPolicy;
+  HITReviewPolicy?: ReviewPolicy | undefined;
 
   /**
    * <p> Contains both ReviewResult and ReviewAction elements for an
    *             Assignment.
    *         </p>
+   * @public
    */
-  AssignmentReviewReport?: ReviewReport;
+  AssignmentReviewReport?: ReviewReport | undefined;
 
   /**
    * <p>Contains both ReviewResult and ReviewAction elements for a particular HIT.
    *         </p>
+   * @public
    */
-  HITReviewReport?: ReviewReport;
+  HITReviewReport?: ReviewReport | undefined;
 
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListReviewPolicyResultsForHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReviewPolicyResultsForHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListWorkerBlocksRequest {
   /**
    * <p>Pagination token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
-  MaxResults?: number;
-}
-
-export namespace ListWorkerBlocksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkerBlocksRequest): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
 }
 
 /**
@@ -2721,65 +2401,60 @@ export namespace ListWorkerBlocksRequest {
  *             been blocked. It has two elements: the WorkerId and the Reason for
  *             the block.
  *         </p>
+ * @public
  */
 export interface WorkerBlock {
   /**
    * <p> The ID of the Worker who accepted the HIT.</p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 
   /**
    * <p> A message explaining the reason the Worker was blocked.
    *         </p>
+   * @public
    */
-  Reason?: string;
+  Reason?: string | undefined;
 }
 
-export namespace WorkerBlock {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: WorkerBlock): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListWorkerBlocksResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The number of assignments on the page in the filtered
    *             results list, equivalent to the number of assignments returned by
    *             this call.</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The list of WorkerBlocks, containing the collection of
    *             Worker IDs and reasons for blocking.</p>
+   * @public
    */
-  WorkerBlocks?: WorkerBlock[];
+  WorkerBlocks?: WorkerBlock[] | undefined;
 }
 
-export namespace ListWorkerBlocksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkerBlocksResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListWorkersWithQualificationTypeRequest {
   /**
    * <p>The ID of the Qualification type of the Qualifications to
    *             return.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
@@ -2788,73 +2463,69 @@ export interface ListWorkersWithQualificationTypeRequest {
    *             The status of the Qualifications to return.
    *             Can be <code>Granted | Revoked</code>.
    *         </p>
+   * @public
    */
-  Status?: QualificationStatus | string;
+  Status?: QualificationStatus | undefined;
 
   /**
    * <p>Pagination Token</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>
    *             Limit the number of results returned.
    *         </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
-export namespace ListWorkersWithQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkersWithQualificationTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListWorkersWithQualificationTypeResponse {
   /**
    * <p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk
    *             returns a pagination token in the response. You can use this pagination token
    *             to retrieve the next set of results.
    *         </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p> The number of Qualifications on this page in the filtered
    *             results list, equivalent to the number of Qualifications being
    *             returned by this call.</p>
+   * @public
    */
-  NumResults?: number;
+  NumResults?: number | undefined;
 
   /**
    * <p> The list of Qualification elements returned by this call.
    *         </p>
+   * @public
    */
-  Qualifications?: Qualification[];
+  Qualifications?: Qualification[] | undefined;
 }
 
-export namespace ListWorkersWithQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListWorkersWithQualificationTypeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface NotifyWorkersRequest {
   /**
    * <p>The subject line of the email message to send. Can include up
    *             to 200 characters.</p>
+   * @public
    */
   Subject: string | undefined;
 
   /**
    * <p>The text of the email message to send. Can include up to
    *             4,096 characters</p>
+   * @public
    */
   MessageText: string | undefined;
 
@@ -2862,82 +2533,63 @@ export interface NotifyWorkersRequest {
    * <p>A list of Worker IDs you wish to notify. You
    *             can notify upto
    *             100 Workers at a time.</p>
+   * @public
    */
   WorkerIds: string[] | undefined;
-}
-
-export namespace NotifyWorkersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyWorkersRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum NotifyWorkersFailureCode {
-  HardFailure = "HardFailure",
-  SoftFailure = "SoftFailure",
 }
 
 /**
  * <p> When MTurk encounters an issue with notifying the Workers
  *             you specified, it returns back this object with failure details.
  *         </p>
+ * @public
  */
 export interface NotifyWorkersFailureStatus {
   /**
    * <p> Encoded value for the failure type.
    *         </p>
+   * @public
    */
-  NotifyWorkersFailureCode?: NotifyWorkersFailureCode | string;
+  NotifyWorkersFailureCode?: NotifyWorkersFailureCode | undefined;
 
   /**
    * <p> A message detailing the reason the Worker could not be
    *             notified.
    *         </p>
+   * @public
    */
-  NotifyWorkersFailureMessage?: string;
+  NotifyWorkersFailureMessage?: string | undefined;
 
   /**
    * <p> The ID of the Worker.</p>
+   * @public
    */
-  WorkerId?: string;
+  WorkerId?: string | undefined;
 }
 
-export namespace NotifyWorkersFailureStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyWorkersFailureStatus): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface NotifyWorkersResponse {
   /**
    * <p> When MTurk sends notifications to the list of Workers, it
    *             returns back any failures it encounters in this list of
    *             NotifyWorkersFailureStatus objects.
    *         </p>
+   * @public
    */
-  NotifyWorkersFailureStatuses?: NotifyWorkersFailureStatus[];
+  NotifyWorkersFailureStatuses?: NotifyWorkersFailureStatus[] | undefined;
 }
 
-export namespace NotifyWorkersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotifyWorkersResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectAssignmentRequest {
   /**
    * <p>
    *             The ID of the assignment. The assignment must correspond to a HIT created by the Requester.
    *         </p>
+   * @public
    */
   AssignmentId: string | undefined;
 
@@ -2945,30 +2597,19 @@ export interface RejectAssignmentRequest {
    * <p>
    *             A message for the Worker, which the Worker can see in the Status section of the web site.
    *         </p>
+   * @public
    */
   RequesterFeedback: string | undefined;
 }
 
-export namespace RejectAssignmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectAssignmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectAssignmentResponse {}
 
-export namespace RejectAssignmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectAssignmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectQualificationRequestRequest {
   /**
    * <p>
@@ -2976,39 +2617,30 @@ export interface RejectQualificationRequestRequest {
    *             <code>ListQualificationRequests</code>
    *             operation.
    *         </p>
+   * @public
    */
   QualificationRequestId: string | undefined;
 
   /**
    * <p>A text message explaining why the request was rejected, to be
    *             shown to the Worker who made the request.</p>
+   * @public
    */
-  Reason?: string;
+  Reason?: string | undefined;
 }
 
-export namespace RejectQualificationRequestRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectQualificationRequestRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RejectQualificationRequestResponse {}
 
-export namespace RejectQualificationRequestResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RejectQualificationRequestResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendBonusRequest {
   /**
    * <p>The ID of the Worker being paid the bonus.</p>
+   * @public
    */
   WorkerId: string | undefined;
 
@@ -3017,17 +2649,20 @@ export interface SendBonusRequest {
    *             The Bonus amount is a US Dollar amount specified using a string (for example, "5" represents $5.00 USD and
    *             "101.42" represents $101.42 USD). Do not include currency symbols or currency codes.
    *         </p>
+   * @public
    */
   BonusAmount: string | undefined;
 
   /**
    * <p>The ID of the assignment for which this bonus is paid.</p>
+   * @public
    */
   AssignmentId: string | undefined;
 
   /**
    * <p>A message that explains the reason for the bonus payment. The
    *             Worker receiving the bonus can see this message.</p>
+   * @public
    */
   Reason: string | undefined;
 
@@ -3039,39 +2674,20 @@ export interface SendBonusRequest {
    *             in the system from a previous call using the same UniqueRequestToken,
    *             subsequent calls will return an error with a message containing the
    *             request ID.</p>
+   * @public
    */
-  UniqueRequestToken?: string;
+  UniqueRequestToken?: string | undefined;
 }
 
-export namespace SendBonusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendBonusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendBonusResponse {}
-
-export namespace SendBonusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendBonusResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum NotificationTransport {
-  Email = "Email",
-  SNS = "SNS",
-  SQS = "SQS",
-}
 
 /**
  * <p>The NotificationSpecification data structure describes a HIT
  *             event notification for a HIT type.</p>
+ * @public
  */
 export interface NotificationSpecification {
   /**
@@ -3089,6 +2705,7 @@ export interface NotificationSpecification {
    *                 <p>When Transport is SNS, the Destination is the ARN of your topic.</p>
    *             </li>
    *          </ul>
+   * @public
    */
   Destination: string | undefined;
 
@@ -3096,12 +2713,14 @@ export interface NotificationSpecification {
    * <p> The method Amazon Mechanical Turk uses to send the
    *             notification. Valid Values: Email | SQS | SNS.
    *         </p>
+   * @public
    */
-  Transport: NotificationTransport | string | undefined;
+  Transport: NotificationTransport | undefined;
 
   /**
    * <p>The version of the Notification API to use. Valid value is
    *             2006-05-05.</p>
+   * @public
    */
   Version: string | undefined;
 
@@ -3113,19 +2732,14 @@ export interface NotificationSpecification {
    *             HITReviewable | HITExpired | Ping. The Ping event is only valid for
    *             the SendTestEventNotification operation.
    *         </p>
+   * @public
    */
-  EventTypes: (EventType | string)[] | undefined;
+  EventTypes: EventType[] | undefined;
 }
 
-export namespace NotificationSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotificationSpecification): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendTestEventNotificationRequest {
   /**
    * <p>
@@ -3133,6 +2747,7 @@ export interface SendTestEventNotificationRequest {
    *             you would provide to the UpdateNotificationSettings operation when you establish
    *             the notification specification for a HIT type.
    *         </p>
+   * @public
    */
   Notification: NotificationSpecification | undefined;
 
@@ -3143,35 +2758,25 @@ export interface SendTestEventNotificationRequest {
    *             does not include the event type.
    *             The notification specification does not filter out the test event.
    *         </p>
+   * @public
    */
-  TestEventType: EventType | string | undefined;
+  TestEventType: EventType | undefined;
 }
 
-export namespace SendTestEventNotificationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendTestEventNotificationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendTestEventNotificationResponse {}
 
-export namespace SendTestEventNotificationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendTestEventNotificationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateExpirationForHITRequest {
   /**
    * <p>
    *             The HIT to update.
    *         </p>
+   * @public
    */
   HITId: string | undefined;
 
@@ -3179,35 +2784,25 @@ export interface UpdateExpirationForHITRequest {
    * <p>
    *             The date and time at which you want the HIT to expire
    *         </p>
+   * @public
    */
   ExpireAt: Date | undefined;
 }
 
-export namespace UpdateExpirationForHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateExpirationForHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateExpirationForHITResponse {}
 
-export namespace UpdateExpirationForHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateExpirationForHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateHITReviewStatusRequest {
   /**
    * <p>
    *             The ID of the HIT to update.
    *         </p>
+   * @public
    */
   HITId: string | undefined;
 
@@ -3227,67 +2822,47 @@ export interface UpdateHITReviewStatusRequest {
    *                 </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Revert?: boolean;
+  Revert?: boolean | undefined;
 }
 
-export namespace UpdateHITReviewStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateHITReviewStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateHITReviewStatusResponse {}
 
-export namespace UpdateHITReviewStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateHITReviewStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateHITTypeOfHITRequest {
   /**
    * <p>The HIT to update.</p>
+   * @public
    */
   HITId: string | undefined;
 
   /**
    * <p>The ID of the new HIT type.</p>
+   * @public
    */
   HITTypeId: string | undefined;
 }
 
-export namespace UpdateHITTypeOfHITRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateHITTypeOfHITRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateHITTypeOfHITResponse {}
 
-export namespace UpdateHITTypeOfHITResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateHITTypeOfHITResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateNotificationSettingsRequest {
   /**
    * <p>
    *             The ID of the HIT type whose notification specification is being updated.
    *         </p>
+   * @public
    */
   HITTypeId: string | undefined;
 
@@ -3295,8 +2870,9 @@ export interface UpdateNotificationSettingsRequest {
    * <p>
    *             The notification specification for the HIT type.
    *         </p>
+   * @public
    */
-  Notification?: NotificationSpecification;
+  Notification?: NotificationSpecification | undefined;
 
   /**
    * <p>
@@ -3305,62 +2881,57 @@ export interface UpdateNotificationSettingsRequest {
    *             You must specify either the Notification parameter or the Active parameter
    *             for the call to UpdateNotificationSettings to succeed.
    *         </p>
+   * @public
    */
-  Active?: boolean;
+  Active?: boolean | undefined;
 }
 
-export namespace UpdateNotificationSettingsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateNotificationSettingsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateNotificationSettingsResponse {}
 
-export namespace UpdateNotificationSettingsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateNotificationSettingsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateQualificationTypeRequest {
   /**
    * <p>The ID of the Qualification type to update.</p>
+   * @public
    */
   QualificationTypeId: string | undefined;
 
   /**
    * <p>The new description of the Qualification type.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The new status of the Qualification type - Active | Inactive</p>
+   * @public
    */
-  QualificationTypeStatus?: QualificationTypeStatus | string;
+  QualificationTypeStatus?: QualificationTypeStatus | undefined;
 
   /**
    * <p>The questions for the Qualification test a Worker must answer correctly to obtain a Qualification of this type. If this parameter is specified, <code>TestDurationInSeconds</code> must also be specified.</p>
    *         <p>Constraints: Must not be longer than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot be specified if AutoGranted is true.</p>
    *         <p>Constraints: None. If not specified, the Worker may request the Qualification without answering any questions.</p>
+   * @public
    */
-  Test?: string;
+  Test?: string | undefined;
 
   /**
    * <p>The answers to the Qualification test specified in the Test parameter, in the form of an AnswerKey data structure.</p>
+   * @public
    */
-  AnswerKey?: string;
+  AnswerKey?: string | undefined;
 
   /**
    * <p>The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.</p>
+   * @public
    */
-  TestDurationInSeconds?: number;
+  TestDurationInSeconds?: number | undefined;
 
   /**
    * <p>The amount of time, in seconds, that Workers must wait
@@ -3371,42 +2942,31 @@ export interface UpdateQualificationTypeRequest {
    *             the existing retry-enabled Qualification type using
    *             DisposeQualificationType and then create a new Qualification type with
    *             retries disabled using CreateQualificationType.</p>
+   * @public
    */
-  RetryDelayInSeconds?: number;
+  RetryDelayInSeconds?: number | undefined;
 
   /**
    * <p>Specifies whether requests for the Qualification type are granted immediately, without prompting the Worker with a Qualification test.</p>
    *         <p>Constraints: If the Test parameter is specified, this parameter cannot be true.</p>
+   * @public
    */
-  AutoGranted?: boolean;
+  AutoGranted?: boolean | undefined;
 
   /**
    * <p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>
+   * @public
    */
-  AutoGrantedValue?: number;
+  AutoGrantedValue?: number | undefined;
 }
 
-export namespace UpdateQualificationTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateQualificationTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateQualificationTypeResponse {
   /**
    * <p> Contains a QualificationType data structure.</p>
+   * @public
    */
-  QualificationType?: QualificationType;
-}
-
-export namespace UpdateQualificationTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateQualificationTypeResponse): any => ({
-    ...obj,
-  });
+  QualificationType?: QualificationType | undefined;
 }

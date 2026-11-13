@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { ListReportsInput, ListReportsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListReportsCommand,
-  serializeAws_json1_1ListReportsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReportsInput, ListReportsOutput } from "../models/models_0";
+import { ListReports$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReportsCommand}.
+ */
 export interface ListReportsCommandInput extends ListReportsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListReportsCommand}.
+ */
 export interface ListReportsCommandOutput extends ListReportsOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,58 @@ export interface ListReportsCommandOutput extends ListReportsOutput, __MetadataB
  * ```javascript
  * import { CodeBuildClient, ListReportsCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, ListReportsCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // ListReportsInput
+ *   sortOrder: "ASCENDING" || "DESCENDING",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   filter: { // ReportFilter
+ *     status: "GENERATING" || "SUCCEEDED" || "FAILED" || "INCOMPLETE" || "DELETING",
+ *   },
+ * };
  * const command = new ListReportsCommand(input);
  * const response = await client.send(command);
+ * // { // ListReportsOutput
+ * //   nextToken: "STRING_VALUE",
+ * //   reports: [ // ReportArns
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListReportsCommandInput - {@link ListReportsCommandInput}
+ * @returns {@link ListReportsCommandOutput}
  * @see {@link ListReportsCommandInput} for command's `input` shape.
  * @see {@link ListReportsCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class ListReportsCommand extends $Command<
-  ListReportsCommandInput,
-  ListReportsCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReportsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReportsCommandInput, ListReportsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "ListReportsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReportsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReportsOutput.filterSensitiveLog,
+export class ListReportsCommand extends command<ListReportsCommandInput, ListReportsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReports",
+  ListReports$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReportsInput;
+      output: ListReportsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReportsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListReportsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListReportsCommandOutput> {
-    return deserializeAws_json1_1ListReportsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReportsCommandInput;
+      output: ListReportsCommandOutput;
+    };
+  };
 }

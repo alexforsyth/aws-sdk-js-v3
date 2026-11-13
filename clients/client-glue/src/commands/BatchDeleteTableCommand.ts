@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { BatchDeleteTableRequest, BatchDeleteTableResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDeleteTableCommand,
-  serializeAws_json1_1BatchDeleteTableCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDeleteTableRequest, BatchDeleteTableResponse } from "../models/models_0";
+import { BatchDeleteTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDeleteTableCommand}.
+ */
 export interface BatchDeleteTableCommandInput extends BatchDeleteTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDeleteTableCommand}.
+ */
 export interface BatchDeleteTableCommandOutput extends BatchDeleteTableResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +39,81 @@ export interface BatchDeleteTableCommandOutput extends BatchDeleteTableResponse,
  * ```javascript
  * import { GlueClient, BatchDeleteTableCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchDeleteTableCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchDeleteTableRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TablesToDelete: [ // BatchDeleteTableNameList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   TransactionId: "STRING_VALUE",
+ * };
  * const command = new BatchDeleteTableCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDeleteTableResponse
+ * //   Errors: [ // TableErrors
+ * //     { // TableError
+ * //       TableName: "STRING_VALUE",
+ * //       ErrorDetail: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDeleteTableCommandInput - {@link BatchDeleteTableCommandInput}
+ * @returns {@link BatchDeleteTableCommandOutput}
  * @see {@link BatchDeleteTableCommandInput} for command's `input` shape.
  * @see {@link BatchDeleteTableCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNotReadyException} (client fault)
+ *  <p>A resource was not ready for a transaction.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDeleteTableCommand extends $Command<
-  BatchDeleteTableCommandInput,
-  BatchDeleteTableCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDeleteTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDeleteTableCommandInput, BatchDeleteTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchDeleteTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDeleteTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDeleteTableResponse.filterSensitiveLog,
+export class BatchDeleteTableCommand extends command<BatchDeleteTableCommandInput, BatchDeleteTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDeleteTable",
+  BatchDeleteTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteTableRequest;
+      output: BatchDeleteTableResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDeleteTableCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDeleteTableCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchDeleteTableCommandOutput> {
-    return deserializeAws_json1_1BatchDeleteTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDeleteTableCommandInput;
+      output: BatchDeleteTableCommandOutput;
+    };
+  };
 }

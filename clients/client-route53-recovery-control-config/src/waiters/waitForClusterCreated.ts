@@ -1,20 +1,31 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeClusterCommand, DescribeClusterCommandInput } from "../commands/DescribeClusterCommand";
-import { Route53RecoveryControlConfigClient } from "../Route53RecoveryControlConfigClient";
+import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
+  DescribeClusterCommand,
+} from "../commands/DescribeClusterCommand";
+import type {
+  Route53RecoveryControlConfigServiceException,
+} from "../models/Route53RecoveryControlConfigServiceException";
+import type { Route53RecoveryControlConfigClient } from "../Route53RecoveryControlConfigClient";
 
-const checkState = async (
-  client: Route53RecoveryControlConfigClient,
-  input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: Route53RecoveryControlConfigClient, input: DescribeClusterCommandInput): Promise<WaiterResult<DescribeClusterCommandOutput | Route53RecoveryControlConfigServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeClusterCommand(input));
+    let result: DescribeClusterCommandOutput & any = await client.send(new DescribeClusterCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Cluster.Status;
-      };
+      }
       if (returnComparator() === "DEPLOYED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -22,14 +33,14 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.Cluster.Status;
-      };
+      }
       if (returnComparator() === "PENDING") {
         return { state: WaiterState.RETRY, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InternalServerException") {
+    if (exception.name === "InternalServerException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -42,7 +53,7 @@ const checkState = async (
 export const waitForClusterCreated = async (
   params: WaiterConfiguration<Route53RecoveryControlConfigClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput | Route53RecoveryControlConfigServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -54,8 +65,8 @@ export const waitForClusterCreated = async (
 export const waitUntilClusterCreated = async (
   params: WaiterConfiguration<Route53RecoveryControlConfigClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeClusterCommandOutput>;
 };

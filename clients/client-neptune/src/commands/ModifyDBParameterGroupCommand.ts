@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DBParameterGroupNameMessage, ModifyDBParameterGroupMessage } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryModifyDBParameterGroupCommand,
-  serializeAws_queryModifyDBParameterGroupCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DBParameterGroupNameMessage, ModifyDBParameterGroupMessage } from "../models/models_0";
+import { ModifyDBParameterGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBParameterGroupCommand}.
+ */
 export interface ModifyDBParameterGroupCommandInput extends ModifyDBParameterGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBParameterGroupCommand}.
+ */
 export interface ModifyDBParameterGroupCommandOutput extends DBParameterGroupNameMessage, __MetadataBearer {}
 
 /**
@@ -47,68 +48,70 @@ export interface ModifyDBParameterGroupCommandOutput extends DBParameterGroupNam
  * ```javascript
  * import { NeptuneClient, ModifyDBParameterGroupCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, ModifyDBParameterGroupCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // ModifyDBParameterGroupMessage
+ *   DBParameterGroupName: "STRING_VALUE", // required
+ *   Parameters: [ // ParametersList // required
+ *     { // Parameter
+ *       ParameterName: "STRING_VALUE",
+ *       ParameterValue: "STRING_VALUE",
+ *       Description: "STRING_VALUE",
+ *       Source: "STRING_VALUE",
+ *       ApplyType: "STRING_VALUE",
+ *       DataType: "STRING_VALUE",
+ *       AllowedValues: "STRING_VALUE",
+ *       IsModifiable: true || false,
+ *       MinimumEngineVersion: "STRING_VALUE",
+ *       ApplyMethod: "immediate" || "pending-reboot",
+ *     },
+ *   ],
+ * };
  * const command = new ModifyDBParameterGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DBParameterGroupNameMessage
+ * //   DBParameterGroupName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBParameterGroupCommandInput - {@link ModifyDBParameterGroupCommandInput}
+ * @returns {@link ModifyDBParameterGroupCommandOutput}
  * @see {@link ModifyDBParameterGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyDBParameterGroupCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBParameterGroupNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBParameterGroupName</i> does not refer to an
+ *       existing DB parameter group.</p>
+ *
+ * @throws {@link InvalidDBParameterGroupStateFault} (client fault)
+ *  <p>The DB parameter group is in use or is in an invalid state. If you are attempting to
+ *       delete the parameter group, you cannot delete it when the parameter group is in this state.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyDBParameterGroupCommand extends $Command<
-  ModifyDBParameterGroupCommandInput,
-  ModifyDBParameterGroupCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBParameterGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBParameterGroupCommandInput, ModifyDBParameterGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "ModifyDBParameterGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBParameterGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DBParameterGroupNameMessage.filterSensitiveLog,
+export class ModifyDBParameterGroupCommand extends command<ModifyDBParameterGroupCommandInput, ModifyDBParameterGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBParameterGroup",
+  ModifyDBParameterGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBParameterGroupMessage;
+      output: DBParameterGroupNameMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyDBParameterGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBParameterGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyDBParameterGroupCommandOutput> {
-    return deserializeAws_queryModifyDBParameterGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBParameterGroupCommandInput;
+      output: ModifyDBParameterGroupCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,75 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAndGetInlineDocumentsInputOutput } from "../models/models_0";
+import { PutAndGetInlineDocuments$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAndGetInlineDocumentsCommand}.
+ */
+export interface PutAndGetInlineDocumentsCommandInput extends PutAndGetInlineDocumentsInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link PutAndGetInlineDocumentsCommand}.
+ */
+export interface PutAndGetInlineDocumentsCommandOutput extends PutAndGetInlineDocumentsInputOutput, __MetadataBearer {}
+
+/**
+ * This example serializes an inline document as part of the payload.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { JsonProtocolClient, PutAndGetInlineDocumentsCommand } from "@aws-sdk/aws-protocoltests-json-schema"; // ES Modules import
+ * // const { JsonProtocolClient, PutAndGetInlineDocumentsCommand } = require("@aws-sdk/aws-protocoltests-json-schema"); // CommonJS import
+ * // import type { JsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-json-schema";
+ * const config = {}; // type is JsonProtocolClientConfig
+ * const client = new JsonProtocolClient(config);
+ * const input = { // PutAndGetInlineDocumentsInputOutput
+ *   inlineDocument: "DOCUMENT_VALUE",
+ * };
+ * const command = new PutAndGetInlineDocumentsCommand(input);
+ * const response = await client.send(command);
+ * // { // PutAndGetInlineDocumentsInputOutput
+ * //   inlineDocument: "DOCUMENT_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param PutAndGetInlineDocumentsCommandInput - {@link PutAndGetInlineDocumentsCommandInput}
+ * @returns {@link PutAndGetInlineDocumentsCommandOutput}
+ * @see {@link PutAndGetInlineDocumentsCommandInput} for command's `input` shape.
+ * @see {@link PutAndGetInlineDocumentsCommandOutput} for command's `response` shape.
+ * @see {@link JsonProtocolClientResolvedConfig | config} for JsonProtocolClient's `config` shape.
+ *
+ * @throws {@link JsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from JsonProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class PutAndGetInlineDocumentsCommand extends command<PutAndGetInlineDocumentsCommandInput, PutAndGetInlineDocumentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAndGetInlineDocuments",
+  PutAndGetInlineDocuments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAndGetInlineDocumentsInputOutput;
+      output: PutAndGetInlineDocumentsInputOutput;
+    };
+    sdk: {
+      input: PutAndGetInlineDocumentsCommandInput;
+      output: PutAndGetInlineDocumentsCommandOutput;
+    };
+  };
+}

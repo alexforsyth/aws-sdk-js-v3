@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTaskTemplatesRequest, ListTaskTemplatesResponse } from "../models/models_2";
+import { ListTaskTemplates$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTaskTemplatesCommand}.
+ */
+export interface ListTaskTemplatesCommandInput extends ListTaskTemplatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTaskTemplatesCommand}.
+ */
+export interface ListTaskTemplatesCommandOutput extends ListTaskTemplatesResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists task templates for the specified Connect Customer instance.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, ListTaskTemplatesCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, ListTaskTemplatesCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // ListTaskTemplatesRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Status: "ACTIVE" || "INACTIVE",
+ *   Name: "STRING_VALUE",
+ * };
+ * const command = new ListTaskTemplatesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListTaskTemplatesResponse
+ * //   TaskTemplates: [ // TaskTemplateList
+ * //     { // TaskTemplateMetadata
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "INACTIVE",
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListTaskTemplatesCommandInput - {@link ListTaskTemplatesCommandInput}
+ * @returns {@link ListTaskTemplatesCommandOutput}
+ * @see {@link ListTaskTemplatesCommandInput} for command's `input` shape.
+ * @see {@link ListTaskTemplatesCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class ListTaskTemplatesCommand extends command<ListTaskTemplatesCommandInput, ListTaskTemplatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTaskTemplates",
+  ListTaskTemplates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTaskTemplatesRequest;
+      output: ListTaskTemplatesResponse;
+    };
+    sdk: {
+      input: ListTaskTemplatesCommandInput;
+      output: ListTaskTemplatesCommandOutput;
+    };
+  };
+}

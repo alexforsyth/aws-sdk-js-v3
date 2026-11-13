@@ -1,96 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LookoutEquipmentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LookoutEquipmentClient";
-import { ListModelsRequest, ListModelsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListModelsCommand,
-  serializeAws_json1_0ListModelsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListModelsRequest, ListModelsResponse } from "../models/models_0";
+import { ListModels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListModelsCommand}.
+ */
 export interface ListModelsCommandInput extends ListModelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListModelsCommand}.
+ */
 export interface ListModelsCommandOutput extends ListModelsResponse, __MetadataBearer {}
 
 /**
  * <p>Generates a list of all models in the account, including model name and ARN, dataset,
  *          and status. </p>
+ *
+ * @deprecated (since 2026-10-07) End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LookoutEquipmentClient, ListModelsCommand } from "@aws-sdk/client-lookoutequipment"; // ES Modules import
  * // const { LookoutEquipmentClient, ListModelsCommand } = require("@aws-sdk/client-lookoutequipment"); // CommonJS import
+ * // import type { LookoutEquipmentClientConfig } from "@aws-sdk/client-lookoutequipment";
+ * const config = {}; // type is LookoutEquipmentClientConfig
  * const client = new LookoutEquipmentClient(config);
+ * const input = { // ListModelsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Status: "IN_PROGRESS" || "SUCCESS" || "FAILED" || "IMPORT_IN_PROGRESS",
+ *   ModelNameBeginsWith: "STRING_VALUE",
+ *   DatasetNameBeginsWith: "STRING_VALUE",
+ * };
  * const command = new ListModelsCommand(input);
  * const response = await client.send(command);
+ * // { // ListModelsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   ModelSummaries: [ // ModelSummaries
+ * //     { // ModelSummary
+ * //       ModelName: "STRING_VALUE",
+ * //       ModelArn: "STRING_VALUE",
+ * //       DatasetName: "STRING_VALUE",
+ * //       DatasetArn: "STRING_VALUE",
+ * //       Status: "IN_PROGRESS" || "SUCCESS" || "FAILED" || "IMPORT_IN_PROGRESS",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       ActiveModelVersion: Number("long"),
+ * //       ActiveModelVersionArn: "STRING_VALUE",
+ * //       LatestScheduledRetrainingStatus: "IN_PROGRESS" || "SUCCESS" || "FAILED" || "IMPORT_IN_PROGRESS" || "CANCELED",
+ * //       LatestScheduledRetrainingModelVersion: Number("long"),
+ * //       LatestScheduledRetrainingStartTime: new Date("TIMESTAMP"),
+ * //       NextScheduledRetrainingStartDate: new Date("TIMESTAMP"),
+ * //       RetrainingSchedulerStatus: "PENDING" || "RUNNING" || "STOPPING" || "STOPPED",
+ * //       ModelDiagnosticsOutputConfiguration: { // ModelDiagnosticsOutputConfiguration
+ * //         S3OutputConfiguration: { // ModelDiagnosticsS3OutputConfiguration
+ * //           Bucket: "STRING_VALUE", // required
+ * //           Prefix: "STRING_VALUE",
+ * //         },
+ * //         KmsKeyId: "STRING_VALUE",
+ * //       },
+ * //       ModelQuality: "QUALITY_THRESHOLD_MET" || "CANNOT_DETERMINE_QUALITY" || "POOR_QUALITY_DETECTED",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListModelsCommandInput - {@link ListModelsCommandInput}
+ * @returns {@link ListModelsCommandOutput}
  * @see {@link ListModelsCommandInput} for command's `input` shape.
  * @see {@link ListModelsCommandOutput} for command's `response` shape.
- * @see {@link LookoutEquipmentClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LookoutEquipmentClientResolvedConfig | config} for LookoutEquipmentClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have access to the resource.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Processing of the request has failed because of an unknown error, exception or failure.
+ *       </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
+ *          service that's being utilized. </p>
+ *
+ * @throws {@link LookoutEquipmentServiceException}
+ * <p>Base exception class for all service exceptions from LookoutEquipment service.</p>
+ *
+ *
+ * @public
  */
-export class ListModelsCommand extends $Command<
-  ListModelsCommandInput,
-  ListModelsCommandOutput,
-  LookoutEquipmentClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListModelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LookoutEquipmentClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListModelsCommandInput, ListModelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LookoutEquipmentClient";
-    const commandName = "ListModelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListModelsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListModelsResponse.filterSensitiveLog,
+export class ListModelsCommand extends command<ListModelsCommandInput, ListModelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListModels",
+  ListModels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListModelsRequest;
+      output: ListModelsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListModelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListModelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListModelsCommandOutput> {
-    return deserializeAws_json1_0ListModelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListModelsCommandInput;
+      output: ListModelsCommandOutput;
+    };
+  };
 }

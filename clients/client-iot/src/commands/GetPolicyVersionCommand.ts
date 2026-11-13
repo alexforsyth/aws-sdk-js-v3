@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { GetPolicyVersionRequest, GetPolicyVersionResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1GetPolicyVersionCommand,
-  serializeAws_restJson1GetPolicyVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPolicyVersionRequest, GetPolicyVersionResponse } from "../models/models_1";
+import { GetPolicyVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPolicyVersionCommand}.
+ */
 export interface GetPolicyVersionCommandInput extends GetPolicyVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPolicyVersionCommand}.
+ */
 export interface GetPolicyVersionCommandOutput extends GetPolicyVersionResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,73 @@ export interface GetPolicyVersionCommandOutput extends GetPolicyVersionResponse,
  * ```javascript
  * import { IoTClient, GetPolicyVersionCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, GetPolicyVersionCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // GetPolicyVersionRequest
+ *   policyName: "STRING_VALUE", // required
+ *   policyVersionId: "STRING_VALUE", // required
+ * };
  * const command = new GetPolicyVersionCommand(input);
  * const response = await client.send(command);
+ * // { // GetPolicyVersionResponse
+ * //   policyArn: "STRING_VALUE",
+ * //   policyName: "STRING_VALUE",
+ * //   policyDocument: "STRING_VALUE",
+ * //   policyVersionId: "STRING_VALUE",
+ * //   isDefaultVersion: true || false,
+ * //   creationDate: new Date("TIMESTAMP"),
+ * //   lastModifiedDate: new Date("TIMESTAMP"),
+ * //   generationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetPolicyVersionCommandInput - {@link GetPolicyVersionCommandInput}
+ * @returns {@link GetPolicyVersionCommandOutput}
  * @see {@link GetPolicyVersionCommandInput} for command's `input` shape.
  * @see {@link GetPolicyVersionCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class GetPolicyVersionCommand extends $Command<
-  GetPolicyVersionCommandInput,
-  GetPolicyVersionCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPolicyVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPolicyVersionCommandInput, GetPolicyVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "GetPolicyVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPolicyVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPolicyVersionResponse.filterSensitiveLog,
+export class GetPolicyVersionCommand extends command<GetPolicyVersionCommandInput, GetPolicyVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPolicyVersion",
+  GetPolicyVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPolicyVersionRequest;
+      output: GetPolicyVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPolicyVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPolicyVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPolicyVersionCommandOutput> {
-    return deserializeAws_restJson1GetPolicyVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPolicyVersionCommandInput;
+      output: GetPolicyVersionCommandOutput;
+    };
+  };
 }

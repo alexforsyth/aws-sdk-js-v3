@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { StopPipelineExecutionInput, StopPipelineExecutionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopPipelineExecutionCommand,
-  serializeAws_json1_1StopPipelineExecutionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopPipelineExecutionInput, StopPipelineExecutionOutput } from "../models/models_0";
+import { StopPipelineExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopPipelineExecutionCommand}.
+ */
 export interface StopPipelineExecutionCommandInput extends StopPipelineExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link StopPipelineExecutionCommand}.
+ */
 export interface StopPipelineExecutionCommandOutput extends StopPipelineExecutionOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,71 @@ export interface StopPipelineExecutionCommandOutput extends StopPipelineExecutio
  * ```javascript
  * import { CodePipelineClient, StopPipelineExecutionCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, StopPipelineExecutionCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // StopPipelineExecutionInput
+ *   pipelineName: "STRING_VALUE", // required
+ *   pipelineExecutionId: "STRING_VALUE", // required
+ *   abandon: true || false,
+ *   reason: "STRING_VALUE",
+ * };
  * const command = new StopPipelineExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // StopPipelineExecutionOutput
+ * //   pipelineExecutionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StopPipelineExecutionCommandInput - {@link StopPipelineExecutionCommandInput}
+ * @returns {@link StopPipelineExecutionCommandOutput}
  * @see {@link StopPipelineExecutionCommandInput} for command's `input` shape.
  * @see {@link StopPipelineExecutionCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Your request cannot be handled because the pipeline is busy handling ongoing
+ *             activities. Try again later.</p>
+ *
+ * @throws {@link DuplicatedStopRequestException} (client fault)
+ *  <p>The pipeline execution is already in a <code>Stopping</code> state. If you already
+ *             chose to stop and wait, you cannot make that request again. You can choose to stop and
+ *             abandon now, but be aware that this option can lead to failed tasks or out of sequence
+ *             tasks. If you already chose to stop and abandon, you cannot make that request
+ *             again.</p>
+ *
+ * @throws {@link PipelineExecutionNotStoppableException} (client fault)
+ *  <p>Unable to stop the pipeline execution. The execution might already be in a
+ *                 <code>Stopped</code> state, or it might no longer be in progress.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The pipeline was specified in an invalid format or cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class StopPipelineExecutionCommand extends $Command<
-  StopPipelineExecutionCommandInput,
-  StopPipelineExecutionCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopPipelineExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopPipelineExecutionCommandInput, StopPipelineExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "StopPipelineExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopPipelineExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StopPipelineExecutionOutput.filterSensitiveLog,
+export class StopPipelineExecutionCommand extends command<StopPipelineExecutionCommandInput, StopPipelineExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopPipelineExecution",
+  StopPipelineExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopPipelineExecutionInput;
+      output: StopPipelineExecutionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopPipelineExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopPipelineExecutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopPipelineExecutionCommandOutput> {
-    return deserializeAws_json1_1StopPipelineExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopPipelineExecutionCommandInput;
+      output: StopPipelineExecutionCommandOutput;
+    };
+  };
 }

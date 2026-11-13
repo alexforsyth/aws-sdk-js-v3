@@ -1,0 +1,75 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { XmlEmptyStringsRequest, XmlEmptyStringsResponse } from "../models/models_0";
+import { XmlEmptyStrings$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlEmptyStringsCommand}.
+ */
+export interface XmlEmptyStringsCommandInput extends XmlEmptyStringsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link XmlEmptyStringsCommand}.
+ */
+export interface XmlEmptyStringsCommandOutput extends XmlEmptyStringsResponse, __MetadataBearer {}
+
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, XmlEmptyStringsCommand } from "@aws-sdk/aws-protocoltests-restxml-schema"; // ES Modules import
+ * // const { RestXmlProtocolClient, XmlEmptyStringsCommand } = require("@aws-sdk/aws-protocoltests-restxml-schema"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml-schema";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // XmlEmptyStringsRequest
+ *   emptyString: "STRING_VALUE",
+ * };
+ * const command = new XmlEmptyStringsCommand(input);
+ * const response = await client.send(command);
+ * // { // XmlEmptyStringsResponse
+ * //   emptyString: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param XmlEmptyStringsCommandInput - {@link XmlEmptyStringsCommandInput}
+ * @returns {@link XmlEmptyStringsCommandOutput}
+ * @see {@link XmlEmptyStringsCommandInput} for command's `input` shape.
+ * @see {@link XmlEmptyStringsCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ */
+export class XmlEmptyStringsCommand extends command<XmlEmptyStringsCommandInput, XmlEmptyStringsCommandOutput>(
+  _ep0,
+  _mw0,
+  "XmlEmptyStrings",
+  XmlEmptyStrings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: XmlEmptyStringsRequest;
+      output: XmlEmptyStringsResponse;
+    };
+    sdk: {
+      input: XmlEmptyStringsCommandInput;
+      output: XmlEmptyStringsCommandOutput;
+    };
+  };
+}

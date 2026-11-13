@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RollbackTransactionRequest, RollbackTransactionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RollbackTransactionCommand,
-  serializeAws_restJson1RollbackTransactionCommand,
-} from "../protocols/Aws_restJson1";
-import { RDSDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSDataClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RollbackTransactionRequest, RollbackTransactionResponse } from "../models/models_0";
+import { RollbackTransaction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RollbackTransactionCommand}.
+ */
 export interface RollbackTransactionCommandInput extends RollbackTransactionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RollbackTransactionCommand}.
+ */
 export interface RollbackTransactionCommandOutput extends RollbackTransactionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,94 @@ export interface RollbackTransactionCommandOutput extends RollbackTransactionRes
  * ```javascript
  * import { RDSDataClient, RollbackTransactionCommand } from "@aws-sdk/client-rds-data"; // ES Modules import
  * // const { RDSDataClient, RollbackTransactionCommand } = require("@aws-sdk/client-rds-data"); // CommonJS import
+ * // import type { RDSDataClientConfig } from "@aws-sdk/client-rds-data";
+ * const config = {}; // type is RDSDataClientConfig
  * const client = new RDSDataClient(config);
+ * const input = { // RollbackTransactionRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   secretArn: "STRING_VALUE", // required
+ *   transactionId: "STRING_VALUE", // required
+ * };
  * const command = new RollbackTransactionCommand(input);
  * const response = await client.send(command);
+ * // { // RollbackTransactionResponse
+ * //   transactionStatus: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RollbackTransactionCommandInput - {@link RollbackTransactionCommandInput}
+ * @returns {@link RollbackTransactionCommandOutput}
  * @see {@link RollbackTransactionCommandInput} for command's `input` shape.
  * @see {@link RollbackTransactionCommandOutput} for command's `response` shape.
- * @see {@link RDSDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSDataClientResolvedConfig | config} for RDSDataClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>There is an error in the call or in a SQL statement. This exception is deprecated.</p>
+ *
+ * @throws {@link DatabaseErrorException} (client fault)
+ *  <p>There was an error in processing the SQL statement.</p>
+ *
+ * @throws {@link DatabaseNotFoundException} (client fault)
+ *  <p>The DB cluster doesn't have a DB instance.</p>
+ *
+ * @throws {@link DatabaseUnavailableException} (server fault)
+ *  <p>The writer instance in the DB cluster isn't available.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>There are insufficient privileges to make the call.</p>
+ *
+ * @throws {@link HttpEndpointNotEnabledException} (client fault)
+ *  <p>The HTTP endpoint for using RDS Data API isn't enabled for the DB cluster.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link InvalidResourceStateException} (client fault)
+ *  <p>The resource is in an invalid state.</p>
+ *
+ * @throws {@link InvalidSecretException} (client fault)
+ *  <p>The Secrets Manager secret used with the request isn't valid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The <code>resourceArn</code>, <code>secretArn</code>, or <code>transactionId</code> value can't be found.</p>
+ *
+ * @throws {@link SecretsErrorException} (client fault)
+ *  <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p> <ul> <li> <p>RDS Data API timed out retrieving the secret.</p> </li> <li> <p>The secret provided wasn't found.</p> </li> <li> <p>The secret couldn't be decrypted.</p> </li> </ul>
+ *
+ * @throws {@link ServiceUnavailableError} (server fault)
+ *  <p>The service specified by the <code>resourceArn</code> parameter isn't available.</p>
+ *
+ * @throws {@link StatementTimeoutException} (client fault)
+ *  <p>The execution of the SQL statement timed out.</p>
+ *
+ * @throws {@link TransactionNotFoundException} (client fault)
+ *  <p>The transaction ID wasn't found.</p>
+ *
+ * @throws {@link RDSDataServiceException}
+ * <p>Base exception class for all service exceptions from RDSData service.</p>
+ *
+ *
+ * @public
  */
-export class RollbackTransactionCommand extends $Command<
-  RollbackTransactionCommandInput,
-  RollbackTransactionCommandOutput,
-  RDSDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RollbackTransactionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RollbackTransactionCommandInput, RollbackTransactionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSDataClient";
-    const commandName = "RollbackTransactionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RollbackTransactionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RollbackTransactionResponse.filterSensitiveLog,
+export class RollbackTransactionCommand extends command<RollbackTransactionCommandInput, RollbackTransactionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RollbackTransaction",
+  RollbackTransaction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RollbackTransactionRequest;
+      output: RollbackTransactionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RollbackTransactionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RollbackTransactionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RollbackTransactionCommandOutput> {
-    return deserializeAws_restJson1RollbackTransactionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RollbackTransactionCommandInput;
+      output: RollbackTransactionCommandOutput;
+    };
+  };
 }

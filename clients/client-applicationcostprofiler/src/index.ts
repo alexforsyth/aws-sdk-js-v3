@@ -1,5 +1,27 @@
-export * from "./ApplicationCostProfiler";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>This reference provides descriptions of the AWS Application Cost Profiler API.</p>
+ *          <p>The AWS Application Cost Profiler API provides programmatic access to view, create, update, and delete
+ *       application cost report definitions, as well as to import your usage data into the Application Cost Profiler
+ *       service.</p>
+ *          <p>For more information about using this service, see the <a href="https://docs.aws.amazon.com/application-cost-profiler/latest/userguide/introduction.html">AWS Application Cost
+ *         Profiler User Guide</a>.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./ApplicationCostProfilerClient";
+export * from "./ApplicationCostProfiler";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { ApplicationCostProfilerExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { ApplicationCostProfilerServiceException } from "./models/ApplicationCostProfilerServiceException";

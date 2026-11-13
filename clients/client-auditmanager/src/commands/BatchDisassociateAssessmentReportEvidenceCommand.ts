@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuditManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AuditManagerClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   BatchDisassociateAssessmentReportEvidenceRequest,
   BatchDisassociateAssessmentReportEvidenceResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchDisassociateAssessmentReportEvidenceCommand,
-  serializeAws_restJson1BatchDisassociateAssessmentReportEvidenceCommand,
-} from "../protocols/Aws_restJson1";
+import { BatchDisassociateAssessmentReportEvidence$ } from "../schemas/schemas_0";
 
-export interface BatchDisassociateAssessmentReportEvidenceCommandInput
-  extends BatchDisassociateAssessmentReportEvidenceRequest {}
-export interface BatchDisassociateAssessmentReportEvidenceCommandOutput
-  extends BatchDisassociateAssessmentReportEvidenceResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDisassociateAssessmentReportEvidenceCommand}.
+ */
+export interface BatchDisassociateAssessmentReportEvidenceCommandInput extends BatchDisassociateAssessmentReportEvidenceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDisassociateAssessmentReportEvidenceCommand}.
+ */
+export interface BatchDisassociateAssessmentReportEvidenceCommandOutput extends BatchDisassociateAssessmentReportEvidenceResponse, __MetadataBearer {}
 
 /**
  * <p> Disassociates a list of evidence from an assessment report in Audit Manager.
@@ -35,77 +33,74 @@ export interface BatchDisassociateAssessmentReportEvidenceCommandOutput
  * ```javascript
  * import { AuditManagerClient, BatchDisassociateAssessmentReportEvidenceCommand } from "@aws-sdk/client-auditmanager"; // ES Modules import
  * // const { AuditManagerClient, BatchDisassociateAssessmentReportEvidenceCommand } = require("@aws-sdk/client-auditmanager"); // CommonJS import
+ * // import type { AuditManagerClientConfig } from "@aws-sdk/client-auditmanager";
+ * const config = {}; // type is AuditManagerClientConfig
  * const client = new AuditManagerClient(config);
+ * const input = { // BatchDisassociateAssessmentReportEvidenceRequest
+ *   assessmentId: "STRING_VALUE", // required
+ *   evidenceFolderId: "STRING_VALUE", // required
+ *   evidenceIds: [ // EvidenceIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDisassociateAssessmentReportEvidenceCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDisassociateAssessmentReportEvidenceResponse
+ * //   evidenceIds: [ // EvidenceIds
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   errors: [ // AssessmentReportEvidenceErrors
+ * //     { // AssessmentReportEvidenceError
+ * //       evidenceId: "STRING_VALUE",
+ * //       errorCode: "STRING_VALUE",
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDisassociateAssessmentReportEvidenceCommandInput - {@link BatchDisassociateAssessmentReportEvidenceCommandInput}
+ * @returns {@link BatchDisassociateAssessmentReportEvidenceCommandOutput}
  * @see {@link BatchDisassociateAssessmentReportEvidenceCommandInput} for command's `input` shape.
  * @see {@link BatchDisassociateAssessmentReportEvidenceCommandOutput} for command's `response` shape.
- * @see {@link AuditManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AuditManagerClientResolvedConfig | config} for AuditManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Your account isn't registered with Audit Manager. Check the delegated
+ *          administrator setup on the Audit Manager settings page, and try again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *          later. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource that's specified in the request can't be found. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AuditManagerServiceException}
+ * <p>Base exception class for all service exceptions from AuditManager service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDisassociateAssessmentReportEvidenceCommand extends $Command<
-  BatchDisassociateAssessmentReportEvidenceCommandInput,
-  BatchDisassociateAssessmentReportEvidenceCommandOutput,
-  AuditManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDisassociateAssessmentReportEvidenceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AuditManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    BatchDisassociateAssessmentReportEvidenceCommandInput,
-    BatchDisassociateAssessmentReportEvidenceCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AuditManagerClient";
-    const commandName = "BatchDisassociateAssessmentReportEvidenceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDisassociateAssessmentReportEvidenceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDisassociateAssessmentReportEvidenceResponse.filterSensitiveLog,
+export class BatchDisassociateAssessmentReportEvidenceCommand extends command<BatchDisassociateAssessmentReportEvidenceCommandInput, BatchDisassociateAssessmentReportEvidenceCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDisassociateAssessmentReportEvidence",
+  BatchDisassociateAssessmentReportEvidence$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDisassociateAssessmentReportEvidenceRequest;
+      output: BatchDisassociateAssessmentReportEvidenceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: BatchDisassociateAssessmentReportEvidenceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchDisassociateAssessmentReportEvidenceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchDisassociateAssessmentReportEvidenceCommandOutput> {
-    return deserializeAws_restJson1BatchDisassociateAssessmentReportEvidenceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDisassociateAssessmentReportEvidenceCommandInput;
+      output: BatchDisassociateAssessmentReportEvidenceCommandOutput;
+    };
+  };
 }

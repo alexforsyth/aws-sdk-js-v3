@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import { GetMemberRequest, GetMemberResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetMemberCommand,
-  serializeAws_restJson1GetMemberCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMemberRequest, GetMemberResponse } from "../models/models_0";
+import { GetMember$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMemberCommand}.
+ */
 export interface GetMemberCommandInput extends GetMemberRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMemberCommand}.
+ */
 export interface GetMemberCommandOutput extends GetMemberResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface GetMemberCommandOutput extends GetMemberResponse, __MetadataBea
  * ```javascript
  * import { Macie2Client, GetMemberCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, GetMemberCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // GetMemberRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetMemberCommand(input);
  * const response = await client.send(command);
+ * // { // GetMemberResponse
+ * //   accountId: "STRING_VALUE",
+ * //   administratorAccountId: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   email: "STRING_VALUE",
+ * //   invitedAt: new Date("TIMESTAMP"),
+ * //   masterAccountId: "STRING_VALUE",
+ * //   relationshipStatus: "Enabled" || "Paused" || "Invited" || "Created" || "Removed" || "Resigned" || "EmailVerificationInProgress" || "EmailVerificationFailed" || "RegionDisabled" || "AccountSuspended",
+ * //   tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   updatedAt: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetMemberCommandInput - {@link GetMemberCommandInput}
+ * @returns {@link GetMemberCommandOutput}
  * @see {@link GetMemberCommandInput} for command's `input` shape.
  * @see {@link GetMemberCommandOutput} for command's `response` shape.
- * @see {@link Macie2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetMemberCommand extends $Command<
-  GetMemberCommandInput,
-  GetMemberCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMemberCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMemberCommandInput, GetMemberCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "GetMemberCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMemberRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMemberResponse.filterSensitiveLog,
+export class GetMemberCommand extends command<GetMemberCommandInput, GetMemberCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMember",
+  GetMember$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMemberRequest;
+      output: GetMemberResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMemberCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMemberCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMemberCommandOutput> {
-    return deserializeAws_restJson1GetMemberCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMemberCommandInput;
+      output: GetMemberCommandOutput;
+    };
+  };
 }

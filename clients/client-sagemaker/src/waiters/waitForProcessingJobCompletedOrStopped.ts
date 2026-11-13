@@ -1,20 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeProcessingJobCommandInput,
+  type DescribeProcessingJobCommandOutput,
   DescribeProcessingJobCommand,
-  DescribeProcessingJobCommandInput,
 } from "../commands/DescribeProcessingJobCommand";
-import { SageMakerClient } from "../SageMakerClient";
+import type { SageMakerServiceException } from "../models/SageMakerServiceException";
+import type { SageMakerClient } from "../SageMakerClient";
 
-const checkState = async (client: SageMakerClient, input: DescribeProcessingJobCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SageMakerClient, input: DescribeProcessingJobCommandInput): Promise<WaiterResult<DescribeProcessingJobCommandOutput | SageMakerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeProcessingJobCommand(input));
+    let result: DescribeProcessingJobCommandOutput & any = await client.send(new DescribeProcessingJobCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.ProcessingJobStatus;
-      };
+      }
       if (returnComparator() === "Completed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -22,7 +31,7 @@ const checkState = async (client: SageMakerClient, input: DescribeProcessingJobC
     try {
       const returnComparator = () => {
         return result.ProcessingJobStatus;
-      };
+      }
       if (returnComparator() === "Stopped") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -30,14 +39,14 @@ const checkState = async (client: SageMakerClient, input: DescribeProcessingJobC
     try {
       const returnComparator = () => {
         return result.ProcessingJobStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ValidationException") {
+    if (exception.name === "ValidationException") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -50,8 +59,8 @@ const checkState = async (client: SageMakerClient, input: DescribeProcessingJobC
 export const waitForProcessingJobCompletedOrStopped = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeProcessingJobCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<DescribeProcessingJobCommandOutput | SageMakerServiceException>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -62,8 +71,8 @@ export const waitForProcessingJobCompletedOrStopped = async (
 export const waitUntilProcessingJobCompletedOrStopped = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeProcessingJobCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<DescribeProcessingJobCommandOutput>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeProcessingJobCommandOutput>;
 };

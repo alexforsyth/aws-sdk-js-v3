@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisassociateWirelessDeviceFromThingRequest,
   DisassociateWirelessDeviceFromThingResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateWirelessDeviceFromThingCommand,
-  serializeAws_restJson1DisassociateWirelessDeviceFromThingCommand,
-} from "../protocols/Aws_restJson1";
+import { DisassociateWirelessDeviceFromThing$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateWirelessDeviceFromThingCommand}.
+ */
 export interface DisassociateWirelessDeviceFromThingCommandInput extends DisassociateWirelessDeviceFromThingRequest {}
-export interface DisassociateWirelessDeviceFromThingCommandOutput
-  extends DisassociateWirelessDeviceFromThingResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateWirelessDeviceFromThingCommand}.
+ */
+export interface DisassociateWirelessDeviceFromThingCommandOutput extends DisassociateWirelessDeviceFromThingResponse, __MetadataBearer {}
 
 /**
  * <p>Disassociates a wireless device from its currently associated thing.</p>
@@ -33,74 +32,63 @@ export interface DisassociateWirelessDeviceFromThingCommandOutput
  * ```javascript
  * import { IoTWirelessClient, DisassociateWirelessDeviceFromThingCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, DisassociateWirelessDeviceFromThingCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // DisassociateWirelessDeviceFromThingRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateWirelessDeviceFromThingCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateWirelessDeviceFromThingCommandInput - {@link DisassociateWirelessDeviceFromThingCommandInput}
+ * @returns {@link DisassociateWirelessDeviceFromThingCommandOutput}
  * @see {@link DisassociateWirelessDeviceFromThingCommandInput} for command's `input` shape.
  * @see {@link DisassociateWirelessDeviceFromThingCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateWirelessDeviceFromThingCommand extends $Command<
-  DisassociateWirelessDeviceFromThingCommandInput,
-  DisassociateWirelessDeviceFromThingCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateWirelessDeviceFromThingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateWirelessDeviceFromThingCommandInput, DisassociateWirelessDeviceFromThingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "DisassociateWirelessDeviceFromThingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateWirelessDeviceFromThingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateWirelessDeviceFromThingResponse.filterSensitiveLog,
+export class DisassociateWirelessDeviceFromThingCommand extends command<DisassociateWirelessDeviceFromThingCommandInput, DisassociateWirelessDeviceFromThingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateWirelessDeviceFromThing",
+  DisassociateWirelessDeviceFromThing$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateWirelessDeviceFromThingRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateWirelessDeviceFromThingCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateWirelessDeviceFromThingCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateWirelessDeviceFromThingCommandOutput> {
-    return deserializeAws_restJson1DisassociateWirelessDeviceFromThingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateWirelessDeviceFromThingCommandInput;
+      output: DisassociateWirelessDeviceFromThingCommandOutput;
+    };
+  };
 }

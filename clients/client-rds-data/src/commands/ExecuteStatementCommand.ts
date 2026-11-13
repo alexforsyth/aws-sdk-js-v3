@@ -1,101 +1,257 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ExecuteStatementRequest, ExecuteStatementResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ExecuteStatementCommand,
-  serializeAws_restJson1ExecuteStatementCommand,
-} from "../protocols/Aws_restJson1";
-import { RDSDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSDataClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ExecuteStatementRequest, ExecuteStatementResponse } from "../models/models_0";
+import { ExecuteStatement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ExecuteStatementCommand}.
+ */
 export interface ExecuteStatementCommandInput extends ExecuteStatementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ExecuteStatementCommand}.
+ */
 export interface ExecuteStatementCommandOutput extends ExecuteStatementResponse, __MetadataBearer {}
 
 /**
- * <p>Runs a SQL statement against a database.</p>
- *         <important>
- *             <p>If a call isn't part of a transaction because it doesn't include the
- *                     <code>transactionID</code> parameter, changes that result from the call are
- *                 committed automatically.</p>
- *         </important>
- *         <p>The response size limit is 1 MB. If the call returns more than 1 MB of response data, the call is terminated.</p>
+ * <p>Runs a SQL statement against a database.</p> <note> <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSDataClient, ExecuteStatementCommand } from "@aws-sdk/client-rds-data"; // ES Modules import
  * // const { RDSDataClient, ExecuteStatementCommand } = require("@aws-sdk/client-rds-data"); // CommonJS import
+ * // import type { RDSDataClientConfig } from "@aws-sdk/client-rds-data";
+ * const config = {}; // type is RDSDataClientConfig
  * const client = new RDSDataClient(config);
+ * const input = { // ExecuteStatementRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   secretArn: "STRING_VALUE", // required
+ *   sql: "STRING_VALUE", // required
+ *   database: "STRING_VALUE",
+ *   schema: "STRING_VALUE",
+ *   parameters: [ // SqlParametersList
+ *     { // SqlParameter
+ *       name: "STRING_VALUE",
+ *       value: { // Field Union: only one key present
+ *         isNull: true || false,
+ *         booleanValue: true || false,
+ *         longValue: Number("long"),
+ *         doubleValue: Number("double"),
+ *         stringValue: "STRING_VALUE",
+ *         blobValue: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *         arrayValue: { // ArrayValue Union: only one key present
+ *           booleanValues: [ // BooleanArray
+ *             true || false,
+ *           ],
+ *           longValues: [ // LongArray
+ *             Number("long"),
+ *           ],
+ *           doubleValues: [ // DoubleArray
+ *             Number("double"),
+ *           ],
+ *           stringValues: [ // StringArray
+ *             "STRING_VALUE",
+ *           ],
+ *           arrayValues: [ // ArrayOfArray
+ *             {//  Union: only one key present
+ *               booleanValues: [
+ *                 true || false,
+ *               ],
+ *               longValues: [
+ *                 Number("long"),
+ *               ],
+ *               doubleValues: [
+ *                 Number("double"),
+ *               ],
+ *               stringValues: [
+ *                 "STRING_VALUE",
+ *               ],
+ *               arrayValues: [
+ *                 "<ArrayValue>",
+ *               ],
+ *             },
+ *           ],
+ *         },
+ *       },
+ *       typeHint: "JSON" || "UUID" || "TIMESTAMP" || "DATE" || "TIME" || "DECIMAL",
+ *     },
+ *   ],
+ *   transactionId: "STRING_VALUE",
+ *   includeResultMetadata: true || false,
+ *   continueAfterTimeout: true || false,
+ *   resultSetOptions: { // ResultSetOptions
+ *     decimalReturnType: "STRING" || "DOUBLE_OR_LONG",
+ *     longReturnType: "STRING" || "LONG",
+ *   },
+ *   formatRecordsAs: "NONE" || "JSON",
+ * };
  * const command = new ExecuteStatementCommand(input);
  * const response = await client.send(command);
+ * // { // ExecuteStatementResponse
+ * //   records: [ // SqlRecords
+ * //     [ // FieldList
+ * //       { // Field Union: only one key present
+ * //         isNull: true || false,
+ * //         booleanValue: true || false,
+ * //         longValue: Number("long"),
+ * //         doubleValue: Number("double"),
+ * //         stringValue: "STRING_VALUE",
+ * //         blobValue: new Uint8Array(),
+ * //         arrayValue: { // ArrayValue Union: only one key present
+ * //           booleanValues: [ // BooleanArray
+ * //             true || false,
+ * //           ],
+ * //           longValues: [ // LongArray
+ * //             Number("long"),
+ * //           ],
+ * //           doubleValues: [ // DoubleArray
+ * //             Number("double"),
+ * //           ],
+ * //           stringValues: [ // StringArray
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           arrayValues: [ // ArrayOfArray
+ * //             {//  Union: only one key present
+ * //               booleanValues: [
+ * //                 true || false,
+ * //               ],
+ * //               longValues: [
+ * //                 Number("long"),
+ * //               ],
+ * //               doubleValues: [
+ * //                 Number("double"),
+ * //               ],
+ * //               stringValues: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               arrayValues: [
+ * //                 "<ArrayValue>",
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //   ],
+ * //   columnMetadata: [ // Metadata
+ * //     { // ColumnMetadata
+ * //       name: "STRING_VALUE",
+ * //       type: Number("int"),
+ * //       typeName: "STRING_VALUE",
+ * //       label: "STRING_VALUE",
+ * //       schemaName: "STRING_VALUE",
+ * //       tableName: "STRING_VALUE",
+ * //       isAutoIncrement: true || false,
+ * //       isSigned: true || false,
+ * //       isCurrency: true || false,
+ * //       isCaseSensitive: true || false,
+ * //       nullable: Number("int"),
+ * //       precision: Number("int"),
+ * //       scale: Number("int"),
+ * //       arrayBaseColumnType: Number("int"),
+ * //     },
+ * //   ],
+ * //   numberOfRecordsUpdated: Number("long"),
+ * //   generatedFields: [
+ * //     {//  Union: only one key present
+ * //       isNull: true || false,
+ * //       booleanValue: true || false,
+ * //       longValue: Number("long"),
+ * //       doubleValue: Number("double"),
+ * //       stringValue: "STRING_VALUE",
+ * //       blobValue: new Uint8Array(),
+ * //       arrayValue: "<ArrayValue>",
+ * //     },
+ * //   ],
+ * //   formattedRecords: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ExecuteStatementCommandInput - {@link ExecuteStatementCommandInput}
+ * @returns {@link ExecuteStatementCommandOutput}
  * @see {@link ExecuteStatementCommandInput} for command's `input` shape.
  * @see {@link ExecuteStatementCommandOutput} for command's `response` shape.
- * @see {@link RDSDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSDataClientResolvedConfig | config} for RDSDataClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>There is an error in the call or in a SQL statement. This exception is deprecated.</p>
+ *
+ * @throws {@link DatabaseErrorException} (client fault)
+ *  <p>There was an error in processing the SQL statement.</p>
+ *
+ * @throws {@link DatabaseNotFoundException} (client fault)
+ *  <p>The DB cluster doesn't have a DB instance.</p>
+ *
+ * @throws {@link DatabaseResumingException} (client fault)
+ *  <p>A request was cancelled because the Aurora Serverless DB instance was paused. The Data API request automatically resumes the DB instance. Wait a few seconds and try again.</p>
+ *
+ * @throws {@link DatabaseUnavailableException} (server fault)
+ *  <p>The writer instance in the DB cluster isn't available.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>There are insufficient privileges to make the call.</p>
+ *
+ * @throws {@link HttpEndpointNotEnabledException} (client fault)
+ *  <p>The HTTP endpoint for using RDS Data API isn't enabled for the DB cluster.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link InvalidResourceStateException} (client fault)
+ *  <p>The resource is in an invalid state.</p>
+ *
+ * @throws {@link InvalidSecretException} (client fault)
+ *  <p>The Secrets Manager secret used with the request isn't valid.</p>
+ *
+ * @throws {@link SecretsErrorException} (client fault)
+ *  <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p> <ul> <li> <p>RDS Data API timed out retrieving the secret.</p> </li> <li> <p>The secret provided wasn't found.</p> </li> <li> <p>The secret couldn't be decrypted.</p> </li> </ul>
+ *
+ * @throws {@link ServiceUnavailableError} (server fault)
+ *  <p>The service specified by the <code>resourceArn</code> parameter isn't available.</p>
+ *
+ * @throws {@link StatementTimeoutException} (client fault)
+ *  <p>The execution of the SQL statement timed out.</p>
+ *
+ * @throws {@link TransactionNotFoundException} (client fault)
+ *  <p>The transaction ID wasn't found.</p>
+ *
+ * @throws {@link UnsupportedResultException} (client fault)
+ *  <p>There was a problem with the result because of one of the following conditions:</p> <ul> <li> <p>It contained an unsupported data type.</p> </li> <li> <p>It contained a multidimensional array.</p> </li> <li> <p>The size was too large.</p> </li> </ul>
+ *
+ * @throws {@link RDSDataServiceException}
+ * <p>Base exception class for all service exceptions from RDSData service.</p>
+ *
+ *
+ * @public
  */
-export class ExecuteStatementCommand extends $Command<
-  ExecuteStatementCommandInput,
-  ExecuteStatementCommandOutput,
-  RDSDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ExecuteStatementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ExecuteStatementCommandInput, ExecuteStatementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSDataClient";
-    const commandName = "ExecuteStatementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ExecuteStatementRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ExecuteStatementResponse.filterSensitiveLog,
+export class ExecuteStatementCommand extends command<ExecuteStatementCommandInput, ExecuteStatementCommandOutput>(
+  _ep0,
+  _mw0,
+  "ExecuteStatement",
+  ExecuteStatement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExecuteStatementRequest;
+      output: ExecuteStatementResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ExecuteStatementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ExecuteStatementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ExecuteStatementCommandOutput> {
-    return deserializeAws_restJson1ExecuteStatementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ExecuteStatementCommandInput;
+      output: ExecuteStatementCommandOutput;
+    };
+  };
 }

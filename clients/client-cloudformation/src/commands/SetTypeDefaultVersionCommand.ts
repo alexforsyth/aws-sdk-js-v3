@@ -1,96 +1,83 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { SetTypeDefaultVersionInput, SetTypeDefaultVersionOutput } from "../models/models_0";
-import {
-  deserializeAws_querySetTypeDefaultVersionCommand,
-  serializeAws_querySetTypeDefaultVersionCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetTypeDefaultVersionInput, SetTypeDefaultVersionOutput } from "../models/models_0";
+import { SetTypeDefaultVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetTypeDefaultVersionCommand}.
+ */
 export interface SetTypeDefaultVersionCommandInput extends SetTypeDefaultVersionInput {}
+/**
+ * @public
+ *
+ * The output of {@link SetTypeDefaultVersionCommand}.
+ */
 export interface SetTypeDefaultVersionCommandOutput extends SetTypeDefaultVersionOutput, __MetadataBearer {}
 
 /**
  * <p>Specify the default version of an extension. The default version of an extension will be
- *          used in CloudFormation operations.</p>
+ *       used in CloudFormation operations.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, SetTypeDefaultVersionCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, SetTypeDefaultVersionCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // SetTypeDefaultVersionInput
+ *   Arn: "STRING_VALUE",
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   TypeName: "STRING_VALUE",
+ *   VersionId: "STRING_VALUE",
+ * };
  * const command = new SetTypeDefaultVersionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetTypeDefaultVersionCommandInput - {@link SetTypeDefaultVersionCommandInput}
+ * @returns {@link SetTypeDefaultVersionCommandOutput}
  * @see {@link SetTypeDefaultVersionCommandInput} for command's `input` shape.
  * @see {@link SetTypeDefaultVersionCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link TypeNotFoundException} (client fault)
+ *  <p>The specified extension doesn't exist in the CloudFormation registry.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class SetTypeDefaultVersionCommand extends $Command<
-  SetTypeDefaultVersionCommandInput,
-  SetTypeDefaultVersionCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetTypeDefaultVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetTypeDefaultVersionCommandInput, SetTypeDefaultVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "SetTypeDefaultVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetTypeDefaultVersionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SetTypeDefaultVersionOutput.filterSensitiveLog,
+export class SetTypeDefaultVersionCommand extends command<SetTypeDefaultVersionCommandInput, SetTypeDefaultVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetTypeDefaultVersion",
+  SetTypeDefaultVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetTypeDefaultVersionInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetTypeDefaultVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_querySetTypeDefaultVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetTypeDefaultVersionCommandOutput> {
-    return deserializeAws_querySetTypeDefaultVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetTypeDefaultVersionCommandInput;
+      output: SetTypeDefaultVersionCommandOutput;
+    };
+  };
 }

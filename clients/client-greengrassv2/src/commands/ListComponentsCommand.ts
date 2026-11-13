@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassV2Client";
-import { ListComponentsRequest, ListComponentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListComponentsCommand,
-  serializeAws_restJson1ListComponentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListComponentsRequest, ListComponentsResponse } from "../models/models_0";
+import { ListComponents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListComponentsCommand}.
+ */
 export interface ListComponentsCommandInput extends ListComponentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListComponentsCommand}.
+ */
 export interface ListComponentsCommandOutput extends ListComponentsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,87 @@ export interface ListComponentsCommandOutput extends ListComponentsResponse, __M
  * ```javascript
  * import { GreengrassV2Client, ListComponentsCommand } from "@aws-sdk/client-greengrassv2"; // ES Modules import
  * // const { GreengrassV2Client, ListComponentsCommand } = require("@aws-sdk/client-greengrassv2"); // CommonJS import
+ * // import type { GreengrassV2ClientConfig } from "@aws-sdk/client-greengrassv2";
+ * const config = {}; // type is GreengrassV2ClientConfig
  * const client = new GreengrassV2Client(config);
+ * const input = { // ListComponentsRequest
+ *   scope: "PRIVATE" || "PUBLIC",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListComponentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListComponentsResponse
+ * //   components: [ // ComponentList
+ * //     { // Component
+ * //       arn: "STRING_VALUE",
+ * //       componentName: "STRING_VALUE",
+ * //       latestVersion: { // ComponentLatestVersion
+ * //         arn: "STRING_VALUE",
+ * //         componentVersion: "STRING_VALUE",
+ * //         creationTimestamp: new Date("TIMESTAMP"),
+ * //         description: "STRING_VALUE",
+ * //         publisher: "STRING_VALUE",
+ * //         platforms: [ // ComponentPlatformList
+ * //           { // ComponentPlatform
+ * //             name: "STRING_VALUE",
+ * //             attributes: { // PlatformAttributesMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListComponentsCommandInput - {@link ListComponentsCommandInput}
+ * @returns {@link ListComponentsCommandOutput}
  * @see {@link ListComponentsCommandInput} for command's `input` shape.
  * @see {@link ListComponentsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassV2ClientResolvedConfig | config} for GreengrassV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>IoT Greengrass can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a request rate quota. For example, you might have exceeded the
+ *       amount of times that you can retrieve device or deployment status per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters.</p>
+ *
+ * @throws {@link GreengrassV2ServiceException}
+ * <p>Base exception class for all service exceptions from GreengrassV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListComponentsCommand extends $Command<
-  ListComponentsCommandInput,
-  ListComponentsCommandOutput,
-  GreengrassV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListComponentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListComponentsCommandInput, ListComponentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassV2Client";
-    const commandName = "ListComponentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListComponentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListComponentsResponse.filterSensitiveLog,
+export class ListComponentsCommand extends command<ListComponentsCommandInput, ListComponentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListComponents",
+  ListComponents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListComponentsRequest;
+      output: ListComponentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListComponentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListComponentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListComponentsCommandOutput> {
-    return deserializeAws_restJson1ListComponentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListComponentsCommandInput;
+      output: ListComponentsCommandOutput;
+    };
+  };
 }

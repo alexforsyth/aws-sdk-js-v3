@@ -1,0 +1,92 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLimitRequest, UpdateLimitResponse } from "../models/models_1";
+import { UpdateLimit$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLimitCommand}.
+ */
+export interface UpdateLimitCommandInput extends UpdateLimitRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLimitCommand}.
+ */
+export interface UpdateLimitCommandOutput extends UpdateLimitResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the properties of the specified limit. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateLimitCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateLimitCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateLimitRequest
+ *   farmId: "STRING_VALUE", // required
+ *   limitId: "STRING_VALUE", // required
+ *   displayName: "STRING_VALUE",
+ *   description: "STRING_VALUE",
+ *   maxCount: Number("int"),
+ * };
+ * const command = new UpdateLimitCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateLimitCommandInput - {@link UpdateLimitCommandInput}
+ * @returns {@link UpdateLimitCommandOutput}
+ * @see {@link UpdateLimitCommandInput} for command's `input` shape.
+ * @see {@link UpdateLimitCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateLimitCommand extends command<UpdateLimitCommandInput, UpdateLimitCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLimit",
+  UpdateLimit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLimitRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateLimitCommandInput;
+      output: UpdateLimitCommandOutput;
+    };
+  };
+}

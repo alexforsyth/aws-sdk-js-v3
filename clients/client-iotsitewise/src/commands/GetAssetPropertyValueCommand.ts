@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { GetAssetPropertyValueRequest, GetAssetPropertyValueResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAssetPropertyValueCommand,
-  serializeAws_restJson1GetAssetPropertyValueCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAssetPropertyValueRequest, GetAssetPropertyValueResponse } from "../models/models_1";
+import { GetAssetPropertyValue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAssetPropertyValueCommand}.
+ */
 export interface GetAssetPropertyValueCommandInput extends GetAssetPropertyValueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAssetPropertyValueCommand}.
+ */
 export interface GetAssetPropertyValueCommandOutput extends GetAssetPropertyValueResponse, __MetadataBearer {}
 
 /**
@@ -39,68 +40,83 @@ export interface GetAssetPropertyValueCommandOutput extends GetAssetPropertyValu
  * ```javascript
  * import { IoTSiteWiseClient, GetAssetPropertyValueCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, GetAssetPropertyValueCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // GetAssetPropertyValueRequest
+ *   assetId: "STRING_VALUE",
+ *   propertyId: "STRING_VALUE",
+ *   propertyAlias: "STRING_VALUE",
+ * };
  * const command = new GetAssetPropertyValueCommand(input);
  * const response = await client.send(command);
+ * // { // GetAssetPropertyValueResponse
+ * //   propertyValue: { // AssetPropertyValue
+ * //     value: { // Variant
+ * //       stringValue: "STRING_VALUE",
+ * //       integerValue: Number("int"),
+ * //       doubleValue: Number("double"),
+ * //       booleanValue: true || false,
+ * //       nullValue: { // PropertyValueNullValue
+ * //         valueType: "D" || "B" || "S" || "I" || "U", // required
+ * //       },
+ * //     },
+ * //     timestamp: { // TimeInNanos
+ * //       timeInSeconds: Number("long"), // required
+ * //       offsetInNanos: Number("int"),
+ * //     },
+ * //     quality: "GOOD" || "BAD" || "UNCERTAIN",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAssetPropertyValueCommandInput - {@link GetAssetPropertyValueCommandInput}
+ * @returns {@link GetAssetPropertyValueCommandOutput}
  * @see {@link GetAssetPropertyValueCommandInput} for command's `input` shape.
  * @see {@link GetAssetPropertyValueCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The requested service is unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class GetAssetPropertyValueCommand extends $Command<
-  GetAssetPropertyValueCommandInput,
-  GetAssetPropertyValueCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAssetPropertyValueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAssetPropertyValueCommandInput, GetAssetPropertyValueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "GetAssetPropertyValueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAssetPropertyValueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAssetPropertyValueResponse.filterSensitiveLog,
+export class GetAssetPropertyValueCommand extends command<GetAssetPropertyValueCommandInput, GetAssetPropertyValueCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAssetPropertyValue",
+  GetAssetPropertyValue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAssetPropertyValueRequest;
+      output: GetAssetPropertyValueResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAssetPropertyValueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAssetPropertyValueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAssetPropertyValueCommandOutput> {
-    return deserializeAws_restJson1GetAssetPropertyValueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAssetPropertyValueCommandInput;
+      output: GetAssetPropertyValueCommandOutput;
+    };
+  };
 }

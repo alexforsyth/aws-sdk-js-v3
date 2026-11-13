@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRPUBLICClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRPUBLICClient";
-import { SetRepositoryPolicyRequest, SetRepositoryPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SetRepositoryPolicyCommand,
-  serializeAws_json1_1SetRepositoryPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetRepositoryPolicyRequest, SetRepositoryPolicyResponse } from "../models/models_0";
+import { SetRepositoryPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetRepositoryPolicyCommand}.
+ */
 export interface SetRepositoryPolicyCommandInput extends SetRepositoryPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SetRepositoryPolicyCommand}.
+ */
 export interface SetRepositoryPolicyCommandOutput extends SetRepositoryPolicyResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,66 @@ export interface SetRepositoryPolicyCommandOutput extends SetRepositoryPolicyRes
  * ```javascript
  * import { ECRPUBLICClient, SetRepositoryPolicyCommand } from "@aws-sdk/client-ecr-public"; // ES Modules import
  * // const { ECRPUBLICClient, SetRepositoryPolicyCommand } = require("@aws-sdk/client-ecr-public"); // CommonJS import
+ * // import type { ECRPUBLICClientConfig } from "@aws-sdk/client-ecr-public";
+ * const config = {}; // type is ECRPUBLICClientConfig
  * const client = new ECRPUBLICClient(config);
+ * const input = { // SetRepositoryPolicyRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   policyText: "STRING_VALUE", // required
+ *   force: true || false,
+ * };
  * const command = new SetRepositoryPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // SetRepositoryPolicyResponse
+ * //   registryId: "STRING_VALUE",
+ * //   repositoryName: "STRING_VALUE",
+ * //   policyText: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SetRepositoryPolicyCommandInput - {@link SetRepositoryPolicyCommandInput}
+ * @returns {@link SetRepositoryPolicyCommandOutput}
  * @see {@link SetRepositoryPolicyCommandInput} for command's `input` shape.
  * @see {@link SetRepositoryPolicyCommandOutput} for command's `response` shape.
- * @see {@link ECRPUBLICClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRPUBLICClientResolvedConfig | config} for ECRPUBLICClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *          request.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository can't be found. Check the spelling of the specified repository
+ *          and ensure that you're performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link UnsupportedCommandException} (client fault)
+ *  <p>The action isn't supported in this Region.</p>
+ *
+ * @throws {@link ECRPUBLICServiceException}
+ * <p>Base exception class for all service exceptions from ECRPUBLIC service.</p>
+ *
+ *
+ * @public
  */
-export class SetRepositoryPolicyCommand extends $Command<
-  SetRepositoryPolicyCommandInput,
-  SetRepositoryPolicyCommandOutput,
-  ECRPUBLICClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetRepositoryPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRPUBLICClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetRepositoryPolicyCommandInput, SetRepositoryPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRPUBLICClient";
-    const commandName = "SetRepositoryPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetRepositoryPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetRepositoryPolicyResponse.filterSensitiveLog,
+export class SetRepositoryPolicyCommand extends command<SetRepositoryPolicyCommandInput, SetRepositoryPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetRepositoryPolicy",
+  SetRepositoryPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetRepositoryPolicyRequest;
+      output: SetRepositoryPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetRepositoryPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SetRepositoryPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetRepositoryPolicyCommandOutput> {
-    return deserializeAws_json1_1SetRepositoryPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetRepositoryPolicyCommandInput;
+      output: SetRepositoryPolicyCommandOutput;
+    };
+  };
 }

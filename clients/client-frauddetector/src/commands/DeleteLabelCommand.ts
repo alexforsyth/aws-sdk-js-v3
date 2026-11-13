@@ -1,99 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FraudDetectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FraudDetectorClient";
-import { DeleteLabelRequest, DeleteLabelResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteLabelCommand,
-  serializeAws_json1_1DeleteLabelCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteLabelRequest, DeleteLabelResult } from "../models/models_0";
+import { DeleteLabel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteLabelCommand}.
+ */
 export interface DeleteLabelCommandInput extends DeleteLabelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteLabelCommand}.
+ */
 export interface DeleteLabelCommandOutput extends DeleteLabelResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a label.</p>
- * 	        <p>You cannot delete labels that are included in an event type in Amazon Fraud Detector.</p>
+ *          <p>You cannot delete labels that are included in an event type in Amazon Fraud Detector.</p>
  *          <p>You cannot delete a label assigned to an event ID. You must first delete the relevant event ID.</p>
- *
  *          <p>When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FraudDetectorClient, DeleteLabelCommand } from "@aws-sdk/client-frauddetector"; // ES Modules import
  * // const { FraudDetectorClient, DeleteLabelCommand } = require("@aws-sdk/client-frauddetector"); // CommonJS import
+ * // import type { FraudDetectorClientConfig } from "@aws-sdk/client-frauddetector";
+ * const config = {}; // type is FraudDetectorClientConfig
  * const client = new FraudDetectorClient(config);
+ * const input = { // DeleteLabelRequest
+ *   name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteLabelCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteLabelCommandInput - {@link DeleteLabelCommandInput}
+ * @returns {@link DeleteLabelCommandOutput}
  * @see {@link DeleteLabelCommandInput} for command's `input` shape.
  * @see {@link DeleteLabelCommandOutput} for command's `response` shape.
- * @see {@link FraudDetectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FraudDetectorClientResolvedConfig | config} for FraudDetectorClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>An exception indicating there was a conflict during a delete operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception indicating an internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>An exception indicating a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception indicating a specified value is not allowed.</p>
+ *
+ * @throws {@link FraudDetectorServiceException}
+ * <p>Base exception class for all service exceptions from FraudDetector service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteLabelCommand extends $Command<
-  DeleteLabelCommandInput,
-  DeleteLabelCommandOutput,
-  FraudDetectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteLabelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FraudDetectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteLabelCommandInput, DeleteLabelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FraudDetectorClient";
-    const commandName = "DeleteLabelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteLabelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteLabelResult.filterSensitiveLog,
+export class DeleteLabelCommand extends command<DeleteLabelCommandInput, DeleteLabelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteLabel",
+  DeleteLabel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLabelRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteLabelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteLabelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteLabelCommandOutput> {
-    return deserializeAws_json1_1DeleteLabelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteLabelCommandInput;
+      output: DeleteLabelCommandOutput;
+    };
+  };
 }

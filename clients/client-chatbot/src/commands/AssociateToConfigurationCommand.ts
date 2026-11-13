@@ -1,0 +1,97 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateToConfigurationRequest, AssociateToConfigurationResult } from "../models/models_0";
+import { AssociateToConfiguration$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateToConfigurationCommand}.
+ */
+export interface AssociateToConfigurationCommandInput extends AssociateToConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateToConfigurationCommand}.
+ */
+export interface AssociateToConfigurationCommandOutput extends AssociateToConfigurationResult, __MetadataBearer {}
+
+/**
+ * <p>Links a resource (for example, a custom action) to a channel configuration.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ChatbotClient, AssociateToConfigurationCommand } from "@aws-sdk/client-chatbot"; // ES Modules import
+ * // const { ChatbotClient, AssociateToConfigurationCommand } = require("@aws-sdk/client-chatbot"); // CommonJS import
+ * // import type { ChatbotClientConfig } from "@aws-sdk/client-chatbot";
+ * const config = {}; // type is ChatbotClientConfig
+ * const client = new ChatbotClient(config);
+ * const input = { // AssociateToConfigurationRequest
+ *   Resource: "STRING_VALUE", // required
+ *   ChatConfiguration: "STRING_VALUE", // required
+ * };
+ * const command = new AssociateToConfigurationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param AssociateToConfigurationCommandInput - {@link AssociateToConfigurationCommandInput}
+ * @returns {@link AssociateToConfigurationCommandOutput}
+ * @see {@link AssociateToConfigurationCommandInput} for command's `input` shape.
+ * @see {@link AssociateToConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link ChatbotClientResolvedConfig | config} for ChatbotClient's `config` shape.
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>Unexpected error during processing of request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Your request input doesn't meet the constraints required by AWS Chatbot.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request was rejected because it doesn't have valid credentials for the target resource.</p>
+ *
+ * @throws {@link ChatbotServiceException}
+ * <p>Base exception class for all service exceptions from Chatbot service.</p>
+ *
+ *
+ * @example Associate a custom action to a configuration
+ * ```javascript
+ * // Associate a custom action to a channel configuration, allowing it to be used in that channel
+ * const input = {
+ *   ChatConfiguration: "arn:aws:chatbot::1234567890:chat-configuration/slack-channel/my-channel",
+ *   Resource: "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+ * };
+ * const command = new AssociateToConfigurationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class AssociateToConfigurationCommand extends command<AssociateToConfigurationCommandInput, AssociateToConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateToConfiguration",
+  AssociateToConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateToConfigurationRequest;
+      output: {};
+    };
+    sdk: {
+      input: AssociateToConfigurationCommandInput;
+      output: AssociateToConfigurationCommandOutput;
+    };
+  };
+}

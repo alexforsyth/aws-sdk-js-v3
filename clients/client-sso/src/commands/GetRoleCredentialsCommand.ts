@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRoleCredentialsRequest, GetRoleCredentialsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRoleCredentialsCommand,
-  serializeAws_restJson1GetRoleCredentialsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOClientResolvedConfig } from "../SSOClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRoleCredentialsRequest, GetRoleCredentialsResponse } from "../models/models_0";
+import { GetRoleCredentials$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRoleCredentialsCommand}.
+ */
 export interface GetRoleCredentialsCommandInput extends GetRoleCredentialsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRoleCredentialsCommand}.
+ */
 export interface GetRoleCredentialsCommandOutput extends GetRoleCredentialsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,69 @@ export interface GetRoleCredentialsCommandOutput extends GetRoleCredentialsRespo
  * ```javascript
  * import { SSOClient, GetRoleCredentialsCommand } from "@aws-sdk/client-sso"; // ES Modules import
  * // const { SSOClient, GetRoleCredentialsCommand } = require("@aws-sdk/client-sso"); // CommonJS import
+ * // import type { SSOClientConfig } from "@aws-sdk/client-sso";
+ * const config = {}; // type is SSOClientConfig
  * const client = new SSOClient(config);
+ * const input = { // GetRoleCredentialsRequest
+ *   roleName: "STRING_VALUE", // required
+ *   accountId: "STRING_VALUE", // required
+ *   accessToken: "STRING_VALUE", // required
+ * };
  * const command = new GetRoleCredentialsCommand(input);
  * const response = await client.send(command);
+ * // { // GetRoleCredentialsResponse
+ * //   roleCredentials: { // RoleCredentials
+ * //     accessKeyId: "STRING_VALUE",
+ * //     secretAccessKey: "STRING_VALUE",
+ * //     sessionToken: "STRING_VALUE",
+ * //     expiration: Number("long"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRoleCredentialsCommandInput - {@link GetRoleCredentialsCommandInput}
+ * @returns {@link GetRoleCredentialsCommandOutput}
  * @see {@link GetRoleCredentialsCommandInput} for command's `input` shape.
  * @see {@link GetRoleCredentialsCommandOutput} for command's `response` shape.
- * @see {@link SSOClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOClientResolvedConfig | config} for SSOClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that a problem occurred with the input to the request. For example, a required
+ *       parameter might be missing or out of range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Indicates that the request is being made too frequently and is more than what the server
+ *       can handle.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Indicates that the request is not authorized. This can happen due to an invalid access
+ *       token in the request.</p>
+ *
+ * @throws {@link SSOServiceException}
+ * <p>Base exception class for all service exceptions from SSO service.</p>
+ *
+ *
+ * @public
  */
-export class GetRoleCredentialsCommand extends $Command<
-  GetRoleCredentialsCommandInput,
-  GetRoleCredentialsCommandOutput,
-  SSOClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRoleCredentialsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRoleCredentialsCommandInput, GetRoleCredentialsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOClient";
-    const commandName = "GetRoleCredentialsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRoleCredentialsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRoleCredentialsResponse.filterSensitiveLog,
+export class GetRoleCredentialsCommand extends command<GetRoleCredentialsCommandInput, GetRoleCredentialsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRoleCredentials",
+  GetRoleCredentials$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRoleCredentialsRequest;
+      output: GetRoleCredentialsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRoleCredentialsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRoleCredentialsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRoleCredentialsCommandOutput> {
-    return deserializeAws_restJson1GetRoleCredentialsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRoleCredentialsCommandInput;
+      output: GetRoleCredentialsCommandOutput;
+    };
+  };
 }

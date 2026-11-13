@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyTransitGatewayVpcAttachmentRequest, ModifyTransitGatewayVpcAttachmentResult } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyTransitGatewayVpcAttachmentCommand,
-  serializeAws_ec2ModifyTransitGatewayVpcAttachmentCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ModifyTransitGatewayVpcAttachmentRequest,
+  ModifyTransitGatewayVpcAttachmentResult,
+} from "../models/models_7";
+import { ModifyTransitGatewayVpcAttachment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyTransitGatewayVpcAttachmentCommand}.
+ */
 export interface ModifyTransitGatewayVpcAttachmentCommandInput extends ModifyTransitGatewayVpcAttachmentRequest {}
-export interface ModifyTransitGatewayVpcAttachmentCommandOutput
-  extends ModifyTransitGatewayVpcAttachmentResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyTransitGatewayVpcAttachmentCommand}.
+ */
+export interface ModifyTransitGatewayVpcAttachmentCommandOutput extends ModifyTransitGatewayVpcAttachmentResult, __MetadataBearer {}
 
 /**
  * <p>Modifies the specified VPC attachment.</p>
@@ -30,74 +32,82 @@ export interface ModifyTransitGatewayVpcAttachmentCommandOutput
  * ```javascript
  * import { EC2Client, ModifyTransitGatewayVpcAttachmentCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyTransitGatewayVpcAttachmentCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyTransitGatewayVpcAttachmentRequest
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   AddSubnetIds: [ // TransitGatewaySubnetIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   RemoveSubnetIds: [
+ *     "STRING_VALUE",
+ *   ],
+ *   Options: { // ModifyTransitGatewayVpcAttachmentRequestOptions
+ *     DnsSupport: "enable" || "disable",
+ *     SecurityGroupReferencingSupport: "enable" || "disable",
+ *     Ipv6Support: "enable" || "disable",
+ *     ApplianceModeSupport: "enable" || "disable",
+ *   },
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyTransitGatewayVpcAttachmentCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyTransitGatewayVpcAttachmentResult
+ * //   TransitGatewayVpcAttachment: { // TransitGatewayVpcAttachment
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     VpcOwnerId: "STRING_VALUE",
+ * //     State: "initiating" || "initiatingRequest" || "pendingAcceptance" || "rollingBack" || "pending" || "available" || "modifying" || "deleting" || "deleted" || "failed" || "rejected" || "rejecting" || "failing",
+ * //     SubnetIds: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Options: { // TransitGatewayVpcAttachmentOptions
+ * //       DnsSupport: "enable" || "disable",
+ * //       SecurityGroupReferencingSupport: "enable" || "disable",
+ * //       Ipv6Support: "enable" || "disable",
+ * //       ApplianceModeSupport: "enable" || "disable",
+ * //     },
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyTransitGatewayVpcAttachmentCommandInput - {@link ModifyTransitGatewayVpcAttachmentCommandInput}
+ * @returns {@link ModifyTransitGatewayVpcAttachmentCommandOutput}
  * @see {@link ModifyTransitGatewayVpcAttachmentCommandInput} for command's `input` shape.
  * @see {@link ModifyTransitGatewayVpcAttachmentCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyTransitGatewayVpcAttachmentCommand extends $Command<
-  ModifyTransitGatewayVpcAttachmentCommandInput,
-  ModifyTransitGatewayVpcAttachmentCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyTransitGatewayVpcAttachmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyTransitGatewayVpcAttachmentCommandInput, ModifyTransitGatewayVpcAttachmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyTransitGatewayVpcAttachmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyTransitGatewayVpcAttachmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyTransitGatewayVpcAttachmentResult.filterSensitiveLog,
+export class ModifyTransitGatewayVpcAttachmentCommand extends command<ModifyTransitGatewayVpcAttachmentCommandInput, ModifyTransitGatewayVpcAttachmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyTransitGatewayVpcAttachment",
+  ModifyTransitGatewayVpcAttachment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyTransitGatewayVpcAttachmentRequest;
+      output: ModifyTransitGatewayVpcAttachmentResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ModifyTransitGatewayVpcAttachmentCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyTransitGatewayVpcAttachmentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyTransitGatewayVpcAttachmentCommandOutput> {
-    return deserializeAws_ec2ModifyTransitGatewayVpcAttachmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyTransitGatewayVpcAttachmentCommandInput;
+      output: ModifyTransitGatewayVpcAttachmentCommandOutput;
+    };
+  };
 }

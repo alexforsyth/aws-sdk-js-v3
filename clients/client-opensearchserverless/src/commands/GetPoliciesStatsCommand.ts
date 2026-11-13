@@ -1,0 +1,89 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPoliciesStatsRequest, GetPoliciesStatsResponse } from "../models/models_0";
+import { GetPoliciesStats$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPoliciesStatsCommand}.
+ */
+export interface GetPoliciesStatsCommandInput extends GetPoliciesStatsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPoliciesStatsCommand}.
+ */
+export interface GetPoliciesStatsCommandOutput extends GetPoliciesStatsResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpenSearchServerlessClient, GetPoliciesStatsCommand } from "@aws-sdk/client-opensearchserverless"; // ES Modules import
+ * // const { OpenSearchServerlessClient, GetPoliciesStatsCommand } = require("@aws-sdk/client-opensearchserverless"); // CommonJS import
+ * // import type { OpenSearchServerlessClientConfig } from "@aws-sdk/client-opensearchserverless";
+ * const config = {}; // type is OpenSearchServerlessClientConfig
+ * const client = new OpenSearchServerlessClient(config);
+ * const input = {};
+ * const command = new GetPoliciesStatsCommand(input);
+ * const response = await client.send(command);
+ * // { // GetPoliciesStatsResponse
+ * //   AccessPolicyStats: { // AccessPolicyStats
+ * //     DataPolicyCount: Number("long"),
+ * //   },
+ * //   SecurityPolicyStats: { // SecurityPolicyStats
+ * //     EncryptionPolicyCount: Number("long"),
+ * //     NetworkPolicyCount: Number("long"),
+ * //   },
+ * //   SecurityConfigStats: { // SecurityConfigStats
+ * //     SamlConfigCount: Number("long"),
+ * //   },
+ * //   LifecyclePolicyStats: { // LifecyclePolicyStats
+ * //     RetentionPolicyCount: Number("long"),
+ * //   },
+ * //   TotalPolicyCount: Number("long"),
+ * // };
+ *
+ * ```
+ *
+ * @param GetPoliciesStatsCommandInput - {@link GetPoliciesStatsCommandInput}
+ * @returns {@link GetPoliciesStatsCommandOutput}
+ * @see {@link GetPoliciesStatsCommandInput} for command's `input` shape.
+ * @see {@link GetPoliciesStatsCommandOutput} for command's `response` shape.
+ * @see {@link OpenSearchServerlessClientResolvedConfig | config} for OpenSearchServerlessClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Thrown when an error internal to the service occurs while processing a request.</p>
+ *
+ * @throws {@link OpenSearchServerlessServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearchServerless service.</p>
+ *
+ *
+ * @public
+ */
+export class GetPoliciesStatsCommand extends command<GetPoliciesStatsCommandInput, GetPoliciesStatsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPoliciesStats",
+  GetPoliciesStats$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetPoliciesStatsResponse;
+    };
+    sdk: {
+      input: GetPoliciesStatsCommandInput;
+      output: GetPoliciesStatsCommandOutput;
+    };
+  };
+}

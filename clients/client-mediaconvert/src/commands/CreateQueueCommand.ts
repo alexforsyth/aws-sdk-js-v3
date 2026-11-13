@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConvertClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConvertClient";
-import { CreateQueueRequest, CreateQueueResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1CreateQueueCommand,
-  serializeAws_restJson1CreateQueueCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateQueueRequest, CreateQueueResponse } from "../models/models_0";
+import { CreateQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateQueueCommand}.
+ */
 export interface CreateQueueCommandInput extends CreateQueueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateQueueCommand}.
+ */
 export interface CreateQueueCommandOutput extends CreateQueueResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,110 @@ export interface CreateQueueCommandOutput extends CreateQueueResponse, __Metadat
  * ```javascript
  * import { MediaConvertClient, CreateQueueCommand } from "@aws-sdk/client-mediaconvert"; // ES Modules import
  * // const { MediaConvertClient, CreateQueueCommand } = require("@aws-sdk/client-mediaconvert"); // CommonJS import
+ * // import type { MediaConvertClientConfig } from "@aws-sdk/client-mediaconvert";
+ * const config = {}; // type is MediaConvertClientConfig
  * const client = new MediaConvertClient(config);
+ * const input = { // CreateQueueRequest
+ *   ConcurrentJobs: Number("int"),
+ *   Description: "STRING_VALUE",
+ *   MaximumConcurrentFeeds: Number("int"),
+ *   Name: "STRING_VALUE", // required
+ *   PricingPlan: "ON_DEMAND" || "RESERVED",
+ *   ReservationPlanSettings: { // ReservationPlanSettings
+ *     Commitment: "ONE_YEAR", // required
+ *     RenewalType: "AUTO_RENEW" || "EXPIRE", // required
+ *     ReservedSlots: Number("int"), // required
+ *   },
+ *   Status: "ACTIVE" || "PAUSED",
+ *   Tags: { // __mapOf__string
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateQueueCommand(input);
  * const response = await client.send(command);
+ * // { // CreateQueueResponse
+ * //   Queue: { // Queue
+ * //     Arn: "STRING_VALUE",
+ * //     ConcurrentJobs: Number("int"),
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     Description: "STRING_VALUE",
+ * //     LastUpdated: new Date("TIMESTAMP"),
+ * //     MaximumConcurrentFeeds: Number("int"),
+ * //     Name: "STRING_VALUE", // required
+ * //     PricingPlan: "ON_DEMAND" || "RESERVED",
+ * //     ProgressingJobsCount: Number("int"),
+ * //     ReservationPlan: { // ReservationPlan
+ * //       Commitment: "ONE_YEAR",
+ * //       ExpiresAt: new Date("TIMESTAMP"),
+ * //       PurchasedAt: new Date("TIMESTAMP"),
+ * //       RenewalType: "AUTO_RENEW" || "EXPIRE",
+ * //       ReservedSlots: Number("int"),
+ * //       Status: "ACTIVE" || "EXPIRED",
+ * //     },
+ * //     ServiceOverrides: [ // __listOfServiceOverride
+ * //       { // ServiceOverride
+ * //         Message: "STRING_VALUE",
+ * //         Name: "STRING_VALUE",
+ * //         OverrideValue: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Status: "ACTIVE" || "PAUSED",
+ * //     SubmittedJobsCount: Number("int"),
+ * //     Type: "SYSTEM" || "CUSTOM",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateQueueCommandInput - {@link CreateQueueCommandInput}
+ * @returns {@link CreateQueueCommandOutput}
  * @see {@link CreateQueueCommandInput} for command's `input` shape.
  * @see {@link CreateQueueCommandOutput} for command's `response` shape.
- * @see {@link MediaConvertClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConvertClientResolvedConfig | config} for MediaConvertClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  The service can't process your request because of a problem in the request. Please check your request form and syntax.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The service couldn't complete your request because there is a conflict with the current state of the resource.
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  You don't have permissions for this action with the credentials you sent.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  The service encountered an unexpected condition and can't fulfill your request.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The resource you requested doesn't exist.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You attempted to create more resources than the service allows based on service quotas.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
+ *
+ * @throws {@link MediaConvertServiceException}
+ * <p>Base exception class for all service exceptions from MediaConvert service.</p>
+ *
+ *
+ * @public
  */
-export class CreateQueueCommand extends $Command<
-  CreateQueueCommandInput,
-  CreateQueueCommandOutput,
-  MediaConvertClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConvertClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateQueueCommandInput, CreateQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConvertClient";
-    const commandName = "CreateQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateQueueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateQueueResponse.filterSensitiveLog,
+export class CreateQueueCommand extends command<CreateQueueCommandInput, CreateQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateQueue",
+  CreateQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateQueueRequest;
+      output: CreateQueueResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateQueueCommandOutput> {
-    return deserializeAws_restJson1CreateQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateQueueCommandInput;
+      output: CreateQueueCommandOutput;
+    };
+  };
 }

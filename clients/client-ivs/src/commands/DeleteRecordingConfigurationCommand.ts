@@ -1,103 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { DeleteRecordingConfigurationRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteRecordingConfigurationCommand,
-  serializeAws_restJson1DeleteRecordingConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRecordingConfigurationRequest } from "../models/models_0";
+import { DeleteRecordingConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRecordingConfigurationCommand}.
+ */
 export interface DeleteRecordingConfigurationCommandInput extends DeleteRecordingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRecordingConfigurationCommand}.
+ */
 export interface DeleteRecordingConfigurationCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes the recording configuration for the specified ARN.</p>
- *          <p>If you try to delete a recording configuration that is associated with a channel, you will
- *       get an error (409 ConflictException). To avoid this, for all channels that reference the
- *       recording configuration, first use <a>UpdateChannel</a> to set the
- *         <code>recordingConfigurationArn</code> field to an empty string, then use
- *       DeleteRecordingConfiguration.</p>
+ * <p>Deletes the recording configuration for the specified ARN.</p> <p>If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use <a>UpdateChannel</a> to set the <code>recordingConfigurationArn</code> field to an empty string, then use DeleteRecordingConfiguration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IvsClient, DeleteRecordingConfigurationCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, DeleteRecordingConfigurationCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // DeleteRecordingConfigurationRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRecordingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteRecordingConfigurationCommandInput - {@link DeleteRecordingConfigurationCommandInput}
+ * @returns {@link DeleteRecordingConfigurationCommandOutput}
  * @see {@link DeleteRecordingConfigurationCommandInput} for command's `input` shape.
  * @see {@link DeleteRecordingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error during processing of request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRecordingConfigurationCommand extends $Command<
-  DeleteRecordingConfigurationCommandInput,
-  DeleteRecordingConfigurationCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRecordingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRecordingConfigurationCommandInput, DeleteRecordingConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "DeleteRecordingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRecordingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteRecordingConfigurationCommand extends command<DeleteRecordingConfigurationCommandInput, DeleteRecordingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRecordingConfiguration",
+  DeleteRecordingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRecordingConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRecordingConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteRecordingConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteRecordingConfigurationCommandOutput> {
-    return deserializeAws_restJson1DeleteRecordingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRecordingConfigurationCommandInput;
+      output: DeleteRecordingConfigurationCommandOutput;
+    };
+  };
 }

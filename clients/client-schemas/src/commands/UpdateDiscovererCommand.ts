@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateDiscovererRequest, UpdateDiscovererResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateDiscovererCommand,
-  serializeAws_restJson1UpdateDiscovererCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDiscovererRequest, UpdateDiscovererResponse } from "../models/models_0";
+import { UpdateDiscoverer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDiscovererCommand}.
+ */
 export interface UpdateDiscovererCommandInput extends UpdateDiscovererRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDiscovererCommand}.
+ */
 export interface UpdateDiscovererCommandOutput extends UpdateDiscovererResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface UpdateDiscovererCommandOutput extends UpdateDiscovererResponse,
  * ```javascript
  * import { SchemasClient, UpdateDiscovererCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, UpdateDiscovererCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // UpdateDiscovererRequest
+ *   Description: "STRING_VALUE",
+ *   DiscovererId: "STRING_VALUE", // required
+ *   CrossAccount: true || false,
+ * };
  * const command = new UpdateDiscovererCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDiscovererResponse
+ * //   Description: "STRING_VALUE",
+ * //   DiscovererArn: "STRING_VALUE",
+ * //   DiscovererId: "STRING_VALUE",
+ * //   SourceArn: "STRING_VALUE",
+ * //   State: "STARTED" || "STOPPED",
+ * //   CrossAccount: true || false,
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateDiscovererCommandInput - {@link UpdateDiscovererCommandInput}
+ * @returns {@link UpdateDiscovererCommandOutput}
  * @see {@link UpdateDiscovererCommandInput} for command's `input` shape.
  * @see {@link UpdateDiscovererCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDiscovererCommand extends $Command<
-  UpdateDiscovererCommandInput,
-  UpdateDiscovererCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDiscovererCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDiscovererCommandInput, UpdateDiscovererCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "UpdateDiscovererCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDiscovererRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDiscovererResponse.filterSensitiveLog,
+export class UpdateDiscovererCommand extends command<UpdateDiscovererCommandInput, UpdateDiscovererCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDiscoverer",
+  UpdateDiscoverer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDiscovererRequest;
+      output: UpdateDiscovererResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDiscovererCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDiscovererCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDiscovererCommandOutput> {
-    return deserializeAws_restJson1UpdateDiscovererCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDiscovererCommandInput;
+      output: UpdateDiscovererCommandOutput;
+    };
+  };
 }

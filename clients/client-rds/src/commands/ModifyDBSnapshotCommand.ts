@@ -1,102 +1,187 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ModifyDBSnapshotMessage, ModifyDBSnapshotResult } from "../models/models_1";
-import {
-  deserializeAws_queryModifyDBSnapshotCommand,
-  serializeAws_queryModifyDBSnapshotCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyDBSnapshotMessage, ModifyDBSnapshotResult } from "../models/models_1";
+import { ModifyDBSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyDBSnapshotCommand}.
+ */
 export interface ModifyDBSnapshotCommandInput extends ModifyDBSnapshotMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyDBSnapshotCommand}.
+ */
 export interface ModifyDBSnapshotCommandOutput extends ModifyDBSnapshotResult, __MetadataBearer {}
 
 /**
- * <p>Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted
- *             or unencrypted, but not shared or public.
- *
- *         </p>
- *
- *          <p>Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This command
- *           doesn't apply to RDS Custom.
- *       </p>
+ * <p>Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted or unencrypted, but not shared or public. </p> <p>Amazon RDS supports upgrading DB snapshots for MariaDB, MySQL, PostgreSQL, and Oracle. This operation doesn't apply to RDS Custom or RDS for Db2.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, ModifyDBSnapshotCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, ModifyDBSnapshotCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // ModifyDBSnapshotMessage
+ *   DBSnapshotIdentifier: "STRING_VALUE", // required
+ *   EngineVersion: "STRING_VALUE",
+ *   OptionGroupName: "STRING_VALUE",
+ * };
  * const command = new ModifyDBSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyDBSnapshotResult
+ * //   DBSnapshot: { // DBSnapshot
+ * //     DBSnapshotIdentifier: "STRING_VALUE",
+ * //     DBInstanceIdentifier: "STRING_VALUE",
+ * //     SnapshotCreateTime: new Date("TIMESTAMP"),
+ * //     Engine: "STRING_VALUE",
+ * //     AllocatedStorage: Number("int"),
+ * //     Status: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     InstanceCreateTime: new Date("TIMESTAMP"),
+ * //     MasterUsername: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     LicenseModel: "STRING_VALUE",
+ * //     SnapshotType: "STRING_VALUE",
+ * //     Iops: Number("int"),
+ * //     StorageThroughput: Number("int"),
+ * //     OptionGroupName: "STRING_VALUE",
+ * //     PercentProgress: Number("int"),
+ * //     SourceRegion: "STRING_VALUE",
+ * //     SourceDBSnapshotIdentifier: "STRING_VALUE",
+ * //     StorageType: "STRING_VALUE",
+ * //     TdeCredentialArn: "STRING_VALUE",
+ * //     Encrypted: true || false,
+ * //     StorageEncryptionType: "none" || "sse-kms" || "sse-rds",
+ * //     BackupRetentionPeriod: Number("int"),
+ * //     PreferredBackupWindow: "STRING_VALUE",
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     DBSnapshotArn: "STRING_VALUE",
+ * //     Timezone: "STRING_VALUE",
+ * //     IAMDatabaseAuthenticationEnabled: true || false,
+ * //     ProcessorFeatures: [ // ProcessorFeatureList
+ * //       { // ProcessorFeature
+ * //         Name: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DbiResourceId: "STRING_VALUE",
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SnapshotTarget: "STRING_VALUE",
+ * //     OriginalSnapshotCreateTime: new Date("TIMESTAMP"),
+ * //     SnapshotDatabaseTime: new Date("TIMESTAMP"),
+ * //     DBSystemId: "STRING_VALUE",
+ * //     MultiTenant: true || false,
+ * //     DedicatedLogVolume: true || false,
+ * //     AdditionalStorageVolumes: [ // AdditionalStorageVolumesList
+ * //       { // AdditionalStorageVolume
+ * //         VolumeName: "STRING_VALUE", // required
+ * //         AllocatedStorage: Number("int"),
+ * //         IOPS: Number("int"),
+ * //         MaxAllocatedStorage: Number("int"),
+ * //         StorageThroughput: Number("int"),
+ * //         StorageType: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SnapshotAvailabilityZone: "STRING_VALUE",
+ * //     FullSnapshotSizeInBytes: Number("long"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyDBSnapshotCommandInput - {@link ModifyDBSnapshotCommandInput}
+ * @returns {@link ModifyDBSnapshotCommandOutput}
  * @see {@link ModifyDBSnapshotCommandInput} for command's `input` shape.
  * @see {@link ModifyDBSnapshotCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBSnapshotNotFoundFault} (client fault)
+ *  <p> <code>DBSnapshotIdentifier</code> doesn't refer to an existing DB snapshot.</p>
+ *
+ * @throws {@link InvalidDBSnapshotStateFault} (client fault)
+ *  <p>The state of the DB snapshot doesn't allow deletion.</p>
+ *
+ * @throws {@link KMSKeyNotAccessibleFault} (client fault)
+ *  <p>An error occurred accessing an Amazon Web Services KMS key.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To modify a DB snapshot
+ * ```javascript
+ * // The following example upgrades a PostgeSQL 10.6 snapshot named db5-snapshot-upg-test to PostgreSQL 11.7. The new DB engine version is shown after the snapshot has finished upgrading and its status is available.
+ * const input = {
+ *   DBSnapshotIdentifier: "db5-snapshot-upg-test",
+ *   EngineVersion: "11.7"
+ * };
+ * const command = new ModifyDBSnapshotCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DBSnapshot: {
+ *     AllocatedStorage: 20,
+ *     AvailabilityZone: "us-west-2a",
+ *     DBInstanceIdentifier: "database-5",
+ *     DBSnapshotArn: "arn:aws:rds:us-west-2:123456789012:snapshot:db5-snapshot-upg-test",
+ *     DBSnapshotIdentifier: "db5-snapshot-upg-test",
+ *     DbiResourceId: "db-GJMF75LM42IL6BTFRE4UZJ5YM4",
+ *     Encrypted: false,
+ *     Engine: "postgres",
+ *     EngineVersion: "10.6",
+ *     IAMDatabaseAuthenticationEnabled: false,
+ *     InstanceCreateTime: "2020-03-27T19:59:04.735Z",
+ *     LicenseModel: "postgresql-license",
+ *     MasterUsername: "postgres",
+ *     OptionGroupName: "default:postgres-11",
+ *     PercentProgress: 100,
+ *     Port: 5432,
+ *     ProcessorFeatures:     [],
+ *     SnapshotCreateTime: "2020-03-27T20:49:17.092Z",
+ *     SnapshotType: "manual",
+ *     Status: "upgrading",
+ *     StorageType: "gp2",
+ *     VpcId: "vpc-2ff27557"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifyDBSnapshotCommand extends $Command<
-  ModifyDBSnapshotCommandInput,
-  ModifyDBSnapshotCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyDBSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyDBSnapshotCommandInput, ModifyDBSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "ModifyDBSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyDBSnapshotMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyDBSnapshotResult.filterSensitiveLog,
+export class ModifyDBSnapshotCommand extends command<ModifyDBSnapshotCommandInput, ModifyDBSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyDBSnapshot",
+  ModifyDBSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyDBSnapshotMessage;
+      output: ModifyDBSnapshotResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyDBSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyDBSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyDBSnapshotCommandOutput> {
-    return deserializeAws_queryModifyDBSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyDBSnapshotCommandInput;
+      output: ModifyDBSnapshotCommandOutput;
+    };
+  };
 }

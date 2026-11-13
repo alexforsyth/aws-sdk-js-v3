@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { DeleteProvisionedConcurrencyConfigRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteProvisionedConcurrencyConfigCommand,
-  serializeAws_restJson1DeleteProvisionedConcurrencyConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteProvisionedConcurrencyConfigRequest } from "../models/models_0";
+import { DeleteProvisionedConcurrencyConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteProvisionedConcurrencyConfigCommand}.
+ */
 export interface DeleteProvisionedConcurrencyConfigCommandInput extends DeleteProvisionedConcurrencyConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteProvisionedConcurrencyConfigCommand}.
+ */
 export interface DeleteProvisionedConcurrencyConfigCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,74 +29,75 @@ export interface DeleteProvisionedConcurrencyConfigCommandOutput extends __Metad
  * ```javascript
  * import { LambdaClient, DeleteProvisionedConcurrencyConfigCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, DeleteProvisionedConcurrencyConfigCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // DeleteProvisionedConcurrencyConfigRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Qualifier: "STRING_VALUE", // required
+ * };
  * const command = new DeleteProvisionedConcurrencyConfigCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteProvisionedConcurrencyConfigCommandInput - {@link DeleteProvisionedConcurrencyConfigCommandInput}
+ * @returns {@link DeleteProvisionedConcurrencyConfigCommandOutput}
  * @see {@link DeleteProvisionedConcurrencyConfigCommandInput} for command's `input` shape.
  * @see {@link DeleteProvisionedConcurrencyConfigCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource already exists, or another operation is in progress.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To delete a provisioned concurrency configuration
+ * ```javascript
+ * // The following example deletes the provisioned concurrency configuration for the GREEN alias of a function named my-function.
+ * const input = {
+ *   FunctionName: "my-function",
+ *   Qualifier: "GREEN"
+ * };
+ * const command = new DeleteProvisionedConcurrencyConfigCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteProvisionedConcurrencyConfigCommand extends $Command<
-  DeleteProvisionedConcurrencyConfigCommandInput,
-  DeleteProvisionedConcurrencyConfigCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteProvisionedConcurrencyConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteProvisionedConcurrencyConfigCommandInput, DeleteProvisionedConcurrencyConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "DeleteProvisionedConcurrencyConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteProvisionedConcurrencyConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteProvisionedConcurrencyConfigCommand extends command<DeleteProvisionedConcurrencyConfigCommandInput, DeleteProvisionedConcurrencyConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteProvisionedConcurrencyConfig",
+  DeleteProvisionedConcurrencyConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProvisionedConcurrencyConfigRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteProvisionedConcurrencyConfigCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteProvisionedConcurrencyConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteProvisionedConcurrencyConfigCommandOutput> {
-    return deserializeAws_restJson1DeleteProvisionedConcurrencyConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteProvisionedConcurrencyConfigCommandInput;
+      output: DeleteProvisionedConcurrencyConfigCommandOutput;
+    };
+  };
 }

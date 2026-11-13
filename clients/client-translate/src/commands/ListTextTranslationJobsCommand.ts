@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListTextTranslationJobsRequest, ListTextTranslationJobsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListTextTranslationJobsCommand,
-  serializeAws_json1_1ListTextTranslationJobsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TranslateClientResolvedConfig } from "../TranslateClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTextTranslationJobsRequest, ListTextTranslationJobsResponse } from "../models/models_0";
+import { ListTextTranslationJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTextTranslationJobsCommand}.
+ */
 export interface ListTextTranslationJobsCommandInput extends ListTextTranslationJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTextTranslationJobsCommand}.
+ */
 export interface ListTextTranslationJobsCommandOutput extends ListTextTranslationJobsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,110 @@ export interface ListTextTranslationJobsCommandOutput extends ListTextTranslatio
  * ```javascript
  * import { TranslateClient, ListTextTranslationJobsCommand } from "@aws-sdk/client-translate"; // ES Modules import
  * // const { TranslateClient, ListTextTranslationJobsCommand } = require("@aws-sdk/client-translate"); // CommonJS import
+ * // import type { TranslateClientConfig } from "@aws-sdk/client-translate";
+ * const config = {}; // type is TranslateClientConfig
  * const client = new TranslateClient(config);
+ * const input = { // ListTextTranslationJobsRequest
+ *   Filter: { // TextTranslationJobFilter
+ *     JobName: "STRING_VALUE",
+ *     JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "COMPLETED_WITH_ERROR" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ *     SubmittedBeforeTime: new Date("TIMESTAMP"),
+ *     SubmittedAfterTime: new Date("TIMESTAMP"),
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListTextTranslationJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTextTranslationJobsResponse
+ * //   TextTranslationJobPropertiesList: [ // TextTranslationJobPropertiesList
+ * //     { // TextTranslationJobProperties
+ * //       JobId: "STRING_VALUE",
+ * //       JobName: "STRING_VALUE",
+ * //       JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "COMPLETED_WITH_ERROR" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * //       JobDetails: { // JobDetails
+ * //         TranslatedDocumentsCount: Number("int"),
+ * //         DocumentsWithErrorsCount: Number("int"),
+ * //         InputDocumentsCount: Number("int"),
+ * //       },
+ * //       SourceLanguageCode: "STRING_VALUE",
+ * //       TargetLanguageCodes: [ // TargetLanguageCodeStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       TerminologyNames: [ // ResourceNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ParallelDataNames: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Message: "STRING_VALUE",
+ * //       SubmittedTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       InputDataConfig: { // InputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         ContentType: "STRING_VALUE", // required
+ * //       },
+ * //       OutputDataConfig: { // OutputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         EncryptionKey: { // EncryptionKey
+ * //           Type: "KMS", // required
+ * //           Id: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       Settings: { // TranslationSettings
+ * //         Formality: "FORMAL" || "INFORMAL",
+ * //         Profanity: "MASK",
+ * //         Brevity: "ON",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTextTranslationJobsCommandInput - {@link ListTextTranslationJobsCommandInput}
+ * @returns {@link ListTextTranslationJobsCommandOutput}
  * @see {@link ListTextTranslationJobsCommandInput} for command's `input` shape.
  * @see {@link ListTextTranslationJobsCommandOutput} for command's `response` shape.
- * @see {@link TranslateClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TranslateClientResolvedConfig | config} for TranslateClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidFilterException} (client fault)
+ *  <p>The filter specified for the operation is not valid. Specify a different filter.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p> The request that you made is not valid. Check your request to determine why it's not
+ *       valid and then retry the request. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again.</p>
+ *
+ * @throws {@link TranslateServiceException}
+ * <p>Base exception class for all service exceptions from Translate service.</p>
+ *
+ *
+ * @public
  */
-export class ListTextTranslationJobsCommand extends $Command<
-  ListTextTranslationJobsCommandInput,
-  ListTextTranslationJobsCommandOutput,
-  TranslateClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTextTranslationJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TranslateClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTextTranslationJobsCommandInput, ListTextTranslationJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TranslateClient";
-    const commandName = "ListTextTranslationJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTextTranslationJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTextTranslationJobsResponse.filterSensitiveLog,
+export class ListTextTranslationJobsCommand extends command<ListTextTranslationJobsCommandInput, ListTextTranslationJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTextTranslationJobs",
+  ListTextTranslationJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTextTranslationJobsRequest;
+      output: ListTextTranslationJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTextTranslationJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTextTranslationJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTextTranslationJobsCommandOutput> {
-    return deserializeAws_json1_1ListTextTranslationJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTextTranslationJobsCommandInput;
+      output: ListTextTranslationJobsCommandOutput;
+    };
+  };
 }

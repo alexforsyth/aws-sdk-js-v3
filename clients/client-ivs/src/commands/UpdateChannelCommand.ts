@@ -1,96 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { UpdateChannelRequest, UpdateChannelResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateChannelCommand,
-  serializeAws_restJson1UpdateChannelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateChannelRequest, UpdateChannelResponse } from "../models/models_0";
+import { UpdateChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateChannelCommand}.
+ */
 export interface UpdateChannelCommandInput extends UpdateChannelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateChannelCommand}.
+ */
 export interface UpdateChannelCommandOutput extends UpdateChannelResponse, __MetadataBearer {}
 
 /**
- * <p>Updates a channel's configuration. This does not affect an ongoing stream of this channel.
- *       You must stop and restart the stream for the changes to take effect.</p>
+ * <p>Updates a channel's configuration. Live channels cannot be updated. You must stop the ongoing stream, update the channel, and restart the stream for the changes to take effect.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IvsClient, UpdateChannelCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, UpdateChannelCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // UpdateChannelRequest
+ *   arn: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   latencyMode: "STRING_VALUE",
+ *   type: "BASIC" || "STANDARD" || "ADVANCED_SD" || "ADVANCED_HD",
+ *   authorized: true || false,
+ *   recordingConfigurationArn: "STRING_VALUE",
+ *   insecureIngest: true || false,
+ *   preset: "HIGHER_BANDWIDTH_DELIVERY" || "CONSTRAINED_BANDWIDTH_DELIVERY",
+ *   playbackRestrictionPolicyArn: "STRING_VALUE",
+ *   multitrackInputConfiguration: { // MultitrackInputConfiguration
+ *     enabled: true || false,
+ *     policy: "ALLOW" || "REQUIRE",
+ *     maximumResolution: "SD" || "HD" || "FULL_HD",
+ *   },
+ *   containerFormat: "STRING_VALUE",
+ *   adConfigurationArn: "STRING_VALUE",
+ *   failoverSlateConfigurationArn: "STRING_VALUE",
+ * };
  * const command = new UpdateChannelCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateChannelResponse
+ * //   channel: { // Channel
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     latencyMode: "STRING_VALUE",
+ * //     type: "BASIC" || "STANDARD" || "ADVANCED_SD" || "ADVANCED_HD",
+ * //     recordingConfigurationArn: "STRING_VALUE",
+ * //     ingestEndpoint: "STRING_VALUE",
+ * //     playbackUrl: "STRING_VALUE",
+ * //     authorized: true || false,
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     insecureIngest: true || false,
+ * //     preset: "HIGHER_BANDWIDTH_DELIVERY" || "CONSTRAINED_BANDWIDTH_DELIVERY",
+ * //     srt: { // Srt
+ * //       endpoint: "STRING_VALUE",
+ * //       passphrase: "STRING_VALUE",
+ * //     },
+ * //     playbackRestrictionPolicyArn: "STRING_VALUE",
+ * //     multitrackInputConfiguration: { // MultitrackInputConfiguration
+ * //       enabled: true || false,
+ * //       policy: "ALLOW" || "REQUIRE",
+ * //       maximumResolution: "SD" || "HD" || "FULL_HD",
+ * //     },
+ * //     containerFormat: "STRING_VALUE",
+ * //     adConfigurationArn: "STRING_VALUE",
+ * //     failoverSlateConfigurationArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateChannelCommandInput - {@link UpdateChannelCommandInput}
+ * @returns {@link UpdateChannelCommandOutput}
  * @see {@link UpdateChannelCommandInput} for command's `input` shape.
  * @see {@link UpdateChannelCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link PendingVerification} (client fault)
+ *  <p>Your account is pending verification.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateChannelCommand extends $Command<
-  UpdateChannelCommandInput,
-  UpdateChannelCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateChannelCommandInput, UpdateChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "UpdateChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateChannelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateChannelResponse.filterSensitiveLog,
+export class UpdateChannelCommand extends command<UpdateChannelCommandInput, UpdateChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateChannel",
+  UpdateChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChannelRequest;
+      output: UpdateChannelResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateChannelCommandOutput> {
-    return deserializeAws_restJson1UpdateChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateChannelCommandInput;
+      output: UpdateChannelCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { PostCommentReplyInput, PostCommentReplyOutput } from "../models/models_1";
-import {
-  deserializeAws_json1_1PostCommentReplyCommand,
-  serializeAws_json1_1PostCommentReplyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PostCommentReplyInput, PostCommentReplyOutput } from "../models/models_0";
+import { PostCommentReply$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PostCommentReplyCommand}.
+ */
 export interface PostCommentReplyCommandInput extends PostCommentReplyInput {}
+/**
+ * @public
+ *
+ * The output of {@link PostCommentReplyCommand}.
+ */
 export interface PostCommentReplyCommandOutput extends PostCommentReplyOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,94 @@ export interface PostCommentReplyCommandOutput extends PostCommentReplyOutput, _
  * ```javascript
  * import { CodeCommitClient, PostCommentReplyCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, PostCommentReplyCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // PostCommentReplyInput
+ *   inReplyTo: "STRING_VALUE", // required
+ *   clientRequestToken: "STRING_VALUE",
+ *   content: "STRING_VALUE", // required
+ * };
  * const command = new PostCommentReplyCommand(input);
  * const response = await client.send(command);
+ * // { // PostCommentReplyOutput
+ * //   comment: { // Comment
+ * //     commentId: "STRING_VALUE",
+ * //     content: "STRING_VALUE",
+ * //     inReplyTo: "STRING_VALUE",
+ * //     creationDate: new Date("TIMESTAMP"),
+ * //     lastModifiedDate: new Date("TIMESTAMP"),
+ * //     authorArn: "STRING_VALUE",
+ * //     deleted: true || false,
+ * //     clientRequestToken: "STRING_VALUE",
+ * //     callerReactions: [ // CallerReactions
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     reactionCounts: { // ReactionCountsMap
+ * //       "<keys>": Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PostCommentReplyCommandInput - {@link PostCommentReplyCommandInput}
+ * @returns {@link PostCommentReplyCommandOutput}
  * @see {@link PostCommentReplyCommandInput} for command's `input` shape.
  * @see {@link PostCommentReplyCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link ClientRequestTokenRequiredException} (client fault)
+ *  <p>A client request token is required. A client request token is an unique,
+ *             client-generated idempotency token that, when provided in a request, ensures the request
+ *             cannot be repeated with a changed parameter. If a request is received with the same
+ *             parameters and a token is included, the request returns information about the initial
+ *             request that used that token.</p>
+ *
+ * @throws {@link CommentContentRequiredException} (client fault)
+ *  <p>The comment is empty. You must provide some content for a comment. The content cannot be null.</p>
+ *
+ * @throws {@link CommentContentSizeLimitExceededException} (client fault)
+ *  <p>The comment is too large. Comments are limited to 10,240 characters.</p>
+ *
+ * @throws {@link CommentDoesNotExistException} (client fault)
+ *  <p>No comment exists with the provided ID. Verify that you have used the correct ID, and
+ *             then try again.</p>
+ *
+ * @throws {@link CommentIdRequiredException} (client fault)
+ *  <p>The comment ID is missing or null. A comment ID is required.</p>
+ *
+ * @throws {@link IdempotencyParameterMismatchException} (client fault)
+ *  <p>The client request token is not valid. Either the token is not in a valid format, or
+ *             the token has been used in a previous request and cannot be reused.</p>
+ *
+ * @throws {@link InvalidClientRequestTokenException} (client fault)
+ *  <p>The client request token is not valid.</p>
+ *
+ * @throws {@link InvalidCommentIdException} (client fault)
+ *  <p>The comment ID is not in a valid format. Make sure that you have provided the full comment ID.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class PostCommentReplyCommand extends $Command<
-  PostCommentReplyCommandInput,
-  PostCommentReplyCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PostCommentReplyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PostCommentReplyCommandInput, PostCommentReplyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "PostCommentReplyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PostCommentReplyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PostCommentReplyOutput.filterSensitiveLog,
+export class PostCommentReplyCommand extends command<PostCommentReplyCommandInput, PostCommentReplyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PostCommentReply",
+  PostCommentReply$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PostCommentReplyInput;
+      output: PostCommentReplyOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PostCommentReplyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PostCommentReplyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PostCommentReplyCommandOutput> {
-    return deserializeAws_json1_1PostCommentReplyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PostCommentReplyCommandInput;
+      output: PostCommentReplyCommandOutput;
+    };
+  };
 }

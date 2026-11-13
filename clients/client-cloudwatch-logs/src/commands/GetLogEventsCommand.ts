@@ -1,100 +1,132 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
-import { GetLogEventsRequest, GetLogEventsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetLogEventsCommand,
-  serializeAws_json1_1GetLogEventsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLogEventsRequest, GetLogEventsResponse } from "../models/models_0";
+import { GetLogEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLogEventsCommand}.
+ */
 export interface GetLogEventsCommandInput extends GetLogEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLogEventsCommand}.
+ */
 export interface GetLogEventsCommandOutput extends GetLogEventsResponse, __MetadataBearer {}
 
 /**
  * <p>Lists log events from the specified log stream. You can list all of the log events or
  *       filter using a time range.</p>
- *
- *          <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events).
- *       You can get additional log events by specifying one of the tokens in a subsequent call.
- *       This operation can return empty results while there are more log events available through the token.</p>
+ *          <p>
+ *             <code>GetLogEvents</code> is a paginated operation. Each page returned can contain up to 1
+ *       MB of log events or up to 10,000 log events. A returned page might only be partially full, or
+ *       even empty. For example, if the result of a query would return 15,000 log events, the first
+ *       page isn't guaranteed to have 10,000 log events even if they all fit into 1 MB.</p>
+ *          <p>Partially full or empty pages don't necessarily mean that pagination is finished. As long
+ *       as the <code>nextBackwardToken</code> or <code>nextForwardToken</code> returned is NOT equal
+ *       to the <code>nextToken</code> that you passed into the API call, there might be more log
+ *       events available. The token that you use depends on the direction you want to move in along
+ *       the log stream. The returned tokens are never null.</p>
+ *          <note>
+ *             <p>If you set <code>startFromHead</code> to <code>true</code> and you don’t include
+ *           <code>endTime</code> in your request, you can end up in a situation where the pagination
+ *         doesn't terminate. This can happen when the new log events are being added to the target log
+ *         streams faster than they are being read. This situation is a good use case for the CloudWatch Logs
+ *         <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html">Live Tail</a> feature.</p>
+ *          </note>
+ *          <p>If you are using CloudWatch cross-account observability, you can use this operation
+ *       in a monitoring account and view data from the linked source accounts. For more information,
+ *       see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html">CloudWatch cross-account observability</a>.</p>
+ *          <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or
+ *         <code>logGroupName</code>. You must include one of these two parameters, but you can't
+ *       include both. </p>
+ *          <note>
+ *             <p>If you are using <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">log
+ *           transformation</a>, the <code>GetLogEvents</code> operation returns only the original
+ *         versions of log events, before they were transformed. To view the transformed versions, you
+ *         must use a <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html">CloudWatch Logs
+ *         query.</a>
+ *             </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchLogsClient, GetLogEventsCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
  * // const { CloudWatchLogsClient, GetLogEventsCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * // import type { CloudWatchLogsClientConfig } from "@aws-sdk/client-cloudwatch-logs";
+ * const config = {}; // type is CloudWatchLogsClientConfig
  * const client = new CloudWatchLogsClient(config);
+ * const input = { // GetLogEventsRequest
+ *   logGroupName: "STRING_VALUE",
+ *   logGroupIdentifier: "STRING_VALUE",
+ *   logStreamName: "STRING_VALUE", // required
+ *   startTime: Number("long"),
+ *   endTime: Number("long"),
+ *   nextToken: "STRING_VALUE",
+ *   limit: Number("int"),
+ *   startFromHead: true || false,
+ *   unmask: true || false,
+ * };
  * const command = new GetLogEventsCommand(input);
  * const response = await client.send(command);
+ * // { // GetLogEventsResponse
+ * //   events: [ // OutputLogEvents
+ * //     { // OutputLogEvent
+ * //       timestamp: Number("long"),
+ * //       message: "STRING_VALUE",
+ * //       ingestionTime: Number("long"),
+ * //     },
+ * //   ],
+ * //   nextForwardToken: "STRING_VALUE",
+ * //   nextBackwardToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetLogEventsCommandInput - {@link GetLogEventsCommandInput}
+ * @returns {@link GetLogEventsCommandOutput}
  * @see {@link GetLogEventsCommandInput} for command's `input` shape.
  * @see {@link GetLogEventsCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ *
+ * @public
  */
-export class GetLogEventsCommand extends $Command<
-  GetLogEventsCommandInput,
-  GetLogEventsCommandOutput,
-  CloudWatchLogsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLogEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchLogsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLogEventsCommandInput, GetLogEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchLogsClient";
-    const commandName = "GetLogEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLogEventsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLogEventsResponse.filterSensitiveLog,
+export class GetLogEventsCommand extends command<GetLogEventsCommandInput, GetLogEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLogEvents",
+  GetLogEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLogEventsRequest;
+      output: GetLogEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLogEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetLogEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLogEventsCommandOutput> {
-    return deserializeAws_json1_1GetLogEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLogEventsCommandInput;
+      output: GetLogEventsCommandOutput;
+    };
+  };
 }

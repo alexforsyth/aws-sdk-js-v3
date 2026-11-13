@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { InitiateMultipartUploadInput, InitiateMultipartUploadOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1InitiateMultipartUploadCommand,
-  serializeAws_restJson1InitiateMultipartUploadCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { InitiateMultipartUploadInput, InitiateMultipartUploadOutput } from "../models/models_0";
+import { InitiateMultipartUpload$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link InitiateMultipartUploadCommand}.
+ */
 export interface InitiateMultipartUploadCommandInput extends InitiateMultipartUploadInput {}
+/**
+ * @public
+ *
+ * The output of {@link InitiateMultipartUploadCommand}.
+ */
 export interface InitiateMultipartUploadCommandOutput extends InitiateMultipartUploadOutput, __MetadataBearer {}
 
 /**
- * <p>This operation initiates a multipart upload. Amazon S3 Glacier creates a multipart
+ * <p>This operation initiates a multipart upload. Amazon Glacier creates a multipart
  *          upload resource and returns its ID in the response. The multipart upload ID is used in
  *          subsequent requests to upload parts of an archive (see <a>UploadMultipartPart</a>).</p>
  *
@@ -39,11 +40,11 @@ export interface InitiateMultipartUploadCommandOutput extends InitiateMultipartU
  *
  *          <note>
  *             <p>You don't need to know the size of the archive when you start a multipart upload
- *             because Amazon S3 Glacier does not require you to specify the overall archive
+ *             because Amazon Glacier does not require you to specify the overall archive
  *             size.</p>
  *          </note>
  *
- *          <p>After you complete the multipart upload, Amazon S3 Glacier (Glacier) removes the multipart upload
+ *          <p>After you complete the multipart upload, Amazon Glacier (Glacier) removes the multipart upload
  *          resource referenced by the ID. Glacier also removes the multipart upload resource if
  *          you cancel the multipart upload or it may be removed if there is no activity for a period
  *          of 24 hours.</p>
@@ -61,68 +62,85 @@ export interface InitiateMultipartUploadCommandOutput extends InitiateMultipartU
  * ```javascript
  * import { GlacierClient, InitiateMultipartUploadCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, InitiateMultipartUploadCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // InitiateMultipartUploadInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   archiveDescription: "STRING_VALUE",
+ *   partSize: "STRING_VALUE",
+ * };
  * const command = new InitiateMultipartUploadCommand(input);
  * const response = await client.send(command);
+ * // { // InitiateMultipartUploadOutput
+ * //   location: "STRING_VALUE",
+ * //   uploadId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param InitiateMultipartUploadCommandInput - {@link InitiateMultipartUploadCommandInput}
+ * @returns {@link InitiateMultipartUploadCommandOutput}
  * @see {@link InitiateMultipartUploadCommandInput} for command's `input` shape.
  * @see {@link InitiateMultipartUploadCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To initiate a multipart upload
+ * ```javascript
+ * // The example initiates a multipart upload to a vault named my-vault with a part size of 1 MiB (1024 x 1024 bytes) per file.
+ * const input = {
+ *   accountId: "-",
+ *   partSize: "1048576",
+ *   vaultName: "my-vault"
+ * };
+ * const command = new InitiateMultipartUploadCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   location: "/111122223333/vaults/my-vault/multipart-uploads/19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ",
+ *   uploadId: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class InitiateMultipartUploadCommand extends $Command<
-  InitiateMultipartUploadCommandInput,
-  InitiateMultipartUploadCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: InitiateMultipartUploadCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<InitiateMultipartUploadCommandInput, InitiateMultipartUploadCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "InitiateMultipartUploadCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: InitiateMultipartUploadInput.filterSensitiveLog,
-      outputFilterSensitiveLog: InitiateMultipartUploadOutput.filterSensitiveLog,
+export class InitiateMultipartUploadCommand extends command<InitiateMultipartUploadCommandInput, InitiateMultipartUploadCommandOutput>(
+  _ep0,
+  _mw0,
+  "InitiateMultipartUpload",
+  InitiateMultipartUpload$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: InitiateMultipartUploadInput;
+      output: InitiateMultipartUploadOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: InitiateMultipartUploadCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1InitiateMultipartUploadCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<InitiateMultipartUploadCommandOutput> {
-    return deserializeAws_restJson1InitiateMultipartUploadCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: InitiateMultipartUploadCommandInput;
+      output: InitiateMultipartUploadCommandOutput;
+    };
+  };
 }

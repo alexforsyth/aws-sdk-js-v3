@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ManagedBlockchainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ManagedBlockchainClient";
-import { UpdateMemberInput, UpdateMemberOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateMemberCommand,
-  serializeAws_restJson1UpdateMemberCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMemberInput, UpdateMemberOutput } from "../models/models_0";
+import { UpdateMember$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMemberCommand}.
+ */
 export interface UpdateMemberCommandInput extends UpdateMemberInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMemberCommand}.
+ */
 export interface UpdateMemberCommandOutput extends UpdateMemberOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +30,73 @@ export interface UpdateMemberCommandOutput extends UpdateMemberOutput, __Metadat
  * ```javascript
  * import { ManagedBlockchainClient, UpdateMemberCommand } from "@aws-sdk/client-managedblockchain"; // ES Modules import
  * // const { ManagedBlockchainClient, UpdateMemberCommand } = require("@aws-sdk/client-managedblockchain"); // CommonJS import
+ * // import type { ManagedBlockchainClientConfig } from "@aws-sdk/client-managedblockchain";
+ * const config = {}; // type is ManagedBlockchainClientConfig
  * const client = new ManagedBlockchainClient(config);
+ * const input = { // UpdateMemberInput
+ *   NetworkId: "STRING_VALUE", // required
+ *   MemberId: "STRING_VALUE", // required
+ *   LogPublishingConfiguration: { // MemberLogPublishingConfiguration
+ *     Fabric: { // MemberFabricLogPublishingConfiguration
+ *       CaLogs: { // LogConfigurations
+ *         Cloudwatch: { // LogConfiguration
+ *           Enabled: true || false,
+ *         },
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new UpdateMemberCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateMemberCommandInput - {@link UpdateMemberCommandInput}
+ * @returns {@link UpdateMemberCommandOutput}
  * @see {@link UpdateMemberCommandInput} for command's `input` shape.
  * @see {@link UpdateMemberCommandOutput} for command's `response` shape.
- * @see {@link ManagedBlockchainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ManagedBlockchainClientResolvedConfig | config} for ManagedBlockchainClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource doesn't exist. It may have been deleted or referenced incorrectly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is
+ *          throttling requests. The most common source of throttling errors is
+ *          creating resources that exceed your service limit for this resource type.
+ *          Request a limit increase or delete unused resources if possible.</p>
+ *
+ * @throws {@link ManagedBlockchainServiceException}
+ * <p>Base exception class for all service exceptions from ManagedBlockchain service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMemberCommand extends $Command<
-  UpdateMemberCommandInput,
-  UpdateMemberCommandOutput,
-  ManagedBlockchainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMemberCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ManagedBlockchainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMemberCommandInput, UpdateMemberCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ManagedBlockchainClient";
-    const commandName = "UpdateMemberCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMemberInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMemberOutput.filterSensitiveLog,
+export class UpdateMemberCommand extends command<UpdateMemberCommandInput, UpdateMemberCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMember",
+  UpdateMember$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMemberInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMemberCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateMemberCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateMemberCommandOutput> {
-    return deserializeAws_restJson1UpdateMemberCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMemberCommandInput;
+      output: UpdateMemberCommandOutput;
+    };
+  };
 }

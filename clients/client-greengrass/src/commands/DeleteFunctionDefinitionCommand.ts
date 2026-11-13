@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { DeleteFunctionDefinitionRequest, DeleteFunctionDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteFunctionDefinitionCommand,
-  serializeAws_restJson1DeleteFunctionDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFunctionDefinitionRequest, DeleteFunctionDefinitionResponse } from "../models/models_0";
+import { DeleteFunctionDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFunctionDefinitionCommand}.
+ */
 export interface DeleteFunctionDefinitionCommandInput extends DeleteFunctionDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFunctionDefinitionCommand}.
+ */
 export interface DeleteFunctionDefinitionCommandOutput extends DeleteFunctionDefinitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,48 @@ export interface DeleteFunctionDefinitionCommandOutput extends DeleteFunctionDef
  * ```javascript
  * import { GreengrassClient, DeleteFunctionDefinitionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, DeleteFunctionDefinitionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // DeleteFunctionDefinitionRequest
+ *   FunctionDefinitionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFunctionDefinitionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteFunctionDefinitionCommandInput - {@link DeleteFunctionDefinitionCommandInput}
+ * @returns {@link DeleteFunctionDefinitionCommandOutput}
  * @see {@link DeleteFunctionDefinitionCommandInput} for command's `input` shape.
  * @see {@link DeleteFunctionDefinitionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFunctionDefinitionCommand extends $Command<
-  DeleteFunctionDefinitionCommandInput,
-  DeleteFunctionDefinitionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFunctionDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFunctionDefinitionCommandInput, DeleteFunctionDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "DeleteFunctionDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFunctionDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFunctionDefinitionResponse.filterSensitiveLog,
+export class DeleteFunctionDefinitionCommand extends command<DeleteFunctionDefinitionCommandInput, DeleteFunctionDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFunctionDefinition",
+  DeleteFunctionDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFunctionDefinitionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFunctionDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteFunctionDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFunctionDefinitionCommandOutput> {
-    return deserializeAws_restJson1DeleteFunctionDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFunctionDefinitionCommandInput;
+      output: DeleteFunctionDefinitionCommandOutput;
+    };
+  };
 }

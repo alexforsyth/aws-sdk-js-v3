@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { GetDeploymentRequest, GetDeploymentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDeploymentCommand,
-  serializeAws_restJson1GetDeploymentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDeploymentRequest, GetDeploymentResponse } from "../models/models_0";
+import { GetDeployment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDeploymentCommand}.
+ */
 export interface GetDeploymentCommandInput extends GetDeploymentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDeploymentCommand}.
+ */
 export interface GetDeploymentCommandOutput extends GetDeploymentResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface GetDeploymentCommandOutput extends GetDeploymentResponse, __Met
  * ```javascript
  * import { ApiGatewayV2Client, GetDeploymentCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, GetDeploymentCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // GetDeploymentRequest
+ *   ApiId: "STRING_VALUE", // required
+ *   DeploymentId: "STRING_VALUE", // required
+ * };
  * const command = new GetDeploymentCommand(input);
  * const response = await client.send(command);
+ * // { // GetDeploymentResponse
+ * //   AutoDeployed: true || false,
+ * //   CreatedDate: new Date("TIMESTAMP"),
+ * //   DeploymentId: "STRING_VALUE",
+ * //   DeploymentStatus: "PENDING" || "FAILED" || "DEPLOYED",
+ * //   DeploymentStatusMessage: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDeploymentCommandInput - {@link GetDeploymentCommandInput}
+ * @returns {@link GetDeploymentCommandOutput}
  * @see {@link GetDeploymentCommandInput} for command's `input` shape.
  * @see {@link GetDeploymentCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetDeploymentCommand extends $Command<
-  GetDeploymentCommandInput,
-  GetDeploymentCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDeploymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDeploymentCommandInput, GetDeploymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "GetDeploymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDeploymentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDeploymentResponse.filterSensitiveLog,
+export class GetDeploymentCommand extends command<GetDeploymentCommandInput, GetDeploymentCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDeployment",
+  GetDeployment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentRequest;
+      output: GetDeploymentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDeploymentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDeploymentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDeploymentCommandOutput> {
-    return deserializeAws_restJson1GetDeploymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDeploymentCommandInput;
+      output: GetDeploymentCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UntagResourceRequest, UntagResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UntagResourceCommand,
-  serializeAws_restJson1UntagResourceCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UntagResourceRequest, UntagResourceResponse } from "../models/models_0";
+import { UntagResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UntagResourceCommand}.
+ */
 export interface UntagResourceCommandInput extends UntagResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UntagResourceCommand}.
+ */
 export interface UntagResourceCommandOutput extends UntagResourceResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,58 @@ export interface UntagResourceCommandOutput extends UntagResourceResponse, __Met
  * ```javascript
  * import { XRayClient, UntagResourceCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, UntagResourceCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // UntagResourceRequest
+ *   ResourceARN: "STRING_VALUE", // required
+ *   TagKeys: [ // TagKeyList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UntagResourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UntagResourceCommandInput - {@link UntagResourceCommandInput}
+ * @returns {@link UntagResourceCommandOutput}
  * @see {@link UntagResourceCommandInput} for command's `input` shape.
  * @see {@link UntagResourceCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource was not found. Verify that the name or Amazon Resource Name (ARN) of the resource is
+ *       correct.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class UntagResourceCommand extends $Command<
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UntagResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UntagResourceCommandInput, UntagResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "UntagResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UntagResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UntagResourceResponse.filterSensitiveLog,
+export class UntagResourceCommand extends command<UntagResourceCommandInput, UntagResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "UntagResource",
+  UntagResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagResourceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UntagResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UntagResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UntagResourceCommandOutput> {
-    return deserializeAws_restJson1UntagResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UntagResourceCommandInput;
+      output: UntagResourceCommandOutput;
+    };
+  };
 }

@@ -1,32 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DescribePublisherInput, DescribePublisherOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribePublisherCommand,
-  serializeAws_queryDescribePublisherCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePublisherInput, DescribePublisherOutput } from "../models/models_0";
+import { DescribePublisher$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePublisherCommand}.
+ */
 export interface DescribePublisherCommandInput extends DescribePublisherInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePublisherCommand}.
+ */
 export interface DescribePublisherCommandOutput extends DescribePublisherOutput, __MetadataBearer {}
 
 /**
  * <p>Returns information about a CloudFormation extension publisher.</p>
- *          <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension
- *          publisher, <code>DescribePublisher</code> returns information about your own publisher
- *          account. </p>
- *          <p>For more information on registering as a publisher, see:</p>
+ *          <p>If you don't supply a <code>PublisherId</code>, and you have registered as an extension
+ *       publisher, <code>DescribePublisher</code> returns information about your own publisher
+ *       account.</p>
+ *          <p>For more information about registering as a publisher, see:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -35,9 +36,9 @@ export interface DescribePublisherCommandOutput extends DescribePublisherOutput,
  *             </li>
  *             <li>
  *                <p>
- *                   <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html">Publishing
- *                   extensions to make them available for public use</a> in the
- *                   <i>CloudFormation CLI User Guide</i>
+ *                   <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html">Publishing extensions
+ *             to make them available for public use</a> in the
+ *             <i>CloudFormation Command Line Interface (CLI) User Guide</i>
  *                </p>
  *             </li>
  *          </ul>
@@ -46,68 +47,53 @@ export interface DescribePublisherCommandOutput extends DescribePublisherOutput,
  * ```javascript
  * import { CloudFormationClient, DescribePublisherCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DescribePublisherCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DescribePublisherInput
+ *   PublisherId: "STRING_VALUE",
+ * };
  * const command = new DescribePublisherCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePublisherOutput
+ * //   PublisherId: "STRING_VALUE",
+ * //   PublisherStatus: "VERIFIED" || "UNVERIFIED",
+ * //   IdentityProvider: "AWS_Marketplace" || "GitHub" || "Bitbucket",
+ * //   PublisherProfile: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePublisherCommandInput - {@link DescribePublisherCommandInput}
+ * @returns {@link DescribePublisherCommandOutput}
  * @see {@link DescribePublisherCommandInput} for command's `input` shape.
  * @see {@link DescribePublisherCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePublisherCommand extends $Command<
-  DescribePublisherCommandInput,
-  DescribePublisherCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePublisherCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePublisherCommandInput, DescribePublisherCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DescribePublisherCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePublisherInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePublisherOutput.filterSensitiveLog,
+export class DescribePublisherCommand extends command<DescribePublisherCommandInput, DescribePublisherCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePublisher",
+  DescribePublisher$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePublisherInput;
+      output: DescribePublisherOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePublisherCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribePublisherCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePublisherCommandOutput> {
-    return deserializeAws_queryDescribePublisherCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePublisherCommandInput;
+      output: DescribePublisherCommandOutput;
+    };
+  };
 }

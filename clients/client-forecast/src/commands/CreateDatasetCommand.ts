@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { CreateDatasetRequest, CreateDatasetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateDatasetCommand,
-  serializeAws_json1_1CreateDatasetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDatasetRequest, CreateDatasetResponse } from "../models/models_0";
+import { CreateDataset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDatasetCommand}.
+ */
 export interface CreateDatasetCommandInput extends CreateDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDatasetCommand}.
+ */
 export interface CreateDatasetCommandOutput extends CreateDatasetResponse, __MetadataBearer {}
 
 /**
@@ -55,82 +56,92 @@ export interface CreateDatasetCommandOutput extends CreateDatasetResponse, __Met
  *          </ul>
  *          <p>After creating a dataset, you import your training data into it and add the dataset to a
  *       dataset group. You use the dataset group to create a predictor. For more information, see
- *         <a>howitworks-datasets-groups</a>.</p>
- *          <p>To get a list of all your datasets, use the <a>ListDatasets</a>
- *       operation.</p>
+ *         <a href="https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html">Importing datasets</a>.</p>
+ *          <p>To get a list of all your datasets, use the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasets.html">ListDatasets</a> operation.</p>
  *          <p>For example Forecast datasets, see the <a href="https://github.com/aws-samples/amazon-forecast-samples">Amazon Forecast Sample GitHub
  *         repository</a>.</p>
  *          <note>
  *             <p>The <code>Status</code> of a dataset must be <code>ACTIVE</code> before you can import
- *         training data. Use the <a>DescribeDataset</a> operation to get the status.</p>
+ *         training data. Use the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html">DescribeDataset</a> operation to get
+ *         the status.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, CreateDatasetCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, CreateDatasetCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // CreateDatasetRequest
+ *   DatasetName: "STRING_VALUE", // required
+ *   Domain: "RETAIL" || "CUSTOM" || "INVENTORY_PLANNING" || "EC2_CAPACITY" || "WORK_FORCE" || "WEB_TRAFFIC" || "METRICS", // required
+ *   DatasetType: "TARGET_TIME_SERIES" || "RELATED_TIME_SERIES" || "ITEM_METADATA", // required
+ *   DataFrequency: "STRING_VALUE",
+ *   Schema: { // Schema
+ *     Attributes: [ // SchemaAttributes
+ *       { // SchemaAttribute
+ *         AttributeName: "STRING_VALUE",
+ *         AttributeType: "string" || "integer" || "float" || "timestamp" || "geolocation",
+ *       },
+ *     ],
+ *   },
+ *   EncryptionConfig: { // EncryptionConfig
+ *     RoleArn: "STRING_VALUE", // required
+ *     KMSKeyArn: "STRING_VALUE", // required
+ *   },
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateDatasetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDatasetResponse
+ * //   DatasetArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateDatasetCommandInput - {@link CreateDatasetCommandInput}
+ * @returns {@link CreateDatasetCommandOutput}
  * @see {@link CreateDatasetCommandInput} for command's `input` shape.
  * @see {@link CreateDatasetCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of resources per account has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>There is already a resource with this name. Try again with a different name.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDatasetCommand extends $Command<
-  CreateDatasetCommandInput,
-  CreateDatasetCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDatasetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDatasetCommandInput, CreateDatasetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "CreateDatasetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDatasetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDatasetResponse.filterSensitiveLog,
+export class CreateDatasetCommand extends command<CreateDatasetCommandInput, CreateDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDataset",
+  CreateDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDatasetRequest;
+      output: CreateDatasetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDatasetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateDatasetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDatasetCommandOutput> {
-    return deserializeAws_json1_1CreateDatasetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDatasetCommandInput;
+      output: CreateDatasetCommandOutput;
+    };
+  };
 }

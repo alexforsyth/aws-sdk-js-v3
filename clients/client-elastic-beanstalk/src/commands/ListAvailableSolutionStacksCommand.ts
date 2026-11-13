@@ -1,101 +1,142 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ListAvailableSolutionStacksResultMessage } from "../models/models_0";
-import {
-  deserializeAws_queryListAvailableSolutionStacksCommand,
-  serializeAws_queryListAvailableSolutionStacksCommand,
-} from "../protocols/Aws_query";
-
-export interface ListAvailableSolutionStacksCommandInput {}
-export interface ListAvailableSolutionStacksCommandOutput
-  extends ListAvailableSolutionStacksResultMessage,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAvailableSolutionStacksResultMessage } from "../models/models_0";
+import { ListAvailableSolutionStacks$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns a list of the available solution stack names, with the public version first and
- *       then in reverse chronological order.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAvailableSolutionStacksCommand}.
+ */
+export interface ListAvailableSolutionStacksCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListAvailableSolutionStacksCommand}.
+ */
+export interface ListAvailableSolutionStacksCommandOutput extends ListAvailableSolutionStacksResultMessage, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.</p>
+ *          <p>This action only returns information about resources that the calling principle has IAM permissions to access. For example, consider a case where a
+ *       user only has permission to access one of three resources. When the user calls the this action, the response will only include the one resource that the
+ *       user has permission to access instead of all three resources. If the user doesn’t have access to any of the resources an empty result is returned.</p>
+ *          <note>
+ *             <p>The <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html">AWSElasticBeanstalkReadOnly</a>
+ *         managed policy allows operators to view information about resources related to Elastic Beanstalk. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html"> Managing Elastic Beanstalk user policies</a> in the <i>Elastic Beanstalk Developer
+ *           Guide</i>. For detailed instructions to attach a policy to a user or group, see the section <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed"> Controlling access with managed policies</a> in the
+ *         same topic.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, ListAvailableSolutionStacksCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, ListAvailableSolutionStacksCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = {};
  * const command = new ListAvailableSolutionStacksCommand(input);
  * const response = await client.send(command);
+ * // { // ListAvailableSolutionStacksResultMessage
+ * //   SolutionStacks: [ // AvailableSolutionStackNamesList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   SolutionStackDetails: [ // AvailableSolutionStackDetailsList
+ * //     { // SolutionStackDescription
+ * //       SolutionStackName: "STRING_VALUE",
+ * //       PermittedFileTypes: [ // SolutionStackFileTypeList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListAvailableSolutionStacksCommandInput - {@link ListAvailableSolutionStacksCommandInput}
+ * @returns {@link ListAvailableSolutionStacksCommandOutput}
  * @see {@link ListAvailableSolutionStacksCommandInput} for command's `input` shape.
  * @see {@link ListAvailableSolutionStacksCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To view solution stacks
+ * ```javascript
+ * // The following operation lists solution stacks for all currently available platform configurations and any that you have used in the past:
+ * const input = { /* empty *\/ };
+ * const command = new ListAvailableSolutionStacksCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SolutionStackDetails: [
+ *     {
+ *       PermittedFileTypes: [
+ *         "zip"
+ *       ],
+ *       SolutionStackName: "64bit Amazon Linux 2015.03 v2.0.0 running Node.js"
+ *     }
+ *   ],
+ *   SolutionStacks: [
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Node.js",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.6",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.5",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.4",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Python 3.4",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Python 2.7",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Python",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Puma)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Passenger Standalone)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Puma)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Passenger Standalone)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Puma)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Passenger Standalone)",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 1.9.3",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 7",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 6",
+ *     "64bit Windows Server Core 2012 R2 running IIS 8.5",
+ *     "64bit Windows Server 2012 R2 running IIS 8.5",
+ *     "64bit Windows Server 2012 running IIS 8",
+ *     "64bit Windows Server 2008 R2 running IIS 7.5",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Docker 1.6.2",
+ *     "64bit Amazon Linux 2015.03 v2.0.0 running Multi-container Docker 1.6.2 (Generic)",
+ *     "64bit Debian jessie v2.0.0 running GlassFish 4.1 Java 8 (Preconfigured - Docker)",
+ *     "64bit Debian jessie v2.0.0 running GlassFish 4.0 Java 7 (Preconfigured - Docker)",
+ *     "64bit Debian jessie v2.0.0 running Go 1.4 (Preconfigured - Docker)",
+ *     "64bit Debian jessie v2.0.0 running Go 1.3 (Preconfigured - Docker)",
+ *     "64bit Debian jessie v2.0.0 running Python 3.4 (Preconfigured - Docker)"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListAvailableSolutionStacksCommand extends $Command<
-  ListAvailableSolutionStacksCommandInput,
-  ListAvailableSolutionStacksCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAvailableSolutionStacksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAvailableSolutionStacksCommandInput, ListAvailableSolutionStacksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "ListAvailableSolutionStacksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: ListAvailableSolutionStacksResultMessage.filterSensitiveLog,
+export class ListAvailableSolutionStacksCommand extends command<ListAvailableSolutionStacksCommandInput, ListAvailableSolutionStacksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAvailableSolutionStacks",
+  ListAvailableSolutionStacks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: ListAvailableSolutionStacksResultMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAvailableSolutionStacksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListAvailableSolutionStacksCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAvailableSolutionStacksCommandOutput> {
-    return deserializeAws_queryListAvailableSolutionStacksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAvailableSolutionStacksCommandInput;
+      output: ListAvailableSolutionStacksCommandOutput;
+    };
+  };
 }

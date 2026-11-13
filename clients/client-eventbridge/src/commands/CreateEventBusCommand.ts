@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { CreateEventBusRequest, CreateEventBusResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateEventBusCommand,
-  serializeAws_json1_1CreateEventBusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEventBusRequest, CreateEventBusResponse } from "../models/models_0";
+import { CreateEventBus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEventBusCommand}.
+ */
 export interface CreateEventBusCommandInput extends CreateEventBusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEventBusCommand}.
+ */
 export interface CreateEventBusCommandOutput extends CreateEventBusResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,94 @@ export interface CreateEventBusCommandOutput extends CreateEventBusResponse, __M
  * ```javascript
  * import { EventBridgeClient, CreateEventBusCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, CreateEventBusCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // CreateEventBusRequest
+ *   Name: "STRING_VALUE", // required
+ *   EventSourceName: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   KmsKeyIdentifier: "STRING_VALUE",
+ *   DeadLetterConfig: { // DeadLetterConfig
+ *     Arn: "STRING_VALUE",
+ *   },
+ *   LogConfig: { // LogConfig
+ *     IncludeDetail: "NONE" || "FULL",
+ *     Level: "OFF" || "ERROR" || "INFO" || "TRACE",
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateEventBusCommand(input);
  * const response = await client.send(command);
+ * // { // CreateEventBusResponse
+ * //   EventBusArn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   KmsKeyIdentifier: "STRING_VALUE",
+ * //   DeadLetterConfig: { // DeadLetterConfig
+ * //     Arn: "STRING_VALUE",
+ * //   },
+ * //   LogConfig: { // LogConfig
+ * //     IncludeDetail: "NONE" || "FULL",
+ * //     Level: "OFF" || "ERROR" || "INFO" || "TRACE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateEventBusCommandInput - {@link CreateEventBusCommandInput}
+ * @returns {@link CreateEventBusCommandOutput}
  * @see {@link CreateEventBusCommandInput} for command's `input` shape.
  * @see {@link CreateEventBusCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>The specified state is not a valid state for an event source.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request failed because it attempted to create resource beyond the allowed service
+ *       quota.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource you are trying to create already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class CreateEventBusCommand extends $Command<
-  CreateEventBusCommandInput,
-  CreateEventBusCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEventBusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEventBusCommandInput, CreateEventBusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "CreateEventBusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEventBusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateEventBusResponse.filterSensitiveLog,
+export class CreateEventBusCommand extends command<CreateEventBusCommandInput, CreateEventBusCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEventBus",
+  CreateEventBus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEventBusRequest;
+      output: CreateEventBusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEventBusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateEventBusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateEventBusCommandOutput> {
-    return deserializeAws_json1_1CreateEventBusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEventBusCommandInput;
+      output: CreateEventBusCommandOutput;
+    };
+  };
 }

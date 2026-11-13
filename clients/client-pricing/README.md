@@ -1,41 +1,16 @@
-# @aws-sdk/client-pricing
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-pricing/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-pricing)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-pricing.svg)](https://www.npmjs.com/package/@aws-sdk/client-pricing)
+# @aws-sdk/client-pricing
 
 ## Description
 
 AWS SDK for JavaScript Pricing Client for Node.js, Browser and React Native.
 
-<p>Amazon Web Services Price List Service API (Amazon Web Services Price List Service) is a centralized and convenient way to
-programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List Service
-uses standardized product attributes such as <code>Location</code>, <code>Storage
-Class</code>, and <code>Operating System</code>, and provides prices at the SKU
-level. You can use the Amazon Web Services Price List Service to build cost control and scenario planning tools, reconcile
-billing data, forecast future spend for budgeting purposes, and provide cost benefit
-analysis that compare your internal workloads with Amazon Web Services.</p>
-<p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then
-<code>GetServices</code> with a service code to retreive the attribute names for
-that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>
-to see what values are available for an attribute. With the service code and an attribute name and value,
-you can use <code>GetProducts</code> to find specific products that you're interested in, such as
-an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code>
-<code>volumeType</code>.</p>
-<p>Service Endpoint</p>
-<p>Amazon Web Services Price List Service API provides the following two endpoints:</p>
-<ul>
-<li>
-<p>https://api.pricing.us-east-1.amazonaws.com</p>
-</li>
-<li>
-<p>https://api.pricing.ap-south-1.amazonaws.com</p>
-</li>
-</ul>
+<p>The Amazon Web Services Price List API is a centralized and convenient way to programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List uses standardized product attributes such as <code>Location</code>, <code>Storage Class</code>, and <code>Operating System</code>, and provides prices at the SKU level. You can use the Amazon Web Services Price List to do the following:</p> <ul> <li> <p>Build cost control and scenario planning tools</p> </li> <li> <p>Reconcile billing data</p> </li> <li> <p>Forecast future spend for budgeting purposes</p> </li> <li> <p>Provide cost benefit analysis that compare your internal workloads with Amazon Web Services</p> </li> </ul> <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all Amazon Web Services services, then <code>GetServices</code> with a service code to retrieve the attribute names for that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code> to see what values are available for an attribute. With the service code and an attribute name and value, you can use <code>GetProducts</code> to find specific products that you're interested in, such as an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> <code>volumeType</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html">Using the Amazon Web Services Price List API</a> in the <i>Billing User Guide</i>.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-pricing
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-pricing`
 - `yarn add @aws-sdk/client-pricing`
@@ -47,40 +22,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `PricingClient` and
-the commands you need, for example `DescribeServicesCommand`:
+the commands you need, for example `ListPriceListsCommand`:
 
 ```js
 // ES5 example
-const { PricingClient, DescribeServicesCommand } = require("@aws-sdk/client-pricing");
+const { PricingClient, ListPriceListsCommand } = require("@aws-sdk/client-pricing");
 ```
 
 ```ts
 // ES6+ example
-import { PricingClient, DescribeServicesCommand } from "@aws-sdk/client-pricing";
+import { PricingClient, ListPriceListsCommand } from "@aws-sdk/client-pricing";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new PricingClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new DescribeServicesCommand(params);
+const params = { /** input parameters */ };
+const command = new ListPriceListsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -95,26 +68,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -130,31 +86,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Pricing` extends `PricingClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`PricingClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-pricing";
-const client = new AWS.Pricing({ region: "REGION" });
+import { Pricing } from "@aws-sdk/client-pricing";
+
+const client = new Pricing({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.describeServices(params);
+  const data = await client.listPriceLists(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -162,7 +112,7 @@ try {
 
 // Promises.
 client
-  .describeServices(params)
+  .listPriceLists(params)
   .then((data) => {
     // process data.
   })
@@ -170,9 +120,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.describeServices(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listPriceLists(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -198,12 +148,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -224,3 +176,41 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+DescribeServices
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/pricing/command/DescribeServicesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/DescribeServicesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/DescribeServicesCommandOutput/)
+</details>
+<details>
+<summary>
+GetAttributeValues
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/pricing/command/GetAttributeValuesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetAttributeValuesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetAttributeValuesCommandOutput/)
+</details>
+<details>
+<summary>
+GetPriceListFileUrl
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/pricing/command/GetPriceListFileUrlCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetPriceListFileUrlCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetPriceListFileUrlCommandOutput/)
+</details>
+<details>
+<summary>
+GetProducts
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/pricing/command/GetProductsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetProductsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/GetProductsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPriceLists
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/pricing/command/ListPriceListsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/ListPriceListsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-pricing/Interface/ListPriceListsCommandOutput/)
+</details>

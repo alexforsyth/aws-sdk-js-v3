@@ -1,99 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DiscoverPollEndpointRequest, DiscoverPollEndpointResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DiscoverPollEndpointCommand,
-  serializeAws_json1_1DiscoverPollEndpointCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DiscoverPollEndpointRequest, DiscoverPollEndpointResponse } from "../models/models_0";
+import { DiscoverPollEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DiscoverPollEndpointCommand}.
+ */
 export interface DiscoverPollEndpointCommandInput extends DiscoverPollEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DiscoverPollEndpointCommand}.
+ */
 export interface DiscoverPollEndpointCommandOutput extends DiscoverPollEndpointResponse, __MetadataBearer {}
 
 /**
- * <note>
- *             <p>This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.</p>
- *          </note>
- *          <p>Returns an endpoint for
- * 			the Amazon ECS agent to poll for updates.</p>
+ * <note> <p>This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.</p> </note> <p>Returns an endpoint for the Amazon ECS agent to poll for updates.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, DiscoverPollEndpointCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DiscoverPollEndpointCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DiscoverPollEndpointRequest
+ *   containerInstance: "STRING_VALUE",
+ *   cluster: "STRING_VALUE",
+ * };
  * const command = new DiscoverPollEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // DiscoverPollEndpointResponse
+ * //   endpoint: "STRING_VALUE",
+ * //   telemetryEndpoint: "STRING_VALUE",
+ * //   serviceConnectEndpoint: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DiscoverPollEndpointCommandInput - {@link DiscoverPollEndpointCommandInput}
+ * @returns {@link DiscoverPollEndpointCommandOutput}
  * @see {@link DiscoverPollEndpointCommandInput} for command's `input` shape.
  * @see {@link DiscoverPollEndpointCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @public
  */
-export class DiscoverPollEndpointCommand extends $Command<
-  DiscoverPollEndpointCommandInput,
-  DiscoverPollEndpointCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DiscoverPollEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DiscoverPollEndpointCommandInput, DiscoverPollEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DiscoverPollEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DiscoverPollEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DiscoverPollEndpointResponse.filterSensitiveLog,
+export class DiscoverPollEndpointCommand extends command<DiscoverPollEndpointCommandInput, DiscoverPollEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "DiscoverPollEndpoint",
+  DiscoverPollEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DiscoverPollEndpointRequest;
+      output: DiscoverPollEndpointResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DiscoverPollEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DiscoverPollEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DiscoverPollEndpointCommandOutput> {
-    return deserializeAws_json1_1DiscoverPollEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DiscoverPollEndpointCommandInput;
+      output: DiscoverPollEndpointCommandOutput;
+    };
+  };
 }

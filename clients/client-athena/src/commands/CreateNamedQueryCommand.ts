@@ -1,99 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { CreateNamedQueryInput, CreateNamedQueryOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateNamedQueryCommand,
-  serializeAws_json1_1CreateNamedQueryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateNamedQueryInput, CreateNamedQueryOutput } from "../models/models_0";
+import { CreateNamedQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateNamedQueryCommand}.
+ */
 export interface CreateNamedQueryCommandInput extends CreateNamedQueryInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateNamedQueryCommand}.
+ */
 export interface CreateNamedQueryCommandOutput extends CreateNamedQueryOutput, __MetadataBearer {}
 
 /**
  * <p>Creates a named query in the specified workgroup. Requires that you have access to the
  *             workgroup.</p>
- *         <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and
- *                 Code Samples</a> in the <i>Amazon Athena User
- *             Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AthenaClient, CreateNamedQueryCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, CreateNamedQueryCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // CreateNamedQueryInput
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Database: "STRING_VALUE", // required
+ *   QueryString: "STRING_VALUE", // required
+ *   ClientRequestToken: "STRING_VALUE",
+ *   WorkGroup: "STRING_VALUE",
+ * };
  * const command = new CreateNamedQueryCommand(input);
  * const response = await client.send(command);
+ * // { // CreateNamedQueryOutput
+ * //   NamedQueryId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateNamedQueryCommandInput - {@link CreateNamedQueryCommandInput}
+ * @returns {@link CreateNamedQueryCommandOutput}
  * @see {@link CreateNamedQueryCommandInput} for command's `input` shape.
  * @see {@link CreateNamedQueryCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class CreateNamedQueryCommand extends $Command<
-  CreateNamedQueryCommandInput,
-  CreateNamedQueryCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateNamedQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateNamedQueryCommandInput, CreateNamedQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "CreateNamedQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateNamedQueryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateNamedQueryOutput.filterSensitiveLog,
+export class CreateNamedQueryCommand extends command<CreateNamedQueryCommandInput, CreateNamedQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateNamedQuery",
+  CreateNamedQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNamedQueryInput;
+      output: CreateNamedQueryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateNamedQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateNamedQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateNamedQueryCommandOutput> {
-    return deserializeAws_json1_1CreateNamedQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateNamedQueryCommandInput;
+      output: CreateNamedQueryCommandOutput;
+    };
+  };
 }

@@ -1,99 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateConfigurationSetRequest, CreateConfigurationSetResponse } from "../models/models_0";
-import {
-  deserializeAws_queryCreateConfigurationSetCommand,
-  serializeAws_queryCreateConfigurationSetCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateConfigurationSetRequest, CreateConfigurationSetResponse } from "../models/models_0";
+import { CreateConfigurationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConfigurationSetCommand}.
+ */
 export interface CreateConfigurationSetCommandInput extends CreateConfigurationSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConfigurationSetCommand}.
+ */
 export interface CreateConfigurationSetCommandOutput extends CreateConfigurationSetResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a configuration set.</p>
- *         <p>Configuration sets enable you to publish email sending events. For information about
- *             using configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer
- *                 Guide</a>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>Configuration sets enable you to publish email sending events. For information about
+ *             using configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html">Amazon SES Developer
+ *             Guide</a>.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, CreateConfigurationSetCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, CreateConfigurationSetCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // CreateConfigurationSetRequest
+ *   ConfigurationSet: { // ConfigurationSet
+ *     Name: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new CreateConfigurationSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateConfigurationSetCommandInput - {@link CreateConfigurationSetCommandInput}
+ * @returns {@link CreateConfigurationSetCommandOutput}
  * @see {@link CreateConfigurationSetCommandInput} for command's `input` shape.
  * @see {@link CreateConfigurationSetCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link ConfigurationSetAlreadyExistsException} (client fault)
+ *  <p>Indicates that the configuration set could not be created because of a naming
+ *             conflict.</p>
+ *
+ * @throws {@link InvalidConfigurationSetException} (client fault)
+ *  <p>Indicates that the configuration set is invalid. See the error message for
+ *             details.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Indicates that a resource could not be created because of service limits. For a list
+ *             of Amazon SES limits, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html">Amazon SES Developer
+ *             Guide</a>.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConfigurationSetCommand extends $Command<
-  CreateConfigurationSetCommandInput,
-  CreateConfigurationSetCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConfigurationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConfigurationSetCommandInput, CreateConfigurationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "CreateConfigurationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConfigurationSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConfigurationSetResponse.filterSensitiveLog,
+export class CreateConfigurationSetCommand extends command<CreateConfigurationSetCommandInput, CreateConfigurationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConfigurationSet",
+  CreateConfigurationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConfigurationSetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateConfigurationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateConfigurationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateConfigurationSetCommandOutput> {
-    return deserializeAws_queryCreateConfigurationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConfigurationSetCommandInput;
+      output: CreateConfigurationSetCommandOutput;
+    };
+  };
 }

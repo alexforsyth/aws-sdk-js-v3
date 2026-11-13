@@ -1,114 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ModifyVpcEndpointServiceConfigurationRequest,
   ModifyVpcEndpointServiceConfigurationResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyVpcEndpointServiceConfigurationCommand,
-  serializeAws_ec2ModifyVpcEndpointServiceConfigurationCommand,
-} from "../protocols/Aws_ec2";
-
-export interface ModifyVpcEndpointServiceConfigurationCommandInput
-  extends ModifyVpcEndpointServiceConfigurationRequest {}
-export interface ModifyVpcEndpointServiceConfigurationCommandOutput
-  extends ModifyVpcEndpointServiceConfigurationResult,
-    __MetadataBearer {}
+} from "../models/models_7";
+import { ModifyVpcEndpointServiceConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Modifies the attributes of your VPC endpoint service configuration. You can change the
- *             Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is
- *             required for requests to connect to your endpoint service through an interface VPC
- *             endpoint.</p>
- * 	        <p>If you set or modify the private DNS name, you must prove that you own the private DNS
- *             domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service
- *                 Private DNS Name Verification</a> in the
- *             <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyVpcEndpointServiceConfigurationCommand}.
+ */
+export interface ModifyVpcEndpointServiceConfigurationCommandInput extends ModifyVpcEndpointServiceConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyVpcEndpointServiceConfigurationCommand}.
+ */
+export interface ModifyVpcEndpointServiceConfigurationCommandOutput extends ModifyVpcEndpointServiceConfigurationResult, __MetadataBearer {}
+
+/**
+ * <p>Modifies the attributes of the specified VPC endpoint service configuration.</p>
+ *          <p>If you set or modify the private DNS name, you must prove that you own the private DNS
+ *             domain name.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifyVpcEndpointServiceConfigurationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyVpcEndpointServiceConfigurationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyVpcEndpointServiceConfigurationRequest
+ *   DryRun: true || false,
+ *   ServiceId: "STRING_VALUE", // required
+ *   PrivateDnsName: "STRING_VALUE",
+ *   RemovePrivateDnsName: true || false,
+ *   AcceptanceRequired: true || false,
+ *   AddNetworkLoadBalancerArns: [ // ValueStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   RemoveNetworkLoadBalancerArns: [
+ *     "STRING_VALUE",
+ *   ],
+ *   AddGatewayLoadBalancerArns: [
+ *     "STRING_VALUE",
+ *   ],
+ *   RemoveGatewayLoadBalancerArns: [
+ *     "STRING_VALUE",
+ *   ],
+ *   AddSupportedIpAddressTypes: [
+ *     "STRING_VALUE",
+ *   ],
+ *   RemoveSupportedIpAddressTypes: "<ValueStringList>",
+ *   AddSupportedRegions: "<ValueStringList>",
+ *   RemoveSupportedRegions: "<ValueStringList>",
+ * };
  * const command = new ModifyVpcEndpointServiceConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyVpcEndpointServiceConfigurationResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyVpcEndpointServiceConfigurationCommandInput - {@link ModifyVpcEndpointServiceConfigurationCommandInput}
+ * @returns {@link ModifyVpcEndpointServiceConfigurationCommandOutput}
  * @see {@link ModifyVpcEndpointServiceConfigurationCommandInput} for command's `input` shape.
  * @see {@link ModifyVpcEndpointServiceConfigurationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyVpcEndpointServiceConfigurationCommand extends $Command<
-  ModifyVpcEndpointServiceConfigurationCommandInput,
-  ModifyVpcEndpointServiceConfigurationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyVpcEndpointServiceConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyVpcEndpointServiceConfigurationCommandInput, ModifyVpcEndpointServiceConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyVpcEndpointServiceConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyVpcEndpointServiceConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyVpcEndpointServiceConfigurationResult.filterSensitiveLog,
+export class ModifyVpcEndpointServiceConfigurationCommand extends command<ModifyVpcEndpointServiceConfigurationCommandInput, ModifyVpcEndpointServiceConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyVpcEndpointServiceConfiguration",
+  ModifyVpcEndpointServiceConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcEndpointServiceConfigurationRequest;
+      output: ModifyVpcEndpointServiceConfigurationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ModifyVpcEndpointServiceConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyVpcEndpointServiceConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyVpcEndpointServiceConfigurationCommandOutput> {
-    return deserializeAws_ec2ModifyVpcEndpointServiceConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyVpcEndpointServiceConfigurationCommandInput;
+      output: ModifyVpcEndpointServiceConfigurationCommandOutput;
+    };
+  };
 }

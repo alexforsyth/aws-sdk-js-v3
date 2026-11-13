@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { DeleteIntegrationRequest, DeleteIntegrationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteIntegrationCommand,
-  serializeAws_restJson1DeleteIntegrationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteIntegrationRequest, DeleteIntegrationResponse } from "../models/models_0";
+import { DeleteIntegration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIntegrationCommand}.
+ */
 export interface DeleteIntegrationCommandInput extends DeleteIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIntegrationCommand}.
+ */
 export interface DeleteIntegrationCommandOutput extends DeleteIntegrationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface DeleteIntegrationCommandOutput extends DeleteIntegrationRespons
  * ```javascript
  * import { CustomerProfilesClient, DeleteIntegrationCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, DeleteIntegrationCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // DeleteIntegrationRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   Uri: "STRING_VALUE", // required
+ * };
  * const command = new DeleteIntegrationCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteIntegrationResponse
+ * //   Message: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteIntegrationCommandInput - {@link DeleteIntegrationCommandInput}
+ * @returns {@link DeleteIntegrationCommandOutput}
  * @see {@link DeleteIntegrationCommandInput} for command's `input` shape.
  * @see {@link DeleteIntegrationCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteIntegrationCommand extends $Command<
-  DeleteIntegrationCommandInput,
-  DeleteIntegrationCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteIntegrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteIntegrationCommandInput, DeleteIntegrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "DeleteIntegrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteIntegrationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteIntegrationResponse.filterSensitiveLog,
+export class DeleteIntegrationCommand extends command<DeleteIntegrationCommandInput, DeleteIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIntegration",
+  DeleteIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIntegrationRequest;
+      output: DeleteIntegrationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteIntegrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteIntegrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteIntegrationCommandOutput> {
-    return deserializeAws_restJson1DeleteIntegrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteIntegrationCommandInput;
+      output: DeleteIntegrationCommandOutput;
+    };
+  };
 }

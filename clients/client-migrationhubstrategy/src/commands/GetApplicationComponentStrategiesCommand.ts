@@ -1,0 +1,102 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetApplicationComponentStrategiesRequest,
+  GetApplicationComponentStrategiesResponse,
+} from "../models/models_0";
+import { GetApplicationComponentStrategies$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApplicationComponentStrategiesCommand}.
+ */
+export interface GetApplicationComponentStrategiesCommandInput extends GetApplicationComponentStrategiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApplicationComponentStrategiesCommand}.
+ */
+export interface GetApplicationComponentStrategiesCommandOutput extends GetApplicationComponentStrategiesResponse, __MetadataBearer {}
+
+/**
+ * <p> Retrieves a list of all the recommended strategies and tools for an application component
+ *       running on a server. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MigrationHubStrategyClient, GetApplicationComponentStrategiesCommand } from "@aws-sdk/client-migrationhubstrategy"; // ES Modules import
+ * // const { MigrationHubStrategyClient, GetApplicationComponentStrategiesCommand } = require("@aws-sdk/client-migrationhubstrategy"); // CommonJS import
+ * // import type { MigrationHubStrategyClientConfig } from "@aws-sdk/client-migrationhubstrategy";
+ * const config = {}; // type is MigrationHubStrategyClientConfig
+ * const client = new MigrationHubStrategyClient(config);
+ * const input = { // GetApplicationComponentStrategiesRequest
+ *   applicationComponentId: "STRING_VALUE", // required
+ * };
+ * const command = new GetApplicationComponentStrategiesCommand(input);
+ * const response = await client.send(command);
+ * // { // GetApplicationComponentStrategiesResponse
+ * //   applicationComponentStrategies: [ // ApplicationComponentStrategies
+ * //     { // ApplicationComponentStrategy
+ * //       recommendation: { // RecommendationSet
+ * //         transformationTool: { // TransformationTool
+ * //           name: "STRING_VALUE",
+ * //           description: "STRING_VALUE",
+ * //           tranformationToolInstallationLink: "STRING_VALUE",
+ * //         },
+ * //         targetDestination: "STRING_VALUE",
+ * //         strategy: "STRING_VALUE",
+ * //       },
+ * //       status: "STRING_VALUE",
+ * //       isPreferred: true || false,
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param GetApplicationComponentStrategiesCommandInput - {@link GetApplicationComponentStrategiesCommandInput}
+ * @returns {@link GetApplicationComponentStrategiesCommandOutput}
+ * @see {@link GetApplicationComponentStrategiesCommandInput} for command's `input` shape.
+ * @see {@link GetApplicationComponentStrategiesCommandOutput} for command's `response` shape.
+ * @see {@link MigrationHubStrategyClientResolvedConfig | config} for MigrationHubStrategyClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The server experienced an internal error. Try again. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ID in the request is not found. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p> The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MigrationHubStrategyServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubStrategy service.</p>
+ *
+ *
+ * @public
+ */
+export class GetApplicationComponentStrategiesCommand extends command<GetApplicationComponentStrategiesCommandInput, GetApplicationComponentStrategiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApplicationComponentStrategies",
+  GetApplicationComponentStrategies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApplicationComponentStrategiesRequest;
+      output: GetApplicationComponentStrategiesResponse;
+    };
+    sdk: {
+      input: GetApplicationComponentStrategiesCommandInput;
+      output: GetApplicationComponentStrategiesCommandOutput;
+    };
+  };
+}

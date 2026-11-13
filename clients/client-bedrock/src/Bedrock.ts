@@ -1,0 +1,2789 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BedrockClient } from "./BedrockClient";
+import {
+  type BatchDeleteAdvancedPromptOptimizationJobCommandInput,
+  type BatchDeleteAdvancedPromptOptimizationJobCommandOutput,
+  BatchDeleteAdvancedPromptOptimizationJobCommand,
+} from "./commands/BatchDeleteAdvancedPromptOptimizationJobCommand";
+import {
+  type BatchDeleteEvaluationJobCommandInput,
+  type BatchDeleteEvaluationJobCommandOutput,
+  BatchDeleteEvaluationJobCommand,
+} from "./commands/BatchDeleteEvaluationJobCommand";
+import {
+  type CancelAutomatedReasoningPolicyBuildWorkflowCommandInput,
+  type CancelAutomatedReasoningPolicyBuildWorkflowCommandOutput,
+  CancelAutomatedReasoningPolicyBuildWorkflowCommand,
+} from "./commands/CancelAutomatedReasoningPolicyBuildWorkflowCommand";
+import {
+  type CreateAdvancedPromptOptimizationJobCommandInput,
+  type CreateAdvancedPromptOptimizationJobCommandOutput,
+  CreateAdvancedPromptOptimizationJobCommand,
+} from "./commands/CreateAdvancedPromptOptimizationJobCommand";
+import {
+  type CreateAutomatedReasoningPolicyCommandInput,
+  type CreateAutomatedReasoningPolicyCommandOutput,
+  CreateAutomatedReasoningPolicyCommand,
+} from "./commands/CreateAutomatedReasoningPolicyCommand";
+import {
+  type CreateAutomatedReasoningPolicyTestCaseCommandInput,
+  type CreateAutomatedReasoningPolicyTestCaseCommandOutput,
+  CreateAutomatedReasoningPolicyTestCaseCommand,
+} from "./commands/CreateAutomatedReasoningPolicyTestCaseCommand";
+import {
+  type CreateAutomatedReasoningPolicyVersionCommandInput,
+  type CreateAutomatedReasoningPolicyVersionCommandOutput,
+  CreateAutomatedReasoningPolicyVersionCommand,
+} from "./commands/CreateAutomatedReasoningPolicyVersionCommand";
+import {
+  type CreateCustomModelCommandInput,
+  type CreateCustomModelCommandOutput,
+  CreateCustomModelCommand,
+} from "./commands/CreateCustomModelCommand";
+import {
+  type CreateCustomModelDeploymentCommandInput,
+  type CreateCustomModelDeploymentCommandOutput,
+  CreateCustomModelDeploymentCommand,
+} from "./commands/CreateCustomModelDeploymentCommand";
+import {
+  type CreateEvaluationJobCommandInput,
+  type CreateEvaluationJobCommandOutput,
+  CreateEvaluationJobCommand,
+} from "./commands/CreateEvaluationJobCommand";
+import {
+  type CreateFoundationModelAgreementCommandInput,
+  type CreateFoundationModelAgreementCommandOutput,
+  CreateFoundationModelAgreementCommand,
+} from "./commands/CreateFoundationModelAgreementCommand";
+import {
+  type CreateGuardrailCommandInput,
+  type CreateGuardrailCommandOutput,
+  CreateGuardrailCommand,
+} from "./commands/CreateGuardrailCommand";
+import {
+  type CreateGuardrailVersionCommandInput,
+  type CreateGuardrailVersionCommandOutput,
+  CreateGuardrailVersionCommand,
+} from "./commands/CreateGuardrailVersionCommand";
+import {
+  type CreateInferenceProfileCommandInput,
+  type CreateInferenceProfileCommandOutput,
+  CreateInferenceProfileCommand,
+} from "./commands/CreateInferenceProfileCommand";
+import {
+  type CreateMarketplaceModelEndpointCommandInput,
+  type CreateMarketplaceModelEndpointCommandOutput,
+  CreateMarketplaceModelEndpointCommand,
+} from "./commands/CreateMarketplaceModelEndpointCommand";
+import {
+  type CreateModelCopyJobCommandInput,
+  type CreateModelCopyJobCommandOutput,
+  CreateModelCopyJobCommand,
+} from "./commands/CreateModelCopyJobCommand";
+import {
+  type CreateModelCustomizationJobCommandInput,
+  type CreateModelCustomizationJobCommandOutput,
+  CreateModelCustomizationJobCommand,
+} from "./commands/CreateModelCustomizationJobCommand";
+import {
+  type CreateModelImportJobCommandInput,
+  type CreateModelImportJobCommandOutput,
+  CreateModelImportJobCommand,
+} from "./commands/CreateModelImportJobCommand";
+import {
+  type CreateModelInvocationJobCommandInput,
+  type CreateModelInvocationJobCommandOutput,
+  CreateModelInvocationJobCommand,
+} from "./commands/CreateModelInvocationJobCommand";
+import {
+  type CreatePromptRouterCommandInput,
+  type CreatePromptRouterCommandOutput,
+  CreatePromptRouterCommand,
+} from "./commands/CreatePromptRouterCommand";
+import {
+  type CreateProvisionedModelThroughputCommandInput,
+  type CreateProvisionedModelThroughputCommandOutput,
+  CreateProvisionedModelThroughputCommand,
+} from "./commands/CreateProvisionedModelThroughputCommand";
+import {
+  type DeleteAutomatedReasoningPolicyBuildWorkflowCommandInput,
+  type DeleteAutomatedReasoningPolicyBuildWorkflowCommandOutput,
+  DeleteAutomatedReasoningPolicyBuildWorkflowCommand,
+} from "./commands/DeleteAutomatedReasoningPolicyBuildWorkflowCommand";
+import {
+  type DeleteAutomatedReasoningPolicyCommandInput,
+  type DeleteAutomatedReasoningPolicyCommandOutput,
+  DeleteAutomatedReasoningPolicyCommand,
+} from "./commands/DeleteAutomatedReasoningPolicyCommand";
+import {
+  type DeleteAutomatedReasoningPolicyTestCaseCommandInput,
+  type DeleteAutomatedReasoningPolicyTestCaseCommandOutput,
+  DeleteAutomatedReasoningPolicyTestCaseCommand,
+} from "./commands/DeleteAutomatedReasoningPolicyTestCaseCommand";
+import {
+  type DeleteCustomModelCommandInput,
+  type DeleteCustomModelCommandOutput,
+  DeleteCustomModelCommand,
+} from "./commands/DeleteCustomModelCommand";
+import {
+  type DeleteCustomModelDeploymentCommandInput,
+  type DeleteCustomModelDeploymentCommandOutput,
+  DeleteCustomModelDeploymentCommand,
+} from "./commands/DeleteCustomModelDeploymentCommand";
+import {
+  type DeleteEnforcedGuardrailConfigurationCommandInput,
+  type DeleteEnforcedGuardrailConfigurationCommandOutput,
+  DeleteEnforcedGuardrailConfigurationCommand,
+} from "./commands/DeleteEnforcedGuardrailConfigurationCommand";
+import {
+  type DeleteFoundationModelAgreementCommandInput,
+  type DeleteFoundationModelAgreementCommandOutput,
+  DeleteFoundationModelAgreementCommand,
+} from "./commands/DeleteFoundationModelAgreementCommand";
+import {
+  type DeleteGuardrailCommandInput,
+  type DeleteGuardrailCommandOutput,
+  DeleteGuardrailCommand,
+} from "./commands/DeleteGuardrailCommand";
+import {
+  type DeleteImportedModelCommandInput,
+  type DeleteImportedModelCommandOutput,
+  DeleteImportedModelCommand,
+} from "./commands/DeleteImportedModelCommand";
+import {
+  type DeleteInferenceProfileCommandInput,
+  type DeleteInferenceProfileCommandOutput,
+  DeleteInferenceProfileCommand,
+} from "./commands/DeleteInferenceProfileCommand";
+import {
+  type DeleteMarketplaceModelEndpointCommandInput,
+  type DeleteMarketplaceModelEndpointCommandOutput,
+  DeleteMarketplaceModelEndpointCommand,
+} from "./commands/DeleteMarketplaceModelEndpointCommand";
+import {
+  type DeleteModelInvocationLoggingConfigurationCommandInput,
+  type DeleteModelInvocationLoggingConfigurationCommandOutput,
+  DeleteModelInvocationLoggingConfigurationCommand,
+} from "./commands/DeleteModelInvocationLoggingConfigurationCommand";
+import {
+  type DeletePromptRouterCommandInput,
+  type DeletePromptRouterCommandOutput,
+  DeletePromptRouterCommand,
+} from "./commands/DeletePromptRouterCommand";
+import {
+  type DeleteProvisionedModelThroughputCommandInput,
+  type DeleteProvisionedModelThroughputCommandOutput,
+  DeleteProvisionedModelThroughputCommand,
+} from "./commands/DeleteProvisionedModelThroughputCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeregisterMarketplaceModelEndpointCommandInput,
+  type DeregisterMarketplaceModelEndpointCommandOutput,
+  DeregisterMarketplaceModelEndpointCommand,
+} from "./commands/DeregisterMarketplaceModelEndpointCommand";
+import {
+  type ExportAutomatedReasoningPolicyVersionCommandInput,
+  type ExportAutomatedReasoningPolicyVersionCommandOutput,
+  ExportAutomatedReasoningPolicyVersionCommand,
+} from "./commands/ExportAutomatedReasoningPolicyVersionCommand";
+import {
+  type GetAccountDataRetentionCommandInput,
+  type GetAccountDataRetentionCommandOutput,
+  GetAccountDataRetentionCommand,
+} from "./commands/GetAccountDataRetentionCommand";
+import {
+  type GetAdvancedPromptOptimizationJobCommandInput,
+  type GetAdvancedPromptOptimizationJobCommandOutput,
+  GetAdvancedPromptOptimizationJobCommand,
+} from "./commands/GetAdvancedPromptOptimizationJobCommand";
+import {
+  type GetAutomatedReasoningPolicyAnnotationsCommandInput,
+  type GetAutomatedReasoningPolicyAnnotationsCommandOutput,
+  GetAutomatedReasoningPolicyAnnotationsCommand,
+} from "./commands/GetAutomatedReasoningPolicyAnnotationsCommand";
+import {
+  type GetAutomatedReasoningPolicyBuildWorkflowCommandInput,
+  type GetAutomatedReasoningPolicyBuildWorkflowCommandOutput,
+  GetAutomatedReasoningPolicyBuildWorkflowCommand,
+} from "./commands/GetAutomatedReasoningPolicyBuildWorkflowCommand";
+import {
+  type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandInput,
+  type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandOutput,
+  GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommand,
+} from "./commands/GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommand";
+import {
+  type GetAutomatedReasoningPolicyCommandInput,
+  type GetAutomatedReasoningPolicyCommandOutput,
+  GetAutomatedReasoningPolicyCommand,
+} from "./commands/GetAutomatedReasoningPolicyCommand";
+import {
+  type GetAutomatedReasoningPolicyNextScenarioCommandInput,
+  type GetAutomatedReasoningPolicyNextScenarioCommandOutput,
+  GetAutomatedReasoningPolicyNextScenarioCommand,
+} from "./commands/GetAutomatedReasoningPolicyNextScenarioCommand";
+import {
+  type GetAutomatedReasoningPolicyTestCaseCommandInput,
+  type GetAutomatedReasoningPolicyTestCaseCommandOutput,
+  GetAutomatedReasoningPolicyTestCaseCommand,
+} from "./commands/GetAutomatedReasoningPolicyTestCaseCommand";
+import {
+  type GetAutomatedReasoningPolicyTestResultCommandInput,
+  type GetAutomatedReasoningPolicyTestResultCommandOutput,
+  GetAutomatedReasoningPolicyTestResultCommand,
+} from "./commands/GetAutomatedReasoningPolicyTestResultCommand";
+import {
+  type GetCustomModelCommandInput,
+  type GetCustomModelCommandOutput,
+  GetCustomModelCommand,
+} from "./commands/GetCustomModelCommand";
+import {
+  type GetCustomModelDeploymentCommandInput,
+  type GetCustomModelDeploymentCommandOutput,
+  GetCustomModelDeploymentCommand,
+} from "./commands/GetCustomModelDeploymentCommand";
+import {
+  type GetEvaluationJobCommandInput,
+  type GetEvaluationJobCommandOutput,
+  GetEvaluationJobCommand,
+} from "./commands/GetEvaluationJobCommand";
+import {
+  type GetFoundationModelAvailabilityCommandInput,
+  type GetFoundationModelAvailabilityCommandOutput,
+  GetFoundationModelAvailabilityCommand,
+} from "./commands/GetFoundationModelAvailabilityCommand";
+import {
+  type GetFoundationModelCommandInput,
+  type GetFoundationModelCommandOutput,
+  GetFoundationModelCommand,
+} from "./commands/GetFoundationModelCommand";
+import {
+  type GetGuardrailCommandInput,
+  type GetGuardrailCommandOutput,
+  GetGuardrailCommand,
+} from "./commands/GetGuardrailCommand";
+import {
+  type GetImportedModelCommandInput,
+  type GetImportedModelCommandOutput,
+  GetImportedModelCommand,
+} from "./commands/GetImportedModelCommand";
+import {
+  type GetInferenceProfileCommandInput,
+  type GetInferenceProfileCommandOutput,
+  GetInferenceProfileCommand,
+} from "./commands/GetInferenceProfileCommand";
+import {
+  type GetMarketplaceModelEndpointCommandInput,
+  type GetMarketplaceModelEndpointCommandOutput,
+  GetMarketplaceModelEndpointCommand,
+} from "./commands/GetMarketplaceModelEndpointCommand";
+import {
+  type GetModelCopyJobCommandInput,
+  type GetModelCopyJobCommandOutput,
+  GetModelCopyJobCommand,
+} from "./commands/GetModelCopyJobCommand";
+import {
+  type GetModelCustomizationJobCommandInput,
+  type GetModelCustomizationJobCommandOutput,
+  GetModelCustomizationJobCommand,
+} from "./commands/GetModelCustomizationJobCommand";
+import {
+  type GetModelImportJobCommandInput,
+  type GetModelImportJobCommandOutput,
+  GetModelImportJobCommand,
+} from "./commands/GetModelImportJobCommand";
+import {
+  type GetModelInvocationJobCommandInput,
+  type GetModelInvocationJobCommandOutput,
+  GetModelInvocationJobCommand,
+} from "./commands/GetModelInvocationJobCommand";
+import {
+  type GetModelInvocationLoggingConfigurationCommandInput,
+  type GetModelInvocationLoggingConfigurationCommandOutput,
+  GetModelInvocationLoggingConfigurationCommand,
+} from "./commands/GetModelInvocationLoggingConfigurationCommand";
+import {
+  type GetPromptRouterCommandInput,
+  type GetPromptRouterCommandOutput,
+  GetPromptRouterCommand,
+} from "./commands/GetPromptRouterCommand";
+import {
+  type GetProvisionedModelThroughputCommandInput,
+  type GetProvisionedModelThroughputCommandOutput,
+  GetProvisionedModelThroughputCommand,
+} from "./commands/GetProvisionedModelThroughputCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetUseCaseForModelAccessCommandInput,
+  type GetUseCaseForModelAccessCommandOutput,
+  GetUseCaseForModelAccessCommand,
+} from "./commands/GetUseCaseForModelAccessCommand";
+import {
+  type ListAdvancedPromptOptimizationJobsCommandInput,
+  type ListAdvancedPromptOptimizationJobsCommandOutput,
+  ListAdvancedPromptOptimizationJobsCommand,
+} from "./commands/ListAdvancedPromptOptimizationJobsCommand";
+import {
+  type ListAutomatedReasoningPoliciesCommandInput,
+  type ListAutomatedReasoningPoliciesCommandOutput,
+  ListAutomatedReasoningPoliciesCommand,
+} from "./commands/ListAutomatedReasoningPoliciesCommand";
+import {
+  type ListAutomatedReasoningPolicyBuildWorkflowsCommandInput,
+  type ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput,
+  ListAutomatedReasoningPolicyBuildWorkflowsCommand,
+} from "./commands/ListAutomatedReasoningPolicyBuildWorkflowsCommand";
+import {
+  type ListAutomatedReasoningPolicyTestCasesCommandInput,
+  type ListAutomatedReasoningPolicyTestCasesCommandOutput,
+  ListAutomatedReasoningPolicyTestCasesCommand,
+} from "./commands/ListAutomatedReasoningPolicyTestCasesCommand";
+import {
+  type ListAutomatedReasoningPolicyTestResultsCommandInput,
+  type ListAutomatedReasoningPolicyTestResultsCommandOutput,
+  ListAutomatedReasoningPolicyTestResultsCommand,
+} from "./commands/ListAutomatedReasoningPolicyTestResultsCommand";
+import {
+  type ListCustomModelDeploymentsCommandInput,
+  type ListCustomModelDeploymentsCommandOutput,
+  ListCustomModelDeploymentsCommand,
+} from "./commands/ListCustomModelDeploymentsCommand";
+import {
+  type ListCustomModelsCommandInput,
+  type ListCustomModelsCommandOutput,
+  ListCustomModelsCommand,
+} from "./commands/ListCustomModelsCommand";
+import {
+  type ListEnforcedGuardrailsConfigurationCommandInput,
+  type ListEnforcedGuardrailsConfigurationCommandOutput,
+  ListEnforcedGuardrailsConfigurationCommand,
+} from "./commands/ListEnforcedGuardrailsConfigurationCommand";
+import {
+  type ListEvaluationJobsCommandInput,
+  type ListEvaluationJobsCommandOutput,
+  ListEvaluationJobsCommand,
+} from "./commands/ListEvaluationJobsCommand";
+import {
+  type ListFoundationModelAgreementOffersCommandInput,
+  type ListFoundationModelAgreementOffersCommandOutput,
+  ListFoundationModelAgreementOffersCommand,
+} from "./commands/ListFoundationModelAgreementOffersCommand";
+import {
+  type ListFoundationModelsCommandInput,
+  type ListFoundationModelsCommandOutput,
+  ListFoundationModelsCommand,
+} from "./commands/ListFoundationModelsCommand";
+import {
+  type ListGuardrailsCommandInput,
+  type ListGuardrailsCommandOutput,
+  ListGuardrailsCommand,
+} from "./commands/ListGuardrailsCommand";
+import {
+  type ListImportedModelsCommandInput,
+  type ListImportedModelsCommandOutput,
+  ListImportedModelsCommand,
+} from "./commands/ListImportedModelsCommand";
+import {
+  type ListInferenceProfilesCommandInput,
+  type ListInferenceProfilesCommandOutput,
+  ListInferenceProfilesCommand,
+} from "./commands/ListInferenceProfilesCommand";
+import {
+  type ListMarketplaceModelEndpointsCommandInput,
+  type ListMarketplaceModelEndpointsCommandOutput,
+  ListMarketplaceModelEndpointsCommand,
+} from "./commands/ListMarketplaceModelEndpointsCommand";
+import {
+  type ListModelCopyJobsCommandInput,
+  type ListModelCopyJobsCommandOutput,
+  ListModelCopyJobsCommand,
+} from "./commands/ListModelCopyJobsCommand";
+import {
+  type ListModelCustomizationJobsCommandInput,
+  type ListModelCustomizationJobsCommandOutput,
+  ListModelCustomizationJobsCommand,
+} from "./commands/ListModelCustomizationJobsCommand";
+import {
+  type ListModelImportJobsCommandInput,
+  type ListModelImportJobsCommandOutput,
+  ListModelImportJobsCommand,
+} from "./commands/ListModelImportJobsCommand";
+import {
+  type ListModelInvocationJobsCommandInput,
+  type ListModelInvocationJobsCommandOutput,
+  ListModelInvocationJobsCommand,
+} from "./commands/ListModelInvocationJobsCommand";
+import {
+  type ListPromptRoutersCommandInput,
+  type ListPromptRoutersCommandOutput,
+  ListPromptRoutersCommand,
+} from "./commands/ListPromptRoutersCommand";
+import {
+  type ListProvisionedModelThroughputsCommandInput,
+  type ListProvisionedModelThroughputsCommandOutput,
+  ListProvisionedModelThroughputsCommand,
+} from "./commands/ListProvisionedModelThroughputsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutAccountDataRetentionCommandInput,
+  type PutAccountDataRetentionCommandOutput,
+  PutAccountDataRetentionCommand,
+} from "./commands/PutAccountDataRetentionCommand";
+import {
+  type PutEnforcedGuardrailConfigurationCommandInput,
+  type PutEnforcedGuardrailConfigurationCommandOutput,
+  PutEnforcedGuardrailConfigurationCommand,
+} from "./commands/PutEnforcedGuardrailConfigurationCommand";
+import {
+  type PutModelInvocationLoggingConfigurationCommandInput,
+  type PutModelInvocationLoggingConfigurationCommandOutput,
+  PutModelInvocationLoggingConfigurationCommand,
+} from "./commands/PutModelInvocationLoggingConfigurationCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type PutUseCaseForModelAccessCommandInput,
+  type PutUseCaseForModelAccessCommandOutput,
+  PutUseCaseForModelAccessCommand,
+} from "./commands/PutUseCaseForModelAccessCommand";
+import {
+  type RegisterMarketplaceModelEndpointCommandInput,
+  type RegisterMarketplaceModelEndpointCommandOutput,
+  RegisterMarketplaceModelEndpointCommand,
+} from "./commands/RegisterMarketplaceModelEndpointCommand";
+import {
+  type StartAutomatedReasoningPolicyBuildWorkflowCommandInput,
+  type StartAutomatedReasoningPolicyBuildWorkflowCommandOutput,
+  StartAutomatedReasoningPolicyBuildWorkflowCommand,
+} from "./commands/StartAutomatedReasoningPolicyBuildWorkflowCommand";
+import {
+  type StartAutomatedReasoningPolicyTestWorkflowCommandInput,
+  type StartAutomatedReasoningPolicyTestWorkflowCommandOutput,
+  StartAutomatedReasoningPolicyTestWorkflowCommand,
+} from "./commands/StartAutomatedReasoningPolicyTestWorkflowCommand";
+import {
+  type StopAdvancedPromptOptimizationJobCommandInput,
+  type StopAdvancedPromptOptimizationJobCommandOutput,
+  StopAdvancedPromptOptimizationJobCommand,
+} from "./commands/StopAdvancedPromptOptimizationJobCommand";
+import {
+  type StopEvaluationJobCommandInput,
+  type StopEvaluationJobCommandOutput,
+  StopEvaluationJobCommand,
+} from "./commands/StopEvaluationJobCommand";
+import {
+  type StopModelCustomizationJobCommandInput,
+  type StopModelCustomizationJobCommandOutput,
+  StopModelCustomizationJobCommand,
+} from "./commands/StopModelCustomizationJobCommand";
+import {
+  type StopModelInvocationJobCommandInput,
+  type StopModelInvocationJobCommandOutput,
+  StopModelInvocationJobCommand,
+} from "./commands/StopModelInvocationJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAutomatedReasoningPolicyAnnotationsCommandInput,
+  type UpdateAutomatedReasoningPolicyAnnotationsCommandOutput,
+  UpdateAutomatedReasoningPolicyAnnotationsCommand,
+} from "./commands/UpdateAutomatedReasoningPolicyAnnotationsCommand";
+import {
+  type UpdateAutomatedReasoningPolicyCommandInput,
+  type UpdateAutomatedReasoningPolicyCommandOutput,
+  UpdateAutomatedReasoningPolicyCommand,
+} from "./commands/UpdateAutomatedReasoningPolicyCommand";
+import {
+  type UpdateAutomatedReasoningPolicyTestCaseCommandInput,
+  type UpdateAutomatedReasoningPolicyTestCaseCommandOutput,
+  UpdateAutomatedReasoningPolicyTestCaseCommand,
+} from "./commands/UpdateAutomatedReasoningPolicyTestCaseCommand";
+import {
+  type UpdateCustomModelDeploymentCommandInput,
+  type UpdateCustomModelDeploymentCommandOutput,
+  UpdateCustomModelDeploymentCommand,
+} from "./commands/UpdateCustomModelDeploymentCommand";
+import {
+  type UpdateGuardrailCommandInput,
+  type UpdateGuardrailCommandOutput,
+  UpdateGuardrailCommand,
+} from "./commands/UpdateGuardrailCommand";
+import {
+  type UpdateMarketplaceModelEndpointCommandInput,
+  type UpdateMarketplaceModelEndpointCommandOutput,
+  UpdateMarketplaceModelEndpointCommand,
+} from "./commands/UpdateMarketplaceModelEndpointCommand";
+import {
+  type UpdateProvisionedModelThroughputCommandInput,
+  type UpdateProvisionedModelThroughputCommandOutput,
+  UpdateProvisionedModelThroughputCommand,
+} from "./commands/UpdateProvisionedModelThroughputCommand";
+import { paginateListAdvancedPromptOptimizationJobs } from "./pagination/ListAdvancedPromptOptimizationJobsPaginator";
+import { paginateListAutomatedReasoningPolicies } from "./pagination/ListAutomatedReasoningPoliciesPaginator";
+import {
+  paginateListAutomatedReasoningPolicyBuildWorkflows,
+} from "./pagination/ListAutomatedReasoningPolicyBuildWorkflowsPaginator";
+import {
+  paginateListAutomatedReasoningPolicyTestCases,
+} from "./pagination/ListAutomatedReasoningPolicyTestCasesPaginator";
+import {
+  paginateListAutomatedReasoningPolicyTestResults,
+} from "./pagination/ListAutomatedReasoningPolicyTestResultsPaginator";
+import { paginateListCustomModelDeployments } from "./pagination/ListCustomModelDeploymentsPaginator";
+import { paginateListCustomModels } from "./pagination/ListCustomModelsPaginator";
+import { paginateListEnforcedGuardrailsConfiguration } from "./pagination/ListEnforcedGuardrailsConfigurationPaginator";
+import { paginateListEvaluationJobs } from "./pagination/ListEvaluationJobsPaginator";
+import { paginateListGuardrails } from "./pagination/ListGuardrailsPaginator";
+import { paginateListImportedModels } from "./pagination/ListImportedModelsPaginator";
+import { paginateListInferenceProfiles } from "./pagination/ListInferenceProfilesPaginator";
+import { paginateListMarketplaceModelEndpoints } from "./pagination/ListMarketplaceModelEndpointsPaginator";
+import { paginateListModelCopyJobs } from "./pagination/ListModelCopyJobsPaginator";
+import { paginateListModelCustomizationJobs } from "./pagination/ListModelCustomizationJobsPaginator";
+import { paginateListModelImportJobs } from "./pagination/ListModelImportJobsPaginator";
+import { paginateListModelInvocationJobs } from "./pagination/ListModelInvocationJobsPaginator";
+import { paginateListPromptRouters } from "./pagination/ListPromptRoutersPaginator";
+import { paginateListProvisionedModelThroughputs } from "./pagination/ListProvisionedModelThroughputsPaginator";
+
+const commands = {
+  BatchDeleteAdvancedPromptOptimizationJobCommand,
+  BatchDeleteEvaluationJobCommand,
+  CancelAutomatedReasoningPolicyBuildWorkflowCommand,
+  CreateAdvancedPromptOptimizationJobCommand,
+  CreateAutomatedReasoningPolicyCommand,
+  CreateAutomatedReasoningPolicyTestCaseCommand,
+  CreateAutomatedReasoningPolicyVersionCommand,
+  CreateCustomModelCommand,
+  CreateCustomModelDeploymentCommand,
+  CreateEvaluationJobCommand,
+  CreateFoundationModelAgreementCommand,
+  CreateGuardrailCommand,
+  CreateGuardrailVersionCommand,
+  CreateInferenceProfileCommand,
+  CreateMarketplaceModelEndpointCommand,
+  CreateModelCopyJobCommand,
+  CreateModelCustomizationJobCommand,
+  CreateModelImportJobCommand,
+  CreateModelInvocationJobCommand,
+  CreatePromptRouterCommand,
+  CreateProvisionedModelThroughputCommand,
+  DeleteAutomatedReasoningPolicyCommand,
+  DeleteAutomatedReasoningPolicyBuildWorkflowCommand,
+  DeleteAutomatedReasoningPolicyTestCaseCommand,
+  DeleteCustomModelCommand,
+  DeleteCustomModelDeploymentCommand,
+  DeleteEnforcedGuardrailConfigurationCommand,
+  DeleteFoundationModelAgreementCommand,
+  DeleteGuardrailCommand,
+  DeleteImportedModelCommand,
+  DeleteInferenceProfileCommand,
+  DeleteMarketplaceModelEndpointCommand,
+  DeleteModelInvocationLoggingConfigurationCommand,
+  DeletePromptRouterCommand,
+  DeleteProvisionedModelThroughputCommand,
+  DeleteResourcePolicyCommand,
+  DeregisterMarketplaceModelEndpointCommand,
+  ExportAutomatedReasoningPolicyVersionCommand,
+  GetAccountDataRetentionCommand,
+  GetAdvancedPromptOptimizationJobCommand,
+  GetAutomatedReasoningPolicyCommand,
+  GetAutomatedReasoningPolicyAnnotationsCommand,
+  GetAutomatedReasoningPolicyBuildWorkflowCommand,
+  GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommand,
+  GetAutomatedReasoningPolicyNextScenarioCommand,
+  GetAutomatedReasoningPolicyTestCaseCommand,
+  GetAutomatedReasoningPolicyTestResultCommand,
+  GetCustomModelCommand,
+  GetCustomModelDeploymentCommand,
+  GetEvaluationJobCommand,
+  GetFoundationModelCommand,
+  GetFoundationModelAvailabilityCommand,
+  GetGuardrailCommand,
+  GetImportedModelCommand,
+  GetInferenceProfileCommand,
+  GetMarketplaceModelEndpointCommand,
+  GetModelCopyJobCommand,
+  GetModelCustomizationJobCommand,
+  GetModelImportJobCommand,
+  GetModelInvocationJobCommand,
+  GetModelInvocationLoggingConfigurationCommand,
+  GetPromptRouterCommand,
+  GetProvisionedModelThroughputCommand,
+  GetResourcePolicyCommand,
+  GetUseCaseForModelAccessCommand,
+  ListAdvancedPromptOptimizationJobsCommand,
+  ListAutomatedReasoningPoliciesCommand,
+  ListAutomatedReasoningPolicyBuildWorkflowsCommand,
+  ListAutomatedReasoningPolicyTestCasesCommand,
+  ListAutomatedReasoningPolicyTestResultsCommand,
+  ListCustomModelDeploymentsCommand,
+  ListCustomModelsCommand,
+  ListEnforcedGuardrailsConfigurationCommand,
+  ListEvaluationJobsCommand,
+  ListFoundationModelAgreementOffersCommand,
+  ListFoundationModelsCommand,
+  ListGuardrailsCommand,
+  ListImportedModelsCommand,
+  ListInferenceProfilesCommand,
+  ListMarketplaceModelEndpointsCommand,
+  ListModelCopyJobsCommand,
+  ListModelCustomizationJobsCommand,
+  ListModelImportJobsCommand,
+  ListModelInvocationJobsCommand,
+  ListPromptRoutersCommand,
+  ListProvisionedModelThroughputsCommand,
+  ListTagsForResourceCommand,
+  PutAccountDataRetentionCommand,
+  PutEnforcedGuardrailConfigurationCommand,
+  PutModelInvocationLoggingConfigurationCommand,
+  PutResourcePolicyCommand,
+  PutUseCaseForModelAccessCommand,
+  RegisterMarketplaceModelEndpointCommand,
+  StartAutomatedReasoningPolicyBuildWorkflowCommand,
+  StartAutomatedReasoningPolicyTestWorkflowCommand,
+  StopAdvancedPromptOptimizationJobCommand,
+  StopEvaluationJobCommand,
+  StopModelCustomizationJobCommand,
+  StopModelInvocationJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAutomatedReasoningPolicyCommand,
+  UpdateAutomatedReasoningPolicyAnnotationsCommand,
+  UpdateAutomatedReasoningPolicyTestCaseCommand,
+  UpdateCustomModelDeploymentCommand,
+  UpdateGuardrailCommand,
+  UpdateMarketplaceModelEndpointCommand,
+  UpdateProvisionedModelThroughputCommand,
+};
+const paginators = {
+  paginateListAdvancedPromptOptimizationJobs,
+  paginateListAutomatedReasoningPolicies,
+  paginateListAutomatedReasoningPolicyBuildWorkflows,
+  paginateListAutomatedReasoningPolicyTestCases,
+  paginateListAutomatedReasoningPolicyTestResults,
+  paginateListCustomModelDeployments,
+  paginateListCustomModels,
+  paginateListEnforcedGuardrailsConfiguration,
+  paginateListEvaluationJobs,
+  paginateListGuardrails,
+  paginateListImportedModels,
+  paginateListInferenceProfiles,
+  paginateListMarketplaceModelEndpoints,
+  paginateListModelCopyJobs,
+  paginateListModelCustomizationJobs,
+  paginateListModelImportJobs,
+  paginateListModelInvocationJobs,
+  paginateListPromptRouters,
+  paginateListProvisionedModelThroughputs,
+};
+
+/**
+ * @public
+ */
+export interface BedrockRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Bedrock {
+  /**
+   * @see {@link BatchDeleteAdvancedPromptOptimizationJobCommand}
+   */
+  batchDeleteAdvancedPromptOptimizationJob(
+    args: BatchDeleteAdvancedPromptOptimizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<BatchDeleteAdvancedPromptOptimizationJobCommandOutput>;
+  batchDeleteAdvancedPromptOptimizationJob(
+    args: BatchDeleteAdvancedPromptOptimizationJobCommandInput,
+    cb: (err: any, data?: BatchDeleteAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+  batchDeleteAdvancedPromptOptimizationJob(
+    args: BatchDeleteAdvancedPromptOptimizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: BatchDeleteAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteEvaluationJobCommand}
+   */
+  batchDeleteEvaluationJob(
+    args: BatchDeleteEvaluationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<BatchDeleteEvaluationJobCommandOutput>;
+  batchDeleteEvaluationJob(
+    args: BatchDeleteEvaluationJobCommandInput,
+    cb: (err: any, data?: BatchDeleteEvaluationJobCommandOutput) => void
+  ): void;
+  batchDeleteEvaluationJob(
+    args: BatchDeleteEvaluationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: BatchDeleteEvaluationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelAutomatedReasoningPolicyBuildWorkflowCommand}
+   */
+  cancelAutomatedReasoningPolicyBuildWorkflow(
+    args: CancelAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CancelAutomatedReasoningPolicyBuildWorkflowCommandOutput>;
+  cancelAutomatedReasoningPolicyBuildWorkflow(
+    args: CancelAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    cb: (err: any, data?: CancelAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+  cancelAutomatedReasoningPolicyBuildWorkflow(
+    args: CancelAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CancelAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAdvancedPromptOptimizationJobCommand}
+   */
+  createAdvancedPromptOptimizationJob(
+    args: CreateAdvancedPromptOptimizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateAdvancedPromptOptimizationJobCommandOutput>;
+  createAdvancedPromptOptimizationJob(
+    args: CreateAdvancedPromptOptimizationJobCommandInput,
+    cb: (err: any, data?: CreateAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+  createAdvancedPromptOptimizationJob(
+    args: CreateAdvancedPromptOptimizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomatedReasoningPolicyCommand}
+   */
+  createAutomatedReasoningPolicy(
+    args: CreateAutomatedReasoningPolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateAutomatedReasoningPolicyCommandOutput>;
+  createAutomatedReasoningPolicy(
+    args: CreateAutomatedReasoningPolicyCommandInput,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+  createAutomatedReasoningPolicy(
+    args: CreateAutomatedReasoningPolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomatedReasoningPolicyTestCaseCommand}
+   */
+  createAutomatedReasoningPolicyTestCase(
+    args: CreateAutomatedReasoningPolicyTestCaseCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateAutomatedReasoningPolicyTestCaseCommandOutput>;
+  createAutomatedReasoningPolicyTestCase(
+    args: CreateAutomatedReasoningPolicyTestCaseCommandInput,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+  createAutomatedReasoningPolicyTestCase(
+    args: CreateAutomatedReasoningPolicyTestCaseCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomatedReasoningPolicyVersionCommand}
+   */
+  createAutomatedReasoningPolicyVersion(
+    args: CreateAutomatedReasoningPolicyVersionCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateAutomatedReasoningPolicyVersionCommandOutput>;
+  createAutomatedReasoningPolicyVersion(
+    args: CreateAutomatedReasoningPolicyVersionCommandInput,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyVersionCommandOutput) => void
+  ): void;
+  createAutomatedReasoningPolicyVersion(
+    args: CreateAutomatedReasoningPolicyVersionCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateAutomatedReasoningPolicyVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomModelCommand}
+   */
+  createCustomModel(
+    args: CreateCustomModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateCustomModelCommandOutput>;
+  createCustomModel(
+    args: CreateCustomModelCommandInput,
+    cb: (err: any, data?: CreateCustomModelCommandOutput) => void
+  ): void;
+  createCustomModel(
+    args: CreateCustomModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateCustomModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomModelDeploymentCommand}
+   */
+  createCustomModelDeployment(
+    args: CreateCustomModelDeploymentCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateCustomModelDeploymentCommandOutput>;
+  createCustomModelDeployment(
+    args: CreateCustomModelDeploymentCommandInput,
+    cb: (err: any, data?: CreateCustomModelDeploymentCommandOutput) => void
+  ): void;
+  createCustomModelDeployment(
+    args: CreateCustomModelDeploymentCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateCustomModelDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEvaluationJobCommand}
+   */
+  createEvaluationJob(
+    args: CreateEvaluationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateEvaluationJobCommandOutput>;
+  createEvaluationJob(
+    args: CreateEvaluationJobCommandInput,
+    cb: (err: any, data?: CreateEvaluationJobCommandOutput) => void
+  ): void;
+  createEvaluationJob(
+    args: CreateEvaluationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateEvaluationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFoundationModelAgreementCommand}
+   */
+  createFoundationModelAgreement(
+    args: CreateFoundationModelAgreementCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateFoundationModelAgreementCommandOutput>;
+  createFoundationModelAgreement(
+    args: CreateFoundationModelAgreementCommandInput,
+    cb: (err: any, data?: CreateFoundationModelAgreementCommandOutput) => void
+  ): void;
+  createFoundationModelAgreement(
+    args: CreateFoundationModelAgreementCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateFoundationModelAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGuardrailCommand}
+   */
+  createGuardrail(
+    args: CreateGuardrailCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateGuardrailCommandOutput>;
+  createGuardrail(
+    args: CreateGuardrailCommandInput,
+    cb: (err: any, data?: CreateGuardrailCommandOutput) => void
+  ): void;
+  createGuardrail(
+    args: CreateGuardrailCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGuardrailVersionCommand}
+   */
+  createGuardrailVersion(
+    args: CreateGuardrailVersionCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateGuardrailVersionCommandOutput>;
+  createGuardrailVersion(
+    args: CreateGuardrailVersionCommandInput,
+    cb: (err: any, data?: CreateGuardrailVersionCommandOutput) => void
+  ): void;
+  createGuardrailVersion(
+    args: CreateGuardrailVersionCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateGuardrailVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInferenceProfileCommand}
+   */
+  createInferenceProfile(
+    args: CreateInferenceProfileCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateInferenceProfileCommandOutput>;
+  createInferenceProfile(
+    args: CreateInferenceProfileCommandInput,
+    cb: (err: any, data?: CreateInferenceProfileCommandOutput) => void
+  ): void;
+  createInferenceProfile(
+    args: CreateInferenceProfileCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateInferenceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMarketplaceModelEndpointCommand}
+   */
+  createMarketplaceModelEndpoint(
+    args: CreateMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateMarketplaceModelEndpointCommandOutput>;
+  createMarketplaceModelEndpoint(
+    args: CreateMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: CreateMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  createMarketplaceModelEndpoint(
+    args: CreateMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelCopyJobCommand}
+   */
+  createModelCopyJob(
+    args: CreateModelCopyJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateModelCopyJobCommandOutput>;
+  createModelCopyJob(
+    args: CreateModelCopyJobCommandInput,
+    cb: (err: any, data?: CreateModelCopyJobCommandOutput) => void
+  ): void;
+  createModelCopyJob(
+    args: CreateModelCopyJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateModelCopyJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelCustomizationJobCommand}
+   */
+  createModelCustomizationJob(
+    args: CreateModelCustomizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateModelCustomizationJobCommandOutput>;
+  createModelCustomizationJob(
+    args: CreateModelCustomizationJobCommandInput,
+    cb: (err: any, data?: CreateModelCustomizationJobCommandOutput) => void
+  ): void;
+  createModelCustomizationJob(
+    args: CreateModelCustomizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateModelCustomizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelImportJobCommand}
+   */
+  createModelImportJob(
+    args: CreateModelImportJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateModelImportJobCommandOutput>;
+  createModelImportJob(
+    args: CreateModelImportJobCommandInput,
+    cb: (err: any, data?: CreateModelImportJobCommandOutput) => void
+  ): void;
+  createModelImportJob(
+    args: CreateModelImportJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateModelImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateModelInvocationJobCommand}
+   */
+  createModelInvocationJob(
+    args: CreateModelInvocationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateModelInvocationJobCommandOutput>;
+  createModelInvocationJob(
+    args: CreateModelInvocationJobCommandInput,
+    cb: (err: any, data?: CreateModelInvocationJobCommandOutput) => void
+  ): void;
+  createModelInvocationJob(
+    args: CreateModelInvocationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateModelInvocationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePromptRouterCommand}
+   */
+  createPromptRouter(
+    args: CreatePromptRouterCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreatePromptRouterCommandOutput>;
+  createPromptRouter(
+    args: CreatePromptRouterCommandInput,
+    cb: (err: any, data?: CreatePromptRouterCommandOutput) => void
+  ): void;
+  createPromptRouter(
+    args: CreatePromptRouterCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreatePromptRouterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProvisionedModelThroughputCommand}
+   */
+  createProvisionedModelThroughput(
+    args: CreateProvisionedModelThroughputCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<CreateProvisionedModelThroughputCommandOutput>;
+  createProvisionedModelThroughput(
+    args: CreateProvisionedModelThroughputCommandInput,
+    cb: (err: any, data?: CreateProvisionedModelThroughputCommandOutput) => void
+  ): void;
+  createProvisionedModelThroughput(
+    args: CreateProvisionedModelThroughputCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: CreateProvisionedModelThroughputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutomatedReasoningPolicyCommand}
+   */
+  deleteAutomatedReasoningPolicy(
+    args: DeleteAutomatedReasoningPolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteAutomatedReasoningPolicyCommandOutput>;
+  deleteAutomatedReasoningPolicy(
+    args: DeleteAutomatedReasoningPolicyCommandInput,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+  deleteAutomatedReasoningPolicy(
+    args: DeleteAutomatedReasoningPolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutomatedReasoningPolicyBuildWorkflowCommand}
+   */
+  deleteAutomatedReasoningPolicyBuildWorkflow(
+    args: DeleteAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteAutomatedReasoningPolicyBuildWorkflowCommandOutput>;
+  deleteAutomatedReasoningPolicyBuildWorkflow(
+    args: DeleteAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+  deleteAutomatedReasoningPolicyBuildWorkflow(
+    args: DeleteAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutomatedReasoningPolicyTestCaseCommand}
+   */
+  deleteAutomatedReasoningPolicyTestCase(
+    args: DeleteAutomatedReasoningPolicyTestCaseCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteAutomatedReasoningPolicyTestCaseCommandOutput>;
+  deleteAutomatedReasoningPolicyTestCase(
+    args: DeleteAutomatedReasoningPolicyTestCaseCommandInput,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+  deleteAutomatedReasoningPolicyTestCase(
+    args: DeleteAutomatedReasoningPolicyTestCaseCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomModelCommand}
+   */
+  deleteCustomModel(
+    args: DeleteCustomModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteCustomModelCommandOutput>;
+  deleteCustomModel(
+    args: DeleteCustomModelCommandInput,
+    cb: (err: any, data?: DeleteCustomModelCommandOutput) => void
+  ): void;
+  deleteCustomModel(
+    args: DeleteCustomModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteCustomModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomModelDeploymentCommand}
+   */
+  deleteCustomModelDeployment(
+    args: DeleteCustomModelDeploymentCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteCustomModelDeploymentCommandOutput>;
+  deleteCustomModelDeployment(
+    args: DeleteCustomModelDeploymentCommandInput,
+    cb: (err: any, data?: DeleteCustomModelDeploymentCommandOutput) => void
+  ): void;
+  deleteCustomModelDeployment(
+    args: DeleteCustomModelDeploymentCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteCustomModelDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnforcedGuardrailConfigurationCommand}
+   */
+  deleteEnforcedGuardrailConfiguration(
+    args: DeleteEnforcedGuardrailConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteEnforcedGuardrailConfigurationCommandOutput>;
+  deleteEnforcedGuardrailConfiguration(
+    args: DeleteEnforcedGuardrailConfigurationCommandInput,
+    cb: (err: any, data?: DeleteEnforcedGuardrailConfigurationCommandOutput) => void
+  ): void;
+  deleteEnforcedGuardrailConfiguration(
+    args: DeleteEnforcedGuardrailConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteEnforcedGuardrailConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFoundationModelAgreementCommand}
+   */
+  deleteFoundationModelAgreement(
+    args: DeleteFoundationModelAgreementCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteFoundationModelAgreementCommandOutput>;
+  deleteFoundationModelAgreement(
+    args: DeleteFoundationModelAgreementCommandInput,
+    cb: (err: any, data?: DeleteFoundationModelAgreementCommandOutput) => void
+  ): void;
+  deleteFoundationModelAgreement(
+    args: DeleteFoundationModelAgreementCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteFoundationModelAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGuardrailCommand}
+   */
+  deleteGuardrail(
+    args: DeleteGuardrailCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteGuardrailCommandOutput>;
+  deleteGuardrail(
+    args: DeleteGuardrailCommandInput,
+    cb: (err: any, data?: DeleteGuardrailCommandOutput) => void
+  ): void;
+  deleteGuardrail(
+    args: DeleteGuardrailCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteImportedModelCommand}
+   */
+  deleteImportedModel(
+    args: DeleteImportedModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteImportedModelCommandOutput>;
+  deleteImportedModel(
+    args: DeleteImportedModelCommandInput,
+    cb: (err: any, data?: DeleteImportedModelCommandOutput) => void
+  ): void;
+  deleteImportedModel(
+    args: DeleteImportedModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteImportedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInferenceProfileCommand}
+   */
+  deleteInferenceProfile(
+    args: DeleteInferenceProfileCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteInferenceProfileCommandOutput>;
+  deleteInferenceProfile(
+    args: DeleteInferenceProfileCommandInput,
+    cb: (err: any, data?: DeleteInferenceProfileCommandOutput) => void
+  ): void;
+  deleteInferenceProfile(
+    args: DeleteInferenceProfileCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteInferenceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMarketplaceModelEndpointCommand}
+   */
+  deleteMarketplaceModelEndpoint(
+    args: DeleteMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteMarketplaceModelEndpointCommandOutput>;
+  deleteMarketplaceModelEndpoint(
+    args: DeleteMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: DeleteMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  deleteMarketplaceModelEndpoint(
+    args: DeleteMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteModelInvocationLoggingConfigurationCommand}
+   */
+  deleteModelInvocationLoggingConfiguration(): Promise<DeleteModelInvocationLoggingConfigurationCommandOutput>;
+  deleteModelInvocationLoggingConfiguration(
+    args: DeleteModelInvocationLoggingConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteModelInvocationLoggingConfigurationCommandOutput>;
+  deleteModelInvocationLoggingConfiguration(
+    args: DeleteModelInvocationLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DeleteModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+  deleteModelInvocationLoggingConfiguration(
+    args: DeleteModelInvocationLoggingConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePromptRouterCommand}
+   */
+  deletePromptRouter(
+    args: DeletePromptRouterCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeletePromptRouterCommandOutput>;
+  deletePromptRouter(
+    args: DeletePromptRouterCommandInput,
+    cb: (err: any, data?: DeletePromptRouterCommandOutput) => void
+  ): void;
+  deletePromptRouter(
+    args: DeletePromptRouterCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeletePromptRouterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProvisionedModelThroughputCommand}
+   */
+  deleteProvisionedModelThroughput(
+    args: DeleteProvisionedModelThroughputCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteProvisionedModelThroughputCommandOutput>;
+  deleteProvisionedModelThroughput(
+    args: DeleteProvisionedModelThroughputCommandInput,
+    cb: (err: any, data?: DeleteProvisionedModelThroughputCommandOutput) => void
+  ): void;
+  deleteProvisionedModelThroughput(
+    args: DeleteProvisionedModelThroughputCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteProvisionedModelThroughputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterMarketplaceModelEndpointCommand}
+   */
+  deregisterMarketplaceModelEndpoint(
+    args: DeregisterMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<DeregisterMarketplaceModelEndpointCommandOutput>;
+  deregisterMarketplaceModelEndpoint(
+    args: DeregisterMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: DeregisterMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  deregisterMarketplaceModelEndpoint(
+    args: DeregisterMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: DeregisterMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportAutomatedReasoningPolicyVersionCommand}
+   */
+  exportAutomatedReasoningPolicyVersion(
+    args: ExportAutomatedReasoningPolicyVersionCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ExportAutomatedReasoningPolicyVersionCommandOutput>;
+  exportAutomatedReasoningPolicyVersion(
+    args: ExportAutomatedReasoningPolicyVersionCommandInput,
+    cb: (err: any, data?: ExportAutomatedReasoningPolicyVersionCommandOutput) => void
+  ): void;
+  exportAutomatedReasoningPolicyVersion(
+    args: ExportAutomatedReasoningPolicyVersionCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ExportAutomatedReasoningPolicyVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAccountDataRetentionCommand}
+   */
+  getAccountDataRetention(): Promise<GetAccountDataRetentionCommandOutput>;
+  getAccountDataRetention(
+    args: GetAccountDataRetentionCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAccountDataRetentionCommandOutput>;
+  getAccountDataRetention(
+    args: GetAccountDataRetentionCommandInput,
+    cb: (err: any, data?: GetAccountDataRetentionCommandOutput) => void
+  ): void;
+  getAccountDataRetention(
+    args: GetAccountDataRetentionCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAccountDataRetentionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAdvancedPromptOptimizationJobCommand}
+   */
+  getAdvancedPromptOptimizationJob(
+    args: GetAdvancedPromptOptimizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAdvancedPromptOptimizationJobCommandOutput>;
+  getAdvancedPromptOptimizationJob(
+    args: GetAdvancedPromptOptimizationJobCommandInput,
+    cb: (err: any, data?: GetAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+  getAdvancedPromptOptimizationJob(
+    args: GetAdvancedPromptOptimizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyCommand}
+   */
+  getAutomatedReasoningPolicy(
+    args: GetAutomatedReasoningPolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyCommandOutput>;
+  getAutomatedReasoningPolicy(
+    args: GetAutomatedReasoningPolicyCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicy(
+    args: GetAutomatedReasoningPolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyAnnotationsCommand}
+   */
+  getAutomatedReasoningPolicyAnnotations(
+    args: GetAutomatedReasoningPolicyAnnotationsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyAnnotationsCommandOutput>;
+  getAutomatedReasoningPolicyAnnotations(
+    args: GetAutomatedReasoningPolicyAnnotationsCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyAnnotationsCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyAnnotations(
+    args: GetAutomatedReasoningPolicyAnnotationsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyAnnotationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyBuildWorkflowCommand}
+   */
+  getAutomatedReasoningPolicyBuildWorkflow(
+    args: GetAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyBuildWorkflowCommandOutput>;
+  getAutomatedReasoningPolicyBuildWorkflow(
+    args: GetAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyBuildWorkflow(
+    args: GetAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommand}
+   */
+  getAutomatedReasoningPolicyBuildWorkflowResultAssets(
+    args: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandOutput>;
+  getAutomatedReasoningPolicyBuildWorkflowResultAssets(
+    args: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyBuildWorkflowResultAssets(
+    args: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyBuildWorkflowResultAssetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyNextScenarioCommand}
+   */
+  getAutomatedReasoningPolicyNextScenario(
+    args: GetAutomatedReasoningPolicyNextScenarioCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyNextScenarioCommandOutput>;
+  getAutomatedReasoningPolicyNextScenario(
+    args: GetAutomatedReasoningPolicyNextScenarioCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyNextScenarioCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyNextScenario(
+    args: GetAutomatedReasoningPolicyNextScenarioCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyNextScenarioCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyTestCaseCommand}
+   */
+  getAutomatedReasoningPolicyTestCase(
+    args: GetAutomatedReasoningPolicyTestCaseCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyTestCaseCommandOutput>;
+  getAutomatedReasoningPolicyTestCase(
+    args: GetAutomatedReasoningPolicyTestCaseCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyTestCase(
+    args: GetAutomatedReasoningPolicyTestCaseCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomatedReasoningPolicyTestResultCommand}
+   */
+  getAutomatedReasoningPolicyTestResult(
+    args: GetAutomatedReasoningPolicyTestResultCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetAutomatedReasoningPolicyTestResultCommandOutput>;
+  getAutomatedReasoningPolicyTestResult(
+    args: GetAutomatedReasoningPolicyTestResultCommandInput,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyTestResultCommandOutput) => void
+  ): void;
+  getAutomatedReasoningPolicyTestResult(
+    args: GetAutomatedReasoningPolicyTestResultCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetAutomatedReasoningPolicyTestResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCustomModelCommand}
+   */
+  getCustomModel(
+    args: GetCustomModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetCustomModelCommandOutput>;
+  getCustomModel(
+    args: GetCustomModelCommandInput,
+    cb: (err: any, data?: GetCustomModelCommandOutput) => void
+  ): void;
+  getCustomModel(
+    args: GetCustomModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetCustomModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCustomModelDeploymentCommand}
+   */
+  getCustomModelDeployment(
+    args: GetCustomModelDeploymentCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetCustomModelDeploymentCommandOutput>;
+  getCustomModelDeployment(
+    args: GetCustomModelDeploymentCommandInput,
+    cb: (err: any, data?: GetCustomModelDeploymentCommandOutput) => void
+  ): void;
+  getCustomModelDeployment(
+    args: GetCustomModelDeploymentCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetCustomModelDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEvaluationJobCommand}
+   */
+  getEvaluationJob(
+    args: GetEvaluationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetEvaluationJobCommandOutput>;
+  getEvaluationJob(
+    args: GetEvaluationJobCommandInput,
+    cb: (err: any, data?: GetEvaluationJobCommandOutput) => void
+  ): void;
+  getEvaluationJob(
+    args: GetEvaluationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetEvaluationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFoundationModelCommand}
+   */
+  getFoundationModel(
+    args: GetFoundationModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetFoundationModelCommandOutput>;
+  getFoundationModel(
+    args: GetFoundationModelCommandInput,
+    cb: (err: any, data?: GetFoundationModelCommandOutput) => void
+  ): void;
+  getFoundationModel(
+    args: GetFoundationModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetFoundationModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFoundationModelAvailabilityCommand}
+   */
+  getFoundationModelAvailability(
+    args: GetFoundationModelAvailabilityCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetFoundationModelAvailabilityCommandOutput>;
+  getFoundationModelAvailability(
+    args: GetFoundationModelAvailabilityCommandInput,
+    cb: (err: any, data?: GetFoundationModelAvailabilityCommandOutput) => void
+  ): void;
+  getFoundationModelAvailability(
+    args: GetFoundationModelAvailabilityCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetFoundationModelAvailabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGuardrailCommand}
+   */
+  getGuardrail(
+    args: GetGuardrailCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetGuardrailCommandOutput>;
+  getGuardrail(
+    args: GetGuardrailCommandInput,
+    cb: (err: any, data?: GetGuardrailCommandOutput) => void
+  ): void;
+  getGuardrail(
+    args: GetGuardrailCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetImportedModelCommand}
+   */
+  getImportedModel(
+    args: GetImportedModelCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetImportedModelCommandOutput>;
+  getImportedModel(
+    args: GetImportedModelCommandInput,
+    cb: (err: any, data?: GetImportedModelCommandOutput) => void
+  ): void;
+  getImportedModel(
+    args: GetImportedModelCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetImportedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInferenceProfileCommand}
+   */
+  getInferenceProfile(
+    args: GetInferenceProfileCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetInferenceProfileCommandOutput>;
+  getInferenceProfile(
+    args: GetInferenceProfileCommandInput,
+    cb: (err: any, data?: GetInferenceProfileCommandOutput) => void
+  ): void;
+  getInferenceProfile(
+    args: GetInferenceProfileCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetInferenceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMarketplaceModelEndpointCommand}
+   */
+  getMarketplaceModelEndpoint(
+    args: GetMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetMarketplaceModelEndpointCommandOutput>;
+  getMarketplaceModelEndpoint(
+    args: GetMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: GetMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  getMarketplaceModelEndpoint(
+    args: GetMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelCopyJobCommand}
+   */
+  getModelCopyJob(
+    args: GetModelCopyJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetModelCopyJobCommandOutput>;
+  getModelCopyJob(
+    args: GetModelCopyJobCommandInput,
+    cb: (err: any, data?: GetModelCopyJobCommandOutput) => void
+  ): void;
+  getModelCopyJob(
+    args: GetModelCopyJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetModelCopyJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelCustomizationJobCommand}
+   */
+  getModelCustomizationJob(
+    args: GetModelCustomizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetModelCustomizationJobCommandOutput>;
+  getModelCustomizationJob(
+    args: GetModelCustomizationJobCommandInput,
+    cb: (err: any, data?: GetModelCustomizationJobCommandOutput) => void
+  ): void;
+  getModelCustomizationJob(
+    args: GetModelCustomizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetModelCustomizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelImportJobCommand}
+   */
+  getModelImportJob(
+    args: GetModelImportJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetModelImportJobCommandOutput>;
+  getModelImportJob(
+    args: GetModelImportJobCommandInput,
+    cb: (err: any, data?: GetModelImportJobCommandOutput) => void
+  ): void;
+  getModelImportJob(
+    args: GetModelImportJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetModelImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelInvocationJobCommand}
+   */
+  getModelInvocationJob(
+    args: GetModelInvocationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetModelInvocationJobCommandOutput>;
+  getModelInvocationJob(
+    args: GetModelInvocationJobCommandInput,
+    cb: (err: any, data?: GetModelInvocationJobCommandOutput) => void
+  ): void;
+  getModelInvocationJob(
+    args: GetModelInvocationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetModelInvocationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetModelInvocationLoggingConfigurationCommand}
+   */
+  getModelInvocationLoggingConfiguration(): Promise<GetModelInvocationLoggingConfigurationCommandOutput>;
+  getModelInvocationLoggingConfiguration(
+    args: GetModelInvocationLoggingConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetModelInvocationLoggingConfigurationCommandOutput>;
+  getModelInvocationLoggingConfiguration(
+    args: GetModelInvocationLoggingConfigurationCommandInput,
+    cb: (err: any, data?: GetModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+  getModelInvocationLoggingConfiguration(
+    args: GetModelInvocationLoggingConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPromptRouterCommand}
+   */
+  getPromptRouter(
+    args: GetPromptRouterCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetPromptRouterCommandOutput>;
+  getPromptRouter(
+    args: GetPromptRouterCommandInput,
+    cb: (err: any, data?: GetPromptRouterCommandOutput) => void
+  ): void;
+  getPromptRouter(
+    args: GetPromptRouterCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetPromptRouterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProvisionedModelThroughputCommand}
+   */
+  getProvisionedModelThroughput(
+    args: GetProvisionedModelThroughputCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetProvisionedModelThroughputCommandOutput>;
+  getProvisionedModelThroughput(
+    args: GetProvisionedModelThroughputCommandInput,
+    cb: (err: any, data?: GetProvisionedModelThroughputCommandOutput) => void
+  ): void;
+  getProvisionedModelThroughput(
+    args: GetProvisionedModelThroughputCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetProvisionedModelThroughputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUseCaseForModelAccessCommand}
+   */
+  getUseCaseForModelAccess(): Promise<GetUseCaseForModelAccessCommandOutput>;
+  getUseCaseForModelAccess(
+    args: GetUseCaseForModelAccessCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<GetUseCaseForModelAccessCommandOutput>;
+  getUseCaseForModelAccess(
+    args: GetUseCaseForModelAccessCommandInput,
+    cb: (err: any, data?: GetUseCaseForModelAccessCommandOutput) => void
+  ): void;
+  getUseCaseForModelAccess(
+    args: GetUseCaseForModelAccessCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: GetUseCaseForModelAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAdvancedPromptOptimizationJobsCommand}
+   */
+  listAdvancedPromptOptimizationJobs(): Promise<ListAdvancedPromptOptimizationJobsCommandOutput>;
+  listAdvancedPromptOptimizationJobs(
+    args: ListAdvancedPromptOptimizationJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListAdvancedPromptOptimizationJobsCommandOutput>;
+  listAdvancedPromptOptimizationJobs(
+    args: ListAdvancedPromptOptimizationJobsCommandInput,
+    cb: (err: any, data?: ListAdvancedPromptOptimizationJobsCommandOutput) => void
+  ): void;
+  listAdvancedPromptOptimizationJobs(
+    args: ListAdvancedPromptOptimizationJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListAdvancedPromptOptimizationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomatedReasoningPoliciesCommand}
+   */
+  listAutomatedReasoningPolicies(): Promise<ListAutomatedReasoningPoliciesCommandOutput>;
+  listAutomatedReasoningPolicies(
+    args: ListAutomatedReasoningPoliciesCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListAutomatedReasoningPoliciesCommandOutput>;
+  listAutomatedReasoningPolicies(
+    args: ListAutomatedReasoningPoliciesCommandInput,
+    cb: (err: any, data?: ListAutomatedReasoningPoliciesCommandOutput) => void
+  ): void;
+  listAutomatedReasoningPolicies(
+    args: ListAutomatedReasoningPoliciesCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListAutomatedReasoningPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyBuildWorkflowsCommand}
+   */
+  listAutomatedReasoningPolicyBuildWorkflows(
+    args: ListAutomatedReasoningPolicyBuildWorkflowsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput>;
+  listAutomatedReasoningPolicyBuildWorkflows(
+    args: ListAutomatedReasoningPolicyBuildWorkflowsCommandInput,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput) => void
+  ): void;
+  listAutomatedReasoningPolicyBuildWorkflows(
+    args: ListAutomatedReasoningPolicyBuildWorkflowsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyTestCasesCommand}
+   */
+  listAutomatedReasoningPolicyTestCases(
+    args: ListAutomatedReasoningPolicyTestCasesCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListAutomatedReasoningPolicyTestCasesCommandOutput>;
+  listAutomatedReasoningPolicyTestCases(
+    args: ListAutomatedReasoningPolicyTestCasesCommandInput,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyTestCasesCommandOutput) => void
+  ): void;
+  listAutomatedReasoningPolicyTestCases(
+    args: ListAutomatedReasoningPolicyTestCasesCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyTestCasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyTestResultsCommand}
+   */
+  listAutomatedReasoningPolicyTestResults(
+    args: ListAutomatedReasoningPolicyTestResultsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListAutomatedReasoningPolicyTestResultsCommandOutput>;
+  listAutomatedReasoningPolicyTestResults(
+    args: ListAutomatedReasoningPolicyTestResultsCommandInput,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyTestResultsCommandOutput) => void
+  ): void;
+  listAutomatedReasoningPolicyTestResults(
+    args: ListAutomatedReasoningPolicyTestResultsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListAutomatedReasoningPolicyTestResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomModelDeploymentsCommand}
+   */
+  listCustomModelDeployments(): Promise<ListCustomModelDeploymentsCommandOutput>;
+  listCustomModelDeployments(
+    args: ListCustomModelDeploymentsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListCustomModelDeploymentsCommandOutput>;
+  listCustomModelDeployments(
+    args: ListCustomModelDeploymentsCommandInput,
+    cb: (err: any, data?: ListCustomModelDeploymentsCommandOutput) => void
+  ): void;
+  listCustomModelDeployments(
+    args: ListCustomModelDeploymentsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListCustomModelDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomModelsCommand}
+   */
+  listCustomModels(): Promise<ListCustomModelsCommandOutput>;
+  listCustomModels(
+    args: ListCustomModelsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListCustomModelsCommandOutput>;
+  listCustomModels(
+    args: ListCustomModelsCommandInput,
+    cb: (err: any, data?: ListCustomModelsCommandOutput) => void
+  ): void;
+  listCustomModels(
+    args: ListCustomModelsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListCustomModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnforcedGuardrailsConfigurationCommand}
+   */
+  listEnforcedGuardrailsConfiguration(): Promise<ListEnforcedGuardrailsConfigurationCommandOutput>;
+  listEnforcedGuardrailsConfiguration(
+    args: ListEnforcedGuardrailsConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListEnforcedGuardrailsConfigurationCommandOutput>;
+  listEnforcedGuardrailsConfiguration(
+    args: ListEnforcedGuardrailsConfigurationCommandInput,
+    cb: (err: any, data?: ListEnforcedGuardrailsConfigurationCommandOutput) => void
+  ): void;
+  listEnforcedGuardrailsConfiguration(
+    args: ListEnforcedGuardrailsConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListEnforcedGuardrailsConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEvaluationJobsCommand}
+   */
+  listEvaluationJobs(): Promise<ListEvaluationJobsCommandOutput>;
+  listEvaluationJobs(
+    args: ListEvaluationJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListEvaluationJobsCommandOutput>;
+  listEvaluationJobs(
+    args: ListEvaluationJobsCommandInput,
+    cb: (err: any, data?: ListEvaluationJobsCommandOutput) => void
+  ): void;
+  listEvaluationJobs(
+    args: ListEvaluationJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListEvaluationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFoundationModelAgreementOffersCommand}
+   */
+  listFoundationModelAgreementOffers(
+    args: ListFoundationModelAgreementOffersCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListFoundationModelAgreementOffersCommandOutput>;
+  listFoundationModelAgreementOffers(
+    args: ListFoundationModelAgreementOffersCommandInput,
+    cb: (err: any, data?: ListFoundationModelAgreementOffersCommandOutput) => void
+  ): void;
+  listFoundationModelAgreementOffers(
+    args: ListFoundationModelAgreementOffersCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListFoundationModelAgreementOffersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFoundationModelsCommand}
+   */
+  listFoundationModels(): Promise<ListFoundationModelsCommandOutput>;
+  listFoundationModels(
+    args: ListFoundationModelsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListFoundationModelsCommandOutput>;
+  listFoundationModels(
+    args: ListFoundationModelsCommandInput,
+    cb: (err: any, data?: ListFoundationModelsCommandOutput) => void
+  ): void;
+  listFoundationModels(
+    args: ListFoundationModelsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListFoundationModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGuardrailsCommand}
+   */
+  listGuardrails(): Promise<ListGuardrailsCommandOutput>;
+  listGuardrails(
+    args: ListGuardrailsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListGuardrailsCommandOutput>;
+  listGuardrails(
+    args: ListGuardrailsCommandInput,
+    cb: (err: any, data?: ListGuardrailsCommandOutput) => void
+  ): void;
+  listGuardrails(
+    args: ListGuardrailsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListGuardrailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportedModelsCommand}
+   */
+  listImportedModels(): Promise<ListImportedModelsCommandOutput>;
+  listImportedModels(
+    args: ListImportedModelsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListImportedModelsCommandOutput>;
+  listImportedModels(
+    args: ListImportedModelsCommandInput,
+    cb: (err: any, data?: ListImportedModelsCommandOutput) => void
+  ): void;
+  listImportedModels(
+    args: ListImportedModelsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListImportedModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInferenceProfilesCommand}
+   */
+  listInferenceProfiles(): Promise<ListInferenceProfilesCommandOutput>;
+  listInferenceProfiles(
+    args: ListInferenceProfilesCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListInferenceProfilesCommandOutput>;
+  listInferenceProfiles(
+    args: ListInferenceProfilesCommandInput,
+    cb: (err: any, data?: ListInferenceProfilesCommandOutput) => void
+  ): void;
+  listInferenceProfiles(
+    args: ListInferenceProfilesCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListInferenceProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMarketplaceModelEndpointsCommand}
+   */
+  listMarketplaceModelEndpoints(): Promise<ListMarketplaceModelEndpointsCommandOutput>;
+  listMarketplaceModelEndpoints(
+    args: ListMarketplaceModelEndpointsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListMarketplaceModelEndpointsCommandOutput>;
+  listMarketplaceModelEndpoints(
+    args: ListMarketplaceModelEndpointsCommandInput,
+    cb: (err: any, data?: ListMarketplaceModelEndpointsCommandOutput) => void
+  ): void;
+  listMarketplaceModelEndpoints(
+    args: ListMarketplaceModelEndpointsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListMarketplaceModelEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelCopyJobsCommand}
+   */
+  listModelCopyJobs(): Promise<ListModelCopyJobsCommandOutput>;
+  listModelCopyJobs(
+    args: ListModelCopyJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListModelCopyJobsCommandOutput>;
+  listModelCopyJobs(
+    args: ListModelCopyJobsCommandInput,
+    cb: (err: any, data?: ListModelCopyJobsCommandOutput) => void
+  ): void;
+  listModelCopyJobs(
+    args: ListModelCopyJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListModelCopyJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelCustomizationJobsCommand}
+   */
+  listModelCustomizationJobs(): Promise<ListModelCustomizationJobsCommandOutput>;
+  listModelCustomizationJobs(
+    args: ListModelCustomizationJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListModelCustomizationJobsCommandOutput>;
+  listModelCustomizationJobs(
+    args: ListModelCustomizationJobsCommandInput,
+    cb: (err: any, data?: ListModelCustomizationJobsCommandOutput) => void
+  ): void;
+  listModelCustomizationJobs(
+    args: ListModelCustomizationJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListModelCustomizationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelImportJobsCommand}
+   */
+  listModelImportJobs(): Promise<ListModelImportJobsCommandOutput>;
+  listModelImportJobs(
+    args: ListModelImportJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListModelImportJobsCommandOutput>;
+  listModelImportJobs(
+    args: ListModelImportJobsCommandInput,
+    cb: (err: any, data?: ListModelImportJobsCommandOutput) => void
+  ): void;
+  listModelImportJobs(
+    args: ListModelImportJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListModelImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelInvocationJobsCommand}
+   */
+  listModelInvocationJobs(): Promise<ListModelInvocationJobsCommandOutput>;
+  listModelInvocationJobs(
+    args: ListModelInvocationJobsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListModelInvocationJobsCommandOutput>;
+  listModelInvocationJobs(
+    args: ListModelInvocationJobsCommandInput,
+    cb: (err: any, data?: ListModelInvocationJobsCommandOutput) => void
+  ): void;
+  listModelInvocationJobs(
+    args: ListModelInvocationJobsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListModelInvocationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPromptRoutersCommand}
+   */
+  listPromptRouters(): Promise<ListPromptRoutersCommandOutput>;
+  listPromptRouters(
+    args: ListPromptRoutersCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListPromptRoutersCommandOutput>;
+  listPromptRouters(
+    args: ListPromptRoutersCommandInput,
+    cb: (err: any, data?: ListPromptRoutersCommandOutput) => void
+  ): void;
+  listPromptRouters(
+    args: ListPromptRoutersCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListPromptRoutersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProvisionedModelThroughputsCommand}
+   */
+  listProvisionedModelThroughputs(): Promise<ListProvisionedModelThroughputsCommandOutput>;
+  listProvisionedModelThroughputs(
+    args: ListProvisionedModelThroughputsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListProvisionedModelThroughputsCommandOutput>;
+  listProvisionedModelThroughputs(
+    args: ListProvisionedModelThroughputsCommandInput,
+    cb: (err: any, data?: ListProvisionedModelThroughputsCommandOutput) => void
+  ): void;
+  listProvisionedModelThroughputs(
+    args: ListProvisionedModelThroughputsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListProvisionedModelThroughputsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAccountDataRetentionCommand}
+   */
+  putAccountDataRetention(
+    args: PutAccountDataRetentionCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<PutAccountDataRetentionCommandOutput>;
+  putAccountDataRetention(
+    args: PutAccountDataRetentionCommandInput,
+    cb: (err: any, data?: PutAccountDataRetentionCommandOutput) => void
+  ): void;
+  putAccountDataRetention(
+    args: PutAccountDataRetentionCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: PutAccountDataRetentionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutEnforcedGuardrailConfigurationCommand}
+   */
+  putEnforcedGuardrailConfiguration(
+    args: PutEnforcedGuardrailConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<PutEnforcedGuardrailConfigurationCommandOutput>;
+  putEnforcedGuardrailConfiguration(
+    args: PutEnforcedGuardrailConfigurationCommandInput,
+    cb: (err: any, data?: PutEnforcedGuardrailConfigurationCommandOutput) => void
+  ): void;
+  putEnforcedGuardrailConfiguration(
+    args: PutEnforcedGuardrailConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: PutEnforcedGuardrailConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutModelInvocationLoggingConfigurationCommand}
+   */
+  putModelInvocationLoggingConfiguration(
+    args: PutModelInvocationLoggingConfigurationCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<PutModelInvocationLoggingConfigurationCommandOutput>;
+  putModelInvocationLoggingConfiguration(
+    args: PutModelInvocationLoggingConfigurationCommandInput,
+    cb: (err: any, data?: PutModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+  putModelInvocationLoggingConfiguration(
+    args: PutModelInvocationLoggingConfigurationCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: PutModelInvocationLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutUseCaseForModelAccessCommand}
+   */
+  putUseCaseForModelAccess(
+    args: PutUseCaseForModelAccessCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<PutUseCaseForModelAccessCommandOutput>;
+  putUseCaseForModelAccess(
+    args: PutUseCaseForModelAccessCommandInput,
+    cb: (err: any, data?: PutUseCaseForModelAccessCommandOutput) => void
+  ): void;
+  putUseCaseForModelAccess(
+    args: PutUseCaseForModelAccessCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: PutUseCaseForModelAccessCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterMarketplaceModelEndpointCommand}
+   */
+  registerMarketplaceModelEndpoint(
+    args: RegisterMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<RegisterMarketplaceModelEndpointCommandOutput>;
+  registerMarketplaceModelEndpoint(
+    args: RegisterMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: RegisterMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  registerMarketplaceModelEndpoint(
+    args: RegisterMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: RegisterMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAutomatedReasoningPolicyBuildWorkflowCommand}
+   */
+  startAutomatedReasoningPolicyBuildWorkflow(
+    args: StartAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StartAutomatedReasoningPolicyBuildWorkflowCommandOutput>;
+  startAutomatedReasoningPolicyBuildWorkflow(
+    args: StartAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    cb: (err: any, data?: StartAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+  startAutomatedReasoningPolicyBuildWorkflow(
+    args: StartAutomatedReasoningPolicyBuildWorkflowCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StartAutomatedReasoningPolicyBuildWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAutomatedReasoningPolicyTestWorkflowCommand}
+   */
+  startAutomatedReasoningPolicyTestWorkflow(
+    args: StartAutomatedReasoningPolicyTestWorkflowCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StartAutomatedReasoningPolicyTestWorkflowCommandOutput>;
+  startAutomatedReasoningPolicyTestWorkflow(
+    args: StartAutomatedReasoningPolicyTestWorkflowCommandInput,
+    cb: (err: any, data?: StartAutomatedReasoningPolicyTestWorkflowCommandOutput) => void
+  ): void;
+  startAutomatedReasoningPolicyTestWorkflow(
+    args: StartAutomatedReasoningPolicyTestWorkflowCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StartAutomatedReasoningPolicyTestWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopAdvancedPromptOptimizationJobCommand}
+   */
+  stopAdvancedPromptOptimizationJob(
+    args: StopAdvancedPromptOptimizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StopAdvancedPromptOptimizationJobCommandOutput>;
+  stopAdvancedPromptOptimizationJob(
+    args: StopAdvancedPromptOptimizationJobCommandInput,
+    cb: (err: any, data?: StopAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+  stopAdvancedPromptOptimizationJob(
+    args: StopAdvancedPromptOptimizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StopAdvancedPromptOptimizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopEvaluationJobCommand}
+   */
+  stopEvaluationJob(
+    args: StopEvaluationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StopEvaluationJobCommandOutput>;
+  stopEvaluationJob(
+    args: StopEvaluationJobCommandInput,
+    cb: (err: any, data?: StopEvaluationJobCommandOutput) => void
+  ): void;
+  stopEvaluationJob(
+    args: StopEvaluationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StopEvaluationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopModelCustomizationJobCommand}
+   */
+  stopModelCustomizationJob(
+    args: StopModelCustomizationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StopModelCustomizationJobCommandOutput>;
+  stopModelCustomizationJob(
+    args: StopModelCustomizationJobCommandInput,
+    cb: (err: any, data?: StopModelCustomizationJobCommandOutput) => void
+  ): void;
+  stopModelCustomizationJob(
+    args: StopModelCustomizationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StopModelCustomizationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopModelInvocationJobCommand}
+   */
+  stopModelInvocationJob(
+    args: StopModelInvocationJobCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<StopModelInvocationJobCommandOutput>;
+  stopModelInvocationJob(
+    args: StopModelInvocationJobCommandInput,
+    cb: (err: any, data?: StopModelInvocationJobCommandOutput) => void
+  ): void;
+  stopModelInvocationJob(
+    args: StopModelInvocationJobCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: StopModelInvocationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAutomatedReasoningPolicyCommand}
+   */
+  updateAutomatedReasoningPolicy(
+    args: UpdateAutomatedReasoningPolicyCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateAutomatedReasoningPolicyCommandOutput>;
+  updateAutomatedReasoningPolicy(
+    args: UpdateAutomatedReasoningPolicyCommandInput,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+  updateAutomatedReasoningPolicy(
+    args: UpdateAutomatedReasoningPolicyCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAutomatedReasoningPolicyAnnotationsCommand}
+   */
+  updateAutomatedReasoningPolicyAnnotations(
+    args: UpdateAutomatedReasoningPolicyAnnotationsCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateAutomatedReasoningPolicyAnnotationsCommandOutput>;
+  updateAutomatedReasoningPolicyAnnotations(
+    args: UpdateAutomatedReasoningPolicyAnnotationsCommandInput,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyAnnotationsCommandOutput) => void
+  ): void;
+  updateAutomatedReasoningPolicyAnnotations(
+    args: UpdateAutomatedReasoningPolicyAnnotationsCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyAnnotationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAutomatedReasoningPolicyTestCaseCommand}
+   */
+  updateAutomatedReasoningPolicyTestCase(
+    args: UpdateAutomatedReasoningPolicyTestCaseCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateAutomatedReasoningPolicyTestCaseCommandOutput>;
+  updateAutomatedReasoningPolicyTestCase(
+    args: UpdateAutomatedReasoningPolicyTestCaseCommandInput,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+  updateAutomatedReasoningPolicyTestCase(
+    args: UpdateAutomatedReasoningPolicyTestCaseCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateAutomatedReasoningPolicyTestCaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCustomModelDeploymentCommand}
+   */
+  updateCustomModelDeployment(
+    args: UpdateCustomModelDeploymentCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateCustomModelDeploymentCommandOutput>;
+  updateCustomModelDeployment(
+    args: UpdateCustomModelDeploymentCommandInput,
+    cb: (err: any, data?: UpdateCustomModelDeploymentCommandOutput) => void
+  ): void;
+  updateCustomModelDeployment(
+    args: UpdateCustomModelDeploymentCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateCustomModelDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateGuardrailCommand}
+   */
+  updateGuardrail(
+    args: UpdateGuardrailCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateGuardrailCommandOutput>;
+  updateGuardrail(
+    args: UpdateGuardrailCommandInput,
+    cb: (err: any, data?: UpdateGuardrailCommandOutput) => void
+  ): void;
+  updateGuardrail(
+    args: UpdateGuardrailCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateGuardrailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMarketplaceModelEndpointCommand}
+   */
+  updateMarketplaceModelEndpoint(
+    args: UpdateMarketplaceModelEndpointCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateMarketplaceModelEndpointCommandOutput>;
+  updateMarketplaceModelEndpoint(
+    args: UpdateMarketplaceModelEndpointCommandInput,
+    cb: (err: any, data?: UpdateMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+  updateMarketplaceModelEndpoint(
+    args: UpdateMarketplaceModelEndpointCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateMarketplaceModelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProvisionedModelThroughputCommand}
+   */
+  updateProvisionedModelThroughput(
+    args: UpdateProvisionedModelThroughputCommandInput,
+    options?: BedrockRequestOptions
+  ): Promise<UpdateProvisionedModelThroughputCommandOutput>;
+  updateProvisionedModelThroughput(
+    args: UpdateProvisionedModelThroughputCommandInput,
+    cb: (err: any, data?: UpdateProvisionedModelThroughputCommandOutput) => void
+  ): void;
+  updateProvisionedModelThroughput(
+    args: UpdateProvisionedModelThroughputCommandInput,
+    options: BedrockRequestOptions,
+    cb: (err: any, data?: UpdateProvisionedModelThroughputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAdvancedPromptOptimizationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAdvancedPromptOptimizationJobsCommandOutput}.
+   */
+  paginateListAdvancedPromptOptimizationJobs(
+    args?: ListAdvancedPromptOptimizationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAdvancedPromptOptimizationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListAutomatedReasoningPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomatedReasoningPoliciesCommandOutput}.
+   */
+  paginateListAutomatedReasoningPolicies(
+    args?: ListAutomatedReasoningPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomatedReasoningPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyBuildWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput}.
+   */
+  paginateListAutomatedReasoningPolicyBuildWorkflows(
+    args: ListAutomatedReasoningPolicyBuildWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomatedReasoningPolicyBuildWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyTestCasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomatedReasoningPolicyTestCasesCommandOutput}.
+   */
+  paginateListAutomatedReasoningPolicyTestCases(
+    args: ListAutomatedReasoningPolicyTestCasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomatedReasoningPolicyTestCasesCommandOutput>;
+
+  /**
+   * @see {@link ListAutomatedReasoningPolicyTestResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomatedReasoningPolicyTestResultsCommandOutput}.
+   */
+  paginateListAutomatedReasoningPolicyTestResults(
+    args: ListAutomatedReasoningPolicyTestResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomatedReasoningPolicyTestResultsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomModelDeploymentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomModelDeploymentsCommandOutput}.
+   */
+  paginateListCustomModelDeployments(
+    args?: ListCustomModelDeploymentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomModelDeploymentsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomModelsCommandOutput}.
+   */
+  paginateListCustomModels(
+    args?: ListCustomModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomModelsCommandOutput>;
+
+  /**
+   * @see {@link ListEnforcedGuardrailsConfigurationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnforcedGuardrailsConfigurationCommandOutput}.
+   */
+  paginateListEnforcedGuardrailsConfiguration(
+    args?: ListEnforcedGuardrailsConfigurationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnforcedGuardrailsConfigurationCommandOutput>;
+
+  /**
+   * @see {@link ListEvaluationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEvaluationJobsCommandOutput}.
+   */
+  paginateListEvaluationJobs(
+    args?: ListEvaluationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEvaluationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListGuardrailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGuardrailsCommandOutput}.
+   */
+  paginateListGuardrails(
+    args?: ListGuardrailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGuardrailsCommandOutput>;
+
+  /**
+   * @see {@link ListImportedModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportedModelsCommandOutput}.
+   */
+  paginateListImportedModels(
+    args?: ListImportedModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportedModelsCommandOutput>;
+
+  /**
+   * @see {@link ListInferenceProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInferenceProfilesCommandOutput}.
+   */
+  paginateListInferenceProfiles(
+    args?: ListInferenceProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInferenceProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListMarketplaceModelEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMarketplaceModelEndpointsCommandOutput}.
+   */
+  paginateListMarketplaceModelEndpoints(
+    args?: ListMarketplaceModelEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMarketplaceModelEndpointsCommandOutput>;
+
+  /**
+   * @see {@link ListModelCopyJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelCopyJobsCommandOutput}.
+   */
+  paginateListModelCopyJobs(
+    args?: ListModelCopyJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelCopyJobsCommandOutput>;
+
+  /**
+   * @see {@link ListModelCustomizationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelCustomizationJobsCommandOutput}.
+   */
+  paginateListModelCustomizationJobs(
+    args?: ListModelCustomizationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelCustomizationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListModelImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelImportJobsCommandOutput}.
+   */
+  paginateListModelImportJobs(
+    args?: ListModelImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListModelInvocationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListModelInvocationJobsCommandOutput}.
+   */
+  paginateListModelInvocationJobs(
+    args?: ListModelInvocationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListModelInvocationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListPromptRoutersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPromptRoutersCommandOutput}.
+   */
+  paginateListPromptRouters(
+    args?: ListPromptRoutersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPromptRoutersCommandOutput>;
+
+  /**
+   * @see {@link ListProvisionedModelThroughputsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProvisionedModelThroughputsCommandOutput}.
+   */
+  paginateListProvisionedModelThroughputs(
+    args?: ListProvisionedModelThroughputsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProvisionedModelThroughputsCommandOutput>;
+}
+
+/**
+ * <p>Describes the API operations for creating, managing, fine-turning, and evaluating Amazon Bedrock models.</p>
+ * @public
+ */
+export class Bedrock extends BedrockClient implements Bedrock {}
+createAggregatedClient(commands, Bedrock, { paginators });

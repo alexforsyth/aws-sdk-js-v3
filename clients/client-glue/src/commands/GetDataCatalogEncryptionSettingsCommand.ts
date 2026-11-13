@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetDataCatalogEncryptionSettingsRequest, GetDataCatalogEncryptionSettingsResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetDataCatalogEncryptionSettingsCommand,
-  serializeAws_json1_1GetDataCatalogEncryptionSettingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetDataCatalogEncryptionSettingsRequest,
+  GetDataCatalogEncryptionSettingsResponse,
+} from "../models/models_2";
+import { GetDataCatalogEncryptionSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDataCatalogEncryptionSettingsCommand}.
+ */
 export interface GetDataCatalogEncryptionSettingsCommandInput extends GetDataCatalogEncryptionSettingsRequest {}
-export interface GetDataCatalogEncryptionSettingsCommandOutput
-  extends GetDataCatalogEncryptionSettingsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetDataCatalogEncryptionSettingsCommand}.
+ */
+export interface GetDataCatalogEncryptionSettingsCommandOutput extends GetDataCatalogEncryptionSettingsResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the security configuration for a specified catalog.</p>
@@ -30,74 +32,66 @@ export interface GetDataCatalogEncryptionSettingsCommandOutput
  * ```javascript
  * import { GlueClient, GetDataCatalogEncryptionSettingsCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetDataCatalogEncryptionSettingsCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetDataCatalogEncryptionSettingsRequest
+ *   CatalogId: "STRING_VALUE",
+ * };
  * const command = new GetDataCatalogEncryptionSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // GetDataCatalogEncryptionSettingsResponse
+ * //   DataCatalogEncryptionSettings: { // DataCatalogEncryptionSettings
+ * //     EncryptionAtRest: { // EncryptionAtRest
+ * //       CatalogEncryptionMode: "DISABLED" || "SSE-KMS" || "SSE-KMS-WITH-SERVICE-ROLE", // required
+ * //       SseAwsKmsKeyId: "STRING_VALUE",
+ * //       CatalogEncryptionServiceRole: "STRING_VALUE",
+ * //     },
+ * //     ConnectionPasswordEncryption: { // ConnectionPasswordEncryption
+ * //       ReturnConnectionPasswordEncrypted: true || false, // required
+ * //       AwsKmsKeyId: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDataCatalogEncryptionSettingsCommandInput - {@link GetDataCatalogEncryptionSettingsCommandInput}
+ * @returns {@link GetDataCatalogEncryptionSettingsCommandOutput}
  * @see {@link GetDataCatalogEncryptionSettingsCommandInput} for command's `input` shape.
  * @see {@link GetDataCatalogEncryptionSettingsCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetDataCatalogEncryptionSettingsCommand extends $Command<
-  GetDataCatalogEncryptionSettingsCommandInput,
-  GetDataCatalogEncryptionSettingsCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDataCatalogEncryptionSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDataCatalogEncryptionSettingsCommandInput, GetDataCatalogEncryptionSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetDataCatalogEncryptionSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDataCatalogEncryptionSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDataCatalogEncryptionSettingsResponse.filterSensitiveLog,
+export class GetDataCatalogEncryptionSettingsCommand extends command<GetDataCatalogEncryptionSettingsCommandInput, GetDataCatalogEncryptionSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDataCatalogEncryptionSettings",
+  GetDataCatalogEncryptionSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataCatalogEncryptionSettingsRequest;
+      output: GetDataCatalogEncryptionSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetDataCatalogEncryptionSettingsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDataCatalogEncryptionSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetDataCatalogEncryptionSettingsCommandOutput> {
-    return deserializeAws_json1_1GetDataCatalogEncryptionSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDataCatalogEncryptionSettingsCommandInput;
+      output: GetDataCatalogEncryptionSettingsCommandOutput;
+    };
+  };
 }

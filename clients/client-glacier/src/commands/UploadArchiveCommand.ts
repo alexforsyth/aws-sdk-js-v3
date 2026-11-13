@@ -1,41 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadInputTypes } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { ArchiveCreationOutput, UploadArchiveInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1UploadArchiveCommand,
-  serializeAws_restJson1UploadArchiveCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ArchiveCreationOutput, UploadArchiveInput } from "../models/models_0";
+import { UploadArchive$ } from "../schemas/schemas_0";
 
-type UploadArchiveCommandInputType = Omit<UploadArchiveInput, "body"> & {
-  /**
-   * For *`UploadArchiveInput["body"]`*, see {@link UploadArchiveInput.body}.
-   */
-  body?: UploadArchiveInput["body"] | string | Uint8Array | Buffer;
-};
 /**
- * This interface extends from `UploadArchiveInput` interface. There are more parameters than `body` defined in {@link UploadArchiveInput}
+ * @public
  */
-export interface UploadArchiveCommandInput extends UploadArchiveCommandInputType {}
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UploadArchiveCommand}.
+ */
+export interface UploadArchiveCommandInput extends Omit<UploadArchiveInput, "body"> {
+  body?: StreamingBlobPayloadInputTypes;
+}
+
+/**
+ * @public
+ *
+ * The output of {@link UploadArchiveCommand}.
+ */
 export interface UploadArchiveCommandOutput extends ArchiveCreationOutput, __MetadataBearer {}
 
 /**
  * <p>This operation adds an archive to a vault. This is a synchronous operation, and for a
- *          successful upload, your data is durably persisted. Amazon S3 Glacier returns the archive ID in
+ *          successful upload, your data is durably persisted. Amazon Glacier returns the archive ID in
  *          the <code>x-amz-archive-id</code> header of the response. </p>
  *
- *          <p>You must use the archive ID to access your data in Amazon S3 Glacier. After you upload
+ *          <p>You must use the archive ID to access your data in Amazon Glacier. After you upload
  *          an archive, you should save the archive ID returned so that you can retrieve or delete the
  *          archive later. Besides saving the archive ID, you can also index it and give it a friendly
  *          name to allow for better searching. You can also use the optional archive description field
@@ -68,68 +63,94 @@ export interface UploadArchiveCommandOutput extends ArchiveCreationOutput, __Met
  * ```javascript
  * import { GlacierClient, UploadArchiveCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, UploadArchiveCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // UploadArchiveInput
+ *   vaultName: "STRING_VALUE", // required
+ *   accountId: "STRING_VALUE", // required
+ *   archiveDescription: "STRING_VALUE",
+ *   checksum: "STRING_VALUE",
+ *   body: "MULTIPLE_TYPES_ACCEPTED", // see \@smithy/types -> StreamingBlobPayloadInputTypes
+ * };
  * const command = new UploadArchiveCommand(input);
  * const response = await client.send(command);
+ * // { // ArchiveCreationOutput
+ * //   location: "STRING_VALUE",
+ * //   checksum: "STRING_VALUE",
+ * //   archiveId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UploadArchiveCommandInput - {@link UploadArchiveCommandInput}
+ * @returns {@link UploadArchiveCommandOutput}
  * @see {@link UploadArchiveCommandInput} for command's `input` shape.
  * @see {@link UploadArchiveCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link RequestTimeoutException} (client fault)
+ *  <p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the
+ *          upload.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To upload an archive
+ * ```javascript
+ * // The example adds an archive to a vault.
+ * const input = {
+ *   accountId: "-",
+ *   archiveDescription: "",
+ *   body: "example-data-to-upload",
+ *   checksum: "",
+ *   vaultName: "my-vault"
+ * };
+ * const command = new UploadArchiveCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   archiveId: "kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw",
+ *   checksum: "969fb39823836d81f0cc028195fcdbcbbe76cdde932d4646fa7de5f21e18aa67",
+ *   location: "/0123456789012/vaults/my-vault/archives/kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UploadArchiveCommand extends $Command<
-  UploadArchiveCommandInput,
-  UploadArchiveCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UploadArchiveCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UploadArchiveCommandInput, UploadArchiveCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "UploadArchiveCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UploadArchiveInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ArchiveCreationOutput.filterSensitiveLog,
+export class UploadArchiveCommand extends command<UploadArchiveCommandInput, UploadArchiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "UploadArchive",
+  UploadArchive$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadArchiveInput;
+      output: ArchiveCreationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UploadArchiveCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UploadArchiveCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UploadArchiveCommandOutput> {
-    return deserializeAws_restJson1UploadArchiveCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UploadArchiveCommandInput;
+      output: UploadArchiveCommandOutput;
+    };
+  };
 }

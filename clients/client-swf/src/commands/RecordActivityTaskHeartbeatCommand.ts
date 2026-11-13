@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ActivityTaskStatus, RecordActivityTaskHeartbeatInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0RecordActivityTaskHeartbeatCommand,
-  serializeAws_json1_0RecordActivityTaskHeartbeatCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ActivityTaskStatus, RecordActivityTaskHeartbeatInput } from "../models/models_0";
+import { RecordActivityTaskHeartbeat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RecordActivityTaskHeartbeatCommand}.
+ */
 export interface RecordActivityTaskHeartbeatCommandInput extends RecordActivityTaskHeartbeatInput {}
+/**
+ * @public
+ *
+ * The output of {@link RecordActivityTaskHeartbeatCommand}.
+ */
 export interface RecordActivityTaskHeartbeatCommandOutput extends ActivityTaskStatus, __MetadataBearer {}
 
 /**
@@ -75,71 +76,54 @@ export interface RecordActivityTaskHeartbeatCommandOutput extends ActivityTaskSt
  * ```javascript
  * import { SWFClient, RecordActivityTaskHeartbeatCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, RecordActivityTaskHeartbeatCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // RecordActivityTaskHeartbeatInput
+ *   taskToken: "STRING_VALUE", // required
+ *   details: "STRING_VALUE",
+ * };
  * const command = new RecordActivityTaskHeartbeatCommand(input);
  * const response = await client.send(command);
+ * // { // ActivityTaskStatus
+ * //   cancelRequested: true || false, // required
+ * // };
+ *
  * ```
  *
+ * @param RecordActivityTaskHeartbeatCommandInput - {@link RecordActivityTaskHeartbeatCommandInput}
+ * @returns {@link RecordActivityTaskHeartbeatCommandOutput}
  * @see {@link RecordActivityTaskHeartbeatCommandInput} for command's `input` shape.
  * @see {@link RecordActivityTaskHeartbeatCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class RecordActivityTaskHeartbeatCommand extends $Command<
-  RecordActivityTaskHeartbeatCommandInput,
-  RecordActivityTaskHeartbeatCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RecordActivityTaskHeartbeatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RecordActivityTaskHeartbeatCommandInput, RecordActivityTaskHeartbeatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "RecordActivityTaskHeartbeatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RecordActivityTaskHeartbeatInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ActivityTaskStatus.filterSensitiveLog,
+export class RecordActivityTaskHeartbeatCommand extends command<RecordActivityTaskHeartbeatCommandInput, RecordActivityTaskHeartbeatCommandOutput>(
+  _ep0,
+  _mw0,
+  "RecordActivityTaskHeartbeat",
+  RecordActivityTaskHeartbeat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RecordActivityTaskHeartbeatInput;
+      output: ActivityTaskStatus;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RecordActivityTaskHeartbeatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0RecordActivityTaskHeartbeatCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RecordActivityTaskHeartbeatCommandOutput> {
-    return deserializeAws_json1_0RecordActivityTaskHeartbeatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RecordActivityTaskHeartbeatCommandInput;
+      output: RecordActivityTaskHeartbeatCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { ListOfferingsRequest, ListOfferingsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListOfferingsCommand,
-  serializeAws_restJson1ListOfferingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListOfferingsRequest, ListOfferingsResponse } from "../models/models_1";
+import { ListOfferings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListOfferingsCommand}.
+ */
 export interface ListOfferingsCommandInput extends ListOfferingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListOfferingsCommand}.
+ */
 export interface ListOfferingsCommandOutput extends ListOfferingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,100 @@ export interface ListOfferingsCommandOutput extends ListOfferingsResponse, __Met
  * ```javascript
  * import { MediaLiveClient, ListOfferingsCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, ListOfferingsCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // ListOfferingsRequest
+ *   ChannelClass: "STRING_VALUE",
+ *   ChannelConfiguration: "STRING_VALUE",
+ *   Codec: "STRING_VALUE",
+ *   Duration: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   MaximumBitrate: "STRING_VALUE",
+ *   MaximumFramerate: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   Resolution: "STRING_VALUE",
+ *   ResourceType: "STRING_VALUE",
+ *   SpecialFeature: "STRING_VALUE",
+ *   VideoQuality: "STRING_VALUE",
+ * };
  * const command = new ListOfferingsCommand(input);
  * const response = await client.send(command);
+ * // { // ListOfferingsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Offerings: [ // __listOfOffering
+ * //     { // Offering
+ * //       Arn: "STRING_VALUE",
+ * //       CurrencyCode: "STRING_VALUE",
+ * //       Duration: Number("int"),
+ * //       DurationUnits: "MONTHS",
+ * //       FixedPrice: Number("double"),
+ * //       OfferingDescription: "STRING_VALUE",
+ * //       OfferingId: "STRING_VALUE",
+ * //       OfferingType: "NO_UPFRONT",
+ * //       Region: "STRING_VALUE",
+ * //       ResourceSpecification: { // ReservationResourceSpecification
+ * //         ChannelClass: "STANDARD" || "SINGLE_PIPELINE",
+ * //         Codec: "MPEG2" || "AVC" || "HEVC" || "AUDIO" || "LINK" || "AV1",
+ * //         MaximumBitrate: "MAX_10_MBPS" || "MAX_20_MBPS" || "MAX_50_MBPS",
+ * //         MaximumFramerate: "MAX_30_FPS" || "MAX_60_FPS",
+ * //         Resolution: "SD" || "HD" || "FHD" || "UHD",
+ * //         ResourceType: "INPUT" || "OUTPUT" || "MULTIPLEX" || "CHANNEL",
+ * //         SpecialFeature: "ADVANCED_AUDIO" || "AUDIO_NORMALIZATION" || "MGHD" || "MGUHD",
+ * //         VideoQuality: "STANDARD" || "ENHANCED" || "PREMIUM",
+ * //       },
+ * //       UsagePrice: Number("double"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListOfferingsCommandInput - {@link ListOfferingsCommandInput}
+ * @returns {@link ListOfferingsCommandOutput}
  * @see {@link ListOfferingsCommandInput} for command's `input` shape.
  * @see {@link ListOfferingsCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class ListOfferingsCommand extends $Command<
-  ListOfferingsCommandInput,
-  ListOfferingsCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListOfferingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListOfferingsCommandInput, ListOfferingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "ListOfferingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListOfferingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListOfferingsResponse.filterSensitiveLog,
+export class ListOfferingsCommand extends command<ListOfferingsCommandInput, ListOfferingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListOfferings",
+  ListOfferings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOfferingsRequest;
+      output: ListOfferingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListOfferingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListOfferingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListOfferingsCommandOutput> {
-    return deserializeAws_restJson1ListOfferingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListOfferingsCommandInput;
+      output: ListOfferingsCommandOutput;
+    };
+  };
 }

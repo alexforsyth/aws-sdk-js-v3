@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { StartTopicsDetectionJobRequest, StartTopicsDetectionJobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartTopicsDetectionJobCommand,
-  serializeAws_json1_1StartTopicsDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartTopicsDetectionJobRequest, StartTopicsDetectionJobResponse } from "../models/models_0";
+import { StartTopicsDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartTopicsDetectionJobCommand}.
+ */
 export interface StartTopicsDetectionJobCommandInput extends StartTopicsDetectionJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartTopicsDetectionJobCommand}.
+ */
 export interface StartTopicsDetectionJobCommandOutput extends StartTopicsDetectionJobResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,104 @@ export interface StartTopicsDetectionJobCommandOutput extends StartTopicsDetecti
  * ```javascript
  * import { ComprehendClient, StartTopicsDetectionJobCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, StartTopicsDetectionJobCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // StartTopicsDetectionJobRequest
+ *   InputDataConfig: { // InputDataConfig
+ *     S3Uri: "STRING_VALUE", // required
+ *     InputFormat: "ONE_DOC_PER_FILE" || "ONE_DOC_PER_LINE",
+ *     DocumentReaderConfig: { // DocumentReaderConfig
+ *       DocumentReadAction: "TEXTRACT_DETECT_DOCUMENT_TEXT" || "TEXTRACT_ANALYZE_DOCUMENT", // required
+ *       DocumentReadMode: "SERVICE_DEFAULT" || "FORCE_DOCUMENT_READ_ACTION",
+ *       FeatureTypes: [ // ListOfDocumentReadFeatureTypes
+ *         "TABLES" || "FORMS",
+ *       ],
+ *     },
+ *   },
+ *   OutputDataConfig: { // OutputDataConfig
+ *     S3Uri: "STRING_VALUE", // required
+ *     KmsKeyId: "STRING_VALUE",
+ *   },
+ *   DataAccessRoleArn: "STRING_VALUE", // required
+ *   JobName: "STRING_VALUE",
+ *   NumberOfTopics: Number("int"),
+ *   ClientRequestToken: "STRING_VALUE",
+ *   VolumeKmsKeyId: "STRING_VALUE",
+ *   VpcConfig: { // VpcConfig
+ *     SecurityGroupIds: [ // SecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     Subnets: [ // Subnets // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new StartTopicsDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StartTopicsDetectionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   JobArn: "STRING_VALUE",
+ * //   JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StartTopicsDetectionJobCommandInput - {@link StartTopicsDetectionJobCommandInput}
+ * @returns {@link StartTopicsDetectionJobCommandOutput}
  * @see {@link StartTopicsDetectionJobCommandInput} for command's `input` shape.
  * @see {@link StartTopicsDetectionJobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link KmsKeyValidationException} (client fault)
+ *  <p>The KMS customer managed key (CMK) entered cannot be validated. Verify the key and
+ *       re-enter it.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource name is already in use. Use a different name and try your request
+ *       again.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>The request contains more tags than can be associated with a resource (50 tags per
+ *       resource). The maximum number of tags includes both existing tags and those included in your
+ *       current request. </p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class StartTopicsDetectionJobCommand extends $Command<
-  StartTopicsDetectionJobCommandInput,
-  StartTopicsDetectionJobCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartTopicsDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartTopicsDetectionJobCommandInput, StartTopicsDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "StartTopicsDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartTopicsDetectionJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartTopicsDetectionJobResponse.filterSensitiveLog,
+export class StartTopicsDetectionJobCommand extends command<StartTopicsDetectionJobCommandInput, StartTopicsDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartTopicsDetectionJob",
+  StartTopicsDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartTopicsDetectionJobRequest;
+      output: StartTopicsDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartTopicsDetectionJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartTopicsDetectionJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartTopicsDetectionJobCommandOutput> {
-    return deserializeAws_json1_1StartTopicsDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartTopicsDetectionJobCommandInput;
+      output: StartTopicsDetectionJobCommandOutput;
+    };
+  };
 }

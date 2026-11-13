@@ -1,105 +1,140 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { UpdateResourceServerRequest, UpdateResourceServerResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1UpdateResourceServerCommand,
-  serializeAws_json1_1UpdateResourceServerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateResourceServerRequest, UpdateResourceServerResponse } from "../models/models_1";
+import { UpdateResourceServer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateResourceServerCommand}.
+ */
 export interface UpdateResourceServerCommandInput extends UpdateResourceServerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateResourceServerCommand}.
+ */
 export interface UpdateResourceServerCommandOutput extends UpdateResourceServerResponse, __MetadataBearer {}
 
 /**
- * <p>Updates the name and scopes of resource server. All other fields are read-only.</p>
- *         <important>
- *             <p>If you don't provide a value for an attribute, it will be set to the default
+ * <p>Updates the name and scopes of a resource server. All other fields are read-only. For
+ *             more information about resource servers, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html">Access control with resource servers</a>.</p>
+ *          <important>
+ *             <p>If you don't provide a value for an attribute, it is set to the default
  *                 value.</p>
- *         </important>
+ *          </important>
+ *          <note>
+ *             <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For
+ *     this operation, you must use IAM credentials to authorize requests, and you must
+ *     grant yourself the corresponding IAM permission in a policy.</p>
+ *             <p class="title">
+ *                <b>Learn more</b>
+ *             </p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html">Signing Amazon Web Services API Requests</a>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html">Using the Amazon Cognito user pools API and user pool endpoints</a>
+ *                   </p>
+ *                </li>
+ *             </ul>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, UpdateResourceServerCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, UpdateResourceServerCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // UpdateResourceServerRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   Identifier: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   Scopes: [ // ResourceServerScopeListType
+ *     { // ResourceServerScopeType
+ *       ScopeName: "STRING_VALUE", // required
+ *       ScopeDescription: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new UpdateResourceServerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateResourceServerResponse
+ * //   ResourceServer: { // ResourceServerType
+ * //     UserPoolId: "STRING_VALUE",
+ * //     Identifier: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Scopes: [ // ResourceServerScopeListType
+ * //       { // ResourceServerScopeType
+ * //         ScopeName: "STRING_VALUE", // required
+ * //         ScopeDescription: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     ManagedBy: "COGNITO",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateResourceServerCommandInput - {@link UpdateResourceServerCommandInput}
+ * @returns {@link UpdateResourceServerCommandOutput}
  * @see {@link UpdateResourceServerCommandInput} for command's `input` shape.
  * @see {@link UpdateResourceServerCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateResourceServerCommand extends $Command<
-  UpdateResourceServerCommandInput,
-  UpdateResourceServerCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateResourceServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateResourceServerCommandInput, UpdateResourceServerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "UpdateResourceServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateResourceServerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateResourceServerResponse.filterSensitiveLog,
+export class UpdateResourceServerCommand extends command<UpdateResourceServerCommandInput, UpdateResourceServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateResourceServer",
+  UpdateResourceServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateResourceServerRequest;
+      output: UpdateResourceServerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateResourceServerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateResourceServerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateResourceServerCommandOutput> {
-    return deserializeAws_json1_1UpdateResourceServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateResourceServerCommandInput;
+      output: UpdateResourceServerCommandOutput;
+    };
+  };
 }

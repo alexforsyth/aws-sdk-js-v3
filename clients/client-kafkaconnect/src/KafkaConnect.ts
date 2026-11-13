@@ -1,415 +1,569 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
   CreateConnectorCommand,
-  CreateConnectorCommandInput,
-  CreateConnectorCommandOutput,
 } from "./commands/CreateConnectorCommand";
 import {
+  type CreateCustomPluginCommandInput,
+  type CreateCustomPluginCommandOutput,
   CreateCustomPluginCommand,
-  CreateCustomPluginCommandInput,
-  CreateCustomPluginCommandOutput,
 } from "./commands/CreateCustomPluginCommand";
 import {
+  type CreateWorkerConfigurationCommandInput,
+  type CreateWorkerConfigurationCommandOutput,
   CreateWorkerConfigurationCommand,
-  CreateWorkerConfigurationCommandInput,
-  CreateWorkerConfigurationCommandOutput,
 } from "./commands/CreateWorkerConfigurationCommand";
 import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
   DeleteConnectorCommand,
-  DeleteConnectorCommandInput,
-  DeleteConnectorCommandOutput,
 } from "./commands/DeleteConnectorCommand";
 import {
+  type DeleteCustomPluginCommandInput,
+  type DeleteCustomPluginCommandOutput,
+  DeleteCustomPluginCommand,
+} from "./commands/DeleteCustomPluginCommand";
+import {
+  type DeleteWorkerConfigurationCommandInput,
+  type DeleteWorkerConfigurationCommandOutput,
+  DeleteWorkerConfigurationCommand,
+} from "./commands/DeleteWorkerConfigurationCommand";
+import {
+  type DescribeConnectorCommandInput,
+  type DescribeConnectorCommandOutput,
   DescribeConnectorCommand,
-  DescribeConnectorCommandInput,
-  DescribeConnectorCommandOutput,
 } from "./commands/DescribeConnectorCommand";
 import {
+  type DescribeConnectorOperationCommandInput,
+  type DescribeConnectorOperationCommandOutput,
+  DescribeConnectorOperationCommand,
+} from "./commands/DescribeConnectorOperationCommand";
+import {
+  type DescribeCustomPluginCommandInput,
+  type DescribeCustomPluginCommandOutput,
   DescribeCustomPluginCommand,
-  DescribeCustomPluginCommandInput,
-  DescribeCustomPluginCommandOutput,
 } from "./commands/DescribeCustomPluginCommand";
 import {
+  type DescribeWorkerConfigurationCommandInput,
+  type DescribeWorkerConfigurationCommandOutput,
   DescribeWorkerConfigurationCommand,
-  DescribeWorkerConfigurationCommandInput,
-  DescribeWorkerConfigurationCommandOutput,
 } from "./commands/DescribeWorkerConfigurationCommand";
 import {
+  type ListConnectorOperationsCommandInput,
+  type ListConnectorOperationsCommandOutput,
+  ListConnectorOperationsCommand,
+} from "./commands/ListConnectorOperationsCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
   ListConnectorsCommand,
-  ListConnectorsCommandInput,
-  ListConnectorsCommandOutput,
 } from "./commands/ListConnectorsCommand";
 import {
+  type ListCustomPluginsCommandInput,
+  type ListCustomPluginsCommandOutput,
   ListCustomPluginsCommand,
-  ListCustomPluginsCommandInput,
-  ListCustomPluginsCommandOutput,
 } from "./commands/ListCustomPluginsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListWorkerConfigurationsCommandInput,
+  type ListWorkerConfigurationsCommandOutput,
   ListWorkerConfigurationsCommand,
-  ListWorkerConfigurationsCommandInput,
-  ListWorkerConfigurationsCommandOutput,
 } from "./commands/ListWorkerConfigurationsCommand";
 import {
+  type PauseConnectorCommandInput,
+  type PauseConnectorCommandOutput,
+  PauseConnectorCommand,
+} from "./commands/PauseConnectorCommand";
+import {
+  type RestartConnectorCommandInput,
+  type RestartConnectorCommandOutput,
+  RestartConnectorCommand,
+} from "./commands/RestartConnectorCommand";
+import {
+  type ResumeConnectorCommandInput,
+  type ResumeConnectorCommandOutput,
+  ResumeConnectorCommand,
+} from "./commands/ResumeConnectorCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateConnectorCommandInput,
+  type UpdateConnectorCommandOutput,
   UpdateConnectorCommand,
-  UpdateConnectorCommandInput,
-  UpdateConnectorCommandOutput,
 } from "./commands/UpdateConnectorCommand";
 import { KafkaConnectClient } from "./KafkaConnectClient";
+import { paginateListConnectorOperations } from "./pagination/ListConnectorOperationsPaginator";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { paginateListCustomPlugins } from "./pagination/ListCustomPluginsPaginator";
+import { paginateListWorkerConfigurations } from "./pagination/ListWorkerConfigurationsPaginator";
+
+const commands = {
+  CreateConnectorCommand,
+  CreateCustomPluginCommand,
+  CreateWorkerConfigurationCommand,
+  DeleteConnectorCommand,
+  DeleteCustomPluginCommand,
+  DeleteWorkerConfigurationCommand,
+  DescribeConnectorCommand,
+  DescribeConnectorOperationCommand,
+  DescribeCustomPluginCommand,
+  DescribeWorkerConfigurationCommand,
+  ListConnectorOperationsCommand,
+  ListConnectorsCommand,
+  ListCustomPluginsCommand,
+  ListTagsForResourceCommand,
+  ListWorkerConfigurationsCommand,
+  PauseConnectorCommand,
+  RestartConnectorCommand,
+  ResumeConnectorCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateConnectorCommand,
+};
+const paginators = {
+  paginateListConnectorOperations,
+  paginateListConnectors,
+  paginateListCustomPlugins,
+  paginateListWorkerConfigurations,
+};
+
+/**
+ * @public
+ */
+export interface KafkaConnectRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface KafkaConnect {
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomPluginCommand}
+   */
+  createCustomPlugin(
+    args: CreateCustomPluginCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<CreateCustomPluginCommandOutput>;
+  createCustomPlugin(
+    args: CreateCustomPluginCommandInput,
+    cb: (err: any, data?: CreateCustomPluginCommandOutput) => void
+  ): void;
+  createCustomPlugin(
+    args: CreateCustomPluginCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: CreateCustomPluginCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkerConfigurationCommand}
+   */
+  createWorkerConfiguration(
+    args: CreateWorkerConfigurationCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<CreateWorkerConfigurationCommandOutput>;
+  createWorkerConfiguration(
+    args: CreateWorkerConfigurationCommandInput,
+    cb: (err: any, data?: CreateWorkerConfigurationCommandOutput) => void
+  ): void;
+  createWorkerConfiguration(
+    args: CreateWorkerConfigurationCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: CreateWorkerConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomPluginCommand}
+   */
+  deleteCustomPlugin(
+    args: DeleteCustomPluginCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DeleteCustomPluginCommandOutput>;
+  deleteCustomPlugin(
+    args: DeleteCustomPluginCommandInput,
+    cb: (err: any, data?: DeleteCustomPluginCommandOutput) => void
+  ): void;
+  deleteCustomPlugin(
+    args: DeleteCustomPluginCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DeleteCustomPluginCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkerConfigurationCommand}
+   */
+  deleteWorkerConfiguration(
+    args: DeleteWorkerConfigurationCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DeleteWorkerConfigurationCommandOutput>;
+  deleteWorkerConfiguration(
+    args: DeleteWorkerConfigurationCommandInput,
+    cb: (err: any, data?: DeleteWorkerConfigurationCommandOutput) => void
+  ): void;
+  deleteWorkerConfiguration(
+    args: DeleteWorkerConfigurationCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DeleteWorkerConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConnectorCommand}
+   */
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DescribeConnectorCommandOutput>;
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
+  ): void;
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConnectorOperationCommand}
+   */
+  describeConnectorOperation(
+    args: DescribeConnectorOperationCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DescribeConnectorOperationCommandOutput>;
+  describeConnectorOperation(
+    args: DescribeConnectorOperationCommandInput,
+    cb: (err: any, data?: DescribeConnectorOperationCommandOutput) => void
+  ): void;
+  describeConnectorOperation(
+    args: DescribeConnectorOperationCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DescribeConnectorOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCustomPluginCommand}
+   */
+  describeCustomPlugin(
+    args: DescribeCustomPluginCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DescribeCustomPluginCommandOutput>;
+  describeCustomPlugin(
+    args: DescribeCustomPluginCommandInput,
+    cb: (err: any, data?: DescribeCustomPluginCommandOutput) => void
+  ): void;
+  describeCustomPlugin(
+    args: DescribeCustomPluginCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DescribeCustomPluginCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWorkerConfigurationCommand}
+   */
+  describeWorkerConfiguration(
+    args: DescribeWorkerConfigurationCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<DescribeWorkerConfigurationCommandOutput>;
+  describeWorkerConfiguration(
+    args: DescribeWorkerConfigurationCommandInput,
+    cb: (err: any, data?: DescribeWorkerConfigurationCommandOutput) => void
+  ): void;
+  describeWorkerConfiguration(
+    args: DescribeWorkerConfigurationCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: DescribeWorkerConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorOperationsCommand}
+   */
+  listConnectorOperations(
+    args: ListConnectorOperationsCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ListConnectorOperationsCommandOutput>;
+  listConnectorOperations(
+    args: ListConnectorOperationsCommandInput,
+    cb: (err: any, data?: ListConnectorOperationsCommandOutput) => void
+  ): void;
+  listConnectorOperations(
+    args: ListConnectorOperationsCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ListConnectorOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomPluginsCommand}
+   */
+  listCustomPlugins(): Promise<ListCustomPluginsCommandOutput>;
+  listCustomPlugins(
+    args: ListCustomPluginsCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ListCustomPluginsCommandOutput>;
+  listCustomPlugins(
+    args: ListCustomPluginsCommandInput,
+    cb: (err: any, data?: ListCustomPluginsCommandOutput) => void
+  ): void;
+  listCustomPlugins(
+    args: ListCustomPluginsCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ListCustomPluginsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkerConfigurationsCommand}
+   */
+  listWorkerConfigurations(): Promise<ListWorkerConfigurationsCommandOutput>;
+  listWorkerConfigurations(
+    args: ListWorkerConfigurationsCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ListWorkerConfigurationsCommandOutput>;
+  listWorkerConfigurations(
+    args: ListWorkerConfigurationsCommandInput,
+    cb: (err: any, data?: ListWorkerConfigurationsCommandOutput) => void
+  ): void;
+  listWorkerConfigurations(
+    args: ListWorkerConfigurationsCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ListWorkerConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PauseConnectorCommand}
+   */
+  pauseConnector(
+    args: PauseConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<PauseConnectorCommandOutput>;
+  pauseConnector(
+    args: PauseConnectorCommandInput,
+    cb: (err: any, data?: PauseConnectorCommandOutput) => void
+  ): void;
+  pauseConnector(
+    args: PauseConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: PauseConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestartConnectorCommand}
+   */
+  restartConnector(
+    args: RestartConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<RestartConnectorCommandOutput>;
+  restartConnector(
+    args: RestartConnectorCommandInput,
+    cb: (err: any, data?: RestartConnectorCommandOutput) => void
+  ): void;
+  restartConnector(
+    args: RestartConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: RestartConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeConnectorCommand}
+   */
+  resumeConnector(
+    args: ResumeConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<ResumeConnectorCommandOutput>;
+  resumeConnector(
+    args: ResumeConnectorCommandInput,
+    cb: (err: any, data?: ResumeConnectorCommandOutput) => void
+  ): void;
+  resumeConnector(
+    args: ResumeConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: ResumeConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorCommand}
+   */
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options?: KafkaConnectRequestOptions
+  ): Promise<UpdateConnectorCommandOutput>;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options: KafkaConnectRequestOptions,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorOperationsCommandOutput}.
+   */
+  paginateListConnectorOperations(
+    args: ListConnectorOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomPluginsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomPluginsCommandOutput}.
+   */
+  paginateListCustomPlugins(
+    args?: ListCustomPluginsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomPluginsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkerConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkerConfigurationsCommandOutput}.
+   */
+  paginateListWorkerConfigurations(
+    args?: ListWorkerConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkerConfigurationsCommandOutput>;
+}
 
 /**
  * <p/>
+ * @public
  */
-export class KafkaConnect extends KafkaConnectClient {
-  /**
-   * <p>Creates a connector using the specified properties.</p>
-   */
-  public createConnector(
-    args: CreateConnectorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateConnectorCommandOutput>;
-  public createConnector(
-    args: CreateConnectorCommandInput,
-    cb: (err: any, data?: CreateConnectorCommandOutput) => void
-  ): void;
-  public createConnector(
-    args: CreateConnectorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateConnectorCommandOutput) => void
-  ): void;
-  public createConnector(
-    args: CreateConnectorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateConnectorCommandOutput) => void),
-    cb?: (err: any, data?: CreateConnectorCommandOutput) => void
-  ): Promise<CreateConnectorCommandOutput> | void {
-    const command = new CreateConnectorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a custom plugin using the specified properties.</p>
-   */
-  public createCustomPlugin(
-    args: CreateCustomPluginCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCustomPluginCommandOutput>;
-  public createCustomPlugin(
-    args: CreateCustomPluginCommandInput,
-    cb: (err: any, data?: CreateCustomPluginCommandOutput) => void
-  ): void;
-  public createCustomPlugin(
-    args: CreateCustomPluginCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCustomPluginCommandOutput) => void
-  ): void;
-  public createCustomPlugin(
-    args: CreateCustomPluginCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCustomPluginCommandOutput) => void),
-    cb?: (err: any, data?: CreateCustomPluginCommandOutput) => void
-  ): Promise<CreateCustomPluginCommandOutput> | void {
-    const command = new CreateCustomPluginCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a worker configuration using the specified properties.</p>
-   */
-  public createWorkerConfiguration(
-    args: CreateWorkerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateWorkerConfigurationCommandOutput>;
-  public createWorkerConfiguration(
-    args: CreateWorkerConfigurationCommandInput,
-    cb: (err: any, data?: CreateWorkerConfigurationCommandOutput) => void
-  ): void;
-  public createWorkerConfiguration(
-    args: CreateWorkerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateWorkerConfigurationCommandOutput) => void
-  ): void;
-  public createWorkerConfiguration(
-    args: CreateWorkerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkerConfigurationCommandOutput) => void
-  ): Promise<CreateWorkerConfigurationCommandOutput> | void {
-    const command = new CreateWorkerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified connector.</p>
-   */
-  public deleteConnector(
-    args: DeleteConnectorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConnectorCommandOutput>;
-  public deleteConnector(
-    args: DeleteConnectorCommandInput,
-    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
-  ): void;
-  public deleteConnector(
-    args: DeleteConnectorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
-  ): void;
-  public deleteConnector(
-    args: DeleteConnectorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectorCommandOutput) => void
-  ): Promise<DeleteConnectorCommandOutput> | void {
-    const command = new DeleteConnectorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns summary information about the connector.</p>
-   */
-  public describeConnector(
-    args: DescribeConnectorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeConnectorCommandOutput>;
-  public describeConnector(
-    args: DescribeConnectorCommandInput,
-    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
-  ): void;
-  public describeConnector(
-    args: DescribeConnectorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
-  ): void;
-  public describeConnector(
-    args: DescribeConnectorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeConnectorCommandOutput) => void),
-    cb?: (err: any, data?: DescribeConnectorCommandOutput) => void
-  ): Promise<DescribeConnectorCommandOutput> | void {
-    const command = new DescribeConnectorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>A summary description of the custom plugin.</p>
-   */
-  public describeCustomPlugin(
-    args: DescribeCustomPluginCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeCustomPluginCommandOutput>;
-  public describeCustomPlugin(
-    args: DescribeCustomPluginCommandInput,
-    cb: (err: any, data?: DescribeCustomPluginCommandOutput) => void
-  ): void;
-  public describeCustomPlugin(
-    args: DescribeCustomPluginCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeCustomPluginCommandOutput) => void
-  ): void;
-  public describeCustomPlugin(
-    args: DescribeCustomPluginCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeCustomPluginCommandOutput) => void),
-    cb?: (err: any, data?: DescribeCustomPluginCommandOutput) => void
-  ): Promise<DescribeCustomPluginCommandOutput> | void {
-    const command = new DescribeCustomPluginCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a worker configuration.</p>
-   */
-  public describeWorkerConfiguration(
-    args: DescribeWorkerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeWorkerConfigurationCommandOutput>;
-  public describeWorkerConfiguration(
-    args: DescribeWorkerConfigurationCommandInput,
-    cb: (err: any, data?: DescribeWorkerConfigurationCommandOutput) => void
-  ): void;
-  public describeWorkerConfiguration(
-    args: DescribeWorkerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeWorkerConfigurationCommandOutput) => void
-  ): void;
-  public describeWorkerConfiguration(
-    args: DescribeWorkerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeWorkerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeWorkerConfigurationCommandOutput) => void
-  ): Promise<DescribeWorkerConfigurationCommandOutput> | void {
-    const command = new DescribeWorkerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all the connectors in this account and Region. The list is limited to connectors whose name starts with the specified prefix. The response also includes a description of each of the listed connectors.</p>
-   */
-  public listConnectors(
-    args: ListConnectorsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListConnectorsCommandOutput>;
-  public listConnectors(
-    args: ListConnectorsCommandInput,
-    cb: (err: any, data?: ListConnectorsCommandOutput) => void
-  ): void;
-  public listConnectors(
-    args: ListConnectorsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListConnectorsCommandOutput) => void
-  ): void;
-  public listConnectors(
-    args: ListConnectorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListConnectorsCommandOutput) => void),
-    cb?: (err: any, data?: ListConnectorsCommandOutput) => void
-  ): Promise<ListConnectorsCommandOutput> | void {
-    const command = new ListConnectorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all of the custom plugins in this account and Region.</p>
-   */
-  public listCustomPlugins(
-    args: ListCustomPluginsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListCustomPluginsCommandOutput>;
-  public listCustomPlugins(
-    args: ListCustomPluginsCommandInput,
-    cb: (err: any, data?: ListCustomPluginsCommandOutput) => void
-  ): void;
-  public listCustomPlugins(
-    args: ListCustomPluginsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListCustomPluginsCommandOutput) => void
-  ): void;
-  public listCustomPlugins(
-    args: ListCustomPluginsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCustomPluginsCommandOutput) => void),
-    cb?: (err: any, data?: ListCustomPluginsCommandOutput) => void
-  ): Promise<ListCustomPluginsCommandOutput> | void {
-    const command = new ListCustomPluginsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all of the worker configurations in this account and Region.</p>
-   */
-  public listWorkerConfigurations(
-    args: ListWorkerConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListWorkerConfigurationsCommandOutput>;
-  public listWorkerConfigurations(
-    args: ListWorkerConfigurationsCommandInput,
-    cb: (err: any, data?: ListWorkerConfigurationsCommandOutput) => void
-  ): void;
-  public listWorkerConfigurations(
-    args: ListWorkerConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListWorkerConfigurationsCommandOutput) => void
-  ): void;
-  public listWorkerConfigurations(
-    args: ListWorkerConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkerConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkerConfigurationsCommandOutput) => void
-  ): Promise<ListWorkerConfigurationsCommandOutput> | void {
-    const command = new ListWorkerConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the specified connector.</p>
-   */
-  public updateConnector(
-    args: UpdateConnectorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateConnectorCommandOutput>;
-  public updateConnector(
-    args: UpdateConnectorCommandInput,
-    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
-  ): void;
-  public updateConnector(
-    args: UpdateConnectorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
-  ): void;
-  public updateConnector(
-    args: UpdateConnectorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateConnectorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateConnectorCommandOutput) => void
-  ): Promise<UpdateConnectorCommandOutput> | void {
-    const command = new UpdateConnectorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class KafkaConnect extends KafkaConnectClient implements KafkaConnect {}
+createAggregatedClient(commands, KafkaConnect, { paginators });

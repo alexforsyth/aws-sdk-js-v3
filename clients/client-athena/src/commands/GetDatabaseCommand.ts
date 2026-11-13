@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { GetDatabaseInput, GetDatabaseOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDatabaseCommand,
-  serializeAws_json1_1GetDatabaseCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDatabaseInput, GetDatabaseOutput } from "../models/models_0";
+import { GetDatabase$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDatabaseCommand}.
+ */
 export interface GetDatabaseCommandInput extends GetDatabaseInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetDatabaseCommand}.
+ */
 export interface GetDatabaseCommandOutput extends GetDatabaseOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface GetDatabaseCommandOutput extends GetDatabaseOutput, __MetadataB
  * ```javascript
  * import { AthenaClient, GetDatabaseCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, GetDatabaseCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // GetDatabaseInput
+ *   CatalogName: "STRING_VALUE", // required
+ *   DatabaseName: "STRING_VALUE", // required
+ *   WorkGroup: "STRING_VALUE",
+ * };
  * const command = new GetDatabaseCommand(input);
  * const response = await client.send(command);
+ * // { // GetDatabaseOutput
+ * //   Database: { // Database
+ * //     Name: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     Parameters: { // ParametersMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDatabaseCommandInput - {@link GetDatabaseCommandInput}
+ * @returns {@link GetDatabaseCommandOutput}
  * @see {@link GetDatabaseCommandInput} for command's `input` shape.
  * @see {@link GetDatabaseCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link MetadataException} (client fault)
+ *  <p>An exception that Athena received when it called a custom metastore.
+ *             Occurs if the error is not caused by user input (<code>InvalidRequestException</code>)
+ *             or from the Athena platform (<code>InternalServerException</code>). For
+ *             example, if a user-created Lambda function is missing permissions, the
+ *                 Lambda
+ *             <code>4XX</code> exception is returned in a <code>MetadataException</code>.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class GetDatabaseCommand extends $Command<
-  GetDatabaseCommandInput,
-  GetDatabaseCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDatabaseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDatabaseCommandInput, GetDatabaseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "GetDatabaseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDatabaseInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDatabaseOutput.filterSensitiveLog,
+export class GetDatabaseCommand extends command<GetDatabaseCommandInput, GetDatabaseCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDatabase",
+  GetDatabase$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDatabaseInput;
+      output: GetDatabaseOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDatabaseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDatabaseCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDatabaseCommandOutput> {
-    return deserializeAws_json1_1GetDatabaseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDatabaseCommandInput;
+      output: GetDatabaseCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { ExtendLicenseConsumptionRequest, ExtendLicenseConsumptionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ExtendLicenseConsumptionCommand,
-  serializeAws_json1_1ExtendLicenseConsumptionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ExtendLicenseConsumptionRequest, ExtendLicenseConsumptionResponse } from "../models/models_0";
+import { ExtendLicenseConsumption$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ExtendLicenseConsumptionCommand}.
+ */
 export interface ExtendLicenseConsumptionCommandInput extends ExtendLicenseConsumptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ExtendLicenseConsumptionCommand}.
+ */
 export interface ExtendLicenseConsumptionCommandOutput extends ExtendLicenseConsumptionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface ExtendLicenseConsumptionCommandOutput extends ExtendLicenseCons
  * ```javascript
  * import { LicenseManagerClient, ExtendLicenseConsumptionCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, ExtendLicenseConsumptionCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // ExtendLicenseConsumptionRequest
+ *   LicenseConsumptionToken: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new ExtendLicenseConsumptionCommand(input);
  * const response = await client.send(command);
+ * // { // ExtendLicenseConsumptionResponse
+ * //   LicenseConsumptionToken: "STRING_VALUE",
+ * //   Expiration: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ExtendLicenseConsumptionCommandInput - {@link ExtendLicenseConsumptionCommandInput}
+ * @returns {@link ExtendLicenseConsumptionCommandOutput}
  * @see {@link ExtendLicenseConsumptionCommandInput} for command's `input` shape.
  * @see {@link ExtendLicenseConsumptionCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The provided input is not valid. Try your request again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class ExtendLicenseConsumptionCommand extends $Command<
-  ExtendLicenseConsumptionCommandInput,
-  ExtendLicenseConsumptionCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ExtendLicenseConsumptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ExtendLicenseConsumptionCommandInput, ExtendLicenseConsumptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "ExtendLicenseConsumptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ExtendLicenseConsumptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ExtendLicenseConsumptionResponse.filterSensitiveLog,
+export class ExtendLicenseConsumptionCommand extends command<ExtendLicenseConsumptionCommandInput, ExtendLicenseConsumptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ExtendLicenseConsumption",
+  ExtendLicenseConsumption$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExtendLicenseConsumptionRequest;
+      output: ExtendLicenseConsumptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ExtendLicenseConsumptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ExtendLicenseConsumptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ExtendLicenseConsumptionCommandOutput> {
-    return deserializeAws_json1_1ExtendLicenseConsumptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ExtendLicenseConsumptionCommandInput;
+      output: ExtendLicenseConsumptionCommandOutput;
+    };
+  };
 }

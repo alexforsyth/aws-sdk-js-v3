@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeBrokerInstanceOptionsRequest, DescribeBrokerInstanceOptionsResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1DescribeBrokerInstanceOptionsCommand,
-  serializeAws_restJson1DescribeBrokerInstanceOptionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBrokerInstanceOptionsRequest, DescribeBrokerInstanceOptionsResponse } from "../models/models_0";
+import { DescribeBrokerInstanceOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBrokerInstanceOptionsCommand}.
+ */
 export interface DescribeBrokerInstanceOptionsCommandInput extends DescribeBrokerInstanceOptionsRequest {}
-export interface DescribeBrokerInstanceOptionsCommandOutput
-  extends DescribeBrokerInstanceOptionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBrokerInstanceOptionsCommand}.
+ */
+export interface DescribeBrokerInstanceOptionsCommandOutput extends DescribeBrokerInstanceOptionsResponse, __MetadataBearer {}
 
 /**
  * <p>Describe available broker instance options.</p>
@@ -30,71 +29,79 @@ export interface DescribeBrokerInstanceOptionsCommandOutput
  * ```javascript
  * import { MqClient, DescribeBrokerInstanceOptionsCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, DescribeBrokerInstanceOptionsCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // DescribeBrokerInstanceOptionsRequest
+ *   EngineType: "STRING_VALUE",
+ *   HostInstanceType: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   StorageType: "STRING_VALUE",
+ * };
  * const command = new DescribeBrokerInstanceOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBrokerInstanceOptionsResponse
+ * //   BrokerInstanceOptions: [ // __listOfBrokerInstanceOption
+ * //     { // BrokerInstanceOption
+ * //       AvailabilityZones: [ // __listOfAvailabilityZone
+ * //         { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       EngineType: "ACTIVEMQ" || "RABBITMQ",
+ * //       HostInstanceType: "STRING_VALUE",
+ * //       StorageType: "EBS" || "EFS",
+ * //       SupportedDeploymentModes: [ // __listOfDeploymentMode
+ * //         "SINGLE_INSTANCE" || "ACTIVE_STANDBY_MULTI_AZ" || "CLUSTER_MULTI_AZ",
+ * //       ],
+ * //       SupportedEngineVersions: [ // __listOf__string
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   MaxResults: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBrokerInstanceOptionsCommandInput - {@link DescribeBrokerInstanceOptionsCommandInput}
+ * @returns {@link DescribeBrokerInstanceOptionsCommandOutput}
  * @see {@link DescribeBrokerInstanceOptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeBrokerInstanceOptionsCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBrokerInstanceOptionsCommand extends $Command<
-  DescribeBrokerInstanceOptionsCommandInput,
-  DescribeBrokerInstanceOptionsCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBrokerInstanceOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBrokerInstanceOptionsCommandInput, DescribeBrokerInstanceOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "DescribeBrokerInstanceOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBrokerInstanceOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBrokerInstanceOptionsResponse.filterSensitiveLog,
+export class DescribeBrokerInstanceOptionsCommand extends command<DescribeBrokerInstanceOptionsCommandInput, DescribeBrokerInstanceOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBrokerInstanceOptions",
+  DescribeBrokerInstanceOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBrokerInstanceOptionsRequest;
+      output: DescribeBrokerInstanceOptionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBrokerInstanceOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeBrokerInstanceOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBrokerInstanceOptionsCommandOutput> {
-    return deserializeAws_restJson1DescribeBrokerInstanceOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBrokerInstanceOptionsCommandInput;
+      output: DescribeBrokerInstanceOptionsCommandOutput;
+    };
+  };
 }

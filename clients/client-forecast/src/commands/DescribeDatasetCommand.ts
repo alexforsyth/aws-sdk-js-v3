@@ -1,29 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { DescribeDatasetRequest, DescribeDatasetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDatasetCommand,
-  serializeAws_json1_1DescribeDatasetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDatasetRequest, DescribeDatasetResponse } from "../models/models_0";
+import { DescribeDataset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDatasetCommand}.
+ */
 export interface DescribeDatasetCommandInput extends DescribeDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDatasetCommand}.
+ */
 export interface DescribeDatasetCommandOutput extends DescribeDatasetResponse, __MetadataBearer {}
 
 /**
- * <p>Describes an Amazon Forecast dataset created using the <a>CreateDataset</a>
- *       operation.</p>
+ * <p>Describes an Amazon Forecast dataset created using the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html">CreateDataset</a> operation.</p>
  *          <p>In addition to listing the parameters specified in the <code>CreateDataset</code> request,
  *       this operation includes the following dataset properties:</p>
  *          <ul>
@@ -48,68 +48,74 @@ export interface DescribeDatasetCommandOutput extends DescribeDatasetResponse, _
  * ```javascript
  * import { ForecastClient, DescribeDatasetCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DescribeDatasetCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DescribeDatasetRequest
+ *   DatasetArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDatasetCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDatasetResponse
+ * //   DatasetArn: "STRING_VALUE",
+ * //   DatasetName: "STRING_VALUE",
+ * //   Domain: "RETAIL" || "CUSTOM" || "INVENTORY_PLANNING" || "EC2_CAPACITY" || "WORK_FORCE" || "WEB_TRAFFIC" || "METRICS",
+ * //   DatasetType: "TARGET_TIME_SERIES" || "RELATED_TIME_SERIES" || "ITEM_METADATA",
+ * //   DataFrequency: "STRING_VALUE",
+ * //   Schema: { // Schema
+ * //     Attributes: [ // SchemaAttributes
+ * //       { // SchemaAttribute
+ * //         AttributeName: "STRING_VALUE",
+ * //         AttributeType: "string" || "integer" || "float" || "timestamp" || "geolocation",
+ * //       },
+ * //     ],
+ * //   },
+ * //   EncryptionConfig: { // EncryptionConfig
+ * //     RoleArn: "STRING_VALUE", // required
+ * //     KMSKeyArn: "STRING_VALUE", // required
+ * //   },
+ * //   Status: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModificationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeDatasetCommandInput - {@link DescribeDatasetCommandInput}
+ * @returns {@link DescribeDatasetCommandOutput}
  * @see {@link DescribeDatasetCommandInput} for command's `input` shape.
  * @see {@link DescribeDatasetCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDatasetCommand extends $Command<
-  DescribeDatasetCommandInput,
-  DescribeDatasetCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDatasetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDatasetCommandInput, DescribeDatasetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DescribeDatasetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDatasetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDatasetResponse.filterSensitiveLog,
+export class DescribeDatasetCommand extends command<DescribeDatasetCommandInput, DescribeDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataset",
+  DescribeDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDatasetRequest;
+      output: DescribeDatasetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDatasetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDatasetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDatasetCommandOutput> {
-    return deserializeAws_json1_1DescribeDatasetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDatasetCommandInput;
+      output: DescribeDatasetCommandOutput;
+    };
+  };
 }

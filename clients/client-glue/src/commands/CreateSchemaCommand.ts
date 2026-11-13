@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { CreateSchemaInput, CreateSchemaResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateSchemaCommand,
-  serializeAws_json1_1CreateSchemaCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSchemaInput, CreateSchemaResponse } from "../models/models_1";
+import { CreateSchema$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSchemaCommand}.
+ */
 export interface CreateSchemaCommandInput extends CreateSchemaInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSchemaCommand}.
+ */
 export interface CreateSchemaCommandOutput extends CreateSchemaResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,94 @@ export interface CreateSchemaCommandOutput extends CreateSchemaResponse, __Metad
  * ```javascript
  * import { GlueClient, CreateSchemaCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, CreateSchemaCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // CreateSchemaInput
+ *   RegistryId: { // RegistryId
+ *     RegistryName: "STRING_VALUE",
+ *     RegistryArn: "STRING_VALUE",
+ *   },
+ *   SchemaName: "STRING_VALUE", // required
+ *   DataFormat: "AVRO" || "JSON" || "PROTOBUF", // required
+ *   Compatibility: "NONE" || "DISABLED" || "BACKWARD" || "BACKWARD_ALL" || "FORWARD" || "FORWARD_ALL" || "FULL" || "FULL_ALL",
+ *   Description: "STRING_VALUE",
+ *   Tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   SchemaDefinition: "STRING_VALUE",
+ * };
  * const command = new CreateSchemaCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSchemaResponse
+ * //   RegistryName: "STRING_VALUE",
+ * //   RegistryArn: "STRING_VALUE",
+ * //   SchemaName: "STRING_VALUE",
+ * //   SchemaArn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   DataFormat: "AVRO" || "JSON" || "PROTOBUF",
+ * //   Compatibility: "NONE" || "DISABLED" || "BACKWARD" || "BACKWARD_ALL" || "FORWARD" || "FORWARD_ALL" || "FULL" || "FULL_ALL",
+ * //   SchemaCheckpoint: Number("long"),
+ * //   LatestSchemaVersion: Number("long"),
+ * //   NextSchemaVersion: Number("long"),
+ * //   SchemaStatus: "AVAILABLE" || "PENDING" || "DELETING",
+ * //   Tags: { // TagsMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   SchemaVersionId: "STRING_VALUE",
+ * //   SchemaVersionStatus: "AVAILABLE" || "PENDING" || "FAILURE" || "DELETING",
+ * // };
+ *
  * ```
  *
+ * @param CreateSchemaCommandInput - {@link CreateSchemaCommandInput}
+ * @returns {@link CreateSchemaCommandOutput}
  * @see {@link CreateSchemaCommandInput} for command's `input` shape.
  * @see {@link CreateSchemaCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>A resource to be created or added already exists.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSchemaCommand extends $Command<
-  CreateSchemaCommandInput,
-  CreateSchemaCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSchemaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSchemaCommandInput, CreateSchemaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "CreateSchemaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSchemaInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSchemaResponse.filterSensitiveLog,
+export class CreateSchemaCommand extends command<CreateSchemaCommandInput, CreateSchemaCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSchema",
+  CreateSchema$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSchemaInput;
+      output: CreateSchemaResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSchemaCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateSchemaCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSchemaCommandOutput> {
-    return deserializeAws_json1_1CreateSchemaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSchemaCommandInput;
+      output: CreateSchemaCommandOutput;
+    };
+  };
 }

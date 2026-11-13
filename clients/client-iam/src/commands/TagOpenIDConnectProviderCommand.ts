@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { TagOpenIDConnectProviderRequest } from "../models/models_0";
-import {
-  deserializeAws_queryTagOpenIDConnectProviderCommand,
-  serializeAws_queryTagOpenIDConnectProviderCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagOpenIDConnectProviderRequest } from "../models/models_0";
+import { TagOpenIDConnectProvider$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagOpenIDConnectProviderCommand}.
+ */
 export interface TagOpenIDConnectProviderCommandInput extends TagOpenIDConnectProviderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagOpenIDConnectProviderCommand}.
+ */
 export interface TagOpenIDConnectProviderCommandOutput extends __MetadataBearer {}
 
 /**
@@ -39,7 +40,7 @@ export interface TagOpenIDConnectProviderCommandOutput extends __MetadataBearer 
  *             </li>
  *             <li>
  *                <p>
- *                   <b>Access control</b> - Include tags in IAM user-based
+ *                   <b>Access control</b> - Include tags in IAM identity-based
  *           and resource-based policies. You can use tags to restrict access to only an OIDC provider
  *           that has a specified tag attached. For examples of policies that show how to use tags to
  *           control access, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Control access using IAM tags</a> in the
@@ -65,68 +66,71 @@ export interface TagOpenIDConnectProviderCommandOutput extends __MetadataBearer 
  * ```javascript
  * import { IAMClient, TagOpenIDConnectProviderCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, TagOpenIDConnectProviderCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // TagOpenIDConnectProviderRequest
+ *   OpenIDConnectProviderArn: "STRING_VALUE", // required
+ *   Tags: [ // tagListType // required
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new TagOpenIDConnectProviderCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param TagOpenIDConnectProviderCommandInput - {@link TagOpenIDConnectProviderCommandInput}
+ * @returns {@link TagOpenIDConnectProviderCommandOutput}
  * @see {@link TagOpenIDConnectProviderCommandInput} for command's `input` shape.
  * @see {@link TagOpenIDConnectProviderCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The request was rejected because multiple requests to change this object were submitted
+ *       simultaneously. Wait a few minutes and submit your request again.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *       input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class TagOpenIDConnectProviderCommand extends $Command<
-  TagOpenIDConnectProviderCommandInput,
-  TagOpenIDConnectProviderCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TagOpenIDConnectProviderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TagOpenIDConnectProviderCommandInput, TagOpenIDConnectProviderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "TagOpenIDConnectProviderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TagOpenIDConnectProviderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class TagOpenIDConnectProviderCommand extends command<TagOpenIDConnectProviderCommandInput, TagOpenIDConnectProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagOpenIDConnectProvider",
+  TagOpenIDConnectProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagOpenIDConnectProviderRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TagOpenIDConnectProviderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryTagOpenIDConnectProviderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TagOpenIDConnectProviderCommandOutput> {
-    return deserializeAws_queryTagOpenIDConnectProviderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TagOpenIDConnectProviderCommandInput;
+      output: TagOpenIDConnectProviderCommandOutput;
+    };
+  };
 }

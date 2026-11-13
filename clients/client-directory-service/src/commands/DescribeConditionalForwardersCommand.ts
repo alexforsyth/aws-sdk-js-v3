@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { DescribeConditionalForwardersRequest, DescribeConditionalForwardersResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConditionalForwardersCommand,
-  serializeAws_json1_1DescribeConditionalForwardersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeConditionalForwardersRequest, DescribeConditionalForwardersResult } from "../models/models_0";
+import { DescribeConditionalForwarders$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConditionalForwardersCommand}.
+ */
 export interface DescribeConditionalForwardersCommandInput extends DescribeConditionalForwardersRequest {}
-export interface DescribeConditionalForwardersCommandOutput
-  extends DescribeConditionalForwardersResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConditionalForwardersCommand}.
+ */
+export interface DescribeConditionalForwardersCommandOutput extends DescribeConditionalForwardersResult, __MetadataBearer {}
 
 /**
  * <p>Obtains information about the conditional forwarders for this account.</p>
@@ -32,71 +31,97 @@ export interface DescribeConditionalForwardersCommandOutput
  * ```javascript
  * import { DirectoryServiceClient, DescribeConditionalForwardersCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, DescribeConditionalForwardersCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // DescribeConditionalForwardersRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   RemoteDomainNames: [ // RemoteDomainNames
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeConditionalForwardersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConditionalForwardersResult
+ * //   ConditionalForwarders: [ // ConditionalForwarders
+ * //     { // ConditionalForwarder
+ * //       RemoteDomainName: "STRING_VALUE",
+ * //       DnsIpAddrs: [ // DnsIpAddrs
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       DnsIpv6Addrs: [ // DnsIpv6Addrs
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ReplicationScope: "Domain",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeConditionalForwardersCommandInput - {@link DescribeConditionalForwardersCommandInput}
+ * @returns {@link DescribeConditionalForwardersCommandOutput}
  * @see {@link DescribeConditionalForwardersCommandInput} for command's `input` shape.
  * @see {@link DescribeConditionalForwardersCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The specified directory is unavailable.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To describe conditional forwarders
+ * ```javascript
+ * // The following example obtains information about the conditional forwarders for a specified directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   RemoteDomainNames: [
+ *     "sales.example.com"
+ *   ]
+ * };
+ * const command = new DescribeConditionalForwardersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ConditionalForwarders:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeConditionalForwardersCommand extends $Command<
-  DescribeConditionalForwardersCommandInput,
-  DescribeConditionalForwardersCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConditionalForwardersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConditionalForwardersCommandInput, DescribeConditionalForwardersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "DescribeConditionalForwardersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConditionalForwardersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConditionalForwardersResult.filterSensitiveLog,
+export class DescribeConditionalForwardersCommand extends command<DescribeConditionalForwardersCommandInput, DescribeConditionalForwardersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConditionalForwarders",
+  DescribeConditionalForwarders$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConditionalForwardersRequest;
+      output: DescribeConditionalForwardersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConditionalForwardersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConditionalForwardersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConditionalForwardersCommandOutput> {
-    return deserializeAws_json1_1DescribeConditionalForwardersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConditionalForwardersCommandInput;
+      output: DescribeConditionalForwardersCommandOutput;
+    };
+  };
 }

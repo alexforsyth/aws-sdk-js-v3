@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteQueueLimitAssociationRequest, DeleteQueueLimitAssociationResponse } from "../models/models_0";
+import { DeleteQueueLimitAssociation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteQueueLimitAssociationCommand}.
+ */
+export interface DeleteQueueLimitAssociationCommandInput extends DeleteQueueLimitAssociationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteQueueLimitAssociationCommand}.
+ */
+export interface DeleteQueueLimitAssociationCommandOutput extends DeleteQueueLimitAssociationResponse, __MetadataBearer {}
+
+/**
+ * Removes the association between a queue and a limit. You must use the <code>UpdateQueueLimitAssociation</code> operation to set the status to <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> or <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code>. The status does not change immediately. Use the <code>GetQueueLimitAssociation</code> operation to see if the status changed to <code>STOPPED</code> before deleting the association.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, DeleteQueueLimitAssociationCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, DeleteQueueLimitAssociationCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // DeleteQueueLimitAssociationRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   limitId: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteQueueLimitAssociationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteQueueLimitAssociationCommandInput - {@link DeleteQueueLimitAssociationCommandInput}
+ * @returns {@link DeleteQueueLimitAssociationCommandOutput}
+ * @see {@link DeleteQueueLimitAssociationCommandInput} for command's `input` shape.
+ * @see {@link DeleteQueueLimitAssociationCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteQueueLimitAssociationCommand extends command<DeleteQueueLimitAssociationCommandInput, DeleteQueueLimitAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteQueueLimitAssociation",
+  DeleteQueueLimitAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteQueueLimitAssociationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteQueueLimitAssociationCommandInput;
+      output: DeleteQueueLimitAssociationCommandOutput;
+    };
+  };
+}

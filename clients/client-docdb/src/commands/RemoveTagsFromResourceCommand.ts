@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { RemoveTagsFromResourceMessage } from "../models/models_0";
-import {
-  deserializeAws_queryRemoveTagsFromResourceCommand,
-  serializeAws_queryRemoveTagsFromResourceCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveTagsFromResourceMessage } from "../models/models_0";
+import { RemoveTagsFromResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveTagsFromResourceCommand}.
+ */
 export interface RemoveTagsFromResourceCommandInput extends RemoveTagsFromResourceMessage {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveTagsFromResourceCommand}.
+ */
 export interface RemoveTagsFromResourceCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface RemoveTagsFromResourceCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DocDBClient, RemoveTagsFromResourceCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, RemoveTagsFromResourceCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // RemoveTagsFromResourceMessage
+ *   ResourceName: "STRING_VALUE", // required
+ *   TagKeys: [ // KeyList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new RemoveTagsFromResourceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveTagsFromResourceCommandInput - {@link RemoveTagsFromResourceCommandInput}
+ * @returns {@link RemoveTagsFromResourceCommandOutput}
  * @see {@link RemoveTagsFromResourceCommandInput} for command's `input` shape.
  * @see {@link RemoveTagsFromResourceCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBClusterIdentifier</code> doesn't refer to an existing cluster. </p>
+ *
+ * @throws {@link DBInstanceNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBInstanceIdentifier</code> doesn't refer to an existing instance. </p>
+ *
+ * @throws {@link DBSnapshotNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBSnapshotIdentifier</code> doesn't refer to an existing snapshot. </p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveTagsFromResourceCommand extends $Command<
-  RemoveTagsFromResourceCommandInput,
-  RemoveTagsFromResourceCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveTagsFromResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveTagsFromResourceCommandInput, RemoveTagsFromResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "RemoveTagsFromResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveTagsFromResourceMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RemoveTagsFromResourceCommand extends command<RemoveTagsFromResourceCommandInput, RemoveTagsFromResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveTagsFromResource",
+  RemoveTagsFromResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveTagsFromResourceMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveTagsFromResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRemoveTagsFromResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveTagsFromResourceCommandOutput> {
-    return deserializeAws_queryRemoveTagsFromResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveTagsFromResourceCommandInput;
+      output: RemoveTagsFromResourceCommandOutput;
+    };
+  };
 }

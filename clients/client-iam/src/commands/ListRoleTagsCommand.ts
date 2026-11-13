@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListRoleTagsRequest, ListRoleTagsResponse } from "../models/models_0";
-import { deserializeAws_queryListRoleTagsCommand, serializeAws_queryListRoleTagsCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRoleTagsRequest, ListRoleTagsResponse } from "../models/models_0";
+import { ListRoleTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRoleTagsCommand}.
+ */
 export interface ListRoleTagsCommandInput extends ListRoleTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRoleTagsCommand}.
+ */
 export interface ListRoleTagsCommandOutput extends ListRoleTagsResponse, __MetadataBearer {}
 
 /**
@@ -27,68 +31,89 @@ export interface ListRoleTagsCommandOutput extends ListRoleTagsResponse, __Metad
  * ```javascript
  * import { IAMClient, ListRoleTagsCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListRoleTagsCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListRoleTagsRequest
+ *   RoleName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListRoleTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRoleTagsResponse
+ * //   Tags: [ // tagListType // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRoleTagsCommandInput - {@link ListRoleTagsCommandInput}
+ * @returns {@link ListRoleTagsCommandOutput}
  * @see {@link ListRoleTagsCommandInput} for command's `input` shape.
  * @see {@link ListRoleTagsCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To list the tags attached to an IAM role
+ * ```javascript
+ * // The following example shows how to list the tags attached to a role.
+ * const input = {
+ *   RoleName: "taggedrole1"
+ * };
+ * const command = new ListRoleTagsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   IsTruncated: false,
+ *   Tags: [
+ *     {
+ *       Key: "Dept",
+ *       Value: "12345"
+ *     },
+ *     {
+ *       Key: "Team",
+ *       Value: "Accounting"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListRoleTagsCommand extends $Command<
-  ListRoleTagsCommandInput,
-  ListRoleTagsCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRoleTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRoleTagsCommandInput, ListRoleTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListRoleTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRoleTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRoleTagsResponse.filterSensitiveLog,
+export class ListRoleTagsCommand extends command<ListRoleTagsCommandInput, ListRoleTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRoleTags",
+  ListRoleTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRoleTagsRequest;
+      output: ListRoleTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRoleTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListRoleTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRoleTagsCommandOutput> {
-    return deserializeAws_queryListRoleTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRoleTagsCommandInput;
+      output: ListRoleTagsCommandOutput;
+    };
+  };
 }

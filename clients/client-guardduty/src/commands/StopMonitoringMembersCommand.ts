@@ -1,97 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { StopMonitoringMembersRequest, StopMonitoringMembersResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopMonitoringMembersCommand,
-  serializeAws_restJson1StopMonitoringMembersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopMonitoringMembersRequest, StopMonitoringMembersResponse } from "../models/models_1";
+import { StopMonitoringMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopMonitoringMembersCommand}.
+ */
 export interface StopMonitoringMembersCommandInput extends StopMonitoringMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopMonitoringMembersCommand}.
+ */
 export interface StopMonitoringMembersCommandOutput extends StopMonitoringMembersResponse, __MetadataBearer {}
 
 /**
- * <p>Stops GuardDuty monitoring for the specified member accounts. Use the
- *         <code>StartMonitoringMembers</code> operation to restart monitoring for those
- *       accounts.</p>
+ * <p>Stops GuardDuty monitoring for the specified member accounts. Use the <code>StartMonitoringMembers</code> operation to restart monitoring for those accounts.</p> <p>With <code>autoEnableOrganizationMembers</code> configuration for your organization set to <code>ALL</code>, you'll receive an error if you attempt to stop monitoring the member accounts in your organization.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GuardDutyClient, StopMonitoringMembersCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, StopMonitoringMembersCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // StopMonitoringMembersRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   AccountIds: [ // AccountIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new StopMonitoringMembersCommand(input);
  * const response = await client.send(command);
+ * // { // StopMonitoringMembersResponse
+ * //   UnprocessedAccounts: [ // UnprocessedAccounts // required
+ * //     { // UnprocessedAccount
+ * //       AccountId: "STRING_VALUE", // required
+ * //       Result: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param StopMonitoringMembersCommandInput - {@link StopMonitoringMembersCommandInput}
+ * @returns {@link StopMonitoringMembersCommandOutput}
  * @see {@link StopMonitoringMembersCommandInput} for command's `input` shape.
  * @see {@link StopMonitoringMembersCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class StopMonitoringMembersCommand extends $Command<
-  StopMonitoringMembersCommandInput,
-  StopMonitoringMembersCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopMonitoringMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopMonitoringMembersCommandInput, StopMonitoringMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "StopMonitoringMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopMonitoringMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopMonitoringMembersResponse.filterSensitiveLog,
+export class StopMonitoringMembersCommand extends command<StopMonitoringMembersCommandInput, StopMonitoringMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopMonitoringMembers",
+  StopMonitoringMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopMonitoringMembersRequest;
+      output: StopMonitoringMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopMonitoringMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopMonitoringMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopMonitoringMembersCommandOutput> {
-    return deserializeAws_restJson1StopMonitoringMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopMonitoringMembersCommandInput;
+      output: StopMonitoringMembersCommandOutput;
+    };
+  };
 }

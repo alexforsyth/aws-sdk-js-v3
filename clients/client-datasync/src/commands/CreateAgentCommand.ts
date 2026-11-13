@@ -1,109 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { CreateAgentRequest, CreateAgentResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateAgentCommand,
-  serializeAws_json1_1CreateAgentCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAgentRequest, CreateAgentResponse } from "../models/models_0";
+import { CreateAgent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAgentCommand}.
+ */
 export interface CreateAgentCommandInput extends CreateAgentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAgentCommand}.
+ */
 export interface CreateAgentCommandOutput extends CreateAgentResponse, __MetadataBearer {}
 
 /**
- * <p>Activates an DataSync agent that you have deployed on your host. The activation
- *       process associates your agent with your account. In the activation process, you specify
- *       information such as the Amazon Web Services Region that you want to activate the agent in. You activate the
- *       agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your
- *       tasks are created in this Amazon Web Services Region.</p>
- *          <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to
- *       a VPC endpoint so you can run tasks without going over the public internet.</p>
- *          <p>You can use an agent for more than one location. If a task uses multiple agents, all of
- *       them need to have status AVAILABLE for the task to run. If you use multiple agents for a
- *       source location, the status of all the agents must be AVAILABLE for the task to run. </p>
- *
- *
- *          <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that
- *       ensures minimal interruption to your tasks.</p>
- *          <p></p>
+ * <p>Activates an DataSync agent that you deploy in your storage environment.
+ *       The activation process associates the agent with your Amazon Web Services account.</p>
+ *          <p>If you haven't deployed an agent yet, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html">Do I need a DataSync
+ *         agent?</a>
+ *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, CreateAgentCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, CreateAgentCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // CreateAgentRequest
+ *   ActivationKey: "STRING_VALUE", // required
+ *   AgentName: "STRING_VALUE",
+ *   Tags: [ // InputTagList
+ *     { // TagListEntry
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   VpcEndpointId: "STRING_VALUE",
+ *   SubnetArns: [ // PLSubnetArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   SecurityGroupArns: [ // PLSecurityGroupArnList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new CreateAgentCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAgentResponse
+ * //   AgentArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateAgentCommandInput - {@link CreateAgentCommandInput}
+ * @returns {@link CreateAgentCommandOutput}
  * @see {@link CreateAgentCommandInput} for command's `input` shape.
  * @see {@link CreateAgentCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAgentCommand extends $Command<
-  CreateAgentCommandInput,
-  CreateAgentCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAgentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAgentCommandInput, CreateAgentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "CreateAgentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAgentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAgentResponse.filterSensitiveLog,
+export class CreateAgentCommand extends command<CreateAgentCommandInput, CreateAgentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAgent",
+  CreateAgent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAgentRequest;
+      output: CreateAgentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAgentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateAgentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAgentCommandOutput> {
-    return deserializeAws_json1_1CreateAgentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAgentCommandInput;
+      output: CreateAgentCommandOutput;
+    };
+  };
 }

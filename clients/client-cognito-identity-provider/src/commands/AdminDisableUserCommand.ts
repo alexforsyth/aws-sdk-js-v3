@@ -1,102 +1,120 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { AdminDisableUserRequest, AdminDisableUserResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AdminDisableUserCommand,
-  serializeAws_json1_1AdminDisableUserCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AdminDisableUserRequest, AdminDisableUserResponse } from "../models/models_0";
+import { AdminDisableUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AdminDisableUserCommand}.
+ */
 export interface AdminDisableUserCommandInput extends AdminDisableUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AdminDisableUserCommand}.
+ */
 export interface AdminDisableUserCommandOutput extends AdminDisableUserResponse, __MetadataBearer {}
 
 /**
- * <p>Disables the specified user.</p>
- *         <p>Calling this action requires developer credentials.</p>
+ * <p>Deactivates a user profile and revokes all access tokens for the user. A deactivated
+ *             user can't sign in, but still appears in the responses to <code>ListUsers</code>
+ *             API requests.</p>
+ *          <note>
+ *             <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For
+ *     this operation, you must use IAM credentials to authorize requests, and you must
+ *     grant yourself the corresponding IAM permission in a policy.</p>
+ *             <p class="title">
+ *                <b>Learn more</b>
+ *             </p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html">Signing Amazon Web Services API Requests</a>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html">Using the Amazon Cognito user pools API and user pool endpoints</a>
+ *                   </p>
+ *                </li>
+ *             </ul>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, AdminDisableUserCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, AdminDisableUserCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // AdminDisableUserRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   Username: "STRING_VALUE", // required
+ * };
  * const command = new AdminDisableUserCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AdminDisableUserCommandInput - {@link AdminDisableUserCommandInput}
+ * @returns {@link AdminDisableUserCommandOutput}
  * @see {@link AdminDisableUserCommandInput} for command's `input` shape.
  * @see {@link AdminDisableUserCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link UserNotFoundException} (client fault)
+ *  <p>This exception is thrown when a user isn't found.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class AdminDisableUserCommand extends $Command<
-  AdminDisableUserCommandInput,
-  AdminDisableUserCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AdminDisableUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AdminDisableUserCommandInput, AdminDisableUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "AdminDisableUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AdminDisableUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AdminDisableUserResponse.filterSensitiveLog,
+export class AdminDisableUserCommand extends command<AdminDisableUserCommandInput, AdminDisableUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "AdminDisableUser",
+  AdminDisableUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AdminDisableUserRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AdminDisableUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AdminDisableUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AdminDisableUserCommandOutput> {
-    return deserializeAws_json1_1AdminDisableUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AdminDisableUserCommandInput;
+      output: AdminDisableUserCommandOutput;
+    };
+  };
 }

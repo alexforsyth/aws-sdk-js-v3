@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListMonitoringSchedulesRequest, ListMonitoringSchedulesResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListMonitoringSchedulesCommand,
-  serializeAws_json1_1ListMonitoringSchedulesCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMonitoringSchedulesRequest, ListMonitoringSchedulesResponse } from "../models/models_4";
+import { ListMonitoringSchedules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMonitoringSchedulesCommand}.
+ */
 export interface ListMonitoringSchedulesCommandInput extends ListMonitoringSchedulesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMonitoringSchedulesCommand}.
+ */
 export interface ListMonitoringSchedulesCommandOutput extends ListMonitoringSchedulesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface ListMonitoringSchedulesCommandOutput extends ListMonitoringSche
  * ```javascript
  * import { SageMakerClient, ListMonitoringSchedulesCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListMonitoringSchedulesCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListMonitoringSchedulesRequest
+ *   EndpointName: "STRING_VALUE",
+ *   SortBy: "Name" || "CreationTime" || "Status",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   LastModifiedTimeBefore: new Date("TIMESTAMP"),
+ *   LastModifiedTimeAfter: new Date("TIMESTAMP"),
+ *   StatusEquals: "Pending" || "Failed" || "Scheduled" || "Stopped",
+ *   MonitoringJobDefinitionName: "STRING_VALUE",
+ *   MonitoringTypeEquals: "DataQuality" || "ModelQuality" || "ModelBias" || "ModelExplainability",
+ * };
  * const command = new ListMonitoringSchedulesCommand(input);
  * const response = await client.send(command);
+ * // { // ListMonitoringSchedulesResponse
+ * //   MonitoringScheduleSummaries: [ // MonitoringScheduleSummaryList // required
+ * //     { // MonitoringScheduleSummary
+ * //       MonitoringScheduleName: "STRING_VALUE", // required
+ * //       MonitoringScheduleArn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //       MonitoringScheduleStatus: "Pending" || "Failed" || "Scheduled" || "Stopped", // required
+ * //       EndpointName: "STRING_VALUE",
+ * //       MonitoringJobDefinitionName: "STRING_VALUE",
+ * //       MonitoringType: "DataQuality" || "ModelQuality" || "ModelBias" || "ModelExplainability",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMonitoringSchedulesCommandInput - {@link ListMonitoringSchedulesCommandInput}
+ * @returns {@link ListMonitoringSchedulesCommandOutput}
  * @see {@link ListMonitoringSchedulesCommandInput} for command's `input` shape.
  * @see {@link ListMonitoringSchedulesCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListMonitoringSchedulesCommand extends $Command<
-  ListMonitoringSchedulesCommandInput,
-  ListMonitoringSchedulesCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMonitoringSchedulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMonitoringSchedulesCommandInput, ListMonitoringSchedulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListMonitoringSchedulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMonitoringSchedulesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListMonitoringSchedulesResponse.filterSensitiveLog,
+export class ListMonitoringSchedulesCommand extends command<ListMonitoringSchedulesCommandInput, ListMonitoringSchedulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMonitoringSchedules",
+  ListMonitoringSchedules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMonitoringSchedulesRequest;
+      output: ListMonitoringSchedulesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMonitoringSchedulesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListMonitoringSchedulesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMonitoringSchedulesCommandOutput> {
-    return deserializeAws_json1_1ListMonitoringSchedulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMonitoringSchedulesCommandInput;
+      output: ListMonitoringSchedulesCommandOutput;
+    };
+  };
 }

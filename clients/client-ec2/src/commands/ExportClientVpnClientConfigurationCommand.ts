@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ExportClientVpnClientConfigurationRequest,
   ExportClientVpnClientConfigurationResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2ExportClientVpnClientConfigurationCommand,
-  serializeAws_ec2ExportClientVpnClientConfigurationCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_6";
+import { ExportClientVpnClientConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ExportClientVpnClientConfigurationCommand}.
+ */
 export interface ExportClientVpnClientConfigurationCommandInput extends ExportClientVpnClientConfigurationRequest {}
-export interface ExportClientVpnClientConfigurationCommandOutput
-  extends ExportClientVpnClientConfigurationResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ExportClientVpnClientConfigurationCommand}.
+ */
+export interface ExportClientVpnClientConfigurationCommandOutput extends ExportClientVpnClientConfigurationResult, __MetadataBearer {}
 
 /**
  * <p>Downloads the contents of the Client VPN endpoint configuration file for the specified Client VPN endpoint. The Client VPN endpoint configuration
@@ -35,74 +34,48 @@ export interface ExportClientVpnClientConfigurationCommandOutput
  * ```javascript
  * import { EC2Client, ExportClientVpnClientConfigurationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ExportClientVpnClientConfigurationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ExportClientVpnClientConfigurationRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new ExportClientVpnClientConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // ExportClientVpnClientConfigurationResult
+ * //   ClientConfiguration: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ExportClientVpnClientConfigurationCommandInput - {@link ExportClientVpnClientConfigurationCommandInput}
+ * @returns {@link ExportClientVpnClientConfigurationCommandOutput}
  * @see {@link ExportClientVpnClientConfigurationCommandInput} for command's `input` shape.
  * @see {@link ExportClientVpnClientConfigurationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ExportClientVpnClientConfigurationCommand extends $Command<
-  ExportClientVpnClientConfigurationCommandInput,
-  ExportClientVpnClientConfigurationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ExportClientVpnClientConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ExportClientVpnClientConfigurationCommandInput, ExportClientVpnClientConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ExportClientVpnClientConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ExportClientVpnClientConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ExportClientVpnClientConfigurationResult.filterSensitiveLog,
+export class ExportClientVpnClientConfigurationCommand extends command<ExportClientVpnClientConfigurationCommandInput, ExportClientVpnClientConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "ExportClientVpnClientConfiguration",
+  ExportClientVpnClientConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ExportClientVpnClientConfigurationRequest;
+      output: ExportClientVpnClientConfigurationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ExportClientVpnClientConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2ExportClientVpnClientConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ExportClientVpnClientConfigurationCommandOutput> {
-    return deserializeAws_ec2ExportClientVpnClientConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ExportClientVpnClientConfigurationCommandInput;
+      output: ExportClientVpnClientConfigurationCommandOutput;
+    };
+  };
 }

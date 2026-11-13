@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociateQualificationWithWorkerRequest, AssociateQualificationWithWorkerResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1AssociateQualificationWithWorkerCommand,
-  serializeAws_json1_1AssociateQualificationWithWorkerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  AssociateQualificationWithWorkerRequest,
+  AssociateQualificationWithWorkerResponse,
+} from "../models/models_0";
+import { AssociateQualificationWithWorker$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateQualificationWithWorkerCommand}.
+ */
 export interface AssociateQualificationWithWorkerCommandInput extends AssociateQualificationWithWorkerRequest {}
-export interface AssociateQualificationWithWorkerCommandOutput
-  extends AssociateQualificationWithWorkerResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateQualificationWithWorkerCommand}.
+ */
+export interface AssociateQualificationWithWorkerCommandOutput extends AssociateQualificationWithWorkerResponse, __MetadataBearer {}
 
 /**
  * <p>
@@ -50,74 +52,54 @@ export interface AssociateQualificationWithWorkerCommandOutput
  * ```javascript
  * import { MTurkClient, AssociateQualificationWithWorkerCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, AssociateQualificationWithWorkerCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // AssociateQualificationWithWorkerRequest
+ *   QualificationTypeId: "STRING_VALUE", // required
+ *   WorkerId: "STRING_VALUE", // required
+ *   IntegerValue: Number("int"),
+ *   SendNotification: true || false,
+ * };
  * const command = new AssociateQualificationWithWorkerCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateQualificationWithWorkerCommandInput - {@link AssociateQualificationWithWorkerCommandInput}
+ * @returns {@link AssociateQualificationWithWorkerCommandOutput}
  * @see {@link AssociateQualificationWithWorkerCommandInput} for command's `input` shape.
  * @see {@link AssociateQualificationWithWorkerCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateQualificationWithWorkerCommand extends $Command<
-  AssociateQualificationWithWorkerCommandInput,
-  AssociateQualificationWithWorkerCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateQualificationWithWorkerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateQualificationWithWorkerCommandInput, AssociateQualificationWithWorkerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "AssociateQualificationWithWorkerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateQualificationWithWorkerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateQualificationWithWorkerResponse.filterSensitiveLog,
+export class AssociateQualificationWithWorkerCommand extends command<AssociateQualificationWithWorkerCommandInput, AssociateQualificationWithWorkerCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateQualificationWithWorker",
+  AssociateQualificationWithWorker$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateQualificationWithWorkerRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateQualificationWithWorkerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateQualificationWithWorkerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateQualificationWithWorkerCommandOutput> {
-    return deserializeAws_json1_1AssociateQualificationWithWorkerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateQualificationWithWorkerCommandInput;
+      output: AssociateQualificationWithWorkerCommandOutput;
+    };
+  };
 }

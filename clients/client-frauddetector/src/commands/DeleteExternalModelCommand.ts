@@ -1,96 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FraudDetectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FraudDetectorClient";
-import { DeleteExternalModelRequest, DeleteExternalModelResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteExternalModelCommand,
-  serializeAws_json1_1DeleteExternalModelCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteExternalModelRequest, DeleteExternalModelResult } from "../models/models_0";
+import { DeleteExternalModel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteExternalModelCommand}.
+ */
 export interface DeleteExternalModelCommandInput extends DeleteExternalModelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteExternalModelCommand}.
+ */
 export interface DeleteExternalModelCommandOutput extends DeleteExternalModelResult, __MetadataBearer {}
 
 /**
  * <p>Removes a SageMaker model from Amazon Fraud Detector.</p>
- * 	        <p>You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.</p>
+ *          <p>You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FraudDetectorClient, DeleteExternalModelCommand } from "@aws-sdk/client-frauddetector"; // ES Modules import
  * // const { FraudDetectorClient, DeleteExternalModelCommand } = require("@aws-sdk/client-frauddetector"); // CommonJS import
+ * // import type { FraudDetectorClientConfig } from "@aws-sdk/client-frauddetector";
+ * const config = {}; // type is FraudDetectorClientConfig
  * const client = new FraudDetectorClient(config);
+ * const input = { // DeleteExternalModelRequest
+ *   modelEndpoint: "STRING_VALUE", // required
+ * };
  * const command = new DeleteExternalModelCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteExternalModelCommandInput - {@link DeleteExternalModelCommandInput}
+ * @returns {@link DeleteExternalModelCommandOutput}
  * @see {@link DeleteExternalModelCommandInput} for command's `input` shape.
  * @see {@link DeleteExternalModelCommandOutput} for command's `response` shape.
- * @see {@link FraudDetectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FraudDetectorClientResolvedConfig | config} for FraudDetectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An exception indicating Amazon Fraud Detector does not have the needed permissions. This can occur if you submit a request, such as <code>PutExternalModel</code>, that specifies a role that is not in your account.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>An exception indicating there was a conflict during a delete operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception indicating an internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>An exception indicating a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception indicating a specified value is not allowed.</p>
+ *
+ * @throws {@link FraudDetectorServiceException}
+ * <p>Base exception class for all service exceptions from FraudDetector service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteExternalModelCommand extends $Command<
-  DeleteExternalModelCommandInput,
-  DeleteExternalModelCommandOutput,
-  FraudDetectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteExternalModelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FraudDetectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteExternalModelCommandInput, DeleteExternalModelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FraudDetectorClient";
-    const commandName = "DeleteExternalModelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteExternalModelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteExternalModelResult.filterSensitiveLog,
+export class DeleteExternalModelCommand extends command<DeleteExternalModelCommandInput, DeleteExternalModelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteExternalModel",
+  DeleteExternalModel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteExternalModelRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteExternalModelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteExternalModelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteExternalModelCommandOutput> {
-    return deserializeAws_json1_1DeleteExternalModelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteExternalModelCommandInput;
+      output: DeleteExternalModelCommandOutput;
+    };
+  };
 }

@@ -1,35 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListGroupsInput, ListGroupsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListGroupsCommand,
-  serializeAws_restJson1ListGroupsCommand,
-} from "../protocols/Aws_restJson1";
-import { ResourceGroupsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResourceGroupsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGroupsInput, ListGroupsOutput } from "../models/models_0";
+import { ListGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGroupsCommand}.
+ */
 export interface ListGroupsCommandInput extends ListGroupsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListGroupsCommand}.
+ */
 export interface ListGroupsCommandOutput extends ListGroupsOutput, __MetadataBearer {}
 
 /**
- * <p>Returns a list of existing resource groups in your account.</p>
- *         <p>
+ * <p>Returns a list of existing Resource Groups in your account.</p>
+ *          <p>
  *             <b>Minimum permissions</b>
  *          </p>
  *          <p>To run this command, you must have the following permissions:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <code>resource-groups:ListGroups</code>
  *                </p>
  *             </li>
@@ -39,68 +40,95 @@ export interface ListGroupsCommandOutput extends ListGroupsOutput, __MetadataBea
  * ```javascript
  * import { ResourceGroupsClient, ListGroupsCommand } from "@aws-sdk/client-resource-groups"; // ES Modules import
  * // const { ResourceGroupsClient, ListGroupsCommand } = require("@aws-sdk/client-resource-groups"); // CommonJS import
+ * // import type { ResourceGroupsClientConfig } from "@aws-sdk/client-resource-groups";
+ * const config = {}; // type is ResourceGroupsClientConfig
  * const client = new ResourceGroupsClient(config);
+ * const input = { // ListGroupsInput
+ *   Filters: [ // GroupFilterList
+ *     { // GroupFilter
+ *       Name: "resource-type" || "configuration-type" || "owner" || "display-name" || "criticality", // required
+ *       Values: [ // GroupFilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListGroupsOutput
+ * //   GroupIdentifiers: [ // GroupIdentifierList
+ * //     { // GroupIdentifier
+ * //       GroupName: "STRING_VALUE",
+ * //       GroupArn: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Criticality: Number("int"),
+ * //       Owner: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Groups: [ // GroupList
+ * //     { // Group
+ * //       GroupArn: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE",
+ * //       Criticality: Number("int"),
+ * //       Owner: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       ApplicationTag: { // ApplicationTag
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListGroupsCommandInput - {@link ListGroupsCommandInput}
+ * @returns {@link ListGroupsCommandOutput}
  * @see {@link ListGroupsCommandInput} for command's `input` shape.
  * @see {@link ListGroupsCommandOutput} for command's `response` shape.
- * @see {@link ResourceGroupsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ResourceGroupsClientResolvedConfig | config} for ResourceGroupsClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request includes one or more parameters that violate validation rules.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The caller isn't authorized to make the request. Check permissions.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal error occurred while processing the request. Try again later.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The request uses an HTTP method that isn't allowed for the specified resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>You've exceeded throttling limits by making too many requests in a period of
+ *             time.</p>
+ *
+ * @throws {@link ResourceGroupsServiceException}
+ * <p>Base exception class for all service exceptions from ResourceGroups service.</p>
+ *
+ *
+ * @public
  */
-export class ListGroupsCommand extends $Command<
-  ListGroupsCommandInput,
-  ListGroupsCommandOutput,
-  ResourceGroupsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResourceGroupsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGroupsCommandInput, ListGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResourceGroupsClient";
-    const commandName = "ListGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGroupsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGroupsOutput.filterSensitiveLog,
+export class ListGroupsCommand extends command<ListGroupsCommandInput, ListGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGroups",
+  ListGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGroupsInput;
+      output: ListGroupsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGroupsCommandOutput> {
-    return deserializeAws_restJson1ListGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGroupsCommandInput;
+      output: ListGroupsCommandOutput;
+    };
+  };
 }

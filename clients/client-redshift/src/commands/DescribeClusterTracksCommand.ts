@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeClusterTracksMessage, TrackListMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeClusterTracksCommand,
-  serializeAws_queryDescribeClusterTracksCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeClusterTracksMessage, TrackListMessage } from "../models/models_0";
+import { DescribeClusterTracks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClusterTracksCommand}.
+ */
 export interface DescribeClusterTracksCommandInput extends DescribeClusterTracksMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClusterTracksCommand}.
+ */
 export interface DescribeClusterTracksCommandOutput extends TrackListMessage, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface DescribeClusterTracksCommandOutput extends TrackListMessage, __
  * ```javascript
  * import { RedshiftClient, DescribeClusterTracksCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeClusterTracksCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeClusterTracksMessage
+ *   MaintenanceTrackName: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeClusterTracksCommand(input);
  * const response = await client.send(command);
+ * // { // TrackListMessage
+ * //   MaintenanceTracks: [ // TrackList
+ * //     { // MaintenanceTrack
+ * //       MaintenanceTrackName: "STRING_VALUE",
+ * //       DatabaseVersion: "STRING_VALUE",
+ * //       UpdateTargets: [ // EligibleTracksToUpdateList
+ * //         { // UpdateTarget
+ * //           MaintenanceTrackName: "STRING_VALUE",
+ * //           DatabaseVersion: "STRING_VALUE",
+ * //           SupportedOperations: [ // SupportedOperationList
+ * //             { // SupportedOperation
+ * //               OperationName: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeClusterTracksCommandInput - {@link DescribeClusterTracksCommandInput}
+ * @returns {@link DescribeClusterTracksCommandOutput}
  * @see {@link DescribeClusterTracksCommandInput} for command's `input` shape.
  * @see {@link DescribeClusterTracksCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidClusterTrackFault} (client fault)
+ *  <p>The provided cluster track name is not valid.</p>
+ *
+ * @throws {@link UnauthorizedOperation} (client fault)
+ *  <p>Your account is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClusterTracksCommand extends $Command<
-  DescribeClusterTracksCommandInput,
-  DescribeClusterTracksCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClusterTracksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClusterTracksCommandInput, DescribeClusterTracksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeClusterTracksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClusterTracksMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: TrackListMessage.filterSensitiveLog,
+export class DescribeClusterTracksCommand extends command<DescribeClusterTracksCommandInput, DescribeClusterTracksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeClusterTracks",
+  DescribeClusterTracks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterTracksMessage;
+      output: TrackListMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClusterTracksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeClusterTracksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeClusterTracksCommandOutput> {
-    return deserializeAws_queryDescribeClusterTracksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClusterTracksCommandInput;
+      output: DescribeClusterTracksCommandOutput;
+    };
+  };
 }

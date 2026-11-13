@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import { RegisterJobDefinitionRequest, RegisterJobDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RegisterJobDefinitionCommand,
-  serializeAws_restJson1RegisterJobDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterJobDefinitionRequest, RegisterJobDefinitionResponse } from "../models/models_0";
+import { RegisterJobDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterJobDefinitionCommand}.
+ */
 export interface RegisterJobDefinitionCommandInput extends RegisterJobDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterJobDefinitionCommand}.
+ */
 export interface RegisterJobDefinitionCommandOutput extends RegisterJobDefinitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,977 @@ export interface RegisterJobDefinitionCommandOutput extends RegisterJobDefinitio
  * ```javascript
  * import { BatchClient, RegisterJobDefinitionCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, RegisterJobDefinitionCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // RegisterJobDefinitionRequest
+ *   jobDefinitionName: "STRING_VALUE", // required
+ *   type: "container" || "multinode", // required
+ *   parameters: { // ParametersMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   schedulingPriority: Number("int"),
+ *   containerProperties: { // ContainerProperties
+ *     image: "STRING_VALUE",
+ *     vcpus: Number("int"),
+ *     memory: Number("int"),
+ *     command: [ // StringList
+ *       "STRING_VALUE",
+ *     ],
+ *     jobRoleArn: "STRING_VALUE",
+ *     executionRoleArn: "STRING_VALUE",
+ *     volumes: [ // Volumes
+ *       { // Volume
+ *         host: { // Host
+ *           sourcePath: "STRING_VALUE",
+ *         },
+ *         name: "STRING_VALUE",
+ *         efsVolumeConfiguration: { // EFSVolumeConfiguration
+ *           fileSystemId: "STRING_VALUE", // required
+ *           rootDirectory: "STRING_VALUE",
+ *           transitEncryption: "ENABLED" || "DISABLED",
+ *           transitEncryptionPort: Number("int"),
+ *           authorizationConfig: { // EFSAuthorizationConfig
+ *             accessPointId: "STRING_VALUE",
+ *             iam: "ENABLED" || "DISABLED",
+ *           },
+ *         },
+ *         s3filesVolumeConfiguration: { // S3FilesVolumeConfiguration
+ *           fileSystemArn: "STRING_VALUE", // required
+ *           rootDirectory: "STRING_VALUE",
+ *           transitEncryptionPort: Number("int"),
+ *           accessPointArn: "STRING_VALUE",
+ *         },
+ *       },
+ *     ],
+ *     environment: [ // EnvironmentVariables
+ *       { // KeyValuePair
+ *         name: "STRING_VALUE",
+ *         value: "STRING_VALUE",
+ *       },
+ *     ],
+ *     mountPoints: [ // MountPoints
+ *       { // MountPoint
+ *         containerPath: "STRING_VALUE",
+ *         readOnly: true || false,
+ *         sourceVolume: "STRING_VALUE",
+ *       },
+ *     ],
+ *     readonlyRootFilesystem: true || false,
+ *     privileged: true || false,
+ *     ulimits: [ // Ulimits
+ *       { // Ulimit
+ *         hardLimit: Number("int"), // required
+ *         name: "STRING_VALUE", // required
+ *         softLimit: Number("int"), // required
+ *       },
+ *     ],
+ *     user: "STRING_VALUE",
+ *     instanceType: "STRING_VALUE",
+ *     resourceRequirements: [ // ResourceRequirements
+ *       { // ResourceRequirement
+ *         value: "STRING_VALUE", // required
+ *         type: "GPU" || "VCPU" || "MEMORY", // required
+ *       },
+ *     ],
+ *     linuxParameters: { // LinuxParameters
+ *       devices: [ // DevicesList
+ *         { // Device
+ *           hostPath: "STRING_VALUE", // required
+ *           containerPath: "STRING_VALUE",
+ *           permissions: [ // DeviceCgroupPermissions
+ *             "READ" || "WRITE" || "MKNOD",
+ *           ],
+ *         },
+ *       ],
+ *       initProcessEnabled: true || false,
+ *       sharedMemorySize: Number("int"),
+ *       tmpfs: [ // TmpfsList
+ *         { // Tmpfs
+ *           containerPath: "STRING_VALUE", // required
+ *           size: Number("int"), // required
+ *           mountOptions: [
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       maxSwap: Number("int"),
+ *       swappiness: Number("int"),
+ *     },
+ *     logConfiguration: { // LogConfiguration
+ *       logDriver: "json-file" || "syslog" || "journald" || "gelf" || "fluentd" || "awslogs" || "splunk" || "awsfirelens", // required
+ *       options: { // LogConfigurationOptionsMap
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *       secretOptions: [ // SecretList
+ *         { // Secret
+ *           name: "STRING_VALUE", // required
+ *           valueFrom: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *     secrets: [
+ *       {
+ *         name: "STRING_VALUE", // required
+ *         valueFrom: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *     networkConfiguration: { // NetworkConfiguration
+ *       assignPublicIp: "ENABLED" || "DISABLED",
+ *     },
+ *     fargatePlatformConfiguration: { // FargatePlatformConfiguration
+ *       platformVersion: "STRING_VALUE",
+ *     },
+ *     enableExecuteCommand: true || false,
+ *     ephemeralStorage: { // EphemeralStorage
+ *       sizeInGiB: Number("int"), // required
+ *     },
+ *     runtimePlatform: { // RuntimePlatform
+ *       operatingSystemFamily: "STRING_VALUE",
+ *       cpuArchitecture: "STRING_VALUE",
+ *     },
+ *     repositoryCredentials: { // RepositoryCredentials
+ *       credentialsParameter: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   nodeProperties: { // NodeProperties
+ *     numNodes: Number("int"), // required
+ *     mainNode: Number("int"), // required
+ *     nodeRangeProperties: [ // NodeRangeProperties // required
+ *       { // NodeRangeProperty
+ *         targetNodes: "STRING_VALUE", // required
+ *         container: {
+ *           image: "STRING_VALUE",
+ *           vcpus: Number("int"),
+ *           memory: Number("int"),
+ *           command: [
+ *             "STRING_VALUE",
+ *           ],
+ *           jobRoleArn: "STRING_VALUE",
+ *           executionRoleArn: "STRING_VALUE",
+ *           volumes: [
+ *             {
+ *               host: {
+ *                 sourcePath: "STRING_VALUE",
+ *               },
+ *               name: "STRING_VALUE",
+ *               efsVolumeConfiguration: {
+ *                 fileSystemId: "STRING_VALUE", // required
+ *                 rootDirectory: "STRING_VALUE",
+ *                 transitEncryption: "ENABLED" || "DISABLED",
+ *                 transitEncryptionPort: Number("int"),
+ *                 authorizationConfig: {
+ *                   accessPointId: "STRING_VALUE",
+ *                   iam: "ENABLED" || "DISABLED",
+ *                 },
+ *               },
+ *               s3filesVolumeConfiguration: {
+ *                 fileSystemArn: "STRING_VALUE", // required
+ *                 rootDirectory: "STRING_VALUE",
+ *                 transitEncryptionPort: Number("int"),
+ *                 accessPointArn: "STRING_VALUE",
+ *               },
+ *             },
+ *           ],
+ *           environment: [
+ *             {
+ *               name: "STRING_VALUE",
+ *               value: "STRING_VALUE",
+ *             },
+ *           ],
+ *           mountPoints: [
+ *             {
+ *               containerPath: "STRING_VALUE",
+ *               readOnly: true || false,
+ *               sourceVolume: "STRING_VALUE",
+ *             },
+ *           ],
+ *           readonlyRootFilesystem: true || false,
+ *           privileged: true || false,
+ *           ulimits: [
+ *             {
+ *               hardLimit: Number("int"), // required
+ *               name: "STRING_VALUE", // required
+ *               softLimit: Number("int"), // required
+ *             },
+ *           ],
+ *           user: "STRING_VALUE",
+ *           instanceType: "STRING_VALUE",
+ *           resourceRequirements: [
+ *             {
+ *               value: "STRING_VALUE", // required
+ *               type: "GPU" || "VCPU" || "MEMORY", // required
+ *             },
+ *           ],
+ *           linuxParameters: {
+ *             devices: [
+ *               {
+ *                 hostPath: "STRING_VALUE", // required
+ *                 containerPath: "STRING_VALUE",
+ *                 permissions: [
+ *                   "READ" || "WRITE" || "MKNOD",
+ *                 ],
+ *               },
+ *             ],
+ *             initProcessEnabled: true || false,
+ *             sharedMemorySize: Number("int"),
+ *             tmpfs: [
+ *               {
+ *                 containerPath: "STRING_VALUE", // required
+ *                 size: Number("int"), // required
+ *                 mountOptions: "<StringList>",
+ *               },
+ *             ],
+ *             maxSwap: Number("int"),
+ *             swappiness: Number("int"),
+ *           },
+ *           logConfiguration: {
+ *             logDriver: "json-file" || "syslog" || "journald" || "gelf" || "fluentd" || "awslogs" || "splunk" || "awsfirelens", // required
+ *             options: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *             secretOptions: "<SecretList>",
+ *           },
+ *           secrets: "<SecretList>",
+ *           networkConfiguration: {
+ *             assignPublicIp: "ENABLED" || "DISABLED",
+ *           },
+ *           fargatePlatformConfiguration: {
+ *             platformVersion: "STRING_VALUE",
+ *           },
+ *           enableExecuteCommand: true || false,
+ *           ephemeralStorage: {
+ *             sizeInGiB: Number("int"), // required
+ *           },
+ *           runtimePlatform: {
+ *             operatingSystemFamily: "STRING_VALUE",
+ *             cpuArchitecture: "STRING_VALUE",
+ *           },
+ *           repositoryCredentials: {
+ *             credentialsParameter: "STRING_VALUE", // required
+ *           },
+ *         },
+ *         instanceTypes: "<StringList>",
+ *         ecsProperties: { // EcsProperties
+ *           taskProperties: [ // ListEcsTaskProperties // required
+ *             { // EcsTaskProperties
+ *               containers: [ // ListTaskContainerProperties // required
+ *                 { // TaskContainerProperties
+ *                   command: "<StringList>",
+ *                   dependsOn: [ // TaskContainerDependencyList
+ *                     { // TaskContainerDependency
+ *                       containerName: "STRING_VALUE",
+ *                       condition: "STRING_VALUE",
+ *                     },
+ *                   ],
+ *                   environment: "<EnvironmentVariables>",
+ *                   essential: true || false,
+ *                   firelensConfiguration: { // FirelensConfiguration
+ *                     type: "fluentd" || "fluentbit", // required
+ *                     options: { // FirelensConfigurationOptionsMap
+ *                       "<keys>": "STRING_VALUE",
+ *                     },
+ *                   },
+ *                   image: "STRING_VALUE", // required
+ *                   linuxParameters: "<LinuxParameters>",
+ *                   logConfiguration: "<LogConfiguration>",
+ *                   mountPoints: "<MountPoints>",
+ *                   name: "STRING_VALUE",
+ *                   privileged: true || false,
+ *                   readonlyRootFilesystem: true || false,
+ *                   repositoryCredentials: "<RepositoryCredentials>",
+ *                   resourceRequirements: "<ResourceRequirements>",
+ *                   secrets: "<SecretList>",
+ *                   ulimits: "<Ulimits>",
+ *                   user: "STRING_VALUE",
+ *                   startTimeout: Number("int"),
+ *                   stopTimeout: Number("int"),
+ *                 },
+ *               ],
+ *               ephemeralStorage: "<EphemeralStorage>",
+ *               executionRoleArn: "STRING_VALUE",
+ *               platformVersion: "STRING_VALUE",
+ *               ipcMode: "STRING_VALUE",
+ *               taskRoleArn: "STRING_VALUE",
+ *               pidMode: "STRING_VALUE",
+ *               networkConfiguration: "<NetworkConfiguration>",
+ *               runtimePlatform: "<RuntimePlatform>",
+ *               volumes: "<Volumes>",
+ *               enableExecuteCommand: true || false,
+ *               networkMode: "STRING_VALUE",
+ *             },
+ *           ],
+ *         },
+ *         eksProperties: { // EksProperties
+ *           podProperties: { // EksPodProperties
+ *             serviceAccountName: "STRING_VALUE",
+ *             hostNetwork: true || false,
+ *             dnsPolicy: "STRING_VALUE",
+ *             imagePullSecrets: [ // ImagePullSecrets
+ *               { // ImagePullSecret
+ *                 name: "STRING_VALUE", // required
+ *               },
+ *             ],
+ *             containers: [ // EksContainers
+ *               { // EksContainer
+ *                 name: "STRING_VALUE",
+ *                 image: "STRING_VALUE", // required
+ *                 imagePullPolicy: "STRING_VALUE",
+ *                 command: "<StringList>",
+ *                 args: "<StringList>",
+ *                 env: [ // EksContainerEnvironmentVariables
+ *                   { // EksContainerEnvironmentVariable
+ *                     name: "STRING_VALUE", // required
+ *                     value: "STRING_VALUE",
+ *                   },
+ *                 ],
+ *                 resources: { // EksContainerResourceRequirements
+ *                   limits: { // EksLimits
+ *                     "<keys>": "STRING_VALUE",
+ *                   },
+ *                   requests: { // EksRequests
+ *                     "<keys>": "STRING_VALUE",
+ *                   },
+ *                 },
+ *                 volumeMounts: [ // EksContainerVolumeMounts
+ *                   { // EksContainerVolumeMount
+ *                     name: "STRING_VALUE",
+ *                     mountPath: "STRING_VALUE",
+ *                     subPath: "STRING_VALUE",
+ *                     readOnly: true || false,
+ *                   },
+ *                 ],
+ *                 securityContext: { // EksContainerSecurityContext
+ *                   runAsUser: Number("long"),
+ *                   runAsGroup: Number("long"),
+ *                   privileged: true || false,
+ *                   allowPrivilegeEscalation: true || false,
+ *                   readOnlyRootFilesystem: true || false,
+ *                   runAsNonRoot: true || false,
+ *                   capabilities: { // EksContainerLinuxCapabilities
+ *                     add: [ // EksContainerLinuxCapabilityList
+ *                       "STRING_VALUE",
+ *                     ],
+ *                     drop: [
+ *                       "STRING_VALUE",
+ *                     ],
+ *                   },
+ *                   seccompProfile: { // EksSeccompProfile
+ *                     type: "RuntimeDefault" || "Localhost" || "Unconfined", // required
+ *                     localhostProfile: "STRING_VALUE",
+ *                   },
+ *                 },
+ *               },
+ *             ],
+ *             initContainers: [
+ *               {
+ *                 name: "STRING_VALUE",
+ *                 image: "STRING_VALUE", // required
+ *                 imagePullPolicy: "STRING_VALUE",
+ *                 command: "<StringList>",
+ *                 args: "<StringList>",
+ *                 env: [
+ *                   {
+ *                     name: "STRING_VALUE", // required
+ *                     value: "STRING_VALUE",
+ *                   },
+ *                 ],
+ *                 resources: {
+ *                   limits: {
+ *                     "<keys>": "STRING_VALUE",
+ *                   },
+ *                   requests: {
+ *                     "<keys>": "STRING_VALUE",
+ *                   },
+ *                 },
+ *                 volumeMounts: [
+ *                   {
+ *                     name: "STRING_VALUE",
+ *                     mountPath: "STRING_VALUE",
+ *                     subPath: "STRING_VALUE",
+ *                     readOnly: true || false,
+ *                   },
+ *                 ],
+ *                 securityContext: {
+ *                   runAsUser: Number("long"),
+ *                   runAsGroup: Number("long"),
+ *                   privileged: true || false,
+ *                   allowPrivilegeEscalation: true || false,
+ *                   readOnlyRootFilesystem: true || false,
+ *                   runAsNonRoot: true || false,
+ *                   capabilities: {
+ *                     add: [
+ *                       "STRING_VALUE",
+ *                     ],
+ *                     drop: [
+ *                       "STRING_VALUE",
+ *                     ],
+ *                   },
+ *                   seccompProfile: {
+ *                     type: "RuntimeDefault" || "Localhost" || "Unconfined", // required
+ *                     localhostProfile: "STRING_VALUE",
+ *                   },
+ *                 },
+ *               },
+ *             ],
+ *             volumes: [ // EksVolumes
+ *               { // EksVolume
+ *                 name: "STRING_VALUE", // required
+ *                 hostPath: { // EksHostPath
+ *                   path: "STRING_VALUE",
+ *                 },
+ *                 emptyDir: { // EksEmptyDir
+ *                   medium: "STRING_VALUE",
+ *                   sizeLimit: "STRING_VALUE",
+ *                 },
+ *                 secret: { // EksSecret
+ *                   secretName: "STRING_VALUE", // required
+ *                   optional: true || false,
+ *                 },
+ *                 persistentVolumeClaim: { // EksPersistentVolumeClaim
+ *                   claimName: "STRING_VALUE", // required
+ *                   readOnly: true || false,
+ *                 },
+ *               },
+ *             ],
+ *             metadata: { // EksMetadata
+ *               labels: { // EksLabelsMap
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *               annotations: { // EksAnnotationsMap
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *               namespace: "STRING_VALUE",
+ *             },
+ *             shareProcessNamespace: true || false,
+ *             securityContext: { // EksPodSecurityContext
+ *               runAsUser: Number("long"),
+ *               runAsGroup: Number("long"),
+ *               runAsNonRoot: true || false,
+ *               seccompProfile: {
+ *                 type: "RuntimeDefault" || "Localhost" || "Unconfined", // required
+ *                 localhostProfile: "STRING_VALUE",
+ *               },
+ *               fsGroup: Number("long"),
+ *             },
+ *           },
+ *         },
+ *         consumableResourceProperties: { // ConsumableResourceProperties
+ *           consumableResourceList: [ // ConsumableResourceList
+ *             { // ConsumableResourceRequirement
+ *               consumableResource: "STRING_VALUE",
+ *               quantity: Number("long"),
+ *             },
+ *           ],
+ *         },
+ *       },
+ *     ],
+ *   },
+ *   retryStrategy: { // RetryStrategy
+ *     attempts: Number("int"),
+ *     evaluateOnExit: [ // EvaluateOnExitList
+ *       { // EvaluateOnExit
+ *         onStatusReason: "STRING_VALUE",
+ *         onReason: "STRING_VALUE",
+ *         onExitCode: "STRING_VALUE",
+ *         action: "RETRY" || "EXIT", // required
+ *       },
+ *     ],
+ *   },
+ *   propagateTags: true || false,
+ *   timeout: { // JobTimeout
+ *     attemptDurationSeconds: Number("int"),
+ *   },
+ *   tags: { // TagrisTagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   platformCapabilities: [ // PlatformCapabilityList
+ *     "EC2" || "FARGATE" || "MANAGED_INSTANCES",
+ *   ],
+ *   eksProperties: {
+ *     podProperties: {
+ *       serviceAccountName: "STRING_VALUE",
+ *       hostNetwork: true || false,
+ *       dnsPolicy: "STRING_VALUE",
+ *       imagePullSecrets: [
+ *         {
+ *           name: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *       containers: [
+ *         {
+ *           name: "STRING_VALUE",
+ *           image: "STRING_VALUE", // required
+ *           imagePullPolicy: "STRING_VALUE",
+ *           command: "<StringList>",
+ *           args: "<StringList>",
+ *           env: [
+ *             {
+ *               name: "STRING_VALUE", // required
+ *               value: "STRING_VALUE",
+ *             },
+ *           ],
+ *           resources: {
+ *             limits: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *             requests: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *           },
+ *           volumeMounts: [
+ *             {
+ *               name: "STRING_VALUE",
+ *               mountPath: "STRING_VALUE",
+ *               subPath: "STRING_VALUE",
+ *               readOnly: true || false,
+ *             },
+ *           ],
+ *           securityContext: {
+ *             runAsUser: Number("long"),
+ *             runAsGroup: Number("long"),
+ *             privileged: true || false,
+ *             allowPrivilegeEscalation: true || false,
+ *             readOnlyRootFilesystem: true || false,
+ *             runAsNonRoot: true || false,
+ *             capabilities: {
+ *               add: [
+ *                 "STRING_VALUE",
+ *               ],
+ *               drop: "<EksContainerLinuxCapabilityList>",
+ *             },
+ *             seccompProfile: "<EksSeccompProfile>",
+ *           },
+ *         },
+ *       ],
+ *       initContainers: [
+ *         {
+ *           name: "STRING_VALUE",
+ *           image: "STRING_VALUE", // required
+ *           imagePullPolicy: "STRING_VALUE",
+ *           command: "<StringList>",
+ *           args: "<StringList>",
+ *           env: [
+ *             {
+ *               name: "STRING_VALUE", // required
+ *               value: "STRING_VALUE",
+ *             },
+ *           ],
+ *           resources: {
+ *             limits: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *             requests: {
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *           },
+ *           volumeMounts: [
+ *             {
+ *               name: "STRING_VALUE",
+ *               mountPath: "STRING_VALUE",
+ *               subPath: "STRING_VALUE",
+ *               readOnly: true || false,
+ *             },
+ *           ],
+ *           securityContext: {
+ *             runAsUser: Number("long"),
+ *             runAsGroup: Number("long"),
+ *             privileged: true || false,
+ *             allowPrivilegeEscalation: true || false,
+ *             readOnlyRootFilesystem: true || false,
+ *             runAsNonRoot: true || false,
+ *             capabilities: {
+ *               add: "<EksContainerLinuxCapabilityList>",
+ *               drop: "<EksContainerLinuxCapabilityList>",
+ *             },
+ *             seccompProfile: "<EksSeccompProfile>",
+ *           },
+ *         },
+ *       ],
+ *       volumes: [
+ *         {
+ *           name: "STRING_VALUE", // required
+ *           hostPath: {
+ *             path: "STRING_VALUE",
+ *           },
+ *           emptyDir: {
+ *             medium: "STRING_VALUE",
+ *             sizeLimit: "STRING_VALUE",
+ *           },
+ *           secret: {
+ *             secretName: "STRING_VALUE", // required
+ *             optional: true || false,
+ *           },
+ *           persistentVolumeClaim: {
+ *             claimName: "STRING_VALUE", // required
+ *             readOnly: true || false,
+ *           },
+ *         },
+ *       ],
+ *       metadata: {
+ *         labels: {
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         annotations: {
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         namespace: "STRING_VALUE",
+ *       },
+ *       shareProcessNamespace: true || false,
+ *       securityContext: {
+ *         runAsUser: Number("long"),
+ *         runAsGroup: Number("long"),
+ *         runAsNonRoot: true || false,
+ *         seccompProfile: "<EksSeccompProfile>",
+ *         fsGroup: Number("long"),
+ *       },
+ *     },
+ *   },
+ *   ecsProperties: {
+ *     taskProperties: [ // required
+ *       {
+ *         containers: [ // required
+ *           {
+ *             command: "<StringList>",
+ *             dependsOn: [
+ *               {
+ *                 containerName: "STRING_VALUE",
+ *                 condition: "STRING_VALUE",
+ *               },
+ *             ],
+ *             environment: "<EnvironmentVariables>",
+ *             essential: true || false,
+ *             firelensConfiguration: {
+ *               type: "fluentd" || "fluentbit", // required
+ *               options: {
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *             },
+ *             image: "STRING_VALUE", // required
+ *             linuxParameters: "<LinuxParameters>",
+ *             logConfiguration: "<LogConfiguration>",
+ *             mountPoints: "<MountPoints>",
+ *             name: "STRING_VALUE",
+ *             privileged: true || false,
+ *             readonlyRootFilesystem: true || false,
+ *             repositoryCredentials: "<RepositoryCredentials>",
+ *             resourceRequirements: "<ResourceRequirements>",
+ *             secrets: "<SecretList>",
+ *             ulimits: "<Ulimits>",
+ *             user: "STRING_VALUE",
+ *             startTimeout: Number("int"),
+ *             stopTimeout: Number("int"),
+ *           },
+ *         ],
+ *         ephemeralStorage: "<EphemeralStorage>",
+ *         executionRoleArn: "STRING_VALUE",
+ *         platformVersion: "STRING_VALUE",
+ *         ipcMode: "STRING_VALUE",
+ *         taskRoleArn: "STRING_VALUE",
+ *         pidMode: "STRING_VALUE",
+ *         networkConfiguration: "<NetworkConfiguration>",
+ *         runtimePlatform: "<RuntimePlatform>",
+ *         volumes: "<Volumes>",
+ *         enableExecuteCommand: true || false,
+ *         networkMode: "STRING_VALUE",
+ *       },
+ *     ],
+ *   },
+ *   consumableResourceProperties: {
+ *     consumableResourceList: [
+ *       {
+ *         consumableResource: "STRING_VALUE",
+ *         quantity: Number("long"),
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new RegisterJobDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterJobDefinitionResponse
+ * //   jobDefinitionName: "STRING_VALUE", // required
+ * //   jobDefinitionArn: "STRING_VALUE", // required
+ * //   revision: Number("int"), // required
+ * // };
+ *
  * ```
  *
+ * @param RegisterJobDefinitionCommandInput - {@link RegisterJobDefinitionCommandInput}
+ * @returns {@link RegisterJobDefinitionCommandOutput}
  * @see {@link RegisterJobDefinitionCommandInput} for command's `input` shape.
  * @see {@link RegisterJobDefinitionCommandOutput} for command's `response` shape.
- * @see {@link BatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @example RegisterJobDefinition with tags
+ * ```javascript
+ * // This demonstrates calling the RegisterJobDefinition action, including tags.
+ * const input = {
+ *   containerProperties: {
+ *     command: [
+ *       "sleep",
+ *       "30"
+ *     ],
+ *     image: "busybox",
+ *     resourceRequirements: [
+ *       {
+ *         type: "MEMORY",
+ *         value: "128"
+ *       },
+ *       {
+ *         type: "VCPU",
+ *         value: "1"
+ *       }
+ *     ]
+ *   },
+ *   jobDefinitionName: "sleep30",
+ *   tags: {
+ *     Department: "Engineering",
+ *     User: "JaneDoe"
+ *   },
+ *   type: "container"
+ * };
+ * const command = new RegisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobDefinitionArn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep30:1",
+ *   jobDefinitionName: "sleep30",
+ *   revision: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @example To register a GPU job definition on ECS Managed Instances
+ * ```javascript
+ * // This example registers a job definition that requests GPU resources on ECS Managed Instances.
+ * const input = {
+ *   ecsProperties: {
+ *     taskProperties: [
+ *       {
+ *         containers: [
+ *           {
+ *             command: [
+ *               "nvidia-smi"
+ *             ],
+ *             image: "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-gpu-image:latest",
+ *             name: "main",
+ *             resourceRequirements: [
+ *               {
+ *                 type: "VCPU",
+ *                 value: "4"
+ *               },
+ *               {
+ *                 type: "MEMORY",
+ *                 value: "16384"
+ *               },
+ *               {
+ *                 type: "GPU",
+ *                 value: "1"
+ *               }
+ *             ]
+ *           }
+ *         ],
+ *         executionRoleArn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+ *       }
+ *     ]
+ *   },
+ *   jobDefinitionName: "my-gpu-managed-instances-job-def",
+ *   platformCapabilities: [
+ *     "MANAGED_INSTANCES"
+ *   ],
+ *   type: "container"
+ * };
+ * const command = new RegisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobDefinitionArn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-gpu-managed-instances-job-def:1",
+ *   jobDefinitionName: "my-gpu-managed-instances-job-def",
+ *   revision: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @example To register a job definition
+ * ```javascript
+ * // This example registers a job definition for a simple container job.
+ * const input = {
+ *   containerProperties: {
+ *     command: [
+ *       "sleep",
+ *       "10"
+ *     ],
+ *     image: "busybox",
+ *     resourceRequirements: [
+ *       {
+ *         type: "MEMORY",
+ *         value: "128"
+ *       },
+ *       {
+ *         type: "VCPU",
+ *         value: "1"
+ *       }
+ *     ]
+ *   },
+ *   jobDefinitionName: "sleep10",
+ *   type: "container"
+ * };
+ * const command = new RegisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobDefinitionArn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1",
+ *   jobDefinitionName: "sleep10",
+ *   revision: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @example To register a job definition on ECS Managed Instances
+ * ```javascript
+ * // This example registers a job definition that runs on ECS Managed Instances using ecsProperties with the MANAGED_INSTANCES platform capability.
+ * const input = {
+ *   ecsProperties: {
+ *     taskProperties: [
+ *       {
+ *         containers: [
+ *           {
+ *             command: [
+ *               "echo",
+ *               "hello managed instances"
+ *             ],
+ *             image: "public.ecr.aws/amazonlinux/amazonlinux:2023",
+ *             name: "main",
+ *             resourceRequirements: [
+ *               {
+ *                 type: "VCPU",
+ *                 value: "1"
+ *               },
+ *               {
+ *                 type: "MEMORY",
+ *                 value: "1024"
+ *               }
+ *             ]
+ *           }
+ *         ],
+ *         executionRoleArn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+ *       }
+ *     ]
+ *   },
+ *   jobDefinitionName: "my-managed-instances-job-def",
+ *   platformCapabilities: [
+ *     "MANAGED_INSTANCES"
+ *   ],
+ *   type: "container"
+ * };
+ * const command = new RegisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobDefinitionArn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-managed-instances-job-def:1",
+ *   jobDefinitionName: "my-managed-instances-job-def",
+ *   revision: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @example To register a multi-container job definition on ECS Managed Instances
+ * ```javascript
+ * // This example registers a job definition with a main container and a sidecar logging container on ECS Managed Instances.
+ * const input = {
+ *   ecsProperties: {
+ *     taskProperties: [
+ *       {
+ *         containers: [
+ *           {
+ *             command: [
+ *               "echo",
+ *               "processing data"
+ *             ],
+ *             essential: true,
+ *             image: "public.ecr.aws/amazonlinux/amazonlinux:2023",
+ *             name: "main",
+ *             resourceRequirements: [
+ *               {
+ *                 type: "VCPU",
+ *                 value: "2"
+ *               },
+ *               {
+ *                 type: "MEMORY",
+ *                 value: "4096"
+ *               }
+ *             ]
+ *           },
+ *           {
+ *             command: [
+ *               "echo",
+ *               "logging sidecar"
+ *             ],
+ *             essential: false,
+ *             image: "public.ecr.aws/amazonlinux/amazonlinux:2023",
+ *             name: "sidecar",
+ *             resourceRequirements: [
+ *               {
+ *                 type: "VCPU",
+ *                 value: "1"
+ *               },
+ *               {
+ *                 type: "MEMORY",
+ *                 value: "512"
+ *               }
+ *             ]
+ *           }
+ *         ],
+ *         executionRoleArn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+ *       }
+ *     ]
+ *   },
+ *   jobDefinitionName: "my-sidecar-managed-instances-job-def",
+ *   platformCapabilities: [
+ *     "MANAGED_INSTANCES"
+ *   ],
+ *   type: "container"
+ * };
+ * const command = new RegisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobDefinitionArn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-sidecar-managed-instances-job-def:1",
+ *   jobDefinitionName: "my-sidecar-managed-instances-job-def",
+ *   revision: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RegisterJobDefinitionCommand extends $Command<
-  RegisterJobDefinitionCommandInput,
-  RegisterJobDefinitionCommandOutput,
-  BatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterJobDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterJobDefinitionCommandInput, RegisterJobDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "RegisterJobDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterJobDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterJobDefinitionResponse.filterSensitiveLog,
+export class RegisterJobDefinitionCommand extends command<RegisterJobDefinitionCommandInput, RegisterJobDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterJobDefinition",
+  RegisterJobDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterJobDefinitionRequest;
+      output: RegisterJobDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterJobDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RegisterJobDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterJobDefinitionCommandOutput> {
-    return deserializeAws_restJson1RegisterJobDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterJobDefinitionCommandInput;
+      output: RegisterJobDefinitionCommandOutput;
+    };
+  };
 }

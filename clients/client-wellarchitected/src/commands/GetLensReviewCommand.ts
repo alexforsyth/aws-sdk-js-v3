@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetLensReviewInput, GetLensReviewOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetLensReviewCommand,
-  serializeAws_restJson1GetLensReviewCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WellArchitectedClientResolvedConfig } from "../WellArchitectedClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLensReviewInput, GetLensReviewOutput } from "../models/models_0";
+import { GetLensReview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLensReviewCommand}.
+ */
 export interface GetLensReviewCommandInput extends GetLensReviewInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetLensReviewCommand}.
+ */
 export interface GetLensReviewCommandOutput extends GetLensReviewOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,110 @@ export interface GetLensReviewCommandOutput extends GetLensReviewOutput, __Metad
  * ```javascript
  * import { WellArchitectedClient, GetLensReviewCommand } from "@aws-sdk/client-wellarchitected"; // ES Modules import
  * // const { WellArchitectedClient, GetLensReviewCommand } = require("@aws-sdk/client-wellarchitected"); // CommonJS import
+ * // import type { WellArchitectedClientConfig } from "@aws-sdk/client-wellarchitected";
+ * const config = {}; // type is WellArchitectedClientConfig
  * const client = new WellArchitectedClient(config);
+ * const input = { // GetLensReviewInput
+ *   WorkloadId: "STRING_VALUE", // required
+ *   LensAlias: "STRING_VALUE", // required
+ *   MilestoneNumber: Number("int"),
+ * };
  * const command = new GetLensReviewCommand(input);
  * const response = await client.send(command);
+ * // { // GetLensReviewOutput
+ * //   WorkloadId: "STRING_VALUE",
+ * //   MilestoneNumber: Number("int"),
+ * //   LensReview: { // LensReview
+ * //     LensAlias: "STRING_VALUE",
+ * //     LensArn: "STRING_VALUE",
+ * //     LensVersion: "STRING_VALUE",
+ * //     LensName: "STRING_VALUE",
+ * //     LensStatus: "CURRENT" || "NOT_CURRENT" || "DEPRECATED" || "DELETED" || "UNSHARED",
+ * //     PillarReviewSummaries: [ // PillarReviewSummaries
+ * //       { // PillarReviewSummary
+ * //         PillarId: "STRING_VALUE",
+ * //         PillarName: "STRING_VALUE",
+ * //         Notes: "STRING_VALUE",
+ * //         RiskCounts: { // RiskCounts
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //         PrioritizedRiskCounts: {
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //       },
+ * //     ],
+ * //     JiraConfiguration: { // JiraSelectedQuestionConfiguration
+ * //       SelectedPillars: [ // SelectedPillars
+ * //         { // SelectedPillar
+ * //           PillarId: "STRING_VALUE",
+ * //           SelectedQuestionIds: [ // SelectedQuestionIds
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     UpdatedAt: new Date("TIMESTAMP"),
+ * //     Notes: "STRING_VALUE",
+ * //     RiskCounts: {
+ * //       "<keys>": Number("int"),
+ * //     },
+ * //     NextToken: "STRING_VALUE",
+ * //     Profiles: [ // WorkloadProfiles
+ * //       { // WorkloadProfile
+ * //         ProfileArn: "STRING_VALUE",
+ * //         ProfileVersion: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     PrioritizedRiskCounts: {
+ * //       "<keys>": Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetLensReviewCommandInput - {@link GetLensReviewCommandInput}
+ * @returns {@link GetLensReviewCommandOutput}
  * @see {@link GetLensReviewCommandInput} for command's `input` shape.
  * @see {@link GetLensReviewCommandOutput} for command's `response` shape.
- * @see {@link WellArchitectedClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WellArchitectedClientResolvedConfig | config} for WellArchitectedClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is a problem with the Well-Architected Tool API service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input is not valid.</p>
+ *
+ * @throws {@link WellArchitectedServiceException}
+ * <p>Base exception class for all service exceptions from WellArchitected service.</p>
+ *
+ *
+ * @public
  */
-export class GetLensReviewCommand extends $Command<
-  GetLensReviewCommandInput,
-  GetLensReviewCommandOutput,
-  WellArchitectedClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLensReviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WellArchitectedClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLensReviewCommandInput, GetLensReviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WellArchitectedClient";
-    const commandName = "GetLensReviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLensReviewInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLensReviewOutput.filterSensitiveLog,
+export class GetLensReviewCommand extends command<GetLensReviewCommandInput, GetLensReviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLensReview",
+  GetLensReview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLensReviewInput;
+      output: GetLensReviewOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLensReviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLensReviewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLensReviewCommandOutput> {
-    return deserializeAws_restJson1GetLensReviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLensReviewCommandInput;
+      output: GetLensReviewCommandOutput;
+    };
+  };
 }

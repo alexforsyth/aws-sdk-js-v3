@@ -1,511 +1,676 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddRoleToDBClusterCommandInput, AddRoleToDBClusterCommandOutput } from "./commands/AddRoleToDBClusterCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultRDSHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AddRoleToDBClusterCommandInput,
+  AddRoleToDBClusterCommandOutput,
+} from "./commands/AddRoleToDBClusterCommand";
+import type {
   AddRoleToDBInstanceCommandInput,
   AddRoleToDBInstanceCommandOutput,
 } from "./commands/AddRoleToDBInstanceCommand";
-import {
+import type {
   AddSourceIdentifierToSubscriptionCommandInput,
   AddSourceIdentifierToSubscriptionCommandOutput,
 } from "./commands/AddSourceIdentifierToSubscriptionCommand";
-import { AddTagsToResourceCommandInput, AddTagsToResourceCommandOutput } from "./commands/AddTagsToResourceCommand";
-import {
+import type {
+  AddTagsToResourceCommandInput,
+  AddTagsToResourceCommandOutput,
+} from "./commands/AddTagsToResourceCommand";
+import type {
   ApplyPendingMaintenanceActionCommandInput,
   ApplyPendingMaintenanceActionCommandOutput,
 } from "./commands/ApplyPendingMaintenanceActionCommand";
-import {
+import type {
   AuthorizeDBSecurityGroupIngressCommandInput,
   AuthorizeDBSecurityGroupIngressCommandOutput,
 } from "./commands/AuthorizeDBSecurityGroupIngressCommand";
-import { BacktrackDBClusterCommandInput, BacktrackDBClusterCommandOutput } from "./commands/BacktrackDBClusterCommand";
-import { CancelExportTaskCommandInput, CancelExportTaskCommandOutput } from "./commands/CancelExportTaskCommand";
-import {
+import type {
+  BacktrackDBClusterCommandInput,
+  BacktrackDBClusterCommandOutput,
+} from "./commands/BacktrackDBClusterCommand";
+import type {
+  CancelDBCapacityReservationCommandInput,
+  CancelDBCapacityReservationCommandOutput,
+} from "./commands/CancelDBCapacityReservationCommand";
+import type { CancelExportTaskCommandInput, CancelExportTaskCommandOutput } from "./commands/CancelExportTaskCommand";
+import type {
   CopyDBClusterParameterGroupCommandInput,
   CopyDBClusterParameterGroupCommandOutput,
 } from "./commands/CopyDBClusterParameterGroupCommand";
-import {
+import type {
   CopyDBClusterSnapshotCommandInput,
   CopyDBClusterSnapshotCommandOutput,
 } from "./commands/CopyDBClusterSnapshotCommand";
-import {
+import type {
   CopyDBParameterGroupCommandInput,
   CopyDBParameterGroupCommandOutput,
 } from "./commands/CopyDBParameterGroupCommand";
-import { CopyDBSnapshotCommandInput, CopyDBSnapshotCommandOutput } from "./commands/CopyDBSnapshotCommand";
-import { CopyOptionGroupCommandInput, CopyOptionGroupCommandOutput } from "./commands/CopyOptionGroupCommand";
-import {
-  CreateCustomAvailabilityZoneCommandInput,
-  CreateCustomAvailabilityZoneCommandOutput,
-} from "./commands/CreateCustomAvailabilityZoneCommand";
-import {
+import type { CopyDBSnapshotCommandInput, CopyDBSnapshotCommandOutput } from "./commands/CopyDBSnapshotCommand";
+import type { CopyOptionGroupCommandInput, CopyOptionGroupCommandOutput } from "./commands/CopyOptionGroupCommand";
+import type {
+  CreateBlueGreenDeploymentCommandInput,
+  CreateBlueGreenDeploymentCommandOutput,
+} from "./commands/CreateBlueGreenDeploymentCommand";
+import type {
   CreateCustomDBEngineVersionCommandInput,
   CreateCustomDBEngineVersionCommandOutput,
 } from "./commands/CreateCustomDBEngineVersionCommand";
-import { CreateDBClusterCommandInput, CreateDBClusterCommandOutput } from "./commands/CreateDBClusterCommand";
-import {
+import type {
+  CreateDBCapacityReservationCommandInput,
+  CreateDBCapacityReservationCommandOutput,
+} from "./commands/CreateDBCapacityReservationCommand";
+import type { CreateDBClusterCommandInput, CreateDBClusterCommandOutput } from "./commands/CreateDBClusterCommand";
+import type {
   CreateDBClusterEndpointCommandInput,
   CreateDBClusterEndpointCommandOutput,
 } from "./commands/CreateDBClusterEndpointCommand";
-import {
+import type {
   CreateDBClusterParameterGroupCommandInput,
   CreateDBClusterParameterGroupCommandOutput,
 } from "./commands/CreateDBClusterParameterGroupCommand";
-import {
+import type {
   CreateDBClusterSnapshotCommandInput,
   CreateDBClusterSnapshotCommandOutput,
 } from "./commands/CreateDBClusterSnapshotCommand";
-import { CreateDBInstanceCommandInput, CreateDBInstanceCommandOutput } from "./commands/CreateDBInstanceCommand";
-import {
+import type { CreateDBInstanceCommandInput, CreateDBInstanceCommandOutput } from "./commands/CreateDBInstanceCommand";
+import type {
   CreateDBInstanceReadReplicaCommandInput,
   CreateDBInstanceReadReplicaCommandOutput,
 } from "./commands/CreateDBInstanceReadReplicaCommand";
-import {
+import type {
   CreateDBParameterGroupCommandInput,
   CreateDBParameterGroupCommandOutput,
 } from "./commands/CreateDBParameterGroupCommand";
-import { CreateDBProxyCommandInput, CreateDBProxyCommandOutput } from "./commands/CreateDBProxyCommand";
-import {
+import type { CreateDBProxyCommandInput, CreateDBProxyCommandOutput } from "./commands/CreateDBProxyCommand";
+import type {
   CreateDBProxyEndpointCommandInput,
   CreateDBProxyEndpointCommandOutput,
 } from "./commands/CreateDBProxyEndpointCommand";
-import {
+import type {
   CreateDBSecurityGroupCommandInput,
   CreateDBSecurityGroupCommandOutput,
 } from "./commands/CreateDBSecurityGroupCommand";
-import { CreateDBSnapshotCommandInput, CreateDBSnapshotCommandOutput } from "./commands/CreateDBSnapshotCommand";
-import {
+import type {
+  CreateDBShardGroupCommandInput,
+  CreateDBShardGroupCommandOutput,
+} from "./commands/CreateDBShardGroupCommand";
+import type { CreateDBSnapshotCommandInput, CreateDBSnapshotCommandOutput } from "./commands/CreateDBSnapshotCommand";
+import type {
   CreateDBSubnetGroupCommandInput,
   CreateDBSubnetGroupCommandOutput,
 } from "./commands/CreateDBSubnetGroupCommand";
-import {
+import type {
   CreateEventSubscriptionCommandInput,
   CreateEventSubscriptionCommandOutput,
 } from "./commands/CreateEventSubscriptionCommand";
-import {
+import type {
   CreateGlobalClusterCommandInput,
   CreateGlobalClusterCommandOutput,
 } from "./commands/CreateGlobalClusterCommand";
-import { CreateOptionGroupCommandInput, CreateOptionGroupCommandOutput } from "./commands/CreateOptionGroupCommand";
-import {
-  DeleteCustomAvailabilityZoneCommandInput,
-  DeleteCustomAvailabilityZoneCommandOutput,
-} from "./commands/DeleteCustomAvailabilityZoneCommand";
-import {
+import type {
+  CreateIntegrationCommandInput,
+  CreateIntegrationCommandOutput,
+} from "./commands/CreateIntegrationCommand";
+import type {
+  CreateOptionGroupCommandInput,
+  CreateOptionGroupCommandOutput,
+} from "./commands/CreateOptionGroupCommand";
+import type {
+  CreateTenantDatabaseCommandInput,
+  CreateTenantDatabaseCommandOutput,
+} from "./commands/CreateTenantDatabaseCommand";
+import type {
+  DeleteBlueGreenDeploymentCommandInput,
+  DeleteBlueGreenDeploymentCommandOutput,
+} from "./commands/DeleteBlueGreenDeploymentCommand";
+import type {
   DeleteCustomDBEngineVersionCommandInput,
   DeleteCustomDBEngineVersionCommandOutput,
 } from "./commands/DeleteCustomDBEngineVersionCommand";
-import { DeleteDBClusterCommandInput, DeleteDBClusterCommandOutput } from "./commands/DeleteDBClusterCommand";
-import {
+import type {
+  DeleteDBClusterAutomatedBackupCommandInput,
+  DeleteDBClusterAutomatedBackupCommandOutput,
+} from "./commands/DeleteDBClusterAutomatedBackupCommand";
+import type { DeleteDBClusterCommandInput, DeleteDBClusterCommandOutput } from "./commands/DeleteDBClusterCommand";
+import type {
   DeleteDBClusterEndpointCommandInput,
   DeleteDBClusterEndpointCommandOutput,
 } from "./commands/DeleteDBClusterEndpointCommand";
-import {
+import type {
   DeleteDBClusterParameterGroupCommandInput,
   DeleteDBClusterParameterGroupCommandOutput,
 } from "./commands/DeleteDBClusterParameterGroupCommand";
-import {
+import type {
   DeleteDBClusterSnapshotCommandInput,
   DeleteDBClusterSnapshotCommandOutput,
 } from "./commands/DeleteDBClusterSnapshotCommand";
-import {
+import type {
   DeleteDBInstanceAutomatedBackupCommandInput,
   DeleteDBInstanceAutomatedBackupCommandOutput,
 } from "./commands/DeleteDBInstanceAutomatedBackupCommand";
-import { DeleteDBInstanceCommandInput, DeleteDBInstanceCommandOutput } from "./commands/DeleteDBInstanceCommand";
-import {
+import type { DeleteDBInstanceCommandInput, DeleteDBInstanceCommandOutput } from "./commands/DeleteDBInstanceCommand";
+import type {
   DeleteDBParameterGroupCommandInput,
   DeleteDBParameterGroupCommandOutput,
 } from "./commands/DeleteDBParameterGroupCommand";
-import { DeleteDBProxyCommandInput, DeleteDBProxyCommandOutput } from "./commands/DeleteDBProxyCommand";
-import {
+import type { DeleteDBProxyCommandInput, DeleteDBProxyCommandOutput } from "./commands/DeleteDBProxyCommand";
+import type {
   DeleteDBProxyEndpointCommandInput,
   DeleteDBProxyEndpointCommandOutput,
 } from "./commands/DeleteDBProxyEndpointCommand";
-import {
+import type {
   DeleteDBSecurityGroupCommandInput,
   DeleteDBSecurityGroupCommandOutput,
 } from "./commands/DeleteDBSecurityGroupCommand";
-import { DeleteDBSnapshotCommandInput, DeleteDBSnapshotCommandOutput } from "./commands/DeleteDBSnapshotCommand";
-import {
+import type {
+  DeleteDBShardGroupCommandInput,
+  DeleteDBShardGroupCommandOutput,
+} from "./commands/DeleteDBShardGroupCommand";
+import type { DeleteDBSnapshotCommandInput, DeleteDBSnapshotCommandOutput } from "./commands/DeleteDBSnapshotCommand";
+import type {
   DeleteDBSubnetGroupCommandInput,
   DeleteDBSubnetGroupCommandOutput,
 } from "./commands/DeleteDBSubnetGroupCommand";
-import {
+import type {
   DeleteEventSubscriptionCommandInput,
   DeleteEventSubscriptionCommandOutput,
 } from "./commands/DeleteEventSubscriptionCommand";
-import {
+import type {
   DeleteGlobalClusterCommandInput,
   DeleteGlobalClusterCommandOutput,
 } from "./commands/DeleteGlobalClusterCommand";
-import {
-  DeleteInstallationMediaCommandInput,
-  DeleteInstallationMediaCommandOutput,
-} from "./commands/DeleteInstallationMediaCommand";
-import { DeleteOptionGroupCommandInput, DeleteOptionGroupCommandOutput } from "./commands/DeleteOptionGroupCommand";
-import {
+import type {
+  DeleteIntegrationCommandInput,
+  DeleteIntegrationCommandOutput,
+} from "./commands/DeleteIntegrationCommand";
+import type {
+  DeleteOptionGroupCommandInput,
+  DeleteOptionGroupCommandOutput,
+} from "./commands/DeleteOptionGroupCommand";
+import type {
+  DeleteTenantDatabaseCommandInput,
+  DeleteTenantDatabaseCommandOutput,
+} from "./commands/DeleteTenantDatabaseCommand";
+import type {
   DeregisterDBProxyTargetsCommandInput,
   DeregisterDBProxyTargetsCommandOutput,
 } from "./commands/DeregisterDBProxyTargetsCommand";
-import {
+import type {
   DescribeAccountAttributesCommandInput,
   DescribeAccountAttributesCommandOutput,
 } from "./commands/DescribeAccountAttributesCommand";
-import {
+import type {
+  DescribeBlueGreenDeploymentsCommandInput,
+  DescribeBlueGreenDeploymentsCommandOutput,
+} from "./commands/DescribeBlueGreenDeploymentsCommand";
+import type {
   DescribeCertificatesCommandInput,
   DescribeCertificatesCommandOutput,
 } from "./commands/DescribeCertificatesCommand";
-import {
-  DescribeCustomAvailabilityZonesCommandInput,
-  DescribeCustomAvailabilityZonesCommandOutput,
-} from "./commands/DescribeCustomAvailabilityZonesCommand";
-import {
+import type {
+  DescribeDBCapacityReservationsCommandInput,
+  DescribeDBCapacityReservationsCommandOutput,
+} from "./commands/DescribeDBCapacityReservationsCommand";
+import type {
+  DescribeDBClusterAutomatedBackupsCommandInput,
+  DescribeDBClusterAutomatedBackupsCommandOutput,
+} from "./commands/DescribeDBClusterAutomatedBackupsCommand";
+import type {
   DescribeDBClusterBacktracksCommandInput,
   DescribeDBClusterBacktracksCommandOutput,
 } from "./commands/DescribeDBClusterBacktracksCommand";
-import {
+import type {
   DescribeDBClusterEndpointsCommandInput,
   DescribeDBClusterEndpointsCommandOutput,
 } from "./commands/DescribeDBClusterEndpointsCommand";
-import {
+import type {
   DescribeDBClusterParameterGroupsCommandInput,
   DescribeDBClusterParameterGroupsCommandOutput,
 } from "./commands/DescribeDBClusterParameterGroupsCommand";
-import {
+import type {
   DescribeDBClusterParametersCommandInput,
   DescribeDBClusterParametersCommandOutput,
 } from "./commands/DescribeDBClusterParametersCommand";
-import { DescribeDBClustersCommandInput, DescribeDBClustersCommandOutput } from "./commands/DescribeDBClustersCommand";
-import {
+import type {
+  DescribeDBClustersCommandInput,
+  DescribeDBClustersCommandOutput,
+} from "./commands/DescribeDBClustersCommand";
+import type {
   DescribeDBClusterSnapshotAttributesCommandInput,
   DescribeDBClusterSnapshotAttributesCommandOutput,
 } from "./commands/DescribeDBClusterSnapshotAttributesCommand";
-import {
+import type {
   DescribeDBClusterSnapshotsCommandInput,
   DescribeDBClusterSnapshotsCommandOutput,
 } from "./commands/DescribeDBClusterSnapshotsCommand";
-import {
+import type {
   DescribeDBEngineVersionsCommandInput,
   DescribeDBEngineVersionsCommandOutput,
 } from "./commands/DescribeDBEngineVersionsCommand";
-import {
+import type {
   DescribeDBInstanceAutomatedBackupsCommandInput,
   DescribeDBInstanceAutomatedBackupsCommandOutput,
 } from "./commands/DescribeDBInstanceAutomatedBackupsCommand";
-import {
+import type {
   DescribeDBInstancesCommandInput,
   DescribeDBInstancesCommandOutput,
 } from "./commands/DescribeDBInstancesCommand";
-import { DescribeDBLogFilesCommandInput, DescribeDBLogFilesCommandOutput } from "./commands/DescribeDBLogFilesCommand";
-import {
+import type {
+  DescribeDBLogFilesCommandInput,
+  DescribeDBLogFilesCommandOutput,
+} from "./commands/DescribeDBLogFilesCommand";
+import type {
+  DescribeDBMajorEngineVersionsCommandInput,
+  DescribeDBMajorEngineVersionsCommandOutput,
+} from "./commands/DescribeDBMajorEngineVersionsCommand";
+import type {
   DescribeDBParameterGroupsCommandInput,
   DescribeDBParameterGroupsCommandOutput,
 } from "./commands/DescribeDBParameterGroupsCommand";
-import {
+import type {
   DescribeDBParametersCommandInput,
   DescribeDBParametersCommandOutput,
 } from "./commands/DescribeDBParametersCommand";
-import { DescribeDBProxiesCommandInput, DescribeDBProxiesCommandOutput } from "./commands/DescribeDBProxiesCommand";
-import {
+import type {
+  DescribeDBProxiesCommandInput,
+  DescribeDBProxiesCommandOutput,
+} from "./commands/DescribeDBProxiesCommand";
+import type {
   DescribeDBProxyEndpointsCommandInput,
   DescribeDBProxyEndpointsCommandOutput,
 } from "./commands/DescribeDBProxyEndpointsCommand";
-import {
+import type {
   DescribeDBProxyTargetGroupsCommandInput,
   DescribeDBProxyTargetGroupsCommandOutput,
 } from "./commands/DescribeDBProxyTargetGroupsCommand";
-import {
+import type {
   DescribeDBProxyTargetsCommandInput,
   DescribeDBProxyTargetsCommandOutput,
 } from "./commands/DescribeDBProxyTargetsCommand";
-import {
+import type {
+  DescribeDBRecommendationsCommandInput,
+  DescribeDBRecommendationsCommandOutput,
+} from "./commands/DescribeDBRecommendationsCommand";
+import type {
   DescribeDBSecurityGroupsCommandInput,
   DescribeDBSecurityGroupsCommandOutput,
 } from "./commands/DescribeDBSecurityGroupsCommand";
-import {
+import type {
+  DescribeDBShardGroupsCommandInput,
+  DescribeDBShardGroupsCommandOutput,
+} from "./commands/DescribeDBShardGroupsCommand";
+import type {
   DescribeDBSnapshotAttributesCommandInput,
   DescribeDBSnapshotAttributesCommandOutput,
 } from "./commands/DescribeDBSnapshotAttributesCommand";
-import {
+import type {
   DescribeDBSnapshotsCommandInput,
   DescribeDBSnapshotsCommandOutput,
 } from "./commands/DescribeDBSnapshotsCommand";
-import {
+import type {
+  DescribeDBSnapshotTenantDatabasesCommandInput,
+  DescribeDBSnapshotTenantDatabasesCommandOutput,
+} from "./commands/DescribeDBSnapshotTenantDatabasesCommand";
+import type {
   DescribeDBSubnetGroupsCommandInput,
   DescribeDBSubnetGroupsCommandOutput,
 } from "./commands/DescribeDBSubnetGroupsCommand";
-import {
+import type {
   DescribeEngineDefaultClusterParametersCommandInput,
   DescribeEngineDefaultClusterParametersCommandOutput,
 } from "./commands/DescribeEngineDefaultClusterParametersCommand";
-import {
+import type {
   DescribeEngineDefaultParametersCommandInput,
   DescribeEngineDefaultParametersCommandOutput,
 } from "./commands/DescribeEngineDefaultParametersCommand";
-import {
+import type {
   DescribeEventCategoriesCommandInput,
   DescribeEventCategoriesCommandOutput,
 } from "./commands/DescribeEventCategoriesCommand";
-import { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
-import {
+import type { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
+import type {
   DescribeEventSubscriptionsCommandInput,
   DescribeEventSubscriptionsCommandOutput,
 } from "./commands/DescribeEventSubscriptionsCommand";
-import {
+import type {
   DescribeExportTasksCommandInput,
   DescribeExportTasksCommandOutput,
 } from "./commands/DescribeExportTasksCommand";
-import {
+import type {
   DescribeGlobalClustersCommandInput,
   DescribeGlobalClustersCommandOutput,
 } from "./commands/DescribeGlobalClustersCommand";
-import {
-  DescribeInstallationMediaCommandInput,
-  DescribeInstallationMediaCommandOutput,
-} from "./commands/DescribeInstallationMediaCommand";
-import {
+import type {
+  DescribeIntegrationsCommandInput,
+  DescribeIntegrationsCommandOutput,
+} from "./commands/DescribeIntegrationsCommand";
+import type {
   DescribeOptionGroupOptionsCommandInput,
   DescribeOptionGroupOptionsCommandOutput,
 } from "./commands/DescribeOptionGroupOptionsCommand";
-import {
+import type {
   DescribeOptionGroupsCommandInput,
   DescribeOptionGroupsCommandOutput,
 } from "./commands/DescribeOptionGroupsCommand";
-import {
+import type {
   DescribeOrderableDBInstanceOptionsCommandInput,
   DescribeOrderableDBInstanceOptionsCommandOutput,
 } from "./commands/DescribeOrderableDBInstanceOptionsCommand";
-import {
+import type {
   DescribePendingMaintenanceActionsCommandInput,
   DescribePendingMaintenanceActionsCommandOutput,
 } from "./commands/DescribePendingMaintenanceActionsCommand";
-import {
+import type {
   DescribeReservedDBInstancesCommandInput,
   DescribeReservedDBInstancesCommandOutput,
 } from "./commands/DescribeReservedDBInstancesCommand";
-import {
+import type {
   DescribeReservedDBInstancesOfferingsCommandInput,
   DescribeReservedDBInstancesOfferingsCommandOutput,
 } from "./commands/DescribeReservedDBInstancesOfferingsCommand";
-import {
+import type {
+  DescribeServerlessV2PlatformVersionsCommandInput,
+  DescribeServerlessV2PlatformVersionsCommandOutput,
+} from "./commands/DescribeServerlessV2PlatformVersionsCommand";
+import type {
   DescribeSourceRegionsCommandInput,
   DescribeSourceRegionsCommandOutput,
 } from "./commands/DescribeSourceRegionsCommand";
-import {
+import type {
+  DescribeTenantDatabasesCommandInput,
+  DescribeTenantDatabasesCommandOutput,
+} from "./commands/DescribeTenantDatabasesCommand";
+import type {
   DescribeValidDBInstanceModificationsCommandInput,
   DescribeValidDBInstanceModificationsCommandOutput,
 } from "./commands/DescribeValidDBInstanceModificationsCommand";
-import {
+import type {
+  DisableHttpEndpointCommandInput,
+  DisableHttpEndpointCommandOutput,
+} from "./commands/DisableHttpEndpointCommand";
+import type {
   DownloadDBLogFilePortionCommandInput,
   DownloadDBLogFilePortionCommandOutput,
 } from "./commands/DownloadDBLogFilePortionCommand";
-import { FailoverDBClusterCommandInput, FailoverDBClusterCommandOutput } from "./commands/FailoverDBClusterCommand";
-import {
+import type {
+  EnableHttpEndpointCommandInput,
+  EnableHttpEndpointCommandOutput,
+} from "./commands/EnableHttpEndpointCommand";
+import type {
+  FailoverDBClusterCommandInput,
+  FailoverDBClusterCommandOutput,
+} from "./commands/FailoverDBClusterCommand";
+import type {
   FailoverGlobalClusterCommandInput,
   FailoverGlobalClusterCommandOutput,
 } from "./commands/FailoverGlobalClusterCommand";
-import {
-  ImportInstallationMediaCommandInput,
-  ImportInstallationMediaCommandOutput,
-} from "./commands/ImportInstallationMediaCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ModifyCertificatesCommandInput, ModifyCertificatesCommandOutput } from "./commands/ModifyCertificatesCommand";
-import {
+import type {
+  ModifyActivityStreamCommandInput,
+  ModifyActivityStreamCommandOutput,
+} from "./commands/ModifyActivityStreamCommand";
+import type {
+  ModifyCertificatesCommandInput,
+  ModifyCertificatesCommandOutput,
+} from "./commands/ModifyCertificatesCommand";
+import type {
   ModifyCurrentDBClusterCapacityCommandInput,
   ModifyCurrentDBClusterCapacityCommandOutput,
 } from "./commands/ModifyCurrentDBClusterCapacityCommand";
-import {
+import type {
   ModifyCustomDBEngineVersionCommandInput,
   ModifyCustomDBEngineVersionCommandOutput,
 } from "./commands/ModifyCustomDBEngineVersionCommand";
-import { ModifyDBClusterCommandInput, ModifyDBClusterCommandOutput } from "./commands/ModifyDBClusterCommand";
-import {
+import type {
+  ModifyDBCapacityReservationCommandInput,
+  ModifyDBCapacityReservationCommandOutput,
+} from "./commands/ModifyDBCapacityReservationCommand";
+import type { ModifyDBClusterCommandInput, ModifyDBClusterCommandOutput } from "./commands/ModifyDBClusterCommand";
+import type {
   ModifyDBClusterEndpointCommandInput,
   ModifyDBClusterEndpointCommandOutput,
 } from "./commands/ModifyDBClusterEndpointCommand";
-import {
+import type {
   ModifyDBClusterParameterGroupCommandInput,
   ModifyDBClusterParameterGroupCommandOutput,
 } from "./commands/ModifyDBClusterParameterGroupCommand";
-import {
+import type {
   ModifyDBClusterSnapshotAttributeCommandInput,
   ModifyDBClusterSnapshotAttributeCommandOutput,
 } from "./commands/ModifyDBClusterSnapshotAttributeCommand";
-import { ModifyDBInstanceCommandInput, ModifyDBInstanceCommandOutput } from "./commands/ModifyDBInstanceCommand";
-import {
+import type { ModifyDBInstanceCommandInput, ModifyDBInstanceCommandOutput } from "./commands/ModifyDBInstanceCommand";
+import type {
   ModifyDBParameterGroupCommandInput,
   ModifyDBParameterGroupCommandOutput,
 } from "./commands/ModifyDBParameterGroupCommand";
-import { ModifyDBProxyCommandInput, ModifyDBProxyCommandOutput } from "./commands/ModifyDBProxyCommand";
-import {
+import type { ModifyDBProxyCommandInput, ModifyDBProxyCommandOutput } from "./commands/ModifyDBProxyCommand";
+import type {
   ModifyDBProxyEndpointCommandInput,
   ModifyDBProxyEndpointCommandOutput,
 } from "./commands/ModifyDBProxyEndpointCommand";
-import {
+import type {
   ModifyDBProxyTargetGroupCommandInput,
   ModifyDBProxyTargetGroupCommandOutput,
 } from "./commands/ModifyDBProxyTargetGroupCommand";
-import {
+import type {
+  ModifyDBRecommendationCommandInput,
+  ModifyDBRecommendationCommandOutput,
+} from "./commands/ModifyDBRecommendationCommand";
+import type {
+  ModifyDBShardGroupCommandInput,
+  ModifyDBShardGroupCommandOutput,
+} from "./commands/ModifyDBShardGroupCommand";
+import type {
   ModifyDBSnapshotAttributeCommandInput,
   ModifyDBSnapshotAttributeCommandOutput,
 } from "./commands/ModifyDBSnapshotAttributeCommand";
-import { ModifyDBSnapshotCommandInput, ModifyDBSnapshotCommandOutput } from "./commands/ModifyDBSnapshotCommand";
-import {
+import type { ModifyDBSnapshotCommandInput, ModifyDBSnapshotCommandOutput } from "./commands/ModifyDBSnapshotCommand";
+import type {
   ModifyDBSubnetGroupCommandInput,
   ModifyDBSubnetGroupCommandOutput,
 } from "./commands/ModifyDBSubnetGroupCommand";
-import {
+import type {
   ModifyEventSubscriptionCommandInput,
   ModifyEventSubscriptionCommandOutput,
 } from "./commands/ModifyEventSubscriptionCommand";
-import {
+import type {
   ModifyGlobalClusterCommandInput,
   ModifyGlobalClusterCommandOutput,
 } from "./commands/ModifyGlobalClusterCommand";
-import { ModifyOptionGroupCommandInput, ModifyOptionGroupCommandOutput } from "./commands/ModifyOptionGroupCommand";
-import { PromoteReadReplicaCommandInput, PromoteReadReplicaCommandOutput } from "./commands/PromoteReadReplicaCommand";
-import {
+import type {
+  ModifyIntegrationCommandInput,
+  ModifyIntegrationCommandOutput,
+} from "./commands/ModifyIntegrationCommand";
+import type {
+  ModifyOptionGroupCommandInput,
+  ModifyOptionGroupCommandOutput,
+} from "./commands/ModifyOptionGroupCommand";
+import type {
+  ModifyTenantDatabaseCommandInput,
+  ModifyTenantDatabaseCommandOutput,
+} from "./commands/ModifyTenantDatabaseCommand";
+import type {
+  PromoteReadReplicaCommandInput,
+  PromoteReadReplicaCommandOutput,
+} from "./commands/PromoteReadReplicaCommand";
+import type {
   PromoteReadReplicaDBClusterCommandInput,
   PromoteReadReplicaDBClusterCommandOutput,
 } from "./commands/PromoteReadReplicaDBClusterCommand";
-import {
+import type {
   PurchaseReservedDBInstancesOfferingCommandInput,
   PurchaseReservedDBInstancesOfferingCommandOutput,
 } from "./commands/PurchaseReservedDBInstancesOfferingCommand";
-import { RebootDBInstanceCommandInput, RebootDBInstanceCommandOutput } from "./commands/RebootDBInstanceCommand";
-import {
+import type { RebootDBClusterCommandInput, RebootDBClusterCommandOutput } from "./commands/RebootDBClusterCommand";
+import type { RebootDBInstanceCommandInput, RebootDBInstanceCommandOutput } from "./commands/RebootDBInstanceCommand";
+import type {
+  RebootDBShardGroupCommandInput,
+  RebootDBShardGroupCommandOutput,
+} from "./commands/RebootDBShardGroupCommand";
+import type {
   RegisterDBProxyTargetsCommandInput,
   RegisterDBProxyTargetsCommandOutput,
 } from "./commands/RegisterDBProxyTargetsCommand";
-import {
+import type {
   RemoveFromGlobalClusterCommandInput,
   RemoveFromGlobalClusterCommandOutput,
 } from "./commands/RemoveFromGlobalClusterCommand";
-import {
+import type {
   RemoveRoleFromDBClusterCommandInput,
   RemoveRoleFromDBClusterCommandOutput,
 } from "./commands/RemoveRoleFromDBClusterCommand";
-import {
+import type {
   RemoveRoleFromDBInstanceCommandInput,
   RemoveRoleFromDBInstanceCommandOutput,
 } from "./commands/RemoveRoleFromDBInstanceCommand";
-import {
+import type {
   RemoveSourceIdentifierFromSubscriptionCommandInput,
   RemoveSourceIdentifierFromSubscriptionCommandOutput,
 } from "./commands/RemoveSourceIdentifierFromSubscriptionCommand";
-import {
+import type {
   RemoveTagsFromResourceCommandInput,
   RemoveTagsFromResourceCommandOutput,
 } from "./commands/RemoveTagsFromResourceCommand";
-import {
+import type {
   ResetDBClusterParameterGroupCommandInput,
   ResetDBClusterParameterGroupCommandOutput,
 } from "./commands/ResetDBClusterParameterGroupCommand";
-import {
+import type {
   ResetDBParameterGroupCommandInput,
   ResetDBParameterGroupCommandOutput,
 } from "./commands/ResetDBParameterGroupCommand";
-import {
+import type {
   RestoreDBClusterFromS3CommandInput,
   RestoreDBClusterFromS3CommandOutput,
 } from "./commands/RestoreDBClusterFromS3Command";
-import {
+import type {
   RestoreDBClusterFromSnapshotCommandInput,
   RestoreDBClusterFromSnapshotCommandOutput,
 } from "./commands/RestoreDBClusterFromSnapshotCommand";
-import {
+import type {
   RestoreDBClusterToPointInTimeCommandInput,
   RestoreDBClusterToPointInTimeCommandOutput,
 } from "./commands/RestoreDBClusterToPointInTimeCommand";
-import {
+import type {
   RestoreDBInstanceFromDBSnapshotCommandInput,
   RestoreDBInstanceFromDBSnapshotCommandOutput,
 } from "./commands/RestoreDBInstanceFromDBSnapshotCommand";
-import {
+import type {
   RestoreDBInstanceFromS3CommandInput,
   RestoreDBInstanceFromS3CommandOutput,
 } from "./commands/RestoreDBInstanceFromS3Command";
-import {
+import type {
   RestoreDBInstanceToPointInTimeCommandInput,
   RestoreDBInstanceToPointInTimeCommandOutput,
 } from "./commands/RestoreDBInstanceToPointInTimeCommand";
-import {
+import type {
   RevokeDBSecurityGroupIngressCommandInput,
   RevokeDBSecurityGroupIngressCommandOutput,
 } from "./commands/RevokeDBSecurityGroupIngressCommand";
-import {
+import type {
   StartActivityStreamCommandInput,
   StartActivityStreamCommandOutput,
 } from "./commands/StartActivityStreamCommand";
-import { StartDBClusterCommandInput, StartDBClusterCommandOutput } from "./commands/StartDBClusterCommand";
-import {
+import type { StartDBClusterCommandInput, StartDBClusterCommandOutput } from "./commands/StartDBClusterCommand";
+import type {
   StartDBInstanceAutomatedBackupsReplicationCommandInput,
   StartDBInstanceAutomatedBackupsReplicationCommandOutput,
 } from "./commands/StartDBInstanceAutomatedBackupsReplicationCommand";
-import { StartDBInstanceCommandInput, StartDBInstanceCommandOutput } from "./commands/StartDBInstanceCommand";
-import { StartExportTaskCommandInput, StartExportTaskCommandOutput } from "./commands/StartExportTaskCommand";
-import { StopActivityStreamCommandInput, StopActivityStreamCommandOutput } from "./commands/StopActivityStreamCommand";
-import { StopDBClusterCommandInput, StopDBClusterCommandOutput } from "./commands/StopDBClusterCommand";
-import {
+import type { StartDBInstanceCommandInput, StartDBInstanceCommandOutput } from "./commands/StartDBInstanceCommand";
+import type { StartExportTaskCommandInput, StartExportTaskCommandOutput } from "./commands/StartExportTaskCommand";
+import type {
+  StopActivityStreamCommandInput,
+  StopActivityStreamCommandOutput,
+} from "./commands/StopActivityStreamCommand";
+import type { StopDBClusterCommandInput, StopDBClusterCommandOutput } from "./commands/StopDBClusterCommand";
+import type {
   StopDBInstanceAutomatedBackupsReplicationCommandInput,
   StopDBInstanceAutomatedBackupsReplicationCommandOutput,
 } from "./commands/StopDBInstanceAutomatedBackupsReplicationCommand";
-import { StopDBInstanceCommandInput, StopDBInstanceCommandOutput } from "./commands/StopDBInstanceCommand";
+import type { StopDBInstanceCommandInput, StopDBInstanceCommandOutput } from "./commands/StopDBInstanceCommand";
+import type {
+  SwitchoverBlueGreenDeploymentCommandInput,
+  SwitchoverBlueGreenDeploymentCommandOutput,
+} from "./commands/SwitchoverBlueGreenDeploymentCommand";
+import type {
+  SwitchoverGlobalClusterCommandInput,
+  SwitchoverGlobalClusterCommandOutput,
+} from "./commands/SwitchoverGlobalClusterCommand";
+import type {
+  SwitchoverReadReplicaCommandInput,
+  SwitchoverReadReplicaCommandOutput,
+} from "./commands/SwitchoverReadReplicaCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddRoleToDBClusterCommandInput
   | AddRoleToDBInstanceCommandInput
@@ -514,14 +679,16 @@ export type ServiceInputTypes =
   | ApplyPendingMaintenanceActionCommandInput
   | AuthorizeDBSecurityGroupIngressCommandInput
   | BacktrackDBClusterCommandInput
+  | CancelDBCapacityReservationCommandInput
   | CancelExportTaskCommandInput
   | CopyDBClusterParameterGroupCommandInput
   | CopyDBClusterSnapshotCommandInput
   | CopyDBParameterGroupCommandInput
   | CopyDBSnapshotCommandInput
   | CopyOptionGroupCommandInput
-  | CreateCustomAvailabilityZoneCommandInput
+  | CreateBlueGreenDeploymentCommandInput
   | CreateCustomDBEngineVersionCommandInput
+  | CreateDBCapacityReservationCommandInput
   | CreateDBClusterCommandInput
   | CreateDBClusterEndpointCommandInput
   | CreateDBClusterParameterGroupCommandInput
@@ -532,13 +699,17 @@ export type ServiceInputTypes =
   | CreateDBProxyCommandInput
   | CreateDBProxyEndpointCommandInput
   | CreateDBSecurityGroupCommandInput
+  | CreateDBShardGroupCommandInput
   | CreateDBSnapshotCommandInput
   | CreateDBSubnetGroupCommandInput
   | CreateEventSubscriptionCommandInput
   | CreateGlobalClusterCommandInput
+  | CreateIntegrationCommandInput
   | CreateOptionGroupCommandInput
-  | DeleteCustomAvailabilityZoneCommandInput
+  | CreateTenantDatabaseCommandInput
+  | DeleteBlueGreenDeploymentCommandInput
   | DeleteCustomDBEngineVersionCommandInput
+  | DeleteDBClusterAutomatedBackupCommandInput
   | DeleteDBClusterCommandInput
   | DeleteDBClusterEndpointCommandInput
   | DeleteDBClusterParameterGroupCommandInput
@@ -549,16 +720,20 @@ export type ServiceInputTypes =
   | DeleteDBProxyCommandInput
   | DeleteDBProxyEndpointCommandInput
   | DeleteDBSecurityGroupCommandInput
+  | DeleteDBShardGroupCommandInput
   | DeleteDBSnapshotCommandInput
   | DeleteDBSubnetGroupCommandInput
   | DeleteEventSubscriptionCommandInput
   | DeleteGlobalClusterCommandInput
-  | DeleteInstallationMediaCommandInput
+  | DeleteIntegrationCommandInput
   | DeleteOptionGroupCommandInput
+  | DeleteTenantDatabaseCommandInput
   | DeregisterDBProxyTargetsCommandInput
   | DescribeAccountAttributesCommandInput
+  | DescribeBlueGreenDeploymentsCommandInput
   | DescribeCertificatesCommandInput
-  | DescribeCustomAvailabilityZonesCommandInput
+  | DescribeDBCapacityReservationsCommandInput
+  | DescribeDBClusterAutomatedBackupsCommandInput
   | DescribeDBClusterBacktracksCommandInput
   | DescribeDBClusterEndpointsCommandInput
   | DescribeDBClusterParameterGroupsCommandInput
@@ -570,14 +745,18 @@ export type ServiceInputTypes =
   | DescribeDBInstanceAutomatedBackupsCommandInput
   | DescribeDBInstancesCommandInput
   | DescribeDBLogFilesCommandInput
+  | DescribeDBMajorEngineVersionsCommandInput
   | DescribeDBParameterGroupsCommandInput
   | DescribeDBParametersCommandInput
   | DescribeDBProxiesCommandInput
   | DescribeDBProxyEndpointsCommandInput
   | DescribeDBProxyTargetGroupsCommandInput
   | DescribeDBProxyTargetsCommandInput
+  | DescribeDBRecommendationsCommandInput
   | DescribeDBSecurityGroupsCommandInput
+  | DescribeDBShardGroupsCommandInput
   | DescribeDBSnapshotAttributesCommandInput
+  | DescribeDBSnapshotTenantDatabasesCommandInput
   | DescribeDBSnapshotsCommandInput
   | DescribeDBSubnetGroupsCommandInput
   | DescribeEngineDefaultClusterParametersCommandInput
@@ -587,23 +766,28 @@ export type ServiceInputTypes =
   | DescribeEventsCommandInput
   | DescribeExportTasksCommandInput
   | DescribeGlobalClustersCommandInput
-  | DescribeInstallationMediaCommandInput
+  | DescribeIntegrationsCommandInput
   | DescribeOptionGroupOptionsCommandInput
   | DescribeOptionGroupsCommandInput
   | DescribeOrderableDBInstanceOptionsCommandInput
   | DescribePendingMaintenanceActionsCommandInput
   | DescribeReservedDBInstancesCommandInput
   | DescribeReservedDBInstancesOfferingsCommandInput
+  | DescribeServerlessV2PlatformVersionsCommandInput
   | DescribeSourceRegionsCommandInput
+  | DescribeTenantDatabasesCommandInput
   | DescribeValidDBInstanceModificationsCommandInput
+  | DisableHttpEndpointCommandInput
   | DownloadDBLogFilePortionCommandInput
+  | EnableHttpEndpointCommandInput
   | FailoverDBClusterCommandInput
   | FailoverGlobalClusterCommandInput
-  | ImportInstallationMediaCommandInput
   | ListTagsForResourceCommandInput
+  | ModifyActivityStreamCommandInput
   | ModifyCertificatesCommandInput
   | ModifyCurrentDBClusterCapacityCommandInput
   | ModifyCustomDBEngineVersionCommandInput
+  | ModifyDBCapacityReservationCommandInput
   | ModifyDBClusterCommandInput
   | ModifyDBClusterEndpointCommandInput
   | ModifyDBClusterParameterGroupCommandInput
@@ -613,16 +797,22 @@ export type ServiceInputTypes =
   | ModifyDBProxyCommandInput
   | ModifyDBProxyEndpointCommandInput
   | ModifyDBProxyTargetGroupCommandInput
+  | ModifyDBRecommendationCommandInput
+  | ModifyDBShardGroupCommandInput
   | ModifyDBSnapshotAttributeCommandInput
   | ModifyDBSnapshotCommandInput
   | ModifyDBSubnetGroupCommandInput
   | ModifyEventSubscriptionCommandInput
   | ModifyGlobalClusterCommandInput
+  | ModifyIntegrationCommandInput
   | ModifyOptionGroupCommandInput
+  | ModifyTenantDatabaseCommandInput
   | PromoteReadReplicaCommandInput
   | PromoteReadReplicaDBClusterCommandInput
   | PurchaseReservedDBInstancesOfferingCommandInput
+  | RebootDBClusterCommandInput
   | RebootDBInstanceCommandInput
+  | RebootDBShardGroupCommandInput
   | RegisterDBProxyTargetsCommandInput
   | RemoveFromGlobalClusterCommandInput
   | RemoveRoleFromDBClusterCommandInput
@@ -646,8 +836,14 @@ export type ServiceInputTypes =
   | StopActivityStreamCommandInput
   | StopDBClusterCommandInput
   | StopDBInstanceAutomatedBackupsReplicationCommandInput
-  | StopDBInstanceCommandInput;
+  | StopDBInstanceCommandInput
+  | SwitchoverBlueGreenDeploymentCommandInput
+  | SwitchoverGlobalClusterCommandInput
+  | SwitchoverReadReplicaCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddRoleToDBClusterCommandOutput
   | AddRoleToDBInstanceCommandOutput
@@ -656,14 +852,16 @@ export type ServiceOutputTypes =
   | ApplyPendingMaintenanceActionCommandOutput
   | AuthorizeDBSecurityGroupIngressCommandOutput
   | BacktrackDBClusterCommandOutput
+  | CancelDBCapacityReservationCommandOutput
   | CancelExportTaskCommandOutput
   | CopyDBClusterParameterGroupCommandOutput
   | CopyDBClusterSnapshotCommandOutput
   | CopyDBParameterGroupCommandOutput
   | CopyDBSnapshotCommandOutput
   | CopyOptionGroupCommandOutput
-  | CreateCustomAvailabilityZoneCommandOutput
+  | CreateBlueGreenDeploymentCommandOutput
   | CreateCustomDBEngineVersionCommandOutput
+  | CreateDBCapacityReservationCommandOutput
   | CreateDBClusterCommandOutput
   | CreateDBClusterEndpointCommandOutput
   | CreateDBClusterParameterGroupCommandOutput
@@ -674,13 +872,17 @@ export type ServiceOutputTypes =
   | CreateDBProxyCommandOutput
   | CreateDBProxyEndpointCommandOutput
   | CreateDBSecurityGroupCommandOutput
+  | CreateDBShardGroupCommandOutput
   | CreateDBSnapshotCommandOutput
   | CreateDBSubnetGroupCommandOutput
   | CreateEventSubscriptionCommandOutput
   | CreateGlobalClusterCommandOutput
+  | CreateIntegrationCommandOutput
   | CreateOptionGroupCommandOutput
-  | DeleteCustomAvailabilityZoneCommandOutput
+  | CreateTenantDatabaseCommandOutput
+  | DeleteBlueGreenDeploymentCommandOutput
   | DeleteCustomDBEngineVersionCommandOutput
+  | DeleteDBClusterAutomatedBackupCommandOutput
   | DeleteDBClusterCommandOutput
   | DeleteDBClusterEndpointCommandOutput
   | DeleteDBClusterParameterGroupCommandOutput
@@ -691,16 +893,20 @@ export type ServiceOutputTypes =
   | DeleteDBProxyCommandOutput
   | DeleteDBProxyEndpointCommandOutput
   | DeleteDBSecurityGroupCommandOutput
+  | DeleteDBShardGroupCommandOutput
   | DeleteDBSnapshotCommandOutput
   | DeleteDBSubnetGroupCommandOutput
   | DeleteEventSubscriptionCommandOutput
   | DeleteGlobalClusterCommandOutput
-  | DeleteInstallationMediaCommandOutput
+  | DeleteIntegrationCommandOutput
   | DeleteOptionGroupCommandOutput
+  | DeleteTenantDatabaseCommandOutput
   | DeregisterDBProxyTargetsCommandOutput
   | DescribeAccountAttributesCommandOutput
+  | DescribeBlueGreenDeploymentsCommandOutput
   | DescribeCertificatesCommandOutput
-  | DescribeCustomAvailabilityZonesCommandOutput
+  | DescribeDBCapacityReservationsCommandOutput
+  | DescribeDBClusterAutomatedBackupsCommandOutput
   | DescribeDBClusterBacktracksCommandOutput
   | DescribeDBClusterEndpointsCommandOutput
   | DescribeDBClusterParameterGroupsCommandOutput
@@ -712,14 +918,18 @@ export type ServiceOutputTypes =
   | DescribeDBInstanceAutomatedBackupsCommandOutput
   | DescribeDBInstancesCommandOutput
   | DescribeDBLogFilesCommandOutput
+  | DescribeDBMajorEngineVersionsCommandOutput
   | DescribeDBParameterGroupsCommandOutput
   | DescribeDBParametersCommandOutput
   | DescribeDBProxiesCommandOutput
   | DescribeDBProxyEndpointsCommandOutput
   | DescribeDBProxyTargetGroupsCommandOutput
   | DescribeDBProxyTargetsCommandOutput
+  | DescribeDBRecommendationsCommandOutput
   | DescribeDBSecurityGroupsCommandOutput
+  | DescribeDBShardGroupsCommandOutput
   | DescribeDBSnapshotAttributesCommandOutput
+  | DescribeDBSnapshotTenantDatabasesCommandOutput
   | DescribeDBSnapshotsCommandOutput
   | DescribeDBSubnetGroupsCommandOutput
   | DescribeEngineDefaultClusterParametersCommandOutput
@@ -729,23 +939,28 @@ export type ServiceOutputTypes =
   | DescribeEventsCommandOutput
   | DescribeExportTasksCommandOutput
   | DescribeGlobalClustersCommandOutput
-  | DescribeInstallationMediaCommandOutput
+  | DescribeIntegrationsCommandOutput
   | DescribeOptionGroupOptionsCommandOutput
   | DescribeOptionGroupsCommandOutput
   | DescribeOrderableDBInstanceOptionsCommandOutput
   | DescribePendingMaintenanceActionsCommandOutput
   | DescribeReservedDBInstancesCommandOutput
   | DescribeReservedDBInstancesOfferingsCommandOutput
+  | DescribeServerlessV2PlatformVersionsCommandOutput
   | DescribeSourceRegionsCommandOutput
+  | DescribeTenantDatabasesCommandOutput
   | DescribeValidDBInstanceModificationsCommandOutput
+  | DisableHttpEndpointCommandOutput
   | DownloadDBLogFilePortionCommandOutput
+  | EnableHttpEndpointCommandOutput
   | FailoverDBClusterCommandOutput
   | FailoverGlobalClusterCommandOutput
-  | ImportInstallationMediaCommandOutput
   | ListTagsForResourceCommandOutput
+  | ModifyActivityStreamCommandOutput
   | ModifyCertificatesCommandOutput
   | ModifyCurrentDBClusterCapacityCommandOutput
   | ModifyCustomDBEngineVersionCommandOutput
+  | ModifyDBCapacityReservationCommandOutput
   | ModifyDBClusterCommandOutput
   | ModifyDBClusterEndpointCommandOutput
   | ModifyDBClusterParameterGroupCommandOutput
@@ -755,16 +970,22 @@ export type ServiceOutputTypes =
   | ModifyDBProxyCommandOutput
   | ModifyDBProxyEndpointCommandOutput
   | ModifyDBProxyTargetGroupCommandOutput
+  | ModifyDBRecommendationCommandOutput
+  | ModifyDBShardGroupCommandOutput
   | ModifyDBSnapshotAttributeCommandOutput
   | ModifyDBSnapshotCommandOutput
   | ModifyDBSubnetGroupCommandOutput
   | ModifyEventSubscriptionCommandOutput
   | ModifyGlobalClusterCommandOutput
+  | ModifyIntegrationCommandOutput
   | ModifyOptionGroupCommandOutput
+  | ModifyTenantDatabaseCommandOutput
   | PromoteReadReplicaCommandOutput
   | PromoteReadReplicaDBClusterCommandOutput
   | PurchaseReservedDBInstancesOfferingCommandOutput
+  | RebootDBClusterCommandOutput
   | RebootDBInstanceCommandOutput
+  | RebootDBShardGroupCommandOutput
   | RegisterDBProxyTargetsCommandOutput
   | RemoveFromGlobalClusterCommandOutput
   | RemoveRoleFromDBClusterCommandOutput
@@ -788,20 +1009,26 @@ export type ServiceOutputTypes =
   | StopActivityStreamCommandOutput
   | StopDBClusterCommandOutput
   | StopDBInstanceAutomatedBackupsReplicationCommandOutput
-  | StopDBInstanceCommandOutput;
+  | StopDBInstanceCommandOutput
+  | SwitchoverBlueGreenDeploymentCommandOutput
+  | SwitchoverGlobalClusterCommandOutput
+  | SwitchoverReadReplicaCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -813,7 +1040,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -852,25 +1079,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -883,119 +1101,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type RDSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of RDSClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type RDSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of RDSClient class constructor that set the region, credentials and other options.
  */
 export interface RDSClientConfig extends RDSClientConfigType {}
 
-type RDSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of RDSClient class. This is resolved and normalized from the {@link RDSClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type RDSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of RDSClient class. This is resolved and normalized from the {@link RDSClientConfig | constructor configuration interface}.
  */
 export interface RDSClientResolvedConfig extends RDSClientResolvedConfigType {}
 
 /**
- * <fullname>Amazon Relational Database Service</fullname>
- *         <p> </p>
- *          <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and
- *           scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational
- *           database and manages common database administration tasks, freeing up developers to focus on what makes their applications
- *           and businesses unique.</p>
- *          <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server,
- *           Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools
- *           you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS
- *           automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS
- *           is flexible: you can scale your DB instance's compute resources and storage capacity to meet your
- *           application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for
- *           the resources you use.</p>
- *          <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface
- *           you can use to manage Amazon RDS. Amazon RDS is asynchronous, which means that some interfaces might
- *           require techniques such as polling or callback functions to determine when a command has been applied. In this
- *           reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot,
- *           or during the maintenance window. The reference structure is as follows, and we list following some related topics
- *           from the user guide.</p>
- *
- *          <p>
- *             <b>Amazon RDS API Reference</b>
- *          </p>
- *
- *          <ul>
- *             <li>
- *                <p>For the alphabetical list of API actions, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html">API Actions</a>.</p>
- *             </li>
- *             <li>
- *                <p>For the alphabetical list of data types, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html">Data Types</a>.</p>
- *             </li>
- *             <li>
- *                <p>For a list of common query parameters, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html">Common Parameters</a>.</p>
- *             </li>
- *             <li>
- *                <p>For descriptions of the error codes, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html">Common Errors</a>.</p>
- *             </li>
- *          </ul>
- *
- *          <p>
- *             <b>Amazon RDS User Guide</b>
- *          </p>
- *
- *          <ul>
- *             <li>
- *                <p>For a summary of the Amazon RDS interfaces, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces">Available RDS Interfaces</a>.</p>
- *             </li>
- *             <li>
- *                <p>For more information about how to use the Query API, see
- *         <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html">Using the Query API</a>.</p>
- *             </li>
- *          </ul>
+ * <fullname>Amazon Relational Database Service</fullname> <p/> <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational database and manages common database administration tasks, freeing up developers to focus on what makes their applications and businesses unique.</p> <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, Oracle, Db2, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS is flexible: you can scale your DB instance's compute resources and storage capacity to meet your application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for the resources you use.</p> <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface you can use to manage Amazon RDS. Amazon RDS is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. In this reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, or during the maintenance window. The reference structure is as follows, and we list following some related topics from the user guide.</p> <p> <b>Amazon RDS API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html">Common Errors</a>.</p> </li> </ul> <p> <b>Amazon RDS User Guide</b> </p> <ul> <li> <p>For a summary of the Amazon RDS interfaces, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces">Available RDS Interfaces</a>.</p> </li> <li> <p>For more information about how to use the Query API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html">Using the Query API</a>.</p> </li> </ul>
+ * @public
  */
 export class RDSClient extends __Client<
   __HttpHandlerOptions,
@@ -1008,22 +1220,36 @@ export class RDSClient extends __Client<
    */
   readonly config: RDSClientResolvedConfig;
 
-  constructor(configuration: RDSClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<RDSClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultRDSHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: RDSClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

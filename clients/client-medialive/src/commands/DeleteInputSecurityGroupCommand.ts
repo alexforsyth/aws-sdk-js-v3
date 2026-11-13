@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { DeleteInputSecurityGroupRequest, DeleteInputSecurityGroupResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteInputSecurityGroupCommand,
-  serializeAws_restJson1DeleteInputSecurityGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteInputSecurityGroupRequest, DeleteInputSecurityGroupResponse } from "../models/models_1";
+import { DeleteInputSecurityGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteInputSecurityGroupCommand}.
+ */
 export interface DeleteInputSecurityGroupCommandInput extends DeleteInputSecurityGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteInputSecurityGroupCommand}.
+ */
 export interface DeleteInputSecurityGroupCommandOutput extends DeleteInputSecurityGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface DeleteInputSecurityGroupCommandOutput extends DeleteInputSecuri
  * ```javascript
  * import { MediaLiveClient, DeleteInputSecurityGroupCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, DeleteInputSecurityGroupCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // DeleteInputSecurityGroupRequest
+ *   InputSecurityGroupId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteInputSecurityGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteInputSecurityGroupCommandInput - {@link DeleteInputSecurityGroupCommandInput}
+ * @returns {@link DeleteInputSecurityGroupCommandOutput}
  * @see {@link DeleteInputSecurityGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteInputSecurityGroupCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteInputSecurityGroupCommand extends $Command<
-  DeleteInputSecurityGroupCommandInput,
-  DeleteInputSecurityGroupCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteInputSecurityGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteInputSecurityGroupCommandInput, DeleteInputSecurityGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "DeleteInputSecurityGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteInputSecurityGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteInputSecurityGroupResponse.filterSensitiveLog,
+export class DeleteInputSecurityGroupCommand extends command<DeleteInputSecurityGroupCommandInput, DeleteInputSecurityGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteInputSecurityGroup",
+  DeleteInputSecurityGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInputSecurityGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteInputSecurityGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteInputSecurityGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteInputSecurityGroupCommandOutput> {
-    return deserializeAws_restJson1DeleteInputSecurityGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteInputSecurityGroupCommandInput;
+      output: DeleteInputSecurityGroupCommandOutput;
+    };
+  };
 }

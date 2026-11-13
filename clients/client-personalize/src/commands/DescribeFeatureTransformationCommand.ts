@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeFeatureTransformationRequest, DescribeFeatureTransformationResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1DescribeFeatureTransformationCommand,
-  serializeAws_json1_1DescribeFeatureTransformationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFeatureTransformationRequest, DescribeFeatureTransformationResponse } from "../models/models_0";
+import { DescribeFeatureTransformation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFeatureTransformationCommand}.
+ */
 export interface DescribeFeatureTransformationCommandInput extends DescribeFeatureTransformationRequest {}
-export interface DescribeFeatureTransformationCommandOutput
-  extends DescribeFeatureTransformationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFeatureTransformationCommand}.
+ */
+export interface DescribeFeatureTransformationCommandOutput extends DescribeFeatureTransformationResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the given feature transformation.</p>
@@ -30,71 +29,62 @@ export interface DescribeFeatureTransformationCommandOutput
  * ```javascript
  * import { PersonalizeClient, DescribeFeatureTransformationCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, DescribeFeatureTransformationCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // DescribeFeatureTransformationRequest
+ *   featureTransformationArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeFeatureTransformationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFeatureTransformationResponse
+ * //   featureTransformation: { // FeatureTransformation
+ * //     name: "STRING_VALUE",
+ * //     featureTransformationArn: "STRING_VALUE",
+ * //     defaultParameters: { // FeaturizationParameters
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     creationDateTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     status: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFeatureTransformationCommandInput - {@link DescribeFeatureTransformationCommandInput}
+ * @returns {@link DescribeFeatureTransformationCommandOutput}
  * @see {@link DescribeFeatureTransformationCommandInput} for command's `input` shape.
  * @see {@link DescribeFeatureTransformationCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFeatureTransformationCommand extends $Command<
-  DescribeFeatureTransformationCommandInput,
-  DescribeFeatureTransformationCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFeatureTransformationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFeatureTransformationCommandInput, DescribeFeatureTransformationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "DescribeFeatureTransformationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFeatureTransformationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFeatureTransformationResponse.filterSensitiveLog,
+export class DescribeFeatureTransformationCommand extends command<DescribeFeatureTransformationCommandInput, DescribeFeatureTransformationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFeatureTransformation",
+  DescribeFeatureTransformation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFeatureTransformationRequest;
+      output: DescribeFeatureTransformationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFeatureTransformationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeFeatureTransformationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeFeatureTransformationCommandOutput> {
-    return deserializeAws_json1_1DescribeFeatureTransformationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFeatureTransformationCommandInput;
+      output: DescribeFeatureTransformationCommandOutput;
+    };
+  };
 }

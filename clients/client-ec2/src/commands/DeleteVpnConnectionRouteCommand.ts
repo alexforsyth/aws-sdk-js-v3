@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteVpnConnectionRouteRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteVpnConnectionRouteCommand,
-  serializeAws_ec2DeleteVpnConnectionRouteCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVpnConnectionRouteRequest } from "../models/models_3";
+import { DeleteVpnConnectionRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVpnConnectionRouteCommand}.
+ */
 export interface DeleteVpnConnectionRouteCommandInput extends DeleteVpnConnectionRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVpnConnectionRouteCommand}.
+ */
 export interface DeleteVpnConnectionRouteCommandOutput extends __MetadataBearer {}
 
 /**
@@ -31,68 +32,46 @@ export interface DeleteVpnConnectionRouteCommandOutput extends __MetadataBearer 
  * ```javascript
  * import { EC2Client, DeleteVpnConnectionRouteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteVpnConnectionRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteVpnConnectionRouteRequest
+ *   DestinationCidrBlock: "STRING_VALUE", // required
+ *   VpnConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVpnConnectionRouteCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteVpnConnectionRouteCommandInput - {@link DeleteVpnConnectionRouteCommandInput}
+ * @returns {@link DeleteVpnConnectionRouteCommandOutput}
  * @see {@link DeleteVpnConnectionRouteCommandInput} for command's `input` shape.
  * @see {@link DeleteVpnConnectionRouteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteVpnConnectionRouteCommand extends $Command<
-  DeleteVpnConnectionRouteCommandInput,
-  DeleteVpnConnectionRouteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVpnConnectionRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVpnConnectionRouteCommandInput, DeleteVpnConnectionRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteVpnConnectionRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVpnConnectionRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteVpnConnectionRouteCommand extends command<DeleteVpnConnectionRouteCommandInput, DeleteVpnConnectionRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVpnConnectionRoute",
+  DeleteVpnConnectionRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVpnConnectionRouteRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVpnConnectionRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteVpnConnectionRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteVpnConnectionRouteCommandOutput> {
-    return deserializeAws_ec2DeleteVpnConnectionRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVpnConnectionRouteCommandInput;
+      output: DeleteVpnConnectionRouteCommandOutput;
+    };
+  };
 }

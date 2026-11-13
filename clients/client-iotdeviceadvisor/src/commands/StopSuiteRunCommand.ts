@@ -1,95 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IotDeviceAdvisorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IotDeviceAdvisorClient";
-import { StopSuiteRunRequest, StopSuiteRunResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopSuiteRunCommand,
-  serializeAws_restJson1StopSuiteRunCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopSuiteRunRequest, StopSuiteRunResponse } from "../models/models_0";
+import { StopSuiteRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopSuiteRunCommand}.
+ */
 export interface StopSuiteRunCommandInput extends StopSuiteRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopSuiteRunCommand}.
+ */
 export interface StopSuiteRunCommandOutput extends StopSuiteRunResponse, __MetadataBearer {}
 
 /**
  * <p>Stops a Device Advisor test suite run that is currently running.</p>
+ *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StopSuiteRun</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IotDeviceAdvisorClient, StopSuiteRunCommand } from "@aws-sdk/client-iotdeviceadvisor"; // ES Modules import
  * // const { IotDeviceAdvisorClient, StopSuiteRunCommand } = require("@aws-sdk/client-iotdeviceadvisor"); // CommonJS import
+ * // import type { IotDeviceAdvisorClientConfig } from "@aws-sdk/client-iotdeviceadvisor";
+ * const config = {}; // type is IotDeviceAdvisorClientConfig
  * const client = new IotDeviceAdvisorClient(config);
+ * const input = { // StopSuiteRunRequest
+ *   suiteDefinitionId: "STRING_VALUE", // required
+ *   suiteRunId: "STRING_VALUE", // required
+ * };
  * const command = new StopSuiteRunCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopSuiteRunCommandInput - {@link StopSuiteRunCommandInput}
+ * @returns {@link StopSuiteRunCommandOutput}
  * @see {@link StopSuiteRunCommandInput} for command's `input` shape.
  * @see {@link StopSuiteRunCommandOutput} for command's `response` shape.
- * @see {@link IotDeviceAdvisorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IotDeviceAdvisorClientResolvedConfig | config} for IotDeviceAdvisorClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Sends an Internal Failure exception.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Sends a Resource Not Found exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Sends a validation exception.</p>
+ *
+ * @throws {@link IotDeviceAdvisorServiceException}
+ * <p>Base exception class for all service exceptions from IotDeviceAdvisor service.</p>
+ *
+ *
+ * @public
  */
-export class StopSuiteRunCommand extends $Command<
-  StopSuiteRunCommandInput,
-  StopSuiteRunCommandOutput,
-  IotDeviceAdvisorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopSuiteRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IotDeviceAdvisorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopSuiteRunCommandInput, StopSuiteRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IotDeviceAdvisorClient";
-    const commandName = "StopSuiteRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopSuiteRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopSuiteRunResponse.filterSensitiveLog,
+export class StopSuiteRunCommand extends command<StopSuiteRunCommandInput, StopSuiteRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopSuiteRun",
+  StopSuiteRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopSuiteRunRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopSuiteRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopSuiteRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopSuiteRunCommandOutput> {
-    return deserializeAws_restJson1StopSuiteRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopSuiteRunCommandInput;
+      output: StopSuiteRunCommandOutput;
+    };
+  };
 }

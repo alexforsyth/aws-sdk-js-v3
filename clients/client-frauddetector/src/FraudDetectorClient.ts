@@ -1,185 +1,242 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultFraudDetectorHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   BatchCreateVariableCommandInput,
   BatchCreateVariableCommandOutput,
 } from "./commands/BatchCreateVariableCommand";
-import { BatchGetVariableCommandInput, BatchGetVariableCommandOutput } from "./commands/BatchGetVariableCommand";
-import {
+import type { BatchGetVariableCommandInput, BatchGetVariableCommandOutput } from "./commands/BatchGetVariableCommand";
+import type {
   CancelBatchImportJobCommandInput,
   CancelBatchImportJobCommandOutput,
 } from "./commands/CancelBatchImportJobCommand";
-import {
+import type {
   CancelBatchPredictionJobCommandInput,
   CancelBatchPredictionJobCommandOutput,
 } from "./commands/CancelBatchPredictionJobCommand";
-import {
+import type {
   CreateBatchImportJobCommandInput,
   CreateBatchImportJobCommandOutput,
 } from "./commands/CreateBatchImportJobCommand";
-import {
+import type {
   CreateBatchPredictionJobCommandInput,
   CreateBatchPredictionJobCommandOutput,
 } from "./commands/CreateBatchPredictionJobCommand";
-import {
+import type {
   CreateDetectorVersionCommandInput,
   CreateDetectorVersionCommandOutput,
 } from "./commands/CreateDetectorVersionCommand";
-import { CreateModelCommandInput, CreateModelCommandOutput } from "./commands/CreateModelCommand";
-import { CreateModelVersionCommandInput, CreateModelVersionCommandOutput } from "./commands/CreateModelVersionCommand";
-import { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
-import { CreateVariableCommandInput, CreateVariableCommandOutput } from "./commands/CreateVariableCommand";
-import {
+import type { CreateListCommandInput, CreateListCommandOutput } from "./commands/CreateListCommand";
+import type { CreateModelCommandInput, CreateModelCommandOutput } from "./commands/CreateModelCommand";
+import type {
+  CreateModelVersionCommandInput,
+  CreateModelVersionCommandOutput,
+} from "./commands/CreateModelVersionCommand";
+import type { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
+import type { CreateVariableCommandInput, CreateVariableCommandOutput } from "./commands/CreateVariableCommand";
+import type {
   DeleteBatchImportJobCommandInput,
   DeleteBatchImportJobCommandOutput,
 } from "./commands/DeleteBatchImportJobCommand";
-import {
+import type {
   DeleteBatchPredictionJobCommandInput,
   DeleteBatchPredictionJobCommandOutput,
 } from "./commands/DeleteBatchPredictionJobCommand";
-import { DeleteDetectorCommandInput, DeleteDetectorCommandOutput } from "./commands/DeleteDetectorCommand";
-import {
+import type { DeleteDetectorCommandInput, DeleteDetectorCommandOutput } from "./commands/DeleteDetectorCommand";
+import type {
   DeleteDetectorVersionCommandInput,
   DeleteDetectorVersionCommandOutput,
 } from "./commands/DeleteDetectorVersionCommand";
-import { DeleteEntityTypeCommandInput, DeleteEntityTypeCommandOutput } from "./commands/DeleteEntityTypeCommand";
-import { DeleteEventCommandInput, DeleteEventCommandOutput } from "./commands/DeleteEventCommand";
-import {
+import type { DeleteEntityTypeCommandInput, DeleteEntityTypeCommandOutput } from "./commands/DeleteEntityTypeCommand";
+import type { DeleteEventCommandInput, DeleteEventCommandOutput } from "./commands/DeleteEventCommand";
+import type {
   DeleteEventsByEventTypeCommandInput,
   DeleteEventsByEventTypeCommandOutput,
 } from "./commands/DeleteEventsByEventTypeCommand";
-import { DeleteEventTypeCommandInput, DeleteEventTypeCommandOutput } from "./commands/DeleteEventTypeCommand";
-import {
+import type { DeleteEventTypeCommandInput, DeleteEventTypeCommandOutput } from "./commands/DeleteEventTypeCommand";
+import type {
   DeleteExternalModelCommandInput,
   DeleteExternalModelCommandOutput,
 } from "./commands/DeleteExternalModelCommand";
-import { DeleteLabelCommandInput, DeleteLabelCommandOutput } from "./commands/DeleteLabelCommand";
-import { DeleteModelCommandInput, DeleteModelCommandOutput } from "./commands/DeleteModelCommand";
-import { DeleteModelVersionCommandInput, DeleteModelVersionCommandOutput } from "./commands/DeleteModelVersionCommand";
-import { DeleteOutcomeCommandInput, DeleteOutcomeCommandOutput } from "./commands/DeleteOutcomeCommand";
-import { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
-import { DeleteVariableCommandInput, DeleteVariableCommandOutput } from "./commands/DeleteVariableCommand";
-import { DescribeDetectorCommandInput, DescribeDetectorCommandOutput } from "./commands/DescribeDetectorCommand";
-import {
+import type { DeleteLabelCommandInput, DeleteLabelCommandOutput } from "./commands/DeleteLabelCommand";
+import type { DeleteListCommandInput, DeleteListCommandOutput } from "./commands/DeleteListCommand";
+import type { DeleteModelCommandInput, DeleteModelCommandOutput } from "./commands/DeleteModelCommand";
+import type {
+  DeleteModelVersionCommandInput,
+  DeleteModelVersionCommandOutput,
+} from "./commands/DeleteModelVersionCommand";
+import type { DeleteOutcomeCommandInput, DeleteOutcomeCommandOutput } from "./commands/DeleteOutcomeCommand";
+import type { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
+import type { DeleteVariableCommandInput, DeleteVariableCommandOutput } from "./commands/DeleteVariableCommand";
+import type { DescribeDetectorCommandInput, DescribeDetectorCommandOutput } from "./commands/DescribeDetectorCommand";
+import type {
   DescribeModelVersionsCommandInput,
   DescribeModelVersionsCommandOutput,
 } from "./commands/DescribeModelVersionsCommand";
-import { GetBatchImportJobsCommandInput, GetBatchImportJobsCommandOutput } from "./commands/GetBatchImportJobsCommand";
-import {
+import type {
+  GetBatchImportJobsCommandInput,
+  GetBatchImportJobsCommandOutput,
+} from "./commands/GetBatchImportJobsCommand";
+import type {
   GetBatchPredictionJobsCommandInput,
   GetBatchPredictionJobsCommandOutput,
 } from "./commands/GetBatchPredictionJobsCommand";
-import {
+import type {
   GetDeleteEventsByEventTypeStatusCommandInput,
   GetDeleteEventsByEventTypeStatusCommandOutput,
 } from "./commands/GetDeleteEventsByEventTypeStatusCommand";
-import { GetDetectorsCommandInput, GetDetectorsCommandOutput } from "./commands/GetDetectorsCommand";
-import { GetDetectorVersionCommandInput, GetDetectorVersionCommandOutput } from "./commands/GetDetectorVersionCommand";
-import { GetEntityTypesCommandInput, GetEntityTypesCommandOutput } from "./commands/GetEntityTypesCommand";
-import { GetEventCommandInput, GetEventCommandOutput } from "./commands/GetEventCommand";
-import { GetEventPredictionCommandInput, GetEventPredictionCommandOutput } from "./commands/GetEventPredictionCommand";
-import { GetEventTypesCommandInput, GetEventTypesCommandOutput } from "./commands/GetEventTypesCommand";
-import { GetExternalModelsCommandInput, GetExternalModelsCommandOutput } from "./commands/GetExternalModelsCommand";
-import {
+import type { GetDetectorsCommandInput, GetDetectorsCommandOutput } from "./commands/GetDetectorsCommand";
+import type {
+  GetDetectorVersionCommandInput,
+  GetDetectorVersionCommandOutput,
+} from "./commands/GetDetectorVersionCommand";
+import type { GetEntityTypesCommandInput, GetEntityTypesCommandOutput } from "./commands/GetEntityTypesCommand";
+import type { GetEventCommandInput, GetEventCommandOutput } from "./commands/GetEventCommand";
+import type {
+  GetEventPredictionCommandInput,
+  GetEventPredictionCommandOutput,
+} from "./commands/GetEventPredictionCommand";
+import type {
+  GetEventPredictionMetadataCommandInput,
+  GetEventPredictionMetadataCommandOutput,
+} from "./commands/GetEventPredictionMetadataCommand";
+import type { GetEventTypesCommandInput, GetEventTypesCommandOutput } from "./commands/GetEventTypesCommand";
+import type {
+  GetExternalModelsCommandInput,
+  GetExternalModelsCommandOutput,
+} from "./commands/GetExternalModelsCommand";
+import type {
   GetKMSEncryptionKeyCommandInput,
   GetKMSEncryptionKeyCommandOutput,
 } from "./commands/GetKMSEncryptionKeyCommand";
-import { GetLabelsCommandInput, GetLabelsCommandOutput } from "./commands/GetLabelsCommand";
-import { GetModelsCommandInput, GetModelsCommandOutput } from "./commands/GetModelsCommand";
-import { GetModelVersionCommandInput, GetModelVersionCommandOutput } from "./commands/GetModelVersionCommand";
-import { GetOutcomesCommandInput, GetOutcomesCommandOutput } from "./commands/GetOutcomesCommand";
-import { GetRulesCommandInput, GetRulesCommandOutput } from "./commands/GetRulesCommand";
-import { GetVariablesCommandInput, GetVariablesCommandOutput } from "./commands/GetVariablesCommand";
-import {
+import type { GetLabelsCommandInput, GetLabelsCommandOutput } from "./commands/GetLabelsCommand";
+import type { GetListElementsCommandInput, GetListElementsCommandOutput } from "./commands/GetListElementsCommand";
+import type { GetListsMetadataCommandInput, GetListsMetadataCommandOutput } from "./commands/GetListsMetadataCommand";
+import type { GetModelsCommandInput, GetModelsCommandOutput } from "./commands/GetModelsCommand";
+import type { GetModelVersionCommandInput, GetModelVersionCommandOutput } from "./commands/GetModelVersionCommand";
+import type { GetOutcomesCommandInput, GetOutcomesCommandOutput } from "./commands/GetOutcomesCommand";
+import type { GetRulesCommandInput, GetRulesCommandOutput } from "./commands/GetRulesCommand";
+import type { GetVariablesCommandInput, GetVariablesCommandOutput } from "./commands/GetVariablesCommand";
+import type {
+  ListEventPredictionsCommandInput,
+  ListEventPredictionsCommandOutput,
+} from "./commands/ListEventPredictionsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { PutDetectorCommandInput, PutDetectorCommandOutput } from "./commands/PutDetectorCommand";
-import { PutEntityTypeCommandInput, PutEntityTypeCommandOutput } from "./commands/PutEntityTypeCommand";
-import { PutEventTypeCommandInput, PutEventTypeCommandOutput } from "./commands/PutEventTypeCommand";
-import { PutExternalModelCommandInput, PutExternalModelCommandOutput } from "./commands/PutExternalModelCommand";
-import {
+import type { PutDetectorCommandInput, PutDetectorCommandOutput } from "./commands/PutDetectorCommand";
+import type { PutEntityTypeCommandInput, PutEntityTypeCommandOutput } from "./commands/PutEntityTypeCommand";
+import type { PutEventTypeCommandInput, PutEventTypeCommandOutput } from "./commands/PutEventTypeCommand";
+import type { PutExternalModelCommandInput, PutExternalModelCommandOutput } from "./commands/PutExternalModelCommand";
+import type {
   PutKMSEncryptionKeyCommandInput,
   PutKMSEncryptionKeyCommandOutput,
 } from "./commands/PutKMSEncryptionKeyCommand";
-import { PutLabelCommandInput, PutLabelCommandOutput } from "./commands/PutLabelCommand";
-import { PutOutcomeCommandInput, PutOutcomeCommandOutput } from "./commands/PutOutcomeCommand";
-import { SendEventCommandInput, SendEventCommandOutput } from "./commands/SendEventCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { PutLabelCommandInput, PutLabelCommandOutput } from "./commands/PutLabelCommand";
+import type { PutOutcomeCommandInput, PutOutcomeCommandOutput } from "./commands/PutOutcomeCommand";
+import type { SendEventCommandInput, SendEventCommandOutput } from "./commands/SendEventCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateDetectorVersionCommandInput,
   UpdateDetectorVersionCommandOutput,
 } from "./commands/UpdateDetectorVersionCommand";
-import {
+import type {
   UpdateDetectorVersionMetadataCommandInput,
   UpdateDetectorVersionMetadataCommandOutput,
 } from "./commands/UpdateDetectorVersionMetadataCommand";
-import {
+import type {
   UpdateDetectorVersionStatusCommandInput,
   UpdateDetectorVersionStatusCommandOutput,
 } from "./commands/UpdateDetectorVersionStatusCommand";
-import { UpdateEventLabelCommandInput, UpdateEventLabelCommandOutput } from "./commands/UpdateEventLabelCommand";
-import { UpdateModelCommandInput, UpdateModelCommandOutput } from "./commands/UpdateModelCommand";
-import { UpdateModelVersionCommandInput, UpdateModelVersionCommandOutput } from "./commands/UpdateModelVersionCommand";
-import {
+import type { UpdateEventLabelCommandInput, UpdateEventLabelCommandOutput } from "./commands/UpdateEventLabelCommand";
+import type { UpdateListCommandInput, UpdateListCommandOutput } from "./commands/UpdateListCommand";
+import type { UpdateModelCommandInput, UpdateModelCommandOutput } from "./commands/UpdateModelCommand";
+import type {
+  UpdateModelVersionCommandInput,
+  UpdateModelVersionCommandOutput,
+} from "./commands/UpdateModelVersionCommand";
+import type {
   UpdateModelVersionStatusCommandInput,
   UpdateModelVersionStatusCommandOutput,
 } from "./commands/UpdateModelVersionStatusCommand";
-import { UpdateRuleMetadataCommandInput, UpdateRuleMetadataCommandOutput } from "./commands/UpdateRuleMetadataCommand";
-import { UpdateRuleVersionCommandInput, UpdateRuleVersionCommandOutput } from "./commands/UpdateRuleVersionCommand";
-import { UpdateVariableCommandInput, UpdateVariableCommandOutput } from "./commands/UpdateVariableCommand";
+import type {
+  UpdateRuleMetadataCommandInput,
+  UpdateRuleMetadataCommandOutput,
+} from "./commands/UpdateRuleMetadataCommand";
+import type {
+  UpdateRuleVersionCommandInput,
+  UpdateRuleVersionCommandOutput,
+} from "./commands/UpdateRuleVersionCommand";
+import type { UpdateVariableCommandInput, UpdateVariableCommandOutput } from "./commands/UpdateVariableCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | BatchCreateVariableCommandInput
   | BatchGetVariableCommandInput
@@ -188,6 +245,7 @@ export type ServiceInputTypes =
   | CreateBatchImportJobCommandInput
   | CreateBatchPredictionJobCommandInput
   | CreateDetectorVersionCommandInput
+  | CreateListCommandInput
   | CreateModelCommandInput
   | CreateModelVersionCommandInput
   | CreateRuleCommandInput
@@ -202,6 +260,7 @@ export type ServiceInputTypes =
   | DeleteEventsByEventTypeCommandInput
   | DeleteExternalModelCommandInput
   | DeleteLabelCommandInput
+  | DeleteListCommandInput
   | DeleteModelCommandInput
   | DeleteModelVersionCommandInput
   | DeleteOutcomeCommandInput
@@ -217,15 +276,19 @@ export type ServiceInputTypes =
   | GetEntityTypesCommandInput
   | GetEventCommandInput
   | GetEventPredictionCommandInput
+  | GetEventPredictionMetadataCommandInput
   | GetEventTypesCommandInput
   | GetExternalModelsCommandInput
   | GetKMSEncryptionKeyCommandInput
   | GetLabelsCommandInput
+  | GetListElementsCommandInput
+  | GetListsMetadataCommandInput
   | GetModelVersionCommandInput
   | GetModelsCommandInput
   | GetOutcomesCommandInput
   | GetRulesCommandInput
   | GetVariablesCommandInput
+  | ListEventPredictionsCommandInput
   | ListTagsForResourceCommandInput
   | PutDetectorCommandInput
   | PutEntityTypeCommandInput
@@ -241,6 +304,7 @@ export type ServiceInputTypes =
   | UpdateDetectorVersionMetadataCommandInput
   | UpdateDetectorVersionStatusCommandInput
   | UpdateEventLabelCommandInput
+  | UpdateListCommandInput
   | UpdateModelCommandInput
   | UpdateModelVersionCommandInput
   | UpdateModelVersionStatusCommandInput
@@ -248,6 +312,9 @@ export type ServiceInputTypes =
   | UpdateRuleVersionCommandInput
   | UpdateVariableCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | BatchCreateVariableCommandOutput
   | BatchGetVariableCommandOutput
@@ -256,6 +323,7 @@ export type ServiceOutputTypes =
   | CreateBatchImportJobCommandOutput
   | CreateBatchPredictionJobCommandOutput
   | CreateDetectorVersionCommandOutput
+  | CreateListCommandOutput
   | CreateModelCommandOutput
   | CreateModelVersionCommandOutput
   | CreateRuleCommandOutput
@@ -270,6 +338,7 @@ export type ServiceOutputTypes =
   | DeleteEventsByEventTypeCommandOutput
   | DeleteExternalModelCommandOutput
   | DeleteLabelCommandOutput
+  | DeleteListCommandOutput
   | DeleteModelCommandOutput
   | DeleteModelVersionCommandOutput
   | DeleteOutcomeCommandOutput
@@ -285,15 +354,19 @@ export type ServiceOutputTypes =
   | GetEntityTypesCommandOutput
   | GetEventCommandOutput
   | GetEventPredictionCommandOutput
+  | GetEventPredictionMetadataCommandOutput
   | GetEventTypesCommandOutput
   | GetExternalModelsCommandOutput
   | GetKMSEncryptionKeyCommandOutput
   | GetLabelsCommandOutput
+  | GetListElementsCommandOutput
+  | GetListsMetadataCommandOutput
   | GetModelVersionCommandOutput
   | GetModelsCommandOutput
   | GetOutcomesCommandOutput
   | GetRulesCommandOutput
   | GetVariablesCommandOutput
+  | ListEventPredictionsCommandOutput
   | ListTagsForResourceCommandOutput
   | PutDetectorCommandOutput
   | PutEntityTypeCommandOutput
@@ -309,6 +382,7 @@ export type ServiceOutputTypes =
   | UpdateDetectorVersionMetadataCommandOutput
   | UpdateDetectorVersionStatusCommandOutput
   | UpdateEventLabelCommandOutput
+  | UpdateListCommandOutput
   | UpdateModelCommandOutput
   | UpdateModelVersionCommandOutput
   | UpdateModelVersionStatusCommandOutput
@@ -316,18 +390,21 @@ export type ServiceOutputTypes =
   | UpdateRuleVersionCommandOutput
   | UpdateVariableCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -339,7 +416,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -378,25 +455,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -409,58 +477,107 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type FraudDetectorClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of FraudDetectorClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type FraudDetectorClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of FraudDetectorClient class constructor that set the region, credentials and other options.
  */
 export interface FraudDetectorClientConfig extends FraudDetectorClientConfigType {}
 
-type FraudDetectorClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of FraudDetectorClient class. This is resolved and normalized from the {@link FraudDetectorClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type FraudDetectorClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of FraudDetectorClient class. This is resolved and normalized from the {@link FraudDetectorClientConfig | constructor configuration interface}.
  */
 export interface FraudDetectorClientResolvedConfig extends FraudDetectorClientResolvedConfigType {}
 
@@ -468,6 +585,14 @@ export interface FraudDetectorClientResolvedConfig extends FraudDetectorClientRe
  * <p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need
  *             detailed information about Amazon Fraud Detector API actions, data types, and errors. For
  *             more information about Amazon Fraud Detector features, see the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/">Amazon Fraud Detector User Guide</a>.</p>
+ *          <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p>
+ *          <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries,
+ *             sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over
+ *             HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and
+ *             handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, go to <a href="https://aws.amazon.com/developer/tools/">Tools to build on AWS</a> page,
+ *             scroll down to the <b>SDK</b> section, and choose plus (+) sign to expand the section.
+ *             </p>
+ * @public
  */
 export class FraudDetectorClient extends __Client<
   __HttpHandlerOptions,
@@ -480,22 +605,36 @@ export class FraudDetectorClient extends __Client<
    */
   readonly config: FraudDetectorClientResolvedConfig;
 
-  constructor(configuration: FraudDetectorClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<FraudDetectorClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultFraudDetectorHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: FraudDetectorClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

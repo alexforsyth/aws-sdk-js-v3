@@ -1,547 +1,478 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { CloudHSMV2Client } from "./CloudHSMV2Client";
 import {
+  type CopyBackupToRegionCommandInput,
+  type CopyBackupToRegionCommandOutput,
   CopyBackupToRegionCommand,
-  CopyBackupToRegionCommandInput,
-  CopyBackupToRegionCommandOutput,
 } from "./commands/CopyBackupToRegionCommand";
 import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
   CreateClusterCommand,
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
 } from "./commands/CreateClusterCommand";
-import { CreateHsmCommand, CreateHsmCommandInput, CreateHsmCommandOutput } from "./commands/CreateHsmCommand";
+import { type CreateHsmCommandInput, type CreateHsmCommandOutput, CreateHsmCommand } from "./commands/CreateHsmCommand";
 import {
+  type DeleteBackupCommandInput,
+  type DeleteBackupCommandOutput,
   DeleteBackupCommand,
-  DeleteBackupCommandInput,
-  DeleteBackupCommandOutput,
 } from "./commands/DeleteBackupCommand";
 import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
   DeleteClusterCommand,
-  DeleteClusterCommandInput,
-  DeleteClusterCommandOutput,
 } from "./commands/DeleteClusterCommand";
-import { DeleteHsmCommand, DeleteHsmCommandInput, DeleteHsmCommandOutput } from "./commands/DeleteHsmCommand";
+import { type DeleteHsmCommandInput, type DeleteHsmCommandOutput, DeleteHsmCommand } from "./commands/DeleteHsmCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DescribeBackupsCommandInput,
+  type DescribeBackupsCommandOutput,
   DescribeBackupsCommand,
-  DescribeBackupsCommandInput,
-  DescribeBackupsCommandOutput,
 } from "./commands/DescribeBackupsCommand";
 import {
+  type DescribeClustersCommandInput,
+  type DescribeClustersCommandOutput,
   DescribeClustersCommand,
-  DescribeClustersCommandInput,
-  DescribeClustersCommandOutput,
 } from "./commands/DescribeClustersCommand";
 import {
-  InitializeClusterCommand,
-  InitializeClusterCommandInput,
-  InitializeClusterCommandOutput,
-} from "./commands/InitializeClusterCommand";
-import { ListTagsCommand, ListTagsCommandInput, ListTagsCommandOutput } from "./commands/ListTagsCommand";
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
 import {
+  type InitializeClusterCommandInput,
+  type InitializeClusterCommandOutput,
+  InitializeClusterCommand,
+} from "./commands/InitializeClusterCommand";
+import { type ListTagsCommandInput, type ListTagsCommandOutput, ListTagsCommand } from "./commands/ListTagsCommand";
+import {
+  type ModifyBackupAttributesCommandInput,
+  type ModifyBackupAttributesCommandOutput,
   ModifyBackupAttributesCommand,
-  ModifyBackupAttributesCommandInput,
-  ModifyBackupAttributesCommandOutput,
 } from "./commands/ModifyBackupAttributesCommand";
 import {
+  type ModifyClusterCommandInput,
+  type ModifyClusterCommandOutput,
   ModifyClusterCommand,
-  ModifyClusterCommandInput,
-  ModifyClusterCommandOutput,
 } from "./commands/ModifyClusterCommand";
 import {
-  RestoreBackupCommand,
-  RestoreBackupCommandInput,
-  RestoreBackupCommandOutput,
-} from "./commands/RestoreBackupCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
 import {
+  type RestoreBackupCommandInput,
+  type RestoreBackupCommandOutput,
+  RestoreBackupCommand,
+} from "./commands/RestoreBackupCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import { paginateDescribeBackups } from "./pagination/DescribeBackupsPaginator";
+import { paginateDescribeClusters } from "./pagination/DescribeClustersPaginator";
+import { paginateListTags } from "./pagination/ListTagsPaginator";
+
+const commands = {
+  CopyBackupToRegionCommand,
+  CreateClusterCommand,
+  CreateHsmCommand,
+  DeleteBackupCommand,
+  DeleteClusterCommand,
+  DeleteHsmCommand,
+  DeleteResourcePolicyCommand,
+  DescribeBackupsCommand,
+  DescribeClustersCommand,
+  GetResourcePolicyCommand,
+  InitializeClusterCommand,
+  ListTagsCommand,
+  ModifyBackupAttributesCommand,
+  ModifyClusterCommand,
+  PutResourcePolicyCommand,
+  RestoreBackupCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateDescribeBackups,
+  paginateDescribeClusters,
+  paginateListTags,
+};
 
 /**
- * <p>For more information about AWS CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS
- *       CloudHSM User Guide</a>.</p>
+ * @public
  */
-export class CloudHSMV2 extends CloudHSMV2Client {
+export interface CloudHSMV2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CloudHSMV2 {
   /**
-   * <p>Copy an AWS CloudHSM cluster backup to a different region.</p>
+   * @see {@link CopyBackupToRegionCommand}
    */
-  public copyBackupToRegion(
+  copyBackupToRegion(
     args: CopyBackupToRegionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<CopyBackupToRegionCommandOutput>;
-  public copyBackupToRegion(
+  copyBackupToRegion(
     args: CopyBackupToRegionCommandInput,
     cb: (err: any, data?: CopyBackupToRegionCommandOutput) => void
   ): void;
-  public copyBackupToRegion(
+  copyBackupToRegion(
     args: CopyBackupToRegionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: CopyBackupToRegionCommandOutput) => void
   ): void;
-  public copyBackupToRegion(
-    args: CopyBackupToRegionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CopyBackupToRegionCommandOutput) => void),
-    cb?: (err: any, data?: CopyBackupToRegionCommandOutput) => void
-  ): Promise<CopyBackupToRegionCommandOutput> | void {
-    const command = new CopyBackupToRegionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new AWS CloudHSM cluster.</p>
+   * @see {@link CreateClusterCommand}
    */
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<CreateClusterCommandOutput>;
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
     cb: (err: any, data?: CreateClusterCommandOutput) => void
   ): void;
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: CreateClusterCommandOutput) => void
   ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateClusterCommandOutput) => void
-  ): Promise<CreateClusterCommandOutput> | void {
-    const command = new CreateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new hardware security module (HSM) in the specified AWS CloudHSM
-   *       cluster.</p>
+   * @see {@link CreateHsmCommand}
    */
-  public createHsm(args: CreateHsmCommandInput, options?: __HttpHandlerOptions): Promise<CreateHsmCommandOutput>;
-  public createHsm(args: CreateHsmCommandInput, cb: (err: any, data?: CreateHsmCommandOutput) => void): void;
-  public createHsm(
+  createHsm(
     args: CreateHsmCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<CreateHsmCommandOutput>;
+  createHsm(
+    args: CreateHsmCommandInput,
     cb: (err: any, data?: CreateHsmCommandOutput) => void
   ): void;
-  public createHsm(
+  createHsm(
     args: CreateHsmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateHsmCommandOutput) => void),
-    cb?: (err: any, data?: CreateHsmCommandOutput) => void
-  ): Promise<CreateHsmCommandOutput> | void {
-    const command = new CreateHsmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: CreateHsmCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days
-   *             after the DeleteBackup request is made. For more information on restoring a backup, see
-   *                 <a>RestoreBackup</a>.</p>
+   * @see {@link DeleteBackupCommand}
    */
-  public deleteBackup(
+  deleteBackup(
     args: DeleteBackupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<DeleteBackupCommandOutput>;
-  public deleteBackup(args: DeleteBackupCommandInput, cb: (err: any, data?: DeleteBackupCommandOutput) => void): void;
-  public deleteBackup(
+  deleteBackup(
     args: DeleteBackupCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteBackupCommandOutput) => void
   ): void;
-  public deleteBackup(
+  deleteBackup(
     args: DeleteBackupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBackupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBackupCommandOutput) => void
-  ): Promise<DeleteBackupCommandOutput> | void {
-    const command = new DeleteBackupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: DeleteBackupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must
-   *       delete all HSMs in the cluster. To see if the cluster contains any HSMs, use <a>DescribeClusters</a>. To delete an HSM, use <a>DeleteHsm</a>.</p>
+   * @see {@link DeleteClusterCommand}
    */
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<DeleteClusterCommandOutput>;
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
     cb: (err: any, data?: DeleteClusterCommandOutput) => void
   ): void;
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: DeleteClusterCommandOutput) => void
   ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): Promise<DeleteClusterCommandOutput> | void {
-    const command = new DeleteClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP
-   *       address of the HSM's elastic network interface (ENI), or the ID of the HSM's ENI. You need to
-   *       specify only one of these values. To find these values, use <a>DescribeClusters</a>.</p>
+   * @see {@link DeleteHsmCommand}
    */
-  public deleteHsm(args: DeleteHsmCommandInput, options?: __HttpHandlerOptions): Promise<DeleteHsmCommandOutput>;
-  public deleteHsm(args: DeleteHsmCommandInput, cb: (err: any, data?: DeleteHsmCommandOutput) => void): void;
-  public deleteHsm(
+  deleteHsm(
     args: DeleteHsmCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<DeleteHsmCommandOutput>;
+  deleteHsm(
+    args: DeleteHsmCommandInput,
     cb: (err: any, data?: DeleteHsmCommandOutput) => void
   ): void;
-  public deleteHsm(
+  deleteHsm(
     args: DeleteHsmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteHsmCommandOutput) => void),
-    cb?: (err: any, data?: DeleteHsmCommandOutput) => void
-  ): Promise<DeleteHsmCommandOutput> | void {
-    const command = new DeleteHsmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: DeleteHsmCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about backups of AWS CloudHSM clusters.</p>
-   *          <p>This is a paginated operation, which means that each response might contain only a
-   *       subset of all the backups. When the response contains only a subset of backups, it includes a
-   *         <code>NextToken</code> value. Use this value in a subsequent <code>DescribeBackups</code>
-   *       request to get more backups. When you receive a response with no <code>NextToken</code> (or an
-   *       empty or null value), that means there are no more backups to get.</p>
+   * @see {@link DeleteResourcePolicyCommand}
    */
-  public describeBackups(
+  deleteResourcePolicy(): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBackupsCommand}
+   */
+  describeBackups(): Promise<DescribeBackupsCommandOutput>;
+  describeBackups(
     args: DescribeBackupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<DescribeBackupsCommandOutput>;
-  public describeBackups(
+  describeBackups(
     args: DescribeBackupsCommandInput,
     cb: (err: any, data?: DescribeBackupsCommandOutput) => void
   ): void;
-  public describeBackups(
+  describeBackups(
     args: DescribeBackupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: DescribeBackupsCommandOutput) => void
   ): void;
-  public describeBackups(
-    args: DescribeBackupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBackupsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBackupsCommandOutput) => void
-  ): Promise<DescribeBackupsCommandOutput> | void {
-    const command = new DescribeBackupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about AWS CloudHSM clusters.</p>
-   *          <p>This is a paginated operation, which means that each response might contain only a
-   *       subset of all the clusters. When the response contains only a subset of clusters, it includes
-   *       a <code>NextToken</code> value. Use this value in a subsequent <code>DescribeClusters</code>
-   *       request to get more clusters. When you receive a response with no <code>NextToken</code> (or
-   *       an empty or null value), that means there are no more clusters to get.</p>
+   * @see {@link DescribeClustersCommand}
    */
-  public describeClusters(
+  describeClusters(): Promise<DescribeClustersCommandOutput>;
+  describeClusters(
     args: DescribeClustersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<DescribeClustersCommandOutput>;
-  public describeClusters(
+  describeClusters(
     args: DescribeClustersCommandInput,
     cb: (err: any, data?: DescribeClustersCommandOutput) => void
   ): void;
-  public describeClusters(
+  describeClusters(
     args: DescribeClustersCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: DescribeClustersCommandOutput) => void
   ): void;
-  public describeClusters(
-    args: DescribeClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClustersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClustersCommandOutput) => void
-  ): Promise<DescribeClustersCommandOutput> | void {
-    const command = new DescribeClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your
-   *       issuing certificate authority (CA) and the CA's root certificate. Before you can claim a
-   *       cluster, you must sign the cluster's certificate signing request (CSR) with your issuing CA.
-   *       To get the cluster's CSR, use <a>DescribeClusters</a>.</p>
+   * @see {@link GetResourcePolicyCommand}
    */
-  public initializeCluster(
+  getResourcePolicy(): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InitializeClusterCommand}
+   */
+  initializeCluster(
     args: InitializeClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<InitializeClusterCommandOutput>;
-  public initializeCluster(
+  initializeCluster(
     args: InitializeClusterCommandInput,
     cb: (err: any, data?: InitializeClusterCommandOutput) => void
   ): void;
-  public initializeCluster(
+  initializeCluster(
     args: InitializeClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: InitializeClusterCommandOutput) => void
   ): void;
-  public initializeCluster(
-    args: InitializeClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InitializeClusterCommandOutput) => void),
-    cb?: (err: any, data?: InitializeClusterCommandOutput) => void
-  ): Promise<InitializeClusterCommandOutput> | void {
-    const command = new InitializeClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of tags for the specified AWS CloudHSM cluster.</p>
-   *          <p>This is a paginated operation, which means that each response might contain only a
-   *       subset of all the tags. When the response contains only a subset of tags, it includes a
-   *       <code>NextToken</code> value. Use this value in a subsequent <code>ListTags</code> request to
-   *       get more tags. When you receive a response with no <code>NextToken</code> (or an empty or null
-   *       value), that means there are no more tags to get.</p>
+   * @see {@link ListTagsCommand}
    */
-  public listTags(args: ListTagsCommandInput, options?: __HttpHandlerOptions): Promise<ListTagsCommandOutput>;
-  public listTags(args: ListTagsCommandInput, cb: (err: any, data?: ListTagsCommandOutput) => void): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<ListTagsCommandOutput>;
+  listTags(
+    args: ListTagsCommandInput,
     cb: (err: any, data?: ListTagsCommandOutput) => void
   ): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsCommandOutput) => void
-  ): Promise<ListTagsCommandOutput> | void {
-    const command = new ListTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: ListTagsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Modifies attributes for AWS CloudHSM backup.</p>
+   * @see {@link ModifyBackupAttributesCommand}
    */
-  public modifyBackupAttributes(
+  modifyBackupAttributes(
     args: ModifyBackupAttributesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<ModifyBackupAttributesCommandOutput>;
-  public modifyBackupAttributes(
+  modifyBackupAttributes(
     args: ModifyBackupAttributesCommandInput,
     cb: (err: any, data?: ModifyBackupAttributesCommandOutput) => void
   ): void;
-  public modifyBackupAttributes(
+  modifyBackupAttributes(
     args: ModifyBackupAttributesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: ModifyBackupAttributesCommandOutput) => void
   ): void;
-  public modifyBackupAttributes(
-    args: ModifyBackupAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyBackupAttributesCommandOutput) => void),
-    cb?: (err: any, data?: ModifyBackupAttributesCommandOutput) => void
-  ): Promise<ModifyBackupAttributesCommandOutput> | void {
-    const command = new ModifyBackupAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies AWS CloudHSM cluster.</p>
+   * @see {@link ModifyClusterCommand}
    */
-  public modifyCluster(
+  modifyCluster(
     args: ModifyClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<ModifyClusterCommandOutput>;
-  public modifyCluster(
+  modifyCluster(
     args: ModifyClusterCommandInput,
     cb: (err: any, data?: ModifyClusterCommandOutput) => void
   ): void;
-  public modifyCluster(
+  modifyCluster(
     args: ModifyClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: ModifyClusterCommandOutput) => void
   ): void;
-  public modifyCluster(
-    args: ModifyClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyClusterCommandOutput) => void),
-    cb?: (err: any, data?: ModifyClusterCommandOutput) => void
-  ): Promise<ModifyClusterCommandOutput> | void {
-    const command = new ModifyClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Restores a specified AWS CloudHSM backup that is in the
-   *                 <code>PENDING_DELETION</code> state. For mor information on deleting a backup, see
-   *                 <a>DeleteBackup</a>.</p>
+   * @see {@link PutResourcePolicyCommand}
    */
-  public restoreBackup(
+  putResourcePolicy(): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreBackupCommand}
+   */
+  restoreBackup(
     args: RestoreBackupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<RestoreBackupCommandOutput>;
-  public restoreBackup(
+  restoreBackup(
     args: RestoreBackupCommandInput,
     cb: (err: any, data?: RestoreBackupCommandOutput) => void
   ): void;
-  public restoreBackup(
+  restoreBackup(
     args: RestoreBackupCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: RestoreBackupCommandOutput) => void
   ): void;
-  public restoreBackup(
-    args: RestoreBackupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RestoreBackupCommandOutput) => void),
-    cb?: (err: any, data?: RestoreBackupCommandOutput) => void
-  ): Promise<RestoreBackupCommandOutput> | void {
-    const command = new RestoreBackupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudHSMV2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudHSMV2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tag or tags from the specified AWS CloudHSM cluster.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudHSMV2RequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudHSMV2RequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link DescribeBackupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeBackupsCommandOutput}.
+   */
+  paginateDescribeBackups(
+    args?: DescribeBackupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeBackupsCommandOutput>;
+
+  /**
+   * @see {@link DescribeClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeClustersCommandOutput}.
+   */
+  paginateDescribeClusters(
+    args?: DescribeClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeClustersCommandOutput>;
+
+  /**
+   * @see {@link ListTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsCommandOutput}.
+   */
+  paginateListTags(
+    args: ListTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsCommandOutput>;
 }
+
+/**
+ * <p>For more information about CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">CloudHSM</a> and the <a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/">
+ *       CloudHSM User Guide</a>.</p>
+ * @public
+ */
+export class CloudHSMV2 extends CloudHSMV2Client implements CloudHSMV2 {}
+createAggregatedClient(commands, CloudHSMV2, { paginators });

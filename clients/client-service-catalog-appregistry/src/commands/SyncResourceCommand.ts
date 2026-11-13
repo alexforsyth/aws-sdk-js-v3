@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SyncResourceRequest, SyncResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SyncResourceCommand,
-  serializeAws_restJson1SyncResourceCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceCatalogAppRegistryClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ServiceCatalogAppRegistryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SyncResourceRequest, SyncResourceResponse } from "../models/models_0";
+import { SyncResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SyncResourceCommand}.
+ */
 export interface SyncResourceCommandInput extends SyncResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SyncResourceCommand}.
+ */
 export interface SyncResourceCommandOutput extends SyncResourceResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +30,70 @@ export interface SyncResourceCommandOutput extends SyncResourceResponse, __Metad
  * ```javascript
  * import { ServiceCatalogAppRegistryClient, SyncResourceCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
  * // const { ServiceCatalogAppRegistryClient, SyncResourceCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * // import type { ServiceCatalogAppRegistryClientConfig } from "@aws-sdk/client-service-catalog-appregistry";
+ * const config = {}; // type is ServiceCatalogAppRegistryClientConfig
  * const client = new ServiceCatalogAppRegistryClient(config);
+ * const input = { // SyncResourceRequest
+ *   resourceType: "CFN_STACK" || "RESOURCE_TAG_VALUE", // required
+ *   resource: "STRING_VALUE", // required
+ * };
  * const command = new SyncResourceCommand(input);
  * const response = await client.send(command);
+ * // { // SyncResourceResponse
+ * //   applicationArn: "STRING_VALUE",
+ * //   resourceArn: "STRING_VALUE",
+ * //   actionTaken: "START_SYNC" || "NO_ACTION",
+ * // };
+ *
  * ```
  *
+ * @param SyncResourceCommandInput - {@link SyncResourceCommandInput}
+ * @returns {@link SyncResourceCommandOutput}
  * @see {@link SyncResourceCommandInput} for command's `input` shape.
  * @see {@link SyncResourceCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for ServiceCatalogAppRegistryClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when processing the request (for example, a resource with the given
+ *       name already exists within the account).</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service is experiencing internal problems.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>
+ *       The maximum number
+ *       of API requests
+ *       has been exceeded.
+ *     </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has invalid or missing parameters.</p>
+ *
+ * @throws {@link ServiceCatalogAppRegistryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalogAppRegistry service.</p>
+ *
+ *
+ * @public
  */
-export class SyncResourceCommand extends $Command<
-  SyncResourceCommandInput,
-  SyncResourceCommandOutput,
-  ServiceCatalogAppRegistryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SyncResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogAppRegistryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SyncResourceCommandInput, SyncResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogAppRegistryClient";
-    const commandName = "SyncResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SyncResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SyncResourceResponse.filterSensitiveLog,
+export class SyncResourceCommand extends command<SyncResourceCommandInput, SyncResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "SyncResource",
+  SyncResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SyncResourceRequest;
+      output: SyncResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SyncResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SyncResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SyncResourceCommandOutput> {
-    return deserializeAws_restJson1SyncResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SyncResourceCommandInput;
+      output: SyncResourceCommandOutput;
+    };
+  };
 }

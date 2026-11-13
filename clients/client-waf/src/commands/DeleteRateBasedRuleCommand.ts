@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteRateBasedRuleRequest, DeleteRateBasedRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRateBasedRuleCommand,
-  serializeAws_json1_1DeleteRateBasedRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRateBasedRuleRequest, DeleteRateBasedRuleResponse } from "../models/models_0";
+import { DeleteRateBasedRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRateBasedRuleCommand}.
+ */
 export interface DeleteRateBasedRuleCommandInput extends DeleteRateBasedRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRateBasedRuleCommand}.
+ */
 export interface DeleteRateBasedRuleCommandOutput extends DeleteRateBasedRuleResponse, __MetadataBearer {}
 
 /**
@@ -55,68 +56,95 @@ export interface DeleteRateBasedRuleCommandOutput extends DeleteRateBasedRuleRes
  * ```javascript
  * import { WAFClient, DeleteRateBasedRuleCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, DeleteRateBasedRuleCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // DeleteRateBasedRuleRequest
+ *   RuleId: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRateBasedRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRateBasedRuleResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteRateBasedRuleCommandInput - {@link DeleteRateBasedRuleCommandInput}
+ * @returns {@link DeleteRateBasedRuleCommandOutput}
  * @see {@link DeleteRateBasedRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteRateBasedRuleCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonEmptyEntityException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that isn't empty. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>WebACL</code> that still contains one or more <code>Rule</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that still contains one or more <code>ByteMatchSet</code> objects
+ * 				or other predicates.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that contains one or more <code>ByteMatchTuple</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete an <code>IPSet</code> that references one or more IP addresses.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFReferencedItemException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that is still in use. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that is still referenced by a <code>Rule</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that is still referenced by a <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFTagOperationException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFTagOperationInternalErrorException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRateBasedRuleCommand extends $Command<
-  DeleteRateBasedRuleCommandInput,
-  DeleteRateBasedRuleCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRateBasedRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRateBasedRuleCommandInput, DeleteRateBasedRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "DeleteRateBasedRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRateBasedRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRateBasedRuleResponse.filterSensitiveLog,
+export class DeleteRateBasedRuleCommand extends command<DeleteRateBasedRuleCommandInput, DeleteRateBasedRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRateBasedRule",
+  DeleteRateBasedRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRateBasedRuleRequest;
+      output: DeleteRateBasedRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRateBasedRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRateBasedRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRateBasedRuleCommandOutput> {
-    return deserializeAws_json1_1DeleteRateBasedRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRateBasedRuleCommandInput;
+      output: DeleteRateBasedRuleCommandOutput;
+    };
+  };
 }

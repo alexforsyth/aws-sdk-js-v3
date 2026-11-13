@@ -1,60 +1,97 @@
-import {
-  ExpectedAttributeValue,
-  ItemCollectionMetrics,
-  PutItemCommand as __PutItemCommand,
-  PutItemCommandInput as __PutItemCommandInput,
-  PutItemCommandOutput as __PutItemCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
-import { marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
+import { ALL_MEMBERS, ALL_VALUES, SELF } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { PutItemCommand as __PutItemCommand } from "@aws-sdk/client-dynamodb";
 
-export type PutCommandInput = Omit<__PutItemCommandInput, "Item" | "Expected" | "ExpressionAttributeValues"> & {
-  Item: { [key: string]: NativeAttributeValue } | undefined;
-  Expected?: {
-    [key: string]: Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
-      Value?: NativeAttributeValue;
-      AttributeValueList?: NativeAttributeValue[];
-    };
-  };
-  ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type PutExpectedAttributeValue = Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
+  Value?: NativeAttributeValue | undefined;
+  AttributeValueList?: NativeAttributeValue[] | undefined;
 };
 
+/**
+ * @public
+ */
+export type PutItemCollectionMetrics = Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
+  ItemCollectionKey?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type PutCommandInput = Omit<__PutItemCommandInput, "Item" | "Expected" | "ExpressionAttributeValues"> & {
+  Item: Record<string, NativeAttributeValue> | undefined;
+  Expected?: Record<
+    string,
+    PutExpectedAttributeValue
+  > | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
 export type PutCommandOutput = Omit<__PutItemCommandOutput, "Attributes" | "ItemCollectionMetrics"> & {
-  Attributes?: { [key: string]: NativeAttributeValue };
-  ItemCollectionMetrics?: Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
-    ItemCollectionKey?: { [key: string]: NativeAttributeValue };
-  };
+  Attributes?: Record<string, NativeAttributeValue> | undefined;
+  ItemCollectionMetrics?: PutItemCollectionMetrics | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * PutItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * PutItemCommand operation from {@link @aws-sdk/client-dynamodb#PutItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
-export class PutCommand extends $Command<PutCommandInput, PutCommandOutput, DynamoDBDocumentClientResolvedConfig> {
-  private readonly inputKeyNodes = [
-    { key: "Item" },
-    {
-      key: "Expected",
-      children: {
-        children: [{ key: "Value" }, { key: "AttributeValueList" }],
+export class PutCommand extends DynamoDBDocumentClientCommand<
+  PutCommandInput,
+  PutCommandOutput,
+  __PutItemCommandInput,
+  __PutItemCommandOutput,
+  DynamoDBDocumentClientResolvedConfig
+> {
+  protected readonly inputKeyNodes = {
+    Item: ALL_VALUES, // map with AttributeValue
+    Expected: {
+      "*": {
+        Value: SELF,
+        AttributeValueList: ALL_MEMBERS, // set/list of AttributeValue
       },
     },
-    { key: "ExpressionAttributeValues" },
-  ];
-  private readonly outputKeyNodes = [
-    { key: "Attributes" },
-    { key: "ItemCollectionMetrics", children: [{ key: "ItemCollectionKey" }] },
-  ];
+    ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Attributes: ALL_VALUES, // map with AttributeValue
+    ItemCollectionMetrics: {
+      ItemCollectionKey: ALL_VALUES, // map with AttributeValue
+    },
+  };
+
+  protected readonly clientCommand: __PutItemCommand;
+  public readonly middlewareStack: MiddlewareStack<PutCommandInput | __PutItemCommandInput,
+  PutCommandOutput | __PutItemCommandOutput>;
 
   constructor(readonly input: PutCommandInput) {
     super();
+    this.clientCommand = new __PutItemCommand(this.input as any);
+    this.middlewareStack = this.clientCommand.middlewareStack;
   }
 
   /**
@@ -65,16 +102,20 @@ export class PutCommand extends $Command<PutCommandInput, PutCommandOutput, Dyna
     configuration: DynamoDBDocumentClientResolvedConfig,
     options?: __HttpHandlerOptions
   ): Handler<PutCommandInput, PutCommandOutput> {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
-    const command = new __PutItemCommand(marshallInput(this.input, this.inputKeyNodes, marshallOptions));
-    const handler = command.resolveMiddleware(clientStack, configuration, options);
+    this.addMarshallingMiddleware(configuration);
+    const stack = clientStack.concat(this.middlewareStack as typeof clientStack);
+    const handler = this.clientCommand.resolveMiddleware(stack, configuration, options);
 
-    return async () => {
-      const data = await handler(command);
-      return {
-        ...data,
-        output: unmarshallOutput(data.output, this.outputKeyNodes, unmarshallOptions),
-      };
-    };
+    return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  ExpectedAttributeValue,
+  ItemCollectionMetrics,
+  PutItemCommandInput as __PutItemCommandInput,
+  PutItemCommandOutput as __PutItemCommandOutput,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

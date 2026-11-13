@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { GetDomainNamesRequest, GetDomainNamesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDomainNamesCommand,
-  serializeAws_restJson1GetDomainNamesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDomainNamesRequest, GetDomainNamesResponse } from "../models/models_0";
+import { GetDomainNames$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDomainNamesCommand}.
+ */
 export interface GetDomainNamesCommandInput extends GetDomainNamesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDomainNamesCommand}.
+ */
 export interface GetDomainNamesCommandOutput extends GetDomainNamesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,90 @@ export interface GetDomainNamesCommandOutput extends GetDomainNamesResponse, __M
  * ```javascript
  * import { ApiGatewayV2Client, GetDomainNamesCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, GetDomainNamesCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // GetDomainNamesRequest
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetDomainNamesCommand(input);
  * const response = await client.send(command);
+ * // { // GetDomainNamesResponse
+ * //   Items: [ // __listOfDomainName
+ * //     { // DomainName
+ * //       ApiMappingSelectionExpression: "STRING_VALUE",
+ * //       DomainName: "STRING_VALUE", // required
+ * //       DomainNameArn: "STRING_VALUE",
+ * //       DomainNameConfigurations: [ // DomainNameConfigurations
+ * //         { // DomainNameConfiguration
+ * //           ApiGatewayDomainName: "STRING_VALUE",
+ * //           CertificateArn: "STRING_VALUE",
+ * //           CertificateName: "STRING_VALUE",
+ * //           CertificateUploadDate: new Date("TIMESTAMP"),
+ * //           DomainNameStatus: "AVAILABLE" || "UPDATING" || "PENDING_CERTIFICATE_REIMPORT" || "PENDING_OWNERSHIP_VERIFICATION",
+ * //           DomainNameStatusMessage: "STRING_VALUE",
+ * //           EndpointType: "REGIONAL" || "EDGE",
+ * //           HostedZoneId: "STRING_VALUE",
+ * //           IpAddressType: "ipv4" || "dualstack",
+ * //           SecurityPolicy: "TLS_1_0" || "TLS_1_2",
+ * //           OwnershipVerificationCertificateArn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       MutualTlsAuthentication: { // MutualTlsAuthentication
+ * //         TruststoreUri: "STRING_VALUE",
+ * //         TruststoreVersion: "STRING_VALUE",
+ * //         TruststoreWarnings: [ // __listOf__string
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       RoutingMode: "API_MAPPING_ONLY" || "ROUTING_RULE_ONLY" || "ROUTING_RULE_THEN_API_MAPPING",
+ * //       Tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDomainNamesCommandInput - {@link GetDomainNamesCommandInput}
+ * @returns {@link GetDomainNamesCommandOutput}
  * @see {@link GetDomainNamesCommandInput} for command's `input` shape.
  * @see {@link GetDomainNamesCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetDomainNamesCommand extends $Command<
-  GetDomainNamesCommandInput,
-  GetDomainNamesCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDomainNamesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDomainNamesCommandInput, GetDomainNamesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "GetDomainNamesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDomainNamesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDomainNamesResponse.filterSensitiveLog,
+export class GetDomainNamesCommand extends command<GetDomainNamesCommandInput, GetDomainNamesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDomainNames",
+  GetDomainNames$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDomainNamesRequest;
+      output: GetDomainNamesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDomainNamesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDomainNamesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDomainNamesCommandOutput> {
-    return deserializeAws_restJson1GetDomainNamesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDomainNamesCommandInput;
+      output: GetDomainNamesCommandOutput;
+    };
+  };
 }

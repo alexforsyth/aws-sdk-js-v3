@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { DeleteBlueprintRequest, DeleteBlueprintResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteBlueprintCommand,
-  serializeAws_json1_1DeleteBlueprintCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteBlueprintRequest, DeleteBlueprintResponse } from "../models/models_1";
+import { DeleteBlueprint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteBlueprintCommand}.
+ */
 export interface DeleteBlueprintCommandInput extends DeleteBlueprintRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteBlueprintCommand}.
+ */
 export interface DeleteBlueprintCommandOutput extends DeleteBlueprintResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,56 @@ export interface DeleteBlueprintCommandOutput extends DeleteBlueprintResponse, _
  * ```javascript
  * import { GlueClient, DeleteBlueprintCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, DeleteBlueprintCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // DeleteBlueprintRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteBlueprintCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteBlueprintResponse
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteBlueprintCommandInput - {@link DeleteBlueprintCommandInput}
+ * @returns {@link DeleteBlueprintCommandOutput}
  * @see {@link DeleteBlueprintCommandInput} for command's `input` shape.
  * @see {@link DeleteBlueprintCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteBlueprintCommand extends $Command<
-  DeleteBlueprintCommandInput,
-  DeleteBlueprintCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteBlueprintCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteBlueprintCommandInput, DeleteBlueprintCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "DeleteBlueprintCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteBlueprintRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteBlueprintResponse.filterSensitiveLog,
+export class DeleteBlueprintCommand extends command<DeleteBlueprintCommandInput, DeleteBlueprintCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteBlueprint",
+  DeleteBlueprint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBlueprintRequest;
+      output: DeleteBlueprintResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteBlueprintCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteBlueprintCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteBlueprintCommandOutput> {
-    return deserializeAws_json1_1DeleteBlueprintCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteBlueprintCommandInput;
+      output: DeleteBlueprintCommandOutput;
+    };
+  };
 }

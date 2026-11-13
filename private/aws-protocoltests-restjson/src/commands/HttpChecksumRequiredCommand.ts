@@ -1,25 +1,34 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import { getApplyMd5BodyChecksumPlugin } from "@smithy/middleware-apply-body-checksum";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HttpChecksumRequiredInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1HttpChecksumRequiredCommand,
-  serializeAws_restJson1HttpChecksumRequiredCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { HttpChecksumRequiredInputOutput } from "../models/models_0";
+import { de_HttpChecksumRequiredCommand, se_HttpChecksumRequiredCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HttpChecksumRequiredCommand}.
+ */
 export interface HttpChecksumRequiredCommandInput extends HttpChecksumRequiredInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link HttpChecksumRequiredCommand}.
+ */
 export interface HttpChecksumRequiredCommandOutput extends HttpChecksumRequiredInputOutput, __MetadataBearer {}
 
 /**
@@ -29,69 +38,63 @@ export interface HttpChecksumRequiredCommandOutput extends HttpChecksumRequiredI
  * ```javascript
  * import { RestJsonProtocolClient, HttpChecksumRequiredCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, HttpChecksumRequiredCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // HttpChecksumRequiredInputOutput
+ *   foo: "STRING_VALUE",
+ * };
  * const command = new HttpChecksumRequiredCommand(input);
  * const response = await client.send(command);
+ * // { // HttpChecksumRequiredInputOutput
+ * //   foo: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param HttpChecksumRequiredCommandInput - {@link HttpChecksumRequiredCommandInput}
+ * @returns {@link HttpChecksumRequiredCommandOutput}
  * @see {@link HttpChecksumRequiredCommandInput} for command's `input` shape.
  * @see {@link HttpChecksumRequiredCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class HttpChecksumRequiredCommand extends $Command<
-  HttpChecksumRequiredCommandInput,
-  HttpChecksumRequiredCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HttpChecksumRequiredCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HttpChecksumRequiredCommandInput, HttpChecksumRequiredCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "HttpChecksumRequiredCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: HttpChecksumRequiredInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: HttpChecksumRequiredInputOutput.filterSensitiveLog,
+export class HttpChecksumRequiredCommand extends $Command
+  .classBuilder<
+    HttpChecksumRequiredCommandInput,
+    HttpChecksumRequiredCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+      getApplyMd5BodyChecksumPlugin(config),
+    ];
+  })
+  .s("RestJson", "HttpChecksumRequired", {})
+  .n("RestJsonProtocolClient", "HttpChecksumRequiredCommand")
+  .f(void 0, void 0)
+  .ser(se_HttpChecksumRequiredCommand)
+  .de(de_HttpChecksumRequiredCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HttpChecksumRequiredInputOutput;
+      output: HttpChecksumRequiredInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: HttpChecksumRequiredCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1HttpChecksumRequiredCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<HttpChecksumRequiredCommandOutput> {
-    return deserializeAws_restJson1HttpChecksumRequiredCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HttpChecksumRequiredCommandInput;
+      output: HttpChecksumRequiredCommandOutput;
+    };
+  };
 }

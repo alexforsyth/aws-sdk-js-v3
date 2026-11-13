@@ -1,0 +1,133 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateProfileRequest, ProfileDetailResponse } from "../models/models_0";
+import { CreateProfile$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateProfileCommand}.
+ */
+export interface CreateProfileCommandInput extends CreateProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateProfileCommand}.
+ */
+export interface CreateProfileCommandOutput extends ProfileDetailResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RolesAnywhereClient, CreateProfileCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
+ * // const { RolesAnywhereClient, CreateProfileCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
+ * const client = new RolesAnywhereClient(config);
+ * const input = { // CreateProfileRequest
+ *   name: "STRING_VALUE", // required
+ *   requireInstanceProperties: true || false,
+ *   sessionPolicy: "STRING_VALUE",
+ *   roleArns: [ // RoleArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   managedPolicyArns: [ // ManagedPolicyList
+ *     "STRING_VALUE",
+ *   ],
+ *   durationSeconds: Number("int"),
+ *   enabled: true || false,
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   acceptRoleSessionName: true || false,
+ *   aliasName: "STRING_VALUE",
+ * };
+ * const command = new CreateProfileCommand(input);
+ * const response = await client.send(command);
+ * // { // ProfileDetailResponse
+ * //   profile: { // ProfileDetail
+ * //     profileId: "STRING_VALUE",
+ * //     profileArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     requireInstanceProperties: true || false,
+ * //     enabled: true || false,
+ * //     createdBy: "STRING_VALUE",
+ * //     sessionPolicy: "STRING_VALUE",
+ * //     roleArns: [ // RoleArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     managedPolicyArns: [ // ManagedPolicyList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     durationSeconds: Number("int"),
+ * //     acceptRoleSessionName: true || false,
+ * //     attributeMappings: [ // AttributeMappings
+ * //       { // AttributeMapping
+ * //         certificateField: "STRING_VALUE",
+ * //         mappingRules: [ // MappingRules
+ * //           { // MappingRule
+ * //             specifier: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param CreateProfileCommandInput - {@link CreateProfileCommandInput}
+ * @returns {@link CreateProfileCommandOutput}
+ * @see {@link CreateProfileCommandInput} for command's `input` shape.
+ * @see {@link CreateProfileCommandOutput} for command's `response` shape.
+ * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateProfileCommand extends command<CreateProfileCommandInput, CreateProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateProfile",
+  CreateProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProfileRequest;
+      output: ProfileDetailResponse;
+    };
+    sdk: {
+      input: CreateProfileCommandInput;
+      output: CreateProfileCommandOutput;
+    };
+  };
+}

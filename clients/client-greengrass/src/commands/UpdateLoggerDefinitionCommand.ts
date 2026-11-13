@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { UpdateLoggerDefinitionRequest, UpdateLoggerDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateLoggerDefinitionCommand,
-  serializeAws_restJson1UpdateLoggerDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLoggerDefinitionRequest, UpdateLoggerDefinitionResponse } from "../models/models_0";
+import { UpdateLoggerDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLoggerDefinitionCommand}.
+ */
 export interface UpdateLoggerDefinitionCommandInput extends UpdateLoggerDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLoggerDefinitionCommand}.
+ */
 export interface UpdateLoggerDefinitionCommandOutput extends UpdateLoggerDefinitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,49 @@ export interface UpdateLoggerDefinitionCommandOutput extends UpdateLoggerDefinit
  * ```javascript
  * import { GreengrassClient, UpdateLoggerDefinitionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, UpdateLoggerDefinitionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // UpdateLoggerDefinitionRequest
+ *   LoggerDefinitionId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ * };
  * const command = new UpdateLoggerDefinitionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateLoggerDefinitionCommandInput - {@link UpdateLoggerDefinitionCommandInput}
+ * @returns {@link UpdateLoggerDefinitionCommandOutput}
  * @see {@link UpdateLoggerDefinitionCommandInput} for command's `input` shape.
  * @see {@link UpdateLoggerDefinitionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateLoggerDefinitionCommand extends $Command<
-  UpdateLoggerDefinitionCommandInput,
-  UpdateLoggerDefinitionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateLoggerDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateLoggerDefinitionCommandInput, UpdateLoggerDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "UpdateLoggerDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateLoggerDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateLoggerDefinitionResponse.filterSensitiveLog,
+export class UpdateLoggerDefinitionCommand extends command<UpdateLoggerDefinitionCommandInput, UpdateLoggerDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLoggerDefinition",
+  UpdateLoggerDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLoggerDefinitionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateLoggerDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateLoggerDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateLoggerDefinitionCommandOutput> {
-    return deserializeAws_restJson1UpdateLoggerDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateLoggerDefinitionCommandInput;
+      output: UpdateLoggerDefinitionCommandOutput;
+    };
+  };
 }

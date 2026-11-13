@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeDirectConnectGatewayAttachmentsRequest,
   DescribeDirectConnectGatewayAttachmentsResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDirectConnectGatewayAttachmentsCommand,
-  serializeAws_json1_1DescribeDirectConnectGatewayAttachmentsCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeDirectConnectGatewayAttachments$ } from "../schemas/schemas_0";
 
-export interface DescribeDirectConnectGatewayAttachmentsCommandInput
-  extends DescribeDirectConnectGatewayAttachmentsRequest {}
-export interface DescribeDirectConnectGatewayAttachmentsCommandOutput
-  extends DescribeDirectConnectGatewayAttachmentsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDirectConnectGatewayAttachmentsCommand}.
+ */
+export interface DescribeDirectConnectGatewayAttachmentsCommandInput extends DescribeDirectConnectGatewayAttachmentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDirectConnectGatewayAttachmentsCommand}.
+ */
+export interface DescribeDirectConnectGatewayAttachmentsCommandOutput extends DescribeDirectConnectGatewayAttachmentsResult, __MetadataBearer {}
 
 /**
  * <p>Lists the attachments between your Direct Connect gateways and virtual interfaces. You must specify
@@ -38,77 +36,67 @@ export interface DescribeDirectConnectGatewayAttachmentsCommandOutput
  * ```javascript
  * import { DirectConnectClient, DescribeDirectConnectGatewayAttachmentsCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, DescribeDirectConnectGatewayAttachmentsCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = { // DescribeDirectConnectGatewayAttachmentsRequest
+ *   directConnectGatewayId: "STRING_VALUE",
+ *   virtualInterfaceId: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeDirectConnectGatewayAttachmentsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDirectConnectGatewayAttachmentsResult
+ * //   directConnectGatewayAttachments: [ // DirectConnectGatewayAttachmentList
+ * //     { // DirectConnectGatewayAttachment
+ * //       directConnectGatewayId: "STRING_VALUE",
+ * //       virtualInterfaceId: "STRING_VALUE",
+ * //       virtualInterfaceRegion: "STRING_VALUE",
+ * //       virtualInterfaceOwnerAccount: "STRING_VALUE",
+ * //       attachmentState: "attaching" || "attached" || "detaching" || "detached",
+ * //       attachmentType: "TransitVirtualInterface" || "PrivateVirtualInterface",
+ * //       stateChangeError: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDirectConnectGatewayAttachmentsCommandInput - {@link DescribeDirectConnectGatewayAttachmentsCommandInput}
+ * @returns {@link DescribeDirectConnectGatewayAttachmentsCommandOutput}
  * @see {@link DescribeDirectConnectGatewayAttachmentsCommandInput} for command's `input` shape.
  * @see {@link DescribeDirectConnectGatewayAttachmentsCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDirectConnectGatewayAttachmentsCommand extends $Command<
-  DescribeDirectConnectGatewayAttachmentsCommandInput,
-  DescribeDirectConnectGatewayAttachmentsCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDirectConnectGatewayAttachmentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeDirectConnectGatewayAttachmentsCommandInput,
-    DescribeDirectConnectGatewayAttachmentsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "DescribeDirectConnectGatewayAttachmentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDirectConnectGatewayAttachmentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDirectConnectGatewayAttachmentsResult.filterSensitiveLog,
+export class DescribeDirectConnectGatewayAttachmentsCommand extends command<DescribeDirectConnectGatewayAttachmentsCommandInput, DescribeDirectConnectGatewayAttachmentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDirectConnectGatewayAttachments",
+  DescribeDirectConnectGatewayAttachments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDirectConnectGatewayAttachmentsRequest;
+      output: DescribeDirectConnectGatewayAttachmentsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeDirectConnectGatewayAttachmentsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDirectConnectGatewayAttachmentsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDirectConnectGatewayAttachmentsCommandOutput> {
-    return deserializeAws_json1_1DescribeDirectConnectGatewayAttachmentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDirectConnectGatewayAttachmentsCommandInput;
+      output: DescribeDirectConnectGatewayAttachmentsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeTransitGatewaysRequest, DescribeTransitGatewaysResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeTransitGatewaysCommand,
-  serializeAws_ec2DescribeTransitGatewaysCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTransitGatewaysRequest, DescribeTransitGatewaysResult } from "../models/models_5";
+import { DescribeTransitGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTransitGatewaysCommand}.
+ */
 export interface DescribeTransitGatewaysCommandInput extends DescribeTransitGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTransitGatewaysCommand}.
+ */
 export interface DescribeTransitGatewaysCommandOutput extends DescribeTransitGatewaysResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,95 @@ export interface DescribeTransitGatewaysCommandOutput extends DescribeTransitGat
  * ```javascript
  * import { EC2Client, DescribeTransitGatewaysCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeTransitGatewaysCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeTransitGatewaysRequest
+ *   TransitGatewayIds: [ // TransitGatewayIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeTransitGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTransitGatewaysResult
+ * //   TransitGateways: [ // TransitGatewayList
+ * //     { // TransitGateway
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //       TransitGatewayArn: "STRING_VALUE",
+ * //       State: "pending" || "available" || "modifying" || "deleting" || "deleted",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       Options: { // TransitGatewayOptions
+ * //         AmazonSideAsn: Number("long"),
+ * //         TransitGatewayCidrBlocks: [ // ValueStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         AutoAcceptSharedAttachments: "enable" || "disable",
+ * //         DefaultRouteTableAssociation: "enable" || "disable",
+ * //         AssociationDefaultRouteTableId: "STRING_VALUE",
+ * //         DefaultRouteTablePropagation: "enable" || "disable",
+ * //         PropagationDefaultRouteTableId: "STRING_VALUE",
+ * //         VpnEcmpSupport: "enable" || "disable",
+ * //         DnsSupport: "enable" || "disable",
+ * //         SecurityGroupReferencingSupport: "enable" || "disable",
+ * //         MulticastSupport: "enable" || "disable",
+ * //         EncryptionSupport: { // EncryptionSupport
+ * //           EncryptionState: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTransitGatewaysCommandInput - {@link DescribeTransitGatewaysCommandInput}
+ * @returns {@link DescribeTransitGatewaysCommandOutput}
  * @see {@link DescribeTransitGatewaysCommandInput} for command's `input` shape.
  * @see {@link DescribeTransitGatewaysCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTransitGatewaysCommand extends $Command<
-  DescribeTransitGatewaysCommandInput,
-  DescribeTransitGatewaysCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTransitGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTransitGatewaysCommandInput, DescribeTransitGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeTransitGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTransitGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTransitGatewaysResult.filterSensitiveLog,
+export class DescribeTransitGatewaysCommand extends command<DescribeTransitGatewaysCommandInput, DescribeTransitGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTransitGateways",
+  DescribeTransitGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTransitGatewaysRequest;
+      output: DescribeTransitGatewaysResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTransitGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeTransitGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTransitGatewaysCommandOutput> {
-    return deserializeAws_ec2DescribeTransitGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTransitGatewaysCommandInput;
+      output: DescribeTransitGatewaysCommandOutput;
+    };
+  };
 }

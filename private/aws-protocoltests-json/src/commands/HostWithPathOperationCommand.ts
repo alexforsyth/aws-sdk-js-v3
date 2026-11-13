@@ -1,77 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
-import {
-  deserializeAws_json1_1HostWithPathOperationCommand,
-  serializeAws_json1_1HostWithPathOperationCommand,
-} from "../protocols/Aws_json1_1";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
+import { de_HostWithPathOperationCommand, se_HostWithPathOperationCommand } from "../protocols/Aws_json1_1";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HostWithPathOperationCommand}.
+ */
 export interface HostWithPathOperationCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link HostWithPathOperationCommand}.
+ */
 export interface HostWithPathOperationCommandOutput extends __MetadataBearer {}
 
-export class HostWithPathOperationCommand extends $Command<
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
-  JsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HostWithPathOperationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: JsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HostWithPathOperationCommandInput, HostWithPathOperationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "JsonProtocolClient";
-    const commandName = "HostWithPathOperationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { JsonProtocolClient, HostWithPathOperationCommand } from "@aws-sdk/aws-protocoltests-json"; // ES Modules import
+ * // const { JsonProtocolClient, HostWithPathOperationCommand } = require("@aws-sdk/aws-protocoltests-json"); // CommonJS import
+ * // import type { JsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-json";
+ * const config = {}; // type is JsonProtocolClientConfig
+ * const client = new JsonProtocolClient(config);
+ * const input = {};
+ * const command = new HostWithPathOperationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param HostWithPathOperationCommandInput - {@link HostWithPathOperationCommandInput}
+ * @returns {@link HostWithPathOperationCommandOutput}
+ * @see {@link HostWithPathOperationCommandInput} for command's `input` shape.
+ * @see {@link HostWithPathOperationCommandOutput} for command's `response` shape.
+ * @see {@link JsonProtocolClientResolvedConfig | config} for JsonProtocolClient's `config` shape.
+ *
+ * @throws {@link JsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from JsonProtocol service.</p>
+ *
+ *
+ */
+export class HostWithPathOperationCommand extends $Command
+  .classBuilder<
+    HostWithPathOperationCommandInput,
+    HostWithPathOperationCommandOutput,
+    JsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: JsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("JsonProtocol", "HostWithPathOperation", {})
+  .n("JsonProtocolClient", "HostWithPathOperationCommand")
+  .f(void 0, void 0)
+  .ser(se_HostWithPathOperationCommand)
+  .de(de_HostWithPathOperationCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: HostWithPathOperationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1HostWithPathOperationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<HostWithPathOperationCommandOutput> {
-    return deserializeAws_json1_1HostWithPathOperationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HostWithPathOperationCommandInput;
+      output: HostWithPathOperationCommandOutput;
+    };
+  };
 }

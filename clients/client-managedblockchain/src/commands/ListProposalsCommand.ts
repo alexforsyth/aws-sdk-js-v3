@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ManagedBlockchainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ManagedBlockchainClient";
-import { ListProposalsInput, ListProposalsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProposalsCommand,
-  serializeAws_restJson1ListProposalsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProposalsInput, ListProposalsOutput } from "../models/models_0";
+import { ListProposals$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProposalsCommand}.
+ */
 export interface ListProposalsCommandInput extends ListProposalsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListProposalsCommand}.
+ */
 export interface ListProposalsCommandOutput extends ListProposalsOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +30,79 @@ export interface ListProposalsCommandOutput extends ListProposalsOutput, __Metad
  * ```javascript
  * import { ManagedBlockchainClient, ListProposalsCommand } from "@aws-sdk/client-managedblockchain"; // ES Modules import
  * // const { ManagedBlockchainClient, ListProposalsCommand } = require("@aws-sdk/client-managedblockchain"); // CommonJS import
+ * // import type { ManagedBlockchainClientConfig } from "@aws-sdk/client-managedblockchain";
+ * const config = {}; // type is ManagedBlockchainClientConfig
  * const client = new ManagedBlockchainClient(config);
+ * const input = { // ListProposalsInput
+ *   NetworkId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListProposalsCommand(input);
  * const response = await client.send(command);
+ * // { // ListProposalsOutput
+ * //   Proposals: [ // ProposalSummaryList
+ * //     { // ProposalSummary
+ * //       ProposalId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       ProposedByMemberId: "STRING_VALUE",
+ * //       ProposedByMemberName: "STRING_VALUE",
+ * //       Status: "IN_PROGRESS" || "APPROVED" || "REJECTED" || "EXPIRED" || "ACTION_FAILED",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       ExpirationDate: new Date("TIMESTAMP"),
+ * //       Arn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProposalsCommandInput - {@link ListProposalsCommandInput}
+ * @returns {@link ListProposalsCommandOutput}
  * @see {@link ListProposalsCommandInput} for command's `input` shape.
  * @see {@link ListProposalsCommandOutput} for command's `response` shape.
- * @see {@link ManagedBlockchainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ManagedBlockchainClientResolvedConfig | config} for ManagedBlockchainClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource doesn't exist. It may have been deleted or referenced incorrectly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is
+ *          throttling requests. The most common source of throttling errors is
+ *          creating resources that exceed your service limit for this resource type.
+ *          Request a limit increase or delete unused resources if possible.</p>
+ *
+ * @throws {@link ManagedBlockchainServiceException}
+ * <p>Base exception class for all service exceptions from ManagedBlockchain service.</p>
+ *
+ *
+ * @public
  */
-export class ListProposalsCommand extends $Command<
-  ListProposalsCommandInput,
-  ListProposalsCommandOutput,
-  ManagedBlockchainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProposalsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ManagedBlockchainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProposalsCommandInput, ListProposalsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ManagedBlockchainClient";
-    const commandName = "ListProposalsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProposalsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProposalsOutput.filterSensitiveLog,
+export class ListProposalsCommand extends command<ListProposalsCommandInput, ListProposalsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProposals",
+  ListProposals$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProposalsInput;
+      output: ListProposalsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProposalsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProposalsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProposalsCommandOutput> {
-    return deserializeAws_restJson1ListProposalsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProposalsCommandInput;
+      output: ListProposalsCommandOutput;
+    };
+  };
 }

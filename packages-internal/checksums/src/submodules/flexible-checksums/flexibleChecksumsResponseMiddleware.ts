@@ -1,0 +1,107 @@
+import type { HttpResponse } from "@smithy/core/protocols";
+import { HttpRequest } from "@smithy/core/protocols";
+import type {
+  DeserializeHandler,
+  DeserializeHandlerArguments,
+  DeserializeHandlerOutput,
+  DeserializeMiddleware,
+  HandlerExecutionContext,
+  MetadataBearer,
+  RelativeMiddlewareOptions,
+} from "@smithy/types";
+
+import type { PreviouslyResolved } from "./configuration";
+import type { ChecksumAlgorithm } from "./constants";
+import { getChecksumAlgorithmListForResponse } from "./getChecksumAlgorithmListForResponse";
+import { getChecksumLocationName } from "./getChecksumLocationName";
+import { isChecksumWithPartNumber } from "./isChecksumWithPartNumber";
+import { validateChecksumFromResponse } from "./validateChecksumFromResponse";
+
+/**
+ * @internal
+ */
+export interface FlexibleChecksumsResponseMiddlewareConfig {
+  /**
+   * Defines a top-level operation input member used to opt-in to best-effort validation
+   * of a checksum returned in the HTTP response of the operation.
+   */
+  requestValidationModeMember?: string;
+
+  /**
+   * Defines the checksum algorithms clients SHOULD look for when validating checksums
+   * returned in the HTTP response.
+   */
+  responseAlgorithms?: string[];
+}
+
+/**
+ * @internal
+ */
+export const flexibleChecksumsResponseMiddlewareOptions: RelativeMiddlewareOptions = {
+  name: "flexibleChecksumsResponseMiddleware",
+  toMiddleware: "deserializerMiddleware",
+  relation: "after",
+  tags: ["BODY_CHECKSUM"],
+  override: true,
+};
+
+/**
+ * @internal
+ *
+ * The validation counterpart to the flexibleChecksumsMiddleware.
+ */
+export const flexibleChecksumsResponseMiddleware =
+  (
+    config: PreviouslyResolved,
+    middlewareConfig: FlexibleChecksumsResponseMiddlewareConfig
+  ): DeserializeMiddleware<any, any> =>
+  <Output extends MetadataBearer>(
+    next: DeserializeHandler<any, Output>,
+    context: HandlerExecutionContext
+  ): DeserializeHandler<any, Output> =>
+  async (args: DeserializeHandlerArguments<any>): Promise<DeserializeHandlerOutput<Output>> => {
+    if (!HttpRequest.isInstance(args.request)) {
+      return next(args);
+    }
+
+    const input = args.input;
+    const result = await next(args);
+
+    const response = result.response as HttpResponse;
+
+    const { requestValidationModeMember, responseAlgorithms } = middlewareConfig;
+    // @ts-ignore Element implicitly has an 'any' type for input[requestValidationModeMember]
+    if (requestValidationModeMember && input[requestValidationModeMember] === "ENABLED") {
+      const { clientName, commandName } = context;
+
+      const customChecksumAlgorithms = Object.keys(config.checksumAlgorithms ?? {}).filter((algorithm: string) => {
+        const responseHeader = getChecksumLocationName(algorithm);
+        return response.headers[responseHeader] !== undefined;
+      });
+      const algoList = getChecksumAlgorithmListForResponse([
+        ...(responseAlgorithms ?? []),
+        ...customChecksumAlgorithms,
+      ]);
+
+      const isS3WholeObjectMultipartGetResponseChecksum =
+        clientName === "S3Client" &&
+        commandName === "GetObjectCommand" &&
+        algoList.every((algorithm: ChecksumAlgorithm) => {
+          const responseHeader = getChecksumLocationName(algorithm);
+          const checksumFromResponse = response.headers[responseHeader];
+          return !checksumFromResponse || isChecksumWithPartNumber(checksumFromResponse);
+        });
+
+      if (isS3WholeObjectMultipartGetResponseChecksum) {
+        return result;
+      }
+
+      await validateChecksumFromResponse(response as HttpResponse, {
+        config,
+        responseAlgorithms: algoList,
+        logger: context.logger,
+      });
+    }
+
+    return result;
+  };

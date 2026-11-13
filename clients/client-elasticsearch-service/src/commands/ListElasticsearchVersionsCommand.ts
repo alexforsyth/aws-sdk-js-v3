@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticsearchServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticsearchServiceClient";
-import { ListElasticsearchVersionsRequest, ListElasticsearchVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListElasticsearchVersionsCommand,
-  serializeAws_restJson1ListElasticsearchVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListElasticsearchVersionsRequest, ListElasticsearchVersionsResponse } from "../models/models_0";
+import { ListElasticsearchVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListElasticsearchVersionsCommand}.
+ */
 export interface ListElasticsearchVersionsCommandInput extends ListElasticsearchVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListElasticsearchVersionsCommand}.
+ */
 export interface ListElasticsearchVersionsCommandOutput extends ListElasticsearchVersionsResponse, __MetadataBearer {}
 
 /**
@@ -32,71 +29,63 @@ export interface ListElasticsearchVersionsCommandOutput extends ListElasticsearc
  * ```javascript
  * import { ElasticsearchServiceClient, ListElasticsearchVersionsCommand } from "@aws-sdk/client-elasticsearch-service"; // ES Modules import
  * // const { ElasticsearchServiceClient, ListElasticsearchVersionsCommand } = require("@aws-sdk/client-elasticsearch-service"); // CommonJS import
+ * // import type { ElasticsearchServiceClientConfig } from "@aws-sdk/client-elasticsearch-service";
+ * const config = {}; // type is ElasticsearchServiceClientConfig
  * const client = new ElasticsearchServiceClient(config);
+ * const input = { // ListElasticsearchVersionsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListElasticsearchVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListElasticsearchVersionsResponse
+ * //   ElasticsearchVersions: [ // ElasticsearchVersionList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListElasticsearchVersionsCommandInput - {@link ListElasticsearchVersionsCommandInput}
+ * @returns {@link ListElasticsearchVersionsCommandOutput}
  * @see {@link ListElasticsearchVersionsCommandInput} for command's `input` shape.
  * @see {@link ListElasticsearchVersionsCommandOutput} for command's `response` shape.
- * @see {@link ElasticsearchServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticsearchServiceClientResolvedConfig | config} for ElasticsearchServiceClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for missing / invalid input fields. Gives http status code of 400.</p>
+ *
+ * @throws {@link ElasticsearchServiceServiceException}
+ * <p>Base exception class for all service exceptions from ElasticsearchService service.</p>
+ *
+ *
+ * @public
  */
-export class ListElasticsearchVersionsCommand extends $Command<
-  ListElasticsearchVersionsCommandInput,
-  ListElasticsearchVersionsCommandOutput,
-  ElasticsearchServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListElasticsearchVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticsearchServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListElasticsearchVersionsCommandInput, ListElasticsearchVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticsearchServiceClient";
-    const commandName = "ListElasticsearchVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListElasticsearchVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListElasticsearchVersionsResponse.filterSensitiveLog,
+export class ListElasticsearchVersionsCommand extends command<ListElasticsearchVersionsCommandInput, ListElasticsearchVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListElasticsearchVersions",
+  ListElasticsearchVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListElasticsearchVersionsRequest;
+      output: ListElasticsearchVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListElasticsearchVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListElasticsearchVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListElasticsearchVersionsCommandOutput> {
-    return deserializeAws_restJson1ListElasticsearchVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListElasticsearchVersionsCommandInput;
+      output: ListElasticsearchVersionsCommandOutput;
+    };
+  };
 }

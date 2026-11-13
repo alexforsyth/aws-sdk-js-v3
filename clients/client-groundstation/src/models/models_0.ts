@@ -1,562 +1,1031 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AgentStatus,
+  AngleUnits,
+  AuditResults,
+  BandwidthUnits,
+  CapabilityHealth,
+  CapabilityHealthReason,
+  ConfigCapabilityType,
+  ContactStatus,
+  Criticality,
+  EirpUnits,
+  EndpointStatus,
+  EphemerisErrorCode,
+  EphemerisInvalidReason,
+  EphemerisSource,
+  EphemerisStatus,
+  EphemerisType,
+  FrequencyUnits,
+  MaintenanceType,
+  Polarization,
+  ReservationType,
+  TelemetrySinkType,
+  VersionFailureReasonCode,
+  VersionStatus,
+} from "./enums";
 
-export enum AngleUnits {
-  DEGREE_ANGLE = "DEGREE_ANGLE",
-  RADIAN = "RADIAN",
+/**
+ * @public
+ */
+export interface GetAgentConfigurationRequest {
+  /**
+   * <p>UUID of agent to get configuration information for.</p>
+   * @public
+   */
+  agentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetAgentConfigurationResponse {
+  /**
+   * <p>UUID of agent.</p>
+   * @public
+   */
+  agentId?: string | undefined;
+
+  /**
+   * <p>Tasking document for agent.</p>
+   * @public
+   */
+  taskingDocument?: string | undefined;
+}
+
+/**
+ * <p>Version information for agent components.</p>
+ * @public
+ */
+export interface ComponentVersion {
+  /**
+   * <p>Component type.</p>
+   * @public
+   */
+  componentType: string | undefined;
+
+  /**
+   * <p>List of versions.</p>
+   * @public
+   */
+  versions: string[] | undefined;
+}
+
+/**
+ * <p>Detailed information about the agent.</p>
+ * @public
+ */
+export interface AgentDetails {
+  /**
+   * <p>Current agent version.</p>
+   * @public
+   */
+  agentVersion: string | undefined;
+
+  /**
+   * <p>ID of EC2 instance agent is running on.</p>
+   * @public
+   */
+  instanceId: string | undefined;
+
+  /**
+   * <p>Type of EC2 instance agent is running on.</p>
+   * @public
+   */
+  instanceType: string | undefined;
+
+  /**
+   * <note> <p>This field should not be used. Use agentCpuCores instead.</p> </note> <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>
+   * @public
+   */
+  reservedCpuCores?: number[] | undefined;
+
+  /**
+   * <p>List of CPU cores reserved for the agent.</p>
+   * @public
+   */
+  agentCpuCores?: number[] | undefined;
+
+  /**
+   * <p>List of versions being used by agent components.</p>
+   * @public
+   */
+  componentVersions: ComponentVersion[] | undefined;
+}
+
+/**
+ * <p>Data for agent discovery.</p>
+ * @public
+ */
+export interface DiscoveryData {
+  /**
+   * <p>List of public IP addresses to associate with agent.</p>
+   * @public
+   */
+  publicIpAddresses: string[] | undefined;
+
+  /**
+   * <p>List of private IP addresses to associate with agent.</p>
+   * @public
+   */
+  privateIpAddresses: string[] | undefined;
+
+  /**
+   * <p>List of capabilities to associate with agent.</p>
+   * @public
+   */
+  capabilityArns: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RegisterAgentRequest {
+  /**
+   * <p>Data for associating an agent with the capabilities it is managing.</p>
+   * @public
+   */
+  discoveryData: DiscoveryData | undefined;
+
+  /**
+   * <p>Detailed information about the agent being registered.</p>
+   * @public
+   */
+  agentDetails: AgentDetails | undefined;
+
+  /**
+   * <p>Tags assigned to an <code>Agent</code>.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RegisterAgentResponse {
+  /**
+   * <p>UUID of registered agent.</p>
+   * @public
+   */
+  agentId?: string | undefined;
+}
+
+/**
+ * <p>Aggregate status of Agent components.</p>
+ * @public
+ */
+export interface AggregateStatus {
+  /**
+   * <p>Aggregate status.</p>
+   * @public
+   */
+  status: AgentStatus | undefined;
+
+  /**
+   * <p>Sparse map of failure signatures.</p>
+   * @public
+   */
+  signatureMap?: Record<string, boolean> | undefined;
+}
+
+/**
+ * <p>Data on the status of agent components.</p>
+ * @public
+ */
+export interface ComponentStatusData {
+  /**
+   * <p>The Component type.</p>
+   * @public
+   */
+  componentType: string | undefined;
+
+  /**
+   * <p>Capability ARN of the component.</p>
+   * @public
+   */
+  capabilityArn: string | undefined;
+
+  /**
+   * <p>Component status.</p>
+   * @public
+   */
+  status: AgentStatus | undefined;
+
+  /**
+   * <p>Bytes sent by the component.</p>
+   * @public
+   */
+  bytesSent?: number | undefined;
+
+  /**
+   * <p>Bytes received by the component.</p>
+   * @public
+   */
+  bytesReceived?: number | undefined;
+
+  /**
+   * <p>Packets dropped by component.</p>
+   * @public
+   */
+  packetsDropped?: number | undefined;
+
+  /**
+   * <p>Dataflow UUID associated with the component.</p>
+   * @public
+   */
+  dataflowId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateAgentStatusRequest {
+  /**
+   * <p>UUID of agent to update.</p>
+   * @public
+   */
+  agentId: string | undefined;
+
+  /**
+   * <p>GUID of agent task.</p>
+   * @public
+   */
+  taskId: string | undefined;
+
+  /**
+   * <p>Aggregate status for agent.</p>
+   * @public
+   */
+  aggregateStatus: AggregateStatus | undefined;
+
+  /**
+   * <p>List of component statuses for agent.</p>
+   * @public
+   */
+  componentStatuses: ComponentStatusData[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateAgentStatusResponse {
+  /**
+   * <p>UUID of updated agent.</p>
+   * @public
+   */
+  agentId: string | undefined;
 }
 
 /**
  * <p>Details about an antenna demod decode <code>Config</code> used in a contact.</p>
+ * @public
  */
 export interface AntennaDemodDecodeDetails {
   /**
    * <p>Name of an antenna demod decode output node used in a contact.</p>
+   * @public
    */
-  outputNode?: string;
-}
-
-export namespace AntennaDemodDecodeDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AntennaDemodDecodeDetails): any => ({
-    ...obj,
-  });
-}
-
-export enum BandwidthUnits {
-  GHZ = "GHz",
-  KHZ = "kHz",
-  MHZ = "MHz",
+  outputNode?: string | undefined;
 }
 
 /**
  * <p>Object that describes the frequency bandwidth. </p>
+ * @public
  */
 export interface FrequencyBandwidth {
   /**
-   * <p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p>
-   *             <ul>
-   *             <li>
-   *                <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>
-   *             </li>
-   *             <li>
-   *                <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p>
-   *             </li>
-   *             <li>
-   *                <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>
-   *             </li>
-   *          </ul>
+   * <p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>
+   * @public
    */
   value: number | undefined;
 
   /**
    * <p>Frequency bandwidth units.</p>
+   * @public
    */
-  units: BandwidthUnits | string | undefined;
-}
-
-export namespace FrequencyBandwidth {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FrequencyBandwidth): any => ({
-    ...obj,
-  });
-}
-
-export enum FrequencyUnits {
-  GHZ = "GHz",
-  KHZ = "kHz",
-  MHZ = "MHz",
+  units: BandwidthUnits | undefined;
 }
 
 /**
  * <p>Object that describes the frequency.</p>
+ * @public
  */
 export interface Frequency {
   /**
    * <p>Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>
+   * @public
    */
   value: number | undefined;
 
   /**
    * <p>Frequency units.</p>
+   * @public
    */
-  units: FrequencyUnits | string | undefined;
-}
-
-export namespace Frequency {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Frequency): any => ({
-    ...obj,
-  });
-}
-
-export enum Polarization {
-  LEFT_HAND = "LEFT_HAND",
-  NONE = "NONE",
-  RIGHT_HAND = "RIGHT_HAND",
+  units: FrequencyUnits | undefined;
 }
 
 /**
  * <p>Object that describes a spectral <code>Config</code>.</p>
+ * @public
  */
 export interface SpectrumConfig {
   /**
    * <p>Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>
+   * @public
    */
   centerFrequency: Frequency | undefined;
 
   /**
-   * <p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p>
-   *             <ul>
-   *             <li>
-   *                <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p>
-   *             </li>
-   *             <li>
-   *                <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p>
-   *             </li>
-   *             <li>
-   *                <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p>
-   *             </li>
-   *          </ul>
+   * <p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>
+   * @public
    */
   bandwidth: FrequencyBandwidth | undefined;
 
   /**
    * <p>Polarization of a spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
+   * @public
    */
-  polarization?: Polarization | string;
-}
-
-export namespace SpectrumConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SpectrumConfig): any => ({
-    ...obj,
-  });
+  polarization?: Polarization | undefined;
 }
 
 /**
- * <p>Information about how AWS Ground Station should configure an
- *          antenna for downlink during a contact.</p>
+ * <p>Information about how AWS Ground Station should configure an antenna for downlink during a contact.</p>
+ * @public
  */
 export interface AntennaDownlinkConfig {
   /**
    * <p>Object that describes a spectral <code>Config</code>.</p>
+   * @public
    */
   spectrumConfig: SpectrumConfig | undefined;
 }
 
-export namespace AntennaDownlinkConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AntennaDownlinkConfig): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Information about the decode <code>Config</code>.</p>
+ * @public
  */
 export interface DecodeConfig {
   /**
    * <p>Unvalidated JSON of a decode <code>Config</code>.</p>
+   * @public
    */
   unvalidatedJSON: string | undefined;
-}
-
-export namespace DecodeConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DecodeConfig): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>Information about the demodulation <code>Config</code>.</p>
+ * @public
  */
 export interface DemodulationConfig {
   /**
    * <p>Unvalidated JSON of a demodulation <code>Config</code>.</p>
+   * @public
    */
   unvalidatedJSON: string | undefined;
 }
 
-export namespace DemodulationConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DemodulationConfig): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.</p>
+ * @public
  */
 export interface AntennaDownlinkDemodDecodeConfig {
   /**
    * <p>Information about the spectral <code>Config</code>.</p>
+   * @public
    */
   spectrumConfig: SpectrumConfig | undefined;
 
   /**
    * <p>Information about the demodulation <code>Config</code>.</p>
+   * @public
    */
   demodulationConfig: DemodulationConfig | undefined;
 
   /**
    * <p>Information about the decode <code>Config</code>.</p>
+   * @public
    */
   decodeConfig: DecodeConfig | undefined;
 }
 
-export namespace AntennaDownlinkDemodDecodeConfig {
+/**
+ * <p>An antenna at a ground station.</p>
+ * @public
+ */
+export interface AntennaListItem {
   /**
-   * @internal
+   * <p>Name of the ground station the antenna is associated with.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AntennaDownlinkDemodDecodeConfig): any => ({
-    ...obj,
-  });
+  groundStationName: string | undefined;
+
+  /**
+   * <p>Name of the antenna.</p>
+   * @public
+   */
+  antennaName: string | undefined;
+
+  /**
+   * <p>Region of the antenna.</p>
+   * @public
+   */
+  region: string | undefined;
 }
 
 /**
  * <p>Information about the uplink spectral <code>Config</code>.</p>
+ * @public
  */
 export interface UplinkSpectrumConfig {
   /**
    * <p>Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.</p>
+   * @public
    */
   centerFrequency: Frequency | undefined;
 
   /**
    * <p>Polarization of an uplink spectral <code>Config</code>. Capturing both <code>"RIGHT_HAND"</code> and <code>"LEFT_HAND"</code> polarization requires two separate configs.</p>
+   * @public
    */
-  polarization?: Polarization | string;
-}
-
-export namespace UplinkSpectrumConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UplinkSpectrumConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum EirpUnits {
-  DBW = "dBW",
+  polarization?: Polarization | undefined;
 }
 
 /**
  * <p>Object that represents EIRP.</p>
+ * @public
  */
 export interface Eirp {
   /**
    * <p>Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.</p>
+   * @public
    */
   value: number | undefined;
 
   /**
    * <p>Units of an EIRP.</p>
+   * @public
    */
-  units: EirpUnits | string | undefined;
-}
-
-export namespace Eirp {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Eirp): any => ({
-    ...obj,
-  });
+  units: EirpUnits | undefined;
 }
 
 /**
  * <p>Information about the uplink <code>Config</code> of an antenna.</p>
+ * @public
  */
 export interface AntennaUplinkConfig {
   /**
    * <p>Whether or not uplink transmit is disabled.</p>
+   * @public
    */
-  transmitDisabled?: boolean;
+  transmitDisabled?: boolean | undefined;
 
   /**
    * <p>Information about the uplink spectral <code>Config</code>.</p>
+   * @public
    */
   spectrumConfig: UplinkSpectrumConfig | undefined;
 
   /**
    * <p>EIRP of the target.</p>
+   * @public
    */
   targetEirp: Eirp | undefined;
 }
 
-export namespace AntennaUplinkConfig {
+/**
+ * <p>Information about the socket address.</p>
+ * @public
+ */
+export interface SocketAddress {
   /**
-   * @internal
+   * <p>Name of a socket address.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AntennaUplinkConfig): any => ({
-    ...obj,
-  });
+  name: string | undefined;
+
+  /**
+   * <p>Port of a socket address.</p>
+   * @public
+   */
+  port: number | undefined;
 }
 
 /**
- * <p/>
+ * <p>Egress address of AgentEndpoint with an optional mtu.</p>
+ * @public
+ */
+export interface ConnectionDetails {
+  /**
+   * <p>A socket address.</p>
+   * @public
+   */
+  socketAddress: SocketAddress | undefined;
+
+  /**
+   * <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+   * @public
+   */
+  mtu?: number | undefined;
+}
+
+/**
+ * <p>An integer range that has a minimum and maximum value.</p>
+ * @public
+ */
+export interface IntegerRange {
+  /**
+   * <p>A minimum value.</p>
+   * @public
+   */
+  minimum: number | undefined;
+
+  /**
+   * <p>A maximum value.</p>
+   * @public
+   */
+  maximum: number | undefined;
+}
+
+/**
+ * <p>A socket address with a port range.</p>
+ * @public
+ */
+export interface RangedSocketAddress {
+  /**
+   * <p>IPv4 socket address.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Port range of a socket address.</p>
+   * @public
+   */
+  portRange: IntegerRange | undefined;
+}
+
+/**
+ * <p>Ingress address of AgentEndpoint with a port range and an optional mtu.</p>
+ * @public
+ */
+export interface RangedConnectionDetails {
+  /**
+   * <p>A ranged socket address.</p>
+   * @public
+   */
+  socketAddress: RangedSocketAddress | undefined;
+
+  /**
+   * <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+   * @public
+   */
+  mtu?: number | undefined;
+}
+
+/**
+ * <p>Information about AwsGroundStationAgentEndpoint.</p>
+ * @public
+ */
+export interface AwsGroundStationAgentEndpoint {
+  /**
+   * <p>Name string associated with AgentEndpoint. Used as a human-readable identifier for AgentEndpoint.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The egress address of AgentEndpoint.</p>
+   * @public
+   */
+  egressAddress: ConnectionDetails | undefined;
+
+  /**
+   * <p>The ingress address of AgentEndpoint.</p>
+   * @public
+   */
+  ingressAddress: RangedConnectionDetails | undefined;
+
+  /**
+   * <p>The status of AgentEndpoint.</p>
+   * @public
+   */
+  agentStatus?: AgentStatus | undefined;
+
+  /**
+   * <p>The results of the audit.</p>
+   * @public
+   */
+  auditResults?: AuditResults | undefined;
+}
+
+/**
+ * <p>Time-tagged azimuth elevation pointing data.</p> <p>Specifies the antenna pointing direction at a specific time offset from the segment's reference epoch.</p>
+ * @public
+ */
+export interface TimeAzEl {
+  /**
+   * <p>Time offset in atomic seconds from the segment's reference epoch.</p> <p>All <code>dt</code> values within a segment must be in ascending order with no duplicates.</p> <p> <code>dt</code> values may be:</p> <ul> <li> <p>negative</p> </li> <li> <p>expressed as fractions of a second</p> </li> <li> <p>expressed in scientific notation</p> </li> </ul>
+   * @public
+   */
+  dt: number | undefined;
+
+  /**
+   * <p>Azimuth angle at the specified time.</p> <p>Valid ranges by unit:</p> <ul> <li> <p> <code>DEGREE_ANGLE</code>: -180 to 360 degrees, measured clockwise from true north</p> </li> <li> <p> <code>RADIAN</code>: -π to 2π radians, measured clockwise from true north</p> </li> </ul>
+   * @public
+   */
+  az: number | undefined;
+
+  /**
+   * <p>Elevation angle at the specified time.</p> <p>Valid ranges by unit:</p> <ul> <li> <p> <code>DEGREE_ANGLE</code>: -90 to 90 degrees, where 0 is the horizon, 90 is zenith, and negative values are below the horizon </p> </li> <li> <p> <code>RADIAN</code>: -π/2 to π/2 radians, where 0 is the horizon, π/2 is zenith, and negative values are below the horizon </p> </li> </ul>
+   * @public
+   */
+  el: number | undefined;
+}
+
+/**
+ * <p>Time range specified using ISO 8601 format timestamps.</p>
+ * @public
+ */
+export interface ISO8601TimeRange {
+  /**
+   * <p>Start time in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>Example: <code>2026-11-15T10:28:48.000Z</code> </p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>End time in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>Example: <code>2024-01-15T12:00:00.000Z</code> </p>
+   * @public
+   */
+  endTime: Date | undefined;
+}
+
+/**
+ * <p>A time segment containing azimuth elevation pointing data.</p> <p> Each segment defines a continuous time period with pointing angle data points. AWS Ground Station uses 4th order Lagrange interpolation between the provided points, so each segment must contain at least five data points. </p>
+ * @public
+ */
+export interface AzElSegment {
+  /**
+   * <p>The reference time for this segment in ISO 8601 format in Coordinated Universal Time (UTC).</p> <p>All time values within the segment's <a>AzElSegment$azElList</a> are specified as offsets in atomic seconds from this reference epoch.</p> <p>Example: <code>2024-01-15T12:00:00.000Z</code> </p>
+   * @public
+   */
+  referenceEpoch: Date | undefined;
+
+  /**
+   * <p>The valid time range for this segment.</p> <p> Specifies the start and end timestamps in ISO 8601 format in Coordinated Universal Time (UTC). The segment's pointing data must cover this entire time range. </p>
+   * @public
+   */
+  validTimeRange: ISO8601TimeRange | undefined;
+
+  /**
+   * <p>List of time-tagged azimuth elevation data points.</p> <p> Must contain at least five points to support 4th order Lagrange interpolation. Points must be in chronological order with no duplicates. </p>
+   * @public
+   */
+  azElList: TimeAzEl[] | undefined;
+}
+
+/**
+ * <p>Azimuth elevation segment collection.</p> <p>Contains five or more time-ordered segments that define antenna pointing angles over the ephemeris validity period.</p>
+ * @public
+ */
+export interface AzElSegments {
+  /**
+   * <p>The unit of measure for azimuth and elevation angles. All angles in all segments must use the same unit.</p>
+   * @public
+   */
+  angleUnit: AngleUnits | undefined;
+
+  /**
+   * <p>List of azimuth elevation segments.</p> <p>Must contain between 1 and 100 segments. Segments must be in chronological order with no overlaps.</p>
+   * @public
+   */
+  azElSegmentList: AzElSegment[] | undefined;
+}
+
+/**
+ * <p>Object stored in Amazon S3 containing ephemeris data.</p>
+ * @public
+ */
+export interface S3Object {
+  /**
+   * <p>An Amazon S3 Bucket name.</p>
+   * @public
+   */
+  bucket?: string | undefined;
+
+  /**
+   * <p>An Amazon S3 key for the ephemeris.</p>
+   * @public
+   */
+  key?: string | undefined;
+
+  /**
+   * <p>For versioned Amazon S3 objects, the version to use for the ephemeris.</p>
+   * @public
+   */
+  version?: string | undefined;
+}
+
+/**
+ * <p>Container for azimuth elevation segment data.</p> <p>Specify either <a>AzElSegmentsData$s3Object</a> to reference data in Amazon S3, or <a>AzElSegmentsData$azElData</a> to provide data inline.</p>
+ * @public
+ */
+export type AzElSegmentsData =
+  | AzElSegmentsData.AzElDataMember
+  | AzElSegmentsData.S3ObjectMember
+  | AzElSegmentsData.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace AzElSegmentsData {
+  /**
+   * <p>The Amazon S3 object containing azimuth elevation segment data.</p> <p>The Amazon S3 object must contain JSON-formatted azimuth elevation data matching the <a>AzElSegments</a> structure.</p>
+   * @public
+   */
+  export interface S3ObjectMember {
+    s3Object: S3Object;
+    azElData?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Azimuth elevation segment data provided directly in the request.</p> <p>Use this option for smaller datasets or when Amazon S3 access is not available.</p>
+   * @public
+   */
+  export interface AzElDataMember {
+    s3Object?: never;
+    azElData: AzElSegments;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    s3Object?: never;
+    azElData?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    s3Object: (value: S3Object) => T;
+    azElData: (value: AzElSegments) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Azimuth elevation ephemeris data.</p> <p> Use this ephemeris type to provide pointing angles directly, rather than satellite orbital elements. Use this when you need precise antenna pointing but have imprecise or unknown satellite trajectory information. </p> <p> The azimuth elevation data specifies the antenna pointing direction at specific times relative to a ground station location. AWS Ground Station uses 4th order Lagrange interpolation to compute pointing angles between the provided data points. </p> <p> AWS Ground Station automatically filters interpolated pointing angles, including only those that are above the site mask elevation of the specified ground station. </p> <p> For more detail about providing azimuth elevation ephemerides to AWS Ground Station, see the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-azimuth-elevation-ephemeris-data.html">azimuth elevation ephemeris section</a> of the AWS Ground Station User Guide. </p>
+ * @public
+ */
+export interface AzElEphemeris {
+  /**
+   * <p>The ground station name for which you're providing azimuth elevation data.</p> <p>This ephemeris is specific to this ground station and can't be used at other locations.</p>
+   * @public
+   */
+  groundStation: string | undefined;
+
+  /**
+   * <p>Azimuth elevation segment data.</p> <p>You can provide data inline in the request or through an Amazon S3 object reference.</p>
+   * @public
+   */
+  data: AzElSegmentsData | undefined;
+}
+
+/**
+ * <p>Filter for selecting contacts that use a specific <a>AzElEphemeris</a>.</p>
+ * @public
+ */
+export interface AzElEphemerisFilter {
+  /**
+   * <p>Unique identifier of the azimuth elevation ephemeris.</p>
+   * @public
+   */
+  id: string | undefined;
+}
+
+/**
+ * <p>Program track settings for <a>AzElEphemeris</a>.</p>
+ * @public
+ */
+export interface AzElProgramTrackSettings {
+  /**
+   * <p>Unique identifier of the azimuth elevation ephemeris.</p>
+   * @public
+   */
+  ephemerisId: string | undefined;
+}
+
+/**
+ * <p>Input for the <code>CancelContact</code> operation. </p>
+ * @public
  */
 export interface CancelContactRequest {
   /**
    * <p>UUID of a contact.</p>
+   * @public
    */
   contactId: string | undefined;
 }
 
-export namespace CancelContactRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelContactRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Response containing the ID of a contact. </p>
+ * @public
  */
 export interface ContactIdResponse {
   /**
    * <p>UUID of a contact.</p>
+   * @public
    */
-  contactId?: string;
-}
+  contactId?: string | undefined;
 
-export namespace ContactIdResponse {
   /**
-   * @internal
+   * <p>Version ID of a contact.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ContactIdResponse): any => ({
-    ...obj,
-  });
+  versionId?: number | undefined;
 }
 
 /**
- * <p>Dependency encountered an error.</p>
- */
-export interface DependencyException extends __SmithyException, $MetadataBearer {
-  name: "DependencyException";
-  $fault: "server";
-  message?: string;
-  /**
-   * <p/>
-   */
-  parameterName?: string;
-}
-
-export namespace DependencyException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DependencyException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more parameters are not valid.</p>
- */
-export interface InvalidParameterException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterException";
-  $fault: "client";
-  message?: string;
-  /**
-   * <p/>
-   */
-  parameterName?: string;
-}
-
-export namespace InvalidParameterException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Resource was not found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-export enum ConfigCapabilityType {
-  ANTENNA_DOWNLINK = "antenna-downlink",
-  ANTENNA_DOWNLINK_DEMOD_DECODE = "antenna-downlink-demod-decode",
-  ANTENNA_UPLINK = "antenna-uplink",
-  DATAFLOW_ENDPOINT = "dataflow-endpoint",
-  S3_RECORDING = "s3-recording",
-  TRACKING = "tracking",
-  UPLINK_ECHO = "uplink-echo",
-}
-
-/**
- * <p/>
+ * <p>Response containing the ARN, ID, and type of a <code>Config</code>. </p>
+ * @public
  */
 export interface ConfigIdResponse {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
-  configId?: string;
+  configId?: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType?: ConfigCapabilityType | string;
+  configType?: ConfigCapabilityType | undefined;
 
   /**
    * <p>ARN of a <code>Config</code>.</p>
+   * @public
    */
-  configArn?: string;
-}
-
-export namespace ConfigIdResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigIdResponse): any => ({
-    ...obj,
-  });
+  configArn?: string | undefined;
 }
 
 /**
  * <p>Information about the dataflow endpoint <code>Config</code>.</p>
+ * @public
  */
 export interface DataflowEndpointConfig {
   /**
    * <p>Name of a dataflow endpoint.</p>
+   * @public
    */
   dataflowEndpointName: string | undefined;
 
   /**
    * <p>Region of a dataflow endpoint.</p>
+   * @public
    */
-  dataflowEndpointRegion?: string;
-}
-
-export namespace DataflowEndpointConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataflowEndpointConfig): any => ({
-    ...obj,
-  });
+  dataflowEndpointRegion?: string | undefined;
 }
 
 /**
  * <p>Information about an S3 recording <code>Config</code>.</p>
+ * @public
  */
 export interface S3RecordingConfig {
   /**
    * <p>ARN of the bucket to record to.</p>
+   * @public
    */
   bucketArn: string | undefined;
 
   /**
    * <p>ARN of the role Ground Station assumes to write data to the bucket.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>S3 Key prefix to prefice data files.</p>
+   * @public
    */
-  prefix?: string;
-}
-
-export namespace S3RecordingConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3RecordingConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum Criticality {
-  PREFERRED = "PREFERRED",
-  REMOVED = "REMOVED",
-  REQUIRED = "REQUIRED",
+  prefix?: string | undefined;
 }
 
 /**
- * <p>Object that determines whether tracking should be used during a contact
- *          executed with this <code>Config</code> in the mission profile.</p>
+ * <p>Information for telemetry delivery to Kinesis Data Streams.</p>
+ * @public
+ */
+export interface KinesisDataStreamData {
+  /**
+   * <p>ARN of the IAM Role used by AWS Ground Station to deliver telemetry.</p>
+   * @public
+   */
+  kinesisRoleArn: string | undefined;
+
+  /**
+   * <p>ARN of the Kinesis Data Stream to deliver telemetry to.</p>
+   * @public
+   */
+  kinesisDataStreamArn: string | undefined;
+}
+
+/**
+ * <p>Information about a telemetry sink.</p>
+ * @public
+ */
+export type TelemetrySinkData =
+  | TelemetrySinkData.KinesisDataStreamDataMember
+  | TelemetrySinkData.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TelemetrySinkData {
+  /**
+   * <p>Information about a telemetry sink of type <code>KINESIS_DATA_STREAM</code>.</p>
+   * @public
+   */
+  export interface KinesisDataStreamDataMember {
+    kinesisDataStreamData: KinesisDataStreamData;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    kinesisDataStreamData?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    kinesisDataStreamData: (value: KinesisDataStreamData) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Information about a telemetry sink <code>Config</code>.</p>
+ * @public
+ */
+export interface TelemetrySinkConfig {
+  /**
+   * <p>The type of telemetry sink.</p>
+   * @public
+   */
+  telemetrySinkType: TelemetrySinkType | undefined;
+
+  /**
+   * <p>Information about the telemetry sink specified by the <code>telemetrySinkType</code>.</p>
+   * @public
+   */
+  telemetrySinkData: TelemetrySinkData | undefined;
+}
+
+/**
+ * <p>Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile.</p>
+ * @public
  */
 export interface TrackingConfig {
   /**
    * <p>Current setting for autotrack.</p>
+   * @public
    */
-  autotrack: Criticality | string | undefined;
-}
-
-export namespace TrackingConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TrackingConfig): any => ({
-    ...obj,
-  });
+  autotrack: Criticality | undefined;
 }
 
 /**
- * <p>Information about an uplink echo <code>Config</code>.</p>
- *          <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the
- *          specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code>
- *          is used in a contact.</p>
+ * <p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code> AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+ * @public
  */
 export interface UplinkEchoConfig {
   /**
    * <p>Whether or not an uplink <code>Config</code> is enabled.</p>
+   * @public
    */
   enabled: boolean | undefined;
 
   /**
    * <p>ARN of an uplink <code>Config</code>.</p>
+   * @public
    */
   antennaUplinkConfigArn: string | undefined;
 }
 
-export namespace UplinkEchoConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UplinkEchoConfig): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Object containing the parameters of a <code>Config</code>.</p>
- *          <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+ * <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+ * @public
  */
 export type ConfigTypeData =
   | ConfigTypeData.AntennaDownlinkConfigMember
@@ -564,13 +1033,18 @@ export type ConfigTypeData =
   | ConfigTypeData.AntennaUplinkConfigMember
   | ConfigTypeData.DataflowEndpointConfigMember
   | ConfigTypeData.S3RecordingConfigMember
+  | ConfigTypeData.TelemetrySinkConfigMember
   | ConfigTypeData.TrackingConfigMember
   | ConfigTypeData.UplinkEchoConfigMember
   | ConfigTypeData.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace ConfigTypeData {
   /**
    * <p>Information about how AWS Ground Station should configure an antenna for downlink during a contact.</p>
+   * @public
    */
   export interface AntennaDownlinkConfigMember {
     antennaDownlinkConfig: AntennaDownlinkConfig;
@@ -580,11 +1054,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
    * <p>Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. </p>
+   * @public
    */
   export interface TrackingConfigMember {
     antennaDownlinkConfig?: never;
@@ -594,11 +1070,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
    * <p>Information about the dataflow endpoint <code>Config</code>.</p>
+   * @public
    */
   export interface DataflowEndpointConfigMember {
     antennaDownlinkConfig?: never;
@@ -608,11 +1086,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
    * <p>Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.</p>
+   * @public
    */
   export interface AntennaDownlinkDemodDecodeConfigMember {
     antennaDownlinkConfig?: never;
@@ -622,11 +1102,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
    * <p>Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.</p>
+   * @public
    */
   export interface AntennaUplinkConfigMember {
     antennaDownlinkConfig?: never;
@@ -636,12 +1118,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig: AntennaUplinkConfig;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
-   * <p>Information about an uplink echo <code>Config</code>.</p>
-   *          <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+   * <p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code> AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>
+   * @public
    */
   export interface UplinkEchoConfigMember {
     antennaDownlinkConfig?: never;
@@ -651,11 +1134,13 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig: UplinkEchoConfig;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
   /**
    * <p>Information about an S3 recording <code>Config</code>.</p>
+   * @public
    */
   export interface S3RecordingConfigMember {
     antennaDownlinkConfig?: never;
@@ -665,9 +1150,29 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig: S3RecordingConfig;
+    telemetrySinkConfig?: never;
     $unknown?: never;
   }
 
+  /**
+   * <p>Information about a telemetry sink <code>Config</code>.</p>
+   * @public
+   */
+  export interface TelemetrySinkConfigMember {
+    antennaDownlinkConfig?: never;
+    trackingConfig?: never;
+    dataflowEndpointConfig?: never;
+    antennaDownlinkDemodDecodeConfig?: never;
+    antennaUplinkConfig?: never;
+    uplinkEchoConfig?: never;
+    s3RecordingConfig?: never;
+    telemetrySinkConfig: TelemetrySinkConfig;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     antennaDownlinkConfig?: never;
     trackingConfig?: never;
@@ -676,9 +1181,14 @@ export namespace ConfigTypeData {
     antennaUplinkConfig?: never;
     uplinkEchoConfig?: never;
     s3RecordingConfig?: never;
+    telemetrySinkConfig?: never;
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     antennaDownlinkConfig: (value: AntennaDownlinkConfig) => T;
     trackingConfig: (value: TrackingConfig) => T;
@@ -687,455 +1197,506 @@ export namespace ConfigTypeData {
     antennaUplinkConfig: (value: AntennaUplinkConfig) => T;
     uplinkEchoConfig: (value: UplinkEchoConfig) => T;
     s3RecordingConfig: (value: S3RecordingConfig) => T;
+    telemetrySinkConfig: (value: TelemetrySinkConfig) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: ConfigTypeData, visitor: Visitor<T>): T => {
-    if (value.antennaDownlinkConfig !== undefined) return visitor.antennaDownlinkConfig(value.antennaDownlinkConfig);
-    if (value.trackingConfig !== undefined) return visitor.trackingConfig(value.trackingConfig);
-    if (value.dataflowEndpointConfig !== undefined) return visitor.dataflowEndpointConfig(value.dataflowEndpointConfig);
-    if (value.antennaDownlinkDemodDecodeConfig !== undefined)
-      return visitor.antennaDownlinkDemodDecodeConfig(value.antennaDownlinkDemodDecodeConfig);
-    if (value.antennaUplinkConfig !== undefined) return visitor.antennaUplinkConfig(value.antennaUplinkConfig);
-    if (value.uplinkEchoConfig !== undefined) return visitor.uplinkEchoConfig(value.uplinkEchoConfig);
-    if (value.s3RecordingConfig !== undefined) return visitor.s3RecordingConfig(value.s3RecordingConfig);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigTypeData): any => {
-    if (obj.antennaDownlinkConfig !== undefined)
-      return { antennaDownlinkConfig: AntennaDownlinkConfig.filterSensitiveLog(obj.antennaDownlinkConfig) };
-    if (obj.trackingConfig !== undefined)
-      return { trackingConfig: TrackingConfig.filterSensitiveLog(obj.trackingConfig) };
-    if (obj.dataflowEndpointConfig !== undefined)
-      return { dataflowEndpointConfig: DataflowEndpointConfig.filterSensitiveLog(obj.dataflowEndpointConfig) };
-    if (obj.antennaDownlinkDemodDecodeConfig !== undefined)
-      return {
-        antennaDownlinkDemodDecodeConfig: AntennaDownlinkDemodDecodeConfig.filterSensitiveLog(
-          obj.antennaDownlinkDemodDecodeConfig
-        ),
-      };
-    if (obj.antennaUplinkConfig !== undefined)
-      return { antennaUplinkConfig: AntennaUplinkConfig.filterSensitiveLog(obj.antennaUplinkConfig) };
-    if (obj.uplinkEchoConfig !== undefined)
-      return { uplinkEchoConfig: UplinkEchoConfig.filterSensitiveLog(obj.uplinkEchoConfig) };
-    if (obj.s3RecordingConfig !== undefined)
-      return { s3RecordingConfig: S3RecordingConfig.filterSensitiveLog(obj.s3RecordingConfig) };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>CreateConfig</code> operation. </p>
+ * @public
  */
 export interface CreateConfigRequest {
   /**
    * <p>Name of a <code>Config</code>.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Parameters of a <code>Config</code>.</p>
+   * @public
    */
   configData: ConfigTypeData | undefined;
 
   /**
    * <p>Tags assigned to a <code>Config</code>.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace CreateConfigRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigRequest): any => ({
-    ...obj,
-    ...(obj.configData && { configData: ConfigTypeData.filterSensitiveLog(obj.configData) }),
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>Account limits for this resource have been exceeded.</p>
- */
-export interface ResourceLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ResourceLimitExceededException";
-  $fault: "client";
-  message?: string;
-  /**
-   * <p/>
-   */
-  parameterName?: string;
-}
-
-export namespace ResourceLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p/>
+ * <p>Input for the <code>DeleteConfig</code> operation. </p>
+ * @public
  */
 export interface DeleteConfigRequest {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
   configId: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType: ConfigCapabilityType | string | undefined;
-}
-
-export namespace DeleteConfigRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigRequest): any => ({
-    ...obj,
-  });
+  configType: ConfigCapabilityType | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>GetConfig</code> operation. </p>
+ * @public
  */
 export interface GetConfigRequest {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
   configId: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType: ConfigCapabilityType | string | undefined;
-}
-
-export namespace GetConfigRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConfigRequest): any => ({
-    ...obj,
-  });
+  configType: ConfigCapabilityType | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>GetConfig</code> operation. </p>
+ * @public
  */
 export interface GetConfigResponse {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
   configId: string | undefined;
 
   /**
-   * <p>ARN of a <code>Config</code>
-   *          </p>
+   * <p>ARN of a <code>Config</code> </p>
+   * @public
    */
   configArn: string | undefined;
 
   /**
    * <p>Name of a <code>Config</code>.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType?: ConfigCapabilityType | string;
+  configType?: ConfigCapabilityType | undefined;
 
   /**
    * <p>Data elements in a <code>Config</code>.</p>
+   * @public
    */
   configData: ConfigTypeData | undefined;
 
   /**
    * <p>Tags assigned to a <code>Config</code>.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace GetConfigResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConfigResponse): any => ({
-    ...obj,
-    ...(obj.configData && { configData: ConfigTypeData.filterSensitiveLog(obj.configData) }),
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>ListConfigs</code> operation. </p>
+ * @public
  */
 export interface ListConfigsRequest {
   /**
    * <p>Maximum number of <code>Configs</code> returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token returned in the request of a previous <code>ListConfigs</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListConfigsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConfigsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>An item in a list of <code>Config</code> objects.</p>
+ * @public
  */
 export interface ConfigListItem {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
-  configId?: string;
+  configId?: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType?: ConfigCapabilityType | string;
+  configType?: ConfigCapabilityType | undefined;
 
   /**
    * <p>ARN of a <code>Config</code>.</p>
+   * @public
    */
-  configArn?: string;
+  configArn?: string | undefined;
 
   /**
    * <p>Name of a <code>Config</code>.</p>
+   * @public
    */
-  name?: string;
-}
-
-export namespace ConfigListItem {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigListItem): any => ({
-    ...obj,
-  });
+  name?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListConfigs</code> operation. </p>
+ * @public
  */
 export interface ListConfigsResponse {
   /**
    * <p>Next token returned in the response of a previous <code>ListConfigs</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>List of <code>Config</code> items.</p>
+   * @public
    */
-  configList?: ConfigListItem[];
-}
-
-export namespace ListConfigsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConfigsResponse): any => ({
-    ...obj,
-  });
+  configList?: ConfigListItem[] | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>UpdateConfig</code> operation. </p>
+ * @public
  */
 export interface UpdateConfigRequest {
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
   configId: string | undefined;
 
   /**
    * <p>Name of a <code>Config</code>.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType: ConfigCapabilityType | string | undefined;
+  configType: ConfigCapabilityType | undefined;
 
   /**
    * <p>Parameters of a <code>Config</code>.</p>
+   * @public
    */
   configData: ConfigTypeData | undefined;
 }
 
-export namespace UpdateConfigRequest {
+/**
+ * <p>Connection details for Ground Station to Agent and Agent to customer</p>
+ * @public
+ */
+export interface DownlinkConnectionDetails {
   /**
-   * @internal
+   * <p>Ingress address of AgentEndpoint with a port range and an optional mtu.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConfigRequest): any => ({
-    ...obj,
-    ...(obj.configData && { configData: ConfigTypeData.filterSensitiveLog(obj.configData) }),
-  });
+  agentIpAndPortAddress: RangedConnectionDetails | undefined;
+
+  /**
+   * <p>Egress address of AgentEndpoint with an optional mtu.</p>
+   * @public
+   */
+  egressAddressAndPort: ConnectionDetails | undefined;
 }
 
 /**
- * <p>Information about the socket address.</p>
+ * <p>Dataflow details for a downlink endpoint</p>
+ * @public
  */
-export interface SocketAddress {
+export type DownlinkDataflowDetails =
+  | DownlinkDataflowDetails.AgentConnectionDetailsMember
+  | DownlinkDataflowDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace DownlinkDataflowDetails {
   /**
-   * <p>Name of a socket address.</p>
+   * <p>Downlink connection details for customer to Agent and Agent to Ground Station</p>
+   * @public
+   */
+  export interface AgentConnectionDetailsMember {
+    agentConnectionDetails: DownlinkConnectionDetails;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    agentConnectionDetails?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    agentConnectionDetails: (value: DownlinkConnectionDetails) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Details for a downlink agent endpoint</p>
+ * @public
+ */
+export interface DownlinkAwsGroundStationAgentEndpointDetails {
+  /**
+   * <p>Downlink dataflow endpoint name</p>
+   * @public
    */
   name: string | undefined;
 
   /**
-   * <p>Port of a socket address.</p>
+   * <p>Dataflow details for the downlink endpoint</p>
+   * @public
    */
-  port: number | undefined;
-}
+  dataflowDetails: DownlinkDataflowDetails | undefined;
 
-export namespace SocketAddress {
   /**
-   * @internal
+   * <p>Status of the agent associated with the downlink dataflow endpoint</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SocketAddress): any => ({
-    ...obj,
-  });
-}
+  agentStatus?: AgentStatus | undefined;
 
-export enum EndpointStatus {
-  created = "created",
-  creating = "creating",
-  deleted = "deleted",
-  deleting = "deleting",
-  failed = "failed",
+  /**
+   * <p>Health audit results for the downlink dataflow endpoint</p>
+   * @public
+   */
+  auditResults?: AuditResults | undefined;
 }
 
 /**
  * <p>Information about a dataflow endpoint.</p>
+ * @public
  */
 export interface DataflowEndpoint {
   /**
    * <p>Name of a dataflow endpoint.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>Socket address of a dataflow endpoint.</p>
+   * @public
    */
-  address?: SocketAddress;
+  address?: SocketAddress | undefined;
 
   /**
    * <p>Status of a dataflow endpoint.</p>
+   * @public
    */
-  status?: EndpointStatus | string;
+  status?: EndpointStatus | undefined;
 
   /**
    * <p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>
+   * @public
    */
-  mtu?: number;
-}
-
-export namespace DataflowEndpoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataflowEndpoint): any => ({
-    ...obj,
-  });
+  mtu?: number | undefined;
 }
 
 /**
  * <p>Information about endpoints.</p>
+ * @public
  */
 export interface SecurityDetails {
   /**
    * <p>A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.</p>
+   * @public
    */
   subnetIds: string[] | undefined;
 
   /**
    * <p>The security groups to attach to the elastic network interfaces.</p>
+   * @public
    */
   securityGroupIds: string[] | undefined;
 
   /**
    * <p>ARN to a role needed for connecting streams to your instances. </p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace SecurityDetails {
+/**
+ * <p>Connection details for customer to Agent and Agent to Ground Station</p>
+ * @public
+ */
+export interface UplinkConnectionDetails {
   /**
-   * @internal
+   * <p>Egress address of AgentEndpoint with an optional mtu.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SecurityDetails): any => ({
-    ...obj,
-  });
+  ingressAddressAndPort: ConnectionDetails | undefined;
+
+  /**
+   * <p>Ingress address of AgentEndpoint with a port range and an optional mtu.</p>
+   * @public
+   */
+  agentIpAndPortAddress: RangedConnectionDetails | undefined;
+}
+
+/**
+ * <p>Dataflow details for an uplink endpoint</p>
+ * @public
+ */
+export type UplinkDataflowDetails =
+  | UplinkDataflowDetails.AgentConnectionDetailsMember
+  | UplinkDataflowDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace UplinkDataflowDetails {
+  /**
+   * <p>Uplink connection details for customer to Agent and Agent to Ground Station</p>
+   * @public
+   */
+  export interface AgentConnectionDetailsMember {
+    agentConnectionDetails: UplinkConnectionDetails;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    agentConnectionDetails?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    agentConnectionDetails: (value: UplinkConnectionDetails) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Details for an uplink agent endpoint</p>
+ * @public
+ */
+export interface UplinkAwsGroundStationAgentEndpointDetails {
+  /**
+   * <p>Uplink dataflow endpoint name</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Dataflow details for the uplink endpoint</p>
+   * @public
+   */
+  dataflowDetails: UplinkDataflowDetails | undefined;
+
+  /**
+   * <p>Status of the agent associated with the uplink dataflow endpoint</p>
+   * @public
+   */
+  agentStatus?: AgentStatus | undefined;
+
+  /**
+   * <p>Health audit results for the uplink dataflow endpoint</p>
+   * @public
+   */
+  auditResults?: AuditResults | undefined;
 }
 
 /**
  * <p>Information about the endpoint details.</p>
+ * @public
  */
 export interface EndpointDetails {
   /**
-   * <p>Endpoint security details.</p>
+   * <p>Endpoint security details including a list of subnets, a list of security groups and a role to connect streams to instances.</p>
+   * @public
    */
-  securityDetails?: SecurityDetails;
+  securityDetails?: SecurityDetails | undefined;
 
   /**
    * <p>A dataflow endpoint.</p>
+   * @public
    */
-  endpoint?: DataflowEndpoint;
-}
+  endpoint?: DataflowEndpoint | undefined;
 
-export namespace EndpointDetails {
   /**
-   * @internal
+   * <p>An agent endpoint.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: EndpointDetails): any => ({
-    ...obj,
-  });
+  awsGroundStationAgentEndpoint?: AwsGroundStationAgentEndpoint | undefined;
+
+  /**
+   * <p>Definition for an uplink agent endpoint</p>
+   * @public
+   */
+  uplinkAwsGroundStationAgentEndpoint?: UplinkAwsGroundStationAgentEndpointDetails | undefined;
+
+  /**
+   * <p>Definition for a downlink agent endpoint</p>
+   * @public
+   */
+  downlinkAwsGroundStationAgentEndpoint?: DownlinkAwsGroundStationAgentEndpointDetails | undefined;
+
+  /**
+   * <p>A dataflow endpoint health status. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>
+   * @public
+   */
+  healthStatus?: CapabilityHealth | undefined;
+
+  /**
+   * <p>Health reasons for a dataflow endpoint. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.</p>
+   * @public
+   */
+  healthReasons?: CapabilityHealthReason[] | undefined;
 }
 
 /**
  * <p>Details about an S3 recording <code>Config</code> used in a contact.</p>
+ * @public
  */
 export interface S3RecordingDetails {
   /**
    * <p>ARN of the bucket used.</p>
+   * @public
    */
-  bucketArn?: string;
+  bucketArn?: string | undefined;
 
   /**
-   * <p>Template of the S3 key used.</p>
+   * <p>Key template used for the S3 Recording Configuration</p>
+   * @public
    */
-  keyTemplate?: string;
-}
-
-export namespace S3RecordingDetails {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3RecordingDetails): any => ({
-    ...obj,
-  });
+  keyTemplate?: string | undefined;
 }
 
 /**
  * <p>Details for certain <code>Config</code> object types in a contact.</p>
+ * @public
  */
 export type ConfigDetails =
   | ConfigDetails.AntennaDemodDecodeDetailsMember
@@ -1143,9 +1704,13 @@ export type ConfigDetails =
   | ConfigDetails.S3RecordingDetailsMember
   | ConfigDetails.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace ConfigDetails {
   /**
    * <p>Information about the endpoint details.</p>
+   * @public
    */
   export interface EndpointDetailsMember {
     endpointDetails: EndpointDetails;
@@ -1156,6 +1721,7 @@ export namespace ConfigDetails {
 
   /**
    * <p>Details for antenna demod decode <code>Config</code> in a contact.</p>
+   * @public
    */
   export interface AntennaDemodDecodeDetailsMember {
     endpointDetails?: never;
@@ -1166,6 +1732,7 @@ export namespace ConfigDetails {
 
   /**
    * <p>Details for an S3 recording <code>Config</code> in a contact.</p>
+   * @public
    */
   export interface S3RecordingDetailsMember {
     endpointDetails?: never;
@@ -1174,6 +1741,9 @@ export namespace ConfigDetails {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     endpointDetails?: never;
     antennaDemodDecodeDetails?: never;
@@ -1181,1365 +1751,2753 @@ export namespace ConfigDetails {
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     endpointDetails: (value: EndpointDetails) => T;
     antennaDemodDecodeDetails: (value: AntennaDemodDecodeDetails) => T;
     s3RecordingDetails: (value: S3RecordingDetails) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: ConfigDetails, visitor: Visitor<T>): T => {
-    if (value.endpointDetails !== undefined) return visitor.endpointDetails(value.endpointDetails);
-    if (value.antennaDemodDecodeDetails !== undefined)
-      return visitor.antennaDemodDecodeDetails(value.antennaDemodDecodeDetails);
-    if (value.s3RecordingDetails !== undefined) return visitor.s3RecordingDetails(value.s3RecordingDetails);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigDetails): any => {
-    if (obj.endpointDetails !== undefined)
-      return { endpointDetails: EndpointDetails.filterSensitiveLog(obj.endpointDetails) };
-    if (obj.antennaDemodDecodeDetails !== undefined)
-      return { antennaDemodDecodeDetails: AntennaDemodDecodeDetails.filterSensitiveLog(obj.antennaDemodDecodeDetails) };
-    if (obj.s3RecordingDetails !== undefined)
-      return { s3RecordingDetails: S3RecordingDetails.filterSensitiveLog(obj.s3RecordingDetails) };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>DescribeContact</code> operation. </p>
+ * @public
  */
 export interface DescribeContactRequest {
   /**
    * <p>UUID of a contact.</p>
+   * @public
    */
   contactId: string | undefined;
 }
 
-export namespace DescribeContactRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeContactRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ContactStatus {
-  AVAILABLE = "AVAILABLE",
-  AWS_CANCELLED = "AWS_CANCELLED",
-  AWS_FAILED = "AWS_FAILED",
-  CANCELLED = "CANCELLED",
-  CANCELLING = "CANCELLING",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  FAILED_TO_SCHEDULE = "FAILED_TO_SCHEDULE",
-  PASS = "PASS",
-  POSTPASS = "POSTPASS",
-  PREPASS = "PREPASS",
-  SCHEDULED = "SCHEDULED",
-  SCHEDULING = "SCHEDULING",
-}
-
 /**
  * <p>Dataflow details for the destination side.</p>
+ * @public
  */
 export interface Destination {
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType?: ConfigCapabilityType | string;
+  configType?: ConfigCapabilityType | undefined;
 
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
-  configId?: string;
+  configId?: string | undefined;
 
   /**
    * <p>Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.</p>
+   * @public
    */
-  configDetails?: ConfigDetails;
+  configDetails?: ConfigDetails | undefined;
 
   /**
    * <p>Region of a dataflow destination.</p>
+   * @public
    */
-  dataflowDestinationRegion?: string;
-}
-
-export namespace Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Destination): any => ({
-    ...obj,
-    ...(obj.configDetails && { configDetails: ConfigDetails.filterSensitiveLog(obj.configDetails) }),
-  });
+  dataflowDestinationRegion?: string | undefined;
 }
 
 /**
  * <p>Dataflow details for the source side.</p>
+ * @public
  */
 export interface Source {
   /**
    * <p>Type of a <code>Config</code>.</p>
+   * @public
    */
-  configType?: ConfigCapabilityType | string;
+  configType?: ConfigCapabilityType | undefined;
 
   /**
    * <p>UUID of a <code>Config</code>.</p>
+   * @public
    */
-  configId?: string;
+  configId?: string | undefined;
 
   /**
-   * <p>Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.</p>
+   * <p>Additional details for a <code>Config</code>, if type is <code>dataflow-endpoint</code> or <code>antenna-downlink-demod-decode</code> </p>
+   * @public
    */
-  configDetails?: ConfigDetails;
+  configDetails?: ConfigDetails | undefined;
 
   /**
    * <p>Region of a dataflow source.</p>
+   * @public
    */
-  dataflowSourceRegion?: string;
-}
-
-export namespace Source {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Source): any => ({
-    ...obj,
-    ...(obj.configDetails && { configDetails: ConfigDetails.filterSensitiveLog(obj.configDetails) }),
-  });
+  dataflowSourceRegion?: string | undefined;
 }
 
 /**
  * <p>Information about a dataflow edge used in a contact.</p>
+ * @public
  */
 export interface DataflowDetail {
   /**
    * <p>Dataflow details for the source side.</p>
+   * @public
    */
-  source?: Source;
+  source?: Source | undefined;
 
   /**
    * <p>Dataflow details for the destination side.</p>
+   * @public
    */
-  destination?: Destination;
+  destination?: Destination | undefined;
 
   /**
    * <p>Error message for a dataflow.</p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 }
 
-export namespace DataflowDetail {
+/**
+ * <p>Ephemeris data for a contact.</p>
+ * @public
+ */
+export interface EphemerisResponseData {
   /**
-   * @internal
+   * <p>Unique identifier of the ephemeris. Appears only for custom ephemerides.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DataflowDetail): any => ({
-    ...obj,
-    ...(obj.source && { source: Source.filterSensitiveLog(obj.source) }),
-    ...(obj.destination && { destination: Destination.filterSensitiveLog(obj.destination) }),
-  });
+  ephemerisId?: string | undefined;
+
+  /**
+   * <p>Type of ephemeris.</p>
+   * @public
+   */
+  ephemerisType: EphemerisType | undefined;
 }
 
 /**
  * <p>Elevation angle of the satellite in the sky during a contact.</p>
+ * @public
  */
 export interface Elevation {
   /**
    * <p>Elevation angle value.</p>
+   * @public
    */
   value: number | undefined;
 
   /**
    * <p>Elevation angle units.</p>
+   * @public
    */
-  unit: AngleUnits | string | undefined;
-}
-
-export namespace Elevation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Elevation): any => ({
-    ...obj,
-  });
+  unit: AngleUnits | undefined;
 }
 
 /**
- * <p/>
+ * <p>Program track settings for <a>OEMEphemeris</a>.</p>
+ * @public
+ */
+export interface OemProgramTrackSettings {
+  /**
+   * <p>Unique identifier of the OEM ephemeris.</p>
+   * @public
+   */
+  ephemerisId: string | undefined;
+}
+
+/**
+ * <p>Program track settings for <a>TLEEphemeris</a>.</p>
+ * @public
+ */
+export interface TleProgramTrackSettings {
+  /**
+   * <p>Unique identifier of the TLE ephemeris.</p>
+   * @public
+   */
+  ephemerisId: string | undefined;
+}
+
+/**
+ * <p>Program track settings for an antenna during a contact.</p>
+ * @public
+ */
+export type ProgramTrackSettings =
+  | ProgramTrackSettings.AzElMember
+  | ProgramTrackSettings.OemMember
+  | ProgramTrackSettings.TleMember
+  | ProgramTrackSettings.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ProgramTrackSettings {
+  /**
+   * <p>Program track settings for <a>AzElEphemeris</a>.</p>
+   * @public
+   */
+  export interface AzElMember {
+    azEl: AzElProgramTrackSettings;
+    oem?: never;
+    tle?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Program track settings for <a>OEMEphemeris</a>.</p>
+   * @public
+   */
+  export interface OemMember {
+    azEl?: never;
+    oem: OemProgramTrackSettings;
+    tle?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Program track settings for <a>TLEEphemeris</a>.</p>
+   * @public
+   */
+  export interface TleMember {
+    azEl?: never;
+    oem?: never;
+    tle: TleProgramTrackSettings;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    azEl?: never;
+    oem?: never;
+    tle?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    azEl: (value: AzElProgramTrackSettings) => T;
+    oem: (value: OemProgramTrackSettings) => T;
+    tle: (value: TleProgramTrackSettings) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Overrides the default tracking configuration on an antenna during a contact.</p>
+ * @public
+ */
+export interface TrackingOverrides {
+  /**
+   * <p>Program track settings to override for antenna tracking during the contact.</p>
+   * @public
+   */
+  programTrackSettings?: ProgramTrackSettings | undefined;
+}
+
+/**
+ * <p>Version information for a contact.</p>
+ * @public
+ */
+export interface ContactVersion {
+  /**
+   * <p>Version ID of a contact.</p>
+   * @public
+   */
+  versionId?: number | undefined;
+
+  /**
+   * <p>Time the contact version was created in UTC.</p>
+   * @public
+   */
+  created?: Date | undefined;
+
+  /**
+   * <p>Time the contact version was activated in UTC. A version is activated when it becomes the current active version of the contact.</p>
+   * @public
+   */
+  activated?: Date | undefined;
+
+  /**
+   * <p>Time the contact version was superseded in UTC. A version is superseded when a newer version becomes active.</p>
+   * @public
+   */
+  superseded?: Date | undefined;
+
+  /**
+   * <p>Time the contact version was last updated in UTC.</p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+
+  /**
+   * <p>Status of the contact version.</p>
+   * @public
+   */
+  status?: VersionStatus | undefined;
+
+  /**
+   * <p>List of failure codes for the contact version.</p>
+   * @public
+   */
+  failureCodes?: VersionFailureReasonCode[] | undefined;
+
+  /**
+   * <p>Failure message for the contact version.</p>
+   * @public
+   */
+  failureMessage?: string | undefined;
+}
+
+/**
+ * <p>Output for the <code>DescribeContact</code> operation. </p>
+ * @public
  */
 export interface DescribeContactResponse {
   /**
    * <p>UUID of a contact.</p>
+   * @public
    */
-  contactId?: string;
+  contactId?: string | undefined;
 
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
-  missionProfileArn?: string;
+  missionProfileArn?: string | undefined;
 
   /**
    * <p>ARN of a satellite.</p>
+   * @public
    */
-  satelliteArn?: string;
+  satelliteArn?: string | undefined;
 
   /**
-   * <p>Start time of a contact.</p>
+   * <p>Start time of a contact in UTC.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
-   * <p>End time of a contact.</p>
+   * <p>End time of a contact in UTC.</p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
-   * <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+   * <p>Start time in UTC of the pre-pass period, at which you receive a CloudWatch event indicating an upcoming pass.</p>
+   * @public
    */
-  prePassStartTime?: Date;
+  prePassStartTime?: Date | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>End time in UTC of the post-pass period, at which you receive a CloudWatch event indicating the pass has finished.</p>
+   * @public
    */
-  postPassEndTime?: Date;
+  postPassEndTime?: Date | undefined;
 
   /**
    * <p>Ground station for a contact.</p>
+   * @public
    */
-  groundStation?: string;
+  groundStation?: string | undefined;
 
   /**
    * <p>Status of a contact.</p>
+   * @public
    */
-  contactStatus?: ContactStatus | string;
+  contactStatus?: ContactStatus | undefined;
 
   /**
    * <p>Error message for a contact.</p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 
   /**
    * <p>Maximum elevation angle of a contact.</p>
+   * @public
    */
-  maximumElevation?: Elevation;
+  maximumElevation?: Elevation | undefined;
 
   /**
    * <p>Tags assigned to a contact.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 
   /**
-   * <p>Region of a contact.</p>
+   * <p>Region where the <code>ReserveContact</code> API was called to schedule this contact.</p>
+   * @public
    */
-  region?: string;
+  region?: string | undefined;
 
   /**
    * <p>List describing source and destination details for each dataflow edge.</p>
+   * @public
    */
-  dataflowList?: DataflowDetail[];
-}
+  dataflowList?: DataflowDetail[] | undefined;
 
-export namespace DescribeContactResponse {
   /**
-   * @internal
+   * <p> Projected time in UTC your satellite will rise above the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeContactResponse): any => ({
-    ...obj,
-    ...(obj.dataflowList && { dataflowList: obj.dataflowList.map((item) => DataflowDetail.filterSensitiveLog(item)) }),
-  });
+  visibilityStartTime?: Date | undefined;
+
+  /**
+   * <p> Projected time in UTC your satellite will set below the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts.</p>
+   * @public
+   */
+  visibilityEndTime?: Date | undefined;
+
+  /**
+   * <p>Tracking configuration overrides specified when the contact was reserved.</p>
+   * @public
+   */
+  trackingOverrides?: TrackingOverrides | undefined;
+
+  /**
+   * <p>The ephemeris that determines antenna pointing directions for the contact.</p>
+   * @public
+   */
+  ephemeris?: EphemerisResponseData | undefined;
+
+  /**
+   * <p>Version information for a contact.</p>
+   * @public
+   */
+  version?: ContactVersion | undefined;
 }
 
 /**
- * <p/>
+ * @public
+ */
+export interface DescribeContactVersionRequest {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId: string | undefined;
+
+  /**
+   * <p>Version ID of a contact.</p>
+   * @public
+   */
+  versionId: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeContactVersionResponse {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId?: string | undefined;
+
+  /**
+   * <p>ARN of the contact's mission profile.</p>
+   * @public
+   */
+  missionProfileArn?: string | undefined;
+
+  /**
+   * <p>ARN of a satellite.</p>
+   * @public
+   */
+  satelliteArn?: string | undefined;
+
+  /**
+   * <p>Start time of a contact in UTC.</p>
+   * @public
+   */
+  startTime?: Date | undefined;
+
+  /**
+   * <p>End time of a contact in UTC.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+
+  /**
+   * <p>Start time in UTC of the pre-pass period, at which you receive a CloudWatch event indicating an upcoming pass.</p>
+   * @public
+   */
+  prePassStartTime?: Date | undefined;
+
+  /**
+   * <p>End time in UTC of the post-pass period, at which you receive a CloudWatch event indicating the pass has finished.</p>
+   * @public
+   */
+  postPassEndTime?: Date | undefined;
+
+  /**
+   * <p>Ground station for a contact.</p>
+   * @public
+   */
+  groundStation?: string | undefined;
+
+  /**
+   * <p>Status of a contact.</p>
+   * @public
+   */
+  contactStatus?: ContactStatus | undefined;
+
+  /**
+   * <p>Error message for a contact.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+
+  /**
+   * <p>Maximum elevation angle of a contact.</p>
+   * @public
+   */
+  maximumElevation?: Elevation | undefined;
+
+  /**
+   * <p>Tags assigned to a contact.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Region where the <code>ReserveContact</code> API was called to schedule this contact.</p>
+   * @public
+   */
+  region?: string | undefined;
+
+  /**
+   * <p>List describing source and destination details for each dataflow edge.</p>
+   * @public
+   */
+  dataflowList?: DataflowDetail[] | undefined;
+
+  /**
+   * <p> Projected time in UTC your satellite will rise above the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts.</p>
+   * @public
+   */
+  visibilityStartTime?: Date | undefined;
+
+  /**
+   * <p> Projected time in UTC your satellite will set below the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts.</p>
+   * @public
+   */
+  visibilityEndTime?: Date | undefined;
+
+  /**
+   * <p>Tracking configuration overrides applied to this contact version. For the initial version, these are the overrides specified when the contact was reserved. For subsequent versions, these are the overrides associated with that specific version update.</p>
+   * @public
+   */
+  trackingOverrides?: TrackingOverrides | undefined;
+
+  /**
+   * <p>The ephemeris that determines antenna pointing directions for the contact.</p>
+   * @public
+   */
+  ephemeris?: EphemerisResponseData | undefined;
+
+  /**
+   * <p>Version information for a contact.</p>
+   * @public
+   */
+  version?: ContactVersion | undefined;
+}
+
+/**
+ * <p>Filter for selecting contacts that use a specific ephemeris".</p>
+ * @public
+ */
+export type EphemerisFilter =
+  | EphemerisFilter.AzElMember
+  | EphemerisFilter.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EphemerisFilter {
+  /**
+   * <p>Filter for <a>AzElEphemeris</a>.</p>
+   * @public
+   */
+  export interface AzElMember {
+    azEl: AzElEphemerisFilter;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    azEl?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    azEl: (value: AzElEphemerisFilter) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Input for the <code>ListContacts</code> operation. </p>
+ * @public
  */
 export interface ListContactsRequest {
   /**
    * <p>Maximum number of contacts returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token returned in the request of a previous <code>ListContacts</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>Status of a contact reservation.</p>
+   * @public
    */
-  statusList: (ContactStatus | string)[] | undefined;
+  statusList: ContactStatus[] | undefined;
 
   /**
-   * <p>Start time of a contact.</p>
+   * <p>Start time of a contact in UTC.</p>
+   * @public
    */
   startTime: Date | undefined;
 
   /**
-   * <p>End time of a contact.</p>
+   * <p>End time of a contact in UTC.</p>
+   * @public
    */
   endTime: Date | undefined;
 
   /**
    * <p>Name of a ground station.</p>
+   * @public
    */
-  groundStation?: string;
+  groundStation?: string | undefined;
 
   /**
    * <p>ARN of a satellite.</p>
+   * @public
    */
-  satelliteArn?: string;
+  satelliteArn?: string | undefined;
 
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
-  missionProfileArn?: string;
-}
+  missionProfileArn?: string | undefined;
 
-export namespace ListContactsRequest {
   /**
-   * @internal
+   * <p>Filter for selecting contacts that use a specific ephemeris".</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListContactsRequest): any => ({
-    ...obj,
-  });
+  ephemeris?: EphemerisFilter | undefined;
 }
 
 /**
  * <p>Data describing a contact.</p>
+ * @public
  */
 export interface ContactData {
   /**
    * <p>UUID of a contact.</p>
+   * @public
    */
-  contactId?: string;
+  contactId?: string | undefined;
 
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
-  missionProfileArn?: string;
+  missionProfileArn?: string | undefined;
 
   /**
    * <p>ARN of a satellite.</p>
+   * @public
    */
-  satelliteArn?: string;
+  satelliteArn?: string | undefined;
 
   /**
-   * <p>Start time of a contact.</p>
+   * <p>Start time of a contact in UTC.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
-   * <p>End time of a contact.</p>
+   * <p>End time of a contact in UTC.</p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
-   * <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+   * <p>Start time in UTC of the pre-pass period, at which you receive a CloudWatch event indicating an upcoming pass.</p>
+   * @public
    */
-  prePassStartTime?: Date;
+  prePassStartTime?: Date | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>End time in UTC of the post-pass period, at which you receive a CloudWatch event indicating the pass has finished.</p>
+   * @public
    */
-  postPassEndTime?: Date;
+  postPassEndTime?: Date | undefined;
 
   /**
    * <p>Name of a ground station.</p>
+   * @public
    */
-  groundStation?: string;
+  groundStation?: string | undefined;
 
   /**
    * <p>Status of a contact.</p>
+   * @public
    */
-  contactStatus?: ContactStatus | string;
+  contactStatus?: ContactStatus | undefined;
 
   /**
    * <p>Error message of a contact.</p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 
   /**
    * <p>Maximum elevation angle of a contact.</p>
+   * @public
    */
-  maximumElevation?: Elevation;
+  maximumElevation?: Elevation | undefined;
 
   /**
    * <p>Region of a contact.</p>
+   * @public
    */
-  region?: string;
+  region?: string | undefined;
 
   /**
    * <p>Tags assigned to a contact.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace ContactData {
   /**
-   * @internal
+   * <p> Projected time in UTC your satellite will rise above the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i> </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ContactData): any => ({
-    ...obj,
-  });
+  visibilityStartTime?: Date | undefined;
+
+  /**
+   * <p> Projected time in UTC your satellite will set below the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html">receive mask</a>. This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was active during contact execution for completed contacts. <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i> </p>
+   * @public
+   */
+  visibilityEndTime?: Date | undefined;
+
+  /**
+   * <p>The ephemeris that determines antenna pointing for the contact.</p>
+   * @public
+   */
+  ephemeris?: EphemerisResponseData | undefined;
+
+  /**
+   * <p>Version information for a contact.</p>
+   * @public
+   */
+  version?: ContactVersion | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListContacts</code> operation. </p>
+ * @public
  */
 export interface ListContactsResponse {
   /**
    * <p>Next token returned in the response of a previous <code>ListContacts</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>List of contacts.</p>
+   * @public
    */
-  contactList?: ContactData[];
-}
-
-export namespace ListContactsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListContactsResponse): any => ({
-    ...obj,
-  });
+  contactList?: ContactData[] | undefined;
 }
 
 /**
- * <p/>
+ * @public
+ */
+export interface ListContactVersionsRequest {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId: string | undefined;
+
+  /**
+   * <p>Maximum number of contact versions returned.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Next token returned in the request of a previous <code>ListContactVersions</code> call. Used to get the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListContactVersionsResponse {
+  /**
+   * <p>Next token to be used in a subsequent <code>ListContactVersions</code> call to retrieve the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>List of contact versions.</p>
+   * @public
+   */
+  contactVersionsList?: ContactVersion[] | undefined;
+}
+
+/**
+ * <p>Input for the <code>ReserveContact</code> operation. </p>
+ * @public
  */
 export interface ReserveContactRequest {
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
   missionProfileArn: string | undefined;
 
   /**
    * <p>ARN of a satellite</p>
+   * @public
    */
-  satelliteArn: string | undefined;
+  satelliteArn?: string | undefined;
 
   /**
-   * <p>Start time of a contact.</p>
+   * <p>Start time of a contact in UTC.</p>
+   * @public
    */
   startTime: Date | undefined;
 
   /**
-   * <p>End time of a contact.</p>
+   * <p>End time of a contact in UTC.</p>
+   * @public
    */
   endTime: Date | undefined;
 
   /**
    * <p>Name of a ground station.</p>
+   * @public
    */
   groundStation: string | undefined;
 
   /**
    * <p>Tags assigned to a contact.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace ReserveContactRequest {
   /**
-   * @internal
+   * <p>Tracking configuration overrides for the contact.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ReserveContactRequest): any => ({
-    ...obj,
-  });
+  trackingOverrides?: TrackingOverrides | undefined;
 }
 
 /**
- * <p/>
+ * @public
+ */
+export interface UpdateContactRequest {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId: string | undefined;
+
+  /**
+   * <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters. It is generated by the client to ensure idempotent operations, allowing safe retries without unintended side effects.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * <p>Overrides the default tracking configuration on an antenna during a contact.</p>
+   * @public
+   */
+  trackingOverrides?: TrackingOverrides | undefined;
+
+  /**
+   * <p>ARN of a satellite.</p>
+   * @public
+   */
+  satelliteArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateContactResponse {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId?: string | undefined;
+
+  /**
+   * <p>Version ID of a contact.</p>
+   * @public
+   */
+  versionId?: number | undefined;
+}
+
+/**
+ * <p>Details of a contact reservation.</p>
+ * @public
+ */
+export interface ContactReservationDetails {
+  /**
+   * <p>UUID of a contact.</p>
+   * @public
+   */
+  contactId?: string | undefined;
+}
+
+/**
+ * <p>Input for the <code>CreateDataflowEndpointGroup</code> operation. </p>
+ * @public
  */
 export interface CreateDataflowEndpointGroupRequest {
   /**
-   * <p>Endpoint details of each endpoint in the dataflow endpoint group.</p>
+   * <p>Endpoint details of each endpoint in the dataflow endpoint group. All dataflow endpoints within a single dataflow endpoint group must be of the same type. You cannot mix <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html"> AWS Ground Station Agent endpoints</a> with <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html">Dataflow endpoints</a> in the same group. If your use case requires both types of endpoints, you must create separate dataflow endpoint groups for each type. </p>
+   * @public
    */
   endpointDetails: EndpointDetails[] | undefined;
 
   /**
    * <p>Tags of a dataflow endpoint group.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace CreateDataflowEndpointGroupRequest {
   /**
-   * @internal
+   * <p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateDataflowEndpointGroupRequest): any => ({
-    ...obj,
-  });
+  contactPrePassDurationSeconds?: number | undefined;
+
+  /**
+   * <p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>
+   * @public
+   */
+  contactPostPassDurationSeconds?: number | undefined;
 }
 
 /**
- * <p/>
+ * <p>Response containing the ID of a dataflow endpoint group. </p>
+ * @public
  */
 export interface DataflowEndpointGroupIdResponse {
   /**
    * <p>UUID of a dataflow endpoint group.</p>
+   * @public
    */
-  dataflowEndpointGroupId?: string;
-}
-
-export namespace DataflowEndpointGroupIdResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataflowEndpointGroupIdResponse): any => ({
-    ...obj,
-  });
+  dataflowEndpointGroupId?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Definition for a downlink agent endpoint</p>
+ * @public
  */
-export interface CreateMissionProfileRequest {
+export interface DownlinkAwsGroundStationAgentEndpoint {
   /**
-   * <p>Name of a mission profile.</p>
+   * <p>Downlink dataflow endpoint name</p>
+   * @public
    */
   name: string | undefined;
 
   /**
-   * <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+   * <p>Dataflow details for the downlink endpoint</p>
+   * @public
    */
-  contactPrePassDurationSeconds?: number;
+  dataflowDetails: DownlinkDataflowDetails | undefined;
+}
+
+/**
+ * <p>Definition for an uplink agent endpoint</p>
+ * @public
+ */
+export interface UplinkAwsGroundStationAgentEndpoint {
+  /**
+   * <p>Uplink dataflow endpoint name</p>
+   * @public
+   */
+  name: string | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>Dataflow details for the uplink endpoint</p>
+   * @public
    */
-  contactPostPassDurationSeconds?: number;
+  dataflowDetails: UplinkDataflowDetails | undefined;
+}
+
+/**
+ * <p>Endpoint definition used for creating a dataflow endpoint</p>
+ * @public
+ */
+export type CreateEndpointDetails =
+  | CreateEndpointDetails.DownlinkAwsGroundStationAgentEndpointMember
+  | CreateEndpointDetails.UplinkAwsGroundStationAgentEndpointMember
+  | CreateEndpointDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CreateEndpointDetails {
+  /**
+   * <p>Definition for an uplink agent endpoint</p>
+   * @public
+   */
+  export interface UplinkAwsGroundStationAgentEndpointMember {
+    uplinkAwsGroundStationAgentEndpoint: UplinkAwsGroundStationAgentEndpoint;
+    downlinkAwsGroundStationAgentEndpoint?: never;
+    $unknown?: never;
+  }
 
   /**
-   * <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * <p>Definition for a downlink agent endpoint</p>
+   * @public
+   */
+  export interface DownlinkAwsGroundStationAgentEndpointMember {
+    uplinkAwsGroundStationAgentEndpoint?: never;
+    downlinkAwsGroundStationAgentEndpoint: DownlinkAwsGroundStationAgentEndpoint;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    uplinkAwsGroundStationAgentEndpoint?: never;
+    downlinkAwsGroundStationAgentEndpoint?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    uplinkAwsGroundStationAgentEndpoint: (value: UplinkAwsGroundStationAgentEndpoint) => T;
+    downlinkAwsGroundStationAgentEndpoint: (value: DownlinkAwsGroundStationAgentEndpoint) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreateDataflowEndpointGroupV2Request {
+  /**
+   * <p>Dataflow endpoint group's endpoint definitions</p>
+   * @public
+   */
+  endpoints: CreateEndpointDetails[] | undefined;
+
+  /**
+   * <p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>
+   * @public
+   */
+  contactPrePassDurationSeconds?: number | undefined;
+
+  /**
+   * <p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>
+   * @public
+   */
+  contactPostPassDurationSeconds?: number | undefined;
+
+  /**
+   * <p>Tags of a V2 dataflow endpoint group.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDataflowEndpointGroupV2Response {
+  /**
+   * <p>Dataflow endpoint group ID</p>
+   * @public
+   */
+  dataflowEndpointGroupId?: string | undefined;
+}
+
+/**
+ * <p>Ephemeris data in Orbit Ephemeris Message (OEM) format.</p> <p> AWS Ground Station processes OEM ephemerides according to the <a href="https://ccsds.org/Pubs/502x0b3e1.pdf">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format">OEM ephemeris format</a> in the AWS Ground Station user guide. </p>
+ * @public
+ */
+export interface OEMEphemeris {
+  /**
+   * <p>The Amazon S3 object that contains the ephemeris data.</p>
+   * @public
+   */
+  s3Object?: S3Object | undefined;
+
+  /**
+   * <p>OEM data that you provide directly instead of using an Amazon S3 object.</p>
+   * @public
+   */
+  oemData?: string | undefined;
+}
+
+/**
+ * <p>A time range with a start and end time.</p>
+ * @public
+ */
+export interface TimeRange {
+  /**
+   * <p>Unix epoch timestamp in UTC at which the time range starts.</p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>Unix epoch timestamp in UTC at which the time range ends.</p>
+   * @public
+   */
+  endTime: Date | undefined;
+}
+
+/**
+ * <p>Two-line element set (TLE) data.</p>
+ * @public
+ */
+export interface TLEData {
+  /**
+   * <p>First line of two-line element set (TLE) data.</p>
+   * @public
+   */
+  tleLine1: string | undefined;
+
+  /**
+   * <p>Second line of two-line element set (TLE) data.</p>
+   * @public
+   */
+  tleLine2: string | undefined;
+
+  /**
+   * <p>The valid time range for the TLE. Time ranges must be continuous without gaps or overlaps.</p>
+   * @public
+   */
+  validTimeRange: TimeRange | undefined;
+}
+
+/**
+ * <p>Two-line element set (TLE) ephemeris.</p> <p> For more detail about providing Two-line element sets to AWS Ground Station, see the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html">TLE section</a> of the AWS Ground Station user guide. </p>
+ * @public
+ */
+export interface TLEEphemeris {
+  /**
+   * <p>The Amazon S3 object that contains the ephemeris data.</p>
+   * @public
+   */
+  s3Object?: S3Object | undefined;
+
+  /**
+   * <p>TLE data that you provide directly instead of using an Amazon S3 object.</p>
+   * @public
+   */
+  tleData?: TLEData[] | undefined;
+}
+
+/**
+ * <p>Ephemeris data.</p>
+ * @public
+ */
+export type EphemerisData =
+  | EphemerisData.AzElMember
+  | EphemerisData.OemMember
+  | EphemerisData.TleMember
+  | EphemerisData.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EphemerisData {
+  /**
+   * <p>Two-line element set (TLE) ephemeris.</p> <p> For more detail about providing Two-line element sets to AWS Ground Station, see the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-tle-ephemeris-data.html">TLE section</a> of the AWS Ground Station user guide. </p>
+   * @public
+   */
+  export interface TleMember {
+    tle: TLEEphemeris;
+    oem?: never;
+    azEl?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Ephemeris data in Orbit Ephemeris Message (OEM) format.</p> <p> AWS Ground Station processes OEM ephemerides according to the <a href="https://ccsds.org/Pubs/502x0b3e1.pdf">CCSDS standard</a> with some extra restrictions. OEM files should be in KVN format. For more detail about the OEM format that AWS Ground Station supports, see <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format">OEM ephemeris format</a> in the AWS Ground Station user guide. </p>
+   * @public
+   */
+  export interface OemMember {
+    tle?: never;
+    oem: OEMEphemeris;
+    azEl?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Azimuth elevation ephemeris data.</p> <p> Use this ephemeris type to provide pointing angles directly, rather than satellite orbital elements. Use this when you need precise antenna pointing but have imprecise or unknown satellite trajectory information. </p> <p> The azimuth elevation data specifies the antenna pointing direction at specific times relative to a ground station location. AWS Ground Station uses 4th order Lagrange interpolation to compute pointing angles between the provided data points. </p> <p> AWS Ground Station automatically filters interpolated pointing angles, including only those that are above the site mask elevation of the specified ground station. </p> <p> For more detail about providing azimuth elevation ephemerides to AWS Ground Station, see the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/providing-azimuth-elevation-ephemeris-data.html">azimuth elevation ephemeris section</a> of the AWS Ground Station User Guide. </p>
+   * @public
+   */
+  export interface AzElMember {
+    tle?: never;
+    oem?: never;
+    azEl: AzElEphemeris;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    tle?: never;
+    oem?: never;
+    azEl?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    tle: (value: TLEEphemeris) => T;
+    oem: (value: OEMEphemeris) => T;
+    azEl: (value: AzElEphemeris) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreateEphemerisRequest {
+  /**
+   * <p>The satellite ID that associates this ephemeris with a satellite in AWS Ground Station.</p>
+   * @public
+   */
+  satelliteId?: string | undefined;
+
+  /**
+   * <p>Set to <code>true</code> to enable the ephemeris after validation. Set to <code>false</code> to keep it disabled.</p>
+   * @public
+   */
+  enabled?: boolean | undefined;
+
+  /**
+   * <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
+   * @public
+   */
+  priority?: number | undefined;
+
+  /**
+   * <p>An overall expiration time for the ephemeris in UTC, after which it will become <code>EXPIRED</code>.</p>
+   * @public
+   */
+  expirationTime?: Date | undefined;
+
+  /**
+   * <p>A name that you can use to identify the ephemeris.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The ARN of the KMS key to use for encrypting the ephemeris.</p>
+   * @public
+   */
+  kmsKeyArn?: string | undefined;
+
+  /**
+   * <p>Ephemeris data.</p>
+   * @public
+   */
+  ephemeris?: EphemerisData | undefined;
+
+  /**
+   * <p>Tags assigned to an ephemeris.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface EphemerisIdResponse {
+  /**
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
+   */
+  ephemerisId?: string | undefined;
+}
+
+/**
+ * <p>KMS key info.</p>
+ * @public
+ */
+export type KmsKey =
+  | KmsKey.KmsAliasArnMember
+  | KmsKey.KmsAliasNameMember
+  | KmsKey.KmsKeyArnMember
+  | KmsKey.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace KmsKey {
+  /**
+   * <p>KMS Key Arn.</p>
+   * @public
+   */
+  export interface KmsKeyArnMember {
+    kmsKeyArn: string;
+    kmsAliasArn?: never;
+    kmsAliasName?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>KMS Alias Arn.</p>
+   * @public
+   */
+  export interface KmsAliasArnMember {
+    kmsKeyArn?: never;
+    kmsAliasArn: string;
+    kmsAliasName?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>KMS Alias Name.</p>
+   * @public
+   */
+  export interface KmsAliasNameMember {
+    kmsKeyArn?: never;
+    kmsAliasArn?: never;
+    kmsAliasName: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    kmsKeyArn?: never;
+    kmsAliasArn?: never;
+    kmsAliasName?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    kmsKeyArn: (value: string) => T;
+    kmsAliasArn: (value: string) => T;
+    kmsAliasName: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Input for the <code>CreateMissionProfile</code> operation. </p>
+ * @public
+ */
+export interface CreateMissionProfileRequest {
+  /**
+   * <p>Name of a mission profile.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Amount of time prior to contact start you'd like to receive a Ground Station Contact State Change event indicating an upcoming pass.</p>
+   * @public
+   */
+  contactPrePassDurationSeconds?: number | undefined;
+
+  /**
+   * <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+   * @public
+   */
+  contactPostPassDurationSeconds?: number | undefined;
+
+  /**
+   * <p>Smallest amount of time in seconds that you'd like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * @public
    */
   minimumViableContactDurationSeconds: number | undefined;
 
   /**
-   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
-   *             <code>Config</code> and a <i>to</i>
-   *             <code>Config</code>.</p>
+   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>
+   * @public
    */
   dataflowEdges: string[][] | undefined;
 
   /**
    * <p>ARN of a tracking <code>Config</code>.</p>
+   * @public
    */
   trackingConfigArn: string | undefined;
 
   /**
-   * <p>Tags assigned to a mission profile.</p>
+   * <p>ARN of a telemetry sink <code>Config</code>.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  telemetrySinkConfigArn?: string | undefined;
 
-export namespace CreateMissionProfileRequest {
   /**
-   * @internal
+   * <p>Tags assigned to a mission profile.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateMissionProfileRequest): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>KMS key to use for encrypting streams.</p>
+   * @public
+   */
+  streamsKmsKey?: KmsKey | undefined;
+
+  /**
+   * <p>Role to use for encrypting streams with KMS key.</p>
+   * @public
+   */
+  streamsKmsRole?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Response containing the ID of a mission profile. </p>
+ * @public
  */
 export interface MissionProfileIdResponse {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
-  missionProfileId?: string;
-}
-
-export namespace MissionProfileIdResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MissionProfileIdResponse): any => ({
-    ...obj,
-  });
+  missionProfileId?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>DeleteDataflowEndpointGroup</code> operation. </p>
+ * @public
  */
 export interface DeleteDataflowEndpointGroupRequest {
   /**
    * <p>UUID of a dataflow endpoint group.</p>
+   * @public
    */
   dataflowEndpointGroupId: string | undefined;
 }
 
-export namespace DeleteDataflowEndpointGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDataflowEndpointGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Input for the <code>GetDataflowEndpointGroup</code> operation. </p>
+ * @public
  */
 export interface GetDataflowEndpointGroupRequest {
   /**
    * <p>UUID of a dataflow endpoint group.</p>
+   * @public
    */
   dataflowEndpointGroupId: string | undefined;
 }
 
-export namespace GetDataflowEndpointGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDataflowEndpointGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>GetDataflowEndpointGroup</code> operation. </p>
+ * @public
  */
 export interface GetDataflowEndpointGroupResponse {
   /**
    * <p>UUID of a dataflow endpoint group.</p>
+   * @public
    */
-  dataflowEndpointGroupId?: string;
+  dataflowEndpointGroupId?: string | undefined;
 
   /**
    * <p>ARN of a dataflow endpoint group.</p>
+   * @public
    */
-  dataflowEndpointGroupArn?: string;
+  dataflowEndpointGroupArn?: string | undefined;
 
   /**
    * <p>Details of a dataflow endpoint.</p>
+   * @public
    */
-  endpointsDetails?: EndpointDetails[];
+  endpointsDetails?: EndpointDetails[] | undefined;
 
   /**
    * <p>Tags assigned to a dataflow endpoint group.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace GetDataflowEndpointGroupResponse {
   /**
-   * @internal
+   * <p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetDataflowEndpointGroupResponse): any => ({
-    ...obj,
-  });
+  contactPrePassDurationSeconds?: number | undefined;
+
+  /**
+   * <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
+   * @public
+   */
+  contactPostPassDurationSeconds?: number | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>ListDataflowEndpointGroups</code> operation. </p>
+ * @public
  */
 export interface ListDataflowEndpointGroupsRequest {
   /**
    * <p>Maximum number of dataflow endpoint groups returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token returned in the request of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListDataflowEndpointGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataflowEndpointGroupsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Item in a list of <code>DataflowEndpoint</code> groups.</p>
+ * @public
  */
 export interface DataflowEndpointListItem {
   /**
    * <p>UUID of a dataflow endpoint group.</p>
+   * @public
    */
-  dataflowEndpointGroupId?: string;
+  dataflowEndpointGroupId?: string | undefined;
 
   /**
    * <p>ARN of a dataflow endpoint group.</p>
+   * @public
    */
-  dataflowEndpointGroupArn?: string;
-}
-
-export namespace DataflowEndpointListItem {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataflowEndpointListItem): any => ({
-    ...obj,
-  });
+  dataflowEndpointGroupArn?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListDataflowEndpointGroups</code> operation. </p>
+ * @public
  */
 export interface ListDataflowEndpointGroupsResponse {
   /**
    * <p>Next token returned in the response of a previous <code>ListDataflowEndpointGroups</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>A list of dataflow endpoint groups.</p>
+   * @public
    */
-  dataflowEndpointGroupList?: DataflowEndpointListItem[];
-}
-
-export namespace ListDataflowEndpointGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDataflowEndpointGroupsResponse): any => ({
-    ...obj,
-  });
+  dataflowEndpointGroupList?: DataflowEndpointListItem[] | undefined;
 }
 
 /**
- * <p/>
+ * @public
+ */
+export interface DeleteEphemerisRequest {
+  /**
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
+   */
+  ephemerisId: string | undefined;
+}
+
+/**
+ * <p>Input for the <code>DeleteMissionProfile</code> operation. </p>
+ * @public
  */
 export interface DeleteMissionProfileRequest {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
   missionProfileId: string | undefined;
 }
 
-export namespace DeleteMissionProfileRequest {
+/**
+ * @public
+ */
+export interface DescribeEphemerisRequest {
   /**
-   * @internal
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteMissionProfileRequest): any => ({
-    ...obj,
-  });
+  ephemerisId: string | undefined;
+}
+
+/**
+ * <p>Detailed error information for ephemeris validation failures.</p> <p>Provides an error code and descriptive message to help diagnose and resolve validation issues.</p>
+ * @public
+ */
+export interface EphemerisErrorReason {
+  /**
+   * <p>The error code identifying the type of validation failure.</p> <p>See the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/troubleshooting-invalid-ephemerides.html">Troubleshooting Invalid Ephemerides guide</a> for error code details.</p>
+   * @public
+   */
+  errorCode: EphemerisErrorCode | undefined;
+
+  /**
+   * <p>A human-readable message describing the validation failure.</p> <p>Provides specific details about what failed and may include suggestions for remediation.</p>
+   * @public
+   */
+  errorMessage: string | undefined;
+}
+
+/**
+ * <p>Description of ephemeris.</p>
+ * @public
+ */
+export interface EphemerisDescription {
+  /**
+   * <p>Source Amazon S3 object used for the ephemeris.</p>
+   * @public
+   */
+  sourceS3Object?: S3Object | undefined;
+
+  /**
+   * <p>Supplied ephemeris data.</p>
+   * @public
+   */
+  ephemerisData?: string | undefined;
 }
 
 /**
  * <p/>
+ * @public
+ */
+export type EphemerisTypeDescription =
+  | EphemerisTypeDescription.AzElMember
+  | EphemerisTypeDescription.OemMember
+  | EphemerisTypeDescription.TleMember
+  | EphemerisTypeDescription.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EphemerisTypeDescription {
+  /**
+   * <p>Description of ephemeris.</p>
+   * @public
+   */
+  export interface TleMember {
+    tle: EphemerisDescription;
+    oem?: never;
+    azEl?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Description of ephemeris.</p>
+   * @public
+   */
+  export interface OemMember {
+    tle?: never;
+    oem: EphemerisDescription;
+    azEl?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Description of ephemeris.</p>
+   * @public
+   */
+  export interface AzElMember {
+    tle?: never;
+    oem?: never;
+    azEl: EphemerisDescription;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    tle?: never;
+    oem?: never;
+    azEl?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    tle: (value: EphemerisDescription) => T;
+    oem: (value: EphemerisDescription) => T;
+    azEl: (value: EphemerisDescription) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface DescribeEphemerisResponse {
+  /**
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
+   */
+  ephemerisId?: string | undefined;
+
+  /**
+   * <p>The AWS Ground Station satellite ID associated with ephemeris.</p>
+   * @public
+   */
+  satelliteId?: string | undefined;
+
+  /**
+   * <p>The status of the ephemeris.</p>
+   * @public
+   */
+  status?: EphemerisStatus | undefined;
+
+  /**
+   * <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
+   * @public
+   */
+  priority?: number | undefined;
+
+  /**
+   * <p>The time the ephemeris was uploaded in UTC.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>Whether or not the ephemeris is enabled.</p>
+   * @public
+   */
+  enabled?: boolean | undefined;
+
+  /**
+   * <p>A name that you can use to identify the ephemeris.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Tags assigned to an ephemeris.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Supplied ephemeris data.</p>
+   * @public
+   */
+  suppliedData?: EphemerisTypeDescription | undefined;
+
+  /**
+   * <p>Reason that an ephemeris failed validation. Appears only when the status is <code>INVALID</code>.</p>
+   * @public
+   */
+  invalidReason?: EphemerisInvalidReason | undefined;
+
+  /**
+   * <p>Detailed error information for ephemerides with <code>INVALID</code> status.</p> <p>Provides specific error codes and messages to help diagnose validation failures.</p>
+   * @public
+   */
+  errorReasons?: EphemerisErrorReason[] | undefined;
+}
+
+/**
+ * <p>Ephemeris item.</p>
+ * @public
+ */
+export interface EphemerisItem {
+  /**
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
+   */
+  ephemerisId?: string | undefined;
+
+  /**
+   * <p>The type of ephemeris.</p>
+   * @public
+   */
+  ephemerisType?: EphemerisType | undefined;
+
+  /**
+   * <p>The status of the ephemeris.</p>
+   * @public
+   */
+  status?: EphemerisStatus | undefined;
+
+  /**
+   * <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
+   * @public
+   */
+  priority?: number | undefined;
+
+  /**
+   * <p>Whether or not the ephemeris is enabled.</p>
+   * @public
+   */
+  enabled?: boolean | undefined;
+
+  /**
+   * <p>The time the ephemeris was uploaded in UTC.</p>
+   * @public
+   */
+  creationTime?: Date | undefined;
+
+  /**
+   * <p>A name that you can use to identify the ephemeris.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Source Amazon S3 object used for the ephemeris.</p>
+   * @public
+   */
+  sourceS3Object?: S3Object | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListEphemeridesRequest {
+  /**
+   * <p>The AWS Ground Station satellite ID to list ephemeris for.</p>
+   * @public
+   */
+  satelliteId?: string | undefined;
+
+  /**
+   * <p>Filter ephemerides by type. If not specified, all ephemeris types will be returned.</p>
+   * @public
+   */
+  ephemerisType?: EphemerisType | undefined;
+
+  /**
+   * <p>The start time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>The end time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>
+   * @public
+   */
+  endTime: Date | undefined;
+
+  /**
+   * <p>The list of ephemeris status to return.</p>
+   * @public
+   */
+  statusList?: EphemerisStatus[] | undefined;
+
+  /**
+   * <p>Maximum number of ephemerides to return.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListEphemeridesResponse {
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>List of ephemerides.</p>
+   * @public
+   */
+  ephemerides?: EphemerisItem[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateEphemerisRequest {
+  /**
+   * <p>The AWS Ground Station ephemeris ID.</p>
+   * @public
+   */
+  ephemerisId: string | undefined;
+
+  /**
+   * <p>Enable or disable the ephemeris. Changing this value doesn't require re-validation.</p>
+   * @public
+   */
+  enabled: boolean | undefined;
+
+  /**
+   * <p>A name that you can use to identify the ephemeris.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
+   * @public
+   */
+  priority?: number | undefined;
+}
+
+/**
+ * <p>Metadata describing a particular ephemeris.</p>
+ * @public
+ */
+export interface EphemerisMetaData {
+  /**
+   * <p>The <code>EphemerisSource</code> that generated a given ephemeris.</p>
+   * @public
+   */
+  source: EphemerisSource | undefined;
+
+  /**
+   * <p>UUID of a customer-provided ephemeris.</p> <p>This field is not populated for default ephemerides from Space Track.</p>
+   * @public
+   */
+  ephemerisId?: string | undefined;
+
+  /**
+   * <p>The epoch of a default, ephemeris from Space Track in UTC.</p> <p>This field is not populated for customer-provided ephemerides.</p>
+   * @public
+   */
+  epoch?: Date | undefined;
+
+  /**
+   * <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p> <p>A name is only returned for customer-provider ephemerides that have a name associated.</p>
+   * @public
+   */
+  name?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetAgentTaskResponseUrlRequest {
+  /**
+   * <p>UUID of agent requesting the response URL.</p>
+   * @public
+   */
+  agentId: string | undefined;
+
+  /**
+   * <p>GUID of the agent task for which the response URL is being requested.</p>
+   * @public
+   */
+  taskId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetAgentTaskResponseUrlResponse {
+  /**
+   * <p>UUID of the agent.</p>
+   * @public
+   */
+  agentId: string | undefined;
+
+  /**
+   * <p>GUID of the agent task.</p>
+   * @public
+   */
+  taskId: string | undefined;
+
+  /**
+   * <p>Presigned URL for uploading agent task response logs.</p>
+   * @public
+   */
+  presignedLogUrl: string | undefined;
+}
+
+/**
+ * <p>Input for the <code>GetMinuteUsage</code> operation.</p>
+ * @public
  */
 export interface GetMinuteUsageRequest {
   /**
    * <p>The month being requested, with a value of 1-12.</p>
+   * @public
    */
   month: number | undefined;
 
   /**
    * <p>The year being requested, in the format of YYYY.</p>
+   * @public
    */
   year: number | undefined;
 }
 
-export namespace GetMinuteUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMinuteUsageRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>GetMinuteUsage</code> operation.</p>
+ * @public
  */
 export interface GetMinuteUsageResponse {
   /**
    * <p>Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.</p>
+   * @public
    */
-  isReservedMinutesCustomer?: boolean;
+  isReservedMinutesCustomer?: boolean | undefined;
 
   /**
    * <p>Total number of reserved minutes allocated, specific to the month being requested.</p>
+   * @public
    */
-  totalReservedMinuteAllocation?: number;
+  totalReservedMinuteAllocation?: number | undefined;
 
   /**
    * <p>Upcoming minutes scheduled for an account, specific to the month being requested.</p>
+   * @public
    */
-  upcomingMinutesScheduled?: number;
+  upcomingMinutesScheduled?: number | undefined;
 
   /**
    * <p>Total scheduled minutes for an account, specific to the month being requested.</p>
+   * @public
    */
-  totalScheduledMinutes?: number;
+  totalScheduledMinutes?: number | undefined;
 
   /**
    * <p>Estimated number of minutes remaining for an account, specific to the month being requested.</p>
+   * @public
    */
-  estimatedMinutesRemaining?: number;
-}
-
-export namespace GetMinuteUsageResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMinuteUsageResponse): any => ({
-    ...obj,
-  });
+  estimatedMinutesRemaining?: number | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>GetMissionProfile</code> operation. </p>
+ * @public
  */
 export interface GetMissionProfileRequest {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
   missionProfileId: string | undefined;
 }
 
-export namespace GetMissionProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMissionProfileRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>GetMissionProfile</code> operation. </p>
+ * @public
  */
 export interface GetMissionProfileResponse {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
-  missionProfileId?: string;
+  missionProfileId?: string | undefined;
 
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
-  missionProfileArn?: string;
+  missionProfileArn?: string | undefined;
 
   /**
    * <p>Name of a mission profile.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>Region of a mission profile.</p>
+   * @public
    */
-  region?: string;
+  region?: string | undefined;
 
   /**
-   * <p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>
+   * <p>Amount of time prior to contact start you'd like to receive a CloudWatch event indicating an upcoming pass.</p>
+   * @public
    */
-  contactPrePassDurationSeconds?: number;
+  contactPrePassDurationSeconds?: number | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>Amount of time after a contact ends that you'd like to receive a CloudWatch event indicating the pass has finished.</p>
+   * @public
    */
-  contactPostPassDurationSeconds?: number;
+  contactPostPassDurationSeconds?: number | undefined;
 
   /**
-   * <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * <p>Smallest amount of time in seconds that you'd like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * @public
    */
-  minimumViableContactDurationSeconds?: number;
+  minimumViableContactDurationSeconds?: number | undefined;
 
   /**
-   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
-   *             <code>Config</code> and a <i>to</i>
-   *             <code>Config</code>.</p>
+   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>
+   * @public
    */
-  dataflowEdges?: string[][];
+  dataflowEdges?: string[][] | undefined;
 
   /**
    * <p>ARN of a tracking <code>Config</code>.</p>
+   * @public
    */
-  trackingConfigArn?: string;
+  trackingConfigArn?: string | undefined;
+
+  /**
+   * <p>ARN of a telemetry sink <code>Config</code>.</p>
+   * @public
+   */
+  telemetrySinkConfigArn?: string | undefined;
 
   /**
    * <p>Tags assigned to a mission profile.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace GetMissionProfileResponse {
   /**
-   * @internal
+   * <p>KMS key to use for encrypting streams.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetMissionProfileResponse): any => ({
-    ...obj,
-  });
+  streamsKmsKey?: KmsKey | undefined;
+
+  /**
+   * <p>Role to use for encrypting streams with KMS key.</p>
+   * @public
+   */
+  streamsKmsRole?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>GetSatellite</code> operation.</p>
+ * @public
  */
 export interface GetSatelliteRequest {
   /**
    * <p>UUID of a satellite.</p>
+   * @public
    */
   satelliteId: string | undefined;
 }
 
-export namespace GetSatelliteRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSatelliteRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>GetSatellite</code> operation.</p>
+ * @public
  */
 export interface GetSatelliteResponse {
   /**
    * <p>UUID of a satellite.</p>
+   * @public
    */
-  satelliteId?: string;
+  satelliteId?: string | undefined;
 
   /**
    * <p>ARN of a satellite.</p>
+   * @public
    */
-  satelliteArn?: string;
+  satelliteArn?: string | undefined;
 
   /**
    * <p>NORAD satellite ID number.</p>
+   * @public
    */
-  noradSatelliteID?: number;
+  noradSatelliteID?: number | undefined;
 
   /**
    * <p>A list of ground stations to which the satellite is on-boarded.</p>
+   * @public
    */
-  groundStations?: string[];
-}
+  groundStations?: string[] | undefined;
 
-export namespace GetSatelliteResponse {
   /**
-   * @internal
+   * <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetSatelliteResponse): any => ({
-    ...obj,
-  });
+  currentEphemeris?: EphemerisMetaData | undefined;
 }
 
 /**
- * <p/>
+ * @public
+ */
+export interface ListAntennasRequest {
+  /**
+   * <p>ID of a ground station.</p>
+   * @public
+   */
+  groundStationId: string | undefined;
+
+  /**
+   * <p>Maximum number of antennas returned.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Next token returned in the request of a previous <code>ListAntennas</code> call. Used to get the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAntennasResponse {
+  /**
+   * <p>List of antennas.</p>
+   * @public
+   */
+  antennaList: AntennaListItem[] | undefined;
+
+  /**
+   * <p>Next token to be used in a subsequent <code>ListAntennas</code> call to retrieve the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListGroundStationReservationsRequest {
+  /**
+   * <p>ID of a ground station.</p>
+   * @public
+   */
+  groundStationId: string | undefined;
+
+  /**
+   * <p>Start time of the reservation window in UTC.</p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>End time of the reservation window in UTC.</p>
+   * @public
+   */
+  endTime: Date | undefined;
+
+  /**
+   * <p>Types of reservations to filter by.</p>
+   * @public
+   */
+  reservationTypes?: ReservationType[] | undefined;
+
+  /**
+   * <p>Maximum number of ground station reservations returned.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Next token returned in the request of a previous <code>ListGroundStationReservations</code> call. Used to get the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Details of a maintenance reservation.</p>
+ * @public
+ */
+export interface MaintenanceReservationDetails {
+  /**
+   * <p>Type of maintenance.</p>
+   * @public
+   */
+  maintenanceType: MaintenanceType | undefined;
+}
+
+/**
+ * <p>Details of a ground station reservation.</p>
+ * @public
+ */
+export type ReservationDetails =
+  | ReservationDetails.ContactMember
+  | ReservationDetails.MaintenanceMember
+  | ReservationDetails.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReservationDetails {
+  /**
+   * <p>Details of a maintenance reservation.</p>
+   * @public
+   */
+  export interface MaintenanceMember {
+    maintenance: MaintenanceReservationDetails;
+    contact?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Details of a contact reservation.</p>
+   * @public
+   */
+  export interface ContactMember {
+    maintenance?: never;
+    contact: ContactReservationDetails;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    maintenance?: never;
+    contact?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    maintenance: (value: MaintenanceReservationDetails) => T;
+    contact: (value: ContactReservationDetails) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Item in a list of ground station reservations.</p>
+ * @public
+ */
+export interface GroundStationReservationListItem {
+  /**
+   * <p>Type of a ground station reservation.</p>
+   * @public
+   */
+  reservationType: ReservationType | undefined;
+
+  /**
+   * <p>ID of a ground station.</p>
+   * @public
+   */
+  groundStationId: string | undefined;
+
+  /**
+   * <p>Name of an antenna.</p>
+   * @public
+   */
+  antennaName: string | undefined;
+
+  /**
+   * <p>Start time of a ground station reservation in UTC.</p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>End time of a ground station reservation in UTC.</p>
+   * @public
+   */
+  endTime: Date | undefined;
+
+  /**
+   * <p>Details of a ground station reservation.</p>
+   * @public
+   */
+  reservationDetails: ReservationDetails | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListGroundStationReservationsResponse {
+  /**
+   * <p>List of ground station reservations.</p>
+   * @public
+   */
+  reservationList: GroundStationReservationListItem[] | undefined;
+
+  /**
+   * <p>Next token to be used in a subsequent <code>ListGroundStationReservations</code> call to retrieve the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Input for the <code>ListGroundStations</code> operation.</p>
+ * @public
  */
 export interface ListGroundStationsRequest {
   /**
    * <p>Satellite ID to retrieve on-boarded ground stations.</p>
+   * @public
    */
-  satelliteId?: string;
+  satelliteId?: string | undefined;
 
   /**
    * <p>Maximum number of ground stations returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token that can be supplied in the next call to get the next page of ground stations.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListGroundStationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroundStationsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Information about the ground station data.</p>
+ * @public
  */
 export interface GroundStationData {
   /**
-   * <p>UUID of a ground station.</p>
+   * <p>ID of a ground station.</p>
+   * @public
    */
-  groundStationId?: string;
+  groundStationId?: string | undefined;
 
   /**
    * <p>Name of a ground station.</p>
+   * @public
    */
-  groundStationName?: string;
+  groundStationName?: string | undefined;
 
   /**
    * <p>Ground station Region.</p>
+   * @public
    */
-  region?: string;
-}
-
-export namespace GroundStationData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroundStationData): any => ({
-    ...obj,
-  });
+  region?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListGroundStations</code> operation.</p>
+ * @public
  */
 export interface ListGroundStationsResponse {
   /**
    * <p>Next token that can be supplied in the next call to get the next page of ground stations.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>List of ground stations.</p>
+   * @public
    */
-  groundStationList?: GroundStationData[];
-}
-
-export namespace ListGroundStationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListGroundStationsResponse): any => ({
-    ...obj,
-  });
+  groundStationList?: GroundStationData[] | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>ListTagsForResource</code> operation.</p>
+ * @public
  */
 export interface ListTagsForResourceRequest {
   /**
    * <p>ARN of a resource.</p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>ListTagsForResource</code> operation.</p>
+ * @public
  */
 export interface ListTagsForResourceResponse {
   /**
    * <p>Tags assigned to a resource.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>ListMissionProfiles</code> operation. </p>
+ * @public
  */
 export interface ListMissionProfilesRequest {
   /**
    * <p>Maximum number of mission profiles returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token returned in the request of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListMissionProfilesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMissionProfilesRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Item in a list of mission profiles.</p>
+ * @public
  */
 export interface MissionProfileListItem {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
-  missionProfileId?: string;
+  missionProfileId?: string | undefined;
 
   /**
    * <p>ARN of a mission profile.</p>
+   * @public
    */
-  missionProfileArn?: string;
+  missionProfileArn?: string | undefined;
 
   /**
    * <p>Region of a mission profile.</p>
+   * @public
    */
-  region?: string;
+  region?: string | undefined;
 
   /**
    * <p>Name of a mission profile.</p>
+   * @public
    */
-  name?: string;
-}
-
-export namespace MissionProfileListItem {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MissionProfileListItem): any => ({
-    ...obj,
-  });
+  name?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListMissionProfiles</code> operation. </p>
+ * @public
  */
 export interface ListMissionProfilesResponse {
   /**
    * <p>Next token returned in the response of a previous <code>ListMissionProfiles</code> call. Used to get the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>List of mission profiles.</p>
+   * @public
    */
-  missionProfileList?: MissionProfileListItem[];
-}
-
-export namespace ListMissionProfilesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMissionProfilesResponse): any => ({
-    ...obj,
-  });
+  missionProfileList?: MissionProfileListItem[] | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>UpdateMissionProfile</code> operation. </p>
+ * @public
  */
 export interface UpdateMissionProfileRequest {
   /**
    * <p>UUID of a mission profile.</p>
+   * @public
    */
   missionProfileId: string | undefined;
 
   /**
    * <p>Name of a mission profile.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+   * @public
    */
-  contactPrePassDurationSeconds?: number;
+  contactPrePassDurationSeconds?: number | undefined;
 
   /**
-   * <p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>
+   * <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+   * @public
    */
-  contactPostPassDurationSeconds?: number;
+  contactPostPassDurationSeconds?: number | undefined;
 
   /**
-   * <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * <p>Smallest amount of time in seconds that you'd like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+   * @public
    */
-  minimumViableContactDurationSeconds?: number;
+  minimumViableContactDurationSeconds?: number | undefined;
 
   /**
-   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
-   *             <code>Config</code> and a <i>to</i>
-   *             <code>Config</code>.</p>
+   * <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>
+   * @public
    */
-  dataflowEdges?: string[][];
+  dataflowEdges?: string[][] | undefined;
 
   /**
    * <p>ARN of a tracking <code>Config</code>.</p>
+   * @public
    */
-  trackingConfigArn?: string;
-}
+  trackingConfigArn?: string | undefined;
 
-export namespace UpdateMissionProfileRequest {
   /**
-   * @internal
+   * <p>ARN of a telemetry sink <code>Config</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateMissionProfileRequest): any => ({
-    ...obj,
-  });
+  telemetrySinkConfigArn?: string | undefined;
+
+  /**
+   * <p>KMS key to use for encrypting streams.</p>
+   * @public
+   */
+  streamsKmsKey?: KmsKey | undefined;
+
+  /**
+   * <p>Role to use for encrypting streams with KMS key.</p>
+   * @public
+   */
+  streamsKmsRole?: string | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>ListSatellites</code> operation.</p>
+ * @public
  */
 export interface ListSatellitesRequest {
   /**
    * <p>Maximum number of satellites returned.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>Next token that can be supplied in the next call to get the next page of satellites.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListSatellitesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSatellitesRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Item in a list of satellites.</p>
+ * @public
  */
 export interface SatelliteListItem {
   /**
    * <p>UUID of a satellite.</p>
+   * @public
    */
-  satelliteId?: string;
+  satelliteId?: string | undefined;
 
   /**
    * <p>ARN of a satellite.</p>
+   * @public
    */
-  satelliteArn?: string;
+  satelliteArn?: string | undefined;
 
   /**
    * <p>NORAD satellite ID number.</p>
+   * @public
    */
-  noradSatelliteID?: number;
+  noradSatelliteID?: number | undefined;
 
   /**
    * <p>A list of ground stations to which the satellite is on-boarded.</p>
+   * @public
    */
-  groundStations?: string[];
-}
+  groundStations?: string[] | undefined;
 
-export namespace SatelliteListItem {
   /**
-   * @internal
+   * <p>The current ephemeris being used to compute the trajectory of the satellite.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SatelliteListItem): any => ({
-    ...obj,
-  });
+  currentEphemeris?: EphemerisMetaData | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>ListSatellites</code> operation.</p>
+ * @public
  */
 export interface ListSatellitesResponse {
   /**
    * <p>Next token that can be supplied in the next call to get the next page of satellites.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>List of satellites.</p>
+   * @public
    */
-  satellites?: SatelliteListItem[];
-}
-
-export namespace ListSatellitesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSatellitesResponse): any => ({
-    ...obj,
-  });
+  satellites?: SatelliteListItem[] | undefined;
 }
 
 /**
- * <p/>
+ * <p>Input for the <code>TagResource</code> operation.</p>
+ * @public
  */
 export interface TagResourceRequest {
   /**
    * <p>ARN of a resource tag.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>Tags assigned to a resource.</p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
-}
-
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
+  tags: Record<string, string> | undefined;
 }
 
 /**
- * <p/>
+ * <p>Output for the <code>TagResource</code> operation.</p>
+ * @public
  */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Input for the <code>UntagResource</code> operation.</p>
+ * @public
  */
 export interface UntagResourceRequest {
   /**
    * <p>ARN of a resource.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>Keys of a resource tag.</p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p/>
+ * <p>Output for the <code>UntagResource</code> operation.</p>
+ * @public
  */
 export interface UntagResourceResponse {}
-
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}

@@ -1,174 +1,252 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AssociateWebACLCommandInput, AssociateWebACLCommandOutput } from "./commands/AssociateWebACLCommand";
-import { CheckCapacityCommandInput, CheckCapacityCommandOutput } from "./commands/CheckCapacityCommand";
-import { CreateIPSetCommandInput, CreateIPSetCommandOutput } from "./commands/CreateIPSetCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultWAFV2HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AssociateWebACLCommandInput, AssociateWebACLCommandOutput } from "./commands/AssociateWebACLCommand";
+import type { CheckCapacityCommandInput, CheckCapacityCommandOutput } from "./commands/CheckCapacityCommand";
+import type { CreateAPIKeyCommandInput, CreateAPIKeyCommandOutput } from "./commands/CreateAPIKeyCommand";
+import type { CreateIPSetCommandInput, CreateIPSetCommandOutput } from "./commands/CreateIPSetCommand";
+import type {
   CreateRegexPatternSetCommandInput,
   CreateRegexPatternSetCommandOutput,
 } from "./commands/CreateRegexPatternSetCommand";
-import { CreateRuleGroupCommandInput, CreateRuleGroupCommandOutput } from "./commands/CreateRuleGroupCommand";
-import { CreateWebACLCommandInput, CreateWebACLCommandOutput } from "./commands/CreateWebACLCommand";
-import {
+import type { CreateRuleGroupCommandInput, CreateRuleGroupCommandOutput } from "./commands/CreateRuleGroupCommand";
+import type { CreateWebACLCommandInput, CreateWebACLCommandOutput } from "./commands/CreateWebACLCommand";
+import type { DeleteAPIKeyCommandInput, DeleteAPIKeyCommandOutput } from "./commands/DeleteAPIKeyCommand";
+import type {
   DeleteFirewallManagerRuleGroupsCommandInput,
   DeleteFirewallManagerRuleGroupsCommandOutput,
 } from "./commands/DeleteFirewallManagerRuleGroupsCommand";
-import { DeleteIPSetCommandInput, DeleteIPSetCommandOutput } from "./commands/DeleteIPSetCommand";
-import {
+import type { DeleteIPSetCommandInput, DeleteIPSetCommandOutput } from "./commands/DeleteIPSetCommand";
+import type {
   DeleteLoggingConfigurationCommandInput,
   DeleteLoggingConfigurationCommandOutput,
 } from "./commands/DeleteLoggingConfigurationCommand";
-import {
+import type {
   DeletePermissionPolicyCommandInput,
   DeletePermissionPolicyCommandOutput,
 } from "./commands/DeletePermissionPolicyCommand";
-import {
+import type {
   DeleteRegexPatternSetCommandInput,
   DeleteRegexPatternSetCommandOutput,
 } from "./commands/DeleteRegexPatternSetCommand";
-import { DeleteRuleGroupCommandInput, DeleteRuleGroupCommandOutput } from "./commands/DeleteRuleGroupCommand";
-import { DeleteWebACLCommandInput, DeleteWebACLCommandOutput } from "./commands/DeleteWebACLCommand";
-import {
+import type { DeleteRuleGroupCommandInput, DeleteRuleGroupCommandOutput } from "./commands/DeleteRuleGroupCommand";
+import type { DeleteWebACLCommandInput, DeleteWebACLCommandOutput } from "./commands/DeleteWebACLCommand";
+import type {
+  DescribeAllManagedProductsCommandInput,
+  DescribeAllManagedProductsCommandOutput,
+} from "./commands/DescribeAllManagedProductsCommand";
+import type {
+  DescribeManagedProductsByVendorCommandInput,
+  DescribeManagedProductsByVendorCommandOutput,
+} from "./commands/DescribeManagedProductsByVendorCommand";
+import type {
   DescribeManagedRuleGroupCommandInput,
   DescribeManagedRuleGroupCommandOutput,
 } from "./commands/DescribeManagedRuleGroupCommand";
-import { DisassociateWebACLCommandInput, DisassociateWebACLCommandOutput } from "./commands/DisassociateWebACLCommand";
-import { GetIPSetCommandInput, GetIPSetCommandOutput } from "./commands/GetIPSetCommand";
-import {
+import type {
+  DisassociateWebACLCommandInput,
+  DisassociateWebACLCommandOutput,
+} from "./commands/DisassociateWebACLCommand";
+import type {
+  GenerateMobileSdkReleaseUrlCommandInput,
+  GenerateMobileSdkReleaseUrlCommandOutput,
+} from "./commands/GenerateMobileSdkReleaseUrlCommand";
+import type {
+  GetDecryptedAPIKeyCommandInput,
+  GetDecryptedAPIKeyCommandOutput,
+} from "./commands/GetDecryptedAPIKeyCommand";
+import type { GetIPSetCommandInput, GetIPSetCommandOutput } from "./commands/GetIPSetCommand";
+import type {
   GetLoggingConfigurationCommandInput,
   GetLoggingConfigurationCommandOutput,
 } from "./commands/GetLoggingConfigurationCommand";
-import { GetManagedRuleSetCommandInput, GetManagedRuleSetCommandOutput } from "./commands/GetManagedRuleSetCommand";
-import {
+import type {
+  GetManagedRuleSetCommandInput,
+  GetManagedRuleSetCommandOutput,
+} from "./commands/GetManagedRuleSetCommand";
+import type {
+  GetMobileSdkReleaseCommandInput,
+  GetMobileSdkReleaseCommandOutput,
+} from "./commands/GetMobileSdkReleaseCommand";
+import type {
   GetPermissionPolicyCommandInput,
   GetPermissionPolicyCommandOutput,
 } from "./commands/GetPermissionPolicyCommand";
-import {
+import type {
   GetRateBasedStatementManagedKeysCommandInput,
   GetRateBasedStatementManagedKeysCommandOutput,
 } from "./commands/GetRateBasedStatementManagedKeysCommand";
-import { GetRegexPatternSetCommandInput, GetRegexPatternSetCommandOutput } from "./commands/GetRegexPatternSetCommand";
-import { GetRuleGroupCommandInput, GetRuleGroupCommandOutput } from "./commands/GetRuleGroupCommand";
-import { GetSampledRequestsCommandInput, GetSampledRequestsCommandOutput } from "./commands/GetSampledRequestsCommand";
-import { GetWebACLCommandInput, GetWebACLCommandOutput } from "./commands/GetWebACLCommand";
-import {
+import type {
+  GetRegexPatternSetCommandInput,
+  GetRegexPatternSetCommandOutput,
+} from "./commands/GetRegexPatternSetCommand";
+import type {
+  GetRevenueStatisticsCommandInput,
+  GetRevenueStatisticsCommandOutput,
+} from "./commands/GetRevenueStatisticsCommand";
+import type {
+  GetRevenueStatisticsSummaryCommandInput,
+  GetRevenueStatisticsSummaryCommandOutput,
+} from "./commands/GetRevenueStatisticsSummaryCommand";
+import type {
+  GetRevenueStatisticsTimeSeriesCommandInput,
+  GetRevenueStatisticsTimeSeriesCommandOutput,
+} from "./commands/GetRevenueStatisticsTimeSeriesCommand";
+import type { GetRuleGroupCommandInput, GetRuleGroupCommandOutput } from "./commands/GetRuleGroupCommand";
+import type {
+  GetSampledRequestsCommandInput,
+  GetSampledRequestsCommandOutput,
+} from "./commands/GetSampledRequestsCommand";
+import type {
+  GetTopPathStatisticsByTrafficCommandInput,
+  GetTopPathStatisticsByTrafficCommandOutput,
+} from "./commands/GetTopPathStatisticsByTrafficCommand";
+import type { GetWebACLCommandInput, GetWebACLCommandOutput } from "./commands/GetWebACLCommand";
+import type {
   GetWebACLForResourceCommandInput,
   GetWebACLForResourceCommandOutput,
 } from "./commands/GetWebACLForResourceCommand";
-import {
+import type { ListAPIKeysCommandInput, ListAPIKeysCommandOutput } from "./commands/ListAPIKeysCommand";
+import type {
   ListAvailableManagedRuleGroupsCommandInput,
   ListAvailableManagedRuleGroupsCommandOutput,
 } from "./commands/ListAvailableManagedRuleGroupsCommand";
-import {
+import type {
   ListAvailableManagedRuleGroupVersionsCommandInput,
   ListAvailableManagedRuleGroupVersionsCommandOutput,
 } from "./commands/ListAvailableManagedRuleGroupVersionsCommand";
-import { ListIPSetsCommandInput, ListIPSetsCommandOutput } from "./commands/ListIPSetsCommand";
-import {
+import type { ListIPSetsCommandInput, ListIPSetsCommandOutput } from "./commands/ListIPSetsCommand";
+import type {
   ListLoggingConfigurationsCommandInput,
   ListLoggingConfigurationsCommandOutput,
 } from "./commands/ListLoggingConfigurationsCommand";
-import {
+import type {
   ListManagedRuleSetsCommandInput,
   ListManagedRuleSetsCommandOutput,
 } from "./commands/ListManagedRuleSetsCommand";
-import {
+import type {
+  ListMobileSdkReleasesCommandInput,
+  ListMobileSdkReleasesCommandOutput,
+} from "./commands/ListMobileSdkReleasesCommand";
+import type {
   ListRegexPatternSetsCommandInput,
   ListRegexPatternSetsCommandOutput,
 } from "./commands/ListRegexPatternSetsCommand";
-import {
+import type {
   ListResourcesForWebACLCommandInput,
   ListResourcesForWebACLCommandOutput,
 } from "./commands/ListResourcesForWebACLCommand";
-import { ListRuleGroupsCommandInput, ListRuleGroupsCommandOutput } from "./commands/ListRuleGroupsCommand";
-import {
+import type { ListRuleGroupsCommandInput, ListRuleGroupsCommandOutput } from "./commands/ListRuleGroupsCommand";
+import type {
+  ListSettlementRecordsCommandInput,
+  ListSettlementRecordsCommandOutput,
+} from "./commands/ListSettlementRecordsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListWebACLsCommandInput, ListWebACLsCommandOutput } from "./commands/ListWebACLsCommand";
-import {
+import type { ListWebACLsCommandInput, ListWebACLsCommandOutput } from "./commands/ListWebACLsCommand";
+import type {
   PutLoggingConfigurationCommandInput,
   PutLoggingConfigurationCommandOutput,
 } from "./commands/PutLoggingConfigurationCommand";
-import {
+import type {
   PutManagedRuleSetVersionsCommandInput,
   PutManagedRuleSetVersionsCommandOutput,
 } from "./commands/PutManagedRuleSetVersionsCommand";
-import {
+import type {
   PutPermissionPolicyCommandInput,
   PutPermissionPolicyCommandOutput,
 } from "./commands/PutPermissionPolicyCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateIPSetCommandInput, UpdateIPSetCommandOutput } from "./commands/UpdateIPSetCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateIPSetCommandInput, UpdateIPSetCommandOutput } from "./commands/UpdateIPSetCommand";
+import type {
   UpdateManagedRuleSetVersionExpiryDateCommandInput,
   UpdateManagedRuleSetVersionExpiryDateCommandOutput,
 } from "./commands/UpdateManagedRuleSetVersionExpiryDateCommand";
-import {
+import type {
   UpdateRegexPatternSetCommandInput,
   UpdateRegexPatternSetCommandOutput,
 } from "./commands/UpdateRegexPatternSetCommand";
-import { UpdateRuleGroupCommandInput, UpdateRuleGroupCommandOutput } from "./commands/UpdateRuleGroupCommand";
-import { UpdateWebACLCommandInput, UpdateWebACLCommandOutput } from "./commands/UpdateWebACLCommand";
+import type { UpdateRuleGroupCommandInput, UpdateRuleGroupCommandOutput } from "./commands/UpdateRuleGroupCommand";
+import type { UpdateWebACLCommandInput, UpdateWebACLCommandOutput } from "./commands/UpdateWebACLCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AssociateWebACLCommandInput
   | CheckCapacityCommandInput
+  | CreateAPIKeyCommandInput
   | CreateIPSetCommandInput
   | CreateRegexPatternSetCommandInput
   | CreateRuleGroupCommandInput
   | CreateWebACLCommandInput
+  | DeleteAPIKeyCommandInput
   | DeleteFirewallManagerRuleGroupsCommandInput
   | DeleteIPSetCommandInput
   | DeleteLoggingConfigurationCommandInput
@@ -176,26 +254,38 @@ export type ServiceInputTypes =
   | DeleteRegexPatternSetCommandInput
   | DeleteRuleGroupCommandInput
   | DeleteWebACLCommandInput
+  | DescribeAllManagedProductsCommandInput
+  | DescribeManagedProductsByVendorCommandInput
   | DescribeManagedRuleGroupCommandInput
   | DisassociateWebACLCommandInput
+  | GenerateMobileSdkReleaseUrlCommandInput
+  | GetDecryptedAPIKeyCommandInput
   | GetIPSetCommandInput
   | GetLoggingConfigurationCommandInput
   | GetManagedRuleSetCommandInput
+  | GetMobileSdkReleaseCommandInput
   | GetPermissionPolicyCommandInput
   | GetRateBasedStatementManagedKeysCommandInput
   | GetRegexPatternSetCommandInput
+  | GetRevenueStatisticsCommandInput
+  | GetRevenueStatisticsSummaryCommandInput
+  | GetRevenueStatisticsTimeSeriesCommandInput
   | GetRuleGroupCommandInput
   | GetSampledRequestsCommandInput
+  | GetTopPathStatisticsByTrafficCommandInput
   | GetWebACLCommandInput
   | GetWebACLForResourceCommandInput
+  | ListAPIKeysCommandInput
   | ListAvailableManagedRuleGroupVersionsCommandInput
   | ListAvailableManagedRuleGroupsCommandInput
   | ListIPSetsCommandInput
   | ListLoggingConfigurationsCommandInput
   | ListManagedRuleSetsCommandInput
+  | ListMobileSdkReleasesCommandInput
   | ListRegexPatternSetsCommandInput
   | ListResourcesForWebACLCommandInput
   | ListRuleGroupsCommandInput
+  | ListSettlementRecordsCommandInput
   | ListTagsForResourceCommandInput
   | ListWebACLsCommandInput
   | PutLoggingConfigurationCommandInput
@@ -209,13 +299,18 @@ export type ServiceInputTypes =
   | UpdateRuleGroupCommandInput
   | UpdateWebACLCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AssociateWebACLCommandOutput
   | CheckCapacityCommandOutput
+  | CreateAPIKeyCommandOutput
   | CreateIPSetCommandOutput
   | CreateRegexPatternSetCommandOutput
   | CreateRuleGroupCommandOutput
   | CreateWebACLCommandOutput
+  | DeleteAPIKeyCommandOutput
   | DeleteFirewallManagerRuleGroupsCommandOutput
   | DeleteIPSetCommandOutput
   | DeleteLoggingConfigurationCommandOutput
@@ -223,26 +318,38 @@ export type ServiceOutputTypes =
   | DeleteRegexPatternSetCommandOutput
   | DeleteRuleGroupCommandOutput
   | DeleteWebACLCommandOutput
+  | DescribeAllManagedProductsCommandOutput
+  | DescribeManagedProductsByVendorCommandOutput
   | DescribeManagedRuleGroupCommandOutput
   | DisassociateWebACLCommandOutput
+  | GenerateMobileSdkReleaseUrlCommandOutput
+  | GetDecryptedAPIKeyCommandOutput
   | GetIPSetCommandOutput
   | GetLoggingConfigurationCommandOutput
   | GetManagedRuleSetCommandOutput
+  | GetMobileSdkReleaseCommandOutput
   | GetPermissionPolicyCommandOutput
   | GetRateBasedStatementManagedKeysCommandOutput
   | GetRegexPatternSetCommandOutput
+  | GetRevenueStatisticsCommandOutput
+  | GetRevenueStatisticsSummaryCommandOutput
+  | GetRevenueStatisticsTimeSeriesCommandOutput
   | GetRuleGroupCommandOutput
   | GetSampledRequestsCommandOutput
+  | GetTopPathStatisticsByTrafficCommandOutput
   | GetWebACLCommandOutput
   | GetWebACLForResourceCommandOutput
+  | ListAPIKeysCommandOutput
   | ListAvailableManagedRuleGroupVersionsCommandOutput
   | ListAvailableManagedRuleGroupsCommandOutput
   | ListIPSetsCommandOutput
   | ListLoggingConfigurationsCommandOutput
   | ListManagedRuleSetsCommandOutput
+  | ListMobileSdkReleasesCommandOutput
   | ListRegexPatternSetsCommandOutput
   | ListResourcesForWebACLCommandOutput
   | ListRuleGroupsCommandOutput
+  | ListSettlementRecordsCommandOutput
   | ListTagsForResourceCommandOutput
   | ListWebACLsCommandOutput
   | PutLoggingConfigurationCommandOutput
@@ -256,18 +363,21 @@ export type ServiceOutputTypes =
   | UpdateRuleGroupCommandOutput
   | UpdateWebACLCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -279,7 +389,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -318,25 +428,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -349,63 +450,112 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type WAFV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of WAFV2Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type WAFV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of WAFV2Client class constructor that set the region, credentials and other options.
  */
 export interface WAFV2ClientConfig extends WAFV2ClientConfigType {}
 
-type WAFV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of WAFV2Client class. This is resolved and normalized from the {@link WAFV2ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type WAFV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of WAFV2Client class. This is resolved and normalized from the {@link WAFV2ClientConfig | constructor configuration interface}.
  */
 export interface WAFV2ClientResolvedConfig extends WAFV2ClientResolvedConfigType {}
 
 /**
- * <fullname>WAF</fullname>
+ * <fullname>WAF </fullname>
  *          <note>
  *             <p>This is the latest version of the <b>WAF</b> API,
  *             released in November, 2019. The names of the entities that you use to access this API,
@@ -413,57 +563,35 @@ export interface WAFV2ClientResolvedConfig extends WAFV2ClientResolvedConfigType
  *             "v2", to distinguish from the prior version. We recommend migrating your resources to
  *             this version, because it has a number of significant improvements.</p>
  *             <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any
- *             WAF resources that you created before. You can access your old rules, web ACLs, and
- *             other WAF resources only through the WAF Classic APIs. The WAF Classic APIs
- *             have retained the prior names, endpoints, and namespaces. </p>
- *             <p>For information, including how to migrate your WAF resources to this version,
+ *             WAF resources that you created before. WAF Classic support will end on September 30, 2025. </p>
+ *             <p>For information about WAF, including how to migrate your WAF Classic resources to this version,
  *             see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF Developer Guide</a>. </p>
  *          </note>
  *          <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS
- *          requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync
- *          GraphQL API. WAF also lets you control access to your content. Based on conditions that
+ *          requests that are forwarded to a protected resource. Protected resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync
+ *       GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, and Amazon Web Services Verified Access instance. WAF also lets you control access to your content,
+ *       to protect the Amazon Web Services resource that WAF is monitoring. Based on conditions that
  *          you specify, such as the IP addresses that requests originate from or the values of query
- *          strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL
- *          API responds to requests either with the requested content or with an HTTP 403 status code
- *          (Forbidden). You also can configure CloudFront to return a custom error page when a request is
- *          blocked.</p>
+ *          strings, the protected resource responds to requests with either the requested content, an HTTP 403 status code
+ *          (Forbidden), or with a custom response. </p>
  *          <p>This API guide is for developers who need detailed information about WAF API actions,
- *          data types, and errors. For detailed information about WAF features and an overview of
- *          how to use WAF, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">WAF Developer
+ *          data types, and errors. For detailed information about WAF features and guidance for configuring and using
+ *          WAF, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">WAF Developer
  *          Guide</a>.</p>
  *          <p>You can make calls using the endpoints listed in <a href="https://docs.aws.amazon.com/general/latest/gr/waf.html">WAF endpoints and quotas</a>. </p>
  *          <ul>
  *             <li>
- *                <p>For regional applications, you can use any of the endpoints in the list.
- *                A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p>
+ *                <p>For regional resources, you can use any of the endpoints in the list.
+ *                A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance. </p>
  *             </li>
  *             <li>
- *                <p>For Amazon CloudFront applications, you must use the API endpoint listed for
+ *                <p>For Amazon CloudFront and Amplify, you must use the API endpoint listed for
  *                US East (N. Virginia): us-east-1.</p>
  *             </li>
  *          </ul>
  *          <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the
  *          programming language or platform that you're using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">Amazon Web Services SDKs</a>.</p>
- *          <p>We currently provide two versions of the WAF API: this API and the prior versions,
- *          the classic WAF APIs. This new API provides the same functionality as the older versions,
- *          with the following major improvements:</p>
- *          <ul>
- *             <li>
- *                <p>You use one API for both global and regional applications. Where you need to
- *                distinguish the scope, you specify a <code>Scope</code> parameter and set it to
- *                   <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>
- *             </li>
- *             <li>
- *                <p>You can define a web ACL or rule group with a single call, and update it with a
- *                single call. You define all rule specifications in JSON format, and pass them to your
- *                rule group or web ACL calls.</p>
- *             </li>
- *             <li>
- *                <p>The limits WAF places on the use of rules more closely reflects the cost of
- *                running each type of rule. Rule groups include capacity settings, so you know the
- *                maximum cost of a rule group when you use it.</p>
- *             </li>
- *          </ul>
+ * @public
  */
 export class WAFV2Client extends __Client<
   __HttpHandlerOptions,
@@ -476,22 +604,36 @@ export class WAFV2Client extends __Client<
    */
   readonly config: WAFV2ClientResolvedConfig;
 
-  constructor(configuration: WAFV2ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<WAFV2ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultWAFV2HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: WAFV2ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

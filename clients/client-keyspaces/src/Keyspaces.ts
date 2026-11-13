@@ -1,0 +1,509 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateKeyspaceCommandInput,
+  type CreateKeyspaceCommandOutput,
+  CreateKeyspaceCommand,
+} from "./commands/CreateKeyspaceCommand";
+import {
+  type CreateTableCommandInput,
+  type CreateTableCommandOutput,
+  CreateTableCommand,
+} from "./commands/CreateTableCommand";
+import {
+  type CreateTypeCommandInput,
+  type CreateTypeCommandOutput,
+  CreateTypeCommand,
+} from "./commands/CreateTypeCommand";
+import {
+  type DeleteKeyspaceCommandInput,
+  type DeleteKeyspaceCommandOutput,
+  DeleteKeyspaceCommand,
+} from "./commands/DeleteKeyspaceCommand";
+import {
+  type DeleteTableCommandInput,
+  type DeleteTableCommandOutput,
+  DeleteTableCommand,
+} from "./commands/DeleteTableCommand";
+import {
+  type DeleteTypeCommandInput,
+  type DeleteTypeCommandOutput,
+  DeleteTypeCommand,
+} from "./commands/DeleteTypeCommand";
+import {
+  type GetKeyspaceCommandInput,
+  type GetKeyspaceCommandOutput,
+  GetKeyspaceCommand,
+} from "./commands/GetKeyspaceCommand";
+import {
+  type GetTableAutoScalingSettingsCommandInput,
+  type GetTableAutoScalingSettingsCommandOutput,
+  GetTableAutoScalingSettingsCommand,
+} from "./commands/GetTableAutoScalingSettingsCommand";
+import { type GetTableCommandInput, type GetTableCommandOutput, GetTableCommand } from "./commands/GetTableCommand";
+import { type GetTypeCommandInput, type GetTypeCommandOutput, GetTypeCommand } from "./commands/GetTypeCommand";
+import {
+  type ListKeyspacesCommandInput,
+  type ListKeyspacesCommandOutput,
+  ListKeyspacesCommand,
+} from "./commands/ListKeyspacesCommand";
+import {
+  type ListTablesCommandInput,
+  type ListTablesCommandOutput,
+  ListTablesCommand,
+} from "./commands/ListTablesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import { type ListTypesCommandInput, type ListTypesCommandOutput, ListTypesCommand } from "./commands/ListTypesCommand";
+import {
+  type RestoreTableCommandInput,
+  type RestoreTableCommandOutput,
+  RestoreTableCommand,
+} from "./commands/RestoreTableCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateKeyspaceCommandInput,
+  type UpdateKeyspaceCommandOutput,
+  UpdateKeyspaceCommand,
+} from "./commands/UpdateKeyspaceCommand";
+import {
+  type UpdateTableCommandInput,
+  type UpdateTableCommandOutput,
+  UpdateTableCommand,
+} from "./commands/UpdateTableCommand";
+import { KeyspacesClient } from "./KeyspacesClient";
+import { paginateListKeyspaces } from "./pagination/ListKeyspacesPaginator";
+import { paginateListTables } from "./pagination/ListTablesPaginator";
+import { paginateListTagsForResource } from "./pagination/ListTagsForResourcePaginator";
+import { paginateListTypes } from "./pagination/ListTypesPaginator";
+
+const commands = {
+  CreateKeyspaceCommand,
+  CreateTableCommand,
+  CreateTypeCommand,
+  DeleteKeyspaceCommand,
+  DeleteTableCommand,
+  DeleteTypeCommand,
+  GetKeyspaceCommand,
+  GetTableCommand,
+  GetTableAutoScalingSettingsCommand,
+  GetTypeCommand,
+  ListKeyspacesCommand,
+  ListTablesCommand,
+  ListTagsForResourceCommand,
+  ListTypesCommand,
+  RestoreTableCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateKeyspaceCommand,
+  UpdateTableCommand,
+};
+const paginators = {
+  paginateListKeyspaces,
+  paginateListTables,
+  paginateListTagsForResource,
+  paginateListTypes,
+};
+
+/**
+ * @public
+ */
+export interface KeyspacesRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Keyspaces {
+  /**
+   * @see {@link CreateKeyspaceCommand}
+   */
+  createKeyspace(
+    args: CreateKeyspaceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<CreateKeyspaceCommandOutput>;
+  createKeyspace(
+    args: CreateKeyspaceCommandInput,
+    cb: (err: any, data?: CreateKeyspaceCommandOutput) => void
+  ): void;
+  createKeyspace(
+    args: CreateKeyspaceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: CreateKeyspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTableCommand}
+   */
+  createTable(
+    args: CreateTableCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<CreateTableCommandOutput>;
+  createTable(
+    args: CreateTableCommandInput,
+    cb: (err: any, data?: CreateTableCommandOutput) => void
+  ): void;
+  createTable(
+    args: CreateTableCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: CreateTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTypeCommand}
+   */
+  createType(
+    args: CreateTypeCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<CreateTypeCommandOutput>;
+  createType(
+    args: CreateTypeCommandInput,
+    cb: (err: any, data?: CreateTypeCommandOutput) => void
+  ): void;
+  createType(
+    args: CreateTypeCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: CreateTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKeyspaceCommand}
+   */
+  deleteKeyspace(
+    args: DeleteKeyspaceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<DeleteKeyspaceCommandOutput>;
+  deleteKeyspace(
+    args: DeleteKeyspaceCommandInput,
+    cb: (err: any, data?: DeleteKeyspaceCommandOutput) => void
+  ): void;
+  deleteKeyspace(
+    args: DeleteKeyspaceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: DeleteKeyspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTableCommand}
+   */
+  deleteTable(
+    args: DeleteTableCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<DeleteTableCommandOutput>;
+  deleteTable(
+    args: DeleteTableCommandInput,
+    cb: (err: any, data?: DeleteTableCommandOutput) => void
+  ): void;
+  deleteTable(
+    args: DeleteTableCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: DeleteTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTypeCommand}
+   */
+  deleteType(
+    args: DeleteTypeCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<DeleteTypeCommandOutput>;
+  deleteType(
+    args: DeleteTypeCommandInput,
+    cb: (err: any, data?: DeleteTypeCommandOutput) => void
+  ): void;
+  deleteType(
+    args: DeleteTypeCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: DeleteTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKeyspaceCommand}
+   */
+  getKeyspace(
+    args: GetKeyspaceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<GetKeyspaceCommandOutput>;
+  getKeyspace(
+    args: GetKeyspaceCommandInput,
+    cb: (err: any, data?: GetKeyspaceCommandOutput) => void
+  ): void;
+  getKeyspace(
+    args: GetKeyspaceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: GetKeyspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableCommand}
+   */
+  getTable(
+    args: GetTableCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<GetTableCommandOutput>;
+  getTable(
+    args: GetTableCommandInput,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+  getTable(
+    args: GetTableCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableAutoScalingSettingsCommand}
+   */
+  getTableAutoScalingSettings(
+    args: GetTableAutoScalingSettingsCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<GetTableAutoScalingSettingsCommandOutput>;
+  getTableAutoScalingSettings(
+    args: GetTableAutoScalingSettingsCommandInput,
+    cb: (err: any, data?: GetTableAutoScalingSettingsCommandOutput) => void
+  ): void;
+  getTableAutoScalingSettings(
+    args: GetTableAutoScalingSettingsCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: GetTableAutoScalingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTypeCommand}
+   */
+  getType(
+    args: GetTypeCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<GetTypeCommandOutput>;
+  getType(
+    args: GetTypeCommandInput,
+    cb: (err: any, data?: GetTypeCommandOutput) => void
+  ): void;
+  getType(
+    args: GetTypeCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: GetTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKeyspacesCommand}
+   */
+  listKeyspaces(): Promise<ListKeyspacesCommandOutput>;
+  listKeyspaces(
+    args: ListKeyspacesCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<ListKeyspacesCommandOutput>;
+  listKeyspaces(
+    args: ListKeyspacesCommandInput,
+    cb: (err: any, data?: ListKeyspacesCommandOutput) => void
+  ): void;
+  listKeyspaces(
+    args: ListKeyspacesCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: ListKeyspacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTablesCommand}
+   */
+  listTables(
+    args: ListTablesCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<ListTablesCommandOutput>;
+  listTables(
+    args: ListTablesCommandInput,
+    cb: (err: any, data?: ListTablesCommandOutput) => void
+  ): void;
+  listTables(
+    args: ListTablesCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: ListTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTypesCommand}
+   */
+  listTypes(
+    args: ListTypesCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<ListTypesCommandOutput>;
+  listTypes(
+    args: ListTypesCommandInput,
+    cb: (err: any, data?: ListTypesCommandOutput) => void
+  ): void;
+  listTypes(
+    args: ListTypesCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: ListTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreTableCommand}
+   */
+  restoreTable(
+    args: RestoreTableCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<RestoreTableCommandOutput>;
+  restoreTable(
+    args: RestoreTableCommandInput,
+    cb: (err: any, data?: RestoreTableCommandOutput) => void
+  ): void;
+  restoreTable(
+    args: RestoreTableCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: RestoreTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateKeyspaceCommand}
+   */
+  updateKeyspace(
+    args: UpdateKeyspaceCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<UpdateKeyspaceCommandOutput>;
+  updateKeyspace(
+    args: UpdateKeyspaceCommandInput,
+    cb: (err: any, data?: UpdateKeyspaceCommandOutput) => void
+  ): void;
+  updateKeyspace(
+    args: UpdateKeyspaceCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: UpdateKeyspaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTableCommand}
+   */
+  updateTable(
+    args: UpdateTableCommandInput,
+    options?: KeyspacesRequestOptions
+  ): Promise<UpdateTableCommandOutput>;
+  updateTable(
+    args: UpdateTableCommandInput,
+    cb: (err: any, data?: UpdateTableCommandOutput) => void
+  ): void;
+  updateTable(
+    args: UpdateTableCommandInput,
+    options: KeyspacesRequestOptions,
+    cb: (err: any, data?: UpdateTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKeyspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKeyspacesCommandOutput}.
+   */
+  paginateListKeyspaces(
+    args?: ListKeyspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKeyspacesCommandOutput>;
+
+  /**
+   * @see {@link ListTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTablesCommandOutput}.
+   */
+  paginateListTables(
+    args: ListTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTablesCommandOutput>;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsForResourceCommandOutput}.
+   */
+  paginateListTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsForResourceCommandOutput>;
+
+  /**
+   * @see {@link ListTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTypesCommandOutput}.
+   */
+  paginateListTypes(
+    args: ListTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTypesCommandOutput>;
+}
+
+/**
+ * <p>Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate, run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p> <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI, as well as infrastructure as code (IaC) services and tools such as CloudFormation and Terraform. This API reference describes the supported DDL operations in detail.</p> <p>For the list of all supported CQL APIs, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html">Supported Cassandra APIs, operations, and data types in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-apis.html">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>
+ * @public
+ */
+export class Keyspaces extends KeyspacesClient implements Keyspaces {}
+createAggregatedClient(commands, Keyspaces, { paginators });

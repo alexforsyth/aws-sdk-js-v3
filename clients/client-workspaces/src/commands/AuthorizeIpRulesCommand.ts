@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuthorizeIpRulesRequest, AuthorizeIpRulesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1AuthorizeIpRulesCommand,
-  serializeAws_json1_1AuthorizeIpRulesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AuthorizeIpRulesRequest, AuthorizeIpRulesResult } from "../models/models_0";
+import { AuthorizeIpRules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AuthorizeIpRulesCommand}.
+ */
 export interface AuthorizeIpRulesCommandInput extends AuthorizeIpRulesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AuthorizeIpRulesCommand}.
+ */
 export interface AuthorizeIpRulesCommandOutput extends AuthorizeIpRulesResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,66 @@ export interface AuthorizeIpRulesCommandOutput extends AuthorizeIpRulesResult, _
  * ```javascript
  * import { WorkSpacesClient, AuthorizeIpRulesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, AuthorizeIpRulesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // AuthorizeIpRulesRequest
+ *   GroupId: "STRING_VALUE", // required
+ *   UserRules: [ // IpRuleList // required
+ *     { // IpRuleItem
+ *       ipRule: "STRING_VALUE",
+ *       ruleDesc: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new AuthorizeIpRulesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AuthorizeIpRulesCommandInput - {@link AuthorizeIpRulesCommandInput}
+ * @returns {@link AuthorizeIpRulesCommandOutput}
  * @see {@link AuthorizeIpRulesCommandInput} for command's `input` shape.
  * @see {@link AuthorizeIpRulesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link InvalidResourceStateException} (client fault)
+ *  <p>The state of the resource is not valid for this operation.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class AuthorizeIpRulesCommand extends $Command<
-  AuthorizeIpRulesCommandInput,
-  AuthorizeIpRulesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AuthorizeIpRulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AuthorizeIpRulesCommandInput, AuthorizeIpRulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "AuthorizeIpRulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AuthorizeIpRulesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AuthorizeIpRulesResult.filterSensitiveLog,
+export class AuthorizeIpRulesCommand extends command<AuthorizeIpRulesCommandInput, AuthorizeIpRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "AuthorizeIpRules",
+  AuthorizeIpRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AuthorizeIpRulesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AuthorizeIpRulesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AuthorizeIpRulesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AuthorizeIpRulesCommandOutput> {
-    return deserializeAws_json1_1AuthorizeIpRulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AuthorizeIpRulesCommandInput;
+      output: AuthorizeIpRulesCommandOutput;
+    };
+  };
 }

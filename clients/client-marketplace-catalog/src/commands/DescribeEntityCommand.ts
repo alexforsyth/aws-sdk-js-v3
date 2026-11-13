@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MarketplaceCatalogClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MarketplaceCatalogClient";
-import { DescribeEntityRequest, DescribeEntityResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeEntityCommand,
-  serializeAws_restJson1DescribeEntityCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEntityRequest, DescribeEntityResponse } from "../models/models_0";
+import { DescribeEntity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEntityCommand}.
+ */
 export interface DescribeEntityCommandInput extends DescribeEntityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEntityCommand}.
+ */
 export interface DescribeEntityCommandOutput extends DescribeEntityResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,76 @@ export interface DescribeEntityCommandOutput extends DescribeEntityResponse, __M
  * ```javascript
  * import { MarketplaceCatalogClient, DescribeEntityCommand } from "@aws-sdk/client-marketplace-catalog"; // ES Modules import
  * // const { MarketplaceCatalogClient, DescribeEntityCommand } = require("@aws-sdk/client-marketplace-catalog"); // CommonJS import
+ * // import type { MarketplaceCatalogClientConfig } from "@aws-sdk/client-marketplace-catalog";
+ * const config = {}; // type is MarketplaceCatalogClientConfig
  * const client = new MarketplaceCatalogClient(config);
+ * const input = { // DescribeEntityRequest
+ *   Catalog: "STRING_VALUE", // required
+ *   EntityId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeEntityCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEntityResponse
+ * //   EntityType: "STRING_VALUE",
+ * //   EntityIdentifier: "STRING_VALUE",
+ * //   EntityArn: "STRING_VALUE",
+ * //   LastModifiedDate: "STRING_VALUE",
+ * //   Details: "STRING_VALUE",
+ * //   DetailsDocument: "DOCUMENT_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEntityCommandInput - {@link DescribeEntityCommandInput}
+ * @returns {@link DescribeEntityCommandOutput}
  * @see {@link DescribeEntityCommandInput} for command's `input` shape.
  * @see {@link DescribeEntityCommandOutput} for command's `response` shape.
- * @see {@link MarketplaceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MarketplaceCatalogClientResolvedConfig | config} for MarketplaceCatalogClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *          <p>HTTP status code: 403</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>There was an internal service exception.</p>
+ *          <p>HTTP status code: 500</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource wasn't found.</p>
+ *          <p>HTTP status code: 404</p>
+ *
+ * @throws {@link ResourceNotSupportedException} (client fault)
+ *  <p>Currently, the specified resource is not supported.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Too many requests.</p>
+ *          <p>HTTP status code: 429</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An error occurred during validation.</p>
+ *          <p>HTTP status code: 422</p>
+ *
+ * @throws {@link MarketplaceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from MarketplaceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEntityCommand extends $Command<
-  DescribeEntityCommandInput,
-  DescribeEntityCommandOutput,
-  MarketplaceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEntityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MarketplaceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEntityCommandInput, DescribeEntityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MarketplaceCatalogClient";
-    const commandName = "DescribeEntityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEntityRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEntityResponse.filterSensitiveLog,
+export class DescribeEntityCommand extends command<DescribeEntityCommandInput, DescribeEntityCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEntity",
+  DescribeEntity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEntityRequest;
+      output: DescribeEntityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEntityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeEntityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEntityCommandOutput> {
-    return deserializeAws_restJson1DescribeEntityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEntityCommandInput;
+      output: DescribeEntityCommandOutput;
+    };
+  };
 }

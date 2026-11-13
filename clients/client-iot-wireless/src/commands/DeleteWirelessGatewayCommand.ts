@@ -1,95 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { DeleteWirelessGatewayRequest, DeleteWirelessGatewayResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteWirelessGatewayCommand,
-  serializeAws_restJson1DeleteWirelessGatewayCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWirelessGatewayRequest, DeleteWirelessGatewayResponse } from "../models/models_0";
+import { DeleteWirelessGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWirelessGatewayCommand}.
+ */
 export interface DeleteWirelessGatewayCommandInput extends DeleteWirelessGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWirelessGatewayCommand}.
+ */
 export interface DeleteWirelessGatewayCommandOutput extends DeleteWirelessGatewayResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes a wireless gateway.</p>
+ *          <note>
+ *             <p>When deleting a wireless gateway, you might run into duplication errors for the
+ *                 following reasons.</p>
+ *             <ul>
+ *                <li>
+ *                   <p>If you specify a <code>GatewayEui</code> value that already exists.</p>
+ *                </li>
+ *                <li>
+ *                   <p>If you used a <code>ClientRequestToken</code> with the same parameters
+ *                         within the last 10 minutes.</p>
+ *                </li>
+ *             </ul>
+ *             <p>To avoid this error, make sure that you use unique identifiers and parameters for
+ *                 each request within the specified time period.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, DeleteWirelessGatewayCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, DeleteWirelessGatewayCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // DeleteWirelessGatewayRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteWirelessGatewayCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteWirelessGatewayCommandInput - {@link DeleteWirelessGatewayCommandInput}
+ * @returns {@link DeleteWirelessGatewayCommandOutput}
  * @see {@link DeleteWirelessGatewayCommandInput} for command's `input` shape.
  * @see {@link DeleteWirelessGatewayCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWirelessGatewayCommand extends $Command<
-  DeleteWirelessGatewayCommandInput,
-  DeleteWirelessGatewayCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWirelessGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWirelessGatewayCommandInput, DeleteWirelessGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "DeleteWirelessGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWirelessGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteWirelessGatewayResponse.filterSensitiveLog,
+export class DeleteWirelessGatewayCommand extends command<DeleteWirelessGatewayCommandInput, DeleteWirelessGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWirelessGateway",
+  DeleteWirelessGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWirelessGatewayRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWirelessGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteWirelessGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWirelessGatewayCommandOutput> {
-    return deserializeAws_restJson1DeleteWirelessGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWirelessGatewayCommandInput;
+      output: DeleteWirelessGatewayCommandOutput;
+    };
+  };
 }

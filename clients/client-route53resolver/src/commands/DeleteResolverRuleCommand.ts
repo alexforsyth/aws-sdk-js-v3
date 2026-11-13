@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteResolverRuleRequest, DeleteResolverRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteResolverRuleCommand,
-  serializeAws_json1_1DeleteResolverRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteResolverRuleRequest, DeleteResolverRuleResponse } from "../models/models_0";
+import { DeleteResolverRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteResolverRuleCommand}.
+ */
 export interface DeleteResolverRuleCommandInput extends DeleteResolverRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteResolverRuleCommand}.
+ */
 export interface DeleteResolverRuleCommandOutput extends DeleteResolverRuleResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,89 @@ export interface DeleteResolverRuleCommandOutput extends DeleteResolverRuleRespo
  * ```javascript
  * import { Route53ResolverClient, DeleteResolverRuleCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, DeleteResolverRuleCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // DeleteResolverRuleRequest
+ *   ResolverRuleId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteResolverRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteResolverRuleResponse
+ * //   ResolverRule: { // ResolverRule
+ * //     Id: "STRING_VALUE",
+ * //     CreatorRequestId: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     DomainName: "STRING_VALUE",
+ * //     Status: "COMPLETE" || "DELETING" || "UPDATING" || "FAILED",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     RuleType: "FORWARD" || "SYSTEM" || "RECURSIVE" || "DELEGATE",
+ * //     Name: "STRING_VALUE",
+ * //     TargetIps: [ // TargetList
+ * //       { // TargetAddress
+ * //         Ip: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         Ipv6: "STRING_VALUE",
+ * //         Protocol: "DoH" || "Do53" || "DoH-FIPS",
+ * //         ServerNameIndication: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ResolverEndpointId: "STRING_VALUE",
+ * //     OwnerId: "STRING_VALUE",
+ * //     ShareStatus: "NOT_SHARED" || "SHARED_WITH_ME" || "SHARED_BY_ME",
+ * //     CreationTime: "STRING_VALUE",
+ * //     ModificationTime: "STRING_VALUE",
+ * //     DelegationRecord: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteResolverRuleCommandInput - {@link DeleteResolverRuleCommandInput}
+ * @returns {@link DeleteResolverRuleCommandOutput}
  * @see {@link DeleteResolverRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteResolverRuleCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters in this request are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The resource that you tried to update or delete is currently in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteResolverRuleCommand extends $Command<
-  DeleteResolverRuleCommandInput,
-  DeleteResolverRuleCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteResolverRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteResolverRuleCommandInput, DeleteResolverRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "DeleteResolverRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteResolverRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteResolverRuleResponse.filterSensitiveLog,
+export class DeleteResolverRuleCommand extends command<DeleteResolverRuleCommandInput, DeleteResolverRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteResolverRule",
+  DeleteResolverRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResolverRuleRequest;
+      output: DeleteResolverRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteResolverRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteResolverRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteResolverRuleCommandOutput> {
-    return deserializeAws_json1_1DeleteResolverRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteResolverRuleCommandInput;
+      output: DeleteResolverRuleCommandOutput;
+    };
+  };
 }

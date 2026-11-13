@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListXssMatchSetsRequest, ListXssMatchSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListXssMatchSetsCommand,
-  serializeAws_json1_1ListXssMatchSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListXssMatchSetsRequest, ListXssMatchSetsResponse } from "../models/models_0";
+import { ListXssMatchSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListXssMatchSetsCommand}.
+ */
 export interface ListXssMatchSetsCommandInput extends ListXssMatchSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListXssMatchSetsCommand}.
+ */
 export interface ListXssMatchSetsCommandOutput extends ListXssMatchSetsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,80 @@ export interface ListXssMatchSetsCommandOutput extends ListXssMatchSetsResponse,
  * ```javascript
  * import { WAFRegionalClient, ListXssMatchSetsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListXssMatchSetsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListXssMatchSetsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListXssMatchSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListXssMatchSetsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   XssMatchSets: [ // XssMatchSetSummaries
+ * //     { // XssMatchSetSummary
+ * //       XssMatchSetId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListXssMatchSetsCommandInput - {@link ListXssMatchSetsCommandInput}
+ * @returns {@link ListXssMatchSetsCommandOutput}
  * @see {@link ListXssMatchSetsCommandInput} for command's `input` shape.
  * @see {@link ListXssMatchSetsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @example To list XSS match sets
+ * ```javascript
+ * // The following example returns an array of up to 100 XSS match sets.
+ * const input = {
+ *   Limit: 100
+ * };
+ * const command = new ListXssMatchSetsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   XssMatchSets: [
+ *     {
+ *       Name: "MySampleXssMatchSet",
+ *       XssMatchSetId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListXssMatchSetsCommand extends $Command<
-  ListXssMatchSetsCommandInput,
-  ListXssMatchSetsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListXssMatchSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListXssMatchSetsCommandInput, ListXssMatchSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListXssMatchSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListXssMatchSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListXssMatchSetsResponse.filterSensitiveLog,
+export class ListXssMatchSetsCommand extends command<ListXssMatchSetsCommandInput, ListXssMatchSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListXssMatchSets",
+  ListXssMatchSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListXssMatchSetsRequest;
+      output: ListXssMatchSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListXssMatchSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListXssMatchSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListXssMatchSetsCommandOutput> {
-    return deserializeAws_json1_1ListXssMatchSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListXssMatchSetsCommandInput;
+      output: ListXssMatchSetsCommandOutput;
+    };
+  };
 }

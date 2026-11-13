@@ -1,124 +1,684 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AcceptHandshakeRequest, AcceptHandshakeResponse } from "../models/models_0";
-import { OrganizationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OrganizationsClient";
-import {
-  deserializeAws_json1_1AcceptHandshakeCommand,
-  serializeAws_json1_1AcceptHandshakeCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptHandshakeRequest, AcceptHandshakeResponse } from "../models/models_0";
+import { AcceptHandshake$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptHandshakeCommand}.
+ */
 export interface AcceptHandshakeCommandInput extends AcceptHandshakeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptHandshakeCommand}.
+ */
 export interface AcceptHandshakeCommandOutput extends AcceptHandshakeResponse, __MetadataBearer {}
 
 /**
- * <p>Sends a response to the originator of a handshake agreeing to the action proposed by
- *             the handshake request.</p>
- *         <p>This operation can be called only by the following principals when they also have the
- *             relevant IAM permissions:</p>
- *         <ul>
+ * <p>Accepts a handshake by sending an <code>ACCEPTED</code> response to the sender. You
+ *             can view accepted handshakes in API responses for 30 days before they are
+ *             deleted.</p>
+ *          <p>
+ *             <b>Only the management account can accept the following
+ *                 handshakes</b>:</p>
+ *          <ul>
  *             <li>
- *                 <p>
- *                   <b>Invitation to join</b> or <b>Approve all features request</b> handshakes: only a principal from
- *                     the member account.</p>
- *                 <p>The user who calls the API for an invitation to join must have the
- *                         <code>organizations:AcceptHandshake</code> permission. If you enabled all
- *                     features in the organization, the user must also have the
- *                         <code>iam:CreateServiceLinkedRole</code> permission so that AWS Organizations can
- *                     create the required service-linked role named <code>AWSServiceRoleForOrganizations</code>. For
- *                     more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles">AWS Organizations and Service-Linked Roles</a> in the
- *                         <i>AWS Organizations User Guide</i>.</p>
+ *                <p>Enable all features final confirmation
+ *                     (<code>APPROVE_ALL_FEATURES</code>)</p>
  *             </li>
  *             <li>
- *                 <p>
- *                   <b>Enable all features final confirmation</b>
- *                     handshake: only a principal from the management account.</p>
- *                 <p>For more information about invitations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html">Inviting an AWS Account to Join Your Organization</a> in the
- *                         <i>AWS Organizations User Guide.</i> For more information about requests to
- *                     enable all features in the organization, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in
- *                     the <i>AWS Organizations User Guide.</i>
- *                </p>
+ *                <p>Billing transfer (<code>TRANSFER_RESPONSIBILITY</code>)</p>
  *             </li>
  *          </ul>
- *         <p>After you accept a handshake, it continues to appear in the results of relevant APIs
- *             for only 30 days. After that, it's deleted.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite">Enabling all features</a> and <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_transfer_billing-respond-invitation.html">Responding to a billing transfer invitation</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
+ *          <p>
+ *             <b>Only a member account can accept the following
+ *                 handshakes</b>:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Invitation to join (<code>INVITE</code>)</p>
+ *             </li>
+ *             <li>
+ *                <p>Approve all features request (<code>ENABLE_ALL_FEATURES</code>)</p>
+ *             </li>
+ *          </ul>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html">Responding to invitations</a> and <a href="https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite">Enabling all features</a> in the <i>Organizations User Guide</i>.</p>
+ *          <p>When a handshake is accepted, Organizations logs membership events in CloudTrail, available
+ *             only in the management account's event history. If the account was standalone and joined
+ *             a new organization, an <code>AccountJoinedOrganization</code> event is logged with
+ *             <code>joinedMethod:INVITED</code> and <code>joinedTime</code> fields. If the account
+ *             departed one organization and joined another, both an
+ *             <code>AccountDepartedOrganization</code> event with <code>departureMethod:LEFT</code>
+ *             and <code>departureTime</code> and an <code>AccountJoinedOrganization</code> event with
+ *             <code>joinedMethod:INVITED</code> and <code>joinedTime</code> are logged in their
+ *             respective management accounts.</p>
+ *          <p>When a billing transfer (<code>TRANSFER_RESPONSIBILITY</code>) handshake is accepted,
+ *             Organizations publishes a <code>ResponsibilityTransferAccepted</code> service event to CloudTrail.
+ *             Each affected account receives this event, including upstream participants such as
+ *             distributors in a chained transfer. For an example log entry, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-accept-responsibility-transfer">Example log entries: AcceptResponsibilityTransfer</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OrganizationsClient, AcceptHandshakeCommand } from "@aws-sdk/client-organizations"; // ES Modules import
  * // const { OrganizationsClient, AcceptHandshakeCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
+ * // import type { OrganizationsClientConfig } from "@aws-sdk/client-organizations";
+ * const config = {}; // type is OrganizationsClientConfig
  * const client = new OrganizationsClient(config);
+ * const input = { // AcceptHandshakeRequest
+ *   HandshakeId: "STRING_VALUE", // required
+ * };
  * const command = new AcceptHandshakeCommand(input);
  * const response = await client.send(command);
+ * // { // AcceptHandshakeResponse
+ * //   Handshake: { // Handshake
+ * //     Id: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     Parties: [ // HandshakeParties
+ * //       { // HandshakeParty
+ * //         Id: "STRING_VALUE", // required
+ * //         Type: "ACCOUNT" || "ORGANIZATION" || "EMAIL", // required
+ * //       },
+ * //     ],
+ * //     State: "REQUESTED" || "OPEN" || "CANCELED" || "ACCEPTED" || "DECLINED" || "EXPIRED",
+ * //     RequestedTimestamp: new Date("TIMESTAMP"),
+ * //     ExpirationTimestamp: new Date("TIMESTAMP"),
+ * //     Action: "INVITE" || "ENABLE_ALL_FEATURES" || "APPROVE_ALL_FEATURES" || "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE" || "TRANSFER_RESPONSIBILITY",
+ * //     Resources: [ // HandshakeResources
+ * //       { // HandshakeResource
+ * //         Value: "STRING_VALUE",
+ * //         Type: "ACCOUNT" || "ORGANIZATION" || "ORGANIZATION_FEATURE_SET" || "EMAIL" || "MASTER_EMAIL" || "MASTER_NAME" || "NOTES" || "PARENT_HANDSHAKE" || "RESPONSIBILITY_TRANSFER" || "TRANSFER_START_TIMESTAMP" || "TRANSFER_TYPE" || "MANAGEMENT_ACCOUNT" || "MANAGEMENT_EMAIL" || "MANAGEMENT_NAME",
+ * //         Resources: [
+ * //           {
+ * //             Value: "STRING_VALUE",
+ * //             Type: "ACCOUNT" || "ORGANIZATION" || "ORGANIZATION_FEATURE_SET" || "EMAIL" || "MASTER_EMAIL" || "MASTER_NAME" || "NOTES" || "PARENT_HANDSHAKE" || "RESPONSIBILITY_TRANSFER" || "TRANSFER_START_TIMESTAMP" || "TRANSFER_TYPE" || "MANAGEMENT_ACCOUNT" || "MANAGEMENT_EMAIL" || "MANAGEMENT_NAME",
+ * //             Resources: "<HandshakeResources>",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AcceptHandshakeCommandInput - {@link AcceptHandshakeCommandInput}
+ * @returns {@link AcceptHandshakeCommandOutput}
  * @see {@link AcceptHandshakeCommandInput} for command's `input` shape.
  * @see {@link AcceptHandshakeCommandOutput} for command's `response` shape.
- * @see {@link OrganizationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OrganizationsClientResolvedConfig | config} for OrganizationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that
+ *             is making the request must have at least one IAM permissions policy attached that
+ *             grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the
+ *                 <i>IAM User Guide</i>.</p>
+ *
+ * @throws {@link AccessDeniedForDependencyException} (client fault)
+ *  <p>The operation that you attempted requires you to have the
+ *                 <code>iam:CreateServiceLinkedRole</code> for
+ *                 <code>organizations.amazonaws.com</code> permission so that Organizations can create the
+ *             required service-linked role. You don't have that permission.</p>
+ *
+ * @throws {@link AWSOrganizationsNotInUseException} (client fault)
+ *  <p>Your account isn't a member of an organization. To make this request, you must use the
+ *             credentials of an account that belongs to an organization.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The target of the operation is currently being modified by a different request. Try
+ *             again later.</p>
+ *
+ * @throws {@link ConstraintViolationException} (client fault)
+ *  <p>Performing this operation violates a minimum or maximum value limit. For example,
+ *             attempting to remove the last service control policy (SCP) from an OU or root, inviting
+ *             or creating too many accounts to the organization, or attaching too many policies to an
+ *             account, OU, or root. This exception includes a reason that contains additional
+ *             information about the violated limit:</p>
+ *          <note>
+ *             <p>Some of the reasons in the following list might not be applicable to this specific
+ *                 API or operation.</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove the management
+ *                     account from the organization. You can't remove the management account. Instead,
+ *                     after you remove all member accounts, delete the organization itself.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an
+ *                     account from the organization that doesn't yet have enough information to exist
+ *                     as a standalone account. This account requires you to first complete phone
+ *                     verification. Follow the steps at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master">Removing a member account from your organization</a> in the
+ *                         <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     accounts that can be in progress at a time.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your
+ *                     account isn't fully active. You must complete the account setup before you
+ *                     create an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY: Your account setup isn't
+ *                     complete or your account isn't fully active to invite or accept a Billing
+ *                     Transfer invitation.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: You cannot delete organization due to an ongoing responsibility transfer process. For example, a pending invitation or an in-progress transfer. To delete the organization, you must resolve the current transfer process.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
+ *                     of accounts in an organization. If you need more accounts, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a> to
+ *                     request an increase in your limit. </p>
+ *                <p>Or the number of invitations that you tried to send would cause you to exceed
+ *                     the limit of accounts in your organization. Send fewer invitations or contact
+ *                     Amazon Web Services Support to request an increase in the number of accounts.</p>
+ *                <note>
+ *                   <p>Deleted and closed accounts still count toward your limit.</p>
+ *                </note>
+ *                <important>
+ *                   <p>If you get this exception when running a command immediately after
+ *                         creating the organization, wait one hour and try again. After an hour, if
+ *                         the command continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+ *                </important>
+ *             </li>
+ *             <li>
+ *                <p>ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED: Your organization has
+ *                     more than 5000 accounts, and you can only use the standard migration process for
+ *                     organizations with less than 5000 accounts. Use the assisted migration process
+ *                     to enable all features mode, or create a support case for assistance if you are
+ *                     unable to use assisted migration.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR: You cannot
+ *                     register a suspended account as a delegated administrator.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register
+ *                     the management account of the organization as a delegated administrator for an
+ *                     Amazon Web Services service integrated with Organizations. You can designate only a member account as a
+ *                     delegated administrator.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_CLOSE_MANAGEMENT_ACCOUNT: You attempted to close the management
+ *                     account. To close the management account for the organization, you must first
+ *                     either remove or close all member accounts in the organization. Follow standard
+ *                     account closure process using root credentials.​ </p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an
+ *                     account that is registered as a delegated administrator for a service integrated
+ *                     with your organization. To complete this operation, you must first deregister
+ *                     this account as a delegated administrator. </p>
+ *             </li>
+ *             <li>
+ *                <p>CLOSE_ACCOUNT_QUOTA_EXCEEDED: You have exceeded close account quota for the
+ *                     past 30 days. </p>
+ *             </li>
+ *             <li>
+ *                <p>CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     accounts that you can close at a time. ​ </p>
+ *             </li>
+ *             <li>
+ *                <p>CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an
+ *                     organization in the specified region, you must enable all features mode.</p>
+ *             </li>
+ *             <li>
+ *                <p>DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an
+ *                     Amazon Web Services account as a delegated administrator for an Amazon Web Services service that already has
+ *                     a delegated administrator. To complete this operation, you must first deregister
+ *                     any existing delegated administrators for this service.</p>
+ *             </li>
+ *             <li>
+ *                <p>EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for
+ *                     a limited period of time. You must resubmit the request and generate a new
+ *                     verification code.</p>
+ *             </li>
+ *             <li>
+ *                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     handshakes that you can send in one day.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PAYMENT_INSTRUMENT: You cannot remove an account because no supported
+ *                     payment method is associated with the account. Amazon Web Services does not support cards
+ *                     issued by financial institutions in Russia or Belarus. For more information, see
+ *                         <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html">Managing your
+ *                         Amazon Web Services payments</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in
+ *                     this organization, you first must migrate the organization's management account
+ *                     to the marketplace that corresponds to the management account's address. All
+ *                     accounts in an organization must be associated with the same marketplace.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the Amazon Web Services Regions in
+ *                     China. To create an organization, the master must have a valid business license.
+ *                     For more information, contact customer support.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must
+ *                     first provide a valid contact address and phone number for the management
+ *                     account. Then try the operation again.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the
+ *                     management account must have an associated account in the Amazon Web Services GovCloud
+ *                     (US-West) Region. For more information, see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html">Organizations</a>
+ *                     in the
+ *                     <i>Amazon Web Services GovCloud User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with
+ *                     this management account, you first must associate a valid payment instrument,
+ *                     such as a credit card, with the account. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a> in
+ *                     the <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to
+ *                     register more delegated administrators than allowed for the service principal.
+ *                 </p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number
+ *                     of policies of a certain type that can be attached to an entity at one
+ *                     time.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags allowed on this
+ *                     resource. </p>
+ *             </li>
+ *             <li>
+ *                <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with
+ *                     this member account, you first must associate a valid payment instrument, such
+ *                     as a credit card, with the account. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a> in
+ *                     the <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy
+ *                     from an entity that would cause the entity to have fewer than the minimum number
+ *                     of policies of a certain type required.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation
+ *                     that requires the organization to be configured to support all features. An
+ *                     organization that supports only consolidated billing features can't perform this
+ *                     operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many
+ *                     levels deep.</p>
+ *             </li>
+ *             <li>
+ *                <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of OUs that you
+ *                     can have in an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger
+ *                     than the maximum size.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies
+ *                     that you can have in an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_TYPE_ENABLED_FOR_THIS_SERVICE: You attempted to disable service access
+ *                     before you disabled the policy type (for example, SECURITYHUB_POLICY). To
+ *                     complete this operation, you must first disable the policy type.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION: You have exceeded your inbound
+ *                     transfers limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION: You have exceeded the maximum length of your
+ *                     transfer chain.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION: You have exceeded your outbound
+ *                     transfers limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION: You have exceeded the maximum
+ *                     number of inbound transfers allowed in a transfer chain.</p>
+ *             </li>
+ *             <li>
+ *                <p>SERVICE_ACCESS_NOT_ENABLED:</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>You attempted to register a delegated administrator before you enabled
+ *                             service access. Call the <code>EnableAWSServiceAccess</code> API
+ *                             first.</p>
+ *                   </li>
+ *                   <li>
+ *                      <p>You attempted to enable a policy type before you enabled service
+ *                             access. Call the <code>EnableAWSServiceAccess</code> API first.</p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags
+ *                     that are not compliant with the tag policy requirements for this account.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS: The source organization cannot accept
+ *                     this transfer invitation because it is marked for deletion.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS: The source organization cannot accept
+ *                     this transfer invitation because target organization is marked for deletion.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED: You cannot update this transfer
+ *                     because it is no longer active. Transfers that have been withdrawn, declined,
+ *                     expired, or cancelled cannot be modified.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNMET_BILLING_PREREQUISITE: Your current billing configuration is unsupported.
+ *                     Contact Amazon Web Services Support for assistance.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNSUPPORTED_PRICING: Ineligible for Billing Transfer. Your organization is
+ *                     subject to a pricing agreement with Amazon Web Services that Billing Transfer does not
+ *                     support.</p>
+ *             </li>
+ *             <li>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at
+ *                     least four days after the account was created. Invited accounts aren't subject
+ *                     to this waiting period.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link HandshakeAlreadyInStateException} (client fault)
+ *  <p>The specified handshake is already in the requested state. For example, you can't
+ *             accept a handshake that was already accepted.</p>
+ *
+ * @throws {@link HandshakeConstraintViolationException} (client fault)
+ *  <p>The requested operation would violate the constraint identified in the reason
+ *             code.</p>
+ *          <note>
+ *             <p>Some of the reasons in the following list might not be applicable to this specific
+ *                 API or operation:</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
+ *                     of accounts in an organization. Note that deleted and closed accounts still
+ *                     count toward your limit.</p>
+ *                <important>
+ *                   <p>If you get this exception immediately after creating the organization,
+ *                         wait one hour and try again. If after an hour it continues to fail with this
+ *                         error, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services
+ *                             Support</a>.</p>
+ *                </important>
+ *             </li>
+ *             <li>
+ *                <p>ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the
+ *                     invited account is already a member of an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     handshakes that you can send in one day.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You can't issue new invitations to
+ *                     join an organization while it's in the process of enabling all features. You can
+ *                     resume inviting accounts after you finalize the process when all accounts have
+ *                     agreed to the change.</p>
+ *             </li>
+ *             <li>
+ *                <p>LEGACY_PERMISSIONS_STILL_IN_USE: Your organization must migrate to use the new IAM
+ *                     fine-grained actions for billing, cost management, and accounts.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid
+ *                     because the organization has already enabled all features.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: You can only join an
+ *                     organization that operates in the same Amazon Web Services partition as your account.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake request
+ *                     is invalid because the organization has already started the process to enable
+ *                     all features.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change
+ *                     the membership of an account too quickly after its previous change.</p>
+ *             </li>
+ *             <li>
+ *                <p>PAST_DUE_INVOICE: Your organization has an invoice that is past due.</p>
+ *             </li>
+ *             <li>
+ *                <p>PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation with an account
+ *                     that doesn't have a payment instrument, such as a credit card, associated with
+ *                     it.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_ALREADY_EXISTS: You cannot perform this operation with the current
+ *                     transfer.</p>
+ *             </li>
+ *             <li>
+ *                <p>SOURCE_AND_TARGET_CANNOT_MATCH: An account can't accept a transfer invitation if it is both the sender and recipient of the invitation.</p>
+ *             </li>
+ *             <li>
+ *                <p>TARGET_ACCOUNT_VALIDATION_FAILURE: Billing transfer is not available for your
+ *                     account. Contact your billing administrator or Amazon Web Services Support for
+ *                     assistance.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNUSED_PREPAYMENT_BALANCE: Your organization has an outstanding pre-payment balance.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link HandshakeNotFoundException} (client fault)
+ *  <p>We can't find a handshake with the <code>HandshakeId</code> that you specified.</p>
+ *
+ * @throws {@link InvalidHandshakeTransitionException} (client fault)
+ *  <p>You can't perform the operation on the handshake in its current state. For example,
+ *             you can't cancel a handshake that was already accepted or accept a handshake that was
+ *             already declined.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The requested operation failed because you provided invalid values for one or more of
+ *             the request parameters. This exception includes a reason that contains additional
+ *             information about the violated limit:</p>
+ *          <note>
+ *             <p>Some of the reasons in the following list might not be applicable to this specific
+ *                 API or operation.</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>CALLER_REQUIRED_FIELD_MISSING: At least one of the required field is missing: Caller Account Id, Management Account Id or Organization Id.</p>
+ *             </li>
+ *             <li>
+ *                <p>DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
+ *                     entity.</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_NOT_END_OF_MONTH: You provided an invalid end date. The end date must be the end
+ *                     of the last day of the month (23.59.59.999).</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_TOO_EARLY: You provided an invalid end date. The end date is too early.</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_TOO_LATE: You provided an invalid end date. The end date is too late.</p>
+ *             </li>
+ *             <li>
+ *                <p>IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web Services and can't be
+ *                     modified.</p>
+ *             </li>
+ *             <li>
+ *                <p>INPUT_REQUIRED: You must include a value for all required parameters.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email address for the
+ *                     invited account owner.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_END_DATE: The selected withdrawal date doesn't meet the minimum notice
+ *                     period required by your partner agreement. Visit Amazon Web Services Partner Central or contact your Amazon Web Services
+ *                     Channel Partner for help.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ENUM: You specified an invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type string.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid
+ *                     characters.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least
+ *                     one invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PAGINATION_TOKEN: Get the value for the <code>NextToken</code>
+ *                     parameter from the response to a previous call of the operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account,
+ *                     organization, or email) as a party.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PATTERN: You provided a value that doesn't match the required
+ *                     pattern. The service also validates your free-text field values against
+ *                     common cross-site scripting (XSS) patterns and rejects requests that
+ *                     contain matching values.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match
+ *                     the required pattern.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PRINCIPAL: You specified an invalid principal element in the
+ *                     policy.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name
+ *                     can't begin with the reserved prefix <code>AWSServiceRoleFor</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_START_DATE: The start date doesn't meet the minimum requirements.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource Name
+ *                     (ARN) for the organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYSTEM_TAGS_PARAMETER: You specified a tag key that is a system tag.
+ *                     You can’t add, edit, or delete system tag keys because they're reserved for
+ *                     Amazon Web Services use. System tags don’t count against your tags per resource limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the
+ *                     operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than
+ *                     allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value
+ *                     than allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than
+ *                     allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value
+ *                     than allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between
+ *                     entities in the same root.</p>
+ *             </li>
+ *             <li>
+ *                <p>NON_DETACHABLE_POLICY: You can't detach this Amazon Web Services Managed Policy.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_NOT_BEGINNING_OF_DAY: You provided an invalid start date. The start date must
+ *                     be the beginning of the day (00:00:00.000).</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_NOT_BEGINNING_OF_MONTH: You provided an invalid start date. The start date must
+ *                     be the first day of the month.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_TOO_EARLY: You provided an invalid start date. The start date is too early.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_TOO_LATE: You provided an invalid start date. The start date is too late.</p>
+ *             </li>
+ *             <li>
+ *                <p>TARGET_NOT_SUPPORTED: You can't perform the specified operation on that target
+ *                     entity.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
+ *                     recognized.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER: You provided a value that is not supported
+ *                 by this operation.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link MasterCannotLeaveOrganizationException} (client fault)
+ *  <p>You can't remove a management account from an organization. If you want the management
+ *             account to become a member account in another organization, you must first delete the
+ *             current organization of the management account.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>Organizations can't complete your request because of an internal service error. Try again
+ *             later.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>You have sent too many requests in too short a period of time. The quota helps protect
+ *             against denial-of-service attacks. Try again later.</p>
+ *          <p>For information about quotas that affect Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html">Quotas for Organizations</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
+ *
+ * @throws {@link OrganizationsServiceException}
+ * <p>Base exception class for all service exceptions from Organizations service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptHandshakeCommand extends $Command<
-  AcceptHandshakeCommandInput,
-  AcceptHandshakeCommandOutput,
-  OrganizationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptHandshakeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OrganizationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptHandshakeCommandInput, AcceptHandshakeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OrganizationsClient";
-    const commandName = "AcceptHandshakeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptHandshakeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptHandshakeResponse.filterSensitiveLog,
+export class AcceptHandshakeCommand extends command<AcceptHandshakeCommandInput, AcceptHandshakeCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptHandshake",
+  AcceptHandshake$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptHandshakeRequest;
+      output: AcceptHandshakeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptHandshakeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AcceptHandshakeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AcceptHandshakeCommandOutput> {
-    return deserializeAws_json1_1AcceptHandshakeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptHandshakeCommandInput;
+      output: AcceptHandshakeCommandOutput;
+    };
+  };
 }

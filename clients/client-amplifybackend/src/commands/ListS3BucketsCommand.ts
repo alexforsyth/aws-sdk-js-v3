@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListS3BucketsRequest, ListS3BucketsResponse } from "../models/models_0";
+import { ListS3Buckets$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListS3BucketsCommand}.
+ */
+export interface ListS3BucketsCommandInput extends ListS3BucketsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListS3BucketsCommand}.
+ */
+export interface ListS3BucketsCommandOutput extends ListS3BucketsResponse, __MetadataBearer {}
+
+/**
+ * <p>The list of S3 buckets in your account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AmplifyBackendClient, ListS3BucketsCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
+ * // const { AmplifyBackendClient, ListS3BucketsCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
+ * const client = new AmplifyBackendClient(config);
+ * const input = { // ListS3BucketsRequest
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListS3BucketsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListS3BucketsResponse
+ * //   Buckets: [ // ListOfS3BucketInfo
+ * //     { // S3BucketInfo
+ * //       CreationDate: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListS3BucketsCommandInput - {@link ListS3BucketsCommandInput}
+ * @returns {@link ListS3BucketsCommandOutput}
+ * @see {@link ListS3BucketsCommandInput} for command's `input` shape.
+ * @see {@link ListS3BucketsCommandOutput} for command's `response` shape.
+ * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
+ */
+export class ListS3BucketsCommand extends command<ListS3BucketsCommandInput, ListS3BucketsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListS3Buckets",
+  ListS3Buckets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListS3BucketsRequest;
+      output: ListS3BucketsResponse;
+    };
+    sdk: {
+      input: ListS3BucketsCommandInput;
+      output: ListS3BucketsCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,211 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateReplicatorRequest, CreateReplicatorResponse } from "../models/models_0";
+import { CreateReplicator$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateReplicatorCommand}.
+ */
+export interface CreateReplicatorCommandInput extends CreateReplicatorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateReplicatorCommand}.
+ */
+export interface CreateReplicatorCommandOutput extends CreateReplicatorResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates the replicator.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { KafkaClient, CreateReplicatorCommand } from "@aws-sdk/client-kafka"; // ES Modules import
+ * // const { KafkaClient, CreateReplicatorCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
+ * const client = new KafkaClient(config);
+ * const input = { // CreateReplicatorRequest
+ *   Description: "STRING_VALUE",
+ *   KafkaClusters: [ // __listOfKafkaCluster // required
+ *     { // KafkaCluster
+ *       AmazonMskCluster: { // AmazonMskCluster
+ *         MskClusterArn: "STRING_VALUE", // required
+ *       },
+ *       ApacheKafkaCluster: { // ApacheKafkaCluster
+ *         ApacheKafkaClusterId: "STRING_VALUE", // required
+ *         BootstrapBrokerString: "STRING_VALUE", // required
+ *       },
+ *       VpcConfig: { // KafkaClusterClientVpcConfig
+ *         SecurityGroupIds: [ // __listOf__string
+ *           "STRING_VALUE",
+ *         ],
+ *         SubnetIds: [ // required
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ClientAuthentication: { // KafkaClusterClientAuthentication
+ *         SaslScram: { // KafkaClusterSaslScramAuthentication
+ *           Mechanism: "SHA256" || "SHA512", // required
+ *           SecretArn: "STRING_VALUE", // required
+ *         },
+ *         MTLS: { // KafkaClusterMTLSAuthentication
+ *           SecretArn: "STRING_VALUE", // required
+ *         },
+ *         SaslOAuthBearer: { // KafkaClusterSaslOAuthBearerAuthentication
+ *           TokenEndpointUrl: "STRING_VALUE", // required
+ *           ClientCredentials: { // KafkaClusterOAuthClientCredentials
+ *             TokenRequestSecretArn: "STRING_VALUE", // required
+ *           },
+ *           IamJwtBearer: { // KafkaClusterOAuthIamJwtBearer
+ *             Audience: "STRING_VALUE", // required
+ *             SigningAlgorithm: "RS256" || "ES384", // required
+ *             TokenRequestSecretArn: "STRING_VALUE",
+ *           },
+ *           ClientCredentialsAssertion: { // KafkaClusterOAuthClientCredentialsAssertion
+ *             Audience: "STRING_VALUE", // required
+ *             SigningAlgorithm: "RS256" || "ES384", // required
+ *             TokenRequestSecretArn: "STRING_VALUE",
+ *           },
+ *           TokenEndpointAuthenticationMethod: "POST" || "BASIC" || "NONE", // required
+ *           Scope: "STRING_VALUE",
+ *           TokenEndpointTlsCertificateArn: "STRING_VALUE",
+ *         },
+ *       },
+ *       EncryptionInTransit: { // KafkaClusterEncryptionInTransit
+ *         EncryptionType: "TLS", // required
+ *         RootCaCertificate: "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ *   ReplicationInfoList: [ // __listOfReplicationInfo // required
+ *     { // ReplicationInfo
+ *       ConsumerGroupReplication: { // ConsumerGroupReplication
+ *         ConsumerGroupsToExclude: [ // __listOf__stringMax256
+ *           "STRING_VALUE",
+ *         ],
+ *         ConsumerGroupsToReplicate: [ // required
+ *           "STRING_VALUE",
+ *         ],
+ *         DetectAndCopyNewConsumerGroups: true || false,
+ *         SynchroniseConsumerGroupOffsets: true || false,
+ *         ConsumerGroupOffsetSyncMode: "LEGACY" || "ENHANCED",
+ *       },
+ *       SourceKafkaClusterArn: "STRING_VALUE",
+ *       SourceKafkaClusterId: "STRING_VALUE",
+ *       TargetCompressionType: "NONE" || "GZIP" || "SNAPPY" || "LZ4" || "ZSTD", // required
+ *       TargetKafkaClusterArn: "STRING_VALUE",
+ *       TargetKafkaClusterId: "STRING_VALUE",
+ *       TopicReplication: { // TopicReplication
+ *         CopyAccessControlListsForTopics: true || false,
+ *         CopyTopicConfigurations: true || false,
+ *         DetectAndCopyNewTopics: true || false,
+ *         StartingPosition: { // ReplicationStartingPosition
+ *           Type: "LATEST" || "EARLIEST",
+ *         },
+ *         TopicNameConfiguration: { // ReplicationTopicNameConfiguration
+ *           Type: "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS" || "IDENTICAL",
+ *         },
+ *         TopicsToExclude: [ // __listOf__stringMax249
+ *           "STRING_VALUE",
+ *         ],
+ *         TopicsToReplicate: [ // required
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   ReplicatorName: "STRING_VALUE", // required
+ *   ServiceExecutionRoleArn: "STRING_VALUE", // required
+ *   Tags: { // __mapOf__string
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   LogDelivery: { // LogDelivery
+ *     ReplicatorLogDelivery: { // ReplicatorLogDelivery
+ *       CloudWatchLogs: { // ReplicatorCloudWatchLogs
+ *         Enabled: true || false, // required
+ *         LogGroup: "STRING_VALUE",
+ *       },
+ *       Firehose: { // ReplicatorFirehose
+ *         Enabled: true || false, // required
+ *         DeliveryStream: "STRING_VALUE",
+ *       },
+ *       S3: { // ReplicatorS3
+ *         Enabled: true || false, // required
+ *         Bucket: "STRING_VALUE",
+ *         Prefix: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ * };
+ * const command = new CreateReplicatorCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateReplicatorResponse
+ * //   ReplicatorArn: "STRING_VALUE",
+ * //   ReplicatorName: "STRING_VALUE",
+ * //   ReplicatorState: "RUNNING" || "CREATING" || "UPDATING" || "DELETING" || "FAILED",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateReplicatorCommandInput - {@link CreateReplicatorCommandInput}
+ * @returns {@link CreateReplicatorCommandOutput}
+ * @see {@link CreateReplicatorCommandInput} for command's `input` shape.
+ * @see {@link CreateReplicatorCommandOutput} for command's `response` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateReplicatorCommand extends command<CreateReplicatorCommandInput, CreateReplicatorCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateReplicator",
+  CreateReplicator$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReplicatorRequest;
+      output: CreateReplicatorResponse;
+    };
+    sdk: {
+      input: CreateReplicatorCommandInput;
+      output: CreateReplicatorCommandOutput;
+    };
+  };
+}

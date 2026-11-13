@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateSavingsPlanRequest, CreateSavingsPlanResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateSavingsPlanCommand,
-  serializeAws_restJson1CreateSavingsPlanCommand,
-} from "../protocols/Aws_restJson1";
-import { SavingsplansClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SavingsplansClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSavingsPlanRequest, CreateSavingsPlanResponse } from "../models/models_0";
+import { CreateSavingsPlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSavingsPlanCommand}.
+ */
 export interface CreateSavingsPlanCommandInput extends CreateSavingsPlanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSavingsPlanCommand}.
+ */
 export interface CreateSavingsPlanCommandOutput extends CreateSavingsPlanResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface CreateSavingsPlanCommandOutput extends CreateSavingsPlanRespons
  * ```javascript
  * import { SavingsplansClient, CreateSavingsPlanCommand } from "@aws-sdk/client-savingsplans"; // ES Modules import
  * // const { SavingsplansClient, CreateSavingsPlanCommand } = require("@aws-sdk/client-savingsplans"); // CommonJS import
+ * // import type { SavingsplansClientConfig } from "@aws-sdk/client-savingsplans";
+ * const config = {}; // type is SavingsplansClientConfig
  * const client = new SavingsplansClient(config);
+ * const input = { // CreateSavingsPlanRequest
+ *   savingsPlanOfferingId: "STRING_VALUE", // required
+ *   commitment: "STRING_VALUE", // required
+ *   upfrontPaymentAmount: "STRING_VALUE",
+ *   purchaseTime: new Date("TIMESTAMP"),
+ *   clientToken: "STRING_VALUE",
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateSavingsPlanCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSavingsPlanResponse
+ * //   savingsPlanId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSavingsPlanCommandInput - {@link CreateSavingsPlanCommandInput}
+ * @returns {@link CreateSavingsPlanCommandOutput}
  * @see {@link CreateSavingsPlanCommandInput} for command's `input` shape.
  * @see {@link CreateSavingsPlanCommandOutput} for command's `response` shape.
- * @see {@link SavingsplansClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SavingsplansClientResolvedConfig | config} for SavingsplansClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>A service quota has been exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters is not valid.</p>
+ *
+ * @throws {@link SavingsplansServiceException}
+ * <p>Base exception class for all service exceptions from Savingsplans service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSavingsPlanCommand extends $Command<
-  CreateSavingsPlanCommandInput,
-  CreateSavingsPlanCommandOutput,
-  SavingsplansClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSavingsPlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SavingsplansClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSavingsPlanCommandInput, CreateSavingsPlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SavingsplansClient";
-    const commandName = "CreateSavingsPlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSavingsPlanRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSavingsPlanResponse.filterSensitiveLog,
+export class CreateSavingsPlanCommand extends command<CreateSavingsPlanCommandInput, CreateSavingsPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSavingsPlan",
+  CreateSavingsPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSavingsPlanRequest;
+      output: CreateSavingsPlanResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSavingsPlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateSavingsPlanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSavingsPlanCommandOutput> {
-    return deserializeAws_restJson1CreateSavingsPlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSavingsPlanCommandInput;
+      output: CreateSavingsPlanCommandOutput;
+    };
+  };
 }

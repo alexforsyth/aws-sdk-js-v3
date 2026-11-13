@@ -1,0 +1,76 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteEdgeDeploymentPlanRequest } from "../models/models_2";
+import { DeleteEdgeDeploymentPlan$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEdgeDeploymentPlanCommand}.
+ */
+export interface DeleteEdgeDeploymentPlanCommandInput extends DeleteEdgeDeploymentPlanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEdgeDeploymentPlanCommand}.
+ */
+export interface DeleteEdgeDeploymentPlanCommandOutput extends __MetadataBearer {}
+
+/**
+ * <p>Deletes an edge deployment plan if (and only if) all the stages in the plan are inactive or there are no stages in the plan.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SageMakerClient, DeleteEdgeDeploymentPlanCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
+ * // const { SageMakerClient, DeleteEdgeDeploymentPlanCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
+ * const client = new SageMakerClient(config);
+ * const input = { // DeleteEdgeDeploymentPlanRequest
+ *   EdgeDeploymentPlanName: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteEdgeDeploymentPlanCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteEdgeDeploymentPlanCommandInput - {@link DeleteEdgeDeploymentPlanCommandInput}
+ * @returns {@link DeleteEdgeDeploymentPlanCommandOutput}
+ * @see {@link DeleteEdgeDeploymentPlanCommandInput} for command's `input` shape.
+ * @see {@link DeleteEdgeDeploymentPlanCommandOutput} for command's `response` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
+ *
+ * @throws {@link ResourceInUse} (client fault)
+ *  <p>Resource being accessed is in use.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteEdgeDeploymentPlanCommand extends command<DeleteEdgeDeploymentPlanCommandInput, DeleteEdgeDeploymentPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteEdgeDeploymentPlan",
+  DeleteEdgeDeploymentPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEdgeDeploymentPlanRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteEdgeDeploymentPlanCommandInput;
+      output: DeleteEdgeDeploymentPlanCommandOutput;
+    };
+  };
+}

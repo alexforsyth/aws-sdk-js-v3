@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBStreamsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBStreamsClient";
-import { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListStreamsCommand,
-  serializeAws_json1_0ListStreamsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
+import { ListStreams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandInput extends ListStreamsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,93 @@ export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataB
  * ```javascript
  * import { DynamoDBStreamsClient, ListStreamsCommand } from "@aws-sdk/client-dynamodb-streams"; // ES Modules import
  * // const { DynamoDBStreamsClient, ListStreamsCommand } = require("@aws-sdk/client-dynamodb-streams"); // CommonJS import
+ * // import type { DynamoDBStreamsClientConfig } from "@aws-sdk/client-dynamodb-streams";
+ * const config = {}; // type is DynamoDBStreamsClientConfig
  * const client = new DynamoDBStreamsClient(config);
+ * const input = { // ListStreamsInput
+ *   TableName: "STRING_VALUE",
+ *   Limit: Number("int"),
+ *   ExclusiveStartStreamArn: "STRING_VALUE",
+ * };
  * const command = new ListStreamsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStreamsOutput
+ * //   Streams: [ // StreamList
+ * //     { // Stream
+ * //       StreamArn: "STRING_VALUE",
+ * //       TableName: "STRING_VALUE",
+ * //       StreamLabel: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   LastEvaluatedStreamArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStreamsCommandInput - {@link ListStreamsCommandInput}
+ * @returns {@link ListStreamsCommandOutput}
  * @see {@link ListStreamsCommandInput} for command's `input` shape.
  * @see {@link ListStreamsCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBStreamsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBStreamsClientResolvedConfig | config} for DynamoDBStreamsClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access a nonexistent table or index. The resource
+ *             might not be specified correctly, or its status might not be
+ *             <code>ACTIVE</code>.</p>
+ *
+ * @throws {@link DynamoDBStreamsServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDBStreams service.</p>
+ *
+ *
+ * @example To list all of the stream ARNs
+ * ```javascript
+ * // The following example lists all of the stream ARNs.
+ * const input = { /* empty *\/ };
+ * const command = new ListStreamsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Streams: [
+ *     {
+ *       StreamArn: "arn:aws:dynamodb:us-wesst-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252",
+ *       StreamLabel: "2015-05-20T20:51:10.252",
+ *       TableName: "Forum"
+ *     },
+ *     {
+ *       StreamArn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:50:02.714",
+ *       StreamLabel: "2015-05-20T20:50:02.714",
+ *       TableName: "Forum"
+ *     },
+ *     {
+ *       StreamArn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-19T23:03:50.641",
+ *       StreamLabel: "2015-05-19T23:03:50.641",
+ *       TableName: "Forum"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListStreamsCommand extends $Command<
-  ListStreamsCommandInput,
-  ListStreamsCommandOutput,
-  DynamoDBStreamsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStreamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBStreamsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStreamsCommandInput, ListStreamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBStreamsClient";
-    const commandName = "ListStreamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStreamsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStreamsOutput.filterSensitiveLog,
+export class ListStreamsCommand extends command<ListStreamsCommandInput, ListStreamsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStreams",
+  ListStreams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamsInput;
+      output: ListStreamsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStreamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListStreamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStreamsCommandOutput> {
-    return deserializeAws_json1_0ListStreamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStreamsCommandInput;
+      output: ListStreamsCommandOutput;
+    };
+  };
 }

@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { AddTagsInput, AddTagsOutput } from "../models/models_0";
-import { deserializeAws_json1_1AddTagsCommand, serializeAws_json1_1AddTagsCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddTagsInput, AddTagsOutput } from "../models/models_0";
+import { AddTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddTagsCommand}.
+ */
 export interface AddTagsCommandInput extends AddTagsInput {}
+/**
+ * @public
+ *
+ * The output of {@link AddTagsCommand}.
+ */
 export interface AddTagsCommandOutput extends AddTagsOutput, __MetadataBearer {}
 
 /**
@@ -25,68 +29,63 @@ export interface AddTagsCommandOutput extends AddTagsOutput, __MetadataBearer {}
  * ```javascript
  * import { DataPipelineClient, AddTagsCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, AddTagsCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // AddTagsInput
+ *   pipelineId: "STRING_VALUE", // required
+ *   tags: [ // tagList // required
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new AddTagsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AddTagsCommandInput - {@link AddTagsCommandInput}
+ * @returns {@link AddTagsCommandOutput}
  * @see {@link AddTagsCommandInput} for command's `input` shape.
  * @see {@link AddTagsCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link PipelineDeletedException} (client fault)
+ *  <p>The specified pipeline has been deleted.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class AddTagsCommand extends $Command<
-  AddTagsCommandInput,
-  AddTagsCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddTagsCommandInput, AddTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "AddTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddTagsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AddTagsOutput.filterSensitiveLog,
+export class AddTagsCommand extends command<AddTagsCommandInput, AddTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddTags",
+  AddTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddTagsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddTagsCommandOutput> {
-    return deserializeAws_json1_1AddTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddTagsCommandInput;
+      output: AddTagsCommandOutput;
+    };
+  };
 }

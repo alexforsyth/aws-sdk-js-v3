@@ -1,101 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { ListQueryExecutionsInput, ListQueryExecutionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListQueryExecutionsCommand,
-  serializeAws_json1_1ListQueryExecutionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListQueryExecutionsInput, ListQueryExecutionsOutput } from "../models/models_0";
+import { ListQueryExecutions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListQueryExecutionsCommand}.
+ */
 export interface ListQueryExecutionsCommandInput extends ListQueryExecutionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListQueryExecutionsCommand}.
+ */
 export interface ListQueryExecutionsCommandOutput extends ListQueryExecutionsOutput, __MetadataBearer {}
 
 /**
  * <p>Provides a list of available query execution IDs for the queries in the specified
- *             workgroup. If a workgroup is not specified, returns a list of query execution IDs for
- *             the primary workgroup. Requires you to have access to the workgroup in which the queries
- *             ran.</p>
- *         <p>For code samples using the Amazon Web Services SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and
- *                 Code Samples</a> in the <i>Amazon Athena User
- *             Guide</i>.</p>
+ *             workgroup. Athena keeps a query history for 45 days. If a workgroup is not
+ *             specified, returns a list of query execution IDs for the primary workgroup. Requires you
+ *             to have access to the workgroup in which the queries ran.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AthenaClient, ListQueryExecutionsCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, ListQueryExecutionsCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // ListQueryExecutionsInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   WorkGroup: "STRING_VALUE",
+ * };
  * const command = new ListQueryExecutionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListQueryExecutionsOutput
+ * //   QueryExecutionIds: [ // QueryExecutionIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListQueryExecutionsCommandInput - {@link ListQueryExecutionsCommandInput}
+ * @returns {@link ListQueryExecutionsCommandOutput}
  * @see {@link ListQueryExecutionsCommandInput} for command's `input` shape.
  * @see {@link ListQueryExecutionsCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class ListQueryExecutionsCommand extends $Command<
-  ListQueryExecutionsCommandInput,
-  ListQueryExecutionsCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListQueryExecutionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListQueryExecutionsCommandInput, ListQueryExecutionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "ListQueryExecutionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListQueryExecutionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListQueryExecutionsOutput.filterSensitiveLog,
+export class ListQueryExecutionsCommand extends command<ListQueryExecutionsCommandInput, ListQueryExecutionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListQueryExecutions",
+  ListQueryExecutions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListQueryExecutionsInput;
+      output: ListQueryExecutionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListQueryExecutionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListQueryExecutionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListQueryExecutionsCommandOutput> {
-    return deserializeAws_json1_1ListQueryExecutionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListQueryExecutionsCommandInput;
+      output: ListQueryExecutionsCommandOutput;
+    };
+  };
 }

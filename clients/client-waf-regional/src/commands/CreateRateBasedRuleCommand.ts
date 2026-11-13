@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateRateBasedRuleRequest, CreateRateBasedRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateRateBasedRuleCommand,
-  serializeAws_json1_1CreateRateBasedRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRateBasedRuleRequest, CreateRateBasedRuleResponse } from "../models/models_0";
+import { CreateRateBasedRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRateBasedRuleCommand}.
+ */
 export interface CreateRateBasedRuleCommandInput extends CreateRateBasedRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRateBasedRuleCommand}.
+ */
 export interface CreateRateBasedRuleCommandOutput extends CreateRateBasedRuleResponse, __MetadataBearer {}
 
 /**
@@ -60,11 +61,11 @@ export interface CreateRateBasedRuleCommandOutput extends CreateRateBasedRuleRes
  *          a rate of more than 1,000 requests every five minutes. If both conditions are met and the
  *          rate is exceeded, AWS WAF blocks the requests. If the rate drops below 1,000 for a
  *          five-minute period, AWS WAF no longer blocks the requests.</p>
- *
+ * 		
  * 		       <p>As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a
  *             <code>RateBasedRule</code>:</p>
- *
- *
+ * 			
+ * 			
  *          <ul>
  *             <li>
  *                <p>A <code>ByteMatchSet</code> with <code>FieldToMatch</code> of <code>URI</code>
@@ -81,8 +82,8 @@ export interface CreateRateBasedRuleCommandOutput extends CreateRateBasedRuleRes
  *          </ul>
  *          <p>Further, you specify a <code>RateLimit</code> of 1,000.</p>
  *          <p>By adding this <code>RateBasedRule</code> to a <code>WebACL</code>, you could limit requests to your login page without affecting the rest of your site.</p>
- *
- *
+ * 		
+ * 		
  *          <p>To create and configure a <code>RateBasedRule</code>, perform the following
  *          steps:</p>
  *          <ol>
@@ -121,68 +122,134 @@ export interface CreateRateBasedRuleCommandOutput extends CreateRateBasedRuleRes
  * ```javascript
  * import { WAFRegionalClient, CreateRateBasedRuleCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, CreateRateBasedRuleCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // CreateRateBasedRuleRequest
+ *   Name: "STRING_VALUE", // required
+ *   MetricName: "STRING_VALUE", // required
+ *   RateKey: "IP", // required
+ *   RateLimit: Number("long"), // required
+ *   ChangeToken: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateRateBasedRuleCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRateBasedRuleResponse
+ * //   Rule: { // RateBasedRule
+ * //     RuleId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     MetricName: "STRING_VALUE",
+ * //     MatchPredicates: [ // Predicates // required
+ * //       { // Predicate
+ * //         Negated: true || false, // required
+ * //         Type: "IPMatch" || "ByteMatch" || "SqlInjectionMatch" || "GeoMatch" || "SizeConstraint" || "XssMatch" || "RegexMatch", // required
+ * //         DataId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     RateKey: "IP", // required
+ * //     RateLimit: Number("long"), // required
+ * //   },
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRateBasedRuleCommandInput - {@link CreateRateBasedRuleCommandInput}
+ * @returns {@link CreateRateBasedRuleCommandOutput}
  * @see {@link CreateRateBasedRuleCommandInput} for command's `input` shape.
  * @see {@link CreateRateBasedRuleCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFBadRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFDisallowedNameException} (client fault)
+ *  <p>The name specified is invalid.</p>
+ *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p>
+ * 			      <ul>
+ *             <li>
+ *                <p>You specified an invalid parameter name.</p>
+ *             </li>
+ *             <li>
+ *                <p>You specified an invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update an object (<code>ByteMatchSet</code>, <code>IPSet</code>, <code>Rule</code>, or <code>WebACL</code>)
+ * 					using an action other than <code>INSERT</code> or <code>DELETE</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to create a <code>WebACL</code> with a <code>DefaultAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ * 		 	           <p>You tried to create a <code>RateBasedRule</code> with a <code>RateKey</code> value other than <code>IP</code>.</p>
+ * 		          </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>WafAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>FieldToMatch</code>
+ *                   <code>Type</code> other than
+ * 					HEADER, METHOD, QUERY_STRING, URI, or BODY.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>Field</code> of <code>HEADER</code>
+ * 					but no value for <code>Data</code>.</p>
+ *             </li>
+ *             <li>
+ * 			   		       <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL cannot be associated.</p>
+ * 			   	     </li>
+ *          </ul>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFTagOperationException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFTagOperationInternalErrorException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRateBasedRuleCommand extends $Command<
-  CreateRateBasedRuleCommandInput,
-  CreateRateBasedRuleCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRateBasedRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRateBasedRuleCommandInput, CreateRateBasedRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "CreateRateBasedRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRateBasedRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRateBasedRuleResponse.filterSensitiveLog,
+export class CreateRateBasedRuleCommand extends command<CreateRateBasedRuleCommandInput, CreateRateBasedRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRateBasedRule",
+  CreateRateBasedRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRateBasedRuleRequest;
+      output: CreateRateBasedRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRateBasedRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateRateBasedRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRateBasedRuleCommandOutput> {
-    return deserializeAws_json1_1CreateRateBasedRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRateBasedRuleCommandInput;
+      output: CreateRateBasedRuleCommandOutput;
+    };
+  };
 }

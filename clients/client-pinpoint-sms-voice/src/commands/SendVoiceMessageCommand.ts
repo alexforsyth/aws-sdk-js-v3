@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SendVoiceMessageRequest, SendVoiceMessageResponse } from "../models/models_0";
-import { PinpointSMSVoiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointSMSVoiceClient";
-import {
-  deserializeAws_restJson1SendVoiceMessageCommand,
-  serializeAws_restJson1SendVoiceMessageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendVoiceMessageRequest, SendVoiceMessageResponse } from "../models/models_0";
+import { SendVoiceMessage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendVoiceMessageCommand}.
+ */
 export interface SendVoiceMessageCommandInput extends SendVoiceMessageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendVoiceMessageCommand}.
+ */
 export interface SendVoiceMessageCommandOutput extends SendVoiceMessageResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface SendVoiceMessageCommandOutput extends SendVoiceMessageResponse,
  * ```javascript
  * import { PinpointSMSVoiceClient, SendVoiceMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice"; // ES Modules import
  * // const { PinpointSMSVoiceClient, SendVoiceMessageCommand } = require("@aws-sdk/client-pinpoint-sms-voice"); // CommonJS import
+ * // import type { PinpointSMSVoiceClientConfig } from "@aws-sdk/client-pinpoint-sms-voice";
+ * const config = {}; // type is PinpointSMSVoiceClientConfig
  * const client = new PinpointSMSVoiceClient(config);
+ * const input = { // SendVoiceMessageRequest
+ *   CallerId: "STRING_VALUE",
+ *   ConfigurationSetName: "STRING_VALUE",
+ *   Content: { // VoiceMessageContent
+ *     CallInstructionsMessage: { // CallInstructionsMessageType
+ *       Text: "STRING_VALUE",
+ *     },
+ *     PlainTextMessage: { // PlainTextMessageType
+ *       LanguageCode: "STRING_VALUE",
+ *       Text: "STRING_VALUE",
+ *       VoiceId: "STRING_VALUE",
+ *     },
+ *     SSMLMessage: { // SSMLMessageType
+ *       LanguageCode: "STRING_VALUE",
+ *       Text: "STRING_VALUE",
+ *       VoiceId: "STRING_VALUE",
+ *     },
+ *   },
+ *   DestinationPhoneNumber: "STRING_VALUE",
+ *   OriginationPhoneNumber: "STRING_VALUE",
+ * };
  * const command = new SendVoiceMessageCommand(input);
  * const response = await client.send(command);
+ * // { // SendVoiceMessageResponse
+ * //   MessageId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SendVoiceMessageCommandInput - {@link SendVoiceMessageCommandInput}
+ * @returns {@link SendVoiceMessageCommandOutput}
  * @see {@link SendVoiceMessageCommandInput} for command's `input` shape.
  * @see {@link SendVoiceMessageCommandOutput} for command's `response` shape.
- * @see {@link PinpointSMSVoiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointSMSVoiceClientResolvedConfig | config} for PinpointSMSVoiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  The input you provided is invalid.
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  You've issued too many requests to the resource. Wait a few minutes, and then try again.
+ *
+ * @throws {@link PinpointSMSVoiceServiceException}
+ * <p>Base exception class for all service exceptions from PinpointSMSVoice service.</p>
+ *
+ *
+ * @public
  */
-export class SendVoiceMessageCommand extends $Command<
-  SendVoiceMessageCommandInput,
-  SendVoiceMessageCommandOutput,
-  PinpointSMSVoiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendVoiceMessageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointSMSVoiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendVoiceMessageCommandInput, SendVoiceMessageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointSMSVoiceClient";
-    const commandName = "SendVoiceMessageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendVoiceMessageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SendVoiceMessageResponse.filterSensitiveLog,
+export class SendVoiceMessageCommand extends command<SendVoiceMessageCommandInput, SendVoiceMessageCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendVoiceMessage",
+  SendVoiceMessage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendVoiceMessageRequest;
+      output: SendVoiceMessageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendVoiceMessageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SendVoiceMessageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendVoiceMessageCommandOutput> {
-    return deserializeAws_restJson1SendVoiceMessageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendVoiceMessageCommandInput;
+      output: SendVoiceMessageCommandOutput;
+    };
+  };
 }

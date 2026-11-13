@@ -1,0 +1,609 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultIoTFleetWiseHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AssociateVehicleFleetCommandInput,
+  AssociateVehicleFleetCommandOutput,
+} from "./commands/AssociateVehicleFleetCommand";
+import type {
+  BatchCreateVehicleCommandInput,
+  BatchCreateVehicleCommandOutput,
+} from "./commands/BatchCreateVehicleCommand";
+import type {
+  BatchUpdateVehicleCommandInput,
+  BatchUpdateVehicleCommandOutput,
+} from "./commands/BatchUpdateVehicleCommand";
+import type { CreateCampaignCommandInput, CreateCampaignCommandOutput } from "./commands/CreateCampaignCommand";
+import type {
+  CreateDecoderManifestCommandInput,
+  CreateDecoderManifestCommandOutput,
+} from "./commands/CreateDecoderManifestCommand";
+import type { CreateFleetCommandInput, CreateFleetCommandOutput } from "./commands/CreateFleetCommand";
+import type {
+  CreateModelManifestCommandInput,
+  CreateModelManifestCommandOutput,
+} from "./commands/CreateModelManifestCommand";
+import type {
+  CreateSignalCatalogCommandInput,
+  CreateSignalCatalogCommandOutput,
+} from "./commands/CreateSignalCatalogCommand";
+import type {
+  CreateStateTemplateCommandInput,
+  CreateStateTemplateCommandOutput,
+} from "./commands/CreateStateTemplateCommand";
+import type { CreateVehicleCommandInput, CreateVehicleCommandOutput } from "./commands/CreateVehicleCommand";
+import type { DeleteCampaignCommandInput, DeleteCampaignCommandOutput } from "./commands/DeleteCampaignCommand";
+import type {
+  DeleteDecoderManifestCommandInput,
+  DeleteDecoderManifestCommandOutput,
+} from "./commands/DeleteDecoderManifestCommand";
+import type { DeleteFleetCommandInput, DeleteFleetCommandOutput } from "./commands/DeleteFleetCommand";
+import type {
+  DeleteModelManifestCommandInput,
+  DeleteModelManifestCommandOutput,
+} from "./commands/DeleteModelManifestCommand";
+import type {
+  DeleteSignalCatalogCommandInput,
+  DeleteSignalCatalogCommandOutput,
+} from "./commands/DeleteSignalCatalogCommand";
+import type {
+  DeleteStateTemplateCommandInput,
+  DeleteStateTemplateCommandOutput,
+} from "./commands/DeleteStateTemplateCommand";
+import type { DeleteVehicleCommandInput, DeleteVehicleCommandOutput } from "./commands/DeleteVehicleCommand";
+import type {
+  DisassociateVehicleFleetCommandInput,
+  DisassociateVehicleFleetCommandOutput,
+} from "./commands/DisassociateVehicleFleetCommand";
+import type { GetCampaignCommandInput, GetCampaignCommandOutput } from "./commands/GetCampaignCommand";
+import type {
+  GetDecoderManifestCommandInput,
+  GetDecoderManifestCommandOutput,
+} from "./commands/GetDecoderManifestCommand";
+import type {
+  GetEncryptionConfigurationCommandInput,
+  GetEncryptionConfigurationCommandOutput,
+} from "./commands/GetEncryptionConfigurationCommand";
+import type { GetFleetCommandInput, GetFleetCommandOutput } from "./commands/GetFleetCommand";
+import type {
+  GetLoggingOptionsCommandInput,
+  GetLoggingOptionsCommandOutput,
+} from "./commands/GetLoggingOptionsCommand";
+import type { GetModelManifestCommandInput, GetModelManifestCommandOutput } from "./commands/GetModelManifestCommand";
+import type {
+  GetRegisterAccountStatusCommandInput,
+  GetRegisterAccountStatusCommandOutput,
+} from "./commands/GetRegisterAccountStatusCommand";
+import type { GetSignalCatalogCommandInput, GetSignalCatalogCommandOutput } from "./commands/GetSignalCatalogCommand";
+import type { GetStateTemplateCommandInput, GetStateTemplateCommandOutput } from "./commands/GetStateTemplateCommand";
+import type { GetVehicleCommandInput, GetVehicleCommandOutput } from "./commands/GetVehicleCommand";
+import type { GetVehicleStatusCommandInput, GetVehicleStatusCommandOutput } from "./commands/GetVehicleStatusCommand";
+import type {
+  ImportDecoderManifestCommandInput,
+  ImportDecoderManifestCommandOutput,
+} from "./commands/ImportDecoderManifestCommand";
+import type {
+  ImportSignalCatalogCommandInput,
+  ImportSignalCatalogCommandOutput,
+} from "./commands/ImportSignalCatalogCommand";
+import type { ListCampaignsCommandInput, ListCampaignsCommandOutput } from "./commands/ListCampaignsCommand";
+import type {
+  ListDecoderManifestNetworkInterfacesCommandInput,
+  ListDecoderManifestNetworkInterfacesCommandOutput,
+} from "./commands/ListDecoderManifestNetworkInterfacesCommand";
+import type {
+  ListDecoderManifestsCommandInput,
+  ListDecoderManifestsCommandOutput,
+} from "./commands/ListDecoderManifestsCommand";
+import type {
+  ListDecoderManifestSignalsCommandInput,
+  ListDecoderManifestSignalsCommandOutput,
+} from "./commands/ListDecoderManifestSignalsCommand";
+import type { ListFleetsCommandInput, ListFleetsCommandOutput } from "./commands/ListFleetsCommand";
+import type {
+  ListFleetsForVehicleCommandInput,
+  ListFleetsForVehicleCommandOutput,
+} from "./commands/ListFleetsForVehicleCommand";
+import type {
+  ListModelManifestNodesCommandInput,
+  ListModelManifestNodesCommandOutput,
+} from "./commands/ListModelManifestNodesCommand";
+import type {
+  ListModelManifestsCommandInput,
+  ListModelManifestsCommandOutput,
+} from "./commands/ListModelManifestsCommand";
+import type {
+  ListSignalCatalogNodesCommandInput,
+  ListSignalCatalogNodesCommandOutput,
+} from "./commands/ListSignalCatalogNodesCommand";
+import type {
+  ListSignalCatalogsCommandInput,
+  ListSignalCatalogsCommandOutput,
+} from "./commands/ListSignalCatalogsCommand";
+import type {
+  ListStateTemplatesCommandInput,
+  ListStateTemplatesCommandOutput,
+} from "./commands/ListStateTemplatesCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type { ListVehiclesCommandInput, ListVehiclesCommandOutput } from "./commands/ListVehiclesCommand";
+import type {
+  ListVehiclesInFleetCommandInput,
+  ListVehiclesInFleetCommandOutput,
+} from "./commands/ListVehiclesInFleetCommand";
+import type {
+  PutEncryptionConfigurationCommandInput,
+  PutEncryptionConfigurationCommandOutput,
+} from "./commands/PutEncryptionConfigurationCommand";
+import type {
+  PutLoggingOptionsCommandInput,
+  PutLoggingOptionsCommandOutput,
+} from "./commands/PutLoggingOptionsCommand";
+import type { RegisterAccountCommandInput, RegisterAccountCommandOutput } from "./commands/RegisterAccountCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateCampaignCommandInput, UpdateCampaignCommandOutput } from "./commands/UpdateCampaignCommand";
+import type {
+  UpdateDecoderManifestCommandInput,
+  UpdateDecoderManifestCommandOutput,
+} from "./commands/UpdateDecoderManifestCommand";
+import type { UpdateFleetCommandInput, UpdateFleetCommandOutput } from "./commands/UpdateFleetCommand";
+import type {
+  UpdateModelManifestCommandInput,
+  UpdateModelManifestCommandOutput,
+} from "./commands/UpdateModelManifestCommand";
+import type {
+  UpdateSignalCatalogCommandInput,
+  UpdateSignalCatalogCommandOutput,
+} from "./commands/UpdateSignalCatalogCommand";
+import type {
+  UpdateStateTemplateCommandInput,
+  UpdateStateTemplateCommandOutput,
+} from "./commands/UpdateStateTemplateCommand";
+import type { UpdateVehicleCommandInput, UpdateVehicleCommandOutput } from "./commands/UpdateVehicleCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | AssociateVehicleFleetCommandInput
+  | BatchCreateVehicleCommandInput
+  | BatchUpdateVehicleCommandInput
+  | CreateCampaignCommandInput
+  | CreateDecoderManifestCommandInput
+  | CreateFleetCommandInput
+  | CreateModelManifestCommandInput
+  | CreateSignalCatalogCommandInput
+  | CreateStateTemplateCommandInput
+  | CreateVehicleCommandInput
+  | DeleteCampaignCommandInput
+  | DeleteDecoderManifestCommandInput
+  | DeleteFleetCommandInput
+  | DeleteModelManifestCommandInput
+  | DeleteSignalCatalogCommandInput
+  | DeleteStateTemplateCommandInput
+  | DeleteVehicleCommandInput
+  | DisassociateVehicleFleetCommandInput
+  | GetCampaignCommandInput
+  | GetDecoderManifestCommandInput
+  | GetEncryptionConfigurationCommandInput
+  | GetFleetCommandInput
+  | GetLoggingOptionsCommandInput
+  | GetModelManifestCommandInput
+  | GetRegisterAccountStatusCommandInput
+  | GetSignalCatalogCommandInput
+  | GetStateTemplateCommandInput
+  | GetVehicleCommandInput
+  | GetVehicleStatusCommandInput
+  | ImportDecoderManifestCommandInput
+  | ImportSignalCatalogCommandInput
+  | ListCampaignsCommandInput
+  | ListDecoderManifestNetworkInterfacesCommandInput
+  | ListDecoderManifestSignalsCommandInput
+  | ListDecoderManifestsCommandInput
+  | ListFleetsCommandInput
+  | ListFleetsForVehicleCommandInput
+  | ListModelManifestNodesCommandInput
+  | ListModelManifestsCommandInput
+  | ListSignalCatalogNodesCommandInput
+  | ListSignalCatalogsCommandInput
+  | ListStateTemplatesCommandInput
+  | ListTagsForResourceCommandInput
+  | ListVehiclesCommandInput
+  | ListVehiclesInFleetCommandInput
+  | PutEncryptionConfigurationCommandInput
+  | PutLoggingOptionsCommandInput
+  | RegisterAccountCommandInput
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateCampaignCommandInput
+  | UpdateDecoderManifestCommandInput
+  | UpdateFleetCommandInput
+  | UpdateModelManifestCommandInput
+  | UpdateSignalCatalogCommandInput
+  | UpdateStateTemplateCommandInput
+  | UpdateVehicleCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | AssociateVehicleFleetCommandOutput
+  | BatchCreateVehicleCommandOutput
+  | BatchUpdateVehicleCommandOutput
+  | CreateCampaignCommandOutput
+  | CreateDecoderManifestCommandOutput
+  | CreateFleetCommandOutput
+  | CreateModelManifestCommandOutput
+  | CreateSignalCatalogCommandOutput
+  | CreateStateTemplateCommandOutput
+  | CreateVehicleCommandOutput
+  | DeleteCampaignCommandOutput
+  | DeleteDecoderManifestCommandOutput
+  | DeleteFleetCommandOutput
+  | DeleteModelManifestCommandOutput
+  | DeleteSignalCatalogCommandOutput
+  | DeleteStateTemplateCommandOutput
+  | DeleteVehicleCommandOutput
+  | DisassociateVehicleFleetCommandOutput
+  | GetCampaignCommandOutput
+  | GetDecoderManifestCommandOutput
+  | GetEncryptionConfigurationCommandOutput
+  | GetFleetCommandOutput
+  | GetLoggingOptionsCommandOutput
+  | GetModelManifestCommandOutput
+  | GetRegisterAccountStatusCommandOutput
+  | GetSignalCatalogCommandOutput
+  | GetStateTemplateCommandOutput
+  | GetVehicleCommandOutput
+  | GetVehicleStatusCommandOutput
+  | ImportDecoderManifestCommandOutput
+  | ImportSignalCatalogCommandOutput
+  | ListCampaignsCommandOutput
+  | ListDecoderManifestNetworkInterfacesCommandOutput
+  | ListDecoderManifestSignalsCommandOutput
+  | ListDecoderManifestsCommandOutput
+  | ListFleetsCommandOutput
+  | ListFleetsForVehicleCommandOutput
+  | ListModelManifestNodesCommandOutput
+  | ListModelManifestsCommandOutput
+  | ListSignalCatalogNodesCommandOutput
+  | ListSignalCatalogsCommandOutput
+  | ListStateTemplatesCommandOutput
+  | ListTagsForResourceCommandOutput
+  | ListVehiclesCommandOutput
+  | ListVehiclesInFleetCommandOutput
+  | PutEncryptionConfigurationCommandOutput
+  | PutLoggingOptionsCommandOutput
+  | RegisterAccountCommandOutput
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateCampaignCommandOutput
+  | UpdateDecoderManifestCommandOutput
+  | UpdateFleetCommandOutput
+  | UpdateModelManifestCommandOutput
+  | UpdateSignalCatalogCommandOutput
+  | UpdateStateTemplateCommandOutput
+  | UpdateVehicleCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type IoTFleetWiseClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of IoTFleetWiseClient class constructor that set the region, credentials and other options.
+ */
+export interface IoTFleetWiseClientConfig extends IoTFleetWiseClientConfigType {}
+
+/**
+ * @public
+ */
+export type IoTFleetWiseClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of IoTFleetWiseClient class. This is resolved and normalized from the {@link IoTFleetWiseClientConfig | constructor configuration interface}.
+ */
+export interface IoTFleetWiseClientResolvedConfig extends IoTFleetWiseClientResolvedConfigType {}
+
+/**
+ * <p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer
+ *             vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of
+ *             your vehicle data models, independent of the in-vehicle communication architecture, and
+ *             define data collection rules to transfer only high-value data to the cloud.
+ *             </p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/">What is Amazon Web Services IoT FleetWise?</a> in the
+ *                 <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>
+ *          <important>
+ *             <p>Access to certain Amazon Web Services IoT FleetWise features is currently gated. For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html">Amazon Web Services Region and feature availability</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>
+ *          </important>
+ * @public
+ */
+export class IoTFleetWiseClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  IoTFleetWiseClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of IoTFleetWiseClient class. This is resolved and normalized from the {@link IoTFleetWiseClientConfig | constructor configuration interface}.
+   */
+  readonly config: IoTFleetWiseClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<IoTFleetWiseClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultIoTFleetWiseHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: IoTFleetWiseClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

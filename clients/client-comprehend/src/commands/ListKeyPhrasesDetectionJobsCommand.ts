@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import { ListKeyPhrasesDetectionJobsRequest, ListKeyPhrasesDetectionJobsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListKeyPhrasesDetectionJobsCommand,
-  serializeAws_json1_1ListKeyPhrasesDetectionJobsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListKeyPhrasesDetectionJobsRequest, ListKeyPhrasesDetectionJobsResponse } from "../models/models_0";
+import { ListKeyPhrasesDetectionJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListKeyPhrasesDetectionJobsCommand}.
+ */
 export interface ListKeyPhrasesDetectionJobsCommandInput extends ListKeyPhrasesDetectionJobsRequest {}
-export interface ListKeyPhrasesDetectionJobsCommandOutput
-  extends ListKeyPhrasesDetectionJobsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListKeyPhrasesDetectionJobsCommand}.
+ */
+export interface ListKeyPhrasesDetectionJobsCommandOutput extends ListKeyPhrasesDetectionJobsResponse, __MetadataBearer {}
 
 /**
  * <p>Get a list of key phrase detection jobs that you have submitted.</p>
@@ -30,71 +29,104 @@ export interface ListKeyPhrasesDetectionJobsCommandOutput
  * ```javascript
  * import { ComprehendClient, ListKeyPhrasesDetectionJobsCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, ListKeyPhrasesDetectionJobsCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // ListKeyPhrasesDetectionJobsRequest
+ *   Filter: { // KeyPhrasesDetectionJobFilter
+ *     JobName: "STRING_VALUE",
+ *     JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ *     SubmitTimeBefore: new Date("TIMESTAMP"),
+ *     SubmitTimeAfter: new Date("TIMESTAMP"),
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListKeyPhrasesDetectionJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListKeyPhrasesDetectionJobsResponse
+ * //   KeyPhrasesDetectionJobPropertiesList: [ // KeyPhrasesDetectionJobPropertiesList
+ * //     { // KeyPhrasesDetectionJobProperties
+ * //       JobId: "STRING_VALUE",
+ * //       JobArn: "STRING_VALUE",
+ * //       JobName: "STRING_VALUE",
+ * //       JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * //       Message: "STRING_VALUE",
+ * //       SubmitTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       InputDataConfig: { // InputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         InputFormat: "ONE_DOC_PER_FILE" || "ONE_DOC_PER_LINE",
+ * //         DocumentReaderConfig: { // DocumentReaderConfig
+ * //           DocumentReadAction: "TEXTRACT_DETECT_DOCUMENT_TEXT" || "TEXTRACT_ANALYZE_DOCUMENT", // required
+ * //           DocumentReadMode: "SERVICE_DEFAULT" || "FORCE_DOCUMENT_READ_ACTION",
+ * //           FeatureTypes: [ // ListOfDocumentReadFeatureTypes
+ * //             "TABLES" || "FORMS",
+ * //           ],
+ * //         },
+ * //       },
+ * //       OutputDataConfig: { // OutputDataConfig
+ * //         S3Uri: "STRING_VALUE", // required
+ * //         KmsKeyId: "STRING_VALUE",
+ * //       },
+ * //       LanguageCode: "en" || "es" || "fr" || "de" || "it" || "pt" || "ar" || "hi" || "ja" || "ko" || "zh" || "zh-TW",
+ * //       DataAccessRoleArn: "STRING_VALUE",
+ * //       VolumeKmsKeyId: "STRING_VALUE",
+ * //       VpcConfig: { // VpcConfig
+ * //         SecurityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Subnets: [ // Subnets // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListKeyPhrasesDetectionJobsCommandInput - {@link ListKeyPhrasesDetectionJobsCommandInput}
+ * @returns {@link ListKeyPhrasesDetectionJobsCommandOutput}
  * @see {@link ListKeyPhrasesDetectionJobsCommandInput} for command's `input` shape.
  * @see {@link ListKeyPhrasesDetectionJobsCommandOutput} for command's `response` shape.
- * @see {@link ComprehendClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidFilterException} (client fault)
+ *  <p>The filter specified for the operation is invalid. Specify a different
+ *       filter.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class ListKeyPhrasesDetectionJobsCommand extends $Command<
-  ListKeyPhrasesDetectionJobsCommandInput,
-  ListKeyPhrasesDetectionJobsCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListKeyPhrasesDetectionJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListKeyPhrasesDetectionJobsCommandInput, ListKeyPhrasesDetectionJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "ListKeyPhrasesDetectionJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListKeyPhrasesDetectionJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListKeyPhrasesDetectionJobsResponse.filterSensitiveLog,
+export class ListKeyPhrasesDetectionJobsCommand extends command<ListKeyPhrasesDetectionJobsCommandInput, ListKeyPhrasesDetectionJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListKeyPhrasesDetectionJobs",
+  ListKeyPhrasesDetectionJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListKeyPhrasesDetectionJobsRequest;
+      output: ListKeyPhrasesDetectionJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListKeyPhrasesDetectionJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListKeyPhrasesDetectionJobsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListKeyPhrasesDetectionJobsCommandOutput> {
-    return deserializeAws_json1_1ListKeyPhrasesDetectionJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListKeyPhrasesDetectionJobsCommandInput;
+      output: ListKeyPhrasesDetectionJobsCommandOutput;
+    };
+  };
 }

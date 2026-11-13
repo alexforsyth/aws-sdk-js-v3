@@ -1,372 +1,1233 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
-import { CreateOrderCommand, CreateOrderCommandInput, CreateOrderCommandOutput } from "./commands/CreateOrderCommand";
 import {
+  type CancelCapacityTaskCommandInput,
+  type CancelCapacityTaskCommandOutput,
+  CancelCapacityTaskCommand,
+} from "./commands/CancelCapacityTaskCommand";
+import {
+  type CancelOrderCommandInput,
+  type CancelOrderCommandOutput,
+  CancelOrderCommand,
+} from "./commands/CancelOrderCommand";
+import {
+  type CreateOrderCommandInput,
+  type CreateOrderCommandOutput,
+  CreateOrderCommand,
+} from "./commands/CreateOrderCommand";
+import {
+  type CreateOutpostCommandInput,
+  type CreateOutpostCommandOutput,
   CreateOutpostCommand,
-  CreateOutpostCommandInput,
-  CreateOutpostCommandOutput,
 } from "./commands/CreateOutpostCommand";
 import {
-  DeleteOutpostCommand,
-  DeleteOutpostCommandInput,
-  DeleteOutpostCommandOutput,
-} from "./commands/DeleteOutpostCommand";
-import { DeleteSiteCommand, DeleteSiteCommandInput, DeleteSiteCommandOutput } from "./commands/DeleteSiteCommand";
-import { GetOutpostCommand, GetOutpostCommandInput, GetOutpostCommandOutput } from "./commands/GetOutpostCommand";
+  type CreatePrivateConnectivityConfigCommandInput,
+  type CreatePrivateConnectivityConfigCommandOutput,
+  CreatePrivateConnectivityConfigCommand,
+} from "./commands/CreatePrivateConnectivityConfigCommand";
 import {
+  type CreateQuoteCommandInput,
+  type CreateQuoteCommandOutput,
+  CreateQuoteCommand,
+} from "./commands/CreateQuoteCommand";
+import {
+  type CreateRenewalCommandInput,
+  type CreateRenewalCommandOutput,
+  CreateRenewalCommand,
+} from "./commands/CreateRenewalCommand";
+import {
+  type CreateSiteCommandInput,
+  type CreateSiteCommandOutput,
+  CreateSiteCommand,
+} from "./commands/CreateSiteCommand";
+import {
+  type DeleteOutpostCommandInput,
+  type DeleteOutpostCommandOutput,
+  DeleteOutpostCommand,
+} from "./commands/DeleteOutpostCommand";
+import {
+  type DeleteQuoteCommandInput,
+  type DeleteQuoteCommandOutput,
+  DeleteQuoteCommand,
+} from "./commands/DeleteQuoteCommand";
+import {
+  type DeleteSiteCommandInput,
+  type DeleteSiteCommandOutput,
+  DeleteSiteCommand,
+} from "./commands/DeleteSiteCommand";
+import {
+  type GetCapacityTaskCommandInput,
+  type GetCapacityTaskCommandOutput,
+  GetCapacityTaskCommand,
+} from "./commands/GetCapacityTaskCommand";
+import {
+  type GetCatalogItemCommandInput,
+  type GetCatalogItemCommandOutput,
+  GetCatalogItemCommand,
+} from "./commands/GetCatalogItemCommand";
+import {
+  type GetConnectionCommandInput,
+  type GetConnectionCommandOutput,
+  GetConnectionCommand,
+} from "./commands/GetConnectionCommand";
+import { type GetOrderCommandInput, type GetOrderCommandOutput, GetOrderCommand } from "./commands/GetOrderCommand";
+import {
+  type GetOutpostBillingInformationCommandInput,
+  type GetOutpostBillingInformationCommandOutput,
+  GetOutpostBillingInformationCommand,
+} from "./commands/GetOutpostBillingInformationCommand";
+import {
+  type GetOutpostCommandInput,
+  type GetOutpostCommandOutput,
+  GetOutpostCommand,
+} from "./commands/GetOutpostCommand";
+import {
+  type GetOutpostInstanceTypesCommandInput,
+  type GetOutpostInstanceTypesCommandOutput,
   GetOutpostInstanceTypesCommand,
-  GetOutpostInstanceTypesCommandInput,
-  GetOutpostInstanceTypesCommandOutput,
 } from "./commands/GetOutpostInstanceTypesCommand";
 import {
+  type GetOutpostSupportedInstanceTypesCommandInput,
+  type GetOutpostSupportedInstanceTypesCommandOutput,
+  GetOutpostSupportedInstanceTypesCommand,
+} from "./commands/GetOutpostSupportedInstanceTypesCommand";
+import {
+  type GetPrivateConnectivityConfigCommandInput,
+  type GetPrivateConnectivityConfigCommandOutput,
+  GetPrivateConnectivityConfigCommand,
+} from "./commands/GetPrivateConnectivityConfigCommand";
+import { type GetQuoteCommandInput, type GetQuoteCommandOutput, GetQuoteCommand } from "./commands/GetQuoteCommand";
+import {
+  type GetRenewalPricingCommandInput,
+  type GetRenewalPricingCommandOutput,
+  GetRenewalPricingCommand,
+} from "./commands/GetRenewalPricingCommand";
+import {
+  type GetSiteAddressCommandInput,
+  type GetSiteAddressCommandOutput,
+  GetSiteAddressCommand,
+} from "./commands/GetSiteAddressCommand";
+import { type GetSiteCommandInput, type GetSiteCommandOutput, GetSiteCommand } from "./commands/GetSiteCommand";
+import {
+  type ListAssetInstancesCommandInput,
+  type ListAssetInstancesCommandOutput,
+  ListAssetInstancesCommand,
+} from "./commands/ListAssetInstancesCommand";
+import {
+  type ListAssetsCommandInput,
+  type ListAssetsCommandOutput,
+  ListAssetsCommand,
+} from "./commands/ListAssetsCommand";
+import {
+  type ListBlockingInstancesForCapacityTaskCommandInput,
+  type ListBlockingInstancesForCapacityTaskCommandOutput,
+  ListBlockingInstancesForCapacityTaskCommand,
+} from "./commands/ListBlockingInstancesForCapacityTaskCommand";
+import {
+  type ListCapacityTasksCommandInput,
+  type ListCapacityTasksCommandOutput,
+  ListCapacityTasksCommand,
+} from "./commands/ListCapacityTasksCommand";
+import {
+  type ListCatalogItemsCommandInput,
+  type ListCatalogItemsCommandOutput,
+  ListCatalogItemsCommand,
+} from "./commands/ListCatalogItemsCommand";
+import {
+  type ListOrderableInstanceTypesCommandInput,
+  type ListOrderableInstanceTypesCommandOutput,
+  ListOrderableInstanceTypesCommand,
+} from "./commands/ListOrderableInstanceTypesCommand";
+import {
+  type ListOrdersCommandInput,
+  type ListOrdersCommandOutput,
+  ListOrdersCommand,
+} from "./commands/ListOrdersCommand";
+import {
+  type ListOutpostsCommandInput,
+  type ListOutpostsCommandOutput,
   ListOutpostsCommand,
-  ListOutpostsCommandInput,
-  ListOutpostsCommandOutput,
 } from "./commands/ListOutpostsCommand";
-import { ListSitesCommand, ListSitesCommandInput, ListSitesCommandOutput } from "./commands/ListSitesCommand";
 import {
+  type ListQuotesCommandInput,
+  type ListQuotesCommandOutput,
+  ListQuotesCommand,
+} from "./commands/ListQuotesCommand";
+import { type ListSitesCommandInput, type ListSitesCommandOutput, ListSitesCommand } from "./commands/ListSitesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartCapacityTaskCommandInput,
+  type StartCapacityTaskCommandOutput,
+  StartCapacityTaskCommand,
+} from "./commands/StartCapacityTaskCommand";
+import {
+  type StartConnectionCommandInput,
+  type StartConnectionCommandOutput,
+  StartConnectionCommand,
+} from "./commands/StartConnectionCommand";
+import {
+  type StartOutpostDecommissionCommandInput,
+  type StartOutpostDecommissionCommandOutput,
+  StartOutpostDecommissionCommand,
+} from "./commands/StartOutpostDecommissionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import {
+  type UpdateOutpostCommandInput,
+  type UpdateOutpostCommandOutput,
+  UpdateOutpostCommand,
+} from "./commands/UpdateOutpostCommand";
+import {
+  type UpdateQuoteCommandInput,
+  type UpdateQuoteCommandOutput,
+  UpdateQuoteCommand,
+} from "./commands/UpdateQuoteCommand";
+import {
+  type UpdateSiteAddressCommandInput,
+  type UpdateSiteAddressCommandOutput,
+  UpdateSiteAddressCommand,
+} from "./commands/UpdateSiteAddressCommand";
+import {
+  type UpdateSiteCommandInput,
+  type UpdateSiteCommandOutput,
+  UpdateSiteCommand,
+} from "./commands/UpdateSiteCommand";
+import {
+  type UpdateSiteRackPhysicalPropertiesCommandInput,
+  type UpdateSiteRackPhysicalPropertiesCommandOutput,
+  UpdateSiteRackPhysicalPropertiesCommand,
+} from "./commands/UpdateSiteRackPhysicalPropertiesCommand";
 import { OutpostsClient } from "./OutpostsClient";
+import { paginateGetOutpostBillingInformation } from "./pagination/GetOutpostBillingInformationPaginator";
+import { paginateGetOutpostInstanceTypes } from "./pagination/GetOutpostInstanceTypesPaginator";
+import { paginateGetOutpostSupportedInstanceTypes } from "./pagination/GetOutpostSupportedInstanceTypesPaginator";
+import { paginateListAssetInstances } from "./pagination/ListAssetInstancesPaginator";
+import { paginateListAssets } from "./pagination/ListAssetsPaginator";
+import {
+  paginateListBlockingInstancesForCapacityTask,
+} from "./pagination/ListBlockingInstancesForCapacityTaskPaginator";
+import { paginateListCapacityTasks } from "./pagination/ListCapacityTasksPaginator";
+import { paginateListCatalogItems } from "./pagination/ListCatalogItemsPaginator";
+import { paginateListOrderableInstanceTypes } from "./pagination/ListOrderableInstanceTypesPaginator";
+import { paginateListOrders } from "./pagination/ListOrdersPaginator";
+import { paginateListOutposts } from "./pagination/ListOutpostsPaginator";
+import { paginateListQuotes } from "./pagination/ListQuotesPaginator";
+import { paginateListSites } from "./pagination/ListSitesPaginator";
+
+const commands = {
+  CancelCapacityTaskCommand,
+  CancelOrderCommand,
+  CreateOrderCommand,
+  CreateOutpostCommand,
+  CreatePrivateConnectivityConfigCommand,
+  CreateQuoteCommand,
+  CreateRenewalCommand,
+  CreateSiteCommand,
+  DeleteOutpostCommand,
+  DeleteQuoteCommand,
+  DeleteSiteCommand,
+  GetCapacityTaskCommand,
+  GetCatalogItemCommand,
+  GetConnectionCommand,
+  GetOrderCommand,
+  GetOutpostCommand,
+  GetOutpostBillingInformationCommand,
+  GetOutpostInstanceTypesCommand,
+  GetOutpostSupportedInstanceTypesCommand,
+  GetPrivateConnectivityConfigCommand,
+  GetQuoteCommand,
+  GetRenewalPricingCommand,
+  GetSiteCommand,
+  GetSiteAddressCommand,
+  ListAssetInstancesCommand,
+  ListAssetsCommand,
+  ListBlockingInstancesForCapacityTaskCommand,
+  ListCapacityTasksCommand,
+  ListCatalogItemsCommand,
+  ListOrderableInstanceTypesCommand,
+  ListOrdersCommand,
+  ListOutpostsCommand,
+  ListQuotesCommand,
+  ListSitesCommand,
+  ListTagsForResourceCommand,
+  StartCapacityTaskCommand,
+  StartConnectionCommand,
+  StartOutpostDecommissionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateOutpostCommand,
+  UpdateQuoteCommand,
+  UpdateSiteCommand,
+  UpdateSiteAddressCommand,
+  UpdateSiteRackPhysicalPropertiesCommand,
+};
+const paginators = {
+  paginateGetOutpostBillingInformation,
+  paginateGetOutpostInstanceTypes,
+  paginateGetOutpostSupportedInstanceTypes,
+  paginateListAssetInstances,
+  paginateListAssets,
+  paginateListBlockingInstancesForCapacityTask,
+  paginateListCapacityTasks,
+  paginateListCatalogItems,
+  paginateListOrderableInstanceTypes,
+  paginateListOrders,
+  paginateListOutposts,
+  paginateListQuotes,
+  paginateListSites,
+};
 
 /**
- * <p>AWS Outposts is a fully managed service that extends AWS infrastructure, APIs, and tools
- *       to customer premises. By providing local access to AWS managed infrastructure, AWS Outposts
- *       enables customers to build and run applications on premises using the same programming
- *       interfaces as in AWS Regions, while using local compute and storage resources for lower
- *       latency and local data processing needs.</p>
+ * @public
  */
-export class Outposts extends OutpostsClient {
+export interface OutpostsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Outposts {
   /**
-   * <p>Creates an order for an Outpost.</p>
+   * @see {@link CancelCapacityTaskCommand}
    */
-  public createOrder(args: CreateOrderCommandInput, options?: __HttpHandlerOptions): Promise<CreateOrderCommandOutput>;
-  public createOrder(args: CreateOrderCommandInput, cb: (err: any, data?: CreateOrderCommandOutput) => void): void;
-  public createOrder(
+  cancelCapacityTask(
+    args: CancelCapacityTaskCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CancelCapacityTaskCommandOutput>;
+  cancelCapacityTask(
+    args: CancelCapacityTaskCommandInput,
+    cb: (err: any, data?: CancelCapacityTaskCommandOutput) => void
+  ): void;
+  cancelCapacityTask(
+    args: CancelCapacityTaskCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CancelCapacityTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelOrderCommand}
+   */
+  cancelOrder(
+    args: CancelOrderCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CancelOrderCommandOutput>;
+  cancelOrder(
+    args: CancelOrderCommandInput,
+    cb: (err: any, data?: CancelOrderCommandOutput) => void
+  ): void;
+  cancelOrder(
+    args: CancelOrderCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CancelOrderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateOrderCommand}
+   */
+  createOrder(
     args: CreateOrderCommandInput,
-    options: __HttpHandlerOptions,
+    options?: OutpostsRequestOptions
+  ): Promise<CreateOrderCommandOutput>;
+  createOrder(
+    args: CreateOrderCommandInput,
     cb: (err: any, data?: CreateOrderCommandOutput) => void
   ): void;
-  public createOrder(
+  createOrder(
     args: CreateOrderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateOrderCommandOutput) => void),
-    cb?: (err: any, data?: CreateOrderCommandOutput) => void
-  ): Promise<CreateOrderCommandOutput> | void {
-    const command = new CreateOrderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CreateOrderCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates an Outpost.</p>
-   *          <p>You can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
+   * @see {@link CreateOutpostCommand}
    */
-  public createOutpost(
+  createOutpost(
     args: CreateOutpostCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<CreateOutpostCommandOutput>;
-  public createOutpost(
+  createOutpost(
     args: CreateOutpostCommandInput,
     cb: (err: any, data?: CreateOutpostCommandOutput) => void
   ): void;
-  public createOutpost(
+  createOutpost(
     args: CreateOutpostCommandInput,
-    options: __HttpHandlerOptions,
+    options: OutpostsRequestOptions,
     cb: (err: any, data?: CreateOutpostCommandOutput) => void
   ): void;
-  public createOutpost(
-    args: CreateOutpostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateOutpostCommandOutput) => void),
-    cb?: (err: any, data?: CreateOutpostCommandOutput) => void
-  ): Promise<CreateOutpostCommandOutput> | void {
-    const command = new CreateOutpostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the Outpost.</p>
+   * @see {@link CreatePrivateConnectivityConfigCommand}
    */
-  public deleteOutpost(
+  createPrivateConnectivityConfig(
+    args: CreatePrivateConnectivityConfigCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CreatePrivateConnectivityConfigCommandOutput>;
+  createPrivateConnectivityConfig(
+    args: CreatePrivateConnectivityConfigCommandInput,
+    cb: (err: any, data?: CreatePrivateConnectivityConfigCommandOutput) => void
+  ): void;
+  createPrivateConnectivityConfig(
+    args: CreatePrivateConnectivityConfigCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CreatePrivateConnectivityConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateQuoteCommand}
+   */
+  createQuote(
+    args: CreateQuoteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CreateQuoteCommandOutput>;
+  createQuote(
+    args: CreateQuoteCommandInput,
+    cb: (err: any, data?: CreateQuoteCommandOutput) => void
+  ): void;
+  createQuote(
+    args: CreateQuoteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CreateQuoteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRenewalCommand}
+   */
+  createRenewal(
+    args: CreateRenewalCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CreateRenewalCommandOutput>;
+  createRenewal(
+    args: CreateRenewalCommandInput,
+    cb: (err: any, data?: CreateRenewalCommandOutput) => void
+  ): void;
+  createRenewal(
+    args: CreateRenewalCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CreateRenewalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSiteCommand}
+   */
+  createSite(
+    args: CreateSiteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<CreateSiteCommandOutput>;
+  createSite(
+    args: CreateSiteCommandInput,
+    cb: (err: any, data?: CreateSiteCommandOutput) => void
+  ): void;
+  createSite(
+    args: CreateSiteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: CreateSiteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteOutpostCommand}
+   */
+  deleteOutpost(
     args: DeleteOutpostCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<DeleteOutpostCommandOutput>;
-  public deleteOutpost(
+  deleteOutpost(
     args: DeleteOutpostCommandInput,
     cb: (err: any, data?: DeleteOutpostCommandOutput) => void
   ): void;
-  public deleteOutpost(
+  deleteOutpost(
     args: DeleteOutpostCommandInput,
-    options: __HttpHandlerOptions,
+    options: OutpostsRequestOptions,
     cb: (err: any, data?: DeleteOutpostCommandOutput) => void
   ): void;
-  public deleteOutpost(
-    args: DeleteOutpostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteOutpostCommandOutput) => void),
-    cb?: (err: any, data?: DeleteOutpostCommandOutput) => void
-  ): Promise<DeleteOutpostCommandOutput> | void {
-    const command = new DeleteOutpostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the site.</p>
+   * @see {@link DeleteQuoteCommand}
    */
-  public deleteSite(args: DeleteSiteCommandInput, options?: __HttpHandlerOptions): Promise<DeleteSiteCommandOutput>;
-  public deleteSite(args: DeleteSiteCommandInput, cb: (err: any, data?: DeleteSiteCommandOutput) => void): void;
-  public deleteSite(
+  deleteQuote(
+    args: DeleteQuoteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<DeleteQuoteCommandOutput>;
+  deleteQuote(
+    args: DeleteQuoteCommandInput,
+    cb: (err: any, data?: DeleteQuoteCommandOutput) => void
+  ): void;
+  deleteQuote(
+    args: DeleteQuoteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: DeleteQuoteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSiteCommand}
+   */
+  deleteSite(
     args: DeleteSiteCommandInput,
-    options: __HttpHandlerOptions,
+    options?: OutpostsRequestOptions
+  ): Promise<DeleteSiteCommandOutput>;
+  deleteSite(
+    args: DeleteSiteCommandInput,
     cb: (err: any, data?: DeleteSiteCommandOutput) => void
   ): void;
-  public deleteSite(
+  deleteSite(
     args: DeleteSiteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSiteCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSiteCommandOutput) => void
-  ): Promise<DeleteSiteCommandOutput> | void {
-    const command = new DeleteSiteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: DeleteSiteCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about the specified Outpost.</p>
+   * @see {@link GetCapacityTaskCommand}
    */
-  public getOutpost(args: GetOutpostCommandInput, options?: __HttpHandlerOptions): Promise<GetOutpostCommandOutput>;
-  public getOutpost(args: GetOutpostCommandInput, cb: (err: any, data?: GetOutpostCommandOutput) => void): void;
-  public getOutpost(
+  getCapacityTask(
+    args: GetCapacityTaskCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetCapacityTaskCommandOutput>;
+  getCapacityTask(
+    args: GetCapacityTaskCommandInput,
+    cb: (err: any, data?: GetCapacityTaskCommandOutput) => void
+  ): void;
+  getCapacityTask(
+    args: GetCapacityTaskCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetCapacityTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCatalogItemCommand}
+   */
+  getCatalogItem(
+    args: GetCatalogItemCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetCatalogItemCommandOutput>;
+  getCatalogItem(
+    args: GetCatalogItemCommandInput,
+    cb: (err: any, data?: GetCatalogItemCommandOutput) => void
+  ): void;
+  getCatalogItem(
+    args: GetCatalogItemCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetCatalogItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionCommand}
+   */
+  getConnection(
+    args: GetConnectionCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetConnectionCommandOutput>;
+  getConnection(
+    args: GetConnectionCommandInput,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+  getConnection(
+    args: GetConnectionCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOrderCommand}
+   */
+  getOrder(
+    args: GetOrderCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetOrderCommandOutput>;
+  getOrder(
+    args: GetOrderCommandInput,
+    cb: (err: any, data?: GetOrderCommandOutput) => void
+  ): void;
+  getOrder(
+    args: GetOrderCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetOrderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOutpostCommand}
+   */
+  getOutpost(
     args: GetOutpostCommandInput,
-    options: __HttpHandlerOptions,
+    options?: OutpostsRequestOptions
+  ): Promise<GetOutpostCommandOutput>;
+  getOutpost(
+    args: GetOutpostCommandInput,
     cb: (err: any, data?: GetOutpostCommandOutput) => void
   ): void;
-  public getOutpost(
+  getOutpost(
     args: GetOutpostCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetOutpostCommandOutput) => void),
-    cb?: (err: any, data?: GetOutpostCommandOutput) => void
-  ): Promise<GetOutpostCommandOutput> | void {
-    const command = new GetOutpostCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetOutpostCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the instance types for the specified Outpost.</p>
+   * @see {@link GetOutpostBillingInformationCommand}
    */
-  public getOutpostInstanceTypes(
+  getOutpostBillingInformation(
+    args: GetOutpostBillingInformationCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetOutpostBillingInformationCommandOutput>;
+  getOutpostBillingInformation(
+    args: GetOutpostBillingInformationCommandInput,
+    cb: (err: any, data?: GetOutpostBillingInformationCommandOutput) => void
+  ): void;
+  getOutpostBillingInformation(
+    args: GetOutpostBillingInformationCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetOutpostBillingInformationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOutpostInstanceTypesCommand}
+   */
+  getOutpostInstanceTypes(
     args: GetOutpostInstanceTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<GetOutpostInstanceTypesCommandOutput>;
-  public getOutpostInstanceTypes(
+  getOutpostInstanceTypes(
     args: GetOutpostInstanceTypesCommandInput,
     cb: (err: any, data?: GetOutpostInstanceTypesCommandOutput) => void
   ): void;
-  public getOutpostInstanceTypes(
+  getOutpostInstanceTypes(
     args: GetOutpostInstanceTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: OutpostsRequestOptions,
     cb: (err: any, data?: GetOutpostInstanceTypesCommandOutput) => void
   ): void;
-  public getOutpostInstanceTypes(
-    args: GetOutpostInstanceTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetOutpostInstanceTypesCommandOutput) => void),
-    cb?: (err: any, data?: GetOutpostInstanceTypesCommandOutput) => void
-  ): Promise<GetOutpostInstanceTypesCommandOutput> | void {
-    const command = new GetOutpostInstanceTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Create a list of the Outposts for your AWS account. Add filters to your request to return
-   *       a more specific list of results. Use filters to match an Outpost lifecycle status,
-   *       Availibility Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p>
-   *
-   *          <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only
-   *       results that match all of the specified filters.</p>
+   * @see {@link GetOutpostSupportedInstanceTypesCommand}
    */
-  public listOutposts(
+  getOutpostSupportedInstanceTypes(
+    args: GetOutpostSupportedInstanceTypesCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetOutpostSupportedInstanceTypesCommandOutput>;
+  getOutpostSupportedInstanceTypes(
+    args: GetOutpostSupportedInstanceTypesCommandInput,
+    cb: (err: any, data?: GetOutpostSupportedInstanceTypesCommandOutput) => void
+  ): void;
+  getOutpostSupportedInstanceTypes(
+    args: GetOutpostSupportedInstanceTypesCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetOutpostSupportedInstanceTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPrivateConnectivityConfigCommand}
+   */
+  getPrivateConnectivityConfig(
+    args: GetPrivateConnectivityConfigCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetPrivateConnectivityConfigCommandOutput>;
+  getPrivateConnectivityConfig(
+    args: GetPrivateConnectivityConfigCommandInput,
+    cb: (err: any, data?: GetPrivateConnectivityConfigCommandOutput) => void
+  ): void;
+  getPrivateConnectivityConfig(
+    args: GetPrivateConnectivityConfigCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetPrivateConnectivityConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQuoteCommand}
+   */
+  getQuote(
+    args: GetQuoteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetQuoteCommandOutput>;
+  getQuote(
+    args: GetQuoteCommandInput,
+    cb: (err: any, data?: GetQuoteCommandOutput) => void
+  ): void;
+  getQuote(
+    args: GetQuoteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetQuoteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRenewalPricingCommand}
+   */
+  getRenewalPricing(
+    args: GetRenewalPricingCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetRenewalPricingCommandOutput>;
+  getRenewalPricing(
+    args: GetRenewalPricingCommandInput,
+    cb: (err: any, data?: GetRenewalPricingCommandOutput) => void
+  ): void;
+  getRenewalPricing(
+    args: GetRenewalPricingCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetRenewalPricingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSiteCommand}
+   */
+  getSite(
+    args: GetSiteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetSiteCommandOutput>;
+  getSite(
+    args: GetSiteCommandInput,
+    cb: (err: any, data?: GetSiteCommandOutput) => void
+  ): void;
+  getSite(
+    args: GetSiteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetSiteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSiteAddressCommand}
+   */
+  getSiteAddress(
+    args: GetSiteAddressCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<GetSiteAddressCommandOutput>;
+  getSiteAddress(
+    args: GetSiteAddressCommandInput,
+    cb: (err: any, data?: GetSiteAddressCommandOutput) => void
+  ): void;
+  getSiteAddress(
+    args: GetSiteAddressCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: GetSiteAddressCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssetInstancesCommand}
+   */
+  listAssetInstances(
+    args: ListAssetInstancesCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListAssetInstancesCommandOutput>;
+  listAssetInstances(
+    args: ListAssetInstancesCommandInput,
+    cb: (err: any, data?: ListAssetInstancesCommandOutput) => void
+  ): void;
+  listAssetInstances(
+    args: ListAssetInstancesCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListAssetInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssetsCommand}
+   */
+  listAssets(
+    args: ListAssetsCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListAssetsCommandOutput>;
+  listAssets(
+    args: ListAssetsCommandInput,
+    cb: (err: any, data?: ListAssetsCommandOutput) => void
+  ): void;
+  listAssets(
+    args: ListAssetsCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListAssetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBlockingInstancesForCapacityTaskCommand}
+   */
+  listBlockingInstancesForCapacityTask(
+    args: ListBlockingInstancesForCapacityTaskCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListBlockingInstancesForCapacityTaskCommandOutput>;
+  listBlockingInstancesForCapacityTask(
+    args: ListBlockingInstancesForCapacityTaskCommandInput,
+    cb: (err: any, data?: ListBlockingInstancesForCapacityTaskCommandOutput) => void
+  ): void;
+  listBlockingInstancesForCapacityTask(
+    args: ListBlockingInstancesForCapacityTaskCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListBlockingInstancesForCapacityTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCapacityTasksCommand}
+   */
+  listCapacityTasks(): Promise<ListCapacityTasksCommandOutput>;
+  listCapacityTasks(
+    args: ListCapacityTasksCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListCapacityTasksCommandOutput>;
+  listCapacityTasks(
+    args: ListCapacityTasksCommandInput,
+    cb: (err: any, data?: ListCapacityTasksCommandOutput) => void
+  ): void;
+  listCapacityTasks(
+    args: ListCapacityTasksCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListCapacityTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCatalogItemsCommand}
+   */
+  listCatalogItems(): Promise<ListCatalogItemsCommandOutput>;
+  listCatalogItems(
+    args: ListCatalogItemsCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListCatalogItemsCommandOutput>;
+  listCatalogItems(
+    args: ListCatalogItemsCommandInput,
+    cb: (err: any, data?: ListCatalogItemsCommandOutput) => void
+  ): void;
+  listCatalogItems(
+    args: ListCatalogItemsCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListCatalogItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOrderableInstanceTypesCommand}
+   */
+  listOrderableInstanceTypes(): Promise<ListOrderableInstanceTypesCommandOutput>;
+  listOrderableInstanceTypes(
+    args: ListOrderableInstanceTypesCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListOrderableInstanceTypesCommandOutput>;
+  listOrderableInstanceTypes(
+    args: ListOrderableInstanceTypesCommandInput,
+    cb: (err: any, data?: ListOrderableInstanceTypesCommandOutput) => void
+  ): void;
+  listOrderableInstanceTypes(
+    args: ListOrderableInstanceTypesCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListOrderableInstanceTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOrdersCommand}
+   */
+  listOrders(): Promise<ListOrdersCommandOutput>;
+  listOrders(
+    args: ListOrdersCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListOrdersCommandOutput>;
+  listOrders(
+    args: ListOrdersCommandInput,
+    cb: (err: any, data?: ListOrdersCommandOutput) => void
+  ): void;
+  listOrders(
+    args: ListOrdersCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListOrdersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOutpostsCommand}
+   */
+  listOutposts(): Promise<ListOutpostsCommandOutput>;
+  listOutposts(
     args: ListOutpostsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<ListOutpostsCommandOutput>;
-  public listOutposts(args: ListOutpostsCommandInput, cb: (err: any, data?: ListOutpostsCommandOutput) => void): void;
-  public listOutposts(
+  listOutposts(
     args: ListOutpostsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListOutpostsCommandOutput) => void
   ): void;
-  public listOutposts(
+  listOutposts(
     args: ListOutpostsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListOutpostsCommandOutput) => void),
-    cb?: (err: any, data?: ListOutpostsCommandOutput) => void
-  ): Promise<ListOutpostsCommandOutput> | void {
-    const command = new ListOutpostsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListOutpostsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the sites for the specified AWS account.</p>
+   * @see {@link ListQuotesCommand}
    */
-  public listSites(args: ListSitesCommandInput, options?: __HttpHandlerOptions): Promise<ListSitesCommandOutput>;
-  public listSites(args: ListSitesCommandInput, cb: (err: any, data?: ListSitesCommandOutput) => void): void;
-  public listSites(
+  listQuotes(): Promise<ListQuotesCommandOutput>;
+  listQuotes(
+    args: ListQuotesCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<ListQuotesCommandOutput>;
+  listQuotes(
+    args: ListQuotesCommandInput,
+    cb: (err: any, data?: ListQuotesCommandOutput) => void
+  ): void;
+  listQuotes(
+    args: ListQuotesCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListQuotesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSitesCommand}
+   */
+  listSites(): Promise<ListSitesCommandOutput>;
+  listSites(
     args: ListSitesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: OutpostsRequestOptions
+  ): Promise<ListSitesCommandOutput>;
+  listSites(
+    args: ListSitesCommandInput,
     cb: (err: any, data?: ListSitesCommandOutput) => void
   ): void;
-  public listSites(
+  listSites(
     args: ListSitesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSitesCommandOutput) => void),
-    cb?: (err: any, data?: ListSitesCommandOutput) => void
-  ): Promise<ListSitesCommandOutput> | void {
-    const command = new ListSitesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: ListSitesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: OutpostsRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds tags to the specified resource.</p>
+   * @see {@link StartCapacityTaskCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  startCapacityTask(
+    args: StartCapacityTaskCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<StartCapacityTaskCommandOutput>;
+  startCapacityTask(
+    args: StartCapacityTaskCommandInput,
+    cb: (err: any, data?: StartCapacityTaskCommandOutput) => void
+  ): void;
+  startCapacityTask(
+    args: StartCapacityTaskCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: StartCapacityTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartConnectionCommand}
+   */
+  startConnection(
+    args: StartConnectionCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<StartConnectionCommandOutput>;
+  startConnection(
+    args: StartConnectionCommandInput,
+    cb: (err: any, data?: StartConnectionCommandOutput) => void
+  ): void;
+  startConnection(
+    args: StartConnectionCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: StartConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOutpostDecommissionCommand}
+   */
+  startOutpostDecommission(
+    args: StartOutpostDecommissionCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<StartOutpostDecommissionCommandOutput>;
+  startOutpostDecommission(
+    args: StartOutpostDecommissionCommandInput,
+    cb: (err: any, data?: StartOutpostDecommissionCommandOutput) => void
+  ): void;
+  startOutpostDecommission(
+    args: StartOutpostDecommissionCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: StartOutpostDecommissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: OutpostsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: OutpostsRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: OutpostsRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateOutpostCommand}
+   */
+  updateOutpost(
+    args: UpdateOutpostCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<UpdateOutpostCommandOutput>;
+  updateOutpost(
+    args: UpdateOutpostCommandInput,
+    cb: (err: any, data?: UpdateOutpostCommandOutput) => void
+  ): void;
+  updateOutpost(
+    args: UpdateOutpostCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: UpdateOutpostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQuoteCommand}
+   */
+  updateQuote(
+    args: UpdateQuoteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<UpdateQuoteCommandOutput>;
+  updateQuote(
+    args: UpdateQuoteCommandInput,
+    cb: (err: any, data?: UpdateQuoteCommandOutput) => void
+  ): void;
+  updateQuote(
+    args: UpdateQuoteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: UpdateQuoteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSiteCommand}
+   */
+  updateSite(
+    args: UpdateSiteCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<UpdateSiteCommandOutput>;
+  updateSite(
+    args: UpdateSiteCommandInput,
+    cb: (err: any, data?: UpdateSiteCommandOutput) => void
+  ): void;
+  updateSite(
+    args: UpdateSiteCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: UpdateSiteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSiteAddressCommand}
+   */
+  updateSiteAddress(
+    args: UpdateSiteAddressCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<UpdateSiteAddressCommandOutput>;
+  updateSiteAddress(
+    args: UpdateSiteAddressCommandInput,
+    cb: (err: any, data?: UpdateSiteAddressCommandOutput) => void
+  ): void;
+  updateSiteAddress(
+    args: UpdateSiteAddressCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: UpdateSiteAddressCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSiteRackPhysicalPropertiesCommand}
+   */
+  updateSiteRackPhysicalProperties(
+    args: UpdateSiteRackPhysicalPropertiesCommandInput,
+    options?: OutpostsRequestOptions
+  ): Promise<UpdateSiteRackPhysicalPropertiesCommandOutput>;
+  updateSiteRackPhysicalProperties(
+    args: UpdateSiteRackPhysicalPropertiesCommandInput,
+    cb: (err: any, data?: UpdateSiteRackPhysicalPropertiesCommandOutput) => void
+  ): void;
+  updateSiteRackPhysicalProperties(
+    args: UpdateSiteRackPhysicalPropertiesCommandInput,
+    options: OutpostsRequestOptions,
+    cb: (err: any, data?: UpdateSiteRackPhysicalPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOutpostBillingInformationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetOutpostBillingInformationCommandOutput}.
+   */
+  paginateGetOutpostBillingInformation(
+    args: GetOutpostBillingInformationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetOutpostBillingInformationCommandOutput>;
+
+  /**
+   * @see {@link GetOutpostInstanceTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetOutpostInstanceTypesCommandOutput}.
+   */
+  paginateGetOutpostInstanceTypes(
+    args: GetOutpostInstanceTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetOutpostInstanceTypesCommandOutput>;
+
+  /**
+   * @see {@link GetOutpostSupportedInstanceTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetOutpostSupportedInstanceTypesCommandOutput}.
+   */
+  paginateGetOutpostSupportedInstanceTypes(
+    args: GetOutpostSupportedInstanceTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetOutpostSupportedInstanceTypesCommandOutput>;
+
+  /**
+   * @see {@link ListAssetInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssetInstancesCommandOutput}.
+   */
+  paginateListAssetInstances(
+    args: ListAssetInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssetInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListAssetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssetsCommandOutput}.
+   */
+  paginateListAssets(
+    args: ListAssetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssetsCommandOutput>;
+
+  /**
+   * @see {@link ListBlockingInstancesForCapacityTaskCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBlockingInstancesForCapacityTaskCommandOutput}.
+   */
+  paginateListBlockingInstancesForCapacityTask(
+    args: ListBlockingInstancesForCapacityTaskCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBlockingInstancesForCapacityTaskCommandOutput>;
+
+  /**
+   * @see {@link ListCapacityTasksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCapacityTasksCommandOutput}.
+   */
+  paginateListCapacityTasks(
+    args?: ListCapacityTasksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCapacityTasksCommandOutput>;
+
+  /**
+   * @see {@link ListCatalogItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCatalogItemsCommandOutput}.
+   */
+  paginateListCatalogItems(
+    args?: ListCatalogItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCatalogItemsCommandOutput>;
+
+  /**
+   * @see {@link ListOrderableInstanceTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOrderableInstanceTypesCommandOutput}.
+   */
+  paginateListOrderableInstanceTypes(
+    args?: ListOrderableInstanceTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOrderableInstanceTypesCommandOutput>;
+
+  /**
+   * @see {@link ListOrdersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOrdersCommandOutput}.
+   */
+  paginateListOrders(
+    args?: ListOrdersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOrdersCommandOutput>;
+
+  /**
+   * @see {@link ListOutpostsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOutpostsCommandOutput}.
+   */
+  paginateListOutposts(
+    args?: ListOutpostsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOutpostsCommandOutput>;
+
+  /**
+   * @see {@link ListQuotesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQuotesCommandOutput}.
+   */
+  paginateListQuotes(
+    args?: ListQuotesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQuotesCommandOutput>;
+
+  /**
+   * @see {@link ListSitesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSitesCommandOutput}.
+   */
+  paginateListSites(
+    args?: ListSitesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSitesCommandOutput>;
 }
+
+/**
+ * <p>Amazon Web Services Outposts is a fully managed service that extends Amazon Web Services infrastructure, APIs, and tools to
+ *       customer premises. By providing local access to Amazon Web Services managed infrastructure, Amazon Web Services Outposts enables
+ *       customers to build and run applications on premises using the same programming interfaces as
+ *       in Amazon Web Services Regions, while using local compute and storage resources for lower latency and local
+ *       data processing needs.</p>
+ *          <p>You can use certain Amazon EC2 API actions for Amazon Web Services Outposts. For more information on these API actions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/operation-list-outposts.html">Amazon Web Services Outposts actions</a> in the <i>Amazon EC2 API Reference</i>.</p>
+ * @public
+ */
+export class Outposts extends OutpostsClient implements Outposts {}
+createAggregatedClient(commands, Outposts, { paginators });

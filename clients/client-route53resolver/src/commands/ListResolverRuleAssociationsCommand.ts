@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListResolverRuleAssociationsRequest, ListResolverRuleAssociationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListResolverRuleAssociationsCommand,
-  serializeAws_json1_1ListResolverRuleAssociationsCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListResolverRuleAssociationsRequest, ListResolverRuleAssociationsResponse } from "../models/models_0";
+import { ListResolverRuleAssociations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListResolverRuleAssociationsCommand}.
+ */
 export interface ListResolverRuleAssociationsCommandInput extends ListResolverRuleAssociationsRequest {}
-export interface ListResolverRuleAssociationsCommandOutput
-  extends ListResolverRuleAssociationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListResolverRuleAssociationsCommand}.
+ */
+export interface ListResolverRuleAssociationsCommandOutput extends ListResolverRuleAssociationsResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.</p>
@@ -30,71 +29,82 @@ export interface ListResolverRuleAssociationsCommandOutput
  * ```javascript
  * import { Route53ResolverClient, ListResolverRuleAssociationsCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, ListResolverRuleAssociationsCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // ListResolverRuleAssociationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // FilterValues
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new ListResolverRuleAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListResolverRuleAssociationsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   MaxResults: Number("int"),
+ * //   ResolverRuleAssociations: [ // ResolverRuleAssociations
+ * //     { // ResolverRuleAssociation
+ * //       Id: "STRING_VALUE",
+ * //       ResolverRuleId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       VPCId: "STRING_VALUE",
+ * //       Status: "CREATING" || "COMPLETE" || "DELETING" || "FAILED" || "OVERRIDDEN",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListResolverRuleAssociationsCommandInput - {@link ListResolverRuleAssociationsCommandInput}
+ * @returns {@link ListResolverRuleAssociationsCommandOutput}
  * @see {@link ListResolverRuleAssociationsCommandInput} for command's `input` shape.
  * @see {@link ListResolverRuleAssociationsCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The value that you specified for <code>NextToken</code> in a <code>List</code> request isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters in this request are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class ListResolverRuleAssociationsCommand extends $Command<
-  ListResolverRuleAssociationsCommandInput,
-  ListResolverRuleAssociationsCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListResolverRuleAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListResolverRuleAssociationsCommandInput, ListResolverRuleAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "ListResolverRuleAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListResolverRuleAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListResolverRuleAssociationsResponse.filterSensitiveLog,
+export class ListResolverRuleAssociationsCommand extends command<ListResolverRuleAssociationsCommandInput, ListResolverRuleAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListResolverRuleAssociations",
+  ListResolverRuleAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResolverRuleAssociationsRequest;
+      output: ListResolverRuleAssociationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListResolverRuleAssociationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListResolverRuleAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListResolverRuleAssociationsCommandOutput> {
-    return deserializeAws_json1_1ListResolverRuleAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListResolverRuleAssociationsCommandInput;
+      output: ListResolverRuleAssociationsCommandOutput;
+    };
+  };
 }

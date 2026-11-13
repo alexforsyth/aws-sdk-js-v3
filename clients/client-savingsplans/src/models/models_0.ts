@@ -1,1148 +1,959 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  CurrencyCode,
+  SavingsPlanOfferingFilterAttribute,
+  SavingsPlanOfferingPropertyKey,
+  SavingsPlanPaymentOption,
+  SavingsPlanProductType,
+  SavingsPlanRateFilterAttribute,
+  SavingsPlanRateFilterName,
+  SavingsPlanRatePropertyKey,
+  SavingsPlanRateServiceCode,
+  SavingsPlanRateUnit,
+  SavingsPlansFilterName,
+  SavingsPlanState,
+  SavingsPlanType,
+} from "./enums";
 
+/**
+ * @public
+ */
 export interface CreateSavingsPlanRequest {
   /**
    * <p>The ID of the offering.</p>
+   * @public
    */
   savingsPlanOfferingId: string | undefined;
 
   /**
-   * <p>The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more
-   *         than three digits after the decimal point.</p>
+   * <p>The hourly commitment, in the same currency of the <code>savingsPlanOfferingId</code>.
+   *          This is a value between 0.001 and 1 million. You cannot specify more than five digits after
+   *          the decimal point.</p>
+   * @public
    */
   commitment: string | undefined;
 
   /**
-   * <p>The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan.
-   *        This parameter is supported only if the payment option is <code>Partial Upfront</code>.</p>
+   * <p>The up-front payment amount. This is a whole number between 50 and 99 percent of the
+   *          total value of the Savings Plan. This parameter is only supported if the
+   *          payment option is <code>Partial Upfront</code>.</p>
+   * @public
    */
-  upfrontPaymentAmount?: string;
+  upfrontPaymentAmount?: string | undefined;
 
   /**
-   * <p>The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).</p>
+   * <p>The purchase time of the Savings Plan in UTC format
+   *          (YYYY-MM-DDTHH:MM:SSZ).</p>
+   * @public
    */
-  purchaseTime?: Date;
+  purchaseTime?: Date | undefined;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
+   * @public
    */
-  clientToken?: string;
+  clientToken?: string | undefined;
 
   /**
    * <p>One or more tags.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateSavingsPlanRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSavingsPlanRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSavingsPlanResponse {
   /**
    * <p>The ID of the Savings Plan.</p>
+   * @public
    */
-  savingsPlanId?: string;
-}
-
-export namespace CreateSavingsPlanResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSavingsPlanResponse): any => ({
-    ...obj,
-  });
+  savingsPlanId?: string | undefined;
 }
 
 /**
- * <p>An unexpected error occurred.</p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified resource was not found.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A service quota has been exceeded.</p>
- */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ServiceQuotaExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One of the input parameters is not valid.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteQueuedSavingsPlanRequest {
   /**
    * <p>The ID of the Savings Plan.</p>
+   * @public
    */
   savingsPlanId: string | undefined;
 }
 
-export namespace DeleteQueuedSavingsPlanRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteQueuedSavingsPlanRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteQueuedSavingsPlanResponse {}
 
-export namespace DeleteQueuedSavingsPlanResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteQueuedSavingsPlanResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanRateFilterName {
-  INSTANCE_TYPE = "instanceType",
-  OPERATION = "operation",
-  PRODUCT_DESCRIPTION = "productDescription",
-  PRODUCT_TYPE = "productType",
-  REGION = "region",
-  SERVICE_CODE = "serviceCode",
-  TENANCY = "tenancy",
-  USAGE_TYPE = "usageType",
-}
-
 /**
- * <p>Information about a filter.</p>
+ * <p>Information about a Savings Plan rate filter.</p>
+ * @public
  */
 export interface SavingsPlanRateFilter {
   /**
    * <p>The filter name.</p>
+   * @public
    */
-  name?: SavingsPlanRateFilterName | string;
+  name?: SavingsPlanRateFilterName | undefined;
 
   /**
    * <p>The filter values.</p>
+   * @public
    */
-  values?: string[];
+  values?: string[] | undefined;
 }
 
-export namespace SavingsPlanRateFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanRateFilter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSavingsPlanRatesRequest {
   /**
    * <p>The ID of the Savings Plan.</p>
+   * @public
    */
   savingsPlanId: string | undefined;
 
   /**
    * <p>The filters.</p>
+   * @public
    */
-  filters?: SavingsPlanRateFilter[];
+  filters?: SavingsPlanRateFilter[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve additional results, make another
-   *          call with the returned token value.</p>
+   * <p>The maximum number of results to return with a single call. To retrieve additional
+   *          results, make another call with the returned token value.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace DescribeSavingsPlanRatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlanRatesRequest): any => ({
-    ...obj,
-  });
-}
-
-export type CurrencyCode = "CNY" | "USD";
-
-export enum SavingsPlanProductType {
-  EC2 = "EC2",
-  FARGATE = "Fargate",
-  LAMBDA = "Lambda",
-  SAGEMAKER = "SageMaker",
-}
-
-export enum SavingsPlanRatePropertyKey {
-  INSTANCE_FAMILY = "instanceFamily",
-  INSTANCE_TYPE = "instanceType",
-  PRODUCT_DESCRIPTION = "productDescription",
-  REGION = "region",
-  TENANCY = "tenancy",
+  maxResults?: number | undefined;
 }
 
 /**
- * <p>Information about a property.</p>
+ * <p>Information about a Savings Plan rate property.</p>
+ * @public
  */
 export interface SavingsPlanRateProperty {
   /**
    * <p>The property name.</p>
+   * @public
    */
-  name?: SavingsPlanRatePropertyKey | string;
+  name?: SavingsPlanRatePropertyKey | undefined;
 
   /**
    * <p>The property value.</p>
+   * @public
    */
-  value?: string;
-}
-
-export namespace SavingsPlanRateProperty {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanRateProperty): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanRateServiceCode {
-  EC2 = "AmazonEC2",
-  FARGATE = "AmazonECS",
-  FARGATE_EKS = "AmazonEKS",
-  LAMBDA = "AWSLambda",
-  SAGEMAKER = "AmazonSageMaker",
-}
-
-export enum SavingsPlanRateUnit {
-  HOURS = "Hrs",
-  LAMBDA_GB_SECOND = "Lambda-GB-Second",
-  REQUEST = "Request",
+  value?: string | undefined;
 }
 
 /**
  * <p>Information about a Savings Plan rate.</p>
+ * @public
  */
 export interface SavingsPlanRate {
   /**
    * <p>The rate.</p>
+   * @public
    */
-  rate?: string;
+  rate?: string | undefined;
 
   /**
    * <p>The currency.</p>
+   * @public
    */
-  currency?: CurrencyCode | string;
+  currency?: CurrencyCode | undefined;
 
   /**
    * <p>The unit.</p>
+   * @public
    */
-  unit?: SavingsPlanRateUnit | string;
+  unit?: SavingsPlanRateUnit | undefined;
 
   /**
    * <p>The product type.</p>
+   * @public
    */
-  productType?: SavingsPlanProductType | string;
+  productType?: SavingsPlanProductType | undefined;
 
   /**
    * <p>The service.</p>
+   * @public
    */
-  serviceCode?: SavingsPlanRateServiceCode | string;
+  serviceCode?: SavingsPlanRateServiceCode | undefined;
 
   /**
    * <p>The usage details of the line item in the billing report.</p>
+   * @public
    */
-  usageType?: string;
+  usageType?: string | undefined;
 
   /**
-   * <p>The specific AWS operation for the line item in the billing report.</p>
+   * <p>The specific Amazon Web Services operation for the line item in the billing
+   *          report.</p>
+   * @public
    */
-  operation?: string;
+  operation?: string | undefined;
 
   /**
    * <p>The properties.</p>
+   * @public
    */
-  properties?: SavingsPlanRateProperty[];
-}
-
-export namespace SavingsPlanRate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanRate): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeSavingsPlanRatesResponse {
-  /**
-   * <p>The ID of the Savings Plan.</p>
-   */
-  savingsPlanId?: string;
-
-  /**
-   * <p>Information about the Savings Plans rates.</p>
-   */
-  searchResults?: SavingsPlanRate[];
-
-  /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are no more
-   *          results to return.</p>
-   */
-  nextToken?: string;
-}
-
-export namespace DescribeSavingsPlanRatesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlanRatesResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlansFilterName {
-  COMMITMENT = "commitment",
-  EC2_INSTANCE_FAMILY = "ec2-instance-family",
-  END = "end",
-  PAYMENT_OPTION = "payment-option",
-  REGION = "region",
-  SAVINGS_PLAN_TYPE = "savings-plan-type",
-  START = "start",
-  TERM = "term",
-  UPFRONT = "upfront",
+  properties?: SavingsPlanRateProperty[] | undefined;
 }
 
 /**
- * <p>Information about a filter.</p>
+ * @public
+ */
+export interface DescribeSavingsPlanRatesResponse {
+  /**
+   * <p>The ID of the Savings Plan.</p>
+   * @public
+   */
+  savingsPlanId?: string | undefined;
+
+  /**
+   * <p>Information about the Savings Plan rates.</p>
+   * @public
+   */
+  searchResults?: SavingsPlanRate[] | undefined;
+
+  /**
+   * <p>The token to use to retrieve the next page of results. This value is null when there are
+   *          no more results to return.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a Savings Plan filter.</p>
+ * @public
  */
 export interface SavingsPlanFilter {
   /**
    * <p>The filter name.</p>
+   * @public
    */
-  name?: SavingsPlansFilterName | string;
+  name?: SavingsPlansFilterName | undefined;
 
   /**
    * <p>The filter value.</p>
+   * @public
    */
-  values?: string[];
+  values?: string[] | undefined;
 }
 
-export namespace SavingsPlanFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanFilter): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanState {
-  ACTIVE = "active",
-  PAYMENT_FAILED = "payment-failed",
-  PAYMENT_PENDING = "payment-pending",
-  QUEUED = "queued",
-  QUEUED_DELETED = "queued-deleted",
-  RETIRED = "retired",
-}
-
+/**
+ * @public
+ */
 export interface DescribeSavingsPlansRequest {
   /**
    * <p>The Amazon Resource Names (ARN) of the Savings Plans.</p>
+   * @public
    */
-  savingsPlanArns?: string[];
+  savingsPlanArns?: string[] | undefined;
 
   /**
    * <p>The IDs of the Savings Plans.</p>
+   * @public
    */
-  savingsPlanIds?: string[];
+  savingsPlanIds?: string[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve additional results, make another
-   *        call with the returned token value.</p>
+   * <p>The maximum number of results to return with a single call. To retrieve additional
+   *          results, make another call with the returned token value.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
-   * <p>The states.</p>
+   * <p>The current states of the Savings Plans.</p>
+   * @public
    */
-  states?: (SavingsPlanState | string)[];
+  states?: SavingsPlanState[] | undefined;
 
   /**
    * <p>The filters.</p>
+   * @public
    */
-  filters?: SavingsPlanFilter[];
-}
-
-export namespace DescribeSavingsPlansRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanPaymentOption {
-  ALL_UPFRONT = "All Upfront",
-  NO_UPFRONT = "No Upfront",
-  PARTIAL_UPFRONT = "Partial Upfront",
-}
-
-export enum SavingsPlanType {
-  COMPUTE = "Compute",
-  EC2_INSTANCE = "EC2Instance",
-  SAGEMAKER = "SageMaker",
+  filters?: SavingsPlanFilter[] | undefined;
 }
 
 /**
  * <p>Information about a Savings Plan.</p>
+ * @public
  */
 export interface SavingsPlan {
   /**
    * <p>The ID of the offering.</p>
+   * @public
    */
-  offeringId?: string;
+  offeringId?: string | undefined;
 
   /**
    * <p>The ID of the Savings Plan.</p>
+   * @public
    */
-  savingsPlanId?: string;
+  savingsPlanId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Savings Plan.</p>
+   * @public
    */
-  savingsPlanArn?: string;
+  savingsPlanArn?: string | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The start time.</p>
+   * @public
    */
-  start?: string;
+  start?: string | undefined;
 
   /**
    * <p>The end time.</p>
+   * @public
    */
-  end?: string;
+  end?: string | undefined;
 
   /**
-   * <p>The state.</p>
+   * <p>The current state.</p>
+   * @public
    */
-  state?: SavingsPlanState | string;
+  state?: SavingsPlanState | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>The Amazon Web Services Region.</p>
+   * @public
    */
-  region?: string;
+  region?: string | undefined;
 
   /**
    * <p>The EC2 instance family.</p>
+   * @public
    */
-  ec2InstanceFamily?: string;
+  ec2InstanceFamily?: string | undefined;
 
   /**
    * <p>The plan type.</p>
+   * @public
    */
-  savingsPlanType?: SavingsPlanType | string;
+  savingsPlanType?: SavingsPlanType | undefined;
 
   /**
    * <p>The payment option.</p>
+   * @public
    */
-  paymentOption?: SavingsPlanPaymentOption | string;
+  paymentOption?: SavingsPlanPaymentOption | undefined;
 
   /**
    * <p>The product types.</p>
+   * @public
    */
-  productTypes?: (SavingsPlanProductType | string)[];
+  productTypes?: SavingsPlanProductType[] | undefined;
 
   /**
    * <p>The currency.</p>
+   * @public
    */
-  currency?: CurrencyCode | string;
+  currency?: CurrencyCode | undefined;
 
   /**
-   * <p>The hourly commitment, in USD.</p>
+   * <p>The hourly commitment amount in the specified currency.</p>
+   * @public
    */
-  commitment?: string;
+  commitment?: string | undefined;
 
   /**
    * <p>The up-front payment amount.</p>
+   * @public
    */
-  upfrontPaymentAmount?: string;
+  upfrontPaymentAmount?: string | undefined;
 
   /**
    * <p>The recurring payment amount.</p>
+   * @public
    */
-  recurringPaymentAmount?: string;
+  recurringPaymentAmount?: string | undefined;
 
   /**
    * <p>The duration of the term, in seconds.</p>
+   * @public
    */
-  termDurationInSeconds?: number;
+  termDurationInSeconds?: number | undefined;
 
   /**
    * <p>One or more tags.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace SavingsPlan {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlan): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeSavingsPlansResponse {
-  /**
-   * <p>Information about the Savings Plans.</p>
-   */
-  savingsPlans?: SavingsPlan[];
+  tags?: Record<string, string> | undefined;
 
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are no more
-   *        results to return.</p>
+   * <p>The time until when a return for the Savings Plan can be requested. If the
+   *             Savings Plan is not returnable, the field reflects the Savings Plans start time.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace DescribeSavingsPlansResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanRateFilterAttribute {
-  INSTANCE_FAMILY = "instanceFamily",
-  INSTANCE_TYPE = "instanceType",
-  PRODUCT_DESCRIPTION = "productDescription",
-  PRODUCT_ID = "productId",
-  REGION = "region",
-  TENANCY = "tenancy",
+  returnableUntil?: string | undefined;
 }
 
 /**
- * <p>Information about a filter.</p>
+ * @public
+ */
+export interface DescribeSavingsPlansResponse {
+  /**
+   * <p>Information about the Savings Plans.</p>
+   * @public
+   */
+  savingsPlans?: SavingsPlan[] | undefined;
+
+  /**
+   * <p>The token to use to retrieve the next page of results. This value is null when there are
+   *          no more results to return.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a Savings Plan offering rate filter.</p>
+ * @public
  */
 export interface SavingsPlanOfferingRateFilterElement {
   /**
    * <p>The filter name.</p>
+   * @public
    */
-  name?: SavingsPlanRateFilterAttribute | string;
+  name?: SavingsPlanRateFilterAttribute | undefined;
 
   /**
    * <p>The filter values.</p>
+   * @public
    */
-  values?: string[];
-}
-
-export namespace SavingsPlanOfferingRateFilterElement {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOfferingRateFilterElement): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeSavingsPlansOfferingRatesRequest {
-  /**
-   * <p>The IDs of the offerings.</p>
-   */
-  savingsPlanOfferingIds?: string[];
-
-  /**
-   * <p>The payment options.</p>
-   */
-  savingsPlanPaymentOptions?: (SavingsPlanPaymentOption | string)[];
-
-  /**
-   * <p>The plan types.</p>
-   */
-  savingsPlanTypes?: (SavingsPlanType | string)[];
-
-  /**
-   * <p>The AWS products.</p>
-   */
-  products?: (SavingsPlanProductType | string)[];
-
-  /**
-   * <p>The services.</p>
-   */
-  serviceCodes?: (SavingsPlanRateServiceCode | string)[];
-
-  /**
-   * <p>The usage details of the line item in the billing report.</p>
-   */
-  usageTypes?: string[];
-
-  /**
-   * <p>The specific AWS operation for the line item in the billing report.</p>
-   */
-  operations?: string[];
-
-  /**
-   * <p>The filters.</p>
-   */
-  filters?: SavingsPlanOfferingRateFilterElement[];
-
-  /**
-   * <p>The token for the next page of results.</p>
-   */
-  nextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return with a single call. To retrieve additional results, make another
-   *        call with the returned token value.</p>
-   */
-  maxResults?: number;
-}
-
-export namespace DescribeSavingsPlansOfferingRatesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansOfferingRatesRequest): any => ({
-    ...obj,
-  });
+  values?: string[] | undefined;
 }
 
 /**
- * <p>Information about a property.</p>
+ * @public
+ */
+export interface DescribeSavingsPlansOfferingRatesRequest {
+  /**
+   * <p>The IDs of the offerings.</p>
+   * @public
+   */
+  savingsPlanOfferingIds?: string[] | undefined;
+
+  /**
+   * <p>The payment options.</p>
+   * @public
+   */
+  savingsPlanPaymentOptions?: SavingsPlanPaymentOption[] | undefined;
+
+  /**
+   * <p>The plan types.</p>
+   * @public
+   */
+  savingsPlanTypes?: SavingsPlanType[] | undefined;
+
+  /**
+   * <p>The Amazon Web Services products.</p>
+   * @public
+   */
+  products?: SavingsPlanProductType[] | undefined;
+
+  /**
+   * <p>The services.</p>
+   * @public
+   */
+  serviceCodes?: SavingsPlanRateServiceCode[] | undefined;
+
+  /**
+   * <p>The usage details of the line item in the billing report.</p>
+   * @public
+   */
+  usageTypes?: string[] | undefined;
+
+  /**
+   * <p>The specific Amazon Web Services operation for the line item in the billing
+   *          report.</p>
+   * @public
+   */
+  operations?: string[] | undefined;
+
+  /**
+   * <p>The filters.</p>
+   * @public
+   */
+  filters?: SavingsPlanOfferingRateFilterElement[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return with a single call. To retrieve additional
+   *          results, make another call with the returned token value.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * <p>Information about a Savings Plan offering rate property.</p>
+ * @public
  */
 export interface SavingsPlanOfferingRateProperty {
   /**
    * <p>The property name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The property value.</p>
+   * @public
    */
-  value?: string;
-}
-
-export namespace SavingsPlanOfferingRateProperty {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOfferingRateProperty): any => ({
-    ...obj,
-  });
+  value?: string | undefined;
 }
 
 /**
  * <p>Information about a Savings Plan offering.</p>
+ * @public
  */
 export interface ParentSavingsPlanOffering {
   /**
    * <p>The ID of the offering.</p>
+   * @public
    */
-  offeringId?: string;
+  offeringId?: string | undefined;
 
   /**
    * <p>The payment option.</p>
+   * @public
    */
-  paymentOption?: SavingsPlanPaymentOption | string;
+  paymentOption?: SavingsPlanPaymentOption | undefined;
 
   /**
    * <p>The plan type.</p>
+   * @public
    */
-  planType?: SavingsPlanType | string;
+  planType?: SavingsPlanType | undefined;
 
   /**
    * <p>The duration, in seconds.</p>
+   * @public
    */
-  durationSeconds?: number;
+  durationSeconds?: number | undefined;
 
   /**
    * <p>The currency.</p>
+   * @public
    */
-  currency?: CurrencyCode | string;
+  currency?: CurrencyCode | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  planDescription?: string;
-}
-
-export namespace ParentSavingsPlanOffering {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParentSavingsPlanOffering): any => ({
-    ...obj,
-  });
+  planDescription?: string | undefined;
 }
 
 /**
  * <p>Information about a Savings Plan offering rate.</p>
+ * @public
  */
 export interface SavingsPlanOfferingRate {
   /**
    * <p>The Savings Plan offering.</p>
+   * @public
    */
-  savingsPlanOffering?: ParentSavingsPlanOffering;
+  savingsPlanOffering?: ParentSavingsPlanOffering | undefined;
 
   /**
    * <p>The Savings Plan rate.</p>
+   * @public
    */
-  rate?: string;
+  rate?: string | undefined;
 
   /**
    * <p>The unit.</p>
+   * @public
    */
-  unit?: SavingsPlanRateUnit | string;
+  unit?: SavingsPlanRateUnit | undefined;
 
   /**
    * <p>The product type.</p>
+   * @public
    */
-  productType?: SavingsPlanProductType | string;
+  productType?: SavingsPlanProductType | undefined;
 
   /**
    * <p>The service.</p>
+   * @public
    */
-  serviceCode?: SavingsPlanRateServiceCode | string;
+  serviceCode?: SavingsPlanRateServiceCode | undefined;
 
   /**
    * <p>The usage details of the line item in the billing report.</p>
+   * @public
    */
-  usageType?: string;
+  usageType?: string | undefined;
 
   /**
-   * <p>The specific AWS operation for the line item in the billing report.</p>
+   * <p>The specific Amazon Web Services operation for the line item in the billing
+   *          report.</p>
+   * @public
    */
-  operation?: string;
+  operation?: string | undefined;
 
   /**
    * <p>The properties.</p>
+   * @public
    */
-  properties?: SavingsPlanOfferingRateProperty[];
-}
-
-export namespace SavingsPlanOfferingRate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOfferingRate): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeSavingsPlansOfferingRatesResponse {
-  /**
-   * <p>Information about the Savings Plans offering rates.</p>
-   */
-  searchResults?: SavingsPlanOfferingRate[];
-
-  /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are no more
-   *        results to return.</p>
-   */
-  nextToken?: string;
-}
-
-export namespace DescribeSavingsPlansOfferingRatesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansOfferingRatesResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanOfferingFilterAttribute {
-  instanceFamily = "instanceFamily",
-  region = "region",
+  properties?: SavingsPlanOfferingRateProperty[] | undefined;
 }
 
 /**
- * <p>Information about a filter.</p>
+ * @public
+ */
+export interface DescribeSavingsPlansOfferingRatesResponse {
+  /**
+   * <p>Information about the Savings Plans offering rates.</p>
+   * @public
+   */
+  searchResults?: SavingsPlanOfferingRate[] | undefined;
+
+  /**
+   * <p>The token to use to retrieve the next page of results. This value is null when there are
+   *          no more results to return.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a Savings Plan offering filter.</p>
+ * @public
  */
 export interface SavingsPlanOfferingFilterElement {
   /**
    * <p>The filter name.</p>
+   * @public
    */
-  name?: SavingsPlanOfferingFilterAttribute | string;
+  name?: SavingsPlanOfferingFilterAttribute | undefined;
 
   /**
    * <p>The filter values.</p>
+   * @public
    */
-  values?: string[];
-}
-
-export namespace SavingsPlanOfferingFilterElement {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOfferingFilterElement): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeSavingsPlansOfferingsRequest {
-  /**
-   * <p>The IDs of the offerings.</p>
-   */
-  offeringIds?: string[];
-
-  /**
-   * <p>The payment options.</p>
-   */
-  paymentOptions?: (SavingsPlanPaymentOption | string)[];
-
-  /**
-   * <p>The product type.</p>
-   */
-  productType?: SavingsPlanProductType | string;
-
-  /**
-   * <p>The plan type.</p>
-   */
-  planTypes?: (SavingsPlanType | string)[];
-
-  /**
-   * <p>The durations, in seconds.</p>
-   */
-  durations?: number[];
-
-  /**
-   * <p>The currencies.</p>
-   */
-  currencies?: (CurrencyCode | string)[];
-
-  /**
-   * <p>The descriptions.</p>
-   */
-  descriptions?: string[];
-
-  /**
-   * <p>The services.</p>
-   */
-  serviceCodes?: string[];
-
-  /**
-   * <p>The usage details of the line item in the billing report.</p>
-   */
-  usageTypes?: string[];
-
-  /**
-   * <p>The specific AWS operation for the line item in the billing report.</p>
-   */
-  operations?: string[];
-
-  /**
-   * <p>The filters.</p>
-   */
-  filters?: SavingsPlanOfferingFilterElement[];
-
-  /**
-   * <p>The token for the next page of results.</p>
-   */
-  nextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return with a single call. To retrieve additional results, make another
-   *        call with the returned token value.</p>
-   */
-  maxResults?: number;
-}
-
-export namespace DescribeSavingsPlansOfferingsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansOfferingsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SavingsPlanOfferingPropertyKey {
-  INSTANCE_FAMILY = "instanceFamily",
-  REGION = "region",
+  values?: string[] | undefined;
 }
 
 /**
- * <p>Information about a property.</p>
+ * @public
+ */
+export interface DescribeSavingsPlansOfferingsRequest {
+  /**
+   * <p>The IDs of the offerings.</p>
+   * @public
+   */
+  offeringIds?: string[] | undefined;
+
+  /**
+   * <p>The payment options.</p>
+   * @public
+   */
+  paymentOptions?: SavingsPlanPaymentOption[] | undefined;
+
+  /**
+   * <p>The product type.</p>
+   * @public
+   */
+  productType?: SavingsPlanProductType | undefined;
+
+  /**
+   * <p>The plan types.</p>
+   * @public
+   */
+  planTypes?: SavingsPlanType[] | undefined;
+
+  /**
+   * <p>The duration, in seconds.</p>
+   * @public
+   */
+  durations?: number[] | undefined;
+
+  /**
+   * <p>The currencies.</p>
+   * @public
+   */
+  currencies?: CurrencyCode[] | undefined;
+
+  /**
+   * <p>The descriptions.</p>
+   * @public
+   */
+  descriptions?: string[] | undefined;
+
+  /**
+   * <p>The services.</p>
+   * @public
+   */
+  serviceCodes?: string[] | undefined;
+
+  /**
+   * <p>The usage details of the line item in the billing report.</p>
+   * @public
+   */
+  usageTypes?: string[] | undefined;
+
+  /**
+   * <p>The specific Amazon Web Services operation for the line item in the billing
+   *          report.</p>
+   * @public
+   */
+  operations?: string[] | undefined;
+
+  /**
+   * <p>The filters.</p>
+   * @public
+   */
+  filters?: SavingsPlanOfferingFilterElement[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return with a single call. To retrieve additional
+   *          results, make another call with the returned token value.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * <p>Information about a Savings Plan offering property.</p>
+ * @public
  */
 export interface SavingsPlanOfferingProperty {
   /**
    * <p>The property name.</p>
+   * @public
    */
-  name?: SavingsPlanOfferingPropertyKey | string;
+  name?: SavingsPlanOfferingPropertyKey | undefined;
 
   /**
    * <p>The property value.</p>
+   * @public
    */
-  value?: string;
-}
-
-export namespace SavingsPlanOfferingProperty {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOfferingProperty): any => ({
-    ...obj,
-  });
+  value?: string | undefined;
 }
 
 /**
  * <p>Information about a Savings Plan offering.</p>
+ * @public
  */
 export interface SavingsPlanOffering {
   /**
    * <p>The ID of the offering.</p>
+   * @public
    */
-  offeringId?: string;
+  offeringId?: string | undefined;
 
   /**
    * <p>The product type.</p>
+   * @public
    */
-  productTypes?: (SavingsPlanProductType | string)[];
+  productTypes?: SavingsPlanProductType[] | undefined;
 
   /**
    * <p>The plan type.</p>
+   * @public
    */
-  planType?: SavingsPlanType | string;
+  planType?: SavingsPlanType | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The payment option.</p>
+   * @public
    */
-  paymentOption?: SavingsPlanPaymentOption | string;
+  paymentOption?: SavingsPlanPaymentOption | undefined;
 
   /**
    * <p>The duration, in seconds.</p>
+   * @public
    */
-  durationSeconds?: number;
+  durationSeconds?: number | undefined;
 
   /**
    * <p>The currency.</p>
+   * @public
    */
-  currency?: CurrencyCode | string;
+  currency?: CurrencyCode | undefined;
 
   /**
    * <p>The service.</p>
+   * @public
    */
-  serviceCode?: string;
+  serviceCode?: string | undefined;
 
   /**
    * <p>The usage details of the line item in the billing report.</p>
+   * @public
    */
-  usageType?: string;
+  usageType?: string | undefined;
 
   /**
-   * <p>The specific AWS operation for the line item in the billing report.</p>
+   * <p>The specific Amazon Web Services operation for the line item in the billing
+   *          report.</p>
+   * @public
    */
-  operation?: string;
+  operation?: string | undefined;
 
   /**
    * <p>The properties.</p>
+   * @public
    */
-  properties?: SavingsPlanOfferingProperty[];
+  properties?: SavingsPlanOfferingProperty[] | undefined;
 }
 
-export namespace SavingsPlanOffering {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SavingsPlanOffering): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSavingsPlansOfferingsResponse {
   /**
    * <p>Information about the Savings Plans offerings.</p>
+   * @public
    */
-  searchResults?: SavingsPlanOffering[];
+  searchResults?: SavingsPlanOffering[] | undefined;
 
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are no more
-   *        results to return.</p>
+   * <p>The token to use to retrieve the next page of results. This value is null when there are
+   *          no more results to return.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace DescribeSavingsPlansOfferingsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSavingsPlansOfferingsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>Information about the tags.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
+/**
+ * @public
+ */
+export interface ReturnSavingsPlanRequest {
   /**
-   * @internal
+   * <p>The ID of the Savings Plan.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  savingsPlanId: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ReturnSavingsPlanResponse {
+  /**
+   * <p>The ID of the Savings Plan.</p>
+   * @public
+   */
+  savingsPlanId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
-   * <p>One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>One or more tags. For example, \{ "tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
+  tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>The tag keys.</p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
-
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}

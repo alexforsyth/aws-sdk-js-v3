@@ -1,0 +1,22 @@
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Amazon VPC Lattice is a fully managed application networking service that you use to connect, secure, and monitor all of your services across multiple accounts and virtual private clouds (VPCs). Amazon VPC Lattice interconnects your microservices and legacy services within a logical boundary, so that you can discover and manage them more efficiently. For more information, see the <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/">Amazon VPC Lattice User Guide</a> </p>
+ *
+ * @packageDocumentation
+ */
+export * from "./VPCLatticeClient";
+export * from "./VPCLattice";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { VPCLatticeExtensionConfiguration } from "./extensionConfiguration";
+export * from "./commands";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { VPCLatticeServiceException } from "./models/VPCLatticeServiceException";

@@ -1,0 +1,271 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type GetPreferencesCommandInput,
+  type GetPreferencesCommandOutput,
+  GetPreferencesCommand,
+} from "./commands/GetPreferencesCommand";
+import {
+  type GetRecommendationCommandInput,
+  type GetRecommendationCommandOutput,
+  GetRecommendationCommand,
+} from "./commands/GetRecommendationCommand";
+import {
+  type ListEfficiencyMetricsCommandInput,
+  type ListEfficiencyMetricsCommandOutput,
+  ListEfficiencyMetricsCommand,
+} from "./commands/ListEfficiencyMetricsCommand";
+import {
+  type ListEnrollmentStatusesCommandInput,
+  type ListEnrollmentStatusesCommandOutput,
+  ListEnrollmentStatusesCommand,
+} from "./commands/ListEnrollmentStatusesCommand";
+import {
+  type ListRecommendationsCommandInput,
+  type ListRecommendationsCommandOutput,
+  ListRecommendationsCommand,
+} from "./commands/ListRecommendationsCommand";
+import {
+  type ListRecommendationSummariesCommandInput,
+  type ListRecommendationSummariesCommandOutput,
+  ListRecommendationSummariesCommand,
+} from "./commands/ListRecommendationSummariesCommand";
+import {
+  type UpdateEnrollmentStatusCommandInput,
+  type UpdateEnrollmentStatusCommandOutput,
+  UpdateEnrollmentStatusCommand,
+} from "./commands/UpdateEnrollmentStatusCommand";
+import {
+  type UpdatePreferencesCommandInput,
+  type UpdatePreferencesCommandOutput,
+  UpdatePreferencesCommand,
+} from "./commands/UpdatePreferencesCommand";
+import { CostOptimizationHubClient } from "./CostOptimizationHubClient";
+import { paginateListEfficiencyMetrics } from "./pagination/ListEfficiencyMetricsPaginator";
+import { paginateListEnrollmentStatuses } from "./pagination/ListEnrollmentStatusesPaginator";
+import { paginateListRecommendations } from "./pagination/ListRecommendationsPaginator";
+import { paginateListRecommendationSummaries } from "./pagination/ListRecommendationSummariesPaginator";
+
+const commands = {
+  GetPreferencesCommand,
+  GetRecommendationCommand,
+  ListEfficiencyMetricsCommand,
+  ListEnrollmentStatusesCommand,
+  ListRecommendationsCommand,
+  ListRecommendationSummariesCommand,
+  UpdateEnrollmentStatusCommand,
+  UpdatePreferencesCommand,
+};
+const paginators = {
+  paginateListEfficiencyMetrics,
+  paginateListEnrollmentStatuses,
+  paginateListRecommendations,
+  paginateListRecommendationSummaries,
+};
+
+/**
+ * @public
+ */
+export interface CostOptimizationHubRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CostOptimizationHub {
+  /**
+   * @see {@link GetPreferencesCommand}
+   */
+  getPreferences(): Promise<GetPreferencesCommandOutput>;
+  getPreferences(
+    args: GetPreferencesCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<GetPreferencesCommandOutput>;
+  getPreferences(
+    args: GetPreferencesCommandInput,
+    cb: (err: any, data?: GetPreferencesCommandOutput) => void
+  ): void;
+  getPreferences(
+    args: GetPreferencesCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: GetPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationCommand}
+   */
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<GetRecommendationCommandOutput>;
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    cb: (err: any, data?: GetRecommendationCommandOutput) => void
+  ): void;
+  getRecommendation(
+    args: GetRecommendationCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: GetRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEfficiencyMetricsCommand}
+   */
+  listEfficiencyMetrics(
+    args: ListEfficiencyMetricsCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<ListEfficiencyMetricsCommandOutput>;
+  listEfficiencyMetrics(
+    args: ListEfficiencyMetricsCommandInput,
+    cb: (err: any, data?: ListEfficiencyMetricsCommandOutput) => void
+  ): void;
+  listEfficiencyMetrics(
+    args: ListEfficiencyMetricsCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: ListEfficiencyMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnrollmentStatusesCommand}
+   */
+  listEnrollmentStatuses(): Promise<ListEnrollmentStatusesCommandOutput>;
+  listEnrollmentStatuses(
+    args: ListEnrollmentStatusesCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<ListEnrollmentStatusesCommandOutput>;
+  listEnrollmentStatuses(
+    args: ListEnrollmentStatusesCommandInput,
+    cb: (err: any, data?: ListEnrollmentStatusesCommandOutput) => void
+  ): void;
+  listEnrollmentStatuses(
+    args: ListEnrollmentStatusesCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: ListEnrollmentStatusesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   */
+  listRecommendations(): Promise<ListRecommendationsCommandOutput>;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<ListRecommendationsCommandOutput>;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    cb: (err: any, data?: ListRecommendationsCommandOutput) => void
+  ): void;
+  listRecommendations(
+    args: ListRecommendationsCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: ListRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendationSummariesCommand}
+   */
+  listRecommendationSummaries(
+    args: ListRecommendationSummariesCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<ListRecommendationSummariesCommandOutput>;
+  listRecommendationSummaries(
+    args: ListRecommendationSummariesCommandInput,
+    cb: (err: any, data?: ListRecommendationSummariesCommandOutput) => void
+  ): void;
+  listRecommendationSummaries(
+    args: ListRecommendationSummariesCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: ListRecommendationSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEnrollmentStatusCommand}
+   */
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<UpdateEnrollmentStatusCommandOutput>;
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
+  ): void;
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePreferencesCommand}
+   */
+  updatePreferences(): Promise<UpdatePreferencesCommandOutput>;
+  updatePreferences(
+    args: UpdatePreferencesCommandInput,
+    options?: CostOptimizationHubRequestOptions
+  ): Promise<UpdatePreferencesCommandOutput>;
+  updatePreferences(
+    args: UpdatePreferencesCommandInput,
+    cb: (err: any, data?: UpdatePreferencesCommandOutput) => void
+  ): void;
+  updatePreferences(
+    args: UpdatePreferencesCommandInput,
+    options: CostOptimizationHubRequestOptions,
+    cb: (err: any, data?: UpdatePreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEfficiencyMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEfficiencyMetricsCommandOutput}.
+   */
+  paginateListEfficiencyMetrics(
+    args: ListEfficiencyMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEfficiencyMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListEnrollmentStatusesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnrollmentStatusesCommandOutput}.
+   */
+  paginateListEnrollmentStatuses(
+    args?: ListEnrollmentStatusesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnrollmentStatusesCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendationsCommandOutput}.
+   */
+  paginateListRecommendations(
+    args?: ListRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendationSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendationSummariesCommandOutput}.
+   */
+  paginateListRecommendationSummaries(
+    args: ListRecommendationSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendationSummariesCommandOutput>;
+}
+
+/**
+ * <p>You can use the Cost Optimization Hub API to programmatically identify, filter, aggregate, and quantify savings for your cost optimization recommendations across multiple Amazon Web Services Regions and Amazon Web Services accounts in your organization.</p> <p>The Cost Optimization Hub API provides the following endpoint:</p> <ul> <li> <p> https://cost-optimization-hub.us-east-1.amazonaws.com </p> </li> </ul>
+ * @public
+ */
+export class CostOptimizationHub extends CostOptimizationHubClient implements CostOptimizationHub {}
+createAggregatedClient(commands, CostOptimizationHub, { paginators });

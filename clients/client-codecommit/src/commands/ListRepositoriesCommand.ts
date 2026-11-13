@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { ListRepositoriesInput, ListRepositoriesOutput } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListRepositoriesCommand,
-  serializeAws_json1_1ListRepositoriesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRepositoriesInput, ListRepositoriesOutput } from "../models/models_0";
+import { ListRepositories$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRepositoriesCommand}.
+ */
 export interface ListRepositoriesCommandInput extends ListRepositoriesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListRepositoriesCommand}.
+ */
 export interface ListRepositoriesCommandOutput extends ListRepositoriesOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface ListRepositoriesCommandOutput extends ListRepositoriesOutput, _
  * ```javascript
  * import { CodeCommitClient, ListRepositoriesCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, ListRepositoriesCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // ListRepositoriesInput
+ *   nextToken: "STRING_VALUE",
+ *   sortBy: "repositoryName" || "lastModifiedDate",
+ *   order: "ascending" || "descending",
+ * };
  * const command = new ListRepositoriesCommand(input);
  * const response = await client.send(command);
+ * // { // ListRepositoriesOutput
+ * //   repositories: [ // RepositoryNameIdPairList
+ * //     { // RepositoryNameIdPair
+ * //       repositoryName: "STRING_VALUE",
+ * //       repositoryId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRepositoriesCommandInput - {@link ListRepositoriesCommandInput}
+ * @returns {@link ListRepositoriesCommandOutput}
  * @see {@link ListRepositoriesCommandInput} for command's `input` shape.
  * @see {@link ListRepositoriesCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link InvalidContinuationTokenException} (client fault)
+ *  <p>The specified continuation token is not valid.</p>
+ *
+ * @throws {@link InvalidOrderException} (client fault)
+ *  <p>The specified sort order is not valid.</p>
+ *
+ * @throws {@link InvalidSortByException} (client fault)
+ *  <p>The specified sort by value is not valid.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class ListRepositoriesCommand extends $Command<
-  ListRepositoriesCommandInput,
-  ListRepositoriesCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRepositoriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRepositoriesCommandInput, ListRepositoriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "ListRepositoriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRepositoriesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRepositoriesOutput.filterSensitiveLog,
+export class ListRepositoriesCommand extends command<ListRepositoriesCommandInput, ListRepositoriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRepositories",
+  ListRepositories$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRepositoriesInput;
+      output: ListRepositoriesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRepositoriesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRepositoriesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRepositoriesCommandOutput> {
-    return deserializeAws_json1_1ListRepositoriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRepositoriesCommandInput;
+      output: ListRepositoriesCommandOutput;
+    };
+  };
 }

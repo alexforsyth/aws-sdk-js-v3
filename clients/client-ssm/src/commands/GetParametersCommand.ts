@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetParametersRequest, GetParametersResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetParametersCommand,
-  serializeAws_json1_1GetParametersCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetParametersRequest, GetParametersResult } from "../models/models_1";
+import { GetParameters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetParametersCommand}.
+ */
 export interface GetParametersCommandInput extends GetParametersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetParametersCommand}.
+ */
 export interface GetParametersCommandOutput extends GetParametersResult, __MetadataBearer {}
 
 /**
@@ -27,73 +28,100 @@ export interface GetParametersCommandOutput extends GetParametersResult, __Metad
  *             <p>To get information about a single parameter, you can use the <a>GetParameter</a>
  *     operation instead.</p>
  *          </note>
+ *          <important>
+ *             <p>This operation is authorized against the <code>ssm:GetParameters</code> action, not against
+ *      <code>ssm:GetParameter</code>. Denying <code>ssm:GetParameter</code> for a parameter doesn't
+ *     prevent a principal from retrieving that parameter with this operation. To restrict access to a
+ *     parameter value, deny every action that can return it. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html">How Parameter Store
+ *      authorizes parameter retrieval</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+ *          </important>
+ *          <p>Parameter names can't contain spaces. The service removes any spaces specified for the
+ *    beginning or end of a parameter name. If the specified name for a parameter contains spaces
+ *    between characters, the request fails with a <code>ValidationException</code> error.</p>
+ *          <note>
+ *             <p>Parameter Store throughput defines the number of API transactions per second (TPS) that
+ *     Systems Manager can process. This applies to <code>GetParameter</code>,
+ *     <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and
+ *     Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable
+ *     for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently
+ *     or operate at smaller scale can use this default setting without additional cost.</p>
+ *             <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum
+ *     number of supported transactions per second for your account and Region. Increased throughput
+ *     supports applications and workloads that need concurrent access to multiple parameters. If you
+ *     experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For
+ *     more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html">Changing Parameter Store
+ *      throughput</a>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, GetParametersCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, GetParametersCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // GetParametersRequest
+ *   Names: [ // ParameterNameList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   WithDecryption: true || false,
+ * };
  * const command = new GetParametersCommand(input);
  * const response = await client.send(command);
+ * // { // GetParametersResult
+ * //   Parameters: [ // ParameterList
+ * //     { // Parameter
+ * //       Name: "STRING_VALUE",
+ * //       Type: "String" || "StringList" || "SecureString",
+ * //       Value: "STRING_VALUE",
+ * //       Version: Number("long"),
+ * //       Selector: "STRING_VALUE",
+ * //       SourceResult: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       ARN: "STRING_VALUE",
+ * //       DataType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   InvalidParameters: [ // ParameterNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetParametersCommandInput - {@link GetParametersCommandInput}
+ * @returns {@link GetParametersCommandOutput}
  * @see {@link GetParametersCommandInput} for command's `input` shape.
  * @see {@link GetParametersCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidKeyId} (client fault)
+ *  <p>The query key ID isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class GetParametersCommand extends $Command<
-  GetParametersCommandInput,
-  GetParametersCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetParametersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetParametersCommandInput, GetParametersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "GetParametersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetParametersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetParametersResult.filterSensitiveLog,
+export class GetParametersCommand extends command<GetParametersCommandInput, GetParametersCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetParameters",
+  GetParameters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetParametersRequest;
+      output: GetParametersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetParametersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetParametersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetParametersCommandOutput> {
-    return deserializeAws_json1_1GetParametersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetParametersCommandInput;
+      output: GetParametersCommandOutput;
+    };
+  };
 }

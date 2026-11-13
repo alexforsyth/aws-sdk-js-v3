@@ -1,58 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { CodeDeploy } from "../CodeDeploy";
 import { CodeDeployClient } from "../CodeDeployClient";
 import {
   ListDeploymentConfigsCommand,
   ListDeploymentConfigsCommandInput,
   ListDeploymentConfigsCommandOutput,
 } from "../commands/ListDeploymentConfigsCommand";
-import { CodeDeployPaginationConfiguration } from "./Interfaces";
+import type { CodeDeployPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: CodeDeployClient,
-  input: ListDeploymentConfigsCommandInput,
-  ...args: any
-): Promise<ListDeploymentConfigsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListDeploymentConfigsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: CodeDeploy,
-  input: ListDeploymentConfigsCommandInput,
-  ...args: any
-): Promise<ListDeploymentConfigsCommandOutput> => {
-  // @ts-ignore
-  return await client.listDeploymentConfigs(input, ...args);
-};
-export async function* paginateListDeploymentConfigs(
+export const paginateListDeploymentConfigs: (
   config: CodeDeployPaginationConfiguration,
   input: ListDeploymentConfigsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListDeploymentConfigsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListDeploymentConfigsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    if (config.client instanceof CodeDeploy) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof CodeDeployClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected CodeDeploy | CodeDeployClient");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListDeploymentConfigsCommandOutput> = createPaginator<
+  CodeDeployPaginationConfiguration,
+  ListDeploymentConfigsCommandInput,
+  ListDeploymentConfigsCommandOutput
+>(CodeDeployClient, ListDeploymentConfigsCommand, "nextToken", "nextToken", "");

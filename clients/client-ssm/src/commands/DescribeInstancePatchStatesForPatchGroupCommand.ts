@@ -1,110 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeInstancePatchStatesForPatchGroupRequest,
   DescribeInstancePatchStatesForPatchGroupResult,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeInstancePatchStatesForPatchGroupCommand,
-  serializeAws_json1_1DescribeInstancePatchStatesForPatchGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
-
-export interface DescribeInstancePatchStatesForPatchGroupCommandInput
-  extends DescribeInstancePatchStatesForPatchGroupRequest {}
-export interface DescribeInstancePatchStatesForPatchGroupCommandOutput
-  extends DescribeInstancePatchStatesForPatchGroupResult,
-    __MetadataBearer {}
+import { DescribeInstancePatchStatesForPatchGroup$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves the high-level patch state for the instances in the specified patch group.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeInstancePatchStatesForPatchGroupCommand}.
+ */
+export interface DescribeInstancePatchStatesForPatchGroupCommandInput extends DescribeInstancePatchStatesForPatchGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeInstancePatchStatesForPatchGroupCommand}.
+ */
+export interface DescribeInstancePatchStatesForPatchGroupCommandOutput extends DescribeInstancePatchStatesForPatchGroupResult, __MetadataBearer {}
+
+/**
+ * <p>Retrieves the high-level patch state for the managed nodes in the specified patch
+ *    group.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, DescribeInstancePatchStatesForPatchGroupCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribeInstancePatchStatesForPatchGroupCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribeInstancePatchStatesForPatchGroupRequest
+ *   PatchGroup: "STRING_VALUE", // required
+ *   Filters: [ // InstancePatchStateFilterList
+ *     { // InstancePatchStateFilter
+ *       Key: "STRING_VALUE", // required
+ *       Values: [ // InstancePatchStateFilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Type: "Equal" || "NotEqual" || "LessThan" || "GreaterThan", // required
+ *     },
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeInstancePatchStatesForPatchGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeInstancePatchStatesForPatchGroupResult
+ * //   InstancePatchStates: [ // InstancePatchStatesList
+ * //     { // InstancePatchState
+ * //       InstanceId: "STRING_VALUE", // required
+ * //       PatchGroup: "STRING_VALUE", // required
+ * //       BaselineId: "STRING_VALUE", // required
+ * //       SnapshotId: "STRING_VALUE",
+ * //       InstallOverrideList: "STRING_VALUE",
+ * //       OwnerInformation: "STRING_VALUE",
+ * //       InstalledCount: Number("int"),
+ * //       InstalledOtherCount: Number("int"),
+ * //       InstalledPendingRebootCount: Number("int"),
+ * //       InstalledRejectedCount: Number("int"),
+ * //       MissingCount: Number("int"),
+ * //       FailedCount: Number("int"),
+ * //       UnreportedNotApplicableCount: Number("int"),
+ * //       NotApplicableCount: Number("int"),
+ * //       AvailableSecurityUpdateCount: Number("int"),
+ * //       OperationStartTime: new Date("TIMESTAMP"), // required
+ * //       OperationEndTime: new Date("TIMESTAMP"), // required
+ * //       Operation: "Scan" || "Install", // required
+ * //       LastNoRebootInstallOperationTime: new Date("TIMESTAMP"),
+ * //       RebootOption: "RebootIfNeeded" || "NoReboot",
+ * //       CriticalNonCompliantCount: Number("int"),
+ * //       SecurityNonCompliantCount: Number("int"),
+ * //       OtherNonCompliantCount: Number("int"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeInstancePatchStatesForPatchGroupCommandInput - {@link DescribeInstancePatchStatesForPatchGroupCommandInput}
+ * @returns {@link DescribeInstancePatchStatesForPatchGroupCommandOutput}
  * @see {@link DescribeInstancePatchStatesForPatchGroupCommandInput} for command's `input` shape.
  * @see {@link DescribeInstancePatchStatesForPatchGroupCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidFilter} (client fault)
+ *  <p>The filter name isn't valid. Verify that you entered the correct name and try again.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeInstancePatchStatesForPatchGroupCommand extends $Command<
-  DescribeInstancePatchStatesForPatchGroupCommandInput,
-  DescribeInstancePatchStatesForPatchGroupCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeInstancePatchStatesForPatchGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeInstancePatchStatesForPatchGroupCommandInput,
-    DescribeInstancePatchStatesForPatchGroupCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribeInstancePatchStatesForPatchGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeInstancePatchStatesForPatchGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeInstancePatchStatesForPatchGroupResult.filterSensitiveLog,
+export class DescribeInstancePatchStatesForPatchGroupCommand extends command<DescribeInstancePatchStatesForPatchGroupCommandInput, DescribeInstancePatchStatesForPatchGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeInstancePatchStatesForPatchGroup",
+  DescribeInstancePatchStatesForPatchGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstancePatchStatesForPatchGroupRequest;
+      output: DescribeInstancePatchStatesForPatchGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeInstancePatchStatesForPatchGroupCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeInstancePatchStatesForPatchGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeInstancePatchStatesForPatchGroupCommandOutput> {
-    return deserializeAws_json1_1DescribeInstancePatchStatesForPatchGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeInstancePatchStatesForPatchGroupCommandInput;
+      output: DescribeInstancePatchStatesForPatchGroupCommandOutput;
+    };
+  };
 }

@@ -1,290 +1,381 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CreateAppCommandInput, CreateAppCommandOutput } from "./commands/CreateAppCommand";
-import { CreateCampaignCommandInput, CreateCampaignCommandOutput } from "./commands/CreateCampaignCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultPinpointHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { CreateAppCommandInput, CreateAppCommandOutput } from "./commands/CreateAppCommand";
+import type { CreateCampaignCommandInput, CreateCampaignCommandOutput } from "./commands/CreateCampaignCommand";
+import type {
   CreateEmailTemplateCommandInput,
   CreateEmailTemplateCommandOutput,
 } from "./commands/CreateEmailTemplateCommand";
-import { CreateExportJobCommandInput, CreateExportJobCommandOutput } from "./commands/CreateExportJobCommand";
-import { CreateImportJobCommandInput, CreateImportJobCommandOutput } from "./commands/CreateImportJobCommand";
-import {
+import type { CreateExportJobCommandInput, CreateExportJobCommandOutput } from "./commands/CreateExportJobCommand";
+import type { CreateImportJobCommandInput, CreateImportJobCommandOutput } from "./commands/CreateImportJobCommand";
+import type {
   CreateInAppTemplateCommandInput,
   CreateInAppTemplateCommandOutput,
 } from "./commands/CreateInAppTemplateCommand";
-import { CreateJourneyCommandInput, CreateJourneyCommandOutput } from "./commands/CreateJourneyCommand";
-import { CreatePushTemplateCommandInput, CreatePushTemplateCommandOutput } from "./commands/CreatePushTemplateCommand";
-import {
+import type { CreateJourneyCommandInput, CreateJourneyCommandOutput } from "./commands/CreateJourneyCommand";
+import type {
+  CreatePushTemplateCommandInput,
+  CreatePushTemplateCommandOutput,
+} from "./commands/CreatePushTemplateCommand";
+import type {
   CreateRecommenderConfigurationCommandInput,
   CreateRecommenderConfigurationCommandOutput,
 } from "./commands/CreateRecommenderConfigurationCommand";
-import { CreateSegmentCommandInput, CreateSegmentCommandOutput } from "./commands/CreateSegmentCommand";
-import { CreateSmsTemplateCommandInput, CreateSmsTemplateCommandOutput } from "./commands/CreateSmsTemplateCommand";
-import {
+import type { CreateSegmentCommandInput, CreateSegmentCommandOutput } from "./commands/CreateSegmentCommand";
+import type {
+  CreateSmsTemplateCommandInput,
+  CreateSmsTemplateCommandOutput,
+} from "./commands/CreateSmsTemplateCommand";
+import type {
   CreateVoiceTemplateCommandInput,
   CreateVoiceTemplateCommandOutput,
 } from "./commands/CreateVoiceTemplateCommand";
-import { DeleteAdmChannelCommandInput, DeleteAdmChannelCommandOutput } from "./commands/DeleteAdmChannelCommand";
-import { DeleteApnsChannelCommandInput, DeleteApnsChannelCommandOutput } from "./commands/DeleteApnsChannelCommand";
-import {
+import type { DeleteAdmChannelCommandInput, DeleteAdmChannelCommandOutput } from "./commands/DeleteAdmChannelCommand";
+import type {
+  DeleteApnsChannelCommandInput,
+  DeleteApnsChannelCommandOutput,
+} from "./commands/DeleteApnsChannelCommand";
+import type {
   DeleteApnsSandboxChannelCommandInput,
   DeleteApnsSandboxChannelCommandOutput,
 } from "./commands/DeleteApnsSandboxChannelCommand";
-import {
+import type {
   DeleteApnsVoipChannelCommandInput,
   DeleteApnsVoipChannelCommandOutput,
 } from "./commands/DeleteApnsVoipChannelCommand";
-import {
+import type {
   DeleteApnsVoipSandboxChannelCommandInput,
   DeleteApnsVoipSandboxChannelCommandOutput,
 } from "./commands/DeleteApnsVoipSandboxChannelCommand";
-import { DeleteAppCommandInput, DeleteAppCommandOutput } from "./commands/DeleteAppCommand";
-import { DeleteBaiduChannelCommandInput, DeleteBaiduChannelCommandOutput } from "./commands/DeleteBaiduChannelCommand";
-import { DeleteCampaignCommandInput, DeleteCampaignCommandOutput } from "./commands/DeleteCampaignCommand";
-import { DeleteEmailChannelCommandInput, DeleteEmailChannelCommandOutput } from "./commands/DeleteEmailChannelCommand";
-import {
+import type { DeleteAppCommandInput, DeleteAppCommandOutput } from "./commands/DeleteAppCommand";
+import type {
+  DeleteBaiduChannelCommandInput,
+  DeleteBaiduChannelCommandOutput,
+} from "./commands/DeleteBaiduChannelCommand";
+import type { DeleteCampaignCommandInput, DeleteCampaignCommandOutput } from "./commands/DeleteCampaignCommand";
+import type {
+  DeleteEmailChannelCommandInput,
+  DeleteEmailChannelCommandOutput,
+} from "./commands/DeleteEmailChannelCommand";
+import type {
   DeleteEmailTemplateCommandInput,
   DeleteEmailTemplateCommandOutput,
 } from "./commands/DeleteEmailTemplateCommand";
-import { DeleteEndpointCommandInput, DeleteEndpointCommandOutput } from "./commands/DeleteEndpointCommand";
-import { DeleteEventStreamCommandInput, DeleteEventStreamCommandOutput } from "./commands/DeleteEventStreamCommand";
-import { DeleteGcmChannelCommandInput, DeleteGcmChannelCommandOutput } from "./commands/DeleteGcmChannelCommand";
-import {
+import type { DeleteEndpointCommandInput, DeleteEndpointCommandOutput } from "./commands/DeleteEndpointCommand";
+import type {
+  DeleteEventStreamCommandInput,
+  DeleteEventStreamCommandOutput,
+} from "./commands/DeleteEventStreamCommand";
+import type { DeleteGcmChannelCommandInput, DeleteGcmChannelCommandOutput } from "./commands/DeleteGcmChannelCommand";
+import type {
   DeleteInAppTemplateCommandInput,
   DeleteInAppTemplateCommandOutput,
 } from "./commands/DeleteInAppTemplateCommand";
-import { DeleteJourneyCommandInput, DeleteJourneyCommandOutput } from "./commands/DeleteJourneyCommand";
-import { DeletePushTemplateCommandInput, DeletePushTemplateCommandOutput } from "./commands/DeletePushTemplateCommand";
-import {
+import type { DeleteJourneyCommandInput, DeleteJourneyCommandOutput } from "./commands/DeleteJourneyCommand";
+import type {
+  DeletePushTemplateCommandInput,
+  DeletePushTemplateCommandOutput,
+} from "./commands/DeletePushTemplateCommand";
+import type {
   DeleteRecommenderConfigurationCommandInput,
   DeleteRecommenderConfigurationCommandOutput,
 } from "./commands/DeleteRecommenderConfigurationCommand";
-import { DeleteSegmentCommandInput, DeleteSegmentCommandOutput } from "./commands/DeleteSegmentCommand";
-import { DeleteSmsChannelCommandInput, DeleteSmsChannelCommandOutput } from "./commands/DeleteSmsChannelCommand";
-import { DeleteSmsTemplateCommandInput, DeleteSmsTemplateCommandOutput } from "./commands/DeleteSmsTemplateCommand";
-import {
+import type { DeleteSegmentCommandInput, DeleteSegmentCommandOutput } from "./commands/DeleteSegmentCommand";
+import type { DeleteSmsChannelCommandInput, DeleteSmsChannelCommandOutput } from "./commands/DeleteSmsChannelCommand";
+import type {
+  DeleteSmsTemplateCommandInput,
+  DeleteSmsTemplateCommandOutput,
+} from "./commands/DeleteSmsTemplateCommand";
+import type {
   DeleteUserEndpointsCommandInput,
   DeleteUserEndpointsCommandOutput,
 } from "./commands/DeleteUserEndpointsCommand";
-import { DeleteVoiceChannelCommandInput, DeleteVoiceChannelCommandOutput } from "./commands/DeleteVoiceChannelCommand";
-import {
+import type {
+  DeleteVoiceChannelCommandInput,
+  DeleteVoiceChannelCommandOutput,
+} from "./commands/DeleteVoiceChannelCommand";
+import type {
   DeleteVoiceTemplateCommandInput,
   DeleteVoiceTemplateCommandOutput,
 } from "./commands/DeleteVoiceTemplateCommand";
-import { GetAdmChannelCommandInput, GetAdmChannelCommandOutput } from "./commands/GetAdmChannelCommand";
-import { GetApnsChannelCommandInput, GetApnsChannelCommandOutput } from "./commands/GetApnsChannelCommand";
-import {
+import type { GetAdmChannelCommandInput, GetAdmChannelCommandOutput } from "./commands/GetAdmChannelCommand";
+import type { GetApnsChannelCommandInput, GetApnsChannelCommandOutput } from "./commands/GetApnsChannelCommand";
+import type {
   GetApnsSandboxChannelCommandInput,
   GetApnsSandboxChannelCommandOutput,
 } from "./commands/GetApnsSandboxChannelCommand";
-import { GetApnsVoipChannelCommandInput, GetApnsVoipChannelCommandOutput } from "./commands/GetApnsVoipChannelCommand";
-import {
+import type {
+  GetApnsVoipChannelCommandInput,
+  GetApnsVoipChannelCommandOutput,
+} from "./commands/GetApnsVoipChannelCommand";
+import type {
   GetApnsVoipSandboxChannelCommandInput,
   GetApnsVoipSandboxChannelCommandOutput,
 } from "./commands/GetApnsVoipSandboxChannelCommand";
-import { GetAppCommandInput, GetAppCommandOutput } from "./commands/GetAppCommand";
-import {
+import type { GetAppCommandInput, GetAppCommandOutput } from "./commands/GetAppCommand";
+import type {
   GetApplicationDateRangeKpiCommandInput,
   GetApplicationDateRangeKpiCommandOutput,
 } from "./commands/GetApplicationDateRangeKpiCommand";
-import {
+import type {
   GetApplicationSettingsCommandInput,
   GetApplicationSettingsCommandOutput,
 } from "./commands/GetApplicationSettingsCommand";
-import { GetAppsCommandInput, GetAppsCommandOutput } from "./commands/GetAppsCommand";
-import { GetBaiduChannelCommandInput, GetBaiduChannelCommandOutput } from "./commands/GetBaiduChannelCommand";
-import {
+import type { GetAppsCommandInput, GetAppsCommandOutput } from "./commands/GetAppsCommand";
+import type { GetBaiduChannelCommandInput, GetBaiduChannelCommandOutput } from "./commands/GetBaiduChannelCommand";
+import type {
   GetCampaignActivitiesCommandInput,
   GetCampaignActivitiesCommandOutput,
 } from "./commands/GetCampaignActivitiesCommand";
-import { GetCampaignCommandInput, GetCampaignCommandOutput } from "./commands/GetCampaignCommand";
-import {
+import type { GetCampaignCommandInput, GetCampaignCommandOutput } from "./commands/GetCampaignCommand";
+import type {
   GetCampaignDateRangeKpiCommandInput,
   GetCampaignDateRangeKpiCommandOutput,
 } from "./commands/GetCampaignDateRangeKpiCommand";
-import { GetCampaignsCommandInput, GetCampaignsCommandOutput } from "./commands/GetCampaignsCommand";
-import { GetCampaignVersionCommandInput, GetCampaignVersionCommandOutput } from "./commands/GetCampaignVersionCommand";
-import {
+import type { GetCampaignsCommandInput, GetCampaignsCommandOutput } from "./commands/GetCampaignsCommand";
+import type {
+  GetCampaignVersionCommandInput,
+  GetCampaignVersionCommandOutput,
+} from "./commands/GetCampaignVersionCommand";
+import type {
   GetCampaignVersionsCommandInput,
   GetCampaignVersionsCommandOutput,
 } from "./commands/GetCampaignVersionsCommand";
-import { GetChannelsCommandInput, GetChannelsCommandOutput } from "./commands/GetChannelsCommand";
-import { GetEmailChannelCommandInput, GetEmailChannelCommandOutput } from "./commands/GetEmailChannelCommand";
-import { GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput } from "./commands/GetEmailTemplateCommand";
-import { GetEndpointCommandInput, GetEndpointCommandOutput } from "./commands/GetEndpointCommand";
-import { GetEventStreamCommandInput, GetEventStreamCommandOutput } from "./commands/GetEventStreamCommand";
-import { GetExportJobCommandInput, GetExportJobCommandOutput } from "./commands/GetExportJobCommand";
-import { GetExportJobsCommandInput, GetExportJobsCommandOutput } from "./commands/GetExportJobsCommand";
-import { GetGcmChannelCommandInput, GetGcmChannelCommandOutput } from "./commands/GetGcmChannelCommand";
-import { GetImportJobCommandInput, GetImportJobCommandOutput } from "./commands/GetImportJobCommand";
-import { GetImportJobsCommandInput, GetImportJobsCommandOutput } from "./commands/GetImportJobsCommand";
-import { GetInAppMessagesCommandInput, GetInAppMessagesCommandOutput } from "./commands/GetInAppMessagesCommand";
-import { GetInAppTemplateCommandInput, GetInAppTemplateCommandOutput } from "./commands/GetInAppTemplateCommand";
-import { GetJourneyCommandInput, GetJourneyCommandOutput } from "./commands/GetJourneyCommand";
-import {
+import type { GetChannelsCommandInput, GetChannelsCommandOutput } from "./commands/GetChannelsCommand";
+import type { GetEmailChannelCommandInput, GetEmailChannelCommandOutput } from "./commands/GetEmailChannelCommand";
+import type { GetEmailTemplateCommandInput, GetEmailTemplateCommandOutput } from "./commands/GetEmailTemplateCommand";
+import type { GetEndpointCommandInput, GetEndpointCommandOutput } from "./commands/GetEndpointCommand";
+import type { GetEventStreamCommandInput, GetEventStreamCommandOutput } from "./commands/GetEventStreamCommand";
+import type { GetExportJobCommandInput, GetExportJobCommandOutput } from "./commands/GetExportJobCommand";
+import type { GetExportJobsCommandInput, GetExportJobsCommandOutput } from "./commands/GetExportJobsCommand";
+import type { GetGcmChannelCommandInput, GetGcmChannelCommandOutput } from "./commands/GetGcmChannelCommand";
+import type { GetImportJobCommandInput, GetImportJobCommandOutput } from "./commands/GetImportJobCommand";
+import type { GetImportJobsCommandInput, GetImportJobsCommandOutput } from "./commands/GetImportJobsCommand";
+import type { GetInAppMessagesCommandInput, GetInAppMessagesCommandOutput } from "./commands/GetInAppMessagesCommand";
+import type { GetInAppTemplateCommandInput, GetInAppTemplateCommandOutput } from "./commands/GetInAppTemplateCommand";
+import type { GetJourneyCommandInput, GetJourneyCommandOutput } from "./commands/GetJourneyCommand";
+import type {
   GetJourneyDateRangeKpiCommandInput,
   GetJourneyDateRangeKpiCommandOutput,
 } from "./commands/GetJourneyDateRangeKpiCommand";
-import {
+import type {
   GetJourneyExecutionActivityMetricsCommandInput,
   GetJourneyExecutionActivityMetricsCommandOutput,
 } from "./commands/GetJourneyExecutionActivityMetricsCommand";
-import {
+import type {
   GetJourneyExecutionMetricsCommandInput,
   GetJourneyExecutionMetricsCommandOutput,
 } from "./commands/GetJourneyExecutionMetricsCommand";
-import { GetPushTemplateCommandInput, GetPushTemplateCommandOutput } from "./commands/GetPushTemplateCommand";
-import {
+import type {
+  GetJourneyRunExecutionActivityMetricsCommandInput,
+  GetJourneyRunExecutionActivityMetricsCommandOutput,
+} from "./commands/GetJourneyRunExecutionActivityMetricsCommand";
+import type {
+  GetJourneyRunExecutionMetricsCommandInput,
+  GetJourneyRunExecutionMetricsCommandOutput,
+} from "./commands/GetJourneyRunExecutionMetricsCommand";
+import type { GetJourneyRunsCommandInput, GetJourneyRunsCommandOutput } from "./commands/GetJourneyRunsCommand";
+import type { GetPushTemplateCommandInput, GetPushTemplateCommandOutput } from "./commands/GetPushTemplateCommand";
+import type {
   GetRecommenderConfigurationCommandInput,
   GetRecommenderConfigurationCommandOutput,
 } from "./commands/GetRecommenderConfigurationCommand";
-import {
+import type {
   GetRecommenderConfigurationsCommandInput,
   GetRecommenderConfigurationsCommandOutput,
 } from "./commands/GetRecommenderConfigurationsCommand";
-import { GetSegmentCommandInput, GetSegmentCommandOutput } from "./commands/GetSegmentCommand";
-import {
+import type { GetSegmentCommandInput, GetSegmentCommandOutput } from "./commands/GetSegmentCommand";
+import type {
   GetSegmentExportJobsCommandInput,
   GetSegmentExportJobsCommandOutput,
 } from "./commands/GetSegmentExportJobsCommand";
-import {
+import type {
   GetSegmentImportJobsCommandInput,
   GetSegmentImportJobsCommandOutput,
 } from "./commands/GetSegmentImportJobsCommand";
-import { GetSegmentsCommandInput, GetSegmentsCommandOutput } from "./commands/GetSegmentsCommand";
-import { GetSegmentVersionCommandInput, GetSegmentVersionCommandOutput } from "./commands/GetSegmentVersionCommand";
-import { GetSegmentVersionsCommandInput, GetSegmentVersionsCommandOutput } from "./commands/GetSegmentVersionsCommand";
-import { GetSmsChannelCommandInput, GetSmsChannelCommandOutput } from "./commands/GetSmsChannelCommand";
-import { GetSmsTemplateCommandInput, GetSmsTemplateCommandOutput } from "./commands/GetSmsTemplateCommand";
-import { GetUserEndpointsCommandInput, GetUserEndpointsCommandOutput } from "./commands/GetUserEndpointsCommand";
-import { GetVoiceChannelCommandInput, GetVoiceChannelCommandOutput } from "./commands/GetVoiceChannelCommand";
-import { GetVoiceTemplateCommandInput, GetVoiceTemplateCommandOutput } from "./commands/GetVoiceTemplateCommand";
-import { ListJourneysCommandInput, ListJourneysCommandOutput } from "./commands/ListJourneysCommand";
-import {
+import type { GetSegmentsCommandInput, GetSegmentsCommandOutput } from "./commands/GetSegmentsCommand";
+import type {
+  GetSegmentVersionCommandInput,
+  GetSegmentVersionCommandOutput,
+} from "./commands/GetSegmentVersionCommand";
+import type {
+  GetSegmentVersionsCommandInput,
+  GetSegmentVersionsCommandOutput,
+} from "./commands/GetSegmentVersionsCommand";
+import type { GetSmsChannelCommandInput, GetSmsChannelCommandOutput } from "./commands/GetSmsChannelCommand";
+import type { GetSmsTemplateCommandInput, GetSmsTemplateCommandOutput } from "./commands/GetSmsTemplateCommand";
+import type { GetUserEndpointsCommandInput, GetUserEndpointsCommandOutput } from "./commands/GetUserEndpointsCommand";
+import type { GetVoiceChannelCommandInput, GetVoiceChannelCommandOutput } from "./commands/GetVoiceChannelCommand";
+import type { GetVoiceTemplateCommandInput, GetVoiceTemplateCommandOutput } from "./commands/GetVoiceTemplateCommand";
+import type { ListJourneysCommandInput, ListJourneysCommandOutput } from "./commands/ListJourneysCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
-import {
+import type { ListTemplatesCommandInput, ListTemplatesCommandOutput } from "./commands/ListTemplatesCommand";
+import type {
   ListTemplateVersionsCommandInput,
   ListTemplateVersionsCommandOutput,
 } from "./commands/ListTemplateVersionsCommand";
-import {
+import type {
   PhoneNumberValidateCommandInput,
   PhoneNumberValidateCommandOutput,
 } from "./commands/PhoneNumberValidateCommand";
-import { PutEventsCommandInput, PutEventsCommandOutput } from "./commands/PutEventsCommand";
-import { PutEventStreamCommandInput, PutEventStreamCommandOutput } from "./commands/PutEventStreamCommand";
-import { RemoveAttributesCommandInput, RemoveAttributesCommandOutput } from "./commands/RemoveAttributesCommand";
-import { SendMessagesCommandInput, SendMessagesCommandOutput } from "./commands/SendMessagesCommand";
-import { SendUsersMessagesCommandInput, SendUsersMessagesCommandOutput } from "./commands/SendUsersMessagesCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateAdmChannelCommandInput, UpdateAdmChannelCommandOutput } from "./commands/UpdateAdmChannelCommand";
-import { UpdateApnsChannelCommandInput, UpdateApnsChannelCommandOutput } from "./commands/UpdateApnsChannelCommand";
-import {
+import type { PutEventsCommandInput, PutEventsCommandOutput } from "./commands/PutEventsCommand";
+import type { PutEventStreamCommandInput, PutEventStreamCommandOutput } from "./commands/PutEventStreamCommand";
+import type { RemoveAttributesCommandInput, RemoveAttributesCommandOutput } from "./commands/RemoveAttributesCommand";
+import type { SendMessagesCommandInput, SendMessagesCommandOutput } from "./commands/SendMessagesCommand";
+import type { SendOTPMessageCommandInput, SendOTPMessageCommandOutput } from "./commands/SendOTPMessageCommand";
+import type {
+  SendUsersMessagesCommandInput,
+  SendUsersMessagesCommandOutput,
+} from "./commands/SendUsersMessagesCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateAdmChannelCommandInput, UpdateAdmChannelCommandOutput } from "./commands/UpdateAdmChannelCommand";
+import type {
+  UpdateApnsChannelCommandInput,
+  UpdateApnsChannelCommandOutput,
+} from "./commands/UpdateApnsChannelCommand";
+import type {
   UpdateApnsSandboxChannelCommandInput,
   UpdateApnsSandboxChannelCommandOutput,
 } from "./commands/UpdateApnsSandboxChannelCommand";
-import {
+import type {
   UpdateApnsVoipChannelCommandInput,
   UpdateApnsVoipChannelCommandOutput,
 } from "./commands/UpdateApnsVoipChannelCommand";
-import {
+import type {
   UpdateApnsVoipSandboxChannelCommandInput,
   UpdateApnsVoipSandboxChannelCommandOutput,
 } from "./commands/UpdateApnsVoipSandboxChannelCommand";
-import {
+import type {
   UpdateApplicationSettingsCommandInput,
   UpdateApplicationSettingsCommandOutput,
 } from "./commands/UpdateApplicationSettingsCommand";
-import { UpdateBaiduChannelCommandInput, UpdateBaiduChannelCommandOutput } from "./commands/UpdateBaiduChannelCommand";
-import { UpdateCampaignCommandInput, UpdateCampaignCommandOutput } from "./commands/UpdateCampaignCommand";
-import { UpdateEmailChannelCommandInput, UpdateEmailChannelCommandOutput } from "./commands/UpdateEmailChannelCommand";
-import {
+import type {
+  UpdateBaiduChannelCommandInput,
+  UpdateBaiduChannelCommandOutput,
+} from "./commands/UpdateBaiduChannelCommand";
+import type { UpdateCampaignCommandInput, UpdateCampaignCommandOutput } from "./commands/UpdateCampaignCommand";
+import type {
+  UpdateEmailChannelCommandInput,
+  UpdateEmailChannelCommandOutput,
+} from "./commands/UpdateEmailChannelCommand";
+import type {
   UpdateEmailTemplateCommandInput,
   UpdateEmailTemplateCommandOutput,
 } from "./commands/UpdateEmailTemplateCommand";
-import { UpdateEndpointCommandInput, UpdateEndpointCommandOutput } from "./commands/UpdateEndpointCommand";
-import {
+import type { UpdateEndpointCommandInput, UpdateEndpointCommandOutput } from "./commands/UpdateEndpointCommand";
+import type {
   UpdateEndpointsBatchCommandInput,
   UpdateEndpointsBatchCommandOutput,
 } from "./commands/UpdateEndpointsBatchCommand";
-import { UpdateGcmChannelCommandInput, UpdateGcmChannelCommandOutput } from "./commands/UpdateGcmChannelCommand";
-import {
+import type { UpdateGcmChannelCommandInput, UpdateGcmChannelCommandOutput } from "./commands/UpdateGcmChannelCommand";
+import type {
   UpdateInAppTemplateCommandInput,
   UpdateInAppTemplateCommandOutput,
 } from "./commands/UpdateInAppTemplateCommand";
-import { UpdateJourneyCommandInput, UpdateJourneyCommandOutput } from "./commands/UpdateJourneyCommand";
-import { UpdateJourneyStateCommandInput, UpdateJourneyStateCommandOutput } from "./commands/UpdateJourneyStateCommand";
-import { UpdatePushTemplateCommandInput, UpdatePushTemplateCommandOutput } from "./commands/UpdatePushTemplateCommand";
-import {
+import type { UpdateJourneyCommandInput, UpdateJourneyCommandOutput } from "./commands/UpdateJourneyCommand";
+import type {
+  UpdateJourneyStateCommandInput,
+  UpdateJourneyStateCommandOutput,
+} from "./commands/UpdateJourneyStateCommand";
+import type {
+  UpdatePushTemplateCommandInput,
+  UpdatePushTemplateCommandOutput,
+} from "./commands/UpdatePushTemplateCommand";
+import type {
   UpdateRecommenderConfigurationCommandInput,
   UpdateRecommenderConfigurationCommandOutput,
 } from "./commands/UpdateRecommenderConfigurationCommand";
-import { UpdateSegmentCommandInput, UpdateSegmentCommandOutput } from "./commands/UpdateSegmentCommand";
-import { UpdateSmsChannelCommandInput, UpdateSmsChannelCommandOutput } from "./commands/UpdateSmsChannelCommand";
-import { UpdateSmsTemplateCommandInput, UpdateSmsTemplateCommandOutput } from "./commands/UpdateSmsTemplateCommand";
-import {
+import type { UpdateSegmentCommandInput, UpdateSegmentCommandOutput } from "./commands/UpdateSegmentCommand";
+import type { UpdateSmsChannelCommandInput, UpdateSmsChannelCommandOutput } from "./commands/UpdateSmsChannelCommand";
+import type {
+  UpdateSmsTemplateCommandInput,
+  UpdateSmsTemplateCommandOutput,
+} from "./commands/UpdateSmsTemplateCommand";
+import type {
   UpdateTemplateActiveVersionCommandInput,
   UpdateTemplateActiveVersionCommandOutput,
 } from "./commands/UpdateTemplateActiveVersionCommand";
-import { UpdateVoiceChannelCommandInput, UpdateVoiceChannelCommandOutput } from "./commands/UpdateVoiceChannelCommand";
-import {
+import type {
+  UpdateVoiceChannelCommandInput,
+  UpdateVoiceChannelCommandOutput,
+} from "./commands/UpdateVoiceChannelCommand";
+import type {
   UpdateVoiceTemplateCommandInput,
   UpdateVoiceTemplateCommandOutput,
 } from "./commands/UpdateVoiceTemplateCommand";
+import type { VerifyOTPMessageCommandInput, VerifyOTPMessageCommandOutput } from "./commands/VerifyOTPMessageCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CreateAppCommandInput
   | CreateCampaignCommandInput
@@ -353,6 +444,9 @@ export type ServiceInputTypes =
   | GetJourneyDateRangeKpiCommandInput
   | GetJourneyExecutionActivityMetricsCommandInput
   | GetJourneyExecutionMetricsCommandInput
+  | GetJourneyRunExecutionActivityMetricsCommandInput
+  | GetJourneyRunExecutionMetricsCommandInput
+  | GetJourneyRunsCommandInput
   | GetPushTemplateCommandInput
   | GetRecommenderConfigurationCommandInput
   | GetRecommenderConfigurationsCommandInput
@@ -376,6 +470,7 @@ export type ServiceInputTypes =
   | PutEventsCommandInput
   | RemoveAttributesCommandInput
   | SendMessagesCommandInput
+  | SendOTPMessageCommandInput
   | SendUsersMessagesCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
@@ -402,8 +497,12 @@ export type ServiceInputTypes =
   | UpdateSmsTemplateCommandInput
   | UpdateTemplateActiveVersionCommandInput
   | UpdateVoiceChannelCommandInput
-  | UpdateVoiceTemplateCommandInput;
+  | UpdateVoiceTemplateCommandInput
+  | VerifyOTPMessageCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CreateAppCommandOutput
   | CreateCampaignCommandOutput
@@ -472,6 +571,9 @@ export type ServiceOutputTypes =
   | GetJourneyDateRangeKpiCommandOutput
   | GetJourneyExecutionActivityMetricsCommandOutput
   | GetJourneyExecutionMetricsCommandOutput
+  | GetJourneyRunExecutionActivityMetricsCommandOutput
+  | GetJourneyRunExecutionMetricsCommandOutput
+  | GetJourneyRunsCommandOutput
   | GetPushTemplateCommandOutput
   | GetRecommenderConfigurationCommandOutput
   | GetRecommenderConfigurationsCommandOutput
@@ -495,6 +597,7 @@ export type ServiceOutputTypes =
   | PutEventsCommandOutput
   | RemoveAttributesCommandOutput
   | SendMessagesCommandOutput
+  | SendOTPMessageCommandOutput
   | SendUsersMessagesCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
@@ -521,20 +624,24 @@ export type ServiceOutputTypes =
   | UpdateSmsTemplateCommandOutput
   | UpdateTemplateActiveVersionCommandOutput
   | UpdateVoiceChannelCommandOutput
-  | UpdateVoiceTemplateCommandOutput;
+  | UpdateVoiceTemplateCommandOutput
+  | VerifyOTPMessageCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -546,7 +653,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -585,25 +692,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -616,63 +714,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type PinpointClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of PinpointClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type PinpointClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of PinpointClient class constructor that set the region, credentials and other options.
  */
 export interface PinpointClientConfig extends PinpointClientConfigType {}
 
-type PinpointClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of PinpointClient class. This is resolved and normalized from the {@link PinpointClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type PinpointClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of PinpointClient class. This is resolved and normalized from the {@link PinpointClientConfig | constructor configuration interface}.
  */
 export interface PinpointClientResolvedConfig extends PinpointClientResolvedConfigType {}
 
 /**
  * <p>Doc Engage API - Amazon Pinpoint API</p>
+ * @public
  */
 export class PinpointClient extends __Client<
   __HttpHandlerOptions,
@@ -685,22 +833,36 @@ export class PinpointClient extends __Client<
    */
   readonly config: PinpointClientResolvedConfig;
 
-  constructor(configuration: PinpointClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<PinpointClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultPinpointHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: PinpointClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

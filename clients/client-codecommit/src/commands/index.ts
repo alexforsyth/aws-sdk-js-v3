@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./AssociateApprovalRuleTemplateWithRepositoryCommand";
 export * from "./BatchAssociateApprovalRuleTemplateWithRepositoriesCommand";
 export * from "./BatchDescribeMergeConflictsCommand";
@@ -23,6 +24,7 @@ export * from "./DisassociateApprovalRuleTemplateFromRepositoryCommand";
 export * from "./EvaluatePullRequestApprovalRulesCommand";
 export * from "./GetApprovalRuleTemplateCommand";
 export * from "./GetBlobCommand";
+export * from "./GetBlobDifferencesCommand";
 export * from "./GetBranchCommand";
 export * from "./GetCommentCommand";
 export * from "./GetCommentReactionsCommand";
@@ -43,6 +45,7 @@ export * from "./GetRepositoryTriggersCommand";
 export * from "./ListApprovalRuleTemplatesCommand";
 export * from "./ListAssociatedApprovalRuleTemplatesForRepositoryCommand";
 export * from "./ListBranchesCommand";
+export * from "./ListFileCommitHistoryCommand";
 export * from "./ListPullRequestsCommand";
 export * from "./ListRepositoriesCommand";
 export * from "./ListRepositoriesForApprovalRuleTemplateCommand";
@@ -74,4 +77,5 @@ export * from "./UpdatePullRequestDescriptionCommand";
 export * from "./UpdatePullRequestStatusCommand";
 export * from "./UpdatePullRequestTitleCommand";
 export * from "./UpdateRepositoryDescriptionCommand";
+export * from "./UpdateRepositoryEncryptionKeyCommand";
 export * from "./UpdateRepositoryNameCommand";

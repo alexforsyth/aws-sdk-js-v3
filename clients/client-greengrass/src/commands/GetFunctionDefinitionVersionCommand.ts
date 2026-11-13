@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { GetFunctionDefinitionVersionRequest, GetFunctionDefinitionVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFunctionDefinitionVersionCommand,
-  serializeAws_restJson1GetFunctionDefinitionVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFunctionDefinitionVersionRequest, GetFunctionDefinitionVersionResponse } from "../models/models_0";
+import { GetFunctionDefinitionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFunctionDefinitionVersionCommand}.
+ */
 export interface GetFunctionDefinitionVersionCommandInput extends GetFunctionDefinitionVersionRequest {}
-export interface GetFunctionDefinitionVersionCommandOutput
-  extends GetFunctionDefinitionVersionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetFunctionDefinitionVersionCommand}.
+ */
+export interface GetFunctionDefinitionVersionCommandOutput extends GetFunctionDefinitionVersionResponse, __MetadataBearer {}
 
 /**
  * Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
@@ -30,71 +29,101 @@ export interface GetFunctionDefinitionVersionCommandOutput
  * ```javascript
  * import { GreengrassClient, GetFunctionDefinitionVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, GetFunctionDefinitionVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // GetFunctionDefinitionVersionRequest
+ *   FunctionDefinitionId: "STRING_VALUE", // required
+ *   FunctionDefinitionVersionId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetFunctionDefinitionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // GetFunctionDefinitionVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Definition: { // FunctionDefinitionVersion
+ * //     DefaultConfig: { // FunctionDefaultConfig
+ * //       Execution: { // FunctionDefaultExecutionConfig
+ * //         IsolationMode: "GreengrassContainer" || "NoContainer",
+ * //         RunAs: { // FunctionRunAsConfig
+ * //           Gid: Number("int"),
+ * //           Uid: Number("int"),
+ * //         },
+ * //       },
+ * //     },
+ * //     Functions: [ // __listOfFunction
+ * //       { // Function
+ * //         FunctionArn: "STRING_VALUE",
+ * //         FunctionConfiguration: { // FunctionConfiguration
+ * //           EncodingType: "binary" || "json",
+ * //           Environment: { // FunctionConfigurationEnvironment
+ * //             AccessSysfs: true || false,
+ * //             Execution: { // FunctionExecutionConfig
+ * //               IsolationMode: "GreengrassContainer" || "NoContainer",
+ * //               RunAs: {
+ * //                 Gid: Number("int"),
+ * //                 Uid: Number("int"),
+ * //               },
+ * //             },
+ * //             ResourceAccessPolicies: [ // __listOfResourceAccessPolicy
+ * //               { // ResourceAccessPolicy
+ * //                 Permission: "ro" || "rw",
+ * //                 ResourceId: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //             Variables: { // __mapOf__string
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //           ExecArgs: "STRING_VALUE",
+ * //           Executable: "STRING_VALUE",
+ * //           MemorySize: Number("int"),
+ * //           Pinned: true || false,
+ * //           Timeout: Number("int"),
+ * //           FunctionRuntimeOverride: "STRING_VALUE",
+ * //         },
+ * //         Id: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   NextToken: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetFunctionDefinitionVersionCommandInput - {@link GetFunctionDefinitionVersionCommandInput}
+ * @returns {@link GetFunctionDefinitionVersionCommandOutput}
  * @see {@link GetFunctionDefinitionVersionCommandInput} for command's `input` shape.
  * @see {@link GetFunctionDefinitionVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class GetFunctionDefinitionVersionCommand extends $Command<
-  GetFunctionDefinitionVersionCommandInput,
-  GetFunctionDefinitionVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFunctionDefinitionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFunctionDefinitionVersionCommandInput, GetFunctionDefinitionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "GetFunctionDefinitionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFunctionDefinitionVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFunctionDefinitionVersionResponse.filterSensitiveLog,
+export class GetFunctionDefinitionVersionCommand extends command<GetFunctionDefinitionVersionCommandInput, GetFunctionDefinitionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFunctionDefinitionVersion",
+  GetFunctionDefinitionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionDefinitionVersionRequest;
+      output: GetFunctionDefinitionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFunctionDefinitionVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFunctionDefinitionVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetFunctionDefinitionVersionCommandOutput> {
-    return deserializeAws_restJson1GetFunctionDefinitionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFunctionDefinitionVersionCommandInput;
+      output: GetFunctionDefinitionVersionCommandOutput;
+    };
+  };
 }

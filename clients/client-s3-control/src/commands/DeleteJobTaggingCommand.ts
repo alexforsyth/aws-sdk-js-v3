@@ -1,33 +1,39 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteJobTaggingRequest, DeleteJobTaggingResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteJobTaggingCommand,
-  serializeAws_restXmlDeleteJobTaggingCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { DeleteJobTaggingRequest, DeleteJobTaggingResult } from "../models/models_0";
+import { DeleteJobTagging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteJobTaggingCommand}.
+ */
 export interface DeleteJobTaggingCommandInput extends DeleteJobTaggingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteJobTaggingCommand}.
+ */
 export interface DeleteJobTaggingCommandOutput extends DeleteJobTaggingResult, __MetadataBearer {}
 
 /**
- * <p>Removes the entire tag set from the specified S3 Batch Operations job. To use this operation,
- *          you must have permission to perform the <code>s3:DeleteJobTagging</code> action. For more
- *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling access and labeling jobs using tags</a> in the
- *             <i>Amazon S3 User Guide</i>.</p>
- *          <p></p>
+ * <p>Removes the entire tag set from the specified S3 Batch Operations job.</p>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <p>To use the
+ *                   <code>DeleteJobTagging</code> operation, you must have permission to
+ *                   perform the <code>s3:DeleteJobTagging</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
+ *                      access and labeling jobs using tags</a> in the
+ *                   <i>Amazon S3 User Guide</i>.</p>
+ *             </dd>
+ *          </dl>
  *          <p>Related actions include:</p>
  *          <ul>
  *             <li>
@@ -51,69 +57,55 @@ export interface DeleteJobTaggingCommandOutput extends DeleteJobTaggingResult, _
  * ```javascript
  * import { S3ControlClient, DeleteJobTaggingCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, DeleteJobTaggingCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // DeleteJobTaggingRequest
+ *   AccountId: "STRING_VALUE",
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteJobTaggingCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteJobTaggingCommandInput - {@link DeleteJobTaggingCommandInput}
+ * @returns {@link DeleteJobTaggingCommandOutput}
  * @see {@link DeleteJobTaggingCommandInput} for command's `input` shape.
  * @see {@link DeleteJobTaggingCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteJobTaggingCommand extends $Command<
-  DeleteJobTaggingCommandInput,
-  DeleteJobTaggingCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteJobTaggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteJobTaggingCommandInput, DeleteJobTaggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "DeleteJobTaggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteJobTaggingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteJobTaggingResult.filterSensitiveLog,
+export class DeleteJobTaggingCommand extends command<DeleteJobTaggingCommandInput, DeleteJobTaggingCommandOutput>(
+  _ep0,
+  _mw1,
+  "DeleteJobTagging",
+  DeleteJobTagging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteJobTaggingRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteJobTaggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteJobTaggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteJobTaggingCommandOutput> {
-    return deserializeAws_restXmlDeleteJobTaggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteJobTaggingCommandInput;
+      output: DeleteJobTaggingCommandOutput;
+    };
+  };
 }

@@ -1,99 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisassociateAddressRequest } from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateAddressCommand,
-  serializeAws_ec2DisassociateAddressCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateAddressRequest } from "../models/models_5";
+import { DisassociateAddress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateAddressCommand}.
+ */
 export interface DisassociateAddressCommandInput extends DisassociateAddressRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateAddressCommand}.
+ */
 export interface DisassociateAddressCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Disassociates an Elastic IP address from the instance or network interface it's associated with.</p>
- * 			      <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more
- * 			information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP
- * 				Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
  *          <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p>
+ *          <p>An address cannot be disassociated if the all of the following conditions are met:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Network interface has a <code>publicDualStackDnsName</code> publicDnsName</p>
+ *             </li>
+ *             <li>
+ *                <p>Public IPv4 address is the primary public IPv4 address</p>
+ *             </li>
+ *             <li>
+ *                <p>Network interface only has one remaining public IPv4 address</p>
+ *             </li>
+ *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DisassociateAddressCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateAddressCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateAddressRequest
+ *   AssociationId: "STRING_VALUE",
+ *   PublicIp: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new DisassociateAddressCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateAddressCommandInput - {@link DisassociateAddressCommandInput}
+ * @returns {@link DisassociateAddressCommandOutput}
  * @see {@link DisassociateAddressCommandInput} for command's `input` shape.
  * @see {@link DisassociateAddressCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To disassociate an Elastic IP address
+ * ```javascript
+ * // This example disassociates an Elastic IP address from an instance.
+ * const input = {
+ *   AssociationId: "eipassoc-2bebb745"
+ * };
+ * const command = new DisassociateAddressCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisassociateAddressCommand extends $Command<
-  DisassociateAddressCommandInput,
-  DisassociateAddressCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateAddressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateAddressCommandInput, DisassociateAddressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateAddressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateAddressRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DisassociateAddressCommand extends command<DisassociateAddressCommandInput, DisassociateAddressCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateAddress",
+  DisassociateAddress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateAddressRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateAddressCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateAddressCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisassociateAddressCommandOutput> {
-    return deserializeAws_ec2DisassociateAddressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateAddressCommandInput;
+      output: DisassociateAddressCommandOutput;
+    };
+  };
 }

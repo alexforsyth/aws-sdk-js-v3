@@ -1,189 +1,671 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddProfileKeyCommandInput, AddProfileKeyCommandOutput } from "./commands/AddProfileKeyCommand";
-import { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
-import { CreateProfileCommandInput, CreateProfileCommandOutput } from "./commands/CreateProfileCommand";
-import { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
-import { DeleteIntegrationCommandInput, DeleteIntegrationCommandOutput } from "./commands/DeleteIntegrationCommand";
-import { DeleteProfileCommandInput, DeleteProfileCommandOutput } from "./commands/DeleteProfileCommand";
-import { DeleteProfileKeyCommandInput, DeleteProfileKeyCommandOutput } from "./commands/DeleteProfileKeyCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultCustomerProfilesHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddProfileKeyCommandInput, AddProfileKeyCommandOutput } from "./commands/AddProfileKeyCommand";
+import type {
+  AssociateStreamForSegmentsCommandInput,
+  AssociateStreamForSegmentsCommandOutput,
+} from "./commands/AssociateStreamForSegmentsCommand";
+import type {
+  BatchGetCalculatedAttributeForProfileCommandInput,
+  BatchGetCalculatedAttributeForProfileCommandOutput,
+} from "./commands/BatchGetCalculatedAttributeForProfileCommand";
+import type { BatchGetProfileCommandInput, BatchGetProfileCommandOutput } from "./commands/BatchGetProfileCommand";
+import type {
+  BatchPutProfileObjectCommandInput,
+  BatchPutProfileObjectCommandOutput,
+} from "./commands/BatchPutProfileObjectCommand";
+import type {
+  CreateCalculatedAttributeDefinitionCommandInput,
+  CreateCalculatedAttributeDefinitionCommandOutput,
+} from "./commands/CreateCalculatedAttributeDefinitionCommand";
+import type { CreateDomainCommandInput, CreateDomainCommandOutput } from "./commands/CreateDomainCommand";
+import type {
+  CreateDomainLayoutCommandInput,
+  CreateDomainLayoutCommandOutput,
+} from "./commands/CreateDomainLayoutCommand";
+import type {
+  CreateEventStreamCommandInput,
+  CreateEventStreamCommandOutput,
+} from "./commands/CreateEventStreamCommand";
+import type {
+  CreateEventTriggerCommandInput,
+  CreateEventTriggerCommandOutput,
+} from "./commands/CreateEventTriggerCommand";
+import type {
+  CreateIntegrationWorkflowCommandInput,
+  CreateIntegrationWorkflowCommandOutput,
+} from "./commands/CreateIntegrationWorkflowCommand";
+import type { CreateProfileCommandInput, CreateProfileCommandOutput } from "./commands/CreateProfileCommand";
+import type {
+  CreateRecommenderCommandInput,
+  CreateRecommenderCommandOutput,
+} from "./commands/CreateRecommenderCommand";
+import type {
+  CreateRecommenderFilterCommandInput,
+  CreateRecommenderFilterCommandOutput,
+} from "./commands/CreateRecommenderFilterCommand";
+import type {
+  CreateRecommenderSchemaCommandInput,
+  CreateRecommenderSchemaCommandOutput,
+} from "./commands/CreateRecommenderSchemaCommand";
+import type {
+  CreateSegmentDefinitionCommandInput,
+  CreateSegmentDefinitionCommandOutput,
+} from "./commands/CreateSegmentDefinitionCommand";
+import type {
+  CreateSegmentEstimateCommandInput,
+  CreateSegmentEstimateCommandOutput,
+} from "./commands/CreateSegmentEstimateCommand";
+import type {
+  CreateSegmentSnapshotCommandInput,
+  CreateSegmentSnapshotCommandOutput,
+} from "./commands/CreateSegmentSnapshotCommand";
+import type { CreateUploadJobCommandInput, CreateUploadJobCommandOutput } from "./commands/CreateUploadJobCommand";
+import type {
+  DeleteCalculatedAttributeDefinitionCommandInput,
+  DeleteCalculatedAttributeDefinitionCommandOutput,
+} from "./commands/DeleteCalculatedAttributeDefinitionCommand";
+import type { DeleteDomainCommandInput, DeleteDomainCommandOutput } from "./commands/DeleteDomainCommand";
+import type {
+  DeleteDomainLayoutCommandInput,
+  DeleteDomainLayoutCommandOutput,
+} from "./commands/DeleteDomainLayoutCommand";
+import type {
+  DeleteDomainObjectTypeCommandInput,
+  DeleteDomainObjectTypeCommandOutput,
+} from "./commands/DeleteDomainObjectTypeCommand";
+import type {
+  DeleteEventStreamCommandInput,
+  DeleteEventStreamCommandOutput,
+} from "./commands/DeleteEventStreamCommand";
+import type {
+  DeleteEventTriggerCommandInput,
+  DeleteEventTriggerCommandOutput,
+} from "./commands/DeleteEventTriggerCommand";
+import type {
+  DeleteIntegrationCommandInput,
+  DeleteIntegrationCommandOutput,
+} from "./commands/DeleteIntegrationCommand";
+import type { DeleteProfileCommandInput, DeleteProfileCommandOutput } from "./commands/DeleteProfileCommand";
+import type { DeleteProfileKeyCommandInput, DeleteProfileKeyCommandOutput } from "./commands/DeleteProfileKeyCommand";
+import type {
   DeleteProfileObjectCommandInput,
   DeleteProfileObjectCommandOutput,
 } from "./commands/DeleteProfileObjectCommand";
-import {
+import type {
   DeleteProfileObjectTypeCommandInput,
   DeleteProfileObjectTypeCommandOutput,
 } from "./commands/DeleteProfileObjectTypeCommand";
-import { GetDomainCommandInput, GetDomainCommandOutput } from "./commands/GetDomainCommand";
-import { GetIntegrationCommandInput, GetIntegrationCommandOutput } from "./commands/GetIntegrationCommand";
-import { GetMatchesCommandInput, GetMatchesCommandOutput } from "./commands/GetMatchesCommand";
-import {
+import type {
+  DeleteRecommenderCommandInput,
+  DeleteRecommenderCommandOutput,
+} from "./commands/DeleteRecommenderCommand";
+import type {
+  DeleteRecommenderFilterCommandInput,
+  DeleteRecommenderFilterCommandOutput,
+} from "./commands/DeleteRecommenderFilterCommand";
+import type {
+  DeleteRecommenderSchemaCommandInput,
+  DeleteRecommenderSchemaCommandOutput,
+} from "./commands/DeleteRecommenderSchemaCommand";
+import type {
+  DeleteSegmentDefinitionCommandInput,
+  DeleteSegmentDefinitionCommandOutput,
+} from "./commands/DeleteSegmentDefinitionCommand";
+import type {
+  DeleteSegmentSubscriptionCommandInput,
+  DeleteSegmentSubscriptionCommandOutput,
+} from "./commands/DeleteSegmentSubscriptionCommand";
+import type { DeleteWorkflowCommandInput, DeleteWorkflowCommandOutput } from "./commands/DeleteWorkflowCommand";
+import type {
+  DetectProfileObjectTypeCommandInput,
+  DetectProfileObjectTypeCommandOutput,
+} from "./commands/DetectProfileObjectTypeCommand";
+import type {
+  DisassociateStreamForSegmentsCommandInput,
+  DisassociateStreamForSegmentsCommandOutput,
+} from "./commands/DisassociateStreamForSegmentsCommand";
+import type {
+  GetAutoMergingPreviewCommandInput,
+  GetAutoMergingPreviewCommandOutput,
+} from "./commands/GetAutoMergingPreviewCommand";
+import type {
+  GetCalculatedAttributeDefinitionCommandInput,
+  GetCalculatedAttributeDefinitionCommandOutput,
+} from "./commands/GetCalculatedAttributeDefinitionCommand";
+import type {
+  GetCalculatedAttributeForProfileCommandInput,
+  GetCalculatedAttributeForProfileCommandOutput,
+} from "./commands/GetCalculatedAttributeForProfileCommand";
+import type { GetDomainCommandInput, GetDomainCommandOutput } from "./commands/GetDomainCommand";
+import type { GetDomainLayoutCommandInput, GetDomainLayoutCommandOutput } from "./commands/GetDomainLayoutCommand";
+import type {
+  GetDomainObjectTypeCommandInput,
+  GetDomainObjectTypeCommandOutput,
+} from "./commands/GetDomainObjectTypeCommand";
+import type { GetEventStreamCommandInput, GetEventStreamCommandOutput } from "./commands/GetEventStreamCommand";
+import type { GetEventTriggerCommandInput, GetEventTriggerCommandOutput } from "./commands/GetEventTriggerCommand";
+import type {
+  GetIdentityResolutionJobCommandInput,
+  GetIdentityResolutionJobCommandOutput,
+} from "./commands/GetIdentityResolutionJobCommand";
+import type { GetIntegrationCommandInput, GetIntegrationCommandOutput } from "./commands/GetIntegrationCommand";
+import type { GetMatchesCommandInput, GetMatchesCommandOutput } from "./commands/GetMatchesCommand";
+import type {
+  GetObjectTypeAttributeStatisticsCommandInput,
+  GetObjectTypeAttributeStatisticsCommandOutput,
+} from "./commands/GetObjectTypeAttributeStatisticsCommand";
+import type {
+  GetProfileHistoryRecordCommandInput,
+  GetProfileHistoryRecordCommandOutput,
+} from "./commands/GetProfileHistoryRecordCommand";
+import type {
   GetProfileObjectTypeCommandInput,
   GetProfileObjectTypeCommandOutput,
 } from "./commands/GetProfileObjectTypeCommand";
-import {
+import type {
   GetProfileObjectTypeTemplateCommandInput,
   GetProfileObjectTypeTemplateCommandOutput,
 } from "./commands/GetProfileObjectTypeTemplateCommand";
-import {
+import type {
+  GetProfileRecommendationsCommandInput,
+  GetProfileRecommendationsCommandOutput,
+} from "./commands/GetProfileRecommendationsCommand";
+import type { GetRecommenderCommandInput, GetRecommenderCommandOutput } from "./commands/GetRecommenderCommand";
+import type {
+  GetRecommenderFilterCommandInput,
+  GetRecommenderFilterCommandOutput,
+} from "./commands/GetRecommenderFilterCommand";
+import type {
+  GetRecommenderSchemaCommandInput,
+  GetRecommenderSchemaCommandOutput,
+} from "./commands/GetRecommenderSchemaCommand";
+import type {
+  GetSegmentDefinitionCommandInput,
+  GetSegmentDefinitionCommandOutput,
+} from "./commands/GetSegmentDefinitionCommand";
+import type {
+  GetSegmentEstimateCommandInput,
+  GetSegmentEstimateCommandOutput,
+} from "./commands/GetSegmentEstimateCommand";
+import type {
+  GetSegmentMembershipCommandInput,
+  GetSegmentMembershipCommandOutput,
+} from "./commands/GetSegmentMembershipCommand";
+import type {
+  GetSegmentSnapshotCommandInput,
+  GetSegmentSnapshotCommandOutput,
+} from "./commands/GetSegmentSnapshotCommand";
+import type {
+  GetSegmentSubscriptionCommandInput,
+  GetSegmentSubscriptionCommandOutput,
+} from "./commands/GetSegmentSubscriptionCommand";
+import type {
+  GetSimilarProfilesCommandInput,
+  GetSimilarProfilesCommandOutput,
+} from "./commands/GetSimilarProfilesCommand";
+import type {
+  GetStreamForSegmentsCommandInput,
+  GetStreamForSegmentsCommandOutput,
+} from "./commands/GetStreamForSegmentsCommand";
+import type { GetUploadJobCommandInput, GetUploadJobCommandOutput } from "./commands/GetUploadJobCommand";
+import type { GetUploadJobPathCommandInput, GetUploadJobPathCommandOutput } from "./commands/GetUploadJobPathCommand";
+import type { GetWorkflowCommandInput, GetWorkflowCommandOutput } from "./commands/GetWorkflowCommand";
+import type { GetWorkflowStepsCommandInput, GetWorkflowStepsCommandOutput } from "./commands/GetWorkflowStepsCommand";
+import type {
   ListAccountIntegrationsCommandInput,
   ListAccountIntegrationsCommandOutput,
 } from "./commands/ListAccountIntegrationsCommand";
-import { ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
-import { ListIntegrationsCommandInput, ListIntegrationsCommandOutput } from "./commands/ListIntegrationsCommand";
-import { ListProfileObjectsCommandInput, ListProfileObjectsCommandOutput } from "./commands/ListProfileObjectsCommand";
-import {
+import type {
+  ListCalculatedAttributeDefinitionsCommandInput,
+  ListCalculatedAttributeDefinitionsCommandOutput,
+} from "./commands/ListCalculatedAttributeDefinitionsCommand";
+import type {
+  ListCalculatedAttributesForProfileCommandInput,
+  ListCalculatedAttributesForProfileCommandOutput,
+} from "./commands/ListCalculatedAttributesForProfileCommand";
+import type {
+  ListDomainLayoutsCommandInput,
+  ListDomainLayoutsCommandOutput,
+} from "./commands/ListDomainLayoutsCommand";
+import type {
+  ListDomainObjectTypesCommandInput,
+  ListDomainObjectTypesCommandOutput,
+} from "./commands/ListDomainObjectTypesCommand";
+import type { ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
+import type { ListEventStreamsCommandInput, ListEventStreamsCommandOutput } from "./commands/ListEventStreamsCommand";
+import type {
+  ListEventTriggersCommandInput,
+  ListEventTriggersCommandOutput,
+} from "./commands/ListEventTriggersCommand";
+import type {
+  ListIdentityResolutionJobsCommandInput,
+  ListIdentityResolutionJobsCommandOutput,
+} from "./commands/ListIdentityResolutionJobsCommand";
+import type { ListIntegrationsCommandInput, ListIntegrationsCommandOutput } from "./commands/ListIntegrationsCommand";
+import type {
+  ListObjectTypeAttributesCommandInput,
+  ListObjectTypeAttributesCommandOutput,
+} from "./commands/ListObjectTypeAttributesCommand";
+import type {
+  ListObjectTypeAttributeValuesCommandInput,
+  ListObjectTypeAttributeValuesCommandOutput,
+} from "./commands/ListObjectTypeAttributeValuesCommand";
+import type {
+  ListProfileAttributeValuesCommandInput,
+  ListProfileAttributeValuesCommandOutput,
+} from "./commands/ListProfileAttributeValuesCommand";
+import type {
+  ListProfileHistoryRecordsCommandInput,
+  ListProfileHistoryRecordsCommandOutput,
+} from "./commands/ListProfileHistoryRecordsCommand";
+import type {
+  ListProfileObjectsCommandInput,
+  ListProfileObjectsCommandOutput,
+} from "./commands/ListProfileObjectsCommand";
+import type {
   ListProfileObjectTypesCommandInput,
   ListProfileObjectTypesCommandOutput,
 } from "./commands/ListProfileObjectTypesCommand";
-import {
+import type {
   ListProfileObjectTypeTemplatesCommandInput,
   ListProfileObjectTypeTemplatesCommandOutput,
 } from "./commands/ListProfileObjectTypeTemplatesCommand";
-import {
+import type {
+  ListRecommenderFiltersCommandInput,
+  ListRecommenderFiltersCommandOutput,
+} from "./commands/ListRecommenderFiltersCommand";
+import type {
+  ListRecommenderRecipesCommandInput,
+  ListRecommenderRecipesCommandOutput,
+} from "./commands/ListRecommenderRecipesCommand";
+import type {
+  ListRecommenderSchemasCommandInput,
+  ListRecommenderSchemasCommandOutput,
+} from "./commands/ListRecommenderSchemasCommand";
+import type { ListRecommendersCommandInput, ListRecommendersCommandOutput } from "./commands/ListRecommendersCommand";
+import type {
+  ListRuleBasedMatchesCommandInput,
+  ListRuleBasedMatchesCommandOutput,
+} from "./commands/ListRuleBasedMatchesCommand";
+import type {
+  ListSegmentDefinitionsCommandInput,
+  ListSegmentDefinitionsCommandOutput,
+} from "./commands/ListSegmentDefinitionsCommand";
+import type {
+  ListSegmentSubscriptionEventsCommandInput,
+  ListSegmentSubscriptionEventsCommandOutput,
+} from "./commands/ListSegmentSubscriptionEventsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { MergeProfilesCommandInput, MergeProfilesCommandOutput } from "./commands/MergeProfilesCommand";
-import { PutIntegrationCommandInput, PutIntegrationCommandOutput } from "./commands/PutIntegrationCommand";
-import { PutProfileObjectCommandInput, PutProfileObjectCommandOutput } from "./commands/PutProfileObjectCommand";
-import {
+import type { ListUploadJobsCommandInput, ListUploadJobsCommandOutput } from "./commands/ListUploadJobsCommand";
+import type { ListWorkflowsCommandInput, ListWorkflowsCommandOutput } from "./commands/ListWorkflowsCommand";
+import type { MergeProfilesCommandInput, MergeProfilesCommandOutput } from "./commands/MergeProfilesCommand";
+import type {
+  PutDomainObjectTypeCommandInput,
+  PutDomainObjectTypeCommandOutput,
+} from "./commands/PutDomainObjectTypeCommand";
+import type { PutIntegrationCommandInput, PutIntegrationCommandOutput } from "./commands/PutIntegrationCommand";
+import type { PutProfileObjectCommandInput, PutProfileObjectCommandOutput } from "./commands/PutProfileObjectCommand";
+import type {
   PutProfileObjectTypeCommandInput,
   PutProfileObjectTypeCommandOutput,
 } from "./commands/PutProfileObjectTypeCommand";
-import { SearchProfilesCommandInput, SearchProfilesCommandOutput } from "./commands/SearchProfilesCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateDomainCommandInput, UpdateDomainCommandOutput } from "./commands/UpdateDomainCommand";
-import { UpdateProfileCommandInput, UpdateProfileCommandOutput } from "./commands/UpdateProfileCommand";
+import type {
+  PutSegmentSubscriptionCommandInput,
+  PutSegmentSubscriptionCommandOutput,
+} from "./commands/PutSegmentSubscriptionCommand";
+import type { SearchProfilesCommandInput, SearchProfilesCommandOutput } from "./commands/SearchProfilesCommand";
+import type {
+  SearchRecommendationsCommandInput,
+  SearchRecommendationsCommandOutput,
+} from "./commands/SearchRecommendationsCommand";
+import type { StartRecommenderCommandInput, StartRecommenderCommandOutput } from "./commands/StartRecommenderCommand";
+import type { StartUploadJobCommandInput, StartUploadJobCommandOutput } from "./commands/StartUploadJobCommand";
+import type { StopRecommenderCommandInput, StopRecommenderCommandOutput } from "./commands/StopRecommenderCommand";
+import type { StopUploadJobCommandInput, StopUploadJobCommandOutput } from "./commands/StopUploadJobCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateCalculatedAttributeDefinitionCommandInput,
+  UpdateCalculatedAttributeDefinitionCommandOutput,
+} from "./commands/UpdateCalculatedAttributeDefinitionCommand";
+import type { UpdateDomainCommandInput, UpdateDomainCommandOutput } from "./commands/UpdateDomainCommand";
+import type {
+  UpdateDomainLayoutCommandInput,
+  UpdateDomainLayoutCommandOutput,
+} from "./commands/UpdateDomainLayoutCommand";
+import type {
+  UpdateEventTriggerCommandInput,
+  UpdateEventTriggerCommandOutput,
+} from "./commands/UpdateEventTriggerCommand";
+import type { UpdateProfileCommandInput, UpdateProfileCommandOutput } from "./commands/UpdateProfileCommand";
+import type {
+  UpdateRecommenderCommandInput,
+  UpdateRecommenderCommandOutput,
+} from "./commands/UpdateRecommenderCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddProfileKeyCommandInput
+  | AssociateStreamForSegmentsCommandInput
+  | BatchGetCalculatedAttributeForProfileCommandInput
+  | BatchGetProfileCommandInput
+  | BatchPutProfileObjectCommandInput
+  | CreateCalculatedAttributeDefinitionCommandInput
   | CreateDomainCommandInput
+  | CreateDomainLayoutCommandInput
+  | CreateEventStreamCommandInput
+  | CreateEventTriggerCommandInput
+  | CreateIntegrationWorkflowCommandInput
   | CreateProfileCommandInput
+  | CreateRecommenderCommandInput
+  | CreateRecommenderFilterCommandInput
+  | CreateRecommenderSchemaCommandInput
+  | CreateSegmentDefinitionCommandInput
+  | CreateSegmentEstimateCommandInput
+  | CreateSegmentSnapshotCommandInput
+  | CreateUploadJobCommandInput
+  | DeleteCalculatedAttributeDefinitionCommandInput
   | DeleteDomainCommandInput
+  | DeleteDomainLayoutCommandInput
+  | DeleteDomainObjectTypeCommandInput
+  | DeleteEventStreamCommandInput
+  | DeleteEventTriggerCommandInput
   | DeleteIntegrationCommandInput
   | DeleteProfileCommandInput
   | DeleteProfileKeyCommandInput
   | DeleteProfileObjectCommandInput
   | DeleteProfileObjectTypeCommandInput
+  | DeleteRecommenderCommandInput
+  | DeleteRecommenderFilterCommandInput
+  | DeleteRecommenderSchemaCommandInput
+  | DeleteSegmentDefinitionCommandInput
+  | DeleteSegmentSubscriptionCommandInput
+  | DeleteWorkflowCommandInput
+  | DetectProfileObjectTypeCommandInput
+  | DisassociateStreamForSegmentsCommandInput
+  | GetAutoMergingPreviewCommandInput
+  | GetCalculatedAttributeDefinitionCommandInput
+  | GetCalculatedAttributeForProfileCommandInput
   | GetDomainCommandInput
+  | GetDomainLayoutCommandInput
+  | GetDomainObjectTypeCommandInput
+  | GetEventStreamCommandInput
+  | GetEventTriggerCommandInput
+  | GetIdentityResolutionJobCommandInput
   | GetIntegrationCommandInput
   | GetMatchesCommandInput
+  | GetObjectTypeAttributeStatisticsCommandInput
+  | GetProfileHistoryRecordCommandInput
   | GetProfileObjectTypeCommandInput
   | GetProfileObjectTypeTemplateCommandInput
+  | GetProfileRecommendationsCommandInput
+  | GetRecommenderCommandInput
+  | GetRecommenderFilterCommandInput
+  | GetRecommenderSchemaCommandInput
+  | GetSegmentDefinitionCommandInput
+  | GetSegmentEstimateCommandInput
+  | GetSegmentMembershipCommandInput
+  | GetSegmentSnapshotCommandInput
+  | GetSegmentSubscriptionCommandInput
+  | GetSimilarProfilesCommandInput
+  | GetStreamForSegmentsCommandInput
+  | GetUploadJobCommandInput
+  | GetUploadJobPathCommandInput
+  | GetWorkflowCommandInput
+  | GetWorkflowStepsCommandInput
   | ListAccountIntegrationsCommandInput
+  | ListCalculatedAttributeDefinitionsCommandInput
+  | ListCalculatedAttributesForProfileCommandInput
+  | ListDomainLayoutsCommandInput
+  | ListDomainObjectTypesCommandInput
   | ListDomainsCommandInput
+  | ListEventStreamsCommandInput
+  | ListEventTriggersCommandInput
+  | ListIdentityResolutionJobsCommandInput
   | ListIntegrationsCommandInput
+  | ListObjectTypeAttributeValuesCommandInput
+  | ListObjectTypeAttributesCommandInput
+  | ListProfileAttributeValuesCommandInput
+  | ListProfileHistoryRecordsCommandInput
   | ListProfileObjectTypeTemplatesCommandInput
   | ListProfileObjectTypesCommandInput
   | ListProfileObjectsCommandInput
+  | ListRecommenderFiltersCommandInput
+  | ListRecommenderRecipesCommandInput
+  | ListRecommenderSchemasCommandInput
+  | ListRecommendersCommandInput
+  | ListRuleBasedMatchesCommandInput
+  | ListSegmentDefinitionsCommandInput
+  | ListSegmentSubscriptionEventsCommandInput
   | ListTagsForResourceCommandInput
+  | ListUploadJobsCommandInput
+  | ListWorkflowsCommandInput
   | MergeProfilesCommandInput
+  | PutDomainObjectTypeCommandInput
   | PutIntegrationCommandInput
   | PutProfileObjectCommandInput
   | PutProfileObjectTypeCommandInput
+  | PutSegmentSubscriptionCommandInput
   | SearchProfilesCommandInput
+  | SearchRecommendationsCommandInput
+  | StartRecommenderCommandInput
+  | StartUploadJobCommandInput
+  | StopRecommenderCommandInput
+  | StopUploadJobCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateCalculatedAttributeDefinitionCommandInput
   | UpdateDomainCommandInput
-  | UpdateProfileCommandInput;
+  | UpdateDomainLayoutCommandInput
+  | UpdateEventTriggerCommandInput
+  | UpdateProfileCommandInput
+  | UpdateRecommenderCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddProfileKeyCommandOutput
+  | AssociateStreamForSegmentsCommandOutput
+  | BatchGetCalculatedAttributeForProfileCommandOutput
+  | BatchGetProfileCommandOutput
+  | BatchPutProfileObjectCommandOutput
+  | CreateCalculatedAttributeDefinitionCommandOutput
   | CreateDomainCommandOutput
+  | CreateDomainLayoutCommandOutput
+  | CreateEventStreamCommandOutput
+  | CreateEventTriggerCommandOutput
+  | CreateIntegrationWorkflowCommandOutput
   | CreateProfileCommandOutput
+  | CreateRecommenderCommandOutput
+  | CreateRecommenderFilterCommandOutput
+  | CreateRecommenderSchemaCommandOutput
+  | CreateSegmentDefinitionCommandOutput
+  | CreateSegmentEstimateCommandOutput
+  | CreateSegmentSnapshotCommandOutput
+  | CreateUploadJobCommandOutput
+  | DeleteCalculatedAttributeDefinitionCommandOutput
   | DeleteDomainCommandOutput
+  | DeleteDomainLayoutCommandOutput
+  | DeleteDomainObjectTypeCommandOutput
+  | DeleteEventStreamCommandOutput
+  | DeleteEventTriggerCommandOutput
   | DeleteIntegrationCommandOutput
   | DeleteProfileCommandOutput
   | DeleteProfileKeyCommandOutput
   | DeleteProfileObjectCommandOutput
   | DeleteProfileObjectTypeCommandOutput
+  | DeleteRecommenderCommandOutput
+  | DeleteRecommenderFilterCommandOutput
+  | DeleteRecommenderSchemaCommandOutput
+  | DeleteSegmentDefinitionCommandOutput
+  | DeleteSegmentSubscriptionCommandOutput
+  | DeleteWorkflowCommandOutput
+  | DetectProfileObjectTypeCommandOutput
+  | DisassociateStreamForSegmentsCommandOutput
+  | GetAutoMergingPreviewCommandOutput
+  | GetCalculatedAttributeDefinitionCommandOutput
+  | GetCalculatedAttributeForProfileCommandOutput
   | GetDomainCommandOutput
+  | GetDomainLayoutCommandOutput
+  | GetDomainObjectTypeCommandOutput
+  | GetEventStreamCommandOutput
+  | GetEventTriggerCommandOutput
+  | GetIdentityResolutionJobCommandOutput
   | GetIntegrationCommandOutput
   | GetMatchesCommandOutput
+  | GetObjectTypeAttributeStatisticsCommandOutput
+  | GetProfileHistoryRecordCommandOutput
   | GetProfileObjectTypeCommandOutput
   | GetProfileObjectTypeTemplateCommandOutput
+  | GetProfileRecommendationsCommandOutput
+  | GetRecommenderCommandOutput
+  | GetRecommenderFilterCommandOutput
+  | GetRecommenderSchemaCommandOutput
+  | GetSegmentDefinitionCommandOutput
+  | GetSegmentEstimateCommandOutput
+  | GetSegmentMembershipCommandOutput
+  | GetSegmentSnapshotCommandOutput
+  | GetSegmentSubscriptionCommandOutput
+  | GetSimilarProfilesCommandOutput
+  | GetStreamForSegmentsCommandOutput
+  | GetUploadJobCommandOutput
+  | GetUploadJobPathCommandOutput
+  | GetWorkflowCommandOutput
+  | GetWorkflowStepsCommandOutput
   | ListAccountIntegrationsCommandOutput
+  | ListCalculatedAttributeDefinitionsCommandOutput
+  | ListCalculatedAttributesForProfileCommandOutput
+  | ListDomainLayoutsCommandOutput
+  | ListDomainObjectTypesCommandOutput
   | ListDomainsCommandOutput
+  | ListEventStreamsCommandOutput
+  | ListEventTriggersCommandOutput
+  | ListIdentityResolutionJobsCommandOutput
   | ListIntegrationsCommandOutput
+  | ListObjectTypeAttributeValuesCommandOutput
+  | ListObjectTypeAttributesCommandOutput
+  | ListProfileAttributeValuesCommandOutput
+  | ListProfileHistoryRecordsCommandOutput
   | ListProfileObjectTypeTemplatesCommandOutput
   | ListProfileObjectTypesCommandOutput
   | ListProfileObjectsCommandOutput
+  | ListRecommenderFiltersCommandOutput
+  | ListRecommenderRecipesCommandOutput
+  | ListRecommenderSchemasCommandOutput
+  | ListRecommendersCommandOutput
+  | ListRuleBasedMatchesCommandOutput
+  | ListSegmentDefinitionsCommandOutput
+  | ListSegmentSubscriptionEventsCommandOutput
   | ListTagsForResourceCommandOutput
+  | ListUploadJobsCommandOutput
+  | ListWorkflowsCommandOutput
   | MergeProfilesCommandOutput
+  | PutDomainObjectTypeCommandOutput
   | PutIntegrationCommandOutput
   | PutProfileObjectCommandOutput
   | PutProfileObjectTypeCommandOutput
+  | PutSegmentSubscriptionCommandOutput
   | SearchProfilesCommandOutput
+  | SearchRecommendationsCommandOutput
+  | StartRecommenderCommandOutput
+  | StartUploadJobCommandOutput
+  | StopRecommenderCommandOutput
+  | StopUploadJobCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateCalculatedAttributeDefinitionCommandOutput
   | UpdateDomainCommandOutput
-  | UpdateProfileCommandOutput;
+  | UpdateDomainLayoutCommandOutput
+  | UpdateEventTriggerCommandOutput
+  | UpdateProfileCommandOutput
+  | UpdateRecommenderCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -195,7 +677,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -234,25 +716,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -265,72 +738,131 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type CustomerProfilesClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of CustomerProfilesClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type CustomerProfilesClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of CustomerProfilesClient class constructor that set the region, credentials and other options.
  */
 export interface CustomerProfilesClientConfig extends CustomerProfilesClientConfigType {}
 
-type CustomerProfilesClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of CustomerProfilesClient class. This is resolved and normalized from the {@link CustomerProfilesClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type CustomerProfilesClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of CustomerProfilesClient class. This is resolved and normalized from the {@link CustomerProfilesClientConfig | constructor configuration interface}.
  */
 export interface CustomerProfilesClientResolvedConfig extends CustomerProfilesClientResolvedConfigType {}
 
 /**
- * <fullname>Amazon Connect Customer Profiles</fullname>
- *          <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information
- *          about the Amazon Connect Customer Profiles API, including supported operations, data types,
- *          parameters, and schemas.</p>
- *          <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has
- *          pre-built connectors powered by AppFlow that make it easy to combine customer information
- *          from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your
- *          enterprise resource planning (ERP), with contact history from your Amazon Connect contact
- *          center.</p>
- *          <p>If you're new to Amazon Connect , you might find it helpful to also review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html">Amazon Connect Administrator Guide</a>.</p>
+ * <fullname>Connect Customer Customer Profiles</fullname>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html">Customer Profiles actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html">Customer Profiles data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Connect Customer Customer Profiles is a unified customer profile for your contact
+ *          center that has pre-built connectors powered by AppFlow that make it easy to combine
+ *          customer information from third party applications, such as Salesforce (CRM), ServiceNow
+ *          (ITSM), and your enterprise resource planning (ERP), with contact history from your Connect Customer contact center. </p>
+ *          <p>For more information about the Connect Customer Customer Profiles feature, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html">Use Customer
+ *             Profiles</a> in the <i>Connect Customer Administrator's Guide</i>. </p>
+ * @public
  */
 export class CustomerProfilesClient extends __Client<
   __HttpHandlerOptions,
@@ -343,22 +875,36 @@ export class CustomerProfilesClient extends __Client<
    */
   readonly config: CustomerProfilesClientResolvedConfig;
 
-  constructor(configuration: CustomerProfilesClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<CustomerProfilesClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultCustomerProfilesHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: CustomerProfilesClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

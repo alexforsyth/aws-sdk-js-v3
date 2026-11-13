@@ -1,103 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { DeleteDatasetRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteDatasetCommand,
-  serializeAws_json1_1DeleteDatasetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDatasetRequest } from "../models/models_0";
+import { DeleteDataset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDatasetCommand}.
+ */
 export interface DeleteDatasetCommandInput extends DeleteDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDatasetCommand}.
+ */
 export interface DeleteDatasetCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes an Amazon Forecast dataset that was created using the <a>CreateDataset</a>
- *       operation. You can only delete datasets that have a status of <code>ACTIVE</code> or
- *         <code>CREATE_FAILED</code>. To get the status use the <a>DescribeDataset</a>
- *       operation.</p>
+ * <p>Deletes an Amazon Forecast dataset that was created using the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html">CreateDataset</a> operation. You can
+ *       only delete datasets that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>.
+ *       To get the status use the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html">DescribeDataset</a> operation.</p>
  *          <note>
  *             <p>Forecast does not automatically update any dataset groups that contain the deleted dataset.
- *         In order to update the dataset group, use the
- *         operation, omitting the deleted dataset's ARN.</p>
+ *         In order to update the dataset group, use the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html">UpdateDatasetGroup</a> operation,
+ *         omitting the deleted dataset's ARN.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, DeleteDatasetCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DeleteDatasetCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DeleteDatasetRequest
+ *   DatasetArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDatasetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDatasetCommandInput - {@link DeleteDatasetCommandInput}
+ * @returns {@link DeleteDatasetCommandOutput}
  * @see {@link DeleteDatasetCommandInput} for command's `input` shape.
  * @see {@link DeleteDatasetCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDatasetCommand extends $Command<
-  DeleteDatasetCommandInput,
-  DeleteDatasetCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDatasetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDatasetCommandInput, DeleteDatasetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DeleteDatasetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDatasetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteDatasetCommand extends command<DeleteDatasetCommandInput, DeleteDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDataset",
+  DeleteDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDatasetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDatasetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteDatasetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDatasetCommandOutput> {
-    return deserializeAws_json1_1DeleteDatasetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDatasetCommandInput;
+      output: DeleteDatasetCommandOutput;
+    };
+  };
 }

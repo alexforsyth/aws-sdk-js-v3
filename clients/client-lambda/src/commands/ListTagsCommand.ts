@@ -1,92 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { ListTagsRequest, ListTagsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListTagsCommand,
-  serializeAws_restJson1ListTagsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsRequest, ListTagsResponse } from "../models/models_0";
+import { ListTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandInput extends ListTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsCommand}.
+ */
 export interface ListTagsCommandOutput extends ListTagsResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>. You can
- *       also view tags with <a>GetFunction</a>.</p>
+ * <p>Returns a function, event source mapping, or code signing configuration's <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>. You can also view function tags with <a>GetFunction</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, ListTagsCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, ListTagsCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // ListTagsRequest
+ *   Resource: "STRING_VALUE", // required
+ * };
  * const command = new ListTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTagsResponse
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ListTagsCommandInput - {@link ListTagsCommandInput}
+ * @returns {@link ListTagsCommandOutput}
  * @see {@link ListTagsCommandInput} for command's `input` shape.
  * @see {@link ListTagsCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To retrieve the list of tags for a Lambda function
+ * ```javascript
+ * // The following example displays the tags attached to the my-function Lambda function.
+ * const input = {
+ *   Resource: "arn:aws:lambda:us-west-2:123456789012:function:my-function"
+ * };
+ * const command = new ListTagsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Tags: {
+ *     Category: "Web Tools",
+ *     Department: "Sales"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListTagsCommand extends $Command<ListTagsCommandInput, ListTagsCommandOutput, LambdaClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTagsCommandInput, ListTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "ListTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTagsResponse.filterSensitiveLog,
+export class ListTagsCommand extends command<ListTagsCommandInput, ListTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTags",
+  ListTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsRequest;
+      output: ListTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTagsCommandOutput> {
-    return deserializeAws_restJson1ListTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTagsCommandInput;
+      output: ListTagsCommandOutput;
+    };
+  };
 }

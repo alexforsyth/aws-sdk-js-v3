@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import { ListVirtualInterfaceTestHistoryRequest, ListVirtualInterfaceTestHistoryResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListVirtualInterfaceTestHistoryCommand,
-  serializeAws_json1_1ListVirtualInterfaceTestHistoryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListVirtualInterfaceTestHistoryRequest,
+  ListVirtualInterfaceTestHistoryResponse,
+} from "../models/models_0";
+import { ListVirtualInterfaceTestHistory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListVirtualInterfaceTestHistoryCommand}.
+ */
 export interface ListVirtualInterfaceTestHistoryCommandInput extends ListVirtualInterfaceTestHistoryRequest {}
-export interface ListVirtualInterfaceTestHistoryCommandOutput
-  extends ListVirtualInterfaceTestHistoryResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListVirtualInterfaceTestHistoryCommand}.
+ */
+export interface ListVirtualInterfaceTestHistoryCommandOutput extends ListVirtualInterfaceTestHistoryResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the virtual interface failover test history.</p>
@@ -30,74 +32,74 @@ export interface ListVirtualInterfaceTestHistoryCommandOutput
  * ```javascript
  * import { DirectConnectClient, ListVirtualInterfaceTestHistoryCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, ListVirtualInterfaceTestHistoryCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = { // ListVirtualInterfaceTestHistoryRequest
+ *   testId: "STRING_VALUE",
+ *   virtualInterfaceId: "STRING_VALUE",
+ *   bgpPeers: [ // BGPPeerIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   status: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListVirtualInterfaceTestHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // ListVirtualInterfaceTestHistoryResponse
+ * //   virtualInterfaceTestHistory: [ // VirtualInterfaceTestHistoryList
+ * //     { // VirtualInterfaceTestHistory
+ * //       testId: "STRING_VALUE",
+ * //       virtualInterfaceId: "STRING_VALUE",
+ * //       bgpPeers: [ // BGPPeerIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       status: "STRING_VALUE",
+ * //       ownerAccount: "STRING_VALUE",
+ * //       testDurationInMinutes: Number("int"),
+ * //       startTime: new Date("TIMESTAMP"),
+ * //       endTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListVirtualInterfaceTestHistoryCommandInput - {@link ListVirtualInterfaceTestHistoryCommandInput}
+ * @returns {@link ListVirtualInterfaceTestHistoryCommandOutput}
  * @see {@link ListVirtualInterfaceTestHistoryCommandInput} for command's `input` shape.
  * @see {@link ListVirtualInterfaceTestHistoryCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class ListVirtualInterfaceTestHistoryCommand extends $Command<
-  ListVirtualInterfaceTestHistoryCommandInput,
-  ListVirtualInterfaceTestHistoryCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListVirtualInterfaceTestHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListVirtualInterfaceTestHistoryCommandInput, ListVirtualInterfaceTestHistoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "ListVirtualInterfaceTestHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListVirtualInterfaceTestHistoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListVirtualInterfaceTestHistoryResponse.filterSensitiveLog,
+export class ListVirtualInterfaceTestHistoryCommand extends command<ListVirtualInterfaceTestHistoryCommandInput, ListVirtualInterfaceTestHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListVirtualInterfaceTestHistory",
+  ListVirtualInterfaceTestHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVirtualInterfaceTestHistoryRequest;
+      output: ListVirtualInterfaceTestHistoryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListVirtualInterfaceTestHistoryCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListVirtualInterfaceTestHistoryCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListVirtualInterfaceTestHistoryCommandOutput> {
-    return deserializeAws_json1_1ListVirtualInterfaceTestHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListVirtualInterfaceTestHistoryCommandInput;
+      output: ListVirtualInterfaceTestHistoryCommandOutput;
+    };
+  };
 }

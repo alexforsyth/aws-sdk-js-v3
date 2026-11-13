@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { ListInputDeviceTransfersRequest, ListInputDeviceTransfersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListInputDeviceTransfersCommand,
-  serializeAws_restJson1ListInputDeviceTransfersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInputDeviceTransfersRequest, ListInputDeviceTransfersResponse } from "../models/models_1";
+import { ListInputDeviceTransfers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInputDeviceTransfersCommand}.
+ */
 export interface ListInputDeviceTransfersCommandInput extends ListInputDeviceTransfersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInputDeviceTransfersCommand}.
+ */
 export interface ListInputDeviceTransfersCommandOutput extends ListInputDeviceTransfersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface ListInputDeviceTransfersCommandOutput extends ListInputDeviceTr
  * ```javascript
  * import { MediaLiveClient, ListInputDeviceTransfersCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, ListInputDeviceTransfersCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // ListInputDeviceTransfersRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   TransferType: "STRING_VALUE", // required
+ * };
  * const command = new ListInputDeviceTransfersCommand(input);
  * const response = await client.send(command);
+ * // { // ListInputDeviceTransfersResponse
+ * //   InputDeviceTransfers: [ // __listOfTransferringInputDeviceSummary
+ * //     { // TransferringInputDeviceSummary
+ * //       Id: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       TargetCustomerId: "STRING_VALUE",
+ * //       TransferType: "OUTGOING" || "INCOMING",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInputDeviceTransfersCommandInput - {@link ListInputDeviceTransfersCommandInput}
+ * @returns {@link ListInputDeviceTransfersCommandOutput}
  * @see {@link ListInputDeviceTransfersCommandInput} for command's `input` shape.
  * @see {@link ListInputDeviceTransfersCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  Placeholder documentation for UnprocessableEntityException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class ListInputDeviceTransfersCommand extends $Command<
-  ListInputDeviceTransfersCommandInput,
-  ListInputDeviceTransfersCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInputDeviceTransfersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInputDeviceTransfersCommandInput, ListInputDeviceTransfersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "ListInputDeviceTransfersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInputDeviceTransfersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListInputDeviceTransfersResponse.filterSensitiveLog,
+export class ListInputDeviceTransfersCommand extends command<ListInputDeviceTransfersCommandInput, ListInputDeviceTransfersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInputDeviceTransfers",
+  ListInputDeviceTransfers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInputDeviceTransfersRequest;
+      output: ListInputDeviceTransfersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInputDeviceTransfersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListInputDeviceTransfersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInputDeviceTransfersCommandOutput> {
-    return deserializeAws_restJson1ListInputDeviceTransfersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInputDeviceTransfersCommandInput;
+      output: ListInputDeviceTransfersCommandOutput;
+    };
+  };
 }

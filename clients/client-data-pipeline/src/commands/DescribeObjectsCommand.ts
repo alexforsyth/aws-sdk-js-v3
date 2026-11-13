@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { DescribeObjectsInput, DescribeObjectsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeObjectsCommand,
-  serializeAws_json1_1DescribeObjectsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeObjectsInput, DescribeObjectsOutput } from "../models/models_0";
+import { DescribeObjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeObjectsCommand}.
+ */
 export interface DescribeObjectsCommandInput extends DescribeObjectsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeObjectsCommand}.
+ */
 export interface DescribeObjectsCommandOutput extends DescribeObjectsOutput, __MetadataBearer {}
 
 /**
@@ -36,10 +37,10 @@ export interface DescribeObjectsCommandOutput extends DescribeObjectsOutput, __M
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"pipelineId": "df-06372391ZG65EXAMPLE",
+ * \{"pipelineId": "df-06372391ZG65EXAMPLE",
  *  "objectIds":
  *   ["Schedule"],
- *  "evaluateExpressions": true}
+ *  "evaluateExpressions": true\}
  *
  *             </request>
  *
@@ -50,34 +51,34 @@ export interface DescribeObjectsCommandOutput extends DescribeObjectsOutput, __M
  * Content-Length: 1488
  * Date: Mon, 12 Nov 2012 17:50:53 GMT
  *
- * {"hasMoreResults": false,
+ * \{"hasMoreResults": false,
  *  "pipelineObjects":
  *   [
- *     {"fields":
+ *     \{"fields":
  *       [
- *         {"key": "startDateTime",
- *          "stringValue": "2012-12-12T00:00:00"},
- *         {"key": "parent",
- *          "refValue": "Default"},
- *         {"key": "@sphere",
- *          "stringValue": "COMPONENT"},
- *         {"key": "type",
- *          "stringValue": "Schedule"},
- *         {"key": "period",
- *          "stringValue": "1 hour"},
- *         {"key": "endDateTime",
- *          "stringValue": "2012-12-21T18:00:00"},
- *         {"key": "@version",
- *          "stringValue": "1"},
- *         {"key": "@status",
- *          "stringValue": "PENDING"},
- *         {"key": "@pipelineId",
- *          "stringValue": "df-06372391ZG65EXAMPLE"}
+ *         \{"key": "startDateTime",
+ *          "stringValue": "2012-12-12T00:00:00"\},
+ *         \{"key": "parent",
+ *          "refValue": "Default"\},
+ *         \{"key": "@sphere",
+ *          "stringValue": "COMPONENT"\},
+ *         \{"key": "type",
+ *          "stringValue": "Schedule"\},
+ *         \{"key": "period",
+ *          "stringValue": "1 hour"\},
+ *         \{"key": "endDateTime",
+ *          "stringValue": "2012-12-21T18:00:00"\},
+ *         \{"key": "@version",
+ *          "stringValue": "1"\},
+ *         \{"key": "@status",
+ *          "stringValue": "PENDING"\},
+ *         \{"key": "@pipelineId",
+ *          "stringValue": "df-06372391ZG65EXAMPLE"\}
  *       ],
  *      "id": "Schedule",
- *      "name": "Schedule"}
+ *      "name": "Schedule"\}
  *   ]
- * }
+ * \}
  *
  *             </response>
  *         </examples>
@@ -86,68 +87,78 @@ export interface DescribeObjectsCommandOutput extends DescribeObjectsOutput, __M
  * ```javascript
  * import { DataPipelineClient, DescribeObjectsCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, DescribeObjectsCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // DescribeObjectsInput
+ *   pipelineId: "STRING_VALUE", // required
+ *   objectIds: [ // idList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   evaluateExpressions: true || false,
+ *   marker: "STRING_VALUE",
+ * };
  * const command = new DescribeObjectsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeObjectsOutput
+ * //   pipelineObjects: [ // PipelineObjectList // required
+ * //     { // PipelineObject
+ * //       id: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       fields: [ // fieldList // required
+ * //         { // Field
+ * //           key: "STRING_VALUE", // required
+ * //           stringValue: "STRING_VALUE",
+ * //           refValue: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   marker: "STRING_VALUE",
+ * //   hasMoreResults: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeObjectsCommandInput - {@link DescribeObjectsCommandInput}
+ * @returns {@link DescribeObjectsCommandOutput}
  * @see {@link DescribeObjectsCommandInput} for command's `input` shape.
  * @see {@link DescribeObjectsCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link PipelineDeletedException} (client fault)
+ *  <p>The specified pipeline has been deleted.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeObjectsCommand extends $Command<
-  DescribeObjectsCommandInput,
-  DescribeObjectsCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeObjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeObjectsCommandInput, DescribeObjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "DescribeObjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeObjectsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeObjectsOutput.filterSensitiveLog,
+export class DescribeObjectsCommand extends command<DescribeObjectsCommandInput, DescribeObjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeObjects",
+  DescribeObjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeObjectsInput;
+      output: DescribeObjectsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeObjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeObjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeObjectsCommandOutput> {
-    return deserializeAws_json1_1DescribeObjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeObjectsCommandInput;
+      output: DescribeObjectsCommandOutput;
+    };
+  };
 }

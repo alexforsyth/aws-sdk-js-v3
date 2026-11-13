@@ -1,0 +1,252 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type ActivateEmailContactCommandInput,
+  type ActivateEmailContactCommandOutput,
+  ActivateEmailContactCommand,
+} from "./commands/ActivateEmailContactCommand";
+import {
+  type CreateEmailContactCommandInput,
+  type CreateEmailContactCommandOutput,
+  CreateEmailContactCommand,
+} from "./commands/CreateEmailContactCommand";
+import {
+  type DeleteEmailContactCommandInput,
+  type DeleteEmailContactCommandOutput,
+  DeleteEmailContactCommand,
+} from "./commands/DeleteEmailContactCommand";
+import {
+  type GetEmailContactCommandInput,
+  type GetEmailContactCommandOutput,
+  GetEmailContactCommand,
+} from "./commands/GetEmailContactCommand";
+import {
+  type ListEmailContactsCommandInput,
+  type ListEmailContactsCommandOutput,
+  ListEmailContactsCommand,
+} from "./commands/ListEmailContactsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type SendActivationCodeCommandInput,
+  type SendActivationCodeCommandOutput,
+  SendActivationCodeCommand,
+} from "./commands/SendActivationCodeCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import { NotificationsContactsClient } from "./NotificationsContactsClient";
+import { paginateListEmailContacts } from "./pagination/ListEmailContactsPaginator";
+
+const commands = {
+  ActivateEmailContactCommand,
+  CreateEmailContactCommand,
+  DeleteEmailContactCommand,
+  GetEmailContactCommand,
+  ListEmailContactsCommand,
+  ListTagsForResourceCommand,
+  SendActivationCodeCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateListEmailContacts,
+};
+
+/**
+ * @public
+ */
+export interface NotificationsContactsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface NotificationsContacts {
+  /**
+   * @see {@link ActivateEmailContactCommand}
+   */
+  activateEmailContact(
+    args: ActivateEmailContactCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<ActivateEmailContactCommandOutput>;
+  activateEmailContact(
+    args: ActivateEmailContactCommandInput,
+    cb: (err: any, data?: ActivateEmailContactCommandOutput) => void
+  ): void;
+  activateEmailContact(
+    args: ActivateEmailContactCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: ActivateEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEmailContactCommand}
+   */
+  createEmailContact(
+    args: CreateEmailContactCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<CreateEmailContactCommandOutput>;
+  createEmailContact(
+    args: CreateEmailContactCommandInput,
+    cb: (err: any, data?: CreateEmailContactCommandOutput) => void
+  ): void;
+  createEmailContact(
+    args: CreateEmailContactCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: CreateEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEmailContactCommand}
+   */
+  deleteEmailContact(
+    args: DeleteEmailContactCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<DeleteEmailContactCommandOutput>;
+  deleteEmailContact(
+    args: DeleteEmailContactCommandInput,
+    cb: (err: any, data?: DeleteEmailContactCommandOutput) => void
+  ): void;
+  deleteEmailContact(
+    args: DeleteEmailContactCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: DeleteEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEmailContactCommand}
+   */
+  getEmailContact(
+    args: GetEmailContactCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<GetEmailContactCommandOutput>;
+  getEmailContact(
+    args: GetEmailContactCommandInput,
+    cb: (err: any, data?: GetEmailContactCommandOutput) => void
+  ): void;
+  getEmailContact(
+    args: GetEmailContactCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: GetEmailContactCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEmailContactsCommand}
+   */
+  listEmailContacts(): Promise<ListEmailContactsCommandOutput>;
+  listEmailContacts(
+    args: ListEmailContactsCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<ListEmailContactsCommandOutput>;
+  listEmailContacts(
+    args: ListEmailContactsCommandInput,
+    cb: (err: any, data?: ListEmailContactsCommandOutput) => void
+  ): void;
+  listEmailContacts(
+    args: ListEmailContactsCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: ListEmailContactsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendActivationCodeCommand}
+   */
+  sendActivationCode(
+    args: SendActivationCodeCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<SendActivationCodeCommandOutput>;
+  sendActivationCode(
+    args: SendActivationCodeCommandInput,
+    cb: (err: any, data?: SendActivationCodeCommandOutput) => void
+  ): void;
+  sendActivationCode(
+    args: SendActivationCodeCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: SendActivationCodeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: NotificationsContactsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: NotificationsContactsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEmailContactsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEmailContactsCommandOutput}.
+   */
+  paginateListEmailContacts(
+    args?: ListEmailContactsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEmailContactsCommandOutput>;
+}
+
+/**
+ * <p>AWS User Notifications Contacts is a service that allows you to create and manage email contacts for AWS User Notifications. The AWS User Notifications Contacts API Reference provides descriptions, API request parameters, and the JSON response for all email contact related API actions.</p>
+ * @public
+ */
+export class NotificationsContacts extends NotificationsContactsClient implements NotificationsContacts {}
+createAggregatedClient(commands, NotificationsContacts, { paginators });

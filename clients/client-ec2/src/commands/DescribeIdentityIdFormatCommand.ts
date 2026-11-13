@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeIdentityIdFormatRequest, DescribeIdentityIdFormatResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeIdentityIdFormatCommand,
-  serializeAws_ec2DescribeIdentityIdFormatCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeIdentityIdFormatRequest, DescribeIdentityIdFormatResult } from "../models/models_4";
+import { DescribeIdentityIdFormat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeIdentityIdFormatCommand}.
+ */
 export interface DescribeIdentityIdFormatCommandInput extends DescribeIdentityIdFormatRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeIdentityIdFormatCommand}.
+ */
 export interface DescribeIdentityIdFormatCommandOutput extends DescribeIdentityIdFormatResult, __MetadataBearer {}
 
 /**
@@ -46,68 +47,54 @@ export interface DescribeIdentityIdFormatCommandOutput extends DescribeIdentityI
  * ```javascript
  * import { EC2Client, DescribeIdentityIdFormatCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeIdentityIdFormatCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeIdentityIdFormatRequest
+ *   Resource: "STRING_VALUE",
+ *   PrincipalArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeIdentityIdFormatCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeIdentityIdFormatResult
+ * //   Statuses: [ // IdFormatList
+ * //     { // IdFormat
+ * //       Deadline: new Date("TIMESTAMP"),
+ * //       Resource: "STRING_VALUE",
+ * //       UseLongIds: true || false,
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeIdentityIdFormatCommandInput - {@link DescribeIdentityIdFormatCommandInput}
+ * @returns {@link DescribeIdentityIdFormatCommandOutput}
  * @see {@link DescribeIdentityIdFormatCommandInput} for command's `input` shape.
  * @see {@link DescribeIdentityIdFormatCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeIdentityIdFormatCommand extends $Command<
-  DescribeIdentityIdFormatCommandInput,
-  DescribeIdentityIdFormatCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeIdentityIdFormatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeIdentityIdFormatCommandInput, DescribeIdentityIdFormatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeIdentityIdFormatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeIdentityIdFormatRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeIdentityIdFormatResult.filterSensitiveLog,
+export class DescribeIdentityIdFormatCommand extends command<DescribeIdentityIdFormatCommandInput, DescribeIdentityIdFormatCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeIdentityIdFormat",
+  DescribeIdentityIdFormat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIdentityIdFormatRequest;
+      output: DescribeIdentityIdFormatResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeIdentityIdFormatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeIdentityIdFormatCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeIdentityIdFormatCommandOutput> {
-    return deserializeAws_ec2DescribeIdentityIdFormatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeIdentityIdFormatCommandInput;
+      output: DescribeIdentityIdFormatCommandOutput;
+    };
+  };
 }

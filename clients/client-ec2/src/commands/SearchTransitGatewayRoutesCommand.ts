@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { SearchTransitGatewayRoutesRequest, SearchTransitGatewayRoutesResult } from "../models/models_5";
-import {
-  deserializeAws_ec2SearchTransitGatewayRoutesCommand,
-  serializeAws_ec2SearchTransitGatewayRoutesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchTransitGatewayRoutesRequest, SearchTransitGatewayRoutesResult } from "../models/models_8";
+import { SearchTransitGatewayRoutes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchTransitGatewayRoutesCommand}.
+ */
 export interface SearchTransitGatewayRoutesCommandInput extends SearchTransitGatewayRoutesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchTransitGatewayRoutesCommand}.
+ */
 export interface SearchTransitGatewayRoutesCommandOutput extends SearchTransitGatewayRoutesResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,75 @@ export interface SearchTransitGatewayRoutesCommandOutput extends SearchTransitGa
  * ```javascript
  * import { EC2Client, SearchTransitGatewayRoutesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, SearchTransitGatewayRoutesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // SearchTransitGatewayRoutesRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList // required
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   DryRun: true || false,
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new SearchTransitGatewayRoutesCommand(input);
  * const response = await client.send(command);
+ * // { // SearchTransitGatewayRoutesResult
+ * //   Routes: [ // TransitGatewayRouteList
+ * //     { // TransitGatewayRoute
+ * //       DestinationCidrBlock: "STRING_VALUE",
+ * //       PrefixListId: "STRING_VALUE",
+ * //       TransitGatewayRouteTableAnnouncementId: "STRING_VALUE",
+ * //       TransitGatewayAttachments: [ // TransitGatewayRouteAttachmentList
+ * //         { // TransitGatewayRouteAttachment
+ * //           ResourceId: "STRING_VALUE",
+ * //           TransitGatewayAttachmentId: "STRING_VALUE",
+ * //           ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //         },
+ * //       ],
+ * //       Type: "static" || "propagated" || "system",
+ * //       State: "pending" || "active" || "blackhole" || "deleting" || "deleted",
+ * //     },
+ * //   ],
+ * //   AdditionalRoutesAvailable: true || false,
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchTransitGatewayRoutesCommandInput - {@link SearchTransitGatewayRoutesCommandInput}
+ * @returns {@link SearchTransitGatewayRoutesCommandOutput}
  * @see {@link SearchTransitGatewayRoutesCommandInput} for command's `input` shape.
  * @see {@link SearchTransitGatewayRoutesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class SearchTransitGatewayRoutesCommand extends $Command<
-  SearchTransitGatewayRoutesCommandInput,
-  SearchTransitGatewayRoutesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchTransitGatewayRoutesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchTransitGatewayRoutesCommandInput, SearchTransitGatewayRoutesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "SearchTransitGatewayRoutesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchTransitGatewayRoutesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchTransitGatewayRoutesResult.filterSensitiveLog,
+export class SearchTransitGatewayRoutesCommand extends command<SearchTransitGatewayRoutesCommandInput, SearchTransitGatewayRoutesCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchTransitGatewayRoutes",
+  SearchTransitGatewayRoutes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchTransitGatewayRoutesRequest;
+      output: SearchTransitGatewayRoutesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchTransitGatewayRoutesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2SearchTransitGatewayRoutesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SearchTransitGatewayRoutesCommandOutput> {
-    return deserializeAws_ec2SearchTransitGatewayRoutesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchTransitGatewayRoutesCommandInput;
+      output: SearchTransitGatewayRoutesCommandOutput;
+    };
+  };
 }

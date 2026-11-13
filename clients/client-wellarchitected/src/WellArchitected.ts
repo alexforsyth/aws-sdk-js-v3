@@ -1,1122 +1,2544 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateLensesCommandInput,
+  type AssociateLensesCommandOutput,
   AssociateLensesCommand,
-  AssociateLensesCommandInput,
-  AssociateLensesCommandOutput,
 } from "./commands/AssociateLensesCommand";
 import {
+  type AssociateProfilesCommandInput,
+  type AssociateProfilesCommandOutput,
+  AssociateProfilesCommand,
+} from "./commands/AssociateProfilesCommand";
+import {
+  type CreateAgentContextCommandInput,
+  type CreateAgentContextCommandOutput,
+  CreateAgentContextCommand,
+} from "./commands/CreateAgentContextCommand";
+import {
+  type CreateAgentGoalCommandInput,
+  type CreateAgentGoalCommandOutput,
+  CreateAgentGoalCommand,
+} from "./commands/CreateAgentGoalCommand";
+import {
+  type CreateAgentProfileCommandInput,
+  type CreateAgentProfileCommandOutput,
+  CreateAgentProfileCommand,
+} from "./commands/CreateAgentProfileCommand";
+import {
+  type CreateLensShareCommandInput,
+  type CreateLensShareCommandOutput,
+  CreateLensShareCommand,
+} from "./commands/CreateLensShareCommand";
+import {
+  type CreateLensVersionCommandInput,
+  type CreateLensVersionCommandOutput,
+  CreateLensVersionCommand,
+} from "./commands/CreateLensVersionCommand";
+import {
+  type CreateMilestoneCommandInput,
+  type CreateMilestoneCommandOutput,
   CreateMilestoneCommand,
-  CreateMilestoneCommandInput,
-  CreateMilestoneCommandOutput,
 } from "./commands/CreateMilestoneCommand";
 import {
+  type CreateProfileCommandInput,
+  type CreateProfileCommandOutput,
+  CreateProfileCommand,
+} from "./commands/CreateProfileCommand";
+import {
+  type CreateProfileShareCommandInput,
+  type CreateProfileShareCommandOutput,
+  CreateProfileShareCommand,
+} from "./commands/CreateProfileShareCommand";
+import {
+  type CreateReviewTemplateCommandInput,
+  type CreateReviewTemplateCommandOutput,
+  CreateReviewTemplateCommand,
+} from "./commands/CreateReviewTemplateCommand";
+import {
+  type CreateTemplateShareCommandInput,
+  type CreateTemplateShareCommandOutput,
+  CreateTemplateShareCommand,
+} from "./commands/CreateTemplateShareCommand";
+import {
+  type CreateWorkloadCommandInput,
+  type CreateWorkloadCommandOutput,
   CreateWorkloadCommand,
-  CreateWorkloadCommandInput,
-  CreateWorkloadCommandOutput,
 } from "./commands/CreateWorkloadCommand";
 import {
+  type CreateWorkloadShareCommandInput,
+  type CreateWorkloadShareCommandOutput,
   CreateWorkloadShareCommand,
-  CreateWorkloadShareCommandInput,
-  CreateWorkloadShareCommandOutput,
 } from "./commands/CreateWorkloadShareCommand";
 import {
+  type DeleteAgentContextCommandInput,
+  type DeleteAgentContextCommandOutput,
+  DeleteAgentContextCommand,
+} from "./commands/DeleteAgentContextCommand";
+import {
+  type DeleteAgentGoalCommandInput,
+  type DeleteAgentGoalCommandOutput,
+  DeleteAgentGoalCommand,
+} from "./commands/DeleteAgentGoalCommand";
+import {
+  type DeleteAgentProfileCommandInput,
+  type DeleteAgentProfileCommandOutput,
+  DeleteAgentProfileCommand,
+} from "./commands/DeleteAgentProfileCommand";
+import {
+  type DeleteLensCommandInput,
+  type DeleteLensCommandOutput,
+  DeleteLensCommand,
+} from "./commands/DeleteLensCommand";
+import {
+  type DeleteLensShareCommandInput,
+  type DeleteLensShareCommandOutput,
+  DeleteLensShareCommand,
+} from "./commands/DeleteLensShareCommand";
+import {
+  type DeleteProfileCommandInput,
+  type DeleteProfileCommandOutput,
+  DeleteProfileCommand,
+} from "./commands/DeleteProfileCommand";
+import {
+  type DeleteProfileShareCommandInput,
+  type DeleteProfileShareCommandOutput,
+  DeleteProfileShareCommand,
+} from "./commands/DeleteProfileShareCommand";
+import {
+  type DeleteReviewTemplateCommandInput,
+  type DeleteReviewTemplateCommandOutput,
+  DeleteReviewTemplateCommand,
+} from "./commands/DeleteReviewTemplateCommand";
+import {
+  type DeleteTemplateShareCommandInput,
+  type DeleteTemplateShareCommandOutput,
+  DeleteTemplateShareCommand,
+} from "./commands/DeleteTemplateShareCommand";
+import {
+  type DeleteWorkloadCommandInput,
+  type DeleteWorkloadCommandOutput,
   DeleteWorkloadCommand,
-  DeleteWorkloadCommandInput,
-  DeleteWorkloadCommandOutput,
 } from "./commands/DeleteWorkloadCommand";
 import {
+  type DeleteWorkloadShareCommandInput,
+  type DeleteWorkloadShareCommandOutput,
   DeleteWorkloadShareCommand,
-  DeleteWorkloadShareCommandInput,
-  DeleteWorkloadShareCommandOutput,
 } from "./commands/DeleteWorkloadShareCommand";
 import {
+  type DisassociateLensesCommandInput,
+  type DisassociateLensesCommandOutput,
   DisassociateLensesCommand,
-  DisassociateLensesCommandInput,
-  DisassociateLensesCommandOutput,
 } from "./commands/DisassociateLensesCommand";
-import { GetAnswerCommand, GetAnswerCommandInput, GetAnswerCommandOutput } from "./commands/GetAnswerCommand";
 import {
+  type DisassociateProfilesCommandInput,
+  type DisassociateProfilesCommandOutput,
+  DisassociateProfilesCommand,
+} from "./commands/DisassociateProfilesCommand";
+import {
+  type ExportLensCommandInput,
+  type ExportLensCommandOutput,
+  ExportLensCommand,
+} from "./commands/ExportLensCommand";
+import {
+  type GetAgentContextCommandInput,
+  type GetAgentContextCommandOutput,
+  GetAgentContextCommand,
+} from "./commands/GetAgentContextCommand";
+import {
+  type GetAgentGoalCommandInput,
+  type GetAgentGoalCommandOutput,
+  GetAgentGoalCommand,
+} from "./commands/GetAgentGoalCommand";
+import {
+  type GetAgentProfileCommandInput,
+  type GetAgentProfileCommandOutput,
+  GetAgentProfileCommand,
+} from "./commands/GetAgentProfileCommand";
+import {
+  type GetAgentRecommendationCommandInput,
+  type GetAgentRecommendationCommandOutput,
+  GetAgentRecommendationCommand,
+} from "./commands/GetAgentRecommendationCommand";
+import {
+  type GetAgentRecommendationGenerationCommandInput,
+  type GetAgentRecommendationGenerationCommandOutput,
+  GetAgentRecommendationGenerationCommand,
+} from "./commands/GetAgentRecommendationGenerationCommand";
+import { type GetAnswerCommandInput, type GetAnswerCommandOutput, GetAnswerCommand } from "./commands/GetAnswerCommand";
+import {
+  type GetConsolidatedReportCommandInput,
+  type GetConsolidatedReportCommandOutput,
+  GetConsolidatedReportCommand,
+} from "./commands/GetConsolidatedReportCommand";
+import {
+  type GetGlobalSettingsCommandInput,
+  type GetGlobalSettingsCommandOutput,
+  GetGlobalSettingsCommand,
+} from "./commands/GetGlobalSettingsCommand";
+import { type GetLensCommandInput, type GetLensCommandOutput, GetLensCommand } from "./commands/GetLensCommand";
+import {
+  type GetLensReviewCommandInput,
+  type GetLensReviewCommandOutput,
   GetLensReviewCommand,
-  GetLensReviewCommandInput,
-  GetLensReviewCommandOutput,
 } from "./commands/GetLensReviewCommand";
 import {
+  type GetLensReviewReportCommandInput,
+  type GetLensReviewReportCommandOutput,
   GetLensReviewReportCommand,
-  GetLensReviewReportCommandInput,
-  GetLensReviewReportCommandOutput,
 } from "./commands/GetLensReviewReportCommand";
 import {
+  type GetLensVersionDifferenceCommandInput,
+  type GetLensVersionDifferenceCommandOutput,
   GetLensVersionDifferenceCommand,
-  GetLensVersionDifferenceCommandInput,
-  GetLensVersionDifferenceCommandOutput,
 } from "./commands/GetLensVersionDifferenceCommand";
 import {
+  type GetMilestoneCommandInput,
+  type GetMilestoneCommandOutput,
   GetMilestoneCommand,
-  GetMilestoneCommandInput,
-  GetMilestoneCommandOutput,
 } from "./commands/GetMilestoneCommand";
-import { GetWorkloadCommand, GetWorkloadCommandInput, GetWorkloadCommandOutput } from "./commands/GetWorkloadCommand";
-import { ListAnswersCommand, ListAnswersCommandInput, ListAnswersCommandOutput } from "./commands/ListAnswersCommand";
-import { ListLensesCommand, ListLensesCommandInput, ListLensesCommandOutput } from "./commands/ListLensesCommand";
 import {
+  type GetProfileCommandInput,
+  type GetProfileCommandOutput,
+  GetProfileCommand,
+} from "./commands/GetProfileCommand";
+import {
+  type GetProfileTemplateCommandInput,
+  type GetProfileTemplateCommandOutput,
+  GetProfileTemplateCommand,
+} from "./commands/GetProfileTemplateCommand";
+import {
+  type GetReviewTemplateAnswerCommandInput,
+  type GetReviewTemplateAnswerCommandOutput,
+  GetReviewTemplateAnswerCommand,
+} from "./commands/GetReviewTemplateAnswerCommand";
+import {
+  type GetReviewTemplateCommandInput,
+  type GetReviewTemplateCommandOutput,
+  GetReviewTemplateCommand,
+} from "./commands/GetReviewTemplateCommand";
+import {
+  type GetReviewTemplateLensReviewCommandInput,
+  type GetReviewTemplateLensReviewCommandOutput,
+  GetReviewTemplateLensReviewCommand,
+} from "./commands/GetReviewTemplateLensReviewCommand";
+import {
+  type GetWorkloadCommandInput,
+  type GetWorkloadCommandOutput,
+  GetWorkloadCommand,
+} from "./commands/GetWorkloadCommand";
+import {
+  type ImportLensCommandInput,
+  type ImportLensCommandOutput,
+  ImportLensCommand,
+} from "./commands/ImportLensCommand";
+import {
+  type ListAgentContextsCommandInput,
+  type ListAgentContextsCommandOutput,
+  ListAgentContextsCommand,
+} from "./commands/ListAgentContextsCommand";
+import {
+  type ListAgentGoalsCommandInput,
+  type ListAgentGoalsCommandOutput,
+  ListAgentGoalsCommand,
+} from "./commands/ListAgentGoalsCommand";
+import {
+  type ListAgentProfilesCommandInput,
+  type ListAgentProfilesCommandOutput,
+  ListAgentProfilesCommand,
+} from "./commands/ListAgentProfilesCommand";
+import {
+  type ListAgentRecommendationGenerationsCommandInput,
+  type ListAgentRecommendationGenerationsCommandOutput,
+  ListAgentRecommendationGenerationsCommand,
+} from "./commands/ListAgentRecommendationGenerationsCommand";
+import {
+  type ListAgentRecommendationItemsCommandInput,
+  type ListAgentRecommendationItemsCommandOutput,
+  ListAgentRecommendationItemsCommand,
+} from "./commands/ListAgentRecommendationItemsCommand";
+import {
+  type ListAgentRecommendationsCommandInput,
+  type ListAgentRecommendationsCommandOutput,
+  ListAgentRecommendationsCommand,
+} from "./commands/ListAgentRecommendationsCommand";
+import {
+  type ListAnswersCommandInput,
+  type ListAnswersCommandOutput,
+  ListAnswersCommand,
+} from "./commands/ListAnswersCommand";
+import {
+  type ListCheckDetailsCommandInput,
+  type ListCheckDetailsCommandOutput,
+  ListCheckDetailsCommand,
+} from "./commands/ListCheckDetailsCommand";
+import {
+  type ListCheckSummariesCommandInput,
+  type ListCheckSummariesCommandOutput,
+  ListCheckSummariesCommand,
+} from "./commands/ListCheckSummariesCommand";
+import {
+  type ListLensesCommandInput,
+  type ListLensesCommandOutput,
+  ListLensesCommand,
+} from "./commands/ListLensesCommand";
+import {
+  type ListLensReviewImprovementsCommandInput,
+  type ListLensReviewImprovementsCommandOutput,
   ListLensReviewImprovementsCommand,
-  ListLensReviewImprovementsCommandInput,
-  ListLensReviewImprovementsCommandOutput,
 } from "./commands/ListLensReviewImprovementsCommand";
 import {
+  type ListLensReviewsCommandInput,
+  type ListLensReviewsCommandOutput,
   ListLensReviewsCommand,
-  ListLensReviewsCommandInput,
-  ListLensReviewsCommandOutput,
 } from "./commands/ListLensReviewsCommand";
 import {
+  type ListLensSharesCommandInput,
+  type ListLensSharesCommandOutput,
+  ListLensSharesCommand,
+} from "./commands/ListLensSharesCommand";
+import {
+  type ListMilestonesCommandInput,
+  type ListMilestonesCommandOutput,
   ListMilestonesCommand,
-  ListMilestonesCommandInput,
-  ListMilestonesCommandOutput,
 } from "./commands/ListMilestonesCommand";
 import {
+  type ListNotificationsCommandInput,
+  type ListNotificationsCommandOutput,
   ListNotificationsCommand,
-  ListNotificationsCommandInput,
-  ListNotificationsCommandOutput,
 } from "./commands/ListNotificationsCommand";
 import {
+  type ListProfileNotificationsCommandInput,
+  type ListProfileNotificationsCommandOutput,
+  ListProfileNotificationsCommand,
+} from "./commands/ListProfileNotificationsCommand";
+import {
+  type ListProfilesCommandInput,
+  type ListProfilesCommandOutput,
+  ListProfilesCommand,
+} from "./commands/ListProfilesCommand";
+import {
+  type ListProfileSharesCommandInput,
+  type ListProfileSharesCommandOutput,
+  ListProfileSharesCommand,
+} from "./commands/ListProfileSharesCommand";
+import {
+  type ListReviewTemplateAnswersCommandInput,
+  type ListReviewTemplateAnswersCommandOutput,
+  ListReviewTemplateAnswersCommand,
+} from "./commands/ListReviewTemplateAnswersCommand";
+import {
+  type ListReviewTemplatesCommandInput,
+  type ListReviewTemplatesCommandOutput,
+  ListReviewTemplatesCommand,
+} from "./commands/ListReviewTemplatesCommand";
+import {
+  type ListShareInvitationsCommandInput,
+  type ListShareInvitationsCommandOutput,
   ListShareInvitationsCommand,
-  ListShareInvitationsCommandInput,
-  ListShareInvitationsCommandOutput,
 } from "./commands/ListShareInvitationsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTemplateSharesCommandInput,
+  type ListTemplateSharesCommandOutput,
+  ListTemplateSharesCommand,
+} from "./commands/ListTemplateSharesCommand";
+import {
+  type ListWorkloadsCommandInput,
+  type ListWorkloadsCommandOutput,
   ListWorkloadsCommand,
-  ListWorkloadsCommandInput,
-  ListWorkloadsCommandOutput,
 } from "./commands/ListWorkloadsCommand";
 import {
+  type ListWorkloadSharesCommandInput,
+  type ListWorkloadSharesCommandOutput,
   ListWorkloadSharesCommand,
-  ListWorkloadSharesCommandInput,
-  ListWorkloadSharesCommandOutput,
 } from "./commands/ListWorkloadSharesCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type PutAgentRecommendationFeedbackCommandInput,
+  type PutAgentRecommendationFeedbackCommandOutput,
+  PutAgentRecommendationFeedbackCommand,
+} from "./commands/PutAgentRecommendationFeedbackCommand";
+import {
+  type StartAgentRecommendationGenerationCommandInput,
+  type StartAgentRecommendationGenerationCommandOutput,
+  StartAgentRecommendationGenerationCommand,
+} from "./commands/StartAgentRecommendationGenerationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAgentContextCommandInput,
+  type UpdateAgentContextCommandOutput,
+  UpdateAgentContextCommand,
+} from "./commands/UpdateAgentContextCommand";
+import {
+  type UpdateAgentGoalCommandInput,
+  type UpdateAgentGoalCommandOutput,
+  UpdateAgentGoalCommand,
+} from "./commands/UpdateAgentGoalCommand";
+import {
+  type UpdateAgentProfileCommandInput,
+  type UpdateAgentProfileCommandOutput,
+  UpdateAgentProfileCommand,
+} from "./commands/UpdateAgentProfileCommand";
+import {
+  type UpdateAgentRecommendationStatusCommandInput,
+  type UpdateAgentRecommendationStatusCommandOutput,
+  UpdateAgentRecommendationStatusCommand,
+} from "./commands/UpdateAgentRecommendationStatusCommand";
+import {
+  type UpdateAnswerCommandInput,
+  type UpdateAnswerCommandOutput,
   UpdateAnswerCommand,
-  UpdateAnswerCommandInput,
-  UpdateAnswerCommandOutput,
 } from "./commands/UpdateAnswerCommand";
 import {
+  type UpdateGlobalSettingsCommandInput,
+  type UpdateGlobalSettingsCommandOutput,
+  UpdateGlobalSettingsCommand,
+} from "./commands/UpdateGlobalSettingsCommand";
+import {
+  type UpdateIntegrationCommandInput,
+  type UpdateIntegrationCommandOutput,
+  UpdateIntegrationCommand,
+} from "./commands/UpdateIntegrationCommand";
+import {
+  type UpdateLensReviewCommandInput,
+  type UpdateLensReviewCommandOutput,
   UpdateLensReviewCommand,
-  UpdateLensReviewCommandInput,
-  UpdateLensReviewCommandOutput,
 } from "./commands/UpdateLensReviewCommand";
 import {
+  type UpdateProfileCommandInput,
+  type UpdateProfileCommandOutput,
+  UpdateProfileCommand,
+} from "./commands/UpdateProfileCommand";
+import {
+  type UpdateReviewTemplateAnswerCommandInput,
+  type UpdateReviewTemplateAnswerCommandOutput,
+  UpdateReviewTemplateAnswerCommand,
+} from "./commands/UpdateReviewTemplateAnswerCommand";
+import {
+  type UpdateReviewTemplateCommandInput,
+  type UpdateReviewTemplateCommandOutput,
+  UpdateReviewTemplateCommand,
+} from "./commands/UpdateReviewTemplateCommand";
+import {
+  type UpdateReviewTemplateLensReviewCommandInput,
+  type UpdateReviewTemplateLensReviewCommandOutput,
+  UpdateReviewTemplateLensReviewCommand,
+} from "./commands/UpdateReviewTemplateLensReviewCommand";
+import {
+  type UpdateShareInvitationCommandInput,
+  type UpdateShareInvitationCommandOutput,
   UpdateShareInvitationCommand,
-  UpdateShareInvitationCommandInput,
-  UpdateShareInvitationCommandOutput,
 } from "./commands/UpdateShareInvitationCommand";
 import {
+  type UpdateWorkloadCommandInput,
+  type UpdateWorkloadCommandOutput,
   UpdateWorkloadCommand,
-  UpdateWorkloadCommandInput,
-  UpdateWorkloadCommandOutput,
 } from "./commands/UpdateWorkloadCommand";
 import {
+  type UpdateWorkloadShareCommandInput,
+  type UpdateWorkloadShareCommandOutput,
   UpdateWorkloadShareCommand,
-  UpdateWorkloadShareCommandInput,
-  UpdateWorkloadShareCommandOutput,
 } from "./commands/UpdateWorkloadShareCommand";
 import {
+  type UpgradeLensReviewCommandInput,
+  type UpgradeLensReviewCommandOutput,
   UpgradeLensReviewCommand,
-  UpgradeLensReviewCommandInput,
-  UpgradeLensReviewCommandOutput,
 } from "./commands/UpgradeLensReviewCommand";
+import {
+  type UpgradeProfileVersionCommandInput,
+  type UpgradeProfileVersionCommandOutput,
+  UpgradeProfileVersionCommand,
+} from "./commands/UpgradeProfileVersionCommand";
+import {
+  type UpgradeReviewTemplateLensReviewCommandInput,
+  type UpgradeReviewTemplateLensReviewCommandOutput,
+  UpgradeReviewTemplateLensReviewCommand,
+} from "./commands/UpgradeReviewTemplateLensReviewCommand";
+import { paginateGetConsolidatedReport } from "./pagination/GetConsolidatedReportPaginator";
+import { paginateListAgentContexts } from "./pagination/ListAgentContextsPaginator";
+import { paginateListAgentGoals } from "./pagination/ListAgentGoalsPaginator";
+import { paginateListAgentProfiles } from "./pagination/ListAgentProfilesPaginator";
+import { paginateListAgentRecommendationGenerations } from "./pagination/ListAgentRecommendationGenerationsPaginator";
+import { paginateListAgentRecommendationItems } from "./pagination/ListAgentRecommendationItemsPaginator";
+import { paginateListAgentRecommendations } from "./pagination/ListAgentRecommendationsPaginator";
+import { paginateListAnswers } from "./pagination/ListAnswersPaginator";
+import { paginateListCheckDetails } from "./pagination/ListCheckDetailsPaginator";
+import { paginateListCheckSummaries } from "./pagination/ListCheckSummariesPaginator";
+import { paginateListLenses } from "./pagination/ListLensesPaginator";
+import { paginateListLensReviewImprovements } from "./pagination/ListLensReviewImprovementsPaginator";
+import { paginateListLensReviews } from "./pagination/ListLensReviewsPaginator";
+import { paginateListLensShares } from "./pagination/ListLensSharesPaginator";
+import { paginateListMilestones } from "./pagination/ListMilestonesPaginator";
+import { paginateListNotifications } from "./pagination/ListNotificationsPaginator";
+import { paginateListProfileNotifications } from "./pagination/ListProfileNotificationsPaginator";
+import { paginateListProfileShares } from "./pagination/ListProfileSharesPaginator";
+import { paginateListProfiles } from "./pagination/ListProfilesPaginator";
+import { paginateListReviewTemplateAnswers } from "./pagination/ListReviewTemplateAnswersPaginator";
+import { paginateListReviewTemplates } from "./pagination/ListReviewTemplatesPaginator";
+import { paginateListShareInvitations } from "./pagination/ListShareInvitationsPaginator";
+import { paginateListTemplateShares } from "./pagination/ListTemplateSharesPaginator";
+import { paginateListWorkloadShares } from "./pagination/ListWorkloadSharesPaginator";
+import { paginateListWorkloads } from "./pagination/ListWorkloadsPaginator";
 import { WellArchitectedClient } from "./WellArchitectedClient";
 
+const commands = {
+  AssociateLensesCommand,
+  AssociateProfilesCommand,
+  CreateAgentContextCommand,
+  CreateAgentGoalCommand,
+  CreateAgentProfileCommand,
+  CreateLensShareCommand,
+  CreateLensVersionCommand,
+  CreateMilestoneCommand,
+  CreateProfileCommand,
+  CreateProfileShareCommand,
+  CreateReviewTemplateCommand,
+  CreateTemplateShareCommand,
+  CreateWorkloadCommand,
+  CreateWorkloadShareCommand,
+  DeleteAgentContextCommand,
+  DeleteAgentGoalCommand,
+  DeleteAgentProfileCommand,
+  DeleteLensCommand,
+  DeleteLensShareCommand,
+  DeleteProfileCommand,
+  DeleteProfileShareCommand,
+  DeleteReviewTemplateCommand,
+  DeleteTemplateShareCommand,
+  DeleteWorkloadCommand,
+  DeleteWorkloadShareCommand,
+  DisassociateLensesCommand,
+  DisassociateProfilesCommand,
+  ExportLensCommand,
+  GetAgentContextCommand,
+  GetAgentGoalCommand,
+  GetAgentProfileCommand,
+  GetAgentRecommendationCommand,
+  GetAgentRecommendationGenerationCommand,
+  GetAnswerCommand,
+  GetConsolidatedReportCommand,
+  GetGlobalSettingsCommand,
+  GetLensCommand,
+  GetLensReviewCommand,
+  GetLensReviewReportCommand,
+  GetLensVersionDifferenceCommand,
+  GetMilestoneCommand,
+  GetProfileCommand,
+  GetProfileTemplateCommand,
+  GetReviewTemplateCommand,
+  GetReviewTemplateAnswerCommand,
+  GetReviewTemplateLensReviewCommand,
+  GetWorkloadCommand,
+  ImportLensCommand,
+  ListAgentContextsCommand,
+  ListAgentGoalsCommand,
+  ListAgentProfilesCommand,
+  ListAgentRecommendationGenerationsCommand,
+  ListAgentRecommendationItemsCommand,
+  ListAgentRecommendationsCommand,
+  ListAnswersCommand,
+  ListCheckDetailsCommand,
+  ListCheckSummariesCommand,
+  ListLensesCommand,
+  ListLensReviewImprovementsCommand,
+  ListLensReviewsCommand,
+  ListLensSharesCommand,
+  ListMilestonesCommand,
+  ListNotificationsCommand,
+  ListProfileNotificationsCommand,
+  ListProfilesCommand,
+  ListProfileSharesCommand,
+  ListReviewTemplateAnswersCommand,
+  ListReviewTemplatesCommand,
+  ListShareInvitationsCommand,
+  ListTagsForResourceCommand,
+  ListTemplateSharesCommand,
+  ListWorkloadsCommand,
+  ListWorkloadSharesCommand,
+  PutAgentRecommendationFeedbackCommand,
+  StartAgentRecommendationGenerationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAgentContextCommand,
+  UpdateAgentGoalCommand,
+  UpdateAgentProfileCommand,
+  UpdateAgentRecommendationStatusCommand,
+  UpdateAnswerCommand,
+  UpdateGlobalSettingsCommand,
+  UpdateIntegrationCommand,
+  UpdateLensReviewCommand,
+  UpdateProfileCommand,
+  UpdateReviewTemplateCommand,
+  UpdateReviewTemplateAnswerCommand,
+  UpdateReviewTemplateLensReviewCommand,
+  UpdateShareInvitationCommand,
+  UpdateWorkloadCommand,
+  UpdateWorkloadShareCommand,
+  UpgradeLensReviewCommand,
+  UpgradeProfileVersionCommand,
+  UpgradeReviewTemplateLensReviewCommand,
+};
+const paginators = {
+  paginateGetConsolidatedReport,
+  paginateListAgentContexts,
+  paginateListAgentGoals,
+  paginateListAgentProfiles,
+  paginateListAgentRecommendationGenerations,
+  paginateListAgentRecommendationItems,
+  paginateListAgentRecommendations,
+  paginateListAnswers,
+  paginateListCheckDetails,
+  paginateListCheckSummaries,
+  paginateListLenses,
+  paginateListLensReviewImprovements,
+  paginateListLensReviews,
+  paginateListLensShares,
+  paginateListMilestones,
+  paginateListNotifications,
+  paginateListProfileNotifications,
+  paginateListProfiles,
+  paginateListProfileShares,
+  paginateListReviewTemplateAnswers,
+  paginateListReviewTemplates,
+  paginateListShareInvitations,
+  paginateListTemplateShares,
+  paginateListWorkloads,
+  paginateListWorkloadShares,
+};
+
 /**
- * <fullname>AWS Well-Architected Tool</fullname>
- *
- *          <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the
- *             <a href="http://aws.amazon.com/well-architected-tool">AWS Well-Architected Tool</a> in the
- *             <a href="https://console.aws.amazon.com/wellarchitected">AWS Management Console</a>. For information
- *             about the AWS Well-Architected Tool, see the
- *             <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html">AWS Well-Architected Tool User Guide</a>.</p>
+ * @public
  */
-export class WellArchitected extends WellArchitectedClient {
+export interface WellArchitectedRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface WellArchitected {
   /**
-   * <p>Associate a lens to a workload.</p>
+   * @see {@link AssociateLensesCommand}
    */
-  public associateLenses(
+  associateLenses(
     args: AssociateLensesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<AssociateLensesCommandOutput>;
-  public associateLenses(
+  associateLenses(
     args: AssociateLensesCommandInput,
     cb: (err: any, data?: AssociateLensesCommandOutput) => void
   ): void;
-  public associateLenses(
+  associateLenses(
     args: AssociateLensesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: AssociateLensesCommandOutput) => void
   ): void;
-  public associateLenses(
-    args: AssociateLensesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateLensesCommandOutput) => void),
-    cb?: (err: any, data?: AssociateLensesCommandOutput) => void
-  ): Promise<AssociateLensesCommandOutput> | void {
-    const command = new AssociateLensesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Create a milestone for an existing workload.</p>
+   * @see {@link AssociateProfilesCommand}
    */
-  public createMilestone(
+  associateProfiles(
+    args: AssociateProfilesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<AssociateProfilesCommandOutput>;
+  associateProfiles(
+    args: AssociateProfilesCommandInput,
+    cb: (err: any, data?: AssociateProfilesCommandOutput) => void
+  ): void;
+  associateProfiles(
+    args: AssociateProfilesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: AssociateProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentContextCommand}
+   */
+  createAgentContext(
+    args: CreateAgentContextCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateAgentContextCommandOutput>;
+  createAgentContext(
+    args: CreateAgentContextCommandInput,
+    cb: (err: any, data?: CreateAgentContextCommandOutput) => void
+  ): void;
+  createAgentContext(
+    args: CreateAgentContextCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateAgentContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentGoalCommand}
+   */
+  createAgentGoal(
+    args: CreateAgentGoalCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateAgentGoalCommandOutput>;
+  createAgentGoal(
+    args: CreateAgentGoalCommandInput,
+    cb: (err: any, data?: CreateAgentGoalCommandOutput) => void
+  ): void;
+  createAgentGoal(
+    args: CreateAgentGoalCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateAgentGoalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentProfileCommand}
+   */
+  createAgentProfile(
+    args: CreateAgentProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateAgentProfileCommandOutput>;
+  createAgentProfile(
+    args: CreateAgentProfileCommandInput,
+    cb: (err: any, data?: CreateAgentProfileCommandOutput) => void
+  ): void;
+  createAgentProfile(
+    args: CreateAgentProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateAgentProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLensShareCommand}
+   */
+  createLensShare(
+    args: CreateLensShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateLensShareCommandOutput>;
+  createLensShare(
+    args: CreateLensShareCommandInput,
+    cb: (err: any, data?: CreateLensShareCommandOutput) => void
+  ): void;
+  createLensShare(
+    args: CreateLensShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateLensShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLensVersionCommand}
+   */
+  createLensVersion(
+    args: CreateLensVersionCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateLensVersionCommandOutput>;
+  createLensVersion(
+    args: CreateLensVersionCommandInput,
+    cb: (err: any, data?: CreateLensVersionCommandOutput) => void
+  ): void;
+  createLensVersion(
+    args: CreateLensVersionCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateLensVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMilestoneCommand}
+   */
+  createMilestone(
     args: CreateMilestoneCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<CreateMilestoneCommandOutput>;
-  public createMilestone(
+  createMilestone(
     args: CreateMilestoneCommandInput,
     cb: (err: any, data?: CreateMilestoneCommandOutput) => void
   ): void;
-  public createMilestone(
+  createMilestone(
     args: CreateMilestoneCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: CreateMilestoneCommandOutput) => void
   ): void;
-  public createMilestone(
-    args: CreateMilestoneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateMilestoneCommandOutput) => void),
-    cb?: (err: any, data?: CreateMilestoneCommandOutput) => void
-  ): Promise<CreateMilestoneCommandOutput> | void {
-    const command = new CreateMilestoneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Create a new workload.</p>
-   *         <p>The owner of a workload can share the workload with other AWS accounts and IAM users
-   *             in the same AWS Region. Only the owner of a workload can delete it.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the
-   *                 <i>AWS Well-Architected Tool User Guide</i>.</p>
+   * @see {@link CreateProfileCommand}
    */
-  public createWorkload(
+  createProfile(
+    args: CreateProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateProfileCommandOutput>;
+  createProfile(
+    args: CreateProfileCommandInput,
+    cb: (err: any, data?: CreateProfileCommandOutput) => void
+  ): void;
+  createProfile(
+    args: CreateProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProfileShareCommand}
+   */
+  createProfileShare(
+    args: CreateProfileShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateProfileShareCommandOutput>;
+  createProfileShare(
+    args: CreateProfileShareCommandInput,
+    cb: (err: any, data?: CreateProfileShareCommandOutput) => void
+  ): void;
+  createProfileShare(
+    args: CreateProfileShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateProfileShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReviewTemplateCommand}
+   */
+  createReviewTemplate(
+    args: CreateReviewTemplateCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateReviewTemplateCommandOutput>;
+  createReviewTemplate(
+    args: CreateReviewTemplateCommandInput,
+    cb: (err: any, data?: CreateReviewTemplateCommandOutput) => void
+  ): void;
+  createReviewTemplate(
+    args: CreateReviewTemplateCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateReviewTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTemplateShareCommand}
+   */
+  createTemplateShare(
+    args: CreateTemplateShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<CreateTemplateShareCommandOutput>;
+  createTemplateShare(
+    args: CreateTemplateShareCommandInput,
+    cb: (err: any, data?: CreateTemplateShareCommandOutput) => void
+  ): void;
+  createTemplateShare(
+    args: CreateTemplateShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: CreateTemplateShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkloadCommand}
+   */
+  createWorkload(
     args: CreateWorkloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<CreateWorkloadCommandOutput>;
-  public createWorkload(
+  createWorkload(
     args: CreateWorkloadCommandInput,
     cb: (err: any, data?: CreateWorkloadCommandOutput) => void
   ): void;
-  public createWorkload(
+  createWorkload(
     args: CreateWorkloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: CreateWorkloadCommandOutput) => void
   ): void;
-  public createWorkload(
-    args: CreateWorkloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkloadCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkloadCommandOutput) => void
-  ): Promise<CreateWorkloadCommandOutput> | void {
-    const command = new CreateWorkloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Create a workload share.</p>
-   *         <p>The owner of a workload can share it with other AWS accounts and IAM users in the same
-   *             AWS Region. Shared access to a workload is not removed until the workload invitation is
-   *             deleted.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a Workload</a> in the
-   *                 <i>AWS Well-Architected Tool User Guide</i>.</p>
+   * @see {@link CreateWorkloadShareCommand}
    */
-  public createWorkloadShare(
+  createWorkloadShare(
     args: CreateWorkloadShareCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<CreateWorkloadShareCommandOutput>;
-  public createWorkloadShare(
+  createWorkloadShare(
     args: CreateWorkloadShareCommandInput,
     cb: (err: any, data?: CreateWorkloadShareCommandOutput) => void
   ): void;
-  public createWorkloadShare(
+  createWorkloadShare(
     args: CreateWorkloadShareCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: CreateWorkloadShareCommandOutput) => void
   ): void;
-  public createWorkloadShare(
-    args: CreateWorkloadShareCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkloadShareCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkloadShareCommandOutput) => void
-  ): Promise<CreateWorkloadShareCommandOutput> | void {
-    const command = new CreateWorkloadShareCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Delete an existing workload.</p>
+   * @see {@link DeleteAgentContextCommand}
    */
-  public deleteWorkload(
+  deleteAgentContext(
+    args: DeleteAgentContextCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteAgentContextCommandOutput>;
+  deleteAgentContext(
+    args: DeleteAgentContextCommandInput,
+    cb: (err: any, data?: DeleteAgentContextCommandOutput) => void
+  ): void;
+  deleteAgentContext(
+    args: DeleteAgentContextCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteAgentContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentGoalCommand}
+   */
+  deleteAgentGoal(
+    args: DeleteAgentGoalCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteAgentGoalCommandOutput>;
+  deleteAgentGoal(
+    args: DeleteAgentGoalCommandInput,
+    cb: (err: any, data?: DeleteAgentGoalCommandOutput) => void
+  ): void;
+  deleteAgentGoal(
+    args: DeleteAgentGoalCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteAgentGoalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentProfileCommand}
+   */
+  deleteAgentProfile(
+    args: DeleteAgentProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteAgentProfileCommandOutput>;
+  deleteAgentProfile(
+    args: DeleteAgentProfileCommandInput,
+    cb: (err: any, data?: DeleteAgentProfileCommandOutput) => void
+  ): void;
+  deleteAgentProfile(
+    args: DeleteAgentProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteAgentProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLensCommand}
+   */
+  deleteLens(
+    args: DeleteLensCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteLensCommandOutput>;
+  deleteLens(
+    args: DeleteLensCommandInput,
+    cb: (err: any, data?: DeleteLensCommandOutput) => void
+  ): void;
+  deleteLens(
+    args: DeleteLensCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteLensCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLensShareCommand}
+   */
+  deleteLensShare(
+    args: DeleteLensShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteLensShareCommandOutput>;
+  deleteLensShare(
+    args: DeleteLensShareCommandInput,
+    cb: (err: any, data?: DeleteLensShareCommandOutput) => void
+  ): void;
+  deleteLensShare(
+    args: DeleteLensShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteLensShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProfileCommand}
+   */
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteProfileCommandOutput>;
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    cb: (err: any, data?: DeleteProfileCommandOutput) => void
+  ): void;
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProfileShareCommand}
+   */
+  deleteProfileShare(
+    args: DeleteProfileShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteProfileShareCommandOutput>;
+  deleteProfileShare(
+    args: DeleteProfileShareCommandInput,
+    cb: (err: any, data?: DeleteProfileShareCommandOutput) => void
+  ): void;
+  deleteProfileShare(
+    args: DeleteProfileShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteProfileShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReviewTemplateCommand}
+   */
+  deleteReviewTemplate(
+    args: DeleteReviewTemplateCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteReviewTemplateCommandOutput>;
+  deleteReviewTemplate(
+    args: DeleteReviewTemplateCommandInput,
+    cb: (err: any, data?: DeleteReviewTemplateCommandOutput) => void
+  ): void;
+  deleteReviewTemplate(
+    args: DeleteReviewTemplateCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteReviewTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTemplateShareCommand}
+   */
+  deleteTemplateShare(
+    args: DeleteTemplateShareCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DeleteTemplateShareCommandOutput>;
+  deleteTemplateShare(
+    args: DeleteTemplateShareCommandInput,
+    cb: (err: any, data?: DeleteTemplateShareCommandOutput) => void
+  ): void;
+  deleteTemplateShare(
+    args: DeleteTemplateShareCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DeleteTemplateShareCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkloadCommand}
+   */
+  deleteWorkload(
     args: DeleteWorkloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<DeleteWorkloadCommandOutput>;
-  public deleteWorkload(
+  deleteWorkload(
     args: DeleteWorkloadCommandInput,
     cb: (err: any, data?: DeleteWorkloadCommandOutput) => void
   ): void;
-  public deleteWorkload(
+  deleteWorkload(
     args: DeleteWorkloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: DeleteWorkloadCommandOutput) => void
   ): void;
-  public deleteWorkload(
-    args: DeleteWorkloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkloadCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkloadCommandOutput) => void
-  ): Promise<DeleteWorkloadCommandOutput> | void {
-    const command = new DeleteWorkloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Delete a workload share.</p>
+   * @see {@link DeleteWorkloadShareCommand}
    */
-  public deleteWorkloadShare(
+  deleteWorkloadShare(
     args: DeleteWorkloadShareCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<DeleteWorkloadShareCommandOutput>;
-  public deleteWorkloadShare(
+  deleteWorkloadShare(
     args: DeleteWorkloadShareCommandInput,
     cb: (err: any, data?: DeleteWorkloadShareCommandOutput) => void
   ): void;
-  public deleteWorkloadShare(
+  deleteWorkloadShare(
     args: DeleteWorkloadShareCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: DeleteWorkloadShareCommandOutput) => void
   ): void;
-  public deleteWorkloadShare(
-    args: DeleteWorkloadShareCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkloadShareCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkloadShareCommandOutput) => void
-  ): Promise<DeleteWorkloadShareCommandOutput> | void {
-    const command = new DeleteWorkloadShareCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociate a lens from a workload.</p>
-   *         <note>
-   *             <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be
-   *                 removed from a workload.</p>
-   *         </note>
+   * @see {@link DisassociateLensesCommand}
    */
-  public disassociateLenses(
+  disassociateLenses(
     args: DisassociateLensesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<DisassociateLensesCommandOutput>;
-  public disassociateLenses(
+  disassociateLenses(
     args: DisassociateLensesCommandInput,
     cb: (err: any, data?: DisassociateLensesCommandOutput) => void
   ): void;
-  public disassociateLenses(
+  disassociateLenses(
     args: DisassociateLensesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: DisassociateLensesCommandOutput) => void
   ): void;
-  public disassociateLenses(
-    args: DisassociateLensesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateLensesCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateLensesCommandOutput) => void
-  ): Promise<DisassociateLensesCommandOutput> | void {
-    const command = new DisassociateLensesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get the answer to a specific question in a workload review.</p>
+   * @see {@link DisassociateProfilesCommand}
    */
-  public getAnswer(args: GetAnswerCommandInput, options?: __HttpHandlerOptions): Promise<GetAnswerCommandOutput>;
-  public getAnswer(args: GetAnswerCommandInput, cb: (err: any, data?: GetAnswerCommandOutput) => void): void;
-  public getAnswer(
+  disassociateProfiles(
+    args: DisassociateProfilesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<DisassociateProfilesCommandOutput>;
+  disassociateProfiles(
+    args: DisassociateProfilesCommandInput,
+    cb: (err: any, data?: DisassociateProfilesCommandOutput) => void
+  ): void;
+  disassociateProfiles(
+    args: DisassociateProfilesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: DisassociateProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportLensCommand}
+   */
+  exportLens(
+    args: ExportLensCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ExportLensCommandOutput>;
+  exportLens(
+    args: ExportLensCommandInput,
+    cb: (err: any, data?: ExportLensCommandOutput) => void
+  ): void;
+  exportLens(
+    args: ExportLensCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ExportLensCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentContextCommand}
+   */
+  getAgentContext(
+    args: GetAgentContextCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAgentContextCommandOutput>;
+  getAgentContext(
+    args: GetAgentContextCommandInput,
+    cb: (err: any, data?: GetAgentContextCommandOutput) => void
+  ): void;
+  getAgentContext(
+    args: GetAgentContextCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAgentContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentGoalCommand}
+   */
+  getAgentGoal(
+    args: GetAgentGoalCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAgentGoalCommandOutput>;
+  getAgentGoal(
+    args: GetAgentGoalCommandInput,
+    cb: (err: any, data?: GetAgentGoalCommandOutput) => void
+  ): void;
+  getAgentGoal(
+    args: GetAgentGoalCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAgentGoalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentProfileCommand}
+   */
+  getAgentProfile(
+    args: GetAgentProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAgentProfileCommandOutput>;
+  getAgentProfile(
+    args: GetAgentProfileCommandInput,
+    cb: (err: any, data?: GetAgentProfileCommandOutput) => void
+  ): void;
+  getAgentProfile(
+    args: GetAgentProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAgentProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentRecommendationCommand}
+   */
+  getAgentRecommendation(
+    args: GetAgentRecommendationCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAgentRecommendationCommandOutput>;
+  getAgentRecommendation(
+    args: GetAgentRecommendationCommandInput,
+    cb: (err: any, data?: GetAgentRecommendationCommandOutput) => void
+  ): void;
+  getAgentRecommendation(
+    args: GetAgentRecommendationCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAgentRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentRecommendationGenerationCommand}
+   */
+  getAgentRecommendationGeneration(
+    args: GetAgentRecommendationGenerationCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAgentRecommendationGenerationCommandOutput>;
+  getAgentRecommendationGeneration(
+    args: GetAgentRecommendationGenerationCommandInput,
+    cb: (err: any, data?: GetAgentRecommendationGenerationCommandOutput) => void
+  ): void;
+  getAgentRecommendationGeneration(
+    args: GetAgentRecommendationGenerationCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAgentRecommendationGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAnswerCommand}
+   */
+  getAnswer(
     args: GetAnswerCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetAnswerCommandOutput>;
+  getAnswer(
+    args: GetAnswerCommandInput,
     cb: (err: any, data?: GetAnswerCommandOutput) => void
   ): void;
-  public getAnswer(
+  getAnswer(
     args: GetAnswerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAnswerCommandOutput) => void),
-    cb?: (err: any, data?: GetAnswerCommandOutput) => void
-  ): Promise<GetAnswerCommandOutput> | void {
-    const command = new GetAnswerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetAnswerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Get lens review.</p>
+   * @see {@link GetConsolidatedReportCommand}
    */
-  public getLensReview(
+  getConsolidatedReport(
+    args: GetConsolidatedReportCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetConsolidatedReportCommandOutput>;
+  getConsolidatedReport(
+    args: GetConsolidatedReportCommandInput,
+    cb: (err: any, data?: GetConsolidatedReportCommandOutput) => void
+  ): void;
+  getConsolidatedReport(
+    args: GetConsolidatedReportCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetConsolidatedReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGlobalSettingsCommand}
+   */
+  getGlobalSettings(): Promise<GetGlobalSettingsCommandOutput>;
+  getGlobalSettings(
+    args: GetGlobalSettingsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetGlobalSettingsCommandOutput>;
+  getGlobalSettings(
+    args: GetGlobalSettingsCommandInput,
+    cb: (err: any, data?: GetGlobalSettingsCommandOutput) => void
+  ): void;
+  getGlobalSettings(
+    args: GetGlobalSettingsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetGlobalSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLensCommand}
+   */
+  getLens(
+    args: GetLensCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetLensCommandOutput>;
+  getLens(
+    args: GetLensCommandInput,
+    cb: (err: any, data?: GetLensCommandOutput) => void
+  ): void;
+  getLens(
+    args: GetLensCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetLensCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLensReviewCommand}
+   */
+  getLensReview(
     args: GetLensReviewCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<GetLensReviewCommandOutput>;
-  public getLensReview(
+  getLensReview(
     args: GetLensReviewCommandInput,
     cb: (err: any, data?: GetLensReviewCommandOutput) => void
   ): void;
-  public getLensReview(
+  getLensReview(
     args: GetLensReviewCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: GetLensReviewCommandOutput) => void
   ): void;
-  public getLensReview(
-    args: GetLensReviewCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLensReviewCommandOutput) => void),
-    cb?: (err: any, data?: GetLensReviewCommandOutput) => void
-  ): Promise<GetLensReviewCommandOutput> | void {
-    const command = new GetLensReviewCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get lens review report.</p>
+   * @see {@link GetLensReviewReportCommand}
    */
-  public getLensReviewReport(
+  getLensReviewReport(
     args: GetLensReviewReportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<GetLensReviewReportCommandOutput>;
-  public getLensReviewReport(
+  getLensReviewReport(
     args: GetLensReviewReportCommandInput,
     cb: (err: any, data?: GetLensReviewReportCommandOutput) => void
   ): void;
-  public getLensReviewReport(
+  getLensReviewReport(
     args: GetLensReviewReportCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: GetLensReviewReportCommandOutput) => void
   ): void;
-  public getLensReviewReport(
-    args: GetLensReviewReportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLensReviewReportCommandOutput) => void),
-    cb?: (err: any, data?: GetLensReviewReportCommandOutput) => void
-  ): Promise<GetLensReviewReportCommandOutput> | void {
-    const command = new GetLensReviewReportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get lens version differences.</p>
+   * @see {@link GetLensVersionDifferenceCommand}
    */
-  public getLensVersionDifference(
+  getLensVersionDifference(
     args: GetLensVersionDifferenceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<GetLensVersionDifferenceCommandOutput>;
-  public getLensVersionDifference(
+  getLensVersionDifference(
     args: GetLensVersionDifferenceCommandInput,
     cb: (err: any, data?: GetLensVersionDifferenceCommandOutput) => void
   ): void;
-  public getLensVersionDifference(
+  getLensVersionDifference(
     args: GetLensVersionDifferenceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: GetLensVersionDifferenceCommandOutput) => void
   ): void;
-  public getLensVersionDifference(
-    args: GetLensVersionDifferenceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLensVersionDifferenceCommandOutput) => void),
-    cb?: (err: any, data?: GetLensVersionDifferenceCommandOutput) => void
-  ): Promise<GetLensVersionDifferenceCommandOutput> | void {
-    const command = new GetLensVersionDifferenceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get a milestone for an existing workload.</p>
+   * @see {@link GetMilestoneCommand}
    */
-  public getMilestone(
+  getMilestone(
     args: GetMilestoneCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<GetMilestoneCommandOutput>;
-  public getMilestone(args: GetMilestoneCommandInput, cb: (err: any, data?: GetMilestoneCommandOutput) => void): void;
-  public getMilestone(
+  getMilestone(
     args: GetMilestoneCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetMilestoneCommandOutput) => void
   ): void;
-  public getMilestone(
+  getMilestone(
     args: GetMilestoneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMilestoneCommandOutput) => void),
-    cb?: (err: any, data?: GetMilestoneCommandOutput) => void
-  ): Promise<GetMilestoneCommandOutput> | void {
-    const command = new GetMilestoneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetMilestoneCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Get an existing workload.</p>
+   * @see {@link GetProfileCommand}
    */
-  public getWorkload(args: GetWorkloadCommandInput, options?: __HttpHandlerOptions): Promise<GetWorkloadCommandOutput>;
-  public getWorkload(args: GetWorkloadCommandInput, cb: (err: any, data?: GetWorkloadCommandOutput) => void): void;
-  public getWorkload(
+  getProfile(
+    args: GetProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetProfileCommandOutput>;
+  getProfile(
+    args: GetProfileCommandInput,
+    cb: (err: any, data?: GetProfileCommandOutput) => void
+  ): void;
+  getProfile(
+    args: GetProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProfileTemplateCommand}
+   */
+  getProfileTemplate(): Promise<GetProfileTemplateCommandOutput>;
+  getProfileTemplate(
+    args: GetProfileTemplateCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetProfileTemplateCommandOutput>;
+  getProfileTemplate(
+    args: GetProfileTemplateCommandInput,
+    cb: (err: any, data?: GetProfileTemplateCommandOutput) => void
+  ): void;
+  getProfileTemplate(
+    args: GetProfileTemplateCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetProfileTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReviewTemplateCommand}
+   */
+  getReviewTemplate(
+    args: GetReviewTemplateCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetReviewTemplateCommandOutput>;
+  getReviewTemplate(
+    args: GetReviewTemplateCommandInput,
+    cb: (err: any, data?: GetReviewTemplateCommandOutput) => void
+  ): void;
+  getReviewTemplate(
+    args: GetReviewTemplateCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetReviewTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReviewTemplateAnswerCommand}
+   */
+  getReviewTemplateAnswer(
+    args: GetReviewTemplateAnswerCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetReviewTemplateAnswerCommandOutput>;
+  getReviewTemplateAnswer(
+    args: GetReviewTemplateAnswerCommandInput,
+    cb: (err: any, data?: GetReviewTemplateAnswerCommandOutput) => void
+  ): void;
+  getReviewTemplateAnswer(
+    args: GetReviewTemplateAnswerCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetReviewTemplateAnswerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReviewTemplateLensReviewCommand}
+   */
+  getReviewTemplateLensReview(
+    args: GetReviewTemplateLensReviewCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetReviewTemplateLensReviewCommandOutput>;
+  getReviewTemplateLensReview(
+    args: GetReviewTemplateLensReviewCommandInput,
+    cb: (err: any, data?: GetReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+  getReviewTemplateLensReview(
+    args: GetReviewTemplateLensReviewCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkloadCommand}
+   */
+  getWorkload(
     args: GetWorkloadCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WellArchitectedRequestOptions
+  ): Promise<GetWorkloadCommandOutput>;
+  getWorkload(
+    args: GetWorkloadCommandInput,
     cb: (err: any, data?: GetWorkloadCommandOutput) => void
   ): void;
-  public getWorkload(
+  getWorkload(
     args: GetWorkloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkloadCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkloadCommandOutput) => void
-  ): Promise<GetWorkloadCommandOutput> | void {
-    const command = new GetWorkloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: GetWorkloadCommandOutput) => void
+  ): void;
 
   /**
-   * <p>List of answers.</p>
+   * @see {@link ImportLensCommand}
    */
-  public listAnswers(args: ListAnswersCommandInput, options?: __HttpHandlerOptions): Promise<ListAnswersCommandOutput>;
-  public listAnswers(args: ListAnswersCommandInput, cb: (err: any, data?: ListAnswersCommandOutput) => void): void;
-  public listAnswers(
+  importLens(
+    args: ImportLensCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ImportLensCommandOutput>;
+  importLens(
+    args: ImportLensCommandInput,
+    cb: (err: any, data?: ImportLensCommandOutput) => void
+  ): void;
+  importLens(
+    args: ImportLensCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ImportLensCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentContextsCommand}
+   */
+  listAgentContexts(
+    args: ListAgentContextsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentContextsCommandOutput>;
+  listAgentContexts(
+    args: ListAgentContextsCommandInput,
+    cb: (err: any, data?: ListAgentContextsCommandOutput) => void
+  ): void;
+  listAgentContexts(
+    args: ListAgentContextsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentContextsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentGoalsCommand}
+   */
+  listAgentGoals(
+    args: ListAgentGoalsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentGoalsCommandOutput>;
+  listAgentGoals(
+    args: ListAgentGoalsCommandInput,
+    cb: (err: any, data?: ListAgentGoalsCommandOutput) => void
+  ): void;
+  listAgentGoals(
+    args: ListAgentGoalsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentGoalsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentProfilesCommand}
+   */
+  listAgentProfiles(): Promise<ListAgentProfilesCommandOutput>;
+  listAgentProfiles(
+    args: ListAgentProfilesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentProfilesCommandOutput>;
+  listAgentProfiles(
+    args: ListAgentProfilesCommandInput,
+    cb: (err: any, data?: ListAgentProfilesCommandOutput) => void
+  ): void;
+  listAgentProfiles(
+    args: ListAgentProfilesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentRecommendationGenerationsCommand}
+   */
+  listAgentRecommendationGenerations(
+    args: ListAgentRecommendationGenerationsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentRecommendationGenerationsCommandOutput>;
+  listAgentRecommendationGenerations(
+    args: ListAgentRecommendationGenerationsCommandInput,
+    cb: (err: any, data?: ListAgentRecommendationGenerationsCommandOutput) => void
+  ): void;
+  listAgentRecommendationGenerations(
+    args: ListAgentRecommendationGenerationsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentRecommendationGenerationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentRecommendationItemsCommand}
+   */
+  listAgentRecommendationItems(
+    args: ListAgentRecommendationItemsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentRecommendationItemsCommandOutput>;
+  listAgentRecommendationItems(
+    args: ListAgentRecommendationItemsCommandInput,
+    cb: (err: any, data?: ListAgentRecommendationItemsCommandOutput) => void
+  ): void;
+  listAgentRecommendationItems(
+    args: ListAgentRecommendationItemsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentRecommendationItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentRecommendationsCommand}
+   */
+  listAgentRecommendations(
+    args: ListAgentRecommendationsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAgentRecommendationsCommandOutput>;
+  listAgentRecommendations(
+    args: ListAgentRecommendationsCommandInput,
+    cb: (err: any, data?: ListAgentRecommendationsCommandOutput) => void
+  ): void;
+  listAgentRecommendations(
+    args: ListAgentRecommendationsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAgentRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnswersCommand}
+   */
+  listAnswers(
     args: ListAnswersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListAnswersCommandOutput>;
+  listAnswers(
+    args: ListAnswersCommandInput,
     cb: (err: any, data?: ListAnswersCommandOutput) => void
   ): void;
-  public listAnswers(
+  listAnswers(
     args: ListAnswersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAnswersCommandOutput) => void),
-    cb?: (err: any, data?: ListAnswersCommandOutput) => void
-  ): Promise<ListAnswersCommandOutput> | void {
-    const command = new ListAnswersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListAnswersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>List the available lenses.</p>
+   * @see {@link ListCheckDetailsCommand}
    */
-  public listLenses(args: ListLensesCommandInput, options?: __HttpHandlerOptions): Promise<ListLensesCommandOutput>;
-  public listLenses(args: ListLensesCommandInput, cb: (err: any, data?: ListLensesCommandOutput) => void): void;
-  public listLenses(
+  listCheckDetails(
+    args: ListCheckDetailsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListCheckDetailsCommandOutput>;
+  listCheckDetails(
+    args: ListCheckDetailsCommandInput,
+    cb: (err: any, data?: ListCheckDetailsCommandOutput) => void
+  ): void;
+  listCheckDetails(
+    args: ListCheckDetailsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListCheckDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCheckSummariesCommand}
+   */
+  listCheckSummaries(
+    args: ListCheckSummariesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListCheckSummariesCommandOutput>;
+  listCheckSummaries(
+    args: ListCheckSummariesCommandInput,
+    cb: (err: any, data?: ListCheckSummariesCommandOutput) => void
+  ): void;
+  listCheckSummaries(
+    args: ListCheckSummariesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListCheckSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLensesCommand}
+   */
+  listLenses(): Promise<ListLensesCommandOutput>;
+  listLenses(
     args: ListLensesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListLensesCommandOutput>;
+  listLenses(
+    args: ListLensesCommandInput,
     cb: (err: any, data?: ListLensesCommandOutput) => void
   ): void;
-  public listLenses(
+  listLenses(
     args: ListLensesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLensesCommandOutput) => void),
-    cb?: (err: any, data?: ListLensesCommandOutput) => void
-  ): Promise<ListLensesCommandOutput> | void {
-    const command = new ListLensesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListLensesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>List lens review improvements.</p>
+   * @see {@link ListLensReviewImprovementsCommand}
    */
-  public listLensReviewImprovements(
+  listLensReviewImprovements(
     args: ListLensReviewImprovementsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListLensReviewImprovementsCommandOutput>;
-  public listLensReviewImprovements(
+  listLensReviewImprovements(
     args: ListLensReviewImprovementsCommandInput,
     cb: (err: any, data?: ListLensReviewImprovementsCommandOutput) => void
   ): void;
-  public listLensReviewImprovements(
+  listLensReviewImprovements(
     args: ListLensReviewImprovementsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListLensReviewImprovementsCommandOutput) => void
   ): void;
-  public listLensReviewImprovements(
-    args: ListLensReviewImprovementsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLensReviewImprovementsCommandOutput) => void),
-    cb?: (err: any, data?: ListLensReviewImprovementsCommandOutput) => void
-  ): Promise<ListLensReviewImprovementsCommandOutput> | void {
-    const command = new ListLensReviewImprovementsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List lens reviews.</p>
+   * @see {@link ListLensReviewsCommand}
    */
-  public listLensReviews(
+  listLensReviews(
     args: ListLensReviewsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListLensReviewsCommandOutput>;
-  public listLensReviews(
+  listLensReviews(
     args: ListLensReviewsCommandInput,
     cb: (err: any, data?: ListLensReviewsCommandOutput) => void
   ): void;
-  public listLensReviews(
+  listLensReviews(
     args: ListLensReviewsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListLensReviewsCommandOutput) => void
   ): void;
-  public listLensReviews(
-    args: ListLensReviewsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLensReviewsCommandOutput) => void),
-    cb?: (err: any, data?: ListLensReviewsCommandOutput) => void
-  ): Promise<ListLensReviewsCommandOutput> | void {
-    const command = new ListLensReviewsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all milestones for an existing workload.</p>
+   * @see {@link ListLensSharesCommand}
    */
-  public listMilestones(
+  listLensShares(
+    args: ListLensSharesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListLensSharesCommandOutput>;
+  listLensShares(
+    args: ListLensSharesCommandInput,
+    cb: (err: any, data?: ListLensSharesCommandOutput) => void
+  ): void;
+  listLensShares(
+    args: ListLensSharesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListLensSharesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMilestonesCommand}
+   */
+  listMilestones(
     args: ListMilestonesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListMilestonesCommandOutput>;
-  public listMilestones(
+  listMilestones(
     args: ListMilestonesCommandInput,
     cb: (err: any, data?: ListMilestonesCommandOutput) => void
   ): void;
-  public listMilestones(
+  listMilestones(
     args: ListMilestonesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListMilestonesCommandOutput) => void
   ): void;
-  public listMilestones(
-    args: ListMilestonesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMilestonesCommandOutput) => void),
-    cb?: (err: any, data?: ListMilestonesCommandOutput) => void
-  ): Promise<ListMilestonesCommandOutput> | void {
-    const command = new ListMilestonesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List lens notifications.</p>
+   * @see {@link ListNotificationsCommand}
    */
-  public listNotifications(
+  listNotifications(): Promise<ListNotificationsCommandOutput>;
+  listNotifications(
     args: ListNotificationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListNotificationsCommandOutput>;
-  public listNotifications(
+  listNotifications(
     args: ListNotificationsCommandInput,
     cb: (err: any, data?: ListNotificationsCommandOutput) => void
   ): void;
-  public listNotifications(
+  listNotifications(
     args: ListNotificationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListNotificationsCommandOutput) => void
   ): void;
-  public listNotifications(
-    args: ListNotificationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNotificationsCommandOutput) => void),
-    cb?: (err: any, data?: ListNotificationsCommandOutput) => void
-  ): Promise<ListNotificationsCommandOutput> | void {
-    const command = new ListNotificationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List  the workload invitations.</p>
+   * @see {@link ListProfileNotificationsCommand}
    */
-  public listShareInvitations(
+  listProfileNotifications(): Promise<ListProfileNotificationsCommandOutput>;
+  listProfileNotifications(
+    args: ListProfileNotificationsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListProfileNotificationsCommandOutput>;
+  listProfileNotifications(
+    args: ListProfileNotificationsCommandInput,
+    cb: (err: any, data?: ListProfileNotificationsCommandOutput) => void
+  ): void;
+  listProfileNotifications(
+    args: ListProfileNotificationsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListProfileNotificationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfilesCommand}
+   */
+  listProfiles(): Promise<ListProfilesCommandOutput>;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListProfilesCommandOutput>;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    cb: (err: any, data?: ListProfilesCommandOutput) => void
+  ): void;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfileSharesCommand}
+   */
+  listProfileShares(
+    args: ListProfileSharesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListProfileSharesCommandOutput>;
+  listProfileShares(
+    args: ListProfileSharesCommandInput,
+    cb: (err: any, data?: ListProfileSharesCommandOutput) => void
+  ): void;
+  listProfileShares(
+    args: ListProfileSharesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListProfileSharesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReviewTemplateAnswersCommand}
+   */
+  listReviewTemplateAnswers(
+    args: ListReviewTemplateAnswersCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListReviewTemplateAnswersCommandOutput>;
+  listReviewTemplateAnswers(
+    args: ListReviewTemplateAnswersCommandInput,
+    cb: (err: any, data?: ListReviewTemplateAnswersCommandOutput) => void
+  ): void;
+  listReviewTemplateAnswers(
+    args: ListReviewTemplateAnswersCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListReviewTemplateAnswersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReviewTemplatesCommand}
+   */
+  listReviewTemplates(): Promise<ListReviewTemplatesCommandOutput>;
+  listReviewTemplates(
+    args: ListReviewTemplatesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListReviewTemplatesCommandOutput>;
+  listReviewTemplates(
+    args: ListReviewTemplatesCommandInput,
+    cb: (err: any, data?: ListReviewTemplatesCommandOutput) => void
+  ): void;
+  listReviewTemplates(
+    args: ListReviewTemplatesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListReviewTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListShareInvitationsCommand}
+   */
+  listShareInvitations(): Promise<ListShareInvitationsCommandOutput>;
+  listShareInvitations(
     args: ListShareInvitationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListShareInvitationsCommandOutput>;
-  public listShareInvitations(
+  listShareInvitations(
     args: ListShareInvitationsCommandInput,
     cb: (err: any, data?: ListShareInvitationsCommandOutput) => void
   ): void;
-  public listShareInvitations(
+  listShareInvitations(
     args: ListShareInvitationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListShareInvitationsCommandOutput) => void
   ): void;
-  public listShareInvitations(
-    args: ListShareInvitationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListShareInvitationsCommandOutput) => void),
-    cb?: (err: any, data?: ListShareInvitationsCommandOutput) => void
-  ): Promise<ListShareInvitationsCommandOutput> | void {
-    const command = new ListShareInvitationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the tags for a resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List workloads. Paginated.</p>
+   * @see {@link ListTemplateSharesCommand}
    */
-  public listWorkloads(
+  listTemplateShares(
+    args: ListTemplateSharesCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<ListTemplateSharesCommandOutput>;
+  listTemplateShares(
+    args: ListTemplateSharesCommandInput,
+    cb: (err: any, data?: ListTemplateSharesCommandOutput) => void
+  ): void;
+  listTemplateShares(
+    args: ListTemplateSharesCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: ListTemplateSharesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkloadsCommand}
+   */
+  listWorkloads(): Promise<ListWorkloadsCommandOutput>;
+  listWorkloads(
     args: ListWorkloadsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListWorkloadsCommandOutput>;
-  public listWorkloads(
+  listWorkloads(
     args: ListWorkloadsCommandInput,
     cb: (err: any, data?: ListWorkloadsCommandOutput) => void
   ): void;
-  public listWorkloads(
+  listWorkloads(
     args: ListWorkloadsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListWorkloadsCommandOutput) => void
   ): void;
-  public listWorkloads(
-    args: ListWorkloadsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkloadsCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkloadsCommandOutput) => void
-  ): Promise<ListWorkloadsCommandOutput> | void {
-    const command = new ListWorkloadsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the workload shares associated with the workload.</p>
+   * @see {@link ListWorkloadSharesCommand}
    */
-  public listWorkloadShares(
+  listWorkloadShares(
     args: ListWorkloadSharesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<ListWorkloadSharesCommandOutput>;
-  public listWorkloadShares(
+  listWorkloadShares(
     args: ListWorkloadSharesCommandInput,
     cb: (err: any, data?: ListWorkloadSharesCommandOutput) => void
   ): void;
-  public listWorkloadShares(
+  listWorkloadShares(
     args: ListWorkloadSharesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: ListWorkloadSharesCommandOutput) => void
   ): void;
-  public listWorkloadShares(
-    args: ListWorkloadSharesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkloadSharesCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkloadSharesCommandOutput) => void
-  ): Promise<ListWorkloadSharesCommandOutput> | void {
-    const command = new ListWorkloadSharesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds one or more tags to the specified resource.</p>
+   * @see {@link PutAgentRecommendationFeedbackCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  putAgentRecommendationFeedback(
+    args: PutAgentRecommendationFeedbackCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<PutAgentRecommendationFeedbackCommandOutput>;
+  putAgentRecommendationFeedback(
+    args: PutAgentRecommendationFeedbackCommandInput,
+    cb: (err: any, data?: PutAgentRecommendationFeedbackCommandOutput) => void
+  ): void;
+  putAgentRecommendationFeedback(
+    args: PutAgentRecommendationFeedbackCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: PutAgentRecommendationFeedbackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAgentRecommendationGenerationCommand}
+   */
+  startAgentRecommendationGeneration(
+    args: StartAgentRecommendationGenerationCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<StartAgentRecommendationGenerationCommandOutput>;
+  startAgentRecommendationGeneration(
+    args: StartAgentRecommendationGenerationCommandInput,
+    cb: (err: any, data?: StartAgentRecommendationGenerationCommandOutput) => void
+  ): void;
+  startAgentRecommendationGeneration(
+    args: StartAgentRecommendationGenerationCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: StartAgentRecommendationGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WellArchitectedRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes specified tags from a resource.</p>
-   *         <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>
-   *         <p>
-   *             <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>
-   *          </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update the answer to a specific question in a workload review.</p>
+   * @see {@link UpdateAgentContextCommand}
    */
-  public updateAnswer(
+  updateAgentContext(
+    args: UpdateAgentContextCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateAgentContextCommandOutput>;
+  updateAgentContext(
+    args: UpdateAgentContextCommandInput,
+    cb: (err: any, data?: UpdateAgentContextCommandOutput) => void
+  ): void;
+  updateAgentContext(
+    args: UpdateAgentContextCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateAgentContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentGoalCommand}
+   */
+  updateAgentGoal(
+    args: UpdateAgentGoalCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateAgentGoalCommandOutput>;
+  updateAgentGoal(
+    args: UpdateAgentGoalCommandInput,
+    cb: (err: any, data?: UpdateAgentGoalCommandOutput) => void
+  ): void;
+  updateAgentGoal(
+    args: UpdateAgentGoalCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateAgentGoalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentProfileCommand}
+   */
+  updateAgentProfile(
+    args: UpdateAgentProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateAgentProfileCommandOutput>;
+  updateAgentProfile(
+    args: UpdateAgentProfileCommandInput,
+    cb: (err: any, data?: UpdateAgentProfileCommandOutput) => void
+  ): void;
+  updateAgentProfile(
+    args: UpdateAgentProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateAgentProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentRecommendationStatusCommand}
+   */
+  updateAgentRecommendationStatus(
+    args: UpdateAgentRecommendationStatusCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateAgentRecommendationStatusCommandOutput>;
+  updateAgentRecommendationStatus(
+    args: UpdateAgentRecommendationStatusCommandInput,
+    cb: (err: any, data?: UpdateAgentRecommendationStatusCommandOutput) => void
+  ): void;
+  updateAgentRecommendationStatus(
+    args: UpdateAgentRecommendationStatusCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateAgentRecommendationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAnswerCommand}
+   */
+  updateAnswer(
     args: UpdateAnswerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpdateAnswerCommandOutput>;
-  public updateAnswer(args: UpdateAnswerCommandInput, cb: (err: any, data?: UpdateAnswerCommandOutput) => void): void;
-  public updateAnswer(
+  updateAnswer(
     args: UpdateAnswerCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateAnswerCommandOutput) => void
   ): void;
-  public updateAnswer(
+  updateAnswer(
     args: UpdateAnswerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAnswerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAnswerCommandOutput) => void
-  ): Promise<UpdateAnswerCommandOutput> | void {
-    const command = new UpdateAnswerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateAnswerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Update lens review.</p>
+   * @see {@link UpdateGlobalSettingsCommand}
    */
-  public updateLensReview(
+  updateGlobalSettings(): Promise<UpdateGlobalSettingsCommandOutput>;
+  updateGlobalSettings(
+    args: UpdateGlobalSettingsCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateGlobalSettingsCommandOutput>;
+  updateGlobalSettings(
+    args: UpdateGlobalSettingsCommandInput,
+    cb: (err: any, data?: UpdateGlobalSettingsCommandOutput) => void
+  ): void;
+  updateGlobalSettings(
+    args: UpdateGlobalSettingsCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateGlobalSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIntegrationCommand}
+   */
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateIntegrationCommandOutput>;
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
+  ): void;
+  updateIntegration(
+    args: UpdateIntegrationCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLensReviewCommand}
+   */
+  updateLensReview(
     args: UpdateLensReviewCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpdateLensReviewCommandOutput>;
-  public updateLensReview(
+  updateLensReview(
     args: UpdateLensReviewCommandInput,
     cb: (err: any, data?: UpdateLensReviewCommandOutput) => void
   ): void;
-  public updateLensReview(
+  updateLensReview(
     args: UpdateLensReviewCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UpdateLensReviewCommandOutput) => void
   ): void;
-  public updateLensReview(
-    args: UpdateLensReviewCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLensReviewCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLensReviewCommandOutput) => void
-  ): Promise<UpdateLensReviewCommandOutput> | void {
-    const command = new UpdateLensReviewCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update a workload invitation.</p>
+   * @see {@link UpdateProfileCommand}
    */
-  public updateShareInvitation(
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateProfileCommandOutput>;
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    cb: (err: any, data?: UpdateProfileCommandOutput) => void
+  ): void;
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReviewTemplateCommand}
+   */
+  updateReviewTemplate(
+    args: UpdateReviewTemplateCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateReviewTemplateCommandOutput>;
+  updateReviewTemplate(
+    args: UpdateReviewTemplateCommandInput,
+    cb: (err: any, data?: UpdateReviewTemplateCommandOutput) => void
+  ): void;
+  updateReviewTemplate(
+    args: UpdateReviewTemplateCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateReviewTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReviewTemplateAnswerCommand}
+   */
+  updateReviewTemplateAnswer(
+    args: UpdateReviewTemplateAnswerCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateReviewTemplateAnswerCommandOutput>;
+  updateReviewTemplateAnswer(
+    args: UpdateReviewTemplateAnswerCommandInput,
+    cb: (err: any, data?: UpdateReviewTemplateAnswerCommandOutput) => void
+  ): void;
+  updateReviewTemplateAnswer(
+    args: UpdateReviewTemplateAnswerCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateReviewTemplateAnswerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReviewTemplateLensReviewCommand}
+   */
+  updateReviewTemplateLensReview(
+    args: UpdateReviewTemplateLensReviewCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpdateReviewTemplateLensReviewCommandOutput>;
+  updateReviewTemplateLensReview(
+    args: UpdateReviewTemplateLensReviewCommandInput,
+    cb: (err: any, data?: UpdateReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+  updateReviewTemplateLensReview(
+    args: UpdateReviewTemplateLensReviewCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpdateReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateShareInvitationCommand}
+   */
+  updateShareInvitation(
     args: UpdateShareInvitationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpdateShareInvitationCommandOutput>;
-  public updateShareInvitation(
+  updateShareInvitation(
     args: UpdateShareInvitationCommandInput,
     cb: (err: any, data?: UpdateShareInvitationCommandOutput) => void
   ): void;
-  public updateShareInvitation(
+  updateShareInvitation(
     args: UpdateShareInvitationCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UpdateShareInvitationCommandOutput) => void
   ): void;
-  public updateShareInvitation(
-    args: UpdateShareInvitationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateShareInvitationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateShareInvitationCommandOutput) => void
-  ): Promise<UpdateShareInvitationCommandOutput> | void {
-    const command = new UpdateShareInvitationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update an existing workload.</p>
+   * @see {@link UpdateWorkloadCommand}
    */
-  public updateWorkload(
+  updateWorkload(
     args: UpdateWorkloadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpdateWorkloadCommandOutput>;
-  public updateWorkload(
+  updateWorkload(
     args: UpdateWorkloadCommandInput,
     cb: (err: any, data?: UpdateWorkloadCommandOutput) => void
   ): void;
-  public updateWorkload(
+  updateWorkload(
     args: UpdateWorkloadCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UpdateWorkloadCommandOutput) => void
   ): void;
-  public updateWorkload(
-    args: UpdateWorkloadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkloadCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkloadCommandOutput) => void
-  ): Promise<UpdateWorkloadCommandOutput> | void {
-    const command = new UpdateWorkloadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update a workload share.</p>
+   * @see {@link UpdateWorkloadShareCommand}
    */
-  public updateWorkloadShare(
+  updateWorkloadShare(
     args: UpdateWorkloadShareCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpdateWorkloadShareCommandOutput>;
-  public updateWorkloadShare(
+  updateWorkloadShare(
     args: UpdateWorkloadShareCommandInput,
     cb: (err: any, data?: UpdateWorkloadShareCommandOutput) => void
   ): void;
-  public updateWorkloadShare(
+  updateWorkloadShare(
     args: UpdateWorkloadShareCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UpdateWorkloadShareCommandOutput) => void
   ): void;
-  public updateWorkloadShare(
-    args: UpdateWorkloadShareCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkloadShareCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkloadShareCommandOutput) => void
-  ): Promise<UpdateWorkloadShareCommandOutput> | void {
-    const command = new UpdateWorkloadShareCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Upgrade lens review.</p>
+   * @see {@link UpgradeLensReviewCommand}
    */
-  public upgradeLensReview(
+  upgradeLensReview(
     args: UpgradeLensReviewCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WellArchitectedRequestOptions
   ): Promise<UpgradeLensReviewCommandOutput>;
-  public upgradeLensReview(
+  upgradeLensReview(
     args: UpgradeLensReviewCommandInput,
     cb: (err: any, data?: UpgradeLensReviewCommandOutput) => void
   ): void;
-  public upgradeLensReview(
+  upgradeLensReview(
     args: UpgradeLensReviewCommandInput,
-    options: __HttpHandlerOptions,
+    options: WellArchitectedRequestOptions,
     cb: (err: any, data?: UpgradeLensReviewCommandOutput) => void
   ): void;
-  public upgradeLensReview(
-    args: UpgradeLensReviewCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpgradeLensReviewCommandOutput) => void),
-    cb?: (err: any, data?: UpgradeLensReviewCommandOutput) => void
-  ): Promise<UpgradeLensReviewCommandOutput> | void {
-    const command = new UpgradeLensReviewCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpgradeProfileVersionCommand}
+   */
+  upgradeProfileVersion(
+    args: UpgradeProfileVersionCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpgradeProfileVersionCommandOutput>;
+  upgradeProfileVersion(
+    args: UpgradeProfileVersionCommandInput,
+    cb: (err: any, data?: UpgradeProfileVersionCommandOutput) => void
+  ): void;
+  upgradeProfileVersion(
+    args: UpgradeProfileVersionCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpgradeProfileVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpgradeReviewTemplateLensReviewCommand}
+   */
+  upgradeReviewTemplateLensReview(
+    args: UpgradeReviewTemplateLensReviewCommandInput,
+    options?: WellArchitectedRequestOptions
+  ): Promise<UpgradeReviewTemplateLensReviewCommandOutput>;
+  upgradeReviewTemplateLensReview(
+    args: UpgradeReviewTemplateLensReviewCommandInput,
+    cb: (err: any, data?: UpgradeReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+  upgradeReviewTemplateLensReview(
+    args: UpgradeReviewTemplateLensReviewCommandInput,
+    options: WellArchitectedRequestOptions,
+    cb: (err: any, data?: UpgradeReviewTemplateLensReviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConsolidatedReportCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetConsolidatedReportCommandOutput}.
+   */
+  paginateGetConsolidatedReport(
+    args: GetConsolidatedReportCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetConsolidatedReportCommandOutput>;
+
+  /**
+   * @see {@link ListAgentContextsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentContextsCommandOutput}.
+   */
+  paginateListAgentContexts(
+    args: ListAgentContextsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentContextsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentGoalsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentGoalsCommandOutput}.
+   */
+  paginateListAgentGoals(
+    args: ListAgentGoalsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentGoalsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentProfilesCommandOutput}.
+   */
+  paginateListAgentProfiles(
+    args?: ListAgentProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListAgentRecommendationGenerationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentRecommendationGenerationsCommandOutput}.
+   */
+  paginateListAgentRecommendationGenerations(
+    args: ListAgentRecommendationGenerationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentRecommendationGenerationsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentRecommendationItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentRecommendationItemsCommandOutput}.
+   */
+  paginateListAgentRecommendationItems(
+    args: ListAgentRecommendationItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentRecommendationItemsCommandOutput>;
+
+  /**
+   * @see {@link ListAgentRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgentRecommendationsCommandOutput}.
+   */
+  paginateListAgentRecommendations(
+    args: ListAgentRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgentRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListAnswersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnswersCommandOutput}.
+   */
+  paginateListAnswers(
+    args: ListAnswersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnswersCommandOutput>;
+
+  /**
+   * @see {@link ListCheckDetailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCheckDetailsCommandOutput}.
+   */
+  paginateListCheckDetails(
+    args: ListCheckDetailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCheckDetailsCommandOutput>;
+
+  /**
+   * @see {@link ListCheckSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCheckSummariesCommandOutput}.
+   */
+  paginateListCheckSummaries(
+    args: ListCheckSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCheckSummariesCommandOutput>;
+
+  /**
+   * @see {@link ListLensesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLensesCommandOutput}.
+   */
+  paginateListLenses(
+    args?: ListLensesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLensesCommandOutput>;
+
+  /**
+   * @see {@link ListLensReviewImprovementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLensReviewImprovementsCommandOutput}.
+   */
+  paginateListLensReviewImprovements(
+    args: ListLensReviewImprovementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLensReviewImprovementsCommandOutput>;
+
+  /**
+   * @see {@link ListLensReviewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLensReviewsCommandOutput}.
+   */
+  paginateListLensReviews(
+    args: ListLensReviewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLensReviewsCommandOutput>;
+
+  /**
+   * @see {@link ListLensSharesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLensSharesCommandOutput}.
+   */
+  paginateListLensShares(
+    args: ListLensSharesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLensSharesCommandOutput>;
+
+  /**
+   * @see {@link ListMilestonesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMilestonesCommandOutput}.
+   */
+  paginateListMilestones(
+    args: ListMilestonesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMilestonesCommandOutput>;
+
+  /**
+   * @see {@link ListNotificationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNotificationsCommandOutput}.
+   */
+  paginateListNotifications(
+    args?: ListNotificationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNotificationsCommandOutput>;
+
+  /**
+   * @see {@link ListProfileNotificationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProfileNotificationsCommandOutput}.
+   */
+  paginateListProfileNotifications(
+    args?: ListProfileNotificationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProfileNotificationsCommandOutput>;
+
+  /**
+   * @see {@link ListProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProfilesCommandOutput}.
+   */
+  paginateListProfiles(
+    args?: ListProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListProfileSharesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProfileSharesCommandOutput}.
+   */
+  paginateListProfileShares(
+    args: ListProfileSharesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProfileSharesCommandOutput>;
+
+  /**
+   * @see {@link ListReviewTemplateAnswersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReviewTemplateAnswersCommandOutput}.
+   */
+  paginateListReviewTemplateAnswers(
+    args: ListReviewTemplateAnswersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReviewTemplateAnswersCommandOutput>;
+
+  /**
+   * @see {@link ListReviewTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReviewTemplatesCommandOutput}.
+   */
+  paginateListReviewTemplates(
+    args?: ListReviewTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReviewTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListShareInvitationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListShareInvitationsCommandOutput}.
+   */
+  paginateListShareInvitations(
+    args?: ListShareInvitationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListShareInvitationsCommandOutput>;
+
+  /**
+   * @see {@link ListTemplateSharesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplateSharesCommandOutput}.
+   */
+  paginateListTemplateShares(
+    args: ListTemplateSharesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplateSharesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkloadsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkloadsCommandOutput}.
+   */
+  paginateListWorkloads(
+    args?: ListWorkloadsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkloadsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkloadSharesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkloadSharesCommandOutput}.
+   */
+  paginateListWorkloadShares(
+    args: ListWorkloadSharesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkloadSharesCommandOutput>;
 }
+
+/**
+ * <fullname>Amazon Web Services Well-Architected</fullname> <p>Amazon Web Services Well-Architected helps you evaluate your architectures against Amazon Web Services best practices across operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability. The service includes the Amazon Web Services Well-Architected Agent for AI-powered recommendations tailored to your specific environment, and the <a href="http://aws.amazon.com/well-architected-tool">Well-Architected Tool</a> for conducting reviews and tracking improvements.</p> <p>This is the <i>Amazon Web Services Well-Architected API Reference</i>. Through this API, you can programmatically access personalized recommendations and automation scripts from the Amazon Web Services Well-Architected Agent, and create and manage workloads, conduct lens reviews, track milestones, manage custom lenses, share workloads across accounts, and manage profiles with the Well-Architected Tool.</p> <p>For more information about the service, see the <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html">Amazon Web Services Well-Architected User Guide</a>.</p>
+ * @public
+ */
+export class WellArchitected extends WellArchitectedClient implements WellArchitected {}
+createAggregatedClient(commands, WellArchitected, { paginators });

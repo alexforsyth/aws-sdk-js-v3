@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { ArchiveCreationOutput, CompleteMultipartUploadInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1CompleteMultipartUploadCommand,
-  serializeAws_restJson1CompleteMultipartUploadCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ArchiveCreationOutput, CompleteMultipartUploadInput } from "../models/models_0";
+import { CompleteMultipartUpload$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CompleteMultipartUploadCommand}.
+ */
 export interface CompleteMultipartUploadCommandInput extends CompleteMultipartUploadInput {}
+/**
+ * @public
+ *
+ * The output of {@link CompleteMultipartUploadCommand}.
+ */
 export interface CompleteMultipartUploadCommandOutput extends ArchiveCreationOutput, __MetadataBearer {}
 
 /**
- * <p>You call this operation to inform Amazon S3 Glacier (Glacier) that all the archive parts have been
+ * <p>You call this operation to inform Amazon Glacier (Glacier) that all the archive parts have been
  *          uploaded and that Glacier can now assemble the archive from the uploaded parts.
  *          After assembling and saving the archive to the vault, Glacier returns the URI path
  *          of the newly created archive resource. Using the URI path, you can then access the archive.
@@ -65,68 +66,90 @@ export interface CompleteMultipartUploadCommandOutput extends ArchiveCreationOut
  * ```javascript
  * import { GlacierClient, CompleteMultipartUploadCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, CompleteMultipartUploadCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // CompleteMultipartUploadInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   uploadId: "STRING_VALUE", // required
+ *   archiveSize: "STRING_VALUE",
+ *   checksum: "STRING_VALUE",
+ * };
  * const command = new CompleteMultipartUploadCommand(input);
  * const response = await client.send(command);
+ * // { // ArchiveCreationOutput
+ * //   location: "STRING_VALUE",
+ * //   checksum: "STRING_VALUE",
+ * //   archiveId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CompleteMultipartUploadCommandInput - {@link CompleteMultipartUploadCommandInput}
+ * @returns {@link CompleteMultipartUploadCommandOutput}
  * @see {@link CompleteMultipartUploadCommandInput} for command's `input` shape.
  * @see {@link CompleteMultipartUploadCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To complete a multipart upload
+ * ```javascript
+ * // The example completes a multipart upload for a 3 MiB archive.
+ * const input = {
+ *   accountId: "-",
+ *   archiveSize: "3145728",
+ *   checksum: "9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67",
+ *   uploadId: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ",
+ *   vaultName: "my-vault"
+ * };
+ * const command = new CompleteMultipartUploadCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   archiveId: "NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId",
+ *   checksum: "9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67",
+ *   location: "/111122223333/vaults/my-vault/archives/NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CompleteMultipartUploadCommand extends $Command<
-  CompleteMultipartUploadCommandInput,
-  CompleteMultipartUploadCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CompleteMultipartUploadCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CompleteMultipartUploadCommandInput, CompleteMultipartUploadCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "CompleteMultipartUploadCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CompleteMultipartUploadInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ArchiveCreationOutput.filterSensitiveLog,
+export class CompleteMultipartUploadCommand extends command<CompleteMultipartUploadCommandInput, CompleteMultipartUploadCommandOutput>(
+  _ep0,
+  _mw0,
+  "CompleteMultipartUpload",
+  CompleteMultipartUpload$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CompleteMultipartUploadInput;
+      output: ArchiveCreationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CompleteMultipartUploadCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CompleteMultipartUploadCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CompleteMultipartUploadCommandOutput> {
-    return deserializeAws_restJson1CompleteMultipartUploadCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CompleteMultipartUploadCommandInput;
+      output: CompleteMultipartUploadCommandOutput;
+    };
+  };
 }

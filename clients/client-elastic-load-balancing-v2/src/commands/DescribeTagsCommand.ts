@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { DescribeTagsInput, DescribeTagsOutput } from "../models/models_0";
-import { deserializeAws_queryDescribeTagsCommand, serializeAws_queryDescribeTagsCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTagsInput, DescribeTagsOutput } from "../models/models_0";
+import { DescribeTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTagsCommand}.
+ */
 export interface DescribeTagsCommandInput extends DescribeTagsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTagsCommand}.
+ */
 export interface DescribeTagsCommandOutput extends DescribeTagsOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +31,105 @@ export interface DescribeTagsCommandOutput extends DescribeTagsOutput, __Metadat
  * ```javascript
  * import { ElasticLoadBalancingV2Client, DescribeTagsCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, DescribeTagsCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // DescribeTagsInput
+ *   ResourceArns: [ // ResourceArns // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeTagsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTagsOutput
+ * //   TagDescriptions: [ // TagDescriptions
+ * //     { // TagDescription
+ * //       ResourceArn: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeTagsCommandInput - {@link DescribeTagsCommandInput}
+ * @returns {@link DescribeTagsCommandOutput}
  * @see {@link DescribeTagsCommandInput} for command's `input` shape.
  * @see {@link DescribeTagsCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The specified listener does not exist.</p>
+ *
+ * @throws {@link LoadBalancerNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link RuleNotFoundException} (client fault)
+ *  <p>The specified rule does not exist.</p>
+ *
+ * @throws {@link TargetGroupNotFoundException} (client fault)
+ *  <p>The specified target group does not exist.</p>
+ *
+ * @throws {@link TrustStoreNotFoundException} (client fault)
+ *  <p>The specified trust store does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @example To describe the tags assigned to a load balancer
+ * ```javascript
+ * // This example describes the tags assigned to the specified load balancer.
+ * const input = {
+ *   ResourceArns: [
+ *     "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
+ *   ]
+ * };
+ * const command = new DescribeTagsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TagDescriptions: [
+ *     {
+ *       ResourceArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
+ *       Tags: [
+ *         {
+ *           Key: "project",
+ *           Value: "lima"
+ *         },
+ *         {
+ *           Key: "department",
+ *           Value: "digital-media"
+ *         }
+ *       ]
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeTagsCommand extends $Command<
-  DescribeTagsCommandInput,
-  DescribeTagsCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTagsCommandInput, DescribeTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "DescribeTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTagsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTagsOutput.filterSensitiveLog,
+export class DescribeTagsCommand extends command<DescribeTagsCommandInput, DescribeTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTags",
+  DescribeTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTagsInput;
+      output: DescribeTagsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTagsCommandOutput> {
-    return deserializeAws_queryDescribeTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTagsCommandInput;
+      output: DescribeTagsCommandOutput;
+    };
+  };
 }

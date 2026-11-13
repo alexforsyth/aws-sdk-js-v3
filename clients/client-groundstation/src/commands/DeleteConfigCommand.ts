@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { ConfigIdResponse, DeleteConfigRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteConfigCommand,
-  serializeAws_restJson1DeleteConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigIdResponse, DeleteConfigRequest } from "../models/models_0";
+import { DeleteConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteConfigCommand}.
+ */
 export interface DeleteConfigCommandInput extends DeleteConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteConfigCommand}.
+ */
 export interface DeleteConfigCommandOutput extends ConfigIdResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface DeleteConfigCommandOutput extends ConfigIdResponse, __MetadataB
  * ```javascript
  * import { GroundStationClient, DeleteConfigCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, DeleteConfigCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // DeleteConfigRequest
+ *   configId: "STRING_VALUE", // required
+ *   configType: "antenna-downlink" || "antenna-downlink-demod-decode" || "tracking" || "dataflow-endpoint" || "antenna-uplink" || "uplink-echo" || "s3-recording" || "telemetry-sink", // required
+ * };
  * const command = new DeleteConfigCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigIdResponse
+ * //   configId: "STRING_VALUE",
+ * //   configType: "antenna-downlink" || "antenna-downlink-demod-decode" || "tracking" || "dataflow-endpoint" || "antenna-uplink" || "uplink-echo" || "s3-recording" || "telemetry-sink",
+ * //   configArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteConfigCommandInput - {@link DeleteConfigCommandInput}
+ * @returns {@link DeleteConfigCommandOutput}
  * @see {@link DeleteConfigCommandInput} for command's `input` shape.
  * @see {@link DeleteConfigCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteConfigCommand extends $Command<
-  DeleteConfigCommandInput,
-  DeleteConfigCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteConfigCommandInput, DeleteConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "DeleteConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigIdResponse.filterSensitiveLog,
+export class DeleteConfigCommand extends command<DeleteConfigCommandInput, DeleteConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteConfig",
+  DeleteConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteConfigRequest;
+      output: ConfigIdResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteConfigCommandOutput> {
-    return deserializeAws_restJson1DeleteConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteConfigCommandInput;
+      output: DeleteConfigCommandOutput;
+    };
+  };
 }

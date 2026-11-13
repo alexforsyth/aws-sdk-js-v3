@@ -1,95 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListPackagesForDomainRequest, ListPackagesForDomainResponse } from "../models/models_0";
-import { OpenSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OpenSearchClient";
-import {
-  deserializeAws_restJson1ListPackagesForDomainCommand,
-  serializeAws_restJson1ListPackagesForDomainCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPackagesForDomainRequest, ListPackagesForDomainResponse } from "../models/models_1";
+import { ListPackagesForDomain$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPackagesForDomainCommand}.
+ */
 export interface ListPackagesForDomainCommandInput extends ListPackagesForDomainRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPackagesForDomainCommand}.
+ */
 export interface ListPackagesForDomainCommandOutput extends ListPackagesForDomainResponse, __MetadataBearer {}
 
 /**
- * <p>Lists all packages associated with the Amazon OpenSearch Service domain.</p>
+ * <p>Lists all packages associated with an Amazon OpenSearch Service domain. For more
+ *             information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html">Custom packages
+ *                 for Amazon OpenSearch Service</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OpenSearchClient, ListPackagesForDomainCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
  * // const { OpenSearchClient, ListPackagesForDomainCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
  * const client = new OpenSearchClient(config);
+ * const input = { // ListPackagesForDomainRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListPackagesForDomainCommand(input);
  * const response = await client.send(command);
+ * // { // ListPackagesForDomainResponse
+ * //   DomainPackageDetailsList: [ // DomainPackageDetailsList
+ * //     { // DomainPackageDetails
+ * //       PackageID: "STRING_VALUE",
+ * //       PackageName: "STRING_VALUE",
+ * //       PackageType: "TXT-DICTIONARY" || "ZIP-PLUGIN" || "PACKAGE-LICENSE" || "PACKAGE-CONFIG",
+ * //       LastUpdated: new Date("TIMESTAMP"),
+ * //       DomainName: "STRING_VALUE",
+ * //       DomainPackageStatus: "ASSOCIATING" || "ASSOCIATION_FAILED" || "ACTIVE" || "DISSOCIATING" || "DISSOCIATION_FAILED",
+ * //       PackageVersion: "STRING_VALUE",
+ * //       PrerequisitePackageIDList: [ // PackageIDList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ReferencePath: "STRING_VALUE",
+ * //       ErrorDetails: { // ErrorDetails
+ * //         ErrorType: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //       AssociationConfiguration: { // PackageAssociationConfiguration
+ * //         KeyStoreAccessOption: { // KeyStoreAccessOption
+ * //           KeyAccessRoleArn: "STRING_VALUE",
+ * //           KeyStoreAccessEnabled: true || false, // required
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPackagesForDomainCommandInput - {@link ListPackagesForDomainCommandInput}
+ * @returns {@link ListPackagesForDomainCommandOutput}
  * @see {@link ListPackagesForDomainCommandInput} for command's `input` shape.
  * @see {@link ListPackagesForDomainCommandOutput} for command's `response` shape.
- * @see {@link OpenSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An error occurred because you don't have permissions to access the resource.</p>
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
  */
-export class ListPackagesForDomainCommand extends $Command<
-  ListPackagesForDomainCommandInput,
-  ListPackagesForDomainCommandOutput,
-  OpenSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPackagesForDomainCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OpenSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPackagesForDomainCommandInput, ListPackagesForDomainCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OpenSearchClient";
-    const commandName = "ListPackagesForDomainCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPackagesForDomainRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPackagesForDomainResponse.filterSensitiveLog,
+export class ListPackagesForDomainCommand extends command<ListPackagesForDomainCommandInput, ListPackagesForDomainCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPackagesForDomain",
+  ListPackagesForDomain$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPackagesForDomainRequest;
+      output: ListPackagesForDomainResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPackagesForDomainCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListPackagesForDomainCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPackagesForDomainCommandOutput> {
-    return deserializeAws_restJson1ListPackagesForDomainCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPackagesForDomainCommandInput;
+      output: ListPackagesForDomainCommandOutput;
+    };
+  };
 }

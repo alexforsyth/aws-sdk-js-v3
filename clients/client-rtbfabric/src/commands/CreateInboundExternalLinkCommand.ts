@@ -1,0 +1,151 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateInboundExternalLinkRequest, CreateInboundExternalLinkResponse } from "../models/models_0";
+import { CreateInboundExternalLink$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateInboundExternalLinkCommand}.
+ */
+export interface CreateInboundExternalLinkCommandInput extends CreateInboundExternalLinkRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateInboundExternalLinkCommand}.
+ */
+export interface CreateInboundExternalLinkCommandOutput extends CreateInboundExternalLinkResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates an inbound external link.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RTBFabricClient, CreateInboundExternalLinkCommand } from "@aws-sdk/client-rtbfabric"; // ES Modules import
+ * // const { RTBFabricClient, CreateInboundExternalLinkCommand } = require("@aws-sdk/client-rtbfabric"); // CommonJS import
+ * // import type { RTBFabricClientConfig } from "@aws-sdk/client-rtbfabric";
+ * const config = {}; // type is RTBFabricClientConfig
+ * const client = new RTBFabricClient(config);
+ * const input = { // CreateInboundExternalLinkRequest
+ *   clientToken: "STRING_VALUE", // required
+ *   gatewayId: "STRING_VALUE", // required
+ *   attributes: { // LinkAttributes
+ *     responderErrorMasking: [ // ResponderErrorMasking
+ *       { // ResponderErrorMaskingForHttpCode
+ *         httpCode: "STRING_VALUE", // required
+ *         action: "NO_BID" || "PASSTHROUGH", // required
+ *         loggingTypes: [ // ResponderErrorMaskingLoggingTypes // required
+ *           "NONE" || "METRIC" || "RESPONSE",
+ *         ],
+ *         responseLoggingPercentage: Number("float"),
+ *       },
+ *     ],
+ *     customerProvidedId: "STRING_VALUE",
+ *   },
+ *   logSettings: { // LinkLogSettings
+ *     applicationLogs: { // LinkApplicationLogConfiguration
+ *       sampling: { // LinkApplicationLogSampling
+ *         errorLog: Number("double"), // required
+ *         filterLog: Number("double"), // required
+ *       },
+ *     },
+ *   },
+ *   tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new CreateInboundExternalLinkCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateInboundExternalLinkResponse
+ * //   gatewayId: "STRING_VALUE", // required
+ * //   linkId: "STRING_VALUE", // required
+ * //   status: "PENDING_CREATION" || "PENDING_REQUEST" || "REQUESTED" || "ACCEPTED" || "ACTIVE" || "REJECTED" || "FAILED" || "PENDING_DELETION" || "DELETED" || "PENDING_UPDATE" || "PENDING_ISOLATION" || "ISOLATED" || "PENDING_RESTORATION", // required
+ * //   domainName: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateInboundExternalLinkCommandInput - {@link CreateInboundExternalLinkCommandInput}
+ * @returns {@link CreateInboundExternalLinkCommandOutput}
+ * @see {@link CreateInboundExternalLinkCommandInput} for command's `input` shape.
+ * @see {@link CreateInboundExternalLinkCommandOutput} for command's `response` shape.
+ * @see {@link RTBFabricClientResolvedConfig | config} for RTBFabricClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be completed because of a conflict in the current state of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request could not be completed because of an internal server error. Try your call again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request could not be completed because the resource does not exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request could not be completed because you exceeded a service quota.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request could not be completed because it fails satisfy the constraints specified by the service.</p>
+ *
+ * @throws {@link RTBFabricServiceException}
+ * <p>Base exception class for all service exceptions from RTBFabric service.</p>
+ *
+ *
+ * @example Create an inbound external link
+ * ```javascript
+ * // Create an inbound external link for a responder gateway
+ * const input = {
+ *   clientToken: "randomClientToken",
+ *   gatewayId: "rtb-gw-12345678",
+ *   logSettings: {
+ *     applicationLogs: {
+ *       sampling: {
+ *         errorLog: 100.0,
+ *         filterLog: 0.0
+ *       }
+ *     }
+ *   }
+ * };
+ * const command = new CreateInboundExternalLinkCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   domainName: "rtb-gw-12345678.example.com",
+ *   gatewayId: "rtb-gw-12345678",
+ *   linkId: "link-87654321",
+ *   status: "ACTIVE"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class CreateInboundExternalLinkCommand extends command<CreateInboundExternalLinkCommandInput, CreateInboundExternalLinkCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateInboundExternalLink",
+  CreateInboundExternalLink$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateInboundExternalLinkRequest;
+      output: CreateInboundExternalLinkResponse;
+    };
+    sdk: {
+      input: CreateInboundExternalLinkCommandInput;
+      output: CreateInboundExternalLinkCommandOutput;
+    };
+  };
+}

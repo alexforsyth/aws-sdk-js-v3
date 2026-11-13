@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyIdentityIdFormatRequest } from "../models/models_4";
-import {
-  deserializeAws_ec2ModifyIdentityIdFormatCommand,
-  serializeAws_ec2ModifyIdentityIdFormatCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyIdentityIdFormatRequest } from "../models/models_7";
+import { ModifyIdentityIdFormat$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyIdentityIdFormatCommand}.
+ */
 export interface ModifyIdentityIdFormatCommandInput extends ModifyIdentityIdFormatRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyIdentityIdFormatCommand}.
+ */
 export interface ModifyIdentityIdFormatCommandOutput extends __MetadataBearer {}
 
 /**
@@ -37,7 +38,7 @@ export interface ModifyIdentityIdFormatCommandOutput extends __MetadataBearer {}
  *                 <code>security-group</code> | <code>subnet</code> |
  *                 <code>subnet-cidr-block-association</code> | <code>vpc</code> |
  *         <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the
  *                 <i>Amazon Elastic Compute Cloud User Guide</i>. </p>
  *          <p>This setting applies to the principal specified in the request; it does not apply to the
  *       principal that makes the request. </p>
@@ -49,68 +50,47 @@ export interface ModifyIdentityIdFormatCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, ModifyIdentityIdFormatCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyIdentityIdFormatCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyIdentityIdFormatRequest
+ *   Resource: "STRING_VALUE", // required
+ *   UseLongIds: true || false, // required
+ *   PrincipalArn: "STRING_VALUE", // required
+ * };
  * const command = new ModifyIdentityIdFormatCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifyIdentityIdFormatCommandInput - {@link ModifyIdentityIdFormatCommandInput}
+ * @returns {@link ModifyIdentityIdFormatCommandOutput}
  * @see {@link ModifyIdentityIdFormatCommandInput} for command's `input` shape.
  * @see {@link ModifyIdentityIdFormatCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyIdentityIdFormatCommand extends $Command<
-  ModifyIdentityIdFormatCommandInput,
-  ModifyIdentityIdFormatCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyIdentityIdFormatCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyIdentityIdFormatCommandInput, ModifyIdentityIdFormatCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyIdentityIdFormatCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyIdentityIdFormatRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class ModifyIdentityIdFormatCommand extends command<ModifyIdentityIdFormatCommandInput, ModifyIdentityIdFormatCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyIdentityIdFormat",
+  ModifyIdentityIdFormat$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyIdentityIdFormatRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyIdentityIdFormatCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyIdentityIdFormatCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyIdentityIdFormatCommandOutput> {
-    return deserializeAws_ec2ModifyIdentityIdFormatCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyIdentityIdFormatCommandInput;
+      output: ModifyIdentityIdFormatCommandOutput;
+    };
+  };
 }

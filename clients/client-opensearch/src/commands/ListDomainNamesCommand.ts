@@ -1,95 +1,87 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListDomainNamesRequest, ListDomainNamesResponse } from "../models/models_0";
-import { OpenSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OpenSearchClient";
-import {
-  deserializeAws_restJson1ListDomainNamesCommand,
-  serializeAws_restJson1ListDomainNamesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDomainNamesRequest, ListDomainNamesResponse } from "../models/models_0";
+import { ListDomainNames$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDomainNamesCommand}.
+ */
 export interface ListDomainNamesCommandInput extends ListDomainNamesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDomainNamesCommand}.
+ */
 export interface ListDomainNamesCommandOutput extends ListDomainNamesResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the names of all domains owned by the current user's account.</p>
+ * <p>Returns the names of all Amazon OpenSearch Service domains owned by the current user
+ *             in the active Region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OpenSearchClient, ListDomainNamesCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
  * // const { OpenSearchClient, ListDomainNamesCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
  * const client = new OpenSearchClient(config);
+ * const input = { // ListDomainNamesRequest
+ *   EngineType: "OpenSearch" || "Elasticsearch",
+ * };
  * const command = new ListDomainNamesCommand(input);
  * const response = await client.send(command);
+ * // { // ListDomainNamesResponse
+ * //   DomainNames: [ // DomainInfoList
+ * //     { // DomainInfo
+ * //       DomainName: "STRING_VALUE",
+ * //       EngineType: "OpenSearch" || "Elasticsearch",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListDomainNamesCommandInput - {@link ListDomainNamesCommandInput}
+ * @returns {@link ListDomainNamesCommandOutput}
  * @see {@link ListDomainNamesCommandInput} for command's `input` shape.
  * @see {@link ListDomainNamesCommandOutput} for command's `response` shape.
- * @see {@link OpenSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
  */
-export class ListDomainNamesCommand extends $Command<
-  ListDomainNamesCommandInput,
-  ListDomainNamesCommandOutput,
-  OpenSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDomainNamesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OpenSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDomainNamesCommandInput, ListDomainNamesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OpenSearchClient";
-    const commandName = "ListDomainNamesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDomainNamesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDomainNamesResponse.filterSensitiveLog,
+export class ListDomainNamesCommand extends command<ListDomainNamesCommandInput, ListDomainNamesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDomainNames",
+  ListDomainNames$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDomainNamesRequest;
+      output: ListDomainNamesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDomainNamesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDomainNamesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDomainNamesCommandOutput> {
-    return deserializeAws_restJson1ListDomainNamesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDomainNamesCommandInput;
+      output: ListDomainNamesCommandOutput;
+    };
+  };
 }

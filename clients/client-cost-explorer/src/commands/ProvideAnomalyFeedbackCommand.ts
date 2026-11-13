@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CostExplorerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CostExplorerClient";
-import { ProvideAnomalyFeedbackRequest, ProvideAnomalyFeedbackResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ProvideAnomalyFeedbackCommand,
-  serializeAws_json1_1ProvideAnomalyFeedbackCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProvideAnomalyFeedbackRequest, ProvideAnomalyFeedbackResponse } from "../models/models_0";
+import { ProvideAnomalyFeedback$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ProvideAnomalyFeedbackCommand}.
+ */
 export interface ProvideAnomalyFeedbackCommandInput extends ProvideAnomalyFeedbackRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ProvideAnomalyFeedbackCommand}.
+ */
 export interface ProvideAnomalyFeedbackCommandOutput extends ProvideAnomalyFeedbackResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,51 @@ export interface ProvideAnomalyFeedbackCommandOutput extends ProvideAnomalyFeedb
  * ```javascript
  * import { CostExplorerClient, ProvideAnomalyFeedbackCommand } from "@aws-sdk/client-cost-explorer"; // ES Modules import
  * // const { CostExplorerClient, ProvideAnomalyFeedbackCommand } = require("@aws-sdk/client-cost-explorer"); // CommonJS import
+ * // import type { CostExplorerClientConfig } from "@aws-sdk/client-cost-explorer";
+ * const config = {}; // type is CostExplorerClientConfig
  * const client = new CostExplorerClient(config);
+ * const input = { // ProvideAnomalyFeedbackRequest
+ *   AnomalyId: "STRING_VALUE", // required
+ *   Feedback: "YES" || "NO" || "PLANNED_ACTIVITY", // required
+ * };
  * const command = new ProvideAnomalyFeedbackCommand(input);
  * const response = await client.send(command);
+ * // { // ProvideAnomalyFeedbackResponse
+ * //   AnomalyId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param ProvideAnomalyFeedbackCommandInput - {@link ProvideAnomalyFeedbackCommandInput}
+ * @returns {@link ProvideAnomalyFeedbackCommandOutput}
  * @see {@link ProvideAnomalyFeedbackCommandInput} for command's `input` shape.
  * @see {@link ProvideAnomalyFeedbackCommandOutput} for command's `response` shape.
- * @see {@link CostExplorerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CostExplorerClientResolvedConfig | config} for CostExplorerClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You made too many calls in a short period of time. Try again later.</p>
+ *
+ * @throws {@link CostExplorerServiceException}
+ * <p>Base exception class for all service exceptions from CostExplorer service.</p>
+ *
+ *
+ * @public
  */
-export class ProvideAnomalyFeedbackCommand extends $Command<
-  ProvideAnomalyFeedbackCommandInput,
-  ProvideAnomalyFeedbackCommandOutput,
-  CostExplorerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ProvideAnomalyFeedbackCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CostExplorerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ProvideAnomalyFeedbackCommandInput, ProvideAnomalyFeedbackCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CostExplorerClient";
-    const commandName = "ProvideAnomalyFeedbackCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ProvideAnomalyFeedbackRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ProvideAnomalyFeedbackResponse.filterSensitiveLog,
+export class ProvideAnomalyFeedbackCommand extends command<ProvideAnomalyFeedbackCommandInput, ProvideAnomalyFeedbackCommandOutput>(
+  _ep0,
+  _mw0,
+  "ProvideAnomalyFeedback",
+  ProvideAnomalyFeedback$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ProvideAnomalyFeedbackRequest;
+      output: ProvideAnomalyFeedbackResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ProvideAnomalyFeedbackCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ProvideAnomalyFeedbackCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ProvideAnomalyFeedbackCommandOutput> {
-    return deserializeAws_json1_1ProvideAnomalyFeedbackCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ProvideAnomalyFeedbackCommandInput;
+      output: ProvideAnomalyFeedbackCommandOutput;
+    };
+  };
 }

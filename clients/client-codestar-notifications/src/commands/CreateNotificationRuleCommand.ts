@@ -1,101 +1,118 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { CreateNotificationRuleRequest, CreateNotificationRuleResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateNotificationRuleCommand,
-  serializeAws_restJson1CreateNotificationRuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateNotificationRuleRequest, CreateNotificationRuleResult } from "../models/models_0";
+import { CreateNotificationRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateNotificationRuleCommand}.
+ */
 export interface CreateNotificationRuleCommandInput extends CreateNotificationRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateNotificationRuleCommand}.
+ */
 export interface CreateNotificationRuleCommandOutput extends CreateNotificationRuleResult, __MetadataBearer {}
 
 /**
  * <p>Creates a notification rule for a resource. The rule specifies the events you want
- *             notifications about and the targets (such as SNS topics) where you want to receive
+ *             notifications about and the targets (such as Amazon Q Developer in chat applications topics or Amazon Q Developer in chat applications clients configured for Slack) where you want to receive
  *             them.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodestarNotificationsClient, CreateNotificationRuleCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, CreateNotificationRuleCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // CreateNotificationRuleRequest
+ *   Name: "STRING_VALUE", // required
+ *   EventTypeIds: [ // EventTypeIds // required
+ *     "STRING_VALUE",
+ *   ],
+ *   Resource: "STRING_VALUE", // required
+ *   Targets: [ // Targets // required
+ *     { // Target
+ *       TargetType: "STRING_VALUE",
+ *       TargetAddress: "STRING_VALUE",
+ *     },
+ *   ],
+ *   DetailType: "BASIC" || "FULL", // required
+ *   ClientRequestToken: "STRING_VALUE",
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   Status: "ENABLED" || "DISABLED",
+ * };
  * const command = new CreateNotificationRuleCommand(input);
  * const response = await client.send(command);
+ * // { // CreateNotificationRuleResult
+ * //   Arn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateNotificationRuleCommandInput - {@link CreateNotificationRuleCommandInput}
+ * @returns {@link CreateNotificationRuleCommandOutput}
  * @see {@link CreateNotificationRuleCommandInput} for command's `input` shape.
  * @see {@link CreateNotificationRuleCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>
+ *             CodeStar Notifications can't create the notification rule because you do not have sufficient
+ *       permissions.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>
+ *             CodeStar Notifications can't complete the request because the resource is being modified by
+ *       another process. Wait a few minutes and try again.</p>
+ *
+ * @throws {@link ConfigurationException} (client fault)
+ *  <p>Some or all of the configuration is incomplete, missing, or not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>One of the CodeStar Notifications limits has been exceeded. Limits apply to
+ *             accounts, notification rules, notifications, resources, and targets. For more
+ *             information, see Limits.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>A resource with the same name or ID already exists. Notification rule names must be
+ *             unique in your Amazon Web Services account.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class CreateNotificationRuleCommand extends $Command<
-  CreateNotificationRuleCommandInput,
-  CreateNotificationRuleCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateNotificationRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateNotificationRuleCommandInput, CreateNotificationRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "CreateNotificationRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateNotificationRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateNotificationRuleResult.filterSensitiveLog,
+export class CreateNotificationRuleCommand extends command<CreateNotificationRuleCommandInput, CreateNotificationRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateNotificationRule",
+  CreateNotificationRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateNotificationRuleRequest;
+      output: CreateNotificationRuleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateNotificationRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateNotificationRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateNotificationRuleCommandOutput> {
-    return deserializeAws_restJson1CreateNotificationRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateNotificationRuleCommandInput;
+      output: CreateNotificationRuleCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,108 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAgentCollaboratorsRequest, ListAgentCollaboratorsResponse } from "../models/models_0";
+import { ListAgentCollaborators$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAgentCollaboratorsCommand}.
+ */
+export interface ListAgentCollaboratorsCommandInput extends ListAgentCollaboratorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAgentCollaboratorsCommand}.
+ */
+export interface ListAgentCollaboratorsCommandOutput extends ListAgentCollaboratorsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieve a list of an agent's collaborators.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BedrockAgentClient, ListAgentCollaboratorsCommand } from "@aws-sdk/client-bedrock-agent"; // ES Modules import
+ * // const { BedrockAgentClient, ListAgentCollaboratorsCommand } = require("@aws-sdk/client-bedrock-agent"); // CommonJS import
+ * // import type { BedrockAgentClientConfig } from "@aws-sdk/client-bedrock-agent";
+ * const config = {}; // type is BedrockAgentClientConfig
+ * const client = new BedrockAgentClient(config);
+ * const input = { // ListAgentCollaboratorsRequest
+ *   agentId: "STRING_VALUE", // required
+ *   agentVersion: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListAgentCollaboratorsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListAgentCollaboratorsResponse
+ * //   agentCollaboratorSummaries: [ // AgentCollaboratorSummaries // required
+ * //     { // AgentCollaboratorSummary
+ * //       agentId: "STRING_VALUE", // required
+ * //       agentVersion: "STRING_VALUE", // required
+ * //       collaboratorId: "STRING_VALUE", // required
+ * //       agentDescriptor: { // AgentDescriptor
+ * //         aliasArn: "STRING_VALUE",
+ * //       },
+ * //       collaborationInstruction: "STRING_VALUE", // required
+ * //       relayConversationHistory: "TO_COLLABORATOR" || "DISABLED", // required
+ * //       collaboratorName: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       lastUpdatedAt: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListAgentCollaboratorsCommandInput - {@link ListAgentCollaboratorsCommandInput}
+ * @returns {@link ListAgentCollaboratorsCommandOutput}
+ * @see {@link ListAgentCollaboratorsCommandInput} for command's `input` shape.
+ * @see {@link ListAgentCollaboratorsCommandOutput} for command's `response` shape.
+ * @see {@link BedrockAgentClientResolvedConfig | config} for BedrockAgentClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request is denied because of missing access permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Input validation failed. Check your request parameters and retry the request.</p>
+ *
+ * @throws {@link BedrockAgentServiceException}
+ * <p>Base exception class for all service exceptions from BedrockAgent service.</p>
+ *
+ *
+ * @public
+ */
+export class ListAgentCollaboratorsCommand extends command<ListAgentCollaboratorsCommandInput, ListAgentCollaboratorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAgentCollaborators",
+  ListAgentCollaborators$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAgentCollaboratorsRequest;
+      output: ListAgentCollaboratorsResponse;
+    };
+    sdk: {
+      input: ListAgentCollaboratorsCommandInput;
+      output: ListAgentCollaboratorsCommandOutput;
+    };
+  };
+}

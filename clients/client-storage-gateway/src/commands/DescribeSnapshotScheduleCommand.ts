@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeSnapshotScheduleInput, DescribeSnapshotScheduleOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSnapshotScheduleCommand,
-  serializeAws_json1_1DescribeSnapshotScheduleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSnapshotScheduleInput, DescribeSnapshotScheduleOutput } from "../models/models_0";
+import { DescribeSnapshotSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSnapshotScheduleCommand}.
+ */
 export interface DescribeSnapshotScheduleCommandInput extends DescribeSnapshotScheduleInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSnapshotScheduleCommand}.
+ */
 export interface DescribeSnapshotScheduleCommandOutput extends DescribeSnapshotScheduleOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +32,84 @@ export interface DescribeSnapshotScheduleCommandOutput extends DescribeSnapshotS
  * ```javascript
  * import { StorageGatewayClient, DescribeSnapshotScheduleCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DescribeSnapshotScheduleCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DescribeSnapshotScheduleInput
+ *   VolumeARN: "STRING_VALUE", // required
+ * };
  * const command = new DescribeSnapshotScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSnapshotScheduleOutput
+ * //   VolumeARN: "STRING_VALUE",
+ * //   StartAt: Number("int"),
+ * //   RecurrenceInHours: Number("int"),
+ * //   Description: "STRING_VALUE",
+ * //   Timezone: "STRING_VALUE",
+ * //   Tags: [ // Tags
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSnapshotScheduleCommandInput - {@link DescribeSnapshotScheduleCommandInput}
+ * @returns {@link DescribeSnapshotScheduleCommandOutput}
  * @see {@link DescribeSnapshotScheduleCommandInput} for command's `input` shape.
  * @see {@link DescribeSnapshotScheduleCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To describe snapshot schedule for gateway volume
+ * ```javascript
+ * // Describes the snapshot schedule for the specified gateway volume including intervals at which snapshots are automatically initiated.
+ * const input = {
+ *   VolumeARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"
+ * };
+ * const command = new DescribeSnapshotScheduleCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Description: "sgw-AABB1122:vol-AABB1122:Schedule",
+ *   RecurrenceInHours: 24,
+ *   StartAt: 6,
+ *   Timezone: "GMT+7:00",
+ *   VolumeARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeSnapshotScheduleCommand extends $Command<
-  DescribeSnapshotScheduleCommandInput,
-  DescribeSnapshotScheduleCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSnapshotScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSnapshotScheduleCommandInput, DescribeSnapshotScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DescribeSnapshotScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSnapshotScheduleInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSnapshotScheduleOutput.filterSensitiveLog,
+export class DescribeSnapshotScheduleCommand extends command<DescribeSnapshotScheduleCommandInput, DescribeSnapshotScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSnapshotSchedule",
+  DescribeSnapshotSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotScheduleInput;
+      output: DescribeSnapshotScheduleOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSnapshotScheduleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSnapshotScheduleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSnapshotScheduleCommandOutput> {
-    return deserializeAws_json1_1DescribeSnapshotScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSnapshotScheduleCommandInput;
+      output: DescribeSnapshotScheduleCommandOutput;
+    };
+  };
 }

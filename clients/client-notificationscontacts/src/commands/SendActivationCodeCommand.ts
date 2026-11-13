@@ -1,0 +1,94 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendActivationCodeRequest, SendActivationCodeResponse } from "../models/models_0";
+import { SendActivationCode$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendActivationCodeCommand}.
+ */
+export interface SendActivationCodeCommandInput extends SendActivationCodeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendActivationCodeCommand}.
+ */
+export interface SendActivationCodeCommandOutput extends SendActivationCodeResponse, __MetadataBearer {}
+
+/**
+ * <p>Sends an activation email to the email address associated with the specified email contact.</p>
+ *          <note>
+ *             <p>It might take a few minutes for the activation email to arrive. If it doesn't arrive, check in your spam folder or try sending another activation email.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NotificationsContactsClient, SendActivationCodeCommand } from "@aws-sdk/client-notificationscontacts"; // ES Modules import
+ * // const { NotificationsContactsClient, SendActivationCodeCommand } = require("@aws-sdk/client-notificationscontacts"); // CommonJS import
+ * // import type { NotificationsContactsClientConfig } from "@aws-sdk/client-notificationscontacts";
+ * const config = {}; // type is NotificationsContactsClientConfig
+ * const client = new NotificationsContactsClient(config);
+ * const input = { // SendActivationCodeRequest
+ *   arn: "STRING_VALUE", // required
+ * };
+ * const command = new SendActivationCodeCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param SendActivationCodeCommandInput - {@link SendActivationCodeCommandInput}
+ * @returns {@link SendActivationCodeCommandOutput}
+ * @see {@link SendActivationCodeCommandInput} for command's `input` shape.
+ * @see {@link SendActivationCodeCommandOutput} for command's `response` shape.
+ * @see {@link NotificationsContactsClientResolvedConfig | config} for NotificationsContactsClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error during processing of request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Your request references a resource which does not exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an AWS service.</p>
+ *
+ * @throws {@link NotificationsContactsServiceException}
+ * <p>Base exception class for all service exceptions from NotificationsContacts service.</p>
+ *
+ *
+ * @public
+ */
+export class SendActivationCodeCommand extends command<SendActivationCodeCommandInput, SendActivationCodeCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendActivationCode",
+  SendActivationCode$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendActivationCodeRequest;
+      output: {};
+    };
+    sdk: {
+      input: SendActivationCodeCommandInput;
+      output: SendActivationCodeCommandOutput;
+    };
+  };
+}

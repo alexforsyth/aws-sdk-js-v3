@@ -1,0 +1,544 @@
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
+
+import {
+  type BatchAddChannelRoleToAccessorsCommandInput,
+  type BatchAddChannelRoleToAccessorsCommandOutput,
+  BatchAddChannelRoleToAccessorsCommand,
+} from "./commands/BatchAddChannelRoleToAccessorsCommand";
+import {
+  type BatchAddRoleCommandInput,
+  type BatchAddRoleCommandOutput,
+  BatchAddRoleCommand,
+} from "./commands/BatchAddRoleCommand";
+import {
+  type BatchRemoveChannelRoleFromAccessorsCommandInput,
+  type BatchRemoveChannelRoleFromAccessorsCommandOutput,
+  BatchRemoveChannelRoleFromAccessorsCommand,
+} from "./commands/BatchRemoveChannelRoleFromAccessorsCommand";
+import {
+  type BatchRemoveRoleCommandInput,
+  type BatchRemoveRoleCommandOutput,
+  BatchRemoveRoleCommand,
+} from "./commands/BatchRemoveRoleCommand";
+import {
+  type CreateChannelCommandInput,
+  type CreateChannelCommandOutput,
+  CreateChannelCommand,
+} from "./commands/CreateChannelCommand";
+import {
+  type CreateSpaceCommandInput,
+  type CreateSpaceCommandOutput,
+  CreateSpaceCommand,
+} from "./commands/CreateSpaceCommand";
+import {
+  type DeleteSpaceCommandInput,
+  type DeleteSpaceCommandOutput,
+  DeleteSpaceCommand,
+} from "./commands/DeleteSpaceCommand";
+import {
+  type DeregisterAdminCommandInput,
+  type DeregisterAdminCommandOutput,
+  DeregisterAdminCommand,
+} from "./commands/DeregisterAdminCommand";
+import {
+  type GetChannelCommandInput,
+  type GetChannelCommandOutput,
+  GetChannelCommand,
+} from "./commands/GetChannelCommand";
+import { type GetSpaceCommandInput, type GetSpaceCommandOutput, GetSpaceCommand } from "./commands/GetSpaceCommand";
+import {
+  type ListChannelsCommandInput,
+  type ListChannelsCommandOutput,
+  ListChannelsCommand,
+} from "./commands/ListChannelsCommand";
+import {
+  type ListSpacesCommandInput,
+  type ListSpacesCommandOutput,
+  ListSpacesCommand,
+} from "./commands/ListSpacesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RegisterAdminCommandInput,
+  type RegisterAdminCommandOutput,
+  RegisterAdminCommand,
+} from "./commands/RegisterAdminCommand";
+import {
+  type SendInvitesCommandInput,
+  type SendInvitesCommandOutput,
+  SendInvitesCommand,
+} from "./commands/SendInvitesCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateChannelCommandInput,
+  type UpdateChannelCommandOutput,
+  UpdateChannelCommand,
+} from "./commands/UpdateChannelCommand";
+import {
+  type UpdateSpaceCommandInput,
+  type UpdateSpaceCommandOutput,
+  UpdateSpaceCommand,
+} from "./commands/UpdateSpaceCommand";
+import type { ResourceNotFoundException } from "./models/errors";
+import type { RepostspaceServiceException } from "./models/RepostspaceServiceException";
+import { paginateListChannels } from "./pagination/ListChannelsPaginator";
+import { paginateListSpaces } from "./pagination/ListSpacesPaginator";
+import { RepostspaceClient } from "./RepostspaceClient";
+import { waitUntilChannelCreated } from "./waiters/waitForChannelCreated";
+import { waitUntilChannelDeleted } from "./waiters/waitForChannelDeleted";
+import { waitUntilSpaceCreated } from "./waiters/waitForSpaceCreated";
+import { waitUntilSpaceDeleted } from "./waiters/waitForSpaceDeleted";
+
+const commands = {
+  BatchAddChannelRoleToAccessorsCommand,
+  BatchAddRoleCommand,
+  BatchRemoveChannelRoleFromAccessorsCommand,
+  BatchRemoveRoleCommand,
+  CreateChannelCommand,
+  CreateSpaceCommand,
+  DeleteSpaceCommand,
+  DeregisterAdminCommand,
+  GetChannelCommand,
+  GetSpaceCommand,
+  ListChannelsCommand,
+  ListSpacesCommand,
+  ListTagsForResourceCommand,
+  RegisterAdminCommand,
+  SendInvitesCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateChannelCommand,
+  UpdateSpaceCommand,
+};
+const paginators = {
+  paginateListChannels,
+  paginateListSpaces,
+};
+const waiters = {
+  waitUntilChannelCreated,
+  waitUntilChannelDeleted,
+  waitUntilSpaceCreated,
+  waitUntilSpaceDeleted,
+};
+
+/**
+ * @public
+ */
+export interface RepostspaceRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Repostspace {
+  /**
+   * @see {@link BatchAddChannelRoleToAccessorsCommand}
+   */
+  batchAddChannelRoleToAccessors(
+    args: BatchAddChannelRoleToAccessorsCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<BatchAddChannelRoleToAccessorsCommandOutput>;
+  batchAddChannelRoleToAccessors(
+    args: BatchAddChannelRoleToAccessorsCommandInput,
+    cb: (err: any, data?: BatchAddChannelRoleToAccessorsCommandOutput) => void
+  ): void;
+  batchAddChannelRoleToAccessors(
+    args: BatchAddChannelRoleToAccessorsCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: BatchAddChannelRoleToAccessorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchAddRoleCommand}
+   */
+  batchAddRole(
+    args: BatchAddRoleCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<BatchAddRoleCommandOutput>;
+  batchAddRole(
+    args: BatchAddRoleCommandInput,
+    cb: (err: any, data?: BatchAddRoleCommandOutput) => void
+  ): void;
+  batchAddRole(
+    args: BatchAddRoleCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: BatchAddRoleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchRemoveChannelRoleFromAccessorsCommand}
+   */
+  batchRemoveChannelRoleFromAccessors(
+    args: BatchRemoveChannelRoleFromAccessorsCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<BatchRemoveChannelRoleFromAccessorsCommandOutput>;
+  batchRemoveChannelRoleFromAccessors(
+    args: BatchRemoveChannelRoleFromAccessorsCommandInput,
+    cb: (err: any, data?: BatchRemoveChannelRoleFromAccessorsCommandOutput) => void
+  ): void;
+  batchRemoveChannelRoleFromAccessors(
+    args: BatchRemoveChannelRoleFromAccessorsCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: BatchRemoveChannelRoleFromAccessorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchRemoveRoleCommand}
+   */
+  batchRemoveRole(
+    args: BatchRemoveRoleCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<BatchRemoveRoleCommandOutput>;
+  batchRemoveRole(
+    args: BatchRemoveRoleCommandInput,
+    cb: (err: any, data?: BatchRemoveRoleCommandOutput) => void
+  ): void;
+  batchRemoveRole(
+    args: BatchRemoveRoleCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: BatchRemoveRoleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateChannelCommand}
+   */
+  createChannel(
+    args: CreateChannelCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<CreateChannelCommandOutput>;
+  createChannel(
+    args: CreateChannelCommandInput,
+    cb: (err: any, data?: CreateChannelCommandOutput) => void
+  ): void;
+  createChannel(
+    args: CreateChannelCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: CreateChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSpaceCommand}
+   */
+  createSpace(
+    args: CreateSpaceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<CreateSpaceCommandOutput>;
+  createSpace(
+    args: CreateSpaceCommandInput,
+    cb: (err: any, data?: CreateSpaceCommandOutput) => void
+  ): void;
+  createSpace(
+    args: CreateSpaceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: CreateSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSpaceCommand}
+   */
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<DeleteSpaceCommandOutput>;
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    cb: (err: any, data?: DeleteSpaceCommandOutput) => void
+  ): void;
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: DeleteSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterAdminCommand}
+   */
+  deregisterAdmin(
+    args: DeregisterAdminCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<DeregisterAdminCommandOutput>;
+  deregisterAdmin(
+    args: DeregisterAdminCommandInput,
+    cb: (err: any, data?: DeregisterAdminCommandOutput) => void
+  ): void;
+  deregisterAdmin(
+    args: DeregisterAdminCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: DeregisterAdminCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetChannelCommand}
+   */
+  getChannel(
+    args: GetChannelCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<GetChannelCommandOutput>;
+  getChannel(
+    args: GetChannelCommandInput,
+    cb: (err: any, data?: GetChannelCommandOutput) => void
+  ): void;
+  getChannel(
+    args: GetChannelCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: GetChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSpaceCommand}
+   */
+  getSpace(
+    args: GetSpaceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<GetSpaceCommandOutput>;
+  getSpace(
+    args: GetSpaceCommandInput,
+    cb: (err: any, data?: GetSpaceCommandOutput) => void
+  ): void;
+  getSpace(
+    args: GetSpaceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: GetSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChannelsCommand}
+   */
+  listChannels(
+    args: ListChannelsCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<ListChannelsCommandOutput>;
+  listChannels(
+    args: ListChannelsCommandInput,
+    cb: (err: any, data?: ListChannelsCommandOutput) => void
+  ): void;
+  listChannels(
+    args: ListChannelsCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: ListChannelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSpacesCommand}
+   */
+  listSpaces(): Promise<ListSpacesCommandOutput>;
+  listSpaces(
+    args: ListSpacesCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<ListSpacesCommandOutput>;
+  listSpaces(
+    args: ListSpacesCommandInput,
+    cb: (err: any, data?: ListSpacesCommandOutput) => void
+  ): void;
+  listSpaces(
+    args: ListSpacesCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: ListSpacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterAdminCommand}
+   */
+  registerAdmin(
+    args: RegisterAdminCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<RegisterAdminCommandOutput>;
+  registerAdmin(
+    args: RegisterAdminCommandInput,
+    cb: (err: any, data?: RegisterAdminCommandOutput) => void
+  ): void;
+  registerAdmin(
+    args: RegisterAdminCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: RegisterAdminCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendInvitesCommand}
+   */
+  sendInvites(
+    args: SendInvitesCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<SendInvitesCommandOutput>;
+  sendInvites(
+    args: SendInvitesCommandInput,
+    cb: (err: any, data?: SendInvitesCommandOutput) => void
+  ): void;
+  sendInvites(
+    args: SendInvitesCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: SendInvitesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateChannelCommand}
+   */
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<UpdateChannelCommandOutput>;
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    cb: (err: any, data?: UpdateChannelCommandOutput) => void
+  ): void;
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: UpdateChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSpaceCommand}
+   */
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    options?: RepostspaceRequestOptions
+  ): Promise<UpdateSpaceCommandOutput>;
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    cb: (err: any, data?: UpdateSpaceCommandOutput) => void
+  ): void;
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    options: RepostspaceRequestOptions,
+    cb: (err: any, data?: UpdateSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChannelsCommandOutput}.
+   */
+  paginateListChannels(
+    args: ListChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListSpacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSpacesCommandOutput}.
+   */
+  paginateListSpaces(
+    args?: ListSpacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSpacesCommandOutput>;
+
+  /**
+   * @see {@link GetChannelCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilChannelCreated(
+    args: GetChannelCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Repostspace>, "client">
+  ): Promise<WaiterResult<GetChannelCommandOutput>>;
+
+  /**
+   * @see {@link GetChannelCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilChannelDeleted(
+    args: GetChannelCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Repostspace>, "client">
+  ): Promise<WaiterResult<GetChannelCommandOutput | ResourceNotFoundException>>;
+
+  /**
+   * @see {@link GetSpaceCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSpaceCreated(
+    args: GetSpaceCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Repostspace>, "client">
+  ): Promise<WaiterResult<GetSpaceCommandOutput>>;
+
+  /**
+   * @see {@link GetSpaceCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSpaceDeleted(
+    args: GetSpaceCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Repostspace>, "client">
+  ): Promise<WaiterResult<GetSpaceCommandOutput | ResourceNotFoundException>>;
+}
+
+/**
+ * <p>AWS re:Post Private is a private version of AWS re:Post for enterprises with Enterprise Support or Enterprise On-Ramp Support plans. It provides access to knowledge and experts to accelerate cloud adoption and increase developer productivity. With your organization-specific private re:Post, you can build an organization-specific developer community that drives efficiencies at scale and provides access to valuable knowledge resources. Additionally, re:Post Private centralizes trusted AWS technical content and offers private discussion forums to improve how your teams collaborate internally and with AWS to remove technical obstacles, accelerate innovation, and scale more efficiently in the cloud.</p>
+ * @public
+ */
+export class Repostspace extends RepostspaceClient implements Repostspace {}
+createAggregatedClient(commands, Repostspace, { paginators, waiters });

@@ -1,0 +1,2731 @@
+const _A = "Addon";
+const _AAP = "AssociatedAccessPolicy";
+const _AAPL = "AssociatedAccessPoliciesList";
+const _AAPR = "AssociateAccessPolicyRequest";
+const _AAPRs = "AssociateAccessPolicyResponse";
+const _AAPs = "AssociateAccessPolicy";
+const _ACA = "ActiveCertificateAuthority";
+const _ACAICR = "ArgoCdAwsIdcConfigRequest";
+const _ACAICRr = "ArgoCdAwsIdcConfigResponse";
+const _ACAR = "ActivateCertificateAuthorityRequest";
+const _ACARc = "ActivateCertificateAuthorityResponse";
+const _ACAc = "ActivateCertificateAuthority";
+const _ACCR = "ArgoCdConfigRequest";
+const _ACCRr = "ArgoCdConfigResponse";
+const _ACD = "AddonCompatibilityDetail";
+const _ACDd = "AddonCompatibilityDetails";
+const _ACNACR = "ArgoCdNetworkAccessConfigRequest";
+const _ACNACRr = "ArgoCdNetworkAccessConfigResponse";
+const _ACR = "AccessConfigResponse";
+const _ACRM = "ArgoCdRoleMapping";
+const _ACRML = "ArgoCdRoleMappingList";
+const _ACRc = "AckConfigRequest";
+const _ACRck = "AckConfigResponse";
+const _ADE = "AccessDeniedException";
+const _AE = "AccessEntry";
+const _AEC = "AssociateEncryptionConfig";
+const _AECR = "AssociateEncryptionConfigRequest";
+const _AECRs = "AssociateEncryptionConfigResponse";
+const _AH = "AddonHealth";
+const _AI = "AddonInfo";
+const _AIL = "AddonIssueList";
+const _AIPC = "AssociateIdentityProviderConfig";
+const _AIPCR = "AssociateIdentityProviderConfigRequest";
+const _AIPCRs = "AssociateIdentityProviderConfigResponse";
+const _AId = "AddonIssue";
+const _ANCR = "AddonNamespaceConfigRequest";
+const _ANCRd = "AddonNamespaceConfigResponse";
+const _AP = "AccessPolicy";
+const _APIA = "AddonPodIdentityAssociations";
+const _APIAL = "AddonPodIdentityAssociationsList";
+const _APIC = "AddonPodIdentityConfiguration";
+const _APICL = "AddonPodIdentityConfigurationList";
+const _APL = "AccessPoliciesList";
+const _AS = "AccessScope";
+const _ASG = "AutoScalingGroup";
+const _ASGL = "AutoScalingGroupList";
+const _AVC = "AllowedValuesConstraint";
+const _AVI = "AddonVersionInfo";
+const _AVIL = "AddonVersionInfoList";
+const _Ad = "Addons";
+const _BRE = "BadRequestException";
+const _BS = "BlockStorage";
+const _C = "Cancellation";
+const _CA = "CertificateAuthority";
+const _CACR = "CreateAccessConfigRequest";
+const _CAE = "CreateAccessEntry";
+const _CAER = "CreateAccessEntryRequest";
+const _CAERr = "CreateAccessEntryResponse";
+const _CAR = "CreateAddonRequest";
+const _CARr = "CreateAddonResponse";
+const _CAS = "CertificateAuthoritySummary";
+const _CASE = "CertificateAuthorityScheduledEvents";
+const _CASL = "CertificateAuthoritySummaryList";
+const _CAV = "CertificateAuthorityValidity";
+const _CAr = "CreateAddon";
+const _CC = "CreateCapability";
+const _CCA = "CreateCertificateAuthority";
+const _CCAR = "CreateCertificateAuthorityRequest";
+const _CCARr = "CreateCertificateAuthorityResponse";
+const _CCR = "CapabilityConfigurationRequest";
+const _CCRa = "CapabilityConfigurationResponse";
+const _CCRo = "ComputeConfigRequest";
+const _CCRom = "ComputeConfigResponse";
+const _CCRon = "ConnectorConfigRequest";
+const _CCRonn = "ConnectorConfigResponse";
+const _CCRr = "CreateCapabilityRequest";
+const _CCRre = "CreateCapabilityResponse";
+const _CCRrea = "CreateClusterRequest";
+const _CCRreat = "CreateClusterResponse";
+const _CCr = "CreateCluster";
+const _CE = "ClientException";
+const _CEAS = "CreateEksAnywhereSubscription";
+const _CEASR = "CreateEksAnywhereSubscriptionRequest";
+const _CEASRr = "CreateEksAnywhereSubscriptionResponse";
+const _CFP = "CreateFargateProfile";
+const _CFPR = "CreateFargateProfileRequest";
+const _CFPRr = "CreateFargateProfileResponse";
+const _CH = "CapabilityHealth";
+const _CHl = "ClusterHealth";
+const _CI = "CapabilityIssue";
+const _CIL = "CapabilityIssueList";
+const _CILl = "ClusterIssueList";
+const _CIl = "ClusterIssue";
+const _CMC = "CrdManagementConfiguration";
+const _CN = "CreateNodegroup";
+const _CNR = "CreateNodegroupRequest";
+const _CNRr = "CreateNodegroupResponse";
+const _CPCI = "ControlPlaneConfigInfo";
+const _CPIA = "CreatePodIdentityAssociation";
+const _CPIAR = "CreatePodIdentityAssociationRequest";
+const _CPIARr = "CreatePodIdentityAssociationResponse";
+const _CPPR = "ControlPlanePlacementRequest";
+const _CPPRo = "ControlPlanePlacementResponse";
+const _CPSC = "ControlPlaneScalingConfig";
+const _CPSTI = "ControlPlaneScalingTierInfo";
+const _CPSTL = "ControlPlaneScalingTierList";
+const _CS = "CapabilitySummary";
+const _CSL = "CapabilitySummaryList";
+const _CSl = "ClientStat";
+const _CSli = "ClientStats";
+const _CU = "CancelUpdate";
+const _CUR = "CancelUpdateRequest";
+const _CURa = "CancelUpdateResponse";
+const _CVI = "ClusterVersionInformation";
+const _CVL = "ClusterVersionList";
+const _Ca = "Capability";
+const _Ce = "Certificate";
+const _Cl = "Cluster";
+const _Co = "Compatibility";
+const _Com = "Compatibilities";
+const _DA = "DeleteAddon";
+const _DAC = "DescribeAddonConfiguration";
+const _DACR = "DescribeAddonConfigurationRequest";
+const _DACRe = "DescribeAddonConfigurationResponse";
+const _DAE = "DeleteAccessEntry";
+const _DAER = "DeleteAccessEntryRequest";
+const _DAERe = "DeleteAccessEntryResponse";
+const _DAERes = "DescribeAccessEntryRequest";
+const _DAEResc = "DescribeAccessEntryResponse";
+const _DAEe = "DescribeAccessEntry";
+const _DAP = "DisassociateAccessPolicy";
+const _DAPR = "DisassociateAccessPolicyRequest";
+const _DAPRi = "DisassociateAccessPolicyResponse";
+const _DAR = "DeleteAddonRequest";
+const _DARe = "DeleteAddonResponse";
+const _DARes = "DescribeAddonRequest";
+const _DAResc = "DescribeAddonResponse";
+const _DAV = "DescribeAddonVersions";
+const _DAVR = "DescribeAddonVersionsRequest";
+const _DAVRe = "DescribeAddonVersionsResponse";
+const _DAe = "DescribeAddon";
+const _DC = "DurationConstraints";
+const _DCA = "DeleteCertificateAuthority";
+const _DCAR = "DeleteCertificateAuthorityRequest";
+const _DCARe = "DeleteCertificateAuthorityResponse";
+const _DCARes = "DescribeCertificateAuthorityRequest";
+const _DCAResc = "DescribeCertificateAuthorityResponse";
+const _DCAe = "DescribeCertificateAuthority";
+const _DCR = "DeleteCapabilityRequest";
+const _DCRe = "DeleteCapabilityResponse";
+const _DCRel = "DeleteClusterRequest";
+const _DCRele = "DeleteClusterResponse";
+const _DCRer = "DeregisterClusterRequest";
+const _DCRere = "DeregisterClusterResponse";
+const _DCRes = "DescribeCapabilityRequest";
+const _DCResc = "DescribeCapabilityResponse";
+const _DCRescr = "DescribeClusterRequest";
+const _DCRescri = "DescribeClusterResponse";
+const _DCV = "DescribeClusterVersions";
+const _DCVR = "DescribeClusterVersionsRequest";
+const _DCVRe = "DescribeClusterVersionsResponse";
+const _DCe = "DeleteCapability";
+const _DCel = "DeleteCluster";
+const _DCer = "DeregisterCluster";
+const _DCes = "DescribeCapability";
+const _DCesc = "DescribeCluster";
+const _DD = "DeprecationDetail";
+const _DDe = "DeprecationDetails";
+const _DEAS = "DeleteEksAnywhereSubscription";
+const _DEASR = "DeleteEksAnywhereSubscriptionRequest";
+const _DEASRe = "DeleteEksAnywhereSubscriptionResponse";
+const _DEASRes = "DescribeEksAnywhereSubscriptionRequest";
+const _DEASResc = "DescribeEksAnywhereSubscriptionResponse";
+const _DEASe = "DescribeEksAnywhereSubscription";
+const _DFP = "DeleteFargateProfile";
+const _DFPR = "DeleteFargateProfileRequest";
+const _DFPRe = "DeleteFargateProfileResponse";
+const _DFPRes = "DescribeFargateProfileRequest";
+const _DFPResc = "DescribeFargateProfileResponse";
+const _DFPe = "DescribeFargateProfile";
+const _DI = "DescribeInsight";
+const _DIPC = "DescribeIdentityProviderConfig";
+const _DIPCR = "DescribeIdentityProviderConfigRequest";
+const _DIPCRe = "DescribeIdentityProviderConfigResponse";
+const _DIPCRi = "DisassociateIdentityProviderConfigRequest";
+const _DIPCRis = "DisassociateIdentityProviderConfigResponse";
+const _DIPCi = "DisassociateIdentityProviderConfig";
+const _DIR = "DescribeInsightRequest";
+const _DIRR = "DescribeInsightsRefreshRequest";
+const _DIRRe = "DescribeInsightsRefreshResponse";
+const _DIRe = "DescribeInsightResponse";
+const _DIRes = "DescribeInsightsRefresh";
+const _DN = "DeleteNodegroup";
+const _DNR = "DeleteNodegroupRequest";
+const _DNRe = "DeleteNodegroupResponse";
+const _DNRes = "DescribeNodegroupRequest";
+const _DNResc = "DescribeNodegroupResponse";
+const _DNe = "DescribeNodegroup";
+const _DPC = "DurationParameterConfig";
+const _DPIA = "DeletePodIdentityAssociation";
+const _DPIAR = "DeletePodIdentityAssociationRequest";
+const _DPIARe = "DeletePodIdentityAssociationResponse";
+const _DPIARes = "DescribePodIdentityAssociationRequest";
+const _DPIAResc = "DescribePodIdentityAssociationResponse";
+const _DPIAe = "DescribePodIdentityAssociation";
+const _DU = "DescribeUpdate";
+const _DUR = "DescribeUpdateRequest";
+const _DURe = "DescribeUpdateResponse";
+const _EAS = "EksAnywhereSubscription";
+const _EASL = "EksAnywhereSubscriptionList";
+const _EAST = "EksAnywhereSubscriptionTerm";
+const _EC = "EncryptionConfig";
+const _ECL = "EncryptionConfigList";
+const _ED = "ErrorDetail";
+const _EDr = "ErrorDetails";
+const _ELB = "ElasticLoadBalancing";
+const _EPR = "EtcdPlacementRequest";
+const _EPRt = "EtcdPlacementResponse";
+const _FP = "FargateProfile";
+const _FPH = "FargateProfileHealth";
+const _FPI = "FargateProfileIssue";
+const _FPIL = "FargateProfileIssueList";
+const _FPS = "FargateProfileSelector";
+const _FPSa = "FargateProfileSelectors";
+const _GAC = "GatewayApiConfiguration";
+const _HPACCR = "HorizontalPodAutoscalerControllerConfigRequest";
+const _HPACCRo = "HorizontalPodAutoscalerControllerConfigResponse";
+const _HPACVC = "HorizontalPodAutoscalerControllerVersionConfig";
+const _I = "Identity";
+const _IC = "IntegerConstraints";
+const _ICSS = "InsightCategorySpecificSummary";
+const _IF = "InsightsFilter";
+const _IL = "IssueList";
+const _IPC = "IdentityProviderConfig";
+const _IPCR = "IdentityProviderConfigResponse";
+const _IPCd = "IdentityProviderConfigs";
+const _IPCn = "IntegerParameterConfig";
+const _IPE = "InvalidParameterException";
+const _IRC = "IntegerRangeConstraint";
+const _IRD = "InsightResourceDetail";
+const _IRDn = "InsightResourceDetails";
+const _IRE = "InvalidRequestException";
+const _IS = "InsightStatus";
+const _ISE = "InvalidStateException";
+const _ISn = "InsightSummary";
+const _ISns = "InsightSummaries";
+const _In = "Insight";
+const _Is = "Issue";
+const _KASCR = "KubeApiServerConfigRequest";
+const _KASCRu = "KubeApiServerConfigResponse";
+const _KASVC = "KubeApiServerVersionConfig";
+const _KCMCR = "KubeControllerManagerConfigRequest";
+const _KCMCRu = "KubeControllerManagerConfigResponse";
+const _KCMVC = "KubeControllerManagerVersionConfig";
+const _KNCR = "KubernetesNetworkConfigRequest";
+const _KNCRu = "KubernetesNetworkConfigResponse";
+const _KSCR = "KubeSchedulerConfigRequest";
+const _KSCRu = "KubeSchedulerConfigResponse";
+const _KSVC = "KubeSchedulerVersionConfig";
+const _L = "License";
+const _LA = "ListAddons";
+const _LAAP = "ListAssociatedAccessPolicies";
+const _LAAPR = "ListAssociatedAccessPoliciesRequest";
+const _LAAPRi = "ListAssociatedAccessPoliciesResponse";
+const _LAE = "ListAccessEntries";
+const _LAER = "ListAccessEntriesRequest";
+const _LAERi = "ListAccessEntriesResponse";
+const _LAP = "ListAccessPolicies";
+const _LAPR = "ListAccessPoliciesRequest";
+const _LAPRi = "ListAccessPoliciesResponse";
+const _LAR = "ListAddonsRequest";
+const _LARi = "ListAddonsResponse";
+const _LC = "ListCapabilities";
+const _LCA = "ListCertificateAuthorities";
+const _LCAR = "ListCertificateAuthoritiesRequest";
+const _LCARi = "ListCertificateAuthoritiesResponse";
+const _LCR = "ListCapabilitiesRequest";
+const _LCRi = "ListCapabilitiesResponse";
+const _LCRis = "ListClustersRequest";
+const _LCRist = "ListClustersResponse";
+const _LCi = "ListClusters";
+const _LEAS = "ListEksAnywhereSubscriptions";
+const _LEASR = "ListEksAnywhereSubscriptionsRequest";
+const _LEASRi = "ListEksAnywhereSubscriptionsResponse";
+const _LFP = "ListFargateProfiles";
+const _LFPR = "ListFargateProfilesRequest";
+const _LFPRi = "ListFargateProfilesResponse";
+const _LI = "ListInsights";
+const _LIPC = "ListIdentityProviderConfigs";
+const _LIPCR = "ListIdentityProviderConfigsRequest";
+const _LIPCRi = "ListIdentityProviderConfigsResponse";
+const _LIR = "ListInsightsRequest";
+const _LIRi = "ListInsightsResponse";
+const _LL = "LicenseList";
+const _LN = "ListNodegroups";
+const _LNR = "ListNodegroupsRequest";
+const _LNRi = "ListNodegroupsResponse";
+const _LPIA = "ListPodIdentityAssociations";
+const _LPIAR = "ListPodIdentityAssociationsRequest";
+const _LPIARi = "ListPodIdentityAssociationsResponse";
+const _LS = "LogSetup";
+const _LSo = "LogSetups";
+const _LTFR = "ListTagsForResource";
+const _LTFRR = "ListTagsForResourceRequest";
+const _LTFRRi = "ListTagsForResourceResponse";
+const _LTS = "LaunchTemplateSpecification";
+const _LU = "ListUpdates";
+const _LUR = "ListUpdatesRequest";
+const _LURi = "ListUpdatesResponse";
+const _Lo = "Logging";
+const _MI = "MarketplaceInformation";
+const _N = "Nodegroup";
+const _NFE = "NotFoundException";
+const _NH = "NodegroupHealth";
+const _NR = "NodegroupResources";
+const _NRC = "NodeRepairConfig";
+const _NRCO = "NodeRepairConfigOverrides";
+const _NRCOL = "NodeRepairConfigOverridesList";
+const _NRFC = "NodeResourcesFitConfig";
+const _NRFVC = "NodeResourcesFitVersionConfig";
+const _NSC = "NodegroupScalingConfig";
+const _NUC = "NodegroupUpdateConfig";
+const _OCR = "OutpostConfigRequest";
+const _OCRu = "OutpostConfigResponse";
+const _OIDC = "OIDC";
+const _OIPC = "OidcIdentityProviderConfig";
+const _OIPCR = "OidcIdentityProviderConfigRequest";
+const _P = "Provider";
+const _PGCCR = "PodGcControllerConfigRequest";
+const _PGCCRo = "PodGcControllerConfigResponse";
+const _PGCVC = "PodGcControllerVersionConfig";
+const _PIA = "PodIdentityAssociation";
+const _PIAS = "PodIdentityAssociationSummary";
+const _PIASo = "PodIdentityAssociationSummaries";
+const _PRC = "PortRangeConstraints";
+const _PRPC = "PortRangeParameterConfig";
+const _RAC = "RemoteAccessConfig";
+const _RC = "ResourceConstraints";
+const _RCR = "RegisterClusterRequest";
+const _RCRe = "RegisterClusterResponse";
+const _RCe = "RegisterCluster";
+const _RCo = "RollbackConfig";
+const _RIUE = "ResourceInUseException";
+const _RLEE = "ResourceLimitExceededException";
+const _RNCR = "RemoteNetworkConfigRequest";
+const _RNCRe = "RemoteNetworkConfigResponse";
+const _RNFE = "ResourceNotFoundException";
+const _RNN = "RemoteNodeNetwork";
+const _RNNL = "RemoteNodeNetworkList";
+const _RPDE = "ResourcePropagationDelayException";
+const _RPN = "RemotePodNetwork";
+const _RPNL = "RemotePodNetworkList";
+const _RW = "ResourceWeight";
+const _RWL = "ResourceWeightList";
+const _SCR = "StorageConfigRequest";
+const _SCRt = "StorageConfigResponse";
+const _SE = "ServerException";
+const _SI = "SsoIdentity";
+const _SIL = "SsoIdentityList";
+const _SIR = "StartInsightsRefresh";
+const _SIRR = "StartInsightsRefreshRequest";
+const _SIRRt = "StartInsightsRefreshResponse";
+const _SNPR = "ServiceNodePortRange";
+const _SS = "ScoringStrategy";
+const _SSC = "ScoringStrategyConfig";
+const _SSCc = "ScoringStrategyConstraints";
+const _SUE = "ServiceUnavailableException";
+const _T = "Taint";
+const _TE = "ThrottlingException";
+const _TR = "TagResource";
+const _TRR = "TagResourceRequest";
+const _TRRa = "TagResourceResponse";
+const _U = "Update";
+const _UA = "UpdateAddon";
+const _UAC = "UpdateAckConfig";
+const _UACC = "UpdateArgoCdConfig";
+const _UACR = "UpdateAccessConfigRequest";
+const _UAE = "UpdateAccessEntry";
+const _UAER = "UpdateAccessEntryRequest";
+const _UAERp = "UpdateAccessEntryResponse";
+const _UAR = "UpdateAddonRequest";
+const _UARp = "UpdateAddonResponse";
+const _UAZE = "UnsupportedAvailabilityZoneException";
+const _UC = "UpdateCapability";
+const _UCC = "UpdateCapabilityConfiguration";
+const _UCCR = "UpdateClusterConfigRequest";
+const _UCCRp = "UpdateClusterConfigResponse";
+const _UCCp = "UpdateClusterConfig";
+const _UCR = "UpdateCapabilityRequest";
+const _UCRp = "UpdateCapabilityResponse";
+const _UCV = "UpdateClusterVersion";
+const _UCVR = "UpdateClusterVersionRequest";
+const _UCVRp = "UpdateClusterVersionResponse";
+const _UEAS = "UpdateEksAnywhereSubscription";
+const _UEASR = "UpdateEksAnywhereSubscriptionRequest";
+const _UEASRp = "UpdateEksAnywhereSubscriptionResponse";
+const _ULP = "UpdateLabelsPayload";
+const _UNC = "UpdateNodegroupConfig";
+const _UNCR = "UpdateNodegroupConfigRequest";
+const _UNCRp = "UpdateNodegroupConfigResponse";
+const _UNV = "UpdateNodegroupVersion";
+const _UNVR = "UpdateNodegroupVersionRequest";
+const _UNVRp = "UpdateNodegroupVersionResponse";
+const _UP = "UpdateParam";
+const _UPIA = "UpdatePodIdentityAssociation";
+const _UPIAR = "UpdatePodIdentityAssociationRequest";
+const _UPIARp = "UpdatePodIdentityAssociationResponse";
+const _UPR = "UpgradePolicyRequest";
+const _UPRp = "UpgradePolicyResponse";
+const _UPp = "UpdateParams";
+const _UR = "UntagResource";
+const _URM = "UpdateRoleMappings";
+const _URR = "UntagResourceRequest";
+const _URRn = "UntagResourceResponse";
+const _UTP = "UpdateTaintsPayload";
+const _VCR = "VpcConfigRequest";
+const _VCRp = "VpcConfigResponse";
+const _WPC = "WarmPoolConfig";
+const _ZSCR = "ZonalShiftConfigRequest";
+const _ZSCRo = "ZonalShiftConfigResponse";
+const _a = "arn";
+const _aA = "addonArn";
+const _aAP = "associatedAccessPolicy";
+const _aAPs = "associatedAccessPolicies";
+const _aAc = "activatedAt";
+const _aAs = "associatedAt";
+const _aAss = "associationArn";
+const _aB = "activatedBy";
+const _aC = "argoCd";
+const _aCD = "addonCompatibilityDetails";
+const _aCc = "accessConfig";
+const _aCct = "activationCode";
+const _aE = "activationExpiry";
+const _aEA = "accessEntryArn";
+const _aEc = "accessEntry";
+const _aEcc = "accessEntries";
+const _aI = "awsIdc";
+const _aIc = "activationId";
+const _aId = "additionalInfo";
+const _aIs = "associationId";
+const _aM = "authenticationMode";
+const _aN = "addonName";
+const _aOUL = "addOrUpdateLabels";
+const _aOURM = "addOrUpdateRoleMappings";
+const _aOUT = "addOrUpdateTaints";
+const _aP = "accessPolicies";
+const _aPA = "associatedPolicyArn";
+const _aR = "autoRenew";
+const _aRC = "apiRequestConcurrency";
+const _aS = "accessScope";
+const _aSG = "autoScalingGroups";
+const _aT = "amiType";
+const _aV = "addonVersion";
+const _aVd = "addonVersions";
+const _aVl = "allowedValues";
+const _ac = "ack";
+const _act = "active";
+const _ad = "addon";
+const _add = "addons";
+const _ar = "architecture";
+const _as = "association";
+const _ass = "associations";
+const _bCCAP = "bootstrapClusterCreatorAdminPermissions";
+const _bS = "blockStorage";
+const _bSMA = "bootstrapSelfManagedAddons";
+const _c = "client";
+const _cA = "createdAt";
+const _cAI = "certificateAuthorityId";
+const _cAe = "certificateAuthority";
+const _cAer = "certificateAuthorities";
+const _cB = "createdBy";
+const _cC = "connectorConfig";
+const _cCo = "computeConfig";
+const _cDSG = "clusterDatabaseSizeGb";
+const _cI = "clientId";
+const _cL = "clusterLogging";
+const _cN = "clusterName";
+const _cNa = "capabilityName";
+const _cPCC = "controlPlaneComponentConfig";
+const _cPCCO = "controlPlaneComponentConfigOverrides";
+const _cPEM = "controlPlaneEgressMode";
+const _cPIT = "controlPlaneInstanceType";
+const _cPP = "controlPlanePlacement";
+const _cPSC = "controlPlaneScalingConfig";
+const _cPST = "controlPlaneScalingTiers";
+const _cRT = "clientRequestToken";
+const _cS = "clientStats";
+const _cSGI = "clusterSecurityGroupId";
+const _cSS = "categorySpecificSummary";
+const _cSo = "configurationSchema";
+const _cT = "computeTypes";
+const _cTa = "capacityType";
+const _cTl = "clusterType";
+const _cV = "configurationValues";
+const _cVl = "clusterVersion";
+const _cVlu = "clusterVersions";
+const _cVo = "compatibleVersions";
+const _ca = "capability";
+const _can = "cancellation";
+const _cap = "capabilities";
+const _cat = "category";
+const _cate = "categories";
+const _ci = "cidrs";
+const _cl = "cluster";
+const _clu = "clusters";
+const _co = "code";
+const _com = "compatibilities";
+const _con = "configuration";
+const _cons = "constraints";
+const _cr = "crds";
+const _d = "data";
+const _dD = "deprecationDetails";
+const _dN = "defaultNamespace";
+const _dO = "defaultOnly";
+const _dP = "deletionProtection";
+const _dPP = "deletePropagationPolicy";
+const _dPV = "defaultPlatformVersion";
+const _dS = "disabledServices";
+const _dST = "disableSessionTags";
+const _dSe = "desiredSize";
+const _dSi = "distributionStatus";
+const _dSis = "diskSize";
+const _dV = "defaultVersion";
+const _dVe = "defaultValue";
+const _de = "description";
+const _du = "duration";
+const _e = "error";
+const _eA = "endedAt";
+const _eC = "encryptionConfig";
+const _eCN = "enableCrossNamespace";
+const _eCr = "errorCode";
+const _eD = "effectiveDate";
+const _eDx = "expirationDate";
+const _eI = "externalId";
+const _eIT = "etcdInstanceType";
+const _eLB = "elasticLoadBalancing";
+const _eM = "errorMessage";
+const _eOESD = "endOfExtendedSupportDate";
+const _eOSSD = "endOfStandardSupportDate";
+const _eP = "endpointPrefix";
+const _ePA = "endpointPublicAccess";
+const _ePAn = "endpointPrivateAccess";
+const _ePt = "etcdPlacement";
+const _eSK = "ec2SshKey";
+const _eT = "eventTtl";
+const _ef = "effect";
+const _en = "enabled";
+const _end = "endpoint";
+const _er = "errors";
+const _f = "filter";
+const _fAA = "firstAutoActivation";
+const _fAAi = "finalAutoActivation";
+const _fP = "fargateProfile";
+const _fPA = "fargateProfileArn";
+const _fPN = "fargateProfileName";
+const _fPNa = "fargateProfileNames";
+const _fo = "force";
+const _gA = "gatewayApi";
+const _gC = "groupsClaim";
+const _gN = "groupName";
+const _gP = "groupsPrefix";
+const _h = "health";
+const _hE = "httpError";
+const _hPACC = "horizontalPodAutoscalerControllerConfig";
+const _hPASP = "horizontalPodAutoscalerSyncPeriod";
+const _hQ = "httpQuery";
+const _ht = "http";
+const _i = "id";
+const _iA = "includeAll";
+const _iF = "ipFamily";
+const _iIA = "idcInstanceArn";
+const _iMAA = "idcManagedApplicationArn";
+const _iPC = "identityProviderConfig";
+const _iPCA = "identityProviderConfigArn";
+const _iPCN = "identityProviderConfigName";
+const _iPCd = "identityProviderConfigs";
+const _iR = "idcRegion";
+const _iS = "insightStatus";
+const _iSn = "includeStatus";
+const _iT = "instanceTypes";
+const _iTd = "idempotencyToken";
+const _iU = "issuerUrl";
+const _id = "identities";
+const _ide = "identity";
+const _in = "insight";
+const _inc = "include";
+const _ins = "insights";
+const _is = "issues";
+const _iss = "issuer";
+const _k = "key";
+const _kA = "keyArn";
+const _kASC = "kubeApiServerConfig";
+const _kCMC = "kubeControllerManagerConfig";
+const _kG = "kubernetesGroups";
+const _kNC = "kubernetesNetworkConfig";
+const _kPV = "kubernetesPatchVersion";
+const _kRU = "kubernetesResourceUri";
+const _kSC = "kubeSchedulerConfig";
+const _kV = "kubernetesVersion";
+const _kVu = "kubernetesVersions";
+const _l = "logging";
+const _lA = "licenseArns";
+const _lQ = "licenseQuantity";
+const _lRT = "lastRequestTime";
+const _lRTa = "lastRefreshTime";
+const _lT = "licenseType";
+const _lTT = "lastTransitionTime";
+const _lTa = "launchTemplate";
+const _la = "labels";
+const _li = "licenses";
+const _m = "message";
+const _mA = "modifiedAt";
+const _mGPC = "maxGroupPreparedCapacity";
+const _mI = "marketplaceInformation";
+const _mP = "minPort";
+const _mPNRC = "maxParallelNodesRepairedCount";
+const _mPNRP = "maxParallelNodesRepairedPercentage";
+const _mPa = "maxPort";
+const _mR = "maxResults";
+const _mRWTM = "minRepairWaitTimeMins";
+const _mS = "minSize";
+const _mSa = "maxSize";
+const _mU = "maxUnavailable";
+const _mUNTC = "maxUnhealthyNodeThresholdCount";
+const _mUNTP = "maxUnhealthyNodeThresholdPercentage";
+const _mUP = "maxUnavailablePercentage";
+const _ma = "managed";
+const _max = "max";
+const _mi = "min";
+const _n = "name";
+const _nA = "networkAccess";
+const _nAo = "notAfter";
+const _nAod = "nodegroupArn";
+const _nB = "notBefore";
+const _nC = "namespaceConfig";
+const _nMC = "nodeMonitoringCondition";
+const _nN = "nodegroupName";
+const _nORLD = "numberOfRequestsLast30Days";
+const _nP = "nodePools";
+const _nR = "nodeRole";
+const _nRA = "nodeRoleArn";
+const _nRC = "nodeRepairConfig";
+const _nRCO = "nodeRepairConfigOverrides";
+const _nRF = "nodeResourcesFit";
+const _nT = "nextToken";
+const _nUR = "nodeUnhealthyReason";
+const _na = "namespaces";
+const _nam = "namespace";
+const _no = "nodegroup";
+const _nod = "nodegroups";
+const _o = "owner";
+const _oA = "outpostArns";
+const _oAw = "ownerArn";
+const _oC = "outpostConfig";
+const _oi = "oidc";
+const _ow = "owners";
+const _p = "publisher";
+const _pA = "principalArn";
+const _pAC = "publicAccessCidrs";
+const _pAo = "policyArn";
+const _pERA = "podExecutionRoleArn";
+const _pGCC = "podGcControllerConfig";
+const _pI = "productId";
+const _pIA = "podIdentityAssociations";
+const _pIC = "podIdentityConfiguration";
+const _pS = "poolState";
+const _pSRPS = "podSchedulingRatePerSecond";
+const _pU = "productUrl";
+const _pV = "platformVersion";
+const _pVl = "platformVersions";
+const _pa = "params";
+const _po = "policy";
+const _pr = "provider";
+const _pre = "preserve";
+const _pu = "publishers";
+const _r = "role";
+const _rA = "roleArn";
+const _rASG = "remoteAccessSecurityGroup";
+const _rAe = "remoteAccess";
+const _rAep = "repairAction";
+const _rAes = "resourceArn";
+const _rAo = "rollbackAvailable";
+const _rC = "requiresConfiguration";
+const _rCe = "resolveConflicts";
+const _rCeq = "requiredClaims";
+const _rCo = "rollbackConfig";
+const _rD = "releaseDate";
+const _rI = "resourceIds";
+const _rIP = "requiresIamPermissions";
+const _rL = "removeLabels";
+const _rMP = "recommendedManagedPolicies";
+const _rNC = "remoteNetworkConfig";
+const _rNN = "remoteNodeNetworks";
+const _rOSI = "reuseOnScaleIn";
+const _rPN = "remotePodNetworks";
+const _rRM = "rbacRoleMappings";
+const _rRMe = "removeRoleMappings";
+const _rT = "removeTaints";
+const _rV = "releaseVersion";
+const _rVC = "resourcesVpcConfig";
+const _rW = "replacedWith";
+const _re = "reason";
+const _rec = "recommendation";
+const _res = "resources";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.eks";
+const _sA = "serviceAccount";
+const _sARA = "serviceAccountRoleArn";
+const _sAt = "startedAt";
+const _sC = "storageConfig";
+const _sCc = "scalingConfig";
+const _sE = "scheduledEvents";
+const _sGI = "securityGroupIds";
+const _sI = "subscriptionId";
+const _sIC = "serviceIpv4Cidr";
+const _sICe = "serviceIpv6Cidr";
+const _sIu = "subnetIds";
+const _sL = "spreadLevel";
+const _sNPR = "serviceNodePortRange";
+const _sS = "signingStatus";
+const _sSG = "sourceSecurityGroups";
+const _sSRV = "startServingReplacementVersion";
+const _sSV = "stopServingVersion";
+const _sSc = "scoringStrategy";
+const _sT = "supportType";
+const _sU = "serverUrl";
+const _se = "server";
+const _sel = "selectors";
+const _st = "status";
+const _sta = "statuses";
+const _su = "subscription";
+const _sub = "subnets";
+const _subs = "subscriptions";
+const _t = "tags";
+const _tK = "tagKeys";
+const _tL = "taintsList";
+const _tM = "timeoutMinutes";
+const _tN = "tierName";
+const _tPGT = "terminatedPodGcThreshold";
+const _tRA = "targetRoleArn";
+const _ta = "taints";
+const _te = "term";
+const _ti = "tier";
+const _to = "token";
+const _ty = "type";
+const _typ = "types";
+const _u = "username";
+const _uA = "userAgent";
+const _uC = "updateConfig";
+const _uCs = "usernameClaim";
+const _uI = "updateId";
+const _uIp = "updateIds";
+const _uP = "upgradePolicy";
+const _uPs = "usernamePrefix";
+const _uS = "updateStrategy";
+const _un = "unit";
+const _up = "update";
+const _us = "usage";
+const _v = "version";
+const _vI = "vpceIds";
+const _vIp = "vpcId";
+const _vS = "versionStatus";
+const _vZ = "validZones";
+const _va = "validity";
+const _val = "value";
+const _w = "weight";
+const _wPC = "warmPoolConfig";
+const _zSC = "zonalShiftConfig";
+const n0 = "com.amazonaws.eks";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import { EKSServiceException } from "../models/EKSServiceException";
+import {
+  AccessDeniedException,
+  BadRequestException,
+  ClientException,
+  InvalidParameterException,
+  InvalidRequestException,
+  InvalidStateException,
+  NotFoundException,
+  ResourceInUseException,
+  ResourceLimitExceededException,
+  ResourceNotFoundException,
+  ResourcePropagationDelayException,
+  ServerException,
+  ServiceUnavailableException,
+  ThrottlingException,
+  UnsupportedAvailabilityZoneException,
+} from "../models/errors";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var EKSServiceException$: StaticErrorSchema = [-3, _s, "EKSServiceException", 0, [], []];
+_s_registry.registerError(EKSServiceException$, EKSServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var BadRequestException$: StaticErrorSchema = [-3, n0, _BRE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(BadRequestException$, BadRequestException);
+export var ClientException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 400 },
+  [_cN, _nN, _aN, _sI, _m],
+  [0, 0, 0, 0, 0]
+];
+n0_registry.registerError(ClientException$, ClientException);
+export var InvalidParameterException$: StaticErrorSchema = [-3, n0, _IPE,
+  { [_e]: _c, [_hE]: 400 },
+  [_cN, _nN, _fPN, _aN, _sI, _m],
+  [0, 0, 0, 0, 0, 0]
+];
+n0_registry.registerError(InvalidParameterException$, InvalidParameterException);
+export var InvalidRequestException$: StaticErrorSchema = [-3, n0, _IRE,
+  { [_e]: _c, [_hE]: 400 },
+  [_cN, _nN, _aN, _sI, _m],
+  [0, 0, 0, 0, 0]
+];
+n0_registry.registerError(InvalidRequestException$, InvalidRequestException);
+export var InvalidStateException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _c, [_hE]: 400 },
+  [_cN, _m],
+  [0, 0]
+];
+n0_registry.registerError(InvalidStateException$, InvalidStateException);
+export var NotFoundException$: StaticErrorSchema = [-3, n0, _NFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(NotFoundException$, NotFoundException);
+export var ResourceInUseException$: StaticErrorSchema = [-3, n0, _RIUE,
+  { [_e]: _c, [_hE]: 409 },
+  [_cN, _nN, _aN, _m],
+  [0, 0, 0, 0]
+];
+n0_registry.registerError(ResourceInUseException$, ResourceInUseException);
+export var ResourceLimitExceededException$: StaticErrorSchema = [-3, n0, _RLEE,
+  { [_e]: _c, [_hE]: 400 },
+  [_cN, _nN, _sI, _m],
+  [0, 0, 0, 0]
+];
+n0_registry.registerError(ResourceLimitExceededException$, ResourceLimitExceededException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_cN, _nN, _fPN, _aN, _sI, _m],
+  [0, 0, 0, 0, 0, 0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ResourcePropagationDelayException$: StaticErrorSchema = [-3, n0, _RPDE,
+  { [_e]: _c, [_hE]: 428 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ResourcePropagationDelayException$, ResourcePropagationDelayException);
+export var ServerException$: StaticErrorSchema = [-3, n0, _SE,
+  { [_e]: _se, [_hE]: 500 },
+  [_cN, _nN, _aN, _sI, _m],
+  [0, 0, 0, 0, 0]
+];
+n0_registry.registerError(ServerException$, ServerException);
+export var ServiceUnavailableException$: StaticErrorSchema = [-3, n0, _SUE,
+  { [_e]: _se, [_hE]: 503 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ServiceUnavailableException$, ServiceUnavailableException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_cN, _m],
+  [0, 0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var UnsupportedAvailabilityZoneException$: StaticErrorSchema = [-3, n0, _UAZE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m, _cN, _nN, _vZ],
+  [0, 0, 0, 64 | 0]
+];
+n0_registry.registerError(UnsupportedAvailabilityZoneException$, UnsupportedAvailabilityZoneException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var AccessConfigResponse$: StaticStructureSchema = [3, n0, _ACR,
+  0,
+  [_bCCAP, _aM],
+  [2, 0]
+];
+export var AccessEntry$: StaticStructureSchema = [3, n0, _AE,
+  0,
+  [_cN, _pA, _kG, _aEA, _cA, _mA, _t, _u, _ty],
+  [0, 0, 64 | 0, 0, 4, 4, 128 | 0, 0, 0]
+];
+export var AccessPolicy$: StaticStructureSchema = [3, n0, _AP,
+  0,
+  [_n, _a],
+  [0, 0]
+];
+export var AccessScope$: StaticStructureSchema = [3, n0, _AS,
+  0,
+  [_ty, _na],
+  [0, 64 | 0]
+];
+export var AckConfigRequest$: StaticStructureSchema = [3, n0, _ACRc,
+  0,
+  [_eCN, _dS],
+  [2, 64 | 0]
+];
+export var AckConfigResponse$: StaticStructureSchema = [3, n0, _ACRck,
+  0,
+  [_eCN, _dS],
+  [2, 64 | 0]
+];
+export var ActivateCertificateAuthorityRequest$: StaticStructureSchema = [3, n0, _ACAR,
+  0,
+  [_cN, _cAI, _cRT],
+  [[0, 1], [0, 1], [0, 4]], 2
+];
+export var ActivateCertificateAuthorityResponse$: StaticStructureSchema = [3, n0, _ACARc,
+  0,
+  [_up, _cAe],
+  [() => Update$, () => CertificateAuthoritySummary$]
+];
+export var ActiveCertificateAuthority$: StaticStructureSchema = [3, n0, _ACA,
+  0,
+  [_i, _aB],
+  [0, 0]
+];
+export var Addon$: StaticStructureSchema = [3, n0, _A,
+  0,
+  [_aN, _cN, _st, _aV, _h, _aA, _cA, _mA, _sARA, _t, _p, _o, _mI, _cV, _pIA, _nC],
+  [0, 0, 0, 0, () => AddonHealth$, 0, 4, 4, 0, 128 | 0, 0, 0, () => MarketplaceInformation$, 0, 64 | 0, () => AddonNamespaceConfigResponse$]
+];
+export var AddonCompatibilityDetail$: StaticStructureSchema = [3, n0, _ACD,
+  0,
+  [_n, _cVo],
+  [0, 64 | 0]
+];
+export var AddonHealth$: StaticStructureSchema = [3, n0, _AH,
+  0,
+  [_is],
+  [() => AddonIssueList]
+];
+export var AddonInfo$: StaticStructureSchema = [3, n0, _AI,
+  0,
+  [_aN, _ty, _aVd, _p, _o, _mI, _dN],
+  [0, 0, () => AddonVersionInfoList, 0, 0, () => MarketplaceInformation$, 0]
+];
+export var AddonIssue$: StaticStructureSchema = [3, n0, _AId,
+  0,
+  [_co, _m, _rI],
+  [0, 0, 64 | 0]
+];
+export var AddonNamespaceConfigRequest$: StaticStructureSchema = [3, n0, _ANCR,
+  0,
+  [_nam],
+  [0]
+];
+export var AddonNamespaceConfigResponse$: StaticStructureSchema = [3, n0, _ANCRd,
+  0,
+  [_nam],
+  [0]
+];
+export var AddonPodIdentityAssociations$: StaticStructureSchema = [3, n0, _APIA,
+  0,
+  [_sA, _rA],
+  [0, 0], 2
+];
+export var AddonPodIdentityConfiguration$: StaticStructureSchema = [3, n0, _APIC,
+  0,
+  [_sA, _rMP],
+  [0, 64 | 0]
+];
+export var AddonVersionInfo$: StaticStructureSchema = [3, n0, _AVI,
+  0,
+  [_aV, _ar, _cT, _com, _rC, _rIP],
+  [0, 64 | 0, 64 | 0, () => Compatibilities, 2, 2]
+];
+export var AllowedValuesConstraint$: StaticStructureSchema = [3, n0, _AVC,
+  0,
+  [_aVl],
+  [64 | 0]
+];
+export var ArgoCdAwsIdcConfigRequest$: StaticStructureSchema = [3, n0, _ACAICR,
+  0,
+  [_iIA, _iR],
+  [0, 0], 1
+];
+export var ArgoCdAwsIdcConfigResponse$: StaticStructureSchema = [3, n0, _ACAICRr,
+  0,
+  [_iIA, _iR, _iMAA],
+  [0, 0, 0]
+];
+export var ArgoCdConfigRequest$: StaticStructureSchema = [3, n0, _ACCR,
+  0,
+  [_aI, _nam, _rRM, _nA, _eP],
+  [() => ArgoCdAwsIdcConfigRequest$, 0, () => ArgoCdRoleMappingList, () => ArgoCdNetworkAccessConfigRequest$, 0], 1
+];
+export var ArgoCdConfigResponse$: StaticStructureSchema = [3, n0, _ACCRr,
+  0,
+  [_nam, _aI, _rRM, _nA, _sU, _eP],
+  [0, () => ArgoCdAwsIdcConfigResponse$, () => ArgoCdRoleMappingList, () => ArgoCdNetworkAccessConfigResponse$, 0, 0]
+];
+export var ArgoCdNetworkAccessConfigRequest$: StaticStructureSchema = [3, n0, _ACNACR,
+  0,
+  [_vI],
+  [64 | 0]
+];
+export var ArgoCdNetworkAccessConfigResponse$: StaticStructureSchema = [3, n0, _ACNACRr,
+  0,
+  [_vI],
+  [64 | 0]
+];
+export var ArgoCdRoleMapping$: StaticStructureSchema = [3, n0, _ACRM,
+  0,
+  [_r, _id],
+  [0, () => SsoIdentityList], 2
+];
+export var AssociateAccessPolicyRequest$: StaticStructureSchema = [3, n0, _AAPR,
+  0,
+  [_cN, _pA, _pAo, _aS],
+  [[0, 1], [0, 1], 0, () => AccessScope$], 4
+];
+export var AssociateAccessPolicyResponse$: StaticStructureSchema = [3, n0, _AAPRs,
+  0,
+  [_cN, _pA, _aAP],
+  [0, 0, () => AssociatedAccessPolicy$]
+];
+export var AssociatedAccessPolicy$: StaticStructureSchema = [3, n0, _AAP,
+  0,
+  [_pAo, _aS, _aAs, _mA],
+  [0, () => AccessScope$, 4, 4]
+];
+export var AssociateEncryptionConfigRequest$: StaticStructureSchema = [3, n0, _AECR,
+  0,
+  [_cN, _eC, _cRT],
+  [[0, 1], () => EncryptionConfigList, [0, 4]], 2
+];
+export var AssociateEncryptionConfigResponse$: StaticStructureSchema = [3, n0, _AECRs,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var AssociateIdentityProviderConfigRequest$: StaticStructureSchema = [3, n0, _AIPCR,
+  0,
+  [_cN, _oi, _t, _cRT],
+  [[0, 1], () => OidcIdentityProviderConfigRequest$, 128 | 0, [0, 4]], 2
+];
+export var AssociateIdentityProviderConfigResponse$: StaticStructureSchema = [3, n0, _AIPCRs,
+  0,
+  [_up, _t],
+  [() => Update$, 128 | 0]
+];
+export var AutoScalingGroup$: StaticStructureSchema = [3, n0, _ASG,
+  0,
+  [_n],
+  [0]
+];
+export var BlockStorage$: StaticStructureSchema = [3, n0, _BS,
+  0,
+  [_en],
+  [2]
+];
+export var Cancellation$: StaticStructureSchema = [3, n0, _C,
+  0,
+  [_st, _re],
+  [0, 0]
+];
+export var CancelUpdateRequest$: StaticStructureSchema = [3, n0, _CUR,
+  0,
+  [_n, _uI, _cRT],
+  [[0, 1], [0, 1], [0, 4]], 2
+];
+export var CancelUpdateResponse$: StaticStructureSchema = [3, n0, _CURa,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var Capability$: StaticStructureSchema = [3, n0, _Ca,
+  0,
+  [_cNa, _a, _cN, _ty, _rA, _st, _v, _con, _t, _h, _cA, _mA, _dPP],
+  [0, 0, 0, 0, 0, 0, 0, () => CapabilityConfigurationResponse$, 128 | 0, () => CapabilityHealth$, 4, 4, 0]
+];
+export var CapabilityConfigurationRequest$: StaticStructureSchema = [3, n0, _CCR,
+  0,
+  [_aC, _ac],
+  [() => ArgoCdConfigRequest$, () => AckConfigRequest$]
+];
+export var CapabilityConfigurationResponse$: StaticStructureSchema = [3, n0, _CCRa,
+  0,
+  [_aC, _ac],
+  [() => ArgoCdConfigResponse$, () => AckConfigResponse$]
+];
+export var CapabilityHealth$: StaticStructureSchema = [3, n0, _CH,
+  0,
+  [_is],
+  [() => CapabilityIssueList]
+];
+export var CapabilityIssue$: StaticStructureSchema = [3, n0, _CI,
+  0,
+  [_co, _m],
+  [0, 0]
+];
+export var CapabilitySummary$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_cNa, _a, _ty, _st, _v, _cA, _mA],
+  [0, 0, 0, 0, 0, 4, 4]
+];
+export var Certificate$: StaticStructureSchema = [3, n0, _Ce,
+  0,
+  [_d, _act],
+  [0, () => ActiveCertificateAuthority$]
+];
+export var CertificateAuthority$: StaticStructureSchema = [3, n0, _CA,
+  0,
+  [_i, _cA, _cB, _aAc, _aB, _sS, _dSi, _va, _sE, _rAo, _d],
+  [0, 4, 0, 4, 0, 0, 0, () => CertificateAuthorityValidity$, () => CertificateAuthorityScheduledEvents$, 2, 0]
+];
+export var CertificateAuthorityScheduledEvents$: StaticStructureSchema = [3, n0, _CASE,
+  0,
+  [_fAA, _fAAi],
+  [4, 4]
+];
+export var CertificateAuthoritySummary$: StaticStructureSchema = [3, n0, _CAS,
+  0,
+  [_i, _cA, _cB, _aAc, _aB, _sS, _dSi],
+  [0, 4, 0, 4, 0, 0, 0]
+];
+export var CertificateAuthorityValidity$: StaticStructureSchema = [3, n0, _CAV,
+  0,
+  [_nB, _nAo],
+  [4, 4]
+];
+export var ClientStat$: StaticStructureSchema = [3, n0, _CSl,
+  0,
+  [_uA, _nORLD, _lRT],
+  [0, 1, 4]
+];
+export var Cluster$: StaticStructureSchema = [3, n0, _Cl,
+  0,
+  [_n, _a, _cA, _v, _end, _rA, _rVC, _kNC, _l, _ide, _st, _cAe, _cRT, _pV, _t, _eC, _cC, _i, _h, _oC, _aCc, _uP, _zSC, _rNC, _cCo, _sC, _dP, _cPSC, _kASC, _kSC, _kCMC],
+  [0, 0, 4, 0, 0, 0, () => VpcConfigResponse$, () => KubernetesNetworkConfigResponse$, () => Logging$, () => Identity$, 0, () => Certificate$, 0, 0, 128 | 0, () => EncryptionConfigList, () => ConnectorConfigResponse$, 0, () => ClusterHealth$, () => OutpostConfigResponse$, () => AccessConfigResponse$, () => UpgradePolicyResponse$, () => ZonalShiftConfigResponse$, () => RemoteNetworkConfigResponse$, () => ComputeConfigResponse$, () => StorageConfigResponse$, 2, () => ControlPlaneScalingConfig$, () => KubeApiServerConfigResponse$, () => KubeSchedulerConfigResponse$, () => KubeControllerManagerConfigResponse$]
+];
+export var ClusterHealth$: StaticStructureSchema = [3, n0, _CHl,
+  0,
+  [_is],
+  [() => ClusterIssueList]
+];
+export var ClusterIssue$: StaticStructureSchema = [3, n0, _CIl,
+  0,
+  [_co, _m, _rI],
+  [0, 0, 64 | 0]
+];
+export var ClusterVersionInformation$: StaticStructureSchema = [3, n0, _CVI,
+  0,
+  [_cVl, _cTl, _dPV, _dV, _rD, _eOSSD, _eOESD, _st, _vS, _kPV, _cPST, _cPCC],
+  [0, 0, 0, 2, 4, 4, 4, 0, 0, 0, () => ControlPlaneScalingTierList, () => ControlPlaneConfigInfo$]
+];
+export var Compatibility$: StaticStructureSchema = [3, n0, _Co,
+  0,
+  [_cVl, _pVl, _dV],
+  [0, 64 | 0, 2]
+];
+export var ComputeConfigRequest$: StaticStructureSchema = [3, n0, _CCRo,
+  0,
+  [_en, _nP, _nRA],
+  [2, 64 | 0, 0]
+];
+export var ComputeConfigResponse$: StaticStructureSchema = [3, n0, _CCRom,
+  0,
+  [_en, _nP, _nRA],
+  [2, 64 | 0, 0]
+];
+export var ConnectorConfigRequest$: StaticStructureSchema = [3, n0, _CCRon,
+  0,
+  [_rA, _pr],
+  [0, 0], 2
+];
+export var ConnectorConfigResponse$: StaticStructureSchema = [3, n0, _CCRonn,
+  0,
+  [_aIc, _aCct, _aE, _pr, _rA],
+  [0, 0, 4, 0, 0]
+];
+export var ControlPlaneConfigInfo$: StaticStructureSchema = [3, n0, _CPCI,
+  0,
+  [_kASC, _kSC, _kCMC],
+  [() => KubeApiServerVersionConfig$, () => KubeSchedulerVersionConfig$, () => KubeControllerManagerVersionConfig$]
+];
+export var ControlPlanePlacementRequest$: StaticStructureSchema = [3, n0, _CPPR,
+  0,
+  [_gN, _sL],
+  [0, 0]
+];
+export var ControlPlanePlacementResponse$: StaticStructureSchema = [3, n0, _CPPRo,
+  0,
+  [_gN, _sL],
+  [0, 0]
+];
+export var ControlPlaneScalingConfig$: StaticStructureSchema = [3, n0, _CPSC,
+  0,
+  [_ti],
+  [0]
+];
+export var ControlPlaneScalingTierInfo$: StaticStructureSchema = [3, n0, _CPSTI,
+  0,
+  [_tN, _aRC, _pSRPS, _cDSG, _cPCCO],
+  [0, 1, 1, 1, () => ControlPlaneConfigInfo$]
+];
+export var CrdManagementConfiguration$: StaticStructureSchema = [3, n0, _CMC,
+  0,
+  [_ma],
+  [2]
+];
+export var CreateAccessConfigRequest$: StaticStructureSchema = [3, n0, _CACR,
+  0,
+  [_bCCAP, _aM],
+  [2, 0]
+];
+export var CreateAccessEntryRequest$: StaticStructureSchema = [3, n0, _CAER,
+  0,
+  [_cN, _pA, _kG, _t, _cRT, _u, _ty],
+  [[0, 1], 0, 64 | 0, 128 | 0, [0, 4], 0, 0], 2
+];
+export var CreateAccessEntryResponse$: StaticStructureSchema = [3, n0, _CAERr,
+  0,
+  [_aEc],
+  [() => AccessEntry$]
+];
+export var CreateAddonRequest$: StaticStructureSchema = [3, n0, _CAR,
+  0,
+  [_cN, _aN, _aV, _sARA, _rCe, _cRT, _t, _cV, _pIA, _nC],
+  [[0, 1], 0, 0, 0, 0, [0, 4], 128 | 0, 0, () => AddonPodIdentityAssociationsList, () => AddonNamespaceConfigRequest$], 2
+];
+export var CreateAddonResponse$: StaticStructureSchema = [3, n0, _CARr,
+  0,
+  [_ad],
+  [() => Addon$]
+];
+export var CreateCapabilityRequest$: StaticStructureSchema = [3, n0, _CCRr,
+  0,
+  [_cNa, _cN, _ty, _rA, _dPP, _cRT, _con, _t],
+  [0, [0, 1], 0, 0, 0, [0, 4], () => CapabilityConfigurationRequest$, 128 | 0], 5
+];
+export var CreateCapabilityResponse$: StaticStructureSchema = [3, n0, _CCRre,
+  0,
+  [_ca],
+  [() => Capability$]
+];
+export var CreateCertificateAuthorityRequest$: StaticStructureSchema = [3, n0, _CCAR,
+  0,
+  [_cN, _cRT],
+  [[0, 1], [0, 4]], 1
+];
+export var CreateCertificateAuthorityResponse$: StaticStructureSchema = [3, n0, _CCARr,
+  0,
+  [_up, _cAe],
+  [() => Update$, () => CertificateAuthoritySummary$]
+];
+export var CreateClusterRequest$: StaticStructureSchema = [3, n0, _CCRrea,
+  0,
+  [_n, _rA, _rVC, _v, _kNC, _l, _cRT, _t, _eC, _oC, _aCc, _bSMA, _uP, _zSC, _rNC, _cCo, _sC, _dP, _cPSC, _kASC, _kSC, _kCMC],
+  [0, 0, () => VpcConfigRequest$, 0, () => KubernetesNetworkConfigRequest$, () => Logging$, [0, 4], 128 | 0, () => EncryptionConfigList, () => OutpostConfigRequest$, () => CreateAccessConfigRequest$, 2, () => UpgradePolicyRequest$, () => ZonalShiftConfigRequest$, () => RemoteNetworkConfigRequest$, () => ComputeConfigRequest$, () => StorageConfigRequest$, 2, () => ControlPlaneScalingConfig$, () => KubeApiServerConfigRequest$, () => KubeSchedulerConfigRequest$, () => KubeControllerManagerConfigRequest$], 3
+];
+export var CreateClusterResponse$: StaticStructureSchema = [3, n0, _CCRreat,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var CreateEksAnywhereSubscriptionRequest$: StaticStructureSchema = [3, n0, _CEASR,
+  0,
+  [_n, _te, _lQ, _lT, _aR, _cRT, _t],
+  [0, () => EksAnywhereSubscriptionTerm$, 1, 0, 2, [0, 4], 128 | 0], 2
+];
+export var CreateEksAnywhereSubscriptionResponse$: StaticStructureSchema = [3, n0, _CEASRr,
+  0,
+  [_su],
+  [() => EksAnywhereSubscription$]
+];
+export var CreateFargateProfileRequest$: StaticStructureSchema = [3, n0, _CFPR,
+  0,
+  [_fPN, _cN, _pERA, _sub, _sel, _cRT, _t],
+  [0, [0, 1], 0, 64 | 0, () => FargateProfileSelectors, [0, 4], 128 | 0], 3
+];
+export var CreateFargateProfileResponse$: StaticStructureSchema = [3, n0, _CFPRr,
+  0,
+  [_fP],
+  [() => FargateProfile$]
+];
+export var CreateNodegroupRequest$: StaticStructureSchema = [3, n0, _CNR,
+  0,
+  [_cN, _nN, _sub, _nR, _sCc, _dSis, _iT, _aT, _rAe, _la, _ta, _t, _cRT, _lTa, _uC, _nRC, _cTa, _v, _rV, _wPC],
+  [[0, 1], 0, 64 | 0, 0, () => NodegroupScalingConfig$, 1, 64 | 0, 0, () => RemoteAccessConfig$, 128 | 0, () => taintsList, 128 | 0, [0, 4], () => LaunchTemplateSpecification$, () => NodegroupUpdateConfig$, () => NodeRepairConfig$, 0, 0, 0, () => WarmPoolConfig$], 4
+];
+export var CreateNodegroupResponse$: StaticStructureSchema = [3, n0, _CNRr,
+  0,
+  [_no],
+  [() => Nodegroup$]
+];
+export var CreatePodIdentityAssociationRequest$: StaticStructureSchema = [3, n0, _CPIAR,
+  0,
+  [_cN, _nam, _sA, _rA, _cRT, _t, _dST, _tRA, _po],
+  [[0, 1], 0, 0, 0, [0, 4], 128 | 0, 2, 0, 0], 4
+];
+export var CreatePodIdentityAssociationResponse$: StaticStructureSchema = [3, n0, _CPIARr,
+  0,
+  [_as],
+  [() => PodIdentityAssociation$]
+];
+export var DeleteAccessEntryRequest$: StaticStructureSchema = [3, n0, _DAER,
+  0,
+  [_cN, _pA],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteAccessEntryResponse$: StaticStructureSchema = [3, n0, _DAERe,
+  0,
+  [],
+  []
+];
+export var DeleteAddonRequest$: StaticStructureSchema = [3, n0, _DAR,
+  0,
+  [_cN, _aN, _pre],
+  [[0, 1], [0, 1], [2, { [_hQ]: _pre }]], 2
+];
+export var DeleteAddonResponse$: StaticStructureSchema = [3, n0, _DARe,
+  0,
+  [_ad],
+  [() => Addon$]
+];
+export var DeleteCapabilityRequest$: StaticStructureSchema = [3, n0, _DCR,
+  0,
+  [_cN, _cNa],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteCapabilityResponse$: StaticStructureSchema = [3, n0, _DCRe,
+  0,
+  [_ca],
+  [() => Capability$]
+];
+export var DeleteCertificateAuthorityRequest$: StaticStructureSchema = [3, n0, _DCAR,
+  0,
+  [_cN, _cAI, _cRT],
+  [[0, 1], [0, 1], [0, { [_hQ]: _cRT, [_iTd]: 1 }]], 2
+];
+export var DeleteCertificateAuthorityResponse$: StaticStructureSchema = [3, n0, _DCARe,
+  0,
+  [_up, _cAe],
+  [() => Update$, () => CertificateAuthoritySummary$]
+];
+export var DeleteClusterRequest$: StaticStructureSchema = [3, n0, _DCRel,
+  0,
+  [_n],
+  [[0, 1]], 1
+];
+export var DeleteClusterResponse$: StaticStructureSchema = [3, n0, _DCRele,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var DeleteEksAnywhereSubscriptionRequest$: StaticStructureSchema = [3, n0, _DEASR,
+  0,
+  [_i],
+  [[0, 1]], 1
+];
+export var DeleteEksAnywhereSubscriptionResponse$: StaticStructureSchema = [3, n0, _DEASRe,
+  0,
+  [_su],
+  [() => EksAnywhereSubscription$]
+];
+export var DeleteFargateProfileRequest$: StaticStructureSchema = [3, n0, _DFPR,
+  0,
+  [_cN, _fPN],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteFargateProfileResponse$: StaticStructureSchema = [3, n0, _DFPRe,
+  0,
+  [_fP],
+  [() => FargateProfile$]
+];
+export var DeleteNodegroupRequest$: StaticStructureSchema = [3, n0, _DNR,
+  0,
+  [_cN, _nN],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteNodegroupResponse$: StaticStructureSchema = [3, n0, _DNRe,
+  0,
+  [_no],
+  [() => Nodegroup$]
+];
+export var DeletePodIdentityAssociationRequest$: StaticStructureSchema = [3, n0, _DPIAR,
+  0,
+  [_cN, _aIs],
+  [[0, 1], [0, 1]], 2
+];
+export var DeletePodIdentityAssociationResponse$: StaticStructureSchema = [3, n0, _DPIARe,
+  0,
+  [_as],
+  [() => PodIdentityAssociation$]
+];
+export var DeprecationDetail$: StaticStructureSchema = [3, n0, _DD,
+  0,
+  [_us, _rW, _sSV, _sSRV, _cS],
+  [0, 0, 0, 0, () => ClientStats]
+];
+export var DeregisterClusterRequest$: StaticStructureSchema = [3, n0, _DCRer,
+  0,
+  [_n],
+  [[0, 1]], 1
+];
+export var DeregisterClusterResponse$: StaticStructureSchema = [3, n0, _DCRere,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var DescribeAccessEntryRequest$: StaticStructureSchema = [3, n0, _DAERes,
+  0,
+  [_cN, _pA],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeAccessEntryResponse$: StaticStructureSchema = [3, n0, _DAEResc,
+  0,
+  [_aEc],
+  [() => AccessEntry$]
+];
+export var DescribeAddonConfigurationRequest$: StaticStructureSchema = [3, n0, _DACR,
+  0,
+  [_aN, _aV],
+  [[0, { [_hQ]: _aN }], [0, { [_hQ]: _aV }]], 2
+];
+export var DescribeAddonConfigurationResponse$: StaticStructureSchema = [3, n0, _DACRe,
+  0,
+  [_aN, _aV, _cSo, _pIC],
+  [0, 0, 0, () => AddonPodIdentityConfigurationList]
+];
+export var DescribeAddonRequest$: StaticStructureSchema = [3, n0, _DARes,
+  0,
+  [_cN, _aN],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeAddonResponse$: StaticStructureSchema = [3, n0, _DAResc,
+  0,
+  [_ad],
+  [() => Addon$]
+];
+export var DescribeAddonVersionsRequest$: StaticStructureSchema = [3, n0, _DAVR,
+  0,
+  [_kV, _mR, _nT, _aN, _typ, _pu, _ow],
+  [[0, { [_hQ]: _kV }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [0, { [_hQ]: _aN }], [64 | 0, { [_hQ]: _typ }], [64 | 0, { [_hQ]: _pu }], [64 | 0, { [_hQ]: _ow }]]
+];
+export var DescribeAddonVersionsResponse$: StaticStructureSchema = [3, n0, _DAVRe,
+  0,
+  [_add, _nT],
+  [() => Addons, 0]
+];
+export var DescribeCapabilityRequest$: StaticStructureSchema = [3, n0, _DCRes,
+  0,
+  [_cN, _cNa],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeCapabilityResponse$: StaticStructureSchema = [3, n0, _DCResc,
+  0,
+  [_ca],
+  [() => Capability$]
+];
+export var DescribeCertificateAuthorityRequest$: StaticStructureSchema = [3, n0, _DCARes,
+  0,
+  [_cN, _cAI],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeCertificateAuthorityResponse$: StaticStructureSchema = [3, n0, _DCAResc,
+  0,
+  [_cAe],
+  [() => CertificateAuthority$]
+];
+export var DescribeClusterRequest$: StaticStructureSchema = [3, n0, _DCRescr,
+  0,
+  [_n],
+  [[0, 1]], 1
+];
+export var DescribeClusterResponse$: StaticStructureSchema = [3, n0, _DCRescri,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var DescribeClusterVersionsRequest$: StaticStructureSchema = [3, n0, _DCVR,
+  0,
+  [_cTl, _mR, _nT, _dO, _iA, _cVlu, _st, _vS],
+  [[0, { [_hQ]: _cTl }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [2, { [_hQ]: _dO }], [2, { [_hQ]: _iA }], [64 | 0, { [_hQ]: _cVlu }], [0, { [_hQ]: _st }], [0, { [_hQ]: _vS }]]
+];
+export var DescribeClusterVersionsResponse$: StaticStructureSchema = [3, n0, _DCVRe,
+  0,
+  [_nT, _cVlu],
+  [0, () => ClusterVersionList]
+];
+export var DescribeEksAnywhereSubscriptionRequest$: StaticStructureSchema = [3, n0, _DEASRes,
+  0,
+  [_i],
+  [[0, 1]], 1
+];
+export var DescribeEksAnywhereSubscriptionResponse$: StaticStructureSchema = [3, n0, _DEASResc,
+  0,
+  [_su],
+  [() => EksAnywhereSubscription$]
+];
+export var DescribeFargateProfileRequest$: StaticStructureSchema = [3, n0, _DFPRes,
+  0,
+  [_cN, _fPN],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeFargateProfileResponse$: StaticStructureSchema = [3, n0, _DFPResc,
+  0,
+  [_fP],
+  [() => FargateProfile$]
+];
+export var DescribeIdentityProviderConfigRequest$: StaticStructureSchema = [3, n0, _DIPCR,
+  0,
+  [_cN, _iPC],
+  [[0, 1], () => IdentityProviderConfig$], 2
+];
+export var DescribeIdentityProviderConfigResponse$: StaticStructureSchema = [3, n0, _DIPCRe,
+  0,
+  [_iPC],
+  [() => IdentityProviderConfigResponse$]
+];
+export var DescribeInsightRequest$: StaticStructureSchema = [3, n0, _DIR,
+  0,
+  [_cN, _i],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeInsightResponse$: StaticStructureSchema = [3, n0, _DIRe,
+  0,
+  [_in],
+  [() => Insight$]
+];
+export var DescribeInsightsRefreshRequest$: StaticStructureSchema = [3, n0, _DIRR,
+  0,
+  [_cN],
+  [[0, 1]], 1
+];
+export var DescribeInsightsRefreshResponse$: StaticStructureSchema = [3, n0, _DIRRe,
+  0,
+  [_m, _st, _sAt, _eA],
+  [0, 0, 4, 4]
+];
+export var DescribeNodegroupRequest$: StaticStructureSchema = [3, n0, _DNRes,
+  0,
+  [_cN, _nN],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribeNodegroupResponse$: StaticStructureSchema = [3, n0, _DNResc,
+  0,
+  [_no],
+  [() => Nodegroup$]
+];
+export var DescribePodIdentityAssociationRequest$: StaticStructureSchema = [3, n0, _DPIARes,
+  0,
+  [_cN, _aIs],
+  [[0, 1], [0, 1]], 2
+];
+export var DescribePodIdentityAssociationResponse$: StaticStructureSchema = [3, n0, _DPIAResc,
+  0,
+  [_as],
+  [() => PodIdentityAssociation$]
+];
+export var DescribeUpdateRequest$: StaticStructureSchema = [3, n0, _DUR,
+  0,
+  [_n, _uI, _nN, _aN, _cNa],
+  [[0, 1], [0, 1], [0, { [_hQ]: _nN }], [0, { [_hQ]: _aN }], [0, { [_hQ]: _cNa }]], 2
+];
+export var DescribeUpdateResponse$: StaticStructureSchema = [3, n0, _DURe,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var DisassociateAccessPolicyRequest$: StaticStructureSchema = [3, n0, _DAPR,
+  0,
+  [_cN, _pA, _pAo],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var DisassociateAccessPolicyResponse$: StaticStructureSchema = [3, n0, _DAPRi,
+  0,
+  [],
+  []
+];
+export var DisassociateIdentityProviderConfigRequest$: StaticStructureSchema = [3, n0, _DIPCRi,
+  0,
+  [_cN, _iPC, _cRT],
+  [[0, 1], () => IdentityProviderConfig$, [0, 4]], 2
+];
+export var DisassociateIdentityProviderConfigResponse$: StaticStructureSchema = [3, n0, _DIPCRis,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var DurationConstraints$: StaticStructureSchema = [3, n0, _DC,
+  0,
+  [_mi, _max],
+  [0, 0]
+];
+export var DurationParameterConfig$: StaticStructureSchema = [3, n0, _DPC,
+  0,
+  [_dVe, _cons],
+  [0, () => DurationConstraints$]
+];
+export var EksAnywhereSubscription$: StaticStructureSchema = [3, n0, _EAS,
+  0,
+  [_i, _a, _cA, _eD, _eDx, _lQ, _lT, _te, _st, _aR, _lA, _li, _t],
+  [0, 0, 4, 4, 4, 1, 0, () => EksAnywhereSubscriptionTerm$, 0, 2, 64 | 0, () => LicenseList, 128 | 0]
+];
+export var EksAnywhereSubscriptionTerm$: StaticStructureSchema = [3, n0, _EAST,
+  0,
+  [_du, _un],
+  [1, 0]
+];
+export var ElasticLoadBalancing$: StaticStructureSchema = [3, n0, _ELB,
+  0,
+  [_en, _gA],
+  [2, () => GatewayApiConfiguration$]
+];
+export var EncryptionConfig$: StaticStructureSchema = [3, n0, _EC,
+  0,
+  [_res, _pr],
+  [64 | 0, () => Provider$]
+];
+export var ErrorDetail$: StaticStructureSchema = [3, n0, _ED,
+  0,
+  [_eCr, _eM, _rI],
+  [0, 0, 64 | 0]
+];
+export var EtcdPlacementRequest$: StaticStructureSchema = [3, n0, _EPR,
+  0,
+  [_sL],
+  [0]
+];
+export var EtcdPlacementResponse$: StaticStructureSchema = [3, n0, _EPRt,
+  0,
+  [_sL],
+  [0]
+];
+export var FargateProfile$: StaticStructureSchema = [3, n0, _FP,
+  0,
+  [_fPN, _fPA, _cN, _cA, _pERA, _sub, _sel, _st, _t, _h],
+  [0, 0, 0, 4, 0, 64 | 0, () => FargateProfileSelectors, 0, 128 | 0, () => FargateProfileHealth$]
+];
+export var FargateProfileHealth$: StaticStructureSchema = [3, n0, _FPH,
+  0,
+  [_is],
+  [() => FargateProfileIssueList]
+];
+export var FargateProfileIssue$: StaticStructureSchema = [3, n0, _FPI,
+  0,
+  [_co, _m, _rI],
+  [0, 0, 64 | 0]
+];
+export var FargateProfileSelector$: StaticStructureSchema = [3, n0, _FPS,
+  0,
+  [_nam, _la],
+  [0, 128 | 0]
+];
+export var GatewayApiConfiguration$: StaticStructureSchema = [3, n0, _GAC,
+  0,
+  [_cr],
+  [() => CrdManagementConfiguration$]
+];
+export var HorizontalPodAutoscalerControllerConfigRequest$: StaticStructureSchema = [3, n0, _HPACCR,
+  0,
+  [_hPASP],
+  [0]
+];
+export var HorizontalPodAutoscalerControllerConfigResponse$: StaticStructureSchema = [3, n0, _HPACCRo,
+  0,
+  [_hPASP],
+  [0]
+];
+export var HorizontalPodAutoscalerControllerVersionConfig$: StaticStructureSchema = [3, n0, _HPACVC,
+  0,
+  [_hPASP],
+  [() => DurationParameterConfig$]
+];
+export var Identity$: StaticStructureSchema = [3, n0, _I,
+  0,
+  [_oi],
+  [() => OIDC$]
+];
+export var IdentityProviderConfig$: StaticStructureSchema = [3, n0, _IPC,
+  0,
+  [_ty, _n],
+  [0, 0], 2
+];
+export var IdentityProviderConfigResponse$: StaticStructureSchema = [3, n0, _IPCR,
+  0,
+  [_oi],
+  [() => OidcIdentityProviderConfig$]
+];
+export var Insight$: StaticStructureSchema = [3, n0, _In,
+  0,
+  [_i, _n, _cat, _kV, _lRTa, _lTT, _de, _iS, _rec, _aId, _res, _cSS],
+  [0, 0, 0, 0, 4, 4, 0, () => InsightStatus$, 0, 128 | 0, () => InsightResourceDetails, () => InsightCategorySpecificSummary$]
+];
+export var InsightCategorySpecificSummary$: StaticStructureSchema = [3, n0, _ICSS,
+  0,
+  [_dD, _aCD],
+  [() => DeprecationDetails, () => AddonCompatibilityDetails]
+];
+export var InsightResourceDetail$: StaticStructureSchema = [3, n0, _IRD,
+  0,
+  [_iS, _kRU, _a],
+  [() => InsightStatus$, 0, 0]
+];
+export var InsightsFilter$: StaticStructureSchema = [3, n0, _IF,
+  0,
+  [_cate, _kVu, _sta],
+  [64 | 0, 64 | 0, 64 | 0]
+];
+export var InsightStatus$: StaticStructureSchema = [3, n0, _IS,
+  0,
+  [_st, _re],
+  [0, 0]
+];
+export var InsightSummary$: StaticStructureSchema = [3, n0, _ISn,
+  0,
+  [_i, _n, _cat, _kV, _lRTa, _lTT, _de, _iS],
+  [0, 0, 0, 0, 4, 4, 0, () => InsightStatus$]
+];
+export var IntegerConstraints$: StaticStructureSchema = [3, n0, _IC,
+  0,
+  [_mi, _max],
+  [1, 1]
+];
+export var IntegerParameterConfig$: StaticStructureSchema = [3, n0, _IPCn,
+  0,
+  [_dVe, _cons],
+  [1, () => IntegerConstraints$]
+];
+export var IntegerRangeConstraint$: StaticStructureSchema = [3, n0, _IRC,
+  0,
+  [_mi, _max],
+  [1, 1]
+];
+export var Issue$: StaticStructureSchema = [3, n0, _Is,
+  0,
+  [_co, _m, _rI],
+  [0, 0, 64 | 0]
+];
+export var KubeApiServerConfigRequest$: StaticStructureSchema = [3, n0, _KASCR,
+  0,
+  [_eT, _sNPR],
+  [0, () => ServiceNodePortRange$]
+];
+export var KubeApiServerConfigResponse$: StaticStructureSchema = [3, n0, _KASCRu,
+  0,
+  [_eT, _sNPR],
+  [0, () => ServiceNodePortRange$]
+];
+export var KubeApiServerVersionConfig$: StaticStructureSchema = [3, n0, _KASVC,
+  0,
+  [_eT, _sNPR],
+  [() => DurationParameterConfig$, () => PortRangeParameterConfig$]
+];
+export var KubeControllerManagerConfigRequest$: StaticStructureSchema = [3, n0, _KCMCR,
+  0,
+  [_pGCC, _hPACC],
+  [() => PodGcControllerConfigRequest$, () => HorizontalPodAutoscalerControllerConfigRequest$]
+];
+export var KubeControllerManagerConfigResponse$: StaticStructureSchema = [3, n0, _KCMCRu,
+  0,
+  [_pGCC, _hPACC],
+  [() => PodGcControllerConfigResponse$, () => HorizontalPodAutoscalerControllerConfigResponse$]
+];
+export var KubeControllerManagerVersionConfig$: StaticStructureSchema = [3, n0, _KCMVC,
+  0,
+  [_pGCC, _hPACC],
+  [() => PodGcControllerVersionConfig$, () => HorizontalPodAutoscalerControllerVersionConfig$]
+];
+export var KubernetesNetworkConfigRequest$: StaticStructureSchema = [3, n0, _KNCR,
+  0,
+  [_sIC, _iF, _eLB],
+  [0, 0, () => ElasticLoadBalancing$]
+];
+export var KubernetesNetworkConfigResponse$: StaticStructureSchema = [3, n0, _KNCRu,
+  0,
+  [_sIC, _sICe, _iF, _eLB],
+  [0, 0, 0, () => ElasticLoadBalancing$]
+];
+export var KubeSchedulerConfigRequest$: StaticStructureSchema = [3, n0, _KSCR,
+  0,
+  [_nRF],
+  [() => NodeResourcesFitConfig$]
+];
+export var KubeSchedulerConfigResponse$: StaticStructureSchema = [3, n0, _KSCRu,
+  0,
+  [_nRF],
+  [() => NodeResourcesFitConfig$]
+];
+export var KubeSchedulerVersionConfig$: StaticStructureSchema = [3, n0, _KSVC,
+  0,
+  [_nRF],
+  [() => NodeResourcesFitVersionConfig$]
+];
+export var LaunchTemplateSpecification$: StaticStructureSchema = [3, n0, _LTS,
+  0,
+  [_n, _v, _i],
+  [0, 0, 0]
+];
+export var License$: StaticStructureSchema = [3, n0, _L,
+  0,
+  [_i, _to],
+  [0, 0]
+];
+export var ListAccessEntriesRequest$: StaticStructureSchema = [3, n0, _LAER,
+  0,
+  [_cN, _aPA, _mR, _nT],
+  [[0, 1], [0, { [_hQ]: _aPA }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListAccessEntriesResponse$: StaticStructureSchema = [3, n0, _LAERi,
+  0,
+  [_aEcc, _nT],
+  [64 | 0, 0]
+];
+export var ListAccessPoliciesRequest$: StaticStructureSchema = [3, n0, _LAPR,
+  0,
+  [_mR, _nT],
+  [[1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]]
+];
+export var ListAccessPoliciesResponse$: StaticStructureSchema = [3, n0, _LAPRi,
+  0,
+  [_aP, _nT],
+  [() => AccessPoliciesList, 0]
+];
+export var ListAddonsRequest$: StaticStructureSchema = [3, n0, _LAR,
+  0,
+  [_cN, _mR, _nT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListAddonsResponse$: StaticStructureSchema = [3, n0, _LARi,
+  0,
+  [_add, _nT],
+  [64 | 0, 0]
+];
+export var ListAssociatedAccessPoliciesRequest$: StaticStructureSchema = [3, n0, _LAAPR,
+  0,
+  [_cN, _pA, _mR, _nT],
+  [[0, 1], [0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 2
+];
+export var ListAssociatedAccessPoliciesResponse$: StaticStructureSchema = [3, n0, _LAAPRi,
+  0,
+  [_cN, _pA, _nT, _aAPs],
+  [0, 0, 0, () => AssociatedAccessPoliciesList]
+];
+export var ListCapabilitiesRequest$: StaticStructureSchema = [3, n0, _LCR,
+  0,
+  [_cN, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCapabilitiesResponse$: StaticStructureSchema = [3, n0, _LCRi,
+  0,
+  [_cap, _nT],
+  [() => CapabilitySummaryList, 0]
+];
+export var ListCertificateAuthoritiesRequest$: StaticStructureSchema = [3, n0, _LCAR,
+  0,
+  [_cN, _mR, _nT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListCertificateAuthoritiesResponse$: StaticStructureSchema = [3, n0, _LCARi,
+  0,
+  [_cAer, _nT],
+  [() => CertificateAuthoritySummaryList, 0]
+];
+export var ListClustersRequest$: StaticStructureSchema = [3, n0, _LCRis,
+  0,
+  [_mR, _nT, _inc],
+  [[1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [64 | 0, { [_hQ]: _inc }]]
+];
+export var ListClustersResponse$: StaticStructureSchema = [3, n0, _LCRist,
+  0,
+  [_clu, _nT],
+  [64 | 0, 0]
+];
+export var ListEksAnywhereSubscriptionsRequest$: StaticStructureSchema = [3, n0, _LEASR,
+  0,
+  [_mR, _nT, _iSn],
+  [[1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [64 | 0, { [_hQ]: _iSn }]]
+];
+export var ListEksAnywhereSubscriptionsResponse$: StaticStructureSchema = [3, n0, _LEASRi,
+  0,
+  [_subs, _nT],
+  [() => EksAnywhereSubscriptionList, 0]
+];
+export var ListFargateProfilesRequest$: StaticStructureSchema = [3, n0, _LFPR,
+  0,
+  [_cN, _mR, _nT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListFargateProfilesResponse$: StaticStructureSchema = [3, n0, _LFPRi,
+  0,
+  [_fPNa, _nT],
+  [64 | 0, 0]
+];
+export var ListIdentityProviderConfigsRequest$: StaticStructureSchema = [3, n0, _LIPCR,
+  0,
+  [_cN, _mR, _nT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListIdentityProviderConfigsResponse$: StaticStructureSchema = [3, n0, _LIPCRi,
+  0,
+  [_iPCd, _nT],
+  [() => IdentityProviderConfigs, 0]
+];
+export var ListInsightsRequest$: StaticStructureSchema = [3, n0, _LIR,
+  0,
+  [_cN, _f, _mR, _nT],
+  [[0, 1], () => InsightsFilter$, 1, 0], 1
+];
+export var ListInsightsResponse$: StaticStructureSchema = [3, n0, _LIRi,
+  0,
+  [_ins, _nT],
+  [() => InsightSummaries, 0]
+];
+export var ListNodegroupsRequest$: StaticStructureSchema = [3, n0, _LNR,
+  0,
+  [_cN, _mR, _nT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListNodegroupsResponse$: StaticStructureSchema = [3, n0, _LNRi,
+  0,
+  [_nod, _nT],
+  [64 | 0, 0]
+];
+export var ListPodIdentityAssociationsRequest$: StaticStructureSchema = [3, n0, _LPIAR,
+  0,
+  [_cN, _nam, _sA, _mR, _nT],
+  [[0, 1], [0, { [_hQ]: _nam }], [0, { [_hQ]: _sA }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListPodIdentityAssociationsResponse$: StaticStructureSchema = [3, n0, _LPIARi,
+  0,
+  [_ass, _nT],
+  [() => PodIdentityAssociationSummaries, 0]
+];
+export var ListTagsForResourceRequest$: StaticStructureSchema = [3, n0, _LTFRR,
+  0,
+  [_rAes],
+  [[0, 1]], 1
+];
+export var ListTagsForResourceResponse$: StaticStructureSchema = [3, n0, _LTFRRi,
+  0,
+  [_t],
+  [128 | 0]
+];
+export var ListUpdatesRequest$: StaticStructureSchema = [3, n0, _LUR,
+  0,
+  [_n, _nN, _aN, _cNa, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nN }], [0, { [_hQ]: _aN }], [0, { [_hQ]: _cNa }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListUpdatesResponse$: StaticStructureSchema = [3, n0, _LURi,
+  0,
+  [_uIp, _nT],
+  [64 | 0, 0]
+];
+export var Logging$: StaticStructureSchema = [3, n0, _Lo,
+  0,
+  [_cL],
+  [() => LogSetups]
+];
+export var LogSetup$: StaticStructureSchema = [3, n0, _LS,
+  0,
+  [_typ, _en],
+  [64 | 0, 2]
+];
+export var MarketplaceInformation$: StaticStructureSchema = [3, n0, _MI,
+  0,
+  [_pI, _pU],
+  [0, 0]
+];
+export var Nodegroup$: StaticStructureSchema = [3, n0, _N,
+  0,
+  [_nN, _nAod, _cN, _v, _rV, _cA, _mA, _st, _cTa, _sCc, _iT, _sub, _rAe, _aT, _nR, _la, _ta, _res, _dSis, _h, _uC, _nRC, _lTa, _t, _wPC],
+  [0, 0, 0, 0, 0, 4, 4, 0, 0, () => NodegroupScalingConfig$, 64 | 0, 64 | 0, () => RemoteAccessConfig$, 0, 0, 128 | 0, () => taintsList, () => NodegroupResources$, 1, () => NodegroupHealth$, () => NodegroupUpdateConfig$, () => NodeRepairConfig$, () => LaunchTemplateSpecification$, 128 | 0, () => WarmPoolConfig$]
+];
+export var NodegroupHealth$: StaticStructureSchema = [3, n0, _NH,
+  0,
+  [_is],
+  [() => IssueList]
+];
+export var NodegroupResources$: StaticStructureSchema = [3, n0, _NR,
+  0,
+  [_aSG, _rASG],
+  [() => AutoScalingGroupList, 0]
+];
+export var NodegroupScalingConfig$: StaticStructureSchema = [3, n0, _NSC,
+  0,
+  [_mS, _mSa, _dSe],
+  [1, 1, 1]
+];
+export var NodegroupUpdateConfig$: StaticStructureSchema = [3, n0, _NUC,
+  0,
+  [_mU, _mUP, _uS],
+  [1, 1, 0]
+];
+export var NodeRepairConfig$: StaticStructureSchema = [3, n0, _NRC,
+  0,
+  [_en, _mUNTC, _mUNTP, _mPNRC, _mPNRP, _nRCO],
+  [2, 1, 1, 1, 1, () => NodeRepairConfigOverridesList]
+];
+export var NodeRepairConfigOverrides$: StaticStructureSchema = [3, n0, _NRCO,
+  0,
+  [_nMC, _nUR, _mRWTM, _rAep],
+  [0, 0, 1, 0]
+];
+export var NodeResourcesFitConfig$: StaticStructureSchema = [3, n0, _NRFC,
+  0,
+  [_sSc],
+  [() => ScoringStrategy$]
+];
+export var NodeResourcesFitVersionConfig$: StaticStructureSchema = [3, n0, _NRFVC,
+  0,
+  [_sSc],
+  [() => ScoringStrategyConfig$]
+];
+export var OIDC$: StaticStructureSchema = [3, n0, _OIDC,
+  0,
+  [_iss],
+  [0]
+];
+export var OidcIdentityProviderConfig$: StaticStructureSchema = [3, n0, _OIPC,
+  0,
+  [_iPCN, _iPCA, _cN, _iU, _cI, _uCs, _uPs, _gC, _gP, _rCeq, _t, _st],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 128 | 0, 128 | 0, 0]
+];
+export var OidcIdentityProviderConfigRequest$: StaticStructureSchema = [3, n0, _OIPCR,
+  0,
+  [_iPCN, _iU, _cI, _uCs, _uPs, _gC, _gP, _rCeq],
+  [0, 0, 0, 0, 0, 0, 0, 128 | 0], 3
+];
+export var OutpostConfigRequest$: StaticStructureSchema = [3, n0, _OCR,
+  0,
+  [_oA, _cPIT, _cPP, _eIT, _ePt],
+  [64 | 0, 0, () => ControlPlanePlacementRequest$, 0, () => EtcdPlacementRequest$], 2
+];
+export var OutpostConfigResponse$: StaticStructureSchema = [3, n0, _OCRu,
+  0,
+  [_oA, _cPIT, _cPP, _eIT, _ePt],
+  [64 | 0, 0, () => ControlPlanePlacementResponse$, 0, () => EtcdPlacementResponse$], 2
+];
+export var PodGcControllerConfigRequest$: StaticStructureSchema = [3, n0, _PGCCR,
+  0,
+  [_tPGT],
+  [1]
+];
+export var PodGcControllerConfigResponse$: StaticStructureSchema = [3, n0, _PGCCRo,
+  0,
+  [_tPGT],
+  [1]
+];
+export var PodGcControllerVersionConfig$: StaticStructureSchema = [3, n0, _PGCVC,
+  0,
+  [_tPGT],
+  [() => IntegerParameterConfig$]
+];
+export var PodIdentityAssociation$: StaticStructureSchema = [3, n0, _PIA,
+  0,
+  [_cN, _nam, _sA, _rA, _aAss, _aIs, _t, _cA, _mA, _oAw, _dST, _tRA, _eI, _po],
+  [0, 0, 0, 0, 0, 0, 128 | 0, 4, 4, 0, 2, 0, 0, 0]
+];
+export var PodIdentityAssociationSummary$: StaticStructureSchema = [3, n0, _PIAS,
+  0,
+  [_cN, _nam, _sA, _aAss, _aIs, _oAw],
+  [0, 0, 0, 0, 0, 0]
+];
+export var PortRangeConstraints$: StaticStructureSchema = [3, n0, _PRC,
+  0,
+  [_mP, _mPa],
+  [() => IntegerRangeConstraint$, () => IntegerRangeConstraint$]
+];
+export var PortRangeParameterConfig$: StaticStructureSchema = [3, n0, _PRPC,
+  0,
+  [_dVe, _cons],
+  [() => ServiceNodePortRange$, () => PortRangeConstraints$]
+];
+export var Provider$: StaticStructureSchema = [3, n0, _P,
+  0,
+  [_kA],
+  [0]
+];
+export var RegisterClusterRequest$: StaticStructureSchema = [3, n0, _RCR,
+  0,
+  [_n, _cC, _cRT, _t],
+  [0, () => ConnectorConfigRequest$, [0, 4], 128 | 0], 2
+];
+export var RegisterClusterResponse$: StaticStructureSchema = [3, n0, _RCRe,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var RemoteAccessConfig$: StaticStructureSchema = [3, n0, _RAC,
+  0,
+  [_eSK, _sSG],
+  [0, 64 | 0]
+];
+export var RemoteNetworkConfigRequest$: StaticStructureSchema = [3, n0, _RNCR,
+  0,
+  [_rNN, _rPN],
+  [() => RemoteNodeNetworkList, () => RemotePodNetworkList]
+];
+export var RemoteNetworkConfigResponse$: StaticStructureSchema = [3, n0, _RNCRe,
+  0,
+  [_rNN, _rPN],
+  [() => RemoteNodeNetworkList, () => RemotePodNetworkList]
+];
+export var RemoteNodeNetwork$: StaticStructureSchema = [3, n0, _RNN,
+  0,
+  [_ci],
+  [64 | 0]
+];
+export var RemotePodNetwork$: StaticStructureSchema = [3, n0, _RPN,
+  0,
+  [_ci],
+  [64 | 0]
+];
+export var ResourceConstraints$: StaticStructureSchema = [3, n0, _RC,
+  0,
+  [_n, _w],
+  [() => AllowedValuesConstraint$, () => IntegerRangeConstraint$]
+];
+export var ResourceWeight$: StaticStructureSchema = [3, n0, _RW,
+  0,
+  [_n, _w],
+  [0, 1]
+];
+export var RollbackConfig$: StaticStructureSchema = [3, n0, _RCo,
+  0,
+  [_tM],
+  [1]
+];
+export var ScoringStrategy$: StaticStructureSchema = [3, n0, _SS,
+  0,
+  [_ty, _res],
+  [0, () => ResourceWeightList]
+];
+export var ScoringStrategyConfig$: StaticStructureSchema = [3, n0, _SSC,
+  0,
+  [_dVe, _cons],
+  [() => ScoringStrategy$, () => ScoringStrategyConstraints$]
+];
+export var ScoringStrategyConstraints$: StaticStructureSchema = [3, n0, _SSCc,
+  0,
+  [_sSc, _res],
+  [() => AllowedValuesConstraint$, () => ResourceConstraints$]
+];
+export var ServiceNodePortRange$: StaticStructureSchema = [3, n0, _SNPR,
+  0,
+  [_mP, _mPa],
+  [1, 1]
+];
+export var SsoIdentity$: StaticStructureSchema = [3, n0, _SI,
+  0,
+  [_i, _ty],
+  [0, 0], 2
+];
+export var StartInsightsRefreshRequest$: StaticStructureSchema = [3, n0, _SIRR,
+  0,
+  [_cN],
+  [[0, 1]], 1
+];
+export var StartInsightsRefreshResponse$: StaticStructureSchema = [3, n0, _SIRRt,
+  0,
+  [_m, _st],
+  [0, 0]
+];
+export var StorageConfigRequest$: StaticStructureSchema = [3, n0, _SCR,
+  0,
+  [_bS],
+  [() => BlockStorage$]
+];
+export var StorageConfigResponse$: StaticStructureSchema = [3, n0, _SCRt,
+  0,
+  [_bS],
+  [() => BlockStorage$]
+];
+export var TagResourceRequest$: StaticStructureSchema = [3, n0, _TRR,
+  0,
+  [_rAes, _t],
+  [[0, 1], 128 | 0], 2
+];
+export var TagResourceResponse$: StaticStructureSchema = [3, n0, _TRRa,
+  0,
+  [],
+  []
+];
+export var Taint$: StaticStructureSchema = [3, n0, _T,
+  0,
+  [_k, _val, _ef],
+  [0, 0, 0]
+];
+export var UntagResourceRequest$: StaticStructureSchema = [3, n0, _URR,
+  0,
+  [_rAes, _tK],
+  [[0, 1], [64 | 0, { [_hQ]: _tK }]], 2
+];
+export var UntagResourceResponse$: StaticStructureSchema = [3, n0, _URRn,
+  0,
+  [],
+  []
+];
+export var Update$: StaticStructureSchema = [3, n0, _U,
+  0,
+  [_i, _st, _ty, _pa, _cA, _er, _can],
+  [0, 0, 0, () => UpdateParams, 4, () => ErrorDetails, () => Cancellation$]
+];
+export var UpdateAccessConfigRequest$: StaticStructureSchema = [3, n0, _UACR,
+  0,
+  [_aM],
+  [0]
+];
+export var UpdateAccessEntryRequest$: StaticStructureSchema = [3, n0, _UAER,
+  0,
+  [_cN, _pA, _kG, _cRT, _u],
+  [[0, 1], [0, 1], 64 | 0, [0, 4], 0], 2
+];
+export var UpdateAccessEntryResponse$: StaticStructureSchema = [3, n0, _UAERp,
+  0,
+  [_aEc],
+  [() => AccessEntry$]
+];
+export var UpdateAckConfig$: StaticStructureSchema = [3, n0, _UAC,
+  0,
+  [_eCN, _dS],
+  [2, 64 | 0]
+];
+export var UpdateAddonRequest$: StaticStructureSchema = [3, n0, _UAR,
+  0,
+  [_cN, _aN, _aV, _sARA, _rCe, _cRT, _cV, _pIA],
+  [[0, 1], [0, 1], 0, 0, 0, [0, 4], 0, () => AddonPodIdentityAssociationsList], 2
+];
+export var UpdateAddonResponse$: StaticStructureSchema = [3, n0, _UARp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateArgoCdConfig$: StaticStructureSchema = [3, n0, _UACC,
+  0,
+  [_rRM, _nA],
+  [() => UpdateRoleMappings$, () => ArgoCdNetworkAccessConfigRequest$]
+];
+export var UpdateCapabilityConfiguration$: StaticStructureSchema = [3, n0, _UCC,
+  0,
+  [_aC, _ac],
+  [() => UpdateArgoCdConfig$, () => UpdateAckConfig$]
+];
+export var UpdateCapabilityRequest$: StaticStructureSchema = [3, n0, _UCR,
+  0,
+  [_cN, _cNa, _rA, _con, _cRT, _dPP],
+  [[0, 1], [0, 1], 0, () => UpdateCapabilityConfiguration$, [0, 4], 0], 2
+];
+export var UpdateCapabilityResponse$: StaticStructureSchema = [3, n0, _UCRp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateClusterConfigRequest$: StaticStructureSchema = [3, n0, _UCCR,
+  0,
+  [_n, _rVC, _l, _cRT, _aCc, _uP, _zSC, _cCo, _kNC, _sC, _rNC, _dP, _cPSC, _kASC, _kSC, _kCMC],
+  [[0, 1], () => VpcConfigRequest$, () => Logging$, [0, 4], () => UpdateAccessConfigRequest$, () => UpgradePolicyRequest$, () => ZonalShiftConfigRequest$, () => ComputeConfigRequest$, () => KubernetesNetworkConfigRequest$, () => StorageConfigRequest$, () => RemoteNetworkConfigRequest$, 2, () => ControlPlaneScalingConfig$, () => KubeApiServerConfigRequest$, () => KubeSchedulerConfigRequest$, () => KubeControllerManagerConfigRequest$], 1
+];
+export var UpdateClusterConfigResponse$: StaticStructureSchema = [3, n0, _UCCRp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateClusterVersionRequest$: StaticStructureSchema = [3, n0, _UCVR,
+  0,
+  [_n, _v, _cRT, _fo, _rCo],
+  [[0, 1], 0, [0, 4], 2, () => RollbackConfig$], 2
+];
+export var UpdateClusterVersionResponse$: StaticStructureSchema = [3, n0, _UCVRp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateEksAnywhereSubscriptionRequest$: StaticStructureSchema = [3, n0, _UEASR,
+  0,
+  [_i, _aR, _cRT],
+  [[0, 1], 2, [0, 4]], 2
+];
+export var UpdateEksAnywhereSubscriptionResponse$: StaticStructureSchema = [3, n0, _UEASRp,
+  0,
+  [_su],
+  [() => EksAnywhereSubscription$]
+];
+export var UpdateLabelsPayload$: StaticStructureSchema = [3, n0, _ULP,
+  0,
+  [_aOUL, _rL],
+  [128 | 0, 64 | 0]
+];
+export var UpdateNodegroupConfigRequest$: StaticStructureSchema = [3, n0, _UNCR,
+  0,
+  [_cN, _nN, _la, _ta, _sCc, _uC, _nRC, _wPC, _cRT],
+  [[0, 1], [0, 1], () => UpdateLabelsPayload$, () => UpdateTaintsPayload$, () => NodegroupScalingConfig$, () => NodegroupUpdateConfig$, () => NodeRepairConfig$, () => WarmPoolConfig$, [0, 4]], 2
+];
+export var UpdateNodegroupConfigResponse$: StaticStructureSchema = [3, n0, _UNCRp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateNodegroupVersionRequest$: StaticStructureSchema = [3, n0, _UNVR,
+  0,
+  [_cN, _nN, _v, _rV, _lTa, _fo, _cRT],
+  [[0, 1], [0, 1], 0, 0, () => LaunchTemplateSpecification$, 2, [0, 4]], 2
+];
+export var UpdateNodegroupVersionResponse$: StaticStructureSchema = [3, n0, _UNVRp,
+  0,
+  [_up],
+  [() => Update$]
+];
+export var UpdateParam$: StaticStructureSchema = [3, n0, _UP,
+  0,
+  [_ty, _val],
+  [0, 0]
+];
+export var UpdatePodIdentityAssociationRequest$: StaticStructureSchema = [3, n0, _UPIAR,
+  0,
+  [_cN, _aIs, _rA, _cRT, _dST, _tRA, _po],
+  [[0, 1], [0, 1], 0, [0, 4], 2, 0, 0], 2
+];
+export var UpdatePodIdentityAssociationResponse$: StaticStructureSchema = [3, n0, _UPIARp,
+  0,
+  [_as],
+  [() => PodIdentityAssociation$]
+];
+export var UpdateRoleMappings$: StaticStructureSchema = [3, n0, _URM,
+  0,
+  [_aOURM, _rRMe],
+  [() => ArgoCdRoleMappingList, () => ArgoCdRoleMappingList]
+];
+export var UpdateTaintsPayload$: StaticStructureSchema = [3, n0, _UTP,
+  0,
+  [_aOUT, _rT],
+  [() => taintsList, () => taintsList]
+];
+export var UpgradePolicyRequest$: StaticStructureSchema = [3, n0, _UPR,
+  0,
+  [_sT],
+  [0]
+];
+export var UpgradePolicyResponse$: StaticStructureSchema = [3, n0, _UPRp,
+  0,
+  [_sT],
+  [0]
+];
+export var VpcConfigRequest$: StaticStructureSchema = [3, n0, _VCR,
+  0,
+  [_sIu, _sGI, _ePA, _ePAn, _pAC, _cPEM],
+  [64 | 0, 64 | 0, 2, 2, 64 | 0, 0]
+];
+export var VpcConfigResponse$: StaticStructureSchema = [3, n0, _VCRp,
+  0,
+  [_sIu, _sGI, _cSGI, _vIp, _ePA, _ePAn, _pAC, _cPEM],
+  [64 | 0, 64 | 0, 0, 0, 2, 2, 64 | 0, 0]
+];
+export var WarmPoolConfig$: StaticStructureSchema = [3, n0, _WPC,
+  0,
+  [_en, _mS, _mGPC, _pS, _rOSI],
+  [2, 1, 1, 0, 2]
+];
+export var ZonalShiftConfigRequest$: StaticStructureSchema = [3, n0, _ZSCR,
+  0,
+  [_en],
+  [2]
+];
+export var ZonalShiftConfigResponse$: StaticStructureSchema = [3, n0, _ZSCRo,
+  0,
+  [_en],
+  [2]
+];
+var AccessPoliciesList: StaticListSchema = [1, n0, _APL,
+  0, () => AccessPolicy$
+];
+var AckDisabledServicesList = 64 | 0;
+var AddonCompatibilityDetails: StaticListSchema = [1, n0, _ACDd,
+  0, () => AddonCompatibilityDetail$
+];
+var AddonIssueList: StaticListSchema = [1, n0, _AIL,
+  0, () => AddonIssue$
+];
+var AddonPodIdentityAssociationsList: StaticListSchema = [1, n0, _APIAL,
+  0, () => AddonPodIdentityAssociations$
+];
+var AddonPodIdentityConfigurationList: StaticListSchema = [1, n0, _APICL,
+  0, () => AddonPodIdentityConfiguration$
+];
+var Addons: StaticListSchema = [1, n0, _Ad,
+  0, () => AddonInfo$
+];
+var AddonVersionInfoList: StaticListSchema = [1, n0, _AVIL,
+  0, () => AddonVersionInfo$
+];
+var AllowedValuesList = 64 | 0;
+var ArgoCdRoleMappingList: StaticListSchema = [1, n0, _ACRML,
+  0, () => ArgoCdRoleMapping$
+];
+var AssociatedAccessPoliciesList: StaticListSchema = [1, n0, _AAPL,
+  0, () => AssociatedAccessPolicy$
+];
+var AutoScalingGroupList: StaticListSchema = [1, n0, _ASGL,
+  0, () => AutoScalingGroup$
+];
+var CapabilityIssueList: StaticListSchema = [1, n0, _CIL,
+  0, () => CapabilityIssue$
+];
+var CapabilitySummaryList: StaticListSchema = [1, n0, _CSL,
+  0, () => CapabilitySummary$
+];
+var CategoryList = 64 | 0;
+var CertificateAuthoritySummaryList: StaticListSchema = [1, n0, _CASL,
+  0, () => CertificateAuthoritySummary$
+];
+var ClientStats: StaticListSchema = [1, n0, _CSli,
+  0, () => ClientStat$
+];
+var ClusterIssueList: StaticListSchema = [1, n0, _CILl,
+  0, () => ClusterIssue$
+];
+var ClusterVersionList: StaticListSchema = [1, n0, _CVL,
+  0, () => ClusterVersionInformation$
+];
+var Compatibilities: StaticListSchema = [1, n0, _Com,
+  0, () => Compatibility$
+];
+var ControlPlaneScalingTierList: StaticListSchema = [1, n0, _CPSTL,
+  0, () => ControlPlaneScalingTierInfo$
+];
+var DeprecationDetails: StaticListSchema = [1, n0, _DDe,
+  0, () => DeprecationDetail$
+];
+var EksAnywhereSubscriptionList: StaticListSchema = [1, n0, _EASL,
+  0, () => EksAnywhereSubscription$
+];
+var EksAnywhereSubscriptionStatusValues = 64 | 0;
+var EncryptionConfigList: StaticListSchema = [1, n0, _ECL,
+  0, () => EncryptionConfig$
+];
+var ErrorDetails: StaticListSchema = [1, n0, _EDr,
+  0, () => ErrorDetail$
+];
+var FargateProfileIssueList: StaticListSchema = [1, n0, _FPIL,
+  0, () => FargateProfileIssue$
+];
+var FargateProfileSelectors: StaticListSchema = [1, n0, _FPSa,
+  0, () => FargateProfileSelector$
+];
+var IdentityProviderConfigs: StaticListSchema = [1, n0, _IPCd,
+  0, () => IdentityProviderConfig$
+];
+var IncludeClustersList = 64 | 0;
+var InsightResourceDetails: StaticListSchema = [1, n0, _IRDn,
+  0, () => InsightResourceDetail$
+];
+var InsightStatusValueList = 64 | 0;
+var InsightSummaries: StaticListSchema = [1, n0, _ISns,
+  0, () => InsightSummary$
+];
+var IssueList: StaticListSchema = [1, n0, _IL,
+  0, () => Issue$
+];
+var labelsKeyList = 64 | 0;
+var LicenseList: StaticListSchema = [1, n0, _LL,
+  0, () => License$
+];
+var LogSetups: StaticListSchema = [1, n0, _LSo,
+  0, () => LogSetup$
+];
+var LogTypes = 64 | 0;
+var NodeRepairConfigOverridesList: StaticListSchema = [1, n0, _NRCOL,
+  0, () => NodeRepairConfigOverrides$
+];
+var PodIdentityAssociationSummaries: StaticListSchema = [1, n0, _PIASo,
+  0, () => PodIdentityAssociationSummary$
+];
+var RemoteNodeNetworkList: StaticListSchema = [1, n0, _RNNL,
+  0, () => RemoteNodeNetwork$
+];
+var RemotePodNetworkList: StaticListSchema = [1, n0, _RPNL,
+  0, () => RemotePodNetwork$
+];
+var ResourceWeightList: StaticListSchema = [1, n0, _RWL,
+  0, () => ResourceWeight$
+];
+var SsoIdentityList: StaticListSchema = [1, n0, _SIL,
+  0, () => SsoIdentity$
+];
+var StringList = 64 | 0;
+var TagKeyList = 64 | 0;
+var taintsList: StaticListSchema = [1, n0, _tL,
+  0, () => Taint$
+];
+var UpdateParams: StaticListSchema = [1, n0, _UPp,
+  0, () => UpdateParam$
+];
+var AdditionalInfoMap = 128 | 0;
+var FargateProfileLabel = 128 | 0;
+var labelsMap = 128 | 0;
+var requiredClaimsMap = 128 | 0;
+var TagMap = 128 | 0;
+export var ActivateCertificateAuthority$: StaticOperationSchema = [9, n0, _ACAc,
+  { [_ht]: ["POST", "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}/activate", 200] }, () => ActivateCertificateAuthorityRequest$, () => ActivateCertificateAuthorityResponse$
+];
+export var AssociateAccessPolicy$: StaticOperationSchema = [9, n0, _AAPs,
+  { [_ht]: ["POST", "/clusters/{clusterName}/access-entries/{principalArn}/access-policies", 200] }, () => AssociateAccessPolicyRequest$, () => AssociateAccessPolicyResponse$
+];
+export var AssociateEncryptionConfig$: StaticOperationSchema = [9, n0, _AEC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/encryption-config/associate", 200] }, () => AssociateEncryptionConfigRequest$, () => AssociateEncryptionConfigResponse$
+];
+export var AssociateIdentityProviderConfig$: StaticOperationSchema = [9, n0, _AIPC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/identity-provider-configs/associate", 200] }, () => AssociateIdentityProviderConfigRequest$, () => AssociateIdentityProviderConfigResponse$
+];
+export var CancelUpdate$: StaticOperationSchema = [9, n0, _CU,
+  { [_ht]: ["POST", "/clusters/{name}/updates/{updateId}/cancel-update", 200] }, () => CancelUpdateRequest$, () => CancelUpdateResponse$
+];
+export var CreateAccessEntry$: StaticOperationSchema = [9, n0, _CAE,
+  { [_ht]: ["POST", "/clusters/{clusterName}/access-entries", 200] }, () => CreateAccessEntryRequest$, () => CreateAccessEntryResponse$
+];
+export var CreateAddon$: StaticOperationSchema = [9, n0, _CAr,
+  { [_ht]: ["POST", "/clusters/{clusterName}/addons", 200] }, () => CreateAddonRequest$, () => CreateAddonResponse$
+];
+export var CreateCapability$: StaticOperationSchema = [9, n0, _CC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/capabilities", 200] }, () => CreateCapabilityRequest$, () => CreateCapabilityResponse$
+];
+export var CreateCertificateAuthority$: StaticOperationSchema = [9, n0, _CCA,
+  { [_ht]: ["POST", "/clusters/{clusterName}/certificate-authorities", 200] }, () => CreateCertificateAuthorityRequest$, () => CreateCertificateAuthorityResponse$
+];
+export var CreateCluster$: StaticOperationSchema = [9, n0, _CCr,
+  { [_ht]: ["POST", "/clusters", 200] }, () => CreateClusterRequest$, () => CreateClusterResponse$
+];
+export var CreateEksAnywhereSubscription$: StaticOperationSchema = [9, n0, _CEAS,
+  { [_ht]: ["POST", "/eks-anywhere-subscriptions", 200] }, () => CreateEksAnywhereSubscriptionRequest$, () => CreateEksAnywhereSubscriptionResponse$
+];
+export var CreateFargateProfile$: StaticOperationSchema = [9, n0, _CFP,
+  { [_ht]: ["POST", "/clusters/{clusterName}/fargate-profiles", 200] }, () => CreateFargateProfileRequest$, () => CreateFargateProfileResponse$
+];
+export var CreateNodegroup$: StaticOperationSchema = [9, n0, _CN,
+  { [_ht]: ["POST", "/clusters/{clusterName}/node-groups", 200] }, () => CreateNodegroupRequest$, () => CreateNodegroupResponse$
+];
+export var CreatePodIdentityAssociation$: StaticOperationSchema = [9, n0, _CPIA,
+  { [_ht]: ["POST", "/clusters/{clusterName}/pod-identity-associations", 200] }, () => CreatePodIdentityAssociationRequest$, () => CreatePodIdentityAssociationResponse$
+];
+export var DeleteAccessEntry$: StaticOperationSchema = [9, n0, _DAE,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/access-entries/{principalArn}", 200] }, () => DeleteAccessEntryRequest$, () => DeleteAccessEntryResponse$
+];
+export var DeleteAddon$: StaticOperationSchema = [9, n0, _DA,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/addons/{addonName}", 200] }, () => DeleteAddonRequest$, () => DeleteAddonResponse$
+];
+export var DeleteCapability$: StaticOperationSchema = [9, n0, _DCe,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/capabilities/{capabilityName}", 200] }, () => DeleteCapabilityRequest$, () => DeleteCapabilityResponse$
+];
+export var DeleteCertificateAuthority$: StaticOperationSchema = [9, n0, _DCA,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}", 200] }, () => DeleteCertificateAuthorityRequest$, () => DeleteCertificateAuthorityResponse$
+];
+export var DeleteCluster$: StaticOperationSchema = [9, n0, _DCel,
+  { [_ht]: ["DELETE", "/clusters/{name}", 200] }, () => DeleteClusterRequest$, () => DeleteClusterResponse$
+];
+export var DeleteEksAnywhereSubscription$: StaticOperationSchema = [9, n0, _DEAS,
+  { [_ht]: ["DELETE", "/eks-anywhere-subscriptions/{id}", 200] }, () => DeleteEksAnywhereSubscriptionRequest$, () => DeleteEksAnywhereSubscriptionResponse$
+];
+export var DeleteFargateProfile$: StaticOperationSchema = [9, n0, _DFP,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/fargate-profiles/{fargateProfileName}", 200] }, () => DeleteFargateProfileRequest$, () => DeleteFargateProfileResponse$
+];
+export var DeleteNodegroup$: StaticOperationSchema = [9, n0, _DN,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/node-groups/{nodegroupName}", 200] }, () => DeleteNodegroupRequest$, () => DeleteNodegroupResponse$
+];
+export var DeletePodIdentityAssociation$: StaticOperationSchema = [9, n0, _DPIA,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/pod-identity-associations/{associationId}", 200] }, () => DeletePodIdentityAssociationRequest$, () => DeletePodIdentityAssociationResponse$
+];
+export var DeregisterCluster$: StaticOperationSchema = [9, n0, _DCer,
+  { [_ht]: ["DELETE", "/cluster-registrations/{name}", 200] }, () => DeregisterClusterRequest$, () => DeregisterClusterResponse$
+];
+export var DescribeAccessEntry$: StaticOperationSchema = [9, n0, _DAEe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/access-entries/{principalArn}", 200] }, () => DescribeAccessEntryRequest$, () => DescribeAccessEntryResponse$
+];
+export var DescribeAddon$: StaticOperationSchema = [9, n0, _DAe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/addons/{addonName}", 200] }, () => DescribeAddonRequest$, () => DescribeAddonResponse$
+];
+export var DescribeAddonConfiguration$: StaticOperationSchema = [9, n0, _DAC,
+  { [_ht]: ["GET", "/addons/configuration-schemas", 200] }, () => DescribeAddonConfigurationRequest$, () => DescribeAddonConfigurationResponse$
+];
+export var DescribeAddonVersions$: StaticOperationSchema = [9, n0, _DAV,
+  { [_ht]: ["GET", "/addons/supported-versions", 200] }, () => DescribeAddonVersionsRequest$, () => DescribeAddonVersionsResponse$
+];
+export var DescribeCapability$: StaticOperationSchema = [9, n0, _DCes,
+  { [_ht]: ["GET", "/clusters/{clusterName}/capabilities/{capabilityName}", 200] }, () => DescribeCapabilityRequest$, () => DescribeCapabilityResponse$
+];
+export var DescribeCertificateAuthority$: StaticOperationSchema = [9, n0, _DCAe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}", 200] }, () => DescribeCertificateAuthorityRequest$, () => DescribeCertificateAuthorityResponse$
+];
+export var DescribeCluster$: StaticOperationSchema = [9, n0, _DCesc,
+  { [_ht]: ["GET", "/clusters/{name}", 200] }, () => DescribeClusterRequest$, () => DescribeClusterResponse$
+];
+export var DescribeClusterVersions$: StaticOperationSchema = [9, n0, _DCV,
+  { [_ht]: ["GET", "/cluster-versions", 200] }, () => DescribeClusterVersionsRequest$, () => DescribeClusterVersionsResponse$
+];
+export var DescribeEksAnywhereSubscription$: StaticOperationSchema = [9, n0, _DEASe,
+  { [_ht]: ["GET", "/eks-anywhere-subscriptions/{id}", 200] }, () => DescribeEksAnywhereSubscriptionRequest$, () => DescribeEksAnywhereSubscriptionResponse$
+];
+export var DescribeFargateProfile$: StaticOperationSchema = [9, n0, _DFPe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/fargate-profiles/{fargateProfileName}", 200] }, () => DescribeFargateProfileRequest$, () => DescribeFargateProfileResponse$
+];
+export var DescribeIdentityProviderConfig$: StaticOperationSchema = [9, n0, _DIPC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/identity-provider-configs/describe", 200] }, () => DescribeIdentityProviderConfigRequest$, () => DescribeIdentityProviderConfigResponse$
+];
+export var DescribeInsight$: StaticOperationSchema = [9, n0, _DI,
+  { [_ht]: ["GET", "/clusters/{clusterName}/insights/{id}", 200] }, () => DescribeInsightRequest$, () => DescribeInsightResponse$
+];
+export var DescribeInsightsRefresh$: StaticOperationSchema = [9, n0, _DIRes,
+  { [_ht]: ["GET", "/clusters/{clusterName}/insights-refresh", 200] }, () => DescribeInsightsRefreshRequest$, () => DescribeInsightsRefreshResponse$
+];
+export var DescribeNodegroup$: StaticOperationSchema = [9, n0, _DNe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/node-groups/{nodegroupName}", 200] }, () => DescribeNodegroupRequest$, () => DescribeNodegroupResponse$
+];
+export var DescribePodIdentityAssociation$: StaticOperationSchema = [9, n0, _DPIAe,
+  { [_ht]: ["GET", "/clusters/{clusterName}/pod-identity-associations/{associationId}", 200] }, () => DescribePodIdentityAssociationRequest$, () => DescribePodIdentityAssociationResponse$
+];
+export var DescribeUpdate$: StaticOperationSchema = [9, n0, _DU,
+  { [_ht]: ["GET", "/clusters/{name}/updates/{updateId}", 200] }, () => DescribeUpdateRequest$, () => DescribeUpdateResponse$
+];
+export var DisassociateAccessPolicy$: StaticOperationSchema = [9, n0, _DAP,
+  { [_ht]: ["DELETE", "/clusters/{clusterName}/access-entries/{principalArn}/access-policies/{policyArn}", 200] }, () => DisassociateAccessPolicyRequest$, () => DisassociateAccessPolicyResponse$
+];
+export var DisassociateIdentityProviderConfig$: StaticOperationSchema = [9, n0, _DIPCi,
+  { [_ht]: ["POST", "/clusters/{clusterName}/identity-provider-configs/disassociate", 200] }, () => DisassociateIdentityProviderConfigRequest$, () => DisassociateIdentityProviderConfigResponse$
+];
+export var ListAccessEntries$: StaticOperationSchema = [9, n0, _LAE,
+  { [_ht]: ["GET", "/clusters/{clusterName}/access-entries", 200] }, () => ListAccessEntriesRequest$, () => ListAccessEntriesResponse$
+];
+export var ListAccessPolicies$: StaticOperationSchema = [9, n0, _LAP,
+  { [_ht]: ["GET", "/access-policies", 200] }, () => ListAccessPoliciesRequest$, () => ListAccessPoliciesResponse$
+];
+export var ListAddons$: StaticOperationSchema = [9, n0, _LA,
+  { [_ht]: ["GET", "/clusters/{clusterName}/addons", 200] }, () => ListAddonsRequest$, () => ListAddonsResponse$
+];
+export var ListAssociatedAccessPolicies$: StaticOperationSchema = [9, n0, _LAAP,
+  { [_ht]: ["GET", "/clusters/{clusterName}/access-entries/{principalArn}/access-policies", 200] }, () => ListAssociatedAccessPoliciesRequest$, () => ListAssociatedAccessPoliciesResponse$
+];
+export var ListCapabilities$: StaticOperationSchema = [9, n0, _LC,
+  { [_ht]: ["GET", "/clusters/{clusterName}/capabilities", 200] }, () => ListCapabilitiesRequest$, () => ListCapabilitiesResponse$
+];
+export var ListCertificateAuthorities$: StaticOperationSchema = [9, n0, _LCA,
+  { [_ht]: ["GET", "/clusters/{clusterName}/certificate-authorities", 200] }, () => ListCertificateAuthoritiesRequest$, () => ListCertificateAuthoritiesResponse$
+];
+export var ListClusters$: StaticOperationSchema = [9, n0, _LCi,
+  { [_ht]: ["GET", "/clusters", 200] }, () => ListClustersRequest$, () => ListClustersResponse$
+];
+export var ListEksAnywhereSubscriptions$: StaticOperationSchema = [9, n0, _LEAS,
+  { [_ht]: ["GET", "/eks-anywhere-subscriptions", 200] }, () => ListEksAnywhereSubscriptionsRequest$, () => ListEksAnywhereSubscriptionsResponse$
+];
+export var ListFargateProfiles$: StaticOperationSchema = [9, n0, _LFP,
+  { [_ht]: ["GET", "/clusters/{clusterName}/fargate-profiles", 200] }, () => ListFargateProfilesRequest$, () => ListFargateProfilesResponse$
+];
+export var ListIdentityProviderConfigs$: StaticOperationSchema = [9, n0, _LIPC,
+  { [_ht]: ["GET", "/clusters/{clusterName}/identity-provider-configs", 200] }, () => ListIdentityProviderConfigsRequest$, () => ListIdentityProviderConfigsResponse$
+];
+export var ListInsights$: StaticOperationSchema = [9, n0, _LI,
+  { [_ht]: ["POST", "/clusters/{clusterName}/insights", 200] }, () => ListInsightsRequest$, () => ListInsightsResponse$
+];
+export var ListNodegroups$: StaticOperationSchema = [9, n0, _LN,
+  { [_ht]: ["GET", "/clusters/{clusterName}/node-groups", 200] }, () => ListNodegroupsRequest$, () => ListNodegroupsResponse$
+];
+export var ListPodIdentityAssociations$: StaticOperationSchema = [9, n0, _LPIA,
+  { [_ht]: ["GET", "/clusters/{clusterName}/pod-identity-associations", 200] }, () => ListPodIdentityAssociationsRequest$, () => ListPodIdentityAssociationsResponse$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  { [_ht]: ["GET", "/tags/{resourceArn}", 200] }, () => ListTagsForResourceRequest$, () => ListTagsForResourceResponse$
+];
+export var ListUpdates$: StaticOperationSchema = [9, n0, _LU,
+  { [_ht]: ["GET", "/clusters/{name}/updates", 200] }, () => ListUpdatesRequest$, () => ListUpdatesResponse$
+];
+export var RegisterCluster$: StaticOperationSchema = [9, n0, _RCe,
+  { [_ht]: ["POST", "/cluster-registrations", 200] }, () => RegisterClusterRequest$, () => RegisterClusterResponse$
+];
+export var StartInsightsRefresh$: StaticOperationSchema = [9, n0, _SIR,
+  { [_ht]: ["POST", "/clusters/{clusterName}/insights-refresh", 200] }, () => StartInsightsRefreshRequest$, () => StartInsightsRefreshResponse$
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TR,
+  { [_ht]: ["POST", "/tags/{resourceArn}", 200] }, () => TagResourceRequest$, () => TagResourceResponse$
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  { [_ht]: ["DELETE", "/tags/{resourceArn}", 200] }, () => UntagResourceRequest$, () => UntagResourceResponse$
+];
+export var UpdateAccessEntry$: StaticOperationSchema = [9, n0, _UAE,
+  { [_ht]: ["POST", "/clusters/{clusterName}/access-entries/{principalArn}", 200] }, () => UpdateAccessEntryRequest$, () => UpdateAccessEntryResponse$
+];
+export var UpdateAddon$: StaticOperationSchema = [9, n0, _UA,
+  { [_ht]: ["POST", "/clusters/{clusterName}/addons/{addonName}/update", 200] }, () => UpdateAddonRequest$, () => UpdateAddonResponse$
+];
+export var UpdateCapability$: StaticOperationSchema = [9, n0, _UC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/capabilities/{capabilityName}", 200] }, () => UpdateCapabilityRequest$, () => UpdateCapabilityResponse$
+];
+export var UpdateClusterConfig$: StaticOperationSchema = [9, n0, _UCCp,
+  { [_ht]: ["POST", "/clusters/{name}/update-config", 200] }, () => UpdateClusterConfigRequest$, () => UpdateClusterConfigResponse$
+];
+export var UpdateClusterVersion$: StaticOperationSchema = [9, n0, _UCV,
+  { [_ht]: ["POST", "/clusters/{name}/updates", 200] }, () => UpdateClusterVersionRequest$, () => UpdateClusterVersionResponse$
+];
+export var UpdateEksAnywhereSubscription$: StaticOperationSchema = [9, n0, _UEAS,
+  { [_ht]: ["POST", "/eks-anywhere-subscriptions/{id}", 200] }, () => UpdateEksAnywhereSubscriptionRequest$, () => UpdateEksAnywhereSubscriptionResponse$
+];
+export var UpdateNodegroupConfig$: StaticOperationSchema = [9, n0, _UNC,
+  { [_ht]: ["POST", "/clusters/{clusterName}/node-groups/{nodegroupName}/update-config", 200] }, () => UpdateNodegroupConfigRequest$, () => UpdateNodegroupConfigResponse$
+];
+export var UpdateNodegroupVersion$: StaticOperationSchema = [9, n0, _UNV,
+  { [_ht]: ["POST", "/clusters/{clusterName}/node-groups/{nodegroupName}/update-version", 200] }, () => UpdateNodegroupVersionRequest$, () => UpdateNodegroupVersionResponse$
+];
+export var UpdatePodIdentityAssociation$: StaticOperationSchema = [9, n0, _UPIA,
+  { [_ht]: ["POST", "/clusters/{clusterName}/pod-identity-associations/{associationId}", 200] }, () => UpdatePodIdentityAssociationRequest$, () => UpdatePodIdentityAssociationResponse$
+];

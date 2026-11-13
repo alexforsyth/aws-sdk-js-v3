@@ -1,112 +1,196 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DeregisterContainerInstanceRequest, DeregisterContainerInstanceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeregisterContainerInstanceCommand,
-  serializeAws_json1_1DeregisterContainerInstanceCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DeregisterContainerInstanceCommandInput extends DeregisterContainerInstanceRequest {}
-export interface DeregisterContainerInstanceCommandOutput
-  extends DeregisterContainerInstanceResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeregisterContainerInstanceRequest, DeregisterContainerInstanceResponse } from "../models/models_0";
+import { DeregisterContainerInstance$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is
- * 			no longer available to run tasks.</p>
- * 		       <p>If you intend to use the container instance for some other purpose after
- * 			deregistration, you should stop all of the tasks running on the container instance
- * 			before deregistration. That prevents any orphaned tasks from consuming resources.</p>
- * 		       <p>Deregistering a container instance removes the instance from a cluster, but it does
- * 			not terminate the EC2 instance. If you are finished using the instance, be sure to
- * 			terminate it in the Amazon EC2 console to stop billing.</p>
- * 		       <note>
- * 			         <p>If you terminate a running container instance, Amazon ECS automatically deregisters the
- * 				instance from your cluster (stopped container instances or instances with
- * 				disconnected agents are not automatically deregistered when terminated).</p>
- * 		       </note>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterContainerInstanceCommand}.
+ */
+export interface DeregisterContainerInstanceCommandInput extends DeregisterContainerInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterContainerInstanceCommand}.
+ */
+export interface DeregisterContainerInstanceCommandOutput extends DeregisterContainerInstanceResponse, __MetadataBearer {}
+
+/**
+ * <p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, we recommend that you stop all of the tasks running on the container instance before deregistration. That prevents any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it doesn't terminate the EC2 instance. If you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note> <p>If you terminate a running container instance, Amazon ECS automatically deregisters the instance from your cluster (stopped container instances or instances with disconnected agents aren't automatically deregistered when terminated).</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, DeregisterContainerInstanceCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DeregisterContainerInstanceCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DeregisterContainerInstanceRequest
+ *   cluster: "STRING_VALUE",
+ *   containerInstance: "STRING_VALUE", // required
+ *   force: true || false,
+ * };
  * const command = new DeregisterContainerInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // DeregisterContainerInstanceResponse
+ * //   containerInstance: { // ContainerInstance
+ * //     containerInstanceArn: "STRING_VALUE",
+ * //     ec2InstanceId: "STRING_VALUE",
+ * //     capacityProviderName: "STRING_VALUE",
+ * //     version: Number("long"),
+ * //     versionInfo: { // VersionInfo
+ * //       agentVersion: "STRING_VALUE",
+ * //       agentHash: "STRING_VALUE",
+ * //       dockerVersion: "STRING_VALUE",
+ * //     },
+ * //     remainingResources: [ // Resources
+ * //       { // Resource
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         doubleValue: Number("double"),
+ * //         longValue: Number("long"),
+ * //         integerValue: Number("int"),
+ * //         stringSetValue: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     registeredResources: [
+ * //       {
+ * //         name: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         doubleValue: Number("double"),
+ * //         longValue: Number("long"),
+ * //         integerValue: Number("int"),
+ * //         stringSetValue: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     status: "STRING_VALUE",
+ * //     statusReason: "STRING_VALUE",
+ * //     agentConnected: true || false,
+ * //     runningTasksCount: Number("int"),
+ * //     pendingTasksCount: Number("int"),
+ * //     agentUpdateStatus: "PENDING" || "STAGING" || "STAGED" || "UPDATING" || "UPDATED" || "FAILED",
+ * //     attributes: [ // Attributes
+ * //       { // Attribute
+ * //         name: "STRING_VALUE", // required
+ * //         value: "STRING_VALUE",
+ * //         targetType: "container-instance",
+ * //         targetId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     registeredAt: new Date("TIMESTAMP"),
+ * //     attachments: [ // Attachments
+ * //       { // Attachment
+ * //         id: "STRING_VALUE",
+ * //         type: "STRING_VALUE",
+ * //         status: "STRING_VALUE",
+ * //         details: [ // AttachmentDetails
+ * //           { // KeyValuePair
+ * //             name: "STRING_VALUE",
+ * //             value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     tags: [ // Tags
+ * //       { // Tag
+ * //         key: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     healthStatus: { // ContainerInstanceHealthStatus
+ * //       overallStatus: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //       details: [ // InstanceHealthCheckResultList
+ * //         { // InstanceHealthCheckResult
+ * //           type: "CONTAINER_RUNTIME" || "ACCELERATED_COMPUTE" || "DAEMON" || "AGENT_CONNECTIVITY",
+ * //           status: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //           statusReason: "STRING_VALUE",
+ * //           lastUpdated: new Date("TIMESTAMP"),
+ * //           lastStatusChange: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //     },
+ * //     gpuDevices: [ // GpuDevices
+ * //       { // GpuDevice
+ * //         gpuId: "STRING_VALUE",
+ * //         sharingMode: "IDLE" || "NVIDIA_MPS" || "DEDICATED",
+ * //         totalMemoryInMiB: Number("int"),
+ * //         remainingMemoryInMiB: Number("int"),
+ * //         containerCount: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeregisterContainerInstanceCommandInput - {@link DeregisterContainerInstanceCommandInput}
+ * @returns {@link DeregisterContainerInstanceCommandOutput}
  * @see {@link DeregisterContainerInstanceCommandInput} for command's `input` shape.
  * @see {@link DeregisterContainerInstanceCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To deregister a container instance from a cluster
+ * ```javascript
+ * // This example deregisters a container instance from the specified cluster in your default region. If there are still tasks running on the container instance, you must either stop those tasks before deregistering, or use the force option.
+ * const input = {
+ *   cluster: "default",
+ *   containerInstance: "container_instance_UUID",
+ *   force: true
+ * };
+ * const command = new DeregisterContainerInstanceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeregisterContainerInstanceCommand extends $Command<
-  DeregisterContainerInstanceCommandInput,
-  DeregisterContainerInstanceCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterContainerInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterContainerInstanceCommandInput, DeregisterContainerInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DeregisterContainerInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterContainerInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeregisterContainerInstanceResponse.filterSensitiveLog,
+export class DeregisterContainerInstanceCommand extends command<DeregisterContainerInstanceCommandInput, DeregisterContainerInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterContainerInstance",
+  DeregisterContainerInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterContainerInstanceRequest;
+      output: DeregisterContainerInstanceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeregisterContainerInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeregisterContainerInstanceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeregisterContainerInstanceCommandOutput> {
-    return deserializeAws_json1_1DeregisterContainerInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterContainerInstanceCommandInput;
+      output: DeregisterContainerInstanceCommandOutput;
+    };
+  };
 }

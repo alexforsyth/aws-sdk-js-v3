@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { DescribeDomainConfigurationRequest, DescribeDomainConfigurationResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DescribeDomainConfigurationCommand,
-  serializeAws_restJson1DescribeDomainConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDomainConfigurationRequest, DescribeDomainConfigurationResponse } from "../models/models_1";
+import { DescribeDomainConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDomainConfigurationCommand}.
+ */
 export interface DescribeDomainConfigurationCommandInput extends DescribeDomainConfigurationRequest {}
-export interface DescribeDomainConfigurationCommandOutput
-  extends DescribeDomainConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDomainConfigurationCommand}.
+ */
+export interface DescribeDomainConfigurationCommandOutput extends DescribeDomainConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Gets summary information about a domain configuration.</p>
@@ -31,71 +30,95 @@ export interface DescribeDomainConfigurationCommandOutput
  * ```javascript
  * import { IoTClient, DescribeDomainConfigurationCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DescribeDomainConfigurationCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DescribeDomainConfigurationRequest
+ *   domainConfigurationName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDomainConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDomainConfigurationResponse
+ * //   domainConfigurationName: "STRING_VALUE",
+ * //   domainConfigurationArn: "STRING_VALUE",
+ * //   domainName: "STRING_VALUE",
+ * //   serverCertificates: [ // ServerCertificates
+ * //     { // ServerCertificateSummary
+ * //       serverCertificateArn: "STRING_VALUE",
+ * //       serverCertificateStatus: "INVALID" || "VALID",
+ * //       serverCertificateStatusDetail: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   authorizerConfig: { // AuthorizerConfig
+ * //     defaultAuthorizerName: "STRING_VALUE",
+ * //     allowAuthorizerOverride: true || false,
+ * //   },
+ * //   domainConfigurationStatus: "ENABLED" || "DISABLED",
+ * //   serviceType: "DATA" || "CREDENTIAL_PROVIDER" || "JOBS",
+ * //   domainType: "ENDPOINT" || "AWS_MANAGED" || "CUSTOMER_MANAGED",
+ * //   lastStatusChangeDate: new Date("TIMESTAMP"),
+ * //   tlsConfig: { // TlsConfig
+ * //     securityPolicy: "STRING_VALUE",
+ * //   },
+ * //   serverCertificateConfig: { // ServerCertificateConfig
+ * //     enableOCSPCheck: true || false,
+ * //     ocspLambdaArn: "STRING_VALUE",
+ * //     ocspAuthorizedResponderArn: "STRING_VALUE",
+ * //   },
+ * //   authenticationType: "CUSTOM_AUTH_X509" || "CUSTOM_AUTH" || "AWS_X509" || "AWS_SIGV4" || "DEFAULT",
+ * //   applicationProtocol: "SECURE_MQTT" || "MQTT_WSS" || "HTTPS" || "DEFAULT",
+ * //   clientCertificateConfig: { // ClientCertificateConfig
+ * //     clientCertificateCallbackArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeDomainConfigurationCommandInput - {@link DescribeDomainConfigurationCommandInput}
+ * @returns {@link DescribeDomainConfigurationCommandOutput}
  * @see {@link DescribeDomainConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeDomainConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDomainConfigurationCommand extends $Command<
-  DescribeDomainConfigurationCommandInput,
-  DescribeDomainConfigurationCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDomainConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDomainConfigurationCommandInput, DescribeDomainConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DescribeDomainConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDomainConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDomainConfigurationResponse.filterSensitiveLog,
+export class DescribeDomainConfigurationCommand extends command<DescribeDomainConfigurationCommandInput, DescribeDomainConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDomainConfiguration",
+  DescribeDomainConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDomainConfigurationRequest;
+      output: DescribeDomainConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDomainConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeDomainConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDomainConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeDomainConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDomainConfigurationCommandInput;
+      output: DescribeDomainConfigurationCommandOutput;
+    };
+  };
 }

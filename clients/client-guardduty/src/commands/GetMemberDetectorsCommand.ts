@@ -1,95 +1,138 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { GetMemberDetectorsRequest, GetMemberDetectorsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetMemberDetectorsCommand,
-  serializeAws_restJson1GetMemberDetectorsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMemberDetectorsRequest, GetMemberDetectorsResponse } from "../models/models_1";
+import { GetMemberDetectors$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMemberDetectorsCommand}.
+ */
 export interface GetMemberDetectorsCommandInput extends GetMemberDetectorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMemberDetectorsCommand}.
+ */
 export interface GetMemberDetectorsCommandOutput extends GetMemberDetectorsResponse, __MetadataBearer {}
 
 /**
- * <p>Describes which data sources are enabled for the member account's detector.</p>
+ * <p>Describes which data sources are enabled for the member account's detector.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GuardDutyClient, GetMemberDetectorsCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, GetMemberDetectorsCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // GetMemberDetectorsRequest
+ *   DetectorId: "STRING_VALUE", // required
+ *   AccountIds: [ // AccountIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new GetMemberDetectorsCommand(input);
  * const response = await client.send(command);
+ * // { // GetMemberDetectorsResponse
+ * //   MemberDataSourceConfigurations: [ // MemberDataSourceConfigurations // required
+ * //     { // MemberDataSourceConfiguration
+ * //       AccountId: "STRING_VALUE", // required
+ * //       DataSources: { // DataSourceConfigurationsResult
+ * //         CloudTrail: { // CloudTrailConfigurationResult
+ * //           Status: "ENABLED" || "DISABLED", // required
+ * //         },
+ * //         DNSLogs: { // DNSLogsConfigurationResult
+ * //           Status: "ENABLED" || "DISABLED", // required
+ * //         },
+ * //         FlowLogs: { // FlowLogsConfigurationResult
+ * //           Status: "ENABLED" || "DISABLED", // required
+ * //         },
+ * //         S3Logs: { // S3LogsConfigurationResult
+ * //           Status: "ENABLED" || "DISABLED", // required
+ * //         },
+ * //         Kubernetes: { // KubernetesConfigurationResult
+ * //           AuditLogs: { // KubernetesAuditLogsConfigurationResult
+ * //             Status: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //         },
+ * //         MalwareProtection: { // MalwareProtectionConfigurationResult
+ * //           ScanEc2InstanceWithFindings: { // ScanEc2InstanceWithFindingsResult
+ * //             EbsVolumes: { // EbsVolumesResult
+ * //               Status: "ENABLED" || "DISABLED",
+ * //               Reason: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //           ServiceRole: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Features: [ // MemberFeaturesConfigurationsResults
+ * //         { // MemberFeaturesConfigurationResult
+ * //           Name: "S3_DATA_EVENTS" || "EKS_AUDIT_LOGS" || "EBS_MALWARE_PROTECTION" || "RDS_LOGIN_EVENTS" || "LAMBDA_NETWORK_LOGS" || "EKS_RUNTIME_MONITORING" || "RUNTIME_MONITORING" || "AI_PROTECTION",
+ * //           Status: "ENABLED" || "DISABLED",
+ * //           UpdatedAt: new Date("TIMESTAMP"),
+ * //           AdditionalConfiguration: [ // MemberAdditionalConfigurationResults
+ * //             { // MemberAdditionalConfigurationResult
+ * //               Name: "EKS_ADDON_MANAGEMENT" || "ECS_FARGATE_AGENT_MANAGEMENT" || "EC2_AGENT_MANAGEMENT" || "RDS_DATA_RISK",
+ * //               Status: "ENABLED" || "DISABLED",
+ * //               UpdatedAt: new Date("TIMESTAMP"),
+ * //               ManagedBy: "GUARDDUTY_POLICY",
+ * //             },
+ * //           ],
+ * //           ManagedBy: "GUARDDUTY_POLICY",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   UnprocessedAccounts: [ // UnprocessedAccounts // required
+ * //     { // UnprocessedAccount
+ * //       AccountId: "STRING_VALUE", // required
+ * //       Result: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetMemberDetectorsCommandInput - {@link GetMemberDetectorsCommandInput}
+ * @returns {@link GetMemberDetectorsCommandOutput}
  * @see {@link GetMemberDetectorsCommandInput} for command's `input` shape.
  * @see {@link GetMemberDetectorsCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class GetMemberDetectorsCommand extends $Command<
-  GetMemberDetectorsCommandInput,
-  GetMemberDetectorsCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMemberDetectorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMemberDetectorsCommandInput, GetMemberDetectorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "GetMemberDetectorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMemberDetectorsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMemberDetectorsResponse.filterSensitiveLog,
+export class GetMemberDetectorsCommand extends command<GetMemberDetectorsCommandInput, GetMemberDetectorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMemberDetectors",
+  GetMemberDetectors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMemberDetectorsRequest;
+      output: GetMemberDetectorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMemberDetectorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMemberDetectorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMemberDetectorsCommandOutput> {
-    return deserializeAws_restJson1GetMemberDetectorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMemberDetectorsCommandInput;
+      output: GetMemberDetectorsCommandOutput;
+    };
+  };
 }

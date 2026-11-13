@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { CreateApprovalRuleTemplateInput, CreateApprovalRuleTemplateOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateApprovalRuleTemplateCommand,
-  serializeAws_json1_1CreateApprovalRuleTemplateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateApprovalRuleTemplateInput, CreateApprovalRuleTemplateOutput } from "../models/models_0";
+import { CreateApprovalRuleTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateApprovalRuleTemplateCommand}.
+ */
 export interface CreateApprovalRuleTemplateCommandInput extends CreateApprovalRuleTemplateInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateApprovalRuleTemplateCommand}.
+ */
 export interface CreateApprovalRuleTemplateCommandOutput extends CreateApprovalRuleTemplateOutput, __MetadataBearer {}
 
 /**
  * <p>Creates a template for approval rules that can then be associated with one or more
- *             repositories in your AWS account. When you associate a template with a repository, AWS
+ *             repositories in your Amazon Web Services account. When you associate a template with a repository,
  *             CodeCommit creates an approval rule that matches the conditions of the template for all
  *             pull requests that meet the conditions of the template. For more information, see
  *             <a>AssociateApprovalRuleTemplateWithRepository</a>.</p>
@@ -32,71 +33,87 @@ export interface CreateApprovalRuleTemplateCommandOutput extends CreateApprovalR
  * ```javascript
  * import { CodeCommitClient, CreateApprovalRuleTemplateCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, CreateApprovalRuleTemplateCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // CreateApprovalRuleTemplateInput
+ *   approvalRuleTemplateName: "STRING_VALUE", // required
+ *   approvalRuleTemplateContent: "STRING_VALUE", // required
+ *   approvalRuleTemplateDescription: "STRING_VALUE",
+ * };
  * const command = new CreateApprovalRuleTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // CreateApprovalRuleTemplateOutput
+ * //   approvalRuleTemplate: { // ApprovalRuleTemplate
+ * //     approvalRuleTemplateId: "STRING_VALUE",
+ * //     approvalRuleTemplateName: "STRING_VALUE",
+ * //     approvalRuleTemplateDescription: "STRING_VALUE",
+ * //     approvalRuleTemplateContent: "STRING_VALUE",
+ * //     ruleContentSha256: "STRING_VALUE",
+ * //     lastModifiedDate: new Date("TIMESTAMP"),
+ * //     creationDate: new Date("TIMESTAMP"),
+ * //     lastModifiedUser: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateApprovalRuleTemplateCommandInput - {@link CreateApprovalRuleTemplateCommandInput}
+ * @returns {@link CreateApprovalRuleTemplateCommandOutput}
  * @see {@link CreateApprovalRuleTemplateCommandInput} for command's `input` shape.
  * @see {@link CreateApprovalRuleTemplateCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link ApprovalRuleTemplateContentRequiredException} (client fault)
+ *  <p>The content for the approval rule template is empty. You must provide some content for an approval rule template. The content cannot be null.</p>
+ *
+ * @throws {@link ApprovalRuleTemplateNameAlreadyExistsException} (client fault)
+ *  <p>You cannot create an approval rule template with that name because a template with
+ *             that name already exists in this Amazon Web Services Region for your Amazon Web Services account. Approval rule template
+ *             names must be unique.</p>
+ *
+ * @throws {@link ApprovalRuleTemplateNameRequiredException} (client fault)
+ *  <p>An approval rule template name is required, but was not specified.</p>
+ *
+ * @throws {@link InvalidApprovalRuleTemplateContentException} (client fault)
+ *  <p>The content of the approval rule template is not valid.</p>
+ *
+ * @throws {@link InvalidApprovalRuleTemplateDescriptionException} (client fault)
+ *  <p>The description for the approval rule template is not valid because it exceeds the
+ *             maximum characters allowed for a description. For more information about limits in CodeCommit,
+ *             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>
+ *                CodeCommit User Guide</i>.</p>
+ *
+ * @throws {@link InvalidApprovalRuleTemplateNameException} (client fault)
+ *  <p>The name of the approval rule template is not valid. Template names must be between 1
+ *             and 100 valid characters in length. For more information about limits in CodeCommit,
+ *             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>
+ *                CodeCommit User Guide</i>.</p>
+ *
+ * @throws {@link NumberOfRuleTemplatesExceededException} (client fault)
+ *  <p>The maximum number of approval rule templates has been exceeded for this Amazon Web Services Region. </p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class CreateApprovalRuleTemplateCommand extends $Command<
-  CreateApprovalRuleTemplateCommandInput,
-  CreateApprovalRuleTemplateCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateApprovalRuleTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateApprovalRuleTemplateCommandInput, CreateApprovalRuleTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "CreateApprovalRuleTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateApprovalRuleTemplateInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateApprovalRuleTemplateOutput.filterSensitiveLog,
+export class CreateApprovalRuleTemplateCommand extends command<CreateApprovalRuleTemplateCommandInput, CreateApprovalRuleTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateApprovalRuleTemplate",
+  CreateApprovalRuleTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateApprovalRuleTemplateInput;
+      output: CreateApprovalRuleTemplateOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateApprovalRuleTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateApprovalRuleTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateApprovalRuleTemplateCommandOutput> {
-    return deserializeAws_json1_1CreateApprovalRuleTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateApprovalRuleTemplateCommandInput;
+      output: CreateApprovalRuleTemplateCommandOutput;
+    };
+  };
 }

@@ -17,11 +17,13 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },
-          "private": true
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
@@ -41,11 +43,39 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },
-          "private": true
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
+        }
+      }
+    },
+    "aws-protocoltests-json-machinelearning": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["com.amazonaws.machinelearning#AmazonML_20141212"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-json-machinelearning",
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
@@ -65,11 +95,13 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },
-          "private": true
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
@@ -89,11 +121,13 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },
-          "private": true
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
@@ -113,32 +147,65 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },
-          "private": true
-        },
-        "typescript-ssdk-codegen": {
-          "package": "@aws-sdk/aws-restjson-server",
-          "packageVersion": "1.0.0-alpha.1",
-          "disableDefaultValidation": true
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
-    "aws-restjson-validation": {
+    "aws-protocoltests-restjson-apigateway": {
       "transforms": [
         {
           "name": "includeServices",
           "args": {
-            "services": ["aws.protocoltests.restjson.validation#RestJsonValidation"]
+            "services": ["com.amazonaws.apigateway#BackplaneControlService"]
           }
         }
       ],
       "plugins": {
-        "typescript-ssdk-codegen": {
-          "package": "@aws-sdk/aws-restjson-validation-server",
-          "packageVersion": "1.0.0-alpha.1"
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restjson-apigateway",
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
+        }
+      }
+    },
+    "aws-protocoltests-restjson-glacier": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["com.amazonaws.glacier#Glacier"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restjson-glacier",
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
         }
       }
     },
@@ -158,7 +225,305 @@
           "packageJson": {
             "author": {
               "name": "AWS SDK for JavaScript Team",
-              "url": "https://aws.amazon.com/javascript/"
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
+        }
+      }
+    },
+    "aws-smithy-rpcv2-cbor": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-smithy-rpcv2-cbor",
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true,
+          "generateSchemas": false,
+          "generateEndpointBdd": false
+        }
+      }
+    },
+    "aws-protocoltests-ec2-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.ec2#AwsEc2"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-ec2-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-json-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json#JsonProtocol"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-json-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-json-schema-machinelearning": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["com.amazonaws.machinelearning#AmazonML_20141212"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-json-schema-machinelearning",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-json-10-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json10#JsonRpc10"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-json-10-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-query-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.query#AwsQuery"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-query-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-restjson-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restjson#RestJson"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restjson-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-restjson-schema-apigateway": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["com.amazonaws.apigateway#BackplaneControlService"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restjson-schema-apigateway",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-restjson-schema-glacier": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["com.amazonaws.glacier#Glacier"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restjson-schema-glacier",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-protocoltests-restxml-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restxml#RestXml"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-restxml-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
+            },
+            "license": "Apache-2.0"
+          },
+          "private": true
+        }
+      }
+    },
+    "aws-smithy-rpcv2-cbor-schema": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"]
+          }
+        }
+      ],
+      "plugins": {
+        "typescript-codegen": {
+          "package": "@aws-sdk/aws-protocoltests-smithy-rpcv2-cbor-schema",
+          "generateSchemas": true,
+          "generateEndpointBdd": true,
+          "generateSnapshotTests": true,
+          "packageVersion": "1.0.0-alpha.1",
+          "packageJson": {
+            "author": {
+              "name": "AWS SDK for JavaScript Team",
+              "url": "https://aws.amazon.com/sdk-for-javascript/"
             },
             "license": "Apache-2.0"
           },

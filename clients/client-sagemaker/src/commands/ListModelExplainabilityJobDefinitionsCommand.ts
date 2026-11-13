@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListModelExplainabilityJobDefinitionsRequest,
   ListModelExplainabilityJobDefinitionsResponse,
-} from "../models/models_2";
-import {
-  deserializeAws_json1_1ListModelExplainabilityJobDefinitionsCommand,
-  serializeAws_json1_1ListModelExplainabilityJobDefinitionsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+} from "../models/models_4";
+import { ListModelExplainabilityJobDefinitions$ } from "../schemas/schemas_0";
 
-export interface ListModelExplainabilityJobDefinitionsCommandInput
-  extends ListModelExplainabilityJobDefinitionsRequest {}
-export interface ListModelExplainabilityJobDefinitionsCommandOutput
-  extends ListModelExplainabilityJobDefinitionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListModelExplainabilityJobDefinitionsCommand}.
+ */
+export interface ListModelExplainabilityJobDefinitionsCommandInput extends ListModelExplainabilityJobDefinitionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListModelExplainabilityJobDefinitionsCommand}.
+ */
+export interface ListModelExplainabilityJobDefinitionsCommandOutput extends ListModelExplainabilityJobDefinitionsResponse, __MetadataBearer {}
 
 /**
  * <p>Lists model explainability job definitions that satisfy various filters.</p>
@@ -34,74 +32,62 @@ export interface ListModelExplainabilityJobDefinitionsCommandOutput
  * ```javascript
  * import { SageMakerClient, ListModelExplainabilityJobDefinitionsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListModelExplainabilityJobDefinitionsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListModelExplainabilityJobDefinitionsRequest
+ *   EndpointName: "STRING_VALUE",
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ * };
  * const command = new ListModelExplainabilityJobDefinitionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListModelExplainabilityJobDefinitionsResponse
+ * //   JobDefinitionSummaries: [ // MonitoringJobDefinitionSummaryList // required
+ * //     { // MonitoringJobDefinitionSummary
+ * //       MonitoringJobDefinitionName: "STRING_VALUE", // required
+ * //       MonitoringJobDefinitionArn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       EndpointName: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListModelExplainabilityJobDefinitionsCommandInput - {@link ListModelExplainabilityJobDefinitionsCommandInput}
+ * @returns {@link ListModelExplainabilityJobDefinitionsCommandOutput}
  * @see {@link ListModelExplainabilityJobDefinitionsCommandInput} for command's `input` shape.
  * @see {@link ListModelExplainabilityJobDefinitionsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListModelExplainabilityJobDefinitionsCommand extends $Command<
-  ListModelExplainabilityJobDefinitionsCommandInput,
-  ListModelExplainabilityJobDefinitionsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListModelExplainabilityJobDefinitionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListModelExplainabilityJobDefinitionsCommandInput, ListModelExplainabilityJobDefinitionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListModelExplainabilityJobDefinitionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListModelExplainabilityJobDefinitionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListModelExplainabilityJobDefinitionsResponse.filterSensitiveLog,
+export class ListModelExplainabilityJobDefinitionsCommand extends command<ListModelExplainabilityJobDefinitionsCommandInput, ListModelExplainabilityJobDefinitionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListModelExplainabilityJobDefinitions",
+  ListModelExplainabilityJobDefinitions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListModelExplainabilityJobDefinitionsRequest;
+      output: ListModelExplainabilityJobDefinitionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListModelExplainabilityJobDefinitionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListModelExplainabilityJobDefinitionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListModelExplainabilityJobDefinitionsCommandOutput> {
-    return deserializeAws_json1_1ListModelExplainabilityJobDefinitionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListModelExplainabilityJobDefinitionsCommandInput;
+      output: ListModelExplainabilityJobDefinitionsCommandOutput;
+    };
+  };
 }

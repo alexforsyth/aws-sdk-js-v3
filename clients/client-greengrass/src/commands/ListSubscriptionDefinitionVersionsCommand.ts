@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListSubscriptionDefinitionVersionsRequest,
   ListSubscriptionDefinitionVersionsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSubscriptionDefinitionVersionsCommand,
-  serializeAws_restJson1ListSubscriptionDefinitionVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { ListSubscriptionDefinitionVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSubscriptionDefinitionVersionsCommand}.
+ */
 export interface ListSubscriptionDefinitionVersionsCommandInput extends ListSubscriptionDefinitionVersionsRequest {}
-export interface ListSubscriptionDefinitionVersionsCommandOutput
-  extends ListSubscriptionDefinitionVersionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListSubscriptionDefinitionVersionsCommand}.
+ */
+export interface ListSubscriptionDefinitionVersionsCommandOutput extends ListSubscriptionDefinitionVersionsResponse, __MetadataBearer {}
 
 /**
  * Lists the versions of a subscription definition.
@@ -33,74 +32,60 @@ export interface ListSubscriptionDefinitionVersionsCommandOutput
  * ```javascript
  * import { GreengrassClient, ListSubscriptionDefinitionVersionsCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, ListSubscriptionDefinitionVersionsCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // ListSubscriptionDefinitionVersionsRequest
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   SubscriptionDefinitionId: "STRING_VALUE", // required
+ * };
  * const command = new ListSubscriptionDefinitionVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSubscriptionDefinitionVersionsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Versions: [ // __listOfVersionInformation
+ * //     { // VersionInformation
+ * //       Arn: "STRING_VALUE",
+ * //       CreationTimestamp: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListSubscriptionDefinitionVersionsCommandInput - {@link ListSubscriptionDefinitionVersionsCommandInput}
+ * @returns {@link ListSubscriptionDefinitionVersionsCommandOutput}
  * @see {@link ListSubscriptionDefinitionVersionsCommandInput} for command's `input` shape.
  * @see {@link ListSubscriptionDefinitionVersionsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class ListSubscriptionDefinitionVersionsCommand extends $Command<
-  ListSubscriptionDefinitionVersionsCommandInput,
-  ListSubscriptionDefinitionVersionsCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSubscriptionDefinitionVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSubscriptionDefinitionVersionsCommandInput, ListSubscriptionDefinitionVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "ListSubscriptionDefinitionVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSubscriptionDefinitionVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSubscriptionDefinitionVersionsResponse.filterSensitiveLog,
+export class ListSubscriptionDefinitionVersionsCommand extends command<ListSubscriptionDefinitionVersionsCommandInput, ListSubscriptionDefinitionVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSubscriptionDefinitionVersions",
+  ListSubscriptionDefinitionVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSubscriptionDefinitionVersionsRequest;
+      output: ListSubscriptionDefinitionVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListSubscriptionDefinitionVersionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSubscriptionDefinitionVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListSubscriptionDefinitionVersionsCommandOutput> {
-    return deserializeAws_restJson1ListSubscriptionDefinitionVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSubscriptionDefinitionVersionsCommandInput;
+      output: ListSubscriptionDefinitionVersionsCommandOutput;
+    };
+  };
 }

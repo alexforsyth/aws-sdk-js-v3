@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocumentTypeAsPayloadInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DocumentTypeAsPayloadCommand,
-  serializeAws_restJson1DocumentTypeAsPayloadCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { DocumentTypeAsPayloadInputOutput } from "../models/models_0";
+import { de_DocumentTypeAsPayloadCommand, se_DocumentTypeAsPayloadCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DocumentTypeAsPayloadCommand}.
+ */
 export interface DocumentTypeAsPayloadCommandInput extends DocumentTypeAsPayloadInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link DocumentTypeAsPayloadCommand}.
+ */
 export interface DocumentTypeAsPayloadCommandOutput extends DocumentTypeAsPayloadInputOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +37,62 @@ export interface DocumentTypeAsPayloadCommandOutput extends DocumentTypeAsPayloa
  * ```javascript
  * import { RestJsonProtocolClient, DocumentTypeAsPayloadCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, DocumentTypeAsPayloadCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // DocumentTypeAsPayloadInputOutput
+ *   documentValue: "DOCUMENT_VALUE",
+ * };
  * const command = new DocumentTypeAsPayloadCommand(input);
  * const response = await client.send(command);
+ * // { // DocumentTypeAsPayloadInputOutput
+ * //   documentValue: "DOCUMENT_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DocumentTypeAsPayloadCommandInput - {@link DocumentTypeAsPayloadCommandInput}
+ * @returns {@link DocumentTypeAsPayloadCommandOutput}
  * @see {@link DocumentTypeAsPayloadCommandInput} for command's `input` shape.
  * @see {@link DocumentTypeAsPayloadCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class DocumentTypeAsPayloadCommand extends $Command<
-  DocumentTypeAsPayloadCommandInput,
-  DocumentTypeAsPayloadCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DocumentTypeAsPayloadCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DocumentTypeAsPayloadCommandInput, DocumentTypeAsPayloadCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "DocumentTypeAsPayloadCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DocumentTypeAsPayloadInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: DocumentTypeAsPayloadInputOutput.filterSensitiveLog,
+export class DocumentTypeAsPayloadCommand extends $Command
+  .classBuilder<
+    DocumentTypeAsPayloadCommandInput,
+    DocumentTypeAsPayloadCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "DocumentTypeAsPayload", {})
+  .n("RestJsonProtocolClient", "DocumentTypeAsPayloadCommand")
+  .f(void 0, void 0)
+  .ser(se_DocumentTypeAsPayloadCommand)
+  .de(de_DocumentTypeAsPayloadCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DocumentTypeAsPayloadInputOutput;
+      output: DocumentTypeAsPayloadInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DocumentTypeAsPayloadCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DocumentTypeAsPayloadCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DocumentTypeAsPayloadCommandOutput> {
-    return deserializeAws_restJson1DocumentTypeAsPayloadCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DocumentTypeAsPayloadCommandInput;
+      output: DocumentTypeAsPayloadCommandOutput;
+    };
+  };
 }

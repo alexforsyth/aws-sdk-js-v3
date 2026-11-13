@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListSizeConstraintSetsRequest, ListSizeConstraintSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListSizeConstraintSetsCommand,
-  serializeAws_json1_1ListSizeConstraintSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSizeConstraintSetsRequest, ListSizeConstraintSetsResponse } from "../models/models_0";
+import { ListSizeConstraintSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSizeConstraintSetsCommand}.
+ */
 export interface ListSizeConstraintSetsCommandInput extends ListSizeConstraintSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSizeConstraintSetsCommand}.
+ */
 export interface ListSizeConstraintSetsCommandOutput extends ListSizeConstraintSetsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,80 @@ export interface ListSizeConstraintSetsCommandOutput extends ListSizeConstraintS
  * ```javascript
  * import { WAFRegionalClient, ListSizeConstraintSetsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListSizeConstraintSetsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListSizeConstraintSetsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListSizeConstraintSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSizeConstraintSetsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   SizeConstraintSets: [ // SizeConstraintSetSummaries
+ * //     { // SizeConstraintSetSummary
+ * //       SizeConstraintSetId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListSizeConstraintSetsCommandInput - {@link ListSizeConstraintSetsCommandInput}
+ * @returns {@link ListSizeConstraintSetsCommandOutput}
  * @see {@link ListSizeConstraintSetsCommandInput} for command's `input` shape.
  * @see {@link ListSizeConstraintSetsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @example To list a size constraint sets
+ * ```javascript
+ * // The following example returns an array of up to 100 size contraint match sets.
+ * const input = {
+ *   Limit: 100
+ * };
+ * const command = new ListSizeConstraintSetsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SizeConstraintSets: [
+ *     {
+ *       Name: "MySampleSizeConstraintSet",
+ *       SizeConstraintSetId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListSizeConstraintSetsCommand extends $Command<
-  ListSizeConstraintSetsCommandInput,
-  ListSizeConstraintSetsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSizeConstraintSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSizeConstraintSetsCommandInput, ListSizeConstraintSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListSizeConstraintSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSizeConstraintSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListSizeConstraintSetsResponse.filterSensitiveLog,
+export class ListSizeConstraintSetsCommand extends command<ListSizeConstraintSetsCommandInput, ListSizeConstraintSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSizeConstraintSets",
+  ListSizeConstraintSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSizeConstraintSetsRequest;
+      output: ListSizeConstraintSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSizeConstraintSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSizeConstraintSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSizeConstraintSetsCommandOutput> {
-    return deserializeAws_json1_1ListSizeConstraintSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSizeConstraintSetsCommandInput;
+      output: ListSizeConstraintSetsCommandOutput;
+    };
+  };
 }

@@ -1,108 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SendCustomVerificationEmailRequest, SendCustomVerificationEmailResponse } from "../models/models_0";
-import {
-  deserializeAws_querySendCustomVerificationEmailCommand,
-  serializeAws_querySendCustomVerificationEmailCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendCustomVerificationEmailRequest, SendCustomVerificationEmailResponse } from "../models/models_0";
+import { SendCustomVerificationEmail$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendCustomVerificationEmailCommand}.
+ */
 export interface SendCustomVerificationEmailCommandInput extends SendCustomVerificationEmailRequest {}
-export interface SendCustomVerificationEmailCommandOutput
-  extends SendCustomVerificationEmailResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link SendCustomVerificationEmailCommand}.
+ */
+export interface SendCustomVerificationEmailCommandOutput extends SendCustomVerificationEmailResponse, __MetadataBearer {}
 
 /**
  * <p>Adds an email address to the list of identities for your Amazon SES account in the current
- *             AWS Region and attempts to verify it. As a result of executing this operation, a
+ *             Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a
  *             customized verification email is sent to the specified address.</p>
- *         <p>To use this operation, you must first create a custom verification email template. For
+ *          <p>To use this operation, you must first create a custom verification email template. For
  *             more information about creating and using custom verification email templates, see
- *                 <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html">Using Custom
- *                 Verification Email Templates</a> in the <i>Amazon SES Developer
+ *                 <a href="https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom">Using
+ *                 Custom Verification Email Templates</a> in the <i>Amazon SES Developer
  *                 Guide</i>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, SendCustomVerificationEmailCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, SendCustomVerificationEmailCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // SendCustomVerificationEmailRequest
+ *   EmailAddress: "STRING_VALUE", // required
+ *   TemplateName: "STRING_VALUE", // required
+ *   ConfigurationSetName: "STRING_VALUE",
+ * };
  * const command = new SendCustomVerificationEmailCommand(input);
  * const response = await client.send(command);
+ * // { // SendCustomVerificationEmailResponse
+ * //   MessageId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SendCustomVerificationEmailCommandInput - {@link SendCustomVerificationEmailCommandInput}
+ * @returns {@link SendCustomVerificationEmailCommandOutput}
  * @see {@link SendCustomVerificationEmailCommandInput} for command's `input` shape.
  * @see {@link SendCustomVerificationEmailCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link ConfigurationSetDoesNotExistException} (client fault)
+ *  <p>Indicates that the configuration set does not exist.</p>
+ *
+ * @throws {@link CustomVerificationEmailTemplateDoesNotExistException} (client fault)
+ *  <p>Indicates that a custom verification email template with the name you specified does
+ *             not exist.</p>
+ *
+ * @throws {@link FromEmailAddressNotVerifiedException} (client fault)
+ *  <p>Indicates that the sender address specified for a custom verification email is not
+ *             verified, and is therefore not eligible to send the custom verification email. </p>
+ *
+ * @throws {@link MessageRejected} (client fault)
+ *  <p>Indicates that the action failed, and the message could not be sent. Check the error
+ *             stack for more information about what caused the error.</p>
+ *
+ * @throws {@link ProductionAccessNotGrantedException} (client fault)
+ *  <p>Indicates that the account has not been granted production access.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @public
  */
-export class SendCustomVerificationEmailCommand extends $Command<
-  SendCustomVerificationEmailCommandInput,
-  SendCustomVerificationEmailCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendCustomVerificationEmailCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendCustomVerificationEmailCommandInput, SendCustomVerificationEmailCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "SendCustomVerificationEmailCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendCustomVerificationEmailRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SendCustomVerificationEmailResponse.filterSensitiveLog,
+export class SendCustomVerificationEmailCommand extends command<SendCustomVerificationEmailCommandInput, SendCustomVerificationEmailCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendCustomVerificationEmail",
+  SendCustomVerificationEmail$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendCustomVerificationEmailRequest;
+      output: SendCustomVerificationEmailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendCustomVerificationEmailCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_querySendCustomVerificationEmailCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SendCustomVerificationEmailCommandOutput> {
-    return deserializeAws_querySendCustomVerificationEmailCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendCustomVerificationEmailCommandInput;
+      output: SendCustomVerificationEmailCommandOutput;
+    };
+  };
 }

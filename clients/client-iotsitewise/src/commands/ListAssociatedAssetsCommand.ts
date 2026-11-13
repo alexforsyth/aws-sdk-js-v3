@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { ListAssociatedAssetsRequest, ListAssociatedAssetsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAssociatedAssetsCommand,
-  serializeAws_restJson1ListAssociatedAssetsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssociatedAssetsRequest, ListAssociatedAssetsResponse } from "../models/models_1";
+import { ListAssociatedAssets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssociatedAssetsCommand}.
+ */
 export interface ListAssociatedAssetsCommandInput extends ListAssociatedAssetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssociatedAssetsCommand}.
+ */
 export interface ListAssociatedAssetsCommandOutput extends ListAssociatedAssetsResponse, __MetadataBearer {}
 
 /**
@@ -26,10 +27,12 @@ export interface ListAssociatedAssetsCommandOutput extends ListAssociatedAssetsR
  *          <p>You can use this operation to do the following:</p>
  *          <ul>
  *             <li>
- *                <p>List child assets associated to a parent asset by a hierarchy that you specify.</p>
+ *                <p>
+ *                   <code>CHILD</code> - List all child assets associated to the asset.</p>
  *             </li>
  *             <li>
- *                <p>List an asset's parent asset.</p>
+ *                <p>
+ *                   <code>PARENT</code> - List the asset's parent asset.</p>
  *             </li>
  *          </ul>
  * @example
@@ -37,68 +40,99 @@ export interface ListAssociatedAssetsCommandOutput extends ListAssociatedAssetsR
  * ```javascript
  * import { IoTSiteWiseClient, ListAssociatedAssetsCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, ListAssociatedAssetsCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // ListAssociatedAssetsRequest
+ *   assetId: "STRING_VALUE", // required
+ *   hierarchyId: "STRING_VALUE",
+ *   traversalDirection: "PARENT" || "CHILD",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAssociatedAssetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssociatedAssetsResponse
+ * //   assetSummaries: [ // AssociatedAssetsSummaries // required
+ * //     { // AssociatedAssetsSummary
+ * //       id: "STRING_VALUE", // required
+ * //       externalId: "STRING_VALUE",
+ * //       arn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       assetModelId: "STRING_VALUE", // required
+ * //       creationDate: new Date("TIMESTAMP"), // required
+ * //       lastUpdateDate: new Date("TIMESTAMP"), // required
+ * //       status: { // AssetStatus
+ * //         state: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING" || "FAILED", // required
+ * //         error: { // ErrorDetails
+ * //           code: "VALIDATION_ERROR" || "INTERNAL_FAILURE", // required
+ * //           message: "STRING_VALUE", // required
+ * //           details: [ // DetailedErrors
+ * //             { // DetailedError
+ * //               code: "INCOMPATIBLE_COMPUTE_LOCATION" || "INCOMPATIBLE_FORWARDING_CONFIGURATION", // required
+ * //               message: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //       hierarchies: [ // AssetHierarchies // required
+ * //         { // AssetHierarchy
+ * //           id: "STRING_VALUE",
+ * //           externalId: "STRING_VALUE",
+ * //           name: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssociatedAssetsCommandInput - {@link ListAssociatedAssetsCommandInput}
+ * @returns {@link ListAssociatedAssetsCommandOutput}
  * @see {@link ListAssociatedAssetsCommandInput} for command's `input` shape.
  * @see {@link ListAssociatedAssetsCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssociatedAssetsCommand extends $Command<
-  ListAssociatedAssetsCommandInput,
-  ListAssociatedAssetsCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssociatedAssetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssociatedAssetsCommandInput, ListAssociatedAssetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "ListAssociatedAssetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssociatedAssetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssociatedAssetsResponse.filterSensitiveLog,
+export class ListAssociatedAssetsCommand extends command<ListAssociatedAssetsCommandInput, ListAssociatedAssetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssociatedAssets",
+  ListAssociatedAssets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssociatedAssetsRequest;
+      output: ListAssociatedAssetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssociatedAssetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAssociatedAssetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssociatedAssetsCommandOutput> {
-    return deserializeAws_restJson1ListAssociatedAssetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssociatedAssetsCommandInput;
+      output: ListAssociatedAssetsCommandOutput;
+    };
+  };
 }

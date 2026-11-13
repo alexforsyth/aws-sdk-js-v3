@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { DeleteJobRequest, DeleteJobResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteJobCommand,
-  serializeAws_restJson1DeleteJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteJobRequest, DeleteJobResponse } from "../models/models_0";
+import { DeleteJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteJobCommand}.
+ */
 export interface DeleteJobCommandInput extends DeleteJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteJobCommand}.
+ */
 export interface DeleteJobCommandOutput extends DeleteJobResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,56 @@ export interface DeleteJobCommandOutput extends DeleteJobResponse, __MetadataBea
  * ```javascript
  * import { DataBrewClient, DeleteJobCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, DeleteJobCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // DeleteJobRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteJobCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteJobResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteJobCommandInput - {@link DeleteJobCommandInput}
+ * @returns {@link DeleteJobCommandOutput}
  * @see {@link DeleteJobCommandInput} for command's `input` shape.
  * @see {@link DeleteJobCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteJobCommand extends $Command<
-  DeleteJobCommandInput,
-  DeleteJobCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteJobCommandInput, DeleteJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "DeleteJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteJobResponse.filterSensitiveLog,
+export class DeleteJobCommand extends command<DeleteJobCommandInput, DeleteJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteJob",
+  DeleteJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteJobRequest;
+      output: DeleteJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteJobCommandOutput> {
-    return deserializeAws_restJson1DeleteJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteJobCommandInput;
+      output: DeleteJobCommandOutput;
+    };
+  };
 }

@@ -1,703 +1,543 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AddProfilePermissionCommandInput,
+  type AddProfilePermissionCommandOutput,
   AddProfilePermissionCommand,
-  AddProfilePermissionCommandInput,
-  AddProfilePermissionCommandOutput,
 } from "./commands/AddProfilePermissionCommand";
 import {
+  type CancelSigningProfileCommandInput,
+  type CancelSigningProfileCommandOutput,
   CancelSigningProfileCommand,
-  CancelSigningProfileCommandInput,
-  CancelSigningProfileCommandOutput,
 } from "./commands/CancelSigningProfileCommand";
 import {
+  type DescribeSigningJobCommandInput,
+  type DescribeSigningJobCommandOutput,
   DescribeSigningJobCommand,
-  DescribeSigningJobCommandInput,
-  DescribeSigningJobCommandOutput,
 } from "./commands/DescribeSigningJobCommand";
 import {
+  type GetRevocationStatusCommandInput,
+  type GetRevocationStatusCommandOutput,
+  GetRevocationStatusCommand,
+} from "./commands/GetRevocationStatusCommand";
+import {
+  type GetSigningPlatformCommandInput,
+  type GetSigningPlatformCommandOutput,
   GetSigningPlatformCommand,
-  GetSigningPlatformCommandInput,
-  GetSigningPlatformCommandOutput,
 } from "./commands/GetSigningPlatformCommand";
 import {
+  type GetSigningProfileCommandInput,
+  type GetSigningProfileCommandOutput,
   GetSigningProfileCommand,
-  GetSigningProfileCommandInput,
-  GetSigningProfileCommandOutput,
 } from "./commands/GetSigningProfileCommand";
 import {
+  type ListProfilePermissionsCommandInput,
+  type ListProfilePermissionsCommandOutput,
   ListProfilePermissionsCommand,
-  ListProfilePermissionsCommandInput,
-  ListProfilePermissionsCommandOutput,
 } from "./commands/ListProfilePermissionsCommand";
 import {
+  type ListSigningJobsCommandInput,
+  type ListSigningJobsCommandOutput,
   ListSigningJobsCommand,
-  ListSigningJobsCommandInput,
-  ListSigningJobsCommandOutput,
 } from "./commands/ListSigningJobsCommand";
 import {
+  type ListSigningPlatformsCommandInput,
+  type ListSigningPlatformsCommandOutput,
   ListSigningPlatformsCommand,
-  ListSigningPlatformsCommandInput,
-  ListSigningPlatformsCommandOutput,
 } from "./commands/ListSigningPlatformsCommand";
 import {
+  type ListSigningProfilesCommandInput,
+  type ListSigningProfilesCommandOutput,
   ListSigningProfilesCommand,
-  ListSigningProfilesCommandInput,
-  ListSigningProfilesCommandOutput,
 } from "./commands/ListSigningProfilesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PutSigningProfileCommandInput,
+  type PutSigningProfileCommandOutput,
   PutSigningProfileCommand,
-  PutSigningProfileCommandInput,
-  PutSigningProfileCommandOutput,
 } from "./commands/PutSigningProfileCommand";
 import {
+  type RemoveProfilePermissionCommandInput,
+  type RemoveProfilePermissionCommandOutput,
   RemoveProfilePermissionCommand,
-  RemoveProfilePermissionCommandInput,
-  RemoveProfilePermissionCommandOutput,
 } from "./commands/RemoveProfilePermissionCommand";
 import {
+  type RevokeSignatureCommandInput,
+  type RevokeSignatureCommandOutput,
   RevokeSignatureCommand,
-  RevokeSignatureCommandInput,
-  RevokeSignatureCommandOutput,
 } from "./commands/RevokeSignatureCommand";
 import {
+  type RevokeSigningProfileCommandInput,
+  type RevokeSigningProfileCommandOutput,
   RevokeSigningProfileCommand,
-  RevokeSigningProfileCommandInput,
-  RevokeSigningProfileCommandOutput,
 } from "./commands/RevokeSigningProfileCommand";
 import {
-  StartSigningJobCommand,
-  StartSigningJobCommandInput,
-  StartSigningJobCommandOutput,
-} from "./commands/StartSigningJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type SignPayloadCommandInput,
+  type SignPayloadCommandOutput,
+  SignPayloadCommand,
+} from "./commands/SignPayloadCommand";
 import {
+  type StartSigningJobCommandInput,
+  type StartSigningJobCommandOutput,
+  StartSigningJobCommand,
+} from "./commands/StartSigningJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import type { SignerServiceException } from "./models/SignerServiceException";
+import { paginateListSigningJobs } from "./pagination/ListSigningJobsPaginator";
+import { paginateListSigningPlatforms } from "./pagination/ListSigningPlatformsPaginator";
+import { paginateListSigningProfiles } from "./pagination/ListSigningProfilesPaginator";
 import { SignerClient } from "./SignerClient";
+import { waitUntilSuccessfulSigningJob } from "./waiters/waitForSuccessfulSigningJob";
+
+const commands = {
+  AddProfilePermissionCommand,
+  CancelSigningProfileCommand,
+  DescribeSigningJobCommand,
+  GetRevocationStatusCommand,
+  GetSigningPlatformCommand,
+  GetSigningProfileCommand,
+  ListProfilePermissionsCommand,
+  ListSigningJobsCommand,
+  ListSigningPlatformsCommand,
+  ListSigningProfilesCommand,
+  ListTagsForResourceCommand,
+  PutSigningProfileCommand,
+  RemoveProfilePermissionCommand,
+  RevokeSignatureCommand,
+  RevokeSigningProfileCommand,
+  SignPayloadCommand,
+  StartSigningJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateListSigningJobs,
+  paginateListSigningPlatforms,
+  paginateListSigningProfiles,
+};
+const waiters = {
+  waitUntilSuccessfulSigningJob,
+};
 
 /**
- * <p>AWS Signer is a fully managed code signing service to help you ensure the trust and
- * 			integrity of your code. </p>
- * 		       <p>AWS Signer supports the following applications:</p>
- *
- * 		       <p>With <i>code signing for AWS Lambda</i>, you can sign AWS Lambda
- * 			deployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch,
- * 			and AWS CloudTrail. In order to sign code, you create a signing profile and then use
- * 			Signer to sign Lambda zip files in S3. </p>
- *
- * 		       <p>With <i>code signing for IoT</i>, you can sign code for any IoT device that is
- * 			supported by AWS. IoT code signing is available for <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and is
- * 			integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign
- * 			code, you import a third-party code signing certificate using ACM, and use that to
- * 			sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>
- * 		       <p>For more information about AWS Signer, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">AWS Signer Developer Guide</a>.</p>
- *
- * 		       <p></p>
+ * @public
  */
-export class Signer extends SignerClient {
+export interface SignerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Signer {
   /**
-   * <p>Adds cross-account permissions to a signing profile.</p>
+   * @see {@link AddProfilePermissionCommand}
    */
-  public addProfilePermission(
+  addProfilePermission(
     args: AddProfilePermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<AddProfilePermissionCommandOutput>;
-  public addProfilePermission(
+  addProfilePermission(
     args: AddProfilePermissionCommandInput,
     cb: (err: any, data?: AddProfilePermissionCommandOutput) => void
   ): void;
-  public addProfilePermission(
+  addProfilePermission(
     args: AddProfilePermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: AddProfilePermissionCommandOutput) => void
   ): void;
-  public addProfilePermission(
-    args: AddProfilePermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddProfilePermissionCommandOutput) => void),
-    cb?: (err: any, data?: AddProfilePermissionCommandOutput) => void
-  ): Promise<AddProfilePermissionCommandOutput> | void {
-    const command = new AddProfilePermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>.
-   * 			A canceled profile is still viewable with the <code>ListSigningProfiles</code>
-   * 			operation, but it cannot perform new signing jobs, and is deleted two years after
-   * 			cancelation.</p>
+   * @see {@link CancelSigningProfileCommand}
    */
-  public cancelSigningProfile(
+  cancelSigningProfile(
     args: CancelSigningProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<CancelSigningProfileCommandOutput>;
-  public cancelSigningProfile(
+  cancelSigningProfile(
     args: CancelSigningProfileCommandInput,
     cb: (err: any, data?: CancelSigningProfileCommandOutput) => void
   ): void;
-  public cancelSigningProfile(
+  cancelSigningProfile(
     args: CancelSigningProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: CancelSigningProfileCommandOutput) => void
   ): void;
-  public cancelSigningProfile(
-    args: CancelSigningProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelSigningProfileCommandOutput) => void),
-    cb?: (err: any, data?: CancelSigningProfileCommandOutput) => void
-  ): Promise<CancelSigningProfileCommandOutput> | void {
-    const command = new CancelSigningProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a specific code signing job. You specify the job by using
-   * 			the <code>jobId</code> value that is returned by the <a>StartSigningJob</a>
-   * 			operation. </p>
+   * @see {@link DescribeSigningJobCommand}
    */
-  public describeSigningJob(
+  describeSigningJob(
     args: DescribeSigningJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<DescribeSigningJobCommandOutput>;
-  public describeSigningJob(
+  describeSigningJob(
     args: DescribeSigningJobCommandInput,
     cb: (err: any, data?: DescribeSigningJobCommandOutput) => void
   ): void;
-  public describeSigningJob(
+  describeSigningJob(
     args: DescribeSigningJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: DescribeSigningJobCommandOutput) => void
   ): void;
-  public describeSigningJob(
-    args: DescribeSigningJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSigningJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSigningJobCommandOutput) => void
-  ): Promise<DescribeSigningJobCommandOutput> | void {
-    const command = new DescribeSigningJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information on a specific signing platform.</p>
+   * @see {@link GetRevocationStatusCommand}
    */
-  public getSigningPlatform(
+  getRevocationStatus(
+    args: GetRevocationStatusCommandInput,
+    options?: SignerRequestOptions
+  ): Promise<GetRevocationStatusCommandOutput>;
+  getRevocationStatus(
+    args: GetRevocationStatusCommandInput,
+    cb: (err: any, data?: GetRevocationStatusCommandOutput) => void
+  ): void;
+  getRevocationStatus(
+    args: GetRevocationStatusCommandInput,
+    options: SignerRequestOptions,
+    cb: (err: any, data?: GetRevocationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSigningPlatformCommand}
+   */
+  getSigningPlatform(
     args: GetSigningPlatformCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<GetSigningPlatformCommandOutput>;
-  public getSigningPlatform(
+  getSigningPlatform(
     args: GetSigningPlatformCommandInput,
     cb: (err: any, data?: GetSigningPlatformCommandOutput) => void
   ): void;
-  public getSigningPlatform(
+  getSigningPlatform(
     args: GetSigningPlatformCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: GetSigningPlatformCommandOutput) => void
   ): void;
-  public getSigningPlatform(
-    args: GetSigningPlatformCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSigningPlatformCommandOutput) => void),
-    cb?: (err: any, data?: GetSigningPlatformCommandOutput) => void
-  ): Promise<GetSigningPlatformCommandOutput> | void {
-    const command = new GetSigningPlatformCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information on a specific signing profile.</p>
+   * @see {@link GetSigningProfileCommand}
    */
-  public getSigningProfile(
+  getSigningProfile(
     args: GetSigningProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<GetSigningProfileCommandOutput>;
-  public getSigningProfile(
+  getSigningProfile(
     args: GetSigningProfileCommandInput,
     cb: (err: any, data?: GetSigningProfileCommandOutput) => void
   ): void;
-  public getSigningProfile(
+  getSigningProfile(
     args: GetSigningProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: GetSigningProfileCommandOutput) => void
   ): void;
-  public getSigningProfile(
-    args: GetSigningProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSigningProfileCommandOutput) => void),
-    cb?: (err: any, data?: GetSigningProfileCommandOutput) => void
-  ): Promise<GetSigningProfileCommandOutput> | void {
-    const command = new GetSigningProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the cross-account permissions associated with a signing profile.</p>
+   * @see {@link ListProfilePermissionsCommand}
    */
-  public listProfilePermissions(
+  listProfilePermissions(
     args: ListProfilePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<ListProfilePermissionsCommandOutput>;
-  public listProfilePermissions(
+  listProfilePermissions(
     args: ListProfilePermissionsCommandInput,
     cb: (err: any, data?: ListProfilePermissionsCommandOutput) => void
   ): void;
-  public listProfilePermissions(
+  listProfilePermissions(
     args: ListProfilePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: ListProfilePermissionsCommandOutput) => void
   ): void;
-  public listProfilePermissions(
-    args: ListProfilePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProfilePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: ListProfilePermissionsCommandOutput) => void
-  ): Promise<ListProfilePermissionsCommandOutput> | void {
-    const command = new ListProfilePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all your signing jobs. You can use the <code>maxResults</code> parameter to
-   * 			limit the number of signing jobs that are returned in the response. If additional jobs
-   * 			remain to be listed, code signing returns a <code>nextToken</code> value. Use this value in
-   * 			subsequent calls to <code>ListSigningJobs</code> to fetch the remaining values. You can
-   * 			continue calling <code>ListSigningJobs</code> with your <code>maxResults</code>
-   * 			parameter and with new values that code signing returns in the <code>nextToken</code>
-   * 			parameter until all of your signing jobs have been returned. </p>
+   * @see {@link ListSigningJobsCommand}
    */
-  public listSigningJobs(
+  listSigningJobs(): Promise<ListSigningJobsCommandOutput>;
+  listSigningJobs(
     args: ListSigningJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<ListSigningJobsCommandOutput>;
-  public listSigningJobs(
+  listSigningJobs(
     args: ListSigningJobsCommandInput,
     cb: (err: any, data?: ListSigningJobsCommandOutput) => void
   ): void;
-  public listSigningJobs(
+  listSigningJobs(
     args: ListSigningJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: ListSigningJobsCommandOutput) => void
   ): void;
-  public listSigningJobs(
-    args: ListSigningJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSigningJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListSigningJobsCommandOutput) => void
-  ): Promise<ListSigningJobsCommandOutput> | void {
-    const command = new ListSigningJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all signing platforms available in code signing that match the request parameters. If
-   * 			additional jobs remain to be listed, code signing returns a <code>nextToken</code> value. Use
-   * 			this value in subsequent calls to <code>ListSigningJobs</code> to fetch the remaining
-   * 			values. You can continue calling <code>ListSigningJobs</code> with your
-   * 				<code>maxResults</code> parameter and with new values that code signing returns in the
-   * 				<code>nextToken</code> parameter until all of your signing jobs have been
-   * 			returned.</p>
+   * @see {@link ListSigningPlatformsCommand}
    */
-  public listSigningPlatforms(
+  listSigningPlatforms(): Promise<ListSigningPlatformsCommandOutput>;
+  listSigningPlatforms(
     args: ListSigningPlatformsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<ListSigningPlatformsCommandOutput>;
-  public listSigningPlatforms(
+  listSigningPlatforms(
     args: ListSigningPlatformsCommandInput,
     cb: (err: any, data?: ListSigningPlatformsCommandOutput) => void
   ): void;
-  public listSigningPlatforms(
+  listSigningPlatforms(
     args: ListSigningPlatformsCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: ListSigningPlatformsCommandOutput) => void
   ): void;
-  public listSigningPlatforms(
-    args: ListSigningPlatformsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSigningPlatformsCommandOutput) => void),
-    cb?: (err: any, data?: ListSigningPlatformsCommandOutput) => void
-  ): Promise<ListSigningPlatformsCommandOutput> | void {
-    const command = new ListSigningPlatformsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all available signing profiles in your AWS account. Returns only profiles with
-   * 			an <code>ACTIVE</code> status unless the <code>includeCanceled</code> request field is
-   * 			set to <code>true</code>. If additional jobs remain to be listed, code signing returns a
-   * 				<code>nextToken</code> value. Use this value in subsequent calls to
-   * 				<code>ListSigningJobs</code> to fetch the remaining values. You can continue calling
-   * 				<code>ListSigningJobs</code> with your <code>maxResults</code> parameter and with
-   * 			new values that code signing returns in the <code>nextToken</code> parameter until all of your
-   * 			signing jobs have been returned.</p>
+   * @see {@link ListSigningProfilesCommand}
    */
-  public listSigningProfiles(
+  listSigningProfiles(): Promise<ListSigningProfilesCommandOutput>;
+  listSigningProfiles(
     args: ListSigningProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<ListSigningProfilesCommandOutput>;
-  public listSigningProfiles(
+  listSigningProfiles(
     args: ListSigningProfilesCommandInput,
     cb: (err: any, data?: ListSigningProfilesCommandOutput) => void
   ): void;
-  public listSigningProfiles(
+  listSigningProfiles(
     args: ListSigningProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: ListSigningProfilesCommandOutput) => void
   ): void;
-  public listSigningProfiles(
-    args: ListSigningProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSigningProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListSigningProfilesCommandOutput) => void
-  ): Promise<ListSigningProfilesCommandOutput> | void {
-    const command = new ListSigningProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of the tags associated with a signing profile resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a signing profile. A signing profile is a code signing template that can be used to
-   * 			carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a>
-   *          </p>
+   * @see {@link PutSigningProfileCommand}
    */
-  public putSigningProfile(
+  putSigningProfile(
     args: PutSigningProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<PutSigningProfileCommandOutput>;
-  public putSigningProfile(
+  putSigningProfile(
     args: PutSigningProfileCommandInput,
     cb: (err: any, data?: PutSigningProfileCommandOutput) => void
   ): void;
-  public putSigningProfile(
+  putSigningProfile(
     args: PutSigningProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: PutSigningProfileCommandOutput) => void
   ): void;
-  public putSigningProfile(
-    args: PutSigningProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutSigningProfileCommandOutput) => void),
-    cb?: (err: any, data?: PutSigningProfileCommandOutput) => void
-  ): Promise<PutSigningProfileCommandOutput> | void {
-    const command = new PutSigningProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes cross-account permissions from a signing profile.</p>
+   * @see {@link RemoveProfilePermissionCommand}
    */
-  public removeProfilePermission(
+  removeProfilePermission(
     args: RemoveProfilePermissionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<RemoveProfilePermissionCommandOutput>;
-  public removeProfilePermission(
+  removeProfilePermission(
     args: RemoveProfilePermissionCommandInput,
     cb: (err: any, data?: RemoveProfilePermissionCommandOutput) => void
   ): void;
-  public removeProfilePermission(
+  removeProfilePermission(
     args: RemoveProfilePermissionCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: RemoveProfilePermissionCommandOutput) => void
   ): void;
-  public removeProfilePermission(
-    args: RemoveProfilePermissionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveProfilePermissionCommandOutput) => void),
-    cb?: (err: any, data?: RemoveProfilePermissionCommandOutput) => void
-  ): Promise<RemoveProfilePermissionCommandOutput> | void {
-    const command = new RemoveProfilePermissionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes the state of a signing job to REVOKED. This indicates that the signature is no
-   * 			longer valid.</p>
+   * @see {@link RevokeSignatureCommand}
    */
-  public revokeSignature(
+  revokeSignature(
     args: RevokeSignatureCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<RevokeSignatureCommandOutput>;
-  public revokeSignature(
+  revokeSignature(
     args: RevokeSignatureCommandInput,
     cb: (err: any, data?: RevokeSignatureCommandOutput) => void
   ): void;
-  public revokeSignature(
+  revokeSignature(
     args: RevokeSignatureCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: RevokeSignatureCommandOutput) => void
   ): void;
-  public revokeSignature(
-    args: RevokeSignatureCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RevokeSignatureCommandOutput) => void),
-    cb?: (err: any, data?: RevokeSignatureCommandOutput) => void
-  ): Promise<RevokeSignatureCommandOutput> | void {
-    const command = new RevokeSignatureCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes the state of a signing profile to REVOKED. This indicates that signatures
-   * 			generated using the signing profile after an effective start date are no longer
-   * 			valid.</p>
+   * @see {@link RevokeSigningProfileCommand}
    */
-  public revokeSigningProfile(
+  revokeSigningProfile(
     args: RevokeSigningProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<RevokeSigningProfileCommandOutput>;
-  public revokeSigningProfile(
+  revokeSigningProfile(
     args: RevokeSigningProfileCommandInput,
     cb: (err: any, data?: RevokeSigningProfileCommandOutput) => void
   ): void;
-  public revokeSigningProfile(
+  revokeSigningProfile(
     args: RevokeSigningProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: RevokeSigningProfileCommandOutput) => void
   ): void;
-  public revokeSigningProfile(
-    args: RevokeSigningProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RevokeSigningProfileCommandOutput) => void),
-    cb?: (err: any, data?: RevokeSigningProfileCommandOutput) => void
-  ): Promise<RevokeSigningProfileCommandOutput> | void {
-    const command = new RevokeSigningProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initiates a signing job to be performed on the code provided. Signing jobs are
-   * 			viewable by the <code>ListSigningJobs</code> operation for two years after they are
-   * 			performed. Note the following requirements: </p>
-   * 		       <ul>
-   *             <li>
-   * 				           <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Create a Bucket</a> in the
-   * 						<i>Amazon S3 Getting Started Guide</i>. </p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>Your S3 source bucket must be version enabled.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>You must create an S3 destination bucket. Code signing uses your S3 destination
-   * 					bucket to write your signed code.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>You specify the name of the source and destination buckets when calling the
-   * 						<code>StartSigningJob</code> operation.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>You must also specify a request token that identifies your request to
-   * 					code signing.</p>
-   * 			         </li>
-   *          </ul>
-   * 		       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call
-   * 			<code>StartSigningJob</code>.</p>
-   * 		       <p>For a Java example that shows how to use this action, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/">http://docs.aws.amazon.com/acm/latest/userguide/</a>
-   *          </p>
+   * @see {@link SignPayloadCommand}
    */
-  public startSigningJob(
+  signPayload(
+    args: SignPayloadCommandInput,
+    options?: SignerRequestOptions
+  ): Promise<SignPayloadCommandOutput>;
+  signPayload(
+    args: SignPayloadCommandInput,
+    cb: (err: any, data?: SignPayloadCommandOutput) => void
+  ): void;
+  signPayload(
+    args: SignPayloadCommandInput,
+    options: SignerRequestOptions,
+    cb: (err: any, data?: SignPayloadCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSigningJobCommand}
+   */
+  startSigningJob(
     args: StartSigningJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<StartSigningJobCommandOutput>;
-  public startSigningJob(
+  startSigningJob(
     args: StartSigningJobCommandInput,
     cb: (err: any, data?: StartSigningJobCommandOutput) => void
   ): void;
-  public startSigningJob(
+  startSigningJob(
     args: StartSigningJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: StartSigningJobCommandOutput) => void
   ): void;
-  public startSigningJob(
-    args: StartSigningJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartSigningJobCommandOutput) => void),
-    cb?: (err: any, data?: StartSigningJobCommandOutput) => void
-  ): Promise<StartSigningJobCommandOutput> | void {
-    const command = new StartSigningJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds one or more tags to a signing profile. Tags are labels that you can use to
-   * 			identify and organize your AWS resources. Each tag consists of a key and an optional
-   * 			value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify
-   * 			the tag, use a key-value pair.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: SignerRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: SignerRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes one or more tags from a signing profile. To remove the tags, specify a list of
-   * 			tag keys.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SignerRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: SignerRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListSigningJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSigningJobsCommandOutput}.
+   */
+  paginateListSigningJobs(
+    args?: ListSigningJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSigningJobsCommandOutput>;
+
+  /**
+   * @see {@link ListSigningPlatformsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSigningPlatformsCommandOutput}.
+   */
+  paginateListSigningPlatforms(
+    args?: ListSigningPlatformsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSigningPlatformsCommandOutput>;
+
+  /**
+   * @see {@link ListSigningProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSigningProfilesCommandOutput}.
+   */
+  paginateListSigningProfiles(
+    args?: ListSigningProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSigningProfilesCommandOutput>;
+
+  /**
+   * @see {@link DescribeSigningJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilSuccessfulSigningJob(
+    args: DescribeSigningJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Signer>, "client">
+  ): Promise<WaiterResult<DescribeSigningJobCommandOutput>>;
 }
+
+/**
+ * <p>AWS Signer is a fully managed code-signing service to help you ensure the trust and
+ * 			integrity of your code. </p>
+ *          <p>Signer supports the following applications:</p>
+ *          <p>With code signing for AWS Lambda, you can sign <a href="http://docs.aws.amazon.com/lambda/latest/dg/">AWS
+ * 				Lambda</a> deployment packages. Integrated support is provided for <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/">Amazon S3</a>, <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/">Amazon
+ * 				CloudWatch</a>, and <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/">AWS CloudTrail</a>. In order
+ * 			to sign code, you create a signing profile and then use Signer to sign Lambda zip
+ * 			files in S3. </p>
+ *          <p>With code signing for IoT, you can sign code for any IoT device that is supported by AWS.
+ * 			IoT code signing is available for <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and is integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code-signing
+ * 			certificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>
+ *          <p>With Signer and the Notation CLI from the <a href="https://notaryproject.dev/">Notary 
+ * 				Project</a>, you can sign container images stored in a container registry such
+ * 			as Amazon Elastic Container Registry (ECR). The signatures are stored in the registry
+ * 			alongside the images, where they are available for verifying image authenticity and
+ * 			integrity.</p>
+ *          <p>For more information about Signer, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">AWS Signer Developer
+ * 			Guide</a>.</p>
+ * @public
+ */
+export class Signer extends SignerClient implements Signer {}
+createAggregatedClient(commands, Signer, { paginators, waiters });

@@ -1,97 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { DescribeAgentRequest, DescribeAgentResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAgentCommand,
-  serializeAws_json1_1DescribeAgentCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAgentRequest, DescribeAgentResponse } from "../models/models_0";
+import { DescribeAgent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAgentCommand}.
+ */
 export interface DescribeAgentCommandInput extends DescribeAgentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAgentCommand}.
+ */
 export interface DescribeAgentCommandOutput extends DescribeAgentResponse, __MetadataBearer {}
 
 /**
- * <p>Returns metadata such as the name, the network interfaces, and the status (that is,
- *       whether the agent is running or not) for an agent. To specify which agent to describe, use the
- *       Amazon Resource Name (ARN) of the agent in your request. </p>
+ * <p>Returns information about an DataSync agent, such as its name, service
+ *       endpoint type, and status.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, DescribeAgentCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, DescribeAgentCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // DescribeAgentRequest
+ *   AgentArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAgentCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAgentResponse
+ * //   AgentArn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Status: "ONLINE" || "OFFLINE",
+ * //   LastConnectionTime: new Date("TIMESTAMP"),
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   EndpointType: "PUBLIC" || "PRIVATE_LINK" || "FIPS" || "FIPS_PRIVATE_LINK",
+ * //   PrivateLinkConfig: { // PrivateLinkConfig
+ * //     VpcEndpointId: "STRING_VALUE",
+ * //     PrivateLinkEndpoint: "STRING_VALUE",
+ * //     SubnetArns: [ // PLSubnetArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SecurityGroupArns: [ // PLSecurityGroupArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   Platform: { // Platform
+ * //     Version: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAgentCommandInput - {@link DescribeAgentCommandInput}
+ * @returns {@link DescribeAgentCommandOutput}
  * @see {@link DescribeAgentCommandInput} for command's `input` shape.
  * @see {@link DescribeAgentCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAgentCommand extends $Command<
-  DescribeAgentCommandInput,
-  DescribeAgentCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAgentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAgentCommandInput, DescribeAgentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "DescribeAgentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAgentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAgentResponse.filterSensitiveLog,
+export class DescribeAgentCommand extends command<DescribeAgentCommandInput, DescribeAgentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAgent",
+  DescribeAgent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAgentRequest;
+      output: DescribeAgentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAgentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAgentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAgentCommandOutput> {
-    return deserializeAws_json1_1DescribeAgentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAgentCommandInput;
+      output: DescribeAgentCommandOutput;
+    };
+  };
 }

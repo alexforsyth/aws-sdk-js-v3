@@ -1,117 +1,142 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DescribeGameSessionPlacementInput, DescribeGameSessionPlacementOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeGameSessionPlacementCommand,
-  serializeAws_json1_1DescribeGameSessionPlacementCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DescribeGameSessionPlacementCommandInput extends DescribeGameSessionPlacementInput {}
-export interface DescribeGameSessionPlacementCommandOutput
-  extends DescribeGameSessionPlacementOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGameSessionPlacementInput, DescribeGameSessionPlacementOutput } from "../models/models_0";
+import { DescribeGameSessionPlacement$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves information, including current status, about a game session placement request. </p>
- *         <p>To get game session placement details, specify the placement ID.</p>
- *         <p>If successful, a <a>GameSessionPlacement</a> object is returned.</p>
- *          <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateGameSession</a> |
- *                     <a>DescribeGameSessions</a> |
- *                     <a>DescribeGameSessionDetails</a> |
- *                     <a>SearchGameSessions</a> |
- *                     <a>UpdateGameSession</a> |
- *                     <a>GetGameSessionLogUrl</a> |
- *                     <a>StartGameSessionPlacement</a> |
- *                     <a>DescribeGameSessionPlacement</a> |
- *                     <a>StopGameSessionPlacement</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGameSessionPlacementCommand}.
+ */
+export interface DescribeGameSessionPlacementCommandInput extends DescribeGameSessionPlacementInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGameSessionPlacementCommand}.
+ */
+export interface DescribeGameSessionPlacementCommandOutput extends DescribeGameSessionPlacementOutput, __MetadataBearer {}
+
+/**
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Retrieves information, including current status, about a game session placement
+ *             request. </p>
+ *          <p>To get game session placement details, specify the placement ID.</p>
+ *          <p>This operation is not designed to be continually called to track game session status.
+ *             This practice can cause you to exceed your API limit, which results in errors. Instead,
+ *             you must configure an Amazon Simple Notification Service (SNS) topic to receive notifications from FlexMatch or
+ *             queues. Continuously polling with <code>DescribeGameSessionPlacement</code> should only
+ *             be used for games in development with low game session usage. For a reference
+ *             implementation of event-based game session placement tracking, see <a href="https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement">
+ *                 Event-based game session placement guidance</a> in the Amazon GameLift Toolkit.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DescribeGameSessionPlacementCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DescribeGameSessionPlacementCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DescribeGameSessionPlacementInput
+ *   PlacementId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeGameSessionPlacementCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGameSessionPlacementOutput
+ * //   GameSessionPlacement: { // GameSessionPlacement
+ * //     PlacementId: "STRING_VALUE",
+ * //     GameSessionQueueName: "STRING_VALUE",
+ * //     Status: "PENDING" || "FULFILLED" || "CANCELLED" || "TIMED_OUT" || "FAILED",
+ * //     GameProperties: [ // GamePropertyList
+ * //       { // GameProperty
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     MaximumPlayerSessionCount: Number("int"),
+ * //     GameSessionName: "STRING_VALUE",
+ * //     GameSessionId: "STRING_VALUE",
+ * //     GameSessionArn: "STRING_VALUE",
+ * //     GameSessionRegion: "STRING_VALUE",
+ * //     PlayerLatencies: [ // PlayerLatencyList
+ * //       { // PlayerLatency
+ * //         PlayerId: "STRING_VALUE",
+ * //         RegionIdentifier: "STRING_VALUE",
+ * //         LatencyInMilliseconds: Number("float"),
+ * //       },
+ * //     ],
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //     IpAddress: "STRING_VALUE",
+ * //     DnsName: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     PlacedPlayerSessions: [ // PlacedPlayerSessionList
+ * //       { // PlacedPlayerSession
+ * //         PlayerId: "STRING_VALUE",
+ * //         PlayerSessionId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     GameSessionData: "STRING_VALUE",
+ * //     MatchmakerData: "STRING_VALUE",
+ * //     PriorityConfigurationOverride: { // PriorityConfigurationOverride
+ * //       PlacementFallbackStrategy: "DEFAULT_AFTER_SINGLE_PASS" || "NONE",
+ * //       LocationOrder: [ // LocationOrderOverrideList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     PlayerGatewayStatus: "DISABLED" || "ENABLED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeGameSessionPlacementCommandInput - {@link DescribeGameSessionPlacementCommandInput}
+ * @returns {@link DescribeGameSessionPlacementCommandOutput}
  * @see {@link DescribeGameSessionPlacementCommandInput} for command's `input` shape.
  * @see {@link DescribeGameSessionPlacementCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGameSessionPlacementCommand extends $Command<
-  DescribeGameSessionPlacementCommandInput,
-  DescribeGameSessionPlacementCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGameSessionPlacementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGameSessionPlacementCommandInput, DescribeGameSessionPlacementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DescribeGameSessionPlacementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGameSessionPlacementInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGameSessionPlacementOutput.filterSensitiveLog,
+export class DescribeGameSessionPlacementCommand extends command<DescribeGameSessionPlacementCommandInput, DescribeGameSessionPlacementCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGameSessionPlacement",
+  DescribeGameSessionPlacement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGameSessionPlacementInput;
+      output: DescribeGameSessionPlacementOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGameSessionPlacementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeGameSessionPlacementCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeGameSessionPlacementCommandOutput> {
-    return deserializeAws_json1_1DescribeGameSessionPlacementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGameSessionPlacementCommandInput;
+      output: DescribeGameSessionPlacementCommandOutput;
+    };
+  };
 }

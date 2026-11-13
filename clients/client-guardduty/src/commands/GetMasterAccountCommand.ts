@@ -1,96 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
-import { GetMasterAccountRequest, GetMasterAccountResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetMasterAccountCommand,
-  serializeAws_restJson1GetMasterAccountCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMasterAccountRequest, GetMasterAccountResponse } from "../models/models_1";
+import { GetMasterAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMasterAccountCommand}.
+ */
 export interface GetMasterAccountCommandInput extends GetMasterAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMasterAccountCommand}.
+ */
 export interface GetMasterAccountCommandOutput extends GetMasterAccountResponse, __MetadataBearer {}
 
 /**
- * <p>Provides the details for the GuardDuty administrator account associated with the current
- *       GuardDuty member account.</p>
+ * <p>Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.</p>
+ *
+ * @deprecated This operation is deprecated, use GetAdministratorAccount instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GuardDutyClient, GetMasterAccountCommand } from "@aws-sdk/client-guardduty"; // ES Modules import
  * // const { GuardDutyClient, GetMasterAccountCommand } = require("@aws-sdk/client-guardduty"); // CommonJS import
+ * // import type { GuardDutyClientConfig } from "@aws-sdk/client-guardduty";
+ * const config = {}; // type is GuardDutyClientConfig
  * const client = new GuardDutyClient(config);
+ * const input = { // GetMasterAccountRequest
+ *   DetectorId: "STRING_VALUE", // required
+ * };
  * const command = new GetMasterAccountCommand(input);
  * const response = await client.send(command);
+ * // { // GetMasterAccountResponse
+ * //   Master: { // Master
+ * //     AccountId: "STRING_VALUE",
+ * //     InvitationId: "STRING_VALUE",
+ * //     RelationshipStatus: "STRING_VALUE",
+ * //     InvitedAt: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetMasterAccountCommandInput - {@link GetMasterAccountCommandInput}
+ * @returns {@link GetMasterAccountCommandOutput}
  * @see {@link GetMasterAccountCommandInput} for command's `input` shape.
  * @see {@link GetMasterAccountCommandOutput} for command's `response` shape.
- * @see {@link GuardDutyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GuardDutyClientResolvedConfig | config} for GuardDutyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A bad request exception object.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error exception object.</p>
+ *
+ * @throws {@link GuardDutyServiceException}
+ * <p>Base exception class for all service exceptions from GuardDuty service.</p>
+ *
+ *
+ * @public
  */
-export class GetMasterAccountCommand extends $Command<
-  GetMasterAccountCommandInput,
-  GetMasterAccountCommandOutput,
-  GuardDutyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMasterAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GuardDutyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMasterAccountCommandInput, GetMasterAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GuardDutyClient";
-    const commandName = "GetMasterAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMasterAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMasterAccountResponse.filterSensitiveLog,
+export class GetMasterAccountCommand extends command<GetMasterAccountCommandInput, GetMasterAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMasterAccount",
+  GetMasterAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMasterAccountRequest;
+      output: GetMasterAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMasterAccountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMasterAccountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMasterAccountCommandOutput> {
-    return deserializeAws_restJson1GetMasterAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMasterAccountCommandInput;
+      output: GetMasterAccountCommandOutput;
+    };
+  };
 }

@@ -1,21 +1,19 @@
-# @aws-sdk/client-savingsplans
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-savingsplans/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-savingsplans)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-savingsplans.svg)](https://www.npmjs.com/package/@aws-sdk/client-savingsplans)
+# @aws-sdk/client-savingsplans
 
 ## Description
 
 AWS SDK for JavaScript Savingsplans Client for Node.js, Browser and React Native.
 
-<p>Savings Plans are a pricing model that offer significant savings on AWS usage (for
-example, on Amazon EC2 instances). You commit to a consistent amount of usage, in USD
-per hour, for a term of 1 or 3 years, and receive a lower price for that usage. For
-more information, see the <a href="https://docs.aws.amazon.com/savingsplans/latest/userguide/">AWS Savings Plans User Guide</a>.</p>
+<p>Savings Plans are a pricing model that offer significant savings on Amazon Web Services usage (for example, on Amazon EC2 instances). You commit to a consistent
+amount of usage per hour, in the specified currency, for a term of one or three years, and
+receive a lower price for that usage. For more information, see the <a href="https://docs.aws.amazon.com/savingsplans/latest/userguide/">Amazon Web Services
+Savings Plans User Guide</a>.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-savingsplans
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-savingsplans`
 - `yarn add @aws-sdk/client-savingsplans`
@@ -27,40 +25,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `SavingsplansClient` and
-the commands you need, for example `CreateSavingsPlanCommand`:
+the commands you need, for example `ListTagsForResourceCommand`:
 
 ```js
 // ES5 example
-const { SavingsplansClient, CreateSavingsPlanCommand } = require("@aws-sdk/client-savingsplans");
+const { SavingsplansClient, ListTagsForResourceCommand } = require("@aws-sdk/client-savingsplans");
 ```
 
 ```ts
 // ES6+ example
-import { SavingsplansClient, CreateSavingsPlanCommand } from "@aws-sdk/client-savingsplans";
+import { SavingsplansClient, ListTagsForResourceCommand } from "@aws-sdk/client-savingsplans";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new SavingsplansClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateSavingsPlanCommand(params);
+const params = { /** input parameters */ };
+const command = new ListTagsForResourceCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -75,26 +71,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -110,31 +89,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Savingsplans` extends `SavingsplansClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`SavingsplansClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-savingsplans";
-const client = new AWS.Savingsplans({ region: "REGION" });
+import { Savingsplans } from "@aws-sdk/client-savingsplans";
+
+const client = new Savingsplans({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createSavingsPlan(params);
+  const data = await client.listTagsForResource(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -142,7 +115,7 @@ try {
 
 // Promises.
 client
-  .createSavingsPlan(params)
+  .listTagsForResource(params)
   .then((data) => {
     // process data.
   })
@@ -150,9 +123,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createSavingsPlan(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listTagsForResource(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -178,12 +151,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -204,3 +179,76 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+CreateSavingsPlan
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/CreateSavingsPlanCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/CreateSavingsPlanCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/CreateSavingsPlanCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteQueuedSavingsPlan
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/DeleteQueuedSavingsPlanCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DeleteQueuedSavingsPlanCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DeleteQueuedSavingsPlanCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSavingsPlanRates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/DescribeSavingsPlanRatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlanRatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlanRatesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSavingsPlans
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/DescribeSavingsPlansCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSavingsPlansOfferingRates
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/DescribeSavingsPlansOfferingRatesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansOfferingRatesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansOfferingRatesCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSavingsPlansOfferings
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/DescribeSavingsPlansOfferingsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansOfferingsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/DescribeSavingsPlansOfferingsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+ReturnSavingsPlan
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/ReturnSavingsPlanCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/ReturnSavingsPlanCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/ReturnSavingsPlanCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/savingsplans/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-savingsplans/Interface/UntagResourceCommandOutput/)
+</details>

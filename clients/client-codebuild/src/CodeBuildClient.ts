@@ -1,157 +1,235 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { BatchDeleteBuildsCommandInput, BatchDeleteBuildsCommandOutput } from "./commands/BatchDeleteBuildsCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultCodeBuildHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  BatchDeleteBuildsCommandInput,
+  BatchDeleteBuildsCommandOutput,
+} from "./commands/BatchDeleteBuildsCommand";
+import type {
   BatchGetBuildBatchesCommandInput,
   BatchGetBuildBatchesCommandOutput,
 } from "./commands/BatchGetBuildBatchesCommand";
-import { BatchGetBuildsCommandInput, BatchGetBuildsCommandOutput } from "./commands/BatchGetBuildsCommand";
-import { BatchGetProjectsCommandInput, BatchGetProjectsCommandOutput } from "./commands/BatchGetProjectsCommand";
-import {
+import type { BatchGetBuildsCommandInput, BatchGetBuildsCommandOutput } from "./commands/BatchGetBuildsCommand";
+import type {
+  BatchGetCommandExecutionsCommandInput,
+  BatchGetCommandExecutionsCommandOutput,
+} from "./commands/BatchGetCommandExecutionsCommand";
+import type { BatchGetFleetsCommandInput, BatchGetFleetsCommandOutput } from "./commands/BatchGetFleetsCommand";
+import type { BatchGetProjectsCommandInput, BatchGetProjectsCommandOutput } from "./commands/BatchGetProjectsCommand";
+import type {
   BatchGetReportGroupsCommandInput,
   BatchGetReportGroupsCommandOutput,
 } from "./commands/BatchGetReportGroupsCommand";
-import { BatchGetReportsCommandInput, BatchGetReportsCommandOutput } from "./commands/BatchGetReportsCommand";
-import { CreateProjectCommandInput, CreateProjectCommandOutput } from "./commands/CreateProjectCommand";
-import { CreateReportGroupCommandInput, CreateReportGroupCommandOutput } from "./commands/CreateReportGroupCommand";
-import { CreateWebhookCommandInput, CreateWebhookCommandOutput } from "./commands/CreateWebhookCommand";
-import { DeleteBuildBatchCommandInput, DeleteBuildBatchCommandOutput } from "./commands/DeleteBuildBatchCommand";
-import { DeleteProjectCommandInput, DeleteProjectCommandOutput } from "./commands/DeleteProjectCommand";
-import { DeleteReportCommandInput, DeleteReportCommandOutput } from "./commands/DeleteReportCommand";
-import { DeleteReportGroupCommandInput, DeleteReportGroupCommandOutput } from "./commands/DeleteReportGroupCommand";
-import {
+import type { BatchGetReportsCommandInput, BatchGetReportsCommandOutput } from "./commands/BatchGetReportsCommand";
+import type {
+  BatchGetSandboxesCommandInput,
+  BatchGetSandboxesCommandOutput,
+} from "./commands/BatchGetSandboxesCommand";
+import type { CreateFleetCommandInput, CreateFleetCommandOutput } from "./commands/CreateFleetCommand";
+import type { CreateProjectCommandInput, CreateProjectCommandOutput } from "./commands/CreateProjectCommand";
+import type {
+  CreateReportGroupCommandInput,
+  CreateReportGroupCommandOutput,
+} from "./commands/CreateReportGroupCommand";
+import type { CreateWebhookCommandInput, CreateWebhookCommandOutput } from "./commands/CreateWebhookCommand";
+import type { DeleteBuildBatchCommandInput, DeleteBuildBatchCommandOutput } from "./commands/DeleteBuildBatchCommand";
+import type { DeleteFleetCommandInput, DeleteFleetCommandOutput } from "./commands/DeleteFleetCommand";
+import type { DeleteProjectCommandInput, DeleteProjectCommandOutput } from "./commands/DeleteProjectCommand";
+import type { DeleteReportCommandInput, DeleteReportCommandOutput } from "./commands/DeleteReportCommand";
+import type {
+  DeleteReportGroupCommandInput,
+  DeleteReportGroupCommandOutput,
+} from "./commands/DeleteReportGroupCommand";
+import type {
   DeleteResourcePolicyCommandInput,
   DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
-import {
+import type {
   DeleteSourceCredentialsCommandInput,
   DeleteSourceCredentialsCommandOutput,
 } from "./commands/DeleteSourceCredentialsCommand";
-import { DeleteWebhookCommandInput, DeleteWebhookCommandOutput } from "./commands/DeleteWebhookCommand";
-import {
+import type { DeleteWebhookCommandInput, DeleteWebhookCommandOutput } from "./commands/DeleteWebhookCommand";
+import type {
   DescribeCodeCoveragesCommandInput,
   DescribeCodeCoveragesCommandOutput,
 } from "./commands/DescribeCodeCoveragesCommand";
-import { DescribeTestCasesCommandInput, DescribeTestCasesCommandOutput } from "./commands/DescribeTestCasesCommand";
-import {
+import type {
+  DescribeTestCasesCommandInput,
+  DescribeTestCasesCommandOutput,
+} from "./commands/DescribeTestCasesCommand";
+import type {
   GetReportGroupTrendCommandInput,
   GetReportGroupTrendCommandOutput,
 } from "./commands/GetReportGroupTrendCommand";
-import { GetResourcePolicyCommandInput, GetResourcePolicyCommandOutput } from "./commands/GetResourcePolicyCommand";
-import {
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type {
   ImportSourceCredentialsCommandInput,
   ImportSourceCredentialsCommandOutput,
 } from "./commands/ImportSourceCredentialsCommand";
-import {
+import type {
   InvalidateProjectCacheCommandInput,
   InvalidateProjectCacheCommandOutput,
 } from "./commands/InvalidateProjectCacheCommand";
-import { ListBuildBatchesCommandInput, ListBuildBatchesCommandOutput } from "./commands/ListBuildBatchesCommand";
-import {
+import type { ListBuildBatchesCommandInput, ListBuildBatchesCommandOutput } from "./commands/ListBuildBatchesCommand";
+import type {
   ListBuildBatchesForProjectCommandInput,
   ListBuildBatchesForProjectCommandOutput,
 } from "./commands/ListBuildBatchesForProjectCommand";
-import { ListBuildsCommandInput, ListBuildsCommandOutput } from "./commands/ListBuildsCommand";
-import {
+import type { ListBuildsCommandInput, ListBuildsCommandOutput } from "./commands/ListBuildsCommand";
+import type {
   ListBuildsForProjectCommandInput,
   ListBuildsForProjectCommandOutput,
 } from "./commands/ListBuildsForProjectCommand";
-import {
+import type {
+  ListCommandExecutionsForSandboxCommandInput,
+  ListCommandExecutionsForSandboxCommandOutput,
+} from "./commands/ListCommandExecutionsForSandboxCommand";
+import type {
   ListCuratedEnvironmentImagesCommandInput,
   ListCuratedEnvironmentImagesCommandOutput,
 } from "./commands/ListCuratedEnvironmentImagesCommand";
-import { ListProjectsCommandInput, ListProjectsCommandOutput } from "./commands/ListProjectsCommand";
-import { ListReportGroupsCommandInput, ListReportGroupsCommandOutput } from "./commands/ListReportGroupsCommand";
-import { ListReportsCommandInput, ListReportsCommandOutput } from "./commands/ListReportsCommand";
-import {
+import type { ListFleetsCommandInput, ListFleetsCommandOutput } from "./commands/ListFleetsCommand";
+import type { ListProjectsCommandInput, ListProjectsCommandOutput } from "./commands/ListProjectsCommand";
+import type { ListReportGroupsCommandInput, ListReportGroupsCommandOutput } from "./commands/ListReportGroupsCommand";
+import type { ListReportsCommandInput, ListReportsCommandOutput } from "./commands/ListReportsCommand";
+import type {
   ListReportsForReportGroupCommandInput,
   ListReportsForReportGroupCommandOutput,
 } from "./commands/ListReportsForReportGroupCommand";
-import { ListSharedProjectsCommandInput, ListSharedProjectsCommandOutput } from "./commands/ListSharedProjectsCommand";
-import {
+import type { ListSandboxesCommandInput, ListSandboxesCommandOutput } from "./commands/ListSandboxesCommand";
+import type {
+  ListSandboxesForProjectCommandInput,
+  ListSandboxesForProjectCommandOutput,
+} from "./commands/ListSandboxesForProjectCommand";
+import type {
+  ListSharedProjectsCommandInput,
+  ListSharedProjectsCommandOutput,
+} from "./commands/ListSharedProjectsCommand";
+import type {
   ListSharedReportGroupsCommandInput,
   ListSharedReportGroupsCommandOutput,
 } from "./commands/ListSharedReportGroupsCommand";
-import {
+import type {
   ListSourceCredentialsCommandInput,
   ListSourceCredentialsCommandOutput,
 } from "./commands/ListSourceCredentialsCommand";
-import { PutResourcePolicyCommandInput, PutResourcePolicyCommandOutput } from "./commands/PutResourcePolicyCommand";
-import { RetryBuildBatchCommandInput, RetryBuildBatchCommandOutput } from "./commands/RetryBuildBatchCommand";
-import { RetryBuildCommandInput, RetryBuildCommandOutput } from "./commands/RetryBuildCommand";
-import { StartBuildBatchCommandInput, StartBuildBatchCommandOutput } from "./commands/StartBuildBatchCommand";
-import { StartBuildCommandInput, StartBuildCommandOutput } from "./commands/StartBuildCommand";
-import { StopBuildBatchCommandInput, StopBuildBatchCommandOutput } from "./commands/StopBuildBatchCommand";
-import { StopBuildCommandInput, StopBuildCommandOutput } from "./commands/StopBuildCommand";
-import { UpdateProjectCommandInput, UpdateProjectCommandOutput } from "./commands/UpdateProjectCommand";
-import {
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type { RetryBuildBatchCommandInput, RetryBuildBatchCommandOutput } from "./commands/RetryBuildBatchCommand";
+import type { RetryBuildCommandInput, RetryBuildCommandOutput } from "./commands/RetryBuildCommand";
+import type { StartBuildBatchCommandInput, StartBuildBatchCommandOutput } from "./commands/StartBuildBatchCommand";
+import type { StartBuildCommandInput, StartBuildCommandOutput } from "./commands/StartBuildCommand";
+import type {
+  StartCommandExecutionCommandInput,
+  StartCommandExecutionCommandOutput,
+} from "./commands/StartCommandExecutionCommand";
+import type { StartSandboxCommandInput, StartSandboxCommandOutput } from "./commands/StartSandboxCommand";
+import type {
+  StartSandboxConnectionCommandInput,
+  StartSandboxConnectionCommandOutput,
+} from "./commands/StartSandboxConnectionCommand";
+import type { StopBuildBatchCommandInput, StopBuildBatchCommandOutput } from "./commands/StopBuildBatchCommand";
+import type { StopBuildCommandInput, StopBuildCommandOutput } from "./commands/StopBuildCommand";
+import type { StopSandboxCommandInput, StopSandboxCommandOutput } from "./commands/StopSandboxCommand";
+import type { UpdateFleetCommandInput, UpdateFleetCommandOutput } from "./commands/UpdateFleetCommand";
+import type { UpdateProjectCommandInput, UpdateProjectCommandOutput } from "./commands/UpdateProjectCommand";
+import type {
   UpdateProjectVisibilityCommandInput,
   UpdateProjectVisibilityCommandOutput,
 } from "./commands/UpdateProjectVisibilityCommand";
-import { UpdateReportGroupCommandInput, UpdateReportGroupCommandOutput } from "./commands/UpdateReportGroupCommand";
-import { UpdateWebhookCommandInput, UpdateWebhookCommandOutput } from "./commands/UpdateWebhookCommand";
+import type {
+  UpdateReportGroupCommandInput,
+  UpdateReportGroupCommandOutput,
+} from "./commands/UpdateReportGroupCommand";
+import type { UpdateWebhookCommandInput, UpdateWebhookCommandOutput } from "./commands/UpdateWebhookCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | BatchDeleteBuildsCommandInput
   | BatchGetBuildBatchesCommandInput
   | BatchGetBuildsCommandInput
+  | BatchGetCommandExecutionsCommandInput
+  | BatchGetFleetsCommandInput
   | BatchGetProjectsCommandInput
   | BatchGetReportGroupsCommandInput
   | BatchGetReportsCommandInput
+  | BatchGetSandboxesCommandInput
+  | CreateFleetCommandInput
   | CreateProjectCommandInput
   | CreateReportGroupCommandInput
   | CreateWebhookCommandInput
   | DeleteBuildBatchCommandInput
+  | DeleteFleetCommandInput
   | DeleteProjectCommandInput
   | DeleteReportCommandInput
   | DeleteReportGroupCommandInput
@@ -168,11 +246,15 @@ export type ServiceInputTypes =
   | ListBuildBatchesForProjectCommandInput
   | ListBuildsCommandInput
   | ListBuildsForProjectCommandInput
+  | ListCommandExecutionsForSandboxCommandInput
   | ListCuratedEnvironmentImagesCommandInput
+  | ListFleetsCommandInput
   | ListProjectsCommandInput
   | ListReportGroupsCommandInput
   | ListReportsCommandInput
   | ListReportsForReportGroupCommandInput
+  | ListSandboxesCommandInput
+  | ListSandboxesForProjectCommandInput
   | ListSharedProjectsCommandInput
   | ListSharedReportGroupsCommandInput
   | ListSourceCredentialsCommandInput
@@ -181,24 +263,37 @@ export type ServiceInputTypes =
   | RetryBuildCommandInput
   | StartBuildBatchCommandInput
   | StartBuildCommandInput
+  | StartCommandExecutionCommandInput
+  | StartSandboxCommandInput
+  | StartSandboxConnectionCommandInput
   | StopBuildBatchCommandInput
   | StopBuildCommandInput
+  | StopSandboxCommandInput
+  | UpdateFleetCommandInput
   | UpdateProjectCommandInput
   | UpdateProjectVisibilityCommandInput
   | UpdateReportGroupCommandInput
   | UpdateWebhookCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | BatchDeleteBuildsCommandOutput
   | BatchGetBuildBatchesCommandOutput
   | BatchGetBuildsCommandOutput
+  | BatchGetCommandExecutionsCommandOutput
+  | BatchGetFleetsCommandOutput
   | BatchGetProjectsCommandOutput
   | BatchGetReportGroupsCommandOutput
   | BatchGetReportsCommandOutput
+  | BatchGetSandboxesCommandOutput
+  | CreateFleetCommandOutput
   | CreateProjectCommandOutput
   | CreateReportGroupCommandOutput
   | CreateWebhookCommandOutput
   | DeleteBuildBatchCommandOutput
+  | DeleteFleetCommandOutput
   | DeleteProjectCommandOutput
   | DeleteReportCommandOutput
   | DeleteReportGroupCommandOutput
@@ -215,11 +310,15 @@ export type ServiceOutputTypes =
   | ListBuildBatchesForProjectCommandOutput
   | ListBuildsCommandOutput
   | ListBuildsForProjectCommandOutput
+  | ListCommandExecutionsForSandboxCommandOutput
   | ListCuratedEnvironmentImagesCommandOutput
+  | ListFleetsCommandOutput
   | ListProjectsCommandOutput
   | ListReportGroupsCommandOutput
   | ListReportsCommandOutput
   | ListReportsForReportGroupCommandOutput
+  | ListSandboxesCommandOutput
+  | ListSandboxesForProjectCommandOutput
   | ListSharedProjectsCommandOutput
   | ListSharedReportGroupsCommandOutput
   | ListSourceCredentialsCommandOutput
@@ -228,25 +327,33 @@ export type ServiceOutputTypes =
   | RetryBuildCommandOutput
   | StartBuildBatchCommandOutput
   | StartBuildCommandOutput
+  | StartCommandExecutionCommandOutput
+  | StartSandboxCommandOutput
+  | StartSandboxConnectionCommandOutput
   | StopBuildBatchCommandOutput
   | StopBuildCommandOutput
+  | StopSandboxCommandOutput
+  | UpdateFleetCommandOutput
   | UpdateProjectCommandOutput
   | UpdateProjectVisibilityCommandOutput
   | UpdateReportGroupCommandOutput
   | UpdateWebhookCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -258,7 +365,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -297,25 +404,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -328,73 +426,123 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type CodeBuildClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of CodeBuildClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type CodeBuildClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of CodeBuildClient class constructor that set the region, credentials and other options.
  */
 export interface CodeBuildClientConfig extends CodeBuildClientConfigType {}
 
-type CodeBuildClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of CodeBuildClient class. This is resolved and normalized from the {@link CodeBuildClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type CodeBuildClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of CodeBuildClient class. This is resolved and normalized from the {@link CodeBuildClientConfig | constructor configuration interface}.
  */
 export interface CodeBuildClientResolvedConfig extends CodeBuildClientResolvedConfigType {}
 
 /**
  * <fullname>CodeBuild</fullname>
- *         <p>CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code,
+ *          <p>CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code,
  *             runs unit tests, and produces artifacts that are ready to deploy. CodeBuild eliminates the
  *             need to provision, manage, and scale your own build servers. It provides prepackaged
  *             build environments for the most popular programming languages and build tools, such as
  *             Apache Maven, Gradle, and more. You can also fully customize build environments in CodeBuild
  *             to use your own build tools. CodeBuild scales automatically to meet peak build requests. You
  *             pay only for the build time you consume. For more information about CodeBuild, see the <i>
- *                 <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html">CodeBuild User
+ *                <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html">CodeBuild User
  *                     Guide</a>.</i>
  *          </p>
+ * @public
  */
 export class CodeBuildClient extends __Client<
   __HttpHandlerOptions,
@@ -407,22 +555,36 @@ export class CodeBuildClient extends __Client<
    */
   readonly config: CodeBuildClientResolvedConfig;
 
-  constructor(configuration: CodeBuildClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<CodeBuildClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultCodeBuildHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: CodeBuildClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

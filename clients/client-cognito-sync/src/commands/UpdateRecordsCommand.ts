@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { UpdateRecordsRequest, UpdateRecordsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRecordsCommand,
-  serializeAws_restJson1UpdateRecordsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRecordsRequest, UpdateRecordsResponse } from "../models/models_0";
+import { UpdateRecords$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRecordsCommand}.
+ */
 export interface UpdateRecordsCommandInput extends UpdateRecordsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRecordsCommand}.
+ */
 export interface UpdateRecordsCommandOutput extends UpdateRecordsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,104 @@ export interface UpdateRecordsCommandOutput extends UpdateRecordsResponse, __Met
  * ```javascript
  * import { CognitoSyncClient, UpdateRecordsCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, UpdateRecordsCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // UpdateRecordsRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ *   IdentityId: "STRING_VALUE", // required
+ *   DatasetName: "STRING_VALUE", // required
+ *   DeviceId: "STRING_VALUE",
+ *   RecordPatches: [ // RecordPatchList
+ *     { // RecordPatch
+ *       Op: "replace" || "remove", // required
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *       SyncCount: Number("long"), // required
+ *       DeviceLastModifiedDate: new Date("TIMESTAMP"),
+ *     },
+ *   ],
+ *   SyncSessionToken: "STRING_VALUE", // required
+ *   ClientContext: "STRING_VALUE",
+ * };
  * const command = new UpdateRecordsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRecordsResponse
+ * //   Records: [ // RecordList
+ * //     { // Record
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //       SyncCount: Number("long"),
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       LastModifiedBy: "STRING_VALUE",
+ * //       DeviceLastModifiedDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateRecordsCommandInput - {@link UpdateRecordsCommandInput}
+ * @returns {@link UpdateRecordsCommandOutput}
  * @see {@link UpdateRecordsCommandInput} for command's `input` shape.
  * @see {@link UpdateRecordsCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidLambdaFunctionOutputException} (client fault)
+ *  <p>The AWS Lambda function returned invalid output or an exception.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link LambdaThrottledException} (client fault)
+ *  <p>AWS Lambda throttled your account, please contact AWS Support</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  Thrown when the limit on the number of objects or
+ *       operations has been exceeded.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  Thrown if an update can't be applied because
+ *       the resource was changed by another call and this would result in a conflict.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Thrown if the request is
+ *       throttled.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRecordsCommand extends $Command<
-  UpdateRecordsCommandInput,
-  UpdateRecordsCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRecordsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRecordsCommandInput, UpdateRecordsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "UpdateRecordsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRecordsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRecordsResponse.filterSensitiveLog,
+export class UpdateRecordsCommand extends command<UpdateRecordsCommandInput, UpdateRecordsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRecords",
+  UpdateRecords$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRecordsRequest;
+      output: UpdateRecordsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRecordsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRecordsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRecordsCommandOutput> {
-    return deserializeAws_restJson1UpdateRecordsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRecordsCommandInput;
+      output: UpdateRecordsCommandOutput;
+    };
+  };
 }

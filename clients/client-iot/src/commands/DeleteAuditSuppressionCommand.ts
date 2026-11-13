@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { DeleteAuditSuppressionRequest, DeleteAuditSuppressionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAuditSuppressionCommand,
-  serializeAws_restJson1DeleteAuditSuppressionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAuditSuppressionRequest, DeleteAuditSuppressionResponse } from "../models/models_0";
+import { DeleteAuditSuppression$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAuditSuppressionCommand}.
+ */
 export interface DeleteAuditSuppressionCommandInput extends DeleteAuditSuppressionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAuditSuppressionCommand}.
+ */
 export interface DeleteAuditSuppressionCommandOutput extends DeleteAuditSuppressionResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,73 @@ export interface DeleteAuditSuppressionCommandOutput extends DeleteAuditSuppress
  * ```javascript
  * import { IoTClient, DeleteAuditSuppressionCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DeleteAuditSuppressionCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DeleteAuditSuppressionRequest
+ *   checkName: "STRING_VALUE", // required
+ *   resourceIdentifier: { // ResourceIdentifier
+ *     deviceCertificateId: "STRING_VALUE",
+ *     caCertificateId: "STRING_VALUE",
+ *     cognitoIdentityPoolId: "STRING_VALUE",
+ *     clientId: "STRING_VALUE",
+ *     policyVersionIdentifier: { // PolicyVersionIdentifier
+ *       policyName: "STRING_VALUE",
+ *       policyVersionId: "STRING_VALUE",
+ *     },
+ *     account: "STRING_VALUE",
+ *     iamRoleArn: "STRING_VALUE",
+ *     roleAliasArn: "STRING_VALUE",
+ *     issuerCertificateIdentifier: { // IssuerCertificateIdentifier
+ *       issuerCertificateSubject: "STRING_VALUE",
+ *       issuerId: "STRING_VALUE",
+ *       issuerCertificateSerialNumber: "STRING_VALUE",
+ *     },
+ *     deviceCertificateArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new DeleteAuditSuppressionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAuditSuppressionCommandInput - {@link DeleteAuditSuppressionCommandInput}
+ * @returns {@link DeleteAuditSuppressionCommandOutput}
  * @see {@link DeleteAuditSuppressionCommandInput} for command's `input` shape.
  * @see {@link DeleteAuditSuppressionCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAuditSuppressionCommand extends $Command<
-  DeleteAuditSuppressionCommandInput,
-  DeleteAuditSuppressionCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAuditSuppressionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAuditSuppressionCommandInput, DeleteAuditSuppressionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DeleteAuditSuppressionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAuditSuppressionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAuditSuppressionResponse.filterSensitiveLog,
+export class DeleteAuditSuppressionCommand extends command<DeleteAuditSuppressionCommandInput, DeleteAuditSuppressionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAuditSuppression",
+  DeleteAuditSuppression$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAuditSuppressionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAuditSuppressionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAuditSuppressionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAuditSuppressionCommandOutput> {
-    return deserializeAws_restJson1DeleteAuditSuppressionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAuditSuppressionCommandInput;
+      output: DeleteAuditSuppressionCommandOutput;
+    };
+  };
 }

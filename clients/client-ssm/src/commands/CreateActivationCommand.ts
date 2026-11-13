@@ -1,104 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateActivationRequest, CreateActivationResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateActivationCommand,
-  serializeAws_json1_1CreateActivationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateActivationRequest, CreateActivationResult } from "../models/models_0";
+import { CreateActivation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateActivationCommand}.
+ */
 export interface CreateActivationCommandInput extends CreateActivationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateActivationCommand}.
+ */
 export interface CreateActivationCommandOutput extends CreateActivationResult, __MetadataBearer {}
 
 /**
  * <p>Generates an activation code and activation ID you can use to register your on-premises
- *    server or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it
- *    possible to manage them using Systems Manager capabilities. You use the activation code and ID when
+ *    servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with
+ *    Systems Manager makes it possible to manage them using Systems Manager tools. You use the activation code and ID when
  *    installing SSM Agent on machines in your hybrid environment. For more information about
- *    requirements for managing on-premises instances and VMs using Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html">Setting up
- *     Amazon Web Services Systems Manager for hybrid environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
+ *    requirements for managing on-premises machines using Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html">Using Amazon Web Services Systems Manager in
+ *     hybrid and multicloud environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
  *          <note>
- *             <p>On-premises servers or VMs that are registered with Systems Manager and Amazon Elastic Compute Cloud (Amazon EC2) instances
- *     that you manage with Systems Manager are all called <i>managed instances</i>.</p>
+ *             <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are
+ *     configured for Systems Manager are all called <i>managed nodes</i>.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, CreateActivationCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, CreateActivationCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // CreateActivationRequest
+ *   Description: "STRING_VALUE",
+ *   DefaultInstanceName: "STRING_VALUE",
+ *   IamRole: "STRING_VALUE", // required
+ *   RegistrationLimit: Number("int"),
+ *   ExpirationDate: new Date("TIMESTAMP"),
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   RegistrationMetadata: [ // RegistrationMetadataList
+ *     { // RegistrationMetadataItem
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateActivationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateActivationResult
+ * //   ActivationId: "STRING_VALUE",
+ * //   ActivationCode: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateActivationCommandInput - {@link CreateActivationCommandInput}
+ * @returns {@link CreateActivationCommandOutput}
  * @see {@link CreateActivationCommandInput} for command's `input` shape.
  * @see {@link CreateActivationCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidParameters} (client fault)
+ *  <p>You must specify values for all required parameters in the Amazon Web Services Systems Manager document (SSM
+ *    document). You can only supply values to parameters defined in the SSM document.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class CreateActivationCommand extends $Command<
-  CreateActivationCommandInput,
-  CreateActivationCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateActivationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateActivationCommandInput, CreateActivationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "CreateActivationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateActivationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateActivationResult.filterSensitiveLog,
+export class CreateActivationCommand extends command<CreateActivationCommandInput, CreateActivationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateActivation",
+  CreateActivation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateActivationRequest;
+      output: CreateActivationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateActivationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateActivationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateActivationCommandOutput> {
-    return deserializeAws_json1_1CreateActivationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateActivationCommandInput;
+      output: CreateActivationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import { AddApplicationInputRequest, AddApplicationInputResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddApplicationInputCommand,
-  serializeAws_json1_1AddApplicationInputCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddApplicationInputRequest, AddApplicationInputResponse } from "../models/models_0";
+import { AddApplicationInput$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddApplicationInputCommand}.
+ */
 export interface AddApplicationInputCommandInput extends AddApplicationInputRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddApplicationInputCommand}.
+ */
 export interface AddApplicationInputCommandOutput extends AddApplicationInputResponse, __MetadataBearer {}
 
 /**
@@ -44,68 +45,106 @@ export interface AddApplicationInputCommandOutput extends AddApplicationInputRes
  * ```javascript
  * import { KinesisAnalyticsClient, AddApplicationInputCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, AddApplicationInputCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // AddApplicationInputRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   CurrentApplicationVersionId: Number("long"), // required
+ *   Input: { // Input
+ *     NamePrefix: "STRING_VALUE", // required
+ *     InputProcessingConfiguration: { // InputProcessingConfiguration
+ *       InputLambdaProcessor: { // InputLambdaProcessor
+ *         ResourceARN: "STRING_VALUE", // required
+ *         RoleARN: "STRING_VALUE", // required
+ *       },
+ *     },
+ *     KinesisStreamsInput: { // KinesisStreamsInput
+ *       ResourceARN: "STRING_VALUE", // required
+ *       RoleARN: "STRING_VALUE", // required
+ *     },
+ *     KinesisFirehoseInput: { // KinesisFirehoseInput
+ *       ResourceARN: "STRING_VALUE", // required
+ *       RoleARN: "STRING_VALUE", // required
+ *     },
+ *     InputParallelism: { // InputParallelism
+ *       Count: Number("int"),
+ *     },
+ *     InputSchema: { // SourceSchema
+ *       RecordFormat: { // RecordFormat
+ *         RecordFormatType: "JSON" || "CSV", // required
+ *         MappingParameters: { // MappingParameters
+ *           JSONMappingParameters: { // JSONMappingParameters
+ *             RecordRowPath: "STRING_VALUE", // required
+ *           },
+ *           CSVMappingParameters: { // CSVMappingParameters
+ *             RecordRowDelimiter: "STRING_VALUE", // required
+ *             RecordColumnDelimiter: "STRING_VALUE", // required
+ *           },
+ *         },
+ *       },
+ *       RecordEncoding: "STRING_VALUE",
+ *       RecordColumns: [ // RecordColumns // required
+ *         { // RecordColumn
+ *           Name: "STRING_VALUE", // required
+ *           Mapping: "STRING_VALUE",
+ *           SqlType: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   },
+ * };
  * const command = new AddApplicationInputCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AddApplicationInputCommandInput - {@link AddApplicationInputCommandInput}
+ * @returns {@link AddApplicationInputCommandOutput}
  * @see {@link AddApplicationInputCommandInput} for command's `input` shape.
  * @see {@link AddApplicationInputCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link CodeValidationException} (client fault)
+ *  <p>User-provided application code (query) is invalid. This can be a simple syntax error.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>Specified input parameter value is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>Application is not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Specified application can't be found.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation. </p>
+ *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class AddApplicationInputCommand extends $Command<
-  AddApplicationInputCommandInput,
-  AddApplicationInputCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddApplicationInputCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddApplicationInputCommandInput, AddApplicationInputCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "AddApplicationInputCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddApplicationInputRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddApplicationInputResponse.filterSensitiveLog,
+export class AddApplicationInputCommand extends command<AddApplicationInputCommandInput, AddApplicationInputCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddApplicationInput",
+  AddApplicationInput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationInputRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddApplicationInputCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddApplicationInputCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddApplicationInputCommandOutput> {
-    return deserializeAws_json1_1AddApplicationInputCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddApplicationInputCommandInput;
+      output: AddApplicationInputCommandOutput;
+    };
+  };
 }

@@ -1,102 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyVpcTenancyRequest, ModifyVpcTenancyResult } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyVpcTenancyCommand,
-  serializeAws_ec2ModifyVpcTenancyCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyVpcTenancyRequest, ModifyVpcTenancyResult } from "../models/models_7";
+import { ModifyVpcTenancy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyVpcTenancyCommand}.
+ */
 export interface ModifyVpcTenancyCommandInput extends ModifyVpcTenancyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyVpcTenancyCommand}.
+ */
 export interface ModifyVpcTenancyCommandOutput extends ModifyVpcTenancyResult, __MetadataBearer {}
 
 /**
  * <p>Modifies the instance tenancy attribute of the specified VPC. You can change the
  *             instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the
  *             instance tenancy attribute to <code>dedicated</code>.</p>
- *         <p>After you modify the tenancy of the VPC, any new instances that you launch into the
+ *          <p>After you modify the tenancy of the VPC, any new instances that you launch into the
  *             VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch.
  *             The tenancy of any existing instances in the VPC is not affected.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the
- * 				<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the
+ * 				<i>Amazon EC2 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifyVpcTenancyCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyVpcTenancyCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyVpcTenancyRequest
+ *   VpcId: "STRING_VALUE", // required
+ *   InstanceTenancy: "default", // required
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyVpcTenancyCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyVpcTenancyResult
+ * //   ReturnValue: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyVpcTenancyCommandInput - {@link ModifyVpcTenancyCommandInput}
+ * @returns {@link ModifyVpcTenancyCommandOutput}
  * @see {@link ModifyVpcTenancyCommandInput} for command's `input` shape.
  * @see {@link ModifyVpcTenancyCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyVpcTenancyCommand extends $Command<
-  ModifyVpcTenancyCommandInput,
-  ModifyVpcTenancyCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyVpcTenancyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyVpcTenancyCommandInput, ModifyVpcTenancyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyVpcTenancyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyVpcTenancyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyVpcTenancyResult.filterSensitiveLog,
+export class ModifyVpcTenancyCommand extends command<ModifyVpcTenancyCommandInput, ModifyVpcTenancyCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyVpcTenancy",
+  ModifyVpcTenancy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyVpcTenancyRequest;
+      output: ModifyVpcTenancyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyVpcTenancyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyVpcTenancyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyVpcTenancyCommandOutput> {
-    return deserializeAws_ec2ModifyVpcTenancyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyVpcTenancyCommandInput;
+      output: ModifyVpcTenancyCommandOutput;
+    };
+  };
 }

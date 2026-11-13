@@ -1,745 +1,754 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
   CreateClusterCommand,
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
 } from "./commands/CreateClusterCommand";
 import {
+  type CreateControlPanelCommandInput,
+  type CreateControlPanelCommandOutput,
   CreateControlPanelCommand,
-  CreateControlPanelCommandInput,
-  CreateControlPanelCommandOutput,
 } from "./commands/CreateControlPanelCommand";
 import {
+  type CreateRoutingControlCommandInput,
+  type CreateRoutingControlCommandOutput,
   CreateRoutingControlCommand,
-  CreateRoutingControlCommandInput,
-  CreateRoutingControlCommandOutput,
 } from "./commands/CreateRoutingControlCommand";
 import {
+  type CreateSafetyRuleCommandInput,
+  type CreateSafetyRuleCommandOutput,
   CreateSafetyRuleCommand,
-  CreateSafetyRuleCommandInput,
-  CreateSafetyRuleCommandOutput,
 } from "./commands/CreateSafetyRuleCommand";
 import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
   DeleteClusterCommand,
-  DeleteClusterCommandInput,
-  DeleteClusterCommandOutput,
 } from "./commands/DeleteClusterCommand";
 import {
+  type DeleteControlPanelCommandInput,
+  type DeleteControlPanelCommandOutput,
   DeleteControlPanelCommand,
-  DeleteControlPanelCommandInput,
-  DeleteControlPanelCommandOutput,
 } from "./commands/DeleteControlPanelCommand";
 import {
+  type DeleteRoutingControlCommandInput,
+  type DeleteRoutingControlCommandOutput,
   DeleteRoutingControlCommand,
-  DeleteRoutingControlCommandInput,
-  DeleteRoutingControlCommandOutput,
 } from "./commands/DeleteRoutingControlCommand";
 import {
+  type DeleteSafetyRuleCommandInput,
+  type DeleteSafetyRuleCommandOutput,
   DeleteSafetyRuleCommand,
-  DeleteSafetyRuleCommandInput,
-  DeleteSafetyRuleCommandOutput,
 } from "./commands/DeleteSafetyRuleCommand";
 import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
   DescribeClusterCommand,
-  DescribeClusterCommandInput,
-  DescribeClusterCommandOutput,
 } from "./commands/DescribeClusterCommand";
 import {
+  type DescribeControlPanelCommandInput,
+  type DescribeControlPanelCommandOutput,
   DescribeControlPanelCommand,
-  DescribeControlPanelCommandInput,
-  DescribeControlPanelCommandOutput,
 } from "./commands/DescribeControlPanelCommand";
 import {
+  type DescribeRoutingControlCommandInput,
+  type DescribeRoutingControlCommandOutput,
   DescribeRoutingControlCommand,
-  DescribeRoutingControlCommandInput,
-  DescribeRoutingControlCommandOutput,
 } from "./commands/DescribeRoutingControlCommand";
 import {
+  type DescribeSafetyRuleCommandInput,
+  type DescribeSafetyRuleCommandOutput,
   DescribeSafetyRuleCommand,
-  DescribeSafetyRuleCommandInput,
-  DescribeSafetyRuleCommandOutput,
 } from "./commands/DescribeSafetyRuleCommand";
 import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type ListAssociatedRoute53HealthChecksCommandInput,
+  type ListAssociatedRoute53HealthChecksCommandOutput,
   ListAssociatedRoute53HealthChecksCommand,
-  ListAssociatedRoute53HealthChecksCommandInput,
-  ListAssociatedRoute53HealthChecksCommandOutput,
 } from "./commands/ListAssociatedRoute53HealthChecksCommand";
 import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
   ListClustersCommand,
-  ListClustersCommandInput,
-  ListClustersCommandOutput,
 } from "./commands/ListClustersCommand";
 import {
+  type ListControlPanelsCommandInput,
+  type ListControlPanelsCommandOutput,
   ListControlPanelsCommand,
-  ListControlPanelsCommandInput,
-  ListControlPanelsCommandOutput,
 } from "./commands/ListControlPanelsCommand";
 import {
+  type ListRoutingControlsCommandInput,
+  type ListRoutingControlsCommandOutput,
   ListRoutingControlsCommand,
-  ListRoutingControlsCommandInput,
-  ListRoutingControlsCommandOutput,
 } from "./commands/ListRoutingControlsCommand";
 import {
+  type ListSafetyRulesCommandInput,
+  type ListSafetyRulesCommandOutput,
   ListSafetyRulesCommand,
-  ListSafetyRulesCommandInput,
-  ListSafetyRulesCommandOutput,
 } from "./commands/ListSafetyRulesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateClusterCommandInput,
+  type UpdateClusterCommandOutput,
+  UpdateClusterCommand,
+} from "./commands/UpdateClusterCommand";
+import {
+  type UpdateControlPanelCommandInput,
+  type UpdateControlPanelCommandOutput,
   UpdateControlPanelCommand,
-  UpdateControlPanelCommandInput,
-  UpdateControlPanelCommandOutput,
 } from "./commands/UpdateControlPanelCommand";
 import {
+  type UpdateRoutingControlCommandInput,
+  type UpdateRoutingControlCommandOutput,
   UpdateRoutingControlCommand,
-  UpdateRoutingControlCommandInput,
-  UpdateRoutingControlCommandOutput,
 } from "./commands/UpdateRoutingControlCommand";
 import {
+  type UpdateSafetyRuleCommandInput,
+  type UpdateSafetyRuleCommandOutput,
   UpdateSafetyRuleCommand,
-  UpdateSafetyRuleCommandInput,
-  UpdateSafetyRuleCommandOutput,
 } from "./commands/UpdateSafetyRuleCommand";
+import type { ResourceNotFoundException } from "./models/errors";
+import type {
+  Route53RecoveryControlConfigServiceException,
+} from "./models/Route53RecoveryControlConfigServiceException";
+import { paginateListAssociatedRoute53HealthChecks } from "./pagination/ListAssociatedRoute53HealthChecksPaginator";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListControlPanels } from "./pagination/ListControlPanelsPaginator";
+import { paginateListRoutingControls } from "./pagination/ListRoutingControlsPaginator";
+import { paginateListSafetyRules } from "./pagination/ListSafetyRulesPaginator";
 import { Route53RecoveryControlConfigClient } from "./Route53RecoveryControlConfigClient";
+import { waitUntilClusterCreated } from "./waiters/waitForClusterCreated";
+import { waitUntilClusterDeleted } from "./waiters/waitForClusterDeleted";
+import { waitUntilControlPanelCreated } from "./waiters/waitForControlPanelCreated";
+import { waitUntilControlPanelDeleted } from "./waiters/waitForControlPanelDeleted";
+import { waitUntilRoutingControlCreated } from "./waiters/waitForRoutingControlCreated";
+import { waitUntilRoutingControlDeleted } from "./waiters/waitForRoutingControlDeleted";
+
+const commands = {
+  CreateClusterCommand,
+  CreateControlPanelCommand,
+  CreateRoutingControlCommand,
+  CreateSafetyRuleCommand,
+  DeleteClusterCommand,
+  DeleteControlPanelCommand,
+  DeleteRoutingControlCommand,
+  DeleteSafetyRuleCommand,
+  DescribeClusterCommand,
+  DescribeControlPanelCommand,
+  DescribeRoutingControlCommand,
+  DescribeSafetyRuleCommand,
+  GetResourcePolicyCommand,
+  ListAssociatedRoute53HealthChecksCommand,
+  ListClustersCommand,
+  ListControlPanelsCommand,
+  ListRoutingControlsCommand,
+  ListSafetyRulesCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateClusterCommand,
+  UpdateControlPanelCommand,
+  UpdateRoutingControlCommand,
+  UpdateSafetyRuleCommand,
+};
+const paginators = {
+  paginateListAssociatedRoute53HealthChecks,
+  paginateListClusters,
+  paginateListControlPanels,
+  paginateListRoutingControls,
+  paginateListSafetyRules,
+};
+const waiters = {
+  waitUntilClusterCreated,
+  waitUntilClusterDeleted,
+  waitUntilControlPanelCreated,
+  waitUntilControlPanelDeleted,
+  waitUntilRoutingControlCreated,
+  waitUntilRoutingControlDeleted,
+};
+
+/**
+ * @public
+ */
+export interface Route53RecoveryControlConfigRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Route53RecoveryControlConfig {
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateControlPanelCommand}
+   */
+  createControlPanel(
+    args: CreateControlPanelCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<CreateControlPanelCommandOutput>;
+  createControlPanel(
+    args: CreateControlPanelCommandInput,
+    cb: (err: any, data?: CreateControlPanelCommandOutput) => void
+  ): void;
+  createControlPanel(
+    args: CreateControlPanelCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: CreateControlPanelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRoutingControlCommand}
+   */
+  createRoutingControl(
+    args: CreateRoutingControlCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<CreateRoutingControlCommandOutput>;
+  createRoutingControl(
+    args: CreateRoutingControlCommandInput,
+    cb: (err: any, data?: CreateRoutingControlCommandOutput) => void
+  ): void;
+  createRoutingControl(
+    args: CreateRoutingControlCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: CreateRoutingControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSafetyRuleCommand}
+   */
+  createSafetyRule(): Promise<CreateSafetyRuleCommandOutput>;
+  createSafetyRule(
+    args: CreateSafetyRuleCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<CreateSafetyRuleCommandOutput>;
+  createSafetyRule(
+    args: CreateSafetyRuleCommandInput,
+    cb: (err: any, data?: CreateSafetyRuleCommandOutput) => void
+  ): void;
+  createSafetyRule(
+    args: CreateSafetyRuleCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: CreateSafetyRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteControlPanelCommand}
+   */
+  deleteControlPanel(
+    args: DeleteControlPanelCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DeleteControlPanelCommandOutput>;
+  deleteControlPanel(
+    args: DeleteControlPanelCommandInput,
+    cb: (err: any, data?: DeleteControlPanelCommandOutput) => void
+  ): void;
+  deleteControlPanel(
+    args: DeleteControlPanelCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DeleteControlPanelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRoutingControlCommand}
+   */
+  deleteRoutingControl(
+    args: DeleteRoutingControlCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DeleteRoutingControlCommandOutput>;
+  deleteRoutingControl(
+    args: DeleteRoutingControlCommandInput,
+    cb: (err: any, data?: DeleteRoutingControlCommandOutput) => void
+  ): void;
+  deleteRoutingControl(
+    args: DeleteRoutingControlCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DeleteRoutingControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSafetyRuleCommand}
+   */
+  deleteSafetyRule(
+    args: DeleteSafetyRuleCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DeleteSafetyRuleCommandOutput>;
+  deleteSafetyRule(
+    args: DeleteSafetyRuleCommandInput,
+    cb: (err: any, data?: DeleteSafetyRuleCommandOutput) => void
+  ): void;
+  deleteSafetyRule(
+    args: DeleteSafetyRuleCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DeleteSafetyRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   */
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DescribeClusterCommandOutput>;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeControlPanelCommand}
+   */
+  describeControlPanel(
+    args: DescribeControlPanelCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DescribeControlPanelCommandOutput>;
+  describeControlPanel(
+    args: DescribeControlPanelCommandInput,
+    cb: (err: any, data?: DescribeControlPanelCommandOutput) => void
+  ): void;
+  describeControlPanel(
+    args: DescribeControlPanelCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DescribeControlPanelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRoutingControlCommand}
+   */
+  describeRoutingControl(
+    args: DescribeRoutingControlCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DescribeRoutingControlCommandOutput>;
+  describeRoutingControl(
+    args: DescribeRoutingControlCommandInput,
+    cb: (err: any, data?: DescribeRoutingControlCommandOutput) => void
+  ): void;
+  describeRoutingControl(
+    args: DescribeRoutingControlCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DescribeRoutingControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSafetyRuleCommand}
+   */
+  describeSafetyRule(
+    args: DescribeSafetyRuleCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<DescribeSafetyRuleCommandOutput>;
+  describeSafetyRule(
+    args: DescribeSafetyRuleCommandInput,
+    cb: (err: any, data?: DescribeSafetyRuleCommandOutput) => void
+  ): void;
+  describeSafetyRule(
+    args: DescribeSafetyRuleCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: DescribeSafetyRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssociatedRoute53HealthChecksCommand}
+   */
+  listAssociatedRoute53HealthChecks(
+    args: ListAssociatedRoute53HealthChecksCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListAssociatedRoute53HealthChecksCommandOutput>;
+  listAssociatedRoute53HealthChecks(
+    args: ListAssociatedRoute53HealthChecksCommandInput,
+    cb: (err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void
+  ): void;
+  listAssociatedRoute53HealthChecks(
+    args: ListAssociatedRoute53HealthChecksCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListControlPanelsCommand}
+   */
+  listControlPanels(): Promise<ListControlPanelsCommandOutput>;
+  listControlPanels(
+    args: ListControlPanelsCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListControlPanelsCommandOutput>;
+  listControlPanels(
+    args: ListControlPanelsCommandInput,
+    cb: (err: any, data?: ListControlPanelsCommandOutput) => void
+  ): void;
+  listControlPanels(
+    args: ListControlPanelsCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListControlPanelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoutingControlsCommand}
+   */
+  listRoutingControls(
+    args: ListRoutingControlsCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListRoutingControlsCommandOutput>;
+  listRoutingControls(
+    args: ListRoutingControlsCommandInput,
+    cb: (err: any, data?: ListRoutingControlsCommandOutput) => void
+  ): void;
+  listRoutingControls(
+    args: ListRoutingControlsCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListRoutingControlsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSafetyRulesCommand}
+   */
+  listSafetyRules(
+    args: ListSafetyRulesCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListSafetyRulesCommandOutput>;
+  listSafetyRules(
+    args: ListSafetyRulesCommandInput,
+    cb: (err: any, data?: ListSafetyRulesCommandOutput) => void
+  ): void;
+  listSafetyRules(
+    args: ListSafetyRulesCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListSafetyRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterCommand}
+   */
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<UpdateClusterCommandOutput>;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateControlPanelCommand}
+   */
+  updateControlPanel(
+    args: UpdateControlPanelCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<UpdateControlPanelCommandOutput>;
+  updateControlPanel(
+    args: UpdateControlPanelCommandInput,
+    cb: (err: any, data?: UpdateControlPanelCommandOutput) => void
+  ): void;
+  updateControlPanel(
+    args: UpdateControlPanelCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: UpdateControlPanelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRoutingControlCommand}
+   */
+  updateRoutingControl(
+    args: UpdateRoutingControlCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<UpdateRoutingControlCommandOutput>;
+  updateRoutingControl(
+    args: UpdateRoutingControlCommandInput,
+    cb: (err: any, data?: UpdateRoutingControlCommandOutput) => void
+  ): void;
+  updateRoutingControl(
+    args: UpdateRoutingControlCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: UpdateRoutingControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSafetyRuleCommand}
+   */
+  updateSafetyRule(): Promise<UpdateSafetyRuleCommandOutput>;
+  updateSafetyRule(
+    args: UpdateSafetyRuleCommandInput,
+    options?: Route53RecoveryControlConfigRequestOptions
+  ): Promise<UpdateSafetyRuleCommandOutput>;
+  updateSafetyRule(
+    args: UpdateSafetyRuleCommandInput,
+    cb: (err: any, data?: UpdateSafetyRuleCommandOutput) => void
+  ): void;
+  updateSafetyRule(
+    args: UpdateSafetyRuleCommandInput,
+    options: Route53RecoveryControlConfigRequestOptions,
+    cb: (err: any, data?: UpdateSafetyRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssociatedRoute53HealthChecksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssociatedRoute53HealthChecksCommandOutput}.
+   */
+  paginateListAssociatedRoute53HealthChecks(
+    args: ListAssociatedRoute53HealthChecksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssociatedRoute53HealthChecksCommandOutput>;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListControlPanelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListControlPanelsCommandOutput}.
+   */
+  paginateListControlPanels(
+    args?: ListControlPanelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListControlPanelsCommandOutput>;
+
+  /**
+   * @see {@link ListRoutingControlsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoutingControlsCommandOutput}.
+   */
+  paginateListRoutingControls(
+    args: ListRoutingControlsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoutingControlsCommandOutput>;
+
+  /**
+   * @see {@link ListSafetyRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSafetyRulesCommandOutput}.
+   */
+  paginateListSafetyRules(
+    args: ListSafetyRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSafetyRulesCommandOutput>;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterCreated(
+    args: DescribeClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<DescribeClusterCommandOutput>>;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilClusterDeleted(
+    args: DescribeClusterCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeControlPanelCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilControlPanelCreated(
+    args: DescribeControlPanelCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<DescribeControlPanelCommandOutput>>;
+
+  /**
+   * @see {@link DescribeControlPanelCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilControlPanelDeleted(
+    args: DescribeControlPanelCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeRoutingControlCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilRoutingControlCreated(
+    args: DescribeRoutingControlCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<DescribeRoutingControlCommandOutput>>;
+
+  /**
+   * @see {@link DescribeRoutingControlCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilRoutingControlDeleted(
+    args: DescribeRoutingControlCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Route53RecoveryControlConfig>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+}
 
 /**
  * <p>Recovery Control Configuration API Reference for Amazon Route 53 Application Recovery Controller</p>
+ * @public
  */
-export class Route53RecoveryControlConfig extends Route53RecoveryControlConfigClient {
-  /**
-   * <p>Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.</p>
-   */
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateClusterCommandOutput>;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateClusterCommandOutput) => void
-  ): Promise<CreateClusterCommandOutput> | void {
-    const command = new CreateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.</p>
-   */
-  public createControlPanel(
-    args: CreateControlPanelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateControlPanelCommandOutput>;
-  public createControlPanel(
-    args: CreateControlPanelCommandInput,
-    cb: (err: any, data?: CreateControlPanelCommandOutput) => void
-  ): void;
-  public createControlPanel(
-    args: CreateControlPanelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateControlPanelCommandOutput) => void
-  ): void;
-  public createControlPanel(
-    args: CreateControlPanelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateControlPanelCommandOutput) => void),
-    cb?: (err: any, data?: CreateControlPanelCommandOutput) => void
-  ): Promise<CreateControlPanelCommandOutput> | void {
-    const command = new CreateControlPanelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new routing control.</p> <p>A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control traffic routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>
-   */
-  public createRoutingControl(
-    args: CreateRoutingControlCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRoutingControlCommandOutput>;
-  public createRoutingControl(
-    args: CreateRoutingControlCommandInput,
-    cb: (err: any, data?: CreateRoutingControlCommandOutput) => void
-  ): void;
-  public createRoutingControl(
-    args: CreateRoutingControlCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRoutingControlCommandOutput) => void
-  ): void;
-  public createRoutingControl(
-    args: CreateRoutingControlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRoutingControlCommandOutput) => void),
-    cb?: (err: any, data?: CreateRoutingControlCommandOutput) => void
-  ): Promise<CreateRoutingControlCommandOutput> | void {
-    const command = new CreateRoutingControlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes.</p> <p>There are two types of safety rules: assertion rules and gating rules.</p> <p>Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p> <p>Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>
-   */
-  public createSafetyRule(
-    args: CreateSafetyRuleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSafetyRuleCommandOutput>;
-  public createSafetyRule(
-    args: CreateSafetyRuleCommandInput,
-    cb: (err: any, data?: CreateSafetyRuleCommandOutput) => void
-  ): void;
-  public createSafetyRule(
-    args: CreateSafetyRuleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSafetyRuleCommandOutput) => void
-  ): void;
-  public createSafetyRule(
-    args: CreateSafetyRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSafetyRuleCommandOutput) => void),
-    cb?: (err: any, data?: CreateSafetyRuleCommandOutput) => void
-  ): Promise<CreateSafetyRuleCommandOutput> | void {
-    const command = new CreateSafetyRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Delete a cluster.</p>
-   */
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteClusterCommandOutput>;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): Promise<DeleteClusterCommandOutput> | void {
-    const command = new DeleteClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a control panel.</p>
-   */
-  public deleteControlPanel(
-    args: DeleteControlPanelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteControlPanelCommandOutput>;
-  public deleteControlPanel(
-    args: DeleteControlPanelCommandInput,
-    cb: (err: any, data?: DeleteControlPanelCommandOutput) => void
-  ): void;
-  public deleteControlPanel(
-    args: DeleteControlPanelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteControlPanelCommandOutput) => void
-  ): void;
-  public deleteControlPanel(
-    args: DeleteControlPanelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteControlPanelCommandOutput) => void),
-    cb?: (err: any, data?: DeleteControlPanelCommandOutput) => void
-  ): Promise<DeleteControlPanelCommandOutput> | void {
-    const command = new DeleteControlPanelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a routing control.</p>
-   */
-  public deleteRoutingControl(
-    args: DeleteRoutingControlCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRoutingControlCommandOutput>;
-  public deleteRoutingControl(
-    args: DeleteRoutingControlCommandInput,
-    cb: (err: any, data?: DeleteRoutingControlCommandOutput) => void
-  ): void;
-  public deleteRoutingControl(
-    args: DeleteRoutingControlCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRoutingControlCommandOutput) => void
-  ): void;
-  public deleteRoutingControl(
-    args: DeleteRoutingControlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRoutingControlCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRoutingControlCommandOutput) => void
-  ): Promise<DeleteRoutingControlCommandOutput> | void {
-    const command = new DeleteRoutingControlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a safety rule.</p>/&gt;
-   */
-  public deleteSafetyRule(
-    args: DeleteSafetyRuleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSafetyRuleCommandOutput>;
-  public deleteSafetyRule(
-    args: DeleteSafetyRuleCommandInput,
-    cb: (err: any, data?: DeleteSafetyRuleCommandOutput) => void
-  ): void;
-  public deleteSafetyRule(
-    args: DeleteSafetyRuleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSafetyRuleCommandOutput) => void
-  ): void;
-  public deleteSafetyRule(
-    args: DeleteSafetyRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSafetyRuleCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSafetyRuleCommandOutput) => void
-  ): Promise<DeleteSafetyRuleCommandOutput> | void {
-    const command = new DeleteSafetyRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Display the details about a cluster. The response includes the cluster name, endpoints, status, and Amazon Resource Name (ARN).</p>
-   */
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeClusterCommandOutput>;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClusterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): Promise<DescribeClusterCommandOutput> | void {
-    const command = new DescribeClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Displays details about a control panel.</p>
-   */
-  public describeControlPanel(
-    args: DescribeControlPanelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeControlPanelCommandOutput>;
-  public describeControlPanel(
-    args: DescribeControlPanelCommandInput,
-    cb: (err: any, data?: DescribeControlPanelCommandOutput) => void
-  ): void;
-  public describeControlPanel(
-    args: DescribeControlPanelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeControlPanelCommandOutput) => void
-  ): void;
-  public describeControlPanel(
-    args: DescribeControlPanelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeControlPanelCommandOutput) => void),
-    cb?: (err: any, data?: DescribeControlPanelCommandOutput) => void
-  ): Promise<DescribeControlPanelCommandOutput> | void {
-    const command = new DescribeControlPanelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Displays details about a routing control. A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>
-   */
-  public describeRoutingControl(
-    args: DescribeRoutingControlCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRoutingControlCommandOutput>;
-  public describeRoutingControl(
-    args: DescribeRoutingControlCommandInput,
-    cb: (err: any, data?: DescribeRoutingControlCommandOutput) => void
-  ): void;
-  public describeRoutingControl(
-    args: DescribeRoutingControlCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRoutingControlCommandOutput) => void
-  ): void;
-  public describeRoutingControl(
-    args: DescribeRoutingControlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRoutingControlCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRoutingControlCommandOutput) => void
-  ): Promise<DescribeRoutingControlCommandOutput> | void {
-    const command = new DescribeRoutingControlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.</p>
-   */
-  public describeSafetyRule(
-    args: DescribeSafetyRuleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSafetyRuleCommandOutput>;
-  public describeSafetyRule(
-    args: DescribeSafetyRuleCommandInput,
-    cb: (err: any, data?: DescribeSafetyRuleCommandOutput) => void
-  ): void;
-  public describeSafetyRule(
-    args: DescribeSafetyRuleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSafetyRuleCommandOutput) => void
-  ): void;
-  public describeSafetyRule(
-    args: DescribeSafetyRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSafetyRuleCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSafetyRuleCommandOutput) => void
-  ): Promise<DescribeSafetyRuleCommandOutput> | void {
-    const command = new DescribeSafetyRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of all Amazon Route 53 health checks associated with a specific routing control.</p>
-   */
-  public listAssociatedRoute53HealthChecks(
-    args: ListAssociatedRoute53HealthChecksCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAssociatedRoute53HealthChecksCommandOutput>;
-  public listAssociatedRoute53HealthChecks(
-    args: ListAssociatedRoute53HealthChecksCommandInput,
-    cb: (err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void
-  ): void;
-  public listAssociatedRoute53HealthChecks(
-    args: ListAssociatedRoute53HealthChecksCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void
-  ): void;
-  public listAssociatedRoute53HealthChecks(
-    args: ListAssociatedRoute53HealthChecksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void),
-    cb?: (err: any, data?: ListAssociatedRoute53HealthChecksCommandOutput) => void
-  ): Promise<ListAssociatedRoute53HealthChecksCommandOutput> | void {
-    const command = new ListAssociatedRoute53HealthChecksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of all the clusters in an account.</p>
-   */
-  public listClusters(
-    args: ListClustersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListClustersCommandOutput>;
-  public listClusters(args: ListClustersCommandInput, cb: (err: any, data?: ListClustersCommandOutput) => void): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListClustersCommandOutput) => void
-  ): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListClustersCommandOutput) => void),
-    cb?: (err: any, data?: ListClustersCommandOutput) => void
-  ): Promise<ListClustersCommandOutput> | void {
-    const command = new ListClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of control panels for a cluster.</p>
-   */
-  public listControlPanels(
-    args: ListControlPanelsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListControlPanelsCommandOutput>;
-  public listControlPanels(
-    args: ListControlPanelsCommandInput,
-    cb: (err: any, data?: ListControlPanelsCommandOutput) => void
-  ): void;
-  public listControlPanels(
-    args: ListControlPanelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListControlPanelsCommandOutput) => void
-  ): void;
-  public listControlPanels(
-    args: ListControlPanelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListControlPanelsCommandOutput) => void),
-    cb?: (err: any, data?: ListControlPanelsCommandOutput) => void
-  ): Promise<ListControlPanelsCommandOutput> | void {
-    const command = new ListControlPanelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of routing controls for a control panel. A routing control is an Amazon Route 53 Application Recovery Controller construct that has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.</p>
-   */
-  public listRoutingControls(
-    args: ListRoutingControlsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRoutingControlsCommandOutput>;
-  public listRoutingControls(
-    args: ListRoutingControlsCommandInput,
-    cb: (err: any, data?: ListRoutingControlsCommandOutput) => void
-  ): void;
-  public listRoutingControls(
-    args: ListRoutingControlsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRoutingControlsCommandOutput) => void
-  ): void;
-  public listRoutingControls(
-    args: ListRoutingControlsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRoutingControlsCommandOutput) => void),
-    cb?: (err: any, data?: ListRoutingControlsCommandOutput) => void
-  ): Promise<ListRoutingControlsCommandOutput> | void {
-    const command = new ListRoutingControlsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>List the safety rules (the assertion rules and gating rules) that you've defined for the routing controls in a control panel.</p>
-   */
-  public listSafetyRules(
-    args: ListSafetyRulesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSafetyRulesCommandOutput>;
-  public listSafetyRules(
-    args: ListSafetyRulesCommandInput,
-    cb: (err: any, data?: ListSafetyRulesCommandOutput) => void
-  ): void;
-  public listSafetyRules(
-    args: ListSafetyRulesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSafetyRulesCommandOutput) => void
-  ): void;
-  public listSafetyRules(
-    args: ListSafetyRulesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSafetyRulesCommandOutput) => void),
-    cb?: (err: any, data?: ListSafetyRulesCommandOutput) => void
-  ): Promise<ListSafetyRulesCommandOutput> | void {
-    const command = new ListSafetyRulesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a control panel. The only update you can make to a control panel is to change the name of the control panel.</p>
-   */
-  public updateControlPanel(
-    args: UpdateControlPanelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateControlPanelCommandOutput>;
-  public updateControlPanel(
-    args: UpdateControlPanelCommandInput,
-    cb: (err: any, data?: UpdateControlPanelCommandOutput) => void
-  ): void;
-  public updateControlPanel(
-    args: UpdateControlPanelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateControlPanelCommandOutput) => void
-  ): void;
-  public updateControlPanel(
-    args: UpdateControlPanelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateControlPanelCommandOutput) => void),
-    cb?: (err: any, data?: UpdateControlPanelCommandOutput) => void
-  ): Promise<UpdateControlPanelCommandOutput> | void {
-    const command = new UpdateControlPanelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a routing control. You can only update the name of the routing control. To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>
-   */
-  public updateRoutingControl(
-    args: UpdateRoutingControlCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRoutingControlCommandOutput>;
-  public updateRoutingControl(
-    args: UpdateRoutingControlCommandInput,
-    cb: (err: any, data?: UpdateRoutingControlCommandOutput) => void
-  ): void;
-  public updateRoutingControl(
-    args: UpdateRoutingControlCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRoutingControlCommandOutput) => void
-  ): void;
-  public updateRoutingControl(
-    args: UpdateRoutingControlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRoutingControlCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRoutingControlCommandOutput) => void
-  ): Promise<UpdateRoutingControlCommandOutput> | void {
-    const command = new UpdateRoutingControlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.</p>
-   */
-  public updateSafetyRule(
-    args: UpdateSafetyRuleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSafetyRuleCommandOutput>;
-  public updateSafetyRule(
-    args: UpdateSafetyRuleCommandInput,
-    cb: (err: any, data?: UpdateSafetyRuleCommandOutput) => void
-  ): void;
-  public updateSafetyRule(
-    args: UpdateSafetyRuleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSafetyRuleCommandOutput) => void
-  ): void;
-  public updateSafetyRule(
-    args: UpdateSafetyRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSafetyRuleCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSafetyRuleCommandOutput) => void
-  ): Promise<UpdateSafetyRuleCommandOutput> | void {
-    const command = new UpdateSafetyRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Route53RecoveryControlConfig extends Route53RecoveryControlConfigClient implements Route53RecoveryControlConfig {}
+createAggregatedClient(commands, Route53RecoveryControlConfig, { paginators, waiters });

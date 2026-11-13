@@ -1,95 +1,145 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { SearchTablesByLFTagsRequest, SearchTablesByLFTagsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchTablesByLFTagsCommand,
-  serializeAws_json1_1SearchTablesByLFTagsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchTablesByLFTagsRequest, SearchTablesByLFTagsResponse } from "../models/models_0";
+import { SearchTablesByLFTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchTablesByLFTagsCommand}.
+ */
 export interface SearchTablesByLFTagsCommandInput extends SearchTablesByLFTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchTablesByLFTagsCommand}.
+ */
 export interface SearchTablesByLFTagsCommandOutput extends SearchTablesByLFTagsResponse, __MetadataBearer {}
 
 /**
- * <p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>
+ * <p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LF-tags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LakeFormationClient, SearchTablesByLFTagsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, SearchTablesByLFTagsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // SearchTablesByLFTagsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   CatalogId: "STRING_VALUE",
+ *   Expression: [ // Expression // required
+ *     { // LFTag
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // TagValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new SearchTablesByLFTagsCommand(input);
  * const response = await client.send(command);
+ * // { // SearchTablesByLFTagsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   TableList: [ // TableLFTagsList
+ * //     { // TaggedTable
+ * //       Table: { // TableResource
+ * //         CatalogId: "STRING_VALUE",
+ * //         DatabaseName: "STRING_VALUE", // required
+ * //         Name: "STRING_VALUE",
+ * //         TableWildcard: {},
+ * //       },
+ * //       LFTagOnDatabase: [ // LFTagsList
+ * //         { // LFTagPair
+ * //           CatalogId: "STRING_VALUE",
+ * //           TagKey: "STRING_VALUE", // required
+ * //           TagValues: [ // TagValueList // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       LFTagsOnTable: [
+ * //         {
+ * //           CatalogId: "STRING_VALUE",
+ * //           TagKey: "STRING_VALUE", // required
+ * //           TagValues: [ // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       LFTagsOnColumns: [ // ColumnLFTagsList
+ * //         { // ColumnLFTag
+ * //           Name: "STRING_VALUE",
+ * //           LFTags: [
+ * //             {
+ * //               CatalogId: "STRING_VALUE",
+ * //               TagKey: "STRING_VALUE", // required
+ * //               TagValues: [ // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param SearchTablesByLFTagsCommandInput - {@link SearchTablesByLFTagsCommandInput}
+ * @returns {@link SearchTablesByLFTagsCommandOutput}
  * @see {@link SearchTablesByLFTagsCommandInput} for command's `input` shape.
  * @see {@link SearchTablesByLFTagsCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class SearchTablesByLFTagsCommand extends $Command<
-  SearchTablesByLFTagsCommandInput,
-  SearchTablesByLFTagsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchTablesByLFTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchTablesByLFTagsCommandInput, SearchTablesByLFTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "SearchTablesByLFTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchTablesByLFTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchTablesByLFTagsResponse.filterSensitiveLog,
+export class SearchTablesByLFTagsCommand extends command<SearchTablesByLFTagsCommandInput, SearchTablesByLFTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchTablesByLFTags",
+  SearchTablesByLFTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchTablesByLFTagsRequest;
+      output: SearchTablesByLFTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchTablesByLFTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchTablesByLFTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchTablesByLFTagsCommandOutput> {
-    return deserializeAws_json1_1SearchTablesByLFTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchTablesByLFTagsCommandInput;
+      output: SearchTablesByLFTagsCommandOutput;
+    };
+  };
 }

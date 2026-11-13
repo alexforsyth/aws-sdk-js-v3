@@ -1,0 +1,110 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePermissionVersionRequest, DeletePermissionVersionResponse } from "../models/models_0";
+import { DeletePermissionVersion$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePermissionVersionCommand}.
+ */
+export interface DeletePermissionVersionCommandInput extends DeletePermissionVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePermissionVersionCommand}.
+ */
+export interface DeletePermissionVersionCommandOutput extends DeletePermissionVersionResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes one version of a customer managed permission. The version you specify must not be attached to any
+ *             resource share and must not be the default version for the permission.</p>
+ *          <p>If a customer managed permission has the maximum of 5 versions, then you must delete at
+ *             least one version before you can create another.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RAMClient, DeletePermissionVersionCommand } from "@aws-sdk/client-ram"; // ES Modules import
+ * // const { RAMClient, DeletePermissionVersionCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
+ * const client = new RAMClient(config);
+ * const input = { // DeletePermissionVersionRequest
+ *   permissionArn: "STRING_VALUE", // required
+ *   permissionVersion: Number("int"), // required
+ *   clientToken: "STRING_VALUE",
+ * };
+ * const command = new DeletePermissionVersionCommand(input);
+ * const response = await client.send(command);
+ * // { // DeletePermissionVersionResponse
+ * //   returnValue: true || false,
+ * //   clientToken: "STRING_VALUE",
+ * //   permissionStatus: "ATTACHABLE" || "UNATTACHABLE" || "DELETING" || "DELETED" || "DEPRECATED",
+ * // };
+ *
+ * ```
+ *
+ * @param DeletePermissionVersionCommandInput - {@link DeletePermissionVersionCommandInput}
+ * @returns {@link DeletePermissionVersionCommandOutput}
+ * @see {@link DeletePermissionVersionCommandInput} for command's `input` shape.
+ * @see {@link DeletePermissionVersionCommandOutput} for command's `response` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
+ *
+ * @throws {@link IdempotentParameterMismatchException} (client fault)
+ *  <p>The operation failed because the client token input parameter matched one that was
+ *             used with a previous call to the operation, but at least one of the other input
+ *             parameters is different from the previous call.</p>
+ *
+ * @throws {@link InvalidClientTokenException} (client fault)
+ *  <p>The operation failed because the specified client token isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The operation failed because a parameter you specified isn't valid.</p>
+ *
+ * @throws {@link MalformedArnException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> has a format that isn't
+ *             valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The operation failed because the requested operation isn't permitted.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link UnknownResourceException} (client fault)
+ *  <p>The operation failed because a specified resource couldn't be found.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
+ */
+export class DeletePermissionVersionCommand extends command<DeletePermissionVersionCommandInput, DeletePermissionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePermissionVersion",
+  DeletePermissionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePermissionVersionRequest;
+      output: DeletePermissionVersionResponse;
+    };
+    sdk: {
+      input: DeletePermissionVersionCommandInput;
+      output: DeletePermissionVersionCommandOutput;
+    };
+  };
+}

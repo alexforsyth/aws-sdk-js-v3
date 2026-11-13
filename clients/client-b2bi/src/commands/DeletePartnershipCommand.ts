@@ -1,0 +1,104 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePartnershipRequest } from "../models/models_0";
+import { DeletePartnership$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePartnershipCommand}.
+ */
+export interface DeletePartnershipCommandInput extends DeletePartnershipRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePartnershipCommand}.
+ */
+export interface DeletePartnershipCommandOutput extends __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified partnership. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { B2biClient, DeletePartnershipCommand } from "@aws-sdk/client-b2bi"; // ES Modules import
+ * // const { B2biClient, DeletePartnershipCommand } = require("@aws-sdk/client-b2bi"); // CommonJS import
+ * // import type { B2biClientConfig } from "@aws-sdk/client-b2bi";
+ * const config = {}; // type is B2biClientConfig
+ * const client = new B2biClient(config);
+ * const input = { // DeletePartnershipRequest
+ *   partnershipId: "STRING_VALUE", // required
+ * };
+ * const command = new DeletePartnershipCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeletePartnershipCommandInput - {@link DeletePartnershipCommandInput}
+ * @returns {@link DeletePartnershipCommandOutput}
+ * @see {@link DeletePartnershipCommandInput} for command's `input` shape.
+ * @see {@link DeletePartnershipCommandOutput} for command's `response` shape.
+ * @see {@link B2biClientResolvedConfig | config} for B2biClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflict exception is thrown when you attempt to delete a resource (such as a profile or a capability) that is being used by other resources.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Amazon Web Services B2B Data Interchange service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Occurs when the requested resource does not exist, or cannot be found. In some cases, the resource exists in a region other than the region specified in the API call.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to throttling: the data speed and rendering may be limited depending on various parameters and conditions.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Occurs when a B2BI object cannot be validated against a request from another object. This exception can be thrown during standard EDI validation or when custom validation rules fail, such as when element length constraints are violated, invalid codes are used in code list validations, or required elements are missing based on configured element requirement rules.</p>
+ *
+ * @throws {@link B2biServiceException}
+ * <p>Base exception class for all service exceptions from B2bi service.</p>
+ *
+ *
+ * @example Sample DeletePartnership call
+ * ```javascript
+ * //
+ * const input = {
+ *   partnershipId: "ps-219fa02f5b4242af8"
+ * };
+ * const command = new DeletePartnershipCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class DeletePartnershipCommand extends command<DeletePartnershipCommandInput, DeletePartnershipCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePartnership",
+  DeletePartnership$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePartnershipRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeletePartnershipCommandInput;
+      output: DeletePartnershipCommandOutput;
+    };
+  };
+}

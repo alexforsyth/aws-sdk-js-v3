@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMClient";
-import { ListLunaClientsRequest, ListLunaClientsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListLunaClientsCommand,
-  serializeAws_json1_1ListLunaClientsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLunaClientsRequest, ListLunaClientsResponse } from "../models/models_0";
+import { ListLunaClients$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLunaClientsCommand}.
+ */
 export interface ListLunaClientsCommandInput extends ListLunaClientsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLunaClientsCommand}.
+ */
 export interface ListLunaClientsCommandOutput extends ListLunaClientsResponse, __MetadataBearer {}
 
 /**
@@ -37,73 +38,66 @@ export interface ListLunaClientsCommandOutput extends ListLunaClientsResponse, _
  *       If more results are available, the <code>NextToken</code> member of the response contains a
  *       token that you pass in the next call to <code>ListLunaClients</code> to retrieve the next set
  *       of items.</p>
+ *
+ * @deprecated This API is deprecated.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMClient, ListLunaClientsCommand } from "@aws-sdk/client-cloudhsm"; // ES Modules import
  * // const { CloudHSMClient, ListLunaClientsCommand } = require("@aws-sdk/client-cloudhsm"); // CommonJS import
+ * // import type { CloudHSMClientConfig } from "@aws-sdk/client-cloudhsm";
+ * const config = {}; // type is CloudHSMClientConfig
  * const client = new CloudHSMClient(config);
+ * const input = { // ListLunaClientsRequest
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListLunaClientsCommand(input);
  * const response = await client.send(command);
+ * // { // ListLunaClientsResponse
+ * //   ClientList: [ // ClientList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLunaClientsCommandInput - {@link ListLunaClientsCommandInput}
+ * @returns {@link ListLunaClientsCommandOutput}
  * @see {@link ListLunaClientsCommandInput} for command's `input` shape.
  * @see {@link ListLunaClientsCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMClientResolvedConfig | config} for CloudHSMClient's `config` shape.
  *
+ * @throws {@link CloudHsmInternalException} (server fault)
+ *  <p>Indicates that an internal error occurred.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>Indicates that an exception occurred in the AWS CloudHSM service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that one or more of the request parameters are not valid.</p>
+ *
+ * @throws {@link CloudHSMServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSM service.</p>
+ *
+ *
+ * @public
  */
-export class ListLunaClientsCommand extends $Command<
-  ListLunaClientsCommandInput,
-  ListLunaClientsCommandOutput,
-  CloudHSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLunaClientsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLunaClientsCommandInput, ListLunaClientsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMClient";
-    const commandName = "ListLunaClientsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLunaClientsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLunaClientsResponse.filterSensitiveLog,
+export class ListLunaClientsCommand extends command<ListLunaClientsCommandInput, ListLunaClientsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLunaClients",
+  ListLunaClients$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLunaClientsRequest;
+      output: ListLunaClientsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLunaClientsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListLunaClientsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLunaClientsCommandOutput> {
-    return deserializeAws_json1_1ListLunaClientsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLunaClientsCommandInput;
+      output: ListLunaClientsCommandOutput;
+    };
+  };
 }

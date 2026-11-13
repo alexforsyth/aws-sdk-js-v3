@@ -1,35 +1,41 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisClient";
-import { GetShardIteratorInput, GetShardIteratorOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetShardIteratorCommand,
-  serializeAws_json1_1GetShardIteratorCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep5, _mw0, command } from "../commandBuilder";
+import type { GetShardIteratorInput, GetShardIteratorOutput } from "../models/models_0";
+import { GetShardIterator$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetShardIteratorCommand}.
+ */
 export interface GetShardIteratorCommandInput extends GetShardIteratorInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetShardIteratorCommand}.
+ */
 export interface GetShardIteratorCommandOutput extends GetShardIteratorOutput, __MetadataBearer {}
 
 /**
- * <p>Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after it
- *             is returned to the requester.</p>
- *         <p>A shard iterator specifies the shard position from which to start reading data
- *             records sequentially. The position is specified using the sequence number of a data
- *             record in a shard. A sequence number is the identifier associated with every record
- *             ingested in the stream, and is assigned when a record is put into the stream. Each
- *             stream has one or more shards.</p>
- *         <p>You must specify the shard iterator type. For example, you can set the
+ * <p>Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after it is
+ *             returned to the requester.</p>
+ *          <note>
+ *             <p>When invoking this API, you must use either the <code>StreamARN</code> or the
+ *                     <code>StreamName</code> parameter, or both. It is recommended that you use the
+ *                     <code>StreamARN</code> input parameter when you invoke this API.</p>
+ *          </note>
+ *          <p>A shard iterator specifies the shard position from which to start reading data records
+ *             sequentially. The position is specified using the sequence number of a data record in a
+ *             shard. A sequence number is the identifier associated with every record ingested in the
+ *             stream, and is assigned when a record is put into the stream. Each stream has one or
+ *             more shards.</p>
+ *          <p>You must specify the shard iterator type. For example, you can set the
  *                 <code>ShardIteratorType</code> parameter to read exactly from the position denoted
  *             by a specific sequence number by using the <code>AT_SEQUENCE_NUMBER</code> shard
  *             iterator type. Alternatively, the parameter can read right after the sequence number by
@@ -41,19 +47,19 @@ export interface GetShardIteratorCommandOutput extends GetShardIteratorOutput, _
  *                 <code>ShardIterator</code> to point to the last untrimmed record in the shard in the
  *             system (the oldest data record in the shard), or <code>LATEST</code> so that you always
  *             read the most recent data in the shard. </p>
- *         <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a>
+ *          <p>When you read repeatedly from a stream, use a <a>GetShardIterator</a>
  *             request to get the first shard iterator for use in your first <a>GetRecords</a> request and for subsequent reads use the shard iterator returned by the <a>GetRecords</a> request in <code>NextShardIterator</code>. A new shard
  *             iterator is returned by every <a>GetRecords</a> request in
  *                 <code>NextShardIterator</code>, which you use in the <code>ShardIterator</code>
  *             parameter of the next <a>GetRecords</a> request. </p>
- *         <p>If a <a>GetShardIterator</a> request is made too often, you receive a
+ *          <p>If a <a>GetShardIterator</a> request is made too often, you receive a
  *                 <code>ProvisionedThroughputExceededException</code>. For more information about
  *             throughput limits, see <a>GetRecords</a>, and <a href="https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the
  *                 <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>
- *         <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator
+ *          <p>If the shard is closed, <a>GetShardIterator</a> returns a valid iterator
  *             for the last sequence number of the shard. A shard can be closed as a result of using
  *                 <a>SplitShard</a> or <a>MergeShards</a>.</p>
- *         <p>
+ *          <p>
  *             <a>GetShardIterator</a> has a limit of five transactions per second per
  *             account per open shard.</p>
  * @example
@@ -61,68 +67,80 @@ export interface GetShardIteratorCommandOutput extends GetShardIteratorOutput, _
  * ```javascript
  * import { KinesisClient, GetShardIteratorCommand } from "@aws-sdk/client-kinesis"; // ES Modules import
  * // const { KinesisClient, GetShardIteratorCommand } = require("@aws-sdk/client-kinesis"); // CommonJS import
+ * // import type { KinesisClientConfig } from "@aws-sdk/client-kinesis";
+ * const config = {}; // type is KinesisClientConfig
  * const client = new KinesisClient(config);
+ * const input = { // GetShardIteratorInput
+ *   StreamName: "STRING_VALUE",
+ *   ShardId: "STRING_VALUE", // required
+ *   ShardIteratorType: "AT_SEQUENCE_NUMBER" || "AFTER_SEQUENCE_NUMBER" || "TRIM_HORIZON" || "LATEST" || "AT_TIMESTAMP", // required
+ *   StartingSequenceNumber: "STRING_VALUE",
+ *   Timestamp: new Date("TIMESTAMP"),
+ *   StreamARN: "STRING_VALUE",
+ *   StreamId: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new GetShardIteratorCommand(input);
  * const response = await client.send(command);
+ * // { // GetShardIteratorOutput
+ * //   ShardIterator: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetShardIteratorCommandInput - {@link GetShardIteratorCommandInput}
+ * @returns {@link GetShardIteratorCommandOutput}
  * @see {@link GetShardIteratorCommandInput} for command's `input` shape.
  * @see {@link GetShardIteratorCommandOutput} for command's `response` shape.
- * @see {@link KinesisClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisClientResolvedConfig | config} for KinesisClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Specifies that you do not have the permissions required to perform this
+ *             operation.</p>
+ *
+ * @throws {@link DryRunOperationException} (client fault)
+ *  <p>The request was rejected because the DryRun parameter was specified.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>The processing of the request failed because of an unknown error, exception, or
+ *             failure.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>A specified parameter exceeds its restrictions, is not supported, or can't be used.
+ *             For more information, see the returned message.</p>
+ *
+ * @throws {@link ProvisionedThroughputExceededException} (client fault)
+ *  <p>The request rate for the stream is too high, or the requested data is too large for
+ *             the available throughput. Reduce the frequency or size of your requests. For more
+ *             information, see <a href="https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the
+ *                 <i>Amazon Kinesis Data Streams Developer Guide</i>, and <a href="https://docs.aws.amazon.com/general/latest/gr/api-retries.html">Error Retries and
+ *                 Exponential Backoff in Amazon Web Services</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found. The stream might not be specified
+ *             correctly.</p>
+ *
+ * @throws {@link KinesisServiceException}
+ * <p>Base exception class for all service exceptions from Kinesis service.</p>
+ *
+ *
+ * @public
  */
-export class GetShardIteratorCommand extends $Command<
-  GetShardIteratorCommandInput,
-  GetShardIteratorCommandOutput,
-  KinesisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetShardIteratorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetShardIteratorCommandInput, GetShardIteratorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisClient";
-    const commandName = "GetShardIteratorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetShardIteratorInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetShardIteratorOutput.filterSensitiveLog,
+export class GetShardIteratorCommand extends command<GetShardIteratorCommandInput, GetShardIteratorCommandOutput>(
+  _ep5,
+  _mw0,
+  "GetShardIterator",
+  GetShardIterator$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetShardIteratorInput;
+      output: GetShardIteratorOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetShardIteratorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetShardIteratorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetShardIteratorCommandOutput> {
-    return deserializeAws_json1_1GetShardIteratorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetShardIteratorCommandInput;
+      output: GetShardIteratorCommandOutput;
+    };
+  };
 }

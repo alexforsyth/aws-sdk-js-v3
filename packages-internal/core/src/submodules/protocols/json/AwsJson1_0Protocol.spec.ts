@@ -1,0 +1,190 @@
+import { TypeRegistry } from "@smithy/core/schema";
+import { toBase64 } from "@smithy/core/serde";
+import { toUtf8 } from "@smithy/core/serde";
+import type {
+  BlobSchema,
+  BooleanSchema,
+  DocumentSchema,
+  NumericSchema,
+  OperationSchema,
+  StaticErrorSchema,
+  StaticStructureSchema,
+  StringSchema,
+  TimestampDefaultSchema,
+} from "@smithy/types";
+import { describe, expect, test as it } from "vitest";
+
+import { context } from "../test-schema.spec";
+import { AwsJson1_0Protocol } from "./AwsJson1_0Protocol";
+
+describe(AwsJson1_0Protocol.name, () => {
+  const json = {
+    string: "string",
+    number: 1234,
+    boolean: false,
+    blob: "AAAAAAAAAAA=",
+    timestamp: 0,
+  };
+  const schema: StaticStructureSchema = [
+    3,
+    "ns",
+    "MyStruct",
+    0,
+    [...Object.keys(json)],
+    [
+      0 satisfies StringSchema,
+      1 satisfies NumericSchema,
+      2 satisfies BooleanSchema,
+      21 satisfies BlobSchema,
+      4 satisfies TimestampDefaultSchema,
+    ],
+  ];
+  const serdeContext = {
+    base64Encoder: toBase64,
+    utf8Encoder: toUtf8,
+  } as any;
+
+  it("is 1.0", async () => {
+    const protocol = new AwsJson1_0Protocol({
+      defaultNamespace: "",
+      serviceTarget: "JsonRpc10",
+    });
+    expect(protocol.getShapeId()).toEqual("aws.protocols#awsJson1_0");
+  });
+
+  it("uses compositeErrorRegistries from instantiation", () => {
+    const GenericServiceException$: StaticErrorSchema = [
+      -3,
+      "com.amazonaws.sdk.example",
+      "GenericServiceException",
+      0,
+      [],
+      [],
+    ];
+    class GenericServiceException extends Error {}
+
+    const registry = TypeRegistry.for("com.amazonaws.sdk.example");
+    registry.registerError(GenericServiceException$, GenericServiceException);
+
+    const protocol = new (class extends AwsJson1_0Protocol {
+      public getCompositeErrorRegistry() {
+        return this.compositeErrorRegistry;
+      }
+    })({
+      defaultNamespace: "",
+      serviceTarget: "JsonRpc10",
+      errorTypeRegistries: [registry],
+    });
+
+    expect(protocol.getCompositeErrorRegistry()).not.toBe(registry);
+    expect(protocol.getCompositeErrorRegistry().getSchema("com.amazonaws.sdk.example#GenericServiceException")).toBe(
+      GenericServiceException$
+    );
+  });
+
+  describe("codec", () => {
+    it("serializes blobs and timestamps", () => {
+      const protocol = new AwsJson1_0Protocol({
+        defaultNamespace: "namespace",
+        serviceTarget: "JsonRpc10",
+      });
+      protocol.setSerdeContext(serdeContext);
+      const codec = protocol.getPayloadCodec();
+      const serializer = codec.createSerializer();
+      const data = {
+        string: "string",
+        number: 1234,
+        boolean: false,
+        blob: new Uint8Array(8),
+        timestamp: new Date(0),
+      };
+      serializer.write(schema, data);
+      const serialized = serializer.flush();
+      expect(JSON.parse(toUtf8(serialized))).toEqual({
+        string: "string",
+        number: 1234,
+        boolean: false,
+        blob: "AAAAAAAAAAA=",
+        timestamp: 0,
+      });
+    });
+
+    it("deserializes blobs and timestamps", async () => {
+      const protocol = new AwsJson1_0Protocol({
+        defaultNamespace: "namespace",
+        serviceTarget: "JsonRpc10",
+      });
+      protocol.setSerdeContext(serdeContext);
+      const codec = protocol.getPayloadCodec();
+      const deserializer = codec.createDeserializer();
+
+      const parsed = await deserializer.read(schema, JSON.stringify(json));
+      expect(parsed).toEqual({
+        string: "string",
+        number: 1234,
+        boolean: false,
+        blob: new Uint8Array(8),
+        timestamp: new Date(0),
+      });
+    });
+
+    it("ignores JSON name and HTTP bindings", async () => {
+      const protocol = new AwsJson1_0Protocol({
+        defaultNamespace: "namespace",
+        serviceTarget: "JsonRpc10",
+      });
+      protocol.setSerdeContext(serdeContext);
+
+      const schema: StaticStructureSchema = [
+        3,
+        "ns",
+        "MyHttpBindingStructure",
+        {},
+        ["header", "query", "headerMap", "payload"],
+        [
+          [0, "ns", "MyHeader", { httpHeader: "header", jsonName: "MyHeader" }, 0 satisfies StringSchema],
+          [0, "ns", "MyQuery", { httpQuery: "query" }, 0 satisfies StringSchema],
+          [
+            2,
+            "ns",
+            "HeaderMap",
+            {
+              httpPrefixHeaders: "",
+            },
+            0 satisfies StringSchema,
+            1 satisfies NumericSchema,
+          ],
+          [0, "ns", "MyPayload", { httpPayload: 1 }, 15 satisfies DocumentSchema],
+        ],
+      ];
+
+      const operationSchema: OperationSchema = {
+        namespace: "ns",
+        name: "MyOperation",
+        traits: {},
+        input: schema,
+        output: "unit",
+      };
+
+      const request = await protocol.serializeRequest(
+        operationSchema,
+        {
+          header: "hello",
+          query: "world",
+          headerMap: {
+            a: 1,
+            b: 2,
+          },
+        },
+        context
+      );
+
+      expect(request.headers).toEqual({
+        "content-type": "application/x-amz-json-1.0",
+        "x-amz-target": "JsonRpc10.MyOperation",
+      });
+      expect(request.query).toEqual({});
+      expect(toUtf8(request.body)).toEqual(`{"header":"hello","query":"world","headerMap":{"a":1,"b":2}}`);
+    });
+  });
+});

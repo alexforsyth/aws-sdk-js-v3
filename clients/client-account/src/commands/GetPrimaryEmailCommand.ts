@@ -1,0 +1,90 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPrimaryEmailRequest, GetPrimaryEmailResponse } from "../models/models_0";
+import { GetPrimaryEmail$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPrimaryEmailCommand}.
+ */
+export interface GetPrimaryEmailCommandInput extends GetPrimaryEmailRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPrimaryEmailCommand}.
+ */
+export interface GetPrimaryEmailCommandOutput extends GetPrimaryEmailResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves the primary email address for the specified account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AccountClient, GetPrimaryEmailCommand } from "@aws-sdk/client-account"; // ES Modules import
+ * // const { AccountClient, GetPrimaryEmailCommand } = require("@aws-sdk/client-account"); // CommonJS import
+ * // import type { AccountClientConfig } from "@aws-sdk/client-account";
+ * const config = {}; // type is AccountClientConfig
+ * const client = new AccountClient(config);
+ * const input = { // GetPrimaryEmailRequest
+ *   AccountId: "STRING_VALUE", // required
+ * };
+ * const command = new GetPrimaryEmailCommand(input);
+ * const response = await client.send(command);
+ * // { // GetPrimaryEmailResponse
+ * //   PrimaryEmail: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetPrimaryEmailCommandInput - {@link GetPrimaryEmailCommandInput}
+ * @returns {@link GetPrimaryEmailCommandOutput}
+ * @see {@link GetPrimaryEmailCommandInput} for command's `input` shape.
+ * @see {@link GetPrimaryEmailCommandOutput} for command's `response` shape.
+ * @see {@link AccountClientResolvedConfig | config} for AccountClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The operation failed because the calling identity doesn't have the minimum required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation failed because of an error internal to Amazon Web Services. Try your operation again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation failed because it specified a resource that can't be found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The operation failed because it was called too frequently and exceeded a throttle limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation failed because one of the input parameters was invalid.</p>
+ *
+ * @throws {@link AccountServiceException}
+ * <p>Base exception class for all service exceptions from Account service.</p>
+ *
+ *
+ * @public
+ */
+export class GetPrimaryEmailCommand extends command<GetPrimaryEmailCommandInput, GetPrimaryEmailCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPrimaryEmail",
+  GetPrimaryEmail$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPrimaryEmailRequest;
+      output: GetPrimaryEmailResponse;
+    };
+    sdk: {
+      input: GetPrimaryEmailCommandInput;
+      output: GetPrimaryEmailCommandOutput;
+    };
+  };
+}

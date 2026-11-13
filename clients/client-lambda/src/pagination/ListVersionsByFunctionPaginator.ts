@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListVersionsByFunctionCommand,
   ListVersionsByFunctionCommandInput,
   ListVersionsByFunctionCommandOutput,
 } from "../commands/ListVersionsByFunctionCommand";
-import { Lambda } from "../Lambda";
 import { LambdaClient } from "../LambdaClient";
-import { LambdaPaginationConfiguration } from "./Interfaces";
+import type { LambdaPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: LambdaClient,
-  input: ListVersionsByFunctionCommandInput,
-  ...args: any
-): Promise<ListVersionsByFunctionCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListVersionsByFunctionCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Lambda,
-  input: ListVersionsByFunctionCommandInput,
-  ...args: any
-): Promise<ListVersionsByFunctionCommandOutput> => {
-  // @ts-ignore
-  return await client.listVersionsByFunction(input, ...args);
-};
-export async function* paginateListVersionsByFunction(
+export const paginateListVersionsByFunction: (
   config: LambdaPaginationConfiguration,
   input: ListVersionsByFunctionCommandInput,
-  ...additionalArguments: any
-): Paginator<ListVersionsByFunctionCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListVersionsByFunctionCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxItems"] = config.pageSize;
-    if (config.client instanceof Lambda) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof LambdaClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Lambda | LambdaClient");
-    }
-    yield page;
-    token = page.NextMarker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListVersionsByFunctionCommandOutput> = createPaginator<
+  LambdaPaginationConfiguration,
+  ListVersionsByFunctionCommandInput,
+  ListVersionsByFunctionCommandOutput
+>(LambdaClient, ListVersionsByFunctionCommand, "Marker", "NextMarker", "MaxItems");

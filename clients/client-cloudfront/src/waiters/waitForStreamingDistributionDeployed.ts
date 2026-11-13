@@ -1,23 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
-
-import { CloudFrontClient } from "../CloudFrontClient";
+// smithy-typescript generated code
 import {
-  GetStreamingDistributionCommand,
-  GetStreamingDistributionCommandInput,
-} from "../commands/GetStreamingDistributionCommand";
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-const checkState = async (
-  client: CloudFrontClient,
-  input: GetStreamingDistributionCommandInput
-): Promise<WaiterResult> => {
+import type { CloudFrontClient } from "../CloudFrontClient";
+import {
+  type GetStreamingDistributionCommandInput,
+  type GetStreamingDistributionCommandOutput,
+  GetStreamingDistributionCommand,
+} from "../commands/GetStreamingDistributionCommand";
+import type { CloudFrontServiceException } from "../models/CloudFrontServiceException";
+
+const checkState = async (client: CloudFrontClient, input: GetStreamingDistributionCommandInput): Promise<WaiterResult<GetStreamingDistributionCommandOutput | CloudFrontServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetStreamingDistributionCommand(input));
+    let result: GetStreamingDistributionCommandOutput & any = await client.send(new GetStreamingDistributionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.StreamingDistribution.Status;
-      };
+      }
       if (returnComparator() === "Deployed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -34,8 +40,8 @@ const checkState = async (
 export const waitForStreamingDistributionDeployed = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetStreamingDistributionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<GetStreamingDistributionCommandOutput | CloudFrontServiceException>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 1500 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -46,8 +52,8 @@ export const waitForStreamingDistributionDeployed = async (
 export const waitUntilStreamingDistributionDeployed = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetStreamingDistributionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<GetStreamingDistributionCommandOutput>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 1500 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetStreamingDistributionCommandOutput>;
 };

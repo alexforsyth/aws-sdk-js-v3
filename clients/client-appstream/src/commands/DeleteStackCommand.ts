@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DeleteStackRequest, DeleteStackResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteStackCommand,
-  serializeAws_json1_1DeleteStackCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteStackRequest, DeleteStackResult } from "../models/models_0";
+import { DeleteStack$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteStackCommand}.
+ */
 export interface DeleteStackCommandInput extends DeleteStackRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteStackCommand}.
+ */
 export interface DeleteStackCommandOutput extends DeleteStackResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,57 @@ export interface DeleteStackCommandOutput extends DeleteStackResult, __MetadataB
  * ```javascript
  * import { AppStreamClient, DeleteStackCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DeleteStackCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DeleteStackRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteStackCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteStackCommandInput - {@link DeleteStackCommandInput}
+ * @returns {@link DeleteStackCommandOutput}
  * @see {@link DeleteStackCommandInput} for command's `input` shape.
  * @see {@link DeleteStackCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>An API error occurred. Wait a few minutes and try again.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteStackCommand extends $Command<
-  DeleteStackCommandInput,
-  DeleteStackCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteStackCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteStackCommandInput, DeleteStackCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DeleteStackCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteStackRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteStackResult.filterSensitiveLog,
+export class DeleteStackCommand extends command<DeleteStackCommandInput, DeleteStackCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteStack",
+  DeleteStack$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStackRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteStackCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteStackCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteStackCommandOutput> {
-    return deserializeAws_json1_1DeleteStackCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteStackCommandInput;
+      output: DeleteStackCommandOutput;
+    };
+  };
 }

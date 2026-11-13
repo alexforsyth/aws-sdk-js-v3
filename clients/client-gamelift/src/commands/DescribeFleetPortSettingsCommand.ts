@@ -1,138 +1,131 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DescribeFleetPortSettingsInput, DescribeFleetPortSettingsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeFleetPortSettingsCommand,
-  serializeAws_json1_1DescribeFleetPortSettingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFleetPortSettingsInput, DescribeFleetPortSettingsOutput } from "../models/models_0";
+import { DescribeFleetPortSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFleetPortSettingsCommand}.
+ */
 export interface DescribeFleetPortSettingsCommandInput extends DescribeFleetPortSettingsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFleetPortSettingsCommand}.
+ */
 export interface DescribeFleetPortSettingsCommandOutput extends DescribeFleetPortSettingsOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves a fleet's inbound connection permissions. Connection permissions specify the
- *             range of IP addresses and port settings that incoming traffic can use to access server
- *             processes in the fleet. Game sessions that are running on instances in the fleet must
- *             use connections that fall in this range.</p>
- *         <p>This operation can be used in the following ways: </p>
- *         <ul>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2</p>
+ *          <p>Retrieves a fleet's inbound connection permissions. Connection permissions specify IP
+ *             addresses and port settings that incoming traffic can use to access server processes in
+ *             the fleet. Game server processes that are running in the fleet must use a port that
+ *             falls within this range. </p>
+ *          <p>Use this operation in the following ways: </p>
+ *          <ul>
  *             <li>
- *                 <p>To retrieve the inbound connection permissions for a fleet, identify the
- *                     fleet's unique identifier. </p>
+ *                <p>To retrieve the port settings for a fleet, identify the fleet's unique
+ *                     identifier. </p>
  *             </li>
  *             <li>
- *                 <p>To check the status of recent updates to a fleet remote location, specify
- *                     the fleet ID and a location. Port setting updates can take time to
- *                     propagate across all locations. </p>
+ *                <p>To check the status of recent updates to a fleet remote location, specify the
+ *                     fleet ID and a location. Port setting updates can take time to propagate across
+ *                     all locations. </p>
  *             </li>
  *          </ul>
- *         <p>If successful, a set of <a>IpPermission</a> objects is returned for the
- *             requested fleet ID. When a location is specified, a pending status is included. If the
- *             requested fleet has been deleted, the result set is empty.</p>
- *         <p>
+ *          <p>If successful, a set of <code>IpPermission</code> objects is returned for the
+ *             requested fleet ID. When specifying a location, this operation returns a pending status.
+ *             If the requested fleet has been deleted, the result set is empty.</p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up GameLift fleets</a>
- *          </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>ListFleets</a> |
- *                     <a>DescribeEC2InstanceLimits</a> |
- *                     <a>DescribeFleetAttributes</a> |
- *                     <a>DescribeFleetCapacity</a> |
- *                     <a>DescribeFleetEvents</a> |
- *                     <a>DescribeFleetLocationAttributes</a> |
- *                     <a>DescribeFleetPortSettings</a> |
- *                     <a>DescribeFleetUtilization</a> |
- *                     <a>DescribeRuntimeConfiguration</a> |
- *                     <a>DescribeScalingPolicies</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up Amazon GameLift Servers
+ *                 fleets</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DescribeFleetPortSettingsCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DescribeFleetPortSettingsCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DescribeFleetPortSettingsInput
+ *   FleetId: "STRING_VALUE", // required
+ *   Location: "STRING_VALUE",
+ * };
  * const command = new DescribeFleetPortSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFleetPortSettingsOutput
+ * //   FleetId: "STRING_VALUE",
+ * //   FleetArn: "STRING_VALUE",
+ * //   InboundPermissions: [ // IpPermissionsList
+ * //     { // IpPermission
+ * //       FromPort: Number("int"), // required
+ * //       ToPort: Number("int"), // required
+ * //       IpRange: "STRING_VALUE", // required
+ * //       Protocol: "TCP" || "UDP", // required
+ * //     },
+ * //   ],
+ * //   UpdateStatus: "PENDING_UPDATE",
+ * //   Location: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeFleetPortSettingsCommandInput - {@link DescribeFleetPortSettingsCommandInput}
+ * @returns {@link DescribeFleetPortSettingsCommandOutput}
  * @see {@link DescribeFleetPortSettingsCommandInput} for command's `input` shape.
  * @see {@link DescribeFleetPortSettingsCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFleetPortSettingsCommand extends $Command<
-  DescribeFleetPortSettingsCommandInput,
-  DescribeFleetPortSettingsCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFleetPortSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFleetPortSettingsCommandInput, DescribeFleetPortSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DescribeFleetPortSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFleetPortSettingsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFleetPortSettingsOutput.filterSensitiveLog,
+export class DescribeFleetPortSettingsCommand extends command<DescribeFleetPortSettingsCommandInput, DescribeFleetPortSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFleetPortSettings",
+  DescribeFleetPortSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFleetPortSettingsInput;
+      output: DescribeFleetPortSettingsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFleetPortSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeFleetPortSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeFleetPortSettingsCommandOutput> {
-    return deserializeAws_json1_1DescribeFleetPortSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFleetPortSettingsCommandInput;
+      output: DescribeFleetPortSettingsCommandOutput;
+    };
+  };
 }

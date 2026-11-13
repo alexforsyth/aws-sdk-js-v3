@@ -1,0 +1,184 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDbInstanceInput, CreateDbInstanceOutput } from "../models/models_0";
+import { CreateDbInstance$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDbInstanceCommand}.
+ */
+export interface CreateDbInstanceCommandInput extends CreateDbInstanceInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDbInstanceCommand}.
+ */
+export interface CreateDbInstanceCommandOutput extends CreateDbInstanceOutput, __MetadataBearer {}
+
+/**
+ * <p>Creates a new Timestream for InfluxDB DB instance.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { TimestreamInfluxDBClient, CreateDbInstanceCommand } from "@aws-sdk/client-timestream-influxdb"; // ES Modules import
+ * // const { TimestreamInfluxDBClient, CreateDbInstanceCommand } = require("@aws-sdk/client-timestream-influxdb"); // CommonJS import
+ * // import type { TimestreamInfluxDBClientConfig } from "@aws-sdk/client-timestream-influxdb";
+ * const config = {}; // type is TimestreamInfluxDBClientConfig
+ * const client = new TimestreamInfluxDBClient(config);
+ * const input = { // CreateDbInstanceInput
+ *   name: "STRING_VALUE", // required
+ *   username: "STRING_VALUE",
+ *   password: "STRING_VALUE", // required
+ *   organization: "STRING_VALUE",
+ *   bucket: "STRING_VALUE",
+ *   dbInstanceType: "db.influx.medium" || "db.influx.large" || "db.influx.xlarge" || "db.influx.2xlarge" || "db.influx.4xlarge" || "db.influx.8xlarge" || "db.influx.12xlarge" || "db.influx.16xlarge" || "db.influx.24xlarge", // required
+ *   vpcSubnetIds: [ // VpcSubnetIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   vpcSecurityGroupIds: [ // VpcSecurityGroupIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   publiclyAccessible: true || false,
+ *   dbStorageType: "InfluxIOIncludedT1" || "InfluxIOIncludedT2" || "InfluxIOIncludedT3",
+ *   allocatedStorage: Number("int"), // required
+ *   dbParameterGroupIdentifier: "STRING_VALUE",
+ *   deploymentType: "SINGLE_AZ" || "WITH_MULTIAZ_STANDBY",
+ *   logDeliveryConfiguration: { // LogDeliveryConfiguration
+ *     s3Configuration: { // S3Configuration
+ *       bucketName: "STRING_VALUE", // required
+ *       enabled: true || false, // required
+ *     },
+ *   },
+ *   maintenanceSchedule: { // MaintenanceSchedule
+ *     timezone: "STRING_VALUE", // required
+ *     preferredMaintenanceWindow: "STRING_VALUE", // required
+ *   },
+ *   tags: { // RequestTagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   port: Number("int"),
+ *   networkType: "IPV4" || "DUAL",
+ *   dbBackupConfigurations: [ // DbBackupConfigurationInputList
+ *     { // DbBackupConfiguration
+ *       type: "HOURLY" || "DAILY" || "WEEKLY" || "MONTHLY" || "CUSTOM_SCHEDULE" || "CONTINUOUS", // required
+ *       retentionDays: Number("int"), // required
+ *       enabled: true || false, // required
+ *       customSchedule: "STRING_VALUE",
+ *     },
+ *   ],
+ *   kmsKeyId: "STRING_VALUE",
+ * };
+ * const command = new CreateDbInstanceCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateDbInstanceOutput
+ * //   id: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   arn: "STRING_VALUE", // required
+ * //   status: "CREATING" || "AVAILABLE" || "DELETING" || "MODIFYING" || "UPDATING" || "DELETED" || "FAILED" || "UPDATING_DEPLOYMENT_TYPE" || "UPDATING_INSTANCE_TYPE" || "MAINTENANCE" || "REBOOTING" || "REBOOT_FAILED" || "RESTORING" || "RESTORE_FAILED",
+ * //   endpoint: "STRING_VALUE",
+ * //   port: Number("int"),
+ * //   networkType: "IPV4" || "DUAL",
+ * //   dbInstanceType: "db.influx.medium" || "db.influx.large" || "db.influx.xlarge" || "db.influx.2xlarge" || "db.influx.4xlarge" || "db.influx.8xlarge" || "db.influx.12xlarge" || "db.influx.16xlarge" || "db.influx.24xlarge",
+ * //   dbStorageType: "InfluxIOIncludedT1" || "InfluxIOIncludedT2" || "InfluxIOIncludedT3",
+ * //   allocatedStorage: Number("int"),
+ * //   deploymentType: "SINGLE_AZ" || "WITH_MULTIAZ_STANDBY",
+ * //   vpcSubnetIds: [ // VpcSubnetIdList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   publiclyAccessible: true || false,
+ * //   vpcSecurityGroupIds: [ // VpcSecurityGroupIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   dbParameterGroupIdentifier: "STRING_VALUE",
+ * //   availabilityZone: "STRING_VALUE",
+ * //   secondaryAvailabilityZone: "STRING_VALUE",
+ * //   logDeliveryConfiguration: { // LogDeliveryConfiguration
+ * //     s3Configuration: { // S3Configuration
+ * //       bucketName: "STRING_VALUE", // required
+ * //       enabled: true || false, // required
+ * //     },
+ * //   },
+ * //   influxAuthParametersSecretArn: "STRING_VALUE",
+ * //   dbClusterId: "STRING_VALUE",
+ * //   instanceMode: "PRIMARY" || "STANDBY" || "REPLICA" || "INGEST" || "QUERY" || "COMPACT" || "PROCESS",
+ * //   instanceModes: [ // InstanceModeList
+ * //     "PRIMARY" || "STANDBY" || "REPLICA" || "INGEST" || "QUERY" || "COMPACT" || "PROCESS",
+ * //   ],
+ * //   maintenanceSchedule: { // MaintenanceSchedule
+ * //     timezone: "STRING_VALUE", // required
+ * //     preferredMaintenanceWindow: "STRING_VALUE", // required
+ * //   },
+ * //   lastMaintenanceTime: new Date("TIMESTAMP"),
+ * //   nextMaintenanceTime: new Date("TIMESTAMP"),
+ * //   dbBackupConfigurations: [ // DbBackupConfigurationOutputList
+ * //     { // DbBackupConfigurationOutput
+ * //       type: "HOURLY" || "DAILY" || "WEEKLY" || "MONTHLY" || "CUSTOM_SCHEDULE" || "CONTINUOUS", // required
+ * //       retentionDays: Number("int"), // required
+ * //       enabled: true || false, // required
+ * //       customSchedule: "STRING_VALUE",
+ * //       nextAutomatedBackupTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   kmsKeyId: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateDbInstanceCommandInput - {@link CreateDbInstanceCommandInput}
+ * @returns {@link CreateDbInstanceCommandOutput}
+ * @see {@link CreateDbInstanceCommandInput} for command's `input` shape.
+ * @see {@link CreateDbInstanceCommandOutput} for command's `response` shape.
+ * @see {@link TimestreamInfluxDBClientResolvedConfig | config} for TimestreamInfluxDBClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request conflicts with an existing resource in Timestream for InfluxDB.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource was not found or does not exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request exceeds the service quota.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by Timestream for InfluxDB.</p>
+ *
+ * @throws {@link TimestreamInfluxDBServiceException}
+ * <p>Base exception class for all service exceptions from TimestreamInfluxDB service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateDbInstanceCommand extends command<CreateDbInstanceCommandInput, CreateDbInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDbInstance",
+  CreateDbInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDbInstanceInput;
+      output: CreateDbInstanceOutput;
+    };
+    sdk: {
+      input: CreateDbInstanceCommandInput;
+      output: CreateDbInstanceCommandOutput;
+    };
+  };
+}

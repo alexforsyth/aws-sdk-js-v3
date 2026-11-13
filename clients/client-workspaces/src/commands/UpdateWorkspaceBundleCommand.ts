@@ -1,31 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateWorkspaceBundleRequest, UpdateWorkspaceBundleResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateWorkspaceBundleCommand,
-  serializeAws_json1_1UpdateWorkspaceBundleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateWorkspaceBundleRequest, UpdateWorkspaceBundleResult } from "../models/models_0";
+import { UpdateWorkspaceBundle$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateWorkspaceBundleCommand}.
+ */
 export interface UpdateWorkspaceBundleCommandInput extends UpdateWorkspaceBundleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateWorkspaceBundleCommand}.
+ */
 export interface UpdateWorkspaceBundleCommandOutput extends UpdateWorkspaceBundleResult, __MetadataBearer {}
 
 /**
  * <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see
  *          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html">
  *             Update a Custom WorkSpaces Bundle</a>.</p>
- *
  *          <important>
  *             <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're
  *             based on. To update existing WorkSpaces that are based on a bundle that you've updated, you
@@ -36,68 +36,61 @@ export interface UpdateWorkspaceBundleCommandOutput extends UpdateWorkspaceBundl
  * ```javascript
  * import { WorkSpacesClient, UpdateWorkspaceBundleCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, UpdateWorkspaceBundleCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // UpdateWorkspaceBundleRequest
+ *   BundleId: "STRING_VALUE",
+ *   ImageId: "STRING_VALUE",
+ * };
  * const command = new UpdateWorkspaceBundleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateWorkspaceBundleCommandInput - {@link UpdateWorkspaceBundleCommandInput}
+ * @returns {@link UpdateWorkspaceBundleCommandOutput}
  * @see {@link UpdateWorkspaceBundleCommandInput} for command's `input` shape.
  * @see {@link UpdateWorkspaceBundleCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource is not available.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateWorkspaceBundleCommand extends $Command<
-  UpdateWorkspaceBundleCommandInput,
-  UpdateWorkspaceBundleCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateWorkspaceBundleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateWorkspaceBundleCommandInput, UpdateWorkspaceBundleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "UpdateWorkspaceBundleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateWorkspaceBundleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateWorkspaceBundleResult.filterSensitiveLog,
+export class UpdateWorkspaceBundleCommand extends command<UpdateWorkspaceBundleCommandInput, UpdateWorkspaceBundleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateWorkspaceBundle",
+  UpdateWorkspaceBundle$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWorkspaceBundleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateWorkspaceBundleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateWorkspaceBundleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateWorkspaceBundleCommandOutput> {
-    return deserializeAws_json1_1UpdateWorkspaceBundleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateWorkspaceBundleCommandInput;
+      output: UpdateWorkspaceBundleCommandOutput;
+    };
+  };
 }

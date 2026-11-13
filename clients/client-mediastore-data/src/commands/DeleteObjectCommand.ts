@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreDataClient";
-import { DeleteObjectRequest, DeleteObjectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteObjectCommand,
-  serializeAws_restJson1DeleteObjectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteObjectRequest, DeleteObjectResponse } from "../models/models_0";
+import { DeleteObject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteObjectCommand}.
+ */
 export interface DeleteObjectCommandInput extends DeleteObjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteObjectCommand}.
+ */
 export interface DeleteObjectCommandOutput extends DeleteObjectResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface DeleteObjectCommandOutput extends DeleteObjectResponse, __Metad
  * ```javascript
  * import { MediaStoreDataClient, DeleteObjectCommand } from "@aws-sdk/client-mediastore-data"; // ES Modules import
  * // const { MediaStoreDataClient, DeleteObjectCommand } = require("@aws-sdk/client-mediastore-data"); // CommonJS import
+ * // import type { MediaStoreDataClientConfig } from "@aws-sdk/client-mediastore-data";
+ * const config = {}; // type is MediaStoreDataClientConfig
  * const client = new MediaStoreDataClient(config);
+ * const input = { // DeleteObjectRequest
+ *   Path: "STRING_VALUE", // required
+ * };
  * const command = new DeleteObjectCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteObjectCommandInput - {@link DeleteObjectCommandInput}
+ * @returns {@link DeleteObjectCommandOutput}
  * @see {@link DeleteObjectCommandInput} for command's `input` shape.
  * @see {@link DeleteObjectCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreDataClientResolvedConfig | config} for MediaStoreDataClient's `config` shape.
  *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The specified container was not found for the specified account.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ObjectNotFoundException} (client fault)
+ *  <p>Could not perform an operation on an object that does not exist.</p>
+ *
+ * @throws {@link MediaStoreDataServiceException}
+ * <p>Base exception class for all service exceptions from MediaStoreData service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteObjectCommand extends $Command<
-  DeleteObjectCommandInput,
-  DeleteObjectCommandOutput,
-  MediaStoreDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteObjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteObjectCommandInput, DeleteObjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreDataClient";
-    const commandName = "DeleteObjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteObjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteObjectResponse.filterSensitiveLog,
+export class DeleteObjectCommand extends command<DeleteObjectCommandInput, DeleteObjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteObject",
+  DeleteObject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteObjectRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteObjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteObjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteObjectCommandOutput> {
-    return deserializeAws_restJson1DeleteObjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteObjectCommandInput;
+      output: DeleteObjectCommandOutput;
+    };
+  };
 }

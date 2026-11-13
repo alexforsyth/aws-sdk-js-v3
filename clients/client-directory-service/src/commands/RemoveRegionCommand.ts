@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { RemoveRegionRequest, RemoveRegionResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1RemoveRegionCommand,
-  serializeAws_json1_1RemoveRegionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveRegionRequest, RemoveRegionResult } from "../models/models_0";
+import { RemoveRegion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveRegionCommand}.
+ */
 export interface RemoveRegionCommandInput extends RemoveRegionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveRegionCommand}.
+ */
 export interface RemoveRegionCommandOutput extends RemoveRegionResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,63 @@ export interface RemoveRegionCommandOutput extends RemoveRegionResult, __Metadat
  * ```javascript
  * import { DirectoryServiceClient, RemoveRegionCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, RemoveRegionCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // RemoveRegionRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ * };
  * const command = new RemoveRegionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveRegionCommandInput - {@link RemoveRegionCommandInput}
+ * @returns {@link RemoveRegionCommandOutput}
  * @see {@link RemoveRegionCommandInput} for command's `input` shape.
  * @see {@link RemoveRegionCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link DirectoryDoesNotExistException} (client fault)
+ *  <p>The specified directory does not exist in the system.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The specified directory is unavailable.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveRegionCommand extends $Command<
-  RemoveRegionCommandInput,
-  RemoveRegionCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveRegionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveRegionCommandInput, RemoveRegionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "RemoveRegionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveRegionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveRegionResult.filterSensitiveLog,
+export class RemoveRegionCommand extends command<RemoveRegionCommandInput, RemoveRegionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveRegion",
+  RemoveRegion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveRegionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveRegionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RemoveRegionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveRegionCommandOutput> {
-    return deserializeAws_json1_1RemoveRegionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveRegionCommandInput;
+      output: RemoveRegionCommandOutput;
+    };
+  };
 }

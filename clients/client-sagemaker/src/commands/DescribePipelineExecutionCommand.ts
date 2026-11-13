@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePipelineExecutionRequest, DescribePipelineExecutionResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribePipelineExecutionCommand,
-  serializeAws_json1_1DescribePipelineExecutionCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePipelineExecutionRequest, DescribePipelineExecutionResponse } from "../models/models_3";
+import { DescribePipelineExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePipelineExecutionCommand}.
+ */
 export interface DescribePipelineExecutionCommandInput extends DescribePipelineExecutionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePipelineExecutionCommand}.
+ */
 export interface DescribePipelineExecutionCommandOutput extends DescribePipelineExecutionResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,101 @@ export interface DescribePipelineExecutionCommandOutput extends DescribePipeline
  * ```javascript
  * import { SageMakerClient, DescribePipelineExecutionCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribePipelineExecutionCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribePipelineExecutionRequest
+ *   PipelineExecutionArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribePipelineExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePipelineExecutionResponse
+ * //   PipelineArn: "STRING_VALUE",
+ * //   PipelineExecutionArn: "STRING_VALUE",
+ * //   PipelineExecutionDisplayName: "STRING_VALUE",
+ * //   PipelineExecutionStatus: "Executing" || "Stopping" || "Stopped" || "Failed" || "Succeeded" || "CompletedWithFailures",
+ * //   PipelineExecutionDescription: "STRING_VALUE",
+ * //   PipelineExperimentConfig: { // PipelineExperimentConfig
+ * //     ExperimentName: "STRING_VALUE",
+ * //     TrialName: "STRING_VALUE",
+ * //   },
+ * //   FailureReason: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   ParallelismConfiguration: { // ParallelismConfiguration
+ * //     MaxParallelExecutionSteps: Number("int"), // required
+ * //   },
+ * //   SelectiveExecutionConfig: { // SelectiveExecutionConfig
+ * //     SourcePipelineExecutionArn: "STRING_VALUE",
+ * //     SelectedSteps: [ // SelectedStepList // required
+ * //       { // SelectedStep
+ * //         StepName: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   PipelineVersionId: Number("long"),
+ * //   MLflowConfig: { // MLflowConfiguration
+ * //     MlflowResourceArn: "STRING_VALUE",
+ * //     MlflowExperimentName: "STRING_VALUE",
+ * //   },
+ * //   PipelineVersionAliases: [ // PipelineVersionAliasList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   RoleArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePipelineExecutionCommandInput - {@link DescribePipelineExecutionCommandInput}
+ * @returns {@link DescribePipelineExecutionCommandOutput}
  * @see {@link DescribePipelineExecutionCommandInput} for command's `input` shape.
  * @see {@link DescribePipelineExecutionCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePipelineExecutionCommand extends $Command<
-  DescribePipelineExecutionCommandInput,
-  DescribePipelineExecutionCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePipelineExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePipelineExecutionCommandInput, DescribePipelineExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribePipelineExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePipelineExecutionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePipelineExecutionResponse.filterSensitiveLog,
+export class DescribePipelineExecutionCommand extends command<DescribePipelineExecutionCommandInput, DescribePipelineExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePipelineExecution",
+  DescribePipelineExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePipelineExecutionRequest;
+      output: DescribePipelineExecutionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePipelineExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePipelineExecutionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribePipelineExecutionCommandOutput> {
-    return deserializeAws_json1_1DescribePipelineExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePipelineExecutionCommandInput;
+      output: DescribePipelineExecutionCommandOutput;
+    };
+  };
 }

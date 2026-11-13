@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateVpcPeeringConnectionRequest, CreateVpcPeeringConnectionResult } from "../models/models_2";
-import {
-  deserializeAws_ec2CreateVpcPeeringConnectionCommand,
-  serializeAws_ec2CreateVpcPeeringConnectionCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateVpcPeeringConnectionRequest, CreateVpcPeeringConnectionResult } from "../models/models_2";
+import { CreateVpcPeeringConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateVpcPeeringConnectionCommand}.
+ */
 export interface CreateVpcPeeringConnectionCommandInput extends CreateVpcPeeringConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateVpcPeeringConnectionCommand}.
+ */
 export interface CreateVpcPeeringConnectionCommandOutput extends CreateVpcPeeringConnectionResult, __MetadataBearer {}
 
 /**
@@ -28,7 +29,7 @@ export interface CreateVpcPeeringConnectionCommandOutput extends CreateVpcPeerin
  *           The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p>
  *          <note>
  *             <p>Limitations and rules apply to a VPC peering connection. For more information, see
- *           the <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations">limitations</a> section in the <i>VPC Peering Guide</i>.</p>
+ *           the <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations">VPC peering limitations</a> in the <i>VPC Peering Guide</i>.</p>
  *          </note>
  *          <p>The owner of the accepter VPC must accept the peering request to activate the peering
  *             connection. The VPC peering connection request expires after 7 days, after which it
@@ -40,71 +41,117 @@ export interface CreateVpcPeeringConnectionCommandOutput extends CreateVpcPeerin
  * ```javascript
  * import { EC2Client, CreateVpcPeeringConnectionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateVpcPeeringConnectionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateVpcPeeringConnectionRequest
+ *   PeerRegion: "STRING_VALUE",
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   DryRun: true || false,
+ *   VpcId: "STRING_VALUE", // required
+ *   PeerVpcId: "STRING_VALUE",
+ *   PeerOwnerId: "STRING_VALUE",
+ * };
  * const command = new CreateVpcPeeringConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateVpcPeeringConnectionResult
+ * //   VpcPeeringConnection: { // VpcPeeringConnection
+ * //     AccepterVpcInfo: { // VpcPeeringConnectionVpcInfo
+ * //       CidrBlock: "STRING_VALUE",
+ * //       Ipv6CidrBlockSet: [ // Ipv6CidrBlockSet
+ * //         { // Ipv6CidrBlock
+ * //           Ipv6CidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       CidrBlockSet: [ // CidrBlockSet
+ * //         { // CidrBlock
+ * //           CidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       OwnerId: "STRING_VALUE",
+ * //       PeeringOptions: { // VpcPeeringConnectionOptionsDescription
+ * //         AllowDnsResolutionFromRemoteVpc: true || false,
+ * //         AllowEgressFromLocalClassicLinkToRemoteVpc: true || false,
+ * //         AllowEgressFromLocalVpcToRemoteClassicLink: true || false,
+ * //       },
+ * //       VpcId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     ExpirationTime: new Date("TIMESTAMP"),
+ * //     RequesterVpcInfo: {
+ * //       CidrBlock: "STRING_VALUE",
+ * //       Ipv6CidrBlockSet: [
+ * //         {
+ * //           Ipv6CidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       CidrBlockSet: [
+ * //         {
+ * //           CidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       OwnerId: "STRING_VALUE",
+ * //       PeeringOptions: {
+ * //         AllowDnsResolutionFromRemoteVpc: true || false,
+ * //         AllowEgressFromLocalClassicLinkToRemoteVpc: true || false,
+ * //         AllowEgressFromLocalVpcToRemoteClassicLink: true || false,
+ * //       },
+ * //       VpcId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     Status: { // VpcPeeringConnectionStateReason
+ * //       Code: "initiating-request" || "pending-acceptance" || "active" || "deleted" || "rejected" || "failed" || "expired" || "provisioning" || "deleting",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     VpcPeeringConnectionId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateVpcPeeringConnectionCommandInput - {@link CreateVpcPeeringConnectionCommandInput}
+ * @returns {@link CreateVpcPeeringConnectionCommandOutput}
  * @see {@link CreateVpcPeeringConnectionCommandInput} for command's `input` shape.
  * @see {@link CreateVpcPeeringConnectionCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateVpcPeeringConnectionCommand extends $Command<
-  CreateVpcPeeringConnectionCommandInput,
-  CreateVpcPeeringConnectionCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateVpcPeeringConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateVpcPeeringConnectionCommandInput, CreateVpcPeeringConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateVpcPeeringConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateVpcPeeringConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateVpcPeeringConnectionResult.filterSensitiveLog,
+export class CreateVpcPeeringConnectionCommand extends command<CreateVpcPeeringConnectionCommandInput, CreateVpcPeeringConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateVpcPeeringConnection",
+  CreateVpcPeeringConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVpcPeeringConnectionRequest;
+      output: CreateVpcPeeringConnectionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateVpcPeeringConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateVpcPeeringConnectionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateVpcPeeringConnectionCommandOutput> {
-    return deserializeAws_ec2CreateVpcPeeringConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateVpcPeeringConnectionCommandInput;
+      output: CreateVpcPeeringConnectionCommandOutput;
+    };
+  };
 }

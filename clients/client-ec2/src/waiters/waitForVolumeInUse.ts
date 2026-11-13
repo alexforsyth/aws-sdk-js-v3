@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeVolumesCommand, DescribeVolumesCommandInput } from "../commands/DescribeVolumesCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type DescribeVolumesCommandInput,
+  type DescribeVolumesCommandOutput,
+  DescribeVolumesCommand,
+} from "../commands/DescribeVolumesCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeVolumesCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeVolumesCommandInput): Promise<WaiterResult<DescribeVolumesCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeVolumesCommand(input));
+    let result: DescribeVolumesCommandOutput & any = await client.send(new DescribeVolumesCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Volumes);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Volumes);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "in-use";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "in-use")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,13 +38,13 @@ const checkState = async (client: EC2Client, input: DescribeVolumesCommandInput)
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Volumes);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Volumes);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleted") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -50,7 +62,7 @@ const checkState = async (client: EC2Client, input: DescribeVolumesCommandInput)
 export const waitForVolumeInUse = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVolumesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVolumesCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -62,8 +74,8 @@ export const waitForVolumeInUse = async (
 export const waitUntilVolumeInUse = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVolumesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVolumesCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeVolumesCommandOutput>;
 };

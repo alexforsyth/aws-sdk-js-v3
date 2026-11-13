@@ -1,0 +1,104 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEvaluationFormsRequest, ListEvaluationFormsResponse } from "../models/models_2";
+import { ListEvaluationForms$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEvaluationFormsCommand}.
+ */
+export interface ListEvaluationFormsCommandInput extends ListEvaluationFormsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEvaluationFormsCommand}.
+ */
+export interface ListEvaluationFormsCommandOutput extends ListEvaluationFormsResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists evaluation forms in the specified Connect Customer instance.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, ListEvaluationFormsCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, ListEvaluationFormsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // ListEvaluationFormsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListEvaluationFormsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListEvaluationFormsResponse
+ * //   EvaluationFormSummaryList: [ // EvaluationFormSummaryList // required
+ * //     { // EvaluationFormSummary
+ * //       EvaluationFormId: "STRING_VALUE", // required
+ * //       EvaluationFormArn: "STRING_VALUE", // required
+ * //       Title: "STRING_VALUE", // required
+ * //       CreatedTime: new Date("TIMESTAMP"), // required
+ * //       CreatedBy: "STRING_VALUE", // required
+ * //       LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //       LastModifiedBy: "STRING_VALUE", // required
+ * //       LastActivatedTime: new Date("TIMESTAMP"),
+ * //       LastActivatedBy: "STRING_VALUE",
+ * //       LatestVersion: Number("int"), // required
+ * //       ActiveVersion: Number("int"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListEvaluationFormsCommandInput - {@link ListEvaluationFormsCommandInput}
+ * @returns {@link ListEvaluationFormsCommandOutput}
+ * @see {@link ListEvaluationFormsCommandInput} for command's `input` shape.
+ * @see {@link ListEvaluationFormsCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class ListEvaluationFormsCommand extends command<ListEvaluationFormsCommandInput, ListEvaluationFormsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEvaluationForms",
+  ListEvaluationForms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEvaluationFormsRequest;
+      output: ListEvaluationFormsResponse;
+    };
+    sdk: {
+      input: ListEvaluationFormsCommandInput;
+      output: ListEvaluationFormsCommandOutput;
+    };
+  };
+}

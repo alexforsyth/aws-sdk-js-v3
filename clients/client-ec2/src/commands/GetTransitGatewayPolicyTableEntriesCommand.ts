@@ -1,0 +1,107 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetTransitGatewayPolicyTableEntriesRequest,
+  GetTransitGatewayPolicyTableEntriesResult,
+} from "../models/models_7";
+import { GetTransitGatewayPolicyTableEntries$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTransitGatewayPolicyTableEntriesCommand}.
+ */
+export interface GetTransitGatewayPolicyTableEntriesCommandInput extends GetTransitGatewayPolicyTableEntriesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTransitGatewayPolicyTableEntriesCommand}.
+ */
+export interface GetTransitGatewayPolicyTableEntriesCommandOutput extends GetTransitGatewayPolicyTableEntriesResult, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of transit gateway policy table entries.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, GetTransitGatewayPolicyTableEntriesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, GetTransitGatewayPolicyTableEntriesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // GetTransitGatewayPolicyTableEntriesRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
+ * const command = new GetTransitGatewayPolicyTableEntriesCommand(input);
+ * const response = await client.send(command);
+ * // { // GetTransitGatewayPolicyTableEntriesResult
+ * //   TransitGatewayPolicyTableEntries: [ // TransitGatewayPolicyTableEntryList
+ * //     { // TransitGatewayPolicyTableEntry
+ * //       PolicyRuleNumber: "STRING_VALUE",
+ * //       PolicyRule: { // TransitGatewayPolicyRule
+ * //         SourceCidrBlock: "STRING_VALUE",
+ * //         SourcePortRange: "STRING_VALUE",
+ * //         DestinationCidrBlock: "STRING_VALUE",
+ * //         DestinationPortRange: "STRING_VALUE",
+ * //         Protocol: "STRING_VALUE",
+ * //         MetaData: { // TransitGatewayPolicyRuleMetaData
+ * //           MetaDataKey: "STRING_VALUE",
+ * //           MetaDataValue: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       TargetRouteTableId: "STRING_VALUE",
+ * //       State: "active" || "deleted",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetTransitGatewayPolicyTableEntriesCommandInput - {@link GetTransitGatewayPolicyTableEntriesCommandInput}
+ * @returns {@link GetTransitGatewayPolicyTableEntriesCommandOutput}
+ * @see {@link GetTransitGatewayPolicyTableEntriesCommandInput} for command's `input` shape.
+ * @see {@link GetTransitGatewayPolicyTableEntriesCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class GetTransitGatewayPolicyTableEntriesCommand extends command<GetTransitGatewayPolicyTableEntriesCommandInput, GetTransitGatewayPolicyTableEntriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTransitGatewayPolicyTableEntries",
+  GetTransitGatewayPolicyTableEntries$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayPolicyTableEntriesRequest;
+      output: GetTransitGatewayPolicyTableEntriesResult;
+    };
+    sdk: {
+      input: GetTransitGatewayPolicyTableEntriesCommandInput;
+      output: GetTransitGatewayPolicyTableEntriesCommandOutput;
+    };
+  };
+}

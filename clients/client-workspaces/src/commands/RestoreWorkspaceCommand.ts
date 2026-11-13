@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RestoreWorkspaceRequest, RestoreWorkspaceResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1RestoreWorkspaceCommand,
-  serializeAws_json1_1RestoreWorkspaceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RestoreWorkspaceRequest, RestoreWorkspaceResult } from "../models/models_0";
+import { RestoreWorkspace$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RestoreWorkspaceCommand}.
+ */
 export interface RestoreWorkspaceCommandInput extends RestoreWorkspaceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RestoreWorkspaceCommand}.
+ */
 export interface RestoreWorkspaceCommandOutput extends RestoreWorkspaceResult, __MetadataBearer {}
 
 /**
@@ -35,68 +36,57 @@ export interface RestoreWorkspaceCommandOutput extends RestoreWorkspaceResult, _
  * ```javascript
  * import { WorkSpacesClient, RestoreWorkspaceCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, RestoreWorkspaceCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // RestoreWorkspaceRequest
+ *   WorkspaceId: "STRING_VALUE", // required
+ * };
  * const command = new RestoreWorkspaceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RestoreWorkspaceCommandInput - {@link RestoreWorkspaceCommandInput}
+ * @returns {@link RestoreWorkspaceCommandOutput}
  * @see {@link RestoreWorkspaceCommandInput} for command's `input` shape.
  * @see {@link RestoreWorkspaceCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class RestoreWorkspaceCommand extends $Command<
-  RestoreWorkspaceCommandInput,
-  RestoreWorkspaceCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RestoreWorkspaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RestoreWorkspaceCommandInput, RestoreWorkspaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "RestoreWorkspaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RestoreWorkspaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RestoreWorkspaceResult.filterSensitiveLog,
+export class RestoreWorkspaceCommand extends command<RestoreWorkspaceCommandInput, RestoreWorkspaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RestoreWorkspace",
+  RestoreWorkspace$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreWorkspaceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RestoreWorkspaceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RestoreWorkspaceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RestoreWorkspaceCommandOutput> {
-    return deserializeAws_json1_1RestoreWorkspaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RestoreWorkspaceCommandInput;
+      output: RestoreWorkspaceCommandOutput;
+    };
+  };
 }

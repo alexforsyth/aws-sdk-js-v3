@@ -1,41 +1,44 @@
-const ROLE_ASSUMER_WITH_WEB_IDENTITY = "ROLE_ASSUMER_WITH_WEB_IDENTITY";
-
-jest.mock("@aws-sdk/client-sts", () => ({
-  getDefaultRoleAssumerWithWebIdentity: jest.fn().mockReturnValue(ROLE_ASSUMER_WITH_WEB_IDENTITY),
-}));
-
-import { getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/client-sts";
 import { fromTokenFile as coreProvider } from "@aws-sdk/credential-provider-web-identity";
+import { getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/nested-clients/sts";
+import { beforeEach, describe, expect, test as it, vi } from "vitest";
 
 import { fromTokenFile } from "./fromTokenFile";
 
-jest.mock("@aws-sdk/credential-provider-web-identity", () => ({
-  fromTokenFile: jest.fn(),
+const mockRoleAssumerWithWebIdentity = vi.fn().mockResolvedValue("ROLE_ASSUMER_WITH_WEB_IDENTITY");
+
+vi.mock("@aws-sdk/nested-clients/sts", () => ({
+  getDefaultRoleAssumerWithWebIdentity: vi.fn().mockImplementation(() => mockRoleAssumerWithWebIdentity),
+}));
+
+vi.mock("@aws-sdk/credential-provider-web-identity", () => ({
+  fromTokenFile: vi.fn().mockReturnValue(vi.fn()),
 }));
 
 describe("fromTokenFile", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it("should inject default role assumer", () => {
-    fromTokenFile();
-    expect(coreProvider).toBeCalledWith({
-      roleAssumerWithWebIdentity: ROLE_ASSUMER_WITH_WEB_IDENTITY,
-    });
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalled();
+  it("should not inject default role assumer", async () => {
+    const provider = fromTokenFile();
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({});
+    expect(getDefaultRoleAssumerWithWebIdentity).not.toHaveBeenCalled();
   });
 
-  it("should supply sts config to role assumer", () => {
+  it("defers to @aws-sdk/credential-provider-web-identity", async () => {
     const clientConfig = {
       region: "US_FOO_0",
     };
-    fromTokenFile({
+    const plugin = { applyToStack: () => {} };
+    const provider = fromTokenFile({
       clientConfig,
+      clientPlugins: [plugin],
     });
-    expect((coreProvider as jest.Mock).mock.calls[0][0]).toMatchObject({
-      roleAssumerWithWebIdentity: ROLE_ASSUMER_WITH_WEB_IDENTITY,
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({
+      clientConfig,
+      clientPlugins: [plugin],
     });
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalledWith(clientConfig);
   });
 });

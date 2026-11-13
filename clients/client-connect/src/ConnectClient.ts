@@ -1,427 +1,1631 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultConnectHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  ActivateEvaluationFormCommandInput,
+  ActivateEvaluationFormCommandOutput,
+} from "./commands/ActivateEvaluationFormCommand";
+import type {
+  AssociateAnalyticsDataSetCommandInput,
+  AssociateAnalyticsDataSetCommandOutput,
+} from "./commands/AssociateAnalyticsDataSetCommand";
+import type {
   AssociateApprovedOriginCommandInput,
   AssociateApprovedOriginCommandOutput,
 } from "./commands/AssociateApprovedOriginCommand";
-import { AssociateBotCommandInput, AssociateBotCommandOutput } from "./commands/AssociateBotCommand";
-import {
+import type { AssociateBotCommandInput, AssociateBotCommandOutput } from "./commands/AssociateBotCommand";
+import type {
+  AssociateContactWithUserCommandInput,
+  AssociateContactWithUserCommandOutput,
+} from "./commands/AssociateContactWithUserCommand";
+import type {
+  AssociateDefaultVocabularyCommandInput,
+  AssociateDefaultVocabularyCommandOutput,
+} from "./commands/AssociateDefaultVocabularyCommand";
+import type {
+  AssociateEmailAddressAliasCommandInput,
+  AssociateEmailAddressAliasCommandOutput,
+} from "./commands/AssociateEmailAddressAliasCommand";
+import type { AssociateFlowCommandInput, AssociateFlowCommandOutput } from "./commands/AssociateFlowCommand";
+import type {
+  AssociateHoursOfOperationsCommandInput,
+  AssociateHoursOfOperationsCommandOutput,
+} from "./commands/AssociateHoursOfOperationsCommand";
+import type {
   AssociateInstanceStorageConfigCommandInput,
   AssociateInstanceStorageConfigCommandOutput,
 } from "./commands/AssociateInstanceStorageConfigCommand";
-import {
+import type {
   AssociateLambdaFunctionCommandInput,
   AssociateLambdaFunctionCommandOutput,
 } from "./commands/AssociateLambdaFunctionCommand";
-import { AssociateLexBotCommandInput, AssociateLexBotCommandOutput } from "./commands/AssociateLexBotCommand";
-import {
+import type { AssociateLexBotCommandInput, AssociateLexBotCommandOutput } from "./commands/AssociateLexBotCommand";
+import type {
+  AssociatePhoneNumberContactFlowCommandInput,
+  AssociatePhoneNumberContactFlowCommandOutput,
+} from "./commands/AssociatePhoneNumberContactFlowCommand";
+import type {
+  AssociateQueueEmailAddressesCommandInput,
+  AssociateQueueEmailAddressesCommandOutput,
+} from "./commands/AssociateQueueEmailAddressesCommand";
+import type {
   AssociateQueueQuickConnectsCommandInput,
   AssociateQueueQuickConnectsCommandOutput,
 } from "./commands/AssociateQueueQuickConnectsCommand";
-import {
+import type {
   AssociateRoutingProfileQueuesCommandInput,
   AssociateRoutingProfileQueuesCommandOutput,
 } from "./commands/AssociateRoutingProfileQueuesCommand";
-import {
+import type {
   AssociateSecurityKeyCommandInput,
   AssociateSecurityKeyCommandOutput,
 } from "./commands/AssociateSecurityKeyCommand";
-import { CreateAgentStatusCommandInput, CreateAgentStatusCommandOutput } from "./commands/CreateAgentStatusCommand";
-import { CreateContactFlowCommandInput, CreateContactFlowCommandOutput } from "./commands/CreateContactFlowCommand";
-import {
+import type {
+  AssociateSecurityProfilesCommandInput,
+  AssociateSecurityProfilesCommandOutput,
+} from "./commands/AssociateSecurityProfilesCommand";
+import type {
+  AssociateTrafficDistributionGroupUserCommandInput,
+  AssociateTrafficDistributionGroupUserCommandOutput,
+} from "./commands/AssociateTrafficDistributionGroupUserCommand";
+import type {
+  AssociateUserProficienciesCommandInput,
+  AssociateUserProficienciesCommandOutput,
+} from "./commands/AssociateUserProficienciesCommand";
+import type {
+  AssociateWorkspaceCommandInput,
+  AssociateWorkspaceCommandOutput,
+} from "./commands/AssociateWorkspaceCommand";
+import type {
+  BatchAssociateAnalyticsDataSetCommandInput,
+  BatchAssociateAnalyticsDataSetCommandOutput,
+} from "./commands/BatchAssociateAnalyticsDataSetCommand";
+import type {
+  BatchCreateDataTableValueCommandInput,
+  BatchCreateDataTableValueCommandOutput,
+} from "./commands/BatchCreateDataTableValueCommand";
+import type {
+  BatchDeleteDataTableValueCommandInput,
+  BatchDeleteDataTableValueCommandOutput,
+} from "./commands/BatchDeleteDataTableValueCommand";
+import type {
+  BatchDescribeDataTableValueCommandInput,
+  BatchDescribeDataTableValueCommandOutput,
+} from "./commands/BatchDescribeDataTableValueCommand";
+import type {
+  BatchDisassociateAnalyticsDataSetCommandInput,
+  BatchDisassociateAnalyticsDataSetCommandOutput,
+} from "./commands/BatchDisassociateAnalyticsDataSetCommand";
+import type {
+  BatchGetAttachedFileMetadataCommandInput,
+  BatchGetAttachedFileMetadataCommandOutput,
+} from "./commands/BatchGetAttachedFileMetadataCommand";
+import type {
+  BatchGetFlowAssociationCommandInput,
+  BatchGetFlowAssociationCommandOutput,
+} from "./commands/BatchGetFlowAssociationCommand";
+import type { BatchPutContactCommandInput, BatchPutContactCommandOutput } from "./commands/BatchPutContactCommand";
+import type {
+  BatchUpdateDataTableValueCommandInput,
+  BatchUpdateDataTableValueCommandOutput,
+} from "./commands/BatchUpdateDataTableValueCommand";
+import type { ClaimPhoneNumberCommandInput, ClaimPhoneNumberCommandOutput } from "./commands/ClaimPhoneNumberCommand";
+import type {
+  CompleteAttachedFileUploadCommandInput,
+  CompleteAttachedFileUploadCommandOutput,
+} from "./commands/CompleteAttachedFileUploadCommand";
+import type {
+  CreateAgentStatusCommandInput,
+  CreateAgentStatusCommandOutput,
+} from "./commands/CreateAgentStatusCommand";
+import type {
+  CreateAttachedFileCommandInput,
+  CreateAttachedFileCommandOutput,
+} from "./commands/CreateAttachedFileCommand";
+import type { CreateAuthCodeCommandInput, CreateAuthCodeCommandOutput } from "./commands/CreateAuthCodeCommand";
+import type { CreateContactCommandInput, CreateContactCommandOutput } from "./commands/CreateContactCommand";
+import type {
+  CreateContactFlowAliasCommandInput,
+  CreateContactFlowAliasCommandOutput,
+} from "./commands/CreateContactFlowAliasCommand";
+import type {
+  CreateContactFlowCommandInput,
+  CreateContactFlowCommandOutput,
+} from "./commands/CreateContactFlowCommand";
+import type {
+  CreateContactFlowModuleAliasCommandInput,
+  CreateContactFlowModuleAliasCommandOutput,
+} from "./commands/CreateContactFlowModuleAliasCommand";
+import type {
+  CreateContactFlowModuleCommandInput,
+  CreateContactFlowModuleCommandOutput,
+} from "./commands/CreateContactFlowModuleCommand";
+import type {
+  CreateContactFlowModuleVersionCommandInput,
+  CreateContactFlowModuleVersionCommandOutput,
+} from "./commands/CreateContactFlowModuleVersionCommand";
+import type {
+  CreateContactFlowVersionCommandInput,
+  CreateContactFlowVersionCommandOutput,
+} from "./commands/CreateContactFlowVersionCommand";
+import type {
+  CreateDataTableAttributeCommandInput,
+  CreateDataTableAttributeCommandOutput,
+} from "./commands/CreateDataTableAttributeCommand";
+import type { CreateDataTableCommandInput, CreateDataTableCommandOutput } from "./commands/CreateDataTableCommand";
+import type {
+  CreateEmailAddressCommandInput,
+  CreateEmailAddressCommandOutput,
+} from "./commands/CreateEmailAddressCommand";
+import type {
+  CreateEvaluationFormCommandInput,
+  CreateEvaluationFormCommandOutput,
+} from "./commands/CreateEvaluationFormCommand";
+import type {
+  CreateExtractionDefinitionCommandInput,
+  CreateExtractionDefinitionCommandOutput,
+} from "./commands/CreateExtractionDefinitionCommand";
+import type {
   CreateHoursOfOperationCommandInput,
   CreateHoursOfOperationCommandOutput,
 } from "./commands/CreateHoursOfOperationCommand";
-import { CreateInstanceCommandInput, CreateInstanceCommandOutput } from "./commands/CreateInstanceCommand";
-import {
+import type {
+  CreateHoursOfOperationOverrideCommandInput,
+  CreateHoursOfOperationOverrideCommandOutput,
+} from "./commands/CreateHoursOfOperationOverrideCommand";
+import type { CreateInstanceCommandInput, CreateInstanceCommandOutput } from "./commands/CreateInstanceCommand";
+import type {
   CreateIntegrationAssociationCommandInput,
   CreateIntegrationAssociationCommandOutput,
 } from "./commands/CreateIntegrationAssociationCommand";
-import { CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
-import { CreateQuickConnectCommandInput, CreateQuickConnectCommandOutput } from "./commands/CreateQuickConnectCommand";
-import {
+import type { CreateMetricCommandInput, CreateMetricCommandOutput } from "./commands/CreateMetricCommand";
+import type {
+  CreateNotificationCommandInput,
+  CreateNotificationCommandOutput,
+} from "./commands/CreateNotificationCommand";
+import type {
+  CreateParticipantCommandInput,
+  CreateParticipantCommandOutput,
+} from "./commands/CreateParticipantCommand";
+import type {
+  CreatePersistentContactAssociationCommandInput,
+  CreatePersistentContactAssociationCommandOutput,
+} from "./commands/CreatePersistentContactAssociationCommand";
+import type {
+  CreatePredefinedAttributeCommandInput,
+  CreatePredefinedAttributeCommandOutput,
+} from "./commands/CreatePredefinedAttributeCommand";
+import type { CreatePromptCommandInput, CreatePromptCommandOutput } from "./commands/CreatePromptCommand";
+import type {
+  CreatePushNotificationRegistrationCommandInput,
+  CreatePushNotificationRegistrationCommandOutput,
+} from "./commands/CreatePushNotificationRegistrationCommand";
+import type { CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
+import type {
+  CreateQuickConnectCommandInput,
+  CreateQuickConnectCommandOutput,
+} from "./commands/CreateQuickConnectCommand";
+import type {
   CreateRoutingProfileCommandInput,
   CreateRoutingProfileCommandOutput,
 } from "./commands/CreateRoutingProfileCommand";
-import { CreateUseCaseCommandInput, CreateUseCaseCommandOutput } from "./commands/CreateUseCaseCommand";
-import { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
-import {
+import type { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
+import type {
+  CreateSecurityProfileCommandInput,
+  CreateSecurityProfileCommandOutput,
+} from "./commands/CreateSecurityProfileCommand";
+import type {
+  CreateTaskTemplateCommandInput,
+  CreateTaskTemplateCommandOutput,
+} from "./commands/CreateTaskTemplateCommand";
+import type { CreateTestCaseCommandInput, CreateTestCaseCommandOutput } from "./commands/CreateTestCaseCommand";
+import type {
+  CreateTrafficDistributionGroupCommandInput,
+  CreateTrafficDistributionGroupCommandOutput,
+} from "./commands/CreateTrafficDistributionGroupCommand";
+import type { CreateUseCaseCommandInput, CreateUseCaseCommandOutput } from "./commands/CreateUseCaseCommand";
+import type { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+import type {
   CreateUserHierarchyGroupCommandInput,
   CreateUserHierarchyGroupCommandOutput,
 } from "./commands/CreateUserHierarchyGroupCommand";
-import {
+import type { CreateViewCommandInput, CreateViewCommandOutput } from "./commands/CreateViewCommand";
+import type {
+  CreateViewVersionCommandInput,
+  CreateViewVersionCommandOutput,
+} from "./commands/CreateViewVersionCommand";
+import type { CreateVocabularyCommandInput, CreateVocabularyCommandOutput } from "./commands/CreateVocabularyCommand";
+import type { CreateWorkspaceCommandInput, CreateWorkspaceCommandOutput } from "./commands/CreateWorkspaceCommand";
+import type {
+  CreateWorkspacePageCommandInput,
+  CreateWorkspacePageCommandOutput,
+} from "./commands/CreateWorkspacePageCommand";
+import type {
+  DeactivateEvaluationFormCommandInput,
+  DeactivateEvaluationFormCommandOutput,
+} from "./commands/DeactivateEvaluationFormCommand";
+import type {
+  DeleteAttachedFileCommandInput,
+  DeleteAttachedFileCommandOutput,
+} from "./commands/DeleteAttachedFileCommand";
+import type {
+  DeleteContactDataCommandInput,
+  DeleteContactDataCommandOutput,
+} from "./commands/DeleteContactDataCommand";
+import type {
+  DeleteContactEvaluationCommandInput,
+  DeleteContactEvaluationCommandOutput,
+} from "./commands/DeleteContactEvaluationCommand";
+import type {
+  DeleteContactFlowAliasCommandInput,
+  DeleteContactFlowAliasCommandOutput,
+} from "./commands/DeleteContactFlowAliasCommand";
+import type {
+  DeleteContactFlowCommandInput,
+  DeleteContactFlowCommandOutput,
+} from "./commands/DeleteContactFlowCommand";
+import type {
+  DeleteContactFlowModuleAliasCommandInput,
+  DeleteContactFlowModuleAliasCommandOutput,
+} from "./commands/DeleteContactFlowModuleAliasCommand";
+import type {
+  DeleteContactFlowModuleCommandInput,
+  DeleteContactFlowModuleCommandOutput,
+} from "./commands/DeleteContactFlowModuleCommand";
+import type {
+  DeleteContactFlowModuleVersionCommandInput,
+  DeleteContactFlowModuleVersionCommandOutput,
+} from "./commands/DeleteContactFlowModuleVersionCommand";
+import type {
+  DeleteContactFlowVersionCommandInput,
+  DeleteContactFlowVersionCommandOutput,
+} from "./commands/DeleteContactFlowVersionCommand";
+import type {
+  DeleteDataTableAttributeCommandInput,
+  DeleteDataTableAttributeCommandOutput,
+} from "./commands/DeleteDataTableAttributeCommand";
+import type { DeleteDataTableCommandInput, DeleteDataTableCommandOutput } from "./commands/DeleteDataTableCommand";
+import type {
+  DeleteEmailAddressCommandInput,
+  DeleteEmailAddressCommandOutput,
+} from "./commands/DeleteEmailAddressCommand";
+import type {
+  DeleteEvaluationFormCommandInput,
+  DeleteEvaluationFormCommandOutput,
+} from "./commands/DeleteEvaluationFormCommand";
+import type {
+  DeleteExtractionDefinitionCommandInput,
+  DeleteExtractionDefinitionCommandOutput,
+} from "./commands/DeleteExtractionDefinitionCommand";
+import type {
   DeleteHoursOfOperationCommandInput,
   DeleteHoursOfOperationCommandOutput,
 } from "./commands/DeleteHoursOfOperationCommand";
-import { DeleteInstanceCommandInput, DeleteInstanceCommandOutput } from "./commands/DeleteInstanceCommand";
-import {
+import type {
+  DeleteHoursOfOperationOverrideCommandInput,
+  DeleteHoursOfOperationOverrideCommandOutput,
+} from "./commands/DeleteHoursOfOperationOverrideCommand";
+import type { DeleteInstanceCommandInput, DeleteInstanceCommandOutput } from "./commands/DeleteInstanceCommand";
+import type {
   DeleteIntegrationAssociationCommandInput,
   DeleteIntegrationAssociationCommandOutput,
 } from "./commands/DeleteIntegrationAssociationCommand";
-import { DeleteQuickConnectCommandInput, DeleteQuickConnectCommandOutput } from "./commands/DeleteQuickConnectCommand";
-import { DeleteUseCaseCommandInput, DeleteUseCaseCommandOutput } from "./commands/DeleteUseCaseCommand";
-import { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
-import {
+import type { DeleteMetricCommandInput, DeleteMetricCommandOutput } from "./commands/DeleteMetricCommand";
+import type {
+  DeleteNotificationCommandInput,
+  DeleteNotificationCommandOutput,
+} from "./commands/DeleteNotificationCommand";
+import type {
+  DeletePredefinedAttributeCommandInput,
+  DeletePredefinedAttributeCommandOutput,
+} from "./commands/DeletePredefinedAttributeCommand";
+import type { DeletePromptCommandInput, DeletePromptCommandOutput } from "./commands/DeletePromptCommand";
+import type {
+  DeletePushNotificationRegistrationCommandInput,
+  DeletePushNotificationRegistrationCommandOutput,
+} from "./commands/DeletePushNotificationRegistrationCommand";
+import type { DeleteQueueCommandInput, DeleteQueueCommandOutput } from "./commands/DeleteQueueCommand";
+import type {
+  DeleteQuickConnectCommandInput,
+  DeleteQuickConnectCommandOutput,
+} from "./commands/DeleteQuickConnectCommand";
+import type {
+  DeleteRoutingProfileCommandInput,
+  DeleteRoutingProfileCommandOutput,
+} from "./commands/DeleteRoutingProfileCommand";
+import type { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
+import type {
+  DeleteSecurityProfileCommandInput,
+  DeleteSecurityProfileCommandOutput,
+} from "./commands/DeleteSecurityProfileCommand";
+import type { DeleteSessionCommandInput, DeleteSessionCommandOutput } from "./commands/DeleteSessionCommand";
+import type {
+  DeleteTaskTemplateCommandInput,
+  DeleteTaskTemplateCommandOutput,
+} from "./commands/DeleteTaskTemplateCommand";
+import type { DeleteTestCaseCommandInput, DeleteTestCaseCommandOutput } from "./commands/DeleteTestCaseCommand";
+import type {
+  DeleteTrafficDistributionGroupCommandInput,
+  DeleteTrafficDistributionGroupCommandOutput,
+} from "./commands/DeleteTrafficDistributionGroupCommand";
+import type { DeleteUseCaseCommandInput, DeleteUseCaseCommandOutput } from "./commands/DeleteUseCaseCommand";
+import type { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+import type {
   DeleteUserHierarchyGroupCommandInput,
   DeleteUserHierarchyGroupCommandOutput,
 } from "./commands/DeleteUserHierarchyGroupCommand";
-import {
+import type { DeleteViewCommandInput, DeleteViewCommandOutput } from "./commands/DeleteViewCommand";
+import type {
+  DeleteViewVersionCommandInput,
+  DeleteViewVersionCommandOutput,
+} from "./commands/DeleteViewVersionCommand";
+import type { DeleteVocabularyCommandInput, DeleteVocabularyCommandOutput } from "./commands/DeleteVocabularyCommand";
+import type { DeleteWorkspaceCommandInput, DeleteWorkspaceCommandOutput } from "./commands/DeleteWorkspaceCommand";
+import type {
+  DeleteWorkspaceMediaCommandInput,
+  DeleteWorkspaceMediaCommandOutput,
+} from "./commands/DeleteWorkspaceMediaCommand";
+import type {
+  DeleteWorkspacePageCommandInput,
+  DeleteWorkspacePageCommandOutput,
+} from "./commands/DeleteWorkspacePageCommand";
+import type {
   DescribeAgentStatusCommandInput,
   DescribeAgentStatusCommandOutput,
 } from "./commands/DescribeAgentStatusCommand";
-import {
+import type {
+  DescribeAttachedFilesConfigurationCommandInput,
+  DescribeAttachedFilesConfigurationCommandOutput,
+} from "./commands/DescribeAttachedFilesConfigurationCommand";
+import type {
+  DescribeAuthenticationProfileCommandInput,
+  DescribeAuthenticationProfileCommandOutput,
+} from "./commands/DescribeAuthenticationProfileCommand";
+import type { DescribeContactCommandInput, DescribeContactCommandOutput } from "./commands/DescribeContactCommand";
+import type {
+  DescribeContactEvaluationCommandInput,
+  DescribeContactEvaluationCommandOutput,
+} from "./commands/DescribeContactEvaluationCommand";
+import type {
+  DescribeContactFlowAliasCommandInput,
+  DescribeContactFlowAliasCommandOutput,
+} from "./commands/DescribeContactFlowAliasCommand";
+import type {
   DescribeContactFlowCommandInput,
   DescribeContactFlowCommandOutput,
 } from "./commands/DescribeContactFlowCommand";
-import {
+import type {
+  DescribeContactFlowModuleAliasCommandInput,
+  DescribeContactFlowModuleAliasCommandOutput,
+} from "./commands/DescribeContactFlowModuleAliasCommand";
+import type {
+  DescribeContactFlowModuleCommandInput,
+  DescribeContactFlowModuleCommandOutput,
+} from "./commands/DescribeContactFlowModuleCommand";
+import type {
+  DescribeDataTableAttributeCommandInput,
+  DescribeDataTableAttributeCommandOutput,
+} from "./commands/DescribeDataTableAttributeCommand";
+import type {
+  DescribeDataTableCommandInput,
+  DescribeDataTableCommandOutput,
+} from "./commands/DescribeDataTableCommand";
+import type {
+  DescribeEmailAddressCommandInput,
+  DescribeEmailAddressCommandOutput,
+} from "./commands/DescribeEmailAddressCommand";
+import type {
+  DescribeEvaluationFormCommandInput,
+  DescribeEvaluationFormCommandOutput,
+} from "./commands/DescribeEvaluationFormCommand";
+import type {
+  DescribeExtractionDefinitionCommandInput,
+  DescribeExtractionDefinitionCommandOutput,
+} from "./commands/DescribeExtractionDefinitionCommand";
+import type {
   DescribeHoursOfOperationCommandInput,
   DescribeHoursOfOperationCommandOutput,
 } from "./commands/DescribeHoursOfOperationCommand";
-import {
+import type {
+  DescribeHoursOfOperationOverrideCommandInput,
+  DescribeHoursOfOperationOverrideCommandOutput,
+} from "./commands/DescribeHoursOfOperationOverrideCommand";
+import type {
   DescribeInstanceAttributeCommandInput,
   DescribeInstanceAttributeCommandOutput,
 } from "./commands/DescribeInstanceAttributeCommand";
-import { DescribeInstanceCommandInput, DescribeInstanceCommandOutput } from "./commands/DescribeInstanceCommand";
-import {
+import type { DescribeInstanceCommandInput, DescribeInstanceCommandOutput } from "./commands/DescribeInstanceCommand";
+import type {
   DescribeInstanceStorageConfigCommandInput,
   DescribeInstanceStorageConfigCommandOutput,
 } from "./commands/DescribeInstanceStorageConfigCommand";
-import { DescribeQueueCommandInput, DescribeQueueCommandOutput } from "./commands/DescribeQueueCommand";
-import {
+import type { DescribeMetricCommandInput, DescribeMetricCommandOutput } from "./commands/DescribeMetricCommand";
+import type {
+  DescribeNotificationCommandInput,
+  DescribeNotificationCommandOutput,
+} from "./commands/DescribeNotificationCommand";
+import type {
+  DescribePhoneNumberCommandInput,
+  DescribePhoneNumberCommandOutput,
+} from "./commands/DescribePhoneNumberCommand";
+import type {
+  DescribePredefinedAttributeCommandInput,
+  DescribePredefinedAttributeCommandOutput,
+} from "./commands/DescribePredefinedAttributeCommand";
+import type { DescribePromptCommandInput, DescribePromptCommandOutput } from "./commands/DescribePromptCommand";
+import type { DescribeQueueCommandInput, DescribeQueueCommandOutput } from "./commands/DescribeQueueCommand";
+import type {
   DescribeQuickConnectCommandInput,
   DescribeQuickConnectCommandOutput,
 } from "./commands/DescribeQuickConnectCommand";
-import {
+import type {
   DescribeRoutingProfileCommandInput,
   DescribeRoutingProfileCommandOutput,
 } from "./commands/DescribeRoutingProfileCommand";
-import { DescribeUserCommandInput, DescribeUserCommandOutput } from "./commands/DescribeUserCommand";
-import {
+import type { DescribeRuleCommandInput, DescribeRuleCommandOutput } from "./commands/DescribeRuleCommand";
+import type {
+  DescribeSecurityProfileCommandInput,
+  DescribeSecurityProfileCommandOutput,
+} from "./commands/DescribeSecurityProfileCommand";
+import type { DescribeTestCaseCommandInput, DescribeTestCaseCommandOutput } from "./commands/DescribeTestCaseCommand";
+import type {
+  DescribeTrafficDistributionGroupCommandInput,
+  DescribeTrafficDistributionGroupCommandOutput,
+} from "./commands/DescribeTrafficDistributionGroupCommand";
+import type { DescribeUserCommandInput, DescribeUserCommandOutput } from "./commands/DescribeUserCommand";
+import type {
   DescribeUserHierarchyGroupCommandInput,
   DescribeUserHierarchyGroupCommandOutput,
 } from "./commands/DescribeUserHierarchyGroupCommand";
-import {
+import type {
   DescribeUserHierarchyStructureCommandInput,
   DescribeUserHierarchyStructureCommandOutput,
 } from "./commands/DescribeUserHierarchyStructureCommand";
-import {
+import type { DescribeViewCommandInput, DescribeViewCommandOutput } from "./commands/DescribeViewCommand";
+import type {
+  DescribeVocabularyCommandInput,
+  DescribeVocabularyCommandOutput,
+} from "./commands/DescribeVocabularyCommand";
+import type {
+  DescribeWorkspaceCommandInput,
+  DescribeWorkspaceCommandOutput,
+} from "./commands/DescribeWorkspaceCommand";
+import type {
+  DisassociateAnalyticsDataSetCommandInput,
+  DisassociateAnalyticsDataSetCommandOutput,
+} from "./commands/DisassociateAnalyticsDataSetCommand";
+import type {
   DisassociateApprovedOriginCommandInput,
   DisassociateApprovedOriginCommandOutput,
 } from "./commands/DisassociateApprovedOriginCommand";
-import { DisassociateBotCommandInput, DisassociateBotCommandOutput } from "./commands/DisassociateBotCommand";
-import {
+import type { DisassociateBotCommandInput, DisassociateBotCommandOutput } from "./commands/DisassociateBotCommand";
+import type {
+  DisassociateEmailAddressAliasCommandInput,
+  DisassociateEmailAddressAliasCommandOutput,
+} from "./commands/DisassociateEmailAddressAliasCommand";
+import type { DisassociateFlowCommandInput, DisassociateFlowCommandOutput } from "./commands/DisassociateFlowCommand";
+import type {
+  DisassociateHoursOfOperationsCommandInput,
+  DisassociateHoursOfOperationsCommandOutput,
+} from "./commands/DisassociateHoursOfOperationsCommand";
+import type {
   DisassociateInstanceStorageConfigCommandInput,
   DisassociateInstanceStorageConfigCommandOutput,
 } from "./commands/DisassociateInstanceStorageConfigCommand";
-import {
+import type {
   DisassociateLambdaFunctionCommandInput,
   DisassociateLambdaFunctionCommandOutput,
 } from "./commands/DisassociateLambdaFunctionCommand";
-import { DisassociateLexBotCommandInput, DisassociateLexBotCommandOutput } from "./commands/DisassociateLexBotCommand";
-import {
+import type {
+  DisassociateLexBotCommandInput,
+  DisassociateLexBotCommandOutput,
+} from "./commands/DisassociateLexBotCommand";
+import type {
+  DisassociatePhoneNumberContactFlowCommandInput,
+  DisassociatePhoneNumberContactFlowCommandOutput,
+} from "./commands/DisassociatePhoneNumberContactFlowCommand";
+import type {
+  DisassociateQueueEmailAddressesCommandInput,
+  DisassociateQueueEmailAddressesCommandOutput,
+} from "./commands/DisassociateQueueEmailAddressesCommand";
+import type {
   DisassociateQueueQuickConnectsCommandInput,
   DisassociateQueueQuickConnectsCommandOutput,
 } from "./commands/DisassociateQueueQuickConnectsCommand";
-import {
+import type {
   DisassociateRoutingProfileQueuesCommandInput,
   DisassociateRoutingProfileQueuesCommandOutput,
 } from "./commands/DisassociateRoutingProfileQueuesCommand";
-import {
+import type {
   DisassociateSecurityKeyCommandInput,
   DisassociateSecurityKeyCommandOutput,
 } from "./commands/DisassociateSecurityKeyCommand";
-import {
+import type {
+  DisassociateSecurityProfilesCommandInput,
+  DisassociateSecurityProfilesCommandOutput,
+} from "./commands/DisassociateSecurityProfilesCommand";
+import type {
+  DisassociateTrafficDistributionGroupUserCommandInput,
+  DisassociateTrafficDistributionGroupUserCommandOutput,
+} from "./commands/DisassociateTrafficDistributionGroupUserCommand";
+import type {
+  DisassociateUserProficienciesCommandInput,
+  DisassociateUserProficienciesCommandOutput,
+} from "./commands/DisassociateUserProficienciesCommand";
+import type {
+  DisassociateWorkspaceCommandInput,
+  DisassociateWorkspaceCommandOutput,
+} from "./commands/DisassociateWorkspaceCommand";
+import type {
+  DismissUserContactCommandInput,
+  DismissUserContactCommandOutput,
+} from "./commands/DismissUserContactCommand";
+import type {
+  EvaluateDataTableValuesCommandInput,
+  EvaluateDataTableValuesCommandOutput,
+} from "./commands/EvaluateDataTableValuesCommand";
+import type { GetAttachedFileCommandInput, GetAttachedFileCommandOutput } from "./commands/GetAttachedFileCommand";
+import type {
   GetContactAttributesCommandInput,
   GetContactAttributesCommandOutput,
 } from "./commands/GetContactAttributesCommand";
-import {
+import type {
+  GetContactMetricsCommandInput,
+  GetContactMetricsCommandOutput,
+} from "./commands/GetContactMetricsCommand";
+import type {
+  GetCrossRegionRoutingCommandInput,
+  GetCrossRegionRoutingCommandOutput,
+} from "./commands/GetCrossRegionRoutingCommand";
+import type {
   GetCurrentMetricDataCommandInput,
   GetCurrentMetricDataCommandOutput,
 } from "./commands/GetCurrentMetricDataCommand";
-import { GetFederationTokenCommandInput, GetFederationTokenCommandOutput } from "./commands/GetFederationTokenCommand";
-import { GetMetricDataCommandInput, GetMetricDataCommandOutput } from "./commands/GetMetricDataCommand";
-import { ListAgentStatusesCommandInput, ListAgentStatusesCommandOutput } from "./commands/ListAgentStatusesCommand";
-import {
+import type {
+  GetCurrentUserDataCommandInput,
+  GetCurrentUserDataCommandOutput,
+} from "./commands/GetCurrentUserDataCommand";
+import type {
+  GetEffectiveHoursOfOperationsCommandInput,
+  GetEffectiveHoursOfOperationsCommandOutput,
+} from "./commands/GetEffectiveHoursOfOperationsCommand";
+import type {
+  GetEvaluationFormValidationCommandInput,
+  GetEvaluationFormValidationCommandOutput,
+} from "./commands/GetEvaluationFormValidationCommand";
+import type {
+  GetFederationTokenCommandInput,
+  GetFederationTokenCommandOutput,
+} from "./commands/GetFederationTokenCommand";
+import type {
+  GetFlowAssociationCommandInput,
+  GetFlowAssociationCommandOutput,
+} from "./commands/GetFlowAssociationCommand";
+import type { GetMetricDataCommandInput, GetMetricDataCommandOutput } from "./commands/GetMetricDataCommand";
+import type { GetMetricDataV2CommandInput, GetMetricDataV2CommandOutput } from "./commands/GetMetricDataV2Command";
+import type { GetPromptFileCommandInput, GetPromptFileCommandOutput } from "./commands/GetPromptFileCommand";
+import type { GetTaskTemplateCommandInput, GetTaskTemplateCommandOutput } from "./commands/GetTaskTemplateCommand";
+import type {
+  GetTestCaseExecutionSummaryCommandInput,
+  GetTestCaseExecutionSummaryCommandOutput,
+} from "./commands/GetTestCaseExecutionSummaryCommand";
+import type {
+  GetTrafficDistributionCommandInput,
+  GetTrafficDistributionCommandOutput,
+} from "./commands/GetTrafficDistributionCommand";
+import type {
+  ImportPhoneNumberCommandInput,
+  ImportPhoneNumberCommandOutput,
+} from "./commands/ImportPhoneNumberCommand";
+import type {
+  ImportWorkspaceMediaCommandInput,
+  ImportWorkspaceMediaCommandOutput,
+} from "./commands/ImportWorkspaceMediaCommand";
+import type {
+  ListAgentStatusesCommandInput,
+  ListAgentStatusesCommandOutput,
+} from "./commands/ListAgentStatusesCommand";
+import type {
+  ListAnalyticsDataAssociationsCommandInput,
+  ListAnalyticsDataAssociationsCommandOutput,
+} from "./commands/ListAnalyticsDataAssociationsCommand";
+import type {
+  ListAnalyticsDataLakeDataSetsCommandInput,
+  ListAnalyticsDataLakeDataSetsCommandOutput,
+} from "./commands/ListAnalyticsDataLakeDataSetsCommand";
+import type {
   ListApprovedOriginsCommandInput,
   ListApprovedOriginsCommandOutput,
 } from "./commands/ListApprovedOriginsCommand";
-import { ListBotsCommandInput, ListBotsCommandOutput } from "./commands/ListBotsCommand";
-import { ListContactFlowsCommandInput, ListContactFlowsCommandOutput } from "./commands/ListContactFlowsCommand";
-import {
+import type {
+  ListAssociatedContactsCommandInput,
+  ListAssociatedContactsCommandOutput,
+} from "./commands/ListAssociatedContactsCommand";
+import type {
+  ListAttachedFilesConfigurationsCommandInput,
+  ListAttachedFilesConfigurationsCommandOutput,
+} from "./commands/ListAttachedFilesConfigurationsCommand";
+import type {
+  ListAuthenticationProfilesCommandInput,
+  ListAuthenticationProfilesCommandOutput,
+} from "./commands/ListAuthenticationProfilesCommand";
+import type { ListBotsCommandInput, ListBotsCommandOutput } from "./commands/ListBotsCommand";
+import type {
+  ListChildHoursOfOperationsCommandInput,
+  ListChildHoursOfOperationsCommandOutput,
+} from "./commands/ListChildHoursOfOperationsCommand";
+import type {
+  ListContactEvaluationsCommandInput,
+  ListContactEvaluationsCommandOutput,
+} from "./commands/ListContactEvaluationsCommand";
+import type {
+  ListContactFlowAliasesCommandInput,
+  ListContactFlowAliasesCommandOutput,
+} from "./commands/ListContactFlowAliasesCommand";
+import type {
+  ListContactFlowModuleAliasesCommandInput,
+  ListContactFlowModuleAliasesCommandOutput,
+} from "./commands/ListContactFlowModuleAliasesCommand";
+import type {
+  ListContactFlowModulesCommandInput,
+  ListContactFlowModulesCommandOutput,
+} from "./commands/ListContactFlowModulesCommand";
+import type {
+  ListContactFlowModuleVersionsCommandInput,
+  ListContactFlowModuleVersionsCommandOutput,
+} from "./commands/ListContactFlowModuleVersionsCommand";
+import type { ListContactFlowsCommandInput, ListContactFlowsCommandOutput } from "./commands/ListContactFlowsCommand";
+import type {
+  ListContactFlowVersionsCommandInput,
+  ListContactFlowVersionsCommandOutput,
+} from "./commands/ListContactFlowVersionsCommand";
+import type {
+  ListContactReferencesCommandInput,
+  ListContactReferencesCommandOutput,
+} from "./commands/ListContactReferencesCommand";
+import type {
+  ListDataTableAttributesCommandInput,
+  ListDataTableAttributesCommandOutput,
+} from "./commands/ListDataTableAttributesCommand";
+import type {
+  ListDataTablePrimaryValuesCommandInput,
+  ListDataTablePrimaryValuesCommandOutput,
+} from "./commands/ListDataTablePrimaryValuesCommand";
+import type { ListDataTablesCommandInput, ListDataTablesCommandOutput } from "./commands/ListDataTablesCommand";
+import type {
+  ListDataTableValuesCommandInput,
+  ListDataTableValuesCommandOutput,
+} from "./commands/ListDataTableValuesCommand";
+import type {
+  ListDefaultVocabulariesCommandInput,
+  ListDefaultVocabulariesCommandOutput,
+} from "./commands/ListDefaultVocabulariesCommand";
+import type {
+  ListEntitySecurityProfilesCommandInput,
+  ListEntitySecurityProfilesCommandOutput,
+} from "./commands/ListEntitySecurityProfilesCommand";
+import type {
+  ListEvaluationFormAIVersionsCommandInput,
+  ListEvaluationFormAIVersionsCommandOutput,
+} from "./commands/ListEvaluationFormAIVersionsCommand";
+import type {
+  ListEvaluationFormsCommandInput,
+  ListEvaluationFormsCommandOutput,
+} from "./commands/ListEvaluationFormsCommand";
+import type {
+  ListEvaluationFormVersionsCommandInput,
+  ListEvaluationFormVersionsCommandOutput,
+} from "./commands/ListEvaluationFormVersionsCommand";
+import type {
+  ListExtractionDefinitionsCommandInput,
+  ListExtractionDefinitionsCommandOutput,
+} from "./commands/ListExtractionDefinitionsCommand";
+import type {
+  ListFlowAssociationsCommandInput,
+  ListFlowAssociationsCommandOutput,
+} from "./commands/ListFlowAssociationsCommand";
+import type {
+  ListHoursOfOperationOverridesCommandInput,
+  ListHoursOfOperationOverridesCommandOutput,
+} from "./commands/ListHoursOfOperationOverridesCommand";
+import type {
   ListHoursOfOperationsCommandInput,
   ListHoursOfOperationsCommandOutput,
 } from "./commands/ListHoursOfOperationsCommand";
-import {
+import type {
   ListInstanceAttributesCommandInput,
   ListInstanceAttributesCommandOutput,
 } from "./commands/ListInstanceAttributesCommand";
-import { ListInstancesCommandInput, ListInstancesCommandOutput } from "./commands/ListInstancesCommand";
-import {
+import type { ListInstancesCommandInput, ListInstancesCommandOutput } from "./commands/ListInstancesCommand";
+import type {
   ListInstanceStorageConfigsCommandInput,
   ListInstanceStorageConfigsCommandOutput,
 } from "./commands/ListInstanceStorageConfigsCommand";
-import {
+import type {
   ListIntegrationAssociationsCommandInput,
   ListIntegrationAssociationsCommandOutput,
 } from "./commands/ListIntegrationAssociationsCommand";
-import {
+import type {
   ListLambdaFunctionsCommandInput,
   ListLambdaFunctionsCommandOutput,
 } from "./commands/ListLambdaFunctionsCommand";
-import { ListLexBotsCommandInput, ListLexBotsCommandOutput } from "./commands/ListLexBotsCommand";
-import { ListPhoneNumbersCommandInput, ListPhoneNumbersCommandOutput } from "./commands/ListPhoneNumbersCommand";
-import { ListPromptsCommandInput, ListPromptsCommandOutput } from "./commands/ListPromptsCommand";
-import {
+import type { ListLexBotsCommandInput, ListLexBotsCommandOutput } from "./commands/ListLexBotsCommand";
+import type { ListMetricsCommandInput, ListMetricsCommandOutput } from "./commands/ListMetricsCommand";
+import type {
+  ListNotificationsCommandInput,
+  ListNotificationsCommandOutput,
+} from "./commands/ListNotificationsCommand";
+import type { ListPhoneNumbersCommandInput, ListPhoneNumbersCommandOutput } from "./commands/ListPhoneNumbersCommand";
+import type {
+  ListPhoneNumbersV2CommandInput,
+  ListPhoneNumbersV2CommandOutput,
+} from "./commands/ListPhoneNumbersV2Command";
+import type {
+  ListPredefinedAttributesCommandInput,
+  ListPredefinedAttributesCommandOutput,
+} from "./commands/ListPredefinedAttributesCommand";
+import type { ListPromptsCommandInput, ListPromptsCommandOutput } from "./commands/ListPromptsCommand";
+import type {
+  ListQueueEmailAddressesCommandInput,
+  ListQueueEmailAddressesCommandOutput,
+} from "./commands/ListQueueEmailAddressesCommand";
+import type {
   ListQueueQuickConnectsCommandInput,
   ListQueueQuickConnectsCommandOutput,
 } from "./commands/ListQueueQuickConnectsCommand";
-import { ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
-import { ListQuickConnectsCommandInput, ListQuickConnectsCommandOutput } from "./commands/ListQuickConnectsCommand";
-import {
+import type { ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
+import type {
+  ListQuickConnectsCommandInput,
+  ListQuickConnectsCommandOutput,
+} from "./commands/ListQuickConnectsCommand";
+import type {
+  ListRealtimeContactAnalysisSegmentsV2CommandInput,
+  ListRealtimeContactAnalysisSegmentsV2CommandOutput,
+} from "./commands/ListRealtimeContactAnalysisSegmentsV2Command";
+import type {
+  ListReplicationFindingsCommandInput,
+  ListReplicationFindingsCommandOutput,
+} from "./commands/ListReplicationFindingsCommand";
+import type {
+  ListRoutingProfileManualAssignmentQueuesCommandInput,
+  ListRoutingProfileManualAssignmentQueuesCommandOutput,
+} from "./commands/ListRoutingProfileManualAssignmentQueuesCommand";
+import type {
   ListRoutingProfileQueuesCommandInput,
   ListRoutingProfileQueuesCommandOutput,
 } from "./commands/ListRoutingProfileQueuesCommand";
-import {
+import type {
   ListRoutingProfilesCommandInput,
   ListRoutingProfilesCommandOutput,
 } from "./commands/ListRoutingProfilesCommand";
-import { ListSecurityKeysCommandInput, ListSecurityKeysCommandOutput } from "./commands/ListSecurityKeysCommand";
-import {
+import type { ListRulesCommandInput, ListRulesCommandOutput } from "./commands/ListRulesCommand";
+import type { ListSecurityKeysCommandInput, ListSecurityKeysCommandOutput } from "./commands/ListSecurityKeysCommand";
+import type {
+  ListSecurityProfileAIAgentsCommandInput,
+  ListSecurityProfileAIAgentsCommandOutput,
+} from "./commands/ListSecurityProfileAIAgentsCommand";
+import type {
+  ListSecurityProfileApplicationsCommandInput,
+  ListSecurityProfileApplicationsCommandOutput,
+} from "./commands/ListSecurityProfileApplicationsCommand";
+import type {
+  ListSecurityProfileFlowModulesCommandInput,
+  ListSecurityProfileFlowModulesCommandOutput,
+} from "./commands/ListSecurityProfileFlowModulesCommand";
+import type {
+  ListSecurityProfilePermissionsCommandInput,
+  ListSecurityProfilePermissionsCommandOutput,
+} from "./commands/ListSecurityProfilePermissionsCommand";
+import type {
   ListSecurityProfilesCommandInput,
   ListSecurityProfilesCommandOutput,
 } from "./commands/ListSecurityProfilesCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListUseCasesCommandInput, ListUseCasesCommandOutput } from "./commands/ListUseCasesCommand";
-import {
+import type {
+  ListTaskTemplatesCommandInput,
+  ListTaskTemplatesCommandOutput,
+} from "./commands/ListTaskTemplatesCommand";
+import type {
+  ListTestCaseExecutionRecordsCommandInput,
+  ListTestCaseExecutionRecordsCommandOutput,
+} from "./commands/ListTestCaseExecutionRecordsCommand";
+import type {
+  ListTestCaseExecutionsCommandInput,
+  ListTestCaseExecutionsCommandOutput,
+} from "./commands/ListTestCaseExecutionsCommand";
+import type { ListTestCasesCommandInput, ListTestCasesCommandOutput } from "./commands/ListTestCasesCommand";
+import type {
+  ListTrafficDistributionGroupsCommandInput,
+  ListTrafficDistributionGroupsCommandOutput,
+} from "./commands/ListTrafficDistributionGroupsCommand";
+import type {
+  ListTrafficDistributionGroupUsersCommandInput,
+  ListTrafficDistributionGroupUsersCommandOutput,
+} from "./commands/ListTrafficDistributionGroupUsersCommand";
+import type { ListUseCasesCommandInput, ListUseCasesCommandOutput } from "./commands/ListUseCasesCommand";
+import type {
   ListUserHierarchyGroupsCommandInput,
   ListUserHierarchyGroupsCommandOutput,
 } from "./commands/ListUserHierarchyGroupsCommand";
-import { ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
-import {
+import type {
+  ListUserNotificationsCommandInput,
+  ListUserNotificationsCommandOutput,
+} from "./commands/ListUserNotificationsCommand";
+import type {
+  ListUserProficienciesCommandInput,
+  ListUserProficienciesCommandOutput,
+} from "./commands/ListUserProficienciesCommand";
+import type { ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+import type { ListViewsCommandInput, ListViewsCommandOutput } from "./commands/ListViewsCommand";
+import type { ListViewVersionsCommandInput, ListViewVersionsCommandOutput } from "./commands/ListViewVersionsCommand";
+import type {
+  ListWorkspaceMediaCommandInput,
+  ListWorkspaceMediaCommandOutput,
+} from "./commands/ListWorkspaceMediaCommand";
+import type {
+  ListWorkspacePagesCommandInput,
+  ListWorkspacePagesCommandOutput,
+} from "./commands/ListWorkspacePagesCommand";
+import type { ListWorkspacesCommandInput, ListWorkspacesCommandOutput } from "./commands/ListWorkspacesCommand";
+import type { MonitorContactCommandInput, MonitorContactCommandOutput } from "./commands/MonitorContactCommand";
+import type { PauseContactCommandInput, PauseContactCommandOutput } from "./commands/PauseContactCommand";
+import type { PutUserStatusCommandInput, PutUserStatusCommandOutput } from "./commands/PutUserStatusCommand";
+import type {
+  ReleasePhoneNumberCommandInput,
+  ReleasePhoneNumberCommandOutput,
+} from "./commands/ReleasePhoneNumberCommand";
+import type {
+  ReplicateInstanceCommandInput,
+  ReplicateInstanceCommandOutput,
+} from "./commands/ReplicateInstanceCommand";
+import type { ResumeContactCommandInput, ResumeContactCommandOutput } from "./commands/ResumeContactCommand";
+import type {
   ResumeContactRecordingCommandInput,
   ResumeContactRecordingCommandOutput,
 } from "./commands/ResumeContactRecordingCommand";
-import { StartChatContactCommandInput, StartChatContactCommandOutput } from "./commands/StartChatContactCommand";
-import {
+import type {
+  SearchAgentStatusesCommandInput,
+  SearchAgentStatusesCommandOutput,
+} from "./commands/SearchAgentStatusesCommand";
+import type {
+  SearchAvailablePhoneNumbersCommandInput,
+  SearchAvailablePhoneNumbersCommandOutput,
+} from "./commands/SearchAvailablePhoneNumbersCommand";
+import type {
+  SearchContactEvaluationsCommandInput,
+  SearchContactEvaluationsCommandOutput,
+} from "./commands/SearchContactEvaluationsCommand";
+import type {
+  SearchContactFlowModulesCommandInput,
+  SearchContactFlowModulesCommandOutput,
+} from "./commands/SearchContactFlowModulesCommand";
+import type {
+  SearchContactFlowsCommandInput,
+  SearchContactFlowsCommandOutput,
+} from "./commands/SearchContactFlowsCommand";
+import type { SearchContactsCommandInput, SearchContactsCommandOutput } from "./commands/SearchContactsCommand";
+import type { SearchDataTablesCommandInput, SearchDataTablesCommandOutput } from "./commands/SearchDataTablesCommand";
+import type {
+  SearchEmailAddressesCommandInput,
+  SearchEmailAddressesCommandOutput,
+} from "./commands/SearchEmailAddressesCommand";
+import type {
+  SearchEvaluationFormsCommandInput,
+  SearchEvaluationFormsCommandOutput,
+} from "./commands/SearchEvaluationFormsCommand";
+import type {
+  SearchHoursOfOperationOverridesCommandInput,
+  SearchHoursOfOperationOverridesCommandOutput,
+} from "./commands/SearchHoursOfOperationOverridesCommand";
+import type {
+  SearchHoursOfOperationsCommandInput,
+  SearchHoursOfOperationsCommandOutput,
+} from "./commands/SearchHoursOfOperationsCommand";
+import type { SearchMetricsCommandInput, SearchMetricsCommandOutput } from "./commands/SearchMetricsCommand";
+import type {
+  SearchNotificationsCommandInput,
+  SearchNotificationsCommandOutput,
+} from "./commands/SearchNotificationsCommand";
+import type {
+  SearchPredefinedAttributesCommandInput,
+  SearchPredefinedAttributesCommandOutput,
+} from "./commands/SearchPredefinedAttributesCommand";
+import type { SearchPromptsCommandInput, SearchPromptsCommandOutput } from "./commands/SearchPromptsCommand";
+import type { SearchQueuesCommandInput, SearchQueuesCommandOutput } from "./commands/SearchQueuesCommand";
+import type {
+  SearchQuickConnectsCommandInput,
+  SearchQuickConnectsCommandOutput,
+} from "./commands/SearchQuickConnectsCommand";
+import type {
+  SearchResourceTagsCommandInput,
+  SearchResourceTagsCommandOutput,
+} from "./commands/SearchResourceTagsCommand";
+import type {
+  SearchRoutingProfilesCommandInput,
+  SearchRoutingProfilesCommandOutput,
+} from "./commands/SearchRoutingProfilesCommand";
+import type { SearchRulesCommandInput, SearchRulesCommandOutput } from "./commands/SearchRulesCommand";
+import type {
+  SearchSecurityProfilesCommandInput,
+  SearchSecurityProfilesCommandOutput,
+} from "./commands/SearchSecurityProfilesCommand";
+import type { SearchTestCasesCommandInput, SearchTestCasesCommandOutput } from "./commands/SearchTestCasesCommand";
+import type {
+  SearchUserHierarchyGroupsCommandInput,
+  SearchUserHierarchyGroupsCommandOutput,
+} from "./commands/SearchUserHierarchyGroupsCommand";
+import type { SearchUsersCommandInput, SearchUsersCommandOutput } from "./commands/SearchUsersCommand";
+import type { SearchViewsCommandInput, SearchViewsCommandOutput } from "./commands/SearchViewsCommand";
+import type {
+  SearchVocabulariesCommandInput,
+  SearchVocabulariesCommandOutput,
+} from "./commands/SearchVocabulariesCommand";
+import type {
+  SearchWorkspaceAssociationsCommandInput,
+  SearchWorkspaceAssociationsCommandOutput,
+} from "./commands/SearchWorkspaceAssociationsCommand";
+import type { SearchWorkspacesCommandInput, SearchWorkspacesCommandOutput } from "./commands/SearchWorkspacesCommand";
+import type {
+  SendChatIntegrationEventCommandInput,
+  SendChatIntegrationEventCommandOutput,
+} from "./commands/SendChatIntegrationEventCommand";
+import type {
+  SendOutboundEmailCommandInput,
+  SendOutboundEmailCommandOutput,
+} from "./commands/SendOutboundEmailCommand";
+import type {
+  SendOutboundWebNotificationCommandInput,
+  SendOutboundWebNotificationCommandOutput,
+} from "./commands/SendOutboundWebNotificationCommand";
+import type {
+  StartAssistantContactCommandInput,
+  StartAssistantContactCommandOutput,
+} from "./commands/StartAssistantContactCommand";
+import type {
+  StartAttachedFileUploadCommandInput,
+  StartAttachedFileUploadCommandOutput,
+} from "./commands/StartAttachedFileUploadCommand";
+import type { StartChatContactCommandInput, StartChatContactCommandOutput } from "./commands/StartChatContactCommand";
+import type {
+  StartContactConversationalAnalyticsJobCommandInput,
+  StartContactConversationalAnalyticsJobCommandOutput,
+} from "./commands/StartContactConversationalAnalyticsJobCommand";
+import type {
+  StartContactEvaluationCommandInput,
+  StartContactEvaluationCommandOutput,
+} from "./commands/StartContactEvaluationCommand";
+import type {
+  StartContactMediaProcessingCommandInput,
+  StartContactMediaProcessingCommandOutput,
+} from "./commands/StartContactMediaProcessingCommand";
+import type {
   StartContactRecordingCommandInput,
   StartContactRecordingCommandOutput,
 } from "./commands/StartContactRecordingCommand";
-import {
+import type {
+  StartContactStreamingCommandInput,
+  StartContactStreamingCommandOutput,
+} from "./commands/StartContactStreamingCommand";
+import type {
+  StartEmailContactCommandInput,
+  StartEmailContactCommandOutput,
+} from "./commands/StartEmailContactCommand";
+import type {
+  StartEvaluationFormValidationCommandInput,
+  StartEvaluationFormValidationCommandOutput,
+} from "./commands/StartEvaluationFormValidationCommand";
+import type {
+  StartOutboundChatContactCommandInput,
+  StartOutboundChatContactCommandOutput,
+} from "./commands/StartOutboundChatContactCommand";
+import type {
+  StartOutboundEmailContactCommandInput,
+  StartOutboundEmailContactCommandOutput,
+} from "./commands/StartOutboundEmailContactCommand";
+import type {
   StartOutboundVoiceContactCommandInput,
   StartOutboundVoiceContactCommandOutput,
 } from "./commands/StartOutboundVoiceContactCommand";
-import { StartTaskContactCommandInput, StartTaskContactCommandOutput } from "./commands/StartTaskContactCommand";
-import { StopContactCommandInput, StopContactCommandOutput } from "./commands/StopContactCommand";
-import {
+import type {
+  StartScreenSharingCommandInput,
+  StartScreenSharingCommandOutput,
+} from "./commands/StartScreenSharingCommand";
+import type { StartTaskContactCommandInput, StartTaskContactCommandOutput } from "./commands/StartTaskContactCommand";
+import type {
+  StartTestCaseExecutionCommandInput,
+  StartTestCaseExecutionCommandOutput,
+} from "./commands/StartTestCaseExecutionCommand";
+import type {
+  StartWebRTCContactCommandInput,
+  StartWebRTCContactCommandOutput,
+} from "./commands/StartWebRTCContactCommand";
+import type { StopContactCommandInput, StopContactCommandOutput } from "./commands/StopContactCommand";
+import type {
+  StopContactMediaProcessingCommandInput,
+  StopContactMediaProcessingCommandOutput,
+} from "./commands/StopContactMediaProcessingCommand";
+import type {
   StopContactRecordingCommandInput,
   StopContactRecordingCommandOutput,
 } from "./commands/StopContactRecordingCommand";
-import {
+import type {
+  StopContactStreamingCommandInput,
+  StopContactStreamingCommandOutput,
+} from "./commands/StopContactStreamingCommand";
+import type {
+  StopTestCaseExecutionCommandInput,
+  StopTestCaseExecutionCommandOutput,
+} from "./commands/StopTestCaseExecutionCommand";
+import type {
+  SubmitContactEvaluationCommandInput,
+  SubmitContactEvaluationCommandOutput,
+} from "./commands/SubmitContactEvaluationCommand";
+import type {
   SuspendContactRecordingCommandInput,
   SuspendContactRecordingCommandOutput,
 } from "./commands/SuspendContactRecordingCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateAgentStatusCommandInput, UpdateAgentStatusCommandOutput } from "./commands/UpdateAgentStatusCommand";
-import {
+import type { TagContactCommandInput, TagContactCommandOutput } from "./commands/TagContactCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { TransferContactCommandInput, TransferContactCommandOutput } from "./commands/TransferContactCommand";
+import type { UntagContactCommandInput, UntagContactCommandOutput } from "./commands/UntagContactCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAgentStatusCommandInput,
+  UpdateAgentStatusCommandOutput,
+} from "./commands/UpdateAgentStatusCommand";
+import type {
+  UpdateAttachedFilesConfigurationCommandInput,
+  UpdateAttachedFilesConfigurationCommandOutput,
+} from "./commands/UpdateAttachedFilesConfigurationCommand";
+import type {
+  UpdateAuthenticationProfileCommandInput,
+  UpdateAuthenticationProfileCommandOutput,
+} from "./commands/UpdateAuthenticationProfileCommand";
+import type {
   UpdateContactAttributesCommandInput,
   UpdateContactAttributesCommandOutput,
 } from "./commands/UpdateContactAttributesCommand";
-import {
+import type { UpdateContactCommandInput, UpdateContactCommandOutput } from "./commands/UpdateContactCommand";
+import type {
+  UpdateContactEvaluationCommandInput,
+  UpdateContactEvaluationCommandOutput,
+} from "./commands/UpdateContactEvaluationCommand";
+import type {
+  UpdateContactFlowAliasCommandInput,
+  UpdateContactFlowAliasCommandOutput,
+} from "./commands/UpdateContactFlowAliasCommand";
+import type {
   UpdateContactFlowContentCommandInput,
   UpdateContactFlowContentCommandOutput,
 } from "./commands/UpdateContactFlowContentCommand";
-import {
+import type {
+  UpdateContactFlowMetadataCommandInput,
+  UpdateContactFlowMetadataCommandOutput,
+} from "./commands/UpdateContactFlowMetadataCommand";
+import type {
+  UpdateContactFlowModuleAliasCommandInput,
+  UpdateContactFlowModuleAliasCommandOutput,
+} from "./commands/UpdateContactFlowModuleAliasCommand";
+import type {
+  UpdateContactFlowModuleContentCommandInput,
+  UpdateContactFlowModuleContentCommandOutput,
+} from "./commands/UpdateContactFlowModuleContentCommand";
+import type {
+  UpdateContactFlowModuleMetadataCommandInput,
+  UpdateContactFlowModuleMetadataCommandOutput,
+} from "./commands/UpdateContactFlowModuleMetadataCommand";
+import type {
   UpdateContactFlowNameCommandInput,
   UpdateContactFlowNameCommandOutput,
 } from "./commands/UpdateContactFlowNameCommand";
-import {
+import type {
+  UpdateContactRoutingDataCommandInput,
+  UpdateContactRoutingDataCommandOutput,
+} from "./commands/UpdateContactRoutingDataCommand";
+import type {
+  UpdateContactScheduleCommandInput,
+  UpdateContactScheduleCommandOutput,
+} from "./commands/UpdateContactScheduleCommand";
+import type {
+  UpdateContactTaskTemplateCommandInput,
+  UpdateContactTaskTemplateCommandOutput,
+} from "./commands/UpdateContactTaskTemplateCommand";
+import type {
+  UpdateCrossRegionRoutingCommandInput,
+  UpdateCrossRegionRoutingCommandOutput,
+} from "./commands/UpdateCrossRegionRoutingCommand";
+import type {
+  UpdateDataTableAttributeCommandInput,
+  UpdateDataTableAttributeCommandOutput,
+} from "./commands/UpdateDataTableAttributeCommand";
+import type {
+  UpdateDataTableMetadataCommandInput,
+  UpdateDataTableMetadataCommandOutput,
+} from "./commands/UpdateDataTableMetadataCommand";
+import type {
+  UpdateDataTablePrimaryValuesCommandInput,
+  UpdateDataTablePrimaryValuesCommandOutput,
+} from "./commands/UpdateDataTablePrimaryValuesCommand";
+import type {
+  UpdateEmailAddressMetadataCommandInput,
+  UpdateEmailAddressMetadataCommandOutput,
+} from "./commands/UpdateEmailAddressMetadataCommand";
+import type {
+  UpdateEvaluationFormCommandInput,
+  UpdateEvaluationFormCommandOutput,
+} from "./commands/UpdateEvaluationFormCommand";
+import type {
+  UpdateExtractionDefinitionCommandInput,
+  UpdateExtractionDefinitionCommandOutput,
+} from "./commands/UpdateExtractionDefinitionCommand";
+import type {
   UpdateHoursOfOperationCommandInput,
   UpdateHoursOfOperationCommandOutput,
 } from "./commands/UpdateHoursOfOperationCommand";
-import {
+import type {
+  UpdateHoursOfOperationOverrideCommandInput,
+  UpdateHoursOfOperationOverrideCommandOutput,
+} from "./commands/UpdateHoursOfOperationOverrideCommand";
+import type {
   UpdateInstanceAttributeCommandInput,
   UpdateInstanceAttributeCommandOutput,
 } from "./commands/UpdateInstanceAttributeCommand";
-import {
+import type {
   UpdateInstanceStorageConfigCommandInput,
   UpdateInstanceStorageConfigCommandOutput,
 } from "./commands/UpdateInstanceStorageConfigCommand";
-import {
+import type {
+  UpdateMetricContentCommandInput,
+  UpdateMetricContentCommandOutput,
+} from "./commands/UpdateMetricContentCommand";
+import type {
+  UpdateMetricMetadataCommandInput,
+  UpdateMetricMetadataCommandOutput,
+} from "./commands/UpdateMetricMetadataCommand";
+import type {
+  UpdateNotificationContentCommandInput,
+  UpdateNotificationContentCommandOutput,
+} from "./commands/UpdateNotificationContentCommand";
+import type {
+  UpdateOutboundEmailContactMessageCommandInput,
+  UpdateOutboundEmailContactMessageCommandOutput,
+} from "./commands/UpdateOutboundEmailContactMessageCommand";
+import type {
+  UpdateParticipantAuthenticationCommandInput,
+  UpdateParticipantAuthenticationCommandOutput,
+} from "./commands/UpdateParticipantAuthenticationCommand";
+import type {
+  UpdateParticipantRoleConfigCommandInput,
+  UpdateParticipantRoleConfigCommandOutput,
+} from "./commands/UpdateParticipantRoleConfigCommand";
+import type {
+  UpdatePhoneNumberCommandInput,
+  UpdatePhoneNumberCommandOutput,
+} from "./commands/UpdatePhoneNumberCommand";
+import type {
+  UpdatePhoneNumberMetadataCommandInput,
+  UpdatePhoneNumberMetadataCommandOutput,
+} from "./commands/UpdatePhoneNumberMetadataCommand";
+import type {
+  UpdatePredefinedAttributeCommandInput,
+  UpdatePredefinedAttributeCommandOutput,
+} from "./commands/UpdatePredefinedAttributeCommand";
+import type { UpdatePromptCommandInput, UpdatePromptCommandOutput } from "./commands/UpdatePromptCommand";
+import type {
   UpdateQueueHoursOfOperationCommandInput,
   UpdateQueueHoursOfOperationCommandOutput,
 } from "./commands/UpdateQueueHoursOfOperationCommand";
-import {
+import type {
   UpdateQueueMaxContactsCommandInput,
   UpdateQueueMaxContactsCommandOutput,
 } from "./commands/UpdateQueueMaxContactsCommand";
-import { UpdateQueueNameCommandInput, UpdateQueueNameCommandOutput } from "./commands/UpdateQueueNameCommand";
-import {
+import type { UpdateQueueNameCommandInput, UpdateQueueNameCommandOutput } from "./commands/UpdateQueueNameCommand";
+import type {
   UpdateQueueOutboundCallerConfigCommandInput,
   UpdateQueueOutboundCallerConfigCommandOutput,
 } from "./commands/UpdateQueueOutboundCallerConfigCommand";
-import { UpdateQueueStatusCommandInput, UpdateQueueStatusCommandOutput } from "./commands/UpdateQueueStatusCommand";
-import {
+import type {
+  UpdateQueueOutboundEmailConfigCommandInput,
+  UpdateQueueOutboundEmailConfigCommandOutput,
+} from "./commands/UpdateQueueOutboundEmailConfigCommand";
+import type {
+  UpdateQueueStatusCommandInput,
+  UpdateQueueStatusCommandOutput,
+} from "./commands/UpdateQueueStatusCommand";
+import type {
   UpdateQuickConnectConfigCommandInput,
   UpdateQuickConnectConfigCommandOutput,
 } from "./commands/UpdateQuickConnectConfigCommand";
-import {
+import type {
   UpdateQuickConnectNameCommandInput,
   UpdateQuickConnectNameCommandOutput,
 } from "./commands/UpdateQuickConnectNameCommand";
-import {
+import type {
+  UpdateRoutingProfileAgentAvailabilityTimerCommandInput,
+  UpdateRoutingProfileAgentAvailabilityTimerCommandOutput,
+} from "./commands/UpdateRoutingProfileAgentAvailabilityTimerCommand";
+import type {
   UpdateRoutingProfileConcurrencyCommandInput,
   UpdateRoutingProfileConcurrencyCommandOutput,
 } from "./commands/UpdateRoutingProfileConcurrencyCommand";
-import {
+import type {
   UpdateRoutingProfileDefaultOutboundQueueCommandInput,
   UpdateRoutingProfileDefaultOutboundQueueCommandOutput,
 } from "./commands/UpdateRoutingProfileDefaultOutboundQueueCommand";
-import {
+import type {
   UpdateRoutingProfileNameCommandInput,
   UpdateRoutingProfileNameCommandOutput,
 } from "./commands/UpdateRoutingProfileNameCommand";
-import {
+import type {
   UpdateRoutingProfileQueuesCommandInput,
   UpdateRoutingProfileQueuesCommandOutput,
 } from "./commands/UpdateRoutingProfileQueuesCommand";
-import {
+import type { UpdateRuleCommandInput, UpdateRuleCommandOutput } from "./commands/UpdateRuleCommand";
+import type {
+  UpdateSecurityProfileCommandInput,
+  UpdateSecurityProfileCommandOutput,
+} from "./commands/UpdateSecurityProfileCommand";
+import type {
+  UpdateTaskTemplateCommandInput,
+  UpdateTaskTemplateCommandOutput,
+} from "./commands/UpdateTaskTemplateCommand";
+import type { UpdateTestCaseCommandInput, UpdateTestCaseCommandOutput } from "./commands/UpdateTestCaseCommand";
+import type {
+  UpdateTrafficDistributionCommandInput,
+  UpdateTrafficDistributionCommandOutput,
+} from "./commands/UpdateTrafficDistributionCommand";
+import type { UpdateUserConfigCommandInput, UpdateUserConfigCommandOutput } from "./commands/UpdateUserConfigCommand";
+import type {
   UpdateUserHierarchyCommandInput,
   UpdateUserHierarchyCommandOutput,
 } from "./commands/UpdateUserHierarchyCommand";
-import {
+import type {
   UpdateUserHierarchyGroupNameCommandInput,
   UpdateUserHierarchyGroupNameCommandOutput,
 } from "./commands/UpdateUserHierarchyGroupNameCommand";
-import {
+import type {
   UpdateUserHierarchyStructureCommandInput,
   UpdateUserHierarchyStructureCommandOutput,
 } from "./commands/UpdateUserHierarchyStructureCommand";
-import {
+import type {
   UpdateUserIdentityInfoCommandInput,
   UpdateUserIdentityInfoCommandOutput,
 } from "./commands/UpdateUserIdentityInfoCommand";
-import {
+import type {
+  UpdateUserNotificationStatusCommandInput,
+  UpdateUserNotificationStatusCommandOutput,
+} from "./commands/UpdateUserNotificationStatusCommand";
+import type {
   UpdateUserPhoneConfigCommandInput,
   UpdateUserPhoneConfigCommandOutput,
 } from "./commands/UpdateUserPhoneConfigCommand";
-import {
+import type {
+  UpdateUserProficienciesCommandInput,
+  UpdateUserProficienciesCommandOutput,
+} from "./commands/UpdateUserProficienciesCommand";
+import type {
   UpdateUserRoutingProfileCommandInput,
   UpdateUserRoutingProfileCommandOutput,
 } from "./commands/UpdateUserRoutingProfileCommand";
-import {
+import type {
   UpdateUserSecurityProfilesCommandInput,
   UpdateUserSecurityProfilesCommandOutput,
 } from "./commands/UpdateUserSecurityProfilesCommand";
+import type {
+  UpdateViewContentCommandInput,
+  UpdateViewContentCommandOutput,
+} from "./commands/UpdateViewContentCommand";
+import type {
+  UpdateViewMetadataCommandInput,
+  UpdateViewMetadataCommandOutput,
+} from "./commands/UpdateViewMetadataCommand";
+import type {
+  UpdateWorkspaceMetadataCommandInput,
+  UpdateWorkspaceMetadataCommandOutput,
+} from "./commands/UpdateWorkspaceMetadataCommand";
+import type {
+  UpdateWorkspacePageCommandInput,
+  UpdateWorkspacePageCommandOutput,
+} from "./commands/UpdateWorkspacePageCommand";
+import type {
+  UpdateWorkspaceThemeCommandInput,
+  UpdateWorkspaceThemeCommandOutput,
+} from "./commands/UpdateWorkspaceThemeCommand";
+import type {
+  UpdateWorkspaceVisibilityCommandInput,
+  UpdateWorkspaceVisibilityCommandOutput,
+} from "./commands/UpdateWorkspaceVisibilityCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | ActivateEvaluationFormCommandInput
+  | AssociateAnalyticsDataSetCommandInput
   | AssociateApprovedOriginCommandInput
   | AssociateBotCommandInput
+  | AssociateContactWithUserCommandInput
+  | AssociateDefaultVocabularyCommandInput
+  | AssociateEmailAddressAliasCommandInput
+  | AssociateFlowCommandInput
+  | AssociateHoursOfOperationsCommandInput
   | AssociateInstanceStorageConfigCommandInput
   | AssociateLambdaFunctionCommandInput
   | AssociateLexBotCommandInput
+  | AssociatePhoneNumberContactFlowCommandInput
+  | AssociateQueueEmailAddressesCommandInput
   | AssociateQueueQuickConnectsCommandInput
   | AssociateRoutingProfileQueuesCommandInput
   | AssociateSecurityKeyCommandInput
+  | AssociateSecurityProfilesCommandInput
+  | AssociateTrafficDistributionGroupUserCommandInput
+  | AssociateUserProficienciesCommandInput
+  | AssociateWorkspaceCommandInput
+  | BatchAssociateAnalyticsDataSetCommandInput
+  | BatchCreateDataTableValueCommandInput
+  | BatchDeleteDataTableValueCommandInput
+  | BatchDescribeDataTableValueCommandInput
+  | BatchDisassociateAnalyticsDataSetCommandInput
+  | BatchGetAttachedFileMetadataCommandInput
+  | BatchGetFlowAssociationCommandInput
+  | BatchPutContactCommandInput
+  | BatchUpdateDataTableValueCommandInput
+  | ClaimPhoneNumberCommandInput
+  | CompleteAttachedFileUploadCommandInput
   | CreateAgentStatusCommandInput
+  | CreateAttachedFileCommandInput
+  | CreateAuthCodeCommandInput
+  | CreateContactCommandInput
+  | CreateContactFlowAliasCommandInput
   | CreateContactFlowCommandInput
+  | CreateContactFlowModuleAliasCommandInput
+  | CreateContactFlowModuleCommandInput
+  | CreateContactFlowModuleVersionCommandInput
+  | CreateContactFlowVersionCommandInput
+  | CreateDataTableAttributeCommandInput
+  | CreateDataTableCommandInput
+  | CreateEmailAddressCommandInput
+  | CreateEvaluationFormCommandInput
+  | CreateExtractionDefinitionCommandInput
   | CreateHoursOfOperationCommandInput
+  | CreateHoursOfOperationOverrideCommandInput
   | CreateInstanceCommandInput
   | CreateIntegrationAssociationCommandInput
+  | CreateMetricCommandInput
+  | CreateNotificationCommandInput
+  | CreateParticipantCommandInput
+  | CreatePersistentContactAssociationCommandInput
+  | CreatePredefinedAttributeCommandInput
+  | CreatePromptCommandInput
+  | CreatePushNotificationRegistrationCommandInput
   | CreateQueueCommandInput
   | CreateQuickConnectCommandInput
   | CreateRoutingProfileCommandInput
+  | CreateRuleCommandInput
+  | CreateSecurityProfileCommandInput
+  | CreateTaskTemplateCommandInput
+  | CreateTestCaseCommandInput
+  | CreateTrafficDistributionGroupCommandInput
   | CreateUseCaseCommandInput
   | CreateUserCommandInput
   | CreateUserHierarchyGroupCommandInput
+  | CreateViewCommandInput
+  | CreateViewVersionCommandInput
+  | CreateVocabularyCommandInput
+  | CreateWorkspaceCommandInput
+  | CreateWorkspacePageCommandInput
+  | DeactivateEvaluationFormCommandInput
+  | DeleteAttachedFileCommandInput
+  | DeleteContactDataCommandInput
+  | DeleteContactEvaluationCommandInput
+  | DeleteContactFlowAliasCommandInput
+  | DeleteContactFlowCommandInput
+  | DeleteContactFlowModuleAliasCommandInput
+  | DeleteContactFlowModuleCommandInput
+  | DeleteContactFlowModuleVersionCommandInput
+  | DeleteContactFlowVersionCommandInput
+  | DeleteDataTableAttributeCommandInput
+  | DeleteDataTableCommandInput
+  | DeleteEmailAddressCommandInput
+  | DeleteEvaluationFormCommandInput
+  | DeleteExtractionDefinitionCommandInput
   | DeleteHoursOfOperationCommandInput
+  | DeleteHoursOfOperationOverrideCommandInput
   | DeleteInstanceCommandInput
   | DeleteIntegrationAssociationCommandInput
+  | DeleteMetricCommandInput
+  | DeleteNotificationCommandInput
+  | DeletePredefinedAttributeCommandInput
+  | DeletePromptCommandInput
+  | DeletePushNotificationRegistrationCommandInput
+  | DeleteQueueCommandInput
   | DeleteQuickConnectCommandInput
+  | DeleteRoutingProfileCommandInput
+  | DeleteRuleCommandInput
+  | DeleteSecurityProfileCommandInput
+  | DeleteSessionCommandInput
+  | DeleteTaskTemplateCommandInput
+  | DeleteTestCaseCommandInput
+  | DeleteTrafficDistributionGroupCommandInput
   | DeleteUseCaseCommandInput
   | DeleteUserCommandInput
   | DeleteUserHierarchyGroupCommandInput
+  | DeleteViewCommandInput
+  | DeleteViewVersionCommandInput
+  | DeleteVocabularyCommandInput
+  | DeleteWorkspaceCommandInput
+  | DeleteWorkspaceMediaCommandInput
+  | DeleteWorkspacePageCommandInput
   | DescribeAgentStatusCommandInput
+  | DescribeAttachedFilesConfigurationCommandInput
+  | DescribeAuthenticationProfileCommandInput
+  | DescribeContactCommandInput
+  | DescribeContactEvaluationCommandInput
+  | DescribeContactFlowAliasCommandInput
   | DescribeContactFlowCommandInput
+  | DescribeContactFlowModuleAliasCommandInput
+  | DescribeContactFlowModuleCommandInput
+  | DescribeDataTableAttributeCommandInput
+  | DescribeDataTableCommandInput
+  | DescribeEmailAddressCommandInput
+  | DescribeEvaluationFormCommandInput
+  | DescribeExtractionDefinitionCommandInput
   | DescribeHoursOfOperationCommandInput
+  | DescribeHoursOfOperationOverrideCommandInput
   | DescribeInstanceAttributeCommandInput
   | DescribeInstanceCommandInput
   | DescribeInstanceStorageConfigCommandInput
+  | DescribeMetricCommandInput
+  | DescribeNotificationCommandInput
+  | DescribePhoneNumberCommandInput
+  | DescribePredefinedAttributeCommandInput
+  | DescribePromptCommandInput
   | DescribeQueueCommandInput
   | DescribeQuickConnectCommandInput
   | DescribeRoutingProfileCommandInput
+  | DescribeRuleCommandInput
+  | DescribeSecurityProfileCommandInput
+  | DescribeTestCaseCommandInput
+  | DescribeTrafficDistributionGroupCommandInput
   | DescribeUserCommandInput
   | DescribeUserHierarchyGroupCommandInput
   | DescribeUserHierarchyStructureCommandInput
+  | DescribeViewCommandInput
+  | DescribeVocabularyCommandInput
+  | DescribeWorkspaceCommandInput
+  | DisassociateAnalyticsDataSetCommandInput
   | DisassociateApprovedOriginCommandInput
   | DisassociateBotCommandInput
+  | DisassociateEmailAddressAliasCommandInput
+  | DisassociateFlowCommandInput
+  | DisassociateHoursOfOperationsCommandInput
   | DisassociateInstanceStorageConfigCommandInput
   | DisassociateLambdaFunctionCommandInput
   | DisassociateLexBotCommandInput
+  | DisassociatePhoneNumberContactFlowCommandInput
+  | DisassociateQueueEmailAddressesCommandInput
   | DisassociateQueueQuickConnectsCommandInput
   | DisassociateRoutingProfileQueuesCommandInput
   | DisassociateSecurityKeyCommandInput
+  | DisassociateSecurityProfilesCommandInput
+  | DisassociateTrafficDistributionGroupUserCommandInput
+  | DisassociateUserProficienciesCommandInput
+  | DisassociateWorkspaceCommandInput
+  | DismissUserContactCommandInput
+  | EvaluateDataTableValuesCommandInput
+  | GetAttachedFileCommandInput
   | GetContactAttributesCommandInput
+  | GetContactMetricsCommandInput
+  | GetCrossRegionRoutingCommandInput
   | GetCurrentMetricDataCommandInput
+  | GetCurrentUserDataCommandInput
+  | GetEffectiveHoursOfOperationsCommandInput
+  | GetEvaluationFormValidationCommandInput
   | GetFederationTokenCommandInput
+  | GetFlowAssociationCommandInput
   | GetMetricDataCommandInput
+  | GetMetricDataV2CommandInput
+  | GetPromptFileCommandInput
+  | GetTaskTemplateCommandInput
+  | GetTestCaseExecutionSummaryCommandInput
+  | GetTrafficDistributionCommandInput
+  | ImportPhoneNumberCommandInput
+  | ImportWorkspaceMediaCommandInput
   | ListAgentStatusesCommandInput
+  | ListAnalyticsDataAssociationsCommandInput
+  | ListAnalyticsDataLakeDataSetsCommandInput
   | ListApprovedOriginsCommandInput
+  | ListAssociatedContactsCommandInput
+  | ListAttachedFilesConfigurationsCommandInput
+  | ListAuthenticationProfilesCommandInput
   | ListBotsCommandInput
+  | ListChildHoursOfOperationsCommandInput
+  | ListContactEvaluationsCommandInput
+  | ListContactFlowAliasesCommandInput
+  | ListContactFlowModuleAliasesCommandInput
+  | ListContactFlowModuleVersionsCommandInput
+  | ListContactFlowModulesCommandInput
+  | ListContactFlowVersionsCommandInput
   | ListContactFlowsCommandInput
+  | ListContactReferencesCommandInput
+  | ListDataTableAttributesCommandInput
+  | ListDataTablePrimaryValuesCommandInput
+  | ListDataTableValuesCommandInput
+  | ListDataTablesCommandInput
+  | ListDefaultVocabulariesCommandInput
+  | ListEntitySecurityProfilesCommandInput
+  | ListEvaluationFormAIVersionsCommandInput
+  | ListEvaluationFormVersionsCommandInput
+  | ListEvaluationFormsCommandInput
+  | ListExtractionDefinitionsCommandInput
+  | ListFlowAssociationsCommandInput
+  | ListHoursOfOperationOverridesCommandInput
   | ListHoursOfOperationsCommandInput
   | ListInstanceAttributesCommandInput
   | ListInstanceStorageConfigsCommandInput
@@ -429,110 +1633,408 @@ export type ServiceInputTypes =
   | ListIntegrationAssociationsCommandInput
   | ListLambdaFunctionsCommandInput
   | ListLexBotsCommandInput
+  | ListMetricsCommandInput
+  | ListNotificationsCommandInput
   | ListPhoneNumbersCommandInput
+  | ListPhoneNumbersV2CommandInput
+  | ListPredefinedAttributesCommandInput
   | ListPromptsCommandInput
+  | ListQueueEmailAddressesCommandInput
   | ListQueueQuickConnectsCommandInput
   | ListQueuesCommandInput
   | ListQuickConnectsCommandInput
+  | ListRealtimeContactAnalysisSegmentsV2CommandInput
+  | ListReplicationFindingsCommandInput
+  | ListRoutingProfileManualAssignmentQueuesCommandInput
   | ListRoutingProfileQueuesCommandInput
   | ListRoutingProfilesCommandInput
+  | ListRulesCommandInput
   | ListSecurityKeysCommandInput
+  | ListSecurityProfileAIAgentsCommandInput
+  | ListSecurityProfileApplicationsCommandInput
+  | ListSecurityProfileFlowModulesCommandInput
+  | ListSecurityProfilePermissionsCommandInput
   | ListSecurityProfilesCommandInput
   | ListTagsForResourceCommandInput
+  | ListTaskTemplatesCommandInput
+  | ListTestCaseExecutionRecordsCommandInput
+  | ListTestCaseExecutionsCommandInput
+  | ListTestCasesCommandInput
+  | ListTrafficDistributionGroupUsersCommandInput
+  | ListTrafficDistributionGroupsCommandInput
   | ListUseCasesCommandInput
   | ListUserHierarchyGroupsCommandInput
+  | ListUserNotificationsCommandInput
+  | ListUserProficienciesCommandInput
   | ListUsersCommandInput
+  | ListViewVersionsCommandInput
+  | ListViewsCommandInput
+  | ListWorkspaceMediaCommandInput
+  | ListWorkspacePagesCommandInput
+  | ListWorkspacesCommandInput
+  | MonitorContactCommandInput
+  | PauseContactCommandInput
+  | PutUserStatusCommandInput
+  | ReleasePhoneNumberCommandInput
+  | ReplicateInstanceCommandInput
+  | ResumeContactCommandInput
   | ResumeContactRecordingCommandInput
+  | SearchAgentStatusesCommandInput
+  | SearchAvailablePhoneNumbersCommandInput
+  | SearchContactEvaluationsCommandInput
+  | SearchContactFlowModulesCommandInput
+  | SearchContactFlowsCommandInput
+  | SearchContactsCommandInput
+  | SearchDataTablesCommandInput
+  | SearchEmailAddressesCommandInput
+  | SearchEvaluationFormsCommandInput
+  | SearchHoursOfOperationOverridesCommandInput
+  | SearchHoursOfOperationsCommandInput
+  | SearchMetricsCommandInput
+  | SearchNotificationsCommandInput
+  | SearchPredefinedAttributesCommandInput
+  | SearchPromptsCommandInput
+  | SearchQueuesCommandInput
+  | SearchQuickConnectsCommandInput
+  | SearchResourceTagsCommandInput
+  | SearchRoutingProfilesCommandInput
+  | SearchRulesCommandInput
+  | SearchSecurityProfilesCommandInput
+  | SearchTestCasesCommandInput
+  | SearchUserHierarchyGroupsCommandInput
+  | SearchUsersCommandInput
+  | SearchViewsCommandInput
+  | SearchVocabulariesCommandInput
+  | SearchWorkspaceAssociationsCommandInput
+  | SearchWorkspacesCommandInput
+  | SendChatIntegrationEventCommandInput
+  | SendOutboundEmailCommandInput
+  | SendOutboundWebNotificationCommandInput
+  | StartAssistantContactCommandInput
+  | StartAttachedFileUploadCommandInput
   | StartChatContactCommandInput
+  | StartContactConversationalAnalyticsJobCommandInput
+  | StartContactEvaluationCommandInput
+  | StartContactMediaProcessingCommandInput
   | StartContactRecordingCommandInput
+  | StartContactStreamingCommandInput
+  | StartEmailContactCommandInput
+  | StartEvaluationFormValidationCommandInput
+  | StartOutboundChatContactCommandInput
+  | StartOutboundEmailContactCommandInput
   | StartOutboundVoiceContactCommandInput
+  | StartScreenSharingCommandInput
   | StartTaskContactCommandInput
+  | StartTestCaseExecutionCommandInput
+  | StartWebRTCContactCommandInput
   | StopContactCommandInput
+  | StopContactMediaProcessingCommandInput
   | StopContactRecordingCommandInput
+  | StopContactStreamingCommandInput
+  | StopTestCaseExecutionCommandInput
+  | SubmitContactEvaluationCommandInput
   | SuspendContactRecordingCommandInput
+  | TagContactCommandInput
   | TagResourceCommandInput
+  | TransferContactCommandInput
+  | UntagContactCommandInput
   | UntagResourceCommandInput
   | UpdateAgentStatusCommandInput
+  | UpdateAttachedFilesConfigurationCommandInput
+  | UpdateAuthenticationProfileCommandInput
   | UpdateContactAttributesCommandInput
+  | UpdateContactCommandInput
+  | UpdateContactEvaluationCommandInput
+  | UpdateContactFlowAliasCommandInput
   | UpdateContactFlowContentCommandInput
+  | UpdateContactFlowMetadataCommandInput
+  | UpdateContactFlowModuleAliasCommandInput
+  | UpdateContactFlowModuleContentCommandInput
+  | UpdateContactFlowModuleMetadataCommandInput
   | UpdateContactFlowNameCommandInput
+  | UpdateContactRoutingDataCommandInput
+  | UpdateContactScheduleCommandInput
+  | UpdateContactTaskTemplateCommandInput
+  | UpdateCrossRegionRoutingCommandInput
+  | UpdateDataTableAttributeCommandInput
+  | UpdateDataTableMetadataCommandInput
+  | UpdateDataTablePrimaryValuesCommandInput
+  | UpdateEmailAddressMetadataCommandInput
+  | UpdateEvaluationFormCommandInput
+  | UpdateExtractionDefinitionCommandInput
   | UpdateHoursOfOperationCommandInput
+  | UpdateHoursOfOperationOverrideCommandInput
   | UpdateInstanceAttributeCommandInput
   | UpdateInstanceStorageConfigCommandInput
+  | UpdateMetricContentCommandInput
+  | UpdateMetricMetadataCommandInput
+  | UpdateNotificationContentCommandInput
+  | UpdateOutboundEmailContactMessageCommandInput
+  | UpdateParticipantAuthenticationCommandInput
+  | UpdateParticipantRoleConfigCommandInput
+  | UpdatePhoneNumberCommandInput
+  | UpdatePhoneNumberMetadataCommandInput
+  | UpdatePredefinedAttributeCommandInput
+  | UpdatePromptCommandInput
   | UpdateQueueHoursOfOperationCommandInput
   | UpdateQueueMaxContactsCommandInput
   | UpdateQueueNameCommandInput
   | UpdateQueueOutboundCallerConfigCommandInput
+  | UpdateQueueOutboundEmailConfigCommandInput
   | UpdateQueueStatusCommandInput
   | UpdateQuickConnectConfigCommandInput
   | UpdateQuickConnectNameCommandInput
+  | UpdateRoutingProfileAgentAvailabilityTimerCommandInput
   | UpdateRoutingProfileConcurrencyCommandInput
   | UpdateRoutingProfileDefaultOutboundQueueCommandInput
   | UpdateRoutingProfileNameCommandInput
   | UpdateRoutingProfileQueuesCommandInput
+  | UpdateRuleCommandInput
+  | UpdateSecurityProfileCommandInput
+  | UpdateTaskTemplateCommandInput
+  | UpdateTestCaseCommandInput
+  | UpdateTrafficDistributionCommandInput
+  | UpdateUserConfigCommandInput
   | UpdateUserHierarchyCommandInput
   | UpdateUserHierarchyGroupNameCommandInput
   | UpdateUserHierarchyStructureCommandInput
   | UpdateUserIdentityInfoCommandInput
+  | UpdateUserNotificationStatusCommandInput
   | UpdateUserPhoneConfigCommandInput
+  | UpdateUserProficienciesCommandInput
   | UpdateUserRoutingProfileCommandInput
-  | UpdateUserSecurityProfilesCommandInput;
+  | UpdateUserSecurityProfilesCommandInput
+  | UpdateViewContentCommandInput
+  | UpdateViewMetadataCommandInput
+  | UpdateWorkspaceMetadataCommandInput
+  | UpdateWorkspacePageCommandInput
+  | UpdateWorkspaceThemeCommandInput
+  | UpdateWorkspaceVisibilityCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | ActivateEvaluationFormCommandOutput
+  | AssociateAnalyticsDataSetCommandOutput
   | AssociateApprovedOriginCommandOutput
   | AssociateBotCommandOutput
+  | AssociateContactWithUserCommandOutput
+  | AssociateDefaultVocabularyCommandOutput
+  | AssociateEmailAddressAliasCommandOutput
+  | AssociateFlowCommandOutput
+  | AssociateHoursOfOperationsCommandOutput
   | AssociateInstanceStorageConfigCommandOutput
   | AssociateLambdaFunctionCommandOutput
   | AssociateLexBotCommandOutput
+  | AssociatePhoneNumberContactFlowCommandOutput
+  | AssociateQueueEmailAddressesCommandOutput
   | AssociateQueueQuickConnectsCommandOutput
   | AssociateRoutingProfileQueuesCommandOutput
   | AssociateSecurityKeyCommandOutput
+  | AssociateSecurityProfilesCommandOutput
+  | AssociateTrafficDistributionGroupUserCommandOutput
+  | AssociateUserProficienciesCommandOutput
+  | AssociateWorkspaceCommandOutput
+  | BatchAssociateAnalyticsDataSetCommandOutput
+  | BatchCreateDataTableValueCommandOutput
+  | BatchDeleteDataTableValueCommandOutput
+  | BatchDescribeDataTableValueCommandOutput
+  | BatchDisassociateAnalyticsDataSetCommandOutput
+  | BatchGetAttachedFileMetadataCommandOutput
+  | BatchGetFlowAssociationCommandOutput
+  | BatchPutContactCommandOutput
+  | BatchUpdateDataTableValueCommandOutput
+  | ClaimPhoneNumberCommandOutput
+  | CompleteAttachedFileUploadCommandOutput
   | CreateAgentStatusCommandOutput
+  | CreateAttachedFileCommandOutput
+  | CreateAuthCodeCommandOutput
+  | CreateContactCommandOutput
+  | CreateContactFlowAliasCommandOutput
   | CreateContactFlowCommandOutput
+  | CreateContactFlowModuleAliasCommandOutput
+  | CreateContactFlowModuleCommandOutput
+  | CreateContactFlowModuleVersionCommandOutput
+  | CreateContactFlowVersionCommandOutput
+  | CreateDataTableAttributeCommandOutput
+  | CreateDataTableCommandOutput
+  | CreateEmailAddressCommandOutput
+  | CreateEvaluationFormCommandOutput
+  | CreateExtractionDefinitionCommandOutput
   | CreateHoursOfOperationCommandOutput
+  | CreateHoursOfOperationOverrideCommandOutput
   | CreateInstanceCommandOutput
   | CreateIntegrationAssociationCommandOutput
+  | CreateMetricCommandOutput
+  | CreateNotificationCommandOutput
+  | CreateParticipantCommandOutput
+  | CreatePersistentContactAssociationCommandOutput
+  | CreatePredefinedAttributeCommandOutput
+  | CreatePromptCommandOutput
+  | CreatePushNotificationRegistrationCommandOutput
   | CreateQueueCommandOutput
   | CreateQuickConnectCommandOutput
   | CreateRoutingProfileCommandOutput
+  | CreateRuleCommandOutput
+  | CreateSecurityProfileCommandOutput
+  | CreateTaskTemplateCommandOutput
+  | CreateTestCaseCommandOutput
+  | CreateTrafficDistributionGroupCommandOutput
   | CreateUseCaseCommandOutput
   | CreateUserCommandOutput
   | CreateUserHierarchyGroupCommandOutput
+  | CreateViewCommandOutput
+  | CreateViewVersionCommandOutput
+  | CreateVocabularyCommandOutput
+  | CreateWorkspaceCommandOutput
+  | CreateWorkspacePageCommandOutput
+  | DeactivateEvaluationFormCommandOutput
+  | DeleteAttachedFileCommandOutput
+  | DeleteContactDataCommandOutput
+  | DeleteContactEvaluationCommandOutput
+  | DeleteContactFlowAliasCommandOutput
+  | DeleteContactFlowCommandOutput
+  | DeleteContactFlowModuleAliasCommandOutput
+  | DeleteContactFlowModuleCommandOutput
+  | DeleteContactFlowModuleVersionCommandOutput
+  | DeleteContactFlowVersionCommandOutput
+  | DeleteDataTableAttributeCommandOutput
+  | DeleteDataTableCommandOutput
+  | DeleteEmailAddressCommandOutput
+  | DeleteEvaluationFormCommandOutput
+  | DeleteExtractionDefinitionCommandOutput
   | DeleteHoursOfOperationCommandOutput
+  | DeleteHoursOfOperationOverrideCommandOutput
   | DeleteInstanceCommandOutput
   | DeleteIntegrationAssociationCommandOutput
+  | DeleteMetricCommandOutput
+  | DeleteNotificationCommandOutput
+  | DeletePredefinedAttributeCommandOutput
+  | DeletePromptCommandOutput
+  | DeletePushNotificationRegistrationCommandOutput
+  | DeleteQueueCommandOutput
   | DeleteQuickConnectCommandOutput
+  | DeleteRoutingProfileCommandOutput
+  | DeleteRuleCommandOutput
+  | DeleteSecurityProfileCommandOutput
+  | DeleteSessionCommandOutput
+  | DeleteTaskTemplateCommandOutput
+  | DeleteTestCaseCommandOutput
+  | DeleteTrafficDistributionGroupCommandOutput
   | DeleteUseCaseCommandOutput
   | DeleteUserCommandOutput
   | DeleteUserHierarchyGroupCommandOutput
+  | DeleteViewCommandOutput
+  | DeleteViewVersionCommandOutput
+  | DeleteVocabularyCommandOutput
+  | DeleteWorkspaceCommandOutput
+  | DeleteWorkspaceMediaCommandOutput
+  | DeleteWorkspacePageCommandOutput
   | DescribeAgentStatusCommandOutput
+  | DescribeAttachedFilesConfigurationCommandOutput
+  | DescribeAuthenticationProfileCommandOutput
+  | DescribeContactCommandOutput
+  | DescribeContactEvaluationCommandOutput
+  | DescribeContactFlowAliasCommandOutput
   | DescribeContactFlowCommandOutput
+  | DescribeContactFlowModuleAliasCommandOutput
+  | DescribeContactFlowModuleCommandOutput
+  | DescribeDataTableAttributeCommandOutput
+  | DescribeDataTableCommandOutput
+  | DescribeEmailAddressCommandOutput
+  | DescribeEvaluationFormCommandOutput
+  | DescribeExtractionDefinitionCommandOutput
   | DescribeHoursOfOperationCommandOutput
+  | DescribeHoursOfOperationOverrideCommandOutput
   | DescribeInstanceAttributeCommandOutput
   | DescribeInstanceCommandOutput
   | DescribeInstanceStorageConfigCommandOutput
+  | DescribeMetricCommandOutput
+  | DescribeNotificationCommandOutput
+  | DescribePhoneNumberCommandOutput
+  | DescribePredefinedAttributeCommandOutput
+  | DescribePromptCommandOutput
   | DescribeQueueCommandOutput
   | DescribeQuickConnectCommandOutput
   | DescribeRoutingProfileCommandOutput
+  | DescribeRuleCommandOutput
+  | DescribeSecurityProfileCommandOutput
+  | DescribeTestCaseCommandOutput
+  | DescribeTrafficDistributionGroupCommandOutput
   | DescribeUserCommandOutput
   | DescribeUserHierarchyGroupCommandOutput
   | DescribeUserHierarchyStructureCommandOutput
+  | DescribeViewCommandOutput
+  | DescribeVocabularyCommandOutput
+  | DescribeWorkspaceCommandOutput
+  | DisassociateAnalyticsDataSetCommandOutput
   | DisassociateApprovedOriginCommandOutput
   | DisassociateBotCommandOutput
+  | DisassociateEmailAddressAliasCommandOutput
+  | DisassociateFlowCommandOutput
+  | DisassociateHoursOfOperationsCommandOutput
   | DisassociateInstanceStorageConfigCommandOutput
   | DisassociateLambdaFunctionCommandOutput
   | DisassociateLexBotCommandOutput
+  | DisassociatePhoneNumberContactFlowCommandOutput
+  | DisassociateQueueEmailAddressesCommandOutput
   | DisassociateQueueQuickConnectsCommandOutput
   | DisassociateRoutingProfileQueuesCommandOutput
   | DisassociateSecurityKeyCommandOutput
+  | DisassociateSecurityProfilesCommandOutput
+  | DisassociateTrafficDistributionGroupUserCommandOutput
+  | DisassociateUserProficienciesCommandOutput
+  | DisassociateWorkspaceCommandOutput
+  | DismissUserContactCommandOutput
+  | EvaluateDataTableValuesCommandOutput
+  | GetAttachedFileCommandOutput
   | GetContactAttributesCommandOutput
+  | GetContactMetricsCommandOutput
+  | GetCrossRegionRoutingCommandOutput
   | GetCurrentMetricDataCommandOutput
+  | GetCurrentUserDataCommandOutput
+  | GetEffectiveHoursOfOperationsCommandOutput
+  | GetEvaluationFormValidationCommandOutput
   | GetFederationTokenCommandOutput
+  | GetFlowAssociationCommandOutput
   | GetMetricDataCommandOutput
+  | GetMetricDataV2CommandOutput
+  | GetPromptFileCommandOutput
+  | GetTaskTemplateCommandOutput
+  | GetTestCaseExecutionSummaryCommandOutput
+  | GetTrafficDistributionCommandOutput
+  | ImportPhoneNumberCommandOutput
+  | ImportWorkspaceMediaCommandOutput
   | ListAgentStatusesCommandOutput
+  | ListAnalyticsDataAssociationsCommandOutput
+  | ListAnalyticsDataLakeDataSetsCommandOutput
   | ListApprovedOriginsCommandOutput
+  | ListAssociatedContactsCommandOutput
+  | ListAttachedFilesConfigurationsCommandOutput
+  | ListAuthenticationProfilesCommandOutput
   | ListBotsCommandOutput
+  | ListChildHoursOfOperationsCommandOutput
+  | ListContactEvaluationsCommandOutput
+  | ListContactFlowAliasesCommandOutput
+  | ListContactFlowModuleAliasesCommandOutput
+  | ListContactFlowModuleVersionsCommandOutput
+  | ListContactFlowModulesCommandOutput
+  | ListContactFlowVersionsCommandOutput
   | ListContactFlowsCommandOutput
+  | ListContactReferencesCommandOutput
+  | ListDataTableAttributesCommandOutput
+  | ListDataTablePrimaryValuesCommandOutput
+  | ListDataTableValuesCommandOutput
+  | ListDataTablesCommandOutput
+  | ListDefaultVocabulariesCommandOutput
+  | ListEntitySecurityProfilesCommandOutput
+  | ListEvaluationFormAIVersionsCommandOutput
+  | ListEvaluationFormVersionsCommandOutput
+  | ListEvaluationFormsCommandOutput
+  | ListExtractionDefinitionsCommandOutput
+  | ListFlowAssociationsCommandOutput
+  | ListHoursOfOperationOverridesCommandOutput
   | ListHoursOfOperationsCommandOutput
   | ListInstanceAttributesCommandOutput
   | ListInstanceStorageConfigsCommandOutput
@@ -540,67 +2042,199 @@ export type ServiceOutputTypes =
   | ListIntegrationAssociationsCommandOutput
   | ListLambdaFunctionsCommandOutput
   | ListLexBotsCommandOutput
+  | ListMetricsCommandOutput
+  | ListNotificationsCommandOutput
   | ListPhoneNumbersCommandOutput
+  | ListPhoneNumbersV2CommandOutput
+  | ListPredefinedAttributesCommandOutput
   | ListPromptsCommandOutput
+  | ListQueueEmailAddressesCommandOutput
   | ListQueueQuickConnectsCommandOutput
   | ListQueuesCommandOutput
   | ListQuickConnectsCommandOutput
+  | ListRealtimeContactAnalysisSegmentsV2CommandOutput
+  | ListReplicationFindingsCommandOutput
+  | ListRoutingProfileManualAssignmentQueuesCommandOutput
   | ListRoutingProfileQueuesCommandOutput
   | ListRoutingProfilesCommandOutput
+  | ListRulesCommandOutput
   | ListSecurityKeysCommandOutput
+  | ListSecurityProfileAIAgentsCommandOutput
+  | ListSecurityProfileApplicationsCommandOutput
+  | ListSecurityProfileFlowModulesCommandOutput
+  | ListSecurityProfilePermissionsCommandOutput
   | ListSecurityProfilesCommandOutput
   | ListTagsForResourceCommandOutput
+  | ListTaskTemplatesCommandOutput
+  | ListTestCaseExecutionRecordsCommandOutput
+  | ListTestCaseExecutionsCommandOutput
+  | ListTestCasesCommandOutput
+  | ListTrafficDistributionGroupUsersCommandOutput
+  | ListTrafficDistributionGroupsCommandOutput
   | ListUseCasesCommandOutput
   | ListUserHierarchyGroupsCommandOutput
+  | ListUserNotificationsCommandOutput
+  | ListUserProficienciesCommandOutput
   | ListUsersCommandOutput
+  | ListViewVersionsCommandOutput
+  | ListViewsCommandOutput
+  | ListWorkspaceMediaCommandOutput
+  | ListWorkspacePagesCommandOutput
+  | ListWorkspacesCommandOutput
+  | MonitorContactCommandOutput
+  | PauseContactCommandOutput
+  | PutUserStatusCommandOutput
+  | ReleasePhoneNumberCommandOutput
+  | ReplicateInstanceCommandOutput
+  | ResumeContactCommandOutput
   | ResumeContactRecordingCommandOutput
+  | SearchAgentStatusesCommandOutput
+  | SearchAvailablePhoneNumbersCommandOutput
+  | SearchContactEvaluationsCommandOutput
+  | SearchContactFlowModulesCommandOutput
+  | SearchContactFlowsCommandOutput
+  | SearchContactsCommandOutput
+  | SearchDataTablesCommandOutput
+  | SearchEmailAddressesCommandOutput
+  | SearchEvaluationFormsCommandOutput
+  | SearchHoursOfOperationOverridesCommandOutput
+  | SearchHoursOfOperationsCommandOutput
+  | SearchMetricsCommandOutput
+  | SearchNotificationsCommandOutput
+  | SearchPredefinedAttributesCommandOutput
+  | SearchPromptsCommandOutput
+  | SearchQueuesCommandOutput
+  | SearchQuickConnectsCommandOutput
+  | SearchResourceTagsCommandOutput
+  | SearchRoutingProfilesCommandOutput
+  | SearchRulesCommandOutput
+  | SearchSecurityProfilesCommandOutput
+  | SearchTestCasesCommandOutput
+  | SearchUserHierarchyGroupsCommandOutput
+  | SearchUsersCommandOutput
+  | SearchViewsCommandOutput
+  | SearchVocabulariesCommandOutput
+  | SearchWorkspaceAssociationsCommandOutput
+  | SearchWorkspacesCommandOutput
+  | SendChatIntegrationEventCommandOutput
+  | SendOutboundEmailCommandOutput
+  | SendOutboundWebNotificationCommandOutput
+  | StartAssistantContactCommandOutput
+  | StartAttachedFileUploadCommandOutput
   | StartChatContactCommandOutput
+  | StartContactConversationalAnalyticsJobCommandOutput
+  | StartContactEvaluationCommandOutput
+  | StartContactMediaProcessingCommandOutput
   | StartContactRecordingCommandOutput
+  | StartContactStreamingCommandOutput
+  | StartEmailContactCommandOutput
+  | StartEvaluationFormValidationCommandOutput
+  | StartOutboundChatContactCommandOutput
+  | StartOutboundEmailContactCommandOutput
   | StartOutboundVoiceContactCommandOutput
+  | StartScreenSharingCommandOutput
   | StartTaskContactCommandOutput
+  | StartTestCaseExecutionCommandOutput
+  | StartWebRTCContactCommandOutput
   | StopContactCommandOutput
+  | StopContactMediaProcessingCommandOutput
   | StopContactRecordingCommandOutput
+  | StopContactStreamingCommandOutput
+  | StopTestCaseExecutionCommandOutput
+  | SubmitContactEvaluationCommandOutput
   | SuspendContactRecordingCommandOutput
+  | TagContactCommandOutput
   | TagResourceCommandOutput
+  | TransferContactCommandOutput
+  | UntagContactCommandOutput
   | UntagResourceCommandOutput
   | UpdateAgentStatusCommandOutput
+  | UpdateAttachedFilesConfigurationCommandOutput
+  | UpdateAuthenticationProfileCommandOutput
   | UpdateContactAttributesCommandOutput
+  | UpdateContactCommandOutput
+  | UpdateContactEvaluationCommandOutput
+  | UpdateContactFlowAliasCommandOutput
   | UpdateContactFlowContentCommandOutput
+  | UpdateContactFlowMetadataCommandOutput
+  | UpdateContactFlowModuleAliasCommandOutput
+  | UpdateContactFlowModuleContentCommandOutput
+  | UpdateContactFlowModuleMetadataCommandOutput
   | UpdateContactFlowNameCommandOutput
+  | UpdateContactRoutingDataCommandOutput
+  | UpdateContactScheduleCommandOutput
+  | UpdateContactTaskTemplateCommandOutput
+  | UpdateCrossRegionRoutingCommandOutput
+  | UpdateDataTableAttributeCommandOutput
+  | UpdateDataTableMetadataCommandOutput
+  | UpdateDataTablePrimaryValuesCommandOutput
+  | UpdateEmailAddressMetadataCommandOutput
+  | UpdateEvaluationFormCommandOutput
+  | UpdateExtractionDefinitionCommandOutput
   | UpdateHoursOfOperationCommandOutput
+  | UpdateHoursOfOperationOverrideCommandOutput
   | UpdateInstanceAttributeCommandOutput
   | UpdateInstanceStorageConfigCommandOutput
+  | UpdateMetricContentCommandOutput
+  | UpdateMetricMetadataCommandOutput
+  | UpdateNotificationContentCommandOutput
+  | UpdateOutboundEmailContactMessageCommandOutput
+  | UpdateParticipantAuthenticationCommandOutput
+  | UpdateParticipantRoleConfigCommandOutput
+  | UpdatePhoneNumberCommandOutput
+  | UpdatePhoneNumberMetadataCommandOutput
+  | UpdatePredefinedAttributeCommandOutput
+  | UpdatePromptCommandOutput
   | UpdateQueueHoursOfOperationCommandOutput
   | UpdateQueueMaxContactsCommandOutput
   | UpdateQueueNameCommandOutput
   | UpdateQueueOutboundCallerConfigCommandOutput
+  | UpdateQueueOutboundEmailConfigCommandOutput
   | UpdateQueueStatusCommandOutput
   | UpdateQuickConnectConfigCommandOutput
   | UpdateQuickConnectNameCommandOutput
+  | UpdateRoutingProfileAgentAvailabilityTimerCommandOutput
   | UpdateRoutingProfileConcurrencyCommandOutput
   | UpdateRoutingProfileDefaultOutboundQueueCommandOutput
   | UpdateRoutingProfileNameCommandOutput
   | UpdateRoutingProfileQueuesCommandOutput
+  | UpdateRuleCommandOutput
+  | UpdateSecurityProfileCommandOutput
+  | UpdateTaskTemplateCommandOutput
+  | UpdateTestCaseCommandOutput
+  | UpdateTrafficDistributionCommandOutput
+  | UpdateUserConfigCommandOutput
   | UpdateUserHierarchyCommandOutput
   | UpdateUserHierarchyGroupNameCommandOutput
   | UpdateUserHierarchyStructureCommandOutput
   | UpdateUserIdentityInfoCommandOutput
+  | UpdateUserNotificationStatusCommandOutput
   | UpdateUserPhoneConfigCommandOutput
+  | UpdateUserProficienciesCommandOutput
   | UpdateUserRoutingProfileCommandOutput
-  | UpdateUserSecurityProfilesCommandOutput;
+  | UpdateUserSecurityProfilesCommandOutput
+  | UpdateViewContentCommandOutput
+  | UpdateViewMetadataCommandOutput
+  | UpdateWorkspaceMetadataCommandOutput
+  | UpdateWorkspacePageCommandOutput
+  | UpdateWorkspaceThemeCommandOutput
+  | UpdateWorkspaceVisibilityCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -612,7 +2246,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -651,25 +2285,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -682,78 +2307,138 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ConnectClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ConnectClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ConnectClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ConnectClient class constructor that set the region, credentials and other options.
  */
 export interface ConnectClientConfig extends ConnectClientConfigType {}
 
-type ConnectClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ConnectClient class. This is resolved and normalized from the {@link ConnectClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ConnectClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ConnectClient class. This is resolved and normalized from the {@link ConnectClientConfig | constructor configuration interface}.
  */
 export interface ConnectClientResolvedConfig extends ConnectClientResolvedConfigType {}
 
 /**
- * <p>Amazon Connect is a cloud-based contact center solution that you use to set up and manage a customer
- *    contact center and provide reliable customer engagement at any scale.</p>
- *          <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize contact routing.
- *    You can also resolve customer issues more efficiently by getting customers in touch with the
- *    appropriate agents.</p>
- *          <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits
- *    to the number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect
- *     Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
- *          <p>You can
- *    connect
- *    programmatically to an AWS service by using an endpoint. For a list of Amazon Connect endpoints, see
- *     <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect
- *    Endpoints</a>.</p>
- *          <note>
- *             <p>Working with contact flows? Check out the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect Flow language</a>.</p>
+ * <note>
+ *             <p>Amazon Connect now refers to a portfolio of agentic solutions for business functions. The
+ *     legacy product is now called Amazon Connect Customer, or simply Customer. The legacy name
+ *     is used interchangeably in this documentation.</p>
  *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html">Connect Customer Customer actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html">Connect Customer Customer data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Connect Customer Customer engages customers at every touchpoint and creates deeper
+ *    relationships with AI powered capabilities.</p>
+ *          <p>Build and manage customer communication experiences. Connect customers to agents, enable
+ *    intelligent routing, and track performance in real-time.</p>
+ *          <p>There are limits to the number of Connect Customer resources that you can create. There are also limits to the
+ *    number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Connect Customer Service Quotas</a> in the
+ *      <i>Connect Customer Administrator Guide</i>.</p>
+ *          <p>You can use an endpoint to connect programmatically to an Amazon Web Services service. For a list of Connect Customer endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Connect Customer
+ *     Endpoints</a>.</p>
+ * @public
  */
 export class ConnectClient extends __Client<
   __HttpHandlerOptions,
@@ -766,22 +2451,36 @@ export class ConnectClient extends __Client<
    */
   readonly config: ConnectClientResolvedConfig;
 
-  constructor(configuration: ConnectClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ConnectClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultConnectHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ConnectClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

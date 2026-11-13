@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { GetDirectoryLimitsRequest, GetDirectoryLimitsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDirectoryLimitsCommand,
-  serializeAws_json1_1GetDirectoryLimitsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDirectoryLimitsRequest, GetDirectoryLimitsResult } from "../models/models_0";
+import { GetDirectoryLimits$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDirectoryLimitsCommand}.
+ */
 export interface GetDirectoryLimitsCommandInput extends GetDirectoryLimitsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDirectoryLimitsCommand}.
+ */
 export interface GetDirectoryLimitsCommandOutput extends GetDirectoryLimitsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface GetDirectoryLimitsCommandOutput extends GetDirectoryLimitsResul
  * ```javascript
  * import { DirectoryServiceClient, GetDirectoryLimitsCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, GetDirectoryLimitsCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = {};
  * const command = new GetDirectoryLimitsCommand(input);
  * const response = await client.send(command);
+ * // { // GetDirectoryLimitsResult
+ * //   DirectoryLimits: { // DirectoryLimits
+ * //     CloudOnlyDirectoriesLimit: Number("int"),
+ * //     CloudOnlyDirectoriesCurrentCount: Number("int"),
+ * //     CloudOnlyDirectoriesLimitReached: true || false,
+ * //     CloudOnlyMicrosoftADLimit: Number("int"),
+ * //     CloudOnlyMicrosoftADCurrentCount: Number("int"),
+ * //     CloudOnlyMicrosoftADLimitReached: true || false,
+ * //     ConnectedDirectoriesLimit: Number("int"),
+ * //     ConnectedDirectoriesCurrentCount: Number("int"),
+ * //     ConnectedDirectoriesLimitReached: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDirectoryLimitsCommandInput - {@link GetDirectoryLimitsCommandInput}
+ * @returns {@link GetDirectoryLimitsCommandOutput}
  * @see {@link GetDirectoryLimitsCommandInput} for command's `input` shape.
  * @see {@link GetDirectoryLimitsCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To get directory limits
+ * ```javascript
+ * // The following example obtains directory limit information for the current region.
+ * const input = { /* empty *\/ };
+ * const command = new GetDirectoryLimitsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DirectoryLimits: {
+ *     CloudOnlyDirectoriesCurrentCount: 2,
+ *     CloudOnlyDirectoriesLimit: 10,
+ *     CloudOnlyDirectoriesLimitReached: false,
+ *     CloudOnlyMicrosoftADCurrentCount: 2,
+ *     CloudOnlyMicrosoftADLimit: 10,
+ *     CloudOnlyMicrosoftADLimitReached: false,
+ *     ConnectedDirectoriesCurrentCount: 1,
+ *     ConnectedDirectoriesLimit: 10,
+ *     ConnectedDirectoriesLimitReached: false
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetDirectoryLimitsCommand extends $Command<
-  GetDirectoryLimitsCommandInput,
-  GetDirectoryLimitsCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDirectoryLimitsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDirectoryLimitsCommandInput, GetDirectoryLimitsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "GetDirectoryLimitsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDirectoryLimitsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDirectoryLimitsResult.filterSensitiveLog,
+export class GetDirectoryLimitsCommand extends command<GetDirectoryLimitsCommandInput, GetDirectoryLimitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDirectoryLimits",
+  GetDirectoryLimits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetDirectoryLimitsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDirectoryLimitsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDirectoryLimitsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDirectoryLimitsCommandOutput> {
-    return deserializeAws_json1_1GetDirectoryLimitsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDirectoryLimitsCommandInput;
+      output: GetDirectoryLimitsCommandOutput;
+    };
+  };
 }

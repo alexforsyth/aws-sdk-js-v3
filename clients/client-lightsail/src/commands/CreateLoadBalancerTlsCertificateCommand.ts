@@ -1,107 +1,145 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
-import { CreateLoadBalancerTlsCertificateRequest, CreateLoadBalancerTlsCertificateResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateLoadBalancerTlsCertificateCommand,
-  serializeAws_json1_1CreateLoadBalancerTlsCertificateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  CreateLoadBalancerTlsCertificateRequest,
+  CreateLoadBalancerTlsCertificateResult,
+} from "../models/models_0";
+import { CreateLoadBalancerTlsCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLoadBalancerTlsCertificateCommand}.
+ */
 export interface CreateLoadBalancerTlsCertificateCommandInput extends CreateLoadBalancerTlsCertificateRequest {}
-export interface CreateLoadBalancerTlsCertificateCommandOutput
-  extends CreateLoadBalancerTlsCertificateResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLoadBalancerTlsCertificateCommand}.
+ */
+export interface CreateLoadBalancerTlsCertificateCommandOutput extends CreateLoadBalancerTlsCertificateResult, __MetadataBearer {}
 
 /**
  * <p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p>
  *          <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>
  *          <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access
  *       control via resource tags applied to the resource identified by <code>load balancer
- *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
+ *         name</code>. For more information, see the <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LightsailClient, CreateLoadBalancerTlsCertificateCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
  * // const { LightsailClient, CreateLoadBalancerTlsCertificateCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * // import type { LightsailClientConfig } from "@aws-sdk/client-lightsail";
+ * const config = {}; // type is LightsailClientConfig
  * const client = new LightsailClient(config);
+ * const input = { // CreateLoadBalancerTlsCertificateRequest
+ *   loadBalancerName: "STRING_VALUE", // required
+ *   certificateName: "STRING_VALUE", // required
+ *   certificateDomainName: "STRING_VALUE", // required
+ *   certificateAlternativeNames: [ // DomainNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE",
+ *       value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateLoadBalancerTlsCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // CreateLoadBalancerTlsCertificateResult
+ * //   operations: [ // OperationList
+ * //     { // Operation
+ * //       id: "STRING_VALUE",
+ * //       resourceName: "STRING_VALUE",
+ * //       resourceType: "ContainerService" || "Instance" || "StaticIp" || "KeyPair" || "InstanceSnapshot" || "Domain" || "PeeredVpc" || "LoadBalancer" || "LoadBalancerTlsCertificate" || "Disk" || "DiskSnapshot" || "RelationalDatabase" || "RelationalDatabaseSnapshot" || "ExportSnapshotRecord" || "CloudFormationStackRecord" || "Alarm" || "ContactMethod" || "Distribution" || "Certificate" || "Bucket" || "Subdomain",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       location: { // ResourceLocation
+ * //         availabilityZone: "STRING_VALUE",
+ * //         regionName: "us-east-1" || "us-east-2" || "us-west-1" || "us-west-2" || "eu-west-1" || "eu-west-2" || "eu-west-3" || "eu-central-1" || "eu-north-1" || "eu-south-2" || "ca-central-1" || "ap-east-1" || "ap-south-1" || "ap-southeast-1" || "ap-southeast-2" || "ap-northeast-1" || "ap-northeast-2" || "ap-southeast-3" || "ap-southeast-5" || "sa-east-1",
+ * //       },
+ * //       isTerminal: true || false,
+ * //       operationDetails: "STRING_VALUE",
+ * //       operationType: "DeleteKnownHostKeys" || "DeleteInstance" || "CreateInstance" || "StopInstance" || "StartInstance" || "RebootInstance" || "OpenInstancePublicPorts" || "PutInstancePublicPorts" || "CloseInstancePublicPorts" || "AllocateStaticIp" || "ReleaseStaticIp" || "AttachStaticIp" || "DetachStaticIp" || "UpdateDomainEntry" || "DeleteDomainEntry" || "CreateDomain" || "DeleteDomain" || "CreateInstanceSnapshot" || "DeleteInstanceSnapshot" || "CreateInstancesFromSnapshot" || "CreateLoadBalancer" || "DeleteLoadBalancer" || "AttachInstancesToLoadBalancer" || "DetachInstancesFromLoadBalancer" || "UpdateLoadBalancerAttribute" || "CreateLoadBalancerTlsCertificate" || "DeleteLoadBalancerTlsCertificate" || "AttachLoadBalancerTlsCertificate" || "CreateDisk" || "DeleteDisk" || "AttachDisk" || "DetachDisk" || "CreateDiskSnapshot" || "DeleteDiskSnapshot" || "CreateDiskFromSnapshot" || "CreateRelationalDatabase" || "UpdateRelationalDatabase" || "DeleteRelationalDatabase" || "CreateRelationalDatabaseFromSnapshot" || "CreateRelationalDatabaseSnapshot" || "DeleteRelationalDatabaseSnapshot" || "UpdateRelationalDatabaseParameters" || "StartRelationalDatabase" || "RebootRelationalDatabase" || "StopRelationalDatabase" || "EnableAddOn" || "DisableAddOn" || "PutAlarm" || "GetAlarms" || "DeleteAlarm" || "TestAlarm" || "CreateContactMethod" || "GetContactMethods" || "SendContactMethodVerification" || "DeleteContactMethod" || "CreateDistribution" || "UpdateDistribution" || "DeleteDistribution" || "ResetDistributionCache" || "AttachCertificateToDistribution" || "DetachCertificateFromDistribution" || "UpdateDistributionBundle" || "SetIpAddressType" || "CreateCertificate" || "DeleteCertificate" || "CreateContainerService" || "UpdateContainerService" || "DeleteContainerService" || "CreateContainerServiceDeployment" || "CreateContainerServiceRegistryLogin" || "RegisterContainerImage" || "DeleteContainerImage" || "CreateBucket" || "DeleteBucket" || "CreateBucketAccessKey" || "DeleteBucketAccessKey" || "UpdateBucketBundle" || "UpdateBucket" || "SetResourceAccessForBucket" || "UpdateInstanceMetadataOptions" || "StartGUISession" || "StopGUISession" || "SetupInstanceHttps" || "GetProfile" || "CreateSubdomain" || "UpdateSubdomainAssociation" || "DeleteSubdomain",
+ * //       status: "NotStarted" || "Started" || "Failed" || "Completed" || "Succeeded",
+ * //       statusChangedAt: new Date("TIMESTAMP"),
+ * //       errorCode: "STRING_VALUE",
+ * //       errorDetails: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateLoadBalancerTlsCertificateCommandInput - {@link CreateLoadBalancerTlsCertificateCommandInput}
+ * @returns {@link CreateLoadBalancerTlsCertificateCommandOutput}
  * @see {@link CreateLoadBalancerTlsCertificateCommandInput} for command's `input` shape.
  * @see {@link CreateLoadBalancerTlsCertificateCommandOutput} for command's `response` shape.
- * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for LightsailClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Lightsail throws this exception when the user cannot be authenticated or uses invalid
+ *       credentials to access a resource.</p>
+ *
+ * @throws {@link AccountSetupInProgressException} (client fault)
+ *  <p>Lightsail throws this exception when an account is still in the setup in progress
+ *       state.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Lightsail throws this exception when user input does not conform to the validation rules
+ *       of an input field.</p>
+ *          <note>
+ *             <p>Domain and distribution APIs are only available in the N. Virginia
+ *           (<code>us-east-1</code>) Amazon Web Services Region. Please set your Amazon Web Services
+ *         Region configuration to <code>us-east-1</code> to create, view, or edit these
+ *         resources.</p>
+ *          </note>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Lightsail throws this exception when it cannot find a resource.</p>
+ *
+ * @throws {@link OperationFailureException} (client fault)
+ *  <p>Lightsail throws this exception when an operation fails to execute.</p>
+ *
+ * @throws {@link RegionSetupInProgressException} (client fault)
+ *  <p>Lightsail throws this exception when an operation is performed on resources in an opt-in
+ *       Region that is currently being set up.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>A general service exception.</p>
+ *
+ * @throws {@link UnauthenticatedException} (client fault)
+ *  <p>Lightsail throws this exception when the user has not been authenticated.</p>
+ *
+ * @throws {@link LightsailServiceException}
+ * <p>Base exception class for all service exceptions from Lightsail service.</p>
+ *
+ *
+ * @public
  */
-export class CreateLoadBalancerTlsCertificateCommand extends $Command<
-  CreateLoadBalancerTlsCertificateCommandInput,
-  CreateLoadBalancerTlsCertificateCommandOutput,
-  LightsailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateLoadBalancerTlsCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LightsailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateLoadBalancerTlsCertificateCommandInput, CreateLoadBalancerTlsCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LightsailClient";
-    const commandName = "CreateLoadBalancerTlsCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateLoadBalancerTlsCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateLoadBalancerTlsCertificateResult.filterSensitiveLog,
+export class CreateLoadBalancerTlsCertificateCommand extends command<CreateLoadBalancerTlsCertificateCommandInput, CreateLoadBalancerTlsCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLoadBalancerTlsCertificate",
+  CreateLoadBalancerTlsCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLoadBalancerTlsCertificateRequest;
+      output: CreateLoadBalancerTlsCertificateResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateLoadBalancerTlsCertificateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateLoadBalancerTlsCertificateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateLoadBalancerTlsCertificateCommandOutput> {
-    return deserializeAws_json1_1CreateLoadBalancerTlsCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateLoadBalancerTlsCertificateCommandInput;
+      output: CreateLoadBalancerTlsCertificateCommandOutput;
+    };
+  };
 }

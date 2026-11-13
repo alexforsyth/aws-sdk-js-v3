@@ -13,8 +13,40 @@
  * permissions and limitations under the License.
  */
 
+import java.io.FileInputStream
+import java.nio.charset.StandardCharsets.UTF_8
+
 rootProject.name = "codegen"
 include(":smithy-aws-typescript-codegen")
 include(":sdk-codegen")
 include(":protocol-test-codegen")
 include(":generic-client-test-codegen")
+
+file(
+    java.nio.file.Paths.get(rootProject.projectDir.absolutePath, "local.properties")
+)
+    .takeIf { it.isFile }?.let { f ->
+        java.util.Properties().apply { load(java.io.InputStreamReader(FileInputStream(f), UTF_8)) }
+    }?.run {
+        listOf("smithy-typescript", "smithy")
+            .map { it to getProperty(it) }
+            .filterNot { it.second.isNullOrEmpty() }
+            .onEach { println("Found property `${it.first}`: ${it.second}") }
+            .map { file(it.second) }
+            .filter { it.isDirectory }
+            .forEach { includeBuild(it.absolutePath) }
+    }
+
+pluginManagement {
+    val smithyGradleVersion: String by settings
+    plugins {
+        id("software.amazon.smithy.gradle.smithy-jar").version(smithyGradleVersion)
+        id("software.amazon.smithy.gradle.smithy-base").version(smithyGradleVersion)
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}

@@ -1,34 +1,46 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateSnapshotRequest, Snapshot } from "../models/models_1";
-import { deserializeAws_ec2CreateSnapshotCommand, serializeAws_ec2CreateSnapshotCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSnapshotRequest, Snapshot } from "../models/models_2";
+import { CreateSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSnapshotCommand}.
+ */
 export interface CreateSnapshotCommandInput extends CreateSnapshotRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSnapshotCommand}.
+ */
 export interface CreateSnapshotCommandOutput extends Snapshot, __MetadataBearer {}
 
 /**
  * <p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for
  *   	backups, to make copies of EBS volumes, and to save data before shutting down an
  *   	instance.</p>
- *
- *
- *          <p>You can create snapshots of volumes in a Region and volumes on an Outpost. If you
- *     	create a snapshot of a volume in a Region, the snapshot must be stored in the same
- *     	Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot
- *     	can be stored on the same Outpost as the volume, or in the Region for that Outpost.</p>
- *
+ *          <p>The location of the source EBS volume determines where you can create the snapshot.</p>
+ *          <ul>
+ *             <li>
+ *                <p>If the source volume is in a Region, you must create the snapshot in the same
+ *           Region as the volume.</p>
+ *             </li>
+ *             <li>
+ *                <p>If the source volume is in a Local Zone, you can create the snapshot in the same Local
+ *           Zone or in its parent Amazon Web Services Region.</p>
+ *             </li>
+ *             <li>
+ *                <p>If the source volume is on an Outpost, you can create the snapshot on the same
+ *           Outpost or in its parent Amazon Web Services Region.</p>
+ *             </li>
+ *          </ul>
  *          <p>When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the
  *       source volume are propagated to the snapshot.</p>
  *          <p>You can take a snapshot of an attached volume that is in use. However, snapshots only
@@ -39,81 +51,123 @@ export interface CreateSnapshotCommandOutput extends Snapshot, __MetadataBearer 
  *       should unmount the volume from within the instance, issue the snapshot command, and then
  *       remount the volume to ensure a consistent and complete snapshot. You may remount and use your
  *       volume while the snapshot status is <code>pending</code>.</p>
- *          <p>To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the
- *       instance before taking the snapshot.</p>
+ *          <p>When you create a snapshot for an EBS volume that serves as a root device, we recommend
+ *       that you stop the instance before taking the snapshot.</p>
  *          <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that
  *       are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes
- *       and any associated snapshots always remain protected.</p>
- *          <p>You can tag your snapshots during creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tag your Amazon EC2
- *         resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon Elastic Block Store</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *       and any associated snapshots always remain protected. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a>
+ *       in the <i>Amazon EBS User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateSnapshotCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateSnapshotCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateSnapshotRequest
+ *   Description: "STRING_VALUE",
+ *   OutpostArn: "STRING_VALUE",
+ *   VolumeId: "STRING_VALUE", // required
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   Location: "regional" || "local",
+ *   DryRun: true || false,
+ * };
  * const command = new CreateSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // Snapshot
+ * //   OwnerAlias: "STRING_VALUE",
+ * //   OutpostArn: "STRING_VALUE",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   StorageTier: "archive" || "standard",
+ * //   RestoreExpiryTime: new Date("TIMESTAMP"),
+ * //   SseType: "sse-ebs" || "sse-kms" || "none",
+ * //   AvailabilityZone: "STRING_VALUE",
+ * //   TransferType: "time-based" || "standard",
+ * //   CompletionDurationMinutes: Number("int"),
+ * //   CompletionTime: new Date("TIMESTAMP"),
+ * //   FullSnapshotSizeInBytes: Number("long"),
+ * //   SnapshotId: "STRING_VALUE",
+ * //   VolumeId: "STRING_VALUE",
+ * //   State: "pending" || "completed" || "error" || "recoverable" || "recovering",
+ * //   StateMessage: "STRING_VALUE",
+ * //   StartTime: new Date("TIMESTAMP"),
+ * //   Progress: "STRING_VALUE",
+ * //   OwnerId: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   VolumeSize: Number("int"),
+ * //   Encrypted: true || false,
+ * //   KmsKeyId: "STRING_VALUE",
+ * //   DataEncryptionKeyId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSnapshotCommandInput - {@link CreateSnapshotCommandInput}
+ * @returns {@link CreateSnapshotCommandOutput}
  * @see {@link CreateSnapshotCommandInput} for command's `input` shape.
  * @see {@link CreateSnapshotCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To create a snapshot
+ * ```javascript
+ * // This example creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0`` and a short description to identify the snapshot.
+ * const input = {
+ *   Description: "This is my root volume snapshot.",
+ *   VolumeId: "vol-1234567890abcdef0"
+ * };
+ * const command = new CreateSnapshotCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Description: "This is my root volume snapshot.",
+ *   OwnerId: "012345678910",
+ *   SnapshotId: "snap-066877671789bd71b",
+ *   StartTime: "2014-02-28T21:06:01.000Z",
+ *   State: "pending",
+ *   Tags:   [],
+ *   VolumeId: "vol-1234567890abcdef0",
+ *   VolumeSize: 8
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateSnapshotCommand extends $Command<
-  CreateSnapshotCommandInput,
-  CreateSnapshotCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSnapshotCommandInput, CreateSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSnapshotRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Snapshot.filterSensitiveLog,
+export class CreateSnapshotCommand extends command<CreateSnapshotCommandInput, CreateSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSnapshot",
+  CreateSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSnapshotRequest;
+      output: Snapshot;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSnapshotCommandOutput> {
-    return deserializeAws_ec2CreateSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSnapshotCommandInput;
+      output: CreateSnapshotCommandOutput;
+    };
+  };
 }

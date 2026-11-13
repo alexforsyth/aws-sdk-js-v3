@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { DescribeClusterRequest, DescribeClusterResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeClusterCommand,
-  serializeAws_restJson1DescribeClusterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeClusterRequest, DescribeClusterResponse } from "../models/models_0";
+import { DescribeCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClusterCommand}.
+ */
 export interface DescribeClusterCommandInput extends DescribeClusterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClusterCommand}.
+ */
 export interface DescribeClusterCommandOutput extends DescribeClusterResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,203 @@ export interface DescribeClusterCommandOutput extends DescribeClusterResponse, _
  * ```javascript
  * import { KafkaClient, DescribeClusterCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, DescribeClusterCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // DescribeClusterRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeClusterCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeClusterResponse
+ * //   ClusterInfo: { // ClusterInfo
+ * //     ActiveOperationArn: "STRING_VALUE",
+ * //     BrokerNodeGroupInfo: { // BrokerNodeGroupInfo
+ * //       BrokerAZDistribution: "DEFAULT",
+ * //       ClientSubnets: [ // __listOf__string // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       InstanceType: "STRING_VALUE", // required
+ * //       SecurityGroups: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       StorageInfo: { // StorageInfo
+ * //         EbsStorageInfo: { // EBSStorageInfo
+ * //           ProvisionedThroughput: { // ProvisionedThroughput
+ * //             Enabled: true || false,
+ * //             VolumeThroughput: Number("int"),
+ * //           },
+ * //           VolumeSize: Number("int"),
+ * //         },
+ * //       },
+ * //       ConnectivityInfo: { // ConnectivityInfo
+ * //         PublicAccess: { // PublicAccess
+ * //           Type: "STRING_VALUE",
+ * //         },
+ * //         VpcConnectivity: { // VpcConnectivity
+ * //           ClientAuthentication: { // VpcConnectivityClientAuthentication
+ * //             Sasl: { // VpcConnectivitySasl
+ * //               Scram: { // VpcConnectivityScram
+ * //                 Enabled: true || false,
+ * //               },
+ * //               Iam: { // VpcConnectivityIam
+ * //                 Enabled: true || false,
+ * //               },
+ * //             },
+ * //             Tls: { // VpcConnectivityTls
+ * //               Enabled: true || false,
+ * //             },
+ * //           },
+ * //         },
+ * //         NetworkType: "IPV4" || "DUAL",
+ * //       },
+ * //       ZoneIds: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     Rebalancing: { // Rebalancing
+ * //       Status: "PAUSED" || "ACTIVE",
+ * //     },
+ * //     ClientAuthentication: { // ClientAuthentication
+ * //       Sasl: { // Sasl
+ * //         Scram: { // Scram
+ * //           Enabled: true || false,
+ * //         },
+ * //         Iam: { // Iam
+ * //           Enabled: true || false,
+ * //         },
+ * //       },
+ * //       Tls: { // Tls
+ * //         CertificateAuthorityArnList: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Enabled: true || false,
+ * //       },
+ * //       Unauthenticated: { // Unauthenticated
+ * //         Enabled: true || false,
+ * //       },
+ * //     },
+ * //     ClusterArn: "STRING_VALUE",
+ * //     ClusterName: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     CurrentBrokerSoftwareInfo: { // BrokerSoftwareInfo
+ * //       ConfigurationArn: "STRING_VALUE",
+ * //       ConfigurationRevision: Number("long"),
+ * //       KafkaVersion: "STRING_VALUE",
+ * //     },
+ * //     CurrentVersion: "STRING_VALUE",
+ * //     EncryptionInfo: { // EncryptionInfo
+ * //       EncryptionAtRest: { // EncryptionAtRest
+ * //         DataVolumeKMSKeyId: "STRING_VALUE", // required
+ * //       },
+ * //       EncryptionInTransit: { // EncryptionInTransit
+ * //         ClientBroker: "TLS" || "TLS_PLAINTEXT" || "PLAINTEXT",
+ * //         InCluster: true || false,
+ * //       },
+ * //     },
+ * //     EnhancedMonitoring: "DEFAULT" || "PER_BROKER" || "PER_TOPIC_PER_BROKER" || "PER_TOPIC_PER_PARTITION",
+ * //     OpenMonitoring: { // OpenMonitoring
+ * //       Prometheus: { // Prometheus
+ * //         JmxExporter: { // JmxExporter
+ * //           EnabledInBroker: true || false, // required
+ * //         },
+ * //         NodeExporter: { // NodeExporter
+ * //           EnabledInBroker: true || false, // required
+ * //         },
+ * //       },
+ * //     },
+ * //     LoggingInfo: { // LoggingInfo
+ * //       AuthorizerLogs: { // AuthorizerLogs
+ * //         CloudWatchLogs: { // CloudWatchLogs
+ * //           Enabled: true || false, // required
+ * //           LogGroup: "STRING_VALUE",
+ * //         },
+ * //         Firehose: { // Firehose
+ * //           DeliveryStream: "STRING_VALUE",
+ * //           Enabled: true || false, // required
+ * //         },
+ * //         S3: { // S3
+ * //           Bucket: "STRING_VALUE",
+ * //           Enabled: true || false, // required
+ * //           Prefix: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       BrokerLogs: { // BrokerLogs
+ * //         CloudWatchLogs: {
+ * //           Enabled: true || false, // required
+ * //           LogGroup: "STRING_VALUE",
+ * //         },
+ * //         Firehose: {
+ * //           DeliveryStream: "STRING_VALUE",
+ * //           Enabled: true || false, // required
+ * //         },
+ * //         S3: {
+ * //           Bucket: "STRING_VALUE",
+ * //           Enabled: true || false, // required
+ * //           Prefix: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     NumberOfBrokerNodes: Number("int"),
+ * //     State: "ACTIVE" || "CREATING" || "DELETING" || "FAILED" || "HEALING" || "MAINTENANCE" || "REBOOTING_BROKER" || "UPDATING",
+ * //     StateInfo: { // StateInfo
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     Tags: { // __mapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     ZookeeperConnectString: "STRING_VALUE",
+ * //     ZookeeperConnectStringTls: "STRING_VALUE",
+ * //     StorageMode: "LOCAL" || "TIERED",
+ * //     CustomerActionStatus: "CRITICAL_ACTION_REQUIRED" || "ACTION_RECOMMENDED" || "NONE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeClusterCommandInput - {@link DescribeClusterCommandInput}
+ * @returns {@link DescribeClusterCommandOutput}
  * @see {@link DescribeClusterCommandInput} for command's `input` shape.
  * @see {@link DescribeClusterCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClusterCommand extends $Command<
-  DescribeClusterCommandInput,
-  DescribeClusterCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClusterCommandInput, DescribeClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "DescribeClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClusterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeClusterResponse.filterSensitiveLog,
+export class DescribeClusterCommand extends command<DescribeClusterCommandInput, DescribeClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCluster",
+  DescribeCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterRequest;
+      output: DescribeClusterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeClusterCommandOutput> {
-    return deserializeAws_restJson1DescribeClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClusterCommandInput;
+      output: DescribeClusterCommandOutput;
+    };
+  };
 }

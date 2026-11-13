@@ -1,0 +1,3496 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.1169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1168.0...v3.1169.0) (2026-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1167.0...v3.1168.0) (2026-11-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1166.0...v3.1167.0) (2026-11-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1166.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1165.0...v3.1166.0) (2026-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1164.0...v3.1165.0) (2026-11-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1164.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1163.0...v3.1164.0) (2026-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1162.0...v3.1163.0) (2026-11-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1161.0...v3.1162.0) (2026-11-04)
+
+
+### Features
+
+* **codegen:** add a default socket timeout per service ([#8396](https://github.com/aws/aws-sdk-js-v3/issues/8396)) ([8f62478](https://github.com/aws/aws-sdk-js-v3/commit/8f62478cf179dc3e0807dae1721a669e08d98074))
+
+
+
+
+
+# [3.1161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1160.0...v3.1161.0) (2026-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1159.0...v3.1160.0) (2026-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1158.0...v3.1159.0) (2026-10-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1158.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1157.0...v3.1158.0) (2026-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1157.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1156.0...v3.1157.0) (2026-10-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1156.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1155.0...v3.1156.0) (2026-10-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1155.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1154.0...v3.1155.0) (2026-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1153.0...v3.1154.0) (2026-10-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1153.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1152.0...v3.1153.0) (2026-10-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1152.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1151.0...v3.1152.0) (2026-10-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1151.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1150.0...v3.1151.0) (2026-10-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1149.0...v3.1150.0) (2026-10-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1149.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1148.0...v3.1149.0) (2026-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1148.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1147.0...v3.1148.0) (2026-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1147.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1146.0...v3.1147.0) (2026-10-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1146.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1145.0...v3.1146.0) (2026-10-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1144.0...v3.1145.0) (2026-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1144.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1143.0...v3.1144.0) (2026-09-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1143.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1142.0...v3.1143.0) (2026-09-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1141.0...v3.1142.0) (2026-09-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1140.0...v3.1141.0) (2026-09-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1140.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1139.0...v3.1140.0) (2026-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1139.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1138.0...v3.1139.0) (2026-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1138.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1137.0...v3.1138.0) (2026-09-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1136.0...v3.1137.0) (2026-09-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1135.0...v3.1136.0) (2026-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1135.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1134.0...v3.1135.0) (2026-09-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1134.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1133.0...v3.1134.0) (2026-09-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1133.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1132.0...v3.1133.0) (2026-09-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1132.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1131.0...v3.1132.0) (2026-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1130.0...v3.1131.0) (2026-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1129.0...v3.1130.0) (2026-09-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1129.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1128.0...v3.1129.0) (2026-09-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1127.0...v3.1128.0) (2026-09-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1126.0...v3.1127.0) (2026-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1126.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1125.0...v3.1126.0) (2026-09-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1125.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1124.0...v3.1125.0) (2026-09-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1124.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1123.0...v3.1124.0) (2026-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1123.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1122.0...v3.1123.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1122.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1121.0...v3.1122.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1120.0...v3.1121.0) (2026-08-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1120.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1119.0...v3.1120.0) (2026-08-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1119.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1118.0...v3.1119.0) (2026-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1117.0...v3.1118.0) (2026-08-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1117.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1116.0...v3.1117.0) (2026-08-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1116.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1115.0...v3.1116.0) (2026-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1115.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1114.0...v3.1115.0) (2026-08-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1114.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1113.0...v3.1114.0) (2026-08-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1113.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1112.0...v3.1113.0) (2026-08-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1111.0...v3.1112.0) (2026-08-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1111.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1110.0...v3.1111.0) (2026-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1109.0...v3.1110.0) (2026-08-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1108.0...v3.1109.0) (2026-08-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1108.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1107.0...v3.1108.0) (2026-08-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1107.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1106.0...v3.1107.0) (2026-08-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1106.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1105.0...v3.1106.0) (2026-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1104.0...v3.1105.0) (2026-08-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1104.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1103.0...v3.1104.0) (2026-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1103.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1102.0...v3.1103.0) (2026-08-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1102.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1101.0...v3.1102.0) (2026-08-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1101.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1100.0...v3.1101.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1099.0...v3.1100.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1099.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1098.0...v3.1099.0) (2026-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1098.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1097.0...v3.1098.0) (2026-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1097.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1096.0...v3.1097.0) (2026-07-28)
+
+
+### Features
+
+* **client-trustedadvisor:** Adds ListRecommendationsForResource API and four CheckSummary fields (resourceArnQueryable, awsResourceTypes, checkGranularity, recommendationId) to retrieve recommendations for a given resource ARN. ([16e67f1](https://github.com/aws/aws-sdk-js-v3/commit/16e67f168da8d32de2ca85b1783b3829e02cfb5a))
+
+
+
+
+
+# [3.1096.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1095.0...v3.1096.0) (2026-07-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1095.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1094.0...v3.1095.0) (2026-07-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1094.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1093.0...v3.1094.0) (2026-07-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1093.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1092.0...v3.1093.0) (2026-07-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1092.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1091.0...v3.1092.0) (2026-07-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1091.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1090.0...v3.1091.0) (2026-07-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1090.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1089.0...v3.1090.0) (2026-07-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1089.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1088.0...v3.1089.0) (2026-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1088.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1087.0...v3.1088.0) (2026-07-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1087.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1086.0...v3.1087.0) (2026-07-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1086.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1085.0...v3.1086.0) (2026-07-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1085.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1084.0...v3.1085.0) (2026-07-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1084.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1083.0...v3.1084.0) (2026-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1083.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1082.0...v3.1083.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1082.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1081.0...v3.1082.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1081.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1080.0...v3.1081.0) (2026-07-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1080.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1079.0...v3.1080.0) (2026-07-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1079.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1078.0...v3.1079.0) (2026-07-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1078.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1077.0...v3.1078.0) (2026-07-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1077.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1076.0...v3.1077.0) (2026-06-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1076.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1075.0...v3.1076.0) (2026-06-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1075.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1074.0...v3.1075.0) (2026-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1074.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1073.0...v3.1074.0) (2026-06-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1073.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1072.0...v3.1073.0) (2026-06-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1072.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1071.0...v3.1072.0) (2026-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1071.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1070.0...v3.1071.0) (2026-06-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1070.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1069.0...v3.1070.0) (2026-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1069.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1068.0...v3.1069.0) (2026-06-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1068.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1067.0...v3.1068.0) (2026-06-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1067.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1066.0...v3.1067.0) (2026-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1066.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1065.0...v3.1066.0) (2026-06-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1065.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1064.0...v3.1065.0) (2026-06-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1064.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1063.0...v3.1064.0) (2026-06-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1063.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1062.0...v3.1063.0) (2026-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1062.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1061.0...v3.1062.0) (2026-06-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1061.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1060.0...v3.1061.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1060.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1059.0...v3.1060.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1059.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1058.0...v3.1059.0) (2026-06-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1058.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1057.0...v3.1058.0) (2026-06-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1057.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1056.0...v3.1057.0) (2026-05-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1056.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1055.0...v3.1056.0) (2026-05-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1055.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1054.0...v3.1055.0) (2026-05-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1054.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1053.0...v3.1054.0) (2026-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1053.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1052.0...v3.1053.0) (2026-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1052.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1051.0...v3.1052.0) (2026-05-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1051.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1050.0...v3.1051.0) (2026-05-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1050.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1049.0...v3.1050.0) (2026-05-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1049.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1048.0...v3.1049.0) (2026-05-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1048.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1047.0...v3.1048.0) (2026-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1047.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1046.0...v3.1047.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1046.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1045.0...v3.1046.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1045.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1044.0...v3.1045.0) (2026-05-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1044.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1043.0...v3.1044.0) (2026-05-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1043.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1042.0...v3.1043.0) (2026-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1042.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1041.0...v3.1042.0) (2026-05-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1041.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1040.0...v3.1041.0) (2026-05-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1040.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1039.0...v3.1040.0) (2026-04-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1039.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1038.0...v3.1039.0) (2026-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1038.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1037.0...v3.1038.0) (2026-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1037.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1036.0...v3.1037.0) (2026-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1036.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1035.0...v3.1036.0) (2026-04-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1035.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1034.0...v3.1035.0) (2026-04-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1034.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1033.0...v3.1034.0) (2026-04-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1033.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1032.0...v3.1033.0) (2026-04-20)
+
+
+### Features
+
+* **clients:** use binary decision diagrams for endpoint resolution ([#7931](https://github.com/aws/aws-sdk-js-v3/issues/7931)) ([ff1b2ba](https://github.com/aws/aws-sdk-js-v3/commit/ff1b2baed919216fa1ddf3d116d500d05f0e436b))
+
+
+
+
+
+# [3.1032.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1031.0...v3.1032.0) (2026-04-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1031.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1030.0...v3.1031.0) (2026-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1030.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1029.0...v3.1030.0) (2026-04-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1029.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1028.0...v3.1029.0) (2026-04-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1028.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1027.0...v3.1028.0) (2026-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1027.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1026.0...v3.1027.0) (2026-04-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1026.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1025.0...v3.1026.0) (2026-04-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1025.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1024.0...v3.1025.0) (2026-04-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1024.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1023.0...v3.1024.0) (2026-04-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1023.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1022.0...v3.1023.0) (2026-04-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1022.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1021.0...v3.1022.0) (2026-04-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1021.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1020.0...v3.1021.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **codegen:** sync for adaptive retry throttling detection fix ([#7905](https://github.com/aws/aws-sdk-js-v3/issues/7905)) ([03f108d](https://github.com/aws/aws-sdk-js-v3/commit/03f108d08c37fcde9de0a62c29887458e980d84e))
+
+
+
+
+
+# [3.1020.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1019.0...v3.1020.0) (2026-03-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1019.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1018.0...v3.1019.0) (2026-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1018.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1017.0...v3.1018.0) (2026-03-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1017.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1016.0...v3.1017.0) (2026-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1016.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1015.0...v3.1016.0) (2026-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1015.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1014.0...v3.1015.0) (2026-03-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1014.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1013.0...v3.1014.0) (2026-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1013.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1012.0...v3.1013.0) (2026-03-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1012.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1011.0...v3.1012.0) (2026-03-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1011.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1010.0...v3.1011.0) (2026-03-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1010.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1009.0...v3.1010.0) (2026-03-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1009.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1008.0...v3.1009.0) (2026-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1008.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1007.0...v3.1008.0) (2026-03-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1007.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1006.0...v3.1007.0) (2026-03-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1006.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1005.0...v3.1006.0) (2026-03-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1005.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1004.0...v3.1005.0) (2026-03-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1004.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1003.0...v3.1004.0) (2026-03-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1003.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1002.0...v3.1003.0) (2026-03-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1002.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1001.0...v3.1002.0) (2026-03-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1001.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1000.0...v3.1001.0) (2026-03-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.1000.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.999.0...v3.1000.0) (2026-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.999.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.998.0...v3.999.0) (2026-02-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.998.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.997.0...v3.998.0) (2026-02-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.997.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.996.0...v3.997.0) (2026-02-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.996.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.995.0...v3.996.0) (2026-02-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.995.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.994.0...v3.995.0) (2026-02-20)
+
+
+### Features
+
+* **client-trustedadvisor:** Adding a new enum attribute(statusReason) to TrustedAdvisorAPI response. This attribute explains reasoning behind check status for certain specific scenarios. ([2d4a1eb](https://github.com/aws/aws-sdk-js-v3/commit/2d4a1eb4804aafa8b4581783e0db0dcb3eb61e8d))
+
+
+
+
+
+# [3.994.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.993.0...v3.994.0) (2026-02-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.993.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.992.0...v3.993.0) (2026-02-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.992.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.991.0...v3.992.0) (2026-02-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.991.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.990.0...v3.991.0) (2026-02-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.990.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.989.0...v3.990.0) (2026-02-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.989.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.988.0...v3.989.0) (2026-02-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.988.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.987.0...v3.988.0) (2026-02-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.987.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.986.0...v3.987.0) (2026-02-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.986.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.985.0...v3.986.0) (2026-02-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.985.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.984.0...v3.985.0) (2026-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.984.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.983.0...v3.984.0) (2026-02-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.983.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.982.0...v3.983.0) (2026-02-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.982.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.981.0...v3.982.0) (2026-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.981.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.980.0...v3.981.0) (2026-02-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.980.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.979.0...v3.980.0) (2026-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.978.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.977.0...v3.978.0) (2026-01-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.975.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.974.0...v3.975.0) (2026-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.974.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.973.0...v3.974.0) (2026-01-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.971.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.970.0...v3.971.0) (2026-01-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.970.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.969.0...v3.970.0) (2026-01-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.967.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.966.0...v3.967.0) (2026-01-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.966.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.965.0...v3.966.0) (2026-01-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.964.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.963.0...v3.964.0) (2026-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.962.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.961.0...v3.962.0) (2026-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.958.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.957.0...v3.958.0) (2025-12-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.955.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.954.0...v3.955.0) (2025-12-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.954.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.953.0...v3.954.0) (2025-12-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.952.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.951.0...v3.952.0) (2025-12-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.948.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.947.0...v3.948.0) (2025-12-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.947.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.946.0...v3.947.0) (2025-12-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.946.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.945.0...v3.946.0) (2025-12-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.943.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.942.0...v3.943.0) (2025-12-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.940.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.939.0...v3.940.0) (2025-11-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.939.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.938.0...v3.939.0) (2025-11-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.936.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.935.0...v3.936.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.935.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.934.0...v3.935.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.934.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.933.0...v3.934.0) (2025-11-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.933.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.932.0...v3.933.0) (2025-11-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.932.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.931.0...v3.932.0) (2025-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.931.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.930.0...v3.931.0) (2025-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.929.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.928.0...v3.929.0) (2025-11-11)
+
+
+### Features
+
+* **clients:** use schema-serde in AWS REST JSON clients ([#7485](https://github.com/aws/aws-sdk-js-v3/issues/7485)) ([99a3693](https://github.com/aws/aws-sdk-js-v3/commit/99a36932937fa5def2b0371b989c6df4d9358044))
+
+
+
+
+
+# [3.928.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.927.0...v3.928.0) (2025-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.927.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.926.0...v3.927.0) (2025-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.926.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.925.0...v3.926.0) (2025-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.925.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.924.0...v3.925.0) (2025-11-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.922.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.921.0...v3.922.0) (2025-10-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.920.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.919.0...v3.920.0) (2025-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.919.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.918.0...v3.919.0) (2025-10-28)
+
+
+### Features
+
+* **client-trustedadvisor:** Update endpoint ruleset parameters casing ([6c5435e](https://github.com/aws/aws-sdk-js-v3/commit/6c5435e1460f7aec17aa0a940525d78c09cc877f))
+
+
+
+
+
+# [3.918.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.917.0...v3.918.0) (2025-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.917.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.916.0...v3.917.0) (2025-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.916.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.915.0...v3.916.0) (2025-10-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.913.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.912.0...v3.913.0) (2025-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.911.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.910.0...v3.911.0) (2025-10-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.908.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.907.0...v3.908.0) (2025-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.907.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.906.0...v3.907.0) (2025-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.906.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.905.0...v3.906.0) (2025-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.899.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.898.0...v3.899.0) (2025-09-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.896.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.895.0...v3.896.0) (2025-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.895.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.894.0...v3.895.0) (2025-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.894.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.893.0...v3.894.0) (2025-09-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.891.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.890.0...v3.891.0) (2025-09-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.888.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.887.0...v3.888.0) (2025-09-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.887.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.886.0...v3.887.0) (2025-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.886.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.885.0...v3.886.0) (2025-09-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.883.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.882.0...v3.883.0) (2025-09-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.882.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.881.0...v3.882.0) (2025-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.879.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.878.0...v3.879.0) (2025-08-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.876.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.875.0...v3.876.0) (2025-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.872.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.871.0...v3.872.0) (2025-08-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.864.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.863.0...v3.864.0) (2025-08-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.863.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.862.0...v3.863.0) (2025-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.859.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.858.0...v3.859.0) (2025-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.858.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.857.0...v3.858.0) (2025-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.857.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.856.0...v3.857.0) (2025-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.856.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.855.0...v3.856.0) (2025-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.855.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.854.0...v3.855.0) (2025-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.848.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.847.0...v3.848.0) (2025-07-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.846.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.845.0...v3.846.0) (2025-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.845.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.844.0...v3.845.0) (2025-07-15)
+
+
+### Bug Fixes
+
+* **clients:** upgrade @smithy/middleware-endpoint to fix file/env endpoint resolution ([#7206](https://github.com/aws/aws-sdk-js-v3/issues/7206)) ([37a6275](https://github.com/aws/aws-sdk-js-v3/commit/37a627510bc53ad0ce8d3ef10a2a5ec8ad195ee2))
+
+
+
+
+
+# [3.844.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.843.0...v3.844.0) (2025-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.840.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.839.0...v3.840.0) (2025-06-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.839.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.838.0...v3.839.0) (2025-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.835.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.834.0...v3.835.0) (2025-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.830.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.829.0...v3.830.0) (2025-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.828.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.827.1...v3.828.0) (2025-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.826.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.825.0...v3.826.0) (2025-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.825.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.824.0...v3.825.0) (2025-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.823.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.822.0...v3.823.0) (2025-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.817.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.816.0...v3.817.0) (2025-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.816.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.815.0...v3.816.0) (2025-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.812.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.811.0...v3.812.0) (2025-05-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.810.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.809.0...v3.810.0) (2025-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.808.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.807.0...v3.808.0) (2025-05-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.806.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.805.0...v3.806.0) (2025-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.803.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.802.0...v3.803.0) (2025-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.799.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.798.0...v3.799.0) (2025-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.797.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.796.0...v3.797.0) (2025-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.796.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.795.0...v3.796.0) (2025-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.787.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.786.0...v3.787.0) (2025-04-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.782.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.781.0...v3.782.0) (2025-04-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.777.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.776.0...v3.777.0) (2025-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.775.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.774.0...v3.775.0) (2025-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.774.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.773.0...v3.774.0) (2025-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.772.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.771.0...v3.772.0) (2025-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.758.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.757.0...v3.758.0) (2025-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.750.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.749.0...v3.750.0) (2025-02-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.749.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.748.0...v3.749.0) (2025-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.744.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.743.0...v3.744.0) (2025-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.743.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.742.1...v3.743.0) (2025-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.741.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.740.0...v3.741.0) (2025-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.738.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.737.0...v3.738.0) (2025-01-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.734.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.733.0...v3.734.0) (2025-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+## [3.731.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.731.0...v3.731.1) (2025-01-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.731.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.730.0...v3.731.0) (2025-01-17)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.730.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.729.0...v3.730.0) (2025-01-16)
+
+
+### Bug Fixes
+
+* **nested-clients:** create nested clients for internal use ([#6791](https://github.com/aws/aws-sdk-js-v3/issues/6791)) ([5c53685](https://github.com/aws/aws-sdk-js-v3/commit/5c5368554d13a3b798a72c53e30cd3d897621135))
+
+
+
+
+
+## [3.726.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.726.0...v3.726.1) (2025-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.726.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.725.0...v3.726.0) (2025-01-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.721.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.720.0...v3.721.0) (2025-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.716.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.715.0...v3.716.0) (2024-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.714.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.713.0...v3.714.0) (2024-12-17)
+
+
+### Features
+
+* **clients:** profile setting for clients ([#6728](https://github.com/aws/aws-sdk-js-v3/issues/6728)) ([afd9eea](https://github.com/aws/aws-sdk-js-v3/commit/afd9eea89fd0d63a377123f1ca999daeefd904a7))
+
+
+
+
+
+# [3.713.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.712.0...v3.713.0) (2024-12-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.712.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.711.0...v3.712.0) (2024-12-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.709.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.708.0...v3.709.0) (2024-12-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.699.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.698.0...v3.699.0) (2024-11-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.696.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.695.0...v3.696.0) (2024-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.692.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.691.0...v3.692.0) (2024-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.691.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.690.0...v3.691.0) (2024-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.687.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.686.0...v3.687.0) (2024-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.686.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.685.0...v3.686.0) (2024-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.682.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.681.0...v3.682.0) (2024-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.677.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.676.0...v3.677.0) (2024-10-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.675.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.674.0...v3.675.0) (2024-10-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.670.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.669.0...v3.670.0) (2024-10-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.669.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.668.0...v3.669.0) (2024-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.668.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.667.0...v3.668.0) (2024-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.665.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.664.0...v3.665.0) (2024-10-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+
+### Features
+
+* **middleware-user-agent:** add client config for userAgentAppId ([#6524](https://github.com/aws/aws-sdk-js-v3/issues/6524)) ([2990ea8](https://github.com/aws/aws-sdk-js-v3/commit/2990ea8f0d689966a9de0000d579f147c2d4af81))
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.658.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.657.0...v3.658.0) (2024-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+## [3.651.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.0...v3.651.1) (2024-09-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.650.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.649.0...v3.650.0) (2024-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.645.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.644.0...v3.645.0) (2024-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.637.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.636.0...v3.637.0) (2024-08-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.635.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.634.0...v3.635.0) (2024-08-20)
+
+
+### Features
+
+* **codegen:** add Smithy RPCv2 CBOR to list of protocols ([#6096](https://github.com/aws/aws-sdk-js-v3/issues/6096)) ([5154d4f](https://github.com/aws/aws-sdk-js-v3/commit/5154d4f19bc77a7bad075b35ce135d3b5f60ad1d))
+
+
+
+
+
+# [3.632.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.631.0...v3.632.0) (2024-08-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.631.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.630.0...v3.631.0) (2024-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.629.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.628.0...v3.629.0) (2024-08-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.624.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.623.0...v3.624.0) (2024-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.623.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.622.0...v3.623.0) (2024-08-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.622.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.621.0...v3.622.0) (2024-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.621.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.1...v3.621.0) (2024-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+## [3.620.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.0...v3.620.1) (2024-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.620.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.619.0...v3.620.0) (2024-07-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.616.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.615.0...v3.616.0) (2024-07-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.614.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.613.0...v3.614.0) (2024-07-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.613.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.612.0...v3.613.0) (2024-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.609.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.608.0...v3.609.0) (2024-07-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.606.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.605.0...v3.606.0) (2024-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.600.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.599.0...v3.600.0) (2024-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.598.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.597.0...v3.598.0) (2024-06-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.596.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.595.0...v3.596.0) (2024-06-12)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.592.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.591.0...v3.592.0) (2024-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.590.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.589.0...v3.590.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **codegen:** consistently add region as config option when generated client is Sigv4 but not AWS ([#6156](https://github.com/aws/aws-sdk-js-v3/issues/6156)) ([06f51cc](https://github.com/aws/aws-sdk-js-v3/commit/06f51ccdc1c825f4b4de6a865520ace78c098ff3))
+
+
+
+
+
+# [3.588.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.587.0...v3.588.0) (2024-05-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.587.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.586.0...v3.587.0) (2024-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.583.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.582.0...v3.583.0) (2024-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.582.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.581.0...v3.582.0) (2024-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.577.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.576.0...v3.577.0) (2024-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.576.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.575.0...v3.576.0) (2024-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.575.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.574.0...v3.575.0) (2024-05-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.574.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.573.0...v3.574.0) (2024-05-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.572.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.571.0...v3.572.0) (2024-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.569.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.568.0...v3.569.0) (2024-05-03)
+
+
+### Bug Fixes
+
+* **clients:** add deps required by default credential providers ([#6055](https://github.com/aws/aws-sdk-js-v3/issues/6055)) ([bfa8626](https://github.com/aws/aws-sdk-js-v3/commit/bfa86268540d197a21f13e8d2e8bced10b78d480))
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.565.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.564.0...v3.565.0) (2024-04-29)
+
+
+### Features
+
+* **client-trustedadvisor:** This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs. ([5fb127b](https://github.com/aws/aws-sdk-js-v3/commit/5fb127b388a9beb100292a455bedbdcaf85784c3))
+
+
+
+
+
+# [3.564.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.563.0...v3.564.0) (2024-04-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.563.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.562.0...v3.563.0) (2024-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.556.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.555.0...v3.556.0) (2024-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.554.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.553.0...v3.554.0) (2024-04-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.552.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.551.0...v3.552.0) (2024-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.549.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.548.0...v3.549.0) (2024-04-04)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.540.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.539.0...v3.540.0) (2024-03-22)
+
+
+### Bug Fixes
+
+* **util-endpoints:** augment endpointFunctions inline in endpointResolver functions ([#5933](https://github.com/aws/aws-sdk-js-v3/issues/5933)) ([42a791d](https://github.com/aws/aws-sdk-js-v3/commit/42a791defb20c697fefc985f1f2b22fc9e5be388))
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.533.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.532.0...v3.533.0) (2024-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+## [3.529.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.529.0...v3.529.1) (2024-03-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.529.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.528.0...v3.529.0) (2024-03-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.525.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.524.0...v3.525.0) (2024-02-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.523.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.522.0...v3.523.0) (2024-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.521.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.520.0...v3.521.0) (2024-02-23)
+
+
+### Features
+
+* requestHandler ctor param pass-through ([#5820](https://github.com/aws/aws-sdk-js-v3/issues/5820)) ([9fec71d](https://github.com/aws/aws-sdk-js-v3/commit/9fec71d1933cd8e3db118c164bca16edc2305532))
+
+
+
+
+
+# [3.515.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.514.0...v3.515.0) (2024-02-15)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.514.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.513.0...v3.514.0) (2024-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.513.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.512.0...v3.513.0) (2024-02-13)
+
+
+### Features
+
+* **experimentalIdentityAndAuth:** release phase for services without customizations ([#5787](https://github.com/aws/aws-sdk-js-v3/issues/5787)) ([4004ff6](https://github.com/aws/aws-sdk-js-v3/commit/4004ff68a8ad20f6e60e8fab1f8952928f92f4b7))
+
+
+
+
+
+# [3.511.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.510.0...v3.511.0) (2024-02-09)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.509.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.508.0...v3.509.0) (2024-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.507.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.506.0...v3.507.0) (2024-02-05)
+
+
+### Features
+
+* unified error dispatcher in protocols ([#5756](https://github.com/aws/aws-sdk-js-v3/issues/5756)) ([0872087](https://github.com/aws/aws-sdk-js-v3/commit/0872087ef56422541bd38d293f97613dfd10236f))
+
+
+
+
+
+# [3.504.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.1...v3.504.0) (2024-01-31)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+## [3.503.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.0...v3.503.1) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.503.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.502.0...v3.503.0) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.502.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.501.0...v3.502.0) (2024-01-29)
+
+
+### Features
+
+* **credential-providers:** lazy load STS & SSO clients in credential providers ([#5681](https://github.com/aws/aws-sdk-js-v3/issues/5681)) ([d27301d](https://github.com/aws/aws-sdk-js-v3/commit/d27301d48f3e75fdaccabf58f779f0b33a70664e))
+
+
+
+
+
+# [3.501.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.500.0...v3.501.0) (2024-01-26)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.499.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.498.0...v3.499.0) (2024-01-24)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.496.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.495.0...v3.496.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* get full list of exports for esm compat in dist-cjs ([#5694](https://github.com/aws/aws-sdk-js-v3/issues/5694)) ([5d26da6](https://github.com/aws/aws-sdk-js-v3/commit/5d26da6d07b593ae286ca674fb3cbff7c833cbb0))
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.490.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.489.0...v3.490.0) (2024-01-11)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.489.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.488.0...v3.489.0) (2024-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.485.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.484.0...v3.485.0) (2024-01-03)
+
+
+### Features
+
+* **credential-providers:** add credentialScope field ([#5606](https://github.com/aws/aws-sdk-js-v3/issues/5606)) ([04c1459](https://github.com/aws/aws-sdk-js-v3/commit/04c14592898ac63ed87d47f2a53320ccaa991083))
+
+
+
+
+
+# [3.484.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.483.0...v3.484.0) (2023-12-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.481.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.480.0...v3.481.0) (2023-12-26)
+
+
+### Features
+
+* codegen for command class builder ([#5604](https://github.com/aws/aws-sdk-js-v3/issues/5604)) ([4835de4](https://github.com/aws/aws-sdk-js-v3/commit/4835de4ebb8f302ae1e838ac1efaf5f12384910d))
+
+
+
+
+
+# [3.478.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.477.0...v3.478.0) (2023-12-20)
+
+
+### Features
+
+* codegen for paginator factory ([#5590](https://github.com/aws/aws-sdk-js-v3/issues/5590)) ([e54099b](https://github.com/aws/aws-sdk-js-v3/commit/e54099b7c1eb3b1de5737d5494821b1dae045fca))
+
+
+
+
+
+# [3.477.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.476.0...v3.477.0) (2023-12-19)
+
+
+### Features
+
+* xml codegen reduction ([#5566](https://github.com/aws/aws-sdk-js-v3/issues/5566)) ([3ed7c81](https://github.com/aws/aws-sdk-js-v3/commit/3ed7c81f9191182826de7645078cc6ed1d2ee959))
+
+
+
+
+
+# [3.476.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.475.0...v3.476.0) (2023-12-18)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.474.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.473.0...v3.474.0) (2023-12-14)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.473.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.472.0...v3.473.0) (2023-12-13)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.470.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.469.0...v3.470.0) (2023-12-08)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.468.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.467.0...v3.468.0) (2023-12-06)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.462.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.461.0...v3.462.0) (2023-11-29)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.461.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.460.0...v3.461.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.460.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.459.0...v3.460.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.458.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.457.0...v3.458.0) (2023-11-27)
+
+**Note:** Version bump only for package @aws-sdk/client-trustedadvisor
+
+
+
+
+
+# [3.454.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.453.0...v3.454.0) (2023-11-17)
+
+
+### Features
+
+* **client-trustedadvisor:** AWS Trusted Advisor introduces new APIs to enable you to programmatically access Trusted Advisor best practice checks, recommendations, and prioritized recommendations. Trusted Advisor APIs enable you to integrate Trusted Advisor with your operational tools to automate your workloads. ([a1849c2](https://github.com/aws/aws-sdk-js-v3/commit/a1849c20c4a364c0ded69f3c3a00ecca963cc881))

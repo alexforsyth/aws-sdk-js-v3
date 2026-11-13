@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeChannelCommand, DescribeChannelCommandInput } from "../commands/DescribeChannelCommand";
-import { MediaLiveClient } from "../MediaLiveClient";
+import {
+  type DescribeChannelCommandInput,
+  type DescribeChannelCommandOutput,
+  DescribeChannelCommand,
+} from "../commands/DescribeChannelCommand";
+import type { MediaLiveClient } from "../MediaLiveClient";
+import type { MediaLiveServiceException } from "../models/MediaLiveServiceException";
 
-const checkState = async (client: MediaLiveClient, input: DescribeChannelCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: MediaLiveClient, input: DescribeChannelCommandInput): Promise<WaiterResult<DescribeChannelCommandOutput | MediaLiveServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeChannelCommand(input));
+    let result: DescribeChannelCommandOutput & any = await client.send(new DescribeChannelCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "IDLE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: MediaLiveClient, input: DescribeChannelCommand
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "CREATING") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -27,14 +39,14 @@ const checkState = async (client: MediaLiveClient, input: DescribeChannelCommand
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "CREATE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InternalServerErrorException") {
+    if (exception.name === "InternalServerErrorException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -47,7 +59,7 @@ const checkState = async (client: MediaLiveClient, input: DescribeChannelCommand
 export const waitForChannelCreated = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeChannelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeChannelCommandOutput | MediaLiveServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -59,8 +71,8 @@ export const waitForChannelCreated = async (
 export const waitUntilChannelCreated = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeChannelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeChannelCommandOutput>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeChannelCommandOutput>;
 };

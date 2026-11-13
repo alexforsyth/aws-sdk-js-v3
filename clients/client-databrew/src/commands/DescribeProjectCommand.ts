@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { DescribeProjectRequest, DescribeProjectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeProjectCommand,
-  serializeAws_restJson1DescribeProjectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeProjectRequest, DescribeProjectResponse } from "../models/models_0";
+import { DescribeProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeProjectCommand}.
+ */
 export interface DescribeProjectCommandInput extends DescribeProjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeProjectCommand}.
+ */
 export interface DescribeProjectCommandOutput extends DescribeProjectResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface DescribeProjectCommandOutput extends DescribeProjectResponse, _
  * ```javascript
  * import { DataBrewClient, DescribeProjectCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, DescribeProjectCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // DescribeProjectRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DescribeProjectCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeProjectResponse
+ * //   CreateDate: new Date("TIMESTAMP"),
+ * //   CreatedBy: "STRING_VALUE",
+ * //   DatasetName: "STRING_VALUE",
+ * //   LastModifiedDate: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: "STRING_VALUE",
+ * //   Name: "STRING_VALUE", // required
+ * //   RecipeName: "STRING_VALUE",
+ * //   ResourceArn: "STRING_VALUE",
+ * //   Sample: { // Sample
+ * //     Size: Number("int"),
+ * //     Type: "FIRST_N" || "LAST_N" || "RANDOM", // required
+ * //   },
+ * //   RoleArn: "STRING_VALUE",
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   SessionStatus: "ASSIGNED" || "FAILED" || "INITIALIZING" || "PROVISIONING" || "READY" || "RECYCLING" || "ROTATING" || "TERMINATED" || "TERMINATING" || "UPDATING",
+ * //   OpenedBy: "STRING_VALUE",
+ * //   OpenDate: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeProjectCommandInput - {@link DescribeProjectCommandInput}
+ * @returns {@link DescribeProjectCommandOutput}
  * @see {@link DescribeProjectCommandInput} for command's `input` shape.
  * @see {@link DescribeProjectCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeProjectCommand extends $Command<
-  DescribeProjectCommandInput,
-  DescribeProjectCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeProjectCommandInput, DescribeProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "DescribeProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeProjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeProjectResponse.filterSensitiveLog,
+export class DescribeProjectCommand extends command<DescribeProjectCommandInput, DescribeProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeProject",
+  DescribeProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProjectRequest;
+      output: DescribeProjectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeProjectCommandOutput> {
-    return deserializeAws_restJson1DescribeProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeProjectCommandInput;
+      output: DescribeProjectCommandOutput;
+    };
+  };
 }

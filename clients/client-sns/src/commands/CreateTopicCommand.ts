@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateTopicInput, CreateTopicResponse } from "../models/models_0";
-import { deserializeAws_queryCreateTopicCommand, serializeAws_queryCreateTopicCommand } from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateTopicInput, CreateTopicResponse } from "../models/models_0";
+import { CreateTopic$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateTopicCommand}.
+ */
 export interface CreateTopicCommandInput extends CreateTopicInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateTopicCommand}.
+ */
 export interface CreateTopicCommandOutput extends CreateTopicResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +33,89 @@ export interface CreateTopicCommandOutput extends CreateTopicResponse, __Metadat
  * ```javascript
  * import { SNSClient, CreateTopicCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, CreateTopicCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // CreateTopicInput
+ *   Name: "STRING_VALUE", // required
+ *   Attributes: { // TopicAttributesMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   DataProtectionPolicy: "STRING_VALUE",
+ * };
  * const command = new CreateTopicCommand(input);
  * const response = await client.send(command);
+ * // { // CreateTopicResponse
+ * //   TopicArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateTopicCommandInput - {@link CreateTopicCommandInput}
+ * @returns {@link CreateTopicCommandOutput}
  * @see {@link CreateTopicCommandInput} for command's `input` shape.
  * @see {@link CreateTopicCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link ConcurrentAccessException} (client fault)
+ *  <p>Can't perform multiple operations on a tag simultaneously. Perform the operations
+ *             sequentially.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link InvalidSecurityException} (client fault)
+ *  <p>The credential signature isn't valid. You must use an HTTPS endpoint and sign your
+ *             request using Signature Version 4.</p>
+ *
+ * @throws {@link StaleTagException} (client fault)
+ *  <p>A tag has been added to a resource with the same ARN as a deleted resource. Wait a
+ *             short while and then retry the operation.</p>
+ *
+ * @throws {@link TagLimitExceededException} (client fault)
+ *  <p>Can't add more than 50 tags to a topic.</p>
+ *
+ * @throws {@link TagPolicyException} (client fault)
+ *  <p>The request doesn't comply with the IAM tag policy. Correct your request and then
+ *             retry it.</p>
+ *
+ * @throws {@link TopicLimitExceededException} (client fault)
+ *  <p>Indicates that the customer already owns the maximum allowed number of topics.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class CreateTopicCommand extends $Command<
-  CreateTopicCommandInput,
-  CreateTopicCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateTopicCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateTopicCommandInput, CreateTopicCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "CreateTopicCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateTopicInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateTopicResponse.filterSensitiveLog,
+export class CreateTopicCommand extends command<CreateTopicCommandInput, CreateTopicCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateTopic",
+  CreateTopic$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTopicInput;
+      output: CreateTopicResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateTopicCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateTopicCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateTopicCommandOutput> {
-    return deserializeAws_queryCreateTopicCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateTopicCommandInput;
+      output: CreateTopicCommandOutput;
+    };
+  };
 }

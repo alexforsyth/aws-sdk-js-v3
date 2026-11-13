@@ -1,103 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateSecurityHubConfigurationRequest, UpdateSecurityHubConfigurationResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateSecurityHubConfigurationCommand,
-  serializeAws_restJson1UpdateSecurityHubConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
-
-export interface UpdateSecurityHubConfigurationCommandInput extends UpdateSecurityHubConfigurationRequest {}
-export interface UpdateSecurityHubConfigurationCommandOutput
-  extends UpdateSecurityHubConfigurationResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateSecurityHubConfigurationRequest, UpdateSecurityHubConfigurationResponse } from "../models/models_3";
+import { UpdateSecurityHubConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Updates configuration options for Security Hub.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSecurityHubConfigurationCommand}.
+ */
+export interface UpdateSecurityHubConfigurationCommandInput extends UpdateSecurityHubConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSecurityHubConfigurationCommand}.
+ */
+export interface UpdateSecurityHubConfigurationCommandOutput extends UpdateSecurityHubConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates configuration options for Security Hub CSPM.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, UpdateSecurityHubConfigurationCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, UpdateSecurityHubConfigurationCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // UpdateSecurityHubConfigurationRequest
+ *   AutoEnableControls: true || false,
+ *   ControlFindingGenerator: "STANDARD_CONTROL" || "SECURITY_CONTROL",
+ * };
  * const command = new UpdateSecurityHubConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateSecurityHubConfigurationCommandInput - {@link UpdateSecurityHubConfigurationCommandInput}
+ * @returns {@link UpdateSecurityHubConfigurationCommandOutput}
  * @see {@link UpdateSecurityHubConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateSecurityHubConfigurationCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action specified in the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To update Security Hub settings
+ * ```javascript
+ * // The following example updates Security Hub settings to turn on consolidated control findings, and to automatically enable new controls in enabled standards.
+ * const input = {
+ *   AutoEnableControls: true,
+ *   ControlFindingGenerator: "SECURITY_CONTROL"
+ * };
+ * const command = new UpdateSecurityHubConfigurationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateSecurityHubConfigurationCommand extends $Command<
-  UpdateSecurityHubConfigurationCommandInput,
-  UpdateSecurityHubConfigurationCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateSecurityHubConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateSecurityHubConfigurationCommandInput, UpdateSecurityHubConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "UpdateSecurityHubConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateSecurityHubConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateSecurityHubConfigurationResponse.filterSensitiveLog,
+export class UpdateSecurityHubConfigurationCommand extends command<UpdateSecurityHubConfigurationCommandInput, UpdateSecurityHubConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSecurityHubConfiguration",
+  UpdateSecurityHubConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSecurityHubConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateSecurityHubConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateSecurityHubConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateSecurityHubConfigurationCommandOutput> {
-    return deserializeAws_restJson1UpdateSecurityHubConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateSecurityHubConfigurationCommandInput;
+      output: UpdateSecurityHubConfigurationCommandOutput;
+    };
+  };
 }

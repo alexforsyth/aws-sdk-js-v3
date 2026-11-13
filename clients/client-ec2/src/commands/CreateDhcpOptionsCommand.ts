@@ -1,147 +1,200 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateDhcpOptionsRequest, CreateDhcpOptionsResult } from "../models/models_0";
-import {
-  deserializeAws_ec2CreateDhcpOptionsCommand,
-  serializeAws_ec2CreateDhcpOptionsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDhcpOptionsRequest, CreateDhcpOptionsResult } from "../models/models_1";
+import { CreateDhcpOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDhcpOptionsCommand}.
+ */
 export interface CreateDhcpOptionsCommandInput extends CreateDhcpOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDhcpOptionsCommand}.
+ */
 export interface CreateDhcpOptionsCommandOutput extends CreateDhcpOptionsResult, __MetadataBearer {}
 
 /**
- * <p>Creates a set of DHCP options for your VPC. After creating the set, you must
- * 				associate it with the VPC, causing all existing and new instances that you launch in
- * 				the VPC to use this set of DHCP options. The following are the individual DHCP
- * 				options you can specify. For more information about the options, see <a href="http://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p>
+ * <p>Creates a custom set of DHCP options. After you create a DHCP option set, you associate
+ * 	       it with a VPC. After you associate a DHCP option set with a VPC, all existing and newly
+ * 	       launched instances in the VPC use this set of DHCP options.</p>
+ *          <p>The following are the individual DHCP options you can specify. For more information, see
+ *            <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP option sets</a>
+ *            in the <i>Amazon VPC User Guide</i>.</p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <code>domain-name-servers</code> - The IP addresses of up to four domain name
- *                     servers, or AmazonProvidedDNS. The default DHCP option set specifies
- *                     AmazonProvidedDNS. If specifying more than one domain name server, specify the
- *                     IP addresses in a single parameter, separated by commas. To have your instance
- *                     receive a custom DNS hostname as specified in <code>domain-name</code>, you must
- *                     set <code>domain-name-servers</code> to a custom DNS server.</p>
- *            </li>
- *             <li>
- *                <p>
- *                   <code>domain-name</code> - If you're using AmazonProvidedDNS in
- *                    <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using
- *                    AmazonProvidedDNS in another Region, specify
- *                    <code>region.compute.internal</code> (for example,
- *                    <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain
- *                    name (for example, <code>ExampleCompany.com</code>). This value is used to complete
- *                    unqualified DNS hostnames. <b>Important</b>: Some
- *                    Linux operating systems accept multiple domain names separated by spaces.
+ *                   <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>,
+ *                    specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in any other Region,
+ *                    specify <code>region.compute.internal</code>. Otherwise, specify a custom domain name.
+ *                    This value is used to complete unqualified DNS hostnames.</p>
+ *                <p>Some Linux operating systems accept multiple domain names separated by spaces.
  *                    However, Windows and other Linux operating systems treat the value as a single
- *                    domain, which results in unexpected behavior. If your DHCP options set is
- *                    associated with a VPC that has instances with multiple operating systems,
- *                    specify only one domain name.</p>
- *            </li>
+ *                    domain, which results in unexpected behavior. If your DHCP option set is
+ *                    associated with a VPC that has instances running operating systems that treat
+ *                    the value as a single domain, specify only one domain name.</p>
+ *             </li>
  *             <li>
  *                <p>
- *                   <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP)
- *                    servers.</p>
- *            </li>
+ *                   <code>domain-name-servers</code> - The IP addresses of up to four DNS servers,
+ *                    or AmazonProvidedDNS. To specify multiple domain name servers in a single parameter,
+ *                    separate the IP addresses using commas. To have your instances receive custom DNS
+ *                    hostnames as specified in <code>domain-name</code>, you must specify a custom DNS
+ *                    server.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ntp-servers</code> - The IP addresses of up to eight Network Time Protocol (NTP)
+ *                    servers (four IPv4 addresses and four IPv6 addresses).</p>
+ *             </li>
  *             <li>
  *                <p>
  *                   <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name
  *                    servers.</p>
- *            </li>
+ *             </li>
  *             <li>
  *                <p>
  *                   <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that
- *                    you specify 2 (broadcast and multicast are not currently supported). For more information
- *                    about these node types, see <a href="http://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p>
- *            </li>
+ *                    you specify 2. Broadcast and multicast are not supported. For more information about
+ *                    NetBIOS node types, see <a href="https://www.ietf.org/rfc/rfc2132.txt">RFC 2132</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>ipv6-address-preferred-lease-time</code> - A value (in seconds, minutes, hours, or years) for how frequently a running instance with an IPv6 assigned to it goes through DHCPv6 lease renewal.
+ *                    Acceptable values are between 140 and 2147483647 seconds (approximately 68 years). If no value is entered, the default lease time is 140 seconds. If you use long-term addressing for EC2 instances, you can increase the lease time and avoid frequent
+ *                    lease renewal requests. Lease renewal typically occurs when half of the lease time has elapsed.</p>
+ *             </li>
  *          </ul>
- *
- *          <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS
- * 			server that we provide (AmazonProvidedDNS). If you create a set of options, and if your
- * 			VPC has an internet gateway, make sure to set the <code>domain-name-servers</code>
- * 			option either to <code>AmazonProvidedDNS</code> or to a domain name server of your
- * 			choice. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP options sets</a> in the
- * 			<i>Amazon Virtual Private Cloud User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateDhcpOptionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateDhcpOptionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateDhcpOptionsRequest
+ *   DhcpConfigurations: [ // NewDhcpConfigurationList // required
+ *     { // NewDhcpConfiguration
+ *       Key: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new CreateDhcpOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDhcpOptionsResult
+ * //   DhcpOptions: { // DhcpOptions
+ * //     OwnerId: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DhcpOptionsId: "STRING_VALUE",
+ * //     DhcpConfigurations: [ // DhcpConfigurationList
+ * //       { // DhcpConfiguration
+ * //         Key: "STRING_VALUE",
+ * //         Values: [ // DhcpConfigurationValueList
+ * //           { // AttributeValue
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDhcpOptionsCommandInput - {@link CreateDhcpOptionsCommandInput}
+ * @returns {@link CreateDhcpOptionsCommandOutput}
  * @see {@link CreateDhcpOptionsCommandInput} for command's `input` shape.
  * @see {@link CreateDhcpOptionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To create a DHCP options set
+ * ```javascript
+ * // This example creates a DHCP options set.
+ * const input = {
+ *   DhcpConfigurations: [
+ *     {
+ *       Key: "domain-name-servers",
+ *       Values: [
+ *         "10.2.5.1",
+ *         "10.2.5.2"
+ *       ]
+ *     }
+ *   ]
+ * };
+ * const command = new CreateDhcpOptionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DhcpOptions: {
+ *     DhcpConfigurations: [
+ *       {
+ *         Key: "domain-name-servers",
+ *         Values: [
+ *           {
+ *             Value: "10.2.5.2"
+ *           },
+ *           {
+ *             Value: "10.2.5.1"
+ *           }
+ *         ]
+ *       }
+ *     ],
+ *     DhcpOptionsId: "dopt-d9070ebb"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateDhcpOptionsCommand extends $Command<
-  CreateDhcpOptionsCommandInput,
-  CreateDhcpOptionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDhcpOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDhcpOptionsCommandInput, CreateDhcpOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateDhcpOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDhcpOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDhcpOptionsResult.filterSensitiveLog,
+export class CreateDhcpOptionsCommand extends command<CreateDhcpOptionsCommandInput, CreateDhcpOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDhcpOptions",
+  CreateDhcpOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDhcpOptionsRequest;
+      output: CreateDhcpOptionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDhcpOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateDhcpOptionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDhcpOptionsCommandOutput> {
-    return deserializeAws_ec2CreateDhcpOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDhcpOptionsCommandInput;
+      output: CreateDhcpOptionsCommandOutput;
+    };
+  };
 }

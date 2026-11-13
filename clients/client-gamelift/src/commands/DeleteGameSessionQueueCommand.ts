@@ -1,113 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DeleteGameSessionQueueInput, DeleteGameSessionQueueOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteGameSessionQueueCommand,
-  serializeAws_json1_1DeleteGameSessionQueueCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGameSessionQueueInput, DeleteGameSessionQueueOutput } from "../models/models_0";
+import { DeleteGameSessionQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGameSessionQueueCommand}.
+ */
 export interface DeleteGameSessionQueueCommandInput extends DeleteGameSessionQueueInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGameSessionQueueCommand}.
+ */
 export interface DeleteGameSessionQueueCommandOutput extends DeleteGameSessionQueueOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes a game session queue. Once a queue is successfully deleted, unfulfilled <a>StartGameSessionPlacement</a> requests that reference the queue will fail.
- *             To delete a queue, specify the queue name.</p>
- *         <p>
- *             <b>Learn more</b>
- *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html">
- *             Using Multi-Region Queues</a>
- *         </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateGameSessionQueue</a> |
- *                     <a>DescribeGameSessionQueues</a> |
- *                     <a>UpdateGameSessionQueue</a> |
- *                     <a>DeleteGameSessionQueue</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Deletes a game session queue. Once a queue is successfully deleted, unfulfilled <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html">StartGameSessionPlacement</a> requests that reference the queue will fail. To
+ *             delete a queue, specify the queue name.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DeleteGameSessionQueueCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DeleteGameSessionQueueCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DeleteGameSessionQueueInput
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteGameSessionQueueCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteGameSessionQueueCommandInput - {@link DeleteGameSessionQueueCommandInput}
+ * @returns {@link DeleteGameSessionQueueCommandOutput}
  * @see {@link DeleteGameSessionQueueCommandInput} for command's `input` shape.
  * @see {@link DeleteGameSessionQueueCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link TaggingFailedException} (client fault)
+ *  <p>The requested tagging operation did not succeed. This may be due to invalid tag format
+ *             or the maximum tag limit may have been exceeded. Resolve the issue before
+ *             retrying.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteGameSessionQueueCommand extends $Command<
-  DeleteGameSessionQueueCommandInput,
-  DeleteGameSessionQueueCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteGameSessionQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteGameSessionQueueCommandInput, DeleteGameSessionQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DeleteGameSessionQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteGameSessionQueueInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteGameSessionQueueOutput.filterSensitiveLog,
+export class DeleteGameSessionQueueCommand extends command<DeleteGameSessionQueueCommandInput, DeleteGameSessionQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGameSessionQueue",
+  DeleteGameSessionQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGameSessionQueueInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteGameSessionQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteGameSessionQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteGameSessionQueueCommandOutput> {
-    return deserializeAws_json1_1DeleteGameSessionQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteGameSessionQueueCommandInput;
+      output: DeleteGameSessionQueueCommandOutput;
+    };
+  };
 }

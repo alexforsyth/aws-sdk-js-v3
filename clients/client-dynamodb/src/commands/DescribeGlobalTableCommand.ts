@@ -1,99 +1,135 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
-import { DescribeGlobalTableInput, DescribeGlobalTableOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeGlobalTableCommand,
-  serializeAws_json1_0DescribeGlobalTableCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep4, _mw0, command } from "../commandBuilder";
+import type { DescribeGlobalTableInput, DescribeGlobalTableOutput } from "../models/models_0";
+import { DescribeGlobalTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGlobalTableCommand}.
+ */
 export interface DescribeGlobalTableCommandInput extends DescribeGlobalTableInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGlobalTableCommand}.
+ */
 export interface DescribeGlobalTableCommandOutput extends DescribeGlobalTableOutput, __MetadataBearer {}
 
 /**
  * <p>Returns information about the specified global table.</p>
- *           <note>
- *             <p>This operation only applies to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.
- *                    If you are using global tables <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> you can use <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html">DescribeTable</a> instead.</p>
- *          </note>
+ *          <important>
+ *             <p>This documentation is for version 2017.11.29 (Legacy) of global tables, which should be avoided for new global tables. Customers should use <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">Global Tables version 2019.11.21 (Current)</a> when possible, because it provides greater flexibility, higher efficiency, and consumes less write capacity than 2017.11.29 (Legacy).</p>
+ *             <p>To determine which version you're using, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html">Determining the global table version you are using</a>. To update existing global tables from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html">Upgrading global tables</a>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DynamoDBClient, DescribeGlobalTableCommand } from "@aws-sdk/client-dynamodb"; // ES Modules import
  * // const { DynamoDBClient, DescribeGlobalTableCommand } = require("@aws-sdk/client-dynamodb"); // CommonJS import
+ * // import type { DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+ * const config = {}; // type is DynamoDBClientConfig
  * const client = new DynamoDBClient(config);
+ * const input = { // DescribeGlobalTableInput
+ *   GlobalTableName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeGlobalTableCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGlobalTableOutput
+ * //   GlobalTableDescription: { // GlobalTableDescription
+ * //     ReplicationGroup: [ // ReplicaDescriptionList
+ * //       { // ReplicaDescription
+ * //         RegionName: "STRING_VALUE",
+ * //         ReplicaStatus: "CREATING" || "CREATION_FAILED" || "UPDATING" || "DELETING" || "ACTIVE" || "REGION_DISABLED" || "INACCESSIBLE_ENCRYPTION_CREDENTIALS" || "ARCHIVING" || "ARCHIVED" || "REPLICATION_NOT_AUTHORIZED",
+ * //         ReplicaArn: "STRING_VALUE",
+ * //         ReplicaStatusDescription: "STRING_VALUE",
+ * //         ReplicaStatusPercentProgress: "STRING_VALUE",
+ * //         KMSMasterKeyId: "STRING_VALUE",
+ * //         ProvisionedThroughputOverride: { // ProvisionedThroughputOverride
+ * //           ReadCapacityUnits: Number("long"),
+ * //         },
+ * //         OnDemandThroughputOverride: { // OnDemandThroughputOverride
+ * //           MaxReadRequestUnits: Number("long"),
+ * //         },
+ * //         WarmThroughput: { // TableWarmThroughputDescription
+ * //           ReadUnitsPerSecond: Number("long"),
+ * //           WriteUnitsPerSecond: Number("long"),
+ * //           Status: "CREATING" || "UPDATING" || "DELETING" || "ACTIVE" || "INACCESSIBLE_ENCRYPTION_CREDENTIALS" || "ARCHIVING" || "ARCHIVED" || "REPLICATION_NOT_AUTHORIZED",
+ * //         },
+ * //         GlobalSecondaryIndexes: [ // ReplicaGlobalSecondaryIndexDescriptionList
+ * //           { // ReplicaGlobalSecondaryIndexDescription
+ * //             IndexName: "STRING_VALUE",
+ * //             ProvisionedThroughputOverride: {
+ * //               ReadCapacityUnits: Number("long"),
+ * //             },
+ * //             OnDemandThroughputOverride: {
+ * //               MaxReadRequestUnits: Number("long"),
+ * //             },
+ * //             WarmThroughput: { // GlobalSecondaryIndexWarmThroughputDescription
+ * //               ReadUnitsPerSecond: Number("long"),
+ * //               WriteUnitsPerSecond: Number("long"),
+ * //               Status: "CREATING" || "UPDATING" || "DELETING" || "ACTIVE",
+ * //             },
+ * //           },
+ * //         ],
+ * //         ReplicaInaccessibleDateTime: new Date("TIMESTAMP"),
+ * //         ReplicaTableClassSummary: { // TableClassSummary
+ * //           TableClass: "STANDARD" || "STANDARD_INFREQUENT_ACCESS",
+ * //           LastUpdateDateTime: new Date("TIMESTAMP"),
+ * //         },
+ * //         GlobalTableSettingsReplicationMode: "ENABLED" || "DISABLED" || "ENABLED_WITH_OVERRIDES",
+ * //       },
+ * //     ],
+ * //     GlobalTableArn: "STRING_VALUE",
+ * //     CreationDateTime: new Date("TIMESTAMP"),
+ * //     GlobalTableStatus: "CREATING" || "ACTIVE" || "DELETING" || "UPDATING",
+ * //     GlobalTableName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeGlobalTableCommandInput - {@link DescribeGlobalTableCommandInput}
+ * @returns {@link DescribeGlobalTableCommandOutput}
  * @see {@link DescribeGlobalTableCommandInput} for command's `input` shape.
  * @see {@link DescribeGlobalTableCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBClientResolvedConfig | config} for DynamoDBClient's `config` shape.
  *
+ * @throws {@link GlobalTableNotFoundException} (client fault)
+ *  <p>The specified global table does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *
+ * @throws {@link DynamoDBServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGlobalTableCommand extends $Command<
-  DescribeGlobalTableCommandInput,
-  DescribeGlobalTableCommandOutput,
-  DynamoDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGlobalTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGlobalTableCommandInput, DescribeGlobalTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBClient";
-    const commandName = "DescribeGlobalTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGlobalTableInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGlobalTableOutput.filterSensitiveLog,
+export class DescribeGlobalTableCommand extends command<DescribeGlobalTableCommandInput, DescribeGlobalTableCommandOutput>(
+  _ep4,
+  _mw0,
+  "DescribeGlobalTable",
+  DescribeGlobalTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGlobalTableInput;
+      output: DescribeGlobalTableOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGlobalTableCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeGlobalTableCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeGlobalTableCommandOutput> {
-    return deserializeAws_json1_0DescribeGlobalTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGlobalTableCommandInput;
+      output: DescribeGlobalTableCommandOutput;
+    };
+  };
 }

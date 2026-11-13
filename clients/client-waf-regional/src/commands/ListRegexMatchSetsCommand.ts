@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListRegexMatchSetsRequest, ListRegexMatchSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListRegexMatchSetsCommand,
-  serializeAws_json1_1ListRegexMatchSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRegexMatchSetsRequest, ListRegexMatchSetsResponse } from "../models/models_0";
+import { ListRegexMatchSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRegexMatchSetsCommand}.
+ */
 export interface ListRegexMatchSetsCommandInput extends ListRegexMatchSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRegexMatchSetsCommand}.
+ */
 export interface ListRegexMatchSetsCommandOutput extends ListRegexMatchSetsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,60 @@ export interface ListRegexMatchSetsCommandOutput extends ListRegexMatchSetsRespo
  * ```javascript
  * import { WAFRegionalClient, ListRegexMatchSetsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListRegexMatchSetsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListRegexMatchSetsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListRegexMatchSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRegexMatchSetsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   RegexMatchSets: [ // RegexMatchSetSummaries
+ * //     { // RegexMatchSetSummary
+ * //       RegexMatchSetId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListRegexMatchSetsCommandInput - {@link ListRegexMatchSetsCommandInput}
+ * @returns {@link ListRegexMatchSetsCommandOutput}
  * @see {@link ListRegexMatchSetsCommandInput} for command's `input` shape.
  * @see {@link ListRegexMatchSetsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class ListRegexMatchSetsCommand extends $Command<
-  ListRegexMatchSetsCommandInput,
-  ListRegexMatchSetsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRegexMatchSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRegexMatchSetsCommandInput, ListRegexMatchSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListRegexMatchSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRegexMatchSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRegexMatchSetsResponse.filterSensitiveLog,
+export class ListRegexMatchSetsCommand extends command<ListRegexMatchSetsCommandInput, ListRegexMatchSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRegexMatchSets",
+  ListRegexMatchSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRegexMatchSetsRequest;
+      output: ListRegexMatchSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRegexMatchSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRegexMatchSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRegexMatchSetsCommandOutput> {
-    return deserializeAws_json1_1ListRegexMatchSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRegexMatchSetsCommandInput;
+      output: ListRegexMatchSetsCommandOutput;
+    };
+  };
 }

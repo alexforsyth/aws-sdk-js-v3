@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ActivityTask, PollForActivityTaskInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0PollForActivityTaskCommand,
-  serializeAws_json1_0PollForActivityTaskCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { ActivityTask, PollForActivityTaskInput } from "../models/models_0";
+import { PollForActivityTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PollForActivityTaskCommand}.
+ */
 export interface PollForActivityTaskCommandInput extends PollForActivityTaskInput {}
+/**
+ * @public
+ *
+ * The output of {@link PollForActivityTaskCommand}.
+ */
 export interface PollForActivityTaskCommandOutput extends ActivityTask, __MetadataBearer {}
 
 /**
@@ -63,68 +64,71 @@ export interface PollForActivityTaskCommandOutput extends ActivityTask, __Metada
  * ```javascript
  * import { SWFClient, PollForActivityTaskCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, PollForActivityTaskCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // PollForActivityTaskInput
+ *   domain: "STRING_VALUE", // required
+ *   taskList: { // TaskList
+ *     name: "STRING_VALUE", // required
+ *   },
+ *   identity: "STRING_VALUE",
+ * };
  * const command = new PollForActivityTaskCommand(input);
  * const response = await client.send(command);
+ * // { // ActivityTask
+ * //   taskToken: "STRING_VALUE", // required
+ * //   activityId: "STRING_VALUE", // required
+ * //   startedEventId: Number("long"), // required
+ * //   workflowExecution: { // WorkflowExecution
+ * //     workflowId: "STRING_VALUE", // required
+ * //     runId: "STRING_VALUE", // required
+ * //   },
+ * //   activityType: { // ActivityType
+ * //     name: "STRING_VALUE", // required
+ * //     version: "STRING_VALUE", // required
+ * //   },
+ * //   input: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param PollForActivityTaskCommandInput - {@link PollForActivityTaskCommandInput}
+ * @returns {@link PollForActivityTaskCommandOutput}
  * @see {@link PollForActivityTaskCommandInput} for command's `input` shape.
  * @see {@link PollForActivityTaskCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link LimitExceededFault} (client fault)
+ *  <p>Returned by any operation if a system imposed limitation has been reached. To address this fault you should either clean up unused resources or increase the limit by contacting AWS.</p>
+ *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class PollForActivityTaskCommand extends $Command<
-  PollForActivityTaskCommandInput,
-  PollForActivityTaskCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PollForActivityTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PollForActivityTaskCommandInput, PollForActivityTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "PollForActivityTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PollForActivityTaskInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ActivityTask.filterSensitiveLog,
+export class PollForActivityTaskCommand extends command<PollForActivityTaskCommandInput, PollForActivityTaskCommandOutput>(
+  _ep0,
+  _mw1,
+  "PollForActivityTask",
+  PollForActivityTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PollForActivityTaskInput;
+      output: ActivityTask;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PollForActivityTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0PollForActivityTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PollForActivityTaskCommandOutput> {
-    return deserializeAws_json1_0PollForActivityTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PollForActivityTaskCommandInput;
+      output: PollForActivityTaskCommandOutput;
+    };
+  };
 }

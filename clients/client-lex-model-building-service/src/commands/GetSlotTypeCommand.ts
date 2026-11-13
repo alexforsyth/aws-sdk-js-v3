@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { GetSlotTypeRequest, GetSlotTypeResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetSlotTypeCommand,
-  serializeAws_restJson1GetSlotTypeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSlotTypeRequest, GetSlotTypeResponse } from "../models/models_0";
+import { GetSlotType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSlotTypeCommand}.
+ */
 export interface GetSlotTypeCommandInput extends GetSlotTypeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSlotTypeCommand}.
+ */
 export interface GetSlotTypeCommandOutput extends GetSlotTypeResponse, __MetadataBearer {}
 
 /**
@@ -31,73 +28,121 @@ export interface GetSlotTypeCommandOutput extends GetSlotTypeResponse, __Metadat
  *       version.</p>
  *          <p>This operation requires permissions for the
  *         <code>lex:GetSlotType</code> action.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, GetSlotTypeCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, GetSlotTypeCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // GetSlotTypeRequest
+ *   name: "STRING_VALUE", // required
+ *   version: "STRING_VALUE", // required
+ * };
  * const command = new GetSlotTypeCommand(input);
  * const response = await client.send(command);
+ * // { // GetSlotTypeResponse
+ * //   name: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   enumerationValues: [ // EnumerationValues
+ * //     { // EnumerationValue
+ * //       value: "STRING_VALUE", // required
+ * //       synonyms: [ // SynonymList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   lastUpdatedDate: new Date("TIMESTAMP"),
+ * //   createdDate: new Date("TIMESTAMP"),
+ * //   version: "STRING_VALUE",
+ * //   checksum: "STRING_VALUE",
+ * //   valueSelectionStrategy: "ORIGINAL_VALUE" || "TOP_RESOLUTION",
+ * //   parentSlotTypeSignature: "STRING_VALUE",
+ * //   slotTypeConfigurations: [ // SlotTypeConfigurations
+ * //     { // SlotTypeConfiguration
+ * //       regexConfiguration: { // SlotTypeRegexConfiguration
+ * //         pattern: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetSlotTypeCommandInput - {@link GetSlotTypeCommandInput}
+ * @returns {@link GetSlotTypeCommandOutput}
  * @see {@link GetSlotTypeCommandInput} for command's `input` shape.
  * @see {@link GetSlotTypeCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @example To get information about a slot type
+ * ```javascript
+ * // This example shows how to get information about a slot type.
+ * const input = {
+ *   name: "DocPizzaCrustType",
+ *   version: "$LATEST"
+ * };
+ * const command = new GetSlotTypeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   checksum: "210b3d5a-90a3-4b22-ac7e-f50c2c71095f",
+ *   createdDate: 1.494359274403E9,
+ *   description: "Available crust types",
+ *   enumerationValues: [
+ *     {
+ *       value: "thick"
+ *     },
+ *     {
+ *       value: "thin"
+ *     }
+ *   ],
+ *   lastUpdatedDate: 1.494359274403E9,
+ *   name: "DocPizzaCrustType",
+ *   version: "$LATEST"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetSlotTypeCommand extends $Command<
-  GetSlotTypeCommandInput,
-  GetSlotTypeCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSlotTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSlotTypeCommandInput, GetSlotTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "GetSlotTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSlotTypeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSlotTypeResponse.filterSensitiveLog,
+export class GetSlotTypeCommand extends command<GetSlotTypeCommandInput, GetSlotTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSlotType",
+  GetSlotType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSlotTypeRequest;
+      output: GetSlotTypeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSlotTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSlotTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSlotTypeCommandOutput> {
-    return deserializeAws_restJson1GetSlotTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSlotTypeCommandInput;
+      output: GetSlotTypeCommandOutput;
+    };
+  };
 }

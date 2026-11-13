@@ -1,38 +1,39 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetBucketTaggingOutput, GetBucketTaggingRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetBucketTaggingCommand,
-  serializeAws_restXmlGetBucketTaggingCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type { GetBucketTaggingOutput, GetBucketTaggingRequest } from "../models/models_0";
+import { GetBucketTagging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBucketTaggingCommand}.
+ */
 export interface GetBucketTaggingCommandInput extends GetBucketTaggingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBucketTaggingCommand}.
+ */
 export interface GetBucketTaggingCommandOutput extends GetBucketTaggingOutput, __MetadataBearer {}
 
 /**
- * <p>Returns the tag set associated with the bucket.</p>
- *          <p>To use this operation, you must have permission to perform the
- *             <code>s3:GetBucketTagging</code> action. By default, the bucket owner has this
- *          permission and can grant this permission to others.</p>
- *
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Returns the tag set associated with the general purpose bucket.</p>
+ *          <p>To use this operation, you must have permission to perform the <code>s3:GetBucketTagging</code>
+ *       action. By default, the bucket owner has this permission and can grant this permission to others.</p>
  *          <p>
  *             <code>GetBucketTagging</code> has the following special error:</p>
  *          <ul>
  *             <li>
- *                <p>Error code: <code>NoSuchTagSetError</code>
+ *                <p>Error code: <code>NoSuchTagSet</code>
  *                </p>
  *                <ul>
  *                   <li>
@@ -41,7 +42,6 @@ export interface GetBucketTaggingCommandOutput extends GetBucketTaggingOutput, _
  *                </ul>
  *             </li>
  *          </ul>
- *
  *          <p>The following operations are related to <code>GetBucketTagging</code>:</p>
  *          <ul>
  *             <li>
@@ -55,74 +55,85 @@ export interface GetBucketTaggingCommandOutput extends GetBucketTaggingOutput, _
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, GetBucketTaggingCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, GetBucketTaggingCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // GetBucketTaggingRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new GetBucketTaggingCommand(input);
  * const response = await client.send(command);
+ * // { // GetBucketTaggingOutput
+ * //   TagSet: [ // TagSet // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetBucketTaggingCommandInput - {@link GetBucketTaggingCommandInput}
+ * @returns {@link GetBucketTaggingCommandOutput}
  * @see {@link GetBucketTaggingCommandInput} for command's `input` shape.
  * @see {@link GetBucketTaggingCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @example To get tag set associated with a bucket
+ * ```javascript
+ * // The following example returns tag set associated with a bucket
+ * const input = {
+ *   Bucket: "examplebucket"
+ * };
+ * const command = new GetBucketTaggingCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TagSet: [
+ *     {
+ *       Key: "key1",
+ *       Value: "value1"
+ *     },
+ *     {
+ *       Key: "key2",
+ *       Value: "value2"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetBucketTaggingCommand extends $Command<
-  GetBucketTaggingCommandInput,
-  GetBucketTaggingCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBucketTaggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBucketTaggingCommandInput, GetBucketTaggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "GetBucketTaggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBucketTaggingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBucketTaggingOutput.filterSensitiveLog,
+export class GetBucketTaggingCommand extends command<GetBucketTaggingCommandInput, GetBucketTaggingCommandOutput>(
+  _ep3,
+  _mw0,
+  "GetBucketTagging",
+  GetBucketTagging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBucketTaggingRequest;
+      output: GetBucketTaggingOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBucketTaggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetBucketTaggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBucketTaggingCommandOutput> {
-    return deserializeAws_restXmlGetBucketTaggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBucketTaggingCommandInput;
+      output: GetBucketTaggingCommandOutput;
+    };
+  };
 }

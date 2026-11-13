@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUserCommand,
-  serializeAws_json1_1DescribeUserCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
+import { DescribeUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandInput extends DescribeUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandOutput extends DescribeUserResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,93 @@ export interface DescribeUserCommandOutput extends DescribeUserResponse, __Metad
  * ```javascript
  * import { WorkMailClient, DescribeUserCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, DescribeUserCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // DescribeUserRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   UserId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeUserCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserResponse
+ * //   UserId: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Email: "STRING_VALUE",
+ * //   DisplayName: "STRING_VALUE",
+ * //   State: "ENABLED" || "DISABLED" || "DELETED",
+ * //   UserRole: "USER" || "RESOURCE" || "SYSTEM_USER" || "REMOTE_USER",
+ * //   EnabledDate: new Date("TIMESTAMP"),
+ * //   DisabledDate: new Date("TIMESTAMP"),
+ * //   MailboxProvisionedDate: new Date("TIMESTAMP"),
+ * //   MailboxDeprovisionedDate: new Date("TIMESTAMP"),
+ * //   FirstName: "STRING_VALUE",
+ * //   LastName: "STRING_VALUE",
+ * //   HiddenFromGlobalAddressList: true || false,
+ * //   Initials: "STRING_VALUE",
+ * //   Telephone: "STRING_VALUE",
+ * //   Street: "STRING_VALUE",
+ * //   JobTitle: "STRING_VALUE",
+ * //   City: "STRING_VALUE",
+ * //   Company: "STRING_VALUE",
+ * //   ZipCode: "STRING_VALUE",
+ * //   Department: "STRING_VALUE",
+ * //   Country: "STRING_VALUE",
+ * //   Office: "STRING_VALUE",
+ * //   IdentityProviderUserId: "STRING_VALUE",
+ * //   IdentityProviderIdentityStoreId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserCommandInput - {@link DescribeUserCommandInput}
+ * @returns {@link DescribeUserCommandOutput}
  * @see {@link DescribeUserCommandInput} for command's `input` shape.
  * @see {@link DescribeUserCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link DirectoryServiceAuthenticationFailedException} (client fault)
+ *  <p>The directory service doesn't recognize the credentials supplied by WorkMail.</p>
+ *
+ * @throws {@link DirectoryUnavailableException} (client fault)
+ *  <p>The directory is unavailable. It might be located in another Region or deleted.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>The identifier supplied for the user, group, or resource does not exist in your
+ *          organization.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link OrganizationNotFoundException} (client fault)
+ *  <p>An operation received a valid organization identifier that either doesn't belong or
+ *          exist in the system.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserCommand extends $Command<
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserCommandInput, DescribeUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "DescribeUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserResponse.filterSensitiveLog,
+export class DescribeUserCommand extends command<DescribeUserCommandInput, DescribeUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUser",
+  DescribeUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserRequest;
+      output: DescribeUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserCommandOutput> {
-    return deserializeAws_json1_1DescribeUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserCommandInput;
+      output: DescribeUserCommandOutput;
+    };
+  };
 }

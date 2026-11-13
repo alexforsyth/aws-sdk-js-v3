@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateServiceActionInput, CreateServiceActionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateServiceActionCommand,
-  serializeAws_json1_1CreateServiceActionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateServiceActionInput, CreateServiceActionOutput } from "../models/models_0";
+import { CreateServiceAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateServiceActionCommand}.
+ */
 export interface CreateServiceActionCommandInput extends CreateServiceActionInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateServiceActionCommand}.
+ */
 export interface CreateServiceActionCommandOutput extends CreateServiceActionOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface CreateServiceActionCommandOutput extends CreateServiceActionOut
  * ```javascript
  * import { ServiceCatalogClient, CreateServiceActionCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, CreateServiceActionCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // CreateServiceActionInput
+ *   Name: "STRING_VALUE", // required
+ *   DefinitionType: "SSM_AUTOMATION", // required
+ *   Definition: { // ServiceActionDefinitionMap // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   Description: "STRING_VALUE",
+ *   AcceptLanguage: "STRING_VALUE",
+ *   IdempotencyToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateServiceActionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateServiceActionOutput
+ * //   ServiceActionDetail: { // ServiceActionDetail
+ * //     ServiceActionSummary: { // ServiceActionSummary
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       DefinitionType: "SSM_AUTOMATION",
+ * //     },
+ * //     Definition: { // ServiceActionDefinitionMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateServiceActionCommandInput - {@link CreateServiceActionCommandInput}
+ * @returns {@link CreateServiceActionCommandOutput}
  * @see {@link CreateServiceActionCommandInput} for command's `input` shape.
  * @see {@link CreateServiceActionCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class CreateServiceActionCommand extends $Command<
-  CreateServiceActionCommandInput,
-  CreateServiceActionCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateServiceActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateServiceActionCommandInput, CreateServiceActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "CreateServiceActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateServiceActionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateServiceActionOutput.filterSensitiveLog,
+export class CreateServiceActionCommand extends command<CreateServiceActionCommandInput, CreateServiceActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateServiceAction",
+  CreateServiceAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateServiceActionInput;
+      output: CreateServiceActionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateServiceActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateServiceActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateServiceActionCommandOutput> {
-    return deserializeAws_json1_1CreateServiceActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateServiceActionCommandInput;
+      output: CreateServiceActionCommandOutput;
+    };
+  };
 }

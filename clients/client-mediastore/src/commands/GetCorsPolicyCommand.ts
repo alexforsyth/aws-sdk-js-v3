@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { GetCorsPolicyInput, GetCorsPolicyOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetCorsPolicyCommand,
-  serializeAws_json1_1GetCorsPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCorsPolicyInput, GetCorsPolicyOutput } from "../models/models_0";
+import { GetCorsPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCorsPolicyCommand}.
+ */
 export interface GetCorsPolicyCommandInput extends GetCorsPolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetCorsPolicyCommand}.
+ */
 export interface GetCorsPolicyCommandOutput extends GetCorsPolicyOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +33,76 @@ export interface GetCorsPolicyCommandOutput extends GetCorsPolicyOutput, __Metad
  * ```javascript
  * import { MediaStoreClient, GetCorsPolicyCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, GetCorsPolicyCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // GetCorsPolicyInput
+ *   ContainerName: "STRING_VALUE", // required
+ * };
  * const command = new GetCorsPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetCorsPolicyOutput
+ * //   CorsPolicy: [ // CorsPolicy // required
+ * //     { // CorsRule
+ * //       AllowedOrigins: [ // AllowedOrigins // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AllowedMethods: [ // AllowedMethods
+ * //         "PUT" || "GET" || "DELETE" || "HEAD",
+ * //       ],
+ * //       AllowedHeaders: [ // AllowedHeaders // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MaxAgeSeconds: Number("int"),
+ * //       ExposeHeaders: [ // ExposeHeaders
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetCorsPolicyCommandInput - {@link GetCorsPolicyCommandInput}
+ * @returns {@link GetCorsPolicyCommandOutput}
  * @see {@link GetCorsPolicyCommandInput} for command's `input` shape.
  * @see {@link GetCorsPolicyCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerInUseException} (client fault)
+ *  <p>The container that you specified in the request already exists or is being
+ *          updated.</p>
+ *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The container that you specified in the request does not exist.</p>
+ *
+ * @throws {@link CorsPolicyNotFoundException} (client fault)
+ *  <p>The CORS policy that you specified in the request does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class GetCorsPolicyCommand extends $Command<
-  GetCorsPolicyCommandInput,
-  GetCorsPolicyCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCorsPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCorsPolicyCommandInput, GetCorsPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "GetCorsPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCorsPolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCorsPolicyOutput.filterSensitiveLog,
+export class GetCorsPolicyCommand extends command<GetCorsPolicyCommandInput, GetCorsPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCorsPolicy",
+  GetCorsPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCorsPolicyInput;
+      output: GetCorsPolicyOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCorsPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCorsPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCorsPolicyCommandOutput> {
-    return deserializeAws_json1_1GetCorsPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCorsPolicyCommandInput;
+      output: GetCorsPolicyCommandOutput;
+    };
+  };
 }

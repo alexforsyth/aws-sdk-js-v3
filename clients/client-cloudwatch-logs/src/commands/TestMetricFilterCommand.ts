@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
-import { TestMetricFilterRequest, TestMetricFilterResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1TestMetricFilterCommand,
-  serializeAws_json1_1TestMetricFilterCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TestMetricFilterRequest, TestMetricFilterResponse } from "../models/models_1";
+import { TestMetricFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TestMetricFilterCommand}.
+ */
 export interface TestMetricFilterCommandInput extends TestMetricFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TestMetricFilterCommand}.
+ */
 export interface TestMetricFilterCommandOutput extends TestMetricFilterResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,64 @@ export interface TestMetricFilterCommandOutput extends TestMetricFilterResponse,
  * ```javascript
  * import { CloudWatchLogsClient, TestMetricFilterCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
  * // const { CloudWatchLogsClient, TestMetricFilterCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * // import type { CloudWatchLogsClientConfig } from "@aws-sdk/client-cloudwatch-logs";
+ * const config = {}; // type is CloudWatchLogsClientConfig
  * const client = new CloudWatchLogsClient(config);
+ * const input = { // TestMetricFilterRequest
+ *   filterPattern: "STRING_VALUE", // required
+ *   logEventMessages: [ // TestEventMessages // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new TestMetricFilterCommand(input);
  * const response = await client.send(command);
+ * // { // TestMetricFilterResponse
+ * //   matches: [ // MetricFilterMatches
+ * //     { // MetricFilterMatchRecord
+ * //       eventNumber: Number("long"),
+ * //       eventMessage: "STRING_VALUE",
+ * //       extractedValues: { // ExtractedValues
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param TestMetricFilterCommandInput - {@link TestMetricFilterCommandInput}
+ * @returns {@link TestMetricFilterCommandOutput}
  * @see {@link TestMetricFilterCommandInput} for command's `input` shape.
  * @see {@link TestMetricFilterCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ *
+ * @public
  */
-export class TestMetricFilterCommand extends $Command<
-  TestMetricFilterCommandInput,
-  TestMetricFilterCommandOutput,
-  CloudWatchLogsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: TestMetricFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchLogsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<TestMetricFilterCommandInput, TestMetricFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchLogsClient";
-    const commandName = "TestMetricFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: TestMetricFilterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: TestMetricFilterResponse.filterSensitiveLog,
+export class TestMetricFilterCommand extends command<TestMetricFilterCommandInput, TestMetricFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "TestMetricFilter",
+  TestMetricFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TestMetricFilterRequest;
+      output: TestMetricFilterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: TestMetricFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1TestMetricFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<TestMetricFilterCommandOutput> {
-    return deserializeAws_json1_1TestMetricFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: TestMetricFilterCommandInput;
+      output: TestMetricFilterCommandOutput;
+    };
+  };
 }

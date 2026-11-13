@@ -1,17 +1,21 @@
-import { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
-import { HttpRequest } from "@aws-sdk/protocol-http";
-import { SignatureV4 } from "@aws-sdk/signature-v4";
-import { formatUrl } from "@aws-sdk/util-format-url";
+import type { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
+import { formatUrl } from "@aws-sdk/core/util";
+import type { AwsCredentialIdentity, Provider } from "@aws-sdk/types";
+import { HttpRequest } from "@smithy/core/protocols";
+import { SignatureV4 } from "@smithy/signature-v4";
 
 export const getSignedUrl = async (
   client: PollyClient,
   command: SynthesizeSpeechCommand,
   options: any = {}
 ): Promise<string> => {
+  const { credentials } = client.config;
+
   const signer = new SignatureV4({
     service: options.service || "polly",
     uriEscapePath: options.uriEscapePath || false,
     ...client.config,
+    credentials: credentials as Provider<AwsCredentialIdentity>,
   });
 
   const presignInterceptMiddleware = (next: any, context: any) => async (args: any) => {
@@ -55,6 +59,7 @@ export const getSignedUrl = async (
     name: "presignInterceptMiddleware",
     relation: "before",
     toMiddleware: "awsAuthMiddleware",
+    override: true,
   });
 
   let presigned: HttpRequest;

@@ -1,37 +1,36 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateGatewaySoftwareNowInput, UpdateGatewaySoftwareNowOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateGatewaySoftwareNowCommand,
-  serializeAws_json1_1UpdateGatewaySoftwareNowCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateGatewaySoftwareNowInput, UpdateGatewaySoftwareNowOutput } from "../models/models_0";
+import { UpdateGatewaySoftwareNow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateGatewaySoftwareNowCommand}.
+ */
 export interface UpdateGatewaySoftwareNowCommandInput extends UpdateGatewaySoftwareNowInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateGatewaySoftwareNowCommand}.
+ */
 export interface UpdateGatewaySoftwareNowCommandOutput extends UpdateGatewaySoftwareNowOutput, __MetadataBearer {}
 
 /**
  * <p>Updates the gateway virtual machine (VM) software. The request immediately triggers the
  *          software update.</p>
- *
  *          <note>
  *             <p>When you make this request, you get a <code>200 OK</code> success response
  *             immediately. However, it might take some time for the update to complete. You can call
  *                <a>DescribeGatewayInformation</a> to verify the gateway is in the
  *                <code>STATE_RUNNING</code> state.</p>
  *          </note>
- *
  *          <important>
  *             <p>A software update forces a system restart of your gateway. You can minimize the
  *             chance of any disruption to your applications by increasing your iSCSI Initiators'
@@ -43,68 +42,70 @@ export interface UpdateGatewaySoftwareNowCommandOutput extends UpdateGatewaySoft
  * ```javascript
  * import { StorageGatewayClient, UpdateGatewaySoftwareNowCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, UpdateGatewaySoftwareNowCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // UpdateGatewaySoftwareNowInput
+ *   GatewayARN: "STRING_VALUE", // required
+ * };
  * const command = new UpdateGatewaySoftwareNowCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateGatewaySoftwareNowOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateGatewaySoftwareNowCommandInput - {@link UpdateGatewaySoftwareNowCommandInput}
+ * @returns {@link UpdateGatewaySoftwareNowCommandOutput}
  * @see {@link UpdateGatewaySoftwareNowCommandInput} for command's `input` shape.
  * @see {@link UpdateGatewaySoftwareNowCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To update a gateway's VM software
+ * ```javascript
+ * // Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+ * };
+ * const command = new UpdateGatewaySoftwareNowCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateGatewaySoftwareNowCommand extends $Command<
-  UpdateGatewaySoftwareNowCommandInput,
-  UpdateGatewaySoftwareNowCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateGatewaySoftwareNowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateGatewaySoftwareNowCommandInput, UpdateGatewaySoftwareNowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "UpdateGatewaySoftwareNowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateGatewaySoftwareNowInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateGatewaySoftwareNowOutput.filterSensitiveLog,
+export class UpdateGatewaySoftwareNowCommand extends command<UpdateGatewaySoftwareNowCommandInput, UpdateGatewaySoftwareNowCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateGatewaySoftwareNow",
+  UpdateGatewaySoftwareNow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGatewaySoftwareNowInput;
+      output: UpdateGatewaySoftwareNowOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateGatewaySoftwareNowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateGatewaySoftwareNowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateGatewaySoftwareNowCommandOutput> {
-    return deserializeAws_json1_1UpdateGatewaySoftwareNowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateGatewaySoftwareNowCommandInput;
+      output: UpdateGatewaySoftwareNowCommandOutput;
+    };
+  };
 }

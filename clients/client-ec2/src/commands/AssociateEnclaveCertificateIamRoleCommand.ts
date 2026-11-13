@@ -1,42 +1,39 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AssociateEnclaveCertificateIamRoleRequest,
   AssociateEnclaveCertificateIamRoleResult,
 } from "../models/models_0";
-import {
-  deserializeAws_ec2AssociateEnclaveCertificateIamRoleCommand,
-  serializeAws_ec2AssociateEnclaveCertificateIamRoleCommand,
-} from "../protocols/Aws_ec2";
+import { AssociateEnclaveCertificateIamRole$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateEnclaveCertificateIamRoleCommand}.
+ */
 export interface AssociateEnclaveCertificateIamRoleCommandInput extends AssociateEnclaveCertificateIamRoleRequest {}
-export interface AssociateEnclaveCertificateIamRoleCommandOutput
-  extends AssociateEnclaveCertificateIamRoleResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateEnclaveCertificateIamRoleCommand}.
+ */
+export interface AssociateEnclaveCertificateIamRoleCommandOutput extends AssociateEnclaveCertificateIamRoleResult, __MetadataBearer {}
 
 /**
  * <p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate.
  * 			This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more
  * 			information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves
  * 					User Guide</i>.</p>
- *
- * 		       <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted
- * 			private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate
+ *          <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted
+ * 			private key are placed in an Amazon S3 location that only the associated IAM role can access. The private key of the certificate
  * 			is encrypted with an Amazon Web Services managed key that has an attached attestation-based key policy.</p>
- *
- * 		       <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code>
+ *          <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code>
  * 			on the Amazon S3 bucket returned by the command. To enable the IAM role to access the KMS key,
  * 			you must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command.
  * 			For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy">
@@ -47,74 +44,51 @@ export interface AssociateEnclaveCertificateIamRoleCommandOutput
  * ```javascript
  * import { EC2Client, AssociateEnclaveCertificateIamRoleCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AssociateEnclaveCertificateIamRoleCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AssociateEnclaveCertificateIamRoleRequest
+ *   CertificateArn: "STRING_VALUE", // required
+ *   RoleArn: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new AssociateEnclaveCertificateIamRoleCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateEnclaveCertificateIamRoleResult
+ * //   CertificateS3BucketName: "STRING_VALUE",
+ * //   CertificateS3ObjectKey: "STRING_VALUE",
+ * //   EncryptionKmsKeyId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AssociateEnclaveCertificateIamRoleCommandInput - {@link AssociateEnclaveCertificateIamRoleCommandInput}
+ * @returns {@link AssociateEnclaveCertificateIamRoleCommandOutput}
  * @see {@link AssociateEnclaveCertificateIamRoleCommandInput} for command's `input` shape.
  * @see {@link AssociateEnclaveCertificateIamRoleCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateEnclaveCertificateIamRoleCommand extends $Command<
-  AssociateEnclaveCertificateIamRoleCommandInput,
-  AssociateEnclaveCertificateIamRoleCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateEnclaveCertificateIamRoleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateEnclaveCertificateIamRoleCommandInput, AssociateEnclaveCertificateIamRoleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AssociateEnclaveCertificateIamRoleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateEnclaveCertificateIamRoleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateEnclaveCertificateIamRoleResult.filterSensitiveLog,
+export class AssociateEnclaveCertificateIamRoleCommand extends command<AssociateEnclaveCertificateIamRoleCommandInput, AssociateEnclaveCertificateIamRoleCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateEnclaveCertificateIamRole",
+  AssociateEnclaveCertificateIamRole$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateEnclaveCertificateIamRoleRequest;
+      output: AssociateEnclaveCertificateIamRoleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateEnclaveCertificateIamRoleCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2AssociateEnclaveCertificateIamRoleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateEnclaveCertificateIamRoleCommandOutput> {
-    return deserializeAws_ec2AssociateEnclaveCertificateIamRoleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateEnclaveCertificateIamRoleCommandInput;
+      output: AssociateEnclaveCertificateIamRoleCommandOutput;
+    };
+  };
 }

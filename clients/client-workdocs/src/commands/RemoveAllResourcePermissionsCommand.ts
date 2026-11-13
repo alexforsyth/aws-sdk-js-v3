@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RemoveAllResourcePermissionsRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1RemoveAllResourcePermissionsCommand,
-  serializeAws_restJson1RemoveAllResourcePermissionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveAllResourcePermissionsRequest } from "../models/models_0";
+import { RemoveAllResourcePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveAllResourcePermissionsCommand}.
+ */
 export interface RemoveAllResourcePermissionsCommandInput extends RemoveAllResourcePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveAllResourcePermissionsCommand}.
+ */
 export interface RemoveAllResourcePermissionsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,71 +29,60 @@ export interface RemoveAllResourcePermissionsCommandOutput extends __MetadataBea
  * ```javascript
  * import { WorkDocsClient, RemoveAllResourcePermissionsCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, RemoveAllResourcePermissionsCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // RemoveAllResourcePermissionsRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   ResourceId: "STRING_VALUE", // required
+ * };
  * const command = new RemoveAllResourcePermissionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveAllResourcePermissionsCommandInput - {@link RemoveAllResourcePermissionsCommandInput}
+ * @returns {@link RemoveAllResourcePermissionsCommandOutput}
  * @see {@link RemoveAllResourcePermissionsCommandInput} for command's `input` shape.
  * @see {@link RemoveAllResourcePermissionsCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveAllResourcePermissionsCommand extends $Command<
-  RemoveAllResourcePermissionsCommandInput,
-  RemoveAllResourcePermissionsCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveAllResourcePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveAllResourcePermissionsCommandInput, RemoveAllResourcePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "RemoveAllResourcePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveAllResourcePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RemoveAllResourcePermissionsCommand extends command<RemoveAllResourcePermissionsCommandInput, RemoveAllResourcePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveAllResourcePermissions",
+  RemoveAllResourcePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveAllResourcePermissionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveAllResourcePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RemoveAllResourcePermissionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveAllResourcePermissionsCommandOutput> {
-    return deserializeAws_restJson1RemoveAllResourcePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveAllResourcePermissionsCommandInput;
+      output: RemoveAllResourcePermissionsCommandOutput;
+    };
+  };
 }

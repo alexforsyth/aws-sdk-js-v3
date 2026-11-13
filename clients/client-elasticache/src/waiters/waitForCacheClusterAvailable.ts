@@ -1,30 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeCacheClustersCommandInput,
+  type DescribeCacheClustersCommandOutput,
   DescribeCacheClustersCommand,
-  DescribeCacheClustersCommandInput,
 } from "../commands/DescribeCacheClustersCommand";
-import { ElastiCacheClient } from "../ElastiCacheClient";
+import type { ElastiCacheClient } from "../ElastiCacheClient";
+import type { ElastiCacheServiceException } from "../models/ElastiCacheServiceException";
 
-const checkState = async (
-  client: ElastiCacheClient,
-  input: DescribeCacheClustersCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ElastiCacheClient, input: DescribeCacheClustersCommandInput): Promise<WaiterResult<DescribeCacheClustersCommandOutput | ElastiCacheServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeCacheClustersCommand(input));
+    let result: DescribeCacheClustersCommandOutput & any = await client.send(new DescribeCacheClustersCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CacheClusters);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.CacheClusters);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.CacheClusterStatus;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "available";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "available")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -32,13 +38,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CacheClusters);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.CacheClusters);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.CacheClusterStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleted") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -46,13 +52,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CacheClusters);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.CacheClusters);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.CacheClusterStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleting") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -60,13 +66,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CacheClusters);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.CacheClusters);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.CacheClusterStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "incompatible-network") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -74,13 +80,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CacheClusters);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.CacheClusters);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.CacheClusterStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "restore-failed") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -98,7 +104,7 @@ const checkState = async (
 export const waitForCacheClusterAvailable = async (
   params: WaiterConfiguration<ElastiCacheClient>,
   input: DescribeCacheClustersCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCacheClustersCommandOutput | ElastiCacheServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -110,8 +116,8 @@ export const waitForCacheClusterAvailable = async (
 export const waitUntilCacheClusterAvailable = async (
   params: WaiterConfiguration<ElastiCacheClient>,
   input: DescribeCacheClustersCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCacheClustersCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeCacheClustersCommandOutput>;
 };

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSpeechSynthesisTaskInput, GetSpeechSynthesisTaskOutput } from "../models/models_0";
-import { PollyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PollyClient";
-import {
-  deserializeAws_restJson1GetSpeechSynthesisTaskCommand,
-  serializeAws_restJson1GetSpeechSynthesisTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSpeechSynthesisTaskInput, GetSpeechSynthesisTaskOutput } from "../models/models_0";
+import { GetSpeechSynthesisTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSpeechSynthesisTaskCommand}.
+ */
 export interface GetSpeechSynthesisTaskCommandInput extends GetSpeechSynthesisTaskInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetSpeechSynthesisTaskCommand}.
+ */
 export interface GetSpeechSynthesisTaskCommandOutput extends GetSpeechSynthesisTaskOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +32,78 @@ export interface GetSpeechSynthesisTaskCommandOutput extends GetSpeechSynthesisT
  * ```javascript
  * import { PollyClient, GetSpeechSynthesisTaskCommand } from "@aws-sdk/client-polly"; // ES Modules import
  * // const { PollyClient, GetSpeechSynthesisTaskCommand } = require("@aws-sdk/client-polly"); // CommonJS import
+ * // import type { PollyClientConfig } from "@aws-sdk/client-polly";
+ * const config = {}; // type is PollyClientConfig
  * const client = new PollyClient(config);
+ * const input = { // GetSpeechSynthesisTaskInput
+ *   TaskId: "STRING_VALUE", // required
+ * };
  * const command = new GetSpeechSynthesisTaskCommand(input);
  * const response = await client.send(command);
+ * // { // GetSpeechSynthesisTaskOutput
+ * //   SynthesisTask: { // SynthesisTask
+ * //     Engine: "standard" || "neural" || "long-form" || "generative",
+ * //     TaskId: "STRING_VALUE",
+ * //     TaskStatus: "scheduled" || "inProgress" || "completed" || "failed",
+ * //     TaskStatusReason: "STRING_VALUE",
+ * //     OutputUri: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     RequestCharacters: Number("int"),
+ * //     SnsTopicArn: "STRING_VALUE",
+ * //     LexiconNames: [ // LexiconNameList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     OutputFormat: "json" || "mp3" || "ogg_opus" || "ogg_vorbis" || "pcm" || "mulaw" || "alaw",
+ * //     SampleRate: "STRING_VALUE",
+ * //     SpeechMarkTypes: [ // SpeechMarkTypeList
+ * //       "sentence" || "ssml" || "viseme" || "word",
+ * //     ],
+ * //     TextType: "ssml" || "text",
+ * //     VoiceId: "Aditi" || "Amy" || "Astrid" || "Bianca" || "Brian" || "Camila" || "Carla" || "Carmen" || "Celine" || "Chantal" || "Conchita" || "Cristiano" || "Dora" || "Emma" || "Enrique" || "Ewa" || "Filiz" || "Gabrielle" || "Geraint" || "Giorgio" || "Gwyneth" || "Hans" || "Ines" || "Ivy" || "Jacek" || "Jan" || "Joanna" || "Joey" || "Justin" || "Karl" || "Kendra" || "Kevin" || "Kimberly" || "Lea" || "Liv" || "Lotte" || "Lucia" || "Lupe" || "Mads" || "Maja" || "Marlene" || "Mathieu" || "Matthew" || "Maxim" || "Mia" || "Miguel" || "Mizuki" || "Naja" || "Nicole" || "Olivia" || "Penelope" || "Raveena" || "Ricardo" || "Ruben" || "Russell" || "Salli" || "Seoyeon" || "Takumi" || "Tatyana" || "Vicki" || "Vitoria" || "Zeina" || "Zhiyu" || "Aria" || "Ayanda" || "Arlet" || "Hannah" || "Arthur" || "Daniel" || "Liam" || "Pedro" || "Kajal" || "Hiujin" || "Laura" || "Elin" || "Ida" || "Suvi" || "Ola" || "Hala" || "Andres" || "Sergio" || "Remi" || "Adriano" || "Thiago" || "Ruth" || "Stephen" || "Kazuha" || "Tomoko" || "Niamh" || "Sofie" || "Lisa" || "Isabelle" || "Zayd" || "Danielle" || "Gregory" || "Burcu" || "Jitka" || "Sabrina" || "Jasmine" || "Jihye" || "Ambre" || "Beatrice" || "Florian" || "Lennart" || "Lorenzo" || "Tiffany" || "Arjun" || "Carlos" || "Carolina" || "Curtis" || "Hyunduk" || "Kenneth" || "Kiara" || "Leo" || "Nate" || "Tina",
+ * //     LanguageCode: "arb" || "cmn-CN" || "cy-GB" || "da-DK" || "de-DE" || "en-AU" || "en-GB" || "en-GB-WLS" || "en-IN" || "en-US" || "es-ES" || "es-MX" || "es-US" || "fr-CA" || "fr-FR" || "is-IS" || "it-IT" || "ja-JP" || "hi-IN" || "ko-KR" || "nb-NO" || "nl-NL" || "pl-PL" || "pt-BR" || "pt-PT" || "ro-RO" || "ru-RU" || "sv-SE" || "tr-TR" || "en-NZ" || "en-ZA" || "ca-ES" || "de-AT" || "yue-CN" || "ar-AE" || "fi-FI" || "en-IE" || "nl-BE" || "fr-BE" || "cs-CZ" || "de-CH" || "en-SG",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSpeechSynthesisTaskCommandInput - {@link GetSpeechSynthesisTaskCommandInput}
+ * @returns {@link GetSpeechSynthesisTaskCommandOutput}
  * @see {@link GetSpeechSynthesisTaskCommandInput} for command's `input` shape.
  * @see {@link GetSpeechSynthesisTaskCommandOutput} for command's `response` shape.
- * @see {@link PollyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PollyClientResolvedConfig | config} for PollyClient's `config` shape.
  *
+ * @throws {@link InvalidTaskIdException} (client fault)
+ *  <p>The provided Task ID is not valid. Please provide a valid Task ID and
+ *       try again.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>An unknown condition has caused a service failure.</p>
+ *
+ * @throws {@link SynthesisTaskNotFoundException} (client fault)
+ *  <p>The Speech Synthesis task with requested Task ID cannot be
+ *       found.</p>
+ *
+ * @throws {@link PollyServiceException}
+ * <p>Base exception class for all service exceptions from Polly service.</p>
+ *
+ *
+ * @public
  */
-export class GetSpeechSynthesisTaskCommand extends $Command<
-  GetSpeechSynthesisTaskCommandInput,
-  GetSpeechSynthesisTaskCommandOutput,
-  PollyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSpeechSynthesisTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PollyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSpeechSynthesisTaskCommandInput, GetSpeechSynthesisTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PollyClient";
-    const commandName = "GetSpeechSynthesisTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSpeechSynthesisTaskInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSpeechSynthesisTaskOutput.filterSensitiveLog,
+export class GetSpeechSynthesisTaskCommand extends command<GetSpeechSynthesisTaskCommandInput, GetSpeechSynthesisTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSpeechSynthesisTask",
+  GetSpeechSynthesisTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSpeechSynthesisTaskInput;
+      output: GetSpeechSynthesisTaskOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSpeechSynthesisTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSpeechSynthesisTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSpeechSynthesisTaskCommandOutput> {
-    return deserializeAws_restJson1GetSpeechSynthesisTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSpeechSynthesisTaskCommandInput;
+      output: GetSpeechSynthesisTaskCommandOutput;
+    };
+  };
 }

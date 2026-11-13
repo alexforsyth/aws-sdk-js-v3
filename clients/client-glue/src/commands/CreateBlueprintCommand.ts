@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { CreateBlueprintRequest, CreateBlueprintResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateBlueprintCommand,
-  serializeAws_json1_1CreateBlueprintCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateBlueprintRequest, CreateBlueprintResponse } from "../models/models_0";
+import { CreateBlueprint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateBlueprintCommand}.
+ */
 export interface CreateBlueprintCommandInput extends CreateBlueprintRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateBlueprintCommand}.
+ */
 export interface CreateBlueprintCommandOutput extends CreateBlueprintResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface CreateBlueprintCommandOutput extends CreateBlueprintResponse, _
  * ```javascript
  * import { GlueClient, CreateBlueprintCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, CreateBlueprintCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // CreateBlueprintRequest
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   BlueprintLocation: "STRING_VALUE", // required
+ *   Tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateBlueprintCommand(input);
  * const response = await client.send(command);
+ * // { // CreateBlueprintResponse
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateBlueprintCommandInput - {@link CreateBlueprintCommandInput}
+ * @returns {@link CreateBlueprintCommandOutput}
  * @see {@link CreateBlueprintCommandInput} for command's `input` shape.
  * @see {@link CreateBlueprintCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>A resource to be created or added already exists.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class CreateBlueprintCommand extends $Command<
-  CreateBlueprintCommandInput,
-  CreateBlueprintCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateBlueprintCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateBlueprintCommandInput, CreateBlueprintCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "CreateBlueprintCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateBlueprintRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateBlueprintResponse.filterSensitiveLog,
+export class CreateBlueprintCommand extends command<CreateBlueprintCommandInput, CreateBlueprintCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateBlueprint",
+  CreateBlueprint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBlueprintRequest;
+      output: CreateBlueprintResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateBlueprintCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateBlueprintCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateBlueprintCommandOutput> {
-    return deserializeAws_json1_1CreateBlueprintCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateBlueprintCommandInput;
+      output: CreateBlueprintCommandOutput;
+    };
+  };
 }

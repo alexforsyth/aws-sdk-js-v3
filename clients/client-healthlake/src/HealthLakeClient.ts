@@ -1,129 +1,251 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
 import {
-  Credentials as __Credentials,
+  type EventStreamSerdeInputConfig,
+  type EventStreamSerdeResolvedConfig,
+  resolveEventStreamSerdeConfig,
+} from "@smithy/core/event-streams";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
+  EventStreamSerdeProvider as __EventStreamSerdeProvider,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultHealthLakeHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  CreateDataTransformationProfileCommandInput,
+  CreateDataTransformationProfileCommandOutput,
+} from "./commands/CreateDataTransformationProfileCommand";
+import type {
   CreateFHIRDatastoreCommandInput,
   CreateFHIRDatastoreCommandOutput,
 } from "./commands/CreateFHIRDatastoreCommand";
-import {
+import type {
+  DeleteDataTransformationProfileCommandInput,
+  DeleteDataTransformationProfileCommandOutput,
+} from "./commands/DeleteDataTransformationProfileCommand";
+import type {
   DeleteFHIRDatastoreCommandInput,
   DeleteFHIRDatastoreCommandOutput,
 } from "./commands/DeleteFHIRDatastoreCommand";
-import {
+import type {
+  DescribeDataTransformationJobCommandInput,
+  DescribeDataTransformationJobCommandOutput,
+} from "./commands/DescribeDataTransformationJobCommand";
+import type {
   DescribeFHIRDatastoreCommandInput,
   DescribeFHIRDatastoreCommandOutput,
 } from "./commands/DescribeFHIRDatastoreCommand";
-import {
+import type {
   DescribeFHIRExportJobCommandInput,
   DescribeFHIRExportJobCommandOutput,
 } from "./commands/DescribeFHIRExportJobCommand";
-import {
+import type {
   DescribeFHIRImportJobCommandInput,
   DescribeFHIRImportJobCommandOutput,
 } from "./commands/DescribeFHIRImportJobCommand";
-import { ListFHIRDatastoresCommandInput, ListFHIRDatastoresCommandOutput } from "./commands/ListFHIRDatastoresCommand";
-import { ListFHIRExportJobsCommandInput, ListFHIRExportJobsCommandOutput } from "./commands/ListFHIRExportJobsCommand";
-import { ListFHIRImportJobsCommandInput, ListFHIRImportJobsCommandOutput } from "./commands/ListFHIRImportJobsCommand";
-import {
+import type {
+  GetDataTransformationProfileCommandInput,
+  GetDataTransformationProfileCommandOutput,
+} from "./commands/GetDataTransformationProfileCommand";
+import type {
+  ListDataTransformationJobsCommandInput,
+  ListDataTransformationJobsCommandOutput,
+} from "./commands/ListDataTransformationJobsCommand";
+import type {
+  ListDataTransformationProfilesCommandInput,
+  ListDataTransformationProfilesCommandOutput,
+} from "./commands/ListDataTransformationProfilesCommand";
+import type {
+  ListDataTransformationProfileVersionsCommandInput,
+  ListDataTransformationProfileVersionsCommandOutput,
+} from "./commands/ListDataTransformationProfileVersionsCommand";
+import type {
+  ListFHIRDatastoresCommandInput,
+  ListFHIRDatastoresCommandOutput,
+} from "./commands/ListFHIRDatastoresCommand";
+import type {
+  ListFHIRExportJobsCommandInput,
+  ListFHIRExportJobsCommandOutput,
+} from "./commands/ListFHIRExportJobsCommand";
+import type {
+  ListFHIRImportJobsCommandInput,
+  ListFHIRImportJobsCommandOutput,
+} from "./commands/ListFHIRImportJobsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { StartFHIRExportJobCommandInput, StartFHIRExportJobCommandOutput } from "./commands/StartFHIRExportJobCommand";
-import { StartFHIRImportJobCommandInput, StartFHIRImportJobCommandOutput } from "./commands/StartFHIRImportJobCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  PublishDataTransformationProfileCommandInput,
+  PublishDataTransformationProfileCommandOutput,
+} from "./commands/PublishDataTransformationProfileCommand";
+import type {
+  RestoreFHIRDatastoreCommandInput,
+  RestoreFHIRDatastoreCommandOutput,
+} from "./commands/RestoreFHIRDatastoreCommand";
+import type {
+  StartDataTransformationJobCommandInput,
+  StartDataTransformationJobCommandOutput,
+} from "./commands/StartDataTransformationJobCommand";
+import type {
+  StartFHIRExportJobCommandInput,
+  StartFHIRExportJobCommandOutput,
+} from "./commands/StartFHIRExportJobCommand";
+import type {
+  StartFHIRImportJobCommandInput,
+  StartFHIRImportJobCommandOutput,
+} from "./commands/StartFHIRImportJobCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateDataTransformationProfileCommandInput,
+  UpdateDataTransformationProfileCommandOutput,
+} from "./commands/UpdateDataTransformationProfileCommand";
+import type {
+  UpdateFHIRDatastoreCommandInput,
+  UpdateFHIRDatastoreCommandOutput,
+} from "./commands/UpdateFHIRDatastoreCommand";
+import type {
+  UpdateProfileWithAgentCommandInput,
+  UpdateProfileWithAgentCommandOutput,
+} from "./commands/UpdateProfileWithAgentCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | CreateDataTransformationProfileCommandInput
   | CreateFHIRDatastoreCommandInput
+  | DeleteDataTransformationProfileCommandInput
   | DeleteFHIRDatastoreCommandInput
+  | DescribeDataTransformationJobCommandInput
   | DescribeFHIRDatastoreCommandInput
   | DescribeFHIRExportJobCommandInput
   | DescribeFHIRImportJobCommandInput
+  | GetDataTransformationProfileCommandInput
+  | ListDataTransformationJobsCommandInput
+  | ListDataTransformationProfileVersionsCommandInput
+  | ListDataTransformationProfilesCommandInput
   | ListFHIRDatastoresCommandInput
   | ListFHIRExportJobsCommandInput
   | ListFHIRImportJobsCommandInput
   | ListTagsForResourceCommandInput
+  | PublishDataTransformationProfileCommandInput
+  | RestoreFHIRDatastoreCommandInput
+  | StartDataTransformationJobCommandInput
   | StartFHIRExportJobCommandInput
   | StartFHIRImportJobCommandInput
   | TagResourceCommandInput
-  | UntagResourceCommandInput;
+  | UntagResourceCommandInput
+  | UpdateDataTransformationProfileCommandInput
+  | UpdateFHIRDatastoreCommandInput
+  | UpdateProfileWithAgentCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | CreateDataTransformationProfileCommandOutput
   | CreateFHIRDatastoreCommandOutput
+  | DeleteDataTransformationProfileCommandOutput
   | DeleteFHIRDatastoreCommandOutput
+  | DescribeDataTransformationJobCommandOutput
   | DescribeFHIRDatastoreCommandOutput
   | DescribeFHIRExportJobCommandOutput
   | DescribeFHIRImportJobCommandOutput
+  | GetDataTransformationProfileCommandOutput
+  | ListDataTransformationJobsCommandOutput
+  | ListDataTransformationProfileVersionsCommandOutput
+  | ListDataTransformationProfilesCommandOutput
   | ListFHIRDatastoresCommandOutput
   | ListFHIRExportJobsCommandOutput
   | ListFHIRImportJobsCommandOutput
   | ListTagsForResourceCommandOutput
+  | PublishDataTransformationProfileCommandOutput
+  | RestoreFHIRDatastoreCommandOutput
+  | StartDataTransformationJobCommandOutput
   | StartFHIRExportJobCommandOutput
   | StartFHIRImportJobCommandOutput
   | TagResourceCommandOutput
-  | UntagResourceCommandOutput;
+  | UntagResourceCommandOutput
+  | UpdateDataTransformationProfileCommandOutput
+  | UpdateFHIRDatastoreCommandOutput
+  | UpdateProfileWithAgentCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -135,7 +257,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -174,25 +296,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -205,64 +318,120 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The function that provides necessary utilities for generating and parsing event stream
+   */
+  eventStreamSerdeProvider?: __EventStreamSerdeProvider;
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type HealthLakeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of HealthLakeClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type HealthLakeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  EventStreamSerdeInputConfig &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of HealthLakeClient class constructor that set the region, credentials and other options.
  */
 export interface HealthLakeClientConfig extends HealthLakeClientConfigType {}
 
-type HealthLakeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of HealthLakeClient class. This is resolved and normalized from the {@link HealthLakeClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type HealthLakeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  EventStreamSerdeResolvedConfig &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of HealthLakeClient class. This is resolved and normalized from the {@link HealthLakeClientConfig | constructor configuration interface}.
  */
 export interface HealthLakeClientResolvedConfig extends HealthLakeClientResolvedConfigType {}
 
 /**
- * <p>Amazon HealthLake is a HIPAA eligibile service that allows customers to store,
- *          transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.</p>
+ * <p>This is the <i>HealthLake API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html">What is HealthLake?</a> in the <i>HealthLake Developer Guide</i>.</p>
+ * @public
  */
 export class HealthLakeClient extends __Client<
   __HttpHandlerOptions,
@@ -275,22 +444,37 @@ export class HealthLakeClient extends __Client<
    */
   readonly config: HealthLakeClientResolvedConfig;
 
-  constructor(configuration: HealthLakeClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<HealthLakeClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveEventStreamSerdeConfig(_config_6);
+    const _config_8 = resolveHttpAuthSchemeConfig(_config_7);
+    const _config_9 = resolveRuntimeExtensions(_config_8, configuration?.extensions || []);
+    this.config = _config_9;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultHealthLakeHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: HealthLakeClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

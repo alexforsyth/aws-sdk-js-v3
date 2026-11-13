@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetChannelsRequest, GetChannelsResponse } from "../models/models_0";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetChannelsCommand,
-  serializeAws_restJson1GetChannelsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetChannelsRequest, GetChannelsResponse } from "../models/models_0";
+import { GetChannels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetChannelsCommand}.
+ */
 export interface GetChannelsCommandInput extends GetChannelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetChannelsCommand}.
+ */
 export interface GetChannelsCommandOutput extends GetChannelsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface GetChannelsCommandOutput extends GetChannelsResponse, __Metadat
  * ```javascript
  * import { PinpointClient, GetChannelsCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetChannelsCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetChannelsRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ * };
  * const command = new GetChannelsCommand(input);
  * const response = await client.send(command);
+ * // { // GetChannelsResponse
+ * //   ChannelsResponse: { // ChannelsResponse
+ * //     Channels: { // MapOfChannelResponse // required
+ * //       "<keys>": { // ChannelResponse
+ * //         ApplicationId: "STRING_VALUE",
+ * //         CreationDate: "STRING_VALUE",
+ * //         Enabled: true || false,
+ * //         HasCredential: true || false,
+ * //         Id: "STRING_VALUE",
+ * //         IsArchived: true || false,
+ * //         LastModifiedBy: "STRING_VALUE",
+ * //         LastModifiedDate: "STRING_VALUE",
+ * //         Version: Number("int"),
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetChannelsCommandInput - {@link GetChannelsCommandInput}
+ * @returns {@link GetChannelsCommandOutput}
  * @see {@link GetChannelsCommandInput} for command's `input` shape.
  * @see {@link GetChannelsCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetChannelsCommand extends $Command<
-  GetChannelsCommandInput,
-  GetChannelsCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetChannelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetChannelsCommandInput, GetChannelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetChannelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetChannelsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetChannelsResponse.filterSensitiveLog,
+export class GetChannelsCommand extends command<GetChannelsCommandInput, GetChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetChannels",
+  GetChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetChannelsRequest;
+      output: GetChannelsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetChannelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetChannelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetChannelsCommandOutput> {
-    return deserializeAws_restJson1GetChannelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetChannelsCommandInput;
+      output: GetChannelsCommandOutput;
+    };
+  };
 }

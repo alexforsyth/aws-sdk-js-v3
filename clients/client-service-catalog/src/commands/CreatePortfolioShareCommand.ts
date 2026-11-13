@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreatePortfolioShareInput, CreatePortfolioShareOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreatePortfolioShareCommand,
-  serializeAws_json1_1CreatePortfolioShareCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePortfolioShareInput, CreatePortfolioShareOutput } from "../models/models_0";
+import { CreatePortfolioShare$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePortfolioShareCommand}.
+ */
 export interface CreatePortfolioShareCommandInput extends CreatePortfolioShareInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePortfolioShareCommand}.
+ */
 export interface CreatePortfolioShareCommandOutput extends CreatePortfolioShareOutput, __MetadataBearer {}
 
 /**
@@ -27,77 +28,91 @@ export interface CreatePortfolioShareCommandOutput extends CreatePortfolioShareO
  *          organization or by a delegated administrator. You can share portfolios to an organization,
  *          an organizational unit, or a specific account.</p>
  *          <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p>
- *         <p>
+ *          <p>
  *             <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p>
  *          <p>You can't share a shared resource, including portfolios that contain a shared product.</p>
- *          <p>If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the <code> UpdatePortfolioShare</code> API instead.</p>
+ *          <p>If the portfolio share with the specified account or organization node already exists, this action will have no effect
+ *          and will not return an error. To update an existing share, you must use the <code> UpdatePortfolioShare</code> API instead. </p>
+ *          <note>
+ *             <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is
+ *          then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin,
+ *          but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal
+ *          name association for the portfolio. Although this user may not know which principal names are associated through
+ *          Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then
+ *          Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration,
+ *          the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogClient, CreatePortfolioShareCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, CreatePortfolioShareCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // CreatePortfolioShareInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   PortfolioId: "STRING_VALUE", // required
+ *   AccountId: "STRING_VALUE",
+ *   OrganizationNode: { // OrganizationNode
+ *     Type: "ORGANIZATION" || "ORGANIZATIONAL_UNIT" || "ACCOUNT",
+ *     Value: "STRING_VALUE",
+ *   },
+ *   ShareTagOptions: true || false,
+ *   SharePrincipals: true || false,
+ * };
  * const command = new CreatePortfolioShareCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePortfolioShareOutput
+ * //   PortfolioShareToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePortfolioShareCommandInput - {@link CreatePortfolioShareCommandInput}
+ * @returns {@link CreatePortfolioShareCommandOutput}
  * @see {@link CreatePortfolioShareCommandInput} for command's `input` shape.
  * @see {@link CreatePortfolioShareCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>An attempt was made to modify a resource that is in a state that is not valid.
+ *          Check your resources to ensure that they are in valid states before retrying the operation.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePortfolioShareCommand extends $Command<
-  CreatePortfolioShareCommandInput,
-  CreatePortfolioShareCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePortfolioShareCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePortfolioShareCommandInput, CreatePortfolioShareCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "CreatePortfolioShareCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePortfolioShareInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePortfolioShareOutput.filterSensitiveLog,
+export class CreatePortfolioShareCommand extends command<CreatePortfolioShareCommandInput, CreatePortfolioShareCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePortfolioShare",
+  CreatePortfolioShare$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePortfolioShareInput;
+      output: CreatePortfolioShareOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePortfolioShareCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreatePortfolioShareCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePortfolioShareCommandOutput> {
-    return deserializeAws_json1_1CreatePortfolioShareCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePortfolioShareCommandInput;
+      output: CreatePortfolioShareCommandOutput;
+    };
+  };
 }

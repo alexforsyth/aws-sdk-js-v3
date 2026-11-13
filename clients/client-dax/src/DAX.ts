@@ -1,805 +1,513 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
   CreateClusterCommand,
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
 } from "./commands/CreateClusterCommand";
 import {
+  type CreateParameterGroupCommandInput,
+  type CreateParameterGroupCommandOutput,
   CreateParameterGroupCommand,
-  CreateParameterGroupCommandInput,
-  CreateParameterGroupCommandOutput,
 } from "./commands/CreateParameterGroupCommand";
 import {
+  type CreateSubnetGroupCommandInput,
+  type CreateSubnetGroupCommandOutput,
   CreateSubnetGroupCommand,
-  CreateSubnetGroupCommandInput,
-  CreateSubnetGroupCommandOutput,
 } from "./commands/CreateSubnetGroupCommand";
 import {
+  type DecreaseReplicationFactorCommandInput,
+  type DecreaseReplicationFactorCommandOutput,
   DecreaseReplicationFactorCommand,
-  DecreaseReplicationFactorCommandInput,
-  DecreaseReplicationFactorCommandOutput,
 } from "./commands/DecreaseReplicationFactorCommand";
 import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
   DeleteClusterCommand,
-  DeleteClusterCommandInput,
-  DeleteClusterCommandOutput,
 } from "./commands/DeleteClusterCommand";
 import {
+  type DeleteParameterGroupCommandInput,
+  type DeleteParameterGroupCommandOutput,
   DeleteParameterGroupCommand,
-  DeleteParameterGroupCommandInput,
-  DeleteParameterGroupCommandOutput,
 } from "./commands/DeleteParameterGroupCommand";
 import {
+  type DeleteSubnetGroupCommandInput,
+  type DeleteSubnetGroupCommandOutput,
   DeleteSubnetGroupCommand,
-  DeleteSubnetGroupCommandInput,
-  DeleteSubnetGroupCommandOutput,
 } from "./commands/DeleteSubnetGroupCommand";
 import {
+  type DescribeClustersCommandInput,
+  type DescribeClustersCommandOutput,
   DescribeClustersCommand,
-  DescribeClustersCommandInput,
-  DescribeClustersCommandOutput,
 } from "./commands/DescribeClustersCommand";
 import {
+  type DescribeDefaultParametersCommandInput,
+  type DescribeDefaultParametersCommandOutput,
   DescribeDefaultParametersCommand,
-  DescribeDefaultParametersCommandInput,
-  DescribeDefaultParametersCommandOutput,
 } from "./commands/DescribeDefaultParametersCommand";
 import {
+  type DescribeEventsCommandInput,
+  type DescribeEventsCommandOutput,
   DescribeEventsCommand,
-  DescribeEventsCommandInput,
-  DescribeEventsCommandOutput,
 } from "./commands/DescribeEventsCommand";
 import {
+  type DescribeParameterGroupsCommandInput,
+  type DescribeParameterGroupsCommandOutput,
   DescribeParameterGroupsCommand,
-  DescribeParameterGroupsCommandInput,
-  DescribeParameterGroupsCommandOutput,
 } from "./commands/DescribeParameterGroupsCommand";
 import {
+  type DescribeParametersCommandInput,
+  type DescribeParametersCommandOutput,
   DescribeParametersCommand,
-  DescribeParametersCommandInput,
-  DescribeParametersCommandOutput,
 } from "./commands/DescribeParametersCommand";
 import {
+  type DescribeSubnetGroupsCommandInput,
+  type DescribeSubnetGroupsCommandOutput,
   DescribeSubnetGroupsCommand,
-  DescribeSubnetGroupsCommandInput,
-  DescribeSubnetGroupsCommandOutput,
 } from "./commands/DescribeSubnetGroupsCommand";
 import {
+  type IncreaseReplicationFactorCommandInput,
+  type IncreaseReplicationFactorCommandOutput,
   IncreaseReplicationFactorCommand,
-  IncreaseReplicationFactorCommandInput,
-  IncreaseReplicationFactorCommandOutput,
 } from "./commands/IncreaseReplicationFactorCommand";
-import { ListTagsCommand, ListTagsCommandInput, ListTagsCommandOutput } from "./commands/ListTagsCommand";
-import { RebootNodeCommand, RebootNodeCommandInput, RebootNodeCommandOutput } from "./commands/RebootNodeCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import { type ListTagsCommandInput, type ListTagsCommandOutput, ListTagsCommand } from "./commands/ListTagsCommand";
 import {
+  type RebootNodeCommandInput,
+  type RebootNodeCommandOutput,
+  RebootNodeCommand,
+} from "./commands/RebootNodeCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateClusterCommandInput,
+  type UpdateClusterCommandOutput,
   UpdateClusterCommand,
-  UpdateClusterCommandInput,
-  UpdateClusterCommandOutput,
 } from "./commands/UpdateClusterCommand";
 import {
+  type UpdateParameterGroupCommandInput,
+  type UpdateParameterGroupCommandOutput,
   UpdateParameterGroupCommand,
-  UpdateParameterGroupCommandInput,
-  UpdateParameterGroupCommandOutput,
 } from "./commands/UpdateParameterGroupCommand";
 import {
+  type UpdateSubnetGroupCommandInput,
+  type UpdateSubnetGroupCommandOutput,
   UpdateSubnetGroupCommand,
-  UpdateSubnetGroupCommandInput,
-  UpdateSubnetGroupCommandOutput,
 } from "./commands/UpdateSubnetGroupCommand";
 import { DAXClient } from "./DAXClient";
 
+const commands = {
+  CreateClusterCommand,
+  CreateParameterGroupCommand,
+  CreateSubnetGroupCommand,
+  DecreaseReplicationFactorCommand,
+  DeleteClusterCommand,
+  DeleteParameterGroupCommand,
+  DeleteSubnetGroupCommand,
+  DescribeClustersCommand,
+  DescribeDefaultParametersCommand,
+  DescribeEventsCommand,
+  DescribeParameterGroupsCommand,
+  DescribeParametersCommand,
+  DescribeSubnetGroupsCommand,
+  IncreaseReplicationFactorCommand,
+  ListTagsCommand,
+  RebootNodeCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateClusterCommand,
+  UpdateParameterGroupCommand,
+  UpdateSubnetGroupCommand,
+};
+
 /**
- * <p>DAX is a managed caching service engineered for Amazon DynamoDB. DAX
- *             dramatically speeds up database reads by caching frequently-accessed data from DynamoDB, so
- *             applications can access that data with sub-millisecond latency. You can create a DAX
- *             cluster easily, using the AWS Management Console. With a few simple modifications to
- *             your code, your application can begin taking advantage of the DAX cluster and realize
- *             significant improvements in read performance.</p>
+ * @public
  */
-export class DAX extends DAXClient {
+export interface DAXRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DAX {
   /**
-   * <p>Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.</p>
+   * @see {@link CreateClusterCommand}
    */
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<CreateClusterCommandOutput>;
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
     cb: (err: any, data?: CreateClusterCommandOutput) => void
   ): void;
-  public createCluster(
+  createCluster(
     args: CreateClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: CreateClusterCommandOutput) => void
   ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateClusterCommandOutput) => void
-  ): Promise<CreateClusterCommandOutput> | void {
-    const command = new CreateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new parameter group. A parameter group is a collection of parameters that
-   *             you apply to all of the nodes in a DAX cluster.</p>
+   * @see {@link CreateParameterGroupCommand}
    */
-  public createParameterGroup(
+  createParameterGroup(
     args: CreateParameterGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<CreateParameterGroupCommandOutput>;
-  public createParameterGroup(
+  createParameterGroup(
     args: CreateParameterGroupCommandInput,
     cb: (err: any, data?: CreateParameterGroupCommandOutput) => void
   ): void;
-  public createParameterGroup(
+  createParameterGroup(
     args: CreateParameterGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: CreateParameterGroupCommandOutput) => void
   ): void;
-  public createParameterGroup(
-    args: CreateParameterGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateParameterGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateParameterGroupCommandOutput) => void
-  ): Promise<CreateParameterGroupCommandOutput> | void {
-    const command = new CreateParameterGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new subnet group.</p>
+   * @see {@link CreateSubnetGroupCommand}
    */
-  public createSubnetGroup(
+  createSubnetGroup(
     args: CreateSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<CreateSubnetGroupCommandOutput>;
-  public createSubnetGroup(
+  createSubnetGroup(
     args: CreateSubnetGroupCommandInput,
     cb: (err: any, data?: CreateSubnetGroupCommandOutput) => void
   ): void;
-  public createSubnetGroup(
+  createSubnetGroup(
     args: CreateSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: CreateSubnetGroupCommandOutput) => void
   ): void;
-  public createSubnetGroup(
-    args: CreateSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateSubnetGroupCommandOutput) => void
-  ): Promise<CreateSubnetGroupCommandOutput> | void {
-    const command = new CreateSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes one or more nodes from a DAX cluster.</p>
-   *         <note>
-   *             <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node in a DAX cluster. If you need to do this, use <code>DeleteCluster</code> instead.</p>
-   *          </note>
+   * @see {@link DecreaseReplicationFactorCommand}
    */
-  public decreaseReplicationFactor(
+  decreaseReplicationFactor(
     args: DecreaseReplicationFactorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DecreaseReplicationFactorCommandOutput>;
-  public decreaseReplicationFactor(
+  decreaseReplicationFactor(
     args: DecreaseReplicationFactorCommandInput,
     cb: (err: any, data?: DecreaseReplicationFactorCommandOutput) => void
   ): void;
-  public decreaseReplicationFactor(
+  decreaseReplicationFactor(
     args: DecreaseReplicationFactorCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DecreaseReplicationFactorCommandOutput) => void
   ): void;
-  public decreaseReplicationFactor(
-    args: DecreaseReplicationFactorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DecreaseReplicationFactorCommandOutput) => void),
-    cb?: (err: any, data?: DecreaseReplicationFactorCommandOutput) => void
-  ): Promise<DecreaseReplicationFactorCommandOutput> | void {
-    const command = new DecreaseReplicationFactorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a previously provisioned DAX cluster.
-   *                 <i>DeleteCluster</i> deletes all associated nodes, node endpoints
-   *             and the DAX cluster itself. When you receive a successful response from this action,
-   *             DAX immediately begins deleting the cluster; you cannot cancel or revert this
-   *             action.</p>
+   * @see {@link DeleteClusterCommand}
    */
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DeleteClusterCommandOutput>;
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
     cb: (err: any, data?: DeleteClusterCommandOutput) => void
   ): void;
-  public deleteCluster(
+  deleteCluster(
     args: DeleteClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DeleteClusterCommandOutput) => void
   ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): Promise<DeleteClusterCommandOutput> | void {
-    const command = new DeleteClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified parameter group. You cannot delete a parameter group if it is
-   *             associated with any DAX clusters.</p>
+   * @see {@link DeleteParameterGroupCommand}
    */
-  public deleteParameterGroup(
+  deleteParameterGroup(
     args: DeleteParameterGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DeleteParameterGroupCommandOutput>;
-  public deleteParameterGroup(
+  deleteParameterGroup(
     args: DeleteParameterGroupCommandInput,
     cb: (err: any, data?: DeleteParameterGroupCommandOutput) => void
   ): void;
-  public deleteParameterGroup(
+  deleteParameterGroup(
     args: DeleteParameterGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DeleteParameterGroupCommandOutput) => void
   ): void;
-  public deleteParameterGroup(
-    args: DeleteParameterGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteParameterGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteParameterGroupCommandOutput) => void
-  ): Promise<DeleteParameterGroupCommandOutput> | void {
-    const command = new DeleteParameterGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a subnet group.</p>
-   *         <note>
-   *             <p>You cannot delete a subnet group if it is associated with any DAX
-   *                 clusters.</p>
-   *         </note>
+   * @see {@link DeleteSubnetGroupCommand}
    */
-  public deleteSubnetGroup(
+  deleteSubnetGroup(
     args: DeleteSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DeleteSubnetGroupCommandOutput>;
-  public deleteSubnetGroup(
+  deleteSubnetGroup(
     args: DeleteSubnetGroupCommandInput,
     cb: (err: any, data?: DeleteSubnetGroupCommandOutput) => void
   ): void;
-  public deleteSubnetGroup(
+  deleteSubnetGroup(
     args: DeleteSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DeleteSubnetGroupCommandOutput) => void
   ): void;
-  public deleteSubnetGroup(
-    args: DeleteSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSubnetGroupCommandOutput) => void
-  ): Promise<DeleteSubnetGroupCommandOutput> | void {
-    const command = new DeleteSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about all provisioned DAX clusters if no cluster identifier
-   *             is specified, or about a specific DAX cluster if a cluster identifier is
-   *             supplied.</p>
-   *         <p>If the cluster is in the CREATING state, only cluster level information will be
-   *             displayed until all of the nodes are successfully provisioned.</p>
-   *         <p>If the cluster is in the DELETING state, only cluster level information will be
-   *             displayed.</p>
-   *         <p>If nodes are currently being added to the DAX cluster, node endpoint information
-   *             and creation time for the additional nodes will not be displayed until they are
-   *             completely provisioned. When the DAX cluster state is <i>available</i>,
-   *             the cluster is ready for use.</p>
-   *         <p>If nodes are currently being removed from the DAX cluster, no endpoint
-   *             information for the removed nodes is displayed.</p>
+   * @see {@link DescribeClustersCommand}
    */
-  public describeClusters(
+  describeClusters(): Promise<DescribeClustersCommandOutput>;
+  describeClusters(
     args: DescribeClustersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeClustersCommandOutput>;
-  public describeClusters(
+  describeClusters(
     args: DescribeClustersCommandInput,
     cb: (err: any, data?: DescribeClustersCommandOutput) => void
   ): void;
-  public describeClusters(
+  describeClusters(
     args: DescribeClustersCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeClustersCommandOutput) => void
   ): void;
-  public describeClusters(
-    args: DescribeClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClustersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClustersCommandOutput) => void
-  ): Promise<DescribeClustersCommandOutput> | void {
-    const command = new DescribeClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the default system parameter information for the DAX caching
-   *             software.</p>
+   * @see {@link DescribeDefaultParametersCommand}
    */
-  public describeDefaultParameters(
+  describeDefaultParameters(): Promise<DescribeDefaultParametersCommandOutput>;
+  describeDefaultParameters(
     args: DescribeDefaultParametersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeDefaultParametersCommandOutput>;
-  public describeDefaultParameters(
+  describeDefaultParameters(
     args: DescribeDefaultParametersCommandInput,
     cb: (err: any, data?: DescribeDefaultParametersCommandOutput) => void
   ): void;
-  public describeDefaultParameters(
+  describeDefaultParameters(
     args: DescribeDefaultParametersCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeDefaultParametersCommandOutput) => void
   ): void;
-  public describeDefaultParameters(
-    args: DescribeDefaultParametersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDefaultParametersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDefaultParametersCommandOutput) => void
-  ): Promise<DescribeDefaultParametersCommandOutput> | void {
-    const command = new DescribeDefaultParametersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns events related to DAX clusters and parameter groups. You can obtain
-   *             events specific to a particular DAX cluster or parameter group by providing the name
-   *             as a parameter.</p>
-   *         <p>By default, only the events occurring within the last 24 hours are returned; however,
-   *             you can retrieve up to 14 days' worth of events if necessary.</p>
+   * @see {@link DescribeEventsCommand}
    */
-  public describeEvents(
+  describeEvents(): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
     args: DescribeEventsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeEventsCommandOutput>;
-  public describeEvents(
+  describeEvents(
     args: DescribeEventsCommandInput,
     cb: (err: any, data?: DescribeEventsCommandOutput) => void
   ): void;
-  public describeEvents(
+  describeEvents(
     args: DescribeEventsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeEventsCommandOutput) => void
   ): void;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): Promise<DescribeEventsCommandOutput> | void {
-    const command = new DescribeEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of parameter group descriptions. If a parameter group name is
-   *             specified, the list will contain only the descriptions for that group.</p>
+   * @see {@link DescribeParameterGroupsCommand}
    */
-  public describeParameterGroups(
+  describeParameterGroups(): Promise<DescribeParameterGroupsCommandOutput>;
+  describeParameterGroups(
     args: DescribeParameterGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeParameterGroupsCommandOutput>;
-  public describeParameterGroups(
+  describeParameterGroups(
     args: DescribeParameterGroupsCommandInput,
     cb: (err: any, data?: DescribeParameterGroupsCommandOutput) => void
   ): void;
-  public describeParameterGroups(
+  describeParameterGroups(
     args: DescribeParameterGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeParameterGroupsCommandOutput) => void
   ): void;
-  public describeParameterGroups(
-    args: DescribeParameterGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeParameterGroupsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeParameterGroupsCommandOutput) => void
-  ): Promise<DescribeParameterGroupsCommandOutput> | void {
-    const command = new DescribeParameterGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the detailed parameter list for a particular parameter group.</p>
+   * @see {@link DescribeParametersCommand}
    */
-  public describeParameters(
+  describeParameters(
     args: DescribeParametersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeParametersCommandOutput>;
-  public describeParameters(
+  describeParameters(
     args: DescribeParametersCommandInput,
     cb: (err: any, data?: DescribeParametersCommandOutput) => void
   ): void;
-  public describeParameters(
+  describeParameters(
     args: DescribeParametersCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeParametersCommandOutput) => void
   ): void;
-  public describeParameters(
-    args: DescribeParametersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeParametersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeParametersCommandOutput) => void
-  ): Promise<DescribeParametersCommandOutput> | void {
-    const command = new DescribeParametersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of subnet group descriptions. If a subnet group name is specified,
-   *             the list will contain only the description of that group.</p>
+   * @see {@link DescribeSubnetGroupsCommand}
    */
-  public describeSubnetGroups(
+  describeSubnetGroups(): Promise<DescribeSubnetGroupsCommandOutput>;
+  describeSubnetGroups(
     args: DescribeSubnetGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<DescribeSubnetGroupsCommandOutput>;
-  public describeSubnetGroups(
+  describeSubnetGroups(
     args: DescribeSubnetGroupsCommandInput,
     cb: (err: any, data?: DescribeSubnetGroupsCommandOutput) => void
   ): void;
-  public describeSubnetGroups(
+  describeSubnetGroups(
     args: DescribeSubnetGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: DescribeSubnetGroupsCommandOutput) => void
   ): void;
-  public describeSubnetGroups(
-    args: DescribeSubnetGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSubnetGroupsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSubnetGroupsCommandOutput) => void
-  ): Promise<DescribeSubnetGroupsCommandOutput> | void {
-    const command = new DescribeSubnetGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds one or more nodes to a DAX cluster.</p>
+   * @see {@link IncreaseReplicationFactorCommand}
    */
-  public increaseReplicationFactor(
+  increaseReplicationFactor(
     args: IncreaseReplicationFactorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<IncreaseReplicationFactorCommandOutput>;
-  public increaseReplicationFactor(
+  increaseReplicationFactor(
     args: IncreaseReplicationFactorCommandInput,
     cb: (err: any, data?: IncreaseReplicationFactorCommandOutput) => void
   ): void;
-  public increaseReplicationFactor(
+  increaseReplicationFactor(
     args: IncreaseReplicationFactorCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: IncreaseReplicationFactorCommandOutput) => void
   ): void;
-  public increaseReplicationFactor(
-    args: IncreaseReplicationFactorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: IncreaseReplicationFactorCommandOutput) => void),
-    cb?: (err: any, data?: IncreaseReplicationFactorCommandOutput) => void
-  ): Promise<IncreaseReplicationFactorCommandOutput> | void {
-    const command = new IncreaseReplicationFactorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to
-   *             10 times per second, per account.</p>
+   * @see {@link ListTagsCommand}
    */
-  public listTags(args: ListTagsCommandInput, options?: __HttpHandlerOptions): Promise<ListTagsCommandOutput>;
-  public listTags(args: ListTagsCommandInput, cb: (err: any, data?: ListTagsCommandOutput) => void): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DAXRequestOptions
+  ): Promise<ListTagsCommandOutput>;
+  listTags(
+    args: ListTagsCommandInput,
     cb: (err: any, data?: ListTagsCommandOutput) => void
   ): void;
-  public listTags(
+  listTags(
     args: ListTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsCommandOutput) => void
-  ): Promise<ListTagsCommandOutput> | void {
-    const command = new ListTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DAXRequestOptions,
+    cb: (err: any, data?: ListTagsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Reboots a single node of a DAX cluster. The reboot action takes place
-   *             as soon as possible. During the
-   *             reboot, the node status is set to REBOOTING.</p>
-   *         <note>
-   *             <p>
-   *                <code>RebootNode</code> restarts the DAX engine process and does not remove the contents of the cache.  </p>
-   *         </note>
+   * @see {@link RebootNodeCommand}
    */
-  public rebootNode(args: RebootNodeCommandInput, options?: __HttpHandlerOptions): Promise<RebootNodeCommandOutput>;
-  public rebootNode(args: RebootNodeCommandInput, cb: (err: any, data?: RebootNodeCommandOutput) => void): void;
-  public rebootNode(
+  rebootNode(
     args: RebootNodeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DAXRequestOptions
+  ): Promise<RebootNodeCommandOutput>;
+  rebootNode(
+    args: RebootNodeCommandInput,
     cb: (err: any, data?: RebootNodeCommandOutput) => void
   ): void;
-  public rebootNode(
+  rebootNode(
     args: RebootNodeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RebootNodeCommandOutput) => void),
-    cb?: (err: any, data?: RebootNodeCommandOutput) => void
-  ): Promise<RebootNodeCommandOutput> | void {
-    const command = new RebootNodeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DAXRequestOptions,
+    cb: (err: any, data?: RebootNodeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Associates a set of tags with a DAX resource.  You can call <code>TagResource</code> up to 5 times per second, per
-   *             account. </p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DAXRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DAXRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the association of tags from a DAX resource. You can call
-   *             <code>UntagResource</code> up to 5 times per second, per account. </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies the settings for a DAX cluster. You can use this action to change one or
-   *             more cluster configuration parameters by specifying the parameters and the new
-   *             values.</p>
+   * @see {@link UpdateClusterCommand}
    */
-  public updateCluster(
+  updateCluster(
     args: UpdateClusterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<UpdateClusterCommandOutput>;
-  public updateCluster(
+  updateCluster(
     args: UpdateClusterCommandInput,
     cb: (err: any, data?: UpdateClusterCommandOutput) => void
   ): void;
-  public updateCluster(
+  updateCluster(
     args: UpdateClusterCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: UpdateClusterCommandOutput) => void
   ): void;
-  public updateCluster(
-    args: UpdateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClusterCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClusterCommandOutput) => void
-  ): Promise<UpdateClusterCommandOutput> | void {
-    const command = new UpdateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies the parameters of a parameter group. You can modify up to 20
-   *             parameters in a single request by submitting a list parameter name and value
-   *             pairs.</p>
+   * @see {@link UpdateParameterGroupCommand}
    */
-  public updateParameterGroup(
+  updateParameterGroup(
     args: UpdateParameterGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<UpdateParameterGroupCommandOutput>;
-  public updateParameterGroup(
+  updateParameterGroup(
     args: UpdateParameterGroupCommandInput,
     cb: (err: any, data?: UpdateParameterGroupCommandOutput) => void
   ): void;
-  public updateParameterGroup(
+  updateParameterGroup(
     args: UpdateParameterGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: UpdateParameterGroupCommandOutput) => void
   ): void;
-  public updateParameterGroup(
-    args: UpdateParameterGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateParameterGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateParameterGroupCommandOutput) => void
-  ): Promise<UpdateParameterGroupCommandOutput> | void {
-    const command = new UpdateParameterGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies an existing subnet group.</p>
+   * @see {@link UpdateSubnetGroupCommand}
    */
-  public updateSubnetGroup(
+  updateSubnetGroup(
     args: UpdateSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DAXRequestOptions
   ): Promise<UpdateSubnetGroupCommandOutput>;
-  public updateSubnetGroup(
+  updateSubnetGroup(
     args: UpdateSubnetGroupCommandInput,
     cb: (err: any, data?: UpdateSubnetGroupCommandOutput) => void
   ): void;
-  public updateSubnetGroup(
+  updateSubnetGroup(
     args: UpdateSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: DAXRequestOptions,
     cb: (err: any, data?: UpdateSubnetGroupCommandOutput) => void
   ): void;
-  public updateSubnetGroup(
-    args: UpdateSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSubnetGroupCommandOutput) => void
-  ): Promise<UpdateSubnetGroupCommandOutput> | void {
-    const command = new UpdateSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 }
+
+/**
+ * <p>DAX is a managed caching service engineered for Amazon DynamoDB. DAX dramatically speeds up database reads by caching
+ *             frequently-accessed data from DynamoDB, so applications can access that data
+ *             with sub-millisecond latency. You can create a DAX cluster easily, using
+ *             the Amazon Web Services Management Console. With a few simple modifications to your code, your
+ *             application can begin taking advantage of the DAX cluster and realize
+ *             significant improvements in read performance.</p>
+ * @public
+ */
+export class DAX extends DAXClient implements DAX {}
+createAggregatedClient(commands, DAX);

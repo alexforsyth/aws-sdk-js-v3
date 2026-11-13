@@ -1,172 +1,637 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateAccountRequest, CreateAccountResponse } from "../models/models_0";
-import { OrganizationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OrganizationsClient";
-import {
-  deserializeAws_json1_1CreateAccountCommand,
-  serializeAws_json1_1CreateAccountCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAccountRequest, CreateAccountResponse } from "../models/models_0";
+import { CreateAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAccountCommand}.
+ */
 export interface CreateAccountCommandInput extends CreateAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAccountCommand}.
+ */
 export interface CreateAccountCommandOutput extends CreateAccountResponse, __MetadataBearer {}
 
 /**
- * <p>Creates an AWS account that is automatically a member of the organization whose
- *             credentials made the request. This is an asynchronous request that AWS performs in the
+ * <p>Creates an Amazon Web Services account that is automatically a member of the organization whose
+ *             credentials made the request. This is an asynchronous request that Amazon Web Services performs in the
  *             background. Because <code>CreateAccount</code> operates asynchronously, it can return a
  *             successful completion message even though account initialization might still be in
  *             progress. You might need to wait a few minutes before you can successfully access the
  *             account. To check the status of the request, do one of the following:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>Use the <code>Id</code> member of the <code>CreateAccountStatus</code>
- *                     response element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p>
+ *                <p>Use the <code>Id</code> value of the <code>CreateAccountStatus</code> response
+ *                     element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p>
  *             </li>
  *             <li>
- *                 <p>Check the AWS CloudTrail log for the <code>CreateAccountResult</code> event. For
- *                     information on using AWS CloudTrail with AWS Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration">Logging and monitoring in AWS Organizations</a> in the
- *                         <i>AWS Organizations User Guide.</i>
- *                </p>
+ *                <p>Check the CloudTrail log for the <code>CreateAccountResult</code> event. For
+ *                     information on using CloudTrail with Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration">Logging and monitoring in Organizations</a> in the
+ *                         <i>Organizations User Guide</i>.</p>
  *             </li>
  *          </ul>
- *         <p>The user who calls the API to create an account must have the
+ *          <p>Additionally, the <code>AccountJoinedOrganization</code> event is logged in CloudTrail and
+ *             is available only in the management account's event history. This event includes
+ *             <code>joinedMethod:Created</code> and <code>joinedTime</code> fields to provide context
+ *             on how and when the account joined the organization.</p>
+ *          <p>The user who calls the API to create an account must have the
  *                 <code>organizations:CreateAccount</code> permission. If you enabled all features in
- *             the organization, AWS Organizations creates the required service-linked role named
- *                 <code>AWSServiceRoleForOrganizations</code>. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs">AWS Organizations and Service-Linked Roles</a> in the
- *                 <i>AWS Organizations User Guide</i>.</p>
- *         <p>If the request includes tags, then the requester must have the
+ *             the organization, Organizations creates the required service-linked role named
+ *                 <code>AWSServiceRoleForOrganizations</code>. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs">Organizations and service-linked roles</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
+ *          <p>If the request includes tags, then the requester must have the
  *                 <code>organizations:TagResource</code> permission.</p>
- *         <p>AWS Organizations preconfigures the new member account with a role (named
+ *          <p>Organizations preconfigures the new member account with a role (named
  *                 <code>OrganizationAccountAccessRole</code> by default) that grants users in the
  *             management account administrator permissions in the new member account. Principals in
- *             the management account can assume the role. AWS Organizations clones the company name and address
+ *             the management account can assume the role. Organizations clones the company name and address
  *             information for the new account from the organization's management account.</p>
- *         <p>This operation can be called only from the organization's management account.</p>
- *         <p>For more information about creating accounts, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating
- *                 an AWS Account in Your Organization</a> in the
- *                 <i>AWS Organizations User Guide.</i>
- *          </p>
- *         <important>
+ *          <p>You can only call this operation from the management account.</p>
+ *          <p>For more information about creating accounts, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating
+ *                 a member account in your organization</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
+ *          <important>
  *             <ul>
  *                <li>
- *                     <p>When you create an account in an organization using the AWS Organizations console,
- *                         API, or CLI commands, the information required for the account to operate as
- *                         a standalone account, such as a payment method and signing the end user
- *                         license agreement (EULA) is <i>not</i> automatically
- *                         collected. If you must remove an account from your organization later, you
- *                         can do so only after you provide the missing information. Follow the steps
- *                         at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info"> To leave an organization as a member account</a> in the
- *                             <i>AWS Organizations User Guide</i>.</p>
- *                 </li>
+ *                   <p>When you create an account in an organization using the Organizations console,
+ *                         API, or CLI commands, the information required for the account to operate
+ *                         as a standalone account, such as a payment method is
+ *                             <i>not</i> automatically collected. If you must remove an
+ *                         account from your organization later, you can do so only after you provide
+ *                         the missing information. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a>
+ *                         in the <i>Organizations User Guide</i>.</p>
+ *                </li>
  *                <li>
- *                     <p>If you get an exception that indicates that you exceeded your account
- *                         limits for the organization, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Support</a>.</p>
- *                 </li>
+ *                   <p>If you get an exception that indicates that you exceeded your account
+ *                         limits for the organization, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+ *                </li>
  *                <li>
- *                     <p>If you get an exception that indicates that the operation failed because
+ *                   <p>If you get an exception that indicates that the operation failed because
  *                         your organization is still initializing, wait one hour and then try again.
- *                         If the error persists, contact <a href="https://console.aws.amazon.com/support/home#/">AWS
- *                             Support</a>.</p>
- *                 </li>
+ *                         If the error persists, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+ *                </li>
  *                <li>
- *                     <p>Using <code>CreateAccount</code> to create multiple temporary accounts
- *                         isn't recommended. You can only close an account from the Billing and Cost
- *                         Management Console, and you must be signed in as the root user. For
- *                         information on the requirements and process for closing an account, see
- *                             <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing an
- *                             AWS Account</a> in the
- *                         <i>AWS Organizations User Guide</i>.</p>
- *                 </li>
+ *                   <p>It isn't recommended to use <code>CreateAccount</code> to create multiple
+ *                         temporary accounts, and using the <code>CreateAccount</code> API to close
+ *                         accounts is subject to a 30-day usage quota. For information on the
+ *                         requirements and process for closing an account, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
+ *                             account in your organization</a> in the
+ *                             <i>Organizations User Guide</i>.</p>
+ *                </li>
  *             </ul>
- *         </important>
- *         <note>
+ *          </important>
+ *          <note>
  *             <p>When you create a member account with this operation, you can choose whether to
  *                 create the account with the <b>IAM User and Role Access to
  *                     Billing Information</b> switch enabled. If you enable it, IAM users and
  *                 roles that have appropriate permissions can view billing information for the
  *                 account. If you disable it, only the account root user can access billing
  *                 information. For information about how to disable this switch for an account, see
- *                     <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html">Granting
- *                     Access to Your Billing Information and Tools</a>.</p>
- *         </note>
+ *                     <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#grantaccess">Granting access to
+ *                     your billing information and tools</a>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OrganizationsClient, CreateAccountCommand } from "@aws-sdk/client-organizations"; // ES Modules import
  * // const { OrganizationsClient, CreateAccountCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
+ * // import type { OrganizationsClientConfig } from "@aws-sdk/client-organizations";
+ * const config = {}; // type is OrganizationsClientConfig
  * const client = new OrganizationsClient(config);
+ * const input = { // CreateAccountRequest
+ *   Email: "STRING_VALUE", // required
+ *   AccountName: "STRING_VALUE", // required
+ *   RoleName: "STRING_VALUE",
+ *   IamUserAccessToBilling: "ALLOW" || "DENY",
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateAccountCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAccountResponse
+ * //   CreateAccountStatus: { // CreateAccountStatus
+ * //     Id: "STRING_VALUE",
+ * //     AccountName: "STRING_VALUE",
+ * //     State: "IN_PROGRESS" || "SUCCEEDED" || "FAILED",
+ * //     RequestedTimestamp: new Date("TIMESTAMP"),
+ * //     CompletedTimestamp: new Date("TIMESTAMP"),
+ * //     AccountId: "STRING_VALUE",
+ * //     GovCloudAccountId: "STRING_VALUE",
+ * //     FailureReason: "ACCOUNT_LIMIT_EXCEEDED" || "EMAIL_ALREADY_EXISTS" || "INVALID_ADDRESS" || "INVALID_EMAIL" || "CONCURRENT_ACCOUNT_MODIFICATION" || "INTERNAL_FAILURE" || "GOVCLOUD_ACCOUNT_ALREADY_EXISTS" || "MISSING_BUSINESS_VALIDATION" || "FAILED_BUSINESS_VALIDATION" || "PENDING_BUSINESS_VALIDATION" || "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION" || "UNKNOWN_BUSINESS_VALIDATION" || "MISSING_PAYMENT_INSTRUMENT" || "INVALID_PAYMENT_INSTRUMENT" || "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateAccountCommandInput - {@link CreateAccountCommandInput}
+ * @returns {@link CreateAccountCommandOutput}
  * @see {@link CreateAccountCommandInput} for command's `input` shape.
  * @see {@link CreateAccountCommandOutput} for command's `response` shape.
- * @see {@link OrganizationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OrganizationsClientResolvedConfig | config} for OrganizationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that
+ *             is making the request must have at least one IAM permissions policy attached that
+ *             grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the
+ *                 <i>IAM User Guide</i>.</p>
+ *
+ * @throws {@link AWSOrganizationsNotInUseException} (client fault)
+ *  <p>Your account isn't a member of an organization. To make this request, you must use the
+ *             credentials of an account that belongs to an organization.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The target of the operation is currently being modified by a different request. Try
+ *             again later.</p>
+ *
+ * @throws {@link ConstraintViolationException} (client fault)
+ *  <p>Performing this operation violates a minimum or maximum value limit. For example,
+ *             attempting to remove the last service control policy (SCP) from an OU or root, inviting
+ *             or creating too many accounts to the organization, or attaching too many policies to an
+ *             account, OU, or root. This exception includes a reason that contains additional
+ *             information about the violated limit:</p>
+ *          <note>
+ *             <p>Some of the reasons in the following list might not be applicable to this specific
+ *                 API or operation.</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove the management
+ *                     account from the organization. You can't remove the management account. Instead,
+ *                     after you remove all member accounts, delete the organization itself.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an
+ *                     account from the organization that doesn't yet have enough information to exist
+ *                     as a standalone account. This account requires you to first complete phone
+ *                     verification. Follow the steps at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master">Removing a member account from your organization</a> in the
+ *                         <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     accounts that can be in progress at a time.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your
+ *                     account isn't fully active. You must complete the account setup before you
+ *                     create an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY: Your account setup isn't
+ *                     complete or your account isn't fully active to invite or accept a Billing
+ *                     Transfer invitation.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: You cannot delete organization due to an ongoing responsibility transfer process. For example, a pending invitation or an in-progress transfer. To delete the organization, you must resolve the current transfer process.</p>
+ *             </li>
+ *             <li>
+ *                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
+ *                     of accounts in an organization. If you need more accounts, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a> to
+ *                     request an increase in your limit. </p>
+ *                <p>Or the number of invitations that you tried to send would cause you to exceed
+ *                     the limit of accounts in your organization. Send fewer invitations or contact
+ *                     Amazon Web Services Support to request an increase in the number of accounts.</p>
+ *                <note>
+ *                   <p>Deleted and closed accounts still count toward your limit.</p>
+ *                </note>
+ *                <important>
+ *                   <p>If you get this exception when running a command immediately after
+ *                         creating the organization, wait one hour and try again. After an hour, if
+ *                         the command continues to fail with this error, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+ *                </important>
+ *             </li>
+ *             <li>
+ *                <p>ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED: Your organization has
+ *                     more than 5000 accounts, and you can only use the standard migration process for
+ *                     organizations with less than 5000 accounts. Use the assisted migration process
+ *                     to enable all features mode, or create a support case for assistance if you are
+ *                     unable to use assisted migration.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR: You cannot
+ *                     register a suspended account as a delegated administrator.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register
+ *                     the management account of the organization as a delegated administrator for an
+ *                     Amazon Web Services service integrated with Organizations. You can designate only a member account as a
+ *                     delegated administrator.</p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_CLOSE_MANAGEMENT_ACCOUNT: You attempted to close the management
+ *                     account. To close the management account for the organization, you must first
+ *                     either remove or close all member accounts in the organization. Follow standard
+ *                     account closure process using root credentials.​ </p>
+ *             </li>
+ *             <li>
+ *                <p>CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an
+ *                     account that is registered as a delegated administrator for a service integrated
+ *                     with your organization. To complete this operation, you must first deregister
+ *                     this account as a delegated administrator. </p>
+ *             </li>
+ *             <li>
+ *                <p>CLOSE_ACCOUNT_QUOTA_EXCEEDED: You have exceeded close account quota for the
+ *                     past 30 days. </p>
+ *             </li>
+ *             <li>
+ *                <p>CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     accounts that you can close at a time. ​ </p>
+ *             </li>
+ *             <li>
+ *                <p>CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an
+ *                     organization in the specified region, you must enable all features mode.</p>
+ *             </li>
+ *             <li>
+ *                <p>DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an
+ *                     Amazon Web Services account as a delegated administrator for an Amazon Web Services service that already has
+ *                     a delegated administrator. To complete this operation, you must first deregister
+ *                     any existing delegated administrators for this service.</p>
+ *             </li>
+ *             <li>
+ *                <p>EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for
+ *                     a limited period of time. You must resubmit the request and generate a new
+ *                     verification code.</p>
+ *             </li>
+ *             <li>
+ *                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
+ *                     handshakes that you can send in one day.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PAYMENT_INSTRUMENT: You cannot remove an account because no supported
+ *                     payment method is associated with the account. Amazon Web Services does not support cards
+ *                     issued by financial institutions in Russia or Belarus. For more information, see
+ *                         <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html">Managing your
+ *                         Amazon Web Services payments</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in
+ *                     this organization, you first must migrate the organization's management account
+ *                     to the marketplace that corresponds to the management account's address. All
+ *                     accounts in an organization must be associated with the same marketplace.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the Amazon Web Services Regions in
+ *                     China. To create an organization, the master must have a valid business license.
+ *                     For more information, contact customer support.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must
+ *                     first provide a valid contact address and phone number for the management
+ *                     account. Then try the operation again.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the
+ *                     management account must have an associated account in the Amazon Web Services GovCloud
+ *                     (US-West) Region. For more information, see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html">Organizations</a>
+ *                     in the
+ *                     <i>Amazon Web Services GovCloud User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with
+ *                     this management account, you first must associate a valid payment instrument,
+ *                     such as a credit card, with the account. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a> in
+ *                     the <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to
+ *                     register more delegated administrators than allowed for the service principal.
+ *                 </p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number
+ *                     of policies of a certain type that can be attached to an entity at one
+ *                     time.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags allowed on this
+ *                     resource. </p>
+ *             </li>
+ *             <li>
+ *                <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with
+ *                     this member account, you first must associate a valid payment instrument, such
+ *                     as a credit card, with the account. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a> in
+ *                     the <i>Organizations User Guide</i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy
+ *                     from an entity that would cause the entity to have fewer than the minimum number
+ *                     of policies of a certain type required.</p>
+ *             </li>
+ *             <li>
+ *                <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation
+ *                     that requires the organization to be configured to support all features. An
+ *                     organization that supports only consolidated billing features can't perform this
+ *                     operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many
+ *                     levels deep.</p>
+ *             </li>
+ *             <li>
+ *                <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of OUs that you
+ *                     can have in an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger
+ *                     than the maximum size.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies
+ *                     that you can have in an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>POLICY_TYPE_ENABLED_FOR_THIS_SERVICE: You attempted to disable service access
+ *                     before you disabled the policy type (for example, SECURITYHUB_POLICY). To
+ *                     complete this operation, you must first disable the policy type.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION: You have exceeded your inbound
+ *                     transfers limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION: You have exceeded the maximum length of your
+ *                     transfer chain.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION: You have exceeded your outbound
+ *                     transfers limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION: You have exceeded the maximum
+ *                     number of inbound transfers allowed in a transfer chain.</p>
+ *             </li>
+ *             <li>
+ *                <p>SERVICE_ACCESS_NOT_ENABLED:</p>
+ *                <ul>
+ *                   <li>
+ *                      <p>You attempted to register a delegated administrator before you enabled
+ *                             service access. Call the <code>EnableAWSServiceAccess</code> API
+ *                             first.</p>
+ *                   </li>
+ *                   <li>
+ *                      <p>You attempted to enable a policy type before you enabled service
+ *                             access. Call the <code>EnableAWSServiceAccess</code> API first.</p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags
+ *                     that are not compliant with the tag policy requirements for this account.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS: The source organization cannot accept
+ *                     this transfer invitation because it is marked for deletion.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS: The source organization cannot accept
+ *                     this transfer invitation because target organization is marked for deletion.</p>
+ *             </li>
+ *             <li>
+ *                <p>TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED: You cannot update this transfer
+ *                     because it is no longer active. Transfers that have been withdrawn, declined,
+ *                     expired, or cancelled cannot be modified.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNMET_BILLING_PREREQUISITE: Your current billing configuration is unsupported.
+ *                     Contact Amazon Web Services Support for assistance.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNSUPPORTED_PRICING: Ineligible for Billing Transfer. Your organization is
+ *                     subject to a pricing agreement with Amazon Web Services that Billing Transfer does not
+ *                     support.</p>
+ *             </li>
+ *             <li>
+ *                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at
+ *                     least four days after the account was created. Invited accounts aren't subject
+ *                     to this waiting period.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link FinalizingOrganizationException} (client fault)
+ *  <p>Organizations couldn't perform the operation because your organization hasn't finished
+ *             initializing. This can take up to an hour. Try again later. If after one hour you
+ *             continue to receive this error, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The requested operation failed because you provided invalid values for one or more of
+ *             the request parameters. This exception includes a reason that contains additional
+ *             information about the violated limit:</p>
+ *          <note>
+ *             <p>Some of the reasons in the following list might not be applicable to this specific
+ *                 API or operation.</p>
+ *          </note>
+ *          <ul>
+ *             <li>
+ *                <p>CALLER_REQUIRED_FIELD_MISSING: At least one of the required field is missing: Caller Account Id, Management Account Id or Organization Id.</p>
+ *             </li>
+ *             <li>
+ *                <p>DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
+ *                     entity.</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_NOT_END_OF_MONTH: You provided an invalid end date. The end date must be the end
+ *                     of the last day of the month (23.59.59.999).</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_TOO_EARLY: You provided an invalid end date. The end date is too early.</p>
+ *             </li>
+ *             <li>
+ *                <p>END_DATE_TOO_LATE: You provided an invalid end date. The end date is too late.</p>
+ *             </li>
+ *             <li>
+ *                <p>IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web Services and can't be
+ *                     modified.</p>
+ *             </li>
+ *             <li>
+ *                <p>INPUT_REQUIRED: You must include a value for all required parameters.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email address for the
+ *                     invited account owner.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_END_DATE: The selected withdrawal date doesn't meet the minimum notice
+ *                     period required by your partner agreement. Visit Amazon Web Services Partner Central or contact your Amazon Web Services
+ *                     Channel Partner for help.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ENUM: You specified an invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type string.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid
+ *                     characters.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least
+ *                     one invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PAGINATION_TOKEN: Get the value for the <code>NextToken</code>
+ *                     parameter from the response to a previous call of the operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account,
+ *                     organization, or email) as a party.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PATTERN: You provided a value that doesn't match the required
+ *                     pattern. The service also validates your free-text field values against
+ *                     common cross-site scripting (XSS) patterns and rejects requests that
+ *                     contain matching values.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match
+ *                     the required pattern.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_PRINCIPAL: You specified an invalid principal element in the
+ *                     policy.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name
+ *                     can't begin with the reserved prefix <code>AWSServiceRoleFor</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_START_DATE: The start date doesn't meet the minimum requirements.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource Name
+ *                     (ARN) for the organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p>
+ *             </li>
+ *             <li>
+ *                <p>INVALID_SYSTEM_TAGS_PARAMETER: You specified a tag key that is a system tag.
+ *                     You can’t add, edit, or delete system tag keys because they're reserved for
+ *                     Amazon Web Services use. System tags don’t count against your tags per resource limit.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the
+ *                     operation.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than
+ *                     allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value
+ *                     than allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than
+ *                     allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value
+ *                     than allowed.</p>
+ *             </li>
+ *             <li>
+ *                <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between
+ *                     entities in the same root.</p>
+ *             </li>
+ *             <li>
+ *                <p>NON_DETACHABLE_POLICY: You can't detach this Amazon Web Services Managed Policy.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_NOT_BEGINNING_OF_DAY: You provided an invalid start date. The start date must
+ *                     be the beginning of the day (00:00:00.000).</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_NOT_BEGINNING_OF_MONTH: You provided an invalid start date. The start date must
+ *                     be the first day of the month.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_TOO_EARLY: You provided an invalid start date. The start date is too early.</p>
+ *             </li>
+ *             <li>
+ *                <p>START_DATE_TOO_LATE: You provided an invalid start date. The start date is too late.</p>
+ *             </li>
+ *             <li>
+ *                <p>TARGET_NOT_SUPPORTED: You can't perform the specified operation on that target
+ *                     entity.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
+ *                     recognized.</p>
+ *             </li>
+ *             <li>
+ *                <p>UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER: You provided a value that is not supported
+ *                 by this operation.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>Organizations can't complete your request because of an internal service error. Try again
+ *             later.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>You have sent too many requests in too short a period of time. The quota helps protect
+ *             against denial-of-service attacks. Try again later.</p>
+ *          <p>For information about quotas that affect Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html">Quotas for Organizations</a> in the
+ *                 <i>Organizations User Guide</i>.</p>
+ *
+ * @throws {@link UnsupportedAPIEndpointException} (client fault)
+ *  <p>This action isn't available in the current Amazon Web Services Region.</p>
+ *
+ * @throws {@link OrganizationsServiceException}
+ * <p>Base exception class for all service exceptions from Organizations service.</p>
+ *
+ *
+ * @example To create a new account that is automatically part of the organization
+ * ```javascript
+ * // The owner of an organization creates a member account in the organization. The following example shows that when the organization owner creates the member account, the account is preconfigured with the name "Production Account" and an owner email address of susan@example.com.  An IAM role is automatically created using the default name because the roleName parameter is not used. AWS Organizations sends Susan a "Welcome to AWS" email:
+ *
+ *
+ * const input = {
+ *   AccountName: "Production Account",
+ *   Email: "susan@example.com"
+ * };
+ * const command = new CreateAccountCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   CreateAccountStatus: {
+ *     Id: "car-examplecreateaccountrequestid111",
+ *     State: "IN_PROGRESS"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateAccountCommand extends $Command<
-  CreateAccountCommandInput,
-  CreateAccountCommandOutput,
-  OrganizationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OrganizationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAccountCommandInput, CreateAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OrganizationsClient";
-    const commandName = "CreateAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAccountResponse.filterSensitiveLog,
+export class CreateAccountCommand extends command<CreateAccountCommandInput, CreateAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAccount",
+  CreateAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAccountRequest;
+      output: CreateAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAccountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateAccountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAccountCommandOutput> {
-    return deserializeAws_json1_1CreateAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAccountCommandInput;
+      output: CreateAccountCommandOutput;
+    };
+  };
 }

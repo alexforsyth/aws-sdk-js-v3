@@ -1,100 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmpClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmpClient";
-import { CreateAlertManagerDefinitionRequest, CreateAlertManagerDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateAlertManagerDefinitionCommand,
-  serializeAws_restJson1CreateAlertManagerDefinitionCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface CreateAlertManagerDefinitionCommandInput extends CreateAlertManagerDefinitionRequest {}
-export interface CreateAlertManagerDefinitionCommandOutput
-  extends CreateAlertManagerDefinitionResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAlertManagerDefinitionRequest, CreateAlertManagerDefinitionResponse } from "../models/models_0";
+import { CreateAlertManagerDefinition$ } from "../schemas/schemas_0";
 
 /**
- * Create an alert manager definition.
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAlertManagerDefinitionCommand}.
+ */
+export interface CreateAlertManagerDefinitionCommandInput extends CreateAlertManagerDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAlertManagerDefinitionCommand}.
+ */
+export interface CreateAlertManagerDefinitionCommandOutput extends CreateAlertManagerDefinitionResponse, __MetadataBearer {}
+
+/**
+ * <p>The <code>CreateAlertManagerDefinition</code> operation creates the alert manager definition in a workspace. If a workspace already has an alert manager definition, don't use this operation to update it. Instead, use <code>PutAlertManagerDefinition</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmpClient, CreateAlertManagerDefinitionCommand } from "@aws-sdk/client-amp"; // ES Modules import
  * // const { AmpClient, CreateAlertManagerDefinitionCommand } = require("@aws-sdk/client-amp"); // CommonJS import
+ * // import type { AmpClientConfig } from "@aws-sdk/client-amp";
+ * const config = {}; // type is AmpClientConfig
  * const client = new AmpClient(config);
+ * const input = { // CreateAlertManagerDefinitionRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new CreateAlertManagerDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAlertManagerDefinitionResponse
+ * //   status: { // AlertManagerDefinitionStatus
+ * //     statusCode: "STRING_VALUE", // required
+ * //     statusReason: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateAlertManagerDefinitionCommandInput - {@link CreateAlertManagerDefinitionCommandInput}
+ * @returns {@link CreateAlertManagerDefinitionCommandOutput}
  * @see {@link CreateAlertManagerDefinitionCommandInput} for command's `input` shape.
  * @see {@link CreateAlertManagerDefinitionCommandOutput} for command's `response` shape.
- * @see {@link AmpClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmpClientResolvedConfig | config} for AmpClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request would cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resources that doesn't exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Completing the request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link AmpServiceException}
+ * <p>Base exception class for all service exceptions from Amp service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAlertManagerDefinitionCommand extends $Command<
-  CreateAlertManagerDefinitionCommandInput,
-  CreateAlertManagerDefinitionCommandOutput,
-  AmpClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAlertManagerDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmpClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAlertManagerDefinitionCommandInput, CreateAlertManagerDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmpClient";
-    const commandName = "CreateAlertManagerDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAlertManagerDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAlertManagerDefinitionResponse.filterSensitiveLog,
+export class CreateAlertManagerDefinitionCommand extends command<CreateAlertManagerDefinitionCommandInput, CreateAlertManagerDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAlertManagerDefinition",
+  CreateAlertManagerDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAlertManagerDefinitionRequest;
+      output: CreateAlertManagerDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAlertManagerDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateAlertManagerDefinitionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateAlertManagerDefinitionCommandOutput> {
-    return deserializeAws_restJson1CreateAlertManagerDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAlertManagerDefinitionCommandInput;
+      output: CreateAlertManagerDefinitionCommandOutput;
+    };
+  };
 }

@@ -1,35 +1,36 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetBucketVersioningOutput, GetBucketVersioningRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetBucketVersioningCommand,
-  serializeAws_restXmlGetBucketVersioningCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type { GetBucketVersioningOutput, GetBucketVersioningRequest } from "../models/models_0";
+import { GetBucketVersioning$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBucketVersioningCommand}.
+ */
 export interface GetBucketVersioningCommandInput extends GetBucketVersioningRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBucketVersioningCommand}.
+ */
 export interface GetBucketVersioningCommandOutput extends GetBucketVersioningOutput, __MetadataBearer {}
 
 /**
- * <p>Returns the versioning state of a bucket.</p>
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Returns the versioning state of a bucket.</p>
  *          <p>To retrieve the versioning state of a bucket, you must be the bucket owner.</p>
- *
- *          <p>This implementation also returns the MFA Delete status of the versioning state. If the
- *          MFA Delete status is <code>enabled</code>, the bucket owner must use an authentication
- *          device to change the versioning state of the bucket.</p>
- *
+ *          <p>This implementation also returns the MFA Delete status of the versioning state. If the MFA Delete
+ *       status is <code>enabled</code>, the bucket owner must use an authentication device to change the
+ *       versioning state of the bucket.</p>
  *          <p>The following operations are related to <code>GetBucketVersioning</code>:</p>
  *          <ul>
  *             <li>
@@ -48,74 +49,73 @@ export interface GetBucketVersioningCommandOutput extends GetBucketVersioningOut
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, GetBucketVersioningCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, GetBucketVersioningCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // GetBucketVersioningRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new GetBucketVersioningCommand(input);
  * const response = await client.send(command);
+ * // { // GetBucketVersioningOutput
+ * //   Status: "Enabled" || "Suspended",
+ * //   MFADelete: "Enabled" || "Disabled",
+ * // };
+ *
  * ```
  *
+ * @param GetBucketVersioningCommandInput - {@link GetBucketVersioningCommandInput}
+ * @returns {@link GetBucketVersioningCommandOutput}
  * @see {@link GetBucketVersioningCommandInput} for command's `input` shape.
  * @see {@link GetBucketVersioningCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @example To get bucket versioning configuration
+ * ```javascript
+ * // The following example retrieves bucket versioning configuration.
+ * const input = {
+ *   Bucket: "examplebucket"
+ * };
+ * const command = new GetBucketVersioningCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   MFADelete: "Disabled",
+ *   Status: "Enabled"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetBucketVersioningCommand extends $Command<
-  GetBucketVersioningCommandInput,
-  GetBucketVersioningCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBucketVersioningCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBucketVersioningCommandInput, GetBucketVersioningCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "GetBucketVersioningCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBucketVersioningRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBucketVersioningOutput.filterSensitiveLog,
+export class GetBucketVersioningCommand extends command<GetBucketVersioningCommandInput, GetBucketVersioningCommandOutput>(
+  _ep3,
+  _mw0,
+  "GetBucketVersioning",
+  GetBucketVersioning$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBucketVersioningRequest;
+      output: GetBucketVersioningOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBucketVersioningCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetBucketVersioningCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBucketVersioningCommandOutput> {
-    return deserializeAws_restXmlGetBucketVersioningCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBucketVersioningCommandInput;
+      output: GetBucketVersioningCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MemoryDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MemoryDBClient";
-import { DeleteSubnetGroupRequest, DeleteSubnetGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteSubnetGroupCommand,
-  serializeAws_json1_1DeleteSubnetGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSubnetGroupRequest, DeleteSubnetGroupResponse } from "../models/models_0";
+import { DeleteSubnetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSubnetGroupCommand}.
+ */
 export interface DeleteSubnetGroupCommandInput extends DeleteSubnetGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSubnetGroupCommand}.
+ */
 export interface DeleteSubnetGroupCommandOutput extends DeleteSubnetGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface DeleteSubnetGroupCommandOutput extends DeleteSubnetGroupRespons
  * ```javascript
  * import { MemoryDBClient, DeleteSubnetGroupCommand } from "@aws-sdk/client-memorydb"; // ES Modules import
  * // const { MemoryDBClient, DeleteSubnetGroupCommand } = require("@aws-sdk/client-memorydb"); // CommonJS import
+ * // import type { MemoryDBClientConfig } from "@aws-sdk/client-memorydb";
+ * const config = {}; // type is MemoryDBClientConfig
  * const client = new MemoryDBClient(config);
+ * const input = { // DeleteSubnetGroupRequest
+ *   SubnetGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteSubnetGroupCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteSubnetGroupResponse
+ * //   SubnetGroup: { // SubnetGroup
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     Subnets: [ // SubnetList
+ * //       { // Subnet
+ * //         Identifier: "STRING_VALUE",
+ * //         AvailabilityZone: { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //         SupportedNetworkTypes: [ // NetworkTypeList
+ * //           "ipv4" || "ipv6" || "dual_stack",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     ARN: "STRING_VALUE",
+ * //     SupportedNetworkTypes: [
+ * //       "ipv4" || "ipv6" || "dual_stack",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteSubnetGroupCommandInput - {@link DeleteSubnetGroupCommandInput}
+ * @returns {@link DeleteSubnetGroupCommandOutput}
  * @see {@link DeleteSubnetGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteSubnetGroupCommandOutput} for command's `response` shape.
- * @see {@link MemoryDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MemoryDBClientResolvedConfig | config} for MemoryDBClient's `config` shape.
  *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The required service-linked role was not found.</p>
+ *
+ * @throws {@link SubnetGroupInUseFault} (client fault)
+ *  <p>The subnet group is currently in use and cannot be deleted.</p>
+ *
+ * @throws {@link SubnetGroupNotFoundFault} (client fault)
+ *  <p>The specified subnet group does not exist.</p>
+ *
+ * @throws {@link MemoryDBServiceException}
+ * <p>Base exception class for all service exceptions from MemoryDB service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSubnetGroupCommand extends $Command<
-  DeleteSubnetGroupCommandInput,
-  DeleteSubnetGroupCommandOutput,
-  MemoryDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSubnetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MemoryDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSubnetGroupCommandInput, DeleteSubnetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MemoryDBClient";
-    const commandName = "DeleteSubnetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSubnetGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSubnetGroupResponse.filterSensitiveLog,
+export class DeleteSubnetGroupCommand extends command<DeleteSubnetGroupCommandInput, DeleteSubnetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSubnetGroup",
+  DeleteSubnetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSubnetGroupRequest;
+      output: DeleteSubnetGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSubnetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteSubnetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSubnetGroupCommandOutput> {
-    return deserializeAws_json1_1DeleteSubnetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSubnetGroupCommandInput;
+      output: DeleteSubnetGroupCommandOutput;
+    };
+  };
 }

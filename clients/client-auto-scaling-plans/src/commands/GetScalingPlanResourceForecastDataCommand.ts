@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingPlansClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingPlansClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetScalingPlanResourceForecastDataRequest,
   GetScalingPlanResourceForecastDataResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetScalingPlanResourceForecastDataCommand,
-  serializeAws_json1_1GetScalingPlanResourceForecastDataCommand,
-} from "../protocols/Aws_json1_1";
+import { GetScalingPlanResourceForecastData$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetScalingPlanResourceForecastDataCommand}.
+ */
 export interface GetScalingPlanResourceForecastDataCommandInput extends GetScalingPlanResourceForecastDataRequest {}
-export interface GetScalingPlanResourceForecastDataCommandOutput
-  extends GetScalingPlanResourceForecastDataResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetScalingPlanResourceForecastDataCommand}.
+ */
+export interface GetScalingPlanResourceForecastDataCommandOutput extends GetScalingPlanResourceForecastDataResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the forecast data for a scalable resource.</p>
@@ -36,74 +35,65 @@ export interface GetScalingPlanResourceForecastDataCommandOutput
  * ```javascript
  * import { AutoScalingPlansClient, GetScalingPlanResourceForecastDataCommand } from "@aws-sdk/client-auto-scaling-plans"; // ES Modules import
  * // const { AutoScalingPlansClient, GetScalingPlanResourceForecastDataCommand } = require("@aws-sdk/client-auto-scaling-plans"); // CommonJS import
+ * // import type { AutoScalingPlansClientConfig } from "@aws-sdk/client-auto-scaling-plans";
+ * const config = {}; // type is AutoScalingPlansClientConfig
  * const client = new AutoScalingPlansClient(config);
+ * const input = { // GetScalingPlanResourceForecastDataRequest
+ *   ScalingPlanName: "STRING_VALUE", // required
+ *   ScalingPlanVersion: Number("long"), // required
+ *   ServiceNamespace: "autoscaling" || "ecs" || "ec2" || "rds" || "dynamodb", // required
+ *   ResourceId: "STRING_VALUE", // required
+ *   ScalableDimension: "autoscaling:autoScalingGroup:DesiredCapacity" || "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "rds:cluster:ReadReplicaCount" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits", // required
+ *   ForecastDataType: "CapacityForecast" || "LoadForecast" || "ScheduledActionMinCapacity" || "ScheduledActionMaxCapacity", // required
+ *   StartTime: new Date("TIMESTAMP"), // required
+ *   EndTime: new Date("TIMESTAMP"), // required
+ * };
  * const command = new GetScalingPlanResourceForecastDataCommand(input);
  * const response = await client.send(command);
+ * // { // GetScalingPlanResourceForecastDataResponse
+ * //   Datapoints: [ // Datapoints // required
+ * //     { // Datapoint
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //       Value: Number("double"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetScalingPlanResourceForecastDataCommandInput - {@link GetScalingPlanResourceForecastDataCommandInput}
+ * @returns {@link GetScalingPlanResourceForecastDataCommandOutput}
  * @see {@link GetScalingPlanResourceForecastDataCommandInput} for command's `input` shape.
  * @see {@link GetScalingPlanResourceForecastDataCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingPlansClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingPlansClientResolvedConfig | config} for AutoScalingPlansClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an internal error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception was thrown for a validation issue. Review the parameters provided.</p>
+ *
+ * @throws {@link AutoScalingPlansServiceException}
+ * <p>Base exception class for all service exceptions from AutoScalingPlans service.</p>
+ *
+ *
+ * @public
  */
-export class GetScalingPlanResourceForecastDataCommand extends $Command<
-  GetScalingPlanResourceForecastDataCommandInput,
-  GetScalingPlanResourceForecastDataCommandOutput,
-  AutoScalingPlansClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetScalingPlanResourceForecastDataCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingPlansClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetScalingPlanResourceForecastDataCommandInput, GetScalingPlanResourceForecastDataCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingPlansClient";
-    const commandName = "GetScalingPlanResourceForecastDataCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetScalingPlanResourceForecastDataRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetScalingPlanResourceForecastDataResponse.filterSensitiveLog,
+export class GetScalingPlanResourceForecastDataCommand extends command<GetScalingPlanResourceForecastDataCommandInput, GetScalingPlanResourceForecastDataCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetScalingPlanResourceForecastData",
+  GetScalingPlanResourceForecastData$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetScalingPlanResourceForecastDataRequest;
+      output: GetScalingPlanResourceForecastDataResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetScalingPlanResourceForecastDataCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetScalingPlanResourceForecastDataCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetScalingPlanResourceForecastDataCommandOutput> {
-    return deserializeAws_json1_1GetScalingPlanResourceForecastDataCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetScalingPlanResourceForecastDataCommandInput;
+      output: GetScalingPlanResourceForecastDataCommandOutput;
+    };
+  };
 }

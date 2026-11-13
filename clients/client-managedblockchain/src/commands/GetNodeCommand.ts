@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ManagedBlockchainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ManagedBlockchainClient";
-import { GetNodeInput, GetNodeOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetNodeCommand,
-  serializeAws_restJson1GetNodeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetNodeInput, GetNodeOutput } from "../models/models_0";
+import { GetNode$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetNodeCommand}.
+ */
 export interface GetNodeCommandInput extends GetNodeInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetNodeCommand}.
+ */
 export interface GetNodeCommandOutput extends GetNodeOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +30,105 @@ export interface GetNodeCommandOutput extends GetNodeOutput, __MetadataBearer {}
  * ```javascript
  * import { ManagedBlockchainClient, GetNodeCommand } from "@aws-sdk/client-managedblockchain"; // ES Modules import
  * // const { ManagedBlockchainClient, GetNodeCommand } = require("@aws-sdk/client-managedblockchain"); // CommonJS import
+ * // import type { ManagedBlockchainClientConfig } from "@aws-sdk/client-managedblockchain";
+ * const config = {}; // type is ManagedBlockchainClientConfig
  * const client = new ManagedBlockchainClient(config);
+ * const input = { // GetNodeInput
+ *   NetworkId: "STRING_VALUE", // required
+ *   MemberId: "STRING_VALUE",
+ *   NodeId: "STRING_VALUE", // required
+ * };
  * const command = new GetNodeCommand(input);
  * const response = await client.send(command);
+ * // { // GetNodeOutput
+ * //   Node: { // Node
+ * //     NetworkId: "STRING_VALUE",
+ * //     MemberId: "STRING_VALUE",
+ * //     Id: "STRING_VALUE",
+ * //     InstanceType: "STRING_VALUE",
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     FrameworkAttributes: { // NodeFrameworkAttributes
+ * //       Fabric: { // NodeFabricAttributes
+ * //         PeerEndpoint: "STRING_VALUE",
+ * //         PeerEventEndpoint: "STRING_VALUE",
+ * //       },
+ * //       Ethereum: { // NodeEthereumAttributes
+ * //         HttpEndpoint: "STRING_VALUE",
+ * //         WebSocketEndpoint: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     LogPublishingConfiguration: { // NodeLogPublishingConfiguration
+ * //       Fabric: { // NodeFabricLogPublishingConfiguration
+ * //         ChaincodeLogs: { // LogConfigurations
+ * //           Cloudwatch: { // LogConfiguration
+ * //             Enabled: true || false,
+ * //           },
+ * //         },
+ * //         PeerLogs: {
+ * //           Cloudwatch: {
+ * //             Enabled: true || false,
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     StateDB: "LevelDB" || "CouchDB",
+ * //     Status: "CREATING" || "AVAILABLE" || "UNHEALTHY" || "CREATE_FAILED" || "UPDATING" || "DELETING" || "DELETED" || "FAILED" || "INACCESSIBLE_ENCRYPTION_KEY",
+ * //     CreationDate: new Date("TIMESTAMP"),
+ * //     Tags: { // OutputTagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     Arn: "STRING_VALUE",
+ * //     KmsKeyArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetNodeCommandInput - {@link GetNodeCommandInput}
+ * @returns {@link GetNodeCommandOutput}
  * @see {@link GetNodeCommandInput} for command's `input` shape.
  * @see {@link GetNodeCommandOutput} for command's `response` shape.
- * @see {@link ManagedBlockchainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ManagedBlockchainClientResolvedConfig | config} for ManagedBlockchainClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource doesn't exist. It may have been deleted or referenced incorrectly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is
+ *          throttling requests. The most common source of throttling errors is
+ *          creating resources that exceed your service limit for this resource type.
+ *          Request a limit increase or delete unused resources if possible.</p>
+ *
+ * @throws {@link ManagedBlockchainServiceException}
+ * <p>Base exception class for all service exceptions from ManagedBlockchain service.</p>
+ *
+ *
+ * @public
  */
-export class GetNodeCommand extends $Command<
-  GetNodeCommandInput,
-  GetNodeCommandOutput,
-  ManagedBlockchainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetNodeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ManagedBlockchainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetNodeCommandInput, GetNodeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ManagedBlockchainClient";
-    const commandName = "GetNodeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetNodeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetNodeOutput.filterSensitiveLog,
+export class GetNodeCommand extends command<GetNodeCommandInput, GetNodeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetNode",
+  GetNode$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetNodeInput;
+      output: GetNodeOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetNodeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetNodeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetNodeCommandOutput> {
-    return deserializeAws_restJson1GetNodeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetNodeCommandInput;
+      output: GetNodeCommandOutput;
+    };
+  };
 }

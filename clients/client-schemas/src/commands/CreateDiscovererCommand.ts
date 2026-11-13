@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateDiscovererRequest, CreateDiscovererResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateDiscovererCommand,
-  serializeAws_restJson1CreateDiscovererCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDiscovererRequest, CreateDiscovererResponse } from "../models/models_0";
+import { CreateDiscoverer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDiscovererCommand}.
+ */
 export interface CreateDiscovererCommandInput extends CreateDiscovererRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDiscovererCommand}.
+ */
 export interface CreateDiscovererCommandOutput extends CreateDiscovererResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface CreateDiscovererCommandOutput extends CreateDiscovererResponse,
  * ```javascript
  * import { SchemasClient, CreateDiscovererCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, CreateDiscovererCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // CreateDiscovererRequest
+ *   Description: "STRING_VALUE",
+ *   SourceArn: "STRING_VALUE", // required
+ *   CrossAccount: true || false,
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateDiscovererCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDiscovererResponse
+ * //   Description: "STRING_VALUE",
+ * //   DiscovererArn: "STRING_VALUE",
+ * //   DiscovererId: "STRING_VALUE",
+ * //   SourceArn: "STRING_VALUE",
+ * //   State: "STARTED" || "STOPPED",
+ * //   CrossAccount: true || false,
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDiscovererCommandInput - {@link CreateDiscovererCommandInput}
+ * @returns {@link CreateDiscovererCommandOutput}
  * @see {@link CreateDiscovererCommandInput} for command's `input` shape.
  * @see {@link CreateDiscovererCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ConflictException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDiscovererCommand extends $Command<
-  CreateDiscovererCommandInput,
-  CreateDiscovererCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDiscovererCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDiscovererCommandInput, CreateDiscovererCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "CreateDiscovererCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDiscovererRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDiscovererResponse.filterSensitiveLog,
+export class CreateDiscovererCommand extends command<CreateDiscovererCommandInput, CreateDiscovererCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDiscoverer",
+  CreateDiscoverer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDiscovererRequest;
+      output: CreateDiscovererResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDiscovererCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateDiscovererCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDiscovererCommandOutput> {
-    return deserializeAws_restJson1CreateDiscovererCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDiscovererCommandInput;
+      output: CreateDiscovererCommandOutput;
+    };
+  };
 }

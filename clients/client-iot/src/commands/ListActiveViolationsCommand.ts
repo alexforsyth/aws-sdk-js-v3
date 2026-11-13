@@ -1,96 +1,165 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListActiveViolationsRequest, ListActiveViolationsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListActiveViolationsCommand,
-  serializeAws_restJson1ListActiveViolationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListActiveViolationsRequest, ListActiveViolationsResponse } from "../models/models_1";
+import { ListActiveViolations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListActiveViolationsCommand}.
+ */
 export interface ListActiveViolationsCommandInput extends ListActiveViolationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListActiveViolationsCommand}.
+ */
 export interface ListActiveViolationsCommandOutput extends ListActiveViolationsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the active violations for a given Device Defender security profile.</p>
+ * <note>
+ *             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+ *          </note>
+ *          <p>Lists the active violations for a given Device Defender security profile.</p>
  *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListActiveViolations</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTClient, ListActiveViolationsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListActiveViolationsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListActiveViolationsRequest
+ *   thingName: "STRING_VALUE",
+ *   securityProfileName: "STRING_VALUE",
+ *   behaviorCriteriaType: "STATIC" || "STATISTICAL" || "MACHINE_LEARNING",
+ *   listSuppressedAlerts: true || false,
+ *   verificationState: "FALSE_POSITIVE" || "BENIGN_POSITIVE" || "TRUE_POSITIVE" || "UNKNOWN",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListActiveViolationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListActiveViolationsResponse
+ * //   activeViolations: [ // ActiveViolations
+ * //     { // ActiveViolation
+ * //       violationId: "STRING_VALUE",
+ * //       thingName: "STRING_VALUE",
+ * //       securityProfileName: "STRING_VALUE",
+ * //       behavior: { // Behavior
+ * //         name: "STRING_VALUE", // required
+ * //         metric: "STRING_VALUE",
+ * //         metricDimension: { // MetricDimension
+ * //           dimensionName: "STRING_VALUE", // required
+ * //           operator: "IN" || "NOT_IN",
+ * //         },
+ * //         criteria: { // BehaviorCriteria
+ * //           comparisonOperator: "less-than" || "less-than-equals" || "greater-than" || "greater-than-equals" || "in-cidr-set" || "not-in-cidr-set" || "in-port-set" || "not-in-port-set" || "in-set" || "not-in-set",
+ * //           value: { // MetricValue
+ * //             count: Number("long"),
+ * //             cidrs: [ // Cidrs
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             ports: [ // Ports
+ * //               Number("int"),
+ * //             ],
+ * //             number: Number("double"),
+ * //             numbers: [ // NumberList
+ * //               Number("double"),
+ * //             ],
+ * //             strings: [ // StringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           durationSeconds: Number("int"),
+ * //           consecutiveDatapointsToAlarm: Number("int"),
+ * //           consecutiveDatapointsToClear: Number("int"),
+ * //           statisticalThreshold: { // StatisticalThreshold
+ * //             statistic: "STRING_VALUE",
+ * //           },
+ * //           mlDetectionConfig: { // MachineLearningDetectionConfig
+ * //             confidenceLevel: "LOW" || "MEDIUM" || "HIGH", // required
+ * //           },
+ * //         },
+ * //         suppressAlerts: true || false,
+ * //         exportMetric: true || false,
+ * //       },
+ * //       lastViolationValue: {
+ * //         count: Number("long"),
+ * //         cidrs: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         ports: [
+ * //           Number("int"),
+ * //         ],
+ * //         number: Number("double"),
+ * //         numbers: [
+ * //           Number("double"),
+ * //         ],
+ * //         strings: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       violationEventAdditionalInfo: { // ViolationEventAdditionalInfo
+ * //         confidenceLevel: "LOW" || "MEDIUM" || "HIGH",
+ * //       },
+ * //       verificationState: "FALSE_POSITIVE" || "BENIGN_POSITIVE" || "TRUE_POSITIVE" || "UNKNOWN",
+ * //       verificationStateDescription: "STRING_VALUE",
+ * //       lastViolationTime: new Date("TIMESTAMP"),
+ * //       violationStartTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListActiveViolationsCommandInput - {@link ListActiveViolationsCommandInput}
+ * @returns {@link ListActiveViolationsCommandOutput}
  * @see {@link ListActiveViolationsCommandInput} for command's `input` shape.
  * @see {@link ListActiveViolationsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListActiveViolationsCommand extends $Command<
-  ListActiveViolationsCommandInput,
-  ListActiveViolationsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListActiveViolationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListActiveViolationsCommandInput, ListActiveViolationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListActiveViolationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListActiveViolationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListActiveViolationsResponse.filterSensitiveLog,
+export class ListActiveViolationsCommand extends command<ListActiveViolationsCommandInput, ListActiveViolationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListActiveViolations",
+  ListActiveViolations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListActiveViolationsRequest;
+      output: ListActiveViolationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListActiveViolationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListActiveViolationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListActiveViolationsCommandOutput> {
-    return deserializeAws_restJson1ListActiveViolationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListActiveViolationsCommandInput;
+      output: ListActiveViolationsCommandOutput;
+    };
+  };
 }

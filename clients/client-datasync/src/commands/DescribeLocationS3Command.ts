@@ -1,95 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { DescribeLocationS3Request, DescribeLocationS3Response } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeLocationS3Command,
-  serializeAws_json1_1DescribeLocationS3Command,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeLocationS3Request, DescribeLocationS3Response } from "../models/models_0";
+import { DescribeLocationS3$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeLocationS3Command}.
+ */
 export interface DescribeLocationS3CommandInput extends DescribeLocationS3Request {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeLocationS3Command}.
+ */
 export interface DescribeLocationS3CommandOutput extends DescribeLocationS3Response, __MetadataBearer {}
 
 /**
- * <p>Returns metadata, such as bucket name, about an Amazon S3 bucket location.</p>
+ * <p>Provides details about how an DataSync transfer location for an S3 bucket
+ *       is configured.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, DescribeLocationS3Command } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, DescribeLocationS3Command } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // DescribeLocationS3Request
+ *   LocationArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeLocationS3Command(input);
  * const response = await client.send(command);
+ * // { // DescribeLocationS3Response
+ * //   LocationArn: "STRING_VALUE",
+ * //   LocationUri: "STRING_VALUE",
+ * //   S3StorageClass: "STANDARD" || "STANDARD_IA" || "ONEZONE_IA" || "INTELLIGENT_TIERING" || "GLACIER" || "DEEP_ARCHIVE" || "OUTPOSTS" || "GLACIER_INSTANT_RETRIEVAL",
+ * //   S3Config: { // S3Config
+ * //     BucketAccessRoleArn: "STRING_VALUE", // required
+ * //   },
+ * //   AgentArns: [ // AgentArnList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeLocationS3CommandInput - {@link DescribeLocationS3CommandInput}
+ * @returns {@link DescribeLocationS3CommandOutput}
  * @see {@link DescribeLocationS3CommandInput} for command's `input` shape.
  * @see {@link DescribeLocationS3CommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeLocationS3Command extends $Command<
-  DescribeLocationS3CommandInput,
-  DescribeLocationS3CommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeLocationS3CommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeLocationS3CommandInput, DescribeLocationS3CommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "DescribeLocationS3Command";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeLocationS3Request.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeLocationS3Response.filterSensitiveLog,
+export class DescribeLocationS3Command extends command<DescribeLocationS3CommandInput, DescribeLocationS3CommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeLocationS3",
+  DescribeLocationS3$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeLocationS3Request;
+      output: DescribeLocationS3Response;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeLocationS3CommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeLocationS3Command(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeLocationS3CommandOutput> {
-    return deserializeAws_json1_1DescribeLocationS3Command(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeLocationS3CommandInput;
+      output: DescribeLocationS3CommandOutput;
+    };
+  };
 }

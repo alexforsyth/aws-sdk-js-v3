@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageVodClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageVodClient";
-import { DeleteAssetRequest, DeleteAssetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAssetCommand,
-  serializeAws_restJson1DeleteAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAssetRequest, DeleteAssetResponse } from "../models/models_0";
+import { DeleteAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAssetCommand}.
+ */
 export interface DeleteAssetCommandInput extends DeleteAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAssetCommand}.
+ */
 export interface DeleteAssetCommandOutput extends DeleteAssetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface DeleteAssetCommandOutput extends DeleteAssetResponse, __Metadat
  * ```javascript
  * import { MediaPackageVodClient, DeleteAssetCommand } from "@aws-sdk/client-mediapackage-vod"; // ES Modules import
  * // const { MediaPackageVodClient, DeleteAssetCommand } = require("@aws-sdk/client-mediapackage-vod"); // CommonJS import
+ * // import type { MediaPackageVodClientConfig } from "@aws-sdk/client-mediapackage-vod";
+ * const config = {}; // type is MediaPackageVodClientConfig
  * const client = new MediaPackageVodClient(config);
+ * const input = { // DeleteAssetRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteAssetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAssetCommandInput - {@link DeleteAssetCommandInput}
+ * @returns {@link DeleteAssetCommandOutput}
  * @see {@link DeleteAssetCommandInput} for command's `input` shape.
  * @see {@link DeleteAssetCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageVodClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageVodClientResolvedConfig | config} for MediaPackageVodClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageVodServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackageVod service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAssetCommand extends $Command<
-  DeleteAssetCommandInput,
-  DeleteAssetCommandOutput,
-  MediaPackageVodClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageVodClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAssetCommandInput, DeleteAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageVodClient";
-    const commandName = "DeleteAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAssetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAssetResponse.filterSensitiveLog,
+export class DeleteAssetCommand extends command<DeleteAssetCommandInput, DeleteAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAsset",
+  DeleteAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAssetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAssetCommandOutput> {
-    return deserializeAws_restJson1DeleteAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAssetCommandInput;
+      output: DeleteAssetCommandOutput;
+    };
+  };
 }

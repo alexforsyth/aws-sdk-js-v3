@@ -1,95 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { APIGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../APIGatewayClient";
-import { Deployments, GetDeploymentsRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDeploymentsCommand,
-  serializeAws_restJson1GetDeploymentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Deployments, GetDeploymentsRequest } from "../models/models_0";
+import { GetDeployments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDeploymentsCommand}.
+ */
 export interface GetDeploymentsCommandInput extends GetDeploymentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDeploymentsCommand}.
+ */
 export interface GetDeploymentsCommandOutput extends Deployments, __MetadataBearer {}
 
 /**
- * <p>Gets information about a <a>Deployments</a> collection.</p>
+ * <p>Gets information about a Deployments collection.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { APIGatewayClient, GetDeploymentsCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
  * // const { APIGatewayClient, GetDeploymentsCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * // import type { APIGatewayClientConfig } from "@aws-sdk/client-api-gateway";
+ * const config = {}; // type is APIGatewayClientConfig
  * const client = new APIGatewayClient(config);
+ * const input = { // GetDeploymentsRequest
+ *   restApiId: "STRING_VALUE", // required
+ *   position: "STRING_VALUE",
+ *   limit: Number("int"),
+ * };
  * const command = new GetDeploymentsCommand(input);
  * const response = await client.send(command);
+ * // { // Deployments
+ * //   items: [ // ListOfDeployment
+ * //     { // Deployment
+ * //       id: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       createdDate: new Date("TIMESTAMP"),
+ * //       apiSummary: { // PathToMapOfMethodSnapshot
+ * //         "<keys>": { // MapOfMethodSnapshot
+ * //           "<keys>": { // MethodSnapshot
+ * //             authorizationType: "STRING_VALUE",
+ * //             apiKeyRequired: true || false,
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   position: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDeploymentsCommandInput - {@link GetDeploymentsCommandInput}
+ * @returns {@link GetDeploymentsCommandOutput}
  * @see {@link GetDeploymentsCommandInput} for command's `input` shape.
  * @see {@link GetDeploymentsCommandOutput} for command's `response` shape.
- * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for APIGatewayClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource is not found. Make sure that the request URI is correct.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The requested service is not available. For details see the accompanying error message. Retry after the specified time period.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request has reached its throttling limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request is denied because the caller has insufficient permissions.</p>
+ *
+ * @throws {@link APIGatewayServiceException}
+ * <p>Base exception class for all service exceptions from APIGateway service.</p>
+ *
+ *
+ * @public
  */
-export class GetDeploymentsCommand extends $Command<
-  GetDeploymentsCommandInput,
-  GetDeploymentsCommandOutput,
-  APIGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDeploymentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: APIGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDeploymentsCommandInput, GetDeploymentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "APIGatewayClient";
-    const commandName = "GetDeploymentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDeploymentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Deployments.filterSensitiveLog,
+export class GetDeploymentsCommand extends command<GetDeploymentsCommandInput, GetDeploymentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDeployments",
+  GetDeployments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDeploymentsRequest;
+      output: Deployments;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDeploymentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDeploymentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDeploymentsCommandOutput> {
-    return deserializeAws_restJson1GetDeploymentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDeploymentsCommandInput;
+      output: GetDeploymentsCommandOutput;
+    };
+  };
 }

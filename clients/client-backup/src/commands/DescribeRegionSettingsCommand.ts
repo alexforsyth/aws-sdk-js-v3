@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { DescribeRegionSettingsInput, DescribeRegionSettingsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeRegionSettingsCommand,
-  serializeAws_restJson1DescribeRegionSettingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRegionSettingsInput, DescribeRegionSettingsOutput } from "../models/models_0";
+import { DescribeRegionSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRegionSettingsCommand}.
+ */
 export interface DescribeRegionSettingsCommandInput extends DescribeRegionSettingsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRegionSettingsCommand}.
+ */
 export interface DescribeRegionSettingsCommandOutput extends DescribeRegionSettingsOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +33,53 @@ export interface DescribeRegionSettingsCommandOutput extends DescribeRegionSetti
  * ```javascript
  * import { BackupClient, DescribeRegionSettingsCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, DescribeRegionSettingsCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = {};
  * const command = new DescribeRegionSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRegionSettingsOutput
+ * //   ResourceTypeOptInPreference: { // ResourceTypeOptInPreference
+ * //     "<keys>": true || false,
+ * //   },
+ * //   ResourceTypeManagementPreference: { // ResourceTypeManagementPreference
+ * //     "<keys>": true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeRegionSettingsCommandInput - {@link DescribeRegionSettingsCommandInput}
+ * @returns {@link DescribeRegionSettingsCommandOutput}
  * @see {@link DescribeRegionSettingsCommandInput} for command's `input` shape.
  * @see {@link DescribeRegionSettingsCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRegionSettingsCommand extends $Command<
-  DescribeRegionSettingsCommandInput,
-  DescribeRegionSettingsCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRegionSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRegionSettingsCommandInput, DescribeRegionSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "DescribeRegionSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRegionSettingsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRegionSettingsOutput.filterSensitiveLog,
+export class DescribeRegionSettingsCommand extends command<DescribeRegionSettingsCommandInput, DescribeRegionSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRegionSettings",
+  DescribeRegionSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeRegionSettingsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRegionSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeRegionSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRegionSettingsCommandOutput> {
-    return deserializeAws_restJson1DescribeRegionSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRegionSettingsCommandInput;
+      output: DescribeRegionSettingsCommandOutput;
+    };
+  };
 }

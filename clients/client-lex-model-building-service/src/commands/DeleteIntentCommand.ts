@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { DeleteIntentRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteIntentCommand,
-  serializeAws_restJson1DeleteIntentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteIntentRequest } from "../models/models_0";
+import { DeleteIntent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIntentCommand}.
+ */
 export interface DeleteIntentCommandInput extends DeleteIntentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIntentCommand}.
+ */
 export interface DeleteIntentCommandOutput extends __MetadataBearer {}
 
 /**
@@ -41,76 +38,91 @@ export interface DeleteIntentCommandOutput extends __MetadataBearer {}
  *         again, repeat until the intent has no references and the call to
  *           <code>DeleteIntent</code> is successful. </p>
  *          </note>
- *
  *          <p> This operation requires permission for the
  *         <code>lex:DeleteIntent</code> action. </p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, DeleteIntentCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, DeleteIntentCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // DeleteIntentRequest
+ *   name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteIntentCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteIntentCommandInput - {@link DeleteIntentCommandInput}
+ * @returns {@link DeleteIntentCommandOutput}
  * @see {@link DeleteIntentCommandInput} for command's `input` shape.
  * @see {@link DeleteIntentCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> There was a conflict processing the request. Try your request
+ *       again. </p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The resource that you are attempting to delete is referred to by
+ *       another resource. Use this information to remove references to the
+ *       resource that you are trying to delete.</p>
+ *          <p>The body of the exception contains a JSON object that describes the
+ *       resource.</p>
+ *          <p>
+ *             <code>{ "resourceType": BOT | BOTALIAS | BOTCHANNEL |
+ *         INTENT,</code>
+ *          </p>
+ *          <p>
+ *             <code>"resourceReference": {</code>
+ *          </p>
+ *          <p>
+ *             <code>"name": <i>string</i>, "version":
+ *           <i>string</i> } }</code>
+ *          </p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteIntentCommand extends $Command<
-  DeleteIntentCommandInput,
-  DeleteIntentCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteIntentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteIntentCommandInput, DeleteIntentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "DeleteIntentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteIntentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteIntentCommand extends command<DeleteIntentCommandInput, DeleteIntentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIntent",
+  DeleteIntent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIntentRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteIntentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteIntentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteIntentCommandOutput> {
-    return deserializeAws_restJson1DeleteIntentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteIntentCommandInput;
+      output: DeleteIntentCommandOutput;
+    };
+  };
 }

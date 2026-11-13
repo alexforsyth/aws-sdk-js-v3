@@ -1,30 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CopyProductInput, CopyProductOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CopyProductCommand,
-  serializeAws_json1_1CopyProductCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CopyProductInput, CopyProductOutput } from "../models/models_0";
+import { CopyProduct$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CopyProductCommand}.
+ */
 export interface CopyProductCommandInput extends CopyProductInput {}
+/**
+ * @public
+ *
+ * The output of {@link CopyProductCommand}.
+ */
 export interface CopyProductCommandOutput extends CopyProductOutput, __MetadataBearer {}
 
 /**
- * <p>Copies the specified source product to the specified target product or a new product.</p>
- *          <p>You can copy a product to the same account or another account.
- *          You can copy a product to the same region or another region.</p>
+ * <p>Copies the specified source product to the specified target product or a new
+ *          product.</p>
+ *          <p>You can copy a product to the same account or another account. You can copy a product
+ *          to the same Region or another Region. If you copy a product to another account, you must
+ *          first share the product in a portfolio using <a>CreatePortfolioShare</a>.</p>
  *          <p>This operation is performed asynchronously. To track the progress of the
  *          operation, use <a>DescribeCopyProductStatus</a>.</p>
  * @example
@@ -32,68 +35,65 @@ export interface CopyProductCommandOutput extends CopyProductOutput, __MetadataB
  * ```javascript
  * import { ServiceCatalogClient, CopyProductCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, CopyProductCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // CopyProductInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   SourceProductArn: "STRING_VALUE", // required
+ *   TargetProductId: "STRING_VALUE",
+ *   TargetProductName: "STRING_VALUE",
+ *   SourceProvisioningArtifactIdentifiers: [ // SourceProvisioningArtifactProperties
+ *     { // SourceProvisioningArtifactPropertiesMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   ],
+ *   CopyOptions: [ // CopyOptions
+ *     "CopyTags",
+ *   ],
+ *   IdempotencyToken: "STRING_VALUE", // required
+ * };
  * const command = new CopyProductCommand(input);
  * const response = await client.send(command);
+ * // { // CopyProductOutput
+ * //   CopyProductToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CopyProductCommandInput - {@link CopyProductCommandInput}
+ * @returns {@link CopyProductCommandOutput}
  * @see {@link CopyProductCommandInput} for command's `input` shape.
  * @see {@link CopyProductCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class CopyProductCommand extends $Command<
-  CopyProductCommandInput,
-  CopyProductCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CopyProductCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CopyProductCommandInput, CopyProductCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "CopyProductCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CopyProductInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CopyProductOutput.filterSensitiveLog,
+export class CopyProductCommand extends command<CopyProductCommandInput, CopyProductCommandOutput>(
+  _ep0,
+  _mw0,
+  "CopyProduct",
+  CopyProduct$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CopyProductInput;
+      output: CopyProductOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CopyProductCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CopyProductCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CopyProductCommandOutput> {
-    return deserializeAws_json1_1CopyProductCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CopyProductCommandInput;
+      output: CopyProductCommandOutput;
+    };
+  };
 }

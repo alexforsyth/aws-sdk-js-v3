@@ -1,0 +1,339 @@
+======================== minimal response ========================
+[status] 400
+  
+content-type: application/x-amz-json-1.0
+
+[Uint8Array (json)]
+{
+  "__type": "com.amazonaws.dynamodb#TransactionCanceledException"
+}
+
+
+--- [error name & message] ---
+TransactionCanceledException: UnknownError
+
+--- [error object] ---
+{
+  $fault: "client",
+  $retryable: (undefined),
+  $metadata: {
+    httpStatusCode: (number) 400,
+    requestId: (undefined),
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  },
+  name: "TransactionCanceledException",
+  CancellationReasons: (undefined),
+  message: "UnknownError",
+  __type: "com.amazonaws.dynamodb#TransactionCanceledException"
+}
+
+======================== w/ optional fields ========================
+[status] 400
+  
+content-type: application/x-amz-json-1.0
+
+[Uint8Array (json)]
+{
+  "__type": "com.amazonaws.dynamodb#TransactionCanceledException",
+  "Message": "__Message__",
+  "CancellationReasons": [
+    {
+      "Item": {
+        "key1": {
+          "NS": [
+            "__member__",
+            "__member__",
+            "__member__"
+          ]
+        },
+        "key2": {
+          "BS": [
+            "AQAAAQ==",
+            "AQAAAQ==",
+            "AQAAAQ=="
+          ]
+        },
+        "key3": {
+          "M": {
+            "key1": {
+              "NULL": false
+            },
+            "key2": {
+              "BOOL": false
+            },
+            "key3": {
+              "S": "__S__"
+            }
+          }
+        }
+      },
+      "Code": "__Code__",
+      "Message": "__Message__"
+    },
+    {
+      "Item": {
+        "key1": {
+          "BS": [
+            "AQAAAQ==",
+            "AQAAAQ==",
+            "AQAAAQ=="
+          ]
+        },
+        "key2": {
+          "M": {
+            "key1": {
+              "NULL": false
+            },
+            "key2": {
+              "BOOL": false
+            },
+            "key3": {
+              "S": "__S__"
+            }
+          }
+        },
+        "key3": {
+          "L": [
+            {
+              "M": {
+                "key1": {},
+                "key2": {},
+                "key3": {}
+              }
+            },
+            {
+              "L": [
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              "NULL": false
+            }
+          ]
+        }
+      },
+      "Code": "__Code__",
+      "Message": "__Message__"
+    },
+    {
+      "Item": {
+        "key1": {
+          "M": {
+            "key1": {
+              "NULL": false
+            },
+            "key2": {
+              "BOOL": false
+            },
+            "key3": {
+              "S": "__S__"
+            }
+          }
+        },
+        "key2": {
+          "L": [
+            {
+              "M": {
+                "key1": {},
+                "key2": {},
+                "key3": {}
+              }
+            },
+            {
+              "L": [
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              "NULL": false
+            }
+          ]
+        },
+        "key3": {
+          "NULL": false
+        }
+      },
+      "Code": "__Code__",
+      "Message": "__Message__"
+    }
+  ]
+}
+
+
+--- [error name & message] ---
+TransactionCanceledException: __Message__
+
+--- [error object] ---
+{
+  $fault: "client",
+  $retryable: (undefined),
+  $metadata: {
+    httpStatusCode: (number) 400,
+    requestId: (undefined),
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  },
+  name: "TransactionCanceledException",
+  CancellationReasons: [
+    {
+      Item: {
+        key1: {
+          NS: [
+            "__member__",
+            "__member__",
+            "__member__"
+          ]
+        },
+        key2: {
+          BS: [
+            (Uint8Array) bytes[1, 0, 0, 1],
+            (Uint8Array) bytes[1, 0, 0, 1],
+            (Uint8Array) bytes[1, 0, 0, 1]
+          ]
+        },
+        key3: {
+          M: {
+            key1: {
+              NULL: (boolean) false
+            },
+            key2: {
+              BOOL: (boolean) false
+            },
+            key3: {
+              S: "__S__"
+            }
+          }
+        }
+      },
+      Code: "__Code__",
+      Message: "__Message__"
+    },
+    {
+      Item: {
+        key1: {
+          BS: [
+            (Uint8Array) bytes[1, 0, 0, 1],
+            (Uint8Array) bytes[1, 0, 0, 1],
+            (Uint8Array) bytes[1, 0, 0, 1]
+          ]
+        },
+        key2: {
+          M: {
+            key1: {
+              NULL: (boolean) false
+            },
+            key2: {
+              BOOL: (boolean) false
+            },
+            key3: {
+              S: "__S__"
+            }
+          }
+        },
+        key3: {
+          L: [
+            {
+              M: {
+                key1: {},
+                key2: {},
+                key3: {}
+              }
+            },
+            {
+              L: [
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              NULL: (boolean) false
+            }
+          ]
+        }
+      },
+      Code: "__Code__",
+      Message: "__Message__"
+    },
+    {
+      Item: {
+        key1: {
+          M: {
+            key1: {
+              NULL: (boolean) false
+            },
+            key2: {
+              BOOL: (boolean) false
+            },
+            key3: {
+              S: "__S__"
+            }
+          }
+        },
+        key2: {
+          L: [
+            {
+              M: {
+                key1: {},
+                key2: {},
+                key3: {}
+              }
+            },
+            {
+              L: [
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              NULL: (boolean) false
+            }
+          ]
+        },
+        key3: {
+          NULL: (boolean) false
+        }
+      },
+      Code: "__Code__",
+      Message: "__Message__"
+    }
+  ],
+  message: "__Message__",
+  __type: "com.amazonaws.dynamodb#TransactionCanceledException"
+}
+
+======================== frontend error ========================
+[status] 500
+  
+content-type: text/html
+
+[Uint8Array (text)]
+An unmodeled error occurred in a front end layer.
+
+
+--- [error name & message] ---
+SyntaxError: Unexpected token 'A', "An unmodel"... is not valid JSON
+  Deserialization error: to see the raw response, inspect the hidden field {error}.$response on this object.
+
+--- [error object] ---
+{
+  $metadata: {
+    httpStatusCode: (number) 500,
+    requestId: (undefined),
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+

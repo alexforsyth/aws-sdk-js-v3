@@ -1,103 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { DescribeEnvironmentManagedActionsRequest, DescribeEnvironmentManagedActionsResult } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEnvironmentManagedActionsCommand,
-  serializeAws_queryDescribeEnvironmentManagedActionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeEnvironmentManagedActionsRequest,
+  DescribeEnvironmentManagedActionsResult,
+} from "../models/models_0";
+import { DescribeEnvironmentManagedActions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEnvironmentManagedActionsCommand}.
+ */
 export interface DescribeEnvironmentManagedActionsCommandInput extends DescribeEnvironmentManagedActionsRequest {}
-export interface DescribeEnvironmentManagedActionsCommandOutput
-  extends DescribeEnvironmentManagedActionsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEnvironmentManagedActionsCommand}.
+ */
+export interface DescribeEnvironmentManagedActionsCommandOutput extends DescribeEnvironmentManagedActionsResult, __MetadataBearer {}
 
 /**
  * <p>Lists an environment's upcoming and in-progress managed actions.</p>
+ *          <p>This action only returns information about environments that the calling principle has IAM permissions to access. For example, consider a case where
+ *       a user only has permission to access one of three environments. When the user calls this action, the response will only include the one environment that
+ *       the user has permission to access instead of all three environments. If the user doesn’t have access to any of the environments an empty result is
+ *       returned.</p>
+ *          <note>
+ *             <p>The <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html">AWSElasticBeanstalkReadOnly</a>
+ *         managed policy allows operators to view information about resources related to Elastic Beanstalk environments. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html"> Managing Elastic Beanstalk user policies</a> in the <i>Elastic Beanstalk Developer
+ *           Guide</i>. For detailed instructions to attach a policy to a user or group, see the section <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed"> Controlling access with managed policies</a> in the
+ *         same topic.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, DescribeEnvironmentManagedActionsCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, DescribeEnvironmentManagedActionsCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // DescribeEnvironmentManagedActionsRequest
+ *   EnvironmentName: "STRING_VALUE",
+ *   EnvironmentId: "STRING_VALUE",
+ *   Status: "Scheduled" || "Pending" || "Running" || "Unknown",
+ * };
  * const command = new DescribeEnvironmentManagedActionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEnvironmentManagedActionsResult
+ * //   ManagedActions: [ // ManagedActions
+ * //     { // ManagedAction
+ * //       ActionId: "STRING_VALUE",
+ * //       ActionDescription: "STRING_VALUE",
+ * //       ActionType: "InstanceRefresh" || "PlatformUpdate" || "Unknown",
+ * //       Status: "Scheduled" || "Pending" || "Running" || "Unknown",
+ * //       WindowStartTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEnvironmentManagedActionsCommandInput - {@link DescribeEnvironmentManagedActionsCommandInput}
+ * @returns {@link DescribeEnvironmentManagedActionsCommandOutput}
  * @see {@link DescribeEnvironmentManagedActionsCommandInput} for command's `input` shape.
  * @see {@link DescribeEnvironmentManagedActionsCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkServiceException} (client fault)
+ *  <p>A generic service exception has occurred.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEnvironmentManagedActionsCommand extends $Command<
-  DescribeEnvironmentManagedActionsCommandInput,
-  DescribeEnvironmentManagedActionsCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEnvironmentManagedActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEnvironmentManagedActionsCommandInput, DescribeEnvironmentManagedActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "DescribeEnvironmentManagedActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEnvironmentManagedActionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEnvironmentManagedActionsResult.filterSensitiveLog,
+export class DescribeEnvironmentManagedActionsCommand extends command<DescribeEnvironmentManagedActionsCommandInput, DescribeEnvironmentManagedActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEnvironmentManagedActions",
+  DescribeEnvironmentManagedActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEnvironmentManagedActionsRequest;
+      output: DescribeEnvironmentManagedActionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeEnvironmentManagedActionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEnvironmentManagedActionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEnvironmentManagedActionsCommandOutput> {
-    return deserializeAws_queryDescribeEnvironmentManagedActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEnvironmentManagedActionsCommandInput;
+      output: DescribeEnvironmentManagedActionsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GroundStationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GroundStationClient";
-import { ListGroundStationsRequest, ListGroundStationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListGroundStationsCommand,
-  serializeAws_restJson1ListGroundStationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGroundStationsRequest, ListGroundStationsResponse } from "../models/models_0";
+import { ListGroundStations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGroundStationsCommand}.
+ */
 export interface ListGroundStationsCommandInput extends ListGroundStationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListGroundStationsCommand}.
+ */
 export interface ListGroundStationsCommandOutput extends ListGroundStationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface ListGroundStationsCommandOutput extends ListGroundStationsRespo
  * ```javascript
  * import { GroundStationClient, ListGroundStationsCommand } from "@aws-sdk/client-groundstation"; // ES Modules import
  * // const { GroundStationClient, ListGroundStationsCommand } = require("@aws-sdk/client-groundstation"); // CommonJS import
+ * // import type { GroundStationClientConfig } from "@aws-sdk/client-groundstation";
+ * const config = {}; // type is GroundStationClientConfig
  * const client = new GroundStationClient(config);
+ * const input = { // ListGroundStationsRequest
+ *   satelliteId: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListGroundStationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListGroundStationsResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   groundStationList: [ // GroundStationList
+ * //     { // GroundStationData
+ * //       groundStationId: "STRING_VALUE",
+ * //       groundStationName: "STRING_VALUE",
+ * //       region: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListGroundStationsCommandInput - {@link ListGroundStationsCommandInput}
+ * @returns {@link ListGroundStationsCommandOutput}
  * @see {@link ListGroundStationsCommandInput} for command's `input` shape.
  * @see {@link ListGroundStationsCommandOutput} for command's `response` shape.
- * @see {@link GroundStationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GroundStationClientResolvedConfig | config} for GroundStationClient's `config` shape.
  *
+ * @throws {@link DependencyException} (server fault)
+ *  <p>Dependency encountered an error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource was not found.</p>
+ *
+ * @throws {@link GroundStationServiceException}
+ * <p>Base exception class for all service exceptions from GroundStation service.</p>
+ *
+ *
+ * @public
  */
-export class ListGroundStationsCommand extends $Command<
-  ListGroundStationsCommandInput,
-  ListGroundStationsCommandOutput,
-  GroundStationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGroundStationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GroundStationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGroundStationsCommandInput, ListGroundStationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GroundStationClient";
-    const commandName = "ListGroundStationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGroundStationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGroundStationsResponse.filterSensitiveLog,
+export class ListGroundStationsCommand extends command<ListGroundStationsCommandInput, ListGroundStationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGroundStations",
+  ListGroundStations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGroundStationsRequest;
+      output: ListGroundStationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGroundStationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListGroundStationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGroundStationsCommandOutput> {
-    return deserializeAws_restJson1ListGroundStationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGroundStationsCommandInput;
+      output: ListGroundStationsCommandOutput;
+    };
+  };
 }

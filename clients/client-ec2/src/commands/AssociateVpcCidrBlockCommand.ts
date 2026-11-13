@@ -1,103 +1,111 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AssociateVpcCidrBlockRequest, AssociateVpcCidrBlockResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AssociateVpcCidrBlockCommand,
-  serializeAws_ec2AssociateVpcCidrBlockCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateVpcCidrBlockRequest, AssociateVpcCidrBlockResult } from "../models/models_0";
+import { AssociateVpcCidrBlock$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateVpcCidrBlockCommand}.
+ */
 export interface AssociateVpcCidrBlockCommandInput extends AssociateVpcCidrBlockRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateVpcCidrBlockCommand}.
+ */
 export interface AssociateVpcCidrBlockCommandOutput extends AssociateVpcCidrBlockResult, __MetadataBearer {}
 
 /**
  * <p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block,
  *             an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that
- *             you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>). The IPv6 CIDR block size is fixed
- *             at /56.</p>
- *         <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6
+ *             you provisioned through bring your own IP addresses (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html">BYOIP</a>).</p>
+ *          <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6
  *             pool, or an Amazon-provided IPv6 CIDR block.</p>
- *         <p>For more information about associating CIDR blocks with your VPC and applicable
- *             restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing">VPC and subnet sizing</a> in the
- *                 <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ *          <p>For more information about associating CIDR blocks with your VPC and applicable
+ *             restrictions, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html">IP addressing for your VPCs and subnets</a>
+ *             in the <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, AssociateVpcCidrBlockCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AssociateVpcCidrBlockCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AssociateVpcCidrBlockRequest
+ *   CidrBlock: "STRING_VALUE",
+ *   Ipv6CidrBlockNetworkBorderGroup: "STRING_VALUE",
+ *   Ipv6Pool: "STRING_VALUE",
+ *   Ipv6CidrBlock: "STRING_VALUE",
+ *   Ipv4IpamPoolId: "STRING_VALUE",
+ *   Ipv4NetmaskLength: Number("int"),
+ *   Ipv6IpamPoolId: "STRING_VALUE",
+ *   Ipv6NetmaskLength: Number("int"),
+ *   VpcId: "STRING_VALUE", // required
+ *   AmazonProvidedIpv6CidrBlock: true || false,
+ * };
  * const command = new AssociateVpcCidrBlockCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateVpcCidrBlockResult
+ * //   Ipv6CidrBlockAssociation: { // VpcIpv6CidrBlockAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     Ipv6CidrBlock: "STRING_VALUE",
+ * //     Ipv6CidrBlockState: { // VpcCidrBlockState
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //     NetworkBorderGroup: "STRING_VALUE",
+ * //     Ipv6Pool: "STRING_VALUE",
+ * //     Ipv6AddressAttribute: "public" || "private",
+ * //     IpSource: "amazon" || "byoip" || "none",
+ * //   },
+ * //   CidrBlockAssociation: { // VpcCidrBlockAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     CidrBlock: "STRING_VALUE",
+ * //     CidrBlockState: {
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   VpcId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AssociateVpcCidrBlockCommandInput - {@link AssociateVpcCidrBlockCommandInput}
+ * @returns {@link AssociateVpcCidrBlockCommandOutput}
  * @see {@link AssociateVpcCidrBlockCommandInput} for command's `input` shape.
  * @see {@link AssociateVpcCidrBlockCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateVpcCidrBlockCommand extends $Command<
-  AssociateVpcCidrBlockCommandInput,
-  AssociateVpcCidrBlockCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateVpcCidrBlockCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateVpcCidrBlockCommandInput, AssociateVpcCidrBlockCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AssociateVpcCidrBlockCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateVpcCidrBlockRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateVpcCidrBlockResult.filterSensitiveLog,
+export class AssociateVpcCidrBlockCommand extends command<AssociateVpcCidrBlockCommandInput, AssociateVpcCidrBlockCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateVpcCidrBlock",
+  AssociateVpcCidrBlock$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateVpcCidrBlockRequest;
+      output: AssociateVpcCidrBlockResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateVpcCidrBlockCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AssociateVpcCidrBlockCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateVpcCidrBlockCommandOutput> {
-    return deserializeAws_ec2AssociateVpcCidrBlockCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateVpcCidrBlockCommandInput;
+      output: AssociateVpcCidrBlockCommandOutput;
+    };
+  };
 }

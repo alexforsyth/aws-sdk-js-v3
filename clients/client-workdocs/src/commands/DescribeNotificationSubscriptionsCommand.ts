@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeNotificationSubscriptionsRequest,
   DescribeNotificationSubscriptionsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeNotificationSubscriptionsCommand,
-  serializeAws_restJson1DescribeNotificationSubscriptionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { DescribeNotificationSubscriptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNotificationSubscriptionsCommand}.
+ */
 export interface DescribeNotificationSubscriptionsCommandInput extends DescribeNotificationSubscriptionsRequest {}
-export interface DescribeNotificationSubscriptionsCommandOutput
-  extends DescribeNotificationSubscriptionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNotificationSubscriptionsCommand}.
+ */
+export interface DescribeNotificationSubscriptionsCommandOutput extends DescribeNotificationSubscriptionsResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the specified notification subscriptions.</p>
@@ -33,74 +32,65 @@ export interface DescribeNotificationSubscriptionsCommandOutput
  * ```javascript
  * import { WorkDocsClient, DescribeNotificationSubscriptionsCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, DescribeNotificationSubscriptionsCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // DescribeNotificationSubscriptionsRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new DescribeNotificationSubscriptionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeNotificationSubscriptionsResponse
+ * //   Subscriptions: [ // SubscriptionList
+ * //     { // Subscription
+ * //       SubscriptionId: "STRING_VALUE",
+ * //       EndPoint: "STRING_VALUE",
+ * //       Protocol: "HTTPS" || "SQS",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeNotificationSubscriptionsCommandInput - {@link DescribeNotificationSubscriptionsCommandInput}
+ * @returns {@link DescribeNotificationSubscriptionsCommandOutput}
  * @see {@link DescribeNotificationSubscriptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeNotificationSubscriptionsCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeNotificationSubscriptionsCommand extends $Command<
-  DescribeNotificationSubscriptionsCommandInput,
-  DescribeNotificationSubscriptionsCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNotificationSubscriptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNotificationSubscriptionsCommandInput, DescribeNotificationSubscriptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "DescribeNotificationSubscriptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNotificationSubscriptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeNotificationSubscriptionsResponse.filterSensitiveLog,
+export class DescribeNotificationSubscriptionsCommand extends command<DescribeNotificationSubscriptionsCommandInput, DescribeNotificationSubscriptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNotificationSubscriptions",
+  DescribeNotificationSubscriptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNotificationSubscriptionsRequest;
+      output: DescribeNotificationSubscriptionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeNotificationSubscriptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeNotificationSubscriptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeNotificationSubscriptionsCommandOutput> {
-    return deserializeAws_restJson1DescribeNotificationSubscriptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNotificationSubscriptionsCommandInput;
+      output: DescribeNotificationSubscriptionsCommandOutput;
+    };
+  };
 }

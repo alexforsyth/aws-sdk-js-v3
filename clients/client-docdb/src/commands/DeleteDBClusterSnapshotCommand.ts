@@ -1,98 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { DeleteDBClusterSnapshotMessage, DeleteDBClusterSnapshotResult } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteDBClusterSnapshotCommand,
-  serializeAws_queryDeleteDBClusterSnapshotCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDBClusterSnapshotMessage, DeleteDBClusterSnapshotResult } from "../models/models_0";
+import { DeleteDBClusterSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDBClusterSnapshotCommand}.
+ */
 export interface DeleteDBClusterSnapshotCommandInput extends DeleteDBClusterSnapshotMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDBClusterSnapshotCommand}.
+ */
 export interface DeleteDBClusterSnapshotCommandOutput extends DeleteDBClusterSnapshotResult, __MetadataBearer {}
 
 /**
  * <p>Deletes a cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p>
- *         <note>
+ *          <note>
  *             <p>The cluster snapshot must be in the <code>available</code> state to be deleted.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DocDBClient, DeleteDBClusterSnapshotCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, DeleteDBClusterSnapshotCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // DeleteDBClusterSnapshotMessage
+ *   DBClusterSnapshotIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDBClusterSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteDBClusterSnapshotResult
+ * //   DBClusterSnapshot: { // DBClusterSnapshot
+ * //     AvailabilityZones: [ // AvailabilityZones
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     DBClusterSnapshotIdentifier: "STRING_VALUE",
+ * //     DBClusterIdentifier: "STRING_VALUE",
+ * //     SnapshotCreateTime: new Date("TIMESTAMP"),
+ * //     Engine: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     VpcId: "STRING_VALUE",
+ * //     ClusterCreateTime: new Date("TIMESTAMP"),
+ * //     MasterUsername: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     SnapshotType: "STRING_VALUE",
+ * //     PercentProgress: Number("int"),
+ * //     StorageEncrypted: true || false,
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     DBClusterSnapshotArn: "STRING_VALUE",
+ * //     SourceDBClusterSnapshotArn: "STRING_VALUE",
+ * //     StorageType: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteDBClusterSnapshotCommandInput - {@link DeleteDBClusterSnapshotCommandInput}
+ * @returns {@link DeleteDBClusterSnapshotCommandOutput}
  * @see {@link DeleteDBClusterSnapshotCommandInput} for command's `input` shape.
  * @see {@link DeleteDBClusterSnapshotCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBClusterSnapshotNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBClusterSnapshotIdentifier</code> doesn't refer to an existing cluster snapshot. </p>
+ *
+ * @throws {@link InvalidDBClusterSnapshotStateFault} (client fault)
+ *  <p>The provided value isn't a valid cluster snapshot state.</p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDBClusterSnapshotCommand extends $Command<
-  DeleteDBClusterSnapshotCommandInput,
-  DeleteDBClusterSnapshotCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDBClusterSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDBClusterSnapshotCommandInput, DeleteDBClusterSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "DeleteDBClusterSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDBClusterSnapshotMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteDBClusterSnapshotResult.filterSensitiveLog,
+export class DeleteDBClusterSnapshotCommand extends command<DeleteDBClusterSnapshotCommandInput, DeleteDBClusterSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDBClusterSnapshot",
+  DeleteDBClusterSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDBClusterSnapshotMessage;
+      output: DeleteDBClusterSnapshotResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDBClusterSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteDBClusterSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDBClusterSnapshotCommandOutput> {
-    return deserializeAws_queryDeleteDBClusterSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDBClusterSnapshotCommandInput;
+      output: DeleteDBClusterSnapshotCommandOutput;
+    };
+  };
 }

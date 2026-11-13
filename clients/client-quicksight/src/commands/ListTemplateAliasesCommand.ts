@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListTemplateAliasesRequest, ListTemplateAliasesResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListTemplateAliasesCommand,
-  serializeAws_restJson1ListTemplateAliasesCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTemplateAliasesRequest, ListTemplateAliasesResponse } from "../models/models_5";
+import { ListTemplateAliases$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTemplateAliasesCommand}.
+ */
 export interface ListTemplateAliasesCommandInput extends ListTemplateAliasesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTemplateAliasesCommand}.
+ */
 export interface ListTemplateAliasesCommandOutput extends ListTemplateAliasesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface ListTemplateAliasesCommandOutput extends ListTemplateAliasesRes
  * ```javascript
  * import { QuickSightClient, ListTemplateAliasesCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, ListTemplateAliasesCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // ListTemplateAliasesRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   TemplateId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListTemplateAliasesCommand(input);
  * const response = await client.send(command);
+ * // { // ListTemplateAliasesResponse
+ * //   TemplateAliasList: [ // TemplateAliasList
+ * //     { // TemplateAlias
+ * //       AliasName: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       TemplateVersionNumber: Number("long"),
+ * //     },
+ * //   ],
+ * //   Status: Number("int"),
+ * //   RequestId: "STRING_VALUE",
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTemplateAliasesCommandInput - {@link ListTemplateAliasesCommandInput}
+ * @returns {@link ListTemplateAliasesCommandOutput}
  * @see {@link ListTemplateAliasesCommandInput} for command's `input` shape.
  * @see {@link ListTemplateAliasesCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class ListTemplateAliasesCommand extends $Command<
-  ListTemplateAliasesCommandInput,
-  ListTemplateAliasesCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTemplateAliasesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTemplateAliasesCommandInput, ListTemplateAliasesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "ListTemplateAliasesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTemplateAliasesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTemplateAliasesResponse.filterSensitiveLog,
+export class ListTemplateAliasesCommand extends command<ListTemplateAliasesCommandInput, ListTemplateAliasesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTemplateAliases",
+  ListTemplateAliases$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTemplateAliasesRequest;
+      output: ListTemplateAliasesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTemplateAliasesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTemplateAliasesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTemplateAliasesCommandOutput> {
-    return deserializeAws_restJson1ListTemplateAliasesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTemplateAliasesCommandInput;
+      output: ListTemplateAliasesCommandOutput;
+    };
+  };
 }

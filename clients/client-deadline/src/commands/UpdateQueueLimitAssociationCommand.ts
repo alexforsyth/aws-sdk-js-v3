@@ -1,0 +1,91 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateQueueLimitAssociationRequest, UpdateQueueLimitAssociationResponse } from "../models/models_1";
+import { UpdateQueueLimitAssociation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateQueueLimitAssociationCommand}.
+ */
+export interface UpdateQueueLimitAssociationCommandInput extends UpdateQueueLimitAssociationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateQueueLimitAssociationCommand}.
+ */
+export interface UpdateQueueLimitAssociationCommandOutput extends UpdateQueueLimitAssociationResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the status of the queue. If you set the status to one of the <code>STOP_LIMIT_USAGE*</code> values, there will be a delay before the status transitions to the <code>STOPPED</code> state. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateQueueLimitAssociationCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateQueueLimitAssociationCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateQueueLimitAssociationRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   limitId: "STRING_VALUE", // required
+ *   status: "ACTIVE" || "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" || "STOP_LIMIT_USAGE_AND_CANCEL_TASKS", // required
+ * };
+ * const command = new UpdateQueueLimitAssociationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateQueueLimitAssociationCommandInput - {@link UpdateQueueLimitAssociationCommandInput}
+ * @returns {@link UpdateQueueLimitAssociationCommandOutput}
+ * @see {@link UpdateQueueLimitAssociationCommandInput} for command's `input` shape.
+ * @see {@link UpdateQueueLimitAssociationCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateQueueLimitAssociationCommand extends command<UpdateQueueLimitAssociationCommandInput, UpdateQueueLimitAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateQueueLimitAssociation",
+  UpdateQueueLimitAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateQueueLimitAssociationRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateQueueLimitAssociationCommandInput;
+      output: UpdateQueueLimitAssociationCommandOutput;
+    };
+  };
+}

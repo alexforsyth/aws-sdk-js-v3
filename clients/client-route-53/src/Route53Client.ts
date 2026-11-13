@@ -1,274 +1,351 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultRoute53HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   ActivateKeySigningKeyCommandInput,
   ActivateKeySigningKeyCommandOutput,
 } from "./commands/ActivateKeySigningKeyCommand";
-import {
+import type {
   AssociateVPCWithHostedZoneCommandInput,
   AssociateVPCWithHostedZoneCommandOutput,
 } from "./commands/AssociateVPCWithHostedZoneCommand";
-import {
+import type {
+  ChangeCidrCollectionCommandInput,
+  ChangeCidrCollectionCommandOutput,
+} from "./commands/ChangeCidrCollectionCommand";
+import type {
   ChangeResourceRecordSetsCommandInput,
   ChangeResourceRecordSetsCommandOutput,
 } from "./commands/ChangeResourceRecordSetsCommand";
-import {
+import type {
   ChangeTagsForResourceCommandInput,
   ChangeTagsForResourceCommandOutput,
 } from "./commands/ChangeTagsForResourceCommand";
-import { CreateHealthCheckCommandInput, CreateHealthCheckCommandOutput } from "./commands/CreateHealthCheckCommand";
-import { CreateHostedZoneCommandInput, CreateHostedZoneCommandOutput } from "./commands/CreateHostedZoneCommand";
-import {
+import type {
+  CreateCidrCollectionCommandInput,
+  CreateCidrCollectionCommandOutput,
+} from "./commands/CreateCidrCollectionCommand";
+import type {
+  CreateHealthCheckCommandInput,
+  CreateHealthCheckCommandOutput,
+} from "./commands/CreateHealthCheckCommand";
+import type { CreateHostedZoneCommandInput, CreateHostedZoneCommandOutput } from "./commands/CreateHostedZoneCommand";
+import type {
   CreateKeySigningKeyCommandInput,
   CreateKeySigningKeyCommandOutput,
 } from "./commands/CreateKeySigningKeyCommand";
-import {
+import type {
   CreateQueryLoggingConfigCommandInput,
   CreateQueryLoggingConfigCommandOutput,
 } from "./commands/CreateQueryLoggingConfigCommand";
-import {
+import type {
+  CreateResourceRecordSetProtectionsCommandInput,
+  CreateResourceRecordSetProtectionsCommandOutput,
+} from "./commands/CreateResourceRecordSetProtectionsCommand";
+import type {
   CreateReusableDelegationSetCommandInput,
   CreateReusableDelegationSetCommandOutput,
 } from "./commands/CreateReusableDelegationSetCommand";
-import {
+import type {
   CreateTrafficPolicyCommandInput,
   CreateTrafficPolicyCommandOutput,
 } from "./commands/CreateTrafficPolicyCommand";
-import {
+import type {
   CreateTrafficPolicyInstanceCommandInput,
   CreateTrafficPolicyInstanceCommandOutput,
 } from "./commands/CreateTrafficPolicyInstanceCommand";
-import {
+import type {
   CreateTrafficPolicyVersionCommandInput,
   CreateTrafficPolicyVersionCommandOutput,
 } from "./commands/CreateTrafficPolicyVersionCommand";
-import {
+import type {
   CreateVPCAssociationAuthorizationCommandInput,
   CreateVPCAssociationAuthorizationCommandOutput,
 } from "./commands/CreateVPCAssociationAuthorizationCommand";
-import {
+import type {
   DeactivateKeySigningKeyCommandInput,
   DeactivateKeySigningKeyCommandOutput,
 } from "./commands/DeactivateKeySigningKeyCommand";
-import { DeleteHealthCheckCommandInput, DeleteHealthCheckCommandOutput } from "./commands/DeleteHealthCheckCommand";
-import { DeleteHostedZoneCommandInput, DeleteHostedZoneCommandOutput } from "./commands/DeleteHostedZoneCommand";
-import {
+import type {
+  DeleteCidrCollectionCommandInput,
+  DeleteCidrCollectionCommandOutput,
+} from "./commands/DeleteCidrCollectionCommand";
+import type {
+  DeleteHealthCheckCommandInput,
+  DeleteHealthCheckCommandOutput,
+} from "./commands/DeleteHealthCheckCommand";
+import type { DeleteHostedZoneCommandInput, DeleteHostedZoneCommandOutput } from "./commands/DeleteHostedZoneCommand";
+import type {
   DeleteKeySigningKeyCommandInput,
   DeleteKeySigningKeyCommandOutput,
 } from "./commands/DeleteKeySigningKeyCommand";
-import {
+import type {
   DeleteQueryLoggingConfigCommandInput,
   DeleteQueryLoggingConfigCommandOutput,
 } from "./commands/DeleteQueryLoggingConfigCommand";
-import {
+import type {
+  DeleteResourceRecordSetProtectionsCommandInput,
+  DeleteResourceRecordSetProtectionsCommandOutput,
+} from "./commands/DeleteResourceRecordSetProtectionsCommand";
+import type {
   DeleteReusableDelegationSetCommandInput,
   DeleteReusableDelegationSetCommandOutput,
 } from "./commands/DeleteReusableDelegationSetCommand";
-import {
+import type {
   DeleteTrafficPolicyCommandInput,
   DeleteTrafficPolicyCommandOutput,
 } from "./commands/DeleteTrafficPolicyCommand";
-import {
+import type {
   DeleteTrafficPolicyInstanceCommandInput,
   DeleteTrafficPolicyInstanceCommandOutput,
 } from "./commands/DeleteTrafficPolicyInstanceCommand";
-import {
+import type {
   DeleteVPCAssociationAuthorizationCommandInput,
   DeleteVPCAssociationAuthorizationCommandOutput,
 } from "./commands/DeleteVPCAssociationAuthorizationCommand";
-import {
+import type {
   DisableHostedZoneDNSSECCommandInput,
   DisableHostedZoneDNSSECCommandOutput,
 } from "./commands/DisableHostedZoneDNSSECCommand";
-import {
+import type {
   DisassociateVPCFromHostedZoneCommandInput,
   DisassociateVPCFromHostedZoneCommandOutput,
 } from "./commands/DisassociateVPCFromHostedZoneCommand";
-import {
+import type {
   EnableHostedZoneDNSSECCommandInput,
   EnableHostedZoneDNSSECCommandOutput,
 } from "./commands/EnableHostedZoneDNSSECCommand";
-import { GetAccountLimitCommandInput, GetAccountLimitCommandOutput } from "./commands/GetAccountLimitCommand";
-import { GetChangeCommandInput, GetChangeCommandOutput } from "./commands/GetChangeCommand";
-import { GetCheckerIpRangesCommandInput, GetCheckerIpRangesCommandOutput } from "./commands/GetCheckerIpRangesCommand";
-import { GetDNSSECCommandInput, GetDNSSECCommandOutput } from "./commands/GetDNSSECCommand";
-import { GetGeoLocationCommandInput, GetGeoLocationCommandOutput } from "./commands/GetGeoLocationCommand";
-import { GetHealthCheckCommandInput, GetHealthCheckCommandOutput } from "./commands/GetHealthCheckCommand";
-import {
+import type { GetAccountLimitCommandInput, GetAccountLimitCommandOutput } from "./commands/GetAccountLimitCommand";
+import type { GetChangeCommandInput, GetChangeCommandOutput } from "./commands/GetChangeCommand";
+import type {
+  GetCheckerIpRangesCommandInput,
+  GetCheckerIpRangesCommandOutput,
+} from "./commands/GetCheckerIpRangesCommand";
+import type { GetDNSSECCommandInput, GetDNSSECCommandOutput } from "./commands/GetDNSSECCommand";
+import type { GetGeoLocationCommandInput, GetGeoLocationCommandOutput } from "./commands/GetGeoLocationCommand";
+import type { GetHealthCheckCommandInput, GetHealthCheckCommandOutput } from "./commands/GetHealthCheckCommand";
+import type {
   GetHealthCheckCountCommandInput,
   GetHealthCheckCountCommandOutput,
 } from "./commands/GetHealthCheckCountCommand";
-import {
+import type {
   GetHealthCheckLastFailureReasonCommandInput,
   GetHealthCheckLastFailureReasonCommandOutput,
 } from "./commands/GetHealthCheckLastFailureReasonCommand";
-import {
+import type {
   GetHealthCheckStatusCommandInput,
   GetHealthCheckStatusCommandOutput,
 } from "./commands/GetHealthCheckStatusCommand";
-import { GetHostedZoneCommandInput, GetHostedZoneCommandOutput } from "./commands/GetHostedZoneCommand";
-import { GetHostedZoneCountCommandInput, GetHostedZoneCountCommandOutput } from "./commands/GetHostedZoneCountCommand";
-import { GetHostedZoneLimitCommandInput, GetHostedZoneLimitCommandOutput } from "./commands/GetHostedZoneLimitCommand";
-import {
+import type { GetHostedZoneCommandInput, GetHostedZoneCommandOutput } from "./commands/GetHostedZoneCommand";
+import type {
+  GetHostedZoneCountCommandInput,
+  GetHostedZoneCountCommandOutput,
+} from "./commands/GetHostedZoneCountCommand";
+import type {
+  GetHostedZoneLimitCommandInput,
+  GetHostedZoneLimitCommandOutput,
+} from "./commands/GetHostedZoneLimitCommand";
+import type {
   GetQueryLoggingConfigCommandInput,
   GetQueryLoggingConfigCommandOutput,
 } from "./commands/GetQueryLoggingConfigCommand";
-import {
+import type {
   GetReusableDelegationSetCommandInput,
   GetReusableDelegationSetCommandOutput,
 } from "./commands/GetReusableDelegationSetCommand";
-import {
+import type {
   GetReusableDelegationSetLimitCommandInput,
   GetReusableDelegationSetLimitCommandOutput,
 } from "./commands/GetReusableDelegationSetLimitCommand";
-import { GetTrafficPolicyCommandInput, GetTrafficPolicyCommandOutput } from "./commands/GetTrafficPolicyCommand";
-import {
+import type { GetTrafficPolicyCommandInput, GetTrafficPolicyCommandOutput } from "./commands/GetTrafficPolicyCommand";
+import type {
   GetTrafficPolicyInstanceCommandInput,
   GetTrafficPolicyInstanceCommandOutput,
 } from "./commands/GetTrafficPolicyInstanceCommand";
-import {
+import type {
   GetTrafficPolicyInstanceCountCommandInput,
   GetTrafficPolicyInstanceCountCommandOutput,
 } from "./commands/GetTrafficPolicyInstanceCountCommand";
-import { ListGeoLocationsCommandInput, ListGeoLocationsCommandOutput } from "./commands/ListGeoLocationsCommand";
-import { ListHealthChecksCommandInput, ListHealthChecksCommandOutput } from "./commands/ListHealthChecksCommand";
-import {
+import type { ListCidrBlocksCommandInput, ListCidrBlocksCommandOutput } from "./commands/ListCidrBlocksCommand";
+import type {
+  ListCidrCollectionsCommandInput,
+  ListCidrCollectionsCommandOutput,
+} from "./commands/ListCidrCollectionsCommand";
+import type {
+  ListCidrLocationsCommandInput,
+  ListCidrLocationsCommandOutput,
+} from "./commands/ListCidrLocationsCommand";
+import type { ListGeoLocationsCommandInput, ListGeoLocationsCommandOutput } from "./commands/ListGeoLocationsCommand";
+import type { ListHealthChecksCommandInput, ListHealthChecksCommandOutput } from "./commands/ListHealthChecksCommand";
+import type {
   ListHostedZonesByNameCommandInput,
   ListHostedZonesByNameCommandOutput,
 } from "./commands/ListHostedZonesByNameCommand";
-import {
+import type {
   ListHostedZonesByVPCCommandInput,
   ListHostedZonesByVPCCommandOutput,
 } from "./commands/ListHostedZonesByVPCCommand";
-import { ListHostedZonesCommandInput, ListHostedZonesCommandOutput } from "./commands/ListHostedZonesCommand";
-import {
+import type { ListHostedZonesCommandInput, ListHostedZonesCommandOutput } from "./commands/ListHostedZonesCommand";
+import type {
   ListQueryLoggingConfigsCommandInput,
   ListQueryLoggingConfigsCommandOutput,
 } from "./commands/ListQueryLoggingConfigsCommand";
-import {
+import type {
+  ListResourceRecordSetProtectionsCommandInput,
+  ListResourceRecordSetProtectionsCommandOutput,
+} from "./commands/ListResourceRecordSetProtectionsCommand";
+import type {
   ListResourceRecordSetsCommandInput,
   ListResourceRecordSetsCommandOutput,
 } from "./commands/ListResourceRecordSetsCommand";
-import {
+import type {
   ListReusableDelegationSetsCommandInput,
   ListReusableDelegationSetsCommandOutput,
 } from "./commands/ListReusableDelegationSetsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListTagsForResourcesCommandInput,
   ListTagsForResourcesCommandOutput,
 } from "./commands/ListTagsForResourcesCommand";
-import {
+import type {
   ListTrafficPoliciesCommandInput,
   ListTrafficPoliciesCommandOutput,
 } from "./commands/ListTrafficPoliciesCommand";
-import {
+import type {
   ListTrafficPolicyInstancesByHostedZoneCommandInput,
   ListTrafficPolicyInstancesByHostedZoneCommandOutput,
 } from "./commands/ListTrafficPolicyInstancesByHostedZoneCommand";
-import {
+import type {
   ListTrafficPolicyInstancesByPolicyCommandInput,
   ListTrafficPolicyInstancesByPolicyCommandOutput,
 } from "./commands/ListTrafficPolicyInstancesByPolicyCommand";
-import {
+import type {
   ListTrafficPolicyInstancesCommandInput,
   ListTrafficPolicyInstancesCommandOutput,
 } from "./commands/ListTrafficPolicyInstancesCommand";
-import {
+import type {
   ListTrafficPolicyVersionsCommandInput,
   ListTrafficPolicyVersionsCommandOutput,
 } from "./commands/ListTrafficPolicyVersionsCommand";
-import {
+import type {
   ListVPCAssociationAuthorizationsCommandInput,
   ListVPCAssociationAuthorizationsCommandOutput,
 } from "./commands/ListVPCAssociationAuthorizationsCommand";
-import { TestDNSAnswerCommandInput, TestDNSAnswerCommandOutput } from "./commands/TestDNSAnswerCommand";
-import { UpdateHealthCheckCommandInput, UpdateHealthCheckCommandOutput } from "./commands/UpdateHealthCheckCommand";
-import {
+import type { TestDNSAnswerCommandInput, TestDNSAnswerCommandOutput } from "./commands/TestDNSAnswerCommand";
+import type {
+  UpdateHealthCheckCommandInput,
+  UpdateHealthCheckCommandOutput,
+} from "./commands/UpdateHealthCheckCommand";
+import type {
   UpdateHostedZoneCommentCommandInput,
   UpdateHostedZoneCommentCommandOutput,
 } from "./commands/UpdateHostedZoneCommentCommand";
-import {
+import type {
+  UpdateHostedZoneFeaturesCommandInput,
+  UpdateHostedZoneFeaturesCommandOutput,
+} from "./commands/UpdateHostedZoneFeaturesCommand";
+import type {
   UpdateTrafficPolicyCommentCommandInput,
   UpdateTrafficPolicyCommentCommandOutput,
 } from "./commands/UpdateTrafficPolicyCommentCommand";
-import {
+import type {
   UpdateTrafficPolicyInstanceCommandInput,
   UpdateTrafficPolicyInstanceCommandOutput,
 } from "./commands/UpdateTrafficPolicyInstanceCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | ActivateKeySigningKeyCommandInput
   | AssociateVPCWithHostedZoneCommandInput
+  | ChangeCidrCollectionCommandInput
   | ChangeResourceRecordSetsCommandInput
   | ChangeTagsForResourceCommandInput
+  | CreateCidrCollectionCommandInput
   | CreateHealthCheckCommandInput
   | CreateHostedZoneCommandInput
   | CreateKeySigningKeyCommandInput
   | CreateQueryLoggingConfigCommandInput
+  | CreateResourceRecordSetProtectionsCommandInput
   | CreateReusableDelegationSetCommandInput
   | CreateTrafficPolicyCommandInput
   | CreateTrafficPolicyInstanceCommandInput
   | CreateTrafficPolicyVersionCommandInput
   | CreateVPCAssociationAuthorizationCommandInput
   | DeactivateKeySigningKeyCommandInput
+  | DeleteCidrCollectionCommandInput
   | DeleteHealthCheckCommandInput
   | DeleteHostedZoneCommandInput
   | DeleteKeySigningKeyCommandInput
   | DeleteQueryLoggingConfigCommandInput
+  | DeleteResourceRecordSetProtectionsCommandInput
   | DeleteReusableDelegationSetCommandInput
   | DeleteTrafficPolicyCommandInput
   | DeleteTrafficPolicyInstanceCommandInput
@@ -294,12 +371,16 @@ export type ServiceInputTypes =
   | GetTrafficPolicyCommandInput
   | GetTrafficPolicyInstanceCommandInput
   | GetTrafficPolicyInstanceCountCommandInput
+  | ListCidrBlocksCommandInput
+  | ListCidrCollectionsCommandInput
+  | ListCidrLocationsCommandInput
   | ListGeoLocationsCommandInput
   | ListHealthChecksCommandInput
   | ListHostedZonesByNameCommandInput
   | ListHostedZonesByVPCCommandInput
   | ListHostedZonesCommandInput
   | ListQueryLoggingConfigsCommandInput
+  | ListResourceRecordSetProtectionsCommandInput
   | ListResourceRecordSetsCommandInput
   | ListReusableDelegationSetsCommandInput
   | ListTagsForResourceCommandInput
@@ -313,28 +394,37 @@ export type ServiceInputTypes =
   | TestDNSAnswerCommandInput
   | UpdateHealthCheckCommandInput
   | UpdateHostedZoneCommentCommandInput
+  | UpdateHostedZoneFeaturesCommandInput
   | UpdateTrafficPolicyCommentCommandInput
   | UpdateTrafficPolicyInstanceCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | ActivateKeySigningKeyCommandOutput
   | AssociateVPCWithHostedZoneCommandOutput
+  | ChangeCidrCollectionCommandOutput
   | ChangeResourceRecordSetsCommandOutput
   | ChangeTagsForResourceCommandOutput
+  | CreateCidrCollectionCommandOutput
   | CreateHealthCheckCommandOutput
   | CreateHostedZoneCommandOutput
   | CreateKeySigningKeyCommandOutput
   | CreateQueryLoggingConfigCommandOutput
+  | CreateResourceRecordSetProtectionsCommandOutput
   | CreateReusableDelegationSetCommandOutput
   | CreateTrafficPolicyCommandOutput
   | CreateTrafficPolicyInstanceCommandOutput
   | CreateTrafficPolicyVersionCommandOutput
   | CreateVPCAssociationAuthorizationCommandOutput
   | DeactivateKeySigningKeyCommandOutput
+  | DeleteCidrCollectionCommandOutput
   | DeleteHealthCheckCommandOutput
   | DeleteHostedZoneCommandOutput
   | DeleteKeySigningKeyCommandOutput
   | DeleteQueryLoggingConfigCommandOutput
+  | DeleteResourceRecordSetProtectionsCommandOutput
   | DeleteReusableDelegationSetCommandOutput
   | DeleteTrafficPolicyCommandOutput
   | DeleteTrafficPolicyInstanceCommandOutput
@@ -360,12 +450,16 @@ export type ServiceOutputTypes =
   | GetTrafficPolicyCommandOutput
   | GetTrafficPolicyInstanceCommandOutput
   | GetTrafficPolicyInstanceCountCommandOutput
+  | ListCidrBlocksCommandOutput
+  | ListCidrCollectionsCommandOutput
+  | ListCidrLocationsCommandOutput
   | ListGeoLocationsCommandOutput
   | ListHealthChecksCommandOutput
   | ListHostedZonesByNameCommandOutput
   | ListHostedZonesByVPCCommandOutput
   | ListHostedZonesCommandOutput
   | ListQueryLoggingConfigsCommandOutput
+  | ListResourceRecordSetProtectionsCommandOutput
   | ListResourceRecordSetsCommandOutput
   | ListReusableDelegationSetsCommandOutput
   | ListTagsForResourceCommandOutput
@@ -379,21 +473,25 @@ export type ServiceOutputTypes =
   | TestDNSAnswerCommandOutput
   | UpdateHealthCheckCommandOutput
   | UpdateHostedZoneCommentCommandOutput
+  | UpdateHostedZoneFeaturesCommandOutput
   | UpdateTrafficPolicyCommentCommandOutput
   | UpdateTrafficPolicyInstanceCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -405,7 +503,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -444,25 +542,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -475,63 +564,129 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type Route53ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of Route53Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type Route53ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of Route53Client class constructor that set the region, credentials and other options.
  */
 export interface Route53ClientConfig extends Route53ClientConfigType {}
 
-type Route53ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of Route53Client class. This is resolved and normalized from the {@link Route53ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type Route53ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of Route53Client class. This is resolved and normalized from the {@link Route53ClientConfig | constructor configuration interface}.
  */
 export interface Route53ClientResolvedConfig extends Route53ClientResolvedConfigType {}
 
 /**
- * <p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.</p>
+ * <p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web
+ * 			service.</p>
+ *          <p>You can use Route 53 to:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Register domain names.</p>
+ *                <p>For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-domain-registration.html">How domain registration works</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Route internet traffic to the resources for your domain</p>
+ *                <p>For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html">How internet traffic is routed to your website or web application</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Check the health of your resources.</p>
+ *                <p>For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-health-checks.html">How Route 53 checks the health of your resources</a>.</p>
+ *             </li>
+ *          </ul>
+ * @public
  */
 export class Route53Client extends __Client<
   __HttpHandlerOptions,
@@ -544,22 +699,36 @@ export class Route53Client extends __Client<
    */
   readonly config: Route53ClientResolvedConfig;
 
-  constructor(configuration: Route53ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<Route53ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultRoute53HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: Route53ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

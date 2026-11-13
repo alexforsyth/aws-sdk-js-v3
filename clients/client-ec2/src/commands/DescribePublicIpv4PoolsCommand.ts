@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribePublicIpv4PoolsRequest, DescribePublicIpv4PoolsResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribePublicIpv4PoolsCommand,
-  serializeAws_ec2DescribePublicIpv4PoolsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePublicIpv4PoolsRequest, DescribePublicIpv4PoolsResult } from "../models/models_5";
+import { DescribePublicIpv4Pools$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePublicIpv4PoolsCommand}.
+ */
 export interface DescribePublicIpv4PoolsCommandInput extends DescribePublicIpv4PoolsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePublicIpv4PoolsCommand}.
+ */
 export interface DescribePublicIpv4PoolsCommandOutput extends DescribePublicIpv4PoolsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface DescribePublicIpv4PoolsCommandOutput extends DescribePublicIpv4
  * ```javascript
  * import { EC2Client, DescribePublicIpv4PoolsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribePublicIpv4PoolsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribePublicIpv4PoolsRequest
+ *   PoolIds: [ // PublicIpv4PoolIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribePublicIpv4PoolsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePublicIpv4PoolsResult
+ * //   PublicIpv4Pools: [ // PublicIpv4PoolSet
+ * //     { // PublicIpv4Pool
+ * //       PoolId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       PoolAddressRanges: [ // PublicIpv4PoolRangeSet
+ * //         { // PublicIpv4PoolRange
+ * //           FirstAddress: "STRING_VALUE",
+ * //           LastAddress: "STRING_VALUE",
+ * //           AddressCount: Number("int"),
+ * //           AvailableAddressCount: Number("int"),
+ * //         },
+ * //       ],
+ * //       TotalAddressCount: Number("int"),
+ * //       TotalAvailableAddressCount: Number("int"),
+ * //       NetworkBorderGroup: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePublicIpv4PoolsCommandInput - {@link DescribePublicIpv4PoolsCommandInput}
+ * @returns {@link DescribePublicIpv4PoolsCommandOutput}
  * @see {@link DescribePublicIpv4PoolsCommandInput} for command's `input` shape.
  * @see {@link DescribePublicIpv4PoolsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePublicIpv4PoolsCommand extends $Command<
-  DescribePublicIpv4PoolsCommandInput,
-  DescribePublicIpv4PoolsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePublicIpv4PoolsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePublicIpv4PoolsCommandInput, DescribePublicIpv4PoolsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribePublicIpv4PoolsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePublicIpv4PoolsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePublicIpv4PoolsResult.filterSensitiveLog,
+export class DescribePublicIpv4PoolsCommand extends command<DescribePublicIpv4PoolsCommandInput, DescribePublicIpv4PoolsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePublicIpv4Pools",
+  DescribePublicIpv4Pools$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePublicIpv4PoolsRequest;
+      output: DescribePublicIpv4PoolsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePublicIpv4PoolsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribePublicIpv4PoolsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePublicIpv4PoolsCommandOutput> {
-    return deserializeAws_ec2DescribePublicIpv4PoolsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePublicIpv4PoolsCommandInput;
+      output: DescribePublicIpv4PoolsCommandOutput;
+    };
+  };
 }

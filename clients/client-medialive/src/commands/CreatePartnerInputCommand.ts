@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { CreatePartnerInputRequest, CreatePartnerInputResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1CreatePartnerInputCommand,
-  serializeAws_restJson1CreatePartnerInputCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePartnerInputRequest, CreatePartnerInputResponse } from "../models/models_1";
+import { CreatePartnerInput$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePartnerInputCommand}.
+ */
 export interface CreatePartnerInputCommandInput extends CreatePartnerInputRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePartnerInputCommand}.
+ */
 export interface CreatePartnerInputCommandOutput extends CreatePartnerInputResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,195 @@ export interface CreatePartnerInputCommandOutput extends CreatePartnerInputRespo
  * ```javascript
  * import { MediaLiveClient, CreatePartnerInputCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, CreatePartnerInputCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // CreatePartnerInputRequest
+ *   InputId: "STRING_VALUE", // required
+ *   RequestId: "STRING_VALUE",
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreatePartnerInputCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePartnerInputResponse
+ * //   Input: { // Input
+ * //     Arn: "STRING_VALUE",
+ * //     AttachedChannels: [ // __listOf__string
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Destinations: [ // __listOfInputDestination
+ * //       { // InputDestination
+ * //         Ip: "STRING_VALUE",
+ * //         Port: "STRING_VALUE",
+ * //         Url: "STRING_VALUE",
+ * //         Vpc: { // InputDestinationVpc
+ * //           AvailabilityZone: "STRING_VALUE",
+ * //           NetworkInterfaceId: "STRING_VALUE",
+ * //         },
+ * //         Network: "STRING_VALUE",
+ * //         NetworkRoutes: [ // __listOfInputDestinationRoute
+ * //           { // InputDestinationRoute
+ * //             Cidr: "STRING_VALUE",
+ * //             Gateway: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     Id: "STRING_VALUE",
+ * //     InputClass: "STANDARD" || "SINGLE_PIPELINE",
+ * //     InputDevices: [ // __listOfInputDeviceSettings
+ * //       { // InputDeviceSettings
+ * //         Id: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     InputPartnerIds: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     InputSourceType: "STATIC" || "DYNAMIC",
+ * //     MediaConnectFlows: [ // __listOfMediaConnectFlow
+ * //       { // MediaConnectFlow
+ * //         FlowArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Name: "STRING_VALUE",
+ * //     RoleArn: "STRING_VALUE",
+ * //     SecurityGroups: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Sources: [ // __listOfInputSource
+ * //       { // InputSource
+ * //         PasswordParam: "STRING_VALUE",
+ * //         Url: "STRING_VALUE",
+ * //         Username: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     State: "CREATING" || "DETACHED" || "ATTACHED" || "DELETING" || "DELETED",
+ * //     Tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     Type: "UDP_PUSH" || "RTP_PUSH" || "RTMP_PUSH" || "RTMP_PULL" || "URL_PULL" || "MP4_FILE" || "MEDIACONNECT" || "INPUT_DEVICE" || "AWS_CDI" || "TS_FILE" || "SRT_CALLER" || "MULTICAST" || "SMPTE_2110_RECEIVER_GROUP" || "SDI" || "MEDIACONNECT_ROUTER" || "SRT_LISTENER",
+ * //     SrtSettings: { // SrtSettings
+ * //       SrtCallerSources: [ // __listOfSrtCallerSource
+ * //         { // SrtCallerSource
+ * //           Decryption: { // SrtCallerDecryption
+ * //             Algorithm: "AES128" || "AES192" || "AES256",
+ * //             PassphraseSecretArn: "STRING_VALUE",
+ * //           },
+ * //           MinimumLatency: Number("int"),
+ * //           SrtListenerAddress: "STRING_VALUE",
+ * //           SrtListenerPort: "STRING_VALUE",
+ * //           StreamId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       SrtListenerSettings: { // SrtListenerSettings
+ * //         Decryption: { // SrtListenerDecryption
+ * //           Algorithm: "AES128" || "AES192" || "AES256", // required
+ * //           PassphraseSecretArn: "STRING_VALUE", // required
+ * //         },
+ * //         MinimumLatency: Number("int"),
+ * //         StreamId: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     InputNetworkLocation: "AWS" || "ON_PREMISES",
+ * //     MulticastSettings: { // MulticastSettings
+ * //       Sources: [ // __listOfMulticastSource
+ * //         { // MulticastSource
+ * //           SourceIp: "STRING_VALUE",
+ * //           Url: "STRING_VALUE", // required
+ * //           SecondarySourceIp: "STRING_VALUE",
+ * //           SecondaryUrl: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     Smpte2110ReceiverGroupSettings: { // Smpte2110ReceiverGroupSettings
+ * //       Smpte2110ReceiverGroups: [ // __listOfSmpte2110ReceiverGroup
+ * //         { // Smpte2110ReceiverGroup
+ * //           SdpSettings: { // Smpte2110ReceiverGroupSdpSettings
+ * //             AncillarySdps: [ // __listOfInputSdpLocation
+ * //               { // InputSdpLocation
+ * //                 MediaIndex: Number("int"),
+ * //                 SdpUrl: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //             AudioSdps: [
+ * //               {
+ * //                 MediaIndex: Number("int"),
+ * //                 SdpUrl: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //             VideoSdp: {
+ * //               MediaIndex: Number("int"),
+ * //               SdpUrl: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //     SdiSources: [ // InputSdiSources
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     RouterSettings: { // RouterInputSettings
+ * //       Destinations: [ // __listOfRouterDestination
+ * //         { // RouterDestination
+ * //           AvailabilityZoneName: "STRING_VALUE",
+ * //           RouterOutputArn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       EncryptionType: "AUTOMATIC" || "SECRETS_MANAGER",
+ * //       SecretArn: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreatePartnerInputCommandInput - {@link CreatePartnerInputCommandInput}
+ * @returns {@link CreatePartnerInputCommandOutput}
  * @see {@link CreatePartnerInputCommandInput} for command's `input` shape.
  * @see {@link CreatePartnerInputCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePartnerInputCommand extends $Command<
-  CreatePartnerInputCommandInput,
-  CreatePartnerInputCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePartnerInputCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePartnerInputCommandInput, CreatePartnerInputCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "CreatePartnerInputCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePartnerInputRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePartnerInputResponse.filterSensitiveLog,
+export class CreatePartnerInputCommand extends command<CreatePartnerInputCommandInput, CreatePartnerInputCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePartnerInput",
+  CreatePartnerInput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePartnerInputRequest;
+      output: CreatePartnerInputResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePartnerInputCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreatePartnerInputCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePartnerInputCommandOutput> {
-    return deserializeAws_restJson1CreatePartnerInputCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePartnerInputCommandInput;
+      output: CreatePartnerInputCommandOutput;
+    };
+  };
 }

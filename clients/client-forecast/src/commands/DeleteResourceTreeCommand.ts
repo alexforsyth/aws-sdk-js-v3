@@ -1,126 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { DeleteResourceTreeRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteResourceTreeCommand,
-  serializeAws_json1_1DeleteResourceTreeCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteResourceTreeRequest } from "../models/models_0";
+import { DeleteResourceTree$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteResourceTreeCommand}.
+ */
 export interface DeleteResourceTreeCommandInput extends DeleteResourceTreeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteResourceTreeCommand}.
+ */
 export interface DeleteResourceTreeCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Deletes an entire resource tree. This operation will delete the parent resource and
  *             its child resources.</p>
- *         <p>Child resources are resources that were created from another resource. For example,
+ *          <p>Child resources are resources that were created from another resource. For example,
  *             when a forecast is generated from a predictor, the forecast is the child resource and
  *             the predictor is the parent resource.</p>
- *         <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p>
- *
- *         <ul>
+ *          <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Dataset</b>: dataset import jobs</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Dataset Group</b>: predictors, predictor backtest
  *                     export jobs, forecasts, forecast export jobs</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Predictor</b>: predictor backtest export jobs,
  *                     forecasts, forecast export jobs</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Forecast</b>: forecast export jobs</p>
  *             </li>
  *          </ul>
- *         <note>
+ *          <note>
  *             <p>
  *                <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not
  *                 delete datasets or exported files stored in Amazon S3. </p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, DeleteResourceTreeCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DeleteResourceTreeCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DeleteResourceTreeRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteResourceTreeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteResourceTreeCommandInput - {@link DeleteResourceTreeCommandInput}
+ * @returns {@link DeleteResourceTreeCommandOutput}
  * @see {@link DeleteResourceTreeCommandInput} for command's `input` shape.
  * @see {@link DeleteResourceTreeCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteResourceTreeCommand extends $Command<
-  DeleteResourceTreeCommandInput,
-  DeleteResourceTreeCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteResourceTreeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteResourceTreeCommandInput, DeleteResourceTreeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DeleteResourceTreeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteResourceTreeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteResourceTreeCommand extends command<DeleteResourceTreeCommandInput, DeleteResourceTreeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteResourceTree",
+  DeleteResourceTree$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResourceTreeRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteResourceTreeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteResourceTreeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteResourceTreeCommandOutput> {
-    return deserializeAws_json1_1DeleteResourceTreeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteResourceTreeCommandInput;
+      output: DeleteResourceTreeCommandOutput;
+    };
+  };
 }

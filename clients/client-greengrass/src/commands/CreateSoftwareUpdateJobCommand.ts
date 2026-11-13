@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { CreateSoftwareUpdateJobRequest, CreateSoftwareUpdateJobResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateSoftwareUpdateJobCommand,
-  serializeAws_restJson1CreateSoftwareUpdateJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSoftwareUpdateJobRequest, CreateSoftwareUpdateJobResponse } from "../models/models_0";
+import { CreateSoftwareUpdateJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSoftwareUpdateJobCommand}.
+ */
 export interface CreateSoftwareUpdateJobCommandInput extends CreateSoftwareUpdateJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSoftwareUpdateJobCommand}.
+ */
 export interface CreateSoftwareUpdateJobCommandOutput extends CreateSoftwareUpdateJobResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface CreateSoftwareUpdateJobCommandOutput extends CreateSoftwareUpda
  * ```javascript
  * import { GreengrassClient, CreateSoftwareUpdateJobCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, CreateSoftwareUpdateJobCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // CreateSoftwareUpdateJobRequest
+ *   AmznClientToken: "STRING_VALUE",
+ *   S3UrlSignerRole: "STRING_VALUE", // required
+ *   SoftwareToUpdate: "core" || "ota_agent", // required
+ *   UpdateAgentLogLevel: "NONE" || "TRACE" || "DEBUG" || "VERBOSE" || "INFO" || "WARN" || "ERROR" || "FATAL",
+ *   UpdateTargets: [ // UpdateTargets // required
+ *     "STRING_VALUE",
+ *   ],
+ *   UpdateTargetsArchitecture: "armv6l" || "armv7l" || "x86_64" || "aarch64", // required
+ *   UpdateTargetsOperatingSystem: "ubuntu" || "raspbian" || "amazon_linux" || "openwrt", // required
+ * };
  * const command = new CreateSoftwareUpdateJobCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSoftwareUpdateJobResponse
+ * //   IotJobArn: "STRING_VALUE",
+ * //   IotJobId: "STRING_VALUE",
+ * //   PlatformSoftwareVersion: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSoftwareUpdateJobCommandInput - {@link CreateSoftwareUpdateJobCommandInput}
+ * @returns {@link CreateSoftwareUpdateJobCommandOutput}
  * @see {@link CreateSoftwareUpdateJobCommandInput} for command's `input` shape.
  * @see {@link CreateSoftwareUpdateJobCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSoftwareUpdateJobCommand extends $Command<
-  CreateSoftwareUpdateJobCommandInput,
-  CreateSoftwareUpdateJobCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSoftwareUpdateJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSoftwareUpdateJobCommandInput, CreateSoftwareUpdateJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "CreateSoftwareUpdateJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSoftwareUpdateJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSoftwareUpdateJobResponse.filterSensitiveLog,
+export class CreateSoftwareUpdateJobCommand extends command<CreateSoftwareUpdateJobCommandInput, CreateSoftwareUpdateJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSoftwareUpdateJob",
+  CreateSoftwareUpdateJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSoftwareUpdateJobRequest;
+      output: CreateSoftwareUpdateJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSoftwareUpdateJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateSoftwareUpdateJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSoftwareUpdateJobCommandOutput> {
-    return deserializeAws_restJson1CreateSoftwareUpdateJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSoftwareUpdateJobCommandInput;
+      output: CreateSoftwareUpdateJobCommandOutput;
+    };
+  };
 }

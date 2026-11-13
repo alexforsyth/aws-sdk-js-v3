@@ -1,95 +1,163 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeRegionsRequest, DescribeRegionsResult } from "../models/models_3";
-import { deserializeAws_ec2DescribeRegionsCommand, serializeAws_ec2DescribeRegionsCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRegionsRequest, DescribeRegionsResult } from "../models/models_5";
+import { DescribeRegions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRegionsCommand}.
+ */
 export interface DescribeRegionsCommandInput extends DescribeRegionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRegionsCommand}.
+ */
 export interface DescribeRegionsCommandOutput extends DescribeRegionsResult, __MetadataBearer {}
 
 /**
  * <p>Describes the Regions that are enabled for your account, or all Regions.</p>
- *          <p>For a list of the Regions supported by Amazon EC2, see <a href="https://docs.aws.amazon.com/general/latest/gr/ec2-service.html">
- *        Amazon Elastic Compute Cloud endpoints and quotas</a>.</p>
- *          <p>For information about enabling and disabling Regions for your account, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html">Managing Amazon Web Services Regions</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ *          <p>For a list of the Regions supported by Amazon EC2, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html">Amazon EC2 service endpoints</a>.</p>
+ *          <p>For information about enabling and disabling Regions for your account, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html">Specify which Amazon Web Services Regions
+ *       your account can use</a> in the <i>Amazon Web Services Account Management Reference Guide</i>.</p>
+ *          <note>
+ *             <p>The order of the elements in the response, including those within nested structures,
+ *         might vary. Applications should not assume the elements appear in a particular order.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeRegionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeRegionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeRegionsRequest
+ *   RegionNames: [ // RegionNameStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   AllRegions: true || false,
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeRegionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRegionsResult
+ * //   Regions: [ // RegionList
+ * //     { // Region
+ * //       OptInStatus: "STRING_VALUE",
+ * //       Geography: [ // RegionGeographyList
+ * //         { // RegionGeography
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       RegionName: "STRING_VALUE",
+ * //       Endpoint: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeRegionsCommandInput - {@link DescribeRegionsCommandInput}
+ * @returns {@link DescribeRegionsCommandOutput}
  * @see {@link DescribeRegionsCommandInput} for command's `input` shape.
  * @see {@link DescribeRegionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe your regions
+ * ```javascript
+ * // This example describes all the regions that are available to you.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeRegionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Regions: [
+ *     {
+ *       Endpoint: "ec2.ap-south-1.amazonaws.com",
+ *       RegionName: "ap-south-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.eu-west-1.amazonaws.com",
+ *       RegionName: "eu-west-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.ap-southeast-1.amazonaws.com",
+ *       RegionName: "ap-southeast-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.ap-southeast-2.amazonaws.com",
+ *       RegionName: "ap-southeast-2"
+ *     },
+ *     {
+ *       Endpoint: "ec2.eu-central-1.amazonaws.com",
+ *       RegionName: "eu-central-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.ap-northeast-2.amazonaws.com",
+ *       RegionName: "ap-northeast-2"
+ *     },
+ *     {
+ *       Endpoint: "ec2.ap-northeast-1.amazonaws.com",
+ *       RegionName: "ap-northeast-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.us-east-1.amazonaws.com",
+ *       RegionName: "us-east-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.sa-east-1.amazonaws.com",
+ *       RegionName: "sa-east-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.us-west-1.amazonaws.com",
+ *       RegionName: "us-west-1"
+ *     },
+ *     {
+ *       Endpoint: "ec2.us-west-2.amazonaws.com",
+ *       RegionName: "us-west-2"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeRegionsCommand extends $Command<
-  DescribeRegionsCommandInput,
-  DescribeRegionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRegionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRegionsCommandInput, DescribeRegionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeRegionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRegionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRegionsResult.filterSensitiveLog,
+export class DescribeRegionsCommand extends command<DescribeRegionsCommandInput, DescribeRegionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRegions",
+  DescribeRegions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRegionsRequest;
+      output: DescribeRegionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRegionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeRegionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRegionsCommandOutput> {
-    return deserializeAws_ec2DescribeRegionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRegionsCommandInput;
+      output: DescribeRegionsCommandOutput;
+    };
+  };
 }

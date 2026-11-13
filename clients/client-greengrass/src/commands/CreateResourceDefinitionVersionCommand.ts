@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { CreateResourceDefinitionVersionRequest, CreateResourceDefinitionVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateResourceDefinitionVersionCommand,
-  serializeAws_restJson1CreateResourceDefinitionVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  CreateResourceDefinitionVersionRequest,
+  CreateResourceDefinitionVersionResponse,
+} from "../models/models_0";
+import { CreateResourceDefinitionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateResourceDefinitionVersionCommand}.
+ */
 export interface CreateResourceDefinitionVersionCommandInput extends CreateResourceDefinitionVersionRequest {}
-export interface CreateResourceDefinitionVersionCommandOutput
-  extends CreateResourceDefinitionVersionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateResourceDefinitionVersionCommand}.
+ */
+export interface CreateResourceDefinitionVersionCommandOutput extends CreateResourceDefinitionVersionResponse, __MetadataBearer {}
 
 /**
  * Creates a version of a resource definition that has already been defined.
@@ -30,74 +32,99 @@ export interface CreateResourceDefinitionVersionCommandOutput
  * ```javascript
  * import { GreengrassClient, CreateResourceDefinitionVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, CreateResourceDefinitionVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // CreateResourceDefinitionVersionRequest
+ *   AmznClientToken: "STRING_VALUE",
+ *   ResourceDefinitionId: "STRING_VALUE", // required
+ *   Resources: [ // __listOfResource
+ *     { // Resource
+ *       Id: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE", // required
+ *       ResourceDataContainer: { // ResourceDataContainer
+ *         LocalDeviceResourceData: { // LocalDeviceResourceData
+ *           GroupOwnerSetting: { // GroupOwnerSetting
+ *             AutoAddGroupOwner: true || false,
+ *             GroupOwner: "STRING_VALUE",
+ *           },
+ *           SourcePath: "STRING_VALUE",
+ *         },
+ *         LocalVolumeResourceData: { // LocalVolumeResourceData
+ *           DestinationPath: "STRING_VALUE",
+ *           GroupOwnerSetting: {
+ *             AutoAddGroupOwner: true || false,
+ *             GroupOwner: "STRING_VALUE",
+ *           },
+ *           SourcePath: "STRING_VALUE",
+ *         },
+ *         S3MachineLearningModelResourceData: { // S3MachineLearningModelResourceData
+ *           DestinationPath: "STRING_VALUE",
+ *           OwnerSetting: { // ResourceDownloadOwnerSetting
+ *             GroupOwner: "STRING_VALUE", // required
+ *             GroupPermission: "ro" || "rw", // required
+ *           },
+ *           S3Uri: "STRING_VALUE",
+ *         },
+ *         SageMakerMachineLearningModelResourceData: { // SageMakerMachineLearningModelResourceData
+ *           DestinationPath: "STRING_VALUE",
+ *           OwnerSetting: {
+ *             GroupOwner: "STRING_VALUE", // required
+ *             GroupPermission: "ro" || "rw", // required
+ *           },
+ *           SageMakerJobArn: "STRING_VALUE",
+ *         },
+ *         SecretsManagerSecretResourceData: { // SecretsManagerSecretResourceData
+ *           ARN: "STRING_VALUE",
+ *           AdditionalStagingLabelsToDownload: [ // __listOf__string
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new CreateResourceDefinitionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateResourceDefinitionVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateResourceDefinitionVersionCommandInput - {@link CreateResourceDefinitionVersionCommandInput}
+ * @returns {@link CreateResourceDefinitionVersionCommandOutput}
  * @see {@link CreateResourceDefinitionVersionCommandInput} for command's `input` shape.
  * @see {@link CreateResourceDefinitionVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class CreateResourceDefinitionVersionCommand extends $Command<
-  CreateResourceDefinitionVersionCommandInput,
-  CreateResourceDefinitionVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateResourceDefinitionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateResourceDefinitionVersionCommandInput, CreateResourceDefinitionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "CreateResourceDefinitionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateResourceDefinitionVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateResourceDefinitionVersionResponse.filterSensitiveLog,
+export class CreateResourceDefinitionVersionCommand extends command<CreateResourceDefinitionVersionCommandInput, CreateResourceDefinitionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateResourceDefinitionVersion",
+  CreateResourceDefinitionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateResourceDefinitionVersionRequest;
+      output: CreateResourceDefinitionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateResourceDefinitionVersionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateResourceDefinitionVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateResourceDefinitionVersionCommandOutput> {
-    return deserializeAws_restJson1CreateResourceDefinitionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateResourceDefinitionVersionCommandInput;
+      output: CreateResourceDefinitionVersionCommandOutput;
+    };
+  };
 }

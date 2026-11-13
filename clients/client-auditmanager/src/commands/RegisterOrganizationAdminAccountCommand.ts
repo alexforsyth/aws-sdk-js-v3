@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuditManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AuditManagerClient";
-import { RegisterOrganizationAdminAccountRequest, RegisterOrganizationAdminAccountResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RegisterOrganizationAdminAccountCommand,
-  serializeAws_restJson1RegisterOrganizationAdminAccountCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  RegisterOrganizationAdminAccountRequest,
+  RegisterOrganizationAdminAccountResponse,
+} from "../models/models_0";
+import { RegisterOrganizationAdminAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterOrganizationAdminAccountCommand}.
+ */
 export interface RegisterOrganizationAdminAccountCommandInput extends RegisterOrganizationAdminAccountRequest {}
-export interface RegisterOrganizationAdminAccountCommandOutput
-  extends RegisterOrganizationAdminAccountResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterOrganizationAdminAccountCommand}.
+ */
+export interface RegisterOrganizationAdminAccountCommandOutput extends RegisterOrganizationAdminAccountResponse, __MetadataBearer {}
 
 /**
  * <p> Enables an Amazon Web Services account within the organization as the delegated
@@ -31,74 +33,65 @@ export interface RegisterOrganizationAdminAccountCommandOutput
  * ```javascript
  * import { AuditManagerClient, RegisterOrganizationAdminAccountCommand } from "@aws-sdk/client-auditmanager"; // ES Modules import
  * // const { AuditManagerClient, RegisterOrganizationAdminAccountCommand } = require("@aws-sdk/client-auditmanager"); // CommonJS import
+ * // import type { AuditManagerClientConfig } from "@aws-sdk/client-auditmanager";
+ * const config = {}; // type is AuditManagerClientConfig
  * const client = new AuditManagerClient(config);
+ * const input = { // RegisterOrganizationAdminAccountRequest
+ *   adminAccountId: "STRING_VALUE", // required
+ * };
  * const command = new RegisterOrganizationAdminAccountCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterOrganizationAdminAccountResponse
+ * //   adminAccountId: "STRING_VALUE",
+ * //   organizationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RegisterOrganizationAdminAccountCommandInput - {@link RegisterOrganizationAdminAccountCommandInput}
+ * @returns {@link RegisterOrganizationAdminAccountCommandOutput}
  * @see {@link RegisterOrganizationAdminAccountCommandInput} for command's `input` shape.
  * @see {@link RegisterOrganizationAdminAccountCommandOutput} for command's `response` shape.
- * @see {@link AuditManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AuditManagerClientResolvedConfig | config} for AuditManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Your account isn't registered with Audit Manager. Check the delegated
+ *          administrator setup on the Audit Manager settings page, and try again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *          later. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource that's specified in the request can't be found. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AuditManagerServiceException}
+ * <p>Base exception class for all service exceptions from AuditManager service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterOrganizationAdminAccountCommand extends $Command<
-  RegisterOrganizationAdminAccountCommandInput,
-  RegisterOrganizationAdminAccountCommandOutput,
-  AuditManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterOrganizationAdminAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AuditManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterOrganizationAdminAccountCommandInput, RegisterOrganizationAdminAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AuditManagerClient";
-    const commandName = "RegisterOrganizationAdminAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterOrganizationAdminAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterOrganizationAdminAccountResponse.filterSensitiveLog,
+export class RegisterOrganizationAdminAccountCommand extends command<RegisterOrganizationAdminAccountCommandInput, RegisterOrganizationAdminAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterOrganizationAdminAccount",
+  RegisterOrganizationAdminAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterOrganizationAdminAccountRequest;
+      output: RegisterOrganizationAdminAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RegisterOrganizationAdminAccountCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1RegisterOrganizationAdminAccountCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterOrganizationAdminAccountCommandOutput> {
-    return deserializeAws_restJson1RegisterOrganizationAdminAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterOrganizationAdminAccountCommandInput;
+      output: RegisterOrganizationAdminAccountCommandOutput;
+    };
+  };
 }

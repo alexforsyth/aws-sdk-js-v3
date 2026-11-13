@@ -1,40 +1,75 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteBucketEncryptionRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteBucketEncryptionCommand,
-  serializeAws_restXmlDeleteBucketEncryptionCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw4, command } from "../commandBuilder";
+import type { DeleteBucketEncryptionRequest } from "../models/models_0";
+import { DeleteBucketEncryption$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteBucketEncryptionCommand}.
+ */
 export interface DeleteBucketEncryptionCommandInput extends DeleteBucketEncryptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteBucketEncryptionCommand}.
+ */
 export interface DeleteBucketEncryptionCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>This implementation of the DELETE action removes default encryption from the bucket.
- *          For information about the Amazon S3 default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Default Bucket Encryption</a> in the
- *             <i>Amazon S3 User Guide</i>.</p>
- *          <p>To use this operation, you must have permissions to perform the
- *             <code>s3:PutEncryptionConfiguration</code> action. The bucket owner has this permission
- *          by default. The bucket owner can grant this permission to others. For more information
- *          about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to your Amazon S3
- *             Resources</a> in the <i>Amazon S3 User Guide</i>.</p>
- *
- *          <p class="title">
- *             <b>Related Resources</b>
- *          </p>
+ * <p>This implementation of the DELETE action resets the default encryption for the bucket as server-side
+ *       encryption with Amazon S3 managed keys (SSE-S3).</p>
+ *          <note>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <b>General purpose buckets</b> - For information about the bucket
+ *             default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Bucket Default Encryption</a> in the
+ *               <i>Amazon S3 User Guide</i>.</p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <b>Directory buckets</b> -
+ *             For directory buckets, there are only two supported options for server-side encryption: SSE-S3 and SSE-KMS. For information about the default encryption configuration in
+ *             directory buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-bucket-encryption.html">Setting default server-side
+ *               encryption behavior for directory buckets</a>.</p>
+ *                </li>
+ *             </ul>
+ *          </note>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <ul>
+ *                   <li>
+ *                      <p>
+ *                         <b>General purpose bucket permissions</b> - The
+ *                   <code>s3:PutEncryptionConfiguration</code> permission is required in a policy. The bucket
+ *                 owner has this permission by default. The bucket owner can grant this permission to others.
+ *                 For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing Access Permissions to Your
+ *                   Amazon S3 Resources</a>.</p>
+ *                   </li>
+ *                   <li>
+ *                      <p>
+ *                         <b>Directory bucket permissions</b> - To grant access to
+ *                 this API operation, you must have the <code>s3express:PutEncryptionConfiguration</code>
+ *                 permission in an IAM identity-based policy instead of a bucket policy. Cross-account access to this API operation isn't supported. This operation can only be performed by the Amazon Web Services account that owns the resource.
+ *                 For more information about directory bucket policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html">Amazon Web Services Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
+ *                   </li>
+ *                </ul>
+ *             </dd>
+ *             <dt>HTTP Host header syntax</dt>
+ *             <dd>
+ *                <p>
+ *                   <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region-code</i>.amazonaws.com</code>.</p>
+ *             </dd>
+ *          </dl>
+ *          <p>The following operations are related to <code>DeleteBucketEncryption</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -47,74 +82,54 @@ export interface DeleteBucketEncryptionCommandOutput extends __MetadataBearer {}
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, DeleteBucketEncryptionCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, DeleteBucketEncryptionCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // DeleteBucketEncryptionRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new DeleteBucketEncryptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteBucketEncryptionCommandInput - {@link DeleteBucketEncryptionCommandInput}
+ * @returns {@link DeleteBucketEncryptionCommandOutput}
  * @see {@link DeleteBucketEncryptionCommandInput} for command's `input` shape.
  * @see {@link DeleteBucketEncryptionCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteBucketEncryptionCommand extends $Command<
-  DeleteBucketEncryptionCommandInput,
-  DeleteBucketEncryptionCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteBucketEncryptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteBucketEncryptionCommandInput, DeleteBucketEncryptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "DeleteBucketEncryptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteBucketEncryptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteBucketEncryptionCommand extends command<DeleteBucketEncryptionCommandInput, DeleteBucketEncryptionCommandOutput>(
+  _ep3,
+  _mw4,
+  "DeleteBucketEncryption",
+  DeleteBucketEncryption$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteBucketEncryptionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteBucketEncryptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteBucketEncryptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteBucketEncryptionCommandOutput> {
-    return deserializeAws_restXmlDeleteBucketEncryptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteBucketEncryptionCommandInput;
+      output: DeleteBucketEncryptionCommandOutput;
+    };
+  };
 }

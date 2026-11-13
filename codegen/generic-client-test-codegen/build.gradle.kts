@@ -13,14 +13,32 @@
  * permissions and limitations under the License.
  */
 
-import software.amazon.smithy.gradle.tasks.SmithyBuild
+import software.amazon.smithy.gradle.tasks.SmithyBuildTask
+
+val smithyVersion: String by project
+
+buildscript {
+    val smithyVersion: String by project
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        "classpath"("software.amazon.smithy:smithy-cli:$smithyVersion")
+    }
+}
 
 plugins {
-    id("software.amazon.smithy") version "0.5.3"
+    `java-library`
+
+    val smithyGradleVersion: String by project
+    id("software.amazon.smithy.gradle.smithy-base").version(smithyGradleVersion)
 }
 
 dependencies {
-    implementation("software.amazon.smithy:smithy-aws-protocol-tests:[1.12.0, 1.13.0[")
+    implementation("software.amazon.smithy:smithy-aws-protocol-tests:$smithyVersion")
+    implementation("software.amazon.smithy:smithy-aws-traits:$smithyVersion")
     implementation(project(":smithy-aws-typescript-codegen"))
 }
 
@@ -29,11 +47,12 @@ tasks["jar"].enabled = false
 
 // Run the SmithyBuild task manually since this project needs the built JAR
 // from smithy-aws-typescript-codegen.
-tasks["smithyBuildJar"].enabled = false
+tasks["smithyBuild"].enabled = false
 
-tasks.create<SmithyBuild>("buildSdk") {
-    addRuntimeClasspath = true
+val buildSdk = tasks.register<SmithyBuildTask>("buildSdk") {
+    models.set(files("model/"))
+    smithyBuildConfigs.set(files("smithy-build.json"))
 }
 
 // Run the `buildSdk` automatically.
-tasks["build"].finalizedBy(tasks["buildSdk"])
+tasks["build"].finalizedBy(buildSdk)

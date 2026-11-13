@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { GetPolicyRequest, GetPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetPolicyCommand,
-  serializeAws_restJson1GetPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPolicyRequest, GetPolicyResponse } from "../models/models_0";
+import { GetPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPolicyCommand}.
+ */
 export interface GetPolicyCommandInput extends GetPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPolicyCommand}.
+ */
 export interface GetPolicyCommandOutput extends GetPolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface GetPolicyCommandOutput extends GetPolicyResponse, __MetadataBea
  * ```javascript
  * import { LambdaClient, GetPolicyCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, GetPolicyCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // GetPolicyRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Qualifier: "STRING_VALUE",
+ * };
  * const command = new GetPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetPolicyResponse
+ * //   Policy: "STRING_VALUE",
+ * //   RevisionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetPolicyCommandInput - {@link GetPolicyCommandInput}
+ * @returns {@link GetPolicyCommandOutput}
  * @see {@link GetPolicyCommandInput} for command's `input` shape.
  * @see {@link GetPolicyCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To retrieve a Lambda function policy
+ * ```javascript
+ * // The following example returns the resource-based policy for version 1 of a Lambda function named my-function.
+ * const input = {
+ *   FunctionName: "my-function",
+ *   Qualifier: "1"
+ * };
+ * const command = new GetPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Policy: `{"Version":"2012-10-17","Id":"default","Statement":[{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::123456789012:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function:1"}]}`,
+ *   RevisionId: "4843f2f6-7c59-4fda-b484-afd0bc0e22b8"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetPolicyCommand extends $Command<
-  GetPolicyCommandInput,
-  GetPolicyCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPolicyCommandInput, GetPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "GetPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPolicyResponse.filterSensitiveLog,
+export class GetPolicyCommand extends command<GetPolicyCommandInput, GetPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPolicy",
+  GetPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPolicyRequest;
+      output: GetPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPolicyCommandOutput> {
-    return deserializeAws_restJson1GetPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPolicyCommandInput;
+      output: GetPolicyCommandOutput;
+    };
+  };
 }

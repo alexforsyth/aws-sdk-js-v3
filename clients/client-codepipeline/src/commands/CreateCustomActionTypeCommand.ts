@@ -1,96 +1,163 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { CreateCustomActionTypeInput, CreateCustomActionTypeOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateCustomActionTypeCommand,
-  serializeAws_json1_1CreateCustomActionTypeCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateCustomActionTypeInput, CreateCustomActionTypeOutput } from "../models/models_0";
+import { CreateCustomActionType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCustomActionTypeCommand}.
+ */
 export interface CreateCustomActionTypeCommandInput extends CreateCustomActionTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCustomActionTypeCommand}.
+ */
 export interface CreateCustomActionTypeCommandOutput extends CreateCustomActionTypeOutput, __MetadataBearer {}
 
 /**
  * <p>Creates a new custom action that can be used in all pipelines associated with the
- *             AWS account. Only used for custom actions.</p>
+ *                 Amazon Web Services account. Only used for custom actions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodePipelineClient, CreateCustomActionTypeCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, CreateCustomActionTypeCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // CreateCustomActionTypeInput
+ *   category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval" || "Compute", // required
+ *   provider: "STRING_VALUE", // required
+ *   version: "STRING_VALUE", // required
+ *   settings: { // ActionTypeSettings
+ *     thirdPartyConfigurationUrl: "STRING_VALUE",
+ *     entityUrlTemplate: "STRING_VALUE",
+ *     executionUrlTemplate: "STRING_VALUE",
+ *     revisionUrlTemplate: "STRING_VALUE",
+ *   },
+ *   configurationProperties: [ // ActionConfigurationPropertyList
+ *     { // ActionConfigurationProperty
+ *       name: "STRING_VALUE", // required
+ *       required: true || false, // required
+ *       key: true || false, // required
+ *       secret: true || false, // required
+ *       queryable: true || false,
+ *       description: "STRING_VALUE",
+ *       type: "String" || "Number" || "Boolean",
+ *     },
+ *   ],
+ *   inputArtifactDetails: { // ArtifactDetails
+ *     minimumCount: Number("int"), // required
+ *     maximumCount: Number("int"), // required
+ *   },
+ *   outputArtifactDetails: {
+ *     minimumCount: Number("int"), // required
+ *     maximumCount: Number("int"), // required
+ *   },
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateCustomActionTypeCommand(input);
  * const response = await client.send(command);
+ * // { // CreateCustomActionTypeOutput
+ * //   actionType: { // ActionType
+ * //     id: { // ActionTypeId
+ * //       category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval" || "Compute", // required
+ * //       owner: "AWS" || "ThirdParty" || "Custom", // required
+ * //       provider: "STRING_VALUE", // required
+ * //       version: "STRING_VALUE", // required
+ * //     },
+ * //     settings: { // ActionTypeSettings
+ * //       thirdPartyConfigurationUrl: "STRING_VALUE",
+ * //       entityUrlTemplate: "STRING_VALUE",
+ * //       executionUrlTemplate: "STRING_VALUE",
+ * //       revisionUrlTemplate: "STRING_VALUE",
+ * //     },
+ * //     actionConfigurationProperties: [ // ActionConfigurationPropertyList
+ * //       { // ActionConfigurationProperty
+ * //         name: "STRING_VALUE", // required
+ * //         required: true || false, // required
+ * //         key: true || false, // required
+ * //         secret: true || false, // required
+ * //         queryable: true || false,
+ * //         description: "STRING_VALUE",
+ * //         type: "String" || "Number" || "Boolean",
+ * //       },
+ * //     ],
+ * //     inputArtifactDetails: { // ArtifactDetails
+ * //       minimumCount: Number("int"), // required
+ * //       maximumCount: Number("int"), // required
+ * //     },
+ * //     outputArtifactDetails: {
+ * //       minimumCount: Number("int"), // required
+ * //       maximumCount: Number("int"), // required
+ * //     },
+ * //   },
+ * //   tags: [ // TagList
+ * //     { // Tag
+ * //       key: "STRING_VALUE", // required
+ * //       value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateCustomActionTypeCommandInput - {@link CreateCustomActionTypeCommandInput}
+ * @returns {@link CreateCustomActionTypeCommandOutput}
  * @see {@link CreateCustomActionTypeCommandInput} for command's `input` shape.
  * @see {@link CreateCustomActionTypeCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Unable to modify the tag due to a simultaneous update request.</p>
+ *
+ * @throws {@link InvalidTagsException} (client fault)
+ *  <p>The specified resource tags are invalid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The number of pipelines associated with the Amazon Web Services account has exceeded
+ *             the limit allowed for the account.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>The tags limit for a resource has been exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class CreateCustomActionTypeCommand extends $Command<
-  CreateCustomActionTypeCommandInput,
-  CreateCustomActionTypeCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateCustomActionTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateCustomActionTypeCommandInput, CreateCustomActionTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "CreateCustomActionTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateCustomActionTypeInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateCustomActionTypeOutput.filterSensitiveLog,
+export class CreateCustomActionTypeCommand extends command<CreateCustomActionTypeCommandInput, CreateCustomActionTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCustomActionType",
+  CreateCustomActionType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCustomActionTypeInput;
+      output: CreateCustomActionTypeOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateCustomActionTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateCustomActionTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateCustomActionTypeCommandOutput> {
-    return deserializeAws_json1_1CreateCustomActionTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateCustomActionTypeCommandInput;
+      output: CreateCustomActionTypeCommandOutput;
+    };
+  };
 }

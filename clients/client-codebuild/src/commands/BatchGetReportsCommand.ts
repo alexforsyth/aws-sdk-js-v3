@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { BatchGetReportsInput, BatchGetReportsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetReportsCommand,
-  serializeAws_json1_1BatchGetReportsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetReportsInput, BatchGetReportsOutput } from "../models/models_0";
+import { BatchGetReports$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetReportsCommand}.
+ */
 export interface BatchGetReportsCommandInput extends BatchGetReportsInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetReportsCommand}.
+ */
 export interface BatchGetReportsCommandOutput extends BatchGetReportsOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,93 @@ export interface BatchGetReportsCommandOutput extends BatchGetReportsOutput, __M
  * ```javascript
  * import { CodeBuildClient, BatchGetReportsCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, BatchGetReportsCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // BatchGetReportsInput
+ *   reportArns: [ // ReportArns // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetReportsCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetReportsOutput
+ * //   reports: [ // Reports
+ * //     { // Report
+ * //       arn: "STRING_VALUE",
+ * //       type: "TEST" || "CODE_COVERAGE",
+ * //       name: "STRING_VALUE",
+ * //       reportGroupArn: "STRING_VALUE",
+ * //       executionId: "STRING_VALUE",
+ * //       status: "GENERATING" || "SUCCEEDED" || "FAILED" || "INCOMPLETE" || "DELETING",
+ * //       created: new Date("TIMESTAMP"),
+ * //       expired: new Date("TIMESTAMP"),
+ * //       exportConfig: { // ReportExportConfig
+ * //         exportConfigType: "S3" || "NO_EXPORT",
+ * //         s3Destination: { // S3ReportExportConfig
+ * //           bucket: "STRING_VALUE",
+ * //           bucketOwner: "STRING_VALUE",
+ * //           path: "STRING_VALUE",
+ * //           packaging: "ZIP" || "NONE",
+ * //           encryptionKey: "STRING_VALUE",
+ * //           encryptionDisabled: true || false,
+ * //         },
+ * //       },
+ * //       truncated: true || false,
+ * //       testSummary: { // TestReportSummary
+ * //         total: Number("int"), // required
+ * //         statusCounts: { // ReportStatusCounts // required
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //         durationInNanoSeconds: Number("long"), // required
+ * //       },
+ * //       codeCoverageSummary: { // CodeCoverageReportSummary
+ * //         lineCoveragePercentage: Number("double"),
+ * //         linesCovered: Number("int"),
+ * //         linesMissed: Number("int"),
+ * //         branchCoveragePercentage: Number("double"),
+ * //         branchesCovered: Number("int"),
+ * //         branchesMissed: Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   reportsNotFound: [ // ReportArns
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetReportsCommandInput - {@link BatchGetReportsCommandInput}
+ * @returns {@link BatchGetReportsCommandOutput}
  * @see {@link BatchGetReportsCommandInput} for command's `input` shape.
  * @see {@link BatchGetReportsCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetReportsCommand extends $Command<
-  BatchGetReportsCommandInput,
-  BatchGetReportsCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetReportsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetReportsCommandInput, BatchGetReportsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "BatchGetReportsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetReportsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetReportsOutput.filterSensitiveLog,
+export class BatchGetReportsCommand extends command<BatchGetReportsCommandInput, BatchGetReportsCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetReports",
+  BatchGetReports$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetReportsInput;
+      output: BatchGetReportsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetReportsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetReportsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetReportsCommandOutput> {
-    return deserializeAws_json1_1BatchGetReportsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetReportsCommandInput;
+      output: BatchGetReportsCommandOutput;
+    };
+  };
 }

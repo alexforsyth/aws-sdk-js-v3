@@ -1,1156 +1,2786 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { AutomaticJsonStringConversion as __AutomaticJsonStringConversion } from "@smithy/core/serde";
+
+import type {
+  AttachmentErrorCode,
+  AttachmentState,
+  AttachmentType,
+  ChangeAction,
+  ChangeSetState,
+  ChangeStatus,
+  ChangeType,
+  ConnectionState,
+  ConnectionStatus,
+  ConnectionType,
+  ConnectPeerAssociationState,
+  ConnectPeerErrorCode,
+  ConnectPeerState,
+  CoreNetworkPolicyAlias,
+  CoreNetworkState,
+  CustomerGatewayAssociationState,
+  DeviceState,
+  GlobalNetworkState,
+  LinkAssociationState,
+  LinkState,
+  NatGatewaySupportState,
+  NatGatewaySupportValue,
+  NatRuleState,
+  PeeringErrorCode,
+  PeeringState,
+  PeeringType,
+  RouteAnalysisCompletionReasonCode,
+  RouteAnalysisCompletionResultCode,
+  RouteAnalysisStatus,
+  RouteState,
+  RouteTableType,
+  RouteType,
+  RoutingPolicyDirection,
+  SegmentActionServiceInsertion,
+  SendViaMode,
+  SiteState,
+  TransitGatewayConnectPeerAssociationState,
+  TransitGatewayRegistrationState,
+  TunnelProtocol,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient access to perform this action.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message: string | undefined;
-}
-
-export namespace AccessDeniedException {
+export interface AcceptAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the attachment. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateCustomerGatewayRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the customer gateway. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.</p>
-   */
-  CustomerGatewayArn: string | undefined;
-
-  /**
-   * <p>The ID of the global network.</p>
-   */
-  GlobalNetworkId: string | undefined;
-
-  /**
-   * <p>The ID of the device.</p>
-   */
-  DeviceId: string | undefined;
-
-  /**
-   * <p>The ID of the link.</p>
-   */
-  LinkId?: string;
-}
-
-export namespace AssociateCustomerGatewayRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateCustomerGatewayRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum CustomerGatewayAssociationState {
-  available = "AVAILABLE",
-  deleted = "DELETED",
-  deleting = "DELETING",
-  pending = "PENDING",
+  AttachmentId: string | undefined;
 }
 
 /**
- * <p>Describes the association between a customer gateway, a device, and a link.</p>
+ * <p>Describes the error associated with an attachment request.</p>
+ * @public
  */
-export interface CustomerGatewayAssociation {
+export interface AttachmentError {
   /**
-   * <p>The Amazon Resource Name (ARN) of the customer gateway.</p>
+   * <p>The error code for the attachment request. </p>
+   * @public
    */
-  CustomerGatewayArn?: string;
+  Code?: AttachmentErrorCode | undefined;
 
   /**
-   * <p>The ID of the global network.</p>
+   * <p>The message associated with the error <code>code</code>.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  Message?: string | undefined;
 
   /**
-   * <p>The ID of the device.</p>
+   * <p>The ARN of the requested attachment resource.</p>
+   * @public
    */
-  DeviceId?: string;
+  ResourceArn?: string | undefined;
 
   /**
-   * <p>The ID of the link.</p>
+   * <p>The ID of the attachment request.</p>
+   * @public
    */
-  LinkId?: string;
-
-  /**
-   * <p>The association state.</p>
-   */
-  State?: CustomerGatewayAssociationState | string;
-}
-
-export namespace CustomerGatewayAssociation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomerGatewayAssociation): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateCustomerGatewayResponse {
-  /**
-   * <p>The customer gateway association.</p>
-   */
-  CustomerGatewayAssociation?: CustomerGatewayAssociation;
-}
-
-export namespace AssociateCustomerGatewayResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateCustomerGatewayResponse): any => ({
-    ...obj,
-  });
+  RequestId?: string | undefined;
 }
 
 /**
- * <p>There was a conflict processing the request. Updating or deleting the resource can
- *             cause an inconsistent state.</p>
+ * <p>Describes a tag.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  Message: string | undefined;
+export interface Tag {
   /**
-   * <p>The ID of the resource.</p>
+   * <p>The tag key.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  ResourceId: string | undefined;
+  Key?: string | undefined;
 
   /**
-   * <p>The resource type.</p>
+   * <p>The tag value.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  ResourceType: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
- * <p>The request has failed due to an internal error.</p>
+ * <p>Describes proposed changes to a network function group. </p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  Message: string | undefined;
+export interface ProposedNetworkFunctionGroupChange {
   /**
-   * <p>Indicates when to retry the request.</p>
+   * <p>The list of proposed changes to the key-value tags associated with the network function group.</p>
+   * @public
    */
-  RetryAfterSeconds?: number;
-}
+  Tags?: Tag[] | undefined;
 
-export namespace InternalServerException {
   /**
-   * @internal
+   * <p>The proposed new attachment policy rule number for the network function group.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
+  AttachmentPolicyRuleNumber?: number | undefined;
+
+  /**
+   * <p>The proposed name change for the network function group name.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
 }
 
 /**
- * <p>The specified resource could not be found.</p>
+ * <p>Describes a proposed segment change. In some cases, the segment change must first be evaluated and accepted. </p>
+ * @public
  */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message: string | undefined;
+export interface ProposedSegmentChange {
   /**
-   * <p>The ID of the resource.</p>
+   * <p>The list of key-value tags that changed for the segment.</p>
+   * @public
    */
-  ResourceId: string | undefined;
+  Tags?: Tag[] | undefined;
 
   /**
-   * <p>The resource type.</p>
+   * <p>The rule number in the policy document that applies to this change.</p>
+   * @public
    */
-  ResourceType: string | undefined;
-}
+  AttachmentPolicyRuleNumber?: number | undefined;
 
-export namespace ResourceNotFoundException {
   /**
-   * @internal
+   * <p>The name of the segment to change.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
+  SegmentName?: string | undefined;
 }
 
 /**
- * <p>A service limit was exceeded.</p>
+ * <p>Describes a core network attachment.</p>
+ * @public
  */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
+export interface Attachment {
   /**
-   * <p>The error message.</p>
+   * <p>The ID of a core network.</p>
+   * @public
    */
-  Message: string | undefined;
+  CoreNetworkId?: string | undefined;
 
   /**
-   * <p>The ID of the resource.</p>
+   * <p>The ARN of a core network.</p>
+   * @public
    */
-  ResourceId?: string;
+  CoreNetworkArn?: string | undefined;
 
   /**
-   * <p>The resource type.</p>
+   * <p>The ID of the attachment.</p>
+   * @public
    */
-  ResourceType?: string;
+  AttachmentId?: string | undefined;
 
   /**
-   * <p>The limit code.</p>
+   * <p>The ID of the attachment account owner.</p>
+   * @public
    */
-  LimitCode: string | undefined;
+  OwnerAccountId?: string | undefined;
 
   /**
-   * <p>The service code.</p>
+   * <p>The type of attachment.</p>
+   * @public
    */
-  ServiceCode: string | undefined;
-}
+  AttachmentType?: AttachmentType | undefined;
 
-export namespace ServiceQuotaExceededException {
   /**
-   * @internal
+   * <p>The state of the attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
+  State?: AttachmentState | undefined;
+
+  /**
+   * <p>The Region where the edge is located. This is returned for all attachment types except a Direct Connect gateway attachment, which instead returns <code>EdgeLocations</code>.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The edge locations that the Direct Connect gateway is associated with. This is returned only for Direct Connect gateway attachments. All other attachment types retrun <code>EdgeLocation</code>.</p>
+   * @public
+   */
+  EdgeLocations?: string[] | undefined;
+
+  /**
+   * <p>The attachment resource ARN.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The policy rule number associated with the attachment.</p>
+   * @public
+   */
+  AttachmentPolicyRuleNumber?: number | undefined;
+
+  /**
+   * <p>The name of the segment attachment.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The name of the network function group.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
+
+  /**
+   * <p>The state of NAT gateway support on the attachment. This is returned only to the core network owner for attachment types that support NAT.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportState | undefined;
+
+  /**
+   * <p>Indicates whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules. This is returned only to the core network owner for attachment types that support NAT.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The tags associated with the attachment.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The attachment to move from one segment to another.</p>
+   * @public
+   */
+  ProposedSegmentChange?: ProposedSegmentChange | undefined;
+
+  /**
+   * <p>Describes a proposed change to a network function group associated with the attachment.</p>
+   * @public
+   */
+  ProposedNetworkFunctionGroupChange?: ProposedNetworkFunctionGroupChange | undefined;
+
+  /**
+   * <p>The timestamp when the attachment was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the attachment was last updated.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+
+  /**
+   * <p>Describes the error associated with the attachment request.</p>
+   * @public
+   */
+  LastModificationErrors?: AttachmentError[] | undefined;
 }
 
 /**
- * <p>The request was denied due to request throttling.</p>
+ * @public
  */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  Message: string | undefined;
+export interface AcceptAttachmentResponse {
   /**
-   * <p>Indicates when to retry the request.</p>
+   * <p>The response to the attachment request. </p>
+   * @public
    */
-  RetryAfterSeconds?: number;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
+  Attachment?: Attachment | undefined;
 }
 
 /**
  * <p>Describes a validation exception for a field.</p>
+ * @public
  */
 export interface ValidationExceptionField {
   /**
    * <p>The name of the field.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The message for the field.</p>
+   * @public
    */
   Message: string | undefined;
-}
-
-export namespace ValidationExceptionField {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationExceptionField): any => ({
-    ...obj,
-  });
-}
-
-export enum ValidationExceptionReason {
-  CANNOT_PARSE = "CannotParse",
-  FIELD_VALIDATION_FAILED = "FieldValidationFailed",
-  OTHER = "Other",
-  UNKNOWN_OPERATION = "UnknownOperation",
 }
 
 /**
- * <p>The input fails to satisfy the constraints.</p>
+ * <p>Describes the current status of an account within an Amazon Web Services Organization, including service-linked roles (SLRs).</p>
+ * @public
  */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  Message: string | undefined;
+export interface AccountStatus {
   /**
-   * <p>The reason for the error.</p>
+   * <p>The ID of an account within the Amazon Web Services Organization.</p>
+   * @public
    */
-  Reason?: ValidationExceptionReason | string;
+  AccountId?: string | undefined;
 
   /**
-   * <p>The fields that caused the error, if applicable.</p>
+   * <p>The status of SLR deployment for the account.</p>
+   * @public
    */
-  Fields?: ValidationExceptionField[];
+  SLRDeploymentStatus?: string | undefined;
 }
 
-export namespace ValidationException {
+/**
+ * @public
+ */
+export interface AssociateConnectPeerRequest {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateLinkRequest {
-  /**
-   * <p>The ID of the global network.</p>
+   * <p>The ID of your global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
+   * <p>The ID of the Connect peer.</p>
+   * @public
+   */
+  ConnectPeerId: string | undefined;
+
+  /**
    * <p>The ID of the device.</p>
+   * @public
    */
   DeviceId: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
+   */
+  LinkId?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network Connect peer association.</p>
+ * @public
+ */
+export interface ConnectPeerAssociation {
+  /**
+   * <p>The ID of the Connect peer.</p>
+   * @public
+   */
+  ConnectPeerId?: string | undefined;
+
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the device to connect to.</p>
+   * @public
+   */
+  DeviceId?: string | undefined;
+
+  /**
+   * <p>The ID of the link.</p>
+   * @public
+   */
+  LinkId?: string | undefined;
+
+  /**
+   * <p>The state of the Connect peer association.</p>
+   * @public
+   */
+  State?: ConnectPeerAssociationState | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateConnectPeerResponse {
+  /**
+   * <p>The response to the Connect peer request.</p>
+   * @public
+   */
+  ConnectPeerAssociation?: ConnectPeerAssociation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateCustomerGatewayRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the customer gateway.</p>
+   * @public
+   */
+  CustomerGatewayArn: string | undefined;
+
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the device.</p>
+   * @public
+   */
+  DeviceId: string | undefined;
+
+  /**
+   * <p>The ID of the link.</p>
+   * @public
+   */
+  LinkId?: string | undefined;
+}
+
+/**
+ * <p>Describes the association between a customer gateway, a device, and a link.</p>
+ * @public
+ */
+export interface CustomerGatewayAssociation {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the customer gateway.</p>
+   * @public
+   */
+  CustomerGatewayArn?: string | undefined;
+
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the device.</p>
+   * @public
+   */
+  DeviceId?: string | undefined;
+
+  /**
+   * <p>The ID of the link.</p>
+   * @public
+   */
+  LinkId?: string | undefined;
+
+  /**
+   * <p>The association state.</p>
+   * @public
+   */
+  State?: CustomerGatewayAssociationState | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateCustomerGatewayResponse {
+  /**
+   * <p>The customer gateway association.</p>
+   * @public
+   */
+  CustomerGatewayAssociation?: CustomerGatewayAssociation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateLinkRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the device.</p>
+   * @public
+   */
+  DeviceId: string | undefined;
+
+  /**
+   * <p>The ID of the link.</p>
+   * @public
    */
   LinkId: string | undefined;
 }
 
-export namespace AssociateLinkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateLinkRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum LinkAssociationState {
-  available = "AVAILABLE",
-  deleted = "DELETED",
-  deleting = "DELETING",
-  pending = "PENDING",
-}
-
 /**
  * <p>Describes the association between a device and a link.</p>
+ * @public
  */
 export interface LinkAssociation {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The device ID for the link association.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The state of the association.</p>
+   * @public
    */
-  LinkAssociationState?: LinkAssociationState | string;
+  LinkAssociationState?: LinkAssociationState | undefined;
 }
 
-export namespace LinkAssociation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LinkAssociation): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateLinkResponse {
   /**
    * <p>The link association.</p>
+   * @public
    */
-  LinkAssociation?: LinkAssociation;
+  LinkAssociation?: LinkAssociation | undefined;
 }
 
-export namespace AssociateLinkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateLinkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateTransitGatewayConnectPeerRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Connect peer.</p>
+   * @public
    */
   TransitGatewayConnectPeerArn: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
   DeviceId: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
-  LinkId?: string;
-}
-
-export namespace AssociateTransitGatewayConnectPeerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateTransitGatewayConnectPeerRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum TransitGatewayConnectPeerAssociationState {
-  available = "AVAILABLE",
-  deleted = "DELETED",
-  deleting = "DELETING",
-  pending = "PENDING",
+  LinkId?: string | undefined;
 }
 
 /**
  * <p>Describes a transit gateway Connect peer association.</p>
+ * @public
  */
 export interface TransitGatewayConnectPeerAssociation {
   /**
    * <p>The Amazon Resource Name (ARN) of the transit gateway Connect peer.</p>
+   * @public
    */
-  TransitGatewayConnectPeerArn?: string;
+  TransitGatewayConnectPeerArn?: string | undefined;
 
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The state of the association.</p>
+   * @public
    */
-  State?: TransitGatewayConnectPeerAssociationState | string;
-}
-
-export namespace TransitGatewayConnectPeerAssociation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TransitGatewayConnectPeerAssociation): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateTransitGatewayConnectPeerResponse {
-  /**
-   * <p>The transit gateway Connect peer association.</p>
-   */
-  TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation;
-}
-
-export namespace AssociateTransitGatewayConnectPeerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateTransitGatewayConnectPeerResponse): any => ({
-    ...obj,
-  });
+  State?: TransitGatewayConnectPeerAssociationState | undefined;
 }
 
 /**
- * <p>Specifies a location in AWS.</p>
+ * @public
+ */
+export interface AssociateTransitGatewayConnectPeerResponse {
+  /**
+   * <p>The transit gateway Connect peer association.</p>
+   * @public
+   */
+  TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation | undefined;
+}
+
+/**
+ * <p>Describes a NAT rule of an attachment.</p>
+ * @public
+ */
+export interface NatRule {
+  /**
+   * <p>The rule number. Rule numbers identify the rules of an attachment and don't set the order in which rules are evaluated.</p>
+   * @public
+   */
+  RuleNumber?: number | undefined;
+
+  /**
+   * <p>The source CIDR block that the rule matches for traffic from the attachment.</p>
+   * @public
+   */
+  MatchSourceCidr?: string | undefined;
+
+  /**
+   * <p>The CIDR block that matching source addresses are translated to.</p>
+   * @public
+   */
+  NatCidr?: string | undefined;
+
+  /**
+   * <p>The state of the NAT rule. The possible values are the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>CREATING</code>: The rule is being created.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MODIFYING</code>: The rule is being modified.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DELETING</code>: The rule is being deleted.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ACTIVATING</code>: NAT gateway support is being enabled, and the rule is being applied.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ACTIVATED</code>: NAT gateway support is enabled, and the rule is applied.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DEACTIVATING</code>: NAT gateway support is being disabled, and the rule is being removed from use.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DEACTIVATED</code>: NAT gateway support is disabled, and the rule isn't applied.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED</code>: The attachment failed to be created, and the rule isn't applied.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING_ATTACHMENT_ACCEPTANCE</code>: The attachment is pending acceptance. The rule is applied after the attachment is accepted.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  State?: NatRuleState | undefined;
+}
+
+/**
+ * <p>Describes the NAT configuration of a core network attachment.</p>
+ * @public
+ */
+export interface AttachmentNatConfiguration {
+  /**
+   * <p>The ID of the attachment.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The state of NAT gateway support on the attachment.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportState | undefined;
+
+  /**
+   * <p>Indicates whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The NAT rules of the attachment.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRule[] | undefined;
+}
+
+/**
+ * <p>Summary information about routing policy associations for an attachment.</p>
+ * @public
+ */
+export interface AttachmentRoutingPolicyAssociationSummary {
+  /**
+   * <p>The ID of the attachment associated with the routing policy.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The list of routing policies that are pending association with the attachment.</p>
+   * @public
+   */
+  PendingRoutingPolicies?: string[] | undefined;
+
+  /**
+   * <p>The list of routing policies currently associated with the attachment.</p>
+   * @public
+   */
+  AssociatedRoutingPolicies?: string[] | undefined;
+
+  /**
+   * <p>The routing policy label associated with the attachment.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+}
+
+/**
+ * <p>Specifies a location in Amazon Web Services.</p>
+ * @public
  */
 export interface AWSLocation {
   /**
-   * <p>The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.</p>
+   * <p>The Zone that the device is located in. Specify the ID of an Availability Zone, Local
+   *             Zone, Wavelength Zone, or an Outpost.</p>
+   * @public
    */
-  Zone?: string;
+  Zone?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the subnet the device is located in.</p>
+   * <p>The Amazon Resource Name (ARN) of the subnet that the device is located in.</p>
+   * @public
    */
-  SubnetArn?: string;
-}
-
-export namespace AWSLocation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AWSLocation): any => ({
-    ...obj,
-  });
+  SubnetArn?: string | undefined;
 }
 
 /**
  * <p>Describes bandwidth information.</p>
+ * @public
  */
 export interface Bandwidth {
   /**
    * <p>Upload speed in Mbps.</p>
+   * @public
    */
-  UploadSpeed?: number;
+  UploadSpeed?: number | undefined;
 
   /**
    * <p>Download speed in Mbps.</p>
+   * @public
    */
-  DownloadSpeed?: number;
-}
-
-export namespace Bandwidth {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Bandwidth): any => ({
-    ...obj,
-  });
-}
-
-export enum ConnectionState {
-  available = "AVAILABLE",
-  deleting = "DELETING",
-  pending = "PENDING",
-  updating = "UPDATING",
+  DownloadSpeed?: number | undefined;
 }
 
 /**
- * <p>Describes a tag.</p>
+ * <p>Describes the BGP options.</p>
+ * @public
  */
-export interface Tag {
+export interface BgpOptions {
   /**
-   * <p>The tag key.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   * <p>The Peer ASN of the BGP.</p>
+   * @public
    */
-  Key?: string;
-
-  /**
-   * <p>The tag value.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
-   */
-  Value?: string;
+  PeerAsn?: number | undefined;
 }
 
-export namespace Tag {
+/**
+ * <p>Describes a core network Connect attachment options.</p>
+ * @public
+ */
+export interface ConnectAttachmentOptions {
   /**
-   * @internal
+   * <p>The protocol used for the attachment connection.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
+  Protocol?: TunnelProtocol | undefined;
+}
+
+/**
+ * <p>Describes a core network Connect attachment.</p>
+ * @public
+ */
+export interface ConnectAttachment {
+  /**
+   * <p>The attachment details.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+
+  /**
+   * <p>The ID of the transport attachment.</p>
+   * @public
+   */
+  TransportAttachmentId?: string | undefined;
+
+  /**
+   * <p>Options for connecting an attachment.</p>
+   * @public
+   */
+  Options?: ConnectAttachmentOptions | undefined;
 }
 
 /**
  * <p>Describes a connection.</p>
+ * @public
  */
 export interface Connection {
   /**
    * <p>The ID of the connection.</p>
+   * @public
    */
-  ConnectionId?: string;
+  ConnectionId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the connection.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The ID of the first device in the connection.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The ID of the second device in the connection.</p>
+   * @public
    */
-  ConnectedDeviceId?: string;
+  ConnectedDeviceId?: string | undefined;
 
   /**
    * <p>The ID of the link for the first device in the connection.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The ID of the link for the second device in the connection.</p>
+   * @public
    */
-  ConnectedLinkId?: string;
+  ConnectedLinkId?: string | undefined;
 
   /**
    * <p>The description of the connection.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date and time that the connection was created.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The state of the connection.</p>
+   * @public
    */
-  State?: ConnectionState | string;
+  State?: ConnectionState | undefined;
 
   /**
    * <p>The tags for the connection.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace Connection {
+/**
+ * <p>Describes connection health.</p>
+ * @public
+ */
+export interface ConnectionHealth {
   /**
-   * @internal
+   * <p>The connection type.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Connection): any => ({
-    ...obj,
-  });
+  Type?: ConnectionType | undefined;
+
+  /**
+   * <p>The connection status.</p>
+   * @public
+   */
+  Status?: ConnectionStatus | undefined;
+
+  /**
+   * <p>The time the status was last updated.</p>
+   * @public
+   */
+  Timestamp?: Date | undefined;
 }
 
+/**
+ * <p>Describes a core network BGP configuration.</p>
+ * @public
+ */
+export interface ConnectPeerBgpConfiguration {
+  /**
+   * <p>The ASN of the Coret Network.</p>
+   * @public
+   */
+  CoreNetworkAsn?: number | undefined;
+
+  /**
+   * <p>The ASN of the Connect peer.</p>
+   * @public
+   */
+  PeerAsn?: number | undefined;
+
+  /**
+   * <p>The address of a core network.</p>
+   * @public
+   */
+  CoreNetworkAddress?: string | undefined;
+
+  /**
+   * <p>The address of a core network Connect peer.</p>
+   * @public
+   */
+  PeerAddress?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network Connect peer configuration.</p>
+ * @public
+ */
+export interface ConnectPeerConfiguration {
+  /**
+   * <p>The IP address of a core network.</p>
+   * @public
+   */
+  CoreNetworkAddress?: string | undefined;
+
+  /**
+   * <p>The IP address of the Connect peer.</p>
+   * @public
+   */
+  PeerAddress?: string | undefined;
+
+  /**
+   * <p>The inside IP addresses used for a Connect peer configuration.</p>
+   * @public
+   */
+  InsideCidrBlocks?: string[] | undefined;
+
+  /**
+   * <p>The protocol used for a Connect peer configuration.</p>
+   * @public
+   */
+  Protocol?: TunnelProtocol | undefined;
+
+  /**
+   * <p>The Connect peer BGP configurations.</p>
+   * @public
+   */
+  BgpConfigurations?: ConnectPeerBgpConfiguration[] | undefined;
+}
+
+/**
+ * <p>Describes an error associated with a Connect peer request</p>
+ * @public
+ */
+export interface ConnectPeerError {
+  /**
+   * <p>The error code for the Connect peer request.</p>
+   * @public
+   */
+  Code?: ConnectPeerErrorCode | undefined;
+
+  /**
+   * <p>The message associated with the error <code>code</code>.</p>
+   * @public
+   */
+  Message?: string | undefined;
+
+  /**
+   * <p>The ARN of the requested Connect peer resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The ID of the Connect peer request.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network Connect peer.</p>
+ * @public
+ */
+export interface ConnectPeer {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the attachment to connect.</p>
+   * @public
+   */
+  ConnectAttachmentId?: string | undefined;
+
+  /**
+   * <p>The ID of the Connect peer.</p>
+   * @public
+   */
+  ConnectPeerId?: string | undefined;
+
+  /**
+   * <p>The Connect peer Regions where edges are located.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The state of the Connect peer.</p>
+   * @public
+   */
+  State?: ConnectPeerState | undefined;
+
+  /**
+   * <p>The timestamp when the Connect peer was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The configuration of the Connect peer.</p>
+   * @public
+   */
+  Configuration?: ConnectPeerConfiguration | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the Connect peer.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The subnet ARN for the Connect peer. This only applies only when the protocol is NO_ENCAP.</p>
+   * @public
+   */
+  SubnetArn?: string | undefined;
+
+  /**
+   * <p>Describes the error associated with the attachment request.</p>
+   * @public
+   */
+  LastModificationErrors?: ConnectPeerError[] | undefined;
+}
+
+/**
+ * <p>Summary description of a Connect peer.</p>
+ * @public
+ */
+export interface ConnectPeerSummary {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of a Connect peer attachment.</p>
+   * @public
+   */
+  ConnectAttachmentId?: string | undefined;
+
+  /**
+   * <p>The ID of a Connect peer.</p>
+   * @public
+   */
+  ConnectPeerId?: string | undefined;
+
+  /**
+   * <p>The Region where the edge is located.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The state of a Connect peer.</p>
+   * @public
+   */
+  ConnectPeerState?: ConnectPeerState | undefined;
+
+  /**
+   * <p>The timestamp when a Connect peer was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the Connect peer summary.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The subnet ARN for the Connect peer summary.</p>
+   * @public
+   */
+  SubnetArn?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network edge.</p>
+ * @public
+ */
+export interface CoreNetworkEdge {
+  /**
+   * <p>The Region where a core network edge is located.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The ASN of a core network edge.</p>
+   * @public
+   */
+  Asn?: number | undefined;
+
+  /**
+   * <p>The inside IP addresses used for core network edges.</p>
+   * @public
+   */
+  InsideCidrBlocks?: string[] | undefined;
+}
+
+/**
+ * <p>Describes the segments associated with the service insertion action.</p>
+ * @public
+ */
+export interface ServiceInsertionSegments {
+  /**
+   * <p>The list of segments associated with the <code>send-via</code> action.</p>
+   * @public
+   */
+  SendVia?: string[] | undefined;
+
+  /**
+   * <p>The list of segments associated with the <code>send-to</code> action.</p>
+   * @public
+   */
+  SendTo?: string[] | undefined;
+}
+
+/**
+ * <p>Describes a network function group.</p>
+ * @public
+ */
+export interface CoreNetworkNetworkFunctionGroup {
+  /**
+   * <p>The name of the network function group.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The core network edge locations.</p>
+   * @public
+   */
+  EdgeLocations?: string[] | undefined;
+
+  /**
+   * <p>The segments associated with the network function group.</p>
+   * @public
+   */
+  Segments?: ServiceInsertionSegments | undefined;
+}
+
+/**
+ * <p>Describes a core network segment, which are dedicated routes. Only attachments within this segment can communicate with each other.</p>
+ * @public
+ */
+export interface CoreNetworkSegment {
+  /**
+   * <p>The name of a core network segment.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The Regions where the edges are located.</p>
+   * @public
+   */
+  EdgeLocations?: string[] | undefined;
+
+  /**
+   * <p>The shared segments of a core network.</p>
+   * @public
+   */
+  SharedSegments?: string[] | undefined;
+}
+
+/**
+ * <p>Describes a core network.</p>
+ * @public
+ */
+export interface CoreNetwork {
+  /**
+   * <p>The ID of the global network that your core network is a part of. </p>
+   * @public
+   */
+  GlobalNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of a core network.</p>
+   * @public
+   */
+  CoreNetworkArn?: string | undefined;
+
+  /**
+   * <p>The description of a core network.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The timestamp when a core network was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The current state of a core network.</p>
+   * @public
+   */
+  State?: CoreNetworkState | undefined;
+
+  /**
+   * <p>The segments within a core network.</p>
+   * @public
+   */
+  Segments?: CoreNetworkSegment[] | undefined;
+
+  /**
+   * <p>The network function groups associated with a core network.</p>
+   * @public
+   */
+  NetworkFunctionGroups?: CoreNetworkNetworkFunctionGroup[] | undefined;
+
+  /**
+   * <p>The edges within a core network.</p>
+   * @public
+   */
+  Edges?: CoreNetworkEdge[] | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with a core network.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * <p>Information about a routing policy association.</p>
+ * @public
+ */
+export interface RoutingPolicyAssociationDetail {
+  /**
+   * <p>The names of the routing policies in the association.</p>
+   * @public
+   */
+  RoutingPolicyNames?: string[] | undefined;
+
+  /**
+   * <p>The names of the segments that are shared with each other in the association.</p>
+   * @public
+   */
+  SharedSegments?: string[] | undefined;
+}
+
+/**
+ * <p>Describes a network function group for service insertion.</p>
+ * @public
+ */
+export interface NetworkFunctionGroup {
+  /**
+   * <p>The name of the network function group.</p>
+   * @public
+   */
+  Name?: string | undefined;
+}
+
+/**
+ * <p>Describes the edge that's used for the override. </p>
+ * @public
+ */
+export interface EdgeOverride {
+  /**
+   * <p>The list of edge locations.</p>
+   * @public
+   */
+  EdgeSets?: string[][] | undefined;
+
+  /**
+   * <p>The edge that should be used when overriding the current edge order.</p>
+   * @public
+   */
+  UseEdge?: string | undefined;
+}
+
+/**
+ * <p>The list of network function groups and edge overrides for the service insertion
+ *             action. Used for both the <code>send-to</code> and <code>send-via</code> actions.</p>
+ * @public
+ */
+export interface Via {
+  /**
+   * <p>The list of network function groups associated with the service insertion action.</p>
+   * @public
+   */
+  NetworkFunctionGroups?: NetworkFunctionGroup[] | undefined;
+
+  /**
+   * <p>Describes any edge overrides. An edge override is a specific edge to be used for traffic.</p>
+   * @public
+   */
+  WithEdgeOverrides?: EdgeOverride[] | undefined;
+}
+
+/**
+ * <p>Displays a list of the destination segments. Used only when the service insertion
+ *             action is <code>send-to</code>.  </p>
+ * @public
+ */
+export interface WhenSentTo {
+  /**
+   * <p>The list of destination segments when the service insertion action is <code>send-to</code>.</p>
+   * @public
+   */
+  WhenSentToSegmentsList?: string[] | undefined;
+}
+
+/**
+ * <p>Describes the action that the service insertion will take for any segments associated with it.</p>
+ * @public
+ */
+export interface ServiceInsertionAction {
+  /**
+   * <p>The action the service insertion takes for traffic.
+   *             <code>send-via</code> sends east-west traffic between attachments.
+   *             <code>send-to</code> sends north-south traffic to the
+   *             security appliance, and then from that to either the Internet or to an on-premesis
+   *             location.  </p>
+   * @public
+   */
+  Action?: SegmentActionServiceInsertion | undefined;
+
+  /**
+   * <p>Describes the mode packets take for the <code>send-via</code> action. This is not used when the action is <code>send-to</code>. <code>dual-hop</code> packets traverse attachments in both the source to the destination core network edges. This mode requires that an inspection attachment must be present in all Regions of the service insertion-enabled segments.
+   *             For <code>single-hop</code>, packets traverse a single intermediate inserted attachment. You can use <code>EdgeOverride</code> to specify a specific edge to use. </p>
+   * @public
+   */
+  Mode?: SendViaMode | undefined;
+
+  /**
+   * <p>The list of destination segments if the service insertion action is <code>send-via</code>.</p>
+   * @public
+   */
+  WhenSentTo?: WhenSentTo | undefined;
+
+  /**
+   * <p>The list of network function groups and any edge overrides for the chosen service
+   *             insertion action. Used for both <code>send-to</code> or <code>send-via</code>.</p>
+   * @public
+   */
+  Via?: Via | undefined;
+}
+
+/**
+ * <p>Describes a core network change.</p>
+ * @public
+ */
+export interface CoreNetworkChangeValues {
+  /**
+   * <p>The names of the segments in a core network.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The network function group name if the change event is associated with a network function group.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
+
+  /**
+   * <p>The Regions where edges are located in a core network. </p>
+   * @public
+   */
+  EdgeLocations?: string[] | undefined;
+
+  /**
+   * <p>The ASN of a core network.</p>
+   * @public
+   */
+  Asn?: number | undefined;
+
+  /**
+   * <p>The IP addresses used for a core network.</p>
+   * @public
+   */
+  Cidr?: string | undefined;
+
+  /**
+   * <p>The ID of the destination.</p>
+   * @public
+   */
+  DestinationIdentifier?: string | undefined;
+
+  /**
+   * <p>The inside IP addresses used for core network change values.</p>
+   * @public
+   */
+  InsideCidrBlocks?: string[] | undefined;
+
+  /**
+   * <p>The shared segments for a core network change value. </p>
+   * @public
+   */
+  SharedSegments?: string[] | undefined;
+
+  /**
+   * <p>Describes the service insertion action. </p>
+   * @public
+   */
+  ServiceInsertionActions?: ServiceInsertionAction[] | undefined;
+
+  /**
+   * <p>Indicates whether Equal Cost Multipath (ECMP) is enabled for the core network.</p>
+   * @public
+   */
+  VpnEcmpSupport?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether public DNS support is supported. The default is <code>true</code>. </p>
+   * @public
+   */
+  DnsSupport?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether security group referencing is enabled for the core network.</p>
+   * @public
+   */
+  SecurityGroupReferencingSupport?: boolean | undefined;
+
+  /**
+   * <p>The routing policy direction (inbound/outbound) in the core network change values.</p>
+   * @public
+   */
+  RoutingPolicyDirection?: RoutingPolicyDirection | undefined;
+
+  /**
+   * <p>The routing policy configuration in the core network change values.</p>
+   * @public
+   */
+  RoutingPolicy?: string | undefined;
+
+  /**
+   * <p>The edge locations of peers in the core network change values.</p>
+   * @public
+   */
+  PeerEdgeLocations?: string[] | undefined;
+
+  /**
+   * <p>The attachment identifier in the core network change values.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The names of the routing policies and other association details in the core network change values.</p>
+   * @public
+   */
+  RoutingPolicyAssociationDetails?: RoutingPolicyAssociationDetail[] | undefined;
+}
+
+/**
+ * <p>Details describing a core network change.</p>
+ * @public
+ */
+export interface CoreNetworkChange {
+  /**
+   * <p>The type of change.</p>
+   * @public
+   */
+  Type?: ChangeType | undefined;
+
+  /**
+   * <p>The action to take for a core network.</p>
+   * @public
+   */
+  Action?: ChangeAction | undefined;
+
+  /**
+   * <p>The resource identifier.</p>
+   * @public
+   */
+  Identifier?: string | undefined;
+
+  /**
+   * <p>The previous values for a core network.</p>
+   * @public
+   */
+  PreviousValues?: CoreNetworkChangeValues | undefined;
+
+  /**
+   * <p>The new value for a core network</p>
+   * @public
+   */
+  NewValues?: CoreNetworkChangeValues | undefined;
+
+  /**
+   * <p>Uniquely identifies the path for a change within the changeset. For example, the <code>IdentifierPath</code> for a core network segment change might be <code>"CORE_NETWORK_SEGMENT/us-east-1/devsegment"</code>.</p>
+   * @public
+   */
+  IdentifierPath?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network change event.</p>
+ * @public
+ */
+export interface CoreNetworkChangeEventValues {
+  /**
+   * <p>The edge location for the core network change event.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The edge location of the peer in a core network change event.</p>
+   * @public
+   */
+  PeerEdgeLocation?: string | undefined;
+
+  /**
+   * <p>The routing policy direction (inbound/outbound) in a core network change event.</p>
+   * @public
+   */
+  RoutingPolicyDirection?: RoutingPolicyDirection | undefined;
+
+  /**
+   * <p>The segment name if the change event is associated with a segment.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The changed network function group name.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
+
+  /**
+   * <p>The ID of the attachment if the change event is associated with an attachment.  </p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>For a <code>STATIC_ROUTE</code> event, this is the IP address.</p>
+   * @public
+   */
+  Cidr?: string | undefined;
+
+  /**
+   * <p>The names of the routing policies and other association details in a core network change event.</p>
+   * @public
+   */
+  RoutingPolicyAssociationDetails?: RoutingPolicyAssociationDetail[] | undefined;
+}
+
+/**
+ * <p>Describes a core network change event. This can be a change to a segment, attachment, route, etc.</p>
+ * @public
+ */
+export interface CoreNetworkChangeEvent {
+  /**
+   * <p>Describes the type of change event. </p>
+   * @public
+   */
+  Type?: ChangeType | undefined;
+
+  /**
+   * <p>The action taken for the change event.</p>
+   * @public
+   */
+  Action?: ChangeAction | undefined;
+
+  /**
+   * <p>Uniquely identifies the path for a change within the changeset. For example, the <code>IdentifierPath</code> for a core network segment change might be <code>"CORE_NETWORK_SEGMENT/us-east-1/devsegment"</code>.</p>
+   * @public
+   */
+  IdentifierPath?: string | undefined;
+
+  /**
+   * <p>The timestamp for an event change in status.</p>
+   * @public
+   */
+  EventTime?: Date | undefined;
+
+  /**
+   * <p>The status of the core network change event.</p>
+   * @public
+   */
+  Status?: ChangeStatus | undefined;
+
+  /**
+   * <p>Details of the change event.</p>
+   * @public
+   */
+  Values?: CoreNetworkChangeEventValues | undefined;
+}
+
+/**
+ * <p>Describes a core network </p>
+ * @public
+ */
+export interface CoreNetworkNetworkFunctionGroupIdentifier {
+  /**
+   * <p>The ID of the core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The network function group name.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
+
+  /**
+   * <p>The location for the core network edge.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+}
+
+/**
+ * <p>Provides details about an error in a core network policy.</p>
+ * @public
+ */
+export interface CoreNetworkPolicyError {
+  /**
+   * <p>The error code associated with a core network policy error.</p>
+   * @public
+   */
+  ErrorCode: string | undefined;
+
+  /**
+   * <p>The message associated with a core network policy error code.</p>
+   * @public
+   */
+  Message: string | undefined;
+
+  /**
+   * <p>The JSON path where the error was discovered in the policy document.</p>
+   * @public
+   */
+  Path?: string | undefined;
+}
+
+/**
+ * <p>Describes a core network policy. You can have only one LIVE Core Policy.</p>
+ * @public
+ */
+export interface CoreNetworkPolicy {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the policy version.</p>
+   * @public
+   */
+  PolicyVersionId?: number | undefined;
+
+  /**
+   * <p>Whether a core network policy is the current LIVE policy or the most recently submitted policy.</p>
+   * @public
+   */
+  Alias?: CoreNetworkPolicyAlias | undefined;
+
+  /**
+   * <p>The description of a core network policy.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The timestamp when a core network policy was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The state of a core network policy.</p>
+   * @public
+   */
+  ChangeSetState?: ChangeSetState | undefined;
+
+  /**
+   * <p>Describes any errors in a core network policy.</p>
+   * @public
+   */
+  PolicyErrors?: CoreNetworkPolicyError[] | undefined;
+
+  /**
+   * <p>Describes a core network policy.</p>
+   * @public
+   */
+  PolicyDocument?: __AutomaticJsonStringConversion | string | undefined;
+}
+
+/**
+ * <p>Describes a core network policy version.</p>
+ * @public
+ */
+export interface CoreNetworkPolicyVersion {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the policy version.</p>
+   * @public
+   */
+  PolicyVersionId?: number | undefined;
+
+  /**
+   * <p>Whether a core network policy is the current policy or the most recently submitted policy.</p>
+   * @public
+   */
+  Alias?: CoreNetworkPolicyAlias | undefined;
+
+  /**
+   * <p>The description of a core network policy version.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The timestamp when a core network policy version was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The status of the policy version change set.</p>
+   * @public
+   */
+  ChangeSetState?: ChangeSetState | undefined;
+}
+
+/**
+ * <p>Information about the next hop for a route in the core network.</p>
+ * @public
+ */
+export interface RoutingInformationNextHop {
+  /**
+   * <p>The IP address of the next hop.</p>
+   * @public
+   */
+  IpAddress?: string | undefined;
+
+  /**
+   * <p>The ID of the core network attachment for the next hop.</p>
+   * @public
+   */
+  CoreNetworkAttachmentId?: string | undefined;
+
+  /**
+   * <p>The ID of the resource for the next hop.</p>
+   * @public
+   */
+  ResourceId?: string | undefined;
+
+  /**
+   * <p>The type of resource for the next hop.</p>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The name of the segment for the next hop.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The edge location for the next hop.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+}
+
+/**
+ * <p>Routing information for a core network, including route details and BGP attributes.</p>
+ * @public
+ */
+export interface CoreNetworkRoutingInformation {
+  /**
+   * <p>The IP prefix for the route.</p>
+   * @public
+   */
+  Prefix?: string | undefined;
+
+  /**
+   * <p>The next hop information for the route.</p>
+   * @public
+   */
+  NextHop?: RoutingInformationNextHop | undefined;
+
+  /**
+   * <p>The BGP local preference value for the route.</p>
+   * @public
+   */
+  LocalPreference?: string | undefined;
+
+  /**
+   * <p>The BGP Multi-Exit Discriminator (MED) value for the route.</p>
+   * @public
+   */
+  Med?: string | undefined;
+
+  /**
+   * <p>The BGP AS path for the route.</p>
+   * @public
+   */
+  AsPath?: string[] | undefined;
+
+  /**
+   * <p>The BGP community values for the route.</p>
+   * @public
+   */
+  Communities?: string[] | undefined;
+}
+
+/**
+ * <p>Returns details about a core network edge.</p>
+ * @public
+ */
+export interface CoreNetworkSegmentEdgeIdentifier {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The name of the segment edge.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The Region where the segment edge is located.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+}
+
+/**
+ * <p>Returns summary information about a core network.</p>
+ * @public
+ */
+export interface CoreNetworkSummary {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>a core network ARN.</p>
+   * @public
+   */
+  CoreNetworkArn?: string | undefined;
+
+  /**
+   * <p>The global network ID.</p>
+   * @public
+   */
+  GlobalNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the account owner.</p>
+   * @public
+   */
+  OwnerAccountId?: string | undefined;
+
+  /**
+   * <p>The state of a core network.</p>
+   * @public
+   */
+  State?: CoreNetworkState | undefined;
+
+  /**
+   * <p>The description of a core network.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The key-value tags associated with a core network summary.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * <p>Describes a NAT rule to configure on an attachment. Source addresses in the source CIDR block of traffic from the attachment are translated to the same host addresses in the NAT CIDR block. Traffic to an address in the NAT CIDR block is translated back to the matching address in the source CIDR block.</p>
+ * @public
+ */
+export interface NatRuleRequest {
+  /**
+   * <p>The rule number, from 1 to 32766. Each rule number must be unique for the attachment.</p>
+   * @public
+   */
+  RuleNumber: number | undefined;
+
+  /**
+   * <p>The IPv4 CIDR block to match against the source address of traffic from the attachment. The CIDR block can't overlap with the multicast range (224.0.0.0/4).</p>
+   * @public
+   */
+  MatchSourceCidr: string | undefined;
+
+  /**
+   * <p>The IPv4 CIDR block to translate matching source addresses to. The prefix length must be the same as the prefix length of <code>MatchSourceCidr</code>. The CIDR block must be within a private (RFC 1918) or shared address space (RFC 6598) range. The CIDR blocks of the NAT rules of an attachment can't overlap with each other.</p>
+   * @public
+   */
+  NatCidr: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateConnectAttachmentRequest {
+  /**
+   * <p>The ID of a core network where you want to create the attachment. </p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The Region where the edge is located.</p>
+   * @public
+   */
+  EdgeLocation: string | undefined;
+
+  /**
+   * <p>The ID of the attachment between the two connections.</p>
+   * @public
+   */
+  TransportAttachmentId: string | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the Connect attachment for traffic routing decisions.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+
+  /**
+   * <p>Specifies whether to enable NAT gateway support on the Connect attachment. NAT is supported only on Connect attachments that use the GRE tunnel protocol. Tunnel-less Connect attachments aren't supported. To enable NAT gateway support, you must also specify at least one NAT rule. If you don't specify a value, NAT gateway support is disabled. Only the core network owner can configure NAT on an attachment.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportValue | undefined;
+
+  /**
+   * <p>The NAT rules for the Connect attachment, up to 50 rules.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRuleRequest[] | undefined;
+
+  /**
+   * <p>Options for creating an attachment.</p>
+   * @public
+   */
+  Options: ConnectAttachmentOptions | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateConnectAttachmentResponse {
+  /**
+   * <p>The response to a Connect attachment request.</p>
+   * @public
+   */
+  ConnectAttachment?: ConnectAttachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateConnectionRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the first device in the connection.</p>
+   * @public
    */
   DeviceId: string | undefined;
 
   /**
    * <p>The ID of the second device in the connection.</p>
+   * @public
    */
   ConnectedDeviceId: string | undefined;
 
   /**
    * <p>The ID of the link for the first device.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The ID of the link for the second device.</p>
+   * @public
    */
-  ConnectedLinkId?: string;
+  ConnectedLinkId?: string | undefined;
 
   /**
    * <p>A description of the connection.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Length Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The tags to apply to the resource during creation.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateConnectionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateConnectionResponse {
-  /**
-   * <p>Information about the connection.</p>
-   */
-  Connection?: Connection;
-}
-
-export namespace CreateConnectionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConnectionResponse): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>Describes a location.</p>
+ * @public
  */
-export interface Location {
+export interface CreateConnectionResponse {
   /**
-   * <p>The physical address.</p>
+   * <p>Information about the connection.</p>
+   * @public
    */
-  Address?: string;
-
-  /**
-   * <p>The latitude.</p>
-   */
-  Latitude?: string;
-
-  /**
-   * <p>The longitude.</p>
-   */
-  Longitude?: string;
+  Connection?: Connection | undefined;
 }
 
-export namespace Location {
+/**
+ * @public
+ */
+export interface CreateConnectPeerRequest {
   /**
-   * @internal
+   * <p>The ID of the connection attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Location): any => ({
-    ...obj,
-  });
+  ConnectAttachmentId: string | undefined;
+
+  /**
+   * <p>A Connect peer core network address. This only applies only when the protocol is <code>GRE</code>.</p>
+   * @public
+   */
+  CoreNetworkAddress?: string | undefined;
+
+  /**
+   * <p>The Connect peer address.</p>
+   * @public
+   */
+  PeerAddress: string | undefined;
+
+  /**
+   * <p>The Connect peer BGP options. This only applies only when the protocol is <code>GRE</code>.</p>
+   * @public
+   */
+  BgpOptions?: BgpOptions | undefined;
+
+  /**
+   * <p>The inside IP addresses used for BGP peering.</p>
+   * @public
+   */
+  InsideCidrBlocks?: string[] | undefined;
+
+  /**
+   * <p>The tags associated with the peer request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The subnet ARN for the Connect peer. This only applies only when the protocol is NO_ENCAP.</p>
+   * @public
+   */
+  SubnetArn?: string | undefined;
 }
 
-export interface CreateDeviceRequest {
+/**
+ * @public
+ */
+export interface CreateConnectPeerResponse {
   /**
-   * <p>The ID of the global network.</p>
+   * <p>The response to the request.</p>
+   * @public
+   */
+  ConnectPeer?: ConnectPeer | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCoreNetworkRequest {
+  /**
+   * <p>The ID of the global network that a core network will be a part of. </p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
-   * <p>The AWS location of the device.</p>
+   * <p>The description of a core network.</p>
+   * @public
    */
-  AWSLocation?: AWSLocation;
+  Description?: string | undefined;
+
+  /**
+   * <p>Key-value tags associated with a core network request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The policy document for creating a core network.</p>
+   * @public
+   */
+  PolicyDocument?: string | undefined;
+
+  /**
+   * <p>The client token associated with a core network request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCoreNetworkResponse {
+  /**
+   * <p>Returns details about a core network.</p>
+   * @public
+   */
+  CoreNetwork?: CoreNetwork | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCoreNetworkPrefixListAssociationRequest {
+  /**
+   * <p>The ID of the core network to associate with the prefix list.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the prefix list to associate with the core network.</p>
+   * @public
+   */
+  PrefixListArn: string | undefined;
+
+  /**
+   * <p>An optional alias for the prefix list association.</p>
+   * @public
+   */
+  PrefixListAlias: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCoreNetworkPrefixListAssociationResponse {
+  /**
+   * <p>The ID of the core network associated with the prefix list.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the prefix list that was associated with the core network.</p>
+   * @public
+   */
+  PrefixListArn?: string | undefined;
+
+  /**
+   * <p>The alias of the prefix list association, if provided.</p>
+   * @public
+   */
+  PrefixListAlias?: string | undefined;
+}
+
+/**
+ * <p>Describes a location.</p>
+ * @public
+ */
+export interface Location {
+  /**
+   * <p>The physical address.</p>
+   * @public
+   */
+  Address?: string | undefined;
+
+  /**
+   * <p>The latitude.</p>
+   * @public
+   */
+  Latitude?: string | undefined;
+
+  /**
+   * <p>The longitude.</p>
+   * @public
+   */
+  Longitude?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDeviceRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.</p>
+   * @public
+   */
+  AWSLocation?: AWSLocation | undefined;
 
   /**
    * <p>A description of the device.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of the device.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The vendor of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Vendor?: string;
+  Vendor?: string | undefined;
 
   /**
    * <p>The model of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Model?: string;
+  Model?: string | undefined;
 
   /**
    * <p>The serial number of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  SerialNumber?: string;
+  SerialNumber?: string | undefined;
 
   /**
    * <p>The location of the device.</p>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The tags to apply to the resource during creation.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateDeviceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceRequest): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
-export enum DeviceState {
-  available = "AVAILABLE",
-  deleting = "DELETING",
-  pending = "PENDING",
-  updating = "UPDATING",
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Describes a device.</p>
+ * @public
  */
 export interface Device {
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the device.</p>
+   * @public
    */
-  DeviceArn?: string;
+  DeviceArn?: string | undefined;
 
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
-   * <p>The AWS location of the device.</p>
+   * <p>The Amazon Web Services location of the device.</p>
+   * @public
    */
-  AWSLocation?: AWSLocation;
+  AWSLocation?: AWSLocation | undefined;
 
   /**
    * <p>The description of the device.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The device type.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The device vendor.</p>
+   * @public
    */
-  Vendor?: string;
+  Vendor?: string | undefined;
 
   /**
    * <p>The device model.</p>
+   * @public
    */
-  Model?: string;
+  Model?: string | undefined;
 
   /**
    * <p>The device serial number.</p>
+   * @public
    */
-  SerialNumber?: string;
+  SerialNumber?: string | undefined;
 
   /**
    * <p>The site location.</p>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 
   /**
    * <p>The site ID.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The date and time that the site was created.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The device state.</p>
+   * @public
    */
-  State?: DeviceState | string;
+  State?: DeviceState | undefined;
 
   /**
    * <p>The tags for the device.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace Device {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Device): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
-export interface CreateDeviceResponse {
-  /**
-   * <p>Information about the device.</p>
-   */
-  Device?: Device;
-}
-
-export namespace CreateDeviceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDeviceResponse): any => ({
-    ...obj,
-    ...(obj.Device && { Device: Device.filterSensitiveLog(obj.Device) }),
-  });
-}
-
-export interface CreateGlobalNetworkRequest {
-  /**
-   * <p>A description of the global network.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The tags to apply to the resource during creation.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateGlobalNetworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGlobalNetworkRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum GlobalNetworkState {
-  available = "AVAILABLE",
-  deleting = "DELETING",
-  pending = "PENDING",
-  updating = "UPDATING",
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>Describes a global network.</p>
+ * @public
+ */
+export interface CreateDeviceResponse {
+  /**
+   * <p>Information about the device.</p>
+   * @public
+   */
+  Device?: Device | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDirectConnectGatewayAttachmentRequest {
+  /**
+   * <p>The ID of the Cloud WAN core network that the Direct Connect gateway attachment should be attached to.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the Direct Connect gateway attachment.</p>
+   * @public
+   */
+  DirectConnectGatewayArn: string | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+
+  /**
+   * <p>One or more core network edge locations that the Direct Connect gateway attachment is associated with. </p>
+   * @public
+   */
+  EdgeLocations: string[] | undefined;
+
+  /**
+   * <p>Specifies whether to enable NAT gateway support on the Direct Connect gateway attachment. To enable NAT gateway support, you must also specify at least one NAT rule. If you don't specify a value, NAT gateway support is disabled. Only the core network owner can configure NAT on an attachment.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportValue | undefined;
+
+  /**
+   * <p>Specifies whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules. System routes have a route type of <code>SYSTEM</code>. NAT is applied to traffic whether or not this option is enabled. The default is <code>true</code>.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The NAT rules for the Direct Connect gateway attachment, up to 50 rules.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRuleRequest[] | undefined;
+
+  /**
+   * <p>The key value tags to apply to the Direct Connect gateway attachment during creation.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>client token</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a Direct Connect gateway attachment.</p>
+ * @public
+ */
+export interface DirectConnectGatewayAttachment {
+  /**
+   * <p>Describes a core network attachment.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+
+  /**
+   * <p>The Direct Connect gateway attachment ARN.</p>
+   * @public
+   */
+  DirectConnectGatewayArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDirectConnectGatewayAttachmentResponse {
+  /**
+   * <p>Describes the details of a <code>CreateDirectConnectGatewayAttachment</code> request.</p>
+   * @public
+   */
+  DirectConnectGatewayAttachment?: DirectConnectGatewayAttachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateGlobalNetworkRequest {
+  /**
+   * <p>A description of the global network.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The tags to apply to the resource during creation.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * <p>Describes a global network. This is a single private network acting as a high-level container for your network objects, including an Amazon Web Services-managed Core Network.</p>
+ * @public
  */
 export interface GlobalNetwork {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the global network.</p>
+   * @public
    */
-  GlobalNetworkArn?: string;
+  GlobalNetworkArn?: string | undefined;
 
   /**
    * <p>The description of the global network.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date and time that the global network was created.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The state of the global network.</p>
+   * @public
    */
-  State?: GlobalNetworkState | string;
+  State?: GlobalNetworkState | undefined;
 
   /**
    * <p>The tags for the global network.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace GlobalNetwork {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GlobalNetwork): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateGlobalNetworkResponse {
   /**
    * <p>Information about the global network object.</p>
+   * @public
    */
-  GlobalNetwork?: GlobalNetwork;
+  GlobalNetwork?: GlobalNetwork | undefined;
 }
 
-export namespace CreateGlobalNetworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateGlobalNetworkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLinkRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>A description of the link.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of the link.</p>
-   *         <p>Constraints: Cannot include the following characters: | \ ^</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters. Cannot include the following characters: | \ ^</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p> The upload speed and download speed in Mbps. </p>
+   * @public
    */
   Bandwidth: Bandwidth | undefined;
 
   /**
    * <p>The provider of the link.</p>
-   *         <p>Constraints: Cannot include the following characters: | \ ^</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters. Cannot include the following characters: | \ ^</p>
+   * @public
    */
-  Provider?: string;
+  Provider?: string | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
   SiteId: string | undefined;
 
   /**
    * <p>The tags to apply to the resource during creation.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateLinkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLinkRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum LinkState {
-  available = "AVAILABLE",
-  deleting = "DELETING",
-  pending = "PENDING",
-  updating = "UPDATING",
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Describes a link.</p>
+ * @public
  */
 export interface Link {
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the link.</p>
+   * @public
    */
-  LinkArn?: string;
+  LinkArn?: string | undefined;
 
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The description of the link.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of the link.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The bandwidth for the link.</p>
+   * @public
    */
-  Bandwidth?: Bandwidth;
+  Bandwidth?: Bandwidth | undefined;
 
   /**
    * <p>The provider of the link.</p>
+   * @public
    */
-  Provider?: string;
+  Provider?: string | undefined;
 
   /**
    * <p>The date and time that the link was created.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The state of the link.</p>
+   * @public
    */
-  State?: LinkState | string;
+  State?: LinkState | undefined;
 
   /**
    * <p>The tags for the link.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace Link {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Link): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateLinkResponse {
   /**
    * <p>Information about the link.</p>
+   * @public
    */
-  Link?: Link;
+  Link?: Link | undefined;
 }
 
-export namespace CreateLinkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLinkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSiteRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>A description of your site.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The site location. This information is used for visualization in the Network Manager console. If you specify the address, the latitude and longitude are automatically calculated.</p>
-   *         <ul>
+   *          <ul>
    *             <li>
    *                <p>
    *                   <code>Address</code>: The physical address of the site.</p>
@@ -1164,1386 +2794,4622 @@ export interface CreateSiteRequest {
    *                   <code>Longitude</code>: The longitude of the site.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 
   /**
    * <p>The tags to apply to the resource during creation.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateSiteRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSiteRequest): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
-export enum SiteState {
-  available = "AVAILABLE",
-  deleting = "DELETING",
-  pending = "PENDING",
-  updating = "UPDATING",
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Describes a site.</p>
+ * @public
  */
 export interface Site {
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the site.</p>
+   * @public
    */
-  SiteArn?: string;
+  SiteArn?: string | undefined;
 
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The description of the site.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The location of the site.</p>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 
   /**
    * <p>The date and time that the site was created.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
   /**
    * <p>The state of the site.</p>
+   * @public
    */
-  State?: SiteState | string;
+  State?: SiteState | undefined;
 
   /**
    * <p>The tags for the site.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace Site {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Site): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSiteResponse {
   /**
    * <p>Information about the site.</p>
+   * @public
    */
-  Site?: Site;
+  Site?: Site | undefined;
 }
 
-export namespace CreateSiteResponse {
+/**
+ * @public
+ */
+export interface CreateSiteToSiteVpnAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of a core network where you're creating a site-to-site VPN attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateSiteResponse): any => ({
-    ...obj,
-    ...(obj.Site && { Site: Site.filterSensitiveLog(obj.Site) }),
-  });
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN identifying the VPN attachment.</p>
+   * @public
+   */
+  VpnConnectionArn: string | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+
+  /**
+   * <p>Specifies whether to enable NAT gateway support on the Site-to-Site VPN attachment. To enable NAT gateway support, you must also specify at least one NAT rule. If you don't specify a value, NAT gateway support is disabled. Only the core network owner can configure NAT on an attachment.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportValue | undefined;
+
+  /**
+   * <p>Specifies whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules. System routes have a route type of <code>SYSTEM</code>. NAT is applied to traffic whether or not this option is enabled. The default is <code>true</code> for VPN connections that use BGP and <code>false</code> for VPN connections that use static routing. If the VPN connection uses static routing, you must specify <code>false</code> or omit this parameter.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The NAT rules for the Site-to-Site VPN attachment, up to 50 rules.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRuleRequest[] | undefined;
+
+  /**
+   * <p>The tags associated with the request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * <p>Creates a site-to-site VPN attachment.</p>
+ * @public
+ */
+export interface SiteToSiteVpnAttachment {
+  /**
+   * <p>Provides details about a site-to-site VPN attachment.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+
+  /**
+   * <p>The ARN of the site-to-site VPN attachment. </p>
+   * @public
+   */
+  VpnConnectionArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateSiteToSiteVpnAttachmentResponse {
+  /**
+   * <p>Details about a site-to-site VPN attachment.</p>
+   * @public
+   */
+  SiteToSiteVpnAttachment?: SiteToSiteVpnAttachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTransitGatewayPeeringRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the transit gateway for the peering request.</p>
+   * @public
+   */
+  TransitGatewayArn: string | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * <p>Describes additional information about missing permissions. </p>
+ * @public
+ */
+export interface PermissionsErrorContext {
+  /**
+   * <p>The missing permissions.</p>
+   * @public
+   */
+  MissingPermission?: string | undefined;
+}
+
+/**
+ * <p>Describes an error associated with a peering request.</p>
+ * @public
+ */
+export interface PeeringError {
+  /**
+   * <p>The error code for the peering request.</p>
+   * @public
+   */
+  Code?: PeeringErrorCode | undefined;
+
+  /**
+   * <p>The message associated with the error <code>code</code>.</p>
+   * @public
+   */
+  Message?: string | undefined;
+
+  /**
+   * <p>The ARN of the requested peering resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The ID of the Peering request.</p>
+   * @public
+   */
+  RequestId?: string | undefined;
+
+  /**
+   * <p>Provides additional information about missing permissions for the peering
+   *             error.</p>
+   * @public
+   */
+  MissingPermissionsContext?: PermissionsErrorContext | undefined;
+}
+
+/**
+ * <p>Describes a peering connection.</p>
+ * @public
+ */
+export interface Peering {
+  /**
+   * <p>The ID of the core network for the peering request.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of a core network.</p>
+   * @public
+   */
+  CoreNetworkArn?: string | undefined;
+
+  /**
+   * <p>The ID of the peering attachment. </p>
+   * @public
+   */
+  PeeringId?: string | undefined;
+
+  /**
+   * <p>The ID of the account owner.</p>
+   * @public
+   */
+  OwnerAccountId?: string | undefined;
+
+  /**
+   * <p>The type of peering. This will be <code>TRANSIT_GATEWAY</code>.</p>
+   * @public
+   */
+  PeeringType?: PeeringType | undefined;
+
+  /**
+   * <p>The current state of the peering connection. </p>
+   * @public
+   */
+  State?: PeeringState | undefined;
+
+  /**
+   * <p>The edge location for the peer.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The resource ARN of the peer.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the peering.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The timestamp when the attachment peer was created.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>Describes the error associated with the peering request.</p>
+   * @public
+   */
+  LastModificationErrors?: PeeringError[] | undefined;
+}
+
+/**
+ * <p>Describes a transit gateway peering attachment.</p>
+ * @public
+ */
+export interface TransitGatewayPeering {
+  /**
+   * <p>Describes a transit gateway peer connection.</p>
+   * @public
+   */
+  Peering?: Peering | undefined;
+
+  /**
+   * <p>The ARN of the transit gateway.</p>
+   * @public
+   */
+  TransitGatewayArn?: string | undefined;
+
+  /**
+   * <p>The ID of the transit gateway peering attachment.</p>
+   * @public
+   */
+  TransitGatewayPeeringAttachmentId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTransitGatewayPeeringResponse {
+  /**
+   * <p>Returns information about the transit gateway peering connection request.</p>
+   * @public
+   */
+  TransitGatewayPeering?: TransitGatewayPeering | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTransitGatewayRouteTableAttachmentRequest {
+  /**
+   * <p>The ID of the peer for the </p>
+   * @public
+   */
+  PeeringId: string | undefined;
+
+  /**
+   * <p>The ARN of the transit gateway route table for the attachment request. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
+   * @public
+   */
+  TransitGatewayRouteTableArn: string | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+
+  /**
+   * <p>The list of key-value tags associated with the request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a transit gateway route table attachment.</p>
+ * @public
+ */
+export interface TransitGatewayRouteTableAttachment {
+  /**
+   * <p>Describes a core network attachment.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+
+  /**
+   * <p>The ID of the peering attachment.</p>
+   * @public
+   */
+  PeeringId?: string | undefined;
+
+  /**
+   * <p>The ARN of the transit gateway attachment route table. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
+   * @public
+   */
+  TransitGatewayRouteTableArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTransitGatewayRouteTableAttachmentResponse {
+  /**
+   * <p>The route table associated with the create transit gateway route table attachment request.</p>
+   * @public
+   */
+  TransitGatewayRouteTableAttachment?: TransitGatewayRouteTableAttachment | undefined;
+}
+
+/**
+ * <p>Describes the VPC options.</p>
+ * @public
+ */
+export interface VpcOptions {
+  /**
+   * <p>Indicates whether IPv6 is supported.</p>
+   * @public
+   */
+  Ipv6Support?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether appliance mode is supported.  If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. The default value is <code>false</code>.</p>
+   * @public
+   */
+  ApplianceModeSupport?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether DNS is supported.</p>
+   * @public
+   */
+  DnsSupport?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether security group referencing is enabled for this VPC attachment. The default is <code>true</code>. However, at the core network policy-level the default is set to <code>false</code>.</p>
+   * @public
+   */
+  SecurityGroupReferencingSupport?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateVpcAttachmentRequest {
+  /**
+   * <p>The ID of a core network for the VPC attachment.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the VPC.</p>
+   * @public
+   */
+  VpcArn: string | undefined;
+
+  /**
+   * <p>The subnet ARN of the VPC attachment.</p>
+   * @public
+   */
+  SubnetArns: string[] | undefined;
+
+  /**
+   * <p>Options for the VPC attachment.</p>
+   * @public
+   */
+  Options?: VpcOptions | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the VPC attachment for traffic routing decisions.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+
+  /**
+   * <p>Specifies whether to enable NAT gateway support on the VPC attachment. To enable NAT gateway support, you must also specify at least one NAT rule. If you don't specify a value, NAT gateway support is disabled. Only the core network owner can configure NAT on an attachment.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportValue | undefined;
+
+  /**
+   * <p>The NAT rules for the VPC attachment, up to 50 rules.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRuleRequest[] | undefined;
+
+  /**
+   * <p>The key-value tags associated with the request.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a VPC attachment.</p>
+ * @public
+ */
+export interface VpcAttachment {
+  /**
+   * <p>Provides details about the VPC attachment.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+
+  /**
+   * <p>The subnet ARNs.</p>
+   * @public
+   */
+  SubnetArns?: string[] | undefined;
+
+  /**
+   * <p>Provides details about the VPC attachment.</p>
+   * @public
+   */
+  Options?: VpcOptions | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateVpcAttachmentResponse {
+  /**
+   * <p>Provides details about the VPC attachment.</p>
+   * @public
+   */
+  VpcAttachment?: VpcAttachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteAttachmentRequest {
+  /**
+   * <p>The ID of the attachment to delete.</p>
+   * @public
+   */
+  AttachmentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteAttachmentResponse {
+  /**
+   * <p>Information about the deleted attachment.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DeleteConnectionRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the connection.</p>
+   * @public
    */
   ConnectionId: string | undefined;
 }
 
-export namespace DeleteConnectionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConnectionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteConnectionResponse {
   /**
    * <p>Information about the connection.</p>
+   * @public
    */
-  Connection?: Connection;
+  Connection?: Connection | undefined;
 }
 
-export namespace DeleteConnectionResponse {
+/**
+ * @public
+ */
+export interface DeleteConnectPeerRequest {
   /**
-   * @internal
+   * <p>The ID of the deleted Connect peer.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteConnectionResponse): any => ({
-    ...obj,
-  });
+  ConnectPeerId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteConnectPeerResponse {
+  /**
+   * <p>Information about the deleted Connect peer.</p>
+   * @public
+   */
+  ConnectPeer?: ConnectPeer | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkRequest {
+  /**
+   * <p>The network ID of the deleted core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkResponse {
+  /**
+   * <p>Information about the deleted core network.</p>
+   * @public
+   */
+  CoreNetwork?: CoreNetwork | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkPolicyVersionRequest {
+  /**
+   * <p>The ID of a core network for the deleted policy.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The version ID of the deleted policy.</p>
+   * @public
+   */
+  PolicyVersionId: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkPolicyVersionResponse {
+  /**
+   * <p>Returns information about the deleted policy version. </p>
+   * @public
+   */
+  CoreNetworkPolicy?: CoreNetworkPolicy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkPrefixListAssociationRequest {
+  /**
+   * <p>The ID of the core network from which to delete the prefix list association.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the prefix list to disassociate from the core network.</p>
+   * @public
+   */
+  PrefixListArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCoreNetworkPrefixListAssociationResponse {
+  /**
+   * <p>The ID of the core network from which the prefix list association was deleted.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the prefix list that was disassociated from the core network.</p>
+   * @public
+   */
+  PrefixListArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DeleteDeviceRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
   DeviceId: string | undefined;
 }
 
-export namespace DeleteDeviceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDeviceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDeviceResponse {
   /**
    * <p>Information about the device.</p>
+   * @public
    */
-  Device?: Device;
+  Device?: Device | undefined;
 }
 
-export namespace DeleteDeviceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDeviceResponse): any => ({
-    ...obj,
-    ...(obj.Device && { Device: Device.filterSensitiveLog(obj.Device) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteGlobalNetworkRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 }
 
-export namespace DeleteGlobalNetworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGlobalNetworkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteGlobalNetworkResponse {
   /**
    * <p>Information about the global network.</p>
+   * @public
    */
-  GlobalNetwork?: GlobalNetwork;
+  GlobalNetwork?: GlobalNetwork | undefined;
 }
 
-export namespace DeleteGlobalNetworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteGlobalNetworkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLinkRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
   LinkId: string | undefined;
 }
 
-export namespace DeleteLinkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLinkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLinkResponse {
   /**
    * <p>Information about the link.</p>
+   * @public
    */
-  Link?: Link;
+  Link?: Link | undefined;
 }
 
-export namespace DeleteLinkResponse {
+/**
+ * @public
+ */
+export interface DeletePeeringRequest {
   /**
-   * @internal
+   * <p>The ID of the peering connection to delete.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteLinkResponse): any => ({
-    ...obj,
-  });
+  PeeringId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeletePeeringResponse {
+  /**
+   * <p>Information about a deleted peering connection.</p>
+   * @public
+   */
+  Peering?: Peering | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteResourcePolicyRequest {
+  /**
+   * <p>The ARN of the policy to delete.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteResourcePolicyResponse {}
+
+/**
+ * @public
+ */
 export interface DeleteSiteRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
   SiteId: string | undefined;
 }
 
-export namespace DeleteSiteRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSiteRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSiteResponse {
   /**
    * <p>Information about the site.</p>
+   * @public
    */
-  Site?: Site;
+  Site?: Site | undefined;
 }
 
-export namespace DeleteSiteResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSiteResponse): any => ({
-    ...obj,
-    ...(obj.Site && { Site: Site.filterSensitiveLog(obj.Site) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterTransitGatewayRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the transit gateway.</p>
+   * @public
    */
   TransitGatewayArn: string | undefined;
 }
 
-export namespace DeregisterTransitGatewayRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterTransitGatewayRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum TransitGatewayRegistrationState {
-  available = "AVAILABLE",
-  deleted = "DELETED",
-  deleting = "DELETING",
-  failed = "FAILED",
-  pending = "PENDING",
-}
-
 /**
  * <p>Describes the status of a transit gateway registration.</p>
+ * @public
  */
 export interface TransitGatewayRegistrationStateReason {
   /**
    * <p>The code for the state reason.</p>
+   * @public
    */
-  Code?: TransitGatewayRegistrationState | string;
+  Code?: TransitGatewayRegistrationState | undefined;
 
   /**
    * <p>The message for the state reason.</p>
+   * @public
    */
-  Message?: string;
-}
-
-export namespace TransitGatewayRegistrationStateReason {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TransitGatewayRegistrationStateReason): any => ({
-    ...obj,
-  });
+  Message?: string | undefined;
 }
 
 /**
  * <p>Describes the registration of a transit gateway to a global network.</p>
+ * @public
  */
 export interface TransitGatewayRegistration {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
-  GlobalNetworkId?: string;
+  GlobalNetworkId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the transit gateway.</p>
+   * @public
    */
-  TransitGatewayArn?: string;
+  TransitGatewayArn?: string | undefined;
 
   /**
    * <p>The state of the transit gateway registration.</p>
+   * @public
    */
-  State?: TransitGatewayRegistrationStateReason;
+  State?: TransitGatewayRegistrationStateReason | undefined;
 }
 
-export namespace TransitGatewayRegistration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TransitGatewayRegistration): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterTransitGatewayResponse {
   /**
    * <p>The transit gateway registration information.</p>
+   * @public
    */
-  TransitGatewayRegistration?: TransitGatewayRegistration;
+  TransitGatewayRegistration?: TransitGatewayRegistration | undefined;
 }
 
-export namespace DeregisterTransitGatewayResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterTransitGatewayResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeGlobalNetworksRequest {
   /**
    * <p>The IDs of one or more global networks. The maximum is 10.</p>
+   * @public
    */
-  GlobalNetworkIds?: string[];
+  GlobalNetworkIds?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeGlobalNetworksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGlobalNetworksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeGlobalNetworksResponse {
   /**
    * <p>Information about the global networks.</p>
+   * @public
    */
-  GlobalNetworks?: GlobalNetwork[];
+  GlobalNetworks?: GlobalNetwork[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeGlobalNetworksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGlobalNetworksResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateCustomerGatewayRequest {
+/**
+ * @public
+ */
+export interface DisassociateConnectPeerRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the customer gateway. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.</p>
+   * <p>The ID of the Connect peer to disassociate from a device.</p>
+   * @public
+   */
+  ConnectPeerId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisassociateConnectPeerResponse {
+  /**
+   * <p>Describes the Connect peer association.</p>
+   * @public
+   */
+  ConnectPeerAssociation?: ConnectPeerAssociation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisassociateCustomerGatewayRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the customer gateway.</p>
+   * @public
    */
   CustomerGatewayArn: string | undefined;
 }
 
-export namespace DisassociateCustomerGatewayRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateCustomerGatewayRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateCustomerGatewayResponse {
   /**
    * <p>Information about the customer gateway association.</p>
+   * @public
    */
-  CustomerGatewayAssociation?: CustomerGatewayAssociation;
+  CustomerGatewayAssociation?: CustomerGatewayAssociation | undefined;
 }
 
-export namespace DisassociateCustomerGatewayResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateCustomerGatewayResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateLinkRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
   DeviceId: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
   LinkId: string | undefined;
 }
 
-export namespace DisassociateLinkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateLinkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateLinkResponse {
   /**
    * <p>Information about the link association.</p>
+   * @public
    */
-  LinkAssociation?: LinkAssociation;
+  LinkAssociation?: LinkAssociation | undefined;
 }
 
-export namespace DisassociateLinkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateLinkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateTransitGatewayConnectPeerRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the transit gateway Connect peer.</p>
+   * @public
    */
   TransitGatewayConnectPeerArn: string | undefined;
 }
 
-export namespace DisassociateTransitGatewayConnectPeerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateTransitGatewayConnectPeerRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateTransitGatewayConnectPeerResponse {
   /**
    * <p>The transit gateway Connect peer association.</p>
+   * @public
    */
-  TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation;
+  TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation | undefined;
 }
 
-export namespace DisassociateTransitGatewayConnectPeerResponse {
+/**
+ * @public
+ */
+export interface ExecuteCoreNetworkChangeSetRequest {
   /**
-   * @internal
+   * <p>The ID of a core network.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DisassociateTransitGatewayConnectPeerResponse): any => ({
-    ...obj,
-  });
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the policy version.</p>
+   * @public
+   */
+  PolicyVersionId: number | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ExecuteCoreNetworkChangeSetResponse {}
+
+/**
+ * @public
+ */
+export interface GetConnectAttachmentRequest {
+  /**
+   * <p>The ID of the attachment.</p>
+   * @public
+   */
+  AttachmentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetConnectAttachmentResponse {
+  /**
+   * <p>Details about the Connect attachment.</p>
+   * @public
+   */
+  ConnectAttachment?: ConnectAttachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetConnectionsRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>One or more connection IDs.</p>
+   * @public
    */
-  ConnectionIds?: string[];
+  ConnectionIds?: string[] | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetConnectionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConnectionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConnectionsResponse {
   /**
    * <p>Information about the connections.</p>
+   * @public
    */
-  Connections?: Connection[];
+  Connections?: Connection[] | undefined;
 
   /**
    * <p>The token to use for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetConnectionsResponse {
+/**
+ * @public
+ */
+export interface GetConnectPeerRequest {
   /**
-   * @internal
+   * <p>The ID of the Connect peer.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetConnectionsResponse): any => ({
-    ...obj,
-  });
+  ConnectPeerId: string | undefined;
 }
 
-export interface GetCustomerGatewayAssociationsRequest {
+/**
+ * @public
+ */
+export interface GetConnectPeerResponse {
+  /**
+   * <p>Returns information about a core network Connect peer.</p>
+   * @public
+   */
+  ConnectPeer?: ConnectPeer | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetConnectPeerAssociationsRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
-   * <p>One or more customer gateway Amazon Resource Names (ARNs). For more information, see
-   *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>. The maximum is 10.</p>
+   * <p>The IDs of the Connect peers.</p>
+   * @public
    */
-  CustomerGatewayArns?: string[];
+  ConnectPeerIds?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetCustomerGatewayAssociationsRequest {
+/**
+ * @public
+ */
+export interface GetConnectPeerAssociationsResponse {
   /**
-   * @internal
+   * <p>Displays a list of Connect peer associations.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetCustomerGatewayAssociationsRequest): any => ({
-    ...obj,
-  });
+  ConnectPeerAssociations?: ConnectPeerAssociation[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetCoreNetworkRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkResponse {
+  /**
+   * <p>Details about a core network.</p>
+   * @public
+   */
+  CoreNetwork?: CoreNetwork | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkChangeEventsRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the policy version.</p>
+   * @public
+   */
+  PolicyVersionId: number | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkChangeEventsResponse {
+  /**
+   * <p>The response to <code>GetCoreNetworkChangeEventsRequest</code>.</p>
+   * @public
+   */
+  CoreNetworkChangeEvents?: CoreNetworkChangeEvent[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkChangeSetRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the policy version.</p>
+   * @public
+   */
+  PolicyVersionId: number | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkChangeSetResponse {
+  /**
+   * <p>Describes a core network changes.</p>
+   * @public
+   */
+  CoreNetworkChanges?: CoreNetworkChange[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkPolicyRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of a core network policy version.</p>
+   * @public
+   */
+  PolicyVersionId?: number | undefined;
+
+  /**
+   * <p>The alias of a core network policy </p>
+   * @public
+   */
+  Alias?: CoreNetworkPolicyAlias | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCoreNetworkPolicyResponse {
+  /**
+   * <p>The details about a core network policy.</p>
+   * @public
+   */
+  CoreNetworkPolicy?: CoreNetworkPolicy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetCustomerGatewayAssociationsRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>One or more customer gateway Amazon Resource Names (ARNs). The maximum is 10.</p>
+   * @public
+   */
+  CustomerGatewayArns?: string[] | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetCustomerGatewayAssociationsResponse {
   /**
    * <p>The customer gateway associations.</p>
+   * @public
    */
-  CustomerGatewayAssociations?: CustomerGatewayAssociation[];
+  CustomerGatewayAssociations?: CustomerGatewayAssociation[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetCustomerGatewayAssociationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCustomerGatewayAssociationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDevicesRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>One or more device IDs. The maximum is 10.</p>
+   * @public
    */
-  DeviceIds?: string[];
+  DeviceIds?: string[] | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetDevicesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDevicesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDevicesResponse {
   /**
    * <p>The devices.</p>
+   * @public
    */
-  Devices?: Device[];
+  Devices?: Device[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetDevicesResponse {
+/**
+ * @public
+ */
+export interface GetDirectConnectGatewayAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the Direct Connect gateway attachment that you want to see details about.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetDevicesResponse): any => ({
-    ...obj,
-    ...(obj.Devices && { Devices: obj.Devices.map((item) => Device.filterSensitiveLog(item)) }),
-  });
+  AttachmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetDirectConnectGatewayAttachmentResponse {
+  /**
+   * <p>Shows details about the Direct Connect gateway attachment. </p>
+   * @public
+   */
+  DirectConnectGatewayAttachment?: DirectConnectGatewayAttachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetLinkAssociationsRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetLinkAssociationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLinkAssociationsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLinkAssociationsResponse {
   /**
    * <p>The link associations.</p>
+   * @public
    */
-  LinkAssociations?: LinkAssociation[];
+  LinkAssociations?: LinkAssociation[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetLinkAssociationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLinkAssociationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLinksRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>One or more link IDs. The maximum is 10.</p>
+   * @public
    */
-  LinkIds?: string[];
+  LinkIds?: string[] | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 
   /**
    * <p>The link type.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The link provider.</p>
+   * @public
    */
-  Provider?: string;
+  Provider?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetLinksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLinksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLinksResponse {
   /**
    * <p>The links.</p>
+   * @public
    */
-  Links?: Link[];
+  Links?: Link[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetLinksResponse {
+/**
+ * @public
+ */
+export interface GetNetworkResourceCountsRequest {
   /**
-   * @internal
+   * <p>The ID of the global network.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetLinksResponse): any => ({
-    ...obj,
-  });
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   *          <p>The following are the supported resource types for Direct Connect:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>dxcon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-vif</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Network Manager:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connection</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>core-network</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>device</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>link</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>peering</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>site</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Amazon VPC:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>customer-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-route-table</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>vpn-connection</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * <p>Describes a resource count.</p>
+ * @public
+ */
+export interface NetworkResourceCount {
+  /**
+   * <p>The resource type.</p>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The resource count.</p>
+   * @public
+   */
+  Count?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkResourceCountsResponse {
+  /**
+   * <p>The count of resources.</p>
+   * @public
+   */
+  NetworkResourceCounts?: NetworkResourceCount[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkResourceRelationshipsRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the registered gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region.</p>
+   * @public
+   */
+  AwsRegion?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   *          <p>The following are the supported resource types for Direct Connect:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>dxcon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-vif</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Network Manager:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connection</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>core-network</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>device</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>link</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>peering</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>site</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Amazon VPC:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>customer-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-route-table</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>vpn-connection</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a resource relationship.</p>
+ * @public
+ */
+export interface Relationship {
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  From?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  To?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkResourceRelationshipsResponse {
+  /**
+   * <p>The resource relationships.</p>
+   * @public
+   */
+  Relationships?: Relationship[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkResourcesRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region.</p>
+   * @public
+   */
+  AwsRegion?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   *          <p>The following are the supported resource types for Direct Connect:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>dxcon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-vif</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Network Manager:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connection</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>core-network</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>device</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>link</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>peering</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>site</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Amazon VPC:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>customer-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-route-table</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>vpn-connection</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a network resource.</p>
+ * @public
+ */
+export interface NetworkResource {
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region.</p>
+   * @public
+   */
+  AwsRegion?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   *          <p>The following are the supported resource types for Direct Connect:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>dxcon</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dx-vif</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Network Manager:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>connection</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>core-network</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>device</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>link</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>peering</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>site</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following are the supported resource types for Amazon VPC:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>customer-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-attachment</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-route-table</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>vpn-connection</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ID of the resource.</p>
+   * @public
+   */
+  ResourceId?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.</p>
+   * @public
+   */
+  Definition?: string | undefined;
+
+  /**
+   * <p>The time that the resource definition was retrieved.</p>
+   * @public
+   */
+  DefinitionTimestamp?: Date | undefined;
+
+  /**
+   * <p>The tags.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The resource metadata.</p>
+   * @public
+   */
+  Metadata?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkResourcesResponse {
+  /**
+   * <p>The network resources.</p>
+   * @public
+   */
+  NetworkResources?: NetworkResource[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes a route table.</p>
+ * @public
+ */
+export interface RouteTableIdentifier {
+  /**
+   * <p>The ARN of the transit gateway route table for the attachment request. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
+   * @public
+   */
+  TransitGatewayRouteTableArn?: string | undefined;
+
+  /**
+   * <p>The segment edge in a core network.</p>
+   * @public
+   */
+  CoreNetworkSegmentEdge?: CoreNetworkSegmentEdgeIdentifier | undefined;
+
+  /**
+   * <p>The route table identifier associated with the network function group.</p>
+   * @public
+   */
+  CoreNetworkNetworkFunctionGroup?: CoreNetworkNetworkFunctionGroupIdentifier | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkRoutesRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the route table.</p>
+   * @public
+   */
+  RouteTableIdentifier: RouteTableIdentifier | undefined;
+
+  /**
+   * <p>An exact CIDR block.</p>
+   * @public
+   */
+  ExactCidrMatches?: string[] | undefined;
+
+  /**
+   * <p>The most specific route that matches the traffic (longest prefix match).</p>
+   * @public
+   */
+  LongestPrefixMatches?: string[] | undefined;
+
+  /**
+   * <p>The routes with a subnet that match the specified CIDR filter.</p>
+   * @public
+   */
+  SubnetOfMatches?: string[] | undefined;
+
+  /**
+   * <p>The routes with a CIDR that encompasses the CIDR filter. Example: If you specify 10.0.1.0/30, then the result returns 10.0.1.0/29.</p>
+   * @public
+   */
+  SupernetOfMatches?: string[] | undefined;
+
+  /**
+   * <p>The IDs of the prefix lists.</p>
+   * @public
+   */
+  PrefixListIds?: string[] | undefined;
+
+  /**
+   * <p>The route states.</p>
+   * @public
+   */
+  States?: RouteState[] | undefined;
+
+  /**
+   * <p>The route types.</p>
+   * @public
+   */
+  Types?: RouteType[] | undefined;
+
+  /**
+   * <p>Filter by route table destination. Possible Values: TRANSIT_GATEWAY_ATTACHMENT_ID, RESOURCE_ID, or RESOURCE_TYPE.</p>
+   * @public
+   */
+  DestinationFilters?: Record<string, string[]> | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes the destination of a network route.</p>
+ * @public
+ */
+export interface NetworkRouteDestination {
+  /**
+   * <p>The ID of a core network attachment.</p>
+   * @public
+   */
+  CoreNetworkAttachmentId?: string | undefined;
+
+  /**
+   * <p>The ID of the transit gateway attachment.</p>
+   * @public
+   */
+  TransitGatewayAttachmentId?: string | undefined;
+
+  /**
+   * <p>The name of the segment.</p>
+   * @public
+   */
+  SegmentName?: string | undefined;
+
+  /**
+   * <p>The network function group name associated with the destination.</p>
+   * @public
+   */
+  NetworkFunctionGroupName?: string | undefined;
+
+  /**
+   * <p>The edge location for the network destination.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ID of the resource.</p>
+   * @public
+   */
+  ResourceId?: string | undefined;
+}
+
+/**
+ * <p>Describes a network route.</p>
+ * @public
+ */
+export interface NetworkRoute {
+  /**
+   * <p>A unique identifier for the route, such as a CIDR block.</p>
+   * @public
+   */
+  DestinationCidrBlock?: string | undefined;
+
+  /**
+   * <p>The destinations.</p>
+   * @public
+   */
+  Destinations?: NetworkRouteDestination[] | undefined;
+
+  /**
+   * <p>The ID of the prefix list.</p>
+   * @public
+   */
+  PrefixListId?: string | undefined;
+
+  /**
+   * <p>The route state. The possible values are <code>active</code> and <code>blackhole</code>.</p>
+   * @public
+   */
+  State?: RouteState | undefined;
+
+  /**
+   * <p>The route type. The possible values are <code>PROPAGATED</code>, <code>STATIC</code>, and <code>SYSTEM</code>. A <code>SYSTEM</code> route is installed by the core network for the NAT CIDR block of an attachment's NAT rule.</p>
+   * @public
+   */
+  Type?: RouteType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkRoutesResponse {
+  /**
+   * <p>The ARN of the route table.</p>
+   * @public
+   */
+  RouteTableArn?: string | undefined;
+
+  /**
+   * <p>Describes a core network segment edge.</p>
+   * @public
+   */
+  CoreNetworkSegmentEdge?: CoreNetworkSegmentEdgeIdentifier | undefined;
+
+  /**
+   * <p>Describes the network function group route table that the routes are from. This field is present only when you specify <code>CoreNetworkNetworkFunctionGroup</code> in <code>RouteTableIdentifier</code>.</p>
+   * @public
+   */
+  CoreNetworkNetworkFunctionGroup?: CoreNetworkNetworkFunctionGroupIdentifier | undefined;
+
+  /**
+   * <p>The route table type.</p>
+   * @public
+   */
+  RouteTableType?: RouteTableType | undefined;
+
+  /**
+   * <p>The route table creation time.</p>
+   * @public
+   */
+  RouteTableTimestamp?: Date | undefined;
+
+  /**
+   * <p>The network routes.</p>
+   * @public
+   */
+  NetworkRoutes?: NetworkRoute[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkTelemetryRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region.</p>
+   * @public
+   */
+  AwsRegion?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The resource type. The following are the supported resource types:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>transit-gateway-connect-peer</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>vpn-connection</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes the telemetry information for a resource.</p>
+ * @public
+ */
+export interface NetworkTelemetry {
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region.</p>
+   * @public
+   */
+  AwsRegion?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services account ID.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>The ID of the resource.</p>
+   * @public
+   */
+  ResourceId?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The address.</p>
+   * @public
+   */
+  Address?: string | undefined;
+
+  /**
+   * <p>The connection health.</p>
+   * @public
+   */
+  Health?: ConnectionHealth | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetNetworkTelemetryResponse {
+  /**
+   * <p>The network telemetry.</p>
+   * @public
+   */
+  NetworkTelemetry?: NetworkTelemetry[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetResourcePolicyRequest {
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetResourcePolicyResponse {
+  /**
+   * <p>The resource policy document.</p>
+   * @public
+   */
+  PolicyDocument?: __AutomaticJsonStringConversion | string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetRouteAnalysisRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the route analysis.</p>
+   * @public
+   */
+  RouteAnalysisId: string | undefined;
+}
+
+/**
+ * <p>Describes a source or a destination.</p>
+ * @public
+ */
+export interface RouteAnalysisEndpointOptions {
+  /**
+   * <p>The ARN of the transit gateway attachment.</p>
+   * @public
+   */
+  TransitGatewayAttachmentArn?: string | undefined;
+
+  /**
+   * <p>The ARN of the transit gateway.</p>
+   * @public
+   */
+  TransitGatewayArn?: string | undefined;
+
+  /**
+   * <p>The IP address.</p>
+   * @public
+   */
+  IpAddress?: string | undefined;
+}
+
+/**
+ * <p>Describes the status of an analysis at completion.</p>
+ * @public
+ */
+export interface RouteAnalysisCompletion {
+  /**
+   * <p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the
+   *             reason code.</p>
+   * @public
+   */
+  ResultCode?: RouteAnalysisCompletionResultCode | undefined;
+
+  /**
+   * <p>The reason code. Available only if a connection is not found.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND</code> - Found a black hole route with the destination CIDR block.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CYCLIC_PATH_DETECTED</code> - Found the same resource multiple times while traversing the path.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INACTIVE_ROUTE_FOR_DESTINATION_FOUND</code> - Found an inactive route with the destination CIDR block.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MAX_HOPS_EXCEEDED</code> - Analysis exceeded 64 hops without finding the destination.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ROUTE_NOT_FOUND</code> - Cannot find a route table with the destination CIDR block.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TGW_ATTACH_ARN_NO_MATCH</code> - Found an attachment, but not with the correct destination ARN.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TGW_ATTACH_NOT_FOUND</code> - Cannot find an attachment.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TGW_ATTACH_NOT_IN_TGW</code> - Found an attachment, but not to the correct transit gateway.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND</code> - The state of the route table association is not associated.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ReasonCode?: RouteAnalysisCompletionReasonCode | undefined;
+
+  /**
+   * <p>Additional information about the path. Available only if a connection is not found.</p>
+   * @public
+   */
+  ReasonContext?: Record<string, string> | undefined;
+}
+
+/**
+ * <p>Describes a network resource.</p>
+ * @public
+ */
+export interface NetworkResourceSummary {
+  /**
+   * <p>The ARN of the gateway.</p>
+   * @public
+   */
+  RegisteredGatewayArn?: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The resource type.</p>
+   * @public
+   */
+  ResourceType?: string | undefined;
+
+  /**
+   * <p>Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.</p>
+   * @public
+   */
+  Definition?: string | undefined;
+
+  /**
+   * <p>The value for the Name tag.</p>
+   * @public
+   */
+  NameTag?: string | undefined;
+
+  /**
+   * <p>Indicates whether this is a middlebox appliance.</p>
+   * @public
+   */
+  IsMiddlebox?: boolean | undefined;
+}
+
+/**
+ * <p>Describes a path component.</p>
+ * @public
+ */
+export interface PathComponent {
+  /**
+   * <p>The sequence number in the path. The destination is 0.</p>
+   * @public
+   */
+  Sequence?: number | undefined;
+
+  /**
+   * <p>The resource.</p>
+   * @public
+   */
+  Resource?: NetworkResourceSummary | undefined;
+
+  /**
+   * <p>The destination CIDR block in the route table.</p>
+   * @public
+   */
+  DestinationCidrBlock?: string | undefined;
+}
+
+/**
+ * <p>Describes a route analysis path.</p>
+ * @public
+ */
+export interface RouteAnalysisPath {
+  /**
+   * <p>The status of the analysis at completion.</p>
+   * @public
+   */
+  CompletionStatus?: RouteAnalysisCompletion | undefined;
+
+  /**
+   * <p>The route analysis path.</p>
+   * @public
+   */
+  Path?: PathComponent[] | undefined;
+}
+
+/**
+ * <p>Describes a route analysis.</p>
+ * @public
+ */
+export interface RouteAnalysis {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the AWS account that created the route analysis.</p>
+   * @public
+   */
+  OwnerAccountId?: string | undefined;
+
+  /**
+   * <p>The ID of the route analysis.</p>
+   * @public
+   */
+  RouteAnalysisId?: string | undefined;
+
+  /**
+   * <p>The time that the analysis started.</p>
+   * @public
+   */
+  StartTimestamp?: Date | undefined;
+
+  /**
+   * <p>The status of the route analysis.</p>
+   * @public
+   */
+  Status?: RouteAnalysisStatus | undefined;
+
+  /**
+   * <p>The source.</p>
+   * @public
+   */
+  Source?: RouteAnalysisEndpointOptions | undefined;
+
+  /**
+   * <p>The destination.</p>
+   * @public
+   */
+  Destination?: RouteAnalysisEndpointOptions | undefined;
+
+  /**
+   * <p>Indicates whether to analyze the return path. The return path is not analyzed if the forward path
+   *             analysis does not succeed.</p>
+   * @public
+   */
+  IncludeReturnPath?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether to include the location of middlebox appliances in the route analysis.</p>
+   * @public
+   */
+  UseMiddleboxes?: boolean | undefined;
+
+  /**
+   * <p>The forward path.</p>
+   * @public
+   */
+  ForwardPath?: RouteAnalysisPath | undefined;
+
+  /**
+   * <p>The return path.</p>
+   * @public
+   */
+  ReturnPath?: RouteAnalysisPath | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetRouteAnalysisResponse {
+  /**
+   * <p>The route analysis.</p>
+   * @public
+   */
+  RouteAnalysis?: RouteAnalysis | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetSitesRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>One or more site IDs. The maximum is 10.</p>
+   * @public
    */
-  SiteIds?: string[];
+  SiteIds?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetSitesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSitesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSitesResponse {
   /**
    * <p>The sites.</p>
+   * @public
    */
-  Sites?: Site[];
+  Sites?: Site[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetSitesResponse {
+/**
+ * @public
+ */
+export interface GetSiteToSiteVpnAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetSitesResponse): any => ({
-    ...obj,
-    ...(obj.Sites && { Sites: obj.Sites.map((item) => Site.filterSensitiveLog(item)) }),
-  });
+  AttachmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetSiteToSiteVpnAttachmentResponse {
+  /**
+   * <p>Describes the site-to-site attachment.</p>
+   * @public
+   */
+  SiteToSiteVpnAttachment?: SiteToSiteVpnAttachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetTransitGatewayConnectPeerAssociationsRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>One or more transit gateway Connect peer Amazon Resource Names (ARNs).</p>
+   * @public
    */
-  TransitGatewayConnectPeerArns?: string[];
+  TransitGatewayConnectPeerArns?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetTransitGatewayConnectPeerAssociationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetTransitGatewayConnectPeerAssociationsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetTransitGatewayConnectPeerAssociationsResponse {
   /**
    * <p>Information about the transit gateway Connect peer associations.</p>
+   * @public
    */
-  TransitGatewayConnectPeerAssociations?: TransitGatewayConnectPeerAssociation[];
+  TransitGatewayConnectPeerAssociations?: TransitGatewayConnectPeerAssociation[] | undefined;
 
   /**
    * <p>The token to use for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetTransitGatewayConnectPeerAssociationsResponse {
+/**
+ * @public
+ */
+export interface GetTransitGatewayPeeringRequest {
   /**
-   * @internal
+   * <p>The ID of the peering request.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetTransitGatewayConnectPeerAssociationsResponse): any => ({
-    ...obj,
-  });
+  PeeringId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetTransitGatewayPeeringResponse {
+  /**
+   * <p>Returns information about a transit gateway peering. </p>
+   * @public
+   */
+  TransitGatewayPeering?: TransitGatewayPeering | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetTransitGatewayRegistrationsRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
    *             10.</p>
+   * @public
    */
-  TransitGatewayArns?: string[];
+  TransitGatewayArns?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetTransitGatewayRegistrationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetTransitGatewayRegistrationsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetTransitGatewayRegistrationsResponse {
   /**
    * <p>The transit gateway registrations.</p>
+   * @public
    */
-  TransitGatewayRegistrations?: TransitGatewayRegistration[];
+  TransitGatewayRegistrations?: TransitGatewayRegistration[] | undefined;
 
   /**
    * <p>The token for the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetTransitGatewayRegistrationsResponse {
+/**
+ * @public
+ */
+export interface GetTransitGatewayRouteTableAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the transit gateway route table attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetTransitGatewayRegistrationsResponse): any => ({
-    ...obj,
-  });
+  AttachmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetTransitGatewayRouteTableAttachmentResponse {
+  /**
+   * <p>Returns information about the transit gateway route table attachment.</p>
+   * @public
+   */
+  TransitGatewayRouteTableAttachment?: TransitGatewayRouteTableAttachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetVpcAttachmentRequest {
+  /**
+   * <p>The ID of the attachment.</p>
+   * @public
+   */
+  AttachmentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetVpcAttachmentResponse {
+  /**
+   * <p>Returns details about a VPC attachment.</p>
+   * @public
+   */
+  VpcAttachment?: VpcAttachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentNatConfigurationsRequest {
+  /**
+   * <p>The ID of a core network. Returns the NAT configurations of attachments in the core network that support NAT.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of an attachment. Returns the NAT configuration of the specified attachment. If you specify both an attachment ID and a core network ID, the attachment ID is used.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The filters to apply to the results. Values for the same filter are joined with OR, and different filters are joined with AND. You can specify up to 10 filter values in total. The following filters are supported:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>nat-gateway-support</code>: The state of NAT gateway support on the attachment, for example <code>ENABLED</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>nat-system-route-support</code>: Whether system routes are installed for the attachment, <code>true</code> or <code>false</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>rule-number</code>: The rule number of a NAT rule.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>match-source-cidr</code>: The source CIDR block of a NAT rule. The value must exactly match the CIDR block of the rule.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>nat-cidr</code>: The NAT CIDR block of a NAT rule. The value must exactly match the CIDR block of the rule.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>nat-rule-state</code>: The state of a NAT rule, for example <code>ACTIVATED</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Filters?: Record<string, string[]> | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentNatConfigurationsResponse {
+  /**
+   * <p>The NAT configurations of the attachments.</p>
+   * @public
+   */
+  AttachmentNatConfigurations: AttachmentNatConfiguration[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentRoutingPolicyAssociationsRequest {
+  /**
+   * <p>The ID of the core network to list attachment routing policy associations for.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of a specific attachment to filter the routing policy associations.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in a single page.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentRoutingPolicyAssociationsResponse {
+  /**
+   * <p>The list of attachment routing policy associations.</p>
+   * @public
+   */
+  AttachmentRoutingPolicyAssociations?: AttachmentRoutingPolicyAssociationSummary[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentsRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The type of attachment.</p>
+   * @public
+   */
+  AttachmentType?: AttachmentType | undefined;
+
+  /**
+   * <p>The Region where the edge is located.</p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>The state of the attachment.</p>
+   * @public
+   */
+  State?: AttachmentState | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAttachmentsResponse {
+  /**
+   * <p>Describes the list of attachments.</p>
+   * @public
+   */
+  Attachments?: Attachment[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListConnectPeersRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the attachment.</p>
+   * @public
+   */
+  ConnectAttachmentId?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListConnectPeersResponse {
+  /**
+   * <p>Describes the Connect peers.</p>
+   * @public
+   */
+  ConnectPeers?: ConnectPeerSummary[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkPolicyVersionsRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkPolicyVersionsResponse {
+  /**
+   * <p>Describes core network policy versions.</p>
+   * @public
+   */
+  CoreNetworkPolicyVersions?: CoreNetworkPolicyVersion[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkPrefixListAssociationsRequest {
+  /**
+   * <p>The ID of the core network to list prefix list associations for.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of a specific prefix list to filter the associations.</p>
+   * @public
+   */
+  PrefixListArn?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in a single page.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Information about a prefix list association with a core network.</p>
+ * @public
+ */
+export interface PrefixListAssociation {
+  /**
+   * <p>The ID of the core network in the association.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ARN of the prefix list in the association.</p>
+   * @public
+   */
+  PrefixListArn?: string | undefined;
+
+  /**
+   * <p>The alias of the prefix list in the association.</p>
+   * @public
+   */
+  PrefixListAlias?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkPrefixListAssociationsResponse {
+  /**
+   * <p>The list of prefix list associations for the core network.</p>
+   * @public
+   */
+  PrefixListAssociations?: PrefixListAssociation[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkRoutingInformationRequest {
+  /**
+   * <p>The ID of the core network to retrieve routing information for.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The name of the segment to filter routing information by.</p>
+   * @public
+   */
+  SegmentName: string | undefined;
+
+  /**
+   * <p>The edge location to filter routing information by.</p>
+   * @public
+   */
+  EdgeLocation: string | undefined;
+
+  /**
+   * <p>Filters to apply based on next hop information. Each filter value must exactly match the corresponding next hop value. Values for the same filter are joined with OR, and different filters are joined with AND. The following filters are supported:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>core-network-attachment-id</code>: The ID of the core network attachment for the next hop, for example <code>attachment-0123456789abcdef0</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>segment-name</code>: The name of the segment for the next hop.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>edge-location</code>: The edge location for the next hop, for example <code>us-east-1</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>resource-id</code>: The ID of the resource for the next hop.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>resource-type</code>: The type of resource for the next hop. The possible values are <code>vpc</code>, <code>vpn</code>, <code>connect-peer</code>, <code>direct-connect-gateway</code>, <code>transit-gateway-route-table</code>, <code>attachment</code>, and <code>blackhole</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ip-address</code>: The IP address of the next hop. For a Site-to-Site VPN next hop, this is the outside IP address of the AWS side of the VPN tunnel. For a Connect peer next hop, this is the core network BGP address of the Connect peer. The value must be a single IPv4 or IPv6 address.</p>
+   *             </li>
+   *          </ul>
+   *          <p>You can specify up to 10 filter values in total across <code>NextHopFilters</code> and the other match parameters in the request. Each filter value can be up to 256 characters.</p>
+   * @public
+   */
+  NextHopFilters?: Record<string, string[]> | undefined;
+
+  /**
+   * <p>Exact prefix values to match when filtering routing information.</p>
+   * @public
+   */
+  ExactPrefixMatches?: string[] | undefined;
+
+  /**
+   * <p>Filters routing information based on the longest prefix that matches each provided IP address.</p>
+   * @public
+   */
+  LongestPrefixMatches?: string[] | undefined;
+
+  /**
+   * <p>Prefix values to filter routing information whose prefix is a subnet of the prefixes provided.</p>
+   * @public
+   */
+  SubnetOfMatches?: string[] | undefined;
+
+  /**
+   * <p>Prefix values to filter routing information whose prefix is a supernet of the prefixes provided.</p>
+   * @public
+   */
+  SupernetOfMatches?: string[] | undefined;
+
+  /**
+   * <p>Local preference values to match when filtering routing information.</p>
+   * @public
+   */
+  LocalPreferenceMatches?: string[] | undefined;
+
+  /**
+   * <p>Exact AS path values to match when filtering routing information.</p>
+   * @public
+   */
+  ExactAsPathMatches?: string[] | undefined;
+
+  /**
+   * <p>Multi-Exit Discriminator (MED) values to match when filtering routing information.</p>
+   * @public
+   */
+  MedMatches?: string[] | undefined;
+
+  /**
+   * <p>BGP community values to match when filtering routing information.</p>
+   * @public
+   */
+  CommunityMatches?: string[] | undefined;
+
+  /**
+   * <p>The maximum number of routing information entries to return in a single page.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworkRoutingInformationResponse {
+  /**
+   * <p>The list of routing information for the core network.</p>
+   * @public
+   */
+  CoreNetworkRoutingInformation?: CoreNetworkRoutingInformation[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworksRequest {
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListCoreNetworksResponse {
+  /**
+   * <p>Describes the list of core networks.</p>
+   * @public
+   */
+  CoreNetworks?: CoreNetworkSummary[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListOrganizationServiceAccessStatusRequest {
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>The status of an Amazon Web Services Organization and the accounts within that organization.</p>
+ * @public
+ */
+export interface OrganizationStatus {
+  /**
+   * <p>The ID of an Amazon Web Services Organization.</p>
+   * @public
+   */
+  OrganizationId?: string | undefined;
+
+  /**
+   * <p>The status  of the organization's AWS service access. This will be <code>ENABLED</code> or <code>DISABLED</code>.</p>
+   * @public
+   */
+  OrganizationAwsServiceAccessStatus?: string | undefined;
+
+  /**
+   * <p>The status of the SLR deployment for the account. This will be either <code>SUCCEEDED</code> or <code>IN_PROGRESS</code>.</p>
+   * @public
+   */
+  SLRDeploymentStatus?: string | undefined;
+
+  /**
+   * <p>The current service-linked role (SLR) deployment status for an Amazon Web Services Organization's accounts. This will be either <code>SUCCEEDED</code> or <code>IN_PROGRESS</code>.</p>
+   * @public
+   */
+  AccountStatusList?: AccountStatus[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListOrganizationServiceAccessStatusResponse {
+  /**
+   * <p>Displays the status of an Amazon Web Services Organization.</p>
+   * @public
+   */
+  OrganizationStatus?: OrganizationStatus | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPeeringsRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>Returns a list of a peering requests.</p>
+   * @public
+   */
+  PeeringType?: PeeringType | undefined;
+
+  /**
+   * <p>Returns a list edge locations for the </p>
+   * @public
+   */
+  EdgeLocation?: string | undefined;
+
+  /**
+   * <p>Returns a list of the peering request states.</p>
+   * @public
+   */
+  State?: PeeringState | undefined;
+
+  /**
+   * <p>The maximum number of results to return.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPeeringsResponse {
+  /**
+   * <p>Lists the transit gateway peerings for the <code>ListPeerings</code> request.</p>
+   * @public
+   */
+  Peerings?: Peering[] | undefined;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>The list of tags.</p>
+   * @public
    */
-  TagList?: Tag[];
+  TagList?: Tag[] | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
+/**
+ * @public
+ */
+export interface PutAttachmentRoutingPolicyLabelRequest {
   /**
-   * @internal
+   * <p>The ID of the core network containing the attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the attachment to apply the routing policy label to.</p>
+   * @public
+   */
+  AttachmentId: string | undefined;
+
+  /**
+   * <p>The routing policy label to apply to the attachment.</p>
+   * @public
+   */
+  RoutingPolicyLabel: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface PutAttachmentRoutingPolicyLabelResponse {
+  /**
+   * <p>The ID of the core network containing the attachment.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the attachment that received the routing policy label.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The routing policy label that was applied to the attachment.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutCoreNetworkPolicyRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The policy document.</p>
+   * @public
+   */
+  PolicyDocument: __AutomaticJsonStringConversion | string | undefined;
+
+  /**
+   * <p>a core network policy description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The ID of a core network policy. </p>
+   * @public
+   */
+  LatestVersionId?: number | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutCoreNetworkPolicyResponse {
+  /**
+   * <p>Describes the changed core network policy.</p>
+   * @public
+   */
+  CoreNetworkPolicy?: CoreNetworkPolicy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutResourcePolicyRequest {
+  /**
+   * <p>The JSON resource policy document.</p>
+   * @public
+   */
+  PolicyDocument: __AutomaticJsonStringConversion | string | undefined;
+
+  /**
+   * <p>The ARN of the resource policy. </p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutResourcePolicyResponse {}
+
+/**
+ * @public
+ */
 export interface RegisterTransitGatewayRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the transit gateway. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies">Resources Defined by Amazon EC2</a>.</p>
+   * <p>The Amazon Resource Name (ARN) of the transit gateway.</p>
+   * @public
    */
   TransitGatewayArn: string | undefined;
 }
 
-export namespace RegisterTransitGatewayRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterTransitGatewayRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterTransitGatewayResponse {
   /**
    * <p>Information about the transit gateway registration.</p>
+   * @public
    */
-  TransitGatewayRegistration?: TransitGatewayRegistration;
+  TransitGatewayRegistration?: TransitGatewayRegistration | undefined;
 }
 
-export namespace RegisterTransitGatewayResponse {
+/**
+ * @public
+ */
+export interface RejectAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RegisterTransitGatewayResponse): any => ({
-    ...obj,
-  });
+  AttachmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface RejectAttachmentResponse {
+  /**
+   * <p>Describes the rejected attachment request.</p>
+   * @public
+   */
+  Attachment?: Attachment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RemoveAttachmentRoutingPolicyLabelRequest {
+  /**
+   * <p>The ID of the core network containing the attachment.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the attachment to remove the routing policy label from.</p>
+   * @public
+   */
+  AttachmentId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RemoveAttachmentRoutingPolicyLabelResponse {
+  /**
+   * <p>The ID of the core network containing the attachment.</p>
+   * @public
+   */
+  CoreNetworkId?: string | undefined;
+
+  /**
+   * <p>The ID of the attachment from which the routing policy label was removed.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The routing policy label that was removed from the attachment.</p>
+   * @public
+   */
+  RoutingPolicyLabel?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RestoreCoreNetworkPolicyVersionRequest {
+  /**
+   * <p>The ID of a core network.</p>
+   * @public
+   */
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The ID of the policy version to restore.</p>
+   * @public
+   */
+  PolicyVersionId: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RestoreCoreNetworkPolicyVersionResponse {
+  /**
+   * <p>Describes the restored core network policy.</p>
+   * @public
+   */
+  CoreNetworkPolicy?: CoreNetworkPolicy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartOrganizationServiceAccessUpdateRequest {
+  /**
+   * <p>The action to take for the update request. This can be either <code>ENABLE</code> or <code>DISABLE</code>.</p>
+   * @public
+   */
+  Action: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartOrganizationServiceAccessUpdateResponse {
+  /**
+   * <p>The status of the service access update request for an Amazon Web Services Organization.</p>
+   * @public
+   */
+  OrganizationStatus?: OrganizationStatus | undefined;
+}
+
+/**
+ * <p>Describes a source or a destination.</p>
+ * @public
+ */
+export interface RouteAnalysisEndpointOptionsSpecification {
+  /**
+   * <p>The ARN of the transit gateway attachment.</p>
+   * @public
+   */
+  TransitGatewayAttachmentArn?: string | undefined;
+
+  /**
+   * <p>The IP address.</p>
+   * @public
+   */
+  IpAddress?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartRouteAnalysisRequest {
+  /**
+   * <p>The ID of the global network.</p>
+   * @public
+   */
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The source from which traffic originates.</p>
+   * @public
+   */
+  Source: RouteAnalysisEndpointOptionsSpecification | undefined;
+
+  /**
+   * <p>The destination.</p>
+   * @public
+   */
+  Destination: RouteAnalysisEndpointOptionsSpecification | undefined;
+
+  /**
+   * <p>Indicates whether to analyze the return path. The default is <code>false</code>.</p>
+   * @public
+   */
+  IncludeReturnPath?: boolean | undefined;
+
+  /**
+   * <p>Indicates whether to include the location of middlebox appliances in the route analysis.
+   *             The default is <code>false</code>.</p>
+   * @public
+   */
+  UseMiddleboxes?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartRouteAnalysisResponse {
+  /**
+   * <p>The route analysis.</p>
+   * @public
+   */
+  RouteAnalysis?: RouteAnalysis | undefined;
+}
+
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>The tags to apply to the specified resource.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>The tag keys to remove from the specified resource.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
-export namespace UntagResourceResponse {
+/**
+ * @public
+ */
+export interface UpdateAttachmentNatConfigurationRequest {
   /**
-   * @internal
+   * <p>The ID of the attachment to update the NAT configuration for.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
+  AttachmentId: string | undefined;
+
+  /**
+   * <p>Specifies whether to enable or disable NAT gateway support on the attachment. When you disable NAT gateway support, the attachment keeps its NAT rules but doesn't apply them. To enable NAT gateway support, the attachment must have at least one NAT rule, either specified in this request or already configured on the attachment. If you omit this parameter, NAT gateway support is unchanged.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportValue | undefined;
+
+  /**
+   * <p>Specifies whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules. System routes have a route type of <code>SYSTEM</code>. NAT is applied to traffic whether or not this option is enabled. If you omit this parameter, the current value is unchanged.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The complete set of NAT rules for the attachment, up to 50 rules. The rules that you specify replace the existing rules of the attachment, matched by rule number. Existing rules that aren't included in the request are deleted. To delete all NAT rules, specify an empty list. You can delete all NAT rules only when NAT gateway support is disabled, or when you disable it in the same request. If you omit this parameter, the existing rules are unchanged.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRuleRequest[] | undefined;
+
+  /**
+   * <p>The client token associated with the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateAttachmentNatConfigurationResponse {
+  /**
+   * <p>The ID of the attachment.</p>
+   * @public
+   */
+  AttachmentId?: string | undefined;
+
+  /**
+   * <p>The state of NAT gateway support on the attachment. The transitional states <code>ENABLING</code> and <code>DISABLING</code> change to <code>ENABLED</code> or <code>DISABLED</code> after the update is applied. The state is <code>PENDING_ATTACHMENT_ACCEPTANCE</code> when NAT gateway support is enabled on an attachment that is pending acceptance.</p>
+   * @public
+   */
+  NatGatewaySupport?: NatGatewaySupportState | undefined;
+
+  /**
+   * <p>Indicates whether the core network installs system routes for the NAT CIDR blocks of the attachment's NAT rules.</p>
+   * @public
+   */
+  NatSystemRouteSupport?: boolean | undefined;
+
+  /**
+   * <p>The NAT rules of the attachment, including rules that are being deleted.</p>
+   * @public
+   */
+  NatGatewayRules?: NatRule[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateConnectionRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the connection.</p>
+   * @public
    */
   ConnectionId: string | undefined;
 
   /**
    * <p>The ID of the link for the first device in the connection.</p>
+   * @public
    */
-  LinkId?: string;
+  LinkId?: string | undefined;
 
   /**
    * <p>The ID of the link for the second device in the connection.</p>
+   * @public
    */
-  ConnectedLinkId?: string;
+  ConnectedLinkId?: string | undefined;
 
   /**
    * <p>A description of the connection.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Length Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace UpdateConnectionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConnectionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateConnectionResponse {
   /**
    * <p>Information about the connection.</p>
+   * @public
    */
-  Connection?: Connection;
+  Connection?: Connection | undefined;
 }
 
-export namespace UpdateConnectionResponse {
+/**
+ * @public
+ */
+export interface UpdateCoreNetworkRequest {
   /**
-   * @internal
+   * <p>The ID of a core network.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateConnectionResponse): any => ({
-    ...obj,
-  });
+  CoreNetworkId: string | undefined;
+
+  /**
+   * <p>The description of the update.</p>
+   * @public
+   */
+  Description?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateCoreNetworkResponse {
+  /**
+   * <p>Returns information about a core network update.</p>
+   * @public
+   */
+  CoreNetwork?: CoreNetwork | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateDeviceRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the device.</p>
+   * @public
    */
   DeviceId: string | undefined;
 
   /**
-   * <p>The AWS location of the device.</p>
+   * <p>The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.</p>
+   * @public
    */
-  AWSLocation?: AWSLocation;
+  AWSLocation?: AWSLocation | undefined;
 
   /**
    * <p>A description of the device.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of the device.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The vendor of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Vendor?: string;
+  Vendor?: string | undefined;
 
   /**
    * <p>The model of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Model?: string;
+  Model?: string | undefined;
 
   /**
    * <p>The serial number of the device.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  SerialNumber?: string;
+  SerialNumber?: string | undefined;
 
   /**
    * <p>Describes a location.</p>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 
   /**
    * <p>The ID of the site.</p>
+   * @public
    */
-  SiteId?: string;
+  SiteId?: string | undefined;
 }
 
-export namespace UpdateDeviceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDeviceRequest): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDeviceResponse {
   /**
    * <p>Information about the device.</p>
+   * @public
    */
-  Device?: Device;
+  Device?: Device | undefined;
 }
 
-export namespace UpdateDeviceResponse {
+/**
+ * @public
+ */
+export interface UpdateDirectConnectGatewayAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the Direct Connect gateway attachment for the updated edge locations. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateDeviceResponse): any => ({
-    ...obj,
-    ...(obj.Device && { Device: Device.filterSensitiveLog(obj.Device) }),
-  });
+  AttachmentId: string | undefined;
+
+  /**
+   * <p>One or more edge locations to update for the Direct Connect gateway attachment. The updated array of edge locations overwrites the previous array of locations. <code>EdgeLocations</code> is only used for Direct Connect gateway attachments.</p>
+   * @public
+   */
+  EdgeLocations?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateDirectConnectGatewayAttachmentResponse {
+  /**
+   * <p>Returns details of the Direct Connect gateway attachment with the updated edge locations.</p>
+   * @public
+   */
+  DirectConnectGatewayAttachment?: DirectConnectGatewayAttachment | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateGlobalNetworkRequest {
   /**
    * <p>The ID of your global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>A description of the global network.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace UpdateGlobalNetworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGlobalNetworkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateGlobalNetworkResponse {
   /**
    * <p>Information about the global network object.</p>
+   * @public
    */
-  GlobalNetwork?: GlobalNetwork;
+  GlobalNetwork?: GlobalNetwork | undefined;
 }
 
-export namespace UpdateGlobalNetworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGlobalNetworkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateLinkRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of the link.</p>
+   * @public
    */
   LinkId: string | undefined;
 
   /**
    * <p>A description of the link.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of the link.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The upload and download speed in Mbps. </p>
+   * @public
    */
-  Bandwidth?: Bandwidth;
+  Bandwidth?: Bandwidth | undefined;
 
   /**
    * <p>The provider of the link.</p>
-   *         <p>Length Constraints: Maximum length of 128 characters.</p>
+   *          <p>Constraints: Maximum length of 128 characters.</p>
+   * @public
    */
-  Provider?: string;
+  Provider?: string | undefined;
 }
 
-export namespace UpdateLinkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateLinkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateLinkResponse {
   /**
    * <p>Information about the link.</p>
+   * @public
    */
-  Link?: Link;
+  Link?: Link | undefined;
 }
 
-export namespace UpdateLinkResponse {
+/**
+ * @public
+ */
+export interface UpdateNetworkResourceMetadataRequest {
   /**
-   * @internal
+   * <p>The ID of the global network.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateLinkResponse): any => ({
-    ...obj,
-  });
+  GlobalNetworkId: string | undefined;
+
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+
+  /**
+   * <p>The resource metadata.</p>
+   * @public
+   */
+  Metadata: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateNetworkResourceMetadataResponse {
+  /**
+   * <p>The ARN of the resource.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The updated resource metadata.</p>
+   * @public
+   */
+  Metadata?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateSiteRequest {
   /**
    * <p>The ID of the global network.</p>
+   * @public
    */
   GlobalNetworkId: string | undefined;
 
   /**
    * <p>The ID of your site.</p>
+   * @public
    */
   SiteId: string | undefined;
 
   /**
    * <p>A description of your site.</p>
-   *         <p>Length Constraints: Maximum length of 256 characters.</p>
+   *          <p>Constraints: Maximum length of 256 characters.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The site location:</p>
-   *         <ul>
+   *          <ul>
    *             <li>
    *                <p>
    *                   <code>Address</code>: The physical address of the site.</p>
@@ -2557,33 +7423,58 @@ export interface UpdateSiteRequest {
    *                   <code>Longitude</code>: The longitude of the site.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Location?: Location;
+  Location?: Location | undefined;
 }
 
-export namespace UpdateSiteRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSiteRequest): any => ({
-    ...obj,
-    ...(obj.Location && { Location: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSiteResponse {
   /**
    * <p>Information about the site.</p>
+   * @public
    */
-  Site?: Site;
+  Site?: Site | undefined;
 }
 
-export namespace UpdateSiteResponse {
+/**
+ * @public
+ */
+export interface UpdateVpcAttachmentRequest {
   /**
-   * @internal
+   * <p>The ID of the attachment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateSiteResponse): any => ({
-    ...obj,
-    ...(obj.Site && { Site: Site.filterSensitiveLog(obj.Site) }),
-  });
+  AttachmentId: string | undefined;
+
+  /**
+   * <p>Adds a subnet ARN to the VPC attachment.</p>
+   * @public
+   */
+  AddSubnetArns?: string[] | undefined;
+
+  /**
+   * <p>Removes a subnet ARN from the attachment.</p>
+   * @public
+   */
+  RemoveSubnetArns?: string[] | undefined;
+
+  /**
+   * <p>Additional options for updating the VPC attachment. </p>
+   * @public
+   */
+  Options?: VpcOptions | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateVpcAttachmentResponse {
+  /**
+   * <p>Describes the updated VPC attachment.</p>
+   * @public
+   */
+  VpcAttachment?: VpcAttachment | undefined;
 }

@@ -1,99 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import { UntagStreamInput, UntagStreamOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1UntagStreamCommand,
-  serializeAws_restJson1UntagStreamCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UntagStreamInput, UntagStreamOutput } from "../models/models_0";
+import { UntagStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UntagStreamCommand}.
+ */
 export interface UntagStreamCommandInput extends UntagStreamInput {}
+/**
+ * @public
+ *
+ * The output of {@link UntagStreamCommand}.
+ */
 export interface UntagStreamCommandOutput extends UntagStreamOutput, __MetadataBearer {}
 
 /**
  * <p>Removes one or more tags from a stream. In the request, specify only a tag key or
  *             keys; don't specify the value. If you specify a tag key that does not exist, it's
  *             ignored.</p>
- *         <p>In the request, you must provide the <code>StreamName</code> or
+ *          <p>In the request, you must provide the <code>StreamName</code> or
  *                 <code>StreamARN</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KinesisVideoClient, UntagStreamCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, UntagStreamCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // UntagStreamInput
+ *   StreamARN: "STRING_VALUE",
+ *   StreamName: "STRING_VALUE",
+ *   TagKeyList: [ // TagKeyList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UntagStreamCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UntagStreamCommandInput - {@link UntagStreamCommandInput}
+ * @returns {@link UntagStreamCommandOutput}
  * @see {@link UntagStreamCommandInput} for command's `input` shape.
  * @see {@link UntagStreamCommandOutput} for command's `response` shape.
- * @see {@link KinesisVideoClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link InvalidResourceFormatException} (client fault)
+ *  <p>The format of the <code>StreamARN</code> is invalid.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>The caller is not authorized to perform this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Amazon Kinesis Video Streams can't find the stream that you specified.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class UntagStreamCommand extends $Command<
-  UntagStreamCommandInput,
-  UntagStreamCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UntagStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UntagStreamCommandInput, UntagStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "UntagStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UntagStreamInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UntagStreamOutput.filterSensitiveLog,
+export class UntagStreamCommand extends command<UntagStreamCommandInput, UntagStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "UntagStream",
+  UntagStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagStreamInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UntagStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UntagStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UntagStreamCommandOutput> {
-    return deserializeAws_restJson1UntagStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UntagStreamCommandInput;
+      output: UntagStreamCommandOutput;
+    };
+  };
 }

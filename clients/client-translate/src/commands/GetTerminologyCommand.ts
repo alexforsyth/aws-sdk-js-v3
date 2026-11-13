@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetTerminologyRequest, GetTerminologyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetTerminologyCommand,
-  serializeAws_json1_1GetTerminologyCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TranslateClientResolvedConfig } from "../TranslateClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTerminologyRequest, GetTerminologyResponse } from "../models/models_0";
+import { GetTerminology$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTerminologyCommand}.
+ */
 export interface GetTerminologyCommandInput extends GetTerminologyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTerminologyCommand}.
+ */
 export interface GetTerminologyCommandOutput extends GetTerminologyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,92 @@ export interface GetTerminologyCommandOutput extends GetTerminologyResponse, __M
  * ```javascript
  * import { TranslateClient, GetTerminologyCommand } from "@aws-sdk/client-translate"; // ES Modules import
  * // const { TranslateClient, GetTerminologyCommand } = require("@aws-sdk/client-translate"); // CommonJS import
+ * // import type { TranslateClientConfig } from "@aws-sdk/client-translate";
+ * const config = {}; // type is TranslateClientConfig
  * const client = new TranslateClient(config);
+ * const input = { // GetTerminologyRequest
+ *   Name: "STRING_VALUE", // required
+ *   TerminologyDataFormat: "CSV" || "TMX" || "TSV",
+ * };
  * const command = new GetTerminologyCommand(input);
  * const response = await client.send(command);
+ * // { // GetTerminologyResponse
+ * //   TerminologyProperties: { // TerminologyProperties
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     SourceLanguageCode: "STRING_VALUE",
+ * //     TargetLanguageCodes: [ // LanguageCodeStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     EncryptionKey: { // EncryptionKey
+ * //       Type: "KMS", // required
+ * //       Id: "STRING_VALUE", // required
+ * //     },
+ * //     SizeBytes: Number("int"),
+ * //     TermCount: Number("int"),
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     LastUpdatedAt: new Date("TIMESTAMP"),
+ * //     Directionality: "UNI" || "MULTI",
+ * //     Message: "STRING_VALUE",
+ * //     SkippedTermCount: Number("int"),
+ * //     Format: "CSV" || "TMX" || "TSV",
+ * //   },
+ * //   TerminologyDataLocation: { // TerminologyDataLocation
+ * //     RepositoryType: "STRING_VALUE", // required
+ * //     Location: "STRING_VALUE", // required
+ * //   },
+ * //   AuxiliaryDataLocation: {
+ * //     RepositoryType: "STRING_VALUE", // required
+ * //     Location: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetTerminologyCommandInput - {@link GetTerminologyCommandInput}
+ * @returns {@link GetTerminologyCommandOutput}
  * @see {@link GetTerminologyCommandInput} for command's `input` shape.
  * @see {@link GetTerminologyCommandOutput} for command's `response` shape.
- * @see {@link TranslateClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TranslateClientResolvedConfig | config} for TranslateClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of the parameter is not valid. Review the value of the parameter you are using
+ *       to correct it, and then retry your operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource you are looking for has not been found. Review the resource you're looking
+ *       for and see if a different resource will accomplish your needs before retrying the revised
+ *       request.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again.</p>
+ *
+ * @throws {@link TranslateServiceException}
+ * <p>Base exception class for all service exceptions from Translate service.</p>
+ *
+ *
+ * @public
  */
-export class GetTerminologyCommand extends $Command<
-  GetTerminologyCommandInput,
-  GetTerminologyCommandOutput,
-  TranslateClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTerminologyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TranslateClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTerminologyCommandInput, GetTerminologyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TranslateClient";
-    const commandName = "GetTerminologyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTerminologyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetTerminologyResponse.filterSensitiveLog,
+export class GetTerminologyCommand extends command<GetTerminologyCommandInput, GetTerminologyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTerminology",
+  GetTerminology$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTerminologyRequest;
+      output: GetTerminologyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTerminologyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetTerminologyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTerminologyCommandOutput> {
-    return deserializeAws_json1_1GetTerminologyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTerminologyCommandInput;
+      output: GetTerminologyCommandOutput;
+    };
+  };
 }

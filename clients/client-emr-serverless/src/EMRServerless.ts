@@ -1,0 +1,586 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CancelJobRunCommandInput,
+  type CancelJobRunCommandOutput,
+  CancelJobRunCommand,
+} from "./commands/CancelJobRunCommand";
+import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type GetApplicationCommandInput,
+  type GetApplicationCommandOutput,
+  GetApplicationCommand,
+} from "./commands/GetApplicationCommand";
+import {
+  type GetDashboardForJobRunCommandInput,
+  type GetDashboardForJobRunCommandOutput,
+  GetDashboardForJobRunCommand,
+} from "./commands/GetDashboardForJobRunCommand";
+import { type GetJobRunCommandInput, type GetJobRunCommandOutput, GetJobRunCommand } from "./commands/GetJobRunCommand";
+import {
+  type GetResourceDashboardCommandInput,
+  type GetResourceDashboardCommandOutput,
+  GetResourceDashboardCommand,
+} from "./commands/GetResourceDashboardCommand";
+import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type GetSessionEndpointCommandInput,
+  type GetSessionEndpointCommandOutput,
+  GetSessionEndpointCommand,
+} from "./commands/GetSessionEndpointCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListJobRunAttemptsCommandInput,
+  type ListJobRunAttemptsCommandOutput,
+  ListJobRunAttemptsCommand,
+} from "./commands/ListJobRunAttemptsCommand";
+import {
+  type ListJobRunsCommandInput,
+  type ListJobRunsCommandOutput,
+  ListJobRunsCommand,
+} from "./commands/ListJobRunsCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type StartApplicationCommandInput,
+  type StartApplicationCommandOutput,
+  StartApplicationCommand,
+} from "./commands/StartApplicationCommand";
+import {
+  type StartJobRunCommandInput,
+  type StartJobRunCommandOutput,
+  StartJobRunCommand,
+} from "./commands/StartJobRunCommand";
+import {
+  type StartSessionCommandInput,
+  type StartSessionCommandOutput,
+  StartSessionCommand,
+} from "./commands/StartSessionCommand";
+import {
+  type StopApplicationCommandInput,
+  type StopApplicationCommandOutput,
+  StopApplicationCommand,
+} from "./commands/StopApplicationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TerminateSessionCommandInput,
+  type TerminateSessionCommandOutput,
+  TerminateSessionCommand,
+} from "./commands/TerminateSessionCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import { EMRServerlessClient } from "./EMRServerlessClient";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListJobRunAttempts } from "./pagination/ListJobRunAttemptsPaginator";
+import { paginateListJobRuns } from "./pagination/ListJobRunsPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+
+const commands = {
+  CancelJobRunCommand,
+  CreateApplicationCommand,
+  DeleteApplicationCommand,
+  GetApplicationCommand,
+  GetDashboardForJobRunCommand,
+  GetJobRunCommand,
+  GetResourceDashboardCommand,
+  GetSessionCommand,
+  GetSessionEndpointCommand,
+  ListApplicationsCommand,
+  ListJobRunAttemptsCommand,
+  ListJobRunsCommand,
+  ListSessionsCommand,
+  ListTagsForResourceCommand,
+  StartApplicationCommand,
+  StartJobRunCommand,
+  StartSessionCommand,
+  StopApplicationCommand,
+  TagResourceCommand,
+  TerminateSessionCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+};
+const paginators = {
+  paginateListApplications,
+  paginateListJobRunAttempts,
+  paginateListJobRuns,
+  paginateListSessions,
+};
+
+/**
+ * @public
+ */
+export interface EMRServerlessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface EMRServerless {
+  /**
+   * @see {@link CancelJobRunCommand}
+   */
+  cancelJobRun(
+    args: CancelJobRunCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<CancelJobRunCommandOutput>;
+  cancelJobRun(
+    args: CancelJobRunCommandInput,
+    cb: (err: any, data?: CancelJobRunCommandOutput) => void
+  ): void;
+  cancelJobRun(
+    args: CancelJobRunCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: CancelJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateApplicationCommand}
+   */
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationCommand}
+   */
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   */
+  getApplication(
+    args: GetApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetApplicationCommandOutput>;
+  getApplication(
+    args: GetApplicationCommandInput,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+  getApplication(
+    args: GetApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDashboardForJobRunCommand}
+   */
+  getDashboardForJobRun(
+    args: GetDashboardForJobRunCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetDashboardForJobRunCommandOutput>;
+  getDashboardForJobRun(
+    args: GetDashboardForJobRunCommandInput,
+    cb: (err: any, data?: GetDashboardForJobRunCommandOutput) => void
+  ): void;
+  getDashboardForJobRun(
+    args: GetDashboardForJobRunCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetDashboardForJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetJobRunCommand}
+   */
+  getJobRun(
+    args: GetJobRunCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetJobRunCommandOutput>;
+  getJobRun(
+    args: GetJobRunCommandInput,
+    cb: (err: any, data?: GetJobRunCommandOutput) => void
+  ): void;
+  getJobRun(
+    args: GetJobRunCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceDashboardCommand}
+   */
+  getResourceDashboard(
+    args: GetResourceDashboardCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetResourceDashboardCommandOutput>;
+  getResourceDashboard(
+    args: GetResourceDashboardCommandInput,
+    cb: (err: any, data?: GetResourceDashboardCommandOutput) => void
+  ): void;
+  getResourceDashboard(
+    args: GetResourceDashboardCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetResourceDashboardCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionCommand}
+   */
+  getSession(
+    args: GetSessionCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+  getSession(
+    args: GetSessionCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionEndpointCommand}
+   */
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<GetSessionEndpointCommandOutput>;
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    cb: (err: any, data?: GetSessionEndpointCommandOutput) => void
+  ): void;
+  getSessionEndpoint(
+    args: GetSessionEndpointCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: GetSessionEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListJobRunAttemptsCommand}
+   */
+  listJobRunAttempts(
+    args: ListJobRunAttemptsCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<ListJobRunAttemptsCommandOutput>;
+  listJobRunAttempts(
+    args: ListJobRunAttemptsCommandInput,
+    cb: (err: any, data?: ListJobRunAttemptsCommandOutput) => void
+  ): void;
+  listJobRunAttempts(
+    args: ListJobRunAttemptsCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: ListJobRunAttemptsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListJobRunsCommand}
+   */
+  listJobRuns(
+    args: ListJobRunsCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<ListJobRunsCommandOutput>;
+  listJobRuns(
+    args: ListJobRunsCommandInput,
+    cb: (err: any, data?: ListJobRunsCommandOutput) => void
+  ): void;
+  listJobRuns(
+    args: ListJobRunsCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: ListJobRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartApplicationCommand}
+   */
+  startApplication(
+    args: StartApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<StartApplicationCommandOutput>;
+  startApplication(
+    args: StartApplicationCommandInput,
+    cb: (err: any, data?: StartApplicationCommandOutput) => void
+  ): void;
+  startApplication(
+    args: StartApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: StartApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartJobRunCommand}
+   */
+  startJobRun(
+    args: StartJobRunCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<StartJobRunCommandOutput>;
+  startJobRun(
+    args: StartJobRunCommandInput,
+    cb: (err: any, data?: StartJobRunCommandOutput) => void
+  ): void;
+  startJobRun(
+    args: StartJobRunCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: StartJobRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSessionCommand}
+   */
+  startSession(
+    args: StartSessionCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<StartSessionCommandOutput>;
+  startSession(
+    args: StartSessionCommandInput,
+    cb: (err: any, data?: StartSessionCommandOutput) => void
+  ): void;
+  startSession(
+    args: StartSessionCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: StartSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopApplicationCommand}
+   */
+  stopApplication(
+    args: StopApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<StopApplicationCommandOutput>;
+  stopApplication(
+    args: StopApplicationCommandInput,
+    cb: (err: any, data?: StopApplicationCommandOutput) => void
+  ): void;
+  stopApplication(
+    args: StopApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: StopApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TerminateSessionCommand}
+   */
+  terminateSession(
+    args: TerminateSessionCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<TerminateSessionCommandOutput>;
+  terminateSession(
+    args: TerminateSessionCommandInput,
+    cb: (err: any, data?: TerminateSessionCommandOutput) => void
+  ): void;
+  terminateSession(
+    args: TerminateSessionCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: TerminateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApplicationCommand}
+   */
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: EMRServerlessRequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: EMRServerlessRequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args?: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListJobRunAttemptsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobRunAttemptsCommandOutput}.
+   */
+  paginateListJobRunAttempts(
+    args: ListJobRunAttemptsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobRunAttemptsCommandOutput>;
+
+  /**
+   * @see {@link ListJobRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobRunsCommandOutput}.
+   */
+  paginateListJobRuns(
+    args: ListJobRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobRunsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+}
+
+/**
+ * <p>Amazon EMR Serverless is a new deployment option for Amazon EMR. Amazon EMR Serverless provides a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive. With Amazon EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.</p> <p>The API reference to Amazon EMR Serverless is <code>emr-serverless</code>. The <code>emr-serverless</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR Serverless. For example, <code>aws emr-serverless start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR Serverless. For example, <code>"Action": ["emr-serverless:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR Serverless</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR Serverless service endpoints. For example, <code>emr-serverless.us-east-2.amazonaws.com</code>.</p> </li> </ul>
+ * @public
+ */
+export class EMRServerless extends EMRServerlessClient implements EMRServerless {}
+createAggregatedClient(commands, EMRServerless, { paginators });

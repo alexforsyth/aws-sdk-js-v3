@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteDiscovererRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteDiscovererCommand,
-  serializeAws_restJson1DeleteDiscovererCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDiscovererRequest } from "../models/models_0";
+import { DeleteDiscoverer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDiscovererCommand}.
+ */
 export interface DeleteDiscovererCommandInput extends DeleteDiscovererRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDiscovererCommand}.
+ */
 export interface DeleteDiscovererCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,57 @@ export interface DeleteDiscovererCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { SchemasClient, DeleteDiscovererCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, DeleteDiscovererCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // DeleteDiscovererRequest
+ *   DiscovererId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDiscovererCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDiscovererCommandInput - {@link DeleteDiscovererCommandInput}
+ * @returns {@link DeleteDiscovererCommandOutput}
  * @see {@link DeleteDiscovererCommandInput} for command's `input` shape.
  * @see {@link DeleteDiscovererCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDiscovererCommand extends $Command<
-  DeleteDiscovererCommandInput,
-  DeleteDiscovererCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDiscovererCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDiscovererCommandInput, DeleteDiscovererCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "DeleteDiscovererCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDiscovererRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteDiscovererCommand extends command<DeleteDiscovererCommandInput, DeleteDiscovererCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDiscoverer",
+  DeleteDiscoverer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDiscovererRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDiscovererCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteDiscovererCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDiscovererCommandOutput> {
-    return deserializeAws_restJson1DeleteDiscovererCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDiscovererCommandInput;
+      output: DeleteDiscovererCommandOutput;
+    };
+  };
 }

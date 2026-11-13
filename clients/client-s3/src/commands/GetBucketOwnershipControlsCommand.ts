@@ -1,33 +1,50 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetBucketOwnershipControlsOutput, GetBucketOwnershipControlsRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetBucketOwnershipControlsCommand,
-  serializeAws_restXmlGetBucketOwnershipControlsCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type { GetBucketOwnershipControlsOutput, GetBucketOwnershipControlsRequest } from "../models/models_0";
+import { GetBucketOwnershipControls$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBucketOwnershipControlsCommand}.
+ */
 export interface GetBucketOwnershipControlsCommandInput extends GetBucketOwnershipControlsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBucketOwnershipControlsCommand}.
+ */
 export interface GetBucketOwnershipControlsCommandOutput extends GetBucketOwnershipControlsOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves <code>OwnershipControls</code> for an Amazon S3 bucket. To use this operation, you
- *          must have the <code>s3:GetBucketOwnershipControls</code> permission. For more information
- *          about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying
- *             Permissions in a Policy</a>. </p>
- *          <p>For information about Amazon S3 Object Ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html">Using Object Ownership</a>. </p>
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Retrieves <code>OwnershipControls</code> for an Amazon S3 bucket. To use this operation, you must have
+ *       the <code>s3:GetBucketOwnershipControls</code> permission. For more information about Amazon S3 permissions,
+ *       see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html">Specifying
+ *         permissions in a policy</a>. </p>
+ *          <note>
+ *             <p>A bucket doesn't have <code>OwnershipControls</code> settings in the following cases:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>The bucket was created before the <code>BucketOwnerEnforced</code> ownership setting was
+ *             introduced and you've never explicitly applied this value</p>
+ *                </li>
+ *                <li>
+ *                   <p>You've manually deleted the bucket ownership control value using the
+ *               <code>DeleteBucketOwnershipControls</code> API operation.</p>
+ *                </li>
+ *             </ul>
+ *             <p>By default, Amazon S3 sets <code>OwnershipControls</code> for all newly created buckets.</p>
+ *          </note>
+ *          <p>For information about Amazon S3 Object Ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Using Object Ownership</a>. </p>
  *          <p>The following operations are related to <code>GetBucketOwnershipControls</code>:</p>
  *          <ul>
  *             <li>
@@ -41,77 +58,62 @@ export interface GetBucketOwnershipControlsCommandOutput extends GetBucketOwners
  *                </p>
  *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, GetBucketOwnershipControlsCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, GetBucketOwnershipControlsCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // GetBucketOwnershipControlsRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new GetBucketOwnershipControlsCommand(input);
  * const response = await client.send(command);
+ * // { // GetBucketOwnershipControlsOutput
+ * //   OwnershipControls: { // OwnershipControls
+ * //     Rules: [ // OwnershipControlsRules // required
+ * //       { // OwnershipControlsRule
+ * //         ObjectOwnership: "BucketOwnerPreferred" || "ObjectWriter" || "BucketOwnerEnforced", // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetBucketOwnershipControlsCommandInput - {@link GetBucketOwnershipControlsCommandInput}
+ * @returns {@link GetBucketOwnershipControlsCommandOutput}
  * @see {@link GetBucketOwnershipControlsCommandInput} for command's `input` shape.
  * @see {@link GetBucketOwnershipControlsCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @public
  */
-export class GetBucketOwnershipControlsCommand extends $Command<
-  GetBucketOwnershipControlsCommandInput,
-  GetBucketOwnershipControlsCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBucketOwnershipControlsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBucketOwnershipControlsCommandInput, GetBucketOwnershipControlsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "GetBucketOwnershipControlsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBucketOwnershipControlsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetBucketOwnershipControlsOutput.filterSensitiveLog,
+export class GetBucketOwnershipControlsCommand extends command<GetBucketOwnershipControlsCommandInput, GetBucketOwnershipControlsCommandOutput>(
+  _ep3,
+  _mw0,
+  "GetBucketOwnershipControls",
+  GetBucketOwnershipControls$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBucketOwnershipControlsRequest;
+      output: GetBucketOwnershipControlsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBucketOwnershipControlsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetBucketOwnershipControlsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetBucketOwnershipControlsCommandOutput> {
-    return deserializeAws_restXmlGetBucketOwnershipControlsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBucketOwnershipControlsCommandInput;
+      output: GetBucketOwnershipControlsCommandOutput;
+    };
+  };
 }

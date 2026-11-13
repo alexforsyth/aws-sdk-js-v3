@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { BuildSuggestersRequest, BuildSuggestersResponse } from "../models/models_0";
-import {
-  deserializeAws_queryBuildSuggestersCommand,
-  serializeAws_queryBuildSuggestersCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BuildSuggestersRequest, BuildSuggestersResponse } from "../models/models_0";
+import { BuildSuggesters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BuildSuggestersCommand}.
+ */
 export interface BuildSuggestersCommandInput extends BuildSuggestersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BuildSuggestersCommand}.
+ */
 export interface BuildSuggestersCommandOutput extends BuildSuggestersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface BuildSuggestersCommandOutput extends BuildSuggestersResponse, _
  * ```javascript
  * import { CloudSearchClient, BuildSuggestersCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, BuildSuggestersCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // BuildSuggestersRequest
+ *   DomainName: "STRING_VALUE", // required
+ * };
  * const command = new BuildSuggestersCommand(input);
  * const response = await client.send(command);
+ * // { // BuildSuggestersResponse
+ * //   FieldNames: [ // FieldNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BuildSuggestersCommandInput - {@link BuildSuggestersCommandInput}
+ * @returns {@link BuildSuggestersCommandOutput}
  * @see {@link BuildSuggestersCommandInput} for command's `input` shape.
  * @see {@link BuildSuggestersCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was rejected because it has invalid parameters.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class BuildSuggestersCommand extends $Command<
-  BuildSuggestersCommandInput,
-  BuildSuggestersCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BuildSuggestersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BuildSuggestersCommandInput, BuildSuggestersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "BuildSuggestersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BuildSuggestersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BuildSuggestersResponse.filterSensitiveLog,
+export class BuildSuggestersCommand extends command<BuildSuggestersCommandInput, BuildSuggestersCommandOutput>(
+  _ep0,
+  _mw0,
+  "BuildSuggesters",
+  BuildSuggesters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BuildSuggestersRequest;
+      output: BuildSuggestersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BuildSuggestersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryBuildSuggestersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BuildSuggestersCommandOutput> {
-    return deserializeAws_queryBuildSuggestersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BuildSuggestersCommandInput;
+      output: BuildSuggestersCommandOutput;
+    };
+  };
 }

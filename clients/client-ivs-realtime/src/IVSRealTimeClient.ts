@@ -1,0 +1,510 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultIVSRealTimeHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  CreateEncoderConfigurationCommandInput,
+  CreateEncoderConfigurationCommandOutput,
+} from "./commands/CreateEncoderConfigurationCommand";
+import type {
+  CreateIngestConfigurationCommandInput,
+  CreateIngestConfigurationCommandOutput,
+} from "./commands/CreateIngestConfigurationCommand";
+import type {
+  CreateParticipantTokenCommandInput,
+  CreateParticipantTokenCommandOutput,
+} from "./commands/CreateParticipantTokenCommand";
+import type { CreateStageCommandInput, CreateStageCommandOutput } from "./commands/CreateStageCommand";
+import type {
+  CreateStorageConfigurationCommandInput,
+  CreateStorageConfigurationCommandOutput,
+} from "./commands/CreateStorageConfigurationCommand";
+import type {
+  DeleteEncoderConfigurationCommandInput,
+  DeleteEncoderConfigurationCommandOutput,
+} from "./commands/DeleteEncoderConfigurationCommand";
+import type {
+  DeleteIngestConfigurationCommandInput,
+  DeleteIngestConfigurationCommandOutput,
+} from "./commands/DeleteIngestConfigurationCommand";
+import type { DeletePublicKeyCommandInput, DeletePublicKeyCommandOutput } from "./commands/DeletePublicKeyCommand";
+import type { DeleteStageCommandInput, DeleteStageCommandOutput } from "./commands/DeleteStageCommand";
+import type {
+  DeleteStorageConfigurationCommandInput,
+  DeleteStorageConfigurationCommandOutput,
+} from "./commands/DeleteStorageConfigurationCommand";
+import type {
+  DisconnectParticipantCommandInput,
+  DisconnectParticipantCommandOutput,
+} from "./commands/DisconnectParticipantCommand";
+import type { GetCompositionCommandInput, GetCompositionCommandOutput } from "./commands/GetCompositionCommand";
+import type {
+  GetEncoderConfigurationCommandInput,
+  GetEncoderConfigurationCommandOutput,
+} from "./commands/GetEncoderConfigurationCommand";
+import type {
+  GetIngestConfigurationCommandInput,
+  GetIngestConfigurationCommandOutput,
+} from "./commands/GetIngestConfigurationCommand";
+import type { GetParticipantCommandInput, GetParticipantCommandOutput } from "./commands/GetParticipantCommand";
+import type { GetPublicKeyCommandInput, GetPublicKeyCommandOutput } from "./commands/GetPublicKeyCommand";
+import type { GetStageCommandInput, GetStageCommandOutput } from "./commands/GetStageCommand";
+import type { GetStageSessionCommandInput, GetStageSessionCommandOutput } from "./commands/GetStageSessionCommand";
+import type {
+  GetStorageConfigurationCommandInput,
+  GetStorageConfigurationCommandOutput,
+} from "./commands/GetStorageConfigurationCommand";
+import type { ImportPublicKeyCommandInput, ImportPublicKeyCommandOutput } from "./commands/ImportPublicKeyCommand";
+import type { ListCompositionsCommandInput, ListCompositionsCommandOutput } from "./commands/ListCompositionsCommand";
+import type {
+  ListEncoderConfigurationsCommandInput,
+  ListEncoderConfigurationsCommandOutput,
+} from "./commands/ListEncoderConfigurationsCommand";
+import type {
+  ListIngestConfigurationsCommandInput,
+  ListIngestConfigurationsCommandOutput,
+} from "./commands/ListIngestConfigurationsCommand";
+import type {
+  ListParticipantEventsCommandInput,
+  ListParticipantEventsCommandOutput,
+} from "./commands/ListParticipantEventsCommand";
+import type {
+  ListParticipantReplicasCommandInput,
+  ListParticipantReplicasCommandOutput,
+} from "./commands/ListParticipantReplicasCommand";
+import type { ListParticipantsCommandInput, ListParticipantsCommandOutput } from "./commands/ListParticipantsCommand";
+import type { ListPublicKeysCommandInput, ListPublicKeysCommandOutput } from "./commands/ListPublicKeysCommand";
+import type { ListStagesCommandInput, ListStagesCommandOutput } from "./commands/ListStagesCommand";
+import type {
+  ListStageSessionsCommandInput,
+  ListStageSessionsCommandOutput,
+} from "./commands/ListStageSessionsCommand";
+import type {
+  ListStorageConfigurationsCommandInput,
+  ListStorageConfigurationsCommandOutput,
+} from "./commands/ListStorageConfigurationsCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type {
+  RevokeConnectionTokenCommandInput,
+  RevokeConnectionTokenCommandOutput,
+} from "./commands/RevokeConnectionTokenCommand";
+import type { StartCompositionCommandInput, StartCompositionCommandOutput } from "./commands/StartCompositionCommand";
+import type {
+  StartParticipantReplicationCommandInput,
+  StartParticipantReplicationCommandOutput,
+} from "./commands/StartParticipantReplicationCommand";
+import type { StopCompositionCommandInput, StopCompositionCommandOutput } from "./commands/StopCompositionCommand";
+import type {
+  StopParticipantReplicationCommandInput,
+  StopParticipantReplicationCommandOutput,
+} from "./commands/StopParticipantReplicationCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateIngestConfigurationCommandInput,
+  UpdateIngestConfigurationCommandOutput,
+} from "./commands/UpdateIngestConfigurationCommand";
+import type { UpdateStageCommandInput, UpdateStageCommandOutput } from "./commands/UpdateStageCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | CreateEncoderConfigurationCommandInput
+  | CreateIngestConfigurationCommandInput
+  | CreateParticipantTokenCommandInput
+  | CreateStageCommandInput
+  | CreateStorageConfigurationCommandInput
+  | DeleteEncoderConfigurationCommandInput
+  | DeleteIngestConfigurationCommandInput
+  | DeletePublicKeyCommandInput
+  | DeleteStageCommandInput
+  | DeleteStorageConfigurationCommandInput
+  | DisconnectParticipantCommandInput
+  | GetCompositionCommandInput
+  | GetEncoderConfigurationCommandInput
+  | GetIngestConfigurationCommandInput
+  | GetParticipantCommandInput
+  | GetPublicKeyCommandInput
+  | GetStageCommandInput
+  | GetStageSessionCommandInput
+  | GetStorageConfigurationCommandInput
+  | ImportPublicKeyCommandInput
+  | ListCompositionsCommandInput
+  | ListEncoderConfigurationsCommandInput
+  | ListIngestConfigurationsCommandInput
+  | ListParticipantEventsCommandInput
+  | ListParticipantReplicasCommandInput
+  | ListParticipantsCommandInput
+  | ListPublicKeysCommandInput
+  | ListStageSessionsCommandInput
+  | ListStagesCommandInput
+  | ListStorageConfigurationsCommandInput
+  | ListTagsForResourceCommandInput
+  | RevokeConnectionTokenCommandInput
+  | StartCompositionCommandInput
+  | StartParticipantReplicationCommandInput
+  | StopCompositionCommandInput
+  | StopParticipantReplicationCommandInput
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateIngestConfigurationCommandInput
+  | UpdateStageCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | CreateEncoderConfigurationCommandOutput
+  | CreateIngestConfigurationCommandOutput
+  | CreateParticipantTokenCommandOutput
+  | CreateStageCommandOutput
+  | CreateStorageConfigurationCommandOutput
+  | DeleteEncoderConfigurationCommandOutput
+  | DeleteIngestConfigurationCommandOutput
+  | DeletePublicKeyCommandOutput
+  | DeleteStageCommandOutput
+  | DeleteStorageConfigurationCommandOutput
+  | DisconnectParticipantCommandOutput
+  | GetCompositionCommandOutput
+  | GetEncoderConfigurationCommandOutput
+  | GetIngestConfigurationCommandOutput
+  | GetParticipantCommandOutput
+  | GetPublicKeyCommandOutput
+  | GetStageCommandOutput
+  | GetStageSessionCommandOutput
+  | GetStorageConfigurationCommandOutput
+  | ImportPublicKeyCommandOutput
+  | ListCompositionsCommandOutput
+  | ListEncoderConfigurationsCommandOutput
+  | ListIngestConfigurationsCommandOutput
+  | ListParticipantEventsCommandOutput
+  | ListParticipantReplicasCommandOutput
+  | ListParticipantsCommandOutput
+  | ListPublicKeysCommandOutput
+  | ListStageSessionsCommandOutput
+  | ListStagesCommandOutput
+  | ListStorageConfigurationsCommandOutput
+  | ListTagsForResourceCommandOutput
+  | RevokeConnectionTokenCommandOutput
+  | StartCompositionCommandOutput
+  | StartParticipantReplicationCommandOutput
+  | StopCompositionCommandOutput
+  | StopParticipantReplicationCommandOutput
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateIngestConfigurationCommandOutput
+  | UpdateStageCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type IVSRealTimeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of IVSRealTimeClient class constructor that set the region, credentials and other options.
+ */
+export interface IVSRealTimeClientConfig extends IVSRealTimeClientConfigType {}
+
+/**
+ * @public
+ */
+export type IVSRealTimeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of IVSRealTimeClient class. This is resolved and normalized from the {@link IVSRealTimeClientConfig | constructor configuration interface}.
+ */
+export interface IVSRealTimeClientResolvedConfig extends IVSRealTimeClientResolvedConfigType {}
+
+/**
+ * <p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors. </p> <p> <b>Key Concepts</b> </p> <ul> <li> <p> <b>Stage</b> — A virtual space where participants can exchange video in real time.</p> </li> <li> <p> <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p> </li> <li> <p> <b>Participant object</b> — Represents participants (people) in the stage and contains information about them. When a token is created, it includes a participant ID; when a participant uses that token to join a stage, the participant is associated with that participant ID. There is a 1:1 mapping between participant tokens and participants.</p> </li> </ul> <p>For server-side composition:</p> <ul> <li> <p> <b>Composition process</b> — Composites participants of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels). Composition operations support this process.</p> </li> <li> <p> <b>Composition</b> — Controls the look of the outputs, including how participants are positioned in the video.</p> </li> </ul> <p>For participant replication:</p> <ul> <li> <p> <b>Source stage</b> — The stage where the participant originally joined, which is used as the source for replication.</p> </li> <li> <p> <b>Destination stage</b> — The stage to which the participant is replicated. </p> </li> <li> <p> <b>Replicated participant</b> — A participant in a stage that is replicated to one or more destination stages. </p> </li> <li> <p> <b>Replica participant</b> — A participant in a destination stage that is replicated from another stage (the source stage).</p> </li> </ul> <p>For more information about your IVS live stream, also see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html">Getting Started with Amazon IVS Real-Time Streaming</a>.</p> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS real-time API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p> <p>At most 50 tags can be applied to a resource.</p>
+ * @public
+ */
+export class IVSRealTimeClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  IVSRealTimeClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of IVSRealTimeClient class. This is resolved and normalized from the {@link IVSRealTimeClientConfig | constructor configuration interface}.
+   */
+  readonly config: IVSRealTimeClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<IVSRealTimeClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultIVSRealTimeHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: IVSRealTimeClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

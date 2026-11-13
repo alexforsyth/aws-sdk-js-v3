@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTailorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaTailorClient";
-import { GetChannelScheduleRequest, GetChannelScheduleResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetChannelScheduleCommand,
-  serializeAws_restJson1GetChannelScheduleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetChannelScheduleRequest, GetChannelScheduleResponse } from "../models/models_0";
+import { GetChannelSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetChannelScheduleCommand}.
+ */
 export interface GetChannelScheduleCommandInput extends GetChannelScheduleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetChannelScheduleCommand}.
+ */
 export interface GetChannelScheduleCommandOutput extends GetChannelScheduleResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface GetChannelScheduleCommandOutput extends GetChannelScheduleRespo
  * ```javascript
  * import { MediaTailorClient, GetChannelScheduleCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
  * // const { MediaTailorClient, GetChannelScheduleCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
  * const client = new MediaTailorClient(config);
+ * const input = { // GetChannelScheduleRequest
+ *   ChannelName: "STRING_VALUE", // required
+ *   DurationMinutes: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Audience: "STRING_VALUE",
+ * };
  * const command = new GetChannelScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // GetChannelScheduleResponse
+ * //   Items: [ // __listOfScheduleEntry
+ * //     { // ScheduleEntry
+ * //       ApproximateDurationSeconds: Number("long"),
+ * //       ApproximateStartTime: new Date("TIMESTAMP"),
+ * //       Arn: "STRING_VALUE", // required
+ * //       ChannelName: "STRING_VALUE", // required
+ * //       LiveSourceName: "STRING_VALUE",
+ * //       ProgramName: "STRING_VALUE", // required
+ * //       ScheduleAdBreaks: [ // __listOfScheduleAdBreak
+ * //         { // ScheduleAdBreak
+ * //           ApproximateDurationSeconds: Number("long"),
+ * //           ApproximateStartTime: new Date("TIMESTAMP"),
+ * //           SourceLocationName: "STRING_VALUE",
+ * //           VodSourceName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ScheduleEntryType: "PROGRAM" || "FILLER_SLATE" || "ALTERNATE_MEDIA",
+ * //       SourceLocationName: "STRING_VALUE", // required
+ * //       VodSourceName: "STRING_VALUE",
+ * //       Audiences: [ // Audiences
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetChannelScheduleCommandInput - {@link GetChannelScheduleCommandInput}
+ * @returns {@link GetChannelScheduleCommandOutput}
  * @see {@link GetChannelScheduleCommandInput} for command's `input` shape.
  * @see {@link GetChannelScheduleCommandOutput} for command's `response` shape.
- * @see {@link MediaTailorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
  *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
  */
-export class GetChannelScheduleCommand extends $Command<
-  GetChannelScheduleCommandInput,
-  GetChannelScheduleCommandOutput,
-  MediaTailorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetChannelScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaTailorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetChannelScheduleCommandInput, GetChannelScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaTailorClient";
-    const commandName = "GetChannelScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetChannelScheduleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetChannelScheduleResponse.filterSensitiveLog,
+export class GetChannelScheduleCommand extends command<GetChannelScheduleCommandInput, GetChannelScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetChannelSchedule",
+  GetChannelSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetChannelScheduleRequest;
+      output: GetChannelScheduleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetChannelScheduleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetChannelScheduleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetChannelScheduleCommandOutput> {
-    return deserializeAws_restJson1GetChannelScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetChannelScheduleCommandInput;
+      output: GetChannelScheduleCommandOutput;
+    };
+  };
 }

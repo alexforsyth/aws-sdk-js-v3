@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteTransitGatewayRequest, DeleteTransitGatewayResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayCommand,
-  serializeAws_ec2DeleteTransitGatewayCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTransitGatewayRequest, DeleteTransitGatewayResult } from "../models/models_3";
+import { DeleteTransitGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayCommand}.
+ */
 export interface DeleteTransitGatewayCommandInput extends DeleteTransitGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayCommand}.
+ */
 export interface DeleteTransitGatewayCommandOutput extends DeleteTransitGatewayResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface DeleteTransitGatewayCommandOutput extends DeleteTransitGatewayR
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayRequest
+ *   TransitGatewayId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayResult
+ * //   TransitGateway: { // TransitGateway
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     TransitGatewayArn: "STRING_VALUE",
+ * //     State: "pending" || "available" || "modifying" || "deleting" || "deleted",
+ * //     OwnerId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Options: { // TransitGatewayOptions
+ * //       AmazonSideAsn: Number("long"),
+ * //       TransitGatewayCidrBlocks: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AutoAcceptSharedAttachments: "enable" || "disable",
+ * //       DefaultRouteTableAssociation: "enable" || "disable",
+ * //       AssociationDefaultRouteTableId: "STRING_VALUE",
+ * //       DefaultRouteTablePropagation: "enable" || "disable",
+ * //       PropagationDefaultRouteTableId: "STRING_VALUE",
+ * //       VpnEcmpSupport: "enable" || "disable",
+ * //       DnsSupport: "enable" || "disable",
+ * //       SecurityGroupReferencingSupport: "enable" || "disable",
+ * //       MulticastSupport: "enable" || "disable",
+ * //       EncryptionSupport: { // EncryptionSupport
+ * //         EncryptionState: "enabling" || "enabled" || "disabling" || "disabled",
+ * //         StateMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayCommandInput - {@link DeleteTransitGatewayCommandInput}
+ * @returns {@link DeleteTransitGatewayCommandOutput}
  * @see {@link DeleteTransitGatewayCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayCommand extends $Command<
-  DeleteTransitGatewayCommandInput,
-  DeleteTransitGatewayCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTransitGatewayCommandInput, DeleteTransitGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayResult.filterSensitiveLog,
+export class DeleteTransitGatewayCommand extends command<DeleteTransitGatewayCommandInput, DeleteTransitGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGateway",
+  DeleteTransitGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayRequest;
+      output: DeleteTransitGatewayResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTransitGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTransitGatewayCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayCommandInput;
+      output: DeleteTransitGatewayCommandOutput;
+    };
+  };
 }

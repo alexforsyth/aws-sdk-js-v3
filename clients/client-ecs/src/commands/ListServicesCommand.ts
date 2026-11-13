@@ -1,96 +1,113 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { ListServicesRequest, ListServicesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListServicesCommand,
-  serializeAws_json1_1ListServicesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListServicesRequest, ListServicesResponse } from "../models/models_1";
+import { ListServices$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListServicesCommand}.
+ */
 export interface ListServicesCommandInput extends ListServicesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListServicesCommand}.
+ */
 export interface ListServicesCommandOutput extends ListServicesResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of services. You can filter the results by cluster, launch type, and
- * 			scheduling strategy.</p>
+ * <p>Returns a list of services. You can filter the results by cluster, launch type, and scheduling strategy.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, ListServicesCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, ListServicesCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // ListServicesRequest
+ *   cluster: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   launchType: "EC2" || "FARGATE" || "EXTERNAL" || "MANAGED_INSTANCES",
+ *   schedulingStrategy: "REPLICA" || "DAEMON",
+ *   resourceManagementType: "CUSTOMER" || "ECS",
+ * };
  * const command = new ListServicesCommand(input);
  * const response = await client.send(command);
+ * // { // ListServicesResponse
+ * //   serviceArns: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListServicesCommandInput - {@link ListServicesCommandInput}
+ * @returns {@link ListServicesCommandOutput}
  * @see {@link ListServicesCommandInput} for command's `input` shape.
  * @see {@link ListServicesCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To list the services in a cluster
+ * ```javascript
+ * // This example lists the services running in the default cluster for an account.
+ * const input = { /* empty *\/ };
+ * const command = new ListServicesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   serviceArns: [
+ *     "arn:aws:ecs:us-east-1:012345678910:service/default/my-http-service"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListServicesCommand extends $Command<
-  ListServicesCommandInput,
-  ListServicesCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListServicesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListServicesCommandInput, ListServicesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "ListServicesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListServicesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListServicesResponse.filterSensitiveLog,
+export class ListServicesCommand extends command<ListServicesCommandInput, ListServicesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListServices",
+  ListServices$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListServicesRequest;
+      output: ListServicesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListServicesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListServicesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListServicesCommandOutput> {
-    return deserializeAws_json1_1ListServicesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListServicesCommandInput;
+      output: ListServicesCommandOutput;
+    };
+  };
 }

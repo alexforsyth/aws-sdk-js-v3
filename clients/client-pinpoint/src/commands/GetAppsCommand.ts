@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAppsRequest, GetAppsResponse } from "../models/models_0";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetAppsCommand,
-  serializeAws_restJson1GetAppsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAppsRequest, GetAppsResponse } from "../models/models_0";
+import { GetApps$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAppsCommand}.
+ */
 export interface GetAppsCommandInput extends GetAppsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAppsCommand}.
+ */
 export interface GetAppsCommandOutput extends GetAppsResponse, __MetadataBearer {}
 
 /**
@@ -28,64 +29,82 @@ export interface GetAppsCommandOutput extends GetAppsResponse, __MetadataBearer 
  * ```javascript
  * import { PinpointClient, GetAppsCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetAppsCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetAppsRequest
+ *   PageSize: "STRING_VALUE",
+ *   Token: "STRING_VALUE",
+ * };
  * const command = new GetAppsCommand(input);
  * const response = await client.send(command);
+ * // { // GetAppsResponse
+ * //   ApplicationsResponse: { // ApplicationsResponse
+ * //     Item: [ // ListOfApplicationResponse
+ * //       { // ApplicationResponse
+ * //         Arn: "STRING_VALUE", // required
+ * //         Id: "STRING_VALUE", // required
+ * //         Name: "STRING_VALUE", // required
+ * //         tags: { // MapOf__string
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         CreationDate: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     NextToken: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAppsCommandInput - {@link GetAppsCommandInput}
+ * @returns {@link GetAppsCommandOutput}
  * @see {@link GetAppsCommandInput} for command's `input` shape.
  * @see {@link GetAppsCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetAppsCommand extends $Command<GetAppsCommandInput, GetAppsCommandOutput, PinpointClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAppsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAppsCommandInput, GetAppsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetAppsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAppsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAppsResponse.filterSensitiveLog,
+export class GetAppsCommand extends command<GetAppsCommandInput, GetAppsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApps",
+  GetApps$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAppsRequest;
+      output: GetAppsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAppsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAppsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAppsCommandOutput> {
-    return deserializeAws_restJson1GetAppsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAppsCommandInput;
+      output: GetAppsCommandOutput;
+    };
+  };
 }

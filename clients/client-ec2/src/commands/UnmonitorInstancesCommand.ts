@@ -1,96 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { UnmonitorInstancesRequest, UnmonitorInstancesResult } from "../models/models_5";
-import {
-  deserializeAws_ec2UnmonitorInstancesCommand,
-  serializeAws_ec2UnmonitorInstancesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UnmonitorInstancesRequest, UnmonitorInstancesResult } from "../models/models_8";
+import { UnmonitorInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UnmonitorInstancesCommand}.
+ */
 export interface UnmonitorInstancesCommandInput extends UnmonitorInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UnmonitorInstancesCommand}.
+ */
 export interface UnmonitorInstancesCommandOutput extends UnmonitorInstancesResult, __MetadataBearer {}
 
 /**
  * <p>Disables detailed monitoring for a running instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html">Monitoring
- *             your instances and volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>
+ *                 your instances and volumes</a> in the
+ *             <i>Amazon EC2 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, UnmonitorInstancesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, UnmonitorInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // UnmonitorInstancesRequest
+ *   InstanceIds: [ // InstanceIdStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   MetricCategoryIds: [ // MetricCategoryIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new UnmonitorInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // UnmonitorInstancesResult
+ * //   InstanceMonitorings: [ // InstanceMonitoringList
+ * //     { // InstanceMonitoring
+ * //       InstanceId: "STRING_VALUE",
+ * //       Monitoring: { // Monitoring
+ * //         MetricCategoryIds: [ // MetricCategoryIdList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         State: "disabled" || "disabling" || "enabled" || "pending",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UnmonitorInstancesCommandInput - {@link UnmonitorInstancesCommandInput}
+ * @returns {@link UnmonitorInstancesCommandOutput}
  * @see {@link UnmonitorInstancesCommandInput} for command's `input` shape.
  * @see {@link UnmonitorInstancesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class UnmonitorInstancesCommand extends $Command<
-  UnmonitorInstancesCommandInput,
-  UnmonitorInstancesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UnmonitorInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UnmonitorInstancesCommandInput, UnmonitorInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "UnmonitorInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UnmonitorInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UnmonitorInstancesResult.filterSensitiveLog,
+export class UnmonitorInstancesCommand extends command<UnmonitorInstancesCommandInput, UnmonitorInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "UnmonitorInstances",
+  UnmonitorInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UnmonitorInstancesRequest;
+      output: UnmonitorInstancesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UnmonitorInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2UnmonitorInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UnmonitorInstancesCommandOutput> {
-    return deserializeAws_ec2UnmonitorInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UnmonitorInstancesCommandInput;
+      output: UnmonitorInstancesCommandOutput;
+    };
+  };
 }

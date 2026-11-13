@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { ListMultipartUploadsInput, ListMultipartUploadsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListMultipartUploadsCommand,
-  serializeAws_restJson1ListMultipartUploadsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMultipartUploadsInput, ListMultipartUploadsOutput } from "../models/models_0";
+import { ListMultipartUploads$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMultipartUploadsCommand}.
+ */
 export interface ListMultipartUploadsCommandInput extends ListMultipartUploadsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListMultipartUploadsCommand}.
+ */
 export interface ListMultipartUploadsCommandOutput extends ListMultipartUploadsOutput, __MetadataBearer {}
 
 /**
@@ -46,75 +47,121 @@ export interface ListMultipartUploadsCommandOutput extends ListMultipartUploadsO
  *             AWS Identity and Access Management (IAM)</a>.</p>
  *
  *          <p>For conceptual information and the underlying REST API, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html">Working
- *             with Archives in Amazon S3 Glacier</a> and <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html">List Multipart Uploads
+ *             with Archives in Amazon Glacier</a> and <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html">List Multipart Uploads
  *          </a> in the <i>Amazon Glacier Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlacierClient, ListMultipartUploadsCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, ListMultipartUploadsCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // ListMultipartUploadsInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   limit: Number("int"),
+ *   marker: "STRING_VALUE",
+ * };
  * const command = new ListMultipartUploadsCommand(input);
  * const response = await client.send(command);
+ * // { // ListMultipartUploadsOutput
+ * //   UploadsList: [ // UploadsList
+ * //     { // UploadListElement
+ * //       MultipartUploadId: "STRING_VALUE",
+ * //       VaultARN: "STRING_VALUE",
+ * //       ArchiveDescription: "STRING_VALUE",
+ * //       PartSizeInBytes: Number("long"),
+ * //       CreationDate: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMultipartUploadsCommandInput - {@link ListMultipartUploadsCommandInput}
+ * @returns {@link ListMultipartUploadsCommandOutput}
  * @see {@link ListMultipartUploadsCommandInput} for command's `input` shape.
  * @see {@link ListMultipartUploadsCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To list all the in-progress multipart uploads for a vault
+ * ```javascript
+ * // The example lists all the in-progress multipart uploads for the vault named examplevault.
+ * const input = {
+ *   accountId: "-",
+ *   vaultName: "examplevault"
+ * };
+ * const command = new ListMultipartUploadsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Marker: "null",
+ *   UploadsList: [
+ *     {
+ *       ArchiveDescription: "archive 1",
+ *       CreationDate: "2012-03-19T23:20:59.130Z",
+ *       MultipartUploadId: "xsQdFIRsfJr20CW2AbZBKpRZAFTZSJIMtL2hYf8mvp8dM0m4RUzlaqoEye6g3h3ecqB_zqwB7zLDMeSWhwo65re4C4Ev",
+ *       PartSizeInBytes: 4194304,
+ *       VaultARN: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault"
+ *     },
+ *     {
+ *       ArchiveDescription: "archive 2",
+ *       CreationDate: "2012-04-01T15:00:00.000Z",
+ *       MultipartUploadId: "nPyGOnyFcx67qqX7E-0tSGiRi88hHMOwOxR-_jNyM6RjVMFfV29lFqZ3rNsSaWBugg6OP92pRtufeHdQH7ClIpSF6uJc",
+ *       PartSizeInBytes: 4194304,
+ *       VaultARN: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault"
+ *     },
+ *     {
+ *       ArchiveDescription: "archive 3",
+ *       CreationDate: "2012-03-20T17:03:43.221Z",
+ *       MultipartUploadId: "qt-RBst_7yO8gVIonIBsAxr2t-db0pE4s8MNeGjKjGdNpuU-cdSAcqG62guwV9r5jh5mLyFPzFEitTpNE7iQfHiu1XoV",
+ *       PartSizeInBytes: 4194304,
+ *       VaultARN: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListMultipartUploadsCommand extends $Command<
-  ListMultipartUploadsCommandInput,
-  ListMultipartUploadsCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMultipartUploadsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMultipartUploadsCommandInput, ListMultipartUploadsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "ListMultipartUploadsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMultipartUploadsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListMultipartUploadsOutput.filterSensitiveLog,
+export class ListMultipartUploadsCommand extends command<ListMultipartUploadsCommandInput, ListMultipartUploadsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMultipartUploads",
+  ListMultipartUploads$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMultipartUploadsInput;
+      output: ListMultipartUploadsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMultipartUploadsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListMultipartUploadsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMultipartUploadsCommandOutput> {
-    return deserializeAws_restJson1ListMultipartUploadsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMultipartUploadsCommandInput;
+      output: ListMultipartUploadsCommandOutput;
+    };
+  };
 }

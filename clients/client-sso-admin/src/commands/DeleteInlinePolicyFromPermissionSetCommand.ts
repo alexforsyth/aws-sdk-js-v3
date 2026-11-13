@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteInlinePolicyFromPermissionSetRequest,
   DeleteInlinePolicyFromPermissionSetResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteInlinePolicyFromPermissionSetCommand,
-  serializeAws_json1_1DeleteInlinePolicyFromPermissionSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
+import { DeleteInlinePolicyFromPermissionSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteInlinePolicyFromPermissionSetCommand}.
+ */
 export interface DeleteInlinePolicyFromPermissionSetCommandInput extends DeleteInlinePolicyFromPermissionSetRequest {}
-export interface DeleteInlinePolicyFromPermissionSetCommandOutput
-  extends DeleteInlinePolicyFromPermissionSetResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteInlinePolicyFromPermissionSetCommand}.
+ */
+export interface DeleteInlinePolicyFromPermissionSetCommandOutput extends DeleteInlinePolicyFromPermissionSetResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes the inline policy from a specified permission set.</p>
@@ -33,74 +32,64 @@ export interface DeleteInlinePolicyFromPermissionSetCommandOutput
  * ```javascript
  * import { SSOAdminClient, DeleteInlinePolicyFromPermissionSetCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, DeleteInlinePolicyFromPermissionSetCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // DeleteInlinePolicyFromPermissionSetRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   PermissionSetArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteInlinePolicyFromPermissionSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteInlinePolicyFromPermissionSetCommandInput - {@link DeleteInlinePolicyFromPermissionSetCommandInput}
+ * @returns {@link DeleteInlinePolicyFromPermissionSetCommandOutput}
  * @see {@link DeleteInlinePolicyFromPermissionSetCommandInput} for command's `input` shape.
  * @see {@link DeleteInlinePolicyFromPermissionSetCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Occurs when a conflict with a previous successful write is detected. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteInlinePolicyFromPermissionSetCommand extends $Command<
-  DeleteInlinePolicyFromPermissionSetCommandInput,
-  DeleteInlinePolicyFromPermissionSetCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteInlinePolicyFromPermissionSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteInlinePolicyFromPermissionSetCommandInput, DeleteInlinePolicyFromPermissionSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "DeleteInlinePolicyFromPermissionSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteInlinePolicyFromPermissionSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteInlinePolicyFromPermissionSetResponse.filterSensitiveLog,
+export class DeleteInlinePolicyFromPermissionSetCommand extends command<DeleteInlinePolicyFromPermissionSetCommandInput, DeleteInlinePolicyFromPermissionSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteInlinePolicyFromPermissionSet",
+  DeleteInlinePolicyFromPermissionSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInlinePolicyFromPermissionSetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteInlinePolicyFromPermissionSetCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteInlinePolicyFromPermissionSetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteInlinePolicyFromPermissionSetCommandOutput> {
-    return deserializeAws_json1_1DeleteInlinePolicyFromPermissionSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteInlinePolicyFromPermissionSetCommandInput;
+      output: DeleteInlinePolicyFromPermissionSetCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StopEngagementRequest, StopEngagementResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopEngagementCommand,
-  serializeAws_json1_1StopEngagementCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMContactsClientResolvedConfig } from "../SSMContactsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopEngagementRequest, StopEngagementResult } from "../models/models_0";
+import { StopEngagement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopEngagementCommand}.
+ */
 export interface StopEngagementCommandInput extends StopEngagementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopEngagementCommand}.
+ */
 export interface StopEngagementCommandOutput extends StopEngagementResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,62 @@ export interface StopEngagementCommandOutput extends StopEngagementResult, __Met
  * ```javascript
  * import { SSMContactsClient, StopEngagementCommand } from "@aws-sdk/client-ssm-contacts"; // ES Modules import
  * // const { SSMContactsClient, StopEngagementCommand } = require("@aws-sdk/client-ssm-contacts"); // CommonJS import
+ * // import type { SSMContactsClientConfig } from "@aws-sdk/client-ssm-contacts";
+ * const config = {}; // type is SSMContactsClientConfig
  * const client = new SSMContactsClient(config);
+ * const input = { // StopEngagementRequest
+ *   EngagementId: "STRING_VALUE", // required
+ *   Reason: "STRING_VALUE",
+ * };
  * const command = new StopEngagementCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopEngagementCommandInput - {@link StopEngagementCommandInput}
+ * @returns {@link StopEngagementCommandOutput}
  * @see {@link StopEngagementCommandInput} for command's `input` shape.
  * @see {@link StopEngagementCommandOutput} for command's `response` shape.
- * @see {@link SSMContactsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMContactsClientResolvedConfig | config} for SSMContactsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *          service.</p>
+ *
+ * @throws {@link SSMContactsServiceException}
+ * <p>Base exception class for all service exceptions from SSMContacts service.</p>
+ *
+ *
+ * @public
  */
-export class StopEngagementCommand extends $Command<
-  StopEngagementCommandInput,
-  StopEngagementCommandOutput,
-  SSMContactsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopEngagementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMContactsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopEngagementCommandInput, StopEngagementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMContactsClient";
-    const commandName = "StopEngagementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopEngagementRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopEngagementResult.filterSensitiveLog,
+export class StopEngagementCommand extends command<StopEngagementCommandInput, StopEngagementCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopEngagement",
+  StopEngagement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopEngagementRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopEngagementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopEngagementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopEngagementCommandOutput> {
-    return deserializeAws_json1_1StopEngagementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopEngagementCommandInput;
+      output: StopEngagementCommandOutput;
+    };
+  };
 }

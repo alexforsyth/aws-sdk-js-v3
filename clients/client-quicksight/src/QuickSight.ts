@@ -1,4471 +1,7606 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchCreateTopicReviewedAnswerCommandInput,
+  type BatchCreateTopicReviewedAnswerCommandOutput,
+  BatchCreateTopicReviewedAnswerCommand,
+} from "./commands/BatchCreateTopicReviewedAnswerCommand";
+import {
+  type BatchDeleteKnowledgeBaseCommandInput,
+  type BatchDeleteKnowledgeBaseCommandOutput,
+  BatchDeleteKnowledgeBaseCommand,
+} from "./commands/BatchDeleteKnowledgeBaseCommand";
+import {
+  type BatchDeleteTopicReviewedAnswerCommandInput,
+  type BatchDeleteTopicReviewedAnswerCommandOutput,
+  BatchDeleteTopicReviewedAnswerCommand,
+} from "./commands/BatchDeleteTopicReviewedAnswerCommand";
+import {
+  type BatchDescribeUserLimitsCommandInput,
+  type BatchDescribeUserLimitsCommandOutput,
+  BatchDescribeUserLimitsCommand,
+} from "./commands/BatchDescribeUserLimitsCommand";
+import {
+  type CancelIngestionCommandInput,
+  type CancelIngestionCommandOutput,
   CancelIngestionCommand,
-  CancelIngestionCommandInput,
-  CancelIngestionCommandOutput,
 } from "./commands/CancelIngestionCommand";
 import {
+  type CreateAccountCustomizationCommandInput,
+  type CreateAccountCustomizationCommandOutput,
   CreateAccountCustomizationCommand,
-  CreateAccountCustomizationCommandInput,
-  CreateAccountCustomizationCommandOutput,
 } from "./commands/CreateAccountCustomizationCommand";
 import {
+  type CreateAccountSubscriptionCommandInput,
+  type CreateAccountSubscriptionCommandOutput,
+  CreateAccountSubscriptionCommand,
+} from "./commands/CreateAccountSubscriptionCommand";
+import {
+  type CreateActionConnectorCommandInput,
+  type CreateActionConnectorCommandOutput,
+  CreateActionConnectorCommand,
+} from "./commands/CreateActionConnectorCommand";
+import {
+  type CreateAgentCommandInput,
+  type CreateAgentCommandOutput,
+  CreateAgentCommand,
+} from "./commands/CreateAgentCommand";
+import {
+  type CreateAnalysisCommandInput,
+  type CreateAnalysisCommandOutput,
   CreateAnalysisCommand,
-  CreateAnalysisCommandInput,
-  CreateAnalysisCommandOutput,
 } from "./commands/CreateAnalysisCommand";
 import {
+  type CreateApprovalPolicyCommandInput,
+  type CreateApprovalPolicyCommandOutput,
+  CreateApprovalPolicyCommand,
+} from "./commands/CreateApprovalPolicyCommand";
+import {
+  type CreateBrandCommandInput,
+  type CreateBrandCommandOutput,
+  CreateBrandCommand,
+} from "./commands/CreateBrandCommand";
+import {
+  type CreateCustomPermissionsCommandInput,
+  type CreateCustomPermissionsCommandOutput,
+  CreateCustomPermissionsCommand,
+} from "./commands/CreateCustomPermissionsCommand";
+import {
+  type CreateDashboardCommandInput,
+  type CreateDashboardCommandOutput,
   CreateDashboardCommand,
-  CreateDashboardCommandInput,
-  CreateDashboardCommandOutput,
 } from "./commands/CreateDashboardCommand";
 import {
+  type CreateDataSetCommandInput,
+  type CreateDataSetCommandOutput,
   CreateDataSetCommand,
-  CreateDataSetCommandInput,
-  CreateDataSetCommandOutput,
 } from "./commands/CreateDataSetCommand";
 import {
+  type CreateDataSourceCommandInput,
+  type CreateDataSourceCommandOutput,
   CreateDataSourceCommand,
-  CreateDataSourceCommandInput,
-  CreateDataSourceCommandOutput,
 } from "./commands/CreateDataSourceCommand";
 import {
+  type CreateDlpSettingCommandInput,
+  type CreateDlpSettingCommandOutput,
+  CreateDlpSettingCommand,
+} from "./commands/CreateDlpSettingCommand";
+import {
+  type CreateFlowCommandInput,
+  type CreateFlowCommandOutput,
+  CreateFlowCommand,
+} from "./commands/CreateFlowCommand";
+import {
+  type CreateFolderCommandInput,
+  type CreateFolderCommandOutput,
   CreateFolderCommand,
-  CreateFolderCommandInput,
-  CreateFolderCommandOutput,
 } from "./commands/CreateFolderCommand";
 import {
+  type CreateFolderMembershipCommandInput,
+  type CreateFolderMembershipCommandOutput,
   CreateFolderMembershipCommand,
-  CreateFolderMembershipCommandInput,
-  CreateFolderMembershipCommandOutput,
 } from "./commands/CreateFolderMembershipCommand";
-import { CreateGroupCommand, CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
 import {
+  type CreateGroupCommandInput,
+  type CreateGroupCommandOutput,
+  CreateGroupCommand,
+} from "./commands/CreateGroupCommand";
+import {
+  type CreateGroupMembershipCommandInput,
+  type CreateGroupMembershipCommandOutput,
   CreateGroupMembershipCommand,
-  CreateGroupMembershipCommandInput,
-  CreateGroupMembershipCommandOutput,
 } from "./commands/CreateGroupMembershipCommand";
 import {
+  type CreateIAMPolicyAssignmentCommandInput,
+  type CreateIAMPolicyAssignmentCommandOutput,
   CreateIAMPolicyAssignmentCommand,
-  CreateIAMPolicyAssignmentCommandInput,
-  CreateIAMPolicyAssignmentCommandOutput,
 } from "./commands/CreateIAMPolicyAssignmentCommand";
 import {
+  type CreateIngestionCommandInput,
+  type CreateIngestionCommandOutput,
   CreateIngestionCommand,
-  CreateIngestionCommandInput,
-  CreateIngestionCommandOutput,
 } from "./commands/CreateIngestionCommand";
 import {
+  type CreateKnowledgeBaseCommandInput,
+  type CreateKnowledgeBaseCommandOutput,
+  CreateKnowledgeBaseCommand,
+} from "./commands/CreateKnowledgeBaseCommand";
+import {
+  type CreateLimitsProfileCommandInput,
+  type CreateLimitsProfileCommandOutput,
+  CreateLimitsProfileCommand,
+} from "./commands/CreateLimitsProfileCommand";
+import {
+  type CreateNamespaceCommandInput,
+  type CreateNamespaceCommandOutput,
   CreateNamespaceCommand,
-  CreateNamespaceCommandInput,
-  CreateNamespaceCommandOutput,
 } from "./commands/CreateNamespaceCommand";
 import {
+  type CreateOAuthClientApplicationCommandInput,
+  type CreateOAuthClientApplicationCommandOutput,
+  CreateOAuthClientApplicationCommand,
+} from "./commands/CreateOAuthClientApplicationCommand";
+import {
+  type CreateRefreshScheduleCommandInput,
+  type CreateRefreshScheduleCommandOutput,
+  CreateRefreshScheduleCommand,
+} from "./commands/CreateRefreshScheduleCommand";
+import {
+  type CreateRoleMembershipCommandInput,
+  type CreateRoleMembershipCommandOutput,
+  CreateRoleMembershipCommand,
+} from "./commands/CreateRoleMembershipCommand";
+import {
+  type CreateSpaceCommandInput,
+  type CreateSpaceCommandOutput,
+  CreateSpaceCommand,
+} from "./commands/CreateSpaceCommand";
+import {
+  type CreateTemplateAliasCommandInput,
+  type CreateTemplateAliasCommandOutput,
   CreateTemplateAliasCommand,
-  CreateTemplateAliasCommandInput,
-  CreateTemplateAliasCommandOutput,
 } from "./commands/CreateTemplateAliasCommand";
 import {
+  type CreateTemplateCommandInput,
+  type CreateTemplateCommandOutput,
   CreateTemplateCommand,
-  CreateTemplateCommandInput,
-  CreateTemplateCommandOutput,
 } from "./commands/CreateTemplateCommand";
 import {
+  type CreateThemeAliasCommandInput,
+  type CreateThemeAliasCommandOutput,
   CreateThemeAliasCommand,
-  CreateThemeAliasCommandInput,
-  CreateThemeAliasCommandOutput,
 } from "./commands/CreateThemeAliasCommand";
-import { CreateThemeCommand, CreateThemeCommandInput, CreateThemeCommandOutput } from "./commands/CreateThemeCommand";
 import {
+  type CreateThemeCommandInput,
+  type CreateThemeCommandOutput,
+  CreateThemeCommand,
+} from "./commands/CreateThemeCommand";
+import {
+  type CreateTopicCommandInput,
+  type CreateTopicCommandOutput,
+  CreateTopicCommand,
+} from "./commands/CreateTopicCommand";
+import {
+  type CreateTopicRefreshScheduleCommandInput,
+  type CreateTopicRefreshScheduleCommandOutput,
+  CreateTopicRefreshScheduleCommand,
+} from "./commands/CreateTopicRefreshScheduleCommand";
+import {
+  type CreateTopicV2CommandInput,
+  type CreateTopicV2CommandOutput,
+  CreateTopicV2Command,
+} from "./commands/CreateTopicV2Command";
+import {
+  type CreateVPCConnectionCommandInput,
+  type CreateVPCConnectionCommandOutput,
+  CreateVPCConnectionCommand,
+} from "./commands/CreateVPCConnectionCommand";
+import {
+  type DeleteAccountCustomizationCommandInput,
+  type DeleteAccountCustomizationCommandOutput,
   DeleteAccountCustomizationCommand,
-  DeleteAccountCustomizationCommandInput,
-  DeleteAccountCustomizationCommandOutput,
 } from "./commands/DeleteAccountCustomizationCommand";
 import {
-  DeleteAnalysisCommand,
-  DeleteAnalysisCommandInput,
-  DeleteAnalysisCommandOutput,
-} from "./commands/DeleteAnalysisCommand";
+  type DeleteAccountCustomPermissionCommandInput,
+  type DeleteAccountCustomPermissionCommandOutput,
+  DeleteAccountCustomPermissionCommand,
+} from "./commands/DeleteAccountCustomPermissionCommand";
 import {
+  type DeleteAccountSubscriptionCommandInput,
+  type DeleteAccountSubscriptionCommandOutput,
+  DeleteAccountSubscriptionCommand,
+} from "./commands/DeleteAccountSubscriptionCommand";
+import {
+  type DeleteActionConnectorCommandInput,
+  type DeleteActionConnectorCommandOutput,
+  DeleteActionConnectorCommand,
+} from "./commands/DeleteActionConnectorCommand";
+import {
+  type DeleteAgentCommandInput,
+  type DeleteAgentCommandOutput,
+  DeleteAgentCommand,
+} from "./commands/DeleteAgentCommand";
+import {
+  type DeleteAnalysisCommandInput,
+  type DeleteAnalysisCommandOutput,
+  DeleteAnalysisCommand,
+} from "./commands/DeleteAnalysisCommand";
+import { type DeleteAppCommandInput, type DeleteAppCommandOutput, DeleteAppCommand } from "./commands/DeleteAppCommand";
+import {
+  type DeleteApprovalPolicyCommandInput,
+  type DeleteApprovalPolicyCommandOutput,
+  DeleteApprovalPolicyCommand,
+} from "./commands/DeleteApprovalPolicyCommand";
+import {
+  type DeleteBrandAssignmentCommandInput,
+  type DeleteBrandAssignmentCommandOutput,
+  DeleteBrandAssignmentCommand,
+} from "./commands/DeleteBrandAssignmentCommand";
+import {
+  type DeleteBrandCommandInput,
+  type DeleteBrandCommandOutput,
+  DeleteBrandCommand,
+} from "./commands/DeleteBrandCommand";
+import {
+  type DeleteCustomPermissionsCommandInput,
+  type DeleteCustomPermissionsCommandOutput,
+  DeleteCustomPermissionsCommand,
+} from "./commands/DeleteCustomPermissionsCommand";
+import {
+  type DeleteDashboardCommandInput,
+  type DeleteDashboardCommandOutput,
   DeleteDashboardCommand,
-  DeleteDashboardCommandInput,
-  DeleteDashboardCommandOutput,
 } from "./commands/DeleteDashboardCommand";
 import {
+  type DeleteDataSetCommandInput,
+  type DeleteDataSetCommandOutput,
   DeleteDataSetCommand,
-  DeleteDataSetCommandInput,
-  DeleteDataSetCommandOutput,
 } from "./commands/DeleteDataSetCommand";
 import {
+  type DeleteDataSetRefreshPropertiesCommandInput,
+  type DeleteDataSetRefreshPropertiesCommandOutput,
+  DeleteDataSetRefreshPropertiesCommand,
+} from "./commands/DeleteDataSetRefreshPropertiesCommand";
+import {
+  type DeleteDataSourceCommandInput,
+  type DeleteDataSourceCommandOutput,
   DeleteDataSourceCommand,
-  DeleteDataSourceCommandInput,
-  DeleteDataSourceCommandOutput,
 } from "./commands/DeleteDataSourceCommand";
 import {
+  type DeleteDefaultQBusinessApplicationCommandInput,
+  type DeleteDefaultQBusinessApplicationCommandOutput,
+  DeleteDefaultQBusinessApplicationCommand,
+} from "./commands/DeleteDefaultQBusinessApplicationCommand";
+import {
+  type DeleteDlpSettingCommandInput,
+  type DeleteDlpSettingCommandOutput,
+  DeleteDlpSettingCommand,
+} from "./commands/DeleteDlpSettingCommand";
+import {
+  type DeleteFlowCommandInput,
+  type DeleteFlowCommandOutput,
+  DeleteFlowCommand,
+} from "./commands/DeleteFlowCommand";
+import {
+  type DeleteFolderCommandInput,
+  type DeleteFolderCommandOutput,
   DeleteFolderCommand,
-  DeleteFolderCommandInput,
-  DeleteFolderCommandOutput,
 } from "./commands/DeleteFolderCommand";
 import {
+  type DeleteFolderMembershipCommandInput,
+  type DeleteFolderMembershipCommandOutput,
   DeleteFolderMembershipCommand,
-  DeleteFolderMembershipCommandInput,
-  DeleteFolderMembershipCommandOutput,
 } from "./commands/DeleteFolderMembershipCommand";
-import { DeleteGroupCommand, DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
 import {
+  type DeleteGroupCommandInput,
+  type DeleteGroupCommandOutput,
+  DeleteGroupCommand,
+} from "./commands/DeleteGroupCommand";
+import {
+  type DeleteGroupMembershipCommandInput,
+  type DeleteGroupMembershipCommandOutput,
   DeleteGroupMembershipCommand,
-  DeleteGroupMembershipCommandInput,
-  DeleteGroupMembershipCommandOutput,
 } from "./commands/DeleteGroupMembershipCommand";
 import {
+  type DeleteIAMPolicyAssignmentCommandInput,
+  type DeleteIAMPolicyAssignmentCommandOutput,
   DeleteIAMPolicyAssignmentCommand,
-  DeleteIAMPolicyAssignmentCommandInput,
-  DeleteIAMPolicyAssignmentCommandOutput,
 } from "./commands/DeleteIAMPolicyAssignmentCommand";
 import {
+  type DeleteIdentityPropagationConfigCommandInput,
+  type DeleteIdentityPropagationConfigCommandOutput,
+  DeleteIdentityPropagationConfigCommand,
+} from "./commands/DeleteIdentityPropagationConfigCommand";
+import {
+  type DeleteKnowledgeBaseCommandInput,
+  type DeleteKnowledgeBaseCommandOutput,
+  DeleteKnowledgeBaseCommand,
+} from "./commands/DeleteKnowledgeBaseCommand";
+import {
+  type DeleteLimitsProfileCommandInput,
+  type DeleteLimitsProfileCommandOutput,
+  DeleteLimitsProfileCommand,
+} from "./commands/DeleteLimitsProfileCommand";
+import {
+  type DeleteNamespaceCommandInput,
+  type DeleteNamespaceCommandOutput,
   DeleteNamespaceCommand,
-  DeleteNamespaceCommandInput,
-  DeleteNamespaceCommandOutput,
 } from "./commands/DeleteNamespaceCommand";
 import {
+  type DeleteOAuthClientApplicationCommandInput,
+  type DeleteOAuthClientApplicationCommandOutput,
+  DeleteOAuthClientApplicationCommand,
+} from "./commands/DeleteOAuthClientApplicationCommand";
+import {
+  type DeleteRefreshScheduleCommandInput,
+  type DeleteRefreshScheduleCommandOutput,
+  DeleteRefreshScheduleCommand,
+} from "./commands/DeleteRefreshScheduleCommand";
+import {
+  type DeleteRoleCustomPermissionCommandInput,
+  type DeleteRoleCustomPermissionCommandOutput,
+  DeleteRoleCustomPermissionCommand,
+} from "./commands/DeleteRoleCustomPermissionCommand";
+import {
+  type DeleteRoleMembershipCommandInput,
+  type DeleteRoleMembershipCommandOutput,
+  DeleteRoleMembershipCommand,
+} from "./commands/DeleteRoleMembershipCommand";
+import {
+  type DeleteSpaceCommandInput,
+  type DeleteSpaceCommandOutput,
+  DeleteSpaceCommand,
+} from "./commands/DeleteSpaceCommand";
+import {
+  type DeleteTemplateAliasCommandInput,
+  type DeleteTemplateAliasCommandOutput,
   DeleteTemplateAliasCommand,
-  DeleteTemplateAliasCommandInput,
-  DeleteTemplateAliasCommandOutput,
 } from "./commands/DeleteTemplateAliasCommand";
 import {
+  type DeleteTemplateCommandInput,
+  type DeleteTemplateCommandOutput,
   DeleteTemplateCommand,
-  DeleteTemplateCommandInput,
-  DeleteTemplateCommandOutput,
 } from "./commands/DeleteTemplateCommand";
 import {
+  type DeleteThemeAliasCommandInput,
+  type DeleteThemeAliasCommandOutput,
   DeleteThemeAliasCommand,
-  DeleteThemeAliasCommandInput,
-  DeleteThemeAliasCommandOutput,
 } from "./commands/DeleteThemeAliasCommand";
-import { DeleteThemeCommand, DeleteThemeCommandInput, DeleteThemeCommandOutput } from "./commands/DeleteThemeCommand";
 import {
+  type DeleteThemeCommandInput,
+  type DeleteThemeCommandOutput,
+  DeleteThemeCommand,
+} from "./commands/DeleteThemeCommand";
+import {
+  type DeleteTopicCommandInput,
+  type DeleteTopicCommandOutput,
+  DeleteTopicCommand,
+} from "./commands/DeleteTopicCommand";
+import {
+  type DeleteTopicRefreshScheduleCommandInput,
+  type DeleteTopicRefreshScheduleCommandOutput,
+  DeleteTopicRefreshScheduleCommand,
+} from "./commands/DeleteTopicRefreshScheduleCommand";
+import {
+  type DeleteTopicV2CommandInput,
+  type DeleteTopicV2CommandOutput,
+  DeleteTopicV2Command,
+} from "./commands/DeleteTopicV2Command";
+import {
+  type DeleteUserByPrincipalIdCommandInput,
+  type DeleteUserByPrincipalIdCommandOutput,
   DeleteUserByPrincipalIdCommand,
-  DeleteUserByPrincipalIdCommandInput,
-  DeleteUserByPrincipalIdCommandOutput,
 } from "./commands/DeleteUserByPrincipalIdCommand";
-import { DeleteUserCommand, DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
 import {
+  type DeleteUserCommandInput,
+  type DeleteUserCommandOutput,
+  DeleteUserCommand,
+} from "./commands/DeleteUserCommand";
+import {
+  type DeleteUserCustomPermissionCommandInput,
+  type DeleteUserCustomPermissionCommandOutput,
+  DeleteUserCustomPermissionCommand,
+} from "./commands/DeleteUserCustomPermissionCommand";
+import {
+  type DeleteVPCConnectionCommandInput,
+  type DeleteVPCConnectionCommandOutput,
+  DeleteVPCConnectionCommand,
+} from "./commands/DeleteVPCConnectionCommand";
+import {
+  type DescribeAccountCustomizationCommandInput,
+  type DescribeAccountCustomizationCommandOutput,
   DescribeAccountCustomizationCommand,
-  DescribeAccountCustomizationCommandInput,
-  DescribeAccountCustomizationCommandOutput,
 } from "./commands/DescribeAccountCustomizationCommand";
 import {
+  type DescribeAccountCustomPermissionCommandInput,
+  type DescribeAccountCustomPermissionCommandOutput,
+  DescribeAccountCustomPermissionCommand,
+} from "./commands/DescribeAccountCustomPermissionCommand";
+import {
+  type DescribeAccountSettingsCommandInput,
+  type DescribeAccountSettingsCommandOutput,
   DescribeAccountSettingsCommand,
-  DescribeAccountSettingsCommandInput,
-  DescribeAccountSettingsCommandOutput,
 } from "./commands/DescribeAccountSettingsCommand";
 import {
+  type DescribeAccountSubscriptionCommandInput,
+  type DescribeAccountSubscriptionCommandOutput,
+  DescribeAccountSubscriptionCommand,
+} from "./commands/DescribeAccountSubscriptionCommand";
+import {
+  type DescribeActionConnectorCommandInput,
+  type DescribeActionConnectorCommandOutput,
+  DescribeActionConnectorCommand,
+} from "./commands/DescribeActionConnectorCommand";
+import {
+  type DescribeActionConnectorPermissionsCommandInput,
+  type DescribeActionConnectorPermissionsCommandOutput,
+  DescribeActionConnectorPermissionsCommand,
+} from "./commands/DescribeActionConnectorPermissionsCommand";
+import {
+  type DescribeAgentCommandInput,
+  type DescribeAgentCommandOutput,
+  DescribeAgentCommand,
+} from "./commands/DescribeAgentCommand";
+import {
+  type DescribeAgentPermissionsCommandInput,
+  type DescribeAgentPermissionsCommandOutput,
+  DescribeAgentPermissionsCommand,
+} from "./commands/DescribeAgentPermissionsCommand";
+import {
+  type DescribeAnalysisCommandInput,
+  type DescribeAnalysisCommandOutput,
   DescribeAnalysisCommand,
-  DescribeAnalysisCommandInput,
-  DescribeAnalysisCommandOutput,
 } from "./commands/DescribeAnalysisCommand";
 import {
+  type DescribeAnalysisDefinitionCommandInput,
+  type DescribeAnalysisDefinitionCommandOutput,
+  DescribeAnalysisDefinitionCommand,
+} from "./commands/DescribeAnalysisDefinitionCommand";
+import {
+  type DescribeAnalysisPermissionsCommandInput,
+  type DescribeAnalysisPermissionsCommandOutput,
   DescribeAnalysisPermissionsCommand,
-  DescribeAnalysisPermissionsCommandInput,
-  DescribeAnalysisPermissionsCommandOutput,
 } from "./commands/DescribeAnalysisPermissionsCommand";
 import {
+  type DescribeAppCommandInput,
+  type DescribeAppCommandOutput,
+  DescribeAppCommand,
+} from "./commands/DescribeAppCommand";
+import {
+  type DescribeAppPermissionsCommandInput,
+  type DescribeAppPermissionsCommandOutput,
+  DescribeAppPermissionsCommand,
+} from "./commands/DescribeAppPermissionsCommand";
+import {
+  type DescribeApprovalPolicyCommandInput,
+  type DescribeApprovalPolicyCommandOutput,
+  DescribeApprovalPolicyCommand,
+} from "./commands/DescribeApprovalPolicyCommand";
+import {
+  type DescribeAssetBundleExportJobCommandInput,
+  type DescribeAssetBundleExportJobCommandOutput,
+  DescribeAssetBundleExportJobCommand,
+} from "./commands/DescribeAssetBundleExportJobCommand";
+import {
+  type DescribeAssetBundleImportJobCommandInput,
+  type DescribeAssetBundleImportJobCommandOutput,
+  DescribeAssetBundleImportJobCommand,
+} from "./commands/DescribeAssetBundleImportJobCommand";
+import {
+  type DescribeAutomationJobCommandInput,
+  type DescribeAutomationJobCommandOutput,
+  DescribeAutomationJobCommand,
+} from "./commands/DescribeAutomationJobCommand";
+import {
+  type DescribeBrandAssignmentCommandInput,
+  type DescribeBrandAssignmentCommandOutput,
+  DescribeBrandAssignmentCommand,
+} from "./commands/DescribeBrandAssignmentCommand";
+import {
+  type DescribeBrandCommandInput,
+  type DescribeBrandCommandOutput,
+  DescribeBrandCommand,
+} from "./commands/DescribeBrandCommand";
+import {
+  type DescribeBrandPublishedVersionCommandInput,
+  type DescribeBrandPublishedVersionCommandOutput,
+  DescribeBrandPublishedVersionCommand,
+} from "./commands/DescribeBrandPublishedVersionCommand";
+import {
+  type DescribeCustomPermissionsCommandInput,
+  type DescribeCustomPermissionsCommandOutput,
+  DescribeCustomPermissionsCommand,
+} from "./commands/DescribeCustomPermissionsCommand";
+import {
+  type DescribeDashboardCommandInput,
+  type DescribeDashboardCommandOutput,
   DescribeDashboardCommand,
-  DescribeDashboardCommandInput,
-  DescribeDashboardCommandOutput,
 } from "./commands/DescribeDashboardCommand";
 import {
+  type DescribeDashboardDefinitionCommandInput,
+  type DescribeDashboardDefinitionCommandOutput,
+  DescribeDashboardDefinitionCommand,
+} from "./commands/DescribeDashboardDefinitionCommand";
+import {
+  type DescribeDashboardPermissionsCommandInput,
+  type DescribeDashboardPermissionsCommandOutput,
   DescribeDashboardPermissionsCommand,
-  DescribeDashboardPermissionsCommandInput,
-  DescribeDashboardPermissionsCommandOutput,
 } from "./commands/DescribeDashboardPermissionsCommand";
 import {
+  type DescribeDashboardSnapshotJobCommandInput,
+  type DescribeDashboardSnapshotJobCommandOutput,
+  DescribeDashboardSnapshotJobCommand,
+} from "./commands/DescribeDashboardSnapshotJobCommand";
+import {
+  type DescribeDashboardSnapshotJobResultCommandInput,
+  type DescribeDashboardSnapshotJobResultCommandOutput,
+  DescribeDashboardSnapshotJobResultCommand,
+} from "./commands/DescribeDashboardSnapshotJobResultCommand";
+import {
+  type DescribeDashboardsQAConfigurationCommandInput,
+  type DescribeDashboardsQAConfigurationCommandOutput,
+  DescribeDashboardsQAConfigurationCommand,
+} from "./commands/DescribeDashboardsQAConfigurationCommand";
+import {
+  type DescribeDataSetCommandInput,
+  type DescribeDataSetCommandOutput,
   DescribeDataSetCommand,
-  DescribeDataSetCommandInput,
-  DescribeDataSetCommandOutput,
 } from "./commands/DescribeDataSetCommand";
 import {
+  type DescribeDataSetPermissionsCommandInput,
+  type DescribeDataSetPermissionsCommandOutput,
   DescribeDataSetPermissionsCommand,
-  DescribeDataSetPermissionsCommandInput,
-  DescribeDataSetPermissionsCommandOutput,
 } from "./commands/DescribeDataSetPermissionsCommand";
 import {
+  type DescribeDataSetRefreshPropertiesCommandInput,
+  type DescribeDataSetRefreshPropertiesCommandOutput,
+  DescribeDataSetRefreshPropertiesCommand,
+} from "./commands/DescribeDataSetRefreshPropertiesCommand";
+import {
+  type DescribeDataSourceCommandInput,
+  type DescribeDataSourceCommandOutput,
   DescribeDataSourceCommand,
-  DescribeDataSourceCommandInput,
-  DescribeDataSourceCommandOutput,
 } from "./commands/DescribeDataSourceCommand";
 import {
+  type DescribeDataSourcePermissionsCommandInput,
+  type DescribeDataSourcePermissionsCommandOutput,
   DescribeDataSourcePermissionsCommand,
-  DescribeDataSourcePermissionsCommandInput,
-  DescribeDataSourcePermissionsCommandOutput,
 } from "./commands/DescribeDataSourcePermissionsCommand";
 import {
+  type DescribeDefaultQBusinessApplicationCommandInput,
+  type DescribeDefaultQBusinessApplicationCommandOutput,
+  DescribeDefaultQBusinessApplicationCommand,
+} from "./commands/DescribeDefaultQBusinessApplicationCommand";
+import {
+  type DescribeDlpSettingCommandInput,
+  type DescribeDlpSettingCommandOutput,
+  DescribeDlpSettingCommand,
+} from "./commands/DescribeDlpSettingCommand";
+import {
+  type DescribeFlowCommandInput,
+  type DescribeFlowCommandOutput,
+  DescribeFlowCommand,
+} from "./commands/DescribeFlowCommand";
+import {
+  type DescribeFolderCommandInput,
+  type DescribeFolderCommandOutput,
   DescribeFolderCommand,
-  DescribeFolderCommandInput,
-  DescribeFolderCommandOutput,
 } from "./commands/DescribeFolderCommand";
 import {
+  type DescribeFolderPermissionsCommandInput,
+  type DescribeFolderPermissionsCommandOutput,
   DescribeFolderPermissionsCommand,
-  DescribeFolderPermissionsCommandInput,
-  DescribeFolderPermissionsCommandOutput,
 } from "./commands/DescribeFolderPermissionsCommand";
 import {
+  type DescribeFolderResolvedPermissionsCommandInput,
+  type DescribeFolderResolvedPermissionsCommandOutput,
   DescribeFolderResolvedPermissionsCommand,
-  DescribeFolderResolvedPermissionsCommandInput,
-  DescribeFolderResolvedPermissionsCommandOutput,
 } from "./commands/DescribeFolderResolvedPermissionsCommand";
 import {
+  type DescribeGroupCommandInput,
+  type DescribeGroupCommandOutput,
   DescribeGroupCommand,
-  DescribeGroupCommandInput,
-  DescribeGroupCommandOutput,
 } from "./commands/DescribeGroupCommand";
 import {
+  type DescribeGroupMembershipCommandInput,
+  type DescribeGroupMembershipCommandOutput,
+  DescribeGroupMembershipCommand,
+} from "./commands/DescribeGroupMembershipCommand";
+import {
+  type DescribeIAMPolicyAssignmentCommandInput,
+  type DescribeIAMPolicyAssignmentCommandOutput,
   DescribeIAMPolicyAssignmentCommand,
-  DescribeIAMPolicyAssignmentCommandInput,
-  DescribeIAMPolicyAssignmentCommandOutput,
 } from "./commands/DescribeIAMPolicyAssignmentCommand";
 import {
+  type DescribeIngestionCommandInput,
+  type DescribeIngestionCommandOutput,
   DescribeIngestionCommand,
-  DescribeIngestionCommandInput,
-  DescribeIngestionCommandOutput,
 } from "./commands/DescribeIngestionCommand";
 import {
+  type DescribeIpRestrictionCommandInput,
+  type DescribeIpRestrictionCommandOutput,
   DescribeIpRestrictionCommand,
-  DescribeIpRestrictionCommandInput,
-  DescribeIpRestrictionCommandOutput,
 } from "./commands/DescribeIpRestrictionCommand";
 import {
+  type DescribeKeyRegistrationCommandInput,
+  type DescribeKeyRegistrationCommandOutput,
+  DescribeKeyRegistrationCommand,
+} from "./commands/DescribeKeyRegistrationCommand";
+import {
+  type DescribeKnowledgeBaseCommandInput,
+  type DescribeKnowledgeBaseCommandOutput,
+  DescribeKnowledgeBaseCommand,
+} from "./commands/DescribeKnowledgeBaseCommand";
+import {
+  type DescribeKnowledgeBasePermissionsCommandInput,
+  type DescribeKnowledgeBasePermissionsCommandOutput,
+  DescribeKnowledgeBasePermissionsCommand,
+} from "./commands/DescribeKnowledgeBasePermissionsCommand";
+import {
+  type DescribeLimitsProfileCommandInput,
+  type DescribeLimitsProfileCommandOutput,
+  DescribeLimitsProfileCommand,
+} from "./commands/DescribeLimitsProfileCommand";
+import {
+  type DescribeNamespaceCommandInput,
+  type DescribeNamespaceCommandOutput,
   DescribeNamespaceCommand,
-  DescribeNamespaceCommandInput,
-  DescribeNamespaceCommandOutput,
 } from "./commands/DescribeNamespaceCommand";
 import {
+  type DescribeOAuthClientApplicationCommandInput,
+  type DescribeOAuthClientApplicationCommandOutput,
+  DescribeOAuthClientApplicationCommand,
+} from "./commands/DescribeOAuthClientApplicationCommand";
+import {
+  type DescribeQPersonalizationConfigurationCommandInput,
+  type DescribeQPersonalizationConfigurationCommandOutput,
+  DescribeQPersonalizationConfigurationCommand,
+} from "./commands/DescribeQPersonalizationConfigurationCommand";
+import {
+  type DescribeQuickSightQSearchConfigurationCommandInput,
+  type DescribeQuickSightQSearchConfigurationCommandOutput,
+  DescribeQuickSightQSearchConfigurationCommand,
+} from "./commands/DescribeQuickSightQSearchConfigurationCommand";
+import {
+  type DescribeRefreshScheduleCommandInput,
+  type DescribeRefreshScheduleCommandOutput,
+  DescribeRefreshScheduleCommand,
+} from "./commands/DescribeRefreshScheduleCommand";
+import {
+  type DescribeResourcePermissionsCommandInput,
+  type DescribeResourcePermissionsCommandOutput,
+  DescribeResourcePermissionsCommand,
+} from "./commands/DescribeResourcePermissionsCommand";
+import {
+  type DescribeRoleCustomPermissionCommandInput,
+  type DescribeRoleCustomPermissionCommandOutput,
+  DescribeRoleCustomPermissionCommand,
+} from "./commands/DescribeRoleCustomPermissionCommand";
+import {
+  type DescribeSelfUpgradeConfigurationCommandInput,
+  type DescribeSelfUpgradeConfigurationCommandOutput,
+  DescribeSelfUpgradeConfigurationCommand,
+} from "./commands/DescribeSelfUpgradeConfigurationCommand";
+import {
+  type DescribeSpaceCommandInput,
+  type DescribeSpaceCommandOutput,
+  DescribeSpaceCommand,
+} from "./commands/DescribeSpaceCommand";
+import {
+  type DescribeSpacePermissionsCommandInput,
+  type DescribeSpacePermissionsCommandOutput,
+  DescribeSpacePermissionsCommand,
+} from "./commands/DescribeSpacePermissionsCommand";
+import {
+  type DescribeTemplateAliasCommandInput,
+  type DescribeTemplateAliasCommandOutput,
   DescribeTemplateAliasCommand,
-  DescribeTemplateAliasCommandInput,
-  DescribeTemplateAliasCommandOutput,
 } from "./commands/DescribeTemplateAliasCommand";
 import {
+  type DescribeTemplateCommandInput,
+  type DescribeTemplateCommandOutput,
   DescribeTemplateCommand,
-  DescribeTemplateCommandInput,
-  DescribeTemplateCommandOutput,
 } from "./commands/DescribeTemplateCommand";
 import {
+  type DescribeTemplateDefinitionCommandInput,
+  type DescribeTemplateDefinitionCommandOutput,
+  DescribeTemplateDefinitionCommand,
+} from "./commands/DescribeTemplateDefinitionCommand";
+import {
+  type DescribeTemplatePermissionsCommandInput,
+  type DescribeTemplatePermissionsCommandOutput,
   DescribeTemplatePermissionsCommand,
-  DescribeTemplatePermissionsCommandInput,
-  DescribeTemplatePermissionsCommandOutput,
 } from "./commands/DescribeTemplatePermissionsCommand";
 import {
+  type DescribeThemeAliasCommandInput,
+  type DescribeThemeAliasCommandOutput,
   DescribeThemeAliasCommand,
-  DescribeThemeAliasCommandInput,
-  DescribeThemeAliasCommandOutput,
 } from "./commands/DescribeThemeAliasCommand";
 import {
+  type DescribeThemeCommandInput,
+  type DescribeThemeCommandOutput,
   DescribeThemeCommand,
-  DescribeThemeCommandInput,
-  DescribeThemeCommandOutput,
 } from "./commands/DescribeThemeCommand";
 import {
+  type DescribeThemePermissionsCommandInput,
+  type DescribeThemePermissionsCommandOutput,
   DescribeThemePermissionsCommand,
-  DescribeThemePermissionsCommandInput,
-  DescribeThemePermissionsCommandOutput,
 } from "./commands/DescribeThemePermissionsCommand";
 import {
+  type DescribeTopicCommandInput,
+  type DescribeTopicCommandOutput,
+  DescribeTopicCommand,
+} from "./commands/DescribeTopicCommand";
+import {
+  type DescribeTopicPermissionsCommandInput,
+  type DescribeTopicPermissionsCommandOutput,
+  DescribeTopicPermissionsCommand,
+} from "./commands/DescribeTopicPermissionsCommand";
+import {
+  type DescribeTopicPermissionsV2CommandInput,
+  type DescribeTopicPermissionsV2CommandOutput,
+  DescribeTopicPermissionsV2Command,
+} from "./commands/DescribeTopicPermissionsV2Command";
+import {
+  type DescribeTopicRefreshCommandInput,
+  type DescribeTopicRefreshCommandOutput,
+  DescribeTopicRefreshCommand,
+} from "./commands/DescribeTopicRefreshCommand";
+import {
+  type DescribeTopicRefreshScheduleCommandInput,
+  type DescribeTopicRefreshScheduleCommandOutput,
+  DescribeTopicRefreshScheduleCommand,
+} from "./commands/DescribeTopicRefreshScheduleCommand";
+import {
+  type DescribeTopicV2CommandInput,
+  type DescribeTopicV2CommandOutput,
+  DescribeTopicV2Command,
+} from "./commands/DescribeTopicV2Command";
+import {
+  type DescribeUserCommandInput,
+  type DescribeUserCommandOutput,
   DescribeUserCommand,
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
 } from "./commands/DescribeUserCommand";
 import {
+  type DescribeVPCConnectionCommandInput,
+  type DescribeVPCConnectionCommandOutput,
+  DescribeVPCConnectionCommand,
+} from "./commands/DescribeVPCConnectionCommand";
+import {
+  type GenerateEmbedUrlForAnonymousUserCommandInput,
+  type GenerateEmbedUrlForAnonymousUserCommandOutput,
   GenerateEmbedUrlForAnonymousUserCommand,
-  GenerateEmbedUrlForAnonymousUserCommandInput,
-  GenerateEmbedUrlForAnonymousUserCommandOutput,
 } from "./commands/GenerateEmbedUrlForAnonymousUserCommand";
 import {
+  type GenerateEmbedUrlForRegisteredUserCommandInput,
+  type GenerateEmbedUrlForRegisteredUserCommandOutput,
   GenerateEmbedUrlForRegisteredUserCommand,
-  GenerateEmbedUrlForRegisteredUserCommandInput,
-  GenerateEmbedUrlForRegisteredUserCommandOutput,
 } from "./commands/GenerateEmbedUrlForRegisteredUserCommand";
 import {
+  type GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput,
+  type GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput,
+  GenerateEmbedUrlForRegisteredUserWithIdentityCommand,
+} from "./commands/GenerateEmbedUrlForRegisteredUserWithIdentityCommand";
+import {
+  type GetDashboardEmbedUrlCommandInput,
+  type GetDashboardEmbedUrlCommandOutput,
   GetDashboardEmbedUrlCommand,
-  GetDashboardEmbedUrlCommandInput,
-  GetDashboardEmbedUrlCommandOutput,
 } from "./commands/GetDashboardEmbedUrlCommand";
 import {
+  type GetFlowMetadataCommandInput,
+  type GetFlowMetadataCommandOutput,
+  GetFlowMetadataCommand,
+} from "./commands/GetFlowMetadataCommand";
+import {
+  type GetFlowPermissionsCommandInput,
+  type GetFlowPermissionsCommandOutput,
+  GetFlowPermissionsCommand,
+} from "./commands/GetFlowPermissionsCommand";
+import {
+  type GetIdentityContextCommandInput,
+  type GetIdentityContextCommandOutput,
+  GetIdentityContextCommand,
+} from "./commands/GetIdentityContextCommand";
+import {
+  type GetSessionEmbedUrlCommandInput,
+  type GetSessionEmbedUrlCommandOutput,
   GetSessionEmbedUrlCommand,
-  GetSessionEmbedUrlCommandInput,
-  GetSessionEmbedUrlCommandOutput,
 } from "./commands/GetSessionEmbedUrlCommand";
 import {
+  type ListActionConnectorsCommandInput,
+  type ListActionConnectorsCommandOutput,
+  ListActionConnectorsCommand,
+} from "./commands/ListActionConnectorsCommand";
+import {
+  type ListAgentsCommandInput,
+  type ListAgentsCommandOutput,
+  ListAgentsCommand,
+} from "./commands/ListAgentsCommand";
+import {
+  type ListAnalysesCommandInput,
+  type ListAnalysesCommandOutput,
   ListAnalysesCommand,
-  ListAnalysesCommandInput,
-  ListAnalysesCommandOutput,
 } from "./commands/ListAnalysesCommand";
 import {
+  type ListApprovalPoliciesCommandInput,
+  type ListApprovalPoliciesCommandOutput,
+  ListApprovalPoliciesCommand,
+} from "./commands/ListApprovalPoliciesCommand";
+import { type ListAppsCommandInput, type ListAppsCommandOutput, ListAppsCommand } from "./commands/ListAppsCommand";
+import {
+  type ListAssetBundleExportJobsCommandInput,
+  type ListAssetBundleExportJobsCommandOutput,
+  ListAssetBundleExportJobsCommand,
+} from "./commands/ListAssetBundleExportJobsCommand";
+import {
+  type ListAssetBundleImportJobsCommandInput,
+  type ListAssetBundleImportJobsCommandOutput,
+  ListAssetBundleImportJobsCommand,
+} from "./commands/ListAssetBundleImportJobsCommand";
+import {
+  type ListBrandsCommandInput,
+  type ListBrandsCommandOutput,
+  ListBrandsCommand,
+} from "./commands/ListBrandsCommand";
+import {
+  type ListCustomPermissionsCommandInput,
+  type ListCustomPermissionsCommandOutput,
+  ListCustomPermissionsCommand,
+} from "./commands/ListCustomPermissionsCommand";
+import {
+  type ListDashboardsCommandInput,
+  type ListDashboardsCommandOutput,
   ListDashboardsCommand,
-  ListDashboardsCommandInput,
-  ListDashboardsCommandOutput,
 } from "./commands/ListDashboardsCommand";
 import {
+  type ListDashboardVersionsCommandInput,
+  type ListDashboardVersionsCommandOutput,
   ListDashboardVersionsCommand,
-  ListDashboardVersionsCommandInput,
-  ListDashboardVersionsCommandOutput,
 } from "./commands/ListDashboardVersionsCommand";
 import {
+  type ListDataSetsCommandInput,
+  type ListDataSetsCommandOutput,
   ListDataSetsCommand,
-  ListDataSetsCommandInput,
-  ListDataSetsCommandOutput,
 } from "./commands/ListDataSetsCommand";
 import {
+  type ListDataSourcesCommandInput,
+  type ListDataSourcesCommandOutput,
   ListDataSourcesCommand,
-  ListDataSourcesCommandInput,
-  ListDataSourcesCommandOutput,
 } from "./commands/ListDataSourcesCommand";
 import {
+  type ListDlpSettingsCommandInput,
+  type ListDlpSettingsCommandOutput,
+  ListDlpSettingsCommand,
+} from "./commands/ListDlpSettingsCommand";
+import { type ListFlowsCommandInput, type ListFlowsCommandOutput, ListFlowsCommand } from "./commands/ListFlowsCommand";
+import {
+  type ListFolderMembersCommandInput,
+  type ListFolderMembersCommandOutput,
   ListFolderMembersCommand,
-  ListFolderMembersCommandInput,
-  ListFolderMembersCommandOutput,
 } from "./commands/ListFolderMembersCommand";
-import { ListFoldersCommand, ListFoldersCommandInput, ListFoldersCommandOutput } from "./commands/ListFoldersCommand";
 import {
+  type ListFoldersCommandInput,
+  type ListFoldersCommandOutput,
+  ListFoldersCommand,
+} from "./commands/ListFoldersCommand";
+import {
+  type ListFoldersForResourceCommandInput,
+  type ListFoldersForResourceCommandOutput,
+  ListFoldersForResourceCommand,
+} from "./commands/ListFoldersForResourceCommand";
+import {
+  type ListGroupMembershipsCommandInput,
+  type ListGroupMembershipsCommandOutput,
   ListGroupMembershipsCommand,
-  ListGroupMembershipsCommandInput,
-  ListGroupMembershipsCommandOutput,
 } from "./commands/ListGroupMembershipsCommand";
-import { ListGroupsCommand, ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
 import {
+  type ListGroupsCommandInput,
+  type ListGroupsCommandOutput,
+  ListGroupsCommand,
+} from "./commands/ListGroupsCommand";
+import {
+  type ListIAMPolicyAssignmentsCommandInput,
+  type ListIAMPolicyAssignmentsCommandOutput,
   ListIAMPolicyAssignmentsCommand,
-  ListIAMPolicyAssignmentsCommandInput,
-  ListIAMPolicyAssignmentsCommandOutput,
 } from "./commands/ListIAMPolicyAssignmentsCommand";
 import {
+  type ListIAMPolicyAssignmentsForUserCommandInput,
+  type ListIAMPolicyAssignmentsForUserCommandOutput,
   ListIAMPolicyAssignmentsForUserCommand,
-  ListIAMPolicyAssignmentsForUserCommandInput,
-  ListIAMPolicyAssignmentsForUserCommandOutput,
 } from "./commands/ListIAMPolicyAssignmentsForUserCommand";
 import {
+  type ListIdentityPropagationConfigsCommandInput,
+  type ListIdentityPropagationConfigsCommandOutput,
+  ListIdentityPropagationConfigsCommand,
+} from "./commands/ListIdentityPropagationConfigsCommand";
+import {
+  type ListIngestionsCommandInput,
+  type ListIngestionsCommandOutput,
   ListIngestionsCommand,
-  ListIngestionsCommandInput,
-  ListIngestionsCommandOutput,
 } from "./commands/ListIngestionsCommand";
 import {
+  type ListKnowledgeBasesCommandInput,
+  type ListKnowledgeBasesCommandOutput,
+  ListKnowledgeBasesCommand,
+} from "./commands/ListKnowledgeBasesCommand";
+import {
+  type ListLimitsProfilesCommandInput,
+  type ListLimitsProfilesCommandOutput,
+  ListLimitsProfilesCommand,
+} from "./commands/ListLimitsProfilesCommand";
+import {
+  type ListNamespacesCommandInput,
+  type ListNamespacesCommandOutput,
   ListNamespacesCommand,
-  ListNamespacesCommandInput,
-  ListNamespacesCommandOutput,
 } from "./commands/ListNamespacesCommand";
 import {
+  type ListOAuthClientApplicationsCommandInput,
+  type ListOAuthClientApplicationsCommandOutput,
+  ListOAuthClientApplicationsCommand,
+} from "./commands/ListOAuthClientApplicationsCommand";
+import {
+  type ListRefreshSchedulesCommandInput,
+  type ListRefreshSchedulesCommandOutput,
+  ListRefreshSchedulesCommand,
+} from "./commands/ListRefreshSchedulesCommand";
+import {
+  type ListRoleMembershipsCommandInput,
+  type ListRoleMembershipsCommandOutput,
+  ListRoleMembershipsCommand,
+} from "./commands/ListRoleMembershipsCommand";
+import {
+  type ListSelfUpgradesCommandInput,
+  type ListSelfUpgradesCommandOutput,
+  ListSelfUpgradesCommand,
+} from "./commands/ListSelfUpgradesCommand";
+import {
+  type ListSpaceResourcesCommandInput,
+  type ListSpaceResourcesCommandOutput,
+  ListSpaceResourcesCommand,
+} from "./commands/ListSpaceResourcesCommand";
+import {
+  type ListSpacesCommandInput,
+  type ListSpacesCommandOutput,
+  ListSpacesCommand,
+} from "./commands/ListSpacesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTemplateAliasesCommandInput,
+  type ListTemplateAliasesCommandOutput,
   ListTemplateAliasesCommand,
-  ListTemplateAliasesCommandInput,
-  ListTemplateAliasesCommandOutput,
 } from "./commands/ListTemplateAliasesCommand";
 import {
+  type ListTemplatesCommandInput,
+  type ListTemplatesCommandOutput,
   ListTemplatesCommand,
-  ListTemplatesCommandInput,
-  ListTemplatesCommandOutput,
 } from "./commands/ListTemplatesCommand";
 import {
+  type ListTemplateVersionsCommandInput,
+  type ListTemplateVersionsCommandOutput,
   ListTemplateVersionsCommand,
-  ListTemplateVersionsCommandInput,
-  ListTemplateVersionsCommandOutput,
 } from "./commands/ListTemplateVersionsCommand";
 import {
+  type ListThemeAliasesCommandInput,
+  type ListThemeAliasesCommandOutput,
   ListThemeAliasesCommand,
-  ListThemeAliasesCommandInput,
-  ListThemeAliasesCommandOutput,
 } from "./commands/ListThemeAliasesCommand";
-import { ListThemesCommand, ListThemesCommandInput, ListThemesCommandOutput } from "./commands/ListThemesCommand";
 import {
+  type ListThemesCommandInput,
+  type ListThemesCommandOutput,
+  ListThemesCommand,
+} from "./commands/ListThemesCommand";
+import {
+  type ListThemeVersionsCommandInput,
+  type ListThemeVersionsCommandOutput,
   ListThemeVersionsCommand,
-  ListThemeVersionsCommandInput,
-  ListThemeVersionsCommandOutput,
 } from "./commands/ListThemeVersionsCommand";
 import {
-  ListUserGroupsCommand,
-  ListUserGroupsCommandInput,
-  ListUserGroupsCommandOutput,
-} from "./commands/ListUserGroupsCommand";
-import { ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+  type ListTopicRefreshSchedulesCommandInput,
+  type ListTopicRefreshSchedulesCommandOutput,
+  ListTopicRefreshSchedulesCommand,
+} from "./commands/ListTopicRefreshSchedulesCommand";
 import {
+  type ListTopicReviewedAnswersCommandInput,
+  type ListTopicReviewedAnswersCommandOutput,
+  ListTopicReviewedAnswersCommand,
+} from "./commands/ListTopicReviewedAnswersCommand";
+import {
+  type ListTopicsCommandInput,
+  type ListTopicsCommandOutput,
+  ListTopicsCommand,
+} from "./commands/ListTopicsCommand";
+import {
+  type ListTopicsV2CommandInput,
+  type ListTopicsV2CommandOutput,
+  ListTopicsV2Command,
+} from "./commands/ListTopicsV2Command";
+import {
+  type ListUserGroupsCommandInput,
+  type ListUserGroupsCommandOutput,
+  ListUserGroupsCommand,
+} from "./commands/ListUserGroupsCommand";
+import { type ListUsersCommandInput, type ListUsersCommandOutput, ListUsersCommand } from "./commands/ListUsersCommand";
+import {
+  type ListUsersIndexCapacityCommandInput,
+  type ListUsersIndexCapacityCommandOutput,
+  ListUsersIndexCapacityCommand,
+} from "./commands/ListUsersIndexCapacityCommand";
+import {
+  type ListVPCConnectionsCommandInput,
+  type ListVPCConnectionsCommandOutput,
+  ListVPCConnectionsCommand,
+} from "./commands/ListVPCConnectionsCommand";
+import {
+  type PredictQAResultsCommandInput,
+  type PredictQAResultsCommandOutput,
+  PredictQAResultsCommand,
+} from "./commands/PredictQAResultsCommand";
+import {
+  type PutDataSetRefreshPropertiesCommandInput,
+  type PutDataSetRefreshPropertiesCommandOutput,
+  PutDataSetRefreshPropertiesCommand,
+} from "./commands/PutDataSetRefreshPropertiesCommand";
+import {
+  type RegisterUserCommandInput,
+  type RegisterUserCommandOutput,
   RegisterUserCommand,
-  RegisterUserCommandInput,
-  RegisterUserCommandOutput,
 } from "./commands/RegisterUserCommand";
 import {
+  type RestoreAnalysisCommandInput,
+  type RestoreAnalysisCommandOutput,
   RestoreAnalysisCommand,
-  RestoreAnalysisCommandInput,
-  RestoreAnalysisCommandOutput,
 } from "./commands/RestoreAnalysisCommand";
 import {
+  type SearchActionConnectorsCommandInput,
+  type SearchActionConnectorsCommandOutput,
+  SearchActionConnectorsCommand,
+} from "./commands/SearchActionConnectorsCommand";
+import {
+  type SearchAgentsCommandInput,
+  type SearchAgentsCommandOutput,
+  SearchAgentsCommand,
+} from "./commands/SearchAgentsCommand";
+import {
+  type SearchAnalysesCommandInput,
+  type SearchAnalysesCommandOutput,
   SearchAnalysesCommand,
-  SearchAnalysesCommandInput,
-  SearchAnalysesCommandOutput,
 } from "./commands/SearchAnalysesCommand";
 import {
+  type SearchAppsCommandInput,
+  type SearchAppsCommandOutput,
+  SearchAppsCommand,
+} from "./commands/SearchAppsCommand";
+import {
+  type SearchDashboardsCommandInput,
+  type SearchDashboardsCommandOutput,
   SearchDashboardsCommand,
-  SearchDashboardsCommandInput,
-  SearchDashboardsCommandOutput,
 } from "./commands/SearchDashboardsCommand";
 import {
-  SearchFoldersCommand,
-  SearchFoldersCommandInput,
-  SearchFoldersCommandOutput,
-} from "./commands/SearchFoldersCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type SearchDataSetsCommandInput,
+  type SearchDataSetsCommandOutput,
+  SearchDataSetsCommand,
+} from "./commands/SearchDataSetsCommand";
 import {
+  type SearchDataSourcesCommandInput,
+  type SearchDataSourcesCommandOutput,
+  SearchDataSourcesCommand,
+} from "./commands/SearchDataSourcesCommand";
+import {
+  type SearchFlowsCommandInput,
+  type SearchFlowsCommandOutput,
+  SearchFlowsCommand,
+} from "./commands/SearchFlowsCommand";
+import {
+  type SearchFoldersCommandInput,
+  type SearchFoldersCommandOutput,
+  SearchFoldersCommand,
+} from "./commands/SearchFoldersCommand";
+import {
+  type SearchGroupsCommandInput,
+  type SearchGroupsCommandOutput,
+  SearchGroupsCommand,
+} from "./commands/SearchGroupsCommand";
+import {
+  type SearchKnowledgeBasesCommandInput,
+  type SearchKnowledgeBasesCommandOutput,
+  SearchKnowledgeBasesCommand,
+} from "./commands/SearchKnowledgeBasesCommand";
+import {
+  type SearchSpacesCommandInput,
+  type SearchSpacesCommandOutput,
+  SearchSpacesCommand,
+} from "./commands/SearchSpacesCommand";
+import {
+  type SearchTopicsCommandInput,
+  type SearchTopicsCommandOutput,
+  SearchTopicsCommand,
+} from "./commands/SearchTopicsCommand";
+import {
+  type SearchTopicsV2CommandInput,
+  type SearchTopicsV2CommandOutput,
+  SearchTopicsV2Command,
+} from "./commands/SearchTopicsV2Command";
+import {
+  type StartAssetBundleExportJobCommandInput,
+  type StartAssetBundleExportJobCommandOutput,
+  StartAssetBundleExportJobCommand,
+} from "./commands/StartAssetBundleExportJobCommand";
+import {
+  type StartAssetBundleImportJobCommandInput,
+  type StartAssetBundleImportJobCommandOutput,
+  StartAssetBundleImportJobCommand,
+} from "./commands/StartAssetBundleImportJobCommand";
+import {
+  type StartAutomationJobCommandInput,
+  type StartAutomationJobCommandOutput,
+  StartAutomationJobCommand,
+} from "./commands/StartAutomationJobCommand";
+import {
+  type StartDashboardSnapshotJobCommandInput,
+  type StartDashboardSnapshotJobCommandOutput,
+  StartDashboardSnapshotJobCommand,
+} from "./commands/StartDashboardSnapshotJobCommand";
+import {
+  type StartDashboardSnapshotJobScheduleCommandInput,
+  type StartDashboardSnapshotJobScheduleCommandOutput,
+  StartDashboardSnapshotJobScheduleCommand,
+} from "./commands/StartDashboardSnapshotJobScheduleCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAccountCustomizationCommandInput,
+  type UpdateAccountCustomizationCommandOutput,
   UpdateAccountCustomizationCommand,
-  UpdateAccountCustomizationCommandInput,
-  UpdateAccountCustomizationCommandOutput,
 } from "./commands/UpdateAccountCustomizationCommand";
 import {
+  type UpdateAccountCustomPermissionCommandInput,
+  type UpdateAccountCustomPermissionCommandOutput,
+  UpdateAccountCustomPermissionCommand,
+} from "./commands/UpdateAccountCustomPermissionCommand";
+import {
+  type UpdateAccountSettingsCommandInput,
+  type UpdateAccountSettingsCommandOutput,
   UpdateAccountSettingsCommand,
-  UpdateAccountSettingsCommandInput,
-  UpdateAccountSettingsCommandOutput,
 } from "./commands/UpdateAccountSettingsCommand";
 import {
+  type UpdateActionConnectorCommandInput,
+  type UpdateActionConnectorCommandOutput,
+  UpdateActionConnectorCommand,
+} from "./commands/UpdateActionConnectorCommand";
+import {
+  type UpdateActionConnectorPermissionsCommandInput,
+  type UpdateActionConnectorPermissionsCommandOutput,
+  UpdateActionConnectorPermissionsCommand,
+} from "./commands/UpdateActionConnectorPermissionsCommand";
+import {
+  type UpdateAgentCommandInput,
+  type UpdateAgentCommandOutput,
+  UpdateAgentCommand,
+} from "./commands/UpdateAgentCommand";
+import {
+  type UpdateAgentPermissionsCommandInput,
+  type UpdateAgentPermissionsCommandOutput,
+  UpdateAgentPermissionsCommand,
+} from "./commands/UpdateAgentPermissionsCommand";
+import {
+  type UpdateAnalysisCommandInput,
+  type UpdateAnalysisCommandOutput,
   UpdateAnalysisCommand,
-  UpdateAnalysisCommandInput,
-  UpdateAnalysisCommandOutput,
 } from "./commands/UpdateAnalysisCommand";
 import {
+  type UpdateAnalysisPermissionsCommandInput,
+  type UpdateAnalysisPermissionsCommandOutput,
   UpdateAnalysisPermissionsCommand,
-  UpdateAnalysisPermissionsCommandInput,
-  UpdateAnalysisPermissionsCommandOutput,
 } from "./commands/UpdateAnalysisPermissionsCommand";
 import {
+  type UpdateApplicationWithTokenExchangeGrantCommandInput,
+  type UpdateApplicationWithTokenExchangeGrantCommandOutput,
+  UpdateApplicationWithTokenExchangeGrantCommand,
+} from "./commands/UpdateApplicationWithTokenExchangeGrantCommand";
+import {
+  type UpdateAppPermissionsCommandInput,
+  type UpdateAppPermissionsCommandOutput,
+  UpdateAppPermissionsCommand,
+} from "./commands/UpdateAppPermissionsCommand";
+import {
+  type UpdateApprovalPolicyCommandInput,
+  type UpdateApprovalPolicyCommandOutput,
+  UpdateApprovalPolicyCommand,
+} from "./commands/UpdateApprovalPolicyCommand";
+import {
+  type UpdateBrandAssignmentCommandInput,
+  type UpdateBrandAssignmentCommandOutput,
+  UpdateBrandAssignmentCommand,
+} from "./commands/UpdateBrandAssignmentCommand";
+import {
+  type UpdateBrandCommandInput,
+  type UpdateBrandCommandOutput,
+  UpdateBrandCommand,
+} from "./commands/UpdateBrandCommand";
+import {
+  type UpdateBrandPublishedVersionCommandInput,
+  type UpdateBrandPublishedVersionCommandOutput,
+  UpdateBrandPublishedVersionCommand,
+} from "./commands/UpdateBrandPublishedVersionCommand";
+import {
+  type UpdateCustomPermissionsCommandInput,
+  type UpdateCustomPermissionsCommandOutput,
+  UpdateCustomPermissionsCommand,
+} from "./commands/UpdateCustomPermissionsCommand";
+import {
+  type UpdateDashboardCommandInput,
+  type UpdateDashboardCommandOutput,
   UpdateDashboardCommand,
-  UpdateDashboardCommandInput,
-  UpdateDashboardCommandOutput,
 } from "./commands/UpdateDashboardCommand";
 import {
+  type UpdateDashboardLinksCommandInput,
+  type UpdateDashboardLinksCommandOutput,
+  UpdateDashboardLinksCommand,
+} from "./commands/UpdateDashboardLinksCommand";
+import {
+  type UpdateDashboardPermissionsCommandInput,
+  type UpdateDashboardPermissionsCommandOutput,
   UpdateDashboardPermissionsCommand,
-  UpdateDashboardPermissionsCommandInput,
-  UpdateDashboardPermissionsCommandOutput,
 } from "./commands/UpdateDashboardPermissionsCommand";
 import {
+  type UpdateDashboardPublishedVersionCommandInput,
+  type UpdateDashboardPublishedVersionCommandOutput,
   UpdateDashboardPublishedVersionCommand,
-  UpdateDashboardPublishedVersionCommandInput,
-  UpdateDashboardPublishedVersionCommandOutput,
 } from "./commands/UpdateDashboardPublishedVersionCommand";
 import {
+  type UpdateDashboardsQAConfigurationCommandInput,
+  type UpdateDashboardsQAConfigurationCommandOutput,
+  UpdateDashboardsQAConfigurationCommand,
+} from "./commands/UpdateDashboardsQAConfigurationCommand";
+import {
+  type UpdateDataSetCommandInput,
+  type UpdateDataSetCommandOutput,
   UpdateDataSetCommand,
-  UpdateDataSetCommandInput,
-  UpdateDataSetCommandOutput,
 } from "./commands/UpdateDataSetCommand";
 import {
+  type UpdateDataSetPermissionsCommandInput,
+  type UpdateDataSetPermissionsCommandOutput,
   UpdateDataSetPermissionsCommand,
-  UpdateDataSetPermissionsCommandInput,
-  UpdateDataSetPermissionsCommandOutput,
 } from "./commands/UpdateDataSetPermissionsCommand";
 import {
+  type UpdateDataSourceCommandInput,
+  type UpdateDataSourceCommandOutput,
   UpdateDataSourceCommand,
-  UpdateDataSourceCommandInput,
-  UpdateDataSourceCommandOutput,
 } from "./commands/UpdateDataSourceCommand";
 import {
+  type UpdateDataSourcePermissionsCommandInput,
+  type UpdateDataSourcePermissionsCommandOutput,
   UpdateDataSourcePermissionsCommand,
-  UpdateDataSourcePermissionsCommandInput,
-  UpdateDataSourcePermissionsCommandOutput,
 } from "./commands/UpdateDataSourcePermissionsCommand";
 import {
+  type UpdateDefaultQBusinessApplicationCommandInput,
+  type UpdateDefaultQBusinessApplicationCommandOutput,
+  UpdateDefaultQBusinessApplicationCommand,
+} from "./commands/UpdateDefaultQBusinessApplicationCommand";
+import {
+  type UpdateDlpSettingCommandInput,
+  type UpdateDlpSettingCommandOutput,
+  UpdateDlpSettingCommand,
+} from "./commands/UpdateDlpSettingCommand";
+import {
+  type UpdateFlowCommandInput,
+  type UpdateFlowCommandOutput,
+  UpdateFlowCommand,
+} from "./commands/UpdateFlowCommand";
+import {
+  type UpdateFlowPermissionsCommandInput,
+  type UpdateFlowPermissionsCommandOutput,
+  UpdateFlowPermissionsCommand,
+} from "./commands/UpdateFlowPermissionsCommand";
+import {
+  type UpdateFolderCommandInput,
+  type UpdateFolderCommandOutput,
   UpdateFolderCommand,
-  UpdateFolderCommandInput,
-  UpdateFolderCommandOutput,
 } from "./commands/UpdateFolderCommand";
 import {
+  type UpdateFolderPermissionsCommandInput,
+  type UpdateFolderPermissionsCommandOutput,
   UpdateFolderPermissionsCommand,
-  UpdateFolderPermissionsCommandInput,
-  UpdateFolderPermissionsCommandOutput,
 } from "./commands/UpdateFolderPermissionsCommand";
-import { UpdateGroupCommand, UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
 import {
+  type UpdateGroupCommandInput,
+  type UpdateGroupCommandOutput,
+  UpdateGroupCommand,
+} from "./commands/UpdateGroupCommand";
+import {
+  type UpdateIAMPolicyAssignmentCommandInput,
+  type UpdateIAMPolicyAssignmentCommandOutput,
   UpdateIAMPolicyAssignmentCommand,
-  UpdateIAMPolicyAssignmentCommandInput,
-  UpdateIAMPolicyAssignmentCommandOutput,
 } from "./commands/UpdateIAMPolicyAssignmentCommand";
 import {
+  type UpdateIdentityPropagationConfigCommandInput,
+  type UpdateIdentityPropagationConfigCommandOutput,
+  UpdateIdentityPropagationConfigCommand,
+} from "./commands/UpdateIdentityPropagationConfigCommand";
+import {
+  type UpdateIpRestrictionCommandInput,
+  type UpdateIpRestrictionCommandOutput,
   UpdateIpRestrictionCommand,
-  UpdateIpRestrictionCommandInput,
-  UpdateIpRestrictionCommandOutput,
 } from "./commands/UpdateIpRestrictionCommand";
 import {
+  type UpdateKeyRegistrationCommandInput,
+  type UpdateKeyRegistrationCommandOutput,
+  UpdateKeyRegistrationCommand,
+} from "./commands/UpdateKeyRegistrationCommand";
+import {
+  type UpdateKnowledgeBaseCommandInput,
+  type UpdateKnowledgeBaseCommandOutput,
+  UpdateKnowledgeBaseCommand,
+} from "./commands/UpdateKnowledgeBaseCommand";
+import {
+  type UpdateKnowledgeBasePermissionsCommandInput,
+  type UpdateKnowledgeBasePermissionsCommandOutput,
+  UpdateKnowledgeBasePermissionsCommand,
+} from "./commands/UpdateKnowledgeBasePermissionsCommand";
+import {
+  type UpdateLimitsProfileCommandInput,
+  type UpdateLimitsProfileCommandOutput,
+  UpdateLimitsProfileCommand,
+} from "./commands/UpdateLimitsProfileCommand";
+import {
+  type UpdateOAuthClientApplicationCommandInput,
+  type UpdateOAuthClientApplicationCommandOutput,
+  UpdateOAuthClientApplicationCommand,
+} from "./commands/UpdateOAuthClientApplicationCommand";
+import {
+  type UpdatePublicSharingSettingsCommandInput,
+  type UpdatePublicSharingSettingsCommandOutput,
+  UpdatePublicSharingSettingsCommand,
+} from "./commands/UpdatePublicSharingSettingsCommand";
+import {
+  type UpdateQPersonalizationConfigurationCommandInput,
+  type UpdateQPersonalizationConfigurationCommandOutput,
+  UpdateQPersonalizationConfigurationCommand,
+} from "./commands/UpdateQPersonalizationConfigurationCommand";
+import {
+  type UpdateQuickSightQSearchConfigurationCommandInput,
+  type UpdateQuickSightQSearchConfigurationCommandOutput,
+  UpdateQuickSightQSearchConfigurationCommand,
+} from "./commands/UpdateQuickSightQSearchConfigurationCommand";
+import {
+  type UpdateRefreshScheduleCommandInput,
+  type UpdateRefreshScheduleCommandOutput,
+  UpdateRefreshScheduleCommand,
+} from "./commands/UpdateRefreshScheduleCommand";
+import {
+  type UpdateResourcePermissionsCommandInput,
+  type UpdateResourcePermissionsCommandOutput,
+  UpdateResourcePermissionsCommand,
+} from "./commands/UpdateResourcePermissionsCommand";
+import {
+  type UpdateRoleCustomPermissionCommandInput,
+  type UpdateRoleCustomPermissionCommandOutput,
+  UpdateRoleCustomPermissionCommand,
+} from "./commands/UpdateRoleCustomPermissionCommand";
+import {
+  type UpdateSelfUpgradeCommandInput,
+  type UpdateSelfUpgradeCommandOutput,
+  UpdateSelfUpgradeCommand,
+} from "./commands/UpdateSelfUpgradeCommand";
+import {
+  type UpdateSelfUpgradeConfigurationCommandInput,
+  type UpdateSelfUpgradeConfigurationCommandOutput,
+  UpdateSelfUpgradeConfigurationCommand,
+} from "./commands/UpdateSelfUpgradeConfigurationCommand";
+import {
+  type UpdateSpaceCommandInput,
+  type UpdateSpaceCommandOutput,
+  UpdateSpaceCommand,
+} from "./commands/UpdateSpaceCommand";
+import {
+  type UpdateSpacePermissionsCommandInput,
+  type UpdateSpacePermissionsCommandOutput,
+  UpdateSpacePermissionsCommand,
+} from "./commands/UpdateSpacePermissionsCommand";
+import {
+  type UpdateSpaceResourcesCommandInput,
+  type UpdateSpaceResourcesCommandOutput,
+  UpdateSpaceResourcesCommand,
+} from "./commands/UpdateSpaceResourcesCommand";
+import {
+  type UpdateSPICECapacityConfigurationCommandInput,
+  type UpdateSPICECapacityConfigurationCommandOutput,
+  UpdateSPICECapacityConfigurationCommand,
+} from "./commands/UpdateSPICECapacityConfigurationCommand";
+import {
+  type UpdateTemplateAliasCommandInput,
+  type UpdateTemplateAliasCommandOutput,
   UpdateTemplateAliasCommand,
-  UpdateTemplateAliasCommandInput,
-  UpdateTemplateAliasCommandOutput,
 } from "./commands/UpdateTemplateAliasCommand";
 import {
+  type UpdateTemplateCommandInput,
+  type UpdateTemplateCommandOutput,
   UpdateTemplateCommand,
-  UpdateTemplateCommandInput,
-  UpdateTemplateCommandOutput,
 } from "./commands/UpdateTemplateCommand";
 import {
+  type UpdateTemplatePermissionsCommandInput,
+  type UpdateTemplatePermissionsCommandOutput,
   UpdateTemplatePermissionsCommand,
-  UpdateTemplatePermissionsCommandInput,
-  UpdateTemplatePermissionsCommandOutput,
 } from "./commands/UpdateTemplatePermissionsCommand";
 import {
+  type UpdateThemeAliasCommandInput,
+  type UpdateThemeAliasCommandOutput,
   UpdateThemeAliasCommand,
-  UpdateThemeAliasCommandInput,
-  UpdateThemeAliasCommandOutput,
 } from "./commands/UpdateThemeAliasCommand";
-import { UpdateThemeCommand, UpdateThemeCommandInput, UpdateThemeCommandOutput } from "./commands/UpdateThemeCommand";
 import {
+  type UpdateThemeCommandInput,
+  type UpdateThemeCommandOutput,
+  UpdateThemeCommand,
+} from "./commands/UpdateThemeCommand";
+import {
+  type UpdateThemePermissionsCommandInput,
+  type UpdateThemePermissionsCommandOutput,
   UpdateThemePermissionsCommand,
-  UpdateThemePermissionsCommandInput,
-  UpdateThemePermissionsCommandOutput,
 } from "./commands/UpdateThemePermissionsCommand";
-import { UpdateUserCommand, UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import {
+  type UpdateTopicCommandInput,
+  type UpdateTopicCommandOutput,
+  UpdateTopicCommand,
+} from "./commands/UpdateTopicCommand";
+import {
+  type UpdateTopicPermissionsCommandInput,
+  type UpdateTopicPermissionsCommandOutput,
+  UpdateTopicPermissionsCommand,
+} from "./commands/UpdateTopicPermissionsCommand";
+import {
+  type UpdateTopicPermissionsV2CommandInput,
+  type UpdateTopicPermissionsV2CommandOutput,
+  UpdateTopicPermissionsV2Command,
+} from "./commands/UpdateTopicPermissionsV2Command";
+import {
+  type UpdateTopicRefreshScheduleCommandInput,
+  type UpdateTopicRefreshScheduleCommandOutput,
+  UpdateTopicRefreshScheduleCommand,
+} from "./commands/UpdateTopicRefreshScheduleCommand";
+import {
+  type UpdateTopicV2CommandInput,
+  type UpdateTopicV2CommandOutput,
+  UpdateTopicV2Command,
+} from "./commands/UpdateTopicV2Command";
+import {
+  type UpdateUserCommandInput,
+  type UpdateUserCommandOutput,
+  UpdateUserCommand,
+} from "./commands/UpdateUserCommand";
+import {
+  type UpdateUserCustomPermissionCommandInput,
+  type UpdateUserCustomPermissionCommandOutput,
+  UpdateUserCustomPermissionCommand,
+} from "./commands/UpdateUserCustomPermissionCommand";
+import {
+  type UpdateVPCConnectionCommandInput,
+  type UpdateVPCConnectionCommandOutput,
+  UpdateVPCConnectionCommand,
+} from "./commands/UpdateVPCConnectionCommand";
+import { paginateDescribeFolderPermissions } from "./pagination/DescribeFolderPermissionsPaginator";
+import { paginateDescribeFolderResolvedPermissions } from "./pagination/DescribeFolderResolvedPermissionsPaginator";
+import { paginateListActionConnectors } from "./pagination/ListActionConnectorsPaginator";
+import { paginateListAnalyses } from "./pagination/ListAnalysesPaginator";
+import { paginateListApprovalPolicies } from "./pagination/ListApprovalPoliciesPaginator";
+import { paginateListApps } from "./pagination/ListAppsPaginator";
+import { paginateListAssetBundleExportJobs } from "./pagination/ListAssetBundleExportJobsPaginator";
+import { paginateListAssetBundleImportJobs } from "./pagination/ListAssetBundleImportJobsPaginator";
+import { paginateListBrands } from "./pagination/ListBrandsPaginator";
+import { paginateListCustomPermissions } from "./pagination/ListCustomPermissionsPaginator";
+import { paginateListDashboards } from "./pagination/ListDashboardsPaginator";
+import { paginateListDashboardVersions } from "./pagination/ListDashboardVersionsPaginator";
+import { paginateListDataSets } from "./pagination/ListDataSetsPaginator";
+import { paginateListDataSources } from "./pagination/ListDataSourcesPaginator";
+import { paginateListDlpSettings } from "./pagination/ListDlpSettingsPaginator";
+import { paginateListFlows } from "./pagination/ListFlowsPaginator";
+import { paginateListFolderMembers } from "./pagination/ListFolderMembersPaginator";
+import { paginateListFoldersForResource } from "./pagination/ListFoldersForResourcePaginator";
+import { paginateListFolders } from "./pagination/ListFoldersPaginator";
+import { paginateListGroupMemberships } from "./pagination/ListGroupMembershipsPaginator";
+import { paginateListGroups } from "./pagination/ListGroupsPaginator";
+import { paginateListIAMPolicyAssignmentsForUser } from "./pagination/ListIAMPolicyAssignmentsForUserPaginator";
+import { paginateListIAMPolicyAssignments } from "./pagination/ListIAMPolicyAssignmentsPaginator";
+import { paginateListIngestions } from "./pagination/ListIngestionsPaginator";
+import { paginateListKnowledgeBases } from "./pagination/ListKnowledgeBasesPaginator";
+import { paginateListLimitsProfiles } from "./pagination/ListLimitsProfilesPaginator";
+import { paginateListNamespaces } from "./pagination/ListNamespacesPaginator";
+import { paginateListOAuthClientApplications } from "./pagination/ListOAuthClientApplicationsPaginator";
+import { paginateListRoleMemberships } from "./pagination/ListRoleMembershipsPaginator";
+import { paginateListTemplateAliases } from "./pagination/ListTemplateAliasesPaginator";
+import { paginateListTemplates } from "./pagination/ListTemplatesPaginator";
+import { paginateListTemplateVersions } from "./pagination/ListTemplateVersionsPaginator";
+import { paginateListThemes } from "./pagination/ListThemesPaginator";
+import { paginateListThemeVersions } from "./pagination/ListThemeVersionsPaginator";
+import { paginateListTopics } from "./pagination/ListTopicsPaginator";
+import { paginateListTopicsV2 } from "./pagination/ListTopicsV2Paginator";
+import { paginateListUserGroups } from "./pagination/ListUserGroupsPaginator";
+import { paginateListUsers } from "./pagination/ListUsersPaginator";
+import { paginateListVPCConnections } from "./pagination/ListVPCConnectionsPaginator";
+import { paginateSearchActionConnectors } from "./pagination/SearchActionConnectorsPaginator";
+import { paginateSearchAnalyses } from "./pagination/SearchAnalysesPaginator";
+import { paginateSearchApps } from "./pagination/SearchAppsPaginator";
+import { paginateSearchDashboards } from "./pagination/SearchDashboardsPaginator";
+import { paginateSearchDataSets } from "./pagination/SearchDataSetsPaginator";
+import { paginateSearchDataSources } from "./pagination/SearchDataSourcesPaginator";
+import { paginateSearchFlows } from "./pagination/SearchFlowsPaginator";
+import { paginateSearchFolders } from "./pagination/SearchFoldersPaginator";
+import { paginateSearchGroups } from "./pagination/SearchGroupsPaginator";
+import { paginateSearchKnowledgeBases } from "./pagination/SearchKnowledgeBasesPaginator";
+import { paginateSearchTopics } from "./pagination/SearchTopicsPaginator";
+import { paginateSearchTopicsV2 } from "./pagination/SearchTopicsV2Paginator";
 import { QuickSightClient } from "./QuickSightClient";
 
+const commands = {
+  BatchCreateTopicReviewedAnswerCommand,
+  BatchDeleteKnowledgeBaseCommand,
+  BatchDeleteTopicReviewedAnswerCommand,
+  BatchDescribeUserLimitsCommand,
+  CancelIngestionCommand,
+  CreateAccountCustomizationCommand,
+  CreateAccountSubscriptionCommand,
+  CreateActionConnectorCommand,
+  CreateAgentCommand,
+  CreateAnalysisCommand,
+  CreateApprovalPolicyCommand,
+  CreateBrandCommand,
+  CreateCustomPermissionsCommand,
+  CreateDashboardCommand,
+  CreateDataSetCommand,
+  CreateDataSourceCommand,
+  CreateDlpSettingCommand,
+  CreateFlowCommand,
+  CreateFolderCommand,
+  CreateFolderMembershipCommand,
+  CreateGroupCommand,
+  CreateGroupMembershipCommand,
+  CreateIAMPolicyAssignmentCommand,
+  CreateIngestionCommand,
+  CreateKnowledgeBaseCommand,
+  CreateLimitsProfileCommand,
+  CreateNamespaceCommand,
+  CreateOAuthClientApplicationCommand,
+  CreateRefreshScheduleCommand,
+  CreateRoleMembershipCommand,
+  CreateSpaceCommand,
+  CreateTemplateCommand,
+  CreateTemplateAliasCommand,
+  CreateThemeCommand,
+  CreateThemeAliasCommand,
+  CreateTopicCommand,
+  CreateTopicRefreshScheduleCommand,
+  CreateTopicV2Command,
+  CreateVPCConnectionCommand,
+  DeleteAccountCustomizationCommand,
+  DeleteAccountCustomPermissionCommand,
+  DeleteAccountSubscriptionCommand,
+  DeleteActionConnectorCommand,
+  DeleteAgentCommand,
+  DeleteAnalysisCommand,
+  DeleteAppCommand,
+  DeleteApprovalPolicyCommand,
+  DeleteBrandCommand,
+  DeleteBrandAssignmentCommand,
+  DeleteCustomPermissionsCommand,
+  DeleteDashboardCommand,
+  DeleteDataSetCommand,
+  DeleteDataSetRefreshPropertiesCommand,
+  DeleteDataSourceCommand,
+  DeleteDefaultQBusinessApplicationCommand,
+  DeleteDlpSettingCommand,
+  DeleteFlowCommand,
+  DeleteFolderCommand,
+  DeleteFolderMembershipCommand,
+  DeleteGroupCommand,
+  DeleteGroupMembershipCommand,
+  DeleteIAMPolicyAssignmentCommand,
+  DeleteIdentityPropagationConfigCommand,
+  DeleteKnowledgeBaseCommand,
+  DeleteLimitsProfileCommand,
+  DeleteNamespaceCommand,
+  DeleteOAuthClientApplicationCommand,
+  DeleteRefreshScheduleCommand,
+  DeleteRoleCustomPermissionCommand,
+  DeleteRoleMembershipCommand,
+  DeleteSpaceCommand,
+  DeleteTemplateCommand,
+  DeleteTemplateAliasCommand,
+  DeleteThemeCommand,
+  DeleteThemeAliasCommand,
+  DeleteTopicCommand,
+  DeleteTopicRefreshScheduleCommand,
+  DeleteTopicV2Command,
+  DeleteUserCommand,
+  DeleteUserByPrincipalIdCommand,
+  DeleteUserCustomPermissionCommand,
+  DeleteVPCConnectionCommand,
+  DescribeAccountCustomizationCommand,
+  DescribeAccountCustomPermissionCommand,
+  DescribeAccountSettingsCommand,
+  DescribeAccountSubscriptionCommand,
+  DescribeActionConnectorCommand,
+  DescribeActionConnectorPermissionsCommand,
+  DescribeAgentCommand,
+  DescribeAgentPermissionsCommand,
+  DescribeAnalysisCommand,
+  DescribeAnalysisDefinitionCommand,
+  DescribeAnalysisPermissionsCommand,
+  DescribeAppCommand,
+  DescribeAppPermissionsCommand,
+  DescribeApprovalPolicyCommand,
+  DescribeAssetBundleExportJobCommand,
+  DescribeAssetBundleImportJobCommand,
+  DescribeAutomationJobCommand,
+  DescribeBrandCommand,
+  DescribeBrandAssignmentCommand,
+  DescribeBrandPublishedVersionCommand,
+  DescribeCustomPermissionsCommand,
+  DescribeDashboardCommand,
+  DescribeDashboardDefinitionCommand,
+  DescribeDashboardPermissionsCommand,
+  DescribeDashboardSnapshotJobCommand,
+  DescribeDashboardSnapshotJobResultCommand,
+  DescribeDashboardsQAConfigurationCommand,
+  DescribeDataSetCommand,
+  DescribeDataSetPermissionsCommand,
+  DescribeDataSetRefreshPropertiesCommand,
+  DescribeDataSourceCommand,
+  DescribeDataSourcePermissionsCommand,
+  DescribeDefaultQBusinessApplicationCommand,
+  DescribeDlpSettingCommand,
+  DescribeFlowCommand,
+  DescribeFolderCommand,
+  DescribeFolderPermissionsCommand,
+  DescribeFolderResolvedPermissionsCommand,
+  DescribeGroupCommand,
+  DescribeGroupMembershipCommand,
+  DescribeIAMPolicyAssignmentCommand,
+  DescribeIngestionCommand,
+  DescribeIpRestrictionCommand,
+  DescribeKeyRegistrationCommand,
+  DescribeKnowledgeBaseCommand,
+  DescribeKnowledgeBasePermissionsCommand,
+  DescribeLimitsProfileCommand,
+  DescribeNamespaceCommand,
+  DescribeOAuthClientApplicationCommand,
+  DescribeQPersonalizationConfigurationCommand,
+  DescribeQuickSightQSearchConfigurationCommand,
+  DescribeRefreshScheduleCommand,
+  DescribeResourcePermissionsCommand,
+  DescribeRoleCustomPermissionCommand,
+  DescribeSelfUpgradeConfigurationCommand,
+  DescribeSpaceCommand,
+  DescribeSpacePermissionsCommand,
+  DescribeTemplateCommand,
+  DescribeTemplateAliasCommand,
+  DescribeTemplateDefinitionCommand,
+  DescribeTemplatePermissionsCommand,
+  DescribeThemeCommand,
+  DescribeThemeAliasCommand,
+  DescribeThemePermissionsCommand,
+  DescribeTopicCommand,
+  DescribeTopicPermissionsCommand,
+  DescribeTopicPermissionsV2Command,
+  DescribeTopicRefreshCommand,
+  DescribeTopicRefreshScheduleCommand,
+  DescribeTopicV2Command,
+  DescribeUserCommand,
+  DescribeVPCConnectionCommand,
+  GenerateEmbedUrlForAnonymousUserCommand,
+  GenerateEmbedUrlForRegisteredUserCommand,
+  GenerateEmbedUrlForRegisteredUserWithIdentityCommand,
+  GetDashboardEmbedUrlCommand,
+  GetFlowMetadataCommand,
+  GetFlowPermissionsCommand,
+  GetIdentityContextCommand,
+  GetSessionEmbedUrlCommand,
+  ListActionConnectorsCommand,
+  ListAgentsCommand,
+  ListAnalysesCommand,
+  ListApprovalPoliciesCommand,
+  ListAppsCommand,
+  ListAssetBundleExportJobsCommand,
+  ListAssetBundleImportJobsCommand,
+  ListBrandsCommand,
+  ListCustomPermissionsCommand,
+  ListDashboardsCommand,
+  ListDashboardVersionsCommand,
+  ListDataSetsCommand,
+  ListDataSourcesCommand,
+  ListDlpSettingsCommand,
+  ListFlowsCommand,
+  ListFolderMembersCommand,
+  ListFoldersCommand,
+  ListFoldersForResourceCommand,
+  ListGroupMembershipsCommand,
+  ListGroupsCommand,
+  ListIAMPolicyAssignmentsCommand,
+  ListIAMPolicyAssignmentsForUserCommand,
+  ListIdentityPropagationConfigsCommand,
+  ListIngestionsCommand,
+  ListKnowledgeBasesCommand,
+  ListLimitsProfilesCommand,
+  ListNamespacesCommand,
+  ListOAuthClientApplicationsCommand,
+  ListRefreshSchedulesCommand,
+  ListRoleMembershipsCommand,
+  ListSelfUpgradesCommand,
+  ListSpaceResourcesCommand,
+  ListSpacesCommand,
+  ListTagsForResourceCommand,
+  ListTemplateAliasesCommand,
+  ListTemplatesCommand,
+  ListTemplateVersionsCommand,
+  ListThemeAliasesCommand,
+  ListThemesCommand,
+  ListThemeVersionsCommand,
+  ListTopicRefreshSchedulesCommand,
+  ListTopicReviewedAnswersCommand,
+  ListTopicsCommand,
+  ListTopicsV2Command,
+  ListUserGroupsCommand,
+  ListUsersCommand,
+  ListUsersIndexCapacityCommand,
+  ListVPCConnectionsCommand,
+  PredictQAResultsCommand,
+  PutDataSetRefreshPropertiesCommand,
+  RegisterUserCommand,
+  RestoreAnalysisCommand,
+  SearchActionConnectorsCommand,
+  SearchAgentsCommand,
+  SearchAnalysesCommand,
+  SearchAppsCommand,
+  SearchDashboardsCommand,
+  SearchDataSetsCommand,
+  SearchDataSourcesCommand,
+  SearchFlowsCommand,
+  SearchFoldersCommand,
+  SearchGroupsCommand,
+  SearchKnowledgeBasesCommand,
+  SearchSpacesCommand,
+  SearchTopicsCommand,
+  SearchTopicsV2Command,
+  StartAssetBundleExportJobCommand,
+  StartAssetBundleImportJobCommand,
+  StartAutomationJobCommand,
+  StartDashboardSnapshotJobCommand,
+  StartDashboardSnapshotJobScheduleCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAccountCustomizationCommand,
+  UpdateAccountCustomPermissionCommand,
+  UpdateAccountSettingsCommand,
+  UpdateActionConnectorCommand,
+  UpdateActionConnectorPermissionsCommand,
+  UpdateAgentCommand,
+  UpdateAgentPermissionsCommand,
+  UpdateAnalysisCommand,
+  UpdateAnalysisPermissionsCommand,
+  UpdateApplicationWithTokenExchangeGrantCommand,
+  UpdateAppPermissionsCommand,
+  UpdateApprovalPolicyCommand,
+  UpdateBrandCommand,
+  UpdateBrandAssignmentCommand,
+  UpdateBrandPublishedVersionCommand,
+  UpdateCustomPermissionsCommand,
+  UpdateDashboardCommand,
+  UpdateDashboardLinksCommand,
+  UpdateDashboardPermissionsCommand,
+  UpdateDashboardPublishedVersionCommand,
+  UpdateDashboardsQAConfigurationCommand,
+  UpdateDataSetCommand,
+  UpdateDataSetPermissionsCommand,
+  UpdateDataSourceCommand,
+  UpdateDataSourcePermissionsCommand,
+  UpdateDefaultQBusinessApplicationCommand,
+  UpdateDlpSettingCommand,
+  UpdateFlowCommand,
+  UpdateFlowPermissionsCommand,
+  UpdateFolderCommand,
+  UpdateFolderPermissionsCommand,
+  UpdateGroupCommand,
+  UpdateIAMPolicyAssignmentCommand,
+  UpdateIdentityPropagationConfigCommand,
+  UpdateIpRestrictionCommand,
+  UpdateKeyRegistrationCommand,
+  UpdateKnowledgeBaseCommand,
+  UpdateKnowledgeBasePermissionsCommand,
+  UpdateLimitsProfileCommand,
+  UpdateOAuthClientApplicationCommand,
+  UpdatePublicSharingSettingsCommand,
+  UpdateQPersonalizationConfigurationCommand,
+  UpdateQuickSightQSearchConfigurationCommand,
+  UpdateRefreshScheduleCommand,
+  UpdateResourcePermissionsCommand,
+  UpdateRoleCustomPermissionCommand,
+  UpdateSelfUpgradeCommand,
+  UpdateSelfUpgradeConfigurationCommand,
+  UpdateSpaceCommand,
+  UpdateSpacePermissionsCommand,
+  UpdateSpaceResourcesCommand,
+  UpdateSPICECapacityConfigurationCommand,
+  UpdateTemplateCommand,
+  UpdateTemplateAliasCommand,
+  UpdateTemplatePermissionsCommand,
+  UpdateThemeCommand,
+  UpdateThemeAliasCommand,
+  UpdateThemePermissionsCommand,
+  UpdateTopicCommand,
+  UpdateTopicPermissionsCommand,
+  UpdateTopicPermissionsV2Command,
+  UpdateTopicRefreshScheduleCommand,
+  UpdateTopicV2Command,
+  UpdateUserCommand,
+  UpdateUserCustomPermissionCommand,
+  UpdateVPCConnectionCommand,
+};
+const paginators = {
+  paginateDescribeFolderPermissions,
+  paginateDescribeFolderResolvedPermissions,
+  paginateListActionConnectors,
+  paginateListAnalyses,
+  paginateListApprovalPolicies,
+  paginateListApps,
+  paginateListAssetBundleExportJobs,
+  paginateListAssetBundleImportJobs,
+  paginateListBrands,
+  paginateListCustomPermissions,
+  paginateListDashboards,
+  paginateListDashboardVersions,
+  paginateListDataSets,
+  paginateListDataSources,
+  paginateListDlpSettings,
+  paginateListFlows,
+  paginateListFolderMembers,
+  paginateListFolders,
+  paginateListFoldersForResource,
+  paginateListGroupMemberships,
+  paginateListGroups,
+  paginateListIAMPolicyAssignments,
+  paginateListIAMPolicyAssignmentsForUser,
+  paginateListIngestions,
+  paginateListKnowledgeBases,
+  paginateListLimitsProfiles,
+  paginateListNamespaces,
+  paginateListOAuthClientApplications,
+  paginateListRoleMemberships,
+  paginateListTemplateAliases,
+  paginateListTemplates,
+  paginateListTemplateVersions,
+  paginateListThemes,
+  paginateListThemeVersions,
+  paginateListTopics,
+  paginateListTopicsV2,
+  paginateListUserGroups,
+  paginateListUsers,
+  paginateListVPCConnections,
+  paginateSearchActionConnectors,
+  paginateSearchAnalyses,
+  paginateSearchApps,
+  paginateSearchDashboards,
+  paginateSearchDataSets,
+  paginateSearchDataSources,
+  paginateSearchFlows,
+  paginateSearchFolders,
+  paginateSearchGroups,
+  paginateSearchKnowledgeBases,
+  paginateSearchTopics,
+  paginateSearchTopicsV2,
+};
+
 /**
- * <fullname>Amazon QuickSight API Reference</fullname>
- *         <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the
- *             Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your
- *             organization. This API reference contains documentation for a programming interface that
- *             you can use to manage Amazon QuickSight. </p>
+ * @public
  */
-export class QuickSight extends QuickSightClient {
+export interface QuickSightRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface QuickSight {
   /**
-   * <p>Cancels an ongoing ingestion of data into SPICE.</p>
+   * @see {@link BatchCreateTopicReviewedAnswerCommand}
    */
-  public cancelIngestion(
+  batchCreateTopicReviewedAnswer(
+    args: BatchCreateTopicReviewedAnswerCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<BatchCreateTopicReviewedAnswerCommandOutput>;
+  batchCreateTopicReviewedAnswer(
+    args: BatchCreateTopicReviewedAnswerCommandInput,
+    cb: (err: any, data?: BatchCreateTopicReviewedAnswerCommandOutput) => void
+  ): void;
+  batchCreateTopicReviewedAnswer(
+    args: BatchCreateTopicReviewedAnswerCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: BatchCreateTopicReviewedAnswerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteKnowledgeBaseCommand}
+   */
+  batchDeleteKnowledgeBase(
+    args: BatchDeleteKnowledgeBaseCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<BatchDeleteKnowledgeBaseCommandOutput>;
+  batchDeleteKnowledgeBase(
+    args: BatchDeleteKnowledgeBaseCommandInput,
+    cb: (err: any, data?: BatchDeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+  batchDeleteKnowledgeBase(
+    args: BatchDeleteKnowledgeBaseCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: BatchDeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteTopicReviewedAnswerCommand}
+   */
+  batchDeleteTopicReviewedAnswer(
+    args: BatchDeleteTopicReviewedAnswerCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<BatchDeleteTopicReviewedAnswerCommandOutput>;
+  batchDeleteTopicReviewedAnswer(
+    args: BatchDeleteTopicReviewedAnswerCommandInput,
+    cb: (err: any, data?: BatchDeleteTopicReviewedAnswerCommandOutput) => void
+  ): void;
+  batchDeleteTopicReviewedAnswer(
+    args: BatchDeleteTopicReviewedAnswerCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: BatchDeleteTopicReviewedAnswerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDescribeUserLimitsCommand}
+   */
+  batchDescribeUserLimits(
+    args: BatchDescribeUserLimitsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<BatchDescribeUserLimitsCommandOutput>;
+  batchDescribeUserLimits(
+    args: BatchDescribeUserLimitsCommandInput,
+    cb: (err: any, data?: BatchDescribeUserLimitsCommandOutput) => void
+  ): void;
+  batchDescribeUserLimits(
+    args: BatchDescribeUserLimitsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: BatchDescribeUserLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelIngestionCommand}
+   */
+  cancelIngestion(
     args: CancelIngestionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CancelIngestionCommandOutput>;
-  public cancelIngestion(
+  cancelIngestion(
     args: CancelIngestionCommandInput,
     cb: (err: any, data?: CancelIngestionCommandOutput) => void
   ): void;
-  public cancelIngestion(
+  cancelIngestion(
     args: CancelIngestionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CancelIngestionCommandOutput) => void
   ): void;
-  public cancelIngestion(
-    args: CancelIngestionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelIngestionCommandOutput) => void),
-    cb?: (err: any, data?: CancelIngestionCommandOutput) => void
-  ): Promise<CancelIngestionCommandOutput> | void {
-    const command = new CancelIngestionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can
-   *             add a custom default theme by using the <code>CreateAccountCustomization</code> or
-   *                 <code>UpdateAccountCustomization</code> API operation. To further customize
-   *             Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User
-   *                 Guide.</i>
-   *          </p>
-   *         <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for
-   *             a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override
-   *             customizations that apply to an Amazon Web Services account. To find out which customizations apply, use
-   *             the <code>DescribeAccountCustomization</code> API operation.</p>
-   *         <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme
-   *             as the namespace default, make sure that you first share the theme with the namespace.
-   *             If you don't share it with the namespace, the theme isn't visible to your users
-   *             even if you make it the default theme.
-   *             To check if the theme is shared, view the current permissions by using the
-   *             <code>
-   *                <a>DescribeThemePermissions</a>
-   *             </code> API operation.
-   *             To share the theme, grant permissions by using the
-   *             <code>
-   *                <a>UpdateThemePermissions</a>
-   *             </code> API operation. </p>
+   * @see {@link CreateAccountCustomizationCommand}
    */
-  public createAccountCustomization(
+  createAccountCustomization(
     args: CreateAccountCustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateAccountCustomizationCommandOutput>;
-  public createAccountCustomization(
+  createAccountCustomization(
     args: CreateAccountCustomizationCommandInput,
     cb: (err: any, data?: CreateAccountCustomizationCommandOutput) => void
   ): void;
-  public createAccountCustomization(
+  createAccountCustomization(
     args: CreateAccountCustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateAccountCustomizationCommandOutput) => void
   ): void;
-  public createAccountCustomization(
-    args: CreateAccountCustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAccountCustomizationCommandOutput) => void),
-    cb?: (err: any, data?: CreateAccountCustomizationCommandOutput) => void
-  ): Promise<CreateAccountCustomizationCommandOutput> | void {
-    const command = new CreateAccountCustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an analysis in Amazon QuickSight.</p>
+   * @see {@link CreateAccountSubscriptionCommand}
    */
-  public createAnalysis(
+  createAccountSubscription(
+    args: CreateAccountSubscriptionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateAccountSubscriptionCommandOutput>;
+  createAccountSubscription(
+    args: CreateAccountSubscriptionCommandInput,
+    cb: (err: any, data?: CreateAccountSubscriptionCommandOutput) => void
+  ): void;
+  createAccountSubscription(
+    args: CreateAccountSubscriptionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateAccountSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateActionConnectorCommand}
+   */
+  createActionConnector(
+    args: CreateActionConnectorCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateActionConnectorCommandOutput>;
+  createActionConnector(
+    args: CreateActionConnectorCommandInput,
+    cb: (err: any, data?: CreateActionConnectorCommandOutput) => void
+  ): void;
+  createActionConnector(
+    args: CreateActionConnectorCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateActionConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAgentCommand}
+   */
+  createAgent(
+    args: CreateAgentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateAgentCommandOutput>;
+  createAgent(
+    args: CreateAgentCommandInput,
+    cb: (err: any, data?: CreateAgentCommandOutput) => void
+  ): void;
+  createAgent(
+    args: CreateAgentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAnalysisCommand}
+   */
+  createAnalysis(
     args: CreateAnalysisCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateAnalysisCommandOutput>;
-  public createAnalysis(
+  createAnalysis(
     args: CreateAnalysisCommandInput,
     cb: (err: any, data?: CreateAnalysisCommandOutput) => void
   ): void;
-  public createAnalysis(
+  createAnalysis(
     args: CreateAnalysisCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateAnalysisCommandOutput) => void
   ): void;
-  public createAnalysis(
-    args: CreateAnalysisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAnalysisCommandOutput) => void),
-    cb?: (err: any, data?: CreateAnalysisCommandOutput) => void
-  ): Promise<CreateAnalysisCommandOutput> | void {
-    const command = new CreateAnalysisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a dashboard from a template. To first create a template, see the <code>
-   *                <a>CreateTemplate</a>
-   *             </code> API operation.</p>
-   *         <p>A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created
-   *             from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can
-   *             create scheduled email reports from them. If you have the correct permissions, you can
-   *             create a dashboard from a template that exists in a different Amazon Web Services account.</p>
+   * @see {@link CreateApprovalPolicyCommand}
    */
-  public createDashboard(
+  createApprovalPolicy(
+    args: CreateApprovalPolicyCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateApprovalPolicyCommandOutput>;
+  createApprovalPolicy(
+    args: CreateApprovalPolicyCommandInput,
+    cb: (err: any, data?: CreateApprovalPolicyCommandOutput) => void
+  ): void;
+  createApprovalPolicy(
+    args: CreateApprovalPolicyCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateApprovalPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBrandCommand}
+   */
+  createBrand(
+    args: CreateBrandCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateBrandCommandOutput>;
+  createBrand(
+    args: CreateBrandCommandInput,
+    cb: (err: any, data?: CreateBrandCommandOutput) => void
+  ): void;
+  createBrand(
+    args: CreateBrandCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateBrandCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCustomPermissionsCommand}
+   */
+  createCustomPermissions(
+    args: CreateCustomPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateCustomPermissionsCommandOutput>;
+  createCustomPermissions(
+    args: CreateCustomPermissionsCommandInput,
+    cb: (err: any, data?: CreateCustomPermissionsCommandOutput) => void
+  ): void;
+  createCustomPermissions(
+    args: CreateCustomPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateCustomPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDashboardCommand}
+   */
+  createDashboard(
     args: CreateDashboardCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateDashboardCommandOutput>;
-  public createDashboard(
+  createDashboard(
     args: CreateDashboardCommandInput,
     cb: (err: any, data?: CreateDashboardCommandOutput) => void
   ): void;
-  public createDashboard(
+  createDashboard(
     args: CreateDashboardCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateDashboardCommandOutput) => void
   ): void;
-  public createDashboard(
-    args: CreateDashboardCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDashboardCommandOutput) => void),
-    cb?: (err: any, data?: CreateDashboardCommandOutput) => void
-  ): Promise<CreateDashboardCommandOutput> | void {
-    const command = new CreateDashboardCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a dataset.</p>
+   * @see {@link CreateDataSetCommand}
    */
-  public createDataSet(
+  createDataSet(
     args: CreateDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateDataSetCommandOutput>;
-  public createDataSet(
+  createDataSet(
     args: CreateDataSetCommandInput,
     cb: (err: any, data?: CreateDataSetCommandOutput) => void
   ): void;
-  public createDataSet(
+  createDataSet(
     args: CreateDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateDataSetCommandOutput) => void
   ): void;
-  public createDataSet(
-    args: CreateDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDataSetCommandOutput) => void),
-    cb?: (err: any, data?: CreateDataSetCommandOutput) => void
-  ): Promise<CreateDataSetCommandOutput> | void {
-    const command = new CreateDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a data source.</p>
+   * @see {@link CreateDataSourceCommand}
    */
-  public createDataSource(
+  createDataSource(
     args: CreateDataSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateDataSourceCommandOutput>;
-  public createDataSource(
+  createDataSource(
     args: CreateDataSourceCommandInput,
     cb: (err: any, data?: CreateDataSourceCommandOutput) => void
   ): void;
-  public createDataSource(
+  createDataSource(
     args: CreateDataSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateDataSourceCommandOutput) => void
   ): void;
-  public createDataSource(
-    args: CreateDataSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDataSourceCommandOutput) => void),
-    cb?: (err: any, data?: CreateDataSourceCommandOutput) => void
-  ): Promise<CreateDataSourceCommandOutput> | void {
-    const command = new CreateDataSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an empty shared folder.</p>
+   * @see {@link CreateDlpSettingCommand}
    */
-  public createFolder(
+  createDlpSetting(
+    args: CreateDlpSettingCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateDlpSettingCommandOutput>;
+  createDlpSetting(
+    args: CreateDlpSettingCommandInput,
+    cb: (err: any, data?: CreateDlpSettingCommandOutput) => void
+  ): void;
+  createDlpSetting(
+    args: CreateDlpSettingCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateDlpSettingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFlowCommand}
+   */
+  createFlow(
+    args: CreateFlowCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateFlowCommandOutput>;
+  createFlow(
+    args: CreateFlowCommandInput,
+    cb: (err: any, data?: CreateFlowCommandOutput) => void
+  ): void;
+  createFlow(
+    args: CreateFlowCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFolderCommand}
+   */
+  createFolder(
     args: CreateFolderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateFolderCommandOutput>;
-  public createFolder(args: CreateFolderCommandInput, cb: (err: any, data?: CreateFolderCommandOutput) => void): void;
-  public createFolder(
+  createFolder(
     args: CreateFolderCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateFolderCommandOutput) => void
   ): void;
-  public createFolder(
+  createFolder(
     args: CreateFolderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFolderCommandOutput) => void),
-    cb?: (err: any, data?: CreateFolderCommandOutput) => void
-  ): Promise<CreateFolderCommandOutput> | void {
-    const command = new CreateFolderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateFolderCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds an asset, such as a dashboard, analysis, or dataset into a folder.</p>
+   * @see {@link CreateFolderMembershipCommand}
    */
-  public createFolderMembership(
+  createFolderMembership(
     args: CreateFolderMembershipCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateFolderMembershipCommandOutput>;
-  public createFolderMembership(
+  createFolderMembership(
     args: CreateFolderMembershipCommandInput,
     cb: (err: any, data?: CreateFolderMembershipCommandOutput) => void
   ): void;
-  public createFolderMembership(
+  createFolderMembership(
     args: CreateFolderMembershipCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateFolderMembershipCommandOutput) => void
   ): void;
-  public createFolderMembership(
-    args: CreateFolderMembershipCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFolderMembershipCommandOutput) => void),
-    cb?: (err: any, data?: CreateFolderMembershipCommandOutput) => void
-  ): Promise<CreateFolderMembershipCommandOutput> | void {
-    const command = new CreateFolderMembershipCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an Amazon QuickSight group.</p>
-   * 		       <p>The permissions resource is
-   * 					<code>arn:aws:quicksight:us-east-1:<i><relevant-aws-account-id></i>:group/default/<i><group-name></i>
-   *             </code>.</p>
-   * 		       <p>The response is a group object.</p>
+   * @see {@link CreateGroupCommand}
    */
-  public createGroup(args: CreateGroupCommandInput, options?: __HttpHandlerOptions): Promise<CreateGroupCommandOutput>;
-  public createGroup(args: CreateGroupCommandInput, cb: (err: any, data?: CreateGroupCommandOutput) => void): void;
-  public createGroup(
+  createGroup(
     args: CreateGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateGroupCommandOutput>;
+  createGroup(
+    args: CreateGroupCommandInput,
     cb: (err: any, data?: CreateGroupCommandOutput) => void
   ): void;
-  public createGroup(
+  createGroup(
     args: CreateGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateGroupCommandOutput) => void
-  ): Promise<CreateGroupCommandOutput> | void {
-    const command = new CreateGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds an Amazon QuickSight user to an Amazon QuickSight group. </p>
+   * @see {@link CreateGroupMembershipCommand}
    */
-  public createGroupMembership(
+  createGroupMembership(
     args: CreateGroupMembershipCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateGroupMembershipCommandOutput>;
-  public createGroupMembership(
+  createGroupMembership(
     args: CreateGroupMembershipCommandInput,
     cb: (err: any, data?: CreateGroupMembershipCommandOutput) => void
   ): void;
-  public createGroupMembership(
+  createGroupMembership(
     args: CreateGroupMembershipCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateGroupMembershipCommandOutput) => void
   ): void;
-  public createGroupMembership(
-    args: CreateGroupMembershipCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateGroupMembershipCommandOutput) => void),
-    cb?: (err: any, data?: CreateGroupMembershipCommandOutput) => void
-  ): Promise<CreateGroupMembershipCommandOutput> | void {
-    const command = new CreateGroupMembershipCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an assignment with one specified IAMpolicy, identified by its Amazon Resource Name
-   * 			(ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight.
-   * 			Assignment names are unique per Amazon Web Services account. To avoid overwriting rules in other namespaces,
-   * 			use assignment names that are unique.</p>
+   * @see {@link CreateIAMPolicyAssignmentCommand}
    */
-  public createIAMPolicyAssignment(
+  createIAMPolicyAssignment(
     args: CreateIAMPolicyAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateIAMPolicyAssignmentCommandOutput>;
-  public createIAMPolicyAssignment(
+  createIAMPolicyAssignment(
     args: CreateIAMPolicyAssignmentCommandInput,
     cb: (err: any, data?: CreateIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public createIAMPolicyAssignment(
+  createIAMPolicyAssignment(
     args: CreateIAMPolicyAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public createIAMPolicyAssignment(
-    args: CreateIAMPolicyAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIAMPolicyAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: CreateIAMPolicyAssignmentCommandOutput) => void
-  ): Promise<CreateIAMPolicyAssignmentCommandOutput> | void {
-    const command = new CreateIAMPolicyAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates and starts a new SPICE ingestion on a dataset</p>
-   *
-   * 		       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in
-   * 			access control. For an example, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How do I create an IAM policy to control access to Amazon EC2 resources using
-   * 				tags?</a> in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>
+   * @see {@link CreateIngestionCommand}
    */
-  public createIngestion(
+  createIngestion(
     args: CreateIngestionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateIngestionCommandOutput>;
-  public createIngestion(
+  createIngestion(
     args: CreateIngestionCommandInput,
     cb: (err: any, data?: CreateIngestionCommandOutput) => void
   ): void;
-  public createIngestion(
+  createIngestion(
     args: CreateIngestionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateIngestionCommandOutput) => void
   ): void;
-  public createIngestion(
-    args: CreateIngestionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIngestionCommandOutput) => void),
-    cb?: (err: any, data?: CreateIngestionCommandOutput) => void
-  ): Promise<CreateIngestionCommandOutput> | void {
-    const command = new CreateIngestionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>(Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight.</p>
-   *         <p>A namespace allows you to isolate the Amazon QuickSight users and groups that are registered
-   *             for that namespace. Users that access the namespace can share assets only with other
-   *             users or groups in the same namespace. They can't see users and groups in other
-   *             namespaces. You can create a namespace after your Amazon Web Services account is subscribed to
-   *             Amazon QuickSight. The namespace must be unique within the Amazon Web Services account. By default, there is a
-   *             limit of 100 namespaces per Amazon Web Services account. To increase your limit, create a ticket with
-   *             Amazon Web Services Support. </p>
+   * @see {@link CreateKnowledgeBaseCommand}
    */
-  public createNamespace(
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateKnowledgeBaseCommandOutput>;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+  createKnowledgeBase(
+    args: CreateKnowledgeBaseCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLimitsProfileCommand}
+   */
+  createLimitsProfile(
+    args: CreateLimitsProfileCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateLimitsProfileCommandOutput>;
+  createLimitsProfile(
+    args: CreateLimitsProfileCommandInput,
+    cb: (err: any, data?: CreateLimitsProfileCommandOutput) => void
+  ): void;
+  createLimitsProfile(
+    args: CreateLimitsProfileCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateLimitsProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNamespaceCommand}
+   */
+  createNamespace(
     args: CreateNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateNamespaceCommandOutput>;
-  public createNamespace(
+  createNamespace(
     args: CreateNamespaceCommandInput,
     cb: (err: any, data?: CreateNamespaceCommandOutput) => void
   ): void;
-  public createNamespace(
+  createNamespace(
     args: CreateNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateNamespaceCommandOutput) => void
   ): void;
-  public createNamespace(
-    args: CreateNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateNamespaceCommandOutput) => void
-  ): Promise<CreateNamespaceCommandOutput> | void {
-    const command = new CreateNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting
-   * 			template to create a dashboard.</p>
-   * 		       <p>A <i>template</i> is an entity in Amazon QuickSight that encapsulates the metadata
-   * 			required to create an analysis and that you can use to create s dashboard. A template adds
-   * 			a layer of abstraction by using placeholders to replace the dataset associated with the
-   * 			analysis. You can use templates to create dashboards by replacing dataset placeholders
-   * 			with datasets that follow the same schema that was used to create the source analysis
-   * 			and template.</p>
+   * @see {@link CreateOAuthClientApplicationCommand}
    */
-  public createTemplate(
+  createOAuthClientApplication(
+    args: CreateOAuthClientApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateOAuthClientApplicationCommandOutput>;
+  createOAuthClientApplication(
+    args: CreateOAuthClientApplicationCommandInput,
+    cb: (err: any, data?: CreateOAuthClientApplicationCommandOutput) => void
+  ): void;
+  createOAuthClientApplication(
+    args: CreateOAuthClientApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateOAuthClientApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRefreshScheduleCommand}
+   */
+  createRefreshSchedule(
+    args: CreateRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateRefreshScheduleCommandOutput>;
+  createRefreshSchedule(
+    args: CreateRefreshScheduleCommandInput,
+    cb: (err: any, data?: CreateRefreshScheduleCommandOutput) => void
+  ): void;
+  createRefreshSchedule(
+    args: CreateRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRoleMembershipCommand}
+   */
+  createRoleMembership(
+    args: CreateRoleMembershipCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateRoleMembershipCommandOutput>;
+  createRoleMembership(
+    args: CreateRoleMembershipCommandInput,
+    cb: (err: any, data?: CreateRoleMembershipCommandOutput) => void
+  ): void;
+  createRoleMembership(
+    args: CreateRoleMembershipCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateRoleMembershipCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSpaceCommand}
+   */
+  createSpace(
+    args: CreateSpaceCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateSpaceCommandOutput>;
+  createSpace(
+    args: CreateSpaceCommandInput,
+    cb: (err: any, data?: CreateSpaceCommandOutput) => void
+  ): void;
+  createSpace(
+    args: CreateSpaceCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTemplateCommand}
+   */
+  createTemplate(
     args: CreateTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateTemplateCommandOutput>;
-  public createTemplate(
+  createTemplate(
     args: CreateTemplateCommandInput,
     cb: (err: any, data?: CreateTemplateCommandOutput) => void
   ): void;
-  public createTemplate(
+  createTemplate(
     args: CreateTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateTemplateCommandOutput) => void
   ): void;
-  public createTemplate(
-    args: CreateTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTemplateCommandOutput) => void),
-    cb?: (err: any, data?: CreateTemplateCommandOutput) => void
-  ): Promise<CreateTemplateCommandOutput> | void {
-    const command = new CreateTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a template alias for a template.</p>
+   * @see {@link CreateTemplateAliasCommand}
    */
-  public createTemplateAlias(
+  createTemplateAlias(
     args: CreateTemplateAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateTemplateAliasCommandOutput>;
-  public createTemplateAlias(
+  createTemplateAlias(
     args: CreateTemplateAliasCommandInput,
     cb: (err: any, data?: CreateTemplateAliasCommandOutput) => void
   ): void;
-  public createTemplateAlias(
+  createTemplateAlias(
     args: CreateTemplateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateTemplateAliasCommandOutput) => void
   ): void;
-  public createTemplateAlias(
-    args: CreateTemplateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTemplateAliasCommandOutput) => void),
-    cb?: (err: any, data?: CreateTemplateAliasCommandOutput) => void
-  ): Promise<CreateTemplateAliasCommandOutput> | void {
-    const command = new CreateTemplateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a theme.</p>
-   * 		       <p>A <i>theme</i> is set of configuration options for color and layout.
-   * 			Themes apply to analyses and dashboards. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using
-   * 			Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+   * @see {@link CreateThemeCommand}
    */
-  public createTheme(args: CreateThemeCommandInput, options?: __HttpHandlerOptions): Promise<CreateThemeCommandOutput>;
-  public createTheme(args: CreateThemeCommandInput, cb: (err: any, data?: CreateThemeCommandOutput) => void): void;
-  public createTheme(
+  createTheme(
     args: CreateThemeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateThemeCommandOutput>;
+  createTheme(
+    args: CreateThemeCommandInput,
     cb: (err: any, data?: CreateThemeCommandOutput) => void
   ): void;
-  public createTheme(
+  createTheme(
     args: CreateThemeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateThemeCommandOutput) => void),
-    cb?: (err: any, data?: CreateThemeCommandOutput) => void
-  ): Promise<CreateThemeCommandOutput> | void {
-    const command = new CreateThemeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateThemeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a theme alias for a theme.</p>
+   * @see {@link CreateThemeAliasCommand}
    */
-  public createThemeAlias(
+  createThemeAlias(
     args: CreateThemeAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<CreateThemeAliasCommandOutput>;
-  public createThemeAlias(
+  createThemeAlias(
     args: CreateThemeAliasCommandInput,
     cb: (err: any, data?: CreateThemeAliasCommandOutput) => void
   ): void;
-  public createThemeAlias(
+  createThemeAlias(
     args: CreateThemeAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: CreateThemeAliasCommandOutput) => void
   ): void;
-  public createThemeAlias(
-    args: CreateThemeAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateThemeAliasCommandOutput) => void),
-    cb?: (err: any, data?: CreateThemeAliasCommandOutput) => void
-  ): Promise<CreateThemeAliasCommandOutput> | void {
-    const command = new CreateThemeAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified
-   *             Amazon Web Services account and Amazon QuickSight namespace.</p>
+   * @see {@link CreateTopicCommand}
    */
-  public deleteAccountCustomization(
+  createTopic(
+    args: CreateTopicCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateTopicCommandOutput>;
+  createTopic(
+    args: CreateTopicCommandInput,
+    cb: (err: any, data?: CreateTopicCommandOutput) => void
+  ): void;
+  createTopic(
+    args: CreateTopicCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTopicRefreshScheduleCommand}
+   */
+  createTopicRefreshSchedule(
+    args: CreateTopicRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateTopicRefreshScheduleCommandOutput>;
+  createTopicRefreshSchedule(
+    args: CreateTopicRefreshScheduleCommandInput,
+    cb: (err: any, data?: CreateTopicRefreshScheduleCommandOutput) => void
+  ): void;
+  createTopicRefreshSchedule(
+    args: CreateTopicRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateTopicRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTopicV2Command}
+   */
+  createTopicV2(
+    args: CreateTopicV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateTopicV2CommandOutput>;
+  createTopicV2(
+    args: CreateTopicV2CommandInput,
+    cb: (err: any, data?: CreateTopicV2CommandOutput) => void
+  ): void;
+  createTopicV2(
+    args: CreateTopicV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateTopicV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVPCConnectionCommand}
+   */
+  createVPCConnection(
+    args: CreateVPCConnectionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<CreateVPCConnectionCommandOutput>;
+  createVPCConnection(
+    args: CreateVPCConnectionCommandInput,
+    cb: (err: any, data?: CreateVPCConnectionCommandOutput) => void
+  ): void;
+  createVPCConnection(
+    args: CreateVPCConnectionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: CreateVPCConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountCustomizationCommand}
+   */
+  deleteAccountCustomization(
     args: DeleteAccountCustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteAccountCustomizationCommandOutput>;
-  public deleteAccountCustomization(
+  deleteAccountCustomization(
     args: DeleteAccountCustomizationCommandInput,
     cb: (err: any, data?: DeleteAccountCustomizationCommandOutput) => void
   ): void;
-  public deleteAccountCustomization(
+  deleteAccountCustomization(
     args: DeleteAccountCustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteAccountCustomizationCommandOutput) => void
   ): void;
-  public deleteAccountCustomization(
-    args: DeleteAccountCustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAccountCustomizationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAccountCustomizationCommandOutput) => void
-  ): Promise<DeleteAccountCustomizationCommandOutput> | void {
-    const command = new DeleteAccountCustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an analysis from Amazon QuickSight. You can optionally include a recovery window during
-   *             which you can restore the analysis. If you don't specify a recovery window value, the
-   *             operation defaults to 30 days. Amazon QuickSight attaches a <code>DeletionTime</code> stamp to
-   *             the response that specifies the end of the recovery window. At the end of the recovery
-   *             window, Amazon QuickSight deletes the analysis permanently.</p>
-   *         <p>At any time before recovery window ends, you can use the <code>RestoreAnalysis</code>
-   *             API operation to remove the <code>DeletionTime</code> stamp and cancel the deletion of
-   *             the analysis. The analysis remains visible in the API until it's deleted, so you can
-   *             describe it but you can't make a template from it.</p>
-   *         <p>An analysis that's scheduled for deletion isn't accessible in the Amazon QuickSight console.
-   *             To access it in the console, restore it. Deleting an analysis doesn't delete the
-   *             dashboards that you publish from it.</p>
+   * @see {@link DeleteAccountCustomPermissionCommand}
    */
-  public deleteAnalysis(
+  deleteAccountCustomPermission(
+    args: DeleteAccountCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteAccountCustomPermissionCommandOutput>;
+  deleteAccountCustomPermission(
+    args: DeleteAccountCustomPermissionCommandInput,
+    cb: (err: any, data?: DeleteAccountCustomPermissionCommandOutput) => void
+  ): void;
+  deleteAccountCustomPermission(
+    args: DeleteAccountCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteAccountCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountSubscriptionCommand}
+   */
+  deleteAccountSubscription(
+    args: DeleteAccountSubscriptionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteAccountSubscriptionCommandOutput>;
+  deleteAccountSubscription(
+    args: DeleteAccountSubscriptionCommandInput,
+    cb: (err: any, data?: DeleteAccountSubscriptionCommandOutput) => void
+  ): void;
+  deleteAccountSubscription(
+    args: DeleteAccountSubscriptionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteAccountSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteActionConnectorCommand}
+   */
+  deleteActionConnector(
+    args: DeleteActionConnectorCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteActionConnectorCommandOutput>;
+  deleteActionConnector(
+    args: DeleteActionConnectorCommandInput,
+    cb: (err: any, data?: DeleteActionConnectorCommandOutput) => void
+  ): void;
+  deleteActionConnector(
+    args: DeleteActionConnectorCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteActionConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentCommand}
+   */
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteAgentCommandOutput>;
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    cb: (err: any, data?: DeleteAgentCommandOutput) => void
+  ): void;
+  deleteAgent(
+    args: DeleteAgentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAnalysisCommand}
+   */
+  deleteAnalysis(
     args: DeleteAnalysisCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteAnalysisCommandOutput>;
-  public deleteAnalysis(
+  deleteAnalysis(
     args: DeleteAnalysisCommandInput,
     cb: (err: any, data?: DeleteAnalysisCommandOutput) => void
   ): void;
-  public deleteAnalysis(
+  deleteAnalysis(
     args: DeleteAnalysisCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteAnalysisCommandOutput) => void
   ): void;
-  public deleteAnalysis(
-    args: DeleteAnalysisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAnalysisCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAnalysisCommandOutput) => void
-  ): Promise<DeleteAnalysisCommandOutput> | void {
-    const command = new DeleteAnalysisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a dashboard.</p>
+   * @see {@link DeleteAppCommand}
    */
-  public deleteDashboard(
+  deleteApp(
+    args: DeleteAppCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteAppCommandOutput>;
+  deleteApp(
+    args: DeleteAppCommandInput,
+    cb: (err: any, data?: DeleteAppCommandOutput) => void
+  ): void;
+  deleteApp(
+    args: DeleteAppCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApprovalPolicyCommand}
+   */
+  deleteApprovalPolicy(
+    args: DeleteApprovalPolicyCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteApprovalPolicyCommandOutput>;
+  deleteApprovalPolicy(
+    args: DeleteApprovalPolicyCommandInput,
+    cb: (err: any, data?: DeleteApprovalPolicyCommandOutput) => void
+  ): void;
+  deleteApprovalPolicy(
+    args: DeleteApprovalPolicyCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteApprovalPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBrandCommand}
+   */
+  deleteBrand(
+    args: DeleteBrandCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteBrandCommandOutput>;
+  deleteBrand(
+    args: DeleteBrandCommandInput,
+    cb: (err: any, data?: DeleteBrandCommandOutput) => void
+  ): void;
+  deleteBrand(
+    args: DeleteBrandCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteBrandCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBrandAssignmentCommand}
+   */
+  deleteBrandAssignment(
+    args: DeleteBrandAssignmentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteBrandAssignmentCommandOutput>;
+  deleteBrandAssignment(
+    args: DeleteBrandAssignmentCommandInput,
+    cb: (err: any, data?: DeleteBrandAssignmentCommandOutput) => void
+  ): void;
+  deleteBrandAssignment(
+    args: DeleteBrandAssignmentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteBrandAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCustomPermissionsCommand}
+   */
+  deleteCustomPermissions(
+    args: DeleteCustomPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteCustomPermissionsCommandOutput>;
+  deleteCustomPermissions(
+    args: DeleteCustomPermissionsCommandInput,
+    cb: (err: any, data?: DeleteCustomPermissionsCommandOutput) => void
+  ): void;
+  deleteCustomPermissions(
+    args: DeleteCustomPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteCustomPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDashboardCommand}
+   */
+  deleteDashboard(
     args: DeleteDashboardCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteDashboardCommandOutput>;
-  public deleteDashboard(
+  deleteDashboard(
     args: DeleteDashboardCommandInput,
     cb: (err: any, data?: DeleteDashboardCommandOutput) => void
   ): void;
-  public deleteDashboard(
+  deleteDashboard(
     args: DeleteDashboardCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteDashboardCommandOutput) => void
   ): void;
-  public deleteDashboard(
-    args: DeleteDashboardCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDashboardCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDashboardCommandOutput) => void
-  ): Promise<DeleteDashboardCommandOutput> | void {
-    const command = new DeleteDashboardCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a dataset.</p>
+   * @see {@link DeleteDataSetCommand}
    */
-  public deleteDataSet(
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteDataSetCommandOutput>;
-  public deleteDataSet(
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
     cb: (err: any, data?: DeleteDataSetCommandOutput) => void
   ): void;
-  public deleteDataSet(
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteDataSetCommandOutput) => void
   ): void;
-  public deleteDataSet(
-    args: DeleteDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDataSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDataSetCommandOutput) => void
-  ): Promise<DeleteDataSetCommandOutput> | void {
-    const command = new DeleteDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the data source permanently. This operation breaks
-   * 			all the datasets that reference the deleted data source.</p>
+   * @see {@link DeleteDataSetRefreshPropertiesCommand}
    */
-  public deleteDataSource(
+  deleteDataSetRefreshProperties(
+    args: DeleteDataSetRefreshPropertiesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteDataSetRefreshPropertiesCommandOutput>;
+  deleteDataSetRefreshProperties(
+    args: DeleteDataSetRefreshPropertiesCommandInput,
+    cb: (err: any, data?: DeleteDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+  deleteDataSetRefreshProperties(
+    args: DeleteDataSetRefreshPropertiesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataSourceCommand}
+   */
+  deleteDataSource(
     args: DeleteDataSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteDataSourceCommandOutput>;
-  public deleteDataSource(
+  deleteDataSource(
     args: DeleteDataSourceCommandInput,
     cb: (err: any, data?: DeleteDataSourceCommandOutput) => void
   ): void;
-  public deleteDataSource(
+  deleteDataSource(
     args: DeleteDataSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteDataSourceCommandOutput) => void
   ): void;
-  public deleteDataSource(
-    args: DeleteDataSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDataSourceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDataSourceCommandOutput) => void
-  ): Promise<DeleteDataSourceCommandOutput> | void {
-    const command = new DeleteDataSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an empty folder.</p>
+   * @see {@link DeleteDefaultQBusinessApplicationCommand}
    */
-  public deleteFolder(
+  deleteDefaultQBusinessApplication(
+    args: DeleteDefaultQBusinessApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteDefaultQBusinessApplicationCommandOutput>;
+  deleteDefaultQBusinessApplication(
+    args: DeleteDefaultQBusinessApplicationCommandInput,
+    cb: (err: any, data?: DeleteDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+  deleteDefaultQBusinessApplication(
+    args: DeleteDefaultQBusinessApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDlpSettingCommand}
+   */
+  deleteDlpSetting(
+    args: DeleteDlpSettingCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteDlpSettingCommandOutput>;
+  deleteDlpSetting(
+    args: DeleteDlpSettingCommandInput,
+    cb: (err: any, data?: DeleteDlpSettingCommandOutput) => void
+  ): void;
+  deleteDlpSetting(
+    args: DeleteDlpSettingCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteDlpSettingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFlowCommand}
+   */
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteFlowCommandOutput>;
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    cb: (err: any, data?: DeleteFlowCommandOutput) => void
+  ): void;
+  deleteFlow(
+    args: DeleteFlowCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFolderCommand}
+   */
+  deleteFolder(
     args: DeleteFolderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteFolderCommandOutput>;
-  public deleteFolder(args: DeleteFolderCommandInput, cb: (err: any, data?: DeleteFolderCommandOutput) => void): void;
-  public deleteFolder(
+  deleteFolder(
     args: DeleteFolderCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteFolderCommandOutput) => void
   ): void;
-  public deleteFolder(
+  deleteFolder(
     args: DeleteFolderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFolderCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFolderCommandOutput) => void
-  ): Promise<DeleteFolderCommandOutput> | void {
-    const command = new DeleteFolderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteFolderCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes an asset, such as a dashboard, analysis, or dataset, from a folder.</p>
+   * @see {@link DeleteFolderMembershipCommand}
    */
-  public deleteFolderMembership(
+  deleteFolderMembership(
     args: DeleteFolderMembershipCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteFolderMembershipCommandOutput>;
-  public deleteFolderMembership(
+  deleteFolderMembership(
     args: DeleteFolderMembershipCommandInput,
     cb: (err: any, data?: DeleteFolderMembershipCommandOutput) => void
   ): void;
-  public deleteFolderMembership(
+  deleteFolderMembership(
     args: DeleteFolderMembershipCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteFolderMembershipCommandOutput) => void
   ): void;
-  public deleteFolderMembership(
-    args: DeleteFolderMembershipCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFolderMembershipCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFolderMembershipCommandOutput) => void
-  ): Promise<DeleteFolderMembershipCommandOutput> | void {
-    const command = new DeleteFolderMembershipCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a user group from Amazon QuickSight. </p>
+   * @see {@link DeleteGroupCommand}
    */
-  public deleteGroup(args: DeleteGroupCommandInput, options?: __HttpHandlerOptions): Promise<DeleteGroupCommandOutput>;
-  public deleteGroup(args: DeleteGroupCommandInput, cb: (err: any, data?: DeleteGroupCommandOutput) => void): void;
-  public deleteGroup(
+  deleteGroup(
     args: DeleteGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteGroupCommandOutput>;
+  deleteGroup(
+    args: DeleteGroupCommandInput,
     cb: (err: any, data?: DeleteGroupCommandOutput) => void
   ): void;
-  public deleteGroup(
+  deleteGroup(
     args: DeleteGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteGroupCommandOutput) => void
-  ): Promise<DeleteGroupCommandOutput> | void {
-    const command = new DeleteGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes a user from a group so that the user is no longer a member of the group.</p>
+   * @see {@link DeleteGroupMembershipCommand}
    */
-  public deleteGroupMembership(
+  deleteGroupMembership(
     args: DeleteGroupMembershipCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteGroupMembershipCommandOutput>;
-  public deleteGroupMembership(
+  deleteGroupMembership(
     args: DeleteGroupMembershipCommandInput,
     cb: (err: any, data?: DeleteGroupMembershipCommandOutput) => void
   ): void;
-  public deleteGroupMembership(
+  deleteGroupMembership(
     args: DeleteGroupMembershipCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteGroupMembershipCommandOutput) => void
   ): void;
-  public deleteGroupMembership(
-    args: DeleteGroupMembershipCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteGroupMembershipCommandOutput) => void),
-    cb?: (err: any, data?: DeleteGroupMembershipCommandOutput) => void
-  ): Promise<DeleteGroupMembershipCommandOutput> | void {
-    const command = new DeleteGroupMembershipCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an existing IAMpolicy assignment.</p>
+   * @see {@link DeleteIAMPolicyAssignmentCommand}
    */
-  public deleteIAMPolicyAssignment(
+  deleteIAMPolicyAssignment(
     args: DeleteIAMPolicyAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteIAMPolicyAssignmentCommandOutput>;
-  public deleteIAMPolicyAssignment(
+  deleteIAMPolicyAssignment(
     args: DeleteIAMPolicyAssignmentCommandInput,
     cb: (err: any, data?: DeleteIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public deleteIAMPolicyAssignment(
+  deleteIAMPolicyAssignment(
     args: DeleteIAMPolicyAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public deleteIAMPolicyAssignment(
-    args: DeleteIAMPolicyAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIAMPolicyAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIAMPolicyAssignmentCommandOutput) => void
-  ): Promise<DeleteIAMPolicyAssignmentCommandOutput> | void {
-    const command = new DeleteIAMPolicyAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a namespace and the users and groups that are associated with the namespace.
-   *         This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not
-   *         deleted. To delete these assets, you use the API operations for the relevant asset. </p>
+   * @see {@link DeleteIdentityPropagationConfigCommand}
    */
-  public deleteNamespace(
+  deleteIdentityPropagationConfig(
+    args: DeleteIdentityPropagationConfigCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteIdentityPropagationConfigCommandOutput>;
+  deleteIdentityPropagationConfig(
+    args: DeleteIdentityPropagationConfigCommandInput,
+    cb: (err: any, data?: DeleteIdentityPropagationConfigCommandOutput) => void
+  ): void;
+  deleteIdentityPropagationConfig(
+    args: DeleteIdentityPropagationConfigCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteIdentityPropagationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnowledgeBaseCommand}
+   */
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteKnowledgeBaseCommandOutput>;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+  deleteKnowledgeBase(
+    args: DeleteKnowledgeBaseCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLimitsProfileCommand}
+   */
+  deleteLimitsProfile(
+    args: DeleteLimitsProfileCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteLimitsProfileCommandOutput>;
+  deleteLimitsProfile(
+    args: DeleteLimitsProfileCommandInput,
+    cb: (err: any, data?: DeleteLimitsProfileCommandOutput) => void
+  ): void;
+  deleteLimitsProfile(
+    args: DeleteLimitsProfileCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteLimitsProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNamespaceCommand}
+   */
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteNamespaceCommandOutput>;
-  public deleteNamespace(
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
     cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
   ): void;
-  public deleteNamespace(
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
   ): void;
-  public deleteNamespace(
-    args: DeleteNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteNamespaceCommandOutput) => void
-  ): Promise<DeleteNamespaceCommandOutput> | void {
-    const command = new DeleteNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a template.</p>
+   * @see {@link DeleteOAuthClientApplicationCommand}
    */
-  public deleteTemplate(
+  deleteOAuthClientApplication(
+    args: DeleteOAuthClientApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteOAuthClientApplicationCommandOutput>;
+  deleteOAuthClientApplication(
+    args: DeleteOAuthClientApplicationCommandInput,
+    cb: (err: any, data?: DeleteOAuthClientApplicationCommandOutput) => void
+  ): void;
+  deleteOAuthClientApplication(
+    args: DeleteOAuthClientApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteOAuthClientApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRefreshScheduleCommand}
+   */
+  deleteRefreshSchedule(
+    args: DeleteRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteRefreshScheduleCommandOutput>;
+  deleteRefreshSchedule(
+    args: DeleteRefreshScheduleCommandInput,
+    cb: (err: any, data?: DeleteRefreshScheduleCommandOutput) => void
+  ): void;
+  deleteRefreshSchedule(
+    args: DeleteRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRoleCustomPermissionCommand}
+   */
+  deleteRoleCustomPermission(
+    args: DeleteRoleCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteRoleCustomPermissionCommandOutput>;
+  deleteRoleCustomPermission(
+    args: DeleteRoleCustomPermissionCommandInput,
+    cb: (err: any, data?: DeleteRoleCustomPermissionCommandOutput) => void
+  ): void;
+  deleteRoleCustomPermission(
+    args: DeleteRoleCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteRoleCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRoleMembershipCommand}
+   */
+  deleteRoleMembership(
+    args: DeleteRoleMembershipCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteRoleMembershipCommandOutput>;
+  deleteRoleMembership(
+    args: DeleteRoleMembershipCommandInput,
+    cb: (err: any, data?: DeleteRoleMembershipCommandOutput) => void
+  ): void;
+  deleteRoleMembership(
+    args: DeleteRoleMembershipCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteRoleMembershipCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSpaceCommand}
+   */
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteSpaceCommandOutput>;
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    cb: (err: any, data?: DeleteSpaceCommandOutput) => void
+  ): void;
+  deleteSpace(
+    args: DeleteSpaceCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTemplateCommand}
+   */
+  deleteTemplate(
     args: DeleteTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteTemplateCommandOutput>;
-  public deleteTemplate(
+  deleteTemplate(
     args: DeleteTemplateCommandInput,
     cb: (err: any, data?: DeleteTemplateCommandOutput) => void
   ): void;
-  public deleteTemplate(
+  deleteTemplate(
     args: DeleteTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteTemplateCommandOutput) => void
   ): void;
-  public deleteTemplate(
-    args: DeleteTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTemplateCommandOutput) => void
-  ): Promise<DeleteTemplateCommandOutput> | void {
-    const command = new DeleteTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the item that the specified template alias points to. If you provide a specific
-   * 			alias, you delete the version of the template that the alias points to.</p>
+   * @see {@link DeleteTemplateAliasCommand}
    */
-  public deleteTemplateAlias(
+  deleteTemplateAlias(
     args: DeleteTemplateAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteTemplateAliasCommandOutput>;
-  public deleteTemplateAlias(
+  deleteTemplateAlias(
     args: DeleteTemplateAliasCommandInput,
     cb: (err: any, data?: DeleteTemplateAliasCommandOutput) => void
   ): void;
-  public deleteTemplateAlias(
+  deleteTemplateAlias(
     args: DeleteTemplateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteTemplateAliasCommandOutput) => void
   ): void;
-  public deleteTemplateAlias(
-    args: DeleteTemplateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTemplateAliasCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTemplateAliasCommandOutput) => void
-  ): Promise<DeleteTemplateAliasCommandOutput> | void {
-    const command = new DeleteTemplateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a theme.</p>
+   * @see {@link DeleteThemeCommand}
    */
-  public deleteTheme(args: DeleteThemeCommandInput, options?: __HttpHandlerOptions): Promise<DeleteThemeCommandOutput>;
-  public deleteTheme(args: DeleteThemeCommandInput, cb: (err: any, data?: DeleteThemeCommandOutput) => void): void;
-  public deleteTheme(
+  deleteTheme(
     args: DeleteThemeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteThemeCommandOutput>;
+  deleteTheme(
+    args: DeleteThemeCommandInput,
     cb: (err: any, data?: DeleteThemeCommandOutput) => void
   ): void;
-  public deleteTheme(
+  deleteTheme(
     args: DeleteThemeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteThemeCommandOutput) => void),
-    cb?: (err: any, data?: DeleteThemeCommandOutput) => void
-  ): Promise<DeleteThemeCommandOutput> | void {
-    const command = new DeleteThemeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteThemeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the version of the theme that the specified theme alias points to.
-   * 			If you provide a specific alias, you delete the version of the theme
-   * 			that the alias points to.</p>
+   * @see {@link DeleteThemeAliasCommand}
    */
-  public deleteThemeAlias(
+  deleteThemeAlias(
     args: DeleteThemeAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteThemeAliasCommandOutput>;
-  public deleteThemeAlias(
+  deleteThemeAlias(
     args: DeleteThemeAliasCommandInput,
     cb: (err: any, data?: DeleteThemeAliasCommandOutput) => void
   ): void;
-  public deleteThemeAlias(
+  deleteThemeAlias(
     args: DeleteThemeAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteThemeAliasCommandOutput) => void
   ): void;
-  public deleteThemeAlias(
-    args: DeleteThemeAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteThemeAliasCommandOutput) => void),
-    cb?: (err: any, data?: DeleteThemeAliasCommandOutput) => void
-  ): Promise<DeleteThemeAliasCommandOutput> | void {
-    const command = new DeleteThemeAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the Amazon QuickSight user that is associated with the identity of the
-   * 			Identity and Access Management (IAM) user or role that's making the call. The IAM user
-   * 			isn't deleted as a result of this call. </p>
+   * @see {@link DeleteTopicCommand}
    */
-  public deleteUser(args: DeleteUserCommandInput, options?: __HttpHandlerOptions): Promise<DeleteUserCommandOutput>;
-  public deleteUser(args: DeleteUserCommandInput, cb: (err: any, data?: DeleteUserCommandOutput) => void): void;
-  public deleteUser(
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteTopicCommandOutput>;
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    cb: (err: any, data?: DeleteTopicCommandOutput) => void
+  ): void;
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTopicRefreshScheduleCommand}
+   */
+  deleteTopicRefreshSchedule(
+    args: DeleteTopicRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteTopicRefreshScheduleCommandOutput>;
+  deleteTopicRefreshSchedule(
+    args: DeleteTopicRefreshScheduleCommandInput,
+    cb: (err: any, data?: DeleteTopicRefreshScheduleCommandOutput) => void
+  ): void;
+  deleteTopicRefreshSchedule(
+    args: DeleteTopicRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteTopicRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTopicV2Command}
+   */
+  deleteTopicV2(
+    args: DeleteTopicV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteTopicV2CommandOutput>;
+  deleteTopicV2(
+    args: DeleteTopicV2CommandInput,
+    cb: (err: any, data?: DeleteTopicV2CommandOutput) => void
+  ): void;
+  deleteTopicV2(
+    args: DeleteTopicV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteTopicV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUserCommand}
+   */
+  deleteUser(
     args: DeleteUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteUserCommandOutput>;
+  deleteUser(
+    args: DeleteUserCommandInput,
     cb: (err: any, data?: DeleteUserCommandOutput) => void
   ): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserCommandOutput) => void
-  ): Promise<DeleteUserCommandOutput> | void {
-    const command = new DeleteUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a user identified by its principal ID. </p>
+   * @see {@link DeleteUserByPrincipalIdCommand}
    */
-  public deleteUserByPrincipalId(
+  deleteUserByPrincipalId(
     args: DeleteUserByPrincipalIdCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DeleteUserByPrincipalIdCommandOutput>;
-  public deleteUserByPrincipalId(
+  deleteUserByPrincipalId(
     args: DeleteUserByPrincipalIdCommandInput,
     cb: (err: any, data?: DeleteUserByPrincipalIdCommandOutput) => void
   ): void;
-  public deleteUserByPrincipalId(
+  deleteUserByPrincipalId(
     args: DeleteUserByPrincipalIdCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DeleteUserByPrincipalIdCommandOutput) => void
   ): void;
-  public deleteUserByPrincipalId(
-    args: DeleteUserByPrincipalIdCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserByPrincipalIdCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserByPrincipalIdCommandOutput) => void
-  ): Promise<DeleteUserByPrincipalIdCommandOutput> | void {
-    const command = new DeleteUserByPrincipalIdCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the customizations associated with the provided Amazon Web Services account and Amazon
-   *             Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which
-   *             customizations to apply by running this API operation with the <code>Resolved</code> flag
-   *             included. </p>
-   *         <p>To determine what customizations display when you run this command, it can help to
-   *             visualize the relationship of the entities involved. </p>
-   *         <ul>
-   *             <li>
-   *                 <p>
-   *                   <code>Amazon Web Services account</code> - The Amazon Web Services account exists at the top of the hierarchy.
-   *                     It has the potential to use all of the Amazon Web Services Regions and AWS Services. When you
-   *                     subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region.
-   *                     That's where your free SPICE capacity is located. You can use Amazon QuickSight in any
-   *                     supported Amazon Web Services Region. </p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Amazon Web Services Region</code> - In each Amazon Web Services Region where you sign in to Amazon QuickSight
-   *                     at least once, Amazon QuickSight acts as a separate instance of the same service. If
-   *                     you have a user directory, it resides in us-east-1, which is the US East (N.
-   *                     Virginia). Generally speaking, these users have access to Amazon QuickSight in any
-   *                     Amazon Web Services Region, unless they are constrained to a namespace. </p>
-   *                 <p>To run the command in a different Amazon Web Services Region, you change your Region settings.
-   *                     If you're using the AWS CLI, you can use one of the following options:</p>
-   *                 <ul>
-   *                   <li>
-   *                         <p>Use <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html">command line options</a>. </p>
-   *                     </li>
-   *                   <li>
-   *                         <p>Use <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html">named profiles</a>. </p>
-   *                     </li>
-   *                   <li>
-   *                         <p>Run <code>aws configure</code> to change your default Amazon Web Services Region. Use
-   *                             Enter to key the same settings for your keys. For more information, see
-   *                             <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">Configuring the AWS CLI</a>.</p>
-   *                     </li>
-   *                </ul>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Namespace</code> - A Amazon QuickSight namespace is a partition that contains
-   *                     users and assets (data sources, datasets, dashboards, and so on). To access
-   *                     assets that are in a specific namespace, users and groups must also be part of
-   *                     the same namespace. People who share a namespace are completely isolated from
-   *                     users and assets in other namespaces, even if they are in the same Amazon Web Services account
-   *                     and Amazon Web Services Region.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Applied customizations</code> -  Within an Amazon Web Services Region, a set of
-   *                     Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace.
-   *                     Settings that you apply to a namespace override settings that you apply to an
-   *                     Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in
-   *                     other Amazon Web Services Regions, run the <code>CreateAccountCustomization</code> command in
-   *                     each Amazon Web Services Region where you want to apply the same customizations. </p>
-   *             </li>
-   *          </ul>
+   * @see {@link DeleteUserCustomPermissionCommand}
    */
-  public describeAccountCustomization(
+  deleteUserCustomPermission(
+    args: DeleteUserCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteUserCustomPermissionCommandOutput>;
+  deleteUserCustomPermission(
+    args: DeleteUserCustomPermissionCommandInput,
+    cb: (err: any, data?: DeleteUserCustomPermissionCommandOutput) => void
+  ): void;
+  deleteUserCustomPermission(
+    args: DeleteUserCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteUserCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVPCConnectionCommand}
+   */
+  deleteVPCConnection(
+    args: DeleteVPCConnectionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DeleteVPCConnectionCommandOutput>;
+  deleteVPCConnection(
+    args: DeleteVPCConnectionCommandInput,
+    cb: (err: any, data?: DeleteVPCConnectionCommandOutput) => void
+  ): void;
+  deleteVPCConnection(
+    args: DeleteVPCConnectionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DeleteVPCConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountCustomizationCommand}
+   */
+  describeAccountCustomization(
     args: DescribeAccountCustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeAccountCustomizationCommandOutput>;
-  public describeAccountCustomization(
+  describeAccountCustomization(
     args: DescribeAccountCustomizationCommandInput,
     cb: (err: any, data?: DescribeAccountCustomizationCommandOutput) => void
   ): void;
-  public describeAccountCustomization(
+  describeAccountCustomization(
     args: DescribeAccountCustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeAccountCustomizationCommandOutput) => void
   ): void;
-  public describeAccountCustomization(
-    args: DescribeAccountCustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountCustomizationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountCustomizationCommandOutput) => void
-  ): Promise<DescribeAccountCustomizationCommandOutput> | void {
-    const command = new DescribeAccountCustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the settings that were used when your Amazon QuickSight subscription was first
-   *             created in this Amazon Web Services account.</p>
+   * @see {@link DescribeAccountCustomPermissionCommand}
    */
-  public describeAccountSettings(
+  describeAccountCustomPermission(
+    args: DescribeAccountCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAccountCustomPermissionCommandOutput>;
+  describeAccountCustomPermission(
+    args: DescribeAccountCustomPermissionCommandInput,
+    cb: (err: any, data?: DescribeAccountCustomPermissionCommandOutput) => void
+  ): void;
+  describeAccountCustomPermission(
+    args: DescribeAccountCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAccountCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountSettingsCommand}
+   */
+  describeAccountSettings(
     args: DescribeAccountSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeAccountSettingsCommandOutput>;
-  public describeAccountSettings(
+  describeAccountSettings(
     args: DescribeAccountSettingsCommandInput,
     cb: (err: any, data?: DescribeAccountSettingsCommandOutput) => void
   ): void;
-  public describeAccountSettings(
+  describeAccountSettings(
     args: DescribeAccountSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeAccountSettingsCommandOutput) => void
   ): void;
-  public describeAccountSettings(
-    args: DescribeAccountSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountSettingsCommandOutput) => void
-  ): Promise<DescribeAccountSettingsCommandOutput> | void {
-    const command = new DescribeAccountSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides a summary of the metadata for an analysis.</p>
+   * @see {@link DescribeAccountSubscriptionCommand}
    */
-  public describeAnalysis(
+  describeAccountSubscription(
+    args: DescribeAccountSubscriptionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAccountSubscriptionCommandOutput>;
+  describeAccountSubscription(
+    args: DescribeAccountSubscriptionCommandInput,
+    cb: (err: any, data?: DescribeAccountSubscriptionCommandOutput) => void
+  ): void;
+  describeAccountSubscription(
+    args: DescribeAccountSubscriptionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAccountSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeActionConnectorCommand}
+   */
+  describeActionConnector(
+    args: DescribeActionConnectorCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeActionConnectorCommandOutput>;
+  describeActionConnector(
+    args: DescribeActionConnectorCommandInput,
+    cb: (err: any, data?: DescribeActionConnectorCommandOutput) => void
+  ): void;
+  describeActionConnector(
+    args: DescribeActionConnectorCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeActionConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeActionConnectorPermissionsCommand}
+   */
+  describeActionConnectorPermissions(
+    args: DescribeActionConnectorPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeActionConnectorPermissionsCommandOutput>;
+  describeActionConnectorPermissions(
+    args: DescribeActionConnectorPermissionsCommandInput,
+    cb: (err: any, data?: DescribeActionConnectorPermissionsCommandOutput) => void
+  ): void;
+  describeActionConnectorPermissions(
+    args: DescribeActionConnectorPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeActionConnectorPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAgentCommand}
+   */
+  describeAgent(
+    args: DescribeAgentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAgentCommandOutput>;
+  describeAgent(
+    args: DescribeAgentCommandInput,
+    cb: (err: any, data?: DescribeAgentCommandOutput) => void
+  ): void;
+  describeAgent(
+    args: DescribeAgentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAgentPermissionsCommand}
+   */
+  describeAgentPermissions(
+    args: DescribeAgentPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAgentPermissionsCommandOutput>;
+  describeAgentPermissions(
+    args: DescribeAgentPermissionsCommandInput,
+    cb: (err: any, data?: DescribeAgentPermissionsCommandOutput) => void
+  ): void;
+  describeAgentPermissions(
+    args: DescribeAgentPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAgentPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAnalysisCommand}
+   */
+  describeAnalysis(
     args: DescribeAnalysisCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeAnalysisCommandOutput>;
-  public describeAnalysis(
+  describeAnalysis(
     args: DescribeAnalysisCommandInput,
     cb: (err: any, data?: DescribeAnalysisCommandOutput) => void
   ): void;
-  public describeAnalysis(
+  describeAnalysis(
     args: DescribeAnalysisCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeAnalysisCommandOutput) => void
   ): void;
-  public describeAnalysis(
-    args: DescribeAnalysisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAnalysisCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAnalysisCommandOutput) => void
-  ): Promise<DescribeAnalysisCommandOutput> | void {
-    const command = new DescribeAnalysisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides the read and write permissions for an analysis.</p>
+   * @see {@link DescribeAnalysisDefinitionCommand}
    */
-  public describeAnalysisPermissions(
+  describeAnalysisDefinition(
+    args: DescribeAnalysisDefinitionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAnalysisDefinitionCommandOutput>;
+  describeAnalysisDefinition(
+    args: DescribeAnalysisDefinitionCommandInput,
+    cb: (err: any, data?: DescribeAnalysisDefinitionCommandOutput) => void
+  ): void;
+  describeAnalysisDefinition(
+    args: DescribeAnalysisDefinitionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAnalysisDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAnalysisPermissionsCommand}
+   */
+  describeAnalysisPermissions(
     args: DescribeAnalysisPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeAnalysisPermissionsCommandOutput>;
-  public describeAnalysisPermissions(
+  describeAnalysisPermissions(
     args: DescribeAnalysisPermissionsCommandInput,
     cb: (err: any, data?: DescribeAnalysisPermissionsCommandOutput) => void
   ): void;
-  public describeAnalysisPermissions(
+  describeAnalysisPermissions(
     args: DescribeAnalysisPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeAnalysisPermissionsCommandOutput) => void
   ): void;
-  public describeAnalysisPermissions(
-    args: DescribeAnalysisPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAnalysisPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAnalysisPermissionsCommandOutput) => void
-  ): Promise<DescribeAnalysisPermissionsCommandOutput> | void {
-    const command = new DescribeAnalysisPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides a summary for a dashboard.</p>
+   * @see {@link DescribeAppCommand}
    */
-  public describeDashboard(
+  describeApp(
+    args: DescribeAppCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAppCommandOutput>;
+  describeApp(
+    args: DescribeAppCommandInput,
+    cb: (err: any, data?: DescribeAppCommandOutput) => void
+  ): void;
+  describeApp(
+    args: DescribeAppCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppPermissionsCommand}
+   */
+  describeAppPermissions(
+    args: DescribeAppPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAppPermissionsCommandOutput>;
+  describeAppPermissions(
+    args: DescribeAppPermissionsCommandInput,
+    cb: (err: any, data?: DescribeAppPermissionsCommandOutput) => void
+  ): void;
+  describeAppPermissions(
+    args: DescribeAppPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAppPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeApprovalPolicyCommand}
+   */
+  describeApprovalPolicy(
+    args: DescribeApprovalPolicyCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeApprovalPolicyCommandOutput>;
+  describeApprovalPolicy(
+    args: DescribeApprovalPolicyCommandInput,
+    cb: (err: any, data?: DescribeApprovalPolicyCommandOutput) => void
+  ): void;
+  describeApprovalPolicy(
+    args: DescribeApprovalPolicyCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeApprovalPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAssetBundleExportJobCommand}
+   */
+  describeAssetBundleExportJob(
+    args: DescribeAssetBundleExportJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAssetBundleExportJobCommandOutput>;
+  describeAssetBundleExportJob(
+    args: DescribeAssetBundleExportJobCommandInput,
+    cb: (err: any, data?: DescribeAssetBundleExportJobCommandOutput) => void
+  ): void;
+  describeAssetBundleExportJob(
+    args: DescribeAssetBundleExportJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAssetBundleExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAssetBundleImportJobCommand}
+   */
+  describeAssetBundleImportJob(
+    args: DescribeAssetBundleImportJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAssetBundleImportJobCommandOutput>;
+  describeAssetBundleImportJob(
+    args: DescribeAssetBundleImportJobCommandInput,
+    cb: (err: any, data?: DescribeAssetBundleImportJobCommandOutput) => void
+  ): void;
+  describeAssetBundleImportJob(
+    args: DescribeAssetBundleImportJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAssetBundleImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAutomationJobCommand}
+   */
+  describeAutomationJob(
+    args: DescribeAutomationJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeAutomationJobCommandOutput>;
+  describeAutomationJob(
+    args: DescribeAutomationJobCommandInput,
+    cb: (err: any, data?: DescribeAutomationJobCommandOutput) => void
+  ): void;
+  describeAutomationJob(
+    args: DescribeAutomationJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeAutomationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBrandCommand}
+   */
+  describeBrand(
+    args: DescribeBrandCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeBrandCommandOutput>;
+  describeBrand(
+    args: DescribeBrandCommandInput,
+    cb: (err: any, data?: DescribeBrandCommandOutput) => void
+  ): void;
+  describeBrand(
+    args: DescribeBrandCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeBrandCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBrandAssignmentCommand}
+   */
+  describeBrandAssignment(
+    args: DescribeBrandAssignmentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeBrandAssignmentCommandOutput>;
+  describeBrandAssignment(
+    args: DescribeBrandAssignmentCommandInput,
+    cb: (err: any, data?: DescribeBrandAssignmentCommandOutput) => void
+  ): void;
+  describeBrandAssignment(
+    args: DescribeBrandAssignmentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeBrandAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBrandPublishedVersionCommand}
+   */
+  describeBrandPublishedVersion(
+    args: DescribeBrandPublishedVersionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeBrandPublishedVersionCommandOutput>;
+  describeBrandPublishedVersion(
+    args: DescribeBrandPublishedVersionCommandInput,
+    cb: (err: any, data?: DescribeBrandPublishedVersionCommandOutput) => void
+  ): void;
+  describeBrandPublishedVersion(
+    args: DescribeBrandPublishedVersionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeBrandPublishedVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCustomPermissionsCommand}
+   */
+  describeCustomPermissions(
+    args: DescribeCustomPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeCustomPermissionsCommandOutput>;
+  describeCustomPermissions(
+    args: DescribeCustomPermissionsCommandInput,
+    cb: (err: any, data?: DescribeCustomPermissionsCommandOutput) => void
+  ): void;
+  describeCustomPermissions(
+    args: DescribeCustomPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeCustomPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDashboardCommand}
+   */
+  describeDashboard(
     args: DescribeDashboardCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDashboardCommandOutput>;
-  public describeDashboard(
+  describeDashboard(
     args: DescribeDashboardCommandInput,
     cb: (err: any, data?: DescribeDashboardCommandOutput) => void
   ): void;
-  public describeDashboard(
+  describeDashboard(
     args: DescribeDashboardCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDashboardCommandOutput) => void
   ): void;
-  public describeDashboard(
-    args: DescribeDashboardCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDashboardCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDashboardCommandOutput) => void
-  ): Promise<DescribeDashboardCommandOutput> | void {
-    const command = new DescribeDashboardCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes read and write permissions for a dashboard.</p>
+   * @see {@link DescribeDashboardDefinitionCommand}
    */
-  public describeDashboardPermissions(
+  describeDashboardDefinition(
+    args: DescribeDashboardDefinitionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDashboardDefinitionCommandOutput>;
+  describeDashboardDefinition(
+    args: DescribeDashboardDefinitionCommandInput,
+    cb: (err: any, data?: DescribeDashboardDefinitionCommandOutput) => void
+  ): void;
+  describeDashboardDefinition(
+    args: DescribeDashboardDefinitionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDashboardDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDashboardPermissionsCommand}
+   */
+  describeDashboardPermissions(
     args: DescribeDashboardPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDashboardPermissionsCommandOutput>;
-  public describeDashboardPermissions(
+  describeDashboardPermissions(
     args: DescribeDashboardPermissionsCommandInput,
     cb: (err: any, data?: DescribeDashboardPermissionsCommandOutput) => void
   ): void;
-  public describeDashboardPermissions(
+  describeDashboardPermissions(
     args: DescribeDashboardPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDashboardPermissionsCommandOutput) => void
   ): void;
-  public describeDashboardPermissions(
-    args: DescribeDashboardPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDashboardPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDashboardPermissionsCommandOutput) => void
-  ): Promise<DescribeDashboardPermissionsCommandOutput> | void {
-    const command = new DescribeDashboardPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a dataset. </p>
+   * @see {@link DescribeDashboardSnapshotJobCommand}
    */
-  public describeDataSet(
+  describeDashboardSnapshotJob(
+    args: DescribeDashboardSnapshotJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDashboardSnapshotJobCommandOutput>;
+  describeDashboardSnapshotJob(
+    args: DescribeDashboardSnapshotJobCommandInput,
+    cb: (err: any, data?: DescribeDashboardSnapshotJobCommandOutput) => void
+  ): void;
+  describeDashboardSnapshotJob(
+    args: DescribeDashboardSnapshotJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDashboardSnapshotJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDashboardSnapshotJobResultCommand}
+   */
+  describeDashboardSnapshotJobResult(
+    args: DescribeDashboardSnapshotJobResultCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDashboardSnapshotJobResultCommandOutput>;
+  describeDashboardSnapshotJobResult(
+    args: DescribeDashboardSnapshotJobResultCommandInput,
+    cb: (err: any, data?: DescribeDashboardSnapshotJobResultCommandOutput) => void
+  ): void;
+  describeDashboardSnapshotJobResult(
+    args: DescribeDashboardSnapshotJobResultCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDashboardSnapshotJobResultCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDashboardsQAConfigurationCommand}
+   */
+  describeDashboardsQAConfiguration(
+    args: DescribeDashboardsQAConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDashboardsQAConfigurationCommandOutput>;
+  describeDashboardsQAConfiguration(
+    args: DescribeDashboardsQAConfigurationCommandInput,
+    cb: (err: any, data?: DescribeDashboardsQAConfigurationCommandOutput) => void
+  ): void;
+  describeDashboardsQAConfiguration(
+    args: DescribeDashboardsQAConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDashboardsQAConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataSetCommand}
+   */
+  describeDataSet(
     args: DescribeDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDataSetCommandOutput>;
-  public describeDataSet(
+  describeDataSet(
     args: DescribeDataSetCommandInput,
     cb: (err: any, data?: DescribeDataSetCommandOutput) => void
   ): void;
-  public describeDataSet(
+  describeDataSet(
     args: DescribeDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDataSetCommandOutput) => void
   ): void;
-  public describeDataSet(
-    args: DescribeDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDataSetCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDataSetCommandOutput) => void
-  ): Promise<DescribeDataSetCommandOutput> | void {
-    const command = new DescribeDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the permissions on a dataset.</p>
-   * 		       <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code>.</p>
+   * @see {@link DescribeDataSetPermissionsCommand}
    */
-  public describeDataSetPermissions(
+  describeDataSetPermissions(
     args: DescribeDataSetPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDataSetPermissionsCommandOutput>;
-  public describeDataSetPermissions(
+  describeDataSetPermissions(
     args: DescribeDataSetPermissionsCommandInput,
     cb: (err: any, data?: DescribeDataSetPermissionsCommandOutput) => void
   ): void;
-  public describeDataSetPermissions(
+  describeDataSetPermissions(
     args: DescribeDataSetPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDataSetPermissionsCommandOutput) => void
   ): void;
-  public describeDataSetPermissions(
-    args: DescribeDataSetPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDataSetPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDataSetPermissionsCommandOutput) => void
-  ): Promise<DescribeDataSetPermissionsCommandOutput> | void {
-    const command = new DescribeDataSetPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a data source.</p>
+   * @see {@link DescribeDataSetRefreshPropertiesCommand}
    */
-  public describeDataSource(
+  describeDataSetRefreshProperties(
+    args: DescribeDataSetRefreshPropertiesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDataSetRefreshPropertiesCommandOutput>;
+  describeDataSetRefreshProperties(
+    args: DescribeDataSetRefreshPropertiesCommandInput,
+    cb: (err: any, data?: DescribeDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+  describeDataSetRefreshProperties(
+    args: DescribeDataSetRefreshPropertiesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataSourceCommand}
+   */
+  describeDataSource(
     args: DescribeDataSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDataSourceCommandOutput>;
-  public describeDataSource(
+  describeDataSource(
     args: DescribeDataSourceCommandInput,
     cb: (err: any, data?: DescribeDataSourceCommandOutput) => void
   ): void;
-  public describeDataSource(
+  describeDataSource(
     args: DescribeDataSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDataSourceCommandOutput) => void
   ): void;
-  public describeDataSource(
-    args: DescribeDataSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDataSourceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDataSourceCommandOutput) => void
-  ): Promise<DescribeDataSourceCommandOutput> | void {
-    const command = new DescribeDataSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the resource permissions for a data source.</p>
+   * @see {@link DescribeDataSourcePermissionsCommand}
    */
-  public describeDataSourcePermissions(
+  describeDataSourcePermissions(
     args: DescribeDataSourcePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeDataSourcePermissionsCommandOutput>;
-  public describeDataSourcePermissions(
+  describeDataSourcePermissions(
     args: DescribeDataSourcePermissionsCommandInput,
     cb: (err: any, data?: DescribeDataSourcePermissionsCommandOutput) => void
   ): void;
-  public describeDataSourcePermissions(
+  describeDataSourcePermissions(
     args: DescribeDataSourcePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeDataSourcePermissionsCommandOutput) => void
   ): void;
-  public describeDataSourcePermissions(
-    args: DescribeDataSourcePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDataSourcePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDataSourcePermissionsCommandOutput) => void
-  ): Promise<DescribeDataSourcePermissionsCommandOutput> | void {
-    const command = new DescribeDataSourcePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a folder.</p>
+   * @see {@link DescribeDefaultQBusinessApplicationCommand}
    */
-  public describeFolder(
+  describeDefaultQBusinessApplication(
+    args: DescribeDefaultQBusinessApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDefaultQBusinessApplicationCommandOutput>;
+  describeDefaultQBusinessApplication(
+    args: DescribeDefaultQBusinessApplicationCommandInput,
+    cb: (err: any, data?: DescribeDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+  describeDefaultQBusinessApplication(
+    args: DescribeDefaultQBusinessApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDlpSettingCommand}
+   */
+  describeDlpSetting(
+    args: DescribeDlpSettingCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeDlpSettingCommandOutput>;
+  describeDlpSetting(
+    args: DescribeDlpSettingCommandInput,
+    cb: (err: any, data?: DescribeDlpSettingCommandOutput) => void
+  ): void;
+  describeDlpSetting(
+    args: DescribeDlpSettingCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeDlpSettingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFlowCommand}
+   */
+  describeFlow(
+    args: DescribeFlowCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeFlowCommandOutput>;
+  describeFlow(
+    args: DescribeFlowCommandInput,
+    cb: (err: any, data?: DescribeFlowCommandOutput) => void
+  ): void;
+  describeFlow(
+    args: DescribeFlowCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFolderCommand}
+   */
+  describeFolder(
     args: DescribeFolderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeFolderCommandOutput>;
-  public describeFolder(
+  describeFolder(
     args: DescribeFolderCommandInput,
     cb: (err: any, data?: DescribeFolderCommandOutput) => void
   ): void;
-  public describeFolder(
+  describeFolder(
     args: DescribeFolderCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeFolderCommandOutput) => void
   ): void;
-  public describeFolder(
-    args: DescribeFolderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFolderCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFolderCommandOutput) => void
-  ): Promise<DescribeFolderCommandOutput> | void {
-    const command = new DescribeFolderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes permissions for a folder.</p>
+   * @see {@link DescribeFolderPermissionsCommand}
    */
-  public describeFolderPermissions(
+  describeFolderPermissions(
     args: DescribeFolderPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeFolderPermissionsCommandOutput>;
-  public describeFolderPermissions(
+  describeFolderPermissions(
     args: DescribeFolderPermissionsCommandInput,
     cb: (err: any, data?: DescribeFolderPermissionsCommandOutput) => void
   ): void;
-  public describeFolderPermissions(
+  describeFolderPermissions(
     args: DescribeFolderPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeFolderPermissionsCommandOutput) => void
   ): void;
-  public describeFolderPermissions(
-    args: DescribeFolderPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFolderPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFolderPermissionsCommandOutput) => void
-  ): Promise<DescribeFolderPermissionsCommandOutput> | void {
-    const command = new DescribeFolderPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.</p>
+   * @see {@link DescribeFolderResolvedPermissionsCommand}
    */
-  public describeFolderResolvedPermissions(
+  describeFolderResolvedPermissions(
     args: DescribeFolderResolvedPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeFolderResolvedPermissionsCommandOutput>;
-  public describeFolderResolvedPermissions(
+  describeFolderResolvedPermissions(
     args: DescribeFolderResolvedPermissionsCommandInput,
     cb: (err: any, data?: DescribeFolderResolvedPermissionsCommandOutput) => void
   ): void;
-  public describeFolderResolvedPermissions(
+  describeFolderResolvedPermissions(
     args: DescribeFolderResolvedPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeFolderResolvedPermissionsCommandOutput) => void
   ): void;
-  public describeFolderResolvedPermissions(
-    args: DescribeFolderResolvedPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFolderResolvedPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFolderResolvedPermissionsCommandOutput) => void
-  ): Promise<DescribeFolderResolvedPermissionsCommandOutput> | void {
-    const command = new DescribeFolderResolvedPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns an Amazon QuickSight group's description and Amazon Resource Name (ARN). </p>
+   * @see {@link DescribeGroupCommand}
    */
-  public describeGroup(
+  describeGroup(
     args: DescribeGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeGroupCommandOutput>;
-  public describeGroup(
+  describeGroup(
     args: DescribeGroupCommandInput,
     cb: (err: any, data?: DescribeGroupCommandOutput) => void
   ): void;
-  public describeGroup(
+  describeGroup(
     args: DescribeGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeGroupCommandOutput) => void
   ): void;
-  public describeGroup(
-    args: DescribeGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeGroupCommandOutput) => void),
-    cb?: (err: any, data?: DescribeGroupCommandOutput) => void
-  ): Promise<DescribeGroupCommandOutput> | void {
-    const command = new DescribeGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes an existing IAMpolicy assignment, as specified by the assignment name.</p>
+   * @see {@link DescribeGroupMembershipCommand}
    */
-  public describeIAMPolicyAssignment(
+  describeGroupMembership(
+    args: DescribeGroupMembershipCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeGroupMembershipCommandOutput>;
+  describeGroupMembership(
+    args: DescribeGroupMembershipCommandInput,
+    cb: (err: any, data?: DescribeGroupMembershipCommandOutput) => void
+  ): void;
+  describeGroupMembership(
+    args: DescribeGroupMembershipCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeGroupMembershipCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeIAMPolicyAssignmentCommand}
+   */
+  describeIAMPolicyAssignment(
     args: DescribeIAMPolicyAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeIAMPolicyAssignmentCommandOutput>;
-  public describeIAMPolicyAssignment(
+  describeIAMPolicyAssignment(
     args: DescribeIAMPolicyAssignmentCommandInput,
     cb: (err: any, data?: DescribeIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public describeIAMPolicyAssignment(
+  describeIAMPolicyAssignment(
     args: DescribeIAMPolicyAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public describeIAMPolicyAssignment(
-    args: DescribeIAMPolicyAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIAMPolicyAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIAMPolicyAssignmentCommandOutput) => void
-  ): Promise<DescribeIAMPolicyAssignmentCommandOutput> | void {
-    const command = new DescribeIAMPolicyAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a SPICE ingestion.</p>
+   * @see {@link DescribeIngestionCommand}
    */
-  public describeIngestion(
+  describeIngestion(
     args: DescribeIngestionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeIngestionCommandOutput>;
-  public describeIngestion(
+  describeIngestion(
     args: DescribeIngestionCommandInput,
     cb: (err: any, data?: DescribeIngestionCommandOutput) => void
   ): void;
-  public describeIngestion(
+  describeIngestion(
     args: DescribeIngestionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeIngestionCommandOutput) => void
   ): void;
-  public describeIngestion(
-    args: DescribeIngestionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIngestionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIngestionCommandOutput) => void
-  ): Promise<DescribeIngestionCommandOutput> | void {
-    const command = new DescribeIngestionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides a summary and status of IP Rules.</p>
+   * @see {@link DescribeIpRestrictionCommand}
    */
-  public describeIpRestriction(
+  describeIpRestriction(
     args: DescribeIpRestrictionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeIpRestrictionCommandOutput>;
-  public describeIpRestriction(
+  describeIpRestriction(
     args: DescribeIpRestrictionCommandInput,
     cb: (err: any, data?: DescribeIpRestrictionCommandOutput) => void
   ): void;
-  public describeIpRestriction(
+  describeIpRestriction(
     args: DescribeIpRestrictionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeIpRestrictionCommandOutput) => void
   ): void;
-  public describeIpRestriction(
-    args: DescribeIpRestrictionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIpRestrictionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIpRestrictionCommandOutput) => void
-  ): Promise<DescribeIpRestrictionCommandOutput> | void {
-    const command = new DescribeIpRestrictionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the current namespace.</p>
+   * @see {@link DescribeKeyRegistrationCommand}
    */
-  public describeNamespace(
+  describeKeyRegistration(
+    args: DescribeKeyRegistrationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeKeyRegistrationCommandOutput>;
+  describeKeyRegistration(
+    args: DescribeKeyRegistrationCommandInput,
+    cb: (err: any, data?: DescribeKeyRegistrationCommandOutput) => void
+  ): void;
+  describeKeyRegistration(
+    args: DescribeKeyRegistrationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeKeyRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeKnowledgeBaseCommand}
+   */
+  describeKnowledgeBase(
+    args: DescribeKnowledgeBaseCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeKnowledgeBaseCommandOutput>;
+  describeKnowledgeBase(
+    args: DescribeKnowledgeBaseCommandInput,
+    cb: (err: any, data?: DescribeKnowledgeBaseCommandOutput) => void
+  ): void;
+  describeKnowledgeBase(
+    args: DescribeKnowledgeBaseCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeKnowledgeBasePermissionsCommand}
+   */
+  describeKnowledgeBasePermissions(
+    args: DescribeKnowledgeBasePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeKnowledgeBasePermissionsCommandOutput>;
+  describeKnowledgeBasePermissions(
+    args: DescribeKnowledgeBasePermissionsCommandInput,
+    cb: (err: any, data?: DescribeKnowledgeBasePermissionsCommandOutput) => void
+  ): void;
+  describeKnowledgeBasePermissions(
+    args: DescribeKnowledgeBasePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeKnowledgeBasePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLimitsProfileCommand}
+   */
+  describeLimitsProfile(
+    args: DescribeLimitsProfileCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeLimitsProfileCommandOutput>;
+  describeLimitsProfile(
+    args: DescribeLimitsProfileCommandInput,
+    cb: (err: any, data?: DescribeLimitsProfileCommandOutput) => void
+  ): void;
+  describeLimitsProfile(
+    args: DescribeLimitsProfileCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeLimitsProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNamespaceCommand}
+   */
+  describeNamespace(
     args: DescribeNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeNamespaceCommandOutput>;
-  public describeNamespace(
+  describeNamespace(
     args: DescribeNamespaceCommandInput,
     cb: (err: any, data?: DescribeNamespaceCommandOutput) => void
   ): void;
-  public describeNamespace(
+  describeNamespace(
     args: DescribeNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeNamespaceCommandOutput) => void
   ): void;
-  public describeNamespace(
-    args: DescribeNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeNamespaceCommandOutput) => void
-  ): Promise<DescribeNamespaceCommandOutput> | void {
-    const command = new DescribeNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a template's metadata.</p>
+   * @see {@link DescribeOAuthClientApplicationCommand}
    */
-  public describeTemplate(
+  describeOAuthClientApplication(
+    args: DescribeOAuthClientApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeOAuthClientApplicationCommandOutput>;
+  describeOAuthClientApplication(
+    args: DescribeOAuthClientApplicationCommandInput,
+    cb: (err: any, data?: DescribeOAuthClientApplicationCommandOutput) => void
+  ): void;
+  describeOAuthClientApplication(
+    args: DescribeOAuthClientApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeOAuthClientApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQPersonalizationConfigurationCommand}
+   */
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeQPersonalizationConfigurationCommandOutput>;
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    cb: (err: any, data?: DescribeQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+  describeQPersonalizationConfiguration(
+    args: DescribeQPersonalizationConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQuickSightQSearchConfigurationCommand}
+   */
+  describeQuickSightQSearchConfiguration(
+    args: DescribeQuickSightQSearchConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeQuickSightQSearchConfigurationCommandOutput>;
+  describeQuickSightQSearchConfiguration(
+    args: DescribeQuickSightQSearchConfigurationCommandInput,
+    cb: (err: any, data?: DescribeQuickSightQSearchConfigurationCommandOutput) => void
+  ): void;
+  describeQuickSightQSearchConfiguration(
+    args: DescribeQuickSightQSearchConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeQuickSightQSearchConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRefreshScheduleCommand}
+   */
+  describeRefreshSchedule(
+    args: DescribeRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeRefreshScheduleCommandOutput>;
+  describeRefreshSchedule(
+    args: DescribeRefreshScheduleCommandInput,
+    cb: (err: any, data?: DescribeRefreshScheduleCommandOutput) => void
+  ): void;
+  describeRefreshSchedule(
+    args: DescribeRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourcePermissionsCommand}
+   */
+  describeResourcePermissions(
+    args: DescribeResourcePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeResourcePermissionsCommandOutput>;
+  describeResourcePermissions(
+    args: DescribeResourcePermissionsCommandInput,
+    cb: (err: any, data?: DescribeResourcePermissionsCommandOutput) => void
+  ): void;
+  describeResourcePermissions(
+    args: DescribeResourcePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeResourcePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRoleCustomPermissionCommand}
+   */
+  describeRoleCustomPermission(
+    args: DescribeRoleCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeRoleCustomPermissionCommandOutput>;
+  describeRoleCustomPermission(
+    args: DescribeRoleCustomPermissionCommandInput,
+    cb: (err: any, data?: DescribeRoleCustomPermissionCommandOutput) => void
+  ): void;
+  describeRoleCustomPermission(
+    args: DescribeRoleCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeRoleCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSelfUpgradeConfigurationCommand}
+   */
+  describeSelfUpgradeConfiguration(
+    args: DescribeSelfUpgradeConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeSelfUpgradeConfigurationCommandOutput>;
+  describeSelfUpgradeConfiguration(
+    args: DescribeSelfUpgradeConfigurationCommandInput,
+    cb: (err: any, data?: DescribeSelfUpgradeConfigurationCommandOutput) => void
+  ): void;
+  describeSelfUpgradeConfiguration(
+    args: DescribeSelfUpgradeConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeSelfUpgradeConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSpaceCommand}
+   */
+  describeSpace(
+    args: DescribeSpaceCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeSpaceCommandOutput>;
+  describeSpace(
+    args: DescribeSpaceCommandInput,
+    cb: (err: any, data?: DescribeSpaceCommandOutput) => void
+  ): void;
+  describeSpace(
+    args: DescribeSpaceCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSpacePermissionsCommand}
+   */
+  describeSpacePermissions(
+    args: DescribeSpacePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeSpacePermissionsCommandOutput>;
+  describeSpacePermissions(
+    args: DescribeSpacePermissionsCommandInput,
+    cb: (err: any, data?: DescribeSpacePermissionsCommandOutput) => void
+  ): void;
+  describeSpacePermissions(
+    args: DescribeSpacePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeSpacePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTemplateCommand}
+   */
+  describeTemplate(
     args: DescribeTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeTemplateCommandOutput>;
-  public describeTemplate(
+  describeTemplate(
     args: DescribeTemplateCommandInput,
     cb: (err: any, data?: DescribeTemplateCommandOutput) => void
   ): void;
-  public describeTemplate(
+  describeTemplate(
     args: DescribeTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeTemplateCommandOutput) => void
   ): void;
-  public describeTemplate(
-    args: DescribeTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTemplateCommandOutput) => void
-  ): Promise<DescribeTemplateCommandOutput> | void {
-    const command = new DescribeTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the template alias for a template.</p>
+   * @see {@link DescribeTemplateAliasCommand}
    */
-  public describeTemplateAlias(
+  describeTemplateAlias(
     args: DescribeTemplateAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeTemplateAliasCommandOutput>;
-  public describeTemplateAlias(
+  describeTemplateAlias(
     args: DescribeTemplateAliasCommandInput,
     cb: (err: any, data?: DescribeTemplateAliasCommandOutput) => void
   ): void;
-  public describeTemplateAlias(
+  describeTemplateAlias(
     args: DescribeTemplateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeTemplateAliasCommandOutput) => void
   ): void;
-  public describeTemplateAlias(
-    args: DescribeTemplateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTemplateAliasCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTemplateAliasCommandOutput) => void
-  ): Promise<DescribeTemplateAliasCommandOutput> | void {
-    const command = new DescribeTemplateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes read and write permissions on a template.</p>
+   * @see {@link DescribeTemplateDefinitionCommand}
    */
-  public describeTemplatePermissions(
+  describeTemplateDefinition(
+    args: DescribeTemplateDefinitionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTemplateDefinitionCommandOutput>;
+  describeTemplateDefinition(
+    args: DescribeTemplateDefinitionCommandInput,
+    cb: (err: any, data?: DescribeTemplateDefinitionCommandOutput) => void
+  ): void;
+  describeTemplateDefinition(
+    args: DescribeTemplateDefinitionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTemplateDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTemplatePermissionsCommand}
+   */
+  describeTemplatePermissions(
     args: DescribeTemplatePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeTemplatePermissionsCommandOutput>;
-  public describeTemplatePermissions(
+  describeTemplatePermissions(
     args: DescribeTemplatePermissionsCommandInput,
     cb: (err: any, data?: DescribeTemplatePermissionsCommandOutput) => void
   ): void;
-  public describeTemplatePermissions(
+  describeTemplatePermissions(
     args: DescribeTemplatePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeTemplatePermissionsCommandOutput) => void
   ): void;
-  public describeTemplatePermissions(
-    args: DescribeTemplatePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTemplatePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTemplatePermissionsCommandOutput) => void
-  ): Promise<DescribeTemplatePermissionsCommandOutput> | void {
-    const command = new DescribeTemplatePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a theme.</p>
+   * @see {@link DescribeThemeCommand}
    */
-  public describeTheme(
+  describeTheme(
     args: DescribeThemeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeThemeCommandOutput>;
-  public describeTheme(
+  describeTheme(
     args: DescribeThemeCommandInput,
     cb: (err: any, data?: DescribeThemeCommandOutput) => void
   ): void;
-  public describeTheme(
+  describeTheme(
     args: DescribeThemeCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeThemeCommandOutput) => void
   ): void;
-  public describeTheme(
-    args: DescribeThemeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeThemeCommandOutput) => void),
-    cb?: (err: any, data?: DescribeThemeCommandOutput) => void
-  ): Promise<DescribeThemeCommandOutput> | void {
-    const command = new DescribeThemeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the alias for a theme.</p>
+   * @see {@link DescribeThemeAliasCommand}
    */
-  public describeThemeAlias(
+  describeThemeAlias(
     args: DescribeThemeAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeThemeAliasCommandOutput>;
-  public describeThemeAlias(
+  describeThemeAlias(
     args: DescribeThemeAliasCommandInput,
     cb: (err: any, data?: DescribeThemeAliasCommandOutput) => void
   ): void;
-  public describeThemeAlias(
+  describeThemeAlias(
     args: DescribeThemeAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeThemeAliasCommandOutput) => void
   ): void;
-  public describeThemeAlias(
-    args: DescribeThemeAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeThemeAliasCommandOutput) => void),
-    cb?: (err: any, data?: DescribeThemeAliasCommandOutput) => void
-  ): Promise<DescribeThemeAliasCommandOutput> | void {
-    const command = new DescribeThemeAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the read and write permissions for a theme.</p>
+   * @see {@link DescribeThemePermissionsCommand}
    */
-  public describeThemePermissions(
+  describeThemePermissions(
     args: DescribeThemePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeThemePermissionsCommandOutput>;
-  public describeThemePermissions(
+  describeThemePermissions(
     args: DescribeThemePermissionsCommandInput,
     cb: (err: any, data?: DescribeThemePermissionsCommandOutput) => void
   ): void;
-  public describeThemePermissions(
+  describeThemePermissions(
     args: DescribeThemePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: DescribeThemePermissionsCommandOutput) => void
   ): void;
-  public describeThemePermissions(
-    args: DescribeThemePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeThemePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeThemePermissionsCommandOutput) => void
-  ): Promise<DescribeThemePermissionsCommandOutput> | void {
-    const command = new DescribeThemePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a user, given the user name. </p>
+   * @see {@link DescribeTopicCommand}
    */
-  public describeUser(
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicCommandOutput>;
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    cb: (err: any, data?: DescribeTopicCommandOutput) => void
+  ): void;
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicPermissionsCommand}
+   */
+  describeTopicPermissions(
+    args: DescribeTopicPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicPermissionsCommandOutput>;
+  describeTopicPermissions(
+    args: DescribeTopicPermissionsCommandInput,
+    cb: (err: any, data?: DescribeTopicPermissionsCommandOutput) => void
+  ): void;
+  describeTopicPermissions(
+    args: DescribeTopicPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicPermissionsV2Command}
+   */
+  describeTopicPermissionsV2(
+    args: DescribeTopicPermissionsV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicPermissionsV2CommandOutput>;
+  describeTopicPermissionsV2(
+    args: DescribeTopicPermissionsV2CommandInput,
+    cb: (err: any, data?: DescribeTopicPermissionsV2CommandOutput) => void
+  ): void;
+  describeTopicPermissionsV2(
+    args: DescribeTopicPermissionsV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicPermissionsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicRefreshCommand}
+   */
+  describeTopicRefresh(
+    args: DescribeTopicRefreshCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicRefreshCommandOutput>;
+  describeTopicRefresh(
+    args: DescribeTopicRefreshCommandInput,
+    cb: (err: any, data?: DescribeTopicRefreshCommandOutput) => void
+  ): void;
+  describeTopicRefresh(
+    args: DescribeTopicRefreshCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicRefreshCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicRefreshScheduleCommand}
+   */
+  describeTopicRefreshSchedule(
+    args: DescribeTopicRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicRefreshScheduleCommandOutput>;
+  describeTopicRefreshSchedule(
+    args: DescribeTopicRefreshScheduleCommandInput,
+    cb: (err: any, data?: DescribeTopicRefreshScheduleCommandOutput) => void
+  ): void;
+  describeTopicRefreshSchedule(
+    args: DescribeTopicRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicV2Command}
+   */
+  describeTopicV2(
+    args: DescribeTopicV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeTopicV2CommandOutput>;
+  describeTopicV2(
+    args: DescribeTopicV2CommandInput,
+    cb: (err: any, data?: DescribeTopicV2CommandOutput) => void
+  ): void;
+  describeTopicV2(
+    args: DescribeTopicV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeTopicV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeUserCommand}
+   */
+  describeUser(
     args: DescribeUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<DescribeUserCommandOutput>;
-  public describeUser(args: DescribeUserCommandInput, cb: (err: any, data?: DescribeUserCommandOutput) => void): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeUserCommandOutput) => void
   ): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserCommandOutput) => void
-  ): Promise<DescribeUserCommandOutput> | void {
-    const command = new DescribeUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>
-   *         <p>The following rules apply to the generated URL:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>
-   *             </li>
-   *             <li>
-   *                 <p>The URL validity period should not be confused with the actual session lifetime
-   *         that can be customized using the <code>
-   *                      <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes">SessionLifetimeInMinutes</a>
-   *                   </code> parameter.</p>
-   *                 <p>The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).</p>
-   *             </li>
-   *             <li>
-   *                 <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>
-   *             </li>
-   *          </ul>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html">Embedded Analytics</a> in the <i>Amazon QuickSight User
-   *             Guide</i>.</p>
-   *         <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon QuickSight Developer Portal</a>.</p>
+   * @see {@link DescribeVPCConnectionCommand}
    */
-  public generateEmbedUrlForAnonymousUser(
+  describeVPCConnection(
+    args: DescribeVPCConnectionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<DescribeVPCConnectionCommandOutput>;
+  describeVPCConnection(
+    args: DescribeVPCConnectionCommandInput,
+    cb: (err: any, data?: DescribeVPCConnectionCommandOutput) => void
+  ): void;
+  describeVPCConnection(
+    args: DescribeVPCConnectionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: DescribeVPCConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateEmbedUrlForAnonymousUserCommand}
+   */
+  generateEmbedUrlForAnonymousUser(
     args: GenerateEmbedUrlForAnonymousUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<GenerateEmbedUrlForAnonymousUserCommandOutput>;
-  public generateEmbedUrlForAnonymousUser(
+  generateEmbedUrlForAnonymousUser(
     args: GenerateEmbedUrlForAnonymousUserCommandInput,
     cb: (err: any, data?: GenerateEmbedUrlForAnonymousUserCommandOutput) => void
   ): void;
-  public generateEmbedUrlForAnonymousUser(
+  generateEmbedUrlForAnonymousUser(
     args: GenerateEmbedUrlForAnonymousUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: GenerateEmbedUrlForAnonymousUserCommandOutput) => void
   ): void;
-  public generateEmbedUrlForAnonymousUser(
-    args: GenerateEmbedUrlForAnonymousUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GenerateEmbedUrlForAnonymousUserCommandOutput) => void),
-    cb?: (err: any, data?: GenerateEmbedUrlForAnonymousUserCommandOutput) => void
-  ): Promise<GenerateEmbedUrlForAnonymousUserCommandOutput> | void {
-    const command = new GenerateEmbedUrlForAnonymousUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>
-   *         <p>The following rules apply to the generated URL:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>
-   *             </li>
-   *             <li>
-   *                 <p>The URL validity period should not be confused with the actual session lifetime
-   *         that can be customized using the <code>
-   *                      <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes">SessionLifetimeInMinutes</a>
-   *                   </code> parameter.</p>
-   *                 <p>The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).</p>
-   *             </li>
-   *             <li>
-   *                 <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>
-   *             </li>
-   *          </ul>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html">Embedded Analytics</a> in the <i>Amazon QuickSight User
-   *             Guide</i>.</p>
-   *             <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon QuickSight Developer Portal</a>.</p>
+   * @see {@link GenerateEmbedUrlForRegisteredUserCommand}
    */
-  public generateEmbedUrlForRegisteredUser(
+  generateEmbedUrlForRegisteredUser(
     args: GenerateEmbedUrlForRegisteredUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<GenerateEmbedUrlForRegisteredUserCommandOutput>;
-  public generateEmbedUrlForRegisteredUser(
+  generateEmbedUrlForRegisteredUser(
     args: GenerateEmbedUrlForRegisteredUserCommandInput,
     cb: (err: any, data?: GenerateEmbedUrlForRegisteredUserCommandOutput) => void
   ): void;
-  public generateEmbedUrlForRegisteredUser(
+  generateEmbedUrlForRegisteredUser(
     args: GenerateEmbedUrlForRegisteredUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: GenerateEmbedUrlForRegisteredUserCommandOutput) => void
   ): void;
-  public generateEmbedUrlForRegisteredUser(
-    args: GenerateEmbedUrlForRegisteredUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GenerateEmbedUrlForRegisteredUserCommandOutput) => void),
-    cb?: (err: any, data?: GenerateEmbedUrlForRegisteredUserCommandOutput) => void
-  ): Promise<GenerateEmbedUrlForRegisteredUserCommandOutput> | void {
-    const command = new GenerateEmbedUrlForRegisteredUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Generates a session URL and authorization code that you can use to embed an Amazon
-   *             Amazon QuickSight read-only dashboard in your web server code. Before you use this command,
-   *             make sure that you have configured the dashboards and permissions. </p>
-   *         <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not
-   *             from the user's browser. The following rules apply to the combination of URL and
-   *             authorization code:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>They must be used together.</p>
-   *             </li>
-   *             <li>
-   *                 <p>They can be used one time only.</p>
-   *             </li>
-   *             <li>
-   *                 <p>They are valid for 5 minutes after you run this command.</p>
-   *             </li>
-   *             <li>
-   *                 <p>The resulting user session is valid for 10 hours.</p>
-   *             </li>
-   *          </ul>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html">Embedding Analytics Using GetDashboardEmbedUrl</a> in the <i>Amazon QuickSight User
-   *             Guide</i>.</p>
-   *             <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon QuickSight Developer Portal</a>.</p>
+   * @see {@link GenerateEmbedUrlForRegisteredUserWithIdentityCommand}
    */
-  public getDashboardEmbedUrl(
+  generateEmbedUrlForRegisteredUserWithIdentity(
+    args: GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput>;
+  generateEmbedUrlForRegisteredUserWithIdentity(
+    args: GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput,
+    cb: (err: any, data?: GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput) => void
+  ): void;
+  generateEmbedUrlForRegisteredUserWithIdentity(
+    args: GenerateEmbedUrlForRegisteredUserWithIdentityCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: GenerateEmbedUrlForRegisteredUserWithIdentityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDashboardEmbedUrlCommand}
+   */
+  getDashboardEmbedUrl(
     args: GetDashboardEmbedUrlCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<GetDashboardEmbedUrlCommandOutput>;
-  public getDashboardEmbedUrl(
+  getDashboardEmbedUrl(
     args: GetDashboardEmbedUrlCommandInput,
     cb: (err: any, data?: GetDashboardEmbedUrlCommandOutput) => void
   ): void;
-  public getDashboardEmbedUrl(
+  getDashboardEmbedUrl(
     args: GetDashboardEmbedUrlCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: GetDashboardEmbedUrlCommandOutput) => void
   ): void;
-  public getDashboardEmbedUrl(
-    args: GetDashboardEmbedUrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDashboardEmbedUrlCommandOutput) => void),
-    cb?: (err: any, data?: GetDashboardEmbedUrlCommandOutput) => void
-  ): Promise<GetDashboardEmbedUrlCommandOutput> | void {
-    const command = new GetDashboardEmbedUrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Generates a session URL and authorization code that you can use to embed the Amazon
-   *             Amazon QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where
-   *             you want to provide an authoring portal that allows users to create data sources,
-   *             datasets, analyses, and dashboards. The users who access an embedded Amazon QuickSight console
-   *             need belong to the author or admin security cohort. If you want to restrict permissions
-   *             to some of these features, add a custom permissions profile to the user with the
-   *             <code>
-   *                <a>UpdateUser</a>
-   *             </code> API operation. Use <code>
-   *                <a>RegisterUser</a>
-   *             </code> API operation to add a new user with a custom permission profile attached. For more
-   *             information, see the following sections in the <i>Amazon QuickSight User
-   *             Guide</i>:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>
-   *                   <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html">Embedding Analytics</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the Amazon QuickSight Console</a>
-   *                </p>
-   *             </li>
-   *          </ul>
+   * @see {@link GetFlowMetadataCommand}
    */
-  public getSessionEmbedUrl(
+  getFlowMetadata(
+    args: GetFlowMetadataCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<GetFlowMetadataCommandOutput>;
+  getFlowMetadata(
+    args: GetFlowMetadataCommandInput,
+    cb: (err: any, data?: GetFlowMetadataCommandOutput) => void
+  ): void;
+  getFlowMetadata(
+    args: GetFlowMetadataCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: GetFlowMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFlowPermissionsCommand}
+   */
+  getFlowPermissions(
+    args: GetFlowPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<GetFlowPermissionsCommandOutput>;
+  getFlowPermissions(
+    args: GetFlowPermissionsCommandInput,
+    cb: (err: any, data?: GetFlowPermissionsCommandOutput) => void
+  ): void;
+  getFlowPermissions(
+    args: GetFlowPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: GetFlowPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdentityContextCommand}
+   */
+  getIdentityContext(
+    args: GetIdentityContextCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<GetIdentityContextCommandOutput>;
+  getIdentityContext(
+    args: GetIdentityContextCommandInput,
+    cb: (err: any, data?: GetIdentityContextCommandOutput) => void
+  ): void;
+  getIdentityContext(
+    args: GetIdentityContextCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: GetIdentityContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionEmbedUrlCommand}
+   */
+  getSessionEmbedUrl(
     args: GetSessionEmbedUrlCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<GetSessionEmbedUrlCommandOutput>;
-  public getSessionEmbedUrl(
+  getSessionEmbedUrl(
     args: GetSessionEmbedUrlCommandInput,
     cb: (err: any, data?: GetSessionEmbedUrlCommandOutput) => void
   ): void;
-  public getSessionEmbedUrl(
+  getSessionEmbedUrl(
     args: GetSessionEmbedUrlCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: GetSessionEmbedUrlCommandOutput) => void
   ): void;
-  public getSessionEmbedUrl(
-    args: GetSessionEmbedUrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSessionEmbedUrlCommandOutput) => void),
-    cb?: (err: any, data?: GetSessionEmbedUrlCommandOutput) => void
-  ): Promise<GetSessionEmbedUrlCommandOutput> | void {
-    const command = new GetSessionEmbedUrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists Amazon QuickSight analyses that exist in the specified Amazon Web Services account.</p>
+   * @see {@link ListActionConnectorsCommand}
    */
-  public listAnalyses(
+  listActionConnectors(
+    args: ListActionConnectorsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListActionConnectorsCommandOutput>;
+  listActionConnectors(
+    args: ListActionConnectorsCommandInput,
+    cb: (err: any, data?: ListActionConnectorsCommandOutput) => void
+  ): void;
+  listActionConnectors(
+    args: ListActionConnectorsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListActionConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAgentsCommand}
+   */
+  listAgents(
+    args: ListAgentsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListAgentsCommandOutput>;
+  listAgents(
+    args: ListAgentsCommandInput,
+    cb: (err: any, data?: ListAgentsCommandOutput) => void
+  ): void;
+  listAgents(
+    args: ListAgentsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnalysesCommand}
+   */
+  listAnalyses(
     args: ListAnalysesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListAnalysesCommandOutput>;
-  public listAnalyses(args: ListAnalysesCommandInput, cb: (err: any, data?: ListAnalysesCommandOutput) => void): void;
-  public listAnalyses(
+  listAnalyses(
     args: ListAnalysesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListAnalysesCommandOutput) => void
   ): void;
-  public listAnalyses(
+  listAnalyses(
     args: ListAnalysesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAnalysesCommandOutput) => void),
-    cb?: (err: any, data?: ListAnalysesCommandOutput) => void
-  ): Promise<ListAnalysesCommandOutput> | void {
-    const command = new ListAnalysesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListAnalysesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists dashboards in an Amazon Web Services account.</p>
+   * @see {@link ListApprovalPoliciesCommand}
    */
-  public listDashboards(
+  listApprovalPolicies(): Promise<ListApprovalPoliciesCommandOutput>;
+  listApprovalPolicies(
+    args: ListApprovalPoliciesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListApprovalPoliciesCommandOutput>;
+  listApprovalPolicies(
+    args: ListApprovalPoliciesCommandInput,
+    cb: (err: any, data?: ListApprovalPoliciesCommandOutput) => void
+  ): void;
+  listApprovalPolicies(
+    args: ListApprovalPoliciesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListApprovalPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppsCommand}
+   */
+  listApps(
+    args: ListAppsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListAppsCommandOutput>;
+  listApps(
+    args: ListAppsCommandInput,
+    cb: (err: any, data?: ListAppsCommandOutput) => void
+  ): void;
+  listApps(
+    args: ListAppsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListAppsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssetBundleExportJobsCommand}
+   */
+  listAssetBundleExportJobs(
+    args: ListAssetBundleExportJobsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListAssetBundleExportJobsCommandOutput>;
+  listAssetBundleExportJobs(
+    args: ListAssetBundleExportJobsCommandInput,
+    cb: (err: any, data?: ListAssetBundleExportJobsCommandOutput) => void
+  ): void;
+  listAssetBundleExportJobs(
+    args: ListAssetBundleExportJobsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListAssetBundleExportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssetBundleImportJobsCommand}
+   */
+  listAssetBundleImportJobs(
+    args: ListAssetBundleImportJobsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListAssetBundleImportJobsCommandOutput>;
+  listAssetBundleImportJobs(
+    args: ListAssetBundleImportJobsCommandInput,
+    cb: (err: any, data?: ListAssetBundleImportJobsCommandOutput) => void
+  ): void;
+  listAssetBundleImportJobs(
+    args: ListAssetBundleImportJobsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListAssetBundleImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBrandsCommand}
+   */
+  listBrands(
+    args: ListBrandsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListBrandsCommandOutput>;
+  listBrands(
+    args: ListBrandsCommandInput,
+    cb: (err: any, data?: ListBrandsCommandOutput) => void
+  ): void;
+  listBrands(
+    args: ListBrandsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListBrandsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCustomPermissionsCommand}
+   */
+  listCustomPermissions(
+    args: ListCustomPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListCustomPermissionsCommandOutput>;
+  listCustomPermissions(
+    args: ListCustomPermissionsCommandInput,
+    cb: (err: any, data?: ListCustomPermissionsCommandOutput) => void
+  ): void;
+  listCustomPermissions(
+    args: ListCustomPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListCustomPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDashboardsCommand}
+   */
+  listDashboards(
     args: ListDashboardsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListDashboardsCommandOutput>;
-  public listDashboards(
+  listDashboards(
     args: ListDashboardsCommandInput,
     cb: (err: any, data?: ListDashboardsCommandOutput) => void
   ): void;
-  public listDashboards(
+  listDashboards(
     args: ListDashboardsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListDashboardsCommandOutput) => void
   ): void;
-  public listDashboards(
-    args: ListDashboardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDashboardsCommandOutput) => void),
-    cb?: (err: any, data?: ListDashboardsCommandOutput) => void
-  ): Promise<ListDashboardsCommandOutput> | void {
-    const command = new ListDashboardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the versions of the dashboards in the Amazon QuickSight subscription.</p>
+   * @see {@link ListDashboardVersionsCommand}
    */
-  public listDashboardVersions(
+  listDashboardVersions(
     args: ListDashboardVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListDashboardVersionsCommandOutput>;
-  public listDashboardVersions(
+  listDashboardVersions(
     args: ListDashboardVersionsCommandInput,
     cb: (err: any, data?: ListDashboardVersionsCommandOutput) => void
   ): void;
-  public listDashboardVersions(
+  listDashboardVersions(
     args: ListDashboardVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListDashboardVersionsCommandOutput) => void
   ): void;
-  public listDashboardVersions(
-    args: ListDashboardVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDashboardVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListDashboardVersionsCommandOutput) => void
-  ): Promise<ListDashboardVersionsCommandOutput> | void {
-    const command = new ListDashboardVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region.</p>
-   * 		       <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>
+   * @see {@link ListDataSetsCommand}
    */
-  public listDataSets(
+  listDataSets(
     args: ListDataSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListDataSetsCommandOutput>;
-  public listDataSets(args: ListDataSetsCommandInput, cb: (err: any, data?: ListDataSetsCommandOutput) => void): void;
-  public listDataSets(
+  listDataSets(
     args: ListDataSetsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListDataSetsCommandOutput) => void
   ): void;
-  public listDataSets(
+  listDataSets(
     args: ListDataSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListDataSetsCommandOutput) => void
-  ): Promise<ListDataSetsCommandOutput> | void {
-    const command = new ListDataSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListDataSetsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists data sources in current Amazon Web Services Region that belong to this Amazon Web Services account.</p>
+   * @see {@link ListDataSourcesCommand}
    */
-  public listDataSources(
+  listDataSources(
     args: ListDataSourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListDataSourcesCommandOutput>;
-  public listDataSources(
+  listDataSources(
     args: ListDataSourcesCommandInput,
     cb: (err: any, data?: ListDataSourcesCommandOutput) => void
   ): void;
-  public listDataSources(
+  listDataSources(
     args: ListDataSourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListDataSourcesCommandOutput) => void
   ): void;
-  public listDataSources(
-    args: ListDataSourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataSourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListDataSourcesCommandOutput) => void
-  ): Promise<ListDataSourcesCommandOutput> | void {
-    const command = new ListDataSourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all assets (<code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>) in a folder. </p>
+   * @see {@link ListDlpSettingsCommand}
    */
-  public listFolderMembers(
+  listDlpSettings(
+    args: ListDlpSettingsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListDlpSettingsCommandOutput>;
+  listDlpSettings(
+    args: ListDlpSettingsCommandInput,
+    cb: (err: any, data?: ListDlpSettingsCommandOutput) => void
+  ): void;
+  listDlpSettings(
+    args: ListDlpSettingsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListDlpSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowsCommand}
+   */
+  listFlows(
+    args: ListFlowsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListFlowsCommandOutput>;
+  listFlows(
+    args: ListFlowsCommandInput,
+    cb: (err: any, data?: ListFlowsCommandOutput) => void
+  ): void;
+  listFlows(
+    args: ListFlowsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListFlowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFolderMembersCommand}
+   */
+  listFolderMembers(
     args: ListFolderMembersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListFolderMembersCommandOutput>;
-  public listFolderMembers(
+  listFolderMembers(
     args: ListFolderMembersCommandInput,
     cb: (err: any, data?: ListFolderMembersCommandOutput) => void
   ): void;
-  public listFolderMembers(
+  listFolderMembers(
     args: ListFolderMembersCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListFolderMembersCommandOutput) => void
   ): void;
-  public listFolderMembers(
-    args: ListFolderMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFolderMembersCommandOutput) => void),
-    cb?: (err: any, data?: ListFolderMembersCommandOutput) => void
-  ): Promise<ListFolderMembersCommandOutput> | void {
-    const command = new ListFolderMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all folders in an account.</p>
+   * @see {@link ListFoldersCommand}
    */
-  public listFolders(args: ListFoldersCommandInput, options?: __HttpHandlerOptions): Promise<ListFoldersCommandOutput>;
-  public listFolders(args: ListFoldersCommandInput, cb: (err: any, data?: ListFoldersCommandOutput) => void): void;
-  public listFolders(
+  listFolders(
     args: ListFoldersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<ListFoldersCommandOutput>;
+  listFolders(
+    args: ListFoldersCommandInput,
     cb: (err: any, data?: ListFoldersCommandOutput) => void
   ): void;
-  public listFolders(
+  listFolders(
     args: ListFoldersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFoldersCommandOutput) => void),
-    cb?: (err: any, data?: ListFoldersCommandOutput) => void
-  ): Promise<ListFoldersCommandOutput> | void {
-    const command = new ListFoldersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListFoldersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists member users in a group.</p>
+   * @see {@link ListFoldersForResourceCommand}
    */
-  public listGroupMemberships(
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListFoldersForResourceCommandOutput>;
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    cb: (err: any, data?: ListFoldersForResourceCommandOutput) => void
+  ): void;
+  listFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListFoldersForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGroupMembershipsCommand}
+   */
+  listGroupMemberships(
     args: ListGroupMembershipsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListGroupMembershipsCommandOutput>;
-  public listGroupMemberships(
+  listGroupMemberships(
     args: ListGroupMembershipsCommandInput,
     cb: (err: any, data?: ListGroupMembershipsCommandOutput) => void
   ): void;
-  public listGroupMemberships(
+  listGroupMemberships(
     args: ListGroupMembershipsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListGroupMembershipsCommandOutput) => void
   ): void;
-  public listGroupMemberships(
-    args: ListGroupMembershipsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListGroupMembershipsCommandOutput) => void),
-    cb?: (err: any, data?: ListGroupMembershipsCommandOutput) => void
-  ): Promise<ListGroupMembershipsCommandOutput> | void {
-    const command = new ListGroupMembershipsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all user groups in Amazon QuickSight. </p>
+   * @see {@link ListGroupsCommand}
    */
-  public listGroups(args: ListGroupsCommandInput, options?: __HttpHandlerOptions): Promise<ListGroupsCommandOutput>;
-  public listGroups(args: ListGroupsCommandInput, cb: (err: any, data?: ListGroupsCommandOutput) => void): void;
-  public listGroups(
+  listGroups(
     args: ListGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<ListGroupsCommandOutput>;
+  listGroups(
+    args: ListGroupsCommandInput,
     cb: (err: any, data?: ListGroupsCommandOutput) => void
   ): void;
-  public listGroups(
+  listGroups(
     args: ListGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListGroupsCommandOutput) => void
-  ): Promise<ListGroupsCommandOutput> | void {
-    const command = new ListGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListGroupsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists IAMpolicy assignments in the current Amazon QuickSight account.</p>
+   * @see {@link ListIAMPolicyAssignmentsCommand}
    */
-  public listIAMPolicyAssignments(
+  listIAMPolicyAssignments(
     args: ListIAMPolicyAssignmentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListIAMPolicyAssignmentsCommandOutput>;
-  public listIAMPolicyAssignments(
+  listIAMPolicyAssignments(
     args: ListIAMPolicyAssignmentsCommandInput,
     cb: (err: any, data?: ListIAMPolicyAssignmentsCommandOutput) => void
   ): void;
-  public listIAMPolicyAssignments(
+  listIAMPolicyAssignments(
     args: ListIAMPolicyAssignmentsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListIAMPolicyAssignmentsCommandOutput) => void
   ): void;
-  public listIAMPolicyAssignments(
-    args: ListIAMPolicyAssignmentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIAMPolicyAssignmentsCommandOutput) => void),
-    cb?: (err: any, data?: ListIAMPolicyAssignmentsCommandOutput) => void
-  ): Promise<ListIAMPolicyAssignmentsCommandOutput> | void {
-    const command = new ListIAMPolicyAssignmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the IAMpolicy assignments, including the Amazon Resource Names (ARNs) for the IAM
-   * 			policies assigned to the specified user and group or groups that the user belongs
-   * 			to.</p>
+   * @see {@link ListIAMPolicyAssignmentsForUserCommand}
    */
-  public listIAMPolicyAssignmentsForUser(
+  listIAMPolicyAssignmentsForUser(
     args: ListIAMPolicyAssignmentsForUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListIAMPolicyAssignmentsForUserCommandOutput>;
-  public listIAMPolicyAssignmentsForUser(
+  listIAMPolicyAssignmentsForUser(
     args: ListIAMPolicyAssignmentsForUserCommandInput,
     cb: (err: any, data?: ListIAMPolicyAssignmentsForUserCommandOutput) => void
   ): void;
-  public listIAMPolicyAssignmentsForUser(
+  listIAMPolicyAssignmentsForUser(
     args: ListIAMPolicyAssignmentsForUserCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListIAMPolicyAssignmentsForUserCommandOutput) => void
   ): void;
-  public listIAMPolicyAssignmentsForUser(
-    args: ListIAMPolicyAssignmentsForUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIAMPolicyAssignmentsForUserCommandOutput) => void),
-    cb?: (err: any, data?: ListIAMPolicyAssignmentsForUserCommandOutput) => void
-  ): Promise<ListIAMPolicyAssignmentsForUserCommandOutput> | void {
-    const command = new ListIAMPolicyAssignmentsForUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the history of SPICE ingestions for a dataset.</p>
+   * @see {@link ListIdentityPropagationConfigsCommand}
    */
-  public listIngestions(
+  listIdentityPropagationConfigs(
+    args: ListIdentityPropagationConfigsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListIdentityPropagationConfigsCommandOutput>;
+  listIdentityPropagationConfigs(
+    args: ListIdentityPropagationConfigsCommandInput,
+    cb: (err: any, data?: ListIdentityPropagationConfigsCommandOutput) => void
+  ): void;
+  listIdentityPropagationConfigs(
+    args: ListIdentityPropagationConfigsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListIdentityPropagationConfigsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngestionsCommand}
+   */
+  listIngestions(
     args: ListIngestionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListIngestionsCommandOutput>;
-  public listIngestions(
+  listIngestions(
     args: ListIngestionsCommandInput,
     cb: (err: any, data?: ListIngestionsCommandOutput) => void
   ): void;
-  public listIngestions(
+  listIngestions(
     args: ListIngestionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListIngestionsCommandOutput) => void
   ): void;
-  public listIngestions(
-    args: ListIngestionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIngestionsCommandOutput) => void),
-    cb?: (err: any, data?: ListIngestionsCommandOutput) => void
-  ): Promise<ListIngestionsCommandOutput> | void {
-    const command = new ListIngestionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the namespaces for the specified Amazon Web Services account.</p>
+   * @see {@link ListKnowledgeBasesCommand}
    */
-  public listNamespaces(
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+  listKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLimitsProfilesCommand}
+   */
+  listLimitsProfiles(
+    args: ListLimitsProfilesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListLimitsProfilesCommandOutput>;
+  listLimitsProfiles(
+    args: ListLimitsProfilesCommandInput,
+    cb: (err: any, data?: ListLimitsProfilesCommandOutput) => void
+  ): void;
+  listLimitsProfiles(
+    args: ListLimitsProfilesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListLimitsProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   */
+  listNamespaces(
     args: ListNamespacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListNamespacesCommandOutput>;
-  public listNamespaces(
+  listNamespaces(
     args: ListNamespacesCommandInput,
     cb: (err: any, data?: ListNamespacesCommandOutput) => void
   ): void;
-  public listNamespaces(
+  listNamespaces(
     args: ListNamespacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListNamespacesCommandOutput) => void
   ): void;
-  public listNamespaces(
-    args: ListNamespacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNamespacesCommandOutput) => void),
-    cb?: (err: any, data?: ListNamespacesCommandOutput) => void
-  ): Promise<ListNamespacesCommandOutput> | void {
-    const command = new ListNamespacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags assigned to a resource.</p>
+   * @see {@link ListOAuthClientApplicationsCommand}
    */
-  public listTagsForResource(
+  listOAuthClientApplications(
+    args: ListOAuthClientApplicationsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListOAuthClientApplicationsCommandOutput>;
+  listOAuthClientApplications(
+    args: ListOAuthClientApplicationsCommandInput,
+    cb: (err: any, data?: ListOAuthClientApplicationsCommandOutput) => void
+  ): void;
+  listOAuthClientApplications(
+    args: ListOAuthClientApplicationsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListOAuthClientApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRefreshSchedulesCommand}
+   */
+  listRefreshSchedules(
+    args: ListRefreshSchedulesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListRefreshSchedulesCommandOutput>;
+  listRefreshSchedules(
+    args: ListRefreshSchedulesCommandInput,
+    cb: (err: any, data?: ListRefreshSchedulesCommandOutput) => void
+  ): void;
+  listRefreshSchedules(
+    args: ListRefreshSchedulesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListRefreshSchedulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoleMembershipsCommand}
+   */
+  listRoleMemberships(
+    args: ListRoleMembershipsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListRoleMembershipsCommandOutput>;
+  listRoleMemberships(
+    args: ListRoleMembershipsCommandInput,
+    cb: (err: any, data?: ListRoleMembershipsCommandOutput) => void
+  ): void;
+  listRoleMemberships(
+    args: ListRoleMembershipsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListRoleMembershipsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSelfUpgradesCommand}
+   */
+  listSelfUpgrades(
+    args: ListSelfUpgradesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListSelfUpgradesCommandOutput>;
+  listSelfUpgrades(
+    args: ListSelfUpgradesCommandInput,
+    cb: (err: any, data?: ListSelfUpgradesCommandOutput) => void
+  ): void;
+  listSelfUpgrades(
+    args: ListSelfUpgradesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListSelfUpgradesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSpaceResourcesCommand}
+   */
+  listSpaceResources(
+    args: ListSpaceResourcesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListSpaceResourcesCommandOutput>;
+  listSpaceResources(
+    args: ListSpaceResourcesCommandInput,
+    cb: (err: any, data?: ListSpaceResourcesCommandOutput) => void
+  ): void;
+  listSpaceResources(
+    args: ListSpaceResourcesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListSpaceResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSpacesCommand}
+   */
+  listSpaces(
+    args: ListSpacesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListSpacesCommandOutput>;
+  listSpaces(
+    args: ListSpacesCommandInput,
+    cb: (err: any, data?: ListSpacesCommandOutput) => void
+  ): void;
+  listSpaces(
+    args: ListSpacesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListSpacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the aliases of a template.</p>
+   * @see {@link ListTemplateAliasesCommand}
    */
-  public listTemplateAliases(
+  listTemplateAliases(
     args: ListTemplateAliasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListTemplateAliasesCommandOutput>;
-  public listTemplateAliases(
+  listTemplateAliases(
     args: ListTemplateAliasesCommandInput,
     cb: (err: any, data?: ListTemplateAliasesCommandOutput) => void
   ): void;
-  public listTemplateAliases(
+  listTemplateAliases(
     args: ListTemplateAliasesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListTemplateAliasesCommandOutput) => void
   ): void;
-  public listTemplateAliases(
-    args: ListTemplateAliasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTemplateAliasesCommandOutput) => void),
-    cb?: (err: any, data?: ListTemplateAliasesCommandOutput) => void
-  ): Promise<ListTemplateAliasesCommandOutput> | void {
-    const command = new ListTemplateAliasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the templates in the current Amazon QuickSight account.</p>
+   * @see {@link ListTemplatesCommand}
    */
-  public listTemplates(
+  listTemplates(
     args: ListTemplatesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListTemplatesCommandOutput>;
-  public listTemplates(
+  listTemplates(
     args: ListTemplatesCommandInput,
     cb: (err: any, data?: ListTemplatesCommandOutput) => void
   ): void;
-  public listTemplates(
+  listTemplates(
     args: ListTemplatesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListTemplatesCommandOutput) => void
   ): void;
-  public listTemplates(
-    args: ListTemplatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: ListTemplatesCommandOutput) => void
-  ): Promise<ListTemplatesCommandOutput> | void {
-    const command = new ListTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the versions of the templates in the current Amazon QuickSight account.</p>
+   * @see {@link ListTemplateVersionsCommand}
    */
-  public listTemplateVersions(
+  listTemplateVersions(
     args: ListTemplateVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListTemplateVersionsCommandOutput>;
-  public listTemplateVersions(
+  listTemplateVersions(
     args: ListTemplateVersionsCommandInput,
     cb: (err: any, data?: ListTemplateVersionsCommandOutput) => void
   ): void;
-  public listTemplateVersions(
+  listTemplateVersions(
     args: ListTemplateVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListTemplateVersionsCommandOutput) => void
   ): void;
-  public listTemplateVersions(
-    args: ListTemplateVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTemplateVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListTemplateVersionsCommandOutput) => void
-  ): Promise<ListTemplateVersionsCommandOutput> | void {
-    const command = new ListTemplateVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the aliases of a theme.</p>
+   * @see {@link ListThemeAliasesCommand}
    */
-  public listThemeAliases(
+  listThemeAliases(
     args: ListThemeAliasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListThemeAliasesCommandOutput>;
-  public listThemeAliases(
+  listThemeAliases(
     args: ListThemeAliasesCommandInput,
     cb: (err: any, data?: ListThemeAliasesCommandOutput) => void
   ): void;
-  public listThemeAliases(
+  listThemeAliases(
     args: ListThemeAliasesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListThemeAliasesCommandOutput) => void
   ): void;
-  public listThemeAliases(
-    args: ListThemeAliasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListThemeAliasesCommandOutput) => void),
-    cb?: (err: any, data?: ListThemeAliasesCommandOutput) => void
-  ): Promise<ListThemeAliasesCommandOutput> | void {
-    const command = new ListThemeAliasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the themes in the current Amazon Web Services account.</p>
+   * @see {@link ListThemesCommand}
    */
-  public listThemes(args: ListThemesCommandInput, options?: __HttpHandlerOptions): Promise<ListThemesCommandOutput>;
-  public listThemes(args: ListThemesCommandInput, cb: (err: any, data?: ListThemesCommandOutput) => void): void;
-  public listThemes(
+  listThemes(
     args: ListThemesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<ListThemesCommandOutput>;
+  listThemes(
+    args: ListThemesCommandInput,
     cb: (err: any, data?: ListThemesCommandOutput) => void
   ): void;
-  public listThemes(
+  listThemes(
     args: ListThemesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListThemesCommandOutput) => void),
-    cb?: (err: any, data?: ListThemesCommandOutput) => void
-  ): Promise<ListThemesCommandOutput> | void {
-    const command = new ListThemesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListThemesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all the versions of the themes in the current Amazon Web Services account.</p>
+   * @see {@link ListThemeVersionsCommand}
    */
-  public listThemeVersions(
+  listThemeVersions(
     args: ListThemeVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListThemeVersionsCommandOutput>;
-  public listThemeVersions(
+  listThemeVersions(
     args: ListThemeVersionsCommandInput,
     cb: (err: any, data?: ListThemeVersionsCommandOutput) => void
   ): void;
-  public listThemeVersions(
+  listThemeVersions(
     args: ListThemeVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListThemeVersionsCommandOutput) => void
   ): void;
-  public listThemeVersions(
-    args: ListThemeVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListThemeVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListThemeVersionsCommandOutput) => void
-  ): Promise<ListThemeVersionsCommandOutput> | void {
-    const command = new ListThemeVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.</p>
+   * @see {@link ListTopicRefreshSchedulesCommand}
    */
-  public listUserGroups(
+  listTopicRefreshSchedules(
+    args: ListTopicRefreshSchedulesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListTopicRefreshSchedulesCommandOutput>;
+  listTopicRefreshSchedules(
+    args: ListTopicRefreshSchedulesCommandInput,
+    cb: (err: any, data?: ListTopicRefreshSchedulesCommandOutput) => void
+  ): void;
+  listTopicRefreshSchedules(
+    args: ListTopicRefreshSchedulesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListTopicRefreshSchedulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTopicReviewedAnswersCommand}
+   */
+  listTopicReviewedAnswers(
+    args: ListTopicReviewedAnswersCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListTopicReviewedAnswersCommandOutput>;
+  listTopicReviewedAnswers(
+    args: ListTopicReviewedAnswersCommandInput,
+    cb: (err: any, data?: ListTopicReviewedAnswersCommandOutput) => void
+  ): void;
+  listTopicReviewedAnswers(
+    args: ListTopicReviewedAnswersCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListTopicReviewedAnswersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTopicsCommand}
+   */
+  listTopics(
+    args: ListTopicsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListTopicsCommandOutput>;
+  listTopics(
+    args: ListTopicsCommandInput,
+    cb: (err: any, data?: ListTopicsCommandOutput) => void
+  ): void;
+  listTopics(
+    args: ListTopicsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListTopicsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTopicsV2Command}
+   */
+  listTopicsV2(
+    args: ListTopicsV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListTopicsV2CommandOutput>;
+  listTopicsV2(
+    args: ListTopicsV2CommandInput,
+    cb: (err: any, data?: ListTopicsV2CommandOutput) => void
+  ): void;
+  listTopicsV2(
+    args: ListTopicsV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListTopicsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserGroupsCommand}
+   */
+  listUserGroups(
     args: ListUserGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<ListUserGroupsCommandOutput>;
-  public listUserGroups(
+  listUserGroups(
     args: ListUserGroupsCommandInput,
     cb: (err: any, data?: ListUserGroupsCommandOutput) => void
   ): void;
-  public listUserGroups(
+  listUserGroups(
     args: ListUserGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: ListUserGroupsCommandOutput) => void
   ): void;
-  public listUserGroups(
-    args: ListUserGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserGroupsCommandOutput) => void
-  ): Promise<ListUserGroupsCommandOutput> | void {
-    const command = new ListUserGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of all of the Amazon QuickSight users belonging to this account. </p>
+   * @see {@link ListUsersCommand}
    */
-  public listUsers(args: ListUsersCommandInput, options?: __HttpHandlerOptions): Promise<ListUsersCommandOutput>;
-  public listUsers(args: ListUsersCommandInput, cb: (err: any, data?: ListUsersCommandOutput) => void): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<ListUsersCommandOutput>;
+  listUsers(
+    args: ListUsersCommandInput,
     cb: (err: any, data?: ListUsersCommandOutput) => void
   ): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsersCommandOutput) => void),
-    cb?: (err: any, data?: ListUsersCommandOutput) => void
-  ): Promise<ListUsersCommandOutput> | void {
-    const command = new ListUsersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListUsersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity
-   * 			and Access Management (IAM) identity or role specified in the request. </p>
+   * @see {@link ListUsersIndexCapacityCommand}
    */
-  public registerUser(
+  listUsersIndexCapacity(
+    args: ListUsersIndexCapacityCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListUsersIndexCapacityCommandOutput>;
+  listUsersIndexCapacity(
+    args: ListUsersIndexCapacityCommandInput,
+    cb: (err: any, data?: ListUsersIndexCapacityCommandOutput) => void
+  ): void;
+  listUsersIndexCapacity(
+    args: ListUsersIndexCapacityCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListUsersIndexCapacityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVPCConnectionsCommand}
+   */
+  listVPCConnections(
+    args: ListVPCConnectionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<ListVPCConnectionsCommandOutput>;
+  listVPCConnections(
+    args: ListVPCConnectionsCommandInput,
+    cb: (err: any, data?: ListVPCConnectionsCommandOutput) => void
+  ): void;
+  listVPCConnections(
+    args: ListVPCConnectionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: ListVPCConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PredictQAResultsCommand}
+   */
+  predictQAResults(
+    args: PredictQAResultsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<PredictQAResultsCommandOutput>;
+  predictQAResults(
+    args: PredictQAResultsCommandInput,
+    cb: (err: any, data?: PredictQAResultsCommandOutput) => void
+  ): void;
+  predictQAResults(
+    args: PredictQAResultsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: PredictQAResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataSetRefreshPropertiesCommand}
+   */
+  putDataSetRefreshProperties(
+    args: PutDataSetRefreshPropertiesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<PutDataSetRefreshPropertiesCommandOutput>;
+  putDataSetRefreshProperties(
+    args: PutDataSetRefreshPropertiesCommandInput,
+    cb: (err: any, data?: PutDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+  putDataSetRefreshProperties(
+    args: PutDataSetRefreshPropertiesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: PutDataSetRefreshPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterUserCommand}
+   */
+  registerUser(
     args: RegisterUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<RegisterUserCommandOutput>;
-  public registerUser(args: RegisterUserCommandInput, cb: (err: any, data?: RegisterUserCommandOutput) => void): void;
-  public registerUser(
+  registerUser(
     args: RegisterUserCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: RegisterUserCommandOutput) => void
   ): void;
-  public registerUser(
+  registerUser(
     args: RegisterUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterUserCommandOutput) => void),
-    cb?: (err: any, data?: RegisterUserCommandOutput) => void
-  ): Promise<RegisterUserCommandOutput> | void {
-    const command = new RegisterUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: RegisterUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Restores an analysis.</p>
+   * @see {@link RestoreAnalysisCommand}
    */
-  public restoreAnalysis(
+  restoreAnalysis(
     args: RestoreAnalysisCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<RestoreAnalysisCommandOutput>;
-  public restoreAnalysis(
+  restoreAnalysis(
     args: RestoreAnalysisCommandInput,
     cb: (err: any, data?: RestoreAnalysisCommandOutput) => void
   ): void;
-  public restoreAnalysis(
+  restoreAnalysis(
     args: RestoreAnalysisCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: RestoreAnalysisCommandOutput) => void
   ): void;
-  public restoreAnalysis(
-    args: RestoreAnalysisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RestoreAnalysisCommandOutput) => void),
-    cb?: (err: any, data?: RestoreAnalysisCommandOutput) => void
-  ): Promise<RestoreAnalysisCommandOutput> | void {
-    const command = new RestoreAnalysisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for analyses that belong to the user specified in the filter.</p>
-   *         <note>
-   *             <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>
-   *         </note>
+   * @see {@link SearchActionConnectorsCommand}
    */
-  public searchAnalyses(
+  searchActionConnectors(
+    args: SearchActionConnectorsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchActionConnectorsCommandOutput>;
+  searchActionConnectors(
+    args: SearchActionConnectorsCommandInput,
+    cb: (err: any, data?: SearchActionConnectorsCommandOutput) => void
+  ): void;
+  searchActionConnectors(
+    args: SearchActionConnectorsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchActionConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchAgentsCommand}
+   */
+  searchAgents(
+    args: SearchAgentsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchAgentsCommandOutput>;
+  searchAgents(
+    args: SearchAgentsCommandInput,
+    cb: (err: any, data?: SearchAgentsCommandOutput) => void
+  ): void;
+  searchAgents(
+    args: SearchAgentsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchAnalysesCommand}
+   */
+  searchAnalyses(
     args: SearchAnalysesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<SearchAnalysesCommandOutput>;
-  public searchAnalyses(
+  searchAnalyses(
     args: SearchAnalysesCommandInput,
     cb: (err: any, data?: SearchAnalysesCommandOutput) => void
   ): void;
-  public searchAnalyses(
+  searchAnalyses(
     args: SearchAnalysesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: SearchAnalysesCommandOutput) => void
   ): void;
-  public searchAnalyses(
-    args: SearchAnalysesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchAnalysesCommandOutput) => void),
-    cb?: (err: any, data?: SearchAnalysesCommandOutput) => void
-  ): Promise<SearchAnalysesCommandOutput> | void {
-    const command = new SearchAnalysesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for dashboards that belong to a user. </p>
-   *         <note>
-   *             <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>
-   *         </note>
+   * @see {@link SearchAppsCommand}
    */
-  public searchDashboards(
+  searchApps(
+    args: SearchAppsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchAppsCommandOutput>;
+  searchApps(
+    args: SearchAppsCommandInput,
+    cb: (err: any, data?: SearchAppsCommandOutput) => void
+  ): void;
+  searchApps(
+    args: SearchAppsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchAppsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchDashboardsCommand}
+   */
+  searchDashboards(
     args: SearchDashboardsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<SearchDashboardsCommandOutput>;
-  public searchDashboards(
+  searchDashboards(
     args: SearchDashboardsCommandInput,
     cb: (err: any, data?: SearchDashboardsCommandOutput) => void
   ): void;
-  public searchDashboards(
+  searchDashboards(
     args: SearchDashboardsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: SearchDashboardsCommandOutput) => void
   ): void;
-  public searchDashboards(
-    args: SearchDashboardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchDashboardsCommandOutput) => void),
-    cb?: (err: any, data?: SearchDashboardsCommandOutput) => void
-  ): Promise<SearchDashboardsCommandOutput> | void {
-    const command = new SearchDashboardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches the subfolders in a folder.</p>
+   * @see {@link SearchDataSetsCommand}
    */
-  public searchFolders(
+  searchDataSets(
+    args: SearchDataSetsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchDataSetsCommandOutput>;
+  searchDataSets(
+    args: SearchDataSetsCommandInput,
+    cb: (err: any, data?: SearchDataSetsCommandOutput) => void
+  ): void;
+  searchDataSets(
+    args: SearchDataSetsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchDataSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchDataSourcesCommand}
+   */
+  searchDataSources(
+    args: SearchDataSourcesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchDataSourcesCommandOutput>;
+  searchDataSources(
+    args: SearchDataSourcesCommandInput,
+    cb: (err: any, data?: SearchDataSourcesCommandOutput) => void
+  ): void;
+  searchDataSources(
+    args: SearchDataSourcesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchDataSourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchFlowsCommand}
+   */
+  searchFlows(
+    args: SearchFlowsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchFlowsCommandOutput>;
+  searchFlows(
+    args: SearchFlowsCommandInput,
+    cb: (err: any, data?: SearchFlowsCommandOutput) => void
+  ): void;
+  searchFlows(
+    args: SearchFlowsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchFlowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchFoldersCommand}
+   */
+  searchFolders(
     args: SearchFoldersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<SearchFoldersCommandOutput>;
-  public searchFolders(
+  searchFolders(
     args: SearchFoldersCommandInput,
     cb: (err: any, data?: SearchFoldersCommandOutput) => void
   ): void;
-  public searchFolders(
+  searchFolders(
     args: SearchFoldersCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: SearchFoldersCommandOutput) => void
   ): void;
-  public searchFolders(
-    args: SearchFoldersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchFoldersCommandOutput) => void),
-    cb?: (err: any, data?: SearchFoldersCommandOutput) => void
-  ): Promise<SearchFoldersCommandOutput> | void {
-    const command = new SearchFoldersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p>
-   * 		       <p>Tags can help you organize and categorize your resources. You can also use them to
-   * 			scope user permissions, by granting a user permission to access or change only resources
-   * 			with certain tag values. You can use the <code>TagResource</code> operation with a
-   * 			resource that already has tags. If you specify a new tag key for the resource, this tag
-   * 			is appended to the list of tags associated with the resource. If you specify a tag key
-   * 			that is already associated with the resource, the new tag value that you specify
-   * 			replaces the previous value for that tag.</p>
-   * 		       <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data
-   * 			set, data source, dashboard, and template. </p>
-   * 		       <p>Tagging for Amazon QuickSight works in a similar way to tagging for other AWS services, except for
-   * 			the following:</p>
-   * 		       <ul>
-   *             <li>
-   *                <p>You can't use tags to track AWS costs for Amazon QuickSight. This restriction is because Amazon QuickSight
-   * 					costs are based on users and SPICE capacity, which aren't taggable
-   * 					resources.</p>
-   *             </li>
-   *             <li>
-   *                <p>Amazon QuickSight doesn't currently support the Tag Editor for Resource Groups.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link SearchGroupsCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  searchGroups(
+    args: SearchGroupsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchGroupsCommandOutput>;
+  searchGroups(
+    args: SearchGroupsCommandInput,
+    cb: (err: any, data?: SearchGroupsCommandOutput) => void
+  ): void;
+  searchGroups(
+    args: SearchGroupsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchKnowledgeBasesCommand}
+   */
+  searchKnowledgeBases(
+    args: SearchKnowledgeBasesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchKnowledgeBasesCommandOutput>;
+  searchKnowledgeBases(
+    args: SearchKnowledgeBasesCommandInput,
+    cb: (err: any, data?: SearchKnowledgeBasesCommandOutput) => void
+  ): void;
+  searchKnowledgeBases(
+    args: SearchKnowledgeBasesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchKnowledgeBasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchSpacesCommand}
+   */
+  searchSpaces(
+    args: SearchSpacesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchSpacesCommandOutput>;
+  searchSpaces(
+    args: SearchSpacesCommandInput,
+    cb: (err: any, data?: SearchSpacesCommandOutput) => void
+  ): void;
+  searchSpaces(
+    args: SearchSpacesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchSpacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchTopicsCommand}
+   */
+  searchTopics(
+    args: SearchTopicsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchTopicsCommandOutput>;
+  searchTopics(
+    args: SearchTopicsCommandInput,
+    cb: (err: any, data?: SearchTopicsCommandOutput) => void
+  ): void;
+  searchTopics(
+    args: SearchTopicsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchTopicsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchTopicsV2Command}
+   */
+  searchTopicsV2(
+    args: SearchTopicsV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<SearchTopicsV2CommandOutput>;
+  searchTopicsV2(
+    args: SearchTopicsV2CommandInput,
+    cb: (err: any, data?: SearchTopicsV2CommandOutput) => void
+  ): void;
+  searchTopicsV2(
+    args: SearchTopicsV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: SearchTopicsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAssetBundleExportJobCommand}
+   */
+  startAssetBundleExportJob(
+    args: StartAssetBundleExportJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<StartAssetBundleExportJobCommandOutput>;
+  startAssetBundleExportJob(
+    args: StartAssetBundleExportJobCommandInput,
+    cb: (err: any, data?: StartAssetBundleExportJobCommandOutput) => void
+  ): void;
+  startAssetBundleExportJob(
+    args: StartAssetBundleExportJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: StartAssetBundleExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAssetBundleImportJobCommand}
+   */
+  startAssetBundleImportJob(
+    args: StartAssetBundleImportJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<StartAssetBundleImportJobCommandOutput>;
+  startAssetBundleImportJob(
+    args: StartAssetBundleImportJobCommandInput,
+    cb: (err: any, data?: StartAssetBundleImportJobCommandOutput) => void
+  ): void;
+  startAssetBundleImportJob(
+    args: StartAssetBundleImportJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: StartAssetBundleImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAutomationJobCommand}
+   */
+  startAutomationJob(
+    args: StartAutomationJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<StartAutomationJobCommandOutput>;
+  startAutomationJob(
+    args: StartAutomationJobCommandInput,
+    cb: (err: any, data?: StartAutomationJobCommandOutput) => void
+  ): void;
+  startAutomationJob(
+    args: StartAutomationJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: StartAutomationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDashboardSnapshotJobCommand}
+   */
+  startDashboardSnapshotJob(
+    args: StartDashboardSnapshotJobCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<StartDashboardSnapshotJobCommandOutput>;
+  startDashboardSnapshotJob(
+    args: StartDashboardSnapshotJobCommandInput,
+    cb: (err: any, data?: StartDashboardSnapshotJobCommandOutput) => void
+  ): void;
+  startDashboardSnapshotJob(
+    args: StartDashboardSnapshotJobCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: StartDashboardSnapshotJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDashboardSnapshotJobScheduleCommand}
+   */
+  startDashboardSnapshotJobSchedule(
+    args: StartDashboardSnapshotJobScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<StartDashboardSnapshotJobScheduleCommandOutput>;
+  startDashboardSnapshotJobSchedule(
+    args: StartDashboardSnapshotJobScheduleCommandInput,
+    cb: (err: any, data?: StartDashboardSnapshotJobScheduleCommandOutput) => void
+  ): void;
+  startDashboardSnapshotJobSchedule(
+    args: StartDashboardSnapshotJobScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: StartDashboardSnapshotJobScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes a tag or tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, the only
-   *             customization you can use is a theme.</p>
-   *         <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a
-   *             Amazon QuickSight namespace instead. Customizations that apply to a namespace override
-   *             customizations that apply to an Amazon Web Services account. To find out which customizations apply, use
-   *             the <code>DescribeAccountCustomization</code> API operation. </p>
+   * @see {@link UpdateAccountCustomizationCommand}
    */
-  public updateAccountCustomization(
+  updateAccountCustomization(
     args: UpdateAccountCustomizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateAccountCustomizationCommandOutput>;
-  public updateAccountCustomization(
+  updateAccountCustomization(
     args: UpdateAccountCustomizationCommandInput,
     cb: (err: any, data?: UpdateAccountCustomizationCommandOutput) => void
   ): void;
-  public updateAccountCustomization(
+  updateAccountCustomization(
     args: UpdateAccountCustomizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateAccountCustomizationCommandOutput) => void
   ): void;
-  public updateAccountCustomization(
-    args: UpdateAccountCustomizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAccountCustomizationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAccountCustomizationCommandOutput) => void
-  ): Promise<UpdateAccountCustomizationCommandOutput> | void {
-    const command = new UpdateAccountCustomizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the Amazon QuickSight settings in your Amazon Web Services account.</p>
+   * @see {@link UpdateAccountCustomPermissionCommand}
    */
-  public updateAccountSettings(
+  updateAccountCustomPermission(
+    args: UpdateAccountCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateAccountCustomPermissionCommandOutput>;
+  updateAccountCustomPermission(
+    args: UpdateAccountCustomPermissionCommandInput,
+    cb: (err: any, data?: UpdateAccountCustomPermissionCommandOutput) => void
+  ): void;
+  updateAccountCustomPermission(
+    args: UpdateAccountCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateAccountCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAccountSettingsCommand}
+   */
+  updateAccountSettings(
     args: UpdateAccountSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateAccountSettingsCommandOutput>;
-  public updateAccountSettings(
+  updateAccountSettings(
     args: UpdateAccountSettingsCommandInput,
     cb: (err: any, data?: UpdateAccountSettingsCommandOutput) => void
   ): void;
-  public updateAccountSettings(
+  updateAccountSettings(
     args: UpdateAccountSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateAccountSettingsCommandOutput) => void
   ): void;
-  public updateAccountSettings(
-    args: UpdateAccountSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAccountSettingsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAccountSettingsCommandOutput) => void
-  ): Promise<UpdateAccountSettingsCommandOutput> | void {
-    const command = new UpdateAccountSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an analysis in Amazon QuickSight</p>
+   * @see {@link UpdateActionConnectorCommand}
    */
-  public updateAnalysis(
+  updateActionConnector(
+    args: UpdateActionConnectorCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateActionConnectorCommandOutput>;
+  updateActionConnector(
+    args: UpdateActionConnectorCommandInput,
+    cb: (err: any, data?: UpdateActionConnectorCommandOutput) => void
+  ): void;
+  updateActionConnector(
+    args: UpdateActionConnectorCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateActionConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateActionConnectorPermissionsCommand}
+   */
+  updateActionConnectorPermissions(
+    args: UpdateActionConnectorPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateActionConnectorPermissionsCommandOutput>;
+  updateActionConnectorPermissions(
+    args: UpdateActionConnectorPermissionsCommandInput,
+    cb: (err: any, data?: UpdateActionConnectorPermissionsCommandOutput) => void
+  ): void;
+  updateActionConnectorPermissions(
+    args: UpdateActionConnectorPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateActionConnectorPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentCommand}
+   */
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateAgentCommandOutput>;
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    cb: (err: any, data?: UpdateAgentCommandOutput) => void
+  ): void;
+  updateAgent(
+    args: UpdateAgentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAgentPermissionsCommand}
+   */
+  updateAgentPermissions(
+    args: UpdateAgentPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateAgentPermissionsCommandOutput>;
+  updateAgentPermissions(
+    args: UpdateAgentPermissionsCommandInput,
+    cb: (err: any, data?: UpdateAgentPermissionsCommandOutput) => void
+  ): void;
+  updateAgentPermissions(
+    args: UpdateAgentPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateAgentPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAnalysisCommand}
+   */
+  updateAnalysis(
     args: UpdateAnalysisCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateAnalysisCommandOutput>;
-  public updateAnalysis(
+  updateAnalysis(
     args: UpdateAnalysisCommandInput,
     cb: (err: any, data?: UpdateAnalysisCommandOutput) => void
   ): void;
-  public updateAnalysis(
+  updateAnalysis(
     args: UpdateAnalysisCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateAnalysisCommandOutput) => void
   ): void;
-  public updateAnalysis(
-    args: UpdateAnalysisCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAnalysisCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAnalysisCommandOutput) => void
-  ): Promise<UpdateAnalysisCommandOutput> | void {
-    const command = new UpdateAnalysisCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the read and write permissions for an analysis.</p>
+   * @see {@link UpdateAnalysisPermissionsCommand}
    */
-  public updateAnalysisPermissions(
+  updateAnalysisPermissions(
     args: UpdateAnalysisPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateAnalysisPermissionsCommandOutput>;
-  public updateAnalysisPermissions(
+  updateAnalysisPermissions(
     args: UpdateAnalysisPermissionsCommandInput,
     cb: (err: any, data?: UpdateAnalysisPermissionsCommandOutput) => void
   ): void;
-  public updateAnalysisPermissions(
+  updateAnalysisPermissions(
     args: UpdateAnalysisPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateAnalysisPermissionsCommandOutput) => void
   ): void;
-  public updateAnalysisPermissions(
-    args: UpdateAnalysisPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAnalysisPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAnalysisPermissionsCommandOutput) => void
-  ): Promise<UpdateAnalysisPermissionsCommandOutput> | void {
-    const command = new UpdateAnalysisPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a dashboard in an Amazon Web Services account.</p>
-   *         <note>
-   *             <p>Updating a Dashboard creates a new dashboard version but does not immediately publish
-   *                 the new version.  You can update the published version of a dashboard by
-   *                 using the <a>UpdateDashboardPublishedVersion</a> API operation.</p>
-   *         </note>
+   * @see {@link UpdateApplicationWithTokenExchangeGrantCommand}
    */
-  public updateDashboard(
+  updateApplicationWithTokenExchangeGrant(
+    args: UpdateApplicationWithTokenExchangeGrantCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateApplicationWithTokenExchangeGrantCommandOutput>;
+  updateApplicationWithTokenExchangeGrant(
+    args: UpdateApplicationWithTokenExchangeGrantCommandInput,
+    cb: (err: any, data?: UpdateApplicationWithTokenExchangeGrantCommandOutput) => void
+  ): void;
+  updateApplicationWithTokenExchangeGrant(
+    args: UpdateApplicationWithTokenExchangeGrantCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateApplicationWithTokenExchangeGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppPermissionsCommand}
+   */
+  updateAppPermissions(
+    args: UpdateAppPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateAppPermissionsCommandOutput>;
+  updateAppPermissions(
+    args: UpdateAppPermissionsCommandInput,
+    cb: (err: any, data?: UpdateAppPermissionsCommandOutput) => void
+  ): void;
+  updateAppPermissions(
+    args: UpdateAppPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateAppPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApprovalPolicyCommand}
+   */
+  updateApprovalPolicy(
+    args: UpdateApprovalPolicyCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateApprovalPolicyCommandOutput>;
+  updateApprovalPolicy(
+    args: UpdateApprovalPolicyCommandInput,
+    cb: (err: any, data?: UpdateApprovalPolicyCommandOutput) => void
+  ): void;
+  updateApprovalPolicy(
+    args: UpdateApprovalPolicyCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateApprovalPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrandCommand}
+   */
+  updateBrand(
+    args: UpdateBrandCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateBrandCommandOutput>;
+  updateBrand(
+    args: UpdateBrandCommandInput,
+    cb: (err: any, data?: UpdateBrandCommandOutput) => void
+  ): void;
+  updateBrand(
+    args: UpdateBrandCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateBrandCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrandAssignmentCommand}
+   */
+  updateBrandAssignment(
+    args: UpdateBrandAssignmentCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateBrandAssignmentCommandOutput>;
+  updateBrandAssignment(
+    args: UpdateBrandAssignmentCommandInput,
+    cb: (err: any, data?: UpdateBrandAssignmentCommandOutput) => void
+  ): void;
+  updateBrandAssignment(
+    args: UpdateBrandAssignmentCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateBrandAssignmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrandPublishedVersionCommand}
+   */
+  updateBrandPublishedVersion(
+    args: UpdateBrandPublishedVersionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateBrandPublishedVersionCommandOutput>;
+  updateBrandPublishedVersion(
+    args: UpdateBrandPublishedVersionCommandInput,
+    cb: (err: any, data?: UpdateBrandPublishedVersionCommandOutput) => void
+  ): void;
+  updateBrandPublishedVersion(
+    args: UpdateBrandPublishedVersionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateBrandPublishedVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCustomPermissionsCommand}
+   */
+  updateCustomPermissions(
+    args: UpdateCustomPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateCustomPermissionsCommandOutput>;
+  updateCustomPermissions(
+    args: UpdateCustomPermissionsCommandInput,
+    cb: (err: any, data?: UpdateCustomPermissionsCommandOutput) => void
+  ): void;
+  updateCustomPermissions(
+    args: UpdateCustomPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateCustomPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDashboardCommand}
+   */
+  updateDashboard(
     args: UpdateDashboardCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDashboardCommandOutput>;
-  public updateDashboard(
+  updateDashboard(
     args: UpdateDashboardCommandInput,
     cb: (err: any, data?: UpdateDashboardCommandOutput) => void
   ): void;
-  public updateDashboard(
+  updateDashboard(
     args: UpdateDashboardCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDashboardCommandOutput) => void
   ): void;
-  public updateDashboard(
-    args: UpdateDashboardCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDashboardCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDashboardCommandOutput) => void
-  ): Promise<UpdateDashboardCommandOutput> | void {
-    const command = new UpdateDashboardCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates read and write permissions on a dashboard.</p>
+   * @see {@link UpdateDashboardLinksCommand}
    */
-  public updateDashboardPermissions(
+  updateDashboardLinks(
+    args: UpdateDashboardLinksCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateDashboardLinksCommandOutput>;
+  updateDashboardLinks(
+    args: UpdateDashboardLinksCommandInput,
+    cb: (err: any, data?: UpdateDashboardLinksCommandOutput) => void
+  ): void;
+  updateDashboardLinks(
+    args: UpdateDashboardLinksCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateDashboardLinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDashboardPermissionsCommand}
+   */
+  updateDashboardPermissions(
     args: UpdateDashboardPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDashboardPermissionsCommandOutput>;
-  public updateDashboardPermissions(
+  updateDashboardPermissions(
     args: UpdateDashboardPermissionsCommandInput,
     cb: (err: any, data?: UpdateDashboardPermissionsCommandOutput) => void
   ): void;
-  public updateDashboardPermissions(
+  updateDashboardPermissions(
     args: UpdateDashboardPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDashboardPermissionsCommandOutput) => void
   ): void;
-  public updateDashboardPermissions(
-    args: UpdateDashboardPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDashboardPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDashboardPermissionsCommandOutput) => void
-  ): Promise<UpdateDashboardPermissionsCommandOutput> | void {
-    const command = new UpdateDashboardPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the published version of a dashboard.</p>
+   * @see {@link UpdateDashboardPublishedVersionCommand}
    */
-  public updateDashboardPublishedVersion(
+  updateDashboardPublishedVersion(
     args: UpdateDashboardPublishedVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDashboardPublishedVersionCommandOutput>;
-  public updateDashboardPublishedVersion(
+  updateDashboardPublishedVersion(
     args: UpdateDashboardPublishedVersionCommandInput,
     cb: (err: any, data?: UpdateDashboardPublishedVersionCommandOutput) => void
   ): void;
-  public updateDashboardPublishedVersion(
+  updateDashboardPublishedVersion(
     args: UpdateDashboardPublishedVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDashboardPublishedVersionCommandOutput) => void
   ): void;
-  public updateDashboardPublishedVersion(
-    args: UpdateDashboardPublishedVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDashboardPublishedVersionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDashboardPublishedVersionCommandOutput) => void
-  ): Promise<UpdateDashboardPublishedVersionCommandOutput> | void {
-    const command = new UpdateDashboardPublishedVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a dataset.</p>
+   * @see {@link UpdateDashboardsQAConfigurationCommand}
    */
-  public updateDataSet(
+  updateDashboardsQAConfiguration(
+    args: UpdateDashboardsQAConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateDashboardsQAConfigurationCommandOutput>;
+  updateDashboardsQAConfiguration(
+    args: UpdateDashboardsQAConfigurationCommandInput,
+    cb: (err: any, data?: UpdateDashboardsQAConfigurationCommandOutput) => void
+  ): void;
+  updateDashboardsQAConfiguration(
+    args: UpdateDashboardsQAConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateDashboardsQAConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataSetCommand}
+   */
+  updateDataSet(
     args: UpdateDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDataSetCommandOutput>;
-  public updateDataSet(
+  updateDataSet(
     args: UpdateDataSetCommandInput,
     cb: (err: any, data?: UpdateDataSetCommandOutput) => void
   ): void;
-  public updateDataSet(
+  updateDataSet(
     args: UpdateDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDataSetCommandOutput) => void
   ): void;
-  public updateDataSet(
-    args: UpdateDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataSetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataSetCommandOutput) => void
-  ): Promise<UpdateDataSetCommandOutput> | void {
-    const command = new UpdateDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the permissions on a dataset.</p>
-   * 		       <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/data-set-id</code>.</p>
+   * @see {@link UpdateDataSetPermissionsCommand}
    */
-  public updateDataSetPermissions(
+  updateDataSetPermissions(
     args: UpdateDataSetPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDataSetPermissionsCommandOutput>;
-  public updateDataSetPermissions(
+  updateDataSetPermissions(
     args: UpdateDataSetPermissionsCommandInput,
     cb: (err: any, data?: UpdateDataSetPermissionsCommandOutput) => void
   ): void;
-  public updateDataSetPermissions(
+  updateDataSetPermissions(
     args: UpdateDataSetPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDataSetPermissionsCommandOutput) => void
   ): void;
-  public updateDataSetPermissions(
-    args: UpdateDataSetPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataSetPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataSetPermissionsCommandOutput) => void
-  ): Promise<UpdateDataSetPermissionsCommandOutput> | void {
-    const command = new UpdateDataSetPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a data source.</p>
+   * @see {@link UpdateDataSourceCommand}
    */
-  public updateDataSource(
+  updateDataSource(
     args: UpdateDataSourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDataSourceCommandOutput>;
-  public updateDataSource(
+  updateDataSource(
     args: UpdateDataSourceCommandInput,
     cb: (err: any, data?: UpdateDataSourceCommandOutput) => void
   ): void;
-  public updateDataSource(
+  updateDataSource(
     args: UpdateDataSourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDataSourceCommandOutput) => void
   ): void;
-  public updateDataSource(
-    args: UpdateDataSourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataSourceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataSourceCommandOutput) => void
-  ): Promise<UpdateDataSourceCommandOutput> | void {
-    const command = new UpdateDataSourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the permissions to a data source.</p>
+   * @see {@link UpdateDataSourcePermissionsCommand}
    */
-  public updateDataSourcePermissions(
+  updateDataSourcePermissions(
     args: UpdateDataSourcePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateDataSourcePermissionsCommandOutput>;
-  public updateDataSourcePermissions(
+  updateDataSourcePermissions(
     args: UpdateDataSourcePermissionsCommandInput,
     cb: (err: any, data?: UpdateDataSourcePermissionsCommandOutput) => void
   ): void;
-  public updateDataSourcePermissions(
+  updateDataSourcePermissions(
     args: UpdateDataSourcePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateDataSourcePermissionsCommandOutput) => void
   ): void;
-  public updateDataSourcePermissions(
-    args: UpdateDataSourcePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataSourcePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataSourcePermissionsCommandOutput) => void
-  ): Promise<UpdateDataSourcePermissionsCommandOutput> | void {
-    const command = new UpdateDataSourcePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the name of a folder.</p>
+   * @see {@link UpdateDefaultQBusinessApplicationCommand}
    */
-  public updateFolder(
+  updateDefaultQBusinessApplication(
+    args: UpdateDefaultQBusinessApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateDefaultQBusinessApplicationCommandOutput>;
+  updateDefaultQBusinessApplication(
+    args: UpdateDefaultQBusinessApplicationCommandInput,
+    cb: (err: any, data?: UpdateDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+  updateDefaultQBusinessApplication(
+    args: UpdateDefaultQBusinessApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateDefaultQBusinessApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDlpSettingCommand}
+   */
+  updateDlpSetting(
+    args: UpdateDlpSettingCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateDlpSettingCommandOutput>;
+  updateDlpSetting(
+    args: UpdateDlpSettingCommandInput,
+    cb: (err: any, data?: UpdateDlpSettingCommandOutput) => void
+  ): void;
+  updateDlpSetting(
+    args: UpdateDlpSettingCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateDlpSettingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFlowCommand}
+   */
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateFlowCommandOutput>;
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    cb: (err: any, data?: UpdateFlowCommandOutput) => void
+  ): void;
+  updateFlow(
+    args: UpdateFlowCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFlowPermissionsCommand}
+   */
+  updateFlowPermissions(
+    args: UpdateFlowPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateFlowPermissionsCommandOutput>;
+  updateFlowPermissions(
+    args: UpdateFlowPermissionsCommandInput,
+    cb: (err: any, data?: UpdateFlowPermissionsCommandOutput) => void
+  ): void;
+  updateFlowPermissions(
+    args: UpdateFlowPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateFlowPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFolderCommand}
+   */
+  updateFolder(
     args: UpdateFolderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateFolderCommandOutput>;
-  public updateFolder(args: UpdateFolderCommandInput, cb: (err: any, data?: UpdateFolderCommandOutput) => void): void;
-  public updateFolder(
+  updateFolder(
     args: UpdateFolderCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateFolderCommandOutput) => void
   ): void;
-  public updateFolder(
+  updateFolder(
     args: UpdateFolderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFolderCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFolderCommandOutput) => void
-  ): Promise<UpdateFolderCommandOutput> | void {
-    const command = new UpdateFolderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateFolderCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates permissions of a folder.</p>
+   * @see {@link UpdateFolderPermissionsCommand}
    */
-  public updateFolderPermissions(
+  updateFolderPermissions(
     args: UpdateFolderPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateFolderPermissionsCommandOutput>;
-  public updateFolderPermissions(
+  updateFolderPermissions(
     args: UpdateFolderPermissionsCommandInput,
     cb: (err: any, data?: UpdateFolderPermissionsCommandOutput) => void
   ): void;
-  public updateFolderPermissions(
+  updateFolderPermissions(
     args: UpdateFolderPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateFolderPermissionsCommandOutput) => void
   ): void;
-  public updateFolderPermissions(
-    args: UpdateFolderPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFolderPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFolderPermissionsCommandOutput) => void
-  ): Promise<UpdateFolderPermissionsCommandOutput> | void {
-    const command = new UpdateFolderPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes a group description. </p>
+   * @see {@link UpdateGroupCommand}
    */
-  public updateGroup(args: UpdateGroupCommandInput, options?: __HttpHandlerOptions): Promise<UpdateGroupCommandOutput>;
-  public updateGroup(args: UpdateGroupCommandInput, cb: (err: any, data?: UpdateGroupCommandOutput) => void): void;
-  public updateGroup(
+  updateGroup(
     args: UpdateGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateGroupCommandOutput>;
+  updateGroup(
+    args: UpdateGroupCommandInput,
     cb: (err: any, data?: UpdateGroupCommandOutput) => void
   ): void;
-  public updateGroup(
+  updateGroup(
     args: UpdateGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateGroupCommandOutput) => void
-  ): Promise<UpdateGroupCommandOutput> | void {
-    const command = new UpdateGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateGroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates an existing IAMpolicy assignment. This operation updates only the optional
-   * 			parameter or parameters that are specified in the request.
-   * 		    This overwrites all of the users included in <code>Identities</code>.
-   * 		</p>
+   * @see {@link UpdateIAMPolicyAssignmentCommand}
    */
-  public updateIAMPolicyAssignment(
+  updateIAMPolicyAssignment(
     args: UpdateIAMPolicyAssignmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateIAMPolicyAssignmentCommandOutput>;
-  public updateIAMPolicyAssignment(
+  updateIAMPolicyAssignment(
     args: UpdateIAMPolicyAssignmentCommandInput,
     cb: (err: any, data?: UpdateIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public updateIAMPolicyAssignment(
+  updateIAMPolicyAssignment(
     args: UpdateIAMPolicyAssignmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateIAMPolicyAssignmentCommandOutput) => void
   ): void;
-  public updateIAMPolicyAssignment(
-    args: UpdateIAMPolicyAssignmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIAMPolicyAssignmentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIAMPolicyAssignmentCommandOutput) => void
-  ): Promise<UpdateIAMPolicyAssignmentCommandOutput> | void {
-    const command = new UpdateIAMPolicyAssignmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates content and status of IP Rules.</p>
+   * @see {@link UpdateIdentityPropagationConfigCommand}
    */
-  public updateIpRestriction(
+  updateIdentityPropagationConfig(
+    args: UpdateIdentityPropagationConfigCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateIdentityPropagationConfigCommandOutput>;
+  updateIdentityPropagationConfig(
+    args: UpdateIdentityPropagationConfigCommandInput,
+    cb: (err: any, data?: UpdateIdentityPropagationConfigCommandOutput) => void
+  ): void;
+  updateIdentityPropagationConfig(
+    args: UpdateIdentityPropagationConfigCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateIdentityPropagationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIpRestrictionCommand}
+   */
+  updateIpRestriction(
     args: UpdateIpRestrictionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateIpRestrictionCommandOutput>;
-  public updateIpRestriction(
+  updateIpRestriction(
     args: UpdateIpRestrictionCommandInput,
     cb: (err: any, data?: UpdateIpRestrictionCommandOutput) => void
   ): void;
-  public updateIpRestriction(
+  updateIpRestriction(
     args: UpdateIpRestrictionCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateIpRestrictionCommandOutput) => void
   ): void;
-  public updateIpRestriction(
-    args: UpdateIpRestrictionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIpRestrictionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIpRestrictionCommandOutput) => void
-  ): Promise<UpdateIpRestrictionCommandOutput> | void {
-    const command = new UpdateIpRestrictionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a template from an existing Amazon QuickSight analysis or another template.</p>
+   * @see {@link UpdateKeyRegistrationCommand}
    */
-  public updateTemplate(
+  updateKeyRegistration(
+    args: UpdateKeyRegistrationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateKeyRegistrationCommandOutput>;
+  updateKeyRegistration(
+    args: UpdateKeyRegistrationCommandInput,
+    cb: (err: any, data?: UpdateKeyRegistrationCommandOutput) => void
+  ): void;
+  updateKeyRegistration(
+    args: UpdateKeyRegistrationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateKeyRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateKnowledgeBaseCommand}
+   */
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateKnowledgeBaseCommandOutput>;
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    cb: (err: any, data?: UpdateKnowledgeBaseCommandOutput) => void
+  ): void;
+  updateKnowledgeBase(
+    args: UpdateKnowledgeBaseCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateKnowledgeBaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateKnowledgeBasePermissionsCommand}
+   */
+  updateKnowledgeBasePermissions(
+    args: UpdateKnowledgeBasePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateKnowledgeBasePermissionsCommandOutput>;
+  updateKnowledgeBasePermissions(
+    args: UpdateKnowledgeBasePermissionsCommandInput,
+    cb: (err: any, data?: UpdateKnowledgeBasePermissionsCommandOutput) => void
+  ): void;
+  updateKnowledgeBasePermissions(
+    args: UpdateKnowledgeBasePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateKnowledgeBasePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLimitsProfileCommand}
+   */
+  updateLimitsProfile(
+    args: UpdateLimitsProfileCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateLimitsProfileCommandOutput>;
+  updateLimitsProfile(
+    args: UpdateLimitsProfileCommandInput,
+    cb: (err: any, data?: UpdateLimitsProfileCommandOutput) => void
+  ): void;
+  updateLimitsProfile(
+    args: UpdateLimitsProfileCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateLimitsProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateOAuthClientApplicationCommand}
+   */
+  updateOAuthClientApplication(
+    args: UpdateOAuthClientApplicationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateOAuthClientApplicationCommandOutput>;
+  updateOAuthClientApplication(
+    args: UpdateOAuthClientApplicationCommandInput,
+    cb: (err: any, data?: UpdateOAuthClientApplicationCommandOutput) => void
+  ): void;
+  updateOAuthClientApplication(
+    args: UpdateOAuthClientApplicationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateOAuthClientApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePublicSharingSettingsCommand}
+   */
+  updatePublicSharingSettings(
+    args: UpdatePublicSharingSettingsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdatePublicSharingSettingsCommandOutput>;
+  updatePublicSharingSettings(
+    args: UpdatePublicSharingSettingsCommandInput,
+    cb: (err: any, data?: UpdatePublicSharingSettingsCommandOutput) => void
+  ): void;
+  updatePublicSharingSettings(
+    args: UpdatePublicSharingSettingsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdatePublicSharingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQPersonalizationConfigurationCommand}
+   */
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateQPersonalizationConfigurationCommandOutput>;
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+  updateQPersonalizationConfiguration(
+    args: UpdateQPersonalizationConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateQPersonalizationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQuickSightQSearchConfigurationCommand}
+   */
+  updateQuickSightQSearchConfiguration(
+    args: UpdateQuickSightQSearchConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateQuickSightQSearchConfigurationCommandOutput>;
+  updateQuickSightQSearchConfiguration(
+    args: UpdateQuickSightQSearchConfigurationCommandInput,
+    cb: (err: any, data?: UpdateQuickSightQSearchConfigurationCommandOutput) => void
+  ): void;
+  updateQuickSightQSearchConfiguration(
+    args: UpdateQuickSightQSearchConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateQuickSightQSearchConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRefreshScheduleCommand}
+   */
+  updateRefreshSchedule(
+    args: UpdateRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateRefreshScheduleCommandOutput>;
+  updateRefreshSchedule(
+    args: UpdateRefreshScheduleCommandInput,
+    cb: (err: any, data?: UpdateRefreshScheduleCommandOutput) => void
+  ): void;
+  updateRefreshSchedule(
+    args: UpdateRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateResourcePermissionsCommand}
+   */
+  updateResourcePermissions(
+    args: UpdateResourcePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateResourcePermissionsCommandOutput>;
+  updateResourcePermissions(
+    args: UpdateResourcePermissionsCommandInput,
+    cb: (err: any, data?: UpdateResourcePermissionsCommandOutput) => void
+  ): void;
+  updateResourcePermissions(
+    args: UpdateResourcePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateResourcePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRoleCustomPermissionCommand}
+   */
+  updateRoleCustomPermission(
+    args: UpdateRoleCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateRoleCustomPermissionCommandOutput>;
+  updateRoleCustomPermission(
+    args: UpdateRoleCustomPermissionCommandInput,
+    cb: (err: any, data?: UpdateRoleCustomPermissionCommandOutput) => void
+  ): void;
+  updateRoleCustomPermission(
+    args: UpdateRoleCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateRoleCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSelfUpgradeCommand}
+   */
+  updateSelfUpgrade(
+    args: UpdateSelfUpgradeCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSelfUpgradeCommandOutput>;
+  updateSelfUpgrade(
+    args: UpdateSelfUpgradeCommandInput,
+    cb: (err: any, data?: UpdateSelfUpgradeCommandOutput) => void
+  ): void;
+  updateSelfUpgrade(
+    args: UpdateSelfUpgradeCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSelfUpgradeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSelfUpgradeConfigurationCommand}
+   */
+  updateSelfUpgradeConfiguration(
+    args: UpdateSelfUpgradeConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSelfUpgradeConfigurationCommandOutput>;
+  updateSelfUpgradeConfiguration(
+    args: UpdateSelfUpgradeConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSelfUpgradeConfigurationCommandOutput) => void
+  ): void;
+  updateSelfUpgradeConfiguration(
+    args: UpdateSelfUpgradeConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSelfUpgradeConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSpaceCommand}
+   */
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSpaceCommandOutput>;
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    cb: (err: any, data?: UpdateSpaceCommandOutput) => void
+  ): void;
+  updateSpace(
+    args: UpdateSpaceCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSpaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSpacePermissionsCommand}
+   */
+  updateSpacePermissions(
+    args: UpdateSpacePermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSpacePermissionsCommandOutput>;
+  updateSpacePermissions(
+    args: UpdateSpacePermissionsCommandInput,
+    cb: (err: any, data?: UpdateSpacePermissionsCommandOutput) => void
+  ): void;
+  updateSpacePermissions(
+    args: UpdateSpacePermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSpacePermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSpaceResourcesCommand}
+   */
+  updateSpaceResources(
+    args: UpdateSpaceResourcesCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSpaceResourcesCommandOutput>;
+  updateSpaceResources(
+    args: UpdateSpaceResourcesCommandInput,
+    cb: (err: any, data?: UpdateSpaceResourcesCommandOutput) => void
+  ): void;
+  updateSpaceResources(
+    args: UpdateSpaceResourcesCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSpaceResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSPICECapacityConfigurationCommand}
+   */
+  updateSPICECapacityConfiguration(
+    args: UpdateSPICECapacityConfigurationCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateSPICECapacityConfigurationCommandOutput>;
+  updateSPICECapacityConfiguration(
+    args: UpdateSPICECapacityConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSPICECapacityConfigurationCommandOutput) => void
+  ): void;
+  updateSPICECapacityConfiguration(
+    args: UpdateSPICECapacityConfigurationCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateSPICECapacityConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTemplateCommand}
+   */
+  updateTemplate(
     args: UpdateTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateTemplateCommandOutput>;
-  public updateTemplate(
+  updateTemplate(
     args: UpdateTemplateCommandInput,
     cb: (err: any, data?: UpdateTemplateCommandOutput) => void
   ): void;
-  public updateTemplate(
+  updateTemplate(
     args: UpdateTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateTemplateCommandOutput) => void
   ): void;
-  public updateTemplate(
-    args: UpdateTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTemplateCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTemplateCommandOutput) => void
-  ): Promise<UpdateTemplateCommandOutput> | void {
-    const command = new UpdateTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the template alias of a template.</p>
+   * @see {@link UpdateTemplateAliasCommand}
    */
-  public updateTemplateAlias(
+  updateTemplateAlias(
     args: UpdateTemplateAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateTemplateAliasCommandOutput>;
-  public updateTemplateAlias(
+  updateTemplateAlias(
     args: UpdateTemplateAliasCommandInput,
     cb: (err: any, data?: UpdateTemplateAliasCommandOutput) => void
   ): void;
-  public updateTemplateAlias(
+  updateTemplateAlias(
     args: UpdateTemplateAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateTemplateAliasCommandOutput) => void
   ): void;
-  public updateTemplateAlias(
-    args: UpdateTemplateAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTemplateAliasCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTemplateAliasCommandOutput) => void
-  ): Promise<UpdateTemplateAliasCommandOutput> | void {
-    const command = new UpdateTemplateAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the resource permissions for a template.</p>
+   * @see {@link UpdateTemplatePermissionsCommand}
    */
-  public updateTemplatePermissions(
+  updateTemplatePermissions(
     args: UpdateTemplatePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateTemplatePermissionsCommandOutput>;
-  public updateTemplatePermissions(
+  updateTemplatePermissions(
     args: UpdateTemplatePermissionsCommandInput,
     cb: (err: any, data?: UpdateTemplatePermissionsCommandOutput) => void
   ): void;
-  public updateTemplatePermissions(
+  updateTemplatePermissions(
     args: UpdateTemplatePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateTemplatePermissionsCommandOutput) => void
   ): void;
-  public updateTemplatePermissions(
-    args: UpdateTemplatePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTemplatePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTemplatePermissionsCommandOutput) => void
-  ): Promise<UpdateTemplatePermissionsCommandOutput> | void {
-    const command = new UpdateTemplatePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a theme.</p>
+   * @see {@link UpdateThemeCommand}
    */
-  public updateTheme(args: UpdateThemeCommandInput, options?: __HttpHandlerOptions): Promise<UpdateThemeCommandOutput>;
-  public updateTheme(args: UpdateThemeCommandInput, cb: (err: any, data?: UpdateThemeCommandOutput) => void): void;
-  public updateTheme(
+  updateTheme(
     args: UpdateThemeCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateThemeCommandOutput>;
+  updateTheme(
+    args: UpdateThemeCommandInput,
     cb: (err: any, data?: UpdateThemeCommandOutput) => void
   ): void;
-  public updateTheme(
+  updateTheme(
     args: UpdateThemeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateThemeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateThemeCommandOutput) => void
-  ): Promise<UpdateThemeCommandOutput> | void {
-    const command = new UpdateThemeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateThemeCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates an alias of a theme.</p>
+   * @see {@link UpdateThemeAliasCommand}
    */
-  public updateThemeAlias(
+  updateThemeAlias(
     args: UpdateThemeAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateThemeAliasCommandOutput>;
-  public updateThemeAlias(
+  updateThemeAlias(
     args: UpdateThemeAliasCommandInput,
     cb: (err: any, data?: UpdateThemeAliasCommandOutput) => void
   ): void;
-  public updateThemeAlias(
+  updateThemeAlias(
     args: UpdateThemeAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateThemeAliasCommandOutput) => void
   ): void;
-  public updateThemeAlias(
-    args: UpdateThemeAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateThemeAliasCommandOutput) => void),
-    cb?: (err: any, data?: UpdateThemeAliasCommandOutput) => void
-  ): Promise<UpdateThemeAliasCommandOutput> | void {
-    const command = new UpdateThemeAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the resource permissions for a theme. Permissions apply to the action to grant or
-   * 			revoke permissions on, for example <code>"quicksight:DescribeTheme"</code>.</p>
-   * 		       <p>Theme permissions apply in groupings. Valid groupings include the following for the three
-   * 			levels of permissions, which are user, owner, or no permissions: </p>
-   * 			      <ul>
-   *             <li>
-   *                <p>User</p>
-   * 					          <ul>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DescribeTheme"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DescribeThemeAlias"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:ListThemeAliases"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:ListThemeVersions"</code>
-   *                      </p>
-   *                   </li>
-   *                </ul>
-   * 				        </li>
-   *             <li>
-   *                <p>Owner</p>
-   * 					          <ul>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DescribeTheme"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DescribeThemeAlias"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:ListThemeAliases"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:ListThemeVersions"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DeleteTheme"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:UpdateTheme"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:CreateThemeAlias"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DeleteThemeAlias"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:UpdateThemeAlias"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:UpdateThemePermissions"</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>"quicksight:DescribeThemePermissions"</code>
-   *                      </p>
-   *                   </li>
-   *                </ul>
-   * 				        </li>
-   *             <li>
-   *                <p>To specify no permissions, omit the permissions list.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link UpdateThemePermissionsCommand}
    */
-  public updateThemePermissions(
+  updateThemePermissions(
     args: UpdateThemePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QuickSightRequestOptions
   ): Promise<UpdateThemePermissionsCommandOutput>;
-  public updateThemePermissions(
+  updateThemePermissions(
     args: UpdateThemePermissionsCommandInput,
     cb: (err: any, data?: UpdateThemePermissionsCommandOutput) => void
   ): void;
-  public updateThemePermissions(
+  updateThemePermissions(
     args: UpdateThemePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QuickSightRequestOptions,
     cb: (err: any, data?: UpdateThemePermissionsCommandOutput) => void
   ): void;
-  public updateThemePermissions(
-    args: UpdateThemePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateThemePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateThemePermissionsCommandOutput) => void
-  ): Promise<UpdateThemePermissionsCommandOutput> | void {
-    const command = new UpdateThemePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an Amazon QuickSight user.</p>
+   * @see {@link UpdateTopicCommand}
    */
-  public updateUser(args: UpdateUserCommandInput, options?: __HttpHandlerOptions): Promise<UpdateUserCommandOutput>;
-  public updateUser(args: UpdateUserCommandInput, cb: (err: any, data?: UpdateUserCommandOutput) => void): void;
-  public updateUser(
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateTopicCommandOutput>;
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    cb: (err: any, data?: UpdateTopicCommandOutput) => void
+  ): void;
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTopicPermissionsCommand}
+   */
+  updateTopicPermissions(
+    args: UpdateTopicPermissionsCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateTopicPermissionsCommandOutput>;
+  updateTopicPermissions(
+    args: UpdateTopicPermissionsCommandInput,
+    cb: (err: any, data?: UpdateTopicPermissionsCommandOutput) => void
+  ): void;
+  updateTopicPermissions(
+    args: UpdateTopicPermissionsCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateTopicPermissionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTopicPermissionsV2Command}
+   */
+  updateTopicPermissionsV2(
+    args: UpdateTopicPermissionsV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateTopicPermissionsV2CommandOutput>;
+  updateTopicPermissionsV2(
+    args: UpdateTopicPermissionsV2CommandInput,
+    cb: (err: any, data?: UpdateTopicPermissionsV2CommandOutput) => void
+  ): void;
+  updateTopicPermissionsV2(
+    args: UpdateTopicPermissionsV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateTopicPermissionsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTopicRefreshScheduleCommand}
+   */
+  updateTopicRefreshSchedule(
+    args: UpdateTopicRefreshScheduleCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateTopicRefreshScheduleCommandOutput>;
+  updateTopicRefreshSchedule(
+    args: UpdateTopicRefreshScheduleCommandInput,
+    cb: (err: any, data?: UpdateTopicRefreshScheduleCommandOutput) => void
+  ): void;
+  updateTopicRefreshSchedule(
+    args: UpdateTopicRefreshScheduleCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateTopicRefreshScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTopicV2Command}
+   */
+  updateTopicV2(
+    args: UpdateTopicV2CommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateTopicV2CommandOutput>;
+  updateTopicV2(
+    args: UpdateTopicV2CommandInput,
+    cb: (err: any, data?: UpdateTopicV2CommandOutput) => void
+  ): void;
+  updateTopicV2(
+    args: UpdateTopicV2CommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateTopicV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserCommand}
+   */
+  updateUser(
     args: UpdateUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateUserCommandOutput>;
+  updateUser(
+    args: UpdateUserCommandInput,
     cb: (err: any, data?: UpdateUserCommandOutput) => void
   ): void;
-  public updateUser(
+  updateUser(
     args: UpdateUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserCommandOutput) => void
-  ): Promise<UpdateUserCommandOutput> | void {
-    const command = new UpdateUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateUserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserCustomPermissionCommand}
+   */
+  updateUserCustomPermission(
+    args: UpdateUserCustomPermissionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateUserCustomPermissionCommandOutput>;
+  updateUserCustomPermission(
+    args: UpdateUserCustomPermissionCommandInput,
+    cb: (err: any, data?: UpdateUserCustomPermissionCommandOutput) => void
+  ): void;
+  updateUserCustomPermission(
+    args: UpdateUserCustomPermissionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateUserCustomPermissionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVPCConnectionCommand}
+   */
+  updateVPCConnection(
+    args: UpdateVPCConnectionCommandInput,
+    options?: QuickSightRequestOptions
+  ): Promise<UpdateVPCConnectionCommandOutput>;
+  updateVPCConnection(
+    args: UpdateVPCConnectionCommandInput,
+    cb: (err: any, data?: UpdateVPCConnectionCommandOutput) => void
+  ): void;
+  updateVPCConnection(
+    args: UpdateVPCConnectionCommandInput,
+    options: QuickSightRequestOptions,
+    cb: (err: any, data?: UpdateVPCConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFolderPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFolderPermissionsCommandOutput}.
+   */
+  paginateDescribeFolderPermissions(
+    args: DescribeFolderPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFolderPermissionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeFolderResolvedPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFolderResolvedPermissionsCommandOutput}.
+   */
+  paginateDescribeFolderResolvedPermissions(
+    args: DescribeFolderResolvedPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFolderResolvedPermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListActionConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListActionConnectorsCommandOutput}.
+   */
+  paginateListActionConnectors(
+    args: ListActionConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListActionConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListAnalysesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnalysesCommandOutput}.
+   */
+  paginateListAnalyses(
+    args: ListAnalysesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnalysesCommandOutput>;
+
+  /**
+   * @see {@link ListApprovalPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApprovalPoliciesCommandOutput}.
+   */
+  paginateListApprovalPolicies(
+    args?: ListApprovalPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApprovalPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListAppsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppsCommandOutput}.
+   */
+  paginateListApps(
+    args: ListAppsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppsCommandOutput>;
+
+  /**
+   * @see {@link ListAssetBundleExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssetBundleExportJobsCommandOutput}.
+   */
+  paginateListAssetBundleExportJobs(
+    args: ListAssetBundleExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssetBundleExportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListAssetBundleImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssetBundleImportJobsCommandOutput}.
+   */
+  paginateListAssetBundleImportJobs(
+    args: ListAssetBundleImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssetBundleImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListBrandsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBrandsCommandOutput}.
+   */
+  paginateListBrands(
+    args: ListBrandsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBrandsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomPermissionsCommandOutput}.
+   */
+  paginateListCustomPermissions(
+    args: ListCustomPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomPermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListDashboardsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDashboardsCommandOutput}.
+   */
+  paginateListDashboards(
+    args: ListDashboardsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDashboardsCommandOutput>;
+
+  /**
+   * @see {@link ListDashboardVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDashboardVersionsCommandOutput}.
+   */
+  paginateListDashboardVersions(
+    args: ListDashboardVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDashboardVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetsCommandOutput}.
+   */
+  paginateListDataSets(
+    args: ListDataSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSourcesCommandOutput}.
+   */
+  paginateListDataSources(
+    args: ListDataSourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSourcesCommandOutput>;
+
+  /**
+   * @see {@link ListDlpSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDlpSettingsCommandOutput}.
+   */
+  paginateListDlpSettings(
+    args: ListDlpSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDlpSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowsCommandOutput}.
+   */
+  paginateListFlows(
+    args: ListFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowsCommandOutput>;
+
+  /**
+   * @see {@link ListFolderMembersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFolderMembersCommandOutput}.
+   */
+  paginateListFolderMembers(
+    args: ListFolderMembersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFolderMembersCommandOutput>;
+
+  /**
+   * @see {@link ListFoldersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFoldersCommandOutput}.
+   */
+  paginateListFolders(
+    args: ListFoldersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFoldersCommandOutput>;
+
+  /**
+   * @see {@link ListFoldersForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFoldersForResourceCommandOutput}.
+   */
+  paginateListFoldersForResource(
+    args: ListFoldersForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFoldersForResourceCommandOutput>;
+
+  /**
+   * @see {@link ListGroupMembershipsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGroupMembershipsCommandOutput}.
+   */
+  paginateListGroupMemberships(
+    args: ListGroupMembershipsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGroupMembershipsCommandOutput>;
+
+  /**
+   * @see {@link ListGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGroupsCommandOutput}.
+   */
+  paginateListGroups(
+    args: ListGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListIAMPolicyAssignmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIAMPolicyAssignmentsCommandOutput}.
+   */
+  paginateListIAMPolicyAssignments(
+    args: ListIAMPolicyAssignmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIAMPolicyAssignmentsCommandOutput>;
+
+  /**
+   * @see {@link ListIAMPolicyAssignmentsForUserCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIAMPolicyAssignmentsForUserCommandOutput}.
+   */
+  paginateListIAMPolicyAssignmentsForUser(
+    args: ListIAMPolicyAssignmentsForUserCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIAMPolicyAssignmentsForUserCommandOutput>;
+
+  /**
+   * @see {@link ListIngestionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngestionsCommandOutput}.
+   */
+  paginateListIngestions(
+    args: ListIngestionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngestionsCommandOutput>;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKnowledgeBasesCommandOutput}.
+   */
+  paginateListKnowledgeBases(
+    args: ListKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link ListLimitsProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLimitsProfilesCommandOutput}.
+   */
+  paginateListLimitsProfiles(
+    args: ListLimitsProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLimitsProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNamespacesCommandOutput}.
+   */
+  paginateListNamespaces(
+    args: ListNamespacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNamespacesCommandOutput>;
+
+  /**
+   * @see {@link ListOAuthClientApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOAuthClientApplicationsCommandOutput}.
+   */
+  paginateListOAuthClientApplications(
+    args: ListOAuthClientApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOAuthClientApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListRoleMembershipsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoleMembershipsCommandOutput}.
+   */
+  paginateListRoleMemberships(
+    args: ListRoleMembershipsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoleMembershipsCommandOutput>;
+
+  /**
+   * @see {@link ListTemplateAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplateAliasesCommandOutput}.
+   */
+  paginateListTemplateAliases(
+    args: ListTemplateAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplateAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplatesCommandOutput}.
+   */
+  paginateListTemplates(
+    args: ListTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListTemplateVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplateVersionsCommandOutput}.
+   */
+  paginateListTemplateVersions(
+    args: ListTemplateVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplateVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListThemesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListThemesCommandOutput}.
+   */
+  paginateListThemes(
+    args: ListThemesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListThemesCommandOutput>;
+
+  /**
+   * @see {@link ListThemeVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListThemeVersionsCommandOutput}.
+   */
+  paginateListThemeVersions(
+    args: ListThemeVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListThemeVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListTopicsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTopicsCommandOutput}.
+   */
+  paginateListTopics(
+    args: ListTopicsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTopicsCommandOutput>;
+
+  /**
+   * @see {@link ListTopicsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTopicsV2CommandOutput}.
+   */
+  paginateListTopicsV2(
+    args: ListTopicsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTopicsV2CommandOutput>;
+
+  /**
+   * @see {@link ListUserGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserGroupsCommandOutput}.
+   */
+  paginateListUserGroups(
+    args: ListUserGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsersCommandOutput}.
+   */
+  paginateListUsers(
+    args: ListUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsersCommandOutput>;
+
+  /**
+   * @see {@link ListVPCConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVPCConnectionsCommandOutput}.
+   */
+  paginateListVPCConnections(
+    args: ListVPCConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVPCConnectionsCommandOutput>;
+
+  /**
+   * @see {@link SearchActionConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchActionConnectorsCommandOutput}.
+   */
+  paginateSearchActionConnectors(
+    args: SearchActionConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchActionConnectorsCommandOutput>;
+
+  /**
+   * @see {@link SearchAnalysesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchAnalysesCommandOutput}.
+   */
+  paginateSearchAnalyses(
+    args: SearchAnalysesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchAnalysesCommandOutput>;
+
+  /**
+   * @see {@link SearchAppsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchAppsCommandOutput}.
+   */
+  paginateSearchApps(
+    args: SearchAppsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchAppsCommandOutput>;
+
+  /**
+   * @see {@link SearchDashboardsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDashboardsCommandOutput}.
+   */
+  paginateSearchDashboards(
+    args: SearchDashboardsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDashboardsCommandOutput>;
+
+  /**
+   * @see {@link SearchDataSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDataSetsCommandOutput}.
+   */
+  paginateSearchDataSets(
+    args: SearchDataSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDataSetsCommandOutput>;
+
+  /**
+   * @see {@link SearchDataSourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDataSourcesCommandOutput}.
+   */
+  paginateSearchDataSources(
+    args: SearchDataSourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDataSourcesCommandOutput>;
+
+  /**
+   * @see {@link SearchFlowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchFlowsCommandOutput}.
+   */
+  paginateSearchFlows(
+    args: SearchFlowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchFlowsCommandOutput>;
+
+  /**
+   * @see {@link SearchFoldersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchFoldersCommandOutput}.
+   */
+  paginateSearchFolders(
+    args: SearchFoldersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchFoldersCommandOutput>;
+
+  /**
+   * @see {@link SearchGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchGroupsCommandOutput}.
+   */
+  paginateSearchGroups(
+    args: SearchGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchGroupsCommandOutput>;
+
+  /**
+   * @see {@link SearchKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchKnowledgeBasesCommandOutput}.
+   */
+  paginateSearchKnowledgeBases(
+    args: SearchKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link SearchTopicsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchTopicsCommandOutput}.
+   */
+  paginateSearchTopics(
+    args: SearchTopicsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchTopicsCommandOutput>;
+
+  /**
+   * @see {@link SearchTopicsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchTopicsV2CommandOutput}.
+   */
+  paginateSearchTopicsV2(
+    args: SearchTopicsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchTopicsV2CommandOutput>;
 }
+
+/**
+ * <fullname>Amazon Quick API Reference</fullname>
+ *          <p>Amazon Quick Sight is a fully managed, serverless business intelligence service for the
+ *             Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your
+ *             organization. This API reference contains documentation for a programming interface that
+ *             you can use to manage Amazon Quick Sight. </p>
+ * @public
+ */
+export class QuickSight extends QuickSightClient implements QuickSight {}
+createAggregatedClient(commands, QuickSight, { paginators });

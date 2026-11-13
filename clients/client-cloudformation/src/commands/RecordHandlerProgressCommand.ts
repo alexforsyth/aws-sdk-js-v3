@@ -1,96 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { RecordHandlerProgressInput, RecordHandlerProgressOutput } from "../models/models_0";
-import {
-  deserializeAws_queryRecordHandlerProgressCommand,
-  serializeAws_queryRecordHandlerProgressCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RecordHandlerProgressInput, RecordHandlerProgressOutput } from "../models/models_0";
+import { RecordHandlerProgress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RecordHandlerProgressCommand}.
+ */
 export interface RecordHandlerProgressCommandInput extends RecordHandlerProgressInput {}
+/**
+ * @public
+ *
+ * The output of {@link RecordHandlerProgressCommand}.
+ */
 export interface RecordHandlerProgressCommandOutput extends RecordHandlerProgressOutput, __MetadataBearer {}
 
 /**
  * <p>Reports progress of a resource handler to CloudFormation.</p>
- *          <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>
+ *          <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation
+ *         CLI</a>. Don't use this API in your code.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, RecordHandlerProgressCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, RecordHandlerProgressCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // RecordHandlerProgressInput
+ *   BearerToken: "STRING_VALUE", // required
+ *   OperationStatus: "PENDING" || "IN_PROGRESS" || "SUCCESS" || "FAILED", // required
+ *   CurrentOperationStatus: "PENDING" || "IN_PROGRESS" || "SUCCESS" || "FAILED",
+ *   StatusMessage: "STRING_VALUE",
+ *   ErrorCode: "NotUpdatable" || "InvalidRequest" || "AccessDenied" || "InvalidCredentials" || "AlreadyExists" || "NotFound" || "ResourceConflict" || "Throttling" || "ServiceLimitExceeded" || "NotStabilized" || "GeneralServiceException" || "ServiceInternalError" || "NetworkFailure" || "InternalFailure" || "InvalidTypeConfiguration" || "HandlerInternalFailure" || "NonCompliant" || "Unknown" || "UnsupportedTarget",
+ *   ResourceModel: "STRING_VALUE",
+ *   ClientRequestToken: "STRING_VALUE",
+ * };
  * const command = new RecordHandlerProgressCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RecordHandlerProgressCommandInput - {@link RecordHandlerProgressCommandInput}
+ * @returns {@link RecordHandlerProgressCommandOutput}
  * @see {@link RecordHandlerProgressCommandInput} for command's `input` shape.
  * @see {@link RecordHandlerProgressCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link InvalidStateTransitionException} (client fault)
+ *  <p>Error reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. CloudFormation doesn't
+ *    return this error to users.</p>
+ *
+ * @throws {@link OperationStatusCheckFailedException} (client fault)
+ *  <p>Error reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. CloudFormation doesn't
+ *    return this error to users.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class RecordHandlerProgressCommand extends $Command<
-  RecordHandlerProgressCommandInput,
-  RecordHandlerProgressCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RecordHandlerProgressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RecordHandlerProgressCommandInput, RecordHandlerProgressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "RecordHandlerProgressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RecordHandlerProgressInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RecordHandlerProgressOutput.filterSensitiveLog,
+export class RecordHandlerProgressCommand extends command<RecordHandlerProgressCommandInput, RecordHandlerProgressCommandOutput>(
+  _ep0,
+  _mw0,
+  "RecordHandlerProgress",
+  RecordHandlerProgress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RecordHandlerProgressInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RecordHandlerProgressCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRecordHandlerProgressCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RecordHandlerProgressCommandOutput> {
-    return deserializeAws_queryRecordHandlerProgressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RecordHandlerProgressCommandInput;
+      output: RecordHandlerProgressCommandOutput;
+    };
+  };
 }

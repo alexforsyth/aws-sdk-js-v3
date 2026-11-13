@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { UpdateMonitoringRequest, UpdateMonitoringResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateMonitoringCommand,
-  serializeAws_restJson1UpdateMonitoringCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMonitoringRequest, UpdateMonitoringResponse } from "../models/models_0";
+import { UpdateMonitoring$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMonitoringCommand}.
+ */
 export interface UpdateMonitoringCommandInput extends UpdateMonitoringRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMonitoringCommand}.
+ */
 export interface UpdateMonitoringCommandOutput extends UpdateMonitoringResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,107 @@ export interface UpdateMonitoringCommandOutput extends UpdateMonitoringResponse,
  * ```javascript
  * import { KafkaClient, UpdateMonitoringCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, UpdateMonitoringCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // UpdateMonitoringRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   CurrentVersion: "STRING_VALUE", // required
+ *   EnhancedMonitoring: "DEFAULT" || "PER_BROKER" || "PER_TOPIC_PER_BROKER" || "PER_TOPIC_PER_PARTITION",
+ *   OpenMonitoring: { // OpenMonitoringInfo
+ *     Prometheus: { // PrometheusInfo
+ *       JmxExporter: { // JmxExporterInfo
+ *         EnabledInBroker: true || false, // required
+ *       },
+ *       NodeExporter: { // NodeExporterInfo
+ *         EnabledInBroker: true || false, // required
+ *       },
+ *     },
+ *   },
+ *   LoggingInfo: { // LoggingInfo
+ *     AuthorizerLogs: { // AuthorizerLogs
+ *       CloudWatchLogs: { // CloudWatchLogs
+ *         Enabled: true || false, // required
+ *         LogGroup: "STRING_VALUE",
+ *       },
+ *       Firehose: { // Firehose
+ *         DeliveryStream: "STRING_VALUE",
+ *         Enabled: true || false, // required
+ *       },
+ *       S3: { // S3
+ *         Bucket: "STRING_VALUE",
+ *         Enabled: true || false, // required
+ *         Prefix: "STRING_VALUE",
+ *       },
+ *     },
+ *     BrokerLogs: { // BrokerLogs
+ *       CloudWatchLogs: {
+ *         Enabled: true || false, // required
+ *         LogGroup: "STRING_VALUE",
+ *       },
+ *       Firehose: {
+ *         DeliveryStream: "STRING_VALUE",
+ *         Enabled: true || false, // required
+ *       },
+ *       S3: {
+ *         Bucket: "STRING_VALUE",
+ *         Enabled: true || false, // required
+ *         Prefix: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new UpdateMonitoringCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateMonitoringResponse
+ * //   ClusterArn: "STRING_VALUE",
+ * //   ClusterOperationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateMonitoringCommandInput - {@link UpdateMonitoringCommandInput}
+ * @returns {@link UpdateMonitoringCommandOutput}
  * @see {@link UpdateMonitoringCommandInput} for command's `input` shape.
  * @see {@link UpdateMonitoringCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMonitoringCommand extends $Command<
-  UpdateMonitoringCommandInput,
-  UpdateMonitoringCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMonitoringCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMonitoringCommandInput, UpdateMonitoringCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "UpdateMonitoringCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMonitoringRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMonitoringResponse.filterSensitiveLog,
+export class UpdateMonitoringCommand extends command<UpdateMonitoringCommandInput, UpdateMonitoringCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMonitoring",
+  UpdateMonitoring$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMonitoringRequest;
+      output: UpdateMonitoringResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMonitoringCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateMonitoringCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateMonitoringCommandOutput> {
-    return deserializeAws_restJson1UpdateMonitoringCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMonitoringCommandInput;
+      output: UpdateMonitoringCommandOutput;
+    };
+  };
 }

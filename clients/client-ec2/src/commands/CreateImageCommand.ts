@@ -1,102 +1,139 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateImageRequest, CreateImageResult } from "../models/models_1";
-import { deserializeAws_ec2CreateImageCommand, serializeAws_ec2CreateImageCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateImageRequest, CreateImageResult } from "../models/models_1";
+import { CreateImage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateImageCommand}.
+ */
 export interface CreateImageCommandInput extends CreateImageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateImageCommand}.
+ */
 export interface CreateImageCommandOutput extends CreateImageResult, __MetadataBearer {}
 
 /**
- * <p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance
- *      	that is either running or stopped.</p>
- *
- *
- *
- *
- *    	     <p>If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the
- *      	new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI,
- *      	the instance automatically launches with those additional volumes.</p>
- *    	     <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating Amazon EBS-Backed Linux AMIs</a>
- * 				in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ * <p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or
+ *       stopped.</p>
+ *          <p>If you customized your instance with instance store volumes or Amazon EBS volumes in addition
+ *       to the root device volume, the new AMI contains block device mapping information for those
+ *       volumes. When you launch an instance from this new AMI, the instance automatically launches
+ *       with those additional volumes.</p>
+ *          <p>The location of the source instance determines where you can create the snapshots of the
+ *       AMI:</p>
+ *          <ul>
+ *             <li>
+ *                <p>If the source instance is in a Region, you must create the snapshots in the same
+ *           Region as the instance.</p>
+ *             </li>
+ *             <li>
+ *                <p>If the source instance is in a Local Zone, you can create the snapshots in the same
+ *           Local Zone or in its parent Region.</p>
+ *             </li>
+ *             <li>
+ *                <p>If the source instance is on an Outpost that supports local snapshots, you can create
+ *           the snapshots on the same Outpost or in the parent Region of that Outpost. In this case,
+ *           you must use the <code>SnapshotLocation</code> parameter to specify where to create the
+ *           snapshots.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Create an Amazon EBS-backed AMI</a> in
+ *       the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateImageCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateImageCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateImageRequest
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   SnapshotLocation: "regional" || "local",
+ *   BootModeOverride: "uefi",
+ *   DryRun: true || false,
+ *   InstanceId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   NoReboot: true || false,
+ *   BlockDeviceMappings: [ // BlockDeviceMappingRequestList
+ *     { // BlockDeviceMapping
+ *       Ebs: { // EbsBlockDevice
+ *         DeleteOnTermination: true || false,
+ *         Iops: Number("int"),
+ *         SnapshotId: "STRING_VALUE",
+ *         VolumeSize: Number("int"),
+ *         VolumeType: "standard" || "io1" || "io2" || "gp2" || "sc1" || "st1" || "gp3",
+ *         KmsKeyId: "STRING_VALUE",
+ *         Throughput: Number("int"),
+ *         OutpostArn: "STRING_VALUE",
+ *         AvailabilityZone: "STRING_VALUE",
+ *         Encrypted: true || false,
+ *         VolumeInitializationRate: Number("int"),
+ *         AvailabilityZoneId: "STRING_VALUE",
+ *         EbsCardIndex: Number("int"),
+ *       },
+ *       NoDevice: "STRING_VALUE",
+ *       DeviceName: "STRING_VALUE",
+ *       VirtualName: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateImageCommand(input);
  * const response = await client.send(command);
+ * // { // CreateImageResult
+ * //   ImageId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateImageCommandInput - {@link CreateImageCommandInput}
+ * @returns {@link CreateImageCommandOutput}
  * @see {@link CreateImageCommandInput} for command's `input` shape.
  * @see {@link CreateImageCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateImageCommand extends $Command<
-  CreateImageCommandInput,
-  CreateImageCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateImageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateImageCommandInput, CreateImageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateImageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateImageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateImageResult.filterSensitiveLog,
+export class CreateImageCommand extends command<CreateImageCommandInput, CreateImageCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateImage",
+  CreateImage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateImageRequest;
+      output: CreateImageResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateImageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateImageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateImageCommandOutput> {
-    return deserializeAws_ec2CreateImageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateImageCommandInput;
+      output: CreateImageCommandOutput;
+    };
+  };
 }

@@ -1,45 +1,85 @@
-# @aws-sdk/client-organizations
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-organizations/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-organizations)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-organizations.svg)](https://www.npmjs.com/package/@aws-sdk/client-organizations)
+# @aws-sdk/client-organizations
 
 ## Description
 
 AWS SDK for JavaScript Organizations Client for Node.js, Browser and React Native.
 
-<p>AWS Organizations is a web service that enables you to consolidate your multiple AWS accounts
-into an <i>organization</i> and centrally manage your accounts and their
-resources.</p>
-<p>This guide provides descriptions of the Organizations operations. For more information about
-using this service, see the <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">AWS Organizations User Guide</a>.</p>
+<p>Organizations is a web service that enables you to consolidate your multiple
+Amazon Web Services accounts into an <i>organization</i> and centrally manage your
+accounts and their resources.</p>
+<p>This guide provides descriptions of the Organizations API. For more
+information about using this service, see the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">Organizations User Guide</a>.</p>
 <p>
-<b>Support and feedback for AWS Organizations</b>
+<b>API version</b>
 </p>
-<p>We welcome your feedback. Send your comments to <a href="mailto:feedback-awsorganizations@amazon.com">feedback-awsorganizations@amazon.com</a> or post your feedback and questions in
-the <a href="http://forums.aws.amazon.com/forum.jspa?forumID=219">AWS Organizations support forum</a>. For
-more information about the AWS support forums, see <a href="http://forums.aws.amazon.com/help.jspa">Forums Help</a>.</p>
+<p>This version of the Organizations API Reference documents the Organizations API version
+2016-11-28.</p>
+<note>
+<p>As an alternative to using the API directly, you can use one of the Amazon Web Services SDKs,
+which consist of libraries and sample code for various programming languages and
+platforms (Java, Ruby, .NET, iOS, Android, and more). The SDKs provide a convenient
+way to create programmatic access to Organizations. For example, the SDKs take care of
+cryptographically signing requests, managing errors, and retrying requests
+automatically. For more information about the Amazon Web Services SDKs, including how to download
+and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web
+Services</a>.</p>
+</note>
+<p>We recommend that you use the Amazon Web Services SDKs to make programmatic API calls to Organizations.
+However, you also can use the Organizations Query API to make direct calls to the Organizations web
+service. To learn more about the Organizations Query API, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_query-requests.html">Calling the API by making HTTP Query
+requests</a> in the <i>Organizations User Guide</i>. Organizations supports GET and
+POST requests for all actions. That is, the API doesn't require you to use GET for some
+actions and POST for others. However, GET requests are subject to the limitation size of
+a URL. Therefore, for operations that require larger sizes, use a POST request.</p>
 <p>
-<b>Endpoint to call When using the AWS CLI or the AWS
+<b>Signing requests</b>
+</p>
+<p>When you send HTTP requests to Amazon Web Services, sign the requests so that Amazon Web Services can identify
+who sent them. You sign requests with your Amazon Web Services access key, which consists of an access
+key ID and a secret access key. We strongly recommend that you don't create an access
+key for your root account. Anyone who has the access key for your root account has
+unrestricted access to all the resources in your account. Instead, create an access key
+for an IAM user that has administrative permissions. As another option, use Amazon Web Services
+Security Token Service (Amazon Web Services STS) to generate temporary security credentials, and use
+those credentials to sign requests.</p>
+<p>To sign requests, we recommend that you use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>. If you
+have an existing application that uses Signature Version 2, you don't have to update it
+to use Signature Version 4. However, some operations now require Signature Version 4.
+The documentation for operations that require version 4 indicate this
+requirement.</p>
+<p>When you use the Command Line Interface (CLI) or one of the Amazon Web Services SDKs to make requests to
+Amazon Web Services, these tools automatically sign the requests for you with the access key that you
+specify when you configure the tools.</p>
+<p>In this release, each organization can have only one root.</p>
+<p>
+<b>Support and feedback for Organizations</b>
+</p>
+<p>We welcome your feedback. You can post your feedback and questions in the <a href="https://forums.aws.amazon.com/forum.jspa?forumID=219">Organizations support
+forum</a>. For more information about the Amazon Web Services Support forums, see <a href="https://forums.aws.amazon.com/help.jspa">Forums Help</a>.</p>
+<p>
+<b>Endpoint to call When using the CLI or the Amazon Web Services
 SDK</b>
 </p>
-<p>For the current release of Organizations, specify the <code>us-east-1</code> region for all
-AWS API and AWS CLI calls made from the commercial AWS Regions outside of China. If
-calling from one of the AWS Regions in China, then specify
-<code>cn-northwest-1</code>. You can do this in the AWS CLI by using these parameters and
-commands:</p>
+<p>For the current release of Organizations, specify the <code>us-east-1</code> region
+for all Amazon Web Services API and CLI calls made from the commercial Amazon Web Services Regions outside of
+China. If calling from one of the Amazon Web Services Regions in China, then specify
+<code>cn-northwest-1</code>. You can do this in the CLI by using these parameters
+and commands:</p>
 <ul>
 <li>
 <p>Use the following parameter with each command to specify both the endpoint and
 its region:</p>
 <p>
 <code>--endpoint-url https://organizations.us-east-1.amazonaws.com</code>
-<i>(from commercial AWS Regions outside of China)</i>
+<i>(from commercial Amazon Web Services Regions outside of China)</i>
 </p>
 <p>or</p>
 <p>
 <code>--endpoint-url
 https://organizations.cn-northwest-1.amazonaws.com.cn</code>
-<i>(from AWS Regions in China)</i>
+<i>(from Amazon Web Services Regions in China)</i>
 </p>
 </li>
 <li>
@@ -47,42 +87,51 @@ https://organizations.cn-northwest-1.amazonaws.com.cn</code>
 command:</p>
 <p>
 <code>aws configure set default.region us-east-1</code>
-<i>(from commercial AWS Regions outside of China)</i>
+<i>(from commercial Amazon Web Services Regions outside of China)</i>
 </p>
 <p>or</p>
 <p>
 <code>aws configure set default.region cn-northwest-1</code>
-<i>(from AWS Regions in China)</i>
+<i>(from Amazon Web Services Regions in China)</i>
 </p>
 </li>
 <li>
 <p>Use the following parameter with each command to specify the endpoint:</p>
 <p>
 <code>--region us-east-1</code>
-<i>(from commercial AWS Regions outside of China)</i>
+<i>(from commercial Amazon Web Services Regions outside of China)</i>
 </p>
 <p>or</p>
 <p>
 <code>--region cn-northwest-1</code>
-<i>(from AWS Regions in China)</i>
+<i>(from Amazon Web Services Regions in China)</i>
 </p>
 </li>
 </ul>
 <p>
+<b>How examples are presented</b>
+</p>
+<p>The JSON returned by the Organizations service as response to your requests arrives as a
+single long string without line breaks or formatting whitespace. The examples in this
+guide include both line breaks and whitespace to improve readability. When example input
+parameters also would result in long strings that would extend beyond the screen, we
+insert line breaks to enhance readability. Always submit the input as a single JSON text
+string.</p>
+<p>
 <b>Recording API Requests</b>
 </p>
-<p>AWS Organizations supports AWS CloudTrail, a service that records AWS API calls for your AWS
-account and delivers log files to an Amazon S3 bucket. By using information collected by
-AWS CloudTrail, you can determine which requests the Organizations service received, who made the request
-and when, and so on. For more about AWS Organizations and its support for AWS CloudTrail, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_incident-response.html#orgs_cloudtrail-integration">Logging
-AWS Organizations Events with AWS CloudTrail</a> in the <i>AWS Organizations User Guide</i>.
-To learn more about AWS CloudTrail, including how to turn it on and find your log files, see the
-<a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">AWS CloudTrail User Guide</a>.</p>
+<p>Organizations supports CloudTrail, a service that records Amazon Web Services API calls for your
+Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected
+by CloudTrail, you can determine which requests the Organizations service received, who made the
+request and when, and so on. For more about Organizations and its support for CloudTrail, see
+<a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration">Logging
+Organizations API calls with CloudTrail</a> in the
+<i>Organizations User Guide</i>. To learn more about CloudTrail, including how to turn it
+on and find your log files, see the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">CloudTrail User Guide</a>.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-organizations
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-organizations`
 - `yarn add @aws-sdk/client-organizations`
@@ -94,40 +143,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `OrganizationsClient` and
-the commands you need, for example `AcceptHandshakeCommand`:
+the commands you need, for example `ListRootsCommand`:
 
 ```js
 // ES5 example
-const { OrganizationsClient, AcceptHandshakeCommand } = require("@aws-sdk/client-organizations");
+const { OrganizationsClient, ListRootsCommand } = require("@aws-sdk/client-organizations");
 ```
 
 ```ts
 // ES6+ example
-import { OrganizationsClient, AcceptHandshakeCommand } from "@aws-sdk/client-organizations";
+import { OrganizationsClient, ListRootsCommand } from "@aws-sdk/client-organizations";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new OrganizationsClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AcceptHandshakeCommand(params);
+const params = { /** input parameters */ };
+const command = new ListRootsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -142,26 +189,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -177,31 +207,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Organizations` extends `OrganizationsClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`OrganizationsClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-organizations";
-const client = new AWS.Organizations({ region: "REGION" });
+import { Organizations } from "@aws-sdk/client-organizations";
+
+const client = new Organizations({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.acceptHandshake(params);
+  const data = await client.listRoots(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -209,7 +233,7 @@ try {
 
 // Promises.
 client
-  .acceptHandshake(params)
+  .listRoots(params)
   .then((data) => {
     // process data.
   })
@@ -217,9 +241,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.acceptHandshake(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listRoots(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -245,12 +269,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -271,3 +297,447 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AcceptHandshake
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/AcceptHandshakeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/AcceptHandshakeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/AcceptHandshakeCommandOutput/)
+</details>
+<details>
+<summary>
+AttachPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/AttachPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/AttachPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/AttachPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+CancelHandshake
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CancelHandshakeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CancelHandshakeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CancelHandshakeCommandOutput/)
+</details>
+<details>
+<summary>
+CloseAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CloseAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CloseAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CloseAccountCommandOutput/)
+</details>
+<details>
+<summary>
+CreateAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CreateAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateAccountCommandOutput/)
+</details>
+<details>
+<summary>
+CreateGovCloudAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CreateGovCloudAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateGovCloudAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateGovCloudAccountCommandOutput/)
+</details>
+<details>
+<summary>
+CreateOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CreateOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+CreateOrganizationalUnit
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CreateOrganizationalUnitCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateOrganizationalUnitCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreateOrganizationalUnitCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/CreatePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreatePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/CreatePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeclineHandshake
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeclineHandshakeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeclineHandshakeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeclineHandshakeCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeleteOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteOrganizationalUnit
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeleteOrganizationalUnitCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteOrganizationalUnitCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteOrganizationalUnitCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeletePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeletePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeletePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteResourcePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeleteResourcePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteResourcePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeleteResourcePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeregisterDelegatedAdministrator
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DeregisterDelegatedAdministratorCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeregisterDelegatedAdministratorCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DeregisterDelegatedAdministratorCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeAccountCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeCreateAccountStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeCreateAccountStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeCreateAccountStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeCreateAccountStatusCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeEffectivePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeEffectivePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeEffectivePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeEffectivePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeHandshake
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeHandshakeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeHandshakeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeHandshakeCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeOrganizationalUnit
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeOrganizationalUnitCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeOrganizationalUnitCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeOrganizationalUnitCommandOutput/)
+</details>
+<details>
+<summary>
+DescribePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeResourcePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeResourcePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeResourcePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeResourcePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeResponsibilityTransfer
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DescribeResponsibilityTransferCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeResponsibilityTransferCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DescribeResponsibilityTransferCommandOutput/)
+</details>
+<details>
+<summary>
+DetachPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DetachPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DetachPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DetachPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DisableAWSServiceAccess
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DisableAWSServiceAccessCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DisableAWSServiceAccessCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DisableAWSServiceAccessCommandOutput/)
+</details>
+<details>
+<summary>
+DisablePolicyType
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/DisablePolicyTypeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DisablePolicyTypeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/DisablePolicyTypeCommandOutput/)
+</details>
+<details>
+<summary>
+EnableAllFeatures
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/EnableAllFeaturesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnableAllFeaturesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnableAllFeaturesCommandOutput/)
+</details>
+<details>
+<summary>
+EnableAWSServiceAccess
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/EnableAWSServiceAccessCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnableAWSServiceAccessCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnableAWSServiceAccessCommandOutput/)
+</details>
+<details>
+<summary>
+EnablePolicyType
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/EnablePolicyTypeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnablePolicyTypeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/EnablePolicyTypeCommandOutput/)
+</details>
+<details>
+<summary>
+InviteAccountToOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/InviteAccountToOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/InviteAccountToOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/InviteAccountToOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+InviteOrganizationToTransferResponsibility
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/InviteOrganizationToTransferResponsibilityCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/InviteOrganizationToTransferResponsibilityCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/InviteOrganizationToTransferResponsibilityCommandOutput/)
+</details>
+<details>
+<summary>
+LeaveOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/LeaveOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/LeaveOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/LeaveOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+ListAccounts
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListAccountsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsCommandOutput/)
+</details>
+<details>
+<summary>
+ListAccountsForParent
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListAccountsForParentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsForParentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsForParentCommandOutput/)
+</details>
+<details>
+<summary>
+ListAccountsWithInvalidEffectivePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListAccountsWithInvalidEffectivePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsWithInvalidEffectivePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAccountsWithInvalidEffectivePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+ListAWSServiceAccessForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListAWSServiceAccessForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAWSServiceAccessForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListAWSServiceAccessForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+ListChildren
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListChildrenCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListChildrenCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListChildrenCommandOutput/)
+</details>
+<details>
+<summary>
+ListCreateAccountStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListCreateAccountStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListCreateAccountStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListCreateAccountStatusCommandOutput/)
+</details>
+<details>
+<summary>
+ListDelegatedAdministrators
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListDelegatedAdministratorsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListDelegatedAdministratorsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListDelegatedAdministratorsCommandOutput/)
+</details>
+<details>
+<summary>
+ListDelegatedServicesForAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListDelegatedServicesForAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListDelegatedServicesForAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListDelegatedServicesForAccountCommandOutput/)
+</details>
+<details>
+<summary>
+ListEffectivePolicyValidationErrors
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListEffectivePolicyValidationErrorsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListEffectivePolicyValidationErrorsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListEffectivePolicyValidationErrorsCommandOutput/)
+</details>
+<details>
+<summary>
+ListHandshakesForAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListHandshakesForAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListHandshakesForAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListHandshakesForAccountCommandOutput/)
+</details>
+<details>
+<summary>
+ListHandshakesForOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListHandshakesForOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListHandshakesForOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListHandshakesForOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+ListInboundResponsibilityTransfers
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListInboundResponsibilityTransfersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListInboundResponsibilityTransfersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListInboundResponsibilityTransfersCommandOutput/)
+</details>
+<details>
+<summary>
+ListOrganizationalUnitsForParent
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListOrganizationalUnitsForParentCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListOrganizationalUnitsForParentCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListOrganizationalUnitsForParentCommandOutput/)
+</details>
+<details>
+<summary>
+ListOutboundResponsibilityTransfers
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListOutboundResponsibilityTransfersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListOutboundResponsibilityTransfersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListOutboundResponsibilityTransfersCommandOutput/)
+</details>
+<details>
+<summary>
+ListParents
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListParentsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListParentsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListParentsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListPoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListPoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListPoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+ListPoliciesForTarget
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListPoliciesForTargetCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListPoliciesForTargetCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListPoliciesForTargetCommandOutput/)
+</details>
+<details>
+<summary>
+ListRoots
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListRootsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListRootsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListRootsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+ListTargetsForPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/ListTargetsForPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListTargetsForPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/ListTargetsForPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+MoveAccount
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/MoveAccountCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/MoveAccountCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/MoveAccountCommandOutput/)
+</details>
+<details>
+<summary>
+PutResourcePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/PutResourcePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/PutResourcePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/PutResourcePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+RegisterDelegatedAdministrator
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/RegisterDelegatedAdministratorCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/RegisterDelegatedAdministratorCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/RegisterDelegatedAdministratorCommandOutput/)
+</details>
+<details>
+<summary>
+RemoveAccountFromOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/RemoveAccountFromOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/RemoveAccountFromOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/RemoveAccountFromOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+TerminateResponsibilityTransfer
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/TerminateResponsibilityTransferCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/TerminateResponsibilityTransferCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/TerminateResponsibilityTransferCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateOrganizationalUnit
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/UpdateOrganizationalUnitCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdateOrganizationalUnitCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdateOrganizationalUnitCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/UpdatePolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdatePolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdatePolicyCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateResponsibilityTransfer
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/organizations/command/UpdateResponsibilityTransferCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdateResponsibilityTransferCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-organizations/Interface/UpdateResponsibilityTransferCommandOutput/)
+</details>

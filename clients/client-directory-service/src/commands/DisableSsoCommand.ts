@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { DisableSsoRequest, DisableSsoResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DisableSsoCommand,
-  serializeAws_json1_1DisableSsoCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisableSsoRequest, DisableSsoResult } from "../models/models_0";
+import { DisableSso$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableSsoCommand}.
+ */
 export interface DisableSsoCommandInput extends DisableSsoRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableSsoCommand}.
+ */
 export interface DisableSsoCommandOutput extends DisableSsoResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface DisableSsoCommandOutput extends DisableSsoResult, __MetadataBea
  * ```javascript
  * import { DirectoryServiceClient, DisableSsoCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, DisableSsoCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // DisableSsoRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   UserName: "STRING_VALUE",
+ *   Password: "STRING_VALUE",
+ * };
  * const command = new DisableSsoCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisableSsoCommandInput - {@link DisableSsoCommandInput}
+ * @returns {@link DisableSsoCommandOutput}
  * @see {@link DisableSsoCommandInput} for command's `input` shape.
  * @see {@link DisableSsoCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link AuthenticationFailedException} (client fault)
+ *  <p>An authentication error occurred.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InsufficientPermissionsException} (client fault)
+ *  <p>The account does not have sufficient permission to perform the operation.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To disable SSO
+ * ```javascript
+ * // The following example disables single sign-on for a specified directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   Password: "Str0ngP@ssw0rd",
+ *   UserName: "Admin"
+ * };
+ * const command = new DisableSsoCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisableSsoCommand extends $Command<
-  DisableSsoCommandInput,
-  DisableSsoCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableSsoCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableSsoCommandInput, DisableSsoCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "DisableSsoCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableSsoRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisableSsoResult.filterSensitiveLog,
+export class DisableSsoCommand extends command<DisableSsoCommandInput, DisableSsoCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableSso",
+  DisableSso$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableSsoRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableSsoCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DisableSsoCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisableSsoCommandOutput> {
-    return deserializeAws_json1_1DisableSsoCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableSsoCommandInput;
+      output: DisableSsoCommandOutput;
+    };
+  };
 }

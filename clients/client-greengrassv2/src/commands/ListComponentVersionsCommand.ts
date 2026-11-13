@@ -1,95 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassV2Client";
-import { ListComponentVersionsRequest, ListComponentVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListComponentVersionsCommand,
-  serializeAws_restJson1ListComponentVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListComponentVersionsRequest, ListComponentVersionsResponse } from "../models/models_0";
+import { ListComponentVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListComponentVersionsCommand}.
+ */
 export interface ListComponentVersionsCommandInput extends ListComponentVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListComponentVersionsCommand}.
+ */
 export interface ListComponentVersionsCommandOutput extends ListComponentVersionsResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves a paginated list of all versions for a component. Greater versions are listed first.</p>
+ * <p>Retrieves a paginated list of all versions for a component. Greater versions are listed
+ *       first.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GreengrassV2Client, ListComponentVersionsCommand } from "@aws-sdk/client-greengrassv2"; // ES Modules import
  * // const { GreengrassV2Client, ListComponentVersionsCommand } = require("@aws-sdk/client-greengrassv2"); // CommonJS import
+ * // import type { GreengrassV2ClientConfig } from "@aws-sdk/client-greengrassv2";
+ * const config = {}; // type is GreengrassV2ClientConfig
  * const client = new GreengrassV2Client(config);
+ * const input = { // ListComponentVersionsRequest
+ *   arn: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListComponentVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListComponentVersionsResponse
+ * //   componentVersions: [ // ComponentVersionList
+ * //     { // ComponentVersionListItem
+ * //       componentName: "STRING_VALUE",
+ * //       componentVersion: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListComponentVersionsCommandInput - {@link ListComponentVersionsCommandInput}
+ * @returns {@link ListComponentVersionsCommandOutput}
  * @see {@link ListComponentVersionsCommandInput} for command's `input` shape.
  * @see {@link ListComponentVersionsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassV2ClientResolvedConfig | config} for GreengrassV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>IoT Greengrass can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a request rate quota. For example, you might have exceeded the
+ *       amount of times that you can retrieve device or deployment status per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters.</p>
+ *
+ * @throws {@link GreengrassV2ServiceException}
+ * <p>Base exception class for all service exceptions from GreengrassV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListComponentVersionsCommand extends $Command<
-  ListComponentVersionsCommandInput,
-  ListComponentVersionsCommandOutput,
-  GreengrassV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListComponentVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListComponentVersionsCommandInput, ListComponentVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassV2Client";
-    const commandName = "ListComponentVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListComponentVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListComponentVersionsResponse.filterSensitiveLog,
+export class ListComponentVersionsCommand extends command<ListComponentVersionsCommandInput, ListComponentVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListComponentVersions",
+  ListComponentVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListComponentVersionsRequest;
+      output: ListComponentVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListComponentVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListComponentVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListComponentVersionsCommandOutput> {
-    return deserializeAws_restJson1ListComponentVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListComponentVersionsCommandInput;
+      output: ListComponentVersionsCommandOutput;
+    };
+  };
 }

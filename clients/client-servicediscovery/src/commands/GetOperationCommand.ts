@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetOperationRequest, GetOperationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetOperationCommand,
-  serializeAws_json1_1GetOperationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceDiscoveryClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceDiscoveryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetOperationRequest, GetOperationResponse } from "../models/models_0";
+import { GetOperation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetOperationCommand}.
+ */
 export interface GetOperationCommandInput extends GetOperationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetOperationCommand}.
+ */
 export interface GetOperationCommandOutput extends GetOperationResponse, __MetadataBearer {}
 
 /**
  * <p>Gets information about any operation that returns an operation ID in the response, such as a
- *     <code>CreateService</code> request.</p>
+ *     <code>CreateHttpNamespace</code> request.</p>
  *          <note>
  *             <p>To get a list of operations that match specified criteria, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html">ListOperations</a>.</p>
  *          </note>
@@ -32,68 +33,92 @@ export interface GetOperationCommandOutput extends GetOperationResponse, __Metad
  * ```javascript
  * import { ServiceDiscoveryClient, GetOperationCommand } from "@aws-sdk/client-servicediscovery"; // ES Modules import
  * // const { ServiceDiscoveryClient, GetOperationCommand } = require("@aws-sdk/client-servicediscovery"); // CommonJS import
+ * // import type { ServiceDiscoveryClientConfig } from "@aws-sdk/client-servicediscovery";
+ * const config = {}; // type is ServiceDiscoveryClientConfig
  * const client = new ServiceDiscoveryClient(config);
+ * const input = { // GetOperationRequest
+ *   OperationId: "STRING_VALUE", // required
+ *   OwnerAccount: "STRING_VALUE",
+ * };
  * const command = new GetOperationCommand(input);
  * const response = await client.send(command);
+ * // { // GetOperationResponse
+ * //   Operation: { // Operation
+ * //     Id: "STRING_VALUE",
+ * //     OwnerAccount: "STRING_VALUE",
+ * //     Type: "CREATE_NAMESPACE" || "DELETE_NAMESPACE" || "UPDATE_NAMESPACE" || "UPDATE_SERVICE" || "REGISTER_INSTANCE" || "DEREGISTER_INSTANCE",
+ * //     Status: "SUBMITTED" || "PENDING" || "SUCCESS" || "FAIL",
+ * //     ErrorMessage: "STRING_VALUE",
+ * //     ErrorCode: "STRING_VALUE",
+ * //     CreateDate: new Date("TIMESTAMP"),
+ * //     UpdateDate: new Date("TIMESTAMP"),
+ * //     Targets: { // OperationTargetsMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetOperationCommandInput - {@link GetOperationCommandInput}
+ * @returns {@link GetOperationCommandOutput}
  * @see {@link GetOperationCommandInput} for command's `input` shape.
  * @see {@link GetOperationCommandOutput} for command's `response` shape.
- * @see {@link ServiceDiscoveryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceDiscoveryClientResolvedConfig | config} for ServiceDiscoveryClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>One or more specified values aren't valid. For example, a required value might be missing, a
+ *    numeric value might be outside the allowed range, or a string value might exceed length
+ *    constraints.</p>
+ *
+ * @throws {@link OperationNotFound} (client fault)
+ *  <p>No operation exists with the specified ID.</p>
+ *
+ * @throws {@link ServiceDiscoveryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceDiscovery service.</p>
+ *
+ *
+ * @example Example: Get operation result
+ * ```javascript
+ * // Example: Get operation result
+ * const input = {
+ *   OperationId: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd"
+ * };
+ * const command = new GetOperationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Operation: {
+ *     CreateDate: 1.587055860121E9,
+ *     Id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k9302yzd",
+ *     Status: "SUCCESS",
+ *     Targets: {
+ *       NAMESPACE: "ns-ylexjili4cdxy3xm"
+ *     },
+ *     Type: "CREATE_NAMESPACE",
+ *     UpdateDate: 1.587055900469E9
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetOperationCommand extends $Command<
-  GetOperationCommandInput,
-  GetOperationCommandOutput,
-  ServiceDiscoveryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetOperationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceDiscoveryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetOperationCommandInput, GetOperationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceDiscoveryClient";
-    const commandName = "GetOperationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetOperationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetOperationResponse.filterSensitiveLog,
+export class GetOperationCommand extends command<GetOperationCommandInput, GetOperationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetOperation",
+  GetOperation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOperationRequest;
+      output: GetOperationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetOperationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetOperationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetOperationCommandOutput> {
-    return deserializeAws_json1_1GetOperationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetOperationCommandInput;
+      output: GetOperationCommandOutput;
+    };
+  };
 }

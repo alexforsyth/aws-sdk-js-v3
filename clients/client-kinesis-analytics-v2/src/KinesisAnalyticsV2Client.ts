@@ -1,156 +1,204 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultKinesisAnalyticsV2HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AddApplicationCloudWatchLoggingOptionCommandInput,
   AddApplicationCloudWatchLoggingOptionCommandOutput,
 } from "./commands/AddApplicationCloudWatchLoggingOptionCommand";
-import {
+import type {
   AddApplicationInputCommandInput,
   AddApplicationInputCommandOutput,
 } from "./commands/AddApplicationInputCommand";
-import {
+import type {
   AddApplicationInputProcessingConfigurationCommandInput,
   AddApplicationInputProcessingConfigurationCommandOutput,
 } from "./commands/AddApplicationInputProcessingConfigurationCommand";
-import {
+import type {
   AddApplicationOutputCommandInput,
   AddApplicationOutputCommandOutput,
 } from "./commands/AddApplicationOutputCommand";
-import {
+import type {
   AddApplicationReferenceDataSourceCommandInput,
   AddApplicationReferenceDataSourceCommandOutput,
 } from "./commands/AddApplicationReferenceDataSourceCommand";
-import {
+import type {
   AddApplicationVpcConfigurationCommandInput,
   AddApplicationVpcConfigurationCommandOutput,
 } from "./commands/AddApplicationVpcConfigurationCommand";
-import { CreateApplicationCommandInput, CreateApplicationCommandOutput } from "./commands/CreateApplicationCommand";
-import {
+import type {
+  CreateApplicationCommandInput,
+  CreateApplicationCommandOutput,
+} from "./commands/CreateApplicationCommand";
+import type {
   CreateApplicationPresignedUrlCommandInput,
   CreateApplicationPresignedUrlCommandOutput,
 } from "./commands/CreateApplicationPresignedUrlCommand";
-import {
+import type {
   CreateApplicationSnapshotCommandInput,
   CreateApplicationSnapshotCommandOutput,
 } from "./commands/CreateApplicationSnapshotCommand";
-import {
+import type { CreateSnapshotCommandInput, CreateSnapshotCommandOutput } from "./commands/CreateSnapshotCommand";
+import type {
   DeleteApplicationCloudWatchLoggingOptionCommandInput,
   DeleteApplicationCloudWatchLoggingOptionCommandOutput,
 } from "./commands/DeleteApplicationCloudWatchLoggingOptionCommand";
-import { DeleteApplicationCommandInput, DeleteApplicationCommandOutput } from "./commands/DeleteApplicationCommand";
-import {
+import type {
+  DeleteApplicationCommandInput,
+  DeleteApplicationCommandOutput,
+} from "./commands/DeleteApplicationCommand";
+import type {
   DeleteApplicationInputProcessingConfigurationCommandInput,
   DeleteApplicationInputProcessingConfigurationCommandOutput,
 } from "./commands/DeleteApplicationInputProcessingConfigurationCommand";
-import {
+import type {
   DeleteApplicationOutputCommandInput,
   DeleteApplicationOutputCommandOutput,
 } from "./commands/DeleteApplicationOutputCommand";
-import {
+import type {
   DeleteApplicationReferenceDataSourceCommandInput,
   DeleteApplicationReferenceDataSourceCommandOutput,
 } from "./commands/DeleteApplicationReferenceDataSourceCommand";
-import {
+import type {
   DeleteApplicationSnapshotCommandInput,
   DeleteApplicationSnapshotCommandOutput,
 } from "./commands/DeleteApplicationSnapshotCommand";
-import {
+import type {
   DeleteApplicationVpcConfigurationCommandInput,
   DeleteApplicationVpcConfigurationCommandOutput,
 } from "./commands/DeleteApplicationVpcConfigurationCommand";
-import {
+import type { DeleteSnapshotCommandInput, DeleteSnapshotCommandOutput } from "./commands/DeleteSnapshotCommand";
+import type {
   DescribeApplicationCommandInput,
   DescribeApplicationCommandOutput,
 } from "./commands/DescribeApplicationCommand";
-import {
+import type {
+  DescribeApplicationOperationCommandInput,
+  DescribeApplicationOperationCommandOutput,
+} from "./commands/DescribeApplicationOperationCommand";
+import type {
   DescribeApplicationSnapshotCommandInput,
   DescribeApplicationSnapshotCommandOutput,
 } from "./commands/DescribeApplicationSnapshotCommand";
-import {
+import type {
   DescribeApplicationVersionCommandInput,
   DescribeApplicationVersionCommandOutput,
 } from "./commands/DescribeApplicationVersionCommand";
-import {
+import type { DescribeSnapshotCommandInput, DescribeSnapshotCommandOutput } from "./commands/DescribeSnapshotCommand";
+import type {
+  DescribeSnapshotOperationCommandInput,
+  DescribeSnapshotOperationCommandOutput,
+} from "./commands/DescribeSnapshotOperationCommand";
+import type {
   DiscoverInputSchemaCommandInput,
   DiscoverInputSchemaCommandOutput,
 } from "./commands/DiscoverInputSchemaCommand";
-import { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
-import {
+import type { ExportSnapshotCommandInput, ExportSnapshotCommandOutput } from "./commands/ExportSnapshotCommand";
+import type { ImportSnapshotCommandInput, ImportSnapshotCommandOutput } from "./commands/ImportSnapshotCommand";
+import type {
+  ListApplicationOperationsCommandInput,
+  ListApplicationOperationsCommandOutput,
+} from "./commands/ListApplicationOperationsCommand";
+import type { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
+import type {
   ListApplicationSnapshotsCommandInput,
   ListApplicationSnapshotsCommandOutput,
 } from "./commands/ListApplicationSnapshotsCommand";
-import {
+import type {
   ListApplicationVersionsCommandInput,
   ListApplicationVersionsCommandOutput,
 } from "./commands/ListApplicationVersionsCommand";
-import {
+import type {
+  ListSnapshotOperationsCommandInput,
+  ListSnapshotOperationsCommandOutput,
+} from "./commands/ListSnapshotOperationsCommand";
+import type { ListSnapshotsCommandInput, ListSnapshotsCommandOutput } from "./commands/ListSnapshotsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   RollbackApplicationCommandInput,
   RollbackApplicationCommandOutput,
 } from "./commands/RollbackApplicationCommand";
-import { StartApplicationCommandInput, StartApplicationCommandOutput } from "./commands/StartApplicationCommand";
-import { StopApplicationCommandInput, StopApplicationCommandOutput } from "./commands/StopApplicationCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateApplicationCommandInput, UpdateApplicationCommandOutput } from "./commands/UpdateApplicationCommand";
-import {
+import type { StartApplicationCommandInput, StartApplicationCommandOutput } from "./commands/StartApplicationCommand";
+import type { StopApplicationCommandInput, StopApplicationCommandOutput } from "./commands/StopApplicationCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateApplicationCommandInput,
+  UpdateApplicationCommandOutput,
+} from "./commands/UpdateApplicationCommand";
+import type {
   UpdateApplicationMaintenanceConfigurationCommandInput,
   UpdateApplicationMaintenanceConfigurationCommandOutput,
 } from "./commands/UpdateApplicationMaintenanceConfigurationCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddApplicationCloudWatchLoggingOptionCommandInput
   | AddApplicationInputCommandInput
@@ -161,6 +209,7 @@ export type ServiceInputTypes =
   | CreateApplicationCommandInput
   | CreateApplicationPresignedUrlCommandInput
   | CreateApplicationSnapshotCommandInput
+  | CreateSnapshotCommandInput
   | DeleteApplicationCloudWatchLoggingOptionCommandInput
   | DeleteApplicationCommandInput
   | DeleteApplicationInputProcessingConfigurationCommandInput
@@ -168,13 +217,22 @@ export type ServiceInputTypes =
   | DeleteApplicationReferenceDataSourceCommandInput
   | DeleteApplicationSnapshotCommandInput
   | DeleteApplicationVpcConfigurationCommandInput
+  | DeleteSnapshotCommandInput
   | DescribeApplicationCommandInput
+  | DescribeApplicationOperationCommandInput
   | DescribeApplicationSnapshotCommandInput
   | DescribeApplicationVersionCommandInput
+  | DescribeSnapshotCommandInput
+  | DescribeSnapshotOperationCommandInput
   | DiscoverInputSchemaCommandInput
+  | ExportSnapshotCommandInput
+  | ImportSnapshotCommandInput
+  | ListApplicationOperationsCommandInput
   | ListApplicationSnapshotsCommandInput
   | ListApplicationVersionsCommandInput
   | ListApplicationsCommandInput
+  | ListSnapshotOperationsCommandInput
+  | ListSnapshotsCommandInput
   | ListTagsForResourceCommandInput
   | RollbackApplicationCommandInput
   | StartApplicationCommandInput
@@ -184,6 +242,9 @@ export type ServiceInputTypes =
   | UpdateApplicationCommandInput
   | UpdateApplicationMaintenanceConfigurationCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddApplicationCloudWatchLoggingOptionCommandOutput
   | AddApplicationInputCommandOutput
@@ -194,6 +255,7 @@ export type ServiceOutputTypes =
   | CreateApplicationCommandOutput
   | CreateApplicationPresignedUrlCommandOutput
   | CreateApplicationSnapshotCommandOutput
+  | CreateSnapshotCommandOutput
   | DeleteApplicationCloudWatchLoggingOptionCommandOutput
   | DeleteApplicationCommandOutput
   | DeleteApplicationInputProcessingConfigurationCommandOutput
@@ -201,13 +263,22 @@ export type ServiceOutputTypes =
   | DeleteApplicationReferenceDataSourceCommandOutput
   | DeleteApplicationSnapshotCommandOutput
   | DeleteApplicationVpcConfigurationCommandOutput
+  | DeleteSnapshotCommandOutput
   | DescribeApplicationCommandOutput
+  | DescribeApplicationOperationCommandOutput
   | DescribeApplicationSnapshotCommandOutput
   | DescribeApplicationVersionCommandOutput
+  | DescribeSnapshotCommandOutput
+  | DescribeSnapshotOperationCommandOutput
   | DiscoverInputSchemaCommandOutput
+  | ExportSnapshotCommandOutput
+  | ImportSnapshotCommandOutput
+  | ListApplicationOperationsCommandOutput
   | ListApplicationSnapshotsCommandOutput
   | ListApplicationVersionsCommandOutput
   | ListApplicationsCommandOutput
+  | ListSnapshotOperationsCommandOutput
+  | ListSnapshotsCommandOutput
   | ListTagsForResourceCommandOutput
   | RollbackApplicationCommandOutput
   | StartApplicationCommandOutput
@@ -217,18 +288,21 @@ export type ServiceOutputTypes =
   | UpdateApplicationCommandOutput
   | UpdateApplicationMaintenanceConfigurationCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -240,7 +314,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -279,25 +353,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -310,65 +375,118 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type KinesisAnalyticsV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of KinesisAnalyticsV2Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type KinesisAnalyticsV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of KinesisAnalyticsV2Client class constructor that set the region, credentials and other options.
  */
 export interface KinesisAnalyticsV2ClientConfig extends KinesisAnalyticsV2ClientConfigType {}
 
-type KinesisAnalyticsV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of KinesisAnalyticsV2Client class. This is resolved and normalized from the {@link KinesisAnalyticsV2ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type KinesisAnalyticsV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of KinesisAnalyticsV2Client class. This is resolved and normalized from the {@link KinesisAnalyticsV2ClientConfig | constructor configuration interface}.
  */
 export interface KinesisAnalyticsV2ClientResolvedConfig extends KinesisAnalyticsV2ClientResolvedConfigType {}
 
 /**
- * <p>Amazon Kinesis Data Analytics is a fully managed service that you can use to process and analyze streaming data using Java, SQL, or Scala. The service
+ * <note>
+ *             <p>Amazon Managed Service for Apache Flink was previously known as Amazon Kinesis Data Analytics for Apache Flink.</p>
+ *          </note>
+ *          <p>Amazon Managed Service for Apache Flink is a fully managed service that you can use to process and analyze streaming data using Java, Python, SQL, or Scala. The service
  *       enables you to quickly author and run Java, SQL, or Scala code against streaming sources to perform time
  *       series analytics, feed real-time dashboards, and create real-time metrics.</p>
+ * @public
  */
 export class KinesisAnalyticsV2Client extends __Client<
   __HttpHandlerOptions,
@@ -381,22 +499,36 @@ export class KinesisAnalyticsV2Client extends __Client<
    */
   readonly config: KinesisAnalyticsV2ClientResolvedConfig;
 
-  constructor(configuration: KinesisAnalyticsV2ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<KinesisAnalyticsV2ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultKinesisAnalyticsV2HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: KinesisAnalyticsV2ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

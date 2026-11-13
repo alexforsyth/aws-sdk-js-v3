@@ -1,0 +1,651 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AssociateEipToVlanCommandInput,
+  type AssociateEipToVlanCommandOutput,
+  AssociateEipToVlanCommand,
+} from "./commands/AssociateEipToVlanCommand";
+import {
+  type CreateEntitlementCommandInput,
+  type CreateEntitlementCommandOutput,
+  CreateEntitlementCommand,
+} from "./commands/CreateEntitlementCommand";
+import {
+  type CreateEnvironmentCommandInput,
+  type CreateEnvironmentCommandOutput,
+  CreateEnvironmentCommand,
+} from "./commands/CreateEnvironmentCommand";
+import {
+  type CreateEnvironmentConnectorCommandInput,
+  type CreateEnvironmentConnectorCommandOutput,
+  CreateEnvironmentConnectorCommand,
+} from "./commands/CreateEnvironmentConnectorCommand";
+import {
+  type CreateEnvironmentHostCommandInput,
+  type CreateEnvironmentHostCommandOutput,
+  CreateEnvironmentHostCommand,
+} from "./commands/CreateEnvironmentHostCommand";
+import {
+  type DeleteEntitlementCommandInput,
+  type DeleteEntitlementCommandOutput,
+  DeleteEntitlementCommand,
+} from "./commands/DeleteEntitlementCommand";
+import {
+  type DeleteEnvironmentCommandInput,
+  type DeleteEnvironmentCommandOutput,
+  DeleteEnvironmentCommand,
+} from "./commands/DeleteEnvironmentCommand";
+import {
+  type DeleteEnvironmentConnectorCommandInput,
+  type DeleteEnvironmentConnectorCommandOutput,
+  DeleteEnvironmentConnectorCommand,
+} from "./commands/DeleteEnvironmentConnectorCommand";
+import {
+  type DeleteEnvironmentHostCommandInput,
+  type DeleteEnvironmentHostCommandOutput,
+  DeleteEnvironmentHostCommand,
+} from "./commands/DeleteEnvironmentHostCommand";
+import {
+  type DisassociateEipFromVlanCommandInput,
+  type DisassociateEipFromVlanCommandOutput,
+  DisassociateEipFromVlanCommand,
+} from "./commands/DisassociateEipFromVlanCommand";
+import {
+  type GetAccountSettingsCommandInput,
+  type GetAccountSettingsCommandOutput,
+  GetAccountSettingsCommand,
+} from "./commands/GetAccountSettingsCommand";
+import {
+  type GetDepotUrlCommandInput,
+  type GetDepotUrlCommandOutput,
+  GetDepotUrlCommand,
+} from "./commands/GetDepotUrlCommand";
+import {
+  type GetEnvironmentCommandInput,
+  type GetEnvironmentCommandOutput,
+  GetEnvironmentCommand,
+} from "./commands/GetEnvironmentCommand";
+import {
+  type GetVersionsCommandInput,
+  type GetVersionsCommandOutput,
+  GetVersionsCommand,
+} from "./commands/GetVersionsCommand";
+import {
+  type ListEnvironmentConnectorsCommandInput,
+  type ListEnvironmentConnectorsCommandOutput,
+  ListEnvironmentConnectorsCommand,
+} from "./commands/ListEnvironmentConnectorsCommand";
+import {
+  type ListEnvironmentHostsCommandInput,
+  type ListEnvironmentHostsCommandOutput,
+  ListEnvironmentHostsCommand,
+} from "./commands/ListEnvironmentHostsCommand";
+import {
+  type ListEnvironmentsCommandInput,
+  type ListEnvironmentsCommandOutput,
+  ListEnvironmentsCommand,
+} from "./commands/ListEnvironmentsCommand";
+import {
+  type ListEnvironmentVlansCommandInput,
+  type ListEnvironmentVlansCommandOutput,
+  ListEnvironmentVlansCommand,
+} from "./commands/ListEnvironmentVlansCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListVmEntitlementsCommandInput,
+  type ListVmEntitlementsCommandOutput,
+  ListVmEntitlementsCommand,
+} from "./commands/ListVmEntitlementsCommand";
+import {
+  type PutAccountSettingsCommandInput,
+  type PutAccountSettingsCommandOutput,
+  PutAccountSettingsCommand,
+} from "./commands/PutAccountSettingsCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateEnvironmentConnectorCommandInput,
+  type UpdateEnvironmentConnectorCommandOutput,
+  UpdateEnvironmentConnectorCommand,
+} from "./commands/UpdateEnvironmentConnectorCommand";
+import { EvsClient } from "./EvsClient";
+import { paginateListEnvironmentConnectors } from "./pagination/ListEnvironmentConnectorsPaginator";
+import { paginateListEnvironmentHosts } from "./pagination/ListEnvironmentHostsPaginator";
+import { paginateListEnvironments } from "./pagination/ListEnvironmentsPaginator";
+import { paginateListEnvironmentVlans } from "./pagination/ListEnvironmentVlansPaginator";
+import { paginateListVmEntitlements } from "./pagination/ListVmEntitlementsPaginator";
+
+const commands = {
+  AssociateEipToVlanCommand,
+  CreateEntitlementCommand,
+  CreateEnvironmentCommand,
+  CreateEnvironmentConnectorCommand,
+  CreateEnvironmentHostCommand,
+  DeleteEntitlementCommand,
+  DeleteEnvironmentCommand,
+  DeleteEnvironmentConnectorCommand,
+  DeleteEnvironmentHostCommand,
+  DisassociateEipFromVlanCommand,
+  GetAccountSettingsCommand,
+  GetDepotUrlCommand,
+  GetEnvironmentCommand,
+  GetVersionsCommand,
+  ListEnvironmentConnectorsCommand,
+  ListEnvironmentHostsCommand,
+  ListEnvironmentsCommand,
+  ListEnvironmentVlansCommand,
+  ListTagsForResourceCommand,
+  ListVmEntitlementsCommand,
+  PutAccountSettingsCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateEnvironmentConnectorCommand,
+};
+const paginators = {
+  paginateListEnvironmentConnectors,
+  paginateListEnvironmentHosts,
+  paginateListEnvironments,
+  paginateListEnvironmentVlans,
+  paginateListVmEntitlements,
+};
+
+/**
+ * @public
+ */
+export interface EvsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Evs {
+  /**
+   * @see {@link AssociateEipToVlanCommand}
+   */
+  associateEipToVlan(
+    args: AssociateEipToVlanCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<AssociateEipToVlanCommandOutput>;
+  associateEipToVlan(
+    args: AssociateEipToVlanCommandInput,
+    cb: (err: any, data?: AssociateEipToVlanCommandOutput) => void
+  ): void;
+  associateEipToVlan(
+    args: AssociateEipToVlanCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: AssociateEipToVlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEntitlementCommand}
+   */
+  createEntitlement(
+    args: CreateEntitlementCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<CreateEntitlementCommandOutput>;
+  createEntitlement(
+    args: CreateEntitlementCommandInput,
+    cb: (err: any, data?: CreateEntitlementCommandOutput) => void
+  ): void;
+  createEntitlement(
+    args: CreateEntitlementCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: CreateEntitlementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEnvironmentCommand}
+   */
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<CreateEnvironmentCommandOutput>;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+  createEnvironment(
+    args: CreateEnvironmentCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: CreateEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEnvironmentConnectorCommand}
+   */
+  createEnvironmentConnector(
+    args: CreateEnvironmentConnectorCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<CreateEnvironmentConnectorCommandOutput>;
+  createEnvironmentConnector(
+    args: CreateEnvironmentConnectorCommandInput,
+    cb: (err: any, data?: CreateEnvironmentConnectorCommandOutput) => void
+  ): void;
+  createEnvironmentConnector(
+    args: CreateEnvironmentConnectorCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: CreateEnvironmentConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEnvironmentHostCommand}
+   */
+  createEnvironmentHost(
+    args: CreateEnvironmentHostCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<CreateEnvironmentHostCommandOutput>;
+  createEnvironmentHost(
+    args: CreateEnvironmentHostCommandInput,
+    cb: (err: any, data?: CreateEnvironmentHostCommandOutput) => void
+  ): void;
+  createEnvironmentHost(
+    args: CreateEnvironmentHostCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: CreateEnvironmentHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEntitlementCommand}
+   */
+  deleteEntitlement(
+    args: DeleteEntitlementCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<DeleteEntitlementCommandOutput>;
+  deleteEntitlement(
+    args: DeleteEntitlementCommandInput,
+    cb: (err: any, data?: DeleteEntitlementCommandOutput) => void
+  ): void;
+  deleteEntitlement(
+    args: DeleteEntitlementCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: DeleteEntitlementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnvironmentCommand}
+   */
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<DeleteEnvironmentCommandOutput>;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+  deleteEnvironment(
+    args: DeleteEnvironmentCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: DeleteEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnvironmentConnectorCommand}
+   */
+  deleteEnvironmentConnector(
+    args: DeleteEnvironmentConnectorCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<DeleteEnvironmentConnectorCommandOutput>;
+  deleteEnvironmentConnector(
+    args: DeleteEnvironmentConnectorCommandInput,
+    cb: (err: any, data?: DeleteEnvironmentConnectorCommandOutput) => void
+  ): void;
+  deleteEnvironmentConnector(
+    args: DeleteEnvironmentConnectorCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: DeleteEnvironmentConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEnvironmentHostCommand}
+   */
+  deleteEnvironmentHost(
+    args: DeleteEnvironmentHostCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<DeleteEnvironmentHostCommandOutput>;
+  deleteEnvironmentHost(
+    args: DeleteEnvironmentHostCommandInput,
+    cb: (err: any, data?: DeleteEnvironmentHostCommandOutput) => void
+  ): void;
+  deleteEnvironmentHost(
+    args: DeleteEnvironmentHostCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: DeleteEnvironmentHostCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateEipFromVlanCommand}
+   */
+  disassociateEipFromVlan(
+    args: DisassociateEipFromVlanCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<DisassociateEipFromVlanCommandOutput>;
+  disassociateEipFromVlan(
+    args: DisassociateEipFromVlanCommandInput,
+    cb: (err: any, data?: DisassociateEipFromVlanCommandOutput) => void
+  ): void;
+  disassociateEipFromVlan(
+    args: DisassociateEipFromVlanCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: DisassociateEipFromVlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAccountSettingsCommand}
+   */
+  getAccountSettings(): Promise<GetAccountSettingsCommandOutput>;
+  getAccountSettings(
+    args: GetAccountSettingsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<GetAccountSettingsCommandOutput>;
+  getAccountSettings(
+    args: GetAccountSettingsCommandInput,
+    cb: (err: any, data?: GetAccountSettingsCommandOutput) => void
+  ): void;
+  getAccountSettings(
+    args: GetAccountSettingsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: GetAccountSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDepotUrlCommand}
+   */
+  getDepotUrl(
+    args: GetDepotUrlCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<GetDepotUrlCommandOutput>;
+  getDepotUrl(
+    args: GetDepotUrlCommandInput,
+    cb: (err: any, data?: GetDepotUrlCommandOutput) => void
+  ): void;
+  getDepotUrl(
+    args: GetDepotUrlCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: GetDepotUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnvironmentCommand}
+   */
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<GetEnvironmentCommandOutput>;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+  getEnvironment(
+    args: GetEnvironmentCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: GetEnvironmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVersionsCommand}
+   */
+  getVersions(): Promise<GetVersionsCommandOutput>;
+  getVersions(
+    args: GetVersionsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<GetVersionsCommandOutput>;
+  getVersions(
+    args: GetVersionsCommandInput,
+    cb: (err: any, data?: GetVersionsCommandOutput) => void
+  ): void;
+  getVersions(
+    args: GetVersionsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: GetVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentConnectorsCommand}
+   */
+  listEnvironmentConnectors(
+    args: ListEnvironmentConnectorsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListEnvironmentConnectorsCommandOutput>;
+  listEnvironmentConnectors(
+    args: ListEnvironmentConnectorsCommandInput,
+    cb: (err: any, data?: ListEnvironmentConnectorsCommandOutput) => void
+  ): void;
+  listEnvironmentConnectors(
+    args: ListEnvironmentConnectorsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListEnvironmentConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentHostsCommand}
+   */
+  listEnvironmentHosts(
+    args: ListEnvironmentHostsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListEnvironmentHostsCommandOutput>;
+  listEnvironmentHosts(
+    args: ListEnvironmentHostsCommandInput,
+    cb: (err: any, data?: ListEnvironmentHostsCommandOutput) => void
+  ): void;
+  listEnvironmentHosts(
+    args: ListEnvironmentHostsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListEnvironmentHostsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   */
+  listEnvironments(): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListEnvironmentsCommandOutput>;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+  listEnvironments(
+    args: ListEnvironmentsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListEnvironmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentVlansCommand}
+   */
+  listEnvironmentVlans(
+    args: ListEnvironmentVlansCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListEnvironmentVlansCommandOutput>;
+  listEnvironmentVlans(
+    args: ListEnvironmentVlansCommandInput,
+    cb: (err: any, data?: ListEnvironmentVlansCommandOutput) => void
+  ): void;
+  listEnvironmentVlans(
+    args: ListEnvironmentVlansCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListEnvironmentVlansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVmEntitlementsCommand}
+   */
+  listVmEntitlements(
+    args: ListVmEntitlementsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<ListVmEntitlementsCommandOutput>;
+  listVmEntitlements(
+    args: ListVmEntitlementsCommandInput,
+    cb: (err: any, data?: ListVmEntitlementsCommandOutput) => void
+  ): void;
+  listVmEntitlements(
+    args: ListVmEntitlementsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: ListVmEntitlementsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAccountSettingsCommand}
+   */
+  putAccountSettings(
+    args: PutAccountSettingsCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<PutAccountSettingsCommandOutput>;
+  putAccountSettings(
+    args: PutAccountSettingsCommandInput,
+    cb: (err: any, data?: PutAccountSettingsCommandOutput) => void
+  ): void;
+  putAccountSettings(
+    args: PutAccountSettingsCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: PutAccountSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEnvironmentConnectorCommand}
+   */
+  updateEnvironmentConnector(
+    args: UpdateEnvironmentConnectorCommandInput,
+    options?: EvsRequestOptions
+  ): Promise<UpdateEnvironmentConnectorCommandOutput>;
+  updateEnvironmentConnector(
+    args: UpdateEnvironmentConnectorCommandInput,
+    cb: (err: any, data?: UpdateEnvironmentConnectorCommandOutput) => void
+  ): void;
+  updateEnvironmentConnector(
+    args: UpdateEnvironmentConnectorCommandInput,
+    options: EvsRequestOptions,
+    cb: (err: any, data?: UpdateEnvironmentConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnvironmentConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentConnectorsCommandOutput}.
+   */
+  paginateListEnvironmentConnectors(
+    args: ListEnvironmentConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentHostsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentHostsCommandOutput}.
+   */
+  paginateListEnvironmentHosts(
+    args: ListEnvironmentHostsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentHostsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentsCommandOutput}.
+   */
+  paginateListEnvironments(
+    args?: ListEnvironmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentsCommandOutput>;
+
+  /**
+   * @see {@link ListEnvironmentVlansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnvironmentVlansCommandOutput}.
+   */
+  paginateListEnvironmentVlans(
+    args: ListEnvironmentVlansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnvironmentVlansCommandOutput>;
+
+  /**
+   * @see {@link ListVmEntitlementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVmEntitlementsCommandOutput}.
+   */
+  paginateListVmEntitlements(
+    args: ListVmEntitlementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVmEntitlementsCommandOutput>;
+}
+
+/**
+ * <p>Amazon Elastic VMware Service (Amazon EVS) is a service that you can use to deploy a VMware Cloud Foundation (VCF) software environment directly on EC2 bare metal instances within an Amazon Virtual Private Cloud (VPC).</p> <p>Workloads running on Amazon EVS are fully compatible with workloads running on any standard VMware vSphere environment. This means that you can migrate any VMware-based workload to Amazon EVS without workload modification.</p>
+ * @public
+ */
+export class Evs extends EvsClient implements Evs {}
+createAggregatedClient(commands, Evs, { paginators });

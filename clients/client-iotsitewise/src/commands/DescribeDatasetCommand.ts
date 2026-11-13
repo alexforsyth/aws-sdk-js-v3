@@ -1,0 +1,145 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDatasetRequest, DescribeDatasetResponse } from "../models/models_0";
+import { DescribeDataset$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDatasetCommand}.
+ */
+export interface DescribeDatasetCommandInput extends DescribeDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDatasetCommand}.
+ */
+export interface DescribeDatasetCommandOutput extends DescribeDatasetResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about a dataset.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IoTSiteWiseClient, DescribeDatasetCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
+ * // const { IoTSiteWiseClient, DescribeDatasetCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
+ * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeDatasetRequest
+ *   datasetId: "STRING_VALUE", // required
+ *   workspaceName: "STRING_VALUE",
+ *   datasetVersion: "STRING_VALUE",
+ * };
+ * const command = new DescribeDatasetCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeDatasetResponse
+ * //   datasetId: "STRING_VALUE", // required
+ * //   datasetArn: "STRING_VALUE", // required
+ * //   datasetName: "STRING_VALUE", // required
+ * //   datasetDescription: "STRING_VALUE", // required
+ * //   datasetType: "SESSION" || "CURATED" || "EXTERNAL",
+ * //   datasetConfig: { // DatasetConfig
+ * //     session: { // SessionConfig
+ * //       sessionStartTimestamp: { // TimeInNanos
+ * //         timeInSeconds: Number("long"), // required
+ * //         offsetInNanos: Number("int"),
+ * //       },
+ * //       sessionEndTimestamp: {
+ * //         timeInSeconds: Number("long"), // required
+ * //         offsetInNanos: Number("int"),
+ * //       },
+ * //     },
+ * //   },
+ * //   workspaceName: "STRING_VALUE",
+ * //   metadata: { // Metadata
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   datasetSource: { // DatasetSource
+ * //     sourceType: "KENDRA" || "SITEWISE", // required
+ * //     sourceFormat: "KNOWLEDGE_BASE" || "TIMESERIES", // required
+ * //     sourceDetail: { // SourceDetail
+ * //       kendra: { // KendraSourceDetail
+ * //         knowledgeBaseArn: "STRING_VALUE", // required
+ * //         roleArn: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   },
+ * //   datasetStatus: { // DatasetStatus
+ * //     state: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING" || "FAILED", // required
+ * //     error: { // ErrorDetails
+ * //       code: "VALIDATION_ERROR" || "INTERNAL_FAILURE", // required
+ * //       message: "STRING_VALUE", // required
+ * //       details: [ // DetailedErrors
+ * //         { // DetailedError
+ * //           code: "INCOMPATIBLE_COMPUTE_LOCATION" || "INCOMPATIBLE_FORWARDING_CONFIGURATION", // required
+ * //           message: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * //   datasetCreationDate: new Date("TIMESTAMP"), // required
+ * //   datasetLastUpdateDate: new Date("TIMESTAMP"), // required
+ * //   datasetVersion: "STRING_VALUE",
+ * //   enrichmentStatus: { // DatasetEnrichment
+ * //     video: { // DatasetEnrichmentEntry
+ * //       status: "FULLY_ENRICHED" || "PARTIALLY_ENRICHED" || "NOT_ENRICHED", // required
+ * //       lastEnrichedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeDatasetCommandInput - {@link DescribeDatasetCommandInput}
+ * @returns {@link DescribeDatasetCommandOutput}
+ * @see {@link DescribeDatasetCommandInput} for command's `input` shape.
+ * @see {@link DescribeDatasetCommandOutput} for command's `response` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeDatasetCommand extends command<DescribeDatasetCommandInput, DescribeDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataset",
+  DescribeDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDatasetRequest;
+      output: DescribeDatasetResponse;
+    };
+    sdk: {
+      input: DescribeDatasetCommandInput;
+      output: DescribeDatasetCommandOutput;
+    };
+  };
+}

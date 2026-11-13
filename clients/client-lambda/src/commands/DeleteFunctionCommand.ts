@@ -1,100 +1,105 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { DeleteFunctionRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteFunctionCommand,
-  serializeAws_restJson1DeleteFunctionCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface DeleteFunctionCommandInput extends DeleteFunctionRequest {}
-export interface DeleteFunctionCommandOutput extends __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFunctionRequest, DeleteFunctionResponse } from "../models/models_0";
+import { DeleteFunction$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.
- *       Otherwise, all versions and aliases are deleted.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
  *
- *          <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>.
- *       For Amazon Web Services services and resources that invoke your function directly, delete the trigger in the service where you
- *       originally configured it.</p>
+ * The input for {@link DeleteFunctionCommand}.
+ */
+export interface DeleteFunctionCommandInput extends DeleteFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFunctionCommand}.
+ */
+export interface DeleteFunctionCommandOutput extends DeleteFunctionResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a Lambda Event Function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted. This doesn't require the user to have explicit permissions for <a>DeleteAlias</a>.</p> <note> <p>A deleted Lambda function cannot be recovered. Ensure that you specify the correct function name and version before deleting.</p> </note> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, DeleteFunctionCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, DeleteFunctionCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // DeleteFunctionRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Qualifier: "STRING_VALUE",
+ * };
  * const command = new DeleteFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFunctionResponse
+ * //   StatusCode: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param DeleteFunctionCommandInput - {@link DeleteFunctionCommandInput}
+ * @returns {@link DeleteFunctionCommandOutput}
  * @see {@link DeleteFunctionCommandInput} for command's `input` shape.
  * @see {@link DeleteFunctionCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource already exists, or another operation is in progress.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To delete a version of a Lambda function
+ * ```javascript
+ * // The following example deletes version 1 of a Lambda function named my-function.
+ * const input = {
+ *   FunctionName: "my-function",
+ *   Qualifier: "1"
+ * };
+ * const command = new DeleteFunctionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteFunctionCommand extends $Command<
-  DeleteFunctionCommandInput,
-  DeleteFunctionCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFunctionCommandInput, DeleteFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "DeleteFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteFunctionCommand extends command<DeleteFunctionCommandInput, DeleteFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFunction",
+  DeleteFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFunctionRequest;
+      output: DeleteFunctionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFunctionCommandOutput> {
-    return deserializeAws_restJson1DeleteFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFunctionCommandInput;
+      output: DeleteFunctionCommandOutput;
+    };
+  };
 }

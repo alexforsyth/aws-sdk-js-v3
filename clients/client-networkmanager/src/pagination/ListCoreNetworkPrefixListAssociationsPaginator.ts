@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListCoreNetworkPrefixListAssociationsCommand,
+  ListCoreNetworkPrefixListAssociationsCommandInput,
+  ListCoreNetworkPrefixListAssociationsCommandOutput,
+} from "../commands/ListCoreNetworkPrefixListAssociationsCommand";
+import { NetworkManagerClient } from "../NetworkManagerClient";
+import type { NetworkManagerPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListCoreNetworkPrefixListAssociations: (
+  config: NetworkManagerPaginationConfiguration,
+  input: ListCoreNetworkPrefixListAssociationsCommandInput,
+  ...rest: any[]
+) => Paginator<ListCoreNetworkPrefixListAssociationsCommandOutput> = createPaginator<
+  NetworkManagerPaginationConfiguration,
+  ListCoreNetworkPrefixListAssociationsCommandInput,
+  ListCoreNetworkPrefixListAssociationsCommandOutput
+>(NetworkManagerClient, ListCoreNetworkPrefixListAssociationsCommand, "NextToken", "NextToken", "MaxResults");

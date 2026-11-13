@@ -1,281 +1,3571 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AddTagsToResourceCommandInput,
+  type AddTagsToResourceCommandOutput,
   AddTagsToResourceCommand,
-  AddTagsToResourceCommandInput,
-  AddTagsToResourceCommandOutput,
 } from "./commands/AddTagsToResourceCommand";
 import {
+  type ApplyPendingMaintenanceActionCommandInput,
+  type ApplyPendingMaintenanceActionCommandOutput,
   ApplyPendingMaintenanceActionCommand,
-  ApplyPendingMaintenanceActionCommandInput,
-  ApplyPendingMaintenanceActionCommandOutput,
 } from "./commands/ApplyPendingMaintenanceActionCommand";
 import {
+  type BatchStartRecommendationsCommandInput,
+  type BatchStartRecommendationsCommandOutput,
+  BatchStartRecommendationsCommand,
+} from "./commands/BatchStartRecommendationsCommand";
+import {
+  type CancelMetadataModelConversionCommandInput,
+  type CancelMetadataModelConversionCommandOutput,
+  CancelMetadataModelConversionCommand,
+} from "./commands/CancelMetadataModelConversionCommand";
+import {
+  type CancelMetadataModelCreationCommandInput,
+  type CancelMetadataModelCreationCommandOutput,
+  CancelMetadataModelCreationCommand,
+} from "./commands/CancelMetadataModelCreationCommand";
+import {
+  type CancelReplicationTaskAssessmentRunCommandInput,
+  type CancelReplicationTaskAssessmentRunCommandOutput,
   CancelReplicationTaskAssessmentRunCommand,
-  CancelReplicationTaskAssessmentRunCommandInput,
-  CancelReplicationTaskAssessmentRunCommandOutput,
 } from "./commands/CancelReplicationTaskAssessmentRunCommand";
 import {
+  type CreateDataMigrationCommandInput,
+  type CreateDataMigrationCommandOutput,
+  CreateDataMigrationCommand,
+} from "./commands/CreateDataMigrationCommand";
+import {
+  type CreateDataProviderCommandInput,
+  type CreateDataProviderCommandOutput,
+  CreateDataProviderCommand,
+} from "./commands/CreateDataProviderCommand";
+import {
+  type CreateEndpointCommandInput,
+  type CreateEndpointCommandOutput,
   CreateEndpointCommand,
-  CreateEndpointCommandInput,
-  CreateEndpointCommandOutput,
 } from "./commands/CreateEndpointCommand";
 import {
+  type CreateEventSubscriptionCommandInput,
+  type CreateEventSubscriptionCommandOutput,
   CreateEventSubscriptionCommand,
-  CreateEventSubscriptionCommandInput,
-  CreateEventSubscriptionCommandOutput,
 } from "./commands/CreateEventSubscriptionCommand";
 import {
+  type CreateFleetAdvisorCollectorCommandInput,
+  type CreateFleetAdvisorCollectorCommandOutput,
+  CreateFleetAdvisorCollectorCommand,
+} from "./commands/CreateFleetAdvisorCollectorCommand";
+import {
+  type CreateInstanceProfileCommandInput,
+  type CreateInstanceProfileCommandOutput,
+  CreateInstanceProfileCommand,
+} from "./commands/CreateInstanceProfileCommand";
+import {
+  type CreateMigrationProjectCommandInput,
+  type CreateMigrationProjectCommandOutput,
+  CreateMigrationProjectCommand,
+} from "./commands/CreateMigrationProjectCommand";
+import {
+  type CreateReplicationConfigCommandInput,
+  type CreateReplicationConfigCommandOutput,
+  CreateReplicationConfigCommand,
+} from "./commands/CreateReplicationConfigCommand";
+import {
+  type CreateReplicationInstanceCommandInput,
+  type CreateReplicationInstanceCommandOutput,
   CreateReplicationInstanceCommand,
-  CreateReplicationInstanceCommandInput,
-  CreateReplicationInstanceCommandOutput,
 } from "./commands/CreateReplicationInstanceCommand";
 import {
+  type CreateReplicationSubnetGroupCommandInput,
+  type CreateReplicationSubnetGroupCommandOutput,
   CreateReplicationSubnetGroupCommand,
-  CreateReplicationSubnetGroupCommandInput,
-  CreateReplicationSubnetGroupCommandOutput,
 } from "./commands/CreateReplicationSubnetGroupCommand";
 import {
+  type CreateReplicationTaskCommandInput,
+  type CreateReplicationTaskCommandOutput,
   CreateReplicationTaskCommand,
-  CreateReplicationTaskCommandInput,
-  CreateReplicationTaskCommandOutput,
 } from "./commands/CreateReplicationTaskCommand";
 import {
+  type DeleteCertificateCommandInput,
+  type DeleteCertificateCommandOutput,
   DeleteCertificateCommand,
-  DeleteCertificateCommandInput,
-  DeleteCertificateCommandOutput,
 } from "./commands/DeleteCertificateCommand";
 import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
   DeleteConnectionCommand,
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
 } from "./commands/DeleteConnectionCommand";
 import {
+  type DeleteDataMigrationCommandInput,
+  type DeleteDataMigrationCommandOutput,
+  DeleteDataMigrationCommand,
+} from "./commands/DeleteDataMigrationCommand";
+import {
+  type DeleteDataProviderCommandInput,
+  type DeleteDataProviderCommandOutput,
+  DeleteDataProviderCommand,
+} from "./commands/DeleteDataProviderCommand";
+import {
+  type DeleteEndpointCommandInput,
+  type DeleteEndpointCommandOutput,
   DeleteEndpointCommand,
-  DeleteEndpointCommandInput,
-  DeleteEndpointCommandOutput,
 } from "./commands/DeleteEndpointCommand";
 import {
+  type DeleteEventSubscriptionCommandInput,
+  type DeleteEventSubscriptionCommandOutput,
   DeleteEventSubscriptionCommand,
-  DeleteEventSubscriptionCommandInput,
-  DeleteEventSubscriptionCommandOutput,
 } from "./commands/DeleteEventSubscriptionCommand";
 import {
+  type DeleteFleetAdvisorCollectorCommandInput,
+  type DeleteFleetAdvisorCollectorCommandOutput,
+  DeleteFleetAdvisorCollectorCommand,
+} from "./commands/DeleteFleetAdvisorCollectorCommand";
+import {
+  type DeleteFleetAdvisorDatabasesCommandInput,
+  type DeleteFleetAdvisorDatabasesCommandOutput,
+  DeleteFleetAdvisorDatabasesCommand,
+} from "./commands/DeleteFleetAdvisorDatabasesCommand";
+import {
+  type DeleteInstanceProfileCommandInput,
+  type DeleteInstanceProfileCommandOutput,
+  DeleteInstanceProfileCommand,
+} from "./commands/DeleteInstanceProfileCommand";
+import {
+  type DeleteMigrationProjectCommandInput,
+  type DeleteMigrationProjectCommandOutput,
+  DeleteMigrationProjectCommand,
+} from "./commands/DeleteMigrationProjectCommand";
+import {
+  type DeleteReplicationConfigCommandInput,
+  type DeleteReplicationConfigCommandOutput,
+  DeleteReplicationConfigCommand,
+} from "./commands/DeleteReplicationConfigCommand";
+import {
+  type DeleteReplicationInstanceCommandInput,
+  type DeleteReplicationInstanceCommandOutput,
   DeleteReplicationInstanceCommand,
-  DeleteReplicationInstanceCommandInput,
-  DeleteReplicationInstanceCommandOutput,
 } from "./commands/DeleteReplicationInstanceCommand";
 import {
+  type DeleteReplicationSubnetGroupCommandInput,
+  type DeleteReplicationSubnetGroupCommandOutput,
   DeleteReplicationSubnetGroupCommand,
-  DeleteReplicationSubnetGroupCommandInput,
-  DeleteReplicationSubnetGroupCommandOutput,
 } from "./commands/DeleteReplicationSubnetGroupCommand";
 import {
+  type DeleteReplicationTaskAssessmentRunCommandInput,
+  type DeleteReplicationTaskAssessmentRunCommandOutput,
   DeleteReplicationTaskAssessmentRunCommand,
-  DeleteReplicationTaskAssessmentRunCommandInput,
-  DeleteReplicationTaskAssessmentRunCommandOutput,
 } from "./commands/DeleteReplicationTaskAssessmentRunCommand";
 import {
+  type DeleteReplicationTaskCommandInput,
+  type DeleteReplicationTaskCommandOutput,
   DeleteReplicationTaskCommand,
-  DeleteReplicationTaskCommandInput,
-  DeleteReplicationTaskCommandOutput,
 } from "./commands/DeleteReplicationTaskCommand";
 import {
+  type DescribeAccountAttributesCommandInput,
+  type DescribeAccountAttributesCommandOutput,
   DescribeAccountAttributesCommand,
-  DescribeAccountAttributesCommandInput,
-  DescribeAccountAttributesCommandOutput,
 } from "./commands/DescribeAccountAttributesCommand";
 import {
+  type DescribeApplicableIndividualAssessmentsCommandInput,
+  type DescribeApplicableIndividualAssessmentsCommandOutput,
   DescribeApplicableIndividualAssessmentsCommand,
-  DescribeApplicableIndividualAssessmentsCommandInput,
-  DescribeApplicableIndividualAssessmentsCommandOutput,
 } from "./commands/DescribeApplicableIndividualAssessmentsCommand";
 import {
+  type DescribeCertificatesCommandInput,
+  type DescribeCertificatesCommandOutput,
   DescribeCertificatesCommand,
-  DescribeCertificatesCommandInput,
-  DescribeCertificatesCommandOutput,
 } from "./commands/DescribeCertificatesCommand";
 import {
+  type DescribeConnectionsCommandInput,
+  type DescribeConnectionsCommandOutput,
   DescribeConnectionsCommand,
-  DescribeConnectionsCommandInput,
-  DescribeConnectionsCommandOutput,
 } from "./commands/DescribeConnectionsCommand";
 import {
+  type DescribeConversionConfigurationCommandInput,
+  type DescribeConversionConfigurationCommandOutput,
+  DescribeConversionConfigurationCommand,
+} from "./commands/DescribeConversionConfigurationCommand";
+import {
+  type DescribeDataMigrationsCommandInput,
+  type DescribeDataMigrationsCommandOutput,
+  DescribeDataMigrationsCommand,
+} from "./commands/DescribeDataMigrationsCommand";
+import {
+  type DescribeDataProvidersCommandInput,
+  type DescribeDataProvidersCommandOutput,
+  DescribeDataProvidersCommand,
+} from "./commands/DescribeDataProvidersCommand";
+import {
+  type DescribeEndpointsCommandInput,
+  type DescribeEndpointsCommandOutput,
   DescribeEndpointsCommand,
-  DescribeEndpointsCommandInput,
-  DescribeEndpointsCommandOutput,
 } from "./commands/DescribeEndpointsCommand";
 import {
+  type DescribeEndpointSettingsCommandInput,
+  type DescribeEndpointSettingsCommandOutput,
   DescribeEndpointSettingsCommand,
-  DescribeEndpointSettingsCommandInput,
-  DescribeEndpointSettingsCommandOutput,
 } from "./commands/DescribeEndpointSettingsCommand";
 import {
+  type DescribeEndpointTypesCommandInput,
+  type DescribeEndpointTypesCommandOutput,
   DescribeEndpointTypesCommand,
-  DescribeEndpointTypesCommandInput,
-  DescribeEndpointTypesCommandOutput,
 } from "./commands/DescribeEndpointTypesCommand";
 import {
+  type DescribeEngineVersionsCommandInput,
+  type DescribeEngineVersionsCommandOutput,
+  DescribeEngineVersionsCommand,
+} from "./commands/DescribeEngineVersionsCommand";
+import {
+  type DescribeEventCategoriesCommandInput,
+  type DescribeEventCategoriesCommandOutput,
   DescribeEventCategoriesCommand,
-  DescribeEventCategoriesCommandInput,
-  DescribeEventCategoriesCommandOutput,
 } from "./commands/DescribeEventCategoriesCommand";
 import {
+  type DescribeEventsCommandInput,
+  type DescribeEventsCommandOutput,
   DescribeEventsCommand,
-  DescribeEventsCommandInput,
-  DescribeEventsCommandOutput,
 } from "./commands/DescribeEventsCommand";
 import {
+  type DescribeEventSubscriptionsCommandInput,
+  type DescribeEventSubscriptionsCommandOutput,
   DescribeEventSubscriptionsCommand,
-  DescribeEventSubscriptionsCommandInput,
-  DescribeEventSubscriptionsCommandOutput,
 } from "./commands/DescribeEventSubscriptionsCommand";
 import {
+  type DescribeExtensionPackAssociationsCommandInput,
+  type DescribeExtensionPackAssociationsCommandOutput,
+  DescribeExtensionPackAssociationsCommand,
+} from "./commands/DescribeExtensionPackAssociationsCommand";
+import {
+  type DescribeFleetAdvisorCollectorsCommandInput,
+  type DescribeFleetAdvisorCollectorsCommandOutput,
+  DescribeFleetAdvisorCollectorsCommand,
+} from "./commands/DescribeFleetAdvisorCollectorsCommand";
+import {
+  type DescribeFleetAdvisorDatabasesCommandInput,
+  type DescribeFleetAdvisorDatabasesCommandOutput,
+  DescribeFleetAdvisorDatabasesCommand,
+} from "./commands/DescribeFleetAdvisorDatabasesCommand";
+import {
+  type DescribeFleetAdvisorLsaAnalysisCommandInput,
+  type DescribeFleetAdvisorLsaAnalysisCommandOutput,
+  DescribeFleetAdvisorLsaAnalysisCommand,
+} from "./commands/DescribeFleetAdvisorLsaAnalysisCommand";
+import {
+  type DescribeFleetAdvisorSchemaObjectSummaryCommandInput,
+  type DescribeFleetAdvisorSchemaObjectSummaryCommandOutput,
+  DescribeFleetAdvisorSchemaObjectSummaryCommand,
+} from "./commands/DescribeFleetAdvisorSchemaObjectSummaryCommand";
+import {
+  type DescribeFleetAdvisorSchemasCommandInput,
+  type DescribeFleetAdvisorSchemasCommandOutput,
+  DescribeFleetAdvisorSchemasCommand,
+} from "./commands/DescribeFleetAdvisorSchemasCommand";
+import {
+  type DescribeInstanceProfilesCommandInput,
+  type DescribeInstanceProfilesCommandOutput,
+  DescribeInstanceProfilesCommand,
+} from "./commands/DescribeInstanceProfilesCommand";
+import {
+  type DescribeMetadataModelAssessmentsCommandInput,
+  type DescribeMetadataModelAssessmentsCommandOutput,
+  DescribeMetadataModelAssessmentsCommand,
+} from "./commands/DescribeMetadataModelAssessmentsCommand";
+import {
+  type DescribeMetadataModelChildrenCommandInput,
+  type DescribeMetadataModelChildrenCommandOutput,
+  DescribeMetadataModelChildrenCommand,
+} from "./commands/DescribeMetadataModelChildrenCommand";
+import {
+  type DescribeMetadataModelCommandInput,
+  type DescribeMetadataModelCommandOutput,
+  DescribeMetadataModelCommand,
+} from "./commands/DescribeMetadataModelCommand";
+import {
+  type DescribeMetadataModelConversionsCommandInput,
+  type DescribeMetadataModelConversionsCommandOutput,
+  DescribeMetadataModelConversionsCommand,
+} from "./commands/DescribeMetadataModelConversionsCommand";
+import {
+  type DescribeMetadataModelCreationsCommandInput,
+  type DescribeMetadataModelCreationsCommandOutput,
+  DescribeMetadataModelCreationsCommand,
+} from "./commands/DescribeMetadataModelCreationsCommand";
+import {
+  type DescribeMetadataModelExportsAsScriptCommandInput,
+  type DescribeMetadataModelExportsAsScriptCommandOutput,
+  DescribeMetadataModelExportsAsScriptCommand,
+} from "./commands/DescribeMetadataModelExportsAsScriptCommand";
+import {
+  type DescribeMetadataModelExportsToTargetCommandInput,
+  type DescribeMetadataModelExportsToTargetCommandOutput,
+  DescribeMetadataModelExportsToTargetCommand,
+} from "./commands/DescribeMetadataModelExportsToTargetCommand";
+import {
+  type DescribeMetadataModelImportsCommandInput,
+  type DescribeMetadataModelImportsCommandOutput,
+  DescribeMetadataModelImportsCommand,
+} from "./commands/DescribeMetadataModelImportsCommand";
+import {
+  type DescribeMigrationProjectsCommandInput,
+  type DescribeMigrationProjectsCommandOutput,
+  DescribeMigrationProjectsCommand,
+} from "./commands/DescribeMigrationProjectsCommand";
+import {
+  type DescribeOrderableReplicationInstancesCommandInput,
+  type DescribeOrderableReplicationInstancesCommandOutput,
   DescribeOrderableReplicationInstancesCommand,
-  DescribeOrderableReplicationInstancesCommandInput,
-  DescribeOrderableReplicationInstancesCommandOutput,
 } from "./commands/DescribeOrderableReplicationInstancesCommand";
 import {
+  type DescribePendingMaintenanceActionsCommandInput,
+  type DescribePendingMaintenanceActionsCommandOutput,
   DescribePendingMaintenanceActionsCommand,
-  DescribePendingMaintenanceActionsCommandInput,
-  DescribePendingMaintenanceActionsCommandOutput,
 } from "./commands/DescribePendingMaintenanceActionsCommand";
 import {
+  type DescribeRecommendationLimitationsCommandInput,
+  type DescribeRecommendationLimitationsCommandOutput,
+  DescribeRecommendationLimitationsCommand,
+} from "./commands/DescribeRecommendationLimitationsCommand";
+import {
+  type DescribeRecommendationsCommandInput,
+  type DescribeRecommendationsCommandOutput,
+  DescribeRecommendationsCommand,
+} from "./commands/DescribeRecommendationsCommand";
+import {
+  type DescribeRefreshSchemasStatusCommandInput,
+  type DescribeRefreshSchemasStatusCommandOutput,
   DescribeRefreshSchemasStatusCommand,
-  DescribeRefreshSchemasStatusCommandInput,
-  DescribeRefreshSchemasStatusCommandOutput,
 } from "./commands/DescribeRefreshSchemasStatusCommand";
 import {
+  type DescribeReplicationConfigsCommandInput,
+  type DescribeReplicationConfigsCommandOutput,
+  DescribeReplicationConfigsCommand,
+} from "./commands/DescribeReplicationConfigsCommand";
+import {
+  type DescribeReplicationInstancesCommandInput,
+  type DescribeReplicationInstancesCommandOutput,
   DescribeReplicationInstancesCommand,
-  DescribeReplicationInstancesCommandInput,
-  DescribeReplicationInstancesCommandOutput,
 } from "./commands/DescribeReplicationInstancesCommand";
 import {
+  type DescribeReplicationInstanceTaskLogsCommandInput,
+  type DescribeReplicationInstanceTaskLogsCommandOutput,
   DescribeReplicationInstanceTaskLogsCommand,
-  DescribeReplicationInstanceTaskLogsCommandInput,
-  DescribeReplicationInstanceTaskLogsCommandOutput,
 } from "./commands/DescribeReplicationInstanceTaskLogsCommand";
 import {
+  type DescribeReplicationsCommandInput,
+  type DescribeReplicationsCommandOutput,
+  DescribeReplicationsCommand,
+} from "./commands/DescribeReplicationsCommand";
+import {
+  type DescribeReplicationSubnetGroupsCommandInput,
+  type DescribeReplicationSubnetGroupsCommandOutput,
   DescribeReplicationSubnetGroupsCommand,
-  DescribeReplicationSubnetGroupsCommandInput,
-  DescribeReplicationSubnetGroupsCommandOutput,
 } from "./commands/DescribeReplicationSubnetGroupsCommand";
 import {
+  type DescribeReplicationTableStatisticsCommandInput,
+  type DescribeReplicationTableStatisticsCommandOutput,
+  DescribeReplicationTableStatisticsCommand,
+} from "./commands/DescribeReplicationTableStatisticsCommand";
+import {
+  type DescribeReplicationTaskAssessmentResultsCommandInput,
+  type DescribeReplicationTaskAssessmentResultsCommandOutput,
   DescribeReplicationTaskAssessmentResultsCommand,
-  DescribeReplicationTaskAssessmentResultsCommandInput,
-  DescribeReplicationTaskAssessmentResultsCommandOutput,
 } from "./commands/DescribeReplicationTaskAssessmentResultsCommand";
 import {
+  type DescribeReplicationTaskAssessmentRunsCommandInput,
+  type DescribeReplicationTaskAssessmentRunsCommandOutput,
   DescribeReplicationTaskAssessmentRunsCommand,
-  DescribeReplicationTaskAssessmentRunsCommandInput,
-  DescribeReplicationTaskAssessmentRunsCommandOutput,
 } from "./commands/DescribeReplicationTaskAssessmentRunsCommand";
 import {
+  type DescribeReplicationTaskIndividualAssessmentsCommandInput,
+  type DescribeReplicationTaskIndividualAssessmentsCommandOutput,
   DescribeReplicationTaskIndividualAssessmentsCommand,
-  DescribeReplicationTaskIndividualAssessmentsCommandInput,
-  DescribeReplicationTaskIndividualAssessmentsCommandOutput,
 } from "./commands/DescribeReplicationTaskIndividualAssessmentsCommand";
 import {
+  type DescribeReplicationTasksCommandInput,
+  type DescribeReplicationTasksCommandOutput,
   DescribeReplicationTasksCommand,
-  DescribeReplicationTasksCommandInput,
-  DescribeReplicationTasksCommandOutput,
 } from "./commands/DescribeReplicationTasksCommand";
 import {
+  type DescribeSchemasCommandInput,
+  type DescribeSchemasCommandOutput,
   DescribeSchemasCommand,
-  DescribeSchemasCommandInput,
-  DescribeSchemasCommandOutput,
 } from "./commands/DescribeSchemasCommand";
 import {
+  type DescribeTableStatisticsCommandInput,
+  type DescribeTableStatisticsCommandOutput,
   DescribeTableStatisticsCommand,
-  DescribeTableStatisticsCommandInput,
-  DescribeTableStatisticsCommandOutput,
 } from "./commands/DescribeTableStatisticsCommand";
 import {
+  type ExportMetadataModelAssessmentCommandInput,
+  type ExportMetadataModelAssessmentCommandOutput,
+  ExportMetadataModelAssessmentCommand,
+} from "./commands/ExportMetadataModelAssessmentCommand";
+import {
+  type GetTargetSelectionRulesCommandInput,
+  type GetTargetSelectionRulesCommandOutput,
+  GetTargetSelectionRulesCommand,
+} from "./commands/GetTargetSelectionRulesCommand";
+import {
+  type ImportCertificateCommandInput,
+  type ImportCertificateCommandOutput,
   ImportCertificateCommand,
-  ImportCertificateCommandInput,
-  ImportCertificateCommandOutput,
 } from "./commands/ImportCertificateCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ModifyConversionConfigurationCommandInput,
+  type ModifyConversionConfigurationCommandOutput,
+  ModifyConversionConfigurationCommand,
+} from "./commands/ModifyConversionConfigurationCommand";
+import {
+  type ModifyDataMigrationCommandInput,
+  type ModifyDataMigrationCommandOutput,
+  ModifyDataMigrationCommand,
+} from "./commands/ModifyDataMigrationCommand";
+import {
+  type ModifyDataProviderCommandInput,
+  type ModifyDataProviderCommandOutput,
+  ModifyDataProviderCommand,
+} from "./commands/ModifyDataProviderCommand";
+import {
+  type ModifyEndpointCommandInput,
+  type ModifyEndpointCommandOutput,
   ModifyEndpointCommand,
-  ModifyEndpointCommandInput,
-  ModifyEndpointCommandOutput,
 } from "./commands/ModifyEndpointCommand";
 import {
+  type ModifyEventSubscriptionCommandInput,
+  type ModifyEventSubscriptionCommandOutput,
   ModifyEventSubscriptionCommand,
-  ModifyEventSubscriptionCommandInput,
-  ModifyEventSubscriptionCommandOutput,
 } from "./commands/ModifyEventSubscriptionCommand";
 import {
+  type ModifyInstanceProfileCommandInput,
+  type ModifyInstanceProfileCommandOutput,
+  ModifyInstanceProfileCommand,
+} from "./commands/ModifyInstanceProfileCommand";
+import {
+  type ModifyMigrationProjectCommandInput,
+  type ModifyMigrationProjectCommandOutput,
+  ModifyMigrationProjectCommand,
+} from "./commands/ModifyMigrationProjectCommand";
+import {
+  type ModifyReplicationConfigCommandInput,
+  type ModifyReplicationConfigCommandOutput,
+  ModifyReplicationConfigCommand,
+} from "./commands/ModifyReplicationConfigCommand";
+import {
+  type ModifyReplicationInstanceCommandInput,
+  type ModifyReplicationInstanceCommandOutput,
   ModifyReplicationInstanceCommand,
-  ModifyReplicationInstanceCommandInput,
-  ModifyReplicationInstanceCommandOutput,
 } from "./commands/ModifyReplicationInstanceCommand";
 import {
+  type ModifyReplicationSubnetGroupCommandInput,
+  type ModifyReplicationSubnetGroupCommandOutput,
   ModifyReplicationSubnetGroupCommand,
-  ModifyReplicationSubnetGroupCommandInput,
-  ModifyReplicationSubnetGroupCommandOutput,
 } from "./commands/ModifyReplicationSubnetGroupCommand";
 import {
+  type ModifyReplicationTaskCommandInput,
+  type ModifyReplicationTaskCommandOutput,
   ModifyReplicationTaskCommand,
-  ModifyReplicationTaskCommandInput,
-  ModifyReplicationTaskCommandOutput,
 } from "./commands/ModifyReplicationTaskCommand";
 import {
+  type MoveReplicationTaskCommandInput,
+  type MoveReplicationTaskCommandOutput,
   MoveReplicationTaskCommand,
-  MoveReplicationTaskCommandInput,
-  MoveReplicationTaskCommandOutput,
 } from "./commands/MoveReplicationTaskCommand";
 import {
+  type RebootReplicationInstanceCommandInput,
+  type RebootReplicationInstanceCommandOutput,
   RebootReplicationInstanceCommand,
-  RebootReplicationInstanceCommandInput,
-  RebootReplicationInstanceCommandOutput,
 } from "./commands/RebootReplicationInstanceCommand";
 import {
+  type RefreshSchemasCommandInput,
+  type RefreshSchemasCommandOutput,
   RefreshSchemasCommand,
-  RefreshSchemasCommandInput,
-  RefreshSchemasCommandOutput,
 } from "./commands/RefreshSchemasCommand";
 import {
+  type ReloadReplicationTablesCommandInput,
+  type ReloadReplicationTablesCommandOutput,
+  ReloadReplicationTablesCommand,
+} from "./commands/ReloadReplicationTablesCommand";
+import {
+  type ReloadTablesCommandInput,
+  type ReloadTablesCommandOutput,
   ReloadTablesCommand,
-  ReloadTablesCommandInput,
-  ReloadTablesCommandOutput,
 } from "./commands/ReloadTablesCommand";
 import {
+  type RemoveTagsFromResourceCommandInput,
+  type RemoveTagsFromResourceCommandOutput,
   RemoveTagsFromResourceCommand,
-  RemoveTagsFromResourceCommandInput,
-  RemoveTagsFromResourceCommandOutput,
 } from "./commands/RemoveTagsFromResourceCommand";
 import {
+  type RunFleetAdvisorLsaAnalysisCommandInput,
+  type RunFleetAdvisorLsaAnalysisCommandOutput,
+  RunFleetAdvisorLsaAnalysisCommand,
+} from "./commands/RunFleetAdvisorLsaAnalysisCommand";
+import {
+  type StartDataMigrationCommandInput,
+  type StartDataMigrationCommandOutput,
+  StartDataMigrationCommand,
+} from "./commands/StartDataMigrationCommand";
+import {
+  type StartExtensionPackAssociationCommandInput,
+  type StartExtensionPackAssociationCommandOutput,
+  StartExtensionPackAssociationCommand,
+} from "./commands/StartExtensionPackAssociationCommand";
+import {
+  type StartMetadataModelAssessmentCommandInput,
+  type StartMetadataModelAssessmentCommandOutput,
+  StartMetadataModelAssessmentCommand,
+} from "./commands/StartMetadataModelAssessmentCommand";
+import {
+  type StartMetadataModelConversionCommandInput,
+  type StartMetadataModelConversionCommandOutput,
+  StartMetadataModelConversionCommand,
+} from "./commands/StartMetadataModelConversionCommand";
+import {
+  type StartMetadataModelCreationCommandInput,
+  type StartMetadataModelCreationCommandOutput,
+  StartMetadataModelCreationCommand,
+} from "./commands/StartMetadataModelCreationCommand";
+import {
+  type StartMetadataModelExportAsScriptCommandInput,
+  type StartMetadataModelExportAsScriptCommandOutput,
+  StartMetadataModelExportAsScriptCommand,
+} from "./commands/StartMetadataModelExportAsScriptCommand";
+import {
+  type StartMetadataModelExportToTargetCommandInput,
+  type StartMetadataModelExportToTargetCommandOutput,
+  StartMetadataModelExportToTargetCommand,
+} from "./commands/StartMetadataModelExportToTargetCommand";
+import {
+  type StartMetadataModelImportCommandInput,
+  type StartMetadataModelImportCommandOutput,
+  StartMetadataModelImportCommand,
+} from "./commands/StartMetadataModelImportCommand";
+import {
+  type StartRecommendationsCommandInput,
+  type StartRecommendationsCommandOutput,
+  StartRecommendationsCommand,
+} from "./commands/StartRecommendationsCommand";
+import {
+  type StartReplicationCommandInput,
+  type StartReplicationCommandOutput,
+  StartReplicationCommand,
+} from "./commands/StartReplicationCommand";
+import {
+  type StartReplicationTaskAssessmentCommandInput,
+  type StartReplicationTaskAssessmentCommandOutput,
   StartReplicationTaskAssessmentCommand,
-  StartReplicationTaskAssessmentCommandInput,
-  StartReplicationTaskAssessmentCommandOutput,
 } from "./commands/StartReplicationTaskAssessmentCommand";
 import {
+  type StartReplicationTaskAssessmentRunCommandInput,
+  type StartReplicationTaskAssessmentRunCommandOutput,
   StartReplicationTaskAssessmentRunCommand,
-  StartReplicationTaskAssessmentRunCommandInput,
-  StartReplicationTaskAssessmentRunCommandOutput,
 } from "./commands/StartReplicationTaskAssessmentRunCommand";
 import {
+  type StartReplicationTaskCommandInput,
+  type StartReplicationTaskCommandOutput,
   StartReplicationTaskCommand,
-  StartReplicationTaskCommandInput,
-  StartReplicationTaskCommandOutput,
 } from "./commands/StartReplicationTaskCommand";
 import {
+  type StopDataMigrationCommandInput,
+  type StopDataMigrationCommandOutput,
+  StopDataMigrationCommand,
+} from "./commands/StopDataMigrationCommand";
+import {
+  type StopReplicationCommandInput,
+  type StopReplicationCommandOutput,
+  StopReplicationCommand,
+} from "./commands/StopReplicationCommand";
+import {
+  type StopReplicationTaskCommandInput,
+  type StopReplicationTaskCommandOutput,
   StopReplicationTaskCommand,
-  StopReplicationTaskCommandInput,
-  StopReplicationTaskCommandOutput,
 } from "./commands/StopReplicationTaskCommand";
 import {
+  type TestConnectionCommandInput,
+  type TestConnectionCommandOutput,
   TestConnectionCommand,
-  TestConnectionCommandInput,
-  TestConnectionCommandOutput,
 } from "./commands/TestConnectionCommand";
+import {
+  type UpdateSubscriptionsToEventBridgeCommandInput,
+  type UpdateSubscriptionsToEventBridgeCommandOutput,
+  UpdateSubscriptionsToEventBridgeCommand,
+} from "./commands/UpdateSubscriptionsToEventBridgeCommand";
 import { DatabaseMigrationServiceClient } from "./DatabaseMigrationServiceClient";
+import type { DatabaseMigrationServiceServiceException } from "./models/DatabaseMigrationServiceServiceException";
+import type { ResourceNotFoundFault } from "./models/errors";
+import {
+  paginateDescribeApplicableIndividualAssessments,
+} from "./pagination/DescribeApplicableIndividualAssessmentsPaginator";
+import { paginateDescribeCertificates } from "./pagination/DescribeCertificatesPaginator";
+import { paginateDescribeConnections } from "./pagination/DescribeConnectionsPaginator";
+import { paginateDescribeDataMigrations } from "./pagination/DescribeDataMigrationsPaginator";
+import { paginateDescribeDataProviders } from "./pagination/DescribeDataProvidersPaginator";
+import { paginateDescribeEndpointSettings } from "./pagination/DescribeEndpointSettingsPaginator";
+import { paginateDescribeEndpoints } from "./pagination/DescribeEndpointsPaginator";
+import { paginateDescribeEndpointTypes } from "./pagination/DescribeEndpointTypesPaginator";
+import { paginateDescribeEngineVersions } from "./pagination/DescribeEngineVersionsPaginator";
+import { paginateDescribeEvents } from "./pagination/DescribeEventsPaginator";
+import { paginateDescribeEventSubscriptions } from "./pagination/DescribeEventSubscriptionsPaginator";
+import { paginateDescribeExtensionPackAssociations } from "./pagination/DescribeExtensionPackAssociationsPaginator";
+import { paginateDescribeFleetAdvisorCollectors } from "./pagination/DescribeFleetAdvisorCollectorsPaginator";
+import { paginateDescribeFleetAdvisorDatabases } from "./pagination/DescribeFleetAdvisorDatabasesPaginator";
+import { paginateDescribeFleetAdvisorLsaAnalysis } from "./pagination/DescribeFleetAdvisorLsaAnalysisPaginator";
+import {
+  paginateDescribeFleetAdvisorSchemaObjectSummary,
+} from "./pagination/DescribeFleetAdvisorSchemaObjectSummaryPaginator";
+import { paginateDescribeFleetAdvisorSchemas } from "./pagination/DescribeFleetAdvisorSchemasPaginator";
+import { paginateDescribeInstanceProfiles } from "./pagination/DescribeInstanceProfilesPaginator";
+import { paginateDescribeMetadataModelAssessments } from "./pagination/DescribeMetadataModelAssessmentsPaginator";
+import { paginateDescribeMetadataModelChildren } from "./pagination/DescribeMetadataModelChildrenPaginator";
+import { paginateDescribeMetadataModelConversions } from "./pagination/DescribeMetadataModelConversionsPaginator";
+import { paginateDescribeMetadataModelCreations } from "./pagination/DescribeMetadataModelCreationsPaginator";
+import {
+  paginateDescribeMetadataModelExportsAsScript,
+} from "./pagination/DescribeMetadataModelExportsAsScriptPaginator";
+import {
+  paginateDescribeMetadataModelExportsToTarget,
+} from "./pagination/DescribeMetadataModelExportsToTargetPaginator";
+import { paginateDescribeMetadataModelImports } from "./pagination/DescribeMetadataModelImportsPaginator";
+import { paginateDescribeMigrationProjects } from "./pagination/DescribeMigrationProjectsPaginator";
+import {
+  paginateDescribeOrderableReplicationInstances,
+} from "./pagination/DescribeOrderableReplicationInstancesPaginator";
+import { paginateDescribePendingMaintenanceActions } from "./pagination/DescribePendingMaintenanceActionsPaginator";
+import { paginateDescribeRecommendationLimitations } from "./pagination/DescribeRecommendationLimitationsPaginator";
+import { paginateDescribeRecommendations } from "./pagination/DescribeRecommendationsPaginator";
+import { paginateDescribeReplicationConfigs } from "./pagination/DescribeReplicationConfigsPaginator";
+import { paginateDescribeReplicationInstances } from "./pagination/DescribeReplicationInstancesPaginator";
+import { paginateDescribeReplicationInstanceTaskLogs } from "./pagination/DescribeReplicationInstanceTaskLogsPaginator";
+import { paginateDescribeReplications } from "./pagination/DescribeReplicationsPaginator";
+import { paginateDescribeReplicationSubnetGroups } from "./pagination/DescribeReplicationSubnetGroupsPaginator";
+import { paginateDescribeReplicationTableStatistics } from "./pagination/DescribeReplicationTableStatisticsPaginator";
+import {
+  paginateDescribeReplicationTaskAssessmentResults,
+} from "./pagination/DescribeReplicationTaskAssessmentResultsPaginator";
+import {
+  paginateDescribeReplicationTaskAssessmentRuns,
+} from "./pagination/DescribeReplicationTaskAssessmentRunsPaginator";
+import {
+  paginateDescribeReplicationTaskIndividualAssessments,
+} from "./pagination/DescribeReplicationTaskIndividualAssessmentsPaginator";
+import { paginateDescribeReplicationTasks } from "./pagination/DescribeReplicationTasksPaginator";
+import { paginateDescribeSchemas } from "./pagination/DescribeSchemasPaginator";
+import { paginateDescribeTableStatistics } from "./pagination/DescribeTableStatisticsPaginator";
+import { waitUntilEndpointDeleted } from "./waiters/waitForEndpointDeleted";
+import { waitUntilExtensionPackAssociated } from "./waiters/waitForExtensionPackAssociated";
+import { waitUntilMetadataModelAssessed } from "./waiters/waitForMetadataModelAssessed";
+import { waitUntilMetadataModelConversionCancelled } from "./waiters/waitForMetadataModelConversionCancelled";
+import { waitUntilMetadataModelConverted } from "./waiters/waitForMetadataModelConverted";
+import { waitUntilMetadataModelCreated } from "./waiters/waitForMetadataModelCreated";
+import { waitUntilMetadataModelCreationCancelled } from "./waiters/waitForMetadataModelCreationCancelled";
+import { waitUntilMetadataModelExportedAsScript } from "./waiters/waitForMetadataModelExportedAsScript";
+import { waitUntilMetadataModelExportedToTarget } from "./waiters/waitForMetadataModelExportedToTarget";
+import { waitUntilMetadataModelImported } from "./waiters/waitForMetadataModelImported";
+import { waitUntilReplicationInstanceAvailable } from "./waiters/waitForReplicationInstanceAvailable";
+import { waitUntilReplicationInstanceDeleted } from "./waiters/waitForReplicationInstanceDeleted";
+import { waitUntilReplicationTaskDeleted } from "./waiters/waitForReplicationTaskDeleted";
+import { waitUntilReplicationTaskReady } from "./waiters/waitForReplicationTaskReady";
+import { waitUntilReplicationTaskRunning } from "./waiters/waitForReplicationTaskRunning";
+import { waitUntilReplicationTaskStopped } from "./waiters/waitForReplicationTaskStopped";
+import { waitUntilTestConnectionSucceeds } from "./waiters/waitForTestConnectionSucceeds";
+
+const commands = {
+  AddTagsToResourceCommand,
+  ApplyPendingMaintenanceActionCommand,
+  BatchStartRecommendationsCommand,
+  CancelMetadataModelConversionCommand,
+  CancelMetadataModelCreationCommand,
+  CancelReplicationTaskAssessmentRunCommand,
+  CreateDataMigrationCommand,
+  CreateDataProviderCommand,
+  CreateEndpointCommand,
+  CreateEventSubscriptionCommand,
+  CreateFleetAdvisorCollectorCommand,
+  CreateInstanceProfileCommand,
+  CreateMigrationProjectCommand,
+  CreateReplicationConfigCommand,
+  CreateReplicationInstanceCommand,
+  CreateReplicationSubnetGroupCommand,
+  CreateReplicationTaskCommand,
+  DeleteCertificateCommand,
+  DeleteConnectionCommand,
+  DeleteDataMigrationCommand,
+  DeleteDataProviderCommand,
+  DeleteEndpointCommand,
+  DeleteEventSubscriptionCommand,
+  DeleteFleetAdvisorCollectorCommand,
+  DeleteFleetAdvisorDatabasesCommand,
+  DeleteInstanceProfileCommand,
+  DeleteMigrationProjectCommand,
+  DeleteReplicationConfigCommand,
+  DeleteReplicationInstanceCommand,
+  DeleteReplicationSubnetGroupCommand,
+  DeleteReplicationTaskCommand,
+  DeleteReplicationTaskAssessmentRunCommand,
+  DescribeAccountAttributesCommand,
+  DescribeApplicableIndividualAssessmentsCommand,
+  DescribeCertificatesCommand,
+  DescribeConnectionsCommand,
+  DescribeConversionConfigurationCommand,
+  DescribeDataMigrationsCommand,
+  DescribeDataProvidersCommand,
+  DescribeEndpointsCommand,
+  DescribeEndpointSettingsCommand,
+  DescribeEndpointTypesCommand,
+  DescribeEngineVersionsCommand,
+  DescribeEventCategoriesCommand,
+  DescribeEventsCommand,
+  DescribeEventSubscriptionsCommand,
+  DescribeExtensionPackAssociationsCommand,
+  DescribeFleetAdvisorCollectorsCommand,
+  DescribeFleetAdvisorDatabasesCommand,
+  DescribeFleetAdvisorLsaAnalysisCommand,
+  DescribeFleetAdvisorSchemaObjectSummaryCommand,
+  DescribeFleetAdvisorSchemasCommand,
+  DescribeInstanceProfilesCommand,
+  DescribeMetadataModelCommand,
+  DescribeMetadataModelAssessmentsCommand,
+  DescribeMetadataModelChildrenCommand,
+  DescribeMetadataModelConversionsCommand,
+  DescribeMetadataModelCreationsCommand,
+  DescribeMetadataModelExportsAsScriptCommand,
+  DescribeMetadataModelExportsToTargetCommand,
+  DescribeMetadataModelImportsCommand,
+  DescribeMigrationProjectsCommand,
+  DescribeOrderableReplicationInstancesCommand,
+  DescribePendingMaintenanceActionsCommand,
+  DescribeRecommendationLimitationsCommand,
+  DescribeRecommendationsCommand,
+  DescribeRefreshSchemasStatusCommand,
+  DescribeReplicationConfigsCommand,
+  DescribeReplicationInstancesCommand,
+  DescribeReplicationInstanceTaskLogsCommand,
+  DescribeReplicationsCommand,
+  DescribeReplicationSubnetGroupsCommand,
+  DescribeReplicationTableStatisticsCommand,
+  DescribeReplicationTaskAssessmentResultsCommand,
+  DescribeReplicationTaskAssessmentRunsCommand,
+  DescribeReplicationTaskIndividualAssessmentsCommand,
+  DescribeReplicationTasksCommand,
+  DescribeSchemasCommand,
+  DescribeTableStatisticsCommand,
+  ExportMetadataModelAssessmentCommand,
+  GetTargetSelectionRulesCommand,
+  ImportCertificateCommand,
+  ListTagsForResourceCommand,
+  ModifyConversionConfigurationCommand,
+  ModifyDataMigrationCommand,
+  ModifyDataProviderCommand,
+  ModifyEndpointCommand,
+  ModifyEventSubscriptionCommand,
+  ModifyInstanceProfileCommand,
+  ModifyMigrationProjectCommand,
+  ModifyReplicationConfigCommand,
+  ModifyReplicationInstanceCommand,
+  ModifyReplicationSubnetGroupCommand,
+  ModifyReplicationTaskCommand,
+  MoveReplicationTaskCommand,
+  RebootReplicationInstanceCommand,
+  RefreshSchemasCommand,
+  ReloadReplicationTablesCommand,
+  ReloadTablesCommand,
+  RemoveTagsFromResourceCommand,
+  RunFleetAdvisorLsaAnalysisCommand,
+  StartDataMigrationCommand,
+  StartExtensionPackAssociationCommand,
+  StartMetadataModelAssessmentCommand,
+  StartMetadataModelConversionCommand,
+  StartMetadataModelCreationCommand,
+  StartMetadataModelExportAsScriptCommand,
+  StartMetadataModelExportToTargetCommand,
+  StartMetadataModelImportCommand,
+  StartRecommendationsCommand,
+  StartReplicationCommand,
+  StartReplicationTaskCommand,
+  StartReplicationTaskAssessmentCommand,
+  StartReplicationTaskAssessmentRunCommand,
+  StopDataMigrationCommand,
+  StopReplicationCommand,
+  StopReplicationTaskCommand,
+  TestConnectionCommand,
+  UpdateSubscriptionsToEventBridgeCommand,
+};
+const paginators = {
+  paginateDescribeApplicableIndividualAssessments,
+  paginateDescribeCertificates,
+  paginateDescribeConnections,
+  paginateDescribeDataMigrations,
+  paginateDescribeDataProviders,
+  paginateDescribeEndpoints,
+  paginateDescribeEndpointSettings,
+  paginateDescribeEndpointTypes,
+  paginateDescribeEngineVersions,
+  paginateDescribeEvents,
+  paginateDescribeEventSubscriptions,
+  paginateDescribeExtensionPackAssociations,
+  paginateDescribeFleetAdvisorCollectors,
+  paginateDescribeFleetAdvisorDatabases,
+  paginateDescribeFleetAdvisorLsaAnalysis,
+  paginateDescribeFleetAdvisorSchemaObjectSummary,
+  paginateDescribeFleetAdvisorSchemas,
+  paginateDescribeInstanceProfiles,
+  paginateDescribeMetadataModelAssessments,
+  paginateDescribeMetadataModelChildren,
+  paginateDescribeMetadataModelConversions,
+  paginateDescribeMetadataModelCreations,
+  paginateDescribeMetadataModelExportsAsScript,
+  paginateDescribeMetadataModelExportsToTarget,
+  paginateDescribeMetadataModelImports,
+  paginateDescribeMigrationProjects,
+  paginateDescribeOrderableReplicationInstances,
+  paginateDescribePendingMaintenanceActions,
+  paginateDescribeRecommendationLimitations,
+  paginateDescribeRecommendations,
+  paginateDescribeReplicationConfigs,
+  paginateDescribeReplicationInstances,
+  paginateDescribeReplicationInstanceTaskLogs,
+  paginateDescribeReplications,
+  paginateDescribeReplicationSubnetGroups,
+  paginateDescribeReplicationTableStatistics,
+  paginateDescribeReplicationTaskAssessmentResults,
+  paginateDescribeReplicationTaskAssessmentRuns,
+  paginateDescribeReplicationTaskIndividualAssessments,
+  paginateDescribeReplicationTasks,
+  paginateDescribeSchemas,
+  paginateDescribeTableStatistics,
+};
+const waiters = {
+  waitUntilTestConnectionSucceeds,
+  waitUntilEndpointDeleted,
+  waitUntilExtensionPackAssociated,
+  waitUntilMetadataModelAssessed,
+  waitUntilMetadataModelConversionCancelled,
+  waitUntilMetadataModelConverted,
+  waitUntilMetadataModelCreated,
+  waitUntilMetadataModelCreationCancelled,
+  waitUntilMetadataModelExportedAsScript,
+  waitUntilMetadataModelExportedToTarget,
+  waitUntilMetadataModelImported,
+  waitUntilReplicationInstanceAvailable,
+  waitUntilReplicationInstanceDeleted,
+  waitUntilReplicationTaskDeleted,
+  waitUntilReplicationTaskReady,
+  waitUntilReplicationTaskRunning,
+  waitUntilReplicationTaskStopped,
+};
+
+/**
+ * @public
+ */
+export interface DatabaseMigrationServiceRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DatabaseMigrationService {
+  /**
+   * @see {@link AddTagsToResourceCommand}
+   */
+  addTagsToResource(
+    args: AddTagsToResourceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<AddTagsToResourceCommandOutput>;
+  addTagsToResource(
+    args: AddTagsToResourceCommandInput,
+    cb: (err: any, data?: AddTagsToResourceCommandOutput) => void
+  ): void;
+  addTagsToResource(
+    args: AddTagsToResourceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: AddTagsToResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ApplyPendingMaintenanceActionCommand}
+   */
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ApplyPendingMaintenanceActionCommandOutput>;
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
+  ): void;
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchStartRecommendationsCommand}
+   */
+  batchStartRecommendations(): Promise<BatchStartRecommendationsCommandOutput>;
+  batchStartRecommendations(
+    args: BatchStartRecommendationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<BatchStartRecommendationsCommandOutput>;
+  batchStartRecommendations(
+    args: BatchStartRecommendationsCommandInput,
+    cb: (err: any, data?: BatchStartRecommendationsCommandOutput) => void
+  ): void;
+  batchStartRecommendations(
+    args: BatchStartRecommendationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: BatchStartRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelMetadataModelConversionCommand}
+   */
+  cancelMetadataModelConversion(
+    args: CancelMetadataModelConversionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CancelMetadataModelConversionCommandOutput>;
+  cancelMetadataModelConversion(
+    args: CancelMetadataModelConversionCommandInput,
+    cb: (err: any, data?: CancelMetadataModelConversionCommandOutput) => void
+  ): void;
+  cancelMetadataModelConversion(
+    args: CancelMetadataModelConversionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CancelMetadataModelConversionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelMetadataModelCreationCommand}
+   */
+  cancelMetadataModelCreation(
+    args: CancelMetadataModelCreationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CancelMetadataModelCreationCommandOutput>;
+  cancelMetadataModelCreation(
+    args: CancelMetadataModelCreationCommandInput,
+    cb: (err: any, data?: CancelMetadataModelCreationCommandOutput) => void
+  ): void;
+  cancelMetadataModelCreation(
+    args: CancelMetadataModelCreationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CancelMetadataModelCreationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelReplicationTaskAssessmentRunCommand}
+   */
+  cancelReplicationTaskAssessmentRun(
+    args: CancelReplicationTaskAssessmentRunCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CancelReplicationTaskAssessmentRunCommandOutput>;
+  cancelReplicationTaskAssessmentRun(
+    args: CancelReplicationTaskAssessmentRunCommandInput,
+    cb: (err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+  cancelReplicationTaskAssessmentRun(
+    args: CancelReplicationTaskAssessmentRunCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataMigrationCommand}
+   */
+  createDataMigration(
+    args: CreateDataMigrationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateDataMigrationCommandOutput>;
+  createDataMigration(
+    args: CreateDataMigrationCommandInput,
+    cb: (err: any, data?: CreateDataMigrationCommandOutput) => void
+  ): void;
+  createDataMigration(
+    args: CreateDataMigrationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateDataMigrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataProviderCommand}
+   */
+  createDataProvider(
+    args: CreateDataProviderCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateDataProviderCommandOutput>;
+  createDataProvider(
+    args: CreateDataProviderCommandInput,
+    cb: (err: any, data?: CreateDataProviderCommandOutput) => void
+  ): void;
+  createDataProvider(
+    args: CreateDataProviderCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateDataProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEndpointCommand}
+   */
+  createEndpoint(
+    args: CreateEndpointCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateEndpointCommandOutput>;
+  createEndpoint(
+    args: CreateEndpointCommandInput,
+    cb: (err: any, data?: CreateEndpointCommandOutput) => void
+  ): void;
+  createEndpoint(
+    args: CreateEndpointCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventSubscriptionCommand}
+   */
+  createEventSubscription(
+    args: CreateEventSubscriptionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateEventSubscriptionCommandOutput>;
+  createEventSubscription(
+    args: CreateEventSubscriptionCommandInput,
+    cb: (err: any, data?: CreateEventSubscriptionCommandOutput) => void
+  ): void;
+  createEventSubscription(
+    args: CreateEventSubscriptionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateEventSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFleetAdvisorCollectorCommand}
+   */
+  createFleetAdvisorCollector(
+    args: CreateFleetAdvisorCollectorCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateFleetAdvisorCollectorCommandOutput>;
+  createFleetAdvisorCollector(
+    args: CreateFleetAdvisorCollectorCommandInput,
+    cb: (err: any, data?: CreateFleetAdvisorCollectorCommandOutput) => void
+  ): void;
+  createFleetAdvisorCollector(
+    args: CreateFleetAdvisorCollectorCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateFleetAdvisorCollectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstanceProfileCommand}
+   */
+  createInstanceProfile(): Promise<CreateInstanceProfileCommandOutput>;
+  createInstanceProfile(
+    args: CreateInstanceProfileCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateInstanceProfileCommandOutput>;
+  createInstanceProfile(
+    args: CreateInstanceProfileCommandInput,
+    cb: (err: any, data?: CreateInstanceProfileCommandOutput) => void
+  ): void;
+  createInstanceProfile(
+    args: CreateInstanceProfileCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateInstanceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMigrationProjectCommand}
+   */
+  createMigrationProject(
+    args: CreateMigrationProjectCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateMigrationProjectCommandOutput>;
+  createMigrationProject(
+    args: CreateMigrationProjectCommandInput,
+    cb: (err: any, data?: CreateMigrationProjectCommandOutput) => void
+  ): void;
+  createMigrationProject(
+    args: CreateMigrationProjectCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateMigrationProjectCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationConfigCommand}
+   */
+  createReplicationConfig(
+    args: CreateReplicationConfigCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateReplicationConfigCommandOutput>;
+  createReplicationConfig(
+    args: CreateReplicationConfigCommandInput,
+    cb: (err: any, data?: CreateReplicationConfigCommandOutput) => void
+  ): void;
+  createReplicationConfig(
+    args: CreateReplicationConfigCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateReplicationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationInstanceCommand}
+   */
+  createReplicationInstance(
+    args: CreateReplicationInstanceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateReplicationInstanceCommandOutput>;
+  createReplicationInstance(
+    args: CreateReplicationInstanceCommandInput,
+    cb: (err: any, data?: CreateReplicationInstanceCommandOutput) => void
+  ): void;
+  createReplicationInstance(
+    args: CreateReplicationInstanceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateReplicationInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationSubnetGroupCommand}
+   */
+  createReplicationSubnetGroup(
+    args: CreateReplicationSubnetGroupCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateReplicationSubnetGroupCommandOutput>;
+  createReplicationSubnetGroup(
+    args: CreateReplicationSubnetGroupCommandInput,
+    cb: (err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void
+  ): void;
+  createReplicationSubnetGroup(
+    args: CreateReplicationSubnetGroupCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationTaskCommand}
+   */
+  createReplicationTask(
+    args: CreateReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<CreateReplicationTaskCommandOutput>;
+  createReplicationTask(
+    args: CreateReplicationTaskCommandInput,
+    cb: (err: any, data?: CreateReplicationTaskCommandOutput) => void
+  ): void;
+  createReplicationTask(
+    args: CreateReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: CreateReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCertificateCommand}
+   */
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteCertificateCommandOutput>;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteConnectionCommandOutput>;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataMigrationCommand}
+   */
+  deleteDataMigration(
+    args: DeleteDataMigrationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteDataMigrationCommandOutput>;
+  deleteDataMigration(
+    args: DeleteDataMigrationCommandInput,
+    cb: (err: any, data?: DeleteDataMigrationCommandOutput) => void
+  ): void;
+  deleteDataMigration(
+    args: DeleteDataMigrationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteDataMigrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataProviderCommand}
+   */
+  deleteDataProvider(
+    args: DeleteDataProviderCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteDataProviderCommandOutput>;
+  deleteDataProvider(
+    args: DeleteDataProviderCommandInput,
+    cb: (err: any, data?: DeleteDataProviderCommandOutput) => void
+  ): void;
+  deleteDataProvider(
+    args: DeleteDataProviderCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteDataProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEndpointCommand}
+   */
+  deleteEndpoint(
+    args: DeleteEndpointCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteEndpointCommandOutput>;
+  deleteEndpoint(
+    args: DeleteEndpointCommandInput,
+    cb: (err: any, data?: DeleteEndpointCommandOutput) => void
+  ): void;
+  deleteEndpoint(
+    args: DeleteEndpointCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventSubscriptionCommand}
+   */
+  deleteEventSubscription(
+    args: DeleteEventSubscriptionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteEventSubscriptionCommandOutput>;
+  deleteEventSubscription(
+    args: DeleteEventSubscriptionCommandInput,
+    cb: (err: any, data?: DeleteEventSubscriptionCommandOutput) => void
+  ): void;
+  deleteEventSubscription(
+    args: DeleteEventSubscriptionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteEventSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFleetAdvisorCollectorCommand}
+   */
+  deleteFleetAdvisorCollector(
+    args: DeleteFleetAdvisorCollectorCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteFleetAdvisorCollectorCommandOutput>;
+  deleteFleetAdvisorCollector(
+    args: DeleteFleetAdvisorCollectorCommandInput,
+    cb: (err: any, data?: DeleteFleetAdvisorCollectorCommandOutput) => void
+  ): void;
+  deleteFleetAdvisorCollector(
+    args: DeleteFleetAdvisorCollectorCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteFleetAdvisorCollectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFleetAdvisorDatabasesCommand}
+   */
+  deleteFleetAdvisorDatabases(
+    args: DeleteFleetAdvisorDatabasesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteFleetAdvisorDatabasesCommandOutput>;
+  deleteFleetAdvisorDatabases(
+    args: DeleteFleetAdvisorDatabasesCommandInput,
+    cb: (err: any, data?: DeleteFleetAdvisorDatabasesCommandOutput) => void
+  ): void;
+  deleteFleetAdvisorDatabases(
+    args: DeleteFleetAdvisorDatabasesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteFleetAdvisorDatabasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceProfileCommand}
+   */
+  deleteInstanceProfile(
+    args: DeleteInstanceProfileCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteInstanceProfileCommandOutput>;
+  deleteInstanceProfile(
+    args: DeleteInstanceProfileCommandInput,
+    cb: (err: any, data?: DeleteInstanceProfileCommandOutput) => void
+  ): void;
+  deleteInstanceProfile(
+    args: DeleteInstanceProfileCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteInstanceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMigrationProjectCommand}
+   */
+  deleteMigrationProject(
+    args: DeleteMigrationProjectCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteMigrationProjectCommandOutput>;
+  deleteMigrationProject(
+    args: DeleteMigrationProjectCommandInput,
+    cb: (err: any, data?: DeleteMigrationProjectCommandOutput) => void
+  ): void;
+  deleteMigrationProject(
+    args: DeleteMigrationProjectCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteMigrationProjectCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationConfigCommand}
+   */
+  deleteReplicationConfig(
+    args: DeleteReplicationConfigCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteReplicationConfigCommandOutput>;
+  deleteReplicationConfig(
+    args: DeleteReplicationConfigCommandInput,
+    cb: (err: any, data?: DeleteReplicationConfigCommandOutput) => void
+  ): void;
+  deleteReplicationConfig(
+    args: DeleteReplicationConfigCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteReplicationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationInstanceCommand}
+   */
+  deleteReplicationInstance(
+    args: DeleteReplicationInstanceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteReplicationInstanceCommandOutput>;
+  deleteReplicationInstance(
+    args: DeleteReplicationInstanceCommandInput,
+    cb: (err: any, data?: DeleteReplicationInstanceCommandOutput) => void
+  ): void;
+  deleteReplicationInstance(
+    args: DeleteReplicationInstanceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteReplicationInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationSubnetGroupCommand}
+   */
+  deleteReplicationSubnetGroup(
+    args: DeleteReplicationSubnetGroupCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteReplicationSubnetGroupCommandOutput>;
+  deleteReplicationSubnetGroup(
+    args: DeleteReplicationSubnetGroupCommandInput,
+    cb: (err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void
+  ): void;
+  deleteReplicationSubnetGroup(
+    args: DeleteReplicationSubnetGroupCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationTaskCommand}
+   */
+  deleteReplicationTask(
+    args: DeleteReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteReplicationTaskCommandOutput>;
+  deleteReplicationTask(
+    args: DeleteReplicationTaskCommandInput,
+    cb: (err: any, data?: DeleteReplicationTaskCommandOutput) => void
+  ): void;
+  deleteReplicationTask(
+    args: DeleteReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationTaskAssessmentRunCommand}
+   */
+  deleteReplicationTaskAssessmentRun(
+    args: DeleteReplicationTaskAssessmentRunCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DeleteReplicationTaskAssessmentRunCommandOutput>;
+  deleteReplicationTaskAssessmentRun(
+    args: DeleteReplicationTaskAssessmentRunCommandInput,
+    cb: (err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+  deleteReplicationTaskAssessmentRun(
+    args: DeleteReplicationTaskAssessmentRunCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountAttributesCommand}
+   */
+  describeAccountAttributes(): Promise<DescribeAccountAttributesCommandOutput>;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeAccountAttributesCommandOutput>;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
+  ): void;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeApplicableIndividualAssessmentsCommand}
+   */
+  describeApplicableIndividualAssessments(): Promise<DescribeApplicableIndividualAssessmentsCommandOutput>;
+  describeApplicableIndividualAssessments(
+    args: DescribeApplicableIndividualAssessmentsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeApplicableIndividualAssessmentsCommandOutput>;
+  describeApplicableIndividualAssessments(
+    args: DescribeApplicableIndividualAssessmentsCommandInput,
+    cb: (err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void
+  ): void;
+  describeApplicableIndividualAssessments(
+    args: DescribeApplicableIndividualAssessmentsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCertificatesCommand}
+   */
+  describeCertificates(): Promise<DescribeCertificatesCommandOutput>;
+  describeCertificates(
+    args: DescribeCertificatesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeCertificatesCommandOutput>;
+  describeCertificates(
+    args: DescribeCertificatesCommandInput,
+    cb: (err: any, data?: DescribeCertificatesCommandOutput) => void
+  ): void;
+  describeCertificates(
+    args: DescribeCertificatesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeCertificatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConnectionsCommand}
+   */
+  describeConnections(): Promise<DescribeConnectionsCommandOutput>;
+  describeConnections(
+    args: DescribeConnectionsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeConnectionsCommandOutput>;
+  describeConnections(
+    args: DescribeConnectionsCommandInput,
+    cb: (err: any, data?: DescribeConnectionsCommandOutput) => void
+  ): void;
+  describeConnections(
+    args: DescribeConnectionsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConversionConfigurationCommand}
+   */
+  describeConversionConfiguration(
+    args: DescribeConversionConfigurationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeConversionConfigurationCommandOutput>;
+  describeConversionConfiguration(
+    args: DescribeConversionConfigurationCommandInput,
+    cb: (err: any, data?: DescribeConversionConfigurationCommandOutput) => void
+  ): void;
+  describeConversionConfiguration(
+    args: DescribeConversionConfigurationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeConversionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataMigrationsCommand}
+   */
+  describeDataMigrations(): Promise<DescribeDataMigrationsCommandOutput>;
+  describeDataMigrations(
+    args: DescribeDataMigrationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeDataMigrationsCommandOutput>;
+  describeDataMigrations(
+    args: DescribeDataMigrationsCommandInput,
+    cb: (err: any, data?: DescribeDataMigrationsCommandOutput) => void
+  ): void;
+  describeDataMigrations(
+    args: DescribeDataMigrationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeDataMigrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataProvidersCommand}
+   */
+  describeDataProviders(): Promise<DescribeDataProvidersCommandOutput>;
+  describeDataProviders(
+    args: DescribeDataProvidersCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeDataProvidersCommandOutput>;
+  describeDataProviders(
+    args: DescribeDataProvidersCommandInput,
+    cb: (err: any, data?: DescribeDataProvidersCommandOutput) => void
+  ): void;
+  describeDataProviders(
+    args: DescribeDataProvidersCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeDataProvidersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEndpointsCommand}
+   */
+  describeEndpoints(): Promise<DescribeEndpointsCommandOutput>;
+  describeEndpoints(
+    args: DescribeEndpointsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEndpointsCommandOutput>;
+  describeEndpoints(
+    args: DescribeEndpointsCommandInput,
+    cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
+  ): void;
+  describeEndpoints(
+    args: DescribeEndpointsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEndpointSettingsCommand}
+   */
+  describeEndpointSettings(
+    args: DescribeEndpointSettingsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEndpointSettingsCommandOutput>;
+  describeEndpointSettings(
+    args: DescribeEndpointSettingsCommandInput,
+    cb: (err: any, data?: DescribeEndpointSettingsCommandOutput) => void
+  ): void;
+  describeEndpointSettings(
+    args: DescribeEndpointSettingsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEndpointSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEndpointTypesCommand}
+   */
+  describeEndpointTypes(): Promise<DescribeEndpointTypesCommandOutput>;
+  describeEndpointTypes(
+    args: DescribeEndpointTypesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEndpointTypesCommandOutput>;
+  describeEndpointTypes(
+    args: DescribeEndpointTypesCommandInput,
+    cb: (err: any, data?: DescribeEndpointTypesCommandOutput) => void
+  ): void;
+  describeEndpointTypes(
+    args: DescribeEndpointTypesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEndpointTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEngineVersionsCommand}
+   */
+  describeEngineVersions(): Promise<DescribeEngineVersionsCommandOutput>;
+  describeEngineVersions(
+    args: DescribeEngineVersionsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEngineVersionsCommandOutput>;
+  describeEngineVersions(
+    args: DescribeEngineVersionsCommandInput,
+    cb: (err: any, data?: DescribeEngineVersionsCommandOutput) => void
+  ): void;
+  describeEngineVersions(
+    args: DescribeEngineVersionsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEngineVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventCategoriesCommand}
+   */
+  describeEventCategories(): Promise<DescribeEventCategoriesCommandOutput>;
+  describeEventCategories(
+    args: DescribeEventCategoriesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEventCategoriesCommandOutput>;
+  describeEventCategories(
+    args: DescribeEventCategoriesCommandInput,
+    cb: (err: any, data?: DescribeEventCategoriesCommandOutput) => void
+  ): void;
+  describeEventCategories(
+    args: DescribeEventCategoriesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEventCategoriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   */
+  describeEvents(): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEventsCommandOutput>;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+  describeEvents(
+    args: DescribeEventsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventSubscriptionsCommand}
+   */
+  describeEventSubscriptions(): Promise<DescribeEventSubscriptionsCommandOutput>;
+  describeEventSubscriptions(
+    args: DescribeEventSubscriptionsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeEventSubscriptionsCommandOutput>;
+  describeEventSubscriptions(
+    args: DescribeEventSubscriptionsCommandInput,
+    cb: (err: any, data?: DescribeEventSubscriptionsCommandOutput) => void
+  ): void;
+  describeEventSubscriptions(
+    args: DescribeEventSubscriptionsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeEventSubscriptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeExtensionPackAssociationsCommand}
+   */
+  describeExtensionPackAssociations(
+    args: DescribeExtensionPackAssociationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeExtensionPackAssociationsCommandOutput>;
+  describeExtensionPackAssociations(
+    args: DescribeExtensionPackAssociationsCommandInput,
+    cb: (err: any, data?: DescribeExtensionPackAssociationsCommandOutput) => void
+  ): void;
+  describeExtensionPackAssociations(
+    args: DescribeExtensionPackAssociationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeExtensionPackAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFleetAdvisorCollectorsCommand}
+   */
+  describeFleetAdvisorCollectors(): Promise<DescribeFleetAdvisorCollectorsCommandOutput>;
+  describeFleetAdvisorCollectors(
+    args: DescribeFleetAdvisorCollectorsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeFleetAdvisorCollectorsCommandOutput>;
+  describeFleetAdvisorCollectors(
+    args: DescribeFleetAdvisorCollectorsCommandInput,
+    cb: (err: any, data?: DescribeFleetAdvisorCollectorsCommandOutput) => void
+  ): void;
+  describeFleetAdvisorCollectors(
+    args: DescribeFleetAdvisorCollectorsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeFleetAdvisorCollectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFleetAdvisorDatabasesCommand}
+   */
+  describeFleetAdvisorDatabases(): Promise<DescribeFleetAdvisorDatabasesCommandOutput>;
+  describeFleetAdvisorDatabases(
+    args: DescribeFleetAdvisorDatabasesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeFleetAdvisorDatabasesCommandOutput>;
+  describeFleetAdvisorDatabases(
+    args: DescribeFleetAdvisorDatabasesCommandInput,
+    cb: (err: any, data?: DescribeFleetAdvisorDatabasesCommandOutput) => void
+  ): void;
+  describeFleetAdvisorDatabases(
+    args: DescribeFleetAdvisorDatabasesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeFleetAdvisorDatabasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFleetAdvisorLsaAnalysisCommand}
+   */
+  describeFleetAdvisorLsaAnalysis(): Promise<DescribeFleetAdvisorLsaAnalysisCommandOutput>;
+  describeFleetAdvisorLsaAnalysis(
+    args: DescribeFleetAdvisorLsaAnalysisCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeFleetAdvisorLsaAnalysisCommandOutput>;
+  describeFleetAdvisorLsaAnalysis(
+    args: DescribeFleetAdvisorLsaAnalysisCommandInput,
+    cb: (err: any, data?: DescribeFleetAdvisorLsaAnalysisCommandOutput) => void
+  ): void;
+  describeFleetAdvisorLsaAnalysis(
+    args: DescribeFleetAdvisorLsaAnalysisCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeFleetAdvisorLsaAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFleetAdvisorSchemaObjectSummaryCommand}
+   */
+  describeFleetAdvisorSchemaObjectSummary(): Promise<DescribeFleetAdvisorSchemaObjectSummaryCommandOutput>;
+  describeFleetAdvisorSchemaObjectSummary(
+    args: DescribeFleetAdvisorSchemaObjectSummaryCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeFleetAdvisorSchemaObjectSummaryCommandOutput>;
+  describeFleetAdvisorSchemaObjectSummary(
+    args: DescribeFleetAdvisorSchemaObjectSummaryCommandInput,
+    cb: (err: any, data?: DescribeFleetAdvisorSchemaObjectSummaryCommandOutput) => void
+  ): void;
+  describeFleetAdvisorSchemaObjectSummary(
+    args: DescribeFleetAdvisorSchemaObjectSummaryCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeFleetAdvisorSchemaObjectSummaryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFleetAdvisorSchemasCommand}
+   */
+  describeFleetAdvisorSchemas(): Promise<DescribeFleetAdvisorSchemasCommandOutput>;
+  describeFleetAdvisorSchemas(
+    args: DescribeFleetAdvisorSchemasCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeFleetAdvisorSchemasCommandOutput>;
+  describeFleetAdvisorSchemas(
+    args: DescribeFleetAdvisorSchemasCommandInput,
+    cb: (err: any, data?: DescribeFleetAdvisorSchemasCommandOutput) => void
+  ): void;
+  describeFleetAdvisorSchemas(
+    args: DescribeFleetAdvisorSchemasCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeFleetAdvisorSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeInstanceProfilesCommand}
+   */
+  describeInstanceProfiles(): Promise<DescribeInstanceProfilesCommandOutput>;
+  describeInstanceProfiles(
+    args: DescribeInstanceProfilesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeInstanceProfilesCommandOutput>;
+  describeInstanceProfiles(
+    args: DescribeInstanceProfilesCommandInput,
+    cb: (err: any, data?: DescribeInstanceProfilesCommandOutput) => void
+  ): void;
+  describeInstanceProfiles(
+    args: DescribeInstanceProfilesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeInstanceProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelCommand}
+   */
+  describeMetadataModel(
+    args: DescribeMetadataModelCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelCommandOutput>;
+  describeMetadataModel(
+    args: DescribeMetadataModelCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelCommandOutput) => void
+  ): void;
+  describeMetadataModel(
+    args: DescribeMetadataModelCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelAssessmentsCommand}
+   */
+  describeMetadataModelAssessments(
+    args: DescribeMetadataModelAssessmentsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelAssessmentsCommandOutput>;
+  describeMetadataModelAssessments(
+    args: DescribeMetadataModelAssessmentsCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelAssessmentsCommandOutput) => void
+  ): void;
+  describeMetadataModelAssessments(
+    args: DescribeMetadataModelAssessmentsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelAssessmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelChildrenCommand}
+   */
+  describeMetadataModelChildren(
+    args: DescribeMetadataModelChildrenCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelChildrenCommandOutput>;
+  describeMetadataModelChildren(
+    args: DescribeMetadataModelChildrenCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelChildrenCommandOutput) => void
+  ): void;
+  describeMetadataModelChildren(
+    args: DescribeMetadataModelChildrenCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelChildrenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelConversionsCommand}
+   */
+  describeMetadataModelConversions(
+    args: DescribeMetadataModelConversionsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelConversionsCommandOutput>;
+  describeMetadataModelConversions(
+    args: DescribeMetadataModelConversionsCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelConversionsCommandOutput) => void
+  ): void;
+  describeMetadataModelConversions(
+    args: DescribeMetadataModelConversionsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelConversionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelCreationsCommand}
+   */
+  describeMetadataModelCreations(
+    args: DescribeMetadataModelCreationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelCreationsCommandOutput>;
+  describeMetadataModelCreations(
+    args: DescribeMetadataModelCreationsCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelCreationsCommandOutput) => void
+  ): void;
+  describeMetadataModelCreations(
+    args: DescribeMetadataModelCreationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelCreationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsAsScriptCommand}
+   */
+  describeMetadataModelExportsAsScript(
+    args: DescribeMetadataModelExportsAsScriptCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelExportsAsScriptCommandOutput>;
+  describeMetadataModelExportsAsScript(
+    args: DescribeMetadataModelExportsAsScriptCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelExportsAsScriptCommandOutput) => void
+  ): void;
+  describeMetadataModelExportsAsScript(
+    args: DescribeMetadataModelExportsAsScriptCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelExportsAsScriptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsToTargetCommand}
+   */
+  describeMetadataModelExportsToTarget(
+    args: DescribeMetadataModelExportsToTargetCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelExportsToTargetCommandOutput>;
+  describeMetadataModelExportsToTarget(
+    args: DescribeMetadataModelExportsToTargetCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelExportsToTargetCommandOutput) => void
+  ): void;
+  describeMetadataModelExportsToTarget(
+    args: DescribeMetadataModelExportsToTargetCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelExportsToTargetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetadataModelImportsCommand}
+   */
+  describeMetadataModelImports(
+    args: DescribeMetadataModelImportsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMetadataModelImportsCommandOutput>;
+  describeMetadataModelImports(
+    args: DescribeMetadataModelImportsCommandInput,
+    cb: (err: any, data?: DescribeMetadataModelImportsCommandOutput) => void
+  ): void;
+  describeMetadataModelImports(
+    args: DescribeMetadataModelImportsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMetadataModelImportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMigrationProjectsCommand}
+   */
+  describeMigrationProjects(): Promise<DescribeMigrationProjectsCommandOutput>;
+  describeMigrationProjects(
+    args: DescribeMigrationProjectsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeMigrationProjectsCommandOutput>;
+  describeMigrationProjects(
+    args: DescribeMigrationProjectsCommandInput,
+    cb: (err: any, data?: DescribeMigrationProjectsCommandOutput) => void
+  ): void;
+  describeMigrationProjects(
+    args: DescribeMigrationProjectsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeMigrationProjectsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOrderableReplicationInstancesCommand}
+   */
+  describeOrderableReplicationInstances(): Promise<DescribeOrderableReplicationInstancesCommandOutput>;
+  describeOrderableReplicationInstances(
+    args: DescribeOrderableReplicationInstancesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeOrderableReplicationInstancesCommandOutput>;
+  describeOrderableReplicationInstances(
+    args: DescribeOrderableReplicationInstancesCommandInput,
+    cb: (err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void
+  ): void;
+  describeOrderableReplicationInstances(
+    args: DescribeOrderableReplicationInstancesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePendingMaintenanceActionsCommand}
+   */
+  describePendingMaintenanceActions(): Promise<DescribePendingMaintenanceActionsCommandOutput>;
+  describePendingMaintenanceActions(
+    args: DescribePendingMaintenanceActionsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribePendingMaintenanceActionsCommandOutput>;
+  describePendingMaintenanceActions(
+    args: DescribePendingMaintenanceActionsCommandInput,
+    cb: (err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void
+  ): void;
+  describePendingMaintenanceActions(
+    args: DescribePendingMaintenanceActionsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecommendationLimitationsCommand}
+   */
+  describeRecommendationLimitations(): Promise<DescribeRecommendationLimitationsCommandOutput>;
+  describeRecommendationLimitations(
+    args: DescribeRecommendationLimitationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeRecommendationLimitationsCommandOutput>;
+  describeRecommendationLimitations(
+    args: DescribeRecommendationLimitationsCommandInput,
+    cb: (err: any, data?: DescribeRecommendationLimitationsCommandOutput) => void
+  ): void;
+  describeRecommendationLimitations(
+    args: DescribeRecommendationLimitationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeRecommendationLimitationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecommendationsCommand}
+   */
+  describeRecommendations(): Promise<DescribeRecommendationsCommandOutput>;
+  describeRecommendations(
+    args: DescribeRecommendationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeRecommendationsCommandOutput>;
+  describeRecommendations(
+    args: DescribeRecommendationsCommandInput,
+    cb: (err: any, data?: DescribeRecommendationsCommandOutput) => void
+  ): void;
+  describeRecommendations(
+    args: DescribeRecommendationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRefreshSchemasStatusCommand}
+   */
+  describeRefreshSchemasStatus(
+    args: DescribeRefreshSchemasStatusCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeRefreshSchemasStatusCommandOutput>;
+  describeRefreshSchemasStatus(
+    args: DescribeRefreshSchemasStatusCommandInput,
+    cb: (err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void
+  ): void;
+  describeRefreshSchemasStatus(
+    args: DescribeRefreshSchemasStatusCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationConfigsCommand}
+   */
+  describeReplicationConfigs(): Promise<DescribeReplicationConfigsCommandOutput>;
+  describeReplicationConfigs(
+    args: DescribeReplicationConfigsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationConfigsCommandOutput>;
+  describeReplicationConfigs(
+    args: DescribeReplicationConfigsCommandInput,
+    cb: (err: any, data?: DescribeReplicationConfigsCommandOutput) => void
+  ): void;
+  describeReplicationConfigs(
+    args: DescribeReplicationConfigsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationConfigsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationInstancesCommand}
+   */
+  describeReplicationInstances(): Promise<DescribeReplicationInstancesCommandOutput>;
+  describeReplicationInstances(
+    args: DescribeReplicationInstancesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationInstancesCommandOutput>;
+  describeReplicationInstances(
+    args: DescribeReplicationInstancesCommandInput,
+    cb: (err: any, data?: DescribeReplicationInstancesCommandOutput) => void
+  ): void;
+  describeReplicationInstances(
+    args: DescribeReplicationInstancesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationInstanceTaskLogsCommand}
+   */
+  describeReplicationInstanceTaskLogs(
+    args: DescribeReplicationInstanceTaskLogsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationInstanceTaskLogsCommandOutput>;
+  describeReplicationInstanceTaskLogs(
+    args: DescribeReplicationInstanceTaskLogsCommandInput,
+    cb: (err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void
+  ): void;
+  describeReplicationInstanceTaskLogs(
+    args: DescribeReplicationInstanceTaskLogsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationsCommand}
+   */
+  describeReplications(): Promise<DescribeReplicationsCommandOutput>;
+  describeReplications(
+    args: DescribeReplicationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationsCommandOutput>;
+  describeReplications(
+    args: DescribeReplicationsCommandInput,
+    cb: (err: any, data?: DescribeReplicationsCommandOutput) => void
+  ): void;
+  describeReplications(
+    args: DescribeReplicationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationSubnetGroupsCommand}
+   */
+  describeReplicationSubnetGroups(): Promise<DescribeReplicationSubnetGroupsCommandOutput>;
+  describeReplicationSubnetGroups(
+    args: DescribeReplicationSubnetGroupsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationSubnetGroupsCommandOutput>;
+  describeReplicationSubnetGroups(
+    args: DescribeReplicationSubnetGroupsCommandInput,
+    cb: (err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void
+  ): void;
+  describeReplicationSubnetGroups(
+    args: DescribeReplicationSubnetGroupsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationTableStatisticsCommand}
+   */
+  describeReplicationTableStatistics(
+    args: DescribeReplicationTableStatisticsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationTableStatisticsCommandOutput>;
+  describeReplicationTableStatistics(
+    args: DescribeReplicationTableStatisticsCommandInput,
+    cb: (err: any, data?: DescribeReplicationTableStatisticsCommandOutput) => void
+  ): void;
+  describeReplicationTableStatistics(
+    args: DescribeReplicationTableStatisticsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationTableStatisticsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationTaskAssessmentResultsCommand}
+   */
+  describeReplicationTaskAssessmentResults(): Promise<DescribeReplicationTaskAssessmentResultsCommandOutput>;
+  describeReplicationTaskAssessmentResults(
+    args: DescribeReplicationTaskAssessmentResultsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationTaskAssessmentResultsCommandOutput>;
+  describeReplicationTaskAssessmentResults(
+    args: DescribeReplicationTaskAssessmentResultsCommandInput,
+    cb: (err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void
+  ): void;
+  describeReplicationTaskAssessmentResults(
+    args: DescribeReplicationTaskAssessmentResultsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationTaskAssessmentRunsCommand}
+   */
+  describeReplicationTaskAssessmentRuns(): Promise<DescribeReplicationTaskAssessmentRunsCommandOutput>;
+  describeReplicationTaskAssessmentRuns(
+    args: DescribeReplicationTaskAssessmentRunsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationTaskAssessmentRunsCommandOutput>;
+  describeReplicationTaskAssessmentRuns(
+    args: DescribeReplicationTaskAssessmentRunsCommandInput,
+    cb: (err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void
+  ): void;
+  describeReplicationTaskAssessmentRuns(
+    args: DescribeReplicationTaskAssessmentRunsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationTaskIndividualAssessmentsCommand}
+   */
+  describeReplicationTaskIndividualAssessments(): Promise<DescribeReplicationTaskIndividualAssessmentsCommandOutput>;
+  describeReplicationTaskIndividualAssessments(
+    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationTaskIndividualAssessmentsCommandOutput>;
+  describeReplicationTaskIndividualAssessments(
+    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
+    cb: (err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void
+  ): void;
+  describeReplicationTaskIndividualAssessments(
+    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   */
+  describeReplicationTasks(): Promise<DescribeReplicationTasksCommandOutput>;
+  describeReplicationTasks(
+    args: DescribeReplicationTasksCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeReplicationTasksCommandOutput>;
+  describeReplicationTasks(
+    args: DescribeReplicationTasksCommandInput,
+    cb: (err: any, data?: DescribeReplicationTasksCommandOutput) => void
+  ): void;
+  describeReplicationTasks(
+    args: DescribeReplicationTasksCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeReplicationTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSchemasCommand}
+   */
+  describeSchemas(
+    args: DescribeSchemasCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeSchemasCommandOutput>;
+  describeSchemas(
+    args: DescribeSchemasCommandInput,
+    cb: (err: any, data?: DescribeSchemasCommandOutput) => void
+  ): void;
+  describeSchemas(
+    args: DescribeSchemasCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTableStatisticsCommand}
+   */
+  describeTableStatistics(
+    args: DescribeTableStatisticsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<DescribeTableStatisticsCommandOutput>;
+  describeTableStatistics(
+    args: DescribeTableStatisticsCommandInput,
+    cb: (err: any, data?: DescribeTableStatisticsCommandOutput) => void
+  ): void;
+  describeTableStatistics(
+    args: DescribeTableStatisticsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: DescribeTableStatisticsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportMetadataModelAssessmentCommand}
+   */
+  exportMetadataModelAssessment(
+    args: ExportMetadataModelAssessmentCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ExportMetadataModelAssessmentCommandOutput>;
+  exportMetadataModelAssessment(
+    args: ExportMetadataModelAssessmentCommandInput,
+    cb: (err: any, data?: ExportMetadataModelAssessmentCommandOutput) => void
+  ): void;
+  exportMetadataModelAssessment(
+    args: ExportMetadataModelAssessmentCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ExportMetadataModelAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTargetSelectionRulesCommand}
+   */
+  getTargetSelectionRules(
+    args: GetTargetSelectionRulesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<GetTargetSelectionRulesCommandOutput>;
+  getTargetSelectionRules(
+    args: GetTargetSelectionRulesCommandInput,
+    cb: (err: any, data?: GetTargetSelectionRulesCommandOutput) => void
+  ): void;
+  getTargetSelectionRules(
+    args: GetTargetSelectionRulesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: GetTargetSelectionRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportCertificateCommand}
+   */
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ImportCertificateCommandOutput>;
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    cb: (err: any, data?: ImportCertificateCommandOutput) => void
+  ): void;
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ImportCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyConversionConfigurationCommand}
+   */
+  modifyConversionConfiguration(
+    args: ModifyConversionConfigurationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyConversionConfigurationCommandOutput>;
+  modifyConversionConfiguration(
+    args: ModifyConversionConfigurationCommandInput,
+    cb: (err: any, data?: ModifyConversionConfigurationCommandOutput) => void
+  ): void;
+  modifyConversionConfiguration(
+    args: ModifyConversionConfigurationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyConversionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyDataMigrationCommand}
+   */
+  modifyDataMigration(
+    args: ModifyDataMigrationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyDataMigrationCommandOutput>;
+  modifyDataMigration(
+    args: ModifyDataMigrationCommandInput,
+    cb: (err: any, data?: ModifyDataMigrationCommandOutput) => void
+  ): void;
+  modifyDataMigration(
+    args: ModifyDataMigrationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyDataMigrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyDataProviderCommand}
+   */
+  modifyDataProvider(
+    args: ModifyDataProviderCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyDataProviderCommandOutput>;
+  modifyDataProvider(
+    args: ModifyDataProviderCommandInput,
+    cb: (err: any, data?: ModifyDataProviderCommandOutput) => void
+  ): void;
+  modifyDataProvider(
+    args: ModifyDataProviderCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyDataProviderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyEndpointCommand}
+   */
+  modifyEndpoint(
+    args: ModifyEndpointCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyEndpointCommandOutput>;
+  modifyEndpoint(
+    args: ModifyEndpointCommandInput,
+    cb: (err: any, data?: ModifyEndpointCommandOutput) => void
+  ): void;
+  modifyEndpoint(
+    args: ModifyEndpointCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyEventSubscriptionCommand}
+   */
+  modifyEventSubscription(
+    args: ModifyEventSubscriptionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyEventSubscriptionCommandOutput>;
+  modifyEventSubscription(
+    args: ModifyEventSubscriptionCommandInput,
+    cb: (err: any, data?: ModifyEventSubscriptionCommandOutput) => void
+  ): void;
+  modifyEventSubscription(
+    args: ModifyEventSubscriptionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyEventSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyInstanceProfileCommand}
+   */
+  modifyInstanceProfile(
+    args: ModifyInstanceProfileCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyInstanceProfileCommandOutput>;
+  modifyInstanceProfile(
+    args: ModifyInstanceProfileCommandInput,
+    cb: (err: any, data?: ModifyInstanceProfileCommandOutput) => void
+  ): void;
+  modifyInstanceProfile(
+    args: ModifyInstanceProfileCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyInstanceProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyMigrationProjectCommand}
+   */
+  modifyMigrationProject(
+    args: ModifyMigrationProjectCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyMigrationProjectCommandOutput>;
+  modifyMigrationProject(
+    args: ModifyMigrationProjectCommandInput,
+    cb: (err: any, data?: ModifyMigrationProjectCommandOutput) => void
+  ): void;
+  modifyMigrationProject(
+    args: ModifyMigrationProjectCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyMigrationProjectCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyReplicationConfigCommand}
+   */
+  modifyReplicationConfig(
+    args: ModifyReplicationConfigCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyReplicationConfigCommandOutput>;
+  modifyReplicationConfig(
+    args: ModifyReplicationConfigCommandInput,
+    cb: (err: any, data?: ModifyReplicationConfigCommandOutput) => void
+  ): void;
+  modifyReplicationConfig(
+    args: ModifyReplicationConfigCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyReplicationConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyReplicationInstanceCommand}
+   */
+  modifyReplicationInstance(
+    args: ModifyReplicationInstanceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyReplicationInstanceCommandOutput>;
+  modifyReplicationInstance(
+    args: ModifyReplicationInstanceCommandInput,
+    cb: (err: any, data?: ModifyReplicationInstanceCommandOutput) => void
+  ): void;
+  modifyReplicationInstance(
+    args: ModifyReplicationInstanceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyReplicationInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyReplicationSubnetGroupCommand}
+   */
+  modifyReplicationSubnetGroup(
+    args: ModifyReplicationSubnetGroupCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyReplicationSubnetGroupCommandOutput>;
+  modifyReplicationSubnetGroup(
+    args: ModifyReplicationSubnetGroupCommandInput,
+    cb: (err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void
+  ): void;
+  modifyReplicationSubnetGroup(
+    args: ModifyReplicationSubnetGroupCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyReplicationTaskCommand}
+   */
+  modifyReplicationTask(
+    args: ModifyReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ModifyReplicationTaskCommandOutput>;
+  modifyReplicationTask(
+    args: ModifyReplicationTaskCommandInput,
+    cb: (err: any, data?: ModifyReplicationTaskCommandOutput) => void
+  ): void;
+  modifyReplicationTask(
+    args: ModifyReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ModifyReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link MoveReplicationTaskCommand}
+   */
+  moveReplicationTask(
+    args: MoveReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<MoveReplicationTaskCommandOutput>;
+  moveReplicationTask(
+    args: MoveReplicationTaskCommandInput,
+    cb: (err: any, data?: MoveReplicationTaskCommandOutput) => void
+  ): void;
+  moveReplicationTask(
+    args: MoveReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: MoveReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RebootReplicationInstanceCommand}
+   */
+  rebootReplicationInstance(
+    args: RebootReplicationInstanceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<RebootReplicationInstanceCommandOutput>;
+  rebootReplicationInstance(
+    args: RebootReplicationInstanceCommandInput,
+    cb: (err: any, data?: RebootReplicationInstanceCommandOutput) => void
+  ): void;
+  rebootReplicationInstance(
+    args: RebootReplicationInstanceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: RebootReplicationInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RefreshSchemasCommand}
+   */
+  refreshSchemas(
+    args: RefreshSchemasCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<RefreshSchemasCommandOutput>;
+  refreshSchemas(
+    args: RefreshSchemasCommandInput,
+    cb: (err: any, data?: RefreshSchemasCommandOutput) => void
+  ): void;
+  refreshSchemas(
+    args: RefreshSchemasCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: RefreshSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReloadReplicationTablesCommand}
+   */
+  reloadReplicationTables(
+    args: ReloadReplicationTablesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ReloadReplicationTablesCommandOutput>;
+  reloadReplicationTables(
+    args: ReloadReplicationTablesCommandInput,
+    cb: (err: any, data?: ReloadReplicationTablesCommandOutput) => void
+  ): void;
+  reloadReplicationTables(
+    args: ReloadReplicationTablesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ReloadReplicationTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReloadTablesCommand}
+   */
+  reloadTables(
+    args: ReloadTablesCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<ReloadTablesCommandOutput>;
+  reloadTables(
+    args: ReloadTablesCommandInput,
+    cb: (err: any, data?: ReloadTablesCommandOutput) => void
+  ): void;
+  reloadTables(
+    args: ReloadTablesCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: ReloadTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveTagsFromResourceCommand}
+   */
+  removeTagsFromResource(
+    args: RemoveTagsFromResourceCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<RemoveTagsFromResourceCommandOutput>;
+  removeTagsFromResource(
+    args: RemoveTagsFromResourceCommandInput,
+    cb: (err: any, data?: RemoveTagsFromResourceCommandOutput) => void
+  ): void;
+  removeTagsFromResource(
+    args: RemoveTagsFromResourceCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: RemoveTagsFromResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RunFleetAdvisorLsaAnalysisCommand}
+   */
+  runFleetAdvisorLsaAnalysis(): Promise<RunFleetAdvisorLsaAnalysisCommandOutput>;
+  runFleetAdvisorLsaAnalysis(
+    args: RunFleetAdvisorLsaAnalysisCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<RunFleetAdvisorLsaAnalysisCommandOutput>;
+  runFleetAdvisorLsaAnalysis(
+    args: RunFleetAdvisorLsaAnalysisCommandInput,
+    cb: (err: any, data?: RunFleetAdvisorLsaAnalysisCommandOutput) => void
+  ): void;
+  runFleetAdvisorLsaAnalysis(
+    args: RunFleetAdvisorLsaAnalysisCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: RunFleetAdvisorLsaAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDataMigrationCommand}
+   */
+  startDataMigration(
+    args: StartDataMigrationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartDataMigrationCommandOutput>;
+  startDataMigration(
+    args: StartDataMigrationCommandInput,
+    cb: (err: any, data?: StartDataMigrationCommandOutput) => void
+  ): void;
+  startDataMigration(
+    args: StartDataMigrationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartDataMigrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartExtensionPackAssociationCommand}
+   */
+  startExtensionPackAssociation(
+    args: StartExtensionPackAssociationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartExtensionPackAssociationCommandOutput>;
+  startExtensionPackAssociation(
+    args: StartExtensionPackAssociationCommandInput,
+    cb: (err: any, data?: StartExtensionPackAssociationCommandOutput) => void
+  ): void;
+  startExtensionPackAssociation(
+    args: StartExtensionPackAssociationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartExtensionPackAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelAssessmentCommand}
+   */
+  startMetadataModelAssessment(
+    args: StartMetadataModelAssessmentCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelAssessmentCommandOutput>;
+  startMetadataModelAssessment(
+    args: StartMetadataModelAssessmentCommandInput,
+    cb: (err: any, data?: StartMetadataModelAssessmentCommandOutput) => void
+  ): void;
+  startMetadataModelAssessment(
+    args: StartMetadataModelAssessmentCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelConversionCommand}
+   */
+  startMetadataModelConversion(
+    args: StartMetadataModelConversionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelConversionCommandOutput>;
+  startMetadataModelConversion(
+    args: StartMetadataModelConversionCommandInput,
+    cb: (err: any, data?: StartMetadataModelConversionCommandOutput) => void
+  ): void;
+  startMetadataModelConversion(
+    args: StartMetadataModelConversionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelConversionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelCreationCommand}
+   */
+  startMetadataModelCreation(
+    args: StartMetadataModelCreationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelCreationCommandOutput>;
+  startMetadataModelCreation(
+    args: StartMetadataModelCreationCommandInput,
+    cb: (err: any, data?: StartMetadataModelCreationCommandOutput) => void
+  ): void;
+  startMetadataModelCreation(
+    args: StartMetadataModelCreationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelCreationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelExportAsScriptCommand}
+   */
+  startMetadataModelExportAsScript(
+    args: StartMetadataModelExportAsScriptCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelExportAsScriptCommandOutput>;
+  startMetadataModelExportAsScript(
+    args: StartMetadataModelExportAsScriptCommandInput,
+    cb: (err: any, data?: StartMetadataModelExportAsScriptCommandOutput) => void
+  ): void;
+  startMetadataModelExportAsScript(
+    args: StartMetadataModelExportAsScriptCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelExportAsScriptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelExportToTargetCommand}
+   */
+  startMetadataModelExportToTarget(
+    args: StartMetadataModelExportToTargetCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelExportToTargetCommandOutput>;
+  startMetadataModelExportToTarget(
+    args: StartMetadataModelExportToTargetCommandInput,
+    cb: (err: any, data?: StartMetadataModelExportToTargetCommandOutput) => void
+  ): void;
+  startMetadataModelExportToTarget(
+    args: StartMetadataModelExportToTargetCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelExportToTargetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetadataModelImportCommand}
+   */
+  startMetadataModelImport(
+    args: StartMetadataModelImportCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartMetadataModelImportCommandOutput>;
+  startMetadataModelImport(
+    args: StartMetadataModelImportCommandInput,
+    cb: (err: any, data?: StartMetadataModelImportCommandOutput) => void
+  ): void;
+  startMetadataModelImport(
+    args: StartMetadataModelImportCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartMetadataModelImportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecommendationsCommand}
+   */
+  startRecommendations(
+    args: StartRecommendationsCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartRecommendationsCommandOutput>;
+  startRecommendations(
+    args: StartRecommendationsCommandInput,
+    cb: (err: any, data?: StartRecommendationsCommandOutput) => void
+  ): void;
+  startRecommendations(
+    args: StartRecommendationsCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationCommand}
+   */
+  startReplication(
+    args: StartReplicationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartReplicationCommandOutput>;
+  startReplication(
+    args: StartReplicationCommandInput,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+  startReplication(
+    args: StartReplicationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationTaskCommand}
+   */
+  startReplicationTask(
+    args: StartReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartReplicationTaskCommandOutput>;
+  startReplicationTask(
+    args: StartReplicationTaskCommandInput,
+    cb: (err: any, data?: StartReplicationTaskCommandOutput) => void
+  ): void;
+  startReplicationTask(
+    args: StartReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationTaskAssessmentCommand}
+   */
+  startReplicationTaskAssessment(
+    args: StartReplicationTaskAssessmentCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartReplicationTaskAssessmentCommandOutput>;
+  startReplicationTaskAssessment(
+    args: StartReplicationTaskAssessmentCommandInput,
+    cb: (err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void
+  ): void;
+  startReplicationTaskAssessment(
+    args: StartReplicationTaskAssessmentCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationTaskAssessmentRunCommand}
+   */
+  startReplicationTaskAssessmentRun(
+    args: StartReplicationTaskAssessmentRunCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StartReplicationTaskAssessmentRunCommandOutput>;
+  startReplicationTaskAssessmentRun(
+    args: StartReplicationTaskAssessmentRunCommandInput,
+    cb: (err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+  startReplicationTaskAssessmentRun(
+    args: StartReplicationTaskAssessmentRunCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopDataMigrationCommand}
+   */
+  stopDataMigration(
+    args: StopDataMigrationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StopDataMigrationCommandOutput>;
+  stopDataMigration(
+    args: StopDataMigrationCommandInput,
+    cb: (err: any, data?: StopDataMigrationCommandOutput) => void
+  ): void;
+  stopDataMigration(
+    args: StopDataMigrationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StopDataMigrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopReplicationCommand}
+   */
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StopReplicationCommandOutput>;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopReplicationTaskCommand}
+   */
+  stopReplicationTask(
+    args: StopReplicationTaskCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<StopReplicationTaskCommandOutput>;
+  stopReplicationTask(
+    args: StopReplicationTaskCommandInput,
+    cb: (err: any, data?: StopReplicationTaskCommandOutput) => void
+  ): void;
+  stopReplicationTask(
+    args: StopReplicationTaskCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: StopReplicationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestConnectionCommand}
+   */
+  testConnection(
+    args: TestConnectionCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<TestConnectionCommandOutput>;
+  testConnection(
+    args: TestConnectionCommandInput,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+  testConnection(
+    args: TestConnectionCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSubscriptionsToEventBridgeCommand}
+   */
+  updateSubscriptionsToEventBridge(): Promise<UpdateSubscriptionsToEventBridgeCommandOutput>;
+  updateSubscriptionsToEventBridge(
+    args: UpdateSubscriptionsToEventBridgeCommandInput,
+    options?: DatabaseMigrationServiceRequestOptions
+  ): Promise<UpdateSubscriptionsToEventBridgeCommandOutput>;
+  updateSubscriptionsToEventBridge(
+    args: UpdateSubscriptionsToEventBridgeCommandInput,
+    cb: (err: any, data?: UpdateSubscriptionsToEventBridgeCommandOutput) => void
+  ): void;
+  updateSubscriptionsToEventBridge(
+    args: UpdateSubscriptionsToEventBridgeCommandInput,
+    options: DatabaseMigrationServiceRequestOptions,
+    cb: (err: any, data?: UpdateSubscriptionsToEventBridgeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeApplicableIndividualAssessmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeApplicableIndividualAssessmentsCommandOutput}.
+   */
+  paginateDescribeApplicableIndividualAssessments(
+    args?: DescribeApplicableIndividualAssessmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeApplicableIndividualAssessmentsCommandOutput>;
+
+  /**
+   * @see {@link DescribeCertificatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeCertificatesCommandOutput}.
+   */
+  paginateDescribeCertificates(
+    args?: DescribeCertificatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeCertificatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeConnectionsCommandOutput}.
+   */
+  paginateDescribeConnections(
+    args?: DescribeConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeConnectionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeDataMigrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDataMigrationsCommandOutput}.
+   */
+  paginateDescribeDataMigrations(
+    args?: DescribeDataMigrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDataMigrationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeDataProvidersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDataProvidersCommandOutput}.
+   */
+  paginateDescribeDataProviders(
+    args?: DescribeDataProvidersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDataProvidersCommandOutput>;
+
+  /**
+   * @see {@link DescribeEndpointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEndpointsCommandOutput}.
+   */
+  paginateDescribeEndpoints(
+    args?: DescribeEndpointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEndpointsCommandOutput>;
+
+  /**
+   * @see {@link DescribeEndpointSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEndpointSettingsCommandOutput}.
+   */
+  paginateDescribeEndpointSettings(
+    args: DescribeEndpointSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEndpointSettingsCommandOutput>;
+
+  /**
+   * @see {@link DescribeEndpointTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEndpointTypesCommandOutput}.
+   */
+  paginateDescribeEndpointTypes(
+    args?: DescribeEndpointTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEndpointTypesCommandOutput>;
+
+  /**
+   * @see {@link DescribeEngineVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEngineVersionsCommandOutput}.
+   */
+  paginateDescribeEngineVersions(
+    args?: DescribeEngineVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEngineVersionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventsCommandOutput}.
+   */
+  paginateDescribeEvents(
+    args?: DescribeEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventsCommandOutput>;
+
+  /**
+   * @see {@link DescribeEventSubscriptionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeEventSubscriptionsCommandOutput}.
+   */
+  paginateDescribeEventSubscriptions(
+    args?: DescribeEventSubscriptionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeEventSubscriptionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeExtensionPackAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeExtensionPackAssociationsCommandOutput}.
+   */
+  paginateDescribeExtensionPackAssociations(
+    args: DescribeExtensionPackAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeExtensionPackAssociationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeFleetAdvisorCollectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFleetAdvisorCollectorsCommandOutput}.
+   */
+  paginateDescribeFleetAdvisorCollectors(
+    args?: DescribeFleetAdvisorCollectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFleetAdvisorCollectorsCommandOutput>;
+
+  /**
+   * @see {@link DescribeFleetAdvisorDatabasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFleetAdvisorDatabasesCommandOutput}.
+   */
+  paginateDescribeFleetAdvisorDatabases(
+    args?: DescribeFleetAdvisorDatabasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFleetAdvisorDatabasesCommandOutput>;
+
+  /**
+   * @see {@link DescribeFleetAdvisorLsaAnalysisCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFleetAdvisorLsaAnalysisCommandOutput}.
+   */
+  paginateDescribeFleetAdvisorLsaAnalysis(
+    args?: DescribeFleetAdvisorLsaAnalysisCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFleetAdvisorLsaAnalysisCommandOutput>;
+
+  /**
+   * @see {@link DescribeFleetAdvisorSchemaObjectSummaryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFleetAdvisorSchemaObjectSummaryCommandOutput}.
+   */
+  paginateDescribeFleetAdvisorSchemaObjectSummary(
+    args?: DescribeFleetAdvisorSchemaObjectSummaryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFleetAdvisorSchemaObjectSummaryCommandOutput>;
+
+  /**
+   * @see {@link DescribeFleetAdvisorSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeFleetAdvisorSchemasCommandOutput}.
+   */
+  paginateDescribeFleetAdvisorSchemas(
+    args?: DescribeFleetAdvisorSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeFleetAdvisorSchemasCommandOutput>;
+
+  /**
+   * @see {@link DescribeInstanceProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeInstanceProfilesCommandOutput}.
+   */
+  paginateDescribeInstanceProfiles(
+    args?: DescribeInstanceProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeInstanceProfilesCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelAssessmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelAssessmentsCommandOutput}.
+   */
+  paginateDescribeMetadataModelAssessments(
+    args: DescribeMetadataModelAssessmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelAssessmentsCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelChildrenCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelChildrenCommandOutput}.
+   */
+  paginateDescribeMetadataModelChildren(
+    args: DescribeMetadataModelChildrenCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelChildrenCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelConversionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelConversionsCommandOutput}.
+   */
+  paginateDescribeMetadataModelConversions(
+    args: DescribeMetadataModelConversionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelConversionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelCreationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelCreationsCommandOutput}.
+   */
+  paginateDescribeMetadataModelCreations(
+    args: DescribeMetadataModelCreationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelCreationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsAsScriptCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelExportsAsScriptCommandOutput}.
+   */
+  paginateDescribeMetadataModelExportsAsScript(
+    args: DescribeMetadataModelExportsAsScriptCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelExportsAsScriptCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsToTargetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelExportsToTargetCommandOutput}.
+   */
+  paginateDescribeMetadataModelExportsToTarget(
+    args: DescribeMetadataModelExportsToTargetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelExportsToTargetCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetadataModelImportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetadataModelImportsCommandOutput}.
+   */
+  paginateDescribeMetadataModelImports(
+    args: DescribeMetadataModelImportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetadataModelImportsCommandOutput>;
+
+  /**
+   * @see {@link DescribeMigrationProjectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMigrationProjectsCommandOutput}.
+   */
+  paginateDescribeMigrationProjects(
+    args?: DescribeMigrationProjectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMigrationProjectsCommandOutput>;
+
+  /**
+   * @see {@link DescribeOrderableReplicationInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeOrderableReplicationInstancesCommandOutput}.
+   */
+  paginateDescribeOrderableReplicationInstances(
+    args?: DescribeOrderableReplicationInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeOrderableReplicationInstancesCommandOutput>;
+
+  /**
+   * @see {@link DescribePendingMaintenanceActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribePendingMaintenanceActionsCommandOutput}.
+   */
+  paginateDescribePendingMaintenanceActions(
+    args?: DescribePendingMaintenanceActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribePendingMaintenanceActionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRecommendationLimitationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRecommendationLimitationsCommandOutput}.
+   */
+  paginateDescribeRecommendationLimitations(
+    args?: DescribeRecommendationLimitationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRecommendationLimitationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRecommendationsCommandOutput}.
+   */
+  paginateDescribeRecommendations(
+    args?: DescribeRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationConfigsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationConfigsCommandOutput}.
+   */
+  paginateDescribeReplicationConfigs(
+    args?: DescribeReplicationConfigsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationConfigsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationInstancesCommandOutput}.
+   */
+  paginateDescribeReplicationInstances(
+    args?: DescribeReplicationInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationInstancesCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationInstanceTaskLogsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationInstanceTaskLogsCommandOutput}.
+   */
+  paginateDescribeReplicationInstanceTaskLogs(
+    args: DescribeReplicationInstanceTaskLogsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationInstanceTaskLogsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationsCommandOutput}.
+   */
+  paginateDescribeReplications(
+    args?: DescribeReplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationSubnetGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationSubnetGroupsCommandOutput}.
+   */
+  paginateDescribeReplicationSubnetGroups(
+    args?: DescribeReplicationSubnetGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationSubnetGroupsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationTableStatisticsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationTableStatisticsCommandOutput}.
+   */
+  paginateDescribeReplicationTableStatistics(
+    args: DescribeReplicationTableStatisticsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationTableStatisticsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationTaskAssessmentResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationTaskAssessmentResultsCommandOutput}.
+   */
+  paginateDescribeReplicationTaskAssessmentResults(
+    args?: DescribeReplicationTaskAssessmentResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationTaskAssessmentResultsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationTaskAssessmentRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationTaskAssessmentRunsCommandOutput}.
+   */
+  paginateDescribeReplicationTaskAssessmentRuns(
+    args?: DescribeReplicationTaskAssessmentRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationTaskAssessmentRunsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationTaskIndividualAssessmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationTaskIndividualAssessmentsCommandOutput}.
+   */
+  paginateDescribeReplicationTaskIndividualAssessments(
+    args?: DescribeReplicationTaskIndividualAssessmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationTaskIndividualAssessmentsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationTasksCommandOutput}.
+   */
+  paginateDescribeReplicationTasks(
+    args?: DescribeReplicationTasksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationTasksCommandOutput>;
+
+  /**
+   * @see {@link DescribeSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSchemasCommandOutput}.
+   */
+  paginateDescribeSchemas(
+    args: DescribeSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSchemasCommandOutput>;
+
+  /**
+   * @see {@link DescribeTableStatisticsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeTableStatisticsCommandOutput}.
+   */
+  paginateDescribeTableStatistics(
+    args: DescribeTableStatisticsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeTableStatisticsCommandOutput>;
+
+  /**
+   * @see {@link DescribeConnectionsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilTestConnectionSucceeds(
+    args: DescribeConnectionsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeConnectionsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeEndpointsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilEndpointDeleted(
+    args: DescribeEndpointsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundFault>>;
+
+  /**
+   * @see {@link DescribeExtensionPackAssociationsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilExtensionPackAssociated(
+    args: DescribeExtensionPackAssociationsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeExtensionPackAssociationsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelAssessmentsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelAssessed(
+    args: DescribeMetadataModelAssessmentsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelAssessmentsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelConversionsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelConversionCancelled(
+    args: DescribeMetadataModelConversionsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelConversionsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelConversionsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelConverted(
+    args: DescribeMetadataModelConversionsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelConversionsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelCreationsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelCreated(
+    args: DescribeMetadataModelCreationsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelCreationsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelCreationsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelCreationCancelled(
+    args: DescribeMetadataModelCreationsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelCreationsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsAsScriptCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelExportedAsScript(
+    args: DescribeMetadataModelExportsAsScriptCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelExportsAsScriptCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelExportsToTargetCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelExportedToTarget(
+    args: DescribeMetadataModelExportsToTargetCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelExportsToTargetCommandOutput>>;
+
+  /**
+   * @see {@link DescribeMetadataModelImportsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMetadataModelImported(
+    args: DescribeMetadataModelImportsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeMetadataModelImportsCommandOutput>>;
+
+  /**
+   * @see {@link DescribeReplicationInstancesCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationInstanceAvailable(
+    args: DescribeReplicationInstancesCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeReplicationInstancesCommandOutput>>;
+
+  /**
+   * @see {@link DescribeReplicationInstancesCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationInstanceDeleted(
+    args: DescribeReplicationInstancesCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundFault>>;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationTaskDeleted(
+    args: DescribeReplicationTasksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundFault>>;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationTaskReady(
+    args: DescribeReplicationTasksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeReplicationTasksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationTaskRunning(
+    args: DescribeReplicationTasksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeReplicationTasksCommandOutput>>;
+
+  /**
+   * @see {@link DescribeReplicationTasksCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilReplicationTaskStopped(
+    args: DescribeReplicationTasksCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<DatabaseMigrationService>, "client">
+  ): Promise<WaiterResult<DescribeReplicationTasksCommandOutput>>;
+}
 
 /**
  * <fullname>Database Migration Service</fullname>
@@ -288,1923 +3578,7 @@ import { DatabaseMigrationServiceClient } from "./DatabaseMigrationServiceClient
  *          <p>For more information about DMS, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is Database Migration Service?</a>
  *          in the <i>Database Migration Service User Guide.</i>
  *          </p>
+ * @public
  */
-export class DatabaseMigrationService extends DatabaseMigrationServiceClient {
-  /**
-   * <p>Adds metadata tags to an DMS resource, including replication instance, endpoint,
-   *          security group, and migration task. These tags can also be used with cost allocation
-   *          reporting to track cost associated with DMS resources, or used in a Condition statement in
-   *          an IAM policy for DMS. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html">
-   *                <code>Tag</code>
-   *             </a> data type description.</p>
-   */
-  public addTagsToResource(
-    args: AddTagsToResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AddTagsToResourceCommandOutput>;
-  public addTagsToResource(
-    args: AddTagsToResourceCommandInput,
-    cb: (err: any, data?: AddTagsToResourceCommandOutput) => void
-  ): void;
-  public addTagsToResource(
-    args: AddTagsToResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AddTagsToResourceCommandOutput) => void
-  ): void;
-  public addTagsToResource(
-    args: AddTagsToResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddTagsToResourceCommandOutput) => void),
-    cb?: (err: any, data?: AddTagsToResourceCommandOutput) => void
-  ): Promise<AddTagsToResourceCommandOutput> | void {
-    const command = new AddTagsToResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Applies a pending maintenance action to a resource (for example, to a replication instance).</p>
-   */
-  public applyPendingMaintenanceAction(
-    args: ApplyPendingMaintenanceActionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ApplyPendingMaintenanceActionCommandOutput>;
-  public applyPendingMaintenanceAction(
-    args: ApplyPendingMaintenanceActionCommandInput,
-    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
-  ): void;
-  public applyPendingMaintenanceAction(
-    args: ApplyPendingMaintenanceActionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
-  ): void;
-  public applyPendingMaintenanceAction(
-    args: ApplyPendingMaintenanceActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void),
-    cb?: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
-  ): Promise<ApplyPendingMaintenanceActionCommandOutput> | void {
-    const command = new ApplyPendingMaintenanceActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Cancels a single premigration assessment run.</p>
-   *          <p>This operation prevents any individual assessments from running if they haven't started
-   *          running. It also attempts to cancel any individual assessments that are currently
-   *          running.</p>
-   */
-  public cancelReplicationTaskAssessmentRun(
-    args: CancelReplicationTaskAssessmentRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CancelReplicationTaskAssessmentRunCommandOutput>;
-  public cancelReplicationTaskAssessmentRun(
-    args: CancelReplicationTaskAssessmentRunCommandInput,
-    cb: (err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public cancelReplicationTaskAssessmentRun(
-    args: CancelReplicationTaskAssessmentRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public cancelReplicationTaskAssessmentRun(
-    args: CancelReplicationTaskAssessmentRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void),
-    cb?: (err: any, data?: CancelReplicationTaskAssessmentRunCommandOutput) => void
-  ): Promise<CancelReplicationTaskAssessmentRunCommandOutput> | void {
-    const command = new CancelReplicationTaskAssessmentRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an endpoint using the provided settings.</p>
-   *          <note>
-   *             <p>For a MySQL source or target endpoint, don't explicitly specify the database using
-   *          the <code>DatabaseName</code> request parameter on the <code>CreateEndpoint</code> API call.
-   *          Specifying <code>DatabaseName</code> when you create a MySQL endpoint replicates all the
-   *          task tables to this single database. For MySQL endpoints, you specify the database only when
-   *          you specify the schema in the table-mapping rules of the DMS task.</p>
-   *          </note>
-   */
-  public createEndpoint(
-    args: CreateEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateEndpointCommandOutput>;
-  public createEndpoint(
-    args: CreateEndpointCommandInput,
-    cb: (err: any, data?: CreateEndpointCommandOutput) => void
-  ): void;
-  public createEndpoint(
-    args: CreateEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateEndpointCommandOutput) => void
-  ): void;
-  public createEndpoint(
-    args: CreateEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEndpointCommandOutput) => void),
-    cb?: (err: any, data?: CreateEndpointCommandOutput) => void
-  ): Promise<CreateEndpointCommandOutput> | void {
-    const command = new CreateEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Creates an DMS event notification subscription. </p>
-   *          <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of,
-   *          provide a list of DMS source IDs (<code>SourceIds</code>) that triggers the events, and
-   *          provide a list of event categories (<code>EventCategories</code>) for events you want to be
-   *          notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>,
-   *          such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier =
-   *             my-replinstance</code>, you will be notified of all the replication instance events for
-   *          the specified source. If you specify a <code>SourceType</code> but don't specify a
-   *             <code>SourceIdentifier</code>, you receive notice of the events for that source type for
-   *          all your DMS sources. If you don't specify either <code>SourceType</code> nor
-   *             <code>SourceIdentifier</code>, you will be notified of events generated from all DMS
-   *          sources belonging to your customer account.</p>
-   *          <p>For more information about DMS events, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and
-   *             Notifications</a> in the <i>Database Migration Service User
-   *             Guide.</i>
-   *          </p>
-   */
-  public createEventSubscription(
-    args: CreateEventSubscriptionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateEventSubscriptionCommandOutput>;
-  public createEventSubscription(
-    args: CreateEventSubscriptionCommandInput,
-    cb: (err: any, data?: CreateEventSubscriptionCommandOutput) => void
-  ): void;
-  public createEventSubscription(
-    args: CreateEventSubscriptionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateEventSubscriptionCommandOutput) => void
-  ): void;
-  public createEventSubscription(
-    args: CreateEventSubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEventSubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: CreateEventSubscriptionCommandOutput) => void
-  ): Promise<CreateEventSubscriptionCommandOutput> | void {
-    const command = new CreateEventSubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates the replication instance using the specified parameters.</p>
-   *          <p>DMS requires that your account have certain roles with appropriate permissions
-   *          before you can create a replication instance. For information on the required roles, see
-   *       <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole">Creating the IAM Roles to Use With the CLI and DMS API</a>. For
-   *          information on the required permissions, see
-   *       <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions">IAM Permissions Needed to Use DMS</a>.</p>
-   */
-  public createReplicationInstance(
-    args: CreateReplicationInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateReplicationInstanceCommandOutput>;
-  public createReplicationInstance(
-    args: CreateReplicationInstanceCommandInput,
-    cb: (err: any, data?: CreateReplicationInstanceCommandOutput) => void
-  ): void;
-  public createReplicationInstance(
-    args: CreateReplicationInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateReplicationInstanceCommandOutput) => void
-  ): void;
-  public createReplicationInstance(
-    args: CreateReplicationInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateReplicationInstanceCommandOutput) => void),
-    cb?: (err: any, data?: CreateReplicationInstanceCommandOutput) => void
-  ): Promise<CreateReplicationInstanceCommandOutput> | void {
-    const command = new CreateReplicationInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p>
-   *          <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the
-   *           service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>
-   */
-  public createReplicationSubnetGroup(
-    args: CreateReplicationSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateReplicationSubnetGroupCommandOutput>;
-  public createReplicationSubnetGroup(
-    args: CreateReplicationSubnetGroupCommandInput,
-    cb: (err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public createReplicationSubnetGroup(
-    args: CreateReplicationSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public createReplicationSubnetGroup(
-    args: CreateReplicationSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateReplicationSubnetGroupCommandOutput) => void
-  ): Promise<CreateReplicationSubnetGroupCommandOutput> | void {
-    const command = new CreateReplicationSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a replication task using the specified parameters.</p>
-   */
-  public createReplicationTask(
-    args: CreateReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateReplicationTaskCommandOutput>;
-  public createReplicationTask(
-    args: CreateReplicationTaskCommandInput,
-    cb: (err: any, data?: CreateReplicationTaskCommandOutput) => void
-  ): void;
-  public createReplicationTask(
-    args: CreateReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateReplicationTaskCommandOutput) => void
-  ): void;
-  public createReplicationTask(
-    args: CreateReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: CreateReplicationTaskCommandOutput) => void
-  ): Promise<CreateReplicationTaskCommandOutput> | void {
-    const command = new CreateReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified certificate. </p>
-   */
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCertificateCommandOutput>;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): void;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): void;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCertificateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): Promise<DeleteCertificateCommandOutput> | void {
-    const command = new DeleteCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the connection between a replication instance and an endpoint.</p>
-   */
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConnectionCommandOutput>;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): Promise<DeleteConnectionCommandOutput> | void {
-    const command = new DeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified endpoint.</p>
-   *          <note>
-   *             <p>All tasks associated with the endpoint must be deleted before you can delete the
-   *             endpoint.</p>
-   *          </note>
-   *          <p></p>
-   */
-  public deleteEndpoint(
-    args: DeleteEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteEndpointCommandOutput>;
-  public deleteEndpoint(
-    args: DeleteEndpointCommandInput,
-    cb: (err: any, data?: DeleteEndpointCommandOutput) => void
-  ): void;
-  public deleteEndpoint(
-    args: DeleteEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteEndpointCommandOutput) => void
-  ): void;
-  public deleteEndpoint(
-    args: DeleteEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEndpointCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEndpointCommandOutput) => void
-  ): Promise<DeleteEndpointCommandOutput> | void {
-    const command = new DeleteEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Deletes an DMS event subscription. </p>
-   */
-  public deleteEventSubscription(
-    args: DeleteEventSubscriptionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteEventSubscriptionCommandOutput>;
-  public deleteEventSubscription(
-    args: DeleteEventSubscriptionCommandInput,
-    cb: (err: any, data?: DeleteEventSubscriptionCommandOutput) => void
-  ): void;
-  public deleteEventSubscription(
-    args: DeleteEventSubscriptionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteEventSubscriptionCommandOutput) => void
-  ): void;
-  public deleteEventSubscription(
-    args: DeleteEventSubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEventSubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEventSubscriptionCommandOutput) => void
-  ): Promise<DeleteEventSubscriptionCommandOutput> | void {
-    const command = new DeleteEventSubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified replication instance.</p>
-   *          <note>
-   *             <p>You must delete any migration tasks that are associated with the replication instance
-   *             before you can delete it.</p>
-   *          </note>
-   *          <p></p>
-   */
-  public deleteReplicationInstance(
-    args: DeleteReplicationInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReplicationInstanceCommandOutput>;
-  public deleteReplicationInstance(
-    args: DeleteReplicationInstanceCommandInput,
-    cb: (err: any, data?: DeleteReplicationInstanceCommandOutput) => void
-  ): void;
-  public deleteReplicationInstance(
-    args: DeleteReplicationInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReplicationInstanceCommandOutput) => void
-  ): void;
-  public deleteReplicationInstance(
-    args: DeleteReplicationInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReplicationInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationInstanceCommandOutput) => void
-  ): Promise<DeleteReplicationInstanceCommandOutput> | void {
-    const command = new DeleteReplicationInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a subnet group.</p>
-   */
-  public deleteReplicationSubnetGroup(
-    args: DeleteReplicationSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReplicationSubnetGroupCommandOutput>;
-  public deleteReplicationSubnetGroup(
-    args: DeleteReplicationSubnetGroupCommandInput,
-    cb: (err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public deleteReplicationSubnetGroup(
-    args: DeleteReplicationSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public deleteReplicationSubnetGroup(
-    args: DeleteReplicationSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationSubnetGroupCommandOutput) => void
-  ): Promise<DeleteReplicationSubnetGroupCommandOutput> | void {
-    const command = new DeleteReplicationSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified replication task.</p>
-   */
-  public deleteReplicationTask(
-    args: DeleteReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReplicationTaskCommandOutput>;
-  public deleteReplicationTask(
-    args: DeleteReplicationTaskCommandInput,
-    cb: (err: any, data?: DeleteReplicationTaskCommandOutput) => void
-  ): void;
-  public deleteReplicationTask(
-    args: DeleteReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReplicationTaskCommandOutput) => void
-  ): void;
-  public deleteReplicationTask(
-    args: DeleteReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationTaskCommandOutput) => void
-  ): Promise<DeleteReplicationTaskCommandOutput> | void {
-    const command = new DeleteReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the record of a single premigration assessment run.</p>
-   *          <p>This operation removes all metadata that DMS maintains about this assessment run.
-   *          However, the operation leaves untouched all information about this assessment run that is
-   *          stored in your Amazon S3 bucket.</p>
-   */
-  public deleteReplicationTaskAssessmentRun(
-    args: DeleteReplicationTaskAssessmentRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReplicationTaskAssessmentRunCommandOutput>;
-  public deleteReplicationTaskAssessmentRun(
-    args: DeleteReplicationTaskAssessmentRunCommandInput,
-    cb: (err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public deleteReplicationTaskAssessmentRun(
-    args: DeleteReplicationTaskAssessmentRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public deleteReplicationTaskAssessmentRun(
-    args: DeleteReplicationTaskAssessmentRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationTaskAssessmentRunCommandOutput) => void
-  ): Promise<DeleteReplicationTaskAssessmentRunCommandOutput> | void {
-    const command = new DeleteReplicationTaskAssessmentRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all of the DMS attributes for a customer account. These attributes include DMS
-   *          quotas for the account and a unique account identifier in a particular DMS region. DMS
-   *          quotas include a list of resource quotas supported by the account, such as the number of
-   *          replication instances allowed. The description for each resource quota, includes the quota
-   *          name, current usage toward that quota, and the quota's maximum value. DMS uses the unique
-   *          account identifier to name each artifact used by DMS in the given region.</p>
-   *          <p>This command does not take any parameters.</p>
-   */
-  public describeAccountAttributes(
-    args: DescribeAccountAttributesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAccountAttributesCommandOutput>;
-  public describeAccountAttributes(
-    args: DescribeAccountAttributesCommandInput,
-    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
-  ): void;
-  public describeAccountAttributes(
-    args: DescribeAccountAttributesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
-  ): void;
-  public describeAccountAttributes(
-    args: DescribeAccountAttributesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccountAttributesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
-  ): Promise<DescribeAccountAttributesCommandOutput> | void {
-    const command = new DescribeAccountAttributesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of individual assessments that you can specify for a new premigration
-   *          assessment run, given one or more parameters.</p>
-   *          <p>If you specify an existing migration task, this operation provides the default individual
-   *          assessments you can specify for that task. Otherwise, the specified parameters model elements
-   *          of a possible migration task on which to base a premigration assessment run.</p>
-   *          <p>To use these migration task modeling parameters, you must specify an existing replication instance,
-   *          a source database engine, a target database engine, and a migration type. This combination of
-   *          parameters potentially limits the default individual assessments available for an assessment run
-   *          created for a corresponding migration task.</p>
-   *          <p>If you specify no parameters, this operation provides a list of all possible individual assessments
-   *          that you can specify for an assessment run. If you specify any one of the task modeling parameters, you must
-   *          specify all of them or the operation cannot provide a list of individual assessments.
-   *          The only parameter that you can specify alone is for an existing migration task. The specified task
-   *          definition then determines the default list of individual assessments that you can specify in an
-   *          assessment run for the task.</p>
-   */
-  public describeApplicableIndividualAssessments(
-    args: DescribeApplicableIndividualAssessmentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeApplicableIndividualAssessmentsCommandOutput>;
-  public describeApplicableIndividualAssessments(
-    args: DescribeApplicableIndividualAssessmentsCommandInput,
-    cb: (err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void
-  ): void;
-  public describeApplicableIndividualAssessments(
-    args: DescribeApplicableIndividualAssessmentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void
-  ): void;
-  public describeApplicableIndividualAssessments(
-    args: DescribeApplicableIndividualAssessmentsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeApplicableIndividualAssessmentsCommandOutput) => void
-  ): Promise<DescribeApplicableIndividualAssessmentsCommandOutput> | void {
-    const command = new DescribeApplicableIndividualAssessmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a description of the certificate.</p>
-   */
-  public describeCertificates(
-    args: DescribeCertificatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeCertificatesCommandOutput>;
-  public describeCertificates(
-    args: DescribeCertificatesCommandInput,
-    cb: (err: any, data?: DescribeCertificatesCommandOutput) => void
-  ): void;
-  public describeCertificates(
-    args: DescribeCertificatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeCertificatesCommandOutput) => void
-  ): void;
-  public describeCertificates(
-    args: DescribeCertificatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeCertificatesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeCertificatesCommandOutput) => void
-  ): Promise<DescribeCertificatesCommandOutput> | void {
-    const command = new DescribeCertificatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the status of the connections that have been made between the replication
-   *          instance and an endpoint. Connections are created when you test an endpoint.</p>
-   */
-  public describeConnections(
-    args: DescribeConnectionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeConnectionsCommandOutput>;
-  public describeConnections(
-    args: DescribeConnectionsCommandInput,
-    cb: (err: any, data?: DescribeConnectionsCommandOutput) => void
-  ): void;
-  public describeConnections(
-    args: DescribeConnectionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeConnectionsCommandOutput) => void
-  ): void;
-  public describeConnections(
-    args: DescribeConnectionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeConnectionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeConnectionsCommandOutput) => void
-  ): Promise<DescribeConnectionsCommandOutput> | void {
-    const command = new DescribeConnectionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the endpoints for your account in the current region.</p>
-   */
-  public describeEndpoints(
-    args: DescribeEndpointsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEndpointsCommandOutput>;
-  public describeEndpoints(
-    args: DescribeEndpointsCommandInput,
-    cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
-  ): void;
-  public describeEndpoints(
-    args: DescribeEndpointsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEndpointsCommandOutput) => void
-  ): void;
-  public describeEndpoints(
-    args: DescribeEndpointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEndpointsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEndpointsCommandOutput) => void
-  ): Promise<DescribeEndpointsCommandOutput> | void {
-    const command = new DescribeEndpointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the possible endpoint settings available
-   *          when you create an endpoint for a specific database engine.</p>
-   */
-  public describeEndpointSettings(
-    args: DescribeEndpointSettingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEndpointSettingsCommandOutput>;
-  public describeEndpointSettings(
-    args: DescribeEndpointSettingsCommandInput,
-    cb: (err: any, data?: DescribeEndpointSettingsCommandOutput) => void
-  ): void;
-  public describeEndpointSettings(
-    args: DescribeEndpointSettingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEndpointSettingsCommandOutput) => void
-  ): void;
-  public describeEndpointSettings(
-    args: DescribeEndpointSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEndpointSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEndpointSettingsCommandOutput) => void
-  ): Promise<DescribeEndpointSettingsCommandOutput> | void {
-    const command = new DescribeEndpointSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the type of endpoints available.</p>
-   */
-  public describeEndpointTypes(
-    args: DescribeEndpointTypesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEndpointTypesCommandOutput>;
-  public describeEndpointTypes(
-    args: DescribeEndpointTypesCommandInput,
-    cb: (err: any, data?: DescribeEndpointTypesCommandOutput) => void
-  ): void;
-  public describeEndpointTypes(
-    args: DescribeEndpointTypesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEndpointTypesCommandOutput) => void
-  ): void;
-  public describeEndpointTypes(
-    args: DescribeEndpointTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEndpointTypesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEndpointTypesCommandOutput) => void
-  ): Promise<DescribeEndpointTypesCommandOutput> | void {
-    const command = new DescribeEndpointTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists categories for all event source types, or, if specified, for a specified source
-   *          type. You can see a list of the event categories and source types in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events
-   *             and Notifications</a> in the <i>Database Migration Service User
-   *             Guide.</i>
-   *          </p>
-   */
-  public describeEventCategories(
-    args: DescribeEventCategoriesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventCategoriesCommandOutput>;
-  public describeEventCategories(
-    args: DescribeEventCategoriesCommandInput,
-    cb: (err: any, data?: DescribeEventCategoriesCommandOutput) => void
-  ): void;
-  public describeEventCategories(
-    args: DescribeEventCategoriesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventCategoriesCommandOutput) => void
-  ): void;
-  public describeEventCategories(
-    args: DescribeEventCategoriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventCategoriesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventCategoriesCommandOutput) => void
-  ): Promise<DescribeEventCategoriesCommandOutput> | void {
-    const command = new DescribeEventCategoriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Lists events for a given source identifier and source type. You can also specify a
-   *          start and end time. For more information on DMS events, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and
-   *             Notifications</a> in the <i>Database Migration Service User
-   *          Guide.</i>
-   *          </p>
-   */
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventsCommandOutput>;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    cb: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): void;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): void;
-  public describeEvents(
-    args: DescribeEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventsCommandOutput) => void
-  ): Promise<DescribeEventsCommandOutput> | void {
-    const command = new DescribeEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all the event subscriptions for a customer account. The description of a
-   *          subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>,
-   *             <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>,
-   *             <code>CreationTime</code>, and <code>Status</code>. </p>
-   *          <p>If you specify <code>SubscriptionName</code>, this action lists the description for that
-   *          subscription.</p>
-   */
-  public describeEventSubscriptions(
-    args: DescribeEventSubscriptionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventSubscriptionsCommandOutput>;
-  public describeEventSubscriptions(
-    args: DescribeEventSubscriptionsCommandInput,
-    cb: (err: any, data?: DescribeEventSubscriptionsCommandOutput) => void
-  ): void;
-  public describeEventSubscriptions(
-    args: DescribeEventSubscriptionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventSubscriptionsCommandOutput) => void
-  ): void;
-  public describeEventSubscriptions(
-    args: DescribeEventSubscriptionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventSubscriptionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventSubscriptionsCommandOutput) => void
-  ): Promise<DescribeEventSubscriptionsCommandOutput> | void {
-    const command = new DescribeEventSubscriptionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the replication instance types that can be created in the
-   *          specified region.</p>
-   */
-  public describeOrderableReplicationInstances(
-    args: DescribeOrderableReplicationInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeOrderableReplicationInstancesCommandOutput>;
-  public describeOrderableReplicationInstances(
-    args: DescribeOrderableReplicationInstancesCommandInput,
-    cb: (err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void
-  ): void;
-  public describeOrderableReplicationInstances(
-    args: DescribeOrderableReplicationInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void
-  ): void;
-  public describeOrderableReplicationInstances(
-    args: DescribeOrderableReplicationInstancesCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeOrderableReplicationInstancesCommandOutput) => void
-  ): Promise<DescribeOrderableReplicationInstancesCommandOutput> | void {
-    const command = new DescribeOrderableReplicationInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>For internal use only</p>
-   */
-  public describePendingMaintenanceActions(
-    args: DescribePendingMaintenanceActionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribePendingMaintenanceActionsCommandOutput>;
-  public describePendingMaintenanceActions(
-    args: DescribePendingMaintenanceActionsCommandInput,
-    cb: (err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void
-  ): void;
-  public describePendingMaintenanceActions(
-    args: DescribePendingMaintenanceActionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void
-  ): void;
-  public describePendingMaintenanceActions(
-    args: DescribePendingMaintenanceActionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribePendingMaintenanceActionsCommandOutput) => void
-  ): Promise<DescribePendingMaintenanceActionsCommandOutput> | void {
-    const command = new DescribePendingMaintenanceActionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the status of the RefreshSchemas operation.</p>
-   */
-  public describeRefreshSchemasStatus(
-    args: DescribeRefreshSchemasStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRefreshSchemasStatusCommandOutput>;
-  public describeRefreshSchemasStatus(
-    args: DescribeRefreshSchemasStatusCommandInput,
-    cb: (err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void
-  ): void;
-  public describeRefreshSchemasStatus(
-    args: DescribeRefreshSchemasStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void
-  ): void;
-  public describeRefreshSchemasStatus(
-    args: DescribeRefreshSchemasStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRefreshSchemasStatusCommandOutput) => void
-  ): Promise<DescribeRefreshSchemasStatusCommandOutput> | void {
-    const command = new DescribeRefreshSchemasStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about replication instances for your account in the current
-   *          region.</p>
-   */
-  public describeReplicationInstances(
-    args: DescribeReplicationInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationInstancesCommandOutput>;
-  public describeReplicationInstances(
-    args: DescribeReplicationInstancesCommandInput,
-    cb: (err: any, data?: DescribeReplicationInstancesCommandOutput) => void
-  ): void;
-  public describeReplicationInstances(
-    args: DescribeReplicationInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationInstancesCommandOutput) => void
-  ): void;
-  public describeReplicationInstances(
-    args: DescribeReplicationInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReplicationInstancesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationInstancesCommandOutput) => void
-  ): Promise<DescribeReplicationInstancesCommandOutput> | void {
-    const command = new DescribeReplicationInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the task logs for the specified task.</p>
-   */
-  public describeReplicationInstanceTaskLogs(
-    args: DescribeReplicationInstanceTaskLogsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationInstanceTaskLogsCommandOutput>;
-  public describeReplicationInstanceTaskLogs(
-    args: DescribeReplicationInstanceTaskLogsCommandInput,
-    cb: (err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void
-  ): void;
-  public describeReplicationInstanceTaskLogs(
-    args: DescribeReplicationInstanceTaskLogsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void
-  ): void;
-  public describeReplicationInstanceTaskLogs(
-    args: DescribeReplicationInstanceTaskLogsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationInstanceTaskLogsCommandOutput) => void
-  ): Promise<DescribeReplicationInstanceTaskLogsCommandOutput> | void {
-    const command = new DescribeReplicationInstanceTaskLogsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the replication subnet groups.</p>
-   */
-  public describeReplicationSubnetGroups(
-    args: DescribeReplicationSubnetGroupsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationSubnetGroupsCommandOutput>;
-  public describeReplicationSubnetGroups(
-    args: DescribeReplicationSubnetGroupsCommandInput,
-    cb: (err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void
-  ): void;
-  public describeReplicationSubnetGroups(
-    args: DescribeReplicationSubnetGroupsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void
-  ): void;
-  public describeReplicationSubnetGroups(
-    args: DescribeReplicationSubnetGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationSubnetGroupsCommandOutput) => void
-  ): Promise<DescribeReplicationSubnetGroupsCommandOutput> | void {
-    const command = new DescribeReplicationSubnetGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your
-   *           Amazon Web Services account.  This action always returns the
-   *          latest results.</p>
-   *          <p>For more information about DMS task assessments, see
-   *            <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html">Creating a task assessment report</a>
-   *            in the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html">
-   *                Database Migration Service User Guide</a>.</p>
-   */
-  public describeReplicationTaskAssessmentResults(
-    args: DescribeReplicationTaskAssessmentResultsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationTaskAssessmentResultsCommandOutput>;
-  public describeReplicationTaskAssessmentResults(
-    args: DescribeReplicationTaskAssessmentResultsCommandInput,
-    cb: (err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskAssessmentResults(
-    args: DescribeReplicationTaskAssessmentResultsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskAssessmentResults(
-    args: DescribeReplicationTaskAssessmentResultsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationTaskAssessmentResultsCommandOutput) => void
-  ): Promise<DescribeReplicationTaskAssessmentResultsCommandOutput> | void {
-    const command = new DescribeReplicationTaskAssessmentResultsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a paginated list of premigration assessment runs based on filter
-   *          settings.</p>
-   *          <p>These filter settings can specify a combination of premigration assessment runs,
-   *          migration tasks, replication instances, and assessment run status values.</p>
-   *          <note>
-   *             <p>This operation doesn't return information about individual assessments. For this
-   *             information, see the <code>DescribeReplicationTaskIndividualAssessments</code>
-   *             operation. </p>
-   *          </note>
-   */
-  public describeReplicationTaskAssessmentRuns(
-    args: DescribeReplicationTaskAssessmentRunsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationTaskAssessmentRunsCommandOutput>;
-  public describeReplicationTaskAssessmentRuns(
-    args: DescribeReplicationTaskAssessmentRunsCommandInput,
-    cb: (err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskAssessmentRuns(
-    args: DescribeReplicationTaskAssessmentRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskAssessmentRuns(
-    args: DescribeReplicationTaskAssessmentRunsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationTaskAssessmentRunsCommandOutput) => void
-  ): Promise<DescribeReplicationTaskAssessmentRunsCommandOutput> | void {
-    const command = new DescribeReplicationTaskAssessmentRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a paginated list of individual assessments based on filter settings.</p>
-   *          <p>These filter settings can specify a combination of premigration assessment runs,
-   *          migration tasks, and assessment status values.</p>
-   */
-  public describeReplicationTaskIndividualAssessments(
-    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationTaskIndividualAssessmentsCommandOutput>;
-  public describeReplicationTaskIndividualAssessments(
-    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
-    cb: (err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskIndividualAssessments(
-    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void
-  ): void;
-  public describeReplicationTaskIndividualAssessments(
-    args: DescribeReplicationTaskIndividualAssessmentsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationTaskIndividualAssessmentsCommandOutput) => void
-  ): Promise<DescribeReplicationTaskIndividualAssessmentsCommandOutput> | void {
-    const command = new DescribeReplicationTaskIndividualAssessmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about replication tasks for your account in the current
-   *          region.</p>
-   */
-  public describeReplicationTasks(
-    args: DescribeReplicationTasksCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationTasksCommandOutput>;
-  public describeReplicationTasks(
-    args: DescribeReplicationTasksCommandInput,
-    cb: (err: any, data?: DescribeReplicationTasksCommandOutput) => void
-  ): void;
-  public describeReplicationTasks(
-    args: DescribeReplicationTasksCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationTasksCommandOutput) => void
-  ): void;
-  public describeReplicationTasks(
-    args: DescribeReplicationTasksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReplicationTasksCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationTasksCommandOutput) => void
-  ): Promise<DescribeReplicationTasksCommandOutput> | void {
-    const command = new DescribeReplicationTasksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the schema for the specified endpoint.</p>
-   *
-   *          <p></p>
-   */
-  public describeSchemas(
-    args: DescribeSchemasCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSchemasCommandOutput>;
-  public describeSchemas(
-    args: DescribeSchemasCommandInput,
-    cb: (err: any, data?: DescribeSchemasCommandOutput) => void
-  ): void;
-  public describeSchemas(
-    args: DescribeSchemasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSchemasCommandOutput) => void
-  ): void;
-  public describeSchemas(
-    args: DescribeSchemasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSchemasCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSchemasCommandOutput) => void
-  ): Promise<DescribeSchemasCommandOutput> | void {
-    const command = new DescribeSchemasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns table statistics on the database migration task, including table name, rows
-   *          inserted, rows updated, and rows deleted.</p>
-   *          <p>Note that the "last updated" column the DMS console only indicates the time that DMS
-   *          last updated the table statistics record for a table. It does not indicate the time of the
-   *          last update to the table.</p>
-   */
-  public describeTableStatistics(
-    args: DescribeTableStatisticsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeTableStatisticsCommandOutput>;
-  public describeTableStatistics(
-    args: DescribeTableStatisticsCommandInput,
-    cb: (err: any, data?: DescribeTableStatisticsCommandOutput) => void
-  ): void;
-  public describeTableStatistics(
-    args: DescribeTableStatisticsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeTableStatisticsCommandOutput) => void
-  ): void;
-  public describeTableStatistics(
-    args: DescribeTableStatisticsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeTableStatisticsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeTableStatisticsCommandOutput) => void
-  ): Promise<DescribeTableStatisticsCommandOutput> | void {
-    const command = new DescribeTableStatisticsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Uploads the specified certificate.</p>
-   */
-  public importCertificate(
-    args: ImportCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ImportCertificateCommandOutput>;
-  public importCertificate(
-    args: ImportCertificateCommandInput,
-    cb: (err: any, data?: ImportCertificateCommandOutput) => void
-  ): void;
-  public importCertificate(
-    args: ImportCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportCertificateCommandOutput) => void
-  ): void;
-  public importCertificate(
-    args: ImportCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportCertificateCommandOutput) => void),
-    cb?: (err: any, data?: ImportCertificateCommandOutput) => void
-  ): Promise<ImportCertificateCommandOutput> | void {
-    const command = new ImportCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all metadata tags attached to an DMS resource, including
-   *          replication instance, endpoint, security group, and migration task.
-   *          For more information, see <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html">
-   *                <code>Tag</code>
-   *             </a> data type description.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the specified endpoint.</p>
-   *          <note>
-   *             <p>For a MySQL source or target endpoint, don't explicitly specify the database using
-   *          the <code>DatabaseName</code> request parameter on the <code>ModifyEndpoint</code> API call.
-   *          Specifying <code>DatabaseName</code> when you modify a MySQL endpoint replicates all the
-   *          task tables to this single database. For MySQL endpoints, you specify the database only when
-   *          you specify the schema in the table-mapping rules of the DMS task.</p>
-   *          </note>
-   */
-  public modifyEndpoint(
-    args: ModifyEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyEndpointCommandOutput>;
-  public modifyEndpoint(
-    args: ModifyEndpointCommandInput,
-    cb: (err: any, data?: ModifyEndpointCommandOutput) => void
-  ): void;
-  public modifyEndpoint(
-    args: ModifyEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyEndpointCommandOutput) => void
-  ): void;
-  public modifyEndpoint(
-    args: ModifyEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyEndpointCommandOutput) => void),
-    cb?: (err: any, data?: ModifyEndpointCommandOutput) => void
-  ): Promise<ModifyEndpointCommandOutput> | void {
-    const command = new ModifyEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies an existing DMS event notification subscription. </p>
-   */
-  public modifyEventSubscription(
-    args: ModifyEventSubscriptionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyEventSubscriptionCommandOutput>;
-  public modifyEventSubscription(
-    args: ModifyEventSubscriptionCommandInput,
-    cb: (err: any, data?: ModifyEventSubscriptionCommandOutput) => void
-  ): void;
-  public modifyEventSubscription(
-    args: ModifyEventSubscriptionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyEventSubscriptionCommandOutput) => void
-  ): void;
-  public modifyEventSubscription(
-    args: ModifyEventSubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyEventSubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: ModifyEventSubscriptionCommandOutput) => void
-  ): Promise<ModifyEventSubscriptionCommandOutput> | void {
-    const command = new ModifyEventSubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the replication instance to apply new settings. You can change one or more
-   *          parameters by specifying these parameters and the new values in the request.</p>
-   *          <p>Some settings are applied during the maintenance window.</p>
-   *
-   *          <p></p>
-   */
-  public modifyReplicationInstance(
-    args: ModifyReplicationInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyReplicationInstanceCommandOutput>;
-  public modifyReplicationInstance(
-    args: ModifyReplicationInstanceCommandInput,
-    cb: (err: any, data?: ModifyReplicationInstanceCommandOutput) => void
-  ): void;
-  public modifyReplicationInstance(
-    args: ModifyReplicationInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyReplicationInstanceCommandOutput) => void
-  ): void;
-  public modifyReplicationInstance(
-    args: ModifyReplicationInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyReplicationInstanceCommandOutput) => void),
-    cb?: (err: any, data?: ModifyReplicationInstanceCommandOutput) => void
-  ): Promise<ModifyReplicationInstanceCommandOutput> | void {
-    const command = new ModifyReplicationInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the settings for the specified replication subnet group.</p>
-   */
-  public modifyReplicationSubnetGroup(
-    args: ModifyReplicationSubnetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyReplicationSubnetGroupCommandOutput>;
-  public modifyReplicationSubnetGroup(
-    args: ModifyReplicationSubnetGroupCommandInput,
-    cb: (err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public modifyReplicationSubnetGroup(
-    args: ModifyReplicationSubnetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void
-  ): void;
-  public modifyReplicationSubnetGroup(
-    args: ModifyReplicationSubnetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void),
-    cb?: (err: any, data?: ModifyReplicationSubnetGroupCommandOutput) => void
-  ): Promise<ModifyReplicationSubnetGroupCommandOutput> | void {
-    const command = new ModifyReplicationSubnetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Modifies the specified replication task.</p>
-   *          <p>You can't modify the task endpoints. The task must be stopped before you can modify it. </p>
-   *          <p>For more information about DMS tasks, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks</a> in the
-   *             <i>Database Migration Service User Guide</i>.</p>
-   */
-  public modifyReplicationTask(
-    args: ModifyReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyReplicationTaskCommandOutput>;
-  public modifyReplicationTask(
-    args: ModifyReplicationTaskCommandInput,
-    cb: (err: any, data?: ModifyReplicationTaskCommandOutput) => void
-  ): void;
-  public modifyReplicationTask(
-    args: ModifyReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyReplicationTaskCommandOutput) => void
-  ): void;
-  public modifyReplicationTask(
-    args: ModifyReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: ModifyReplicationTaskCommandOutput) => void
-  ): Promise<ModifyReplicationTaskCommandOutput> | void {
-    const command = new ModifyReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Moves a replication task from its current replication instance to a different target
-   *          replication instance using the specified parameters. The target replication instance must
-   *          be created with the same or later DMS version as the current replication
-   *          instance.</p>
-   */
-  public moveReplicationTask(
-    args: MoveReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<MoveReplicationTaskCommandOutput>;
-  public moveReplicationTask(
-    args: MoveReplicationTaskCommandInput,
-    cb: (err: any, data?: MoveReplicationTaskCommandOutput) => void
-  ): void;
-  public moveReplicationTask(
-    args: MoveReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: MoveReplicationTaskCommandOutput) => void
-  ): void;
-  public moveReplicationTask(
-    args: MoveReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MoveReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: MoveReplicationTaskCommandOutput) => void
-  ): Promise<MoveReplicationTaskCommandOutput> | void {
-    const command = new MoveReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Reboots a replication instance. Rebooting results in a momentary outage, until the
-   *          replication instance becomes available again.</p>
-   */
-  public rebootReplicationInstance(
-    args: RebootReplicationInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RebootReplicationInstanceCommandOutput>;
-  public rebootReplicationInstance(
-    args: RebootReplicationInstanceCommandInput,
-    cb: (err: any, data?: RebootReplicationInstanceCommandOutput) => void
-  ): void;
-  public rebootReplicationInstance(
-    args: RebootReplicationInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RebootReplicationInstanceCommandOutput) => void
-  ): void;
-  public rebootReplicationInstance(
-    args: RebootReplicationInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RebootReplicationInstanceCommandOutput) => void),
-    cb?: (err: any, data?: RebootReplicationInstanceCommandOutput) => void
-  ): Promise<RebootReplicationInstanceCommandOutput> | void {
-    const command = new RebootReplicationInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Populates the schema for the specified endpoint. This is an asynchronous operation and
-   *          can take several minutes. You can check the status of this operation by calling the
-   *          DescribeRefreshSchemasStatus operation.</p>
-   */
-  public refreshSchemas(
-    args: RefreshSchemasCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RefreshSchemasCommandOutput>;
-  public refreshSchemas(
-    args: RefreshSchemasCommandInput,
-    cb: (err: any, data?: RefreshSchemasCommandOutput) => void
-  ): void;
-  public refreshSchemas(
-    args: RefreshSchemasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RefreshSchemasCommandOutput) => void
-  ): void;
-  public refreshSchemas(
-    args: RefreshSchemasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RefreshSchemasCommandOutput) => void),
-    cb?: (err: any, data?: RefreshSchemasCommandOutput) => void
-  ): Promise<RefreshSchemasCommandOutput> | void {
-    const command = new RefreshSchemasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Reloads the target database table with the source data. </p>
-   *          <p>You can only use this operation with a task in the <code>RUNNING</code> state, otherwise the service
-   *            will throw an <code>InvalidResourceStateFault</code> exception.</p>
-   */
-  public reloadTables(
-    args: ReloadTablesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ReloadTablesCommandOutput>;
-  public reloadTables(args: ReloadTablesCommandInput, cb: (err: any, data?: ReloadTablesCommandOutput) => void): void;
-  public reloadTables(
-    args: ReloadTablesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ReloadTablesCommandOutput) => void
-  ): void;
-  public reloadTables(
-    args: ReloadTablesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ReloadTablesCommandOutput) => void),
-    cb?: (err: any, data?: ReloadTablesCommandOutput) => void
-  ): Promise<ReloadTablesCommandOutput> | void {
-    const command = new ReloadTablesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes metadata tags from an DMS resource, including replication instance,
-   *          endpoint, security group, and migration task. For more information, see
-   *          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html">
-   *                <code>Tag</code>
-   *             </a>
-   *          data type description.</p>
-   */
-  public removeTagsFromResource(
-    args: RemoveTagsFromResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RemoveTagsFromResourceCommandOutput>;
-  public removeTagsFromResource(
-    args: RemoveTagsFromResourceCommandInput,
-    cb: (err: any, data?: RemoveTagsFromResourceCommandOutput) => void
-  ): void;
-  public removeTagsFromResource(
-    args: RemoveTagsFromResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RemoveTagsFromResourceCommandOutput) => void
-  ): void;
-  public removeTagsFromResource(
-    args: RemoveTagsFromResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveTagsFromResourceCommandOutput) => void),
-    cb?: (err: any, data?: RemoveTagsFromResourceCommandOutput) => void
-  ): Promise<RemoveTagsFromResourceCommandOutput> | void {
-    const command = new RemoveTagsFromResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts the replication task.</p>
-   *          <p>For more information about DMS tasks, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks </a> in the
-   *             <i>Database Migration Service User Guide.</i>
-   *          </p>
-   */
-  public startReplicationTask(
-    args: StartReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartReplicationTaskCommandOutput>;
-  public startReplicationTask(
-    args: StartReplicationTaskCommandInput,
-    cb: (err: any, data?: StartReplicationTaskCommandOutput) => void
-  ): void;
-  public startReplicationTask(
-    args: StartReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartReplicationTaskCommandOutput) => void
-  ): void;
-  public startReplicationTask(
-    args: StartReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: StartReplicationTaskCommandOutput) => void
-  ): Promise<StartReplicationTaskCommandOutput> | void {
-    const command = new StartReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Starts the replication task assessment for unsupported data types in the source
-   *          database. </p>
-   */
-  public startReplicationTaskAssessment(
-    args: StartReplicationTaskAssessmentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartReplicationTaskAssessmentCommandOutput>;
-  public startReplicationTaskAssessment(
-    args: StartReplicationTaskAssessmentCommandInput,
-    cb: (err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void
-  ): void;
-  public startReplicationTaskAssessment(
-    args: StartReplicationTaskAssessmentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void
-  ): void;
-  public startReplicationTaskAssessment(
-    args: StartReplicationTaskAssessmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void),
-    cb?: (err: any, data?: StartReplicationTaskAssessmentCommandOutput) => void
-  ): Promise<StartReplicationTaskAssessmentCommandOutput> | void {
-    const command = new StartReplicationTaskAssessmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a new premigration assessment run for one or more individual assessments
-   *          of a migration task.</p>
-   *          <p>The assessments that you can specify depend on the source and target database engine and
-   *          the migration type defined for the given task. To run this operation, your migration task
-   *          must already be created. After you run this operation, you can review the status of each
-   *          individual assessment. You can also run the migration task manually after the assessment
-   *          run and its individual assessments complete.</p>
-   */
-  public startReplicationTaskAssessmentRun(
-    args: StartReplicationTaskAssessmentRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartReplicationTaskAssessmentRunCommandOutput>;
-  public startReplicationTaskAssessmentRun(
-    args: StartReplicationTaskAssessmentRunCommandInput,
-    cb: (err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public startReplicationTaskAssessmentRun(
-    args: StartReplicationTaskAssessmentRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void
-  ): void;
-  public startReplicationTaskAssessmentRun(
-    args: StartReplicationTaskAssessmentRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void),
-    cb?: (err: any, data?: StartReplicationTaskAssessmentRunCommandOutput) => void
-  ): Promise<StartReplicationTaskAssessmentRunCommandOutput> | void {
-    const command = new StartReplicationTaskAssessmentRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops the replication task.</p>
-   */
-  public stopReplicationTask(
-    args: StopReplicationTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopReplicationTaskCommandOutput>;
-  public stopReplicationTask(
-    args: StopReplicationTaskCommandInput,
-    cb: (err: any, data?: StopReplicationTaskCommandOutput) => void
-  ): void;
-  public stopReplicationTask(
-    args: StopReplicationTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopReplicationTaskCommandOutput) => void
-  ): void;
-  public stopReplicationTask(
-    args: StopReplicationTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopReplicationTaskCommandOutput) => void),
-    cb?: (err: any, data?: StopReplicationTaskCommandOutput) => void
-  ): Promise<StopReplicationTaskCommandOutput> | void {
-    const command = new StopReplicationTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Tests the connection between the replication instance and the endpoint.</p>
-   */
-  public testConnection(
-    args: TestConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<TestConnectionCommandOutput>;
-  public testConnection(
-    args: TestConnectionCommandInput,
-    cb: (err: any, data?: TestConnectionCommandOutput) => void
-  ): void;
-  public testConnection(
-    args: TestConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TestConnectionCommandOutput) => void
-  ): void;
-  public testConnection(
-    args: TestConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestConnectionCommandOutput) => void),
-    cb?: (err: any, data?: TestConnectionCommandOutput) => void
-  ): Promise<TestConnectionCommandOutput> | void {
-    const command = new TestConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class DatabaseMigrationService extends DatabaseMigrationServiceClient implements DatabaseMigrationService {}
+createAggregatedClient(commands, DatabaseMigrationService, { paginators, waiters });

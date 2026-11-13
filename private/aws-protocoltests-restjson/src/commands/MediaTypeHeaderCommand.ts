@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTypeHeaderInput, MediaTypeHeaderOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1MediaTypeHeaderCommand,
-  serializeAws_restJson1MediaTypeHeaderCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { MediaTypeHeaderInput, MediaTypeHeaderOutput } from "../models/models_0";
+import { de_MediaTypeHeaderCommand, se_MediaTypeHeaderCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MediaTypeHeaderCommand}.
+ */
 export interface MediaTypeHeaderCommandInput extends MediaTypeHeaderInput {}
+/**
+ * @public
+ *
+ * The output of {@link MediaTypeHeaderCommand}.
+ */
 export interface MediaTypeHeaderCommandOutput extends MediaTypeHeaderOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +37,62 @@ export interface MediaTypeHeaderCommandOutput extends MediaTypeHeaderOutput, __M
  * ```javascript
  * import { RestJsonProtocolClient, MediaTypeHeaderCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, MediaTypeHeaderCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // MediaTypeHeaderInput
+ *   json: "STRING_VALUE",
+ * };
  * const command = new MediaTypeHeaderCommand(input);
  * const response = await client.send(command);
+ * // { // MediaTypeHeaderOutput
+ * //   json: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param MediaTypeHeaderCommandInput - {@link MediaTypeHeaderCommandInput}
+ * @returns {@link MediaTypeHeaderCommandOutput}
  * @see {@link MediaTypeHeaderCommandInput} for command's `input` shape.
  * @see {@link MediaTypeHeaderCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class MediaTypeHeaderCommand extends $Command<
-  MediaTypeHeaderCommandInput,
-  MediaTypeHeaderCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MediaTypeHeaderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MediaTypeHeaderCommandInput, MediaTypeHeaderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "MediaTypeHeaderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: MediaTypeHeaderInput.filterSensitiveLog,
-      outputFilterSensitiveLog: MediaTypeHeaderOutput.filterSensitiveLog,
+export class MediaTypeHeaderCommand extends $Command
+  .classBuilder<
+    MediaTypeHeaderCommandInput,
+    MediaTypeHeaderCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "MediaTypeHeader", {})
+  .n("RestJsonProtocolClient", "MediaTypeHeaderCommand")
+  .f(void 0, void 0)
+  .ser(se_MediaTypeHeaderCommand)
+  .de(de_MediaTypeHeaderCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MediaTypeHeaderInput;
+      output: MediaTypeHeaderOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MediaTypeHeaderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1MediaTypeHeaderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<MediaTypeHeaderCommandOutput> {
-    return deserializeAws_restJson1MediaTypeHeaderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MediaTypeHeaderCommandInput;
+      output: MediaTypeHeaderCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { CreateRemoteAccessSessionRequest, CreateRemoteAccessSessionResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateRemoteAccessSessionCommand,
-  serializeAws_json1_1CreateRemoteAccessSessionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRemoteAccessSessionRequest, CreateRemoteAccessSessionResult } from "../models/models_0";
+import { CreateRemoteAccessSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRemoteAccessSessionCommand}.
+ */
 export interface CreateRemoteAccessSessionCommandInput extends CreateRemoteAccessSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRemoteAccessSessionCommand}.
+ */
 export interface CreateRemoteAccessSessionCommandOutput extends CreateRemoteAccessSessionResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,189 @@ export interface CreateRemoteAccessSessionCommandOutput extends CreateRemoteAcce
  * ```javascript
  * import { DeviceFarmClient, CreateRemoteAccessSessionCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, CreateRemoteAccessSessionCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // CreateRemoteAccessSessionRequest
+ *   projectArn: "STRING_VALUE", // required
+ *   deviceArn: "STRING_VALUE", // required
+ *   appArn: "STRING_VALUE",
+ *   instanceArn: "STRING_VALUE",
+ *   name: "STRING_VALUE",
+ *   configuration: { // CreateRemoteAccessSessionConfiguration
+ *     auxiliaryApps: [ // AuxiliaryAppArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     billingMethod: "METERED" || "UNMETERED",
+ *     vpceConfigurationArns: [ // AmazonResourceNames
+ *       "STRING_VALUE",
+ *     ],
+ *     deviceProxy: { // DeviceProxy
+ *       host: "STRING_VALUE", // required
+ *       port: Number("int"), // required
+ *     },
+ *     parameters: { // RemoteAccessParameters
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   interactionMode: "INTERACTIVE" || "NO_VIDEO" || "VIDEO_ONLY",
+ *   skipAppResign: true || false,
+ * };
  * const command = new CreateRemoteAccessSessionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRemoteAccessSessionResult
+ * //   remoteAccessSession: { // RemoteAccessSession
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     created: new Date("TIMESTAMP"),
+ * //     status: "PENDING" || "PENDING_CONCURRENCY" || "PENDING_DEVICE" || "PROCESSING" || "SCHEDULING" || "PREPARING" || "RUNNING" || "COMPLETED" || "STOPPING",
+ * //     result: "PENDING" || "PASSED" || "WARNED" || "FAILED" || "SKIPPED" || "ERRORED" || "STOPPED",
+ * //     message: "STRING_VALUE",
+ * //     started: new Date("TIMESTAMP"),
+ * //     stopped: new Date("TIMESTAMP"),
+ * //     device: { // Device
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       manufacturer: "STRING_VALUE",
+ * //       model: "STRING_VALUE",
+ * //       modelId: "STRING_VALUE",
+ * //       formFactor: "PHONE" || "TABLET",
+ * //       platform: "ANDROID" || "IOS",
+ * //       os: "STRING_VALUE",
+ * //       cpu: { // CPU
+ * //         frequency: "STRING_VALUE",
+ * //         architecture: "STRING_VALUE",
+ * //         clock: Number("double"),
+ * //       },
+ * //       resolution: { // Resolution
+ * //         width: Number("int"),
+ * //         height: Number("int"),
+ * //       },
+ * //       heapSize: Number("long"),
+ * //       memory: Number("long"),
+ * //       image: "STRING_VALUE",
+ * //       carrier: "STRING_VALUE",
+ * //       radio: "STRING_VALUE",
+ * //       remoteAccessEnabled: true || false,
+ * //       remoteDebugEnabled: true || false,
+ * //       fleetType: "STRING_VALUE",
+ * //       fleetName: "STRING_VALUE",
+ * //       instances: [ // DeviceInstances
+ * //         { // DeviceInstance
+ * //           arn: "STRING_VALUE",
+ * //           deviceArn: "STRING_VALUE",
+ * //           labels: [ // InstanceLabels
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           status: "IN_USE" || "PREPARING" || "AVAILABLE" || "NOT_AVAILABLE",
+ * //           udid: "STRING_VALUE",
+ * //           instanceProfile: { // InstanceProfile
+ * //             arn: "STRING_VALUE",
+ * //             packageCleanup: true || false,
+ * //             excludeAppPackagesFromCleanup: [ // PackageIds
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             rebootAfterUse: true || false,
+ * //             name: "STRING_VALUE",
+ * //             description: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //       availability: "TEMPORARY_NOT_AVAILABLE" || "BUSY" || "AVAILABLE" || "HIGHLY_AVAILABLE",
+ * //     },
+ * //     instanceArn: "STRING_VALUE",
+ * //     billingMethod: "METERED" || "UNMETERED",
+ * //     deviceMinutes: { // DeviceMinutes
+ * //       total: Number("double"),
+ * //       metered: Number("double"),
+ * //       unmetered: Number("double"),
+ * //     },
+ * //     endpoint: "STRING_VALUE",
+ * //     deviceUdid: "STRING_VALUE",
+ * //     interactionMode: "INTERACTIVE" || "NO_VIDEO" || "VIDEO_ONLY",
+ * //     skipAppResign: true || false,
+ * //     vpcConfig: { // VpcConfig
+ * //       securityGroupIds: [ // VpcSecurityGroupIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       subnetIds: [ // VpcSubnetIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       vpcId: "STRING_VALUE", // required
+ * //     },
+ * //     deviceProxy: { // DeviceProxy
+ * //       host: "STRING_VALUE", // required
+ * //       port: Number("int"), // required
+ * //     },
+ * //     appUpload: "STRING_VALUE",
+ * //     endpoints: { // RemoteAccessEndpoints
+ * //       remoteDriverEndpoint: "STRING_VALUE",
+ * //       interactiveEndpoint: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateRemoteAccessSessionCommandInput - {@link CreateRemoteAccessSessionCommandInput}
+ * @returns {@link CreateRemoteAccessSessionCommandOutput}
  * @see {@link CreateRemoteAccessSessionCommandInput} for command's `input` shape.
  * @see {@link CreateRemoteAccessSessionCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @example To create a remote access session
+ * ```javascript
+ * // The following example creates a remote access session named MySession.
+ * const input = {
+ *   configuration: {
+ *     billingMethod: "METERED"
+ *   },
+ *   deviceArn: "arn:aws:devicefarm:us-west-2::device:123EXAMPLE",
+ *   name: "MySession",
+ *   projectArn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"
+ * };
+ * const command = new CreateRemoteAccessSessionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   remoteAccessSession:   { /* empty *\/ }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateRemoteAccessSessionCommand extends $Command<
-  CreateRemoteAccessSessionCommandInput,
-  CreateRemoteAccessSessionCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRemoteAccessSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRemoteAccessSessionCommandInput, CreateRemoteAccessSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "CreateRemoteAccessSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRemoteAccessSessionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRemoteAccessSessionResult.filterSensitiveLog,
+export class CreateRemoteAccessSessionCommand extends command<CreateRemoteAccessSessionCommandInput, CreateRemoteAccessSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRemoteAccessSession",
+  CreateRemoteAccessSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRemoteAccessSessionRequest;
+      output: CreateRemoteAccessSessionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRemoteAccessSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateRemoteAccessSessionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateRemoteAccessSessionCommandOutput> {
-    return deserializeAws_json1_1CreateRemoteAccessSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRemoteAccessSessionCommandInput;
+      output: CreateRemoteAccessSessionCommandOutput;
+    };
+  };
 }

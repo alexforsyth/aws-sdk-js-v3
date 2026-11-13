@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DisableLoggingMessage, LoggingStatus } from "../models/models_1";
-import {
-  deserializeAws_queryDisableLoggingCommand,
-  serializeAws_queryDisableLoggingCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisableLoggingMessage, LoggingStatus } from "../models/models_0";
+import { DisableLogging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableLoggingCommand}.
+ */
 export interface DisableLoggingCommandInput extends DisableLoggingMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DisableLoggingCommand}.
+ */
 export interface DisableLoggingCommandOutput extends LoggingStatus, __MetadataBearer {}
 
 /**
@@ -29,68 +30,81 @@ export interface DisableLoggingCommandOutput extends LoggingStatus, __MetadataBe
  * ```javascript
  * import { RedshiftClient, DisableLoggingCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DisableLoggingCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DisableLoggingMessage
+ *   ClusterIdentifier: "STRING_VALUE", // required
+ *   LogDestinationType: "s3" || "cloudwatch" || "s3table",
+ *   LogExports: [ // LogTypeList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DisableLoggingCommand(input);
  * const response = await client.send(command);
+ * // { // LoggingStatus
+ * //   LoggingEnabled: true || false,
+ * //   BucketName: "STRING_VALUE",
+ * //   S3KeyPrefix: "STRING_VALUE",
+ * //   LastSuccessfulDeliveryTime: new Date("TIMESTAMP"),
+ * //   LastFailureTime: new Date("TIMESTAMP"),
+ * //   LastFailureMessage: "STRING_VALUE",
+ * //   LogDestinationType: "s3" || "cloudwatch" || "s3table",
+ * //   LogExports: [ // LogTypeList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   S3Tables: { // S3TablePublishStatus
+ * //     S3Tables: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     S3TableNamespace: "STRING_VALUE",
+ * //     S3TableGranularity: "STRING_VALUE",
+ * //     EnabledAll: true || false,
+ * //     LastIngestionTimes: { // S3TableLastIngestionTimeMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisableLoggingCommandInput - {@link DisableLoggingCommandInput}
+ * @returns {@link DisableLoggingCommandOutput}
  * @see {@link DisableLoggingCommandInput} for command's `input` shape.
  * @see {@link DisableLoggingCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DisableLoggingCommand extends $Command<
-  DisableLoggingCommandInput,
-  DisableLoggingCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableLoggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableLoggingCommandInput, DisableLoggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DisableLoggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableLoggingMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: LoggingStatus.filterSensitiveLog,
+export class DisableLoggingCommand extends command<DisableLoggingCommandInput, DisableLoggingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableLogging",
+  DisableLogging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableLoggingMessage;
+      output: LoggingStatus;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableLoggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDisableLoggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisableLoggingCommandOutput> {
-    return deserializeAws_queryDisableLoggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableLoggingCommandInput;
+      output: DisableLoggingCommandOutput;
+    };
+  };
 }

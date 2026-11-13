@@ -1,33 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListUserPoliciesRequest, ListUserPoliciesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListUserPoliciesCommand,
-  serializeAws_queryListUserPoliciesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListUserPoliciesRequest, ListUserPoliciesResponse } from "../models/models_0";
+import { ListUserPolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListUserPoliciesCommand}.
+ */
 export interface ListUserPoliciesCommandInput extends ListUserPoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListUserPoliciesCommand}.
+ */
 export interface ListUserPoliciesCommandOutput extends ListUserPoliciesResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the names of the inline policies embedded in the specified IAM user.</p>
- *         <p>An IAM user can also have managed policies attached to it. To list the managed
- *             policies that are attached to a user, use <a>ListAttachedUserPolicies</a>.
- *             For more information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
- *                 policies</a> in the <i>IAM User Guide</i>.</p>
- *         <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
+ *          <p>An IAM user can also have managed policies attached to it. To list the managed
+ *             policies that are attached to a user, use <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html">ListAttachedUserPolicies</a>. For more information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
+ *                 policies and inline policies</a> in the
+ *             <i>IAM User Guide</i>.</p>
+ *          <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
  *             parameters. If there are no inline policies embedded with the specified user, the
  *             operation returns an empty list.</p>
  * @example
@@ -35,68 +36,61 @@ export interface ListUserPoliciesCommandOutput extends ListUserPoliciesResponse,
  * ```javascript
  * import { IAMClient, ListUserPoliciesCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListUserPoliciesCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListUserPoliciesRequest
+ *   UserName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListUserPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // ListUserPoliciesResponse
+ * //   PolicyNames: [ // policyNameListType // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListUserPoliciesCommandInput - {@link ListUserPoliciesCommandInput}
+ * @returns {@link ListUserPoliciesCommandOutput}
  * @see {@link ListUserPoliciesCommandInput} for command's `input` shape.
  * @see {@link ListUserPoliciesCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class ListUserPoliciesCommand extends $Command<
-  ListUserPoliciesCommandInput,
-  ListUserPoliciesCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListUserPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListUserPoliciesCommandInput, ListUserPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListUserPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListUserPoliciesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListUserPoliciesResponse.filterSensitiveLog,
+export class ListUserPoliciesCommand extends command<ListUserPoliciesCommandInput, ListUserPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListUserPolicies",
+  ListUserPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListUserPoliciesRequest;
+      output: ListUserPoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListUserPoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListUserPoliciesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListUserPoliciesCommandOutput> {
-    return deserializeAws_queryListUserPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListUserPoliciesCommandInput;
+      output: ListUserPoliciesCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { ListAccessPreviewsRequest, ListAccessPreviewsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAccessPreviewsCommand,
-  serializeAws_restJson1ListAccessPreviewsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAccessPreviewsRequest, ListAccessPreviewsResponse } from "../models/models_0";
+import { ListAccessPreviews$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAccessPreviewsCommand}.
+ */
 export interface ListAccessPreviewsCommandInput extends ListAccessPreviewsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAccessPreviewsCommand}.
+ */
 export interface ListAccessPreviewsCommandOutput extends ListAccessPreviewsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface ListAccessPreviewsCommandOutput extends ListAccessPreviewsRespo
  * ```javascript
  * import { AccessAnalyzerClient, ListAccessPreviewsCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, ListAccessPreviewsCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // ListAccessPreviewsRequest
+ *   analyzerArn: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAccessPreviewsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAccessPreviewsResponse
+ * //   accessPreviews: [ // AccessPreviewsList // required
+ * //     { // AccessPreviewSummary
+ * //       id: "STRING_VALUE", // required
+ * //       analyzerArn: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       status: "STRING_VALUE", // required
+ * //       statusReason: { // AccessPreviewStatusReason
+ * //         code: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAccessPreviewsCommandInput - {@link ListAccessPreviewsCommandInput}
+ * @returns {@link ListAccessPreviewsCommandOutput}
  * @see {@link ListAccessPreviewsCommandInput} for command's `input` shape.
  * @see {@link ListAccessPreviewsCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class ListAccessPreviewsCommand extends $Command<
-  ListAccessPreviewsCommandInput,
-  ListAccessPreviewsCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAccessPreviewsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAccessPreviewsCommandInput, ListAccessPreviewsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "ListAccessPreviewsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAccessPreviewsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAccessPreviewsResponse.filterSensitiveLog,
+export class ListAccessPreviewsCommand extends command<ListAccessPreviewsCommandInput, ListAccessPreviewsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAccessPreviews",
+  ListAccessPreviews$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccessPreviewsRequest;
+      output: ListAccessPreviewsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAccessPreviewsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAccessPreviewsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAccessPreviewsCommandOutput> {
-    return deserializeAws_restJson1ListAccessPreviewsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAccessPreviewsCommandInput;
+      output: ListAccessPreviewsCommandOutput;
+    };
+  };
 }

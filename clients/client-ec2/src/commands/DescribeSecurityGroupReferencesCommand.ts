@@ -1,103 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeSecurityGroupReferencesRequest, DescribeSecurityGroupReferencesResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeSecurityGroupReferencesCommand,
-  serializeAws_ec2DescribeSecurityGroupReferencesCommand,
-} from "../protocols/Aws_ec2";
-
-export interface DescribeSecurityGroupReferencesCommandInput extends DescribeSecurityGroupReferencesRequest {}
-export interface DescribeSecurityGroupReferencesCommandOutput
-  extends DescribeSecurityGroupReferencesResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSecurityGroupReferencesRequest, DescribeSecurityGroupReferencesResult } from "../models/models_5";
+import { DescribeSecurityGroupReferences$ } from "../schemas/schemas_0";
 
 /**
- * <p>[VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSecurityGroupReferencesCommand}.
+ */
+export interface DescribeSecurityGroupReferencesCommandInput extends DescribeSecurityGroupReferencesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSecurityGroupReferencesCommand}.
+ */
+export interface DescribeSecurityGroupReferencesCommandOutput extends DescribeSecurityGroupReferencesResult, __MetadataBearer {}
+
+/**
+ * <p>Describes the VPCs on the other side of a VPC peering or Transit Gateway connection that are referencing the security groups you've specified in this request.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeSecurityGroupReferencesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeSecurityGroupReferencesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeSecurityGroupReferencesRequest
+ *   DryRun: true || false,
+ *   GroupId: [ // GroupIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeSecurityGroupReferencesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSecurityGroupReferencesResult
+ * //   SecurityGroupReferenceSet: [ // SecurityGroupReferences
+ * //     { // SecurityGroupReference
+ * //       GroupId: "STRING_VALUE",
+ * //       ReferencingVpcId: "STRING_VALUE",
+ * //       VpcPeeringConnectionId: "STRING_VALUE",
+ * //       TransitGatewayId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSecurityGroupReferencesCommandInput - {@link DescribeSecurityGroupReferencesCommandInput}
+ * @returns {@link DescribeSecurityGroupReferencesCommandOutput}
  * @see {@link DescribeSecurityGroupReferencesCommandInput} for command's `input` shape.
  * @see {@link DescribeSecurityGroupReferencesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe security group references
+ * ```javascript
+ * // This example describes the security group references for the specified security group.
+ * const input = {
+ *   GroupId: [
+ *     "sg-903004f8"
+ *   ]
+ * };
+ * const command = new DescribeSecurityGroupReferencesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SecurityGroupReferenceSet: [
+ *     {
+ *       GroupId: "sg-903004f8",
+ *       ReferencingVpcId: "vpc-1a2b3c4d",
+ *       VpcPeeringConnectionId: "pcx-b04deed9"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeSecurityGroupReferencesCommand extends $Command<
-  DescribeSecurityGroupReferencesCommandInput,
-  DescribeSecurityGroupReferencesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSecurityGroupReferencesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSecurityGroupReferencesCommandInput, DescribeSecurityGroupReferencesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeSecurityGroupReferencesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSecurityGroupReferencesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSecurityGroupReferencesResult.filterSensitiveLog,
+export class DescribeSecurityGroupReferencesCommand extends command<DescribeSecurityGroupReferencesCommandInput, DescribeSecurityGroupReferencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSecurityGroupReferences",
+  DescribeSecurityGroupReferences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSecurityGroupReferencesRequest;
+      output: DescribeSecurityGroupReferencesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeSecurityGroupReferencesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeSecurityGroupReferencesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSecurityGroupReferencesCommandOutput> {
-    return deserializeAws_ec2DescribeSecurityGroupReferencesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSecurityGroupReferencesCommandInput;
+      output: DescribeSecurityGroupReferencesCommandOutput;
+    };
+  };
 }

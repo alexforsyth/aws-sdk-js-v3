@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateRoutingControlRequest, UpdateRoutingControlResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRoutingControlCommand,
-  serializeAws_restJson1UpdateRoutingControlCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryControlConfigClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryControlConfigClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRoutingControlRequest, UpdateRoutingControlResponse } from "../models/models_0";
+import { UpdateRoutingControl$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRoutingControlCommand}.
+ */
 export interface UpdateRoutingControlCommandInput extends UpdateRoutingControlRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRoutingControlCommand}.
+ */
 export interface UpdateRoutingControlCommandOutput extends UpdateRoutingControlResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,72 @@ export interface UpdateRoutingControlCommandOutput extends UpdateRoutingControlR
  * ```javascript
  * import { Route53RecoveryControlConfigClient, UpdateRoutingControlCommand } from "@aws-sdk/client-route53-recovery-control-config"; // ES Modules import
  * // const { Route53RecoveryControlConfigClient, UpdateRoutingControlCommand } = require("@aws-sdk/client-route53-recovery-control-config"); // CommonJS import
+ * // import type { Route53RecoveryControlConfigClientConfig } from "@aws-sdk/client-route53-recovery-control-config";
+ * const config = {}; // type is Route53RecoveryControlConfigClientConfig
  * const client = new Route53RecoveryControlConfigClient(config);
+ * const input = { // UpdateRoutingControlRequest
+ *   RoutingControlArn: "STRING_VALUE", // required
+ *   RoutingControlName: "STRING_VALUE", // required
+ * };
  * const command = new UpdateRoutingControlCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRoutingControlResponse
+ * //   RoutingControl: { // RoutingControl
+ * //     ControlPanelArn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     RoutingControlArn: "STRING_VALUE",
+ * //     Status: "PENDING" || "DEPLOYED" || "PENDING_DELETION",
+ * //     Owner: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateRoutingControlCommandInput - {@link UpdateRoutingControlCommandInput}
+ * @returns {@link UpdateRoutingControlCommandOutput}
  * @see {@link UpdateRoutingControlCommandInput} for command's `input` shape.
  * @see {@link UpdateRoutingControlCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryControlConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryControlConfigClientResolvedConfig | config} for Route53RecoveryControlConfigClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>403 response - You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>409 response - ConflictException. You might be using a predefined variable.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>500 response - InternalServiceError. Temporary service error. Retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>404 response - MalformedQueryString. The query string contains a syntax error or resource not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>429 response - LimitExceededException or TooManyRequestsException.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>400 response - Multiple causes. For example, you might have a malformed query string and input parameter might be out of range, or you might have used parameters together incorrectly.</p>
+ *
+ * @throws {@link Route53RecoveryControlConfigServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryControlConfig service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRoutingControlCommand extends $Command<
-  UpdateRoutingControlCommandInput,
-  UpdateRoutingControlCommandOutput,
-  Route53RecoveryControlConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRoutingControlCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryControlConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRoutingControlCommandInput, UpdateRoutingControlCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryControlConfigClient";
-    const commandName = "UpdateRoutingControlCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRoutingControlRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRoutingControlResponse.filterSensitiveLog,
+export class UpdateRoutingControlCommand extends command<UpdateRoutingControlCommandInput, UpdateRoutingControlCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRoutingControl",
+  UpdateRoutingControl$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRoutingControlRequest;
+      output: UpdateRoutingControlResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRoutingControlCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRoutingControlCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRoutingControlCommandOutput> {
-    return deserializeAws_restJson1UpdateRoutingControlCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRoutingControlCommandInput;
+      output: UpdateRoutingControlCommandOutput;
+    };
+  };
 }

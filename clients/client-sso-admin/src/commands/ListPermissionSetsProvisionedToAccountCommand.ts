@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListPermissionSetsProvisionedToAccountRequest,
   ListPermissionSetsProvisionedToAccountResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListPermissionSetsProvisionedToAccountCommand,
-  serializeAws_json1_1ListPermissionSetsProvisionedToAccountCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
+import { ListPermissionSetsProvisionedToAccount$ } from "../schemas/schemas_0";
 
-export interface ListPermissionSetsProvisionedToAccountCommandInput
-  extends ListPermissionSetsProvisionedToAccountRequest {}
-export interface ListPermissionSetsProvisionedToAccountCommandOutput
-  extends ListPermissionSetsProvisionedToAccountResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPermissionSetsProvisionedToAccountCommand}.
+ */
+export interface ListPermissionSetsProvisionedToAccountCommandInput extends ListPermissionSetsProvisionedToAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPermissionSetsProvisionedToAccountCommand}.
+ */
+export interface ListPermissionSetsProvisionedToAccountCommandOutput extends ListPermissionSetsProvisionedToAccountResponse, __MetadataBearer {}
 
 /**
  * <p>Lists all the permission sets that are provisioned to a specified Amazon Web Services account.</p>
@@ -34,74 +32,69 @@ export interface ListPermissionSetsProvisionedToAccountCommandOutput
  * ```javascript
  * import { SSOAdminClient, ListPermissionSetsProvisionedToAccountCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, ListPermissionSetsProvisionedToAccountCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // ListPermissionSetsProvisionedToAccountRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   AccountId: "STRING_VALUE", // required
+ *   ProvisioningStatus: "LATEST_PERMISSION_SET_PROVISIONED" || "LATEST_PERMISSION_SET_NOT_PROVISIONED",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListPermissionSetsProvisionedToAccountCommand(input);
  * const response = await client.send(command);
+ * // { // ListPermissionSetsProvisionedToAccountResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   PermissionSets: [ // PermissionSetList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListPermissionSetsProvisionedToAccountCommandInput - {@link ListPermissionSetsProvisionedToAccountCommandInput}
+ * @returns {@link ListPermissionSetsProvisionedToAccountCommandOutput}
  * @see {@link ListPermissionSetsProvisionedToAccountCommandInput} for command's `input` shape.
  * @see {@link ListPermissionSetsProvisionedToAccountCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class ListPermissionSetsProvisionedToAccountCommand extends $Command<
-  ListPermissionSetsProvisionedToAccountCommandInput,
-  ListPermissionSetsProvisionedToAccountCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPermissionSetsProvisionedToAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPermissionSetsProvisionedToAccountCommandInput, ListPermissionSetsProvisionedToAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "ListPermissionSetsProvisionedToAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPermissionSetsProvisionedToAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPermissionSetsProvisionedToAccountResponse.filterSensitiveLog,
+export class ListPermissionSetsProvisionedToAccountCommand extends command<ListPermissionSetsProvisionedToAccountCommandInput, ListPermissionSetsProvisionedToAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPermissionSetsProvisionedToAccount",
+  ListPermissionSetsProvisionedToAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPermissionSetsProvisionedToAccountRequest;
+      output: ListPermissionSetsProvisionedToAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListPermissionSetsProvisionedToAccountCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPermissionSetsProvisionedToAccountCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListPermissionSetsProvisionedToAccountCommandOutput> {
-    return deserializeAws_json1_1ListPermissionSetsProvisionedToAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPermissionSetsProvisionedToAccountCommandInput;
+      output: ListPermissionSetsProvisionedToAccountCommandOutput;
+    };
+  };
 }

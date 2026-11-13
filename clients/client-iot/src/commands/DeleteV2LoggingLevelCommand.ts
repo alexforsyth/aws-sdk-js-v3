@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { DeleteV2LoggingLevelRequest } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteV2LoggingLevelCommand,
-  serializeAws_restJson1DeleteV2LoggingLevelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteV2LoggingLevelRequest } from "../models/models_1";
+import { DeleteV2LoggingLevel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteV2LoggingLevelCommand}.
+ */
 export interface DeleteV2LoggingLevelCommandInput extends DeleteV2LoggingLevelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteV2LoggingLevelCommand}.
+ */
 export interface DeleteV2LoggingLevelCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +30,55 @@ export interface DeleteV2LoggingLevelCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IoTClient, DeleteV2LoggingLevelCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DeleteV2LoggingLevelCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DeleteV2LoggingLevelRequest
+ *   targetType: "DEFAULT" || "THING_GROUP" || "CLIENT_ID" || "SOURCE_IP" || "PRINCIPAL_ID", // required
+ *   targetName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteV2LoggingLevelCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteV2LoggingLevelCommandInput - {@link DeleteV2LoggingLevelCommandInput}
+ * @returns {@link DeleteV2LoggingLevelCommandOutput}
  * @see {@link DeleteV2LoggingLevelCommandInput} for command's `input` shape.
  * @see {@link DeleteV2LoggingLevelCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteV2LoggingLevelCommand extends $Command<
-  DeleteV2LoggingLevelCommandInput,
-  DeleteV2LoggingLevelCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteV2LoggingLevelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteV2LoggingLevelCommandInput, DeleteV2LoggingLevelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DeleteV2LoggingLevelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteV2LoggingLevelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteV2LoggingLevelCommand extends command<DeleteV2LoggingLevelCommandInput, DeleteV2LoggingLevelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteV2LoggingLevel",
+  DeleteV2LoggingLevel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteV2LoggingLevelRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteV2LoggingLevelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteV2LoggingLevelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteV2LoggingLevelCommandOutput> {
-    return deserializeAws_restJson1DeleteV2LoggingLevelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteV2LoggingLevelCommandInput;
+      output: DeleteV2LoggingLevelCommandOutput;
+    };
+  };
 }

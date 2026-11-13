@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteTransitGatewayVpcAttachmentRequest, DeleteTransitGatewayVpcAttachmentResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayVpcAttachmentCommand,
-  serializeAws_ec2DeleteTransitGatewayVpcAttachmentCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DeleteTransitGatewayVpcAttachmentRequest,
+  DeleteTransitGatewayVpcAttachmentResult,
+} from "../models/models_3";
+import { DeleteTransitGatewayVpcAttachment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayVpcAttachmentCommand}.
+ */
 export interface DeleteTransitGatewayVpcAttachmentCommandInput extends DeleteTransitGatewayVpcAttachmentRequest {}
-export interface DeleteTransitGatewayVpcAttachmentCommandOutput
-  extends DeleteTransitGatewayVpcAttachmentResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayVpcAttachmentCommand}.
+ */
+export interface DeleteTransitGatewayVpcAttachmentCommandOutput extends DeleteTransitGatewayVpcAttachmentResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified VPC attachment.</p>
@@ -30,74 +32,70 @@ export interface DeleteTransitGatewayVpcAttachmentCommandOutput
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayVpcAttachmentCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayVpcAttachmentCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayVpcAttachmentRequest
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayVpcAttachmentCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayVpcAttachmentResult
+ * //   TransitGatewayVpcAttachment: { // TransitGatewayVpcAttachment
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     VpcOwnerId: "STRING_VALUE",
+ * //     State: "initiating" || "initiatingRequest" || "pendingAcceptance" || "rollingBack" || "pending" || "available" || "modifying" || "deleting" || "deleted" || "failed" || "rejected" || "rejecting" || "failing",
+ * //     SubnetIds: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Options: { // TransitGatewayVpcAttachmentOptions
+ * //       DnsSupport: "enable" || "disable",
+ * //       SecurityGroupReferencingSupport: "enable" || "disable",
+ * //       Ipv6Support: "enable" || "disable",
+ * //       ApplianceModeSupport: "enable" || "disable",
+ * //     },
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayVpcAttachmentCommandInput - {@link DeleteTransitGatewayVpcAttachmentCommandInput}
+ * @returns {@link DeleteTransitGatewayVpcAttachmentCommandOutput}
  * @see {@link DeleteTransitGatewayVpcAttachmentCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayVpcAttachmentCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayVpcAttachmentCommand extends $Command<
-  DeleteTransitGatewayVpcAttachmentCommandInput,
-  DeleteTransitGatewayVpcAttachmentCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayVpcAttachmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTransitGatewayVpcAttachmentCommandInput, DeleteTransitGatewayVpcAttachmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayVpcAttachmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayVpcAttachmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayVpcAttachmentResult.filterSensitiveLog,
+export class DeleteTransitGatewayVpcAttachmentCommand extends command<DeleteTransitGatewayVpcAttachmentCommandInput, DeleteTransitGatewayVpcAttachmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayVpcAttachment",
+  DeleteTransitGatewayVpcAttachment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayVpcAttachmentRequest;
+      output: DeleteTransitGatewayVpcAttachmentResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteTransitGatewayVpcAttachmentCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayVpcAttachmentCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTransitGatewayVpcAttachmentCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayVpcAttachmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayVpcAttachmentCommandInput;
+      output: DeleteTransitGatewayVpcAttachmentCommandOutput;
+    };
+  };
 }

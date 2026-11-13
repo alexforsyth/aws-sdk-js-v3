@@ -1,0 +1,85 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { TagResourceRequest, TagResourceResponse } from "../models/models_0";
+import { TagResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandInput extends TagResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link TagResourceCommand}.
+ */
+export interface TagResourceCommandOutput extends TagResourceResponse, __MetadataBearer {}
+
+/**
+ * <p>Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EMRServerlessClient, TagResourceCommand } from "@aws-sdk/client-emr-serverless"; // ES Modules import
+ * // const { EMRServerlessClient, TagResourceCommand } = require("@aws-sdk/client-emr-serverless"); // CommonJS import
+ * // import type { EMRServerlessClientConfig } from "@aws-sdk/client-emr-serverless";
+ * const config = {}; // type is EMRServerlessClientConfig
+ * const client = new EMRServerlessClient(config);
+ * const input = { // TagResourceRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   tags: { // TagMap // required
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new TagResourceCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param TagResourceCommandInput - {@link TagResourceCommandInput}
+ * @returns {@link TagResourceCommandOutput}
+ * @see {@link TagResourceCommandInput} for command's `input` shape.
+ * @see {@link TagResourceCommandOutput} for command's `response` shape.
+ * @see {@link EMRServerlessClientResolvedConfig | config} for EMRServerlessClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link EMRServerlessServiceException}
+ * <p>Base exception class for all service exceptions from EMRServerless service.</p>
+ *
+ *
+ * @public
+ */
+export class TagResourceCommand extends command<TagResourceCommandInput, TagResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "TagResource",
+  TagResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: TagResourceRequest;
+      output: {};
+    };
+    sdk: {
+      input: TagResourceCommandInput;
+      output: TagResourceCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeClusterRequest, DescribeClusterResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeClusterCommand,
-  serializeAws_json1_1DescribeClusterCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SnowballClientResolvedConfig } from "../SnowballClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeClusterRequest, DescribeClusterResult } from "../models/models_0";
+import { DescribeCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClusterCommand}.
+ */
 export interface DescribeClusterCommandInput extends DescribeClusterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClusterCommand}.
+ */
 export interface DescribeClusterCommandOutput extends DescribeClusterResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,129 @@ export interface DescribeClusterCommandOutput extends DescribeClusterResult, __M
  * ```javascript
  * import { SnowballClient, DescribeClusterCommand } from "@aws-sdk/client-snowball"; // ES Modules import
  * // const { SnowballClient, DescribeClusterCommand } = require("@aws-sdk/client-snowball"); // CommonJS import
+ * // import type { SnowballClientConfig } from "@aws-sdk/client-snowball";
+ * const config = {}; // type is SnowballClientConfig
  * const client = new SnowballClient(config);
+ * const input = { // DescribeClusterRequest
+ *   ClusterId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeClusterCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeClusterResult
+ * //   ClusterMetadata: { // ClusterMetadata
+ * //     ClusterId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     KmsKeyARN: "STRING_VALUE",
+ * //     RoleARN: "STRING_VALUE",
+ * //     ClusterState: "AwaitingQuorum" || "Pending" || "InUse" || "Complete" || "Cancelled",
+ * //     JobType: "IMPORT" || "EXPORT" || "LOCAL_USE",
+ * //     SnowballType: "STANDARD" || "EDGE" || "EDGE_C" || "EDGE_CG" || "EDGE_S" || "SNC1_HDD" || "SNC1_SSD" || "V3_5C" || "V3_5S" || "RACK_5U_C",
+ * //     CreationDate: new Date("TIMESTAMP"),
+ * //     Resources: { // JobResource
+ * //       S3Resources: [ // S3ResourceList
+ * //         { // S3Resource
+ * //           BucketArn: "STRING_VALUE",
+ * //           KeyRange: { // KeyRange
+ * //             BeginMarker: "STRING_VALUE",
+ * //             EndMarker: "STRING_VALUE",
+ * //           },
+ * //           TargetOnDeviceServices: [ // TargetOnDeviceServiceList
+ * //             { // TargetOnDeviceService
+ * //               ServiceName: "NFS_ON_DEVICE_SERVICE" || "S3_ON_DEVICE_SERVICE",
+ * //               TransferOption: "IMPORT" || "EXPORT" || "LOCAL_USE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       LambdaResources: [ // LambdaResourceList
+ * //         { // LambdaResource
+ * //           LambdaArn: "STRING_VALUE",
+ * //           EventTriggers: [ // EventTriggerDefinitionList
+ * //             { // EventTriggerDefinition
+ * //               EventResourceARN: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       Ec2AmiResources: [ // Ec2AmiResourceList
+ * //         { // Ec2AmiResource
+ * //           AmiId: "STRING_VALUE", // required
+ * //           SnowballAmiId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     AddressId: "STRING_VALUE",
+ * //     ShippingOption: "SECOND_DAY" || "NEXT_DAY" || "EXPRESS" || "STANDARD",
+ * //     Notification: { // Notification
+ * //       SnsTopicARN: "STRING_VALUE",
+ * //       JobStatesToNotify: [ // JobStateList
+ * //         "New" || "PreparingAppliance" || "PreparingShipment" || "InTransitToCustomer" || "WithCustomer" || "InTransitToAWS" || "WithAWSSortingFacility" || "WithAWS" || "InProgress" || "Complete" || "Cancelled" || "Listing" || "Pending",
+ * //       ],
+ * //       NotifyAll: true || false,
+ * //       DevicePickupSnsTopicARN: "STRING_VALUE",
+ * //     },
+ * //     ForwardingAddressId: "STRING_VALUE",
+ * //     TaxDocuments: { // TaxDocuments
+ * //       IND: { // INDTaxDocuments
+ * //         GSTIN: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     OnDeviceServiceConfiguration: { // OnDeviceServiceConfiguration
+ * //       NFSOnDeviceService: { // NFSOnDeviceServiceConfiguration
+ * //         StorageLimit: Number("int"),
+ * //         StorageUnit: "TB",
+ * //       },
+ * //       TGWOnDeviceService: { // TGWOnDeviceServiceConfiguration
+ * //         StorageLimit: Number("int"),
+ * //         StorageUnit: "TB",
+ * //       },
+ * //       EKSOnDeviceService: { // EKSOnDeviceServiceConfiguration
+ * //         KubernetesVersion: "STRING_VALUE",
+ * //         EKSAnywhereVersion: "STRING_VALUE",
+ * //       },
+ * //       S3OnDeviceService: { // S3OnDeviceServiceConfiguration
+ * //         StorageLimit: Number("double"),
+ * //         StorageUnit: "TB",
+ * //         ServiceSize: Number("int"),
+ * //         FaultTolerance: Number("int"),
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeClusterCommandInput - {@link DescribeClusterCommandInput}
+ * @returns {@link DescribeClusterCommandOutput}
  * @see {@link DescribeClusterCommandInput} for command's `input` shape.
  * @see {@link DescribeClusterCommandOutput} for command's `response` shape.
- * @see {@link SnowballClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowballClientResolvedConfig | config} for SnowballClient's `config` shape.
  *
+ * @throws {@link InvalidResourceException} (client fault)
+ *  <p>The specified resource can't be found. Check the information you provided in your last
+ *       request, and try again.</p>
+ *
+ * @throws {@link SnowballServiceException}
+ * <p>Base exception class for all service exceptions from Snowball service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClusterCommand extends $Command<
-  DescribeClusterCommandInput,
-  DescribeClusterCommandOutput,
-  SnowballClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowballClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClusterCommandInput, DescribeClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowballClient";
-    const commandName = "DescribeClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClusterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeClusterResult.filterSensitiveLog,
+export class DescribeClusterCommand extends command<DescribeClusterCommandInput, DescribeClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCluster",
+  DescribeCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterRequest;
+      output: DescribeClusterResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeClusterCommandOutput> {
-    return deserializeAws_json1_1DescribeClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClusterCommandInput;
+      output: DescribeClusterCommandOutput;
+    };
+  };
 }

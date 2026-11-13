@@ -1,1827 +1,3042 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { CloudWatchLogsClient } from "./CloudWatchLogsClient";
 import {
+  type AssociateKmsKeyCommandInput,
+  type AssociateKmsKeyCommandOutput,
   AssociateKmsKeyCommand,
-  AssociateKmsKeyCommandInput,
-  AssociateKmsKeyCommandOutput,
 } from "./commands/AssociateKmsKeyCommand";
 import {
+  type AssociateSourceToS3TableIntegrationCommandInput,
+  type AssociateSourceToS3TableIntegrationCommandOutput,
+  AssociateSourceToS3TableIntegrationCommand,
+} from "./commands/AssociateSourceToS3TableIntegrationCommand";
+import {
+  type CancelExportTaskCommandInput,
+  type CancelExportTaskCommandOutput,
   CancelExportTaskCommand,
-  CancelExportTaskCommandInput,
-  CancelExportTaskCommandOutput,
 } from "./commands/CancelExportTaskCommand";
 import {
+  type CancelImportTaskCommandInput,
+  type CancelImportTaskCommandOutput,
+  CancelImportTaskCommand,
+} from "./commands/CancelImportTaskCommand";
+import {
+  type CreateDeliveryCommandInput,
+  type CreateDeliveryCommandOutput,
+  CreateDeliveryCommand,
+} from "./commands/CreateDeliveryCommand";
+import {
+  type CreateExportTaskCommandInput,
+  type CreateExportTaskCommandOutput,
   CreateExportTaskCommand,
-  CreateExportTaskCommandInput,
-  CreateExportTaskCommandOutput,
 } from "./commands/CreateExportTaskCommand";
 import {
+  type CreateImportTaskCommandInput,
+  type CreateImportTaskCommandOutput,
+  CreateImportTaskCommand,
+} from "./commands/CreateImportTaskCommand";
+import {
+  type CreateLogAnomalyDetectorCommandInput,
+  type CreateLogAnomalyDetectorCommandOutput,
+  CreateLogAnomalyDetectorCommand,
+} from "./commands/CreateLogAnomalyDetectorCommand";
+import {
+  type CreateLogGroupCommandInput,
+  type CreateLogGroupCommandOutput,
   CreateLogGroupCommand,
-  CreateLogGroupCommandInput,
-  CreateLogGroupCommandOutput,
 } from "./commands/CreateLogGroupCommand";
 import {
+  type CreateLogStreamCommandInput,
+  type CreateLogStreamCommandOutput,
   CreateLogStreamCommand,
-  CreateLogStreamCommandInput,
-  CreateLogStreamCommandOutput,
 } from "./commands/CreateLogStreamCommand";
 import {
+  type CreateLookupTableCommandInput,
+  type CreateLookupTableCommandOutput,
+  CreateLookupTableCommand,
+} from "./commands/CreateLookupTableCommand";
+import {
+  type CreateScheduledQueryCommandInput,
+  type CreateScheduledQueryCommandOutput,
+  CreateScheduledQueryCommand,
+} from "./commands/CreateScheduledQueryCommand";
+import {
+  type DeleteAccountPolicyCommandInput,
+  type DeleteAccountPolicyCommandOutput,
+  DeleteAccountPolicyCommand,
+} from "./commands/DeleteAccountPolicyCommand";
+import {
+  type DeleteDataProtectionPolicyCommandInput,
+  type DeleteDataProtectionPolicyCommandOutput,
+  DeleteDataProtectionPolicyCommand,
+} from "./commands/DeleteDataProtectionPolicyCommand";
+import {
+  type DeleteDeliveryCommandInput,
+  type DeleteDeliveryCommandOutput,
+  DeleteDeliveryCommand,
+} from "./commands/DeleteDeliveryCommand";
+import {
+  type DeleteDeliveryDestinationCommandInput,
+  type DeleteDeliveryDestinationCommandOutput,
+  DeleteDeliveryDestinationCommand,
+} from "./commands/DeleteDeliveryDestinationCommand";
+import {
+  type DeleteDeliveryDestinationPolicyCommandInput,
+  type DeleteDeliveryDestinationPolicyCommandOutput,
+  DeleteDeliveryDestinationPolicyCommand,
+} from "./commands/DeleteDeliveryDestinationPolicyCommand";
+import {
+  type DeleteDeliverySourceCommandInput,
+  type DeleteDeliverySourceCommandOutput,
+  DeleteDeliverySourceCommand,
+} from "./commands/DeleteDeliverySourceCommand";
+import {
+  type DeleteDestinationCommandInput,
+  type DeleteDestinationCommandOutput,
   DeleteDestinationCommand,
-  DeleteDestinationCommandInput,
-  DeleteDestinationCommandOutput,
 } from "./commands/DeleteDestinationCommand";
 import {
+  type DeleteIndexPolicyCommandInput,
+  type DeleteIndexPolicyCommandOutput,
+  DeleteIndexPolicyCommand,
+} from "./commands/DeleteIndexPolicyCommand";
+import {
+  type DeleteIntegrationCommandInput,
+  type DeleteIntegrationCommandOutput,
+  DeleteIntegrationCommand,
+} from "./commands/DeleteIntegrationCommand";
+import {
+  type DeleteLogAnomalyDetectorCommandInput,
+  type DeleteLogAnomalyDetectorCommandOutput,
+  DeleteLogAnomalyDetectorCommand,
+} from "./commands/DeleteLogAnomalyDetectorCommand";
+import {
+  type DeleteLogGroupCommandInput,
+  type DeleteLogGroupCommandOutput,
   DeleteLogGroupCommand,
-  DeleteLogGroupCommandInput,
-  DeleteLogGroupCommandOutput,
 } from "./commands/DeleteLogGroupCommand";
 import {
+  type DeleteLogStreamCommandInput,
+  type DeleteLogStreamCommandOutput,
   DeleteLogStreamCommand,
-  DeleteLogStreamCommandInput,
-  DeleteLogStreamCommandOutput,
 } from "./commands/DeleteLogStreamCommand";
 import {
+  type DeleteLookupTableCommandInput,
+  type DeleteLookupTableCommandOutput,
+  DeleteLookupTableCommand,
+} from "./commands/DeleteLookupTableCommand";
+import {
+  type DeleteMetricFilterCommandInput,
+  type DeleteMetricFilterCommandOutput,
   DeleteMetricFilterCommand,
-  DeleteMetricFilterCommandInput,
-  DeleteMetricFilterCommandOutput,
 } from "./commands/DeleteMetricFilterCommand";
 import {
+  type DeleteQueryDefinitionCommandInput,
+  type DeleteQueryDefinitionCommandOutput,
   DeleteQueryDefinitionCommand,
-  DeleteQueryDefinitionCommandInput,
-  DeleteQueryDefinitionCommandOutput,
 } from "./commands/DeleteQueryDefinitionCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
   DeleteResourcePolicyCommand,
-  DeleteResourcePolicyCommandInput,
-  DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
 import {
+  type DeleteRetentionPolicyCommandInput,
+  type DeleteRetentionPolicyCommandOutput,
   DeleteRetentionPolicyCommand,
-  DeleteRetentionPolicyCommandInput,
-  DeleteRetentionPolicyCommandOutput,
 } from "./commands/DeleteRetentionPolicyCommand";
 import {
+  type DeleteScheduledQueryCommandInput,
+  type DeleteScheduledQueryCommandOutput,
+  DeleteScheduledQueryCommand,
+} from "./commands/DeleteScheduledQueryCommand";
+import {
+  type DeleteSubscriptionFilterCommandInput,
+  type DeleteSubscriptionFilterCommandOutput,
   DeleteSubscriptionFilterCommand,
-  DeleteSubscriptionFilterCommandInput,
-  DeleteSubscriptionFilterCommandOutput,
 } from "./commands/DeleteSubscriptionFilterCommand";
 import {
+  type DeleteSyslogConfigurationCommandInput,
+  type DeleteSyslogConfigurationCommandOutput,
+  DeleteSyslogConfigurationCommand,
+} from "./commands/DeleteSyslogConfigurationCommand";
+import {
+  type DeleteTransformerCommandInput,
+  type DeleteTransformerCommandOutput,
+  DeleteTransformerCommand,
+} from "./commands/DeleteTransformerCommand";
+import {
+  type DescribeAccountPoliciesCommandInput,
+  type DescribeAccountPoliciesCommandOutput,
+  DescribeAccountPoliciesCommand,
+} from "./commands/DescribeAccountPoliciesCommand";
+import {
+  type DescribeConfigurationTemplatesCommandInput,
+  type DescribeConfigurationTemplatesCommandOutput,
+  DescribeConfigurationTemplatesCommand,
+} from "./commands/DescribeConfigurationTemplatesCommand";
+import {
+  type DescribeDeliveriesCommandInput,
+  type DescribeDeliveriesCommandOutput,
+  DescribeDeliveriesCommand,
+} from "./commands/DescribeDeliveriesCommand";
+import {
+  type DescribeDeliveryDestinationsCommandInput,
+  type DescribeDeliveryDestinationsCommandOutput,
+  DescribeDeliveryDestinationsCommand,
+} from "./commands/DescribeDeliveryDestinationsCommand";
+import {
+  type DescribeDeliverySourcesCommandInput,
+  type DescribeDeliverySourcesCommandOutput,
+  DescribeDeliverySourcesCommand,
+} from "./commands/DescribeDeliverySourcesCommand";
+import {
+  type DescribeDestinationsCommandInput,
+  type DescribeDestinationsCommandOutput,
   DescribeDestinationsCommand,
-  DescribeDestinationsCommandInput,
-  DescribeDestinationsCommandOutput,
 } from "./commands/DescribeDestinationsCommand";
 import {
+  type DescribeExportTasksCommandInput,
+  type DescribeExportTasksCommandOutput,
   DescribeExportTasksCommand,
-  DescribeExportTasksCommandInput,
-  DescribeExportTasksCommandOutput,
 } from "./commands/DescribeExportTasksCommand";
 import {
+  type DescribeFieldIndexesCommandInput,
+  type DescribeFieldIndexesCommandOutput,
+  DescribeFieldIndexesCommand,
+} from "./commands/DescribeFieldIndexesCommand";
+import {
+  type DescribeImportTaskBatchesCommandInput,
+  type DescribeImportTaskBatchesCommandOutput,
+  DescribeImportTaskBatchesCommand,
+} from "./commands/DescribeImportTaskBatchesCommand";
+import {
+  type DescribeImportTasksCommandInput,
+  type DescribeImportTasksCommandOutput,
+  DescribeImportTasksCommand,
+} from "./commands/DescribeImportTasksCommand";
+import {
+  type DescribeIndexPoliciesCommandInput,
+  type DescribeIndexPoliciesCommandOutput,
+  DescribeIndexPoliciesCommand,
+} from "./commands/DescribeIndexPoliciesCommand";
+import {
+  type DescribeLogGroupsCommandInput,
+  type DescribeLogGroupsCommandOutput,
   DescribeLogGroupsCommand,
-  DescribeLogGroupsCommandInput,
-  DescribeLogGroupsCommandOutput,
 } from "./commands/DescribeLogGroupsCommand";
 import {
+  type DescribeLogStreamsCommandInput,
+  type DescribeLogStreamsCommandOutput,
   DescribeLogStreamsCommand,
-  DescribeLogStreamsCommandInput,
-  DescribeLogStreamsCommandOutput,
 } from "./commands/DescribeLogStreamsCommand";
 import {
+  type DescribeLookupTablesCommandInput,
+  type DescribeLookupTablesCommandOutput,
+  DescribeLookupTablesCommand,
+} from "./commands/DescribeLookupTablesCommand";
+import {
+  type DescribeMetricFiltersCommandInput,
+  type DescribeMetricFiltersCommandOutput,
   DescribeMetricFiltersCommand,
-  DescribeMetricFiltersCommandInput,
-  DescribeMetricFiltersCommandOutput,
 } from "./commands/DescribeMetricFiltersCommand";
 import {
+  type DescribeQueriesCommandInput,
+  type DescribeQueriesCommandOutput,
   DescribeQueriesCommand,
-  DescribeQueriesCommandInput,
-  DescribeQueriesCommandOutput,
 } from "./commands/DescribeQueriesCommand";
 import {
+  type DescribeQueryDefinitionsCommandInput,
+  type DescribeQueryDefinitionsCommandOutput,
   DescribeQueryDefinitionsCommand,
-  DescribeQueryDefinitionsCommandInput,
-  DescribeQueryDefinitionsCommandOutput,
 } from "./commands/DescribeQueryDefinitionsCommand";
 import {
+  type DescribeResourcePoliciesCommandInput,
+  type DescribeResourcePoliciesCommandOutput,
   DescribeResourcePoliciesCommand,
-  DescribeResourcePoliciesCommandInput,
-  DescribeResourcePoliciesCommandOutput,
 } from "./commands/DescribeResourcePoliciesCommand";
 import {
+  type DescribeSubscriptionFiltersCommandInput,
+  type DescribeSubscriptionFiltersCommandOutput,
   DescribeSubscriptionFiltersCommand,
-  DescribeSubscriptionFiltersCommandInput,
-  DescribeSubscriptionFiltersCommandOutput,
 } from "./commands/DescribeSubscriptionFiltersCommand";
 import {
+  type DisassociateKmsKeyCommandInput,
+  type DisassociateKmsKeyCommandOutput,
   DisassociateKmsKeyCommand,
-  DisassociateKmsKeyCommandInput,
-  DisassociateKmsKeyCommandOutput,
 } from "./commands/DisassociateKmsKeyCommand";
 import {
+  type DisassociateSourceFromS3TableIntegrationCommandInput,
+  type DisassociateSourceFromS3TableIntegrationCommandOutput,
+  DisassociateSourceFromS3TableIntegrationCommand,
+} from "./commands/DisassociateSourceFromS3TableIntegrationCommand";
+import {
+  type FilterLogEventsCommandInput,
+  type FilterLogEventsCommandOutput,
   FilterLogEventsCommand,
-  FilterLogEventsCommandInput,
-  FilterLogEventsCommandOutput,
 } from "./commands/FilterLogEventsCommand";
 import {
+  type GetDataProtectionPolicyCommandInput,
+  type GetDataProtectionPolicyCommandOutput,
+  GetDataProtectionPolicyCommand,
+} from "./commands/GetDataProtectionPolicyCommand";
+import {
+  type GetDeliveryCommandInput,
+  type GetDeliveryCommandOutput,
+  GetDeliveryCommand,
+} from "./commands/GetDeliveryCommand";
+import {
+  type GetDeliveryDestinationCommandInput,
+  type GetDeliveryDestinationCommandOutput,
+  GetDeliveryDestinationCommand,
+} from "./commands/GetDeliveryDestinationCommand";
+import {
+  type GetDeliveryDestinationPolicyCommandInput,
+  type GetDeliveryDestinationPolicyCommandOutput,
+  GetDeliveryDestinationPolicyCommand,
+} from "./commands/GetDeliveryDestinationPolicyCommand";
+import {
+  type GetDeliverySourceCommandInput,
+  type GetDeliverySourceCommandOutput,
+  GetDeliverySourceCommand,
+} from "./commands/GetDeliverySourceCommand";
+import {
+  type GetIntegrationCommandInput,
+  type GetIntegrationCommandOutput,
+  GetIntegrationCommand,
+} from "./commands/GetIntegrationCommand";
+import {
+  type GetLogAnomalyDetectorCommandInput,
+  type GetLogAnomalyDetectorCommandOutput,
+  GetLogAnomalyDetectorCommand,
+} from "./commands/GetLogAnomalyDetectorCommand";
+import {
+  type GetLogEventsCommandInput,
+  type GetLogEventsCommandOutput,
   GetLogEventsCommand,
-  GetLogEventsCommandInput,
-  GetLogEventsCommandOutput,
 } from "./commands/GetLogEventsCommand";
 import {
+  type GetLogFieldsCommandInput,
+  type GetLogFieldsCommandOutput,
+  GetLogFieldsCommand,
+} from "./commands/GetLogFieldsCommand";
+import {
+  type GetLogGroupFieldsCommandInput,
+  type GetLogGroupFieldsCommandOutput,
   GetLogGroupFieldsCommand,
-  GetLogGroupFieldsCommandInput,
-  GetLogGroupFieldsCommandOutput,
 } from "./commands/GetLogGroupFieldsCommand";
 import {
+  type GetLogObjectCommandInput,
+  type GetLogObjectCommandOutput,
+  GetLogObjectCommand,
+} from "./commands/GetLogObjectCommand";
+import {
+  type GetLogRecordCommandInput,
+  type GetLogRecordCommandOutput,
   GetLogRecordCommand,
-  GetLogRecordCommandInput,
-  GetLogRecordCommandOutput,
 } from "./commands/GetLogRecordCommand";
 import {
+  type GetLookupTableCommandInput,
+  type GetLookupTableCommandOutput,
+  GetLookupTableCommand,
+} from "./commands/GetLookupTableCommand";
+import {
+  type GetQueryResultsCommandInput,
+  type GetQueryResultsCommandOutput,
   GetQueryResultsCommand,
-  GetQueryResultsCommandInput,
-  GetQueryResultsCommandOutput,
 } from "./commands/GetQueryResultsCommand";
 import {
+  type GetScheduledQueryCommandInput,
+  type GetScheduledQueryCommandOutput,
+  GetScheduledQueryCommand,
+} from "./commands/GetScheduledQueryCommand";
+import {
+  type GetScheduledQueryHistoryCommandInput,
+  type GetScheduledQueryHistoryCommandOutput,
+  GetScheduledQueryHistoryCommand,
+} from "./commands/GetScheduledQueryHistoryCommand";
+import {
+  type GetStorageTierPolicyCommandInput,
+  type GetStorageTierPolicyCommandOutput,
+  GetStorageTierPolicyCommand,
+} from "./commands/GetStorageTierPolicyCommand";
+import {
+  type GetTransformerCommandInput,
+  type GetTransformerCommandOutput,
+  GetTransformerCommand,
+} from "./commands/GetTransformerCommand";
+import {
+  type ListAggregateLogGroupSummariesCommandInput,
+  type ListAggregateLogGroupSummariesCommandOutput,
+  ListAggregateLogGroupSummariesCommand,
+} from "./commands/ListAggregateLogGroupSummariesCommand";
+import {
+  type ListAnomaliesCommandInput,
+  type ListAnomaliesCommandOutput,
+  ListAnomaliesCommand,
+} from "./commands/ListAnomaliesCommand";
+import {
+  type ListIntegrationsCommandInput,
+  type ListIntegrationsCommandOutput,
+  ListIntegrationsCommand,
+} from "./commands/ListIntegrationsCommand";
+import {
+  type ListLogAnomalyDetectorsCommandInput,
+  type ListLogAnomalyDetectorsCommandOutput,
+  ListLogAnomalyDetectorsCommand,
+} from "./commands/ListLogAnomalyDetectorsCommand";
+import {
+  type ListLogGroupsCommandInput,
+  type ListLogGroupsCommandOutput,
+  ListLogGroupsCommand,
+} from "./commands/ListLogGroupsCommand";
+import {
+  type ListLogGroupsForQueryCommandInput,
+  type ListLogGroupsForQueryCommandOutput,
+  ListLogGroupsForQueryCommand,
+} from "./commands/ListLogGroupsForQueryCommand";
+import {
+  type ListScheduledQueriesCommandInput,
+  type ListScheduledQueriesCommandOutput,
+  ListScheduledQueriesCommand,
+} from "./commands/ListScheduledQueriesCommand";
+import {
+  type ListSourcesForS3TableIntegrationCommandInput,
+  type ListSourcesForS3TableIntegrationCommandOutput,
+  ListSourcesForS3TableIntegrationCommand,
+} from "./commands/ListSourcesForS3TableIntegrationCommand";
+import {
+  type ListSyslogConfigurationsCommandInput,
+  type ListSyslogConfigurationsCommandOutput,
+  ListSyslogConfigurationsCommand,
+} from "./commands/ListSyslogConfigurationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTagsLogGroupCommandInput,
+  type ListTagsLogGroupCommandOutput,
   ListTagsLogGroupCommand,
-  ListTagsLogGroupCommandInput,
-  ListTagsLogGroupCommandOutput,
 } from "./commands/ListTagsLogGroupCommand";
 import {
+  type PutAccountPolicyCommandInput,
+  type PutAccountPolicyCommandOutput,
+  PutAccountPolicyCommand,
+} from "./commands/PutAccountPolicyCommand";
+import {
+  type PutBearerTokenAuthenticationCommandInput,
+  type PutBearerTokenAuthenticationCommandOutput,
+  PutBearerTokenAuthenticationCommand,
+} from "./commands/PutBearerTokenAuthenticationCommand";
+import {
+  type PutDataProtectionPolicyCommandInput,
+  type PutDataProtectionPolicyCommandOutput,
+  PutDataProtectionPolicyCommand,
+} from "./commands/PutDataProtectionPolicyCommand";
+import {
+  type PutDeliveryDestinationCommandInput,
+  type PutDeliveryDestinationCommandOutput,
+  PutDeliveryDestinationCommand,
+} from "./commands/PutDeliveryDestinationCommand";
+import {
+  type PutDeliveryDestinationPolicyCommandInput,
+  type PutDeliveryDestinationPolicyCommandOutput,
+  PutDeliveryDestinationPolicyCommand,
+} from "./commands/PutDeliveryDestinationPolicyCommand";
+import {
+  type PutDeliverySourceCommandInput,
+  type PutDeliverySourceCommandOutput,
+  PutDeliverySourceCommand,
+} from "./commands/PutDeliverySourceCommand";
+import {
+  type PutDestinationCommandInput,
+  type PutDestinationCommandOutput,
   PutDestinationCommand,
-  PutDestinationCommandInput,
-  PutDestinationCommandOutput,
 } from "./commands/PutDestinationCommand";
 import {
+  type PutDestinationPolicyCommandInput,
+  type PutDestinationPolicyCommandOutput,
   PutDestinationPolicyCommand,
-  PutDestinationPolicyCommandInput,
-  PutDestinationPolicyCommandOutput,
 } from "./commands/PutDestinationPolicyCommand";
 import {
+  type PutIndexPolicyCommandInput,
+  type PutIndexPolicyCommandOutput,
+  PutIndexPolicyCommand,
+} from "./commands/PutIndexPolicyCommand";
+import {
+  type PutIntegrationCommandInput,
+  type PutIntegrationCommandOutput,
+  PutIntegrationCommand,
+} from "./commands/PutIntegrationCommand";
+import {
+  type PutLogEventsCommandInput,
+  type PutLogEventsCommandOutput,
   PutLogEventsCommand,
-  PutLogEventsCommandInput,
-  PutLogEventsCommandOutput,
 } from "./commands/PutLogEventsCommand";
 import {
+  type PutLogGroupDeletionProtectionCommandInput,
+  type PutLogGroupDeletionProtectionCommandOutput,
+  PutLogGroupDeletionProtectionCommand,
+} from "./commands/PutLogGroupDeletionProtectionCommand";
+import {
+  type PutMetricFilterCommandInput,
+  type PutMetricFilterCommandOutput,
   PutMetricFilterCommand,
-  PutMetricFilterCommandInput,
-  PutMetricFilterCommandOutput,
 } from "./commands/PutMetricFilterCommand";
 import {
+  type PutQueryDefinitionCommandInput,
+  type PutQueryDefinitionCommandOutput,
   PutQueryDefinitionCommand,
-  PutQueryDefinitionCommandInput,
-  PutQueryDefinitionCommandOutput,
 } from "./commands/PutQueryDefinitionCommand";
 import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
   PutResourcePolicyCommand,
-  PutResourcePolicyCommandInput,
-  PutResourcePolicyCommandOutput,
 } from "./commands/PutResourcePolicyCommand";
 import {
+  type PutRetentionPolicyCommandInput,
+  type PutRetentionPolicyCommandOutput,
   PutRetentionPolicyCommand,
-  PutRetentionPolicyCommandInput,
-  PutRetentionPolicyCommandOutput,
 } from "./commands/PutRetentionPolicyCommand";
 import {
-  PutSubscriptionFilterCommand,
-  PutSubscriptionFilterCommandInput,
-  PutSubscriptionFilterCommandOutput,
-} from "./commands/PutSubscriptionFilterCommand";
-import { StartQueryCommand, StartQueryCommandInput, StartQueryCommandOutput } from "./commands/StartQueryCommand";
-import { StopQueryCommand, StopQueryCommandInput, StopQueryCommandOutput } from "./commands/StopQueryCommand";
-import { TagLogGroupCommand, TagLogGroupCommandInput, TagLogGroupCommandOutput } from "./commands/TagLogGroupCommand";
+  type PutStorageTierPolicyCommandInput,
+  type PutStorageTierPolicyCommandOutput,
+  PutStorageTierPolicyCommand,
+} from "./commands/PutStorageTierPolicyCommand";
 import {
+  type PutSubscriptionFilterCommandInput,
+  type PutSubscriptionFilterCommandOutput,
+  PutSubscriptionFilterCommand,
+} from "./commands/PutSubscriptionFilterCommand";
+import {
+  type PutSyslogConfigurationCommandInput,
+  type PutSyslogConfigurationCommandOutput,
+  PutSyslogConfigurationCommand,
+} from "./commands/PutSyslogConfigurationCommand";
+import {
+  type PutTransformerCommandInput,
+  type PutTransformerCommandOutput,
+  PutTransformerCommand,
+} from "./commands/PutTransformerCommand";
+import {
+  type StartLiveTailCommandInput,
+  type StartLiveTailCommandOutput,
+  StartLiveTailCommand,
+} from "./commands/StartLiveTailCommand";
+import {
+  type StartQueryCommandInput,
+  type StartQueryCommandOutput,
+  StartQueryCommand,
+} from "./commands/StartQueryCommand";
+import { type StopQueryCommandInput, type StopQueryCommandOutput, StopQueryCommand } from "./commands/StopQueryCommand";
+import {
+  type TagLogGroupCommandInput,
+  type TagLogGroupCommandOutput,
+  TagLogGroupCommand,
+} from "./commands/TagLogGroupCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TestMetricFilterCommandInput,
+  type TestMetricFilterCommandOutput,
   TestMetricFilterCommand,
-  TestMetricFilterCommandInput,
-  TestMetricFilterCommandOutput,
 } from "./commands/TestMetricFilterCommand";
 import {
+  type TestTransformerCommandInput,
+  type TestTransformerCommandOutput,
+  TestTransformerCommand,
+} from "./commands/TestTransformerCommand";
+import {
+  type UntagLogGroupCommandInput,
+  type UntagLogGroupCommandOutput,
   UntagLogGroupCommand,
-  UntagLogGroupCommandInput,
-  UntagLogGroupCommandOutput,
 } from "./commands/UntagLogGroupCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAnomalyCommandInput,
+  type UpdateAnomalyCommandOutput,
+  UpdateAnomalyCommand,
+} from "./commands/UpdateAnomalyCommand";
+import {
+  type UpdateDeliveryConfigurationCommandInput,
+  type UpdateDeliveryConfigurationCommandOutput,
+  UpdateDeliveryConfigurationCommand,
+} from "./commands/UpdateDeliveryConfigurationCommand";
+import {
+  type UpdateLogAnomalyDetectorCommandInput,
+  type UpdateLogAnomalyDetectorCommandOutput,
+  UpdateLogAnomalyDetectorCommand,
+} from "./commands/UpdateLogAnomalyDetectorCommand";
+import {
+  type UpdateLookupTableCommandInput,
+  type UpdateLookupTableCommandOutput,
+  UpdateLookupTableCommand,
+} from "./commands/UpdateLookupTableCommand";
+import {
+  type UpdateScheduledQueryCommandInput,
+  type UpdateScheduledQueryCommandOutput,
+  UpdateScheduledQueryCommand,
+} from "./commands/UpdateScheduledQueryCommand";
+import { paginateDescribeConfigurationTemplates } from "./pagination/DescribeConfigurationTemplatesPaginator";
+import { paginateDescribeDeliveries } from "./pagination/DescribeDeliveriesPaginator";
+import { paginateDescribeDeliveryDestinations } from "./pagination/DescribeDeliveryDestinationsPaginator";
+import { paginateDescribeDeliverySources } from "./pagination/DescribeDeliverySourcesPaginator";
+import { paginateDescribeDestinations } from "./pagination/DescribeDestinationsPaginator";
+import { paginateDescribeLogGroups } from "./pagination/DescribeLogGroupsPaginator";
+import { paginateDescribeLogStreams } from "./pagination/DescribeLogStreamsPaginator";
+import { paginateDescribeMetricFilters } from "./pagination/DescribeMetricFiltersPaginator";
+import { paginateDescribeSubscriptionFilters } from "./pagination/DescribeSubscriptionFiltersPaginator";
+import { paginateFilterLogEvents } from "./pagination/FilterLogEventsPaginator";
+import { paginateGetLogEvents } from "./pagination/GetLogEventsPaginator";
+import { paginateGetScheduledQueryHistory } from "./pagination/GetScheduledQueryHistoryPaginator";
+import { paginateListAggregateLogGroupSummaries } from "./pagination/ListAggregateLogGroupSummariesPaginator";
+import { paginateListAnomalies } from "./pagination/ListAnomaliesPaginator";
+import { paginateListLogAnomalyDetectors } from "./pagination/ListLogAnomalyDetectorsPaginator";
+import { paginateListLogGroupsForQuery } from "./pagination/ListLogGroupsForQueryPaginator";
+import { paginateListScheduledQueries } from "./pagination/ListScheduledQueriesPaginator";
+import { paginateListSourcesForS3TableIntegration } from "./pagination/ListSourcesForS3TableIntegrationPaginator";
+
+const commands = {
+  AssociateKmsKeyCommand,
+  AssociateSourceToS3TableIntegrationCommand,
+  CancelExportTaskCommand,
+  CancelImportTaskCommand,
+  CreateDeliveryCommand,
+  CreateExportTaskCommand,
+  CreateImportTaskCommand,
+  CreateLogAnomalyDetectorCommand,
+  CreateLogGroupCommand,
+  CreateLogStreamCommand,
+  CreateLookupTableCommand,
+  CreateScheduledQueryCommand,
+  DeleteAccountPolicyCommand,
+  DeleteDataProtectionPolicyCommand,
+  DeleteDeliveryCommand,
+  DeleteDeliveryDestinationCommand,
+  DeleteDeliveryDestinationPolicyCommand,
+  DeleteDeliverySourceCommand,
+  DeleteDestinationCommand,
+  DeleteIndexPolicyCommand,
+  DeleteIntegrationCommand,
+  DeleteLogAnomalyDetectorCommand,
+  DeleteLogGroupCommand,
+  DeleteLogStreamCommand,
+  DeleteLookupTableCommand,
+  DeleteMetricFilterCommand,
+  DeleteQueryDefinitionCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRetentionPolicyCommand,
+  DeleteScheduledQueryCommand,
+  DeleteSubscriptionFilterCommand,
+  DeleteSyslogConfigurationCommand,
+  DeleteTransformerCommand,
+  DescribeAccountPoliciesCommand,
+  DescribeConfigurationTemplatesCommand,
+  DescribeDeliveriesCommand,
+  DescribeDeliveryDestinationsCommand,
+  DescribeDeliverySourcesCommand,
+  DescribeDestinationsCommand,
+  DescribeExportTasksCommand,
+  DescribeFieldIndexesCommand,
+  DescribeImportTaskBatchesCommand,
+  DescribeImportTasksCommand,
+  DescribeIndexPoliciesCommand,
+  DescribeLogGroupsCommand,
+  DescribeLogStreamsCommand,
+  DescribeLookupTablesCommand,
+  DescribeMetricFiltersCommand,
+  DescribeQueriesCommand,
+  DescribeQueryDefinitionsCommand,
+  DescribeResourcePoliciesCommand,
+  DescribeSubscriptionFiltersCommand,
+  DisassociateKmsKeyCommand,
+  DisassociateSourceFromS3TableIntegrationCommand,
+  FilterLogEventsCommand,
+  GetDataProtectionPolicyCommand,
+  GetDeliveryCommand,
+  GetDeliveryDestinationCommand,
+  GetDeliveryDestinationPolicyCommand,
+  GetDeliverySourceCommand,
+  GetIntegrationCommand,
+  GetLogAnomalyDetectorCommand,
+  GetLogEventsCommand,
+  GetLogFieldsCommand,
+  GetLogGroupFieldsCommand,
+  GetLogObjectCommand,
+  GetLogRecordCommand,
+  GetLookupTableCommand,
+  GetQueryResultsCommand,
+  GetScheduledQueryCommand,
+  GetScheduledQueryHistoryCommand,
+  GetStorageTierPolicyCommand,
+  GetTransformerCommand,
+  ListAggregateLogGroupSummariesCommand,
+  ListAnomaliesCommand,
+  ListIntegrationsCommand,
+  ListLogAnomalyDetectorsCommand,
+  ListLogGroupsCommand,
+  ListLogGroupsForQueryCommand,
+  ListScheduledQueriesCommand,
+  ListSourcesForS3TableIntegrationCommand,
+  ListSyslogConfigurationsCommand,
+  ListTagsForResourceCommand,
+  ListTagsLogGroupCommand,
+  PutAccountPolicyCommand,
+  PutBearerTokenAuthenticationCommand,
+  PutDataProtectionPolicyCommand,
+  PutDeliveryDestinationCommand,
+  PutDeliveryDestinationPolicyCommand,
+  PutDeliverySourceCommand,
+  PutDestinationCommand,
+  PutDestinationPolicyCommand,
+  PutIndexPolicyCommand,
+  PutIntegrationCommand,
+  PutLogEventsCommand,
+  PutLogGroupDeletionProtectionCommand,
+  PutMetricFilterCommand,
+  PutQueryDefinitionCommand,
+  PutResourcePolicyCommand,
+  PutRetentionPolicyCommand,
+  PutStorageTierPolicyCommand,
+  PutSubscriptionFilterCommand,
+  PutSyslogConfigurationCommand,
+  PutTransformerCommand,
+  StartLiveTailCommand,
+  StartQueryCommand,
+  StopQueryCommand,
+  TagLogGroupCommand,
+  TagResourceCommand,
+  TestMetricFilterCommand,
+  TestTransformerCommand,
+  UntagLogGroupCommand,
+  UntagResourceCommand,
+  UpdateAnomalyCommand,
+  UpdateDeliveryConfigurationCommand,
+  UpdateLogAnomalyDetectorCommand,
+  UpdateLookupTableCommand,
+  UpdateScheduledQueryCommand,
+};
+const paginators = {
+  paginateDescribeConfigurationTemplates,
+  paginateDescribeDeliveries,
+  paginateDescribeDeliveryDestinations,
+  paginateDescribeDeliverySources,
+  paginateDescribeDestinations,
+  paginateDescribeLogGroups,
+  paginateDescribeLogStreams,
+  paginateDescribeMetricFilters,
+  paginateDescribeSubscriptionFilters,
+  paginateFilterLogEvents,
+  paginateGetLogEvents,
+  paginateGetScheduledQueryHistory,
+  paginateListAggregateLogGroupSummaries,
+  paginateListAnomalies,
+  paginateListLogAnomalyDetectors,
+  paginateListLogGroupsForQuery,
+  paginateListScheduledQueries,
+  paginateListSourcesForS3TableIntegration,
+};
+
+/**
+ * @public
+ */
+export interface CloudWatchLogsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CloudWatchLogs {
+  /**
+   * @see {@link AssociateKmsKeyCommand}
+   */
+  associateKmsKey(
+    args: AssociateKmsKeyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<AssociateKmsKeyCommandOutput>;
+  associateKmsKey(
+    args: AssociateKmsKeyCommandInput,
+    cb: (err: any, data?: AssociateKmsKeyCommandOutput) => void
+  ): void;
+  associateKmsKey(
+    args: AssociateKmsKeyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: AssociateKmsKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateSourceToS3TableIntegrationCommand}
+   */
+  associateSourceToS3TableIntegration(
+    args: AssociateSourceToS3TableIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<AssociateSourceToS3TableIntegrationCommandOutput>;
+  associateSourceToS3TableIntegration(
+    args: AssociateSourceToS3TableIntegrationCommandInput,
+    cb: (err: any, data?: AssociateSourceToS3TableIntegrationCommandOutput) => void
+  ): void;
+  associateSourceToS3TableIntegration(
+    args: AssociateSourceToS3TableIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: AssociateSourceToS3TableIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelExportTaskCommand}
+   */
+  cancelExportTask(
+    args: CancelExportTaskCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CancelExportTaskCommandOutput>;
+  cancelExportTask(
+    args: CancelExportTaskCommandInput,
+    cb: (err: any, data?: CancelExportTaskCommandOutput) => void
+  ): void;
+  cancelExportTask(
+    args: CancelExportTaskCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CancelExportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelImportTaskCommand}
+   */
+  cancelImportTask(
+    args: CancelImportTaskCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CancelImportTaskCommandOutput>;
+  cancelImportTask(
+    args: CancelImportTaskCommandInput,
+    cb: (err: any, data?: CancelImportTaskCommandOutput) => void
+  ): void;
+  cancelImportTask(
+    args: CancelImportTaskCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CancelImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDeliveryCommand}
+   */
+  createDelivery(
+    args: CreateDeliveryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateDeliveryCommandOutput>;
+  createDelivery(
+    args: CreateDeliveryCommandInput,
+    cb: (err: any, data?: CreateDeliveryCommandOutput) => void
+  ): void;
+  createDelivery(
+    args: CreateDeliveryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateDeliveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateExportTaskCommand}
+   */
+  createExportTask(
+    args: CreateExportTaskCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateExportTaskCommandOutput>;
+  createExportTask(
+    args: CreateExportTaskCommandInput,
+    cb: (err: any, data?: CreateExportTaskCommandOutput) => void
+  ): void;
+  createExportTask(
+    args: CreateExportTaskCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateExportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateImportTaskCommand}
+   */
+  createImportTask(
+    args: CreateImportTaskCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateImportTaskCommandOutput>;
+  createImportTask(
+    args: CreateImportTaskCommandInput,
+    cb: (err: any, data?: CreateImportTaskCommandOutput) => void
+  ): void;
+  createImportTask(
+    args: CreateImportTaskCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLogAnomalyDetectorCommand}
+   */
+  createLogAnomalyDetector(
+    args: CreateLogAnomalyDetectorCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateLogAnomalyDetectorCommandOutput>;
+  createLogAnomalyDetector(
+    args: CreateLogAnomalyDetectorCommandInput,
+    cb: (err: any, data?: CreateLogAnomalyDetectorCommandOutput) => void
+  ): void;
+  createLogAnomalyDetector(
+    args: CreateLogAnomalyDetectorCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateLogAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLogGroupCommand}
+   */
+  createLogGroup(
+    args: CreateLogGroupCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateLogGroupCommandOutput>;
+  createLogGroup(
+    args: CreateLogGroupCommandInput,
+    cb: (err: any, data?: CreateLogGroupCommandOutput) => void
+  ): void;
+  createLogGroup(
+    args: CreateLogGroupCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateLogGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLogStreamCommand}
+   */
+  createLogStream(
+    args: CreateLogStreamCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateLogStreamCommandOutput>;
+  createLogStream(
+    args: CreateLogStreamCommandInput,
+    cb: (err: any, data?: CreateLogStreamCommandOutput) => void
+  ): void;
+  createLogStream(
+    args: CreateLogStreamCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateLogStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLookupTableCommand}
+   */
+  createLookupTable(
+    args: CreateLookupTableCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateLookupTableCommandOutput>;
+  createLookupTable(
+    args: CreateLookupTableCommandInput,
+    cb: (err: any, data?: CreateLookupTableCommandOutput) => void
+  ): void;
+  createLookupTable(
+    args: CreateLookupTableCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateLookupTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateScheduledQueryCommand}
+   */
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<CreateScheduledQueryCommandOutput>;
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    cb: (err: any, data?: CreateScheduledQueryCommandOutput) => void
+  ): void;
+  createScheduledQuery(
+    args: CreateScheduledQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: CreateScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountPolicyCommand}
+   */
+  deleteAccountPolicy(
+    args: DeleteAccountPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteAccountPolicyCommandOutput>;
+  deleteAccountPolicy(
+    args: DeleteAccountPolicyCommandInput,
+    cb: (err: any, data?: DeleteAccountPolicyCommandOutput) => void
+  ): void;
+  deleteAccountPolicy(
+    args: DeleteAccountPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteAccountPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataProtectionPolicyCommand}
+   */
+  deleteDataProtectionPolicy(
+    args: DeleteDataProtectionPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDataProtectionPolicyCommandOutput>;
+  deleteDataProtectionPolicy(
+    args: DeleteDataProtectionPolicyCommandInput,
+    cb: (err: any, data?: DeleteDataProtectionPolicyCommandOutput) => void
+  ): void;
+  deleteDataProtectionPolicy(
+    args: DeleteDataProtectionPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDataProtectionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeliveryCommand}
+   */
+  deleteDelivery(
+    args: DeleteDeliveryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDeliveryCommandOutput>;
+  deleteDelivery(
+    args: DeleteDeliveryCommandInput,
+    cb: (err: any, data?: DeleteDeliveryCommandOutput) => void
+  ): void;
+  deleteDelivery(
+    args: DeleteDeliveryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDeliveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeliveryDestinationCommand}
+   */
+  deleteDeliveryDestination(
+    args: DeleteDeliveryDestinationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDeliveryDestinationCommandOutput>;
+  deleteDeliveryDestination(
+    args: DeleteDeliveryDestinationCommandInput,
+    cb: (err: any, data?: DeleteDeliveryDestinationCommandOutput) => void
+  ): void;
+  deleteDeliveryDestination(
+    args: DeleteDeliveryDestinationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDeliveryDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeliveryDestinationPolicyCommand}
+   */
+  deleteDeliveryDestinationPolicy(
+    args: DeleteDeliveryDestinationPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDeliveryDestinationPolicyCommandOutput>;
+  deleteDeliveryDestinationPolicy(
+    args: DeleteDeliveryDestinationPolicyCommandInput,
+    cb: (err: any, data?: DeleteDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+  deleteDeliveryDestinationPolicy(
+    args: DeleteDeliveryDestinationPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeliverySourceCommand}
+   */
+  deleteDeliverySource(
+    args: DeleteDeliverySourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDeliverySourceCommandOutput>;
+  deleteDeliverySource(
+    args: DeleteDeliverySourceCommandInput,
+    cb: (err: any, data?: DeleteDeliverySourceCommandOutput) => void
+  ): void;
+  deleteDeliverySource(
+    args: DeleteDeliverySourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDeliverySourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDestinationCommand}
+   */
+  deleteDestination(
+    args: DeleteDestinationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteDestinationCommandOutput>;
+  deleteDestination(
+    args: DeleteDestinationCommandInput,
+    cb: (err: any, data?: DeleteDestinationCommandOutput) => void
+  ): void;
+  deleteDestination(
+    args: DeleteDestinationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIndexPolicyCommand}
+   */
+  deleteIndexPolicy(
+    args: DeleteIndexPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteIndexPolicyCommandOutput>;
+  deleteIndexPolicy(
+    args: DeleteIndexPolicyCommandInput,
+    cb: (err: any, data?: DeleteIndexPolicyCommandOutput) => void
+  ): void;
+  deleteIndexPolicy(
+    args: DeleteIndexPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteIndexPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIntegrationCommand}
+   */
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteIntegrationCommandOutput>;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+  deleteIntegration(
+    args: DeleteIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLogAnomalyDetectorCommand}
+   */
+  deleteLogAnomalyDetector(
+    args: DeleteLogAnomalyDetectorCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteLogAnomalyDetectorCommandOutput>;
+  deleteLogAnomalyDetector(
+    args: DeleteLogAnomalyDetectorCommandInput,
+    cb: (err: any, data?: DeleteLogAnomalyDetectorCommandOutput) => void
+  ): void;
+  deleteLogAnomalyDetector(
+    args: DeleteLogAnomalyDetectorCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteLogAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLogGroupCommand}
+   */
+  deleteLogGroup(
+    args: DeleteLogGroupCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteLogGroupCommandOutput>;
+  deleteLogGroup(
+    args: DeleteLogGroupCommandInput,
+    cb: (err: any, data?: DeleteLogGroupCommandOutput) => void
+  ): void;
+  deleteLogGroup(
+    args: DeleteLogGroupCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteLogGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLogStreamCommand}
+   */
+  deleteLogStream(
+    args: DeleteLogStreamCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteLogStreamCommandOutput>;
+  deleteLogStream(
+    args: DeleteLogStreamCommandInput,
+    cb: (err: any, data?: DeleteLogStreamCommandOutput) => void
+  ): void;
+  deleteLogStream(
+    args: DeleteLogStreamCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteLogStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLookupTableCommand}
+   */
+  deleteLookupTable(
+    args: DeleteLookupTableCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteLookupTableCommandOutput>;
+  deleteLookupTable(
+    args: DeleteLookupTableCommandInput,
+    cb: (err: any, data?: DeleteLookupTableCommandOutput) => void
+  ): void;
+  deleteLookupTable(
+    args: DeleteLookupTableCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteLookupTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMetricFilterCommand}
+   */
+  deleteMetricFilter(
+    args: DeleteMetricFilterCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteMetricFilterCommandOutput>;
+  deleteMetricFilter(
+    args: DeleteMetricFilterCommandInput,
+    cb: (err: any, data?: DeleteMetricFilterCommandOutput) => void
+  ): void;
+  deleteMetricFilter(
+    args: DeleteMetricFilterCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteMetricFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQueryDefinitionCommand}
+   */
+  deleteQueryDefinition(
+    args: DeleteQueryDefinitionCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteQueryDefinitionCommandOutput>;
+  deleteQueryDefinition(
+    args: DeleteQueryDefinitionCommandInput,
+    cb: (err: any, data?: DeleteQueryDefinitionCommandOutput) => void
+  ): void;
+  deleteQueryDefinition(
+    args: DeleteQueryDefinitionCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteQueryDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRetentionPolicyCommand}
+   */
+  deleteRetentionPolicy(
+    args: DeleteRetentionPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteRetentionPolicyCommandOutput>;
+  deleteRetentionPolicy(
+    args: DeleteRetentionPolicyCommandInput,
+    cb: (err: any, data?: DeleteRetentionPolicyCommandOutput) => void
+  ): void;
+  deleteRetentionPolicy(
+    args: DeleteRetentionPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteRetentionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteScheduledQueryCommand}
+   */
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteScheduledQueryCommandOutput>;
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    cb: (err: any, data?: DeleteScheduledQueryCommandOutput) => void
+  ): void;
+  deleteScheduledQuery(
+    args: DeleteScheduledQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSubscriptionFilterCommand}
+   */
+  deleteSubscriptionFilter(
+    args: DeleteSubscriptionFilterCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteSubscriptionFilterCommandOutput>;
+  deleteSubscriptionFilter(
+    args: DeleteSubscriptionFilterCommandInput,
+    cb: (err: any, data?: DeleteSubscriptionFilterCommandOutput) => void
+  ): void;
+  deleteSubscriptionFilter(
+    args: DeleteSubscriptionFilterCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteSubscriptionFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSyslogConfigurationCommand}
+   */
+  deleteSyslogConfiguration(
+    args: DeleteSyslogConfigurationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteSyslogConfigurationCommandOutput>;
+  deleteSyslogConfiguration(
+    args: DeleteSyslogConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSyslogConfigurationCommandOutput) => void
+  ): void;
+  deleteSyslogConfiguration(
+    args: DeleteSyslogConfigurationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteSyslogConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTransformerCommand}
+   */
+  deleteTransformer(
+    args: DeleteTransformerCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DeleteTransformerCommandOutput>;
+  deleteTransformer(
+    args: DeleteTransformerCommandInput,
+    cb: (err: any, data?: DeleteTransformerCommandOutput) => void
+  ): void;
+  deleteTransformer(
+    args: DeleteTransformerCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DeleteTransformerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountPoliciesCommand}
+   */
+  describeAccountPolicies(
+    args: DescribeAccountPoliciesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeAccountPoliciesCommandOutput>;
+  describeAccountPolicies(
+    args: DescribeAccountPoliciesCommandInput,
+    cb: (err: any, data?: DescribeAccountPoliciesCommandOutput) => void
+  ): void;
+  describeAccountPolicies(
+    args: DescribeAccountPoliciesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeAccountPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConfigurationTemplatesCommand}
+   */
+  describeConfigurationTemplates(): Promise<DescribeConfigurationTemplatesCommandOutput>;
+  describeConfigurationTemplates(
+    args: DescribeConfigurationTemplatesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeConfigurationTemplatesCommandOutput>;
+  describeConfigurationTemplates(
+    args: DescribeConfigurationTemplatesCommandInput,
+    cb: (err: any, data?: DescribeConfigurationTemplatesCommandOutput) => void
+  ): void;
+  describeConfigurationTemplates(
+    args: DescribeConfigurationTemplatesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeConfigurationTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDeliveriesCommand}
+   */
+  describeDeliveries(): Promise<DescribeDeliveriesCommandOutput>;
+  describeDeliveries(
+    args: DescribeDeliveriesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeDeliveriesCommandOutput>;
+  describeDeliveries(
+    args: DescribeDeliveriesCommandInput,
+    cb: (err: any, data?: DescribeDeliveriesCommandOutput) => void
+  ): void;
+  describeDeliveries(
+    args: DescribeDeliveriesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeDeliveriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDeliveryDestinationsCommand}
+   */
+  describeDeliveryDestinations(): Promise<DescribeDeliveryDestinationsCommandOutput>;
+  describeDeliveryDestinations(
+    args: DescribeDeliveryDestinationsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeDeliveryDestinationsCommandOutput>;
+  describeDeliveryDestinations(
+    args: DescribeDeliveryDestinationsCommandInput,
+    cb: (err: any, data?: DescribeDeliveryDestinationsCommandOutput) => void
+  ): void;
+  describeDeliveryDestinations(
+    args: DescribeDeliveryDestinationsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeDeliveryDestinationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDeliverySourcesCommand}
+   */
+  describeDeliverySources(): Promise<DescribeDeliverySourcesCommandOutput>;
+  describeDeliverySources(
+    args: DescribeDeliverySourcesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeDeliverySourcesCommandOutput>;
+  describeDeliverySources(
+    args: DescribeDeliverySourcesCommandInput,
+    cb: (err: any, data?: DescribeDeliverySourcesCommandOutput) => void
+  ): void;
+  describeDeliverySources(
+    args: DescribeDeliverySourcesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeDeliverySourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDestinationsCommand}
+   */
+  describeDestinations(): Promise<DescribeDestinationsCommandOutput>;
+  describeDestinations(
+    args: DescribeDestinationsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeDestinationsCommandOutput>;
+  describeDestinations(
+    args: DescribeDestinationsCommandInput,
+    cb: (err: any, data?: DescribeDestinationsCommandOutput) => void
+  ): void;
+  describeDestinations(
+    args: DescribeDestinationsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeDestinationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeExportTasksCommand}
+   */
+  describeExportTasks(): Promise<DescribeExportTasksCommandOutput>;
+  describeExportTasks(
+    args: DescribeExportTasksCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeExportTasksCommandOutput>;
+  describeExportTasks(
+    args: DescribeExportTasksCommandInput,
+    cb: (err: any, data?: DescribeExportTasksCommandOutput) => void
+  ): void;
+  describeExportTasks(
+    args: DescribeExportTasksCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeExportTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFieldIndexesCommand}
+   */
+  describeFieldIndexes(
+    args: DescribeFieldIndexesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeFieldIndexesCommandOutput>;
+  describeFieldIndexes(
+    args: DescribeFieldIndexesCommandInput,
+    cb: (err: any, data?: DescribeFieldIndexesCommandOutput) => void
+  ): void;
+  describeFieldIndexes(
+    args: DescribeFieldIndexesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeFieldIndexesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeImportTaskBatchesCommand}
+   */
+  describeImportTaskBatches(
+    args: DescribeImportTaskBatchesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeImportTaskBatchesCommandOutput>;
+  describeImportTaskBatches(
+    args: DescribeImportTaskBatchesCommandInput,
+    cb: (err: any, data?: DescribeImportTaskBatchesCommandOutput) => void
+  ): void;
+  describeImportTaskBatches(
+    args: DescribeImportTaskBatchesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeImportTaskBatchesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeImportTasksCommand}
+   */
+  describeImportTasks(): Promise<DescribeImportTasksCommandOutput>;
+  describeImportTasks(
+    args: DescribeImportTasksCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeImportTasksCommandOutput>;
+  describeImportTasks(
+    args: DescribeImportTasksCommandInput,
+    cb: (err: any, data?: DescribeImportTasksCommandOutput) => void
+  ): void;
+  describeImportTasks(
+    args: DescribeImportTasksCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeImportTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeIndexPoliciesCommand}
+   */
+  describeIndexPolicies(
+    args: DescribeIndexPoliciesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeIndexPoliciesCommandOutput>;
+  describeIndexPolicies(
+    args: DescribeIndexPoliciesCommandInput,
+    cb: (err: any, data?: DescribeIndexPoliciesCommandOutput) => void
+  ): void;
+  describeIndexPolicies(
+    args: DescribeIndexPoliciesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeIndexPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLogGroupsCommand}
+   */
+  describeLogGroups(): Promise<DescribeLogGroupsCommandOutput>;
+  describeLogGroups(
+    args: DescribeLogGroupsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeLogGroupsCommandOutput>;
+  describeLogGroups(
+    args: DescribeLogGroupsCommandInput,
+    cb: (err: any, data?: DescribeLogGroupsCommandOutput) => void
+  ): void;
+  describeLogGroups(
+    args: DescribeLogGroupsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeLogGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLogStreamsCommand}
+   */
+  describeLogStreams(): Promise<DescribeLogStreamsCommandOutput>;
+  describeLogStreams(
+    args: DescribeLogStreamsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeLogStreamsCommandOutput>;
+  describeLogStreams(
+    args: DescribeLogStreamsCommandInput,
+    cb: (err: any, data?: DescribeLogStreamsCommandOutput) => void
+  ): void;
+  describeLogStreams(
+    args: DescribeLogStreamsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeLogStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLookupTablesCommand}
+   */
+  describeLookupTables(): Promise<DescribeLookupTablesCommandOutput>;
+  describeLookupTables(
+    args: DescribeLookupTablesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeLookupTablesCommandOutput>;
+  describeLookupTables(
+    args: DescribeLookupTablesCommandInput,
+    cb: (err: any, data?: DescribeLookupTablesCommandOutput) => void
+  ): void;
+  describeLookupTables(
+    args: DescribeLookupTablesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeLookupTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetricFiltersCommand}
+   */
+  describeMetricFilters(): Promise<DescribeMetricFiltersCommandOutput>;
+  describeMetricFilters(
+    args: DescribeMetricFiltersCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeMetricFiltersCommandOutput>;
+  describeMetricFilters(
+    args: DescribeMetricFiltersCommandInput,
+    cb: (err: any, data?: DescribeMetricFiltersCommandOutput) => void
+  ): void;
+  describeMetricFilters(
+    args: DescribeMetricFiltersCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeMetricFiltersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQueriesCommand}
+   */
+  describeQueries(): Promise<DescribeQueriesCommandOutput>;
+  describeQueries(
+    args: DescribeQueriesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeQueriesCommandOutput>;
+  describeQueries(
+    args: DescribeQueriesCommandInput,
+    cb: (err: any, data?: DescribeQueriesCommandOutput) => void
+  ): void;
+  describeQueries(
+    args: DescribeQueriesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeQueriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQueryDefinitionsCommand}
+   */
+  describeQueryDefinitions(): Promise<DescribeQueryDefinitionsCommandOutput>;
+  describeQueryDefinitions(
+    args: DescribeQueryDefinitionsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeQueryDefinitionsCommandOutput>;
+  describeQueryDefinitions(
+    args: DescribeQueryDefinitionsCommandInput,
+    cb: (err: any, data?: DescribeQueryDefinitionsCommandOutput) => void
+  ): void;
+  describeQueryDefinitions(
+    args: DescribeQueryDefinitionsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeQueryDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourcePoliciesCommand}
+   */
+  describeResourcePolicies(): Promise<DescribeResourcePoliciesCommandOutput>;
+  describeResourcePolicies(
+    args: DescribeResourcePoliciesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeResourcePoliciesCommandOutput>;
+  describeResourcePolicies(
+    args: DescribeResourcePoliciesCommandInput,
+    cb: (err: any, data?: DescribeResourcePoliciesCommandOutput) => void
+  ): void;
+  describeResourcePolicies(
+    args: DescribeResourcePoliciesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeResourcePoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSubscriptionFiltersCommand}
+   */
+  describeSubscriptionFilters(
+    args: DescribeSubscriptionFiltersCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DescribeSubscriptionFiltersCommandOutput>;
+  describeSubscriptionFilters(
+    args: DescribeSubscriptionFiltersCommandInput,
+    cb: (err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void
+  ): void;
+  describeSubscriptionFilters(
+    args: DescribeSubscriptionFiltersCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateKmsKeyCommand}
+   */
+  disassociateKmsKey(): Promise<DisassociateKmsKeyCommandOutput>;
+  disassociateKmsKey(
+    args: DisassociateKmsKeyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DisassociateKmsKeyCommandOutput>;
+  disassociateKmsKey(
+    args: DisassociateKmsKeyCommandInput,
+    cb: (err: any, data?: DisassociateKmsKeyCommandOutput) => void
+  ): void;
+  disassociateKmsKey(
+    args: DisassociateKmsKeyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DisassociateKmsKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateSourceFromS3TableIntegrationCommand}
+   */
+  disassociateSourceFromS3TableIntegration(
+    args: DisassociateSourceFromS3TableIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<DisassociateSourceFromS3TableIntegrationCommandOutput>;
+  disassociateSourceFromS3TableIntegration(
+    args: DisassociateSourceFromS3TableIntegrationCommandInput,
+    cb: (err: any, data?: DisassociateSourceFromS3TableIntegrationCommandOutput) => void
+  ): void;
+  disassociateSourceFromS3TableIntegration(
+    args: DisassociateSourceFromS3TableIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: DisassociateSourceFromS3TableIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link FilterLogEventsCommand}
+   */
+  filterLogEvents(): Promise<FilterLogEventsCommandOutput>;
+  filterLogEvents(
+    args: FilterLogEventsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<FilterLogEventsCommandOutput>;
+  filterLogEvents(
+    args: FilterLogEventsCommandInput,
+    cb: (err: any, data?: FilterLogEventsCommandOutput) => void
+  ): void;
+  filterLogEvents(
+    args: FilterLogEventsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: FilterLogEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataProtectionPolicyCommand}
+   */
+  getDataProtectionPolicy(
+    args: GetDataProtectionPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetDataProtectionPolicyCommandOutput>;
+  getDataProtectionPolicy(
+    args: GetDataProtectionPolicyCommandInput,
+    cb: (err: any, data?: GetDataProtectionPolicyCommandOutput) => void
+  ): void;
+  getDataProtectionPolicy(
+    args: GetDataProtectionPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetDataProtectionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeliveryCommand}
+   */
+  getDelivery(
+    args: GetDeliveryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetDeliveryCommandOutput>;
+  getDelivery(
+    args: GetDeliveryCommandInput,
+    cb: (err: any, data?: GetDeliveryCommandOutput) => void
+  ): void;
+  getDelivery(
+    args: GetDeliveryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetDeliveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeliveryDestinationCommand}
+   */
+  getDeliveryDestination(
+    args: GetDeliveryDestinationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetDeliveryDestinationCommandOutput>;
+  getDeliveryDestination(
+    args: GetDeliveryDestinationCommandInput,
+    cb: (err: any, data?: GetDeliveryDestinationCommandOutput) => void
+  ): void;
+  getDeliveryDestination(
+    args: GetDeliveryDestinationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetDeliveryDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeliveryDestinationPolicyCommand}
+   */
+  getDeliveryDestinationPolicy(
+    args: GetDeliveryDestinationPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetDeliveryDestinationPolicyCommandOutput>;
+  getDeliveryDestinationPolicy(
+    args: GetDeliveryDestinationPolicyCommandInput,
+    cb: (err: any, data?: GetDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+  getDeliveryDestinationPolicy(
+    args: GetDeliveryDestinationPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeliverySourceCommand}
+   */
+  getDeliverySource(
+    args: GetDeliverySourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetDeliverySourceCommandOutput>;
+  getDeliverySource(
+    args: GetDeliverySourceCommandInput,
+    cb: (err: any, data?: GetDeliverySourceCommandOutput) => void
+  ): void;
+  getDeliverySource(
+    args: GetDeliverySourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetDeliverySourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIntegrationCommand}
+   */
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetIntegrationCommandOutput>;
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    cb: (err: any, data?: GetIntegrationCommandOutput) => void
+  ): void;
+  getIntegration(
+    args: GetIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogAnomalyDetectorCommand}
+   */
+  getLogAnomalyDetector(
+    args: GetLogAnomalyDetectorCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogAnomalyDetectorCommandOutput>;
+  getLogAnomalyDetector(
+    args: GetLogAnomalyDetectorCommandInput,
+    cb: (err: any, data?: GetLogAnomalyDetectorCommandOutput) => void
+  ): void;
+  getLogAnomalyDetector(
+    args: GetLogAnomalyDetectorCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogEventsCommand}
+   */
+  getLogEvents(
+    args: GetLogEventsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogEventsCommandOutput>;
+  getLogEvents(
+    args: GetLogEventsCommandInput,
+    cb: (err: any, data?: GetLogEventsCommandOutput) => void
+  ): void;
+  getLogEvents(
+    args: GetLogEventsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogFieldsCommand}
+   */
+  getLogFields(
+    args: GetLogFieldsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogFieldsCommandOutput>;
+  getLogFields(
+    args: GetLogFieldsCommandInput,
+    cb: (err: any, data?: GetLogFieldsCommandOutput) => void
+  ): void;
+  getLogFields(
+    args: GetLogFieldsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogFieldsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogGroupFieldsCommand}
+   */
+  getLogGroupFields(): Promise<GetLogGroupFieldsCommandOutput>;
+  getLogGroupFields(
+    args: GetLogGroupFieldsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogGroupFieldsCommandOutput>;
+  getLogGroupFields(
+    args: GetLogGroupFieldsCommandInput,
+    cb: (err: any, data?: GetLogGroupFieldsCommandOutput) => void
+  ): void;
+  getLogGroupFields(
+    args: GetLogGroupFieldsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogGroupFieldsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogObjectCommand}
+   */
+  getLogObject(
+    args: GetLogObjectCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogObjectCommandOutput>;
+  getLogObject(
+    args: GetLogObjectCommandInput,
+    cb: (err: any, data?: GetLogObjectCommandOutput) => void
+  ): void;
+  getLogObject(
+    args: GetLogObjectCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogObjectCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLogRecordCommand}
+   */
+  getLogRecord(
+    args: GetLogRecordCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLogRecordCommandOutput>;
+  getLogRecord(
+    args: GetLogRecordCommandInput,
+    cb: (err: any, data?: GetLogRecordCommandOutput) => void
+  ): void;
+  getLogRecord(
+    args: GetLogRecordCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLogRecordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLookupTableCommand}
+   */
+  getLookupTable(
+    args: GetLookupTableCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetLookupTableCommandOutput>;
+  getLookupTable(
+    args: GetLookupTableCommandInput,
+    cb: (err: any, data?: GetLookupTableCommandOutput) => void
+  ): void;
+  getLookupTable(
+    args: GetLookupTableCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetLookupTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQueryResultsCommand}
+   */
+  getQueryResults(
+    args: GetQueryResultsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetQueryResultsCommandOutput>;
+  getQueryResults(
+    args: GetQueryResultsCommandInput,
+    cb: (err: any, data?: GetQueryResultsCommandOutput) => void
+  ): void;
+  getQueryResults(
+    args: GetQueryResultsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetQueryResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetScheduledQueryCommand}
+   */
+  getScheduledQuery(
+    args: GetScheduledQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetScheduledQueryCommandOutput>;
+  getScheduledQuery(
+    args: GetScheduledQueryCommandInput,
+    cb: (err: any, data?: GetScheduledQueryCommandOutput) => void
+  ): void;
+  getScheduledQuery(
+    args: GetScheduledQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetScheduledQueryHistoryCommand}
+   */
+  getScheduledQueryHistory(
+    args: GetScheduledQueryHistoryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetScheduledQueryHistoryCommandOutput>;
+  getScheduledQueryHistory(
+    args: GetScheduledQueryHistoryCommandInput,
+    cb: (err: any, data?: GetScheduledQueryHistoryCommandOutput) => void
+  ): void;
+  getScheduledQueryHistory(
+    args: GetScheduledQueryHistoryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetScheduledQueryHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStorageTierPolicyCommand}
+   */
+  getStorageTierPolicy(): Promise<GetStorageTierPolicyCommandOutput>;
+  getStorageTierPolicy(
+    args: GetStorageTierPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetStorageTierPolicyCommandOutput>;
+  getStorageTierPolicy(
+    args: GetStorageTierPolicyCommandInput,
+    cb: (err: any, data?: GetStorageTierPolicyCommandOutput) => void
+  ): void;
+  getStorageTierPolicy(
+    args: GetStorageTierPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetStorageTierPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTransformerCommand}
+   */
+  getTransformer(
+    args: GetTransformerCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<GetTransformerCommandOutput>;
+  getTransformer(
+    args: GetTransformerCommandInput,
+    cb: (err: any, data?: GetTransformerCommandOutput) => void
+  ): void;
+  getTransformer(
+    args: GetTransformerCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: GetTransformerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAggregateLogGroupSummariesCommand}
+   */
+  listAggregateLogGroupSummaries(
+    args: ListAggregateLogGroupSummariesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListAggregateLogGroupSummariesCommandOutput>;
+  listAggregateLogGroupSummaries(
+    args: ListAggregateLogGroupSummariesCommandInput,
+    cb: (err: any, data?: ListAggregateLogGroupSummariesCommandOutput) => void
+  ): void;
+  listAggregateLogGroupSummaries(
+    args: ListAggregateLogGroupSummariesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListAggregateLogGroupSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnomaliesCommand}
+   */
+  listAnomalies(): Promise<ListAnomaliesCommandOutput>;
+  listAnomalies(
+    args: ListAnomaliesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListAnomaliesCommandOutput>;
+  listAnomalies(
+    args: ListAnomaliesCommandInput,
+    cb: (err: any, data?: ListAnomaliesCommandOutput) => void
+  ): void;
+  listAnomalies(
+    args: ListAnomaliesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListAnomaliesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntegrationsCommand}
+   */
+  listIntegrations(): Promise<ListIntegrationsCommandOutput>;
+  listIntegrations(
+    args: ListIntegrationsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListIntegrationsCommandOutput>;
+  listIntegrations(
+    args: ListIntegrationsCommandInput,
+    cb: (err: any, data?: ListIntegrationsCommandOutput) => void
+  ): void;
+  listIntegrations(
+    args: ListIntegrationsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLogAnomalyDetectorsCommand}
+   */
+  listLogAnomalyDetectors(): Promise<ListLogAnomalyDetectorsCommandOutput>;
+  listLogAnomalyDetectors(
+    args: ListLogAnomalyDetectorsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListLogAnomalyDetectorsCommandOutput>;
+  listLogAnomalyDetectors(
+    args: ListLogAnomalyDetectorsCommandInput,
+    cb: (err: any, data?: ListLogAnomalyDetectorsCommandOutput) => void
+  ): void;
+  listLogAnomalyDetectors(
+    args: ListLogAnomalyDetectorsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListLogAnomalyDetectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLogGroupsCommand}
+   */
+  listLogGroups(): Promise<ListLogGroupsCommandOutput>;
+  listLogGroups(
+    args: ListLogGroupsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListLogGroupsCommandOutput>;
+  listLogGroups(
+    args: ListLogGroupsCommandInput,
+    cb: (err: any, data?: ListLogGroupsCommandOutput) => void
+  ): void;
+  listLogGroups(
+    args: ListLogGroupsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListLogGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLogGroupsForQueryCommand}
+   */
+  listLogGroupsForQuery(
+    args: ListLogGroupsForQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListLogGroupsForQueryCommandOutput>;
+  listLogGroupsForQuery(
+    args: ListLogGroupsForQueryCommandInput,
+    cb: (err: any, data?: ListLogGroupsForQueryCommandOutput) => void
+  ): void;
+  listLogGroupsForQuery(
+    args: ListLogGroupsForQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListLogGroupsForQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScheduledQueriesCommand}
+   */
+  listScheduledQueries(): Promise<ListScheduledQueriesCommandOutput>;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListScheduledQueriesCommandOutput>;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    cb: (err: any, data?: ListScheduledQueriesCommandOutput) => void
+  ): void;
+  listScheduledQueries(
+    args: ListScheduledQueriesCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListScheduledQueriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSourcesForS3TableIntegrationCommand}
+   */
+  listSourcesForS3TableIntegration(
+    args: ListSourcesForS3TableIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListSourcesForS3TableIntegrationCommandOutput>;
+  listSourcesForS3TableIntegration(
+    args: ListSourcesForS3TableIntegrationCommandInput,
+    cb: (err: any, data?: ListSourcesForS3TableIntegrationCommandOutput) => void
+  ): void;
+  listSourcesForS3TableIntegration(
+    args: ListSourcesForS3TableIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListSourcesForS3TableIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSyslogConfigurationsCommand}
+   */
+  listSyslogConfigurations(): Promise<ListSyslogConfigurationsCommandOutput>;
+  listSyslogConfigurations(
+    args: ListSyslogConfigurationsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListSyslogConfigurationsCommandOutput>;
+  listSyslogConfigurations(
+    args: ListSyslogConfigurationsCommandInput,
+    cb: (err: any, data?: ListSyslogConfigurationsCommandOutput) => void
+  ): void;
+  listSyslogConfigurations(
+    args: ListSyslogConfigurationsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListSyslogConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsLogGroupCommand}
+   */
+  listTagsLogGroup(
+    args: ListTagsLogGroupCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<ListTagsLogGroupCommandOutput>;
+  listTagsLogGroup(
+    args: ListTagsLogGroupCommandInput,
+    cb: (err: any, data?: ListTagsLogGroupCommandOutput) => void
+  ): void;
+  listTagsLogGroup(
+    args: ListTagsLogGroupCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: ListTagsLogGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAccountPolicyCommand}
+   */
+  putAccountPolicy(
+    args: PutAccountPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutAccountPolicyCommandOutput>;
+  putAccountPolicy(
+    args: PutAccountPolicyCommandInput,
+    cb: (err: any, data?: PutAccountPolicyCommandOutput) => void
+  ): void;
+  putAccountPolicy(
+    args: PutAccountPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutAccountPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutBearerTokenAuthenticationCommand}
+   */
+  putBearerTokenAuthentication(
+    args: PutBearerTokenAuthenticationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutBearerTokenAuthenticationCommandOutput>;
+  putBearerTokenAuthentication(
+    args: PutBearerTokenAuthenticationCommandInput,
+    cb: (err: any, data?: PutBearerTokenAuthenticationCommandOutput) => void
+  ): void;
+  putBearerTokenAuthentication(
+    args: PutBearerTokenAuthenticationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutBearerTokenAuthenticationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataProtectionPolicyCommand}
+   */
+  putDataProtectionPolicy(
+    args: PutDataProtectionPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDataProtectionPolicyCommandOutput>;
+  putDataProtectionPolicy(
+    args: PutDataProtectionPolicyCommandInput,
+    cb: (err: any, data?: PutDataProtectionPolicyCommandOutput) => void
+  ): void;
+  putDataProtectionPolicy(
+    args: PutDataProtectionPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDataProtectionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDeliveryDestinationCommand}
+   */
+  putDeliveryDestination(
+    args: PutDeliveryDestinationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDeliveryDestinationCommandOutput>;
+  putDeliveryDestination(
+    args: PutDeliveryDestinationCommandInput,
+    cb: (err: any, data?: PutDeliveryDestinationCommandOutput) => void
+  ): void;
+  putDeliveryDestination(
+    args: PutDeliveryDestinationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDeliveryDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDeliveryDestinationPolicyCommand}
+   */
+  putDeliveryDestinationPolicy(
+    args: PutDeliveryDestinationPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDeliveryDestinationPolicyCommandOutput>;
+  putDeliveryDestinationPolicy(
+    args: PutDeliveryDestinationPolicyCommandInput,
+    cb: (err: any, data?: PutDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+  putDeliveryDestinationPolicy(
+    args: PutDeliveryDestinationPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDeliveryDestinationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDeliverySourceCommand}
+   */
+  putDeliverySource(
+    args: PutDeliverySourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDeliverySourceCommandOutput>;
+  putDeliverySource(
+    args: PutDeliverySourceCommandInput,
+    cb: (err: any, data?: PutDeliverySourceCommandOutput) => void
+  ): void;
+  putDeliverySource(
+    args: PutDeliverySourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDeliverySourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDestinationCommand}
+   */
+  putDestination(
+    args: PutDestinationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDestinationCommandOutput>;
+  putDestination(
+    args: PutDestinationCommandInput,
+    cb: (err: any, data?: PutDestinationCommandOutput) => void
+  ): void;
+  putDestination(
+    args: PutDestinationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDestinationPolicyCommand}
+   */
+  putDestinationPolicy(
+    args: PutDestinationPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutDestinationPolicyCommandOutput>;
+  putDestinationPolicy(
+    args: PutDestinationPolicyCommandInput,
+    cb: (err: any, data?: PutDestinationPolicyCommandOutput) => void
+  ): void;
+  putDestinationPolicy(
+    args: PutDestinationPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutDestinationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutIndexPolicyCommand}
+   */
+  putIndexPolicy(
+    args: PutIndexPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutIndexPolicyCommandOutput>;
+  putIndexPolicy(
+    args: PutIndexPolicyCommandInput,
+    cb: (err: any, data?: PutIndexPolicyCommandOutput) => void
+  ): void;
+  putIndexPolicy(
+    args: PutIndexPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutIndexPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutIntegrationCommand}
+   */
+  putIntegration(
+    args: PutIntegrationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutIntegrationCommandOutput>;
+  putIntegration(
+    args: PutIntegrationCommandInput,
+    cb: (err: any, data?: PutIntegrationCommandOutput) => void
+  ): void;
+  putIntegration(
+    args: PutIntegrationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutLogEventsCommand}
+   */
+  putLogEvents(
+    args: PutLogEventsCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutLogEventsCommandOutput>;
+  putLogEvents(
+    args: PutLogEventsCommandInput,
+    cb: (err: any, data?: PutLogEventsCommandOutput) => void
+  ): void;
+  putLogEvents(
+    args: PutLogEventsCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutLogEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutLogGroupDeletionProtectionCommand}
+   */
+  putLogGroupDeletionProtection(
+    args: PutLogGroupDeletionProtectionCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutLogGroupDeletionProtectionCommandOutput>;
+  putLogGroupDeletionProtection(
+    args: PutLogGroupDeletionProtectionCommandInput,
+    cb: (err: any, data?: PutLogGroupDeletionProtectionCommandOutput) => void
+  ): void;
+  putLogGroupDeletionProtection(
+    args: PutLogGroupDeletionProtectionCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutLogGroupDeletionProtectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutMetricFilterCommand}
+   */
+  putMetricFilter(
+    args: PutMetricFilterCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutMetricFilterCommandOutput>;
+  putMetricFilter(
+    args: PutMetricFilterCommandInput,
+    cb: (err: any, data?: PutMetricFilterCommandOutput) => void
+  ): void;
+  putMetricFilter(
+    args: PutMetricFilterCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutMetricFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutQueryDefinitionCommand}
+   */
+  putQueryDefinition(
+    args: PutQueryDefinitionCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutQueryDefinitionCommandOutput>;
+  putQueryDefinition(
+    args: PutQueryDefinitionCommandInput,
+    cb: (err: any, data?: PutQueryDefinitionCommandOutput) => void
+  ): void;
+  putQueryDefinition(
+    args: PutQueryDefinitionCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutQueryDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRetentionPolicyCommand}
+   */
+  putRetentionPolicy(
+    args: PutRetentionPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutRetentionPolicyCommandOutput>;
+  putRetentionPolicy(
+    args: PutRetentionPolicyCommandInput,
+    cb: (err: any, data?: PutRetentionPolicyCommandOutput) => void
+  ): void;
+  putRetentionPolicy(
+    args: PutRetentionPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutRetentionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutStorageTierPolicyCommand}
+   */
+  putStorageTierPolicy(
+    args: PutStorageTierPolicyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutStorageTierPolicyCommandOutput>;
+  putStorageTierPolicy(
+    args: PutStorageTierPolicyCommandInput,
+    cb: (err: any, data?: PutStorageTierPolicyCommandOutput) => void
+  ): void;
+  putStorageTierPolicy(
+    args: PutStorageTierPolicyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutStorageTierPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutSubscriptionFilterCommand}
+   */
+  putSubscriptionFilter(
+    args: PutSubscriptionFilterCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutSubscriptionFilterCommandOutput>;
+  putSubscriptionFilter(
+    args: PutSubscriptionFilterCommandInput,
+    cb: (err: any, data?: PutSubscriptionFilterCommandOutput) => void
+  ): void;
+  putSubscriptionFilter(
+    args: PutSubscriptionFilterCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutSubscriptionFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutSyslogConfigurationCommand}
+   */
+  putSyslogConfiguration(
+    args: PutSyslogConfigurationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutSyslogConfigurationCommandOutput>;
+  putSyslogConfiguration(
+    args: PutSyslogConfigurationCommandInput,
+    cb: (err: any, data?: PutSyslogConfigurationCommandOutput) => void
+  ): void;
+  putSyslogConfiguration(
+    args: PutSyslogConfigurationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutSyslogConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutTransformerCommand}
+   */
+  putTransformer(
+    args: PutTransformerCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<PutTransformerCommandOutput>;
+  putTransformer(
+    args: PutTransformerCommandInput,
+    cb: (err: any, data?: PutTransformerCommandOutput) => void
+  ): void;
+  putTransformer(
+    args: PutTransformerCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: PutTransformerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartLiveTailCommand}
+   */
+  startLiveTail(
+    args: StartLiveTailCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<StartLiveTailCommandOutput>;
+  startLiveTail(
+    args: StartLiveTailCommandInput,
+    cb: (err: any, data?: StartLiveTailCommandOutput) => void
+  ): void;
+  startLiveTail(
+    args: StartLiveTailCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: StartLiveTailCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartQueryCommand}
+   */
+  startQuery(
+    args: StartQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<StartQueryCommandOutput>;
+  startQuery(
+    args: StartQueryCommandInput,
+    cb: (err: any, data?: StartQueryCommandOutput) => void
+  ): void;
+  startQuery(
+    args: StartQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: StartQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopQueryCommand}
+   */
+  stopQuery(
+    args: StopQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<StopQueryCommandOutput>;
+  stopQuery(
+    args: StopQueryCommandInput,
+    cb: (err: any, data?: StopQueryCommandOutput) => void
+  ): void;
+  stopQuery(
+    args: StopQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: StopQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagLogGroupCommand}
+   */
+  tagLogGroup(
+    args: TagLogGroupCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<TagLogGroupCommandOutput>;
+  tagLogGroup(
+    args: TagLogGroupCommandInput,
+    cb: (err: any, data?: TagLogGroupCommandOutput) => void
+  ): void;
+  tagLogGroup(
+    args: TagLogGroupCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: TagLogGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestMetricFilterCommand}
+   */
+  testMetricFilter(
+    args: TestMetricFilterCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<TestMetricFilterCommandOutput>;
+  testMetricFilter(
+    args: TestMetricFilterCommandInput,
+    cb: (err: any, data?: TestMetricFilterCommandOutput) => void
+  ): void;
+  testMetricFilter(
+    args: TestMetricFilterCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: TestMetricFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestTransformerCommand}
+   */
+  testTransformer(
+    args: TestTransformerCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<TestTransformerCommandOutput>;
+  testTransformer(
+    args: TestTransformerCommandInput,
+    cb: (err: any, data?: TestTransformerCommandOutput) => void
+  ): void;
+  testTransformer(
+    args: TestTransformerCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: TestTransformerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagLogGroupCommand}
+   */
+  untagLogGroup(
+    args: UntagLogGroupCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UntagLogGroupCommandOutput>;
+  untagLogGroup(
+    args: UntagLogGroupCommandInput,
+    cb: (err: any, data?: UntagLogGroupCommandOutput) => void
+  ): void;
+  untagLogGroup(
+    args: UntagLogGroupCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UntagLogGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAnomalyCommand}
+   */
+  updateAnomaly(
+    args: UpdateAnomalyCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UpdateAnomalyCommandOutput>;
+  updateAnomaly(
+    args: UpdateAnomalyCommandInput,
+    cb: (err: any, data?: UpdateAnomalyCommandOutput) => void
+  ): void;
+  updateAnomaly(
+    args: UpdateAnomalyCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UpdateAnomalyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDeliveryConfigurationCommand}
+   */
+  updateDeliveryConfiguration(
+    args: UpdateDeliveryConfigurationCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UpdateDeliveryConfigurationCommandOutput>;
+  updateDeliveryConfiguration(
+    args: UpdateDeliveryConfigurationCommandInput,
+    cb: (err: any, data?: UpdateDeliveryConfigurationCommandOutput) => void
+  ): void;
+  updateDeliveryConfiguration(
+    args: UpdateDeliveryConfigurationCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UpdateDeliveryConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLogAnomalyDetectorCommand}
+   */
+  updateLogAnomalyDetector(
+    args: UpdateLogAnomalyDetectorCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UpdateLogAnomalyDetectorCommandOutput>;
+  updateLogAnomalyDetector(
+    args: UpdateLogAnomalyDetectorCommandInput,
+    cb: (err: any, data?: UpdateLogAnomalyDetectorCommandOutput) => void
+  ): void;
+  updateLogAnomalyDetector(
+    args: UpdateLogAnomalyDetectorCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UpdateLogAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLookupTableCommand}
+   */
+  updateLookupTable(
+    args: UpdateLookupTableCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UpdateLookupTableCommandOutput>;
+  updateLookupTable(
+    args: UpdateLookupTableCommandInput,
+    cb: (err: any, data?: UpdateLookupTableCommandOutput) => void
+  ): void;
+  updateLookupTable(
+    args: UpdateLookupTableCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UpdateLookupTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateScheduledQueryCommand}
+   */
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    options?: CloudWatchLogsRequestOptions
+  ): Promise<UpdateScheduledQueryCommandOutput>;
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    cb: (err: any, data?: UpdateScheduledQueryCommandOutput) => void
+  ): void;
+  updateScheduledQuery(
+    args: UpdateScheduledQueryCommandInput,
+    options: CloudWatchLogsRequestOptions,
+    cb: (err: any, data?: UpdateScheduledQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConfigurationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeConfigurationTemplatesCommandOutput}.
+   */
+  paginateDescribeConfigurationTemplates(
+    args?: DescribeConfigurationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeConfigurationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeDeliveriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDeliveriesCommandOutput}.
+   */
+  paginateDescribeDeliveries(
+    args?: DescribeDeliveriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDeliveriesCommandOutput>;
+
+  /**
+   * @see {@link DescribeDeliveryDestinationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDeliveryDestinationsCommandOutput}.
+   */
+  paginateDescribeDeliveryDestinations(
+    args?: DescribeDeliveryDestinationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDeliveryDestinationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeDeliverySourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDeliverySourcesCommandOutput}.
+   */
+  paginateDescribeDeliverySources(
+    args?: DescribeDeliverySourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDeliverySourcesCommandOutput>;
+
+  /**
+   * @see {@link DescribeDestinationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDestinationsCommandOutput}.
+   */
+  paginateDescribeDestinations(
+    args?: DescribeDestinationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDestinationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeLogGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeLogGroupsCommandOutput}.
+   */
+  paginateDescribeLogGroups(
+    args?: DescribeLogGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeLogGroupsCommandOutput>;
+
+  /**
+   * @see {@link DescribeLogStreamsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeLogStreamsCommandOutput}.
+   */
+  paginateDescribeLogStreams(
+    args?: DescribeLogStreamsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeLogStreamsCommandOutput>;
+
+  /**
+   * @see {@link DescribeMetricFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMetricFiltersCommandOutput}.
+   */
+  paginateDescribeMetricFilters(
+    args?: DescribeMetricFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMetricFiltersCommandOutput>;
+
+  /**
+   * @see {@link DescribeSubscriptionFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSubscriptionFiltersCommandOutput}.
+   */
+  paginateDescribeSubscriptionFilters(
+    args: DescribeSubscriptionFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSubscriptionFiltersCommandOutput>;
+
+  /**
+   * @see {@link FilterLogEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link FilterLogEventsCommandOutput}.
+   */
+  paginateFilterLogEvents(
+    args?: FilterLogEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<FilterLogEventsCommandOutput>;
+
+  /**
+   * @see {@link GetLogEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetLogEventsCommandOutput}.
+   */
+  paginateGetLogEvents(
+    args: GetLogEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetLogEventsCommandOutput>;
+
+  /**
+   * @see {@link GetScheduledQueryHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetScheduledQueryHistoryCommandOutput}.
+   */
+  paginateGetScheduledQueryHistory(
+    args: GetScheduledQueryHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetScheduledQueryHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListAggregateLogGroupSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAggregateLogGroupSummariesCommandOutput}.
+   */
+  paginateListAggregateLogGroupSummaries(
+    args: ListAggregateLogGroupSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAggregateLogGroupSummariesCommandOutput>;
+
+  /**
+   * @see {@link ListAnomaliesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnomaliesCommandOutput}.
+   */
+  paginateListAnomalies(
+    args?: ListAnomaliesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnomaliesCommandOutput>;
+
+  /**
+   * @see {@link ListLogAnomalyDetectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLogAnomalyDetectorsCommandOutput}.
+   */
+  paginateListLogAnomalyDetectors(
+    args?: ListLogAnomalyDetectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLogAnomalyDetectorsCommandOutput>;
+
+  /**
+   * @see {@link ListLogGroupsForQueryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLogGroupsForQueryCommandOutput}.
+   */
+  paginateListLogGroupsForQuery(
+    args: ListLogGroupsForQueryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLogGroupsForQueryCommandOutput>;
+
+  /**
+   * @see {@link ListScheduledQueriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScheduledQueriesCommandOutput}.
+   */
+  paginateListScheduledQueries(
+    args?: ListScheduledQueriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScheduledQueriesCommandOutput>;
+
+  /**
+   * @see {@link ListSourcesForS3TableIntegrationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSourcesForS3TableIntegrationCommandOutput}.
+   */
+  paginateListSourcesForS3TableIntegration(
+    args: ListSourcesForS3TableIntegrationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSourcesForS3TableIntegrationCommandOutput>;
+}
 
 /**
  * <p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from
  *       EC2 instances, CloudTrail, and other sources. You can then retrieve the associated
- *       log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the
- *       Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p>
+ *       log data from CloudWatch Logs using the CloudWatch console. Alternatively, you can use
+ *       CloudWatch Logs commands in the Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch
+ *       Logs SDK.</p>
+ *          <p>For more information about CloudWatch Logs features, see the
+ *       <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html">Amazon CloudWatch Logs User Guide</a>.</p>
  *          <p>You can use CloudWatch Logs to:</p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <b>Monitor logs from EC2 instances in real-time</b>: You
+ *                   <b>Monitor logs from EC2 instances in real time</b>: You
  *           can use CloudWatch Logs to monitor applications and systems using log data. For example,
- *           CloudWatch Logs can track the number of errors that occur in your application logs and
- *           send you a notification whenever the rate of errors exceeds a threshold that you specify.
- *           CloudWatch Logs uses your log data for monitoring so no code changes are required. For
- *           example, you can monitor application logs for specific literal terms (such as
- *           "NullReferenceException") or count the number of occurrences of a literal term at a
- *           particular position in log data (such as "404" status codes in an Apache access log). When
- *           the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch
- *           metric that you specify.</p>
+ *           CloudWatch Logs can track the number of errors that occur in your application logs. Then,
+ *           it can send you a notification whenever the rate of errors exceeds a threshold that you
+ *           specify. CloudWatch Logs uses your log data for monitoring so no code changes are
+ *           required. For example, you can monitor application logs for specific literal terms (such
+ *           as "NullReferenceException"). You can also count the number of occurrences of a literal
+ *           term at a particular position in log data (such as "404" status codes in an Apache access
+ *           log). When the term you are searching for is found, CloudWatch Logs reports the data to a
+ *           CloudWatch metric that you specify.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <b>Monitor CloudTrail logged events</b>: You can
- *           create alarms in CloudWatch and receive notifications of particular API activity as
+ *                   <b>Monitor CloudTrail logged events</b>: You
+ *           can create alarms in CloudWatch and receive notifications of particular API activity as
  *           captured by CloudTrail. You can use the notification to perform troubleshooting.</p>
  *             </li>
  *             <li>
  *                <p>
  *                   <b>Archive log data</b>: You can use CloudWatch Logs to
  *           store your log data in highly durable storage. You can change the log retention setting so
- *           that any log events older than this setting are automatically deleted. The CloudWatch Logs
- *           agent makes it easy to quickly send both rotated and non-rotated log data off of a host
- *           and into the log service. You can then access the raw log data when you need it.</p>
+ *           that any log events earlier than this setting are automatically deleted. The CloudWatch
+ *           Logs agent helps to quickly send both rotated and non-rotated log data off of a host and
+ *           into the log service. You can then access the raw log data when you need it.</p>
  *             </li>
  *          </ul>
+ *          <note>
+ *             <p>CloudWatch Logs might log request contents for fields that aren't considered
+ *         sensitive, such as API request parameters for CloudWatch Logs actions. This provides
+ *         debugging information for failed API requests.</p>
+ *          </note>
+ * @public
  */
-export class CloudWatchLogs extends CloudWatchLogsClient {
-  /**
-   * <p>Associates the specified Key Management Service customer master key (CMK) with the specified log group.</p>
-   *          <p>Associating an KMS CMK with a log group overrides any existing associations between the log group and a CMK.
-   *       After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK.
-   *       This association is stored as long as the data encrypted with the CMK is still within CloudWatch Logs.
-   *       This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>
-   *          <important>
-   *             <p>CloudWatch Logs supports only symmetric CMKs. Do not use an associate an asymmetric CMK
-   *         with your log group. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and Asymmetric
-   *           Keys</a>.</p>
-   *          </important>
-   *          <p>It can take up to 5 minutes for this operation to take effect.</p>
-   *          <p>If you attempt to associate a CMK with a log group but the CMK does not exist or the
-   *       CMK is disabled, you receive an <code>InvalidParameterException</code> error. </p>
-   */
-  public associateKmsKey(
-    args: AssociateKmsKeyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AssociateKmsKeyCommandOutput>;
-  public associateKmsKey(
-    args: AssociateKmsKeyCommandInput,
-    cb: (err: any, data?: AssociateKmsKeyCommandOutput) => void
-  ): void;
-  public associateKmsKey(
-    args: AssociateKmsKeyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AssociateKmsKeyCommandOutput) => void
-  ): void;
-  public associateKmsKey(
-    args: AssociateKmsKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateKmsKeyCommandOutput) => void),
-    cb?: (err: any, data?: AssociateKmsKeyCommandOutput) => void
-  ): Promise<AssociateKmsKeyCommandOutput> | void {
-    const command = new AssociateKmsKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Cancels the specified export task.</p>
-   *          <p>The task must be in the <code>PENDING</code> or <code>RUNNING</code> state.</p>
-   */
-  public cancelExportTask(
-    args: CancelExportTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CancelExportTaskCommandOutput>;
-  public cancelExportTask(
-    args: CancelExportTaskCommandInput,
-    cb: (err: any, data?: CancelExportTaskCommandOutput) => void
-  ): void;
-  public cancelExportTask(
-    args: CancelExportTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CancelExportTaskCommandOutput) => void
-  ): void;
-  public cancelExportTask(
-    args: CancelExportTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelExportTaskCommandOutput) => void),
-    cb?: (err: any, data?: CancelExportTaskCommandOutput) => void
-  ): Promise<CancelExportTaskCommandOutput> | void {
-    const command = new CancelExportTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an export task, which allows you to efficiently export data from a
-   *       log group to an Amazon S3 bucket. When you perform a <code>CreateExportTask</code>
-   *       operation, you must use credentials that have permission to write to the S3 bucket
-   *       that you specify as the destination.</p>
-   *          <p>This is an asynchronous call. If all the required information is provided, this
-   *       operation initiates an export task and responds with the ID of the task. After the task has started,
-   *       you can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html">DescribeExportTasks</a> to get the status of the export task. Each account can
-   *       only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time.
-   *       To cancel an export task, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html">CancelExportTask</a>.</p>
-   *          <p>You can export logs from multiple log groups or multiple time ranges to the same S3
-   *       bucket. To separate out log data for each export task, you can specify a prefix to be used as
-   *       the Amazon S3 key prefix for all exported objects.</p>
-   *          <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets
-   *       encrypted with SSE-KMS is not supported. </p>
-   */
-  public createExportTask(
-    args: CreateExportTaskCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateExportTaskCommandOutput>;
-  public createExportTask(
-    args: CreateExportTaskCommandInput,
-    cb: (err: any, data?: CreateExportTaskCommandOutput) => void
-  ): void;
-  public createExportTask(
-    args: CreateExportTaskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateExportTaskCommandOutput) => void
-  ): void;
-  public createExportTask(
-    args: CreateExportTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateExportTaskCommandOutput) => void),
-    cb?: (err: any, data?: CreateExportTaskCommandOutput) => void
-  ): Promise<CreateExportTaskCommandOutput> | void {
-    const command = new CreateExportTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a log group with the specified name. You can create up to 20,000 log groups per account.</p>
-   *          <p>You must use the following guidelines when naming a log group:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Log group names must be unique within a region for an Amazon Web Services account.</p>
-   *             </li>
-   *             <li>
-   *                <p>Log group names can be between 1 and 512 characters long.</p>
-   *             </li>
-   *             <li>
-   *                <p>Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
-   *           '/' (forward slash), '.' (period), and '#' (number sign)</p>
-   *             </li>
-   *          </ul>
-   *          <p>When you create a log group, by default the log events in the log group never expire. To set
-   *     a retention policy so that events expire and are deleted after a specified time, use
-   *       <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html">PutRetentionPolicy</a>.</p>
-   *          <p>If you associate a Key Management Service customer master key (CMK) with the log group, ingested data is encrypted using the CMK.
-   *       This association is stored as long as the data encrypted with the CMK is still within CloudWatch Logs.
-   *       This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>
-   *          <p>If you attempt to associate a CMK with the log group but the CMK does not exist or the
-   *       CMK is disabled, you receive an <code>InvalidParameterException</code> error. </p>
-   *          <important>
-   *             <p>CloudWatch Logs supports only symmetric CMKs. Do not associate an asymmetric CMK with
-   *         your log group. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and Asymmetric
-   *           Keys</a>.</p>
-   *          </important>
-   */
-  public createLogGroup(
-    args: CreateLogGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateLogGroupCommandOutput>;
-  public createLogGroup(
-    args: CreateLogGroupCommandInput,
-    cb: (err: any, data?: CreateLogGroupCommandOutput) => void
-  ): void;
-  public createLogGroup(
-    args: CreateLogGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateLogGroupCommandOutput) => void
-  ): void;
-  public createLogGroup(
-    args: CreateLogGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLogGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateLogGroupCommandOutput) => void
-  ): Promise<CreateLogGroupCommandOutput> | void {
-    const command = new CreateLogGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a log stream for the specified log group. A log stream is a sequence of log events
-   *       that originate from a single source, such as an application instance or a resource that is
-   *       being monitored.</p>
-   *          <p>There is no limit on the number of log streams that you can create for a log group. There is a limit
-   *     of 50 TPS on <code>CreateLogStream</code> operations, after which transactions are throttled.</p>
-   *          <p>You must use the following guidelines when naming a log stream:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Log stream names must be unique within the log group.</p>
-   *             </li>
-   *             <li>
-   *                <p>Log stream names can be between 1 and 512 characters long.</p>
-   *             </li>
-   *             <li>
-   *                <p>The ':' (colon) and '*' (asterisk) characters are not allowed.</p>
-   *             </li>
-   *          </ul>
-   */
-  public createLogStream(
-    args: CreateLogStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateLogStreamCommandOutput>;
-  public createLogStream(
-    args: CreateLogStreamCommandInput,
-    cb: (err: any, data?: CreateLogStreamCommandOutput) => void
-  ): void;
-  public createLogStream(
-    args: CreateLogStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateLogStreamCommandOutput) => void
-  ): void;
-  public createLogStream(
-    args: CreateLogStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLogStreamCommandOutput) => void),
-    cb?: (err: any, data?: CreateLogStreamCommandOutput) => void
-  ): Promise<CreateLogStreamCommandOutput> | void {
-    const command = new CreateLogStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified destination, and eventually disables all the
-   *       subscription filters that publish to it. This operation does not delete the
-   *       physical resource encapsulated by the destination.</p>
-   */
-  public deleteDestination(
-    args: DeleteDestinationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDestinationCommandOutput>;
-  public deleteDestination(
-    args: DeleteDestinationCommandInput,
-    cb: (err: any, data?: DeleteDestinationCommandOutput) => void
-  ): void;
-  public deleteDestination(
-    args: DeleteDestinationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDestinationCommandOutput) => void
-  ): void;
-  public deleteDestination(
-    args: DeleteDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDestinationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDestinationCommandOutput) => void
-  ): Promise<DeleteDestinationCommandOutput> | void {
-    const command = new DeleteDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified log group and permanently deletes all the archived
-   *       log events associated with the log group.</p>
-   */
-  public deleteLogGroup(
-    args: DeleteLogGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteLogGroupCommandOutput>;
-  public deleteLogGroup(
-    args: DeleteLogGroupCommandInput,
-    cb: (err: any, data?: DeleteLogGroupCommandOutput) => void
-  ): void;
-  public deleteLogGroup(
-    args: DeleteLogGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteLogGroupCommandOutput) => void
-  ): void;
-  public deleteLogGroup(
-    args: DeleteLogGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLogGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLogGroupCommandOutput) => void
-  ): Promise<DeleteLogGroupCommandOutput> | void {
-    const command = new DeleteLogGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified log stream and permanently deletes all the archived log events associated
-   *       with the log stream.</p>
-   */
-  public deleteLogStream(
-    args: DeleteLogStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteLogStreamCommandOutput>;
-  public deleteLogStream(
-    args: DeleteLogStreamCommandInput,
-    cb: (err: any, data?: DeleteLogStreamCommandOutput) => void
-  ): void;
-  public deleteLogStream(
-    args: DeleteLogStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteLogStreamCommandOutput) => void
-  ): void;
-  public deleteLogStream(
-    args: DeleteLogStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLogStreamCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLogStreamCommandOutput) => void
-  ): Promise<DeleteLogStreamCommandOutput> | void {
-    const command = new DeleteLogStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified metric filter.</p>
-   */
-  public deleteMetricFilter(
-    args: DeleteMetricFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteMetricFilterCommandOutput>;
-  public deleteMetricFilter(
-    args: DeleteMetricFilterCommandInput,
-    cb: (err: any, data?: DeleteMetricFilterCommandOutput) => void
-  ): void;
-  public deleteMetricFilter(
-    args: DeleteMetricFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteMetricFilterCommandOutput) => void
-  ): void;
-  public deleteMetricFilter(
-    args: DeleteMetricFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMetricFilterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMetricFilterCommandOutput) => void
-  ): Promise<DeleteMetricFilterCommandOutput> | void {
-    const command = new DeleteMetricFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a saved CloudWatch Logs Insights query definition.
-   *       A query definition contains details about a saved CloudWatch Logs Insights query.</p>
-   *          <p>Each <code>DeleteQueryDefinition</code> operation can delete one query definition.</p>
-   *          <p>You must have the <code>logs:DeleteQueryDefinition</code> permission to be able to perform
-   *       this operation.</p>
-   */
-  public deleteQueryDefinition(
-    args: DeleteQueryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteQueryDefinitionCommandOutput>;
-  public deleteQueryDefinition(
-    args: DeleteQueryDefinitionCommandInput,
-    cb: (err: any, data?: DeleteQueryDefinitionCommandOutput) => void
-  ): void;
-  public deleteQueryDefinition(
-    args: DeleteQueryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteQueryDefinitionCommandOutput) => void
-  ): void;
-  public deleteQueryDefinition(
-    args: DeleteQueryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteQueryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteQueryDefinitionCommandOutput) => void
-  ): Promise<DeleteQueryDefinitionCommandOutput> | void {
-    const command = new DeleteQueryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a resource policy from this account. This revokes
-   *     the access of the identities in that policy to put log events to this account.</p>
-   */
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteResourcePolicyCommandOutput>;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): Promise<DeleteResourcePolicyCommandOutput> | void {
-    const command = new DeleteResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified retention policy.</p>
-   *          <p>Log events do not expire if they belong to log groups without a retention policy.</p>
-   */
-  public deleteRetentionPolicy(
-    args: DeleteRetentionPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRetentionPolicyCommandOutput>;
-  public deleteRetentionPolicy(
-    args: DeleteRetentionPolicyCommandInput,
-    cb: (err: any, data?: DeleteRetentionPolicyCommandOutput) => void
-  ): void;
-  public deleteRetentionPolicy(
-    args: DeleteRetentionPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRetentionPolicyCommandOutput) => void
-  ): void;
-  public deleteRetentionPolicy(
-    args: DeleteRetentionPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRetentionPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRetentionPolicyCommandOutput) => void
-  ): Promise<DeleteRetentionPolicyCommandOutput> | void {
-    const command = new DeleteRetentionPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified subscription filter.</p>
-   */
-  public deleteSubscriptionFilter(
-    args: DeleteSubscriptionFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSubscriptionFilterCommandOutput>;
-  public deleteSubscriptionFilter(
-    args: DeleteSubscriptionFilterCommandInput,
-    cb: (err: any, data?: DeleteSubscriptionFilterCommandOutput) => void
-  ): void;
-  public deleteSubscriptionFilter(
-    args: DeleteSubscriptionFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSubscriptionFilterCommandOutput) => void
-  ): void;
-  public deleteSubscriptionFilter(
-    args: DeleteSubscriptionFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSubscriptionFilterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSubscriptionFilterCommandOutput) => void
-  ): Promise<DeleteSubscriptionFilterCommandOutput> | void {
-    const command = new DeleteSubscriptionFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all your destinations. The results are ASCII-sorted by destination name.</p>
-   */
-  public describeDestinations(
-    args: DescribeDestinationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDestinationsCommandOutput>;
-  public describeDestinations(
-    args: DescribeDestinationsCommandInput,
-    cb: (err: any, data?: DescribeDestinationsCommandOutput) => void
-  ): void;
-  public describeDestinations(
-    args: DescribeDestinationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDestinationsCommandOutput) => void
-  ): void;
-  public describeDestinations(
-    args: DescribeDestinationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDestinationsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDestinationsCommandOutput) => void
-  ): Promise<DescribeDestinationsCommandOutput> | void {
-    const command = new DescribeDestinationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the specified export tasks. You can list all your export tasks or filter
-   *       the results based on task ID or task status.</p>
-   */
-  public describeExportTasks(
-    args: DescribeExportTasksCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeExportTasksCommandOutput>;
-  public describeExportTasks(
-    args: DescribeExportTasksCommandInput,
-    cb: (err: any, data?: DescribeExportTasksCommandOutput) => void
-  ): void;
-  public describeExportTasks(
-    args: DescribeExportTasksCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeExportTasksCommandOutput) => void
-  ): void;
-  public describeExportTasks(
-    args: DescribeExportTasksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeExportTasksCommandOutput) => void),
-    cb?: (err: any, data?: DescribeExportTasksCommandOutput) => void
-  ): Promise<DescribeExportTasksCommandOutput> | void {
-    const command = new DescribeExportTasksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the specified log groups. You can list all your log groups or filter the results by prefix.
-   *       The results are ASCII-sorted by log group name.</p>
-   *          <p>CloudWatch Logs doesn’t support IAM policies that control access to the <code>DescribeLogGroups</code> action by using the
-   *       <code>aws:ResourceTag/<i>key-name</i>
-   *             </code> condition key. Other CloudWatch Logs actions
-   *       do support the use of the <code>aws:ResourceTag/<i>key-name</i>
-   *             </code> condition key to control access.
-   *       For more information about using tags to control access, see
-   *       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Controlling access to Amazon Web Services resources using tags</a>.</p>
-   */
-  public describeLogGroups(
-    args: DescribeLogGroupsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeLogGroupsCommandOutput>;
-  public describeLogGroups(
-    args: DescribeLogGroupsCommandInput,
-    cb: (err: any, data?: DescribeLogGroupsCommandOutput) => void
-  ): void;
-  public describeLogGroups(
-    args: DescribeLogGroupsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeLogGroupsCommandOutput) => void
-  ): void;
-  public describeLogGroups(
-    args: DescribeLogGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeLogGroupsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeLogGroupsCommandOutput) => void
-  ): Promise<DescribeLogGroupsCommandOutput> | void {
-    const command = new DescribeLogGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the log streams for the specified log group.
-   *       You can list all the log streams or filter the results by prefix.
-   *       You can also control how the results are ordered.</p>
-   *          <p>This operation has a limit of five transactions per second, after which transactions are throttled.</p>
-   */
-  public describeLogStreams(
-    args: DescribeLogStreamsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeLogStreamsCommandOutput>;
-  public describeLogStreams(
-    args: DescribeLogStreamsCommandInput,
-    cb: (err: any, data?: DescribeLogStreamsCommandOutput) => void
-  ): void;
-  public describeLogStreams(
-    args: DescribeLogStreamsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeLogStreamsCommandOutput) => void
-  ): void;
-  public describeLogStreams(
-    args: DescribeLogStreamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeLogStreamsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeLogStreamsCommandOutput) => void
-  ): Promise<DescribeLogStreamsCommandOutput> | void {
-    const command = new DescribeLogStreamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the specified metric filters. You can list all of the metric filters or filter
-   *       the results by log name, prefix, metric name, or metric namespace. The results are
-   *       ASCII-sorted by filter name.</p>
-   */
-  public describeMetricFilters(
-    args: DescribeMetricFiltersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeMetricFiltersCommandOutput>;
-  public describeMetricFilters(
-    args: DescribeMetricFiltersCommandInput,
-    cb: (err: any, data?: DescribeMetricFiltersCommandOutput) => void
-  ): void;
-  public describeMetricFilters(
-    args: DescribeMetricFiltersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeMetricFiltersCommandOutput) => void
-  ): void;
-  public describeMetricFilters(
-    args: DescribeMetricFiltersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeMetricFiltersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeMetricFiltersCommandOutput) => void
-  ): Promise<DescribeMetricFiltersCommandOutput> | void {
-    const command = new DescribeMetricFiltersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of CloudWatch Logs Insights queries that are scheduled, executing, or have
-   *       been executed recently in this account. You can request all queries or limit it to queries of
-   *       a specific log group or queries with a certain status.</p>
-   */
-  public describeQueries(
-    args: DescribeQueriesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeQueriesCommandOutput>;
-  public describeQueries(
-    args: DescribeQueriesCommandInput,
-    cb: (err: any, data?: DescribeQueriesCommandOutput) => void
-  ): void;
-  public describeQueries(
-    args: DescribeQueriesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeQueriesCommandOutput) => void
-  ): void;
-  public describeQueries(
-    args: DescribeQueriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeQueriesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeQueriesCommandOutput) => void
-  ): Promise<DescribeQueriesCommandOutput> | void {
-    const command = new DescribeQueriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions.</p>
-   *          <p>You can use the <code>queryDefinitionNamePrefix</code> parameter to limit the results to only the
-   *       query definitions that have names that start with a certain string.</p>
-   */
-  public describeQueryDefinitions(
-    args: DescribeQueryDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeQueryDefinitionsCommandOutput>;
-  public describeQueryDefinitions(
-    args: DescribeQueryDefinitionsCommandInput,
-    cb: (err: any, data?: DescribeQueryDefinitionsCommandOutput) => void
-  ): void;
-  public describeQueryDefinitions(
-    args: DescribeQueryDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeQueryDefinitionsCommandOutput) => void
-  ): void;
-  public describeQueryDefinitions(
-    args: DescribeQueryDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeQueryDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeQueryDefinitionsCommandOutput) => void
-  ): Promise<DescribeQueryDefinitionsCommandOutput> | void {
-    const command = new DescribeQueryDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the resource policies in this account.</p>
-   */
-  public describeResourcePolicies(
-    args: DescribeResourcePoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeResourcePoliciesCommandOutput>;
-  public describeResourcePolicies(
-    args: DescribeResourcePoliciesCommandInput,
-    cb: (err: any, data?: DescribeResourcePoliciesCommandOutput) => void
-  ): void;
-  public describeResourcePolicies(
-    args: DescribeResourcePoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeResourcePoliciesCommandOutput) => void
-  ): void;
-  public describeResourcePolicies(
-    args: DescribeResourcePoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourcePoliciesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourcePoliciesCommandOutput) => void
-  ): Promise<DescribeResourcePoliciesCommandOutput> | void {
-    const command = new DescribeResourcePoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the subscription filters for the specified log group. You can list all the subscription filters or filter the results by prefix.
-   *       The results are ASCII-sorted by filter name.</p>
-   */
-  public describeSubscriptionFilters(
-    args: DescribeSubscriptionFiltersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSubscriptionFiltersCommandOutput>;
-  public describeSubscriptionFilters(
-    args: DescribeSubscriptionFiltersCommandInput,
-    cb: (err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void
-  ): void;
-  public describeSubscriptionFilters(
-    args: DescribeSubscriptionFiltersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void
-  ): void;
-  public describeSubscriptionFilters(
-    args: DescribeSubscriptionFiltersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSubscriptionFiltersCommandOutput) => void
-  ): Promise<DescribeSubscriptionFiltersCommandOutput> | void {
-    const command = new DescribeSubscriptionFiltersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disassociates the associated Key Management Service customer master key (CMK) from the specified log group.</p>
-   *          <p>After the KMS CMK is disassociated from the log group, CloudWatch Logs stops encrypting newly ingested data for the log group.
-   *       All previously ingested data remains encrypted, and CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested.</p>
-   *          <p>Note that it can take up to 5 minutes for this operation to take effect.</p>
-   */
-  public disassociateKmsKey(
-    args: DisassociateKmsKeyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateKmsKeyCommandOutput>;
-  public disassociateKmsKey(
-    args: DisassociateKmsKeyCommandInput,
-    cb: (err: any, data?: DisassociateKmsKeyCommandOutput) => void
-  ): void;
-  public disassociateKmsKey(
-    args: DisassociateKmsKeyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateKmsKeyCommandOutput) => void
-  ): void;
-  public disassociateKmsKey(
-    args: DisassociateKmsKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateKmsKeyCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateKmsKeyCommandOutput) => void
-  ): Promise<DisassociateKmsKeyCommandOutput> | void {
-    const command = new DisassociateKmsKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists log events from the specified log group. You can list all the log events or filter the results
-   *       using a filter pattern, a time range, and the name of the log stream.</p>
-   *          <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000
-   *       log events) or all the events found within the time range that you specify. If the results
-   *       include a token, then there are more log events available, and you can get additional results
-   *       by specifying the token in a subsequent call. This operation can return empty results
-   *     while there are more log events available through the token.</p>
-   *          <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested
-   *     by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>
-   */
-  public filterLogEvents(
-    args: FilterLogEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<FilterLogEventsCommandOutput>;
-  public filterLogEvents(
-    args: FilterLogEventsCommandInput,
-    cb: (err: any, data?: FilterLogEventsCommandOutput) => void
-  ): void;
-  public filterLogEvents(
-    args: FilterLogEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: FilterLogEventsCommandOutput) => void
-  ): void;
-  public filterLogEvents(
-    args: FilterLogEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FilterLogEventsCommandOutput) => void),
-    cb?: (err: any, data?: FilterLogEventsCommandOutput) => void
-  ): Promise<FilterLogEventsCommandOutput> | void {
-    const command = new FilterLogEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists log events from the specified log stream. You can list all of the log events or
-   *       filter using a time range.</p>
-   *
-   *          <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events).
-   *       You can get additional log events by specifying one of the tokens in a subsequent call.
-   *       This operation can return empty results while there are more log events available through the token.</p>
-   */
-  public getLogEvents(
-    args: GetLogEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLogEventsCommandOutput>;
-  public getLogEvents(args: GetLogEventsCommandInput, cb: (err: any, data?: GetLogEventsCommandOutput) => void): void;
-  public getLogEvents(
-    args: GetLogEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLogEventsCommandOutput) => void
-  ): void;
-  public getLogEvents(
-    args: GetLogEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLogEventsCommandOutput) => void),
-    cb?: (err: any, data?: GetLogEventsCommandOutput) => void
-  ): Promise<GetLogEventsCommandOutput> | void {
-    const command = new GetLogEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the fields that are included in log events in the specified log group, along with the percentage of log events
-   *     that contain each field. The search is limited to a time period that you specify.</p>
-   *          <p>In the results, fields that start with @ are fields generated by CloudWatch Logs. For
-   *       example, <code>@timestamp</code> is the timestamp of each log event. For more information about the fields that are
-   *       generated by CloudWatch logs, see
-   *       <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html">Supported Logs and Discovered Fields</a>.</p>
-   *          <p>The response results are sorted by the frequency percentage, starting
-   *     with the highest percentage.</p>
-   */
-  public getLogGroupFields(
-    args: GetLogGroupFieldsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLogGroupFieldsCommandOutput>;
-  public getLogGroupFields(
-    args: GetLogGroupFieldsCommandInput,
-    cb: (err: any, data?: GetLogGroupFieldsCommandOutput) => void
-  ): void;
-  public getLogGroupFields(
-    args: GetLogGroupFieldsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLogGroupFieldsCommandOutput) => void
-  ): void;
-  public getLogGroupFields(
-    args: GetLogGroupFieldsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLogGroupFieldsCommandOutput) => void),
-    cb?: (err: any, data?: GetLogGroupFieldsCommandOutput) => void
-  ): Promise<GetLogGroupFieldsCommandOutput> | void {
-    const command = new GetLogGroupFieldsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves all of the fields and values of a single log event. All fields are retrieved,
-   *       even if the original query that produced the <code>logRecordPointer</code> retrieved only a
-   *       subset of fields. Fields are returned as field name/field value pairs.</p>
-   *          <p>The full unparsed log event is returned within <code>@message</code>.</p>
-   */
-  public getLogRecord(
-    args: GetLogRecordCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLogRecordCommandOutput>;
-  public getLogRecord(args: GetLogRecordCommandInput, cb: (err: any, data?: GetLogRecordCommandOutput) => void): void;
-  public getLogRecord(
-    args: GetLogRecordCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLogRecordCommandOutput) => void
-  ): void;
-  public getLogRecord(
-    args: GetLogRecordCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLogRecordCommandOutput) => void),
-    cb?: (err: any, data?: GetLogRecordCommandOutput) => void
-  ): Promise<GetLogRecordCommandOutput> | void {
-    const command = new GetLogRecordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the results from the specified query.</p>
-   *          <p>Only the fields requested in the query are returned, along with a <code>@ptr</code>
-   *       field, which is the identifier for the log record. You can use the value of <code>@ptr</code>
-   *       in a <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html">GetLogRecord</a>
-   *       operation to get the full log record.</p>
-   *          <p>
-   *             <code>GetQueryResults</code>
-   *       does not start a query execution. To run a query, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html">StartQuery</a>.</p>
-   *          <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation
-   *       returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status,
-   *       you can retry the operation later to see the final results. </p>
-   */
-  public getQueryResults(
-    args: GetQueryResultsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetQueryResultsCommandOutput>;
-  public getQueryResults(
-    args: GetQueryResultsCommandInput,
-    cb: (err: any, data?: GetQueryResultsCommandOutput) => void
-  ): void;
-  public getQueryResults(
-    args: GetQueryResultsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetQueryResultsCommandOutput) => void
-  ): void;
-  public getQueryResults(
-    args: GetQueryResultsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetQueryResultsCommandOutput) => void),
-    cb?: (err: any, data?: GetQueryResultsCommandOutput) => void
-  ): Promise<GetQueryResultsCommandOutput> | void {
-    const command = new GetQueryResultsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the tags for the specified log group.</p>
-   */
-  public listTagsLogGroup(
-    args: ListTagsLogGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsLogGroupCommandOutput>;
-  public listTagsLogGroup(
-    args: ListTagsLogGroupCommandInput,
-    cb: (err: any, data?: ListTagsLogGroupCommandOutput) => void
-  ): void;
-  public listTagsLogGroup(
-    args: ListTagsLogGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsLogGroupCommandOutput) => void
-  ): void;
-  public listTagsLogGroup(
-    args: ListTagsLogGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsLogGroupCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsLogGroupCommandOutput) => void
-  ): Promise<ListTagsLogGroupCommandOutput> | void {
-    const command = new ListTagsLogGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates a destination. This operation is used only to create destinations for cross-account subscriptions.</p>
-   *          <p>A destination encapsulates a physical resource (such
-   *       as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events
-   *       for a different account, ingested using <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a>.</p>
-   *          <p>Through an access policy, a destination controls what is written to it.
-   *       By default, <code>PutDestination</code> does not set any access policy with the destination,
-   *       which means a cross-account user cannot call <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html">PutSubscriptionFilter</a> against
-   *       this destination. To enable this, the destination owner must call <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html">PutDestinationPolicy</a> after <code>PutDestination</code>.</p>
-   *          <p>To perform a <code>PutDestination</code> operation, you must also have the
-   *     <code>iam:PassRole</code> permission.</p>
-   */
-  public putDestination(
-    args: PutDestinationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutDestinationCommandOutput>;
-  public putDestination(
-    args: PutDestinationCommandInput,
-    cb: (err: any, data?: PutDestinationCommandOutput) => void
-  ): void;
-  public putDestination(
-    args: PutDestinationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutDestinationCommandOutput) => void
-  ): void;
-  public putDestination(
-    args: PutDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDestinationCommandOutput) => void),
-    cb?: (err: any, data?: PutDestinationCommandOutput) => void
-  ): Promise<PutDestinationCommandOutput> | void {
-    const command = new PutDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates an access policy associated with an existing
-   *       destination. An access policy is an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html">IAM policy document</a> that is used
-   *       to authorize claims to register a subscription filter against a given destination.</p>
-   *          <p>If multiple Amazon Web Services accounts are sending logs to this destination, each sender account must be
-   *     listed separately in the policy. The policy does not support specifying <code>*</code>
-   *     as the Principal or the use of the <code>aws:PrincipalOrgId</code> global key.</p>
-   */
-  public putDestinationPolicy(
-    args: PutDestinationPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutDestinationPolicyCommandOutput>;
-  public putDestinationPolicy(
-    args: PutDestinationPolicyCommandInput,
-    cb: (err: any, data?: PutDestinationPolicyCommandOutput) => void
-  ): void;
-  public putDestinationPolicy(
-    args: PutDestinationPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutDestinationPolicyCommandOutput) => void
-  ): void;
-  public putDestinationPolicy(
-    args: PutDestinationPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDestinationPolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutDestinationPolicyCommandOutput) => void
-  ): Promise<PutDestinationPolicyCommandOutput> | void {
-    const command = new PutDestinationPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Uploads a batch of log events to the specified log stream.</p>
-   *          <p>You must include the sequence token obtained from the response of the previous call. An
-   *       upload in a newly created log stream does not require a sequence token. You can also get the
-   *       sequence token in the <code>expectedSequenceToken</code> field from
-   *         <code>InvalidSequenceTokenException</code>. If you call <code>PutLogEvents</code> twice
-   *       within a narrow time period using the same value for <code>sequenceToken</code>, both calls
-   *       might be successful or one might be rejected.</p>
-   *          <p>The batch of events must satisfy the following constraints:</p>
-   *          <ul>
-   *             <li>
-   *                <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of
-   *           all event messages in UTF-8, plus 26 bytes for each log event.</p>
-   *             </li>
-   *             <li>
-   *                <p>None of the log events in the batch can be more than 2 hours in the future.</p>
-   *             </li>
-   *             <li>
-   *                <p>None of the log events in the batch can be older than 14 days or older than the retention
-   *           period of the log group.</p>
-   *             </li>
-   *             <li>
-   *                <p>The log events in the batch must be in chronological order by their timestamp. The
-   *           timestamp is the time the event occurred, expressed as the number of milliseconds after
-   *           Jan 1, 1970 00:00:00 UTC. (In Amazon Web Services Tools for PowerShell and the Amazon Web Services SDK for .NET, the
-   *           timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For example,
-   *           2017-09-15T13:45:30.) </p>
-   *             </li>
-   *             <li>
-   *                <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>
-   *             </li>
-   *             <li>
-   *                <p>The maximum number of log events in a batch is 10,000.</p>
-   *             </li>
-   *             <li>
-   *                <p>There is a quota of 5 requests per second per log stream. Additional requests are throttled. This quota can't be changed.</p>
-   *             </li>
-   *          </ul>
-   *          <p>If a call to <code>PutLogEvents</code> returns "UnrecognizedClientException" the most likely cause is an invalid Amazon Web Services access key ID or secret key. </p>
-   */
-  public putLogEvents(
-    args: PutLogEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutLogEventsCommandOutput>;
-  public putLogEvents(args: PutLogEventsCommandInput, cb: (err: any, data?: PutLogEventsCommandOutput) => void): void;
-  public putLogEvents(
-    args: PutLogEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutLogEventsCommandOutput) => void
-  ): void;
-  public putLogEvents(
-    args: PutLogEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutLogEventsCommandOutput) => void),
-    cb?: (err: any, data?: PutLogEventsCommandOutput) => void
-  ): Promise<PutLogEventsCommandOutput> | void {
-    const command = new PutLogEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates a metric filter and associates it with the specified log group.
-   *       Metric filters allow you to configure rules to extract metric data from log events ingested
-   *       through <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a>.</p>
-   *          <p>The maximum number of metric filters that can be associated with a log group is
-   *       100.</p>
-   *          <p>When you create a metric filter, you can also optionally assign a unit and dimensions
-   *     to the metric that is created.</p>
-   *          <important>
-   *             <p>Metrics extracted from log events are charged as custom metrics.
-   *       To prevent unexpected high charges, do not specify high-cardinality fields such as
-   *       <code>IPAddress</code> or <code>requestID</code> as dimensions. Each different value
-   *       found for
-   *       a dimension is treated as a separate metric and accrues charges as a separate custom metric.
-   *     </p>
-   *             <p>To help prevent accidental high charges, Amazon disables a metric filter
-   *         if it generates 1000 different name/value pairs for the dimensions that you
-   *         have specified within a certain amount of time.</p>
-   *             <p>You can also set up a billing alarm to alert you if your charges are higher than
-   *         expected. For more information,
-   *         see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html">
-   *           Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges</a>.
-   *       </p>
-   *          </important>
-   */
-  public putMetricFilter(
-    args: PutMetricFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutMetricFilterCommandOutput>;
-  public putMetricFilter(
-    args: PutMetricFilterCommandInput,
-    cb: (err: any, data?: PutMetricFilterCommandOutput) => void
-  ): void;
-  public putMetricFilter(
-    args: PutMetricFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutMetricFilterCommandOutput) => void
-  ): void;
-  public putMetricFilter(
-    args: PutMetricFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutMetricFilterCommandOutput) => void),
-    cb?: (err: any, data?: PutMetricFilterCommandOutput) => void
-  ): Promise<PutMetricFilterCommandOutput> | void {
-    const command = new PutMetricFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates a query definition for CloudWatch Logs Insights. For
-   *       more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html">Analyzing Log Data with CloudWatch Logs Insights</a>.</p>
-   *
-   *          <p>To update a query definition, specify its
-   *         <code>queryDefinitionId</code> in your request. The values of <code>name</code>, <code>queryString</code>,
-   *       and <code>logGroupNames</code> are changed to the values that you specify in your update
-   *       operation. No current values are retained from the current query definition. For example, if
-   *       you update a current query definition that includes log groups, and you don't specify the
-   *         <code>logGroupNames</code> parameter in your update operation, the query definition changes
-   *       to contain no log groups.</p>
-   *          <p>You must have the <code>logs:PutQueryDefinition</code> permission to be able to perform
-   *     this operation.</p>
-   */
-  public putQueryDefinition(
-    args: PutQueryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutQueryDefinitionCommandOutput>;
-  public putQueryDefinition(
-    args: PutQueryDefinitionCommandInput,
-    cb: (err: any, data?: PutQueryDefinitionCommandOutput) => void
-  ): void;
-  public putQueryDefinition(
-    args: PutQueryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutQueryDefinitionCommandOutput) => void
-  ): void;
-  public putQueryDefinition(
-    args: PutQueryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutQueryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: PutQueryDefinitionCommandOutput) => void
-  ): Promise<PutQueryDefinitionCommandOutput> | void {
-    const command = new PutQueryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates a resource policy allowing other Amazon Web Services services to put log events to
-   *       this account, such as Amazon Route 53. An account can have up to 10 resource policies per Amazon Web Services
-   *       Region.</p>
-   */
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutResourcePolicyCommandOutput>;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): Promise<PutResourcePolicyCommandOutput> | void {
-    const command = new PutResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the retention of the specified log group. A retention policy allows you to
-   *       configure the number of days for which to retain log events in the specified log
-   *       group.</p>
-   */
-  public putRetentionPolicy(
-    args: PutRetentionPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutRetentionPolicyCommandOutput>;
-  public putRetentionPolicy(
-    args: PutRetentionPolicyCommandInput,
-    cb: (err: any, data?: PutRetentionPolicyCommandOutput) => void
-  ): void;
-  public putRetentionPolicy(
-    args: PutRetentionPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutRetentionPolicyCommandOutput) => void
-  ): void;
-  public putRetentionPolicy(
-    args: PutRetentionPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutRetentionPolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutRetentionPolicyCommandOutput) => void
-  ): Promise<PutRetentionPolicyCommandOutput> | void {
-    const command = new PutRetentionPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates a subscription filter and associates it with the specified log
-   *       group. Subscription filters allow you to subscribe to a real-time stream of log events
-   *       ingested through <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a> and have them delivered to a specific
-   *       destination. When log events are sent to the
-   *       receiving service, they are Base64 encoded
-   *       and compressed with the gzip format.</p>
-   *          <p>The following destinations are supported for subscription filters:</p>
-   *          <ul>
-   *             <li>
-   *                <p>An Amazon Kinesis stream belonging to the same account as the subscription filter,
-   *           for same-account delivery.</p>
-   *             </li>
-   *             <li>
-   *                <p>A logical destination that belongs to a different account, for cross-account delivery.</p>
-   *             </li>
-   *             <li>
-   *                <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the
-   *           subscription filter, for same-account delivery.</p>
-   *             </li>
-   *             <li>
-   *                <p>An Lambda function that belongs to the same account as the subscription filter,
-   *           for same-account delivery.</p>
-   *             </li>
-   *          </ul>
-   *          <p>Each log group can have up to two subscription filters associated with it. If you are
-   *       updating an existing filter, you must specify the correct name in <code>filterName</code>.
-   *       </p>
-   *          <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the
-   *       <code>iam:PassRole</code> permission.</p>
-   */
-  public putSubscriptionFilter(
-    args: PutSubscriptionFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutSubscriptionFilterCommandOutput>;
-  public putSubscriptionFilter(
-    args: PutSubscriptionFilterCommandInput,
-    cb: (err: any, data?: PutSubscriptionFilterCommandOutput) => void
-  ): void;
-  public putSubscriptionFilter(
-    args: PutSubscriptionFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutSubscriptionFilterCommandOutput) => void
-  ): void;
-  public putSubscriptionFilter(
-    args: PutSubscriptionFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutSubscriptionFilterCommandOutput) => void),
-    cb?: (err: any, data?: PutSubscriptionFilterCommandOutput) => void
-  ): Promise<PutSubscriptionFilterCommandOutput> | void {
-    const command = new PutSubscriptionFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group
-   *       and time range to query and the query string to use.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.</p>
-   *
-   *          <p>Queries time out after 15 minutes of execution. If your queries are timing out, reduce the
-   *       time range being searched or partition your query into a number of queries.</p>
-   */
-  public startQuery(args: StartQueryCommandInput, options?: __HttpHandlerOptions): Promise<StartQueryCommandOutput>;
-  public startQuery(args: StartQueryCommandInput, cb: (err: any, data?: StartQueryCommandOutput) => void): void;
-  public startQuery(
-    args: StartQueryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartQueryCommandOutput) => void
-  ): void;
-  public startQuery(
-    args: StartQueryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartQueryCommandOutput) => void),
-    cb?: (err: any, data?: StartQueryCommandOutput) => void
-  ): Promise<StartQueryCommandOutput> | void {
-    const command = new StartQueryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops a CloudWatch Logs Insights query that is in progress. If the query has already ended, the operation
-   *     returns an error indicating that the specified query is not running.</p>
-   */
-  public stopQuery(args: StopQueryCommandInput, options?: __HttpHandlerOptions): Promise<StopQueryCommandOutput>;
-  public stopQuery(args: StopQueryCommandInput, cb: (err: any, data?: StopQueryCommandOutput) => void): void;
-  public stopQuery(
-    args: StopQueryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopQueryCommandOutput) => void
-  ): void;
-  public stopQuery(
-    args: StopQueryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopQueryCommandOutput) => void),
-    cb?: (err: any, data?: StopQueryCommandOutput) => void
-  ): Promise<StopQueryCommandOutput> | void {
-    const command = new StopQueryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds or updates the specified tags for the specified log group.</p>
-   *          <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html">ListTagsLogGroup</a>.
-   *       To remove tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html">UntagLogGroup</a>.</p>
-   *          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging">Tag Log Groups in Amazon CloudWatch Logs</a>
-   *       in the <i>Amazon CloudWatch Logs User Guide</i>.</p>
-   *          <p>CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to
-   *       log groups using the <code>aws:Resource/<i>key-name</i>
-   *             </code> or <code>aws:TagKeys</code> condition keys.
-   *       For more information about using tags to control access, see
-   *       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Controlling access to Amazon Web Services resources using tags</a>.</p>
-   */
-  public tagLogGroup(args: TagLogGroupCommandInput, options?: __HttpHandlerOptions): Promise<TagLogGroupCommandOutput>;
-  public tagLogGroup(args: TagLogGroupCommandInput, cb: (err: any, data?: TagLogGroupCommandOutput) => void): void;
-  public tagLogGroup(
-    args: TagLogGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagLogGroupCommandOutput) => void
-  ): void;
-  public tagLogGroup(
-    args: TagLogGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagLogGroupCommandOutput) => void),
-    cb?: (err: any, data?: TagLogGroupCommandOutput) => void
-  ): Promise<TagLogGroupCommandOutput> | void {
-    const command = new TagLogGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Tests the filter pattern of a metric filter against a sample of log event messages. You
-   *       can use this operation to validate the correctness of a metric filter pattern.</p>
-   */
-  public testMetricFilter(
-    args: TestMetricFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<TestMetricFilterCommandOutput>;
-  public testMetricFilter(
-    args: TestMetricFilterCommandInput,
-    cb: (err: any, data?: TestMetricFilterCommandOutput) => void
-  ): void;
-  public testMetricFilter(
-    args: TestMetricFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TestMetricFilterCommandOutput) => void
-  ): void;
-  public testMetricFilter(
-    args: TestMetricFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestMetricFilterCommandOutput) => void),
-    cb?: (err: any, data?: TestMetricFilterCommandOutput) => void
-  ): Promise<TestMetricFilterCommandOutput> | void {
-    const command = new TestMetricFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the specified tags from the specified log group.</p>
-   *          <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html">ListTagsLogGroup</a>.
-   *       To add tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html">TagLogGroup</a>.</p>
-   *          <p>CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to
-   *       log groups using the <code>aws:Resource/<i>key-name</i>
-   *             </code> or <code>aws:TagKeys</code> condition keys.
-   *      </p>
-   */
-  public untagLogGroup(
-    args: UntagLogGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagLogGroupCommandOutput>;
-  public untagLogGroup(
-    args: UntagLogGroupCommandInput,
-    cb: (err: any, data?: UntagLogGroupCommandOutput) => void
-  ): void;
-  public untagLogGroup(
-    args: UntagLogGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagLogGroupCommandOutput) => void
-  ): void;
-  public untagLogGroup(
-    args: UntagLogGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagLogGroupCommandOutput) => void),
-    cb?: (err: any, data?: UntagLogGroupCommandOutput) => void
-  ): Promise<UntagLogGroupCommandOutput> | void {
-    const command = new UntagLogGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class CloudWatchLogs extends CloudWatchLogsClient implements CloudWatchLogs {}
+createAggregatedClient(commands, CloudWatchLogs, { paginators });

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { ListProvisionedCapacityInput, ListProvisionedCapacityOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProvisionedCapacityCommand,
-  serializeAws_restJson1ListProvisionedCapacityCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProvisionedCapacityInput, ListProvisionedCapacityOutput } from "../models/models_0";
+import { ListProvisionedCapacity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProvisionedCapacityCommand}.
+ */
 export interface ListProvisionedCapacityCommandInput extends ListProvisionedCapacityInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListProvisionedCapacityCommand}.
+ */
 export interface ListProvisionedCapacityCommandOutput extends ListProvisionedCapacityOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,91 @@ export interface ListProvisionedCapacityCommandOutput extends ListProvisionedCap
  * ```javascript
  * import { GlacierClient, ListProvisionedCapacityCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, ListProvisionedCapacityCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // ListProvisionedCapacityInput
+ *   accountId: "STRING_VALUE", // required
+ * };
  * const command = new ListProvisionedCapacityCommand(input);
  * const response = await client.send(command);
+ * // { // ListProvisionedCapacityOutput
+ * //   ProvisionedCapacityList: [ // ProvisionedCapacityList
+ * //     { // ProvisionedCapacityDescription
+ * //       CapacityId: "STRING_VALUE",
+ * //       StartDate: "STRING_VALUE",
+ * //       ExpirationDate: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListProvisionedCapacityCommandInput - {@link ListProvisionedCapacityCommandInput}
+ * @returns {@link ListProvisionedCapacityCommandOutput}
  * @see {@link ListProvisionedCapacityCommandInput} for command's `input` shape.
  * @see {@link ListProvisionedCapacityCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To list the provisioned capacity units for an account
+ * ```javascript
+ * // The example lists the provisioned capacity units for an account.
+ * const input = {
+ *   accountId: "-"
+ * };
+ * const command = new ListProvisionedCapacityCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ProvisionedCapacityList: [
+ *     {
+ *       CapacityId: "zSaq7NzHFQDANTfQkDen4V7z",
+ *       ExpirationDate: "2016-12-12T00:00:00.000Z",
+ *       StartDate: "2016-11-11T20:11:51.095Z"
+ *     },
+ *     {
+ *       CapacityId: "yXaq7NzHFQNADTfQkDen4V7z",
+ *       ExpirationDate: "2017-01-15T00:00:00.000Z",
+ *       StartDate: "2016-12-13T20:11:51.095Z"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListProvisionedCapacityCommand extends $Command<
-  ListProvisionedCapacityCommandInput,
-  ListProvisionedCapacityCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProvisionedCapacityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProvisionedCapacityCommandInput, ListProvisionedCapacityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "ListProvisionedCapacityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProvisionedCapacityInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProvisionedCapacityOutput.filterSensitiveLog,
+export class ListProvisionedCapacityCommand extends command<ListProvisionedCapacityCommandInput, ListProvisionedCapacityCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProvisionedCapacity",
+  ListProvisionedCapacity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProvisionedCapacityInput;
+      output: ListProvisionedCapacityOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProvisionedCapacityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProvisionedCapacityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProvisionedCapacityCommandOutput> {
-    return deserializeAws_restJson1ListProvisionedCapacityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProvisionedCapacityCommandInput;
+      output: ListProvisionedCapacityCommandOutput;
+    };
+  };
 }

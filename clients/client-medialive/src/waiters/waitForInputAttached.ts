@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeInputCommand, DescribeInputCommandInput } from "../commands/DescribeInputCommand";
-import { MediaLiveClient } from "../MediaLiveClient";
+import {
+  type DescribeInputCommandInput,
+  type DescribeInputCommandOutput,
+  DescribeInputCommand,
+} from "../commands/DescribeInputCommand";
+import type { MediaLiveClient } from "../MediaLiveClient";
+import type { MediaLiveServiceException } from "../models/MediaLiveServiceException";
 
-const checkState = async (client: MediaLiveClient, input: DescribeInputCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: MediaLiveClient, input: DescribeInputCommandInput): Promise<WaiterResult<DescribeInputCommandOutput | MediaLiveServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeInputCommand(input));
+    let result: DescribeInputCommandOutput & any = await client.send(new DescribeInputCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "ATTACHED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,14 +31,14 @@ const checkState = async (client: MediaLiveClient, input: DescribeInputCommandIn
     try {
       const returnComparator = () => {
         return result.State;
-      };
+      }
       if (returnComparator() === "DETACHED") {
         return { state: WaiterState.RETRY, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InternalServerErrorException") {
+    if (exception.name === "InternalServerErrorException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -39,7 +51,7 @@ const checkState = async (client: MediaLiveClient, input: DescribeInputCommandIn
 export const waitForInputAttached = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeInputCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInputCommandOutput | MediaLiveServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +63,8 @@ export const waitForInputAttached = async (
 export const waitUntilInputAttached = async (
   params: WaiterConfiguration<MediaLiveClient>,
   input: DescribeInputCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInputCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeInputCommandOutput>;
 };

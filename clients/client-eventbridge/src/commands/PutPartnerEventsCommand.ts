@@ -1,96 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { PutPartnerEventsRequest, PutPartnerEventsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutPartnerEventsCommand,
-  serializeAws_json1_1PutPartnerEventsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutPartnerEventsRequest, PutPartnerEventsResponse } from "../models/models_0";
+import { PutPartnerEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutPartnerEventsCommand}.
+ */
 export interface PutPartnerEventsCommandInput extends PutPartnerEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutPartnerEventsCommand}.
+ */
 export interface PutPartnerEventsCommandOutput extends PutPartnerEventsResponse, __MetadataBearer {}
 
 /**
- * <p>This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services
- *       customers do not use this operation.</p>
+ * <p>This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation.</p>
+ *          <p>For information on calculating event batch size, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html">Calculating EventBridge PutEvents event
+ *         entry size</a> in the <i>EventBridge User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EventBridgeClient, PutPartnerEventsCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, PutPartnerEventsCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // PutPartnerEventsRequest
+ *   Entries: [ // PutPartnerEventsRequestEntryList // required
+ *     { // PutPartnerEventsRequestEntry
+ *       Time: new Date("TIMESTAMP"),
+ *       Source: "STRING_VALUE",
+ *       Resources: [ // EventResourceList
+ *         "STRING_VALUE",
+ *       ],
+ *       DetailType: "STRING_VALUE",
+ *       Detail: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new PutPartnerEventsCommand(input);
  * const response = await client.send(command);
+ * // { // PutPartnerEventsResponse
+ * //   FailedEntryCount: Number("int"),
+ * //   Entries: [ // PutPartnerEventsResultEntryList
+ * //     { // PutPartnerEventsResultEntry
+ * //       EventId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutPartnerEventsCommandInput - {@link PutPartnerEventsCommandInput}
+ * @returns {@link PutPartnerEventsCommandOutput}
  * @see {@link PutPartnerEventsCommandInput} for command's `input` shape.
  * @see {@link PutPartnerEventsCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class PutPartnerEventsCommand extends $Command<
-  PutPartnerEventsCommandInput,
-  PutPartnerEventsCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutPartnerEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutPartnerEventsCommandInput, PutPartnerEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "PutPartnerEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutPartnerEventsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutPartnerEventsResponse.filterSensitiveLog,
+export class PutPartnerEventsCommand extends command<PutPartnerEventsCommandInput, PutPartnerEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutPartnerEvents",
+  PutPartnerEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPartnerEventsRequest;
+      output: PutPartnerEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutPartnerEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutPartnerEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutPartnerEventsCommandOutput> {
-    return deserializeAws_json1_1PutPartnerEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutPartnerEventsCommandInput;
+      output: PutPartnerEventsCommandOutput;
+    };
+  };
 }

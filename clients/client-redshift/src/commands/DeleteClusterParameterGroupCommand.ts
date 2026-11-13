@@ -1,102 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteClusterParameterGroupMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteClusterParameterGroupCommand,
-  serializeAws_queryDeleteClusterParameterGroupCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteClusterParameterGroupMessage } from "../models/models_0";
+import { DeleteClusterParameterGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteClusterParameterGroupCommand}.
+ */
 export interface DeleteClusterParameterGroupCommandInput extends DeleteClusterParameterGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteClusterParameterGroupCommand}.
+ */
 export interface DeleteClusterParameterGroupCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Deletes a specified Amazon Redshift parameter group.</p>
- *         <note>
+ *          <note>
  *             <p>You cannot delete a parameter group if it is associated with a
  *                 cluster.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftClient, DeleteClusterParameterGroupCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DeleteClusterParameterGroupCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DeleteClusterParameterGroupMessage
+ *   ParameterGroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteClusterParameterGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteClusterParameterGroupCommandInput - {@link DeleteClusterParameterGroupCommandInput}
+ * @returns {@link DeleteClusterParameterGroupCommandOutput}
  * @see {@link DeleteClusterParameterGroupCommandInput} for command's `input` shape.
  * @see {@link DeleteClusterParameterGroupCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterParameterGroupNotFoundFault} (client fault)
+ *  <p>The parameter group name does not refer to an existing parameter group.</p>
+ *
+ * @throws {@link InvalidClusterParameterGroupStateFault} (client fault)
+ *  <p>The cluster parameter group action can not be completed because another task is in
+ *             progress that involves the parameter group. Wait a few moments and try the operation
+ *             again.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteClusterParameterGroupCommand extends $Command<
-  DeleteClusterParameterGroupCommandInput,
-  DeleteClusterParameterGroupCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteClusterParameterGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteClusterParameterGroupCommandInput, DeleteClusterParameterGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DeleteClusterParameterGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteClusterParameterGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteClusterParameterGroupCommand extends command<DeleteClusterParameterGroupCommandInput, DeleteClusterParameterGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteClusterParameterGroup",
+  DeleteClusterParameterGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteClusterParameterGroupMessage;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteClusterParameterGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteClusterParameterGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteClusterParameterGroupCommandOutput> {
-    return deserializeAws_queryDeleteClusterParameterGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteClusterParameterGroupCommandInput;
+      output: DeleteClusterParameterGroupCommandOutput;
+    };
+  };
 }

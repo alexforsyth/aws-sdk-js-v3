@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteTrafficMirrorFilterRuleRequest, DeleteTrafficMirrorFilterRuleResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTrafficMirrorFilterRuleCommand,
-  serializeAws_ec2DeleteTrafficMirrorFilterRuleCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTrafficMirrorFilterRuleRequest, DeleteTrafficMirrorFilterRuleResult } from "../models/models_3";
+import { DeleteTrafficMirrorFilterRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTrafficMirrorFilterRuleCommand}.
+ */
 export interface DeleteTrafficMirrorFilterRuleCommandInput extends DeleteTrafficMirrorFilterRuleRequest {}
-export interface DeleteTrafficMirrorFilterRuleCommandOutput
-  extends DeleteTrafficMirrorFilterRuleResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTrafficMirrorFilterRuleCommand}.
+ */
+export interface DeleteTrafficMirrorFilterRuleCommandOutput extends DeleteTrafficMirrorFilterRuleResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified Traffic Mirror rule.</p>
@@ -30,71 +29,48 @@ export interface DeleteTrafficMirrorFilterRuleCommandOutput
  * ```javascript
  * import { EC2Client, DeleteTrafficMirrorFilterRuleCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTrafficMirrorFilterRuleCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTrafficMirrorFilterRuleRequest
+ *   TrafficMirrorFilterRuleId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTrafficMirrorFilterRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTrafficMirrorFilterRuleResult
+ * //   TrafficMirrorFilterRuleId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteTrafficMirrorFilterRuleCommandInput - {@link DeleteTrafficMirrorFilterRuleCommandInput}
+ * @returns {@link DeleteTrafficMirrorFilterRuleCommandOutput}
  * @see {@link DeleteTrafficMirrorFilterRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteTrafficMirrorFilterRuleCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTrafficMirrorFilterRuleCommand extends $Command<
-  DeleteTrafficMirrorFilterRuleCommandInput,
-  DeleteTrafficMirrorFilterRuleCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTrafficMirrorFilterRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTrafficMirrorFilterRuleCommandInput, DeleteTrafficMirrorFilterRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTrafficMirrorFilterRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTrafficMirrorFilterRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTrafficMirrorFilterRuleResult.filterSensitiveLog,
+export class DeleteTrafficMirrorFilterRuleCommand extends command<DeleteTrafficMirrorFilterRuleCommandInput, DeleteTrafficMirrorFilterRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTrafficMirrorFilterRule",
+  DeleteTrafficMirrorFilterRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTrafficMirrorFilterRuleRequest;
+      output: DeleteTrafficMirrorFilterRuleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTrafficMirrorFilterRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTrafficMirrorFilterRuleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTrafficMirrorFilterRuleCommandOutput> {
-    return deserializeAws_ec2DeleteTrafficMirrorFilterRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTrafficMirrorFilterRuleCommandInput;
+      output: DeleteTrafficMirrorFilterRuleCommandOutput;
+    };
+  };
 }

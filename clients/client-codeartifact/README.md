@@ -1,38 +1,32 @@
-# @aws-sdk/client-codeartifact
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-codeartifact/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-codeartifact)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-codeartifact.svg)](https://www.npmjs.com/package/@aws-sdk/client-codeartifact)
+# @aws-sdk/client-codeartifact
 
 ## Description
 
 AWS SDK for JavaScript Codeartifact Client for Node.js, Browser and React Native.
 
-<p> AWS CodeArtifact is a fully managed artifact repository compatible with language-native
-package managers and build tools such as npm, Apache Maven, and pip. You can use CodeArtifact to
+<p> CodeArtifact is a fully managed artifact repository compatible with language-native
+package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to
 share packages with development teams and pull packages. Packages can be pulled from both
 public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact
 repository and another repository, which effectively merges their contents from the point of
 view of a package manager client. </p>
-
 <p>
-<b>AWS CodeArtifact Components</b>
+<b>CodeArtifact concepts</b>
 </p>
-<p>Use the information in this guide to help you work with the following CodeArtifact components:</p>
-
 <ul>
 <li>
 <p>
 <b>Repository</b>: A CodeArtifact repository contains a set of <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version">package
 versions</a>, each of which maps to a set of assets, or files. Repositories are
 polyglot, so a single repository can contain packages of any supported type. Each
-repository exposes endpoints for fetching and publishing packages using tools like the
-<b>
+repository exposes endpoints for fetching and publishing packages using tools such as the <b>
 <code>npm</code>
-</b> CLI, the Maven CLI (<b>
+</b> CLI or the Maven CLI (<b>
 <code>mvn</code>
-</b>), and <b>
-<code>pip</code>
-</b>.</p>
+</b>). For a list of supported package managers, see the
+<a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
 </li>
 <li>
 <p>
@@ -41,7 +35,7 @@ repository exposes endpoints for fetching and publishing packages using tools li
 but are consumed through repositories. A given package asset, such as a Maven JAR file, is
 stored once per domain, no matter how many repositories it's present in. All of the assets
 and metadata in a domain are encrypted with the same customer master key (CMK) stored in
-AWS Key Management Service (AWS KMS).</p>
+Key Management Service (KMS).</p>
 <p>Each repository is a member of a single domain and can't be moved to a
 different domain.</p>
 <p>The domain allows organizational policy to be applied across multiple
@@ -54,7 +48,9 @@ across their organization.</p>
 <li>
 <p>
 <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to
-resolve dependencies and install the software. CodeArtifact supports <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html">npm</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html">PyPI</a>, and <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven">Maven</a> package formats.</p>
+resolve dependencies and install the software. CodeArtifact supports npm, PyPI, Maven, NuGet, Swift, Ruby, Cargo, and generic package formats.
+For more information about the supported package formats and how to use CodeArtifact with them, see the
+<a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html">CodeArtifact User Guide</a>.</p>
 <p>In CodeArtifact, a package consists of:</p>
 <ul>
 <li>
@@ -72,6 +68,14 @@ popular npm package)</p>
 <p> Package-level metadata (for example, npm tags)</p>
 </li>
 </ul>
+</li>
+<li>
+<p>
+<b>Package group</b>: A group of packages that match a specified definition. Package
+groups can be used to apply configuration to multiple packages that match a defined pattern using
+package format, package namespace, and package name. You can use package groups to more conveniently
+configure package origin controls for multiple packages. Package origin controls are used to block or allow ingestion or publishing
+of new package versions, which protects users from malicious actions known as dependency substitution attacks.</p>
 </li>
 <li>
 <p>
@@ -94,8 +98,9 @@ allows creating an upstream relationship between two repositories.</p>
 <code>.tgz</code> file or Maven POM and JAR files.</p>
 </li>
 </ul>
-
-<p>CodeArtifact supports these operations:</p>
+<p>
+<b>CodeArtifact supported API operations</b>
+</p>
 <ul>
 <li>
 <p>
@@ -110,7 +115,11 @@ repository to another repository in the same domain.</p>
 </li>
 <li>
 <p>
-<code>CreateDomain</code>: Creates a domain</p>
+<code>CreateDomain</code>: Creates a domain.</p>
+</li>
+<li>
+<p>
+<code>CreatePackageGroup</code>: Creates a package group.</p>
 </li>
 <li>
 <p>
@@ -124,6 +133,14 @@ repositories. </p>
 <li>
 <p>
 <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>
+</li>
+<li>
+<p>
+<code>DeletePackage</code>: Deletes a package and all associated package versions.</p>
+</li>
+<li>
+<p>
+<code>DeletePackageGroup</code>: Deletes a package group. Does not delete packages or package versions that are associated with a package group.</p>
 </li>
 <li>
 <p>
@@ -147,6 +164,16 @@ contains information about the requested domain.</p>
 </li>
 <li>
 <p>
+<code>DescribePackage</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a>
+object that contains details about a package. </p>
+</li>
+<li>
+<p>
+<code>DescribePackageGroup</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroup.html">PackageGroup</a>
+object that contains details about a package group. </p>
+</li>
+<li>
+<p>
 <code>DescribePackageVersion</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a>
 object that contains details about a package version. </p>
 </li>
@@ -165,6 +192,10 @@ permanently removed from storage.</p>
 <p>
 <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.
 </p>
+</li>
+<li>
+<p>
+<code>GetAssociatedPackageGroup</code>: Returns the most closely associated package group to the specified package.</p>
 </li>
 <li>
 <p>
@@ -192,7 +223,27 @@ package format:
 <ul>
 <li>
 <p>
+<code>cargo</code>
+</p>
+</li>
+<li>
+<p>
+<code>generic</code>
+</p>
+</li>
+<li>
+<p>
+<code>maven</code>
+</p>
+</li>
+<li>
+<p>
 <code>npm</code>
+</p>
+</li>
+<li>
+<p>
+<code>nuget</code>
 </p>
 </li>
 <li>
@@ -202,7 +253,12 @@ package format:
 </li>
 <li>
 <p>
-<code>maven</code>
+<code>ruby</code>
+</p>
+</li>
+<li>
+<p>
+<code>swift</code>
 </p>
 </li>
 </ul>
@@ -214,12 +270,24 @@ package format:
 </li>
 <li>
 <p>
+<code>ListAllowedRepositoriesForGroup</code>: Lists the allowed repositories for a package group that has origin configuration set to <code>ALLOW_SPECIFIC_REPOSITORIES</code>.</p>
+</li>
+<li>
+<p>
+<code>ListAssociatedPackages</code>: Returns a list of packages associated with the requested package group.</p>
+</li>
+<li>
+<p>
 <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each
 returned <code>DomainSummary</code> object contains information about a domain.</p>
 </li>
 <li>
 <p>
 <code>ListPackages</code>: Lists the packages in a repository.</p>
+</li>
+<li>
+<p>
+<code>ListPackageGroups</code>: Returns a list of package groups in the requested domain.</p>
 </li>
 <li>
 <p>
@@ -237,7 +305,7 @@ package in a repository.</p>
 </li>
 <li>
 <p>
-<code>ListRepositories</code>: Returns a list of repositories owned by the AWS account that called this method.</p>
+<code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>
 </li>
 <li>
 <p>
@@ -245,12 +313,33 @@ package in a repository.</p>
 </li>
 <li>
 <p>
+<code>ListSubPackageGroups</code>: Returns a list of direct children of the specified package group.</p>
+</li>
+<li>
+<p>
+<code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>
+</li>
+<li>
+<p>
 <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>
+</li>
+<li>
+<p>
+<code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine
+how new versions of the package can be added to a specific repository.</p>
 </li>
 <li>
 <p>
 <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository
 that specifies permissions to access it. </p>
+</li>
+<li>
+<p>
+<code>UpdatePackageGroup</code>: Updates a package group. This API cannot be used to update a package group's origin configuration or pattern.</p>
+</li>
+<li>
+<p>
+<code>UpdatePackageGroupOriginConfiguration</code>: Updates the package origin configuration for a package group.</p>
 </li>
 <li>
 <p>
@@ -264,8 +353,7 @@ that specifies permissions to access it. </p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-codeartifact
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-codeartifact`
 - `yarn add @aws-sdk/client-codeartifact`
@@ -277,40 +365,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `CodeartifactClient` and
-the commands you need, for example `AssociateExternalConnectionCommand`:
+the commands you need, for example `ListDomainsCommand`:
 
 ```js
 // ES5 example
-const { CodeartifactClient, AssociateExternalConnectionCommand } = require("@aws-sdk/client-codeartifact");
+const { CodeartifactClient, ListDomainsCommand } = require("@aws-sdk/client-codeartifact");
 ```
 
 ```ts
 // ES6+ example
-import { CodeartifactClient, AssociateExternalConnectionCommand } from "@aws-sdk/client-codeartifact";
+import { CodeartifactClient, ListDomainsCommand } from "@aws-sdk/client-codeartifact";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new CodeartifactClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AssociateExternalConnectionCommand(params);
+const params = { /** input parameters */ };
+const command = new ListDomainsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -325,26 +411,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -360,31 +429,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`Codeartifact` extends `CodeartifactClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`CodeartifactClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-codeartifact";
-const client = new AWS.Codeartifact({ region: "REGION" });
+import { Codeartifact } from "@aws-sdk/client-codeartifact";
+
+const client = new Codeartifact({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.associateExternalConnection(params);
+  const data = await client.listDomains(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -392,7 +455,7 @@ try {
 
 // Promises.
 client
-  .associateExternalConnection(params)
+  .listDomains(params)
   .then((data) => {
     // process data.
   })
@@ -400,9 +463,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.associateExternalConnection(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listDomains(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -428,12 +491,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -454,3 +519,342 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AssociateExternalConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/AssociateExternalConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/AssociateExternalConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/AssociateExternalConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+CopyPackageVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/CopyPackageVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CopyPackageVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CopyPackageVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/CreateDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreateDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreateDomainCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePackageGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/CreatePackageGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreatePackageGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreatePackageGroupCommandOutput/)
+</details>
+<details>
+<summary>
+CreateRepository
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/CreateRepositoryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreateRepositoryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/CreateRepositoryCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeleteDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDomainPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeleteDomainPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteDomainPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteDomainPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePackage
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeletePackageCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePackageGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeletePackageGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePackageVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeletePackageVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeletePackageVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteRepository
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeleteRepositoryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteRepositoryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteRepositoryCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteRepositoryPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DeleteRepositoryPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteRepositoryPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DeleteRepositoryPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DescribeDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribeDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribeDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DescribePackage
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DescribePackageCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageCommandOutput/)
+</details>
+<details>
+<summary>
+DescribePackageGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DescribePackageGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageGroupCommandOutput/)
+</details>
+<details>
+<summary>
+DescribePackageVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DescribePackageVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribePackageVersionCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeRepository
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DescribeRepositoryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribeRepositoryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DescribeRepositoryCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateExternalConnection
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DisassociateExternalConnectionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DisassociateExternalConnectionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DisassociateExternalConnectionCommandOutput/)
+</details>
+<details>
+<summary>
+DisposePackageVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/DisposePackageVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DisposePackageVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/DisposePackageVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+GetAssociatedPackageGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetAssociatedPackageGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetAssociatedPackageGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetAssociatedPackageGroupCommandOutput/)
+</details>
+<details>
+<summary>
+GetAuthorizationToken
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetAuthorizationTokenCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetAuthorizationTokenCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetAuthorizationTokenCommandOutput/)
+</details>
+<details>
+<summary>
+GetDomainPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetDomainPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetDomainPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetDomainPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+GetPackageVersionAsset
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetPackageVersionAssetCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetPackageVersionAssetCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetPackageVersionAssetCommandOutput/)
+</details>
+<details>
+<summary>
+GetPackageVersionReadme
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetPackageVersionReadmeCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetPackageVersionReadmeCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetPackageVersionReadmeCommandOutput/)
+</details>
+<details>
+<summary>
+GetRepositoryEndpoint
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetRepositoryEndpointCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetRepositoryEndpointCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetRepositoryEndpointCommandOutput/)
+</details>
+<details>
+<summary>
+GetRepositoryPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/GetRepositoryPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetRepositoryPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/GetRepositoryPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+ListAllowedRepositoriesForGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListAllowedRepositoriesForGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListAllowedRepositoriesForGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListAllowedRepositoriesForGroupCommandOutput/)
+</details>
+<details>
+<summary>
+ListAssociatedPackages
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListAssociatedPackagesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListAssociatedPackagesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListAssociatedPackagesCommandOutput/)
+</details>
+<details>
+<summary>
+ListDomains
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListDomainsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListDomainsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListDomainsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPackageGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListPackageGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPackages
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListPackagesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackagesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackagesCommandOutput/)
+</details>
+<details>
+<summary>
+ListPackageVersionAssets
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListPackageVersionAssetsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionAssetsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionAssetsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPackageVersionDependencies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListPackageVersionDependenciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionDependenciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionDependenciesCommandOutput/)
+</details>
+<details>
+<summary>
+ListPackageVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListPackageVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListPackageVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+ListRepositories
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListRepositoriesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListRepositoriesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListRepositoriesCommandOutput/)
+</details>
+<details>
+<summary>
+ListRepositoriesInDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListRepositoriesInDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListRepositoriesInDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListRepositoriesInDomainCommandOutput/)
+</details>
+<details>
+<summary>
+ListSubPackageGroups
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListSubPackageGroupsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListSubPackageGroupsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListSubPackageGroupsCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+PublishPackageVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/PublishPackageVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PublishPackageVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PublishPackageVersionCommandOutput/)
+</details>
+<details>
+<summary>
+PutDomainPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/PutDomainPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutDomainPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutDomainPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+PutPackageOriginConfiguration
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/PutPackageOriginConfigurationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutPackageOriginConfigurationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutPackageOriginConfigurationCommandOutput/)
+</details>
+<details>
+<summary>
+PutRepositoryPermissionsPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/PutRepositoryPermissionsPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutRepositoryPermissionsPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/PutRepositoryPermissionsPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePackageGroup
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/UpdatePackageGroupCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageGroupCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageGroupCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePackageGroupOriginConfiguration
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/UpdatePackageGroupOriginConfigurationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageGroupOriginConfigurationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageGroupOriginConfigurationCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePackageVersionsStatus
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/UpdatePackageVersionsStatusCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageVersionsStatusCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdatePackageVersionsStatusCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateRepository
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/codeartifact/command/UpdateRepositoryCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdateRepositoryCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-codeartifact/Interface/UpdateRepositoryCommandOutput/)
+</details>

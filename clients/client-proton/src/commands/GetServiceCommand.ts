@@ -1,95 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetServiceInput, GetServiceOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0GetServiceCommand,
-  serializeAws_json1_0GetServiceCommand,
-} from "../protocols/Aws_json1_0";
-import { ProtonClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ProtonClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetServiceInput, GetServiceOutput } from "../models/models_0";
+import { GetService$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetServiceCommand}.
+ */
 export interface GetServiceCommandInput extends GetServiceInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetServiceCommand}.
+ */
 export interface GetServiceCommandOutput extends GetServiceOutput, __MetadataBearer {}
 
 /**
- * <p>Get detail data for a service.</p>
+ * <p>Get detailed data for a service.</p>
+ *
+ * @deprecated (since 10/07/2025) AWS Proton is not accepting new customers.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ProtonClient, GetServiceCommand } from "@aws-sdk/client-proton"; // ES Modules import
  * // const { ProtonClient, GetServiceCommand } = require("@aws-sdk/client-proton"); // CommonJS import
+ * // import type { ProtonClientConfig } from "@aws-sdk/client-proton";
+ * const config = {}; // type is ProtonClientConfig
  * const client = new ProtonClient(config);
+ * const input = { // GetServiceInput
+ *   name: "STRING_VALUE", // required
+ * };
  * const command = new GetServiceCommand(input);
  * const response = await client.send(command);
+ * // { // GetServiceOutput
+ * //   service: { // Service
+ * //     name: "STRING_VALUE", // required
+ * //     description: "STRING_VALUE",
+ * //     arn: "STRING_VALUE", // required
+ * //     templateName: "STRING_VALUE", // required
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     lastModifiedAt: new Date("TIMESTAMP"), // required
+ * //     status: "STRING_VALUE", // required
+ * //     statusMessage: "STRING_VALUE",
+ * //     spec: "STRING_VALUE", // required
+ * //     pipeline: { // ServicePipeline
+ * //       arn: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       lastDeploymentAttemptedAt: new Date("TIMESTAMP"), // required
+ * //       lastDeploymentSucceededAt: new Date("TIMESTAMP"), // required
+ * //       templateName: "STRING_VALUE", // required
+ * //       templateMajorVersion: "STRING_VALUE", // required
+ * //       templateMinorVersion: "STRING_VALUE", // required
+ * //       deploymentStatus: "STRING_VALUE", // required
+ * //       deploymentStatusMessage: "STRING_VALUE",
+ * //       spec: "STRING_VALUE",
+ * //       lastAttemptedDeploymentId: "STRING_VALUE",
+ * //       lastSucceededDeploymentId: "STRING_VALUE",
+ * //     },
+ * //     repositoryConnectionArn: "STRING_VALUE",
+ * //     repositoryId: "STRING_VALUE",
+ * //     branchName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetServiceCommandInput - {@link GetServiceCommandInput}
+ * @returns {@link GetServiceCommandOutput}
  * @see {@link GetServiceCommandInput} for command's `input` shape.
  * @see {@link GetServiceCommandOutput} for command's `response` shape.
- * @see {@link ProtonClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ProtonClientResolvedConfig | config} for ProtonClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>There <i>isn't</i> sufficient access for performing this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed to register with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource <i>wasn't</i> found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ProtonServiceException}
+ * <p>Base exception class for all service exceptions from Proton service.</p>
+ *
+ *
+ * @public
  */
-export class GetServiceCommand extends $Command<
-  GetServiceCommandInput,
-  GetServiceCommandOutput,
-  ProtonClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetServiceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ProtonClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetServiceCommandInput, GetServiceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ProtonClient";
-    const commandName = "GetServiceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetServiceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetServiceOutput.filterSensitiveLog,
+export class GetServiceCommand extends command<GetServiceCommandInput, GetServiceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetService",
+  GetService$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceInput;
+      output: GetServiceOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetServiceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetServiceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetServiceCommandOutput> {
-    return deserializeAws_json1_0GetServiceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetServiceCommandInput;
+      output: GetServiceCommandOutput;
+    };
+  };
 }

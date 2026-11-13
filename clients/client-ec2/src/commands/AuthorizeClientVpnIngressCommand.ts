@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AuthorizeClientVpnIngressRequest, AuthorizeClientVpnIngressResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AuthorizeClientVpnIngressCommand,
-  serializeAws_ec2AuthorizeClientVpnIngressCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AuthorizeClientVpnIngressRequest, AuthorizeClientVpnIngressResult } from "../models/models_0";
+import { AuthorizeClientVpnIngress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AuthorizeClientVpnIngressCommand}.
+ */
 export interface AuthorizeClientVpnIngressCommandInput extends AuthorizeClientVpnIngressRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AuthorizeClientVpnIngressCommand}.
+ */
 export interface AuthorizeClientVpnIngressCommandOutput extends AuthorizeClientVpnIngressResult, __MetadataBearer {}
 
 /**
@@ -30,71 +31,56 @@ export interface AuthorizeClientVpnIngressCommandOutput extends AuthorizeClientV
  * ```javascript
  * import { EC2Client, AuthorizeClientVpnIngressCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AuthorizeClientVpnIngressCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AuthorizeClientVpnIngressRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   TargetNetworkCidr: "STRING_VALUE", // required
+ *   AccessGroupId: "STRING_VALUE",
+ *   AuthorizeAllGroups: true || false,
+ *   Description: "STRING_VALUE",
+ *   ClientToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new AuthorizeClientVpnIngressCommand(input);
  * const response = await client.send(command);
+ * // { // AuthorizeClientVpnIngressResult
+ * //   Status: { // ClientVpnAuthorizationRuleStatus
+ * //     Code: "authorizing" || "active" || "failed" || "revoking",
+ * //     Message: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AuthorizeClientVpnIngressCommandInput - {@link AuthorizeClientVpnIngressCommandInput}
+ * @returns {@link AuthorizeClientVpnIngressCommandOutput}
  * @see {@link AuthorizeClientVpnIngressCommandInput} for command's `input` shape.
  * @see {@link AuthorizeClientVpnIngressCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AuthorizeClientVpnIngressCommand extends $Command<
-  AuthorizeClientVpnIngressCommandInput,
-  AuthorizeClientVpnIngressCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AuthorizeClientVpnIngressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AuthorizeClientVpnIngressCommandInput, AuthorizeClientVpnIngressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AuthorizeClientVpnIngressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AuthorizeClientVpnIngressRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AuthorizeClientVpnIngressResult.filterSensitiveLog,
+export class AuthorizeClientVpnIngressCommand extends command<AuthorizeClientVpnIngressCommandInput, AuthorizeClientVpnIngressCommandOutput>(
+  _ep0,
+  _mw0,
+  "AuthorizeClientVpnIngress",
+  AuthorizeClientVpnIngress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AuthorizeClientVpnIngressRequest;
+      output: AuthorizeClientVpnIngressResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AuthorizeClientVpnIngressCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2AuthorizeClientVpnIngressCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AuthorizeClientVpnIngressCommandOutput> {
-    return deserializeAws_ec2AuthorizeClientVpnIngressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AuthorizeClientVpnIngressCommandInput;
+      output: AuthorizeClientVpnIngressCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,119 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListJobsRequest, ListJobsResponse } from "../models/models_0";
+import { ListJobs$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListJobsCommand}.
+ */
+export interface ListJobsCommandInput extends ListJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListJobsCommand}.
+ */
+export interface ListJobsCommandOutput extends ListJobsResponse, __MetadataBearer {}
+
+/**
+ * Lists jobs.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListJobsCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListJobsCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListJobsRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   principalId: "STRING_VALUE",
+ * };
+ * const command = new ListJobsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListJobsResponse
+ * //   jobs: [ // JobSummaries // required
+ * //     { // JobSummary
+ * //       jobId: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       lifecycleStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "UPLOAD_IN_PROGRESS" || "UPLOAD_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED" || "UPDATE_SUCCEEDED" || "ARCHIVED", // required
+ * //       lifecycleStatusMessage: "STRING_VALUE", // required
+ * //       priority: Number("int"), // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //       startedAt: new Date("TIMESTAMP"),
+ * //       endedAt: new Date("TIMESTAMP"),
+ * //       taskRunStatus: "PENDING" || "READY" || "ASSIGNED" || "STARTING" || "SCHEDULED" || "INTERRUPTING" || "RUNNING" || "SUSPENDED" || "CANCELED" || "FAILED" || "SUCCEEDED" || "NOT_COMPATIBLE",
+ * //       targetTaskRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ * //       taskRunStatusCounts: { // TaskRunStatusCounts
+ * //         "<keys>": Number("int"),
+ * //       },
+ * //       taskFailureRetryCount: Number("int"),
+ * //       maxFailedTasksCount: Number("int"),
+ * //       maxRetriesPerTask: Number("int"),
+ * //       maxWorkerCount: Number("int"),
+ * //       sourceJobId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListJobsCommandInput - {@link ListJobsCommandInput}
+ * @returns {@link ListJobsCommandOutput}
+ * @see {@link ListJobsCommandInput} for command's `input` shape.
+ * @see {@link ListJobsCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListJobsCommand extends command<ListJobsCommandInput, ListJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListJobs",
+  ListJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobsRequest;
+      output: ListJobsResponse;
+    };
+    sdk: {
+      input: ListJobsCommandInput;
+      output: ListJobsCommandOutput;
+    };
+  };
+}

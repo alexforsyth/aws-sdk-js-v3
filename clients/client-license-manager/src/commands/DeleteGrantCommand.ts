@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { DeleteGrantRequest, DeleteGrantResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteGrantCommand,
-  serializeAws_json1_1DeleteGrantCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteGrantRequest, DeleteGrantResponse } from "../models/models_0";
+import { DeleteGrant$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteGrantCommand}.
+ */
 export interface DeleteGrantCommandInput extends DeleteGrantRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteGrantCommand}.
+ */
 export interface DeleteGrantCommandOutput extends DeleteGrantResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface DeleteGrantCommandOutput extends DeleteGrantResponse, __Metadat
  * ```javascript
  * import { LicenseManagerClient, DeleteGrantCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, DeleteGrantCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // DeleteGrantRequest
+ *   GrantArn: "STRING_VALUE", // required
+ *   StatusReason: "STRING_VALUE",
+ *   Version: "STRING_VALUE", // required
+ * };
  * const command = new DeleteGrantCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteGrantResponse
+ * //   GrantArn: "STRING_VALUE",
+ * //   Status: "PENDING_WORKFLOW" || "PENDING_ACCEPT" || "REJECTED" || "ACTIVE" || "FAILED_WORKFLOW" || "DELETED" || "PENDING_DELETE" || "DISABLED" || "WORKFLOW_COMPLETED",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteGrantCommandInput - {@link DeleteGrantCommandInput}
+ * @returns {@link DeleteGrantCommandOutput}
  * @see {@link DeleteGrantCommandInput} for command's `input` shape.
  * @see {@link DeleteGrantCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The provided input is not valid. Try your request again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteGrantCommand extends $Command<
-  DeleteGrantCommandInput,
-  DeleteGrantCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteGrantCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteGrantCommandInput, DeleteGrantCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "DeleteGrantCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteGrantRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteGrantResponse.filterSensitiveLog,
+export class DeleteGrantCommand extends command<DeleteGrantCommandInput, DeleteGrantCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteGrant",
+  DeleteGrant$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteGrantRequest;
+      output: DeleteGrantResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteGrantCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteGrantCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteGrantCommandOutput> {
-    return deserializeAws_json1_1DeleteGrantCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteGrantCommandInput;
+      output: DeleteGrantCommandOutput;
+    };
+  };
 }

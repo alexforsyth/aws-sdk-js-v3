@@ -1,35 +1,36 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAccessPointsForObjectLambdaRequest, ListAccessPointsForObjectLambdaResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlListAccessPointsForObjectLambdaCommand,
-  serializeAws_restXmlListAccessPointsForObjectLambdaCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
-
-export interface ListAccessPointsForObjectLambdaCommandInput extends ListAccessPointsForObjectLambdaRequest {}
-export interface ListAccessPointsForObjectLambdaCommandOutput
-  extends ListAccessPointsForObjectLambdaResult,
-    __MetadataBearer {}
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { ListAccessPointsForObjectLambdaRequest, ListAccessPointsForObjectLambdaResult } from "../models/models_0";
+import { ListAccessPointsForObjectLambda$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns a list of the access points associated with the Object Lambda Access Point. You
- *          can retrieve up to 1000 access points per call. If there are more than 1,000
- *          access points (or the number specified in <code>maxResults</code>, whichever is less), the
- *          response will include a continuation token that you can use to list the additional access points.</p>
- *          <p>The following actions are related to <code>ListAccessPointsForObjectLambda</code>:</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAccessPointsForObjectLambdaCommand}.
+ */
+export interface ListAccessPointsForObjectLambdaCommandInput extends ListAccessPointsForObjectLambdaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAccessPointsForObjectLambdaCommand}.
+ */
+export interface ListAccessPointsForObjectLambdaCommandOutput extends ListAccessPointsForObjectLambdaResult, __MetadataBearer {}
+
+/**
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there
+ *          are more access points than what can be returned in one call, the response will include a
+ *          continuation token that you can use to list the additional access points.</p>
+ *          <p>The following actions are related to
+ *          <code>ListAccessPointsForObjectLambda</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -52,75 +53,59 @@ export interface ListAccessPointsForObjectLambdaCommandOutput
  * ```javascript
  * import { S3ControlClient, ListAccessPointsForObjectLambdaCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, ListAccessPointsForObjectLambdaCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // ListAccessPointsForObjectLambdaRequest
+ *   AccountId: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListAccessPointsForObjectLambdaCommand(input);
  * const response = await client.send(command);
+ * // { // ListAccessPointsForObjectLambdaResult
+ * //   ObjectLambdaAccessPointList: [ // ObjectLambdaAccessPointList
+ * //     { // ObjectLambdaAccessPoint
+ * //       Name: "STRING_VALUE", // required
+ * //       ObjectLambdaAccessPointArn: "STRING_VALUE",
+ * //       Alias: { // ObjectLambdaAccessPointAlias
+ * //         Value: "STRING_VALUE",
+ * //         Status: "PROVISIONING" || "READY",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAccessPointsForObjectLambdaCommandInput - {@link ListAccessPointsForObjectLambdaCommandInput}
+ * @returns {@link ListAccessPointsForObjectLambdaCommandOutput}
  * @see {@link ListAccessPointsForObjectLambdaCommandInput} for command's `input` shape.
  * @see {@link ListAccessPointsForObjectLambdaCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class ListAccessPointsForObjectLambdaCommand extends $Command<
-  ListAccessPointsForObjectLambdaCommandInput,
-  ListAccessPointsForObjectLambdaCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAccessPointsForObjectLambdaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAccessPointsForObjectLambdaCommandInput, ListAccessPointsForObjectLambdaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "ListAccessPointsForObjectLambdaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAccessPointsForObjectLambdaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAccessPointsForObjectLambdaResult.filterSensitiveLog,
+export class ListAccessPointsForObjectLambdaCommand extends command<ListAccessPointsForObjectLambdaCommandInput, ListAccessPointsForObjectLambdaCommandOutput>(
+  _ep0,
+  _mw1,
+  "ListAccessPointsForObjectLambda",
+  ListAccessPointsForObjectLambda$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccessPointsForObjectLambdaRequest;
+      output: ListAccessPointsForObjectLambdaResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListAccessPointsForObjectLambdaCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlListAccessPointsForObjectLambdaCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAccessPointsForObjectLambdaCommandOutput> {
-    return deserializeAws_restXmlListAccessPointsForObjectLambdaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAccessPointsForObjectLambdaCommandInput;
+      output: ListAccessPointsForObjectLambdaCommandOutput;
+    };
+  };
 }

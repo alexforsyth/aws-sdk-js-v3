@@ -1,1987 +1,1572 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { Readiness } from "./enums";
 
 /**
- * A Cell and its properties
+ * <p>Information about a cell.</p>
+ * @public
  */
 export interface CellOutput {
   /**
-   * The arn for the Cell
+   * <p>The Amazon Resource Name (ARN) for the cell.</p>
+   * @public
    */
   CellArn: string | undefined;
 
   /**
-   * The name of the Cell
+   * <p>The name of the cell.</p>
+   * @public
    */
   CellName: string | undefined;
 
   /**
-   * A list of Cell arns
+   * <p>A list of cell ARNs.</p>
+   * @public
    */
   Cells: string[] | undefined;
 
   /**
-   * A list of Cell ARNs and/or RecoveryGroup ARNs
+   * <p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>
+   * @public
    */
   ParentReadinessScopes: string[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>Tags on the resources.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CellOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CellOutput): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * A collection of rules used in a readiness check
+ * <p>Readiness rule information, including the resource type, rule ID, and rule description.</p>
+ * @public
  */
 export interface ListRulesOutput {
   /**
-   * The resource type the rule applies to.
+   * <p>The resource type that the readiness rule applies to.</p>
+   * @public
    */
   ResourceType: string | undefined;
 
   /**
-   * A description of the rule
+   * <p>The description of a readiness rule.</p>
+   * @public
    */
   RuleDescription: string | undefined;
 
   /**
-   * The Rule's ID.
+   * <p>The ID for the readiness rule.</p>
+   * @public
    */
   RuleId: string | undefined;
 }
 
-export namespace ListRulesOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRulesOutput): any => ({
-    ...obj,
-  });
-}
-
 /**
- * Information relating to readiness check status
+ * <p>Information relating to readiness check status.</p>
+ * @public
  */
 export interface Message {
   /**
-   * The text of a readiness check message
+   * <p>The text of a readiness check message.</p>
+   * @public
    */
-  MessageText?: string;
-}
-
-export namespace Message {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Message): any => ({
-    ...obj,
-  });
+  MessageText?: string | undefined;
 }
 
 /**
- * A resource used for checking the readiness of a Resource Set
+ * <p>A readiness check.</p>
+ * @public
  */
 export interface ReadinessCheckOutput {
   /**
-   * Arn associated with ReadinessCheck
+   * <p>The Amazon Resource Name (ARN) associated with a readiness check.</p>
+   * @public
    */
   ReadinessCheckArn: string | undefined;
 
   /**
-   * Name for a ReadinessCheck
+   * <p>Name of a readiness check.</p>
+   * @public
    */
-  ReadinessCheckName?: string;
+  ReadinessCheckName?: string | undefined;
 
   /**
-   * Name of the ResourceSet to be checked
+   * <p>Name of the resource set to be checked.</p>
+   * @public
    */
   ResourceSet: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace ReadinessCheckOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReadinessCheckOutput): any => ({
-    ...obj,
-  });
-}
-
-export enum Readiness {
-  NOT_AUTHORIZED = "NOT_AUTHORIZED",
-  NOT_READY = "NOT_READY",
-  READY = "READY",
-  UNKNOWN = "UNKNOWN",
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * Summary of ReadinessCheck status, paginated in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary
+ * <p>Summary of all readiness check statuses in a recovery group, paginated in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.</p>
+ * @public
  */
 export interface ReadinessCheckSummary {
   /**
-   * The readiness of this ReadinessCheck
+   * <p>The readiness status of this readiness check.</p>
+   * @public
    */
-  Readiness?: Readiness | string;
+  Readiness?: Readiness | undefined;
 
   /**
-   * The name of a ReadinessCheck which is part of the given RecoveryGroup or Cell
+   * <p>The name of a readiness check.</p>
+   * @public
    */
-  ReadinessCheckName?: string;
-}
-
-export namespace ReadinessCheckSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReadinessCheckSummary): any => ({
-    ...obj,
-  });
+  ReadinessCheckName?: string | undefined;
 }
 
 /**
- * Guidance for improving Recovery Group resilliancy
+ * <p>Recommendations that are provided to make an application more recovery resilient.</p>
+ * @public
  */
 export interface Recommendation {
   /**
-   * Guidance text for recommendation
+   * <p>Text of the recommendations that are provided to make an application more recovery resilient.</p>
+   * @public
    */
   RecommendationText: string | undefined;
 }
 
-export namespace Recommendation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Recommendation): any => ({
-    ...obj,
-  });
-}
-
 /**
- * A Recovery Group generally containing multiple Cells
+ * <p>A representation of the application, typically containing multiple cells.</p>
+ * @public
  */
 export interface RecoveryGroupOutput {
   /**
-   * A list of Cell arns
+   * <p>A list of a cell's Amazon Resource Names (ARNs).</p>
+   * @public
    */
   Cells: string[] | undefined;
 
   /**
-   * The arn for the RecoveryGroup
+   * <p>The Amazon Resource Name (ARN) for the recovery group.</p>
+   * @public
    */
   RecoveryGroupArn: string | undefined;
 
   /**
-   * The name of the RecoveryGroup
+   * <p>The name of the recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>The tags associated with the recovery group.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace RecoveryGroupOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RecoveryGroupOutput): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * The NLB resource a DNS Target Resource points to
+ * <p>The Network Load Balancer resource that a DNS target resource points to.</p>
+ * @public
  */
 export interface NLBResource {
   /**
-   * An NLB resource arn
+   * <p>The Network Load Balancer resource Amazon Resource Name (ARN).</p>
+   * @public
    */
-  Arn?: string;
-}
-
-export namespace NLBResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NLBResource): any => ({
-    ...obj,
-  });
+  Arn?: string | undefined;
 }
 
 /**
- * The Route 53 resource a DNS Target Resource record points to
+ * <p>The Route 53 resource that a DNS target resource record points to.</p>
+ * @public
  */
 export interface R53ResourceRecord {
   /**
-   * The DNS target name
+   * <p>The DNS target domain name.</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
-   * The Resource Record set id
+   * <p>The Route 53 Resource Record Set ID.</p>
+   * @public
    */
-  RecordSetId?: string;
-}
-
-export namespace R53ResourceRecord {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: R53ResourceRecord): any => ({
-    ...obj,
-  });
+  RecordSetId?: string | undefined;
 }
 
 /**
- * The target resource the R53 record points to
+ * <p>The target resource that the Route 53 record points to.</p>
+ * @public
  */
 export interface TargetResource {
   /**
-   * The NLB resource a DNS Target Resource points to
+   * <p>The Network Load Balancer Resource.</p>
+   * @public
    */
-  NLBResource?: NLBResource;
+  NLBResource?: NLBResource | undefined;
 
   /**
-   * The Route 53 resource a DNS Target Resource record points to
+   * <p>The Route 53 resource.</p>
+   * @public
    */
-  R53Resource?: R53ResourceRecord;
-}
-
-export namespace TargetResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TargetResource): any => ({
-    ...obj,
-  });
+  R53Resource?: R53ResourceRecord | undefined;
 }
 
 /**
- * A component for DNS/Routing Control Readiness Checks
+ * <p>A component for DNS/routing control readiness checks and architecture checks.</p>
+ * @public
  */
 export interface DNSTargetResource {
   /**
-   * The DNS Name that acts as ingress point to a portion of application
+   * <p>The domain name that acts as an ingress point to a portion of the customer application.</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
-   * The Hosted Zone ARN that contains the DNS record with the provided name of target resource.
+   * <p>The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.</p>
+   * @public
    */
-  HostedZoneArn?: string;
+  HostedZoneArn?: string | undefined;
 
   /**
-   * The R53 Set Id to uniquely identify a record given a Name and a Type
+   * <p>The Route 53 record set ID that uniquely identifies a DNS record, given a name and a type.</p>
+   * @public
    */
-  RecordSetId?: string;
+  RecordSetId?: string | undefined;
 
   /**
-   * The Type of DNS Record of target resource
+   * <p>The type of DNS record of the target resource.</p>
+   * @public
    */
-  RecordType?: string;
+  RecordType?: string | undefined;
 
   /**
-   * The target resource the R53 record points to
+   * <p>The target resource of the DNS target resource.</p>
+   * @public
    */
-  TargetResource?: TargetResource;
-}
-
-export namespace DNSTargetResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DNSTargetResource): any => ({
-    ...obj,
-  });
+  TargetResource?: TargetResource | undefined;
 }
 
 /**
- * The resource element of a ResourceSet
+ * <p>The resource element of a resource set.</p>
+ * @public
  */
 export interface Resource {
   /**
-   * The component id of the resource, generated by the service when dnsTargetResource is used
+   * <p>The component identifier of the resource, generated when DNS target resource is used.</p>
+   * @public
    */
-  ComponentId?: string;
+  ComponentId?: string | undefined;
 
   /**
-   * A component for DNS/Routing Control Readiness Checks
+   * <p>The DNS target resource.</p>
+   * @public
    */
-  DnsTargetResource?: DNSTargetResource;
+  DnsTargetResource?: DNSTargetResource | undefined;
 
   /**
-   * A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is contained within.
+   * <p>A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.</p>
+   * @public
    */
-  ReadinessScopes?: string[];
+  ReadinessScopes?: string[] | undefined;
 
   /**
-   * The ARN of the AWS resource, can be skipped if dnsTargetResource is used
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource.</p>
+   * @public
    */
-  ResourceArn?: string;
-}
-
-export namespace Resource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Resource): any => ({
-    ...obj,
-  });
+  ResourceArn?: string | undefined;
 }
 
 /**
- * Result with status for an individual resource.
+ * <p>The result of a successful Resource request, with status for an individual resource.</p>
+ * @public
  */
 export interface ResourceResult {
   /**
-   * The component id of the resource
+   * <p>The component id of the resource.</p>
+   * @public
    */
-  ComponentId?: string;
+  ComponentId?: string | undefined;
 
   /**
-   * The time the resource was last checked for readiness, in ISO-8601 format, UTC.
+   * <p>The time (UTC) that the resource was last checked for readiness, in ISO-8601 format.</p>
+   * @public
    */
   LastCheckedTimestamp: Date | undefined;
 
   /**
-   * The readiness of the resource.
+   * <p>The readiness of a resource.</p>
+   * @public
    */
-  Readiness: Readiness | string | undefined;
+  Readiness: Readiness | undefined;
 
   /**
-   * The ARN of the resource
+   * <p>The Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  ResourceArn?: string;
-}
-
-export namespace ResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceResult): any => ({
-    ...obj,
-  });
+  ResourceArn?: string | undefined;
 }
 
 /**
- * A collection of resources of the same type
+ * <p>A collection of resources of the same type.</p>
+ * @public
  */
 export interface ResourceSetOutput {
   /**
-   * The arn for the ResourceSet
+   * <p>The Amazon Resource Name (ARN) for the resource set.</p>
+   * @public
    */
   ResourceSetArn: string | undefined;
 
   /**
-   * The name of the ResourceSet
+   * <p>The name of the resource set.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 
   /**
-   * AWS Resource Type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
   ResourceSetType: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects.</p>
+   * @public
    */
   Resources: Resource[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace ResourceSetOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceSetOutput): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * Result with status for an individual rule..
+ * <p>The result of a successful Rule request, with status for an individual rule.</p>
+ * @public
  */
 export interface RuleResult {
   /**
-   * The time the resource was last checked for readiness, in ISO-8601 format, UTC.
+   * <p>The time the resource was last checked for readiness, in ISO-8601 format, UTC.</p>
+   * @public
    */
   LastCheckedTimestamp: Date | undefined;
 
   /**
-   * Details about the resource's readiness
+   * <p>Details about the resource's readiness.</p>
+   * @public
    */
   Messages: Message[] | undefined;
 
   /**
-   * The readiness at rule level.
+   * <p>The readiness at rule level.</p>
+   * @public
    */
-  Readiness: Readiness | string | undefined;
+  Readiness: Readiness | undefined;
 
   /**
-   * The identifier of the rule.
+   * <p>The identifier of the rule.</p>
+   * @public
    */
   RuleId: string | undefined;
 }
 
-export namespace RuleResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RuleResult): any => ({
-    ...obj,
-  });
-}
-
 /**
- * User does not have sufficient access to perform this action.
- */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Updating or deleting a resource can cause an inconsistent state.
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The Cell to create
+ * @public
  */
 export interface CreateCellRequest {
   /**
-   * The name of the Cell to create
+   * <p>The name of the cell to create.</p>
+   * @public
    */
   CellName: string | undefined;
 
   /**
-   * A list of Cell arns contained within this Cell (for use in nested Cells, e.g. regions within which AZs)
+   * <p>A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Amazon Web Services Regions.</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateCellRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCellRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCellResponse {
   /**
-   * The arn for the Cell
+   * <p>The Amazon Resource Name (ARN) for the cell.</p>
+   * @public
    */
-  CellArn?: string;
+  CellArn?: string | undefined;
 
   /**
-   * The name of the Cell
+   * <p>The name of the cell.</p>
+   * @public
    */
-  CellName?: string;
+  CellName?: string | undefined;
 
   /**
-   * A list of Cell arns
+   * <p>A list of cell ARNs.</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * A list of Cell ARNs and/or RecoveryGroup ARNs
+   * <p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>
+   * @public
    */
-  ParentReadinessScopes?: string[];
+  ParentReadinessScopes?: string[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>Tags on the resources.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateCellResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCellResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * An unexpected error occurred.
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Request was denied due to request throttling.
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The input fails to satisfy the constraints specified by an AWS service.
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The cross account authorization
+ * @public
  */
 export interface CreateCrossAccountAuthorizationRequest {
   /**
-   * The cross account authorization
+   * <p>The cross-account authorization.</p>
+   * @public
    */
   CrossAccountAuthorization: string | undefined;
 }
 
-export namespace CreateCrossAccountAuthorizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCrossAccountAuthorizationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCrossAccountAuthorizationResponse {
   /**
-   * The cross account authorization
+   * <p>The cross-account authorization.</p>
+   * @public
    */
-  CrossAccountAuthorization?: string;
-}
-
-export namespace CreateCrossAccountAuthorizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCrossAccountAuthorizationResponse): any => ({
-    ...obj,
-  });
+  CrossAccountAuthorization?: string | undefined;
 }
 
 /**
- * The ReadinessCheck to create
+ * @public
  */
 export interface CreateReadinessCheckRequest {
   /**
-   * The name of the ReadinessCheck to create
+   * <p>The name of the readiness check to create.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 
   /**
-   * The name of the ResourceSet to check
+   * <p>The name of the resource set to check.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateReadinessCheckRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateReadinessCheckRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateReadinessCheckResponse {
-  /**
-   * Arn associated with ReadinessCheck
-   */
-  ReadinessCheckArn?: string;
-
-  /**
-   * Name for a ReadinessCheck
-   */
-  ReadinessCheckName?: string;
-
-  /**
-   * Name of the ResourceSet to be checked
-   */
-  ResourceSet?: string;
-
-  /**
-   * A collection of tags associated with a resource
-   */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateReadinessCheckResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateReadinessCheckResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * The RecoveryGroup to create
+ * @public
+ */
+export interface CreateReadinessCheckResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) associated with a readiness check.</p>
+   * @public
+   */
+  ReadinessCheckArn?: string | undefined;
+
+  /**
+   * <p>Name of a readiness check.</p>
+   * @public
+   */
+  ReadinessCheckName?: string | undefined;
+
+  /**
+   * <p>Name of the resource set to be checked.</p>
+   * @public
+   */
+  ResourceSet?: string | undefined;
+
+  /**
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
  */
 export interface CreateRecoveryGroupRequest {
   /**
-   * A list of Cell arns
+   * <p>A list of the cell Amazon Resource Names (ARNs) in the recovery group.</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * The name of the RecoveryGroup to create
+   * <p>The name of the recovery group to create.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateRecoveryGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRecoveryGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateRecoveryGroupResponse {
-  /**
-   * A list of Cell arns
-   */
-  Cells?: string[];
-
-  /**
-   * The arn for the RecoveryGroup
-   */
-  RecoveryGroupArn?: string;
-
-  /**
-   * The name of the RecoveryGroup
-   */
-  RecoveryGroupName?: string;
-
-  /**
-   * A collection of tags associated with a resource
-   */
-  Tags?: { [key: string]: string };
-}
-
-export namespace CreateRecoveryGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRecoveryGroupResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * The ResourceSet to create
+ * @public
+ */
+export interface CreateRecoveryGroupResponse {
+  /**
+   * <p>A list of a cell's Amazon Resource Names (ARNs).</p>
+   * @public
+   */
+  Cells?: string[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the recovery group.</p>
+   * @public
+   */
+  RecoveryGroupArn?: string | undefined;
+
+  /**
+   * <p>The name of the recovery group.</p>
+   * @public
+   */
+  RecoveryGroupName?: string | undefined;
+
+  /**
+   * <p>The tags associated with the recovery group.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
  */
 export interface CreateResourceSetRequest {
   /**
-   * The name of the ResourceSet to create
+   * <p>The name of the resource set to create.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 
   /**
-   * AWS Resource type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
   ResourceSetType: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects in the resource set.</p>
+   * @public
    */
   Resources: Resource[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A tag to associate with the parameters for a resource set.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateResourceSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateResourceSetResponse {
   /**
-   * The arn for the ResourceSet
+   * <p>The Amazon Resource Name (ARN) for the resource set.</p>
+   * @public
    */
-  ResourceSetArn?: string;
+  ResourceSetArn?: string | undefined;
 
   /**
-   * The name of the ResourceSet
+   * <p>The name of the resource set.</p>
+   * @public
    */
-  ResourceSetName?: string;
+  ResourceSetName?: string | undefined;
 
   /**
-   * AWS Resource Type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
-  ResourceSetType?: string;
+  ResourceSetType?: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects.</p>
+   * @public
    */
-  Resources?: Resource[];
+  Resources?: Resource[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateResourceSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateResourceSetResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCellRequest {
   /**
-   * The Cell to delete
+   * <p>The name of the cell.</p>
+   * @public
    */
   CellName: string | undefined;
 }
 
-export namespace DeleteCellRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCellRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * The requested resource does not exist.
+ * @public
  */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteCrossAccountAuthorizationRequest {
   /**
-   * The cross account authorization
+   * <p>The cross-account authorization.</p>
+   * @public
    */
   CrossAccountAuthorization: string | undefined;
 }
 
-export namespace DeleteCrossAccountAuthorizationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCrossAccountAuthorizationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCrossAccountAuthorizationResponse {}
 
-export namespace DeleteCrossAccountAuthorizationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCrossAccountAuthorizationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteReadinessCheckRequest {
   /**
-   * The ReadinessCheck to delete
+   * <p>Name of a readiness check.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 }
 
-export namespace DeleteReadinessCheckRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteReadinessCheckRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRecoveryGroupRequest {
   /**
-   * The RecoveryGroup to delete
+   * <p>The name of a recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 }
 
-export namespace DeleteRecoveryGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRecoveryGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteResourceSetRequest {
   /**
-   * The ResourceSet to delete
+   * <p>Name of a resource set.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 }
 
-export namespace DeleteResourceSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteResourceSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetArchitectureRecommendationsRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * Name of RecoveryGroup (top level resource) to be analyzed.
+   * <p>The name of a recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 }
 
-export namespace GetArchitectureRecommendationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetArchitectureRecommendationsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetArchitectureRecommendationsResponse {
   /**
-   * The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format.
+   * <p>The time that a recovery group was last assessed for recommendations, in UTC ISO-8601 format.</p>
+   * @public
    */
-  LastAuditTimestamp?: Date;
+  LastAuditTimestamp?: Date | undefined;
 
   /**
-   * A token that can be used to resume pagination from the end of the collection
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * A list of recommendations for the customer's application
+   * <p>A list of the recommendations for the customer's application.</p>
+   * @public
    */
-  Recommendations?: Recommendation[];
+  Recommendations?: Recommendation[] | undefined;
 }
 
-export namespace GetArchitectureRecommendationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetArchitectureRecommendationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCellRequest {
   /**
-   * The Cell to get
+   * <p>The name of the cell.</p>
+   * @public
    */
   CellName: string | undefined;
 }
 
-export namespace GetCellRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCellRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCellResponse {
   /**
-   * The arn for the Cell
+   * <p>The Amazon Resource Name (ARN) for the cell.</p>
+   * @public
    */
-  CellArn?: string;
+  CellArn?: string | undefined;
 
   /**
-   * The name of the Cell
+   * <p>The name of the cell.</p>
+   * @public
    */
-  CellName?: string;
+  CellName?: string | undefined;
 
   /**
-   * A list of Cell arns
+   * <p>A list of cell ARNs.</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * A list of Cell ARNs and/or RecoveryGroup ARNs
+   * <p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>
+   * @public
    */
-  ParentReadinessScopes?: string[];
+  ParentReadinessScopes?: string[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>Tags on the resources.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace GetCellResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCellResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCellReadinessSummaryRequest {
   /**
-   * The name of the Cell
+   * <p>The name of the cell.</p>
+   * @public
    */
   CellName: string | undefined;
 
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace GetCellReadinessSummaryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCellReadinessSummaryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCellReadinessSummaryResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The readiness at Cell level.
+   * <p>The readiness at a cell level.</p>
+   * @public
    */
-  Readiness?: Readiness | string;
+  Readiness?: Readiness | undefined;
 
   /**
-   * Summaries for the ReadinessChecks making up the Cell
+   * <p>Summaries for the readiness checks that make up the cell.</p>
+   * @public
    */
-  ReadinessChecks?: ReadinessCheckSummary[];
+  ReadinessChecks?: ReadinessCheckSummary[] | undefined;
 }
 
-export namespace GetCellReadinessSummaryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCellReadinessSummaryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckRequest {
   /**
-   * The ReadinessCheck to get
+   * <p>Name of a readiness check.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 }
 
-export namespace GetReadinessCheckRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckResponse {
   /**
-   * Arn associated with ReadinessCheck
+   * <p>The Amazon Resource Name (ARN) associated with a readiness check.</p>
+   * @public
    */
-  ReadinessCheckArn?: string;
+  ReadinessCheckArn?: string | undefined;
 
   /**
-   * Name for a ReadinessCheck
+   * <p>Name of a readiness check.</p>
+   * @public
    */
-  ReadinessCheckName?: string;
+  ReadinessCheckName?: string | undefined;
 
   /**
-   * Name of the ResourceSet to be checked
+   * <p>Name of the resource set to be checked.</p>
+   * @public
    */
-  ResourceSet?: string;
+  ResourceSet?: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace GetReadinessCheckResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckResourceStatusRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The ReadinessCheck to get
+   * <p>Name of a readiness check.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 
   /**
-   * The resource ARN or component Id to get
+   * <p>The resource identifier, which is the Amazon Resource Name (ARN) or the identifier generated for the resource by Application Recovery Controller (for example, for a DNS target resource).</p>
+   * @public
    */
   ResourceIdentifier: string | undefined;
 }
 
-export namespace GetReadinessCheckResourceStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckResourceStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckResourceStatusResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The readiness at rule level.
+   * <p>The readiness at a rule level.</p>
+   * @public
    */
-  Readiness?: Readiness | string;
+  Readiness?: Readiness | undefined;
 
   /**
-   * Details of the rules's results
+   * <p>Details of the rule's results.</p>
+   * @public
    */
-  Rules?: RuleResult[];
+  Rules?: RuleResult[] | undefined;
 }
 
-export namespace GetReadinessCheckResourceStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckResourceStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckStatusRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The ReadinessCheck to get
+   * <p>Name of a readiness check.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 }
 
-export namespace GetReadinessCheckStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetReadinessCheckStatusResponse {
   /**
-   * Top level messages for readiness check status
+   * <p>Top level messages for readiness check status</p>
+   * @public
    */
-  Messages?: Message[];
+  Messages?: Message[] | undefined;
 
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The readiness at rule level.
+   * <p>The readiness at rule level.</p>
+   * @public
    */
-  Readiness?: Readiness | string;
+  Readiness?: Readiness | undefined;
 
   /**
-   * Summary of resources's readiness
+   * <p>Summary of the readiness of resources.</p>
+   * @public
    */
-  Resources?: ResourceResult[];
+  Resources?: ResourceResult[] | undefined;
 }
 
-export namespace GetReadinessCheckStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetReadinessCheckStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRecoveryGroupRequest {
   /**
-   * The RecoveryGroup to get
+   * <p>The name of a recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 }
 
-export namespace GetRecoveryGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecoveryGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRecoveryGroupResponse {
   /**
-   * A list of Cell arns
+   * <p>A list of a cell's Amazon Resource Names (ARNs).</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * The arn for the RecoveryGroup
+   * <p>The Amazon Resource Name (ARN) for the recovery group.</p>
+   * @public
    */
-  RecoveryGroupArn?: string;
+  RecoveryGroupArn?: string | undefined;
 
   /**
-   * The name of the RecoveryGroup
+   * <p>The name of the recovery group.</p>
+   * @public
    */
-  RecoveryGroupName?: string;
+  RecoveryGroupName?: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>The tags associated with the recovery group.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace GetRecoveryGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecoveryGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRecoveryGroupReadinessSummaryRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The name of the RecoveryGroup
+   * <p>The name of a recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 }
 
-export namespace GetRecoveryGroupReadinessSummaryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecoveryGroupReadinessSummaryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRecoveryGroupReadinessSummaryResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * The readiness at RecoveryGroup level.
+   * <p>The readiness status at a recovery group level.</p>
+   * @public
    */
-  Readiness?: Readiness | string;
+  Readiness?: Readiness | undefined;
 
   /**
-   * Summaries for the ReadinessChecks making up the RecoveryGroup
+   * <p>Summaries of the readiness checks for the recovery group.</p>
+   * @public
    */
-  ReadinessChecks?: ReadinessCheckSummary[];
+  ReadinessChecks?: ReadinessCheckSummary[] | undefined;
 }
 
-export namespace GetRecoveryGroupReadinessSummaryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRecoveryGroupReadinessSummaryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceSetRequest {
   /**
-   * The ResourceSet to get
+   * <p>Name of a resource set.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 }
 
-export namespace GetResourceSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourceSetResponse {
   /**
-   * The arn for the ResourceSet
+   * <p>The Amazon Resource Name (ARN) for the resource set.</p>
+   * @public
    */
-  ResourceSetArn?: string;
+  ResourceSetArn?: string | undefined;
 
   /**
-   * The name of the ResourceSet
+   * <p>The name of the resource set.</p>
+   * @public
    */
-  ResourceSetName?: string;
+  ResourceSetName?: string | undefined;
 
   /**
-   * AWS Resource Type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
-  ResourceSetType?: string;
+  ResourceSetType?: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects.</p>
+   * @public
    */
-  Resources?: Resource[];
+  Resources?: Resource[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace GetResourceSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourceSetResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCellsRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCellsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCellsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCellsResponse {
   /**
-   * A list of Cells
+   * <p>A list of cells.</p>
+   * @public
    */
-  Cells?: CellOutput[];
+  Cells?: CellOutput[] | undefined;
 
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCellsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCellsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCrossAccountAuthorizationsRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCrossAccountAuthorizationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCrossAccountAuthorizationsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListCrossAccountAuthorizationsResponse {
   /**
-   * A list of CrossAccountAuthorizations
+   * <p>A list of cross-account authorizations.</p>
+   * @public
    */
-  CrossAccountAuthorizations?: string[];
+  CrossAccountAuthorizations?: string[] | undefined;
 
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListCrossAccountAuthorizationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListCrossAccountAuthorizationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListReadinessChecksRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListReadinessChecksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReadinessChecksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListReadinessChecksResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * A list of ReadinessCheck associated with the account
+   * <p>A list of readiness checks associated with the account.</p>
+   * @public
    */
-  ReadinessChecks?: ReadinessCheckOutput[];
+  ReadinessChecks?: ReadinessCheckOutput[] | undefined;
 }
 
-export namespace ListReadinessChecksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListReadinessChecksResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRecoveryGroupsRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListRecoveryGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRecoveryGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRecoveryGroupsResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * A list of RecoveryGroups
+   * <p>A list of recovery groups.</p>
+   * @public
    */
-  RecoveryGroups?: RecoveryGroupOutput[];
+  RecoveryGroups?: RecoveryGroupOutput[] | undefined;
 }
 
-export namespace ListRecoveryGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRecoveryGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceSetsRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListResourceSetsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceSetsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListResourceSetsResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * A list of ResourceSets associated with the account
+   * <p>A list of resource sets associated with the account.</p>
+   * @public
    */
-  ResourceSets?: ResourceSetOutput[];
+  ResourceSets?: ResourceSetOutput[] | undefined;
 }
 
-export namespace ListResourceSetsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListResourceSetsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRulesRequest {
   /**
-   * Upper bound on number of records to return.
+   * <p>The number of objects that you want to return with this call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
-   * A token used to resume pagination from the end of a previous request.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * Filter parameter which specifies the rules to return given a resource type.
+   * <p>The resource type that a readiness rule applies to.</p>
+   * @public
    */
-  ResourceType?: string;
+  ResourceType?: string | undefined;
 }
 
-export namespace ListRulesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRulesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRulesResponse {
   /**
-   * A token that can be used to resume pagination from the end of the collection.
+   * <p>The token that identifies which batch of results you want to see.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * A list of rules
+   * <p>A list of readiness rules for a specific resource type.</p>
+   * @public
    */
-  Rules?: ListRulesOutput[];
+  Rules?: ListRulesOutput[] | undefined;
 }
 
-export namespace ListRulesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRulesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourcesRequest {
   /**
-   * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+   * <p>The Amazon Resource Name (ARN) for a resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourcesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourcesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourcesResponse {
   /**
-   * A collection of tags associated with a resource
+   * <p></p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourcesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourcesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
-   * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+   * <p>The Amazon Resource Name (ARN) for a resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p></p>
+   * @public
    */
-  Tags: { [key: string]: string } | undefined;
+  Tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
-   * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+   * <p>The Amazon Resource Name (ARN) for a resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * A comma-separated list of the tag keys to remove from the resource.
+   * <p>The keys for tags you add to resources.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * Parameters to update for the Cell
+ * @public
  */
 export interface UpdateCellRequest {
   /**
-   * The Cell to update
+   * <p>The name of the cell.</p>
+   * @public
    */
   CellName: string | undefined;
 
   /**
-   * A list of Cell arns, completely replaces previous list
+   * <p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>
+   * @public
    */
   Cells: string[] | undefined;
 }
 
-export namespace UpdateCellRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateCellRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateCellResponse {
   /**
-   * The arn for the Cell
+   * <p>The Amazon Resource Name (ARN) for the cell.</p>
+   * @public
    */
-  CellArn?: string;
+  CellArn?: string | undefined;
 
   /**
-   * The name of the Cell
+   * <p>The name of the cell.</p>
+   * @public
    */
-  CellName?: string;
+  CellName?: string | undefined;
 
   /**
-   * A list of Cell arns
+   * <p>A list of cell ARNs.</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * A list of Cell ARNs and/or RecoveryGroup ARNs
+   * <p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>
+   * @public
    */
-  ParentReadinessScopes?: string[];
+  ParentReadinessScopes?: string[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>Tags on the resources.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateCellResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateCellResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * The new Readiness Check values
+ * <p>Name of a readiness check to describe.</p>
+ * @public
  */
 export interface UpdateReadinessCheckRequest {
   /**
-   * The ReadinessCheck to update
+   * <p>Name of a readiness check.</p>
+   * @public
    */
   ReadinessCheckName: string | undefined;
 
   /**
-   * The name of the ResourceSet to check
+   * <p>The name of the resource set to be checked.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 }
 
-export namespace UpdateReadinessCheckRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateReadinessCheckRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateReadinessCheckResponse {
   /**
-   * Arn associated with ReadinessCheck
+   * <p>The Amazon Resource Name (ARN) associated with a readiness check.</p>
+   * @public
    */
-  ReadinessCheckArn?: string;
+  ReadinessCheckArn?: string | undefined;
 
   /**
-   * Name for a ReadinessCheck
+   * <p>Name of a readiness check.</p>
+   * @public
    */
-  ReadinessCheckName?: string;
+  ReadinessCheckName?: string | undefined;
 
   /**
-   * Name of the ResourceSet to be checked
+   * <p>Name of the resource set to be checked.</p>
+   * @public
    */
-  ResourceSet?: string;
+  ResourceSet?: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateReadinessCheckResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateReadinessCheckResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * Parameters to update for the RecoveryGroup
+ * <p>Name of a recovery group.</p>
+ * @public
  */
 export interface UpdateRecoveryGroupRequest {
   /**
-   * A list of Cell arns, completely replaces previous list
+   * <p>A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.</p>
+   * @public
    */
   Cells: string[] | undefined;
 
   /**
-   * The RecoveryGroup to update
+   * <p>The name of a recovery group.</p>
+   * @public
    */
   RecoveryGroupName: string | undefined;
 }
 
-export namespace UpdateRecoveryGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRecoveryGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRecoveryGroupResponse {
   /**
-   * A list of Cell arns
+   * <p>A list of a cell's Amazon Resource Names (ARNs).</p>
+   * @public
    */
-  Cells?: string[];
+  Cells?: string[] | undefined;
 
   /**
-   * The arn for the RecoveryGroup
+   * <p>The Amazon Resource Name (ARN) for the recovery group.</p>
+   * @public
    */
-  RecoveryGroupArn?: string;
+  RecoveryGroupArn?: string | undefined;
 
   /**
-   * The name of the RecoveryGroup
+   * <p>The name of the recovery group.</p>
+   * @public
    */
-  RecoveryGroupName?: string;
+  RecoveryGroupName?: string | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>The tags associated with the recovery group.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateRecoveryGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRecoveryGroupResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * configuration for the desired
+ * <p>Name of a resource set.</p>
+ * @public
  */
 export interface UpdateResourceSetRequest {
   /**
-   * The ResourceSet to update
+   * <p>Name of a resource set.</p>
+   * @public
    */
   ResourceSetName: string | undefined;
 
   /**
-   * AWS Resource Type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
   ResourceSetType: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects.</p>
+   * @public
    */
   Resources: Resource[] | undefined;
 }
 
-export namespace UpdateResourceSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateResourceSetRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateResourceSetResponse {
   /**
-   * The arn for the ResourceSet
+   * <p>The Amazon Resource Name (ARN) for the resource set.</p>
+   * @public
    */
-  ResourceSetArn?: string;
+  ResourceSetArn?: string | undefined;
 
   /**
-   * The name of the ResourceSet
+   * <p>The name of the resource set.</p>
+   * @public
    */
-  ResourceSetName?: string;
+  ResourceSetName?: string | undefined;
 
   /**
-   * AWS Resource Type of the resources in the ResourceSet
+   * <p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>
+   * @public
    */
-  ResourceSetType?: string;
+  ResourceSetType?: string | undefined;
 
   /**
-   * A list of Resource objects
+   * <p>A list of resource objects.</p>
+   * @public
    */
-  Resources?: Resource[];
+  Resources?: Resource[] | undefined;
 
   /**
-   * A collection of tags associated with a resource
+   * <p>A collection of tags associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateResourceSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateResourceSetResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }

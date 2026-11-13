@@ -1,104 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeWorkspaceImagePermissionsRequest, DescribeWorkspaceImagePermissionsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeWorkspaceImagePermissionsCommand,
-  serializeAws_json1_1DescribeWorkspaceImagePermissionsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
-
-export interface DescribeWorkspaceImagePermissionsCommandInput extends DescribeWorkspaceImagePermissionsRequest {}
-export interface DescribeWorkspaceImagePermissionsCommandOutput
-  extends DescribeWorkspaceImagePermissionsResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeWorkspaceImagePermissionsRequest,
+  DescribeWorkspaceImagePermissionsResult,
+} from "../models/models_0";
+import { DescribeWorkspaceImagePermissions$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes the permissions that the owner of an image has granted to other
- *          Amazon Web Services accounts for an image.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeWorkspaceImagePermissionsCommand}.
+ */
+export interface DescribeWorkspaceImagePermissionsCommandInput extends DescribeWorkspaceImagePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeWorkspaceImagePermissionsCommand}.
+ */
+export interface DescribeWorkspaceImagePermissionsCommandOutput extends DescribeWorkspaceImagePermissionsResult, __MetadataBearer {}
+
+/**
+ * <p>Describes the permissions that the owner of an image has granted to other Amazon Web Services accounts for an image.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkSpacesClient, DescribeWorkspaceImagePermissionsCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeWorkspaceImagePermissionsCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeWorkspaceImagePermissionsRequest
+ *   ImageId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeWorkspaceImagePermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeWorkspaceImagePermissionsResult
+ * //   ImageId: "STRING_VALUE",
+ * //   ImagePermissions: [ // ImagePermissions
+ * //     { // ImagePermission
+ * //       SharedAccountId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeWorkspaceImagePermissionsCommandInput - {@link DescribeWorkspaceImagePermissionsCommandInput}
+ * @returns {@link DescribeWorkspaceImagePermissionsCommandOutput}
  * @see {@link DescribeWorkspaceImagePermissionsCommandInput} for command's `input` shape.
  * @see {@link DescribeWorkspaceImagePermissionsCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeWorkspaceImagePermissionsCommand extends $Command<
-  DescribeWorkspaceImagePermissionsCommandInput,
-  DescribeWorkspaceImagePermissionsCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeWorkspaceImagePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeWorkspaceImagePermissionsCommandInput, DescribeWorkspaceImagePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeWorkspaceImagePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeWorkspaceImagePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeWorkspaceImagePermissionsResult.filterSensitiveLog,
+export class DescribeWorkspaceImagePermissionsCommand extends command<DescribeWorkspaceImagePermissionsCommandInput, DescribeWorkspaceImagePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeWorkspaceImagePermissions",
+  DescribeWorkspaceImagePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkspaceImagePermissionsRequest;
+      output: DescribeWorkspaceImagePermissionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeWorkspaceImagePermissionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeWorkspaceImagePermissionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeWorkspaceImagePermissionsCommandOutput> {
-    return deserializeAws_json1_1DescribeWorkspaceImagePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeWorkspaceImagePermissionsCommandInput;
+      output: DescribeWorkspaceImagePermissionsCommandOutput;
+    };
+  };
 }

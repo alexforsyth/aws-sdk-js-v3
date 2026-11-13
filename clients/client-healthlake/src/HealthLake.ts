@@ -1,493 +1,775 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type CreateDataTransformationProfileCommandInput,
+  type CreateDataTransformationProfileCommandOutput,
+  CreateDataTransformationProfileCommand,
+} from "./commands/CreateDataTransformationProfileCommand";
+import {
+  type CreateFHIRDatastoreCommandInput,
+  type CreateFHIRDatastoreCommandOutput,
   CreateFHIRDatastoreCommand,
-  CreateFHIRDatastoreCommandInput,
-  CreateFHIRDatastoreCommandOutput,
 } from "./commands/CreateFHIRDatastoreCommand";
 import {
+  type DeleteDataTransformationProfileCommandInput,
+  type DeleteDataTransformationProfileCommandOutput,
+  DeleteDataTransformationProfileCommand,
+} from "./commands/DeleteDataTransformationProfileCommand";
+import {
+  type DeleteFHIRDatastoreCommandInput,
+  type DeleteFHIRDatastoreCommandOutput,
   DeleteFHIRDatastoreCommand,
-  DeleteFHIRDatastoreCommandInput,
-  DeleteFHIRDatastoreCommandOutput,
 } from "./commands/DeleteFHIRDatastoreCommand";
 import {
+  type DescribeDataTransformationJobCommandInput,
+  type DescribeDataTransformationJobCommandOutput,
+  DescribeDataTransformationJobCommand,
+} from "./commands/DescribeDataTransformationJobCommand";
+import {
+  type DescribeFHIRDatastoreCommandInput,
+  type DescribeFHIRDatastoreCommandOutput,
   DescribeFHIRDatastoreCommand,
-  DescribeFHIRDatastoreCommandInput,
-  DescribeFHIRDatastoreCommandOutput,
 } from "./commands/DescribeFHIRDatastoreCommand";
 import {
+  type DescribeFHIRExportJobCommandInput,
+  type DescribeFHIRExportJobCommandOutput,
   DescribeFHIRExportJobCommand,
-  DescribeFHIRExportJobCommandInput,
-  DescribeFHIRExportJobCommandOutput,
 } from "./commands/DescribeFHIRExportJobCommand";
 import {
+  type DescribeFHIRImportJobCommandInput,
+  type DescribeFHIRImportJobCommandOutput,
   DescribeFHIRImportJobCommand,
-  DescribeFHIRImportJobCommandInput,
-  DescribeFHIRImportJobCommandOutput,
 } from "./commands/DescribeFHIRImportJobCommand";
 import {
+  type GetDataTransformationProfileCommandInput,
+  type GetDataTransformationProfileCommandOutput,
+  GetDataTransformationProfileCommand,
+} from "./commands/GetDataTransformationProfileCommand";
+import {
+  type ListDataTransformationJobsCommandInput,
+  type ListDataTransformationJobsCommandOutput,
+  ListDataTransformationJobsCommand,
+} from "./commands/ListDataTransformationJobsCommand";
+import {
+  type ListDataTransformationProfilesCommandInput,
+  type ListDataTransformationProfilesCommandOutput,
+  ListDataTransformationProfilesCommand,
+} from "./commands/ListDataTransformationProfilesCommand";
+import {
+  type ListDataTransformationProfileVersionsCommandInput,
+  type ListDataTransformationProfileVersionsCommandOutput,
+  ListDataTransformationProfileVersionsCommand,
+} from "./commands/ListDataTransformationProfileVersionsCommand";
+import {
+  type ListFHIRDatastoresCommandInput,
+  type ListFHIRDatastoresCommandOutput,
   ListFHIRDatastoresCommand,
-  ListFHIRDatastoresCommandInput,
-  ListFHIRDatastoresCommandOutput,
 } from "./commands/ListFHIRDatastoresCommand";
 import {
+  type ListFHIRExportJobsCommandInput,
+  type ListFHIRExportJobsCommandOutput,
   ListFHIRExportJobsCommand,
-  ListFHIRExportJobsCommandInput,
-  ListFHIRExportJobsCommandOutput,
 } from "./commands/ListFHIRExportJobsCommand";
 import {
+  type ListFHIRImportJobsCommandInput,
+  type ListFHIRImportJobsCommandOutput,
   ListFHIRImportJobsCommand,
-  ListFHIRImportJobsCommandInput,
-  ListFHIRImportJobsCommandOutput,
 } from "./commands/ListFHIRImportJobsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PublishDataTransformationProfileCommandInput,
+  type PublishDataTransformationProfileCommandOutput,
+  PublishDataTransformationProfileCommand,
+} from "./commands/PublishDataTransformationProfileCommand";
+import {
+  type RestoreFHIRDatastoreCommandInput,
+  type RestoreFHIRDatastoreCommandOutput,
+  RestoreFHIRDatastoreCommand,
+} from "./commands/RestoreFHIRDatastoreCommand";
+import {
+  type StartDataTransformationJobCommandInput,
+  type StartDataTransformationJobCommandOutput,
+  StartDataTransformationJobCommand,
+} from "./commands/StartDataTransformationJobCommand";
+import {
+  type StartFHIRExportJobCommandInput,
+  type StartFHIRExportJobCommandOutput,
   StartFHIRExportJobCommand,
-  StartFHIRExportJobCommandInput,
-  StartFHIRExportJobCommandOutput,
 } from "./commands/StartFHIRExportJobCommand";
 import {
+  type StartFHIRImportJobCommandInput,
+  type StartFHIRImportJobCommandOutput,
   StartFHIRImportJobCommand,
-  StartFHIRImportJobCommandInput,
-  StartFHIRImportJobCommandOutput,
 } from "./commands/StartFHIRImportJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import {
+  type UpdateDataTransformationProfileCommandInput,
+  type UpdateDataTransformationProfileCommandOutput,
+  UpdateDataTransformationProfileCommand,
+} from "./commands/UpdateDataTransformationProfileCommand";
+import {
+  type UpdateFHIRDatastoreCommandInput,
+  type UpdateFHIRDatastoreCommandOutput,
+  UpdateFHIRDatastoreCommand,
+} from "./commands/UpdateFHIRDatastoreCommand";
+import {
+  type UpdateProfileWithAgentCommandInput,
+  type UpdateProfileWithAgentCommandOutput,
+  UpdateProfileWithAgentCommand,
+} from "./commands/UpdateProfileWithAgentCommand";
 import { HealthLakeClient } from "./HealthLakeClient";
+import type { HealthLakeServiceException } from "./models/HealthLakeServiceException";
+import { paginateListDataTransformationJobs } from "./pagination/ListDataTransformationJobsPaginator";
+import { paginateListDataTransformationProfiles } from "./pagination/ListDataTransformationProfilesPaginator";
+import {
+  paginateListDataTransformationProfileVersions,
+} from "./pagination/ListDataTransformationProfileVersionsPaginator";
+import { paginateListFHIRDatastores } from "./pagination/ListFHIRDatastoresPaginator";
+import { paginateListFHIRExportJobs } from "./pagination/ListFHIRExportJobsPaginator";
+import { paginateListFHIRImportJobs } from "./pagination/ListFHIRImportJobsPaginator";
+import { waitUntilDataTransformationJobCompleted } from "./waiters/waitForDataTransformationJobCompleted";
+import { waitUntilFHIRDatastoreActive } from "./waiters/waitForFHIRDatastoreActive";
+import { waitUntilFHIRDatastoreDeleted } from "./waiters/waitForFHIRDatastoreDeleted";
+import { waitUntilFHIRExportJobCompleted } from "./waiters/waitForFHIRExportJobCompleted";
+import { waitUntilFHIRImportJobCompleted } from "./waiters/waitForFHIRImportJobCompleted";
+
+const commands = {
+  CreateDataTransformationProfileCommand,
+  CreateFHIRDatastoreCommand,
+  DeleteDataTransformationProfileCommand,
+  DeleteFHIRDatastoreCommand,
+  DescribeDataTransformationJobCommand,
+  DescribeFHIRDatastoreCommand,
+  DescribeFHIRExportJobCommand,
+  DescribeFHIRImportJobCommand,
+  GetDataTransformationProfileCommand,
+  ListDataTransformationJobsCommand,
+  ListDataTransformationProfilesCommand,
+  ListDataTransformationProfileVersionsCommand,
+  ListFHIRDatastoresCommand,
+  ListFHIRExportJobsCommand,
+  ListFHIRImportJobsCommand,
+  ListTagsForResourceCommand,
+  PublishDataTransformationProfileCommand,
+  RestoreFHIRDatastoreCommand,
+  StartDataTransformationJobCommand,
+  StartFHIRExportJobCommand,
+  StartFHIRImportJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateDataTransformationProfileCommand,
+  UpdateFHIRDatastoreCommand,
+  UpdateProfileWithAgentCommand,
+};
+const paginators = {
+  paginateListDataTransformationJobs,
+  paginateListDataTransformationProfiles,
+  paginateListDataTransformationProfileVersions,
+  paginateListFHIRDatastores,
+  paginateListFHIRExportJobs,
+  paginateListFHIRImportJobs,
+};
+const waiters = {
+  waitUntilDataTransformationJobCompleted,
+  waitUntilFHIRDatastoreActive,
+  waitUntilFHIRDatastoreDeleted,
+  waitUntilFHIRExportJobCompleted,
+  waitUntilFHIRImportJobCompleted,
+};
 
 /**
- * <p>Amazon HealthLake is a HIPAA eligibile service that allows customers to store,
- *          transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.</p>
+ * @public
  */
-export class HealthLake extends HealthLakeClient {
+export interface HealthLakeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface HealthLake {
   /**
-   * <p>Creates a Data Store that can ingest and export FHIR formatted data.</p>
+   * @see {@link CreateDataTransformationProfileCommand}
    */
-  public createFHIRDatastore(
+  createDataTransformationProfile(
+    args: CreateDataTransformationProfileCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<CreateDataTransformationProfileCommandOutput>;
+  createDataTransformationProfile(
+    args: CreateDataTransformationProfileCommandInput,
+    cb: (err: any, data?: CreateDataTransformationProfileCommandOutput) => void
+  ): void;
+  createDataTransformationProfile(
+    args: CreateDataTransformationProfileCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: CreateDataTransformationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFHIRDatastoreCommand}
+   */
+  createFHIRDatastore(
     args: CreateFHIRDatastoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<CreateFHIRDatastoreCommandOutput>;
-  public createFHIRDatastore(
+  createFHIRDatastore(
     args: CreateFHIRDatastoreCommandInput,
     cb: (err: any, data?: CreateFHIRDatastoreCommandOutput) => void
   ): void;
-  public createFHIRDatastore(
+  createFHIRDatastore(
     args: CreateFHIRDatastoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: CreateFHIRDatastoreCommandOutput) => void
   ): void;
-  public createFHIRDatastore(
-    args: CreateFHIRDatastoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFHIRDatastoreCommandOutput) => void),
-    cb?: (err: any, data?: CreateFHIRDatastoreCommandOutput) => void
-  ): Promise<CreateFHIRDatastoreCommandOutput> | void {
-    const command = new CreateFHIRDatastoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a Data Store. </p>
+   * @see {@link DeleteDataTransformationProfileCommand}
    */
-  public deleteFHIRDatastore(
+  deleteDataTransformationProfile(
+    args: DeleteDataTransformationProfileCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<DeleteDataTransformationProfileCommandOutput>;
+  deleteDataTransformationProfile(
+    args: DeleteDataTransformationProfileCommandInput,
+    cb: (err: any, data?: DeleteDataTransformationProfileCommandOutput) => void
+  ): void;
+  deleteDataTransformationProfile(
+    args: DeleteDataTransformationProfileCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: DeleteDataTransformationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFHIRDatastoreCommand}
+   */
+  deleteFHIRDatastore(
     args: DeleteFHIRDatastoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<DeleteFHIRDatastoreCommandOutput>;
-  public deleteFHIRDatastore(
+  deleteFHIRDatastore(
     args: DeleteFHIRDatastoreCommandInput,
     cb: (err: any, data?: DeleteFHIRDatastoreCommandOutput) => void
   ): void;
-  public deleteFHIRDatastore(
+  deleteFHIRDatastore(
     args: DeleteFHIRDatastoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: DeleteFHIRDatastoreCommandOutput) => void
   ): void;
-  public deleteFHIRDatastore(
-    args: DeleteFHIRDatastoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFHIRDatastoreCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFHIRDatastoreCommandOutput) => void
-  ): Promise<DeleteFHIRDatastoreCommandOutput> | void {
-    const command = new DeleteFHIRDatastoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the properties associated with the FHIR Data Store, including the Data Store ID,
-   *          Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and
-   *          Data Store endpoint.</p>
+   * @see {@link DescribeDataTransformationJobCommand}
    */
-  public describeFHIRDatastore(
+  describeDataTransformationJob(
+    args: DescribeDataTransformationJobCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<DescribeDataTransformationJobCommandOutput>;
+  describeDataTransformationJob(
+    args: DescribeDataTransformationJobCommandInput,
+    cb: (err: any, data?: DescribeDataTransformationJobCommandOutput) => void
+  ): void;
+  describeDataTransformationJob(
+    args: DescribeDataTransformationJobCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: DescribeDataTransformationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFHIRDatastoreCommand}
+   */
+  describeFHIRDatastore(
     args: DescribeFHIRDatastoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<DescribeFHIRDatastoreCommandOutput>;
-  public describeFHIRDatastore(
+  describeFHIRDatastore(
     args: DescribeFHIRDatastoreCommandInput,
     cb: (err: any, data?: DescribeFHIRDatastoreCommandOutput) => void
   ): void;
-  public describeFHIRDatastore(
+  describeFHIRDatastore(
     args: DescribeFHIRDatastoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: DescribeFHIRDatastoreCommandOutput) => void
   ): void;
-  public describeFHIRDatastore(
-    args: DescribeFHIRDatastoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFHIRDatastoreCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFHIRDatastoreCommandOutput) => void
-  ): Promise<DescribeFHIRDatastoreCommandOutput> | void {
-    const command = new DescribeFHIRDatastoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.</p>
+   * @see {@link DescribeFHIRExportJobCommand}
    */
-  public describeFHIRExportJob(
+  describeFHIRExportJob(
     args: DescribeFHIRExportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<DescribeFHIRExportJobCommandOutput>;
-  public describeFHIRExportJob(
+  describeFHIRExportJob(
     args: DescribeFHIRExportJobCommandInput,
     cb: (err: any, data?: DescribeFHIRExportJobCommandOutput) => void
   ): void;
-  public describeFHIRExportJob(
+  describeFHIRExportJob(
     args: DescribeFHIRExportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: DescribeFHIRExportJobCommandOutput) => void
   ): void;
-  public describeFHIRExportJob(
-    args: DescribeFHIRExportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFHIRExportJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFHIRExportJobCommandOutput) => void
-  ): Promise<DescribeFHIRExportJobCommandOutput> | void {
-    const command = new DescribeFHIRExportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. </p>
+   * @see {@link DescribeFHIRImportJobCommand}
    */
-  public describeFHIRImportJob(
+  describeFHIRImportJob(
     args: DescribeFHIRImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<DescribeFHIRImportJobCommandOutput>;
-  public describeFHIRImportJob(
+  describeFHIRImportJob(
     args: DescribeFHIRImportJobCommandInput,
     cb: (err: any, data?: DescribeFHIRImportJobCommandOutput) => void
   ): void;
-  public describeFHIRImportJob(
+  describeFHIRImportJob(
     args: DescribeFHIRImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: DescribeFHIRImportJobCommandOutput) => void
   ): void;
-  public describeFHIRImportJob(
-    args: DescribeFHIRImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFHIRImportJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFHIRImportJobCommandOutput) => void
-  ): Promise<DescribeFHIRImportJobCommandOutput> | void {
-    const command = new DescribeFHIRImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store
-   *          status.</p>
+   * @see {@link GetDataTransformationProfileCommand}
    */
-  public listFHIRDatastores(
+  getDataTransformationProfile(
+    args: GetDataTransformationProfileCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<GetDataTransformationProfileCommandOutput>;
+  getDataTransformationProfile(
+    args: GetDataTransformationProfileCommandInput,
+    cb: (err: any, data?: GetDataTransformationProfileCommandOutput) => void
+  ): void;
+  getDataTransformationProfile(
+    args: GetDataTransformationProfileCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: GetDataTransformationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTransformationJobsCommand}
+   */
+  listDataTransformationJobs(): Promise<ListDataTransformationJobsCommandOutput>;
+  listDataTransformationJobs(
+    args: ListDataTransformationJobsCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<ListDataTransformationJobsCommandOutput>;
+  listDataTransformationJobs(
+    args: ListDataTransformationJobsCommandInput,
+    cb: (err: any, data?: ListDataTransformationJobsCommandOutput) => void
+  ): void;
+  listDataTransformationJobs(
+    args: ListDataTransformationJobsCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: ListDataTransformationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTransformationProfilesCommand}
+   */
+  listDataTransformationProfiles(
+    args: ListDataTransformationProfilesCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<ListDataTransformationProfilesCommandOutput>;
+  listDataTransformationProfiles(
+    args: ListDataTransformationProfilesCommandInput,
+    cb: (err: any, data?: ListDataTransformationProfilesCommandOutput) => void
+  ): void;
+  listDataTransformationProfiles(
+    args: ListDataTransformationProfilesCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: ListDataTransformationProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTransformationProfileVersionsCommand}
+   */
+  listDataTransformationProfileVersions(
+    args: ListDataTransformationProfileVersionsCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<ListDataTransformationProfileVersionsCommandOutput>;
+  listDataTransformationProfileVersions(
+    args: ListDataTransformationProfileVersionsCommandInput,
+    cb: (err: any, data?: ListDataTransformationProfileVersionsCommandOutput) => void
+  ): void;
+  listDataTransformationProfileVersions(
+    args: ListDataTransformationProfileVersionsCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: ListDataTransformationProfileVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFHIRDatastoresCommand}
+   */
+  listFHIRDatastores(): Promise<ListFHIRDatastoresCommandOutput>;
+  listFHIRDatastores(
     args: ListFHIRDatastoresCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<ListFHIRDatastoresCommandOutput>;
-  public listFHIRDatastores(
+  listFHIRDatastores(
     args: ListFHIRDatastoresCommandInput,
     cb: (err: any, data?: ListFHIRDatastoresCommandOutput) => void
   ): void;
-  public listFHIRDatastores(
+  listFHIRDatastores(
     args: ListFHIRDatastoresCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: ListFHIRDatastoresCommandOutput) => void
   ): void;
-  public listFHIRDatastores(
-    args: ListFHIRDatastoresCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFHIRDatastoresCommandOutput) => void),
-    cb?: (err: any, data?: ListFHIRDatastoresCommandOutput) => void
-  ): Promise<ListFHIRDatastoresCommandOutput> | void {
-    const command = new ListFHIRDatastoresCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             Lists all FHIR export jobs associated with an account and their statuses.
-   *          </p>
+   * @see {@link ListFHIRExportJobsCommand}
    */
-  public listFHIRExportJobs(
+  listFHIRExportJobs(
     args: ListFHIRExportJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<ListFHIRExportJobsCommandOutput>;
-  public listFHIRExportJobs(
+  listFHIRExportJobs(
     args: ListFHIRExportJobsCommandInput,
     cb: (err: any, data?: ListFHIRExportJobsCommandOutput) => void
   ): void;
-  public listFHIRExportJobs(
+  listFHIRExportJobs(
     args: ListFHIRExportJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: ListFHIRExportJobsCommandOutput) => void
   ): void;
-  public listFHIRExportJobs(
-    args: ListFHIRExportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFHIRExportJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListFHIRExportJobsCommandOutput) => void
-  ): Promise<ListFHIRExportJobsCommandOutput> | void {
-    const command = new ListFHIRExportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             Lists all FHIR import jobs associated with an account and their statuses.
-   *          </p>
+   * @see {@link ListFHIRImportJobsCommand}
    */
-  public listFHIRImportJobs(
+  listFHIRImportJobs(
     args: ListFHIRImportJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<ListFHIRImportJobsCommandOutput>;
-  public listFHIRImportJobs(
+  listFHIRImportJobs(
     args: ListFHIRImportJobsCommandInput,
     cb: (err: any, data?: ListFHIRImportJobsCommandOutput) => void
   ): void;
-  public listFHIRImportJobs(
+  listFHIRImportJobs(
     args: ListFHIRImportJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: ListFHIRImportJobsCommandOutput) => void
   ): void;
-  public listFHIRImportJobs(
-    args: ListFHIRImportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFHIRImportJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListFHIRImportJobsCommandOutput) => void
-  ): Promise<ListFHIRImportJobsCommandOutput> | void {
-    const command = new ListFHIRImportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             Returns a list of all existing tags associated with a Data Store.
-   *          </p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Begins a FHIR export job.</p>
+   * @see {@link PublishDataTransformationProfileCommand}
    */
-  public startFHIRExportJob(
+  publishDataTransformationProfile(
+    args: PublishDataTransformationProfileCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<PublishDataTransformationProfileCommandOutput>;
+  publishDataTransformationProfile(
+    args: PublishDataTransformationProfileCommandInput,
+    cb: (err: any, data?: PublishDataTransformationProfileCommandOutput) => void
+  ): void;
+  publishDataTransformationProfile(
+    args: PublishDataTransformationProfileCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: PublishDataTransformationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreFHIRDatastoreCommand}
+   */
+  restoreFHIRDatastore(
+    args: RestoreFHIRDatastoreCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<RestoreFHIRDatastoreCommandOutput>;
+  restoreFHIRDatastore(
+    args: RestoreFHIRDatastoreCommandInput,
+    cb: (err: any, data?: RestoreFHIRDatastoreCommandOutput) => void
+  ): void;
+  restoreFHIRDatastore(
+    args: RestoreFHIRDatastoreCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: RestoreFHIRDatastoreCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDataTransformationJobCommand}
+   */
+  startDataTransformationJob(
+    args: StartDataTransformationJobCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<StartDataTransformationJobCommandOutput>;
+  startDataTransformationJob(
+    args: StartDataTransformationJobCommandInput,
+    cb: (err: any, data?: StartDataTransformationJobCommandOutput) => void
+  ): void;
+  startDataTransformationJob(
+    args: StartDataTransformationJobCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: StartDataTransformationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFHIRExportJobCommand}
+   */
+  startFHIRExportJob(
     args: StartFHIRExportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<StartFHIRExportJobCommandOutput>;
-  public startFHIRExportJob(
+  startFHIRExportJob(
     args: StartFHIRExportJobCommandInput,
     cb: (err: any, data?: StartFHIRExportJobCommandOutput) => void
   ): void;
-  public startFHIRExportJob(
+  startFHIRExportJob(
     args: StartFHIRExportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: StartFHIRExportJobCommandOutput) => void
   ): void;
-  public startFHIRExportJob(
-    args: StartFHIRExportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFHIRExportJobCommandOutput) => void),
-    cb?: (err: any, data?: StartFHIRExportJobCommandOutput) => void
-  ): Promise<StartFHIRExportJobCommandOutput> | void {
-    const command = new StartFHIRExportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Begins a FHIR Import job.</p>
+   * @see {@link StartFHIRImportJobCommand}
    */
-  public startFHIRImportJob(
+  startFHIRImportJob(
     args: StartFHIRImportJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<StartFHIRImportJobCommandOutput>;
-  public startFHIRImportJob(
+  startFHIRImportJob(
     args: StartFHIRImportJobCommandInput,
     cb: (err: any, data?: StartFHIRImportJobCommandOutput) => void
   ): void;
-  public startFHIRImportJob(
+  startFHIRImportJob(
     args: StartFHIRImportJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: StartFHIRImportJobCommandOutput) => void
   ): void;
-  public startFHIRImportJob(
-    args: StartFHIRImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFHIRImportJobCommandOutput) => void),
-    cb?: (err: any, data?: StartFHIRImportJobCommandOutput) => void
-  ): Promise<StartFHIRImportJobCommandOutput> | void {
-    const command = new StartFHIRImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             Adds a user specifed key and value tag to a Data Store.
-   *          </p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: HealthLakeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *             Removes tags from a Data Store.
-   *          </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: HealthLakeRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: HealthLakeRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateDataTransformationProfileCommand}
+   */
+  updateDataTransformationProfile(
+    args: UpdateDataTransformationProfileCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<UpdateDataTransformationProfileCommandOutput>;
+  updateDataTransformationProfile(
+    args: UpdateDataTransformationProfileCommandInput,
+    cb: (err: any, data?: UpdateDataTransformationProfileCommandOutput) => void
+  ): void;
+  updateDataTransformationProfile(
+    args: UpdateDataTransformationProfileCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: UpdateDataTransformationProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFHIRDatastoreCommand}
+   */
+  updateFHIRDatastore(
+    args: UpdateFHIRDatastoreCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<UpdateFHIRDatastoreCommandOutput>;
+  updateFHIRDatastore(
+    args: UpdateFHIRDatastoreCommandInput,
+    cb: (err: any, data?: UpdateFHIRDatastoreCommandOutput) => void
+  ): void;
+  updateFHIRDatastore(
+    args: UpdateFHIRDatastoreCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: UpdateFHIRDatastoreCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProfileWithAgentCommand}
+   */
+  updateProfileWithAgent(
+    args: UpdateProfileWithAgentCommandInput,
+    options?: HealthLakeRequestOptions
+  ): Promise<UpdateProfileWithAgentCommandOutput>;
+  updateProfileWithAgent(
+    args: UpdateProfileWithAgentCommandInput,
+    cb: (err: any, data?: UpdateProfileWithAgentCommandOutput) => void
+  ): void;
+  updateProfileWithAgent(
+    args: UpdateProfileWithAgentCommandInput,
+    options: HealthLakeRequestOptions,
+    cb: (err: any, data?: UpdateProfileWithAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataTransformationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTransformationJobsCommandOutput}.
+   */
+  paginateListDataTransformationJobs(
+    args?: ListDataTransformationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTransformationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListDataTransformationProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTransformationProfilesCommandOutput}.
+   */
+  paginateListDataTransformationProfiles(
+    args: ListDataTransformationProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTransformationProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListDataTransformationProfileVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataTransformationProfileVersionsCommandOutput}.
+   */
+  paginateListDataTransformationProfileVersions(
+    args: ListDataTransformationProfileVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataTransformationProfileVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListFHIRDatastoresCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFHIRDatastoresCommandOutput}.
+   */
+  paginateListFHIRDatastores(
+    args?: ListFHIRDatastoresCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFHIRDatastoresCommandOutput>;
+
+  /**
+   * @see {@link ListFHIRExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFHIRExportJobsCommandOutput}.
+   */
+  paginateListFHIRExportJobs(
+    args: ListFHIRExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFHIRExportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListFHIRImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFHIRImportJobsCommandOutput}.
+   */
+  paginateListFHIRImportJobs(
+    args: ListFHIRImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFHIRImportJobsCommandOutput>;
+
+  /**
+   * @see {@link DescribeDataTransformationJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilDataTransformationJobCompleted(
+    args: DescribeDataTransformationJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<HealthLake>, "client">
+  ): Promise<WaiterResult<DescribeDataTransformationJobCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFHIRDatastoreCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFHIRDatastoreActive(
+    args: DescribeFHIRDatastoreCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<HealthLake>, "client">
+  ): Promise<WaiterResult<DescribeFHIRDatastoreCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFHIRDatastoreCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFHIRDatastoreDeleted(
+    args: DescribeFHIRDatastoreCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<HealthLake>, "client">
+  ): Promise<WaiterResult<DescribeFHIRDatastoreCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFHIRExportJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFHIRExportJobCompleted(
+    args: DescribeFHIRExportJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<HealthLake>, "client">
+  ): Promise<WaiterResult<DescribeFHIRExportJobCommandOutput>>;
+
+  /**
+   * @see {@link DescribeFHIRImportJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilFHIRImportJobCompleted(
+    args: DescribeFHIRImportJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<HealthLake>, "client">
+  ): Promise<WaiterResult<DescribeFHIRImportJobCommandOutput>>;
 }
+
+/**
+ * <p>This is the <i>HealthLake API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html">What is HealthLake?</a> in the <i>HealthLake Developer Guide</i>.</p>
+ * @public
+ */
+export class HealthLake extends HealthLakeClient implements HealthLake {}
+createAggregatedClient(commands, HealthLake, { paginators, waiters });

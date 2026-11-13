@@ -1,0 +1,108 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBotAliasReplicasRequest, ListBotAliasReplicasResponse } from "../models/models_1";
+import { ListBotAliasReplicas$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBotAliasReplicasCommand}.
+ */
+export interface ListBotAliasReplicasCommandInput extends ListBotAliasReplicasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBotAliasReplicasCommand}.
+ */
+export interface ListBotAliasReplicasCommandOutput extends ListBotAliasReplicasResponse, __MetadataBearer {}
+
+/**
+ * <p>The action to list the replicated bots created from the source bot alias.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LexModelsV2Client, ListBotAliasReplicasCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
+ * // const { LexModelsV2Client, ListBotAliasReplicasCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
+ * const client = new LexModelsV2Client(config);
+ * const input = { // ListBotAliasReplicasRequest
+ *   botId: "STRING_VALUE", // required
+ *   replicaRegion: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListBotAliasReplicasCommand(input);
+ * const response = await client.send(command);
+ * // { // ListBotAliasReplicasResponse
+ * //   botId: "STRING_VALUE",
+ * //   sourceRegion: "STRING_VALUE",
+ * //   replicaRegion: "STRING_VALUE",
+ * //   botAliasReplicaSummaries: [ // BotAliasReplicaSummaryList
+ * //     { // BotAliasReplicaSummary
+ * //       botAliasId: "STRING_VALUE",
+ * //       botAliasReplicationStatus: "Creating" || "Updating" || "Available" || "Deleting" || "Failed",
+ * //       botVersion: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //       failureReasons: [ // FailureReasons
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListBotAliasReplicasCommandInput - {@link ListBotAliasReplicasCommandInput}
+ * @returns {@link ListBotAliasReplicasCommandOutput}
+ * @see {@link ListBotAliasReplicasCommandInput} for command's `input` shape.
+ * @see {@link ListBotAliasReplicasCommandOutput} for command's `response` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have reached a quota for your bot. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class ListBotAliasReplicasCommand extends command<ListBotAliasReplicasCommandInput, ListBotAliasReplicasCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBotAliasReplicas",
+  ListBotAliasReplicas$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBotAliasReplicasRequest;
+      output: ListBotAliasReplicasResponse;
+    };
+    sdk: {
+      input: ListBotAliasReplicasCommandInput;
+      output: ListBotAliasReplicasCommandOutput;
+    };
+  };
+}

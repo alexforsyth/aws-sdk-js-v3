@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import { ListLocationsRequest, ListLocationsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListLocationsCommand,
-  serializeAws_json1_1ListLocationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLocationsRequest, ListLocationsResponse } from "../models/models_0";
+import { ListLocations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLocationsCommand}.
+ */
 export interface ListLocationsCommandInput extends ListLocationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLocationsCommand}.
+ */
 export interface ListLocationsCommandOutput extends ListLocationsResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,70 @@ export interface ListLocationsCommandOutput extends ListLocationsResponse, __Met
  * ```javascript
  * import { DataSyncClient, ListLocationsCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, ListLocationsCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // ListLocationsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // LocationFilters
+ *     { // LocationFilter
+ *       Name: "LocationUri" || "LocationType" || "CreationTime", // required
+ *       Values: [ // FilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Operator: "Equals" || "NotEquals" || "In" || "LessThanOrEqual" || "LessThan" || "GreaterThanOrEqual" || "GreaterThan" || "Contains" || "NotContains" || "BeginsWith", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListLocationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListLocationsResponse
+ * //   Locations: [ // LocationList
+ * //     { // LocationListEntry
+ * //       LocationArn: "STRING_VALUE",
+ * //       LocationUri: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLocationsCommandInput - {@link ListLocationsCommandInput}
+ * @returns {@link ListLocationsCommandOutput}
  * @see {@link ListLocationsCommandInput} for command's `input` shape.
  * @see {@link ListLocationsCommandOutput} for command's `response` shape.
- * @see {@link DataSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class ListLocationsCommand extends $Command<
-  ListLocationsCommandInput,
-  ListLocationsCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLocationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLocationsCommandInput, ListLocationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "ListLocationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLocationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLocationsResponse.filterSensitiveLog,
+export class ListLocationsCommand extends command<ListLocationsCommandInput, ListLocationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLocations",
+  ListLocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLocationsRequest;
+      output: ListLocationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLocationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListLocationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLocationsCommandOutput> {
-    return deserializeAws_json1_1ListLocationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLocationsCommandInput;
+      output: ListLocationsCommandOutput;
+    };
+  };
 }

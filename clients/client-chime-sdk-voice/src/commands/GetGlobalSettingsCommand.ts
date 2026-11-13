@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetGlobalSettingsResponse } from "../models/models_0";
+import { GetGlobalSettings$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetGlobalSettingsCommand}.
+ */
+export interface GetGlobalSettingsCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetGlobalSettingsCommand}.
+ */
+export interface GetGlobalSettingsCommandOutput extends GetGlobalSettingsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves the global settings for the Amazon Chime SDK Voice Connectors in an AWS account.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ChimeSDKVoiceClient, GetGlobalSettingsCommand } from "@aws-sdk/client-chime-sdk-voice"; // ES Modules import
+ * // const { ChimeSDKVoiceClient, GetGlobalSettingsCommand } = require("@aws-sdk/client-chime-sdk-voice"); // CommonJS import
+ * // import type { ChimeSDKVoiceClientConfig } from "@aws-sdk/client-chime-sdk-voice";
+ * const config = {}; // type is ChimeSDKVoiceClientConfig
+ * const client = new ChimeSDKVoiceClient(config);
+ * const input = {};
+ * const command = new GetGlobalSettingsCommand(input);
+ * const response = await client.send(command);
+ * // { // GetGlobalSettingsResponse
+ * //   VoiceConnector: { // VoiceConnectorSettings
+ * //     CdrBucket: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetGlobalSettingsCommandInput - {@link GetGlobalSettingsCommandInput}
+ * @returns {@link GetGlobalSettingsCommandOutput}
+ * @see {@link GetGlobalSettingsCommandInput} for command's `input` shape.
+ * @see {@link GetGlobalSettingsCommandOutput} for command's `response` shape.
+ * @see {@link ChimeSDKVoiceClientResolvedConfig | config} for ChimeSDKVoiceClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The number of customer requests exceeds the request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client isn't authorized to request a resource.</p>
+ *
+ * @throws {@link ChimeSDKVoiceServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKVoice service.</p>
+ *
+ *
+ * @public
+ */
+export class GetGlobalSettingsCommand extends command<GetGlobalSettingsCommandInput, GetGlobalSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetGlobalSettings",
+  GetGlobalSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetGlobalSettingsResponse;
+    };
+    sdk: {
+      input: GetGlobalSettingsCommandInput;
+      output: GetGlobalSettingsCommandOutput;
+    };
+  };
+}

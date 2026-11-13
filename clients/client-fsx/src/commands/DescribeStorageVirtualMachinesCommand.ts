@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FSxClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FSxClient";
-import { DescribeStorageVirtualMachinesRequest, DescribeStorageVirtualMachinesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeStorageVirtualMachinesCommand,
-  serializeAws_json1_1DescribeStorageVirtualMachinesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStorageVirtualMachinesRequest, DescribeStorageVirtualMachinesResponse } from "../models/models_0";
+import { DescribeStorageVirtualMachines$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStorageVirtualMachinesCommand}.
+ */
 export interface DescribeStorageVirtualMachinesCommandInput extends DescribeStorageVirtualMachinesRequest {}
-export interface DescribeStorageVirtualMachinesCommandOutput
-  extends DescribeStorageVirtualMachinesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStorageVirtualMachinesCommand}.
+ */
+export interface DescribeStorageVirtualMachinesCommandOutput extends DescribeStorageVirtualMachinesResponse, __MetadataBearer {}
 
 /**
  * <p>Describes one or more Amazon FSx for NetApp ONTAP storage virtual machines (SVMs).</p>
@@ -30,74 +29,135 @@ export interface DescribeStorageVirtualMachinesCommandOutput
  * ```javascript
  * import { FSxClient, DescribeStorageVirtualMachinesCommand } from "@aws-sdk/client-fsx"; // ES Modules import
  * // const { FSxClient, DescribeStorageVirtualMachinesCommand } = require("@aws-sdk/client-fsx"); // CommonJS import
+ * // import type { FSxClientConfig } from "@aws-sdk/client-fsx";
+ * const config = {}; // type is FSxClientConfig
  * const client = new FSxClient(config);
+ * const input = { // DescribeStorageVirtualMachinesRequest
+ *   StorageVirtualMachineIds: [ // StorageVirtualMachineIds
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // StorageVirtualMachineFilters
+ *     { // StorageVirtualMachineFilter
+ *       Name: "file-system-id",
+ *       Values: [ // StorageVirtualMachineFilterValues
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeStorageVirtualMachinesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStorageVirtualMachinesResponse
+ * //   StorageVirtualMachines: [ // StorageVirtualMachines
+ * //     { // StorageVirtualMachine
+ * //       ActiveDirectoryConfiguration: { // SvmActiveDirectoryConfiguration
+ * //         NetBiosName: "STRING_VALUE",
+ * //         SelfManagedActiveDirectoryConfiguration: { // SelfManagedActiveDirectoryAttributes
+ * //           DomainName: "STRING_VALUE",
+ * //           OrganizationalUnitDistinguishedName: "STRING_VALUE",
+ * //           FileSystemAdministratorsGroup: "STRING_VALUE",
+ * //           UserName: "STRING_VALUE",
+ * //           DnsIps: [ // DnsIps
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           DomainJoinServiceAccountSecret: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       Endpoints: { // SvmEndpoints
+ * //         Iscsi: { // SvmEndpoint
+ * //           DNSName: "STRING_VALUE",
+ * //           IpAddresses: [ // OntapEndpointIpAddresses
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           Ipv6Addresses: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         Management: {
+ * //           DNSName: "STRING_VALUE",
+ * //           IpAddresses: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           Ipv6Addresses: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         Nfs: {
+ * //           DNSName: "STRING_VALUE",
+ * //           IpAddresses: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //         },
+ * //         Smb: {
+ * //           DNSName: "STRING_VALUE",
+ * //           IpAddresses: "<OntapEndpointIpAddresses>",
+ * //           Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //         },
+ * //       },
+ * //       FileSystemId: "STRING_VALUE",
+ * //       Lifecycle: "CREATED" || "CREATING" || "DELETING" || "FAILED" || "MISCONFIGURED" || "PENDING",
+ * //       Name: "STRING_VALUE",
+ * //       ResourceARN: "STRING_VALUE",
+ * //       StorageVirtualMachineId: "STRING_VALUE",
+ * //       Subtype: "DEFAULT" || "DP_DESTINATION" || "SYNC_DESTINATION" || "SYNC_SOURCE",
+ * //       UUID: "STRING_VALUE",
+ * //       Tags: [ // Tags
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       LifecycleTransitionReason: { // LifecycleTransitionReason
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //       RootVolumeSecurityStyle: "UNIX" || "NTFS" || "MIXED",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeStorageVirtualMachinesCommandInput - {@link DescribeStorageVirtualMachinesCommandInput}
+ * @returns {@link DescribeStorageVirtualMachinesCommandOutput}
  * @see {@link DescribeStorageVirtualMachinesCommandInput} for command's `input` shape.
  * @see {@link DescribeStorageVirtualMachinesCommandOutput} for command's `response` shape.
- * @see {@link FSxClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FSxClientResolvedConfig | config} for FSxClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>A generic error indicating a failure with a client request.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>A generic error indicating a server-side failure.</p>
+ *
+ * @throws {@link StorageVirtualMachineNotFound} (client fault)
+ *  <p>No FSx for ONTAP SVMs were found based upon the supplied parameters.</p>
+ *
+ * @throws {@link FSxServiceException}
+ * <p>Base exception class for all service exceptions from FSx service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStorageVirtualMachinesCommand extends $Command<
-  DescribeStorageVirtualMachinesCommandInput,
-  DescribeStorageVirtualMachinesCommandOutput,
-  FSxClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStorageVirtualMachinesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FSxClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStorageVirtualMachinesCommandInput, DescribeStorageVirtualMachinesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FSxClient";
-    const commandName = "DescribeStorageVirtualMachinesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStorageVirtualMachinesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStorageVirtualMachinesResponse.filterSensitiveLog,
+export class DescribeStorageVirtualMachinesCommand extends command<DescribeStorageVirtualMachinesCommandInput, DescribeStorageVirtualMachinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStorageVirtualMachines",
+  DescribeStorageVirtualMachines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStorageVirtualMachinesRequest;
+      output: DescribeStorageVirtualMachinesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeStorageVirtualMachinesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeStorageVirtualMachinesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeStorageVirtualMachinesCommandOutput> {
-    return deserializeAws_json1_1DescribeStorageVirtualMachinesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStorageVirtualMachinesCommandInput;
+      output: DescribeStorageVirtualMachinesCommandOutput;
+    };
+  };
 }

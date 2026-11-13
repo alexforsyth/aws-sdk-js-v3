@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetPersonalizedRankingRequest, GetPersonalizedRankingResponse } from "../models/models_0";
-import {
-  PersonalizeRuntimeClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../PersonalizeRuntimeClient";
-import {
-  deserializeAws_restJson1GetPersonalizedRankingCommand,
-  serializeAws_restJson1GetPersonalizedRankingCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPersonalizedRankingRequest, GetPersonalizedRankingResponse } from "../models/models_0";
+import { GetPersonalizedRanking$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPersonalizedRankingCommand}.
+ */
 export interface GetPersonalizedRankingCommandInput extends GetPersonalizedRankingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPersonalizedRankingCommand}.
+ */
 export interface GetPersonalizedRankingCommandOutput extends GetPersonalizedRankingResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +34,82 @@ export interface GetPersonalizedRankingCommandOutput extends GetPersonalizedRank
  * ```javascript
  * import { PersonalizeRuntimeClient, GetPersonalizedRankingCommand } from "@aws-sdk/client-personalize-runtime"; // ES Modules import
  * // const { PersonalizeRuntimeClient, GetPersonalizedRankingCommand } = require("@aws-sdk/client-personalize-runtime"); // CommonJS import
+ * // import type { PersonalizeRuntimeClientConfig } from "@aws-sdk/client-personalize-runtime";
+ * const config = {}; // type is PersonalizeRuntimeClientConfig
  * const client = new PersonalizeRuntimeClient(config);
+ * const input = { // GetPersonalizedRankingRequest
+ *   campaignArn: "STRING_VALUE", // required
+ *   inputList: [ // InputList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   userId: "STRING_VALUE", // required
+ *   context: { // Context
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   filterArn: "STRING_VALUE",
+ *   filterValues: { // FilterValues
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   metadataColumns: { // MetadataColumns
+ *     "<keys>": [ // ColumnNamesList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new GetPersonalizedRankingCommand(input);
  * const response = await client.send(command);
+ * // { // GetPersonalizedRankingResponse
+ * //   personalizedRanking: [ // ItemList
+ * //     { // PredictedItem
+ * //       itemId: "STRING_VALUE",
+ * //       score: Number("double"),
+ * //       promotionName: "STRING_VALUE",
+ * //       metadata: { // Metadata
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       reason: [ // ReasonList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   recommendationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetPersonalizedRankingCommandInput - {@link GetPersonalizedRankingCommandInput}
+ * @returns {@link GetPersonalizedRankingCommandOutput}
  * @see {@link GetPersonalizedRankingCommandInput} for command's `input` shape.
  * @see {@link GetPersonalizedRankingCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeRuntimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeRuntimeClientResolvedConfig | config} for PersonalizeRuntimeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link PersonalizeRuntimeServiceException}
+ * <p>Base exception class for all service exceptions from PersonalizeRuntime service.</p>
+ *
+ *
+ * @public
  */
-export class GetPersonalizedRankingCommand extends $Command<
-  GetPersonalizedRankingCommandInput,
-  GetPersonalizedRankingCommandOutput,
-  PersonalizeRuntimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPersonalizedRankingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeRuntimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPersonalizedRankingCommandInput, GetPersonalizedRankingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeRuntimeClient";
-    const commandName = "GetPersonalizedRankingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPersonalizedRankingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPersonalizedRankingResponse.filterSensitiveLog,
+export class GetPersonalizedRankingCommand extends command<GetPersonalizedRankingCommandInput, GetPersonalizedRankingCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPersonalizedRanking",
+  GetPersonalizedRanking$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPersonalizedRankingRequest;
+      output: GetPersonalizedRankingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPersonalizedRankingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPersonalizedRankingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPersonalizedRankingCommandOutput> {
-    return deserializeAws_restJson1GetPersonalizedRankingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPersonalizedRankingCommandInput;
+      output: GetPersonalizedRankingCommandOutput;
+    };
+  };
 }

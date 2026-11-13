@@ -1,0 +1,99 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
+import { ListTagsForResource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTagsForResourceCommand}.
+ */
+export interface ListTagsForResourceCommandInput extends ListTagsForResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTagsForResourceCommand}.
+ */
+export interface ListTagsForResourceCommandOutput extends ListTagsForResourceResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns all the tags on the specified Application Auto Scaling scalable target.</p>
+ *          <p>For general information about tags, including the format and syntax, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging your Amazon Web Services
+ *             resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ApplicationAutoScalingClient, ListTagsForResourceCommand } from "@aws-sdk/client-application-auto-scaling"; // ES Modules import
+ * // const { ApplicationAutoScalingClient, ListTagsForResourceCommand } = require("@aws-sdk/client-application-auto-scaling"); // CommonJS import
+ * // import type { ApplicationAutoScalingClientConfig } from "@aws-sdk/client-application-auto-scaling";
+ * const config = {}; // type is ApplicationAutoScalingClientConfig
+ * const client = new ApplicationAutoScalingClient(config);
+ * const input = { // ListTagsForResourceRequest
+ *   ResourceARN: "STRING_VALUE", // required
+ * };
+ * const command = new ListTagsForResourceCommand(input);
+ * const response = await client.send(command);
+ * // { // ListTagsForResourceResponse
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param ListTagsForResourceCommandInput - {@link ListTagsForResourceCommandInput}
+ * @returns {@link ListTagsForResourceCommandOutput}
+ * @see {@link ListTagsForResourceCommandInput} for command's `input` shape.
+ * @see {@link ListTagsForResourceCommandOutput} for command's `response` shape.
+ * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for ApplicationAutoScalingClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ApplicationAutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationAutoScaling service.</p>
+ *
+ *
+ * @example To list tags for a scalable target
+ * ```javascript
+ * // This example lists the tag key names and values that are attached to the scalable target specified by its ARN.
+ * const input = {
+ *   ResourceARN: "arn:aws:application-autoscaling:us-west-2:123456789012:scalable-target/1234abcd56ab78cd901ef1234567890ab123"
+ * };
+ * const command = new ListTagsForResourceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Tags: {
+ *     environment: "production"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class ListTagsForResourceCommand extends command<ListTagsForResourceCommandInput, ListTagsForResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTagsForResource",
+  ListTagsForResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTagsForResourceRequest;
+      output: ListTagsForResourceResponse;
+    };
+    sdk: {
+      input: ListTagsForResourceCommandInput;
+      output: ListTagsForResourceCommandOutput;
+    };
+  };
+}

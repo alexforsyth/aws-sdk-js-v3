@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AssociateServiceActionWithProvisioningArtifactInput,
   AssociateServiceActionWithProvisioningArtifactOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateServiceActionWithProvisioningArtifactCommand,
-  serializeAws_json1_1AssociateServiceActionWithProvisioningArtifactCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { AssociateServiceActionWithProvisioningArtifact$ } from "../schemas/schemas_0";
 
-export interface AssociateServiceActionWithProvisioningArtifactCommandInput
-  extends AssociateServiceActionWithProvisioningArtifactInput {}
-export interface AssociateServiceActionWithProvisioningArtifactCommandOutput
-  extends AssociateServiceActionWithProvisioningArtifactOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateServiceActionWithProvisioningArtifactCommand}.
+ */
+export interface AssociateServiceActionWithProvisioningArtifactCommandInput extends AssociateServiceActionWithProvisioningArtifactInput {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateServiceActionWithProvisioningArtifactCommand}.
+ */
+export interface AssociateServiceActionWithProvisioningArtifactCommandOutput extends AssociateServiceActionWithProvisioningArtifactOutput, __MetadataBearer {}
 
 /**
  * <p>Associates a self-service action with a provisioning artifact.</p>
@@ -34,77 +32,62 @@ export interface AssociateServiceActionWithProvisioningArtifactCommandOutput
  * ```javascript
  * import { ServiceCatalogClient, AssociateServiceActionWithProvisioningArtifactCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, AssociateServiceActionWithProvisioningArtifactCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // AssociateServiceActionWithProvisioningArtifactInput
+ *   ProductId: "STRING_VALUE", // required
+ *   ProvisioningArtifactId: "STRING_VALUE", // required
+ *   ServiceActionId: "STRING_VALUE", // required
+ *   AcceptLanguage: "STRING_VALUE",
+ *   IdempotencyToken: "STRING_VALUE",
+ * };
  * const command = new AssociateServiceActionWithProvisioningArtifactCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateServiceActionWithProvisioningArtifactCommandInput - {@link AssociateServiceActionWithProvisioningArtifactCommandInput}
+ * @returns {@link AssociateServiceActionWithProvisioningArtifactCommandOutput}
  * @see {@link AssociateServiceActionWithProvisioningArtifactCommandInput} for command's `input` shape.
  * @see {@link AssociateServiceActionWithProvisioningArtifactCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>The specified resource is a duplicate.</p>
+ *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateServiceActionWithProvisioningArtifactCommand extends $Command<
-  AssociateServiceActionWithProvisioningArtifactCommandInput,
-  AssociateServiceActionWithProvisioningArtifactCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateServiceActionWithProvisioningArtifactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    AssociateServiceActionWithProvisioningArtifactCommandInput,
-    AssociateServiceActionWithProvisioningArtifactCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "AssociateServiceActionWithProvisioningArtifactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateServiceActionWithProvisioningArtifactInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateServiceActionWithProvisioningArtifactOutput.filterSensitiveLog,
+export class AssociateServiceActionWithProvisioningArtifactCommand extends command<AssociateServiceActionWithProvisioningArtifactCommandInput, AssociateServiceActionWithProvisioningArtifactCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateServiceActionWithProvisioningArtifact",
+  AssociateServiceActionWithProvisioningArtifact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateServiceActionWithProvisioningArtifactInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateServiceActionWithProvisioningArtifactCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateServiceActionWithProvisioningArtifactCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateServiceActionWithProvisioningArtifactCommandOutput> {
-    return deserializeAws_json1_1AssociateServiceActionWithProvisioningArtifactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateServiceActionWithProvisioningArtifactCommandInput;
+      output: AssociateServiceActionWithProvisioningArtifactCommandOutput;
+    };
+  };
 }

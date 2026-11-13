@@ -1,0 +1,97 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInstanceCommunicationLimitsRequest, GetInstanceCommunicationLimitsResponse } from "../models/models_0";
+import { GetInstanceCommunicationLimits$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInstanceCommunicationLimitsCommand}.
+ */
+export interface GetInstanceCommunicationLimitsCommandInput extends GetInstanceCommunicationLimitsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInstanceCommunicationLimitsCommand}.
+ */
+export interface GetInstanceCommunicationLimitsCommandOutput extends GetInstanceCommunicationLimitsResponse, __MetadataBearer {}
+
+/**
+ * Get the instance communication limits.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectCampaignsV2Client, GetInstanceCommunicationLimitsCommand } from "@aws-sdk/client-connectcampaignsv2"; // ES Modules import
+ * // const { ConnectCampaignsV2Client, GetInstanceCommunicationLimitsCommand } = require("@aws-sdk/client-connectcampaignsv2"); // CommonJS import
+ * // import type { ConnectCampaignsV2ClientConfig } from "@aws-sdk/client-connectcampaignsv2";
+ * const config = {}; // type is ConnectCampaignsV2ClientConfig
+ * const client = new ConnectCampaignsV2Client(config);
+ * const input = { // GetInstanceCommunicationLimitsRequest
+ *   connectInstanceId: "STRING_VALUE", // required
+ * };
+ * const command = new GetInstanceCommunicationLimitsCommand(input);
+ * const response = await client.send(command);
+ * // { // GetInstanceCommunicationLimitsResponse
+ * //   communicationLimitsConfig: { // InstanceCommunicationLimitsConfig
+ * //     allChannelSubtypes: { // CommunicationLimits Union: only one key present
+ * //       communicationLimitsList: [ // CommunicationLimitList
+ * //         { // CommunicationLimit
+ * //           maxCountPerRecipient: Number("int"), // required
+ * //           frequency: Number("int"), // required
+ * //           unit: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetInstanceCommunicationLimitsCommandInput - {@link GetInstanceCommunicationLimitsCommandInput}
+ * @returns {@link GetInstanceCommunicationLimitsCommandOutput}
+ * @see {@link GetInstanceCommunicationLimitsCommandInput} for command's `input` shape.
+ * @see {@link GetInstanceCommunicationLimitsCommandOutput} for command's `response` shape.
+ * @see {@link ConnectCampaignsV2ClientResolvedConfig | config} for ConnectCampaignsV2Client's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsV2ServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaignsV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class GetInstanceCommunicationLimitsCommand extends command<GetInstanceCommunicationLimitsCommandInput, GetInstanceCommunicationLimitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInstanceCommunicationLimits",
+  GetInstanceCommunicationLimits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceCommunicationLimitsRequest;
+      output: GetInstanceCommunicationLimitsResponse;
+    };
+    sdk: {
+      input: GetInstanceCommunicationLimitsCommandInput;
+      output: GetInstanceCommunicationLimitsCommandOutput;
+    };
+  };
+}

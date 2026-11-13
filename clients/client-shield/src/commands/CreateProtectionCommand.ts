@@ -1,96 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateProtectionRequest, CreateProtectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateProtectionCommand,
-  serializeAws_json1_1CreateProtectionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateProtectionRequest, CreateProtectionResponse } from "../models/models_0";
+import { CreateProtection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateProtectionCommand}.
+ */
 export interface CreateProtectionCommandInput extends CreateProtectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateProtectionCommand}.
+ */
 export interface CreateProtectionCommandOutput extends CreateProtectionResponse, __MetadataBearer {}
 
 /**
- * <p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p>
- *          <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href="https://console.aws.amazon.com/waf/">WAF console</a>. For more information see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html">Getting Started with Shield Advanced</a> and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html">Add Shield Advanced Protection to more Amazon Web Services Resources</a>.</p>
+ * <p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted zone, Global Accelerator standard accelerator, Elastic IP Address, Application Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and Network Load Balancers by association with protected Amazon EC2 Elastic IP addresses.</p>
+ *          <p>You can add protection to only a single resource with each <code>CreateProtection</code> request. You can add protection to multiple resources
+ *           at once through the Shield Advanced console at <a href="https://console.aws.amazon.com/wafv2/shieldv2#/">https://console.aws.amazon.com/wafv2/shieldv2#/</a>.
+ *               For more information see
+ *           <a href="https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html">Getting Started with Shield Advanced</a>
+ *               and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html">Adding Shield Advanced protection to Amazon Web Services resources</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ShieldClient, CreateProtectionCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, CreateProtectionCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // CreateProtectionRequest
+ *   Name: "STRING_VALUE", // required
+ *   ResourceArn: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateProtectionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateProtectionResponse
+ * //   ProtectionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateProtectionCommandInput - {@link CreateProtectionCommandInput}
+ * @returns {@link CreateProtectionCommandOutput}
  * @see {@link CreateProtectionCommandInput} for command's `input` shape.
  * @see {@link CreateProtectionCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>Exception that indicates that the operation would not cause any change to occur.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link InvalidResourceException} (client fault)
+ *  <p>Exception that indicates that the resource is invalid. You might not have access to the resource, or the resource might not exist.</p>
+ *
+ * @throws {@link LimitsExceededException} (client fault)
+ *  <p>Exception that indicates that the operation would exceed a limit.</p>
+ *
+ * @throws {@link OptimisticLockException} (client fault)
+ *  <p>Exception that indicates that the resource state has been modified by another
+ *          client. Retrieve the resource and then retry your request.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>Exception indicating the specified resource already exists. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class CreateProtectionCommand extends $Command<
-  CreateProtectionCommandInput,
-  CreateProtectionCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateProtectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateProtectionCommandInput, CreateProtectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "CreateProtectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateProtectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateProtectionResponse.filterSensitiveLog,
+export class CreateProtectionCommand extends command<CreateProtectionCommandInput, CreateProtectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateProtection",
+  CreateProtection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProtectionRequest;
+      output: CreateProtectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateProtectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateProtectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateProtectionCommandOutput> {
-    return deserializeAws_json1_1CreateProtectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateProtectionCommandInput;
+      output: CreateProtectionCommandOutput;
+    };
+  };
 }

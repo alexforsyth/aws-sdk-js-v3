@@ -1,0 +1,3698 @@
+// smithy-typescript generated code
+import type {
+  DukptDerivationType,
+  DukptEncryptionMode,
+  DukptKeyVariant,
+  EmvEncryptionMode,
+  EmvMajorKeyDerivationMode,
+  EncryptionMode,
+  KeyCheckValueAlgorithm,
+  KeyDerivationFunction,
+  KeyDerivationHashAlgorithm,
+  MacAlgorithm,
+  MajorKeyDerivationMode,
+  PaddingType,
+  PinBlockFormatForEmvPinChange,
+  PinBlockFormatForPinData,
+  PinBlockLengthPosition,
+  PinBlockPaddingType,
+  RandomKeyMaxLength,
+  RandomKeySendVariantMask,
+  SessionKeyDerivationMode,
+  SymmetricKeyAlgorithm,
+  WrappedKeyMaterialFormat,
+} from "./enums";
+
+/**
+ * <p>The parameter values of the current PIN to be changed on the EMV chip card.</p>
+ * @public
+ */
+export interface CurrentPinAttributes {
+  /**
+   * <p>The <code>keyArn</code> of the current PIN PEK.</p>
+   * @public
+   */
+  CurrentPinPekIdentifier: string | undefined;
+
+  /**
+   * <p>The encrypted pinblock of the current pin stored on the chip card.</p>
+   * @public
+   */
+  CurrentEncryptedPinBlock: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive the confidentiality and integrity keys for a payment card using Amex derivation method.</p>
+ * @public
+ */
+export interface AmexAttributes {
+  /**
+   * <p>The method to use when deriving the master key for a payment card using Amex derivation.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter of the current transaction that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+
+  /**
+   * <p>The <code>keyArn</code> of the issuer master key for cryptogram (IMK-AC) for the payment card.</p>
+   * @public
+   */
+  AuthorizationRequestKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The encrypted pinblock of the old pin stored on the chip card.</p>
+   * @public
+   */
+  CurrentPinAttributes?: CurrentPinAttributes | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
+ * @public
+ */
+export interface AmexCardSecurityCodeVersion1 {
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
+ * @public
+ */
+export interface AmexCardSecurityCodeVersion2 {
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+
+  /**
+   * <p>The service code of the AMEX payment card. This is different from the Card Security Code (CSC).</p>
+   * @public
+   */
+  ServiceCode: string | undefined;
+}
+
+/**
+ * <p>Parameter information for generating a KEK validation request during node-to-node initialization.</p>
+ * @public
+ */
+export interface KekValidationRequest {
+  /**
+   * <p>The key derivation algorithm to use for generating a KEK validation request.</p>
+   * @public
+   */
+  DeriveKeyAlgorithm: SymmetricKeyAlgorithm | undefined;
+
+  /**
+   * <p>The maximum length of the random key to generate for a KEK validation request.</p>
+   * @public
+   */
+  RandomKeyMaxLength?: RandomKeyMaxLength | undefined;
+}
+
+/**
+ * <p>Parameter information for generating a KEK validation response during node-to-node initialization.</p>
+ * @public
+ */
+export interface KekValidationResponse {
+  /**
+   * <p>The random key send value received from the initiating node to generate a KEK validation response.</p>
+   * @public
+   */
+  RandomKeySend: string | undefined;
+}
+
+/**
+ * <p>Parameter information for generating a random key for KEK validation to perform node-to-node initialization.</p>
+ * @public
+ */
+export type As2805KekValidationType =
+  | As2805KekValidationType.KekValidationRequestMember
+  | As2805KekValidationType.KekValidationResponseMember
+  | As2805KekValidationType.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace As2805KekValidationType {
+  /**
+   * <p>Parameter information for generating a KEK validation request during node-to-node initialization.</p>
+   * @public
+   */
+  export interface KekValidationRequestMember {
+    KekValidationRequest: KekValidationRequest;
+    KekValidationResponse?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameter information for generating a KEK validation response during node-to-node initialization.</p>
+   * @public
+   */
+  export interface KekValidationResponseMember {
+    KekValidationRequest?: never;
+    KekValidationResponse: KekValidationResponse;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    KekValidationRequest?: never;
+    KekValidationResponse?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    KekValidationRequest: (value: KekValidationRequest) => T;
+    KekValidationResponse: (value: KekValidationResponse) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameter information to use a PEK derived using AS2805.</p>
+ * @public
+ */
+export interface As2805PekDerivationAttributes {
+  /**
+   * <p>The system trace audit number for the transaction.</p>
+   * @public
+   */
+  SystemTraceAuditNumber: string | undefined;
+
+  /**
+   * <p>The transaction amount for the transaction.</p>
+   * @public
+   */
+  TransactionAmount: string | undefined;
+}
+
+/**
+ * <p>Parameters for plaintext encryption using asymmetric keys.</p>
+ * @public
+ */
+export interface AsymmetricEncryptionAttributes {
+  /**
+   * <p>The padding to be included with the data.</p>
+   * @public
+   */
+  PaddingType?: PaddingType | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to generate a cardholder verification value for the payment card.</p>
+ * @public
+ */
+export interface CardHolderVerificationValue {
+  /**
+   * <p>A random number generated by the issuer.</p>
+   * @public
+   */
+  UnpredictableNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter value that comes from a point of sale terminal.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to verify CVV (Card Verification Value) for the payment card.</p>
+ * @public
+ */
+export interface CardVerificationValue1 {
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+
+  /**
+   * <p>The service code of the payment card. This is different from Card Security Code (CSC).</p>
+   * @public
+   */
+  ServiceCode: string | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to verify Card Verification Value (CVV2) for the payment card.</p>
+ * @public
+ */
+export interface CardVerificationValue2 {
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Dynamic Card Verification Value (dCVV).</p>
+ * @public
+ */
+export interface DynamicCardVerificationCode {
+  /**
+   * <p>A random number generated by the issuer.</p>
+   * @public
+   */
+  UnpredictableNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter value that comes from the terminal.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+
+  /**
+   * <p>The data on the two tracks of magnetic cards used for financial transactions. This includes the cardholder name, PAN, expiration date, bank ID (BIN) and several other numbers the issuing bank uses to validate the data received.</p>
+   * @public
+   */
+  TrackData: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Dynamic Card Verification Value (dCVV).</p>
+ * @public
+ */
+export interface DynamicCardVerificationValue {
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+
+  /**
+   * <p>The service code of the payment card. This is different from Card Security Code (CSC).</p>
+   * @public
+   */
+  ServiceCode: string | undefined;
+
+  /**
+   * <p>The transaction counter value that comes from the terminal.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Card data parameters that are required to generate Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).</p>
+ * @public
+ */
+export type CardGenerationAttributes =
+  | CardGenerationAttributes.AmexCardSecurityCodeVersion1Member
+  | CardGenerationAttributes.AmexCardSecurityCodeVersion2Member
+  | CardGenerationAttributes.CardHolderVerificationValueMember
+  | CardGenerationAttributes.CardVerificationValue1Member
+  | CardGenerationAttributes.CardVerificationValue2Member
+  | CardGenerationAttributes.DynamicCardVerificationCodeMember
+  | CardGenerationAttributes.DynamicCardVerificationValueMember
+  | CardGenerationAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CardGenerationAttributes {
+  /**
+   * <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
+   * @public
+   */
+  export interface AmexCardSecurityCodeVersion1Member {
+    AmexCardSecurityCodeVersion1: AmexCardSecurityCodeVersion1;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
+   * @public
+   */
+  export interface AmexCardSecurityCodeVersion2Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2: AmexCardSecurityCodeVersion2;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate Card Verification Value (CVV) for the payment card.</p>
+   * @public
+   */
+  export interface CardVerificationValue1Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1: CardVerificationValue1;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate Card Verification Value (CVV2) for the payment card.</p>
+   * @public
+   */
+  export interface CardVerificationValue2Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2: CardVerificationValue2;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate a cardholder verification value for the payment card.</p>
+   * @public
+   */
+  export interface CardHolderVerificationValueMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue: CardHolderVerificationValue;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate CDynamic Card Verification Code (dCVC) for the payment card.</p>
+   * @public
+   */
+  export interface DynamicCardVerificationCodeMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode: DynamicCardVerificationCode;
+    DynamicCardVerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to generate CDynamic Card Verification Value (dCVV) for the payment card.</p>
+   * @public
+   */
+  export interface DynamicCardVerificationValueMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue: DynamicCardVerificationValue;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AmexCardSecurityCodeVersion1: (value: AmexCardSecurityCodeVersion1) => T;
+    AmexCardSecurityCodeVersion2: (value: AmexCardSecurityCodeVersion2) => T;
+    CardVerificationValue1: (value: CardVerificationValue1) => T;
+    CardVerificationValue2: (value: CardVerificationValue2) => T;
+    CardHolderVerificationValue: (value: CardHolderVerificationValue) => T;
+    DynamicCardVerificationCode: (value: DynamicCardVerificationCode) => T;
+    DynamicCardVerificationValue: (value: DynamicCardVerificationValue) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are required to generate or verify dCVC (Dynamic Card Verification Code).</p>
+ * @public
+ */
+export interface DiscoverDynamicCardVerificationCode {
+  /**
+   * <p>The expiry date of a payment card.</p>
+   * @public
+   */
+  CardExpiryDate: string | undefined;
+
+  /**
+   * <p>A random number that is generated by the issuer.</p>
+   * @public
+   */
+  UnpredictableNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter value that comes from the terminal.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Card data parameters that are requried to verify Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).</p>
+ * @public
+ */
+export type CardVerificationAttributes =
+  | CardVerificationAttributes.AmexCardSecurityCodeVersion1Member
+  | CardVerificationAttributes.AmexCardSecurityCodeVersion2Member
+  | CardVerificationAttributes.CardHolderVerificationValueMember
+  | CardVerificationAttributes.CardVerificationValue1Member
+  | CardVerificationAttributes.CardVerificationValue2Member
+  | CardVerificationAttributes.DiscoverDynamicCardVerificationCodeMember
+  | CardVerificationAttributes.DynamicCardVerificationCodeMember
+  | CardVerificationAttributes.DynamicCardVerificationValueMember
+  | CardVerificationAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CardVerificationAttributes {
+  /**
+   * <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
+   * @public
+   */
+  export interface AmexCardSecurityCodeVersion1Member {
+    AmexCardSecurityCodeVersion1: AmexCardSecurityCodeVersion1;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify a Card Security Code (CSC2) for an AMEX payment card.</p>
+   * @public
+   */
+  export interface AmexCardSecurityCodeVersion2Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2: AmexCardSecurityCodeVersion2;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify Card Verification Value (CVV) for the payment card.</p>
+   * @public
+   */
+  export interface CardVerificationValue1Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1: CardVerificationValue1;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify Card Verification Value (CVV2) for the payment card.</p>
+   * @public
+   */
+  export interface CardVerificationValue2Member {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2: CardVerificationValue2;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify a cardholder verification value for the payment card.</p>
+   * @public
+   */
+  export interface CardHolderVerificationValueMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue: CardHolderVerificationValue;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify CDynamic Card Verification Code (dCVC) for the payment card.</p>
+   * @public
+   */
+  export interface DynamicCardVerificationCodeMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode: DynamicCardVerificationCode;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify CDynamic Card Verification Value (dCVV) for the payment card.</p>
+   * @public
+   */
+  export interface DynamicCardVerificationValueMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue: DynamicCardVerificationValue;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Card data parameters that are required to verify CDynamic Card Verification Code (dCVC) for the payment card.</p>
+   * @public
+   */
+  export interface DiscoverDynamicCardVerificationCodeMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode: DiscoverDynamicCardVerificationCode;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AmexCardSecurityCodeVersion1?: never;
+    AmexCardSecurityCodeVersion2?: never;
+    CardVerificationValue1?: never;
+    CardVerificationValue2?: never;
+    CardHolderVerificationValue?: never;
+    DynamicCardVerificationCode?: never;
+    DynamicCardVerificationValue?: never;
+    DiscoverDynamicCardVerificationCode?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AmexCardSecurityCodeVersion1: (value: AmexCardSecurityCodeVersion1) => T;
+    AmexCardSecurityCodeVersion2: (value: AmexCardSecurityCodeVersion2) => T;
+    CardVerificationValue1: (value: CardVerificationValue1) => T;
+    CardVerificationValue2: (value: CardVerificationValue2) => T;
+    CardHolderVerificationValue: (value: CardHolderVerificationValue) => T;
+    DynamicCardVerificationCode: (value: DynamicCardVerificationCode) => T;
+    DynamicCardVerificationValue: (value: DynamicCardVerificationValue) => T;
+    DiscoverDynamicCardVerificationCode: (value: DiscoverDynamicCardVerificationCode) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are required for ARPC response generation using method1 after ARQC verification is successful.</p>
+ * @public
+ */
+export interface CryptogramVerificationArpcMethod1 {
+  /**
+   * <p>The auth code used to calculate APRC after ARQC verification is successful. This is the same auth code used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  AuthResponseCode: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required for ARPC response generation using method2 after ARQC verification is successful.</p>
+ * @public
+ */
+export interface CryptogramVerificationArpcMethod2 {
+  /**
+   * <p>The data indicating whether the issuer approves or declines an online transaction using an EMV chip card.</p>
+   * @public
+   */
+  CardStatusUpdate: string | undefined;
+
+  /**
+   * <p>The proprietary authentication data used by issuer for communication during online transaction using an EMV chip card.</p>
+   * @public
+   */
+  ProprietaryAuthenticationData?: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required for Authorization Response Cryptogram (ARPC) generation after Authorization Request Cryptogram (ARQC) verification is successful.</p>
+ * @public
+ */
+export type CryptogramAuthResponse =
+  | CryptogramAuthResponse.ArpcMethod1Member
+  | CryptogramAuthResponse.ArpcMethod2Member
+  | CryptogramAuthResponse.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CryptogramAuthResponse {
+  /**
+   * <p>Parameters that are required for ARPC response generation using method1 after ARQC verification is successful.</p>
+   * @public
+   */
+  export interface ArpcMethod1Member {
+    ArpcMethod1: CryptogramVerificationArpcMethod1;
+    ArpcMethod2?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for ARPC response generation using method2 after ARQC verification is successful.</p>
+   * @public
+   */
+  export interface ArpcMethod2Member {
+    ArpcMethod1?: never;
+    ArpcMethod2: CryptogramVerificationArpcMethod2;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    ArpcMethod1?: never;
+    ArpcMethod2?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    ArpcMethod1: (value: CryptogramVerificationArpcMethod1) => T;
+    ArpcMethod2: (value: CryptogramVerificationArpcMethod2) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are required to encrypt plaintext data using DUKPT.</p>
+ * @public
+ */
+export interface DukptEncryptionAttributes {
+  /**
+   * <p>The unique identifier known as Key Serial Number (KSN) that comes from an encrypting device using DUKPT encryption method. The KSN is derived from the encrypting device unique identifier and an internal transaction counter.</p>
+   * @public
+   */
+  KeySerialNumber: string | undefined;
+
+  /**
+   * <p>The block cipher method to use for encryption.</p> <p>The default is CBC.</p>
+   * @public
+   */
+  Mode?: DukptEncryptionMode | undefined;
+
+  /**
+   * <p>The key type encrypted using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code> </p>
+   * @public
+   */
+  DukptKeyDerivationType?: DukptDerivationType | undefined;
+
+  /**
+   * <p>The type of use of DUKPT, which can be incoming data decryption, outgoing data encryption, or both.</p>
+   * @public
+   */
+  DukptKeyVariant?: DukptKeyVariant | undefined;
+
+  /**
+   * <p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>
+   * @public
+   */
+  InitializationVector?: string | undefined;
+}
+
+/**
+ * <p>Parameters for plaintext encryption using EMV keys.</p>
+ * @public
+ */
+export interface EmvEncryptionAttributes {
+  /**
+   * <p>The EMV derivation mode to use for ICC master key derivation as per EMV version 4.3 book 2.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: EmvMajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The derivation value used to derive the ICC session key. It is typically the application transaction counter value padded with zeros or previous ARQC value padded with zeros as per EMV version 4.3 book 2.</p>
+   * @public
+   */
+  SessionDerivationData: string | undefined;
+
+  /**
+   * <p>The block cipher method to use for encryption.</p>
+   * @public
+   */
+  Mode?: EmvEncryptionMode | undefined;
+
+  /**
+   * <p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>
+   * @public
+   */
+  InitializationVector?: string | undefined;
+}
+
+/**
+ * <p>Parameters requried to encrypt plaintext data using symmetric keys.</p>
+ * @public
+ */
+export interface SymmetricEncryptionAttributes {
+  /**
+   * <p>The block cipher method to use for encryption.</p>
+   * @public
+   */
+  Mode: EncryptionMode | undefined;
+
+  /**
+   * <p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>
+   * @public
+   */
+  InitializationVector?: string | undefined;
+
+  /**
+   * <p>The padding to be included with the data.</p>
+   * @public
+   */
+  PaddingType?: PaddingType | undefined;
+}
+
+/**
+ * <p>Parameters that are required to perform encryption and decryption operations.</p>
+ * @public
+ */
+export type EncryptionDecryptionAttributes =
+  | EncryptionDecryptionAttributes.AsymmetricMember
+  | EncryptionDecryptionAttributes.DukptMember
+  | EncryptionDecryptionAttributes.EmvMember
+  | EncryptionDecryptionAttributes.SymmetricMember
+  | EncryptionDecryptionAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EncryptionDecryptionAttributes {
+  /**
+   * <p>Parameters that are required to perform encryption and decryption using symmetric keys.</p>
+   * @public
+   */
+  export interface SymmetricMember {
+    Symmetric: SymmetricEncryptionAttributes;
+    Asymmetric?: never;
+    Dukpt?: never;
+    Emv?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters for plaintext encryption using asymmetric keys.</p>
+   * @public
+   */
+  export interface AsymmetricMember {
+    Symmetric?: never;
+    Asymmetric: AsymmetricEncryptionAttributes;
+    Dukpt?: never;
+    Emv?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to encrypt plaintext data using DUKPT.</p>
+   * @public
+   */
+  export interface DukptMember {
+    Symmetric?: never;
+    Asymmetric?: never;
+    Dukpt: DukptEncryptionAttributes;
+    Emv?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters for plaintext encryption using EMV keys.</p>
+   * @public
+   */
+  export interface EmvMember {
+    Symmetric?: never;
+    Asymmetric?: never;
+    Dukpt?: never;
+    Emv: EmvEncryptionAttributes;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Symmetric?: never;
+    Asymmetric?: never;
+    Dukpt?: never;
+    Emv?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Symmetric: (value: SymmetricEncryptionAttributes) => T;
+    Asymmetric: (value: AsymmetricEncryptionAttributes) => T;
+    Dukpt: (value: DukptEncryptionAttributes) => T;
+    Emv: (value: EmvEncryptionAttributes) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters required to establish ECDH based key exchange.</p>
+ * @public
+ */
+export interface EcdhDerivationAttributes {
+  /**
+   * <p>The <code>keyArn</code> of the certificate that signed the client's <code>PublicKeyCertificate</code>.</p>
+   * @public
+   */
+  CertificateAuthorityPublicKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The client's public key certificate in PEM format (base64 encoded) to use for ECDH key derivation.</p>
+   * @public
+   */
+  PublicKeyCertificate: string | undefined;
+
+  /**
+   * <p>The key algorithm of the derived ECDH key.</p>
+   * @public
+   */
+  KeyAlgorithm: SymmetricKeyAlgorithm | undefined;
+
+  /**
+   * <p>The key derivation function to use for deriving a key using ECDH.</p>
+   * @public
+   */
+  KeyDerivationFunction: KeyDerivationFunction | undefined;
+
+  /**
+   * <p>The hash type to use for deriving a key using ECDH.</p>
+   * @public
+   */
+  KeyDerivationHashAlgorithm: KeyDerivationHashAlgorithm | undefined;
+
+  /**
+   * <p>A byte string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p> <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes, and re-using shared information for multiple ECDH key derivations is not recommended.</p>
+   * @public
+   */
+  SharedInformation: string | undefined;
+}
+
+/**
+ * <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
+ * @public
+ */
+export type WrappedKeyMaterial =
+  | WrappedKeyMaterial.DiffieHellmanSymmetricKeyMember
+  | WrappedKeyMaterial.Tr31KeyBlockMember
+  | WrappedKeyMaterial.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace WrappedKeyMaterial {
+  /**
+   * <p>The TR-31 wrapped key block.</p>
+   * @public
+   */
+  export interface Tr31KeyBlockMember {
+    Tr31KeyBlock: string;
+    DiffieHellmanSymmetricKey?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The parameter information for deriving a ECDH shared key.</p>
+   * @public
+   */
+  export interface DiffieHellmanSymmetricKeyMember {
+    Tr31KeyBlock?: never;
+    DiffieHellmanSymmetricKey: EcdhDerivationAttributes;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Tr31KeyBlock?: never;
+    DiffieHellmanSymmetricKey?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Tr31KeyBlock: (value: string) => T;
+    DiffieHellmanSymmetricKey: (value: EcdhDerivationAttributes) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
+ * @public
+ */
+export interface WrappedKey {
+  /**
+   * <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
+   * @public
+   */
+  WrappedKeyMaterial: WrappedKeyMaterial | undefined;
+
+  /**
+   * <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+   * @public
+   */
+  KeyCheckValueAlgorithm?: KeyCheckValueAlgorithm | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DecryptDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.</p> <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The ciphertext to decrypt.</p>
+   * @public
+   */
+  CipherText: string | undefined;
+
+  /**
+   * <p>The encryption key type and attributes for ciphertext decryption.</p>
+   * @public
+   */
+  DecryptionAttributes: EncryptionDecryptionAttributes | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key for ciphertext decryption.</p>
+   * @public
+   */
+  WrappedKey?: WrappedKey | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DecryptDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The decrypted plaintext data in hexBinary format.</p>
+   * @public
+   */
+  PlainText: string | undefined;
+}
+
+/**
+ * <p>The request was denied due to an invalid request error.</p>
+ * @public
+ */
+export interface ValidationExceptionField {
+  /**
+   * <p>The request was denied due to an invalid request error.</p>
+   * @public
+   */
+  path: string | undefined;
+
+  /**
+   * <p>The request was denied due to an invalid request error.</p>
+   * @public
+   */
+  message: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive the confidentiality and integrity keys for a payment card using EMV2000 deruv.</p>
+ * @public
+ */
+export interface Emv2000Attributes {
+  /**
+   * <p>The method to use when deriving the master key for the payment card.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter of the current transaction that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive the confidentiality and integrity keys for an Emv common payment card.</p>
+ * @public
+ */
+export interface EmvCommonAttributes {
+  /**
+   * <p>The method to use when deriving the master key for the payment card.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The application cryptogram for the current transaction that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationCryptogram: string | undefined;
+
+  /**
+   * <p>The block cipher method to use for encryption.</p>
+   * @public
+   */
+  Mode: EmvEncryptionMode | undefined;
+
+  /**
+   * <p>The padding to be added to the PIN block prior to encryption.</p> <p>Padding type should be <code>ISO_IEC_7816_4</code>, if <code>PinBlockLengthPosition</code> is set to <code>FRONT_OF_PIN_BLOCK</code>. No padding is required, if <code>PinBlockLengthPosition</code> is set to <code>NONE</code>.</p>
+   * @public
+   */
+  PinBlockPaddingType: PinBlockPaddingType | undefined;
+
+  /**
+   * <p>Specifies if PIN block length should be added to front of the pin block. </p> <p>If value is set to <code>FRONT_OF_PIN_BLOCK</code>, then PIN block padding type should be <code>ISO_IEC_7816_4</code>.</p>
+   * @public
+   */
+  PinBlockLengthPosition: PinBlockLengthPosition | undefined;
+}
+
+/**
+ * <p>Parameters to derive the confidentiality and integrity keys for a Mastercard payment card.</p>
+ * @public
+ */
+export interface MasterCardAttributes {
+  /**
+   * <p>The method to use when deriving the master key for the payment card.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The application cryptogram for the current transaction that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationCryptogram: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive the confidentiality and integrity keys for a Visa payment card.</p>
+ * @public
+ */
+export interface VisaAttributes {
+  /**
+   * <p>The method to use when deriving the master key for the payment card.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). Typically 00 is used, if no value is provided by the terminal.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter of the current transaction that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+
+  /**
+   * <p>The <code>keyArn</code> of the issuer master key for cryptogram (IMK-AC) for the payment card.</p>
+   * @public
+   */
+  AuthorizationRequestKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The encrypted pinblock of the old pin stored on the chip card.</p>
+   * @public
+   */
+  CurrentPinAttributes?: CurrentPinAttributes | undefined;
+}
+
+/**
+ * <p>Parameters to derive the payment card specific confidentiality and integrity keys.</p>
+ * @public
+ */
+export type DerivationMethodAttributes =
+  | DerivationMethodAttributes.AmexMember
+  | DerivationMethodAttributes.Emv2000Member
+  | DerivationMethodAttributes.EmvCommonMember
+  | DerivationMethodAttributes.MastercardMember
+  | DerivationMethodAttributes.VisaMember
+  | DerivationMethodAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace DerivationMethodAttributes {
+  /**
+   * <p>Parameters to derive the confidentiality and integrity keys for a payment card using Emv common derivation method.</p>
+   * @public
+   */
+  export interface EmvCommonMember {
+    EmvCommon: EmvCommonAttributes;
+    Amex?: never;
+    Visa?: never;
+    Emv2000?: never;
+    Mastercard?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive the confidentiality and integrity keys for a payment card using Amex derivation method.</p>
+   * @public
+   */
+  export interface AmexMember {
+    EmvCommon?: never;
+    Amex: AmexAttributes;
+    Visa?: never;
+    Emv2000?: never;
+    Mastercard?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive the confidentiality and integrity keys for a a payment card using Visa derivation method.</p>
+   * @public
+   */
+  export interface VisaMember {
+    EmvCommon?: never;
+    Amex?: never;
+    Visa: VisaAttributes;
+    Emv2000?: never;
+    Mastercard?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive the confidentiality and integrity keys for a payment card using Emv2000 derivation method.</p>
+   * @public
+   */
+  export interface Emv2000Member {
+    EmvCommon?: never;
+    Amex?: never;
+    Visa?: never;
+    Emv2000: Emv2000Attributes;
+    Mastercard?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive the confidentiality and integrity keys for a payment card using Mastercard derivation method.</p>
+   * @public
+   */
+  export interface MastercardMember {
+    EmvCommon?: never;
+    Amex?: never;
+    Visa?: never;
+    Emv2000?: never;
+    Mastercard: MasterCardAttributes;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    EmvCommon?: never;
+    Amex?: never;
+    Visa?: never;
+    Emv2000?: never;
+    Mastercard?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    EmvCommon: (value: EmvCommonAttributes) => T;
+    Amex: (value: AmexAttributes) => T;
+    Visa: (value: VisaAttributes) => T;
+    Emv2000: (value: Emv2000Attributes) => T;
+    Mastercard: (value: MasterCardAttributes) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The shared information used when deriving a key using ECDH.</p>
+ * @public
+ */
+export type DiffieHellmanDerivationData =
+  | DiffieHellmanDerivationData.SharedInformationMember
+  | DiffieHellmanDerivationData.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace DiffieHellmanDerivationData {
+  /**
+   * <p>A string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p> <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes. It is not recommended to reuse shared information for multiple ECDH key derivations, as it could result in derived key material being the same across different derivations.</p>
+   * @public
+   */
+  export interface SharedInformationMember {
+    SharedInformation: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    SharedInformation?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    SharedInformation: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are used for Derived Unique Key Per Transaction (DUKPT) derivation algorithm.</p>
+ * @public
+ */
+export interface DukptAttributes {
+  /**
+   * <p>The unique identifier known as Key Serial Number (KSN) that comes from an encrypting device using DUKPT encryption method. The KSN is derived from the encrypting device unique identifier and an internal transaction counter.</p>
+   * @public
+   */
+  KeySerialNumber: string | undefined;
+
+  /**
+   * <p>The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code>.</p>
+   * @public
+   */
+  DukptDerivationType: DukptDerivationType | undefined;
+}
+
+/**
+ * <p>Parameters required for encryption or decryption of data using DUKPT.</p>
+ * @public
+ */
+export interface DukptDerivationAttributes {
+  /**
+   * <p>The unique identifier known as Key Serial Number (KSN) that comes from an encrypting device using DUKPT encryption method. The KSN is derived from the encrypting device unique identifier and an internal transaction counter.</p>
+   * @public
+   */
+  KeySerialNumber: string | undefined;
+
+  /**
+   * <p>The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code> </p>
+   * @public
+   */
+  DukptKeyDerivationType?: DukptDerivationType | undefined;
+
+  /**
+   * <p>The type of use of DUKPT, which can be for incoming data decryption, outgoing data encryption, or both.</p>
+   * @public
+   */
+  DukptKeyVariant?: DukptKeyVariant | undefined;
+}
+
+/**
+ * @public
+ */
+export interface EncryptDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.</p> <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The plaintext to be encrypted.</p> <note> <p>For encryption using asymmetric keys, plaintext data length is constrained by encryption key strength that you define in <code>KeyAlgorithm</code> and padding type that you define in <code>AsymmetricEncryptionAttributes</code>. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html">Encrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> </note>
+   * @public
+   */
+  PlainText: string | undefined;
+
+  /**
+   * <p>The encryption key type and attributes for plaintext encryption.</p>
+   * @public
+   */
+  EncryptionAttributes: EncryptionDecryptionAttributes | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key for plaintext encryption.</p>
+   * @public
+   */
+  WrappedKey?: WrappedKey | undefined;
+}
+
+/**
+ * @public
+ */
+export interface EncryptDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue?: string | undefined;
+
+  /**
+   * <p>The encrypted ciphertext.</p>
+   * @public
+   */
+  CipherText: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateAs2805KekValidationInput {
+  /**
+   * <p>The <code>keyARN</code> of sending KEK that Amazon Web Services Payment Cryptography uses for node-to-node initialization</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>Defines whether to generate a KEK validation request or KEK validation response for node-to-node initialization.</p>
+   * @public
+   */
+  KekValidationType: As2805KekValidationType | undefined;
+
+  /**
+   * <p>The key variant to use for generating a random key for KEK validation during node-to-node initialization.</p>
+   * @public
+   */
+  RandomKeySendVariantMask: RandomKeySendVariantMask | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateAs2805KekValidationOutput {
+  /**
+   * <p>The <code>keyARN</code> of sending KEK that Amazon Web Services Payment Cryptography validates for node-to-node initialization</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the sending KEK that Amazon Web Services Payment Cryptography validates for node-to-node initialization.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The random key generated for sending KEK validation.</p>
+   * @public
+   */
+  RandomKeySend: string | undefined;
+
+  /**
+   * <p>The random key generated for receiving KEK validation. The initiating node sends this key to its partner node for validation.</p>
+   * @public
+   */
+  RandomKeyReceive: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for an Amex payment card.</p>
+ * @public
+ */
+export interface SessionKeyAmex {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for an Emv2000 payment card for ARQC verification.</p>
+ * @public
+ */
+export interface SessionKeyEmv2000 {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for an Emv common payment card for ARQC verification.</p>
+ * @public
+ */
+export interface SessionKeyEmvCommon {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for Mastercard payment card for ARQC verification.</p>
+ * @public
+ */
+export interface SessionKeyMastercard {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+
+  /**
+   * <p>A random number generated by the issuer.</p>
+   * @public
+   */
+  UnpredictableNumber: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>
+ * @public
+ */
+export interface SessionKeyUnionPay {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). If not used, enter <code>00</code>.</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The transaction counter that the terminal provides during transaction processing. This value is in hexadecimal format. For example, enter a decimal counter of 109 as <code>006D</code>.</p>
+   * @public
+   */
+  ApplicationTransactionCounter: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key for Visa payment card for ARQC verification.</p>
+ * @public
+ */
+export interface SessionKeyVisa {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+}
+
+/**
+ * <p>Parameters to derive a session key for Authorization Response Cryptogram (ARQC) verification.</p>
+ * @public
+ */
+export type SessionKeyDerivation =
+  | SessionKeyDerivation.AmexMember
+  | SessionKeyDerivation.Emv2000Member
+  | SessionKeyDerivation.EmvCommonMember
+  | SessionKeyDerivation.MastercardMember
+  | SessionKeyDerivation.UnionPayMember
+  | SessionKeyDerivation.VisaMember
+  | SessionKeyDerivation.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace SessionKeyDerivation {
+  /**
+   * <p>Parameters to derive session key for an Emv common payment card for ARQC verification.</p>
+   * @public
+   */
+  export interface EmvCommonMember {
+    EmvCommon: SessionKeyEmvCommon;
+    Mastercard?: never;
+    Emv2000?: never;
+    Amex?: never;
+    Visa?: never;
+    UnionPay?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive session key for a Mastercard payment card for ARQC verification.</p>
+   * @public
+   */
+  export interface MastercardMember {
+    EmvCommon?: never;
+    Mastercard: SessionKeyMastercard;
+    Emv2000?: never;
+    Amex?: never;
+    Visa?: never;
+    UnionPay?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive session key for an Emv2000 payment card for ARQC verification.</p>
+   * @public
+   */
+  export interface Emv2000Member {
+    EmvCommon?: never;
+    Mastercard?: never;
+    Emv2000: SessionKeyEmv2000;
+    Amex?: never;
+    Visa?: never;
+    UnionPay?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive session key for an Amex payment card for ARQC verification.</p>
+   * @public
+   */
+  export interface AmexMember {
+    EmvCommon?: never;
+    Mastercard?: never;
+    Emv2000?: never;
+    Amex: SessionKeyAmex;
+    Visa?: never;
+    UnionPay?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive session key for a Visa payment cardfor ARQC verification.</p>
+   * @public
+   */
+  export interface VisaMember {
+    EmvCommon?: never;
+    Mastercard?: never;
+    Emv2000?: never;
+    Amex?: never;
+    Visa: SessionKeyVisa;
+    UnionPay?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>
+   * @public
+   */
+  export interface UnionPayMember {
+    EmvCommon?: never;
+    Mastercard?: never;
+    Emv2000?: never;
+    Amex?: never;
+    Visa?: never;
+    UnionPay: SessionKeyUnionPay;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    EmvCommon?: never;
+    Mastercard?: never;
+    Emv2000?: never;
+    Amex?: never;
+    Visa?: never;
+    UnionPay?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    EmvCommon: (value: SessionKeyEmvCommon) => T;
+    Mastercard: (value: SessionKeyMastercard) => T;
+    Emv2000: (value: SessionKeyEmv2000) => T;
+    Amex: (value: SessionKeyAmex) => T;
+    Visa: (value: SessionKeyVisa) => T;
+    UnionPay: (value: SessionKeyUnionPay) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface GenerateAuthRequestCryptogramInput {
+  /**
+   * <p>The <code>keyARN</code> of the IMK-AC (TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS) that Amazon Web Services Payment Cryptography uses to generate the ARQC.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The transaction data that Amazon Web Services Payment Cryptography uses for ARQC generation. The same transaction data is used for ARQC verification by the issuer using <a>VerifyAuthRequestCryptogram</a>.</p>
+   * @public
+   */
+  TransactionData: string | undefined;
+
+  /**
+   * <p>The method to use when deriving the major encryption key for ARQC generation within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The attributes and values to use for deriving a session key for ARQC generation within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  SessionKeyDerivationAttributes: SessionKeyDerivation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateAuthRequestCryptogramOutput {
+  /**
+   * <p>The <code>keyARN</code> of the IMK-AC that Amazon Web Services Payment Cryptography uses for ARQC generation.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The Authorization Request Cryptogram (ARQC) generated by Amazon Web Services Payment Cryptography using the specified key and transaction data.</p>
+   * @public
+   */
+  AuthRequestCryptogram: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateCardValidationDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the CVK encryption key that Amazon Web Services Payment Cryptography uses to generate card data.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>The algorithm for generating CVV or CSC values for the card within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  GenerationAttributes: CardGenerationAttributes | undefined;
+
+  /**
+   * <p>The length of the CVV or CSC to be generated. The default value is 3.</p>
+   * @public
+   */
+  ValidationDataLength?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateCardValidationDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the CVK encryption key that Amazon Web Services Payment Cryptography uses to generate CVV or CSC.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The CVV or CSC value that Amazon Web Services Payment Cryptography generates for the card.</p>
+   * @public
+   */
+  ValidationData: string | undefined;
+}
+
+/**
+ * <p>Parameters required for DUKPT MAC generation and verification.</p>
+ * @public
+ */
+export interface MacAlgorithmDukpt {
+  /**
+   * <p>The unique identifier known as Key Serial Number (KSN) that comes from an encrypting device using DUKPT encryption method. The KSN is derived from the encrypting device unique identifier and an internal transaction counter.</p>
+   * @public
+   */
+  KeySerialNumber: string | undefined;
+
+  /**
+   * <p>The type of use of DUKPT, which can be MAC generation, MAC verification, or both.</p>
+   * @public
+   */
+  DukptKeyVariant: DukptKeyVariant | undefined;
+
+  /**
+   * <p>The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use <code>AES_128</code> as a derivation type for a BDK of <code>AES_128</code> or <code>TDES_2KEY</code>.</p>
+   * @public
+   */
+  DukptDerivationType?: DukptDerivationType | undefined;
+}
+
+/**
+ * <p>Parameters to derive session key value using a MAC EMV algorithm.</p>
+ * @public
+ */
+export type SessionKeyDerivationValue =
+  | SessionKeyDerivationValue.ApplicationCryptogramMember
+  | SessionKeyDerivationValue.ApplicationTransactionCounterMember
+  | SessionKeyDerivationValue.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace SessionKeyDerivationValue {
+  /**
+   * <p>The cryptogram provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  export interface ApplicationCryptogramMember {
+    ApplicationCryptogram: string;
+    ApplicationTransactionCounter?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The transaction counter that is provided by the terminal during transaction processing.</p>
+   * @public
+   */
+  export interface ApplicationTransactionCounterMember {
+    ApplicationCryptogram?: never;
+    ApplicationTransactionCounter: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    ApplicationCryptogram?: never;
+    ApplicationTransactionCounter?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    ApplicationCryptogram: (value: string) => T;
+    ApplicationTransactionCounter: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are required for EMV MAC generation and verification.</p>
+ * @public
+ */
+export interface MacAlgorithmEmv {
+  /**
+   * <p>The method to use when deriving the master key for EMV MAC generation or verification.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>
+   * @public
+   */
+  PanSequenceNumber: string | undefined;
+
+  /**
+   * <p>The method of deriving a session key for EMV MAC generation or verification.</p>
+   * @public
+   */
+  SessionKeyDerivationMode: SessionKeyDerivationMode | undefined;
+
+  /**
+   * <p>Parameters that are required to generate session key for EMV generation and verification.</p>
+   * @public
+   */
+  SessionKeyDerivationValue: SessionKeyDerivationValue | undefined;
+}
+
+/**
+ * <p>Parameters that are required for DUKPT, HMAC, or EMV MAC generation or verification.</p>
+ * @public
+ */
+export type MacAttributes =
+  | MacAttributes.AlgorithmMember
+  | MacAttributes.DukptCmacMember
+  | MacAttributes.DukptIso9797Algorithm1Member
+  | MacAttributes.DukptIso9797Algorithm3Member
+  | MacAttributes.EmvMacMember
+  | MacAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace MacAttributes {
+  /**
+   * <p>The encryption algorithm for MAC generation or verification.</p>
+   * @public
+   */
+  export interface AlgorithmMember {
+    Algorithm: MacAlgorithm;
+    EmvMac?: never;
+    DukptIso9797Algorithm1?: never;
+    DukptIso9797Algorithm3?: never;
+    DukptCmac?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for MAC generation or verification using EMV MAC algorithm.</p>
+   * @public
+   */
+  export interface EmvMacMember {
+    Algorithm?: never;
+    EmvMac: MacAlgorithmEmv;
+    DukptIso9797Algorithm1?: never;
+    DukptIso9797Algorithm3?: never;
+    DukptCmac?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm1.</p>
+   * @public
+   */
+  export interface DukptIso9797Algorithm1Member {
+    Algorithm?: never;
+    EmvMac?: never;
+    DukptIso9797Algorithm1: MacAlgorithmDukpt;
+    DukptIso9797Algorithm3?: never;
+    DukptCmac?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for MAC generation or verification using DUKPT ISO 9797 algorithm3.</p>
+   * @public
+   */
+  export interface DukptIso9797Algorithm3Member {
+    Algorithm?: never;
+    EmvMac?: never;
+    DukptIso9797Algorithm1?: never;
+    DukptIso9797Algorithm3: MacAlgorithmDukpt;
+    DukptCmac?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for MAC generation or verification using DUKPT CMAC algorithm.</p>
+   * @public
+   */
+  export interface DukptCmacMember {
+    Algorithm?: never;
+    EmvMac?: never;
+    DukptIso9797Algorithm1?: never;
+    DukptIso9797Algorithm3?: never;
+    DukptCmac: MacAlgorithmDukpt;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Algorithm?: never;
+    EmvMac?: never;
+    DukptIso9797Algorithm1?: never;
+    DukptIso9797Algorithm3?: never;
+    DukptCmac?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Algorithm: (value: MacAlgorithm) => T;
+    EmvMac: (value: MacAlgorithmEmv) => T;
+    DukptIso9797Algorithm1: (value: MacAlgorithmDukpt) => T;
+    DukptIso9797Algorithm3: (value: MacAlgorithmDukpt) => T;
+    DukptCmac: (value: MacAlgorithmDukpt) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface GenerateMacInput {
+  /**
+   * <p>The <code>keyARN</code> of the MAC generation encryption key.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The data for which a MAC is under generation. This value must be hexBinary.</p>
+   * @public
+   */
+  MessageData: string | undefined;
+
+  /**
+   * <p>The attributes and data values to use for MAC generation within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  GenerationAttributes: MacAttributes | undefined;
+
+  /**
+   * <p>The length of a MAC under generation.</p>
+   * @public
+   */
+  MacLength?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateMacOutput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for MAC generation.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The MAC cryptogram generated within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  Mac: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateMacEmvPinChangeInput {
+  /**
+   * <p>The <code>keyARN</code> of the PEK protecting the incoming new encrypted PIN block.</p>
+   * @public
+   */
+  NewPinPekIdentifier: string | undefined;
+
+  /**
+   * <p>The incoming new encrypted PIN block data for offline pin change on an EMV card.</p>
+   * @public
+   */
+  NewEncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The PIN encoding format of the incoming new encrypted PIN block as specified in ISO 9564.</p>
+   * @public
+   */
+  PinBlockFormat: PinBlockFormatForEmvPinChange | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the issuer master key (IMK-SMI) used to authenticate the issuer script response.</p>
+   * @public
+   */
+  SecureMessagingIntegrityKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the issuer master key (IMK-SMC) used to protect the PIN block data in the issuer script response.</p>
+   * @public
+   */
+  SecureMessagingConfidentialityKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The message data is the APDU command from the card reader or terminal. The target encrypted PIN block, after translation to ISO2 format, is appended to this message data to generate an issuer script response.</p>
+   * @public
+   */
+  MessageData: string | undefined;
+
+  /**
+   * <p>The attributes and data values to derive payment card specific confidentiality and integrity keys.</p>
+   * @public
+   */
+  DerivationMethodAttributes: DerivationMethodAttributes | undefined;
+}
+
+/**
+ * <p>The attributes values used for Amex and Visa derivation methods.</p>
+ * @public
+ */
+export interface VisaAmexDerivationOutputs {
+  /**
+   * <p>The <code>keyArn</code> of the issuer master key for cryptogram (IMK-AC) used by the operation.</p>
+   * @public
+   */
+  AuthorizationRequestKeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the issuer master key for cryptogram (IMK-AC) used by the operation.</p>
+   * @public
+   */
+  AuthorizationRequestKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The <code>keyArn</code> of the current PIN PEK.</p>
+   * @public
+   */
+  CurrentPinPekArn?: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the current PIN PEK.</p>
+   * @public
+   */
+  CurrentPinPekKeyCheckValue?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GenerateMacEmvPinChangeOutput {
+  /**
+   * <p>Returns the <code>keyArn</code> of the PEK protecting the incoming new encrypted PIN block.</p>
+   * @public
+   */
+  NewPinPekArn: string | undefined;
+
+  /**
+   * <p>Returns the <code>keyArn</code> of the IMK-SMI used by the operation.</p>
+   * @public
+   */
+  SecureMessagingIntegrityKeyArn: string | undefined;
+
+  /**
+   * <p>Returns the <code>keyArn</code> of the IMK-SMC used by the operation.</p>
+   * @public
+   */
+  SecureMessagingConfidentialityKeyArn: string | undefined;
+
+  /**
+   * <p>Returns the mac of the issuer script containing message data and appended target encrypted pin block in ISO2 format.</p>
+   * @public
+   */
+  Mac: string | undefined;
+
+  /**
+   * <p>Returns the incoming new encrpted PIN block.</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the PEK uprotecting the incoming new encrypted PIN block.</p>
+   * @public
+   */
+  NewPinPekKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the SMI issuer master key used by the operation.</p>
+   * @public
+   */
+  SecureMessagingIntegrityKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the SMC issuer master key used by the operation.</p>
+   * @public
+   */
+  SecureMessagingConfidentialityKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The attribute values used for Amex and Visa derivation methods.</p>
+   * @public
+   */
+  VisaAmexDerivationOutputs?: VisaAmexDerivationOutputs | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Ibm3624 natural PIN.</p>
+ * @public
+ */
+export interface Ibm3624NaturalPin {
+  /**
+   * <p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>
+   * @public
+   */
+  DecimalizationTable: string | undefined;
+
+  /**
+   * <p>The padding character for validation data.</p>
+   * @public
+   */
+  PinValidationDataPadCharacter: string | undefined;
+
+  /**
+   * <p>The unique data for cardholder identification.</p>
+   * @public
+   */
+  PinValidationData: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Ibm3624 PIN from offset PIN.</p>
+ * @public
+ */
+export interface Ibm3624PinFromOffset {
+  /**
+   * <p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>
+   * @public
+   */
+  DecimalizationTable: string | undefined;
+
+  /**
+   * <p>The padding character for validation data.</p>
+   * @public
+   */
+  PinValidationDataPadCharacter: string | undefined;
+
+  /**
+   * <p>The unique data for cardholder identification.</p>
+   * @public
+   */
+  PinValidationData: string | undefined;
+
+  /**
+   * <p>The PIN offset value.</p>
+   * @public
+   */
+  PinOffset: string | undefined;
+}
+
+/**
+ * <p>Pparameters that are required to generate or verify Ibm3624 PIN offset PIN.</p>
+ * @public
+ */
+export interface Ibm3624PinOffset {
+  /**
+   * <p>The encrypted PIN block data. According to ISO 9564 standard, a PIN Block is an encoded representation of a payment card Personal Account Number (PAN) and the cardholder Personal Identification Number (PIN).</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>
+   * @public
+   */
+  DecimalizationTable: string | undefined;
+
+  /**
+   * <p>The padding character for validation data.</p>
+   * @public
+   */
+  PinValidationDataPadCharacter: string | undefined;
+
+  /**
+   * <p>The unique data for cardholder identification.</p>
+   * @public
+   */
+  PinValidationData: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Ibm3624 random PIN.</p>
+ * @public
+ */
+export interface Ibm3624RandomPin {
+  /**
+   * <p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>
+   * @public
+   */
+  DecimalizationTable: string | undefined;
+
+  /**
+   * <p>The padding character for validation data.</p>
+   * @public
+   */
+  PinValidationDataPadCharacter: string | undefined;
+
+  /**
+   * <p>The unique data for cardholder identification.</p>
+   * @public
+   */
+  PinValidationData: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Visa PIN.</p>
+ * @public
+ */
+export interface VisaPin {
+  /**
+   * <p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>
+   * @public
+   */
+  PinVerificationKeyIndex: number | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>
+ * @public
+ */
+export interface VisaPinVerificationValue {
+  /**
+   * <p>The encrypted PIN block data to verify.</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>
+   * @public
+   */
+  PinVerificationKeyIndex: number | undefined;
+}
+
+/**
+ * <p>Parameters that are required for PIN data generation.</p>
+ * @public
+ */
+export type PinGenerationAttributes =
+  | PinGenerationAttributes.Ibm3624NaturalPinMember
+  | PinGenerationAttributes.Ibm3624PinFromOffsetMember
+  | PinGenerationAttributes.Ibm3624PinOffsetMember
+  | PinGenerationAttributes.Ibm3624RandomPinMember
+  | PinGenerationAttributes.VisaPinMember
+  | PinGenerationAttributes.VisaPinVerificationValueMember
+  | PinGenerationAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PinGenerationAttributes {
+  /**
+   * <p>Parameters that are required to generate or verify Visa PIN.</p>
+   * @public
+   */
+  export interface VisaPinMember {
+    VisaPin: VisaPin;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Visa PIN Verification Value (PVV).</p>
+   * @public
+   */
+  export interface VisaPinVerificationValueMember {
+    VisaPin?: never;
+    VisaPinVerificationValue: VisaPinVerificationValue;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Ibm3624 PIN offset PIN.</p>
+   * @public
+   */
+  export interface Ibm3624PinOffsetMember {
+    VisaPin?: never;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset: Ibm3624PinOffset;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Ibm3624 natural PIN.</p>
+   * @public
+   */
+  export interface Ibm3624NaturalPinMember {
+    VisaPin?: never;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin: Ibm3624NaturalPin;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Ibm3624 random PIN.</p>
+   * @public
+   */
+  export interface Ibm3624RandomPinMember {
+    VisaPin?: never;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin: Ibm3624RandomPin;
+    Ibm3624PinFromOffset?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Ibm3624 PIN from offset PIN.</p>
+   * @public
+   */
+  export interface Ibm3624PinFromOffsetMember {
+    VisaPin?: never;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset: Ibm3624PinFromOffset;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    VisaPin?: never;
+    VisaPinVerificationValue?: never;
+    Ibm3624PinOffset?: never;
+    Ibm3624NaturalPin?: never;
+    Ibm3624RandomPin?: never;
+    Ibm3624PinFromOffset?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    VisaPin: (value: VisaPin) => T;
+    VisaPinVerificationValue: (value: VisaPinVerificationValue) => T;
+    Ibm3624PinOffset: (value: Ibm3624PinOffset) => T;
+    Ibm3624NaturalPin: (value: Ibm3624NaturalPin) => T;
+    Ibm3624RandomPin: (value: Ibm3624RandomPin) => T;
+    Ibm3624PinFromOffset: (value: Ibm3624PinFromOffset) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface GeneratePinDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the PEK that Amazon Web Services Payment Cryptography uses for pin data generation.</p>
+   * @public
+   */
+  GenerationKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the PEK that Amazon Web Services Payment Cryptography uses to encrypt the PIN Block. For ECDH, it is the <code>keyARN</code> of the asymmetric ECC key.</p>
+   * @public
+   */
+  EncryptionKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The attributes and values to use for PIN, PVV, or PIN Offset generation.</p>
+   * @public
+   */
+  GenerationAttributes: PinGenerationAttributes | undefined;
+
+  /**
+   * <p>The length of PIN under generation.</p>
+   * @public
+   */
+  PinDataLength?: number | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber?: string | undefined;
+
+  /**
+   * <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code>, <code>ISO_Format_3</code> and <code>ISO_Format_4</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p> <p>The <code>ISO_Format_4</code> PIN block format is the only one supporting AES encryption.</p>
+   * @public
+   */
+  PinBlockFormat: PinBlockFormatForPinData | undefined;
+
+  /**
+   * <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
+   * @public
+   */
+  EncryptionWrappedKey?: WrappedKey | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate, translate, or verify PIN data.</p>
+ * @public
+ */
+export type PinData =
+  | PinData.PinOffsetMember
+  | PinData.VerificationValueMember
+  | PinData.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PinData {
+  /**
+   * <p>The PIN offset value.</p>
+   * @public
+   */
+  export interface PinOffsetMember {
+    PinOffset: string;
+    VerificationValue?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The unique data to identify a cardholder. In most cases, this is the same as cardholder's Primary Account Number (PAN). If a value is not provided, it defaults to PAN.</p>
+   * @public
+   */
+  export interface VerificationValueMember {
+    PinOffset?: never;
+    VerificationValue: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    PinOffset?: never;
+    VerificationValue?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    PinOffset: (value: string) => T;
+    VerificationValue: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface GeneratePinDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the pin data generation key that Amazon Web Services Payment Cryptography uses for PIN, PVV or PIN Offset generation.</p>
+   * @public
+   */
+  GenerationKeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  GenerationKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the PEK that Amazon Web Services Payment Cryptography uses for encrypted pin block generation. For ECDH, it is the <code>keyARN</code> of the asymmetric ECC key.</p>
+   * @public
+   */
+  EncryptionKeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  EncryptionKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The PIN block encrypted under PEK from Amazon Web Services Payment Cryptography. The encrypted PIN block is a composite of PAN (Primary Account Number) and PIN (Personal Identification Number), generated in accordance with ISO 9564 standard.</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The attributes and values Amazon Web Services Payment Cryptography uses for pin data generation.</p>
+   * @public
+   */
+  PinData: PinData | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Ibm3624 PIN verification PIN.</p>
+ * @public
+ */
+export interface Ibm3624PinVerification {
+  /**
+   * <p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>
+   * @public
+   */
+  DecimalizationTable: string | undefined;
+
+  /**
+   * <p>The padding character for validation data.</p>
+   * @public
+   */
+  PinValidationDataPadCharacter: string | undefined;
+
+  /**
+   * <p>The unique data for cardholder identification.</p>
+   * @public
+   */
+  PinValidationData: string | undefined;
+
+  /**
+   * <p>The PIN offset value.</p>
+   * @public
+   */
+  PinOffset: string | undefined;
+}
+
+/**
+ * <p>Parameter information of a TR31KeyBlock wrapped using an ECDH derived key.</p>
+ * @public
+ */
+export interface IncomingDiffieHellmanTr31KeyBlock {
+  /**
+   * <p>The <code>keyARN</code> of the asymmetric ECC key pair.</p>
+   * @public
+   */
+  PrivateKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyArn</code> of the certificate that signed the client's <code>PublicKeyCertificate</code>.</p>
+   * @public
+   */
+  CertificateAuthorityPublicKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The client's public key certificate in PEM format (base64 encoded) to use for ECDH key derivation.</p>
+   * @public
+   */
+  PublicKeyCertificate: string | undefined;
+
+  /**
+   * <p>The key algorithm of the derived ECDH key.</p>
+   * @public
+   */
+  DeriveKeyAlgorithm: SymmetricKeyAlgorithm | undefined;
+
+  /**
+   * <p>The key derivation function to use for deriving a key using ECDH.</p>
+   * @public
+   */
+  KeyDerivationFunction: KeyDerivationFunction | undefined;
+
+  /**
+   * <p>The hash type to use for deriving a key using ECDH.</p>
+   * @public
+   */
+  KeyDerivationHashAlgorithm: KeyDerivationHashAlgorithm | undefined;
+
+  /**
+   * <p>The shared information used when deriving a key using ECDH.</p>
+   * @public
+   */
+  DerivationData: DiffieHellmanDerivationData | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the transaction key wrapped using an ECDH dervied key. </p>
+   * @public
+   */
+  WrappedKeyBlock: string | undefined;
+}
+
+/**
+ * <p>Parameter information of the incoming WrappedKeyBlock containing the transaction key.</p>
+ * @public
+ */
+export type IncomingKeyMaterial =
+  | IncomingKeyMaterial.DiffieHellmanTr31KeyBlockMember
+  | IncomingKeyMaterial.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace IncomingKeyMaterial {
+  /**
+   * <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using an ECDH dervied key.</p>
+   * @public
+   */
+  export interface DiffieHellmanTr31KeyBlockMember {
+    DiffieHellmanTr31KeyBlock: IncomingDiffieHellmanTr31KeyBlock;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    DiffieHellmanTr31KeyBlock?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    DiffieHellmanTr31KeyBlock: (value: IncomingDiffieHellmanTr31KeyBlock) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using a KEK.</p>
+ * @public
+ */
+export interface OutgoingTr31KeyBlock {
+  /**
+   * <p>The <code>keyARN</code> of the KEK used to wrap the transaction key.</p>
+   * @public
+   */
+  WrappingKeyIdentifier: string | undefined;
+}
+
+/**
+ * <p>Parameter information of the outgoing TR31WrappedKeyBlock containing the transaction key.</p>
+ * @public
+ */
+export type OutgoingKeyMaterial =
+  | OutgoingKeyMaterial.Tr31KeyBlockMember
+  | OutgoingKeyMaterial.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace OutgoingKeyMaterial {
+  /**
+   * <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using a KEK.</p>
+   * @public
+   */
+  export interface Tr31KeyBlockMember {
+    Tr31KeyBlock: OutgoingTr31KeyBlock;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Tr31KeyBlock?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Tr31KeyBlock: (value: OutgoingTr31KeyBlock) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Parameters that are required to perform reencryption operation.</p>
+ * @public
+ */
+export type ReEncryptionAttributes =
+  | ReEncryptionAttributes.AsymmetricMember
+  | ReEncryptionAttributes.DukptMember
+  | ReEncryptionAttributes.SymmetricMember
+  | ReEncryptionAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReEncryptionAttributes {
+  /**
+   * <p>Specifies the parameters required to encrypt data using symmetric keys.</p>
+   * @public
+   */
+  export interface SymmetricMember {
+    Symmetric: SymmetricEncryptionAttributes;
+    Asymmetric?: never;
+    Dukpt?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Specifies the parameters required to encrypt data using an asymmetric key pair. You must specify a <code>PaddingType</code>.</p>
+   * @public
+   */
+  export interface AsymmetricMember {
+    Symmetric?: never;
+    Asymmetric: AsymmetricEncryptionAttributes;
+    Dukpt?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Specifies the parameters required to encrypt data using DUKPT.</p>
+   * @public
+   */
+  export interface DukptMember {
+    Symmetric?: never;
+    Asymmetric?: never;
+    Dukpt: DukptEncryptionAttributes;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Symmetric?: never;
+    Asymmetric?: never;
+    Dukpt?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Symmetric: (value: SymmetricEncryptionAttributes) => T;
+    Asymmetric: (value: AsymmetricEncryptionAttributes) => T;
+    Dukpt: (value: DukptEncryptionAttributes) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface ReEncryptDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key of incoming ciphertext data.</p> <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>
+   * @public
+   */
+  IncomingKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  OutgoingKeyIdentifier: string | undefined;
+
+  /**
+   * <p>Ciphertext to be encrypted. The minimum allowed length is 16 bytes and maximum allowed length is 4096 bytes.</p>
+   * @public
+   */
+  CipherText: string | undefined;
+
+  /**
+   * <p>The attributes and values for incoming ciphertext.</p>
+   * @public
+   */
+  IncomingEncryptionAttributes: ReEncryptionAttributes | undefined;
+
+  /**
+   * <p>The attributes and values for outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  OutgoingEncryptionAttributes: ReEncryptionAttributes | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key of incoming ciphertext data.</p>
+   * @public
+   */
+  IncomingWrappedKey?: WrappedKey | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  OutgoingWrappedKey?: WrappedKey | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ReEncryptDataOutput {
+  /**
+   * <p>The keyARN (Amazon Resource Name) of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The encrypted ciphertext.</p>
+   * @public
+   */
+  CipherText: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TranslateKeyMaterialInput {
+  /**
+   * <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key.</p>
+   * @public
+   */
+  IncomingKeyMaterial: IncomingKeyMaterial | undefined;
+
+  /**
+   * <p>Parameter information of the wrapping key used to wrap the transaction key in the outgoing TR31WrappedKeyBlock.</p>
+   * @public
+   */
+  OutgoingKeyMaterial: OutgoingKeyMaterial | undefined;
+
+  /**
+   * <p>The key check value (KCV) algorithm used for calculating the KCV of the derived key.</p>
+   * @public
+   */
+  KeyCheckValueAlgorithm?: KeyCheckValueAlgorithm | undefined;
+}
+
+/**
+ * <p>The parameter information of the outgoing wrapped key block.</p>
+ * @public
+ */
+export interface WrappedWorkingKey {
+  /**
+   * <p>The wrapped key block of the outgoing transaction key.</p>
+   * @public
+   */
+  WrappedKeyMaterial: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the key contained within the outgoing TR31WrappedKeyBlock.</p> <p> The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. For more information on KCV, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kcv">KCV</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The key block format of the wrapped key.</p>
+   * @public
+   */
+  WrappedKeyMaterialFormat: WrappedKeyMaterialFormat | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TranslateKeyMaterialOutput {
+  /**
+   * <p>The outgoing KEK wrapped TR31WrappedKeyBlock.</p>
+   * @public
+   */
+  WrappedKey: WrappedWorkingKey | undefined;
+}
+
+/**
+ * <p>Parameters that are required for translation between AS2805 PIN format 0 translation.</p>
+ * @public
+ */
+export interface TranslationPinDataAs2805Format0 {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required for translation between ISO9564 PIN format 0,3,4 translation.</p>
+ * @public
+ */
+export interface TranslationPinDataIsoFormat034 {
+  /**
+   * <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required for ISO9564 PIN format 1 translation.</p>
+ * @public
+ */
+export interface TranslationPinDataIsoFormat1 {}
+
+/**
+ * <p>Parameters that are required for translation between ISO9564 PIN block formats 0,1,3,4.</p>
+ * @public
+ */
+export type TranslationIsoFormats =
+  | TranslationIsoFormats.As2805Format0Member
+  | TranslationIsoFormats.IsoFormat0Member
+  | TranslationIsoFormats.IsoFormat1Member
+  | TranslationIsoFormats.IsoFormat3Member
+  | TranslationIsoFormats.IsoFormat4Member
+  | TranslationIsoFormats.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TranslationIsoFormats {
+  /**
+   * <p>Parameters that are required for ISO9564 PIN format 0 translation.</p>
+   * @public
+   */
+  export interface IsoFormat0Member {
+    IsoFormat0: TranslationPinDataIsoFormat034;
+    IsoFormat1?: never;
+    IsoFormat3?: never;
+    IsoFormat4?: never;
+    As2805Format0?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for ISO9564 PIN format 1 translation.</p>
+   * @public
+   */
+  export interface IsoFormat1Member {
+    IsoFormat0?: never;
+    IsoFormat1: TranslationPinDataIsoFormat1;
+    IsoFormat3?: never;
+    IsoFormat4?: never;
+    As2805Format0?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for ISO9564 PIN format 3 translation.</p>
+   * @public
+   */
+  export interface IsoFormat3Member {
+    IsoFormat0?: never;
+    IsoFormat1?: never;
+    IsoFormat3: TranslationPinDataIsoFormat034;
+    IsoFormat4?: never;
+    As2805Format0?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for ISO9564 PIN format 4 translation.</p>
+   * @public
+   */
+  export interface IsoFormat4Member {
+    IsoFormat0?: never;
+    IsoFormat1?: never;
+    IsoFormat3?: never;
+    IsoFormat4: TranslationPinDataIsoFormat034;
+    As2805Format0?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required for AS2805 PIN format 0 translation.</p>
+   * @public
+   */
+  export interface As2805Format0Member {
+    IsoFormat0?: never;
+    IsoFormat1?: never;
+    IsoFormat3?: never;
+    IsoFormat4?: never;
+    As2805Format0: TranslationPinDataAs2805Format0;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    IsoFormat0?: never;
+    IsoFormat1?: never;
+    IsoFormat3?: never;
+    IsoFormat4?: never;
+    As2805Format0?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    IsoFormat0: (value: TranslationPinDataIsoFormat034) => T;
+    IsoFormat1: (value: TranslationPinDataIsoFormat1) => T;
+    IsoFormat3: (value: TranslationPinDataIsoFormat034) => T;
+    IsoFormat4: (value: TranslationPinDataIsoFormat034) => T;
+    As2805Format0: (value: TranslationPinDataAs2805Format0) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface TranslatePinDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key under which incoming PIN block data is encrypted. This key type can be PEK or BDK.</p> <p>For dynamic keys, it is the <code>keyARN</code> of KEK of the TR-31 wrapped PEK. For ECDH, it is the <code>keyARN</code> of the asymmetric ECC key.</p>
+   * @public
+   */
+  IncomingKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the encryption key for encrypting outgoing PIN block data. This key type can be PEK or BDK.</p> <p>For ECDH, it is the <code>keyARN</code> of the asymmetric ECC key.</p>
+   * @public
+   */
+  OutgoingKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The format of the incoming PIN block data for translation within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  IncomingTranslationAttributes: TranslationIsoFormats | undefined;
+
+  /**
+   * <p>The format of the outgoing PIN block data after translation by Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  OutgoingTranslationAttributes: TranslationIsoFormats | undefined;
+
+  /**
+   * <p>The encrypted PIN block data that Amazon Web Services Payment Cryptography translates.</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The attributes and values to use for incoming DUKPT encryption key for PIN block translation.</p>
+   * @public
+   */
+  IncomingDukptAttributes?: DukptDerivationAttributes | undefined;
+
+  /**
+   * <p>The attributes and values to use for outgoing DUKPT encryption key after PIN block translation.</p>
+   * @public
+   */
+  OutgoingDukptAttributes?: DukptDerivationAttributes | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key under which incoming PIN block data is encrypted.</p>
+   * @public
+   */
+  IncomingWrappedKey?: WrappedKey | undefined;
+
+  /**
+   * <p>The WrappedKeyBlock containing the encryption key for encrypting outgoing PIN block data.</p>
+   * @public
+   */
+  OutgoingWrappedKey?: WrappedKey | undefined;
+
+  /**
+   * <p>The attributes and values to use for incoming AS2805 encryption key for PIN block translation.</p>
+   * @public
+   */
+  IncomingAs2805Attributes?: As2805PekDerivationAttributes | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TranslatePinDataOutput {
+  /**
+   * <p>The outgoing encrypted PIN block data after translation.</p>
+   * @public
+   */
+  PinBlock: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses to encrypt outgoing PIN block data after translation.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyAuthRequestCryptogramInput {
+  /**
+   * <p>The <code>keyARN</code> of the major encryption key that Amazon Web Services Payment Cryptography uses for ARQC verification.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The transaction data that Amazon Web Services Payment Cryptography uses for ARQC verification. The same transaction is used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  TransactionData: string | undefined;
+
+  /**
+   * <p>The auth request cryptogram imported into Amazon Web Services Payment Cryptography for ARQC verification using a major encryption key and transaction data.</p>
+   * @public
+   */
+  AuthRequestCryptogram: string | undefined;
+
+  /**
+   * <p>The method to use when deriving the major encryption key for ARQC verification within Amazon Web Services Payment Cryptography. The same key derivation mode was used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  MajorKeyDerivationMode: MajorKeyDerivationMode | undefined;
+
+  /**
+   * <p>The attributes and values to use for deriving a session key for ARQC verification within Amazon Web Services Payment Cryptography. The same attributes were used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  SessionKeyDerivationAttributes: SessionKeyDerivation | undefined;
+
+  /**
+   * <p>The attributes and values for auth request cryptogram verification. These parameters are required in case using ARPC Method 1 or Method 2 for ARQC verification.</p>
+   * @public
+   */
+  AuthResponseAttributes?: CryptogramAuthResponse | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyAuthRequestCryptogramOutput {
+  /**
+   * <p>The <code>keyARN</code> of the major encryption key that Amazon Web Services Payment Cryptography uses for ARQC verification.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+
+  /**
+   * <p>The result for ARQC verification or ARPC generation within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  AuthResponseValue?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyCardValidationDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the CVK encryption key that Amazon Web Services Payment Cryptography uses to verify card data.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber: string | undefined;
+
+  /**
+   * <p>The algorithm to use for verification of card data within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  VerificationAttributes: CardVerificationAttributes | undefined;
+
+  /**
+   * <p>The CVV or CSC value for use for card data verification within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  ValidationData: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyCardValidationDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the CVK encryption key that Amazon Web Services Payment Cryptography uses to verify CVV or CSC.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyMacInput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses to verify MAC data.</p>
+   * @public
+   */
+  KeyIdentifier: string | undefined;
+
+  /**
+   * <p>The data on for which MAC is under verification. This value must be hexBinary.</p>
+   * @public
+   */
+  MessageData: string | undefined;
+
+  /**
+   * <p>The MAC being verified.</p>
+   * @public
+   */
+  Mac: string | undefined;
+
+  /**
+   * <p>The attributes and data values to use for MAC verification within Amazon Web Services Payment Cryptography.</p>
+   * @public
+   */
+  VerificationAttributes: MacAttributes | undefined;
+
+  /**
+   * <p>The length of the MAC.</p>
+   * @public
+   */
+  MacLength?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyMacOutput {
+  /**
+   * <p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for MAC verification.</p>
+   * @public
+   */
+  KeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  KeyCheckValue: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required to generate or verify Visa PIN.</p>
+ * @public
+ */
+export interface VisaPinVerification {
+  /**
+   * <p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>
+   * @public
+   */
+  PinVerificationKeyIndex: number | undefined;
+
+  /**
+   * <p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>
+   * @public
+   */
+  VerificationValue: string | undefined;
+}
+
+/**
+ * <p>Parameters that are required for PIN data verification.</p>
+ * @public
+ */
+export type PinVerificationAttributes =
+  | PinVerificationAttributes.Ibm3624PinMember
+  | PinVerificationAttributes.VisaPinMember
+  | PinVerificationAttributes.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PinVerificationAttributes {
+  /**
+   * <p>Parameters that are required to generate or verify Visa PIN.</p>
+   * @public
+   */
+  export interface VisaPinMember {
+    VisaPin: VisaPinVerification;
+    Ibm3624Pin?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Parameters that are required to generate or verify Ibm3624 PIN.</p>
+   * @public
+   */
+  export interface Ibm3624PinMember {
+    VisaPin?: never;
+    Ibm3624Pin: Ibm3624PinVerification;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    VisaPin?: never;
+    Ibm3624Pin?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    VisaPin: (value: VisaPinVerification) => T;
+    Ibm3624Pin: (value: Ibm3624PinVerification) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface VerifyPinDataInput {
+  /**
+   * <p>The <code>keyARN</code> of the PIN verification key.</p>
+   * @public
+   */
+  VerificationKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the encryption key under which the PIN block data is encrypted. This key type can be PEK or BDK.</p>
+   * @public
+   */
+  EncryptionKeyIdentifier: string | undefined;
+
+  /**
+   * <p>The attributes and values for PIN data verification.</p>
+   * @public
+   */
+  VerificationAttributes: PinVerificationAttributes | undefined;
+
+  /**
+   * <p>The encrypted PIN block data that Amazon Web Services Payment Cryptography verifies.</p>
+   * @public
+   */
+  EncryptedPinBlock: string | undefined;
+
+  /**
+   * <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
+   * @public
+   */
+  PrimaryAccountNumber?: string | undefined;
+
+  /**
+   * <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code> and <code>ISO_Format_3</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p>
+   * @public
+   */
+  PinBlockFormat: PinBlockFormatForPinData | undefined;
+
+  /**
+   * <p>The length of PIN being verified.</p>
+   * @public
+   */
+  PinDataLength?: number | undefined;
+
+  /**
+   * <p>The attributes and values for the DUKPT encrypted PIN block data.</p>
+   * @public
+   */
+  DukptAttributes?: DukptAttributes | undefined;
+
+  /**
+   * <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
+   * @public
+   */
+  EncryptionWrappedKey?: WrappedKey | undefined;
+}
+
+/**
+ * @public
+ */
+export interface VerifyPinDataOutput {
+  /**
+   * <p>The <code>keyARN</code> of the PIN encryption key that Amazon Web Services Payment Cryptography uses for PIN or PIN Offset verification.</p>
+   * @public
+   */
+  VerificationKeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  VerificationKeyCheckValue: string | undefined;
+
+  /**
+   * <p>The <code>keyARN</code> of the PEK that Amazon Web Services Payment Cryptography uses for encrypted pin block generation.</p>
+   * @public
+   */
+  EncryptionKeyArn: string | undefined;
+
+  /**
+   * <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+   * @public
+   */
+  EncryptionKeyCheckValue: string | undefined;
+}

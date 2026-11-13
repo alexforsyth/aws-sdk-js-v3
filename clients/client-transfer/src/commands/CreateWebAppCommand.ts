@@ -1,0 +1,118 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateWebAppRequest, CreateWebAppResponse } from "../models/models_0";
+import { CreateWebApp$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateWebAppCommand}.
+ */
+export interface CreateWebAppCommandInput extends CreateWebAppRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateWebAppCommand}.
+ */
+export interface CreateWebAppCommandOutput extends CreateWebAppResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a web app based on specified parameters, and returns the ID for the new web app. You can configure the web app to be publicly accessible or hosted within a VPC.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html">Create a Transfer Family web app in a VPC</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { TransferClient, CreateWebAppCommand } from "@aws-sdk/client-transfer"; // ES Modules import
+ * // const { TransferClient, CreateWebAppCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
+ * const client = new TransferClient(config);
+ * const input = { // CreateWebAppRequest
+ *   IdentityProviderDetails: { // WebAppIdentityProviderDetails Union: only one key present
+ *     IdentityCenterConfig: { // IdentityCenterConfig
+ *       InstanceArn: "STRING_VALUE",
+ *       Role: "STRING_VALUE",
+ *     },
+ *   },
+ *   AccessEndpoint: "STRING_VALUE",
+ *   WebAppUnits: { // WebAppUnits Union: only one key present
+ *     Provisioned: Number("int"),
+ *   },
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   WebAppEndpointPolicy: "FIPS" || "STANDARD",
+ *   EndpointDetails: { // WebAppEndpointDetails Union: only one key present
+ *     Vpc: { // WebAppVpcConfig
+ *       SubnetIds: [ // SubnetIds
+ *         "STRING_VALUE",
+ *       ],
+ *       VpcId: "STRING_VALUE",
+ *       SecurityGroupIds: [ // SecurityGroupIds
+ *         "STRING_VALUE",
+ *       ],
+ *       IpAddressType: "IPV4" || "DUALSTACK",
+ *     },
+ *   },
+ * };
+ * const command = new CreateWebAppCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateWebAppResponse
+ * //   WebAppId: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateWebAppCommandInput - {@link CreateWebAppCommandInput}
+ * @returns {@link CreateWebAppCommandOutput}
+ * @see {@link CreateWebAppCommandInput} for command's `input` shape.
+ * @see {@link CreateWebAppCommandOutput} for command's `response` shape.
+ * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateWebAppCommand extends command<CreateWebAppCommandInput, CreateWebAppCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateWebApp",
+  CreateWebApp$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateWebAppRequest;
+      output: CreateWebAppResponse;
+    };
+    sdk: {
+      input: CreateWebAppCommandInput;
+      output: CreateWebAppCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateRulesOfIpGroupRequest, UpdateRulesOfIpGroupResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateRulesOfIpGroupCommand,
-  serializeAws_json1_1UpdateRulesOfIpGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRulesOfIpGroupRequest, UpdateRulesOfIpGroupResult } from "../models/models_0";
+import { UpdateRulesOfIpGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRulesOfIpGroupCommand}.
+ */
 export interface UpdateRulesOfIpGroupCommandInput extends UpdateRulesOfIpGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRulesOfIpGroupCommand}.
+ */
 export interface UpdateRulesOfIpGroupCommandOutput extends UpdateRulesOfIpGroupResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,66 @@ export interface UpdateRulesOfIpGroupCommandOutput extends UpdateRulesOfIpGroupR
  * ```javascript
  * import { WorkSpacesClient, UpdateRulesOfIpGroupCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, UpdateRulesOfIpGroupCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // UpdateRulesOfIpGroupRequest
+ *   GroupId: "STRING_VALUE", // required
+ *   UserRules: [ // IpRuleList // required
+ *     { // IpRuleItem
+ *       ipRule: "STRING_VALUE",
+ *       ruleDesc: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateRulesOfIpGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateRulesOfIpGroupCommandInput - {@link UpdateRulesOfIpGroupCommandInput}
+ * @returns {@link UpdateRulesOfIpGroupCommandOutput}
  * @see {@link UpdateRulesOfIpGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateRulesOfIpGroupCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link InvalidResourceStateException} (client fault)
+ *  <p>The state of the resource is not valid for this operation.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRulesOfIpGroupCommand extends $Command<
-  UpdateRulesOfIpGroupCommandInput,
-  UpdateRulesOfIpGroupCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRulesOfIpGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRulesOfIpGroupCommandInput, UpdateRulesOfIpGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "UpdateRulesOfIpGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRulesOfIpGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRulesOfIpGroupResult.filterSensitiveLog,
+export class UpdateRulesOfIpGroupCommand extends command<UpdateRulesOfIpGroupCommandInput, UpdateRulesOfIpGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRulesOfIpGroup",
+  UpdateRulesOfIpGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRulesOfIpGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRulesOfIpGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateRulesOfIpGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRulesOfIpGroupCommandOutput> {
-    return deserializeAws_json1_1UpdateRulesOfIpGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRulesOfIpGroupCommandInput;
+      output: UpdateRulesOfIpGroupCommandOutput;
+    };
+  };
 }

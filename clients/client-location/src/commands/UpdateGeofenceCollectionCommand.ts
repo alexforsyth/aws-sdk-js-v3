@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { UpdateGeofenceCollectionRequest, UpdateGeofenceCollectionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateGeofenceCollectionCommand,
-  serializeAws_restJson1UpdateGeofenceCollectionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateGeofenceCollectionRequest, UpdateGeofenceCollectionResponse } from "../models/models_0";
+import { UpdateGeofenceCollection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateGeofenceCollectionCommand}.
+ */
 export interface UpdateGeofenceCollectionCommandInput extends UpdateGeofenceCollectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateGeofenceCollectionCommand}.
+ */
 export interface UpdateGeofenceCollectionCommandOutput extends UpdateGeofenceCollectionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface UpdateGeofenceCollectionCommandOutput extends UpdateGeofenceCol
  * ```javascript
  * import { LocationClient, UpdateGeofenceCollectionCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, UpdateGeofenceCollectionCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // UpdateGeofenceCollectionRequest
+ *   CollectionName: "STRING_VALUE", // required
+ *   PricingPlan: "STRING_VALUE",
+ *   PricingPlanDataSource: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateGeofenceCollectionCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateGeofenceCollectionResponse
+ * //   CollectionName: "STRING_VALUE", // required
+ * //   CollectionArn: "STRING_VALUE", // required
+ * //   UpdateTime: new Date("TIMESTAMP"), // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateGeofenceCollectionCommandInput - {@link UpdateGeofenceCollectionCommandInput}
+ * @returns {@link UpdateGeofenceCollectionCommandOutput}
  * @see {@link UpdateGeofenceCollectionCommandInput} for command's `input` shape.
  * @see {@link UpdateGeofenceCollectionCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateGeofenceCollectionCommand extends $Command<
-  UpdateGeofenceCollectionCommandInput,
-  UpdateGeofenceCollectionCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateGeofenceCollectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateGeofenceCollectionCommandInput, UpdateGeofenceCollectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "UpdateGeofenceCollectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateGeofenceCollectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateGeofenceCollectionResponse.filterSensitiveLog,
+export class UpdateGeofenceCollectionCommand extends command<UpdateGeofenceCollectionCommandInput, UpdateGeofenceCollectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateGeofenceCollection",
+  UpdateGeofenceCollection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGeofenceCollectionRequest;
+      output: UpdateGeofenceCollectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateGeofenceCollectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateGeofenceCollectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateGeofenceCollectionCommandOutput> {
-    return deserializeAws_restJson1UpdateGeofenceCollectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateGeofenceCollectionCommandInput;
+      output: UpdateGeofenceCollectionCommandOutput;
+    };
+  };
 }

@@ -1,93 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
-import { StopQueryRequest, StopQueryResponse } from "../models/models_0";
-import { deserializeAws_json1_1StopQueryCommand, serializeAws_json1_1StopQueryCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopQueryRequest, StopQueryResponse } from "../models/models_0";
+import { StopQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopQueryCommand}.
+ */
 export interface StopQueryCommandInput extends StopQueryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopQueryCommand}.
+ */
 export interface StopQueryCommandOutput extends StopQueryResponse, __MetadataBearer {}
 
 /**
- * <p>Stops a CloudWatch Logs Insights query that is in progress. If the query has already ended, the operation
- *     returns an error indicating that the specified query is not running.</p>
+ * <p>Stops a CloudWatch Logs Insights query that is in progress. If the query has already
+ *       ended, the operation returns an error indicating that the specified query is not
+ *       running.</p>
+ *          <p>This operation can be used to cancel both interactive queries and individual scheduled
+ *       query executions. When used with scheduled queries, <code>StopQuery</code> cancels only the
+ *       specific execution identified by the query ID, not the scheduled query configuration
+ *       itself.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchLogsClient, StopQueryCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
  * // const { CloudWatchLogsClient, StopQueryCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * // import type { CloudWatchLogsClientConfig } from "@aws-sdk/client-cloudwatch-logs";
+ * const config = {}; // type is CloudWatchLogsClientConfig
  * const client = new CloudWatchLogsClient(config);
+ * const input = { // StopQueryRequest
+ *   queryId: "STRING_VALUE", // required
+ * };
  * const command = new StopQueryCommand(input);
  * const response = await client.send(command);
+ * // { // StopQueryResponse
+ * //   success: true || false,
+ * // };
+ *
  * ```
  *
+ * @param StopQueryCommandInput - {@link StopQueryCommandInput}
+ * @returns {@link StopQueryCommandOutput}
  * @see {@link StopQueryCommandInput} for command's `input` shape.
  * @see {@link StopQueryCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for CloudWatchLogsClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>A parameter is specified incorrectly.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service cannot complete the request.</p>
+ *
+ * @throws {@link CloudWatchLogsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchLogs service.</p>
+ *
+ *
+ * @public
  */
-export class StopQueryCommand extends $Command<
-  StopQueryCommandInput,
-  StopQueryCommandOutput,
-  CloudWatchLogsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchLogsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopQueryCommandInput, StopQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchLogsClient";
-    const commandName = "StopQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopQueryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopQueryResponse.filterSensitiveLog,
+export class StopQueryCommand extends command<StopQueryCommandInput, StopQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopQuery",
+  StopQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopQueryRequest;
+      output: StopQueryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopQueryCommandOutput> {
-    return deserializeAws_json1_1StopQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopQueryCommandInput;
+      output: StopQueryCommandOutput;
+    };
+  };
 }

@@ -1,52 +1,7 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-import { Readable } from "stream";
+// smithy-typescript generated code
+import type { StreamingBlobTypes } from "@smithy/types";
 
-/**
- * <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
- *       allowed client calls. Try making the call later.</p>
- */
-export interface ClientLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ClientLimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ClientLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClientLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
- *       allowed client connections.</p>
- */
-export interface ConnectionLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "ConnectionLimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ConnectionLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConnectionLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-export enum StartSelectorType {
-  CONTINUATION_TOKEN = "CONTINUATION_TOKEN",
-  EARLIEST = "EARLIEST",
-  FRAGMENT_NUMBER = "FRAGMENT_NUMBER",
-  NOW = "NOW",
-  PRODUCER_TIMESTAMP = "PRODUCER_TIMESTAMP",
-  SERVER_TIMESTAMP = "SERVER_TIMESTAMP",
-}
+import type { StartSelectorType } from "./enums";
 
 /**
  * <p>Identifies the chunk on the Kinesis video stream where you want the
@@ -68,6 +23,7 @@ export enum StartSelectorType {
  *           last API ended.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export interface StartSelector {
   /**
@@ -98,73 +54,69 @@ export interface StartSelector {
    *           <code>startSelectorType</code>, you don't provide any additional information in the
    *           <code>startSelector</code>.</p>
    *          </note>
+   * @public
    */
-  StartSelectorType: StartSelectorType | string | undefined;
+  StartSelectorType: StartSelectorType | undefined;
 
   /**
    * <p>Specifies the fragment number from where you want the <code>GetMedia</code> API to
    *       start returning the fragments. </p>
+   * @public
    */
-  AfterFragmentNumber?: string;
+  AfterFragmentNumber?: string | undefined;
 
   /**
    * <p>A timestamp value. This value is required if you choose the PRODUCER_TIMESTAMP or the
    *       SERVER_TIMESTAMP as the <code>startSelectorType</code>. The <code>GetMedia</code> API then
    *       starts with the chunk containing the fragment that has the specified timestamp.</p>
+   * @public
    */
-  StartTimestamp?: Date;
+  StartTimestamp?: Date | undefined;
 
   /**
    * <p>Continuation token that Kinesis Video Streams returned in the previous
    *         <code>GetMedia</code> response. The <code>GetMedia</code> API then starts with the chunk
    *       identified by the continuation token.</p>
+   * @public
    */
-  ContinuationToken?: string;
+  ContinuationToken?: string | undefined;
 }
 
-export namespace StartSelector {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSelector): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetMediaInput {
   /**
    * <p>The Kinesis video stream name from where you want to get the media content. If you
    *       don't specify the <code>streamName</code>, you must specify the
    *       <code>streamARN</code>.</p>
+   * @public
    */
-  StreamName?: string;
+  StreamName?: string | undefined;
 
   /**
    * <p>The ARN of the stream from where you want to get the media content. If you don't
    *       specify the <code>streamARN</code>, you must specify the <code>streamName</code>.</p>
+   * @public
    */
-  StreamARN?: string;
+  StreamARN?: string | undefined;
 
   /**
    * <p>Identifies the starting chunk to get from the specified stream. </p>
+   * @public
    */
   StartSelector: StartSelector | undefined;
 }
 
-export namespace GetMediaInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMediaInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetMediaOutput {
   /**
    * <p>The content type of the requested media.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p> The payload Kinesis Video Streams returns is a sequence of chunks from the specified
@@ -235,91 +187,7 @@ export interface GetMediaOutput {
    *                <p>5000 - Internal error</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Payload?: Readable | ReadableStream | Blob;
-}
-
-export namespace GetMediaOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMediaOutput): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The value for this input parameter is invalid.</p>
- */
-export interface InvalidArgumentException extends __SmithyException, $MetadataBearer {
-  name: "InvalidArgumentException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidArgumentException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidArgumentException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p> Status Code: 400, Caller used wrong endpoint to write data to a stream. On receiving
- *       such an exception, the user must call <code>GetDataEndpoint</code> with
- *         <code>AccessMode</code> set to "READ" and use the endpoint Kinesis Video returns in the next
- *         <code>GetMedia</code> call. </p>
- */
-export interface InvalidEndpointException extends __SmithyException, $MetadataBearer {
-  name: "InvalidEndpointException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidEndpointException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidEndpointException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Status Code: 403, The caller is not authorized to perform an operation on the given
- *       stream, or the token has expired.</p>
- */
-export interface NotAuthorizedException extends __SmithyException, $MetadataBearer {
-  name: "NotAuthorizedException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace NotAuthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotAuthorizedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Status Code: 404, The stream with the given name does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
+  Payload?: StreamingBlobTypes | undefined;
 }

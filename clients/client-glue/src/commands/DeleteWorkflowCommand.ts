@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { DeleteWorkflowRequest, DeleteWorkflowResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteWorkflowCommand,
-  serializeAws_json1_1DeleteWorkflowCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWorkflowRequest, DeleteWorkflowResponse } from "../models/models_1";
+import { DeleteWorkflow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWorkflowCommand}.
+ */
 export interface DeleteWorkflowCommandInput extends DeleteWorkflowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWorkflowCommand}.
+ */
 export interface DeleteWorkflowCommandOutput extends DeleteWorkflowResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface DeleteWorkflowCommandOutput extends DeleteWorkflowResponse, __M
  * ```javascript
  * import { GlueClient, DeleteWorkflowCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, DeleteWorkflowCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // DeleteWorkflowRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteWorkflowCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteWorkflowResponse
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteWorkflowCommandInput - {@link DeleteWorkflowCommandInput}
+ * @returns {@link DeleteWorkflowCommandOutput}
  * @see {@link DeleteWorkflowCommandInput} for command's `input` shape.
  * @see {@link DeleteWorkflowCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWorkflowCommand extends $Command<
-  DeleteWorkflowCommandInput,
-  DeleteWorkflowCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWorkflowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWorkflowCommandInput, DeleteWorkflowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "DeleteWorkflowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWorkflowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteWorkflowResponse.filterSensitiveLog,
+export class DeleteWorkflowCommand extends command<DeleteWorkflowCommandInput, DeleteWorkflowCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWorkflow",
+  DeleteWorkflow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWorkflowRequest;
+      output: DeleteWorkflowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWorkflowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteWorkflowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWorkflowCommandOutput> {
-    return deserializeAws_json1_1DeleteWorkflowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWorkflowCommandInput;
+      output: DeleteWorkflowCommandOutput;
+    };
+  };
 }

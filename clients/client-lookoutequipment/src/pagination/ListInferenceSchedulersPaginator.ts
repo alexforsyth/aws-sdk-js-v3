@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListInferenceSchedulersCommand,
   ListInferenceSchedulersCommandInput,
   ListInferenceSchedulersCommandOutput,
 } from "../commands/ListInferenceSchedulersCommand";
-import { LookoutEquipment } from "../LookoutEquipment";
 import { LookoutEquipmentClient } from "../LookoutEquipmentClient";
-import { LookoutEquipmentPaginationConfiguration } from "./Interfaces";
+import type { LookoutEquipmentPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: LookoutEquipmentClient,
-  input: ListInferenceSchedulersCommandInput,
-  ...args: any
-): Promise<ListInferenceSchedulersCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListInferenceSchedulersCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: LookoutEquipment,
-  input: ListInferenceSchedulersCommandInput,
-  ...args: any
-): Promise<ListInferenceSchedulersCommandOutput> => {
-  // @ts-ignore
-  return await client.listInferenceSchedulers(input, ...args);
-};
-export async function* paginateListInferenceSchedulers(
+export const paginateListInferenceSchedulers: (
   config: LookoutEquipmentPaginationConfiguration,
   input: ListInferenceSchedulersCommandInput,
-  ...additionalArguments: any
-): Paginator<ListInferenceSchedulersCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListInferenceSchedulersCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof LookoutEquipment) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof LookoutEquipmentClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected LookoutEquipment | LookoutEquipmentClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListInferenceSchedulersCommandOutput> = createPaginator<
+  LookoutEquipmentPaginationConfiguration,
+  ListInferenceSchedulersCommandInput,
+  ListInferenceSchedulersCommandOutput
+>(LookoutEquipmentClient, ListInferenceSchedulersCommand, "NextToken", "NextToken", "MaxResults");

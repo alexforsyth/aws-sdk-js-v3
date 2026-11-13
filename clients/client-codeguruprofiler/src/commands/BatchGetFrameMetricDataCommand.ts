@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeGuruProfilerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeGuruProfilerClient";
-import { BatchGetFrameMetricDataRequest, BatchGetFrameMetricDataResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchGetFrameMetricDataCommand,
-  serializeAws_restJson1BatchGetFrameMetricDataCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetFrameMetricDataRequest, BatchGetFrameMetricDataResponse } from "../models/models_0";
+import { BatchGetFrameMetricData$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetFrameMetricDataCommand}.
+ */
 export interface BatchGetFrameMetricDataCommandInput extends BatchGetFrameMetricDataRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetFrameMetricDataCommand}.
+ */
 export interface BatchGetFrameMetricDataCommandOutput extends BatchGetFrameMetricDataResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,100 @@ export interface BatchGetFrameMetricDataCommandOutput extends BatchGetFrameMetri
  * ```javascript
  * import { CodeGuruProfilerClient, BatchGetFrameMetricDataCommand } from "@aws-sdk/client-codeguruprofiler"; // ES Modules import
  * // const { CodeGuruProfilerClient, BatchGetFrameMetricDataCommand } = require("@aws-sdk/client-codeguruprofiler"); // CommonJS import
+ * // import type { CodeGuruProfilerClientConfig } from "@aws-sdk/client-codeguruprofiler";
+ * const config = {}; // type is CodeGuruProfilerClientConfig
  * const client = new CodeGuruProfilerClient(config);
+ * const input = { // BatchGetFrameMetricDataRequest
+ *   profilingGroupName: "STRING_VALUE", // required
+ *   startTime: new Date("TIMESTAMP"),
+ *   endTime: new Date("TIMESTAMP"),
+ *   period: "STRING_VALUE",
+ *   targetResolution: "STRING_VALUE",
+ *   frameMetrics: [ // FrameMetrics
+ *     { // FrameMetric
+ *       frameName: "STRING_VALUE", // required
+ *       type: "STRING_VALUE", // required
+ *       threadStates: [ // ThreadStates // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new BatchGetFrameMetricDataCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetFrameMetricDataResponse
+ * //   startTime: new Date("TIMESTAMP"), // required
+ * //   endTime: new Date("TIMESTAMP"), // required
+ * //   resolution: "STRING_VALUE", // required
+ * //   endTimes: [ // ListOfTimestamps // required
+ * //     { // TimestampStructure
+ * //       value: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   unprocessedEndTimes: { // UnprocessedEndTimeMap // required
+ * //     "<keys>": [
+ * //       {
+ * //         value: new Date("TIMESTAMP"), // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   frameMetricData: [ // FrameMetricData // required
+ * //     { // FrameMetricDatum
+ * //       frameMetric: { // FrameMetric
+ * //         frameName: "STRING_VALUE", // required
+ * //         type: "STRING_VALUE", // required
+ * //         threadStates: [ // ThreadStates // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       values: [ // FrameMetricValues // required
+ * //         Number("double"),
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetFrameMetricDataCommandInput - {@link BatchGetFrameMetricDataCommandInput}
+ * @returns {@link BatchGetFrameMetricDataCommandOutput}
  * @see {@link BatchGetFrameMetricDataCommandInput} for command's `input` shape.
  * @see {@link BatchGetFrameMetricDataCommandOutput} for command's `response` shape.
- * @see {@link CodeGuruProfilerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeGuruProfilerClientResolvedConfig | config} for CodeGuruProfilerClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The parameter is not valid.</p>
+ *
+ * @throws {@link CodeGuruProfilerServiceException}
+ * <p>Base exception class for all service exceptions from CodeGuruProfiler service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetFrameMetricDataCommand extends $Command<
-  BatchGetFrameMetricDataCommandInput,
-  BatchGetFrameMetricDataCommandOutput,
-  CodeGuruProfilerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetFrameMetricDataCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeGuruProfilerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetFrameMetricDataCommandInput, BatchGetFrameMetricDataCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeGuruProfilerClient";
-    const commandName = "BatchGetFrameMetricDataCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetFrameMetricDataRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetFrameMetricDataResponse.filterSensitiveLog,
+export class BatchGetFrameMetricDataCommand extends command<BatchGetFrameMetricDataCommandInput, BatchGetFrameMetricDataCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetFrameMetricData",
+  BatchGetFrameMetricData$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetFrameMetricDataRequest;
+      output: BatchGetFrameMetricDataResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetFrameMetricDataCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchGetFrameMetricDataCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetFrameMetricDataCommandOutput> {
-    return deserializeAws_restJson1BatchGetFrameMetricDataCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetFrameMetricDataCommandInput;
+      output: BatchGetFrameMetricDataCommandOutput;
+    };
+  };
 }

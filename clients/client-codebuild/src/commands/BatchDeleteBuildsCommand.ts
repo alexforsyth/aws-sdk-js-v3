@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { BatchDeleteBuildsInput, BatchDeleteBuildsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchDeleteBuildsCommand,
-  serializeAws_json1_1BatchDeleteBuildsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchDeleteBuildsInput, BatchDeleteBuildsOutput } from "../models/models_0";
+import { BatchDeleteBuilds$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchDeleteBuildsCommand}.
+ */
 export interface BatchDeleteBuildsCommandInput extends BatchDeleteBuildsInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchDeleteBuildsCommand}.
+ */
 export interface BatchDeleteBuildsCommandOutput extends BatchDeleteBuildsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface BatchDeleteBuildsCommandOutput extends BatchDeleteBuildsOutput,
  * ```javascript
  * import { CodeBuildClient, BatchDeleteBuildsCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, BatchDeleteBuildsCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // BatchDeleteBuildsInput
+ *   ids: [ // BuildIds // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchDeleteBuildsCommand(input);
  * const response = await client.send(command);
+ * // { // BatchDeleteBuildsOutput
+ * //   buildsDeleted: [ // BuildIds
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   buildsNotDeleted: [ // BuildsNotDeleted
+ * //     { // BuildNotDeleted
+ * //       id: "STRING_VALUE",
+ * //       statusCode: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchDeleteBuildsCommandInput - {@link BatchDeleteBuildsCommandInput}
+ * @returns {@link BatchDeleteBuildsCommandOutput}
  * @see {@link BatchDeleteBuildsCommandInput} for command's `input` shape.
  * @see {@link BatchDeleteBuildsCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class BatchDeleteBuildsCommand extends $Command<
-  BatchDeleteBuildsCommandInput,
-  BatchDeleteBuildsCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchDeleteBuildsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchDeleteBuildsCommandInput, BatchDeleteBuildsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "BatchDeleteBuildsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchDeleteBuildsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchDeleteBuildsOutput.filterSensitiveLog,
+export class BatchDeleteBuildsCommand extends command<BatchDeleteBuildsCommandInput, BatchDeleteBuildsCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchDeleteBuilds",
+  BatchDeleteBuilds$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchDeleteBuildsInput;
+      output: BatchDeleteBuildsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchDeleteBuildsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchDeleteBuildsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchDeleteBuildsCommandOutput> {
-    return deserializeAws_json1_1BatchDeleteBuildsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchDeleteBuildsCommandInput;
+      output: BatchDeleteBuildsCommandOutput;
+    };
+  };
 }

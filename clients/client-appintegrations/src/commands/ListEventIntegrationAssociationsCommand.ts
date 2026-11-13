@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppIntegrationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppIntegrationsClient";
-import { ListEventIntegrationAssociationsRequest, ListEventIntegrationAssociationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListEventIntegrationAssociationsCommand,
-  serializeAws_restJson1ListEventIntegrationAssociationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListEventIntegrationAssociationsRequest,
+  ListEventIntegrationAssociationsResponse,
+} from "../models/models_0";
+import { ListEventIntegrationAssociations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEventIntegrationAssociationsCommand}.
+ */
 export interface ListEventIntegrationAssociationsCommandInput extends ListEventIntegrationAssociationsRequest {}
-export interface ListEventIntegrationAssociationsCommandOutput
-  extends ListEventIntegrationAssociationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListEventIntegrationAssociationsCommand}.
+ */
+export interface ListEventIntegrationAssociationsCommandOutput extends ListEventIntegrationAssociationsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns a paginated list of event integration associations in the account. </p>
@@ -30,74 +32,76 @@ export interface ListEventIntegrationAssociationsCommandOutput
  * ```javascript
  * import { AppIntegrationsClient, ListEventIntegrationAssociationsCommand } from "@aws-sdk/client-appintegrations"; // ES Modules import
  * // const { AppIntegrationsClient, ListEventIntegrationAssociationsCommand } = require("@aws-sdk/client-appintegrations"); // CommonJS import
+ * // import type { AppIntegrationsClientConfig } from "@aws-sdk/client-appintegrations";
+ * const config = {}; // type is AppIntegrationsClientConfig
  * const client = new AppIntegrationsClient(config);
+ * const input = { // ListEventIntegrationAssociationsRequest
+ *   EventIntegrationName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListEventIntegrationAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListEventIntegrationAssociationsResponse
+ * //   EventIntegrationAssociations: [ // EventIntegrationAssociationsList
+ * //     { // EventIntegrationAssociation
+ * //       EventIntegrationAssociationArn: "STRING_VALUE",
+ * //       EventIntegrationAssociationId: "STRING_VALUE",
+ * //       EventIntegrationName: "STRING_VALUE",
+ * //       ClientId: "STRING_VALUE",
+ * //       EventBridgeRuleName: "STRING_VALUE",
+ * //       ClientAssociationMetadata: { // ClientAssociationMetadata
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEventIntegrationAssociationsCommandInput - {@link ListEventIntegrationAssociationsCommandInput}
+ * @returns {@link ListEventIntegrationAssociationsCommandOutput}
  * @see {@link ListEventIntegrationAssociationsCommandInput} for command's `input` shape.
  * @see {@link ListEventIntegrationAssociationsCommandOutput} for command's `response` shape.
- * @see {@link AppIntegrationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppIntegrationsClientResolvedConfig | config} for AppIntegrationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>Request processing failed due to an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link AppIntegrationsServiceException}
+ * <p>Base exception class for all service exceptions from AppIntegrations service.</p>
+ *
+ *
+ * @public
  */
-export class ListEventIntegrationAssociationsCommand extends $Command<
-  ListEventIntegrationAssociationsCommandInput,
-  ListEventIntegrationAssociationsCommandOutput,
-  AppIntegrationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEventIntegrationAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppIntegrationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEventIntegrationAssociationsCommandInput, ListEventIntegrationAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppIntegrationsClient";
-    const commandName = "ListEventIntegrationAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEventIntegrationAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEventIntegrationAssociationsResponse.filterSensitiveLog,
+export class ListEventIntegrationAssociationsCommand extends command<ListEventIntegrationAssociationsCommandInput, ListEventIntegrationAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEventIntegrationAssociations",
+  ListEventIntegrationAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventIntegrationAssociationsRequest;
+      output: ListEventIntegrationAssociationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListEventIntegrationAssociationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListEventIntegrationAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListEventIntegrationAssociationsCommandOutput> {
-    return deserializeAws_restJson1ListEventIntegrationAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEventIntegrationAssociationsCommandInput;
+      output: ListEventIntegrationAssociationsCommandOutput;
+    };
+  };
 }

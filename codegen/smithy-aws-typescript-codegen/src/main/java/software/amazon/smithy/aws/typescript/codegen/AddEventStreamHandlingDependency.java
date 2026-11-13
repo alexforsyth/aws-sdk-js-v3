@@ -1,18 +1,7 @@
 /*
- * Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
  */
-
 package software.amazon.smithy.aws.typescript.codegen;
 
 import static software.amazon.smithy.typescript.codegen.integration.RuntimeClientPlugin.Convention.HAS_CONFIG;
@@ -30,9 +19,11 @@ import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.typescript.codegen.LanguageTarget;
+import software.amazon.smithy.typescript.codegen.SmithyCoreSubmodules;
 import software.amazon.smithy.typescript.codegen.TypeScriptDependency;
 import software.amazon.smithy.typescript.codegen.TypeScriptSettings;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
+import software.amazon.smithy.typescript.codegen.auth.http.integration.AddHttpAuthSchemePlugin;
 import software.amazon.smithy.typescript.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.typescript.codegen.integration.TypeScriptIntegration;
 import software.amazon.smithy.utils.ListUtils;
@@ -45,68 +36,91 @@ import software.amazon.smithy.utils.SmithyInternalApi;
  */
 @SmithyInternalApi
 public class AddEventStreamHandlingDependency implements TypeScriptIntegration {
+
+    @Override
+    public List<String> runAfter() {
+        return List.of(AddHttpAuthSchemePlugin.class.getCanonicalName());
+    }
+
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
-                RuntimeClientPlugin.builder()
-                        .withConventions(AwsDependency.MIDDLEWARE_EVENTSTREAM.dependency,
-                                "EventStream", HAS_CONFIG)
-                        .servicePredicate(AddEventStreamHandlingDependency::hasEventStreamInput)
-                        .build(),
-                RuntimeClientPlugin.builder()
-                        .withConventions(AwsDependency.MIDDLEWARE_EVENTSTREAM.dependency,
-                                "EventStream", HAS_MIDDLEWARE)
-                        .operationPredicate(AddEventStreamHandlingDependency::hasEventStreamInput)
-                        .build()
+            RuntimeClientPlugin.builder()
+                .withConventions(
+                    AwsDependency.MIDDLEWARE_EVENTSTREAM.dependency,
+                    "EventStream",
+                    HAS_CONFIG
+                )
+                .servicePredicate(AddEventStreamHandlingDependency::hasEventStreamInput)
+                .build(),
+            RuntimeClientPlugin.builder()
+                .withConventions(
+                    AwsDependency.MIDDLEWARE_EVENTSTREAM.dependency,
+                    "EventStream",
+                    HAS_MIDDLEWARE
+                )
+                .operationPredicate((m, s, o) -> hasEventStreamInput(m, o))
+                .build()
         );
     }
 
     @Override
     public void addConfigInterfaceFields(
-            TypeScriptSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            TypeScriptWriter writer
+        TypeScriptSettings settings,
+        Model model,
+        SymbolProvider symbolProvider,
+        TypeScriptWriter writer
     ) {
         if (hasEventStreamInput(model, settings.getService(model))) {
-            writer.addImport("EventStreamPayloadHandlerProvider", "__EventStreamPayloadHandlerProvider",
-                    TypeScriptDependency.AWS_SDK_TYPES.packageName);
-            writer.writeDocs("The function that provides necessary utilities for handling request event stream.\n"
-                            + "@internal");
+            writer.addImport(
+                "EventStreamPayloadHandlerProvider",
+                "__EventStreamPayloadHandlerProvider",
+                AwsDependency.TYPES
+            );
+            writer.writeDocs(
+                "The function that provides necessary utilities for handling request event stream.\n"
+                    + "@internal"
+            );
             writer.write("eventStreamPayloadHandlerProvider?: __EventStreamPayloadHandlerProvider;\n");
         }
     }
 
     @Override
     public Map<String, Consumer<TypeScriptWriter>> getRuntimeConfigWriters(
-            TypeScriptSettings settings,
-            Model model,
-            SymbolProvider symbolProvider,
-            LanguageTarget target
+        TypeScriptSettings settings,
+        Model model,
+        SymbolProvider symbolProvider,
+        LanguageTarget target
     ) {
         ServiceShape service = settings.getService(model);
         if (!hasEventStreamInput(model, service)) {
             return Collections.emptyMap();
         }
-
         switch (target) {
             case NODE:
                 return MapUtils.of("eventStreamPayloadHandlerProvider", writer -> {
                     writer.addDependency(AwsDependency.AWS_SDK_EVENTSTREAM_HANDLER_NODE);
-                    writer.addImport("eventStreamPayloadHandlerProvider", "eventStreamPayloadHandlerProvider",
-                            AwsDependency.AWS_SDK_EVENTSTREAM_HANDLER_NODE.packageName);
+                    writer.addImport(
+                        "eventStreamPayloadHandlerProvider",
+                        "eventStreamPayloadHandlerProvider",
+                        AwsDependency.AWS_SDK_EVENTSTREAM_HANDLER_NODE
+                    );
                     writer.write("eventStreamPayloadHandlerProvider");
                 });
             case BROWSER:
                 /**
-                 * Browser doesn't support streaming requests as of March 2020.
+                 * Browser doesn't support streaming requests as of Aug 2022.
                  * Each service client needs to support eventstream request in browser individually.
-                 * Services like TranscribeStreaming support it via WebSocket.
+                 * Services like TranscribeStreaming and Rekognition supports it via WebSocket.
+                 * See the websocket customization in AddWebsocketPlugin.
                  */
                 return MapUtils.of("eventStreamPayloadHandlerProvider", writer -> {
-                    writer.addDependency(TypeScriptDependency.INVALID_DEPENDENCY);
-                    writer.addImport("invalidFunction", "invalidFunction",
-                            TypeScriptDependency.INVALID_DEPENDENCY.packageName);
+                    writer.addImportSubmodule(
+                        "invalidFunction",
+                        "invalidFunction",
+                        TypeScriptDependency.SMITHY_CORE,
+                        SmithyCoreSubmodules.CLIENT
+                    );
                     writer.openBlock("(() => ({", "}))", () -> {
                         writer.write("handle: invalidFunction(\"event stream request is not supported in browser.\"),");
                     });
@@ -118,12 +132,17 @@ public class AddEventStreamHandlingDependency implements TypeScriptIntegration {
                  * in RN has to implement a customization providing its own eventStreamSignerProvider
                  */
                 return MapUtils.of("eventStreamPayloadHandlerProvider", writer -> {
-                    writer.addDependency(TypeScriptDependency.INVALID_DEPENDENCY);
-                    writer.addImport("invalidFunction", "invalidFunction",
-                            TypeScriptDependency.INVALID_DEPENDENCY.packageName);
+                    writer.addImportSubmodule(
+                        "invalidFunction",
+                        "invalidFunction",
+                        TypeScriptDependency.SMITHY_CORE,
+                        SmithyCoreSubmodules.CLIENT
+                    );
                     writer.openBlock("(() => ({", "}))", () -> {
-                        writer.write("handle: invalidFunction(\"event stream request "
-                                + "is not supported in ReactNative.\"),");
+                        writer.write(
+                            "handle: invalidFunction(\"event stream request "
+                                + "is not supported in ReactNative.\"),"
+                        );
                     });
                 });
             default:
@@ -131,7 +150,7 @@ public class AddEventStreamHandlingDependency implements TypeScriptIntegration {
         }
     }
 
-    private static boolean hasEventStreamInput(Model model, ServiceShape service) {
+    public static boolean hasEventStreamInput(Model model, ServiceShape service) {
         TopDownIndex topDownIndex = TopDownIndex.of(model);
         Set<OperationShape> operations = topDownIndex.getContainedOperations(service);
         EventStreamIndex eventStreamIndex = EventStreamIndex.of(model);
@@ -143,8 +162,7 @@ public class AddEventStreamHandlingDependency implements TypeScriptIntegration {
         return false;
     }
 
-    private static boolean hasEventStreamInput(Model model, ServiceShape service, OperationShape operation) {
-        EventStreamIndex eventStreamIndex = EventStreamIndex.of(model);
-        return eventStreamIndex.getInputInfo(operation).isPresent();
+    public static boolean hasEventStreamInput(Model model, OperationShape operation) {
+        return EventStreamIndex.of(model).getInputInfo(operation).isPresent();
     }
 }

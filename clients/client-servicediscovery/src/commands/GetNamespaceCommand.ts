@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetNamespaceRequest, GetNamespaceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetNamespaceCommand,
-  serializeAws_json1_1GetNamespaceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceDiscoveryClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceDiscoveryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetNamespaceRequest, GetNamespaceResponse } from "../models/models_0";
+import { GetNamespace$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetNamespaceCommand}.
+ */
 export interface GetNamespaceCommandInput extends GetNamespaceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetNamespaceCommand}.
+ */
 export interface GetNamespaceCommandOutput extends GetNamespaceResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,76 @@ export interface GetNamespaceCommandOutput extends GetNamespaceResponse, __Metad
  * ```javascript
  * import { ServiceDiscoveryClient, GetNamespaceCommand } from "@aws-sdk/client-servicediscovery"; // ES Modules import
  * // const { ServiceDiscoveryClient, GetNamespaceCommand } = require("@aws-sdk/client-servicediscovery"); // CommonJS import
+ * // import type { ServiceDiscoveryClientConfig } from "@aws-sdk/client-servicediscovery";
+ * const config = {}; // type is ServiceDiscoveryClientConfig
  * const client = new ServiceDiscoveryClient(config);
+ * const input = { // GetNamespaceRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new GetNamespaceCommand(input);
  * const response = await client.send(command);
+ * // { // GetNamespaceResponse
+ * //   Namespace: { // Namespace
+ * //     Id: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     ResourceOwner: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Type: "DNS_PUBLIC" || "DNS_PRIVATE" || "HTTP",
+ * //     Description: "STRING_VALUE",
+ * //     ServiceCount: Number("int"),
+ * //     Properties: { // NamespaceProperties
+ * //       DnsProperties: { // DnsProperties
+ * //         HostedZoneId: "STRING_VALUE",
+ * //         SOA: { // SOA
+ * //           TTL: Number("long"), // required
+ * //         },
+ * //       },
+ * //       HttpProperties: { // HttpProperties
+ * //         HttpName: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     CreateDate: new Date("TIMESTAMP"),
+ * //     CreatorRequestId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetNamespaceCommandInput - {@link GetNamespaceCommandInput}
+ * @returns {@link GetNamespaceCommandOutput}
  * @see {@link GetNamespaceCommandInput} for command's `input` shape.
  * @see {@link GetNamespaceCommandOutput} for command's `response` shape.
- * @see {@link ServiceDiscoveryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceDiscoveryClientResolvedConfig | config} for ServiceDiscoveryClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>One or more specified values aren't valid. For example, a required value might be missing, a
+ *    numeric value might be outside the allowed range, or a string value might exceed length
+ *    constraints.</p>
+ *
+ * @throws {@link NamespaceNotFound} (client fault)
+ *  <p>No namespace exists with the specified ID.</p>
+ *
+ * @throws {@link ServiceDiscoveryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceDiscovery service.</p>
+ *
+ *
+ * @public
  */
-export class GetNamespaceCommand extends $Command<
-  GetNamespaceCommandInput,
-  GetNamespaceCommandOutput,
-  ServiceDiscoveryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetNamespaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceDiscoveryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetNamespaceCommandInput, GetNamespaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceDiscoveryClient";
-    const commandName = "GetNamespaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetNamespaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetNamespaceResponse.filterSensitiveLog,
+export class GetNamespaceCommand extends command<GetNamespaceCommandInput, GetNamespaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetNamespace",
+  GetNamespace$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetNamespaceRequest;
+      output: GetNamespaceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetNamespaceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetNamespaceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetNamespaceCommandOutput> {
-    return deserializeAws_json1_1GetNamespaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetNamespaceCommandInput;
+      output: GetNamespaceCommandOutput;
+    };
+  };
 }

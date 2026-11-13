@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   RemoveSourceIdentifierFromSubscriptionMessage,
   RemoveSourceIdentifierFromSubscriptionResult,
 } from "../models/models_0";
-import {
-  deserializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand,
-  serializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand,
-} from "../protocols/Aws_query";
+import { RemoveSourceIdentifierFromSubscription$ } from "../schemas/schemas_0";
 
-export interface RemoveSourceIdentifierFromSubscriptionCommandInput
-  extends RemoveSourceIdentifierFromSubscriptionMessage {}
-export interface RemoveSourceIdentifierFromSubscriptionCommandOutput
-  extends RemoveSourceIdentifierFromSubscriptionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveSourceIdentifierFromSubscriptionCommand}.
+ */
+export interface RemoveSourceIdentifierFromSubscriptionCommandInput extends RemoveSourceIdentifierFromSubscriptionMessage {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveSourceIdentifierFromSubscriptionCommand}.
+ */
+export interface RemoveSourceIdentifierFromSubscriptionCommandOutput extends RemoveSourceIdentifierFromSubscriptionResult, __MetadataBearer {}
 
 /**
  * <p>Removes a source identifier from an existing Amazon DocumentDB event notification
@@ -35,74 +33,69 @@ export interface RemoveSourceIdentifierFromSubscriptionCommandOutput
  * ```javascript
  * import { DocDBClient, RemoveSourceIdentifierFromSubscriptionCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, RemoveSourceIdentifierFromSubscriptionCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // RemoveSourceIdentifierFromSubscriptionMessage
+ *   SubscriptionName: "STRING_VALUE", // required
+ *   SourceIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new RemoveSourceIdentifierFromSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveSourceIdentifierFromSubscriptionResult
+ * //   EventSubscription: { // EventSubscription
+ * //     CustomerAwsId: "STRING_VALUE",
+ * //     CustSubscriptionId: "STRING_VALUE",
+ * //     SnsTopicArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     SubscriptionCreationTime: "STRING_VALUE",
+ * //     SourceType: "STRING_VALUE",
+ * //     SourceIdsList: [ // SourceIdsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     EventCategoriesList: [ // EventCategoriesList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Enabled: true || false,
+ * //     EventSubscriptionArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RemoveSourceIdentifierFromSubscriptionCommandInput - {@link RemoveSourceIdentifierFromSubscriptionCommandInput}
+ * @returns {@link RemoveSourceIdentifierFromSubscriptionCommandOutput}
  * @see {@link RemoveSourceIdentifierFromSubscriptionCommandInput} for command's `input` shape.
  * @see {@link RemoveSourceIdentifierFromSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link SourceNotFoundFault} (client fault)
+ *  <p>The requested source could not be found. </p>
+ *
+ * @throws {@link SubscriptionNotFoundFault} (client fault)
+ *  <p>The subscription name does not exist. </p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveSourceIdentifierFromSubscriptionCommand extends $Command<
-  RemoveSourceIdentifierFromSubscriptionCommandInput,
-  RemoveSourceIdentifierFromSubscriptionCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveSourceIdentifierFromSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveSourceIdentifierFromSubscriptionCommandInput, RemoveSourceIdentifierFromSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "RemoveSourceIdentifierFromSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveSourceIdentifierFromSubscriptionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveSourceIdentifierFromSubscriptionResult.filterSensitiveLog,
+export class RemoveSourceIdentifierFromSubscriptionCommand extends command<RemoveSourceIdentifierFromSubscriptionCommandInput, RemoveSourceIdentifierFromSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveSourceIdentifierFromSubscription",
+  RemoveSourceIdentifierFromSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveSourceIdentifierFromSubscriptionMessage;
+      output: RemoveSourceIdentifierFromSubscriptionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RemoveSourceIdentifierFromSubscriptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveSourceIdentifierFromSubscriptionCommandOutput> {
-    return deserializeAws_queryRemoveSourceIdentifierFromSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveSourceIdentifierFromSubscriptionCommandInput;
+      output: RemoveSourceIdentifierFromSubscriptionCommandOutput;
+    };
+  };
 }

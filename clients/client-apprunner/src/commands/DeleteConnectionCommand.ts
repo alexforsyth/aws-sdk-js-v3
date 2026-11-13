@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import { DeleteConnectionRequest, DeleteConnectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DeleteConnectionCommand,
-  serializeAws_json1_0DeleteConnectionCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteConnectionRequest, DeleteConnectionResponse } from "../models/models_0";
+import { DeleteConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteConnectionCommand}.
+ */
 export interface DeleteConnectionCommandInput extends DeleteConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteConnectionCommand}.
+ */
 export interface DeleteConnectionCommandOutput extends DeleteConnectionResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,62 @@ export interface DeleteConnectionCommandOutput extends DeleteConnectionResponse,
  * ```javascript
  * import { AppRunnerClient, DeleteConnectionCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, DeleteConnectionCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // DeleteConnectionRequest
+ *   ConnectionArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteConnectionResponse
+ * //   Connection: { // Connection
+ * //     ConnectionName: "STRING_VALUE",
+ * //     ConnectionArn: "STRING_VALUE",
+ * //     ProviderType: "GITHUB" || "BITBUCKET",
+ * //     Status: "PENDING_HANDSHAKE" || "AVAILABLE" || "ERROR" || "DELETED",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteConnectionCommandInput - {@link DeleteConnectionCommandInput}
+ * @returns {@link DeleteConnectionCommandOutput}
  * @see {@link DeleteConnectionCommandInput} for command's `input` shape.
  * @see {@link DeleteConnectionCommandOutput} for command's `response` shape.
- * @see {@link AppRunnerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource doesn't exist for the specified Amazon Resource Name (ARN) in your Amazon Web Services account.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteConnectionCommand extends $Command<
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteConnectionCommandInput, DeleteConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "DeleteConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteConnectionResponse.filterSensitiveLog,
+export class DeleteConnectionCommand extends command<DeleteConnectionCommandInput, DeleteConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteConnection",
+  DeleteConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteConnectionRequest;
+      output: DeleteConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeleteConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteConnectionCommandOutput> {
-    return deserializeAws_json1_0DeleteConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteConnectionCommandInput;
+      output: DeleteConnectionCommandOutput;
+    };
+  };
 }

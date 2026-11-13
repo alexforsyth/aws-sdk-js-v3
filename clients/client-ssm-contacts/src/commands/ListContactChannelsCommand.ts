@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListContactChannelsRequest, ListContactChannelsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListContactChannelsCommand,
-  serializeAws_json1_1ListContactChannelsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMContactsClientResolvedConfig } from "../SSMContactsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListContactChannelsRequest, ListContactChannelsResult } from "../models/models_0";
+import { ListContactChannels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListContactChannelsCommand}.
+ */
 export interface ListContactChannelsCommandInput extends ListContactChannelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListContactChannelsCommand}.
+ */
 export interface ListContactChannelsCommandOutput extends ListContactChannelsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface ListContactChannelsCommandOutput extends ListContactChannelsRes
  * ```javascript
  * import { SSMContactsClient, ListContactChannelsCommand } from "@aws-sdk/client-ssm-contacts"; // ES Modules import
  * // const { SSMContactsClient, ListContactChannelsCommand } = require("@aws-sdk/client-ssm-contacts"); // CommonJS import
+ * // import type { SSMContactsClientConfig } from "@aws-sdk/client-ssm-contacts";
+ * const config = {}; // type is SSMContactsClientConfig
  * const client = new SSMContactsClient(config);
+ * const input = { // ListContactChannelsRequest
+ *   ContactId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListContactChannelsCommand(input);
  * const response = await client.send(command);
+ * // { // ListContactChannelsResult
+ * //   NextToken: "STRING_VALUE",
+ * //   ContactChannels: [ // ContactChannelList // required
+ * //     { // ContactChannel
+ * //       ContactChannelArn: "STRING_VALUE", // required
+ * //       ContactArn: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //       Type: "SMS" || "VOICE" || "EMAIL",
+ * //       DeliveryAddress: { // ContactChannelAddress
+ * //         SimpleAddress: "STRING_VALUE",
+ * //       },
+ * //       ActivationStatus: "ACTIVATED" || "NOT_ACTIVATED", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListContactChannelsCommandInput - {@link ListContactChannelsCommandInput}
+ * @returns {@link ListContactChannelsCommandOutput}
  * @see {@link ListContactChannelsCommandInput} for command's `input` shape.
  * @see {@link ListContactChannelsCommandOutput} for command's `response` shape.
- * @see {@link SSMContactsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMContactsClientResolvedConfig | config} for SSMContactsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link DataEncryptionException} (client fault)
+ *  <p>The operation failed to due an encryption key error.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *          service.</p>
+ *
+ * @throws {@link SSMContactsServiceException}
+ * <p>Base exception class for all service exceptions from SSMContacts service.</p>
+ *
+ *
+ * @public
  */
-export class ListContactChannelsCommand extends $Command<
-  ListContactChannelsCommandInput,
-  ListContactChannelsCommandOutput,
-  SSMContactsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListContactChannelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMContactsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListContactChannelsCommandInput, ListContactChannelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMContactsClient";
-    const commandName = "ListContactChannelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListContactChannelsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListContactChannelsResult.filterSensitiveLog,
+export class ListContactChannelsCommand extends command<ListContactChannelsCommandInput, ListContactChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListContactChannels",
+  ListContactChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContactChannelsRequest;
+      output: ListContactChannelsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListContactChannelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListContactChannelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListContactChannelsCommandOutput> {
-    return deserializeAws_json1_1ListContactChannelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListContactChannelsCommandInput;
+      output: ListContactChannelsCommandOutput;
+    };
+  };
 }

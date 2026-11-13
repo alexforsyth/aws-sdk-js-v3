@@ -1,96 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KendraClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KendraClient";
-import { StopDataSourceSyncJobRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopDataSourceSyncJobCommand,
-  serializeAws_json1_1StopDataSourceSyncJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopDataSourceSyncJobRequest } from "../models/models_0";
+import { StopDataSourceSyncJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopDataSourceSyncJobCommand}.
+ */
 export interface StopDataSourceSyncJobCommandInput extends StopDataSourceSyncJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopDataSourceSyncJobCommand}.
+ */
 export interface StopDataSourceSyncJobCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Stops a running synchronization job. You can't stop a scheduled
+ * <p>Stops a synchronization job that is currently running. You can't stop a scheduled
  *       synchronization job.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KendraClient, StopDataSourceSyncJobCommand } from "@aws-sdk/client-kendra"; // ES Modules import
  * // const { KendraClient, StopDataSourceSyncJobCommand } = require("@aws-sdk/client-kendra"); // CommonJS import
+ * // import type { KendraClientConfig } from "@aws-sdk/client-kendra";
+ * const config = {}; // type is KendraClientConfig
  * const client = new KendraClient(config);
+ * const input = { // StopDataSourceSyncJobRequest
+ *   Id: "STRING_VALUE", // required
+ *   IndexId: "STRING_VALUE", // required
+ * };
  * const command = new StopDataSourceSyncJobCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopDataSourceSyncJobCommandInput - {@link StopDataSourceSyncJobCommandInput}
+ * @returns {@link StopDataSourceSyncJobCommandOutput}
  * @see {@link StopDataSourceSyncJobCommandInput} for command's `input` shape.
  * @see {@link StopDataSourceSyncJobCommandOutput} for command's `response` shape.
- * @see {@link KendraClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KendraClientResolvedConfig | config} for KendraClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action. Please ensure you have the
+ *             required permission policies and user accounts and try again.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An issue occurred with the internal server used for your Amazon Kendra service.
+ *             Please wait a few minutes and try again, or contact <a href="http://aws.amazon.com/contact-us/">Support</a> for help.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource you want to use doesn’t exist. Please check you have provided the correct
+ *             resource and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. Please reduce the number of requests
+ *             and try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints set by the Amazon Kendra service.
+ *             Please provide the correct input and try again.</p>
+ *
+ * @throws {@link KendraServiceException}
+ * <p>Base exception class for all service exceptions from Kendra service.</p>
+ *
+ *
+ * @public
  */
-export class StopDataSourceSyncJobCommand extends $Command<
-  StopDataSourceSyncJobCommandInput,
-  StopDataSourceSyncJobCommandOutput,
-  KendraClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopDataSourceSyncJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KendraClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopDataSourceSyncJobCommandInput, StopDataSourceSyncJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KendraClient";
-    const commandName = "StopDataSourceSyncJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopDataSourceSyncJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class StopDataSourceSyncJobCommand extends command<StopDataSourceSyncJobCommandInput, StopDataSourceSyncJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopDataSourceSyncJob",
+  StopDataSourceSyncJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopDataSourceSyncJobRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopDataSourceSyncJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopDataSourceSyncJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopDataSourceSyncJobCommandOutput> {
-    return deserializeAws_json1_1StopDataSourceSyncJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopDataSourceSyncJobCommandInput;
+      output: StopDataSourceSyncJobCommandOutput;
+    };
+  };
 }

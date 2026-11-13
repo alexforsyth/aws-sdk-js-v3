@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { UpdateRouteResponseRequest, UpdateRouteResponseResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRouteResponseCommand,
-  serializeAws_restJson1UpdateRouteResponseCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRouteResponseRequest, UpdateRouteResponseResponse } from "../models/models_0";
+import { UpdateRouteResponse$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRouteResponseCommand}.
+ */
 export interface UpdateRouteResponseCommandInput extends UpdateRouteResponseRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRouteResponseCommand}.
+ */
 export interface UpdateRouteResponseCommandOutput extends UpdateRouteResponseResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,81 @@ export interface UpdateRouteResponseCommandOutput extends UpdateRouteResponseRes
  * ```javascript
  * import { ApiGatewayV2Client, UpdateRouteResponseCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, UpdateRouteResponseCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // UpdateRouteResponseRequest
+ *   ApiId: "STRING_VALUE", // required
+ *   ModelSelectionExpression: "STRING_VALUE",
+ *   ResponseModels: { // RouteModels
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   ResponseParameters: { // RouteParameters
+ *     "<keys>": { // ParameterConstraints
+ *       Required: true || false,
+ *     },
+ *   },
+ *   RouteId: "STRING_VALUE", // required
+ *   RouteResponseId: "STRING_VALUE", // required
+ *   RouteResponseKey: "STRING_VALUE",
+ * };
  * const command = new UpdateRouteResponseCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRouteResponseResponse
+ * //   ModelSelectionExpression: "STRING_VALUE",
+ * //   ResponseModels: { // RouteModels
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   ResponseParameters: { // RouteParameters
+ * //     "<keys>": { // ParameterConstraints
+ * //       Required: true || false,
+ * //     },
+ * //   },
+ * //   RouteResponseId: "STRING_VALUE",
+ * //   RouteResponseKey: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateRouteResponseCommandInput - {@link UpdateRouteResponseCommandInput}
+ * @returns {@link UpdateRouteResponseCommandOutput}
  * @see {@link UpdateRouteResponseCommandInput} for command's `input` shape.
  * @see {@link UpdateRouteResponseCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRouteResponseCommand extends $Command<
-  UpdateRouteResponseCommandInput,
-  UpdateRouteResponseCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRouteResponseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRouteResponseCommandInput, UpdateRouteResponseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "UpdateRouteResponseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRouteResponseRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRouteResponseResponse.filterSensitiveLog,
+export class UpdateRouteResponseCommand extends command<UpdateRouteResponseCommandInput, UpdateRouteResponseCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRouteResponse",
+  UpdateRouteResponse$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRouteResponseRequest;
+      output: UpdateRouteResponseResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRouteResponseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRouteResponseCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateRouteResponseCommandOutput> {
-    return deserializeAws_restJson1UpdateRouteResponseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRouteResponseCommandInput;
+      output: UpdateRouteResponseCommandOutput;
+    };
+  };
 }

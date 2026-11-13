@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListWebACLsRequest, ListWebACLsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListWebACLsCommand,
-  serializeAws_json1_1ListWebACLsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWebACLsRequest, ListWebACLsResponse } from "../models/models_0";
+import { ListWebACLs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWebACLsCommand}.
+ */
 export interface ListWebACLsCommandInput extends ListWebACLsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWebACLsCommand}.
+ */
 export interface ListWebACLsCommandOutput extends ListWebACLsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,80 @@ export interface ListWebACLsCommandOutput extends ListWebACLsResponse, __Metadat
  * ```javascript
  * import { WAFClient, ListWebACLsCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, ListWebACLsCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // ListWebACLsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListWebACLsCommand(input);
  * const response = await client.send(command);
+ * // { // ListWebACLsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   WebACLs: [ // WebACLSummaries
+ * //     { // WebACLSummary
+ * //       WebACLId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListWebACLsCommandInput - {@link ListWebACLsCommandInput}
+ * @returns {@link ListWebACLsCommandOutput}
  * @see {@link ListWebACLsCommandInput} for command's `input` shape.
  * @see {@link ListWebACLsCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @example To list Web ACLs
+ * ```javascript
+ * // The following example returns an array of up to 100 web ACLs.
+ * const input = {
+ *   Limit: 100
+ * };
+ * const command = new ListWebACLsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   WebACLs: [
+ *     {
+ *       Name: "WebACLexample",
+ *       WebACLId: "webacl-1472061481310"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListWebACLsCommand extends $Command<
-  ListWebACLsCommandInput,
-  ListWebACLsCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListWebACLsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListWebACLsCommandInput, ListWebACLsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "ListWebACLsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListWebACLsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListWebACLsResponse.filterSensitiveLog,
+export class ListWebACLsCommand extends command<ListWebACLsCommandInput, ListWebACLsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWebACLs",
+  ListWebACLs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWebACLsRequest;
+      output: ListWebACLsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListWebACLsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListWebACLsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListWebACLsCommandOutput> {
-    return deserializeAws_json1_1ListWebACLsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListWebACLsCommandInput;
+      output: ListWebACLsCommandOutput;
+    };
+  };
 }

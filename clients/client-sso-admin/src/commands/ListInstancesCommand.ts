@@ -1,95 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListInstancesRequest, ListInstancesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListInstancesCommand,
-  serializeAws_json1_1ListInstancesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInstancesRequest, ListInstancesResponse } from "../models/models_0";
+import { ListInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandInput extends ListInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandOutput extends ListInstancesResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the SSO instances that the caller has access to.</p>
+ * <p>Lists the details of the organization and account instances of IAM Identity Center that were created in or visible to the account calling this API. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSOAdminClient, ListInstancesCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, ListInstancesCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // ListInstancesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   RegionScope: "CURRENT_REGION" || "ALL_REGIONS",
+ * };
  * const command = new ListInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // ListInstancesResponse
+ * //   Instances: [ // InstanceList
+ * //     { // InstanceMetadata
+ * //       InstanceArn: "STRING_VALUE",
+ * //       IdentityStoreId: "STRING_VALUE",
+ * //       IdentityStoreArn: "STRING_VALUE",
+ * //       OwnerAccountId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       Status: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "DELETE_IN_PROGRESS" || "ACTIVE",
+ * //       StatusReason: "STRING_VALUE",
+ * //       PrimaryRegion: "STRING_VALUE",
+ * //       Regions: [ // RegionMetadataList
+ * //         { // RegionMetadata
+ * //           RegionName: "STRING_VALUE",
+ * //           Status: "ACTIVE" || "ADDING" || "REMOVING",
+ * //           AddedDate: new Date("TIMESTAMP"),
+ * //           IsPrimaryRegion: true || false,
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInstancesCommandInput - {@link ListInstancesCommandInput}
+ * @returns {@link ListInstancesCommandOutput}
  * @see {@link ListInstancesCommandInput} for command's `input` shape.
  * @see {@link ListInstancesCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class ListInstancesCommand extends $Command<
-  ListInstancesCommandInput,
-  ListInstancesCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInstancesCommandInput, ListInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "ListInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListInstancesResponse.filterSensitiveLog,
+export class ListInstancesCommand extends command<ListInstancesCommandInput, ListInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInstances",
+  ListInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInstancesRequest;
+      output: ListInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInstancesCommandOutput> {
-    return deserializeAws_json1_1ListInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInstancesCommandInput;
+      output: ListInstancesCommandOutput;
+    };
+  };
 }

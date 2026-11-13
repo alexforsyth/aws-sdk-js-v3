@@ -1,95 +1,87 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { DeprecateFlowTemplateRequest, DeprecateFlowTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeprecateFlowTemplateCommand,
-  serializeAws_json1_1DeprecateFlowTemplateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeprecateFlowTemplateRequest, DeprecateFlowTemplateResponse } from "../models/models_0";
+import { DeprecateFlowTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeprecateFlowTemplateCommand}.
+ */
 export interface DeprecateFlowTemplateCommandInput extends DeprecateFlowTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeprecateFlowTemplateCommand}.
+ */
 export interface DeprecateFlowTemplateCommandOutput extends DeprecateFlowTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Deprecates the specified workflow. This action marks the workflow for deletion. Deprecated flows can't be deployed, but existing deployments will continue to run.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, DeprecateFlowTemplateCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, DeprecateFlowTemplateCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // DeprecateFlowTemplateRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new DeprecateFlowTemplateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeprecateFlowTemplateCommandInput - {@link DeprecateFlowTemplateCommandInput}
+ * @returns {@link DeprecateFlowTemplateCommandOutput}
  * @see {@link DeprecateFlowTemplateCommandInput} for command's `input` shape.
  * @see {@link DeprecateFlowTemplateCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class DeprecateFlowTemplateCommand extends $Command<
-  DeprecateFlowTemplateCommandInput,
-  DeprecateFlowTemplateCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeprecateFlowTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeprecateFlowTemplateCommandInput, DeprecateFlowTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "DeprecateFlowTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeprecateFlowTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeprecateFlowTemplateResponse.filterSensitiveLog,
+export class DeprecateFlowTemplateCommand extends command<DeprecateFlowTemplateCommandInput, DeprecateFlowTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeprecateFlowTemplate",
+  DeprecateFlowTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeprecateFlowTemplateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeprecateFlowTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeprecateFlowTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeprecateFlowTemplateCommandOutput> {
-    return deserializeAws_json1_1DeprecateFlowTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeprecateFlowTemplateCommandInput;
+      output: DeprecateFlowTemplateCommandOutput;
+    };
+  };
 }

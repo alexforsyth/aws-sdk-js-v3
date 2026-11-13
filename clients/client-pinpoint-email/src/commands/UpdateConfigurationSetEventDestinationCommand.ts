@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   UpdateConfigurationSetEventDestinationRequest,
   UpdateConfigurationSetEventDestinationResponse,
 } from "../models/models_0";
-import { PinpointEmailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointEmailClient";
-import {
-  deserializeAws_restJson1UpdateConfigurationSetEventDestinationCommand,
-  serializeAws_restJson1UpdateConfigurationSetEventDestinationCommand,
-} from "../protocols/Aws_restJson1";
+import { UpdateConfigurationSetEventDestination$ } from "../schemas/schemas_0";
 
-export interface UpdateConfigurationSetEventDestinationCommandInput
-  extends UpdateConfigurationSetEventDestinationRequest {}
-export interface UpdateConfigurationSetEventDestinationCommandOutput
-  extends UpdateConfigurationSetEventDestinationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConfigurationSetEventDestinationCommand}.
+ */
+export interface UpdateConfigurationSetEventDestinationCommandInput extends UpdateConfigurationSetEventDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConfigurationSetEventDestinationCommand}.
+ */
+export interface UpdateConfigurationSetEventDestinationCommandOutput extends UpdateConfigurationSetEventDestinationResponse, __MetadataBearer {}
 
 /**
  * <p>Update the configuration of an event destination for a configuration set.</p>
@@ -39,74 +37,80 @@ export interface UpdateConfigurationSetEventDestinationCommandOutput
  * ```javascript
  * import { PinpointEmailClient, UpdateConfigurationSetEventDestinationCommand } from "@aws-sdk/client-pinpoint-email"; // ES Modules import
  * // const { PinpointEmailClient, UpdateConfigurationSetEventDestinationCommand } = require("@aws-sdk/client-pinpoint-email"); // CommonJS import
+ * // import type { PinpointEmailClientConfig } from "@aws-sdk/client-pinpoint-email";
+ * const config = {}; // type is PinpointEmailClientConfig
  * const client = new PinpointEmailClient(config);
+ * const input = { // UpdateConfigurationSetEventDestinationRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   EventDestinationName: "STRING_VALUE", // required
+ *   EventDestination: { // EventDestinationDefinition
+ *     Enabled: true || false,
+ *     MatchingEventTypes: [ // EventTypes
+ *       "SEND" || "REJECT" || "BOUNCE" || "COMPLAINT" || "DELIVERY" || "OPEN" || "CLICK" || "RENDERING_FAILURE",
+ *     ],
+ *     KinesisFirehoseDestination: { // KinesisFirehoseDestination
+ *       IamRoleArn: "STRING_VALUE", // required
+ *       DeliveryStreamArn: "STRING_VALUE", // required
+ *     },
+ *     CloudWatchDestination: { // CloudWatchDestination
+ *       DimensionConfigurations: [ // CloudWatchDimensionConfigurations // required
+ *         { // CloudWatchDimensionConfiguration
+ *           DimensionName: "STRING_VALUE", // required
+ *           DimensionValueSource: "MESSAGE_TAG" || "EMAIL_HEADER" || "LINK_TAG", // required
+ *           DefaultDimensionValue: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *     SnsDestination: { // SnsDestination
+ *       TopicArn: "STRING_VALUE", // required
+ *     },
+ *     PinpointDestination: { // PinpointDestination
+ *       ApplicationArn: "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new UpdateConfigurationSetEventDestinationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateConfigurationSetEventDestinationCommandInput - {@link UpdateConfigurationSetEventDestinationCommandInput}
+ * @returns {@link UpdateConfigurationSetEventDestinationCommandOutput}
  * @see {@link UpdateConfigurationSetEventDestinationCommandInput} for command's `input` shape.
  * @see {@link UpdateConfigurationSetEventDestinationCommandOutput} for command's `response` shape.
- * @see {@link PinpointEmailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointEmailClientResolvedConfig | config} for PinpointEmailClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link PinpointEmailServiceException}
+ * <p>Base exception class for all service exceptions from PinpointEmail service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateConfigurationSetEventDestinationCommand extends $Command<
-  UpdateConfigurationSetEventDestinationCommandInput,
-  UpdateConfigurationSetEventDestinationCommandOutput,
-  PinpointEmailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConfigurationSetEventDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointEmailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConfigurationSetEventDestinationCommandInput, UpdateConfigurationSetEventDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointEmailClient";
-    const commandName = "UpdateConfigurationSetEventDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConfigurationSetEventDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateConfigurationSetEventDestinationResponse.filterSensitiveLog,
+export class UpdateConfigurationSetEventDestinationCommand extends command<UpdateConfigurationSetEventDestinationCommandInput, UpdateConfigurationSetEventDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConfigurationSetEventDestination",
+  UpdateConfigurationSetEventDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfigurationSetEventDestinationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateConfigurationSetEventDestinationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateConfigurationSetEventDestinationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateConfigurationSetEventDestinationCommandOutput> {
-    return deserializeAws_restJson1UpdateConfigurationSetEventDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConfigurationSetEventDestinationCommandInput;
+      output: UpdateConfigurationSetEventDestinationCommandOutput;
+    };
+  };
 }

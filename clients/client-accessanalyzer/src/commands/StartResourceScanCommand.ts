@@ -1,95 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { StartResourceScanRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartResourceScanCommand,
-  serializeAws_restJson1StartResourceScanCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartResourceScanRequest } from "../models/models_0";
+import { StartResourceScan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartResourceScanCommand}.
+ */
 export interface StartResourceScanCommandInput extends StartResourceScanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartResourceScanCommand}.
+ */
 export interface StartResourceScanCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Immediately starts a scan of the policies applied to the specified resource.</p>
+ * <p>Immediately starts a scan of the policies applied to the specified resource.</p> <note> <p>This action is supported only for external access analyzers.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AccessAnalyzerClient, StartResourceScanCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, StartResourceScanCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // StartResourceScanRequest
+ *   analyzerArn: "STRING_VALUE", // required
+ *   resourceArn: "STRING_VALUE", // required
+ *   resourceOwnerAccount: "STRING_VALUE",
+ * };
  * const command = new StartResourceScanCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartResourceScanCommandInput - {@link StartResourceScanCommandInput}
+ * @returns {@link StartResourceScanCommandOutput}
  * @see {@link StartResourceScanCommandInput} for command's `input` shape.
  * @see {@link StartResourceScanCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class StartResourceScanCommand extends $Command<
-  StartResourceScanCommandInput,
-  StartResourceScanCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartResourceScanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartResourceScanCommandInput, StartResourceScanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "StartResourceScanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartResourceScanRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class StartResourceScanCommand extends command<StartResourceScanCommandInput, StartResourceScanCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartResourceScan",
+  StartResourceScan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartResourceScanRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartResourceScanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartResourceScanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartResourceScanCommandOutput> {
-    return deserializeAws_restJson1StartResourceScanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartResourceScanCommandInput;
+      output: StartResourceScanCommandOutput;
+    };
+  };
 }

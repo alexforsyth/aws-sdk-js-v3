@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { ListForecastsRequest, ListForecastsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListForecastsCommand,
-  serializeAws_json1_1ListForecastsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListForecastsRequest, ListForecastsResponse } from "../models/models_0";
+import { ListForecasts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListForecastsCommand}.
+ */
 export interface ListForecastsCommandInput extends ListForecastsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListForecastsCommand}.
+ */
 export interface ListForecastsCommandOutput extends ListForecastsResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +33,75 @@ export interface ListForecastsCommandOutput extends ListForecastsResponse, __Met
  * ```javascript
  * import { ForecastClient, ListForecastsCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, ListForecastsCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // ListForecastsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *       Condition: "IS" || "IS_NOT", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListForecastsCommand(input);
  * const response = await client.send(command);
+ * // { // ListForecastsResponse
+ * //   Forecasts: [ // Forecasts
+ * //     { // ForecastSummary
+ * //       ForecastArn: "STRING_VALUE",
+ * //       ForecastName: "STRING_VALUE",
+ * //       PredictorArn: "STRING_VALUE",
+ * //       CreatedUsingAutoPredictor: true || false,
+ * //       DatasetGroupArn: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModificationTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListForecastsCommandInput - {@link ListForecastsCommandInput}
+ * @returns {@link ListForecastsCommandOutput}
  * @see {@link ListForecastsCommandInput} for command's `input` shape.
  * @see {@link ListForecastsCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid. Tokens expire after 24 hours.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class ListForecastsCommand extends $Command<
-  ListForecastsCommandInput,
-  ListForecastsCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListForecastsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListForecastsCommandInput, ListForecastsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "ListForecastsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListForecastsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListForecastsResponse.filterSensitiveLog,
+export class ListForecastsCommand extends command<ListForecastsCommandInput, ListForecastsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListForecasts",
+  ListForecasts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListForecastsRequest;
+      output: ListForecastsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListForecastsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListForecastsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListForecastsCommandOutput> {
-    return deserializeAws_json1_1ListForecastsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListForecastsCommandInput;
+      output: ListForecastsCommandOutput;
+    };
+  };
 }

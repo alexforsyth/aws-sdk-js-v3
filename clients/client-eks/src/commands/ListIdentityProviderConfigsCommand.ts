@@ -1,100 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { ListIdentityProviderConfigsRequest, ListIdentityProviderConfigsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListIdentityProviderConfigsCommand,
-  serializeAws_restJson1ListIdentityProviderConfigsCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface ListIdentityProviderConfigsCommandInput extends ListIdentityProviderConfigsRequest {}
-export interface ListIdentityProviderConfigsCommandOutput
-  extends ListIdentityProviderConfigsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListIdentityProviderConfigsRequest, ListIdentityProviderConfigsResponse } from "../models/models_0";
+import { ListIdentityProviderConfigs$ } from "../schemas/schemas_0";
 
 /**
- * <p>A list of identity provider configurations.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListIdentityProviderConfigsCommand}.
+ */
+export interface ListIdentityProviderConfigsCommandInput extends ListIdentityProviderConfigsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListIdentityProviderConfigsCommand}.
+ */
+export interface ListIdentityProviderConfigsCommandOutput extends ListIdentityProviderConfigsResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists the identity provider configurations for your cluster.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, ListIdentityProviderConfigsCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, ListIdentityProviderConfigsCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // ListIdentityProviderConfigsRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListIdentityProviderConfigsCommand(input);
  * const response = await client.send(command);
+ * // { // ListIdentityProviderConfigsResponse
+ * //   identityProviderConfigs: [ // IdentityProviderConfigs
+ * //     { // IdentityProviderConfig
+ * //       type: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListIdentityProviderConfigsCommandInput - {@link ListIdentityProviderConfigsCommandInput}
+ * @returns {@link ListIdentityProviderConfigsCommandOutput}
  * @see {@link ListIdentityProviderConfigsCommandInput} for command's `input` shape.
  * @see {@link ListIdentityProviderConfigsCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is unavailable. Back off and retry the operation.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class ListIdentityProviderConfigsCommand extends $Command<
-  ListIdentityProviderConfigsCommandInput,
-  ListIdentityProviderConfigsCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListIdentityProviderConfigsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListIdentityProviderConfigsCommandInput, ListIdentityProviderConfigsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "ListIdentityProviderConfigsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListIdentityProviderConfigsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListIdentityProviderConfigsResponse.filterSensitiveLog,
+export class ListIdentityProviderConfigsCommand extends command<ListIdentityProviderConfigsCommandInput, ListIdentityProviderConfigsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListIdentityProviderConfigs",
+  ListIdentityProviderConfigs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListIdentityProviderConfigsRequest;
+      output: ListIdentityProviderConfigsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListIdentityProviderConfigsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListIdentityProviderConfigsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListIdentityProviderConfigsCommandOutput> {
-    return deserializeAws_restJson1ListIdentityProviderConfigsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListIdentityProviderConfigsCommandInput;
+      output: ListIdentityProviderConfigsCommandOutput;
+    };
+  };
 }

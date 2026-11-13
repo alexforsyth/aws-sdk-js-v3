@@ -1,95 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteFirewallRuleRequest, DeleteFirewallRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteFirewallRuleCommand,
-  serializeAws_json1_1DeleteFirewallRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFirewallRuleRequest, DeleteFirewallRuleResponse } from "../models/models_0";
+import { DeleteFirewallRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFirewallRuleCommand}.
+ */
 export interface DeleteFirewallRuleCommandInput extends DeleteFirewallRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFirewallRuleCommand}.
+ */
 export interface DeleteFirewallRuleCommandOutput extends DeleteFirewallRuleResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified firewall rule.</p>
+ * <p>Deletes the specified firewall rule. Identify the rule using either <code>FirewallDomainListId</code> (for domain-list and DNS Firewall Advanced rules) or <code>FirewallThreatProtectionId</code> (for partner-managed and DNS Firewall Advanced rules) — together with <code>FirewallRuleGroupId</code>.</p>
+ *          <p>
+ *             <code>DeleteFirewallRule</code> is the only operation that succeeds against a rule whose <code>Status</code> is <code>CREATION_FAILED</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53ResolverClient, DeleteFirewallRuleCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, DeleteFirewallRuleCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // DeleteFirewallRuleRequest
+ *   FirewallRuleGroupId: "STRING_VALUE", // required
+ *   FirewallDomainListId: "STRING_VALUE",
+ *   FirewallThreatProtectionId: "STRING_VALUE",
+ *   Qtype: "STRING_VALUE",
+ * };
  * const command = new DeleteFirewallRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFirewallRuleResponse
+ * //   FirewallRule: { // FirewallRule
+ * //     FirewallRuleGroupId: "STRING_VALUE",
+ * //     FirewallDomainListId: "STRING_VALUE",
+ * //     FirewallThreatProtectionId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Priority: Number("int"),
+ * //     Action: "ALLOW" || "BLOCK" || "ALERT",
+ * //     BlockResponse: "NODATA" || "NXDOMAIN" || "OVERRIDE",
+ * //     BlockOverrideDomain: "STRING_VALUE",
+ * //     BlockOverrideDnsType: "CNAME",
+ * //     BlockOverrideTtl: Number("int"),
+ * //     CreatorRequestId: "STRING_VALUE",
+ * //     CreationTime: "STRING_VALUE",
+ * //     ModificationTime: "STRING_VALUE",
+ * //     FirewallDomainRedirectionAction: "INSPECT_REDIRECTION_DOMAIN" || "TRUST_REDIRECTION_DOMAIN",
+ * //     Qtype: "STRING_VALUE",
+ * //     DnsThreatProtection: "DGA" || "DNS_TUNNELING" || "DICTIONARY_DGA",
+ * //     ConfidenceThreshold: "LOW" || "MEDIUM" || "HIGH",
+ * //     FirewallRuleType: { // FirewallRuleType
+ * //       PartnerThreatProtection: { // PartnerThreatProtectionConfig
+ * //         Partner: "STRING_VALUE", // required
+ * //       },
+ * //       FirewallAdvancedContentCategory: { // FirewallAdvancedContentCategoryConfig
+ * //         Category: "STRING_VALUE", // required
+ * //       },
+ * //       FirewallAdvancedThreatCategory: { // FirewallAdvancedThreatCategoryConfig
+ * //         Category: "STRING_VALUE", // required
+ * //       },
+ * //       DnsThreatProtection: { // DnsThreatProtectionRuleTypeConfig
+ * //         Value: "STRING_VALUE", // required
+ * //         ConfidenceThreshold: "LOW" || "MEDIUM" || "HIGH", // required
+ * //       },
+ * //     },
+ * //     Status: "STRING_VALUE",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteFirewallRuleCommandInput - {@link DeleteFirewallRuleCommandInput}
+ * @returns {@link DeleteFirewallRuleCommandOutput}
  * @see {@link DeleteFirewallRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteFirewallRuleCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The current account doesn't have the IAM permissions required to perform the specified Resolver operation.</p>
+ *          <p>This error can also be thrown when a customer has reached the 5120 character limit for a
+ * 			resource policy for CloudWatch Logs.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>You have provided an invalid command. If you ran the <code>UpdateFirewallDomains</code> request. supported values are <code>ADD</code>,
+ * 			<code>REMOVE</code>, or <code>REPLACE</code> a domain.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFirewallRuleCommand extends $Command<
-  DeleteFirewallRuleCommandInput,
-  DeleteFirewallRuleCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFirewallRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFirewallRuleCommandInput, DeleteFirewallRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "DeleteFirewallRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFirewallRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFirewallRuleResponse.filterSensitiveLog,
+export class DeleteFirewallRuleCommand extends command<DeleteFirewallRuleCommandInput, DeleteFirewallRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFirewallRule",
+  DeleteFirewallRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFirewallRuleRequest;
+      output: DeleteFirewallRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFirewallRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteFirewallRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFirewallRuleCommandOutput> {
-    return deserializeAws_json1_1DeleteFirewallRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFirewallRuleCommandInput;
+      output: DeleteFirewallRuleCommandOutput;
+    };
+  };
 }

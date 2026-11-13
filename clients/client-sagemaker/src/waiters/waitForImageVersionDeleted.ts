@@ -1,27 +1,40 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeImageVersionCommand, DescribeImageVersionCommandInput } from "../commands/DescribeImageVersionCommand";
-import { SageMakerClient } from "../SageMakerClient";
+import {
+  type DescribeImageVersionCommandInput,
+  type DescribeImageVersionCommandOutput,
+  DescribeImageVersionCommand,
+} from "../commands/DescribeImageVersionCommand";
+import type { ResourceNotFound } from "../models/errors";
+import type { SageMakerServiceException } from "../models/SageMakerServiceException";
+import type { SageMakerClient } from "../SageMakerClient";
 
-const checkState = async (client: SageMakerClient, input: DescribeImageVersionCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SageMakerClient, input: DescribeImageVersionCommandInput): Promise<WaiterResult<DescribeImageVersionCommandOutput | SageMakerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeImageVersionCommand(input));
+    let result: DescribeImageVersionCommandOutput & any = await client.send(new DescribeImageVersionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.ImageVersionStatus;
-      };
+      }
       if (returnComparator() === "DELETE_FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFound") {
       return { state: WaiterState.SUCCESS, reason };
     }
-    if (exception.name && exception.name == "ValidationException") {
+    if (exception.name === "ValidationException") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -34,8 +47,8 @@ const checkState = async (client: SageMakerClient, input: DescribeImageVersionCo
 export const waitForImageVersionDeleted = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeImageVersionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<DescribeImageVersionCommandOutput | SageMakerServiceException>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -46,8 +59,8 @@ export const waitForImageVersionDeleted = async (
 export const waitUntilImageVersionDeleted = async (
   params: WaiterConfiguration<SageMakerClient>,
   input: DescribeImageVersionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<ResourceNotFound>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 3600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFound>;
 };

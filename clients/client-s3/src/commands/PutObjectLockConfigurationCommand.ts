@@ -1,122 +1,119 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutObjectLockConfigurationOutput, PutObjectLockConfigurationRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlPutObjectLockConfigurationCommand,
-  serializeAws_restXmlPutObjectLockConfigurationCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep5, _mw5, command } from "../commandBuilder";
+import type { PutObjectLockConfigurationOutput, PutObjectLockConfigurationRequest } from "../models/models_0";
+import { PutObjectLockConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutObjectLockConfigurationCommand}.
+ */
 export interface PutObjectLockConfigurationCommandInput extends PutObjectLockConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutObjectLockConfigurationCommand}.
+ */
 export interface PutObjectLockConfigurationCommandOutput extends PutObjectLockConfigurationOutput, __MetadataBearer {}
 
 /**
- * <p>Places an Object Lock configuration on the specified bucket. The rule specified in the
- *          Object Lock configuration will be applied by default to every new object placed in the
- *          specified bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>.
- *       </p>
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock
+ *       configuration will be applied by default to every new object placed in the specified bucket. For more
+ *       information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking
+ *         Objects</a>. </p>
  *          <note>
  *             <ul>
  *                <li>
- *                   <p>The <code>DefaultRetention</code> settings require both a mode and a
- *                period.</p>
+ *                   <p>The <code>DefaultRetention</code> settings require both a mode and a period.</p>
  *                </li>
  *                <li>
- *                   <p>The <code>DefaultRetention</code> period can be either <code>Days</code>
- *                or <code>Years</code> but you must select one. You cannot specify <code>Days</code>
- *                and <code>Years</code> at the same time.</p>
+ *                   <p>The <code>DefaultRetention</code> period can be either <code>Days</code> or <code>Years</code>
+ *             but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same
+ *             time.</p>
  *                </li>
  *                <li>
- *                   <p>You can only enable Object Lock for new buckets. If you want to turn on
- *                Object Lock for an existing bucket, contact Amazon Web Services Support.</p>
+ *                   <p>You can enable Object Lock for new or existing buckets. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html">Configuring
+ *               Object Lock</a>.</p>
  *                </li>
  *             </ul>
  *          </note>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, PutObjectLockConfigurationCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, PutObjectLockConfigurationCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // PutObjectLockConfigurationRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   ObjectLockConfiguration: { // ObjectLockConfiguration
+ *     ObjectLockEnabled: "Enabled",
+ *     Rule: { // ObjectLockRule
+ *       DefaultRetention: { // DefaultRetention
+ *         Mode: "GOVERNANCE" || "COMPLIANCE",
+ *         Days: Number("int"),
+ *         Years: Number("int"),
+ *         DefaultEventHold: { // EventHoldDuration
+ *           Days: Number("int"),
+ *           Years: Number("int"),
+ *         },
+ *       },
+ *     },
+ *   },
+ *   RequestPayer: "requester",
+ *   Token: "STRING_VALUE",
+ *   ContentMD5: "STRING_VALUE",
+ *   ChecksumAlgorithm: "CRC32" || "CRC32C" || "SHA1" || "SHA256" || "CRC64NVME" || "SHA512" || "MD5" || "XXHASH64" || "XXHASH3" || "XXHASH128",
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ * };
  * const command = new PutObjectLockConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // PutObjectLockConfigurationOutput
+ * //   RequestCharged: "requester",
+ * // };
+ *
  * ```
  *
+ * @param PutObjectLockConfigurationCommandInput - {@link PutObjectLockConfigurationCommandInput}
+ * @returns {@link PutObjectLockConfigurationCommandOutput}
  * @see {@link PutObjectLockConfigurationCommandInput} for command's `input` shape.
  * @see {@link PutObjectLockConfigurationCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @public
  */
-export class PutObjectLockConfigurationCommand extends $Command<
-  PutObjectLockConfigurationCommandInput,
-  PutObjectLockConfigurationCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutObjectLockConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutObjectLockConfigurationCommandInput, PutObjectLockConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "PutObjectLockConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutObjectLockConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutObjectLockConfigurationOutput.filterSensitiveLog,
+export class PutObjectLockConfigurationCommand extends command<PutObjectLockConfigurationCommandInput, PutObjectLockConfigurationCommandOutput>(
+  _ep5,
+  _mw5,
+  "PutObjectLockConfiguration",
+  PutObjectLockConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutObjectLockConfigurationRequest;
+      output: PutObjectLockConfigurationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutObjectLockConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlPutObjectLockConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutObjectLockConfigurationCommandOutput> {
-    return deserializeAws_restXmlPutObjectLockConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutObjectLockConfigurationCommandInput;
+      output: PutObjectLockConfigurationCommandOutput;
+    };
+  };
 }

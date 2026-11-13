@@ -1,55 +1,20 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { ACMPCA } from "../ACMPCA";
 import { ACMPCAClient } from "../ACMPCAClient";
 import { ListTagsCommand, ListTagsCommandInput, ListTagsCommandOutput } from "../commands/ListTagsCommand";
-import { ACMPCAPaginationConfiguration } from "./Interfaces";
+import type { ACMPCAPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: ACMPCAClient,
-  input: ListTagsCommandInput,
-  ...args: any
-): Promise<ListTagsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListTagsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: ACMPCA,
-  input: ListTagsCommandInput,
-  ...args: any
-): Promise<ListTagsCommandOutput> => {
-  // @ts-ignore
-  return await client.listTags(input, ...args);
-};
-export async function* paginateListTags(
+export const paginateListTags: (
   config: ACMPCAPaginationConfiguration,
   input: ListTagsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListTagsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListTagsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof ACMPCA) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof ACMPCAClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected ACMPCA | ACMPCAClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListTagsCommandOutput> = createPaginator<
+  ACMPCAPaginationConfiguration,
+  ListTagsCommandInput,
+  ListTagsCommandOutput
+>(ACMPCAClient, ListTagsCommand, "NextToken", "NextToken", "MaxResults");

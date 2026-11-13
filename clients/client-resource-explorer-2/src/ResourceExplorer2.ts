@@ -1,0 +1,910 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AssociateDefaultViewCommandInput,
+  type AssociateDefaultViewCommandOutput,
+  AssociateDefaultViewCommand,
+} from "./commands/AssociateDefaultViewCommand";
+import {
+  type BatchGetViewCommandInput,
+  type BatchGetViewCommandOutput,
+  BatchGetViewCommand,
+} from "./commands/BatchGetViewCommand";
+import {
+  type CreateIndexCommandInput,
+  type CreateIndexCommandOutput,
+  CreateIndexCommand,
+} from "./commands/CreateIndexCommand";
+import {
+  type CreateResourceExplorerSetupCommandInput,
+  type CreateResourceExplorerSetupCommandOutput,
+  CreateResourceExplorerSetupCommand,
+} from "./commands/CreateResourceExplorerSetupCommand";
+import {
+  type CreateViewCommandInput,
+  type CreateViewCommandOutput,
+  CreateViewCommand,
+} from "./commands/CreateViewCommand";
+import {
+  type DeleteIndexCommandInput,
+  type DeleteIndexCommandOutput,
+  DeleteIndexCommand,
+} from "./commands/DeleteIndexCommand";
+import {
+  type DeleteResourceExplorerSetupCommandInput,
+  type DeleteResourceExplorerSetupCommandOutput,
+  DeleteResourceExplorerSetupCommand,
+} from "./commands/DeleteResourceExplorerSetupCommand";
+import {
+  type DeleteViewCommandInput,
+  type DeleteViewCommandOutput,
+  DeleteViewCommand,
+} from "./commands/DeleteViewCommand";
+import {
+  type DisassociateDefaultViewCommandInput,
+  type DisassociateDefaultViewCommandOutput,
+  DisassociateDefaultViewCommand,
+} from "./commands/DisassociateDefaultViewCommand";
+import {
+  type GetAccountLevelServiceConfigurationCommandInput,
+  type GetAccountLevelServiceConfigurationCommandOutput,
+  GetAccountLevelServiceConfigurationCommand,
+} from "./commands/GetAccountLevelServiceConfigurationCommand";
+import {
+  type GetDefaultViewCommandInput,
+  type GetDefaultViewCommandOutput,
+  GetDefaultViewCommand,
+} from "./commands/GetDefaultViewCommand";
+import { type GetIndexCommandInput, type GetIndexCommandOutput, GetIndexCommand } from "./commands/GetIndexCommand";
+import {
+  type GetManagedViewCommandInput,
+  type GetManagedViewCommandOutput,
+  GetManagedViewCommand,
+} from "./commands/GetManagedViewCommand";
+import {
+  type GetResourceExplorerSetupCommandInput,
+  type GetResourceExplorerSetupCommandOutput,
+  GetResourceExplorerSetupCommand,
+} from "./commands/GetResourceExplorerSetupCommand";
+import {
+  type GetServiceIndexCommandInput,
+  type GetServiceIndexCommandOutput,
+  GetServiceIndexCommand,
+} from "./commands/GetServiceIndexCommand";
+import {
+  type GetServiceViewCommandInput,
+  type GetServiceViewCommandOutput,
+  GetServiceViewCommand,
+} from "./commands/GetServiceViewCommand";
+import { type GetViewCommandInput, type GetViewCommandOutput, GetViewCommand } from "./commands/GetViewCommand";
+import {
+  type ListIndexesCommandInput,
+  type ListIndexesCommandOutput,
+  ListIndexesCommand,
+} from "./commands/ListIndexesCommand";
+import {
+  type ListIndexesForMembersCommandInput,
+  type ListIndexesForMembersCommandOutput,
+  ListIndexesForMembersCommand,
+} from "./commands/ListIndexesForMembersCommand";
+import {
+  type ListManagedViewsCommandInput,
+  type ListManagedViewsCommandOutput,
+  ListManagedViewsCommand,
+} from "./commands/ListManagedViewsCommand";
+import {
+  type ListResourcesCommandInput,
+  type ListResourcesCommandOutput,
+  ListResourcesCommand,
+} from "./commands/ListResourcesCommand";
+import {
+  type ListServiceIndexesCommandInput,
+  type ListServiceIndexesCommandOutput,
+  ListServiceIndexesCommand,
+} from "./commands/ListServiceIndexesCommand";
+import {
+  type ListServiceViewsCommandInput,
+  type ListServiceViewsCommandOutput,
+  ListServiceViewsCommand,
+} from "./commands/ListServiceViewsCommand";
+import {
+  type ListStreamingAccessForServicesCommandInput,
+  type ListStreamingAccessForServicesCommandOutput,
+  ListStreamingAccessForServicesCommand,
+} from "./commands/ListStreamingAccessForServicesCommand";
+import {
+  type ListSupportedResourceTypesCommandInput,
+  type ListSupportedResourceTypesCommandOutput,
+  ListSupportedResourceTypesCommand,
+} from "./commands/ListSupportedResourceTypesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import { type ListViewsCommandInput, type ListViewsCommandOutput, ListViewsCommand } from "./commands/ListViewsCommand";
+import { type SearchCommandInput, type SearchCommandOutput, SearchCommand } from "./commands/SearchCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateIndexTypeCommandInput,
+  type UpdateIndexTypeCommandOutput,
+  UpdateIndexTypeCommand,
+} from "./commands/UpdateIndexTypeCommand";
+import {
+  type UpdateViewCommandInput,
+  type UpdateViewCommandOutput,
+  UpdateViewCommand,
+} from "./commands/UpdateViewCommand";
+import { paginateGetResourceExplorerSetup } from "./pagination/GetResourceExplorerSetupPaginator";
+import { paginateListIndexesForMembers } from "./pagination/ListIndexesForMembersPaginator";
+import { paginateListIndexes } from "./pagination/ListIndexesPaginator";
+import { paginateListManagedViews } from "./pagination/ListManagedViewsPaginator";
+import { paginateListResources } from "./pagination/ListResourcesPaginator";
+import { paginateListServiceIndexes } from "./pagination/ListServiceIndexesPaginator";
+import { paginateListServiceViews } from "./pagination/ListServiceViewsPaginator";
+import { paginateListStreamingAccessForServices } from "./pagination/ListStreamingAccessForServicesPaginator";
+import { paginateListSupportedResourceTypes } from "./pagination/ListSupportedResourceTypesPaginator";
+import { paginateListViews } from "./pagination/ListViewsPaginator";
+import { paginateSearch } from "./pagination/SearchPaginator";
+import { ResourceExplorer2Client } from "./ResourceExplorer2Client";
+
+const commands = {
+  AssociateDefaultViewCommand,
+  BatchGetViewCommand,
+  CreateIndexCommand,
+  CreateResourceExplorerSetupCommand,
+  CreateViewCommand,
+  DeleteIndexCommand,
+  DeleteResourceExplorerSetupCommand,
+  DeleteViewCommand,
+  DisassociateDefaultViewCommand,
+  GetAccountLevelServiceConfigurationCommand,
+  GetDefaultViewCommand,
+  GetIndexCommand,
+  GetManagedViewCommand,
+  GetResourceExplorerSetupCommand,
+  GetServiceIndexCommand,
+  GetServiceViewCommand,
+  GetViewCommand,
+  ListIndexesCommand,
+  ListIndexesForMembersCommand,
+  ListManagedViewsCommand,
+  ListResourcesCommand,
+  ListServiceIndexesCommand,
+  ListServiceViewsCommand,
+  ListStreamingAccessForServicesCommand,
+  ListSupportedResourceTypesCommand,
+  ListTagsForResourceCommand,
+  ListViewsCommand,
+  SearchCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateIndexTypeCommand,
+  UpdateViewCommand,
+};
+const paginators = {
+  paginateGetResourceExplorerSetup,
+  paginateListIndexes,
+  paginateListIndexesForMembers,
+  paginateListManagedViews,
+  paginateListResources,
+  paginateListServiceIndexes,
+  paginateListServiceViews,
+  paginateListStreamingAccessForServices,
+  paginateListSupportedResourceTypes,
+  paginateListViews,
+  paginateSearch,
+};
+
+/**
+ * @public
+ */
+export interface ResourceExplorer2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ResourceExplorer2 {
+  /**
+   * @see {@link AssociateDefaultViewCommand}
+   */
+  associateDefaultView(
+    args: AssociateDefaultViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<AssociateDefaultViewCommandOutput>;
+  associateDefaultView(
+    args: AssociateDefaultViewCommandInput,
+    cb: (err: any, data?: AssociateDefaultViewCommandOutput) => void
+  ): void;
+  associateDefaultView(
+    args: AssociateDefaultViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: AssociateDefaultViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetViewCommand}
+   */
+  batchGetView(): Promise<BatchGetViewCommandOutput>;
+  batchGetView(
+    args: BatchGetViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<BatchGetViewCommandOutput>;
+  batchGetView(
+    args: BatchGetViewCommandInput,
+    cb: (err: any, data?: BatchGetViewCommandOutput) => void
+  ): void;
+  batchGetView(
+    args: BatchGetViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: BatchGetViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIndexCommand}
+   */
+  createIndex(): Promise<CreateIndexCommandOutput>;
+  createIndex(
+    args: CreateIndexCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<CreateIndexCommandOutput>;
+  createIndex(
+    args: CreateIndexCommandInput,
+    cb: (err: any, data?: CreateIndexCommandOutput) => void
+  ): void;
+  createIndex(
+    args: CreateIndexCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: CreateIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateResourceExplorerSetupCommand}
+   */
+  createResourceExplorerSetup(
+    args: CreateResourceExplorerSetupCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<CreateResourceExplorerSetupCommandOutput>;
+  createResourceExplorerSetup(
+    args: CreateResourceExplorerSetupCommandInput,
+    cb: (err: any, data?: CreateResourceExplorerSetupCommandOutput) => void
+  ): void;
+  createResourceExplorerSetup(
+    args: CreateResourceExplorerSetupCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: CreateResourceExplorerSetupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateViewCommand}
+   */
+  createView(
+    args: CreateViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<CreateViewCommandOutput>;
+  createView(
+    args: CreateViewCommandInput,
+    cb: (err: any, data?: CreateViewCommandOutput) => void
+  ): void;
+  createView(
+    args: CreateViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: CreateViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIndexCommand}
+   */
+  deleteIndex(
+    args: DeleteIndexCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<DeleteIndexCommandOutput>;
+  deleteIndex(
+    args: DeleteIndexCommandInput,
+    cb: (err: any, data?: DeleteIndexCommandOutput) => void
+  ): void;
+  deleteIndex(
+    args: DeleteIndexCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: DeleteIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourceExplorerSetupCommand}
+   */
+  deleteResourceExplorerSetup(): Promise<DeleteResourceExplorerSetupCommandOutput>;
+  deleteResourceExplorerSetup(
+    args: DeleteResourceExplorerSetupCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<DeleteResourceExplorerSetupCommandOutput>;
+  deleteResourceExplorerSetup(
+    args: DeleteResourceExplorerSetupCommandInput,
+    cb: (err: any, data?: DeleteResourceExplorerSetupCommandOutput) => void
+  ): void;
+  deleteResourceExplorerSetup(
+    args: DeleteResourceExplorerSetupCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: DeleteResourceExplorerSetupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteViewCommand}
+   */
+  deleteView(
+    args: DeleteViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<DeleteViewCommandOutput>;
+  deleteView(
+    args: DeleteViewCommandInput,
+    cb: (err: any, data?: DeleteViewCommandOutput) => void
+  ): void;
+  deleteView(
+    args: DeleteViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: DeleteViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateDefaultViewCommand}
+   */
+  disassociateDefaultView(): Promise<DisassociateDefaultViewCommandOutput>;
+  disassociateDefaultView(
+    args: DisassociateDefaultViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<DisassociateDefaultViewCommandOutput>;
+  disassociateDefaultView(
+    args: DisassociateDefaultViewCommandInput,
+    cb: (err: any, data?: DisassociateDefaultViewCommandOutput) => void
+  ): void;
+  disassociateDefaultView(
+    args: DisassociateDefaultViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: DisassociateDefaultViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAccountLevelServiceConfigurationCommand}
+   */
+  getAccountLevelServiceConfiguration(): Promise<GetAccountLevelServiceConfigurationCommandOutput>;
+  getAccountLevelServiceConfiguration(
+    args: GetAccountLevelServiceConfigurationCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetAccountLevelServiceConfigurationCommandOutput>;
+  getAccountLevelServiceConfiguration(
+    args: GetAccountLevelServiceConfigurationCommandInput,
+    cb: (err: any, data?: GetAccountLevelServiceConfigurationCommandOutput) => void
+  ): void;
+  getAccountLevelServiceConfiguration(
+    args: GetAccountLevelServiceConfigurationCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetAccountLevelServiceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDefaultViewCommand}
+   */
+  getDefaultView(): Promise<GetDefaultViewCommandOutput>;
+  getDefaultView(
+    args: GetDefaultViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetDefaultViewCommandOutput>;
+  getDefaultView(
+    args: GetDefaultViewCommandInput,
+    cb: (err: any, data?: GetDefaultViewCommandOutput) => void
+  ): void;
+  getDefaultView(
+    args: GetDefaultViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetDefaultViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIndexCommand}
+   */
+  getIndex(): Promise<GetIndexCommandOutput>;
+  getIndex(
+    args: GetIndexCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetIndexCommandOutput>;
+  getIndex(
+    args: GetIndexCommandInput,
+    cb: (err: any, data?: GetIndexCommandOutput) => void
+  ): void;
+  getIndex(
+    args: GetIndexCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetManagedViewCommand}
+   */
+  getManagedView(
+    args: GetManagedViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetManagedViewCommandOutput>;
+  getManagedView(
+    args: GetManagedViewCommandInput,
+    cb: (err: any, data?: GetManagedViewCommandOutput) => void
+  ): void;
+  getManagedView(
+    args: GetManagedViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetManagedViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceExplorerSetupCommand}
+   */
+  getResourceExplorerSetup(
+    args: GetResourceExplorerSetupCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetResourceExplorerSetupCommandOutput>;
+  getResourceExplorerSetup(
+    args: GetResourceExplorerSetupCommandInput,
+    cb: (err: any, data?: GetResourceExplorerSetupCommandOutput) => void
+  ): void;
+  getResourceExplorerSetup(
+    args: GetResourceExplorerSetupCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetResourceExplorerSetupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceIndexCommand}
+   */
+  getServiceIndex(): Promise<GetServiceIndexCommandOutput>;
+  getServiceIndex(
+    args: GetServiceIndexCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetServiceIndexCommandOutput>;
+  getServiceIndex(
+    args: GetServiceIndexCommandInput,
+    cb: (err: any, data?: GetServiceIndexCommandOutput) => void
+  ): void;
+  getServiceIndex(
+    args: GetServiceIndexCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetServiceIndexCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceViewCommand}
+   */
+  getServiceView(
+    args: GetServiceViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetServiceViewCommandOutput>;
+  getServiceView(
+    args: GetServiceViewCommandInput,
+    cb: (err: any, data?: GetServiceViewCommandOutput) => void
+  ): void;
+  getServiceView(
+    args: GetServiceViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetServiceViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetViewCommand}
+   */
+  getView(
+    args: GetViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<GetViewCommandOutput>;
+  getView(
+    args: GetViewCommandInput,
+    cb: (err: any, data?: GetViewCommandOutput) => void
+  ): void;
+  getView(
+    args: GetViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: GetViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIndexesCommand}
+   */
+  listIndexes(): Promise<ListIndexesCommandOutput>;
+  listIndexes(
+    args: ListIndexesCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListIndexesCommandOutput>;
+  listIndexes(
+    args: ListIndexesCommandInput,
+    cb: (err: any, data?: ListIndexesCommandOutput) => void
+  ): void;
+  listIndexes(
+    args: ListIndexesCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListIndexesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIndexesForMembersCommand}
+   */
+  listIndexesForMembers(
+    args: ListIndexesForMembersCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListIndexesForMembersCommandOutput>;
+  listIndexesForMembers(
+    args: ListIndexesForMembersCommandInput,
+    cb: (err: any, data?: ListIndexesForMembersCommandOutput) => void
+  ): void;
+  listIndexesForMembers(
+    args: ListIndexesForMembersCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListIndexesForMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListManagedViewsCommand}
+   */
+  listManagedViews(): Promise<ListManagedViewsCommandOutput>;
+  listManagedViews(
+    args: ListManagedViewsCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListManagedViewsCommandOutput>;
+  listManagedViews(
+    args: ListManagedViewsCommandInput,
+    cb: (err: any, data?: ListManagedViewsCommandOutput) => void
+  ): void;
+  listManagedViews(
+    args: ListManagedViewsCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListManagedViewsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResourcesCommand}
+   */
+  listResources(): Promise<ListResourcesCommandOutput>;
+  listResources(
+    args: ListResourcesCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListResourcesCommandOutput>;
+  listResources(
+    args: ListResourcesCommandInput,
+    cb: (err: any, data?: ListResourcesCommandOutput) => void
+  ): void;
+  listResources(
+    args: ListResourcesCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceIndexesCommand}
+   */
+  listServiceIndexes(): Promise<ListServiceIndexesCommandOutput>;
+  listServiceIndexes(
+    args: ListServiceIndexesCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListServiceIndexesCommandOutput>;
+  listServiceIndexes(
+    args: ListServiceIndexesCommandInput,
+    cb: (err: any, data?: ListServiceIndexesCommandOutput) => void
+  ): void;
+  listServiceIndexes(
+    args: ListServiceIndexesCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListServiceIndexesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceViewsCommand}
+   */
+  listServiceViews(): Promise<ListServiceViewsCommandOutput>;
+  listServiceViews(
+    args: ListServiceViewsCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListServiceViewsCommandOutput>;
+  listServiceViews(
+    args: ListServiceViewsCommandInput,
+    cb: (err: any, data?: ListServiceViewsCommandOutput) => void
+  ): void;
+  listServiceViews(
+    args: ListServiceViewsCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListServiceViewsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamingAccessForServicesCommand}
+   */
+  listStreamingAccessForServices(): Promise<ListStreamingAccessForServicesCommandOutput>;
+  listStreamingAccessForServices(
+    args: ListStreamingAccessForServicesCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListStreamingAccessForServicesCommandOutput>;
+  listStreamingAccessForServices(
+    args: ListStreamingAccessForServicesCommandInput,
+    cb: (err: any, data?: ListStreamingAccessForServicesCommandOutput) => void
+  ): void;
+  listStreamingAccessForServices(
+    args: ListStreamingAccessForServicesCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListStreamingAccessForServicesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSupportedResourceTypesCommand}
+   */
+  listSupportedResourceTypes(): Promise<ListSupportedResourceTypesCommandOutput>;
+  listSupportedResourceTypes(
+    args: ListSupportedResourceTypesCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListSupportedResourceTypesCommandOutput>;
+  listSupportedResourceTypes(
+    args: ListSupportedResourceTypesCommandInput,
+    cb: (err: any, data?: ListSupportedResourceTypesCommandOutput) => void
+  ): void;
+  listSupportedResourceTypes(
+    args: ListSupportedResourceTypesCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListSupportedResourceTypesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListViewsCommand}
+   */
+  listViews(): Promise<ListViewsCommandOutput>;
+  listViews(
+    args: ListViewsCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<ListViewsCommandOutput>;
+  listViews(
+    args: ListViewsCommandInput,
+    cb: (err: any, data?: ListViewsCommandOutput) => void
+  ): void;
+  listViews(
+    args: ListViewsCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: ListViewsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchCommand}
+   */
+  search(
+    args: SearchCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<SearchCommandOutput>;
+  search(
+    args: SearchCommandInput,
+    cb: (err: any, data?: SearchCommandOutput) => void
+  ): void;
+  search(
+    args: SearchCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: SearchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIndexTypeCommand}
+   */
+  updateIndexType(
+    args: UpdateIndexTypeCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<UpdateIndexTypeCommandOutput>;
+  updateIndexType(
+    args: UpdateIndexTypeCommandInput,
+    cb: (err: any, data?: UpdateIndexTypeCommandOutput) => void
+  ): void;
+  updateIndexType(
+    args: UpdateIndexTypeCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: UpdateIndexTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateViewCommand}
+   */
+  updateView(
+    args: UpdateViewCommandInput,
+    options?: ResourceExplorer2RequestOptions
+  ): Promise<UpdateViewCommandOutput>;
+  updateView(
+    args: UpdateViewCommandInput,
+    cb: (err: any, data?: UpdateViewCommandOutput) => void
+  ): void;
+  updateView(
+    args: UpdateViewCommandInput,
+    options: ResourceExplorer2RequestOptions,
+    cb: (err: any, data?: UpdateViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceExplorerSetupCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourceExplorerSetupCommandOutput}.
+   */
+  paginateGetResourceExplorerSetup(
+    args: GetResourceExplorerSetupCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourceExplorerSetupCommandOutput>;
+
+  /**
+   * @see {@link ListIndexesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIndexesCommandOutput}.
+   */
+  paginateListIndexes(
+    args?: ListIndexesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIndexesCommandOutput>;
+
+  /**
+   * @see {@link ListIndexesForMembersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIndexesForMembersCommandOutput}.
+   */
+  paginateListIndexesForMembers(
+    args: ListIndexesForMembersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIndexesForMembersCommandOutput>;
+
+  /**
+   * @see {@link ListManagedViewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedViewsCommandOutput}.
+   */
+  paginateListManagedViews(
+    args?: ListManagedViewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedViewsCommandOutput>;
+
+  /**
+   * @see {@link ListResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourcesCommandOutput}.
+   */
+  paginateListResources(
+    args?: ListResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceIndexesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceIndexesCommandOutput}.
+   */
+  paginateListServiceIndexes(
+    args?: ListServiceIndexesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceIndexesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceViewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceViewsCommandOutput}.
+   */
+  paginateListServiceViews(
+    args?: ListServiceViewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceViewsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamingAccessForServicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamingAccessForServicesCommandOutput}.
+   */
+  paginateListStreamingAccessForServices(
+    args?: ListStreamingAccessForServicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamingAccessForServicesCommandOutput>;
+
+  /**
+   * @see {@link ListSupportedResourceTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSupportedResourceTypesCommandOutput}.
+   */
+  paginateListSupportedResourceTypes(
+    args?: ListSupportedResourceTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSupportedResourceTypesCommandOutput>;
+
+  /**
+   * @see {@link ListViewsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListViewsCommandOutput}.
+   */
+  paginateListViews(
+    args?: ListViewsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListViewsCommandOutput>;
+
+  /**
+   * @see {@link SearchCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchCommandOutput}.
+   */
+  paginateSearch(
+    args: SearchCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchCommandOutput>;
+}
+
+/**
+ * <p>Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can explore your resources using an internet search engine-like experience. Examples of resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB tables. You can search for your resources using resource metadata like names, tags, and IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn the service on, to simplify your cross-Region workloads.</p> <p>Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which you turn on Resource Explorer. Resource Explorer <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index">creates and maintains an index</a> in each Region, with the details of that Region's resources.</p> <p>You can <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">search across all of the indexed Regions in your account</a> by designating one of your Amazon Web Services Regions to contain the aggregator index for the account. When you <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html">promote a local index in a Region to become the aggregator index for the account</a>, Resource Explorer automatically replicates the index information from all local indexes in the other Regions to the aggregator index. Therefore, the Region with the aggregator index has a copy of all resource information for all Regions in the account where you turned on Resource Explorer. As a result, views in the aggregator index Region include resources from all of the indexed Regions in your account.</p> <p>For more information about Amazon Web Services Resource Explorer, including how to enable and configure the service, see the <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/">Amazon Web Services Resource Explorer User Guide</a>.</p>
+ * @public
+ */
+export class ResourceExplorer2 extends ResourceExplorer2Client implements ResourceExplorer2 {}
+createAggregatedClient(commands, ResourceExplorer2, { paginators });

@@ -1,41 +1,42 @@
-import { getIdNormalizerPlugin } from "@aws-sdk/middleware-sdk-route53";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTrafficPolicyRequest, DeleteTrafficPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteTrafficPolicyCommand,
-  serializeAws_restXmlDeleteTrafficPolicyCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTrafficPolicyRequest, DeleteTrafficPolicyResponse } from "../models/models_0";
+import { DeleteTrafficPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTrafficPolicyCommand}.
+ */
 export interface DeleteTrafficPolicyCommandInput extends DeleteTrafficPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTrafficPolicyCommand}.
+ */
 export interface DeleteTrafficPolicyCommandOutput extends DeleteTrafficPolicyResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes a traffic policy.</p>
- * 		       <p>When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that it has been deleted. However, Route 53 never fully deletes
- * 			the traffic policy. Note the following:</p>
- * 		       <ul>
+ *          <p>When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that
+ * 			it has been deleted. However, Route 53 never fully deletes the traffic policy. Note the
+ * 			following:</p>
+ *          <ul>
  *             <li>
  *                <p>Deleted traffic policies aren't listed if you run <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListTrafficPolicies.html">ListTrafficPolicies</a>.</p>
  *             </li>
  *             <li>
- *                <p>	There's no way to get a list of deleted policies.</p>
+ *                <p> There's no way to get a list of deleted policies.</p>
  *             </li>
  *             <li>
- *                <p>If you retain the ID of the policy, you can get information about the policy, including the traffic policy document, by running
- * 				<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html">GetTrafficPolicy</a>.</p>
+ *                <p>If you retain the ID of the policy, you can get information about the policy,
+ * 					including the traffic policy document, by running <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html">GetTrafficPolicy</a>.</p>
  *             </li>
  *          </ul>
  * @example
@@ -43,69 +44,60 @@ export interface DeleteTrafficPolicyCommandOutput extends DeleteTrafficPolicyRes
  * ```javascript
  * import { Route53Client, DeleteTrafficPolicyCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, DeleteTrafficPolicyCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // DeleteTrafficPolicyRequest
+ *   Id: "STRING_VALUE", // required
+ *   Version: Number("int"), // required
+ * };
  * const command = new DeleteTrafficPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteTrafficPolicyCommandInput - {@link DeleteTrafficPolicyCommandInput}
+ * @returns {@link DeleteTrafficPolicyCommandOutput}
  * @see {@link DeleteTrafficPolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteTrafficPolicyCommandOutput} for command's `response` shape.
- * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link ConcurrentModification} (client fault)
+ *  <p>Another user submitted a request to create, update, or delete the object at the same
+ * 			time that you did. Retry the request. </p>
+ *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link NoSuchTrafficPolicy} (client fault)
+ *  <p>No traffic policy exists with the specified ID.</p>
+ *
+ * @throws {@link TrafficPolicyInUse} (client fault)
+ *  <p>One or more traffic policy instances were created by using the specified traffic
+ * 			policy.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTrafficPolicyCommand extends $Command<
-  DeleteTrafficPolicyCommandInput,
-  DeleteTrafficPolicyCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTrafficPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTrafficPolicyCommandInput, DeleteTrafficPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getIdNormalizerPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "DeleteTrafficPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTrafficPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTrafficPolicyResponse.filterSensitiveLog,
+export class DeleteTrafficPolicyCommand extends command<DeleteTrafficPolicyCommandInput, DeleteTrafficPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTrafficPolicy",
+  DeleteTrafficPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTrafficPolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTrafficPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteTrafficPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTrafficPolicyCommandOutput> {
-    return deserializeAws_restXmlDeleteTrafficPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTrafficPolicyCommandInput;
+      output: DeleteTrafficPolicyCommandOutput;
+    };
+  };
 }

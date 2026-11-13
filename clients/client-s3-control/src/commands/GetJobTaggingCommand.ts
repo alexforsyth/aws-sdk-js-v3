@@ -1,34 +1,39 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetJobTaggingRequest, GetJobTaggingResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetJobTaggingCommand,
-  serializeAws_restXmlGetJobTaggingCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { GetJobTaggingRequest, GetJobTaggingResult } from "../models/models_0";
+import { GetJobTagging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJobTaggingCommand}.
+ */
 export interface GetJobTaggingCommandInput extends GetJobTaggingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetJobTaggingCommand}.
+ */
 export interface GetJobTaggingCommandOutput extends GetJobTaggingResult, __MetadataBearer {}
 
 /**
- * <p>Returns the tags on an S3 Batch Operations job. To use this operation, you must have
- *          permission to perform the <code>s3:GetJobTagging</code> action. For more information, see
- *             <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
- *             access and labeling jobs using tags</a> in the
- *          <i>Amazon S3 User Guide</i>.</p>
- *          <p></p>
+ * <p>Returns the tags on an S3 Batch Operations job. </p>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <p>To use the
+ *                   <code>GetJobTagging</code> operation, you must have permission to
+ *                   perform the <code>s3:GetJobTagging</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
+ *                      access and labeling jobs using tags</a> in the
+ *                   <i>Amazon S3 User Guide</i>.</p>
+ *             </dd>
+ *          </dl>
  *          <p>Related actions include:</p>
  *          <ul>
  *             <li>
@@ -52,69 +57,62 @@ export interface GetJobTaggingCommandOutput extends GetJobTaggingResult, __Metad
  * ```javascript
  * import { S3ControlClient, GetJobTaggingCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetJobTaggingCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetJobTaggingRequest
+ *   AccountId: "STRING_VALUE",
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new GetJobTaggingCommand(input);
  * const response = await client.send(command);
+ * // { // GetJobTaggingResult
+ * //   Tags: [ // S3TagSet
+ * //     { // S3Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetJobTaggingCommandInput - {@link GetJobTaggingCommandInput}
+ * @returns {@link GetJobTaggingCommandOutput}
  * @see {@link GetJobTaggingCommandInput} for command's `input` shape.
  * @see {@link GetJobTaggingCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetJobTaggingCommand extends $Command<
-  GetJobTaggingCommandInput,
-  GetJobTaggingCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetJobTaggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetJobTaggingCommandInput, GetJobTaggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetJobTaggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetJobTaggingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetJobTaggingResult.filterSensitiveLog,
+export class GetJobTaggingCommand extends command<GetJobTaggingCommandInput, GetJobTaggingCommandOutput>(
+  _ep0,
+  _mw1,
+  "GetJobTagging",
+  GetJobTagging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobTaggingRequest;
+      output: GetJobTaggingResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetJobTaggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetJobTaggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetJobTaggingCommandOutput> {
-    return deserializeAws_restXmlGetJobTaggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetJobTaggingCommandInput;
+      output: GetJobTaggingCommandOutput;
+    };
+  };
 }

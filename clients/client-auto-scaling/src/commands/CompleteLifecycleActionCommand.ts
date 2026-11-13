@@ -1,126 +1,134 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { CompleteLifecycleActionAnswer, CompleteLifecycleActionType } from "../models/models_0";
-import {
-  deserializeAws_queryCompleteLifecycleActionCommand,
-  serializeAws_queryCompleteLifecycleActionCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CompleteLifecycleActionAnswer, CompleteLifecycleActionType } from "../models/models_0";
+import { CompleteLifecycleAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CompleteLifecycleActionCommand}.
+ */
 export interface CompleteLifecycleActionCommandInput extends CompleteLifecycleActionType {}
+/**
+ * @public
+ *
+ * The output of {@link CompleteLifecycleActionCommand}.
+ */
 export interface CompleteLifecycleActionCommandOutput extends CompleteLifecycleActionAnswer, __MetadataBearer {}
 
 /**
  * <p>Completes the lifecycle action for the specified token or instance with the specified
  *             result.</p>
- *         <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling
+ *          <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling
  *             group:</p>
- *         <ol>
+ *          <ol>
  *             <li>
- *                 <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to
- *                     invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates
- *                     instances.</p>
+ *                <p>(Optional) Create a launch template or launch configuration with a user data
+ *                     script that runs while an instance is in a wait state due to a lifecycle
+ *                     hook.</p>
  *             </li>
  *             <li>
- *                 <p>(Optional) Create a notification target and an IAM role. The target can be
- *                     either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to
- *                     publish lifecycle notifications to the target.</p>
+ *                <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke
+ *                     your Lambda function when an instance is put into a wait state due to a
+ *                     lifecycle hook.</p>
  *             </li>
  *             <li>
- *                 <p>Create the lifecycle hook. Specify whether the hook is used when the instances
+ *                <p>(Optional) Create a notification target and an IAM role. The target can be
+ *                     either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish
+ *                     lifecycle notifications to the target.</p>
+ *             </li>
+ *             <li>
+ *                <p>Create the lifecycle hook. Specify whether the hook is used when the instances
  *                     launch or terminate.</p>
  *             </li>
  *             <li>
- *                 <p>If you need more time, record the lifecycle action heartbeat to keep the
- *                     instance in a pending state.</p>
+ *                <p>If you need more time, record the lifecycle action heartbeat to keep the
+ *                     instance in a wait state.</p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <b>If you finish before the timeout period ends, complete the
- *                         lifecycle action.</b>
- *                 </p>
+ *                <p>
+ *                   <b>If you finish before the timeout period ends, send a
+ *                         callback by using the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CompleteLifecycleAction.html">CompleteLifecycleAction</a> API
+ *                         call.</b>
+ *                </p>
  *             </li>
  *          </ol>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling lifecycle
- *                 hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html">Complete a lifecycle
+ *                 action</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AutoScalingClient, CompleteLifecycleActionCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, CompleteLifecycleActionCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = { // CompleteLifecycleActionType
+ *   LifecycleHookName: "STRING_VALUE", // required
+ *   AutoScalingGroupName: "STRING_VALUE", // required
+ *   LifecycleActionToken: "STRING_VALUE",
+ *   LifecycleActionResult: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE",
+ * };
  * const command = new CompleteLifecycleActionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CompleteLifecycleActionCommandInput - {@link CompleteLifecycleActionCommandInput}
+ * @returns {@link CompleteLifecycleActionCommandOutput}
  * @see {@link CompleteLifecycleActionCommandInput} for command's `input` shape.
  * @see {@link CompleteLifecycleActionCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @example To complete the lifecycle action
+ * ```javascript
+ * // This example notifies Auto Scaling that the specified lifecycle action is complete so that it can finish launching or terminating the instance.
+ * const input = {
+ *   AutoScalingGroupName: "my-auto-scaling-group",
+ *   LifecycleActionResult: "CONTINUE",
+ *   LifecycleActionToken: "bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635",
+ *   LifecycleHookName: "my-lifecycle-hook"
+ * };
+ * const command = new CompleteLifecycleActionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CompleteLifecycleActionCommand extends $Command<
-  CompleteLifecycleActionCommandInput,
-  CompleteLifecycleActionCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CompleteLifecycleActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CompleteLifecycleActionCommandInput, CompleteLifecycleActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "CompleteLifecycleActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CompleteLifecycleActionType.filterSensitiveLog,
-      outputFilterSensitiveLog: CompleteLifecycleActionAnswer.filterSensitiveLog,
+export class CompleteLifecycleActionCommand extends command<CompleteLifecycleActionCommandInput, CompleteLifecycleActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CompleteLifecycleAction",
+  CompleteLifecycleAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CompleteLifecycleActionType;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CompleteLifecycleActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCompleteLifecycleActionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CompleteLifecycleActionCommandOutput> {
-    return deserializeAws_queryCompleteLifecycleActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CompleteLifecycleActionCommandInput;
+      output: CompleteLifecycleActionCommandOutput;
+    };
+  };
 }

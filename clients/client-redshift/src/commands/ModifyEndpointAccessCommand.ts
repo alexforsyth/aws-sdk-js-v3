@@ -1,25 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EndpointAccess } from "../models/models_0";
-import { ModifyEndpointAccessMessage } from "../models/models_1";
-import {
-  deserializeAws_queryModifyEndpointAccessCommand,
-  serializeAws_queryModifyEndpointAccessCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EndpointAccess } from "../models/models_0";
+import type { ModifyEndpointAccessMessage } from "../models/models_1";
+import { ModifyEndpointAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyEndpointAccessCommand}.
+ */
 export interface ModifyEndpointAccessCommandInput extends ModifyEndpointAccessMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyEndpointAccessCommand}.
+ */
 export interface ModifyEndpointAccessCommandOutput extends EndpointAccess, __MetadataBearer {}
 
 /**
@@ -29,68 +30,95 @@ export interface ModifyEndpointAccessCommandOutput extends EndpointAccess, __Met
  * ```javascript
  * import { RedshiftClient, ModifyEndpointAccessCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, ModifyEndpointAccessCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // ModifyEndpointAccessMessage
+ *   EndpointName: "STRING_VALUE", // required
+ *   VpcSecurityGroupIds: [ // VpcSecurityGroupIdList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifyEndpointAccessCommand(input);
  * const response = await client.send(command);
+ * // { // EndpointAccess
+ * //   ClusterIdentifier: "STRING_VALUE",
+ * //   ResourceOwner: "STRING_VALUE",
+ * //   SubnetGroupName: "STRING_VALUE",
+ * //   EndpointStatus: "STRING_VALUE",
+ * //   EndpointName: "STRING_VALUE",
+ * //   EndpointCreateTime: new Date("TIMESTAMP"),
+ * //   Port: Number("int"),
+ * //   Address: "STRING_VALUE",
+ * //   VpcSecurityGroups: [ // VpcSecurityGroupMembershipList
+ * //     { // VpcSecurityGroupMembership
+ * //       VpcSecurityGroupId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   VpcEndpoint: { // VpcEndpoint
+ * //     VpcEndpointId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     NetworkInterfaces: [ // NetworkInterfaceList
+ * //       { // NetworkInterface
+ * //         NetworkInterfaceId: "STRING_VALUE",
+ * //         SubnetId: "STRING_VALUE",
+ * //         PrivateIpAddress: "STRING_VALUE",
+ * //         AvailabilityZone: "STRING_VALUE",
+ * //         Ipv6Address: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyEndpointAccessCommandInput - {@link ModifyEndpointAccessCommandInput}
+ * @returns {@link ModifyEndpointAccessCommandOutput}
  * @see {@link ModifyEndpointAccessCommandInput} for command's `input` shape.
  * @see {@link ModifyEndpointAccessCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link EndpointNotFoundFault} (client fault)
+ *  <p>The endpoint name doesn't refer to an existing endpoint.</p>
+ *
+ * @throws {@link InvalidClusterSecurityGroupStateFault} (client fault)
+ *  <p>The state of the cluster security group is not <code>available</code>. </p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link InvalidEndpointStateFault} (client fault)
+ *  <p>The status of the endpoint is not valid.</p>
+ *
+ * @throws {@link UnauthorizedOperation} (client fault)
+ *  <p>Your account is not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyEndpointAccessCommand extends $Command<
-  ModifyEndpointAccessCommandInput,
-  ModifyEndpointAccessCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyEndpointAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyEndpointAccessCommandInput, ModifyEndpointAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "ModifyEndpointAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyEndpointAccessMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EndpointAccess.filterSensitiveLog,
+export class ModifyEndpointAccessCommand extends command<ModifyEndpointAccessCommandInput, ModifyEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyEndpointAccess",
+  ModifyEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyEndpointAccessMessage;
+      output: EndpointAccess;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyEndpointAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifyEndpointAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyEndpointAccessCommandOutput> {
-    return deserializeAws_queryModifyEndpointAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyEndpointAccessCommandInput;
+      output: ModifyEndpointAccessCommandOutput;
+    };
+  };
 }

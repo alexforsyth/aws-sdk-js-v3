@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { UpdateProjectRequest, UpdateProjectResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateProjectCommand,
-  serializeAws_json1_1UpdateProjectCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateProjectRequest, UpdateProjectResult } from "../models/models_0";
+import { UpdateProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateProjectCommand}.
+ */
 export interface UpdateProjectCommandInput extends UpdateProjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateProjectCommand}.
+ */
 export interface UpdateProjectCommandOutput extends UpdateProjectResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,98 @@ export interface UpdateProjectCommandOutput extends UpdateProjectResult, __Metad
  * ```javascript
  * import { DeviceFarmClient, UpdateProjectCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, UpdateProjectCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // UpdateProjectRequest
+ *   arn: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   defaultJobTimeoutMinutes: Number("int"),
+ *   vpcConfig: { // VpcConfig
+ *     securityGroupIds: [ // VpcSecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     subnetIds: [ // VpcSubnetIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     vpcId: "STRING_VALUE", // required
+ *   },
+ *   environmentVariables: [ // EnvironmentVariables
+ *     { // EnvironmentVariable
+ *       name: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   executionRoleArn: "STRING_VALUE",
+ * };
  * const command = new UpdateProjectCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateProjectResult
+ * //   project: { // Project
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     defaultJobTimeoutMinutes: Number("int"),
+ * //     created: new Date("TIMESTAMP"),
+ * //     vpcConfig: { // VpcConfig
+ * //       securityGroupIds: [ // VpcSecurityGroupIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       subnetIds: [ // VpcSubnetIds // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       vpcId: "STRING_VALUE", // required
+ * //     },
+ * //     environmentVariables: [ // EnvironmentVariables
+ * //       { // EnvironmentVariable
+ * //         name: "STRING_VALUE", // required
+ * //         value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     executionRoleArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateProjectCommandInput - {@link UpdateProjectCommandInput}
+ * @returns {@link UpdateProjectCommandOutput}
  * @see {@link UpdateProjectCommandInput} for command's `input` shape.
  * @see {@link UpdateProjectCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateProjectCommand extends $Command<
-  UpdateProjectCommandInput,
-  UpdateProjectCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateProjectCommandInput, UpdateProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "UpdateProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateProjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateProjectResult.filterSensitiveLog,
+export class UpdateProjectCommand extends command<UpdateProjectCommandInput, UpdateProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateProject",
+  UpdateProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProjectRequest;
+      output: UpdateProjectResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateProjectCommandOutput> {
-    return deserializeAws_json1_1UpdateProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateProjectCommandInput;
+      output: UpdateProjectCommandOutput;
+    };
+  };
 }

@@ -1,98 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { DescribeGlobalClustersMessage, GlobalClustersMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeGlobalClustersCommand,
-  serializeAws_queryDescribeGlobalClustersCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGlobalClustersMessage, GlobalClustersMessage } from "../models/models_0";
+import { DescribeGlobalClusters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGlobalClustersCommand}.
+ */
 export interface DescribeGlobalClustersCommandInput extends DescribeGlobalClustersMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGlobalClustersCommand}.
+ */
 export interface DescribeGlobalClustersCommandOutput extends GlobalClustersMessage, __MetadataBearer {}
 
 /**
  * <p>Returns information about Amazon DocumentDB global  clusters. This API supports pagination.</p>
- *         <note>
+ *          <note>
  *             <p>This action only applies to Amazon DocumentDB clusters.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DocDBClient, DescribeGlobalClustersCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, DescribeGlobalClustersCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // DescribeGlobalClustersMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeGlobalClustersCommand(input);
  * const response = await client.send(command);
+ * // { // GlobalClustersMessage
+ * //   Marker: "STRING_VALUE",
+ * //   GlobalClusters: [ // GlobalClusterList
+ * //     { // GlobalCluster
+ * //       GlobalClusterIdentifier: "STRING_VALUE",
+ * //       GlobalClusterResourceId: "STRING_VALUE",
+ * //       GlobalClusterArn: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Engine: "STRING_VALUE",
+ * //       EngineVersion: "STRING_VALUE",
+ * //       DatabaseName: "STRING_VALUE",
+ * //       StorageEncrypted: true || false,
+ * //       DeletionProtection: true || false,
+ * //       GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //         { // GlobalClusterMember
+ * //           DBClusterArn: "STRING_VALUE",
+ * //           Readers: [ // ReadersArnList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           IsWriter: true || false,
+ * //           SynchronizationStatus: "connected" || "pending-resync",
+ * //         },
+ * //       ],
+ * //       FailoverState: { // FailoverState
+ * //         Status: "pending" || "failing-over" || "cancelling",
+ * //         FromDbClusterArn: "STRING_VALUE",
+ * //         ToDbClusterArn: "STRING_VALUE",
+ * //         IsDataLossAllowed: true || false,
+ * //       },
+ * //       TagList: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeGlobalClustersCommandInput - {@link DescribeGlobalClustersCommandInput}
+ * @returns {@link DescribeGlobalClustersCommandOutput}
  * @see {@link DescribeGlobalClustersCommandInput} for command's `input` shape.
  * @see {@link DescribeGlobalClustersCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global cluster.</p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGlobalClustersCommand extends $Command<
-  DescribeGlobalClustersCommandInput,
-  DescribeGlobalClustersCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGlobalClustersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGlobalClustersCommandInput, DescribeGlobalClustersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "DescribeGlobalClustersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGlobalClustersMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: GlobalClustersMessage.filterSensitiveLog,
+export class DescribeGlobalClustersCommand extends command<DescribeGlobalClustersCommandInput, DescribeGlobalClustersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGlobalClusters",
+  DescribeGlobalClusters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGlobalClustersMessage;
+      output: GlobalClustersMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGlobalClustersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeGlobalClustersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeGlobalClustersCommandOutput> {
-    return deserializeAws_queryDescribeGlobalClustersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGlobalClustersCommandInput;
+      output: DescribeGlobalClustersCommandOutput;
+    };
+  };
 }

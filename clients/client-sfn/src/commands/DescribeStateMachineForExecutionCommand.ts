@@ -1,30 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeStateMachineForExecutionInput, DescribeStateMachineForExecutionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeStateMachineForExecutionCommand,
-  serializeAws_json1_0DescribeStateMachineForExecutionCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
-
-export interface DescribeStateMachineForExecutionCommandInput extends DescribeStateMachineForExecutionInput {}
-export interface DescribeStateMachineForExecutionCommandOutput
-  extends DescribeStateMachineForExecutionOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStateMachineForExecutionInput, DescribeStateMachineForExecutionOutput } from "../models/models_0";
+import { DescribeStateMachineForExecution$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes the state machine associated with a specific execution.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStateMachineForExecutionCommand}.
+ */
+export interface DescribeStateMachineForExecutionCommandInput extends DescribeStateMachineForExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStateMachineForExecutionCommand}.
+ */
+export interface DescribeStateMachineForExecutionCommandOutput extends DescribeStateMachineForExecutionOutput, __MetadataBearer {}
+
+/**
+ * <p>Provides information about a state machine's definition, its execution role ARN, and
+ *       configuration. If a Map Run dispatched the execution, this action returns the Map Run
+ *       Amazon Resource Name (ARN) in the response. The state machine returned is the state machine associated with the
+ *       Map Run.</p>
  *          <note>
  *             <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>
  *          </note>
@@ -34,74 +36,94 @@ export interface DescribeStateMachineForExecutionCommandOutput
  * ```javascript
  * import { SFNClient, DescribeStateMachineForExecutionCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, DescribeStateMachineForExecutionCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // DescribeStateMachineForExecutionInput
+ *   executionArn: "STRING_VALUE", // required
+ *   includedData: "ALL_DATA" || "METADATA_ONLY",
+ * };
  * const command = new DescribeStateMachineForExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStateMachineForExecutionOutput
+ * //   stateMachineArn: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   definition: "STRING_VALUE", // required
+ * //   roleArn: "STRING_VALUE", // required
+ * //   updateDate: new Date("TIMESTAMP"), // required
+ * //   loggingConfiguration: { // LoggingConfiguration
+ * //     level: "ALL" || "ERROR" || "FATAL" || "OFF",
+ * //     includeExecutionData: true || false,
+ * //     destinations: [ // LogDestinationList
+ * //       { // LogDestination
+ * //         cloudWatchLogsLogGroup: { // CloudWatchLogsLogGroup
+ * //           logGroupArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   tracingConfiguration: { // TracingConfiguration
+ * //     enabled: true || false,
+ * //   },
+ * //   mapRunArn: "STRING_VALUE",
+ * //   label: "STRING_VALUE",
+ * //   revisionId: "STRING_VALUE",
+ * //   encryptionConfiguration: { // EncryptionConfiguration
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     kmsDataKeyReusePeriodSeconds: Number("int"),
+ * //     type: "AWS_OWNED_KEY" || "CUSTOMER_MANAGED_KMS_KEY", // required
+ * //   },
+ * //   variableReferences: { // VariableReferences
+ * //     "<keys>": [ // VariableNameList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeStateMachineForExecutionCommandInput - {@link DescribeStateMachineForExecutionCommandInput}
+ * @returns {@link DescribeStateMachineForExecutionCommandOutput}
  * @see {@link DescribeStateMachineForExecutionCommandInput} for command's `input` shape.
  * @see {@link DescribeStateMachineForExecutionCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link ExecutionDoesNotExist} (client fault)
+ *  <p>The specified execution does not exist.</p>
+ *
+ * @throws {@link InvalidArn} (client fault)
+ *  <p>The provided Amazon Resource Name (ARN) is not valid.</p>
+ *
+ * @throws {@link KmsAccessDeniedException} (client fault)
+ *  <p>Either your KMS key policy or API caller does not have the required permissions.</p>
+ *
+ * @throws {@link KmsInvalidStateException} (client fault)
+ *  <p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>
+ *
+ * @throws {@link KmsThrottlingException} (client fault)
+ *  <p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStateMachineForExecutionCommand extends $Command<
-  DescribeStateMachineForExecutionCommandInput,
-  DescribeStateMachineForExecutionCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStateMachineForExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStateMachineForExecutionCommandInput, DescribeStateMachineForExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "DescribeStateMachineForExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStateMachineForExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStateMachineForExecutionOutput.filterSensitiveLog,
+export class DescribeStateMachineForExecutionCommand extends command<DescribeStateMachineForExecutionCommandInput, DescribeStateMachineForExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStateMachineForExecution",
+  DescribeStateMachineForExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStateMachineForExecutionInput;
+      output: DescribeStateMachineForExecutionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeStateMachineForExecutionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeStateMachineForExecutionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeStateMachineForExecutionCommandOutput> {
-    return deserializeAws_json1_0DescribeStateMachineForExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStateMachineForExecutionCommandInput;
+      output: DescribeStateMachineForExecutionCommandOutput;
+    };
+  };
 }

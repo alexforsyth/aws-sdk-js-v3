@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { UpdateAddonRequest, UpdateAddonResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateAddonCommand,
-  serializeAws_restJson1UpdateAddonCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAddonRequest, UpdateAddonResponse } from "../models/models_0";
+import { UpdateAddon$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAddonCommand}.
+ */
 export interface UpdateAddonCommandInput extends UpdateAddonRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAddonCommand}.
+ */
 export interface UpdateAddonCommandOutput extends UpdateAddonResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,108 @@ export interface UpdateAddonCommandOutput extends UpdateAddonResponse, __Metadat
  * ```javascript
  * import { EKSClient, UpdateAddonCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, UpdateAddonCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // UpdateAddonRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   addonName: "STRING_VALUE", // required
+ *   addonVersion: "STRING_VALUE",
+ *   serviceAccountRoleArn: "STRING_VALUE",
+ *   resolveConflicts: "OVERWRITE" || "NONE" || "PRESERVE",
+ *   clientRequestToken: "STRING_VALUE",
+ *   configurationValues: "STRING_VALUE",
+ *   podIdentityAssociations: [ // AddonPodIdentityAssociationsList
+ *     { // AddonPodIdentityAssociations
+ *       serviceAccount: "STRING_VALUE", // required
+ *       roleArn: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new UpdateAddonCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAddonResponse
+ * //   update: { // Update
+ * //     id: "STRING_VALUE",
+ * //     status: "InProgress" || "Failed" || "Cancelled" || "Successful",
+ * //     type: "VersionUpdate" || "EndpointAccessUpdate" || "LoggingUpdate" || "ConfigUpdate" || "AssociateIdentityProviderConfig" || "DisassociateIdentityProviderConfig" || "AssociateEncryptionConfig" || "AddonUpdate" || "VpcConfigUpdate" || "AccessConfigUpdate" || "UpgradePolicyUpdate" || "ZonalShiftConfigUpdate" || "AutoModeUpdate" || "RemoteNetworkConfigUpdate" || "DeletionProtectionUpdate" || "CapabilityUpdate" || "ControlPlaneScalingConfigUpdate" || "VendedLogsUpdate" || "ControlPlaneEgressUpdate" || "VersionRollback" || "ControlPlaneComponentConfigUpdate" || "CertificateAuthorityUpdate",
+ * //     params: [ // UpdateParams
+ * //       { // UpdateParam
+ * //         type: "Version" || "PlatformVersion" || "EndpointPrivateAccess" || "EndpointPublicAccess" || "ClusterLogging" || "DesiredSize" || "LabelsToAdd" || "LabelsToRemove" || "TaintsToAdd" || "TaintsToRemove" || "MaxSize" || "MinSize" || "ReleaseVersion" || "PublicAccessCidrs" || "LaunchTemplateName" || "LaunchTemplateVersion" || "IdentityProviderConfig" || "EncryptionConfig" || "AddonVersion" || "ServiceAccountRoleArn" || "ResolveConflicts" || "MaxUnavailable" || "MaxUnavailablePercentage" || "NodeRepairEnabled" || "UpdateStrategy" || "ConfigurationValues" || "SecurityGroups" || "Subnets" || "AuthenticationMode" || "PodIdentityAssociations" || "UpgradePolicy" || "ZonalShiftConfig" || "ComputeConfig" || "StorageConfig" || "KubernetesNetworkConfig" || "RemoteNetworkConfig" || "DeletionProtection" || "NodeRepairConfig" || "RoleArn" || "RoleMappingsToAddOrUpdate" || "RoleMappingsToRemove" || "NetworkAccess" || "VendedLogs" || "UpdatedTier" || "PreviousTier" || "EnableCrossNamespace" || "DisabledServices" || "WarmPoolEnabled" || "WarmPoolMaxGroupPreparedCapacity" || "WarmPoolMinSize" || "WarmPoolState" || "WarmPoolReuseOnScaleIn" || "ControlPlaneEgressMode" || "KubeApiServerConfig" || "KubeSchedulerConfig" || "KubeControllerManagerConfig" || "ActiveCertificateAuthority" || "TrustedCertificateAuthorities" || "CertificateAuthorityId" || "SigningStatus",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     errors: [ // ErrorDetails
+ * //       { // ErrorDetail
+ * //         errorCode: "SubnetNotFound" || "SecurityGroupNotFound" || "EniLimitReached" || "IpNotAvailable" || "AccessDenied" || "OperationNotPermitted" || "VpcIdNotFound" || "Unknown" || "NodeCreationFailure" || "PodEvictionFailure" || "InsufficientFreeAddresses" || "ClusterUnreachable" || "InsufficientNumberOfReplicas" || "ConfigurationConflict" || "AdmissionRequestDenied" || "UnsupportedAddonModification" || "K8sResourceNotFound",
+ * //         errorMessage: "STRING_VALUE",
+ * //         resourceIds: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     cancellation: { // Cancellation
+ * //       status: "InProgress" || "Failed" || "Successful",
+ * //       reason: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateAddonCommandInput - {@link UpdateAddonCommandInput}
+ * @returns {@link UpdateAddonCommandOutput}
  * @see {@link UpdateAddonCommandInput} for command's `input` shape.
  * @see {@link UpdateAddonCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid given the state of the cluster. Check the state of the cluster
+ *             and the associated operations.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAddonCommand extends $Command<
-  UpdateAddonCommandInput,
-  UpdateAddonCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAddonCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAddonCommandInput, UpdateAddonCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "UpdateAddonCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAddonRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAddonResponse.filterSensitiveLog,
+export class UpdateAddonCommand extends command<UpdateAddonCommandInput, UpdateAddonCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAddon",
+  UpdateAddon$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAddonRequest;
+      output: UpdateAddonResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAddonCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateAddonCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateAddonCommandOutput> {
-    return deserializeAws_restJson1UpdateAddonCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAddonCommandInput;
+      output: UpdateAddonCommandOutput;
+    };
+  };
 }

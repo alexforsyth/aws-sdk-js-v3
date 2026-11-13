@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { PutContainerPolicyInput, PutContainerPolicyOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutContainerPolicyCommand,
-  serializeAws_json1_1PutContainerPolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutContainerPolicyInput, PutContainerPolicyOutput } from "../models/models_0";
+import { PutContainerPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutContainerPolicyCommand}.
+ */
 export interface PutContainerPolicyCommandInput extends PutContainerPolicyInput {}
+/**
+ * @public
+ *
+ * The output of {@link PutContainerPolicyCommand}.
+ */
 export interface PutContainerPolicyCommandOutput extends PutContainerPolicyOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +35,56 @@ export interface PutContainerPolicyCommandOutput extends PutContainerPolicyOutpu
  * ```javascript
  * import { MediaStoreClient, PutContainerPolicyCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, PutContainerPolicyCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // PutContainerPolicyInput
+ *   ContainerName: "STRING_VALUE", // required
+ *   Policy: "STRING_VALUE", // required
+ * };
  * const command = new PutContainerPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutContainerPolicyCommandInput - {@link PutContainerPolicyCommandInput}
+ * @returns {@link PutContainerPolicyCommandOutput}
  * @see {@link PutContainerPolicyCommandInput} for command's `input` shape.
  * @see {@link PutContainerPolicyCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerInUseException} (client fault)
+ *  <p>The container that you specified in the request already exists or is being
+ *          updated.</p>
+ *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The container that you specified in the request does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class PutContainerPolicyCommand extends $Command<
-  PutContainerPolicyCommandInput,
-  PutContainerPolicyCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutContainerPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutContainerPolicyCommandInput, PutContainerPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "PutContainerPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutContainerPolicyInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PutContainerPolicyOutput.filterSensitiveLog,
+export class PutContainerPolicyCommand extends command<PutContainerPolicyCommandInput, PutContainerPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutContainerPolicy",
+  PutContainerPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutContainerPolicyInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutContainerPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutContainerPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutContainerPolicyCommandOutput> {
-    return deserializeAws_json1_1PutContainerPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutContainerPolicyCommandInput;
+      output: PutContainerPolicyCommandOutput;
+    };
+  };
 }

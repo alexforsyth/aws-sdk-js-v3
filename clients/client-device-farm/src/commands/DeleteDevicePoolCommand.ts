@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { DeleteDevicePoolRequest, DeleteDevicePoolResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteDevicePoolCommand,
-  serializeAws_json1_1DeleteDevicePoolCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDevicePoolRequest, DeleteDevicePoolResult } from "../models/models_0";
+import { DeleteDevicePool$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDevicePoolCommand}.
+ */
 export interface DeleteDevicePoolCommandInput extends DeleteDevicePoolRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDevicePoolCommand}.
+ */
 export interface DeleteDevicePoolCommandOutput extends DeleteDevicePoolResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,70 @@ export interface DeleteDevicePoolCommandOutput extends DeleteDevicePoolResult, _
  * ```javascript
  * import { DeviceFarmClient, DeleteDevicePoolCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, DeleteDevicePoolCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // DeleteDevicePoolRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDevicePoolCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDevicePoolCommandInput - {@link DeleteDevicePoolCommandInput}
+ * @returns {@link DeleteDevicePoolCommandOutput}
  * @see {@link DeleteDevicePoolCommandInput} for command's `input` shape.
  * @see {@link DeleteDevicePoolCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @example To delete a device pool
+ * ```javascript
+ * // The following example deletes a specific device pool.
+ * const input = {
+ *   arn: "arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"
+ * };
+ * const command = new DeleteDevicePoolCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteDevicePoolCommand extends $Command<
-  DeleteDevicePoolCommandInput,
-  DeleteDevicePoolCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDevicePoolCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDevicePoolCommandInput, DeleteDevicePoolCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "DeleteDevicePoolCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDevicePoolRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteDevicePoolResult.filterSensitiveLog,
+export class DeleteDevicePoolCommand extends command<DeleteDevicePoolCommandInput, DeleteDevicePoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDevicePool",
+  DeleteDevicePool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDevicePoolRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDevicePoolCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteDevicePoolCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDevicePoolCommandOutput> {
-    return deserializeAws_json1_1DeleteDevicePoolCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDevicePoolCommandInput;
+      output: DeleteDevicePoolCommandOutput;
+    };
+  };
 }

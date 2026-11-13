@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { GetSchemaCreationStatusRequest, GetSchemaCreationStatusResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetSchemaCreationStatusCommand,
-  serializeAws_restJson1GetSchemaCreationStatusCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSchemaCreationStatusRequest, GetSchemaCreationStatusResponse } from "../models/models_0";
+import { GetSchemaCreationStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSchemaCreationStatusCommand}.
+ */
 export interface GetSchemaCreationStatusCommandInput extends GetSchemaCreationStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSchemaCreationStatusCommand}.
+ */
 export interface GetSchemaCreationStatusCommandOutput extends GetSchemaCreationStatusResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface GetSchemaCreationStatusCommandOutput extends GetSchemaCreationS
  * ```javascript
  * import { AppSyncClient, GetSchemaCreationStatusCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetSchemaCreationStatusCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetSchemaCreationStatusRequest
+ *   apiId: "STRING_VALUE", // required
+ * };
  * const command = new GetSchemaCreationStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetSchemaCreationStatusResponse
+ * //   status: "PROCESSING" || "ACTIVE" || "DELETING" || "FAILED" || "SUCCESS" || "NOT_APPLICABLE",
+ * //   details: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetSchemaCreationStatusCommandInput - {@link GetSchemaCreationStatusCommandInput}
+ * @returns {@link GetSchemaCreationStatusCommandOutput}
  * @see {@link GetSchemaCreationStatusCommandInput} for command's `input` shape.
  * @see {@link GetSchemaCreationStatusCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetSchemaCreationStatusCommand extends $Command<
-  GetSchemaCreationStatusCommandInput,
-  GetSchemaCreationStatusCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSchemaCreationStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSchemaCreationStatusCommandInput, GetSchemaCreationStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetSchemaCreationStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSchemaCreationStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSchemaCreationStatusResponse.filterSensitiveLog,
+export class GetSchemaCreationStatusCommand extends command<GetSchemaCreationStatusCommandInput, GetSchemaCreationStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSchemaCreationStatus",
+  GetSchemaCreationStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSchemaCreationStatusRequest;
+      output: GetSchemaCreationStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSchemaCreationStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSchemaCreationStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSchemaCreationStatusCommandOutput> {
-    return deserializeAws_restJson1GetSchemaCreationStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSchemaCreationStatusCommandInput;
+      output: GetSchemaCreationStatusCommandOutput;
+    };
+  };
 }

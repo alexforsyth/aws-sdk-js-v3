@@ -1,132 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { StartFleetActionsInput, StartFleetActionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartFleetActionsCommand,
-  serializeAws_json1_1StartFleetActionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartFleetActionsInput, StartFleetActionsOutput } from "../models/models_0";
+import { StartFleetActions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartFleetActionsCommand}.
+ */
 export interface StartFleetActionsCommandInput extends StartFleetActionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link StartFleetActionsCommand}.
+ */
 export interface StartFleetActionsCommandOutput extends StartFleetActionsOutput, __MetadataBearer {}
 
 /**
- * <p>Resumes certain types of activity on fleet instances that were suspended with <a>StopFleetActions</a>. For multi-location fleets, fleet actions are managed
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Container</p>
+ *          <p>Resumes certain types of activity on fleet instances that were suspended with <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html">StopFleetActions</a>. For multi-location fleets, fleet actions are managed
  *             separately for each location. Currently, this operation is used to restart a fleet's
  *             auto-scaling activity.</p>
- *         <p>This operation can be used in the following ways: </p>
- *         <ul>
+ *          <p>This operation can be used in the following ways: </p>
+ *          <ul>
  *             <li>
- *                 <p>To restart actions on instances in the fleet's home Region, provide a fleet ID
+ *                <p>To restart actions on instances in the fleet's home Region, provide a fleet ID
  *                     and the type of actions to resume. </p>
  *             </li>
  *             <li>
- *                 <p>To restart actions on instances in one of the fleet's remote locations,
- *                     provide a fleet ID, a location name, and the type of actions to resume.  </p>
+ *                <p>To restart actions on instances in one of the fleet's remote locations,
+ *                     provide a fleet ID, a location name, and the type of actions to resume. </p>
  *             </li>
  *          </ul>
- *         <p>If successful, GameLift once again initiates scaling events as triggered by the fleet's
+ *          <p>If successful, Amazon GameLift Servers once again initiates scaling events as triggered by the fleet's
  *             scaling policies. If actions on the fleet location were never stopped, this operation
- *             will have no effect. You can view a fleet's stopped actions using <a>DescribeFleetAttributes</a> or <a>DescribeFleetLocationAttributes</a>.</p>
- *         <p>
+ *             will have no effect.</p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up GameLift fleets</a>
- *          </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateFleet</a> |
- *                     <a>UpdateFleetCapacity</a> |
- *                     <a>PutScalingPolicy</a> |
- *                     <a>DescribeEC2InstanceLimits</a> |
- *                     <a>DescribeFleetAttributes</a> |
- *                     <a>DescribeFleetLocationAttributes</a> |
- *                     <a>UpdateFleetAttributes</a> |
- *                     <a>StopFleetActions</a> |
- *                     <a>DeleteFleet</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up Amazon GameLift Servers
+ *                 fleets</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, StartFleetActionsCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, StartFleetActionsCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // StartFleetActionsInput
+ *   FleetId: "STRING_VALUE", // required
+ *   Actions: [ // FleetActionList // required
+ *     "AUTO_SCALING",
+ *   ],
+ *   Location: "STRING_VALUE",
+ * };
  * const command = new StartFleetActionsCommand(input);
  * const response = await client.send(command);
+ * // { // StartFleetActionsOutput
+ * //   FleetId: "STRING_VALUE",
+ * //   FleetArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartFleetActionsCommandInput - {@link StartFleetActionsCommandInput}
+ * @returns {@link StartFleetActionsCommandOutput}
  * @see {@link StartFleetActionsCommandInput} for command's `input` shape.
  * @see {@link StartFleetActionsCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class StartFleetActionsCommand extends $Command<
-  StartFleetActionsCommandInput,
-  StartFleetActionsCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartFleetActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartFleetActionsCommandInput, StartFleetActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "StartFleetActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartFleetActionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StartFleetActionsOutput.filterSensitiveLog,
+export class StartFleetActionsCommand extends command<StartFleetActionsCommandInput, StartFleetActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartFleetActions",
+  StartFleetActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartFleetActionsInput;
+      output: StartFleetActionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartFleetActionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartFleetActionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartFleetActionsCommandOutput> {
-    return deserializeAws_json1_1StartFleetActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartFleetActionsCommandInput;
+      output: StartFleetActionsCommandOutput;
+    };
+  };
 }

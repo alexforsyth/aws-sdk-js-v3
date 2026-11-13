@@ -1,0 +1,230 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFleetRequest, UpdateFleetResponse } from "../models/models_0";
+import { UpdateFleet$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFleetCommand}.
+ */
+export interface UpdateFleetCommandInput extends UpdateFleetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFleetCommand}.
+ */
+export interface UpdateFleetCommandOutput extends UpdateFleetResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates a fleet.</p> <note> <p>Workers that are running when you call <code>UpdateFleet</code> keep the instance type and capabilities that they launched with until they scale in. Deadline Cloud can schedule jobs that you submit after the update on these existing workers, so the new configuration might not take effect immediately. To make sure that all workers use the new configuration, set <code>maxWorkerCount</code> to 0, use the <code>ListWorkers</code> operation to confirm that the fleet has no workers, and then restore <code>maxWorkerCount</code>.</p> </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateFleetCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateFleetCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateFleetRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   displayName: "STRING_VALUE",
+ *   description: "STRING_VALUE",
+ *   roleArn: "STRING_VALUE",
+ *   minWorkerCount: Number("int"),
+ *   maxWorkerCount: Number("int"),
+ *   configuration: { // FleetConfiguration Union: only one key present
+ *     customerManaged: { // CustomerManagedFleetConfiguration
+ *       mode: "NO_SCALING" || "EVENT_BASED_AUTO_SCALING", // required
+ *       autoScalingConfiguration: { // CustomerManagedAutoScalingConfiguration
+ *         standbyWorkerCount: Number("int"),
+ *         workerIdleDurationSeconds: Number("int"),
+ *         scaleOutWorkersPerMinute: Number("int"),
+ *       },
+ *       workerCapabilities: { // CustomerManagedWorkerCapabilities
+ *         vCpuCount: { // VCpuCountRange
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         memoryMiB: { // MemoryMiBRange
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         acceleratorTypes: [ // AcceleratorTypes
+ *           "gpu",
+ *         ],
+ *         acceleratorCount: { // AcceleratorCountRange
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         acceleratorTotalMemoryMiB: { // AcceleratorTotalMemoryMiBRange
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         osFamily: "WINDOWS" || "LINUX" || "MACOS", // required
+ *         cpuArchitectureType: "x86_64" || "arm64", // required
+ *         customAmounts: [ // CustomFleetAmountCapabilities
+ *           { // FleetAmountCapability
+ *             name: "STRING_VALUE", // required
+ *             min: Number("float"), // required
+ *             max: Number("float"),
+ *           },
+ *         ],
+ *         customAttributes: [ // CustomFleetAttributeCapabilities
+ *           { // FleetAttributeCapability
+ *             name: "STRING_VALUE", // required
+ *             values: [ // AttributeCapabilityValuesList // required
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *       storageProfileId: "STRING_VALUE",
+ *       tagPropagationMode: "NO_PROPAGATION" || "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH",
+ *     },
+ *     serviceManagedEc2: { // ServiceManagedEc2FleetConfiguration
+ *       instanceCapabilities: { // ServiceManagedEc2InstanceCapabilities
+ *         vCpuCount: {
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         memoryMiB: {
+ *           min: Number("int"), // required
+ *           max: Number("int"),
+ *         },
+ *         osFamily: "WINDOWS" || "LINUX", // required
+ *         cpuArchitectureType: "x86_64" || "arm64", // required
+ *         rootEbsVolume: { // Ec2EbsVolume
+ *           sizeGiB: Number("int"),
+ *           iops: Number("int"),
+ *           throughputMiB: Number("int"),
+ *         },
+ *         acceleratorCapabilities: { // AcceleratorCapabilities
+ *           selections: [ // AcceleratorSelections // required
+ *             { // AcceleratorSelection
+ *               name: "t4" || "a10g" || "l4" || "l40s" || "rtx-pro-server-6000" || "rtx-pro-4500", // required
+ *               runtime: "STRING_VALUE",
+ *             },
+ *           ],
+ *           count: {
+ *             min: Number("int"), // required
+ *             max: Number("int"),
+ *           },
+ *         },
+ *         allowedInstanceTypes: [ // InstanceTypes
+ *           "STRING_VALUE",
+ *         ],
+ *         excludedInstanceTypes: [
+ *           "STRING_VALUE",
+ *         ],
+ *         customAmounts: [
+ *           {
+ *             name: "STRING_VALUE", // required
+ *             min: Number("float"), // required
+ *             max: Number("float"),
+ *           },
+ *         ],
+ *         customAttributes: [
+ *           {
+ *             name: "STRING_VALUE", // required
+ *             values: [ // required
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *         softwareAddOns: [ // FleetSoftwareAddOns
+ *           { // FleetSoftwareAddOn
+ *             name: "docker", // required
+ *           },
+ *         ],
+ *       },
+ *       instanceMarketOptions: { // ServiceManagedEc2InstanceMarketOptions
+ *         type: "on-demand" || "spot" || "wait-and-save", // required
+ *       },
+ *       vpcConfiguration: { // VpcConfiguration
+ *         resourceConfigurationArns: [ // VpcResourceConfigurationArns
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       storageProfileId: "STRING_VALUE",
+ *       persistentVolumeConfiguration: { // PersistentVolumeConfiguration
+ *         sizeGiB: Number("int"),
+ *         iops: Number("int"),
+ *         throughputMiB: Number("int"),
+ *         mountPath: "STRING_VALUE", // required
+ *         lastUsedTtlHours: Number("int"),
+ *       },
+ *       autoScalingConfiguration: { // ServiceManagedEc2AutoScalingConfiguration
+ *         standbyWorkerCount: Number("int"),
+ *         workerIdleDurationSeconds: Number("int"),
+ *         scaleOutWorkersPerMinute: Number("int"),
+ *       },
+ *     },
+ *   },
+ *   hostConfiguration: { // HostConfiguration
+ *     scriptBody: "STRING_VALUE", // required
+ *     scriptTimeoutSeconds: Number("int"),
+ *   },
+ * };
+ * const command = new UpdateFleetCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateFleetCommandInput - {@link UpdateFleetCommandInput}
+ * @returns {@link UpdateFleetCommandOutput}
+ * @see {@link UpdateFleetCommandInput} for command's `input` shape.
+ * @see {@link UpdateFleetCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateFleetCommand extends command<UpdateFleetCommandInput, UpdateFleetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFleet",
+  UpdateFleet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFleetRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateFleetCommandInput;
+      output: UpdateFleetCommandOutput;
+    };
+  };
+}

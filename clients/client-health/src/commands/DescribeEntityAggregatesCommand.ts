@@ -1,96 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthClient";
-import { DescribeEntityAggregatesRequest, DescribeEntityAggregatesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEntityAggregatesCommand,
-  serializeAws_json1_1DescribeEntityAggregatesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEntityAggregatesRequest, DescribeEntityAggregatesResponse } from "../models/models_0";
+import { DescribeEntityAggregates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEntityAggregatesCommand}.
+ */
 export interface DescribeEntityAggregatesCommandInput extends DescribeEntityAggregatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEntityAggregatesCommand}.
+ */
 export interface DescribeEntityAggregatesCommandOutput extends DescribeEntityAggregatesResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the number of entities that are affected by each of the specified events. If no
- *          events are specified, the counts of all affected entities are returned.</p>
+ * <p>Returns the number of entities that are affected by each of the specified events.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { HealthClient, DescribeEntityAggregatesCommand } from "@aws-sdk/client-health"; // ES Modules import
  * // const { HealthClient, DescribeEntityAggregatesCommand } = require("@aws-sdk/client-health"); // CommonJS import
+ * // import type { HealthClientConfig } from "@aws-sdk/client-health";
+ * const config = {}; // type is HealthClientConfig
  * const client = new HealthClient(config);
+ * const input = { // DescribeEntityAggregatesRequest
+ *   eventArns: [ // EventArnsList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeEntityAggregatesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEntityAggregatesResponse
+ * //   entityAggregates: [ // EntityAggregateList
+ * //     { // EntityAggregate
+ * //       eventArn: "STRING_VALUE",
+ * //       count: Number("int"),
+ * //       statuses: { // entityStatuses
+ * //         "<keys>": Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEntityAggregatesCommandInput - {@link DescribeEntityAggregatesCommandInput}
+ * @returns {@link DescribeEntityAggregatesCommandOutput}
  * @see {@link DescribeEntityAggregatesCommandInput} for command's `input` shape.
  * @see {@link DescribeEntityAggregatesCommandOutput} for command's `response` shape.
- * @see {@link HealthClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link HealthClientResolvedConfig | config} for HealthClient's `config` shape.
  *
+ * @throws {@link HealthServiceException}
+ * <p>Base exception class for all service exceptions from Health service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEntityAggregatesCommand extends $Command<
-  DescribeEntityAggregatesCommandInput,
-  DescribeEntityAggregatesCommandOutput,
-  HealthClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEntityAggregatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEntityAggregatesCommandInput, DescribeEntityAggregatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthClient";
-    const commandName = "DescribeEntityAggregatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEntityAggregatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEntityAggregatesResponse.filterSensitiveLog,
+export class DescribeEntityAggregatesCommand extends command<DescribeEntityAggregatesCommandInput, DescribeEntityAggregatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEntityAggregates",
+  DescribeEntityAggregates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEntityAggregatesRequest;
+      output: DescribeEntityAggregatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEntityAggregatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEntityAggregatesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEntityAggregatesCommandOutput> {
-    return deserializeAws_json1_1DescribeEntityAggregatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEntityAggregatesCommandInput;
+      output: DescribeEntityAggregatesCommandOutput;
+    };
+  };
 }

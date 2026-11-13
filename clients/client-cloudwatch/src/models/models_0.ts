@@ -1,2969 +1,5020 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ActionsSuppressedBy,
+  AlarmMuteRuleStatus,
+  AlarmType,
+  AnomalyDetectorAdaptationSpeed,
+  AnomalyDetectorOutlierFilteringStrength,
+  AnomalyDetectorStateValue,
+  AnomalyDetectorType,
+  ComparisonOperator,
+  EvaluationState,
+  HistoryItemType,
+  MetricStreamOutputFormat,
+  OTelEnrichmentStatus,
+  QueryType,
+  RecentlyActive,
+  ScanBy,
+  StandardUnit,
+  StateValue,
+  Statistic,
+  StatusCode,
+} from "./enums";
 
-export type AlarmType = "CompositeAlarm" | "MetricAlarm";
+/**
+ * <p>Includes the alarm's tags in the notifications that the alarm sends to Amazon SNS
+ *             topics and Lambda functions. The tags are also included in the alarm's
+ *             state-change events in Amazon EventBridge. Other types of alarm actions don't receive
+ *             the tags.</p>
+ *          <p>By default, the alarm's tags aren't included.</p>
+ *          <p>Use this to route or filter notifications and events by tag, such as by team or
+ *             environment. You can also use it to read the alarm's tags without looking them up
+ *             separately.</p>
+ *          <p>To limit which tags are included, specify either <code>IncludedTagKeys</code> or
+ *                 <code>ExcludedTagKeys</code>. You can't specify both. If you specify neither, all of
+ *             the alarm's tags are included. This includes tags that you add to the alarm later.</p>
+ * @public
+ */
+export interface AlarmTagsPropagation {
+  /**
+   * <p>Set to <code>true</code> to include the alarm's tags. Set to <code>false</code> to
+   *             stop including them.</p>
+   *          <p>When this is <code>true</code>, you must have the
+   *                 <code>cloudwatch:ListTagsForResource</code> permission on the alarm to create or
+   *             update it.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
 
-export type HistoryItemType = "Action" | "ConfigurationUpdate" | "StateUpdate";
+  /**
+   * <p>The tag keys to include. Only the alarm's tags with these keys are included.</p>
+   *          <p>You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.</p>
+   *          <p>You can't specify both <code>IncludedTagKeys</code> and
+   *             <code>ExcludedTagKeys</code>.</p>
+   * @public
+   */
+  IncludedTagKeys?: string[] | undefined;
+
+  /**
+   * <p>The tag keys to exclude. All of the alarm's tags except those with these keys are
+   *             included.</p>
+   *          <p>You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.</p>
+   *          <p>You can't specify both <code>IncludedTagKeys</code> and
+   *             <code>ExcludedTagKeys</code>.</p>
+   * @public
+   */
+  ExcludedTagKeys?: string[] | undefined;
+}
+
+/**
+ * <p>Settings that change the content of the notifications and events that an alarm sends
+ *             when its state changes. These settings apply to the alarm's actions, whichever state
+ *             triggers them.</p>
+ * @public
+ */
+export interface ActionConfiguration {
+  /**
+   * <p>Settings for including the alarm's tags in its action notifications and
+   *             state-change events.</p>
+   * @public
+   */
+  AlarmTagsPropagation?: AlarmTagsPropagation | undefined;
+}
+
+/**
+ * <p>Represents an individual contributor to a multi-timeseries alarm, containing
+ *             information about a specific time series and its contribution to the alarm's
+ *             state.</p>
+ * @public
+ */
+export interface AlarmContributor {
+  /**
+   * <p>The unique identifier for this alarm contributor.</p>
+   * @public
+   */
+  ContributorId: string | undefined;
+
+  /**
+   * <p>A map of attributes that describe the contributor, such as metric dimensions and other
+   *             identifying characteristics.</p>
+   * @public
+   */
+  ContributorAttributes: Record<string, string> | undefined;
+
+  /**
+   * <p>An explanation for the contributor's current state, providing context about why it is
+   *             in its current condition.</p>
+   * @public
+   */
+  StateReason: string | undefined;
+
+  /**
+   * <p>The timestamp when the contributor last transitioned to its current state.</p>
+   * @public
+   */
+  StateTransitionedTimestamp?: Date | undefined;
+}
 
 /**
  * <p>Represents the history of a specific alarm.</p>
+ * @public
  */
 export interface AlarmHistoryItem {
   /**
    * <p>The descriptive name for the alarm.</p>
+   * @public
    */
-  AlarmName?: string;
+  AlarmName?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the alarm contributor associated with this history item, if
+   *             applicable.</p>
+   * @public
+   */
+  AlarmContributorId?: string | undefined;
 
   /**
    * <p>The type of alarm, either metric alarm or composite alarm.</p>
+   * @public
    */
-  AlarmType?: AlarmType | string;
+  AlarmType?: AlarmType | undefined;
 
   /**
    * <p>The time stamp for the alarm history item.</p>
+   * @public
    */
-  Timestamp?: Date;
+  Timestamp?: Date | undefined;
 
   /**
    * <p>The type of alarm history item.</p>
+   * @public
    */
-  HistoryItemType?: HistoryItemType | string;
+  HistoryItemType?: HistoryItemType | undefined;
 
   /**
    * <p>A summary of the alarm history, in text format.</p>
+   * @public
    */
-  HistorySummary?: string;
+  HistorySummary?: string | undefined;
 
   /**
    * <p>Data about the alarm, in JSON format.</p>
+   * @public
    */
-  HistoryData?: string;
-}
+  HistoryData?: string | undefined;
 
-export namespace AlarmHistoryItem {
   /**
-   * @internal
+   * <p>A map of attributes that describe the alarm contributor associated with this history
+   *             item, providing context about the contributor's characteristics at the time of the
+   *             event.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AlarmHistoryItem): any => ({
-    ...obj,
-  });
+  AlarmContributorAttributes?: Record<string, string> | undefined;
 }
 
 /**
- * <p>Specifies one range of days or times to exclude from use for training an
- * 		anomaly detection model.</p>
+ * <p>Summary information about an alarm mute rule, including its name, status, and
+ *             configuration details.</p>
+ * @public
+ */
+export interface AlarmMuteRuleSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>
+   * @public
+   */
+  AlarmMuteRuleArn?: string | undefined;
+
+  /**
+   * <p>The date and time when the mute rule expires and is no longer evaluated. This field
+   *             is only present if an expiration date was configured.</p>
+   * @public
+   */
+  ExpireDate?: Date | undefined;
+
+  /**
+   * <p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>,
+   *                 <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+   * @public
+   */
+  Status?: AlarmMuteRuleStatus | undefined;
+
+  /**
+   * <p>Indicates whether the mute rule is one-time or recurring. Valid values are
+   *                 <code>ONE_TIME</code> or <code>RECURRING</code>.</p>
+   * @public
+   */
+  MuteType?: string | undefined;
+
+  /**
+   * <p>The date and time when the mute rule was last updated.</p>
+   * @public
+   */
+  LastUpdatedTimestamp?: Date | undefined;
+}
+
+/**
+ * <p>Contains the configuration that determines how a PromQL alarm evaluates its
+ *             contributors, including the query to run and the durations that define when contributors
+ *             transition between states.</p>
+ * @public
+ */
+export interface AlarmPromQLCriteria {
+  /**
+   * <p>The PromQL query that the alarm evaluates. The query must return a result of vector
+   *             type. Each entry in the vector result represents an alarm contributor.</p>
+   * @public
+   */
+  Query: string | undefined;
+
+  /**
+   * <p>The duration, in seconds, that a contributor must be continuously breaching before
+   *             it transitions to the <code>ALARM</code> state.</p>
+   * @public
+   */
+  PendingPeriod?: number | undefined;
+
+  /**
+   * <p>The duration, in seconds, that a contributor must continuously not be breaching
+   *             before it transitions back to the <code>OK</code> state.</p>
+   * @public
+   */
+  RecoveryPeriod?: number | undefined;
+}
+
+/**
+ * <p>Specifies one range of days or times to exclude from use for training an anomaly
+ *             detection model.</p>
+ * @public
  */
 export interface Range {
   /**
-   * <p>The start time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-   * 			<code>2019-07-01T23:59:59</code>.</p>
+   * <p>The start time of the range to exclude. The format is
+   *                 <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
+   *             <code>2019-07-01T23:59:59</code>.</p>
+   * @public
    */
   StartTime: Date | undefined;
 
   /**
-   * <p>The end time of the range to exclude. The format is <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-   * 			<code>2019-07-01T23:59:59</code>.</p>
+   * <p>The end time of the range to exclude. The format is
+   *             <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
+   *             <code>2019-07-01T23:59:59</code>.</p>
+   * @public
    */
   EndTime: Date | undefined;
 }
 
-export namespace Range {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Range): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The configuration specifies details about how the anomaly detection model is to be trained,
- * 			including time ranges to exclude from use for training the model and the time zone to
- * 			use for the metric.</p>
+ * <p>The configuration specifies details about how the anomaly detection model is to be
+ *             trained, including time ranges to exclude from use for training the model and the time
+ *             zone to use for the metric.</p>
+ * @public
  */
 export interface AnomalyDetectorConfiguration {
   /**
-   * <p>An array of time ranges to exclude from use when the anomaly detection model is trained. Use
-   * 			this to make sure that events that could cause unusual values for the metric, such as
-   * 			deployments, aren't used when CloudWatch creates the model.</p>
+   * <p>An array of time ranges to exclude from use when the anomaly detection model is
+   *             trained. Use this to make sure that events that could cause unusual values for the
+   *             metric, such as deployments, aren't used when CloudWatch creates the model.</p>
+   * @public
    */
-  ExcludedTimeRanges?: Range[];
+  ExcludedTimeRanges?: Range[] | undefined;
 
   /**
-   * <p>The time zone to use for the metric. This is useful to enable the model to automatically
-   * 			account for daylight savings time changes if the metric is sensitive to such time
-   * 			changes.</p>
-   * 		       <p>To specify a time zone, use the name of the time zone as specified in the standard tz database. For more information,
-   * 			see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
+   * <p>The time zone to use for the metric. This is useful to enable the model to
+   *             automatically account for daylight savings time changes if the metric is sensitive to
+   *             such time changes.</p>
+   *          <p>To specify a time zone, use the name of the time zone as specified in the standard
+   *             tz database. For more information, see <a href="https://en.wikipedia.org/wiki/Tz_database">tz database</a>.</p>
+   * @public
    */
-  MetricTimezone?: string;
-}
+  MetricTimezone?: string | undefined;
 
-export namespace AnomalyDetectorConfiguration {
   /**
-   * @internal
+   * <p>The speed at which the anomaly detection model adapts to sustained changes in the
+   *             metric's baseline. Faster adaptation lets the model track shifting workloads sooner, but
+   *             increases the chance that the model treats a real, lasting change as normal.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>FAST</code> - The model adapts quickly to sustained changes in the baseline.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NORMAL</code> - The model adapts at a moderate pace. This is the default value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SLOW</code> - The model adapts slowly, reducing the risk of treating a real change as normal.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AnomalyDetectorConfiguration): any => ({
-    ...obj,
-  });
+  AdaptationSpeed?: AnomalyDetectorAdaptationSpeed | undefined;
+
+  /**
+   * <p>The aggressiveness with which CloudWatch filters outliers from the metric data
+   *             that the anomaly detection model uses. Stronger filtering excludes more extreme values,
+   *             which can produce a tighter band of expected values but may also suppress legitimate
+   *             spikes.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MINIMAL</code> - Excludes only the most extreme outliers.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MODERATE</code> - Excludes a moderate range of outliers. This is the default value.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STRICT</code> - Excludes a wider range of outliers, which can suppress legitimate spikes.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  OutlierFilteringStrength?: AnomalyDetectorOutlierFilteringStrength | undefined;
 }
 
 /**
- * <p>A dimension is a name/value pair that is part of the identity of a metric. You
- * 			can assign up to 10 dimensions to a metric. Because dimensions are part of the unique
- * 			identifier for a metric, whenever you add a unique name/value pair to one of
- * 			your metrics, you are creating a new variation of that metric. </p>
+ * <p>A dimension is a name/value pair that is part of the identity of a metric. Because
+ *             dimensions are part of the unique identifier for a metric, whenever you add a unique
+ *             name/value pair to one of your metrics, you are creating a new variation of that metric.
+ *             For example, many Amazon EC2 metrics publish <code>InstanceId</code> as a
+ *             dimension name, and the actual instance ID as the value for that dimension.</p>
+ *          <p>You can assign up to 30 dimensions to a metric.</p>
+ * @public
  */
 export interface Dimension {
   /**
-   * <p>The name of the dimension. Dimension names must contain only ASCII characters and must include
-   * 			at least one non-whitespace character.</p>
+   * <p>The name of the dimension. Dimension names must contain only ASCII characters, must
+   *             include at least one non-whitespace character, and cannot start with a colon
+   *                 (<code>:</code>). ASCII control characters are not supported as part of dimension
+   *             names.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>The value of the dimension. Dimension values must contain only ASCII characters and must include
-   * 			at least one non-whitespace character.</p>
+   * <p>The value of the dimension. Dimension values must contain only ASCII characters and
+   *             must include at least one non-whitespace character. ASCII control characters are not
+   *             supported as part of dimension values.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace Dimension {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Dimension): any => ({
-    ...obj,
-  });
-}
-
-export type AnomalyDetectorStateValue = "PENDING_TRAINING" | "TRAINED" | "TRAINED_INSUFFICIENT_DATA";
-
 /**
- * <p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You
- * 			can use the model to display a band of expected normal values when the metric is
- * 			graphed.</p>
+ * <p>This object includes parameters that you can use to provide information to CloudWatch to help it build more accurate anomaly detection models.</p>
+ * @public
  */
-export interface AnomalyDetector {
-  /**
-   * <p>The namespace of the metric associated with the anomaly detection model.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The name of the metric associated with the anomaly detection model.</p>
-   */
-  MetricName?: string;
-
-  /**
-   * <p>The metric dimensions associated with the anomaly detection model.</p>
-   */
-  Dimensions?: Dimension[];
-
-  /**
-   * <p>The statistic associated with the anomaly detection model.</p>
-   */
-  Stat?: string;
-
-  /**
-   * <p>The configuration specifies details about how the
-   * 		anomaly detection model is to be trained, including time ranges to
-   * 		exclude from use for training the model, and the time zone to use for
-   * 		the metric.</p>
-   */
-  Configuration?: AnomalyDetectorConfiguration;
-
-  /**
-   * <p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code>
-   *          </p>
-   */
-  StateValue?: AnomalyDetectorStateValue | string;
-}
-
-export namespace AnomalyDetector {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AnomalyDetector): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>This array is empty if the API operation was successful for all the rules specified in the request. If the operation could
- * 		not process one of the rules, the following data is returned for each of those rules.</p>
- */
-export interface PartialFailure {
-  /**
-   * <p>The specified rule that could not be deleted.</p>
-   */
-  FailureResource?: string;
-
-  /**
-   * <p>The type of error.</p>
-   */
-  ExceptionType?: string;
-
-  /**
-   * <p>The code of the error.</p>
-   */
-  FailureCode?: string;
-
-  /**
-   * <p>A description of the error.</p>
-   */
-  FailureDescription?: string;
-}
-
-export namespace PartialFailure {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PartialFailure): any => ({
-    ...obj,
-  });
-}
-
-export type ComparisonOperator =
-  | "GreaterThanOrEqualToThreshold"
-  | "GreaterThanThreshold"
-  | "GreaterThanUpperThreshold"
-  | "LessThanLowerOrGreaterThanUpperThreshold"
-  | "LessThanLowerThreshold"
-  | "LessThanOrEqualToThreshold"
-  | "LessThanThreshold";
-
-export type StateValue = "ALARM" | "INSUFFICIENT_DATA" | "OK";
-
-/**
- * <p>The details about a composite alarm.</p>
- */
-export interface CompositeAlarm {
-  /**
-   * <p>Indicates whether actions should be executed during any changes to the alarm state.</p>
-   */
-  ActionsEnabled?: boolean;
-
-  /**
-   * <p>The actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
-   */
-  AlarmActions?: string[];
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the alarm.</p>
-   */
-  AlarmArn?: string;
-
-  /**
-   * <p>The time stamp of the last update to the alarm configuration.</p>
-   */
-  AlarmConfigurationUpdatedTimestamp?: Date;
-
-  /**
-   * <p>The description of the alarm.</p>
-   */
-  AlarmDescription?: string;
-
-  /**
-   * <p>The name of the alarm.</p>
-   */
-  AlarmName?: string;
-
-  /**
-   * <p>The rule that this alarm uses to evaluate its alarm state.</p>
-   */
-  AlarmRule?: string;
-
-  /**
-   * <p>The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
-   */
-  InsufficientDataActions?: string[];
-
-  /**
-   * <p>The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
-   */
-  OKActions?: string[];
-
-  /**
-   * <p>An explanation for the alarm state, in text format.</p>
-   */
-  StateReason?: string;
-
-  /**
-   * <p>An explanation for the alarm state, in JSON format.</p>
-   */
-  StateReasonData?: string;
-
-  /**
-   * <p>The time stamp of the last update to the alarm state.</p>
-   */
-  StateUpdatedTimestamp?: Date;
-
-  /**
-   * <p>The state value for the alarm.</p>
-   */
-  StateValue?: StateValue | string;
-}
-
-export namespace CompositeAlarm {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CompositeAlarm): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>More than one process tried to modify a resource at the same time.</p>
- */
-export interface ConcurrentModificationException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentModificationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ConcurrentModificationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentModificationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Represents a specific dashboard.</p>
- */
-export interface DashboardEntry {
-  /**
-   * <p>The name of the dashboard.</p>
-   */
-  DashboardName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dashboard.</p>
-   */
-  DashboardArn?: string;
-
-  /**
-   * <p>The time stamp of when the dashboard was last modified, either by an API call or
-   * 			through the console. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>
-   */
-  LastModified?: Date;
-
-  /**
-   * <p>The size of the dashboard, in bytes.</p>
-   */
-  Size?: number;
-}
-
-export namespace DashboardEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardEntry): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An error or warning for the operation.</p>
- */
-export interface DashboardValidationMessage {
-  /**
-   * <p>The data path related to the message.</p>
-   */
-  DataPath?: string;
-
-  /**
-   * <p>A message describing the error or warning.</p>
-   */
-  Message?: string;
-}
-
-export namespace DashboardValidationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardValidationMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Some part of the dashboard data is invalid.</p>
- */
-export interface DashboardInvalidInputError extends __SmithyException, $MetadataBearer {
-  name: "DashboardInvalidInputError";
-  $fault: "client";
-  message?: string;
-  dashboardValidationMessages?: DashboardValidationMessage[];
-}
-
-export namespace DashboardInvalidInputError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardInvalidInputError): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified dashboard does not exist.</p>
- */
-export interface DashboardNotFoundError extends __SmithyException, $MetadataBearer {
-  name: "DashboardNotFoundError";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DashboardNotFoundError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DashboardNotFoundError): any => ({
-    ...obj,
-  });
-}
-
-export type StandardUnit =
-  | "Bits"
-  | "Bits/Second"
-  | "Bytes"
-  | "Bytes/Second"
-  | "Count"
-  | "Count/Second"
-  | "Gigabits"
-  | "Gigabits/Second"
-  | "Gigabytes"
-  | "Gigabytes/Second"
-  | "Kilobits"
-  | "Kilobits/Second"
-  | "Kilobytes"
-  | "Kilobytes/Second"
-  | "Megabits"
-  | "Megabits/Second"
-  | "Megabytes"
-  | "Megabytes/Second"
-  | "Microseconds"
-  | "Milliseconds"
-  | "None"
-  | "Percent"
-  | "Seconds"
-  | "Terabits"
-  | "Terabits/Second"
-  | "Terabytes"
-  | "Terabytes/Second";
-
-/**
- * <p>Encapsulates the statistical data that CloudWatch computes from metric data.</p>
- */
-export interface Datapoint {
-  /**
-   * <p>The time stamp used for the data point.</p>
-   */
-  Timestamp?: Date;
-
-  /**
-   * <p>The number of metric values that contributed to the aggregate value of this
-   * 			data point.</p>
-   */
-  SampleCount?: number;
-
-  /**
-   * <p>The average of the metric values that correspond to the data point.</p>
-   */
-  Average?: number;
-
-  /**
-   * <p>The sum of the metric values for the data point.</p>
-   */
-  Sum?: number;
-
-  /**
-   * <p>The minimum metric value for the data point.</p>
-   */
-  Minimum?: number;
-
-  /**
-   * <p>The maximum metric value for the data point.</p>
-   */
-  Maximum?: number;
-
-  /**
-   * <p>The standard unit for the data point.</p>
-   */
-  Unit?: StandardUnit | string;
-
-  /**
-   * <p>The percentile statistic for the data point.</p>
-   */
-  ExtendedStatistics?: { [key: string]: number };
-}
-
-export namespace Datapoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Datapoint): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAlarmsInput {
-  /**
-   * <p>The alarms to be deleted.</p>
-   */
-  AlarmNames: string[] | undefined;
-}
-
-export namespace DeleteAlarmsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAlarmsInput): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The named resource does not exist.</p>
- */
-export interface ResourceNotFound extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFound";
-  $fault: "client";
-  /**
-   * <p></p>
-   */
-  message?: string;
-}
-
-export namespace ResourceNotFound {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFound): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAnomalyDetectorInput {
-  /**
-   * <p>The namespace associated with the anomaly detection model to delete.</p>
-   */
-  Namespace: string | undefined;
-
-  /**
-   * <p>The metric name associated with the anomaly detection model to delete.</p>
-   */
-  MetricName: string | undefined;
-
-  /**
-   * <p>The metric dimensions associated with the anomaly detection model to delete.</p>
-   */
-  Dimensions?: Dimension[];
-
-  /**
-   * <p>The statistic associated with the anomaly detection model to delete.</p>
-   */
-  Stat: string | undefined;
-}
-
-export namespace DeleteAnomalyDetectorInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAnomalyDetectorInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteAnomalyDetectorOutput {}
-
-export namespace DeleteAnomalyDetectorOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAnomalyDetectorOutput): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Request processing has failed due to some unknown error, exception, or failure.</p>
- */
-export interface InternalServiceFault extends __SmithyException, $MetadataBearer {
-  name: "InternalServiceFault";
-  $fault: "server";
-  /**
-   * <p></p>
-   */
-  Message?: string;
-}
-
-export namespace InternalServiceFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServiceFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The value of an input parameter is bad or out-of-range.</p>
- */
-export interface InvalidParameterValueException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterValueException";
-  $fault: "client";
-  /**
-   * <p></p>
-   */
-  message?: string;
-}
-
-export namespace InvalidParameterValueException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterValueException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An input parameter that is required is missing.</p>
- */
-export interface MissingRequiredParameterException extends __SmithyException, $MetadataBearer {
-  name: "MissingRequiredParameterException";
-  $fault: "client";
-  /**
-   * <p></p>
-   */
-  message?: string;
-}
-
-export namespace MissingRequiredParameterException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MissingRequiredParameterException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The named resource does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  ResourceType?: string;
-  ResourceId?: string;
-  Message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDashboardsInput {
-  /**
-   * <p>The dashboards to be deleted. This parameter is required.</p>
-   */
-  DashboardNames: string[] | undefined;
-}
-
-export namespace DeleteDashboardsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDashboardsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteDashboardsOutput {}
-
-export namespace DeleteDashboardsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDashboardsOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteInsightRulesInput {
-  /**
-   * <p>An array of the rule names to delete. If you need to find out the names of your rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
-   */
-  RuleNames: string[] | undefined;
-}
-
-export namespace DeleteInsightRulesInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteInsightRulesInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteInsightRulesOutput {
-  /**
-   * <p>An array listing the rules that could not be deleted. You cannot delete built-in rules.</p>
-   */
-  Failures?: PartialFailure[];
-}
-
-export namespace DeleteInsightRulesOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteInsightRulesOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteMetricStreamInput {
-  /**
-   * <p>The name of the metric stream to delete.</p>
-   */
-  Name: string | undefined;
-}
-
-export namespace DeleteMetricStreamInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteMetricStreamInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteMetricStreamOutput {}
-
-export namespace DeleteMetricStreamOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteMetricStreamOutput): any => ({
-    ...obj,
-  });
-}
-
-export enum ScanBy {
-  TIMESTAMP_ASCENDING = "TimestampAscending",
-  TIMESTAMP_DESCENDING = "TimestampDescending",
-}
-
-export interface DescribeAlarmHistoryInput {
-  /**
-   * <p>The name of the alarm.</p>
-   */
-  AlarmName?: string;
-
-  /**
-   * <p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you omit this parameter,
-   * 			only metric alarms are returned.</p>
-   */
-  AlarmTypes?: (AlarmType | string)[];
-
-  /**
-   * <p>The type of alarm histories to retrieve.</p>
-   */
-  HistoryItemType?: HistoryItemType | string;
-
-  /**
-   * <p>The starting date to retrieve alarm history.</p>
-   */
-  StartDate?: Date;
-
-  /**
-   * <p>The ending date to retrieve alarm history.</p>
-   */
-  EndDate?: Date;
-
-  /**
-   * <p>The maximum number of alarm history records to retrieve.</p>
-   */
-  MaxRecords?: number;
-
-  /**
-   * <p>The token returned by a previous call to indicate that there is more data
-   * 			available.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Specified whether to return the newest or oldest alarm history first. Specify <code>TimestampDescending</code> to have the newest
-   * 		event history returned first, and specify <code>TimestampAscending</code> to have the oldest history returned first.</p>
-   */
-  ScanBy?: ScanBy | string;
-}
-
-export namespace DescribeAlarmHistoryInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmHistoryInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAlarmHistoryOutput {
-  /**
-   * <p>The alarm histories, in JSON format.</p>
-   */
-  AlarmHistoryItems?: AlarmHistoryItem[];
-
-  /**
-   * <p>The token that marks the start of the next batch of returned results.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribeAlarmHistoryOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmHistoryOutput): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The next token specified is invalid.</p>
- */
-export interface InvalidNextToken extends __SmithyException, $MetadataBearer {
-  name: "InvalidNextToken";
-  $fault: "client";
-  /**
-   * <p></p>
-   */
-  message?: string;
-}
-
-export namespace InvalidNextToken {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidNextToken): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAlarmsInput {
-  /**
-   * <p>The names of the alarms to retrieve information about.</p>
-   */
-  AlarmNames?: string[];
-
-  /**
-   * <p>An alarm name prefix. If you specify this parameter, you receive information about all alarms that have names
-   * 			that start with this prefix.</p>
-   * 		       <p>If this parameter
-   * 			is specified, you cannot specify <code>AlarmNames</code>.</p>
-   */
-  AlarmNamePrefix?: string;
-
-  /**
-   * <p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you omit this parameter,
-   * 		only metric alarms are returned.</p>
-   */
-  AlarmTypes?: (AlarmType | string)[];
-
-  /**
-   * <p>If you use this parameter and specify the name of a composite alarm, the operation returns
-   * 			information about the "children" alarms
-   * 			of the alarm you specify. These are the metric alarms and composite alarms referenced in the
-   * 			<code>AlarmRule</code> field of the composite alarm that you specify in
-   * 			<code>ChildrenOfAlarmName</code>. Information about the composite alarm that you name in
-   * 			<code>ChildrenOfAlarmName</code> is not returned.</p>
-   * 		       <p>If you specify <code>ChildrenOfAlarmName</code>, you cannot specify any other parameters in the request except
-   * 			for <code>MaxRecords</code> and <code>NextToken</code>. If you do so, you
-   * 			receive a validation
-   * 			error.</p>
-   * 		       <note>
-   *             <p>Only the <code>Alarm Name</code>, <code>ARN</code>, <code>StateValue</code> (OK/ALARM/INSUFFICIENT_DATA), and <code>StateUpdatedTimestamp</code>
-   * 			information are returned by this operation
-   * 			when you use this parameter. To get complete information about
-   * 			these alarms, perform another <code>DescribeAlarms</code> operation and specify
-   * 			the parent alarm names in the <code>AlarmNames</code> parameter.</p>
-   *          </note>
-   */
-  ChildrenOfAlarmName?: string;
-
-  /**
-   * <p>If you use this parameter and specify the name of a metric or composite alarm, the operation returns
-   * 			information about the "parent" alarms
-   * 			of the alarm you specify. These are the composite alarms that have <code>AlarmRule</code>
-   * 			parameters that reference
-   * 			the alarm named in <code>ParentsOfAlarmName</code>. Information about the alarm that you specify in
-   * 			<code>ParentsOfAlarmName</code> is not returned.</p>
-   * 		       <p>If you specify <code>ParentsOfAlarmName</code>, you cannot specify any other parameters in the request except
-   * 			for <code>MaxRecords</code> and <code>NextToken</code>. If you do so, you receive a validation
-   * 			error.</p>
-   * 		       <note>
-   *             <p>Only the Alarm Name and ARN are returned by this operation when you use this parameter. To get complete information about
-   * 			these alarms, perform another <code>DescribeAlarms</code> operation and specify
-   * 			the parent alarm names in the <code>AlarmNames</code> parameter.</p>
-   *          </note>
-   */
-  ParentsOfAlarmName?: string;
-
-  /**
-   * <p>Specify this parameter to receive information only about alarms that are currently in the state that you specify.</p>
-   */
-  StateValue?: StateValue | string;
-
-  /**
-   * <p>Use this parameter to filter the results of the operation to only those alarms that
-   * 		use a certain alarm action. For example, you could specify the ARN of an SNS topic to find all
-   * 		alarms that send notifications to that topic.</p>
-   */
-  ActionPrefix?: string;
-
-  /**
-   * <p>The maximum number of alarm descriptions to retrieve.</p>
-   */
-  MaxRecords?: number;
-
-  /**
-   * <p>The token returned by a previous call to indicate that there is more data
-   * 			available.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribeAlarmsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmsInput): any => ({
-    ...obj,
-  });
+export interface MetricCharacteristics {
+  /**
+   * <p>Set this parameter to <code>true</code> if values for this metric consistently include
+   *             spikes that should not be considered to be anomalies. With this set to
+   *             <code>true</code>, CloudWatch will expect to see spikes that occurred
+   *             consistently during the model training period, and won't flag future similar spikes as
+   *             anomalies.</p>
+   * @public
+   */
+  PeriodicSpikes?: boolean | undefined;
 }
 
 /**
  * <p>Represents a specific metric.</p>
+ * @public
  */
 export interface Metric {
   /**
    * <p>The namespace of the metric.</p>
+   * @public
    */
-  Namespace?: string;
+  Namespace?: string | undefined;
 
   /**
    * <p>The name of the metric. This is a required field.</p>
+   * @public
    */
-  MetricName?: string;
+  MetricName?: string | undefined;
 
   /**
    * <p>The dimensions for the metric.</p>
+   * @public
    */
-  Dimensions?: Dimension[];
-}
-
-export namespace Metric {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Metric): any => ({
-    ...obj,
-  });
+  Dimensions?: Dimension[] | undefined;
 }
 
 /**
- * <p>This structure defines the metric to be returned, along with the statistics, period, and units.</p>
+ * <p>This structure defines the metric to be returned, along with the statistics, period,
+ *             and units.</p>
+ * @public
  */
 export interface MetricStat {
   /**
    * <p>The metric to return, including the metric name, namespace, and dimensions.</p>
+   * @public
    */
   Metric: Metric | undefined;
 
   /**
-   * <p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can
-   * 			be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected
-   * 			at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics
-   * 			are those metrics stored by a <code>PutMetricData</code> call that includes a <code>StorageResolution</code> of 1 second.</p>
-   * 			      <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
-   * 				3 hours ago, you must specify the period as follows or no data points in that time range is returned:</p>
-   * 			      <ul>
+   * <p>The granularity, in seconds, of the returned data points. For metrics with regular
+   *             resolution, a period can be as short as one minute (60 seconds) and must be a multiple
+   *             of 60. For high-resolution metrics that are collected at intervals of less than one
+   *             minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
+   *             metrics are those metrics stored by a <code>PutMetricData</code> call that includes a
+   *                 <code>StorageResolution</code> of 1 second.</p>
+   *          <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
+   *             3 hours ago, you must specify the period as follows or no data points in that time range
+   *             is returned:</p>
+   *          <ul>
    *             <li>
-   *                <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).</p>
+   *                <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds
+   *                     (1 minute).</p>
    *             </li>
    *             <li>
-   *                <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).</p>
+   *                <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5
+   *                     minutes).</p>
    *             </li>
    *             <li>
-   *                <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).</p>
+   *                <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1
+   *                     hour).</p>
    *             </li>
    *          </ul>
+   * @public
    */
   Period: number | undefined;
 
   /**
-   * <p>The statistic to return. It can include any CloudWatch statistic or extended statistic.</p>
+   * <p>The statistic to return. It can include any CloudWatch statistic or extended
+   *             statistic.</p>
+   * @public
    */
   Stat: string | undefined;
 
   /**
-   * <p>When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric.</p>
-   * 		       <p>In a <code>Get</code> operation, if you omit <code>Unit</code> then all data that was collected with any unit is returned, along with the corresponding units that were specified
-   * 			when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified.
-   * 			If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>
+   * <p>When you are using a <code>Put</code> operation, this defines what unit you want to
+   *             use when storing the metric.</p>
+   *          <p>In a <code>Get</code> operation, if you omit <code>Unit</code> then all data that
+   *             was collected with any unit is returned, along with the corresponding units that were
+   *             specified when the data was reported to CloudWatch. If you specify a unit, the operation
+   *             returns only data that was collected with that unit specified. If you specify a unit
+   *             that does not match the data collected, the results of the operation are null.
+   *             CloudWatch does not perform unit conversions.</p>
+   * @public
    */
-  Unit?: StandardUnit | string;
-}
-
-export namespace MetricStat {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricStat): any => ({
-    ...obj,
-  });
+  Unit?: StandardUnit | undefined;
 }
 
 /**
- * <p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported
- * 			use of this structure is different for those two operations.</p>
- * 		       <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving
- * 			a batch set of data for one metric, or is performing a math expression on metric data. A
- * 			single <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>
- * 			structures.</p>
- * 		       <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a
- * 			metric math expression. Each <code>MetricDataQuery</code> in the array specifies either
- * 			a metric to retrieve, or a math expression to be performed on retrieved metrics. A
- * 			single <code>PutMetricAlarm</code> call can include up to 20
- * 				<code>MetricDataQuery</code> structures in the array. The 20 structures can include
- * 			as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a
- * 			metric, and as many as 10 structures that contain the <code>Expression</code> parameter
- * 			to perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code>
- * 		as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p>
- *
- * 		       <p>Any expression used in a <code>PutMetricAlarm</code>
- * 			operation must return a single time series. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
- * 				Guide</i>.</p>
- *
- * 		       <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code>
- * 			operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>
+ * <p>This structure is used in both <code>GetMetricData</code> and
+ *                 <code>PutMetricAlarm</code>. The supported use of this structure is different for
+ *             those two operations.</p>
+ *          <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and
+ *             whether this call is just retrieving a batch set of data for one metric, or is
+ *             performing a Metrics Insights query or a math expression. A single
+ *                 <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>
+ *             structures.</p>
+ *          <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a
+ *             metric math expression. Each <code>MetricDataQuery</code> in the array specifies either
+ *             a metric to retrieve, or a math expression to be performed on retrieved metrics. A
+ *             single <code>PutMetricAlarm</code> call can include up to 20
+ *                 <code>MetricDataQuery</code> structures in the array. The 20 structures can include
+ *             as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a
+ *             metric, and as many as 10 structures that contain the <code>Expression</code> parameter
+ *             to perform a math expression. Of those <code>Expression</code> structures, one must have
+ *                 <code>true</code> as the value for <code>ReturnData</code>. The result of this
+ *             expression is the value the alarm watches.</p>
+ *          <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single
+ *             time series. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
+ *                 Guide</i>.</p>
+ *          <p>Some of the parameters of this structure also have different uses whether you are
+ *             using this structure in a <code>GetMetricData</code> operation or a
+ *                 <code>PutMetricAlarm</code> operation. These differences are explained in the
+ *             following parameter list.</p>
+ * @public
  */
 export interface MetricDataQuery {
   /**
    * <p>A short name used to tie this object to the results in the response. This name must be
-   * 			unique within a single call to <code>GetMetricData</code>. If you are performing math
-   * 			expressions on this set of data, this name represents that data and can serve as a
-   * 			variable in the mathematical expression. The valid characters are letters, numbers, and
-   * 			underscore. The first character must be a lowercase letter.</p>
+   *             unique within a single call to <code>GetMetricData</code>. If you are performing math
+   *             expressions on this set of data, this name represents that data and can serve as a
+   *             variable in the mathematical expression. The valid characters are letters, numbers, and
+   *             underscore. The first character must be a lowercase letter.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
-   * <p>The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric
-   * 			and not performing a math expression on returned data.</p>
-   * 		       <p>Within one MetricDataQuery object, you must specify either
-   * 			<code>Expression</code> or <code>MetricStat</code> but not both.</p>
+   * <p>The metric to be returned, along with statistics, period, and units. Use this
+   *             parameter only if this object is retrieving a metric and not performing a math
+   *             expression on returned data.</p>
+   *          <p>Within one MetricDataQuery object, you must specify either <code>Expression</code> or
+   *                 <code>MetricStat</code> but not both.</p>
+   * @public
    */
-  MetricStat?: MetricStat;
+  MetricStat?: MetricStat | undefined;
 
   /**
-   * <p>The math expression to be performed on the returned data, if this object is performing a math expression. This expression
-   * 			can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other
-   * 			expressions to use the result of those expressions. For more information about metric math expressions, see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the
-   * 			<i>Amazon CloudWatch User Guide</i>.</p>
-   * 		       <p>Within each MetricDataQuery object, you must specify either
-   * 			<code>Expression</code> or <code>MetricStat</code> but not both.</p>
+   * <p>This field can contain either a Metrics Insights query, or a metric math expression to
+   *             be performed on the returned data. For more information about Metrics Insights queries,
+   *             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage">Metrics Insights query components and syntax</a> in the <i>Amazon
+   *                 CloudWatch User Guide</i>.</p>
+   *          <p>A math expression can use the <code>Id</code> of the other metrics or queries to refer
+   *             to those metrics, and can also use the <code>Id</code> of other expressions to use the
+   *             result of those expressions. For more information about metric math expressions, see
+   *                 <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
+   *                 Guide</i>.</p>
+   *          <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or
+   *                 <code>MetricStat</code> but not both.</p>
+   * @public
    */
-  Expression?: string;
+  Expression?: string | undefined;
 
   /**
-   * <p>A human-readable label for this metric or expression. This is especially useful
-   * 			if this is an expression, so that you know
-   * 			what the value represents. If the metric or expression is shown in a
-   * 			CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch
-   * 			generates a default.</p>
-   * 		       <p>You can put dynamic expressions into a label, so that it is more descriptive.
-   * 			For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic Labels</a>.</p>
+   * <p>A human-readable label for this metric or expression. This is especially useful if
+   *             this is an expression, so that you know what the value represents. If the metric or
+   *             expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is
+   *             omitted, CloudWatch generates a default.</p>
+   *          <p>You can put dynamic expressions into a label, so that it is more descriptive. For more
+   *             information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic
+   *                 Labels</a>.</p>
+   * @public
    */
-  Label?: string;
+  Label?: string | undefined;
 
   /**
    * <p>When used in <code>GetMetricData</code>, this option indicates whether to return the
-   * 			timestamps and raw data values of this metric. If you are performing this call just to
-   * 			do math expressions and do not also need the raw data returned, you can specify
-   * 				<code>False</code>. If you omit this, the default of <code>True</code> is
-   * 			used.</p>
-   * 		       <p>When used in <code>PutMetricAlarm</code>, specify <code>True</code> for the one expression result to use as the alarm. For all
-   * 		other metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>
+   *             timestamps and raw data values of this metric. If you are performing this call just to
+   *             do math expressions and do not also need the raw data returned, you can specify
+   *                 <code>false</code>. If you omit this, the default of <code>true</code> is
+   *             used.</p>
+   *          <p>When used in <code>PutMetricAlarm</code>, specify <code>true</code> for the one
+   *             expression result to use as the alarm. For all other metrics and expressions in the same
+   *                 <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as
+   *             False.</p>
+   * @public
    */
-  ReturnData?: boolean;
+  ReturnData?: boolean | undefined;
 
   /**
-   * <p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a
-   * 			period can be as short as one minute (60 seconds) and must be a multiple of 60.
-   * 			For high-resolution metrics that are collected at intervals of less than one minute,
-   * 			the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics
-   * 			stored by a <code>PutMetricData</code> operation that includes a <code>StorageResolution of 1 second</code>.</p>
+   * <p>The granularity, in seconds, of the returned data points. For metrics with regular
+   *             resolution, a period can be as short as one minute (60 seconds) and must be a multiple
+   *             of 60. For high-resolution metrics that are collected at intervals of less than one
+   *             minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
+   *             metrics are those metrics stored by a <code>PutMetricData</code> operation that includes
+   *             a <code>StorageResolution of 1 second</code>.</p>
+   * @public
    */
-  Period?: number;
+  Period?: number | undefined;
 
   /**
-   * <p>The ID of the account where the metrics are located, if this is a cross-account alarm.</p>
-   * 		       <p>Use this field only for <code>PutMetricAlarm</code> operations. It is not used in
-   * 		<code>GetMetricData</code> operations.</p>
+   * <p>The ID of the account where the metrics are located.</p>
+   *          <p>If you are performing a <code>GetMetricData</code> operation in a monitoring account,
+   *             use this to specify which account to retrieve this metric from.</p>
+   *          <p>If you are performing a <code>PutMetricAlarm</code> operation, use this to specify
+   *             which account contains the metric that the alarm is watching.</p>
+   * @public
    */
-  AccountId?: string;
+  AccountId?: string | undefined;
 }
-
-export namespace MetricDataQuery {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDataQuery): any => ({
-    ...obj,
-  });
-}
-
-export type Statistic = "Average" | "Maximum" | "Minimum" | "SampleCount" | "Sum";
 
 /**
- * <p>The details about a metric alarm.</p>
+ * <p>Indicates the CloudWatch math expression that provides the time series the anomaly
+ *             detector uses as input. The designated math expression must return a single time
+ *             series.</p>
+ * @public
  */
-export interface MetricAlarm {
+export interface MetricMathAnomalyDetector {
   /**
-   * <p>The name of the alarm.</p>
+   * <p>An array of metric data query structures that enables you to create an anomaly
+   *             detector based on the result of a metric math expression. Each item in
+   *                 <code>MetricDataQueries</code> gets a metric or performs a math expression. One item
+   *             in <code>MetricDataQueries</code> is the expression that provides the time series that
+   *             the anomaly detector uses as input. Designate the expression by setting
+   *                 <code>ReturnData</code> to <code>true</code> for this object in the array. For all
+   *             other expressions and metrics, set <code>ReturnData</code> to <code>false</code>. The
+   *             designated expression must return a single time series.</p>
+   * @public
    */
-  AlarmName?: string;
+  MetricDataQueries?: MetricDataQuery[] | undefined;
+}
+
+/**
+ * <p>Designates the CloudWatch metric and statistic that provides the time series the
+ *             anomaly detector uses as input. If you have enabled unified cross-account observability,
+ *             and this account is a monitoring account, the metric can be in the same account or a
+ *             source account.</p>
+ * @public
+ */
+export interface SingleMetricAnomalyDetector {
+  /**
+   * <p>If the CloudWatch metric that provides the time series that the anomaly
+   *             detector uses as input is in another account, specify that account ID here. If you omit
+   *             this parameter, the current account is used.</p>
+   * @public
+   */
+  AccountId?: string | undefined;
+
+  /**
+   * <p>The namespace of the metric to create the anomaly detection model for.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The name of the metric to create the anomaly detection model for.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The metric dimensions to create the anomaly detection model for.</p>
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The statistic to use for the metric and anomaly detection model.</p>
+   * @public
+   */
+  Stat?: string | undefined;
+}
+
+/**
+ * <p>An anomaly detection model associated with a particular CloudWatch metric, statistic,
+ *             or metric math expression. You can use the model to display a band of expected, normal
+ *             values when the metric is graphed.</p>
+ *          <p>If you have enabled unified cross-account observability, and this account is a
+ *             monitoring account, the metric can be in the same account or a source account.</p>
+ * @public
+ */
+export interface AnomalyDetector {
+  /**
+   * <p>The unique identifier of the anomaly detector.</p>
+   *          <note>
+   *             <p>The identifier does not restrict access to a specific anomaly detector in an IAM
+   *                 policy. Permissions for anomaly detector operations apply to all anomaly detectors
+   *                 in the account.</p>
+   *          </note>
+   * @public
+   */
+  AnomalyDetectorId?: string | undefined;
+
+  /**
+   * <p>The namespace of the metric associated with the anomaly detection model.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.Namespace property.
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The name of the metric associated with the anomaly detection model.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.MetricName property.
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The metric dimensions associated with the anomaly detection model.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.Dimensions property.
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The statistic associated with the anomaly detection model.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.Stat property.
+   * @public
+   */
+  Stat?: string | undefined;
+
+  /**
+   * <p>The configuration specifies details about how the anomaly detection model is to be
+   *             trained, including time ranges to exclude from use for training the model, and the time
+   *             zone to use for the metric.</p>
+   * @public
+   */
+  Configuration?: AnomalyDetectorConfiguration | undefined;
+
+  /**
+   * <p>The current status of the anomaly detector's training.</p>
+   * @public
+   */
+  StateValue?: AnomalyDetectorStateValue | undefined;
+
+  /**
+   * <p>This object includes parameters that you can use to provide information about your
+   *             metric to CloudWatch to help it build more accurate anomaly detection models.
+   *             Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>
+   * @public
+   */
+  MetricCharacteristics?: MetricCharacteristics | undefined;
+
+  /**
+   * <p>The CloudWatch metric and statistic for this anomaly detector.</p>
+   * @public
+   */
+  SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector | undefined;
+
+  /**
+   * <p>The CloudWatch metric math expression for this anomaly detector.</p>
+   * @public
+   */
+  MetricMathAnomalyDetector?: MetricMathAnomalyDetector | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateDatasetKmsKeyInput {
+  /**
+   * <p>Specifies the identifier of the dataset that you want to associate the KMS key
+   *             with. For the <code>default</code> dataset, you can specify either
+   *             <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+   *             <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+   * @public
+   */
+  DatasetIdentifier: string | undefined;
+
+  /**
+   * <p>Specifies the Amazon Resource Name (ARN) of the customer managed KMS key to
+   *             associate with the dataset. The key must be a symmetric encryption KMS key
+   *             (<code>SYMMETRIC_DEFAULT</code>) in the same Amazon Web Services Region as the
+   *             dataset.</p>
+   *          <p>The ARN must be in the format
+   *             <code>arn:aws:kms:<i>Region</i>:<i>account-id</i>:key/<i>key-id</i>
+   *             </code>.
+   *             Key IDs, aliases, and alias ARNs are not accepted.</p>
+   *          <p>For more information about KMS key ARNs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key ARN</a> in
+   *             the <i>Amazon Web Services Key Management Service Developer
+   *                 Guide</i>.</p>
+   * @public
+   */
+  KmsKeyArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateDatasetKmsKeyOutput {}
+
+/**
+ * <p>This array is empty if the API operation was successful for all the rules specified in
+ *             the request. If the operation could not process one of the rules, the following data is
+ *             returned for each of those rules.</p>
+ * @public
+ */
+export interface PartialFailure {
+  /**
+   * <p>The specified rule that could not be deleted.</p>
+   * @public
+   */
+  FailureResource?: string | undefined;
+
+  /**
+   * <p>The type of error.</p>
+   * @public
+   */
+  ExceptionType?: string | undefined;
+
+  /**
+   * <p>The code of the error.</p>
+   * @public
+   */
+  FailureCode?: string | undefined;
+
+  /**
+   * <p>A description of the error.</p>
+   * @public
+   */
+  FailureDescription?: string | undefined;
+}
+
+/**
+ * <p>The details about a composite alarm.</p>
+ * @public
+ */
+export interface CompositeAlarm {
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm
+   *             state.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the ALARM state from any other
+   *             state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  AlarmActions?: string[] | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the alarm.</p>
+   * @public
    */
-  AlarmArn?: string;
-
-  /**
-   * <p>The description of the alarm.</p>
-   */
-  AlarmDescription?: string;
+  AlarmArn?: string | undefined;
 
   /**
    * <p>The time stamp of the last update to the alarm configuration.</p>
+   * @public
    */
-  AlarmConfigurationUpdatedTimestamp?: Date;
+  AlarmConfigurationUpdatedTimestamp?: Date | undefined;
 
   /**
-   * <p>Indicates whether actions should be executed during any changes to the alarm state.</p>
+   * <p>The description of the alarm.</p>
+   * @public
    */
-  ActionsEnabled?: boolean;
+  AlarmDescription?: string | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>OK</code> state
-   * 			from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * <p>The name of the alarm.</p>
+   * @public
    */
-  OKActions?: string[];
+  AlarmName?: string | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
-   * 			from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * <p>The rule that this alarm uses to evaluate its alarm state.</p>
+   * @public
    */
-  AlarmActions?: string[];
+  AlarmRule?: string | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state
-   * 			from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * <p>The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from
+   *             any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
    */
-  InsufficientDataActions?: string[];
+  InsufficientDataActions?: string[] | undefined;
 
   /**
-   * <p>The state value for the alarm.</p>
+   * <p>The actions to execute when this alarm transitions to the OK state from any other
+   *             state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
    */
-  StateValue?: StateValue | string;
+  OKActions?: string[] | undefined;
 
   /**
    * <p>An explanation for the alarm state, in text format.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>An explanation for the alarm state, in JSON format.</p>
+   * @public
    */
-  StateReasonData?: string;
+  StateReasonData?: string | undefined;
 
   /**
-   * <p>The time stamp of the last update to the alarm state.</p>
+   * <p>Tracks the timestamp of any state update, even if <code>StateValue</code> doesn't
+   *             change.</p>
+   * @public
    */
-  StateUpdatedTimestamp?: Date;
+  StateUpdatedTimestamp?: Date | undefined;
 
   /**
-   * <p>The name of the metric associated with the alarm, if this is an alarm
-   * 		based on a single metric.</p>
+   * <p>The state value for the alarm.</p>
+   * @public
    */
-  MetricName?: string;
+  StateValue?: StateValue | undefined;
 
   /**
-   * <p>The namespace of the metric associated with the alarm.</p>
+   * <p> The timestamp of the last change to the alarm's <code>StateValue</code>. </p>
+   * @public
    */
-  Namespace?: string;
+  StateTransitionedTimestamp?: Date | undefined;
 
   /**
-   * <p>The statistic for the metric associated with the alarm, other than percentile.
-   * 		    For percentile statistics, use <code>ExtendedStatistic</code>.</p>
+   * <p> When the value is <code>ALARM</code>, it means that the actions are suppressed
+   *             because the suppressor alarm is in <code>ALARM</code> When the value is
+   *                 <code>WaitPeriod</code>, it means that the actions are suppressed because the
+   *             composite alarm is waiting for the suppressor alarm to go into into the
+   *                 <code>ALARM</code> state. The maximum waiting time is as specified in
+   *                 <code>ActionsSuppressorWaitPeriod</code>. After this time, the composite alarm
+   *             performs its actions. When the value is <code>ExtensionPeriod</code>, it means that the
+   *             actions are suppressed because the composite alarm is waiting after the suppressor alarm
+   *             went out of the <code>ALARM</code> state. The maximum waiting time is as specified in
+   *                 <code>ActionsSuppressorExtensionPeriod</code>. After this time, the composite alarm
+   *             performs its actions. </p>
+   * @public
    */
-  Statistic?: Statistic | string;
+  ActionsSuppressedBy?: ActionsSuppressedBy | undefined;
 
   /**
-   * <p>The percentile statistic for the metric associated with the alarm. Specify a value between
-   * 			p0.0 and p100.</p>
+   * <p> Captures the reason for action suppression. </p>
+   * @public
    */
-  ExtendedStatistic?: string;
+  ActionsSuppressedReason?: string | undefined;
 
   /**
-   * <p>The dimensions for the metric associated with the alarm.</p>
+   * <p> Actions will be suppressed if the suppressor alarm is in the <code>ALARM</code>
+   *             state. <code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name
+   *             (ARN) from an existing alarm. </p>
+   * @public
    */
-  Dimensions?: Dimension[];
+  ActionsSuppressor?: string | undefined;
 
   /**
-   * <p>The period, in seconds, over which the statistic is applied.</p>
+   * <p> The maximum time in seconds that the composite alarm waits for the suppressor alarm
+   *             to go into the <code>ALARM</code> state. After this time, the composite alarm performs
+   *             its actions. </p>
+   *          <important>
+   *             <p>
+   *                <code>WaitPeriod</code> is required only when <code>ActionsSuppressor</code> is
+   *                 specified. </p>
+   *          </important>
+   * @public
    */
-  Period?: number;
+  ActionsSuppressorWaitPeriod?: number | undefined;
 
   /**
-   * <p>The unit of the metric associated with the alarm.</p>
+   * <p> The maximum time in seconds that the composite alarm waits after suppressor alarm
+   *             goes out of the <code>ALARM</code> state. After this time, the composite alarm performs
+   *             its actions. </p>
+   *          <important>
+   *             <p>
+   *                <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is
+   *                 specified. </p>
+   *          </important>
+   * @public
    */
-  Unit?: StandardUnit | string;
+  ActionsSuppressorExtensionPeriod?: number | undefined;
 
   /**
-   * <p>The number of periods over which data is compared to the specified threshold.</p>
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
    */
-  EvaluationPeriods?: number;
-
-  /**
-   * <p>The number of data points that must be breaching to trigger the alarm.</p>
-   */
-  DatapointsToAlarm?: number;
-
-  /**
-   * <p>The value to compare with the specified statistic.</p>
-   */
-  Threshold?: number;
-
-  /**
-   * <p>The arithmetic operation to use when comparing the specified
-   * 			statistic and threshold. The specified statistic value is used as the first operand.</p>
-   */
-  ComparisonOperator?: ComparisonOperator | string;
-
-  /**
-   * <p>Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>
-   */
-  TreatMissingData?: string;
-
-  /**
-   * <p>Used only for alarms based on percentiles. If <code>ignore</code>, the alarm state does not change
-   * 			during periods with too few data points to be statistically significant. If <code>evaluate</code> or this
-   * 			parameter is not used, the alarm is always evaluated and possibly changes state no matter
-   * 			how many data points are available.</p>
-   */
-  EvaluateLowSampleCountPercentile?: string;
-
-  /**
-   * <p>An array of MetricDataQuery structures, used in an alarm based on a
-   * 			metric math expression. Each structure either retrieves a
-   * 			metric or performs a math expression.
-   *
-   * 			One item in the Metrics array is the math expression that the alarm watches.
-   * 			This expression by designated by having <code>ReturnData</code> set to
-   * 			true.</p>
-   */
-  Metrics?: MetricDataQuery[];
-
-  /**
-   * <p>In an alarm based on an anomaly detection model, this is the ID of the
-   * 			<code>ANOMALY_DETECTION_BAND</code> function
-   * 			used as the threshold for the alarm.</p>
-   */
-  ThresholdMetricId?: string;
-}
-
-export namespace MetricAlarm {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricAlarm): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAlarmsOutput {
-  /**
-   * <p>The information about any composite alarms returned by the operation.</p>
-   */
-  CompositeAlarms?: CompositeAlarm[];
-
-  /**
-   * <p>The information about any metric alarms returned by the operation.</p>
-   */
-  MetricAlarms?: MetricAlarm[];
-
-  /**
-   * <p>The token that marks the start of the next batch of returned results.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribeAlarmsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmsOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAlarmsForMetricInput {
-  /**
-   * <p>The name of the metric.</p>
-   */
-  MetricName: string | undefined;
-
-  /**
-   * <p>The namespace of the metric.</p>
-   */
-  Namespace: string | undefined;
-
-  /**
-   * <p>The statistic for the metric, other than percentiles.
-   * 		    For percentile statistics, use <code>ExtendedStatistics</code>.</p>
-   */
-  Statistic?: Statistic | string;
-
-  /**
-   * <p>The percentile statistic for the metric. Specify a value between
-   * 		    p0.0 and p100.</p>
-   */
-  ExtendedStatistic?: string;
-
-  /**
-   * <p>The dimensions associated with the metric. If the metric has any associated
-   * 			dimensions, you must specify them in order for the call to succeed.</p>
-   */
-  Dimensions?: Dimension[];
-
-  /**
-   * <p>The period, in seconds, over which the statistic is applied.</p>
-   */
-  Period?: number;
-
-  /**
-   * <p>The unit for the metric.</p>
-   */
-  Unit?: StandardUnit | string;
-}
-
-export namespace DescribeAlarmsForMetricInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmsForMetricInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAlarmsForMetricOutput {
-  /**
-   * <p>The information for each alarm with the specified metric.</p>
-   */
-  MetricAlarms?: MetricAlarm[];
-}
-
-export namespace DescribeAlarmsForMetricOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAlarmsForMetricOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnomalyDetectorsInput {
-  /**
-   * <p>Use the token returned by the previous operation to request the next page of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return in one operation. The maximum
-   * 			value that you can specify is 100.</p>
-   * 			      <p>To retrieve the remaining results, make another call with the returned
-   * 			<code>NextToken</code> value. </p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>Limits the results to only the anomaly detection models that
-   * 			are associated with the specified namespace.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>Limits the results to only the anomaly detection models that are associated with the
-   * 			specified metric name. If there are multiple metrics with this name in different
-   * 			namespaces that have anomaly detection models, they're all returned.</p>
-   */
-  MetricName?: string;
-
-  /**
-   * <p>Limits the results to only the anomaly detection models that are associated with the
-   * 			specified metric dimensions. If there are multiple metrics that have these dimensions
-   * 			and have anomaly detection models associated, they're all returned.</p>
-   */
-  Dimensions?: Dimension[];
-}
-
-export namespace DescribeAnomalyDetectorsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnomalyDetectorsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeAnomalyDetectorsOutput {
-  /**
-   * <p>The list of anomaly detection models returned by the operation.</p>
-   */
-  AnomalyDetectors?: AnomalyDetector[];
-
-  /**
-   * <p>A token that you can use in a subsequent operation to
-   * 		retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribeAnomalyDetectorsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAnomalyDetectorsOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeInsightRulesInput {
-  /**
-   * <p>Include this value, if it was returned by the previous operation, to get the next set of rules.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return in one operation. If you omit this
-   * 		parameter, the default of 500 is used.</p>
-   */
-  MaxResults?: number;
-}
-
-export namespace DescribeInsightRulesInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeInsightRulesInput): any => ({
-    ...obj,
-  });
+  ActionConfiguration?: ActionConfiguration | undefined;
 }
 
 /**
- * <p>This structure contains the definition for a Contributor Insights rule.</p>
+ * <p>Specifies which metrics Amazon CloudWatch collects for a resource metrics
+ *             configuration. Include this in a <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html">UpdateResourceMetricsConfiguration</a> request to limit collection to a specific
+ *             set of metrics. If you omit metric selections, Amazon CloudWatch collects all
+ *             available detailed metrics for the resource.</p>
+ * @public
  */
-export interface InsightRule {
+export interface ResourceMetricSelection {
   /**
-   * <p>The name of the rule.</p>
+   * <p>The names of the metrics to collect for the resource. Amazon CloudWatch collects
+   *             only the metrics that you list here.</p>
+   * @public
    */
-  Name: string | undefined;
-
-  /**
-   * <p>Indicates whether the rule is enabled or disabled.</p>
-   */
-  State: string | undefined;
-
-  /**
-   * <p>For rules that you create, this is always <code>{"Name": "CloudWatchLogRule", "Version": 1}</code>. For built-in rules,
-   * 			this is <code>{"Name": "ServiceLogRule", "Version": 1}</code>
-   *          </p>
-   */
-  Schema: string | undefined;
-
-  /**
-   * <p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors,
-   * 			the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights
-   * 				Rule Syntax</a>.</p>
-   */
-  Definition: string | undefined;
-}
-
-export namespace InsightRule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsightRule): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeInsightRulesOutput {
-  /**
-   * <p>If this parameter is present, it is a token that marks the start of the next batch of returned results.      </p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The rules returned by the operation.</p>
-   */
-  InsightRules?: InsightRule[];
-}
-
-export namespace DescribeInsightRulesOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeInsightRulesOutput): any => ({
-    ...obj,
-  });
+  IncludeMetrics: string[] | undefined;
 }
 
 /**
- * <p>Represents filters for a dimension.</p>
+ * <p>Specifies the resource ARN and optional metric selections for a
+ *             <code>CreateResourceMetricsConfiguration</code> request.</p>
+ * @public
  */
-export interface DimensionFilter {
+export interface CreateResourceMetricsConfigurationInput {
   /**
-   * <p>The dimension name to be matched.</p>
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to enable detailed
+   *             monitoring for.</p>
+   * @public
    */
-  Name: string | undefined;
+  ResourceArn: string | undefined;
 
   /**
-   * <p>The value of the dimension to be matched.</p>
+   * <p>Specifies which metrics Amazon CloudWatch collects for the resource. If you omit
+   *             this parameter, Amazon CloudWatch collects all available detailed metrics for the
+   *             resource.</p>
+   * @public
    */
-  Value?: string;
-}
-
-export namespace DimensionFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DimensionFilter): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableAlarmActionsInput {
-  /**
-   * <p>The names of the alarms.</p>
-   */
-  AlarmNames: string[] | undefined;
-}
-
-export namespace DisableAlarmActionsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableAlarmActionsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableInsightRulesInput {
-  /**
-   * <p>An array of the rule names to disable. If you need to find out the names of your rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
-   */
-  RuleNames: string[] | undefined;
-}
-
-export namespace DisableInsightRulesInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableInsightRulesInput): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableInsightRulesOutput {
-  /**
-   * <p>An array listing the rules that could not be disabled. You cannot disable built-in rules.</p>
-   */
-  Failures?: PartialFailure[];
-}
-
-export namespace DisableInsightRulesOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisableInsightRulesOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableAlarmActionsInput {
-  /**
-   * <p>The names of the alarms.</p>
-   */
-  AlarmNames: string[] | undefined;
-}
-
-export namespace EnableAlarmActionsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableAlarmActionsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableInsightRulesInput {
-  /**
-   * <p>An array of the rule names to enable. If you need to find out the names of your rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
-   */
-  RuleNames: string[] | undefined;
-}
-
-export namespace EnableInsightRulesInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableInsightRulesInput): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableInsightRulesOutput {
-  /**
-   * <p>An array listing the rules that could not be enabled. You cannot disable or enable built-in rules.</p>
-   */
-  Failures?: PartialFailure[];
-}
-
-export namespace EnableInsightRulesOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableInsightRulesOutput): any => ({
-    ...obj,
-  });
+  MetricSelections?: ResourceMetricSelection[] | undefined;
 }
 
 /**
- * <p>The operation exceeded one or more limits.</p>
+ * <p>Represents a resource metrics configuration for an Amazon Web Services resource. A
+ *             resource metrics configuration enables detailed metric collection for the resource that
+ *             is identified by its Amazon Resource Name (ARN). Each Amazon Web Services resource can
+ *             have only one resource metrics configuration.</p>
+ *          <p>This structure is returned by the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a>, <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html">UpdateResourceMetricsConfiguration</a>, and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html">GetResourceMetricsConfiguration</a> operations.</p>
+ * @public
  */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  Message?: string;
+export interface ResourceMetricsConfiguration {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource that this
+   *             configuration applies to.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+
+  /**
+   * <p>The date and time that the resource metrics configuration was created.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time that the resource metrics configuration was last updated. When the
+   *             configuration is first created, this value is the same as
+   *             <code>CreatedAt</code>.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+
+  /**
+   * <p>The metrics that Amazon CloudWatch collects for the resource. If this field is not
+   *             present, Amazon CloudWatch collects all available detailed metrics for the
+   *             resource.</p>
+   * @public
+   */
+  MetricSelections?: ResourceMetricSelection[] | undefined;
 }
 
-export namespace LimitExceededException {
+/**
+ * <p>Returns the newly created resource metrics configuration.</p>
+ * @public
+ */
+export interface CreateResourceMetricsConfigurationOutput {
   /**
-   * @internal
+   * <p>The resource metrics configuration that was created by this operation.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
+  ResourceMetricsConfiguration: ResourceMetricsConfiguration | undefined;
 }
 
-export interface GetDashboardInput {
-  /**
-   * <p>The name of the dashboard to be described.</p>
-   */
-  DashboardName: string | undefined;
-}
-
-export namespace GetDashboardInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDashboardInput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetDashboardOutput {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the dashboard.</p>
-   */
-  DashboardArn?: string;
-
-  /**
-   * <p>The detailed information about the dashboard, including what widgets are included and their location
-   * 			on the dashboard. For more information about the <code>DashboardBody</code> syntax,
-   * 			see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>. </p>
-   */
-  DashboardBody?: string;
-
+/**
+ * <p>Represents a specific dashboard.</p>
+ * @public
+ */
+export interface DashboardEntry {
   /**
    * <p>The name of the dashboard.</p>
+   * @public
    */
-  DashboardName?: string;
-}
-
-export namespace GetDashboardOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDashboardOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetInsightRuleReportInput {
-  /**
-   * <p>The name of the rule that you want to see data from.</p>
-   */
-  RuleName: string | undefined;
+  DashboardName?: string | undefined;
 
   /**
-   * <p>The start time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as
-   * 			<code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-   * 			<code>2019-07-01T23:59:59</code>.</p>
+   * <p>The Amazon Resource Name (ARN) of the dashboard.</p>
+   * @public
    */
-  StartTime: Date | undefined;
+  DashboardArn?: string | undefined;
 
   /**
-   * <p>The end time of the data to use in the report. When used in a raw HTTP Query API, it is formatted as
-   * 			<code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-   * 			<code>2019-07-01T23:59:59</code>.</p>
+   * <p>The time stamp of when the dashboard was last modified, either by an API call or
+   *             through the console. This number is expressed as the number of milliseconds since Jan 1,
+   *             1970 00:00:00 UTC.</p>
+   * @public
    */
-  EndTime: Date | undefined;
+  LastModified?: Date | undefined;
 
   /**
-   * <p>The period, in seconds, to use for the statistics in the <code>InsightRuleMetricDatapoint</code> results.</p>
+   * <p>The size of the dashboard, in bytes.</p>
+   * @public
    */
-  Period: number | undefined;
-
-  /**
-   * <p>The maximum number of contributors to include in the report. The range is 1 to 100. If you omit this, the default of 10 is used.</p>
-   */
-  MaxContributorCount?: number;
-
-  /**
-   * <p>Specifies which metrics to use for aggregation of contributor values for the report. You can specify one or more
-   * 		of the following metrics:</p>
-   * 		       <ul>
-   *             <li>
-   * 				           <p>
-   *                   <code>UniqueContributors</code> -- the number of unique contributors for each data point.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>MaxContributorValue</code> -- the value of the top contributor for each data point. The identity of the
-   * 					contributor might change for each data point in the graph.</p>
-   * 				           <p>If this rule aggregates by COUNT, the top contributor for each data point is the contributor with the
-   * 					most occurrences in that period. If the rule aggregates by SUM, the top contributor is the contributor with the highest sum in the log field specified
-   * 					by the rule's <code>Value</code>, during that period.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>SampleCount</code> -- the number of data points matched by the rule.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>Sum</code> -- the sum of the values from all contributors during the time period represented by that data point.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>Minimum</code> -- the minimum value from a single observation during the time period represented by that data point.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>Maximum</code> -- the maximum value from a single observation during the time period represented by that data point.</p>
-   * 			         </li>
-   *             <li>
-   * 				           <p>
-   *                   <code>Average</code> -- the average value from all contributors during the time period represented by that data point.</p>
-   * 			         </li>
-   *          </ul>
-   */
-  Metrics?: string[];
-
-  /**
-   * <p>Determines what statistic to use to rank the contributors. Valid values are SUM and MAXIMUM.</p>
-   */
-  OrderBy?: string;
-}
-
-export namespace GetInsightRuleReportInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetInsightRuleReportInput): any => ({
-    ...obj,
-  });
+  Size?: number | undefined;
 }
 
 /**
- * <p>One data point related to one contributor.</p>
- * 		       <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a> and
- * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_InsightRuleContributor.html">InsightRuleContributor</a>.</p>
+ * <p>An error or warning for the operation.</p>
+ * @public
  */
-export interface InsightRuleContributorDatapoint {
+export interface DashboardValidationMessage {
   /**
-   * <p>The timestamp of the data point.</p>
+   * <p>The data path related to the message.</p>
+   * @public
    */
-  Timestamp: Date | undefined;
+  DataPath?: string | undefined;
 
   /**
-   * <p>The approximate value that this contributor added during this timestamp.</p>
+   * <p>A message describing the error or warning.</p>
+   * @public
    */
-  ApproximateValue: number | undefined;
-}
-
-export namespace InsightRuleContributorDatapoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsightRuleContributorDatapoint): any => ({
-    ...obj,
-  });
+  Message?: string | undefined;
 }
 
 /**
- * <p>One of the unique contributors found by a Contributor Insights rule. If the rule contains multiple keys, then
- * 			a unique contributor is a unique combination of values from all the keys in the rule.</p>
- * 		       <p>If the rule contains a single key, then each unique contributor is each unique value for this key.</p>
- * 		       <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a>.</p>
+ * <p>Encapsulates the statistical data that CloudWatch computes from metric
+ *             data.</p>
+ * @public
  */
-export interface InsightRuleContributor {
+export interface Datapoint {
   /**
-   * <p>One of the log entry field keywords that is used to define contributors for this rule.</p>
+   * <p>The time stamp used for the data point.</p>
+   * @public
    */
-  Keys: string[] | undefined;
+  Timestamp?: Date | undefined;
 
   /**
-   * <p>An approximation of the aggregate value that comes from this contributor.</p>
+   * <p>The number of metric values that contributed to the aggregate value of this data
+   *             point.</p>
+   * @public
    */
-  ApproximateAggregateValue: number | undefined;
+  SampleCount?: number | undefined;
 
   /**
-   * <p>An array of the data points where this contributor is present. Only the data points when this contributor appeared are included in the array.</p>
+   * <p>The average of the metric values that correspond to the data point.</p>
+   * @public
    */
-  Datapoints: InsightRuleContributorDatapoint[] | undefined;
-}
+  Average?: number | undefined;
 
-export namespace InsightRuleContributor {
   /**
-   * @internal
+   * <p>The sum of the metric values for the data point.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InsightRuleContributor): any => ({
-    ...obj,
-  });
+  Sum?: number | undefined;
+
+  /**
+   * <p>The minimum metric value for the data point.</p>
+   * @public
+   */
+  Minimum?: number | undefined;
+
+  /**
+   * <p>The maximum metric value for the data point.</p>
+   * @public
+   */
+  Maximum?: number | undefined;
+
+  /**
+   * <p>The standard unit for the data point.</p>
+   * @public
+   */
+  Unit?: StandardUnit | undefined;
+
+  /**
+   * <p>The percentile statistic for the data point.</p>
+   * @public
+   */
+  ExtendedStatistics?: Record<string, number> | undefined;
 }
 
 /**
- * <p>One data point from the metric time series returned in a Contributor Insights rule report.</p>
- * 		       <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a>.</p>
+ * @public
  */
-export interface InsightRuleMetricDatapoint {
+export interface DeleteAlarmMuteRuleInput {
   /**
-   * <p>The timestamp of the data point.</p>
+   * <p>The name of the alarm mute rule to delete.</p>
+   * @public
    */
-  Timestamp: Date | undefined;
-
-  /**
-   * <p>The number of unique contributors who published data during this timestamp.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  UniqueContributors?: number;
-
-  /**
-   * <p>The maximum value provided by one contributor during this timestamp. Each timestamp is evaluated separately,
-   * 			so the identity of the max contributor
-   * 		could be different for each timestamp.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  MaxContributorValue?: number;
-
-  /**
-   * <p>The number of occurrences that matched the rule during this data point.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  SampleCount?: number;
-
-  /**
-   * <p>The average value from all contributors during the time period represented by that data point.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  Average?: number;
-
-  /**
-   * <p>The sum of the values from all contributors during the time period represented by that data point.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  Sum?: number;
-
-  /**
-   * <p>The minimum value from a single contributor during the time period represented by that data point.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  Minimum?: number;
-
-  /**
-   * <p>The maximum value from a single occurence from a single contributor during the time period represented by that data point.</p>
-   * 		       <p>This statistic is returned only if you included it in the <code>Metrics</code> array in your request.</p>
-   */
-  Maximum?: number;
-}
-
-export namespace InsightRuleMetricDatapoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsightRuleMetricDatapoint): any => ({
-    ...obj,
-  });
-}
-
-export interface GetInsightRuleReportOutput {
-  /**
-   * <p>An array of the strings used as the keys for this rule. The keys are the dimensions used to classify contributors.
-   * 			If the rule contains more than one key, then each unique combination of values for the keys is counted as a unique contributor.</p>
-   */
-  KeyLabels?: string[];
-
-  /**
-   * <p>Specifies whether this rule aggregates contributor data by COUNT or SUM.</p>
-   */
-  AggregationStatistic?: string;
-
-  /**
-   * <p>The sum of the values from all individual contributors that match the rule.</p>
-   */
-  AggregateValue?: number;
-
-  /**
-   * <p>An approximate count of the unique contributors found by this rule in this time period.</p>
-   */
-  ApproximateUniqueCount?: number;
-
-  /**
-   * <p>An array of the unique contributors found by this rule in this time period. If the rule contains multiple keys, each combination of values
-   * 		for the keys counts as a unique contributor.</p>
-   */
-  Contributors?: InsightRuleContributor[];
-
-  /**
-   * <p>A time series of metric data points that matches the time period in the rule request.</p>
-   */
-  MetricDatapoints?: InsightRuleMetricDatapoint[];
-}
-
-export namespace GetInsightRuleReportOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetInsightRuleReportOutput): any => ({
-    ...obj,
-  });
+  AlarmMuteRuleName: string | undefined;
 }
 
 /**
- * <p>This structure includes the <code>Timezone</code> parameter, which you can use
- * 			to specify your time zone so that the labels that are associated with returned metrics display the
- * 			correct time
- * 			for your time zone. </p>
- * 		       <p>The <code>Timezone</code> value affects a label only if you have a time-based
- * 		dynamic expression in the label. For more information about dynamic expressions in labels,
- * 		see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic Labels</a>.</p>
+ * @public
  */
-export interface LabelOptions {
+export interface DeleteAlarmsInput {
   /**
-   * <p>The time zone to use for metric data return in this operation.
-   * 			The format is <code>+</code> or <code>-</code> followed by four digits.
-   * 			The first two digits indicate the number of hours ahead or behind of UTC, and
-   * 			the final two digits are the number of minutes. For example, +0130 indicates a time zone that is 1 hour
-   * 			and 30 minutes ahead of UTC. The default is +0000. </p>
+   * <p>The alarms to be deleted. Do not enclose the alarm names in quote marks.</p>
+   * @public
    */
-  Timezone?: string;
+  AlarmNames: string[] | undefined;
 }
 
-export namespace LabelOptions {
+/**
+ * @public
+ */
+export interface DeleteAnomalyDetectorInput {
   /**
-   * @internal
+   * <p>Specifies the unique identifier of the anomaly detector to delete. If you specify
+   *             this parameter, you do not need to specify a metric to identify the detector.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: LabelOptions): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricDataInput {
-  /**
-   * <p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 500 <code>MetricDataQuery</code>
-   * 		structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. </p>
-   */
-  MetricDataQueries: MetricDataQuery[] | undefined;
+  AnomalyDetectorId?: string | undefined;
 
   /**
-   * <p>The time stamp indicating the earliest data to be returned.</p>
-   * 		       <p>The value specified is inclusive; results include data points with the specified time stamp. </p>
-   * 		       <p>CloudWatch rounds the specified time stamp as follows:</p>
-   * 		       <ul>
+   * <p>The namespace associated with the anomaly detection model to delete.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The metric name associated with the anomaly detection model to delete.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The metric dimensions associated with the anomaly detection model to delete.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The statistic associated with the anomaly detection model to delete.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Stat?: string | undefined;
+
+  /**
+   * <p>A single metric anomaly detector to be deleted.</p>
+   *          <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following
+   *             parameters in the same operation:</p>
+   *          <ul>
    *             <li>
-   *                <p>Start time less than 15 days ago - Round down to the nearest whole minute.
-   * 				For example, 12:32:34 is rounded down to 12:32:00.</p>
+   *                <p>
+   *                   <code>Dimensions</code>,</p>
    *             </li>
    *             <li>
-   *                <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval.
-   * 				For example, 12:32:34 is rounded down to 12:30:00.</p>
+   *                <p>
+   *                   <code>MetricName</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval.
-   * 				For example, 12:32:34 is rounded down to 12:00:00.</p>
+   *                <p>
+   *                   <code>Namespace</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Stat</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>the <code>MetricMathAnomalyDetector</code> parameters of
+   *                         <code>DeleteAnomalyDetectorInput</code>
+   *                </p>
    *             </li>
    *          </ul>
-   * 		       <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is
-   * 			rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions
-   * 			of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous
-   * 			10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to
-   * 			01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a
-   * 			period of 5 seconds, you receive data
-   * 			timestamped between 15:02:15 and 15:07:15.
-   * 		</p>
-   * 		       <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code>
-   * 		values that align with the value of the metric's <code>Period</code> and sync up with
-   * 		the beginning and end of an hour. For example, if the <code>Period</code> of a metric
-   * 		is 5 minutes, specifying 12:05 or 12:30 as <code>StartTime</code> can get a faster response
-   * 			from CloudWatch than setting 12:07 or 12:29 as the <code>StartTime</code>.</p>
+   *          <p>Instead, specify the single metric anomaly detector attributes as part of the
+   *                 <code>SingleMetricAnomalyDetector</code> property.</p>
+   * @public
    */
-  StartTime: Date | undefined;
+  SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector | undefined;
 
   /**
-   * <p>The time stamp indicating the latest data to be returned.</p>
-   * 		       <p>The value specified is exclusive; results include data points up to the specified time stamp.</p>
-   * 		       <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code>
-   * 			values that align with the value of the metric's <code>Period</code> and sync up with
-   * 			the beginning and end of an hour. For example, if the <code>Period</code> of a metric
-   * 			is 5 minutes, specifying 12:05 or 12:30 as <code>EndTime</code> can get a faster response
-   * 			from CloudWatch than setting 12:07 or 12:29 as the <code>EndTime</code>.</p>
-   */
-  EndTime: Date | undefined;
-
-  /**
-   * <p>Include this value, if it was returned by the previous <code>GetMetricData</code> operation,
-   * 			to get the next set of data points.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The order in which data points should be returned. <code>TimestampDescending</code> returns the newest data first and paginates
-   * 			when the <code>MaxDatapoints</code> limit is reached. <code>TimestampAscending</code> returns the oldest data first and paginates
-   * 			when the <code>MaxDatapoints</code> limit is reached.</p>
-   */
-  ScanBy?: ScanBy | string;
-
-  /**
-   * <p>The maximum number of data points the request should return before paginating. If you omit
-   * 			this, the default of 100,800 is used.</p>
-   */
-  MaxDatapoints?: number;
-
-  /**
-   * <p>This structure includes the <code>Timezone</code> parameter, which you can use
-   * 			to specify your time zone so that the labels of returned data display the
-   * 			correct time
-   * 			for your time zone. </p>
-   */
-  LabelOptions?: LabelOptions;
-}
-
-export namespace GetMetricDataInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricDataInput): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p>
- * 		       <p>If a cross-Region <code>GetMetricData</code> operation fails with a code of <code>Forbidden</code> and a
- * 			value of <code>Authentication too complex to
- * 			retrieve cross region data</code>, you can correct the problem by running the <code>GetMetricData</code>
- * 		operation in the same Region where the metric data is.</p>
- */
-export interface MessageData {
-  /**
-   * <p>The error code or status code associated with the message.</p>
-   */
-  Code?: string;
-
-  /**
-   * <p>The message text.</p>
-   */
-  Value?: string;
-}
-
-export namespace MessageData {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MessageData): any => ({
-    ...obj,
-  });
-}
-
-export enum StatusCode {
-  COMPLETE = "Complete",
-  INTERNAL_ERROR = "InternalError",
-  PARTIAL_DATA = "PartialData",
-}
-
-/**
- * <p>A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code>
- * 			structures. Each of these structures includes the data points for that metric, along
- * 			with the timestamps of those data points and other identifying information.</p>
- */
-export interface MetricDataResult {
-  /**
-   * <p>The short name you specified to represent this metric.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The human-readable label associated with the data.</p>
-   */
-  Label?: string;
-
-  /**
-   * <p>The timestamps for the data points, formatted in Unix timestamp format. The number of
-   * 			timestamps always matches the number of values and the value for Timestamps[x] is
-   * 			Values[x].</p>
-   */
-  Timestamps?: Date[];
-
-  /**
-   * <p>The data points for the metric corresponding to <code>Timestamps</code>. The number of
-   * 			values always matches the number of timestamps and the timestamp for Values[x] is
-   * 			Timestamps[x].</p>
-   */
-  Values?: number[];
-
-  /**
-   * <p>The status of the returned data. <code>Complete</code> indicates that all data points in the requested time range were returned.
-   * 			<code>PartialData</code> means that an incomplete set of data points were returned.
-   * 					You can use the <code>NextToken</code> value that was returned and repeat your request to get more data points.
-   * 			<code>NextToken</code> is not returned if you are performing a math expression. <code>InternalError</code>
-   * 			indicates that an error occurred. Retry your request using <code>NextToken</code>, if present.</p>
-   */
-  StatusCode?: StatusCode | string;
-
-  /**
-   * <p>A list of messages with additional information about the data returned.</p>
-   */
-  Messages?: MessageData[];
-}
-
-export namespace MetricDataResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDataResult): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricDataOutput {
-  /**
-   * <p>The metrics that are returned, including the metric name, namespace, and dimensions.</p>
-   */
-  MetricDataResults?: MetricDataResult[];
-
-  /**
-   * <p>A token that marks the next batch of returned results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Contains a message about this <code>GetMetricData</code> operation, if the operation results in such a message.
-   * 			An example of a message that
-   * 			might be returned is <code>Maximum number of allowed metrics exceeded</code>. If there is a message, as much of the
-   * 			operation as possible is still executed.</p>
-   * 		       <p>A message appears here only if it is related to the global <code>GetMetricData</code> operation. Any message
-   * 			about a specific metric returned by the operation appears in the <code>MetricDataResult</code> object returned for that metric.</p>
-   */
-  Messages?: MessageData[];
-}
-
-export namespace GetMetricDataOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricDataOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricStatisticsInput {
-  /**
-   * <p>The namespace of the metric, with or without spaces.</p>
-   */
-  Namespace: string | undefined;
-
-  /**
-   * <p>The name of the metric, with or without spaces.</p>
-   */
-  MetricName: string | undefined;
-
-  /**
-   * <p>The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension.
-   * 			CloudWatch treats each unique combination of dimensions as a separate metric.
-   * 		    If a specific combination of dimensions was not published, you can't retrieve statistics for it.
-   * 		    You must specify the same dimensions that were used when the metrics were created. For an example,
-   * 		    see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations">Dimension Combinations</a> in the <i>Amazon CloudWatch User Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the
-   * 			<i>Amazon CloudWatch User Guide</i>.</p>
-   */
-  Dimensions?: Dimension[];
-
-  /**
-   * <p>The time stamp that determines the first data point to return. Start times are
-   * 			evaluated relative to the time that CloudWatch receives the request.</p>
-   * 	        <p>The value specified is inclusive; results include data points with the specified time stamp.
-   * 	    	In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).</p>
-   * 		       <p>CloudWatch rounds the specified time stamp as follows:</p>
-   * 		       <ul>
+   * <p>The metric math anomaly detector to be deleted.</p>
+   *          <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following
+   *             parameters in the same operation:</p>
+   *          <ul>
    *             <li>
-   *                <p>Start time less than 15 days ago - Round down to the nearest whole minute.
-   * 			    For example, 12:32:34 is rounded down to 12:32:00.</p>
+   *                <p>
+   *                   <code>Dimensions</code>,</p>
    *             </li>
    *             <li>
-   *                <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute clock interval.
-   * 			    For example, 12:32:34 is rounded down to 12:30:00.</p>
+   *                <p>
+   *                   <code>MetricName</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                <p>Start time greater than 63 days ago - Round down to the nearest 1-hour clock interval.
-   * 			    For example, 12:32:34 is rounded down to 12:00:00.</p>
+   *                <p>
+   *                   <code>Namespace</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Stat</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>the <code>SingleMetricAnomalyDetector</code> parameters of
+   *                         <code>DeleteAnomalyDetectorInput</code>
+   *                </p>
    *             </li>
    *          </ul>
-   * 		       <p>If you set <code>Period</code> to 5, 10, or 30, the start time of your request is
-   * 			rounded down to the nearest time that corresponds to even 5-, 10-, or 30-second divisions
-   * 			of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the previous
-   * 			10-second period, the start time of your request is rounded down and you receive data from 01:05:10 to
-   * 			01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data, using a
-   * 			period of 5 seconds, you receive data
-   * 			timestamped between 15:02:15 and 15:07:15.
-   * 		</p>
+   *          <p>Instead, specify the metric math anomaly detector attributes as part of the
+   *                 <code>MetricMathAnomalyDetector</code> property.</p>
+   * @public
    */
-  StartTime: Date | undefined;
-
-  /**
-   * <p>The time stamp that determines the last data point to return.</p>
-   * 		       <p>The value specified is exclusive; results include data points up to the specified time stamp.
-   * 			In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).</p>
-   */
-  EndTime: Date | undefined;
-
-  /**
-   * <p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can
-   * 			be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected
-   * 			at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics
-   * 		are those metrics stored by a <code>PutMetricData</code> call that includes a <code>StorageResolution</code> of 1 second.</p>
-   * 		       <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
-   * 		    3 hours ago, you must specify the period as follows or no data points in that time range is returned:</p>
-   * 		       <ul>
-   *             <li>
-   *                <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).</p>
-   *             </li>
-   *             <li>
-   *                <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).</p>
-   *             </li>
-   *             <li>
-   *                <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).</p>
-   *             </li>
-   *          </ul>
-   */
-  Period: number | undefined;
-
-  /**
-   * <p>The metric statistics, other than percentile. For percentile statistics,
-   * 		    use <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you must
-   * 		specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both.</p>
-   */
-  Statistics?: (Statistic | string)[];
-
-  /**
-   * <p>The percentile statistics. Specify values between p0.0 and p100. When calling <code>GetMetricStatistics</code>, you must
-   * 			specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
-   * 			available for metrics when any of the metric values are negative numbers.</p>
-   */
-  ExtendedStatistics?: string[];
-
-  /**
-   * <p>The unit for a given metric.
-   * 			If you omit <code>Unit</code>, all data that was collected with any unit is returned, along with the corresponding units that were specified
-   * 			when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified.
-   * 			If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>
-   */
-  Unit?: StandardUnit | string;
-}
-
-export namespace GetMetricStatisticsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricStatisticsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricStatisticsOutput {
-  /**
-   * <p>A label for the specified metric.</p>
-   */
-  Label?: string;
-
-  /**
-   * <p>The data points for the specified metric.</p>
-   */
-  Datapoints?: Datapoint[];
-}
-
-export namespace GetMetricStatisticsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricStatisticsOutput): any => ({
-    ...obj,
-  });
+  MetricMathAnomalyDetector?: MetricMathAnomalyDetector | undefined;
 }
 
 /**
- * <p>Parameters were used together that cannot be used together.</p>
+ * @public
  */
-export interface InvalidParameterCombinationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterCombinationException";
-  $fault: "client";
+export interface DeleteAnomalyDetectorOutput {}
+
+/**
+ * @public
+ */
+export interface DeleteDashboardsInput {
   /**
-   * <p></p>
+   * <p>The dashboards to be deleted. This parameter is required.</p>
+   * @public
    */
-  message?: string;
+  DashboardNames: string[] | undefined;
 }
 
-export namespace InvalidParameterCombinationException {
+/**
+ * @public
+ */
+export interface DeleteDashboardsOutput {}
+
+/**
+ * @public
+ */
+export interface DeleteInsightRulesInput {
   /**
-   * @internal
+   * <p>An array of the rule names to delete. If you need to find out the names of your rules,
+   *             use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidParameterCombinationException): any => ({
-    ...obj,
-  });
+  RuleNames: string[] | undefined;
 }
 
-export interface GetMetricStreamInput {
+/**
+ * @public
+ */
+export interface DeleteInsightRulesOutput {
   /**
-   * <p>The name of the metric stream to retrieve information about.</p>
+   * <p>An array listing the rules that could not be deleted. You cannot delete built-in
+   *             rules.</p>
+   * @public
+   */
+  Failures?: PartialFailure[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteMetricDataQueryDefinitionInput {
+  /**
+   * <p>The ID of the metric data query definition to delete.</p>
+   * @public
+   */
+  Id: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteMetricDataQueryDefinitionOutput {}
+
+/**
+ * @public
+ */
+export interface DeleteMetricStreamInput {
+  /**
+   * <p>The name of the metric stream to delete.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
-export namespace GetMetricStreamInput {
+/**
+ * @public
+ */
+export interface DeleteMetricStreamOutput {}
+
+/**
+ * <p>Specifies the resource ARN for a <code>DeleteResourceMetricsConfiguration</code>
+ *             request.</p>
+ * @public
+ */
+export interface DeleteResourceMetricsConfigurationInput {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to delete the
+   *             resource metrics configuration for.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetMetricStreamInput): any => ({
-    ...obj,
-  });
+  ResourceArn: string | undefined;
 }
 
 /**
- * <p>This structure contains the name of one of the metric namespaces that is listed in
- * 		a filter of a metric stream.</p>
+ * <p>No data is returned.</p>
+ * @public
  */
-export interface MetricStreamFilter {
+export interface DeleteResourceMetricsConfigurationOutput {}
+
+/**
+ * @public
+ */
+export interface DescribeAlarmContributorsInput {
   /**
-   * <p>The name of the metric namespace in the filter.</p>
+   * <p>The name of the alarm for which to retrieve contributor information.</p>
+   * @public
    */
-  Namespace?: string;
-}
-
-export namespace MetricStreamFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricStreamFilter): any => ({
-    ...obj,
-  });
-}
-
-export enum MetricStreamOutputFormat {
-  JSON = "json",
-  OPEN_TELEMETRY_0_7 = "opentelemetry0.7",
-}
-
-export interface GetMetricStreamOutput {
-  /**
-   * <p>The ARN of the metric stream.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the metric stream.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>If this array of metric namespaces is present, then these
-   * 			namespaces are the only
-   * 		metric namespaces that are streamed by this metric stream.</p>
-   */
-  IncludeFilters?: MetricStreamFilter[];
-
-  /**
-   * <p>If this array of metric namespaces is present, then these namespaces are the only
-   * 			metric namespaces that are not streamed by this metric stream. In this case, all other metric namespaces in
-   * 		the account are streamed by this metric stream.</p>
-   */
-  ExcludeFilters?: MetricStreamFilter[];
-
-  /**
-   * <p>The ARN of the Amazon Kinesis Firehose delivery stream that is used by
-   * 		this metric stream.</p>
-   */
-  FirehoseArn?: string;
-
-  /**
-   * <p>The ARN of the IAM role that is used by this metric stream.</p>
-   */
-  RoleArn?: string;
-
-  /**
-   * <p>The state of the metric stream. The possible values are <code>running</code>
-   * 		and <code>stopped</code>.</p>
-   */
-  State?: string;
-
-  /**
-   * <p>The date that the metric stream was created.</p>
-   */
-  CreationDate?: Date;
-
-  /**
-   * <p>The date of the most recent update to the metric stream's configuration.</p>
-   */
-  LastUpdateDate?: Date;
-
-  /**
-   * <p></p>
-   */
-  OutputFormat?: MetricStreamOutputFormat | string;
-}
-
-export namespace GetMetricStreamOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricStreamOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricWidgetImageInput {
-  /**
-   * <p>A JSON string that defines the bitmap graph to be retrieved. The string includes the
-   * 			metrics to include in the graph, statistics, annotations, title, axis limits, and so on.
-   * 			You can include only one <code>MetricWidget</code> parameter in each <code>GetMetricWidgetImage</code> call.</p>
-   * 		       <p>For more information about the syntax of <code>MetricWidget</code> see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
-   *
-   * 		       <p>If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation
-   * 			point appears next to the graph legend.</p>
-   */
-  MetricWidget: string | undefined;
-
-  /**
-   * <p>The format of the resulting image. Only PNG images are supported.</p>
-   *
-   * 		       <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns an HTTP response with the
-   * 			content-type set to <code>text/xml</code>. The image data is in a <code>MetricWidgetImage</code>
-   * 			field. For example:</p>
-   *
-   * 		       <p>
-   *             <code>
-   * 			<GetMetricWidgetImageResponse xmlns=<URLstring>></code>
-   *          </p>
-   * 		       <p>
-   *             <code>  <GetMetricWidgetImageResult></code>
-   *          </p>
-   * 		       <p>
-   *             <code>    <MetricWidgetImage></code>
-   *          </p>
-   * 		       <p>
-   *             <code>       iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code>
-   *          </p>
-   * 		       <p>
-   *             <code>    </MetricWidgetImage></code>
-   *          </p>
-   * 		       <p>
-   *             <code>  </GetMetricWidgetImageResult></code>
-   *          </p>
-   * 		       <p>
-   *             <code>  <ResponseMetadata></code>
-   *          </p>
-   * 		       <p>
-   *             <code>    <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId></code>
-   *          </p>
-   * 		       <p>
-   *             <code>  </ResponseMetadata></code>
-   *          </p>
-   * 		       <p>
-   *             <code></GetMetricWidgetImageResponse></code>
-   *          </p>
-   *
-   * 		       <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most
-   * 			use cases, and all actions using an Amazon Web Services SDK, you should use <code>png</code>. If you specify
-   * 			<code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>,
-   * 			and the body of the response is a PNG image. </p>
-   */
-  OutputFormat?: string;
-}
-
-export namespace GetMetricWidgetImageInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricWidgetImageInput): any => ({
-    ...obj,
-  });
-}
-
-export interface GetMetricWidgetImageOutput {
-  /**
-   * <p>The image of the graph, in the output format specified. The output is base64-encoded.</p>
-   */
-  MetricWidgetImage?: Uint8Array;
-}
-
-export namespace GetMetricWidgetImageOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetMetricWidgetImageOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface ListDashboardsInput {
-  /**
-   * <p>If you specify this parameter, only
-   * 			the dashboards with names starting with the specified string are listed. The maximum length is 255, and
-   * 			valid characters are A-Z, a-z, 0-9, ".", "-", and "_".
-   *
-   * 		</p>
-   */
-  DashboardNamePrefix?: string;
-
-  /**
-   * <p>The token returned by a previous call to indicate that there is more data available.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace ListDashboardsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDashboardsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface ListDashboardsOutput {
-  /**
-   * <p>The list of matching dashboards.</p>
-   */
-  DashboardEntries?: DashboardEntry[];
-
-  /**
-   * <p>The token that marks the start of the next batch of returned results.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace ListDashboardsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDashboardsOutput): any => ({
-    ...obj,
-  });
-}
-
-export enum RecentlyActive {
-  PT3H = "PT3H",
-}
-
-export interface ListMetricsInput {
-  /**
-   * <p>The metric namespace to filter against. Only the namespace that matches exactly
-   * 		will be returned.</p>
-   */
-  Namespace?: string;
-
-  /**
-   * <p>The name of the metric to filter against.  Only the metrics with names that match exactly
-   * 			will be returned.</p>
-   */
-  MetricName?: string;
-
-  /**
-   * <p>The dimensions to filter against.  Only the dimensions that match exactly
-   * 			will be returned.</p>
-   */
-  Dimensions?: DimensionFilter[];
+  AlarmName: string | undefined;
 
   /**
    * <p>The token returned by a previous call to indicate that there is more data
-   * 			available.</p>
+   *             available.</p>
+   * @public
    */
-  NextToken?: string;
-
-  /**
-   * <p>To filter the results to show only metrics that have had data points published
-   * 			in the past three hours, specify this parameter
-   * 			with a value of <code>PT3H</code>. This is the only valid value
-   * 			for this parameter.</p>
-   * 		       <p>The results that are returned are an approximation of the value you specify. There
-   * 		is a low probability that the returned results include metrics with last published
-   * 		data as much as 40 minutes more than the specified time interval.</p>
-   */
-  RecentlyActive?: RecentlyActive | string;
-}
-
-export namespace ListMetricsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMetricsInput): any => ({
-    ...obj,
-  });
-}
-
-export interface ListMetricsOutput {
-  /**
-   * <p>The metrics that match your request. </p>
-   */
-  Metrics?: Metric[];
-
-  /**
-   * <p>The token that marks the start of the next batch of returned results. </p>
-   */
-  NextToken?: string;
-}
-
-export namespace ListMetricsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMetricsOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface ListMetricStreamsInput {
-  /**
-   * <p>Include this value, if it was returned by the previous call, to get the next set of metric streams.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return in one operation.</p>
-   */
-  MaxResults?: number;
-}
-
-export namespace ListMetricStreamsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListMetricStreamsInput): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>This structure contains the configuration information about one metric stream.</p>
+ * @public
  */
-export interface MetricStreamEntry {
+export interface DescribeAlarmContributorsOutput {
   /**
-   * <p>The ARN of the metric stream.</p>
+   * <p>A list of alarm contributors that provide details about the individual time series
+   *             contributing to the alarm's state.</p>
+   * @public
    */
-  Arn?: string;
+  AlarmContributors: AlarmContributor[] | undefined;
 
   /**
-   * <p>The date that the metric stream was originally created.</p>
+   * <p>The token that marks the start of the next batch of returned results.</p>
+   * @public
    */
-  CreationDate?: Date;
-
-  /**
-   * <p>The date that the configuration of this metric stream was most recently updated.</p>
-   */
-  LastUpdateDate?: Date;
-
-  /**
-   * <p>The name of the metric stream.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The ARN of the Kinesis Firehose devlivery stream that is used for this metric stream.</p>
-   */
-  FirehoseArn?: string;
-
-  /**
-   * <p>The current state of this stream. Valid values are <code>running</code> and <code>stopped</code>.</p>
-   */
-  State?: string;
-
-  /**
-   * <p>The output format of this metric stream. Valid values are
-   * 			<code>json</code>
-   * 			and <code>opentelemetry0.7</code>.</p>
-   */
-  OutputFormat?: MetricStreamOutputFormat | string;
+  NextToken?: string | undefined;
 }
 
-export namespace MetricStreamEntry {
+/**
+ * @public
+ */
+export interface DescribeAlarmHistoryInput {
   /**
-   * @internal
+   * <p>The name of the alarm.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: MetricStreamEntry): any => ({
-    ...obj,
-  });
+  AlarmName?: string | undefined;
+
+  /**
+   * <p>The unique identifier of a specific alarm contributor to filter the alarm history
+   *             results.</p>
+   * @public
+   */
+  AlarmContributorId?: string | undefined;
+
+  /**
+   * <p>Use this parameter to specify whether you want the operation to return metric alarms,
+   *             composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+   *             returned.</p>
+   * @public
+   */
+  AlarmTypes?: AlarmType[] | undefined;
+
+  /**
+   * <p>The type of alarm histories to retrieve.</p>
+   * @public
+   */
+  HistoryItemType?: HistoryItemType | undefined;
+
+  /**
+   * <p>The starting date to retrieve alarm history.</p>
+   * @public
+   */
+  StartDate?: Date | undefined;
+
+  /**
+   * <p>The ending date to retrieve alarm history.</p>
+   * @public
+   */
+  EndDate?: Date | undefined;
+
+  /**
+   * <p>The maximum number of alarm history records to retrieve.</p>
+   * @public
+   */
+  MaxRecords?: number | undefined;
+
+  /**
+   * <p>The token returned by a previous call to indicate that there is more data
+   *             available.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Specified whether to return the newest or oldest alarm history first. Specify
+   *                 <code>TimestampDescending</code> to have the newest event history returned first,
+   *             and specify <code>TimestampAscending</code> to have the oldest history returned
+   *             first.</p>
+   * @public
+   */
+  ScanBy?: ScanBy | undefined;
 }
 
-export interface ListMetricStreamsOutput {
+/**
+ * @public
+ */
+export interface DescribeAlarmHistoryOutput {
   /**
-   * <p>The token that marks the start of the next batch of returned results. You can use this
-   * 		token in a subsequent operation to get the next batch of results.</p>
+   * <p>The alarm histories, in JSON format.</p>
+   * @public
    */
-  NextToken?: string;
+  AlarmHistoryItems?: AlarmHistoryItem[] | undefined;
 
   /**
-   * <p>The array of metric stream information.</p>
+   * <p>The token that marks the start of the next batch of returned results.</p>
+   * @public
    */
-  Entries?: MetricStreamEntry[];
+  NextToken?: string | undefined;
 }
 
-export namespace ListMetricStreamsOutput {
+/**
+ * @public
+ */
+export interface DescribeAlarmsInput {
   /**
-   * @internal
+   * <p>The names of the alarms to retrieve information about.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListMetricStreamsOutput): any => ({
-    ...obj,
-  });
+  AlarmNames?: string[] | undefined;
+
+  /**
+   * <p>An alarm name prefix. If you specify this parameter, you receive information about
+   *             all alarms that have names that start with this prefix.</p>
+   *          <p>If this parameter is specified, you cannot specify
+   *             <code>AlarmNames</code>.</p>
+   * @public
+   */
+  AlarmNamePrefix?: string | undefined;
+
+  /**
+   * <p>Use this parameter to specify whether you want the operation to return metric alarms,
+   *             composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+   *             returned, even if composite alarms or log alarms exist in the account.</p>
+   *          <p>For example, if you omit this parameter or specify <code>MetricAlarms</code>, the
+   *             operation returns only a list of metric alarms. It does not return any composite alarms
+   *             or log alarms, even if they exist in the account.</p>
+   *          <p>If you specify <code>CompositeAlarms</code>, the operation returns only a list of
+   *             composite alarms, and does not return any metric alarms or log alarms.</p>
+   *          <p>If you specify <code>LogAlarms</code>, the operation returns only a list of log
+   *             alarms, and does not return any metric alarms or composite alarms.</p>
+   * @public
+   */
+  AlarmTypes?: AlarmType[] | undefined;
+
+  /**
+   * <p>If you use this parameter and specify the name of a composite alarm, the operation
+   *             returns information about the "children" alarms of the alarm you specify. These are the
+   *             metric alarms and composite alarms referenced in the <code>AlarmRule</code> field of the
+   *             composite alarm that you specify in <code>ChildrenOfAlarmName</code>. Information about
+   *             the composite alarm that you name in <code>ChildrenOfAlarmName</code> is not
+   *             returned.</p>
+   *          <p>If you specify <code>ChildrenOfAlarmName</code>, you cannot specify any other
+   *             parameters in the request except for <code>MaxRecords</code> and <code>NextToken</code>.
+   *             If you do so, you receive a validation error.</p>
+   *          <note>
+   *             <p>Only the <code>Alarm Name</code>, <code>ARN</code>, <code>StateValue</code>
+   *                 (OK/ALARM/INSUFFICIENT_DATA), and <code>StateUpdatedTimestamp</code> information are
+   *                 returned by this operation when you use this parameter. To get complete information
+   *                 about these alarms, perform another <code>DescribeAlarms</code> operation and
+   *                 specify the parent alarm names in the <code>AlarmNames</code> parameter.</p>
+   *          </note>
+   * @public
+   */
+  ChildrenOfAlarmName?: string | undefined;
+
+  /**
+   * <p>If you use this parameter and specify the name of a metric or composite alarm, the
+   *             operation returns information about the "parent" alarms of the alarm you specify. These
+   *             are the composite alarms that have <code>AlarmRule</code> parameters that reference the
+   *             alarm named in <code>ParentsOfAlarmName</code>. Information about the alarm that you
+   *             specify in <code>ParentsOfAlarmName</code> is not returned.</p>
+   *          <p>If you specify <code>ParentsOfAlarmName</code>, you cannot specify any other
+   *             parameters in the request except for <code>MaxRecords</code> and <code>NextToken</code>.
+   *             If you do so, you receive a validation error.</p>
+   *          <note>
+   *             <p>Only the Alarm Name and ARN are returned by this operation when you use this
+   *                 parameter. To get complete information about these alarms, perform another
+   *                     <code>DescribeAlarms</code> operation and specify the parent alarm names in the
+   *                     <code>AlarmNames</code> parameter.</p>
+   *          </note>
+   * @public
+   */
+  ParentsOfAlarmName?: string | undefined;
+
+  /**
+   * <p>Specify this parameter to receive information only about alarms that are currently
+   *             in the state that you specify.</p>
+   * @public
+   */
+  StateValue?: StateValue | undefined;
+
+  /**
+   * <p>Use this parameter to filter the results of the operation to only those alarms that
+   *             use a certain alarm action. For example, you could specify the ARN of an SNS topic to
+   *             find all alarms that send notifications to that topic.</p>
+   * @public
+   */
+  ActionPrefix?: string | undefined;
+
+  /**
+   * <p>The maximum number of alarm descriptions to retrieve.</p>
+   * @public
+   */
+  MaxRecords?: number | undefined;
+
+  /**
+   * <p>The token returned by a previous call to indicate that there is more data
+   *             available.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
-export interface ListTagsForResourceInput {
+/**
+ * <p>Contains the schedule expression and time-range offsets that define when a scheduled query runs and what time range each execution covers.</p>
+ * @public
+ */
+export interface ScheduleConfiguration {
   /**
-   * <p>The ARN of the CloudWatch resource that you want to view tags for.</p>
-   * 		       <p>The ARN format of an alarm is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
-   *             </code>
-   *          </p>
-   * 		       <p>The ARN format of a Contributor Insights rule is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i>
-   *             </code>
-   *          </p>
-   * 	        <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-   * 				Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-   * 			Reference</i>.</p>
+   * <p>The schedule expression that defines how often the underlying CloudWatch Logs scheduled query runs. Specify a <code>rate()</code> expression, for example <code>rate(5 minutes)</code>.</p>
+   * @public
    */
-  ResourceARN: string | undefined;
-}
+  ScheduleExpression: string | undefined;
 
-export namespace ListTagsForResourceInput {
   /**
-   * @internal
+   * <p>The offset, in seconds, before the scheduled execution time at which the query time range begins. For example, an offset of 360 (6 minutes) on a query running at 12:05:00 starts the query time range at 11:59:00.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsForResourceInput): any => ({
-    ...obj,
-  });
+  StartTimeOffset: number | undefined;
+
+  /**
+   * <p>The offset, in seconds, before the scheduled execution time at which the query time range ends. Must be non-negative and less than <code>StartTimeOffset</code>.  The default is 0.</p>
+   * @public
+   */
+  EndTimeOffset?: number | undefined;
 }
 
 /**
  * <p>A key-value pair associated with a CloudWatch resource.</p>
+ * @public
  */
 export interface Tag {
   /**
-   * <p>A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your
-   * 		resources.</p>
+   * <p>A string that you can use to assign a value. The combination of tag keys and values
+   *             can help you organize and categorize your resources.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>The value for the specified tag key.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace Tag {
+/**
+ * <p>The configuration of the CloudWatch Logs scheduled query that backs a log alarm.</p>
+ * @public
+ */
+export interface ScheduledQueryConfiguration {
   /**
-   * @internal
+   * <p>The CloudWatch Logs query to execute on each scheduled run. Length constraints: maximum of 10,000 characters.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
+  QueryString: string | undefined;
+
+  /**
+   * <p>The log groups to query. Each entry can be a log group name or ARN. Use the ARN form when querying log groups in a different account (for example, when running cross-account queries from a monitoring account). The list must contain between 1 and 50 entries.</p>
+   * @public
+   */
+  LogGroupIdentifiers?: string[] | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the CloudWatch Logs scheduled query that the alarm uses. This field is populated in <code>DescribeAlarms</code> responses.</p>
+   * @public
+   */
+  QueryARN?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role that CloudWatch assumes when executing the scheduled query against the configured log groups.</p>
+   * @public
+   */
+  ScheduledQueryRoleARN: string | undefined;
+
+  /**
+   * <p>The schedule and time-range offset configuration for the underlying scheduled query.</p>
+   * @public
+   */
+  ScheduleConfiguration: ScheduleConfiguration | undefined;
+
+  /**
+   * <p>The expression that defines how to aggregate query results into one or more scalar values for alarm evaluation. For example, <code>count(*)</code> or <code>avg(latency) by host | sort desc</code>. Length constraints: minimum 1 character, maximum 2048 characters.</p>
+   * @public
+   */
+  AggregationExpression: string | undefined;
+
+  /**
+   * <p>A list of key-value pairs to associate with the underlying scheduled query resource.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
 }
 
-export interface ListTagsForResourceOutput {
+/**
+ * <p>The configuration settings that define the warm-up behavior for an alarm. Use these
+ *             settings to delay alarm evaluation after you create or update the alarm, which reduces
+ *             alarm noise while a new resource or service starts publishing data.</p>
+ *          <p>During the warm-up period, the alarm stays in <code>INSUFFICIENT_DATA</code> and
+ *             does not perform alarm actions.</p>
+ * @public
+ */
+export interface WarmUpConfiguration {
   /**
-   * <p>The list of tag keys and values associated with the resource you specified.</p>
+   * <p>The length of the warm-up period, in minutes. After you create or update the alarm,
+   *             the alarm stays in <code>INSUFFICIENT_DATA</code> for this duration. During this time,
+   *             the alarm does not perform alarm actions.</p>
+   *          <p>You can change this value at any time, including after the warm-up period ends. If
+   *             you change it after the warm-up period ends, the new value does not restart the
+   *             warm-up period.</p>
+   * @public
    */
-  Tags?: Tag[];
+  WarmUpPeriodDurationInMinutes: number | undefined;
+
+  /**
+   * <p>Specifies whether the alarm waits for the full warm-up period before it starts
+   *             to evaluate. The default is <code>false</code>. If <code>true</code>, the alarm waits
+   *             the entire <code>WarmUpPeriodDurationInMinutes</code> before it starts to evaluate, even
+   *             if metric data arrives earlier. If <code>false</code>, the alarm ends the warm-up period
+   *             early. Evaluation begins as soon as the alarm has enough metric data to fill its
+   *             evaluation window.</p>
+   * @public
+   */
+  OnlyStartEvaluatingAfterWarmUpPeriodEnds?: boolean | undefined;
 }
 
-export namespace ListTagsForResourceOutput {
+/**
+ * <p>The details about a log alarm.</p>
+ * @public
+ */
+export interface LogAlarm {
   /**
-   * @internal
+   * <p>The name of the alarm.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListTagsForResourceOutput): any => ({
-    ...obj,
-  });
+  AlarmName?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the alarm.</p>
+   * @public
+   */
+  AlarmArn?: string | undefined;
+
+  /**
+   * <p>The description of the alarm.</p>
+   * @public
+   */
+  AlarmDescription?: string | undefined;
+
+  /**
+   * <p>The time stamp of the last update to the alarm configuration.</p>
+   * @public
+   */
+  AlarmConfigurationUpdatedTimestamp?: Date | undefined;
+
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm state.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  OKActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  AlarmActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  InsufficientDataActions?: string[] | undefined;
+
+  /**
+   * <p>The state value for the alarm.</p>
+   * @public
+   */
+  StateValue?: StateValue | undefined;
+
+  /**
+   * <p>An explanation for the alarm state, in text format.</p>
+   * @public
+   */
+  StateReason?: string | undefined;
+
+  /**
+   * <p>An explanation for the alarm state, in JSON format.</p>
+   * @public
+   */
+  StateReasonData?: string | undefined;
+
+  /**
+   * <p>The time stamp of the last update to the value of either the <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>
+   * @public
+   */
+  StateUpdatedTimestamp?: Date | undefined;
+
+  /**
+   * <p>The configuration of the underlying CloudWatch Logs scheduled query, including the query string, log groups, schedule, aggregation expression, and the ARN of the managed scheduled query.</p>
+   * @public
+   */
+  ScheduledQueryConfiguration?: ScheduledQueryConfiguration | undefined;
+
+  /**
+   * <p>The number of most recent scheduled query results that the alarm evaluates against the threshold (the N in M-of-N evaluation).</p>
+   * @public
+   */
+  QueryResultsToEvaluate?: number | undefined;
+
+  /**
+   * <p>The number of query results, out of the most recent <code>QueryResultsToEvaluate</code> results, that must breach the threshold to trigger the alarm to transition to <code>ALARM</code> (the M in M-of-N evaluation).</p>
+   * @public
+   */
+  QueryResultsToAlarm?: number | undefined;
+
+  /**
+   * <p>The value to compare with the aggregated query result.</p>
+   * @public
+   */
+  Threshold?: number | undefined;
+
+  /**
+   * <p>The arithmetic operation to use when comparing the aggregated query result and the threshold. The aggregated query result is used as the first operand.</p>
+   * @public
+   */
+  ComparisonOperator?: ComparisonOperator | undefined;
+
+  /**
+   * <p>How this alarm handles missing data points. Valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>.</p>
+   * @public
+   */
+  TreatMissingData?: string | undefined;
+
+  /**
+   * <p>The date and time that the alarm's <code>StateValue</code> most recently changed.</p>
+   * @public
+   */
+  StateTransitionedTimestamp?: Date | undefined;
+
+  /**
+   * <p>If the value of this field is <code>EVALUATION_ERROR</code>, it indicates configuration errors in the alarm setup that require review and correction. Refer to the <code>StateReason</code> field of the alarm for more details.</p>
+   *          <p>If the value of this field is <code>EVALUATION_FAILURE</code>, it indicates temporary CloudWatch issues. We recommend manual monitoring until the issue is resolved.</p>
+   *          <p>If the value of this field is <code>PARTIAL_DATA</code>, it indicates that the query returned the maximum 500 contributor groups but more matched. The alarm evaluates the available contributors, but results might be incomplete.</p>
+   * @public
+   */
+  EvaluationState?: EvaluationState | undefined;
+
+  /**
+   * <p>The number of log lines from the most recent scheduled query execution that are included in alarm action notifications. Valid range is 0 through 50. A value of 0 means no log lines are included.</p>
+   * @public
+   */
+  ActionLogLineCount?: number | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the IAM role that CloudWatch assumes to retrieve log events for inclusion in alarm action notifications. Set when <code>ActionLogLineCount</code> is greater than 0.</p>
+   * @public
+   */
+  ActionLogLineRoleArn?: string | undefined;
+
+  /**
+   * <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+   *             after you create or update the alarm. During the warm-up period, the alarm stays in
+   *                 <code>INSUFFICIENT_DATA</code> and does not perform alarm actions.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+   *                 periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+   * @public
+   */
+  WarmUpConfiguration?: WarmUpConfiguration | undefined;
+
+  /**
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
+   */
+  ActionConfiguration?: ActionConfiguration | undefined;
 }
 
-export interface PutAnomalyDetectorInput {
+/**
+ * <p>The evaluation criteria for an alarm. This is a union type that currently supports
+ *                 <code>PromQLCriteria</code>.</p>
+ * @public
+ */
+export type EvaluationCriteria =
+  | EvaluationCriteria.PromQLCriteriaMember
+  | EvaluationCriteria.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationCriteria {
   /**
-   * <p>The namespace of the metric to create the anomaly detection model for.</p>
+   * <p>The PromQL criteria for the alarm evaluation.</p>
+   * @public
    */
-  Namespace: string | undefined;
+  export interface PromQLCriteriaMember {
+    PromQLCriteria: AlarmPromQLCriteria;
+    $unknown?: never;
+  }
 
   /**
-   * <p>The name of the metric to create the anomaly detection model for.</p>
+   * @public
+   */
+  export interface $UnknownMember {
+    PromQLCriteria?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    PromQLCriteria: (value: AlarmPromQLCriteria) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>An evaluation window that advances each time the alarm is evaluated, forming a rolling
+ *             time window. This is the default evaluation window. A sliding window has no additional
+ *             configuration options.</p>
+ *          <p>Choose a sliding window when you need the fastest detection and the calendar
+ *             boundaries of the data don't matter, such as for continuous performance, latency, or
+ *             resource-exhaustion monitoring.</p>
+ * @public
+ */
+export interface SlidingWindow {}
+
+/**
+ * <p>An evaluation window that aligns the evaluated range to fixed clock boundaries that
+ *             match the alarm's period, such as the top of the hour, midnight, or the start of the
+ *             calendar week, optionally in a specific time zone.</p>
+ *          <p>When you use a wall clock window, the alarm's period must be 1 minute (60 seconds),
+ *             5 minutes (300 seconds), 1 hour (3,600 seconds), 1 day (86,400 seconds), or 1 week
+ *             (604,800 seconds). Other period values aren't supported with a wall clock window.</p>
+ *          <p>Choose a wall clock window when your monitoring is tied to a business or calendar
+ *             period, such as daily reports, batch jobs, or backups, or when you want alarm
+ *             evaluations to match the periods shown on a metric dashboard.</p>
+ * @public
+ */
+export interface WallClockWindow {
+  /**
+   * <p>The time zone to use when the alarm aligns the evaluation window to clock boundaries.
+   *             You can specify an IANA time zone name (for example, <code>America/New_York</code>), a
+   *             fixed UTC offset (for example, <code>+05:30</code>), or an offset-prefixed identifier
+   *             (for example, <code>UTC+05:30</code>). The offset must be aligned to a multiple of
+   *             5 minutes. If you don't specify a time zone, CloudWatch uses
+   *             <code>UTC</code>.</p>
+   *          <p>The time zone affects window alignment for all periods, including periods of one
+   *             hour or shorter.</p>
+   * @public
+   */
+  Timezone?: string | undefined;
+}
+
+/**
+ * <p>The evaluation window that an alarm uses to select the range of metric data that it
+ *             evaluates each time it runs. This is a union type. Set exactly one of its members,
+ *             <code>SlidingWindow</code> or <code>WallClockWindow</code>. If you don't set
+ *             <code>EvaluationWindow</code>, the alarm uses a <code>SlidingWindow</code> by
+ *             default.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+ *                 evaluation windows</a> in the <i>CloudWatch User
+ *             Guide</i>.</p>
+ * @public
+ */
+export type EvaluationWindow =
+  | EvaluationWindow.SlidingWindowMember
+  | EvaluationWindow.WallClockWindowMember
+  | EvaluationWindow.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationWindow {
+  /**
+   * <p>A wall clock window, which aligns the evaluated range to fixed clock boundaries that
+   *             match the alarm's period, such as the top of the hour, midnight, or the start of the
+   *             calendar week.</p>
+   * @public
+   */
+  export interface WallClockWindowMember {
+    WallClockWindow: WallClockWindow;
+    SlidingWindow?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>A sliding window, which advances each time the alarm is evaluated, forming a rolling
+   *             time window. This is the default evaluation window.</p>
+   * @public
+   */
+  export interface SlidingWindowMember {
+    WallClockWindow?: never;
+    SlidingWindow: SlidingWindow;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    WallClockWindow?: never;
+    SlidingWindow?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    WallClockWindow: (value: WallClockWindow) => T;
+    SlidingWindow: (value: SlidingWindow) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The details about a metric alarm.</p>
+ * @public
+ */
+export interface MetricAlarm {
+  /**
+   * <p>The name of the alarm.</p>
+   * @public
+   */
+  AlarmName?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the alarm.</p>
+   * @public
+   */
+  AlarmArn?: string | undefined;
+
+  /**
+   * <p>The description of the alarm.</p>
+   * @public
+   */
+  AlarmDescription?: string | undefined;
+
+  /**
+   * <p>The time stamp of the last update to the alarm configuration.</p>
+   * @public
+   */
+  AlarmConfigurationUpdatedTimestamp?: Date | undefined;
+
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm
+   *             state.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>OK</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name
+   *             (ARN).</p>
+   * @public
+   */
+  OKActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name
+   *             (ARN).</p>
+   * @public
+   */
+  AlarmActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the
+   *                 <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+   *             as an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  InsufficientDataActions?: string[] | undefined;
+
+  /**
+   * <p>The state value for the alarm.</p>
+   * @public
+   */
+  StateValue?: StateValue | undefined;
+
+  /**
+   * <p>An explanation for the alarm state, in text format.</p>
+   * @public
+   */
+  StateReason?: string | undefined;
+
+  /**
+   * <p>An explanation for the alarm state, in JSON format.</p>
+   * @public
+   */
+  StateReasonData?: string | undefined;
+
+  /**
+   * <p>The time stamp of the last update to the value of either the
+   *                 <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>
+   * @public
+   */
+  StateUpdatedTimestamp?: Date | undefined;
+
+  /**
+   * <p>The name of the metric associated with the alarm, if this is an alarm based on a
+   *             single metric.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The namespace of the metric associated with the alarm.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The statistic for the metric associated with the alarm, other than percentile. For
+   *             percentile statistics, use <code>ExtendedStatistic</code>.</p>
+   * @public
+   */
+  Statistic?: Statistic | undefined;
+
+  /**
+   * <p>The percentile statistic for the metric associated with the alarm. Specify a value
+   *             between p0.0 and p100.</p>
+   * @public
+   */
+  ExtendedStatistic?: string | undefined;
+
+  /**
+   * <p>The dimensions for the metric associated with the alarm.</p>
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The period, in seconds, over which the statistic is applied.</p>
+   * @public
+   */
+  Period?: number | undefined;
+
+  /**
+   * <p>The unit of the metric associated with the alarm.</p>
+   * @public
+   */
+  Unit?: StandardUnit | undefined;
+
+  /**
+   * <p>The number of periods over which data is compared to the specified
+   *             threshold.</p>
+   * @public
+   */
+  EvaluationPeriods?: number | undefined;
+
+  /**
+   * <p>The number of data points that must be breaching to trigger the alarm.</p>
+   * @public
+   */
+  DatapointsToAlarm?: number | undefined;
+
+  /**
+   * <p>The value to compare with the specified statistic.</p>
+   * @public
+   */
+  Threshold?: number | undefined;
+
+  /**
+   * <p>The arithmetic operation to use when comparing the specified statistic and
+   *             threshold. The specified statistic value is used as the first operand.</p>
+   * @public
+   */
+  ComparisonOperator?: ComparisonOperator | undefined;
+
+  /**
+   * <p>Sets how this alarm is to handle missing data points. The valid values are
+   *                 <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and
+   *                 <code>missing</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring how CloudWatch alarms treat missing data</a>.</p>
+   *          <p>If this parameter is omitted, the default behavior of <code>missing</code> is
+   *             used.</p>
+   *          <note>
+   *             <p>This parameter is not applicable to PromQL alarms.</p>
+   *          </note>
+   * @public
+   */
+  TreatMissingData?: string | undefined;
+
+  /**
+   * <p>Used only for alarms based on percentiles. If <code>ignore</code>, the alarm state
+   *             does not change during periods with too few data points to be statistically significant.
+   *             If <code>evaluate</code> or this parameter is not used, the alarm is always evaluated
+   *             and possibly changes state no matter how many data points are available.</p>
+   * @public
+   */
+  EvaluateLowSampleCountPercentile?: string | undefined;
+
+  /**
+   * <p>An array of MetricDataQuery structures, used in an alarm based on a metric math
+   *             expression. Each structure either retrieves a metric or performs a math expression. One
+   *             item in the Metrics array is the math expression that the alarm watches. This expression
+   *             by designated by having <code>ReturnData</code> set to true.</p>
+   * @public
+   */
+  Metrics?: MetricDataQuery[] | undefined;
+
+  /**
+   * <p>In an alarm based on an anomaly detection model, this is the ID of the
+   *                 <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the
+   *             alarm.</p>
+   * @public
+   */
+  ThresholdMetricId?: string | undefined;
+
+  /**
+   * <p>If the value of this field is <code>PARTIAL_DATA</code>, it indicates that not all the
+   *             available data was able to be retrieved due to quota limitations. For more information,
+   *             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html">Create
+   *                 alarms on Metrics Insights queries</a>.</p>
+   *          <p>If the value of this field is <code>EVALUATION_ERROR</code>, it indicates
+   *             configuration errors in alarm setup that require review and correction. Refer to
+   *             StateReason field of the alarm for more details.</p>
+   *          <p>If the value of this field is <code>EVALUATION_FAILURE</code>, it indicates temporary
+   *             CloudWatch issues. We recommend manual monitoring until the issue is resolved </p>
+   * @public
+   */
+  EvaluationState?: EvaluationState | undefined;
+
+  /**
+   * <p>The date and time that the alarm's <code>StateValue</code> most recently
+   *             changed.</p>
+   * @public
+   */
+  StateTransitionedTimestamp?: Date | undefined;
+
+  /**
+   * <p>The evaluation window that the alarm uses to select the range of metric data that it
+   *             evaluates. This is either a sliding window or a wall clock window. For more information,
+   *             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+   *                 evaluation windows</a> in the <i>CloudWatch User
+   *             Guide</i>.</p>
+   * @public
+   */
+  EvaluationWindow?: EvaluationWindow | undefined;
+
+  /**
+   * <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+   *             after you create or update the alarm. During the warm-up period, the alarm stays in
+   *                 <code>INSUFFICIENT_DATA</code> and does not perform alarm actions.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+   *                 periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+   * @public
+   */
+  WarmUpConfiguration?: WarmUpConfiguration | undefined;
+
+  /**
+   * <p>The evaluation criteria for the alarm.</p>
+   * @public
+   */
+  EvaluationCriteria?: EvaluationCriteria | undefined;
+
+  /**
+   * <p>The frequency, in seconds, at which the alarm is evaluated.</p>
+   * @public
+   */
+  EvaluationInterval?: number | undefined;
+
+  /**
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
+   */
+  ActionConfiguration?: ActionConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeAlarmsOutput {
+  /**
+   * <p>The information about any composite alarms returned by the operation.</p>
+   * @public
+   */
+  CompositeAlarms?: CompositeAlarm[] | undefined;
+
+  /**
+   * <p>The information about any metric alarms returned by the operation.</p>
+   * @public
+   */
+  MetricAlarms?: MetricAlarm[] | undefined;
+
+  /**
+   * <p>The information about any log alarms returned by the operation.</p>
+   * @public
+   */
+  LogAlarms?: LogAlarm[] | undefined;
+
+  /**
+   * <p>The token that marks the start of the next batch of returned results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeAlarmsForMetricInput {
+  /**
+   * <p>The name of the metric.</p>
+   * @public
    */
   MetricName: string | undefined;
 
   /**
-   * <p>The metric dimensions to create the anomaly detection model for.</p>
+   * <p>The namespace of the metric.</p>
+   * @public
    */
-  Dimensions?: Dimension[];
+  Namespace: string | undefined;
 
   /**
-   * <p>The statistic to use for the metric and the anomaly detection model.</p>
+   * <p>The statistic for the metric, other than percentiles. For percentile statistics,
+   *             use <code>ExtendedStatistics</code>.</p>
+   * @public
    */
-  Stat: string | undefined;
+  Statistic?: Statistic | undefined;
 
   /**
-   * <p>The configuration specifies details about how the
-   * 			anomaly detection model is to be trained, including
-   * 			time ranges to exclude when training and updating the model.
-   * 			You can specify as many as 10 time ranges.</p>
-   * 		       <p>The configuration can also include the time zone to use for
-   * 			the metric.</p>
+   * <p>The percentile statistic for the metric. Specify a value between p0.0 and
+   *             p100.</p>
+   * @public
    */
-  Configuration?: AnomalyDetectorConfiguration;
-}
+  ExtendedStatistic?: string | undefined;
 
-export namespace PutAnomalyDetectorInput {
   /**
-   * @internal
+   * <p>The dimensions associated with the metric. If the metric has any associated
+   *             dimensions, you must specify them in order for the call to succeed.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutAnomalyDetectorInput): any => ({
-    ...obj,
-  });
-}
+  Dimensions?: Dimension[] | undefined;
 
-export interface PutAnomalyDetectorOutput {}
-
-export namespace PutAnomalyDetectorOutput {
   /**
-   * @internal
+   * <p>The period, in seconds, over which the statistic is applied.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutAnomalyDetectorOutput): any => ({
-    ...obj,
-  });
+  Period?: number | undefined;
+
+  /**
+   * <p>The unit for the metric.</p>
+   * @public
+   */
+  Unit?: StandardUnit | undefined;
 }
 
 /**
- * <p>The quota for alarms for this customer has already been reached.</p>
+ * @public
  */
-export interface LimitExceededFault extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededFault";
-  $fault: "client";
+export interface DescribeAlarmsForMetricOutput {
   /**
-   * <p></p>
+   * <p>The information for each alarm with the specified metric.</p>
+   * @public
    */
-  message?: string;
+  MetricAlarms?: MetricAlarm[] | undefined;
 }
 
-export namespace LimitExceededFault {
+/**
+ * @public
+ */
+export interface DescribeAnomalyDetectorsInput {
   /**
-   * @internal
+   * <p>Specifies the unique identifiers of the anomaly detectors to describe. You can specify
+   *             up to 50 identifiers. If you specify this parameter, you cannot also specify the
+   *             <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>, or
+   *             <code>AnomalyDetectorTypes</code> metric filters.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: LimitExceededFault): any => ({
-    ...obj,
-  });
+  AnomalyDetectorIds?: string[] | undefined;
+
+  /**
+   * <p>Use the token returned by the previous operation to request the next page of
+   *             results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in one operation. The maximum value that you
+   *             can specify is 100.</p>
+   *          <p>To retrieve the remaining results, make another call with the returned
+   *                 <code>NextToken</code> value. </p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Limits the results to only the anomaly detection models that are associated with the
+   *             specified namespace.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>Limits the results to only the anomaly detection models that are associated with the
+   *             specified metric name. If there are multiple metrics with this name in different
+   *             namespaces that have anomaly detection models, they're all returned.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>Limits the results to only the anomaly detection models that are associated with the
+   *             specified metric dimensions. If there are multiple metrics that have these dimensions
+   *             and have anomaly detection models associated, they're all returned.</p>
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The anomaly detector types to request when using
+   *                 <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to
+   *                 <code>SINGLE_METRIC</code>.</p>
+   * @public
+   */
+  AnomalyDetectorTypes?: AnomalyDetectorType[] | undefined;
 }
 
-export interface PutCompositeAlarmInput {
+/**
+ * @public
+ */
+export interface DescribeAnomalyDetectorsOutput {
   /**
-   * <p>Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. The default is
-   * 			<code>TRUE</code>.</p>
+   * <p>The list of anomaly detection models returned by the operation.</p>
+   * @public
    */
-  ActionsEnabled?: boolean;
+  AnomalyDetectors?: AnomalyDetector[] | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state.
-   * 			Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   * 		       <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
-   *             </code>
-   * 			| <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
+   * <p>A token that you can use in a subsequent operation to retrieve the next set of
+   *             results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeInsightRulesInput {
+  /**
+   * <p>Include this value, if it was returned by the previous operation, to get the next set
+   *             of rules.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in one operation. If you omit this parameter,
+   *             the default of 500 is used.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * <p>This structure contains the definition for a Contributor Insights rule. For more
+ *             information about this rule, see<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html"> Using Constributor Insights to analyze high-cardinality data</a> in the
+ *                     <i>Amazon CloudWatch User Guide</i>.</p>
+ * @public
+ */
+export interface InsightRule {
+  /**
+   * <p>The name of the rule.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>Indicates whether the rule is enabled or disabled.</p>
+   * @public
+   */
+  State: string | undefined;
+
+  /**
+   * <p>For rules that you create, this is always <code>\{"Name": "CloudWatchLogRule",
+   *                 "Version": 1\}</code>. For managed rules, this is <code>\{"Name": "ServiceLogRule",
+   *                 "Version": 1\}</code>
+   *          </p>
+   * @public
+   */
+  Schema: string | undefined;
+
+  /**
+   * <p>The definition of the rule, as a JSON object. The definition contains the keywords
+   *             used to define contributors, the value to aggregate on if this rule returns a sum
+   *             instead of a count, and the filters. For details on the valid syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
+   * @public
+   */
+  Definition: string | undefined;
+
+  /**
+   * <p> An optional built-in rule that Amazon Web Services manages. </p>
+   * @public
+   */
+  ManagedRule?: boolean | undefined;
+
+  /**
+   * <p>Displays whether the rule is evaluated on the transformed versions of logs, for log
+   *             groups that have <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log
+   *                 transformation</a> enabled. If this is <code>false</code>, log events are
+   *             evaluated before they are transformed.</p>
+   * @public
+   */
+  ApplyOnTransformedLogs?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DescribeInsightRulesOutput {
+  /**
+   * <p>If this parameter is present, it is a token that marks the start of the next batch of
+   *             returned results. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The rules returned by the operation.</p>
+   * @public
+   */
+  InsightRules?: InsightRule[] | undefined;
+}
+
+/**
+ * <p>Represents filters for a dimension.</p>
+ * @public
+ */
+export interface DimensionFilter {
+  /**
+   * <p>The dimension name to be matched.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The value of the dimension to be matched.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisableAlarmActionsInput {
+  /**
+   * <p>The names of the alarms.</p>
+   * @public
+   */
+  AlarmNames: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisableInsightRulesInput {
+  /**
+   * <p>An array of the rule names to disable. If you need to find out the names of your
+   *             rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
+   * @public
+   */
+  RuleNames: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisableInsightRulesOutput {
+  /**
+   * <p>An array listing the rules that could not be disabled. You cannot disable built-in
+   *             rules.</p>
+   * @public
+   */
+  Failures?: PartialFailure[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisassociateDatasetKmsKeyInput {
+  /**
+   * <p>Specifies the identifier of the dataset from which to remove the KMS key
+   *             association. For the <code>default</code> dataset, you can specify either
+   *             <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+   *             <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+   * @public
+   */
+  DatasetIdentifier: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DisassociateDatasetKmsKeyOutput {}
+
+/**
+ * @public
+ */
+export interface EnableAlarmActionsInput {
+  /**
+   * <p>The names of the alarms.</p>
+   * @public
+   */
+  AlarmNames: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface EnableInsightRulesInput {
+  /**
+   * <p>An array of the rule names to enable. If you need to find out the names of your rules,
+   *             use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.</p>
+   * @public
+   */
+  RuleNames: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface EnableInsightRulesOutput {
+  /**
+   * <p>An array listing the rules that could not be enabled. You cannot disable or enable
+   *             built-in rules.</p>
+   * @public
+   */
+  Failures?: PartialFailure[] | undefined;
+}
+
+/**
+ * <p>An entity associated with metrics, to allow for finding related telemetry. An entity
+ *             is typically a resource or service within your system. For example, metrics from an
+ *                 Amazon EC2 instance could be associated with that instance as the entity.
+ *             Similarly, metrics from a service that you own could be associated with that service as
+ *             the entity.</p>
+ * @public
+ */
+export interface Entity {
+  /**
+   * <p>The attributes of the entity which identify the specific entity, as a list of
+   *             key-value pairs. Entities with the same <code>KeyAttributes</code> are considered to be
+   *             the same entity. For an entity to be valid, the <code>KeyAttributes</code> must exist
+   *             and be formatted correctly.</p>
+   *          <p>There are five allowed attributes (key names): <code>Type</code>,
+   *                 <code>ResourceType</code>, <code>Identifier</code>, <code>Name</code>, and
+   *                 <code>Environment</code>.</p>
+   *          <p>For details about how to use the key attributes to specify an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How
+   *                 to add related information to telemetry</a> in the <i>CloudWatch
+   *                 User Guide</i>.</p>
+   * @public
+   */
+  KeyAttributes?: Record<string, string> | undefined;
+
+  /**
+   * <p>Additional attributes of the entity that are not used to specify the identity of the
+   *             entity. A list of key-value pairs.</p>
+   *          <p>For details about how to use the attributes, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How
+   *                 to add related information to telemetry</a> in the <i>CloudWatch
+   *                 User Guide</i>.</p>
+   * @public
+   */
+  Attributes?: Record<string, string> | undefined;
+}
+
+/**
+ * <p>Represents a set of statistics that describes a specific metric. </p>
+ * @public
+ */
+export interface StatisticSet {
+  /**
+   * <p>The number of samples used for the statistic set.</p>
+   * @public
+   */
+  SampleCount: number | undefined;
+
+  /**
+   * <p>The sum of values for the sample set.</p>
+   * @public
+   */
+  Sum: number | undefined;
+
+  /**
+   * <p>The minimum value of the sample set.</p>
+   * @public
+   */
+  Minimum: number | undefined;
+
+  /**
+   * <p>The maximum value of the sample set.</p>
+   * @public
+   */
+  Maximum: number | undefined;
+}
+
+/**
+ * <p>Encapsulates the information sent to either create a metric or add new values to be
+ *             aggregated into an existing metric.</p>
+ * @public
+ */
+export interface MetricDatum {
+  /**
+   * <p>The name of the metric.</p>
+   * @public
+   */
+  MetricName: string | undefined;
+
+  /**
+   * <p>The dimensions associated with the metric. </p>
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The time the metric data was received, expressed as the number of milliseconds
+   *             since Jan 1, 1970 00:00:00 UTC.</p>
+   * @public
+   */
+  Timestamp?: Date | undefined;
+
+  /**
+   * <p>The value for the metric.</p>
+   *          <p>Although the parameter accepts numbers of type Double, CloudWatch rejects values
+   *             that are either too small or too large. Values must be in the range of -2^360 to 2^360.
+   *             In addition, special values (for example, NaN, +Infinity, -Infinity) are not
+   *             supported.</p>
+   * @public
+   */
+  Value?: number | undefined;
+
+  /**
+   * <p>The statistical values for the metric.</p>
+   * @public
+   */
+  StatisticValues?: StatisticSet | undefined;
+
+  /**
+   * <p>Array of numbers representing the values for the metric during the period. Each unique
+   *             value is listed just once in this array, and the corresponding number in the
+   *                 <code>Counts</code> array specifies the number of times that value occurred during
+   *             the period. You can include up to 150 unique values in each <code>PutMetricData</code>
+   *             action that specifies a <code>Values</code> array.</p>
+   *          <p>Although the <code>Values</code> array accepts numbers of type <code>Double</code>,
+   *             CloudWatch rejects values that are either too small or too large. Values must be in the
+   *             range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
+   *             -Infinity) are not supported.</p>
+   * @public
+   */
+  Values?: number[] | undefined;
+
+  /**
+   * <p>Array of numbers that is used along with the <code>Values</code> array. Each number in
+   *             the <code>Count</code> array is the number of times the corresponding value in the
+   *                 <code>Values</code> array occurred during the period. </p>
+   *          <p>If you omit the <code>Counts</code> array, the default of 1 is used as the value for
+   *             each count. If you include a <code>Counts</code> array, it must include the same amount
+   *             of values as the <code>Values</code> array.</p>
+   * @public
+   */
+  Counts?: number[] | undefined;
+
+  /**
+   * <p>When you are using a <code>Put</code> operation, this defines what unit you want to
+   *             use when storing the metric.</p>
+   *          <p>In a <code>Get</code> operation, this displays the unit that is used for the
+   *             metric.</p>
+   * @public
+   */
+  Unit?: StandardUnit | undefined;
+
+  /**
+   * <p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a
+   *             high-resolution metric, so that CloudWatch stores the metric with sub-minute resolution
+   *             down to one second. Setting this to 60 specifies this metric as a regular-resolution
+   *             metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is
+   *             available only for custom metrics. For more information about high-resolution metrics,
+   *             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User
+   *                 Guide</i>. </p>
+   *          <p>This field is optional, if you do not specify it the default of 60 is
+   *             used.</p>
+   * @public
+   */
+  StorageResolution?: number | undefined;
+}
+
+/**
+ * <p>A set of metrics that are associated with an entity, such as a specific service or
+ *             resource. Contains the entity and the list of metric data associated with it.</p>
+ * @public
+ */
+export interface EntityMetricData {
+  /**
+   * <p>The entity associated with the metrics.</p>
+   * @public
+   */
+  Entity?: Entity | undefined;
+
+  /**
+   * <p>The metric data.</p>
+   * @public
+   */
+  MetricData?: MetricDatum[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetAlarmMuteRuleInput {
+  /**
+   * <p>The name of the alarm mute rule to retrieve.</p>
+   * @public
+   */
+  AlarmMuteRuleName: string | undefined;
+}
+
+/**
+ * <p>Specifies which alarms an alarm mute rule applies to.</p>
+ *          <p>You can target up to 100 specific alarms by name. When a mute rule is active, the
+ *             targeted alarms continue to evaluate metrics and transition between states, but their
+ *             configured actions are muted.</p>
+ * @public
+ */
+export interface MuteTargets {
+  /**
+   * <p>The list of alarm names that this mute rule targets. You can specify up to 100 alarm
+   *             names.</p>
+   *          <p>Each alarm name must be between 1 and 255 characters in length. The alarm names must
+   *             match existing alarms in your Amazon Web Services account and region.</p>
+   * @public
+   */
+  AlarmNames: string[] | undefined;
+}
+
+/**
+ * <p>Specifies when and how long an alarm mute rule is active.</p>
+ *          <p>The schedule uses either a cron expression for recurring mute windows or an at
+ *             expression for one-time mute windows. When the schedule activates, the mute rule mutes
+ *             alarm actions for the specified duration.</p>
+ * @public
+ */
+export interface Schedule {
+  /**
+   * <p>The schedule expression that defines when the mute rule activates. The expression must
+   *             be between 1 and 256 characters in length.</p>
+   *          <p>You can use one of two expression formats:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <b>Cron expressions</b> - For recurring mute
+   *                     windows. Format: <code>cron(Minutes Hours Day-of-month Month
+   *                     Day-of-week)</code>
+   *                </p>
+   *                <p>Examples:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <code>cron(0 2 * * *)</code> - Activates daily at 2:00 AM</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>cron(0 2 * * SUN)</code> - Activates every Sunday at 2:00 AM for
+   *                             weekly system maintenance</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>cron(0 1 1 * *)</code> - Activates on the first day of each
+   *                             month at 1:00 AM for monthly database maintenance</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>cron(0 18 * * FRI)</code> - Activates every Friday at 6:00
+   *                             PM</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>cron(0 23 * * *)</code> - Activates every day at 11:00 PM during
+   *                             nightly backup operations</p>
+   *                   </li>
+   *                </ul>
+   *                <p>The characters <code>*</code>, <code>-</code>, and <code>,</code> are
+   *                     supported in all fields. English names can be used for the month (JAN-DEC) and
+   *                     day of week (SUN-SAT) fields.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <b>At expressions</b> - For one-time mute windows.
+   *                     Format: <code>at(yyyy-MM-ddThh:mm)</code>
+   *                </p>
+   *                <p>Examples:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <code>at(2024-05-10T14:00)</code> - Activates once on May 10, 2024 at
+   *                             2:00 PM during an active incident response session</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>at(2024-12-23T00:00)</code> - Activates once on December 23,
+   *                             2024 at midnight during annual company shutdown</p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Expression: string | undefined;
+
+  /**
+   * <p>The length of time that alarms remain muted when the schedule activates. The duration
+   *             must be between 1 and 50 characters in length.</p>
+   *          <p>Specify the duration using ISO 8601 duration format with a minimum of 1 minute
+   *                 (<code>PT1M</code>) and maximum of 15 days (<code>P15D</code>).</p>
+   *          <p>Examples:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PT4H</code> - 4 hours for weekly system maintenance</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>P2DT12H</code> - 2 days and 12 hours for weekend muting from Friday 6:00
+   *                     PM to Monday 6:00 AM</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PT6H</code> - 6 hours for monthly database maintenance</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PT2H</code> - 2 hours for nightly backup operations</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>P7D</code> - 7 days for annual company shutdown</p>
+   *             </li>
+   *          </ul>
+   *          <p>The duration begins when the schedule expression time is reached. For recurring
+   *             schedules, the duration applies to each occurrence.</p>
+   * @public
+   */
+  Duration: string | undefined;
+
+  /**
+   * <p>The time zone to use when evaluating the schedule expression. The time zone must be
+   *             between 1 and 50 characters in length.</p>
+   *          <p>Specify the time zone using standard timezone identifiers (for example,
+   *                 <code>America/New_York</code>, <code>Europe/London</code>, or
+   *                 <code>Asia/Tokyo</code>).</p>
+   *          <p>If you don't specify a time zone, UTC is used by default. The time zone affects how
+   *             cron and at expressions are interpreted, as well as start and expire dates you
+   *             specify</p>
+   *          <p>Examples:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>America/New_York</code> - Eastern Time (US)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>America/Los_Angeles</code> - Pacific Time (US)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Europe/London</code> - British Time</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Asia/Tokyo</code> - Japan Standard Time</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>UTC</code> - Coordinated Universal Time</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Timezone?: string | undefined;
+}
+
+/**
+ * <p>Defines the schedule configuration for an alarm mute rule.</p>
+ *          <p>The rule contains a schedule that specifies when and how long alarms should be muted.
+ *             The schedule can be a recurring pattern using cron expressions or a one-time mute window
+ *             using at expressions.</p>
+ * @public
+ */
+export interface Rule {
+  /**
+   * <p>The schedule configuration that defines when the mute rule activates and how long it
+   *             remains active.</p>
+   * @public
+   */
+  Schedule: Schedule | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetAlarmMuteRuleOutput {
+  /**
+   * <p>The name of the alarm mute rule.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>
+   * @public
+   */
+  AlarmMuteRuleArn?: string | undefined;
+
+  /**
+   * <p>The description of the alarm mute rule.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The configuration that defines when and how long alarms are muted.</p>
+   * @public
+   */
+  Rule?: Rule | undefined;
+
+  /**
+   * <p>Specifies which alarms this rule applies to.</p>
+   * @public
+   */
+  MuteTargets?: MuteTargets | undefined;
+
+  /**
+   * <p>The date and time when the mute rule becomes active. If not set, the rule is active
+   *             immediately.</p>
+   * @public
+   */
+  StartDate?: Date | undefined;
+
+  /**
+   * <p>The date and time when the mute rule expires and is no longer evaluated.</p>
+   * @public
+   */
+  ExpireDate?: Date | undefined;
+
+  /**
+   * <p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>,
+   *                 <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+   * @public
+   */
+  Status?: AlarmMuteRuleStatus | undefined;
+
+  /**
+   * <p>The date and time when the mute rule was last updated.</p>
+   * @public
+   */
+  LastUpdatedTimestamp?: Date | undefined;
+
+  /**
+   * <p>Indicates whether the mute rule is one-time or recurring. Valid values are
+   *                 <code>ONE_TIME</code> or <code>RECURRING</code>.</p>
+   * @public
+   */
+  MuteType?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDashboardInput {
+  /**
+   * <p>The name of the dashboard to be described.</p>
+   * @public
+   */
+  DashboardName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDashboardOutput {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the dashboard.</p>
+   * @public
+   */
+  DashboardArn?: string | undefined;
+
+  /**
+   * <p>The detailed information about the dashboard, including what widgets are included
+   *             and their location on the dashboard. For more information about the
+   *                 <code>DashboardBody</code> syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>. </p>
+   * @public
+   */
+  DashboardBody?: string | undefined;
+
+  /**
+   * <p>The name of the dashboard.</p>
+   * @public
+   */
+  DashboardName?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDatasetInput {
+  /**
+   * <p>Specifies the identifier of the dataset to retrieve. For the <code>default</code>
+   *             dataset, you can specify either <code>default</code> or the full dataset Amazon
+   *             Resource Name (ARN) in the format
+   *             <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+   * @public
+   */
+  DatasetIdentifier: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDatasetOutput {
+  /**
+   * <p>Returns the identifier of the dataset.</p>
+   * @public
+   */
+  DatasetId: string | undefined;
+
+  /**
+   * <p>Returns the Amazon Resource Name (ARN) of the dataset, in the format
+   *             <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/<i>dataset-id</i>
+   *             </code>.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>Returns the Amazon Resource Name (ARN) of the customer managed Amazon Web Services
+   *             KMS key that is currently associated with the dataset, if any. If the dataset is not
+   *             associated with a customer managed KMS key, this field is not included in the
+   *             response and the dataset is encrypted at rest using an Amazon Web Services owned
+   *             key.</p>
+   * @public
+   */
+  KmsKeyArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightRuleReportInput {
+  /**
+   * <p>The name of the rule that you want to see data from.</p>
+   * @public
+   */
+  RuleName: string | undefined;
+
+  /**
+   * <p>The start time of the data to use in the report. When used in a raw HTTP Query API, it
+   *             is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
+   *                 <code>2019-07-01T23:59:59</code>.</p>
+   * @public
+   */
+  StartTime: Date | undefined;
+
+  /**
+   * <p>The end time of the data to use in the report. When used in a raw HTTP Query API, it
+   *             is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
+   *                 <code>2019-07-01T23:59:59</code>.</p>
+   * @public
+   */
+  EndTime: Date | undefined;
+
+  /**
+   * <p>The period, in seconds, to use for the statistics in the
+   *                 <code>InsightRuleMetricDatapoint</code> results.</p>
+   * @public
+   */
+  Period: number | undefined;
+
+  /**
+   * <p>The maximum number of contributors to include in the report. The range is 1 to 100. If
+   *             you omit this, the default of 10 is used.</p>
+   * @public
+   */
+  MaxContributorCount?: number | undefined;
+
+  /**
+   * <p>Specifies which metrics to use for aggregation of contributor values for the report.
+   *             You can specify one or more of the following metrics:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>UniqueContributors</code> -- the number of unique contributors for each
+   *                     data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MaxContributorValue</code> -- the value of the top contributor for each
+   *                     data point. The identity of the contributor might change for each data point in
+   *                     the graph.</p>
+   *                <p>If this rule aggregates by COUNT, the top contributor for each data point is
+   *                     the contributor with the most occurrences in that period. If the rule aggregates
+   *                     by SUM, the top contributor is the contributor with the highest sum in the log
+   *                     field specified by the rule's <code>Value</code>, during that period.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SampleCount</code> -- the number of data points matched by the
+   *                     rule.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Sum</code> -- the sum of the values from all contributors during the
+   *                     time period represented by that data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Minimum</code> -- the minimum value from a single observation during the
+   *                     time period represented by that data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Maximum</code> -- the maximum value from a single observation during the
+   *                     time period represented by that data point.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Average</code> -- the average value from all contributors during the
+   *                     time period represented by that data point.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Metrics?: string[] | undefined;
+
+  /**
+   * <p>Determines what statistic to use to rank the contributors. Valid values are
+   *                 <code>Sum</code> and <code>Maximum</code>.</p>
+   * @public
+   */
+  OrderBy?: string | undefined;
+}
+
+/**
+ * <p>One data point related to one contributor.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_InsightRuleContributor.html">InsightRuleContributor</a>.</p>
+ * @public
+ */
+export interface InsightRuleContributorDatapoint {
+  /**
+   * <p>The timestamp of the data point.</p>
+   * @public
+   */
+  Timestamp: Date | undefined;
+
+  /**
+   * <p>The approximate value that this contributor added during this timestamp.</p>
+   * @public
+   */
+  ApproximateValue: number | undefined;
+}
+
+/**
+ * <p>One of the unique contributors found by a Contributor Insights rule. If the rule
+ *             contains multiple keys, then a unique contributor is a unique combination of values from
+ *             all the keys in the rule.</p>
+ *          <p>If the rule contains a single key, then each unique contributor is each unique value
+ *             for this key.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a>.</p>
+ * @public
+ */
+export interface InsightRuleContributor {
+  /**
+   * <p>One of the log entry field keywords that is used to define contributors for this
+   *             rule.</p>
+   * @public
+   */
+  Keys: string[] | undefined;
+
+  /**
+   * <p>An approximation of the aggregate value that comes from this contributor.</p>
+   * @public
+   */
+  ApproximateAggregateValue: number | undefined;
+
+  /**
+   * <p>An array of the data points where this contributor is present. Only the data points
+   *             when this contributor appeared are included in the array.</p>
+   * @public
+   */
+  Datapoints: InsightRuleContributorDatapoint[] | undefined;
+}
+
+/**
+ * <p>One data point from the metric time series returned in a Contributor Insights rule
+ *             report.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html">GetInsightRuleReport</a>.</p>
+ * @public
+ */
+export interface InsightRuleMetricDatapoint {
+  /**
+   * <p>The timestamp of the data point.</p>
+   * @public
+   */
+  Timestamp: Date | undefined;
+
+  /**
+   * <p>The number of unique contributors who published data during this timestamp.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  UniqueContributors?: number | undefined;
+
+  /**
+   * <p>The maximum value provided by one contributor during this timestamp. Each timestamp is
+   *             evaluated separately, so the identity of the max contributor could be different for each
+   *             timestamp.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  MaxContributorValue?: number | undefined;
+
+  /**
+   * <p>The number of occurrences that matched the rule during this data point.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  SampleCount?: number | undefined;
+
+  /**
+   * <p>The average value from all contributors during the time period represented by that
+   *             data point.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  Average?: number | undefined;
+
+  /**
+   * <p>The sum of the values from all contributors during the time period represented by that
+   *             data point.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  Sum?: number | undefined;
+
+  /**
+   * <p>The minimum value from a single contributor during the time period represented by that
+   *             data point.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  Minimum?: number | undefined;
+
+  /**
+   * <p>The maximum value from a single occurence from a single contributor during the time
+   *             period represented by that data point.</p>
+   *          <p>This statistic is returned only if you included it in the <code>Metrics</code> array
+   *             in your request.</p>
+   * @public
+   */
+  Maximum?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightRuleReportOutput {
+  /**
+   * <p>An array of the strings used as the keys for this rule. The keys are the dimensions
+   *             used to classify contributors. If the rule contains more than one key, then each unique
+   *             combination of values for the keys is counted as a unique contributor.</p>
+   * @public
+   */
+  KeyLabels?: string[] | undefined;
+
+  /**
+   * <p>Specifies whether this rule aggregates contributor data by COUNT or SUM.</p>
+   * @public
+   */
+  AggregationStatistic?: string | undefined;
+
+  /**
+   * <p>The sum of the values from all individual contributors that match the rule.</p>
+   * @public
+   */
+  AggregateValue?: number | undefined;
+
+  /**
+   * <p>An approximate count of the unique contributors found by this rule in this time
+   *             period.</p>
+   * @public
+   */
+  ApproximateUniqueCount?: number | undefined;
+
+  /**
+   * <p>An array of the unique contributors found by this rule in this time period. If the
+   *             rule contains multiple keys, each combination of values for the keys counts as a unique
+   *             contributor.</p>
+   * @public
+   */
+  Contributors?: InsightRuleContributor[] | undefined;
+
+  /**
+   * <p>A time series of metric data points that matches the time period in the rule
+   *             request.</p>
+   * @public
+   */
+  MetricDatapoints?: InsightRuleMetricDatapoint[] | undefined;
+}
+
+/**
+ * <p>This structure includes the <code>Timezone</code> parameter, which you can use to
+ *             specify your time zone so that the labels that are associated with returned metrics
+ *             display the correct time for your time zone. </p>
+ *          <p>The <code>Timezone</code> value affects a label only if you have a time-based dynamic
+ *             expression in the label. For more information about dynamic expressions in labels, see
+ *                 <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic
+ *                 Labels</a>.</p>
+ * @public
+ */
+export interface LabelOptions {
+  /**
+   * <p>The time zone to use for metric data return in this operation. The format is
+   *                 <code>+</code> or <code>-</code> followed by four digits. The first two digits
+   *             indicate the number of hours ahead or behind of UTC, and the final two digits are the
+   *             number of minutes. For example, +0130 indicates a time zone that is 1 hour and 30
+   *             minutes ahead of UTC. The default is +0000. </p>
+   * @public
+   */
+  Timezone?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricDataInput {
+  /**
+   * <p>The metric queries to be returned. A single <code>GetMetricData</code> call can
+   *             include as many as 500 <code>MetricDataQuery</code> structures. Each of these structures
+   *             can specify either a metric to retrieve, a Metrics Insights query, or a math expression
+   *             to perform on retrieved data. </p>
+   * @public
+   */
+  MetricDataQueries: MetricDataQuery[] | undefined;
+
+  /**
+   * <p>The time stamp indicating the earliest data to be returned.</p>
+   *          <p>The value specified is inclusive; results include data points with the specified
+   *             time stamp. </p>
+   *          <p>CloudWatch rounds the specified time stamp as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Start time less than 15 days ago - Round down to the nearest whole minute.
+   *                     For example, 12:32:34 is rounded down to 12:32:00.</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute
+   *                     clock interval. For example, 12:32:34 is rounded down to 12:30:00.</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time greater than 63 days ago - Round down to the nearest 1-hour
+   *                     clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
+   *             </li>
+   *          </ul>
+   *          <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+   *             is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+   *             divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
+   *             previous 10-second period, the start time of your request is rounded down and you
+   *             receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
+   *             5 minutes of data, using a period of 5 seconds, you receive data timestamped between
+   *             15:02:15 and 15:07:15. </p>
+   *          <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values
+   *             that align with the value of the metric's <code>Period</code> and sync up with the
+   *             beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5
+   *             minutes, specifying 12:05 or 12:30 as <code>StartTime</code> can get a faster response
+   *             from CloudWatch than setting 12:07 or 12:29 as the <code>StartTime</code>.</p>
+   * @public
+   */
+  StartTime: Date | undefined;
+
+  /**
+   * <p>The time stamp indicating the latest data to be returned.</p>
+   *          <p>The value specified is exclusive; results include data points up to the specified
+   *             time stamp.</p>
+   *          <p>For better performance, specify <code>StartTime</code> and <code>EndTime</code> values
+   *             that align with the value of the metric's <code>Period</code> and sync up with the
+   *             beginning and end of an hour. For example, if the <code>Period</code> of a metric is 5
+   *             minutes, specifying 12:05 or 12:30 as <code>EndTime</code> can get a faster response
+   *             from CloudWatch than setting 12:07 or 12:29 as the <code>EndTime</code>.</p>
+   * @public
+   */
+  EndTime: Date | undefined;
+
+  /**
+   * <p>Include this value, if it was returned by the previous <code>GetMetricData</code>
+   *             operation, to get the next set of data points.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The order in which data points should be returned. <code>TimestampDescending</code>
+   *             returns the newest data first and paginates when the <code>MaxDatapoints</code> limit is
+   *             reached. <code>TimestampAscending</code> returns the oldest data first and paginates
+   *             when the <code>MaxDatapoints</code> limit is reached.</p>
+   *          <p>If you omit this parameter, the default of <code>TimestampDescending</code> is
+   *             used.</p>
+   * @public
+   */
+  ScanBy?: ScanBy | undefined;
+
+  /**
+   * <p>The maximum number of data points the request should return before paginating. If you
+   *             omit this, the default of 100,800 is used.</p>
+   * @public
+   */
+  MaxDatapoints?: number | undefined;
+
+  /**
+   * <p>This structure includes the <code>Timezone</code> parameter, which you can use to
+   *             specify your time zone so that the labels of returned data display the correct time for
+   *             your time zone. </p>
+   * @public
+   */
+  LabelOptions?: LabelOptions | undefined;
+}
+
+/**
+ * <p>A message returned by the <code>GetMetricData</code>API, including a code and a
+ *             description.</p>
+ *          <p>If a cross-Region <code>GetMetricData</code> operation fails with a code of
+ *                 <code>Forbidden</code> and a value of <code>Authentication too complex to retrieve
+ *                 cross region data</code>, you can correct the problem by running the
+ *                 <code>GetMetricData</code> operation in the same Region where the metric data
+ *             is.</p>
+ * @public
+ */
+export interface MessageData {
+  /**
+   * <p>The error code or status code associated with the message.</p>
+   * @public
+   */
+  Code?: string | undefined;
+
+  /**
+   * <p>The message text.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * <p>A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code>
+ *             structures. Each of these structures includes the data points for that metric, along
+ *             with the timestamps of those data points and other identifying information.</p>
+ * @public
+ */
+export interface MetricDataResult {
+  /**
+   * <p>The short name you specified to represent this metric.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The human-readable label associated with the data.</p>
+   * @public
+   */
+  Label?: string | undefined;
+
+  /**
+   * <p>The timestamps for the data points, formatted in Unix timestamp format. The number of
+   *             timestamps always matches the number of values and the value for Timestamps[x] is
+   *             Values[x].</p>
+   * @public
+   */
+  Timestamps?: Date[] | undefined;
+
+  /**
+   * <p>The data points for the metric corresponding to <code>Timestamps</code>. The number of
+   *             values always matches the number of timestamps and the timestamp for Values[x] is
+   *             Timestamps[x].</p>
+   * @public
+   */
+  Values?: number[] | undefined;
+
+  /**
+   * <p>The status of the returned data. <code>Complete</code> indicates that all data points
+   *             in the requested time range were returned. <code>PartialData</code> means that an
+   *             incomplete set of data points were returned. You can use the <code>NextToken</code>
+   *             value that was returned and repeat your request to get more data points.
+   *                 <code>NextToken</code> is not returned if you are performing a math expression.
+   *                 <code>InternalError</code> indicates that an error occurred. Retry your request
+   *             using <code>NextToken</code>, if present.</p>
+   * @public
+   */
+  StatusCode?: StatusCode | undefined;
+
+  /**
+   * <p>A list of messages with additional information about the data returned.</p>
+   * @public
+   */
+  Messages?: MessageData[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricDataOutput {
+  /**
+   * <p>The metrics that are returned, including the metric name, namespace, and
+   *             dimensions.</p>
+   * @public
+   */
+  MetricDataResults?: MetricDataResult[] | undefined;
+
+  /**
+   * <p>A token that marks the next batch of returned results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Contains a message about this <code>GetMetricData</code> operation, if the operation
+   *             results in such a message. An example of a message that might be returned is
+   *                 <code>Maximum number of allowed metrics exceeded</code>. If there is a message, as
+   *             much of the operation as possible is still executed.</p>
+   *          <p>A message appears here only if it is related to the global <code>GetMetricData</code>
+   *             operation. Any message about a specific metric returned by the operation appears in the
+   *                 <code>MetricDataResult</code> object returned for that metric.</p>
+   * @public
+   */
+  Messages?: MessageData[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricDataQueryDefinitionInput {
+  /**
+   * <p>The ID of the metric data query definition to retrieve.</p>
+   * @public
+   */
+  Id: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricDataQueryDefinitionOutput {
+  /**
+   * <p>The ID of the metric data query definition.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the metric data query definition.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The path of the metric data query definition.</p>
+   * @public
+   */
+  Path: string | undefined;
+
+  /**
+   * <p>The query expression.</p>
+   * @public
+   */
+  Expression: string | undefined;
+
+  /**
+   * <p>The language of the expression. Valid values are the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PROMQL</code> – A PromQL query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SQL</code> – A CloudWatch Metrics Insights query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>METRIC_MATH</code> – A metric math expression.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type: QueryType | undefined;
+
+  /**
+   * <p>The date and time when you created the metric data query definition.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time when you last updated the metric data query
+   *             definition.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricStatisticsInput {
+  /**
+   * <p>The namespace of the metric, with or without spaces.</p>
+   * @public
+   */
+  Namespace: string | undefined;
+
+  /**
+   * <p>The name of the metric, with or without spaces.</p>
+   * @public
+   */
+  MetricName: string | undefined;
+
+  /**
+   * <p>The dimensions. If the metric contains multiple dimensions, you must include a
+   *             value for each dimension. CloudWatch treats each unique combination of dimensions as a
+   *             separate metric. If a specific combination of dimensions was not published, you can't
+   *             retrieve statistics for it. You must specify the same dimensions that were used when the
+   *             metrics were created. For an example, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations">Dimension Combinations</a> in the <i>Amazon CloudWatch User
+   *                 Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User
+   *             Guide</i>.</p>
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The time stamp that determines the first data point to return. Start times are
+   *             evaluated relative to the time that CloudWatch receives the request.</p>
+   *          <p>The value specified is inclusive; results include data points with the specified
+   *             time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for
+   *             example, 2016-10-03T23:00:00Z).</p>
+   *          <p>CloudWatch rounds the specified time stamp as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Start time less than 15 days ago - Round down to the nearest whole minute.
+   *                     For example, 12:32:34 is rounded down to 12:32:00.</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time between 15 and 63 days ago - Round down to the nearest 5-minute
+   *                     clock interval. For example, 12:32:34 is rounded down to 12:30:00.</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time greater than 63 days ago - Round down to the nearest 1-hour
+   *                     clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
+   *             </li>
+   *          </ul>
+   *          <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+   *             is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+   *             divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
+   *             previous 10-second period, the start time of your request is rounded down and you
+   *             receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
+   *             5 minutes of data, using a period of 5 seconds, you receive data timestamped between
+   *             15:02:15 and 15:07:15. </p>
+   * @public
+   */
+  StartTime: Date | undefined;
+
+  /**
+   * <p>The time stamp that determines the last data point to return.</p>
+   *          <p>The value specified is exclusive; results include data points up to the specified
+   *             time stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for
+   *             example, 2016-10-10T23:00:00Z).</p>
+   * @public
+   */
+  EndTime: Date | undefined;
+
+  /**
+   * <p>The granularity, in seconds, of the returned data points. For metrics with regular
+   *             resolution, a period can be as short as one minute (60 seconds) and must be a multiple
+   *             of 60. For high-resolution metrics that are collected at intervals of less than one
+   *             minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
+   *             metrics are those metrics stored by a <code>PutMetricData</code> call that includes a
+   *                 <code>StorageResolution</code> of 1 second.</p>
+   *          <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
+   *             3 hours ago, you must specify the period as follows or no data points in that time range
+   *             is returned:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds
+   *                     (1 minute).</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5
+   *                     minutes).</p>
+   *             </li>
+   *             <li>
+   *                <p>Start time greater than 63 days ago - Use a multiple of 3600 seconds (1
+   *                     hour).</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Period: number | undefined;
+
+  /**
+   * <p>The metric statistics, other than percentile. For percentile statistics, use
+   *                 <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you
+   *             must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not
+   *             both.</p>
+   * @public
+   */
+  Statistics?: Statistic[] | undefined;
+
+  /**
+   * <p>The percentile statistics. Specify values between p0.0 and p100. When calling
+   *                 <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or
+   *                 <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
+   *             available for metrics when any of the metric values are negative numbers.</p>
+   * @public
+   */
+  ExtendedStatistics?: string[] | undefined;
+
+  /**
+   * <p>The unit for a given metric. If you omit <code>Unit</code>, all data that was
+   *             collected with any unit is returned, along with the corresponding units that were
+   *             specified when the data was reported to CloudWatch. If you specify a unit, the operation
+   *             returns only data that was collected with that unit specified. If you specify a unit
+   *             that does not match the data collected, the results of the operation are null.
+   *             CloudWatch does not perform unit conversions.</p>
+   * @public
+   */
+  Unit?: StandardUnit | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricStatisticsOutput {
+  /**
+   * <p>A label for the specified metric.</p>
+   * @public
+   */
+  Label?: string | undefined;
+
+  /**
+   * <p>The data points for the specified metric.</p>
+   * @public
+   */
+  Datapoints?: Datapoint[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricStreamInput {
+  /**
+   * <p>The name of the metric stream to retrieve information about.</p>
+   * @public
+   */
+  Name: string | undefined;
+}
+
+/**
+ * <p>This structure contains a metric namespace and optionally, a list of metric names, to
+ *             either include in a metric stream or exclude from a metric stream.</p>
+ *          <p>A metric stream's filters can include up to 1000 total names. This limit applies to
+ *             the sum of namespace names and metric names in the filters. For example, this could
+ *             include 10 metric namespace filters with 99 metrics each, or 20 namespace filters with
+ *             49 metrics specified in each filter.</p>
+ * @public
+ */
+export interface MetricStreamFilter {
+  /**
+   * <p>The name of the metric namespace for this filter.</p>
+   *          <p>The namespace can contain only ASCII printable characters (ASCII range 32 through
+   *             126). It must contain at least one non-whitespace character.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The names of the metrics to either include or exclude from the metric stream. </p>
+   *          <p>If you omit this parameter, all metrics in the namespace are included or excluded,
+   *             depending on whether this filter is specified as an exclude filter or an include
+   *             filter.</p>
+   *          <p>Each metric name can contain only ASCII printable characters (ASCII range 32 through
+   *             126). Each metric name must contain at least one non-whitespace character.</p>
+   * @public
+   */
+  MetricNames?: string[] | undefined;
+}
+
+/**
+ * <p>This object contains the information for one metric that is to be streamed with
+ *             additional statistics.</p>
+ * @public
+ */
+export interface MetricStreamStatisticsMetric {
+  /**
+   * <p>The namespace of the metric.</p>
+   * @public
+   */
+  Namespace: string | undefined;
+
+  /**
+   * <p>The name of the metric.</p>
+   * @public
+   */
+  MetricName: string | undefined;
+}
+
+/**
+ * <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
+ *                 <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+ *             streamed. This structure contains information for one metric that includes additional
+ *             statistics in the stream. For more information about statistics, see CloudWatch,
+ *             listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
+ *                 CloudWatch statistics definitions</a>.</p>
+ * @public
+ */
+export interface MetricStreamStatisticsConfiguration {
+  /**
+   * <p>An array of metric name and namespace pairs that stream the additional statistics
+   *             listed in the value of the <code>AdditionalStatistics</code> parameter. There can be as
+   *             many as 100 pairs in the array.</p>
+   *          <p>All metrics that match the combination of metric name and namespace will be streamed
+   *             with the additional statistics, no matter their dimensions.</p>
+   * @public
+   */
+  IncludeMetrics: MetricStreamStatisticsMetric[] | undefined;
+
+  /**
+   * <p>The list of additional statistics that are to be streamed for the metrics listed in
+   *             the <code>IncludeMetrics</code> array in this structure. This list can include as many
+   *             as 20 statistics.</p>
+   *          <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry1.0</code> or
+   *                 <code>opentelemetry0.7</code>, the only valid values are
+   *                     <code>p<i>??</i>
+   *             </code> percentile statistics such as
+   *                 <code>p90</code>, <code>p99</code> and so on.</p>
+   *          <p>If the <code>OutputFormat</code> for the stream is <code>json</code>, the valid values
+   *             include the abbreviations for all of the statistics listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
+   *                 CloudWatch statistics definitions</a>. For example, this includes
+   *                 <code>tm98, </code>
+   *             <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>
+   * @public
+   */
+  AdditionalStatistics: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricStreamOutput {
+  /**
+   * <p>The ARN of the metric stream.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The name of the metric stream.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>If this array of metric namespaces is present, then these namespaces are the only
+   *             metric namespaces that are streamed by this metric stream.</p>
+   * @public
+   */
+  IncludeFilters?: MetricStreamFilter[] | undefined;
+
+  /**
+   * <p>If this array of metric namespaces is present, then these namespaces are the only
+   *             metric namespaces that are not streamed by this metric stream. In this case, all other
+   *             metric namespaces in the account are streamed by this metric stream.</p>
+   * @public
+   */
+  ExcludeFilters?: MetricStreamFilter[] | undefined;
+
+  /**
+   * <p>The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by this
+   *             metric stream.</p>
+   * @public
+   */
+  FirehoseArn?: string | undefined;
+
+  /**
+   * <p>The ARN of the IAM role that is used by this metric stream.</p>
+   * @public
+   */
+  RoleArn?: string | undefined;
+
+  /**
+   * <p>The state of the metric stream. The possible values are <code>running</code> and
+   *                 <code>stopped</code>.</p>
+   * @public
+   */
+  State?: string | undefined;
+
+  /**
+   * <p>The date that the metric stream was created.</p>
+   * @public
+   */
+  CreationDate?: Date | undefined;
+
+  /**
+   * <p>The date of the most recent update to the metric stream's configuration.</p>
+   * @public
+   */
+  LastUpdateDate?: Date | undefined;
+
+  /**
+   * <p>The output format for the stream. Valid values are <code>json</code>,
+   *                 <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
+   *             information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">Metric streams output formats</a>.</p>
+   * @public
+   */
+  OutputFormat?: MetricStreamOutputFormat | undefined;
+
+  /**
+   * <p>Each entry in this array displays information about one or more metrics that include
+   *             additional statistics in the metric stream. For more information about the additional
+   *             statistics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
+   *                 CloudWatch statistics definitions</a>. </p>
+   * @public
+   */
+  StatisticsConfigurations?: MetricStreamStatisticsConfiguration[] | undefined;
+
+  /**
+   * <p>If this is <code>true</code> and this metric stream is in a monitoring account, then
+   *             the stream includes metrics from source accounts that the monitoring account is linked
+   *             to.</p>
+   * @public
+   */
+  IncludeLinkedAccountsMetrics?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricWidgetImageInput {
+  /**
+   * <p>A JSON string that defines the bitmap graph to be retrieved. The string includes
+   *             the metrics to include in the graph, statistics, annotations, title, axis limits, and so
+   *             on. You can include only one <code>MetricWidget</code> parameter in each
+   *                 <code>GetMetricWidgetImage</code> call.</p>
+   *          <p>For more information about the syntax of <code>MetricWidget</code> see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
+   *          <p>If any metric on the graph could not load all the requested data points, an orange
+   *             triangle with an exclamation point appears next to the graph legend.</p>
+   * @public
+   */
+  MetricWidget: string | undefined;
+
+  /**
+   * <p>The format of the resulting image. Only PNG images are supported.</p>
+   *          <p>The default is <code>png</code>. If you specify <code>png</code>, the API returns
+   *             an HTTP response with the content-type set to <code>text/xml</code>. The image data is
+   *             in a <code>MetricWidgetImage</code> field. For example:</p>
+   *          <p>
+   *             <code> <GetMetricWidgetImageResponse xmlns=<URLstring>></code>
+   *          </p>
+   *          <p>
+   *             <code> <GetMetricWidgetImageResult></code>
+   *          </p>
+   *          <p>
+   *             <code> <MetricWidgetImage></code>
+   *          </p>
+   *          <p>
+   *             <code> iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...</code>
+   *          </p>
+   *          <p>
+   *             <code> </MetricWidgetImage></code>
+   *          </p>
+   *          <p>
+   *             <code> </GetMetricWidgetImageResult></code>
+   *          </p>
+   *          <p>
+   *             <code> <ResponseMetadata></code>
+   *          </p>
+   *          <p>
+   *             <code>
+   *             <RequestId>6f0d4192-4d42-11e8-82c1-f539a07e0e3b</RequestId></code>
+   *          </p>
+   *          <p>
+   *             <code> </ResponseMetadata></code>
+   *          </p>
+   *          <p>
+   *             <code></GetMetricWidgetImageResponse></code>
+   *          </p>
+   *          <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For
+   *             most use cases, and all actions using an Amazon Web Services SDK, you should use
+   *                 <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a
+   *             content-type set to <code>image/png</code>, and the body of the response is a PNG
+   *             image.</p>
+   * @public
+   */
+  OutputFormat?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetMetricWidgetImageOutput {
+  /**
+   * <p>The image of the graph, in the output format specified. The output is
+   *             base64-encoded.</p>
+   * @public
+   */
+  MetricWidgetImage?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetOTelEnrichmentInput {}
+
+/**
+ * <p>Selects the metrics in one namespace, for use in the <code>IncludeFilters</code> or
+ *                 <code>ExcludeFilters</code> parameter of <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html">StartOTelEnrichment</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html">UpdateOTelEnrichment</a>.</p>
+ *          <p>A maximum of 100 selectors is allowed across <code>IncludeFilters</code> and
+ *                 <code>ExcludeFilters</code> combined.</p>
+ * @public
+ */
+export interface OTelEnrichmentMetricSelector {
+  /**
+   * <p>The namespace of the metrics to select. Namespaces are matched exactly and are
+   *             case-sensitive.</p>
+   * @public
+   */
+  Namespace: string | undefined;
+
+  /**
+   * <p>The names of the metrics to select within the namespace. Metric names are matched
+   *             exactly and are case-sensitive. If this parameter is omitted, every metric in the
+   *             namespace is selected.</p>
+   *          <p>A maximum of 100 metric names is allowed for each selector.</p>
+   * @public
+   */
+  MetricNames?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetOTelEnrichmentOutput {
+  /**
+   * <p>The status of OTel enrichment for the account. Valid values are
+   *                 <code>Running</code> (enrichment is enabled) and <code>Stopped</code> (enrichment is
+   *             disabled).</p>
+   * @public
+   */
+  Status: OTelEnrichmentStatus | undefined;
+
+  /**
+   * <p>The metric namespaces, and the metric names, that are enriched. This parameter is
+   *             omitted when enrichment is stopped, and when enrichment is running with no include
+   *             filters, which means that every supported namespace is in scope.</p>
+   * @public
+   */
+  IncludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The metric namespaces, and the metric names, that are left unenriched. This
+   *             parameter is omitted when enrichment is stopped, and when enrichment is running with no
+   *             exclude filters, which means that nothing is excluded.</p>
+   * @public
+   */
+  ExcludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The date and time that enrichment started for the account. This parameter is
+   *             omitted when enrichment is stopped.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The date and time that the enrichment configuration for the account was last
+   *             stored.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * <p>Specifies the resource ARN for a <code>GetResourceMetricsConfiguration</code>
+ *             request.</p>
+ * @public
+ */
+export interface GetResourceMetricsConfigurationInput {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to retrieve the
+   *             resource metrics configuration for.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+}
+
+/**
+ * <p>Returns the current resource metrics configuration for the specified resource.</p>
+ * @public
+ */
+export interface GetResourceMetricsConfigurationOutput {
+  /**
+   * <p>The resource metrics configuration for the specified resource.</p>
+   * @public
+   */
+  ResourceMetricsConfiguration: ResourceMetricsConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAlarmMuteRulesInput {
+  /**
+   * <p>Filter results to show only mute rules that target the specified alarm
+   *             name.</p>
+   * @public
+   */
+  AlarmName?: string | undefined;
+
+  /**
+   * <p>Filter results to show only mute rules with the specified statuses. Valid values
+   *             are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+   * @public
+   */
+  Statuses?: AlarmMuteRuleStatus[] | undefined;
+
+  /**
+   * <p>The maximum number of mute rules to return in one call. The default is
+   *             50.</p>
+   * @public
+   */
+  MaxRecords?: number | undefined;
+
+  /**
+   * <p>The token returned from a previous call to indicate where to continue retrieving
+   *             results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAlarmMuteRulesOutput {
+  /**
+   * <p>A list of alarm mute rule summaries.</p>
+   * @public
+   */
+  AlarmMuteRuleSummaries?: AlarmMuteRuleSummary[] | undefined;
+
+  /**
+   * <p>The token to use when requesting the next set of results. If this field is absent,
+   *             there are no more results to retrieve.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListDashboardsInput {
+  /**
+   * <p>If you specify this parameter, only the dashboards with names starting with the
+   *             specified string are listed. The maximum length is 255, and valid characters are A-Z,
+   *             a-z, 0-9, ".", "-", and "_". </p>
+   * @public
+   */
+  DashboardNamePrefix?: string | undefined;
+
+  /**
+   * <p>The token returned by a previous call to indicate that there is more data
+   *             available.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListDashboardsOutput {
+  /**
+   * <p>The list of matching dashboards.</p>
+   * @public
+   */
+  DashboardEntries?: DashboardEntry[] | undefined;
+
+  /**
+   * <p>The token that marks the start of the next batch of returned results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListManagedInsightRulesInput {
+  /**
+   * <p> The ARN of an Amazon Web Services resource that has managed Contributor Insights
+   *             rules. </p>
+   * @public
+   */
+  ResourceARN: string | undefined;
+
+  /**
+   * <p> Include this value to get the next set of rules if the value was returned by the
+   *             previous operation. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p> The maximum number of results to return in one operation. If you omit this parameter,
+   *             the default number is used. The default number is <code>100</code>. </p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * <p> The status of a managed Contributor Insights rule. </p>
+ * @public
+ */
+export interface ManagedRuleState {
+  /**
+   * <p> The name of the Contributor Insights rule that contains data for the specified
+   *                 Amazon Web Services resource. </p>
+   * @public
+   */
+  RuleName: string | undefined;
+
+  /**
+   * <p> Indicates whether the rule is enabled or disabled. </p>
+   * @public
+   */
+  State: string | undefined;
+}
+
+/**
+ * <p> Contains information about managed Contributor Insights rules, as returned by
+ *                 <code>ListManagedInsightRules</code>.
+ *         </p>
+ * @public
+ */
+export interface ManagedRuleDescription {
+  /**
+   * <p> The template name for the managed rule. Used to enable managed rules using
+   *                 <code>PutManagedInsightRules</code>. </p>
+   * @public
+   */
+  TemplateName?: string | undefined;
+
+  /**
+   * <p> If a managed rule is enabled, this is the ARN for the related Amazon Web Services
+   *             resource. </p>
+   * @public
+   */
+  ResourceARN?: string | undefined;
+
+  /**
+   * <p> Describes the state of a managed rule. If present, it contains information about the
+   *             Contributor Insights rule that contains information about the related Amazon Web Services
+   *             resource. </p>
+   * @public
+   */
+  RuleState?: ManagedRuleState | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListManagedInsightRulesOutput {
+  /**
+   * <p> The managed rules that are available for the specified Amazon Web Services resource.
+   *         </p>
+   * @public
+   */
+  ManagedRules?: ManagedRuleDescription[] | undefined;
+
+  /**
+   * <p> Include this value to get the next set of rules if the value was returned by the
+   *             previous operation. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricDataQueryDefinitionsInput {
+  /**
+   * <p>The maximum number of metric data query definitions to return in one call. The
+   *             default is 100.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>The token returned by a previous call to indicate where to continue retrieving
+   *             results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Summary information about a metric data query definition. To get the expression,
+ *             call <code>GetMetricDataQueryDefinition</code>.</p>
+ * @public
+ */
+export interface MetricDataQueryDefinitionSummary {
+  /**
+   * <p>The ID of the metric data query definition.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The path of the metric data query definition.</p>
+   * @public
+   */
+  Path: string | undefined;
+
+  /**
+   * <p>The language of the expression. Valid values are the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PROMQL</code> – A PromQL query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SQL</code> – A CloudWatch Metrics Insights query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>METRIC_MATH</code> – A metric math expression.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type: QueryType | undefined;
+
+  /**
+   * <p>The date and time when you last updated the metric data query
+   *             definition.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricDataQueryDefinitionsOutput {
+  /**
+   * <p>A list of metric data query definition summaries.</p>
+   * @public
+   */
+  Items: MetricDataQueryDefinitionSummary[] | undefined;
+
+  /**
+   * <p>The token to use when requesting the next set of results. If this field is absent,
+   *             there are no more results to retrieve.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricsInput {
+  /**
+   * <p>The metric namespace to filter against. Only the namespace that matches exactly
+   *             will be returned.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The name of the metric to filter against. Only the metrics with names that match
+   *             exactly will be returned.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The dimensions to filter against. Only the dimension with names that match exactly
+   *             will be returned. If you specify one dimension name and a metric has that dimension and
+   *             also other dimensions, it will be returned.</p>
+   * @public
+   */
+  Dimensions?: DimensionFilter[] | undefined;
+
+  /**
+   * <p>The token returned by a previous call to indicate that there is more data
+   *             available.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>To filter the results to show only metrics that have had data points published in the
+   *             past three hours, specify this parameter with a value of <code>PT3H</code>. This is the
+   *             only valid value for this parameter.</p>
+   *          <p>The results that are returned are an approximation of the value you specify. There is
+   *             a low probability that the returned results include metrics with last published data as
+   *             much as 50 minutes more than the specified time interval.</p>
+   * @public
+   */
+  RecentlyActive?: RecentlyActive | undefined;
+
+  /**
+   * <p>If you are using this operation in a monitoring account, specify <code>true</code> to
+   *             include metrics from source accounts in the returned data.</p>
+   *          <p>The default is <code>false</code>.</p>
+   * @public
+   */
+  IncludeLinkedAccounts?: boolean | undefined;
+
+  /**
+   * <p>When you use this operation in a monitoring account, use this field to return metrics
+   *             only from one source account. To do so, specify that source account ID in this field,
+   *             and also specify <code>true</code> for <code>IncludeLinkedAccounts</code>.</p>
+   * @public
+   */
+  OwningAccount?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricsOutput {
+  /**
+   * <p>The metrics that match your request. </p>
+   * @public
+   */
+  Metrics?: Metric[] | undefined;
+
+  /**
+   * <p>The token that marks the start of the next batch of returned results. </p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>If you are using this operation in a monitoring account, this array contains the
+   *             account IDs of the source accounts where the metrics in the returned data are
+   *             from.</p>
+   *          <p>This field is a 1:1 mapping between each metric that is returned and the ID of the
+   *             owning account.</p>
+   * @public
+   */
+  OwningAccounts?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricStreamsInput {
+  /**
+   * <p>Include this value, if it was returned by the previous call, to get the next set of
+   *             metric streams.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return in one operation.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * <p>This structure contains the configuration information about one metric stream.</p>
+ * @public
+ */
+export interface MetricStreamEntry {
+  /**
+   * <p>The ARN of the metric stream.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The date that the metric stream was originally created.</p>
+   * @public
+   */
+  CreationDate?: Date | undefined;
+
+  /**
+   * <p>The date that the configuration of this metric stream was most recently
+   *             updated.</p>
+   * @public
+   */
+  LastUpdateDate?: Date | undefined;
+
+  /**
+   * <p>The name of the metric stream.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The ARN of the Kinesis Firehose devlivery stream that is used for this metric
+   *             stream.</p>
+   * @public
+   */
+  FirehoseArn?: string | undefined;
+
+  /**
+   * <p>The current state of this stream. Valid values are <code>running</code> and
+   *                 <code>stopped</code>.</p>
+   * @public
+   */
+  State?: string | undefined;
+
+  /**
+   * <p>The output format of this metric stream. Valid values are <code>json</code>,
+   *                 <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>.</p>
+   * @public
+   */
+  OutputFormat?: MetricStreamOutputFormat | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListMetricStreamsOutput {
+  /**
+   * <p>The token that marks the start of the next batch of returned results. You can use
+   *             this token in a subsequent operation to get the next batch of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The array of metric stream information.</p>
+   * @public
+   */
+  Entries?: MetricStreamEntry[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTagsForResourceInput {
+  /**
+   * <p>The ARN of the CloudWatch resource that you want to view tags for.</p>
+   *          <p>The ARN format of an alarm is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
    *             </code>
    *          </p>
+   *          <p>The ARN format of a Contributor Insights rule is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+   *             </code>
+   *          </p>
+   *          <p>The ARN format of a dashboard is
+   *                     <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+   *             </code>
+   *          </p>
+   *          <p>The ARN format of a metric stream is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
+   *             </code>
+   *          </p>
+   *          <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
+   *                 Services General Reference</i>.</p>
+   * @public
    */
-  AlarmActions?: string[];
+  ResourceARN: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTagsForResourceOutput {
+  /**
+   * <p>The list of tag keys and values associated with the resource you specified.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutAlarmMuteRuleInput {
+  /**
+   * <p>The name of the alarm mute rule. This name must be unique within your Amazon Web Services account and region.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>A description of the alarm mute rule that helps you identify its purpose.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The configuration that defines when and how long alarms should be muted.</p>
+   * @public
+   */
+  Rule: Rule | undefined;
+
+  /**
+   * <p>Specifies which alarms this rule applies to.</p>
+   * @public
+   */
+  MuteTargets?: MuteTargets | undefined;
+
+  /**
+   * <p>A list of key-value pairs to associate with the alarm mute rule. You can use tags
+   *             to categorize and manage your mute rules.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The date and time after which the mute rule takes effect, specified as a timestamp
+   *             in ISO 8601 format (for example, <code>2026-04-15T08:00:00Z</code>). If not specified,
+   *             the mute rule takes effect immediately upon creation and the mutes are applied as per
+   *             the schedule expression.</p>
+   * @public
+   */
+  StartDate?: Date | undefined;
+
+  /**
+   * <p>The date and time when the mute rule expires and is no longer evaluated, specified
+   *             as a timestamp in ISO 8601 format (for example, <code>2026-12-31T23:59:59Z</code>).
+   *             After this time, the rule status becomes EXPIRED and will no longer mute the targeted
+   *             alarms.</p>
+   * @public
+   */
+  ExpireDate?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutAnomalyDetectorInput {
+  /**
+   * <p>The namespace of the metric to create the anomaly detection model for.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The name of the metric to create the anomaly detection model for.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The metric dimensions to create the anomaly detection model for.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Dimensions?: Dimension[] | undefined;
+
+  /**
+   * <p>The statistic to use for the metric and the anomaly detection model.</p>
+   *
+   * @deprecated Use SingleMetricAnomalyDetector.
+   * @public
+   */
+  Stat?: string | undefined;
+
+  /**
+   * <p>The configuration specifies details about how the anomaly detection model is to be
+   *             trained, including time ranges to exclude when training and updating the model. You can
+   *             specify as many as 10 time ranges.</p>
+   *          <p>The configuration can also include the time zone to use for the metric.</p>
+   * @public
+   */
+  Configuration?: AnomalyDetectorConfiguration | undefined;
+
+  /**
+   * <p>Use this object to include parameters to provide information about your metric to
+   *                 CloudWatch to help it build more accurate anomaly detection models.
+   *             Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>
+   * @public
+   */
+  MetricCharacteristics?: MetricCharacteristics | undefined;
+
+  /**
+   * <p>A single metric anomaly detector to be created.</p>
+   *          <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following
+   *             parameters in the same operation:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Dimensions</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MetricName</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Namespace</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Stat</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>the <code>MetricMathAnomalyDetector</code> parameters of
+   *                         <code>PutAnomalyDetectorInput</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>Instead, specify the single metric anomaly detector attributes as part of the property
+   *                 <code>SingleMetricAnomalyDetector</code>.</p>
+   * @public
+   */
+  SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector | undefined;
+
+  /**
+   * <p>The metric math anomaly detector to be created.</p>
+   *          <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following
+   *             parameters in the same operation:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Dimensions</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MetricName</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Namespace</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Stat</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>the <code>SingleMetricAnomalyDetector</code> parameters of
+   *                         <code>PutAnomalyDetectorInput</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>Instead, specify the metric math anomaly detector attributes as part of the property
+   *                 <code>MetricMathAnomalyDetector</code>.</p>
+   * @public
+   */
+  MetricMathAnomalyDetector?: MetricMathAnomalyDetector | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutAnomalyDetectorOutput {
+  /**
+   * <p>The unique identifier of the anomaly detector that you created or updated.</p>
+   * @public
+   */
+  AnomalyDetectorId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutCompositeAlarmInput {
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm state of
+   *             the composite alarm. The default is <code>TRUE</code>.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name
+   *             (ARN).</p>
+   *          <p>Valid Values: ]</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   *             </code>
+   *          </p>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Systems Manager actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
+   *             </code>
+   *          </p>
+   *          <p>
+   *             <b>Start a Amazon Q Developer operational
+   *                 investigation</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
+   *             </code>
+   *          </p>
+   * @public
+   */
+  AlarmActions?: string[] | undefined;
 
   /**
    * <p>The description for the composite alarm.</p>
+   * @public
    */
-  AlarmDescription?: string;
+  AlarmDescription?: string | undefined;
 
   /**
-   * <p>The name for the composite alarm. This name must be unique within the Region.</p>
+   * <p>The name for the composite alarm. This name must be unique within the
+   *             Region.</p>
+   * @public
    */
   AlarmName: string | undefined;
 
   /**
    * <p>An expression that specifies which other alarms are to be evaluated to determine this
-   * 			composite alarm's state. For each alarm that you reference, you
-   * 			designate a function that
-   * 			specifies whether that alarm needs to be in ALARM state, OK state, or INSUFFICIENT_DATA state. You
-   * 			can use operators (AND, OR and NOT) to combine multiple functions in a single expression. You can use parenthesis to logically group the
-   * 			functions in your expression.</p>
-   * 		       <p>You can use either alarm names or ARNs to reference the other alarms that are to be evaluated.</p>
-   * 		       <p>Functions can include the following:</p>
-   * 		       <ul>
+   *             composite alarm's state. For each alarm that you reference, you designate a function
+   *             that specifies whether that alarm needs to be in ALARM state, OK state, or
+   *             INSUFFICIENT_DATA state. You can use operators (AND, OR and NOT) to combine multiple
+   *             functions in a single expression. You can use parenthesis to logically group the
+   *             functions in your expression.</p>
+   *          <p>You can use either alarm names or ARNs to reference the other alarms that are to be
+   *             evaluated.</p>
+   *          <p>Functions can include the following:</p>
+   *          <ul>
    *             <li>
    *                <p>
-   *                   <code>ALARM("<i>alarm-name</i> or <i>alarm-ARN</i>")</code> is TRUE if the named
-   * 			alarm is in ALARM state.</p>
+   *                   <code>ALARM("<i>alarm-name</i> or
+   *                         <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+   *                     ALARM state.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>OK("<i>alarm-name</i> or <i>alarm-ARN</i>")</code> is TRUE if the named
-   * 				alarm is in OK state.</p>
+   *                   <code>OK("<i>alarm-name</i> or
+   *                         <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in OK
+   *                     state.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>INSUFFICIENT_DATA("<i>alarm-name</i> or <i>alarm-ARN</i>")</code> is TRUE if the named
-   * 				alarm is in INSUFFICIENT_DATA state.</p>
+   *                   <code>INSUFFICIENT_DATA("<i>alarm-name</i> or
+   *                             <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+   *                     INSUFFICIENT_DATA state.</p>
    *             </li>
    *             <li>
    *                <p>
@@ -2974,616 +5025,1528 @@ export interface PutCompositeAlarmInput {
    *                   <code>FALSE</code> always evaluates to FALSE.</p>
    *             </li>
    *          </ul>
-   * 		       <p>TRUE and FALSE are useful for testing a complex <code>AlarmRule</code> structure, and
-   * 		for testing your alarm actions.</p>
-   * 		       <p>Alarm names specified in <code>AlarmRule</code> can be surrounded with double-quotes ("), but do not have to be.</p>
-   * 		       <p>The following
-   * 			are some examples of <code>AlarmRule</code>:</p>
-   * 		       <ul>
+   *          <p>TRUE and FALSE are useful for testing a complex <code>AlarmRule</code> structure, and
+   *             for testing your alarm actions.</p>
+   *          <p>Alarm names specified in <code>AlarmRule</code> can be surrounded with double-quotes
+   *             ("), but do not have to be.</p>
+   *          <p>The following are some examples of <code>AlarmRule</code>:</p>
+   *          <ul>
    *             <li>
    *                <p>
-   *                   <code>ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)</code> specifies that the composite alarm goes into ALARM state only
-   * 				if both CPUUtilizationTooHigh and DiskReadOpsTooHigh alarms are in ALARM state.</p>
+   *                   <code>ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)</code>
+   *                     specifies that the composite alarm goes into ALARM state only if both
+   *                     CPUUtilizationTooHigh and DiskReadOpsTooHigh alarms are in ALARM state.</p>
    *             </li>
    *             <li>
    *                <p>
    *                   <code>ALARM(CPUUtilizationTooHigh) AND NOT ALARM(DeploymentInProgress)</code>
-   * 					specifies that the alarm goes to ALARM state if CPUUtilizationTooHigh is in ALARM state
-   * 					and DeploymentInProgress is not in ALARM state. This example reduces
-   * 					alarm noise during a known deployment window.</p>
+   *                     specifies that the alarm goes to ALARM state if CPUUtilizationTooHigh is in
+   *                     ALARM state and DeploymentInProgress is not in ALARM state. This example reduces
+   *                     alarm noise during a known deployment window.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND OK(NetworkOutTooHigh)</code> goes into ALARM
-   * 				state if CPUUtilizationTooHigh OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK state.
-   * 				This provides another example of using a composite alarm to prevent noise. This rule ensures that you are not notified with an
-   * 				alarm action on high CPU or disk usage if a known network problem is also occurring.</p>
+   *                   <code>(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND
+   *                         OK(NetworkOutTooHigh)</code> goes into ALARM state if CPUUtilizationTooHigh
+   *                     OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK
+   *                     state. This provides another example of using a composite alarm to prevent
+   *                     noise. This rule ensures that you are not notified with an alarm action on high
+   *                     CPU or disk usage if a known network problem is also occurring.</p>
    *             </li>
    *          </ul>
-   * 		       <p>The <code>AlarmRule</code> can specify as many as 100
-   * 			"children" alarms. The <code>AlarmRule</code> expression can have as many as 500 elements. Elements
-   * 			are child alarms, TRUE or FALSE statements, and
-   * 			parentheses.</p>
+   *          <p>The <code>AlarmRule</code> can specify as many as 100 "children" alarms. The
+   *                 <code>AlarmRule</code> expression can have as many as 500 elements. Elements are
+   *             child alarms, TRUE or FALSE statements, and parentheses.</p>
+   * @public
    */
   AlarmRule: string | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state.
-   * 			Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   * 		       <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   * <p>The actions to execute when this alarm transitions to the
+   *                 <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+   *             as an Amazon Resource Name (ARN).</p>
+   *          <p>Valid Values: ]</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
    *             </code>
    *          </p>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  InsufficientDataActions?: string[];
+  InsufficientDataActions?: string[] | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to an <code>OK</code> state
-   * 			from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   *
-   * 		       <p>Valid Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   * <p>The actions to execute when this alarm transitions to an <code>OK</code> state from
+   *             any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   *          <p>Valid Values: ]</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
    *             </code>
    *          </p>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  OKActions?: string[];
+  OKActions?: string[] | undefined;
 
   /**
-   * <p>A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.</p>
-   * 		       <p>Tags can help you organize and categorize your
-   * 			resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with
-   * 			certain tag values.</p>
+   * <p>A list of key-value pairs to associate with the alarm. You can associate as many as
+   *             50 tags with an alarm. To be able to associate tags with the alarm when you create the
+   *             alarm, you must have the <code>cloudwatch:TagResource</code> permission.</p>
+   *          <p>Tags can help you organize and categorize your resources. You can also use them to
+   *             scope user permissions by granting a user permission to access or change only resources
+   *             with certain tag values.</p>
+   *          <p>If you are using this operation to update an existing alarm, any tags you specify in
+   *             this parameter are ignored. To change the tags of an existing alarm, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace PutCompositeAlarmInput {
   /**
-   * @internal
+   * <p> Actions will be suppressed if the suppressor alarm is in the <code>ALARM</code>
+   *             state. <code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name
+   *             (ARN) from an existing alarm. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutCompositeAlarmInput): any => ({
-    ...obj,
-  });
+  ActionsSuppressor?: string | undefined;
+
+  /**
+   * <p> The maximum time in seconds that the composite alarm waits for the suppressor alarm
+   *             to go into the <code>ALARM</code> state. After this time, the composite alarm performs
+   *             its actions. </p>
+   *          <important>
+   *             <p>
+   *                <code>WaitPeriod</code> is required only when <code>ActionsSuppressor</code> is
+   *                 specified. </p>
+   *          </important>
+   * @public
+   */
+  ActionsSuppressorWaitPeriod?: number | undefined;
+
+  /**
+   * <p> The maximum time in seconds that the composite alarm waits after suppressor alarm
+   *             goes out of the <code>ALARM</code> state. After this time, the composite alarm performs
+   *             its actions. </p>
+   *          <important>
+   *             <p>
+   *                <code>ExtensionPeriod</code> is required only when <code>ActionsSuppressor</code> is
+   *                 specified. </p>
+   *          </important>
+   * @public
+   */
+  ActionsSuppressorExtensionPeriod?: number | undefined;
+
+  /**
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
+   */
+  ActionConfiguration?: ActionConfiguration | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutDashboardInput {
   /**
-   * <p>The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing
-   * 			its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are
-   * 			A-Z, a-z, 0-9, "-", and "_".  This parameter is required.</p>
+   * <p>The name of the dashboard. If a dashboard with this name already exists, this call
+   *             modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is
+   *             created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and
+   *             "_". This parameter is required.</p>
+   * @public
    */
   DashboardName: string | undefined;
 
   /**
-   * <p>The detailed information about the dashboard in JSON format, including the widgets to include and their location
-   * 			on the dashboard.  This parameter is required.</p>
-   * 		       <p>For more information about the syntax,
-   * 			see  <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
+   * <p>The detailed information about the dashboard in JSON format, including the widgets
+   *             to include and their location on the dashboard. This parameter is required.</p>
+   *          <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
+   * @public
    */
   DashboardBody: string | undefined;
-}
 
-export namespace PutDashboardInput {
   /**
-   * @internal
+   * <p>A list of key-value pairs to associate with the dashboard. You can associate as many
+   *             as 50 tags with a dashboard.</p>
+   *          <p>Tags can help you organize and categorize your dashboards. You can also use them to
+   *             scope user permissions by granting a user permission to access or change only dashboards
+   *             with certain tag values.</p>
+   *          <p>You can use this parameter only when creating a new dashboard. If you specify
+   *                 <code>Tags</code> when updating an existing dashboard, the tag updates are ignored.
+   *             To add or update tags on an existing dashboard, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.
+   *             To remove tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutDashboardInput): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutDashboardOutput {
   /**
-   * <p>If the input for <code>PutDashboard</code> was correct and the dashboard was successfully created or modified, this result is empty.</p>
-   * 			      <p>If this result includes only warning messages, then the input was valid enough for the dashboard to be
-   * 			created or modified, but some elements of the dashboard
-   * 			might not render.</p>
-   * 				     <p>If this result includes error messages, the input was not valid and the operation failed.</p>
+   * <p>If the input for <code>PutDashboard</code> was correct and the dashboard was
+   *             successfully created or modified, this result is empty.</p>
+   *          <p>If this result includes only warning messages, then the input was valid enough for
+   *             the dashboard to be created or modified, but some elements of the dashboard might not
+   *             render.</p>
+   *          <p>If this result includes error messages, the input was not valid and the operation
+   *             failed.</p>
+   * @public
    */
-  DashboardValidationMessages?: DashboardValidationMessage[];
+  DashboardValidationMessages?: DashboardValidationMessage[] | undefined;
 }
 
-export namespace PutDashboardOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutDashboardOutput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutInsightRuleInput {
   /**
    * <p>A unique name for the rule.</p>
+   * @public
    */
   RuleName: string | undefined;
 
   /**
    * <p>The state of the rule. Valid values are ENABLED and DISABLED.</p>
+   * @public
    */
-  RuleState?: string;
+  RuleState?: string | undefined;
 
   /**
    * <p>The definition of the rule, as a JSON object. For details on the valid syntax, see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights
-   * 			Rule Syntax</a>.</p>
+   *                 <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
+   * @public
    */
   RuleDefinition: string | undefined;
 
   /**
-   * <p>A list of key-value pairs to associate with the Contributor Insights rule.
-   * 			You can associate as many as 50 tags with a rule.</p>
-   * 		       <p>Tags can help you organize and categorize your
-   * 			resources. You can also use them to scope user permissions, by
-   * 			granting a user permission to access or change only the resources that have
-   * 			certain tag values.</p>
-   * 		       <p>To be able to associate tags with a rule, you must have the <code>cloudwatch:TagResource</code>
-   * 		permission in addition to the <code>cloudwatch:PutInsightRule</code> permission.</p>
-   * 		       <p>If you are using this operation to update an existing Contributor Insights rule, any tags
-   * 		you specify in this parameter are ignored. To change the tags of an existing rule, use
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
+   * <p>A list of key-value pairs to associate with the Contributor Insights rule. You can
+   *             associate as many as 50 tags with a rule.</p>
+   *          <p>Tags can help you organize and categorize your resources. You can also use them to
+   *             scope user permissions, by granting a user permission to access or change only the
+   *             resources that have certain tag values.</p>
+   *          <p>To be able to associate tags with a rule, you must have the
+   *                 <code>cloudwatch:TagResource</code> permission in addition to the
+   *                 <code>cloudwatch:PutInsightRule</code> permission.</p>
+   *          <p>If you are using this operation to update an existing Contributor Insights rule, any
+   *             tags you specify in this parameter are ignored. To change the tags of an existing rule,
+   *             use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace PutInsightRuleInput {
   /**
-   * @internal
+   * <p>Specify <code>true</code> to have this rule evaluate log events after they have been
+   *             transformed by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log
+   *                 transformation</a>. If you specify <code>true</code>, then the log events in log
+   *             groups that have transformers will be evaluated by Contributor Insights after being
+   *             transformed. Log groups that don't have transformers will still have their original log
+   *             events evaluated by Contributor Insights.</p>
+   *          <p>The default is <code>false</code>
+   *          </p>
+   *          <note>
+   *             <p>If a log group has a transformer, and transformation fails for some log events,
+   *                 those log events won't be evaluated by Contributor Insights. For information about
+   *                 investigating log transformation failures, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html">Transformation metrics and errors</a>.</p>
+   *          </note>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutInsightRuleInput): any => ({
-    ...obj,
-  });
+  ApplyOnTransformedLogs?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutInsightRuleOutput {}
 
-export namespace PutInsightRuleOutput {
+/**
+ * @public
+ */
+export interface PutLogAlarmInput {
   /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutInsightRuleOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface PutMetricAlarmInput {
-  /**
-   * <p>The name for the alarm. This name must be unique within the Region.</p>
+   * <p>The name for the alarm. This name must be unique within the Amazon Web Services account and Region.</p>
+   * @public
    */
   AlarmName: string | undefined;
 
   /**
    * <p>The description for the alarm.</p>
+   * @public
    */
-  AlarmDescription?: string;
+  AlarmDescription?: string | undefined;
 
   /**
-   * <p>Indicates whether actions should be executed during any changes to the alarm state. The default is
-   * 			<code>TRUE</code>.</p>
+   * <p>The configuration of the underlying CloudWatch Logs scheduled query that this alarm evaluates, including the query string, log groups, schedule, and aggregation expression.</p>
+   * @public
    */
-  ActionsEnabled?: boolean;
+  ScheduledQueryConfiguration: ScheduledQueryConfiguration | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to an <code>OK</code> state
-   * 			from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   * 		       <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-   * 			<code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
-   *             </code> |
-   * 			<code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
+   * <p>The number of log lines from the most recent scheduled query execution to include in alarm action notifications. Valid range is 0 through 50. The default is 0, which means no log lines are included.</p>
+   * @public
+   */
+  ActionLogLineCount?: number | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of an IAM role that CloudWatch assumes to retrieve log events for inclusion in alarm action notifications. Required when <code>ActionLogLineCount</code> is greater than 0.</p>
+   * @public
+   */
+  ActionLogLineRoleArn?: string | undefined;
+
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm state. The default is <code>true</code>.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>OK</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   *          <p>Valid Values:</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
    *             </code>
    *          </p>
-   *
-   * 		       <p>Valid Values (for use with IAM roles):
-   * 			<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> |
-   * 			    <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
+   *          <p>
+   *             <b>Lambda actions:</b>
    *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  OKActions?: string[];
+  OKActions?: string[] | undefined;
 
   /**
-   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state.
-   * 			Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   * 		       <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-   * 			<code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
-   *             </code> |
-   * 			<code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
-   *             </code>
-   * 			| <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
-   *             </code>
-   * 			| <code>arn:aws:ssm-incidents::<i>account-id</i>:response-plan:<i>response-plan-name</i>
-   *             </code>
+   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   *          <p>Valid Values:</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
    *          </p>
-   *
-   * 		       <p>Valid Values (for use with IAM roles):
-   * 			<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> |
-   * 			<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
-   *          </p>
-   */
-  AlarmActions?: string[];
-
-  /**
-   * <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state.
-   * 			Each action is specified as an Amazon Resource Name (ARN).</p>
-   *
-   * 		       <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-   * 			<code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-   * 			<code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
-   *             </code> |
-   * 			<code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
    *             </code>
    *          </p>
-   *
-   * 		       <p>Valid Values (for use with IAM roles):
-   * 			<code>>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> |
-   * 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
+   *          <p>
+   *             <b>Lambda actions:</b>
    *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Systems Manager actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
+   *             </code>
+   *          </p>
+   * @public
    */
-  InsufficientDataActions?: string[];
+  AlarmActions?: string[] | undefined;
 
   /**
-   * <p>The name for the metric associated with the alarm. For each <code>PutMetricAlarm</code>
-   * 		operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p>
-   * 		       <p>If you are creating an alarm based on a math expression, you cannot specify this parameter, or any of the
-   * 			<code>Dimensions</code>, <code>Period</code>,
-   * 			<code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters. Instead, you specify
-   * 		all this information in the <code>Metrics</code> array.</p>
+   * <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+   *          <p>Valid Values:</p>
+   *          <p>
+   *             <b>Amazon SNS actions:</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   *             </code>
+   *          </p>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                     <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  MetricName?: string;
+  InsufficientDataActions?: string[] | undefined;
 
   /**
-   * <p>The namespace for the metric associated specified in <code>MetricName</code>.</p>
+   * <p>The number of most recent scheduled query results to evaluate against the threshold (the N in M-of-N evaluation). Valid range is 1 through 100.</p>
+   * @public
    */
-  Namespace?: string;
+  QueryResultsToEvaluate: number | undefined;
 
   /**
-   * <p>The statistic for the metric specified in <code>MetricName</code>, other than percentile.
-   * 		    For percentile statistics, use <code>ExtendedStatistic</code>. When you call <code>PutMetricAlarm</code> and specify
-   * 			a <code>MetricName</code>, you must
-   * 		specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>
+   * <p>The number of query results, out of the most recent <code>QueryResultsToEvaluate</code> results, that must breach the threshold to trigger the alarm to transition to <code>ALARM</code> (the M in M-of-N evaluation). Must be less than or equal to <code>QueryResultsToEvaluate</code>.</p>
+   * @public
    */
-  Statistic?: Statistic | string;
+  QueryResultsToAlarm: number | undefined;
 
   /**
-   * <p>The percentile statistic for the metric specified in <code>MetricName</code>. Specify a value
-   * 			between p0.0 and p100. When you call <code>PutMetricAlarm</code> and specify
-   * 			a <code>MetricName</code>, you must
-   * 			specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>
+   * <p>The value to compare with the aggregated query result.</p>
+   * @public
    */
-  ExtendedStatistic?: string;
+  Threshold: number | undefined;
+
+  /**
+   * <p>The arithmetic operation to use when comparing the aggregated query result and the threshold. The aggregated query result is used as the first operand. Valid values are <code>GreaterThanThreshold</code>, <code>GreaterThanOrEqualToThreshold</code>, <code>LessThanThreshold</code>, and <code>LessThanOrEqualToThreshold</code>.</p>
+   * @public
+   */
+  ComparisonOperator: ComparisonOperator | undefined;
+
+  /**
+   * <p>Sets how this alarm is to handle missing data points. Valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>
+   * @public
+   */
+  TreatMissingData?: string | undefined;
+
+  /**
+   * <p>A list of key-value pairs to associate with the alarm. You can use tags to categorize and manage your alarms.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+   *             after you create or update the alarm. The warm-up period reduces alarm noise from
+   *             missing data while a new resource or service starts publishing data.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+   *                 periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+   * @public
+   */
+  WarmUpConfiguration?: WarmUpConfiguration | undefined;
+
+  /**
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
+   */
+  ActionConfiguration?: ActionConfiguration | undefined;
+}
+
+/**
+ * <p> Contains the information that's required to enable a managed Contributor Insights
+ *             rule for an Amazon Web Services resource.
+ *
+ *         </p>
+ * @public
+ */
+export interface ManagedRule {
+  /**
+   * <p> The template name for the managed Contributor Insights rule, as returned by
+   *                 <code>ListManagedInsightRules</code>. </p>
+   * @public
+   */
+  TemplateName: string | undefined;
+
+  /**
+   * <p> The ARN of an Amazon Web Services resource that has managed Contributor Insights
+   *             rules. </p>
+   * @public
+   */
+  ResourceARN: string | undefined;
+
+  /**
+   * <p> A list of key-value pairs that you can associate with a managed Contributor Insights
+   *             rule. You can associate as many as 50 tags with a rule. Tags can help you organize and
+   *             categorize your resources. You also can use them to scope user permissions by granting a
+   *             user permission to access or change only the resources that have certain tag values. To
+   *             associate tags with a rule, you must have the <code>cloudwatch:TagResource</code>
+   *             permission in addition to the <code>cloudwatch:PutInsightRule</code> permission. If you
+   *             are using this operation to update an existing Contributor Insights rule, any tags that
+   *             you specify in this parameter are ignored. To change the tags of an existing rule, use
+   *                 <code>TagResource</code>. </p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutManagedInsightRulesInput {
+  /**
+   * <p> A list of <code>ManagedRules</code> to enable. </p>
+   * @public
+   */
+  ManagedRules: ManagedRule[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutManagedInsightRulesOutput {
+  /**
+   * <p> An array that lists the rules that could not be enabled. </p>
+   * @public
+   */
+  Failures?: PartialFailure[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutMetricAlarmInput {
+  /**
+   * <p>The name for the alarm. This name must be unique within the Region.</p>
+   *          <p>The name must contain only UTF-8 characters, and can't contain ASCII control
+   *             characters</p>
+   * @public
+   */
+  AlarmName: string | undefined;
+
+  /**
+   * <p>The description for the alarm.</p>
+   * @public
+   */
+  AlarmDescription?: string | undefined;
+
+  /**
+   * <p>Indicates whether actions should be executed during any changes to the alarm state.
+   *             The default is <code>TRUE</code>.</p>
+   * @public
+   */
+  ActionsEnabled?: boolean | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to an <code>OK</code> state from
+   *             any other state. Each action is specified as an Amazon Resource Name (ARN). Valid
+   *             values:</p>
+   *          <p>
+   *             <b>EC2 actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:stop</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:terminate</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:recover</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Autoscaling action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SNS notification action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SSM integration actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  OKActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+   *             from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid
+   *             values:</p>
+   *          <p>
+   *             <b>EC2 actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:stop</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:terminate</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:recover</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Autoscaling action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SNS notification action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SSM integration actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Start a Amazon Q Developer operational
+   *                 investigation</b>
+   *          </p>
+   *          <p>
+   *             <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
+   *             </code>
+   *          </p>
+   * @public
+   */
+  AlarmActions?: string[] | undefined;
+
+  /**
+   * <p>The actions to execute when this alarm transitions to the
+   *                 <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+   *             as an Amazon Resource Name (ARN). Valid values:</p>
+   *          <p>
+   *             <b>EC2 actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:stop</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:terminate</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:reboot</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:automate:<i>region</i>:ec2:recover</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Autoscaling action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Lambda actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>Invoke the latest version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a specific version of a Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Invoke a function by using an alias Lambda function:
+   *                             <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SNS notification action:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>SSM integration actions:</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>#CATEGORY=<i>category-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:ssm-incidents::<i>account-id</i>:responseplan/<i>response-plan-name</i>
+   *                   </code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  InsufficientDataActions?: string[] | undefined;
+
+  /**
+   * <p>The name for the metric associated with the alarm. For each
+   *                 <code>PutMetricAlarm</code> operation, you must specify either
+   *                 <code>MetricName</code>, a <code>Metrics</code> array, or an
+   *                 <code>EvaluationCriteria</code>.</p>
+   *          <p>If you are creating an alarm based on a math expression, you cannot specify this
+   *             parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>,
+   *                 <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+   *                 <code>ExtendedStatistic</code> parameters. Instead, you specify all this information
+   *             in the <code>Metrics</code> array.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The namespace for the metric associated specified in
+   *             <code>MetricName</code>.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The statistic for the metric specified in <code>MetricName</code>, other than
+   *             percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call
+   *                 <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify
+   *             either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>
+   * @public
+   */
+  Statistic?: Statistic | undefined;
+
+  /**
+   * <p>The extended statistic for the metric specified in <code>MetricName</code>. When
+   *             you call <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must
+   *             specify either <code>Statistic</code> or <code>ExtendedStatistic</code> but not
+   *             both.</p>
+   *          <p>If you specify <code>ExtendedStatistic</code>, the following are valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>p90</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>tm90</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>tc90</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ts90</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>wm90</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>IQM</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PR(<i>n</i>:<i>m</i>)</code> where n and m
+   *                     are values of the metric</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TC(<i>X</i>%:<i>X</i>%)</code> where X is
+   *                     between 10 and 90 inclusive.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TM(<i>X</i>%:<i>X</i>%)</code> where X is
+   *                     between 10 and 90 inclusive.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>TS(<i>X</i>%:<i>X</i>%)</code> where X is
+   *                     between 10 and 90 inclusive.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>WM(<i>X</i>%:<i>X</i>%)</code> where X is
+   *                     between 10 and 90 inclusive.</p>
+   *             </li>
+   *          </ul>
+   *          <p>For more information about these extended statistics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">CloudWatch statistics definitions</a>.</p>
+   * @public
+   */
+  ExtendedStatistic?: string | undefined;
 
   /**
    * <p>The dimensions for the metric specified in <code>MetricName</code>.</p>
+   * @public
    */
-  Dimensions?: Dimension[];
+  Dimensions?: Dimension[] | undefined;
 
   /**
-   * <p>The length, in seconds, used each time the metric specified in <code>MetricName</code> is
-   * 			evaluated. Valid values are 10, 30, and any multiple of 60.</p>
-   * 		       <p>
-   *             <code>Period</code> is required for alarms based on static thresholds. If
-   * 		you are creating an alarm based on a metric math expression, you specify the
-   * 		period for each metric within the objects in the <code>Metrics</code> array.</p>
-   * 		       <p>Be sure to specify 10 or 30 only for metrics that are stored by a <code>PutMetricData</code> call with a
-   * 				<code>StorageResolution</code> of 1. If you specify a period of 10 or 30 for a metric that does not have
-   * 			sub-minute resolution, the alarm still attempts to gather data at the period rate that you specify. In this case,
-   * 			it does not receive data for the attempts that do not correspond to a one-minute data resolution, and the alarm
-   * 			might often lapse into INSUFFICENT_DATA status. Specifying 10 or 30 also sets this alarm as a high-resolution alarm,
-   * 			which has a higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p>
-   * 		       <p>An alarm's total current evaluation period can
-   * 		be no longer than one day, so <code>Period</code> multiplied by <code>EvaluationPeriods</code> cannot be more than 86,400 seconds.</p>
+   * <p>The length, in seconds, used each time the metric specified in
+   *                 <code>MetricName</code> is evaluated. Valid values are 10, 20, 30, and any multiple
+   *             of 60.</p>
+   *          <p>
+   *             <code>Period</code> is required for alarms based on static thresholds. If you are
+   *             creating an alarm based on a metric math expression, you specify the period for each
+   *             metric within the objects in the <code>Metrics</code> array.</p>
+   *          <p>Be sure to specify 10, 20, or 30 only for metrics that are stored by a
+   *                 <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you
+   *             specify a period of 10, 20, or 30 for a metric that does not have sub-minute resolution,
+   *             the alarm still attempts to gather data at the period rate that you specify. In this
+   *             case, it does not receive data for the attempts that do not correspond to a one-minute
+   *             data resolution, and the alarm might often lapse into INSUFFICENT_DATA status.
+   *             Specifying 10, 20, or 30 also sets this alarm as a high-resolution alarm, which has a
+   *             higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+   *             Pricing</a>.</p>
+   *          <p>An alarm's total current evaluation period can be no longer than seven days, so
+   *                 <code>Period</code> multiplied by <code>EvaluationPeriods</code> can't be more than
+   *             604,800 seconds. For alarms with a period of less than one hour (3,600 seconds), the
+   *             total evaluation period can't be longer than one day (86,400 seconds).</p>
+   * @public
    */
-  Period?: number;
+  Period?: number | undefined;
 
   /**
    * <p>The unit of measure for the statistic. For example, the units for the Amazon EC2
-   * 			NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance
-   * 			receives on all network interfaces. You can also specify a unit when you create a custom
-   * 			metric. Units help provide conceptual meaning to your data. Metric data points that
-   * 			specify a unit of measure, such as Percent, are aggregated separately.</p>
-   * 		       <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the
-   * 			metric and attempts to evaluate the alarm.
-   * 			Usually, metrics are
-   * 			published with only one unit, so the alarm
-   * 			works as intended.</p>
-   * 			      <p>However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's
-   * 			behavior is not defined and
-   * 			it behaves predictably.</p>
-   * 		       <p>We recommend omitting <code>Unit</code> so that you don't inadvertently
-   * 			specify an incorrect unit that is not published for this metric. Doing so
-   * 			causes the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.</p>
+   *             NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance
+   *             receives on all network interfaces. You can also specify a unit when you create a custom
+   *             metric. Units help provide conceptual meaning to your data. Metric data points that
+   *             specify a unit of measure, such as Percent, are aggregated separately. If you are
+   *             creating an alarm based on a metric math expression, you can specify the unit for each
+   *             metric (if needed) within the objects in the <code>Metrics</code> array.</p>
+   *          <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that
+   *             have been published for the metric and attempts to evaluate the alarm. Usually, metrics
+   *             are published with only one unit, so the alarm works as intended.</p>
+   *          <p>However, if the metric is published with multiple types of units and you don't
+   *             specify a unit, the alarm's behavior is not defined and it behaves
+   *             unpredictably.</p>
+   *          <p>We recommend omitting <code>Unit</code> so that you don't inadvertently specify an
+   *             incorrect unit that is not published for this metric. Doing so causes the alarm to be
+   *             stuck in the <code>INSUFFICIENT DATA</code> state.</p>
+   * @public
    */
-  Unit?: StandardUnit | string;
+  Unit?: StandardUnit | undefined;
 
   /**
-   * <p>The number of periods over which data is compared to the specified threshold. If you are
-   * 			setting an alarm that requires that a number of consecutive data points be breaching to
-   * 			trigger the alarm, this value specifies that number. If you are setting an "M out of N"
-   * 			alarm, this value is the N.</p>
-   * 		       <p>An alarm's total current evaluation period can
-   * 			be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.</p>
+   * <p>The number of periods over which data is compared to the specified threshold. If
+   *             you are setting an alarm that requires that a number of consecutive data points be
+   *             breaching to trigger the alarm, this value specifies that number. If you are setting an
+   *             "M out of N" alarm, this value is the N.</p>
+   * @public
    */
-  EvaluationPeriods: number | undefined;
+  EvaluationPeriods?: number | undefined;
 
   /**
-   * <p>The number of data points that must be breaching to trigger the alarm. This is used only if you are setting
-   * 			an "M out of N" alarm. In that case, this value is the M. For more information, see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the
-   * 			<i>Amazon CloudWatch User Guide</i>.</p>
+   * <p>The number of data points that must be breaching to trigger the alarm. This is used
+   *             only if you are setting an "M out of N" alarm. In that case, this value is the M. For
+   *             more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User
+   *                 Guide</i>.</p>
+   * @public
    */
-  DatapointsToAlarm?: number;
+  DatapointsToAlarm?: number | undefined;
 
   /**
    * <p>The value against which the specified statistic is compared.</p>
-   * 		       <p>This parameter is required for alarms based on static thresholds, but should
-   * 		not be used for alarms based on anomaly detection models.</p>
+   *          <p>This parameter is required for alarms based on static thresholds, but should not be
+   *             used for alarms based on anomaly detection models.</p>
+   * @public
    */
-  Threshold?: number;
+  Threshold?: number | undefined;
 
   /**
    * <p> The arithmetic operation to use when comparing the specified statistic and
-   * 			threshold. The specified statistic value is used as the first operand.</p>
-   * 		       <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,
-   * 			<code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code>
-   * 		are used only for alarms based on anomaly detection models.</p>
+   *             threshold. The specified statistic value is used as the first operand.</p>
+   *          <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,
+   *                 <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are
+   *             used only for alarms based on anomaly detection models.</p>
+   * @public
    */
-  ComparisonOperator: ComparisonOperator | string | undefined;
+  ComparisonOperator?: ComparisonOperator | undefined;
 
   /**
-   * <p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used.
-   * 			For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch
-   * 				Alarms Treats Missing Data</a>.</p>
-   * 		       <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>
+   * <p> Sets how this alarm is to handle missing data points. If
+   *                 <code>TreatMissingData</code> is omitted, the default behavior of
+   *                 <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>
+   *          <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>
    *          </p>
+   *          <note>
+   *             <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always
+   *                     <code>ignore</code> missing data even if you choose a different option for
+   *                     <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has
+   *                 missing data, alarms that evaluate that metric remain in their current state.</p>
+   *          </note>
+   *          <note>
+   *             <p>This parameter is not applicable to PromQL alarms.</p>
+   *          </note>
+   * @public
    */
-  TreatMissingData?: string;
+  TreatMissingData?: string | undefined;
 
   /**
-   * <p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the alarm state does not change during periods with too few data points to be
-   * 			statistically significant. If you specify <code>evaluate</code> or omit this parameter, the alarm is always evaluated and possibly changes state
-   * 			no matter how many data points are available. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p>
-   * 		       <p>Valid Values: <code>evaluate | ignore</code>
+   * <p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the
+   *             alarm state does not change during periods with too few data points to be statistically
+   *             significant. If you specify <code>evaluate</code> or omit this parameter, the alarm is
+   *             always evaluated and possibly changes state no matter how many data points are
+   *             available. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples">Percentile-Based CloudWatch Alarms and Low Data Samples</a>.</p>
+   *          <p>Valid Values: <code>evaluate | ignore</code>
    *          </p>
+   * @public
    */
-  EvaluateLowSampleCountPercentile?: string;
+  EvaluateLowSampleCountPercentile?: string | undefined;
 
   /**
-   * <p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm based on the result of a
-   * 			metric math expression. For each <code>PutMetricAlarm</code>
-   * 			operation, you must specify either <code>MetricName</code> or a <code>Metrics</code> array.</p>
-   * 		       <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a math expression.</p>
-   * 		       <p>One item in the <code>Metrics</code> array is the expression that the alarm watches. You designate this expression
-   * 			by setting <code>ReturnData</code> to true for this object in the array. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.</p>
-   * 		       <p>If you use the <code>Metrics</code> parameter, you cannot include the <code>MetricName</code>, <code>Dimensions</code>, <code>Period</code>,
-   * 			<code>Namespace</code>, <code>Statistic</code>, or <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same operation.
-   * 			Instead, you retrieve
-   * 		the metrics you are using in your math expression as part of the <code>Metrics</code> array.</p>
+   * <p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm
+   *             based on the result of a metric math expression. For each <code>PutMetricAlarm</code>
+   *             operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+   *             array, or an <code>EvaluationCriteria</code>.</p>
+   *          <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a
+   *             math expression.</p>
+   *          <p>One item in the <code>Metrics</code> array is the expression that the alarm watches.
+   *             You designate this expression by setting <code>ReturnData</code> to true for this object
+   *             in the array. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.</p>
+   *          <p>If you use the <code>Metrics</code> parameter, you cannot include the
+   *                 <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+   *                 <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+   *                 <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same
+   *             operation. Instead, you retrieve the metrics you are using in your math expression as
+   *             part of the <code>Metrics</code> array.</p>
+   * @public
    */
-  Metrics?: MetricDataQuery[];
+  Metrics?: MetricDataQuery[] | undefined;
 
   /**
-   * <p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p>
-   * 		       <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-   * 			permissions by granting a user
-   * 			permission to access or change only resources with certain tag values.</p>
-   * 		       <p>If you are using this operation to update an existing alarm, any tags
-   * 			you specify in this parameter are ignored. To change the tags of an existing alarm, use
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>
-   * 			or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   * <p>A list of key-value pairs to associate with the alarm. You can associate as many as
+   *             50 tags with an alarm. To be able to associate tags with the alarm when you create the
+   *             alarm, you must have the <code>cloudwatch:TagResource</code> permission.</p>
+   *          <p>Tags can help you organize and categorize your resources. You can also use them to
+   *             scope user permissions by granting a user permission to access or change only resources
+   *             with certain tag values.</p>
+   *          <p>If you are using this operation to update an existing alarm, any tags you specify in
+   *             this parameter are ignored. To change the tags of an existing alarm, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   *          <p>To use this field to set tags for an alarm when you create it, you must be signed on
+   *             with both the <code>cloudwatch:PutMetricAlarm</code> and
+   *                 <code>cloudwatch:TagResource</code> permissions.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
-   * <p>If this is an alarm based on an anomaly detection model, make this value match
-   * 			the ID of
-   * 			the <code>ANOMALY_DETECTION_BAND</code> function.</p>
-   * 		       <p>For an example of how to use this parameter, see the
-   * 			<b>Anomaly Detection
-   * 		Model Alarm</b> example on this page.</p>
-   * 		       <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>
+   * <p>If this is an alarm based on an anomaly detection model, make this value match the ID
+   *             of the <code>ANOMALY_DETECTION_BAND</code> function.</p>
+   *          <p>For an example of how to use this parameter, see the <b>Anomaly
+   *                 Detection Model Alarm</b> example on this page.</p>
+   *          <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>
+   * @public
    */
-  ThresholdMetricId?: string;
-}
+  ThresholdMetricId?: string | undefined;
 
-export namespace PutMetricAlarmInput {
   /**
-   * @internal
+   * <p>The evaluation window that the alarm uses to select the range of metric data that it
+   *             evaluates. Specify either a sliding window or a wall clock window. If you omit this
+   *             parameter, the alarm uses a sliding window.</p>
+   *          <p>A sliding window advances each time the alarm is evaluated, forming a rolling time
+   *             window. A wall clock window aligns the evaluated range to fixed clock boundaries, such
+   *             as the top of the hour or the start of the day.</p>
+   *          <p>You can use <code>EvaluationWindow</code> with any type of metric alarm except alarms
+   *             that are based on a PromQL query.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+   *                 evaluation windows</a> in the <i>CloudWatch User
+   *             Guide</i>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutMetricAlarmInput): any => ({
-    ...obj,
-  });
+  EvaluationWindow?: EvaluationWindow | undefined;
+
+  /**
+   * <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+   *             after you create or update the alarm. The warm-up period reduces alarm noise from
+   *             missing data while a new resource or service starts publishing metrics.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+   *                 periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+   * @public
+   */
+  WarmUpConfiguration?: WarmUpConfiguration | undefined;
+
+  /**
+   * <p>The evaluation criteria for the alarm. For each <code>PutMetricAlarm</code>
+   *             operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+   *             array, or an <code>EvaluationCriteria</code>.</p>
+   *          <p>If you use the <code>EvaluationCriteria</code> parameter, you cannot include the
+   *                 <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+   *                 <code>Period</code>, <code>Unit</code>, <code>Statistic</code>,
+   *                 <code>ExtendedStatistic</code>, <code>Metrics</code>, <code>Threshold</code>,
+   *                 <code>ComparisonOperator</code>, <code>ThresholdMetricId</code>,
+   *                 <code>EvaluationPeriods</code>, or <code>DatapointsToAlarm</code> parameters of
+   *                 <code>PutMetricAlarm</code> in the same operation. Instead, all evaluation
+   *             parameters are defined within this structure.</p>
+   *          <p>For an example of how to use this parameter, see the <b>PromQL
+   *                 alarm</b> example on this page.</p>
+   * @public
+   */
+  EvaluationCriteria?: EvaluationCriteria | undefined;
+
+  /**
+   * <p>The frequency, in seconds, at which the alarm is evaluated. Valid values are 10,
+   *             20, 30, and any multiple of 60.</p>
+   *          <p>This parameter is required for alarms that use <code>EvaluationCriteria</code>, and
+   *             cannot be specified for alarms configured with <code>MetricName</code> or
+   *                 <code>Metrics</code>.</p>
+   * @public
+   */
+  EvaluationInterval?: number | undefined;
+
+  /**
+   * <p>Settings that change the content of the notifications and events that the alarm
+   *             sends when its state changes. These settings apply to the alarm's actions, whichever
+   *             state triggers them.</p>
+   * @public
+   */
+  ActionConfiguration?: ActionConfiguration | undefined;
 }
 
 /**
- * <p>Represents a set of statistics that describes a specific metric. </p>
+ * @public
  */
-export interface StatisticSet {
-  /**
-   * <p>The number of samples used for the statistic set.</p>
-   */
-  SampleCount: number | undefined;
-
-  /**
-   * <p>The sum of values for the sample set.</p>
-   */
-  Sum: number | undefined;
-
-  /**
-   * <p>The minimum value of the sample set.</p>
-   */
-  Minimum: number | undefined;
-
-  /**
-   * <p>The maximum value of the sample set.</p>
-   */
-  Maximum: number | undefined;
-}
-
-export namespace StatisticSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StatisticSet): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Encapsulates the information sent to either create a metric or add new values
- * 			to be aggregated into an existing metric.</p>
- */
-export interface MetricDatum {
-  /**
-   * <p>The name of the metric.</p>
-   */
-  MetricName: string | undefined;
-
-  /**
-   * <p>The dimensions associated with the metric.</p>
-   */
-  Dimensions?: Dimension[];
-
-  /**
-   * <p>The time the metric data was received, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>
-   */
-  Timestamp?: Date;
-
-  /**
-   * <p>The value for the metric.</p>
-   * 		       <p>Although the parameter accepts numbers of type Double, CloudWatch rejects values that are either too small or
-   * 			too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity)
-   * 			are not supported.</p>
-   */
-  Value?: number;
-
-  /**
-   * <p>The statistical values for the metric.</p>
-   */
-  StatisticValues?: StatisticSet;
-
-  /**
-   * <p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once
-   * 		in this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period.
-   * 		You can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p>
-   * 		       <p>Although the <code>Values</code> array accepts numbers of type
-   * 			<code>Double</code>, CloudWatch rejects values that are either too small
-   * 			or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
-   * 			-Infinity) are not supported.</p>
-   */
-  Values?: number[];
-
-  /**
-   * <p>Array of numbers that is used along with the <code>Values</code> array. Each number in the <code>Count</code> array
-   * 			is the number of times the corresponding value in the <code>Values</code> array occurred during the period. </p>
-   * 		       <p>If you omit the <code>Counts</code> array, the default of 1 is used as the value for each count. If you
-   * 		include a <code>Counts</code> array, it must include the same amount of values as the <code>Values</code> array.</p>
-   */
-  Counts?: number[];
-
-  /**
-   * <p>When you are using a <code>Put</code> operation, this defines what unit you want to use when storing the metric.</p>
-   * 		       <p>In
-   * 		a <code>Get</code> operation, this displays the unit that is used for the metric.</p>
-   */
-  Unit?: StandardUnit | string;
-
-  /**
-   * <p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a high-resolution metric, so that CloudWatch stores the metric with
-   * 			sub-minute resolution down to one second.
-   * 		Setting this to 60 specifies this metric as a regular-resolution metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is available
-   * 		only for custom metrics. For more information about high-resolution metrics,
-   * 			see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the
-   * 			<i>Amazon CloudWatch User Guide</i>.
-   * 		</p>
-   * 	        <p>This field is optional, if you do not specify it the default of 60 is used.</p>
-   */
-  StorageResolution?: number;
-}
-
-export namespace MetricDatum {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDatum): any => ({
-    ...obj,
-  });
-}
-
 export interface PutMetricDataInput {
   /**
-   * <p>The namespace for the metric data.</p>
-   * 		       <p>To avoid conflicts
-   * 			with Amazon Web Services service namespaces, you should not specify a namespace that begins with <code>AWS/</code>
+   * <p>The namespace for the metric data. You can use ASCII characters for the namespace,
+   *             except for control characters which are not supported.</p>
+   *          <p>To avoid conflicts with Amazon Web Services service namespaces, you should not
+   *             specify a namespace that begins with <code>AWS/</code>
    *          </p>
+   * @public
    */
   Namespace: string | undefined;
 
   /**
-   * <p>The data for the metric. The array can include no more than 20 metrics per call.</p>
+   * <p>The data for the metrics. Use this parameter if your metrics do not contain
+   *             associated entities. The array can include no more than 1000 metrics per call.</p>
+   *          <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
+   *             and <code>MetricData</code> metrics.</p>
+   * @public
    */
-  MetricData: MetricDatum[] | undefined;
-}
+  MetricData?: MetricDatum[] | undefined;
 
-export namespace PutMetricDataInput {
   /**
-   * @internal
+   * <p>Data for metrics that contain associated entity information. You can include up to two
+   *                 <code>EntityMetricData</code> objects, each of which can contain a single
+   *                 <code>Entity</code> and associated metrics.</p>
+   *          <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
+   *             and <code>MetricData</code> metrics.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutMetricDataInput): any => ({
-    ...obj,
-  });
+  EntityMetricData?: EntityMetricData[] | undefined;
+
+  /**
+   * <p>Whether to accept valid metric data when an invalid entity is sent.</p>
+   *          <ul>
+   *             <li>
+   *                <p>When set to <code>true</code>: Any validation error (for entity or metric
+   *                     data) will fail the entire request, and no data will be ingested. The failed
+   *                     operation will return a 400 result with the error.</p>
+   *             </li>
+   *             <li>
+   *                <p>When set to <code>false</code>: Validation errors in the entity will not
+   *                     associate the metric with the entity, but the metric data will still be accepted
+   *                     and ingested. Validation errors in the metric data will fail the entire request,
+   *                     and no data will be ingested.</p>
+   *                <p>In the case of an invalid entity, the operation will return a <code>200</code>
+   *                     status, but an additional response header will contain information about the
+   *                     validation errors. The new header, <code>X-Amzn-Failure-Message</code> is an
+   *                     enumeration of the following values:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <code>InvalidEntity</code> - The provided entity is invalid.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>InvalidKeyAttributes</code> - The provided
+   *                                 <code>KeyAttributes</code> of an entity is invalid.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>InvalidAttributes</code> - The provided <code>Attributes</code>
+   *                             of an entity is invalid.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>InvalidTypeValue</code> - The provided <code>Type</code> in the
+   *                                 <code>KeyAttributes</code> of an entity is invalid.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>EntitySizeTooLarge</code> - The number of
+   *                                 <code>EntityMetricData</code> objects allowed is 2.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>MissingRequiredFields</code> - There are missing required fields
+   *                             in the <code>KeyAttributes</code> for the provided
+   *                             <code>Type</code>.</p>
+   *                   </li>
+   *                </ul>
+   *                <p>For details of the requirements for specifying an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How to add related information to telemetry</a> in the
+   *                             <i>CloudWatch User Guide</i>.</p>
+   *             </li>
+   *          </ul>
+   *          <p>This parameter is <i>required</i> when <code>EntityMetricData</code> is
+   *             included.</p>
+   * @public
+   */
+  StrictEntityValidation?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
+export interface PutMetricDataQueryDefinitionInput {
+  /**
+   * <p>The ID of the metric data query definition to update. Omit this parameter to
+   *             create a definition. CloudWatch then generates the ID and returns it in the
+   *             response.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>The name of the metric data query definition. Use slashes (<code>/</code>) to
+   *             organize definitions into folders, for example <code>team/web/latency</code>. The path
+   *             must meet the following requirements:</p>
+   *          <ul>
+   *             <li>
+   *                <p>It must be unique in your account and Region.</p>
+   *             </li>
+   *             <li>
+   *                <p>It can't start or end with a slash.</p>
+   *             </li>
+   *             <li>
+   *                <p>It can't contain an empty folder name (<code>//</code>).</p>
+   *             </li>
+   *             <li>
+   *                <p>It can be at most 1,015 bytes when encoded as UTF-8.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Path: string | undefined;
+
+  /**
+   * <p>The query expression, in the language that <code>Type</code> specifies.
+   *                 CloudWatch doesn't validate or run the expression when you save it.</p>
+   * @public
+   */
+  Expression: string | undefined;
+
+  /**
+   * <p>The language of the expression. Valid values are the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PROMQL</code> – A PromQL query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SQL</code> – A CloudWatch Metrics Insights query.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>METRIC_MATH</code> – A metric math expression.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Type: QueryType | undefined;
+
+  /**
+   * <p>A list of key-value pairs to associate with the metric data query definition. You
+   *             can use tags to categorize definitions and to control access to them. Tags are applied
+   *             only when the request creates a definition, that is, when you omit <code>Id</code>. To
+   *             change the tags of an existing definition, use <code>TagResource</code> and
+   *                 <code>UntagResource</code>.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutMetricDataQueryDefinitionOutput {
+  /**
+   * <p>The ID of the metric data query definition.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the metric data query definition.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The path of the metric data query definition.</p>
+   * @public
+   */
+  Path: string | undefined;
+
+  /**
+   * <p>The query expression.</p>
+   * @public
+   */
+  Expression: string | undefined;
+
+  /**
+   * <p>The language of the expression.</p>
+   * @public
+   */
+  Type: QueryType | undefined;
+
+  /**
+   * <p>The date and time when you created the metric data query definition.</p>
+   * @public
+   */
+  CreatedAt: Date | undefined;
+
+  /**
+   * <p>The date and time when you last updated the metric data query
+   *             definition.</p>
+   * @public
+   */
+  UpdatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface PutMetricStreamInput {
   /**
    * <p>If you are creating a new metric stream, this is the name for the new stream. The name
-   * 		must be different than the names of other metric streams in this account and Region.</p>
-   * 		       <p>If you are updating a metric stream, specify the name of that stream here.</p>
-   * 		       <p>Valid characters are A-Z, a-z, 0-9, "-" and "_".</p>
+   *             must be different than the names of other metric streams in this account and
+   *             Region.</p>
+   *          <p>If you are updating a metric stream, specify the name of that stream here.</p>
+   *          <p>Valid characters are A-Z, a-z, 0-9, "-" and "_".</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>If you specify this parameter, the stream sends only the
-   * 		metrics from the metric namespaces that you specify here.</p>
-   * 		       <p>You cannot include <code>IncludeFilters</code> and <code>ExcludeFilters</code>
-   * 		in the same operation.</p>
+   * <p>If you specify this parameter, the stream sends only the metrics from the metric
+   *             namespaces that you specify here.</p>
+   *          <p>You cannot include <code>IncludeFilters</code> and <code>ExcludeFilters</code> in the
+   *             same operation.</p>
+   * @public
    */
-  IncludeFilters?: MetricStreamFilter[];
+  IncludeFilters?: MetricStreamFilter[] | undefined;
 
   /**
-   * <p>If you specify this parameter, the stream sends metrics from all
-   * 			metric namespaces except for the namespaces that you specify here.</p>
-   * 		       <p>You cannot include <code>ExcludeFilters</code> and <code>IncludeFilters</code> in
-   * 			the same operation.</p>
+   * <p>If you specify this parameter, the stream sends metrics from all metric namespaces
+   *             except for the namespaces that you specify here.</p>
+   *          <p>You cannot include <code>ExcludeFilters</code> and <code>IncludeFilters</code> in the
+   *             same operation.</p>
+   * @public
    */
-  ExcludeFilters?: MetricStreamFilter[];
+  ExcludeFilters?: MetricStreamFilter[] | undefined;
 
   /**
-   * <p>The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
-   * 		This Amazon Kinesis Firehose delivery stream must already exist and must be in the same
-   * 		account as the metric stream.</p>
+   * <p>The ARN of the Amazon Kinesis Data Firehose delivery stream to use for this metric
+   *             stream. This Amazon Kinesis Data Firehose delivery stream must already exist and must be
+   *             in the same account as the metric stream.</p>
+   * @public
    */
   FirehoseArn: string | undefined;
 
   /**
-   * <p>The ARN of an IAM role that this metric stream will use to access
-   * 			Amazon Kinesis Firehose resources. This IAM role must already
-   * 		exist and must be in the same account as the metric stream. This IAM role must include the following permissions:</p>
-   * 		       <ul>
+   * <p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Data
+   *             Firehose resources. This IAM role must already exist and must be in the same account as
+   *             the metric stream. This IAM role must include the following permissions:</p>
+   *          <ul>
    *             <li>
    *                <p>firehose:PutRecord</p>
    *             </li>
@@ -3591,253 +6554,377 @@ export interface PutMetricStreamInput {
    *                <p>firehose:PutRecordBatch</p>
    *             </li>
    *          </ul>
+   * @public
    */
   RoleArn: string | undefined;
 
   /**
-   * <p>The output format for the stream. Valid values are <code>json</code>
-   * 		and <code>opentelemetry0.7</code>. For more information about metric stream
-   * 		output formats, see
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">
-   * 				Metric streams output formats</a>.</p>
+   * <p>The output format for the stream. Valid values are <code>json</code>,
+   *                 <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
+   *             information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">
+   *                 Metric streams output formats</a>.</p>
+   * @public
    */
-  OutputFormat: MetricStreamOutputFormat | string | undefined;
+  OutputFormat: MetricStreamOutputFormat | undefined;
 
   /**
    * <p>A list of key-value pairs to associate with the metric stream. You can associate as
-   * 			many as 50 tags with a metric stream.</p>
-   * 		       <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-   * 			permissions by granting a user
-   * 			permission to access or change only resources with certain tag values.</p>
-   * 		       <p>You can use this parameter only when you are creating a new metric stream. If you are using this operation to update an existing metric stream, any tags
-   * 			you specify in this parameter are ignored. To change the tags of an existing metric stream, use
-   * 			<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>
-   * 			or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   *             many as 50 tags with a metric stream.</p>
+   *          <p>Tags can help you organize and categorize your resources. You can also use them to
+   *             scope user permissions by granting a user permission to access or change only resources
+   *             with certain tag values.</p>
+   *          <p>You can use this parameter only when you are creating a new metric stream. If you are
+   *             using this operation to update an existing metric stream, any tags you specify in this
+   *             parameter are ignored. To change the tags of an existing metric stream, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace PutMetricStreamInput {
   /**
-   * @internal
+   * <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
+   *                 <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+   *             streamed. You can use this parameter to have the metric stream also send additional
+   *             statistics in the stream. This array can have up to 100 members.</p>
+   *          <p>For each entry in this array, you specify one or more metrics and the list of
+   *             additional statistics to stream for those metrics. The additional statistics that you
+   *             can stream depend on the stream's <code>OutputFormat</code>. If the
+   *                 <code>OutputFormat</code> is <code>json</code>, you can stream any additional
+   *             statistic that is supported by CloudWatch, listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
+   *                 CloudWatch statistics definitions</a>. If the <code>OutputFormat</code>
+   *             is <code>opentelemetry1.0</code> or <code>opentelemetry0.7</code>, you can stream
+   *             percentile statistics such as p95, p99.9, and so on.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutMetricStreamInput): any => ({
-    ...obj,
-  });
-}
+  StatisticsConfigurations?: MetricStreamStatisticsConfiguration[] | undefined;
 
-export interface PutMetricStreamOutput {
   /**
-   * <p>The ARN of the metric stream.</p>
+   * <p>If you are creating a metric stream in a monitoring account, specify <code>true</code>
+   *             to include metrics from source accounts in the metric stream.</p>
+   * @public
    */
-  Arn?: string;
-}
-
-export namespace PutMetricStreamOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutMetricStreamOutput): any => ({
-    ...obj,
-  });
+  IncludeLinkedAccountsMetrics?: boolean | undefined;
 }
 
 /**
- * <p>Data was not syntactically valid JSON.</p>
+ * @public
  */
-export interface InvalidFormatFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidFormatFault";
-  $fault: "client";
+export interface PutMetricStreamOutput {
   /**
-   * <p></p>
+   * <p>The ARN of the metric stream.</p>
+   * @public
    */
-  message?: string;
+  Arn?: string | undefined;
 }
 
-export namespace InvalidFormatFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidFormatFault): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SetAlarmStateInput {
   /**
    * <p>The name of the alarm.</p>
+   * @public
    */
   AlarmName: string | undefined;
 
   /**
    * <p>The value of the state.</p>
+   * @public
    */
-  StateValue: StateValue | string | undefined;
+  StateValue: StateValue | undefined;
 
   /**
    * <p>The reason that this alarm is set to this specific state, in text format.</p>
+   * @public
    */
   StateReason: string | undefined;
 
   /**
    * <p>The reason that this alarm is set to this specific state, in JSON format.</p>
-   * 		       <p>For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling
-   * 		alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.</p>
+   *          <p>For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling
+   *             or application Auto Scaling alarm actions, the Auto Scaling policy uses the information
+   *             in this field to take the correct action.</p>
+   * @public
    */
-  StateReasonData?: string;
+  StateReasonData?: string | undefined;
 }
 
-export namespace SetAlarmStateInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SetAlarmStateInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartMetricStreamsInput {
   /**
    * <p>The array of the names of metric streams to start streaming.</p>
-   * 		       <p>This is an "all or nothing" operation. If you do not have
-   * 		permission to access all of the metric streams that you list here, then none of the streams that you list
-   * 		in the operation will start streaming.</p>
+   *          <p>This is an "all or nothing" operation. If you do not have permission to access all of
+   *             the metric streams that you list here, then none of the streams that you list in the
+   *             operation will start streaming.</p>
+   * @public
    */
   Names: string[] | undefined;
 }
 
-export namespace StartMetricStreamsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartMetricStreamsInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartMetricStreamsOutput {}
 
-export namespace StartMetricStreamsOutput {
+/**
+ * @public
+ */
+export interface StartOTelEnrichmentInput {
   /**
-   * @internal
+   * <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+   *             omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+   *             scope.</p>
+   *          <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+   *                 <code>ExcludeFilters</code> combined.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: StartMetricStreamsOutput): any => ({
-    ...obj,
-  });
+  IncludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+   *             is omitted, nothing is excluded.</p>
+   *          <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+   *                 <code>IncludeFilters</code>, so a metric that both parameters match is not
+   *             enriched.</p>
+   *          <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+   *                 <code>ExcludeFilters</code> combined.</p>
+   * @public
+   */
+  ExcludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface StartOTelEnrichmentOutput {
+  /**
+   * <p>The include filters that are stored for the account.</p>
+   * @public
+   */
+  IncludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The exclude filters that are stored for the account.</p>
+   * @public
+   */
+  ExcludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The date and time that enrichment started for the account.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The date and time that the enrichment configuration for the account was last
+   *             stored.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface StopMetricStreamsInput {
   /**
    * <p>The array of the names of metric streams to stop streaming.</p>
-   * 		       <p>This is an "all or nothing" operation. If you do not have
-   * 			permission to access all of the metric streams that you list here, then none of the streams that you list
-   * 			in the operation will stop streaming.</p>
+   *          <p>This is an "all or nothing" operation. If you do not have permission to access all of
+   *             the metric streams that you list here, then none of the streams that you list in the
+   *             operation will stop streaming.</p>
+   * @public
    */
   Names: string[] | undefined;
 }
 
-export namespace StopMetricStreamsInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopMetricStreamsInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopMetricStreamsOutput {}
 
-export namespace StopMetricStreamsOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopMetricStreamsOutput): any => ({
-    ...obj,
-  });
-}
+/**
+ * @public
+ */
+export interface StopOTelEnrichmentInput {}
 
+/**
+ * @public
+ */
+export interface StopOTelEnrichmentOutput {}
+
+/**
+ * @public
+ */
 export interface TagResourceInput {
   /**
    * <p>The ARN of the CloudWatch resource that you're adding tags to.</p>
-   * 		       <p>The ARN format of an alarm is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+   *          <p>The ARN format of an alarm is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
    *             </code>
    *          </p>
-   * 		       <p>The ARN format of a Contributor Insights rule is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i>
+   *          <p>The ARN format of a Contributor Insights rule is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
    *             </code>
    *          </p>
-   * 		       <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-   * 				Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-   * 			Reference</i>.</p>
+   *          <p>The ARN format of a dashboard is
+   *                     <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+   *             </code>
+   *          </p>
+   *          <p>The ARN format of a metric stream is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
+   *             </code>
+   *          </p>
+   *          <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
+   *                 Services General Reference</i>.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The list of key-value pairs to associate with the alarm.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
-export namespace TagResourceInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceOutput {}
 
-export namespace TagResourceOutput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceOutput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceInput {
   /**
    * <p>The ARN of the CloudWatch resource that you're removing tags from.</p>
-   * 		       <p>The ARN format of an alarm is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+   *          <p>The ARN format of an alarm is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
    *             </code>
    *          </p>
-   * 		       <p>The ARN format of a Contributor Insights rule is
-   * 			<code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i>
+   *          <p>The ARN format of a Contributor Insights rule is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
    *             </code>
    *          </p>
-   * 	        <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-   * 				Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-   * 			Reference</i>.</p>
+   *          <p>The ARN format of a dashboard is
+   *                     <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+   *             </code>
+   *          </p>
+   *          <p>The ARN format of a metric stream is
+   *                     <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
+   *             </code>
+   *          </p>
+   *          <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
+   *                 Services General Reference</i>.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The list of tag keys to remove from the resource.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceInput): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceOutput {}
 
-export namespace UntagResourceOutput {
+/**
+ * @public
+ */
+export interface UpdateOTelEnrichmentInput {
   /**
-   * @internal
+   * <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+   *             omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+   *             scope.</p>
+   *          <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+   *                 <code>ExcludeFilters</code> combined.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UntagResourceOutput): any => ({
-    ...obj,
-  });
+  IncludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+   *             is omitted, nothing is excluded.</p>
+   *          <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+   *                 <code>IncludeFilters</code>, so a metric that both parameters match is not
+   *             enriched.</p>
+   *          <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+   *                 <code>ExcludeFilters</code> combined.</p>
+   * @public
+   */
+  ExcludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateOTelEnrichmentOutput {
+  /**
+   * <p>The include filters that are stored for the account after the replacement. This
+   *             parameter is omitted when the request cleared the include filters, which means that
+   *             every supported namespace is in scope.</p>
+   * @public
+   */
+  IncludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The exclude filters that are stored for the account after the replacement. This
+   *             parameter is omitted when the request cleared the exclude filters, which means that
+   *             nothing is excluded.</p>
+   * @public
+   */
+  ExcludeFilters?: OTelEnrichmentMetricSelector[] | undefined;
+
+  /**
+   * <p>The date and time that enrichment started for the account.</p>
+   * @public
+   */
+  CreatedAt?: Date | undefined;
+
+  /**
+   * <p>The date and time that the enrichment configuration for the account was last
+   *             stored.</p>
+   * @public
+   */
+  UpdatedAt?: Date | undefined;
+}
+
+/**
+ * <p>Specifies the resource ARN and optional replacement metric selections for an
+ *             <code>UpdateResourceMetricsConfiguration</code> request.</p>
+ * @public
+ */
+export interface UpdateResourceMetricsConfigurationInput {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to update the
+   *             resource metrics configuration for.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+
+  /**
+   * <p>Specifies which metrics Amazon CloudWatch collects for the resource. The selections
+   *             that you provide completely replace any existing metric selections.</p>
+   *          <p>If you omit this parameter, Amazon CloudWatch removes any existing metric selection
+   *             filter and collects all available detailed metrics for the resource.</p>
+   * @public
+   */
+  MetricSelections?: ResourceMetricSelection[] | undefined;
+}
+
+/**
+ * <p>Returns the updated resource metrics configuration.</p>
+ * @public
+ */
+export interface UpdateResourceMetricsConfigurationOutput {
+  /**
+   * <p>The resource metrics configuration after the update was applied.</p>
+   * @public
+   */
+  ResourceMetricsConfiguration: ResourceMetricsConfiguration | undefined;
 }

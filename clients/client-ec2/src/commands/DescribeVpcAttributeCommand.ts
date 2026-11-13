@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeVpcAttributeRequest, DescribeVpcAttributeResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeVpcAttributeCommand,
-  serializeAws_ec2DescribeVpcAttributeCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeVpcAttributeRequest, DescribeVpcAttributeResult } from "../models/models_5";
+import { DescribeVpcAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeVpcAttributeCommand}.
+ */
 export interface DescribeVpcAttributeCommandInput extends DescribeVpcAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeVpcAttributeCommand}.
+ */
 export interface DescribeVpcAttributeCommandOutput extends DescribeVpcAttributeResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface DescribeVpcAttributeCommandOutput extends DescribeVpcAttributeR
  * ```javascript
  * import { EC2Client, DescribeVpcAttributeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeVpcAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeVpcAttributeRequest
+ *   Attribute: "enableDnsSupport" || "enableDnsHostnames" || "enableNetworkAddressUsageMetrics", // required
+ *   VpcId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DescribeVpcAttributeCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeVpcAttributeResult
+ * //   EnableDnsHostnames: { // AttributeBooleanValue
+ * //     Value: true || false,
+ * //   },
+ * //   EnableDnsSupport: {
+ * //     Value: true || false,
+ * //   },
+ * //   EnableNetworkAddressUsageMetrics: {
+ * //     Value: true || false,
+ * //   },
+ * //   VpcId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeVpcAttributeCommandInput - {@link DescribeVpcAttributeCommandInput}
+ * @returns {@link DescribeVpcAttributeCommandOutput}
  * @see {@link DescribeVpcAttributeCommandInput} for command's `input` shape.
  * @see {@link DescribeVpcAttributeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe the enableDnsSupport attribute
+ * ```javascript
+ * // This example describes the enableDnsSupport attribute. This attribute indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.
+ * const input = {
+ *   Attribute: "enableDnsSupport",
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new DescribeVpcAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EnableDnsSupport: {
+ *     Value: true
+ *   },
+ *   VpcId: "vpc-a01106c2"
+ * }
+ * *\/
+ * ```
+ *
+ * @example To describe the enableDnsHostnames attribute
+ * ```javascript
+ * // This example describes the enableDnsHostnames attribute. This attribute indicates whether the instances launched in the VPC get DNS hostnames. If this attribute is true, instances in the VPC get DNS hostnames; otherwise, they do not.
+ * const input = {
+ *   Attribute: "enableDnsHostnames",
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new DescribeVpcAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EnableDnsHostnames: {
+ *     Value: true
+ *   },
+ *   VpcId: "vpc-a01106c2"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeVpcAttributeCommand extends $Command<
-  DescribeVpcAttributeCommandInput,
-  DescribeVpcAttributeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeVpcAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeVpcAttributeCommandInput, DescribeVpcAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeVpcAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeVpcAttributeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeVpcAttributeResult.filterSensitiveLog,
+export class DescribeVpcAttributeCommand extends command<DescribeVpcAttributeCommandInput, DescribeVpcAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeVpcAttribute",
+  DescribeVpcAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcAttributeRequest;
+      output: DescribeVpcAttributeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeVpcAttributeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeVpcAttributeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeVpcAttributeCommandOutput> {
-    return deserializeAws_ec2DescribeVpcAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeVpcAttributeCommandInput;
+      output: DescribeVpcAttributeCommandOutput;
+    };
+  };
 }

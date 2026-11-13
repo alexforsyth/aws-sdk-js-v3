@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeTrafficMirrorSessionsRequest, DescribeTrafficMirrorSessionsResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeTrafficMirrorSessionsCommand,
-  serializeAws_ec2DescribeTrafficMirrorSessionsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTrafficMirrorSessionsRequest, DescribeTrafficMirrorSessionsResult } from "../models/models_5";
+import { DescribeTrafficMirrorSessions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTrafficMirrorSessionsCommand}.
+ */
 export interface DescribeTrafficMirrorSessionsCommandInput extends DescribeTrafficMirrorSessionsRequest {}
-export interface DescribeTrafficMirrorSessionsCommandOutput
-  extends DescribeTrafficMirrorSessionsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTrafficMirrorSessionsCommand}.
+ */
+export interface DescribeTrafficMirrorSessionsCommandOutput extends DescribeTrafficMirrorSessionsResult, __MetadataBearer {}
 
 /**
  * <p>Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.</p>
@@ -30,71 +29,79 @@ export interface DescribeTrafficMirrorSessionsCommandOutput
  * ```javascript
  * import { EC2Client, DescribeTrafficMirrorSessionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeTrafficMirrorSessionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeTrafficMirrorSessionsRequest
+ *   TrafficMirrorSessionIds: [ // TrafficMirrorSessionIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeTrafficMirrorSessionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTrafficMirrorSessionsResult
+ * //   TrafficMirrorSessions: [ // TrafficMirrorSessionSet
+ * //     { // TrafficMirrorSession
+ * //       TrafficMirrorSessionId: "STRING_VALUE",
+ * //       TrafficMirrorTargetId: "STRING_VALUE",
+ * //       TrafficMirrorFilterId: "STRING_VALUE",
+ * //       NetworkInterfaceId: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       PacketLength: Number("int"),
+ * //       SessionNumber: Number("int"),
+ * //       VirtualNetworkId: Number("int"),
+ * //       Description: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTrafficMirrorSessionsCommandInput - {@link DescribeTrafficMirrorSessionsCommandInput}
+ * @returns {@link DescribeTrafficMirrorSessionsCommandOutput}
  * @see {@link DescribeTrafficMirrorSessionsCommandInput} for command's `input` shape.
  * @see {@link DescribeTrafficMirrorSessionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTrafficMirrorSessionsCommand extends $Command<
-  DescribeTrafficMirrorSessionsCommandInput,
-  DescribeTrafficMirrorSessionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTrafficMirrorSessionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTrafficMirrorSessionsCommandInput, DescribeTrafficMirrorSessionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeTrafficMirrorSessionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTrafficMirrorSessionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTrafficMirrorSessionsResult.filterSensitiveLog,
+export class DescribeTrafficMirrorSessionsCommand extends command<DescribeTrafficMirrorSessionsCommandInput, DescribeTrafficMirrorSessionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTrafficMirrorSessions",
+  DescribeTrafficMirrorSessions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTrafficMirrorSessionsRequest;
+      output: DescribeTrafficMirrorSessionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTrafficMirrorSessionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeTrafficMirrorSessionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeTrafficMirrorSessionsCommandOutput> {
-    return deserializeAws_ec2DescribeTrafficMirrorSessionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTrafficMirrorSessionsCommandInput;
+      output: DescribeTrafficMirrorSessionsCommandOutput;
+    };
+  };
 }

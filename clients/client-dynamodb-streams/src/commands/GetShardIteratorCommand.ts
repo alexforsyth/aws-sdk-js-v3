@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBStreamsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBStreamsClient";
-import { GetShardIteratorInput, GetShardIteratorOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0GetShardIteratorCommand,
-  serializeAws_json1_0GetShardIteratorCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetShardIteratorInput, GetShardIteratorOutput } from "../models/models_0";
+import { GetShardIterator$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetShardIteratorCommand}.
+ */
 export interface GetShardIteratorCommandInput extends GetShardIteratorInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetShardIteratorCommand}.
+ */
 export interface GetShardIteratorCommandOutput extends GetShardIteratorOutput, __MetadataBearer {}
 
 /**
@@ -35,68 +36,90 @@ export interface GetShardIteratorCommandOutput extends GetShardIteratorOutput, _
  * ```javascript
  * import { DynamoDBStreamsClient, GetShardIteratorCommand } from "@aws-sdk/client-dynamodb-streams"; // ES Modules import
  * // const { DynamoDBStreamsClient, GetShardIteratorCommand } = require("@aws-sdk/client-dynamodb-streams"); // CommonJS import
+ * // import type { DynamoDBStreamsClientConfig } from "@aws-sdk/client-dynamodb-streams";
+ * const config = {}; // type is DynamoDBStreamsClientConfig
  * const client = new DynamoDBStreamsClient(config);
+ * const input = { // GetShardIteratorInput
+ *   StreamArn: "STRING_VALUE", // required
+ *   ShardId: "STRING_VALUE", // required
+ *   ShardIteratorType: "TRIM_HORIZON" || "LATEST" || "AT_SEQUENCE_NUMBER" || "AFTER_SEQUENCE_NUMBER" || "AT_TIMESTAMP", // required
+ *   SequenceNumber: "STRING_VALUE",
+ *   Timestamp: new Date("TIMESTAMP"),
+ * };
  * const command = new GetShardIteratorCommand(input);
  * const response = await client.send(command);
+ * // { // GetShardIteratorOutput
+ * //   ShardIterator: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetShardIteratorCommandInput - {@link GetShardIteratorCommandInput}
+ * @returns {@link GetShardIteratorCommandOutput}
  * @see {@link GetShardIteratorCommandInput} for command's `input` shape.
  * @see {@link GetShardIteratorCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBStreamsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBStreamsClientResolvedConfig | config} for DynamoDBStreamsClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access a nonexistent table or index. The resource
+ *             might not be specified correctly, or its status might not be
+ *             <code>ACTIVE</code>.</p>
+ *
+ * @throws {@link TrimmedDataAccessException} (client fault)
+ *  <p>The operation attempted to read past the oldest stream record in a shard.</p>
+ *          <p>In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream. You might receive a TrimmedDataAccessException if:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You request a shard iterator with a sequence number older than the trim point (24 hours).</p>
+ *             </li>
+ *             <li>
+ *                <p>You obtain a shard iterator, but before you use the iterator in a <code>GetRecords</code>
+ *         request, a stream record in the shard exceeds the 24 hour period and is trimmed. This causes
+ *         the iterator to access a record that no longer exists.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link DynamoDBStreamsServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDBStreams service.</p>
+ *
+ *
+ * @example To obtain a shard iterator for the provided stream ARN and shard ID
+ * ```javascript
+ * // The following example returns a shard iterator for the provided stream ARN and shard ID.
+ * const input = {
+ *   ShardId: "00000001414576573621-f55eea83",
+ *   ShardIteratorType: "TRIM_HORIZON",
+ *   StreamArn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"
+ * };
+ * const command = new GetShardIteratorCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ShardIterator: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ..."
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetShardIteratorCommand extends $Command<
-  GetShardIteratorCommandInput,
-  GetShardIteratorCommandOutput,
-  DynamoDBStreamsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetShardIteratorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBStreamsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetShardIteratorCommandInput, GetShardIteratorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBStreamsClient";
-    const commandName = "GetShardIteratorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetShardIteratorInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetShardIteratorOutput.filterSensitiveLog,
+export class GetShardIteratorCommand extends command<GetShardIteratorCommandInput, GetShardIteratorCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetShardIterator",
+  GetShardIterator$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetShardIteratorInput;
+      output: GetShardIteratorOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetShardIteratorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetShardIteratorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetShardIteratorCommandOutput> {
-    return deserializeAws_json1_0GetShardIteratorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetShardIteratorCommandInput;
+      output: GetShardIteratorCommandOutput;
+    };
+  };
 }

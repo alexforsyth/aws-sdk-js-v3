@@ -1,129 +1,154 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
-import { CreateTokenCommand, CreateTokenCommandInput, CreateTokenCommandOutput } from "./commands/CreateTokenCommand";
 import {
+  type CreateTokenCommandInput,
+  type CreateTokenCommandOutput,
+  CreateTokenCommand,
+} from "./commands/CreateTokenCommand";
+import {
+  type CreateTokenWithIAMCommandInput,
+  type CreateTokenWithIAMCommandOutput,
+  CreateTokenWithIAMCommand,
+} from "./commands/CreateTokenWithIAMCommand";
+import {
+  type RegisterClientCommandInput,
+  type RegisterClientCommandOutput,
   RegisterClientCommand,
-  RegisterClientCommandInput,
-  RegisterClientCommandOutput,
 } from "./commands/RegisterClientCommand";
 import {
+  type StartDeviceAuthorizationCommandInput,
+  type StartDeviceAuthorizationCommandOutput,
   StartDeviceAuthorizationCommand,
-  StartDeviceAuthorizationCommandInput,
-  StartDeviceAuthorizationCommandOutput,
 } from "./commands/StartDeviceAuthorizationCommand";
 import { SSOOIDCClient } from "./SSOOIDCClient";
 
+const commands = {
+  CreateTokenCommand,
+  CreateTokenWithIAMCommand,
+  RegisterClientCommand,
+  StartDeviceAuthorizationCommand,
+};
+
 /**
- * <p>AWS Single Sign-On (SSO) OpenID Connect (OIDC) is a web service that enables a client
- *       (such as AWS CLI or a native application) to register with AWS SSO. The service also
- *       enables the client to fetch the user’s access token upon successful authentication and
- *       authorization with AWS SSO. This service conforms with the OAuth 2.0 based implementation of
- *       the device authorization grant standard (<a href="https://tools.ietf.org/html/rfc8628">https://tools.ietf.org/html/rfc8628</a>).</p>
- *
- *          <p>For general information about AWS SSO, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">What is AWS
- *         Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p>
- *
- *          <p>This API reference guide describes the AWS SSO OIDC operations that you can call
- *       programatically and includes detailed information on data types and errors.</p>
- *
- *          <note>
- *             <p>AWS provides SDKs that consist of libraries and sample code for various programming
- *         languages and platforms such as Java, Ruby, .Net, iOS, and Android. The SDKs provide a
- *         convenient way to create programmatic access to AWS SSO and other AWS services. For more
- *         information about the AWS SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p>
- *          </note>
+ * @public
  */
-export class SSOOIDC extends SSOOIDCClient {
+export interface SSOOIDCRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface SSOOIDC {
   /**
-   * <p>Creates and returns an access token for the authorized client. The access token issued
-   *       will be used to fetch short-term credentials for the assigned roles in the AWS
-   *       account.</p>
+   * @see {@link CreateTokenCommand}
    */
-  public createToken(args: CreateTokenCommandInput, options?: __HttpHandlerOptions): Promise<CreateTokenCommandOutput>;
-  public createToken(args: CreateTokenCommandInput, cb: (err: any, data?: CreateTokenCommandOutput) => void): void;
-  public createToken(
+  createToken(
     args: CreateTokenCommandInput,
-    options: __HttpHandlerOptions,
+    options?: SSOOIDCRequestOptions
+  ): Promise<CreateTokenCommandOutput>;
+  createToken(
+    args: CreateTokenCommandInput,
     cb: (err: any, data?: CreateTokenCommandOutput) => void
   ): void;
-  public createToken(
+  createToken(
     args: CreateTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTokenCommandOutput) => void),
-    cb?: (err: any, data?: CreateTokenCommandOutput) => void
-  ): Promise<CreateTokenCommandOutput> | void {
-    const command = new CreateTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: SSOOIDCRequestOptions,
+    cb: (err: any, data?: CreateTokenCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Registers a client with AWS SSO. This allows clients to initiate device authorization.
-   *       The output should be persisted for reuse through many authentication requests.</p>
+   * @see {@link CreateTokenWithIAMCommand}
    */
-  public registerClient(
+  createTokenWithIAM(
+    args: CreateTokenWithIAMCommandInput,
+    options?: SSOOIDCRequestOptions
+  ): Promise<CreateTokenWithIAMCommandOutput>;
+  createTokenWithIAM(
+    args: CreateTokenWithIAMCommandInput,
+    cb: (err: any, data?: CreateTokenWithIAMCommandOutput) => void
+  ): void;
+  createTokenWithIAM(
+    args: CreateTokenWithIAMCommandInput,
+    options: SSOOIDCRequestOptions,
+    cb: (err: any, data?: CreateTokenWithIAMCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterClientCommand}
+   */
+  registerClient(
     args: RegisterClientCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOOIDCRequestOptions
   ): Promise<RegisterClientCommandOutput>;
-  public registerClient(
+  registerClient(
     args: RegisterClientCommandInput,
     cb: (err: any, data?: RegisterClientCommandOutput) => void
   ): void;
-  public registerClient(
+  registerClient(
     args: RegisterClientCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOOIDCRequestOptions,
     cb: (err: any, data?: RegisterClientCommandOutput) => void
   ): void;
-  public registerClient(
-    args: RegisterClientCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterClientCommandOutput) => void),
-    cb?: (err: any, data?: RegisterClientCommandOutput) => void
-  ): Promise<RegisterClientCommandOutput> | void {
-    const command = new RegisterClientCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initiates device authorization by requesting a pair of verification codes from the authorization service.</p>
+   * @see {@link StartDeviceAuthorizationCommand}
    */
-  public startDeviceAuthorization(
+  startDeviceAuthorization(
     args: StartDeviceAuthorizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: SSOOIDCRequestOptions
   ): Promise<StartDeviceAuthorizationCommandOutput>;
-  public startDeviceAuthorization(
+  startDeviceAuthorization(
     args: StartDeviceAuthorizationCommandInput,
     cb: (err: any, data?: StartDeviceAuthorizationCommandOutput) => void
   ): void;
-  public startDeviceAuthorization(
+  startDeviceAuthorization(
     args: StartDeviceAuthorizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: SSOOIDCRequestOptions,
     cb: (err: any, data?: StartDeviceAuthorizationCommandOutput) => void
   ): void;
-  public startDeviceAuthorization(
-    args: StartDeviceAuthorizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartDeviceAuthorizationCommandOutput) => void),
-    cb?: (err: any, data?: StartDeviceAuthorizationCommandOutput) => void
-  ): Promise<StartDeviceAuthorizationCommandOutput> | void {
-    const command = new StartDeviceAuthorizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 }
+
+/**
+ * <p>IAM Identity Center OpenID Connect (OIDC) is a web service that enables a client (such as CLI or a
+ *       native application) to register with IAM Identity Center. The service also enables the client to fetch the
+ *       user’s access token upon successful authentication and authorization with IAM Identity Center.</p>
+ *          <p>
+ *             <b>API namespaces</b>
+ *          </p>
+ *          <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces. IAM Identity Center
+ *       OpenID Connect uses the <code>sso-oauth</code> namespace.</p>
+ *          <p>
+ *             <b>Considerations for using this guide</b>
+ *          </p>
+ *          <p>Before you begin using this guide, we recommend that you first review the following
+ *       important information about how the IAM Identity Center OIDC service works.</p>
+ *          <ul>
+ *             <li>
+ *                <p>The IAM Identity Center OIDC service currently implements only the portions of the OAuth 2.0 Device
+ *           Authorization Grant standard (<a href="https://tools.ietf.org/html/rfc8628">https://tools.ietf.org/html/rfc8628</a>) that are necessary to enable single
+ *           sign-on authentication with the CLI. </p>
+ *             </li>
+ *             <li>
+ *                <p>With older versions of the CLI, the service only emits OIDC access tokens, so to
+ *           obtain a new token, users must explicitly re-authenticate. To access the OIDC flow that
+ *           supports token refresh and doesn’t require re-authentication, update to the latest CLI
+ *           version (1.27.10 for CLI V1 and 2.9.0 for CLI V2) with support for OIDC token refresh
+ *           and configurable IAM Identity Center session durations. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/configure-user-session.html">Configure Amazon Web Services access portal session duration </a>. </p>
+ *             </li>
+ *             <li>
+ *                <p>The access tokens provided by this service grant access to all Amazon Web Services account
+ *           entitlements assigned to an IAM Identity Center user, not just a particular application.</p>
+ *             </li>
+ *             <li>
+ *                <p>The documentation in this guide does not describe the mechanism to convert the access
+ *           token into Amazon Web Services Auth (“sigv4”) credentials for use with IAM-protected Amazon Web Services service
+ *           endpoints. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/PortalAPIReference/API_GetRoleCredentials.html">GetRoleCredentials</a> in the <i>IAM Identity Center Portal API Reference
+ *           Guide</i>.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For general information about IAM Identity Center, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">What is
+ *         IAM Identity Center?</a> in the <i>IAM Identity Center User Guide</i>.</p>
+ * @public
+ */
+export class SSOOIDC extends SSOOIDCClient implements SSOOIDC {}
+createAggregatedClient(commands, SSOOIDC);

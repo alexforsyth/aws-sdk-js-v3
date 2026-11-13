@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodeStarConnectionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodeStarConnectionsClient";
-import { ListHostsInput, ListHostsOutput } from "../models/models_0";
-import { deserializeAws_json1_0ListHostsCommand, serializeAws_json1_0ListHostsCommand } from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListHostsInput, ListHostsOutput } from "../models/models_0";
+import { ListHosts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListHostsCommand}.
+ */
 export interface ListHostsCommandInput extends ListHostsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListHostsCommand}.
+ */
 export interface ListHostsCommandOutput extends ListHostsOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +29,68 @@ export interface ListHostsCommandOutput extends ListHostsOutput, __MetadataBeare
  * ```javascript
  * import { CodeStarConnectionsClient, ListHostsCommand } from "@aws-sdk/client-codestar-connections"; // ES Modules import
  * // const { CodeStarConnectionsClient, ListHostsCommand } = require("@aws-sdk/client-codestar-connections"); // CommonJS import
+ * // import type { CodeStarConnectionsClientConfig } from "@aws-sdk/client-codestar-connections";
+ * const config = {}; // type is CodeStarConnectionsClientConfig
  * const client = new CodeStarConnectionsClient(config);
+ * const input = { // ListHostsInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListHostsCommand(input);
  * const response = await client.send(command);
+ * // { // ListHostsOutput
+ * //   Hosts: [ // HostList
+ * //     { // Host
+ * //       Name: "STRING_VALUE",
+ * //       HostArn: "STRING_VALUE",
+ * //       ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged",
+ * //       ProviderEndpoint: "STRING_VALUE",
+ * //       VpcConfiguration: { // VpcConfiguration
+ * //         VpcId: "STRING_VALUE", // required
+ * //         SubnetIds: [ // SubnetIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SecurityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         TlsCertificate: "STRING_VALUE",
+ * //       },
+ * //       Status: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListHostsCommandInput - {@link ListHostsCommandInput}
+ * @returns {@link ListHostsCommandOutput}
  * @see {@link ListHostsCommandInput} for command's `input` shape.
  * @see {@link ListHostsCommandOutput} for command's `response` shape.
- * @see {@link CodeStarConnectionsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeStarConnectionsClientResolvedConfig | config} for CodeStarConnectionsClient's `config` shape.
  *
+ * @throws {@link CodeStarConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeStarConnections service.</p>
+ *
+ *
+ * @public
  */
-export class ListHostsCommand extends $Command<
-  ListHostsCommandInput,
-  ListHostsCommandOutput,
-  CodeStarConnectionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListHostsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeStarConnectionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListHostsCommandInput, ListHostsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeStarConnectionsClient";
-    const commandName = "ListHostsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListHostsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListHostsOutput.filterSensitiveLog,
+export class ListHostsCommand extends command<ListHostsCommandInput, ListHostsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListHosts",
+  ListHosts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListHostsInput;
+      output: ListHostsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListHostsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListHostsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListHostsCommandOutput> {
-    return deserializeAws_json1_0ListHostsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListHostsCommandInput;
+      output: ListHostsCommandOutput;
+    };
+  };
 }

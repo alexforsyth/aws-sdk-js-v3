@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticsearchServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticsearchServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeReservedElasticsearchInstanceOfferingsRequest,
   DescribeReservedElasticsearchInstanceOfferingsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeReservedElasticsearchInstanceOfferingsCommand,
-  serializeAws_restJson1DescribeReservedElasticsearchInstanceOfferingsCommand,
-} from "../protocols/Aws_restJson1";
+import { DescribeReservedElasticsearchInstanceOfferings$ } from "../schemas/schemas_0";
 
-export interface DescribeReservedElasticsearchInstanceOfferingsCommandInput
-  extends DescribeReservedElasticsearchInstanceOfferingsRequest {}
-export interface DescribeReservedElasticsearchInstanceOfferingsCommandOutput
-  extends DescribeReservedElasticsearchInstanceOfferingsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeReservedElasticsearchInstanceOfferingsCommand}.
+ */
+export interface DescribeReservedElasticsearchInstanceOfferingsCommandInput extends DescribeReservedElasticsearchInstanceOfferingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeReservedElasticsearchInstanceOfferingsCommand}.
+ */
+export interface DescribeReservedElasticsearchInstanceOfferingsCommandOutput extends DescribeReservedElasticsearchInstanceOfferingsResponse, __MetadataBearer {}
 
 /**
  * <p>Lists available reserved Elasticsearch instance offerings.</p>
@@ -38,77 +32,78 @@ export interface DescribeReservedElasticsearchInstanceOfferingsCommandOutput
  * ```javascript
  * import { ElasticsearchServiceClient, DescribeReservedElasticsearchInstanceOfferingsCommand } from "@aws-sdk/client-elasticsearch-service"; // ES Modules import
  * // const { ElasticsearchServiceClient, DescribeReservedElasticsearchInstanceOfferingsCommand } = require("@aws-sdk/client-elasticsearch-service"); // CommonJS import
+ * // import type { ElasticsearchServiceClientConfig } from "@aws-sdk/client-elasticsearch-service";
+ * const config = {}; // type is ElasticsearchServiceClientConfig
  * const client = new ElasticsearchServiceClient(config);
+ * const input = { // DescribeReservedElasticsearchInstanceOfferingsRequest
+ *   ReservedElasticsearchInstanceOfferingId: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeReservedElasticsearchInstanceOfferingsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeReservedElasticsearchInstanceOfferingsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   ReservedElasticsearchInstanceOfferings: [ // ReservedElasticsearchInstanceOfferingList
+ * //     { // ReservedElasticsearchInstanceOffering
+ * //       ReservedElasticsearchInstanceOfferingId: "STRING_VALUE",
+ * //       ElasticsearchInstanceType: "m3.medium.elasticsearch" || "m3.large.elasticsearch" || "m3.xlarge.elasticsearch" || "m3.2xlarge.elasticsearch" || "m4.large.elasticsearch" || "m4.xlarge.elasticsearch" || "m4.2xlarge.elasticsearch" || "m4.4xlarge.elasticsearch" || "m4.10xlarge.elasticsearch" || "m5.large.elasticsearch" || "m5.xlarge.elasticsearch" || "m5.2xlarge.elasticsearch" || "m5.4xlarge.elasticsearch" || "m5.12xlarge.elasticsearch" || "r5.large.elasticsearch" || "r5.xlarge.elasticsearch" || "r5.2xlarge.elasticsearch" || "r5.4xlarge.elasticsearch" || "r5.12xlarge.elasticsearch" || "c5.large.elasticsearch" || "c5.xlarge.elasticsearch" || "c5.2xlarge.elasticsearch" || "c5.4xlarge.elasticsearch" || "c5.9xlarge.elasticsearch" || "c5.18xlarge.elasticsearch" || "ultrawarm1.medium.elasticsearch" || "ultrawarm1.large.elasticsearch" || "t2.micro.elasticsearch" || "t2.small.elasticsearch" || "t2.medium.elasticsearch" || "r3.large.elasticsearch" || "r3.xlarge.elasticsearch" || "r3.2xlarge.elasticsearch" || "r3.4xlarge.elasticsearch" || "r3.8xlarge.elasticsearch" || "i2.xlarge.elasticsearch" || "i2.2xlarge.elasticsearch" || "d2.xlarge.elasticsearch" || "d2.2xlarge.elasticsearch" || "d2.4xlarge.elasticsearch" || "d2.8xlarge.elasticsearch" || "c4.large.elasticsearch" || "c4.xlarge.elasticsearch" || "c4.2xlarge.elasticsearch" || "c4.4xlarge.elasticsearch" || "c4.8xlarge.elasticsearch" || "r4.large.elasticsearch" || "r4.xlarge.elasticsearch" || "r4.2xlarge.elasticsearch" || "r4.4xlarge.elasticsearch" || "r4.8xlarge.elasticsearch" || "r4.16xlarge.elasticsearch" || "i3.large.elasticsearch" || "i3.xlarge.elasticsearch" || "i3.2xlarge.elasticsearch" || "i3.4xlarge.elasticsearch" || "i3.8xlarge.elasticsearch" || "i3.16xlarge.elasticsearch",
+ * //       Duration: Number("int"),
+ * //       FixedPrice: Number("double"),
+ * //       UsagePrice: Number("double"),
+ * //       CurrencyCode: "STRING_VALUE",
+ * //       PaymentOption: "ALL_UPFRONT" || "PARTIAL_UPFRONT" || "NO_UPFRONT",
+ * //       RecurringCharges: [ // RecurringChargeList
+ * //         { // RecurringCharge
+ * //           RecurringChargeAmount: Number("double"),
+ * //           RecurringChargeFrequency: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeReservedElasticsearchInstanceOfferingsCommandInput - {@link DescribeReservedElasticsearchInstanceOfferingsCommandInput}
+ * @returns {@link DescribeReservedElasticsearchInstanceOfferingsCommandOutput}
  * @see {@link DescribeReservedElasticsearchInstanceOfferingsCommandInput} for command's `input` shape.
  * @see {@link DescribeReservedElasticsearchInstanceOfferingsCommandOutput} for command's `response` shape.
- * @see {@link ElasticsearchServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticsearchServiceClientResolvedConfig | config} for ElasticsearchServiceClient's `config` shape.
  *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access a not supported operation. Gives http status code of 409.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for missing / invalid input fields. Gives http status code of 400.</p>
+ *
+ * @throws {@link ElasticsearchServiceServiceException}
+ * <p>Base exception class for all service exceptions from ElasticsearchService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeReservedElasticsearchInstanceOfferingsCommand extends $Command<
-  DescribeReservedElasticsearchInstanceOfferingsCommandInput,
-  DescribeReservedElasticsearchInstanceOfferingsCommandOutput,
-  ElasticsearchServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeReservedElasticsearchInstanceOfferingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticsearchServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeReservedElasticsearchInstanceOfferingsCommandInput,
-    DescribeReservedElasticsearchInstanceOfferingsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticsearchServiceClient";
-    const commandName = "DescribeReservedElasticsearchInstanceOfferingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeReservedElasticsearchInstanceOfferingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeReservedElasticsearchInstanceOfferingsResponse.filterSensitiveLog,
+export class DescribeReservedElasticsearchInstanceOfferingsCommand extends command<DescribeReservedElasticsearchInstanceOfferingsCommandInput, DescribeReservedElasticsearchInstanceOfferingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeReservedElasticsearchInstanceOfferings",
+  DescribeReservedElasticsearchInstanceOfferings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReservedElasticsearchInstanceOfferingsRequest;
+      output: DescribeReservedElasticsearchInstanceOfferingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeReservedElasticsearchInstanceOfferingsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeReservedElasticsearchInstanceOfferingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeReservedElasticsearchInstanceOfferingsCommandOutput> {
-    return deserializeAws_restJson1DescribeReservedElasticsearchInstanceOfferingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeReservedElasticsearchInstanceOfferingsCommandInput;
+      output: DescribeReservedElasticsearchInstanceOfferingsCommandOutput;
+    };
+  };
 }

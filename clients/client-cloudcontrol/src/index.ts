@@ -1,6 +1,24 @@
-export * from "./CloudControl";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>For more information about Amazon Web Services Cloud Control API, see the <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html">Amazon Web Services Cloud Control API User
+ *         Guide</a>.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./CloudControlClient";
+export * from "./CloudControl";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { CloudControlExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
 export * from "./waiters";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { CloudControlServiceException } from "./models/CloudControlServiceException";

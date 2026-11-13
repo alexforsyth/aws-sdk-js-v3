@@ -1,104 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ResendContactReachabilityEmailRequest, ResendContactReachabilityEmailResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ResendContactReachabilityEmailCommand,
-  serializeAws_json1_1ResendContactReachabilityEmailCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53DomainsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53DomainsClient";
-
-export interface ResendContactReachabilityEmailCommandInput extends ResendContactReachabilityEmailRequest {}
-export interface ResendContactReachabilityEmailCommandOutput
-  extends ResendContactReachabilityEmailResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ResendContactReachabilityEmailRequest, ResendContactReachabilityEmailResponse } from "../models/models_0";
+import { ResendContactReachabilityEmail$ } from "../schemas/schemas_0";
 
 /**
- * <p>For operations that require confirmation that the email address for the registrant contact is valid,
- * 			such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ResendContactReachabilityEmailCommand}.
+ */
+export interface ResendContactReachabilityEmailCommandInput extends ResendContactReachabilityEmailRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ResendContactReachabilityEmailCommand}.
+ */
+export interface ResendContactReachabilityEmailCommandOutput extends ResendContactReachabilityEmailResponse, __MetadataBearer {}
+
+/**
+ * <p>For operations that require confirmation that the email address for the registrant
+ * 			contact is valid, such as registering a new domain, this operation resends the
+ * 			confirmation email to the current email address for the registrant contact.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53DomainsClient, ResendContactReachabilityEmailCommand } from "@aws-sdk/client-route-53-domains"; // ES Modules import
  * // const { Route53DomainsClient, ResendContactReachabilityEmailCommand } = require("@aws-sdk/client-route-53-domains"); // CommonJS import
+ * // import type { Route53DomainsClientConfig } from "@aws-sdk/client-route-53-domains";
+ * const config = {}; // type is Route53DomainsClientConfig
  * const client = new Route53DomainsClient(config);
+ * const input = { // ResendContactReachabilityEmailRequest
+ *   domainName: "STRING_VALUE",
+ * };
  * const command = new ResendContactReachabilityEmailCommand(input);
  * const response = await client.send(command);
+ * // { // ResendContactReachabilityEmailResponse
+ * //   domainName: "STRING_VALUE",
+ * //   emailAddress: "STRING_VALUE",
+ * //   isAlreadyVerified: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ResendContactReachabilityEmailCommandInput - {@link ResendContactReachabilityEmailCommandInput}
+ * @returns {@link ResendContactReachabilityEmailCommandOutput}
  * @see {@link ResendContactReachabilityEmailCommandInput} for command's `input` shape.
  * @see {@link ResendContactReachabilityEmailCommandOutput} for command's `response` shape.
- * @see {@link Route53DomainsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53DomainsClientResolvedConfig | config} for Route53DomainsClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The requested item is not acceptable. For example, for APIs that accept a domain name,
+ * 			the request might specify a domain name that doesn't belong to the account that
+ * 			submitted the request. For <code>AcceptDomainTransferFromAnotherAwsAccount</code>, the
+ * 			password might be invalid.</p>
+ *
+ * @throws {@link OperationLimitExceeded} (client fault)
+ *  <p>The number of operations or jobs running exceeded the allowed threshold for the
+ * 			account.</p>
+ *
+ * @throws {@link TLDInMaintenance} (client fault)
+ *  <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+ *
+ * @throws {@link UnsupportedTLD} (client fault)
+ *  <p>Amazon Route 53 does not support this top-level domain (TLD).</p>
+ *
+ * @throws {@link Route53DomainsServiceException}
+ * <p>Base exception class for all service exceptions from Route53Domains service.</p>
+ *
+ *
+ * @public
  */
-export class ResendContactReachabilityEmailCommand extends $Command<
-  ResendContactReachabilityEmailCommandInput,
-  ResendContactReachabilityEmailCommandOutput,
-  Route53DomainsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ResendContactReachabilityEmailCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53DomainsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ResendContactReachabilityEmailCommandInput, ResendContactReachabilityEmailCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53DomainsClient";
-    const commandName = "ResendContactReachabilityEmailCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ResendContactReachabilityEmailRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ResendContactReachabilityEmailResponse.filterSensitiveLog,
+export class ResendContactReachabilityEmailCommand extends command<ResendContactReachabilityEmailCommandInput, ResendContactReachabilityEmailCommandOutput>(
+  _ep0,
+  _mw0,
+  "ResendContactReachabilityEmail",
+  ResendContactReachabilityEmail$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResendContactReachabilityEmailRequest;
+      output: ResendContactReachabilityEmailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ResendContactReachabilityEmailCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ResendContactReachabilityEmailCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ResendContactReachabilityEmailCommandOutput> {
-    return deserializeAws_json1_1ResendContactReachabilityEmailCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ResendContactReachabilityEmailCommandInput;
+      output: ResendContactReachabilityEmailCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { GetIntentsRequest, GetIntentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetIntentsCommand,
-  serializeAws_restJson1GetIntentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIntentsRequest, GetIntentsResponse } from "../models/models_0";
+import { GetIntents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIntentsCommand}.
+ */
 export interface GetIntentsCommandInput extends GetIntentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIntentsCommand}.
+ */
 export interface GetIntentsCommandOutput extends GetIntentsResponse, __MetadataBearer {}
 
 /**
@@ -41,73 +38,104 @@ export interface GetIntentsCommandOutput extends GetIntentsResponse, __MetadataB
  *          </ul>
  *          <p> The operation requires permission for the
  *         <code>lex:GetIntents</code> action. </p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, GetIntentsCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, GetIntentsCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // GetIntentsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nameContains: "STRING_VALUE",
+ * };
  * const command = new GetIntentsCommand(input);
  * const response = await client.send(command);
+ * // { // GetIntentsResponse
+ * //   intents: [ // IntentMetadataList
+ * //     { // IntentMetadata
+ * //       name: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       lastUpdatedDate: new Date("TIMESTAMP"),
+ * //       createdDate: new Date("TIMESTAMP"),
+ * //       version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetIntentsCommandInput - {@link GetIntentsCommandInput}
+ * @returns {@link GetIntentsCommandOutput}
  * @see {@link GetIntentsCommandInput} for command's `input` shape.
  * @see {@link GetIntentsCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the
+ *       resource and try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @example To get a list of intents
+ * ```javascript
+ * // This example shows how to get a list of all of the intents in your account.
+ * const input = {
+ *   maxResults: 10,
+ *   nextToken: ""
+ * };
+ * const command = new GetIntentsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   intents: [
+ *     {
+ *       createdDate: 1.494359783453E9,
+ *       description: "Order a pizza from a local pizzeria.",
+ *       lastUpdatedDate: 1.494359783453E9,
+ *       name: "DocOrderPizza",
+ *       version: "$LATEST"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetIntentsCommand extends $Command<
-  GetIntentsCommandInput,
-  GetIntentsCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIntentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIntentsCommandInput, GetIntentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "GetIntentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIntentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIntentsResponse.filterSensitiveLog,
+export class GetIntentsCommand extends command<GetIntentsCommandInput, GetIntentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIntents",
+  GetIntents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIntentsRequest;
+      output: GetIntentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIntentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIntentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIntentsCommandOutput> {
-    return deserializeAws_restJson1GetIntentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIntentsCommandInput;
+      output: GetIntentsCommandOutput;
+    };
+  };
 }

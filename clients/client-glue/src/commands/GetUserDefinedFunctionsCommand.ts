@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetUserDefinedFunctionsRequest, GetUserDefinedFunctionsResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetUserDefinedFunctionsCommand,
-  serializeAws_json1_1GetUserDefinedFunctionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetUserDefinedFunctionsRequest, GetUserDefinedFunctionsResponse } from "../models/models_2";
+import { GetUserDefinedFunctions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetUserDefinedFunctionsCommand}.
+ */
 export interface GetUserDefinedFunctionsCommandInput extends GetUserDefinedFunctionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetUserDefinedFunctionsCommand}.
+ */
 export interface GetUserDefinedFunctionsCommandOutput extends GetUserDefinedFunctionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,88 @@ export interface GetUserDefinedFunctionsCommandOutput extends GetUserDefinedFunc
  * ```javascript
  * import { GlueClient, GetUserDefinedFunctionsCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetUserDefinedFunctionsCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetUserDefinedFunctionsRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE",
+ *   Pattern: "STRING_VALUE", // required
+ *   FunctionType: "REGULAR_FUNCTION" || "AGGREGATE_FUNCTION" || "STORED_PROCEDURE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new GetUserDefinedFunctionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetUserDefinedFunctionsResponse
+ * //   UserDefinedFunctions: [ // UserDefinedFunctionList
+ * //     { // UserDefinedFunction
+ * //       FunctionName: "STRING_VALUE",
+ * //       DatabaseName: "STRING_VALUE",
+ * //       ClassName: "STRING_VALUE",
+ * //       OwnerName: "STRING_VALUE",
+ * //       FunctionType: "REGULAR_FUNCTION" || "AGGREGATE_FUNCTION" || "STORED_PROCEDURE",
+ * //       OwnerType: "USER" || "ROLE" || "GROUP",
+ * //       CreateTime: new Date("TIMESTAMP"),
+ * //       ResourceUris: [ // ResourceUriList
+ * //         { // ResourceUri
+ * //           ResourceType: "JAR" || "FILE" || "ARCHIVE",
+ * //           Uri: "STRING_VALUE",
+ * //           LastModified: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //       ArtifactLocation: "STRING_VALUE",
+ * //       GovernanceMode: "IAM_ONLY" || "LAKE_FORMATION",
+ * //       CatalogId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetUserDefinedFunctionsCommandInput - {@link GetUserDefinedFunctionsCommandInput}
+ * @returns {@link GetUserDefinedFunctionsCommandOutput}
  * @see {@link GetUserDefinedFunctionsCommandInput} for command's `input` shape.
  * @see {@link GetUserDefinedFunctionsCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetUserDefinedFunctionsCommand extends $Command<
-  GetUserDefinedFunctionsCommandInput,
-  GetUserDefinedFunctionsCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetUserDefinedFunctionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetUserDefinedFunctionsCommandInput, GetUserDefinedFunctionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetUserDefinedFunctionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetUserDefinedFunctionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetUserDefinedFunctionsResponse.filterSensitiveLog,
+export class GetUserDefinedFunctionsCommand extends command<GetUserDefinedFunctionsCommandInput, GetUserDefinedFunctionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetUserDefinedFunctions",
+  GetUserDefinedFunctions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUserDefinedFunctionsRequest;
+      output: GetUserDefinedFunctionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetUserDefinedFunctionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetUserDefinedFunctionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetUserDefinedFunctionsCommandOutput> {
-    return deserializeAws_json1_1GetUserDefinedFunctionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetUserDefinedFunctionsCommandInput;
+      output: GetUserDefinedFunctionsCommandOutput;
+    };
+  };
 }

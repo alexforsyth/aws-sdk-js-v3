@@ -1,8 +1,7 @@
-// polyfill exposes the same ReadableStream API as web, allowing easy testing
-import { ReadableStream } from "web-streams-polyfill";
+import { describe, expect, test as it } from "vitest";
 
-import { byteLength } from "../bytelength";
-import { RawDataPart as DataPart } from "../Upload";
+import { byteLength } from "../byteLength";
+import type { RawDataPart as DataPart } from "../Upload";
 import { getChunkStream as chunkFromReadable } from "./getChunkStream";
 import { getDataReadableStream } from "./getDataReadableStream";
 
@@ -35,18 +34,25 @@ describe("chunkFromReadable.name", () => {
     return chunks;
   };
 
-  it("should a single chunk if the stream is smaller than partsize", async (done) => {
+  it("should a single chunk if the stream is smaller than partsize", async () => {
     const chunks = await getChunks(34, 2, 100);
 
     expect(chunks.length).toBe(1);
     expect(byteLength(chunks[0].data)).toEqual(68);
     expect(chunks[0].partNumber).toEqual(1);
     expect(chunks[0].lastPart).toBe(true);
-
-    done();
   });
 
-  it("should return chunks of a specific size", async (done) => {
+  it("should a single chunk if the stream is equal to partsize", async () => {
+    const chunks = await getChunks(20, 5, 100);
+
+    expect(chunks.length).toBe(1);
+    expect(byteLength(chunks[0].data)).toEqual(100);
+    expect(chunks[0].partNumber).toEqual(1);
+    expect(chunks[0].lastPart).toBe(true);
+  });
+
+  it("should return chunks of a specific size", async () => {
     const chunks = await getChunks(58, 1, 20);
 
     expect(chunks.length).toBe(3);
@@ -61,10 +67,9 @@ describe("chunkFromReadable.name", () => {
     expect(byteLength(chunks[2].data)).toEqual(18);
     expect(chunks[2].partNumber).toEqual(3);
     expect(chunks[2].lastPart).toBe(true);
-    done();
   });
 
-  it("should properly chunk a large stream of unknown size", async (done) => {
+  it("should properly chunk a large stream of unknown size", async () => {
     const chunks = await getChunks(_6MB / 2, 21, _6MB);
 
     expect(chunks.length).toEqual(11);
@@ -74,6 +79,5 @@ describe("chunkFromReadable.name", () => {
     }
     expect(byteLength(chunks[10].data)).toEqual(_6MB / 2);
     expect(chunks[10].lastPart).toBe(true);
-    done();
   });
 });

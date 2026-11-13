@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAccessGrantsLocationsRequest, ListAccessGrantsLocationsResult } from "../models/models_0";
+import { ListAccessGrantsLocations$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAccessGrantsLocationsCommand}.
+ */
+export interface ListAccessGrantsLocationsCommandInput extends ListAccessGrantsLocationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAccessGrantsLocationsCommand}.
+ */
+export interface ListAccessGrantsLocationsCommandOutput extends ListAccessGrantsLocationsResult, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of the locations registered in your S3 Access Grants instance.</p>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <p>You must have the <code>s3:ListAccessGrantsLocations</code> permission to use this operation. </p>
+ *             </dd>
+ *          </dl>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { S3ControlClient, ListAccessGrantsLocationsCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
+ * // const { S3ControlClient, ListAccessGrantsLocationsCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
+ * const client = new S3ControlClient(config);
+ * const input = { // ListAccessGrantsLocationsRequest
+ *   AccountId: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   LocationScope: "STRING_VALUE",
+ * };
+ * const command = new ListAccessGrantsLocationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListAccessGrantsLocationsResult
+ * //   NextToken: "STRING_VALUE",
+ * //   AccessGrantsLocationsList: [ // AccessGrantsLocationsList
+ * //     { // ListAccessGrantsLocationsEntry
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       AccessGrantsLocationId: "STRING_VALUE",
+ * //       AccessGrantsLocationArn: "STRING_VALUE",
+ * //       LocationScope: "STRING_VALUE",
+ * //       IAMRoleArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param ListAccessGrantsLocationsCommandInput - {@link ListAccessGrantsLocationsCommandInput}
+ * @returns {@link ListAccessGrantsLocationsCommandOutput}
+ * @see {@link ListAccessGrantsLocationsCommandInput} for command's `input` shape.
+ * @see {@link ListAccessGrantsLocationsCommandOutput} for command's `response` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
+ *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
+ */
+export class ListAccessGrantsLocationsCommand extends command<ListAccessGrantsLocationsCommandInput, ListAccessGrantsLocationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAccessGrantsLocations",
+  ListAccessGrantsLocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAccessGrantsLocationsRequest;
+      output: ListAccessGrantsLocationsResult;
+    };
+    sdk: {
+      input: ListAccessGrantsLocationsCommandInput;
+      output: ListAccessGrantsLocationsCommandOutput;
+    };
+  };
+}

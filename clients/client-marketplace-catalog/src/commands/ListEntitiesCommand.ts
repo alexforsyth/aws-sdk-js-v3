@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MarketplaceCatalogClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MarketplaceCatalogClient";
-import { ListEntitiesRequest, ListEntitiesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListEntitiesCommand,
-  serializeAws_restJson1ListEntitiesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEntitiesRequest, ListEntitiesResponse } from "../models/models_0";
+import { ListEntities$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEntitiesCommand}.
+ */
 export interface ListEntitiesCommandInput extends ListEntitiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEntitiesCommand}.
+ */
 export interface ListEntitiesCommandOutput extends ListEntitiesResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,606 @@ export interface ListEntitiesCommandOutput extends ListEntitiesResponse, __Metad
  * ```javascript
  * import { MarketplaceCatalogClient, ListEntitiesCommand } from "@aws-sdk/client-marketplace-catalog"; // ES Modules import
  * // const { MarketplaceCatalogClient, ListEntitiesCommand } = require("@aws-sdk/client-marketplace-catalog"); // CommonJS import
+ * // import type { MarketplaceCatalogClientConfig } from "@aws-sdk/client-marketplace-catalog";
+ * const config = {}; // type is MarketplaceCatalogClientConfig
  * const client = new MarketplaceCatalogClient(config);
+ * const input = { // ListEntitiesRequest
+ *   Catalog: "STRING_VALUE", // required
+ *   EntityType: "STRING_VALUE", // required
+ *   FilterList: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       ValueList: [ // ValueList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Sort: { // Sort
+ *     SortBy: "STRING_VALUE",
+ *     SortOrder: "ASCENDING" || "DESCENDING",
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   OwnershipType: "SELF" || "SHARED",
+ *   EntityTypeFilters: { // EntityTypeFilters Union: only one key present
+ *     DataProductFilters: { // DataProductFilters
+ *       EntityId: { // DataProductEntityIdFilter
+ *         ValueList: [ // DataProductEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ProductTitle: { // DataProductTitleFilter
+ *         ValueList: [ // DataProductTitleFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Visibility: { // DataProductVisibilityFilter
+ *         ValueList: [ // DataProductVisibilityFilterValueList
+ *           "Limited" || "Public" || "Restricted" || "Unavailable" || "Draft",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // DataProductLastModifiedDateFilter
+ *         DateRange: { // DataProductLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *     },
+ *     SaaSProductFilters: { // SaaSProductFilters
+ *       EntityId: { // SaaSProductEntityIdFilter
+ *         ValueList: [ // SaaSProductEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ProductTitle: { // SaaSProductTitleFilter
+ *         ValueList: [ // SaaSProductTitleFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Visibility: { // SaaSProductVisibilityFilter
+ *         ValueList: [ // SaaSProductVisibilityFilterValueList
+ *           "Limited" || "Public" || "Restricted" || "Draft",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // SaaSProductLastModifiedDateFilter
+ *         DateRange: { // SaaSProductLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *     },
+ *     AmiProductFilters: { // AmiProductFilters
+ *       EntityId: { // AmiProductEntityIdFilter
+ *         ValueList: [ // AmiProductEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // AmiProductLastModifiedDateFilter
+ *         DateRange: { // AmiProductLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       ProductTitle: { // AmiProductTitleFilter
+ *         ValueList: [ // AmiProductTitleFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Visibility: { // AmiProductVisibilityFilter
+ *         ValueList: [ // AmiProductVisibilityFilterValueList
+ *           "Limited" || "Public" || "Restricted" || "Draft",
+ *         ],
+ *       },
+ *     },
+ *     OfferFilters: { // OfferFilters
+ *       EntityId: { // OfferEntityIdFilter
+ *         ValueList: [ // OfferEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       Name: { // OfferNameFilter
+ *         ValueList: [ // OfferNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ProductId: { // OfferProductIdFilter
+ *         ValueList: [ // OfferProductIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ResaleAuthorizationId: { // OfferResaleAuthorizationIdFilter
+ *         ValueList: [ // OfferResaleAuthorizationIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ReleaseDate: { // OfferReleaseDateFilter
+ *         DateRange: { // OfferReleaseDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       AvailabilityEndDate: { // OfferAvailabilityEndDateFilter
+ *         DateRange: { // OfferAvailabilityEndDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       BuyerAccounts: { // OfferBuyerAccountsFilter
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       State: { // OfferStateFilter
+ *         ValueList: [ // OfferStateFilterValueList
+ *           "Draft" || "Released",
+ *         ],
+ *       },
+ *       Targeting: { // OfferTargetingFilter
+ *         ValueList: [ // OfferTargetingFilterValueList
+ *           "BuyerAccounts" || "ParticipatingPrograms" || "CountryCodes" || "None",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // OfferLastModifiedDateFilter
+ *         DateRange: { // OfferLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       OfferSetId: { // OfferSetIdFilter
+ *         ValueList: [ // OfferSetIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       TargetAgreementId: { // OfferTargetAgreementIdFilter
+ *         ValueList: [ // OfferTargetAgreementIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       TargetAgreementIntent: { // OfferTargetAgreementIntentFilter
+ *         ValueList: [ // OfferTargetAgreementIntentFilterValueList
+ *           "Renew",
+ *         ],
+ *       },
+ *       CreatedBySource: { // OfferCreatedBySourceFilter
+ *         ValueList: [ // OfferCreatedBySourceFilterValueList
+ *           "Seller" || "AwsMarketplace",
+ *         ],
+ *       },
+ *     },
+ *     ContainerProductFilters: { // ContainerProductFilters
+ *       EntityId: { // ContainerProductEntityIdFilter
+ *         ValueList: [ // ContainerProductEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // ContainerProductLastModifiedDateFilter
+ *         DateRange: { // ContainerProductLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       ProductTitle: { // ContainerProductTitleFilter
+ *         ValueList: [ // ContainerProductTitleFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Visibility: { // ContainerProductVisibilityFilter
+ *         ValueList: [ // ContainerProductVisibilityFilterValueList
+ *           "Limited" || "Public" || "Restricted" || "Draft",
+ *         ],
+ *       },
+ *     },
+ *     ResaleAuthorizationFilters: { // ResaleAuthorizationFilters
+ *       EntityId: { // ResaleAuthorizationEntityIdFilter
+ *         ValueList: [ // ResaleAuthorizationEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       Name: { // ResaleAuthorizationNameFilter
+ *         ValueList: [ // ResaleAuthorizationNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ProductId: { // ResaleAuthorizationProductIdFilter
+ *         ValueList: [ // ResaleAuthorizationProductIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       CreatedDate: { // ResaleAuthorizationCreatedDateFilter
+ *         DateRange: { // ResaleAuthorizationCreatedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *         ValueList: [ // ResaleAuthorizationCreatedDateFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       AvailabilityEndDate: { // ResaleAuthorizationAvailabilityEndDateFilter
+ *         DateRange: { // ResaleAuthorizationAvailabilityEndDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *         ValueList: [ // ResaleAuthorizationAvailabilityEndDateFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ManufacturerAccountId: { // ResaleAuthorizationManufacturerAccountIdFilter
+ *         ValueList: [ // ResaleAuthorizationManufacturerAccountIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ProductName: { // ResaleAuthorizationProductNameFilter
+ *         ValueList: [ // ResaleAuthorizationProductNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ManufacturerLegalName: { // ResaleAuthorizationManufacturerLegalNameFilter
+ *         ValueList: [ // ResaleAuthorizationManufacturerLegalNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ResellerAccountID: { // ResaleAuthorizationResellerAccountIDFilter
+ *         ValueList: [ // ResaleAuthorizationResellerAccountIDFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       ResellerLegalName: { // ResaleAuthorizationResellerLegalNameFilter
+ *         ValueList: [ // ResaleAuthorizationResellerLegalNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Status: { // ResaleAuthorizationStatusFilter
+ *         ValueList: [ // ResaleAuthorizationStatusFilterValueList
+ *           "Draft" || "Active" || "Restricted",
+ *         ],
+ *       },
+ *       OfferExtendedStatus: { // ResaleAuthorizationOfferExtendedStatusFilter
+ *         ValueList: [ // ResaleAuthorizationOfferExtendedStatusFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // ResaleAuthorizationLastModifiedDateFilter
+ *         DateRange: { // ResaleAuthorizationLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       ResellerRole: { // ResaleAuthorizationResellerRoleFilter
+ *         ValueList: [ // ResaleAuthorizationResellerRoleFilterValueList
+ *           "ChannelPartner" || "Distributor",
+ *         ],
+ *       },
+ *       SourceAuthorization: { // ResaleAuthorizationSourceAuthorizationFilter
+ *         ValueList: [ // ResaleAuthorizationSourceAuthorizationFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       IssuerAccountId: { // ResaleAuthorizationIssuerAccountIdFilter
+ *         ValueList: [ // ResaleAuthorizationIssuerAccountIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     MachineLearningProductFilters: { // MachineLearningProductFilters
+ *       EntityId: { // MachineLearningProductEntityIdFilter
+ *         ValueList: [ // MachineLearningProductEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // MachineLearningProductLastModifiedDateFilter
+ *         DateRange: { // MachineLearningProductLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       ProductTitle: { // MachineLearningProductTitleFilter
+ *         ValueList: [ // MachineLearningProductTitleFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Visibility: { // MachineLearningProductVisibilityFilter
+ *         ValueList: [ // MachineLearningProductVisibilityFilterValueList
+ *           "Limited" || "Public" || "Restricted" || "Draft",
+ *         ],
+ *       },
+ *     },
+ *     OfferSetFilters: { // OfferSetFilters
+ *       EntityId: { // OfferSetEntityIdFilter
+ *         ValueList: [ // OfferSetEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       Name: { // OfferSetNameFilter
+ *         ValueList: [ // OfferSetNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       State: { // OfferSetStateFilter
+ *         ValueList: [ // OfferSetStateFilterValueList
+ *           "Draft" || "Released",
+ *         ],
+ *       },
+ *       ReleaseDate: { // OfferSetReleaseDateFilter
+ *         DateRange: { // OfferSetReleaseDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       AssociatedOfferIds: { // OfferSetAssociatedOfferIdsFilter
+ *         ValueList: [ // OfferSetAssociatedOfferIdsFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       SolutionId: { // OfferSetSolutionIdFilter
+ *         ValueList: [ // OfferSetSolutionIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       LastModifiedDate: { // OfferSetLastModifiedDateFilter
+ *         DateRange: { // OfferSetLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *     },
+ *     ExpressPrivateOfferConfigurationFilters: { // ExpressPrivateOfferConfigurationFilters
+ *       EntityId: { // ExpressPrivateOfferConfigurationEntityIdFilter
+ *         ValueList: [ // ExpressPrivateOfferConfigurationEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ProductId: { // ExpressPrivateOfferConfigurationProductIdFilter
+ *         ValueList: [ // ExpressPrivateOfferConfigurationProductIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       State: { // ExpressPrivateOfferConfigurationStateFilter
+ *         ValueList: [ // ExpressPrivateOfferConfigurationStateFilterValueList
+ *           "ACTIVE" || "INACTIVE",
+ *         ],
+ *       },
+ *     },
+ *     SubsidiaryAuthorizationFilters: { // SubsidiaryAuthorizationFilters
+ *       EntityId: { // SubsidiaryAuthorizationEntityIdFilter
+ *         ValueList: [ // SubsidiaryAuthorizationEntityIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       Status: { // SubsidiaryAuthorizationStatusFilter
+ *         ValueList: [ // SubsidiaryAuthorizationStatusFilterValueList
+ *           "Draft" || "Active" || "Restricted",
+ *         ],
+ *       },
+ *       ResourceId: { // SubsidiaryAuthorizationResourceIdFilter
+ *         ValueList: [ // SubsidiaryAuthorizationResourceIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       ResourceName: { // SubsidiaryAuthorizationResourceNameFilter
+ *         ValueList: [ // SubsidiaryAuthorizationResourceNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       Name: { // SubsidiaryAuthorizationNameFilter
+ *         ValueList: [ // SubsidiaryAuthorizationNameFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *         WildCardValue: "STRING_VALUE",
+ *       },
+ *       SubsidiaryAccountId: { // SubsidiaryAuthorizationSubsidiaryAccountIdFilter
+ *         ValueList: [ // SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       CreatedDate: { // SubsidiaryAuthorizationCreatedDateFilter
+ *         DateRange: { // SubsidiaryAuthorizationCreatedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *       LastModifiedDate: { // SubsidiaryAuthorizationLastModifiedDateFilter
+ *         DateRange: { // SubsidiaryAuthorizationLastModifiedDateFilterDateRange
+ *           AfterValue: "STRING_VALUE",
+ *           BeforeValue: "STRING_VALUE",
+ *         },
+ *       },
+ *     },
+ *   },
+ *   EntityTypeSort: { // EntityTypeSort Union: only one key present
+ *     DataProductSort: { // DataProductSort
+ *       SortBy: "EntityId" || "ProductTitle" || "Visibility" || "LastModifiedDate",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     SaaSProductSort: { // SaaSProductSort
+ *       SortBy: "EntityId" || "ProductTitle" || "Visibility" || "LastModifiedDate" || "DeliveryOptionTypes",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     AmiProductSort: { // AmiProductSort
+ *       SortBy: "EntityId" || "LastModifiedDate" || "ProductTitle" || "Visibility",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     OfferSort: { // OfferSort
+ *       SortBy: "EntityId" || "Name" || "ProductId" || "ResaleAuthorizationId" || "ReleaseDate" || "AvailabilityEndDate" || "BuyerAccounts" || "State" || "Targeting" || "LastModifiedDate" || "OfferSetId" || "TargetAgreementId" || "TargetAgreementIntent" || "CreatedBySource",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     ContainerProductSort: { // ContainerProductSort
+ *       SortBy: "EntityId" || "LastModifiedDate" || "ProductTitle" || "Visibility" || "CompatibleAWSServices",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     ResaleAuthorizationSort: { // ResaleAuthorizationSort
+ *       SortBy: "EntityId" || "Name" || "ProductId" || "ProductName" || "ManufacturerAccountId" || "ManufacturerLegalName" || "ResellerAccountID" || "ResellerLegalName" || "Status" || "OfferExtendedStatus" || "CreatedDate" || "AvailabilityEndDate" || "LastModifiedDate" || "ResellerRole" || "SourceAuthorization" || "IssuerAccountId",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     MachineLearningProductSort: { // MachineLearningProductSort
+ *       SortBy: "EntityId" || "LastModifiedDate" || "ProductTitle" || "Visibility",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     OfferSetSort: { // OfferSetSort
+ *       SortBy: "Name" || "State" || "ReleaseDate" || "SolutionId" || "EntityId" || "LastModifiedDate",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     ExpressPrivateOfferConfigurationSort: { // ExpressPrivateOfferConfigurationSort
+ *       SortBy: "EntityId" || "LastModifiedDate" || "ProductId" || "State",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *     SubsidiaryAuthorizationSort: { // SubsidiaryAuthorizationSort
+ *       SortBy: "EntityId" || "Status" || "ResourceId" || "SubsidiaryAccountId" || "CreatedDate" || "LastModifiedDate",
+ *       SortOrder: "ASCENDING" || "DESCENDING",
+ *     },
+ *   },
+ * };
  * const command = new ListEntitiesCommand(input);
  * const response = await client.send(command);
+ * // { // ListEntitiesResponse
+ * //   EntitySummaryList: [ // EntitySummaryList
+ * //     { // EntitySummary
+ * //       Name: "STRING_VALUE",
+ * //       EntityType: "STRING_VALUE",
+ * //       EntityId: "STRING_VALUE",
+ * //       EntityArn: "STRING_VALUE",
+ * //       LastModifiedDate: "STRING_VALUE",
+ * //       Visibility: "STRING_VALUE",
+ * //       AmiProductSummary: { // AmiProductSummary
+ * //         ProductTitle: "STRING_VALUE",
+ * //         Visibility: "Limited" || "Public" || "Restricted" || "Draft",
+ * //       },
+ * //       ContainerProductSummary: { // ContainerProductSummary
+ * //         ProductTitle: "STRING_VALUE",
+ * //         Visibility: "Limited" || "Public" || "Restricted" || "Draft",
+ * //       },
+ * //       DataProductSummary: { // DataProductSummary
+ * //         ProductTitle: "STRING_VALUE",
+ * //         Visibility: "Limited" || "Public" || "Restricted" || "Unavailable" || "Draft",
+ * //       },
+ * //       SaaSProductSummary: { // SaaSProductSummary
+ * //         ProductTitle: "STRING_VALUE",
+ * //         Visibility: "Limited" || "Public" || "Restricted" || "Draft",
+ * //       },
+ * //       OfferSummary: { // OfferSummary
+ * //         Name: "STRING_VALUE",
+ * //         ProductId: "STRING_VALUE",
+ * //         ResaleAuthorizationId: "STRING_VALUE",
+ * //         ReleaseDate: "STRING_VALUE",
+ * //         AvailabilityEndDate: "STRING_VALUE",
+ * //         BuyerAccounts: [ // OfferBuyerAccountsList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         State: "Draft" || "Released",
+ * //         Targeting: [ // OfferTargetingList
+ * //           "BuyerAccounts" || "ParticipatingPrograms" || "CountryCodes" || "None",
+ * //         ],
+ * //         OfferSetId: "STRING_VALUE",
+ * //         TargetAgreementId: "STRING_VALUE",
+ * //         TargetAgreementIntent: "Renew",
+ * //         CreatedBySource: "Seller" || "AwsMarketplace",
+ * //       },
+ * //       ResaleAuthorizationSummary: { // ResaleAuthorizationSummary
+ * //         Name: "STRING_VALUE",
+ * //         ProductId: "STRING_VALUE",
+ * //         ProductName: "STRING_VALUE",
+ * //         ManufacturerAccountId: "STRING_VALUE",
+ * //         ManufacturerLegalName: "STRING_VALUE",
+ * //         ResellerAccountID: "STRING_VALUE",
+ * //         ResellerLegalName: "STRING_VALUE",
+ * //         Status: "Draft" || "Active" || "Restricted",
+ * //         OfferExtendedStatus: "STRING_VALUE",
+ * //         CreatedDate: "STRING_VALUE",
+ * //         AvailabilityEndDate: "STRING_VALUE",
+ * //         ResellerRole: "ChannelPartner" || "Distributor",
+ * //         SourceAuthorization: "STRING_VALUE",
+ * //         IssuerAccountId: "STRING_VALUE",
+ * //       },
+ * //       MachineLearningProductSummary: { // MachineLearningProductSummary
+ * //         ProductTitle: "STRING_VALUE",
+ * //         Visibility: "Limited" || "Public" || "Restricted" || "Draft",
+ * //       },
+ * //       OfferSetSummary: { // OfferSetSummary
+ * //         Name: "STRING_VALUE",
+ * //         State: "Draft" || "Released",
+ * //         ReleaseDate: "STRING_VALUE",
+ * //         AssociatedOfferIds: [ // OfferSetAssociatedOfferIdsList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SolutionId: "STRING_VALUE",
+ * //       },
+ * //       ExpressPrivateOfferConfigurationSummary: { // ExpressPrivateOfferConfigurationSummary
+ * //         ProductId: "STRING_VALUE",
+ * //         State: "ACTIVE" || "INACTIVE",
+ * //       },
+ * //       SubsidiaryAuthorizationSummary: { // SubsidiaryAuthorizationSummary
+ * //         Name: "STRING_VALUE",
+ * //         Status: "STRING_VALUE",
+ * //         ResourceId: "STRING_VALUE",
+ * //         ResourceName: "STRING_VALUE",
+ * //         SubsidiaryAccountId: "STRING_VALUE",
+ * //         CreatedDate: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEntitiesCommandInput - {@link ListEntitiesCommandInput}
+ * @returns {@link ListEntitiesCommandOutput}
  * @see {@link ListEntitiesCommandInput} for command's `input` shape.
  * @see {@link ListEntitiesCommandOutput} for command's `response` shape.
- * @see {@link MarketplaceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MarketplaceCatalogClientResolvedConfig | config} for MarketplaceCatalogClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *          <p>HTTP status code: 403</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>There was an internal service exception.</p>
+ *          <p>HTTP status code: 500</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource wasn't found.</p>
+ *          <p>HTTP status code: 404</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Too many requests.</p>
+ *          <p>HTTP status code: 429</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An error occurred during validation.</p>
+ *          <p>HTTP status code: 422</p>
+ *
+ * @throws {@link MarketplaceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from MarketplaceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class ListEntitiesCommand extends $Command<
-  ListEntitiesCommandInput,
-  ListEntitiesCommandOutput,
-  MarketplaceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEntitiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MarketplaceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEntitiesCommandInput, ListEntitiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MarketplaceCatalogClient";
-    const commandName = "ListEntitiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEntitiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEntitiesResponse.filterSensitiveLog,
+export class ListEntitiesCommand extends command<ListEntitiesCommandInput, ListEntitiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEntities",
+  ListEntities$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEntitiesRequest;
+      output: ListEntitiesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEntitiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListEntitiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEntitiesCommandOutput> {
-    return deserializeAws_restJson1ListEntitiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEntitiesCommandInput;
+      output: ListEntitiesCommandOutput;
+    };
+  };
 }

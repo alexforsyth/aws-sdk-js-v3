@@ -1,95 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { RemoveFlowVpcInterfaceRequest, RemoveFlowVpcInterfaceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RemoveFlowVpcInterfaceCommand,
-  serializeAws_restJson1RemoveFlowVpcInterfaceCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveFlowVpcInterfaceRequest, RemoveFlowVpcInterfaceResponse } from "../models/models_1";
+import { RemoveFlowVpcInterface$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveFlowVpcInterfaceCommand}.
+ */
 export interface RemoveFlowVpcInterfaceCommandInput extends RemoveFlowVpcInterfaceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveFlowVpcInterfaceCommand}.
+ */
 export interface RemoveFlowVpcInterfaceCommandOutput extends RemoveFlowVpcInterfaceResponse, __MetadataBearer {}
 
 /**
- * Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.
+ * <p> Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, RemoveFlowVpcInterfaceCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, RemoveFlowVpcInterfaceCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // RemoveFlowVpcInterfaceRequest
+ *   FlowArn: "STRING_VALUE", // required
+ *   VpcInterfaceName: "STRING_VALUE", // required
+ * };
  * const command = new RemoveFlowVpcInterfaceCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveFlowVpcInterfaceResponse
+ * //   FlowArn: "STRING_VALUE",
+ * //   NonDeletedNetworkInterfaceIds: [ // __listOfString
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   VpcInterfaceName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RemoveFlowVpcInterfaceCommandInput - {@link RemoveFlowVpcInterfaceCommandInput}
+ * @returns {@link RemoveFlowVpcInterfaceCommandOutput}
  * @see {@link RemoveFlowVpcInterfaceCommandInput} for command's `input` shape.
  * @see {@link RemoveFlowVpcInterfaceCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveFlowVpcInterfaceCommand extends $Command<
-  RemoveFlowVpcInterfaceCommandInput,
-  RemoveFlowVpcInterfaceCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveFlowVpcInterfaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveFlowVpcInterfaceCommandInput, RemoveFlowVpcInterfaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "RemoveFlowVpcInterfaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveFlowVpcInterfaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveFlowVpcInterfaceResponse.filterSensitiveLog,
+export class RemoveFlowVpcInterfaceCommand extends command<RemoveFlowVpcInterfaceCommandInput, RemoveFlowVpcInterfaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveFlowVpcInterface",
+  RemoveFlowVpcInterface$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveFlowVpcInterfaceRequest;
+      output: RemoveFlowVpcInterfaceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveFlowVpcInterfaceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RemoveFlowVpcInterfaceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveFlowVpcInterfaceCommandOutput> {
-    return deserializeAws_restJson1RemoveFlowVpcInterfaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveFlowVpcInterfaceCommandInput;
+      output: RemoveFlowVpcInterfaceCommandOutput;
+    };
+  };
 }

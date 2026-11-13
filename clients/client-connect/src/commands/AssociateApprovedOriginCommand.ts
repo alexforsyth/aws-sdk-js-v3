@@ -1,96 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { AssociateApprovedOriginRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1AssociateApprovedOriginCommand,
-  serializeAws_restJson1AssociateApprovedOriginCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateApprovedOriginRequest } from "../models/models_0";
+import { AssociateApprovedOrigin$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateApprovedOriginCommand}.
+ */
 export interface AssociateApprovedOriginCommandInput extends AssociateApprovedOriginRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateApprovedOriginCommand}.
+ */
 export interface AssociateApprovedOriginCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>Associates an approved origin to an Amazon Connect instance.</p>
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>Associates an approved origin to an Connect Customer instance.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, AssociateApprovedOriginCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, AssociateApprovedOriginCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // AssociateApprovedOriginRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   Origin: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE",
+ * };
  * const command = new AssociateApprovedOriginCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateApprovedOriginCommandInput - {@link AssociateApprovedOriginCommandInput}
+ * @returns {@link AssociateApprovedOriginCommandOutput}
  * @see {@link AssociateApprovedOriginCommandInput} for command's `input` shape.
  * @see {@link AssociateApprovedOriginCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>A resource already has that name.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateApprovedOriginCommand extends $Command<
-  AssociateApprovedOriginCommandInput,
-  AssociateApprovedOriginCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateApprovedOriginCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateApprovedOriginCommandInput, AssociateApprovedOriginCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "AssociateApprovedOriginCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateApprovedOriginRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AssociateApprovedOriginCommand extends command<AssociateApprovedOriginCommandInput, AssociateApprovedOriginCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateApprovedOrigin",
+  AssociateApprovedOrigin$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateApprovedOriginRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateApprovedOriginCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociateApprovedOriginCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateApprovedOriginCommandOutput> {
-    return deserializeAws_restJson1AssociateApprovedOriginCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateApprovedOriginCommandInput;
+      output: AssociateApprovedOriginCommandOutput;
+    };
+  };
 }

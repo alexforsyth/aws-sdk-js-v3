@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { ListBuildsForProjectInput, ListBuildsForProjectOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListBuildsForProjectCommand,
-  serializeAws_json1_1ListBuildsForProjectCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBuildsForProjectInput, ListBuildsForProjectOutput } from "../models/models_0";
+import { ListBuildsForProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBuildsForProjectCommand}.
+ */
 export interface ListBuildsForProjectCommandInput extends ListBuildsForProjectInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBuildsForProjectCommand}.
+ */
 export interface ListBuildsForProjectCommandOutput extends ListBuildsForProjectOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,58 @@ export interface ListBuildsForProjectCommandOutput extends ListBuildsForProjectO
  * ```javascript
  * import { CodeBuildClient, ListBuildsForProjectCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, ListBuildsForProjectCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // ListBuildsForProjectInput
+ *   projectName: "STRING_VALUE", // required
+ *   sortOrder: "ASCENDING" || "DESCENDING",
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListBuildsForProjectCommand(input);
  * const response = await client.send(command);
+ * // { // ListBuildsForProjectOutput
+ * //   ids: [ // BuildIds
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBuildsForProjectCommandInput - {@link ListBuildsForProjectCommandInput}
+ * @returns {@link ListBuildsForProjectCommandOutput}
  * @see {@link ListBuildsForProjectCommandInput} for command's `input` shape.
  * @see {@link ListBuildsForProjectCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class ListBuildsForProjectCommand extends $Command<
-  ListBuildsForProjectCommandInput,
-  ListBuildsForProjectCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBuildsForProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBuildsForProjectCommandInput, ListBuildsForProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "ListBuildsForProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBuildsForProjectInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBuildsForProjectOutput.filterSensitiveLog,
+export class ListBuildsForProjectCommand extends command<ListBuildsForProjectCommandInput, ListBuildsForProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBuildsForProject",
+  ListBuildsForProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBuildsForProjectInput;
+      output: ListBuildsForProjectOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBuildsForProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListBuildsForProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBuildsForProjectCommandOutput> {
-    return deserializeAws_json1_1ListBuildsForProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBuildsForProjectCommandInput;
+      output: ListBuildsForProjectCommandOutput;
+    };
+  };
 }

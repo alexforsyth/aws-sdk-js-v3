@@ -1,107 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetJobUnlockCodeRequest, GetJobUnlockCodeResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetJobUnlockCodeCommand,
-  serializeAws_json1_1GetJobUnlockCodeCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SnowballClientResolvedConfig } from "../SnowballClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetJobUnlockCodeRequest, GetJobUnlockCodeResult } from "../models/models_0";
+import { GetJobUnlockCode$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJobUnlockCodeCommand}.
+ */
 export interface GetJobUnlockCodeCommandInput extends GetJobUnlockCodeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetJobUnlockCodeCommand}.
+ */
 export interface GetJobUnlockCodeCommandOutput extends GetJobUnlockCodeResult, __MetadataBearer {}
 
 /**
  * <p>Returns the <code>UnlockCode</code> code value for the specified job. A particular
  *         <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job
  *       has been created.</p>
- *
  *          <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric
  *       characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed
- *       along with the manifest to the Snow device through the Snowball client when the client is started
- *       for the first time.</p>
- *
+ *       along with the manifest to the Snow device through the Snowball client when the client is
+ *       started for the first time. The only valid status for calling this API is
+ *         <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for
+ *       securing your device and should only be used when you have the device.</p>
  *          <p>As a best practice, we recommend that you don't save a copy of the
  *         <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these
- *       separately helps prevent unauthorized parties from gaining access to the Snow device associated
- *       with that job.</p>
+ *       separately helps prevent unauthorized parties from gaining access to the Snow device
+ *       associated with that job.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SnowballClient, GetJobUnlockCodeCommand } from "@aws-sdk/client-snowball"; // ES Modules import
  * // const { SnowballClient, GetJobUnlockCodeCommand } = require("@aws-sdk/client-snowball"); // CommonJS import
+ * // import type { SnowballClientConfig } from "@aws-sdk/client-snowball";
+ * const config = {}; // type is SnowballClientConfig
  * const client = new SnowballClient(config);
+ * const input = { // GetJobUnlockCodeRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new GetJobUnlockCodeCommand(input);
  * const response = await client.send(command);
+ * // { // GetJobUnlockCodeResult
+ * //   UnlockCode: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetJobUnlockCodeCommandInput - {@link GetJobUnlockCodeCommandInput}
+ * @returns {@link GetJobUnlockCodeCommandOutput}
  * @see {@link GetJobUnlockCodeCommandInput} for command's `input` shape.
  * @see {@link GetJobUnlockCodeCommandOutput} for command's `response` shape.
- * @see {@link SnowballClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowballClientResolvedConfig | config} for SnowballClient's `config` shape.
  *
+ * @throws {@link InvalidJobStateException} (client fault)
+ *  <p>The action can't be performed because the job's current state doesn't allow that action
+ *       to be performed.</p>
+ *
+ * @throws {@link InvalidResourceException} (client fault)
+ *  <p>The specified resource can't be found. Check the information you provided in your last
+ *       request, and try again.</p>
+ *
+ * @throws {@link SnowballServiceException}
+ * <p>Base exception class for all service exceptions from Snowball service.</p>
+ *
+ *
+ * @example To get the unlock code for a job you've created for AWS Snowball
+ * ```javascript
+ * // Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.
+ *
+ * The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.
+ *
+ * As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
+ * const input = {
+ *   JobId: "JID123e4567-e89b-12d3-a456-426655440000"
+ * };
+ * const command = new GetJobUnlockCodeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   UnlockCode: "12345-abcde-56789-fghij-01234"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetJobUnlockCodeCommand extends $Command<
-  GetJobUnlockCodeCommandInput,
-  GetJobUnlockCodeCommandOutput,
-  SnowballClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetJobUnlockCodeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowballClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetJobUnlockCodeCommandInput, GetJobUnlockCodeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowballClient";
-    const commandName = "GetJobUnlockCodeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetJobUnlockCodeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetJobUnlockCodeResult.filterSensitiveLog,
+export class GetJobUnlockCodeCommand extends command<GetJobUnlockCodeCommandInput, GetJobUnlockCodeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJobUnlockCode",
+  GetJobUnlockCode$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobUnlockCodeRequest;
+      output: GetJobUnlockCodeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetJobUnlockCodeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetJobUnlockCodeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetJobUnlockCodeCommandOutput> {
-    return deserializeAws_json1_1GetJobUnlockCodeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetJobUnlockCodeCommandInput;
+      output: GetJobUnlockCodeCommandOutput;
+    };
+  };
 }

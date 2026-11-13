@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeStepCommand, DescribeStepCommandInput } from "../commands/DescribeStepCommand";
-import { EMRClient } from "../EMRClient";
+import {
+  type DescribeStepCommandInput,
+  type DescribeStepCommandOutput,
+  DescribeStepCommand,
+} from "../commands/DescribeStepCommand";
+import type { EMRClient } from "../EMRClient";
+import type { EMRServiceException } from "../models/EMRServiceException";
 
-const checkState = async (client: EMRClient, input: DescribeStepCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EMRClient, input: DescribeStepCommandInput): Promise<WaiterResult<DescribeStepCommandOutput | EMRServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeStepCommand(input));
+    let result: DescribeStepCommandOutput & any = await client.send(new DescribeStepCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Step.Status.State;
-      };
+      }
       if (returnComparator() === "COMPLETED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: EMRClient, input: DescribeStepCommandInput): P
     try {
       const returnComparator = () => {
         return result.Step.Status.State;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -27,7 +39,7 @@ const checkState = async (client: EMRClient, input: DescribeStepCommandInput): P
     try {
       const returnComparator = () => {
         return result.Step.Status.State;
-      };
+      }
       if (returnComparator() === "CANCELLED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -44,7 +56,7 @@ const checkState = async (client: EMRClient, input: DescribeStepCommandInput): P
 export const waitForStepComplete = async (
   params: WaiterConfiguration<EMRClient>,
   input: DescribeStepCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeStepCommandOutput | EMRServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -56,8 +68,8 @@ export const waitForStepComplete = async (
 export const waitUntilStepComplete = async (
   params: WaiterConfiguration<EMRClient>,
   input: DescribeStepCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeStepCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeStepCommandOutput>;
 };

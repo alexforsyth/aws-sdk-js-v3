@@ -1,95 +1,109 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { APIGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../APIGatewayClient";
-import { ExportResponse, GetExportRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetExportCommand,
-  serializeAws_restJson1GetExportCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetExportCommandInput extends GetExportRequest {}
-export interface GetExportCommandOutput extends ExportResponse, __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ExportResponse, GetExportRequest } from "../models/models_0";
+import { GetExport$ } from "../schemas/schemas_0";
 
 /**
- * <p>Exports a deployed version of a <a>RestApi</a> in a specified format.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetExportCommand}.
+ */
+export interface GetExportCommandInput extends GetExportRequest {}
+/**
+ * @public
+ */
+export type GetExportCommandOutputType = Omit<ExportResponse, "body"> & {
+  body?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetExportCommand}.
+ */
+export interface GetExportCommandOutput extends GetExportCommandOutputType, __MetadataBearer {}
+
+/**
+ * <p>Exports a deployed version of a RestApi in a specified format.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { APIGatewayClient, GetExportCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
  * // const { APIGatewayClient, GetExportCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * // import type { APIGatewayClientConfig } from "@aws-sdk/client-api-gateway";
+ * const config = {}; // type is APIGatewayClientConfig
  * const client = new APIGatewayClient(config);
+ * const input = { // GetExportRequest
+ *   restApiId: "STRING_VALUE", // required
+ *   stageName: "STRING_VALUE", // required
+ *   exportType: "STRING_VALUE", // required
+ *   parameters: { // MapOfStringToString
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   accepts: "STRING_VALUE",
+ * };
  * const command = new GetExportCommand(input);
  * const response = await client.send(command);
+ * // { // ExportResponse
+ * //   contentType: "STRING_VALUE",
+ * //   contentDisposition: "STRING_VALUE",
+ * //   body: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param GetExportCommandInput - {@link GetExportCommandInput}
+ * @returns {@link GetExportCommandOutput}
  * @see {@link GetExportCommandInput} for command's `input` shape.
  * @see {@link GetExportCommandOutput} for command's `response` shape.
- * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for APIGatewayClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request configuration has conflicts. For details, see the accompanying error message.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded the rate limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource is not found. Make sure that the request URI is correct.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request has reached its throttling limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request is denied because the caller has insufficient permissions.</p>
+ *
+ * @throws {@link APIGatewayServiceException}
+ * <p>Base exception class for all service exceptions from APIGateway service.</p>
+ *
+ *
+ * @public
  */
-export class GetExportCommand extends $Command<
-  GetExportCommandInput,
-  GetExportCommandOutput,
-  APIGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetExportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: APIGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetExportCommandInput, GetExportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "APIGatewayClient";
-    const commandName = "GetExportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetExportRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ExportResponse.filterSensitiveLog,
+export class GetExportCommand extends command<GetExportCommandInput, GetExportCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetExport",
+  GetExport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExportRequest;
+      output: ExportResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetExportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetExportCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetExportCommandOutput> {
-    return deserializeAws_restJson1GetExportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetExportCommandInput;
+      output: GetExportCommandOutput;
+    };
+  };
 }

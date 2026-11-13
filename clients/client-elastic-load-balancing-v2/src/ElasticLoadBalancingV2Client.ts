@@ -1,139 +1,245 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultElasticLoadBalancingV2HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AddListenerCertificatesCommandInput,
   AddListenerCertificatesCommandOutput,
 } from "./commands/AddListenerCertificatesCommand";
-import { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
-import { CreateListenerCommandInput, CreateListenerCommandOutput } from "./commands/CreateListenerCommand";
-import { CreateLoadBalancerCommandInput, CreateLoadBalancerCommandOutput } from "./commands/CreateLoadBalancerCommand";
-import { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
-import { CreateTargetGroupCommandInput, CreateTargetGroupCommandOutput } from "./commands/CreateTargetGroupCommand";
-import { DeleteListenerCommandInput, DeleteListenerCommandOutput } from "./commands/DeleteListenerCommand";
-import { DeleteLoadBalancerCommandInput, DeleteLoadBalancerCommandOutput } from "./commands/DeleteLoadBalancerCommand";
-import { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
-import { DeleteTargetGroupCommandInput, DeleteTargetGroupCommandOutput } from "./commands/DeleteTargetGroupCommand";
-import { DeregisterTargetsCommandInput, DeregisterTargetsCommandOutput } from "./commands/DeregisterTargetsCommand";
-import {
+import type { AddTagsCommandInput, AddTagsCommandOutput } from "./commands/AddTagsCommand";
+import type {
+  AddTrustStoreRevocationsCommandInput,
+  AddTrustStoreRevocationsCommandOutput,
+} from "./commands/AddTrustStoreRevocationsCommand";
+import type { CreateListenerCommandInput, CreateListenerCommandOutput } from "./commands/CreateListenerCommand";
+import type {
+  CreateLoadBalancerCommandInput,
+  CreateLoadBalancerCommandOutput,
+} from "./commands/CreateLoadBalancerCommand";
+import type { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
+import type {
+  CreateTargetGroupCommandInput,
+  CreateTargetGroupCommandOutput,
+} from "./commands/CreateTargetGroupCommand";
+import type { CreateTrustStoreCommandInput, CreateTrustStoreCommandOutput } from "./commands/CreateTrustStoreCommand";
+import type { DeleteListenerCommandInput, DeleteListenerCommandOutput } from "./commands/DeleteListenerCommand";
+import type {
+  DeleteLoadBalancerCommandInput,
+  DeleteLoadBalancerCommandOutput,
+} from "./commands/DeleteLoadBalancerCommand";
+import type { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
+import type {
+  DeleteSharedTrustStoreAssociationCommandInput,
+  DeleteSharedTrustStoreAssociationCommandOutput,
+} from "./commands/DeleteSharedTrustStoreAssociationCommand";
+import type {
+  DeleteTargetGroupCommandInput,
+  DeleteTargetGroupCommandOutput,
+} from "./commands/DeleteTargetGroupCommand";
+import type { DeleteTrustStoreCommandInput, DeleteTrustStoreCommandOutput } from "./commands/DeleteTrustStoreCommand";
+import type {
+  DeregisterTargetsCommandInput,
+  DeregisterTargetsCommandOutput,
+} from "./commands/DeregisterTargetsCommand";
+import type {
   DescribeAccountLimitsCommandInput,
   DescribeAccountLimitsCommandOutput,
 } from "./commands/DescribeAccountLimitsCommand";
-import {
+import type {
+  DescribeCapacityReservationCommandInput,
+  DescribeCapacityReservationCommandOutput,
+} from "./commands/DescribeCapacityReservationCommand";
+import type {
+  DescribeListenerAttributesCommandInput,
+  DescribeListenerAttributesCommandOutput,
+} from "./commands/DescribeListenerAttributesCommand";
+import type {
   DescribeListenerCertificatesCommandInput,
   DescribeListenerCertificatesCommandOutput,
 } from "./commands/DescribeListenerCertificatesCommand";
-import { DescribeListenersCommandInput, DescribeListenersCommandOutput } from "./commands/DescribeListenersCommand";
-import {
+import type {
+  DescribeListenersCommandInput,
+  DescribeListenersCommandOutput,
+} from "./commands/DescribeListenersCommand";
+import type {
   DescribeLoadBalancerAttributesCommandInput,
   DescribeLoadBalancerAttributesCommandOutput,
 } from "./commands/DescribeLoadBalancerAttributesCommand";
-import {
+import type {
   DescribeLoadBalancersCommandInput,
   DescribeLoadBalancersCommandOutput,
 } from "./commands/DescribeLoadBalancersCommand";
-import { DescribeRulesCommandInput, DescribeRulesCommandOutput } from "./commands/DescribeRulesCommand";
-import {
+import type { DescribeRulesCommandInput, DescribeRulesCommandOutput } from "./commands/DescribeRulesCommand";
+import type {
   DescribeSSLPoliciesCommandInput,
   DescribeSSLPoliciesCommandOutput,
 } from "./commands/DescribeSSLPoliciesCommand";
-import { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
-import {
+import type { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
+import type {
   DescribeTargetGroupAttributesCommandInput,
   DescribeTargetGroupAttributesCommandOutput,
 } from "./commands/DescribeTargetGroupAttributesCommand";
-import {
+import type {
   DescribeTargetGroupsCommandInput,
   DescribeTargetGroupsCommandOutput,
 } from "./commands/DescribeTargetGroupsCommand";
-import {
+import type {
   DescribeTargetHealthCommandInput,
   DescribeTargetHealthCommandOutput,
 } from "./commands/DescribeTargetHealthCommand";
-import { ModifyListenerCommandInput, ModifyListenerCommandOutput } from "./commands/ModifyListenerCommand";
-import {
+import type {
+  DescribeTrustStoreAssociationsCommandInput,
+  DescribeTrustStoreAssociationsCommandOutput,
+} from "./commands/DescribeTrustStoreAssociationsCommand";
+import type {
+  DescribeTrustStoreRevocationsCommandInput,
+  DescribeTrustStoreRevocationsCommandOutput,
+} from "./commands/DescribeTrustStoreRevocationsCommand";
+import type {
+  DescribeTrustStoresCommandInput,
+  DescribeTrustStoresCommandOutput,
+} from "./commands/DescribeTrustStoresCommand";
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type {
+  GetTrustStoreCaCertificatesBundleCommandInput,
+  GetTrustStoreCaCertificatesBundleCommandOutput,
+} from "./commands/GetTrustStoreCaCertificatesBundleCommand";
+import type {
+  GetTrustStoreRevocationContentCommandInput,
+  GetTrustStoreRevocationContentCommandOutput,
+} from "./commands/GetTrustStoreRevocationContentCommand";
+import type {
+  ModifyCapacityReservationCommandInput,
+  ModifyCapacityReservationCommandOutput,
+} from "./commands/ModifyCapacityReservationCommand";
+import type { ModifyIpPoolsCommandInput, ModifyIpPoolsCommandOutput } from "./commands/ModifyIpPoolsCommand";
+import type {
+  ModifyListenerAttributesCommandInput,
+  ModifyListenerAttributesCommandOutput,
+} from "./commands/ModifyListenerAttributesCommand";
+import type { ModifyListenerCommandInput, ModifyListenerCommandOutput } from "./commands/ModifyListenerCommand";
+import type {
   ModifyLoadBalancerAttributesCommandInput,
   ModifyLoadBalancerAttributesCommandOutput,
 } from "./commands/ModifyLoadBalancerAttributesCommand";
-import { ModifyRuleCommandInput, ModifyRuleCommandOutput } from "./commands/ModifyRuleCommand";
-import {
+import type { ModifyRuleCommandInput, ModifyRuleCommandOutput } from "./commands/ModifyRuleCommand";
+import type {
   ModifyTargetGroupAttributesCommandInput,
   ModifyTargetGroupAttributesCommandOutput,
 } from "./commands/ModifyTargetGroupAttributesCommand";
-import { ModifyTargetGroupCommandInput, ModifyTargetGroupCommandOutput } from "./commands/ModifyTargetGroupCommand";
-import { RegisterTargetsCommandInput, RegisterTargetsCommandOutput } from "./commands/RegisterTargetsCommand";
-import {
+import type {
+  ModifyTargetGroupCommandInput,
+  ModifyTargetGroupCommandOutput,
+} from "./commands/ModifyTargetGroupCommand";
+import type { ModifyTrustStoreCommandInput, ModifyTrustStoreCommandOutput } from "./commands/ModifyTrustStoreCommand";
+import type { RegisterTargetsCommandInput, RegisterTargetsCommandOutput } from "./commands/RegisterTargetsCommand";
+import type {
   RemoveListenerCertificatesCommandInput,
   RemoveListenerCertificatesCommandOutput,
 } from "./commands/RemoveListenerCertificatesCommand";
-import { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
-import { SetIpAddressTypeCommandInput, SetIpAddressTypeCommandOutput } from "./commands/SetIpAddressTypeCommand";
-import { SetRulePrioritiesCommandInput, SetRulePrioritiesCommandOutput } from "./commands/SetRulePrioritiesCommand";
-import { SetSecurityGroupsCommandInput, SetSecurityGroupsCommandOutput } from "./commands/SetSecurityGroupsCommand";
-import { SetSubnetsCommandInput, SetSubnetsCommandOutput } from "./commands/SetSubnetsCommand";
+import type { RemoveTagsCommandInput, RemoveTagsCommandOutput } from "./commands/RemoveTagsCommand";
+import type {
+  RemoveTrustStoreRevocationsCommandInput,
+  RemoveTrustStoreRevocationsCommandOutput,
+} from "./commands/RemoveTrustStoreRevocationsCommand";
+import type { SetIpAddressTypeCommandInput, SetIpAddressTypeCommandOutput } from "./commands/SetIpAddressTypeCommand";
+import type {
+  SetRulePrioritiesCommandInput,
+  SetRulePrioritiesCommandOutput,
+} from "./commands/SetRulePrioritiesCommand";
+import type {
+  SetSecurityGroupsCommandInput,
+  SetSecurityGroupsCommandOutput,
+} from "./commands/SetSecurityGroupsCommand";
+import type { SetSubnetsCommandInput, SetSubnetsCommandOutput } from "./commands/SetSubnetsCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddListenerCertificatesCommandInput
   | AddTagsCommandInput
+  | AddTrustStoreRevocationsCommandInput
   | CreateListenerCommandInput
   | CreateLoadBalancerCommandInput
   | CreateRuleCommandInput
   | CreateTargetGroupCommandInput
+  | CreateTrustStoreCommandInput
   | DeleteListenerCommandInput
   | DeleteLoadBalancerCommandInput
   | DeleteRuleCommandInput
+  | DeleteSharedTrustStoreAssociationCommandInput
   | DeleteTargetGroupCommandInput
+  | DeleteTrustStoreCommandInput
   | DeregisterTargetsCommandInput
   | DescribeAccountLimitsCommandInput
+  | DescribeCapacityReservationCommandInput
+  | DescribeListenerAttributesCommandInput
   | DescribeListenerCertificatesCommandInput
   | DescribeListenersCommandInput
   | DescribeLoadBalancerAttributesCommandInput
@@ -144,32 +250,52 @@ export type ServiceInputTypes =
   | DescribeTargetGroupAttributesCommandInput
   | DescribeTargetGroupsCommandInput
   | DescribeTargetHealthCommandInput
+  | DescribeTrustStoreAssociationsCommandInput
+  | DescribeTrustStoreRevocationsCommandInput
+  | DescribeTrustStoresCommandInput
+  | GetResourcePolicyCommandInput
+  | GetTrustStoreCaCertificatesBundleCommandInput
+  | GetTrustStoreRevocationContentCommandInput
+  | ModifyCapacityReservationCommandInput
+  | ModifyIpPoolsCommandInput
+  | ModifyListenerAttributesCommandInput
   | ModifyListenerCommandInput
   | ModifyLoadBalancerAttributesCommandInput
   | ModifyRuleCommandInput
   | ModifyTargetGroupAttributesCommandInput
   | ModifyTargetGroupCommandInput
+  | ModifyTrustStoreCommandInput
   | RegisterTargetsCommandInput
   | RemoveListenerCertificatesCommandInput
   | RemoveTagsCommandInput
+  | RemoveTrustStoreRevocationsCommandInput
   | SetIpAddressTypeCommandInput
   | SetRulePrioritiesCommandInput
   | SetSecurityGroupsCommandInput
   | SetSubnetsCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddListenerCertificatesCommandOutput
   | AddTagsCommandOutput
+  | AddTrustStoreRevocationsCommandOutput
   | CreateListenerCommandOutput
   | CreateLoadBalancerCommandOutput
   | CreateRuleCommandOutput
   | CreateTargetGroupCommandOutput
+  | CreateTrustStoreCommandOutput
   | DeleteListenerCommandOutput
   | DeleteLoadBalancerCommandOutput
   | DeleteRuleCommandOutput
+  | DeleteSharedTrustStoreAssociationCommandOutput
   | DeleteTargetGroupCommandOutput
+  | DeleteTrustStoreCommandOutput
   | DeregisterTargetsCommandOutput
   | DescribeAccountLimitsCommandOutput
+  | DescribeCapacityReservationCommandOutput
+  | DescribeListenerAttributesCommandOutput
   | DescribeListenerCertificatesCommandOutput
   | DescribeListenersCommandOutput
   | DescribeLoadBalancerAttributesCommandOutput
@@ -180,31 +306,45 @@ export type ServiceOutputTypes =
   | DescribeTargetGroupAttributesCommandOutput
   | DescribeTargetGroupsCommandOutput
   | DescribeTargetHealthCommandOutput
+  | DescribeTrustStoreAssociationsCommandOutput
+  | DescribeTrustStoreRevocationsCommandOutput
+  | DescribeTrustStoresCommandOutput
+  | GetResourcePolicyCommandOutput
+  | GetTrustStoreCaCertificatesBundleCommandOutput
+  | GetTrustStoreRevocationContentCommandOutput
+  | ModifyCapacityReservationCommandOutput
+  | ModifyIpPoolsCommandOutput
+  | ModifyListenerAttributesCommandOutput
   | ModifyListenerCommandOutput
   | ModifyLoadBalancerAttributesCommandOutput
   | ModifyRuleCommandOutput
   | ModifyTargetGroupAttributesCommandOutput
   | ModifyTargetGroupCommandOutput
+  | ModifyTrustStoreCommandOutput
   | RegisterTargetsCommandOutput
   | RemoveListenerCertificatesCommandOutput
   | RemoveTagsCommandOutput
+  | RemoveTrustStoreRevocationsCommandOutput
   | SetIpAddressTypeCommandOutput
   | SetRulePrioritiesCommandOutput
   | SetSecurityGroupsCommandOutput
   | SetSubnetsCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -216,7 +356,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -255,25 +395,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -286,64 +417,112 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ElasticLoadBalancingV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ElasticLoadBalancingV2Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ElasticLoadBalancingV2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ElasticLoadBalancingV2Client class constructor that set the region, credentials and other options.
  */
 export interface ElasticLoadBalancingV2ClientConfig extends ElasticLoadBalancingV2ClientConfigType {}
 
-type ElasticLoadBalancingV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ElasticLoadBalancingV2Client class. This is resolved and normalized from the {@link ElasticLoadBalancingV2ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ElasticLoadBalancingV2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ElasticLoadBalancingV2Client class. This is resolved and normalized from the {@link ElasticLoadBalancingV2ClientConfig | constructor configuration interface}.
  */
 export interface ElasticLoadBalancingV2ClientResolvedConfig extends ElasticLoadBalancingV2ClientResolvedConfigType {}
 
 /**
  * <fullname>Elastic Load Balancing</fullname>
- *
  *          <p>A load balancer distributes incoming traffic across targets, such as your EC2 instances.
  *       This enables you to increase the availability of your application. The load balancer also
  *       monitors the health of its registered targets and ensures that it routes traffic only to
@@ -352,7 +531,6 @@ export interface ElasticLoadBalancingV2ClientResolvedConfig extends ElasticLoadB
  *       clients to the load balancer. You configure a target group with a protocol and port number for
  *       connections from the load balancer to the targets, and with health check settings to be used
  *       when checking the health status of the targets.</p>
- *
  *          <p>Elastic Load Balancing supports the following types of load balancers: Application Load
  *       Balancers, Network Load Balancers, Gateway Load Balancers, and Classic Load Balancers. This
  *       reference covers the following load balancer types:</p>
@@ -363,24 +541,17 @@ export interface ElasticLoadBalancingV2ClientResolvedConfig extends ElasticLoadB
  *             </li>
  *             <li>
  *                <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP,
- *           TLS, and UDP.</p>
+ *           TLS, UDP, and QUIC.</p>
  *             </li>
  *             <li>
  *                <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>
  *             </li>
  *          </ul>
- *
  *          <p>For more information, see the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/">Elastic Load Balancing User
  *       Guide</a>.</p>
- *
- *
- *
- *
- *
- *
- *
  *          <p>All Elastic Load Balancing operations are idempotent, which means that they complete at
  *       most one time. If you repeat an operation, it succeeds.</p>
+ * @public
  */
 export class ElasticLoadBalancingV2Client extends __Client<
   __HttpHandlerOptions,
@@ -393,22 +564,36 @@ export class ElasticLoadBalancingV2Client extends __Client<
    */
   readonly config: ElasticLoadBalancingV2ClientResolvedConfig;
 
-  constructor(configuration: ElasticLoadBalancingV2ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ElasticLoadBalancingV2ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultElasticLoadBalancingV2HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ElasticLoadBalancingV2ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

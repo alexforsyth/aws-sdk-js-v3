@@ -1,0 +1,100 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFarmRequest, CreateFarmResponse } from "../models/models_0";
+import { CreateFarm$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFarmCommand}.
+ */
+export interface CreateFarmCommandInput extends CreateFarmRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFarmCommand}.
+ */
+export interface CreateFarmCommandOutput extends CreateFarmResponse, __MetadataBearer {}
+
+/**
+ * Creates a farm to allow space for queues and fleets. Farms are the space where the components of your renders gather and are pieced together in the cloud. Farms contain budgets and allow you to enforce permissions. Deadline Cloud farms are a useful container for large projects.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, CreateFarmCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, CreateFarmCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // CreateFarmRequest
+ *   clientToken: "STRING_VALUE",
+ *   displayName: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   kmsKeyArn: "STRING_VALUE",
+ *   costScaleFactor: Number("float"),
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new CreateFarmCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateFarmResponse
+ * //   farmId: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateFarmCommandInput - {@link CreateFarmCommandInput}
+ * @returns {@link CreateFarmCommandOutput}
+ * @see {@link CreateFarmCommandInput} for command's `input` shape.
+ * @see {@link CreateFarmCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateFarmCommand extends command<CreateFarmCommandInput, CreateFarmCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFarm",
+  CreateFarm$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFarmRequest;
+      output: CreateFarmResponse;
+    };
+    sdk: {
+      input: CreateFarmCommandInput;
+      output: CreateFarmCommandOutput;
+    };
+  };
+}

@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ComprehendMedicalClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ComprehendMedicalClient";
-import { StartEntitiesDetectionV2JobRequest, StartEntitiesDetectionV2JobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartEntitiesDetectionV2JobCommand,
-  serializeAws_json1_1StartEntitiesDetectionV2JobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartEntitiesDetectionV2JobRequest, StartEntitiesDetectionV2JobResponse } from "../models/models_0";
+import { StartEntitiesDetectionV2Job$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartEntitiesDetectionV2JobCommand}.
+ */
 export interface StartEntitiesDetectionV2JobCommandInput extends StartEntitiesDetectionV2JobRequest {}
-export interface StartEntitiesDetectionV2JobCommandOutput
-  extends StartEntitiesDetectionV2JobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link StartEntitiesDetectionV2JobCommand}.
+ */
+export interface StartEntitiesDetectionV2JobCommandOutput extends StartEntitiesDetectionV2JobResponse, __MetadataBearer {}
 
 /**
  * <p>Starts an asynchronous medical entity detection job for a collection of documents. Use the
@@ -35,71 +30,75 @@ export interface StartEntitiesDetectionV2JobCommandOutput
  * ```javascript
  * import { ComprehendMedicalClient, StartEntitiesDetectionV2JobCommand } from "@aws-sdk/client-comprehendmedical"; // ES Modules import
  * // const { ComprehendMedicalClient, StartEntitiesDetectionV2JobCommand } = require("@aws-sdk/client-comprehendmedical"); // CommonJS import
+ * // import type { ComprehendMedicalClientConfig } from "@aws-sdk/client-comprehendmedical";
+ * const config = {}; // type is ComprehendMedicalClientConfig
  * const client = new ComprehendMedicalClient(config);
+ * const input = { // StartEntitiesDetectionV2JobRequest
+ *   InputDataConfig: { // InputDataConfig
+ *     S3Bucket: "STRING_VALUE", // required
+ *     S3Key: "STRING_VALUE",
+ *   },
+ *   OutputDataConfig: { // OutputDataConfig
+ *     S3Bucket: "STRING_VALUE", // required
+ *     S3Key: "STRING_VALUE",
+ *   },
+ *   DataAccessRoleArn: "STRING_VALUE", // required
+ *   JobName: "STRING_VALUE",
+ *   ClientRequestToken: "STRING_VALUE",
+ *   KMSKey: "STRING_VALUE",
+ *   LanguageCode: "en", // required
+ * };
  * const command = new StartEntitiesDetectionV2JobCommand(input);
  * const response = await client.send(command);
+ * // { // StartEntitiesDetectionV2JobResponse
+ * //   JobId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartEntitiesDetectionV2JobCommandInput - {@link StartEntitiesDetectionV2JobCommandInput}
+ * @returns {@link StartEntitiesDetectionV2JobCommandOutput}
  * @see {@link StartEntitiesDetectionV2JobCommandInput} for command's `input` shape.
  * @see {@link StartEntitiesDetectionV2JobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendMedicalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendMedicalClientResolvedConfig | config} for ComprehendMedicalClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal server error occurred. Retry your request. </p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p> The request that you made is invalid. Check your request to determine why it's invalid
+ *       and then retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource identified by the specified Amazon Resource Name (ARN) was not found. Check
+ *       the ARN and try your request again.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again. Contact customer support for more information about a service
+ *       limit increase. </p>
+ *
+ * @throws {@link ComprehendMedicalServiceException}
+ * <p>Base exception class for all service exceptions from ComprehendMedical service.</p>
+ *
+ *
+ * @public
  */
-export class StartEntitiesDetectionV2JobCommand extends $Command<
-  StartEntitiesDetectionV2JobCommandInput,
-  StartEntitiesDetectionV2JobCommandOutput,
-  ComprehendMedicalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartEntitiesDetectionV2JobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendMedicalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartEntitiesDetectionV2JobCommandInput, StartEntitiesDetectionV2JobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendMedicalClient";
-    const commandName = "StartEntitiesDetectionV2JobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartEntitiesDetectionV2JobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartEntitiesDetectionV2JobResponse.filterSensitiveLog,
+export class StartEntitiesDetectionV2JobCommand extends command<StartEntitiesDetectionV2JobCommandInput, StartEntitiesDetectionV2JobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartEntitiesDetectionV2Job",
+  StartEntitiesDetectionV2Job$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartEntitiesDetectionV2JobRequest;
+      output: StartEntitiesDetectionV2JobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartEntitiesDetectionV2JobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartEntitiesDetectionV2JobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartEntitiesDetectionV2JobCommandOutput> {
-    return deserializeAws_json1_1StartEntitiesDetectionV2JobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartEntitiesDetectionV2JobCommandInput;
+      output: StartEntitiesDetectionV2JobCommandOutput;
+    };
+  };
 }

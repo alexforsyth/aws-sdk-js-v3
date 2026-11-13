@@ -1,87 +1,133 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  type QueueUrlInputConfig,
+  type QueueUrlResolvedConfig,
+  getQueueUrlPlugin,
+  resolveQueueUrlConfig,
+} from "@aws-sdk/middleware-sdk-sqs";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  Checksum as __Checksum,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddPermissionCommandInput, AddPermissionCommandOutput } from "./commands/AddPermissionCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultSQSHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddPermissionCommandInput, AddPermissionCommandOutput } from "./commands/AddPermissionCommand";
+import type {
+  CancelMessageMoveTaskCommandInput,
+  CancelMessageMoveTaskCommandOutput,
+} from "./commands/CancelMessageMoveTaskCommand";
+import type {
   ChangeMessageVisibilityBatchCommandInput,
   ChangeMessageVisibilityBatchCommandOutput,
 } from "./commands/ChangeMessageVisibilityBatchCommand";
-import {
+import type {
   ChangeMessageVisibilityCommandInput,
   ChangeMessageVisibilityCommandOutput,
 } from "./commands/ChangeMessageVisibilityCommand";
-import { CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
-import { DeleteMessageBatchCommandInput, DeleteMessageBatchCommandOutput } from "./commands/DeleteMessageBatchCommand";
-import { DeleteMessageCommandInput, DeleteMessageCommandOutput } from "./commands/DeleteMessageCommand";
-import { DeleteQueueCommandInput, DeleteQueueCommandOutput } from "./commands/DeleteQueueCommand";
-import { GetQueueAttributesCommandInput, GetQueueAttributesCommandOutput } from "./commands/GetQueueAttributesCommand";
-import { GetQueueUrlCommandInput, GetQueueUrlCommandOutput } from "./commands/GetQueueUrlCommand";
-import {
+import type { CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
+import type {
+  DeleteMessageBatchCommandInput,
+  DeleteMessageBatchCommandOutput,
+} from "./commands/DeleteMessageBatchCommand";
+import type { DeleteMessageCommandInput, DeleteMessageCommandOutput } from "./commands/DeleteMessageCommand";
+import type { DeleteQueueCommandInput, DeleteQueueCommandOutput } from "./commands/DeleteQueueCommand";
+import type {
+  GetQueueAttributesCommandInput,
+  GetQueueAttributesCommandOutput,
+} from "./commands/GetQueueAttributesCommand";
+import type { GetQueueUrlCommandInput, GetQueueUrlCommandOutput } from "./commands/GetQueueUrlCommand";
+import type {
   ListDeadLetterSourceQueuesCommandInput,
   ListDeadLetterSourceQueuesCommandOutput,
 } from "./commands/ListDeadLetterSourceQueuesCommand";
-import { ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
-import { ListQueueTagsCommandInput, ListQueueTagsCommandOutput } from "./commands/ListQueueTagsCommand";
-import { PurgeQueueCommandInput, PurgeQueueCommandOutput } from "./commands/PurgeQueueCommand";
-import { ReceiveMessageCommandInput, ReceiveMessageCommandOutput } from "./commands/ReceiveMessageCommand";
-import { RemovePermissionCommandInput, RemovePermissionCommandOutput } from "./commands/RemovePermissionCommand";
-import { SendMessageBatchCommandInput, SendMessageBatchCommandOutput } from "./commands/SendMessageBatchCommand";
-import { SendMessageCommandInput, SendMessageCommandOutput } from "./commands/SendMessageCommand";
-import { SetQueueAttributesCommandInput, SetQueueAttributesCommandOutput } from "./commands/SetQueueAttributesCommand";
-import { TagQueueCommandInput, TagQueueCommandOutput } from "./commands/TagQueueCommand";
-import { UntagQueueCommandInput, UntagQueueCommandOutput } from "./commands/UntagQueueCommand";
+import type {
+  ListMessageMoveTasksCommandInput,
+  ListMessageMoveTasksCommandOutput,
+} from "./commands/ListMessageMoveTasksCommand";
+import type { ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
+import type { ListQueueTagsCommandInput, ListQueueTagsCommandOutput } from "./commands/ListQueueTagsCommand";
+import type { PurgeQueueCommandInput, PurgeQueueCommandOutput } from "./commands/PurgeQueueCommand";
+import type { ReceiveMessageCommandInput, ReceiveMessageCommandOutput } from "./commands/ReceiveMessageCommand";
+import type { RemovePermissionCommandInput, RemovePermissionCommandOutput } from "./commands/RemovePermissionCommand";
+import type { SendMessageBatchCommandInput, SendMessageBatchCommandOutput } from "./commands/SendMessageBatchCommand";
+import type { SendMessageCommandInput, SendMessageCommandOutput } from "./commands/SendMessageCommand";
+import type {
+  SetQueueAttributesCommandInput,
+  SetQueueAttributesCommandOutput,
+} from "./commands/SetQueueAttributesCommand";
+import type {
+  StartMessageMoveTaskCommandInput,
+  StartMessageMoveTaskCommandOutput,
+} from "./commands/StartMessageMoveTaskCommand";
+import type { TagQueueCommandInput, TagQueueCommandOutput } from "./commands/TagQueueCommand";
+import type { UntagQueueCommandInput, UntagQueueCommandOutput } from "./commands/UntagQueueCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddPermissionCommandInput
+  | CancelMessageMoveTaskCommandInput
   | ChangeMessageVisibilityBatchCommandInput
   | ChangeMessageVisibilityCommandInput
   | CreateQueueCommandInput
@@ -91,6 +137,7 @@ export type ServiceInputTypes =
   | GetQueueAttributesCommandInput
   | GetQueueUrlCommandInput
   | ListDeadLetterSourceQueuesCommandInput
+  | ListMessageMoveTasksCommandInput
   | ListQueueTagsCommandInput
   | ListQueuesCommandInput
   | PurgeQueueCommandInput
@@ -99,11 +146,16 @@ export type ServiceInputTypes =
   | SendMessageBatchCommandInput
   | SendMessageCommandInput
   | SetQueueAttributesCommandInput
+  | StartMessageMoveTaskCommandInput
   | TagQueueCommandInput
   | UntagQueueCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddPermissionCommandOutput
+  | CancelMessageMoveTaskCommandOutput
   | ChangeMessageVisibilityBatchCommandOutput
   | ChangeMessageVisibilityCommandOutput
   | CreateQueueCommandOutput
@@ -113,6 +165,7 @@ export type ServiceOutputTypes =
   | GetQueueAttributesCommandOutput
   | GetQueueUrlCommandOutput
   | ListDeadLetterSourceQueuesCommandOutput
+  | ListMessageMoveTasksCommandOutput
   | ListQueueTagsCommandOutput
   | ListQueuesCommandOutput
   | PurgeQueueCommandOutput
@@ -121,21 +174,25 @@ export type ServiceOutputTypes =
   | SendMessageBatchCommandOutput
   | SendMessageCommandOutput
   | SetQueueAttributesCommandOutput
+  | StartMessageMoveTaskCommandOutput
   | TagQueueCommandOutput
   | UntagQueueCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -147,7 +204,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -186,25 +243,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -217,102 +265,154 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
-
-  /**
-   * A constructor for a class implementing the {@link __Hash} interface
-   * that computes MD5 hashes.
-   * @internal
-   */
-  md5?: __HashConstructor;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * A constructor for a class implementing the {@link __Checksum} interface
+   * that computes MD5 hashes, or false to prevent MD5 computation.
+   */
+  md5?: __ChecksumConstructor | __HashConstructor | false;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type SQSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of SQSClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type SQSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  QueueUrlInputConfig &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of SQSClient class constructor that set the region, credentials and other options.
  */
 export interface SQSClientConfig extends SQSClientConfigType {}
 
-type SQSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of SQSClient class. This is resolved and normalized from the {@link SQSClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type SQSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  QueueUrlResolvedConfig &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of SQSClient class. This is resolved and normalized from the {@link SQSClientConfig | constructor configuration interface}.
  */
 export interface SQSClientResolvedConfig extends SQSClientResolvedConfigType {}
 
 /**
  * <p>Welcome to the <i>Amazon SQS API Reference</i>.</p>
- *         <p>Amazon SQS is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.</p>
- *         <p>For information on the permissions you need to use this API, see
- *             <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html">Identity and
- *             access management</a> in the <i>Amazon SQS Developer Guide.</i>
+ *          <p>Amazon SQS is a reliable, highly-scalable hosted queue for storing messages as they travel
+ *             between applications or microservices. Amazon SQS moves data between distributed application
+ *             components and helps you decouple these components.</p>
+ *          <p>For information on the permissions you need to use this API, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html">Identity and access management</a> in the <i>Amazon SQS Developer
+ *                 Guide.</i>
  *          </p>
- *         <p>You can use <a href="http://aws.amazon.com/tools/#sdk">Amazon Web Services SDKs</a> to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:</p>
- *         <ul>
+ *          <p>You can use <a href="http://aws.amazon.com/tools/#sdk">Amazon Web Services SDKs</a> to access
+ *             Amazon SQS using your favorite programming language. The SDKs perform tasks such as the
+ *             following automatically:</p>
+ *          <ul>
  *             <li>
- *                 <p>Cryptographically sign your service requests</p>
+ *                <p>Cryptographically sign your service requests</p>
  *             </li>
  *             <li>
- *                 <p>Retry requests</p>
+ *                <p>Retry requests</p>
  *             </li>
  *             <li>
- *                 <p>Handle error responses</p>
+ *                <p>Handle error responses</p>
  *             </li>
  *          </ul>
- *
- *         <p>
+ *          <p>
  *             <b>Additional information</b>
  *          </p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
- *                     <a href="http://aws.amazon.com/sqs/">Amazon SQS Product Page</a>
- *                 </p>
+ *                <p>
+ *                   <a href="http://aws.amazon.com/sqs/">Amazon SQS Product Page</a>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <i>Amazon SQS Developer Guide</i>
  *                </p>
- *                 <ul>
+ *                <ul>
  *                   <li>
  *                      <p>
  *                         <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html">Making API Requests</a>
@@ -331,24 +431,25 @@ export interface SQSClientResolvedConfig extends SQSClientResolvedConfigType {}
  *                </ul>
  *             </li>
  *             <li>
- *                 <p>
- *                   <a href="http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html">Amazon SQS in the <i>Command Line Interface</i>
- *                   </a>
+ *                <p>
+ *                   <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sqs/index.html">Amazon SQS in the Command Line Interface</a>
  *                </p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <i>Amazon Web Services General Reference</i>
  *                </p>
- *                 <ul>
+ *                <ul>
  *                   <li>
  *                      <p>
- *                         <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region">Regions and Endpoints</a>
+ *                         <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region">Regions and
+ *                                 Endpoints</a>
  *                      </p>
  *                   </li>
  *                </ul>
  *             </li>
  *          </ul>
+ * @public
  */
 export class SQSClient extends __Client<
   __HttpHandlerOptions,
@@ -361,22 +462,38 @@ export class SQSClient extends __Client<
    */
   readonly config: SQSClientResolvedConfig;
 
-  constructor(configuration: SQSClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<SQSClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveQueueUrlConfig(_config_6);
+    const _config_8 = resolveHttpAuthSchemeConfig(_config_7);
+    const _config_9 = resolveRuntimeExtensions(_config_8, configuration?.extensions || []);
+    this.config = _config_9;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(getQueueUrlPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultSQSHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: SQSClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

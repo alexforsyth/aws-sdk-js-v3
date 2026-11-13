@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRateBasedRuleRequest, GetRateBasedRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetRateBasedRuleCommand,
-  serializeAws_json1_1GetRateBasedRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRateBasedRuleRequest, GetRateBasedRuleResponse } from "../models/models_0";
+import { GetRateBasedRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRateBasedRuleCommand}.
+ */
 export interface GetRateBasedRuleCommandInput extends GetRateBasedRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRateBasedRuleCommand}.
+ */
 export interface GetRateBasedRuleCommandOutput extends GetRateBasedRuleResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +39,69 @@ export interface GetRateBasedRuleCommandOutput extends GetRateBasedRuleResponse,
  * ```javascript
  * import { WAFClient, GetRateBasedRuleCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, GetRateBasedRuleCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // GetRateBasedRuleRequest
+ *   RuleId: "STRING_VALUE", // required
+ * };
  * const command = new GetRateBasedRuleCommand(input);
  * const response = await client.send(command);
+ * // { // GetRateBasedRuleResponse
+ * //   Rule: { // RateBasedRule
+ * //     RuleId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     MetricName: "STRING_VALUE",
+ * //     MatchPredicates: [ // Predicates // required
+ * //       { // Predicate
+ * //         Negated: true || false, // required
+ * //         Type: "IPMatch" || "ByteMatch" || "SqlInjectionMatch" || "GeoMatch" || "SizeConstraint" || "XssMatch" || "RegexMatch", // required
+ * //         DataId: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     RateKey: "IP", // required
+ * //     RateLimit: Number("long"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRateBasedRuleCommandInput - {@link GetRateBasedRuleCommandInput}
+ * @returns {@link GetRateBasedRuleCommandOutput}
  * @see {@link GetRateBasedRuleCommandInput} for command's `input` shape.
  * @see {@link GetRateBasedRuleCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class GetRateBasedRuleCommand extends $Command<
-  GetRateBasedRuleCommandInput,
-  GetRateBasedRuleCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRateBasedRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRateBasedRuleCommandInput, GetRateBasedRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "GetRateBasedRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRateBasedRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRateBasedRuleResponse.filterSensitiveLog,
+export class GetRateBasedRuleCommand extends command<GetRateBasedRuleCommandInput, GetRateBasedRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRateBasedRule",
+  GetRateBasedRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRateBasedRuleRequest;
+      output: GetRateBasedRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRateBasedRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRateBasedRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRateBasedRuleCommandOutput> {
-    return deserializeAws_json1_1GetRateBasedRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRateBasedRuleCommandInput;
+      output: GetRateBasedRuleCommandOutput;
+    };
+  };
 }

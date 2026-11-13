@@ -1,2149 +1,3016 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type BatchCreateCustomVocabularyItemCommandInput,
+  type BatchCreateCustomVocabularyItemCommandOutput,
+  BatchCreateCustomVocabularyItemCommand,
+} from "./commands/BatchCreateCustomVocabularyItemCommand";
+import {
+  type BatchDeleteCustomVocabularyItemCommandInput,
+  type BatchDeleteCustomVocabularyItemCommandOutput,
+  BatchDeleteCustomVocabularyItemCommand,
+} from "./commands/BatchDeleteCustomVocabularyItemCommand";
+import {
+  type BatchUpdateCustomVocabularyItemCommandInput,
+  type BatchUpdateCustomVocabularyItemCommandOutput,
+  BatchUpdateCustomVocabularyItemCommand,
+} from "./commands/BatchUpdateCustomVocabularyItemCommand";
+import {
+  type BuildBotLocaleCommandInput,
+  type BuildBotLocaleCommandOutput,
   BuildBotLocaleCommand,
-  BuildBotLocaleCommandInput,
-  BuildBotLocaleCommandOutput,
 } from "./commands/BuildBotLocaleCommand";
 import {
+  type CreateBotAliasCommandInput,
+  type CreateBotAliasCommandOutput,
   CreateBotAliasCommand,
-  CreateBotAliasCommandInput,
-  CreateBotAliasCommandOutput,
 } from "./commands/CreateBotAliasCommand";
-import { CreateBotCommand, CreateBotCommandInput, CreateBotCommandOutput } from "./commands/CreateBotCommand";
+import { type CreateBotCommandInput, type CreateBotCommandOutput, CreateBotCommand } from "./commands/CreateBotCommand";
 import {
+  type CreateBotLocaleCommandInput,
+  type CreateBotLocaleCommandOutput,
   CreateBotLocaleCommand,
-  CreateBotLocaleCommandInput,
-  CreateBotLocaleCommandOutput,
 } from "./commands/CreateBotLocaleCommand";
 import {
+  type CreateBotReplicaCommandInput,
+  type CreateBotReplicaCommandOutput,
+  CreateBotReplicaCommand,
+} from "./commands/CreateBotReplicaCommand";
+import {
+  type CreateBotVersionCommandInput,
+  type CreateBotVersionCommandOutput,
   CreateBotVersionCommand,
-  CreateBotVersionCommandInput,
-  CreateBotVersionCommandOutput,
 } from "./commands/CreateBotVersionCommand";
 import {
+  type CreateExportCommandInput,
+  type CreateExportCommandOutput,
   CreateExportCommand,
-  CreateExportCommandInput,
-  CreateExportCommandOutput,
 } from "./commands/CreateExportCommand";
 import {
+  type CreateIntentCommandInput,
+  type CreateIntentCommandOutput,
   CreateIntentCommand,
-  CreateIntentCommandInput,
-  CreateIntentCommandOutput,
 } from "./commands/CreateIntentCommand";
 import {
+  type CreateResourcePolicyCommandInput,
+  type CreateResourcePolicyCommandOutput,
   CreateResourcePolicyCommand,
-  CreateResourcePolicyCommandInput,
-  CreateResourcePolicyCommandOutput,
 } from "./commands/CreateResourcePolicyCommand";
 import {
+  type CreateResourcePolicyStatementCommandInput,
+  type CreateResourcePolicyStatementCommandOutput,
   CreateResourcePolicyStatementCommand,
-  CreateResourcePolicyStatementCommandInput,
-  CreateResourcePolicyStatementCommandOutput,
 } from "./commands/CreateResourcePolicyStatementCommand";
-import { CreateSlotCommand, CreateSlotCommandInput, CreateSlotCommandOutput } from "./commands/CreateSlotCommand";
 import {
+  type CreateSlotCommandInput,
+  type CreateSlotCommandOutput,
+  CreateSlotCommand,
+} from "./commands/CreateSlotCommand";
+import {
+  type CreateSlotTypeCommandInput,
+  type CreateSlotTypeCommandOutput,
   CreateSlotTypeCommand,
-  CreateSlotTypeCommandInput,
-  CreateSlotTypeCommandOutput,
 } from "./commands/CreateSlotTypeCommand";
 import {
+  type CreateTestSetDiscrepancyReportCommandInput,
+  type CreateTestSetDiscrepancyReportCommandOutput,
+  CreateTestSetDiscrepancyReportCommand,
+} from "./commands/CreateTestSetDiscrepancyReportCommand";
+import {
+  type CreateUploadUrlCommandInput,
+  type CreateUploadUrlCommandOutput,
   CreateUploadUrlCommand,
-  CreateUploadUrlCommandInput,
-  CreateUploadUrlCommandOutput,
 } from "./commands/CreateUploadUrlCommand";
 import {
+  type DeleteBotAliasCommandInput,
+  type DeleteBotAliasCommandOutput,
   DeleteBotAliasCommand,
-  DeleteBotAliasCommandInput,
-  DeleteBotAliasCommandOutput,
 } from "./commands/DeleteBotAliasCommand";
-import { DeleteBotCommand, DeleteBotCommandInput, DeleteBotCommandOutput } from "./commands/DeleteBotCommand";
 import {
+  type DeleteBotAnalyzerRecommendationCommandInput,
+  type DeleteBotAnalyzerRecommendationCommandOutput,
+  DeleteBotAnalyzerRecommendationCommand,
+} from "./commands/DeleteBotAnalyzerRecommendationCommand";
+import { type DeleteBotCommandInput, type DeleteBotCommandOutput, DeleteBotCommand } from "./commands/DeleteBotCommand";
+import {
+  type DeleteBotLocaleCommandInput,
+  type DeleteBotLocaleCommandOutput,
   DeleteBotLocaleCommand,
-  DeleteBotLocaleCommandInput,
-  DeleteBotLocaleCommandOutput,
 } from "./commands/DeleteBotLocaleCommand";
 import {
+  type DeleteBotReplicaCommandInput,
+  type DeleteBotReplicaCommandOutput,
+  DeleteBotReplicaCommand,
+} from "./commands/DeleteBotReplicaCommand";
+import {
+  type DeleteBotVersionCommandInput,
+  type DeleteBotVersionCommandOutput,
   DeleteBotVersionCommand,
-  DeleteBotVersionCommandInput,
-  DeleteBotVersionCommandOutput,
 } from "./commands/DeleteBotVersionCommand";
 import {
+  type DeleteCustomVocabularyCommandInput,
+  type DeleteCustomVocabularyCommandOutput,
+  DeleteCustomVocabularyCommand,
+} from "./commands/DeleteCustomVocabularyCommand";
+import {
+  type DeleteExportCommandInput,
+  type DeleteExportCommandOutput,
   DeleteExportCommand,
-  DeleteExportCommandInput,
-  DeleteExportCommandOutput,
 } from "./commands/DeleteExportCommand";
 import {
+  type DeleteImportCommandInput,
+  type DeleteImportCommandOutput,
   DeleteImportCommand,
-  DeleteImportCommandInput,
-  DeleteImportCommandOutput,
 } from "./commands/DeleteImportCommand";
 import {
+  type DeleteIntentCommandInput,
+  type DeleteIntentCommandOutput,
   DeleteIntentCommand,
-  DeleteIntentCommandInput,
-  DeleteIntentCommandOutput,
 } from "./commands/DeleteIntentCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
   DeleteResourcePolicyCommand,
-  DeleteResourcePolicyCommandInput,
-  DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
 import {
+  type DeleteResourcePolicyStatementCommandInput,
+  type DeleteResourcePolicyStatementCommandOutput,
   DeleteResourcePolicyStatementCommand,
-  DeleteResourcePolicyStatementCommandInput,
-  DeleteResourcePolicyStatementCommandOutput,
 } from "./commands/DeleteResourcePolicyStatementCommand";
-import { DeleteSlotCommand, DeleteSlotCommandInput, DeleteSlotCommandOutput } from "./commands/DeleteSlotCommand";
 import {
+  type DeleteSlotCommandInput,
+  type DeleteSlotCommandOutput,
+  DeleteSlotCommand,
+} from "./commands/DeleteSlotCommand";
+import {
+  type DeleteSlotTypeCommandInput,
+  type DeleteSlotTypeCommandOutput,
   DeleteSlotTypeCommand,
-  DeleteSlotTypeCommandInput,
-  DeleteSlotTypeCommandOutput,
 } from "./commands/DeleteSlotTypeCommand";
 import {
+  type DeleteTestSetCommandInput,
+  type DeleteTestSetCommandOutput,
+  DeleteTestSetCommand,
+} from "./commands/DeleteTestSetCommand";
+import {
+  type DeleteUtterancesCommandInput,
+  type DeleteUtterancesCommandOutput,
   DeleteUtterancesCommand,
-  DeleteUtterancesCommandInput,
-  DeleteUtterancesCommandOutput,
 } from "./commands/DeleteUtterancesCommand";
 import {
+  type DescribeBotAliasCommandInput,
+  type DescribeBotAliasCommandOutput,
   DescribeBotAliasCommand,
-  DescribeBotAliasCommandInput,
-  DescribeBotAliasCommandOutput,
 } from "./commands/DescribeBotAliasCommand";
-import { DescribeBotCommand, DescribeBotCommandInput, DescribeBotCommandOutput } from "./commands/DescribeBotCommand";
 import {
+  type DescribeBotAnalyzerRecommendationCommandInput,
+  type DescribeBotAnalyzerRecommendationCommandOutput,
+  DescribeBotAnalyzerRecommendationCommand,
+} from "./commands/DescribeBotAnalyzerRecommendationCommand";
+import {
+  type DescribeBotCommandInput,
+  type DescribeBotCommandOutput,
+  DescribeBotCommand,
+} from "./commands/DescribeBotCommand";
+import {
+  type DescribeBotLocaleCommandInput,
+  type DescribeBotLocaleCommandOutput,
   DescribeBotLocaleCommand,
-  DescribeBotLocaleCommandInput,
-  DescribeBotLocaleCommandOutput,
 } from "./commands/DescribeBotLocaleCommand";
 import {
+  type DescribeBotRecommendationCommandInput,
+  type DescribeBotRecommendationCommandOutput,
+  DescribeBotRecommendationCommand,
+} from "./commands/DescribeBotRecommendationCommand";
+import {
+  type DescribeBotReplicaCommandInput,
+  type DescribeBotReplicaCommandOutput,
+  DescribeBotReplicaCommand,
+} from "./commands/DescribeBotReplicaCommand";
+import {
+  type DescribeBotResourceGenerationCommandInput,
+  type DescribeBotResourceGenerationCommandOutput,
+  DescribeBotResourceGenerationCommand,
+} from "./commands/DescribeBotResourceGenerationCommand";
+import {
+  type DescribeBotVersionCommandInput,
+  type DescribeBotVersionCommandOutput,
   DescribeBotVersionCommand,
-  DescribeBotVersionCommandInput,
-  DescribeBotVersionCommandOutput,
 } from "./commands/DescribeBotVersionCommand";
 import {
+  type DescribeCustomVocabularyMetadataCommandInput,
+  type DescribeCustomVocabularyMetadataCommandOutput,
+  DescribeCustomVocabularyMetadataCommand,
+} from "./commands/DescribeCustomVocabularyMetadataCommand";
+import {
+  type DescribeExportCommandInput,
+  type DescribeExportCommandOutput,
   DescribeExportCommand,
-  DescribeExportCommandInput,
-  DescribeExportCommandOutput,
 } from "./commands/DescribeExportCommand";
 import {
+  type DescribeImportCommandInput,
+  type DescribeImportCommandOutput,
   DescribeImportCommand,
-  DescribeImportCommandInput,
-  DescribeImportCommandOutput,
 } from "./commands/DescribeImportCommand";
 import {
+  type DescribeIntentCommandInput,
+  type DescribeIntentCommandOutput,
   DescribeIntentCommand,
-  DescribeIntentCommandInput,
-  DescribeIntentCommandOutput,
 } from "./commands/DescribeIntentCommand";
 import {
+  type DescribeResourcePolicyCommandInput,
+  type DescribeResourcePolicyCommandOutput,
   DescribeResourcePolicyCommand,
-  DescribeResourcePolicyCommandInput,
-  DescribeResourcePolicyCommandOutput,
 } from "./commands/DescribeResourcePolicyCommand";
 import {
+  type DescribeSlotCommandInput,
+  type DescribeSlotCommandOutput,
   DescribeSlotCommand,
-  DescribeSlotCommandInput,
-  DescribeSlotCommandOutput,
 } from "./commands/DescribeSlotCommand";
 import {
+  type DescribeSlotTypeCommandInput,
+  type DescribeSlotTypeCommandOutput,
   DescribeSlotTypeCommand,
-  DescribeSlotTypeCommandInput,
-  DescribeSlotTypeCommandOutput,
 } from "./commands/DescribeSlotTypeCommand";
 import {
+  type DescribeTestExecutionCommandInput,
+  type DescribeTestExecutionCommandOutput,
+  DescribeTestExecutionCommand,
+} from "./commands/DescribeTestExecutionCommand";
+import {
+  type DescribeTestSetCommandInput,
+  type DescribeTestSetCommandOutput,
+  DescribeTestSetCommand,
+} from "./commands/DescribeTestSetCommand";
+import {
+  type DescribeTestSetDiscrepancyReportCommandInput,
+  type DescribeTestSetDiscrepancyReportCommandOutput,
+  DescribeTestSetDiscrepancyReportCommand,
+} from "./commands/DescribeTestSetDiscrepancyReportCommand";
+import {
+  type DescribeTestSetGenerationCommandInput,
+  type DescribeTestSetGenerationCommandOutput,
+  DescribeTestSetGenerationCommand,
+} from "./commands/DescribeTestSetGenerationCommand";
+import {
+  type GenerateBotElementCommandInput,
+  type GenerateBotElementCommandOutput,
+  GenerateBotElementCommand,
+} from "./commands/GenerateBotElementCommand";
+import {
+  type GetTestExecutionArtifactsUrlCommandInput,
+  type GetTestExecutionArtifactsUrlCommandOutput,
+  GetTestExecutionArtifactsUrlCommand,
+} from "./commands/GetTestExecutionArtifactsUrlCommand";
+import {
+  type ListAggregatedUtterancesCommandInput,
+  type ListAggregatedUtterancesCommandOutput,
   ListAggregatedUtterancesCommand,
-  ListAggregatedUtterancesCommandInput,
-  ListAggregatedUtterancesCommandOutput,
 } from "./commands/ListAggregatedUtterancesCommand";
 import {
+  type ListBotAliasesCommandInput,
+  type ListBotAliasesCommandOutput,
   ListBotAliasesCommand,
-  ListBotAliasesCommandInput,
-  ListBotAliasesCommandOutput,
 } from "./commands/ListBotAliasesCommand";
 import {
-  ListBotLocalesCommand,
-  ListBotLocalesCommandInput,
-  ListBotLocalesCommandOutput,
-} from "./commands/ListBotLocalesCommand";
-import { ListBotsCommand, ListBotsCommandInput, ListBotsCommandOutput } from "./commands/ListBotsCommand";
+  type ListBotAliasReplicasCommandInput,
+  type ListBotAliasReplicasCommandOutput,
+  ListBotAliasReplicasCommand,
+} from "./commands/ListBotAliasReplicasCommand";
 import {
+  type ListBotAnalyzerHistoryCommandInput,
+  type ListBotAnalyzerHistoryCommandOutput,
+  ListBotAnalyzerHistoryCommand,
+} from "./commands/ListBotAnalyzerHistoryCommand";
+import {
+  type ListBotLocalesCommandInput,
+  type ListBotLocalesCommandOutput,
+  ListBotLocalesCommand,
+} from "./commands/ListBotLocalesCommand";
+import {
+  type ListBotRecommendationsCommandInput,
+  type ListBotRecommendationsCommandOutput,
+  ListBotRecommendationsCommand,
+} from "./commands/ListBotRecommendationsCommand";
+import {
+  type ListBotReplicasCommandInput,
+  type ListBotReplicasCommandOutput,
+  ListBotReplicasCommand,
+} from "./commands/ListBotReplicasCommand";
+import {
+  type ListBotResourceGenerationsCommandInput,
+  type ListBotResourceGenerationsCommandOutput,
+  ListBotResourceGenerationsCommand,
+} from "./commands/ListBotResourceGenerationsCommand";
+import { type ListBotsCommandInput, type ListBotsCommandOutput, ListBotsCommand } from "./commands/ListBotsCommand";
+import {
+  type ListBotVersionReplicasCommandInput,
+  type ListBotVersionReplicasCommandOutput,
+  ListBotVersionReplicasCommand,
+} from "./commands/ListBotVersionReplicasCommand";
+import {
+  type ListBotVersionsCommandInput,
+  type ListBotVersionsCommandOutput,
   ListBotVersionsCommand,
-  ListBotVersionsCommandInput,
-  ListBotVersionsCommandOutput,
 } from "./commands/ListBotVersionsCommand";
 import {
+  type ListBuiltInIntentsCommandInput,
+  type ListBuiltInIntentsCommandOutput,
   ListBuiltInIntentsCommand,
-  ListBuiltInIntentsCommandInput,
-  ListBuiltInIntentsCommandOutput,
 } from "./commands/ListBuiltInIntentsCommand";
 import {
+  type ListBuiltInSlotTypesCommandInput,
+  type ListBuiltInSlotTypesCommandOutput,
   ListBuiltInSlotTypesCommand,
-  ListBuiltInSlotTypesCommandInput,
-  ListBuiltInSlotTypesCommandOutput,
 } from "./commands/ListBuiltInSlotTypesCommand";
-import { ListExportsCommand, ListExportsCommandInput, ListExportsCommandOutput } from "./commands/ListExportsCommand";
-import { ListImportsCommand, ListImportsCommandInput, ListImportsCommandOutput } from "./commands/ListImportsCommand";
-import { ListIntentsCommand, ListIntentsCommandInput, ListIntentsCommandOutput } from "./commands/ListIntentsCommand";
-import { ListSlotsCommand, ListSlotsCommandInput, ListSlotsCommandOutput } from "./commands/ListSlotsCommand";
 import {
+  type ListCustomVocabularyItemsCommandInput,
+  type ListCustomVocabularyItemsCommandOutput,
+  ListCustomVocabularyItemsCommand,
+} from "./commands/ListCustomVocabularyItemsCommand";
+import {
+  type ListExportsCommandInput,
+  type ListExportsCommandOutput,
+  ListExportsCommand,
+} from "./commands/ListExportsCommand";
+import {
+  type ListImportsCommandInput,
+  type ListImportsCommandOutput,
+  ListImportsCommand,
+} from "./commands/ListImportsCommand";
+import {
+  type ListIntentMetricsCommandInput,
+  type ListIntentMetricsCommandOutput,
+  ListIntentMetricsCommand,
+} from "./commands/ListIntentMetricsCommand";
+import {
+  type ListIntentPathsCommandInput,
+  type ListIntentPathsCommandOutput,
+  ListIntentPathsCommand,
+} from "./commands/ListIntentPathsCommand";
+import {
+  type ListIntentsCommandInput,
+  type ListIntentsCommandOutput,
+  ListIntentsCommand,
+} from "./commands/ListIntentsCommand";
+import {
+  type ListIntentStageMetricsCommandInput,
+  type ListIntentStageMetricsCommandOutput,
+  ListIntentStageMetricsCommand,
+} from "./commands/ListIntentStageMetricsCommand";
+import {
+  type ListRecommendedIntentsCommandInput,
+  type ListRecommendedIntentsCommandOutput,
+  ListRecommendedIntentsCommand,
+} from "./commands/ListRecommendedIntentsCommand";
+import {
+  type ListSessionAnalyticsDataCommandInput,
+  type ListSessionAnalyticsDataCommandOutput,
+  ListSessionAnalyticsDataCommand,
+} from "./commands/ListSessionAnalyticsDataCommand";
+import {
+  type ListSessionMetricsCommandInput,
+  type ListSessionMetricsCommandOutput,
+  ListSessionMetricsCommand,
+} from "./commands/ListSessionMetricsCommand";
+import { type ListSlotsCommandInput, type ListSlotsCommandOutput, ListSlotsCommand } from "./commands/ListSlotsCommand";
+import {
+  type ListSlotTypesCommandInput,
+  type ListSlotTypesCommandOutput,
   ListSlotTypesCommand,
-  ListSlotTypesCommandInput,
-  ListSlotTypesCommandOutput,
 } from "./commands/ListSlotTypesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { StartImportCommand, StartImportCommandInput, StartImportCommandOutput } from "./commands/StartImportCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type ListTestExecutionResultItemsCommandInput,
+  type ListTestExecutionResultItemsCommandOutput,
+  ListTestExecutionResultItemsCommand,
+} from "./commands/ListTestExecutionResultItemsCommand";
+import {
+  type ListTestExecutionsCommandInput,
+  type ListTestExecutionsCommandOutput,
+  ListTestExecutionsCommand,
+} from "./commands/ListTestExecutionsCommand";
+import {
+  type ListTestSetRecordsCommandInput,
+  type ListTestSetRecordsCommandOutput,
+  ListTestSetRecordsCommand,
+} from "./commands/ListTestSetRecordsCommand";
+import {
+  type ListTestSetsCommandInput,
+  type ListTestSetsCommandOutput,
+  ListTestSetsCommand,
+} from "./commands/ListTestSetsCommand";
+import {
+  type ListUtteranceAnalyticsDataCommandInput,
+  type ListUtteranceAnalyticsDataCommandOutput,
+  ListUtteranceAnalyticsDataCommand,
+} from "./commands/ListUtteranceAnalyticsDataCommand";
+import {
+  type ListUtteranceMetricsCommandInput,
+  type ListUtteranceMetricsCommandOutput,
+  ListUtteranceMetricsCommand,
+} from "./commands/ListUtteranceMetricsCommand";
+import {
+  type SearchAssociatedTranscriptsCommandInput,
+  type SearchAssociatedTranscriptsCommandOutput,
+  SearchAssociatedTranscriptsCommand,
+} from "./commands/SearchAssociatedTranscriptsCommand";
+import {
+  type StartBotAnalyzerCommandInput,
+  type StartBotAnalyzerCommandOutput,
+  StartBotAnalyzerCommand,
+} from "./commands/StartBotAnalyzerCommand";
+import {
+  type StartBotRecommendationCommandInput,
+  type StartBotRecommendationCommandOutput,
+  StartBotRecommendationCommand,
+} from "./commands/StartBotRecommendationCommand";
+import {
+  type StartBotResourceGenerationCommandInput,
+  type StartBotResourceGenerationCommandOutput,
+  StartBotResourceGenerationCommand,
+} from "./commands/StartBotResourceGenerationCommand";
+import {
+  type StartImportCommandInput,
+  type StartImportCommandOutput,
+  StartImportCommand,
+} from "./commands/StartImportCommand";
+import {
+  type StartTestExecutionCommandInput,
+  type StartTestExecutionCommandOutput,
+  StartTestExecutionCommand,
+} from "./commands/StartTestExecutionCommand";
+import {
+  type StartTestSetGenerationCommandInput,
+  type StartTestSetGenerationCommandOutput,
+  StartTestSetGenerationCommand,
+} from "./commands/StartTestSetGenerationCommand";
+import {
+  type StopBotAnalyzerCommandInput,
+  type StopBotAnalyzerCommandOutput,
+  StopBotAnalyzerCommand,
+} from "./commands/StopBotAnalyzerCommand";
+import {
+  type StopBotRecommendationCommandInput,
+  type StopBotRecommendationCommandOutput,
+  StopBotRecommendationCommand,
+} from "./commands/StopBotRecommendationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateBotAliasCommandInput,
+  type UpdateBotAliasCommandOutput,
   UpdateBotAliasCommand,
-  UpdateBotAliasCommandInput,
-  UpdateBotAliasCommandOutput,
 } from "./commands/UpdateBotAliasCommand";
-import { UpdateBotCommand, UpdateBotCommandInput, UpdateBotCommandOutput } from "./commands/UpdateBotCommand";
+import { type UpdateBotCommandInput, type UpdateBotCommandOutput, UpdateBotCommand } from "./commands/UpdateBotCommand";
 import {
+  type UpdateBotLocaleCommandInput,
+  type UpdateBotLocaleCommandOutput,
   UpdateBotLocaleCommand,
-  UpdateBotLocaleCommandInput,
-  UpdateBotLocaleCommandOutput,
 } from "./commands/UpdateBotLocaleCommand";
 import {
+  type UpdateBotRecommendationCommandInput,
+  type UpdateBotRecommendationCommandOutput,
+  UpdateBotRecommendationCommand,
+} from "./commands/UpdateBotRecommendationCommand";
+import {
+  type UpdateExportCommandInput,
+  type UpdateExportCommandOutput,
   UpdateExportCommand,
-  UpdateExportCommandInput,
-  UpdateExportCommandOutput,
 } from "./commands/UpdateExportCommand";
 import {
+  type UpdateIntentCommandInput,
+  type UpdateIntentCommandOutput,
   UpdateIntentCommand,
-  UpdateIntentCommandInput,
-  UpdateIntentCommandOutput,
 } from "./commands/UpdateIntentCommand";
 import {
+  type UpdateResourcePolicyCommandInput,
+  type UpdateResourcePolicyCommandOutput,
   UpdateResourcePolicyCommand,
-  UpdateResourcePolicyCommandInput,
-  UpdateResourcePolicyCommandOutput,
 } from "./commands/UpdateResourcePolicyCommand";
-import { UpdateSlotCommand, UpdateSlotCommandInput, UpdateSlotCommandOutput } from "./commands/UpdateSlotCommand";
 import {
+  type UpdateSlotCommandInput,
+  type UpdateSlotCommandOutput,
+  UpdateSlotCommand,
+} from "./commands/UpdateSlotCommand";
+import {
+  type UpdateSlotTypeCommandInput,
+  type UpdateSlotTypeCommandOutput,
   UpdateSlotTypeCommand,
-  UpdateSlotTypeCommandInput,
-  UpdateSlotTypeCommandOutput,
 } from "./commands/UpdateSlotTypeCommand";
+import {
+  type UpdateTestSetCommandInput,
+  type UpdateTestSetCommandOutput,
+  UpdateTestSetCommand,
+} from "./commands/UpdateTestSetCommand";
 import { LexModelsV2Client } from "./LexModelsV2Client";
+import type { LexModelsV2ServiceException } from "./models/LexModelsV2ServiceException";
+import { paginateDescribeBotAnalyzerRecommendation } from "./pagination/DescribeBotAnalyzerRecommendationPaginator";
+import { paginateListAggregatedUtterances } from "./pagination/ListAggregatedUtterancesPaginator";
+import { paginateListBotAliases } from "./pagination/ListBotAliasesPaginator";
+import { paginateListBotAliasReplicas } from "./pagination/ListBotAliasReplicasPaginator";
+import { paginateListBotAnalyzerHistory } from "./pagination/ListBotAnalyzerHistoryPaginator";
+import { paginateListBotLocales } from "./pagination/ListBotLocalesPaginator";
+import { paginateListBotRecommendations } from "./pagination/ListBotRecommendationsPaginator";
+import { paginateListBotResourceGenerations } from "./pagination/ListBotResourceGenerationsPaginator";
+import { paginateListBots } from "./pagination/ListBotsPaginator";
+import { paginateListBotVersionReplicas } from "./pagination/ListBotVersionReplicasPaginator";
+import { paginateListBotVersions } from "./pagination/ListBotVersionsPaginator";
+import { paginateListBuiltInIntents } from "./pagination/ListBuiltInIntentsPaginator";
+import { paginateListBuiltInSlotTypes } from "./pagination/ListBuiltInSlotTypesPaginator";
+import { paginateListCustomVocabularyItems } from "./pagination/ListCustomVocabularyItemsPaginator";
+import { paginateListExports } from "./pagination/ListExportsPaginator";
+import { paginateListImports } from "./pagination/ListImportsPaginator";
+import { paginateListIntentMetrics } from "./pagination/ListIntentMetricsPaginator";
+import { paginateListIntents } from "./pagination/ListIntentsPaginator";
+import { paginateListIntentStageMetrics } from "./pagination/ListIntentStageMetricsPaginator";
+import { paginateListRecommendedIntents } from "./pagination/ListRecommendedIntentsPaginator";
+import { paginateListSessionAnalyticsData } from "./pagination/ListSessionAnalyticsDataPaginator";
+import { paginateListSessionMetrics } from "./pagination/ListSessionMetricsPaginator";
+import { paginateListSlots } from "./pagination/ListSlotsPaginator";
+import { paginateListSlotTypes } from "./pagination/ListSlotTypesPaginator";
+import { paginateListTestExecutionResultItems } from "./pagination/ListTestExecutionResultItemsPaginator";
+import { paginateListTestExecutions } from "./pagination/ListTestExecutionsPaginator";
+import { paginateListTestSetRecords } from "./pagination/ListTestSetRecordsPaginator";
+import { paginateListTestSets } from "./pagination/ListTestSetsPaginator";
+import { paginateListUtteranceAnalyticsData } from "./pagination/ListUtteranceAnalyticsDataPaginator";
+import { paginateListUtteranceMetrics } from "./pagination/ListUtteranceMetricsPaginator";
+import { waitUntilBotAliasAvailable } from "./waiters/waitForBotAliasAvailable";
+import { waitUntilBotAvailable } from "./waiters/waitForBotAvailable";
+import { waitUntilBotExportCompleted } from "./waiters/waitForBotExportCompleted";
+import { waitUntilBotImportCompleted } from "./waiters/waitForBotImportCompleted";
+import { waitUntilBotLocaleBuilt } from "./waiters/waitForBotLocaleBuilt";
+import { waitUntilBotLocaleCreated } from "./waiters/waitForBotLocaleCreated";
+import { waitUntilBotLocaleExpressTestingAvailable } from "./waiters/waitForBotLocaleExpressTestingAvailable";
+import { waitUntilBotVersionAvailable } from "./waiters/waitForBotVersionAvailable";
+
+const commands = {
+  BatchCreateCustomVocabularyItemCommand,
+  BatchDeleteCustomVocabularyItemCommand,
+  BatchUpdateCustomVocabularyItemCommand,
+  BuildBotLocaleCommand,
+  CreateBotCommand,
+  CreateBotAliasCommand,
+  CreateBotLocaleCommand,
+  CreateBotReplicaCommand,
+  CreateBotVersionCommand,
+  CreateExportCommand,
+  CreateIntentCommand,
+  CreateResourcePolicyCommand,
+  CreateResourcePolicyStatementCommand,
+  CreateSlotCommand,
+  CreateSlotTypeCommand,
+  CreateTestSetDiscrepancyReportCommand,
+  CreateUploadUrlCommand,
+  DeleteBotCommand,
+  DeleteBotAliasCommand,
+  DeleteBotAnalyzerRecommendationCommand,
+  DeleteBotLocaleCommand,
+  DeleteBotReplicaCommand,
+  DeleteBotVersionCommand,
+  DeleteCustomVocabularyCommand,
+  DeleteExportCommand,
+  DeleteImportCommand,
+  DeleteIntentCommand,
+  DeleteResourcePolicyCommand,
+  DeleteResourcePolicyStatementCommand,
+  DeleteSlotCommand,
+  DeleteSlotTypeCommand,
+  DeleteTestSetCommand,
+  DeleteUtterancesCommand,
+  DescribeBotCommand,
+  DescribeBotAliasCommand,
+  DescribeBotAnalyzerRecommendationCommand,
+  DescribeBotLocaleCommand,
+  DescribeBotRecommendationCommand,
+  DescribeBotReplicaCommand,
+  DescribeBotResourceGenerationCommand,
+  DescribeBotVersionCommand,
+  DescribeCustomVocabularyMetadataCommand,
+  DescribeExportCommand,
+  DescribeImportCommand,
+  DescribeIntentCommand,
+  DescribeResourcePolicyCommand,
+  DescribeSlotCommand,
+  DescribeSlotTypeCommand,
+  DescribeTestExecutionCommand,
+  DescribeTestSetCommand,
+  DescribeTestSetDiscrepancyReportCommand,
+  DescribeTestSetGenerationCommand,
+  GenerateBotElementCommand,
+  GetTestExecutionArtifactsUrlCommand,
+  ListAggregatedUtterancesCommand,
+  ListBotAliasesCommand,
+  ListBotAliasReplicasCommand,
+  ListBotAnalyzerHistoryCommand,
+  ListBotLocalesCommand,
+  ListBotRecommendationsCommand,
+  ListBotReplicasCommand,
+  ListBotResourceGenerationsCommand,
+  ListBotsCommand,
+  ListBotVersionReplicasCommand,
+  ListBotVersionsCommand,
+  ListBuiltInIntentsCommand,
+  ListBuiltInSlotTypesCommand,
+  ListCustomVocabularyItemsCommand,
+  ListExportsCommand,
+  ListImportsCommand,
+  ListIntentMetricsCommand,
+  ListIntentPathsCommand,
+  ListIntentsCommand,
+  ListIntentStageMetricsCommand,
+  ListRecommendedIntentsCommand,
+  ListSessionAnalyticsDataCommand,
+  ListSessionMetricsCommand,
+  ListSlotsCommand,
+  ListSlotTypesCommand,
+  ListTagsForResourceCommand,
+  ListTestExecutionResultItemsCommand,
+  ListTestExecutionsCommand,
+  ListTestSetRecordsCommand,
+  ListTestSetsCommand,
+  ListUtteranceAnalyticsDataCommand,
+  ListUtteranceMetricsCommand,
+  SearchAssociatedTranscriptsCommand,
+  StartBotAnalyzerCommand,
+  StartBotRecommendationCommand,
+  StartBotResourceGenerationCommand,
+  StartImportCommand,
+  StartTestExecutionCommand,
+  StartTestSetGenerationCommand,
+  StopBotAnalyzerCommand,
+  StopBotRecommendationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateBotCommand,
+  UpdateBotAliasCommand,
+  UpdateBotLocaleCommand,
+  UpdateBotRecommendationCommand,
+  UpdateExportCommand,
+  UpdateIntentCommand,
+  UpdateResourcePolicyCommand,
+  UpdateSlotCommand,
+  UpdateSlotTypeCommand,
+  UpdateTestSetCommand,
+};
+const paginators = {
+  paginateDescribeBotAnalyzerRecommendation,
+  paginateListAggregatedUtterances,
+  paginateListBotAliases,
+  paginateListBotAliasReplicas,
+  paginateListBotAnalyzerHistory,
+  paginateListBotLocales,
+  paginateListBotRecommendations,
+  paginateListBotResourceGenerations,
+  paginateListBots,
+  paginateListBotVersionReplicas,
+  paginateListBotVersions,
+  paginateListBuiltInIntents,
+  paginateListBuiltInSlotTypes,
+  paginateListCustomVocabularyItems,
+  paginateListExports,
+  paginateListImports,
+  paginateListIntentMetrics,
+  paginateListIntents,
+  paginateListIntentStageMetrics,
+  paginateListRecommendedIntents,
+  paginateListSessionAnalyticsData,
+  paginateListSessionMetrics,
+  paginateListSlots,
+  paginateListSlotTypes,
+  paginateListTestExecutionResultItems,
+  paginateListTestExecutions,
+  paginateListTestSetRecords,
+  paginateListTestSets,
+  paginateListUtteranceAnalyticsData,
+  paginateListUtteranceMetrics,
+};
+const waiters = {
+  waitUntilBotAvailable,
+  waitUntilBotAliasAvailable,
+  waitUntilBotLocaleBuilt,
+  waitUntilBotLocaleCreated,
+  waitUntilBotLocaleExpressTestingAvailable,
+  waitUntilBotVersionAvailable,
+  waitUntilBotExportCompleted,
+  waitUntilBotImportCompleted,
+};
 
 /**
- * <p></p>
+ * @public
  */
-export class LexModelsV2 extends LexModelsV2Client {
+export interface LexModelsV2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface LexModelsV2 {
   /**
-   * <p>Builds a bot, its intents, and its slot types into a specific
-   *          locale. A bot can be built into multiple locales. At runtime the locale
-   *          is used to choose a specific build of the bot.</p>
+   * @see {@link BatchCreateCustomVocabularyItemCommand}
    */
-  public buildBotLocale(
-    args: BuildBotLocaleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BuildBotLocaleCommandOutput>;
-  public buildBotLocale(
-    args: BuildBotLocaleCommandInput,
-    cb: (err: any, data?: BuildBotLocaleCommandOutput) => void
+  batchCreateCustomVocabularyItem(
+    args: BatchCreateCustomVocabularyItemCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<BatchCreateCustomVocabularyItemCommandOutput>;
+  batchCreateCustomVocabularyItem(
+    args: BatchCreateCustomVocabularyItemCommandInput,
+    cb: (err: any, data?: BatchCreateCustomVocabularyItemCommandOutput) => void
   ): void;
-  public buildBotLocale(
-    args: BuildBotLocaleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BuildBotLocaleCommandOutput) => void
+  batchCreateCustomVocabularyItem(
+    args: BatchCreateCustomVocabularyItemCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: BatchCreateCustomVocabularyItemCommandOutput) => void
   ): void;
-  public buildBotLocale(
-    args: BuildBotLocaleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BuildBotLocaleCommandOutput) => void),
-    cb?: (err: any, data?: BuildBotLocaleCommandOutput) => void
-  ): Promise<BuildBotLocaleCommandOutput> | void {
-    const command = new BuildBotLocaleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an Amazon Lex conversational bot. </p>
+   * @see {@link BatchDeleteCustomVocabularyItemCommand}
    */
-  public createBot(args: CreateBotCommandInput, options?: __HttpHandlerOptions): Promise<CreateBotCommandOutput>;
-  public createBot(args: CreateBotCommandInput, cb: (err: any, data?: CreateBotCommandOutput) => void): void;
-  public createBot(
+  batchDeleteCustomVocabularyItem(
+    args: BatchDeleteCustomVocabularyItemCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<BatchDeleteCustomVocabularyItemCommandOutput>;
+  batchDeleteCustomVocabularyItem(
+    args: BatchDeleteCustomVocabularyItemCommandInput,
+    cb: (err: any, data?: BatchDeleteCustomVocabularyItemCommandOutput) => void
+  ): void;
+  batchDeleteCustomVocabularyItem(
+    args: BatchDeleteCustomVocabularyItemCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: BatchDeleteCustomVocabularyItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateCustomVocabularyItemCommand}
+   */
+  batchUpdateCustomVocabularyItem(
+    args: BatchUpdateCustomVocabularyItemCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<BatchUpdateCustomVocabularyItemCommandOutput>;
+  batchUpdateCustomVocabularyItem(
+    args: BatchUpdateCustomVocabularyItemCommandInput,
+    cb: (err: any, data?: BatchUpdateCustomVocabularyItemCommandOutput) => void
+  ): void;
+  batchUpdateCustomVocabularyItem(
+    args: BatchUpdateCustomVocabularyItemCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: BatchUpdateCustomVocabularyItemCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BuildBotLocaleCommand}
+   */
+  buildBotLocale(
+    args: BuildBotLocaleCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<BuildBotLocaleCommandOutput>;
+  buildBotLocale(
+    args: BuildBotLocaleCommandInput,
+    cb: (err: any, data?: BuildBotLocaleCommandOutput) => void
+  ): void;
+  buildBotLocale(
+    args: BuildBotLocaleCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: BuildBotLocaleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBotCommand}
+   */
+  createBot(
     args: CreateBotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<CreateBotCommandOutput>;
+  createBot(
+    args: CreateBotCommandInput,
     cb: (err: any, data?: CreateBotCommandOutput) => void
   ): void;
-  public createBot(
+  createBot(
     args: CreateBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBotCommandOutput) => void),
-    cb?: (err: any, data?: CreateBotCommandOutput) => void
-  ): Promise<CreateBotCommandOutput> | void {
-    const command = new CreateBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateBotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates an alias for the specified version of a bot. Use an alias to
-   *          enable you to change the version of a bot without updating applications
-   *          that use the bot.</p>
-   *          <p>For example, you can create an alias called "PROD" that your
-   *          applications use to call the Amazon Lex bot. </p>
+   * @see {@link CreateBotAliasCommand}
    */
-  public createBotAlias(
+  createBotAlias(
     args: CreateBotAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateBotAliasCommandOutput>;
-  public createBotAlias(
+  createBotAlias(
     args: CreateBotAliasCommandInput,
     cb: (err: any, data?: CreateBotAliasCommandOutput) => void
   ): void;
-  public createBotAlias(
+  createBotAlias(
     args: CreateBotAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateBotAliasCommandOutput) => void
   ): void;
-  public createBotAlias(
-    args: CreateBotAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBotAliasCommandOutput) => void),
-    cb?: (err: any, data?: CreateBotAliasCommandOutput) => void
-  ): Promise<CreateBotAliasCommandOutput> | void {
-    const command = new CreateBotAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a locale in the bot. The locale contains the intents and
-   *          slot types that the bot uses in conversations with users in the
-   *          specified language and locale. You must add a locale to a bot before
-   *          you can add intents and slot types to the bot.</p>
+   * @see {@link CreateBotLocaleCommand}
    */
-  public createBotLocale(
+  createBotLocale(
     args: CreateBotLocaleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateBotLocaleCommandOutput>;
-  public createBotLocale(
+  createBotLocale(
     args: CreateBotLocaleCommandInput,
     cb: (err: any, data?: CreateBotLocaleCommandOutput) => void
   ): void;
-  public createBotLocale(
+  createBotLocale(
     args: CreateBotLocaleCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateBotLocaleCommandOutput) => void
   ): void;
-  public createBotLocale(
-    args: CreateBotLocaleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBotLocaleCommandOutput) => void),
-    cb?: (err: any, data?: CreateBotLocaleCommandOutput) => void
-  ): Promise<CreateBotLocaleCommandOutput> | void {
-    const command = new CreateBotLocaleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new version of the bot based on the <code>DRAFT</code>
-   *          version. If the <code>DRAFT</code> version of this resource hasn't
-   *          changed since you created the last version, Amazon Lex doesn't create a new
-   *          version, it returns the last created version.</p>
-   *          <p>When you create the first version of a bot, Amazon Lex sets the version
-   *          to 1. Subsequent versions increment by 1.</p>
+   * @see {@link CreateBotReplicaCommand}
    */
-  public createBotVersion(
+  createBotReplica(
+    args: CreateBotReplicaCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<CreateBotReplicaCommandOutput>;
+  createBotReplica(
+    args: CreateBotReplicaCommandInput,
+    cb: (err: any, data?: CreateBotReplicaCommandOutput) => void
+  ): void;
+  createBotReplica(
+    args: CreateBotReplicaCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateBotReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBotVersionCommand}
+   */
+  createBotVersion(
     args: CreateBotVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateBotVersionCommandOutput>;
-  public createBotVersion(
+  createBotVersion(
     args: CreateBotVersionCommandInput,
     cb: (err: any, data?: CreateBotVersionCommandOutput) => void
   ): void;
-  public createBotVersion(
+  createBotVersion(
     args: CreateBotVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateBotVersionCommandOutput) => void
   ): void;
-  public createBotVersion(
-    args: CreateBotVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBotVersionCommandOutput) => void),
-    cb?: (err: any, data?: CreateBotVersionCommandOutput) => void
-  ): Promise<CreateBotVersionCommandOutput> | void {
-    const command = new CreateBotVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a zip archive containing the contents of a bot or a bot
-   *          locale. The archive contains a directory structure that contains JSON
-   *          files that define the bot.</p>
-   *          <p>You can create an archive that contains the complete definition of a
-   *          bot, or you can specify that the archive contain only the definition of
-   *          a single bot locale.</p>
-   *          <p>For more information about exporting bots, and about the structure
-   *          of the export archive, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html"> Importing and
-   *             exporting bots </a>
-   *          </p>
+   * @see {@link CreateExportCommand}
    */
-  public createExport(
+  createExport(
     args: CreateExportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateExportCommandOutput>;
-  public createExport(args: CreateExportCommandInput, cb: (err: any, data?: CreateExportCommandOutput) => void): void;
-  public createExport(
+  createExport(
     args: CreateExportCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateExportCommandOutput) => void
   ): void;
-  public createExport(
+  createExport(
     args: CreateExportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateExportCommandOutput) => void),
-    cb?: (err: any, data?: CreateExportCommandOutput) => void
-  ): Promise<CreateExportCommandOutput> | void {
-    const command = new CreateExportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateExportCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates an intent.</p>
-   *          <p>To define the interaction between the user and your bot, you define
-   *          one or more intents. For example, for a pizza ordering bot you would
-   *          create an <code>OrderPizza</code> intent.</p>
-   *          <p>When you create an intent, you must provide a name. You can
-   *          optionally provide the following:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Sample utterances. For example, "I want to order a pizza" and
-   *                "Can I order a pizza." You can't provide utterances for built-in
-   *                intents.</p>
-   *             </li>
-   *             <li>
-   *                <p>Information to be gathered. You specify slots for the
-   *                information that you bot requests from the user. You can specify
-   *                standard slot types, such as date and time, or custom slot types
-   *                for your application.</p>
-   *             </li>
-   *             <li>
-   *                <p>How the intent is fulfilled. You can provide a Lambda function
-   *                or configure the intent to return the intent information to your
-   *                client application. If you use a Lambda function, Amazon Lex invokes
-   *                the function when all of the intent information is
-   *                available.</p>
-   *             </li>
-   *             <li>
-   *                <p>A confirmation prompt to send to the user to confirm an
-   *                intent. For example, "Shall I order your pizza?"</p>
-   *             </li>
-   *             <li>
-   *                <p>A conclusion statement to send to the user after the intent is
-   *                fulfilled. For example, "I ordered your pizza."</p>
-   *             </li>
-   *             <li>
-   *                <p>A follow-up prompt that asks the user for additional activity.
-   *                For example, "Do you want a drink with your pizza?"</p>
-   *             </li>
-   *          </ul>
+   * @see {@link CreateIntentCommand}
    */
-  public createIntent(
+  createIntent(
     args: CreateIntentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateIntentCommandOutput>;
-  public createIntent(args: CreateIntentCommandInput, cb: (err: any, data?: CreateIntentCommandOutput) => void): void;
-  public createIntent(
+  createIntent(
     args: CreateIntentCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateIntentCommandOutput) => void
   ): void;
-  public createIntent(
+  createIntent(
     args: CreateIntentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIntentCommandOutput) => void),
-    cb?: (err: any, data?: CreateIntentCommandOutput) => void
-  ): Promise<CreateIntentCommandOutput> | void {
-    const command = new CreateIntentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateIntentCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a new resource policy with the specified policy
-   *          statements.</p>
+   * @see {@link CreateResourcePolicyCommand}
    */
-  public createResourcePolicy(
+  createResourcePolicy(
     args: CreateResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateResourcePolicyCommandOutput>;
-  public createResourcePolicy(
+  createResourcePolicy(
     args: CreateResourcePolicyCommandInput,
     cb: (err: any, data?: CreateResourcePolicyCommandOutput) => void
   ): void;
-  public createResourcePolicy(
+  createResourcePolicy(
     args: CreateResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateResourcePolicyCommandOutput) => void
   ): void;
-  public createResourcePolicy(
-    args: CreateResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: CreateResourcePolicyCommandOutput) => void
-  ): Promise<CreateResourcePolicyCommandOutput> | void {
-    const command = new CreateResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds a new resource policy statement to a bot or bot alias. If a
-   *          resource policy exists, the statement is added to the current resource
-   *          policy. If a policy doesn't exist, a new policy is created.</p>
-   *          <p>You can't create a resource policy statement that allows
-   *          cross-account access.</p>
+   * @see {@link CreateResourcePolicyStatementCommand}
    */
-  public createResourcePolicyStatement(
+  createResourcePolicyStatement(
     args: CreateResourcePolicyStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateResourcePolicyStatementCommandOutput>;
-  public createResourcePolicyStatement(
+  createResourcePolicyStatement(
     args: CreateResourcePolicyStatementCommandInput,
     cb: (err: any, data?: CreateResourcePolicyStatementCommandOutput) => void
   ): void;
-  public createResourcePolicyStatement(
+  createResourcePolicyStatement(
     args: CreateResourcePolicyStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateResourcePolicyStatementCommandOutput) => void
   ): void;
-  public createResourcePolicyStatement(
-    args: CreateResourcePolicyStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResourcePolicyStatementCommandOutput) => void),
-    cb?: (err: any, data?: CreateResourcePolicyStatementCommandOutput) => void
-  ): Promise<CreateResourcePolicyStatementCommandOutput> | void {
-    const command = new CreateResourcePolicyStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a slot in an intent. A slot is a variable needed to fulfill
-   *          an intent. For example, an <code>OrderPizza</code> intent might need
-   *          slots for size, crust, and number of pizzas. For each slot, you define
-   *          one or more utterances that Amazon Lex uses to elicit a response from the
-   *          user. </p>
+   * @see {@link CreateSlotCommand}
    */
-  public createSlot(args: CreateSlotCommandInput, options?: __HttpHandlerOptions): Promise<CreateSlotCommandOutput>;
-  public createSlot(args: CreateSlotCommandInput, cb: (err: any, data?: CreateSlotCommandOutput) => void): void;
-  public createSlot(
+  createSlot(
     args: CreateSlotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<CreateSlotCommandOutput>;
+  createSlot(
+    args: CreateSlotCommandInput,
     cb: (err: any, data?: CreateSlotCommandOutput) => void
   ): void;
-  public createSlot(
+  createSlot(
     args: CreateSlotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSlotCommandOutput) => void),
-    cb?: (err: any, data?: CreateSlotCommandOutput) => void
-  ): Promise<CreateSlotCommandOutput> | void {
-    const command = new CreateSlotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateSlotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a custom slot type</p>
-   *          <p> To create a custom slot type, specify a name for the slot type and
-   *          a set of enumeration values, the values that a slot of this type can
-   *          assume. </p>
+   * @see {@link CreateSlotTypeCommand}
    */
-  public createSlotType(
+  createSlotType(
     args: CreateSlotTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateSlotTypeCommandOutput>;
-  public createSlotType(
+  createSlotType(
     args: CreateSlotTypeCommandInput,
     cb: (err: any, data?: CreateSlotTypeCommandOutput) => void
   ): void;
-  public createSlotType(
+  createSlotType(
     args: CreateSlotTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateSlotTypeCommandOutput) => void
   ): void;
-  public createSlotType(
-    args: CreateSlotTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSlotTypeCommandOutput) => void),
-    cb?: (err: any, data?: CreateSlotTypeCommandOutput) => void
-  ): Promise<CreateSlotTypeCommandOutput> | void {
-    const command = new CreateSlotTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a pre-signed S3 write URL that you use to upload the zip
-   *          archive when importing a bot or a bot locale. </p>
+   * @see {@link CreateTestSetDiscrepancyReportCommand}
    */
-  public createUploadUrl(
+  createTestSetDiscrepancyReport(
+    args: CreateTestSetDiscrepancyReportCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<CreateTestSetDiscrepancyReportCommandOutput>;
+  createTestSetDiscrepancyReport(
+    args: CreateTestSetDiscrepancyReportCommandInput,
+    cb: (err: any, data?: CreateTestSetDiscrepancyReportCommandOutput) => void
+  ): void;
+  createTestSetDiscrepancyReport(
+    args: CreateTestSetDiscrepancyReportCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: CreateTestSetDiscrepancyReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUploadUrlCommand}
+   */
+  createUploadUrl(): Promise<CreateUploadUrlCommandOutput>;
+  createUploadUrl(
     args: CreateUploadUrlCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<CreateUploadUrlCommandOutput>;
-  public createUploadUrl(
+  createUploadUrl(
     args: CreateUploadUrlCommandInput,
     cb: (err: any, data?: CreateUploadUrlCommandOutput) => void
   ): void;
-  public createUploadUrl(
+  createUploadUrl(
     args: CreateUploadUrlCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: CreateUploadUrlCommandOutput) => void
   ): void;
-  public createUploadUrl(
-    args: CreateUploadUrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUploadUrlCommandOutput) => void),
-    cb?: (err: any, data?: CreateUploadUrlCommandOutput) => void
-  ): Promise<CreateUploadUrlCommandOutput> | void {
-    const command = new CreateUploadUrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes all versions of a bot, including the <code>Draft</code>
-   *          version. To delete a specific version, use the
-   *             <code>DeleteBotVersion</code> operation.</p>
-   *          <p>When you delete a bot, all of the resources contained in the bot are
-   *          also deleted. Deleting a bot removes all locales, intents, slot, and
-   *          slot types defined for the bot.</p>
-   *          <p>If a bot has an alias, the <code>DeleteBot</code> operation returns
-   *          a <code>ResourceInUseException</code> exception. If you want to delete
-   *          the bot and the alias, set the <code>skipResourceInUseCheck</code>
-   *          parameter to <code>true</code>.</p>
+   * @see {@link DeleteBotCommand}
    */
-  public deleteBot(args: DeleteBotCommandInput, options?: __HttpHandlerOptions): Promise<DeleteBotCommandOutput>;
-  public deleteBot(args: DeleteBotCommandInput, cb: (err: any, data?: DeleteBotCommandOutput) => void): void;
-  public deleteBot(
+  deleteBot(
     args: DeleteBotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteBotCommandOutput>;
+  deleteBot(
+    args: DeleteBotCommandInput,
     cb: (err: any, data?: DeleteBotCommandOutput) => void
   ): void;
-  public deleteBot(
+  deleteBot(
     args: DeleteBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBotCommandOutput) => void
-  ): Promise<DeleteBotCommandOutput> | void {
-    const command = new DeleteBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteBotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified bot alias.</p>
+   * @see {@link DeleteBotAliasCommand}
    */
-  public deleteBotAlias(
+  deleteBotAlias(
     args: DeleteBotAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteBotAliasCommandOutput>;
-  public deleteBotAlias(
+  deleteBotAlias(
     args: DeleteBotAliasCommandInput,
     cb: (err: any, data?: DeleteBotAliasCommandOutput) => void
   ): void;
-  public deleteBotAlias(
+  deleteBotAlias(
     args: DeleteBotAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteBotAliasCommandOutput) => void
   ): void;
-  public deleteBotAlias(
-    args: DeleteBotAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBotAliasCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBotAliasCommandOutput) => void
-  ): Promise<DeleteBotAliasCommandOutput> | void {
-    const command = new DeleteBotAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a locale from a bot.</p>
-   *          <p>When you delete a locale, all intents, slots, and slot types defined
-   *          for the locale are also deleted.</p>
+   * @see {@link DeleteBotAnalyzerRecommendationCommand}
    */
-  public deleteBotLocale(
+  deleteBotAnalyzerRecommendation(
+    args: DeleteBotAnalyzerRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteBotAnalyzerRecommendationCommandOutput>;
+  deleteBotAnalyzerRecommendation(
+    args: DeleteBotAnalyzerRecommendationCommandInput,
+    cb: (err: any, data?: DeleteBotAnalyzerRecommendationCommandOutput) => void
+  ): void;
+  deleteBotAnalyzerRecommendation(
+    args: DeleteBotAnalyzerRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteBotAnalyzerRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBotLocaleCommand}
+   */
+  deleteBotLocale(
     args: DeleteBotLocaleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteBotLocaleCommandOutput>;
-  public deleteBotLocale(
+  deleteBotLocale(
     args: DeleteBotLocaleCommandInput,
     cb: (err: any, data?: DeleteBotLocaleCommandOutput) => void
   ): void;
-  public deleteBotLocale(
+  deleteBotLocale(
     args: DeleteBotLocaleCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteBotLocaleCommandOutput) => void
   ): void;
-  public deleteBotLocale(
-    args: DeleteBotLocaleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBotLocaleCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBotLocaleCommandOutput) => void
-  ): Promise<DeleteBotLocaleCommandOutput> | void {
-    const command = new DeleteBotLocaleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a specific version of a bot. To delete all version of a bot,
-   *          use the <a>DeleteBot</a> operation.</p>
+   * @see {@link DeleteBotReplicaCommand}
    */
-  public deleteBotVersion(
+  deleteBotReplica(
+    args: DeleteBotReplicaCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteBotReplicaCommandOutput>;
+  deleteBotReplica(
+    args: DeleteBotReplicaCommandInput,
+    cb: (err: any, data?: DeleteBotReplicaCommandOutput) => void
+  ): void;
+  deleteBotReplica(
+    args: DeleteBotReplicaCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteBotReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBotVersionCommand}
+   */
+  deleteBotVersion(
     args: DeleteBotVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteBotVersionCommandOutput>;
-  public deleteBotVersion(
+  deleteBotVersion(
     args: DeleteBotVersionCommandInput,
     cb: (err: any, data?: DeleteBotVersionCommandOutput) => void
   ): void;
-  public deleteBotVersion(
+  deleteBotVersion(
     args: DeleteBotVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteBotVersionCommandOutput) => void
   ): void;
-  public deleteBotVersion(
-    args: DeleteBotVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBotVersionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBotVersionCommandOutput) => void
-  ): Promise<DeleteBotVersionCommandOutput> | void {
-    const command = new DeleteBotVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a previous export and the associated files stored in an S3
-   *          bucket.</p>
+   * @see {@link DeleteCustomVocabularyCommand}
    */
-  public deleteExport(
+  deleteCustomVocabulary(
+    args: DeleteCustomVocabularyCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteCustomVocabularyCommandOutput>;
+  deleteCustomVocabulary(
+    args: DeleteCustomVocabularyCommandInput,
+    cb: (err: any, data?: DeleteCustomVocabularyCommandOutput) => void
+  ): void;
+  deleteCustomVocabulary(
+    args: DeleteCustomVocabularyCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteCustomVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteExportCommand}
+   */
+  deleteExport(
     args: DeleteExportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteExportCommandOutput>;
-  public deleteExport(args: DeleteExportCommandInput, cb: (err: any, data?: DeleteExportCommandOutput) => void): void;
-  public deleteExport(
+  deleteExport(
     args: DeleteExportCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteExportCommandOutput) => void
   ): void;
-  public deleteExport(
+  deleteExport(
     args: DeleteExportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteExportCommandOutput) => void),
-    cb?: (err: any, data?: DeleteExportCommandOutput) => void
-  ): Promise<DeleteExportCommandOutput> | void {
-    const command = new DeleteExportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteExportCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes a previous import and the associated file stored in an S3
-   *          bucket.</p>
+   * @see {@link DeleteImportCommand}
    */
-  public deleteImport(
+  deleteImport(
     args: DeleteImportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteImportCommandOutput>;
-  public deleteImport(args: DeleteImportCommandInput, cb: (err: any, data?: DeleteImportCommandOutput) => void): void;
-  public deleteImport(
+  deleteImport(
     args: DeleteImportCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteImportCommandOutput) => void
   ): void;
-  public deleteImport(
+  deleteImport(
     args: DeleteImportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteImportCommandOutput) => void),
-    cb?: (err: any, data?: DeleteImportCommandOutput) => void
-  ): Promise<DeleteImportCommandOutput> | void {
-    const command = new DeleteImportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteImportCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified intent.</p>
-   *          <p>Deleting an intent also deletes the slots associated with the
-   *          intent.</p>
+   * @see {@link DeleteIntentCommand}
    */
-  public deleteIntent(
+  deleteIntent(
     args: DeleteIntentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteIntentCommandOutput>;
-  public deleteIntent(args: DeleteIntentCommandInput, cb: (err: any, data?: DeleteIntentCommandOutput) => void): void;
-  public deleteIntent(
+  deleteIntent(
     args: DeleteIntentCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteIntentCommandOutput) => void
   ): void;
-  public deleteIntent(
+  deleteIntent(
     args: DeleteIntentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIntentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIntentCommandOutput) => void
-  ): Promise<DeleteIntentCommandOutput> | void {
-    const command = new DeleteIntentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteIntentCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes an existing policy from a bot or bot alias. If the resource
-   *          doesn't have a policy attached, Amazon Lex returns an exception.</p>
+   * @see {@link DeleteResourcePolicyCommand}
    */
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteResourcePolicyCommandOutput>;
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
     cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
   ): void;
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
   ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): Promise<DeleteResourcePolicyCommandOutput> | void {
-    const command = new DeleteResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a policy statement from a resource policy. If you delete the
-   *          last statement from a policy, the policy is deleted. If you specify a
-   *          statement ID that doesn't exist in the policy, or if the bot or bot
-   *          alias doesn't have a policy attached, Amazon Lex returns an
-   *          exception.</p>
+   * @see {@link DeleteResourcePolicyStatementCommand}
    */
-  public deleteResourcePolicyStatement(
+  deleteResourcePolicyStatement(
     args: DeleteResourcePolicyStatementCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteResourcePolicyStatementCommandOutput>;
-  public deleteResourcePolicyStatement(
+  deleteResourcePolicyStatement(
     args: DeleteResourcePolicyStatementCommandInput,
     cb: (err: any, data?: DeleteResourcePolicyStatementCommandOutput) => void
   ): void;
-  public deleteResourcePolicyStatement(
+  deleteResourcePolicyStatement(
     args: DeleteResourcePolicyStatementCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteResourcePolicyStatementCommandOutput) => void
   ): void;
-  public deleteResourcePolicyStatement(
-    args: DeleteResourcePolicyStatementCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyStatementCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyStatementCommandOutput) => void
-  ): Promise<DeleteResourcePolicyStatementCommandOutput> | void {
-    const command = new DeleteResourcePolicyStatementCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified slot from an intent.</p>
+   * @see {@link DeleteSlotCommand}
    */
-  public deleteSlot(args: DeleteSlotCommandInput, options?: __HttpHandlerOptions): Promise<DeleteSlotCommandOutput>;
-  public deleteSlot(args: DeleteSlotCommandInput, cb: (err: any, data?: DeleteSlotCommandOutput) => void): void;
-  public deleteSlot(
+  deleteSlot(
     args: DeleteSlotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteSlotCommandOutput>;
+  deleteSlot(
+    args: DeleteSlotCommandInput,
     cb: (err: any, data?: DeleteSlotCommandOutput) => void
   ): void;
-  public deleteSlot(
+  deleteSlot(
     args: DeleteSlotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSlotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSlotCommandOutput) => void
-  ): Promise<DeleteSlotCommandOutput> | void {
-    const command = new DeleteSlotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteSlotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a slot type from a bot locale.</p>
-   *          <p>If a slot is using the slot type, Amazon Lex throws a
-   *             <code>ResourceInUseException</code> exception. To avoid the
-   *          exception, set the <code>skipResourceInUseCheck</code> parameter to
-   *             <code>true</code>.</p>
+   * @see {@link DeleteSlotTypeCommand}
    */
-  public deleteSlotType(
+  deleteSlotType(
     args: DeleteSlotTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteSlotTypeCommandOutput>;
-  public deleteSlotType(
+  deleteSlotType(
     args: DeleteSlotTypeCommandInput,
     cb: (err: any, data?: DeleteSlotTypeCommandOutput) => void
   ): void;
-  public deleteSlotType(
+  deleteSlotType(
     args: DeleteSlotTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteSlotTypeCommandOutput) => void
   ): void;
-  public deleteSlotType(
-    args: DeleteSlotTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSlotTypeCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSlotTypeCommandOutput) => void
-  ): Promise<DeleteSlotTypeCommandOutput> | void {
-    const command = new DeleteSlotTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes stored utterances.</p>
-   *          <p>Amazon Lex stores the utterances that users send to your bot. Utterances
-   *          are stored for 15 days for use with the  operation, and then stored
-   *          indefinitely for use in improving the ability of your bot to respond to
-   *          user input..</p>
-   *          <p>Use the <code>DeleteUtterances</code> operation to manually delete
-   *          utterances for a specific session. When you use the
-   *             <code>DeleteUtterances</code> operation, utterances stored for
-   *          improving your bot's ability to respond to user input are deleted
-   *          immediately. Utterances stored for use with the
-   *             <code>ListAggregatedUtterances</code> operation are deleted after 15
-   *          days.</p>
+   * @see {@link DeleteTestSetCommand}
    */
-  public deleteUtterances(
+  deleteTestSet(
+    args: DeleteTestSetCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DeleteTestSetCommandOutput>;
+  deleteTestSet(
+    args: DeleteTestSetCommandInput,
+    cb: (err: any, data?: DeleteTestSetCommandOutput) => void
+  ): void;
+  deleteTestSet(
+    args: DeleteTestSetCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DeleteTestSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUtterancesCommand}
+   */
+  deleteUtterances(
     args: DeleteUtterancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DeleteUtterancesCommandOutput>;
-  public deleteUtterances(
+  deleteUtterances(
     args: DeleteUtterancesCommandInput,
     cb: (err: any, data?: DeleteUtterancesCommandOutput) => void
   ): void;
-  public deleteUtterances(
+  deleteUtterances(
     args: DeleteUtterancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DeleteUtterancesCommandOutput) => void
   ): void;
-  public deleteUtterances(
-    args: DeleteUtterancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUtterancesCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUtterancesCommandOutput) => void
-  ): Promise<DeleteUtterancesCommandOutput> | void {
-    const command = new DeleteUtterancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides metadata information about a bot. </p>
+   * @see {@link DescribeBotCommand}
    */
-  public describeBot(args: DescribeBotCommandInput, options?: __HttpHandlerOptions): Promise<DescribeBotCommandOutput>;
-  public describeBot(args: DescribeBotCommandInput, cb: (err: any, data?: DescribeBotCommandOutput) => void): void;
-  public describeBot(
+  describeBot(
     args: DescribeBotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeBotCommandOutput>;
+  describeBot(
+    args: DescribeBotCommandInput,
     cb: (err: any, data?: DescribeBotCommandOutput) => void
   ): void;
-  public describeBot(
+  describeBot(
     args: DescribeBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBotCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBotCommandOutput) => void
-  ): Promise<DescribeBotCommandOutput> | void {
-    const command = new DescribeBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeBotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Get information about a specific bot alias.</p>
+   * @see {@link DescribeBotAliasCommand}
    */
-  public describeBotAlias(
+  describeBotAlias(
     args: DescribeBotAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeBotAliasCommandOutput>;
-  public describeBotAlias(
+  describeBotAlias(
     args: DescribeBotAliasCommandInput,
     cb: (err: any, data?: DescribeBotAliasCommandOutput) => void
   ): void;
-  public describeBotAlias(
+  describeBotAlias(
     args: DescribeBotAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeBotAliasCommandOutput) => void
   ): void;
-  public describeBotAlias(
-    args: DescribeBotAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBotAliasCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBotAliasCommandOutput) => void
-  ): Promise<DescribeBotAliasCommandOutput> | void {
-    const command = new DescribeBotAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the settings that a bot has for a specific locale. </p>
+   * @see {@link DescribeBotAnalyzerRecommendationCommand}
    */
-  public describeBotLocale(
+  describeBotAnalyzerRecommendation(
+    args: DescribeBotAnalyzerRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeBotAnalyzerRecommendationCommandOutput>;
+  describeBotAnalyzerRecommendation(
+    args: DescribeBotAnalyzerRecommendationCommandInput,
+    cb: (err: any, data?: DescribeBotAnalyzerRecommendationCommandOutput) => void
+  ): void;
+  describeBotAnalyzerRecommendation(
+    args: DescribeBotAnalyzerRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeBotAnalyzerRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBotLocaleCommand}
+   */
+  describeBotLocale(
     args: DescribeBotLocaleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeBotLocaleCommandOutput>;
-  public describeBotLocale(
+  describeBotLocale(
     args: DescribeBotLocaleCommandInput,
     cb: (err: any, data?: DescribeBotLocaleCommandOutput) => void
   ): void;
-  public describeBotLocale(
+  describeBotLocale(
     args: DescribeBotLocaleCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeBotLocaleCommandOutput) => void
   ): void;
-  public describeBotLocale(
-    args: DescribeBotLocaleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBotLocaleCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBotLocaleCommandOutput) => void
-  ): Promise<DescribeBotLocaleCommandOutput> | void {
-    const command = new DescribeBotLocaleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides metadata about a version of a bot.</p>
+   * @see {@link DescribeBotRecommendationCommand}
    */
-  public describeBotVersion(
+  describeBotRecommendation(
+    args: DescribeBotRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeBotRecommendationCommandOutput>;
+  describeBotRecommendation(
+    args: DescribeBotRecommendationCommandInput,
+    cb: (err: any, data?: DescribeBotRecommendationCommandOutput) => void
+  ): void;
+  describeBotRecommendation(
+    args: DescribeBotRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeBotRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBotReplicaCommand}
+   */
+  describeBotReplica(
+    args: DescribeBotReplicaCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeBotReplicaCommandOutput>;
+  describeBotReplica(
+    args: DescribeBotReplicaCommandInput,
+    cb: (err: any, data?: DescribeBotReplicaCommandOutput) => void
+  ): void;
+  describeBotReplica(
+    args: DescribeBotReplicaCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeBotReplicaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBotResourceGenerationCommand}
+   */
+  describeBotResourceGeneration(
+    args: DescribeBotResourceGenerationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeBotResourceGenerationCommandOutput>;
+  describeBotResourceGeneration(
+    args: DescribeBotResourceGenerationCommandInput,
+    cb: (err: any, data?: DescribeBotResourceGenerationCommandOutput) => void
+  ): void;
+  describeBotResourceGeneration(
+    args: DescribeBotResourceGenerationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeBotResourceGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBotVersionCommand}
+   */
+  describeBotVersion(
     args: DescribeBotVersionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeBotVersionCommandOutput>;
-  public describeBotVersion(
+  describeBotVersion(
     args: DescribeBotVersionCommandInput,
     cb: (err: any, data?: DescribeBotVersionCommandOutput) => void
   ): void;
-  public describeBotVersion(
+  describeBotVersion(
     args: DescribeBotVersionCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeBotVersionCommandOutput) => void
   ): void;
-  public describeBotVersion(
-    args: DescribeBotVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBotVersionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBotVersionCommandOutput) => void
-  ): Promise<DescribeBotVersionCommandOutput> | void {
-    const command = new DescribeBotVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a specific export.</p>
+   * @see {@link DescribeCustomVocabularyMetadataCommand}
    */
-  public describeExport(
+  describeCustomVocabularyMetadata(
+    args: DescribeCustomVocabularyMetadataCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeCustomVocabularyMetadataCommandOutput>;
+  describeCustomVocabularyMetadata(
+    args: DescribeCustomVocabularyMetadataCommandInput,
+    cb: (err: any, data?: DescribeCustomVocabularyMetadataCommandOutput) => void
+  ): void;
+  describeCustomVocabularyMetadata(
+    args: DescribeCustomVocabularyMetadataCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeCustomVocabularyMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeExportCommand}
+   */
+  describeExport(
     args: DescribeExportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeExportCommandOutput>;
-  public describeExport(
+  describeExport(
     args: DescribeExportCommandInput,
     cb: (err: any, data?: DescribeExportCommandOutput) => void
   ): void;
-  public describeExport(
+  describeExport(
     args: DescribeExportCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeExportCommandOutput) => void
   ): void;
-  public describeExport(
-    args: DescribeExportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeExportCommandOutput) => void),
-    cb?: (err: any, data?: DescribeExportCommandOutput) => void
-  ): Promise<DescribeExportCommandOutput> | void {
-    const command = new DescribeExportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a specific import.</p>
+   * @see {@link DescribeImportCommand}
    */
-  public describeImport(
+  describeImport(
     args: DescribeImportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeImportCommandOutput>;
-  public describeImport(
+  describeImport(
     args: DescribeImportCommandInput,
     cb: (err: any, data?: DescribeImportCommandOutput) => void
   ): void;
-  public describeImport(
+  describeImport(
     args: DescribeImportCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeImportCommandOutput) => void
   ): void;
-  public describeImport(
-    args: DescribeImportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeImportCommandOutput) => void),
-    cb?: (err: any, data?: DescribeImportCommandOutput) => void
-  ): Promise<DescribeImportCommandOutput> | void {
-    const command = new DescribeImportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns metadata about an intent.</p>
+   * @see {@link DescribeIntentCommand}
    */
-  public describeIntent(
+  describeIntent(
     args: DescribeIntentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeIntentCommandOutput>;
-  public describeIntent(
+  describeIntent(
     args: DescribeIntentCommandInput,
     cb: (err: any, data?: DescribeIntentCommandOutput) => void
   ): void;
-  public describeIntent(
+  describeIntent(
     args: DescribeIntentCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeIntentCommandOutput) => void
   ): void;
-  public describeIntent(
-    args: DescribeIntentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeIntentCommandOutput) => void),
-    cb?: (err: any, data?: DescribeIntentCommandOutput) => void
-  ): Promise<DescribeIntentCommandOutput> | void {
-    const command = new DescribeIntentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the resource policy and policy revision for a bot or bot
-   *          alias.</p>
+   * @see {@link DescribeResourcePolicyCommand}
    */
-  public describeResourcePolicy(
+  describeResourcePolicy(
     args: DescribeResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeResourcePolicyCommandOutput>;
-  public describeResourcePolicy(
+  describeResourcePolicy(
     args: DescribeResourcePolicyCommandInput,
     cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
   ): void;
-  public describeResourcePolicy(
+  describeResourcePolicy(
     args: DescribeResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
   ): void;
-  public describeResourcePolicy(
-    args: DescribeResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
-  ): Promise<DescribeResourcePolicyCommandOutput> | void {
-    const command = new DescribeResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets metadata information about a slot.</p>
+   * @see {@link DescribeSlotCommand}
    */
-  public describeSlot(
+  describeSlot(
     args: DescribeSlotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeSlotCommandOutput>;
-  public describeSlot(args: DescribeSlotCommandInput, cb: (err: any, data?: DescribeSlotCommandOutput) => void): void;
-  public describeSlot(
+  describeSlot(
     args: DescribeSlotCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeSlotCommandOutput) => void
   ): void;
-  public describeSlot(
+  describeSlot(
     args: DescribeSlotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSlotCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSlotCommandOutput) => void
-  ): Promise<DescribeSlotCommandOutput> | void {
-    const command = new DescribeSlotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeSlotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets metadata information about a slot type.</p>
+   * @see {@link DescribeSlotTypeCommand}
    */
-  public describeSlotType(
+  describeSlotType(
     args: DescribeSlotTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<DescribeSlotTypeCommandOutput>;
-  public describeSlotType(
+  describeSlotType(
     args: DescribeSlotTypeCommandInput,
     cb: (err: any, data?: DescribeSlotTypeCommandOutput) => void
   ): void;
-  public describeSlotType(
+  describeSlotType(
     args: DescribeSlotTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: DescribeSlotTypeCommandOutput) => void
   ): void;
-  public describeSlotType(
-    args: DescribeSlotTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSlotTypeCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSlotTypeCommandOutput) => void
-  ): Promise<DescribeSlotTypeCommandOutput> | void {
-    const command = new DescribeSlotTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides a list of utterances that users have sent to the
-   *          bot.</p>
-   *          <p>Utterances are aggregated by the text of the utterance. For example,
-   *          all instances where customers used the phrase "I want to order pizza"
-   *          are aggregated into the same line in the response.</p>
-   *          <p>You can see both detected utterances and missed utterances. A
-   *          detected utterance is where the bot properly recognized the utterance
-   *          and activated the associated intent. A missed utterance was not
-   *          recognized by the bot and didn't activate an intent.</p>
-   *          <p>Utterances can be aggregated for a bot alias or for a bot version,
-   *          but not both at the same time.</p>
-   *          <p>Utterances statistics are not generated under the following
-   *          conditions:</p>
-   *          <ul>
-   *             <li>
-   *                <p>The <code>childDirected</code> field was set to true when the
-   *                bot was created.</p>
-   *             </li>
-   *             <li>
-   *                <p>You are using slot obfuscation with one or more slots.</p>
-   *             </li>
-   *             <li>
-   *                <p>You opted out of participating in improving Amazon Lex.</p>
-   *             </li>
-   *          </ul>
+   * @see {@link DescribeTestExecutionCommand}
    */
-  public listAggregatedUtterances(
+  describeTestExecution(
+    args: DescribeTestExecutionCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeTestExecutionCommandOutput>;
+  describeTestExecution(
+    args: DescribeTestExecutionCommandInput,
+    cb: (err: any, data?: DescribeTestExecutionCommandOutput) => void
+  ): void;
+  describeTestExecution(
+    args: DescribeTestExecutionCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeTestExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTestSetCommand}
+   */
+  describeTestSet(
+    args: DescribeTestSetCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeTestSetCommandOutput>;
+  describeTestSet(
+    args: DescribeTestSetCommandInput,
+    cb: (err: any, data?: DescribeTestSetCommandOutput) => void
+  ): void;
+  describeTestSet(
+    args: DescribeTestSetCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeTestSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTestSetDiscrepancyReportCommand}
+   */
+  describeTestSetDiscrepancyReport(
+    args: DescribeTestSetDiscrepancyReportCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeTestSetDiscrepancyReportCommandOutput>;
+  describeTestSetDiscrepancyReport(
+    args: DescribeTestSetDiscrepancyReportCommandInput,
+    cb: (err: any, data?: DescribeTestSetDiscrepancyReportCommandOutput) => void
+  ): void;
+  describeTestSetDiscrepancyReport(
+    args: DescribeTestSetDiscrepancyReportCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeTestSetDiscrepancyReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTestSetGenerationCommand}
+   */
+  describeTestSetGeneration(
+    args: DescribeTestSetGenerationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<DescribeTestSetGenerationCommandOutput>;
+  describeTestSetGeneration(
+    args: DescribeTestSetGenerationCommandInput,
+    cb: (err: any, data?: DescribeTestSetGenerationCommandOutput) => void
+  ): void;
+  describeTestSetGeneration(
+    args: DescribeTestSetGenerationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: DescribeTestSetGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateBotElementCommand}
+   */
+  generateBotElement(
+    args: GenerateBotElementCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<GenerateBotElementCommandOutput>;
+  generateBotElement(
+    args: GenerateBotElementCommandInput,
+    cb: (err: any, data?: GenerateBotElementCommandOutput) => void
+  ): void;
+  generateBotElement(
+    args: GenerateBotElementCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: GenerateBotElementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTestExecutionArtifactsUrlCommand}
+   */
+  getTestExecutionArtifactsUrl(
+    args: GetTestExecutionArtifactsUrlCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<GetTestExecutionArtifactsUrlCommandOutput>;
+  getTestExecutionArtifactsUrl(
+    args: GetTestExecutionArtifactsUrlCommandInput,
+    cb: (err: any, data?: GetTestExecutionArtifactsUrlCommandOutput) => void
+  ): void;
+  getTestExecutionArtifactsUrl(
+    args: GetTestExecutionArtifactsUrlCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: GetTestExecutionArtifactsUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAggregatedUtterancesCommand}
+   */
+  listAggregatedUtterances(
     args: ListAggregatedUtterancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListAggregatedUtterancesCommandOutput>;
-  public listAggregatedUtterances(
+  listAggregatedUtterances(
     args: ListAggregatedUtterancesCommandInput,
     cb: (err: any, data?: ListAggregatedUtterancesCommandOutput) => void
   ): void;
-  public listAggregatedUtterances(
+  listAggregatedUtterances(
     args: ListAggregatedUtterancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListAggregatedUtterancesCommandOutput) => void
   ): void;
-  public listAggregatedUtterances(
-    args: ListAggregatedUtterancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAggregatedUtterancesCommandOutput) => void),
-    cb?: (err: any, data?: ListAggregatedUtterancesCommandOutput) => void
-  ): Promise<ListAggregatedUtterancesCommandOutput> | void {
-    const command = new ListAggregatedUtterancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of aliases for the specified bot.</p>
+   * @see {@link ListBotAliasesCommand}
    */
-  public listBotAliases(
+  listBotAliases(
     args: ListBotAliasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListBotAliasesCommandOutput>;
-  public listBotAliases(
+  listBotAliases(
     args: ListBotAliasesCommandInput,
     cb: (err: any, data?: ListBotAliasesCommandOutput) => void
   ): void;
-  public listBotAliases(
+  listBotAliases(
     args: ListBotAliasesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListBotAliasesCommandOutput) => void
   ): void;
-  public listBotAliases(
-    args: ListBotAliasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBotAliasesCommandOutput) => void),
-    cb?: (err: any, data?: ListBotAliasesCommandOutput) => void
-  ): Promise<ListBotAliasesCommandOutput> | void {
-    const command = new ListBotAliasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of locales for the specified bot.</p>
+   * @see {@link ListBotAliasReplicasCommand}
    */
-  public listBotLocales(
+  listBotAliasReplicas(
+    args: ListBotAliasReplicasCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotAliasReplicasCommandOutput>;
+  listBotAliasReplicas(
+    args: ListBotAliasReplicasCommandInput,
+    cb: (err: any, data?: ListBotAliasReplicasCommandOutput) => void
+  ): void;
+  listBotAliasReplicas(
+    args: ListBotAliasReplicasCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotAliasReplicasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotAnalyzerHistoryCommand}
+   */
+  listBotAnalyzerHistory(
+    args: ListBotAnalyzerHistoryCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotAnalyzerHistoryCommandOutput>;
+  listBotAnalyzerHistory(
+    args: ListBotAnalyzerHistoryCommandInput,
+    cb: (err: any, data?: ListBotAnalyzerHistoryCommandOutput) => void
+  ): void;
+  listBotAnalyzerHistory(
+    args: ListBotAnalyzerHistoryCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotAnalyzerHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotLocalesCommand}
+   */
+  listBotLocales(
     args: ListBotLocalesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListBotLocalesCommandOutput>;
-  public listBotLocales(
+  listBotLocales(
     args: ListBotLocalesCommandInput,
     cb: (err: any, data?: ListBotLocalesCommandOutput) => void
   ): void;
-  public listBotLocales(
+  listBotLocales(
     args: ListBotLocalesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListBotLocalesCommandOutput) => void
   ): void;
-  public listBotLocales(
-    args: ListBotLocalesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBotLocalesCommandOutput) => void),
-    cb?: (err: any, data?: ListBotLocalesCommandOutput) => void
-  ): Promise<ListBotLocalesCommandOutput> | void {
-    const command = new ListBotLocalesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of available bots.</p>
+   * @see {@link ListBotRecommendationsCommand}
    */
-  public listBots(args: ListBotsCommandInput, options?: __HttpHandlerOptions): Promise<ListBotsCommandOutput>;
-  public listBots(args: ListBotsCommandInput, cb: (err: any, data?: ListBotsCommandOutput) => void): void;
-  public listBots(
+  listBotRecommendations(
+    args: ListBotRecommendationsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotRecommendationsCommandOutput>;
+  listBotRecommendations(
+    args: ListBotRecommendationsCommandInput,
+    cb: (err: any, data?: ListBotRecommendationsCommandOutput) => void
+  ): void;
+  listBotRecommendations(
+    args: ListBotRecommendationsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotReplicasCommand}
+   */
+  listBotReplicas(
+    args: ListBotReplicasCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotReplicasCommandOutput>;
+  listBotReplicas(
+    args: ListBotReplicasCommandInput,
+    cb: (err: any, data?: ListBotReplicasCommandOutput) => void
+  ): void;
+  listBotReplicas(
+    args: ListBotReplicasCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotReplicasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotResourceGenerationsCommand}
+   */
+  listBotResourceGenerations(
+    args: ListBotResourceGenerationsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotResourceGenerationsCommandOutput>;
+  listBotResourceGenerations(
+    args: ListBotResourceGenerationsCommandInput,
+    cb: (err: any, data?: ListBotResourceGenerationsCommandOutput) => void
+  ): void;
+  listBotResourceGenerations(
+    args: ListBotResourceGenerationsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotResourceGenerationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotsCommand}
+   */
+  listBots(): Promise<ListBotsCommandOutput>;
+  listBots(
     args: ListBotsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotsCommandOutput>;
+  listBots(
+    args: ListBotsCommandInput,
     cb: (err: any, data?: ListBotsCommandOutput) => void
   ): void;
-  public listBots(
+  listBots(
     args: ListBotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBotsCommandOutput) => void),
-    cb?: (err: any, data?: ListBotsCommandOutput) => void
-  ): Promise<ListBotsCommandOutput> | void {
-    const command = new ListBotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about all of the versions of a bot.</p>
-   *          <p>The <code>ListBotVersions</code> operation returns a summary of each
-   *          version of a bot. For example, if a bot has three numbered versions,
-   *          the <code>ListBotVersions</code> operation returns for summaries, one
-   *          for each numbered version and one for the <code>DRAFT</code>
-   *          version.</p>
-   *          <p>The <code>ListBotVersions</code> operation always returns at least
-   *          one version, the <code>DRAFT</code> version.</p>
+   * @see {@link ListBotVersionReplicasCommand}
    */
-  public listBotVersions(
+  listBotVersionReplicas(
+    args: ListBotVersionReplicasCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListBotVersionReplicasCommandOutput>;
+  listBotVersionReplicas(
+    args: ListBotVersionReplicasCommandInput,
+    cb: (err: any, data?: ListBotVersionReplicasCommandOutput) => void
+  ): void;
+  listBotVersionReplicas(
+    args: ListBotVersionReplicasCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListBotVersionReplicasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBotVersionsCommand}
+   */
+  listBotVersions(
     args: ListBotVersionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListBotVersionsCommandOutput>;
-  public listBotVersions(
+  listBotVersions(
     args: ListBotVersionsCommandInput,
     cb: (err: any, data?: ListBotVersionsCommandOutput) => void
   ): void;
-  public listBotVersions(
+  listBotVersions(
     args: ListBotVersionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListBotVersionsCommandOutput) => void
   ): void;
-  public listBotVersions(
-    args: ListBotVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBotVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListBotVersionsCommandOutput) => void
-  ): Promise<ListBotVersionsCommandOutput> | void {
-    const command = new ListBotVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of built-in intents provided by Amazon Lex that you can use
-   *          in your bot. </p>
-   *          <p>To use a built-in intent as a the base for your own intent, include
-   *          the built-in intent signature in the <code>parentIntentSignature</code>
-   *          parameter when you call the <code>CreateIntent</code> operation. For
-   *          more information, see <a>CreateIntent</a>.</p>
+   * @see {@link ListBuiltInIntentsCommand}
    */
-  public listBuiltInIntents(
+  listBuiltInIntents(
     args: ListBuiltInIntentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListBuiltInIntentsCommandOutput>;
-  public listBuiltInIntents(
+  listBuiltInIntents(
     args: ListBuiltInIntentsCommandInput,
     cb: (err: any, data?: ListBuiltInIntentsCommandOutput) => void
   ): void;
-  public listBuiltInIntents(
+  listBuiltInIntents(
     args: ListBuiltInIntentsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListBuiltInIntentsCommandOutput) => void
   ): void;
-  public listBuiltInIntents(
-    args: ListBuiltInIntentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBuiltInIntentsCommandOutput) => void),
-    cb?: (err: any, data?: ListBuiltInIntentsCommandOutput) => void
-  ): Promise<ListBuiltInIntentsCommandOutput> | void {
-    const command = new ListBuiltInIntentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of built-in slot types that meet the specified
-   *          criteria.</p>
+   * @see {@link ListBuiltInSlotTypesCommand}
    */
-  public listBuiltInSlotTypes(
+  listBuiltInSlotTypes(
     args: ListBuiltInSlotTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListBuiltInSlotTypesCommandOutput>;
-  public listBuiltInSlotTypes(
+  listBuiltInSlotTypes(
     args: ListBuiltInSlotTypesCommandInput,
     cb: (err: any, data?: ListBuiltInSlotTypesCommandOutput) => void
   ): void;
-  public listBuiltInSlotTypes(
+  listBuiltInSlotTypes(
     args: ListBuiltInSlotTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListBuiltInSlotTypesCommandOutput) => void
   ): void;
-  public listBuiltInSlotTypes(
-    args: ListBuiltInSlotTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBuiltInSlotTypesCommandOutput) => void),
-    cb?: (err: any, data?: ListBuiltInSlotTypesCommandOutput) => void
-  ): Promise<ListBuiltInSlotTypesCommandOutput> | void {
-    const command = new ListBuiltInSlotTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the exports for a bot or bot locale. Exports are kept in the
-   *          list for 7 days.</p>
+   * @see {@link ListCustomVocabularyItemsCommand}
    */
-  public listExports(args: ListExportsCommandInput, options?: __HttpHandlerOptions): Promise<ListExportsCommandOutput>;
-  public listExports(args: ListExportsCommandInput, cb: (err: any, data?: ListExportsCommandOutput) => void): void;
-  public listExports(
+  listCustomVocabularyItems(
+    args: ListCustomVocabularyItemsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListCustomVocabularyItemsCommandOutput>;
+  listCustomVocabularyItems(
+    args: ListCustomVocabularyItemsCommandInput,
+    cb: (err: any, data?: ListCustomVocabularyItemsCommandOutput) => void
+  ): void;
+  listCustomVocabularyItems(
+    args: ListCustomVocabularyItemsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListCustomVocabularyItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExportsCommand}
+   */
+  listExports(): Promise<ListExportsCommandOutput>;
+  listExports(
     args: ListExportsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
     cb: (err: any, data?: ListExportsCommandOutput) => void
   ): void;
-  public listExports(
+  listExports(
     args: ListExportsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExportsCommandOutput) => void),
-    cb?: (err: any, data?: ListExportsCommandOutput) => void
-  ): Promise<ListExportsCommandOutput> | void {
-    const command = new ListExportsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the imports for a bot or bot locale. Imports are kept in the
-   *          list for 7 days.</p>
+   * @see {@link ListImportsCommand}
    */
-  public listImports(args: ListImportsCommandInput, options?: __HttpHandlerOptions): Promise<ListImportsCommandOutput>;
-  public listImports(args: ListImportsCommandInput, cb: (err: any, data?: ListImportsCommandOutput) => void): void;
-  public listImports(
+  listImports(): Promise<ListImportsCommandOutput>;
+  listImports(
     args: ListImportsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListImportsCommandOutput>;
+  listImports(
+    args: ListImportsCommandInput,
     cb: (err: any, data?: ListImportsCommandOutput) => void
   ): void;
-  public listImports(
+  listImports(
     args: ListImportsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListImportsCommandOutput) => void),
-    cb?: (err: any, data?: ListImportsCommandOutput) => void
-  ): Promise<ListImportsCommandOutput> | void {
-    const command = new ListImportsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListImportsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Get a list of intents that meet the specified criteria.</p>
+   * @see {@link ListIntentMetricsCommand}
    */
-  public listIntents(args: ListIntentsCommandInput, options?: __HttpHandlerOptions): Promise<ListIntentsCommandOutput>;
-  public listIntents(args: ListIntentsCommandInput, cb: (err: any, data?: ListIntentsCommandOutput) => void): void;
-  public listIntents(
+  listIntentMetrics(
+    args: ListIntentMetricsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListIntentMetricsCommandOutput>;
+  listIntentMetrics(
+    args: ListIntentMetricsCommandInput,
+    cb: (err: any, data?: ListIntentMetricsCommandOutput) => void
+  ): void;
+  listIntentMetrics(
+    args: ListIntentMetricsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListIntentMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntentPathsCommand}
+   */
+  listIntentPaths(
+    args: ListIntentPathsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListIntentPathsCommandOutput>;
+  listIntentPaths(
+    args: ListIntentPathsCommandInput,
+    cb: (err: any, data?: ListIntentPathsCommandOutput) => void
+  ): void;
+  listIntentPaths(
+    args: ListIntentPathsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListIntentPathsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIntentsCommand}
+   */
+  listIntents(
     args: ListIntentsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListIntentsCommandOutput>;
+  listIntents(
+    args: ListIntentsCommandInput,
     cb: (err: any, data?: ListIntentsCommandOutput) => void
   ): void;
-  public listIntents(
+  listIntents(
     args: ListIntentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIntentsCommandOutput) => void),
-    cb?: (err: any, data?: ListIntentsCommandOutput) => void
-  ): Promise<ListIntentsCommandOutput> | void {
-    const command = new ListIntentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListIntentsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a list of slots that match the specified criteria.</p>
+   * @see {@link ListIntentStageMetricsCommand}
    */
-  public listSlots(args: ListSlotsCommandInput, options?: __HttpHandlerOptions): Promise<ListSlotsCommandOutput>;
-  public listSlots(args: ListSlotsCommandInput, cb: (err: any, data?: ListSlotsCommandOutput) => void): void;
-  public listSlots(
+  listIntentStageMetrics(
+    args: ListIntentStageMetricsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListIntentStageMetricsCommandOutput>;
+  listIntentStageMetrics(
+    args: ListIntentStageMetricsCommandInput,
+    cb: (err: any, data?: ListIntentStageMetricsCommandOutput) => void
+  ): void;
+  listIntentStageMetrics(
+    args: ListIntentStageMetricsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListIntentStageMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendedIntentsCommand}
+   */
+  listRecommendedIntents(
+    args: ListRecommendedIntentsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListRecommendedIntentsCommandOutput>;
+  listRecommendedIntents(
+    args: ListRecommendedIntentsCommandInput,
+    cb: (err: any, data?: ListRecommendedIntentsCommandOutput) => void
+  ): void;
+  listRecommendedIntents(
+    args: ListRecommendedIntentsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListRecommendedIntentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionAnalyticsDataCommand}
+   */
+  listSessionAnalyticsData(
+    args: ListSessionAnalyticsDataCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListSessionAnalyticsDataCommandOutput>;
+  listSessionAnalyticsData(
+    args: ListSessionAnalyticsDataCommandInput,
+    cb: (err: any, data?: ListSessionAnalyticsDataCommandOutput) => void
+  ): void;
+  listSessionAnalyticsData(
+    args: ListSessionAnalyticsDataCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListSessionAnalyticsDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionMetricsCommand}
+   */
+  listSessionMetrics(
+    args: ListSessionMetricsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListSessionMetricsCommandOutput>;
+  listSessionMetrics(
+    args: ListSessionMetricsCommandInput,
+    cb: (err: any, data?: ListSessionMetricsCommandOutput) => void
+  ): void;
+  listSessionMetrics(
+    args: ListSessionMetricsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListSessionMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSlotsCommand}
+   */
+  listSlots(
     args: ListSlotsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListSlotsCommandOutput>;
+  listSlots(
+    args: ListSlotsCommandInput,
     cb: (err: any, data?: ListSlotsCommandOutput) => void
   ): void;
-  public listSlots(
+  listSlots(
     args: ListSlotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSlotsCommandOutput) => void),
-    cb?: (err: any, data?: ListSlotsCommandOutput) => void
-  ): Promise<ListSlotsCommandOutput> | void {
-    const command = new ListSlotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListSlotsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a list of slot types that match the specified criteria.</p>
+   * @see {@link ListSlotTypesCommand}
    */
-  public listSlotTypes(
+  listSlotTypes(
     args: ListSlotTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListSlotTypesCommandOutput>;
-  public listSlotTypes(
+  listSlotTypes(
     args: ListSlotTypesCommandInput,
     cb: (err: any, data?: ListSlotTypesCommandOutput) => void
   ): void;
-  public listSlotTypes(
+  listSlotTypes(
     args: ListSlotTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListSlotTypesCommandOutput) => void
   ): void;
-  public listSlotTypes(
-    args: ListSlotTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSlotTypesCommandOutput) => void),
-    cb?: (err: any, data?: ListSlotTypesCommandOutput) => void
-  ): Promise<ListSlotTypesCommandOutput> | void {
-    const command = new ListSlotTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of tags associated with a resource. Only bots, bot
-   *          aliases, and bot channels can have tags associated with them.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts importing a bot or bot locale from a zip archive that you
-   *          uploaded to an S3 bucket.</p>
+   * @see {@link ListTestExecutionResultItemsCommand}
    */
-  public startImport(args: StartImportCommandInput, options?: __HttpHandlerOptions): Promise<StartImportCommandOutput>;
-  public startImport(args: StartImportCommandInput, cb: (err: any, data?: StartImportCommandOutput) => void): void;
-  public startImport(
+  listTestExecutionResultItems(
+    args: ListTestExecutionResultItemsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListTestExecutionResultItemsCommandOutput>;
+  listTestExecutionResultItems(
+    args: ListTestExecutionResultItemsCommandInput,
+    cb: (err: any, data?: ListTestExecutionResultItemsCommandOutput) => void
+  ): void;
+  listTestExecutionResultItems(
+    args: ListTestExecutionResultItemsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListTestExecutionResultItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestExecutionsCommand}
+   */
+  listTestExecutions(): Promise<ListTestExecutionsCommandOutput>;
+  listTestExecutions(
+    args: ListTestExecutionsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListTestExecutionsCommandOutput>;
+  listTestExecutions(
+    args: ListTestExecutionsCommandInput,
+    cb: (err: any, data?: ListTestExecutionsCommandOutput) => void
+  ): void;
+  listTestExecutions(
+    args: ListTestExecutionsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListTestExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestSetRecordsCommand}
+   */
+  listTestSetRecords(
+    args: ListTestSetRecordsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListTestSetRecordsCommandOutput>;
+  listTestSetRecords(
+    args: ListTestSetRecordsCommandInput,
+    cb: (err: any, data?: ListTestSetRecordsCommandOutput) => void
+  ): void;
+  listTestSetRecords(
+    args: ListTestSetRecordsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListTestSetRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestSetsCommand}
+   */
+  listTestSets(): Promise<ListTestSetsCommandOutput>;
+  listTestSets(
+    args: ListTestSetsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListTestSetsCommandOutput>;
+  listTestSets(
+    args: ListTestSetsCommandInput,
+    cb: (err: any, data?: ListTestSetsCommandOutput) => void
+  ): void;
+  listTestSets(
+    args: ListTestSetsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListTestSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUtteranceAnalyticsDataCommand}
+   */
+  listUtteranceAnalyticsData(
+    args: ListUtteranceAnalyticsDataCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListUtteranceAnalyticsDataCommandOutput>;
+  listUtteranceAnalyticsData(
+    args: ListUtteranceAnalyticsDataCommandInput,
+    cb: (err: any, data?: ListUtteranceAnalyticsDataCommandOutput) => void
+  ): void;
+  listUtteranceAnalyticsData(
+    args: ListUtteranceAnalyticsDataCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListUtteranceAnalyticsDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUtteranceMetricsCommand}
+   */
+  listUtteranceMetrics(
+    args: ListUtteranceMetricsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<ListUtteranceMetricsCommandOutput>;
+  listUtteranceMetrics(
+    args: ListUtteranceMetricsCommandInput,
+    cb: (err: any, data?: ListUtteranceMetricsCommandOutput) => void
+  ): void;
+  listUtteranceMetrics(
+    args: ListUtteranceMetricsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: ListUtteranceMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchAssociatedTranscriptsCommand}
+   */
+  searchAssociatedTranscripts(
+    args: SearchAssociatedTranscriptsCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<SearchAssociatedTranscriptsCommandOutput>;
+  searchAssociatedTranscripts(
+    args: SearchAssociatedTranscriptsCommandInput,
+    cb: (err: any, data?: SearchAssociatedTranscriptsCommandOutput) => void
+  ): void;
+  searchAssociatedTranscripts(
+    args: SearchAssociatedTranscriptsCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: SearchAssociatedTranscriptsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBotAnalyzerCommand}
+   */
+  startBotAnalyzer(
+    args: StartBotAnalyzerCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartBotAnalyzerCommandOutput>;
+  startBotAnalyzer(
+    args: StartBotAnalyzerCommandInput,
+    cb: (err: any, data?: StartBotAnalyzerCommandOutput) => void
+  ): void;
+  startBotAnalyzer(
+    args: StartBotAnalyzerCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartBotAnalyzerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBotRecommendationCommand}
+   */
+  startBotRecommendation(
+    args: StartBotRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartBotRecommendationCommandOutput>;
+  startBotRecommendation(
+    args: StartBotRecommendationCommandInput,
+    cb: (err: any, data?: StartBotRecommendationCommandOutput) => void
+  ): void;
+  startBotRecommendation(
+    args: StartBotRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartBotRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartBotResourceGenerationCommand}
+   */
+  startBotResourceGeneration(
+    args: StartBotResourceGenerationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartBotResourceGenerationCommandOutput>;
+  startBotResourceGeneration(
+    args: StartBotResourceGenerationCommandInput,
+    cb: (err: any, data?: StartBotResourceGenerationCommandOutput) => void
+  ): void;
+  startBotResourceGeneration(
+    args: StartBotResourceGenerationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartBotResourceGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportCommand}
+   */
+  startImport(
     args: StartImportCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartImportCommandOutput>;
+  startImport(
+    args: StartImportCommandInput,
     cb: (err: any, data?: StartImportCommandOutput) => void
   ): void;
-  public startImport(
+  startImport(
     args: StartImportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartImportCommandOutput) => void),
-    cb?: (err: any, data?: StartImportCommandOutput) => void
-  ): Promise<StartImportCommandOutput> | void {
-    const command = new StartImportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartImportCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds the specified tags to the specified resource. If a tag key
-   *          already exists, the existing value is replaced with the new
-   *          value.</p>
+   * @see {@link StartTestExecutionCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  startTestExecution(
+    args: StartTestExecutionCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartTestExecutionCommandOutput>;
+  startTestExecution(
+    args: StartTestExecutionCommandInput,
+    cb: (err: any, data?: StartTestExecutionCommandOutput) => void
+  ): void;
+  startTestExecution(
+    args: StartTestExecutionCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartTestExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTestSetGenerationCommand}
+   */
+  startTestSetGeneration(
+    args: StartTestSetGenerationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StartTestSetGenerationCommandOutput>;
+  startTestSetGeneration(
+    args: StartTestSetGenerationCommandInput,
+    cb: (err: any, data?: StartTestSetGenerationCommandOutput) => void
+  ): void;
+  startTestSetGeneration(
+    args: StartTestSetGenerationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StartTestSetGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopBotAnalyzerCommand}
+   */
+  stopBotAnalyzer(
+    args: StopBotAnalyzerCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StopBotAnalyzerCommandOutput>;
+  stopBotAnalyzer(
+    args: StopBotAnalyzerCommandInput,
+    cb: (err: any, data?: StopBotAnalyzerCommandOutput) => void
+  ): void;
+  stopBotAnalyzer(
+    args: StopBotAnalyzerCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StopBotAnalyzerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopBotRecommendationCommand}
+   */
+  stopBotRecommendation(
+    args: StopBotRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<StopBotRecommendationCommandOutput>;
+  stopBotRecommendation(
+    args: StopBotRecommendationCommandInput,
+    cb: (err: any, data?: StopBotRecommendationCommandOutput) => void
+  ): void;
+  stopBotRecommendation(
+    args: StopBotRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: StopBotRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from a bot, bot alias, or bot channel.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the configuration of an existing bot. </p>
+   * @see {@link UpdateBotCommand}
    */
-  public updateBot(args: UpdateBotCommandInput, options?: __HttpHandlerOptions): Promise<UpdateBotCommandOutput>;
-  public updateBot(args: UpdateBotCommandInput, cb: (err: any, data?: UpdateBotCommandOutput) => void): void;
-  public updateBot(
+  updateBot(
     args: UpdateBotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<UpdateBotCommandOutput>;
+  updateBot(
+    args: UpdateBotCommandInput,
     cb: (err: any, data?: UpdateBotCommandOutput) => void
   ): void;
-  public updateBot(
+  updateBot(
     args: UpdateBotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBotCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBotCommandOutput) => void
-  ): Promise<UpdateBotCommandOutput> | void {
-    const command = new UpdateBotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateBotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the configuration of an existing bot alias.</p>
+   * @see {@link UpdateBotAliasCommand}
    */
-  public updateBotAlias(
+  updateBotAlias(
     args: UpdateBotAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateBotAliasCommandOutput>;
-  public updateBotAlias(
+  updateBotAlias(
     args: UpdateBotAliasCommandInput,
     cb: (err: any, data?: UpdateBotAliasCommandOutput) => void
   ): void;
-  public updateBotAlias(
+  updateBotAlias(
     args: UpdateBotAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: UpdateBotAliasCommandOutput) => void
   ): void;
-  public updateBotAlias(
-    args: UpdateBotAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBotAliasCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBotAliasCommandOutput) => void
-  ): Promise<UpdateBotAliasCommandOutput> | void {
-    const command = new UpdateBotAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the settings that a bot has for a specific locale.</p>
+   * @see {@link UpdateBotLocaleCommand}
    */
-  public updateBotLocale(
+  updateBotLocale(
     args: UpdateBotLocaleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateBotLocaleCommandOutput>;
-  public updateBotLocale(
+  updateBotLocale(
     args: UpdateBotLocaleCommandInput,
     cb: (err: any, data?: UpdateBotLocaleCommandOutput) => void
   ): void;
-  public updateBotLocale(
+  updateBotLocale(
     args: UpdateBotLocaleCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: UpdateBotLocaleCommandOutput) => void
   ): void;
-  public updateBotLocale(
-    args: UpdateBotLocaleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBotLocaleCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBotLocaleCommandOutput) => void
-  ): Promise<UpdateBotLocaleCommandOutput> | void {
-    const command = new UpdateBotLocaleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the password used to protect an export zip archive.</p>
-   *          <p>The password is not required. If you don't supply a password, Amazon Lex
-   *          generates a zip file that is not protected by a password. This is the
-   *          archive that is available at the pre-signed S3 URL provided by the
-   *              operation.</p>
+   * @see {@link UpdateBotRecommendationCommand}
    */
-  public updateExport(
+  updateBotRecommendation(
+    args: UpdateBotRecommendationCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<UpdateBotRecommendationCommandOutput>;
+  updateBotRecommendation(
+    args: UpdateBotRecommendationCommandInput,
+    cb: (err: any, data?: UpdateBotRecommendationCommandOutput) => void
+  ): void;
+  updateBotRecommendation(
+    args: UpdateBotRecommendationCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateBotRecommendationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateExportCommand}
+   */
+  updateExport(
     args: UpdateExportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateExportCommandOutput>;
-  public updateExport(args: UpdateExportCommandInput, cb: (err: any, data?: UpdateExportCommandOutput) => void): void;
-  public updateExport(
+  updateExport(
     args: UpdateExportCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateExportCommandOutput) => void
   ): void;
-  public updateExport(
+  updateExport(
     args: UpdateExportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateExportCommandOutput) => void),
-    cb?: (err: any, data?: UpdateExportCommandOutput) => void
-  ): Promise<UpdateExportCommandOutput> | void {
-    const command = new UpdateExportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateExportCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the settings for an intent.</p>
+   * @see {@link UpdateIntentCommand}
    */
-  public updateIntent(
+  updateIntent(
     args: UpdateIntentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateIntentCommandOutput>;
-  public updateIntent(args: UpdateIntentCommandInput, cb: (err: any, data?: UpdateIntentCommandOutput) => void): void;
-  public updateIntent(
+  updateIntent(
     args: UpdateIntentCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateIntentCommandOutput) => void
   ): void;
-  public updateIntent(
+  updateIntent(
     args: UpdateIntentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIntentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIntentCommandOutput) => void
-  ): Promise<UpdateIntentCommandOutput> | void {
-    const command = new UpdateIntentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateIntentCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Replaces the existing resource policy for a bot or bot alias with a
-   *          new one. If the policy doesn't exist, Amazon Lex returns an
-   *          exception.</p>
+   * @see {@link UpdateResourcePolicyCommand}
    */
-  public updateResourcePolicy(
+  updateResourcePolicy(
     args: UpdateResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateResourcePolicyCommandOutput>;
-  public updateResourcePolicy(
+  updateResourcePolicy(
     args: UpdateResourcePolicyCommandInput,
     cb: (err: any, data?: UpdateResourcePolicyCommandOutput) => void
   ): void;
-  public updateResourcePolicy(
+  updateResourcePolicy(
     args: UpdateResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: UpdateResourcePolicyCommandOutput) => void
   ): void;
-  public updateResourcePolicy(
-    args: UpdateResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourcePolicyCommandOutput) => void
-  ): Promise<UpdateResourcePolicyCommandOutput> | void {
-    const command = new UpdateResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the settings for a slot.</p>
+   * @see {@link UpdateSlotCommand}
    */
-  public updateSlot(args: UpdateSlotCommandInput, options?: __HttpHandlerOptions): Promise<UpdateSlotCommandOutput>;
-  public updateSlot(args: UpdateSlotCommandInput, cb: (err: any, data?: UpdateSlotCommandOutput) => void): void;
-  public updateSlot(
+  updateSlot(
     args: UpdateSlotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LexModelsV2RequestOptions
+  ): Promise<UpdateSlotCommandOutput>;
+  updateSlot(
+    args: UpdateSlotCommandInput,
     cb: (err: any, data?: UpdateSlotCommandOutput) => void
   ): void;
-  public updateSlot(
+  updateSlot(
     args: UpdateSlotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSlotCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSlotCommandOutput) => void
-  ): Promise<UpdateSlotCommandOutput> | void {
-    const command = new UpdateSlotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateSlotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the configuration of an existing slot type.</p>
+   * @see {@link UpdateSlotTypeCommand}
    */
-  public updateSlotType(
+  updateSlotType(
     args: UpdateSlotTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LexModelsV2RequestOptions
   ): Promise<UpdateSlotTypeCommandOutput>;
-  public updateSlotType(
+  updateSlotType(
     args: UpdateSlotTypeCommandInput,
     cb: (err: any, data?: UpdateSlotTypeCommandOutput) => void
   ): void;
-  public updateSlotType(
+  updateSlotType(
     args: UpdateSlotTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: LexModelsV2RequestOptions,
     cb: (err: any, data?: UpdateSlotTypeCommandOutput) => void
   ): void;
-  public updateSlotType(
-    args: UpdateSlotTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSlotTypeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSlotTypeCommandOutput) => void
-  ): Promise<UpdateSlotTypeCommandOutput> | void {
-    const command = new UpdateSlotTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateTestSetCommand}
+   */
+  updateTestSet(
+    args: UpdateTestSetCommandInput,
+    options?: LexModelsV2RequestOptions
+  ): Promise<UpdateTestSetCommandOutput>;
+  updateTestSet(
+    args: UpdateTestSetCommandInput,
+    cb: (err: any, data?: UpdateTestSetCommandOutput) => void
+  ): void;
+  updateTestSet(
+    args: UpdateTestSetCommandInput,
+    options: LexModelsV2RequestOptions,
+    cb: (err: any, data?: UpdateTestSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBotAnalyzerRecommendationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeBotAnalyzerRecommendationCommandOutput}.
+   */
+  paginateDescribeBotAnalyzerRecommendation(
+    args: DescribeBotAnalyzerRecommendationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeBotAnalyzerRecommendationCommandOutput>;
+
+  /**
+   * @see {@link ListAggregatedUtterancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAggregatedUtterancesCommandOutput}.
+   */
+  paginateListAggregatedUtterances(
+    args: ListAggregatedUtterancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAggregatedUtterancesCommandOutput>;
+
+  /**
+   * @see {@link ListBotAliasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotAliasesCommandOutput}.
+   */
+  paginateListBotAliases(
+    args: ListBotAliasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotAliasesCommandOutput>;
+
+  /**
+   * @see {@link ListBotAliasReplicasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotAliasReplicasCommandOutput}.
+   */
+  paginateListBotAliasReplicas(
+    args: ListBotAliasReplicasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotAliasReplicasCommandOutput>;
+
+  /**
+   * @see {@link ListBotAnalyzerHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotAnalyzerHistoryCommandOutput}.
+   */
+  paginateListBotAnalyzerHistory(
+    args: ListBotAnalyzerHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotAnalyzerHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListBotLocalesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotLocalesCommandOutput}.
+   */
+  paginateListBotLocales(
+    args: ListBotLocalesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotLocalesCommandOutput>;
+
+  /**
+   * @see {@link ListBotRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotRecommendationsCommandOutput}.
+   */
+  paginateListBotRecommendations(
+    args: ListBotRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListBotResourceGenerationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotResourceGenerationsCommandOutput}.
+   */
+  paginateListBotResourceGenerations(
+    args: ListBotResourceGenerationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotResourceGenerationsCommandOutput>;
+
+  /**
+   * @see {@link ListBotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotsCommandOutput}.
+   */
+  paginateListBots(
+    args?: ListBotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotsCommandOutput>;
+
+  /**
+   * @see {@link ListBotVersionReplicasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotVersionReplicasCommandOutput}.
+   */
+  paginateListBotVersionReplicas(
+    args: ListBotVersionReplicasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotVersionReplicasCommandOutput>;
+
+  /**
+   * @see {@link ListBotVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBotVersionsCommandOutput}.
+   */
+  paginateListBotVersions(
+    args: ListBotVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBotVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListBuiltInIntentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBuiltInIntentsCommandOutput}.
+   */
+  paginateListBuiltInIntents(
+    args: ListBuiltInIntentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBuiltInIntentsCommandOutput>;
+
+  /**
+   * @see {@link ListBuiltInSlotTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBuiltInSlotTypesCommandOutput}.
+   */
+  paginateListBuiltInSlotTypes(
+    args: ListBuiltInSlotTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBuiltInSlotTypesCommandOutput>;
+
+  /**
+   * @see {@link ListCustomVocabularyItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomVocabularyItemsCommandOutput}.
+   */
+  paginateListCustomVocabularyItems(
+    args: ListCustomVocabularyItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomVocabularyItemsCommandOutput>;
+
+  /**
+   * @see {@link ListExportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportsCommandOutput}.
+   */
+  paginateListExports(
+    args?: ListExportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportsCommandOutput>;
+
+  /**
+   * @see {@link ListImportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportsCommandOutput}.
+   */
+  paginateListImports(
+    args?: ListImportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportsCommandOutput>;
+
+  /**
+   * @see {@link ListIntentMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIntentMetricsCommandOutput}.
+   */
+  paginateListIntentMetrics(
+    args: ListIntentMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIntentMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListIntentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIntentsCommandOutput}.
+   */
+  paginateListIntents(
+    args: ListIntentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIntentsCommandOutput>;
+
+  /**
+   * @see {@link ListIntentStageMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIntentStageMetricsCommandOutput}.
+   */
+  paginateListIntentStageMetrics(
+    args: ListIntentStageMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIntentStageMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendedIntentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendedIntentsCommandOutput}.
+   */
+  paginateListRecommendedIntents(
+    args: ListRecommendedIntentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendedIntentsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionAnalyticsDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionAnalyticsDataCommandOutput}.
+   */
+  paginateListSessionAnalyticsData(
+    args: ListSessionAnalyticsDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionAnalyticsDataCommandOutput>;
+
+  /**
+   * @see {@link ListSessionMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionMetricsCommandOutput}.
+   */
+  paginateListSessionMetrics(
+    args: ListSessionMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListSlotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSlotsCommandOutput}.
+   */
+  paginateListSlots(
+    args: ListSlotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSlotsCommandOutput>;
+
+  /**
+   * @see {@link ListSlotTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSlotTypesCommandOutput}.
+   */
+  paginateListSlotTypes(
+    args: ListSlotTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSlotTypesCommandOutput>;
+
+  /**
+   * @see {@link ListTestExecutionResultItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestExecutionResultItemsCommandOutput}.
+   */
+  paginateListTestExecutionResultItems(
+    args: ListTestExecutionResultItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestExecutionResultItemsCommandOutput>;
+
+  /**
+   * @see {@link ListTestExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestExecutionsCommandOutput}.
+   */
+  paginateListTestExecutions(
+    args?: ListTestExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListTestSetRecordsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestSetRecordsCommandOutput}.
+   */
+  paginateListTestSetRecords(
+    args: ListTestSetRecordsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestSetRecordsCommandOutput>;
+
+  /**
+   * @see {@link ListTestSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestSetsCommandOutput}.
+   */
+  paginateListTestSets(
+    args?: ListTestSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestSetsCommandOutput>;
+
+  /**
+   * @see {@link ListUtteranceAnalyticsDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUtteranceAnalyticsDataCommandOutput}.
+   */
+  paginateListUtteranceAnalyticsData(
+    args: ListUtteranceAnalyticsDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUtteranceAnalyticsDataCommandOutput>;
+
+  /**
+   * @see {@link ListUtteranceMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUtteranceMetricsCommandOutput}.
+   */
+  paginateListUtteranceMetrics(
+    args: ListUtteranceMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUtteranceMetricsCommandOutput>;
+
+  /**
+   * @see {@link DescribeBotCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotAvailable(
+    args: DescribeBotCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotCommandOutput>>;
+
+  /**
+   * @see {@link DescribeBotAliasCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotAliasAvailable(
+    args: DescribeBotAliasCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotAliasCommandOutput>>;
+
+  /**
+   * @see {@link DescribeBotLocaleCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotLocaleBuilt(
+    args: DescribeBotLocaleCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotLocaleCommandOutput>>;
+
+  /**
+   * @see {@link DescribeBotLocaleCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotLocaleCreated(
+    args: DescribeBotLocaleCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotLocaleCommandOutput>>;
+
+  /**
+   * @see {@link DescribeBotLocaleCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotLocaleExpressTestingAvailable(
+    args: DescribeBotLocaleCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotLocaleCommandOutput>>;
+
+  /**
+   * @see {@link DescribeBotVersionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotVersionAvailable(
+    args: DescribeBotVersionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeBotVersionCommandOutput>>;
+
+  /**
+   * @see {@link DescribeExportCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotExportCompleted(
+    args: DescribeExportCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeExportCommandOutput>>;
+
+  /**
+   * @see {@link DescribeImportCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilBotImportCompleted(
+    args: DescribeImportCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<LexModelsV2>, "client">
+  ): Promise<WaiterResult<DescribeImportCommandOutput>>;
 }
+
+/**
+ * <p>This document provides detailed information about the Amazon Lex V2 API actions and their parameters.</p>
+ *          <p>For information about the IAM access control permissions you need to use this API, see
+ *         <a href="https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html">Identity-based policies for Amazon Lex V2</a>.</p>
+ *          <p>Amazon Lex V2 Model Building V2 operations let you build and manage bots.</p>
+ *          <p>If you use a custom HTTP client to call Amazon Lex Model Building
+ *         V2 operations, you must set the "Content-Type" HTTP header to
+ *         "application/x-amz-json-1.1". Otherwise, you receive an HTTP 404 -
+ *         UnknownOperationException in the response.</p>
+ *          <p>Amazon Lex Model Building V2 operations return the responses with
+ *         the "application/x-amz-json-1.1" content type.</p>
+ *          <p>You can use <a href="http://aws.amazon.com/tools/#sdk">Amazon Web Services SDKs</a> to access Amazon Lex V2 APIs using your favorite programming language.
+ *         The SDKs automatically perform useful tasks for you, such as:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Cryptographically sign your service requests</p>
+ *             </li>
+ *             <li>
+ *                <p>Retry requests</p>
+ *             </li>
+ *             <li>
+ *                <p>Handle error responses</p>
+ *             </li>
+ *          </ul>
+ *          <p>The following resources provide additional information about the Amazon Lex V2 Model Building API.</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <i>Amazon Web Services General Reference</i>
+ *                </p>
+ *                <ul>
+ *                   <li>
+ *                      <p>
+ *                         <a href="https://docs.aws.amazon.com/general/latest/gr/lex.html">Amazon Lex V2 Endpoints for each region</a>.</p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <i>Command Line Interface</i>
+ *                </p>
+ *                <ul>
+ *                   <li>
+ *                      <p>
+ *                         <a href="https://docs.aws.amazon.com/cli/latest/reference/lexv2-models/index.html">
+ *                     Amazon Lex Model Building V2 CLI commands</a>.</p>
+ *                   </li>
+ *                </ul>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export class LexModelsV2 extends LexModelsV2Client implements LexModelsV2 {}
+createAggregatedClient(commands, LexModelsV2, { paginators, waiters });

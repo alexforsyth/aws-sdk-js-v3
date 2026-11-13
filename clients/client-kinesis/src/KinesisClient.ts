@@ -1,132 +1,207 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
+  AccountIdEndpointMode,
+  AccountIdEndpointModeInputConfig,
+  AccountIdEndpointModeResolvedConfig,
+  resolveAccountIdEndpointModeConfig,
+} from "@aws-sdk/core/account-id-endpoint";
 import {
-  EventStreamSerdeInputConfig,
-  EventStreamSerdeResolvedConfig,
-  resolveEventStreamSerdeConfig,
-} from "@aws-sdk/eventstream-serde-config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
 import {
-  Credentials as __Credentials,
+  type EventStreamSerdeInputConfig,
+  type EventStreamSerdeResolvedConfig,
+  resolveEventStreamSerdeConfig,
+} from "@smithy/core/event-streams";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
   EventStreamSerdeProvider as __EventStreamSerdeProvider,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AddTagsToStreamCommandInput, AddTagsToStreamCommandOutput } from "./commands/AddTagsToStreamCommand";
-import { CreateStreamCommandInput, CreateStreamCommandOutput } from "./commands/CreateStreamCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultKinesisHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AddTagsToStreamCommandInput, AddTagsToStreamCommandOutput } from "./commands/AddTagsToStreamCommand";
+import type { CreateChannelCommandInput, CreateChannelCommandOutput } from "./commands/CreateChannelCommand";
+import type { CreateStreamCommandInput, CreateStreamCommandOutput } from "./commands/CreateStreamCommand";
+import type {
   DecreaseStreamRetentionPeriodCommandInput,
   DecreaseStreamRetentionPeriodCommandOutput,
 } from "./commands/DecreaseStreamRetentionPeriodCommand";
-import { DeleteStreamCommandInput, DeleteStreamCommandOutput } from "./commands/DeleteStreamCommand";
-import {
+import type { DeleteChannelCommandInput, DeleteChannelCommandOutput } from "./commands/DeleteChannelCommand";
+import type {
+  DeleteResourcePolicyCommandInput,
+  DeleteResourcePolicyCommandOutput,
+} from "./commands/DeleteResourcePolicyCommand";
+import type { DeleteStreamCommandInput, DeleteStreamCommandOutput } from "./commands/DeleteStreamCommand";
+import type {
   DeregisterStreamConsumerCommandInput,
   DeregisterStreamConsumerCommandOutput,
 } from "./commands/DeregisterStreamConsumerCommand";
-import { DescribeLimitsCommandInput, DescribeLimitsCommandOutput } from "./commands/DescribeLimitsCommand";
-import { DescribeStreamCommandInput, DescribeStreamCommandOutput } from "./commands/DescribeStreamCommand";
-import {
+import type {
+  DescribeAccountSettingsCommandInput,
+  DescribeAccountSettingsCommandOutput,
+} from "./commands/DescribeAccountSettingsCommand";
+import type { DescribeChannelCommandInput, DescribeChannelCommandOutput } from "./commands/DescribeChannelCommand";
+import type { DescribeLimitsCommandInput, DescribeLimitsCommandOutput } from "./commands/DescribeLimitsCommand";
+import type { DescribeStreamCommandInput, DescribeStreamCommandOutput } from "./commands/DescribeStreamCommand";
+import type {
   DescribeStreamConsumerCommandInput,
   DescribeStreamConsumerCommandOutput,
 } from "./commands/DescribeStreamConsumerCommand";
-import {
+import type {
   DescribeStreamSummaryCommandInput,
   DescribeStreamSummaryCommandOutput,
 } from "./commands/DescribeStreamSummaryCommand";
-import {
+import type {
   DisableEnhancedMonitoringCommandInput,
   DisableEnhancedMonitoringCommandOutput,
 } from "./commands/DisableEnhancedMonitoringCommand";
-import {
+import type {
   EnableEnhancedMonitoringCommandInput,
   EnableEnhancedMonitoringCommandOutput,
 } from "./commands/EnableEnhancedMonitoringCommand";
-import { GetRecordsCommandInput, GetRecordsCommandOutput } from "./commands/GetRecordsCommand";
-import { GetShardIteratorCommandInput, GetShardIteratorCommandOutput } from "./commands/GetShardIteratorCommand";
-import {
+import type { GetRecordsCommandInput, GetRecordsCommandOutput } from "./commands/GetRecordsCommand";
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type { GetShardIteratorCommandInput, GetShardIteratorCommandOutput } from "./commands/GetShardIteratorCommand";
+import type {
   IncreaseStreamRetentionPeriodCommandInput,
   IncreaseStreamRetentionPeriodCommandOutput,
 } from "./commands/IncreaseStreamRetentionPeriodCommand";
-import { ListShardsCommandInput, ListShardsCommandOutput } from "./commands/ListShardsCommand";
-import {
+import type { ListChannelsCommandInput, ListChannelsCommandOutput } from "./commands/ListChannelsCommand";
+import type { ListShardsCommandInput, ListShardsCommandOutput } from "./commands/ListShardsCommand";
+import type {
   ListStreamConsumersCommandInput,
   ListStreamConsumersCommandOutput,
 } from "./commands/ListStreamConsumersCommand";
-import { ListStreamsCommandInput, ListStreamsCommandOutput } from "./commands/ListStreamsCommand";
-import { ListTagsForStreamCommandInput, ListTagsForStreamCommandOutput } from "./commands/ListTagsForStreamCommand";
-import { MergeShardsCommandInput, MergeShardsCommandOutput } from "./commands/MergeShardsCommand";
-import { PutRecordCommandInput, PutRecordCommandOutput } from "./commands/PutRecordCommand";
-import { PutRecordsCommandInput, PutRecordsCommandOutput } from "./commands/PutRecordsCommand";
-import {
+import type { ListStreamsCommandInput, ListStreamsCommandOutput } from "./commands/ListStreamsCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type {
+  ListTagsForStreamCommandInput,
+  ListTagsForStreamCommandOutput,
+} from "./commands/ListTagsForStreamCommand";
+import type { MergeShardsCommandInput, MergeShardsCommandOutput } from "./commands/MergeShardsCommand";
+import type { PutRecordCommandInput, PutRecordCommandOutput } from "./commands/PutRecordCommand";
+import type { PutRecordsCommandInput, PutRecordsCommandOutput } from "./commands/PutRecordsCommand";
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type {
   RegisterStreamConsumerCommandInput,
   RegisterStreamConsumerCommandOutput,
 } from "./commands/RegisterStreamConsumerCommand";
-import {
+import type {
   RemoveTagsFromStreamCommandInput,
   RemoveTagsFromStreamCommandOutput,
 } from "./commands/RemoveTagsFromStreamCommand";
-import { SplitShardCommandInput, SplitShardCommandOutput } from "./commands/SplitShardCommand";
-import {
+import type { SplitShardCommandInput, SplitShardCommandOutput } from "./commands/SplitShardCommand";
+import type {
   StartStreamEncryptionCommandInput,
   StartStreamEncryptionCommandOutput,
 } from "./commands/StartStreamEncryptionCommand";
-import {
+import type {
   StopStreamEncryptionCommandInput,
   StopStreamEncryptionCommandOutput,
 } from "./commands/StopStreamEncryptionCommand";
-import { SubscribeToShardCommandInput, SubscribeToShardCommandOutput } from "./commands/SubscribeToShardCommand";
-import { UpdateShardCountCommandInput, UpdateShardCountCommandOutput } from "./commands/UpdateShardCountCommand";
+import type { SubscribeToShardCommandInput, SubscribeToShardCommandOutput } from "./commands/SubscribeToShardCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAccountSettingsCommandInput,
+  UpdateAccountSettingsCommandOutput,
+} from "./commands/UpdateAccountSettingsCommand";
+import type { UpdateChannelCommandInput, UpdateChannelCommandOutput } from "./commands/UpdateChannelCommand";
+import type {
+  UpdateMaxRecordSizeCommandInput,
+  UpdateMaxRecordSizeCommandOutput,
+} from "./commands/UpdateMaxRecordSizeCommand";
+import type { UpdateShardCountCommandInput, UpdateShardCountCommandOutput } from "./commands/UpdateShardCountCommand";
+import type { UpdateStreamModeCommandInput, UpdateStreamModeCommandOutput } from "./commands/UpdateStreamModeCommand";
+import type {
+  UpdateStreamRecordDistributionStrategyCommandInput,
+  UpdateStreamRecordDistributionStrategyCommandOutput,
+} from "./commands/UpdateStreamRecordDistributionStrategyCommand";
+import type {
+  UpdateStreamWarmThroughputCommandInput,
+  UpdateStreamWarmThroughputCommandOutput,
+} from "./commands/UpdateStreamWarmThroughputCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddTagsToStreamCommandInput
+  | CreateChannelCommandInput
   | CreateStreamCommandInput
   | DecreaseStreamRetentionPeriodCommandInput
+  | DeleteChannelCommandInput
+  | DeleteResourcePolicyCommandInput
   | DeleteStreamCommandInput
   | DeregisterStreamConsumerCommandInput
+  | DescribeAccountSettingsCommandInput
+  | DescribeChannelCommandInput
   | DescribeLimitsCommandInput
   | DescribeStreamCommandInput
   | DescribeStreamConsumerCommandInput
@@ -134,29 +209,49 @@ export type ServiceInputTypes =
   | DisableEnhancedMonitoringCommandInput
   | EnableEnhancedMonitoringCommandInput
   | GetRecordsCommandInput
+  | GetResourcePolicyCommandInput
   | GetShardIteratorCommandInput
   | IncreaseStreamRetentionPeriodCommandInput
+  | ListChannelsCommandInput
   | ListShardsCommandInput
   | ListStreamConsumersCommandInput
   | ListStreamsCommandInput
+  | ListTagsForResourceCommandInput
   | ListTagsForStreamCommandInput
   | MergeShardsCommandInput
   | PutRecordCommandInput
   | PutRecordsCommandInput
+  | PutResourcePolicyCommandInput
   | RegisterStreamConsumerCommandInput
   | RemoveTagsFromStreamCommandInput
   | SplitShardCommandInput
   | StartStreamEncryptionCommandInput
   | StopStreamEncryptionCommandInput
   | SubscribeToShardCommandInput
-  | UpdateShardCountCommandInput;
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateAccountSettingsCommandInput
+  | UpdateChannelCommandInput
+  | UpdateMaxRecordSizeCommandInput
+  | UpdateShardCountCommandInput
+  | UpdateStreamModeCommandInput
+  | UpdateStreamRecordDistributionStrategyCommandInput
+  | UpdateStreamWarmThroughputCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddTagsToStreamCommandOutput
+  | CreateChannelCommandOutput
   | CreateStreamCommandOutput
   | DecreaseStreamRetentionPeriodCommandOutput
+  | DeleteChannelCommandOutput
+  | DeleteResourcePolicyCommandOutput
   | DeleteStreamCommandOutput
   | DeregisterStreamConsumerCommandOutput
+  | DescribeAccountSettingsCommandOutput
+  | DescribeChannelCommandOutput
   | DescribeLimitsCommandOutput
   | DescribeStreamCommandOutput
   | DescribeStreamConsumerCommandOutput
@@ -164,35 +259,50 @@ export type ServiceOutputTypes =
   | DisableEnhancedMonitoringCommandOutput
   | EnableEnhancedMonitoringCommandOutput
   | GetRecordsCommandOutput
+  | GetResourcePolicyCommandOutput
   | GetShardIteratorCommandOutput
   | IncreaseStreamRetentionPeriodCommandOutput
+  | ListChannelsCommandOutput
   | ListShardsCommandOutput
   | ListStreamConsumersCommandOutput
   | ListStreamsCommandOutput
+  | ListTagsForResourceCommandOutput
   | ListTagsForStreamCommandOutput
   | MergeShardsCommandOutput
   | PutRecordCommandOutput
   | PutRecordsCommandOutput
+  | PutResourcePolicyCommandOutput
   | RegisterStreamConsumerCommandOutput
   | RemoveTagsFromStreamCommandOutput
   | SplitShardCommandOutput
   | StartStreamEncryptionCommandOutput
   | StopStreamEncryptionCommandOutput
   | SubscribeToShardCommandOutput
-  | UpdateShardCountCommandOutput;
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateAccountSettingsCommandOutput
+  | UpdateChannelCommandOutput
+  | UpdateMaxRecordSizeCommandOutput
+  | UpdateShardCountCommandOutput
+  | UpdateStreamModeCommandOutput
+  | UpdateStreamRecordDistributionStrategyCommandOutput
+  | UpdateStreamWarmThroughputCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -204,7 +314,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -243,25 +353,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -274,72 +375,129 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+  profile?: string;
 
   /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
+   * Defines if the AWS AccountId will be used for endpoint routing.
    */
-  regionInfoProvider?: RegionInfoProvider;
+  accountIdEndpointMode?: AccountIdEndpointMode | __Provider<AccountIdEndpointMode>;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
 
   /**
    * The function that provides necessary utilities for generating and parsing event stream
    */
   eventStreamSerdeProvider?: __EventStreamSerdeProvider;
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type KinesisClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig &
-  EventStreamSerdeInputConfig;
 /**
- * The configuration interface of KinesisClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type KinesisClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  AccountIdEndpointModeInputConfig &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  EventStreamSerdeInputConfig &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of KinesisClient class constructor that set the region, credentials and other options.
  */
 export interface KinesisClientConfig extends KinesisClientConfigType {}
 
-type KinesisClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig &
-  EventStreamSerdeResolvedConfig;
 /**
- * The resolved configuration interface of KinesisClient class. This is resolved and normalized from the {@link KinesisClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type KinesisClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  AccountIdEndpointModeResolvedConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  EventStreamSerdeResolvedConfig &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of KinesisClient class. This is resolved and normalized from the {@link KinesisClientConfig | constructor configuration interface}.
  */
 export interface KinesisClientResolvedConfig extends KinesisClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon Kinesis Data Streams Service API Reference</fullname>
- *         <p>Amazon Kinesis Data Streams is a managed service that scales elastically for
- *             real-time processing of streaming big data.</p>
+ *          <p>Amazon Kinesis Data Streams is a managed service that scales elastically for real-time
+ *             processing of streaming big data.</p>
+ * @public
  */
 export class KinesisClient extends __Client<
   __HttpHandlerOptions,
@@ -352,23 +510,38 @@ export class KinesisClient extends __Client<
    */
   readonly config: KinesisClientResolvedConfig;
 
-  constructor(configuration: KinesisClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
-    const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    const _config_7 = resolveEventStreamSerdeConfig(_config_6);
-    super(_config_7);
-    this.config = _config_7;
+  constructor(...[configuration]: __CheckOptionalClientConfig<KinesisClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveAccountIdEndpointModeConfig(_config_1);
+    const _config_3 = resolveUserAgentConfig(_config_2);
+    const _config_4 = resolveRetryConfig(_config_3);
+    const _config_5 = resolveRegionConfig(_config_4);
+    const _config_6 = resolveHostHeaderConfig(_config_5);
+    const _config_7 = resolveEndpointConfig(_config_6);
+    const _config_8 = resolveEventStreamSerdeConfig(_config_7);
+    const _config_9 = resolveHttpAuthSchemeConfig(_config_8);
+    const _config_10 = resolveRuntimeExtensions(_config_9, configuration?.extensions || []);
+    this.config = _config_10;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultKinesisHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: KinesisClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

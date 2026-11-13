@@ -1,0 +1,524 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type ApplyPendingMaintenanceActionCommandInput,
+  type ApplyPendingMaintenanceActionCommandOutput,
+  ApplyPendingMaintenanceActionCommand,
+} from "./commands/ApplyPendingMaintenanceActionCommand";
+import {
+  type CopyClusterSnapshotCommandInput,
+  type CopyClusterSnapshotCommandOutput,
+  CopyClusterSnapshotCommand,
+} from "./commands/CopyClusterSnapshotCommand";
+import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
+  CreateClusterCommand,
+} from "./commands/CreateClusterCommand";
+import {
+  type CreateClusterSnapshotCommandInput,
+  type CreateClusterSnapshotCommandOutput,
+  CreateClusterSnapshotCommand,
+} from "./commands/CreateClusterSnapshotCommand";
+import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
+  DeleteClusterCommand,
+} from "./commands/DeleteClusterCommand";
+import {
+  type DeleteClusterSnapshotCommandInput,
+  type DeleteClusterSnapshotCommandOutput,
+  DeleteClusterSnapshotCommand,
+} from "./commands/DeleteClusterSnapshotCommand";
+import {
+  type GetClusterCommandInput,
+  type GetClusterCommandOutput,
+  GetClusterCommand,
+} from "./commands/GetClusterCommand";
+import {
+  type GetClusterSnapshotCommandInput,
+  type GetClusterSnapshotCommandOutput,
+  GetClusterSnapshotCommand,
+} from "./commands/GetClusterSnapshotCommand";
+import {
+  type GetPendingMaintenanceActionCommandInput,
+  type GetPendingMaintenanceActionCommandOutput,
+  GetPendingMaintenanceActionCommand,
+} from "./commands/GetPendingMaintenanceActionCommand";
+import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
+  ListClustersCommand,
+} from "./commands/ListClustersCommand";
+import {
+  type ListClusterSnapshotsCommandInput,
+  type ListClusterSnapshotsCommandOutput,
+  ListClusterSnapshotsCommand,
+} from "./commands/ListClusterSnapshotsCommand";
+import {
+  type ListPendingMaintenanceActionsCommandInput,
+  type ListPendingMaintenanceActionsCommandOutput,
+  ListPendingMaintenanceActionsCommand,
+} from "./commands/ListPendingMaintenanceActionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RestoreClusterFromSnapshotCommandInput,
+  type RestoreClusterFromSnapshotCommandOutput,
+  RestoreClusterFromSnapshotCommand,
+} from "./commands/RestoreClusterFromSnapshotCommand";
+import {
+  type StartClusterCommandInput,
+  type StartClusterCommandOutput,
+  StartClusterCommand,
+} from "./commands/StartClusterCommand";
+import {
+  type StopClusterCommandInput,
+  type StopClusterCommandOutput,
+  StopClusterCommand,
+} from "./commands/StopClusterCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateClusterCommandInput,
+  type UpdateClusterCommandOutput,
+  UpdateClusterCommand,
+} from "./commands/UpdateClusterCommand";
+import { DocDBElasticClient } from "./DocDBElasticClient";
+import { paginateListClusterSnapshots } from "./pagination/ListClusterSnapshotsPaginator";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListPendingMaintenanceActions } from "./pagination/ListPendingMaintenanceActionsPaginator";
+
+const commands = {
+  ApplyPendingMaintenanceActionCommand,
+  CopyClusterSnapshotCommand,
+  CreateClusterCommand,
+  CreateClusterSnapshotCommand,
+  DeleteClusterCommand,
+  DeleteClusterSnapshotCommand,
+  GetClusterCommand,
+  GetClusterSnapshotCommand,
+  GetPendingMaintenanceActionCommand,
+  ListClustersCommand,
+  ListClusterSnapshotsCommand,
+  ListPendingMaintenanceActionsCommand,
+  ListTagsForResourceCommand,
+  RestoreClusterFromSnapshotCommand,
+  StartClusterCommand,
+  StopClusterCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateClusterCommand,
+};
+const paginators = {
+  paginateListClusters,
+  paginateListClusterSnapshots,
+  paginateListPendingMaintenanceActions,
+};
+
+/**
+ * @public
+ */
+export interface DocDBElasticRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DocDBElastic {
+  /**
+   * @see {@link ApplyPendingMaintenanceActionCommand}
+   */
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<ApplyPendingMaintenanceActionCommandOutput>;
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
+  ): void;
+  applyPendingMaintenanceAction(
+    args: ApplyPendingMaintenanceActionCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: ApplyPendingMaintenanceActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CopyClusterSnapshotCommand}
+   */
+  copyClusterSnapshot(
+    args: CopyClusterSnapshotCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<CopyClusterSnapshotCommandOutput>;
+  copyClusterSnapshot(
+    args: CopyClusterSnapshotCommandInput,
+    cb: (err: any, data?: CopyClusterSnapshotCommandOutput) => void
+  ): void;
+  copyClusterSnapshot(
+    args: CopyClusterSnapshotCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: CopyClusterSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClusterSnapshotCommand}
+   */
+  createClusterSnapshot(
+    args: CreateClusterSnapshotCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<CreateClusterSnapshotCommandOutput>;
+  createClusterSnapshot(
+    args: CreateClusterSnapshotCommandInput,
+    cb: (err: any, data?: CreateClusterSnapshotCommandOutput) => void
+  ): void;
+  createClusterSnapshot(
+    args: CreateClusterSnapshotCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: CreateClusterSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterSnapshotCommand}
+   */
+  deleteClusterSnapshot(
+    args: DeleteClusterSnapshotCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<DeleteClusterSnapshotCommandOutput>;
+  deleteClusterSnapshot(
+    args: DeleteClusterSnapshotCommandInput,
+    cb: (err: any, data?: DeleteClusterSnapshotCommandOutput) => void
+  ): void;
+  deleteClusterSnapshot(
+    args: DeleteClusterSnapshotCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: DeleteClusterSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterCommand}
+   */
+  getCluster(
+    args: GetClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<GetClusterCommandOutput>;
+  getCluster(
+    args: GetClusterCommandInput,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+  getCluster(
+    args: GetClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterSnapshotCommand}
+   */
+  getClusterSnapshot(
+    args: GetClusterSnapshotCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<GetClusterSnapshotCommandOutput>;
+  getClusterSnapshot(
+    args: GetClusterSnapshotCommandInput,
+    cb: (err: any, data?: GetClusterSnapshotCommandOutput) => void
+  ): void;
+  getClusterSnapshot(
+    args: GetClusterSnapshotCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: GetClusterSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPendingMaintenanceActionCommand}
+   */
+  getPendingMaintenanceAction(
+    args: GetPendingMaintenanceActionCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<GetPendingMaintenanceActionCommandOutput>;
+  getPendingMaintenanceAction(
+    args: GetPendingMaintenanceActionCommandInput,
+    cb: (err: any, data?: GetPendingMaintenanceActionCommandOutput) => void
+  ): void;
+  getPendingMaintenanceAction(
+    args: GetPendingMaintenanceActionCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: GetPendingMaintenanceActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClusterSnapshotsCommand}
+   */
+  listClusterSnapshots(): Promise<ListClusterSnapshotsCommandOutput>;
+  listClusterSnapshots(
+    args: ListClusterSnapshotsCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<ListClusterSnapshotsCommandOutput>;
+  listClusterSnapshots(
+    args: ListClusterSnapshotsCommandInput,
+    cb: (err: any, data?: ListClusterSnapshotsCommandOutput) => void
+  ): void;
+  listClusterSnapshots(
+    args: ListClusterSnapshotsCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: ListClusterSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPendingMaintenanceActionsCommand}
+   */
+  listPendingMaintenanceActions(): Promise<ListPendingMaintenanceActionsCommandOutput>;
+  listPendingMaintenanceActions(
+    args: ListPendingMaintenanceActionsCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<ListPendingMaintenanceActionsCommandOutput>;
+  listPendingMaintenanceActions(
+    args: ListPendingMaintenanceActionsCommandInput,
+    cb: (err: any, data?: ListPendingMaintenanceActionsCommandOutput) => void
+  ): void;
+  listPendingMaintenanceActions(
+    args: ListPendingMaintenanceActionsCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: ListPendingMaintenanceActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreClusterFromSnapshotCommand}
+   */
+  restoreClusterFromSnapshot(
+    args: RestoreClusterFromSnapshotCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<RestoreClusterFromSnapshotCommandOutput>;
+  restoreClusterFromSnapshot(
+    args: RestoreClusterFromSnapshotCommandInput,
+    cb: (err: any, data?: RestoreClusterFromSnapshotCommandOutput) => void
+  ): void;
+  restoreClusterFromSnapshot(
+    args: RestoreClusterFromSnapshotCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: RestoreClusterFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartClusterCommand}
+   */
+  startCluster(
+    args: StartClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<StartClusterCommandOutput>;
+  startCluster(
+    args: StartClusterCommandInput,
+    cb: (err: any, data?: StartClusterCommandOutput) => void
+  ): void;
+  startCluster(
+    args: StartClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: StartClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopClusterCommand}
+   */
+  stopCluster(
+    args: StopClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<StopClusterCommandOutput>;
+  stopCluster(
+    args: StopClusterCommandInput,
+    cb: (err: any, data?: StopClusterCommandOutput) => void
+  ): void;
+  stopCluster(
+    args: StopClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: StopClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterCommand}
+   */
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options?: DocDBElasticRequestOptions
+  ): Promise<UpdateClusterCommandOutput>;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options: DocDBElasticRequestOptions,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListClusterSnapshotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClusterSnapshotsCommandOutput}.
+   */
+  paginateListClusterSnapshots(
+    args?: ListClusterSnapshotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClusterSnapshotsCommandOutput>;
+
+  /**
+   * @see {@link ListPendingMaintenanceActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPendingMaintenanceActionsCommandOutput}.
+   */
+  paginateListPendingMaintenanceActions(
+    args?: ListPendingMaintenanceActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPendingMaintenanceActionsCommandOutput>;
+}
+
+/**
+ * <fullname>Amazon DocumentDB elastic clusters</fullname>
+ *          <p>Amazon DocumentDB elastic-clusters support workloads with millions of reads/writes per second and petabytes of storage capacity.
+ *       Amazon DocumentDB elastic clusters also simplify how developers interact with Amazon DocumentDB elastic-clusters by eliminating the need to choose, manage or upgrade instances.</p>
+ *          <p>Amazon DocumentDB elastic-clusters were created to:</p>
+ *          <ul>
+ *             <li>
+ *                <p>provide a solution for customers looking for a database that provides virtually limitless scale with rich query capabilities and MongoDB API compatibility.</p>
+ *             </li>
+ *             <li>
+ *                <p>give customers higher connection limits, and to reduce downtime from patching.</p>
+ *             </li>
+ *             <li>
+ *                <p>continue investing in a cloud-native, elastic, and class leading architecture for JSON workloads.</p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export class DocDBElastic extends DocDBElasticClient implements DocDBElastic {}
+createAggregatedClient(commands, DocDBElastic, { paginators });

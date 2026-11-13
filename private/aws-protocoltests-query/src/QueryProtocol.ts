@@ -1,1022 +1,795 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type DatetimeOffsetsCommandInput,
+  type DatetimeOffsetsCommandOutput,
+  DatetimeOffsetsCommand,
+} from "./commands/DatetimeOffsetsCommand";
+import {
+  type EmptyInputAndEmptyOutputCommandInput,
+  type EmptyInputAndEmptyOutputCommandOutput,
   EmptyInputAndEmptyOutputCommand,
-  EmptyInputAndEmptyOutputCommandInput,
-  EmptyInputAndEmptyOutputCommandOutput,
 } from "./commands/EmptyInputAndEmptyOutputCommand";
 import {
+  type EndpointOperationCommandInput,
+  type EndpointOperationCommandOutput,
   EndpointOperationCommand,
-  EndpointOperationCommandInput,
-  EndpointOperationCommandOutput,
 } from "./commands/EndpointOperationCommand";
 import {
+  type EndpointWithHostLabelOperationCommandInput,
+  type EndpointWithHostLabelOperationCommandOutput,
   EndpointWithHostLabelOperationCommand,
-  EndpointWithHostLabelOperationCommandInput,
-  EndpointWithHostLabelOperationCommandOutput,
 } from "./commands/EndpointWithHostLabelOperationCommand";
 import {
+  type FlattenedXmlMapCommandInput,
+  type FlattenedXmlMapCommandOutput,
   FlattenedXmlMapCommand,
-  FlattenedXmlMapCommandInput,
-  FlattenedXmlMapCommandOutput,
 } from "./commands/FlattenedXmlMapCommand";
 import {
+  type FlattenedXmlMapWithXmlNameCommandInput,
+  type FlattenedXmlMapWithXmlNameCommandOutput,
   FlattenedXmlMapWithXmlNameCommand,
-  FlattenedXmlMapWithXmlNameCommandInput,
-  FlattenedXmlMapWithXmlNameCommandOutput,
 } from "./commands/FlattenedXmlMapWithXmlNameCommand";
 import {
+  type FlattenedXmlMapWithXmlNamespaceCommandInput,
+  type FlattenedXmlMapWithXmlNamespaceCommandOutput,
   FlattenedXmlMapWithXmlNamespaceCommand,
-  FlattenedXmlMapWithXmlNamespaceCommandInput,
-  FlattenedXmlMapWithXmlNamespaceCommandOutput,
 } from "./commands/FlattenedXmlMapWithXmlNamespaceCommand";
 import {
+  type FractionalSecondsCommandInput,
+  type FractionalSecondsCommandOutput,
+  FractionalSecondsCommand,
+} from "./commands/FractionalSecondsCommand";
+import {
+  type GreetingWithErrorsCommandInput,
+  type GreetingWithErrorsCommandOutput,
   GreetingWithErrorsCommand,
-  GreetingWithErrorsCommandInput,
-  GreetingWithErrorsCommandOutput,
 } from "./commands/GreetingWithErrorsCommand";
 import {
+  type HostWithPathOperationCommandInput,
+  type HostWithPathOperationCommandOutput,
   HostWithPathOperationCommand,
-  HostWithPathOperationCommandInput,
-  HostWithPathOperationCommandOutput,
 } from "./commands/HostWithPathOperationCommand";
 import {
+  type IgnoresWrappingXmlNameCommandInput,
+  type IgnoresWrappingXmlNameCommandOutput,
   IgnoresWrappingXmlNameCommand,
-  IgnoresWrappingXmlNameCommandInput,
-  IgnoresWrappingXmlNameCommandOutput,
 } from "./commands/IgnoresWrappingXmlNameCommand";
 import {
+  type NestedStructuresCommandInput,
+  type NestedStructuresCommandOutput,
   NestedStructuresCommand,
-  NestedStructuresCommandInput,
-  NestedStructuresCommandOutput,
 } from "./commands/NestedStructuresCommand";
 import {
+  type NoInputAndNoOutputCommandInput,
+  type NoInputAndNoOutputCommandOutput,
   NoInputAndNoOutputCommand,
-  NoInputAndNoOutputCommandInput,
-  NoInputAndNoOutputCommandOutput,
 } from "./commands/NoInputAndNoOutputCommand";
 import {
+  type NoInputAndOutputCommandInput,
+  type NoInputAndOutputCommandOutput,
   NoInputAndOutputCommand,
-  NoInputAndOutputCommandInput,
-  NoInputAndOutputCommandOutput,
 } from "./commands/NoInputAndOutputCommand";
 import {
-  QueryIdempotencyTokenAutoFillCommand,
-  QueryIdempotencyTokenAutoFillCommandInput,
-  QueryIdempotencyTokenAutoFillCommandOutput,
-} from "./commands/QueryIdempotencyTokenAutoFillCommand";
-import { QueryListsCommand, QueryListsCommandInput, QueryListsCommandOutput } from "./commands/QueryListsCommand";
-import { QueryMapsCommand, QueryMapsCommandInput, QueryMapsCommandOutput } from "./commands/QueryMapsCommand";
+  type PutWithContentEncodingCommandInput,
+  type PutWithContentEncodingCommandOutput,
+  PutWithContentEncodingCommand,
+} from "./commands/PutWithContentEncodingCommand";
 import {
+  type QueryIdempotencyTokenAutoFillCommandInput,
+  type QueryIdempotencyTokenAutoFillCommandOutput,
+  QueryIdempotencyTokenAutoFillCommand,
+} from "./commands/QueryIdempotencyTokenAutoFillCommand";
+import {
+  type QueryListsCommandInput,
+  type QueryListsCommandOutput,
+  QueryListsCommand,
+} from "./commands/QueryListsCommand";
+import { type QueryMapsCommandInput, type QueryMapsCommandOutput, QueryMapsCommand } from "./commands/QueryMapsCommand";
+import {
+  type QueryTimestampsCommandInput,
+  type QueryTimestampsCommandOutput,
   QueryTimestampsCommand,
-  QueryTimestampsCommandInput,
-  QueryTimestampsCommandOutput,
 } from "./commands/QueryTimestampsCommand";
 import {
+  type RecursiveXmlShapesCommandInput,
+  type RecursiveXmlShapesCommandOutput,
   RecursiveXmlShapesCommand,
-  RecursiveXmlShapesCommandInput,
-  RecursiveXmlShapesCommandOutput,
 } from "./commands/RecursiveXmlShapesCommand";
 import {
+  type SimpleInputParamsCommandInput,
+  type SimpleInputParamsCommandOutput,
   SimpleInputParamsCommand,
-  SimpleInputParamsCommandInput,
-  SimpleInputParamsCommandOutput,
 } from "./commands/SimpleInputParamsCommand";
 import {
+  type SimpleScalarXmlPropertiesCommandInput,
+  type SimpleScalarXmlPropertiesCommandOutput,
   SimpleScalarXmlPropertiesCommand,
-  SimpleScalarXmlPropertiesCommandInput,
-  SimpleScalarXmlPropertiesCommandOutput,
 } from "./commands/SimpleScalarXmlPropertiesCommand";
-import { XmlBlobsCommand, XmlBlobsCommandInput, XmlBlobsCommandOutput } from "./commands/XmlBlobsCommand";
+import { type XmlBlobsCommandInput, type XmlBlobsCommandOutput, XmlBlobsCommand } from "./commands/XmlBlobsCommand";
 import {
+  type XmlEmptyBlobsCommandInput,
+  type XmlEmptyBlobsCommandOutput,
   XmlEmptyBlobsCommand,
-  XmlEmptyBlobsCommandInput,
-  XmlEmptyBlobsCommandOutput,
 } from "./commands/XmlEmptyBlobsCommand";
 import {
+  type XmlEmptyListsCommandInput,
+  type XmlEmptyListsCommandOutput,
   XmlEmptyListsCommand,
-  XmlEmptyListsCommandInput,
-  XmlEmptyListsCommandOutput,
 } from "./commands/XmlEmptyListsCommand";
 import {
+  type XmlEmptyMapsCommandInput,
+  type XmlEmptyMapsCommandOutput,
   XmlEmptyMapsCommand,
-  XmlEmptyMapsCommandInput,
-  XmlEmptyMapsCommandOutput,
 } from "./commands/XmlEmptyMapsCommand";
-import { XmlEnumsCommand, XmlEnumsCommandInput, XmlEnumsCommandOutput } from "./commands/XmlEnumsCommand";
-import { XmlListsCommand, XmlListsCommandInput, XmlListsCommandOutput } from "./commands/XmlListsCommand";
-import { XmlMapsCommand, XmlMapsCommandInput, XmlMapsCommandOutput } from "./commands/XmlMapsCommand";
+import { type XmlEnumsCommandInput, type XmlEnumsCommandOutput, XmlEnumsCommand } from "./commands/XmlEnumsCommand";
 import {
+  type XmlIntEnumsCommandInput,
+  type XmlIntEnumsCommandOutput,
+  XmlIntEnumsCommand,
+} from "./commands/XmlIntEnumsCommand";
+import { type XmlListsCommandInput, type XmlListsCommandOutput, XmlListsCommand } from "./commands/XmlListsCommand";
+import { type XmlMapsCommandInput, type XmlMapsCommandOutput, XmlMapsCommand } from "./commands/XmlMapsCommand";
+import {
+  type XmlMapsXmlNameCommandInput,
+  type XmlMapsXmlNameCommandOutput,
   XmlMapsXmlNameCommand,
-  XmlMapsXmlNameCommandInput,
-  XmlMapsXmlNameCommandOutput,
 } from "./commands/XmlMapsXmlNameCommand";
 import {
+  type XmlNamespacesCommandInput,
+  type XmlNamespacesCommandOutput,
   XmlNamespacesCommand,
-  XmlNamespacesCommandInput,
-  XmlNamespacesCommandOutput,
 } from "./commands/XmlNamespacesCommand";
 import {
+  type XmlTimestampsCommandInput,
+  type XmlTimestampsCommandOutput,
   XmlTimestampsCommand,
-  XmlTimestampsCommandInput,
-  XmlTimestampsCommandOutput,
 } from "./commands/XmlTimestampsCommand";
 import { QueryProtocolClient } from "./QueryProtocolClient";
 
+const commands = {
+  DatetimeOffsetsCommand,
+  EmptyInputAndEmptyOutputCommand,
+  EndpointOperationCommand,
+  EndpointWithHostLabelOperationCommand,
+  FlattenedXmlMapCommand,
+  FlattenedXmlMapWithXmlNameCommand,
+  FlattenedXmlMapWithXmlNamespaceCommand,
+  FractionalSecondsCommand,
+  GreetingWithErrorsCommand,
+  HostWithPathOperationCommand,
+  IgnoresWrappingXmlNameCommand,
+  NestedStructuresCommand,
+  NoInputAndNoOutputCommand,
+  NoInputAndOutputCommand,
+  PutWithContentEncodingCommand,
+  QueryIdempotencyTokenAutoFillCommand,
+  QueryListsCommand,
+  QueryMapsCommand,
+  QueryTimestampsCommand,
+  RecursiveXmlShapesCommand,
+  SimpleInputParamsCommand,
+  SimpleScalarXmlPropertiesCommand,
+  XmlBlobsCommand,
+  XmlEmptyBlobsCommand,
+  XmlEmptyListsCommand,
+  XmlEmptyMapsCommand,
+  XmlEnumsCommand,
+  XmlIntEnumsCommand,
+  XmlListsCommand,
+  XmlMapsCommand,
+  XmlMapsXmlNameCommand,
+  XmlNamespacesCommand,
+  XmlTimestampsCommand,
+};
+
 /**
- * A query service that sends query requests and XML responses.
+ * @public
  */
-export class QueryProtocol extends QueryProtocolClient {
+export interface QueryProtocolRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface QueryProtocol {
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response members.
-   *
-   * While this should be rare, code generators must support this.
+   * @see {@link DatetimeOffsetsCommand}
    */
-  public emptyInputAndEmptyOutput(
+  datetimeOffsets(): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<DatetimeOffsetsCommandOutput>;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+  datetimeOffsets(
+    args: DatetimeOffsetsCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: DatetimeOffsetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EmptyInputAndEmptyOutputCommand}
+   */
+  emptyInputAndEmptyOutput(): Promise<EmptyInputAndEmptyOutputCommandOutput>;
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<EmptyInputAndEmptyOutputCommandOutput>;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
+  emptyInputAndEmptyOutput(
     args: EmptyInputAndEmptyOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
   ): void;
-  public emptyInputAndEmptyOutput(
-    args: EmptyInputAndEmptyOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void),
-    cb?: (err: any, data?: EmptyInputAndEmptyOutputCommandOutput) => void
-  ): Promise<EmptyInputAndEmptyOutputCommandOutput> | void {
-    const command = new EmptyInputAndEmptyOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointOperation(
+  /**
+   * @see {@link EndpointOperationCommand}
+   */
+  endpointOperation(): Promise<EndpointOperationCommandOutput>;
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<EndpointOperationCommandOutput>;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
+  endpointOperation(
     args: EndpointOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: EndpointOperationCommandOutput) => void
   ): void;
-  public endpointOperation(
-    args: EndpointOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointOperationCommandOutput) => void
-  ): Promise<EndpointOperationCommandOutput> | void {
-    const command = new EndpointOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public endpointWithHostLabelOperation(
+  /**
+   * @see {@link EndpointWithHostLabelOperationCommand}
+   */
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<EndpointWithHostLabelOperationCommandOutput>;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
+  endpointWithHostLabelOperation(
     args: EndpointWithHostLabelOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
   ): void;
-  public endpointWithHostLabelOperation(
-    args: EndpointWithHostLabelOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void),
-    cb?: (err: any, data?: EndpointWithHostLabelOperationCommandOutput) => void
-  ): Promise<EndpointWithHostLabelOperationCommandOutput> | void {
-    const command = new EndpointWithHostLabelOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Flattened maps
+   * @see {@link FlattenedXmlMapCommand}
    */
-  public flattenedXmlMap(
+  flattenedXmlMap(): Promise<FlattenedXmlMapCommandOutput>;
+  flattenedXmlMap(
     args: FlattenedXmlMapCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<FlattenedXmlMapCommandOutput>;
-  public flattenedXmlMap(
+  flattenedXmlMap(
     args: FlattenedXmlMapCommandInput,
     cb: (err: any, data?: FlattenedXmlMapCommandOutput) => void
   ): void;
-  public flattenedXmlMap(
+  flattenedXmlMap(
     args: FlattenedXmlMapCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: FlattenedXmlMapCommandOutput) => void
   ): void;
-  public flattenedXmlMap(
-    args: FlattenedXmlMapCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FlattenedXmlMapCommandOutput) => void),
-    cb?: (err: any, data?: FlattenedXmlMapCommandOutput) => void
-  ): Promise<FlattenedXmlMapCommandOutput> | void {
-    const command = new FlattenedXmlMapCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Flattened maps with @xmlName
+   * @see {@link FlattenedXmlMapWithXmlNameCommand}
    */
-  public flattenedXmlMapWithXmlName(
+  flattenedXmlMapWithXmlName(): Promise<FlattenedXmlMapWithXmlNameCommandOutput>;
+  flattenedXmlMapWithXmlName(
     args: FlattenedXmlMapWithXmlNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<FlattenedXmlMapWithXmlNameCommandOutput>;
-  public flattenedXmlMapWithXmlName(
+  flattenedXmlMapWithXmlName(
     args: FlattenedXmlMapWithXmlNameCommandInput,
     cb: (err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void
   ): void;
-  public flattenedXmlMapWithXmlName(
+  flattenedXmlMapWithXmlName(
     args: FlattenedXmlMapWithXmlNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void
   ): void;
-  public flattenedXmlMapWithXmlName(
-    args: FlattenedXmlMapWithXmlNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void),
-    cb?: (err: any, data?: FlattenedXmlMapWithXmlNameCommandOutput) => void
-  ): Promise<FlattenedXmlMapWithXmlNameCommandOutput> | void {
-    const command = new FlattenedXmlMapWithXmlNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Flattened maps with @xmlNamespace and @xmlName
+   * @see {@link FlattenedXmlMapWithXmlNamespaceCommand}
    */
-  public flattenedXmlMapWithXmlNamespace(
+  flattenedXmlMapWithXmlNamespace(): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput>;
+  flattenedXmlMapWithXmlNamespace(
     args: FlattenedXmlMapWithXmlNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput>;
-  public flattenedXmlMapWithXmlNamespace(
+  flattenedXmlMapWithXmlNamespace(
     args: FlattenedXmlMapWithXmlNamespaceCommandInput,
     cb: (err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void
   ): void;
-  public flattenedXmlMapWithXmlNamespace(
+  flattenedXmlMapWithXmlNamespace(
     args: FlattenedXmlMapWithXmlNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void
   ): void;
-  public flattenedXmlMapWithXmlNamespace(
-    args: FlattenedXmlMapWithXmlNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: FlattenedXmlMapWithXmlNamespaceCommandOutput) => void
-  ): Promise<FlattenedXmlMapWithXmlNamespaceCommandOutput> | void {
-    const command = new FlattenedXmlMapWithXmlNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This operation has three possible return values:
-   *
-   * 1. A successful response in the form of GreetingWithErrorsOutput
-   * 2. An InvalidGreeting error.
-   * 3. A BadRequest error.
+   * @see {@link FractionalSecondsCommand}
    */
-  public greetingWithErrors(
+  fractionalSeconds(): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<FractionalSecondsCommandOutput>;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+  fractionalSeconds(
+    args: FractionalSecondsCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: FractionalSecondsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GreetingWithErrorsCommand}
+   */
+  greetingWithErrors(): Promise<GreetingWithErrorsCommandOutput>;
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<GreetingWithErrorsCommandOutput>;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
+  greetingWithErrors(
     args: GreetingWithErrorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: GreetingWithErrorsCommandOutput) => void
   ): void;
-  public greetingWithErrors(
-    args: GreetingWithErrorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GreetingWithErrorsCommandOutput) => void),
-    cb?: (err: any, data?: GreetingWithErrorsCommandOutput) => void
-  ): Promise<GreetingWithErrorsCommandOutput> | void {
-    const command = new GreetingWithErrorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public hostWithPathOperation(
+  /**
+   * @see {@link HostWithPathOperationCommand}
+   */
+  hostWithPathOperation(): Promise<HostWithPathOperationCommandOutput>;
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<HostWithPathOperationCommandOutput>;
-  public hostWithPathOperation(
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
     cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
   ): void;
-  public hostWithPathOperation(
+  hostWithPathOperation(
     args: HostWithPathOperationCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: HostWithPathOperationCommandOutput) => void
   ): void;
-  public hostWithPathOperation(
-    args: HostWithPathOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: HostWithPathOperationCommandOutput) => void),
-    cb?: (err: any, data?: HostWithPathOperationCommandOutput) => void
-  ): Promise<HostWithPathOperationCommandOutput> | void {
-    const command = new HostWithPathOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The xmlName trait on the output structure is ignored in AWS Query.
-   *
-   * The wrapping element is always operation name + "Response", and
-   * inside of that wrapper is another wrapper named operation name + "Result".
+   * @see {@link IgnoresWrappingXmlNameCommand}
    */
-  public ignoresWrappingXmlName(
+  ignoresWrappingXmlName(): Promise<IgnoresWrappingXmlNameCommandOutput>;
+  ignoresWrappingXmlName(
     args: IgnoresWrappingXmlNameCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<IgnoresWrappingXmlNameCommandOutput>;
-  public ignoresWrappingXmlName(
+  ignoresWrappingXmlName(
     args: IgnoresWrappingXmlNameCommandInput,
     cb: (err: any, data?: IgnoresWrappingXmlNameCommandOutput) => void
   ): void;
-  public ignoresWrappingXmlName(
+  ignoresWrappingXmlName(
     args: IgnoresWrappingXmlNameCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: IgnoresWrappingXmlNameCommandOutput) => void
   ): void;
-  public ignoresWrappingXmlName(
-    args: IgnoresWrappingXmlNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: IgnoresWrappingXmlNameCommandOutput) => void),
-    cb?: (err: any, data?: IgnoresWrappingXmlNameCommandOutput) => void
-  ): Promise<IgnoresWrappingXmlNameCommandOutput> | void {
-    const command = new IgnoresWrappingXmlNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This test serializes nested and recursive structure members.
+   * @see {@link NestedStructuresCommand}
    */
-  public nestedStructures(
+  nestedStructures(): Promise<NestedStructuresCommandOutput>;
+  nestedStructures(
     args: NestedStructuresCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<NestedStructuresCommandOutput>;
-  public nestedStructures(
+  nestedStructures(
     args: NestedStructuresCommandInput,
     cb: (err: any, data?: NestedStructuresCommandOutput) => void
   ): void;
-  public nestedStructures(
+  nestedStructures(
     args: NestedStructuresCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: NestedStructuresCommandOutput) => void
   ): void;
-  public nestedStructures(
-    args: NestedStructuresCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NestedStructuresCommandOutput) => void),
-    cb?: (err: any, data?: NestedStructuresCommandOutput) => void
-  ): Promise<NestedStructuresCommandOutput> | void {
-    const command = new NestedStructuresCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request or response payload because the operation has no input or output.
-   *
-   * While this should be rare, code generators must support this.
+   * @see {@link NoInputAndNoOutputCommand}
    */
-  public noInputAndNoOutput(
+  noInputAndNoOutput(): Promise<NoInputAndNoOutputCommandOutput>;
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<NoInputAndNoOutputCommandOutput>;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
+  noInputAndNoOutput(
     args: NoInputAndNoOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
   ): void;
-  public noInputAndNoOutput(
-    args: NoInputAndNoOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndNoOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndNoOutputCommandOutput) => void
-  ): Promise<NoInputAndNoOutputCommandOutput> | void {
-    const command = new NoInputAndNoOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * The example tests how requests and responses are serialized when there's
-   * no request payload or response members.
-   *
-   * While this should be rare, code generators must support this.
+   * @see {@link NoInputAndOutputCommand}
    */
-  public noInputAndOutput(
+  noInputAndOutput(): Promise<NoInputAndOutputCommandOutput>;
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<NoInputAndOutputCommandOutput>;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
+  noInputAndOutput(
     args: NoInputAndOutputCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
   ): void;
-  public noInputAndOutput(
-    args: NoInputAndOutputCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NoInputAndOutputCommandOutput) => void),
-    cb?: (err: any, data?: NoInputAndOutputCommandOutput) => void
-  ): Promise<NoInputAndOutputCommandOutput> | void {
-    const command = new NoInputAndOutputCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Automatically adds idempotency tokens.
+   * @see {@link PutWithContentEncodingCommand}
    */
-  public queryIdempotencyTokenAutoFill(
+  putWithContentEncoding(): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link QueryIdempotencyTokenAutoFillCommand}
+   */
+  queryIdempotencyTokenAutoFill(): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<QueryIdempotencyTokenAutoFillCommandOutput>;
-  public queryIdempotencyTokenAutoFill(
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
     cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
   ): void;
-  public queryIdempotencyTokenAutoFill(
+  queryIdempotencyTokenAutoFill(
     args: QueryIdempotencyTokenAutoFillCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
   ): void;
-  public queryIdempotencyTokenAutoFill(
-    args: QueryIdempotencyTokenAutoFillCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void),
-    cb?: (err: any, data?: QueryIdempotencyTokenAutoFillCommandOutput) => void
-  ): Promise<QueryIdempotencyTokenAutoFillCommandOutput> | void {
-    const command = new QueryIdempotencyTokenAutoFillCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This test serializes simple and complex lists.
+   * @see {@link QueryListsCommand}
    */
-  public queryLists(args: QueryListsCommandInput, options?: __HttpHandlerOptions): Promise<QueryListsCommandOutput>;
-  public queryLists(args: QueryListsCommandInput, cb: (err: any, data?: QueryListsCommandOutput) => void): void;
-  public queryLists(
+  queryLists(): Promise<QueryListsCommandOutput>;
+  queryLists(
     args: QueryListsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<QueryListsCommandOutput>;
+  queryLists(
+    args: QueryListsCommandInput,
     cb: (err: any, data?: QueryListsCommandOutput) => void
   ): void;
-  public queryLists(
+  queryLists(
     args: QueryListsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryListsCommandOutput) => void),
-    cb?: (err: any, data?: QueryListsCommandOutput) => void
-  ): Promise<QueryListsCommandOutput> | void {
-    const command = new QueryListsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: QueryListsCommandOutput) => void
+  ): void;
 
   /**
-   * This test serializes simple and complex maps.
+   * @see {@link QueryMapsCommand}
    */
-  public queryMaps(args: QueryMapsCommandInput, options?: __HttpHandlerOptions): Promise<QueryMapsCommandOutput>;
-  public queryMaps(args: QueryMapsCommandInput, cb: (err: any, data?: QueryMapsCommandOutput) => void): void;
-  public queryMaps(
+  queryMaps(): Promise<QueryMapsCommandOutput>;
+  queryMaps(
     args: QueryMapsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<QueryMapsCommandOutput>;
+  queryMaps(
+    args: QueryMapsCommandInput,
     cb: (err: any, data?: QueryMapsCommandOutput) => void
   ): void;
-  public queryMaps(
+  queryMaps(
     args: QueryMapsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryMapsCommandOutput) => void),
-    cb?: (err: any, data?: QueryMapsCommandOutput) => void
-  ): Promise<QueryMapsCommandOutput> | void {
-    const command = new QueryMapsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: QueryMapsCommandOutput) => void
+  ): void;
 
   /**
-   * This test serializes timestamps.
-   *
-   * 1. Timestamps are serialized as RFC 3339 date-time values by default.
-   * 2. A timestampFormat trait on a member changes the format.
-   * 3. A timestampFormat trait on the shape targeted by the member changes the format.
+   * @see {@link QueryTimestampsCommand}
    */
-  public queryTimestamps(
+  queryTimestamps(): Promise<QueryTimestampsCommandOutput>;
+  queryTimestamps(
     args: QueryTimestampsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<QueryTimestampsCommandOutput>;
-  public queryTimestamps(
+  queryTimestamps(
     args: QueryTimestampsCommandInput,
     cb: (err: any, data?: QueryTimestampsCommandOutput) => void
   ): void;
-  public queryTimestamps(
+  queryTimestamps(
     args: QueryTimestampsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: QueryTimestampsCommandOutput) => void
   ): void;
-  public queryTimestamps(
-    args: QueryTimestampsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryTimestampsCommandOutput) => void),
-    cb?: (err: any, data?: QueryTimestampsCommandOutput) => void
-  ): Promise<QueryTimestampsCommandOutput> | void {
-    const command = new QueryTimestampsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Recursive shapes
+   * @see {@link RecursiveXmlShapesCommand}
    */
-  public recursiveXmlShapes(
+  recursiveXmlShapes(): Promise<RecursiveXmlShapesCommandOutput>;
+  recursiveXmlShapes(
     args: RecursiveXmlShapesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<RecursiveXmlShapesCommandOutput>;
-  public recursiveXmlShapes(
+  recursiveXmlShapes(
     args: RecursiveXmlShapesCommandInput,
     cb: (err: any, data?: RecursiveXmlShapesCommandOutput) => void
   ): void;
-  public recursiveXmlShapes(
+  recursiveXmlShapes(
     args: RecursiveXmlShapesCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: RecursiveXmlShapesCommandOutput) => void
   ): void;
-  public recursiveXmlShapes(
-    args: RecursiveXmlShapesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RecursiveXmlShapesCommandOutput) => void),
-    cb?: (err: any, data?: RecursiveXmlShapesCommandOutput) => void
-  ): Promise<RecursiveXmlShapesCommandOutput> | void {
-    const command = new RecursiveXmlShapesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This test serializes strings, numbers, and boolean values.
+   * @see {@link SimpleInputParamsCommand}
    */
-  public simpleInputParams(
+  simpleInputParams(): Promise<SimpleInputParamsCommandOutput>;
+  simpleInputParams(
     args: SimpleInputParamsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<SimpleInputParamsCommandOutput>;
-  public simpleInputParams(
+  simpleInputParams(
     args: SimpleInputParamsCommandInput,
     cb: (err: any, data?: SimpleInputParamsCommandOutput) => void
   ): void;
-  public simpleInputParams(
+  simpleInputParams(
     args: SimpleInputParamsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: SimpleInputParamsCommandOutput) => void
   ): void;
-  public simpleInputParams(
-    args: SimpleInputParamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SimpleInputParamsCommandOutput) => void),
-    cb?: (err: any, data?: SimpleInputParamsCommandOutput) => void
-  ): Promise<SimpleInputParamsCommandOutput> | void {
-    const command = new SimpleInputParamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public simpleScalarXmlProperties(
-    args: SimpleScalarXmlPropertiesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SimpleScalarXmlPropertiesCommandOutput>;
-  public simpleScalarXmlProperties(
-    args: SimpleScalarXmlPropertiesCommandInput,
-    cb: (err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void
-  ): void;
-  public simpleScalarXmlProperties(
-    args: SimpleScalarXmlPropertiesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void
-  ): void;
-  public simpleScalarXmlProperties(
-    args: SimpleScalarXmlPropertiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void),
-    cb?: (err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void
-  ): Promise<SimpleScalarXmlPropertiesCommandOutput> | void {
-    const command = new SimpleScalarXmlPropertiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Blobs are base64 encoded
+   * @see {@link SimpleScalarXmlPropertiesCommand}
    */
-  public xmlBlobs(args: XmlBlobsCommandInput, options?: __HttpHandlerOptions): Promise<XmlBlobsCommandOutput>;
-  public xmlBlobs(args: XmlBlobsCommandInput, cb: (err: any, data?: XmlBlobsCommandOutput) => void): void;
-  public xmlBlobs(
+  simpleScalarXmlProperties(): Promise<SimpleScalarXmlPropertiesCommandOutput>;
+  simpleScalarXmlProperties(
+    args: SimpleScalarXmlPropertiesCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<SimpleScalarXmlPropertiesCommandOutput>;
+  simpleScalarXmlProperties(
+    args: SimpleScalarXmlPropertiesCommandInput,
+    cb: (err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void
+  ): void;
+  simpleScalarXmlProperties(
+    args: SimpleScalarXmlPropertiesCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: SimpleScalarXmlPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlBlobsCommand}
+   */
+  xmlBlobs(): Promise<XmlBlobsCommandOutput>;
+  xmlBlobs(
     args: XmlBlobsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlBlobsCommandOutput>;
+  xmlBlobs(
+    args: XmlBlobsCommandInput,
     cb: (err: any, data?: XmlBlobsCommandOutput) => void
   ): void;
-  public xmlBlobs(
+  xmlBlobs(
     args: XmlBlobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlBlobsCommandOutput) => void),
-    cb?: (err: any, data?: XmlBlobsCommandOutput) => void
-  ): Promise<XmlBlobsCommandOutput> | void {
-    const command = new XmlBlobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlBlobsCommandOutput) => void
+  ): void;
 
-  public xmlEmptyBlobs(
+  /**
+   * @see {@link XmlEmptyBlobsCommand}
+   */
+  xmlEmptyBlobs(): Promise<XmlEmptyBlobsCommandOutput>;
+  xmlEmptyBlobs(
     args: XmlEmptyBlobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<XmlEmptyBlobsCommandOutput>;
-  public xmlEmptyBlobs(
+  xmlEmptyBlobs(
     args: XmlEmptyBlobsCommandInput,
     cb: (err: any, data?: XmlEmptyBlobsCommandOutput) => void
   ): void;
-  public xmlEmptyBlobs(
+  xmlEmptyBlobs(
     args: XmlEmptyBlobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: XmlEmptyBlobsCommandOutput) => void
   ): void;
-  public xmlEmptyBlobs(
-    args: XmlEmptyBlobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlEmptyBlobsCommandOutput) => void),
-    cb?: (err: any, data?: XmlEmptyBlobsCommandOutput) => void
-  ): Promise<XmlEmptyBlobsCommandOutput> | void {
-    const command = new XmlEmptyBlobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public xmlEmptyLists(
+  /**
+   * @see {@link XmlEmptyListsCommand}
+   */
+  xmlEmptyLists(): Promise<XmlEmptyListsCommandOutput>;
+  xmlEmptyLists(
     args: XmlEmptyListsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<XmlEmptyListsCommandOutput>;
-  public xmlEmptyLists(
+  xmlEmptyLists(
     args: XmlEmptyListsCommandInput,
     cb: (err: any, data?: XmlEmptyListsCommandOutput) => void
   ): void;
-  public xmlEmptyLists(
+  xmlEmptyLists(
     args: XmlEmptyListsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: XmlEmptyListsCommandOutput) => void
   ): void;
-  public xmlEmptyLists(
-    args: XmlEmptyListsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlEmptyListsCommandOutput) => void),
-    cb?: (err: any, data?: XmlEmptyListsCommandOutput) => void
-  ): Promise<XmlEmptyListsCommandOutput> | void {
-    const command = new XmlEmptyListsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
-  public xmlEmptyMaps(
+  /**
+   * @see {@link XmlEmptyMapsCommand}
+   */
+  xmlEmptyMaps(): Promise<XmlEmptyMapsCommandOutput>;
+  xmlEmptyMaps(
     args: XmlEmptyMapsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<XmlEmptyMapsCommandOutput>;
-  public xmlEmptyMaps(args: XmlEmptyMapsCommandInput, cb: (err: any, data?: XmlEmptyMapsCommandOutput) => void): void;
-  public xmlEmptyMaps(
+  xmlEmptyMaps(
     args: XmlEmptyMapsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: XmlEmptyMapsCommandOutput) => void
   ): void;
-  public xmlEmptyMaps(
+  xmlEmptyMaps(
     args: XmlEmptyMapsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlEmptyMapsCommandOutput) => void),
-    cb?: (err: any, data?: XmlEmptyMapsCommandOutput) => void
-  ): Promise<XmlEmptyMapsCommandOutput> | void {
-    const command = new XmlEmptyMapsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlEmptyMapsCommandOutput) => void
+  ): void;
 
   /**
-   * This example serializes enums as top level properties, in lists, sets, and maps.
+   * @see {@link XmlEnumsCommand}
    */
-  public xmlEnums(args: XmlEnumsCommandInput, options?: __HttpHandlerOptions): Promise<XmlEnumsCommandOutput>;
-  public xmlEnums(args: XmlEnumsCommandInput, cb: (err: any, data?: XmlEnumsCommandOutput) => void): void;
-  public xmlEnums(
+  xmlEnums(): Promise<XmlEnumsCommandOutput>;
+  xmlEnums(
     args: XmlEnumsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlEnumsCommandOutput>;
+  xmlEnums(
+    args: XmlEnumsCommandInput,
     cb: (err: any, data?: XmlEnumsCommandOutput) => void
   ): void;
-  public xmlEnums(
+  xmlEnums(
     args: XmlEnumsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlEnumsCommandOutput) => void),
-    cb?: (err: any, data?: XmlEnumsCommandOutput) => void
-  ): Promise<XmlEnumsCommandOutput> | void {
-    const command = new XmlEnumsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlEnumsCommandOutput) => void
+  ): void;
 
   /**
-   * This test case serializes XML lists for the following cases for both
-   * input and output:
-   *
-   * 1. Normal XML lists.
-   * 2. Normal XML sets.
-   * 3. XML lists of lists.
-   * 4. XML lists with @xmlName on its members
-   * 5. Flattened XML lists.
-   * 6. Flattened XML lists with @xmlName.
-   * 7. Lists of structures.
+   * @see {@link XmlIntEnumsCommand}
    */
-  public xmlLists(args: XmlListsCommandInput, options?: __HttpHandlerOptions): Promise<XmlListsCommandOutput>;
-  public xmlLists(args: XmlListsCommandInput, cb: (err: any, data?: XmlListsCommandOutput) => void): void;
-  public xmlLists(
+  xmlIntEnums(): Promise<XmlIntEnumsCommandOutput>;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlIntEnumsCommandOutput>;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    cb: (err: any, data?: XmlIntEnumsCommandOutput) => void
+  ): void;
+  xmlIntEnums(
+    args: XmlIntEnumsCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlIntEnumsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlListsCommand}
+   */
+  xmlLists(): Promise<XmlListsCommandOutput>;
+  xmlLists(
     args: XmlListsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlListsCommandOutput>;
+  xmlLists(
+    args: XmlListsCommandInput,
     cb: (err: any, data?: XmlListsCommandOutput) => void
   ): void;
-  public xmlLists(
+  xmlLists(
     args: XmlListsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlListsCommandOutput) => void),
-    cb?: (err: any, data?: XmlListsCommandOutput) => void
-  ): Promise<XmlListsCommandOutput> | void {
-    const command = new XmlListsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlListsCommandOutput) => void
+  ): void;
 
   /**
-   * The example tests basic map serialization.
+   * @see {@link XmlMapsCommand}
    */
-  public xmlMaps(args: XmlMapsCommandInput, options?: __HttpHandlerOptions): Promise<XmlMapsCommandOutput>;
-  public xmlMaps(args: XmlMapsCommandInput, cb: (err: any, data?: XmlMapsCommandOutput) => void): void;
-  public xmlMaps(
+  xmlMaps(): Promise<XmlMapsCommandOutput>;
+  xmlMaps(
     args: XmlMapsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlMapsCommandOutput>;
+  xmlMaps(
+    args: XmlMapsCommandInput,
     cb: (err: any, data?: XmlMapsCommandOutput) => void
   ): void;
-  public xmlMaps(
+  xmlMaps(
     args: XmlMapsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlMapsCommandOutput) => void),
-    cb?: (err: any, data?: XmlMapsCommandOutput) => void
-  ): Promise<XmlMapsCommandOutput> | void {
-    const command = new XmlMapsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public xmlMapsXmlName(
-    args: XmlMapsXmlNameCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<XmlMapsXmlNameCommandOutput>;
-  public xmlMapsXmlName(
-    args: XmlMapsXmlNameCommandInput,
-    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlMapsCommandOutput) => void
   ): void;
-  public xmlMapsXmlName(
-    args: XmlMapsXmlNameCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
-  ): void;
-  public xmlMapsXmlName(
-    args: XmlMapsXmlNameCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlMapsXmlNameCommandOutput) => void),
-    cb?: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
-  ): Promise<XmlMapsXmlNameCommandOutput> | void {
-    const command = new XmlMapsXmlNameCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  public xmlNamespaces(
-    args: XmlNamespacesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<XmlNamespacesCommandOutput>;
-  public xmlNamespaces(
-    args: XmlNamespacesCommandInput,
-    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
-  ): void;
-  public xmlNamespaces(
-    args: XmlNamespacesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
-  ): void;
-  public xmlNamespaces(
-    args: XmlNamespacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlNamespacesCommandOutput) => void),
-    cb?: (err: any, data?: XmlNamespacesCommandOutput) => void
-  ): Promise<XmlNamespacesCommandOutput> | void {
-    const command = new XmlNamespacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * This tests how timestamps are serialized, including using the
-   * default format of date-time and various @timestampFormat trait
-   * values.
+   * @see {@link XmlMapsXmlNameCommand}
    */
-  public xmlTimestamps(
+  xmlMapsXmlName(): Promise<XmlMapsXmlNameCommandOutput>;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlMapsXmlNameCommandOutput>;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
+  ): void;
+  xmlMapsXmlName(
+    args: XmlMapsXmlNameCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlMapsXmlNameCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlNamespacesCommand}
+   */
+  xmlNamespaces(): Promise<XmlNamespacesCommandOutput>;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    options?: QueryProtocolRequestOptions
+  ): Promise<XmlNamespacesCommandOutput>;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
+  ): void;
+  xmlNamespaces(
+    args: XmlNamespacesCommandInput,
+    options: QueryProtocolRequestOptions,
+    cb: (err: any, data?: XmlNamespacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link XmlTimestampsCommand}
+   */
+  xmlTimestamps(): Promise<XmlTimestampsCommandOutput>;
+  xmlTimestamps(
     args: XmlTimestampsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: QueryProtocolRequestOptions
   ): Promise<XmlTimestampsCommandOutput>;
-  public xmlTimestamps(
+  xmlTimestamps(
     args: XmlTimestampsCommandInput,
     cb: (err: any, data?: XmlTimestampsCommandOutput) => void
   ): void;
-  public xmlTimestamps(
+  xmlTimestamps(
     args: XmlTimestampsCommandInput,
-    options: __HttpHandlerOptions,
+    options: QueryProtocolRequestOptions,
     cb: (err: any, data?: XmlTimestampsCommandOutput) => void
   ): void;
-  public xmlTimestamps(
-    args: XmlTimestampsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: XmlTimestampsCommandOutput) => void),
-    cb?: (err: any, data?: XmlTimestampsCommandOutput) => void
-  ): Promise<XmlTimestampsCommandOutput> | void {
-    const command = new XmlTimestampsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 }
+
+/**
+ * A query service that sends query requests and XML responses.
+ * @public
+ */
+export class QueryProtocol extends QueryProtocolClient implements QueryProtocol {}
+createAggregatedClient(commands, QueryProtocol);

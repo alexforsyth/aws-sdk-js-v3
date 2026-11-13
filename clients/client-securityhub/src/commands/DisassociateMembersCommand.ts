@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DisassociateMembersRequest, DisassociateMembersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DisassociateMembersCommand,
-  serializeAws_restJson1DisassociateMembersCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateMembersRequest, DisassociateMembersResponse } from "../models/models_2";
+import { DisassociateMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateMembersCommand}.
+ */
 export interface DisassociateMembersCommandInput extends DisassociateMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateMembersCommand}.
+ */
 export interface DisassociateMembersCommandOutput extends DisassociateMembersResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,83 @@ export interface DisassociateMembersCommandOutput extends DisassociateMembersRes
  * ```javascript
  * import { SecurityHubClient, DisassociateMembersCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, DisassociateMembersCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // DisassociateMembersRequest
+ *   AccountIds: [ // AccountIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DisassociateMembersCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateMembersCommandInput - {@link DisassociateMembersCommandInput}
+ * @returns {@link DisassociateMembersCommandOutput}
  * @see {@link DisassociateMembersCommandInput} for command's `input` shape.
  * @see {@link DisassociateMembersCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action specified in the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To disassociate member accounts from administrator account
+ * ```javascript
+ * // The following example dissociates the specified member accounts from the associated administrator account.
+ * const input = {
+ *   AccountIds: [
+ *     "123456789012",
+ *     "111122223333"
+ *   ]
+ * };
+ * const command = new DisassociateMembersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DisassociateMembersCommand extends $Command<
-  DisassociateMembersCommandInput,
-  DisassociateMembersCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateMembersCommandInput, DisassociateMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "DisassociateMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateMembersResponse.filterSensitiveLog,
+export class DisassociateMembersCommand extends command<DisassociateMembersCommandInput, DisassociateMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateMembers",
+  DisassociateMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateMembersRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisassociateMembersCommandOutput> {
-    return deserializeAws_restJson1DisassociateMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateMembersCommandInput;
+      output: DisassociateMembersCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexModelsV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexModelsV2Client";
-import { UpdateExportRequest, UpdateExportResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateExportCommand,
-  serializeAws_restJson1UpdateExportCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateExportRequest, UpdateExportResponse } from "../models/models_1";
+import { UpdateExport$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateExportCommand}.
+ */
 export interface UpdateExportCommandInput extends UpdateExportRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateExportCommand}.
+ */
 export interface UpdateExportCommandOutput extends UpdateExportResponse, __MetadataBearer {}
 
 /**
@@ -26,74 +27,101 @@ export interface UpdateExportCommandOutput extends UpdateExportResponse, __Metad
  *          <p>The password is not required. If you don't supply a password, Amazon Lex
  *          generates a zip file that is not protected by a password. This is the
  *          archive that is available at the pre-signed S3 URL provided by the
- *              operation.</p>
+ *             <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html">DescribeExport</a> operation.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelsV2Client, UpdateExportCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
  * // const { LexModelsV2Client, UpdateExportCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
  * const client = new LexModelsV2Client(config);
+ * const input = { // UpdateExportRequest
+ *   exportId: "STRING_VALUE", // required
+ *   filePassword: "STRING_VALUE",
+ * };
  * const command = new UpdateExportCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateExportResponse
+ * //   exportId: "STRING_VALUE",
+ * //   resourceSpecification: { // ExportResourceSpecification
+ * //     botExportSpecification: { // BotExportSpecification
+ * //       botId: "STRING_VALUE", // required
+ * //       botVersion: "STRING_VALUE", // required
+ * //     },
+ * //     botLocaleExportSpecification: { // BotLocaleExportSpecification
+ * //       botId: "STRING_VALUE", // required
+ * //       botVersion: "STRING_VALUE", // required
+ * //       localeId: "STRING_VALUE", // required
+ * //     },
+ * //     customVocabularyExportSpecification: { // CustomVocabularyExportSpecification
+ * //       botId: "STRING_VALUE", // required
+ * //       botVersion: "STRING_VALUE", // required
+ * //       localeId: "STRING_VALUE", // required
+ * //     },
+ * //     testSetExportSpecification: { // TestSetExportSpecification
+ * //       testSetId: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   fileFormat: "LexJson" || "TSV" || "CSV",
+ * //   exportStatus: "InProgress" || "Completed" || "Failed" || "Deleting",
+ * //   creationDateTime: new Date("TIMESTAMP"),
+ * //   lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateExportCommandInput - {@link UpdateExportCommandInput}
+ * @returns {@link UpdateExportCommandOutput}
  * @see {@link UpdateExportCommandInput} for command's `input` shape.
  * @see {@link UpdateExportCommandOutput} for command's `response` shape.
- * @see {@link LexModelsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The action that you tried to perform couldn't be completed because
+ *          the resource is in a conflicting state. For example, deleting a bot
+ *          that is in the CREATING state. Try your request again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>You asked to describe a resource that doesn't exist. Check the
+ *          resource that you are requesting and try again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have reached a quota for your bot. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateExportCommand extends $Command<
-  UpdateExportCommandInput,
-  UpdateExportCommandOutput,
-  LexModelsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateExportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateExportCommandInput, UpdateExportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelsV2Client";
-    const commandName = "UpdateExportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateExportRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateExportResponse.filterSensitiveLog,
+export class UpdateExportCommand extends command<UpdateExportCommandInput, UpdateExportCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateExport",
+  UpdateExport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateExportRequest;
+      output: UpdateExportResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateExportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateExportCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateExportCommandOutput> {
-    return deserializeAws_restJson1UpdateExportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateExportCommandInput;
+      output: UpdateExportCommandOutput;
+    };
+  };
 }

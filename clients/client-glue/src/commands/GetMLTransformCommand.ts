@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetMLTransformRequest, GetMLTransformResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetMLTransformCommand,
-  serializeAws_json1_1GetMLTransformCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMLTransformRequest, GetMLTransformResponse } from "../models/models_2";
+import { GetMLTransform$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMLTransformCommand}.
+ */
 export interface GetMLTransformCommandInput extends GetMLTransformRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMLTransformCommand}.
+ */
 export interface GetMLTransformCommandOutput extends GetMLTransformResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +33,126 @@ export interface GetMLTransformCommandOutput extends GetMLTransformResponse, __M
  * ```javascript
  * import { GlueClient, GetMLTransformCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetMLTransformCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetMLTransformRequest
+ *   TransformId: "STRING_VALUE", // required
+ * };
  * const command = new GetMLTransformCommand(input);
  * const response = await client.send(command);
+ * // { // GetMLTransformResponse
+ * //   TransformId: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   Status: "NOT_READY" || "READY" || "DELETING",
+ * //   CreatedOn: new Date("TIMESTAMP"),
+ * //   LastModifiedOn: new Date("TIMESTAMP"),
+ * //   InputRecordTables: [ // GlueTables
+ * //     { // GlueTable
+ * //       DatabaseName: "STRING_VALUE", // required
+ * //       TableName: "STRING_VALUE", // required
+ * //       CatalogId: "STRING_VALUE",
+ * //       ConnectionName: "STRING_VALUE",
+ * //       AdditionalOptions: { // GlueTableAdditionalOptions
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   Parameters: { // TransformParameters
+ * //     TransformType: "FIND_MATCHES", // required
+ * //     FindMatchesParameters: { // FindMatchesParameters
+ * //       PrimaryKeyColumnName: "STRING_VALUE",
+ * //       PrecisionRecallTradeoff: Number("double"),
+ * //       AccuracyCostTradeoff: Number("double"),
+ * //       EnforceProvidedLabels: true || false,
+ * //     },
+ * //   },
+ * //   EvaluationMetrics: { // EvaluationMetrics
+ * //     TransformType: "FIND_MATCHES", // required
+ * //     FindMatchesMetrics: { // FindMatchesMetrics
+ * //       AreaUnderPRCurve: Number("double"),
+ * //       Precision: Number("double"),
+ * //       Recall: Number("double"),
+ * //       F1: Number("double"),
+ * //       ConfusionMatrix: { // ConfusionMatrix
+ * //         NumTruePositives: Number("long"),
+ * //         NumFalsePositives: Number("long"),
+ * //         NumTrueNegatives: Number("long"),
+ * //         NumFalseNegatives: Number("long"),
+ * //       },
+ * //       ColumnImportances: [ // ColumnImportanceList
+ * //         { // ColumnImportance
+ * //           ColumnName: "STRING_VALUE",
+ * //           Importance: Number("double"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * //   LabelCount: Number("int"),
+ * //   Schema: [ // TransformSchema
+ * //     { // SchemaColumn
+ * //       Name: "STRING_VALUE",
+ * //       DataType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Role: "STRING_VALUE",
+ * //   GlueVersion: "STRING_VALUE",
+ * //   MaxCapacity: Number("double"),
+ * //   WorkerType: "Standard" || "G.1X" || "G.2X" || "G.4X" || "G.8X" || "G.025X" || "Z.2X" || "G.12X" || "G.16X" || "R.1X" || "R.2X" || "R.4X" || "R.8X",
+ * //   NumberOfWorkers: Number("int"),
+ * //   Timeout: Number("int"),
+ * //   MaxRetries: Number("int"),
+ * //   TransformEncryption: { // TransformEncryption
+ * //     MlUserDataEncryption: { // MLUserDataEncryption
+ * //       MlUserDataEncryptionMode: "DISABLED" || "SSE-KMS", // required
+ * //       KmsKeyId: "STRING_VALUE",
+ * //     },
+ * //     TaskRunSecurityConfigurationName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetMLTransformCommandInput - {@link GetMLTransformCommandInput}
+ * @returns {@link GetMLTransformCommandOutput}
  * @see {@link GetMLTransformCommandInput} for command's `input` shape.
  * @see {@link GetMLTransformCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetMLTransformCommand extends $Command<
-  GetMLTransformCommandInput,
-  GetMLTransformCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMLTransformCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMLTransformCommandInput, GetMLTransformCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetMLTransformCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMLTransformRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMLTransformResponse.filterSensitiveLog,
+export class GetMLTransformCommand extends command<GetMLTransformCommandInput, GetMLTransformCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMLTransform",
+  GetMLTransform$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMLTransformRequest;
+      output: GetMLTransformResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMLTransformCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetMLTransformCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMLTransformCommandOutput> {
-    return deserializeAws_json1_1GetMLTransformCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMLTransformCommandInput;
+      output: GetMLTransformCommandOutput;
+    };
+  };
 }

@@ -1,95 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteUserRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteUserCommand,
-  serializeAws_restJson1DeleteUserCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteUserRequest } from "../models/models_0";
+import { DeleteUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteUserCommand}.
+ */
 export interface DeleteUserCommandInput extends DeleteUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteUserCommand}.
+ */
 export interface DeleteUserCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p>
+ *          <important>
+ *             <p>Deleting a user immediately and permanently deletes all content in that user's folder structure. Site retention policies do NOT apply to this type of deletion.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkDocsClient, DeleteUserCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, DeleteUserCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // DeleteUserRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   UserId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteUserCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteUserCommandInput - {@link DeleteUserCommandInput}
+ * @returns {@link DeleteUserCommandOutput}
  * @see {@link DeleteUserCommandInput} for command's `input` shape.
  * @see {@link DeleteUserCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteUserCommand extends $Command<
-  DeleteUserCommandInput,
-  DeleteUserCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteUserCommandInput, DeleteUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "DeleteUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteUserCommand extends command<DeleteUserCommandInput, DeleteUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteUser",
+  DeleteUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteUserRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteUserCommandOutput> {
-    return deserializeAws_restJson1DeleteUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteUserCommandInput;
+      output: DeleteUserCommandOutput;
+    };
+  };
 }

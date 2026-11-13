@@ -1,0 +1,145 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelUpdateRequest, CancelUpdateResponse } from "../models/models_0";
+import { CancelUpdate$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelUpdateCommand}.
+ */
+export interface CancelUpdateCommandInput extends CancelUpdateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelUpdateCommand}.
+ */
+export interface CancelUpdateCommandOutput extends CancelUpdateResponse, __MetadataBearer {}
+
+/**
+ * <p>Cancels an in-progress update to an Amazon EKS cluster on a best-effort basis. Cancellation
+ *             is only performed if the update can be cancelled. Currently, this is supported for
+ *             <code>VersionRollback</code> update types on EKS Auto Mode clusters when nodes are
+ *             rolling back.</p>
+ *          <p>A successful cancellation stops the node rollback. After cancellation, nodes converge
+ *             to the current cluster version honoring configured disruption controls. If the control
+ *             plane rollback has already begun, the cancellation request fails.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EKSClient, CancelUpdateCommand } from "@aws-sdk/client-eks"; // ES Modules import
+ * // const { EKSClient, CancelUpdateCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
+ * const client = new EKSClient(config);
+ * const input = { // CancelUpdateRequest
+ *   name: "STRING_VALUE", // required
+ *   updateId: "STRING_VALUE", // required
+ *   clientRequestToken: "STRING_VALUE",
+ * };
+ * const command = new CancelUpdateCommand(input);
+ * const response = await client.send(command);
+ * // { // CancelUpdateResponse
+ * //   update: { // Update
+ * //     id: "STRING_VALUE",
+ * //     status: "InProgress" || "Failed" || "Cancelled" || "Successful",
+ * //     type: "VersionUpdate" || "EndpointAccessUpdate" || "LoggingUpdate" || "ConfigUpdate" || "AssociateIdentityProviderConfig" || "DisassociateIdentityProviderConfig" || "AssociateEncryptionConfig" || "AddonUpdate" || "VpcConfigUpdate" || "AccessConfigUpdate" || "UpgradePolicyUpdate" || "ZonalShiftConfigUpdate" || "AutoModeUpdate" || "RemoteNetworkConfigUpdate" || "DeletionProtectionUpdate" || "CapabilityUpdate" || "ControlPlaneScalingConfigUpdate" || "VendedLogsUpdate" || "ControlPlaneEgressUpdate" || "VersionRollback" || "ControlPlaneComponentConfigUpdate" || "CertificateAuthorityUpdate",
+ * //     params: [ // UpdateParams
+ * //       { // UpdateParam
+ * //         type: "Version" || "PlatformVersion" || "EndpointPrivateAccess" || "EndpointPublicAccess" || "ClusterLogging" || "DesiredSize" || "LabelsToAdd" || "LabelsToRemove" || "TaintsToAdd" || "TaintsToRemove" || "MaxSize" || "MinSize" || "ReleaseVersion" || "PublicAccessCidrs" || "LaunchTemplateName" || "LaunchTemplateVersion" || "IdentityProviderConfig" || "EncryptionConfig" || "AddonVersion" || "ServiceAccountRoleArn" || "ResolveConflicts" || "MaxUnavailable" || "MaxUnavailablePercentage" || "NodeRepairEnabled" || "UpdateStrategy" || "ConfigurationValues" || "SecurityGroups" || "Subnets" || "AuthenticationMode" || "PodIdentityAssociations" || "UpgradePolicy" || "ZonalShiftConfig" || "ComputeConfig" || "StorageConfig" || "KubernetesNetworkConfig" || "RemoteNetworkConfig" || "DeletionProtection" || "NodeRepairConfig" || "RoleArn" || "RoleMappingsToAddOrUpdate" || "RoleMappingsToRemove" || "NetworkAccess" || "VendedLogs" || "UpdatedTier" || "PreviousTier" || "EnableCrossNamespace" || "DisabledServices" || "WarmPoolEnabled" || "WarmPoolMaxGroupPreparedCapacity" || "WarmPoolMinSize" || "WarmPoolState" || "WarmPoolReuseOnScaleIn" || "ControlPlaneEgressMode" || "KubeApiServerConfig" || "KubeSchedulerConfig" || "KubeControllerManagerConfig" || "ActiveCertificateAuthority" || "TrustedCertificateAuthorities" || "CertificateAuthorityId" || "SigningStatus",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     errors: [ // ErrorDetails
+ * //       { // ErrorDetail
+ * //         errorCode: "SubnetNotFound" || "SecurityGroupNotFound" || "EniLimitReached" || "IpNotAvailable" || "AccessDenied" || "OperationNotPermitted" || "VpcIdNotFound" || "Unknown" || "NodeCreationFailure" || "PodEvictionFailure" || "InsufficientFreeAddresses" || "ClusterUnreachable" || "InsufficientNumberOfReplicas" || "ConfigurationConflict" || "AdmissionRequestDenied" || "UnsupportedAddonModification" || "K8sResourceNotFound",
+ * //         errorMessage: "STRING_VALUE",
+ * //         resourceIds: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     cancellation: { // Cancellation
+ * //       status: "InProgress" || "Failed" || "Successful",
+ * //       reason: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param CancelUpdateCommandInput - {@link CancelUpdateCommandInput}
+ * @returns {@link CancelUpdateCommandOutput}
+ * @see {@link CancelUpdateCommandInput} for command's `input` shape.
+ * @see {@link CancelUpdateCommandOutput} for command's `response` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid given the state of the cluster. Check the state of the cluster
+ *             and the associated operations.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>Amazon EKS detected upgrade readiness issues. Call the <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_ListInsights.html">
+ *                <code>ListInsights</code>
+ *             </a> API to view detected upgrade blocking issues.
+ *             Pass the <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateClusterVersion.html#API_UpdateClusterVersion_RequestBody">
+ *                <code>force</code>
+ *             </a> flag when updating to override upgrade readiness
+ *             errors.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is throttling
+ *             requests.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
+ */
+export class CancelUpdateCommand extends command<CancelUpdateCommandInput, CancelUpdateCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelUpdate",
+  CancelUpdate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelUpdateRequest;
+      output: CancelUpdateResponse;
+    };
+    sdk: {
+      input: CancelUpdateCommandInput;
+      output: CancelUpdateCommandOutput;
+    };
+  };
+}

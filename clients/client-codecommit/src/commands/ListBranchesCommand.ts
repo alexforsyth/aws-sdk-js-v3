@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { ListBranchesInput, ListBranchesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListBranchesCommand,
-  serializeAws_json1_1ListBranchesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBranchesInput, ListBranchesOutput } from "../models/models_0";
+import { ListBranches$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBranchesCommand}.
+ */
 export interface ListBranchesCommandInput extends ListBranchesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBranchesCommand}.
+ */
 export interface ListBranchesCommandOutput extends ListBranchesOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface ListBranchesCommandOutput extends ListBranchesOutput, __Metadat
  * ```javascript
  * import { CodeCommitClient, ListBranchesCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, ListBranchesCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // ListBranchesInput
+ *   repositoryName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListBranchesCommand(input);
  * const response = await client.send(command);
+ * // { // ListBranchesOutput
+ * //   branches: [ // BranchNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBranchesCommandInput - {@link ListBranchesCommandInput}
+ * @returns {@link ListBranchesCommandOutput}
  * @see {@link ListBranchesCommandInput} for command's `input` shape.
  * @see {@link ListBranchesCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link InvalidContinuationTokenException} (client fault)
+ *  <p>The specified continuation token is not valid.</p>
+ *
+ * @throws {@link InvalidRepositoryNameException} (client fault)
+ *  <p>A specified repository name is not valid.</p>
+ *          <note>
+ *             <p>This exception occurs only when a specified repository name is not valid. Other
+ *                 exceptions occur when a required repository parameter is missing, or when a
+ *                 specified repository does not exist.</p>
+ *          </note>
+ *
+ * @throws {@link RepositoryDoesNotExistException} (client fault)
+ *  <p>The specified repository does not exist.</p>
+ *
+ * @throws {@link RepositoryNameRequiredException} (client fault)
+ *  <p>A repository name is required, but was not specified.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class ListBranchesCommand extends $Command<
-  ListBranchesCommandInput,
-  ListBranchesCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBranchesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBranchesCommandInput, ListBranchesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "ListBranchesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBranchesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBranchesOutput.filterSensitiveLog,
+export class ListBranchesCommand extends command<ListBranchesCommandInput, ListBranchesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBranches",
+  ListBranches$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBranchesInput;
+      output: ListBranchesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBranchesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListBranchesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBranchesCommandOutput> {
-    return deserializeAws_json1_1ListBranchesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBranchesCommandInput;
+      output: ListBranchesCommandOutput;
+    };
+  };
 }

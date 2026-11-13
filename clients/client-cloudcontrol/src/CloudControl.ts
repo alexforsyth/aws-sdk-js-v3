@@ -1,336 +1,259 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import { CloudControlClient } from "./CloudControlClient";
 import {
+  type CancelResourceRequestCommandInput,
+  type CancelResourceRequestCommandOutput,
   CancelResourceRequestCommand,
-  CancelResourceRequestCommandInput,
-  CancelResourceRequestCommandOutput,
 } from "./commands/CancelResourceRequestCommand";
 import {
+  type CreateResourceCommandInput,
+  type CreateResourceCommandOutput,
   CreateResourceCommand,
-  CreateResourceCommandInput,
-  CreateResourceCommandOutput,
 } from "./commands/CreateResourceCommand";
 import {
+  type DeleteResourceCommandInput,
+  type DeleteResourceCommandOutput,
   DeleteResourceCommand,
-  DeleteResourceCommandInput,
-  DeleteResourceCommandOutput,
 } from "./commands/DeleteResourceCommand";
-import { GetResourceCommand, GetResourceCommandInput, GetResourceCommandOutput } from "./commands/GetResourceCommand";
 import {
+  type GetResourceCommandInput,
+  type GetResourceCommandOutput,
+  GetResourceCommand,
+} from "./commands/GetResourceCommand";
+import {
+  type GetResourceRequestStatusCommandInput,
+  type GetResourceRequestStatusCommandOutput,
   GetResourceRequestStatusCommand,
-  GetResourceRequestStatusCommandInput,
-  GetResourceRequestStatusCommandOutput,
 } from "./commands/GetResourceRequestStatusCommand";
 import {
+  type ListResourceRequestsCommandInput,
+  type ListResourceRequestsCommandOutput,
   ListResourceRequestsCommand,
-  ListResourceRequestsCommandInput,
-  ListResourceRequestsCommandOutput,
 } from "./commands/ListResourceRequestsCommand";
 import {
+  type ListResourcesCommandInput,
+  type ListResourcesCommandOutput,
   ListResourcesCommand,
-  ListResourcesCommandInput,
-  ListResourcesCommandOutput,
 } from "./commands/ListResourcesCommand";
 import {
+  type UpdateResourceCommandInput,
+  type UpdateResourceCommandOutput,
   UpdateResourceCommand,
-  UpdateResourceCommandInput,
-  UpdateResourceCommandOutput,
 } from "./commands/UpdateResourceCommand";
+import type { CloudControlServiceException } from "./models/CloudControlServiceException";
+import { paginateListResourceRequests } from "./pagination/ListResourceRequestsPaginator";
+import { paginateListResources } from "./pagination/ListResourcesPaginator";
+import { waitUntilResourceRequestSuccess } from "./waiters/waitForResourceRequestSuccess";
+
+const commands = {
+  CancelResourceRequestCommand,
+  CreateResourceCommand,
+  DeleteResourceCommand,
+  GetResourceCommand,
+  GetResourceRequestStatusCommand,
+  ListResourceRequestsCommand,
+  ListResourcesCommand,
+  UpdateResourceCommand,
+};
+const paginators = {
+  paginateListResourceRequests,
+  paginateListResources,
+};
+const waiters = {
+  waitUntilResourceRequestSuccess,
+};
 
 /**
- * <p>Use Amazon Web Services Cloud Control API to create, read, update, delete, and list (CRUD-L) your cloud resources that
- *       belong to a wide range of services--both Amazon Web Services and third-party.  With the Cloud Control API
- *       standardized set of application programming interfaces (APIs), you can perform CRUD-L operations
- *       on any supported resources in your Amazon Web Services account. Using Cloud Control API, you won't have to generate code
- *       or scripts specific to each individual service responsible for those resources.</p>
- *          <p>For more information about Amazon Web Services Cloud Control API, see the <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html">Amazon Web Services Cloud Control API User
- *         Guide</a>.</p>
+ * @public
  */
-export class CloudControl extends CloudControlClient {
+export interface CloudControlRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CloudControl {
   /**
-   * <p>Cancels the specified resource operation request. For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel">Canceling resource operation requests</a> in the
-   *         <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <p>Only resource operations requests with a status of <code>PENDING</code> or
-   *         <code>IN_PROGRESS</code> can be cancelled.</p>
+   * @see {@link CancelResourceRequestCommand}
    */
-  public cancelResourceRequest(
+  cancelResourceRequest(
     args: CancelResourceRequestCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<CancelResourceRequestCommandOutput>;
-  public cancelResourceRequest(
+  cancelResourceRequest(
     args: CancelResourceRequestCommandInput,
     cb: (err: any, data?: CancelResourceRequestCommandOutput) => void
   ): void;
-  public cancelResourceRequest(
+  cancelResourceRequest(
     args: CancelResourceRequestCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: CancelResourceRequestCommandOutput) => void
   ): void;
-  public cancelResourceRequest(
-    args: CancelResourceRequestCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelResourceRequestCommandOutput) => void),
-    cb?: (err: any, data?: CancelResourceRequestCommandOutput) => void
-  ): Promise<CancelResourceRequestCommandOutput> | void {
-    const command = new CancelResourceRequestCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates the specified resource. For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html">Creating a
-   *         resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <p>After you have initiated a resource creation request, you can monitor the progress of your
-   *       request by calling <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the
-   *         <code>ProgressEvent</code> type returned by <code>CreateResource</code>.</p>
+   * @see {@link CreateResourceCommand}
    */
-  public createResource(
+  createResource(
     args: CreateResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<CreateResourceCommandOutput>;
-  public createResource(
+  createResource(
     args: CreateResourceCommandInput,
     cb: (err: any, data?: CreateResourceCommandOutput) => void
   ): void;
-  public createResource(
+  createResource(
     args: CreateResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: CreateResourceCommandOutput) => void
   ): void;
-  public createResource(
-    args: CreateResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResourceCommandOutput) => void),
-    cb?: (err: any, data?: CreateResourceCommandOutput) => void
-  ): Promise<CreateResourceCommandOutput> | void {
-    const command = new CreateResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified resource. For details, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-delete.html">Deleting a
-   *         resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <p>After you have initiated a resource deletion request, you can monitor the progress of your
-   *       request by calling <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the
-   *         <code>ProgressEvent</code> returned by <code>DeleteResource</code>.</p>
+   * @see {@link DeleteResourceCommand}
    */
-  public deleteResource(
+  deleteResource(
     args: DeleteResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<DeleteResourceCommandOutput>;
-  public deleteResource(
+  deleteResource(
     args: DeleteResourceCommandInput,
     cb: (err: any, data?: DeleteResourceCommandOutput) => void
   ): void;
-  public deleteResource(
+  deleteResource(
     args: DeleteResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: DeleteResourceCommandOutput) => void
   ): void;
-  public deleteResource(
-    args: DeleteResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourceCommandOutput) => void
-  ): Promise<DeleteResourceCommandOutput> | void {
-    const command = new DeleteResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about the current state of the specified resource. For details, see
-   *         <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html">Reading a resource's current state</a>.</p>
-   *          <p>You can use this action to return information about an existing resource in your account
-   *       and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>
+   * @see {@link GetResourceCommand}
    */
-  public getResource(args: GetResourceCommandInput, options?: __HttpHandlerOptions): Promise<GetResourceCommandOutput>;
-  public getResource(args: GetResourceCommandInput, cb: (err: any, data?: GetResourceCommandOutput) => void): void;
-  public getResource(
+  getResource(
     args: GetResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CloudControlRequestOptions
+  ): Promise<GetResourceCommandOutput>;
+  getResource(
+    args: GetResourceCommandInput,
     cb: (err: any, data?: GetResourceCommandOutput) => void
   ): void;
-  public getResource(
+  getResource(
     args: GetResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceCommandOutput) => void
-  ): Promise<GetResourceCommandOutput> | void {
-    const command = new GetResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CloudControlRequestOptions,
+    cb: (err: any, data?: GetResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns the current status of a resource operation request. For more information, see
-   *         <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track">Tracking the progress of resource operation requests</a> in the
-   *         <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
+   * @see {@link GetResourceRequestStatusCommand}
    */
-  public getResourceRequestStatus(
+  getResourceRequestStatus(
     args: GetResourceRequestStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<GetResourceRequestStatusCommandOutput>;
-  public getResourceRequestStatus(
+  getResourceRequestStatus(
     args: GetResourceRequestStatusCommandInput,
     cb: (err: any, data?: GetResourceRequestStatusCommandOutput) => void
   ): void;
-  public getResourceRequestStatus(
+  getResourceRequestStatus(
     args: GetResourceRequestStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: GetResourceRequestStatusCommandOutput) => void
   ): void;
-  public getResourceRequestStatus(
-    args: GetResourceRequestStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceRequestStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceRequestStatusCommandOutput) => void
-  ): Promise<GetResourceRequestStatusCommandOutput> | void {
-    const command = new GetResourceRequestStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns existing resource operation requests. This includes requests of all status types.
-   *       For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list">Listing active resource operation requests</a> in the
-   *         <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <note>
-   *             <p>Resource operation requests expire after seven days.</p>
-   *          </note>
+   * @see {@link ListResourceRequestsCommand}
    */
-  public listResourceRequests(
+  listResourceRequests(): Promise<ListResourceRequestsCommandOutput>;
+  listResourceRequests(
     args: ListResourceRequestsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<ListResourceRequestsCommandOutput>;
-  public listResourceRequests(
+  listResourceRequests(
     args: ListResourceRequestsCommandInput,
     cb: (err: any, data?: ListResourceRequestsCommandOutput) => void
   ): void;
-  public listResourceRequests(
+  listResourceRequests(
     args: ListResourceRequestsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: ListResourceRequestsCommandOutput) => void
   ): void;
-  public listResourceRequests(
-    args: ListResourceRequestsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResourceRequestsCommandOutput) => void),
-    cb?: (err: any, data?: ListResourceRequestsCommandOutput) => void
-  ): Promise<ListResourceRequestsCommandOutput> | void {
-    const command = new ListResourceRequestsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about the specified resources. For more information, see <a href="cloudcontrolapi/latest/userguide/resource-operations-list.html">Discovering
-   *         resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <p>You can use this action to return information about existing resources in your account and
-   *       Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>
+   * @see {@link ListResourcesCommand}
    */
-  public listResources(
+  listResources(
     args: ListResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<ListResourcesCommandOutput>;
-  public listResources(
+  listResources(
     args: ListResourcesCommandInput,
     cb: (err: any, data?: ListResourcesCommandOutput) => void
   ): void;
-  public listResources(
+  listResources(
     args: ListResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: ListResourcesCommandOutput) => void
   ): void;
-  public listResources(
-    args: ListResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListResourcesCommandOutput) => void
-  ): Promise<ListResourcesCommandOutput> | void {
-    const command = new ListResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified property values in the resource.</p>
-   *          <p>You specify your resource property updates as a list of patch operations contained in a
-   *       JSON patch document that adheres to the <a href="https://datatracker.ietf.org/doc/html/rfc6902">
-   *                <i>RFC 6902 - JavaScript Object
-   *           Notation (JSON) Patch</i>
-   *             </a> standard.</p>
-   *          <p>For details on how Cloud Control API performs resource update operations, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html">Updating a resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
-   *          <p>After you have initiated a resource update request, you can monitor the progress of your
-   *       request by calling <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the
-   *         <code>ProgressEvent</code> returned by <code>UpdateResource</code>.</p>
-   *          <p>For more information about the properties of a specific resource, refer to the related
-   *       topic for the resource in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">Resource and property types reference</a> in the <i>Amazon Web Services
-   *         CloudFormation Users Guide</i>.</p>
+   * @see {@link UpdateResourceCommand}
    */
-  public updateResource(
+  updateResource(
     args: UpdateResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CloudControlRequestOptions
   ): Promise<UpdateResourceCommandOutput>;
-  public updateResource(
+  updateResource(
     args: UpdateResourceCommandInput,
     cb: (err: any, data?: UpdateResourceCommandOutput) => void
   ): void;
-  public updateResource(
+  updateResource(
     args: UpdateResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: CloudControlRequestOptions,
     cb: (err: any, data?: UpdateResourceCommandOutput) => void
   ): void;
-  public updateResource(
-    args: UpdateResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceCommandOutput) => void
-  ): Promise<UpdateResourceCommandOutput> | void {
-    const command = new UpdateResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListResourceRequestsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceRequestsCommandOutput}.
+   */
+  paginateListResourceRequests(
+    args?: ListResourceRequestsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceRequestsCommandOutput>;
+
+  /**
+   * @see {@link ListResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourcesCommandOutput}.
+   */
+  paginateListResources(
+    args: ListResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourcesCommandOutput>;
+
+  /**
+   * @see {@link GetResourceRequestStatusCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilResourceRequestSuccess(
+    args: GetResourceRequestStatusCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<CloudControl>, "client">
+  ): Promise<WaiterResult<GetResourceRequestStatusCommandOutput>>;
 }
+
+/**
+ * <p>For more information about Amazon Web Services Cloud Control API, see the <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html">Amazon Web Services Cloud Control API User
+ *         Guide</a>.</p>
+ * @public
+ */
+export class CloudControl extends CloudControlClient implements CloudControl {}
+createAggregatedClient(commands, CloudControl, { paginators, waiters });

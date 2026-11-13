@@ -1,99 +1,120 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AutoScalingClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AutoScalingClient";
-import { ProcessesType } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeScalingProcessTypesCommand,
-  serializeAws_queryDescribeScalingProcessTypesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProcessesType } from "../models/models_0";
+import { DescribeScalingProcessTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeScalingProcessTypesCommand}.
+ */
 export interface DescribeScalingProcessTypesCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeScalingProcessTypesCommand}.
+ */
 export interface DescribeScalingProcessTypesCommandOutput extends ProcessesType, __MetadataBearer {}
 
 /**
- * <p>Describes the scaling process types for use with the <a>ResumeProcesses</a>
- *             and <a>SuspendProcesses</a> APIs.</p>
+ * <p>Describes the scaling process types for use with the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html">ResumeProcesses</a>
+ *             and <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html">SuspendProcesses</a> APIs.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AutoScalingClient, DescribeScalingProcessTypesCommand } from "@aws-sdk/client-auto-scaling"; // ES Modules import
  * // const { AutoScalingClient, DescribeScalingProcessTypesCommand } = require("@aws-sdk/client-auto-scaling"); // CommonJS import
+ * // import type { AutoScalingClientConfig } from "@aws-sdk/client-auto-scaling";
+ * const config = {}; // type is AutoScalingClientConfig
  * const client = new AutoScalingClient(config);
+ * const input = {};
  * const command = new DescribeScalingProcessTypesCommand(input);
  * const response = await client.send(command);
+ * // { // ProcessesType
+ * //   Processes: [ // Processes
+ * //     { // ProcessType
+ * //       ProcessName: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeScalingProcessTypesCommandInput - {@link DescribeScalingProcessTypesCommandInput}
+ * @returns {@link DescribeScalingProcessTypesCommandOutput}
  * @see {@link DescribeScalingProcessTypesCommandInput} for command's `input` shape.
  * @see {@link DescribeScalingProcessTypesCommandOutput} for command's `response` shape.
- * @see {@link AutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AutoScalingClientResolvedConfig | config} for AutoScalingClient's `config` shape.
  *
+ * @throws {@link ResourceContentionFault} (server fault)
+ *  <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
+ *             instance, or load balancer).</p>
+ *
+ * @throws {@link AutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from AutoScaling service.</p>
+ *
+ *
+ * @example To describe the Auto Scaling process types
+ * ```javascript
+ * // This example describes the Auto Scaling process types.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeScalingProcessTypesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Processes: [
+ *     {
+ *       ProcessName: "AZRebalance"
+ *     },
+ *     {
+ *       ProcessName: "AddToLoadBalancer"
+ *     },
+ *     {
+ *       ProcessName: "AlarmNotification"
+ *     },
+ *     {
+ *       ProcessName: "HealthCheck"
+ *     },
+ *     {
+ *       ProcessName: "Launch"
+ *     },
+ *     {
+ *       ProcessName: "ReplaceUnhealthy"
+ *     },
+ *     {
+ *       ProcessName: "ScheduledActions"
+ *     },
+ *     {
+ *       ProcessName: "Terminate"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeScalingProcessTypesCommand extends $Command<
-  DescribeScalingProcessTypesCommandInput,
-  DescribeScalingProcessTypesCommandOutput,
-  AutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeScalingProcessTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeScalingProcessTypesCommandInput, DescribeScalingProcessTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AutoScalingClient";
-    const commandName = "DescribeScalingProcessTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: ProcessesType.filterSensitiveLog,
+export class DescribeScalingProcessTypesCommand extends command<DescribeScalingProcessTypesCommandInput, DescribeScalingProcessTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeScalingProcessTypes",
+  DescribeScalingProcessTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: ProcessesType;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeScalingProcessTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeScalingProcessTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeScalingProcessTypesCommandOutput> {
-    return deserializeAws_queryDescribeScalingProcessTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeScalingProcessTypesCommandInput;
+      output: DescribeScalingProcessTypesCommandOutput;
+    };
+  };
 }

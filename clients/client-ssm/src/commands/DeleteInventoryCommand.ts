@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteInventoryRequest, DeleteInventoryResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteInventoryCommand,
-  serializeAws_json1_1DeleteInventoryCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteInventoryRequest, DeleteInventoryResult } from "../models/models_0";
+import { DeleteInventory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteInventoryCommand}.
+ */
 export interface DeleteInventoryCommandInput extends DeleteInventoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteInventoryCommand}.
+ */
 export interface DeleteInventoryCommandOutput extends DeleteInventoryResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,78 @@ export interface DeleteInventoryCommandOutput extends DeleteInventoryResult, __M
  * ```javascript
  * import { SSMClient, DeleteInventoryCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DeleteInventoryCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DeleteInventoryRequest
+ *   TypeName: "STRING_VALUE", // required
+ *   SchemaDeleteOption: "DisableSchema" || "DeleteSchema",
+ *   DryRun: true || false,
+ *   ClientToken: "STRING_VALUE",
+ * };
  * const command = new DeleteInventoryCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteInventoryResult
+ * //   DeletionId: "STRING_VALUE",
+ * //   TypeName: "STRING_VALUE",
+ * //   DeletionSummary: { // InventoryDeletionSummary
+ * //     TotalCount: Number("int"),
+ * //     RemainingCount: Number("int"),
+ * //     SummaryItems: [ // InventoryDeletionSummaryItems
+ * //       { // InventoryDeletionSummaryItem
+ * //         Version: "STRING_VALUE",
+ * //         Count: Number("int"),
+ * //         RemainingCount: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteInventoryCommandInput - {@link DeleteInventoryCommandInput}
+ * @returns {@link DeleteInventoryCommandOutput}
  * @see {@link DeleteInventoryCommandInput} for command's `input` shape.
  * @see {@link DeleteInventoryCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidDeleteInventoryParametersException} (client fault)
+ *  <p>One or more of the parameters specified for the delete operation isn't valid. Verify all
+ *    parameters and try again.</p>
+ *
+ * @throws {@link InvalidInventoryRequestException} (client fault)
+ *  <p>The request isn't valid.</p>
+ *
+ * @throws {@link InvalidOptionException} (client fault)
+ *  <p>The delete inventory option specified isn't valid. Verify the option and try again.</p>
+ *
+ * @throws {@link InvalidTypeNameException} (client fault)
+ *  <p>The parameter type name isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteInventoryCommand extends $Command<
-  DeleteInventoryCommandInput,
-  DeleteInventoryCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteInventoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteInventoryCommandInput, DeleteInventoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DeleteInventoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteInventoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteInventoryResult.filterSensitiveLog,
+export class DeleteInventoryCommand extends command<DeleteInventoryCommandInput, DeleteInventoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteInventory",
+  DeleteInventory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInventoryRequest;
+      output: DeleteInventoryResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteInventoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteInventoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteInventoryCommandOutput> {
-    return deserializeAws_json1_1DeleteInventoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteInventoryCommandInput;
+      output: DeleteInventoryCommandOutput;
+    };
+  };
 }

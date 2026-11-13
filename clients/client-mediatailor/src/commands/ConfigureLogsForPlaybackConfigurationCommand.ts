@@ -1,107 +1,118 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTailorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaTailorClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ConfigureLogsForPlaybackConfigurationRequest,
   ConfigureLogsForPlaybackConfigurationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1ConfigureLogsForPlaybackConfigurationCommand,
-  serializeAws_restJson1ConfigureLogsForPlaybackConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface ConfigureLogsForPlaybackConfigurationCommandInput
-  extends ConfigureLogsForPlaybackConfigurationRequest {}
-export interface ConfigureLogsForPlaybackConfigurationCommandOutput
-  extends ConfigureLogsForPlaybackConfigurationResponse,
-    __MetadataBearer {}
+import { ConfigureLogsForPlaybackConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Configures Amazon CloudWatch log settings for a playback configuration.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConfigureLogsForPlaybackConfigurationCommand}.
+ */
+export interface ConfigureLogsForPlaybackConfigurationCommandInput extends ConfigureLogsForPlaybackConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ConfigureLogsForPlaybackConfigurationCommand}.
+ */
+export interface ConfigureLogsForPlaybackConfigurationCommandOutput extends ConfigureLogsForPlaybackConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Defines where AWS Elemental MediaTailor sends logs for the playback configuration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaTailorClient, ConfigureLogsForPlaybackConfigurationCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
  * // const { MediaTailorClient, ConfigureLogsForPlaybackConfigurationCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
  * const client = new MediaTailorClient(config);
+ * const input = { // ConfigureLogsForPlaybackConfigurationRequest
+ *   PercentEnabled: Number("int"), // required
+ *   PlaybackConfigurationName: "STRING_VALUE", // required
+ *   EnabledLoggingStrategies: [ // __listOfLoggingStrategies
+ *     "VENDED_LOGS" || "LEGACY_CLOUDWATCH",
+ *   ],
+ *   AdsInteractionLog: { // AdsInteractionLog
+ *     PublishOptInEventTypes: [ // __adsInteractionPublishOptInEventTypesList
+ *       "RAW_ADS_RESPONSE" || "RAW_ADS_REQUEST" || "RAW_BID_REQUEST" || "RAW_BID_RESPONSE" || "PRE_ADS_REQUEST_HOOK_SUMMARY" || "PRE_ADS_REQUEST_FUNCTION_COMPLETED" || "POST_ADS_RESPONSE_HOOK_SUMMARY" || "POST_ADS_RESPONSE_FUNCTION_COMPLETED" || "PRE_MANIFEST_INSERTION_HOOK_SUMMARY" || "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED",
+ *     ],
+ *     ExcludeEventTypes: [ // __adsInteractionExcludeEventTypesList
+ *       "AD_MARKER_FOUND" || "NON_AD_MARKER_FOUND" || "MAKING_ADS_REQUEST" || "MODIFIED_TARGET_URL" || "VAST_REDIRECT" || "EMPTY_VAST_RESPONSE" || "EMPTY_VMAP_RESPONSE" || "VAST_RESPONSE" || "REDIRECTED_VAST_RESPONSE" || "FILLED_AVAIL" || "FILLED_OVERLAY_AVAIL" || "BEACON_FIRED" || "WARNING_NO_ADVERTISEMENTS" || "WARNING_VPAID_AD_DROPPED" || "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" || "ERROR_UNKNOWN" || "ERROR_UNKNOWN_HOST" || "ERROR_DISALLOWED_HOST" || "ERROR_ADS_IO" || "ERROR_ADS_TIMEOUT" || "ERROR_ADS_RESPONSE_PARSE" || "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" || "ERROR_ADS_INVALID_RESPONSE" || "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" || "ERROR_VAST_REDIRECT_MULTIPLE_VAST" || "ERROR_VAST_REDIRECT_FAILED" || "ERROR_VAST_MISSING_MEDIAFILES" || "ERROR_VAST_MISSING_CREATIVES" || "ERROR_VAST_MISSING_OVERLAYS" || "ERROR_VAST_MISSING_IMPRESSION" || "ERROR_VAST_INVALID_VAST_AD_TAG_URI" || "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" || "ERROR_VAST_MULTIPLE_LINEAR" || "ERROR_VAST_INVALID_MEDIA_FILE" || "ERROR_FIRING_BEACON_FAILED" || "ERROR_PERSONALIZATION_DISABLED" || "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" || "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" || "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" || "INTERSTITIAL_VOD_SUCCESS" || "INTERSTITIAL_VOD_FAILURE" || "PRE_ADS_REQUEST_HOOK_ERROR" || "PRE_ADS_REQUEST_FUNCTION_ERROR" || "BEACON_RECEIVED" || "POST_ADS_RESPONSE_HOOK_ERROR" || "POST_ADS_RESPONSE_FUNCTION_ERROR" || "PRE_MANIFEST_INSERTION_HOOK_ERROR" || "PRE_MANIFEST_INSERTION_FUNCTION_ERROR",
+ *     ],
+ *   },
+ *   ManifestServiceInteractionLog: { // ManifestServiceInteractionLog
+ *     PublishOptInEventTypes: [ // __manifestServicePublishOptInEventTypesList
+ *       "PRE_SESSION_INIT_HOOK_SUMMARY" || "PRE_SESSION_INIT_FUNCTION_COMPLETED" || "POST_ORIGIN_RESPONSE_HOOK_SUMMARY" || "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED",
+ *     ],
+ *     ExcludeEventTypes: [ // __manifestServiceExcludeEventTypesList
+ *       "GENERATED_MANIFEST" || "ORIGIN_MANIFEST" || "SESSION_INITIALIZED" || "TRACKING_RESPONSE" || "CONFIG_SYNTAX_ERROR" || "CONFIG_SECURITY_ERROR" || "UNKNOWN_HOST" || "TIMEOUT_ERROR" || "CONNECTION_ERROR" || "IO_ERROR" || "UNKNOWN_ERROR" || "HOST_DISALLOWED" || "PARSING_ERROR" || "MANIFEST_ERROR" || "NO_MASTER_OR_MEDIA_PLAYLIST" || "NO_MASTER_PLAYLIST" || "NO_MEDIA_PLAYLIST" || "INCOMPATIBLE_HLS_VERSION" || "SCTE35_PARSING_ERROR" || "INVALID_SINGLE_PERIOD_DASH_MANIFEST" || "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" || "LAST_PERIOD_MISSING_AUDIO" || "LAST_PERIOD_MISSING_AUDIO_WARNING" || "ERROR_ORIGIN_PREFIX_INTERPOLATION" || "ERROR_ADS_INTERPOLATION" || "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" || "ERROR_CDN_AD_SEGMENT_INTERPOLATION" || "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" || "ERROR_SLATE_AD_URL_INTERPOLATION" || "ERROR_PROFILE_NAME_INTERPOLATION" || "ERROR_BUMPER_START_INTERPOLATION" || "ERROR_BUMPER_END_INTERPOLATION" || "PRE_SESSION_INIT_HOOK_ERROR" || "PRE_SESSION_INIT_FUNCTION_ERROR" || "POST_ORIGIN_RESPONSE_HOOK_ERROR" || "POST_ORIGIN_RESPONSE_FUNCTION_ERROR",
+ *     ],
+ *   },
+ * };
  * const command = new ConfigureLogsForPlaybackConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigureLogsForPlaybackConfigurationResponse
+ * //   PercentEnabled: Number("int"), // required
+ * //   PlaybackConfigurationName: "STRING_VALUE",
+ * //   EnabledLoggingStrategies: [ // __listOfLoggingStrategies
+ * //     "VENDED_LOGS" || "LEGACY_CLOUDWATCH",
+ * //   ],
+ * //   AdsInteractionLog: { // AdsInteractionLog
+ * //     PublishOptInEventTypes: [ // __adsInteractionPublishOptInEventTypesList
+ * //       "RAW_ADS_RESPONSE" || "RAW_ADS_REQUEST" || "RAW_BID_REQUEST" || "RAW_BID_RESPONSE" || "PRE_ADS_REQUEST_HOOK_SUMMARY" || "PRE_ADS_REQUEST_FUNCTION_COMPLETED" || "POST_ADS_RESPONSE_HOOK_SUMMARY" || "POST_ADS_RESPONSE_FUNCTION_COMPLETED" || "PRE_MANIFEST_INSERTION_HOOK_SUMMARY" || "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED",
+ * //     ],
+ * //     ExcludeEventTypes: [ // __adsInteractionExcludeEventTypesList
+ * //       "AD_MARKER_FOUND" || "NON_AD_MARKER_FOUND" || "MAKING_ADS_REQUEST" || "MODIFIED_TARGET_URL" || "VAST_REDIRECT" || "EMPTY_VAST_RESPONSE" || "EMPTY_VMAP_RESPONSE" || "VAST_RESPONSE" || "REDIRECTED_VAST_RESPONSE" || "FILLED_AVAIL" || "FILLED_OVERLAY_AVAIL" || "BEACON_FIRED" || "WARNING_NO_ADVERTISEMENTS" || "WARNING_VPAID_AD_DROPPED" || "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" || "ERROR_UNKNOWN" || "ERROR_UNKNOWN_HOST" || "ERROR_DISALLOWED_HOST" || "ERROR_ADS_IO" || "ERROR_ADS_TIMEOUT" || "ERROR_ADS_RESPONSE_PARSE" || "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" || "ERROR_ADS_INVALID_RESPONSE" || "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" || "ERROR_VAST_REDIRECT_MULTIPLE_VAST" || "ERROR_VAST_REDIRECT_FAILED" || "ERROR_VAST_MISSING_MEDIAFILES" || "ERROR_VAST_MISSING_CREATIVES" || "ERROR_VAST_MISSING_OVERLAYS" || "ERROR_VAST_MISSING_IMPRESSION" || "ERROR_VAST_INVALID_VAST_AD_TAG_URI" || "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" || "ERROR_VAST_MULTIPLE_LINEAR" || "ERROR_VAST_INVALID_MEDIA_FILE" || "ERROR_FIRING_BEACON_FAILED" || "ERROR_PERSONALIZATION_DISABLED" || "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" || "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" || "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" || "INTERSTITIAL_VOD_SUCCESS" || "INTERSTITIAL_VOD_FAILURE" || "PRE_ADS_REQUEST_HOOK_ERROR" || "PRE_ADS_REQUEST_FUNCTION_ERROR" || "BEACON_RECEIVED" || "POST_ADS_RESPONSE_HOOK_ERROR" || "POST_ADS_RESPONSE_FUNCTION_ERROR" || "PRE_MANIFEST_INSERTION_HOOK_ERROR" || "PRE_MANIFEST_INSERTION_FUNCTION_ERROR",
+ * //     ],
+ * //   },
+ * //   ManifestServiceInteractionLog: { // ManifestServiceInteractionLog
+ * //     PublishOptInEventTypes: [ // __manifestServicePublishOptInEventTypesList
+ * //       "PRE_SESSION_INIT_HOOK_SUMMARY" || "PRE_SESSION_INIT_FUNCTION_COMPLETED" || "POST_ORIGIN_RESPONSE_HOOK_SUMMARY" || "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED",
+ * //     ],
+ * //     ExcludeEventTypes: [ // __manifestServiceExcludeEventTypesList
+ * //       "GENERATED_MANIFEST" || "ORIGIN_MANIFEST" || "SESSION_INITIALIZED" || "TRACKING_RESPONSE" || "CONFIG_SYNTAX_ERROR" || "CONFIG_SECURITY_ERROR" || "UNKNOWN_HOST" || "TIMEOUT_ERROR" || "CONNECTION_ERROR" || "IO_ERROR" || "UNKNOWN_ERROR" || "HOST_DISALLOWED" || "PARSING_ERROR" || "MANIFEST_ERROR" || "NO_MASTER_OR_MEDIA_PLAYLIST" || "NO_MASTER_PLAYLIST" || "NO_MEDIA_PLAYLIST" || "INCOMPATIBLE_HLS_VERSION" || "SCTE35_PARSING_ERROR" || "INVALID_SINGLE_PERIOD_DASH_MANIFEST" || "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" || "LAST_PERIOD_MISSING_AUDIO" || "LAST_PERIOD_MISSING_AUDIO_WARNING" || "ERROR_ORIGIN_PREFIX_INTERPOLATION" || "ERROR_ADS_INTERPOLATION" || "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" || "ERROR_CDN_AD_SEGMENT_INTERPOLATION" || "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" || "ERROR_SLATE_AD_URL_INTERPOLATION" || "ERROR_PROFILE_NAME_INTERPOLATION" || "ERROR_BUMPER_START_INTERPOLATION" || "ERROR_BUMPER_END_INTERPOLATION" || "PRE_SESSION_INIT_HOOK_ERROR" || "PRE_SESSION_INIT_FUNCTION_ERROR" || "POST_ORIGIN_RESPONSE_HOOK_ERROR" || "POST_ORIGIN_RESPONSE_FUNCTION_ERROR",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ConfigureLogsForPlaybackConfigurationCommandInput - {@link ConfigureLogsForPlaybackConfigurationCommandInput}
+ * @returns {@link ConfigureLogsForPlaybackConfigurationCommandOutput}
  * @see {@link ConfigureLogsForPlaybackConfigurationCommandInput} for command's `input` shape.
  * @see {@link ConfigureLogsForPlaybackConfigurationCommandOutput} for command's `response` shape.
- * @see {@link MediaTailorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
  *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
  */
-export class ConfigureLogsForPlaybackConfigurationCommand extends $Command<
-  ConfigureLogsForPlaybackConfigurationCommandInput,
-  ConfigureLogsForPlaybackConfigurationCommandOutput,
-  MediaTailorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ConfigureLogsForPlaybackConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaTailorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ConfigureLogsForPlaybackConfigurationCommandInput, ConfigureLogsForPlaybackConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaTailorClient";
-    const commandName = "ConfigureLogsForPlaybackConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ConfigureLogsForPlaybackConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigureLogsForPlaybackConfigurationResponse.filterSensitiveLog,
+export class ConfigureLogsForPlaybackConfigurationCommand extends command<ConfigureLogsForPlaybackConfigurationCommandInput, ConfigureLogsForPlaybackConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConfigureLogsForPlaybackConfiguration",
+  ConfigureLogsForPlaybackConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfigureLogsForPlaybackConfigurationRequest;
+      output: ConfigureLogsForPlaybackConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ConfigureLogsForPlaybackConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ConfigureLogsForPlaybackConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ConfigureLogsForPlaybackConfigurationCommandOutput> {
-    return deserializeAws_restJson1ConfigureLogsForPlaybackConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ConfigureLogsForPlaybackConfigurationCommandInput;
+      output: ConfigureLogsForPlaybackConfigurationCommandOutput;
+    };
+  };
 }

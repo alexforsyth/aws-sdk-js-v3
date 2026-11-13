@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import { ListComplianceStatusRequest, ListComplianceStatusResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListComplianceStatusCommand,
-  serializeAws_json1_1ListComplianceStatusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListComplianceStatusRequest, ListComplianceStatusResponse } from "../models/models_0";
+import { ListComplianceStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListComplianceStatusCommand}.
+ */
 export interface ListComplianceStatusCommandInput extends ListComplianceStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListComplianceStatusCommand}.
+ */
 export interface ListComplianceStatusCommandOutput extends ListComplianceStatusResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,75 @@ export interface ListComplianceStatusCommandOutput extends ListComplianceStatusR
  * ```javascript
  * import { FMSClient, ListComplianceStatusCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, ListComplianceStatusCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = { // ListComplianceStatusRequest
+ *   PolicyId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListComplianceStatusCommand(input);
  * const response = await client.send(command);
+ * // { // ListComplianceStatusResponse
+ * //   PolicyComplianceStatusList: [ // PolicyComplianceStatusList
+ * //     { // PolicyComplianceStatus
+ * //       PolicyOwner: "STRING_VALUE",
+ * //       PolicyId: "STRING_VALUE",
+ * //       PolicyName: "STRING_VALUE",
+ * //       MemberAccount: "STRING_VALUE",
+ * //       EvaluationResults: [ // EvaluationResults
+ * //         { // EvaluationResult
+ * //           ComplianceStatus: "COMPLIANT" || "NON_COMPLIANT",
+ * //           ViolatorCount: Number("long"),
+ * //           EvaluationLimitExceeded: true || false,
+ * //         },
+ * //       ],
+ * //       LastUpdated: new Date("TIMESTAMP"),
+ * //       IssueInfoMap: { // IssueInfoMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListComplianceStatusCommandInput - {@link ListComplianceStatusCommandInput}
+ * @returns {@link ListComplianceStatusCommandOutput}
  * @see {@link ListComplianceStatusCommandInput} for command's `input` shape.
  * @see {@link ListComplianceStatusCommandOutput} for command's `response` shape.
- * @see {@link FMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class ListComplianceStatusCommand extends $Command<
-  ListComplianceStatusCommandInput,
-  ListComplianceStatusCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListComplianceStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListComplianceStatusCommandInput, ListComplianceStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "ListComplianceStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListComplianceStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListComplianceStatusResponse.filterSensitiveLog,
+export class ListComplianceStatusCommand extends command<ListComplianceStatusCommandInput, ListComplianceStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListComplianceStatus",
+  ListComplianceStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListComplianceStatusRequest;
+      output: ListComplianceStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListComplianceStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListComplianceStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListComplianceStatusCommandOutput> {
-    return deserializeAws_json1_1ListComplianceStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListComplianceStatusCommandInput;
+      output: ListComplianceStatusCommandOutput;
+    };
+  };
 }

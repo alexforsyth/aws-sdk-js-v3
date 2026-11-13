@@ -1,16 +1,10 @@
-import { parseQueryString } from "@aws-sdk/querystring-parser";
-import {
-  getCanonicalQuery,
-  getPayloadHash,
-  moveHeadersToQuery,
-  normalizeCredentialsProvider,
-  normalizeRegionProvider,
-  prepareRequest,
-  SignatureV4CryptoInit,
-  SignatureV4Init,
-} from "@aws-sdk/signature-v4";
-import {
-  Credentials,
+import { auth as crtAuth, http as crtHttp, io as crtIO } from "@aws-sdk/crt-loader";
+import type { AwsCredentialIdentity } from "@aws-sdk/types";
+import { normalizeProvider } from "@smithy/core/client";
+import { parseQueryString } from "@smithy/core/protocols";
+import type { SignatureV4CryptoInit, SignatureV4Init } from "@smithy/signature-v4";
+import { getCanonicalQuery, getPayloadHash, moveHeadersToQuery, prepareRequest } from "@smithy/signature-v4";
+import type {
   HttpRequest,
   Provider,
   QueryParameterBag,
@@ -18,8 +12,7 @@ import {
   RequestPresigningArguments,
   RequestSigner,
   RequestSigningArguments,
-} from "@aws-sdk/types";
-import { auth as crtAuth, http as crtHttp, io as crtIO } from "aws-crt";
+} from "@smithy/types";
 
 import { MAX_PRESIGNED_TTL, SHA256_HEADER } from "./constants";
 import { deleteHeader } from "./headerUtil";
@@ -62,7 +55,7 @@ export interface CrtSignerV4Init extends SignatureV4Init {
 export class CrtSignerV4 implements RequestPresigner, RequestSigner {
   private readonly service: string;
   private readonly regionProvider: Provider<string>;
-  private readonly credentialProvider: Provider<Credentials>;
+  private readonly credentialProvider: Provider<AwsCredentialIdentity>;
   private readonly sha256: any;
   private readonly uriEscapePath: boolean;
   private readonly applyChecksum: boolean;
@@ -82,8 +75,8 @@ export class CrtSignerV4 implements RequestPresigner, RequestSigner {
     this.uriEscapePath = uriEscapePath;
     this.signingAlgorithm = signingAlgorithm;
     this.applyChecksum = applyChecksum;
-    this.regionProvider = normalizeRegionProvider(region);
-    this.credentialProvider = normalizeCredentialsProvider(credentials);
+    this.regionProvider = normalizeProvider(region);
+    this.credentialProvider = normalizeProvider(credentials);
     crtIO.enable_logging(crtIO.LogLevel.ERROR);
   }
 
@@ -95,11 +88,12 @@ export class CrtSignerV4 implements RequestPresigner, RequestSigner {
       signingRegion,
       signingService,
     }: RequestSigningArguments | RequestPresigningArguments | undefined = {},
-    viaHeader: Boolean,
+    viaHeader: boolean,
     payloadHash: string,
-    expiresIn?: number
+    expiresIn?: number,
+    _credentials?: AwsCredentialIdentity
   ): Promise<crtAuth.AwsSigningConfig> {
-    const credentials = await this.credentialProvider();
+    const credentials = _credentials ?? (await this.credentialProvider());
     const region = signingRegion ?? (await this.regionProvider());
     const service = signingService ?? this.service;
     if (signableHeaders?.has("x-amzn-trace-id") || signableHeaders?.has("user-agent")) {
@@ -153,6 +147,29 @@ export class CrtSignerV4 implements RequestPresigner, RequestSigner {
     const crtSignedRequest = await this.signRequest(
       request,
       await this.options2crtConfigure(options, true /* viaHeader */, await getPayloadHash(toSign, this.sha256))
+    );
+    request.headers = crtSignedRequest.headers._flatten().reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    return request;
+  }
+
+  /**
+   * Sign with alternate credentials to the ones provided in the constructor.
+   */
+  public async signWithCredentials(
+    toSign: HttpRequest,
+    credentials: AwsCredentialIdentity,
+    options?: RequestSigningArguments
+  ): Promise<HttpRequest> {
+    const request = prepareRequest(toSign);
+    const crtSignedRequest = await this.signRequest(
+      request,
+      await this.options2crtConfigure(
+        options,
+        true /* viaHeader */,
+        await getPayloadHash(toSign, this.sha256),
+        undefined,
+        credentials
+      )
     );
     request.headers = crtSignedRequest.headers._flatten().reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     return request;
@@ -254,7 +271,7 @@ export class CrtSignerV4 implements RequestPresigner, RequestSigner {
   }
 }
 
-function sdk2crtCredentialsProvider(credentials: Credentials): crtAuth.AwsCredentialsProvider {
+function sdk2crtCredentialsProvider(credentials: AwsCredentialIdentity): crtAuth.AwsCredentialsProvider {
   return crtAuth.AwsCredentialsProvider.newStatic(
     credentials.accessKeyId,
     credentials.secretAccessKey,
@@ -270,7 +287,7 @@ function getHeadersUnsignable(unsignableHeaders?: Set<string>, signableHeaders?:
     return [...unsignableHeaders];
   }
   const result = new Set([...unsignableHeaders]);
-  for (let it = signableHeaders.values(), val = null; (val = it.next().value); ) {
+  for (let it = signableHeaders.values(), val = null; (val = it.next().value);) {
     if (result.has(val)) {
       result.delete(val);
     }

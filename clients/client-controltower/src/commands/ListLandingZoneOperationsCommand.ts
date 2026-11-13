@@ -1,0 +1,103 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLandingZoneOperationsInput, ListLandingZoneOperationsOutput } from "../models/models_0";
+import { ListLandingZoneOperations$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLandingZoneOperationsCommand}.
+ */
+export interface ListLandingZoneOperationsCommandInput extends ListLandingZoneOperationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListLandingZoneOperationsCommand}.
+ */
+export interface ListLandingZoneOperationsCommandOutput extends ListLandingZoneOperationsOutput, __MetadataBearer {}
+
+/**
+ * <p>Lists all landing zone operations from the past 90 days. Results are sorted by time, with the most recent operation first.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ControlTowerClient, ListLandingZoneOperationsCommand } from "@aws-sdk/client-controltower"; // ES Modules import
+ * // const { ControlTowerClient, ListLandingZoneOperationsCommand } = require("@aws-sdk/client-controltower"); // CommonJS import
+ * // import type { ControlTowerClientConfig } from "@aws-sdk/client-controltower";
+ * const config = {}; // type is ControlTowerClientConfig
+ * const client = new ControlTowerClient(config);
+ * const input = { // ListLandingZoneOperationsInput
+ *   filter: { // LandingZoneOperationFilter
+ *     types: [ // LandingZoneOperationTypes
+ *       "DELETE" || "CREATE" || "UPDATE" || "RESET",
+ *     ],
+ *     statuses: [ // LandingZoneOperationStatuses
+ *       "SUCCEEDED" || "FAILED" || "IN_PROGRESS",
+ *     ],
+ *   },
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListLandingZoneOperationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListLandingZoneOperationsOutput
+ * //   landingZoneOperations: [ // LandingZoneOperations // required
+ * //     { // LandingZoneOperationSummary
+ * //       operationType: "DELETE" || "CREATE" || "UPDATE" || "RESET",
+ * //       operationIdentifier: "STRING_VALUE",
+ * //       status: "SUCCEEDED" || "FAILED" || "IN_PROGRESS",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListLandingZoneOperationsCommandInput - {@link ListLandingZoneOperationsCommandInput}
+ * @returns {@link ListLandingZoneOperationsCommandOutput}
+ * @see {@link ListLandingZoneOperationsCommandInput} for command's `input` shape.
+ * @see {@link ListLandingZoneOperationsCommandOutput} for command's `response` shape.
+ * @see {@link ControlTowerClientResolvedConfig | config} for ControlTowerClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during processing of a request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link ControlTowerServiceException}
+ * <p>Base exception class for all service exceptions from ControlTower service.</p>
+ *
+ *
+ * @public
+ */
+export class ListLandingZoneOperationsCommand extends command<ListLandingZoneOperationsCommandInput, ListLandingZoneOperationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLandingZoneOperations",
+  ListLandingZoneOperations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLandingZoneOperationsInput;
+      output: ListLandingZoneOperationsOutput;
+    };
+    sdk: {
+      input: ListLandingZoneOperationsCommandInput;
+      output: ListLandingZoneOperationsCommandOutput;
+    };
+  };
+}

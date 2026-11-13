@@ -1,20 +1,17 @@
-# @aws-sdk/client-voice-id
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-voice-id/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-voice-id)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-voice-id.svg)](https://www.npmjs.com/package/@aws-sdk/client-voice-id)
+# @aws-sdk/client-voice-id
 
 ## Description
 
 AWS SDK for JavaScript VoiceID Client for Node.js, Browser and React Native.
 
-<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide
-describes the APIs used for this service.
-</p>
+<p>Amazon Connect Voice ID provides real-time caller authentication and fraud risk detection, which
+make voice interactions in contact centers more secure and efficient.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-voice-id
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-voice-id`
 - `yarn add @aws-sdk/client-voice-id`
@@ -26,40 +23,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `VoiceIDClient` and
-the commands you need, for example `CreateDomainCommand`:
+the commands you need, for example `ListDomainsCommand`:
 
 ```js
 // ES5 example
-const { VoiceIDClient, CreateDomainCommand } = require("@aws-sdk/client-voice-id");
+const { VoiceIDClient, ListDomainsCommand } = require("@aws-sdk/client-voice-id");
 ```
 
 ```ts
 // ES6+ example
-import { VoiceIDClient, CreateDomainCommand } from "@aws-sdk/client-voice-id";
+import { VoiceIDClient, ListDomainsCommand } from "@aws-sdk/client-voice-id";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new VoiceIDClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new CreateDomainCommand(params);
+const params = { /** input parameters */ };
+const command = new ListDomainsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -74,26 +69,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -109,31 +87,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`VoiceID` extends `VoiceIDClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`VoiceIDClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-voice-id";
-const client = new AWS.VoiceID({ region: "REGION" });
+import { VoiceID } from "@aws-sdk/client-voice-id";
+
+const client = new VoiceID({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.createDomain(params);
+  const data = await client.listDomains(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -141,7 +113,7 @@ try {
 
 // Promises.
 client
-  .createDomain(params)
+  .listDomains(params)
   .then((data) => {
     // process data.
   })
@@ -149,9 +121,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.createDomain(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listDomains(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -177,12 +149,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -203,3 +177,209 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AssociateFraudster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/AssociateFraudsterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/AssociateFraudsterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/AssociateFraudsterCommandOutput/)
+</details>
+<details>
+<summary>
+CreateDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/CreateDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/CreateDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/CreateDomainCommandOutput/)
+</details>
+<details>
+<summary>
+CreateWatchlist
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/CreateWatchlistCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/CreateWatchlistCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/CreateWatchlistCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DeleteDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteFraudster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DeleteFraudsterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteFraudsterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteFraudsterCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteSpeaker
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DeleteSpeakerCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteSpeakerCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteSpeakerCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteWatchlist
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DeleteWatchlistCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteWatchlistCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DeleteWatchlistCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeDomainCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeFraudster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeFraudsterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeFraudsterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeFraudsterCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeFraudsterRegistrationJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeFraudsterRegistrationJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeFraudsterRegistrationJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeFraudsterRegistrationJobCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSpeaker
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeSpeakerCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeSpeakerCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeSpeakerCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeSpeakerEnrollmentJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeSpeakerEnrollmentJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeSpeakerEnrollmentJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeSpeakerEnrollmentJobCommandOutput/)
+</details>
+<details>
+<summary>
+DescribeWatchlist
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DescribeWatchlistCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeWatchlistCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DescribeWatchlistCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateFraudster
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/DisassociateFraudsterCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DisassociateFraudsterCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/DisassociateFraudsterCommandOutput/)
+</details>
+<details>
+<summary>
+EvaluateSession
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/EvaluateSessionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/EvaluateSessionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/EvaluateSessionCommandOutput/)
+</details>
+<details>
+<summary>
+ListDomains
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListDomainsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListDomainsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListDomainsCommandOutput/)
+</details>
+<details>
+<summary>
+ListFraudsterRegistrationJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListFraudsterRegistrationJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListFraudsterRegistrationJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListFraudsterRegistrationJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListFraudsters
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListFraudstersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListFraudstersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListFraudstersCommandOutput/)
+</details>
+<details>
+<summary>
+ListSpeakerEnrollmentJobs
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListSpeakerEnrollmentJobsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListSpeakerEnrollmentJobsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListSpeakerEnrollmentJobsCommandOutput/)
+</details>
+<details>
+<summary>
+ListSpeakers
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListSpeakersCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListSpeakersCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListSpeakersCommandOutput/)
+</details>
+<details>
+<summary>
+ListTagsForResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListTagsForResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListTagsForResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListTagsForResourceCommandOutput/)
+</details>
+<details>
+<summary>
+ListWatchlists
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/ListWatchlistsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListWatchlistsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/ListWatchlistsCommandOutput/)
+</details>
+<details>
+<summary>
+OptOutSpeaker
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/OptOutSpeakerCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/OptOutSpeakerCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/OptOutSpeakerCommandOutput/)
+</details>
+<details>
+<summary>
+StartFraudsterRegistrationJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/StartFraudsterRegistrationJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/StartFraudsterRegistrationJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/StartFraudsterRegistrationJobCommandOutput/)
+</details>
+<details>
+<summary>
+StartSpeakerEnrollmentJob
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/StartSpeakerEnrollmentJobCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/StartSpeakerEnrollmentJobCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/StartSpeakerEnrollmentJobCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateDomain
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/UpdateDomainCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UpdateDomainCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UpdateDomainCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateWatchlist
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/voice-id/command/UpdateWatchlistCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UpdateWatchlistCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-voice-id/Interface/UpdateWatchlistCommandOutput/)
+</details>

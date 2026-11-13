@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListAuditFindingsRequest, ListAuditFindingsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListAuditFindingsCommand,
-  serializeAws_restJson1ListAuditFindingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAuditFindingsRequest, ListAuditFindingsResponse } from "../models/models_1";
+import { ListAuditFindings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAuditFindingsCommand}.
+ */
 export interface ListAuditFindingsCommandInput extends ListAuditFindingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAuditFindingsCommand}.
+ */
 export interface ListAuditFindingsCommandOutput extends ListAuditFindingsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,146 @@ export interface ListAuditFindingsCommandOutput extends ListAuditFindingsRespons
  * ```javascript
  * import { IoTClient, ListAuditFindingsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListAuditFindingsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListAuditFindingsRequest
+ *   taskId: "STRING_VALUE",
+ *   checkName: "STRING_VALUE",
+ *   resourceIdentifier: { // ResourceIdentifier
+ *     deviceCertificateId: "STRING_VALUE",
+ *     caCertificateId: "STRING_VALUE",
+ *     cognitoIdentityPoolId: "STRING_VALUE",
+ *     clientId: "STRING_VALUE",
+ *     policyVersionIdentifier: { // PolicyVersionIdentifier
+ *       policyName: "STRING_VALUE",
+ *       policyVersionId: "STRING_VALUE",
+ *     },
+ *     account: "STRING_VALUE",
+ *     iamRoleArn: "STRING_VALUE",
+ *     roleAliasArn: "STRING_VALUE",
+ *     issuerCertificateIdentifier: { // IssuerCertificateIdentifier
+ *       issuerCertificateSubject: "STRING_VALUE",
+ *       issuerId: "STRING_VALUE",
+ *       issuerCertificateSerialNumber: "STRING_VALUE",
+ *     },
+ *     deviceCertificateArn: "STRING_VALUE",
+ *   },
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   startTime: new Date("TIMESTAMP"),
+ *   endTime: new Date("TIMESTAMP"),
+ *   listSuppressedFindings: true || false,
+ * };
  * const command = new ListAuditFindingsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAuditFindingsResponse
+ * //   findings: [ // AuditFindings
+ * //     { // AuditFinding
+ * //       findingId: "STRING_VALUE",
+ * //       taskId: "STRING_VALUE",
+ * //       checkName: "STRING_VALUE",
+ * //       taskStartTime: new Date("TIMESTAMP"),
+ * //       findingTime: new Date("TIMESTAMP"),
+ * //       severity: "CRITICAL" || "HIGH" || "MEDIUM" || "LOW",
+ * //       nonCompliantResource: { // NonCompliantResource
+ * //         resourceType: "DEVICE_CERTIFICATE" || "CA_CERTIFICATE" || "IOT_POLICY" || "COGNITO_IDENTITY_POOL" || "CLIENT_ID" || "ACCOUNT_SETTINGS" || "ROLE_ALIAS" || "IAM_ROLE" || "ISSUER_CERTIFICATE",
+ * //         resourceIdentifier: { // ResourceIdentifier
+ * //           deviceCertificateId: "STRING_VALUE",
+ * //           caCertificateId: "STRING_VALUE",
+ * //           cognitoIdentityPoolId: "STRING_VALUE",
+ * //           clientId: "STRING_VALUE",
+ * //           policyVersionIdentifier: { // PolicyVersionIdentifier
+ * //             policyName: "STRING_VALUE",
+ * //             policyVersionId: "STRING_VALUE",
+ * //           },
+ * //           account: "STRING_VALUE",
+ * //           iamRoleArn: "STRING_VALUE",
+ * //           roleAliasArn: "STRING_VALUE",
+ * //           issuerCertificateIdentifier: { // IssuerCertificateIdentifier
+ * //             issuerCertificateSubject: "STRING_VALUE",
+ * //             issuerId: "STRING_VALUE",
+ * //             issuerCertificateSerialNumber: "STRING_VALUE",
+ * //           },
+ * //           deviceCertificateArn: "STRING_VALUE",
+ * //         },
+ * //         additionalInfo: { // StringMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       relatedResources: [ // RelatedResources
+ * //         { // RelatedResource
+ * //           resourceType: "DEVICE_CERTIFICATE" || "CA_CERTIFICATE" || "IOT_POLICY" || "COGNITO_IDENTITY_POOL" || "CLIENT_ID" || "ACCOUNT_SETTINGS" || "ROLE_ALIAS" || "IAM_ROLE" || "ISSUER_CERTIFICATE",
+ * //           resourceIdentifier: {
+ * //             deviceCertificateId: "STRING_VALUE",
+ * //             caCertificateId: "STRING_VALUE",
+ * //             cognitoIdentityPoolId: "STRING_VALUE",
+ * //             clientId: "STRING_VALUE",
+ * //             policyVersionIdentifier: {
+ * //               policyName: "STRING_VALUE",
+ * //               policyVersionId: "STRING_VALUE",
+ * //             },
+ * //             account: "STRING_VALUE",
+ * //             iamRoleArn: "STRING_VALUE",
+ * //             roleAliasArn: "STRING_VALUE",
+ * //             issuerCertificateIdentifier: {
+ * //               issuerCertificateSubject: "STRING_VALUE",
+ * //               issuerId: "STRING_VALUE",
+ * //               issuerCertificateSerialNumber: "STRING_VALUE",
+ * //             },
+ * //             deviceCertificateArn: "STRING_VALUE",
+ * //           },
+ * //           additionalInfo: {
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //       reasonForNonCompliance: "STRING_VALUE",
+ * //       reasonForNonComplianceCode: "STRING_VALUE",
+ * //       isSuppressed: true || false,
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAuditFindingsCommandInput - {@link ListAuditFindingsCommandInput}
+ * @returns {@link ListAuditFindingsCommandOutput}
  * @see {@link ListAuditFindingsCommandInput} for command's `input` shape.
  * @see {@link ListAuditFindingsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListAuditFindingsCommand extends $Command<
-  ListAuditFindingsCommandInput,
-  ListAuditFindingsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAuditFindingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAuditFindingsCommandInput, ListAuditFindingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListAuditFindingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAuditFindingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAuditFindingsResponse.filterSensitiveLog,
+export class ListAuditFindingsCommand extends command<ListAuditFindingsCommandInput, ListAuditFindingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAuditFindings",
+  ListAuditFindings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAuditFindingsRequest;
+      output: ListAuditFindingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAuditFindingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAuditFindingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAuditFindingsCommandOutput> {
-    return deserializeAws_restJson1ListAuditFindingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAuditFindingsCommandInput;
+      output: ListAuditFindingsCommandOutput;
+    };
+  };
 }

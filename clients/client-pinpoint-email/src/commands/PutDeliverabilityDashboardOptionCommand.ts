@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutDeliverabilityDashboardOptionRequest, PutDeliverabilityDashboardOptionResponse } from "../models/models_0";
-import { PinpointEmailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointEmailClient";
-import {
-  deserializeAws_restJson1PutDeliverabilityDashboardOptionCommand,
-  serializeAws_restJson1PutDeliverabilityDashboardOptionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  PutDeliverabilityDashboardOptionRequest,
+  PutDeliverabilityDashboardOptionResponse,
+} from "../models/models_0";
+import { PutDeliverabilityDashboardOption$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutDeliverabilityDashboardOptionCommand}.
+ */
 export interface PutDeliverabilityDashboardOptionCommandInput extends PutDeliverabilityDashboardOptionRequest {}
-export interface PutDeliverabilityDashboardOptionCommandOutput
-  extends PutDeliverabilityDashboardOptionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link PutDeliverabilityDashboardOptionCommand}.
+ */
+export interface PutDeliverabilityDashboardOptionCommandOutput extends PutDeliverabilityDashboardOptionResponse, __MetadataBearer {}
 
 /**
  * <p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the
@@ -36,74 +38,72 @@ export interface PutDeliverabilityDashboardOptionCommandOutput
  * ```javascript
  * import { PinpointEmailClient, PutDeliverabilityDashboardOptionCommand } from "@aws-sdk/client-pinpoint-email"; // ES Modules import
  * // const { PinpointEmailClient, PutDeliverabilityDashboardOptionCommand } = require("@aws-sdk/client-pinpoint-email"); // CommonJS import
+ * // import type { PinpointEmailClientConfig } from "@aws-sdk/client-pinpoint-email";
+ * const config = {}; // type is PinpointEmailClientConfig
  * const client = new PinpointEmailClient(config);
+ * const input = { // PutDeliverabilityDashboardOptionRequest
+ *   DashboardEnabled: true || false, // required
+ *   SubscribedDomains: [ // DomainDeliverabilityTrackingOptions
+ *     { // DomainDeliverabilityTrackingOption
+ *       Domain: "STRING_VALUE",
+ *       SubscriptionStartDate: new Date("TIMESTAMP"),
+ *       InboxPlacementTrackingOption: { // InboxPlacementTrackingOption
+ *         Global: true || false,
+ *         TrackedIsps: [ // IspNameList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new PutDeliverabilityDashboardOptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutDeliverabilityDashboardOptionCommandInput - {@link PutDeliverabilityDashboardOptionCommandInput}
+ * @returns {@link PutDeliverabilityDashboardOptionCommandOutput}
  * @see {@link PutDeliverabilityDashboardOptionCommandInput} for command's `input` shape.
  * @see {@link PutDeliverabilityDashboardOptionCommandOutput} for command's `response` shape.
- * @see {@link PinpointEmailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointEmailClientResolvedConfig | config} for PinpointEmailClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>The resource specified in your request already exists.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>There are too many instances of the specified resource type.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link PinpointEmailServiceException}
+ * <p>Base exception class for all service exceptions from PinpointEmail service.</p>
+ *
+ *
+ * @public
  */
-export class PutDeliverabilityDashboardOptionCommand extends $Command<
-  PutDeliverabilityDashboardOptionCommandInput,
-  PutDeliverabilityDashboardOptionCommandOutput,
-  PinpointEmailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutDeliverabilityDashboardOptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointEmailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutDeliverabilityDashboardOptionCommandInput, PutDeliverabilityDashboardOptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointEmailClient";
-    const commandName = "PutDeliverabilityDashboardOptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutDeliverabilityDashboardOptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutDeliverabilityDashboardOptionResponse.filterSensitiveLog,
+export class PutDeliverabilityDashboardOptionCommand extends command<PutDeliverabilityDashboardOptionCommandInput, PutDeliverabilityDashboardOptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutDeliverabilityDashboardOption",
+  PutDeliverabilityDashboardOption$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutDeliverabilityDashboardOptionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutDeliverabilityDashboardOptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutDeliverabilityDashboardOptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutDeliverabilityDashboardOptionCommandOutput> {
-    return deserializeAws_restJson1PutDeliverabilityDashboardOptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutDeliverabilityDashboardOptionCommandInput;
+      output: PutDeliverabilityDashboardOptionCommandOutput;
+    };
+  };
 }

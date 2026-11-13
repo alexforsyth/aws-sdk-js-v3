@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { ListFrameworksInput, ListFrameworksOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListFrameworksCommand,
-  serializeAws_restJson1ListFrameworksCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFrameworksInput, ListFrameworksOutput } from "../models/models_0";
+import { ListFrameworks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFrameworksCommand}.
+ */
 export interface ListFrameworksCommandInput extends ListFrameworksInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListFrameworksCommand}.
+ */
 export interface ListFrameworksCommandOutput extends ListFrameworksOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface ListFrameworksCommandOutput extends ListFrameworksOutput, __Met
  * ```javascript
  * import { BackupClient, ListFrameworksCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, ListFrameworksCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // ListFrameworksInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListFrameworksCommand(input);
  * const response = await client.send(command);
+ * // { // ListFrameworksOutput
+ * //   Frameworks: [ // FrameworkList
+ * //     { // Framework
+ * //       FrameworkName: "STRING_VALUE",
+ * //       FrameworkArn: "STRING_VALUE",
+ * //       FrameworkDescription: "STRING_VALUE",
+ * //       NumberOfControls: Number("int"),
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       DeploymentStatus: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFrameworksCommandInput - {@link ListFrameworksCommandInput}
+ * @returns {@link ListFrameworksCommandOutput}
  * @see {@link ListFrameworksCommandInput} for command's `input` shape.
  * @see {@link ListFrameworksCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class ListFrameworksCommand extends $Command<
-  ListFrameworksCommandInput,
-  ListFrameworksCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFrameworksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFrameworksCommandInput, ListFrameworksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "ListFrameworksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFrameworksInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFrameworksOutput.filterSensitiveLog,
+export class ListFrameworksCommand extends command<ListFrameworksCommandInput, ListFrameworksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFrameworks",
+  ListFrameworks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFrameworksInput;
+      output: ListFrameworksOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFrameworksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFrameworksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFrameworksCommandOutput> {
-    return deserializeAws_restJson1ListFrameworksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFrameworksCommandInput;
+      output: ListFrameworksCommandOutput;
+    };
+  };
 }

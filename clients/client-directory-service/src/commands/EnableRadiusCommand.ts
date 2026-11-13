@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { EnableRadiusRequest, EnableRadiusResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1EnableRadiusCommand,
-  serializeAws_json1_1EnableRadiusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableRadiusRequest, EnableRadiusResult } from "../models/models_0";
+import { EnableRadius$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableRadiusCommand}.
+ */
 export interface EnableRadiusCommandInput extends EnableRadiusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableRadiusCommand}.
+ */
 export interface EnableRadiusCommandOutput extends EnableRadiusResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,100 @@ export interface EnableRadiusCommandOutput extends EnableRadiusResult, __Metadat
  * ```javascript
  * import { DirectoryServiceClient, EnableRadiusCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, EnableRadiusCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // EnableRadiusRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   RadiusSettings: { // RadiusSettings
+ *     RadiusServers: [ // Servers
+ *       "STRING_VALUE",
+ *     ],
+ *     RadiusServersIpv6: [
+ *       "STRING_VALUE",
+ *     ],
+ *     RadiusPort: Number("int"),
+ *     RadiusTimeout: Number("int"),
+ *     RadiusRetries: Number("int"),
+ *     SharedSecret: "STRING_VALUE",
+ *     AuthenticationProtocol: "PAP" || "CHAP" || "MS-CHAPv1" || "MS-CHAPv2",
+ *     DisplayLabel: "STRING_VALUE",
+ *     UseSameUsername: true || false,
+ *   },
+ * };
  * const command = new EnableRadiusCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param EnableRadiusCommandInput - {@link EnableRadiusCommandInput}
+ * @returns {@link EnableRadiusCommandOutput}
  * @see {@link EnableRadiusCommandInput} for command's `input` shape.
  * @see {@link EnableRadiusCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityAlreadyExistsException} (client fault)
+ *  <p>The specified entity already exists.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To enable radius
+ * ```javascript
+ * // The following example enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   RadiusSettings: {
+ *     AuthenticationProtocol: "PAP",
+ *     DisplayLabel: "MyRadius",
+ *     RadiusPort: 1200,
+ *     RadiusRetries: 2,
+ *     RadiusServers: [
+ *       "172.168.111.12"
+ *     ],
+ *     RadiusTimeout: 1,
+ *     SharedSecret: "123456789",
+ *     UseSameUsername: true
+ *   }
+ * };
+ * const command = new EnableRadiusCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class EnableRadiusCommand extends $Command<
-  EnableRadiusCommandInput,
-  EnableRadiusCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableRadiusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableRadiusCommandInput, EnableRadiusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "EnableRadiusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableRadiusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: EnableRadiusResult.filterSensitiveLog,
+export class EnableRadiusCommand extends command<EnableRadiusCommandInput, EnableRadiusCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableRadius",
+  EnableRadius$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableRadiusRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EnableRadiusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1EnableRadiusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<EnableRadiusCommandOutput> {
-    return deserializeAws_json1_1EnableRadiusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableRadiusCommandInput;
+      output: EnableRadiusCommandOutput;
+    };
+  };
 }

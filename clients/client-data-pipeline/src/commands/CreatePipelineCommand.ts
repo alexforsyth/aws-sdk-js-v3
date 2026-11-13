@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { CreatePipelineInput, CreatePipelineOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreatePipelineCommand,
-  serializeAws_json1_1CreatePipelineCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePipelineInput, CreatePipelineOutput } from "../models/models_0";
+import { CreatePipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePipelineCommand}.
+ */
 export interface CreatePipelineCommandInput extends CreatePipelineInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePipelineCommand}.
+ */
 export interface CreatePipelineCommandOutput extends CreatePipelineOutput, __MetadataBearer {}
 
 /**
@@ -35,9 +36,9 @@ export interface CreatePipelineCommandOutput extends CreatePipelineOutput, __Met
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"name": "myPipeline",
+ * \{"name": "myPipeline",
  *  "uniqueId": "123456789",
- *  "description": "This is my first pipeline"}
+ *  "description": "This is my first pipeline"\}
  *
  *             </request>
  *
@@ -49,7 +50,7 @@ export interface CreatePipelineCommandOutput extends CreatePipelineOutput, __Met
  * Content-Length: 40
  * Date: Mon, 12 Nov 2012 17:50:53 GMT
  *
- * {"pipelineId": "df-06372391ZG65EXAMPLE"}
+ * \{"pipelineId": "df-06372391ZG65EXAMPLE"\}
  *
  *             </response>
  *         </examples>
@@ -58,68 +59,61 @@ export interface CreatePipelineCommandOutput extends CreatePipelineOutput, __Met
  * ```javascript
  * import { DataPipelineClient, CreatePipelineCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, CreatePipelineCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // CreatePipelineInput
+ *   name: "STRING_VALUE", // required
+ *   uniqueId: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   tags: [ // tagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreatePipelineCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePipelineOutput
+ * //   pipelineId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreatePipelineCommandInput - {@link CreatePipelineCommandInput}
+ * @returns {@link CreatePipelineCommandOutput}
  * @see {@link CreatePipelineCommandInput} for command's `input` shape.
  * @see {@link CreatePipelineCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePipelineCommand extends $Command<
-  CreatePipelineCommandInput,
-  CreatePipelineCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePipelineCommandInput, CreatePipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "CreatePipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePipelineInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePipelineOutput.filterSensitiveLog,
+export class CreatePipelineCommand extends command<CreatePipelineCommandInput, CreatePipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePipeline",
+  CreatePipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePipelineInput;
+      output: CreatePipelineOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreatePipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePipelineCommandOutput> {
-    return deserializeAws_json1_1CreatePipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePipelineCommandInput;
+      output: CreatePipelineCommandOutput;
+    };
+  };
 }

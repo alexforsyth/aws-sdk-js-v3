@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { ListRecipesRequest, ListRecipesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRecipesCommand,
-  serializeAws_restJson1ListRecipesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRecipesRequest, ListRecipesResponse } from "../models/models_0";
+import { ListRecipes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRecipesCommand}.
+ */
 export interface ListRecipesCommandInput extends ListRecipesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRecipesCommand}.
+ */
 export interface ListRecipesCommandOutput extends ListRecipesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface ListRecipesCommandOutput extends ListRecipesResponse, __Metadat
  * ```javascript
  * import { DataBrewClient, ListRecipesCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, ListRecipesCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // ListRecipesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   RecipeVersion: "STRING_VALUE",
+ * };
  * const command = new ListRecipesCommand(input);
  * const response = await client.send(command);
+ * // { // ListRecipesResponse
+ * //   Recipes: [ // RecipeList // required
+ * //     { // Recipe
+ * //       CreatedBy: "STRING_VALUE",
+ * //       CreateDate: new Date("TIMESTAMP"),
+ * //       LastModifiedBy: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       ProjectName: "STRING_VALUE",
+ * //       PublishedBy: "STRING_VALUE",
+ * //       PublishedDate: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //       Name: "STRING_VALUE", // required
+ * //       ResourceArn: "STRING_VALUE",
+ * //       Steps: [ // RecipeStepList
+ * //         { // RecipeStep
+ * //           Action: { // RecipeAction
+ * //             Operation: "STRING_VALUE", // required
+ * //             Parameters: { // ParameterMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //           },
+ * //           ConditionExpressions: [ // ConditionExpressionList
+ * //             { // ConditionExpression
+ * //               Condition: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE",
+ * //               TargetColumn: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       RecipeVersion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRecipesCommandInput - {@link ListRecipesCommandInput}
+ * @returns {@link ListRecipesCommandOutput}
  * @see {@link ListRecipesCommandInput} for command's `input` shape.
  * @see {@link ListRecipesCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class ListRecipesCommand extends $Command<
-  ListRecipesCommandInput,
-  ListRecipesCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRecipesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRecipesCommandInput, ListRecipesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "ListRecipesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRecipesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRecipesResponse.filterSensitiveLog,
+export class ListRecipesCommand extends command<ListRecipesCommandInput, ListRecipesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRecipes",
+  ListRecipes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRecipesRequest;
+      output: ListRecipesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRecipesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRecipesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRecipesCommandOutput> {
-    return deserializeAws_restJson1ListRecipesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRecipesCommandInput;
+      output: ListRecipesCommandOutput;
+    };
+  };
 }

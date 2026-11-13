@@ -5,7 +5,7 @@
 
 // @ts-check
 
-const { spawn, execSync } = require("child_process");
+const { spawn, execSync } = require("node:child_process");
 const pipeStdIo = { stdio: [process.stdin, process.stdout, process.stderr] };
 
 execSync("rm -rf verdaccio/storage");
@@ -34,16 +34,34 @@ const args = [
   "--no-git-reset",
   "--ignore-scripts",
   "--no-verify-access",
+  "--concurrency",
+  "4",
   "--dist-tag",
   "ci",
 ];
-spawn("npx", args, pipeStdIo).on("close", (code) => {
+spawn("npx", args, {
+  ...pipeStdIo,
+  env: {
+    ...process.env,
+    HUSKY: "0",
+    HUSKY_SKIP_HOOKS: "1",
+  },
+}).on("close", (code) => {
   // Rollback the changes caused by the version bumping
   execSync("git checkout -- clients/*/package.json");
   execSync("git checkout -- packages/*/package.json");
   execSync("git checkout -- private/*/package.json");
+  execSync("git checkout -- lib/*/package.json");
+  try {
+    execSync("git checkout -- preview/*/package.json");
+  } catch {
+    /* no preview packages to roll back */
+  }
+  execSync("git checkout -- lerna.json");
 
   // Kill the background verdaccio server
   verdaccio.kill();
-  if (code !== 0) throw Error(`Exit code: ${code}`);
+  if (code !== 0) {
+    throw Error(`Exit code: ${code}`);
+  }
 });

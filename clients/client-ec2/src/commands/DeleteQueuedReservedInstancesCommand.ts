@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteQueuedReservedInstancesRequest, DeleteQueuedReservedInstancesResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteQueuedReservedInstancesCommand,
-  serializeAws_ec2DeleteQueuedReservedInstancesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteQueuedReservedInstancesRequest, DeleteQueuedReservedInstancesResult } from "../models/models_3";
+import { DeleteQueuedReservedInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteQueuedReservedInstancesCommand}.
+ */
 export interface DeleteQueuedReservedInstancesCommandInput extends DeleteQueuedReservedInstancesRequest {}
-export interface DeleteQueuedReservedInstancesCommandOutput
-  extends DeleteQueuedReservedInstancesResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteQueuedReservedInstancesCommand}.
+ */
+export interface DeleteQueuedReservedInstancesCommandOutput extends DeleteQueuedReservedInstancesResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the queued purchases for the specified Reserved Instances.</p>
@@ -30,71 +29,63 @@ export interface DeleteQueuedReservedInstancesCommandOutput
  * ```javascript
  * import { EC2Client, DeleteQueuedReservedInstancesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteQueuedReservedInstancesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteQueuedReservedInstancesRequest
+ *   DryRun: true || false,
+ *   ReservedInstancesIds: [ // DeleteQueuedReservedInstancesIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DeleteQueuedReservedInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteQueuedReservedInstancesResult
+ * //   SuccessfulQueuedPurchaseDeletions: [ // SuccessfulQueuedPurchaseDeletionSet
+ * //     { // SuccessfulQueuedPurchaseDeletion
+ * //       ReservedInstancesId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   FailedQueuedPurchaseDeletions: [ // FailedQueuedPurchaseDeletionSet
+ * //     { // FailedQueuedPurchaseDeletion
+ * //       Error: { // DeleteQueuedReservedInstancesError
+ * //         Code: "reserved-instances-id-invalid" || "reserved-instances-not-in-queued-state" || "unexpected-error",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //       ReservedInstancesId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteQueuedReservedInstancesCommandInput - {@link DeleteQueuedReservedInstancesCommandInput}
+ * @returns {@link DeleteQueuedReservedInstancesCommandOutput}
  * @see {@link DeleteQueuedReservedInstancesCommandInput} for command's `input` shape.
  * @see {@link DeleteQueuedReservedInstancesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteQueuedReservedInstancesCommand extends $Command<
-  DeleteQueuedReservedInstancesCommandInput,
-  DeleteQueuedReservedInstancesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteQueuedReservedInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteQueuedReservedInstancesCommandInput, DeleteQueuedReservedInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteQueuedReservedInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteQueuedReservedInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteQueuedReservedInstancesResult.filterSensitiveLog,
+export class DeleteQueuedReservedInstancesCommand extends command<DeleteQueuedReservedInstancesCommandInput, DeleteQueuedReservedInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteQueuedReservedInstances",
+  DeleteQueuedReservedInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteQueuedReservedInstancesRequest;
+      output: DeleteQueuedReservedInstancesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteQueuedReservedInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteQueuedReservedInstancesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteQueuedReservedInstancesCommandOutput> {
-    return deserializeAws_ec2DeleteQueuedReservedInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteQueuedReservedInstancesCommandInput;
+      output: DeleteQueuedReservedInstancesCommandOutput;
+    };
+  };
 }

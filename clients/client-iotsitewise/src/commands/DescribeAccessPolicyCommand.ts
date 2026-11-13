@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { DescribeAccessPolicyRequest, DescribeAccessPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAccessPolicyCommand,
-  serializeAws_restJson1DescribeAccessPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccessPolicyRequest, DescribeAccessPolicyResponse } from "../models/models_0";
+import { DescribeAccessPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccessPolicyCommand}.
+ */
 export interface DescribeAccessPolicyCommandInput extends DescribeAccessPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccessPolicyCommand}.
+ */
 export interface DescribeAccessPolicyCommandOutput extends DescribeAccessPolicyResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,89 @@ export interface DescribeAccessPolicyCommandOutput extends DescribeAccessPolicyR
  * ```javascript
  * import { IoTSiteWiseClient, DescribeAccessPolicyCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, DescribeAccessPolicyCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeAccessPolicyRequest
+ *   accessPolicyId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAccessPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccessPolicyResponse
+ * //   accessPolicyId: "STRING_VALUE", // required
+ * //   accessPolicyArn: "STRING_VALUE", // required
+ * //   accessPolicyIdentity: { // Identity
+ * //     user: { // UserIdentity
+ * //       id: "STRING_VALUE", // required
+ * //     },
+ * //     group: { // GroupIdentity
+ * //       id: "STRING_VALUE", // required
+ * //     },
+ * //     iamUser: { // IAMUserIdentity
+ * //       arn: "STRING_VALUE", // required
+ * //     },
+ * //     iamRole: { // IAMRoleIdentity
+ * //       arn: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   accessPolicyResource: { // Resource
+ * //     portal: { // PortalResource
+ * //       id: "STRING_VALUE", // required
+ * //     },
+ * //     project: { // ProjectResource
+ * //       id: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   accessPolicyPermission: "ADMINISTRATOR" || "VIEWER", // required
+ * //   accessPolicyCreationDate: new Date("TIMESTAMP"), // required
+ * //   accessPolicyLastUpdateDate: new Date("TIMESTAMP"), // required
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccessPolicyCommandInput - {@link DescribeAccessPolicyCommandInput}
+ * @returns {@link DescribeAccessPolicyCommandOutput}
  * @see {@link DescribeAccessPolicyCommandInput} for command's `input` shape.
  * @see {@link DescribeAccessPolicyCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccessPolicyCommand extends $Command<
-  DescribeAccessPolicyCommandInput,
-  DescribeAccessPolicyCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccessPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccessPolicyCommandInput, DescribeAccessPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "DescribeAccessPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccessPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccessPolicyResponse.filterSensitiveLog,
+export class DescribeAccessPolicyCommand extends command<DescribeAccessPolicyCommandInput, DescribeAccessPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccessPolicy",
+  DescribeAccessPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccessPolicyRequest;
+      output: DescribeAccessPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccessPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAccessPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAccessPolicyCommandOutput> {
-    return deserializeAws_restJson1DescribeAccessPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccessPolicyCommandInput;
+      output: DescribeAccessPolicyCommandOutput;
+    };
+  };
 }

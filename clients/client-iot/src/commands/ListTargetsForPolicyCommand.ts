@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListTargetsForPolicyRequest, ListTargetsForPolicyResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListTargetsForPolicyCommand,
-  serializeAws_restJson1ListTargetsForPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTargetsForPolicyRequest, ListTargetsForPolicyResponse } from "../models/models_2";
+import { ListTargetsForPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTargetsForPolicyCommand}.
+ */
 export interface ListTargetsForPolicyCommandInput extends ListTargetsForPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTargetsForPolicyCommand}.
+ */
 export interface ListTargetsForPolicyCommandOutput extends ListTargetsForPolicyResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,73 @@ export interface ListTargetsForPolicyCommandOutput extends ListTargetsForPolicyR
  * ```javascript
  * import { IoTClient, ListTargetsForPolicyCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListTargetsForPolicyCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListTargetsForPolicyRequest
+ *   policyName: "STRING_VALUE", // required
+ *   marker: "STRING_VALUE",
+ *   pageSize: Number("int"),
+ * };
  * const command = new ListTargetsForPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // ListTargetsForPolicyResponse
+ * //   targets: [ // PolicyTargets
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTargetsForPolicyCommandInput - {@link ListTargetsForPolicyCommandInput}
+ * @returns {@link ListTargetsForPolicyCommandOutput}
  * @see {@link ListTargetsForPolicyCommandInput} for command's `input` shape.
  * @see {@link ListTargetsForPolicyCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListTargetsForPolicyCommand extends $Command<
-  ListTargetsForPolicyCommandInput,
-  ListTargetsForPolicyCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTargetsForPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTargetsForPolicyCommandInput, ListTargetsForPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListTargetsForPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTargetsForPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTargetsForPolicyResponse.filterSensitiveLog,
+export class ListTargetsForPolicyCommand extends command<ListTargetsForPolicyCommandInput, ListTargetsForPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTargetsForPolicy",
+  ListTargetsForPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTargetsForPolicyRequest;
+      output: ListTargetsForPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTargetsForPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTargetsForPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTargetsForPolicyCommandOutput> {
-    return deserializeAws_restJson1ListTargetsForPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTargetsForPolicyCommandInput;
+      output: ListTargetsForPolicyCommandOutput;
+    };
+  };
 }

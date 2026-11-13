@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifySnapshotAttributeRequest } from "../models/models_5";
-import {
-  deserializeAws_ec2ModifySnapshotAttributeCommand,
-  serializeAws_ec2ModifySnapshotAttributeCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifySnapshotAttributeRequest } from "../models/models_7";
+import { ModifySnapshotAttribute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifySnapshotAttributeCommand}.
+ */
 export interface ModifySnapshotAttributeCommandInput extends ModifySnapshotAttributeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifySnapshotAttributeCommand}.
+ */
 export interface ModifySnapshotAttributeCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,75 +29,111 @@ export interface ModifySnapshotAttributeCommandOutput extends __MetadataBearer {
  *       you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation.</p>
  *          <p>Encrypted snapshots and snapshots with Amazon Web Services Marketplace product codes cannot be made
  *       public. Snapshots encrypted with your default KMS key cannot be shared with other accounts.</p>
- *          <p>For more information about modifying snapshot permissions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html">Share a snapshot</a> in the
- *         <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *          <p>For more information about modifying snapshot permissions, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html">Share a snapshot</a> in the
+ *         <i>Amazon EBS User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifySnapshotAttributeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifySnapshotAttributeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifySnapshotAttributeRequest
+ *   Attribute: "productCodes" || "createVolumePermission",
+ *   CreateVolumePermission: { // CreateVolumePermissionModifications
+ *     Add: [ // CreateVolumePermissionList
+ *       { // CreateVolumePermission
+ *         UserId: "STRING_VALUE",
+ *         Group: "all",
+ *       },
+ *     ],
+ *     Remove: [
+ *       {
+ *         UserId: "STRING_VALUE",
+ *         Group: "all",
+ *       },
+ *     ],
+ *   },
+ *   GroupNames: [ // GroupNameStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   OperationType: "add" || "remove",
+ *   SnapshotId: "STRING_VALUE", // required
+ *   UserIds: [ // UserIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new ModifySnapshotAttributeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifySnapshotAttributeCommandInput - {@link ModifySnapshotAttributeCommandInput}
+ * @returns {@link ModifySnapshotAttributeCommandOutput}
  * @see {@link ModifySnapshotAttributeCommandInput} for command's `input` shape.
  * @see {@link ModifySnapshotAttributeCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To make a snapshot public
+ * ```javascript
+ * // This example makes the snapshot ``snap-1234567890abcdef0`` public.
+ * const input = {
+ *   Attribute: "createVolumePermission",
+ *   GroupNames: [
+ *     "all"
+ *   ],
+ *   OperationType: "add",
+ *   SnapshotId: "snap-1234567890abcdef0"
+ * };
+ * const command = new ModifySnapshotAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @example To modify a snapshot attribute
+ * ```javascript
+ * // This example modifies snapshot ``snap-1234567890abcdef0`` to remove the create volume permission for a user with the account ID ``123456789012``. If the command succeeds, no output is returned.
+ * const input = {
+ *   Attribute: "createVolumePermission",
+ *   OperationType: "remove",
+ *   SnapshotId: "snap-1234567890abcdef0",
+ *   UserIds: [
+ *     "123456789012"
+ *   ]
+ * };
+ * const command = new ModifySnapshotAttributeCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ModifySnapshotAttributeCommand extends $Command<
-  ModifySnapshotAttributeCommandInput,
-  ModifySnapshotAttributeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifySnapshotAttributeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifySnapshotAttributeCommandInput, ModifySnapshotAttributeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifySnapshotAttributeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifySnapshotAttributeRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class ModifySnapshotAttributeCommand extends command<ModifySnapshotAttributeCommandInput, ModifySnapshotAttributeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifySnapshotAttribute",
+  ModifySnapshotAttribute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySnapshotAttributeRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifySnapshotAttributeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifySnapshotAttributeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifySnapshotAttributeCommandOutput> {
-    return deserializeAws_ec2ModifySnapshotAttributeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifySnapshotAttributeCommandInput;
+      output: ModifySnapshotAttributeCommandOutput;
+    };
+  };
 }

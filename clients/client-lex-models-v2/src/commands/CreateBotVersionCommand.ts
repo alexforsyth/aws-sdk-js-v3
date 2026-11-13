@@ -1,100 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexModelsV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexModelsV2Client";
-import { CreateBotVersionRequest, CreateBotVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateBotVersionCommand,
-  serializeAws_restJson1CreateBotVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateBotVersionRequest, CreateBotVersionResponse } from "../models/models_0";
+import { CreateBotVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateBotVersionCommand}.
+ */
 export interface CreateBotVersionCommandInput extends CreateBotVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateBotVersionCommand}.
+ */
 export interface CreateBotVersionCommandOutput extends CreateBotVersionResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new version of the bot based on the <code>DRAFT</code>
- *          version. If the <code>DRAFT</code> version of this resource hasn't
- *          changed since you created the last version, Amazon Lex doesn't create a new
- *          version, it returns the last created version.</p>
- *          <p>When you create the first version of a bot, Amazon Lex sets the version
- *          to 1. Subsequent versions increment by 1.</p>
+ * <p>Creates an immutable version of the bot. When you create the first
+ *          version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase
+ *          in an increment of 1. The version number will always represent the total number
+ *          of versions created of the bot, not the current number of versions. If a bot version
+ *          is deleted, that bot version number will not be reused.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelsV2Client, CreateBotVersionCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
  * // const { LexModelsV2Client, CreateBotVersionCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
  * const client = new LexModelsV2Client(config);
+ * const input = { // CreateBotVersionRequest
+ *   botId: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   botVersionLocaleSpecification: { // BotVersionLocaleSpecification // required
+ *     "<keys>": { // BotVersionLocaleDetails
+ *       sourceBotVersion: "STRING_VALUE", // required
+ *     },
+ *   },
+ * };
  * const command = new CreateBotVersionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateBotVersionResponse
+ * //   botId: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   botVersion: "STRING_VALUE",
+ * //   botVersionLocaleSpecification: { // BotVersionLocaleSpecification
+ * //     "<keys>": { // BotVersionLocaleDetails
+ * //       sourceBotVersion: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   botStatus: "Creating" || "Available" || "Inactive" || "Deleting" || "Failed" || "Versioning" || "Importing" || "Updating",
+ * //   creationDateTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param CreateBotVersionCommandInput - {@link CreateBotVersionCommandInput}
+ * @returns {@link CreateBotVersionCommandOutput}
  * @see {@link CreateBotVersionCommandInput} for command's `input` shape.
  * @see {@link CreateBotVersionCommandOutput} for command's `response` shape.
- * @see {@link LexModelsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The action that you tried to perform couldn't be completed because
+ *          the resource is in a conflicting state. For example, deleting a bot
+ *          that is in the CREATING state. Try your request again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link PreconditionFailedException} (client fault)
+ *  <p>Your request couldn't be completed because one or more request
+ *          fields aren't valid. Check the fields in your request and try
+ *          again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have reached a quota for your bot. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateBotVersionCommand extends $Command<
-  CreateBotVersionCommandInput,
-  CreateBotVersionCommandOutput,
-  LexModelsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateBotVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateBotVersionCommandInput, CreateBotVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelsV2Client";
-    const commandName = "CreateBotVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateBotVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateBotVersionResponse.filterSensitiveLog,
+export class CreateBotVersionCommand extends command<CreateBotVersionCommandInput, CreateBotVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateBotVersion",
+  CreateBotVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBotVersionRequest;
+      output: CreateBotVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateBotVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateBotVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateBotVersionCommandOutput> {
-    return deserializeAws_restJson1CreateBotVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateBotVersionCommandInput;
+      output: CreateBotVersionCommandOutput;
+    };
+  };
 }

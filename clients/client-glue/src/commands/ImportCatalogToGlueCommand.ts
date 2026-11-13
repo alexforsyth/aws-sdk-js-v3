@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { ImportCatalogToGlueRequest, ImportCatalogToGlueResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1ImportCatalogToGlueCommand,
-  serializeAws_json1_1ImportCatalogToGlueCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ImportCatalogToGlueRequest, ImportCatalogToGlueResponse } from "../models/models_2";
+import { ImportCatalogToGlue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ImportCatalogToGlueCommand}.
+ */
 export interface ImportCatalogToGlueCommandInput extends ImportCatalogToGlueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ImportCatalogToGlueCommand}.
+ */
 export interface ImportCatalogToGlueCommandOutput extends ImportCatalogToGlueResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,51 @@ export interface ImportCatalogToGlueCommandOutput extends ImportCatalogToGlueRes
  * ```javascript
  * import { GlueClient, ImportCatalogToGlueCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, ImportCatalogToGlueCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // ImportCatalogToGlueRequest
+ *   CatalogId: "STRING_VALUE",
+ * };
  * const command = new ImportCatalogToGlueCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ImportCatalogToGlueCommandInput - {@link ImportCatalogToGlueCommandInput}
+ * @returns {@link ImportCatalogToGlueCommandOutput}
  * @see {@link ImportCatalogToGlueCommandInput} for command's `input` shape.
  * @see {@link ImportCatalogToGlueCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class ImportCatalogToGlueCommand extends $Command<
-  ImportCatalogToGlueCommandInput,
-  ImportCatalogToGlueCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ImportCatalogToGlueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ImportCatalogToGlueCommandInput, ImportCatalogToGlueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "ImportCatalogToGlueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ImportCatalogToGlueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ImportCatalogToGlueResponse.filterSensitiveLog,
+export class ImportCatalogToGlueCommand extends command<ImportCatalogToGlueCommandInput, ImportCatalogToGlueCommandOutput>(
+  _ep0,
+  _mw0,
+  "ImportCatalogToGlue",
+  ImportCatalogToGlue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportCatalogToGlueRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ImportCatalogToGlueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ImportCatalogToGlueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ImportCatalogToGlueCommandOutput> {
-    return deserializeAws_json1_1ImportCatalogToGlueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ImportCatalogToGlueCommandInput;
+      output: ImportCatalogToGlueCommandOutput;
+    };
+  };
 }

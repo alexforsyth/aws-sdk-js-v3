@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RetrieveTapeArchiveInput, RetrieveTapeArchiveOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1RetrieveTapeArchiveCommand,
-  serializeAws_json1_1RetrieveTapeArchiveCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RetrieveTapeArchiveInput, RetrieveTapeArchiveOutput } from "../models/models_0";
+import { RetrieveTapeArchive$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RetrieveTapeArchiveCommand}.
+ */
 export interface RetrieveTapeArchiveCommandInput extends RetrieveTapeArchiveInput {}
+/**
+ * @public
+ *
+ * The output of {@link RetrieveTapeArchiveCommand}.
+ */
 export interface RetrieveTapeArchiveCommandOutput extends RetrieveTapeArchiveOutput, __MetadataBearer {}
 
 /**
@@ -26,7 +27,6 @@ export interface RetrieveTapeArchiveCommandOutput extends RetrieveTapeArchiveOut
  *          Virtual tapes archived in the VTS are not associated with any gateway. However after a tape
  *          is retrieved, it is associated with a gateway, even though it is also listed in the VTS,
  *          that is, archive. This operation is only supported in the tape gateway type.</p>
- *
  *          <p>Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to
  *          another gateway. You must archive the tape again before you can retrieve it to another
  *          gateway. This operation is only supported in the tape gateway type.</p>
@@ -35,68 +35,72 @@ export interface RetrieveTapeArchiveCommandOutput extends RetrieveTapeArchiveOut
  * ```javascript
  * import { StorageGatewayClient, RetrieveTapeArchiveCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, RetrieveTapeArchiveCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // RetrieveTapeArchiveInput
+ *   TapeARN: "STRING_VALUE", // required
+ *   GatewayARN: "STRING_VALUE", // required
+ * };
  * const command = new RetrieveTapeArchiveCommand(input);
  * const response = await client.send(command);
+ * // { // RetrieveTapeArchiveOutput
+ * //   TapeARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RetrieveTapeArchiveCommandInput - {@link RetrieveTapeArchiveCommandInput}
+ * @returns {@link RetrieveTapeArchiveCommandOutput}
  * @see {@link RetrieveTapeArchiveCommandInput} for command's `input` shape.
  * @see {@link RetrieveTapeArchiveCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To retrieve an archived tape from the VTS
+ * ```javascript
+ * // Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL. Virtual tapes archived in the VTS are not associated with any gateway.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B",
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"
+ * };
+ * const command = new RetrieveTapeArchiveCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TapeARN: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RetrieveTapeArchiveCommand extends $Command<
-  RetrieveTapeArchiveCommandInput,
-  RetrieveTapeArchiveCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RetrieveTapeArchiveCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RetrieveTapeArchiveCommandInput, RetrieveTapeArchiveCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "RetrieveTapeArchiveCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RetrieveTapeArchiveInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RetrieveTapeArchiveOutput.filterSensitiveLog,
+export class RetrieveTapeArchiveCommand extends command<RetrieveTapeArchiveCommandInput, RetrieveTapeArchiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "RetrieveTapeArchive",
+  RetrieveTapeArchive$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RetrieveTapeArchiveInput;
+      output: RetrieveTapeArchiveOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RetrieveTapeArchiveCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RetrieveTapeArchiveCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RetrieveTapeArchiveCommandOutput> {
-    return deserializeAws_json1_1RetrieveTapeArchiveCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RetrieveTapeArchiveCommandInput;
+      output: RetrieveTapeArchiveCommandOutput;
+    };
+  };
 }

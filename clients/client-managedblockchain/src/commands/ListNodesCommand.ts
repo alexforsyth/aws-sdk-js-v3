@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ManagedBlockchainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ManagedBlockchainClient";
-import { ListNodesInput, ListNodesOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListNodesCommand,
-  serializeAws_restJson1ListNodesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListNodesInput, ListNodesOutput } from "../models/models_0";
+import { ListNodes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListNodesCommand}.
+ */
 export interface ListNodesCommandInput extends ListNodesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListNodesCommand}.
+ */
 export interface ListNodesCommandOutput extends ListNodesOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +30,76 @@ export interface ListNodesCommandOutput extends ListNodesOutput, __MetadataBeare
  * ```javascript
  * import { ManagedBlockchainClient, ListNodesCommand } from "@aws-sdk/client-managedblockchain"; // ES Modules import
  * // const { ManagedBlockchainClient, ListNodesCommand } = require("@aws-sdk/client-managedblockchain"); // CommonJS import
+ * // import type { ManagedBlockchainClientConfig } from "@aws-sdk/client-managedblockchain";
+ * const config = {}; // type is ManagedBlockchainClientConfig
  * const client = new ManagedBlockchainClient(config);
+ * const input = { // ListNodesInput
+ *   NetworkId: "STRING_VALUE", // required
+ *   MemberId: "STRING_VALUE",
+ *   Status: "CREATING" || "AVAILABLE" || "UNHEALTHY" || "CREATE_FAILED" || "UPDATING" || "DELETING" || "DELETED" || "FAILED" || "INACCESSIBLE_ENCRYPTION_KEY",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListNodesCommand(input);
  * const response = await client.send(command);
+ * // { // ListNodesOutput
+ * //   Nodes: [ // NodeSummaryList
+ * //     { // NodeSummary
+ * //       Id: "STRING_VALUE",
+ * //       Status: "CREATING" || "AVAILABLE" || "UNHEALTHY" || "CREATE_FAILED" || "UPDATING" || "DELETING" || "DELETED" || "FAILED" || "INACCESSIBLE_ENCRYPTION_KEY",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       InstanceType: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListNodesCommandInput - {@link ListNodesCommandInput}
+ * @returns {@link ListNodesCommandOutput}
  * @see {@link ListNodesCommandInput} for command's `input` shape.
  * @see {@link ListNodesCommandOutput} for command's `response` shape.
- * @see {@link ManagedBlockchainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ManagedBlockchainClientResolvedConfig | config} for ManagedBlockchainClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is
+ *          throttling requests. The most common source of throttling errors is
+ *          creating resources that exceed your service limit for this resource type.
+ *          Request a limit increase or delete unused resources if possible.</p>
+ *
+ * @throws {@link ManagedBlockchainServiceException}
+ * <p>Base exception class for all service exceptions from ManagedBlockchain service.</p>
+ *
+ *
+ * @public
  */
-export class ListNodesCommand extends $Command<
-  ListNodesCommandInput,
-  ListNodesCommandOutput,
-  ManagedBlockchainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListNodesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ManagedBlockchainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListNodesCommandInput, ListNodesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ManagedBlockchainClient";
-    const commandName = "ListNodesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListNodesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListNodesOutput.filterSensitiveLog,
+export class ListNodesCommand extends command<ListNodesCommandInput, ListNodesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListNodes",
+  ListNodes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNodesInput;
+      output: ListNodesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListNodesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListNodesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListNodesCommandOutput> {
-    return deserializeAws_restJson1ListNodesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListNodesCommandInput;
+      output: ListNodesCommandOutput;
+    };
+  };
 }

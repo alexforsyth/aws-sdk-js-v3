@@ -1,190 +1,45 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
- */
-export interface AlreadyStreamedException extends __SmithyException, $MetadataBearer {
-  name: "AlreadyStreamedException";
-  $fault: "client";
-  /**
-   * The message associated with the AlreadyStreamedException exception.
-   */
-  message: string | undefined;
-}
-
-export namespace AlreadyStreamedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AlreadyStreamedException): any => ({
-    ...obj,
-  });
-}
+// smithy-typescript generated code
+import type { BulkPublishStatus, Operation, Platform, StreamingStatus } from "./enums";
 
 /**
  * The input for the BulkPublish operation.
+ * @public
  */
 export interface BulkPublishRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 }
 
-export namespace BulkPublishRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BulkPublishRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * The output for the BulkPublish operation.
+ * @public
  */
 export interface BulkPublishResponse {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityPoolId?: string;
-}
-
-export namespace BulkPublishResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BulkPublishResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
- */
-export interface DuplicateRequestException extends __SmithyException, $MetadataBearer {
-  name: "DuplicateRequestException";
-  $fault: "client";
-  /**
-   * The message associated with the DuplicateRequestException exception.
-   */
-  message: string | undefined;
-}
-
-export namespace DuplicateRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DuplicateRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Indicates an internal service
- *       error.
- */
-export interface InternalErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalErrorException";
-  $fault: "server";
-  /**
-   * Message returned by
-   *       InternalErrorException.
-   */
-  message: string | undefined;
-}
-
-export namespace InternalErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown when a request parameter does not comply
- *       with the associated constraints.
- */
-export interface InvalidParameterException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterException";
-  $fault: "client";
-  /**
-   * Message returned by
-   *       InvalidParameterException.
-   */
-  message: string | undefined;
-}
-
-export namespace InvalidParameterException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown when a user is not authorized to access the
- *       requested resource.
- */
-export interface NotAuthorizedException extends __SmithyException, $MetadataBearer {
-  name: "NotAuthorizedException";
-  $fault: "client";
-  /**
-   * The message returned by a
-   *       NotAuthorizedException.
-   */
-  message: string | undefined;
-}
-
-export namespace NotAuthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotAuthorizedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown if the resource doesn't
- *       exist.
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * Message returned by a
-   *       ResourceNotFoundException.
-   */
-  message: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
+  IdentityPoolId?: string | undefined;
 }
 
 /**
  * A request to delete the specific
  *       dataset.
+ * @public
  */
 export interface DeleteDatasetRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -192,6 +47,7 @@ export interface DeleteDatasetRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 
@@ -199,17 +55,9 @@ export interface DeleteDatasetRequest {
    * A string of up to 128 characters.
    *       Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.'
    *       (dot).
+   * @public
    */
   DatasetName: string | undefined;
-}
-
-export namespace DeleteDatasetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDatasetRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
@@ -218,63 +66,63 @@ export namespace DeleteDatasetRequest {
  *       particular entity in an application (like a saved game). Datasets are automatically created if
  *       they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value
  *       pairs.
+ * @public
  */
 export interface Dataset {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityId?: string;
+  IdentityId?: string | undefined;
 
   /**
    * A string of up to 128 characters. Allowed characters
    *       are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot).
+   * @public
    */
-  DatasetName?: string;
+  DatasetName?: string | undefined;
 
   /**
    * Date on which the dataset was
    *       created.
+   * @public
    */
-  CreationDate?: Date;
+  CreationDate?: Date | undefined;
 
   /**
    * Date when the dataset was last
    *       modified.
+   * @public
    */
-  LastModifiedDate?: Date;
+  LastModifiedDate?: Date | undefined;
 
   /**
    * The device that made the last change to this
    *       dataset.
+   * @public
    */
-  LastModifiedBy?: string;
+  LastModifiedBy?: string | undefined;
 
   /**
    * Total size in bytes of the records in this
    *       dataset.
+   * @public
    */
-  DataStorage?: number;
+  DataStorage?: number | undefined;
 
   /**
    * Number of records in this dataset.
+   * @public
    */
-  NumRecords?: number;
-}
-
-export namespace Dataset {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Dataset): any => ({
-    ...obj,
-  });
+  NumRecords?: number | undefined;
 }
 
 /**
  * Response to a successful DeleteDataset
  *       request.
+ * @public
  */
 export interface DeleteDatasetResponse {
   /**
@@ -283,74 +131,22 @@ export interface DeleteDatasetResponse {
    *       associated with a particular entity in an application (like a saved game). Datasets are
    *       automatically created if they don't exist. Data is synced by dataset, and a dataset can hold
    *       up to 1MB of key-value pairs.
+   * @public
    */
-  Dataset?: Dataset;
-}
-
-export namespace DeleteDatasetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDatasetResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown if an update can't be applied because
- *       the resource was changed by another call and this would result in a conflict.
- */
-export interface ResourceConflictException extends __SmithyException, $MetadataBearer {
-  name: "ResourceConflictException";
-  $fault: "client";
-  /**
-   * The message returned by a
-   *       ResourceConflictException.
-   */
-  message: string | undefined;
-}
-
-export namespace ResourceConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown if the request is
- *       throttled.
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  /**
-   * Message returned by a
-   *       TooManyRequestsException.
-   */
-  message: string | undefined;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
+  Dataset?: Dataset | undefined;
 }
 
 /**
  * A request for meta data about a dataset (creation
  *       date, number of records, size) by owner and dataset name.
+ * @public
  */
 export interface DescribeDatasetRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -358,6 +154,7 @@ export interface DescribeDatasetRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 
@@ -365,22 +162,15 @@ export interface DescribeDatasetRequest {
    * A string of up to 128 characters.
    *       Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.'
    *       (dot).
+   * @public
    */
   DatasetName: string | undefined;
-}
-
-export namespace DescribeDatasetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDatasetRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * Response to a successful DescribeDataset
  *       request.
+ * @public
  */
 export interface DescribeDatasetResponse {
   /**
@@ -389,111 +179,87 @@ export interface DescribeDatasetResponse {
    *       a particular entity in an application (like a saved game). Datasets are automatically created
    *       if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value
    *       pairs.
+   * @public
    */
-  Dataset?: Dataset;
-}
-
-export namespace DescribeDatasetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDatasetResponse): any => ({
-    ...obj,
-  });
+  Dataset?: Dataset | undefined;
 }
 
 /**
  * A request for usage information about
  *       the identity pool.
+ * @public
  */
 export interface DescribeIdentityPoolUsageRequest {
   /**
    * A name-spaced GUID (for
    *       example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
    *       generation is unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
-}
-
-export namespace DescribeIdentityPoolUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIdentityPoolUsageRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * Usage information for the identity
  *       pool.
+ * @public
  */
 export interface IdentityPoolUsage {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * Number of sync sessions for the
    *       identity pool.
+   * @public
    */
-  SyncSessionsCount?: number;
+  SyncSessionsCount?: number | undefined;
 
   /**
    * Data storage information for the identity
    *       pool.
+   * @public
    */
-  DataStorage?: number;
+  DataStorage?: number | undefined;
 
   /**
    * Date on which the identity pool was
    *       last modified.
+   * @public
    */
-  LastModifiedDate?: Date;
-}
-
-export namespace IdentityPoolUsage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IdentityPoolUsage): any => ({
-    ...obj,
-  });
+  LastModifiedDate?: Date | undefined;
 }
 
 /**
  * Response to a successful
  *       DescribeIdentityPoolUsage request.
+ * @public
  */
 export interface DescribeIdentityPoolUsageResponse {
   /**
    * Information about the
    *       usage of the identity pool.
+   * @public
    */
-  IdentityPoolUsage?: IdentityPoolUsage;
-}
-
-export namespace DescribeIdentityPoolUsageResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIdentityPoolUsageResponse): any => ({
-    ...obj,
-  });
+  IdentityPoolUsage?: IdentityPoolUsage | undefined;
 }
 
 /**
  * A request for information about the usage of
  *       an identity pool.
+ * @public
  */
 export interface DescribeIdentityUsageRequest {
   /**
    * A name-spaced GUID (for
    *       example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID
    *       generation is unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -501,134 +267,106 @@ export interface DescribeIdentityUsageRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 }
 
-export namespace DescribeIdentityUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIdentityUsageRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * Usage information for the identity.
+ * @public
  */
 export interface IdentityUsage {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityId?: string;
+  IdentityId?: string | undefined;
 
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * Date on which the identity was last
    *       modified.
+   * @public
    */
-  LastModifiedDate?: Date;
+  LastModifiedDate?: Date | undefined;
 
   /**
    * Number of datasets for the
    *       identity.
+   * @public
    */
-  DatasetCount?: number;
+  DatasetCount?: number | undefined;
 
   /**
    * Total data storage for this
    *       identity.
+   * @public
    */
-  DataStorage?: number;
-}
-
-export namespace IdentityUsage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IdentityUsage): any => ({
-    ...obj,
-  });
+  DataStorage?: number | undefined;
 }
 
 /**
  * The response to a successful
  *       DescribeIdentityUsage request.
+ * @public
  */
 export interface DescribeIdentityUsageResponse {
   /**
    * Usage information for the
    *       identity.
+   * @public
    */
-  IdentityUsage?: IdentityUsage;
-}
-
-export namespace DescribeIdentityUsageResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeIdentityUsageResponse): any => ({
-    ...obj,
-  });
+  IdentityUsage?: IdentityUsage | undefined;
 }
 
 /**
  * The input for the GetBulkPublishDetails operation.
+ * @public
  */
 export interface GetBulkPublishDetailsRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 }
 
-export namespace GetBulkPublishDetailsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBulkPublishDetailsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum BulkPublishStatus {
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  NOT_STARTED = "NOT_STARTED",
-  SUCCEEDED = "SUCCEEDED",
-}
-
 /**
  * The output for the GetBulkPublishDetails operation.
+ * @public
  */
 export interface GetBulkPublishDetailsResponse {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * The date/time at which the last bulk publish was initiated.
+   * @public
    */
-  BulkPublishStartTime?: Date;
+  BulkPublishStartTime?: Date | undefined;
 
   /**
    * If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed.
+   * @public
    */
-  BulkPublishCompleteTime?: Date;
+  BulkPublishCompleteTime?: Date | undefined;
 
   /**
    * Status of the last bulk publish operation, valid values are:
@@ -636,178 +374,134 @@ export interface GetBulkPublishDetailsResponse {
    *       <p>IN_PROGRESS - Data is being published to the configured stream</p>
    *       <p>SUCCEEDED - All data for the identity pool has been published to the configured stream</p>
    *       <p>FAILED - Some portion of the data has failed to publish, check FailureMessage for the cause.</p>
+   * @public
    */
-  BulkPublishStatus?: BulkPublishStatus | string;
+  BulkPublishStatus?: BulkPublishStatus | undefined;
 
   /**
    * If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
+   * @public
    */
-  FailureMessage?: string;
-}
-
-export namespace GetBulkPublishDetailsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBulkPublishDetailsResponse): any => ({
-    ...obj,
-  });
+  FailureMessage?: string | undefined;
 }
 
 /**
  * <p>A request for a list of the configured Cognito Events</p>
+ * @public
  */
 export interface GetCognitoEventsRequest {
   /**
    * <p>The Cognito Identity Pool ID for the request</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 }
 
-export namespace GetCognitoEventsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCognitoEventsRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The response from the GetCognitoEvents request</p>
+ * @public
  */
 export interface GetCognitoEventsResponse {
   /**
    * <p>The Cognito Events returned from the GetCognitoEvents request</p>
+   * @public
    */
-  Events?: { [key: string]: string };
-}
-
-export namespace GetCognitoEventsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCognitoEventsResponse): any => ({
-    ...obj,
-  });
+  Events?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The input for the GetIdentityPoolConfiguration operation.</p>
+ * @public
  */
 export interface GetIdentityPoolConfigurationRequest {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito. This is the ID of the pool for which to return a configuration.</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 }
 
-export namespace GetIdentityPoolConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetIdentityPoolConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
-export type StreamingStatus = "DISABLED" | "ENABLED";
-
 /**
  * Configuration options for configure Cognito streams.
+ * @public
  */
 export interface CognitoStreams {
   /**
    * The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+   * @public
    */
-  StreamName?: string;
+  StreamName?: string | undefined;
 
   /**
    * The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 
   /**
    * Status of the Cognito streams. Valid values are:
    *       <p>ENABLED - Streaming of updates to identity pool is enabled.</p>
    *       <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>
+   * @public
    */
-  StreamingStatus?: StreamingStatus | string;
-}
-
-export namespace CognitoStreams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CognitoStreams): any => ({
-    ...obj,
-  });
+  StreamingStatus?: StreamingStatus | undefined;
 }
 
 /**
  * <p>Configuration options to be applied to the identity pool.</p>
+ * @public
  */
 export interface PushSync {
   /**
    * <p>List of SNS platform application ARNs that could be used by clients.</p>
+   * @public
    */
-  ApplicationArns?: string[];
+  ApplicationArns?: string[] | undefined;
 
   /**
    * <p>A role configured to allow Cognito to call SNS on behalf of the developer.</p>
+   * @public
    */
-  RoleArn?: string;
-}
-
-export namespace PushSync {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PushSync): any => ({
-    ...obj,
-  });
+  RoleArn?: string | undefined;
 }
 
 /**
  * <p>The output for the GetIdentityPoolConfiguration operation.</p>
+ * @public
  */
 export interface GetIdentityPoolConfigurationResponse {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito.</p>
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * <p>Options to apply to this identity pool for push synchronization.</p>
+   * @public
    */
-  PushSync?: PushSync;
+  PushSync?: PushSync | undefined;
 
   /**
    * Options to apply to this identity pool for Amazon Cognito streams.
+   * @public
    */
-  CognitoStreams?: CognitoStreams;
-}
-
-export namespace GetIdentityPoolConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetIdentityPoolConfigurationResponse): any => ({
-    ...obj,
-  });
+  CognitoStreams?: CognitoStreams | undefined;
 }
 
 /**
  * Request for a list of datasets for an
  *       identity.
+ * @public
  */
 export interface ListDatasetsRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -815,136 +509,117 @@ export interface ListDatasetsRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 
   /**
    * A pagination token for obtaining the next
    *       page of results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The maximum number of results to be
    *       returned.
+   * @public
    */
-  MaxResults?: number;
-}
-
-export namespace ListDatasetsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDatasetsRequest): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
 }
 
 /**
  * Returned for a successful ListDatasets
  *       request.
+ * @public
  */
 export interface ListDatasetsResponse {
   /**
    * A set of datasets.
+   * @public
    */
-  Datasets?: Dataset[];
+  Datasets?: Dataset[] | undefined;
 
   /**
    * Number of datasets returned.
+   * @public
    */
-  Count?: number;
+  Count?: number | undefined;
 
   /**
    * A pagination token for obtaining the next
    *       page of results.
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListDatasetsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDatasetsResponse): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * A request for usage information on an
  *       identity pool.
+ * @public
  */
 export interface ListIdentityPoolUsageRequest {
   /**
    * A pagination token for obtaining
    *       the next page of results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The maximum number of results to
    *       be returned.
+   * @public
    */
-  MaxResults?: number;
-}
-
-export namespace ListIdentityPoolUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListIdentityPoolUsageRequest): any => ({
-    ...obj,
-  });
+  MaxResults?: number | undefined;
 }
 
 /**
  * Returned for a successful
  *       ListIdentityPoolUsage request.
+ * @public
  */
 export interface ListIdentityPoolUsageResponse {
   /**
    * Usage information for
    *       the identity pools.
+   * @public
    */
-  IdentityPoolUsages?: IdentityPoolUsage[];
+  IdentityPoolUsages?: IdentityPoolUsage[] | undefined;
 
   /**
    * The maximum number of results to
    *       be returned.
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * Total number of identities for the
    *       identity pool.
+   * @public
    */
-  Count?: number;
+  Count?: number | undefined;
 
   /**
    * A pagination token for obtaining
    *       the next page of results.
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListIdentityPoolUsageResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListIdentityPoolUsageResponse): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * A request for a list of records.
+ * @public
  */
 export interface ListRecordsRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -952,559 +627,394 @@ export interface ListRecordsRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 
   /**
    * A string of up to 128 characters. Allowed
    *       characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.' (dot).
+   * @public
    */
   DatasetName: string | undefined;
 
   /**
    * The last server sync count for this
    *       record.
+   * @public
    */
-  LastSyncCount?: number;
+  LastSyncCount?: number | undefined;
 
   /**
    * A pagination token for obtaining the next
    *       page of results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * The maximum number of results to be
    *       returned.
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * A token containing a session ID,
    *       identity ID, and expiration.
+   * @public
    */
-  SyncSessionToken?: string;
-}
-
-export namespace ListRecordsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRecordsRequest): any => ({
-    ...obj,
-  });
+  SyncSessionToken?: string | undefined;
 }
 
 /**
  * The basic data structure of a dataset.
+ * @public
  */
 export interface _Record {
   /**
    * The key for the record.
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * The value for the record.
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * The server sync count for this record.
+   * @public
    */
-  SyncCount?: number;
+  SyncCount?: number | undefined;
 
   /**
    * The date on which the record was last
    *       modified.
+   * @public
    */
-  LastModifiedDate?: Date;
+  LastModifiedDate?: Date | undefined;
 
   /**
    * The user/device that made the last change to this
    *       record.
+   * @public
    */
-  LastModifiedBy?: string;
+  LastModifiedBy?: string | undefined;
 
   /**
    * The last modified date of the client
    *       device.
+   * @public
    */
-  DeviceLastModifiedDate?: Date;
-}
-
-export namespace _Record {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: _Record): any => ({
-    ...obj,
-  });
+  DeviceLastModifiedDate?: Date | undefined;
 }
 
 /**
  * Returned for a successful
  *       ListRecordsRequest.
+ * @public
  */
 export interface ListRecordsResponse {
   /**
    * A list of all records.
+   * @public
    */
-  Records?: _Record[];
+  Records?: _Record[] | undefined;
 
   /**
    * A pagination token for obtaining the next
    *       page of results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Total number of records.
+   * @public
    */
-  Count?: number;
+  Count?: number | undefined;
 
   /**
    * Server sync count for this
    *       dataset.
+   * @public
    */
-  DatasetSyncCount?: number;
+  DatasetSyncCount?: number | undefined;
 
   /**
    * The user/device that made the last
    *       change to this record.
+   * @public
    */
-  LastModifiedBy?: string;
+  LastModifiedBy?: string | undefined;
 
   /**
    * Names of merged
    *       datasets.
+   * @public
    */
-  MergedDatasetNames?: string[];
+  MergedDatasetNames?: string[] | undefined;
 
   /**
    * Indicates whether the dataset
    *       exists.
+   * @public
    */
-  DatasetExists?: boolean;
+  DatasetExists?: boolean | undefined;
 
   /**
    * A boolean value
    *       specifying whether to delete the dataset locally.
+   * @public
    */
-  DatasetDeletedAfterRequestedSyncCount?: boolean;
+  DatasetDeletedAfterRequestedSyncCount?: boolean | undefined;
 
   /**
    * A token containing a session ID,
    *       identity ID, and expiration.
+   * @public
    */
-  SyncSessionToken?: string;
+  SyncSessionToken?: string | undefined;
 }
-
-export namespace ListRecordsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRecordsResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface InvalidConfigurationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidConfigurationException";
-  $fault: "client";
-  /**
-   * Message returned by
-   *       InvalidConfigurationException.
-   */
-  message: string | undefined;
-}
-
-export namespace InvalidConfigurationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidConfigurationException): any => ({
-    ...obj,
-  });
-}
-
-export type Platform = "ADM" | "APNS" | "APNS_SANDBOX" | "GCM";
 
 /**
  * <p>A request to RegisterDevice.</p>
+ * @public
  */
 export interface RegisterDeviceRequest {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito. Here, the ID of the pool that the identity belongs to.</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 
   /**
    * <p>The unique ID for this identity.</p>
+   * @public
    */
   IdentityId: string | undefined;
 
   /**
    * <p>The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).</p>
+   * @public
    */
-  Platform: Platform | string | undefined;
+  Platform: Platform | undefined;
 
   /**
    * <p>The push token.</p>
+   * @public
    */
   Token: string | undefined;
 }
 
-export namespace RegisterDeviceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterDeviceRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Response to a RegisterDevice request.</p>
+ * @public
  */
 export interface RegisterDeviceResponse {
   /**
    * <p>The unique ID generated for this device by Cognito.</p>
+   * @public
    */
-  DeviceId?: string;
-}
-
-export namespace RegisterDeviceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterDeviceResponse): any => ({
-    ...obj,
-  });
+  DeviceId?: string | undefined;
 }
 
 /**
  * <p>A request to configure Cognito Events"</p>"
+ * @public
  */
 export interface SetCognitoEventsRequest {
   /**
    * <p>The Cognito Identity Pool to use when configuring Cognito Events</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 
   /**
    * <p>The events to configure</p>
+   * @public
    */
-  Events: { [key: string]: string } | undefined;
-}
-
-export namespace SetCognitoEventsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SetCognitoEventsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Thrown if there are parallel requests to modify a resource.</p>
- */
-export interface ConcurrentModificationException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentModificationException";
-  $fault: "client";
-  /**
-   * <p>The message returned by a ConcurrentModicationException.</p>
-   */
-  message: string | undefined;
-}
-
-export namespace ConcurrentModificationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentModificationException): any => ({
-    ...obj,
-  });
+  Events: Record<string, string> | undefined;
 }
 
 /**
  * <p>The input for the SetIdentityPoolConfiguration operation.</p>
+ * @public
  */
 export interface SetIdentityPoolConfigurationRequest {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito. This is the ID of the pool to modify.</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 
   /**
    * <p>Options to apply to this identity pool for push synchronization.</p>
+   * @public
    */
-  PushSync?: PushSync;
+  PushSync?: PushSync | undefined;
 
   /**
    * Options to apply to this identity pool for Amazon Cognito streams.
+   * @public
    */
-  CognitoStreams?: CognitoStreams;
-}
-
-export namespace SetIdentityPoolConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SetIdentityPoolConfigurationRequest): any => ({
-    ...obj,
-  });
+  CognitoStreams?: CognitoStreams | undefined;
 }
 
 /**
  * <p>The output for the SetIdentityPoolConfiguration operation</p>
+ * @public
  */
 export interface SetIdentityPoolConfigurationResponse {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito.</p>
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * <p>Options to apply to this identity pool for push synchronization.</p>
+   * @public
    */
-  PushSync?: PushSync;
+  PushSync?: PushSync | undefined;
 
   /**
    * Options to apply to this identity pool for Amazon Cognito streams.
+   * @public
    */
-  CognitoStreams?: CognitoStreams;
-}
-
-export namespace SetIdentityPoolConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SetIdentityPoolConfigurationResponse): any => ({
-    ...obj,
-  });
+  CognitoStreams?: CognitoStreams | undefined;
 }
 
 /**
  * <p>A request to SubscribeToDatasetRequest.</p>
+ * @public
  */
 export interface SubscribeToDatasetRequest {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito. The ID of the pool to which the identity belongs.</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 
   /**
    * <p>Unique ID for this identity.</p>
+   * @public
    */
   IdentityId: string | undefined;
 
   /**
    * <p>The name of the dataset to subcribe to.</p>
+   * @public
    */
   DatasetName: string | undefined;
 
   /**
    * <p>The unique ID generated for this device by Cognito.</p>
+   * @public
    */
   DeviceId: string | undefined;
 }
 
-export namespace SubscribeToDatasetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubscribeToDatasetRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Response to a SubscribeToDataset request.</p>
+ * @public
  */
 export interface SubscribeToDatasetResponse {}
 
-export namespace SubscribeToDatasetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubscribeToDatasetResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>A request to UnsubscribeFromDataset.</p>
+ * @public
  */
 export interface UnsubscribeFromDatasetRequest {
   /**
    * <p>A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by
    *          Amazon Cognito. The ID of the pool to which this identity belongs.</p>
+   * @public
    */
   IdentityPoolId: string | undefined;
 
   /**
    * <p>Unique ID for this identity.</p>
+   * @public
    */
   IdentityId: string | undefined;
 
   /**
    * <p>The name of the dataset from which to unsubcribe.</p>
+   * @public
    */
   DatasetName: string | undefined;
 
   /**
    * <p>The unique ID generated for this device by Cognito.</p>
+   * @public
    */
   DeviceId: string | undefined;
 }
 
-export namespace UnsubscribeFromDatasetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnsubscribeFromDatasetRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Response to an UnsubscribeFromDataset request.</p>
+ * @public
  */
 export interface UnsubscribeFromDatasetResponse {}
 
-export namespace UnsubscribeFromDatasetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnsubscribeFromDatasetResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The AWS Lambda function returned invalid output or an exception.</p>
- */
-export interface InvalidLambdaFunctionOutputException extends __SmithyException, $MetadataBearer {
-  name: "InvalidLambdaFunctionOutputException";
-  $fault: "client";
-  /**
-   * <p>A message returned when an InvalidLambdaFunctionOutputException occurs</p>
-   */
-  message: string | undefined;
-}
-
-export namespace InvalidLambdaFunctionOutputException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidLambdaFunctionOutputException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>AWS Lambda throttled your account, please contact AWS Support</p>
- */
-export interface LambdaThrottledException extends __SmithyException, $MetadataBearer {
-  name: "LambdaThrottledException";
-  $fault: "client";
-  /**
-   * <p>A message returned when an LambdaThrottledException is thrown</p>
-   */
-  message: string | undefined;
-}
-
-export namespace LambdaThrottledException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LambdaThrottledException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Thrown when the limit on the number of objects or
- *       operations has been exceeded.
- */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  /**
-   * Message returned by
-   *       LimitExceededException.
-   */
-  message: string | undefined;
-}
-
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-export type Operation = "remove" | "replace";
-
 /**
  * An update operation for a record.
+ * @public
  */
 export interface RecordPatch {
   /**
    * An operation, either replace or remove.
+   * @public
    */
-  Op: Operation | string | undefined;
+  Op: Operation | undefined;
 
   /**
    * The key associated with the record patch.
+   * @public
    */
   Key: string | undefined;
 
   /**
    * The value associated with the record
    *       patch.
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * Last known server sync count for this record. Set
    *       to 0 if unknown.
+   * @public
    */
   SyncCount: number | undefined;
 
   /**
    * The last modified date of the client
    *       device.
+   * @public
    */
-  DeviceLastModifiedDate?: Date;
-}
-
-export namespace RecordPatch {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RecordPatch): any => ({
-    ...obj,
-  });
+  DeviceLastModifiedDate?: Date | undefined;
 }
 
 /**
  * A request to post updates to records or add and
  *       delete records for a dataset and user.
+ * @public
  */
 export interface UpdateRecordsRequest {
   /**
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityPoolId: string | undefined;
 
@@ -1512,6 +1022,7 @@ export interface UpdateRecordsRequest {
    * A name-spaced GUID (for example,
    *       us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is
    *       unique within a region.
+   * @public
    */
   IdentityId: string | undefined;
 
@@ -1519,23 +1030,27 @@ export interface UpdateRecordsRequest {
    * A string of up to 128 characters.
    *       Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-' (dash), and '.'
    *       (dot).
+   * @public
    */
   DatasetName: string | undefined;
 
   /**
    * <p>The unique ID generated for this device by Cognito.</p>
+   * @public
    */
-  DeviceId?: string;
+  DeviceId?: string | undefined;
 
   /**
    * A list of patch
    *       operations.
+   * @public
    */
-  RecordPatches?: RecordPatch[];
+  RecordPatches?: RecordPatch[] | undefined;
 
   /**
    * The SyncSessionToken returned by a
    *       previous call to ListRecords for this dataset and identity.
+   * @public
    */
   SyncSessionToken: string | undefined;
 
@@ -1543,36 +1058,21 @@ export interface UpdateRecordsRequest {
    * Intended to supply a device ID that
    *       will populate the lastModifiedBy field referenced in other methods. The
    *          ClientContext field is not yet implemented.
+   * @public
    */
-  ClientContext?: string;
-}
-
-export namespace UpdateRecordsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRecordsRequest): any => ({
-    ...obj,
-  });
+  ClientContext?: string | undefined;
 }
 
 /**
  * Returned for a successful
  *       UpdateRecordsRequest.
+ * @public
  */
 export interface UpdateRecordsResponse {
   /**
    * A list of records that have been
    *       updated.
+   * @public
    */
-  Records?: _Record[];
-}
-
-export namespace UpdateRecordsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRecordsResponse): any => ({
-    ...obj,
-  });
+  Records?: _Record[] | undefined;
 }

@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AddApplicationInputProcessingConfigurationRequest,
   AddApplicationInputProcessingConfigurationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddApplicationInputProcessingConfigurationCommand,
-  serializeAws_json1_1AddApplicationInputProcessingConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { AddApplicationInputProcessingConfiguration$ } from "../schemas/schemas_0";
 
-export interface AddApplicationInputProcessingConfigurationCommandInput
-  extends AddApplicationInputProcessingConfigurationRequest {}
-export interface AddApplicationInputProcessingConfigurationCommandOutput
-  extends AddApplicationInputProcessingConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddApplicationInputProcessingConfigurationCommand}.
+ */
+export interface AddApplicationInputProcessingConfigurationCommandInput extends AddApplicationInputProcessingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddApplicationInputProcessingConfigurationCommand}.
+ */
+export interface AddApplicationInputProcessingConfigurationCommandOutput extends AddApplicationInputProcessingConfigurationResponse, __MetadataBearer {}
 
 /**
  * <note>
@@ -39,77 +37,68 @@ export interface AddApplicationInputProcessingConfigurationCommandOutput
  * ```javascript
  * import { KinesisAnalyticsClient, AddApplicationInputProcessingConfigurationCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, AddApplicationInputProcessingConfigurationCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // AddApplicationInputProcessingConfigurationRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   CurrentApplicationVersionId: Number("long"), // required
+ *   InputId: "STRING_VALUE", // required
+ *   InputProcessingConfiguration: { // InputProcessingConfiguration
+ *     InputLambdaProcessor: { // InputLambdaProcessor
+ *       ResourceARN: "STRING_VALUE", // required
+ *       RoleARN: "STRING_VALUE", // required
+ *     },
+ *   },
+ * };
  * const command = new AddApplicationInputProcessingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AddApplicationInputProcessingConfigurationCommandInput - {@link AddApplicationInputProcessingConfigurationCommandInput}
+ * @returns {@link AddApplicationInputProcessingConfigurationCommandOutput}
  * @see {@link AddApplicationInputProcessingConfigurationCommandInput} for command's `input` shape.
  * @see {@link AddApplicationInputProcessingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>Specified input parameter value is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>Application is not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Specified application can't be found.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation. </p>
+ *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class AddApplicationInputProcessingConfigurationCommand extends $Command<
-  AddApplicationInputProcessingConfigurationCommandInput,
-  AddApplicationInputProcessingConfigurationCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddApplicationInputProcessingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    AddApplicationInputProcessingConfigurationCommandInput,
-    AddApplicationInputProcessingConfigurationCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "AddApplicationInputProcessingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddApplicationInputProcessingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddApplicationInputProcessingConfigurationResponse.filterSensitiveLog,
+export class AddApplicationInputProcessingConfigurationCommand extends command<AddApplicationInputProcessingConfigurationCommandInput, AddApplicationInputProcessingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddApplicationInputProcessingConfiguration",
+  AddApplicationInputProcessingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddApplicationInputProcessingConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AddApplicationInputProcessingConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddApplicationInputProcessingConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AddApplicationInputProcessingConfigurationCommandOutput> {
-    return deserializeAws_json1_1AddApplicationInputProcessingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddApplicationInputProcessingConfigurationCommandInput;
+      output: AddApplicationInputProcessingConfigurationCommandOutput;
+    };
+  };
 }

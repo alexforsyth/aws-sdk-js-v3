@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { GetConsoleOutputRequest, GetConsoleOutputResult } from "../models/models_4";
-import {
-  deserializeAws_ec2GetConsoleOutputCommand,
-  serializeAws_ec2GetConsoleOutputCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetConsoleOutputRequest, GetConsoleOutputResult } from "../models/models_6";
+import { GetConsoleOutput$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetConsoleOutputCommand}.
+ */
 export interface GetConsoleOutputCommandInput extends GetConsoleOutputRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetConsoleOutputCommand}.
+ */
 export interface GetConsoleOutputCommandOutput extends GetConsoleOutputResult, __MetadataBearer {}
 
 /**
@@ -26,82 +27,75 @@ export interface GetConsoleOutputCommandOutput extends GetConsoleOutputResult, _
  *             console output displays the exact console output that would normally be displayed on a
  *             physical monitor attached to a computer. For Windows instances, the instance console
  *             output includes the last three system event log errors.</p>
- *         <p>By default, the console output returns buffered information that was posted shortly
- *             after an instance transition state (start, stop, reboot, or terminate). This information
- *             is available for at least one hour after the most recent post. Only the most recent 64
- *             KB of console output is available.</p>
- *         <p>You can optionally retrieve the latest serial console output at any time during the
- *             instance lifecycle. This option is supported on instance types that use the Nitro
- *             hypervisor.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output">Instance
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output">Instance
  *                 console output</a> in the <i>Amazon EC2 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, GetConsoleOutputCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetConsoleOutputCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetConsoleOutputRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   Latest: true || false,
+ *   DryRun: true || false,
+ * };
  * const command = new GetConsoleOutputCommand(input);
  * const response = await client.send(command);
+ * // { // GetConsoleOutputResult
+ * //   InstanceId: "STRING_VALUE",
+ * //   Timestamp: new Date("TIMESTAMP"),
+ * //   Output: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetConsoleOutputCommandInput - {@link GetConsoleOutputCommandInput}
+ * @returns {@link GetConsoleOutputCommandOutput}
  * @see {@link GetConsoleOutputCommandInput} for command's `input` shape.
  * @see {@link GetConsoleOutputCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To get the console output
+ * ```javascript
+ * // This example gets the console output for the specified instance.
+ * const input = {
+ *   InstanceId: "i-1234567890abcdef0"
+ * };
+ * const command = new GetConsoleOutputCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   InstanceId: "i-1234567890abcdef0",
+ *   Output: "...",
+ *   Timestamp: "2018-05-25T21:23:53.000Z"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetConsoleOutputCommand extends $Command<
-  GetConsoleOutputCommandInput,
-  GetConsoleOutputCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetConsoleOutputCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetConsoleOutputCommandInput, GetConsoleOutputCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetConsoleOutputCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetConsoleOutputRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetConsoleOutputResult.filterSensitiveLog,
+export class GetConsoleOutputCommand extends command<GetConsoleOutputCommandInput, GetConsoleOutputCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetConsoleOutput",
+  GetConsoleOutput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConsoleOutputRequest;
+      output: GetConsoleOutputResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetConsoleOutputCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2GetConsoleOutputCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetConsoleOutputCommandOutput> {
-    return deserializeAws_ec2GetConsoleOutputCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetConsoleOutputCommandInput;
+      output: GetConsoleOutputCommandOutput;
+    };
+  };
 }

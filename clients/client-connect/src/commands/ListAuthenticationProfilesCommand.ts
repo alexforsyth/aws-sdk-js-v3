@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAuthenticationProfilesRequest, ListAuthenticationProfilesResponse } from "../models/models_2";
+import { ListAuthenticationProfiles$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAuthenticationProfilesCommand}.
+ */
+export interface ListAuthenticationProfilesCommandInput extends ListAuthenticationProfilesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAuthenticationProfilesCommand}.
+ */
+export interface ListAuthenticationProfilesCommandOutput extends ListAuthenticationProfilesResponse, __MetadataBearer {}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change. To
+ * request access to this API, contact Amazon Web Services Support.</p>
+ *          <p>Provides summary information about the authentication profiles in a specified Connect Customer
+ *    instance.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, ListAuthenticationProfilesCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, ListAuthenticationProfilesCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // ListAuthenticationProfilesRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListAuthenticationProfilesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListAuthenticationProfilesResponse
+ * //   AuthenticationProfileSummaryList: [ // AuthenticationProfileSummaryList
+ * //     { // AuthenticationProfileSummary
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       IsDefault: true || false,
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedRegion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListAuthenticationProfilesCommandInput - {@link ListAuthenticationProfilesCommandInput}
+ * @returns {@link ListAuthenticationProfilesCommandOutput}
+ * @see {@link ListAuthenticationProfilesCommandInput} for command's `input` shape.
+ * @see {@link ListAuthenticationProfilesCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class ListAuthenticationProfilesCommand extends command<ListAuthenticationProfilesCommandInput, ListAuthenticationProfilesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAuthenticationProfiles",
+  ListAuthenticationProfiles$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAuthenticationProfilesRequest;
+      output: ListAuthenticationProfilesResponse;
+    };
+    sdk: {
+      input: ListAuthenticationProfilesCommandInput;
+      output: ListAuthenticationProfilesCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RevokeVpcEndpointAccessRequest, RevokeVpcEndpointAccessResponse } from "../models/models_1";
+import { RevokeVpcEndpointAccess$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RevokeVpcEndpointAccessCommand}.
+ */
+export interface RevokeVpcEndpointAccessCommandInput extends RevokeVpcEndpointAccessRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RevokeVpcEndpointAccessCommand}.
+ */
+export interface RevokeVpcEndpointAccessCommandOutput extends RevokeVpcEndpointAccessResponse, __MetadataBearer {}
+
+/**
+ * <p>Revokes access to an Amazon OpenSearch Service domain that was provided through an
+ *             interface VPC endpoint.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpenSearchClient, RevokeVpcEndpointAccessCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
+ * // const { OpenSearchClient, RevokeVpcEndpointAccessCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
+ * const client = new OpenSearchClient(config);
+ * const input = { // RevokeVpcEndpointAccessRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   Account: "STRING_VALUE",
+ *   Service: "application.opensearchservice.amazonaws.com",
+ *   ServiceOptions: { // ServiceOptions
+ *     SupportedRegions: [ // RegionsList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
+ * const command = new RevokeVpcEndpointAccessCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param RevokeVpcEndpointAccessCommandInput - {@link RevokeVpcEndpointAccessCommandInput}
+ * @returns {@link RevokeVpcEndpointAccessCommandOutput}
+ * @see {@link RevokeVpcEndpointAccessCommandInput} for command's `input` shape.
+ * @see {@link RevokeVpcEndpointAccessCommandOutput} for command's `response` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
+ *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access an unsupported operation.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
+ */
+export class RevokeVpcEndpointAccessCommand extends command<RevokeVpcEndpointAccessCommandInput, RevokeVpcEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "RevokeVpcEndpointAccess",
+  RevokeVpcEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeVpcEndpointAccessRequest;
+      output: {};
+    };
+    sdk: {
+      input: RevokeVpcEndpointAccessCommandInput;
+      output: RevokeVpcEndpointAccessCommandOutput;
+    };
+  };
+}

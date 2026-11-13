@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListServiceNetworkResourceAssociationsCommand,
+  ListServiceNetworkResourceAssociationsCommandInput,
+  ListServiceNetworkResourceAssociationsCommandOutput,
+} from "../commands/ListServiceNetworkResourceAssociationsCommand";
+import { VPCLatticeClient } from "../VPCLatticeClient";
+import type { VPCLatticePaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListServiceNetworkResourceAssociations: (
+  config: VPCLatticePaginationConfiguration,
+  input: ListServiceNetworkResourceAssociationsCommandInput,
+  ...rest: any[]
+) => Paginator<ListServiceNetworkResourceAssociationsCommandOutput> = createPaginator<
+  VPCLatticePaginationConfiguration,
+  ListServiceNetworkResourceAssociationsCommandInput,
+  ListServiceNetworkResourceAssociationsCommandOutput
+>(VPCLatticeClient, ListServiceNetworkResourceAssociationsCommand, "nextToken", "nextToken", "maxResults");

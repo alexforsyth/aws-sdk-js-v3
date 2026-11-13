@@ -1,0 +1,81 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteServiceEnvironmentRequest, DeleteServiceEnvironmentResponse } from "../models/models_0";
+import { DeleteServiceEnvironment$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteServiceEnvironmentCommand}.
+ */
+export interface DeleteServiceEnvironmentCommandInput extends DeleteServiceEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteServiceEnvironmentCommand}.
+ */
+export interface DeleteServiceEnvironmentCommandOutput extends DeleteServiceEnvironmentResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a Service environment. Before you can delete a service environment, you must first set its state to <code>DISABLED</code> with the <code>UpdateServiceEnvironment</code> API operation and disassociate it from any job queues with the <code>UpdateJobQueue</code> API operation.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BatchClient, DeleteServiceEnvironmentCommand } from "@aws-sdk/client-batch"; // ES Modules import
+ * // const { BatchClient, DeleteServiceEnvironmentCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
+ * const client = new BatchClient(config);
+ * const input = { // DeleteServiceEnvironmentRequest
+ *   serviceEnvironment: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteServiceEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteServiceEnvironmentCommandInput - {@link DeleteServiceEnvironmentCommandInput}
+ * @returns {@link DeleteServiceEnvironmentCommandOutput}
+ * @see {@link DeleteServiceEnvironmentCommandInput} for command's `input` shape.
+ * @see {@link DeleteServiceEnvironmentCommandOutput} for command's `response` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteServiceEnvironmentCommand extends command<DeleteServiceEnvironmentCommandInput, DeleteServiceEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteServiceEnvironment",
+  DeleteServiceEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceEnvironmentRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteServiceEnvironmentCommandInput;
+      output: DeleteServiceEnvironmentCommandOutput;
+    };
+  };
+}

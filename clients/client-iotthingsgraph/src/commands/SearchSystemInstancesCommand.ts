@@ -1,95 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { SearchSystemInstancesRequest, SearchSystemInstancesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchSystemInstancesCommand,
-  serializeAws_json1_1SearchSystemInstancesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchSystemInstancesRequest, SearchSystemInstancesResponse } from "../models/models_0";
+import { SearchSystemInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchSystemInstancesCommand}.
+ */
 export interface SearchSystemInstancesCommandInput extends SearchSystemInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchSystemInstancesCommand}.
+ */
 export interface SearchSystemInstancesCommandOutput extends SearchSystemInstancesResponse, __MetadataBearer {}
 
 /**
  * <p>Searches for system instances in the user's account.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, SearchSystemInstancesCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, SearchSystemInstancesCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // SearchSystemInstancesRequest
+ *   filters: [ // SystemInstanceFilters
+ *     { // SystemInstanceFilter
+ *       name: "SYSTEM_TEMPLATE_ID" || "STATUS" || "GREENGRASS_GROUP_NAME",
+ *       value: [ // SystemInstanceFilterValues
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new SearchSystemInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // SearchSystemInstancesResponse
+ * //   summaries: [ // SystemInstanceSummaries
+ * //     { // SystemInstanceSummary
+ * //       id: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //       status: "NOT_DEPLOYED" || "BOOTSTRAP" || "DEPLOY_IN_PROGRESS" || "DEPLOYED_IN_TARGET" || "UNDEPLOY_IN_PROGRESS" || "FAILED" || "PENDING_DELETE" || "DELETED_IN_TARGET",
+ * //       target: "GREENGRASS" || "CLOUD",
+ * //       greengrassGroupName: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       greengrassGroupId: "STRING_VALUE",
+ * //       greengrassGroupVersionId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchSystemInstancesCommandInput - {@link SearchSystemInstancesCommandInput}
+ * @returns {@link SearchSystemInstancesCommandOutput}
  * @see {@link SearchSystemInstancesCommandInput} for command's `input` shape.
  * @see {@link SearchSystemInstancesCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class SearchSystemInstancesCommand extends $Command<
-  SearchSystemInstancesCommandInput,
-  SearchSystemInstancesCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchSystemInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchSystemInstancesCommandInput, SearchSystemInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "SearchSystemInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchSystemInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchSystemInstancesResponse.filterSensitiveLog,
+export class SearchSystemInstancesCommand extends command<SearchSystemInstancesCommandInput, SearchSystemInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchSystemInstances",
+  SearchSystemInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchSystemInstancesRequest;
+      output: SearchSystemInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchSystemInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchSystemInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchSystemInstancesCommandOutput> {
-    return deserializeAws_json1_1SearchSystemInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchSystemInstancesCommandInput;
+      output: SearchSystemInstancesCommandOutput;
+    };
+  };
 }

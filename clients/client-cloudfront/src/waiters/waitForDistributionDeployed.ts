@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CloudFrontClient } from "../CloudFrontClient";
-import { GetDistributionCommand, GetDistributionCommandInput } from "../commands/GetDistributionCommand";
+import type { CloudFrontClient } from "../CloudFrontClient";
+import {
+  type GetDistributionCommandInput,
+  type GetDistributionCommandOutput,
+  GetDistributionCommand,
+} from "../commands/GetDistributionCommand";
+import type { CloudFrontServiceException } from "../models/CloudFrontServiceException";
 
-const checkState = async (client: CloudFrontClient, input: GetDistributionCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: CloudFrontClient, input: GetDistributionCommandInput): Promise<WaiterResult<GetDistributionCommandOutput | CloudFrontServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetDistributionCommand(input));
+    let result: GetDistributionCommandOutput & any = await client.send(new GetDistributionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Distribution.Status;
-      };
+      }
       if (returnComparator() === "Deployed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -28,8 +40,8 @@ const checkState = async (client: CloudFrontClient, input: GetDistributionComman
 export const waitForDistributionDeployed = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetDistributionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<GetDistributionCommandOutput | CloudFrontServiceException>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 2100 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -40,8 +52,8 @@ export const waitForDistributionDeployed = async (
 export const waitUntilDistributionDeployed = async (
   params: WaiterConfiguration<CloudFrontClient>,
   input: GetDistributionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 60, maxDelay: 120 };
+): Promise<WaiterResult<GetDistributionCommandOutput>> => {
+  const serviceDefaults = { minDelay: 60, maxDelay: 2100 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetDistributionCommandOutput>;
 };

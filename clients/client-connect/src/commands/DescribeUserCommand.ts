@@ -1,97 +1,159 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeUserCommand,
-  serializeAws_restJson1DescribeUserCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserRequest, DescribeUserResponse } from "../models/models_1";
+import { DescribeUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandInput extends DescribeUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandOutput extends DescribeUserResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the specified user account. You can find the instance ID in the console (it’s the
- *    final part of the ARN). The console does not display the user IDs. Instead, list the users and
- *    note the IDs provided in the output.</p>
+ * <p>Describes the specified user. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID in the Connect Customer
+ *     console</a> (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users
+ *    and note the IDs provided in the output.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, DescribeUserCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DescribeUserCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DescribeUserRequest
+ *   UserId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeUserCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserResponse
+ * //   User: { // User
+ * //     Id: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     Username: "STRING_VALUE",
+ * //     IdentityInfo: { // UserIdentityInfo
+ * //       FirstName: "STRING_VALUE",
+ * //       LastName: "STRING_VALUE",
+ * //       Email: "STRING_VALUE",
+ * //       SecondaryEmail: "STRING_VALUE",
+ * //       Mobile: "STRING_VALUE",
+ * //     },
+ * //     PhoneConfig: { // UserPhoneConfig
+ * //       PhoneType: "SOFT_PHONE" || "DESK_PHONE",
+ * //       AutoAccept: true || false,
+ * //       AfterContactWorkTimeLimit: Number("int"),
+ * //       DeskPhoneNumber: "STRING_VALUE",
+ * //       PersistentConnection: true || false,
+ * //     },
+ * //     DirectoryUserId: "STRING_VALUE",
+ * //     SecurityProfileIds: [ // SecurityProfileIds
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     RoutingProfileId: "STRING_VALUE",
+ * //     HierarchyGroupId: "STRING_VALUE",
+ * //     Tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     AutoAcceptConfigs: [ // AutoAcceptConfigs
+ * //       { // AutoAcceptConfig
+ * //         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //         AutoAccept: true || false, // required
+ * //         AgentFirstCallbackAutoAccept: true || false,
+ * //       },
+ * //     ],
+ * //     AfterContactWorkConfigs: [ // AfterContactWorkConfigs
+ * //       { // AfterContactWorkConfigPerChannel
+ * //         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //         AfterContactWorkConfig: { // AfterContactWorkConfig
+ * //           AfterContactWorkTimeLimit: Number("int"),
+ * //         },
+ * //         AgentFirstCallbackAfterContactWorkConfig: {
+ * //           AfterContactWorkTimeLimit: Number("int"),
+ * //         },
+ * //       },
+ * //     ],
+ * //     PhoneNumberConfigs: [ // PhoneNumberConfigs
+ * //       { // PhoneNumberConfig
+ * //         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //         PhoneType: "SOFT_PHONE" || "DESK_PHONE", // required
+ * //         PhoneNumber: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     PersistentConnectionConfigs: [ // PersistentConnectionConfigs
+ * //       { // PersistentConnectionConfig
+ * //         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //         PersistentConnection: true || false, // required
+ * //       },
+ * //     ],
+ * //     VoiceEnhancementConfigs: [ // VoiceEnhancementConfigs
+ * //       { // VoiceEnhancementConfig
+ * //         Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //         VoiceEnhancementMode: "VOICE_ISOLATION" || "NOISE_SUPPRESSION" || "NONE", // required
+ * //       },
+ * //     ],
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedRegion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserCommandInput - {@link DescribeUserCommandInput}
+ * @returns {@link DescribeUserCommandOutput}
  * @see {@link DescribeUserCommandInput} for command's `input` shape.
  * @see {@link DescribeUserCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserCommand extends $Command<
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserCommandInput, DescribeUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DescribeUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserResponse.filterSensitiveLog,
+export class DescribeUserCommand extends command<DescribeUserCommandInput, DescribeUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUser",
+  DescribeUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserRequest;
+      output: DescribeUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserCommandOutput> {
-    return deserializeAws_restJson1DescribeUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserCommandInput;
+      output: DescribeUserCommandOutput;
+    };
+  };
 }

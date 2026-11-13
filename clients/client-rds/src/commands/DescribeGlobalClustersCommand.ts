@@ -1,104 +1,152 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeGlobalClustersMessage, GlobalClustersMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeGlobalClustersCommand,
-  serializeAws_queryDescribeGlobalClustersCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGlobalClustersMessage, GlobalClustersMessage } from "../models/models_0";
+import { DescribeGlobalClusters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGlobalClustersCommand}.
+ */
 export interface DescribeGlobalClustersCommandInput extends DescribeGlobalClustersMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGlobalClustersCommand}.
+ */
 export interface DescribeGlobalClustersCommandOutput extends GlobalClustersMessage, __MetadataBearer {}
 
 /**
- * <p>
- *         Returns information about Aurora global database clusters. This API supports pagination.
- *       </p>
- *          <p>
- *         For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the
- *         <i>Amazon Aurora User Guide.</i>
- *          </p>
- *          <note>
- *            <p>This action only applies to Aurora DB clusters.</p>
- *          </note>
+ * <p>Returns information about Aurora global database clusters. This API supports pagination.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, DescribeGlobalClustersCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribeGlobalClustersCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribeGlobalClustersMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeGlobalClustersCommand(input);
  * const response = await client.send(command);
+ * // { // GlobalClustersMessage
+ * //   Marker: "STRING_VALUE",
+ * //   GlobalClusters: [ // GlobalClusterList
+ * //     { // GlobalCluster
+ * //       GlobalClusterIdentifier: "STRING_VALUE",
+ * //       GlobalClusterResourceId: "STRING_VALUE",
+ * //       GlobalClusterArn: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Engine: "STRING_VALUE",
+ * //       EngineVersion: "STRING_VALUE",
+ * //       EngineLifecycleSupport: "STRING_VALUE",
+ * //       DatabaseName: "STRING_VALUE",
+ * //       StorageEncrypted: true || false,
+ * //       StorageEncryptionType: "none" || "sse-kms" || "sse-rds",
+ * //       DeletionProtection: true || false,
+ * //       GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //         { // GlobalClusterMember
+ * //           DBClusterArn: "STRING_VALUE",
+ * //           Readers: [ // ReadersArnList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           IsWriter: true || false,
+ * //           GlobalWriteForwardingStatus: "enabled" || "disabled" || "enabling" || "disabling" || "unknown",
+ * //           SynchronizationStatus: "connected" || "pending-resync",
+ * //         },
+ * //       ],
+ * //       Endpoint: "STRING_VALUE",
+ * //       FailoverState: { // FailoverState
+ * //         Status: "pending" || "failing-over" || "cancelling",
+ * //         FromDbClusterArn: "STRING_VALUE",
+ * //         ToDbClusterArn: "STRING_VALUE",
+ * //         IsDataLossAllowed: true || false,
+ * //       },
+ * //       TagList: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeGlobalClustersCommandInput - {@link DescribeGlobalClustersCommandInput}
+ * @returns {@link DescribeGlobalClustersCommandOutput}
  * @see {@link DescribeGlobalClustersCommandInput} for command's `input` shape.
  * @see {@link DescribeGlobalClustersCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To describe global DB clusters
+ * ```javascript
+ * // The following example lists Aurora global DB clusters in the current AWS Region.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeGlobalClustersCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   GlobalClusters: [
+ *     {
+ *       DeletionProtection: false,
+ *       Engine: "aurora-mysql",
+ *       EngineVersion: "5.7.mysql_aurora.2.07.2",
+ *       GlobalClusterArn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster",
+ *       GlobalClusterIdentifier: "myglobalcluster",
+ *       GlobalClusterMembers:       [],
+ *       GlobalClusterResourceId: "cluster-f5982077e3b5aabb",
+ *       Status: "available",
+ *       StorageEncrypted: false
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeGlobalClustersCommand extends $Command<
-  DescribeGlobalClustersCommandInput,
-  DescribeGlobalClustersCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGlobalClustersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGlobalClustersCommandInput, DescribeGlobalClustersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribeGlobalClustersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGlobalClustersMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: GlobalClustersMessage.filterSensitiveLog,
+export class DescribeGlobalClustersCommand extends command<DescribeGlobalClustersCommandInput, DescribeGlobalClustersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGlobalClusters",
+  DescribeGlobalClusters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeGlobalClustersMessage;
+      output: GlobalClustersMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGlobalClustersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeGlobalClustersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeGlobalClustersCommandOutput> {
-    return deserializeAws_queryDescribeGlobalClustersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGlobalClustersCommandInput;
+      output: DescribeGlobalClustersCommandOutput;
+    };
+  };
 }

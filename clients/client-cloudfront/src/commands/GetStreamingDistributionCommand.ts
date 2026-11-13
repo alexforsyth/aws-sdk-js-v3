@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { GetStreamingDistributionRequest, GetStreamingDistributionResult } from "../models/models_1";
-import {
-  deserializeAws_restXmlGetStreamingDistributionCommand,
-  serializeAws_restXmlGetStreamingDistributionCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetStreamingDistributionRequest, GetStreamingDistributionResult } from "../models/models_1";
+import { GetStreamingDistribution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetStreamingDistributionCommand}.
+ */
 export interface GetStreamingDistributionCommandInput extends GetStreamingDistributionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetStreamingDistributionCommand}.
+ */
 export interface GetStreamingDistributionCommandOutput extends GetStreamingDistributionResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,103 @@ export interface GetStreamingDistributionCommandOutput extends GetStreamingDistr
  * ```javascript
  * import { CloudFrontClient, GetStreamingDistributionCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, GetStreamingDistributionCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // GetStreamingDistributionRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new GetStreamingDistributionCommand(input);
  * const response = await client.send(command);
+ * // { // GetStreamingDistributionResult
+ * //   StreamingDistribution: { // StreamingDistribution
+ * //     Id: "STRING_VALUE", // required
+ * //     ARN: "STRING_VALUE", // required
+ * //     Status: "STRING_VALUE", // required
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     DomainName: "STRING_VALUE", // required
+ * //     ActiveTrustedSigners: { // ActiveTrustedSigners
+ * //       Enabled: true || false, // required
+ * //       Quantity: Number("int"), // required
+ * //       Items: [ // SignerList
+ * //         { // Signer
+ * //           AwsAccountNumber: "STRING_VALUE",
+ * //           KeyPairIds: { // KeyPairIds
+ * //             Quantity: Number("int"), // required
+ * //             Items: [ // KeyPairIdList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //     StreamingDistributionConfig: { // StreamingDistributionConfig
+ * //       CallerReference: "STRING_VALUE", // required
+ * //       S3Origin: { // S3Origin
+ * //         DomainName: "STRING_VALUE", // required
+ * //         OriginAccessIdentity: "STRING_VALUE", // required
+ * //       },
+ * //       Aliases: { // Aliases
+ * //         Quantity: Number("int"), // required
+ * //         Items: [ // AliasList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Comment: "STRING_VALUE", // required
+ * //       Logging: { // StreamingLoggingConfig
+ * //         Enabled: true || false, // required
+ * //         Bucket: "STRING_VALUE", // required
+ * //         Prefix: "STRING_VALUE", // required
+ * //       },
+ * //       TrustedSigners: { // TrustedSigners
+ * //         Enabled: true || false, // required
+ * //         Quantity: Number("int"), // required
+ * //         Items: [ // AwsAccountNumberList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       PriceClass: "PriceClass_100" || "PriceClass_200" || "PriceClass_All" || "None",
+ * //       Enabled: true || false, // required
+ * //     },
+ * //   },
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetStreamingDistributionCommandInput - {@link GetStreamingDistributionCommandInput}
+ * @returns {@link GetStreamingDistributionCommandOutput}
  * @see {@link GetStreamingDistributionCommandInput} for command's `input` shape.
  * @see {@link GetStreamingDistributionCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link NoSuchStreamingDistribution} (client fault)
+ *  <p>The specified streaming distribution does not exist.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class GetStreamingDistributionCommand extends $Command<
-  GetStreamingDistributionCommandInput,
-  GetStreamingDistributionCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetStreamingDistributionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetStreamingDistributionCommandInput, GetStreamingDistributionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "GetStreamingDistributionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetStreamingDistributionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetStreamingDistributionResult.filterSensitiveLog,
+export class GetStreamingDistributionCommand extends command<GetStreamingDistributionCommandInput, GetStreamingDistributionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetStreamingDistribution",
+  GetStreamingDistribution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetStreamingDistributionRequest;
+      output: GetStreamingDistributionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetStreamingDistributionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetStreamingDistributionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetStreamingDistributionCommandOutput> {
-    return deserializeAws_restXmlGetStreamingDistributionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetStreamingDistributionCommandInput;
+      output: GetStreamingDistributionCommandOutput;
+    };
+  };
 }

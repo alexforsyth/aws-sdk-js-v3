@@ -1,0 +1,233 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProbeRequest, ProbeResponse } from "../models/models_0";
+import { Probe$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ProbeCommand}.
+ */
+export interface ProbeCommandInput extends ProbeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ProbeCommand}.
+ */
+export interface ProbeCommandOutput extends ProbeResponse, __MetadataBearer {}
+
+/**
+ * Use Probe to obtain detailed information about your input media files. Probe returns a JSON that includes container, codec, frame rate, resolution, track count, audio layout, captions, and more. You can use this information to learn more about your media files, or to help make decisions while automating your transcoding workflow. Probe supports the following input container formats: MP4, QuickTime (MOV), 3GP, 3G2, Matroska (MKV), WebM, MXF, MPEG-TS, MPEG-PS, AVI, WAV, MP3, FLAC, Ogg, and ASF (Windows Media / WMA). The fields that Probe returns vary by container and codec. A field isn't returned when the source doesn't contain it, or when it isn't available for that container and codec.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaConvertClient, ProbeCommand } from "@aws-sdk/client-mediaconvert"; // ES Modules import
+ * // const { MediaConvertClient, ProbeCommand } = require("@aws-sdk/client-mediaconvert"); // CommonJS import
+ * // import type { MediaConvertClientConfig } from "@aws-sdk/client-mediaconvert";
+ * const config = {}; // type is MediaConvertClientConfig
+ * const client = new MediaConvertClient(config);
+ * const input = { // ProbeRequest
+ *   InputFiles: [ // __listOfProbeInputFile
+ *     { // ProbeInputFile
+ *       FileUrl: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
+ * const command = new ProbeCommand(input);
+ * const response = await client.send(command);
+ * // { // ProbeResponse
+ * //   ProbeResults: [ // __listOfProbeResult
+ * //     { // ProbeResult
+ * //       Container: { // Container
+ * //         BitRate: Number("long"),
+ * //         Duration: Number("double"),
+ * //         Format: "mp4" || "quicktime" || "matroska" || "webm" || "mxf" || "wave" || "avi" || "mpegts" || "mpegps" || "mp3" || "flac" || "asf" || "ogg" || "three_gp" || "three_g2" || "aac" || "ac3" || "eac3",
+ * //         StartTimecode: "STRING_VALUE",
+ * //         Tracks: [ // __listOfTrack
+ * //           { // Track
+ * //             AudioProperties: { // AudioProperties
+ * //               BitDepth: Number("int"),
+ * //               BitRate: Number("long"),
+ * //               ChannelLayout: "STRING_VALUE",
+ * //               Channels: Number("int"),
+ * //               FrameRate: { // FrameRate
+ * //                 Denominator: Number("int"),
+ * //                 Numerator: Number("int"),
+ * //               },
+ * //               LanguageCode: "STRING_VALUE",
+ * //               ObjectCount: Number("int"),
+ * //               SampleRate: Number("int"),
+ * //             },
+ * //             Codec: "UNKNOWN" || "AAC" || "AC3" || "AMR" || "EAC3" || "FLAC" || "MP2" || "MP3" || "OPUS" || "PCM" || "VORBIS" || "WMA" || "WMA2" || "WMAPRO" || "AV1" || "AVC" || "DV" || "H263" || "HEVC" || "JPEG2000" || "MJPEG" || "MPEG1" || "MP4V" || "MPEG2" || "PRORES" || "QTRLE" || "THEORA" || "UNCOMPRESSED" || "VC1" || "VC3" || "VFW" || "VP8" || "VP9" || "C608" || "C708" || "WEBVTT",
+ * //             DataProperties: { // DataProperties
+ * //               LanguageCode: "STRING_VALUE",
+ * //             },
+ * //             Duration: Number("double"),
+ * //             Index: Number("int"),
+ * //             TrackType: "video" || "audio" || "data",
+ * //             VideoProperties: { // VideoProperties
+ * //               BitDepth: Number("int"),
+ * //               BitRate: Number("long"),
+ * //               CodecMetadata: { // CodecMetadata
+ * //                 BitDepth: Number("int"),
+ * //                 ChromaSubsampling: "STRING_VALUE",
+ * //                 CodedFrameRate: {
+ * //                   Denominator: Number("int"),
+ * //                   Numerator: Number("int"),
+ * //                 },
+ * //                 ColorPrimaries: "ITU_709" || "UNSPECIFIED" || "RESERVED" || "ITU_470M" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "GENERIC_FILM" || "ITU_2020" || "SMPTE_428_1" || "SMPTE_431_2" || "SMPTE_EG_432_1" || "IPT" || "SMPTE_2067XYZ" || "EBU_3213_E" || "LAST",
+ * //                 ContentLightLevel: { // ContentLightLevel
+ * //                   MaxContentLightLevel: Number("int"),
+ * //                   MaxFrameAverageLightLevel: Number("int"),
+ * //                 },
+ * //                 DisplayAspectRatio: { // AspectRatio
+ * //                   Denominator: Number("int"),
+ * //                   Numerator: Number("int"),
+ * //                 },
+ * //                 DolbyVision: { // DolbyVisionMetadata
+ * //                   BaseLayer: "PRESENT" || "ABSENT",
+ * //                   EnhancementLayer: "PRESENT" || "ABSENT",
+ * //                   Level: Number("int"),
+ * //                   Profile: Number("int"),
+ * //                   Rpu: "PRESENT" || "ABSENT",
+ * //                 },
+ * //                 FieldOrder: "STRING_VALUE",
+ * //                 Hdr10PlusPresence: "PRESENT",
+ * //                 Height: Number("int"),
+ * //                 Level: "STRING_VALUE",
+ * //                 MatrixCoefficients: "RGB" || "ITU_709" || "UNSPECIFIED" || "RESERVED" || "FCC" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "YCgCo" || "ITU_2020_NCL" || "ITU_2020_CL" || "SMPTE_2085" || "CD_NCL" || "CD_CL" || "ITU_2100ICtCp" || "IPT" || "EBU3213" || "LAST",
+ * //                 Profile: "STRING_VALUE",
+ * //                 Rotation: Number("int"),
+ * //                 SampleAspectRatio: {
+ * //                   Denominator: Number("int"),
+ * //                   Numerator: Number("int"),
+ * //                 },
+ * //                 ScanType: "STRING_VALUE",
+ * //                 TransferCharacteristics: "ITU_709" || "UNSPECIFIED" || "RESERVED" || "ITU_470M" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "LINEAR" || "LOG10_2" || "LOC10_2_5" || "IEC_61966_2_4" || "ITU_1361" || "IEC_61966_2_1" || "ITU_2020_10bit" || "ITU_2020_12bit" || "SMPTE_2084" || "SMPTE_428_1" || "ARIB_B67" || "LAST",
+ * //                 Width: Number("int"),
+ * //               },
+ * //               ColorPrimaries: "ITU_709" || "UNSPECIFIED" || "RESERVED" || "ITU_470M" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "GENERIC_FILM" || "ITU_2020" || "SMPTE_428_1" || "SMPTE_431_2" || "SMPTE_EG_432_1" || "IPT" || "SMPTE_2067XYZ" || "EBU_3213_E" || "LAST",
+ * //               DisplayAspectRatio: {
+ * //                 Denominator: Number("int"),
+ * //                 Numerator: Number("int"),
+ * //               },
+ * //               FrameRate: {
+ * //                 Denominator: Number("int"),
+ * //                 Numerator: Number("int"),
+ * //               },
+ * //               HdrMetadata: { // HdrMetadata
+ * //                 ContentLightLevel: {
+ * //                   MaxContentLightLevel: Number("int"),
+ * //                   MaxFrameAverageLightLevel: Number("int"),
+ * //                 },
+ * //                 MasteringDisplayColorVolume: { // MasteringDisplayColorVolume
+ * //                   BluePrimaryX: Number("int"),
+ * //                   BluePrimaryY: Number("int"),
+ * //                   GreenPrimaryX: Number("int"),
+ * //                   GreenPrimaryY: Number("int"),
+ * //                   MaxLuminance: Number("long"),
+ * //                   MinLuminance: Number("long"),
+ * //                   RedPrimaryX: Number("int"),
+ * //                   RedPrimaryY: Number("int"),
+ * //                   WhitePointX: Number("int"),
+ * //                   WhitePointY: Number("int"),
+ * //                 },
+ * //               },
+ * //               Height: Number("int"),
+ * //               MatrixCoefficients: "RGB" || "ITU_709" || "UNSPECIFIED" || "RESERVED" || "FCC" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "YCgCo" || "ITU_2020_NCL" || "ITU_2020_CL" || "SMPTE_2085" || "CD_NCL" || "CD_CL" || "ITU_2100ICtCp" || "IPT" || "EBU3213" || "LAST",
+ * //               Rotation: Number("int"),
+ * //               SampleAspectRatio: {
+ * //                 Denominator: Number("int"),
+ * //                 Numerator: Number("int"),
+ * //               },
+ * //               TransferCharacteristics: "ITU_709" || "UNSPECIFIED" || "RESERVED" || "ITU_470M" || "ITU_470BG" || "SMPTE_170M" || "SMPTE_240M" || "LINEAR" || "LOG10_2" || "LOC10_2_5" || "IEC_61966_2_4" || "ITU_1361" || "IEC_61966_2_1" || "ITU_2020_10bit" || "ITU_2020_12bit" || "SMPTE_2084" || "SMPTE_428_1" || "ARIB_B67" || "LAST",
+ * //               Width: Number("int"),
+ * //             },
+ * //           },
+ * //         ],
+ * //       },
+ * //       Metadata: { // Metadata
+ * //         ETag: "STRING_VALUE",
+ * //         FileSize: Number("long"),
+ * //         LastModified: new Date("TIMESTAMP"),
+ * //         MimeType: "STRING_VALUE",
+ * //       },
+ * //       TrackMappings: [ // __listOfTrackMapping
+ * //         { // TrackMapping
+ * //           AudioTrackIndexes: [ // __listOf__integer
+ * //             Number("int"),
+ * //           ],
+ * //           DataTrackIndexes: [
+ * //             Number("int"),
+ * //           ],
+ * //           VideoTrackIndexes: [
+ * //             Number("int"),
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param ProbeCommandInput - {@link ProbeCommandInput}
+ * @returns {@link ProbeCommandOutput}
+ * @see {@link ProbeCommandInput} for command's `input` shape.
+ * @see {@link ProbeCommandOutput} for command's `response` shape.
+ * @see {@link MediaConvertClientResolvedConfig | config} for MediaConvertClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  The service can't process your request because of a problem in the request. Please check your request form and syntax.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The service couldn't complete your request because there is a conflict with the current state of the resource.
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  You don't have permissions for this action with the credentials you sent.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  The service encountered an unexpected condition and can't fulfill your request.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The resource you requested doesn't exist.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You attempted to create more resources than the service allows based on service quotas.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The input file was recognized but appears to be malformed or corrupt.
+ *
+ * @throws {@link MediaConvertServiceException}
+ * <p>Base exception class for all service exceptions from MediaConvert service.</p>
+ *
+ *
+ * @public
+ */
+export class ProbeCommand extends command<ProbeCommandInput, ProbeCommandOutput>(
+  _ep0,
+  _mw0,
+  "Probe",
+  Probe$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ProbeRequest;
+      output: ProbeResponse;
+    };
+    sdk: {
+      input: ProbeCommandInput;
+      output: ProbeCommandOutput;
+    };
+  };
+}

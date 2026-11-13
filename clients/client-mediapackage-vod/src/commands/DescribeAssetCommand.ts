@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageVodClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageVodClient";
-import { DescribeAssetRequest, DescribeAssetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAssetCommand,
-  serializeAws_restJson1DescribeAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAssetRequest, DescribeAssetResponse } from "../models/models_0";
+import { DescribeAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAssetCommand}.
+ */
 export interface DescribeAssetCommandInput extends DescribeAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAssetCommand}.
+ */
 export interface DescribeAssetCommandOutput extends DescribeAssetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,81 @@ export interface DescribeAssetCommandOutput extends DescribeAssetResponse, __Met
  * ```javascript
  * import { MediaPackageVodClient, DescribeAssetCommand } from "@aws-sdk/client-mediapackage-vod"; // ES Modules import
  * // const { MediaPackageVodClient, DescribeAssetCommand } = require("@aws-sdk/client-mediapackage-vod"); // CommonJS import
+ * // import type { MediaPackageVodClientConfig } from "@aws-sdk/client-mediapackage-vod";
+ * const config = {}; // type is MediaPackageVodClientConfig
  * const client = new MediaPackageVodClient(config);
+ * const input = { // DescribeAssetRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAssetCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAssetResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreatedAt: "STRING_VALUE",
+ * //   EgressEndpoints: [ // __listOfEgressEndpoint
+ * //     { // EgressEndpoint
+ * //       PackagingConfigurationId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Url: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Id: "STRING_VALUE",
+ * //   PackagingGroupId: "STRING_VALUE",
+ * //   ResourceId: "STRING_VALUE",
+ * //   SourceArn: "STRING_VALUE",
+ * //   SourceRoleArn: "STRING_VALUE",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAssetCommandInput - {@link DescribeAssetCommandInput}
+ * @returns {@link DescribeAssetCommandOutput}
  * @see {@link DescribeAssetCommandInput} for command's `input` shape.
  * @see {@link DescribeAssetCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageVodClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageVodClientResolvedConfig | config} for MediaPackageVodClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageVodServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackageVod service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAssetCommand extends $Command<
-  DescribeAssetCommandInput,
-  DescribeAssetCommandOutput,
-  MediaPackageVodClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageVodClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAssetCommandInput, DescribeAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageVodClient";
-    const commandName = "DescribeAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAssetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAssetResponse.filterSensitiveLog,
+export class DescribeAssetCommand extends command<DescribeAssetCommandInput, DescribeAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAsset",
+  DescribeAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAssetRequest;
+      output: DescribeAssetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAssetCommandOutput> {
-    return deserializeAws_restJson1DescribeAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAssetCommandInput;
+      output: DescribeAssetCommandOutput;
+    };
+  };
 }

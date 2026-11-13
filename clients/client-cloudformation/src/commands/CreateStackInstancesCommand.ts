@@ -1,96 +1,154 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { CreateStackInstancesInput, CreateStackInstancesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryCreateStackInstancesCommand,
-  serializeAws_queryCreateStackInstancesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateStackInstancesInput, CreateStackInstancesOutput } from "../models/models_0";
+import { CreateStackInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateStackInstancesCommand}.
+ */
 export interface CreateStackInstancesCommandInput extends CreateStackInstancesInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateStackInstancesCommand}.
+ */
 export interface CreateStackInstancesCommandOutput extends CreateStackInstancesOutput, __MetadataBearer {}
 
 /**
- * <p>Creates stack instances for the specified accounts, within the specified Regions. A
- *          stack instance refers to a stack in a specific account and Region. You must specify at least one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must specify at least one value for <code>Regions</code>.</p>
+ * <p>Creates stack instances for the specified accounts, within the specified Amazon Web Services Regions. A
+ *       stack instance refers to a stack in a specific account and Region. You must specify at least
+ *       one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must
+ *       specify at least one value for <code>Regions</code>.</p>
+ *          <note>
+ *             <p>The maximum number of organizational unit (OUs) supported by a
+ *           <code>CreateStackInstances</code> operation is 50.</p>
+ *             <p>If you need more than 50, consider the following options:</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <i>Batch processing:</i> If you don't want to expose your OU
+ *             hierarchy, split up the operations into multiple calls with less than 50 OUs
+ *             each.</p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <i>Parent OU strategy:</i> If you don't mind exposing the OU
+ *             hierarchy, target a parent OU that contains all desired child OUs.</p>
+ *                </li>
+ *             </ul>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, CreateStackInstancesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, CreateStackInstancesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // CreateStackInstancesInput
+ *   StackSetName: "STRING_VALUE", // required
+ *   Accounts: [ // AccountList
+ *     "STRING_VALUE",
+ *   ],
+ *   DeploymentTargets: { // DeploymentTargets
+ *     Accounts: [
+ *       "STRING_VALUE",
+ *     ],
+ *     AccountsUrl: "STRING_VALUE",
+ *     OrganizationalUnitIds: [ // OrganizationalUnitIdList
+ *       "STRING_VALUE",
+ *     ],
+ *     AccountFilterType: "NONE" || "INTERSECTION" || "DIFFERENCE" || "UNION",
+ *   },
+ *   Regions: [ // RegionList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   ParameterOverrides: [ // Parameters
+ *     { // Parameter
+ *       ParameterKey: "STRING_VALUE",
+ *       ParameterValue: "STRING_VALUE",
+ *       UsePreviousValue: true || false,
+ *       ResolvedValue: "STRING_VALUE",
+ *     },
+ *   ],
+ *   OperationPreferences: { // StackSetOperationPreferences
+ *     RegionConcurrencyType: "SEQUENTIAL" || "PARALLEL",
+ *     RegionOrder: [
+ *       "STRING_VALUE",
+ *     ],
+ *     FailureToleranceCount: Number("int"),
+ *     FailureTolerancePercentage: Number("int"),
+ *     MaxConcurrentCount: Number("int"),
+ *     MaxConcurrentPercentage: Number("int"),
+ *     ConcurrencyMode: "STRICT_FAILURE_TOLERANCE" || "SOFT_FAILURE_TOLERANCE",
+ *   },
+ *   OperationId: "STRING_VALUE",
+ *   CallAs: "SELF" || "DELEGATED_ADMIN",
+ * };
  * const command = new CreateStackInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // CreateStackInstancesOutput
+ * //   OperationId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateStackInstancesCommandInput - {@link CreateStackInstancesCommandInput}
+ * @returns {@link CreateStackInstancesCommandOutput}
  * @see {@link CreateStackInstancesCommandInput} for command's `input` shape.
  * @see {@link CreateStackInstancesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The specified operation isn't valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The quota for the resource has already been reached.</p>
+ *          <p>For information about resource and stack limitations, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">CloudFormation quotas</a> in the
+ *    <i>CloudFormation User Guide</i>.</p>
+ *
+ * @throws {@link OperationIdAlreadyExistsException} (client fault)
+ *  <p>The specified operation ID already exists.</p>
+ *
+ * @throws {@link OperationInProgressException} (client fault)
+ *  <p>Another operation is currently in progress for this StackSet. Only one operation can be performed for a stack
+ *    set at a given time.</p>
+ *
+ * @throws {@link StackSetNotFoundException} (client fault)
+ *  <p>The specified StackSet doesn't exist.</p>
+ *
+ * @throws {@link StaleRequestException} (client fault)
+ *  <p>Another operation has been performed on this StackSet since the specified operation was performed.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class CreateStackInstancesCommand extends $Command<
-  CreateStackInstancesCommandInput,
-  CreateStackInstancesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateStackInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateStackInstancesCommandInput, CreateStackInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "CreateStackInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateStackInstancesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateStackInstancesOutput.filterSensitiveLog,
+export class CreateStackInstancesCommand extends command<CreateStackInstancesCommandInput, CreateStackInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateStackInstances",
+  CreateStackInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStackInstancesInput;
+      output: CreateStackInstancesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateStackInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateStackInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateStackInstancesCommandOutput> {
-    return deserializeAws_queryCreateStackInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateStackInstancesCommandInput;
+      output: CreateStackInstancesCommandOutput;
+    };
+  };
 }

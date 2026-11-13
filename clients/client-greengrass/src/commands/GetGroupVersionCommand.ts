@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { GetGroupVersionRequest, GetGroupVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetGroupVersionCommand,
-  serializeAws_restJson1GetGroupVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetGroupVersionRequest, GetGroupVersionResponse } from "../models/models_0";
+import { GetGroupVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetGroupVersionCommand}.
+ */
 export interface GetGroupVersionCommandInput extends GetGroupVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetGroupVersionCommand}.
+ */
 export interface GetGroupVersionCommandOutput extends GetGroupVersionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface GetGroupVersionCommandOutput extends GetGroupVersionResponse, _
  * ```javascript
  * import { GreengrassClient, GetGroupVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, GetGroupVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // GetGroupVersionRequest
+ *   GroupId: "STRING_VALUE", // required
+ *   GroupVersionId: "STRING_VALUE", // required
+ * };
  * const command = new GetGroupVersionCommand(input);
  * const response = await client.send(command);
+ * // { // GetGroupVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Definition: { // GroupVersion
+ * //     ConnectorDefinitionVersionArn: "STRING_VALUE",
+ * //     CoreDefinitionVersionArn: "STRING_VALUE",
+ * //     DeviceDefinitionVersionArn: "STRING_VALUE",
+ * //     FunctionDefinitionVersionArn: "STRING_VALUE",
+ * //     LoggerDefinitionVersionArn: "STRING_VALUE",
+ * //     ResourceDefinitionVersionArn: "STRING_VALUE",
+ * //     SubscriptionDefinitionVersionArn: "STRING_VALUE",
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetGroupVersionCommandInput - {@link GetGroupVersionCommandInput}
+ * @returns {@link GetGroupVersionCommandOutput}
  * @see {@link GetGroupVersionCommandInput} for command's `input` shape.
  * @see {@link GetGroupVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class GetGroupVersionCommand extends $Command<
-  GetGroupVersionCommandInput,
-  GetGroupVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetGroupVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetGroupVersionCommandInput, GetGroupVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "GetGroupVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetGroupVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetGroupVersionResponse.filterSensitiveLog,
+export class GetGroupVersionCommand extends command<GetGroupVersionCommandInput, GetGroupVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetGroupVersion",
+  GetGroupVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGroupVersionRequest;
+      output: GetGroupVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetGroupVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetGroupVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetGroupVersionCommandOutput> {
-    return deserializeAws_restJson1GetGroupVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetGroupVersionCommandInput;
+      output: GetGroupVersionCommandOutput;
+    };
+  };
 }

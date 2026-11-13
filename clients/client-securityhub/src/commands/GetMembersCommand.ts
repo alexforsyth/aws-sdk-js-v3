@@ -1,30 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetMembersRequest, GetMembersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1GetMembersCommand,
-  serializeAws_restJson1GetMembersCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMembersRequest, GetMembersResponse } from "../models/models_2";
+import { GetMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMembersCommand}.
+ */
 export interface GetMembersCommandInput extends GetMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMembersCommand}.
+ */
 export interface GetMembersCommandOutput extends GetMembersResponse, __MetadataBearer {}
 
 /**
- * <p>Returns the details for the Security Hub member accounts for the specified account IDs.</p>
- *          <p>An administrator account can be either the delegated Security Hub administrator account for an
- *          organization or an administrator account that enabled Security Hub manually.</p>
+ * <p>Returns the details for the Security Hub CSPM member accounts for the specified account IDs.</p>
+ *          <p>An administrator account can be either the delegated Security Hub CSPM administrator account for an
+ *          organization or an administrator account that enabled Security Hub CSPM manually.</p>
  *          <p>The results include both member accounts that are managed using Organizations and accounts that
  *          were invited manually.</p>
  * @example
@@ -32,68 +33,82 @@ export interface GetMembersCommandOutput extends GetMembersResponse, __MetadataB
  * ```javascript
  * import { SecurityHubClient, GetMembersCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, GetMembersCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // GetMembersRequest
+ *   AccountIds: [ // AccountIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new GetMembersCommand(input);
  * const response = await client.send(command);
+ * // { // GetMembersResponse
+ * //   Members: [ // MemberList
+ * //     { // Member
+ * //       AccountId: "STRING_VALUE",
+ * //       Email: "STRING_VALUE",
+ * //       MasterId: "STRING_VALUE",
+ * //       AdministratorId: "STRING_VALUE",
+ * //       MemberStatus: "STRING_VALUE",
+ * //       InvitedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   UnprocessedAccounts: [ // ResultList
+ * //     { // Result
+ * //       AccountId: "STRING_VALUE",
+ * //       ProcessingResult: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetMembersCommandInput - {@link GetMembersCommandInput}
+ * @returns {@link GetMembersCommandOutput}
  * @see {@link GetMembersCommandInput} for command's `input` shape.
  * @see {@link GetMembersCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @public
  */
-export class GetMembersCommand extends $Command<
-  GetMembersCommandInput,
-  GetMembersCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMembersCommandInput, GetMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "GetMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMembersResponse.filterSensitiveLog,
+export class GetMembersCommand extends command<GetMembersCommandInput, GetMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMembers",
+  GetMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMembersRequest;
+      output: GetMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMembersCommandOutput> {
-    return deserializeAws_restJson1GetMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMembersCommandInput;
+      output: GetMembersCommandOutput;
+    };
+  };
 }

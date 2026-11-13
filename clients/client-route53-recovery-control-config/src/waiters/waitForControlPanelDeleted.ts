@@ -1,30 +1,42 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeControlPanelCommand, DescribeControlPanelCommandInput } from "../commands/DescribeControlPanelCommand";
-import { Route53RecoveryControlConfigClient } from "../Route53RecoveryControlConfigClient";
+import {
+  type DescribeControlPanelCommandInput,
+  type DescribeControlPanelCommandOutput,
+  DescribeControlPanelCommand,
+} from "../commands/DescribeControlPanelCommand";
+import type { ResourceNotFoundException } from "../models/errors";
+import type {
+  Route53RecoveryControlConfigServiceException,
+} from "../models/Route53RecoveryControlConfigServiceException";
+import type { Route53RecoveryControlConfigClient } from "../Route53RecoveryControlConfigClient";
 
-const checkState = async (
-  client: Route53RecoveryControlConfigClient,
-  input: DescribeControlPanelCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: Route53RecoveryControlConfigClient, input: DescribeControlPanelCommandInput): Promise<WaiterResult<DescribeControlPanelCommandOutput | Route53RecoveryControlConfigServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeControlPanelCommand(input));
+    let result: DescribeControlPanelCommandOutput & any = await client.send(new DescribeControlPanelCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.ControlPanel.Status;
-      };
+      }
       if (returnComparator() === "PENDING_DELETION") {
         return { state: WaiterState.RETRY, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
-    if (exception.name && exception.name == "InternalServerException") {
+    if (exception.name === "InternalServerException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -37,7 +49,7 @@ const checkState = async (
 export const waitForControlPanelDeleted = async (
   params: WaiterConfiguration<Route53RecoveryControlConfigClient>,
   input: DescribeControlPanelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeControlPanelCommandOutput | Route53RecoveryControlConfigServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -49,8 +61,8 @@ export const waitForControlPanelDeleted = async (
 export const waitUntilControlPanelDeleted = async (
   params: WaiterConfiguration<Route53RecoveryControlConfigClient>,
   input: DescribeControlPanelCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

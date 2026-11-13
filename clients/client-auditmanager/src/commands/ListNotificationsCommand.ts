@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuditManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AuditManagerClient";
-import { ListNotificationsRequest, ListNotificationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListNotificationsCommand,
-  serializeAws_restJson1ListNotificationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListNotificationsRequest, ListNotificationsResponse } from "../models/models_0";
+import { ListNotifications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListNotificationsCommand}.
+ */
 export interface ListNotificationsCommandInput extends ListNotificationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListNotificationsCommand}.
+ */
 export interface ListNotificationsCommandOutput extends ListNotificationsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,71 @@ export interface ListNotificationsCommandOutput extends ListNotificationsRespons
  * ```javascript
  * import { AuditManagerClient, ListNotificationsCommand } from "@aws-sdk/client-auditmanager"; // ES Modules import
  * // const { AuditManagerClient, ListNotificationsCommand } = require("@aws-sdk/client-auditmanager"); // CommonJS import
+ * // import type { AuditManagerClientConfig } from "@aws-sdk/client-auditmanager";
+ * const config = {}; // type is AuditManagerClientConfig
  * const client = new AuditManagerClient(config);
+ * const input = { // ListNotificationsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListNotificationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListNotificationsResponse
+ * //   notifications: [ // Notifications
+ * //     { // Notification
+ * //       id: "STRING_VALUE",
+ * //       assessmentId: "STRING_VALUE",
+ * //       assessmentName: "STRING_VALUE",
+ * //       controlSetId: "STRING_VALUE",
+ * //       controlSetName: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       eventTime: new Date("TIMESTAMP"),
+ * //       source: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListNotificationsCommandInput - {@link ListNotificationsCommandInput}
+ * @returns {@link ListNotificationsCommandOutput}
  * @see {@link ListNotificationsCommandInput} for command's `input` shape.
  * @see {@link ListNotificationsCommandOutput} for command's `response` shape.
- * @see {@link AuditManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AuditManagerClientResolvedConfig | config} for AuditManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Your account isn't registered with Audit Manager. Check the delegated
+ *          administrator setup on the Audit Manager settings page, and try again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *          later. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AuditManagerServiceException}
+ * <p>Base exception class for all service exceptions from AuditManager service.</p>
+ *
+ *
+ * @public
  */
-export class ListNotificationsCommand extends $Command<
-  ListNotificationsCommandInput,
-  ListNotificationsCommandOutput,
-  AuditManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListNotificationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AuditManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListNotificationsCommandInput, ListNotificationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AuditManagerClient";
-    const commandName = "ListNotificationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListNotificationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListNotificationsResponse.filterSensitiveLog,
+export class ListNotificationsCommand extends command<ListNotificationsCommandInput, ListNotificationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListNotifications",
+  ListNotifications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNotificationsRequest;
+      output: ListNotificationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListNotificationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListNotificationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListNotificationsCommandOutput> {
-    return deserializeAws_restJson1ListNotificationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListNotificationsCommandInput;
+      output: ListNotificationsCommandOutput;
+    };
+  };
 }

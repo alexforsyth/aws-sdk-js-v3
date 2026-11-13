@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { DescribeContainerInput, DescribeContainerOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeContainerCommand,
-  serializeAws_json1_1DescribeContainerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeContainerInput, DescribeContainerOutput } from "../models/models_0";
+import { DescribeContainer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeContainerCommand}.
+ */
 export interface DescribeContainerCommandInput extends DescribeContainerInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeContainerCommand}.
+ */
 export interface DescribeContainerCommandOutput extends DescribeContainerOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +35,60 @@ export interface DescribeContainerCommandOutput extends DescribeContainerOutput,
  * ```javascript
  * import { MediaStoreClient, DescribeContainerCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, DescribeContainerCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // DescribeContainerInput
+ *   ContainerName: "STRING_VALUE",
+ * };
  * const command = new DescribeContainerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeContainerOutput
+ * //   Container: { // Container
+ * //     Endpoint: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     ARN: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Status: "ACTIVE" || "CREATING" || "DELETING",
+ * //     AccessLoggingEnabled: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeContainerCommandInput - {@link DescribeContainerCommandInput}
+ * @returns {@link DescribeContainerCommandOutput}
  * @see {@link DescribeContainerCommandInput} for command's `input` shape.
  * @see {@link DescribeContainerCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link ContainerNotFoundException} (client fault)
+ *  <p>The container that you specified in the request does not exist.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeContainerCommand extends $Command<
-  DescribeContainerCommandInput,
-  DescribeContainerCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeContainerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeContainerCommandInput, DescribeContainerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "DescribeContainerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeContainerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeContainerOutput.filterSensitiveLog,
+export class DescribeContainerCommand extends command<DescribeContainerCommandInput, DescribeContainerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeContainer",
+  DescribeContainer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContainerInput;
+      output: DescribeContainerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeContainerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeContainerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeContainerCommandOutput> {
-    return deserializeAws_json1_1DescribeContainerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeContainerCommandInput;
+      output: DescribeContainerCommandOutput;
+    };
+  };
 }

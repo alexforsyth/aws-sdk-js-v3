@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { ListCopyJobsInput, ListCopyJobsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListCopyJobsCommand,
-  serializeAws_restJson1ListCopyJobsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCopyJobsInput, ListCopyJobsOutput } from "../models/models_0";
+import { ListCopyJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCopyJobsCommand}.
+ */
 export interface ListCopyJobsCommandInput extends ListCopyJobsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListCopyJobsCommand}.
+ */
 export interface ListCopyJobsCommandOutput extends ListCopyJobsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,114 @@ export interface ListCopyJobsCommandOutput extends ListCopyJobsOutput, __Metadat
  * ```javascript
  * import { BackupClient, ListCopyJobsCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, ListCopyJobsCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = { // ListCopyJobsInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   ByResourceArn: "STRING_VALUE",
+ *   ByState: "CREATED" || "RUNNING" || "COMPLETED" || "FAILED" || "PARTIAL",
+ *   ByCreatedBefore: new Date("TIMESTAMP"),
+ *   ByCreatedAfter: new Date("TIMESTAMP"),
+ *   ByResourceType: "STRING_VALUE",
+ *   ByDestinationVaultArn: "STRING_VALUE",
+ *   ByAccountId: "STRING_VALUE",
+ *   ByCompleteBefore: new Date("TIMESTAMP"),
+ *   ByCompleteAfter: new Date("TIMESTAMP"),
+ *   ByParentJobId: "STRING_VALUE",
+ *   ByMessageCategory: "STRING_VALUE",
+ *   BySourceRecoveryPointArn: "STRING_VALUE",
+ * };
  * const command = new ListCopyJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCopyJobsOutput
+ * //   CopyJobs: [ // CopyJobsList
+ * //     { // CopyJob
+ * //       AccountId: "STRING_VALUE",
+ * //       CopyJobId: "STRING_VALUE",
+ * //       SourceBackupVaultArn: "STRING_VALUE",
+ * //       SourceRecoveryPointArn: "STRING_VALUE",
+ * //       DestinationBackupVaultArn: "STRING_VALUE",
+ * //       DestinationVaultType: "STRING_VALUE",
+ * //       DestinationVaultLockState: "STRING_VALUE",
+ * //       DestinationRecoveryPointArn: "STRING_VALUE",
+ * //       DestinationEncryptionKeyArn: "STRING_VALUE",
+ * //       DestinationRecoveryPointLifecycle: { // Lifecycle
+ * //         MoveToColdStorageAfterDays: Number("long"),
+ * //         DeleteAfterDays: Number("long"),
+ * //         OptInToArchiveForSupportedResources: true || false,
+ * //         DeleteAfterEvent: "DELETE_AFTER_COPY",
+ * //       },
+ * //       ResourceArn: "STRING_VALUE",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       CompletionDate: new Date("TIMESTAMP"),
+ * //       State: "CREATED" || "RUNNING" || "COMPLETED" || "FAILED" || "PARTIAL",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       BackupSizeInBytes: Number("long"),
+ * //       IamRoleArn: "STRING_VALUE",
+ * //       CreatedBy: { // RecoveryPointCreator
+ * //         BackupPlanId: "STRING_VALUE",
+ * //         BackupPlanArn: "STRING_VALUE",
+ * //         BackupPlanName: "STRING_VALUE",
+ * //         BackupPlanVersion: "STRING_VALUE",
+ * //         BackupRuleId: "STRING_VALUE",
+ * //         BackupRuleName: "STRING_VALUE",
+ * //         BackupRuleCron: "STRING_VALUE",
+ * //         BackupRuleTimezone: "STRING_VALUE",
+ * //       },
+ * //       CreatedByBackupJobId: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE",
+ * //       ParentJobId: "STRING_VALUE",
+ * //       IsParent: true || false,
+ * //       CompositeMemberIdentifier: "STRING_VALUE",
+ * //       NumberOfChildJobs: Number("long"),
+ * //       ChildJobsInState: { // CopyJobChildJobsInState
+ * //         "<keys>": Number("long"),
+ * //       },
+ * //       ResourceName: "STRING_VALUE",
+ * //       MessageCategory: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCopyJobsCommandInput - {@link ListCopyJobsCommandInput}
+ * @returns {@link ListCopyJobsCommandOutput}
  * @see {@link ListCopyJobsCommandInput} for command's `input` shape.
  * @see {@link ListCopyJobsCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Indicates that something is wrong with a parameter's value. For example, the value is
+ *          out of range.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class ListCopyJobsCommand extends $Command<
-  ListCopyJobsCommandInput,
-  ListCopyJobsCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCopyJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCopyJobsCommandInput, ListCopyJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "ListCopyJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCopyJobsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListCopyJobsOutput.filterSensitiveLog,
+export class ListCopyJobsCommand extends command<ListCopyJobsCommandInput, ListCopyJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCopyJobs",
+  ListCopyJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCopyJobsInput;
+      output: ListCopyJobsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCopyJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListCopyJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCopyJobsCommandOutput> {
-    return deserializeAws_restJson1ListCopyJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCopyJobsCommandInput;
+      output: ListCopyJobsCommandOutput;
+    };
+  };
 }

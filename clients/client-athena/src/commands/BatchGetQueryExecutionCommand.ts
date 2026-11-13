@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { BatchGetQueryExecutionInput, BatchGetQueryExecutionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetQueryExecutionCommand,
-  serializeAws_json1_1BatchGetQueryExecutionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetQueryExecutionInput, BatchGetQueryExecutionOutput } from "../models/models_0";
+import { BatchGetQueryExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetQueryExecutionCommand}.
+ */
 export interface BatchGetQueryExecutionCommandInput extends BatchGetQueryExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetQueryExecutionCommand}.
+ */
 export interface BatchGetQueryExecutionCommandOutput extends BatchGetQueryExecutionOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,137 @@ export interface BatchGetQueryExecutionCommandOutput extends BatchGetQueryExecut
  * ```javascript
  * import { AthenaClient, BatchGetQueryExecutionCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, BatchGetQueryExecutionCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // BatchGetQueryExecutionInput
+ *   QueryExecutionIds: [ // QueryExecutionIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetQueryExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetQueryExecutionOutput
+ * //   QueryExecutions: [ // QueryExecutionList
+ * //     { // QueryExecution
+ * //       QueryExecutionId: "STRING_VALUE",
+ * //       Query: "STRING_VALUE",
+ * //       StatementType: "DDL" || "DML" || "UTILITY",
+ * //       ManagedQueryResultsConfiguration: { // ManagedQueryResultsConfiguration
+ * //         Enabled: true || false, // required
+ * //         EncryptionConfiguration: { // ManagedQueryResultsEncryptionConfiguration
+ * //           KmsKey: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //       ResultConfiguration: { // ResultConfiguration
+ * //         OutputLocation: "STRING_VALUE",
+ * //         EncryptionConfiguration: { // EncryptionConfiguration
+ * //           EncryptionOption: "SSE_S3" || "SSE_KMS" || "CSE_KMS", // required
+ * //           KmsKey: "STRING_VALUE",
+ * //         },
+ * //         ExpectedBucketOwner: "STRING_VALUE",
+ * //         AclConfiguration: { // AclConfiguration
+ * //           S3AclOption: "BUCKET_OWNER_FULL_CONTROL", // required
+ * //         },
+ * //       },
+ * //       ResultReuseConfiguration: { // ResultReuseConfiguration
+ * //         ResultReuseByAgeConfiguration: { // ResultReuseByAgeConfiguration
+ * //           Enabled: true || false, // required
+ * //           MaxAgeInMinutes: Number("int"),
+ * //         },
+ * //       },
+ * //       QueryExecutionContext: { // QueryExecutionContext
+ * //         Database: "STRING_VALUE",
+ * //         Catalog: "STRING_VALUE",
+ * //       },
+ * //       Status: { // QueryExecutionStatus
+ * //         State: "QUEUED" || "RUNNING" || "SUCCEEDED" || "FAILED" || "CANCELLED",
+ * //         StateChangeReason: "STRING_VALUE",
+ * //         SubmissionDateTime: new Date("TIMESTAMP"),
+ * //         CompletionDateTime: new Date("TIMESTAMP"),
+ * //         AthenaError: { // AthenaError
+ * //           ErrorCategory: Number("int"),
+ * //           ErrorType: Number("int"),
+ * //           Retryable: true || false,
+ * //           ErrorMessage: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Statistics: { // QueryExecutionStatistics
+ * //         EngineExecutionTimeInMillis: Number("long"),
+ * //         DataScannedInBytes: Number("long"),
+ * //         DataManifestLocation: "STRING_VALUE",
+ * //         TotalExecutionTimeInMillis: Number("long"),
+ * //         QueryQueueTimeInMillis: Number("long"),
+ * //         ServicePreProcessingTimeInMillis: Number("long"),
+ * //         QueryPlanningTimeInMillis: Number("long"),
+ * //         ServiceProcessingTimeInMillis: Number("long"),
+ * //         ResultReuseInformation: { // ResultReuseInformation
+ * //           ReusedPreviousResult: true || false, // required
+ * //         },
+ * //         DpuCount: Number("double"),
+ * //       },
+ * //       WorkGroup: "STRING_VALUE",
+ * //       EngineVersion: { // EngineVersion
+ * //         SelectedEngineVersion: "STRING_VALUE",
+ * //         EffectiveEngineVersion: "STRING_VALUE",
+ * //       },
+ * //       ExecutionParameters: [ // ExecutionParameters
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SubstatementType: "STRING_VALUE",
+ * //       QueryResultsS3AccessGrantsConfiguration: { // QueryResultsS3AccessGrantsConfiguration
+ * //         EnableS3AccessGrants: true || false, // required
+ * //         CreateUserLevelPrefix: true || false,
+ * //         AuthenticationType: "DIRECTORY_IDENTITY", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   UnprocessedQueryExecutionIds: [ // UnprocessedQueryExecutionIdList
+ * //     { // UnprocessedQueryExecutionId
+ * //       QueryExecutionId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetQueryExecutionCommandInput - {@link BatchGetQueryExecutionCommandInput}
+ * @returns {@link BatchGetQueryExecutionCommandOutput}
  * @see {@link BatchGetQueryExecutionCommandInput} for command's `input` shape.
  * @see {@link BatchGetQueryExecutionCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetQueryExecutionCommand extends $Command<
-  BatchGetQueryExecutionCommandInput,
-  BatchGetQueryExecutionCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetQueryExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetQueryExecutionCommandInput, BatchGetQueryExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "BatchGetQueryExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetQueryExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetQueryExecutionOutput.filterSensitiveLog,
+export class BatchGetQueryExecutionCommand extends command<BatchGetQueryExecutionCommandInput, BatchGetQueryExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetQueryExecution",
+  BatchGetQueryExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetQueryExecutionInput;
+      output: BatchGetQueryExecutionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetQueryExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetQueryExecutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetQueryExecutionCommandOutput> {
-    return deserializeAws_json1_1BatchGetQueryExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetQueryExecutionCommandInput;
+      output: BatchGetQueryExecutionCommandOutput;
+    };
+  };
 }

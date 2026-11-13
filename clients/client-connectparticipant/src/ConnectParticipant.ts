@@ -1,338 +1,309 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CancelParticipantAuthenticationCommandInput,
+  type CancelParticipantAuthenticationCommandOutput,
+  CancelParticipantAuthenticationCommand,
+} from "./commands/CancelParticipantAuthenticationCommand";
+import {
+  type CompleteAttachmentUploadCommandInput,
+  type CompleteAttachmentUploadCommandOutput,
   CompleteAttachmentUploadCommand,
-  CompleteAttachmentUploadCommandInput,
-  CompleteAttachmentUploadCommandOutput,
 } from "./commands/CompleteAttachmentUploadCommand";
 import {
+  type CreateParticipantConnectionCommandInput,
+  type CreateParticipantConnectionCommandOutput,
   CreateParticipantConnectionCommand,
-  CreateParticipantConnectionCommandInput,
-  CreateParticipantConnectionCommandOutput,
 } from "./commands/CreateParticipantConnectionCommand";
 import {
+  type DescribeViewCommandInput,
+  type DescribeViewCommandOutput,
+  DescribeViewCommand,
+} from "./commands/DescribeViewCommand";
+import {
+  type DisconnectParticipantCommandInput,
+  type DisconnectParticipantCommandOutput,
   DisconnectParticipantCommand,
-  DisconnectParticipantCommandInput,
-  DisconnectParticipantCommandOutput,
 } from "./commands/DisconnectParticipantCommand";
 import {
+  type GetAttachmentCommandInput,
+  type GetAttachmentCommandOutput,
   GetAttachmentCommand,
-  GetAttachmentCommandInput,
-  GetAttachmentCommandOutput,
 } from "./commands/GetAttachmentCommand";
 import {
-  GetTranscriptCommand,
-  GetTranscriptCommandInput,
-  GetTranscriptCommandOutput,
-} from "./commands/GetTranscriptCommand";
-import { SendEventCommand, SendEventCommandInput, SendEventCommandOutput } from "./commands/SendEventCommand";
-import { SendMessageCommand, SendMessageCommandInput, SendMessageCommandOutput } from "./commands/SendMessageCommand";
+  type GetAuthenticationUrlCommandInput,
+  type GetAuthenticationUrlCommandOutput,
+  GetAuthenticationUrlCommand,
+} from "./commands/GetAuthenticationUrlCommand";
 import {
+  type GetTranscriptCommandInput,
+  type GetTranscriptCommandOutput,
+  GetTranscriptCommand,
+} from "./commands/GetTranscriptCommand";
+import { type SendEventCommandInput, type SendEventCommandOutput, SendEventCommand } from "./commands/SendEventCommand";
+import {
+  type SendMessageCommandInput,
+  type SendMessageCommandOutput,
+  SendMessageCommand,
+} from "./commands/SendMessageCommand";
+import {
+  type StartAttachmentUploadCommandInput,
+  type StartAttachmentUploadCommandOutput,
   StartAttachmentUploadCommand,
-  StartAttachmentUploadCommandInput,
-  StartAttachmentUploadCommandOutput,
 } from "./commands/StartAttachmentUploadCommand";
 import { ConnectParticipantClient } from "./ConnectParticipantClient";
+import { paginateGetTranscript } from "./pagination/GetTranscriptPaginator";
+
+const commands = {
+  CancelParticipantAuthenticationCommand,
+  CompleteAttachmentUploadCommand,
+  CreateParticipantConnectionCommand,
+  DescribeViewCommand,
+  DisconnectParticipantCommand,
+  GetAttachmentCommand,
+  GetAuthenticationUrlCommand,
+  GetTranscriptCommand,
+  SendEventCommand,
+  SendMessageCommand,
+  StartAttachmentUploadCommand,
+};
+const paginators = {
+  paginateGetTranscript,
+};
 
 /**
- * <p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage
- *             a customer contact center and provide reliable customer engagement at any scale.</p>
- *         <p>Amazon Connect enables customer contacts through voice or chat.</p>
- *
- *         <p>The APIs described here are used by chat participants, such as agents and
- *             customers.</p>
+ * @public
  */
-export class ConnectParticipant extends ConnectParticipantClient {
+export interface ConnectParticipantRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ConnectParticipant {
   /**
-   * <p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL
-   *             provided in StartAttachmentUpload API. </p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link CancelParticipantAuthenticationCommand}
    */
-  public completeAttachmentUpload(
+  cancelParticipantAuthentication(
+    args: CancelParticipantAuthenticationCommandInput,
+    options?: ConnectParticipantRequestOptions
+  ): Promise<CancelParticipantAuthenticationCommandOutput>;
+  cancelParticipantAuthentication(
+    args: CancelParticipantAuthenticationCommandInput,
+    cb: (err: any, data?: CancelParticipantAuthenticationCommandOutput) => void
+  ): void;
+  cancelParticipantAuthentication(
+    args: CancelParticipantAuthenticationCommandInput,
+    options: ConnectParticipantRequestOptions,
+    cb: (err: any, data?: CancelParticipantAuthenticationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CompleteAttachmentUploadCommand}
+   */
+  completeAttachmentUpload(
     args: CompleteAttachmentUploadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<CompleteAttachmentUploadCommandOutput>;
-  public completeAttachmentUpload(
+  completeAttachmentUpload(
     args: CompleteAttachmentUploadCommandInput,
     cb: (err: any, data?: CompleteAttachmentUploadCommandOutput) => void
   ): void;
-  public completeAttachmentUpload(
+  completeAttachmentUpload(
     args: CompleteAttachmentUploadCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: CompleteAttachmentUploadCommandOutput) => void
   ): void;
-  public completeAttachmentUpload(
-    args: CompleteAttachmentUploadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CompleteAttachmentUploadCommandOutput) => void),
-    cb?: (err: any, data?: CompleteAttachmentUploadCommandOutput) => void
-  ): Promise<CompleteAttachmentUploadCommandOutput> | void {
-    const command = new CompleteAttachmentUploadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates the participant's connection.  Note that ParticipantToken is used for invoking this API instead of
-   *             ConnectionToken.</p>
-   *         <p>The participant token is valid for the lifetime of the participant –
-   *             until they are part of a contact.</p>
-   *         <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.
-   *             Clients must manually connect to the returned websocket URL and subscribe to the desired
-   *             topic. </p>
-   *         <p>For chat, you need to publish the following on the established websocket
-   *             connection:</p>
-   *         <p>
-   *             <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code>
-   *          </p>
-   *         <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,
-   *             clients need to call this API again to obtain a new websocket URL and perform the same
-   *             steps as before.</p>
-   *         <p>
-   *             <b>Message streaming support</b>: This API can also be used together with the
-   *             <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html">StartContactStreaming</a>
-   *             API to create a participant connection for chat contacts that are
-   *             not using a websocket. For more information about message streaming, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html">Enable real-time chat message streaming</a> in the <i>Amazon Connect
-   *                     Administrator Guide</i>.</p>
-   *         <p>
-   *             <b>Feature specifications</b>: For information about feature specifications, such as the allowed number of open
-   *             websocket connections per participant, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator
-   *                 Guide</i>. </p>
-   *         <note>
-   *             <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
-   *          </note>
+   * @see {@link CreateParticipantConnectionCommand}
    */
-  public createParticipantConnection(
+  createParticipantConnection(
     args: CreateParticipantConnectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<CreateParticipantConnectionCommandOutput>;
-  public createParticipantConnection(
+  createParticipantConnection(
     args: CreateParticipantConnectionCommandInput,
     cb: (err: any, data?: CreateParticipantConnectionCommandOutput) => void
   ): void;
-  public createParticipantConnection(
+  createParticipantConnection(
     args: CreateParticipantConnectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: CreateParticipantConnectionCommandOutput) => void
   ): void;
-  public createParticipantConnection(
-    args: CreateParticipantConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateParticipantConnectionCommandOutput) => void),
-    cb?: (err: any, data?: CreateParticipantConnectionCommandOutput) => void
-  ): Promise<CreateParticipantConnectionCommandOutput> | void {
-    const command = new CreateParticipantConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disconnects a participant. Note that ConnectionToken is used for invoking this API
-   *             instead of ParticipantToken.</p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link DescribeViewCommand}
    */
-  public disconnectParticipant(
+  describeView(
+    args: DescribeViewCommandInput,
+    options?: ConnectParticipantRequestOptions
+  ): Promise<DescribeViewCommandOutput>;
+  describeView(
+    args: DescribeViewCommandInput,
+    cb: (err: any, data?: DescribeViewCommandOutput) => void
+  ): void;
+  describeView(
+    args: DescribeViewCommandInput,
+    options: ConnectParticipantRequestOptions,
+    cb: (err: any, data?: DescribeViewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisconnectParticipantCommand}
+   */
+  disconnectParticipant(
     args: DisconnectParticipantCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<DisconnectParticipantCommandOutput>;
-  public disconnectParticipant(
+  disconnectParticipant(
     args: DisconnectParticipantCommandInput,
     cb: (err: any, data?: DisconnectParticipantCommandOutput) => void
   ): void;
-  public disconnectParticipant(
+  disconnectParticipant(
     args: DisconnectParticipantCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: DisconnectParticipantCommandOutput) => void
   ): void;
-  public disconnectParticipant(
-    args: DisconnectParticipantCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisconnectParticipantCommandOutput) => void),
-    cb?: (err: any, data?: DisconnectParticipantCommandOutput) => void
-  ): Promise<DisconnectParticipantCommandOutput> | void {
-    const command = new DisconnectParticipantCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provides a pre-signed URL for download of a completed attachment. This is an
-   *             asynchronous API for use with active contacts.</p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link GetAttachmentCommand}
    */
-  public getAttachment(
+  getAttachment(
     args: GetAttachmentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<GetAttachmentCommandOutput>;
-  public getAttachment(
+  getAttachment(
     args: GetAttachmentCommandInput,
     cb: (err: any, data?: GetAttachmentCommandOutput) => void
   ): void;
-  public getAttachment(
+  getAttachment(
     args: GetAttachmentCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: GetAttachmentCommandOutput) => void
   ): void;
-  public getAttachment(
-    args: GetAttachmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAttachmentCommandOutput) => void),
-    cb?: (err: any, data?: GetAttachmentCommandOutput) => void
-  ): Promise<GetAttachmentCommandOutput> | void {
-    const command = new GetAttachmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a transcript of the session, including details about any attachments. Note
-   *             that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>
-   *         <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link GetAuthenticationUrlCommand}
    */
-  public getTranscript(
+  getAuthenticationUrl(
+    args: GetAuthenticationUrlCommandInput,
+    options?: ConnectParticipantRequestOptions
+  ): Promise<GetAuthenticationUrlCommandOutput>;
+  getAuthenticationUrl(
+    args: GetAuthenticationUrlCommandInput,
+    cb: (err: any, data?: GetAuthenticationUrlCommandOutput) => void
+  ): void;
+  getAuthenticationUrl(
+    args: GetAuthenticationUrlCommandInput,
+    options: ConnectParticipantRequestOptions,
+    cb: (err: any, data?: GetAuthenticationUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTranscriptCommand}
+   */
+  getTranscript(
     args: GetTranscriptCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<GetTranscriptCommandOutput>;
-  public getTranscript(
+  getTranscript(
     args: GetTranscriptCommandInput,
     cb: (err: any, data?: GetTranscriptCommandOutput) => void
   ): void;
-  public getTranscript(
+  getTranscript(
     args: GetTranscriptCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: GetTranscriptCommandOutput) => void
   ): void;
-  public getTranscript(
-    args: GetTranscriptCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTranscriptCommandOutput) => void),
-    cb?: (err: any, data?: GetTranscriptCommandOutput) => void
-  ): Promise<GetTranscriptCommandOutput> | void {
-    const command = new GetTranscriptCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends an event. Note that ConnectionToken is used for invoking this API instead of
-   *             ParticipantToken.</p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link SendEventCommand}
    */
-  public sendEvent(args: SendEventCommandInput, options?: __HttpHandlerOptions): Promise<SendEventCommandOutput>;
-  public sendEvent(args: SendEventCommandInput, cb: (err: any, data?: SendEventCommandOutput) => void): void;
-  public sendEvent(
+  sendEvent(
     args: SendEventCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectParticipantRequestOptions
+  ): Promise<SendEventCommandOutput>;
+  sendEvent(
+    args: SendEventCommandInput,
     cb: (err: any, data?: SendEventCommandOutput) => void
   ): void;
-  public sendEvent(
+  sendEvent(
     args: SendEventCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendEventCommandOutput) => void),
-    cb?: (err: any, data?: SendEventCommandOutput) => void
-  ): Promise<SendEventCommandOutput> | void {
-    const command = new SendEventCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectParticipantRequestOptions,
+    cb: (err: any, data?: SendEventCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Sends a message. Note that ConnectionToken is used for invoking this API instead of
-   *             ParticipantToken.</p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link SendMessageCommand}
    */
-  public sendMessage(args: SendMessageCommandInput, options?: __HttpHandlerOptions): Promise<SendMessageCommandOutput>;
-  public sendMessage(args: SendMessageCommandInput, cb: (err: any, data?: SendMessageCommandOutput) => void): void;
-  public sendMessage(
+  sendMessage(
     args: SendMessageCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ConnectParticipantRequestOptions
+  ): Promise<SendMessageCommandOutput>;
+  sendMessage(
+    args: SendMessageCommandInput,
     cb: (err: any, data?: SendMessageCommandOutput) => void
   ): void;
-  public sendMessage(
+  sendMessage(
     args: SendMessageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendMessageCommandOutput) => void),
-    cb?: (err: any, data?: SendMessageCommandOutput) => void
-  ): Promise<SendMessageCommandOutput> | void {
-    const command = new SendMessageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ConnectParticipantRequestOptions,
+    cb: (err: any, data?: SendMessageCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to
-   *             S3.</p>
-   *          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
-   *                     authentication</a>.</p>
+   * @see {@link StartAttachmentUploadCommand}
    */
-  public startAttachmentUpload(
+  startAttachmentUpload(
     args: StartAttachmentUploadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ConnectParticipantRequestOptions
   ): Promise<StartAttachmentUploadCommandOutput>;
-  public startAttachmentUpload(
+  startAttachmentUpload(
     args: StartAttachmentUploadCommandInput,
     cb: (err: any, data?: StartAttachmentUploadCommandOutput) => void
   ): void;
-  public startAttachmentUpload(
+  startAttachmentUpload(
     args: StartAttachmentUploadCommandInput,
-    options: __HttpHandlerOptions,
+    options: ConnectParticipantRequestOptions,
     cb: (err: any, data?: StartAttachmentUploadCommandOutput) => void
   ): void;
-  public startAttachmentUpload(
-    args: StartAttachmentUploadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartAttachmentUploadCommandOutput) => void),
-    cb?: (err: any, data?: StartAttachmentUploadCommandOutput) => void
-  ): Promise<StartAttachmentUploadCommandOutput> | void {
-    const command = new StartAttachmentUploadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link GetTranscriptCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTranscriptCommandOutput}.
+   */
+  paginateGetTranscript(
+    args: GetTranscriptCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTranscriptCommandOutput>;
 }
+
+/**
+ * <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html">Participant Service actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html">Participant Service data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>Use the Connect Customer Participant Service to manage participants (for example,
+ *             agents, customers, and managers listening in), and to send messages and events within a
+ *             chat contact. The APIs in the service enable the following: sending chat messages,
+ *             attachment sharing, managing a participant's connection state and message events, and
+ *             retrieving chat transcripts.</p>
+ * @public
+ */
+export class ConnectParticipant extends ConnectParticipantClient implements ConnectParticipant {}
+createAggregatedClient(commands, ConnectParticipant, { paginators });

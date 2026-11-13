@@ -1,0 +1,109 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchAssociateAnalyticsDataSetRequest, BatchAssociateAnalyticsDataSetResponse } from "../models/models_0";
+import { BatchAssociateAnalyticsDataSet$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchAssociateAnalyticsDataSetCommand}.
+ */
+export interface BatchAssociateAnalyticsDataSetCommandInput extends BatchAssociateAnalyticsDataSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchAssociateAnalyticsDataSetCommand}.
+ */
+export interface BatchAssociateAnalyticsDataSetCommandOutput extends BatchAssociateAnalyticsDataSetResponse, __MetadataBearer {}
+
+/**
+ * <p>Associates a list of analytics datasets for a given Connect Customer instance to a target account. You can
+ *    associate multiple datasets in a single call.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, BatchAssociateAnalyticsDataSetCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, BatchAssociateAnalyticsDataSetCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // BatchAssociateAnalyticsDataSetRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   DataSetIds: [ // DataSetIds // required
+ *     "STRING_VALUE",
+ *   ],
+ *   TargetAccountId: "STRING_VALUE",
+ * };
+ * const command = new BatchAssociateAnalyticsDataSetCommand(input);
+ * const response = await client.send(command);
+ * // { // BatchAssociateAnalyticsDataSetResponse
+ * //   Created: [ // AnalyticsDataAssociationResults
+ * //     { // AnalyticsDataAssociationResult
+ * //       DataSetId: "STRING_VALUE",
+ * //       TargetAccountId: "STRING_VALUE",
+ * //       ResourceShareId: "STRING_VALUE",
+ * //       ResourceShareArn: "STRING_VALUE",
+ * //       ResourceShareStatus: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Errors: [ // ErrorResults
+ * //     { // ErrorResult
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param BatchAssociateAnalyticsDataSetCommandInput - {@link BatchAssociateAnalyticsDataSetCommandInput}
+ * @returns {@link BatchAssociateAnalyticsDataSetCommandOutput}
+ * @see {@link BatchAssociateAnalyticsDataSetCommandInput} for command's `input` shape.
+ * @see {@link BatchAssociateAnalyticsDataSetCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class BatchAssociateAnalyticsDataSetCommand extends command<BatchAssociateAnalyticsDataSetCommandInput, BatchAssociateAnalyticsDataSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchAssociateAnalyticsDataSet",
+  BatchAssociateAnalyticsDataSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchAssociateAnalyticsDataSetRequest;
+      output: BatchAssociateAnalyticsDataSetResponse;
+    };
+    sdk: {
+      input: BatchAssociateAnalyticsDataSetCommandInput;
+      output: BatchAssociateAnalyticsDataSetCommandOutput;
+    };
+  };
+}

@@ -1,100 +1,83 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CostExplorerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CostExplorerClient";
-import { DeleteCostCategoryDefinitionRequest, DeleteCostCategoryDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteCostCategoryDefinitionCommand,
-  serializeAws_json1_1DeleteCostCategoryDefinitionCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DeleteCostCategoryDefinitionCommandInput extends DeleteCostCategoryDefinitionRequest {}
-export interface DeleteCostCategoryDefinitionCommandOutput
-  extends DeleteCostCategoryDefinitionResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCostCategoryDefinitionRequest, DeleteCostCategoryDefinitionResponse } from "../models/models_0";
+import { DeleteCostCategoryDefinition$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCostCategoryDefinitionCommand}.
+ */
+export interface DeleteCostCategoryDefinitionCommandInput extends DeleteCostCategoryDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCostCategoryDefinitionCommand}.
+ */
+export interface DeleteCostCategoryDefinitionCommandOutput extends DeleteCostCategoryDefinitionResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a cost category. Expenses from this month going forward will no longer be
+ *       categorized with this cost category.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CostExplorerClient, DeleteCostCategoryDefinitionCommand } from "@aws-sdk/client-cost-explorer"; // ES Modules import
  * // const { CostExplorerClient, DeleteCostCategoryDefinitionCommand } = require("@aws-sdk/client-cost-explorer"); // CommonJS import
+ * // import type { CostExplorerClientConfig } from "@aws-sdk/client-cost-explorer";
+ * const config = {}; // type is CostExplorerClientConfig
  * const client = new CostExplorerClient(config);
+ * const input = { // DeleteCostCategoryDefinitionRequest
+ *   CostCategoryArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCostCategoryDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteCostCategoryDefinitionResponse
+ * //   CostCategoryArn: "STRING_VALUE",
+ * //   EffectiveEnd: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteCostCategoryDefinitionCommandInput - {@link DeleteCostCategoryDefinitionCommandInput}
+ * @returns {@link DeleteCostCategoryDefinitionCommandOutput}
  * @see {@link DeleteCostCategoryDefinitionCommandInput} for command's `input` shape.
  * @see {@link DeleteCostCategoryDefinitionCommandOutput} for command's `response` shape.
- * @see {@link CostExplorerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CostExplorerClientResolvedConfig | config} for CostExplorerClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You made too many calls in a short period of time. Try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ARN in the request doesn't exist. </p>
+ *
+ * @throws {@link CostExplorerServiceException}
+ * <p>Base exception class for all service exceptions from CostExplorer service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCostCategoryDefinitionCommand extends $Command<
-  DeleteCostCategoryDefinitionCommandInput,
-  DeleteCostCategoryDefinitionCommandOutput,
-  CostExplorerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCostCategoryDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CostExplorerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCostCategoryDefinitionCommandInput, DeleteCostCategoryDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CostExplorerClient";
-    const commandName = "DeleteCostCategoryDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCostCategoryDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCostCategoryDefinitionResponse.filterSensitiveLog,
+export class DeleteCostCategoryDefinitionCommand extends command<DeleteCostCategoryDefinitionCommandInput, DeleteCostCategoryDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCostCategoryDefinition",
+  DeleteCostCategoryDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCostCategoryDefinitionRequest;
+      output: DeleteCostCategoryDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCostCategoryDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteCostCategoryDefinitionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteCostCategoryDefinitionCommandOutput> {
-    return deserializeAws_json1_1DeleteCostCategoryDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCostCategoryDefinitionCommandInput;
+      output: DeleteCostCategoryDefinitionCommandOutput;
+    };
+  };
 }

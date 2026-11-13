@@ -1,102 +1,71 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * <p>Concurrent updates caused an exception, for example, if you request an update to a
- *          scaling plan that already has a pending update.</p>
- */
-export interface ConcurrentUpdateException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentUpdateException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace ConcurrentUpdateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentUpdateException): any => ({
-    ...obj,
-  });
-}
+// smithy-typescript generated code
+import type {
+  ForecastDataType,
+  LoadMetricType,
+  MetricStatistic,
+  PolicyType,
+  PredictiveScalingMaxCapacityBehavior,
+  PredictiveScalingMode,
+  ScalableDimension,
+  ScalingMetricType,
+  ScalingPlanStatusCode,
+  ScalingPolicyUpdateBehavior,
+  ScalingStatusCode,
+  ServiceNamespace,
+} from "./enums";
 
 /**
  * <p>Represents a tag.</p>
+ * @public
  */
 export interface TagFilter {
   /**
    * <p>The tag key.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The tag values (0 to 20).</p>
+   * @public
    */
-  Values?: string[];
-}
-
-export namespace TagFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagFilter): any => ({
-    ...obj,
-  });
+  Values?: string[] | undefined;
 }
 
 /**
  * <p>Represents an application source.</p>
+ * @public
  */
 export interface ApplicationSource {
   /**
    * <p>The Amazon Resource Name (ARN) of a AWS CloudFormation stack.</p>
+   * @public
    */
-  CloudFormationStackARN?: string;
+  CloudFormationStackARN?: string | undefined;
 
   /**
    * <p>A set of tags (up to 50).</p>
+   * @public
    */
-  TagFilters?: TagFilter[];
-}
-
-export namespace ApplicationSource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationSource): any => ({
-    ...obj,
-  });
+  TagFilters?: TagFilter[] | undefined;
 }
 
 /**
  * <p>Represents a dimension for a customized metric.</p>
+ * @public
  */
 export interface MetricDimension {
   /**
    * <p>The name of the dimension.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The value of the dimension.</p>
+   * @public
    */
   Value: string | undefined;
-}
-
-export namespace MetricDimension {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDimension): any => ({
-    ...obj,
-  });
-}
-
-export enum MetricStatistic {
-  Average = "Average",
-  Maximum = "Maximum",
-  Minimum = "Minimum",
-  SampleCount = "SampleCount",
-  Sum = "Sum",
 }
 
 /**
@@ -124,15 +93,18 @@ export enum MetricStatistic {
  *          forecasts for the specified metric. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource">View
  *             Scaling Information for a Resource</a> in the
  *          <i>AWS Auto Scaling User Guide</i>.</p>
+ * @public
  */
 export interface CustomizedLoadMetricSpecification {
   /**
    * <p>The name of the metric.</p>
+   * @public
    */
   MetricName: string | undefined;
 
   /**
    * <p>The namespace of the metric.</p>
+   * @public
    */
   Namespace: string | undefined;
 
@@ -140,34 +112,21 @@ export interface CustomizedLoadMetricSpecification {
    * <p>The dimensions of the metric.</p>
    *          <p>Conditional: If you published your metric with dimensions, you must specify the same
    *          dimensions in your customized load metric specification.</p>
+   * @public
    */
-  Dimensions?: MetricDimension[];
+  Dimensions?: MetricDimension[] | undefined;
 
   /**
    * <p>The statistic of the metric. The only valid value is <code>Sum</code>.</p>
+   * @public
    */
-  Statistic: MetricStatistic | string | undefined;
+  Statistic: MetricStatistic | undefined;
 
   /**
    * <p>The unit of the metric.</p>
+   * @public
    */
-  Unit?: string;
-}
-
-export namespace CustomizedLoadMetricSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomizedLoadMetricSpecification): any => ({
-    ...obj,
-  });
-}
-
-export enum LoadMetricType {
-  ALBTargetGroupRequestCount = "ALBTargetGroupRequestCount",
-  ASGTotalCPUUtilization = "ASGTotalCPUUtilization",
-  ASGTotalNetworkIn = "ASGTotalNetworkIn",
-  ASGTotalNetworkOut = "ASGTotalNetworkOut",
+  Unit?: string | undefined;
 }
 
 /**
@@ -176,12 +135,14 @@ export enum LoadMetricType {
  *          forecasts for the specified metric. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource">View
  *             Scaling Information for a Resource</a> in the
  *          <i>AWS Auto Scaling User Guide</i>.</p>
+ * @public
  */
 export interface PredefinedLoadMetricSpecification {
   /**
    * <p>The metric type.</p>
+   * @public
    */
-  PredefinedLoadMetricType: LoadMetricType | string | undefined;
+  PredefinedLoadMetricType: LoadMetricType | undefined;
 
   /**
    * <p>Identifies the resource associated with the metric type. You can't specify a resource
@@ -206,52 +167,9 @@ export interface PredefinedLoadMetricSpecification {
    *          app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.</p>
    *          <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use
    *          the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
+   * @public
    */
-  ResourceLabel?: string;
-}
-
-export namespace PredefinedLoadMetricSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PredefinedLoadMetricSpecification): any => ({
-    ...obj,
-  });
-}
-
-export enum PredictiveScalingMaxCapacityBehavior {
-  SetForecastCapacityToMaxCapacity = "SetForecastCapacityToMaxCapacity",
-  SetMaxCapacityAboveForecastCapacity = "SetMaxCapacityAboveForecastCapacity",
-  SetMaxCapacityToForecastCapacity = "SetMaxCapacityToForecastCapacity",
-}
-
-export enum PredictiveScalingMode {
-  ForecastAndScale = "ForecastAndScale",
-  ForecastOnly = "ForecastOnly",
-}
-
-export enum ScalableDimension {
-  AutoScalingGroupDesiredCapacity = "autoscaling:autoScalingGroup:DesiredCapacity",
-  DynamoDBIndexReadCapacityUnits = "dynamodb:index:ReadCapacityUnits",
-  DynamoDBIndexWriteCapacityUnits = "dynamodb:index:WriteCapacityUnits",
-  DynamoDBTableReadCapacityUnits = "dynamodb:table:ReadCapacityUnits",
-  DynamoDBTableWriteCapacityUnits = "dynamodb:table:WriteCapacityUnits",
-  EC2SpotFleetRequestTargetCapacity = "ec2:spot-fleet-request:TargetCapacity",
-  ECSServiceDesiredCount = "ecs:service:DesiredCount",
-  RDSClusterReadReplicaCount = "rds:cluster:ReadReplicaCount",
-}
-
-export enum ScalingPolicyUpdateBehavior {
-  KeepExternalPolicies = "KeepExternalPolicies",
-  ReplaceExternalPolicies = "ReplaceExternalPolicies",
-}
-
-export enum ServiceNamespace {
-  AUTOSCALING = "autoscaling",
-  DYNAMODB = "dynamodb",
-  EC2 = "ec2",
-  ECS = "ecs",
-  RDS = "rds",
+  ResourceLabel?: string | undefined;
 }
 
 /**
@@ -274,15 +192,18 @@ export enum ServiceNamespace {
  *          <p>For information about terminology, available metrics, or how to publish new metrics, see
  *             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html">Amazon CloudWatch
  *             Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>
+ * @public
  */
 export interface CustomizedScalingMetricSpecification {
   /**
    * <p>The name of the metric.</p>
+   * @public
    */
   MetricName: string | undefined;
 
   /**
    * <p>The namespace of the metric.</p>
+   * @public
    */
   Namespace: string | undefined;
 
@@ -290,55 +211,35 @@ export interface CustomizedScalingMetricSpecification {
    * <p>The dimensions of the metric.</p>
    *          <p>Conditional: If you published your metric with dimensions, you must specify the same
    *          dimensions in your customized scaling metric specification.</p>
+   * @public
    */
-  Dimensions?: MetricDimension[];
+  Dimensions?: MetricDimension[] | undefined;
 
   /**
    * <p>The statistic of the metric.</p>
+   * @public
    */
-  Statistic: MetricStatistic | string | undefined;
+  Statistic: MetricStatistic | undefined;
 
   /**
    * <p>The unit of the metric. </p>
+   * @public
    */
-  Unit?: string;
-}
-
-export namespace CustomizedScalingMetricSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomizedScalingMetricSpecification): any => ({
-    ...obj,
-  });
-}
-
-export enum ScalingMetricType {
-  ALBRequestCountPerTarget = "ALBRequestCountPerTarget",
-  ASGAverageCPUUtilization = "ASGAverageCPUUtilization",
-  ASGAverageNetworkIn = "ASGAverageNetworkIn",
-  ASGAverageNetworkOut = "ASGAverageNetworkOut",
-  DynamoDBReadCapacityUtilization = "DynamoDBReadCapacityUtilization",
-  DynamoDBWriteCapacityUtilization = "DynamoDBWriteCapacityUtilization",
-  EC2SpotFleetRequestAverageCPUUtilization = "EC2SpotFleetRequestAverageCPUUtilization",
-  EC2SpotFleetRequestAverageNetworkIn = "EC2SpotFleetRequestAverageNetworkIn",
-  EC2SpotFleetRequestAverageNetworkOut = "EC2SpotFleetRequestAverageNetworkOut",
-  ECSServiceAverageCPUUtilization = "ECSServiceAverageCPUUtilization",
-  ECSServiceAverageMemoryUtilization = "ECSServiceAverageMemoryUtilization",
-  RDSReaderAverageCPUUtilization = "RDSReaderAverageCPUUtilization",
-  RDSReaderAverageDatabaseConnections = "RDSReaderAverageDatabaseConnections",
+  Unit?: string | undefined;
 }
 
 /**
  * <p>Represents a predefined metric that can be used for dynamic scaling as part of a target
  *          tracking scaling policy.</p>
+ * @public
  */
 export interface PredefinedScalingMetricSpecification {
   /**
    * <p>The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to
    *          Auto Scaling groups, Spot Fleet requests, and ECS services.</p>
+   * @public
    */
-  PredefinedScalingMetricType: ScalingMetricType | string | undefined;
+  PredefinedScalingMetricType: ScalingMetricType | undefined;
 
   /**
    * <p>Identifies the resource associated with the metric type. You can't specify a resource
@@ -364,39 +265,35 @@ export interface PredefinedScalingMetricSpecification {
    *          app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.</p>
    *          <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use
    *          the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>
+   * @public
    */
-  ResourceLabel?: string;
-}
-
-export namespace PredefinedScalingMetricSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PredefinedScalingMetricSpecification): any => ({
-    ...obj,
-  });
+  ResourceLabel?: string | undefined;
 }
 
 /**
  * <p>Describes a target tracking configuration to use with AWS Auto Scaling. Used with <a>ScalingInstruction</a> and <a>ScalingPolicy</a>.</p>
+ * @public
  */
 export interface TargetTrackingConfiguration {
   /**
    * <p>A predefined metric. You can specify either a predefined metric or a customized
    *          metric.</p>
+   * @public
    */
-  PredefinedScalingMetricSpecification?: PredefinedScalingMetricSpecification;
+  PredefinedScalingMetricSpecification?: PredefinedScalingMetricSpecification | undefined;
 
   /**
    * <p>A customized metric. You can specify either a predefined metric or a customized metric.
    *       </p>
+   * @public
    */
-  CustomizedScalingMetricSpecification?: CustomizedScalingMetricSpecification;
+  CustomizedScalingMetricSpecification?: CustomizedScalingMetricSpecification | undefined;
 
   /**
    * <p>The target value for the metric. Although this property accepts numbers of type Double,
    *          it won't accept values that are either too small or too large. Values must be in the range
    *          of -2^360 to 2^360.</p>
+   * @public
    */
   TargetValue: number | undefined;
 
@@ -406,8 +303,9 @@ export interface TargetTrackingConfiguration {
    *          doesn't remove capacity from the scalable resource. Otherwise, scale in is enabled and the
    *          target tracking scaling policy can remove capacity from the scalable resource. </p>
    *          <p>The default value is <code>false</code>.</p>
+   * @public
    */
-  DisableScaleIn?: boolean;
+  DisableScaleIn?: boolean | undefined;
 
   /**
    * <p>The amount of time, in seconds, to wait for a previous scale-out activity to take
@@ -418,8 +316,9 @@ export interface TargetTrackingConfiguration {
    *          tracking scaling policy, it starts to calculate the cooldown time. The scaling policy won't
    *          increase the desired capacity again unless either a larger scale out is triggered or the
    *          cooldown period ends.</p>
+   * @public
    */
-  ScaleOutCooldown?: number;
+  ScaleOutCooldown?: number | undefined;
 
   /**
    * <p>The amount of time, in seconds, after a scale-in activity completes before another
@@ -430,23 +329,16 @@ export interface TargetTrackingConfiguration {
    *          until the cooldown period has expired. However, if another alarm triggers a scale-out activity
    *          during the scale-in cooldown period, Auto Scaling scales out the target immediately. In this case,
    *          the scale-in cooldown period stops and doesn't complete.</p>
+   * @public
    */
-  ScaleInCooldown?: number;
+  ScaleInCooldown?: number | undefined;
 
   /**
    * <p>The estimated time, in seconds, until a newly launched instance can contribute to the
    *          CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.</p>
+   * @public
    */
-  EstimatedInstanceWarmup?: number;
-}
-
-export namespace TargetTrackingConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TargetTrackingConfiguration): any => ({
-    ...obj,
-  });
+  EstimatedInstanceWarmup?: number | undefined;
 }
 
 /**
@@ -468,12 +360,14 @@ export namespace TargetTrackingConfiguration {
  *             forecast. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html">Best Practices for
  *                AWS Auto Scaling</a> in the <i>AWS Auto Scaling User Guide</i>.</p>
  *          </important>
+ * @public
  */
 export interface ScalingInstruction {
   /**
    * <p>The namespace of the AWS service.</p>
+   * @public
    */
-  ServiceNamespace: ServiceNamespace | string | undefined;
+  ServiceNamespace: ServiceNamespace | undefined;
 
   /**
    * <p>The ID of the resource. This string consists of the resource type and unique
@@ -504,6 +398,7 @@ export interface ScalingInstruction {
    *                Example: <code>cluster:my-db-cluster</code>.</p>
    *            </li>
    *          </ul>
+   * @public
    */
   ResourceId: string | undefined;
 
@@ -543,37 +438,43 @@ export interface ScalingInstruction {
    *                   <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.</p>
    *            </li>
    *          </ul>
+   * @public
    */
-  ScalableDimension: ScalableDimension | string | undefined;
+  ScalableDimension: ScalableDimension | undefined;
 
   /**
    * <p>The minimum capacity of the resource. </p>
+   * @public
    */
   MinCapacity: number | undefined;
 
   /**
    * <p>The maximum capacity of the resource. The exception to this upper limit is if you
    *          specify a non-default setting for <b>PredictiveScalingMaxCapacityBehavior</b>. </p>
+   * @public
    */
   MaxCapacity: number | undefined;
 
   /**
    * <p>The target tracking configurations (up to 10). Each of these structures must specify a
    *          unique scaling metric and a target value for the metric. </p>
+   * @public
    */
   TargetTrackingConfigurations: TargetTrackingConfiguration[] | undefined;
 
   /**
    * <p>The predefined load metric to use for predictive scaling. This parameter or a <b>CustomizedLoadMetricSpecification</b> is required when configuring
    *          predictive scaling, and cannot be used otherwise. </p>
+   * @public
    */
-  PredefinedLoadMetricSpecification?: PredefinedLoadMetricSpecification;
+  PredefinedLoadMetricSpecification?: PredefinedLoadMetricSpecification | undefined;
 
   /**
    * <p>The customized load metric to use for predictive scaling. This parameter or a <b>PredefinedLoadMetricSpecification</b> is required when configuring
    *          predictive scaling, and cannot be used otherwise. </p>
+   * @public
    */
-  CustomizedLoadMetricSpecification?: CustomizedLoadMetricSpecification;
+  CustomizedLoadMetricSpecification?: CustomizedLoadMetricSpecification | undefined;
 
   /**
    * <p>The amount of time, in seconds, to buffer the run time of scheduled scaling actions when
@@ -586,8 +487,9 @@ export interface ScalingInstruction {
    *          <p>The value must be less than the forecast interval duration of 3600 seconds (60 minutes).
    *          The default is 300 seconds. </p>
    *          <p>Only valid when configuring predictive scaling. </p>
+   * @public
    */
-  ScheduledActionBufferTime?: number;
+  ScheduledActionBufferTime?: number | undefined;
 
   /**
    * <p>Defines the behavior that should be applied if the forecast capacity approaches or
@@ -616,8 +518,9 @@ export interface ScalingInstruction {
    *             </li>
    *          </ul>
    *          <p>Only valid when configuring predictive scaling.</p>
+   * @public
    */
-  PredictiveScalingMaxCapacityBehavior?: PredictiveScalingMaxCapacityBehavior | string;
+  PredictiveScalingMaxCapacityBehavior?: PredictiveScalingMaxCapacityBehavior | undefined;
 
   /**
    * <p>The size of the capacity buffer to use when the forecast capacity is close to or exceeds
@@ -628,15 +531,17 @@ export interface ScalingInstruction {
    *          <p>Only valid when configuring predictive scaling. Required if the <b>PredictiveScalingMaxCapacityBehavior</b> is set to
    *             <code>SetMaxCapacityAboveForecastCapacity</code>, and cannot be used otherwise.</p>
    *          <p>The range is 1-100.</p>
+   * @public
    */
-  PredictiveScalingMaxCapacityBuffer?: number;
+  PredictiveScalingMaxCapacityBuffer?: number | undefined;
 
   /**
    * <p>The predictive scaling mode. The default value is <code>ForecastAndScale</code>.
    *          Otherwise, AWS Auto Scaling forecasts capacity but does not create any scheduled scaling actions
    *          based on the capacity forecast. </p>
+   * @public
    */
-  PredictiveScalingMode?: PredictiveScalingMode | string;
+  PredictiveScalingMode?: PredictiveScalingMode | undefined;
 
   /**
    * <p>Controls whether a resource's externally created scaling policies are kept or replaced. </p>
@@ -647,31 +552,28 @@ export interface ScalingInstruction {
    *          <p>Condition: The number of existing policies to be replaced must be less than or equal to
    *          50. If there are more than 50 policies to be replaced, AWS Auto Scaling keeps all existing policies
    *          and does not create new ones.</p>
+   * @public
    */
-  ScalingPolicyUpdateBehavior?: ScalingPolicyUpdateBehavior | string;
+  ScalingPolicyUpdateBehavior?: ScalingPolicyUpdateBehavior | undefined;
 
   /**
    * <p>Controls whether dynamic scaling by AWS Auto Scaling is disabled. When dynamic scaling is
    *          enabled, AWS Auto Scaling creates target tracking scaling policies based on the specified target
    *          tracking configurations. </p>
    *          <p>The default is enabled (<code>false</code>). </p>
+   * @public
    */
-  DisableDynamicScaling?: boolean;
+  DisableDynamicScaling?: boolean | undefined;
 }
 
-export namespace ScalingInstruction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScalingInstruction): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateScalingPlanRequest {
   /**
    * <p>The name of the scaling plan. Names cannot contain vertical bars, colons, or forward
    *          slashes.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
@@ -679,239 +581,131 @@ export interface CreateScalingPlanRequest {
    * <p>A CloudFormation stack or set of tags. You can create one scaling plan per application
    *          source.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html">ApplicationSource</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
+   * @public
    */
   ApplicationSource: ApplicationSource | undefined;
 
   /**
    * <p>The scaling instructions.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
+   * @public
    */
   ScalingInstructions: ScalingInstruction[] | undefined;
 }
 
-export namespace CreateScalingPlanRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateScalingPlanRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateScalingPlanResponse {
   /**
    * <p>The version number of the scaling plan. This value is always <code>1</code>. Currently,
    *          you cannot have multiple scaling plan versions.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 }
 
-export namespace CreateScalingPlanResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateScalingPlanResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The service encountered an internal error.</p>
+ * @public
  */
-export interface InternalServiceException extends __SmithyException, $MetadataBearer {
-  name: "InternalServiceException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServiceException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServiceException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Your account exceeded a limit. This exception is thrown when a per-account resource
- *          limit is exceeded.</p>
- */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An exception was thrown for a validation issue. Review the parameters provided.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteScalingPlanRequest {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan. Currently, the only valid value is
    *             <code>1</code>.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 }
 
-export namespace DeleteScalingPlanRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteScalingPlanRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteScalingPlanResponse {}
 
-export namespace DeleteScalingPlanResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteScalingPlanResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The specified object could not be found.</p>
+ * @public
  */
-export interface ObjectNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ObjectNotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ObjectNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ObjectNotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface DescribeScalingPlanResourcesRequest {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan. Currently, the only valid value is
    *             <code>1</code>.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 
   /**
    * <p>The maximum number of scalable resources to return. The value must be between
    *          1 and 50. The default value is 50.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeScalingPlanResourcesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeScalingPlanResourcesRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum PolicyType {
-  TargetTrackingScaling = "TargetTrackingScaling",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Represents a scaling policy.</p>
+ * @public
  */
 export interface ScalingPolicy {
   /**
    * <p>The name of the scaling policy.</p>
+   * @public
    */
   PolicyName: string | undefined;
 
   /**
    * <p>The type of scaling policy.</p>
+   * @public
    */
-  PolicyType: PolicyType | string | undefined;
+  PolicyType: PolicyType | undefined;
 
   /**
    * <p>The target tracking scaling policy. Includes support for predefined or customized
    *          metrics.</p>
+   * @public
    */
-  TargetTrackingConfiguration?: TargetTrackingConfiguration;
-}
-
-export namespace ScalingPolicy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScalingPolicy): any => ({
-    ...obj,
-  });
-}
-
-export enum ScalingStatusCode {
-  Active = "Active",
-  Inactive = "Inactive",
-  PartiallyActive = "PartiallyActive",
+  TargetTrackingConfiguration?: TargetTrackingConfiguration | undefined;
 }
 
 /**
  * <p>Represents a scalable resource.</p>
+ * @public
  */
 export interface ScalingPlanResource {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 
   /**
    * <p>The namespace of the AWS service.</p>
+   * @public
    */
-  ServiceNamespace: ServiceNamespace | string | undefined;
+  ServiceNamespace: ServiceNamespace | undefined;
 
   /**
    * <p>The ID of the resource. This string consists of the resource type and unique
@@ -942,6 +736,7 @@ export interface ScalingPlanResource {
    *                Example: <code>cluster:my-db-cluster</code>.</p>
    *            </li>
    *          </ul>
+   * @public
    */
   ResourceId: string | undefined;
 
@@ -981,13 +776,15 @@ export interface ScalingPlanResource {
    *                   <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.</p>
    *            </li>
    *          </ul>
+   * @public
    */
-  ScalableDimension: ScalableDimension | string | undefined;
+  ScalableDimension: ScalableDimension | undefined;
 
   /**
    * <p>The scaling policies.</p>
+   * @public
    */
-  ScalingPolicies?: ScalingPolicy[];
+  ScalingPolicies?: ScalingPolicy[] | undefined;
 
   /**
    * <p>The scaling status of the resource.</p>
@@ -1009,70 +806,45 @@ export interface ScalingPlanResource {
    *                could not be fully applied. Check the status message for more information.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ScalingStatusCode: ScalingStatusCode | string | undefined;
+  ScalingStatusCode: ScalingStatusCode | undefined;
 
   /**
    * <p>A simple message about the current scaling status of the resource.</p>
+   * @public
    */
-  ScalingStatusMessage?: string;
+  ScalingStatusMessage?: string | undefined;
 }
 
-export namespace ScalingPlanResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScalingPlanResource): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeScalingPlanResourcesResponse {
   /**
    * <p>Information about the scalable resources.</p>
+   * @public
    */
-  ScalingPlanResources?: ScalingPlanResource[];
+  ScalingPlanResources?: ScalingPlanResource[] | undefined;
 
   /**
    * <p>The token required to get the next set of results. This value is <code>null</code> if
    *          there are no more results to return.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeScalingPlanResourcesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeScalingPlanResourcesResponse): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>The token provided is not valid.</p>
+ * @public
  */
-export interface InvalidNextTokenException extends __SmithyException, $MetadataBearer {
-  name: "InvalidNextTokenException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidNextTokenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidNextTokenException): any => ({
-    ...obj,
-  });
-}
-
 export interface DescribeScalingPlansRequest {
   /**
    * <p>The names of the scaling plans (up to 10). If you specify application sources, you
    *          cannot specify scaling plan names.</p>
+   * @public
    */
-  ScalingPlanNames?: string[];
+  ScalingPlanNames?: string[] | undefined;
 
   /**
    * <p>The version number of the scaling plan. Currently, the only valid value is
@@ -1081,69 +853,58 @@ export interface DescribeScalingPlansRequest {
    *             <p>If you specify a scaling plan version, you must also specify a scaling plan
    *             name.</p>
    *          </note>
+   * @public
    */
-  ScalingPlanVersion?: number;
+  ScalingPlanVersion?: number | undefined;
 
   /**
    * <p>The sources for the applications (up to 10). If you specify scaling plan names, you
    *          cannot specify application sources.</p>
+   * @public
    */
-  ApplicationSources?: ApplicationSource[];
+  ApplicationSources?: ApplicationSource[] | undefined;
 
   /**
    * <p>The maximum number of scalable resources to return. This value can be between
    *          1 and 50. The default value is 50.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeScalingPlansRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeScalingPlansRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ScalingPlanStatusCode {
-  Active = "Active",
-  ActiveWithProblems = "ActiveWithProblems",
-  CreationFailed = "CreationFailed",
-  CreationInProgress = "CreationInProgress",
-  DeletionFailed = "DeletionFailed",
-  DeletionInProgress = "DeletionInProgress",
-  UpdateFailed = "UpdateFailed",
-  UpdateInProgress = "UpdateInProgress",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Represents a scaling plan.</p>
+ * @public
  */
 export interface ScalingPlan {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 
   /**
    * <p>A CloudFormation stack or a set of tags. You can create one scaling plan per application
    *          source.</p>
+   * @public
    */
   ApplicationSource: ApplicationSource | undefined;
 
   /**
    * <p>The scaling instructions.</p>
+   * @public
    */
   ScalingInstructions: ScalingInstruction[] | undefined;
 
@@ -1184,93 +945,85 @@ export interface ScalingPlan {
    *                   <code>UpdateFailed</code> - The scaling plan could not be updated.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  StatusCode: ScalingPlanStatusCode | string | undefined;
+  StatusCode: ScalingPlanStatusCode | undefined;
 
   /**
    * <p>A simple message about the current status of the scaling plan.</p>
+   * @public
    */
-  StatusMessage?: string;
+  StatusMessage?: string | undefined;
 
   /**
    * <p>The Unix time stamp when the scaling plan entered the current status.</p>
+   * @public
    */
-  StatusStartTime?: Date;
+  StatusStartTime?: Date | undefined;
 
   /**
    * <p>The Unix time stamp when the scaling plan was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 }
 
-export namespace ScalingPlan {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ScalingPlan): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeScalingPlansResponse {
   /**
    * <p>Information about the scaling plans.</p>
+   * @public
    */
-  ScalingPlans?: ScalingPlan[];
+  ScalingPlans?: ScalingPlan[] | undefined;
 
   /**
    * <p>The token required to get the next set of results. This value is <code>null</code> if
    *          there are no more results to return.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeScalingPlansResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeScalingPlansResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ForecastDataType {
-  CapacityForecast = "CapacityForecast",
-  LoadForecast = "LoadForecast",
-  ScheduledActionMaxCapacity = "ScheduledActionMaxCapacity",
-  ScheduledActionMinCapacity = "ScheduledActionMinCapacity",
-}
-
+/**
+ * @public
+ */
 export interface GetScalingPlanResourceForecastDataRequest {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan. Currently, the only valid value is
    *             <code>1</code>.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 
   /**
    * <p>The namespace of the AWS service. The only valid value is <code>autoscaling</code>.
    *       </p>
+   * @public
    */
-  ServiceNamespace: ServiceNamespace | string | undefined;
+  ServiceNamespace: ServiceNamespace | undefined;
 
   /**
    * <p>The ID of the resource. This string consists of a prefix (<code>autoScalingGroup</code>)
    *          followed by the name of a specified Auto Scaling group (<code>my-asg</code>). Example:
    *             <code>autoScalingGroup/my-asg</code>. </p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The scalable dimension for the resource. The only valid value is
    *             <code>autoscaling:autoScalingGroup:DesiredCapacity</code>. </p>
+   * @public
    */
-  ScalableDimension: ScalableDimension | string | undefined;
+  ScalableDimension: ScalableDimension | undefined;
 
   /**
    * <p>The type of forecast data to get.</p>
@@ -1296,12 +1049,14 @@ export interface GetScalingPlanResourceForecastDataRequest {
    *                capacity behavior setting in the scaling instruction.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ForecastDataType: ForecastDataType | string | undefined;
+  ForecastDataType: ForecastDataType | undefined;
 
   /**
    * <p>The inclusive start time of the time range for the forecast data to get. The date and
    *          time can be at most 56 days before the current date and time. </p>
+   * @public
    */
   StartTime: Date | undefined;
 
@@ -1311,100 +1066,73 @@ export interface GetScalingPlanResourceForecastDataRequest {
    *          <p>Although this parameter can accept a date and time that is more than two days in the
    *          future, the availability of forecast data has limits. AWS Auto Scaling only issues forecasts for
    *          periods of two days in advance.</p>
+   * @public
    */
   EndTime: Date | undefined;
 }
 
-export namespace GetScalingPlanResourceForecastDataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetScalingPlanResourceForecastDataRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Represents a single value in the forecast data used for predictive scaling.</p>
+ * @public
  */
 export interface Datapoint {
   /**
    * <p>The time stamp for the data point in UTC format.</p>
+   * @public
    */
-  Timestamp?: Date;
+  Timestamp?: Date | undefined;
 
   /**
    * <p>The value of the data point.</p>
+   * @public
    */
-  Value?: number;
+  Value?: number | undefined;
 }
 
-export namespace Datapoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Datapoint): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetScalingPlanResourceForecastDataResponse {
   /**
    * <p>The data points to return.</p>
+   * @public
    */
   Datapoints: Datapoint[] | undefined;
 }
 
-export namespace GetScalingPlanResourceForecastDataResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetScalingPlanResourceForecastDataResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateScalingPlanRequest {
   /**
    * <p>The name of the scaling plan.</p>
+   * @public
    */
   ScalingPlanName: string | undefined;
 
   /**
    * <p>The version number of the scaling plan. The only valid value is <code>1</code>.
    *          Currently, you cannot have multiple scaling plan versions.</p>
+   * @public
    */
   ScalingPlanVersion: number | undefined;
 
   /**
    * <p>A CloudFormation stack or set of tags.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html">ApplicationSource</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
+   * @public
    */
-  ApplicationSource?: ApplicationSource;
+  ApplicationSource?: ApplicationSource | undefined;
 
   /**
    * <p>The scaling instructions.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>
+   * @public
    */
-  ScalingInstructions?: ScalingInstruction[];
+  ScalingInstructions?: ScalingInstruction[] | undefined;
 }
 
-export namespace UpdateScalingPlanRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateScalingPlanRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateScalingPlanResponse {}
-
-export namespace UpdateScalingPlanResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateScalingPlanResponse): any => ({
-    ...obj,
-  });
-}

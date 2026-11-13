@@ -1,0 +1,1085 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateEncoderConfigurationCommandInput,
+  type CreateEncoderConfigurationCommandOutput,
+  CreateEncoderConfigurationCommand,
+} from "./commands/CreateEncoderConfigurationCommand";
+import {
+  type CreateIngestConfigurationCommandInput,
+  type CreateIngestConfigurationCommandOutput,
+  CreateIngestConfigurationCommand,
+} from "./commands/CreateIngestConfigurationCommand";
+import {
+  type CreateParticipantTokenCommandInput,
+  type CreateParticipantTokenCommandOutput,
+  CreateParticipantTokenCommand,
+} from "./commands/CreateParticipantTokenCommand";
+import {
+  type CreateStageCommandInput,
+  type CreateStageCommandOutput,
+  CreateStageCommand,
+} from "./commands/CreateStageCommand";
+import {
+  type CreateStorageConfigurationCommandInput,
+  type CreateStorageConfigurationCommandOutput,
+  CreateStorageConfigurationCommand,
+} from "./commands/CreateStorageConfigurationCommand";
+import {
+  type DeleteEncoderConfigurationCommandInput,
+  type DeleteEncoderConfigurationCommandOutput,
+  DeleteEncoderConfigurationCommand,
+} from "./commands/DeleteEncoderConfigurationCommand";
+import {
+  type DeleteIngestConfigurationCommandInput,
+  type DeleteIngestConfigurationCommandOutput,
+  DeleteIngestConfigurationCommand,
+} from "./commands/DeleteIngestConfigurationCommand";
+import {
+  type DeletePublicKeyCommandInput,
+  type DeletePublicKeyCommandOutput,
+  DeletePublicKeyCommand,
+} from "./commands/DeletePublicKeyCommand";
+import {
+  type DeleteStageCommandInput,
+  type DeleteStageCommandOutput,
+  DeleteStageCommand,
+} from "./commands/DeleteStageCommand";
+import {
+  type DeleteStorageConfigurationCommandInput,
+  type DeleteStorageConfigurationCommandOutput,
+  DeleteStorageConfigurationCommand,
+} from "./commands/DeleteStorageConfigurationCommand";
+import {
+  type DisconnectParticipantCommandInput,
+  type DisconnectParticipantCommandOutput,
+  DisconnectParticipantCommand,
+} from "./commands/DisconnectParticipantCommand";
+import {
+  type GetCompositionCommandInput,
+  type GetCompositionCommandOutput,
+  GetCompositionCommand,
+} from "./commands/GetCompositionCommand";
+import {
+  type GetEncoderConfigurationCommandInput,
+  type GetEncoderConfigurationCommandOutput,
+  GetEncoderConfigurationCommand,
+} from "./commands/GetEncoderConfigurationCommand";
+import {
+  type GetIngestConfigurationCommandInput,
+  type GetIngestConfigurationCommandOutput,
+  GetIngestConfigurationCommand,
+} from "./commands/GetIngestConfigurationCommand";
+import {
+  type GetParticipantCommandInput,
+  type GetParticipantCommandOutput,
+  GetParticipantCommand,
+} from "./commands/GetParticipantCommand";
+import {
+  type GetPublicKeyCommandInput,
+  type GetPublicKeyCommandOutput,
+  GetPublicKeyCommand,
+} from "./commands/GetPublicKeyCommand";
+import { type GetStageCommandInput, type GetStageCommandOutput, GetStageCommand } from "./commands/GetStageCommand";
+import {
+  type GetStageSessionCommandInput,
+  type GetStageSessionCommandOutput,
+  GetStageSessionCommand,
+} from "./commands/GetStageSessionCommand";
+import {
+  type GetStorageConfigurationCommandInput,
+  type GetStorageConfigurationCommandOutput,
+  GetStorageConfigurationCommand,
+} from "./commands/GetStorageConfigurationCommand";
+import {
+  type ImportPublicKeyCommandInput,
+  type ImportPublicKeyCommandOutput,
+  ImportPublicKeyCommand,
+} from "./commands/ImportPublicKeyCommand";
+import {
+  type ListCompositionsCommandInput,
+  type ListCompositionsCommandOutput,
+  ListCompositionsCommand,
+} from "./commands/ListCompositionsCommand";
+import {
+  type ListEncoderConfigurationsCommandInput,
+  type ListEncoderConfigurationsCommandOutput,
+  ListEncoderConfigurationsCommand,
+} from "./commands/ListEncoderConfigurationsCommand";
+import {
+  type ListIngestConfigurationsCommandInput,
+  type ListIngestConfigurationsCommandOutput,
+  ListIngestConfigurationsCommand,
+} from "./commands/ListIngestConfigurationsCommand";
+import {
+  type ListParticipantEventsCommandInput,
+  type ListParticipantEventsCommandOutput,
+  ListParticipantEventsCommand,
+} from "./commands/ListParticipantEventsCommand";
+import {
+  type ListParticipantReplicasCommandInput,
+  type ListParticipantReplicasCommandOutput,
+  ListParticipantReplicasCommand,
+} from "./commands/ListParticipantReplicasCommand";
+import {
+  type ListParticipantsCommandInput,
+  type ListParticipantsCommandOutput,
+  ListParticipantsCommand,
+} from "./commands/ListParticipantsCommand";
+import {
+  type ListPublicKeysCommandInput,
+  type ListPublicKeysCommandOutput,
+  ListPublicKeysCommand,
+} from "./commands/ListPublicKeysCommand";
+import {
+  type ListStagesCommandInput,
+  type ListStagesCommandOutput,
+  ListStagesCommand,
+} from "./commands/ListStagesCommand";
+import {
+  type ListStageSessionsCommandInput,
+  type ListStageSessionsCommandOutput,
+  ListStageSessionsCommand,
+} from "./commands/ListStageSessionsCommand";
+import {
+  type ListStorageConfigurationsCommandInput,
+  type ListStorageConfigurationsCommandOutput,
+  ListStorageConfigurationsCommand,
+} from "./commands/ListStorageConfigurationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RevokeConnectionTokenCommandInput,
+  type RevokeConnectionTokenCommandOutput,
+  RevokeConnectionTokenCommand,
+} from "./commands/RevokeConnectionTokenCommand";
+import {
+  type StartCompositionCommandInput,
+  type StartCompositionCommandOutput,
+  StartCompositionCommand,
+} from "./commands/StartCompositionCommand";
+import {
+  type StartParticipantReplicationCommandInput,
+  type StartParticipantReplicationCommandOutput,
+  StartParticipantReplicationCommand,
+} from "./commands/StartParticipantReplicationCommand";
+import {
+  type StopCompositionCommandInput,
+  type StopCompositionCommandOutput,
+  StopCompositionCommand,
+} from "./commands/StopCompositionCommand";
+import {
+  type StopParticipantReplicationCommandInput,
+  type StopParticipantReplicationCommandOutput,
+  StopParticipantReplicationCommand,
+} from "./commands/StopParticipantReplicationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateIngestConfigurationCommandInput,
+  type UpdateIngestConfigurationCommandOutput,
+  UpdateIngestConfigurationCommand,
+} from "./commands/UpdateIngestConfigurationCommand";
+import {
+  type UpdateStageCommandInput,
+  type UpdateStageCommandOutput,
+  UpdateStageCommand,
+} from "./commands/UpdateStageCommand";
+import { IVSRealTimeClient } from "./IVSRealTimeClient";
+import { paginateListCompositions } from "./pagination/ListCompositionsPaginator";
+import { paginateListEncoderConfigurations } from "./pagination/ListEncoderConfigurationsPaginator";
+import { paginateListIngestConfigurations } from "./pagination/ListIngestConfigurationsPaginator";
+import { paginateListParticipantEvents } from "./pagination/ListParticipantEventsPaginator";
+import { paginateListParticipantReplicas } from "./pagination/ListParticipantReplicasPaginator";
+import { paginateListParticipants } from "./pagination/ListParticipantsPaginator";
+import { paginateListPublicKeys } from "./pagination/ListPublicKeysPaginator";
+import { paginateListStageSessions } from "./pagination/ListStageSessionsPaginator";
+import { paginateListStages } from "./pagination/ListStagesPaginator";
+import { paginateListStorageConfigurations } from "./pagination/ListStorageConfigurationsPaginator";
+
+const commands = {
+  CreateEncoderConfigurationCommand,
+  CreateIngestConfigurationCommand,
+  CreateParticipantTokenCommand,
+  CreateStageCommand,
+  CreateStorageConfigurationCommand,
+  DeleteEncoderConfigurationCommand,
+  DeleteIngestConfigurationCommand,
+  DeletePublicKeyCommand,
+  DeleteStageCommand,
+  DeleteStorageConfigurationCommand,
+  DisconnectParticipantCommand,
+  GetCompositionCommand,
+  GetEncoderConfigurationCommand,
+  GetIngestConfigurationCommand,
+  GetParticipantCommand,
+  GetPublicKeyCommand,
+  GetStageCommand,
+  GetStageSessionCommand,
+  GetStorageConfigurationCommand,
+  ImportPublicKeyCommand,
+  ListCompositionsCommand,
+  ListEncoderConfigurationsCommand,
+  ListIngestConfigurationsCommand,
+  ListParticipantEventsCommand,
+  ListParticipantReplicasCommand,
+  ListParticipantsCommand,
+  ListPublicKeysCommand,
+  ListStagesCommand,
+  ListStageSessionsCommand,
+  ListStorageConfigurationsCommand,
+  ListTagsForResourceCommand,
+  RevokeConnectionTokenCommand,
+  StartCompositionCommand,
+  StartParticipantReplicationCommand,
+  StopCompositionCommand,
+  StopParticipantReplicationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateIngestConfigurationCommand,
+  UpdateStageCommand,
+};
+const paginators = {
+  paginateListCompositions,
+  paginateListEncoderConfigurations,
+  paginateListIngestConfigurations,
+  paginateListParticipantEvents,
+  paginateListParticipantReplicas,
+  paginateListParticipants,
+  paginateListPublicKeys,
+  paginateListStages,
+  paginateListStageSessions,
+  paginateListStorageConfigurations,
+};
+
+/**
+ * @public
+ */
+export interface IVSRealTimeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IVSRealTime {
+  /**
+   * @see {@link CreateEncoderConfigurationCommand}
+   */
+  createEncoderConfiguration(): Promise<CreateEncoderConfigurationCommandOutput>;
+  createEncoderConfiguration(
+    args: CreateEncoderConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<CreateEncoderConfigurationCommandOutput>;
+  createEncoderConfiguration(
+    args: CreateEncoderConfigurationCommandInput,
+    cb: (err: any, data?: CreateEncoderConfigurationCommandOutput) => void
+  ): void;
+  createEncoderConfiguration(
+    args: CreateEncoderConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: CreateEncoderConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIngestConfigurationCommand}
+   */
+  createIngestConfiguration(
+    args: CreateIngestConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<CreateIngestConfigurationCommandOutput>;
+  createIngestConfiguration(
+    args: CreateIngestConfigurationCommandInput,
+    cb: (err: any, data?: CreateIngestConfigurationCommandOutput) => void
+  ): void;
+  createIngestConfiguration(
+    args: CreateIngestConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: CreateIngestConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateParticipantTokenCommand}
+   */
+  createParticipantToken(
+    args: CreateParticipantTokenCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<CreateParticipantTokenCommandOutput>;
+  createParticipantToken(
+    args: CreateParticipantTokenCommandInput,
+    cb: (err: any, data?: CreateParticipantTokenCommandOutput) => void
+  ): void;
+  createParticipantToken(
+    args: CreateParticipantTokenCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: CreateParticipantTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStageCommand}
+   */
+  createStage(): Promise<CreateStageCommandOutput>;
+  createStage(
+    args: CreateStageCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<CreateStageCommandOutput>;
+  createStage(
+    args: CreateStageCommandInput,
+    cb: (err: any, data?: CreateStageCommandOutput) => void
+  ): void;
+  createStage(
+    args: CreateStageCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: CreateStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStorageConfigurationCommand}
+   */
+  createStorageConfiguration(
+    args: CreateStorageConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<CreateStorageConfigurationCommandOutput>;
+  createStorageConfiguration(
+    args: CreateStorageConfigurationCommandInput,
+    cb: (err: any, data?: CreateStorageConfigurationCommandOutput) => void
+  ): void;
+  createStorageConfiguration(
+    args: CreateStorageConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: CreateStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEncoderConfigurationCommand}
+   */
+  deleteEncoderConfiguration(
+    args: DeleteEncoderConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DeleteEncoderConfigurationCommandOutput>;
+  deleteEncoderConfiguration(
+    args: DeleteEncoderConfigurationCommandInput,
+    cb: (err: any, data?: DeleteEncoderConfigurationCommandOutput) => void
+  ): void;
+  deleteEncoderConfiguration(
+    args: DeleteEncoderConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DeleteEncoderConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIngestConfigurationCommand}
+   */
+  deleteIngestConfiguration(
+    args: DeleteIngestConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DeleteIngestConfigurationCommandOutput>;
+  deleteIngestConfiguration(
+    args: DeleteIngestConfigurationCommandInput,
+    cb: (err: any, data?: DeleteIngestConfigurationCommandOutput) => void
+  ): void;
+  deleteIngestConfiguration(
+    args: DeleteIngestConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DeleteIngestConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePublicKeyCommand}
+   */
+  deletePublicKey(
+    args: DeletePublicKeyCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DeletePublicKeyCommandOutput>;
+  deletePublicKey(
+    args: DeletePublicKeyCommandInput,
+    cb: (err: any, data?: DeletePublicKeyCommandOutput) => void
+  ): void;
+  deletePublicKey(
+    args: DeletePublicKeyCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DeletePublicKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStageCommand}
+   */
+  deleteStage(
+    args: DeleteStageCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DeleteStageCommandOutput>;
+  deleteStage(
+    args: DeleteStageCommandInput,
+    cb: (err: any, data?: DeleteStageCommandOutput) => void
+  ): void;
+  deleteStage(
+    args: DeleteStageCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DeleteStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStorageConfigurationCommand}
+   */
+  deleteStorageConfiguration(
+    args: DeleteStorageConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DeleteStorageConfigurationCommandOutput>;
+  deleteStorageConfiguration(
+    args: DeleteStorageConfigurationCommandInput,
+    cb: (err: any, data?: DeleteStorageConfigurationCommandOutput) => void
+  ): void;
+  deleteStorageConfiguration(
+    args: DeleteStorageConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DeleteStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisconnectParticipantCommand}
+   */
+  disconnectParticipant(
+    args: DisconnectParticipantCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<DisconnectParticipantCommandOutput>;
+  disconnectParticipant(
+    args: DisconnectParticipantCommandInput,
+    cb: (err: any, data?: DisconnectParticipantCommandOutput) => void
+  ): void;
+  disconnectParticipant(
+    args: DisconnectParticipantCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: DisconnectParticipantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCompositionCommand}
+   */
+  getComposition(
+    args: GetCompositionCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetCompositionCommandOutput>;
+  getComposition(
+    args: GetCompositionCommandInput,
+    cb: (err: any, data?: GetCompositionCommandOutput) => void
+  ): void;
+  getComposition(
+    args: GetCompositionCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetCompositionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEncoderConfigurationCommand}
+   */
+  getEncoderConfiguration(
+    args: GetEncoderConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetEncoderConfigurationCommandOutput>;
+  getEncoderConfiguration(
+    args: GetEncoderConfigurationCommandInput,
+    cb: (err: any, data?: GetEncoderConfigurationCommandOutput) => void
+  ): void;
+  getEncoderConfiguration(
+    args: GetEncoderConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetEncoderConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngestConfigurationCommand}
+   */
+  getIngestConfiguration(
+    args: GetIngestConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetIngestConfigurationCommandOutput>;
+  getIngestConfiguration(
+    args: GetIngestConfigurationCommandInput,
+    cb: (err: any, data?: GetIngestConfigurationCommandOutput) => void
+  ): void;
+  getIngestConfiguration(
+    args: GetIngestConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetIngestConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetParticipantCommand}
+   */
+  getParticipant(
+    args: GetParticipantCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetParticipantCommandOutput>;
+  getParticipant(
+    args: GetParticipantCommandInput,
+    cb: (err: any, data?: GetParticipantCommandOutput) => void
+  ): void;
+  getParticipant(
+    args: GetParticipantCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetParticipantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPublicKeyCommand}
+   */
+  getPublicKey(
+    args: GetPublicKeyCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetPublicKeyCommandOutput>;
+  getPublicKey(
+    args: GetPublicKeyCommandInput,
+    cb: (err: any, data?: GetPublicKeyCommandOutput) => void
+  ): void;
+  getPublicKey(
+    args: GetPublicKeyCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetPublicKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStageCommand}
+   */
+  getStage(
+    args: GetStageCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetStageCommandOutput>;
+  getStage(
+    args: GetStageCommandInput,
+    cb: (err: any, data?: GetStageCommandOutput) => void
+  ): void;
+  getStage(
+    args: GetStageCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStageSessionCommand}
+   */
+  getStageSession(
+    args: GetStageSessionCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetStageSessionCommandOutput>;
+  getStageSession(
+    args: GetStageSessionCommandInput,
+    cb: (err: any, data?: GetStageSessionCommandOutput) => void
+  ): void;
+  getStageSession(
+    args: GetStageSessionCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetStageSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStorageConfigurationCommand}
+   */
+  getStorageConfiguration(
+    args: GetStorageConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<GetStorageConfigurationCommandOutput>;
+  getStorageConfiguration(
+    args: GetStorageConfigurationCommandInput,
+    cb: (err: any, data?: GetStorageConfigurationCommandOutput) => void
+  ): void;
+  getStorageConfiguration(
+    args: GetStorageConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: GetStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportPublicKeyCommand}
+   */
+  importPublicKey(
+    args: ImportPublicKeyCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ImportPublicKeyCommandOutput>;
+  importPublicKey(
+    args: ImportPublicKeyCommandInput,
+    cb: (err: any, data?: ImportPublicKeyCommandOutput) => void
+  ): void;
+  importPublicKey(
+    args: ImportPublicKeyCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ImportPublicKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCompositionsCommand}
+   */
+  listCompositions(): Promise<ListCompositionsCommandOutput>;
+  listCompositions(
+    args: ListCompositionsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListCompositionsCommandOutput>;
+  listCompositions(
+    args: ListCompositionsCommandInput,
+    cb: (err: any, data?: ListCompositionsCommandOutput) => void
+  ): void;
+  listCompositions(
+    args: ListCompositionsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListCompositionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEncoderConfigurationsCommand}
+   */
+  listEncoderConfigurations(): Promise<ListEncoderConfigurationsCommandOutput>;
+  listEncoderConfigurations(
+    args: ListEncoderConfigurationsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListEncoderConfigurationsCommandOutput>;
+  listEncoderConfigurations(
+    args: ListEncoderConfigurationsCommandInput,
+    cb: (err: any, data?: ListEncoderConfigurationsCommandOutput) => void
+  ): void;
+  listEncoderConfigurations(
+    args: ListEncoderConfigurationsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListEncoderConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngestConfigurationsCommand}
+   */
+  listIngestConfigurations(): Promise<ListIngestConfigurationsCommandOutput>;
+  listIngestConfigurations(
+    args: ListIngestConfigurationsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListIngestConfigurationsCommandOutput>;
+  listIngestConfigurations(
+    args: ListIngestConfigurationsCommandInput,
+    cb: (err: any, data?: ListIngestConfigurationsCommandOutput) => void
+  ): void;
+  listIngestConfigurations(
+    args: ListIngestConfigurationsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListIngestConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListParticipantEventsCommand}
+   */
+  listParticipantEvents(
+    args: ListParticipantEventsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListParticipantEventsCommandOutput>;
+  listParticipantEvents(
+    args: ListParticipantEventsCommandInput,
+    cb: (err: any, data?: ListParticipantEventsCommandOutput) => void
+  ): void;
+  listParticipantEvents(
+    args: ListParticipantEventsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListParticipantEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListParticipantReplicasCommand}
+   */
+  listParticipantReplicas(
+    args: ListParticipantReplicasCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListParticipantReplicasCommandOutput>;
+  listParticipantReplicas(
+    args: ListParticipantReplicasCommandInput,
+    cb: (err: any, data?: ListParticipantReplicasCommandOutput) => void
+  ): void;
+  listParticipantReplicas(
+    args: ListParticipantReplicasCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListParticipantReplicasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListParticipantsCommand}
+   */
+  listParticipants(
+    args: ListParticipantsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListParticipantsCommandOutput>;
+  listParticipants(
+    args: ListParticipantsCommandInput,
+    cb: (err: any, data?: ListParticipantsCommandOutput) => void
+  ): void;
+  listParticipants(
+    args: ListParticipantsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListParticipantsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPublicKeysCommand}
+   */
+  listPublicKeys(): Promise<ListPublicKeysCommandOutput>;
+  listPublicKeys(
+    args: ListPublicKeysCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListPublicKeysCommandOutput>;
+  listPublicKeys(
+    args: ListPublicKeysCommandInput,
+    cb: (err: any, data?: ListPublicKeysCommandOutput) => void
+  ): void;
+  listPublicKeys(
+    args: ListPublicKeysCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListPublicKeysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStagesCommand}
+   */
+  listStages(): Promise<ListStagesCommandOutput>;
+  listStages(
+    args: ListStagesCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListStagesCommandOutput>;
+  listStages(
+    args: ListStagesCommandInput,
+    cb: (err: any, data?: ListStagesCommandOutput) => void
+  ): void;
+  listStages(
+    args: ListStagesCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListStagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStageSessionsCommand}
+   */
+  listStageSessions(
+    args: ListStageSessionsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListStageSessionsCommandOutput>;
+  listStageSessions(
+    args: ListStageSessionsCommandInput,
+    cb: (err: any, data?: ListStageSessionsCommandOutput) => void
+  ): void;
+  listStageSessions(
+    args: ListStageSessionsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListStageSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStorageConfigurationsCommand}
+   */
+  listStorageConfigurations(): Promise<ListStorageConfigurationsCommandOutput>;
+  listStorageConfigurations(
+    args: ListStorageConfigurationsCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListStorageConfigurationsCommandOutput>;
+  listStorageConfigurations(
+    args: ListStorageConfigurationsCommandInput,
+    cb: (err: any, data?: ListStorageConfigurationsCommandOutput) => void
+  ): void;
+  listStorageConfigurations(
+    args: ListStorageConfigurationsCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListStorageConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RevokeConnectionTokenCommand}
+   */
+  revokeConnectionToken(
+    args: RevokeConnectionTokenCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<RevokeConnectionTokenCommandOutput>;
+  revokeConnectionToken(
+    args: RevokeConnectionTokenCommandInput,
+    cb: (err: any, data?: RevokeConnectionTokenCommandOutput) => void
+  ): void;
+  revokeConnectionToken(
+    args: RevokeConnectionTokenCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: RevokeConnectionTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCompositionCommand}
+   */
+  startComposition(
+    args: StartCompositionCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<StartCompositionCommandOutput>;
+  startComposition(
+    args: StartCompositionCommandInput,
+    cb: (err: any, data?: StartCompositionCommandOutput) => void
+  ): void;
+  startComposition(
+    args: StartCompositionCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: StartCompositionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartParticipantReplicationCommand}
+   */
+  startParticipantReplication(
+    args: StartParticipantReplicationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<StartParticipantReplicationCommandOutput>;
+  startParticipantReplication(
+    args: StartParticipantReplicationCommandInput,
+    cb: (err: any, data?: StartParticipantReplicationCommandOutput) => void
+  ): void;
+  startParticipantReplication(
+    args: StartParticipantReplicationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: StartParticipantReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCompositionCommand}
+   */
+  stopComposition(
+    args: StopCompositionCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<StopCompositionCommandOutput>;
+  stopComposition(
+    args: StopCompositionCommandInput,
+    cb: (err: any, data?: StopCompositionCommandOutput) => void
+  ): void;
+  stopComposition(
+    args: StopCompositionCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: StopCompositionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopParticipantReplicationCommand}
+   */
+  stopParticipantReplication(
+    args: StopParticipantReplicationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<StopParticipantReplicationCommandOutput>;
+  stopParticipantReplication(
+    args: StopParticipantReplicationCommandInput,
+    cb: (err: any, data?: StopParticipantReplicationCommandOutput) => void
+  ): void;
+  stopParticipantReplication(
+    args: StopParticipantReplicationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: StopParticipantReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIngestConfigurationCommand}
+   */
+  updateIngestConfiguration(
+    args: UpdateIngestConfigurationCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<UpdateIngestConfigurationCommandOutput>;
+  updateIngestConfiguration(
+    args: UpdateIngestConfigurationCommandInput,
+    cb: (err: any, data?: UpdateIngestConfigurationCommandOutput) => void
+  ): void;
+  updateIngestConfiguration(
+    args: UpdateIngestConfigurationCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: UpdateIngestConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStageCommand}
+   */
+  updateStage(
+    args: UpdateStageCommandInput,
+    options?: IVSRealTimeRequestOptions
+  ): Promise<UpdateStageCommandOutput>;
+  updateStage(
+    args: UpdateStageCommandInput,
+    cb: (err: any, data?: UpdateStageCommandOutput) => void
+  ): void;
+  updateStage(
+    args: UpdateStageCommandInput,
+    options: IVSRealTimeRequestOptions,
+    cb: (err: any, data?: UpdateStageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCompositionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCompositionsCommandOutput}.
+   */
+  paginateListCompositions(
+    args?: ListCompositionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCompositionsCommandOutput>;
+
+  /**
+   * @see {@link ListEncoderConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEncoderConfigurationsCommandOutput}.
+   */
+  paginateListEncoderConfigurations(
+    args?: ListEncoderConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEncoderConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListIngestConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngestConfigurationsCommandOutput}.
+   */
+  paginateListIngestConfigurations(
+    args?: ListIngestConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngestConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListParticipantEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListParticipantEventsCommandOutput}.
+   */
+  paginateListParticipantEvents(
+    args: ListParticipantEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListParticipantEventsCommandOutput>;
+
+  /**
+   * @see {@link ListParticipantReplicasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListParticipantReplicasCommandOutput}.
+   */
+  paginateListParticipantReplicas(
+    args: ListParticipantReplicasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListParticipantReplicasCommandOutput>;
+
+  /**
+   * @see {@link ListParticipantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListParticipantsCommandOutput}.
+   */
+  paginateListParticipants(
+    args: ListParticipantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListParticipantsCommandOutput>;
+
+  /**
+   * @see {@link ListPublicKeysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPublicKeysCommandOutput}.
+   */
+  paginateListPublicKeys(
+    args?: ListPublicKeysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPublicKeysCommandOutput>;
+
+  /**
+   * @see {@link ListStagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStagesCommandOutput}.
+   */
+  paginateListStages(
+    args?: ListStagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStagesCommandOutput>;
+
+  /**
+   * @see {@link ListStageSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStageSessionsCommandOutput}.
+   */
+  paginateListStageSessions(
+    args: ListStageSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStageSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListStorageConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStorageConfigurationsCommandOutput}.
+   */
+  paginateListStorageConfigurations(
+    args?: ListStorageConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStorageConfigurationsCommandOutput>;
+}
+
+/**
+ * <p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors. </p> <p> <b>Key Concepts</b> </p> <ul> <li> <p> <b>Stage</b> — A virtual space where participants can exchange video in real time.</p> </li> <li> <p> <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p> </li> <li> <p> <b>Participant object</b> — Represents participants (people) in the stage and contains information about them. When a token is created, it includes a participant ID; when a participant uses that token to join a stage, the participant is associated with that participant ID. There is a 1:1 mapping between participant tokens and participants.</p> </li> </ul> <p>For server-side composition:</p> <ul> <li> <p> <b>Composition process</b> — Composites participants of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels). Composition operations support this process.</p> </li> <li> <p> <b>Composition</b> — Controls the look of the outputs, including how participants are positioned in the video.</p> </li> </ul> <p>For participant replication:</p> <ul> <li> <p> <b>Source stage</b> — The stage where the participant originally joined, which is used as the source for replication.</p> </li> <li> <p> <b>Destination stage</b> — The stage to which the participant is replicated. </p> </li> <li> <p> <b>Replicated participant</b> — A participant in a stage that is replicated to one or more destination stages. </p> </li> <li> <p> <b>Replica participant</b> — A participant in a destination stage that is replicated from another stage (the source stage).</p> </li> </ul> <p>For more information about your IVS live stream, also see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html">Getting Started with Amazon IVS Real-Time Streaming</a>.</p> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS real-time API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p> <p>At most 50 tags can be applied to a resource.</p>
+ * @public
+ */
+export class IVSRealTime extends IVSRealTimeClient implements IVSRealTime {}
+createAggregatedClient(commands, IVSRealTime, { paginators });

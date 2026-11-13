@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListHumanTaskUisRequest, ListHumanTaskUisResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListHumanTaskUisCommand,
-  serializeAws_json1_1ListHumanTaskUisCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListHumanTaskUisRequest, ListHumanTaskUisResponse } from "../models/models_4";
+import { ListHumanTaskUis$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListHumanTaskUisCommand}.
+ */
 export interface ListHumanTaskUisCommandInput extends ListHumanTaskUisRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListHumanTaskUisCommand}.
+ */
 export interface ListHumanTaskUisCommandOutput extends ListHumanTaskUisResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,58 @@ export interface ListHumanTaskUisCommandOutput extends ListHumanTaskUisResponse,
  * ```javascript
  * import { SageMakerClient, ListHumanTaskUisCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListHumanTaskUisCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListHumanTaskUisRequest
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListHumanTaskUisCommand(input);
  * const response = await client.send(command);
+ * // { // ListHumanTaskUisResponse
+ * //   HumanTaskUiSummaries: [ // HumanTaskUiSummaries // required
+ * //     { // HumanTaskUiSummary
+ * //       HumanTaskUiName: "STRING_VALUE", // required
+ * //       HumanTaskUiArn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListHumanTaskUisCommandInput - {@link ListHumanTaskUisCommandInput}
+ * @returns {@link ListHumanTaskUisCommandOutput}
  * @see {@link ListHumanTaskUisCommandInput} for command's `input` shape.
  * @see {@link ListHumanTaskUisCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListHumanTaskUisCommand extends $Command<
-  ListHumanTaskUisCommandInput,
-  ListHumanTaskUisCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListHumanTaskUisCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListHumanTaskUisCommandInput, ListHumanTaskUisCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListHumanTaskUisCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListHumanTaskUisRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListHumanTaskUisResponse.filterSensitiveLog,
+export class ListHumanTaskUisCommand extends command<ListHumanTaskUisCommandInput, ListHumanTaskUisCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListHumanTaskUis",
+  ListHumanTaskUis$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListHumanTaskUisRequest;
+      output: ListHumanTaskUisResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListHumanTaskUisCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListHumanTaskUisCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListHumanTaskUisCommandOutput> {
-    return deserializeAws_json1_1ListHumanTaskUisCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListHumanTaskUisCommandInput;
+      output: ListHumanTaskUisCommandOutput;
+    };
+  };
 }

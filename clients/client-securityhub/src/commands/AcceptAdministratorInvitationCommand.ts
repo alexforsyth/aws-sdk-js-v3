@@ -1,30 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AcceptAdministratorInvitationRequest, AcceptAdministratorInvitationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AcceptAdministratorInvitationCommand,
-  serializeAws_restJson1AcceptAdministratorInvitationCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
-
-export interface AcceptAdministratorInvitationCommandInput extends AcceptAdministratorInvitationRequest {}
-export interface AcceptAdministratorInvitationCommandOutput
-  extends AcceptAdministratorInvitationResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AcceptAdministratorInvitationRequest, AcceptAdministratorInvitationResponse } from "../models/models_0";
+import { AcceptAdministratorInvitation$ } from "../schemas/schemas_0";
 
 /**
- * <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptAdministratorInvitationCommand}.
+ */
+export interface AcceptAdministratorInvitationCommandInput extends AcceptAdministratorInvitationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptAdministratorInvitationCommand}.
+ */
+export interface AcceptAdministratorInvitationCommandOutput extends AcceptAdministratorInvitationResponse, __MetadataBearer {}
+
+/**
+ * <note>
+ *             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+ *            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+ *            in the <i>Security Hub CSPM User Guide</i>.</p>
+ *          </note>
+ *          <p>Accepts the invitation to be a member account and be monitored by the Security Hub CSPM administrator
  *          account that the invitation was sent from.</p>
  *          <p>This operation is only used by member accounts that are not added through
  *          Organizations.</p>
@@ -35,71 +39,77 @@ export interface AcceptAdministratorInvitationCommandOutput
  * ```javascript
  * import { SecurityHubClient, AcceptAdministratorInvitationCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, AcceptAdministratorInvitationCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // AcceptAdministratorInvitationRequest
+ *   AdministratorId: "STRING_VALUE", // required
+ *   InvitationId: "STRING_VALUE", // required
+ * };
  * const command = new AcceptAdministratorInvitationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AcceptAdministratorInvitationCommandInput - {@link AcceptAdministratorInvitationCommandInput}
+ * @returns {@link AcceptAdministratorInvitationCommandOutput}
  * @see {@link AcceptAdministratorInvitationCommandInput} for command's `input` shape.
  * @see {@link AcceptAdministratorInvitationCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To accept an invitation be a member account
+ * ```javascript
+ * // The following example demonstrates how an account can accept an invitation from the Security Hub administrator account to be a member account. This operation is applicable only to member accounts that are not added through AWS Organizations.
+ * const input = {
+ *   AdministratorId: "123456789012",
+ *   InvitationId: "7ab938c5d52d7904ad09f9e7c20cc4eb"
+ * };
+ * const command = new AcceptAdministratorInvitationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class AcceptAdministratorInvitationCommand extends $Command<
-  AcceptAdministratorInvitationCommandInput,
-  AcceptAdministratorInvitationCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptAdministratorInvitationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AcceptAdministratorInvitationCommandInput, AcceptAdministratorInvitationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "AcceptAdministratorInvitationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptAdministratorInvitationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptAdministratorInvitationResponse.filterSensitiveLog,
+export class AcceptAdministratorInvitationCommand extends command<AcceptAdministratorInvitationCommandInput, AcceptAdministratorInvitationCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptAdministratorInvitation",
+  AcceptAdministratorInvitation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptAdministratorInvitationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AcceptAdministratorInvitationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AcceptAdministratorInvitationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AcceptAdministratorInvitationCommandOutput> {
-    return deserializeAws_restJson1AcceptAdministratorInvitationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptAdministratorInvitationCommandInput;
+      output: AcceptAdministratorInvitationCommandOutput;
+    };
+  };
 }

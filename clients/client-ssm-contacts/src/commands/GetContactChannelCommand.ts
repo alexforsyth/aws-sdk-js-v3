@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetContactChannelRequest, GetContactChannelResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetContactChannelCommand,
-  serializeAws_json1_1GetContactChannelCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMContactsClientResolvedConfig } from "../SSMContactsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetContactChannelRequest, GetContactChannelResult } from "../models/models_0";
+import { GetContactChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetContactChannelCommand}.
+ */
 export interface GetContactChannelCommandInput extends GetContactChannelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetContactChannelCommand}.
+ */
 export interface GetContactChannelCommandOutput extends GetContactChannelResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface GetContactChannelCommandOutput extends GetContactChannelResult,
  * ```javascript
  * import { SSMContactsClient, GetContactChannelCommand } from "@aws-sdk/client-ssm-contacts"; // ES Modules import
  * // const { SSMContactsClient, GetContactChannelCommand } = require("@aws-sdk/client-ssm-contacts"); // CommonJS import
+ * // import type { SSMContactsClientConfig } from "@aws-sdk/client-ssm-contacts";
+ * const config = {}; // type is SSMContactsClientConfig
  * const client = new SSMContactsClient(config);
+ * const input = { // GetContactChannelRequest
+ *   ContactChannelId: "STRING_VALUE", // required
+ * };
  * const command = new GetContactChannelCommand(input);
  * const response = await client.send(command);
+ * // { // GetContactChannelResult
+ * //   ContactArn: "STRING_VALUE", // required
+ * //   ContactChannelArn: "STRING_VALUE", // required
+ * //   Name: "STRING_VALUE", // required
+ * //   Type: "SMS" || "VOICE" || "EMAIL", // required
+ * //   DeliveryAddress: { // ContactChannelAddress
+ * //     SimpleAddress: "STRING_VALUE",
+ * //   },
+ * //   ActivationStatus: "ACTIVATED" || "NOT_ACTIVATED",
+ * // };
+ *
  * ```
  *
+ * @param GetContactChannelCommandInput - {@link GetContactChannelCommandInput}
+ * @returns {@link GetContactChannelCommandOutput}
  * @see {@link GetContactChannelCommandInput} for command's `input` shape.
  * @see {@link GetContactChannelCommandOutput} for command's `response` shape.
- * @see {@link SSMContactsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMContactsClientResolvedConfig | config} for SSMContactsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link DataEncryptionException} (client fault)
+ *  <p>The operation failed to due an encryption key error.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *          service.</p>
+ *
+ * @throws {@link SSMContactsServiceException}
+ * <p>Base exception class for all service exceptions from SSMContacts service.</p>
+ *
+ *
+ * @public
  */
-export class GetContactChannelCommand extends $Command<
-  GetContactChannelCommandInput,
-  GetContactChannelCommandOutput,
-  SSMContactsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetContactChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMContactsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetContactChannelCommandInput, GetContactChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMContactsClient";
-    const commandName = "GetContactChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetContactChannelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetContactChannelResult.filterSensitiveLog,
+export class GetContactChannelCommand extends command<GetContactChannelCommandInput, GetContactChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetContactChannel",
+  GetContactChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetContactChannelRequest;
+      output: GetContactChannelResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetContactChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetContactChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetContactChannelCommandOutput> {
-    return deserializeAws_json1_1GetContactChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetContactChannelCommandInput;
+      output: GetContactChannelCommandOutput;
+    };
+  };
 }

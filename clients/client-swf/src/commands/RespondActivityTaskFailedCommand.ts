@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RespondActivityTaskFailedInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0RespondActivityTaskFailedCommand,
-  serializeAws_json1_0RespondActivityTaskFailedCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RespondActivityTaskFailedInput } from "../models/models_0";
+import { RespondActivityTaskFailed$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RespondActivityTaskFailedCommand}.
+ */
 export interface RespondActivityTaskFailedCommandInput extends RespondActivityTaskFailedInput {}
+/**
+ * @public
+ *
+ * The output of {@link RespondActivityTaskFailedCommand}.
+ */
 export interface RespondActivityTaskFailedCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,12 +27,10 @@ export interface RespondActivityTaskFailedCommandOutput extends __MetadataBearer
  *       by the <code>taskToken</code> has failed with <code>reason</code> (if specified). The
  *         <code>reason</code> and <code>details</code> appear in the <code>ActivityTaskFailed</code>
  *       event added to the workflow history.</p>
- *
  *          <p>A task is considered open from the time that it is scheduled until it is closed.
  *       Therefore a task is reported as open while a worker is processing it. A task is closed after
  *       it has been specified in a call to <a>RespondActivityTaskCompleted</a>, <a>RespondActivityTaskCanceled</a>, RespondActivityTaskFailed, or the task has <a href="https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types">timed
  *         out</a>.</p>
- *
  *          <p>
  *             <b>Access Control</b>
  *          </p>
@@ -60,71 +59,53 @@ export interface RespondActivityTaskFailedCommandOutput extends __MetadataBearer
  * ```javascript
  * import { SWFClient, RespondActivityTaskFailedCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, RespondActivityTaskFailedCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // RespondActivityTaskFailedInput
+ *   taskToken: "STRING_VALUE", // required
+ *   reason: "STRING_VALUE",
+ *   details: "STRING_VALUE",
+ * };
  * const command = new RespondActivityTaskFailedCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RespondActivityTaskFailedCommandInput - {@link RespondActivityTaskFailedCommandInput}
+ * @returns {@link RespondActivityTaskFailedCommandOutput}
  * @see {@link RespondActivityTaskFailedCommandInput} for command's `input` shape.
  * @see {@link RespondActivityTaskFailedCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class RespondActivityTaskFailedCommand extends $Command<
-  RespondActivityTaskFailedCommandInput,
-  RespondActivityTaskFailedCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RespondActivityTaskFailedCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RespondActivityTaskFailedCommandInput, RespondActivityTaskFailedCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "RespondActivityTaskFailedCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RespondActivityTaskFailedInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RespondActivityTaskFailedCommand extends command<RespondActivityTaskFailedCommandInput, RespondActivityTaskFailedCommandOutput>(
+  _ep0,
+  _mw0,
+  "RespondActivityTaskFailed",
+  RespondActivityTaskFailed$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RespondActivityTaskFailedInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RespondActivityTaskFailedCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0RespondActivityTaskFailedCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RespondActivityTaskFailedCommandOutput> {
-    return deserializeAws_json1_0RespondActivityTaskFailedCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RespondActivityTaskFailedCommandInput;
+      output: RespondActivityTaskFailedCommandOutput;
+    };
+  };
 }

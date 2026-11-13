@@ -1,101 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTDataPlaneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTDataPlaneClient";
-import { GetRetainedMessageRequest, GetRetainedMessageResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRetainedMessageCommand,
-  serializeAws_restJson1GetRetainedMessageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRetainedMessageRequest, GetRetainedMessageResponse } from "../models/models_0";
+import { GetRetainedMessage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRetainedMessageCommand}.
+ */
 export interface GetRetainedMessageCommandInput extends GetRetainedMessageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRetainedMessageCommand}.
+ */
 export interface GetRetainedMessageCommandOutput extends GetRetainedMessageResponse, __MetadataBearer {}
 
 /**
  * <p>Gets the details of a single retained message for the specified topic.</p>
  *          <p>This action returns the message payload of the retained message, which can
  *       incur messaging costs. To list only the topic names of the retained messages, call
- *       <a href="/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html">ListRetainedMessages</a>.</p>
- *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">GetRetainedMessage</a> action.</p>
- *          <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core
+ *       <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html">ListRetainedMessages</a>.</p>
+ *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html">GetRetainedMessage</a> action.</p>
+ *          <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">Amazon Web Services IoT Core
  *       pricing - Messaging</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTDataPlaneClient, GetRetainedMessageCommand } from "@aws-sdk/client-iot-data-plane"; // ES Modules import
  * // const { IoTDataPlaneClient, GetRetainedMessageCommand } = require("@aws-sdk/client-iot-data-plane"); // CommonJS import
+ * // import type { IoTDataPlaneClientConfig } from "@aws-sdk/client-iot-data-plane";
+ * const config = {}; // type is IoTDataPlaneClientConfig
  * const client = new IoTDataPlaneClient(config);
+ * const input = { // GetRetainedMessageRequest
+ *   topic: "STRING_VALUE", // required
+ * };
  * const command = new GetRetainedMessageCommand(input);
  * const response = await client.send(command);
+ * // { // GetRetainedMessageResponse
+ * //   topic: "STRING_VALUE",
+ * //   payload: new Uint8Array(),
+ * //   qos: Number("int"),
+ * //   lastModifiedTime: Number("long"),
+ * //   userProperties: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param GetRetainedMessageCommandInput - {@link GetRetainedMessageCommandInput}
+ * @returns {@link GetRetainedMessageCommandOutput}
  * @see {@link GetRetainedMessageCommandInput} for command's `input` shape.
  * @see {@link GetRetainedMessageCommandOutput} for command's `response` shape.
- * @see {@link IoTDataPlaneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTDataPlaneClientResolvedConfig | config} for IoTDataPlaneClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The specified combination of HTTP verb and URI is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTDataPlaneServiceException}
+ * <p>Base exception class for all service exceptions from IoTDataPlane service.</p>
+ *
+ *
+ * @public
  */
-export class GetRetainedMessageCommand extends $Command<
-  GetRetainedMessageCommandInput,
-  GetRetainedMessageCommandOutput,
-  IoTDataPlaneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRetainedMessageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTDataPlaneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRetainedMessageCommandInput, GetRetainedMessageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTDataPlaneClient";
-    const commandName = "GetRetainedMessageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRetainedMessageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRetainedMessageResponse.filterSensitiveLog,
+export class GetRetainedMessageCommand extends command<GetRetainedMessageCommandInput, GetRetainedMessageCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRetainedMessage",
+  GetRetainedMessage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRetainedMessageRequest;
+      output: GetRetainedMessageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRetainedMessageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRetainedMessageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRetainedMessageCommandOutput> {
-    return deserializeAws_restJson1GetRetainedMessageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRetainedMessageCommandInput;
+      output: GetRetainedMessageCommandOutput;
+    };
+  };
 }

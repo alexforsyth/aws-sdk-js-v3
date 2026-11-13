@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { UpdateTableRequest, UpdateTableResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1UpdateTableCommand,
-  serializeAws_json1_1UpdateTableCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTableRequest, UpdateTableResponse } from "../models/models_3";
+import { UpdateTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTableCommand}.
+ */
 export interface UpdateTableCommandInput extends UpdateTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTableCommand}.
+ */
 export interface UpdateTableCommandOutput extends UpdateTableResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,275 @@ export interface UpdateTableCommandOutput extends UpdateTableResponse, __Metadat
  * ```javascript
  * import { GlueClient, UpdateTableCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, UpdateTableCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // UpdateTableRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   TableInput: { // TableInput
+ *     Name: "STRING_VALUE", // required
+ *     Description: "STRING_VALUE",
+ *     Owner: "STRING_VALUE",
+ *     LastAccessTime: new Date("TIMESTAMP"),
+ *     LastAnalyzedTime: new Date("TIMESTAMP"),
+ *     Retention: Number("int"),
+ *     StorageDescriptor: { // StorageDescriptor
+ *       Columns: [ // ColumnList
+ *         { // Column
+ *           Name: "STRING_VALUE", // required
+ *           Type: "STRING_VALUE",
+ *           Comment: "STRING_VALUE",
+ *           Parameters: { // ParametersMap
+ *             "<keys>": "STRING_VALUE",
+ *           },
+ *         },
+ *       ],
+ *       Location: "STRING_VALUE",
+ *       AdditionalLocations: [ // LocationStringList
+ *         "STRING_VALUE",
+ *       ],
+ *       InputFormat: "STRING_VALUE",
+ *       OutputFormat: "STRING_VALUE",
+ *       Compressed: true || false,
+ *       NumberOfBuckets: Number("int"),
+ *       SerdeInfo: { // SerDeInfo
+ *         Name: "STRING_VALUE",
+ *         SerializationLibrary: "STRING_VALUE",
+ *         Parameters: {
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *       },
+ *       BucketColumns: [ // NameStringList
+ *         "STRING_VALUE",
+ *       ],
+ *       SortColumns: [ // OrderList
+ *         { // Order
+ *           Column: "STRING_VALUE", // required
+ *           SortOrder: Number("int"), // required
+ *         },
+ *       ],
+ *       Parameters: "<ParametersMap>",
+ *       SkewedInfo: { // SkewedInfo
+ *         SkewedColumnNames: [
+ *           "STRING_VALUE",
+ *         ],
+ *         SkewedColumnValues: [ // ColumnValueStringList
+ *           "STRING_VALUE",
+ *         ],
+ *         SkewedColumnValueLocationMaps: { // LocationMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *       },
+ *       StoredAsSubDirectories: true || false,
+ *       SchemaReference: { // SchemaReference
+ *         SchemaId: { // SchemaId
+ *           SchemaArn: "STRING_VALUE",
+ *           SchemaName: "STRING_VALUE",
+ *           RegistryName: "STRING_VALUE",
+ *         },
+ *         SchemaVersionId: "STRING_VALUE",
+ *         SchemaVersionNumber: Number("long"),
+ *       },
+ *     },
+ *     PartitionKeys: [
+ *       {
+ *         Name: "STRING_VALUE", // required
+ *         Type: "STRING_VALUE",
+ *         Comment: "STRING_VALUE",
+ *         Parameters: "<ParametersMap>",
+ *       },
+ *     ],
+ *     ViewOriginalText: "STRING_VALUE",
+ *     ViewExpandedText: "STRING_VALUE",
+ *     TableType: "STRING_VALUE",
+ *     Parameters: "<ParametersMap>",
+ *     TargetTable: { // TableIdentifier
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE",
+ *       Name: "STRING_VALUE",
+ *       Region: "STRING_VALUE",
+ *     },
+ *     FederatedTable: { // FederatedTable
+ *       Identifier: "STRING_VALUE",
+ *       DatabaseIdentifier: "STRING_VALUE",
+ *       ConnectionName: "STRING_VALUE",
+ *       ConnectionType: "STRING_VALUE",
+ *     },
+ *     ViewDefinition: { // ViewDefinitionInput
+ *       IsProtected: true || false,
+ *       IsManaged: true || false,
+ *       Definer: "STRING_VALUE",
+ *       Representations: [ // ViewRepresentationInputList
+ *         { // ViewRepresentationInput
+ *           Dialect: "REDSHIFT" || "ATHENA" || "SPARK",
+ *           DialectVersion: "STRING_VALUE",
+ *           ViewOriginalText: "STRING_VALUE",
+ *           ValidationConnection: "STRING_VALUE",
+ *           ViewExpandedText: "STRING_VALUE",
+ *         },
+ *       ],
+ *       ViewVersionId: Number("long"),
+ *       ViewVersionToken: "STRING_VALUE",
+ *       RefreshSeconds: Number("long"),
+ *       LastRefreshType: "FULL" || "INCREMENTAL",
+ *       SubObjects: [ // ViewSubObjectsList
+ *         "STRING_VALUE",
+ *       ],
+ *       SubObjectVersionIds: [ // ViewSubObjectVersionIdsList
+ *         Number("long"),
+ *       ],
+ *       SubObjectsStatistics: [ // SubObjectsStatisticsList
+ *         { // SubObjectStatistics
+ *           SourceType: "HIVE_PARQUET" || "HIVE_ORC" || "HIVE_CSV" || "HIVE_JSON" || "PLAIN_PARQUET" || "ICEBERG",
+ *           GlueVersionId: "STRING_VALUE",
+ *           PartitionCount: Number("long"),
+ *           FileCount: Number("long"),
+ *           TotalFileBytes: Number("long"),
+ *         },
+ *       ],
+ *       SparkPipelineInfo: { // SparkPipelineInfoMap
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   SkipArchive: true || false,
+ *   TransactionId: "STRING_VALUE",
+ *   VersionId: "STRING_VALUE",
+ *   ViewUpdateAction: "ADD" || "REPLACE" || "ADD_OR_REPLACE" || "DROP",
+ *   Force: true || false,
+ *   UpdateOpenTableFormatInput: { // UpdateOpenTableFormatInput
+ *     UpdateIcebergInput: { // UpdateIcebergInput
+ *       UpdateIcebergTableInput: { // UpdateIcebergTableInput
+ *         Updates: [ // IcebergTableUpdateList // required
+ *           { // IcebergTableUpdate
+ *             Schema: { // IcebergSchema
+ *               SchemaId: Number("int"),
+ *               IdentifierFieldIds: [ // IntegerList
+ *                 Number("int"),
+ *               ],
+ *               Type: "struct",
+ *               Fields: [ // IcebergStructFieldList // required
+ *                 { // IcebergStructField
+ *                   Id: Number("int"), // required
+ *                   Name: "STRING_VALUE", // required
+ *                   Type: "DOCUMENT_VALUE", // required
+ *                   Required: true || false, // required
+ *                   Doc: "STRING_VALUE",
+ *                   InitialDefault: "DOCUMENT_VALUE",
+ *                   WriteDefault: "DOCUMENT_VALUE",
+ *                 },
+ *               ],
+ *             },
+ *             PartitionSpec: { // IcebergPartitionSpec
+ *               Fields: [ // IcebergPartitionSpecFieldList // required
+ *                 { // IcebergPartitionField
+ *                   SourceId: Number("int"), // required
+ *                   Transform: "STRING_VALUE", // required
+ *                   Name: "STRING_VALUE", // required
+ *                   FieldId: Number("int"),
+ *                 },
+ *               ],
+ *               SpecId: Number("int"),
+ *             },
+ *             SortOrder: { // IcebergSortOrder
+ *               OrderId: Number("int"), // required
+ *               Fields: [ // IcebergSortOrderFieldList // required
+ *                 { // IcebergSortField
+ *                   SourceId: Number("int"), // required
+ *                   Transform: "STRING_VALUE", // required
+ *                   Direction: "asc" || "desc", // required
+ *                   NullOrder: "nulls-first" || "nulls-last", // required
+ *                 },
+ *               ],
+ *             },
+ *             Location: "STRING_VALUE", // required
+ *             Properties: { // StringToStringMap
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *             Action: "add-schema" || "set-current-schema" || "add-spec" || "set-default-spec" || "add-sort-order" || "set-default-sort-order" || "set-location" || "set-properties" || "remove-properties" || "add-encryption-key" || "remove-encryption-key",
+ *             EncryptionKey: { // IcebergEncryptedKey
+ *               KeyId: "STRING_VALUE", // required
+ *               EncryptedKeyMetadata: "STRING_VALUE", // required
+ *               EncryptedById: "STRING_VALUE",
+ *               Properties: {
+ *                 "<keys>": "STRING_VALUE",
+ *               },
+ *             },
+ *             KeyId: "STRING_VALUE",
+ *           },
+ *         ],
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new UpdateTableCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateTableCommandInput - {@link UpdateTableCommandInput}
+ * @returns {@link UpdateTableCommandOutput}
  * @see {@link UpdateTableCommandInput} for command's `input` shape.
  * @see {@link UpdateTableCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>A resource to be created or added already exists.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link FederationSourceException} (client fault)
+ *  <p>A federation source failed.</p>
+ *
+ * @throws {@link FederationSourceRetryableException} (client fault)
+ *  <p>A federation source failed, but the operation may be retried.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNotReadyException} (client fault)
+ *  <p>A resource was not ready for a transaction.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTableCommand extends $Command<
-  UpdateTableCommandInput,
-  UpdateTableCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTableCommandInput, UpdateTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "UpdateTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTableResponse.filterSensitiveLog,
+export class UpdateTableCommand extends command<UpdateTableCommandInput, UpdateTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTable",
+  UpdateTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTableRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTableCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateTableCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateTableCommandOutput> {
-    return deserializeAws_json1_1UpdateTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTableCommandInput;
+      output: UpdateTableCommandOutput;
+    };
+  };
 }

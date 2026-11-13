@@ -1,100 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateMobileDeviceAccessRuleRequest, UpdateMobileDeviceAccessRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateMobileDeviceAccessRuleCommand,
-  serializeAws_json1_1UpdateMobileDeviceAccessRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
-
-export interface UpdateMobileDeviceAccessRuleCommandInput extends UpdateMobileDeviceAccessRuleRequest {}
-export interface UpdateMobileDeviceAccessRuleCommandOutput
-  extends UpdateMobileDeviceAccessRuleResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMobileDeviceAccessRuleRequest, UpdateMobileDeviceAccessRuleResponse } from "../models/models_0";
+import { UpdateMobileDeviceAccessRule$ } from "../schemas/schemas_0";
 
 /**
- * <p>Updates a mobile device access rule for the specified Amazon WorkMail organization.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMobileDeviceAccessRuleCommand}.
+ */
+export interface UpdateMobileDeviceAccessRuleCommandInput extends UpdateMobileDeviceAccessRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMobileDeviceAccessRuleCommand}.
+ */
+export interface UpdateMobileDeviceAccessRuleCommandOutput extends UpdateMobileDeviceAccessRuleResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates a mobile device access rule for the specified WorkMail organization.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkMailClient, UpdateMobileDeviceAccessRuleCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, UpdateMobileDeviceAccessRuleCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // UpdateMobileDeviceAccessRuleRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   MobileDeviceAccessRuleId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Effect: "ALLOW" || "DENY", // required
+ *   DeviceTypes: [ // DeviceTypeList
+ *     "STRING_VALUE",
+ *   ],
+ *   NotDeviceTypes: [
+ *     "STRING_VALUE",
+ *   ],
+ *   DeviceModels: [ // DeviceModelList
+ *     "STRING_VALUE",
+ *   ],
+ *   NotDeviceModels: [
+ *     "STRING_VALUE",
+ *   ],
+ *   DeviceOperatingSystems: [ // DeviceOperatingSystemList
+ *     "STRING_VALUE",
+ *   ],
+ *   NotDeviceOperatingSystems: [
+ *     "STRING_VALUE",
+ *   ],
+ *   DeviceUserAgents: [ // DeviceUserAgentList
+ *     "STRING_VALUE",
+ *   ],
+ *   NotDeviceUserAgents: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdateMobileDeviceAccessRuleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateMobileDeviceAccessRuleCommandInput - {@link UpdateMobileDeviceAccessRuleCommandInput}
+ * @returns {@link UpdateMobileDeviceAccessRuleCommandOutput}
  * @see {@link UpdateMobileDeviceAccessRuleCommandInput} for command's `input` shape.
  * @see {@link UpdateMobileDeviceAccessRuleCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>The identifier supplied for the user, group, or resource does not exist in your
+ *          organization.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link OrganizationNotFoundException} (client fault)
+ *  <p>An operation received a valid organization identifier that either doesn't belong or
+ *          exist in the system.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMobileDeviceAccessRuleCommand extends $Command<
-  UpdateMobileDeviceAccessRuleCommandInput,
-  UpdateMobileDeviceAccessRuleCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMobileDeviceAccessRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMobileDeviceAccessRuleCommandInput, UpdateMobileDeviceAccessRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "UpdateMobileDeviceAccessRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMobileDeviceAccessRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMobileDeviceAccessRuleResponse.filterSensitiveLog,
+export class UpdateMobileDeviceAccessRuleCommand extends command<UpdateMobileDeviceAccessRuleCommandInput, UpdateMobileDeviceAccessRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMobileDeviceAccessRule",
+  UpdateMobileDeviceAccessRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMobileDeviceAccessRuleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMobileDeviceAccessRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateMobileDeviceAccessRuleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateMobileDeviceAccessRuleCommandOutput> {
-    return deserializeAws_json1_1UpdateMobileDeviceAccessRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMobileDeviceAccessRuleCommandInput;
+      output: UpdateMobileDeviceAccessRuleCommandOutput;
+    };
+  };
 }

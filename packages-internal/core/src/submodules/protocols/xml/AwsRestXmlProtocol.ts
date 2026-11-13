@@ -1,0 +1,189 @@
+import {
+  HttpBindingProtocol,
+  HttpInterceptingShapeDeserializer,
+  HttpInterceptingShapeSerializer,
+} from "@smithy/core/protocols";
+import type { TypeRegistry } from "@smithy/core/schema";
+import { NormalizedSchema } from "@smithy/core/schema";
+import type {
+  EndpointBearer,
+  HandlerExecutionContext,
+  HttpRequest as IHttpRequest,
+  HttpResponse as IHttpResponse,
+  MetadataBearer,
+  OperationSchema,
+  ResponseMetadata,
+  SerdeFunctions,
+  ShapeDeserializer,
+  ShapeSerializer,
+  TimestampDateTimeSchema,
+} from "@smithy/types";
+
+import { ProtocolLib } from "../ProtocolLib";
+import { loadRestXmlErrorCode } from "./parseXmlBody";
+import type { XmlSettings } from "./XmlCodec";
+import { XmlCodec } from "./XmlCodec";
+
+/**
+ * @public
+ */
+export class AwsRestXmlProtocol extends HttpBindingProtocol {
+  private readonly codec: XmlCodec;
+  protected serializer: ShapeSerializer<string | Uint8Array>;
+  protected deserializer: ShapeDeserializer<string | Uint8Array>;
+  private readonly mixin = new ProtocolLib();
+
+  public constructor(options: {
+    defaultNamespace: string;
+    xmlNamespace: string;
+    errorTypeRegistries?: TypeRegistry[];
+  }) {
+    super(options);
+    const settings: XmlSettings = {
+      timestampFormat: {
+        useTrait: true,
+        default: 5 as const satisfies TimestampDateTimeSchema,
+      },
+      httpBindings: true,
+      xmlNamespace: options.xmlNamespace,
+      serviceNamespace: options.defaultNamespace,
+    };
+    this.codec = new XmlCodec(settings);
+    this.serializer = new HttpInterceptingShapeSerializer(this.codec.createSerializer(), settings);
+    this.deserializer = new HttpInterceptingShapeDeserializer(this.codec.createDeserializer(), settings);
+  }
+
+  public getPayloadCodec(): XmlCodec {
+    return this.codec;
+  }
+
+  public getShapeId(): string {
+    return "aws.protocols#restXml";
+  }
+
+  public async serializeRequest<Input extends object>(
+    operationSchema: OperationSchema,
+    input: Input,
+    context: HandlerExecutionContext & SerdeFunctions & EndpointBearer
+  ): Promise<IHttpRequest> {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    const inputSchema = NormalizedSchema.of(operationSchema.input);
+
+    if (!request.headers["content-type"]) {
+      const contentType = this.mixin.resolveRestContentType(this.getDefaultContentType(), inputSchema);
+      if (contentType) {
+        request.headers["content-type"] = contentType;
+      }
+    }
+
+    if (
+      typeof request.body === "string" &&
+      request.headers["content-type"] === this.getDefaultContentType() &&
+      !request.body.startsWith("<?xml ") &&
+      !this.hasUnstructuredPayloadBinding(inputSchema)
+    ) {
+      // string type excludes event streams.
+      // if the body is a string, it is either XML serialized from a structure
+      // or a text payload. We exclude text payloads by checking
+      // whether the schema has a payload binding.
+      request.body = '<?xml version="1.0" encoding="UTF-8"?>' + request.body;
+    }
+
+    // content-length header is set by the contentLengthMiddleware.
+
+    return request;
+  }
+
+  public async deserializeResponse<Output extends MetadataBearer>(
+    operationSchema: OperationSchema,
+    context: HandlerExecutionContext & SerdeFunctions,
+    response: IHttpResponse
+  ): Promise<Output> {
+    return super.deserializeResponse<Output>(operationSchema, context, response);
+  }
+
+  /**
+   * @override
+   */
+  protected async handleError(
+    operationSchema: OperationSchema,
+    context: HandlerExecutionContext & SerdeFunctions,
+    response: IHttpResponse,
+    dataObject: any,
+    metadata: ResponseMetadata
+  ): Promise<never> {
+    const errorIdentifier = loadRestXmlErrorCode(response, dataObject) ?? "Unknown";
+    this.mixin.compose(this.compositeErrorRegistry, errorIdentifier, this.options.defaultNamespace);
+
+    // see https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#error-response-serialization
+    if (dataObject.Error && typeof dataObject.Error === "object") {
+      for (const key of Object.keys(dataObject.Error)) {
+        dataObject[key] = dataObject.Error[key];
+        if (key.toLowerCase() === "message") {
+          dataObject.message = dataObject.Error[key];
+        }
+      }
+    }
+    if (dataObject.RequestId && !metadata.requestId) {
+      metadata.requestId = dataObject.RequestId;
+    }
+
+    const { errorSchema, errorMetadata } = await this.mixin.getErrorSchemaOrThrowBaseException(
+      errorIdentifier,
+      this.options.defaultNamespace,
+      response,
+      dataObject,
+      metadata
+    );
+
+    const ns = NormalizedSchema.of(errorSchema);
+    const message =
+      dataObject.Error?.message ??
+      dataObject.Error?.Message ??
+      dataObject.message ??
+      dataObject.Message ??
+      "UnknownError";
+    const ErrorCtor = this.compositeErrorRegistry.getErrorCtor(errorSchema) ?? Error;
+    const exception = new ErrorCtor({});
+
+    await this.deserializeHttpMessage(errorSchema, context, response, dataObject);
+    const output = {} as any;
+    const errorDeserializer = this.codec.createDeserializer();
+    for (const [name, member] of ns.structIterator()) {
+      const target = member.getMergedTraits().xmlName ?? name;
+      const value = dataObject.Error?.[target] ?? dataObject[target];
+      output[name] = errorDeserializer.readSchema(member, value);
+    }
+
+    throw this.mixin.decorateServiceException(
+      Object.assign(
+        exception,
+        errorMetadata,
+        {
+          $fault: ns.getMergedTraits().error,
+          message,
+        },
+        output
+      ),
+      dataObject
+    );
+  }
+
+  /**
+   * @override
+   */
+  protected getDefaultContentType(): string {
+    return "application/xml";
+  }
+
+  private hasUnstructuredPayloadBinding(ns: NormalizedSchema): boolean {
+    for (const [, member] of ns.structIterator()) {
+      if (member.getMergedTraits().httpPayload) {
+        // all struct members can be http payloads, but the serialization of
+        // simple types are probably not in XML format.
+        return !(member.isStructSchema() || member.isMapSchema() || member.isListSchema());
+      }
+    }
+    return false;
+  }
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { ListEngineVersionsInput, ListEngineVersionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListEngineVersionsCommand,
-  serializeAws_json1_1ListEngineVersionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEngineVersionsInput, ListEngineVersionsOutput } from "../models/models_0";
+import { ListEngineVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEngineVersionsCommand}.
+ */
 export interface ListEngineVersionsCommandInput extends ListEngineVersionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListEngineVersionsCommand}.
+ */
 export interface ListEngineVersionsCommandOutput extends ListEngineVersionsOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,62 @@ export interface ListEngineVersionsCommandOutput extends ListEngineVersionsOutpu
  * ```javascript
  * import { AthenaClient, ListEngineVersionsCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, ListEngineVersionsCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // ListEngineVersionsInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListEngineVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListEngineVersionsOutput
+ * //   EngineVersions: [ // EngineVersionsList
+ * //     { // EngineVersion
+ * //       SelectedEngineVersion: "STRING_VALUE",
+ * //       EffectiveEngineVersion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEngineVersionsCommandInput - {@link ListEngineVersionsCommandInput}
+ * @returns {@link ListEngineVersionsCommandOutput}
  * @see {@link ListEngineVersionsCommandInput} for command's `input` shape.
  * @see {@link ListEngineVersionsCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class ListEngineVersionsCommand extends $Command<
-  ListEngineVersionsCommandInput,
-  ListEngineVersionsCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEngineVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEngineVersionsCommandInput, ListEngineVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "ListEngineVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEngineVersionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEngineVersionsOutput.filterSensitiveLog,
+export class ListEngineVersionsCommand extends command<ListEngineVersionsCommandInput, ListEngineVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEngineVersions",
+  ListEngineVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEngineVersionsInput;
+      output: ListEngineVersionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEngineVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEngineVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEngineVersionsCommandOutput> {
-    return deserializeAws_json1_1ListEngineVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEngineVersionsCommandInput;
+      output: ListEngineVersionsCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,687 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultVPCLatticeHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { BatchUpdateRuleCommandInput, BatchUpdateRuleCommandOutput } from "./commands/BatchUpdateRuleCommand";
+import type {
+  CreateAccessLogSubscriptionCommandInput,
+  CreateAccessLogSubscriptionCommandOutput,
+} from "./commands/CreateAccessLogSubscriptionCommand";
+import type { CreateListenerCommandInput, CreateListenerCommandOutput } from "./commands/CreateListenerCommand";
+import type {
+  CreateResourceConfigurationCommandInput,
+  CreateResourceConfigurationCommandOutput,
+} from "./commands/CreateResourceConfigurationCommand";
+import type {
+  CreateResourceGatewayCommandInput,
+  CreateResourceGatewayCommandOutput,
+} from "./commands/CreateResourceGatewayCommand";
+import type { CreateRuleCommandInput, CreateRuleCommandOutput } from "./commands/CreateRuleCommand";
+import type { CreateServiceCommandInput, CreateServiceCommandOutput } from "./commands/CreateServiceCommand";
+import type {
+  CreateServiceNetworkCommandInput,
+  CreateServiceNetworkCommandOutput,
+} from "./commands/CreateServiceNetworkCommand";
+import type {
+  CreateServiceNetworkResourceAssociationCommandInput,
+  CreateServiceNetworkResourceAssociationCommandOutput,
+} from "./commands/CreateServiceNetworkResourceAssociationCommand";
+import type {
+  CreateServiceNetworkServiceAssociationCommandInput,
+  CreateServiceNetworkServiceAssociationCommandOutput,
+} from "./commands/CreateServiceNetworkServiceAssociationCommand";
+import type {
+  CreateServiceNetworkVpcAssociationCommandInput,
+  CreateServiceNetworkVpcAssociationCommandOutput,
+} from "./commands/CreateServiceNetworkVpcAssociationCommand";
+import type {
+  CreateTargetGroupCommandInput,
+  CreateTargetGroupCommandOutput,
+} from "./commands/CreateTargetGroupCommand";
+import type {
+  DeleteAccessLogSubscriptionCommandInput,
+  DeleteAccessLogSubscriptionCommandOutput,
+} from "./commands/DeleteAccessLogSubscriptionCommand";
+import type { DeleteAuthPolicyCommandInput, DeleteAuthPolicyCommandOutput } from "./commands/DeleteAuthPolicyCommand";
+import type {
+  DeleteDomainVerificationCommandInput,
+  DeleteDomainVerificationCommandOutput,
+} from "./commands/DeleteDomainVerificationCommand";
+import type { DeleteListenerCommandInput, DeleteListenerCommandOutput } from "./commands/DeleteListenerCommand";
+import type {
+  DeleteResourceConfigurationCommandInput,
+  DeleteResourceConfigurationCommandOutput,
+} from "./commands/DeleteResourceConfigurationCommand";
+import type {
+  DeleteResourceEndpointAssociationCommandInput,
+  DeleteResourceEndpointAssociationCommandOutput,
+} from "./commands/DeleteResourceEndpointAssociationCommand";
+import type {
+  DeleteResourceGatewayCommandInput,
+  DeleteResourceGatewayCommandOutput,
+} from "./commands/DeleteResourceGatewayCommand";
+import type {
+  DeleteResourcePolicyCommandInput,
+  DeleteResourcePolicyCommandOutput,
+} from "./commands/DeleteResourcePolicyCommand";
+import type { DeleteRuleCommandInput, DeleteRuleCommandOutput } from "./commands/DeleteRuleCommand";
+import type { DeleteServiceCommandInput, DeleteServiceCommandOutput } from "./commands/DeleteServiceCommand";
+import type {
+  DeleteServiceNetworkCommandInput,
+  DeleteServiceNetworkCommandOutput,
+} from "./commands/DeleteServiceNetworkCommand";
+import type {
+  DeleteServiceNetworkResourceAssociationCommandInput,
+  DeleteServiceNetworkResourceAssociationCommandOutput,
+} from "./commands/DeleteServiceNetworkResourceAssociationCommand";
+import type {
+  DeleteServiceNetworkServiceAssociationCommandInput,
+  DeleteServiceNetworkServiceAssociationCommandOutput,
+} from "./commands/DeleteServiceNetworkServiceAssociationCommand";
+import type {
+  DeleteServiceNetworkVpcAssociationCommandInput,
+  DeleteServiceNetworkVpcAssociationCommandOutput,
+} from "./commands/DeleteServiceNetworkVpcAssociationCommand";
+import type {
+  DeleteTargetGroupCommandInput,
+  DeleteTargetGroupCommandOutput,
+} from "./commands/DeleteTargetGroupCommand";
+import type {
+  DeregisterTargetsCommandInput,
+  DeregisterTargetsCommandOutput,
+} from "./commands/DeregisterTargetsCommand";
+import type {
+  GetAccessLogSubscriptionCommandInput,
+  GetAccessLogSubscriptionCommandOutput,
+} from "./commands/GetAccessLogSubscriptionCommand";
+import type { GetAuthPolicyCommandInput, GetAuthPolicyCommandOutput } from "./commands/GetAuthPolicyCommand";
+import type {
+  GetDomainVerificationCommandInput,
+  GetDomainVerificationCommandOutput,
+} from "./commands/GetDomainVerificationCommand";
+import type { GetListenerCommandInput, GetListenerCommandOutput } from "./commands/GetListenerCommand";
+import type {
+  GetResourceConfigurationCommandInput,
+  GetResourceConfigurationCommandOutput,
+} from "./commands/GetResourceConfigurationCommand";
+import type {
+  GetResourceGatewayCommandInput,
+  GetResourceGatewayCommandOutput,
+} from "./commands/GetResourceGatewayCommand";
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type { GetRuleCommandInput, GetRuleCommandOutput } from "./commands/GetRuleCommand";
+import type { GetServiceCommandInput, GetServiceCommandOutput } from "./commands/GetServiceCommand";
+import type {
+  GetServiceNetworkCommandInput,
+  GetServiceNetworkCommandOutput,
+} from "./commands/GetServiceNetworkCommand";
+import type {
+  GetServiceNetworkResourceAssociationCommandInput,
+  GetServiceNetworkResourceAssociationCommandOutput,
+} from "./commands/GetServiceNetworkResourceAssociationCommand";
+import type {
+  GetServiceNetworkServiceAssociationCommandInput,
+  GetServiceNetworkServiceAssociationCommandOutput,
+} from "./commands/GetServiceNetworkServiceAssociationCommand";
+import type {
+  GetServiceNetworkVpcAssociationCommandInput,
+  GetServiceNetworkVpcAssociationCommandOutput,
+} from "./commands/GetServiceNetworkVpcAssociationCommand";
+import type { GetTargetGroupCommandInput, GetTargetGroupCommandOutput } from "./commands/GetTargetGroupCommand";
+import type {
+  ListAccessLogSubscriptionsCommandInput,
+  ListAccessLogSubscriptionsCommandOutput,
+} from "./commands/ListAccessLogSubscriptionsCommand";
+import type {
+  ListDomainVerificationsCommandInput,
+  ListDomainVerificationsCommandOutput,
+} from "./commands/ListDomainVerificationsCommand";
+import type { ListListenersCommandInput, ListListenersCommandOutput } from "./commands/ListListenersCommand";
+import type {
+  ListResourceConfigurationsCommandInput,
+  ListResourceConfigurationsCommandOutput,
+} from "./commands/ListResourceConfigurationsCommand";
+import type {
+  ListResourceEndpointAssociationsCommandInput,
+  ListResourceEndpointAssociationsCommandOutput,
+} from "./commands/ListResourceEndpointAssociationsCommand";
+import type {
+  ListResourceGatewaysCommandInput,
+  ListResourceGatewaysCommandOutput,
+} from "./commands/ListResourceGatewaysCommand";
+import type { ListRulesCommandInput, ListRulesCommandOutput } from "./commands/ListRulesCommand";
+import type {
+  ListServiceNetworkResourceAssociationsCommandInput,
+  ListServiceNetworkResourceAssociationsCommandOutput,
+} from "./commands/ListServiceNetworkResourceAssociationsCommand";
+import type {
+  ListServiceNetworksCommandInput,
+  ListServiceNetworksCommandOutput,
+} from "./commands/ListServiceNetworksCommand";
+import type {
+  ListServiceNetworkServiceAssociationsCommandInput,
+  ListServiceNetworkServiceAssociationsCommandOutput,
+} from "./commands/ListServiceNetworkServiceAssociationsCommand";
+import type {
+  ListServiceNetworkVpcAssociationsCommandInput,
+  ListServiceNetworkVpcAssociationsCommandOutput,
+} from "./commands/ListServiceNetworkVpcAssociationsCommand";
+import type {
+  ListServiceNetworkVpcEndpointAssociationsCommandInput,
+  ListServiceNetworkVpcEndpointAssociationsCommandOutput,
+} from "./commands/ListServiceNetworkVpcEndpointAssociationsCommand";
+import type { ListServicesCommandInput, ListServicesCommandOutput } from "./commands/ListServicesCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type { ListTargetGroupsCommandInput, ListTargetGroupsCommandOutput } from "./commands/ListTargetGroupsCommand";
+import type { ListTargetsCommandInput, ListTargetsCommandOutput } from "./commands/ListTargetsCommand";
+import type { PutAuthPolicyCommandInput, PutAuthPolicyCommandOutput } from "./commands/PutAuthPolicyCommand";
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type { RegisterTargetsCommandInput, RegisterTargetsCommandOutput } from "./commands/RegisterTargetsCommand";
+import type {
+  StartDomainVerificationCommandInput,
+  StartDomainVerificationCommandOutput,
+} from "./commands/StartDomainVerificationCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAccessLogSubscriptionCommandInput,
+  UpdateAccessLogSubscriptionCommandOutput,
+} from "./commands/UpdateAccessLogSubscriptionCommand";
+import type { UpdateListenerCommandInput, UpdateListenerCommandOutput } from "./commands/UpdateListenerCommand";
+import type {
+  UpdateResourceConfigurationCommandInput,
+  UpdateResourceConfigurationCommandOutput,
+} from "./commands/UpdateResourceConfigurationCommand";
+import type {
+  UpdateResourceGatewayCommandInput,
+  UpdateResourceGatewayCommandOutput,
+} from "./commands/UpdateResourceGatewayCommand";
+import type { UpdateRuleCommandInput, UpdateRuleCommandOutput } from "./commands/UpdateRuleCommand";
+import type { UpdateServiceCommandInput, UpdateServiceCommandOutput } from "./commands/UpdateServiceCommand";
+import type {
+  UpdateServiceNetworkCommandInput,
+  UpdateServiceNetworkCommandOutput,
+} from "./commands/UpdateServiceNetworkCommand";
+import type {
+  UpdateServiceNetworkVpcAssociationCommandInput,
+  UpdateServiceNetworkVpcAssociationCommandOutput,
+} from "./commands/UpdateServiceNetworkVpcAssociationCommand";
+import type {
+  UpdateTargetGroupCommandInput,
+  UpdateTargetGroupCommandOutput,
+} from "./commands/UpdateTargetGroupCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | BatchUpdateRuleCommandInput
+  | CreateAccessLogSubscriptionCommandInput
+  | CreateListenerCommandInput
+  | CreateResourceConfigurationCommandInput
+  | CreateResourceGatewayCommandInput
+  | CreateRuleCommandInput
+  | CreateServiceCommandInput
+  | CreateServiceNetworkCommandInput
+  | CreateServiceNetworkResourceAssociationCommandInput
+  | CreateServiceNetworkServiceAssociationCommandInput
+  | CreateServiceNetworkVpcAssociationCommandInput
+  | CreateTargetGroupCommandInput
+  | DeleteAccessLogSubscriptionCommandInput
+  | DeleteAuthPolicyCommandInput
+  | DeleteDomainVerificationCommandInput
+  | DeleteListenerCommandInput
+  | DeleteResourceConfigurationCommandInput
+  | DeleteResourceEndpointAssociationCommandInput
+  | DeleteResourceGatewayCommandInput
+  | DeleteResourcePolicyCommandInput
+  | DeleteRuleCommandInput
+  | DeleteServiceCommandInput
+  | DeleteServiceNetworkCommandInput
+  | DeleteServiceNetworkResourceAssociationCommandInput
+  | DeleteServiceNetworkServiceAssociationCommandInput
+  | DeleteServiceNetworkVpcAssociationCommandInput
+  | DeleteTargetGroupCommandInput
+  | DeregisterTargetsCommandInput
+  | GetAccessLogSubscriptionCommandInput
+  | GetAuthPolicyCommandInput
+  | GetDomainVerificationCommandInput
+  | GetListenerCommandInput
+  | GetResourceConfigurationCommandInput
+  | GetResourceGatewayCommandInput
+  | GetResourcePolicyCommandInput
+  | GetRuleCommandInput
+  | GetServiceCommandInput
+  | GetServiceNetworkCommandInput
+  | GetServiceNetworkResourceAssociationCommandInput
+  | GetServiceNetworkServiceAssociationCommandInput
+  | GetServiceNetworkVpcAssociationCommandInput
+  | GetTargetGroupCommandInput
+  | ListAccessLogSubscriptionsCommandInput
+  | ListDomainVerificationsCommandInput
+  | ListListenersCommandInput
+  | ListResourceConfigurationsCommandInput
+  | ListResourceEndpointAssociationsCommandInput
+  | ListResourceGatewaysCommandInput
+  | ListRulesCommandInput
+  | ListServiceNetworkResourceAssociationsCommandInput
+  | ListServiceNetworkServiceAssociationsCommandInput
+  | ListServiceNetworkVpcAssociationsCommandInput
+  | ListServiceNetworkVpcEndpointAssociationsCommandInput
+  | ListServiceNetworksCommandInput
+  | ListServicesCommandInput
+  | ListTagsForResourceCommandInput
+  | ListTargetGroupsCommandInput
+  | ListTargetsCommandInput
+  | PutAuthPolicyCommandInput
+  | PutResourcePolicyCommandInput
+  | RegisterTargetsCommandInput
+  | StartDomainVerificationCommandInput
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateAccessLogSubscriptionCommandInput
+  | UpdateListenerCommandInput
+  | UpdateResourceConfigurationCommandInput
+  | UpdateResourceGatewayCommandInput
+  | UpdateRuleCommandInput
+  | UpdateServiceCommandInput
+  | UpdateServiceNetworkCommandInput
+  | UpdateServiceNetworkVpcAssociationCommandInput
+  | UpdateTargetGroupCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | BatchUpdateRuleCommandOutput
+  | CreateAccessLogSubscriptionCommandOutput
+  | CreateListenerCommandOutput
+  | CreateResourceConfigurationCommandOutput
+  | CreateResourceGatewayCommandOutput
+  | CreateRuleCommandOutput
+  | CreateServiceCommandOutput
+  | CreateServiceNetworkCommandOutput
+  | CreateServiceNetworkResourceAssociationCommandOutput
+  | CreateServiceNetworkServiceAssociationCommandOutput
+  | CreateServiceNetworkVpcAssociationCommandOutput
+  | CreateTargetGroupCommandOutput
+  | DeleteAccessLogSubscriptionCommandOutput
+  | DeleteAuthPolicyCommandOutput
+  | DeleteDomainVerificationCommandOutput
+  | DeleteListenerCommandOutput
+  | DeleteResourceConfigurationCommandOutput
+  | DeleteResourceEndpointAssociationCommandOutput
+  | DeleteResourceGatewayCommandOutput
+  | DeleteResourcePolicyCommandOutput
+  | DeleteRuleCommandOutput
+  | DeleteServiceCommandOutput
+  | DeleteServiceNetworkCommandOutput
+  | DeleteServiceNetworkResourceAssociationCommandOutput
+  | DeleteServiceNetworkServiceAssociationCommandOutput
+  | DeleteServiceNetworkVpcAssociationCommandOutput
+  | DeleteTargetGroupCommandOutput
+  | DeregisterTargetsCommandOutput
+  | GetAccessLogSubscriptionCommandOutput
+  | GetAuthPolicyCommandOutput
+  | GetDomainVerificationCommandOutput
+  | GetListenerCommandOutput
+  | GetResourceConfigurationCommandOutput
+  | GetResourceGatewayCommandOutput
+  | GetResourcePolicyCommandOutput
+  | GetRuleCommandOutput
+  | GetServiceCommandOutput
+  | GetServiceNetworkCommandOutput
+  | GetServiceNetworkResourceAssociationCommandOutput
+  | GetServiceNetworkServiceAssociationCommandOutput
+  | GetServiceNetworkVpcAssociationCommandOutput
+  | GetTargetGroupCommandOutput
+  | ListAccessLogSubscriptionsCommandOutput
+  | ListDomainVerificationsCommandOutput
+  | ListListenersCommandOutput
+  | ListResourceConfigurationsCommandOutput
+  | ListResourceEndpointAssociationsCommandOutput
+  | ListResourceGatewaysCommandOutput
+  | ListRulesCommandOutput
+  | ListServiceNetworkResourceAssociationsCommandOutput
+  | ListServiceNetworkServiceAssociationsCommandOutput
+  | ListServiceNetworkVpcAssociationsCommandOutput
+  | ListServiceNetworkVpcEndpointAssociationsCommandOutput
+  | ListServiceNetworksCommandOutput
+  | ListServicesCommandOutput
+  | ListTagsForResourceCommandOutput
+  | ListTargetGroupsCommandOutput
+  | ListTargetsCommandOutput
+  | PutAuthPolicyCommandOutput
+  | PutResourcePolicyCommandOutput
+  | RegisterTargetsCommandOutput
+  | StartDomainVerificationCommandOutput
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateAccessLogSubscriptionCommandOutput
+  | UpdateListenerCommandOutput
+  | UpdateResourceConfigurationCommandOutput
+  | UpdateResourceGatewayCommandOutput
+  | UpdateRuleCommandOutput
+  | UpdateServiceCommandOutput
+  | UpdateServiceNetworkCommandOutput
+  | UpdateServiceNetworkVpcAssociationCommandOutput
+  | UpdateTargetGroupCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type VPCLatticeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of VPCLatticeClient class constructor that set the region, credentials and other options.
+ */
+export interface VPCLatticeClientConfig extends VPCLatticeClientConfigType {}
+
+/**
+ * @public
+ */
+export type VPCLatticeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of VPCLatticeClient class. This is resolved and normalized from the {@link VPCLatticeClientConfig | constructor configuration interface}.
+ */
+export interface VPCLatticeClientResolvedConfig extends VPCLatticeClientResolvedConfigType {}
+
+/**
+ * <p>Amazon VPC Lattice is a fully managed application networking service that you use to connect, secure, and monitor all of your services across multiple accounts and virtual private clouds (VPCs). Amazon VPC Lattice interconnects your microservices and legacy services within a logical boundary, so that you can discover and manage them more efficiently. For more information, see the <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/">Amazon VPC Lattice User Guide</a> </p>
+ * @public
+ */
+export class VPCLatticeClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  VPCLatticeClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of VPCLatticeClient class. This is resolved and normalized from the {@link VPCLatticeClientConfig | constructor configuration interface}.
+   */
+  readonly config: VPCLatticeClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<VPCLatticeClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultVPCLatticeHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: VPCLatticeClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

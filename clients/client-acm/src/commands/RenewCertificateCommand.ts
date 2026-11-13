@@ -1,99 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
-import { RenewCertificateRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1RenewCertificateCommand,
-  serializeAws_json1_1RenewCertificateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RenewCertificateRequest } from "../models/models_0";
+import { RenewCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RenewCertificateCommand}.
+ */
 export interface RenewCertificateCommandInput extends RenewCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RenewCertificateCommand}.
+ */
 export interface RenewCertificateCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Renews an eligible ACM certificate. At this time, only exported private certificates can
- *       be renewed with this operation. In order to renew your ACM PCA certificates with ACM, you must
- *       first <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html">grant the ACM
- *         service principal permission to do so</a>. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html">Testing Managed Renewal</a>
- *       in the ACM User Guide.</p>
+ * <p>Renews an <a href="https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html">eligible ACM certificate</a>. In order to renew your Amazon Web Services Private CA certificates with ACM, you must first <a href="https://docs.aws.amazon.com/privateca/latest/userguide/assign-permissions.html#PcaPermissions">grant the ACM service principal permission to do so</a>. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html">Testing Managed Renewal</a> in the ACM User Guide.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ACMClient, RenewCertificateCommand } from "@aws-sdk/client-acm"; // ES Modules import
  * // const { ACMClient, RenewCertificateCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * // import type { ACMClientConfig } from "@aws-sdk/client-acm";
+ * const config = {}; // type is ACMClientConfig
  * const client = new ACMClient(config);
+ * const input = { // RenewCertificateRequest
+ *   CertificateArn: "STRING_VALUE", // required
+ * };
  * const command = new RenewCertificateCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RenewCertificateCommandInput - {@link RenewCertificateCommandInput}
+ * @returns {@link RenewCertificateCommandOutput}
  * @see {@link RenewCertificateCommandInput} for command's `input` shape.
  * @see {@link RenewCertificateCommandOutput} for command's `response` shape.
- * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ACMClientResolvedConfig | config} for ACMClient's `config` shape.
  *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
+ *
+ * @throws {@link RequestInProgressException} (client fault)
+ *  <p>The certificate request is in process and the certificate in your account has not yet been issued.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified certificate cannot be found in the caller's account or the caller's account cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
+ *
+ * @throws {@link ACMServiceException}
+ * <p>Base exception class for all service exceptions from ACM service.</p>
+ *
+ *
+ * @public
  */
-export class RenewCertificateCommand extends $Command<
-  RenewCertificateCommandInput,
-  RenewCertificateCommandOutput,
-  ACMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RenewCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ACMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RenewCertificateCommandInput, RenewCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ACMClient";
-    const commandName = "RenewCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RenewCertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RenewCertificateCommand extends command<RenewCertificateCommandInput, RenewCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "RenewCertificate",
+  RenewCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RenewCertificateRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RenewCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RenewCertificateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RenewCertificateCommandOutput> {
-    return deserializeAws_json1_1RenewCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RenewCertificateCommandInput;
+      output: RenewCertificateCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import { UpdateClusterKafkaVersionRequest, UpdateClusterKafkaVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateClusterKafkaVersionCommand,
-  serializeAws_restJson1UpdateClusterKafkaVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateClusterKafkaVersionRequest, UpdateClusterKafkaVersionResponse } from "../models/models_0";
+import { UpdateClusterKafkaVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateClusterKafkaVersionCommand}.
+ */
 export interface UpdateClusterKafkaVersionCommandInput extends UpdateClusterKafkaVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateClusterKafkaVersionCommand}.
+ */
 export interface UpdateClusterKafkaVersionCommandOutput extends UpdateClusterKafkaVersionResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,75 @@ export interface UpdateClusterKafkaVersionCommandOutput extends UpdateClusterKaf
  * ```javascript
  * import { KafkaClient, UpdateClusterKafkaVersionCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, UpdateClusterKafkaVersionCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // UpdateClusterKafkaVersionRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   ConfigurationInfo: { // ConfigurationInfo
+ *     Arn: "STRING_VALUE", // required
+ *     Revision: Number("long"), // required
+ *   },
+ *   CurrentVersion: "STRING_VALUE", // required
+ *   TargetKafkaVersion: "STRING_VALUE", // required
+ * };
  * const command = new UpdateClusterKafkaVersionCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateClusterKafkaVersionResponse
+ * //   ClusterArn: "STRING_VALUE",
+ * //   ClusterOperationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateClusterKafkaVersionCommandInput - {@link UpdateClusterKafkaVersionCommandInput}
+ * @returns {@link UpdateClusterKafkaVersionCommandOutput}
  * @see {@link UpdateClusterKafkaVersionCommandInput} for command's `input` shape.
  * @see {@link UpdateClusterKafkaVersionCommandOutput} for command's `response` shape.
- * @see {@link KafkaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateClusterKafkaVersionCommand extends $Command<
-  UpdateClusterKafkaVersionCommandInput,
-  UpdateClusterKafkaVersionCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateClusterKafkaVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateClusterKafkaVersionCommandInput, UpdateClusterKafkaVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "UpdateClusterKafkaVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateClusterKafkaVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateClusterKafkaVersionResponse.filterSensitiveLog,
+export class UpdateClusterKafkaVersionCommand extends command<UpdateClusterKafkaVersionCommandInput, UpdateClusterKafkaVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateClusterKafkaVersion",
+  UpdateClusterKafkaVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateClusterKafkaVersionRequest;
+      output: UpdateClusterKafkaVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateClusterKafkaVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateClusterKafkaVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateClusterKafkaVersionCommandOutput> {
-    return deserializeAws_restJson1UpdateClusterKafkaVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateClusterKafkaVersionCommandInput;
+      output: UpdateClusterKafkaVersionCommandOutput;
+    };
+  };
 }

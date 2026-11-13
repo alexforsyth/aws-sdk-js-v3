@@ -1,1129 +1,1688 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchAssociateScramSecretCommandInput,
+  type BatchAssociateScramSecretCommandOutput,
   BatchAssociateScramSecretCommand,
-  BatchAssociateScramSecretCommandInput,
-  BatchAssociateScramSecretCommandOutput,
 } from "./commands/BatchAssociateScramSecretCommand";
 import {
+  type BatchDisassociateScramSecretCommandInput,
+  type BatchDisassociateScramSecretCommandOutput,
   BatchDisassociateScramSecretCommand,
-  BatchDisassociateScramSecretCommandInput,
-  BatchDisassociateScramSecretCommandOutput,
 } from "./commands/BatchDisassociateScramSecretCommand";
 import {
+  type CreateChannelCommandInput,
+  type CreateChannelCommandOutput,
+  CreateChannelCommand,
+} from "./commands/CreateChannelCommand";
+import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
   CreateClusterCommand,
-  CreateClusterCommandInput,
-  CreateClusterCommandOutput,
 } from "./commands/CreateClusterCommand";
 import {
+  type CreateClusterV2CommandInput,
+  type CreateClusterV2CommandOutput,
+  CreateClusterV2Command,
+} from "./commands/CreateClusterV2Command";
+import {
+  type CreateConfigurationCommandInput,
+  type CreateConfigurationCommandOutput,
   CreateConfigurationCommand,
-  CreateConfigurationCommandInput,
-  CreateConfigurationCommandOutput,
 } from "./commands/CreateConfigurationCommand";
 import {
+  type CreateReplicatorCommandInput,
+  type CreateReplicatorCommandOutput,
+  CreateReplicatorCommand,
+} from "./commands/CreateReplicatorCommand";
+import {
+  type CreateTopicCommandInput,
+  type CreateTopicCommandOutput,
+  CreateTopicCommand,
+} from "./commands/CreateTopicCommand";
+import {
+  type CreateVpcConnectionCommandInput,
+  type CreateVpcConnectionCommandOutput,
+  CreateVpcConnectionCommand,
+} from "./commands/CreateVpcConnectionCommand";
+import {
+  type DeleteChannelCommandInput,
+  type DeleteChannelCommandOutput,
+  DeleteChannelCommand,
+} from "./commands/DeleteChannelCommand";
+import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
   DeleteClusterCommand,
-  DeleteClusterCommandInput,
-  DeleteClusterCommandOutput,
 } from "./commands/DeleteClusterCommand";
 import {
+  type DeleteClusterPolicyCommandInput,
+  type DeleteClusterPolicyCommandOutput,
+  DeleteClusterPolicyCommand,
+} from "./commands/DeleteClusterPolicyCommand";
+import {
+  type DeleteConfigurationCommandInput,
+  type DeleteConfigurationCommandOutput,
   DeleteConfigurationCommand,
-  DeleteConfigurationCommandInput,
-  DeleteConfigurationCommandOutput,
 } from "./commands/DeleteConfigurationCommand";
 import {
+  type DeleteReplicatorCommandInput,
+  type DeleteReplicatorCommandOutput,
+  DeleteReplicatorCommand,
+} from "./commands/DeleteReplicatorCommand";
+import {
+  type DeleteTopicCommandInput,
+  type DeleteTopicCommandOutput,
+  DeleteTopicCommand,
+} from "./commands/DeleteTopicCommand";
+import {
+  type DeleteVpcConnectionCommandInput,
+  type DeleteVpcConnectionCommandOutput,
+  DeleteVpcConnectionCommand,
+} from "./commands/DeleteVpcConnectionCommand";
+import {
+  type DescribeChannelCommandInput,
+  type DescribeChannelCommandOutput,
+  DescribeChannelCommand,
+} from "./commands/DescribeChannelCommand";
+import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
   DescribeClusterCommand,
-  DescribeClusterCommandInput,
-  DescribeClusterCommandOutput,
 } from "./commands/DescribeClusterCommand";
 import {
+  type DescribeClusterOperationCommandInput,
+  type DescribeClusterOperationCommandOutput,
   DescribeClusterOperationCommand,
-  DescribeClusterOperationCommandInput,
-  DescribeClusterOperationCommandOutput,
 } from "./commands/DescribeClusterOperationCommand";
 import {
+  type DescribeClusterOperationV2CommandInput,
+  type DescribeClusterOperationV2CommandOutput,
+  DescribeClusterOperationV2Command,
+} from "./commands/DescribeClusterOperationV2Command";
+import {
+  type DescribeClusterV2CommandInput,
+  type DescribeClusterV2CommandOutput,
+  DescribeClusterV2Command,
+} from "./commands/DescribeClusterV2Command";
+import {
+  type DescribeConfigurationCommandInput,
+  type DescribeConfigurationCommandOutput,
   DescribeConfigurationCommand,
-  DescribeConfigurationCommandInput,
-  DescribeConfigurationCommandOutput,
 } from "./commands/DescribeConfigurationCommand";
 import {
+  type DescribeConfigurationRevisionCommandInput,
+  type DescribeConfigurationRevisionCommandOutput,
   DescribeConfigurationRevisionCommand,
-  DescribeConfigurationRevisionCommandInput,
-  DescribeConfigurationRevisionCommandOutput,
 } from "./commands/DescribeConfigurationRevisionCommand";
 import {
+  type DescribeReplicatorCommandInput,
+  type DescribeReplicatorCommandOutput,
+  DescribeReplicatorCommand,
+} from "./commands/DescribeReplicatorCommand";
+import {
+  type DescribeTopicCommandInput,
+  type DescribeTopicCommandOutput,
+  DescribeTopicCommand,
+} from "./commands/DescribeTopicCommand";
+import {
+  type DescribeTopicPartitionsCommandInput,
+  type DescribeTopicPartitionsCommandOutput,
+  DescribeTopicPartitionsCommand,
+} from "./commands/DescribeTopicPartitionsCommand";
+import {
+  type DescribeVpcConnectionCommandInput,
+  type DescribeVpcConnectionCommandOutput,
+  DescribeVpcConnectionCommand,
+} from "./commands/DescribeVpcConnectionCommand";
+import {
+  type GetBootstrapBrokersCommandInput,
+  type GetBootstrapBrokersCommandOutput,
   GetBootstrapBrokersCommand,
-  GetBootstrapBrokersCommandInput,
-  GetBootstrapBrokersCommandOutput,
 } from "./commands/GetBootstrapBrokersCommand";
 import {
+  type GetClusterPolicyCommandInput,
+  type GetClusterPolicyCommandOutput,
+  GetClusterPolicyCommand,
+} from "./commands/GetClusterPolicyCommand";
+import {
+  type GetCompatibleKafkaVersionsCommandInput,
+  type GetCompatibleKafkaVersionsCommandOutput,
   GetCompatibleKafkaVersionsCommand,
-  GetCompatibleKafkaVersionsCommandInput,
-  GetCompatibleKafkaVersionsCommandOutput,
 } from "./commands/GetCompatibleKafkaVersionsCommand";
 import {
+  type ListChannelsCommandInput,
+  type ListChannelsCommandOutput,
+  ListChannelsCommand,
+} from "./commands/ListChannelsCommand";
+import {
+  type ListClientVpcConnectionsCommandInput,
+  type ListClientVpcConnectionsCommandOutput,
+  ListClientVpcConnectionsCommand,
+} from "./commands/ListClientVpcConnectionsCommand";
+import {
+  type ListClusterOperationsCommandInput,
+  type ListClusterOperationsCommandOutput,
   ListClusterOperationsCommand,
-  ListClusterOperationsCommandInput,
-  ListClusterOperationsCommandOutput,
 } from "./commands/ListClusterOperationsCommand";
 import {
+  type ListClusterOperationsV2CommandInput,
+  type ListClusterOperationsV2CommandOutput,
+  ListClusterOperationsV2Command,
+} from "./commands/ListClusterOperationsV2Command";
+import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
   ListClustersCommand,
-  ListClustersCommandInput,
-  ListClustersCommandOutput,
 } from "./commands/ListClustersCommand";
 import {
+  type ListClustersV2CommandInput,
+  type ListClustersV2CommandOutput,
+  ListClustersV2Command,
+} from "./commands/ListClustersV2Command";
+import {
+  type ListConfigurationRevisionsCommandInput,
+  type ListConfigurationRevisionsCommandOutput,
   ListConfigurationRevisionsCommand,
-  ListConfigurationRevisionsCommandInput,
-  ListConfigurationRevisionsCommandOutput,
 } from "./commands/ListConfigurationRevisionsCommand";
 import {
+  type ListConfigurationsCommandInput,
+  type ListConfigurationsCommandOutput,
   ListConfigurationsCommand,
-  ListConfigurationsCommandInput,
-  ListConfigurationsCommandOutput,
 } from "./commands/ListConfigurationsCommand";
 import {
+  type ListKafkaVersionsCommandInput,
+  type ListKafkaVersionsCommandOutput,
   ListKafkaVersionsCommand,
-  ListKafkaVersionsCommandInput,
-  ListKafkaVersionsCommandOutput,
 } from "./commands/ListKafkaVersionsCommand";
-import { ListNodesCommand, ListNodesCommandInput, ListNodesCommandOutput } from "./commands/ListNodesCommand";
+import { type ListNodesCommandInput, type ListNodesCommandOutput, ListNodesCommand } from "./commands/ListNodesCommand";
 import {
+  type ListReplicatorsCommandInput,
+  type ListReplicatorsCommandOutput,
+  ListReplicatorsCommand,
+} from "./commands/ListReplicatorsCommand";
+import {
+  type ListScramSecretsCommandInput,
+  type ListScramSecretsCommandOutput,
   ListScramSecretsCommand,
-  ListScramSecretsCommandInput,
-  ListScramSecretsCommandOutput,
 } from "./commands/ListScramSecretsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
-  RebootBrokerCommand,
-  RebootBrokerCommandInput,
-  RebootBrokerCommandOutput,
-} from "./commands/RebootBrokerCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type ListTopicsCommandInput,
+  type ListTopicsCommandOutput,
+  ListTopicsCommand,
+} from "./commands/ListTopicsCommand";
 import {
+  type ListVpcConnectionsCommandInput,
+  type ListVpcConnectionsCommandOutput,
+  ListVpcConnectionsCommand,
+} from "./commands/ListVpcConnectionsCommand";
+import {
+  type PutClusterPolicyCommandInput,
+  type PutClusterPolicyCommandOutput,
+  PutClusterPolicyCommand,
+} from "./commands/PutClusterPolicyCommand";
+import {
+  type RebootBrokerCommandInput,
+  type RebootBrokerCommandOutput,
+  RebootBrokerCommand,
+} from "./commands/RebootBrokerCommand";
+import {
+  type RejectClientVpcConnectionCommandInput,
+  type RejectClientVpcConnectionCommandOutput,
+  RejectClientVpcConnectionCommand,
+} from "./commands/RejectClientVpcConnectionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateBrokerCountCommandInput,
+  type UpdateBrokerCountCommandOutput,
   UpdateBrokerCountCommand,
-  UpdateBrokerCountCommandInput,
-  UpdateBrokerCountCommandOutput,
 } from "./commands/UpdateBrokerCountCommand";
 import {
+  type UpdateBrokerStorageCommandInput,
+  type UpdateBrokerStorageCommandOutput,
   UpdateBrokerStorageCommand,
-  UpdateBrokerStorageCommandInput,
-  UpdateBrokerStorageCommandOutput,
 } from "./commands/UpdateBrokerStorageCommand";
 import {
+  type UpdateBrokerTypeCommandInput,
+  type UpdateBrokerTypeCommandOutput,
   UpdateBrokerTypeCommand,
-  UpdateBrokerTypeCommandInput,
-  UpdateBrokerTypeCommandOutput,
 } from "./commands/UpdateBrokerTypeCommand";
 import {
+  type UpdateChannelCommandInput,
+  type UpdateChannelCommandOutput,
+  UpdateChannelCommand,
+} from "./commands/UpdateChannelCommand";
+import {
+  type UpdateClusterConfigurationCommandInput,
+  type UpdateClusterConfigurationCommandOutput,
   UpdateClusterConfigurationCommand,
-  UpdateClusterConfigurationCommandInput,
-  UpdateClusterConfigurationCommandOutput,
 } from "./commands/UpdateClusterConfigurationCommand";
 import {
+  type UpdateClusterKafkaVersionCommandInput,
+  type UpdateClusterKafkaVersionCommandOutput,
   UpdateClusterKafkaVersionCommand,
-  UpdateClusterKafkaVersionCommandInput,
-  UpdateClusterKafkaVersionCommandOutput,
 } from "./commands/UpdateClusterKafkaVersionCommand";
 import {
+  type UpdateConfigurationCommandInput,
+  type UpdateConfigurationCommandOutput,
   UpdateConfigurationCommand,
-  UpdateConfigurationCommandInput,
-  UpdateConfigurationCommandOutput,
 } from "./commands/UpdateConfigurationCommand";
 import {
+  type UpdateConnectivityCommandInput,
+  type UpdateConnectivityCommandOutput,
+  UpdateConnectivityCommand,
+} from "./commands/UpdateConnectivityCommand";
+import {
+  type UpdateMonitoringCommandInput,
+  type UpdateMonitoringCommandOutput,
   UpdateMonitoringCommand,
-  UpdateMonitoringCommandInput,
-  UpdateMonitoringCommandOutput,
 } from "./commands/UpdateMonitoringCommand";
 import {
+  type UpdateRebalancingCommandInput,
+  type UpdateRebalancingCommandOutput,
+  UpdateRebalancingCommand,
+} from "./commands/UpdateRebalancingCommand";
+import {
+  type UpdateReplicationInfoCommandInput,
+  type UpdateReplicationInfoCommandOutput,
+  UpdateReplicationInfoCommand,
+} from "./commands/UpdateReplicationInfoCommand";
+import {
+  type UpdateSecurityCommandInput,
+  type UpdateSecurityCommandOutput,
   UpdateSecurityCommand,
-  UpdateSecurityCommandInput,
-  UpdateSecurityCommandOutput,
 } from "./commands/UpdateSecurityCommand";
+import {
+  type UpdateStorageCommandInput,
+  type UpdateStorageCommandOutput,
+  UpdateStorageCommand,
+} from "./commands/UpdateStorageCommand";
+import {
+  type UpdateTopicCommandInput,
+  type UpdateTopicCommandOutput,
+  UpdateTopicCommand,
+} from "./commands/UpdateTopicCommand";
 import { KafkaClient } from "./KafkaClient";
+import { paginateDescribeTopicPartitions } from "./pagination/DescribeTopicPartitionsPaginator";
+import { paginateListClientVpcConnections } from "./pagination/ListClientVpcConnectionsPaginator";
+import { paginateListClusterOperations } from "./pagination/ListClusterOperationsPaginator";
+import { paginateListClusterOperationsV2 } from "./pagination/ListClusterOperationsV2Paginator";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListClustersV2 } from "./pagination/ListClustersV2Paginator";
+import { paginateListConfigurationRevisions } from "./pagination/ListConfigurationRevisionsPaginator";
+import { paginateListConfigurations } from "./pagination/ListConfigurationsPaginator";
+import { paginateListKafkaVersions } from "./pagination/ListKafkaVersionsPaginator";
+import { paginateListNodes } from "./pagination/ListNodesPaginator";
+import { paginateListReplicators } from "./pagination/ListReplicatorsPaginator";
+import { paginateListScramSecrets } from "./pagination/ListScramSecretsPaginator";
+import { paginateListTopics } from "./pagination/ListTopicsPaginator";
+import { paginateListVpcConnections } from "./pagination/ListVpcConnectionsPaginator";
+
+const commands = {
+  BatchAssociateScramSecretCommand,
+  BatchDisassociateScramSecretCommand,
+  CreateChannelCommand,
+  CreateClusterCommand,
+  CreateClusterV2Command,
+  CreateConfigurationCommand,
+  CreateReplicatorCommand,
+  CreateTopicCommand,
+  CreateVpcConnectionCommand,
+  DeleteChannelCommand,
+  DeleteClusterCommand,
+  DeleteClusterPolicyCommand,
+  DeleteConfigurationCommand,
+  DeleteReplicatorCommand,
+  DeleteTopicCommand,
+  DeleteVpcConnectionCommand,
+  DescribeChannelCommand,
+  DescribeClusterCommand,
+  DescribeClusterOperationCommand,
+  DescribeClusterOperationV2Command,
+  DescribeClusterV2Command,
+  DescribeConfigurationCommand,
+  DescribeConfigurationRevisionCommand,
+  DescribeReplicatorCommand,
+  DescribeTopicCommand,
+  DescribeTopicPartitionsCommand,
+  DescribeVpcConnectionCommand,
+  GetBootstrapBrokersCommand,
+  GetClusterPolicyCommand,
+  GetCompatibleKafkaVersionsCommand,
+  ListChannelsCommand,
+  ListClientVpcConnectionsCommand,
+  ListClusterOperationsCommand,
+  ListClusterOperationsV2Command,
+  ListClustersCommand,
+  ListClustersV2Command,
+  ListConfigurationRevisionsCommand,
+  ListConfigurationsCommand,
+  ListKafkaVersionsCommand,
+  ListNodesCommand,
+  ListReplicatorsCommand,
+  ListScramSecretsCommand,
+  ListTagsForResourceCommand,
+  ListTopicsCommand,
+  ListVpcConnectionsCommand,
+  PutClusterPolicyCommand,
+  RebootBrokerCommand,
+  RejectClientVpcConnectionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateBrokerCountCommand,
+  UpdateBrokerStorageCommand,
+  UpdateBrokerTypeCommand,
+  UpdateChannelCommand,
+  UpdateClusterConfigurationCommand,
+  UpdateClusterKafkaVersionCommand,
+  UpdateConfigurationCommand,
+  UpdateConnectivityCommand,
+  UpdateMonitoringCommand,
+  UpdateRebalancingCommand,
+  UpdateReplicationInfoCommand,
+  UpdateSecurityCommand,
+  UpdateStorageCommand,
+  UpdateTopicCommand,
+};
+const paginators = {
+  paginateDescribeTopicPartitions,
+  paginateListClientVpcConnections,
+  paginateListClusterOperations,
+  paginateListClusterOperationsV2,
+  paginateListClusters,
+  paginateListClustersV2,
+  paginateListConfigurationRevisions,
+  paginateListConfigurations,
+  paginateListKafkaVersions,
+  paginateListNodes,
+  paginateListReplicators,
+  paginateListScramSecrets,
+  paginateListTopics,
+  paginateListVpcConnections,
+};
+
+/**
+ * @public
+ */
+export interface KafkaRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Kafka {
+  /**
+   * @see {@link BatchAssociateScramSecretCommand}
+   */
+  batchAssociateScramSecret(
+    args: BatchAssociateScramSecretCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<BatchAssociateScramSecretCommandOutput>;
+  batchAssociateScramSecret(
+    args: BatchAssociateScramSecretCommandInput,
+    cb: (err: any, data?: BatchAssociateScramSecretCommandOutput) => void
+  ): void;
+  batchAssociateScramSecret(
+    args: BatchAssociateScramSecretCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: BatchAssociateScramSecretCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDisassociateScramSecretCommand}
+   */
+  batchDisassociateScramSecret(
+    args: BatchDisassociateScramSecretCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<BatchDisassociateScramSecretCommandOutput>;
+  batchDisassociateScramSecret(
+    args: BatchDisassociateScramSecretCommandInput,
+    cb: (err: any, data?: BatchDisassociateScramSecretCommandOutput) => void
+  ): void;
+  batchDisassociateScramSecret(
+    args: BatchDisassociateScramSecretCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: BatchDisassociateScramSecretCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateChannelCommand}
+   */
+  createChannel(
+    args: CreateChannelCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateChannelCommandOutput>;
+  createChannel(
+    args: CreateChannelCommandInput,
+    cb: (err: any, data?: CreateChannelCommandOutput) => void
+  ): void;
+  createChannel(
+    args: CreateChannelCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateClusterV2Command}
+   */
+  createClusterV2(
+    args: CreateClusterV2CommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateClusterV2CommandOutput>;
+  createClusterV2(
+    args: CreateClusterV2CommandInput,
+    cb: (err: any, data?: CreateClusterV2CommandOutput) => void
+  ): void;
+  createClusterV2(
+    args: CreateClusterV2CommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateClusterV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfigurationCommand}
+   */
+  createConfiguration(
+    args: CreateConfigurationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateConfigurationCommandOutput>;
+  createConfiguration(
+    args: CreateConfigurationCommandInput,
+    cb: (err: any, data?: CreateConfigurationCommandOutput) => void
+  ): void;
+  createConfiguration(
+    args: CreateConfigurationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicatorCommand}
+   */
+  createReplicator(
+    args: CreateReplicatorCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateReplicatorCommandOutput>;
+  createReplicator(
+    args: CreateReplicatorCommandInput,
+    cb: (err: any, data?: CreateReplicatorCommandOutput) => void
+  ): void;
+  createReplicator(
+    args: CreateReplicatorCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateReplicatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTopicCommand}
+   */
+  createTopic(
+    args: CreateTopicCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateTopicCommandOutput>;
+  createTopic(
+    args: CreateTopicCommandInput,
+    cb: (err: any, data?: CreateTopicCommandOutput) => void
+  ): void;
+  createTopic(
+    args: CreateTopicCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVpcConnectionCommand}
+   */
+  createVpcConnection(
+    args: CreateVpcConnectionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<CreateVpcConnectionCommandOutput>;
+  createVpcConnection(
+    args: CreateVpcConnectionCommandInput,
+    cb: (err: any, data?: CreateVpcConnectionCommandOutput) => void
+  ): void;
+  createVpcConnection(
+    args: CreateVpcConnectionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: CreateVpcConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteChannelCommand}
+   */
+  deleteChannel(
+    args: DeleteChannelCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteChannelCommandOutput>;
+  deleteChannel(
+    args: DeleteChannelCommandInput,
+    cb: (err: any, data?: DeleteChannelCommandOutput) => void
+  ): void;
+  deleteChannel(
+    args: DeleteChannelCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterPolicyCommand}
+   */
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteClusterPolicyCommandOutput>;
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    cb: (err: any, data?: DeleteClusterPolicyCommandOutput) => void
+  ): void;
+  deleteClusterPolicy(
+    args: DeleteClusterPolicyCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfigurationCommand}
+   */
+  deleteConfiguration(
+    args: DeleteConfigurationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteConfigurationCommandOutput>;
+  deleteConfiguration(
+    args: DeleteConfigurationCommandInput,
+    cb: (err: any, data?: DeleteConfigurationCommandOutput) => void
+  ): void;
+  deleteConfiguration(
+    args: DeleteConfigurationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicatorCommand}
+   */
+  deleteReplicator(
+    args: DeleteReplicatorCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteReplicatorCommandOutput>;
+  deleteReplicator(
+    args: DeleteReplicatorCommandInput,
+    cb: (err: any, data?: DeleteReplicatorCommandOutput) => void
+  ): void;
+  deleteReplicator(
+    args: DeleteReplicatorCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteReplicatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTopicCommand}
+   */
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteTopicCommandOutput>;
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    cb: (err: any, data?: DeleteTopicCommandOutput) => void
+  ): void;
+  deleteTopic(
+    args: DeleteTopicCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVpcConnectionCommand}
+   */
+  deleteVpcConnection(
+    args: DeleteVpcConnectionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DeleteVpcConnectionCommandOutput>;
+  deleteVpcConnection(
+    args: DeleteVpcConnectionCommandInput,
+    cb: (err: any, data?: DeleteVpcConnectionCommandOutput) => void
+  ): void;
+  deleteVpcConnection(
+    args: DeleteVpcConnectionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DeleteVpcConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeChannelCommand}
+   */
+  describeChannel(
+    args: DescribeChannelCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeChannelCommandOutput>;
+  describeChannel(
+    args: DescribeChannelCommandInput,
+    cb: (err: any, data?: DescribeChannelCommandOutput) => void
+  ): void;
+  describeChannel(
+    args: DescribeChannelCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterCommand}
+   */
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeClusterCommandOutput>;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+  describeCluster(
+    args: DescribeClusterCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterOperationCommand}
+   */
+  describeClusterOperation(
+    args: DescribeClusterOperationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeClusterOperationCommandOutput>;
+  describeClusterOperation(
+    args: DescribeClusterOperationCommandInput,
+    cb: (err: any, data?: DescribeClusterOperationCommandOutput) => void
+  ): void;
+  describeClusterOperation(
+    args: DescribeClusterOperationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeClusterOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterOperationV2Command}
+   */
+  describeClusterOperationV2(
+    args: DescribeClusterOperationV2CommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeClusterOperationV2CommandOutput>;
+  describeClusterOperationV2(
+    args: DescribeClusterOperationV2CommandInput,
+    cb: (err: any, data?: DescribeClusterOperationV2CommandOutput) => void
+  ): void;
+  describeClusterOperationV2(
+    args: DescribeClusterOperationV2CommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeClusterOperationV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeClusterV2Command}
+   */
+  describeClusterV2(
+    args: DescribeClusterV2CommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeClusterV2CommandOutput>;
+  describeClusterV2(
+    args: DescribeClusterV2CommandInput,
+    cb: (err: any, data?: DescribeClusterV2CommandOutput) => void
+  ): void;
+  describeClusterV2(
+    args: DescribeClusterV2CommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeClusterV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConfigurationCommand}
+   */
+  describeConfiguration(
+    args: DescribeConfigurationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeConfigurationCommandOutput>;
+  describeConfiguration(
+    args: DescribeConfigurationCommandInput,
+    cb: (err: any, data?: DescribeConfigurationCommandOutput) => void
+  ): void;
+  describeConfiguration(
+    args: DescribeConfigurationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConfigurationRevisionCommand}
+   */
+  describeConfigurationRevision(
+    args: DescribeConfigurationRevisionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeConfigurationRevisionCommandOutput>;
+  describeConfigurationRevision(
+    args: DescribeConfigurationRevisionCommandInput,
+    cb: (err: any, data?: DescribeConfigurationRevisionCommandOutput) => void
+  ): void;
+  describeConfigurationRevision(
+    args: DescribeConfigurationRevisionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeConfigurationRevisionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicatorCommand}
+   */
+  describeReplicator(
+    args: DescribeReplicatorCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeReplicatorCommandOutput>;
+  describeReplicator(
+    args: DescribeReplicatorCommandInput,
+    cb: (err: any, data?: DescribeReplicatorCommandOutput) => void
+  ): void;
+  describeReplicator(
+    args: DescribeReplicatorCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeReplicatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicCommand}
+   */
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeTopicCommandOutput>;
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    cb: (err: any, data?: DescribeTopicCommandOutput) => void
+  ): void;
+  describeTopic(
+    args: DescribeTopicCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicPartitionsCommand}
+   */
+  describeTopicPartitions(
+    args: DescribeTopicPartitionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeTopicPartitionsCommandOutput>;
+  describeTopicPartitions(
+    args: DescribeTopicPartitionsCommandInput,
+    cb: (err: any, data?: DescribeTopicPartitionsCommandOutput) => void
+  ): void;
+  describeTopicPartitions(
+    args: DescribeTopicPartitionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeTopicPartitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeVpcConnectionCommand}
+   */
+  describeVpcConnection(
+    args: DescribeVpcConnectionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<DescribeVpcConnectionCommandOutput>;
+  describeVpcConnection(
+    args: DescribeVpcConnectionCommandInput,
+    cb: (err: any, data?: DescribeVpcConnectionCommandOutput) => void
+  ): void;
+  describeVpcConnection(
+    args: DescribeVpcConnectionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: DescribeVpcConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBootstrapBrokersCommand}
+   */
+  getBootstrapBrokers(
+    args: GetBootstrapBrokersCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<GetBootstrapBrokersCommandOutput>;
+  getBootstrapBrokers(
+    args: GetBootstrapBrokersCommandInput,
+    cb: (err: any, data?: GetBootstrapBrokersCommandOutput) => void
+  ): void;
+  getBootstrapBrokers(
+    args: GetBootstrapBrokersCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: GetBootstrapBrokersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterPolicyCommand}
+   */
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<GetClusterPolicyCommandOutput>;
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    cb: (err: any, data?: GetClusterPolicyCommandOutput) => void
+  ): void;
+  getClusterPolicy(
+    args: GetClusterPolicyCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: GetClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCompatibleKafkaVersionsCommand}
+   */
+  getCompatibleKafkaVersions(): Promise<GetCompatibleKafkaVersionsCommandOutput>;
+  getCompatibleKafkaVersions(
+    args: GetCompatibleKafkaVersionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<GetCompatibleKafkaVersionsCommandOutput>;
+  getCompatibleKafkaVersions(
+    args: GetCompatibleKafkaVersionsCommandInput,
+    cb: (err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void
+  ): void;
+  getCompatibleKafkaVersions(
+    args: GetCompatibleKafkaVersionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChannelsCommand}
+   */
+  listChannels(
+    args: ListChannelsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListChannelsCommandOutput>;
+  listChannels(
+    args: ListChannelsCommandInput,
+    cb: (err: any, data?: ListChannelsCommandOutput) => void
+  ): void;
+  listChannels(
+    args: ListChannelsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListChannelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClientVpcConnectionsCommand}
+   */
+  listClientVpcConnections(
+    args: ListClientVpcConnectionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListClientVpcConnectionsCommandOutput>;
+  listClientVpcConnections(
+    args: ListClientVpcConnectionsCommandInput,
+    cb: (err: any, data?: ListClientVpcConnectionsCommandOutput) => void
+  ): void;
+  listClientVpcConnections(
+    args: ListClientVpcConnectionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListClientVpcConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClusterOperationsCommand}
+   */
+  listClusterOperations(
+    args: ListClusterOperationsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListClusterOperationsCommandOutput>;
+  listClusterOperations(
+    args: ListClusterOperationsCommandInput,
+    cb: (err: any, data?: ListClusterOperationsCommandOutput) => void
+  ): void;
+  listClusterOperations(
+    args: ListClusterOperationsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListClusterOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClusterOperationsV2Command}
+   */
+  listClusterOperationsV2(
+    args: ListClusterOperationsV2CommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListClusterOperationsV2CommandOutput>;
+  listClusterOperationsV2(
+    args: ListClusterOperationsV2CommandInput,
+    cb: (err: any, data?: ListClusterOperationsV2CommandOutput) => void
+  ): void;
+  listClusterOperationsV2(
+    args: ListClusterOperationsV2CommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListClusterOperationsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersV2Command}
+   */
+  listClustersV2(): Promise<ListClustersV2CommandOutput>;
+  listClustersV2(
+    args: ListClustersV2CommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListClustersV2CommandOutput>;
+  listClustersV2(
+    args: ListClustersV2CommandInput,
+    cb: (err: any, data?: ListClustersV2CommandOutput) => void
+  ): void;
+  listClustersV2(
+    args: ListClustersV2CommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListClustersV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfigurationRevisionsCommand}
+   */
+  listConfigurationRevisions(
+    args: ListConfigurationRevisionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListConfigurationRevisionsCommandOutput>;
+  listConfigurationRevisions(
+    args: ListConfigurationRevisionsCommandInput,
+    cb: (err: any, data?: ListConfigurationRevisionsCommandOutput) => void
+  ): void;
+  listConfigurationRevisions(
+    args: ListConfigurationRevisionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListConfigurationRevisionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfigurationsCommand}
+   */
+  listConfigurations(): Promise<ListConfigurationsCommandOutput>;
+  listConfigurations(
+    args: ListConfigurationsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListConfigurationsCommandOutput>;
+  listConfigurations(
+    args: ListConfigurationsCommandInput,
+    cb: (err: any, data?: ListConfigurationsCommandOutput) => void
+  ): void;
+  listConfigurations(
+    args: ListConfigurationsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKafkaVersionsCommand}
+   */
+  listKafkaVersions(): Promise<ListKafkaVersionsCommandOutput>;
+  listKafkaVersions(
+    args: ListKafkaVersionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListKafkaVersionsCommandOutput>;
+  listKafkaVersions(
+    args: ListKafkaVersionsCommandInput,
+    cb: (err: any, data?: ListKafkaVersionsCommandOutput) => void
+  ): void;
+  listKafkaVersions(
+    args: ListKafkaVersionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListKafkaVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNodesCommand}
+   */
+  listNodes(
+    args: ListNodesCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListNodesCommandOutput>;
+  listNodes(
+    args: ListNodesCommandInput,
+    cb: (err: any, data?: ListNodesCommandOutput) => void
+  ): void;
+  listNodes(
+    args: ListNodesCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListNodesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReplicatorsCommand}
+   */
+  listReplicators(): Promise<ListReplicatorsCommandOutput>;
+  listReplicators(
+    args: ListReplicatorsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListReplicatorsCommandOutput>;
+  listReplicators(
+    args: ListReplicatorsCommandInput,
+    cb: (err: any, data?: ListReplicatorsCommandOutput) => void
+  ): void;
+  listReplicators(
+    args: ListReplicatorsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListReplicatorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScramSecretsCommand}
+   */
+  listScramSecrets(
+    args: ListScramSecretsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListScramSecretsCommandOutput>;
+  listScramSecrets(
+    args: ListScramSecretsCommandInput,
+    cb: (err: any, data?: ListScramSecretsCommandOutput) => void
+  ): void;
+  listScramSecrets(
+    args: ListScramSecretsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListScramSecretsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTopicsCommand}
+   */
+  listTopics(
+    args: ListTopicsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListTopicsCommandOutput>;
+  listTopics(
+    args: ListTopicsCommandInput,
+    cb: (err: any, data?: ListTopicsCommandOutput) => void
+  ): void;
+  listTopics(
+    args: ListTopicsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListTopicsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVpcConnectionsCommand}
+   */
+  listVpcConnections(): Promise<ListVpcConnectionsCommandOutput>;
+  listVpcConnections(
+    args: ListVpcConnectionsCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<ListVpcConnectionsCommandOutput>;
+  listVpcConnections(
+    args: ListVpcConnectionsCommandInput,
+    cb: (err: any, data?: ListVpcConnectionsCommandOutput) => void
+  ): void;
+  listVpcConnections(
+    args: ListVpcConnectionsCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: ListVpcConnectionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutClusterPolicyCommand}
+   */
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<PutClusterPolicyCommandOutput>;
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    cb: (err: any, data?: PutClusterPolicyCommandOutput) => void
+  ): void;
+  putClusterPolicy(
+    args: PutClusterPolicyCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: PutClusterPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RebootBrokerCommand}
+   */
+  rebootBroker(
+    args: RebootBrokerCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<RebootBrokerCommandOutput>;
+  rebootBroker(
+    args: RebootBrokerCommandInput,
+    cb: (err: any, data?: RebootBrokerCommandOutput) => void
+  ): void;
+  rebootBroker(
+    args: RebootBrokerCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: RebootBrokerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RejectClientVpcConnectionCommand}
+   */
+  rejectClientVpcConnection(
+    args: RejectClientVpcConnectionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<RejectClientVpcConnectionCommandOutput>;
+  rejectClientVpcConnection(
+    args: RejectClientVpcConnectionCommandInput,
+    cb: (err: any, data?: RejectClientVpcConnectionCommandOutput) => void
+  ): void;
+  rejectClientVpcConnection(
+    args: RejectClientVpcConnectionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: RejectClientVpcConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrokerCountCommand}
+   */
+  updateBrokerCount(
+    args: UpdateBrokerCountCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateBrokerCountCommandOutput>;
+  updateBrokerCount(
+    args: UpdateBrokerCountCommandInput,
+    cb: (err: any, data?: UpdateBrokerCountCommandOutput) => void
+  ): void;
+  updateBrokerCount(
+    args: UpdateBrokerCountCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateBrokerCountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrokerStorageCommand}
+   */
+  updateBrokerStorage(
+    args: UpdateBrokerStorageCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateBrokerStorageCommandOutput>;
+  updateBrokerStorage(
+    args: UpdateBrokerStorageCommandInput,
+    cb: (err: any, data?: UpdateBrokerStorageCommandOutput) => void
+  ): void;
+  updateBrokerStorage(
+    args: UpdateBrokerStorageCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateBrokerStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBrokerTypeCommand}
+   */
+  updateBrokerType(
+    args: UpdateBrokerTypeCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateBrokerTypeCommandOutput>;
+  updateBrokerType(
+    args: UpdateBrokerTypeCommandInput,
+    cb: (err: any, data?: UpdateBrokerTypeCommandOutput) => void
+  ): void;
+  updateBrokerType(
+    args: UpdateBrokerTypeCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateBrokerTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateChannelCommand}
+   */
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateChannelCommandOutput>;
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    cb: (err: any, data?: UpdateChannelCommandOutput) => void
+  ): void;
+  updateChannel(
+    args: UpdateChannelCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterConfigurationCommand}
+   */
+  updateClusterConfiguration(
+    args: UpdateClusterConfigurationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateClusterConfigurationCommandOutput>;
+  updateClusterConfiguration(
+    args: UpdateClusterConfigurationCommandInput,
+    cb: (err: any, data?: UpdateClusterConfigurationCommandOutput) => void
+  ): void;
+  updateClusterConfiguration(
+    args: UpdateClusterConfigurationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateClusterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterKafkaVersionCommand}
+   */
+  updateClusterKafkaVersion(
+    args: UpdateClusterKafkaVersionCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateClusterKafkaVersionCommandOutput>;
+  updateClusterKafkaVersion(
+    args: UpdateClusterKafkaVersionCommandInput,
+    cb: (err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void
+  ): void;
+  updateClusterKafkaVersion(
+    args: UpdateClusterKafkaVersionCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConfigurationCommand}
+   */
+  updateConfiguration(
+    args: UpdateConfigurationCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateConfigurationCommandOutput>;
+  updateConfiguration(
+    args: UpdateConfigurationCommandInput,
+    cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
+  ): void;
+  updateConfiguration(
+    args: UpdateConfigurationCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectivityCommand}
+   */
+  updateConnectivity(
+    args: UpdateConnectivityCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateConnectivityCommandOutput>;
+  updateConnectivity(
+    args: UpdateConnectivityCommandInput,
+    cb: (err: any, data?: UpdateConnectivityCommandOutput) => void
+  ): void;
+  updateConnectivity(
+    args: UpdateConnectivityCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateConnectivityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMonitoringCommand}
+   */
+  updateMonitoring(
+    args: UpdateMonitoringCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateMonitoringCommandOutput>;
+  updateMonitoring(
+    args: UpdateMonitoringCommandInput,
+    cb: (err: any, data?: UpdateMonitoringCommandOutput) => void
+  ): void;
+  updateMonitoring(
+    args: UpdateMonitoringCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateMonitoringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRebalancingCommand}
+   */
+  updateRebalancing(
+    args: UpdateRebalancingCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateRebalancingCommandOutput>;
+  updateRebalancing(
+    args: UpdateRebalancingCommandInput,
+    cb: (err: any, data?: UpdateRebalancingCommandOutput) => void
+  ): void;
+  updateRebalancing(
+    args: UpdateRebalancingCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateRebalancingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReplicationInfoCommand}
+   */
+  updateReplicationInfo(
+    args: UpdateReplicationInfoCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateReplicationInfoCommandOutput>;
+  updateReplicationInfo(
+    args: UpdateReplicationInfoCommandInput,
+    cb: (err: any, data?: UpdateReplicationInfoCommandOutput) => void
+  ): void;
+  updateReplicationInfo(
+    args: UpdateReplicationInfoCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateReplicationInfoCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSecurityCommand}
+   */
+  updateSecurity(
+    args: UpdateSecurityCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateSecurityCommandOutput>;
+  updateSecurity(
+    args: UpdateSecurityCommandInput,
+    cb: (err: any, data?: UpdateSecurityCommandOutput) => void
+  ): void;
+  updateSecurity(
+    args: UpdateSecurityCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateSecurityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStorageCommand}
+   */
+  updateStorage(
+    args: UpdateStorageCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateStorageCommandOutput>;
+  updateStorage(
+    args: UpdateStorageCommandInput,
+    cb: (err: any, data?: UpdateStorageCommandOutput) => void
+  ): void;
+  updateStorage(
+    args: UpdateStorageCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTopicCommand}
+   */
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    options?: KafkaRequestOptions
+  ): Promise<UpdateTopicCommandOutput>;
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    cb: (err: any, data?: UpdateTopicCommandOutput) => void
+  ): void;
+  updateTopic(
+    args: UpdateTopicCommandInput,
+    options: KafkaRequestOptions,
+    cb: (err: any, data?: UpdateTopicCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeTopicPartitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeTopicPartitionsCommandOutput}.
+   */
+  paginateDescribeTopicPartitions(
+    args: DescribeTopicPartitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeTopicPartitionsCommandOutput>;
+
+  /**
+   * @see {@link ListClientVpcConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClientVpcConnectionsCommandOutput}.
+   */
+  paginateListClientVpcConnections(
+    args: ListClientVpcConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClientVpcConnectionsCommandOutput>;
+
+  /**
+   * @see {@link ListClusterOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClusterOperationsCommandOutput}.
+   */
+  paginateListClusterOperations(
+    args: ListClusterOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClusterOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListClusterOperationsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClusterOperationsV2CommandOutput}.
+   */
+  paginateListClusterOperationsV2(
+    args: ListClusterOperationsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClusterOperationsV2CommandOutput>;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListClustersV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersV2CommandOutput}.
+   */
+  paginateListClustersV2(
+    args?: ListClustersV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersV2CommandOutput>;
+
+  /**
+   * @see {@link ListConfigurationRevisionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfigurationRevisionsCommandOutput}.
+   */
+  paginateListConfigurationRevisions(
+    args: ListConfigurationRevisionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfigurationRevisionsCommandOutput>;
+
+  /**
+   * @see {@link ListConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfigurationsCommandOutput}.
+   */
+  paginateListConfigurations(
+    args?: ListConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListKafkaVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKafkaVersionsCommandOutput}.
+   */
+  paginateListKafkaVersions(
+    args?: ListKafkaVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKafkaVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListNodesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNodesCommandOutput}.
+   */
+  paginateListNodes(
+    args: ListNodesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNodesCommandOutput>;
+
+  /**
+   * @see {@link ListReplicatorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReplicatorsCommandOutput}.
+   */
+  paginateListReplicators(
+    args?: ListReplicatorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReplicatorsCommandOutput>;
+
+  /**
+   * @see {@link ListScramSecretsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScramSecretsCommandOutput}.
+   */
+  paginateListScramSecrets(
+    args: ListScramSecretsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScramSecretsCommandOutput>;
+
+  /**
+   * @see {@link ListTopicsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTopicsCommandOutput}.
+   */
+  paginateListTopics(
+    args: ListTopicsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTopicsCommandOutput>;
+
+  /**
+   * @see {@link ListVpcConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVpcConnectionsCommandOutput}.
+   */
+  paginateListVpcConnections(
+    args?: ListVpcConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVpcConnectionsCommandOutput>;
+}
 
 /**
  * <p>The operations for managing an Amazon MSK cluster.</p>
+ * @public
  */
-export class Kafka extends KafkaClient {
-  /**
-   * <p>Associates one or more Scram Secrets with an Amazon MSK cluster.</p>
-   */
-  public batchAssociateScramSecret(
-    args: BatchAssociateScramSecretCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchAssociateScramSecretCommandOutput>;
-  public batchAssociateScramSecret(
-    args: BatchAssociateScramSecretCommandInput,
-    cb: (err: any, data?: BatchAssociateScramSecretCommandOutput) => void
-  ): void;
-  public batchAssociateScramSecret(
-    args: BatchAssociateScramSecretCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchAssociateScramSecretCommandOutput) => void
-  ): void;
-  public batchAssociateScramSecret(
-    args: BatchAssociateScramSecretCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchAssociateScramSecretCommandOutput) => void),
-    cb?: (err: any, data?: BatchAssociateScramSecretCommandOutput) => void
-  ): Promise<BatchAssociateScramSecretCommandOutput> | void {
-    const command = new BatchAssociateScramSecretCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disassociates one or more Scram Secrets from an Amazon MSK cluster.</p>
-   */
-  public batchDisassociateScramSecret(
-    args: BatchDisassociateScramSecretCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDisassociateScramSecretCommandOutput>;
-  public batchDisassociateScramSecret(
-    args: BatchDisassociateScramSecretCommandInput,
-    cb: (err: any, data?: BatchDisassociateScramSecretCommandOutput) => void
-  ): void;
-  public batchDisassociateScramSecret(
-    args: BatchDisassociateScramSecretCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDisassociateScramSecretCommandOutput) => void
-  ): void;
-  public batchDisassociateScramSecret(
-    args: BatchDisassociateScramSecretCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDisassociateScramSecretCommandOutput) => void),
-    cb?: (err: any, data?: BatchDisassociateScramSecretCommandOutput) => void
-  ): Promise<BatchDisassociateScramSecretCommandOutput> | void {
-    const command = new BatchDisassociateScramSecretCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new MSK cluster.</p>
-   */
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateClusterCommandOutput>;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateClusterCommandOutput) => void
-  ): void;
-  public createCluster(
-    args: CreateClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateClusterCommandOutput) => void),
-    cb?: (err: any, data?: CreateClusterCommandOutput) => void
-  ): Promise<CreateClusterCommandOutput> | void {
-    const command = new CreateClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new MSK configuration.</p>
-   */
-  public createConfiguration(
-    args: CreateConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateConfigurationCommandOutput>;
-  public createConfiguration(
-    args: CreateConfigurationCommandInput,
-    cb: (err: any, data?: CreateConfigurationCommandOutput) => void
-  ): void;
-  public createConfiguration(
-    args: CreateConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateConfigurationCommandOutput) => void
-  ): void;
-  public createConfiguration(
-    args: CreateConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateConfigurationCommandOutput) => void
-  ): Promise<CreateConfigurationCommandOutput> | void {
-    const command = new CreateConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.</p>
-   */
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteClusterCommandOutput>;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): void;
-  public deleteCluster(
-    args: DeleteClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteClusterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteClusterCommandOutput) => void
-  ): Promise<DeleteClusterCommandOutput> | void {
-    const command = new DeleteClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an MSK Configuration.</p>
-   */
-  public deleteConfiguration(
-    args: DeleteConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConfigurationCommandOutput>;
-  public deleteConfiguration(
-    args: DeleteConfigurationCommandInput,
-    cb: (err: any, data?: DeleteConfigurationCommandOutput) => void
-  ): void;
-  public deleteConfiguration(
-    args: DeleteConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConfigurationCommandOutput) => void
-  ): void;
-  public deleteConfiguration(
-    args: DeleteConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConfigurationCommandOutput) => void
-  ): Promise<DeleteConfigurationCommandOutput> | void {
-    const command = new DeleteConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.</p>
-   */
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeClusterCommandOutput>;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): void;
-  public describeCluster(
-    args: DescribeClusterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClusterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClusterCommandOutput) => void
-  ): Promise<DescribeClusterCommandOutput> | void {
-    const command = new DescribeClusterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a description of the cluster operation specified by the ARN.</p>
-   */
-  public describeClusterOperation(
-    args: DescribeClusterOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeClusterOperationCommandOutput>;
-  public describeClusterOperation(
-    args: DescribeClusterOperationCommandInput,
-    cb: (err: any, data?: DescribeClusterOperationCommandOutput) => void
-  ): void;
-  public describeClusterOperation(
-    args: DescribeClusterOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeClusterOperationCommandOutput) => void
-  ): void;
-  public describeClusterOperation(
-    args: DescribeClusterOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeClusterOperationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeClusterOperationCommandOutput) => void
-  ): Promise<DescribeClusterOperationCommandOutput> | void {
-    const command = new DescribeClusterOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a description of this MSK configuration.</p>
-   */
-  public describeConfiguration(
-    args: DescribeConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeConfigurationCommandOutput>;
-  public describeConfiguration(
-    args: DescribeConfigurationCommandInput,
-    cb: (err: any, data?: DescribeConfigurationCommandOutput) => void
-  ): void;
-  public describeConfiguration(
-    args: DescribeConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeConfigurationCommandOutput) => void
-  ): void;
-  public describeConfiguration(
-    args: DescribeConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeConfigurationCommandOutput) => void
-  ): Promise<DescribeConfigurationCommandOutput> | void {
-    const command = new DescribeConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a description of this revision of the configuration.</p>
-   */
-  public describeConfigurationRevision(
-    args: DescribeConfigurationRevisionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeConfigurationRevisionCommandOutput>;
-  public describeConfigurationRevision(
-    args: DescribeConfigurationRevisionCommandInput,
-    cb: (err: any, data?: DescribeConfigurationRevisionCommandOutput) => void
-  ): void;
-  public describeConfigurationRevision(
-    args: DescribeConfigurationRevisionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeConfigurationRevisionCommandOutput) => void
-  ): void;
-  public describeConfigurationRevision(
-    args: DescribeConfigurationRevisionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeConfigurationRevisionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeConfigurationRevisionCommandOutput) => void
-  ): Promise<DescribeConfigurationRevisionCommandOutput> | void {
-    const command = new DescribeConfigurationRevisionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>A list of brokers that a client application can use to bootstrap.</p>
-   */
-  public getBootstrapBrokers(
-    args: GetBootstrapBrokersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBootstrapBrokersCommandOutput>;
-  public getBootstrapBrokers(
-    args: GetBootstrapBrokersCommandInput,
-    cb: (err: any, data?: GetBootstrapBrokersCommandOutput) => void
-  ): void;
-  public getBootstrapBrokers(
-    args: GetBootstrapBrokersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBootstrapBrokersCommandOutput) => void
-  ): void;
-  public getBootstrapBrokers(
-    args: GetBootstrapBrokersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBootstrapBrokersCommandOutput) => void),
-    cb?: (err: any, data?: GetBootstrapBrokersCommandOutput) => void
-  ): Promise<GetBootstrapBrokersCommandOutput> | void {
-    const command = new GetBootstrapBrokersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the Apache Kafka versions to which you can update the MSK cluster.</p>
-   */
-  public getCompatibleKafkaVersions(
-    args: GetCompatibleKafkaVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCompatibleKafkaVersionsCommandOutput>;
-  public getCompatibleKafkaVersions(
-    args: GetCompatibleKafkaVersionsCommandInput,
-    cb: (err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void
-  ): void;
-  public getCompatibleKafkaVersions(
-    args: GetCompatibleKafkaVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void
-  ): void;
-  public getCompatibleKafkaVersions(
-    args: GetCompatibleKafkaVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void),
-    cb?: (err: any, data?: GetCompatibleKafkaVersionsCommandOutput) => void
-  ): Promise<GetCompatibleKafkaVersionsCommandOutput> | void {
-    const command = new GetCompatibleKafkaVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all the operations that have been performed on the specified MSK cluster.</p>
-   */
-  public listClusterOperations(
-    args: ListClusterOperationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListClusterOperationsCommandOutput>;
-  public listClusterOperations(
-    args: ListClusterOperationsCommandInput,
-    cb: (err: any, data?: ListClusterOperationsCommandOutput) => void
-  ): void;
-  public listClusterOperations(
-    args: ListClusterOperationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListClusterOperationsCommandOutput) => void
-  ): void;
-  public listClusterOperations(
-    args: ListClusterOperationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListClusterOperationsCommandOutput) => void),
-    cb?: (err: any, data?: ListClusterOperationsCommandOutput) => void
-  ): Promise<ListClusterOperationsCommandOutput> | void {
-    const command = new ListClusterOperationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all the MSK clusters in the current Region.</p>
-   */
-  public listClusters(
-    args: ListClustersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListClustersCommandOutput>;
-  public listClusters(args: ListClustersCommandInput, cb: (err: any, data?: ListClustersCommandOutput) => void): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListClustersCommandOutput) => void
-  ): void;
-  public listClusters(
-    args: ListClustersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListClustersCommandOutput) => void),
-    cb?: (err: any, data?: ListClustersCommandOutput) => void
-  ): Promise<ListClustersCommandOutput> | void {
-    const command = new ListClustersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all the MSK configurations in this Region.</p>
-   */
-  public listConfigurationRevisions(
-    args: ListConfigurationRevisionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListConfigurationRevisionsCommandOutput>;
-  public listConfigurationRevisions(
-    args: ListConfigurationRevisionsCommandInput,
-    cb: (err: any, data?: ListConfigurationRevisionsCommandOutput) => void
-  ): void;
-  public listConfigurationRevisions(
-    args: ListConfigurationRevisionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListConfigurationRevisionsCommandOutput) => void
-  ): void;
-  public listConfigurationRevisions(
-    args: ListConfigurationRevisionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListConfigurationRevisionsCommandOutput) => void),
-    cb?: (err: any, data?: ListConfigurationRevisionsCommandOutput) => void
-  ): Promise<ListConfigurationRevisionsCommandOutput> | void {
-    const command = new ListConfigurationRevisionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all the MSK configurations in this Region.</p>
-   */
-  public listConfigurations(
-    args: ListConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListConfigurationsCommandOutput>;
-  public listConfigurations(
-    args: ListConfigurationsCommandInput,
-    cb: (err: any, data?: ListConfigurationsCommandOutput) => void
-  ): void;
-  public listConfigurations(
-    args: ListConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListConfigurationsCommandOutput) => void
-  ): void;
-  public listConfigurations(
-    args: ListConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListConfigurationsCommandOutput) => void
-  ): Promise<ListConfigurationsCommandOutput> | void {
-    const command = new ListConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of Kafka versions.</p>
-   */
-  public listKafkaVersions(
-    args: ListKafkaVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListKafkaVersionsCommandOutput>;
-  public listKafkaVersions(
-    args: ListKafkaVersionsCommandInput,
-    cb: (err: any, data?: ListKafkaVersionsCommandOutput) => void
-  ): void;
-  public listKafkaVersions(
-    args: ListKafkaVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListKafkaVersionsCommandOutput) => void
-  ): void;
-  public listKafkaVersions(
-    args: ListKafkaVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListKafkaVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListKafkaVersionsCommandOutput) => void
-  ): Promise<ListKafkaVersionsCommandOutput> | void {
-    const command = new ListKafkaVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the broker nodes in the cluster.</p>
-   */
-  public listNodes(args: ListNodesCommandInput, options?: __HttpHandlerOptions): Promise<ListNodesCommandOutput>;
-  public listNodes(args: ListNodesCommandInput, cb: (err: any, data?: ListNodesCommandOutput) => void): void;
-  public listNodes(
-    args: ListNodesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListNodesCommandOutput) => void
-  ): void;
-  public listNodes(
-    args: ListNodesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNodesCommandOutput) => void),
-    cb?: (err: any, data?: ListNodesCommandOutput) => void
-  ): Promise<ListNodesCommandOutput> | void {
-    const command = new ListNodesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the Scram Secrets associated with an Amazon MSK cluster.</p>
-   */
-  public listScramSecrets(
-    args: ListScramSecretsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListScramSecretsCommandOutput>;
-  public listScramSecrets(
-    args: ListScramSecretsCommandInput,
-    cb: (err: any, data?: ListScramSecretsCommandOutput) => void
-  ): void;
-  public listScramSecrets(
-    args: ListScramSecretsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListScramSecretsCommandOutput) => void
-  ): void;
-  public listScramSecrets(
-    args: ListScramSecretsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListScramSecretsCommandOutput) => void),
-    cb?: (err: any, data?: ListScramSecretsCommandOutput) => void
-  ): Promise<ListScramSecretsCommandOutput> | void {
-    const command = new ListScramSecretsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the tags associated with the specified resource.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * Reboots brokers.
-   */
-  public rebootBroker(
-    args: RebootBrokerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RebootBrokerCommandOutput>;
-  public rebootBroker(args: RebootBrokerCommandInput, cb: (err: any, data?: RebootBrokerCommandOutput) => void): void;
-  public rebootBroker(
-    args: RebootBrokerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RebootBrokerCommandOutput) => void
-  ): void;
-  public rebootBroker(
-    args: RebootBrokerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RebootBrokerCommandOutput) => void),
-    cb?: (err: any, data?: RebootBrokerCommandOutput) => void
-  ): Promise<RebootBrokerCommandOutput> | void {
-    const command = new RebootBrokerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds tags to the specified MSK resource.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the tags associated with the keys that are provided in the query.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the number of broker nodes in the cluster.</p>
-   */
-  public updateBrokerCount(
-    args: UpdateBrokerCountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBrokerCountCommandOutput>;
-  public updateBrokerCount(
-    args: UpdateBrokerCountCommandInput,
-    cb: (err: any, data?: UpdateBrokerCountCommandOutput) => void
-  ): void;
-  public updateBrokerCount(
-    args: UpdateBrokerCountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBrokerCountCommandOutput) => void
-  ): void;
-  public updateBrokerCount(
-    args: UpdateBrokerCountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBrokerCountCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBrokerCountCommandOutput) => void
-  ): Promise<UpdateBrokerCountCommandOutput> | void {
-    const command = new UpdateBrokerCountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the EBS storage associated with MSK brokers.</p>
-   */
-  public updateBrokerStorage(
-    args: UpdateBrokerStorageCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBrokerStorageCommandOutput>;
-  public updateBrokerStorage(
-    args: UpdateBrokerStorageCommandInput,
-    cb: (err: any, data?: UpdateBrokerStorageCommandOutput) => void
-  ): void;
-  public updateBrokerStorage(
-    args: UpdateBrokerStorageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBrokerStorageCommandOutput) => void
-  ): void;
-  public updateBrokerStorage(
-    args: UpdateBrokerStorageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBrokerStorageCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBrokerStorageCommandOutput) => void
-  ): Promise<UpdateBrokerStorageCommandOutput> | void {
-    const command = new UpdateBrokerStorageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates EC2 instance type.</p>
-   */
-  public updateBrokerType(
-    args: UpdateBrokerTypeCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBrokerTypeCommandOutput>;
-  public updateBrokerType(
-    args: UpdateBrokerTypeCommandInput,
-    cb: (err: any, data?: UpdateBrokerTypeCommandOutput) => void
-  ): void;
-  public updateBrokerType(
-    args: UpdateBrokerTypeCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBrokerTypeCommandOutput) => void
-  ): void;
-  public updateBrokerType(
-    args: UpdateBrokerTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBrokerTypeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBrokerTypeCommandOutput) => void
-  ): Promise<UpdateBrokerTypeCommandOutput> | void {
-    const command = new UpdateBrokerTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the cluster with the configuration that is specified in the request body.</p>
-   */
-  public updateClusterConfiguration(
-    args: UpdateClusterConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateClusterConfigurationCommandOutput>;
-  public updateClusterConfiguration(
-    args: UpdateClusterConfigurationCommandInput,
-    cb: (err: any, data?: UpdateClusterConfigurationCommandOutput) => void
-  ): void;
-  public updateClusterConfiguration(
-    args: UpdateClusterConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateClusterConfigurationCommandOutput) => void
-  ): void;
-  public updateClusterConfiguration(
-    args: UpdateClusterConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClusterConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClusterConfigurationCommandOutput) => void
-  ): Promise<UpdateClusterConfigurationCommandOutput> | void {
-    const command = new UpdateClusterConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the Apache Kafka version for the cluster.</p>
-   */
-  public updateClusterKafkaVersion(
-    args: UpdateClusterKafkaVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateClusterKafkaVersionCommandOutput>;
-  public updateClusterKafkaVersion(
-    args: UpdateClusterKafkaVersionCommandInput,
-    cb: (err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void
-  ): void;
-  public updateClusterKafkaVersion(
-    args: UpdateClusterKafkaVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void
-  ): void;
-  public updateClusterKafkaVersion(
-    args: UpdateClusterKafkaVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateClusterKafkaVersionCommandOutput) => void
-  ): Promise<UpdateClusterKafkaVersionCommandOutput> | void {
-    const command = new UpdateClusterKafkaVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an MSK configuration.</p>
-   */
-  public updateConfiguration(
-    args: UpdateConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateConfigurationCommandOutput>;
-  public updateConfiguration(
-    args: UpdateConfigurationCommandInput,
-    cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
-  ): void;
-  public updateConfiguration(
-    args: UpdateConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
-  ): void;
-  public updateConfiguration(
-    args: UpdateConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateConfigurationCommandOutput) => void
-  ): Promise<UpdateConfigurationCommandOutput> | void {
-    const command = new UpdateConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.</p>
-   */
-  public updateMonitoring(
-    args: UpdateMonitoringCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateMonitoringCommandOutput>;
-  public updateMonitoring(
-    args: UpdateMonitoringCommandInput,
-    cb: (err: any, data?: UpdateMonitoringCommandOutput) => void
-  ): void;
-  public updateMonitoring(
-    args: UpdateMonitoringCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateMonitoringCommandOutput) => void
-  ): void;
-  public updateMonitoring(
-    args: UpdateMonitoringCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateMonitoringCommandOutput) => void),
-    cb?: (err: any, data?: UpdateMonitoringCommandOutput) => void
-  ): Promise<UpdateMonitoringCommandOutput> | void {
-    const command = new UpdateMonitoringCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.</p>
-   */
-  public updateSecurity(
-    args: UpdateSecurityCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSecurityCommandOutput>;
-  public updateSecurity(
-    args: UpdateSecurityCommandInput,
-    cb: (err: any, data?: UpdateSecurityCommandOutput) => void
-  ): void;
-  public updateSecurity(
-    args: UpdateSecurityCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSecurityCommandOutput) => void
-  ): void;
-  public updateSecurity(
-    args: UpdateSecurityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSecurityCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSecurityCommandOutput) => void
-  ): Promise<UpdateSecurityCommandOutput> | void {
-    const command = new UpdateSecurityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Kafka extends KafkaClient implements Kafka {}
+createAggregatedClient(commands, Kafka, { paginators });

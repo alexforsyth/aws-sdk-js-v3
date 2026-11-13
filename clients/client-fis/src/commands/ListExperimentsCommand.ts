@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FisClient";
-import { ListExperimentsRequest, ListExperimentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListExperimentsCommand,
-  serializeAws_restJson1ListExperimentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListExperimentsRequest, ListExperimentsResponse } from "../models/models_0";
+import { ListExperiments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListExperimentsCommand}.
+ */
 export interface ListExperimentsCommandInput extends ListExperimentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListExperimentsCommand}.
+ */
 export interface ListExperimentsCommandOutput extends ListExperimentsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface ListExperimentsCommandOutput extends ListExperimentsResponse, _
  * ```javascript
  * import { FisClient, ListExperimentsCommand } from "@aws-sdk/client-fis"; // ES Modules import
  * // const { FisClient, ListExperimentsCommand } = require("@aws-sdk/client-fis"); // CommonJS import
+ * // import type { FisClientConfig } from "@aws-sdk/client-fis";
+ * const config = {}; // type is FisClientConfig
  * const client = new FisClient(config);
+ * const input = { // ListExperimentsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   experimentTemplateId: "STRING_VALUE",
+ * };
  * const command = new ListExperimentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListExperimentsResponse
+ * //   experiments: [ // ExperimentSummaryList
+ * //     { // ExperimentSummary
+ * //       id: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //       experimentTemplateId: "STRING_VALUE",
+ * //       state: { // ExperimentState
+ * //         status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed" || "cancelled",
+ * //         reason: "STRING_VALUE",
+ * //         error: { // ExperimentError
+ * //           accountId: "STRING_VALUE",
+ * //           code: "STRING_VALUE",
+ * //           location: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       creationTime: new Date("TIMESTAMP"),
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       experimentOptions: { // ExperimentOptions
+ * //         accountTargeting: "single-account" || "multi-account",
+ * //         emptyTargetResolutionMode: "fail" || "skip",
+ * //         actionsMode: "skip-all" || "run-all",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListExperimentsCommandInput - {@link ListExperimentsCommandInput}
+ * @returns {@link ListExperimentsCommandOutput}
  * @see {@link ListExperimentsCommandInput} for command's `input` shape.
  * @see {@link ListExperimentsCommandOutput} for command's `response` shape.
- * @see {@link FisClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FisClientResolvedConfig | config} for FisClient's `config` shape.
  *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>
+ *
+ * @throws {@link FisServiceException}
+ * <p>Base exception class for all service exceptions from Fis service.</p>
+ *
+ *
+ * @public
  */
-export class ListExperimentsCommand extends $Command<
-  ListExperimentsCommandInput,
-  ListExperimentsCommandOutput,
-  FisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListExperimentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListExperimentsCommandInput, ListExperimentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FisClient";
-    const commandName = "ListExperimentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListExperimentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListExperimentsResponse.filterSensitiveLog,
+export class ListExperimentsCommand extends command<ListExperimentsCommandInput, ListExperimentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListExperiments",
+  ListExperiments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListExperimentsRequest;
+      output: ListExperimentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListExperimentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListExperimentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListExperimentsCommandOutput> {
-    return deserializeAws_restJson1ListExperimentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListExperimentsCommandInput;
+      output: ListExperimentsCommandOutput;
+    };
+  };
 }

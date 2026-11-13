@@ -1,1175 +1,1109 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateAssistantAssociationCommandInput,
+  type CreateAssistantAssociationCommandOutput,
   CreateAssistantAssociationCommand,
-  CreateAssistantAssociationCommandInput,
-  CreateAssistantAssociationCommandOutput,
 } from "./commands/CreateAssistantAssociationCommand";
 import {
+  type CreateAssistantCommandInput,
+  type CreateAssistantCommandOutput,
   CreateAssistantCommand,
-  CreateAssistantCommandInput,
-  CreateAssistantCommandOutput,
 } from "./commands/CreateAssistantCommand";
 import {
+  type CreateContentCommandInput,
+  type CreateContentCommandOutput,
   CreateContentCommand,
-  CreateContentCommandInput,
-  CreateContentCommandOutput,
 } from "./commands/CreateContentCommand";
 import {
+  type CreateKnowledgeBaseCommandInput,
+  type CreateKnowledgeBaseCommandOutput,
   CreateKnowledgeBaseCommand,
-  CreateKnowledgeBaseCommandInput,
-  CreateKnowledgeBaseCommandOutput,
 } from "./commands/CreateKnowledgeBaseCommand";
 import {
+  type CreateQuickResponseCommandInput,
+  type CreateQuickResponseCommandOutput,
+  CreateQuickResponseCommand,
+} from "./commands/CreateQuickResponseCommand";
+import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
   CreateSessionCommand,
-  CreateSessionCommandInput,
-  CreateSessionCommandOutput,
 } from "./commands/CreateSessionCommand";
 import {
+  type DeleteAssistantAssociationCommandInput,
+  type DeleteAssistantAssociationCommandOutput,
   DeleteAssistantAssociationCommand,
-  DeleteAssistantAssociationCommandInput,
-  DeleteAssistantAssociationCommandOutput,
 } from "./commands/DeleteAssistantAssociationCommand";
 import {
+  type DeleteAssistantCommandInput,
+  type DeleteAssistantCommandOutput,
   DeleteAssistantCommand,
-  DeleteAssistantCommandInput,
-  DeleteAssistantCommandOutput,
 } from "./commands/DeleteAssistantCommand";
 import {
+  type DeleteContentCommandInput,
+  type DeleteContentCommandOutput,
   DeleteContentCommand,
-  DeleteContentCommandInput,
-  DeleteContentCommandOutput,
 } from "./commands/DeleteContentCommand";
 import {
+  type DeleteImportJobCommandInput,
+  type DeleteImportJobCommandOutput,
+  DeleteImportJobCommand,
+} from "./commands/DeleteImportJobCommand";
+import {
+  type DeleteKnowledgeBaseCommandInput,
+  type DeleteKnowledgeBaseCommandOutput,
   DeleteKnowledgeBaseCommand,
-  DeleteKnowledgeBaseCommandInput,
-  DeleteKnowledgeBaseCommandOutput,
 } from "./commands/DeleteKnowledgeBaseCommand";
 import {
+  type DeleteQuickResponseCommandInput,
+  type DeleteQuickResponseCommandOutput,
+  DeleteQuickResponseCommand,
+} from "./commands/DeleteQuickResponseCommand";
+import {
+  type GetAssistantAssociationCommandInput,
+  type GetAssistantAssociationCommandOutput,
   GetAssistantAssociationCommand,
-  GetAssistantAssociationCommandInput,
-  GetAssistantAssociationCommandOutput,
 } from "./commands/GetAssistantAssociationCommand";
 import {
+  type GetAssistantCommandInput,
+  type GetAssistantCommandOutput,
   GetAssistantCommand,
-  GetAssistantCommandInput,
-  GetAssistantCommandOutput,
 } from "./commands/GetAssistantCommand";
-import { GetContentCommand, GetContentCommandInput, GetContentCommandOutput } from "./commands/GetContentCommand";
 import {
+  type GetContentCommandInput,
+  type GetContentCommandOutput,
+  GetContentCommand,
+} from "./commands/GetContentCommand";
+import {
+  type GetContentSummaryCommandInput,
+  type GetContentSummaryCommandOutput,
   GetContentSummaryCommand,
-  GetContentSummaryCommandInput,
-  GetContentSummaryCommandOutput,
 } from "./commands/GetContentSummaryCommand";
 import {
+  type GetImportJobCommandInput,
+  type GetImportJobCommandOutput,
+  GetImportJobCommand,
+} from "./commands/GetImportJobCommand";
+import {
+  type GetKnowledgeBaseCommandInput,
+  type GetKnowledgeBaseCommandOutput,
   GetKnowledgeBaseCommand,
-  GetKnowledgeBaseCommandInput,
-  GetKnowledgeBaseCommandOutput,
 } from "./commands/GetKnowledgeBaseCommand";
 import {
-  GetRecommendationsCommand,
-  GetRecommendationsCommandInput,
-  GetRecommendationsCommandOutput,
-} from "./commands/GetRecommendationsCommand";
-import { GetSessionCommand, GetSessionCommandInput, GetSessionCommandOutput } from "./commands/GetSessionCommand";
+  type GetQuickResponseCommandInput,
+  type GetQuickResponseCommandOutput,
+  GetQuickResponseCommand,
+} from "./commands/GetQuickResponseCommand";
 import {
+  type GetRecommendationsCommandInput,
+  type GetRecommendationsCommandOutput,
+  GetRecommendationsCommand,
+} from "./commands/GetRecommendationsCommand";
+import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type ListAssistantAssociationsCommandInput,
+  type ListAssistantAssociationsCommandOutput,
   ListAssistantAssociationsCommand,
-  ListAssistantAssociationsCommandInput,
-  ListAssistantAssociationsCommandOutput,
 } from "./commands/ListAssistantAssociationsCommand";
 import {
+  type ListAssistantsCommandInput,
+  type ListAssistantsCommandOutput,
   ListAssistantsCommand,
-  ListAssistantsCommandInput,
-  ListAssistantsCommandOutput,
 } from "./commands/ListAssistantsCommand";
 import {
+  type ListContentsCommandInput,
+  type ListContentsCommandOutput,
   ListContentsCommand,
-  ListContentsCommandInput,
-  ListContentsCommandOutput,
 } from "./commands/ListContentsCommand";
 import {
+  type ListImportJobsCommandInput,
+  type ListImportJobsCommandOutput,
+  ListImportJobsCommand,
+} from "./commands/ListImportJobsCommand";
+import {
+  type ListKnowledgeBasesCommandInput,
+  type ListKnowledgeBasesCommandOutput,
   ListKnowledgeBasesCommand,
-  ListKnowledgeBasesCommandInput,
-  ListKnowledgeBasesCommandOutput,
 } from "./commands/ListKnowledgeBasesCommand";
 import {
+  type ListQuickResponsesCommandInput,
+  type ListQuickResponsesCommandOutput,
+  ListQuickResponsesCommand,
+} from "./commands/ListQuickResponsesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type NotifyRecommendationsReceivedCommandInput,
+  type NotifyRecommendationsReceivedCommandOutput,
   NotifyRecommendationsReceivedCommand,
-  NotifyRecommendationsReceivedCommandInput,
-  NotifyRecommendationsReceivedCommandOutput,
 } from "./commands/NotifyRecommendationsReceivedCommand";
 import {
+  type QueryAssistantCommandInput,
+  type QueryAssistantCommandOutput,
   QueryAssistantCommand,
-  QueryAssistantCommandInput,
-  QueryAssistantCommandOutput,
 } from "./commands/QueryAssistantCommand";
 import {
+  type RemoveKnowledgeBaseTemplateUriCommandInput,
+  type RemoveKnowledgeBaseTemplateUriCommandOutput,
   RemoveKnowledgeBaseTemplateUriCommand,
-  RemoveKnowledgeBaseTemplateUriCommandInput,
-  RemoveKnowledgeBaseTemplateUriCommandOutput,
 } from "./commands/RemoveKnowledgeBaseTemplateUriCommand";
 import {
+  type SearchContentCommandInput,
+  type SearchContentCommandOutput,
   SearchContentCommand,
-  SearchContentCommandInput,
-  SearchContentCommandOutput,
 } from "./commands/SearchContentCommand";
 import {
+  type SearchQuickResponsesCommandInput,
+  type SearchQuickResponsesCommandOutput,
+  SearchQuickResponsesCommand,
+} from "./commands/SearchQuickResponsesCommand";
+import {
+  type SearchSessionsCommandInput,
+  type SearchSessionsCommandOutput,
   SearchSessionsCommand,
-  SearchSessionsCommandInput,
-  SearchSessionsCommandOutput,
 } from "./commands/SearchSessionsCommand";
 import {
+  type StartContentUploadCommandInput,
+  type StartContentUploadCommandOutput,
   StartContentUploadCommand,
-  StartContentUploadCommandInput,
-  StartContentUploadCommandOutput,
 } from "./commands/StartContentUploadCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartImportJobCommandInput,
+  type StartImportJobCommandOutput,
+  StartImportJobCommand,
+} from "./commands/StartImportJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateContentCommandInput,
+  type UpdateContentCommandOutput,
   UpdateContentCommand,
-  UpdateContentCommandInput,
-  UpdateContentCommandOutput,
 } from "./commands/UpdateContentCommand";
 import {
+  type UpdateKnowledgeBaseTemplateUriCommandInput,
+  type UpdateKnowledgeBaseTemplateUriCommandOutput,
   UpdateKnowledgeBaseTemplateUriCommand,
-  UpdateKnowledgeBaseTemplateUriCommandInput,
-  UpdateKnowledgeBaseTemplateUriCommandOutput,
 } from "./commands/UpdateKnowledgeBaseTemplateUriCommand";
+import {
+  type UpdateQuickResponseCommandInput,
+  type UpdateQuickResponseCommandOutput,
+  UpdateQuickResponseCommand,
+} from "./commands/UpdateQuickResponseCommand";
+import { paginateListAssistantAssociations } from "./pagination/ListAssistantAssociationsPaginator";
+import { paginateListAssistants } from "./pagination/ListAssistantsPaginator";
+import { paginateListContents } from "./pagination/ListContentsPaginator";
+import { paginateListImportJobs } from "./pagination/ListImportJobsPaginator";
+import { paginateListKnowledgeBases } from "./pagination/ListKnowledgeBasesPaginator";
+import { paginateListQuickResponses } from "./pagination/ListQuickResponsesPaginator";
+import { paginateQueryAssistant } from "./pagination/QueryAssistantPaginator";
+import { paginateSearchContent } from "./pagination/SearchContentPaginator";
+import { paginateSearchQuickResponses } from "./pagination/SearchQuickResponsesPaginator";
+import { paginateSearchSessions } from "./pagination/SearchSessionsPaginator";
 import { WisdomClient } from "./WisdomClient";
 
+const commands = {
+  CreateAssistantCommand,
+  CreateAssistantAssociationCommand,
+  CreateContentCommand,
+  CreateKnowledgeBaseCommand,
+  CreateQuickResponseCommand,
+  CreateSessionCommand,
+  DeleteAssistantCommand,
+  DeleteAssistantAssociationCommand,
+  DeleteContentCommand,
+  DeleteImportJobCommand,
+  DeleteKnowledgeBaseCommand,
+  DeleteQuickResponseCommand,
+  GetAssistantCommand,
+  GetAssistantAssociationCommand,
+  GetContentCommand,
+  GetContentSummaryCommand,
+  GetImportJobCommand,
+  GetKnowledgeBaseCommand,
+  GetQuickResponseCommand,
+  GetRecommendationsCommand,
+  GetSessionCommand,
+  ListAssistantAssociationsCommand,
+  ListAssistantsCommand,
+  ListContentsCommand,
+  ListImportJobsCommand,
+  ListKnowledgeBasesCommand,
+  ListQuickResponsesCommand,
+  ListTagsForResourceCommand,
+  NotifyRecommendationsReceivedCommand,
+  QueryAssistantCommand,
+  RemoveKnowledgeBaseTemplateUriCommand,
+  SearchContentCommand,
+  SearchQuickResponsesCommand,
+  SearchSessionsCommand,
+  StartContentUploadCommand,
+  StartImportJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateContentCommand,
+  UpdateKnowledgeBaseTemplateUriCommand,
+  UpdateQuickResponseCommand,
+};
+const paginators = {
+  paginateListAssistantAssociations,
+  paginateListAssistants,
+  paginateListContents,
+  paginateListImportJobs,
+  paginateListKnowledgeBases,
+  paginateListQuickResponses,
+  paginateQueryAssistant,
+  paginateSearchContent,
+  paginateSearchQuickResponses,
+  paginateSearchSessions,
+};
+
 /**
- * <p>All Amazon Connect Wisdom functionality is accessible using the API. For example, you can create an
- *       assistant and a knowledge base.</p>
- *
- *          <p>Some more advanced features are only accessible using the Wisdom API. For example, you
- *       can manually manage content by uploading custom files and control their lifecycle. </p>
+ * @public
  */
-export class Wisdom extends WisdomClient {
+export interface WisdomRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Wisdom {
   /**
-   * <p>Creates an Amazon Connect Wisdom assistant.</p>
+   * @see {@link CreateAssistantCommand}
    */
-  public createAssistant(
+  createAssistant(
     args: CreateAssistantCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<CreateAssistantCommandOutput>;
-  public createAssistant(
+  createAssistant(
     args: CreateAssistantCommandInput,
     cb: (err: any, data?: CreateAssistantCommandOutput) => void
   ): void;
-  public createAssistant(
+  createAssistant(
     args: CreateAssistantCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: CreateAssistantCommandOutput) => void
   ): void;
-  public createAssistant(
-    args: CreateAssistantCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAssistantCommandOutput) => void),
-    cb?: (err: any, data?: CreateAssistantCommandOutput) => void
-  ): Promise<CreateAssistantCommandOutput> | void {
-    const command = new CreateAssistantCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an association between an Amazon Connect Wisdom assistant and another resource. Currently, the
-   *       only supported association is with a knowledge base. An assistant can have only a single
-   *       association.</p>
+   * @see {@link CreateAssistantAssociationCommand}
    */
-  public createAssistantAssociation(
+  createAssistantAssociation(
     args: CreateAssistantAssociationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<CreateAssistantAssociationCommandOutput>;
-  public createAssistantAssociation(
+  createAssistantAssociation(
     args: CreateAssistantAssociationCommandInput,
     cb: (err: any, data?: CreateAssistantAssociationCommandOutput) => void
   ): void;
-  public createAssistantAssociation(
+  createAssistantAssociation(
     args: CreateAssistantAssociationCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: CreateAssistantAssociationCommandOutput) => void
   ): void;
-  public createAssistantAssociation(
-    args: CreateAssistantAssociationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAssistantAssociationCommandOutput) => void),
-    cb?: (err: any, data?: CreateAssistantAssociationCommandOutput) => void
-  ): Promise<CreateAssistantAssociationCommandOutput> | void {
-    const command = new CreateAssistantAssociationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates Wisdom content. Before to calling this API, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html">StartContentUpload</a> to
-   *       upload an asset.</p>
+   * @see {@link CreateContentCommand}
    */
-  public createContent(
+  createContent(
     args: CreateContentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<CreateContentCommandOutput>;
-  public createContent(
+  createContent(
     args: CreateContentCommandInput,
     cb: (err: any, data?: CreateContentCommandOutput) => void
   ): void;
-  public createContent(
+  createContent(
     args: CreateContentCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: CreateContentCommandOutput) => void
   ): void;
-  public createContent(
-    args: CreateContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContentCommandOutput) => void),
-    cb?: (err: any, data?: CreateContentCommandOutput) => void
-  ): Promise<CreateContentCommandOutput> | void {
-    const command = new CreateContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a knowledge base.</p>
-   *          <note>
-   *             <p>When using this API, you cannot reuse <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html">Amazon AppIntegrations</a>
-   *         DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do,
-   *         you'll get an <code>InvalidRequestException</code> error. </p>
-   *
-   *             <p>For example, you're programmatically managing your external knowledge base, and you want
-   *         to add or remove one of the fields that is being ingested from Salesforce. Do the
-   *         following:</p>
-   *             <ol>
-   *                <li>
-   *                   <p>Call <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html">DeleteKnowledgeBase</a>.</p>
-   *                </li>
-   *                <li>
-   *                   <p>Call <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html">DeleteDataIntegration</a>.</p>
-   *                </li>
-   *                <li>
-   *                   <p>Call <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> to recreate the DataIntegration or a create different
-   *             one.</p>
-   *                </li>
-   *                <li>
-   *                   <p>Call CreateKnowledgeBase.</p>
-   *                </li>
-   *             </ol>
-   *          </note>
+   * @see {@link CreateKnowledgeBaseCommand}
    */
-  public createKnowledgeBase(
+  createKnowledgeBase(
     args: CreateKnowledgeBaseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<CreateKnowledgeBaseCommandOutput>;
-  public createKnowledgeBase(
+  createKnowledgeBase(
     args: CreateKnowledgeBaseCommandInput,
     cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
   ): void;
-  public createKnowledgeBase(
+  createKnowledgeBase(
     args: CreateKnowledgeBaseCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
   ): void;
-  public createKnowledgeBase(
-    args: CreateKnowledgeBaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateKnowledgeBaseCommandOutput) => void),
-    cb?: (err: any, data?: CreateKnowledgeBaseCommandOutput) => void
-  ): Promise<CreateKnowledgeBaseCommandOutput> | void {
-    const command = new CreateKnowledgeBaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a session. A session is a contextual container used for generating
-   *       recommendations. Amazon Connect creates a new Wisdom session for each contact on which Wisdom is
-   *       enabled.</p>
+   * @see {@link CreateQuickResponseCommand}
    */
-  public createSession(
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<CreateQuickResponseCommandOutput>;
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    cb: (err: any, data?: CreateQuickResponseCommandOutput) => void
+  ): void;
+  createQuickResponse(
+    args: CreateQuickResponseCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: CreateQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSessionCommand}
+   */
+  createSession(
     args: CreateSessionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<CreateSessionCommandOutput>;
-  public createSession(
+  createSession(
     args: CreateSessionCommandInput,
     cb: (err: any, data?: CreateSessionCommandOutput) => void
   ): void;
-  public createSession(
+  createSession(
     args: CreateSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: CreateSessionCommandOutput) => void
   ): void;
-  public createSession(
-    args: CreateSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSessionCommandOutput) => void),
-    cb?: (err: any, data?: CreateSessionCommandOutput) => void
-  ): Promise<CreateSessionCommandOutput> | void {
-    const command = new CreateSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an assistant.</p>
+   * @see {@link DeleteAssistantCommand}
    */
-  public deleteAssistant(
+  deleteAssistant(
     args: DeleteAssistantCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<DeleteAssistantCommandOutput>;
-  public deleteAssistant(
+  deleteAssistant(
     args: DeleteAssistantCommandInput,
     cb: (err: any, data?: DeleteAssistantCommandOutput) => void
   ): void;
-  public deleteAssistant(
+  deleteAssistant(
     args: DeleteAssistantCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: DeleteAssistantCommandOutput) => void
   ): void;
-  public deleteAssistant(
-    args: DeleteAssistantCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAssistantCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAssistantCommandOutput) => void
-  ): Promise<DeleteAssistantCommandOutput> | void {
-    const command = new DeleteAssistantCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an assistant association.</p>
+   * @see {@link DeleteAssistantAssociationCommand}
    */
-  public deleteAssistantAssociation(
+  deleteAssistantAssociation(
     args: DeleteAssistantAssociationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<DeleteAssistantAssociationCommandOutput>;
-  public deleteAssistantAssociation(
+  deleteAssistantAssociation(
     args: DeleteAssistantAssociationCommandInput,
     cb: (err: any, data?: DeleteAssistantAssociationCommandOutput) => void
   ): void;
-  public deleteAssistantAssociation(
+  deleteAssistantAssociation(
     args: DeleteAssistantAssociationCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: DeleteAssistantAssociationCommandOutput) => void
   ): void;
-  public deleteAssistantAssociation(
-    args: DeleteAssistantAssociationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAssistantAssociationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAssistantAssociationCommandOutput) => void
-  ): Promise<DeleteAssistantAssociationCommandOutput> | void {
-    const command = new DeleteAssistantAssociationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the content.</p>
+   * @see {@link DeleteContentCommand}
    */
-  public deleteContent(
+  deleteContent(
     args: DeleteContentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<DeleteContentCommandOutput>;
-  public deleteContent(
+  deleteContent(
     args: DeleteContentCommandInput,
     cb: (err: any, data?: DeleteContentCommandOutput) => void
   ): void;
-  public deleteContent(
+  deleteContent(
     args: DeleteContentCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: DeleteContentCommandOutput) => void
   ): void;
-  public deleteContent(
-    args: DeleteContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteContentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteContentCommandOutput) => void
-  ): Promise<DeleteContentCommandOutput> | void {
-    const command = new DeleteContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the knowledge base.</p>
-   *          <note>
-   *             <p>When you use this API to delete an external knowledge base such as Salesforce or
-   *         ServiceNow, you must also delete the <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html">Amazon AppIntegrations</a> DataIntegration.
-   *         This is because you can't reuse the DataIntegration after it's been associated with an
-   *         external knowledge base. However, you can delete and recreate it. See <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html">DeleteDataIntegration</a> and <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> in the <i>Amazon AppIntegrations API
-   *         Reference</i>.</p>
-   *          </note>
+   * @see {@link DeleteImportJobCommand}
    */
-  public deleteKnowledgeBase(
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<DeleteImportJobCommandOutput>;
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    cb: (err: any, data?: DeleteImportJobCommandOutput) => void
+  ): void;
+  deleteImportJob(
+    args: DeleteImportJobCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: DeleteImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnowledgeBaseCommand}
+   */
+  deleteKnowledgeBase(
     args: DeleteKnowledgeBaseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<DeleteKnowledgeBaseCommandOutput>;
-  public deleteKnowledgeBase(
+  deleteKnowledgeBase(
     args: DeleteKnowledgeBaseCommandInput,
     cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
   ): void;
-  public deleteKnowledgeBase(
+  deleteKnowledgeBase(
     args: DeleteKnowledgeBaseCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
   ): void;
-  public deleteKnowledgeBase(
-    args: DeleteKnowledgeBaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteKnowledgeBaseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteKnowledgeBaseCommandOutput) => void
-  ): Promise<DeleteKnowledgeBaseCommandOutput> | void {
-    const command = new DeleteKnowledgeBaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about an assistant.</p>
+   * @see {@link DeleteQuickResponseCommand}
    */
-  public getAssistant(
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<DeleteQuickResponseCommandOutput>;
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    cb: (err: any, data?: DeleteQuickResponseCommandOutput) => void
+  ): void;
+  deleteQuickResponse(
+    args: DeleteQuickResponseCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: DeleteQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAssistantCommand}
+   */
+  getAssistant(
     args: GetAssistantCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<GetAssistantCommandOutput>;
-  public getAssistant(args: GetAssistantCommandInput, cb: (err: any, data?: GetAssistantCommandOutput) => void): void;
-  public getAssistant(
+  getAssistant(
     args: GetAssistantCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetAssistantCommandOutput) => void
   ): void;
-  public getAssistant(
+  getAssistant(
     args: GetAssistantCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAssistantCommandOutput) => void),
-    cb?: (err: any, data?: GetAssistantCommandOutput) => void
-  ): Promise<GetAssistantCommandOutput> | void {
-    const command = new GetAssistantCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: GetAssistantCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves information about an assistant association.</p>
+   * @see {@link GetAssistantAssociationCommand}
    */
-  public getAssistantAssociation(
+  getAssistantAssociation(
     args: GetAssistantAssociationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<GetAssistantAssociationCommandOutput>;
-  public getAssistantAssociation(
+  getAssistantAssociation(
     args: GetAssistantAssociationCommandInput,
     cb: (err: any, data?: GetAssistantAssociationCommandOutput) => void
   ): void;
-  public getAssistantAssociation(
+  getAssistantAssociation(
     args: GetAssistantAssociationCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: GetAssistantAssociationCommandOutput) => void
   ): void;
-  public getAssistantAssociation(
-    args: GetAssistantAssociationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAssistantAssociationCommandOutput) => void),
-    cb?: (err: any, data?: GetAssistantAssociationCommandOutput) => void
-  ): Promise<GetAssistantAssociationCommandOutput> | void {
-    const command = new GetAssistantAssociationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves content, including a pre-signed URL to download the content.</p>
+   * @see {@link GetContentCommand}
    */
-  public getContent(args: GetContentCommandInput, options?: __HttpHandlerOptions): Promise<GetContentCommandOutput>;
-  public getContent(args: GetContentCommandInput, cb: (err: any, data?: GetContentCommandOutput) => void): void;
-  public getContent(
+  getContent(
     args: GetContentCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WisdomRequestOptions
+  ): Promise<GetContentCommandOutput>;
+  getContent(
+    args: GetContentCommandInput,
     cb: (err: any, data?: GetContentCommandOutput) => void
   ): void;
-  public getContent(
+  getContent(
     args: GetContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContentCommandOutput) => void),
-    cb?: (err: any, data?: GetContentCommandOutput) => void
-  ): Promise<GetContentCommandOutput> | void {
-    const command = new GetContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: GetContentCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves summary information about the content.</p>
+   * @see {@link GetContentSummaryCommand}
    */
-  public getContentSummary(
+  getContentSummary(
     args: GetContentSummaryCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<GetContentSummaryCommandOutput>;
-  public getContentSummary(
+  getContentSummary(
     args: GetContentSummaryCommandInput,
     cb: (err: any, data?: GetContentSummaryCommandOutput) => void
   ): void;
-  public getContentSummary(
+  getContentSummary(
     args: GetContentSummaryCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: GetContentSummaryCommandOutput) => void
   ): void;
-  public getContentSummary(
-    args: GetContentSummaryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContentSummaryCommandOutput) => void),
-    cb?: (err: any, data?: GetContentSummaryCommandOutput) => void
-  ): Promise<GetContentSummaryCommandOutput> | void {
-    const command = new GetContentSummaryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about the knowledge base.</p>
+   * @see {@link GetImportJobCommand}
    */
-  public getKnowledgeBase(
+  getImportJob(
+    args: GetImportJobCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<GetImportJobCommandOutput>;
+  getImportJob(
+    args: GetImportJobCommandInput,
+    cb: (err: any, data?: GetImportJobCommandOutput) => void
+  ): void;
+  getImportJob(
+    args: GetImportJobCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: GetImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKnowledgeBaseCommand}
+   */
+  getKnowledgeBase(
     args: GetKnowledgeBaseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<GetKnowledgeBaseCommandOutput>;
-  public getKnowledgeBase(
+  getKnowledgeBase(
     args: GetKnowledgeBaseCommandInput,
     cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
   ): void;
-  public getKnowledgeBase(
+  getKnowledgeBase(
     args: GetKnowledgeBaseCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
   ): void;
-  public getKnowledgeBase(
-    args: GetKnowledgeBaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetKnowledgeBaseCommandOutput) => void),
-    cb?: (err: any, data?: GetKnowledgeBaseCommandOutput) => void
-  ): Promise<GetKnowledgeBaseCommandOutput> | void {
-    const command = new GetKnowledgeBaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves recommendations for the specified session. To avoid retrieving the same
-   *       recommendations in subsequent calls, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the
-   *         <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns
-   *       recommendations already available. To perform a manual query against an assistant, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html">QueryAssistant</a>.</p>
+   * @see {@link GetQuickResponseCommand}
    */
-  public getRecommendations(
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<GetQuickResponseCommandOutput>;
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    cb: (err: any, data?: GetQuickResponseCommandOutput) => void
+  ): void;
+  getQuickResponse(
+    args: GetQuickResponseCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: GetQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationsCommand}
+   */
+  getRecommendations(
     args: GetRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<GetRecommendationsCommandOutput>;
-  public getRecommendations(
+  getRecommendations(
     args: GetRecommendationsCommandInput,
     cb: (err: any, data?: GetRecommendationsCommandOutput) => void
   ): void;
-  public getRecommendations(
+  getRecommendations(
     args: GetRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: GetRecommendationsCommandOutput) => void
   ): void;
-  public getRecommendations(
-    args: GetRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetRecommendationsCommandOutput) => void
-  ): Promise<GetRecommendationsCommandOutput> | void {
-    const command = new GetRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information for a specified session.</p>
+   * @see {@link GetSessionCommand}
    */
-  public getSession(args: GetSessionCommandInput, options?: __HttpHandlerOptions): Promise<GetSessionCommandOutput>;
-  public getSession(args: GetSessionCommandInput, cb: (err: any, data?: GetSessionCommandOutput) => void): void;
-  public getSession(
+  getSession(
     args: GetSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WisdomRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
     cb: (err: any, data?: GetSessionCommandOutput) => void
   ): void;
-  public getSession(
+  getSession(
     args: GetSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSessionCommandOutput) => void),
-    cb?: (err: any, data?: GetSessionCommandOutput) => void
-  ): Promise<GetSessionCommandOutput> | void {
-    const command = new GetSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists information about assistant associations.</p>
+   * @see {@link ListAssistantAssociationsCommand}
    */
-  public listAssistantAssociations(
+  listAssistantAssociations(
     args: ListAssistantAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<ListAssistantAssociationsCommandOutput>;
-  public listAssistantAssociations(
+  listAssistantAssociations(
     args: ListAssistantAssociationsCommandInput,
     cb: (err: any, data?: ListAssistantAssociationsCommandOutput) => void
   ): void;
-  public listAssistantAssociations(
+  listAssistantAssociations(
     args: ListAssistantAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: ListAssistantAssociationsCommandOutput) => void
   ): void;
-  public listAssistantAssociations(
-    args: ListAssistantAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAssistantAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: ListAssistantAssociationsCommandOutput) => void
-  ): Promise<ListAssistantAssociationsCommandOutput> | void {
-    const command = new ListAssistantAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists information about assistants.</p>
+   * @see {@link ListAssistantsCommand}
    */
-  public listAssistants(
+  listAssistants(): Promise<ListAssistantsCommandOutput>;
+  listAssistants(
     args: ListAssistantsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<ListAssistantsCommandOutput>;
-  public listAssistants(
+  listAssistants(
     args: ListAssistantsCommandInput,
     cb: (err: any, data?: ListAssistantsCommandOutput) => void
   ): void;
-  public listAssistants(
+  listAssistants(
     args: ListAssistantsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: ListAssistantsCommandOutput) => void
   ): void;
-  public listAssistants(
-    args: ListAssistantsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAssistantsCommandOutput) => void),
-    cb?: (err: any, data?: ListAssistantsCommandOutput) => void
-  ): Promise<ListAssistantsCommandOutput> | void {
-    const command = new ListAssistantsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the content.</p>
+   * @see {@link ListContentsCommand}
    */
-  public listContents(
+  listContents(
     args: ListContentsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<ListContentsCommandOutput>;
-  public listContents(args: ListContentsCommandInput, cb: (err: any, data?: ListContentsCommandOutput) => void): void;
-  public listContents(
+  listContents(
     args: ListContentsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListContentsCommandOutput) => void
   ): void;
-  public listContents(
+  listContents(
     args: ListContentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListContentsCommandOutput) => void),
-    cb?: (err: any, data?: ListContentsCommandOutput) => void
-  ): Promise<ListContentsCommandOutput> | void {
-    const command = new ListContentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: ListContentsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the knowledge bases.</p>
+   * @see {@link ListImportJobsCommand}
    */
-  public listKnowledgeBases(
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<ListImportJobsCommandOutput>;
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    cb: (err: any, data?: ListImportJobsCommandOutput) => void
+  ): void;
+  listImportJobs(
+    args: ListImportJobsCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: ListImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   */
+  listKnowledgeBases(): Promise<ListKnowledgeBasesCommandOutput>;
+  listKnowledgeBases(
     args: ListKnowledgeBasesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<ListKnowledgeBasesCommandOutput>;
-  public listKnowledgeBases(
+  listKnowledgeBases(
     args: ListKnowledgeBasesCommandInput,
     cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
   ): void;
-  public listKnowledgeBases(
+  listKnowledgeBases(
     args: ListKnowledgeBasesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
   ): void;
-  public listKnowledgeBases(
-    args: ListKnowledgeBasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListKnowledgeBasesCommandOutput) => void),
-    cb?: (err: any, data?: ListKnowledgeBasesCommandOutput) => void
-  ): Promise<ListKnowledgeBasesCommandOutput> | void {
-    const command = new ListKnowledgeBasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
+   * @see {@link ListQuickResponsesCommand}
    */
-  public listTagsForResource(
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<ListQuickResponsesCommandOutput>;
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    cb: (err: any, data?: ListQuickResponsesCommandOutput) => void
+  ): void;
+  listQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: ListQuickResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the specified recommendations from the specified assistant's queue of newly
-   *       available recommendations. You can use this API in conjunction with <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html">GetRecommendations</a> and a <code>waitTimeSeconds</code> input for long-polling
-   *       behavior and avoiding duplicate recommendations.</p>
+   * @see {@link NotifyRecommendationsReceivedCommand}
    */
-  public notifyRecommendationsReceived(
+  notifyRecommendationsReceived(
     args: NotifyRecommendationsReceivedCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<NotifyRecommendationsReceivedCommandOutput>;
-  public notifyRecommendationsReceived(
+  notifyRecommendationsReceived(
     args: NotifyRecommendationsReceivedCommandInput,
     cb: (err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void
   ): void;
-  public notifyRecommendationsReceived(
+  notifyRecommendationsReceived(
     args: NotifyRecommendationsReceivedCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void
   ): void;
-  public notifyRecommendationsReceived(
-    args: NotifyRecommendationsReceivedCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void),
-    cb?: (err: any, data?: NotifyRecommendationsReceivedCommandOutput) => void
-  ): Promise<NotifyRecommendationsReceivedCommandOutput> | void {
-    const command = new NotifyRecommendationsReceivedCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Performs a manual search against the specified assistant. To retrieve recommendations for
-   *       an assistant, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html">GetRecommendations</a>.
-   *     </p>
+   * @see {@link QueryAssistantCommand}
    */
-  public queryAssistant(
+  queryAssistant(
     args: QueryAssistantCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<QueryAssistantCommandOutput>;
-  public queryAssistant(
+  queryAssistant(
     args: QueryAssistantCommandInput,
     cb: (err: any, data?: QueryAssistantCommandOutput) => void
   ): void;
-  public queryAssistant(
+  queryAssistant(
     args: QueryAssistantCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: QueryAssistantCommandOutput) => void
   ): void;
-  public queryAssistant(
-    args: QueryAssistantCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: QueryAssistantCommandOutput) => void),
-    cb?: (err: any, data?: QueryAssistantCommandOutput) => void
-  ): Promise<QueryAssistantCommandOutput> | void {
-    const command = new QueryAssistantCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a URI template from a knowledge base.</p>
+   * @see {@link RemoveKnowledgeBaseTemplateUriCommand}
    */
-  public removeKnowledgeBaseTemplateUri(
+  removeKnowledgeBaseTemplateUri(
     args: RemoveKnowledgeBaseTemplateUriCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<RemoveKnowledgeBaseTemplateUriCommandOutput>;
-  public removeKnowledgeBaseTemplateUri(
+  removeKnowledgeBaseTemplateUri(
     args: RemoveKnowledgeBaseTemplateUriCommandInput,
     cb: (err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void
   ): void;
-  public removeKnowledgeBaseTemplateUri(
+  removeKnowledgeBaseTemplateUri(
     args: RemoveKnowledgeBaseTemplateUriCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void
   ): void;
-  public removeKnowledgeBaseTemplateUri(
-    args: RemoveKnowledgeBaseTemplateUriCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void),
-    cb?: (err: any, data?: RemoveKnowledgeBaseTemplateUriCommandOutput) => void
-  ): Promise<RemoveKnowledgeBaseTemplateUriCommandOutput> | void {
-    const command = new RemoveKnowledgeBaseTemplateUriCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for content in a specified knowledge base. Can be used to get a specific content
-   *       resource by its name.</p>
+   * @see {@link SearchContentCommand}
    */
-  public searchContent(
+  searchContent(
     args: SearchContentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<SearchContentCommandOutput>;
-  public searchContent(
+  searchContent(
     args: SearchContentCommandInput,
     cb: (err: any, data?: SearchContentCommandOutput) => void
   ): void;
-  public searchContent(
+  searchContent(
     args: SearchContentCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: SearchContentCommandOutput) => void
   ): void;
-  public searchContent(
-    args: SearchContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchContentCommandOutput) => void),
-    cb?: (err: any, data?: SearchContentCommandOutput) => void
-  ): Promise<SearchContentCommandOutput> | void {
-    const command = new SearchContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for sessions.</p>
+   * @see {@link SearchQuickResponsesCommand}
    */
-  public searchSessions(
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<SearchQuickResponsesCommandOutput>;
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    cb: (err: any, data?: SearchQuickResponsesCommandOutput) => void
+  ): void;
+  searchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: SearchQuickResponsesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchSessionsCommand}
+   */
+  searchSessions(
     args: SearchSessionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<SearchSessionsCommandOutput>;
-  public searchSessions(
+  searchSessions(
     args: SearchSessionsCommandInput,
     cb: (err: any, data?: SearchSessionsCommandOutput) => void
   ): void;
-  public searchSessions(
+  searchSessions(
     args: SearchSessionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: SearchSessionsCommandOutput) => void
   ): void;
-  public searchSessions(
-    args: SearchSessionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchSessionsCommandOutput) => void),
-    cb?: (err: any, data?: SearchSessionsCommandOutput) => void
-  ): Promise<SearchSessionsCommandOutput> | void {
-    const command = new SearchSessionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get a URL to upload content to a knowledge base. To upload content, first make a PUT
-   *       request to the returned URL with your file, making sure to include the required headers. Then
-   *       use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_CreateContent.html">CreateContent</a> to finalize the content creation process or <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_UpdateContent.html">UpdateContent</a> to modify an existing resource. You can only upload content to a
-   *       knowledge base of type CUSTOM.</p>
+   * @see {@link StartContentUploadCommand}
    */
-  public startContentUpload(
+  startContentUpload(
     args: StartContentUploadCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<StartContentUploadCommandOutput>;
-  public startContentUpload(
+  startContentUpload(
     args: StartContentUploadCommandInput,
     cb: (err: any, data?: StartContentUploadCommandOutput) => void
   ): void;
-  public startContentUpload(
+  startContentUpload(
     args: StartContentUploadCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: StartContentUploadCommandOutput) => void
   ): void;
-  public startContentUpload(
-    args: StartContentUploadCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartContentUploadCommandOutput) => void),
-    cb?: (err: any, data?: StartContentUploadCommandOutput) => void
-  ): Promise<StartContentUploadCommandOutput> | void {
-    const command = new StartContentUploadCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds the specified tags to the specified resource.</p>
+   * @see {@link StartImportJobCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  startImportJob(
+    args: StartImportJobCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<StartImportJobCommandOutput>;
+  startImportJob(
+    args: StartImportJobCommandInput,
+    cb: (err: any, data?: StartImportJobCommandOutput) => void
+  ): void;
+  startImportJob(
+    args: StartImportJobCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: StartImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WisdomRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates information about the content.</p>
+   * @see {@link UpdateContentCommand}
    */
-  public updateContent(
+  updateContent(
     args: UpdateContentCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<UpdateContentCommandOutput>;
-  public updateContent(
+  updateContent(
     args: UpdateContentCommandInput,
     cb: (err: any, data?: UpdateContentCommandOutput) => void
   ): void;
-  public updateContent(
+  updateContent(
     args: UpdateContentCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: UpdateContentCommandOutput) => void
   ): void;
-  public updateContent(
-    args: UpdateContentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateContentCommandOutput) => void),
-    cb?: (err: any, data?: UpdateContentCommandOutput) => void
-  ): Promise<UpdateContentCommandOutput> | void {
-    const command = new UpdateContentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the template URI of a knowledge base. This is only supported for knowledge bases
-   *       of type EXTERNAL. Include a single variable in <code>${variable}</code> format; this
-   *       interpolated by Wisdom using ingested content. For example, if you ingest a Salesforce
-   *       article, it has an <code>Id</code> value, and you can set the template URI to
-   *         <code>https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*\/view</code>.
-   *     </p>
+   * @see {@link UpdateKnowledgeBaseTemplateUriCommand}
    */
-  public updateKnowledgeBaseTemplateUri(
+  updateKnowledgeBaseTemplateUri(
     args: UpdateKnowledgeBaseTemplateUriCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WisdomRequestOptions
   ): Promise<UpdateKnowledgeBaseTemplateUriCommandOutput>;
-  public updateKnowledgeBaseTemplateUri(
+  updateKnowledgeBaseTemplateUri(
     args: UpdateKnowledgeBaseTemplateUriCommandInput,
     cb: (err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void
   ): void;
-  public updateKnowledgeBaseTemplateUri(
+  updateKnowledgeBaseTemplateUri(
     args: UpdateKnowledgeBaseTemplateUriCommandInput,
-    options: __HttpHandlerOptions,
+    options: WisdomRequestOptions,
     cb: (err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void
   ): void;
-  public updateKnowledgeBaseTemplateUri(
-    args: UpdateKnowledgeBaseTemplateUriCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void),
-    cb?: (err: any, data?: UpdateKnowledgeBaseTemplateUriCommandOutput) => void
-  ): Promise<UpdateKnowledgeBaseTemplateUriCommandOutput> | void {
-    const command = new UpdateKnowledgeBaseTemplateUriCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateQuickResponseCommand}
+   */
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    options?: WisdomRequestOptions
+  ): Promise<UpdateQuickResponseCommandOutput>;
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    cb: (err: any, data?: UpdateQuickResponseCommandOutput) => void
+  ): void;
+  updateQuickResponse(
+    args: UpdateQuickResponseCommandInput,
+    options: WisdomRequestOptions,
+    cb: (err: any, data?: UpdateQuickResponseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAssistantAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssistantAssociationsCommandOutput}.
+   */
+  paginateListAssistantAssociations(
+    args: ListAssistantAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssistantAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListAssistantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAssistantsCommandOutput}.
+   */
+  paginateListAssistants(
+    args?: ListAssistantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAssistantsCommandOutput>;
+
+  /**
+   * @see {@link ListContentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListContentsCommandOutput}.
+   */
+  paginateListContents(
+    args: ListContentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListContentsCommandOutput>;
+
+  /**
+   * @see {@link ListImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportJobsCommandOutput}.
+   */
+  paginateListImportJobs(
+    args: ListImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListKnowledgeBasesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListKnowledgeBasesCommandOutput}.
+   */
+  paginateListKnowledgeBases(
+    args?: ListKnowledgeBasesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListKnowledgeBasesCommandOutput>;
+
+  /**
+   * @see {@link ListQuickResponsesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQuickResponsesCommandOutput}.
+   */
+  paginateListQuickResponses(
+    args: ListQuickResponsesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQuickResponsesCommandOutput>;
+
+  /**
+   * @see {@link QueryAssistantCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link QueryAssistantCommandOutput}.
+   */
+  paginateQueryAssistant(
+    args: QueryAssistantCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<QueryAssistantCommandOutput>;
+
+  /**
+   * @see {@link SearchContentCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchContentCommandOutput}.
+   */
+  paginateSearchContent(
+    args: SearchContentCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchContentCommandOutput>;
+
+  /**
+   * @see {@link SearchQuickResponsesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchQuickResponsesCommandOutput}.
+   */
+  paginateSearchQuickResponses(
+    args: SearchQuickResponsesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchQuickResponsesCommandOutput>;
+
+  /**
+   * @see {@link SearchSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchSessionsCommandOutput}.
+   */
+  paginateSearchSessions(
+    args: SearchSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchSessionsCommandOutput>;
 }
+
+/**
+ * <p>Amazon Connect Wisdom delivers agents the information they need to solve customer issues as they're
+ *       actively speaking with customers. Agents can search across connected repositories from within
+ *       their agent desktop to find answers quickly. Use Amazon Connect Wisdom to create an assistant and a
+ *       knowledge base, for example, or manage content by uploading custom files.</p>
+ * @public
+ */
+export class Wisdom extends WisdomClient implements Wisdom {}
+createAggregatedClient(commands, Wisdom, { paginators });

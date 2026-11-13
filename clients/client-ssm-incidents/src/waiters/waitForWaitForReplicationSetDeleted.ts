@@ -1,17 +1,30 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetReplicationSetCommand, GetReplicationSetCommandInput } from "../commands/GetReplicationSetCommand";
-import { SSMIncidentsClient } from "../SSMIncidentsClient";
+import {
+  type GetReplicationSetCommandInput,
+  type GetReplicationSetCommandOutput,
+  GetReplicationSetCommand,
+} from "../commands/GetReplicationSetCommand";
+import type { ResourceNotFoundException } from "../models/errors";
+import type { SSMIncidentsServiceException } from "../models/SSMIncidentsServiceException";
+import type { SSMIncidentsClient } from "../SSMIncidentsClient";
 
-const checkState = async (client: SSMIncidentsClient, input: GetReplicationSetCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SSMIncidentsClient, input: GetReplicationSetCommandInput): Promise<WaiterResult<GetReplicationSetCommandOutput | SSMIncidentsServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetReplicationSetCommand(input));
+    let result: GetReplicationSetCommandOutput & any = await client.send(new GetReplicationSetCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.replicationSet.status;
-      };
+      }
       if (returnComparator() === "DELETING") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -19,14 +32,14 @@ const checkState = async (client: SSMIncidentsClient, input: GetReplicationSetCo
     try {
       const returnComparator = () => {
         return result.replicationSet.status;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -39,7 +52,7 @@ const checkState = async (client: SSMIncidentsClient, input: GetReplicationSetCo
 export const waitForWaitForReplicationSetDeleted = async (
   params: WaiterConfiguration<SSMIncidentsClient>,
   input: GetReplicationSetCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetReplicationSetCommandOutput | SSMIncidentsServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 30 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +64,8 @@ export const waitForWaitForReplicationSetDeleted = async (
 export const waitUntilWaitForReplicationSetDeleted = async (
   params: WaiterConfiguration<SSMIncidentsClient>,
   input: GetReplicationSetCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 30 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundException>;
 };

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FisClient";
-import { StartExperimentRequest, StartExperimentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartExperimentCommand,
-  serializeAws_restJson1StartExperimentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartExperimentRequest, StartExperimentResponse } from "../models/models_0";
+import { StartExperiment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartExperimentCommand}.
+ */
 export interface StartExperimentCommandInput extends StartExperimentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartExperimentCommand}.
+ */
 export interface StartExperimentCommandOutput extends StartExperimentResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,184 @@ export interface StartExperimentCommandOutput extends StartExperimentResponse, _
  * ```javascript
  * import { FisClient, StartExperimentCommand } from "@aws-sdk/client-fis"; // ES Modules import
  * // const { FisClient, StartExperimentCommand } = require("@aws-sdk/client-fis"); // CommonJS import
+ * // import type { FisClientConfig } from "@aws-sdk/client-fis";
+ * const config = {}; // type is FisClientConfig
  * const client = new FisClient(config);
+ * const input = { // StartExperimentRequest
+ *   clientToken: "STRING_VALUE", // required
+ *   experimentTemplateId: "STRING_VALUE", // required
+ *   experimentOptions: { // StartExperimentExperimentOptionsInput
+ *     actionsMode: "skip-all" || "run-all",
+ *   },
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new StartExperimentCommand(input);
  * const response = await client.send(command);
+ * // { // StartExperimentResponse
+ * //   experiment: { // Experiment
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     experimentTemplateId: "STRING_VALUE",
+ * //     roleArn: "STRING_VALUE",
+ * //     state: { // ExperimentState
+ * //       status: "pending" || "initiating" || "running" || "completed" || "stopping" || "stopped" || "failed" || "cancelled",
+ * //       reason: "STRING_VALUE",
+ * //       error: { // ExperimentError
+ * //         accountId: "STRING_VALUE",
+ * //         code: "STRING_VALUE",
+ * //         location: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     targets: { // ExperimentTargetMap
+ * //       "<keys>": { // ExperimentTarget
+ * //         resourceType: "STRING_VALUE",
+ * //         resourceArns: [ // ResourceArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         resourceTags: { // TagMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         filters: [ // ExperimentTargetFilterList
+ * //           { // ExperimentTargetFilter
+ * //             path: "STRING_VALUE",
+ * //             values: [ // ExperimentTargetFilterValues
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         selectionMode: "STRING_VALUE",
+ * //         parameters: { // ExperimentTargetParameterMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     actions: { // ExperimentActionMap
+ * //       "<keys>": { // ExperimentAction
+ * //         actionId: "STRING_VALUE",
+ * //         description: "STRING_VALUE",
+ * //         parameters: { // ExperimentActionParameterMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         targets: { // ExperimentActionTargetMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         startAfter: [ // ExperimentActionStartAfterList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         state: { // ExperimentActionState
+ * //           status: "pending" || "initiating" || "running" || "completed" || "cancelled" || "stopping" || "stopped" || "failed" || "skipped",
+ * //           reason: "STRING_VALUE",
+ * //         },
+ * //         startTime: new Date("TIMESTAMP"),
+ * //         endTime: new Date("TIMESTAMP"),
+ * //       },
+ * //     },
+ * //     stopConditions: [ // ExperimentStopConditionList
+ * //       { // ExperimentStopCondition
+ * //         source: "STRING_VALUE",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     startTime: new Date("TIMESTAMP"),
+ * //     endTime: new Date("TIMESTAMP"),
+ * //     tags: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     logConfiguration: { // ExperimentLogConfiguration
+ * //       cloudWatchLogsConfiguration: { // ExperimentCloudWatchLogsLogConfiguration
+ * //         logGroupArn: "STRING_VALUE",
+ * //       },
+ * //       s3Configuration: { // ExperimentS3LogConfiguration
+ * //         bucketName: "STRING_VALUE",
+ * //         prefix: "STRING_VALUE",
+ * //       },
+ * //       logSchemaVersion: Number("int"),
+ * //     },
+ * //     experimentOptions: { // ExperimentOptions
+ * //       accountTargeting: "single-account" || "multi-account",
+ * //       emptyTargetResolutionMode: "fail" || "skip",
+ * //       actionsMode: "skip-all" || "run-all",
+ * //     },
+ * //     targetAccountConfigurationsCount: Number("long"),
+ * //     experimentReportConfiguration: { // ExperimentReportConfiguration
+ * //       outputs: { // ExperimentReportConfigurationOutputs
+ * //         s3Configuration: { // ExperimentReportConfigurationOutputsS3Configuration
+ * //           bucketName: "STRING_VALUE",
+ * //           prefix: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       dataSources: { // ExperimentReportConfigurationDataSources
+ * //         cloudWatchDashboards: [ // ExperimentReportConfigurationCloudWatchDashboardList
+ * //           { // ExperimentReportConfigurationCloudWatchDashboard
+ * //             dashboardIdentifier: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //       preExperimentDuration: "STRING_VALUE",
+ * //       postExperimentDuration: "STRING_VALUE",
+ * //     },
+ * //     experimentReport: { // ExperimentReport
+ * //       state: { // ExperimentReportState
+ * //         status: "pending" || "running" || "completed" || "cancelled" || "failed",
+ * //         reason: "STRING_VALUE",
+ * //         error: { // ExperimentReportError
+ * //           code: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       s3Reports: [ // ExperimentReportS3ReportList
+ * //         { // ExperimentReportS3Report
+ * //           arn: "STRING_VALUE",
+ * //           reportType: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartExperimentCommandInput - {@link StartExperimentCommandInput}
+ * @returns {@link StartExperimentCommandOutput}
  * @see {@link StartExperimentCommandInput} for command's `input` shape.
  * @see {@link StartExperimentCommandOutput} for command's `response` shape.
- * @see {@link FisClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FisClientResolvedConfig | config} for FisClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be processed because of a conflict.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have exceeded your service quota.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>
+ *
+ * @throws {@link FisServiceException}
+ * <p>Base exception class for all service exceptions from Fis service.</p>
+ *
+ *
+ * @public
  */
-export class StartExperimentCommand extends $Command<
-  StartExperimentCommandInput,
-  StartExperimentCommandOutput,
-  FisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartExperimentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartExperimentCommandInput, StartExperimentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FisClient";
-    const commandName = "StartExperimentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartExperimentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartExperimentResponse.filterSensitiveLog,
+export class StartExperimentCommand extends command<StartExperimentCommandInput, StartExperimentCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartExperiment",
+  StartExperiment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartExperimentRequest;
+      output: StartExperimentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartExperimentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartExperimentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartExperimentCommandOutput> {
-    return deserializeAws_restJson1StartExperimentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartExperimentCommandInput;
+      output: StartExperimentCommandOutput;
+    };
+  };
 }

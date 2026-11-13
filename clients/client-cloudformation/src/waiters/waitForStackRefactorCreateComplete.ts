@@ -1,0 +1,70 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import type { CloudFormationClient } from "../CloudFormationClient";
+import {
+  type DescribeStackRefactorCommandInput,
+  type DescribeStackRefactorCommandOutput,
+  DescribeStackRefactorCommand,
+} from "../commands/DescribeStackRefactorCommand";
+import type { CloudFormationServiceException } from "../models/CloudFormationServiceException";
+
+const checkState = async (client: CloudFormationClient, input: DescribeStackRefactorCommandInput): Promise<WaiterResult<DescribeStackRefactorCommandOutput | CloudFormationServiceException>> => {
+  let reason;
+  try {
+    let result: DescribeStackRefactorCommandOutput & any = await client.send(new DescribeStackRefactorCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.Status;
+      }
+      if (returnComparator() === "CREATE_COMPLETE") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.Status;
+      }
+      if (returnComparator() === "CREATE_FAILED") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+    if (exception.name === "ValidationError") {
+      return { state: WaiterState.FAILURE, reason };
+    }
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ * Wait until the stack refactor status is CREATE_COMPLETE.
+ *  @deprecated Use waitUntilStackRefactorCreateComplete instead. waitForStackRefactorCreateComplete does not throw error in non-success cases.
+ */
+export const waitForStackRefactorCreateComplete = async (
+  params: WaiterConfiguration<CloudFormationClient>,
+  input: DescribeStackRefactorCommandInput
+): Promise<WaiterResult<DescribeStackRefactorCommandOutput | CloudFormationServiceException>> => {
+  const serviceDefaults = { minDelay: 5, maxDelay: 120 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ * Wait until the stack refactor status is CREATE_COMPLETE.
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to DescribeStackRefactorCommand for polling.
+ */
+export const waitUntilStackRefactorCreateComplete = async (
+  params: WaiterConfiguration<CloudFormationClient>,
+  input: DescribeStackRefactorCommandInput
+): Promise<WaiterResult<DescribeStackRefactorCommandOutput>> => {
+  const serviceDefaults = { minDelay: 5, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<DescribeStackRefactorCommandOutput>;
+};

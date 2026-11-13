@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { DescribeConnectionRequest, DescribeConnectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConnectionCommand,
-  serializeAws_json1_1DescribeConnectionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeConnectionRequest, DescribeConnectionResponse } from "../models/models_0";
+import { DescribeConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConnectionCommand}.
+ */
 export interface DescribeConnectionCommandInput extends DescribeConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConnectionCommand}.
+ */
 export interface DescribeConnectionCommandOutput extends DescribeConnectionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,136 @@ export interface DescribeConnectionCommandOutput extends DescribeConnectionRespo
  * ```javascript
  * import { EventBridgeClient, DescribeConnectionCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, DescribeConnectionCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // DescribeConnectionRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DescribeConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConnectionResponse
+ * //   ConnectionArn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   InvocationConnectivityParameters: { // DescribeConnectionConnectivityParameters
+ * //     ResourceParameters: { // DescribeConnectionResourceParameters
+ * //       ResourceConfigurationArn: "STRING_VALUE", // required
+ * //       ResourceAssociationArn: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   ConnectionState: "CREATING" || "UPDATING" || "DELETING" || "AUTHORIZED" || "DEAUTHORIZED" || "AUTHORIZING" || "DEAUTHORIZING" || "ACTIVE" || "FAILED_CONNECTIVITY",
+ * //   StateReason: "STRING_VALUE",
+ * //   AuthorizationType: "BASIC" || "OAUTH_CLIENT_CREDENTIALS" || "API_KEY",
+ * //   SecretArn: "STRING_VALUE",
+ * //   KmsKeyIdentifier: "STRING_VALUE",
+ * //   AuthParameters: { // ConnectionAuthResponseParameters
+ * //     BasicAuthParameters: { // ConnectionBasicAuthResponseParameters
+ * //       Username: "STRING_VALUE",
+ * //     },
+ * //     OAuthParameters: { // ConnectionOAuthResponseParameters
+ * //       ClientParameters: { // ConnectionOAuthClientResponseParameters
+ * //         ClientID: "STRING_VALUE",
+ * //       },
+ * //       AuthorizationEndpoint: "STRING_VALUE",
+ * //       HttpMethod: "GET" || "POST" || "PUT",
+ * //       OAuthHttpParameters: { // ConnectionHttpParameters
+ * //         HeaderParameters: [ // ConnectionHeaderParametersList
+ * //           { // ConnectionHeaderParameter
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //             IsValueSecret: true || false,
+ * //           },
+ * //         ],
+ * //         QueryStringParameters: [ // ConnectionQueryStringParametersList
+ * //           { // ConnectionQueryStringParameter
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //             IsValueSecret: true || false,
+ * //           },
+ * //         ],
+ * //         BodyParameters: [ // ConnectionBodyParametersList
+ * //           { // ConnectionBodyParameter
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //             IsValueSecret: true || false,
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //     ApiKeyAuthParameters: { // ConnectionApiKeyAuthResponseParameters
+ * //       ApiKeyName: "STRING_VALUE",
+ * //     },
+ * //     InvocationHttpParameters: {
+ * //       HeaderParameters: [
+ * //         {
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //           IsValueSecret: true || false,
+ * //         },
+ * //       ],
+ * //       QueryStringParameters: [
+ * //         {
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //           IsValueSecret: true || false,
+ * //         },
+ * //       ],
+ * //       BodyParameters: [
+ * //         {
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //           IsValueSecret: true || false,
+ * //         },
+ * //       ],
+ * //     },
+ * //     ConnectivityParameters: {
+ * //       ResourceParameters: {
+ * //         ResourceConfigurationArn: "STRING_VALUE", // required
+ * //         ResourceAssociationArn: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   },
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastAuthorizedTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeConnectionCommandInput - {@link DescribeConnectionCommandInput}
+ * @returns {@link DescribeConnectionCommandOutput}
  * @see {@link DescribeConnectionCommandInput} for command's `input` shape.
  * @see {@link DescribeConnectionCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConnectionCommand extends $Command<
-  DescribeConnectionCommandInput,
-  DescribeConnectionCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConnectionCommandInput, DescribeConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "DescribeConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConnectionResponse.filterSensitiveLog,
+export class DescribeConnectionCommand extends command<DescribeConnectionCommandInput, DescribeConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConnection",
+  DescribeConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConnectionRequest;
+      output: DescribeConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeConnectionCommandOutput> {
-    return deserializeAws_json1_1DescribeConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConnectionCommandInput;
+      output: DescribeConnectionCommandOutput;
+    };
+  };
 }

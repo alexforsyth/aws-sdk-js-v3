@@ -1,7 +1,6 @@
-# @aws-sdk/client-ram
+<!-- generated file, do not edit directly -->
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-ram/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-ram)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-ram.svg)](https://www.npmjs.com/package/@aws-sdk/client-ram)
+# @aws-sdk/client-ram
 
 ## Description
 
@@ -9,14 +8,11 @@ AWS SDK for JavaScript RAM Client for Node.js, Browser and React Native.
 
 <p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides
 descriptions and syntax for each of the actions and data types in RAM. RAM is a
-service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts and
-within your organization or organizational units (OUs) in Organizations. For supported
-resource types, you can also share resources with IAM roles and IAM users. If you have
-multiple Amazon Web Services accounts, you can use RAM to share those resources with other
-accounts.</p>
-
+service that helps you securely share your Amazon Web Services resources to other Amazon Web Services accounts. If
+you use Organizations to manage your accounts, then you can share your resources with your
+entire organization or to organizational units (OUs). For supported resource types, you
+can also share resources with individual Identity and Access Management (IAM) roles and users. </p>
 <p>To learn more about RAM, see the following resources:</p>
-
 <ul>
 <li>
 <p>
@@ -33,8 +29,7 @@ Guide</a>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-ram
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-ram`
 - `yarn add @aws-sdk/client-ram`
@@ -46,40 +41,38 @@ using your favorite package manager:
 
 The AWS SDK is modulized by clients and commands.
 To send a request, you only need to import the `RAMClient` and
-the commands you need, for example `AcceptResourceShareInvitationCommand`:
+the commands you need, for example `ListPermissionsCommand`:
 
 ```js
 // ES5 example
-const { RAMClient, AcceptResourceShareInvitationCommand } = require("@aws-sdk/client-ram");
+const { RAMClient, ListPermissionsCommand } = require("@aws-sdk/client-ram");
 ```
 
 ```ts
 // ES6+ example
-import { RAMClient, AcceptResourceShareInvitationCommand } from "@aws-sdk/client-ram";
+import { RAMClient, ListPermissionsCommand } from "@aws-sdk/client-ram";
 ```
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new RAMClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
-const command = new AcceptResourceShareInvitationCommand(params);
+const params = { /** input parameters */ };
+const command = new ListPermissionsCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -94,26 +87,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -129,31 +105,25 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // proccess err and data.
-});
-```
+`RAM` extends `RAMClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`RAMClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-ram";
-const client = new AWS.RAM({ region: "REGION" });
+import { RAM } from "@aws-sdk/client-ram";
+
+const client = new RAM({ region: "REGION" });
 
 // async/await.
 try {
-  const data = await client.acceptResourceShareInvitation(params);
+  const data = await client.listPermissions(params);
   // process data.
 } catch (error) {
   // error handling.
@@ -161,7 +131,7 @@ try {
 
 // Promises.
 client
-  .acceptResourceShareInvitation(params)
+  .listPermissions(params)
   .then((data) => {
     // process data.
   })
@@ -169,9 +139,9 @@ client
     // error handling.
   });
 
-// callbacks.
-client.acceptResourceShareInvitation(params, (err, data) => {
-  // proccess err and data.
+// callbacks (not recommended).
+client.listPermissions(params, (err, data) => {
+  // process err and data.
 });
 ```
 
@@ -197,12 +167,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -223,3 +195,258 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+AcceptResourceShareInvitation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/AcceptResourceShareInvitationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AcceptResourceShareInvitationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AcceptResourceShareInvitationCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateResourceShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/AssociateResourceShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AssociateResourceShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AssociateResourceShareCommandOutput/)
+</details>
+<details>
+<summary>
+AssociateResourceSharePermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/AssociateResourceSharePermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AssociateResourceSharePermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/AssociateResourceSharePermissionCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/CreatePermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreatePermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreatePermissionCommandOutput/)
+</details>
+<details>
+<summary>
+CreatePermissionVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/CreatePermissionVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreatePermissionVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreatePermissionVersionCommandOutput/)
+</details>
+<details>
+<summary>
+CreateResourceShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/CreateResourceShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreateResourceShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/CreateResourceShareCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/DeletePermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeletePermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeletePermissionCommandOutput/)
+</details>
+<details>
+<summary>
+DeletePermissionVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/DeletePermissionVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeletePermissionVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeletePermissionVersionCommandOutput/)
+</details>
+<details>
+<summary>
+DeleteResourceShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/DeleteResourceShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeleteResourceShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DeleteResourceShareCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateResourceShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/DisassociateResourceShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DisassociateResourceShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DisassociateResourceShareCommandOutput/)
+</details>
+<details>
+<summary>
+DisassociateResourceSharePermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/DisassociateResourceSharePermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DisassociateResourceSharePermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/DisassociateResourceSharePermissionCommandOutput/)
+</details>
+<details>
+<summary>
+EnableSharingWithAwsOrganization
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/EnableSharingWithAwsOrganizationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/EnableSharingWithAwsOrganizationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/EnableSharingWithAwsOrganizationCommandOutput/)
+</details>
+<details>
+<summary>
+GetPermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/GetPermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetPermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetPermissionCommandOutput/)
+</details>
+<details>
+<summary>
+GetResourcePolicies
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/GetResourcePoliciesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourcePoliciesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourcePoliciesCommandOutput/)
+</details>
+<details>
+<summary>
+GetResourceShareAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/GetResourceShareAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceShareAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceShareAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+GetResourceShareInvitations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/GetResourceShareInvitationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceShareInvitationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceShareInvitationsCommandOutput/)
+</details>
+<details>
+<summary>
+GetResourceShares
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/GetResourceSharesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceSharesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/GetResourceSharesCommandOutput/)
+</details>
+<details>
+<summary>
+ListPendingInvitationResources
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListPendingInvitationResourcesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPendingInvitationResourcesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPendingInvitationResourcesCommandOutput/)
+</details>
+<details>
+<summary>
+ListPermissionAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListPermissionAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPermissions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListPermissionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPermissionVersions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListPermissionVersionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionVersionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPermissionVersionsCommandOutput/)
+</details>
+<details>
+<summary>
+ListPrincipals
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListPrincipalsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPrincipalsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListPrincipalsCommandOutput/)
+</details>
+<details>
+<summary>
+ListReplacePermissionAssociationsWork
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListReplacePermissionAssociationsWorkCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListReplacePermissionAssociationsWorkCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListReplacePermissionAssociationsWorkCommandOutput/)
+</details>
+<details>
+<summary>
+ListResources
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListResourcesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourcesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourcesCommandOutput/)
+</details>
+<details>
+<summary>
+ListResourceSharePermissions
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListResourceSharePermissionsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourceSharePermissionsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourceSharePermissionsCommandOutput/)
+</details>
+<details>
+<summary>
+ListResourceTypes
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListResourceTypesCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourceTypesCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListResourceTypesCommandOutput/)
+</details>
+<details>
+<summary>
+ListSourceAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ListSourceAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListSourceAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ListSourceAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+PromotePermissionCreatedFromPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/PromotePermissionCreatedFromPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/PromotePermissionCreatedFromPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/PromotePermissionCreatedFromPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+PromoteResourceShareCreatedFromPolicy
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/PromoteResourceShareCreatedFromPolicyCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/PromoteResourceShareCreatedFromPolicyCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/PromoteResourceShareCreatedFromPolicyCommandOutput/)
+</details>
+<details>
+<summary>
+RejectResourceShareInvitation
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/RejectResourceShareInvitationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/RejectResourceShareInvitationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/RejectResourceShareInvitationCommandOutput/)
+</details>
+<details>
+<summary>
+ReplacePermissionAssociations
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/ReplacePermissionAssociationsCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ReplacePermissionAssociationsCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/ReplacePermissionAssociationsCommandOutput/)
+</details>
+<details>
+<summary>
+SetDefaultPermissionVersion
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/SetDefaultPermissionVersionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/SetDefaultPermissionVersionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/SetDefaultPermissionVersionCommandOutput/)
+</details>
+<details>
+<summary>
+TagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/TagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/TagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/TagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UntagResource
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/UntagResourceCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UntagResourceCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UntagResourceCommandOutput/)
+</details>
+<details>
+<summary>
+UpdatePermission
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/UpdatePermissionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UpdatePermissionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UpdatePermissionCommandOutput/)
+</details>
+<details>
+<summary>
+UpdateResourceShare
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ram/command/UpdateResourceShareCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UpdateResourceShareCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-ram/Interface/UpdateResourceShareCommandOutput/)
+</details>

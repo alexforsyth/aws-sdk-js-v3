@@ -1,0 +1,109 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateHostInput, CreateHostOutput } from "../models/models_0";
+import { CreateHost$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateHostCommand}.
+ */
+export interface CreateHostCommandInput extends CreateHostInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateHostCommand}.
+ */
+export interface CreateHostCommandOutput extends CreateHostOutput, __MetadataBearer {}
+
+/**
+ * <p>Creates a resource that represents the infrastructure where a third-party provider is
+ *       installed. The host is used when you create connections to an installed third-party provider
+ *       type, such as GitHub Enterprise Server. You create one host for all connections to that
+ *       provider.</p>
+ *          <note>
+ *             <p>A host created through the CLI or the SDK is in `PENDING` status by
+ *         default. You can make its status `AVAILABLE` by setting up the host in the console.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CodeConnectionsClient, CreateHostCommand } from "@aws-sdk/client-codeconnections"; // ES Modules import
+ * // const { CodeConnectionsClient, CreateHostCommand } = require("@aws-sdk/client-codeconnections"); // CommonJS import
+ * // import type { CodeConnectionsClientConfig } from "@aws-sdk/client-codeconnections";
+ * const config = {}; // type is CodeConnectionsClientConfig
+ * const client = new CodeConnectionsClient(config);
+ * const input = { // CreateHostInput
+ *   Name: "STRING_VALUE", // required
+ *   ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged" || "AzureDevOps", // required
+ *   ProviderEndpoint: "STRING_VALUE", // required
+ *   VpcConfiguration: { // VpcConfiguration
+ *     VpcId: "STRING_VALUE", // required
+ *     SubnetIds: [ // SubnetIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     SecurityGroupIds: [ // SecurityGroupIds // required
+ *       "STRING_VALUE",
+ *     ],
+ *     TlsCertificate: "STRING_VALUE",
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
+ * const command = new CreateHostCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateHostOutput
+ * //   HostArn: "STRING_VALUE",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param CreateHostCommandInput - {@link CreateHostCommandInput}
+ * @returns {@link CreateHostCommandOutput}
+ * @see {@link CreateHostCommandInput} for command's `input` shape.
+ * @see {@link CreateHostCommandOutput} for command's `response` shape.
+ * @see {@link CodeConnectionsClientResolvedConfig | config} for CodeConnectionsClient's `config` shape.
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>Exceeded the maximum limit for connections.</p>
+ *
+ * @throws {@link CodeConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeConnections service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateHostCommand extends command<CreateHostCommandInput, CreateHostCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateHost",
+  CreateHost$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHostInput;
+      output: CreateHostOutput;
+    };
+    sdk: {
+      input: CreateHostCommandInput;
+      output: CreateHostCommandOutput;
+    };
+  };
+}

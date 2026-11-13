@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteHITRequest, DeleteHITResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import { deserializeAws_json1_1DeleteHITCommand, serializeAws_json1_1DeleteHITCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteHITRequest, DeleteHITResponse } from "../models/models_0";
+import { DeleteHIT$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteHITCommand}.
+ */
 export interface DeleteHITCommandInput extends DeleteHITRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteHITCommand}.
+ */
 export interface DeleteHITCommandOutput extends DeleteHITResponse, __MetadataBearer {}
 
 /**
@@ -60,68 +64,51 @@ export interface DeleteHITCommandOutput extends DeleteHITResponse, __MetadataBea
  * ```javascript
  * import { MTurkClient, DeleteHITCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, DeleteHITCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // DeleteHITRequest
+ *   HITId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteHITCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteHITCommandInput - {@link DeleteHITCommandInput}
+ * @returns {@link DeleteHITCommandOutput}
  * @see {@link DeleteHITCommandInput} for command's `input` shape.
  * @see {@link DeleteHITCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteHITCommand extends $Command<
-  DeleteHITCommandInput,
-  DeleteHITCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteHITCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteHITCommandInput, DeleteHITCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "DeleteHITCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteHITRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteHITResponse.filterSensitiveLog,
+export class DeleteHITCommand extends command<DeleteHITCommandInput, DeleteHITCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteHIT",
+  DeleteHIT$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteHITRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteHITCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteHITCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteHITCommandOutput> {
-    return deserializeAws_json1_1DeleteHITCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteHITCommandInput;
+      output: DeleteHITCommandOutput;
+    };
+  };
 }

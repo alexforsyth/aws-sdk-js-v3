@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BraketClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BraketClient";
-import { CreateQuantumTaskRequest, CreateQuantumTaskResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateQuantumTaskCommand,
-  serializeAws_restJson1CreateQuantumTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateQuantumTaskRequest, CreateQuantumTaskResponse } from "../models/models_0";
+import { CreateQuantumTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateQuantumTaskCommand}.
+ */
 export interface CreateQuantumTaskCommandInput extends CreateQuantumTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateQuantumTaskCommand}.
+ */
 export interface CreateQuantumTaskCommandOutput extends CreateQuantumTaskResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface CreateQuantumTaskCommandOutput extends CreateQuantumTaskRespons
  * ```javascript
  * import { BraketClient, CreateQuantumTaskCommand } from "@aws-sdk/client-braket"; // ES Modules import
  * // const { BraketClient, CreateQuantumTaskCommand } = require("@aws-sdk/client-braket"); // CommonJS import
+ * // import type { BraketClientConfig } from "@aws-sdk/client-braket";
+ * const config = {}; // type is BraketClientConfig
  * const client = new BraketClient(config);
+ * const input = { // CreateQuantumTaskRequest
+ *   clientToken: "STRING_VALUE", // required
+ *   deviceArn: "STRING_VALUE", // required
+ *   deviceParameters: "STRING_VALUE",
+ *   shots: Number("long"), // required
+ *   outputS3Bucket: "STRING_VALUE", // required
+ *   outputS3KeyPrefix: "STRING_VALUE", // required
+ *   action: "STRING_VALUE", // required
+ *   tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   jobToken: "STRING_VALUE",
+ *   associations: [ // Associations
+ *     { // Association
+ *       arn: "STRING_VALUE", // required
+ *       type: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   experimentalCapabilities: { // ExperimentalCapabilities Union: only one key present
+ *     enabled: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateQuantumTaskCommand(input);
  * const response = await client.send(command);
+ * // { // CreateQuantumTaskResponse
+ * //   quantumTaskArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateQuantumTaskCommandInput - {@link CreateQuantumTaskCommandInput}
+ * @returns {@link CreateQuantumTaskCommandOutput}
  * @see {@link CreateQuantumTaskCommandInput} for command's `input` shape.
  * @see {@link CreateQuantumTaskCommandOutput} for command's `response` shape.
- * @see {@link BraketClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BraketClientResolvedConfig | config} for BraketClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link DeviceOfflineException} (client fault)
+ *  <p>The specified device is currently offline.</p>
+ *
+ * @throws {@link DeviceRetiredException} (client fault)
+ *  <p>The specified device has been retired.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The request failed because of an unknown error.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request failed because a service quota is exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The API throttling rate limit is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input request failed to satisfy constraints expected by Amazon Braket.</p>
+ *
+ * @throws {@link BraketServiceException}
+ * <p>Base exception class for all service exceptions from Braket service.</p>
+ *
+ *
+ * @public
  */
-export class CreateQuantumTaskCommand extends $Command<
-  CreateQuantumTaskCommandInput,
-  CreateQuantumTaskCommandOutput,
-  BraketClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateQuantumTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BraketClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateQuantumTaskCommandInput, CreateQuantumTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BraketClient";
-    const commandName = "CreateQuantumTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateQuantumTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateQuantumTaskResponse.filterSensitiveLog,
+export class CreateQuantumTaskCommand extends command<CreateQuantumTaskCommandInput, CreateQuantumTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateQuantumTask",
+  CreateQuantumTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateQuantumTaskRequest;
+      output: CreateQuantumTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateQuantumTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateQuantumTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateQuantumTaskCommandOutput> {
-    return deserializeAws_restJson1CreateQuantumTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateQuantumTaskCommandInput;
+      output: CreateQuantumTaskCommandOutput;
+    };
+  };
 }

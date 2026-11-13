@@ -1,98 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { ListInstancesRequest, ListInstancesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListInstancesCommand,
-  serializeAws_restJson1ListInstancesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInstancesRequest, ListInstancesResponse } from "../models/models_2";
+import { ListInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandInput extends ListInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandOutput extends ListInstancesResponse, __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>Return a list of instances which are in active state, creation-in-progress state, and failed
- *    state. Instances that aren't successfully created (they are in a failed state) are returned only
- *    for 24 hours after the CreateInstance API was invoked.</p>
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances
+ *    that aren't successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance
+ *    API was invoked.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, ListInstancesCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, ListInstancesCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // ListInstancesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // ListInstancesResponse
+ * //   InstanceSummaryList: [ // InstanceSummaryList
+ * //     { // InstanceSummary
+ * //       Id: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       IdentityManagementType: "SAML" || "CONNECT_MANAGED" || "EXISTING_DIRECTORY",
+ * //       InstanceAlias: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       ServiceRole: "STRING_VALUE",
+ * //       InstanceStatus: "CREATION_IN_PROGRESS" || "ACTIVE" || "CREATION_FAILED",
+ * //       InboundCallsEnabled: true || false,
+ * //       OutboundCallsEnabled: true || false,
+ * //       InstanceAccessUrl: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInstancesCommandInput - {@link ListInstancesCommandInput}
+ * @returns {@link ListInstancesCommandOutput}
  * @see {@link ListInstancesCommandInput} for command's `input` shape.
  * @see {@link ListInstancesCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class ListInstancesCommand extends $Command<
-  ListInstancesCommandInput,
-  ListInstancesCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInstancesCommandInput, ListInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "ListInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListInstancesResponse.filterSensitiveLog,
+export class ListInstancesCommand extends command<ListInstancesCommandInput, ListInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInstances",
+  ListInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInstancesRequest;
+      output: ListInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInstancesCommandOutput> {
-    return deserializeAws_restJson1ListInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInstancesCommandInput;
+      output: ListInstancesCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { ListByoipCidrsRequest, ListByoipCidrsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListByoipCidrsCommand,
-  serializeAws_json1_1ListByoipCidrsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListByoipCidrsRequest, ListByoipCidrsResponse } from "../models/models_0";
+import { ListByoipCidrs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListByoipCidrsCommand}.
+ */
 export interface ListByoipCidrsCommandInput extends ListByoipCidrsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListByoipCidrsCommand}.
+ */
 export interface ListByoipCidrsCommandOutput extends ListByoipCidrsResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +30,72 @@ export interface ListByoipCidrsCommandOutput extends ListByoipCidrsResponse, __M
  * ```javascript
  * import { GlobalAcceleratorClient, ListByoipCidrsCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, ListByoipCidrsCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // ListByoipCidrsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListByoipCidrsCommand(input);
  * const response = await client.send(command);
+ * // { // ListByoipCidrsResponse
+ * //   ByoipCidrs: [ // ByoipCidrs
+ * //     { // ByoipCidr
+ * //       Cidr: "STRING_VALUE",
+ * //       State: "PENDING_PROVISIONING" || "READY" || "PENDING_ADVERTISING" || "ADVERTISING" || "PENDING_WITHDRAWING" || "PENDING_DEPROVISIONING" || "DEPROVISIONED" || "FAILED_PROVISION" || "FAILED_ADVERTISING" || "FAILED_WITHDRAW" || "FAILED_DEPROVISION",
+ * //       Events: [ // ByoipCidrEvents
+ * //         { // ByoipCidrEvent
+ * //           Message: "STRING_VALUE",
+ * //           Timestamp: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListByoipCidrsCommandInput - {@link ListByoipCidrsCommandInput}
+ * @returns {@link ListByoipCidrsCommandOutput}
  * @see {@link ListByoipCidrsCommandInput} for command's `input` shape.
  * @see {@link ListByoipCidrsCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access permission.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>There isn't another item to return.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class ListByoipCidrsCommand extends $Command<
-  ListByoipCidrsCommandInput,
-  ListByoipCidrsCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListByoipCidrsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListByoipCidrsCommandInput, ListByoipCidrsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "ListByoipCidrsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListByoipCidrsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListByoipCidrsResponse.filterSensitiveLog,
+export class ListByoipCidrsCommand extends command<ListByoipCidrsCommandInput, ListByoipCidrsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListByoipCidrs",
+  ListByoipCidrs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListByoipCidrsRequest;
+      output: ListByoipCidrsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListByoipCidrsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListByoipCidrsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListByoipCidrsCommandOutput> {
-    return deserializeAws_json1_1ListByoipCidrsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListByoipCidrsCommandInput;
+      output: ListByoipCidrsCommandOutput;
+    };
+  };
 }

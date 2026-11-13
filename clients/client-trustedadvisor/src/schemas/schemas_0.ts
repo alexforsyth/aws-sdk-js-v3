@@ -1,0 +1,461 @@
+const _ADE = "AccessDeniedException";
+const _ARLS = "AccountRecommendationLifecycleSummary";
+const _ARLSL = "AccountRecommendationLifecycleSummaryList";
+const _BURRE = "BatchUpdateRecommendationResourceExclusion";
+const _BURRER = "BatchUpdateRecommendationResourceExclusionRequest";
+const _BURRERa = "BatchUpdateRecommendationResourceExclusionResponse";
+const _CE = "ConflictException";
+const _CS = "CheckSummary";
+const _CSL = "CheckSummaryList";
+const _GOR = "GetOrganizationRecommendation";
+const _GORR = "GetOrganizationRecommendationRequest";
+const _GORRe = "GetOrganizationRecommendationResponse";
+const _GR = "GetRecommendation";
+const _GRR = "GetRecommendationRequest";
+const _GRRe = "GetRecommendationResponse";
+const _ISE = "InternalServerException";
+const _LC = "ListChecks";
+const _LCR = "ListChecksRequest";
+const _LCRi = "ListChecksResponse";
+const _LOR = "ListOrganizationRecommendations";
+const _LORA = "ListOrganizationRecommendationAccounts";
+const _LORAR = "ListOrganizationRecommendationAccountsRequest";
+const _LORARi = "ListOrganizationRecommendationAccountsResponse";
+const _LORR = "ListOrganizationRecommendationsRequest";
+const _LORRR = "ListOrganizationRecommendationResourcesRequest";
+const _LORRRi = "ListOrganizationRecommendationResourcesResponse";
+const _LORRi = "ListOrganizationRecommendationsResponse";
+const _LORRis = "ListOrganizationRecommendationResources";
+const _LR = "ListRecommendations";
+const _LRFR = "ListRecommendationsForResource";
+const _LRFRR = "ListRecommendationsForResourceRequest";
+const _LRFRRi = "ListRecommendationsForResourceResponse";
+const _LRR = "ListRecommendationsRequest";
+const _LRRR = "ListRecommendationResourcesRequest";
+const _LRRRi = "ListRecommendationResourcesResponse";
+const _LRRi = "ListRecommendationsResponse";
+const _LRRis = "ListRecommendationResources";
+const _OR = "OrganizationRecommendation";
+const _ORRS = "OrganizationRecommendationResourceSummary";
+const _ORRSL = "OrganizationRecommendationResourceSummaryList";
+const _ORS = "OrganizationRecommendationSummary";
+const _ORSL = "OrganizationRecommendationSummaryList";
+const _R = "Recommendation";
+const _RCOA = "RecommendationCostOptimizingAggregates";
+const _RFRS = "RecommendationForResourceSummary";
+const _RFRSL = "RecommendationForResourceSummaryList";
+const _RNFE = "ResourceNotFoundException";
+const _RPSA = "RecommendationPillarSpecificAggregates";
+const _RRA = "RecommendationResourcesAggregates";
+const _RRE = "RecommendationResourceExclusion";
+const _RREL = "RecommendationResourceExclusionList";
+const _RRS = "RecommendationResourceSummary";
+const _RRSL = "RecommendationResourceSummaryList";
+const _RS = "RecommendationSummary";
+const _RSL = "RecommendationSummaryList";
+const _RUR = "RecommendationUpdateReason";
+const _TE = "ThrottlingException";
+const _UORL = "UpdateOrganizationRecommendationLifecycle";
+const _UORLR = "UpdateOrganizationRecommendationLifecycleRequest";
+const _URL = "UpdateRecommendationLifecycle";
+const _URLR = "UpdateRecommendationLifecycleRequest";
+const _URREE = "UpdateRecommendationResourceExclusionError";
+const _URREEL = "UpdateRecommendationResourceExclusionErrorList";
+const _VE = "ValidationException";
+const _a = "arn";
+const _aAI = "affectedAccountId";
+const _aI = "accountId";
+const _aLUA = "afterLastUpdatedAt";
+const _aRA = "accountRecommendationArn";
+const _aRAw = "awsResourceArn";
+const _aRI = "awsResourceId";
+const _aRLS = "accountRecommendationLifecycleSummaries";
+const _aRT = "awsResourceTypes";
+const _aS = "awsServices";
+const _aSw = "awsService";
+const _bLUA = "beforeLastUpdatedAt";
+const _bURREE = "batchUpdateRecommendationResourceExclusionErrors";
+const _c = "client";
+const _cA = "checkArn";
+const _cAr = "createdAt";
+const _cB = "createdBy";
+const _cG = "checkGranularity";
+const _cI = "checkIdentifier";
+const _cO = "costOptimizing";
+const _cS = "checkSummaries";
+const _d = "description";
+const _e = "error";
+const _eC = "errorCount";
+const _eCr = "errorCode";
+const _eCx = "excludedCount";
+const _eM = "errorMessage";
+const _eMS = "estimatedMonthlySavings";
+const _ePMS = "estimatedPercentMonthlySavings";
+const _eS = "exclusionStatus";
+const _h = "http";
+const _hE = "httpError";
+const _hQ = "httpQuery";
+const _i = "id";
+const _iE = "isExcluded";
+const _l = "language";
+const _lS = "lifecycleStage";
+const _lUA = "lastUpdatedAt";
+const _m = "message";
+const _mR = "maxResults";
+const _me = "metadata";
+const _n = "name";
+const _nT = "nextToken";
+const _oC = "okCount";
+const _oR = "organizationRecommendation";
+const _oRI = "organizationRecommendationIdentifier";
+const _oRRS = "organizationRecommendationResourceSummaries";
+const _oRS = "organizationRecommendationSummaries";
+const _p = "pillars";
+const _pSA = "pillarSpecificAggregates";
+const _pi = "pillar";
+const _r = "recommendation";
+const _rA = "resourcesAggregates";
+const _rAQ = "resourceArnQueryable";
+const _rAe = "resolvedAt";
+const _rAec = "recommendationArn";
+const _rC = "regionCode";
+const _rFRS = "recommendationForResourceSummaries";
+const _rI = "recommendationId";
+const _rIe = "recommendationIdentifier";
+const _rRE = "recommendationResourceExclusions";
+const _rRS = "recommendationResourceSummaries";
+const _rS = "recommendationSummaries";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.trustedadvisor";
+const _sR = "statusReason";
+const _se = "server";
+const _so = "source";
+const _st = "status";
+const _t = "type";
+const _uOBO = "updatedOnBehalfOf";
+const _uOBOJT = "updatedOnBehalfOfJobTitle";
+const _uR = "updateReason";
+const _uRC = "updateReasonCode";
+const _wC = "warningCount";
+const n0 = "com.amazonaws.trustedadvisor";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  ConflictException,
+  InternalServerException,
+  ResourceNotFoundException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { TrustedAdvisorServiceException } from "../models/TrustedAdvisorServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var TrustedAdvisorServiceException$: StaticErrorSchema = [-3, _s, "TrustedAdvisorServiceException", 0, [], []];
+_s_registry.registerError(TrustedAdvisorServiceException$, TrustedAdvisorServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var RecommendationUpdateReason: StaticSimpleSchema = [0, n0, _RUR, 8, 0];
+export var AccountRecommendationLifecycleSummary$: StaticStructureSchema = [3, n0, _ARLS,
+  0,
+  [_aI, _aRA, _lS, _uOBO, _uOBOJT, _uR, _uRC, _lUA],
+  [0, 0, 0, 0, 0, [() => RecommendationUpdateReason, 0], 0, 5]
+];
+export var BatchUpdateRecommendationResourceExclusionRequest$: StaticStructureSchema = [3, n0, _BURRER,
+  0,
+  [_rRE],
+  [() => RecommendationResourceExclusionList], 1
+];
+export var BatchUpdateRecommendationResourceExclusionResponse$: StaticStructureSchema = [3, n0, _BURRERa,
+  0,
+  [_bURREE],
+  [() => UpdateRecommendationResourceExclusionErrorList], 1
+];
+export var CheckSummary$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_i, _a, _n, _d, _p, _aS, _so, _me, _rAQ, _aRT, _cG, _rI],
+  [0, 0, 0, 0, 64 | 0, 64 | 0, 0, 128 | 0, 2, 64 | 0, 0, 0], 8
+];
+export var GetOrganizationRecommendationRequest$: StaticStructureSchema = [3, n0, _GORR,
+  0,
+  [_oRI],
+  [[0, 1]], 1
+];
+export var GetOrganizationRecommendationResponse$: StaticStructureSchema = [3, n0, _GORRe,
+  0,
+  [_oR],
+  [[() => OrganizationRecommendation$, 0]]
+];
+export var GetRecommendationRequest$: StaticStructureSchema = [3, n0, _GRR,
+  0,
+  [_rIe, _l],
+  [[0, 1], [0, { [_hQ]: _l }]], 1
+];
+export var GetRecommendationResponse$: StaticStructureSchema = [3, n0, _GRRe,
+  0,
+  [_r],
+  [[() => Recommendation$, 0]]
+];
+export var ListChecksRequest$: StaticStructureSchema = [3, n0, _LCR,
+  0,
+  [_nT, _mR, _pi, _aSw, _so, _l],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _pi }], [0, { [_hQ]: _aSw }], [0, { [_hQ]: _so }], [0, { [_hQ]: _l }]]
+];
+export var ListChecksResponse$: StaticStructureSchema = [3, n0, _LCRi,
+  0,
+  [_cS, _nT],
+  [() => CheckSummaryList, 0], 1
+];
+export var ListOrganizationRecommendationAccountsRequest$: StaticStructureSchema = [3, n0, _LORAR,
+  0,
+  [_oRI, _nT, _mR, _aAI],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _aAI }]], 1
+];
+export var ListOrganizationRecommendationAccountsResponse$: StaticStructureSchema = [3, n0, _LORARi,
+  0,
+  [_aRLS, _nT],
+  [[() => AccountRecommendationLifecycleSummaryList, 0], 0], 1
+];
+export var ListOrganizationRecommendationResourcesRequest$: StaticStructureSchema = [3, n0, _LORRR,
+  0,
+  [_oRI, _nT, _mR, _st, _eS, _rC, _aAI],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _st }], [0, { [_hQ]: _eS }], [0, { [_hQ]: _rC }], [0, { [_hQ]: _aAI }]], 1
+];
+export var ListOrganizationRecommendationResourcesResponse$: StaticStructureSchema = [3, n0, _LORRRi,
+  0,
+  [_oRRS, _nT],
+  [() => OrganizationRecommendationResourceSummaryList, 0], 1
+];
+export var ListOrganizationRecommendationsRequest$: StaticStructureSchema = [3, n0, _LORR,
+  0,
+  [_nT, _mR, _t, _st, _pi, _aSw, _so, _cI, _aLUA, _bLUA],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _t }], [0, { [_hQ]: _st }], [0, { [_hQ]: _pi }], [0, { [_hQ]: _aSw }], [0, { [_hQ]: _so }], [0, { [_hQ]: _cI }], [4, { [_hQ]: _aLUA }], [4, { [_hQ]: _bLUA }]]
+];
+export var ListOrganizationRecommendationsResponse$: StaticStructureSchema = [3, n0, _LORRi,
+  0,
+  [_oRS, _nT],
+  [() => OrganizationRecommendationSummaryList, 0], 1
+];
+export var ListRecommendationResourcesRequest$: StaticStructureSchema = [3, n0, _LRRR,
+  0,
+  [_rIe, _nT, _mR, _st, _eS, _rC, _l],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _st }], [0, { [_hQ]: _eS }], [0, { [_hQ]: _rC }], [0, { [_hQ]: _l }]], 1
+];
+export var ListRecommendationResourcesResponse$: StaticStructureSchema = [3, n0, _LRRRi,
+  0,
+  [_rRS, _nT],
+  [() => RecommendationResourceSummaryList, 0], 1
+];
+export var ListRecommendationsForResourceRequest$: StaticStructureSchema = [3, n0, _LRFRR,
+  0,
+  [_aRAw, _nT, _mR, _pi, _st, _cA, _l],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _pi }], [0, { [_hQ]: _st }], [0, { [_hQ]: _cA }], [0, { [_hQ]: _l }]], 1
+];
+export var ListRecommendationsForResourceResponse$: StaticStructureSchema = [3, n0, _LRFRRi,
+  0,
+  [_rFRS, _nT],
+  [() => RecommendationForResourceSummaryList, 0], 1
+];
+export var ListRecommendationsRequest$: StaticStructureSchema = [3, n0, _LRR,
+  0,
+  [_nT, _mR, _t, _st, _pi, _aSw, _so, _cI, _aLUA, _bLUA, _l],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _t }], [0, { [_hQ]: _st }], [0, { [_hQ]: _pi }], [0, { [_hQ]: _aSw }], [0, { [_hQ]: _so }], [0, { [_hQ]: _cI }], [4, { [_hQ]: _aLUA }], [4, { [_hQ]: _bLUA }], [0, { [_hQ]: _l }]]
+];
+export var ListRecommendationsResponse$: StaticStructureSchema = [3, n0, _LRRi,
+  0,
+  [_rS, _nT],
+  [() => RecommendationSummaryList, 0], 1
+];
+export var OrganizationRecommendation$: StaticStructureSchema = [3, n0, _OR,
+  0,
+  [_i, _t, _st, _p, _so, _n, _rA, _a, _d, _cA, _lS, _aS, _pSA, _cAr, _lUA, _cB, _uOBO, _uOBOJT, _uR, _uRC, _rAe],
+  [0, 0, 0, 64 | 0, 0, 0, () => RecommendationResourcesAggregates$, 0, 0, 0, 0, 64 | 0, () => RecommendationPillarSpecificAggregates$, 5, 5, 0, 0, 0, [() => RecommendationUpdateReason, 0], 0, 5], 9
+];
+export var OrganizationRecommendationResourceSummary$: StaticStructureSchema = [3, n0, _ORRS,
+  0,
+  [_i, _a, _aRI, _rC, _st, _me, _lUA, _rAec, _eS, _aI],
+  [0, 0, 0, 0, 0, 128 | 0, 5, 0, 0, 0], 8
+];
+export var OrganizationRecommendationSummary$: StaticStructureSchema = [3, n0, _ORS,
+  0,
+  [_i, _t, _st, _p, _so, _n, _rA, _a, _cA, _lS, _aS, _pSA, _cAr, _lUA],
+  [0, 0, 0, 64 | 0, 0, 0, () => RecommendationResourcesAggregates$, 0, 0, 0, 64 | 0, () => RecommendationPillarSpecificAggregates$, 5, 5], 8
+];
+export var Recommendation$: StaticStructureSchema = [3, n0, _R,
+  0,
+  [_i, _t, _st, _p, _so, _n, _rA, _a, _d, _cA, _lS, _aS, _pSA, _cAr, _lUA, _sR, _cB, _uOBO, _uOBOJT, _uR, _uRC, _rAe],
+  [0, 0, 0, 64 | 0, 0, 0, () => RecommendationResourcesAggregates$, 0, 0, 0, 0, 64 | 0, () => RecommendationPillarSpecificAggregates$, 5, 5, 0, 0, 0, 0, [() => RecommendationUpdateReason, 0], 0, 5], 9
+];
+export var RecommendationCostOptimizingAggregates$: StaticStructureSchema = [3, n0, _RCOA,
+  0,
+  [_eMS, _ePMS],
+  [1, 1], 2
+];
+export var RecommendationForResourceSummary$: StaticStructureSchema = [3, n0, _RFRS,
+  0,
+  [_cA, _rAec, _aRAw, _st, _lUA, _eS, _me, _p],
+  [0, 0, 0, 0, 5, 0, 128 | 0, 64 | 0], 8
+];
+export var RecommendationPillarSpecificAggregates$: StaticStructureSchema = [3, n0, _RPSA,
+  0,
+  [_cO],
+  [() => RecommendationCostOptimizingAggregates$]
+];
+export var RecommendationResourceExclusion$: StaticStructureSchema = [3, n0, _RRE,
+  0,
+  [_a, _iE],
+  [0, 2], 2
+];
+export var RecommendationResourcesAggregates$: StaticStructureSchema = [3, n0, _RRA,
+  0,
+  [_oC, _wC, _eC, _eCx],
+  [1, 1, 1, 1], 3
+];
+export var RecommendationResourceSummary$: StaticStructureSchema = [3, n0, _RRS,
+  0,
+  [_i, _a, _aRI, _rC, _st, _me, _lUA, _rAec, _eS],
+  [0, 0, 0, 0, 0, 128 | 0, 5, 0, 0], 8
+];
+export var RecommendationSummary$: StaticStructureSchema = [3, n0, _RS,
+  0,
+  [_i, _t, _st, _p, _so, _n, _rA, _a, _cA, _lS, _aS, _pSA, _cAr, _lUA, _sR],
+  [0, 0, 0, 64 | 0, 0, 0, () => RecommendationResourcesAggregates$, 0, 0, 0, 64 | 0, () => RecommendationPillarSpecificAggregates$, 5, 5, 0], 8
+];
+export var UpdateOrganizationRecommendationLifecycleRequest$: StaticStructureSchema = [3, n0, _UORLR,
+  0,
+  [_lS, _oRI, _uR, _uRC],
+  [0, [0, 1], [() => RecommendationUpdateReason, 0], 0], 2
+];
+export var UpdateRecommendationLifecycleRequest$: StaticStructureSchema = [3, n0, _URLR,
+  0,
+  [_lS, _rIe, _uR, _uRC],
+  [0, [0, 1], [() => RecommendationUpdateReason, 0], 0], 2
+];
+export var UpdateRecommendationResourceExclusionError$: StaticStructureSchema = [3, n0, _URREE,
+  0,
+  [_a, _eCr, _eM],
+  [0, 0, 0]
+];
+var __Unit = "unit" as const;
+var AccountRecommendationLifecycleSummaryList: StaticListSchema = [1, n0, _ARLSL,
+  0, [() => AccountRecommendationLifecycleSummary$,
+    0]
+];
+var CheckSummaryList: StaticListSchema = [1, n0, _CSL,
+  0, () => CheckSummary$
+];
+var OrganizationRecommendationResourceSummaryList: StaticListSchema = [1, n0, _ORRSL,
+  0, () => OrganizationRecommendationResourceSummary$
+];
+var OrganizationRecommendationSummaryList: StaticListSchema = [1, n0, _ORSL,
+  0, () => OrganizationRecommendationSummary$
+];
+var RecommendationAwsServiceList = 64 | 0;
+var RecommendationForResourceSummaryList: StaticListSchema = [1, n0, _RFRSL,
+  0, () => RecommendationForResourceSummary$
+];
+var RecommendationPillarList = 64 | 0;
+var RecommendationResourceExclusionList: StaticListSchema = [1, n0, _RREL,
+  0, () => RecommendationResourceExclusion$
+];
+var RecommendationResourceSummaryList: StaticListSchema = [1, n0, _RRSL,
+  0, () => RecommendationResourceSummary$
+];
+var RecommendationSummaryList: StaticListSchema = [1, n0, _RSL,
+  0, () => RecommendationSummary$
+];
+var StringList = 64 | 0;
+var UpdateRecommendationResourceExclusionErrorList: StaticListSchema = [1, n0, _URREEL,
+  0, () => UpdateRecommendationResourceExclusionError$
+];
+var StringMap = 128 | 0;
+export var BatchUpdateRecommendationResourceExclusion$: StaticOperationSchema = [9, n0, _BURRE,
+  { [_h]: ["PUT", "/v1/batch-update-recommendation-resource-exclusion", 200] }, () => BatchUpdateRecommendationResourceExclusionRequest$, () => BatchUpdateRecommendationResourceExclusionResponse$
+];
+export var GetOrganizationRecommendation$: StaticOperationSchema = [9, n0, _GOR,
+  { [_h]: ["GET", "/v1/organization-recommendations/{organizationRecommendationIdentifier}", 200] }, () => GetOrganizationRecommendationRequest$, () => GetOrganizationRecommendationResponse$
+];
+export var GetRecommendation$: StaticOperationSchema = [9, n0, _GR,
+  { [_h]: ["GET", "/v1/recommendations/{recommendationIdentifier}", 200] }, () => GetRecommendationRequest$, () => GetRecommendationResponse$
+];
+export var ListChecks$: StaticOperationSchema = [9, n0, _LC,
+  { [_h]: ["GET", "/v1/checks", 200] }, () => ListChecksRequest$, () => ListChecksResponse$
+];
+export var ListOrganizationRecommendationAccounts$: StaticOperationSchema = [9, n0, _LORA,
+  { [_h]: ["GET", "/v1/organization-recommendations/{organizationRecommendationIdentifier}/accounts", 200] }, () => ListOrganizationRecommendationAccountsRequest$, () => ListOrganizationRecommendationAccountsResponse$
+];
+export var ListOrganizationRecommendationResources$: StaticOperationSchema = [9, n0, _LORRis,
+  { [_h]: ["GET", "/v1/organization-recommendations/{organizationRecommendationIdentifier}/resources", 200] }, () => ListOrganizationRecommendationResourcesRequest$, () => ListOrganizationRecommendationResourcesResponse$
+];
+export var ListOrganizationRecommendations$: StaticOperationSchema = [9, n0, _LOR,
+  { [_h]: ["GET", "/v1/organization-recommendations", 200] }, () => ListOrganizationRecommendationsRequest$, () => ListOrganizationRecommendationsResponse$
+];
+export var ListRecommendationResources$: StaticOperationSchema = [9, n0, _LRRis,
+  { [_h]: ["GET", "/v1/recommendations/{recommendationIdentifier}/resources", 200] }, () => ListRecommendationResourcesRequest$, () => ListRecommendationResourcesResponse$
+];
+export var ListRecommendations$: StaticOperationSchema = [9, n0, _LR,
+  { [_h]: ["GET", "/v1/recommendations", 200] }, () => ListRecommendationsRequest$, () => ListRecommendationsResponse$
+];
+export var ListRecommendationsForResource$: StaticOperationSchema = [9, n0, _LRFR,
+  { [_h]: ["GET", "/v1/recommendations-for-resource/{awsResourceArn}", 200] }, () => ListRecommendationsForResourceRequest$, () => ListRecommendationsForResourceResponse$
+];
+export var UpdateOrganizationRecommendationLifecycle$: StaticOperationSchema = [9, n0, _UORL,
+  { [_h]: ["PUT", "/v1/organization-recommendations/{organizationRecommendationIdentifier}/lifecycle", 200] }, () => UpdateOrganizationRecommendationLifecycleRequest$, () => __Unit
+];
+export var UpdateRecommendationLifecycle$: StaticOperationSchema = [9, n0, _URL,
+  { [_h]: ["PUT", "/v1/recommendations/{recommendationIdentifier}/lifecycle", 200] }, () => UpdateRecommendationLifecycleRequest$, () => __Unit
+];

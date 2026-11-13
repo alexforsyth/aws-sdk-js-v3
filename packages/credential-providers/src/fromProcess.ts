@@ -1,7 +1,5 @@
-import { fromProcess as _fromProcess, FromProcessInit as _FromProcessInit } from "@aws-sdk/credential-provider-process";
-import { CredentialProvider } from "@aws-sdk/types";
-
-export interface FromProcessInit extends _FromProcessInit {}
+import type { FromProcessInit } from "@aws-sdk/credential-provider-process";
+import type { AwsIdentityProperties, RuntimeConfigAwsCredentialIdentityProvider } from "@aws-sdk/types";
 
 /**
  * Creates a credential provider function that executes a given process and attempt to read its standard output to
@@ -25,5 +23,12 @@ export interface FromProcessInit extends _FromProcessInit {}
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromProcess = (init?: FromProcessInit): CredentialProvider => _fromProcess(init);
+export const fromProcess = (init?: FromProcessInit): RuntimeConfigAwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromProcess: _fromProcess } = await import("@aws-sdk/credential-provider-process");
+    return _fromProcess(init)(args);
+  };
+};

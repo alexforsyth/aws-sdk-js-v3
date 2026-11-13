@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MemoryDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MemoryDBClient";
-import { DescribeSnapshotsRequest, DescribeSnapshotsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeSnapshotsCommand,
-  serializeAws_json1_1DescribeSnapshotsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSnapshotsRequest, DescribeSnapshotsResponse } from "../models/models_0";
+import { DescribeSnapshots$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSnapshotsCommand}.
+ */
 export interface DescribeSnapshotsCommandInput extends DescribeSnapshotsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSnapshotsCommand}.
+ */
 export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,103 @@ export interface DescribeSnapshotsCommandOutput extends DescribeSnapshotsRespons
  * ```javascript
  * import { MemoryDBClient, DescribeSnapshotsCommand } from "@aws-sdk/client-memorydb"; // ES Modules import
  * // const { MemoryDBClient, DescribeSnapshotsCommand } = require("@aws-sdk/client-memorydb"); // CommonJS import
+ * // import type { MemoryDBClientConfig } from "@aws-sdk/client-memorydb";
+ * const config = {}; // type is MemoryDBClientConfig
  * const client = new MemoryDBClient(config);
+ * const input = { // DescribeSnapshotsRequest
+ *   ClusterName: "STRING_VALUE",
+ *   SnapshotName: "STRING_VALUE",
+ *   Source: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   ShowDetail: true || false,
+ * };
  * const command = new DescribeSnapshotsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSnapshotsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Snapshots: [ // SnapshotList
+ * //     { // Snapshot
+ * //       Name: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Source: "STRING_VALUE",
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       ARN: "STRING_VALUE",
+ * //       ClusterConfiguration: { // ClusterConfiguration
+ * //         Name: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         NodeType: "STRING_VALUE",
+ * //         Engine: "STRING_VALUE",
+ * //         EngineVersion: "STRING_VALUE",
+ * //         MaintenanceWindow: "STRING_VALUE",
+ * //         TopicArn: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         ParameterGroupName: "STRING_VALUE",
+ * //         SubnetGroupName: "STRING_VALUE",
+ * //         VpcId: "STRING_VALUE",
+ * //         SnapshotRetentionLimit: Number("int"),
+ * //         SnapshotWindow: "STRING_VALUE",
+ * //         NumShards: Number("int"),
+ * //         Shards: [ // ShardDetails
+ * //           { // ShardDetail
+ * //             Name: "STRING_VALUE",
+ * //             Configuration: { // ShardConfiguration
+ * //               Slots: "STRING_VALUE",
+ * //               ReplicaCount: Number("int"),
+ * //             },
+ * //             Size: "STRING_VALUE",
+ * //             SnapshotCreationTime: new Date("TIMESTAMP"),
+ * //           },
+ * //         ],
+ * //         MultiRegionParameterGroupName: "STRING_VALUE",
+ * //         MultiRegionClusterName: "STRING_VALUE",
+ * //       },
+ * //       DataTiering: "true" || "false",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSnapshotsCommandInput - {@link DescribeSnapshotsCommandInput}
+ * @returns {@link DescribeSnapshotsCommandOutput}
  * @see {@link DescribeSnapshotsCommandInput} for command's `input` shape.
  * @see {@link DescribeSnapshotsCommandOutput} for command's `response` shape.
- * @see {@link MemoryDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MemoryDBClientResolvedConfig | config} for MemoryDBClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>The specified parameter combination is not valid.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The specified parameter value is not valid.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The required service-linked role was not found.</p>
+ *
+ * @throws {@link SnapshotNotFoundFault} (client fault)
+ *  <p>The specified snapshot does not exist.</p>
+ *
+ * @throws {@link MemoryDBServiceException}
+ * <p>Base exception class for all service exceptions from MemoryDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSnapshotsCommand extends $Command<
-  DescribeSnapshotsCommandInput,
-  DescribeSnapshotsCommandOutput,
-  MemoryDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSnapshotsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MemoryDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSnapshotsCommandInput, DescribeSnapshotsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MemoryDBClient";
-    const commandName = "DescribeSnapshotsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSnapshotsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSnapshotsResponse.filterSensitiveLog,
+export class DescribeSnapshotsCommand extends command<DescribeSnapshotsCommandInput, DescribeSnapshotsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSnapshots",
+  DescribeSnapshots$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotsRequest;
+      output: DescribeSnapshotsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSnapshotsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeSnapshotsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSnapshotsCommandOutput> {
-    return deserializeAws_json1_1DescribeSnapshotsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSnapshotsCommandInput;
+      output: DescribeSnapshotsCommandOutput;
+    };
+  };
 }

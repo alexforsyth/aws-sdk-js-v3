@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListRegexPatternSetsRequest, ListRegexPatternSetsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListRegexPatternSetsCommand,
-  serializeAws_json1_1ListRegexPatternSetsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRegexPatternSetsRequest, ListRegexPatternSetsResponse } from "../models/models_0";
+import { ListRegexPatternSets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRegexPatternSetsCommand}.
+ */
 export interface ListRegexPatternSetsCommandInput extends ListRegexPatternSetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRegexPatternSetsCommand}.
+ */
 export interface ListRegexPatternSetsCommandOutput extends ListRegexPatternSetsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,60 @@ export interface ListRegexPatternSetsCommandOutput extends ListRegexPatternSetsR
  * ```javascript
  * import { WAFRegionalClient, ListRegexPatternSetsCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, ListRegexPatternSetsCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // ListRegexPatternSetsRequest
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListRegexPatternSetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRegexPatternSetsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   RegexPatternSets: [ // RegexPatternSetSummaries
+ * //     { // RegexPatternSetSummary
+ * //       RegexPatternSetId: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListRegexPatternSetsCommandInput - {@link ListRegexPatternSetsCommandInput}
+ * @returns {@link ListRegexPatternSetsCommandOutput}
  * @see {@link ListRegexPatternSetsCommandInput} for command's `input` shape.
  * @see {@link ListRegexPatternSetsCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class ListRegexPatternSetsCommand extends $Command<
-  ListRegexPatternSetsCommandInput,
-  ListRegexPatternSetsCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRegexPatternSetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRegexPatternSetsCommandInput, ListRegexPatternSetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "ListRegexPatternSetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRegexPatternSetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRegexPatternSetsResponse.filterSensitiveLog,
+export class ListRegexPatternSetsCommand extends command<ListRegexPatternSetsCommandInput, ListRegexPatternSetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRegexPatternSets",
+  ListRegexPatternSets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRegexPatternSetsRequest;
+      output: ListRegexPatternSetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRegexPatternSetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRegexPatternSetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRegexPatternSetsCommandOutput> {
-    return deserializeAws_json1_1ListRegexPatternSetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRegexPatternSetsCommandInput;
+      output: ListRegexPatternSetsCommandOutput;
+    };
+  };
 }

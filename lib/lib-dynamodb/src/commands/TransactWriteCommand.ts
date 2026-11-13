@@ -1,86 +1,147 @@
-import {
-  ConditionCheck,
-  Delete,
-  ItemCollectionMetrics,
-  Put,
-  TransactWriteItem,
-  TransactWriteItemsCommand as __TransactWriteItemsCommand,
-  TransactWriteItemsCommandInput as __TransactWriteItemsCommandInput,
-  TransactWriteItemsCommandOutput as __TransactWriteItemsCommandOutput,
-  Update,
-} from "@aws-sdk/client-dynamodb";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
-import { marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
+import { ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { TransactWriteItemsCommand as __TransactWriteItemsCommand } from "@aws-sdk/client-dynamodb";
 
-export type TransactWriteCommandInput = Omit<__TransactWriteItemsCommandInput, "TransactItems"> & {
-  TransactItems:
-    | (Omit<TransactWriteItem, "ConditionCheck" | "Put" | "Delete" | "Update"> & {
-        ConditionCheck?: Omit<ConditionCheck, "Key" | "ExpressionAttributeValues"> & {
-          Key: { [key: string]: NativeAttributeValue } | undefined;
-          ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
-        };
-        Put?: Omit<Put, "Item" | "ExpressionAttributeValues"> & {
-          Item: { [key: string]: NativeAttributeValue } | undefined;
-          ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
-        };
-        Delete?: Omit<Delete, "Key" | "ExpressionAttributeValues"> & {
-          Key: { [key: string]: NativeAttributeValue } | undefined;
-          ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
-        };
-        Update?: Omit<Update, "Key" | "ExpressionAttributeValues"> & {
-          Key: { [key: string]: NativeAttributeValue } | undefined;
-          ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
-        };
-      })[]
-    | undefined;
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type TransactWriteConditionCheck = Omit<ConditionCheck, "Key" | "ExpressionAttributeValues"> & {
+  Key: Record<string, NativeAttributeValue> | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
 };
 
+/**
+ * @public
+ */
+export type TransactWritePut = Omit<Put, "Item" | "ExpressionAttributeValues"> & {
+  Item: Record<string, NativeAttributeValue> | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type TransactWriteDelete = Omit<Delete, "Key" | "ExpressionAttributeValues"> & {
+  Key: Record<string, NativeAttributeValue> | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type TransactWriteUpdate = Omit<Update, "Key" | "ExpressionAttributeValues"> & {
+  Key: Record<string, NativeAttributeValue> | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type TransactWriteItem = Omit<ClientTransactWriteItem, "ConditionCheck" | "Put" | "Delete" | "Update"> & {
+  ConditionCheck?: TransactWriteConditionCheck | undefined;
+  Put?: TransactWritePut | undefined;
+  Delete?: TransactWriteDelete | undefined;
+  Update?: TransactWriteUpdate | undefined;
+};
+
+/**
+ * @public
+ */
+export type TransactWriteItemCollectionMetrics = Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
+  ItemCollectionKey?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type TransactWriteCommandInput = Omit<__TransactWriteItemsCommandInput, "TransactItems"> & {
+  TransactItems: (
+    TransactWriteItem
+  )[] | undefined;
+};
+
+/**
+ * @public
+ */
 export type TransactWriteCommandOutput = Omit<__TransactWriteItemsCommandOutput, "ItemCollectionMetrics"> & {
-  ItemCollectionMetrics?: {
-    [key: string]: (Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
-      ItemCollectionKey?: { [key: string]: NativeAttributeValue };
-    })[];
-  };
+  ItemCollectionMetrics?: Record<
+    string,
+    (
+      TransactWriteItemCollectionMetrics
+    )[]
+  > | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * TransactWriteItemsCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * TransactWriteItemsCommand operation from {@link @aws-sdk/client-dynamodb#TransactWriteItemsCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
-export class TransactWriteCommand extends $Command<
+export class TransactWriteCommand extends DynamoDBDocumentClientCommand<
   TransactWriteCommandInput,
   TransactWriteCommandOutput,
+  __TransactWriteItemsCommandInput,
+  __TransactWriteItemsCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  private readonly inputKeyNodes = [
-    {
-      key: "TransactItems",
-      children: [
-        { key: "ConditionCheck", children: [{ key: "Key" }, { key: "ExpressionAttributeValues" }] },
-        { key: "Put", children: [{ key: "Item" }, { key: "ExpressionAttributeValues" }] },
-        { key: "Delete", children: [{ key: "Key" }, { key: "ExpressionAttributeValues" }] },
-        { key: "Update", children: [{ key: "Key" }, { key: "ExpressionAttributeValues" }] },
-      ],
-    },
-  ];
-  private readonly outputKeyNodes = [
-    {
-      key: "ItemCollectionMetrics",
-      children: {
-        children: [{ key: "ItemCollectionKey" }],
+  protected readonly inputKeyNodes = {
+    TransactItems: {
+      "*": {
+        ConditionCheck: {
+          Key: ALL_VALUES, // map with AttributeValue
+          ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+        },
+        Put: {
+          Item: ALL_VALUES, // map with AttributeValue
+          ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+        },
+        Delete: {
+          Key: ALL_VALUES, // map with AttributeValue
+          ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+        },
+        Update: {
+          Key: ALL_VALUES, // map with AttributeValue
+          ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+        },
       },
     },
-  ];
+  };
+  protected readonly outputKeyNodes = {
+    ItemCollectionMetrics: {
+      "*": {
+        "*": {
+          ItemCollectionKey: ALL_VALUES, // map with AttributeValue
+        },
+      },
+    },
+  };
+
+  protected readonly clientCommand: __TransactWriteItemsCommand;
+  public readonly middlewareStack: MiddlewareStack<TransactWriteCommandInput | __TransactWriteItemsCommandInput,
+  TransactWriteCommandOutput | __TransactWriteItemsCommandOutput>;
 
   constructor(readonly input: TransactWriteCommandInput) {
     super();
+    this.clientCommand = new __TransactWriteItemsCommand(this.input as any);
+    this.middlewareStack = this.clientCommand.middlewareStack;
   }
 
   /**
@@ -91,16 +152,24 @@ export class TransactWriteCommand extends $Command<
     configuration: DynamoDBDocumentClientResolvedConfig,
     options?: __HttpHandlerOptions
   ): Handler<TransactWriteCommandInput, TransactWriteCommandOutput> {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
-    const command = new __TransactWriteItemsCommand(marshallInput(this.input, this.inputKeyNodes, marshallOptions));
-    const handler = command.resolveMiddleware(clientStack, configuration, options);
+    this.addMarshallingMiddleware(configuration);
+    const stack = clientStack.concat(this.middlewareStack as typeof clientStack);
+    const handler = this.clientCommand.resolveMiddleware(stack, configuration, options);
 
-    return async () => {
-      const data = await handler(command);
-      return {
-        ...data,
-        output: unmarshallOutput(data.output, this.outputKeyNodes, unmarshallOptions),
-      };
-    };
+    return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  ConditionCheck,
+  Delete,
+  ItemCollectionMetrics,
+  Put,
+  TransactWriteItem as ClientTransactWriteItem,
+  TransactWriteItemsCommandInput as __TransactWriteItemsCommandInput,
+  TransactWriteItemsCommandOutput as __TransactWriteItemsCommandOutput,
+  Update,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

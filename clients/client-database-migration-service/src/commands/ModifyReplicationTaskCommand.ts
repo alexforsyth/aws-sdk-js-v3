@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { ModifyReplicationTaskMessage, ModifyReplicationTaskResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifyReplicationTaskCommand,
-  serializeAws_json1_1ModifyReplicationTaskCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyReplicationTaskMessage, ModifyReplicationTaskResponse } from "../models/models_0";
+import { ModifyReplicationTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyReplicationTaskCommand}.
+ */
 export interface ModifyReplicationTaskCommandInput extends ModifyReplicationTaskMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyReplicationTaskCommand}.
+ */
 export interface ModifyReplicationTaskCommandOutput extends ModifyReplicationTaskResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +32,99 @@ export interface ModifyReplicationTaskCommandOutput extends ModifyReplicationTas
  * ```javascript
  * import { DatabaseMigrationServiceClient, ModifyReplicationTaskCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, ModifyReplicationTaskCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // ModifyReplicationTaskMessage
+ *   ReplicationTaskArn: "STRING_VALUE", // required
+ *   ReplicationTaskIdentifier: "STRING_VALUE",
+ *   MigrationType: "full-load" || "cdc" || "full-load-and-cdc",
+ *   TableMappings: "STRING_VALUE",
+ *   ReplicationTaskSettings: "STRING_VALUE",
+ *   CdcStartTime: new Date("TIMESTAMP"),
+ *   CdcStartPosition: "STRING_VALUE",
+ *   CdcStopPosition: "STRING_VALUE",
+ *   TaskData: "STRING_VALUE",
+ * };
  * const command = new ModifyReplicationTaskCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyReplicationTaskResponse
+ * //   ReplicationTask: { // ReplicationTask
+ * //     ReplicationTaskIdentifier: "STRING_VALUE",
+ * //     SourceEndpointArn: "STRING_VALUE",
+ * //     TargetEndpointArn: "STRING_VALUE",
+ * //     ReplicationInstanceArn: "STRING_VALUE",
+ * //     MigrationType: "full-load" || "cdc" || "full-load-and-cdc",
+ * //     TableMappings: "STRING_VALUE",
+ * //     ReplicationTaskSettings: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     LastFailureMessage: "STRING_VALUE",
+ * //     StopReason: "STRING_VALUE",
+ * //     ReplicationTaskCreationDate: new Date("TIMESTAMP"),
+ * //     ReplicationTaskStartDate: new Date("TIMESTAMP"),
+ * //     CdcStartPosition: "STRING_VALUE",
+ * //     CdcStopPosition: "STRING_VALUE",
+ * //     RecoveryCheckpoint: "STRING_VALUE",
+ * //     ReplicationTaskArn: "STRING_VALUE",
+ * //     ReplicationTaskStats: { // ReplicationTaskStats
+ * //       FullLoadProgressPercent: Number("int"),
+ * //       ElapsedTimeMillis: Number("long"),
+ * //       TablesLoaded: Number("int"),
+ * //       TablesLoading: Number("int"),
+ * //       TablesQueued: Number("int"),
+ * //       TablesErrored: Number("int"),
+ * //       FreshStartDate: new Date("TIMESTAMP"),
+ * //       StartDate: new Date("TIMESTAMP"),
+ * //       StopDate: new Date("TIMESTAMP"),
+ * //       FullLoadStartDate: new Date("TIMESTAMP"),
+ * //       FullLoadFinishDate: new Date("TIMESTAMP"),
+ * //     },
+ * //     TaskData: "STRING_VALUE",
+ * //     TargetReplicationInstanceArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyReplicationTaskCommandInput - {@link ModifyReplicationTaskCommandInput}
+ * @returns {@link ModifyReplicationTaskCommandOutput}
  * @see {@link ModifyReplicationTaskCommandInput} for command's `input` shape.
  * @see {@link ModifyReplicationTaskCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link KMSKeyNotAccessibleFault} (client fault)
+ *  <p>DMS cannot access the KMS key.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsFault} (client fault)
+ *  <p>The resource you are attempting to create already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyReplicationTaskCommand extends $Command<
-  ModifyReplicationTaskCommandInput,
-  ModifyReplicationTaskCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyReplicationTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyReplicationTaskCommandInput, ModifyReplicationTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "ModifyReplicationTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyReplicationTaskMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyReplicationTaskResponse.filterSensitiveLog,
+export class ModifyReplicationTaskCommand extends command<ModifyReplicationTaskCommandInput, ModifyReplicationTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyReplicationTask",
+  ModifyReplicationTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyReplicationTaskMessage;
+      output: ModifyReplicationTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyReplicationTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifyReplicationTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyReplicationTaskCommandOutput> {
-    return deserializeAws_json1_1ModifyReplicationTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyReplicationTaskCommandInput;
+      output: ModifyReplicationTaskCommandOutput;
+    };
+  };
 }

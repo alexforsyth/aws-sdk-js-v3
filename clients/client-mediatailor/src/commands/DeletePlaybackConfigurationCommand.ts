@@ -1,100 +1,73 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTailorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaTailorClient";
-import { DeletePlaybackConfigurationRequest, DeletePlaybackConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeletePlaybackConfigurationCommand,
-  serializeAws_restJson1DeletePlaybackConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface DeletePlaybackConfigurationCommandInput extends DeletePlaybackConfigurationRequest {}
-export interface DeletePlaybackConfigurationCommandOutput
-  extends DeletePlaybackConfigurationResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePlaybackConfigurationRequest, DeletePlaybackConfigurationResponse } from "../models/models_0";
+import { DeletePlaybackConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes the playback configuration for the specified name.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePlaybackConfigurationCommand}.
+ */
+export interface DeletePlaybackConfigurationCommandInput extends DeletePlaybackConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePlaybackConfigurationCommand}.
+ */
+export interface DeletePlaybackConfigurationCommandOutput extends DeletePlaybackConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Deletes a playback configuration. For information about MediaTailor configurations, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html">Working with configurations in AWS Elemental MediaTailor</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaTailorClient, DeletePlaybackConfigurationCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
  * // const { MediaTailorClient, DeletePlaybackConfigurationCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
  * const client = new MediaTailorClient(config);
+ * const input = { // DeletePlaybackConfigurationRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeletePlaybackConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePlaybackConfigurationCommandInput - {@link DeletePlaybackConfigurationCommandInput}
+ * @returns {@link DeletePlaybackConfigurationCommandOutput}
  * @see {@link DeletePlaybackConfigurationCommandInput} for command's `input` shape.
  * @see {@link DeletePlaybackConfigurationCommandOutput} for command's `response` shape.
- * @see {@link MediaTailorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
  *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePlaybackConfigurationCommand extends $Command<
-  DeletePlaybackConfigurationCommandInput,
-  DeletePlaybackConfigurationCommandOutput,
-  MediaTailorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePlaybackConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaTailorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePlaybackConfigurationCommandInput, DeletePlaybackConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaTailorClient";
-    const commandName = "DeletePlaybackConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePlaybackConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeletePlaybackConfigurationResponse.filterSensitiveLog,
+export class DeletePlaybackConfigurationCommand extends command<DeletePlaybackConfigurationCommandInput, DeletePlaybackConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePlaybackConfiguration",
+  DeletePlaybackConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePlaybackConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePlaybackConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeletePlaybackConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeletePlaybackConfigurationCommandOutput> {
-    return deserializeAws_restJson1DeletePlaybackConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePlaybackConfigurationCommandInput;
+      output: DeletePlaybackConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,83 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteApplicationRequest, DeleteApplicationResponse } from "../models/models_0";
+import { DeleteApplication$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteApplicationCommand}.
+ */
+export interface DeleteApplicationCommandInput extends DeleteApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteApplicationCommand}.
+ */
+export interface DeleteApplicationCommandOutput extends DeleteApplicationResponse, __MetadataBearer {}
+
+/**
+ * <p>Delete application.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MgnClient, DeleteApplicationCommand } from "@aws-sdk/client-mgn"; // ES Modules import
+ * // const { MgnClient, DeleteApplicationCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
+ * const client = new MgnClient(config);
+ * const input = { // DeleteApplicationRequest
+ *   applicationID: "STRING_VALUE", // required
+ *   accountID: "STRING_VALUE",
+ * };
+ * const command = new DeleteApplicationCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteApplicationCommandInput - {@link DeleteApplicationCommandInput}
+ * @returns {@link DeleteApplicationCommandOutput}
+ * @see {@link DeleteApplicationCommandInput} for command's `input` shape.
+ * @see {@link DeleteApplicationCommandOutput} for command's `response` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteApplicationCommand extends command<DeleteApplicationCommandInput, DeleteApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteApplication",
+  DeleteApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApplicationRequest;
+      output: {};
+    };
+    sdk: {
+      input: DeleteApplicationCommandInput;
+      output: DeleteApplicationCommandOutput;
+    };
+  };
+}

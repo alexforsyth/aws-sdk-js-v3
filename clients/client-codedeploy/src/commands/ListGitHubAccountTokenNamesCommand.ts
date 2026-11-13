@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { ListGitHubAccountTokenNamesInput, ListGitHubAccountTokenNamesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListGitHubAccountTokenNamesCommand,
-  serializeAws_json1_1ListGitHubAccountTokenNamesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGitHubAccountTokenNamesInput, ListGitHubAccountTokenNamesOutput } from "../models/models_0";
+import { ListGitHubAccountTokenNames$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGitHubAccountTokenNamesCommand}.
+ */
 export interface ListGitHubAccountTokenNamesCommandInput extends ListGitHubAccountTokenNamesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListGitHubAccountTokenNamesCommand}.
+ */
 export interface ListGitHubAccountTokenNamesCommandOutput extends ListGitHubAccountTokenNamesOutput, __MetadataBearer {}
 
 /**
@@ -28,71 +29,59 @@ export interface ListGitHubAccountTokenNamesCommandOutput extends ListGitHubAcco
  * ```javascript
  * import { CodeDeployClient, ListGitHubAccountTokenNamesCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, ListGitHubAccountTokenNamesCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // ListGitHubAccountTokenNamesInput
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListGitHubAccountTokenNamesCommand(input);
  * const response = await client.send(command);
+ * // { // ListGitHubAccountTokenNamesOutput
+ * //   tokenNameList: [ // GitHubAccountTokenNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListGitHubAccountTokenNamesCommandInput - {@link ListGitHubAccountTokenNamesCommandInput}
+ * @returns {@link ListGitHubAccountTokenNamesCommandOutput}
  * @see {@link ListGitHubAccountTokenNamesCommandInput} for command's `input` shape.
  * @see {@link ListGitHubAccountTokenNamesCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token was specified in an invalid format.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The API used does not support the deployment.</p>
+ *
+ * @throws {@link ResourceValidationException} (client fault)
+ *  <p>The specified resource could not be validated.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class ListGitHubAccountTokenNamesCommand extends $Command<
-  ListGitHubAccountTokenNamesCommandInput,
-  ListGitHubAccountTokenNamesCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGitHubAccountTokenNamesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGitHubAccountTokenNamesCommandInput, ListGitHubAccountTokenNamesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "ListGitHubAccountTokenNamesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGitHubAccountTokenNamesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGitHubAccountTokenNamesOutput.filterSensitiveLog,
+export class ListGitHubAccountTokenNamesCommand extends command<ListGitHubAccountTokenNamesCommandInput, ListGitHubAccountTokenNamesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGitHubAccountTokenNames",
+  ListGitHubAccountTokenNames$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGitHubAccountTokenNamesInput;
+      output: ListGitHubAccountTokenNamesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGitHubAccountTokenNamesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListGitHubAccountTokenNamesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListGitHubAccountTokenNamesCommandOutput> {
-    return deserializeAws_json1_1ListGitHubAccountTokenNamesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGitHubAccountTokenNamesCommandInput;
+      output: ListGitHubAccountTokenNamesCommandOutput;
+    };
+  };
 }

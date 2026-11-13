@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { RejectCertificateTransferRequest } from "../models/models_2";
-import {
-  deserializeAws_restJson1RejectCertificateTransferCommand,
-  serializeAws_restJson1RejectCertificateTransferCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RejectCertificateTransferRequest } from "../models/models_2";
+import { RejectCertificateTransfer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RejectCertificateTransferCommand}.
+ */
 export interface RejectCertificateTransferCommandInput extends RejectCertificateTransferRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RejectCertificateTransferCommand}.
+ */
 export interface RejectCertificateTransferCommandOutput extends __MetadataBearer {}
 
 /**
@@ -35,71 +36,68 @@ export interface RejectCertificateTransferCommandOutput extends __MetadataBearer
  * ```javascript
  * import { IoTClient, RejectCertificateTransferCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, RejectCertificateTransferCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // RejectCertificateTransferRequest
+ *   certificateId: "STRING_VALUE", // required
+ *   rejectReason: "STRING_VALUE",
+ * };
  * const command = new RejectCertificateTransferCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RejectCertificateTransferCommandInput - {@link RejectCertificateTransferCommandInput}
+ * @returns {@link RejectCertificateTransferCommandOutput}
  * @see {@link RejectCertificateTransferCommandInput} for command's `input` shape.
  * @see {@link RejectCertificateTransferCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link TransferAlreadyCompletedException} (client fault)
+ *  <p>You can't revert the certificate transfer because the transfer is already
+ *          complete.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class RejectCertificateTransferCommand extends $Command<
-  RejectCertificateTransferCommandInput,
-  RejectCertificateTransferCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RejectCertificateTransferCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RejectCertificateTransferCommandInput, RejectCertificateTransferCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "RejectCertificateTransferCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RejectCertificateTransferRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RejectCertificateTransferCommand extends command<RejectCertificateTransferCommandInput, RejectCertificateTransferCommandOutput>(
+  _ep0,
+  _mw0,
+  "RejectCertificateTransfer",
+  RejectCertificateTransfer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RejectCertificateTransferRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RejectCertificateTransferCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RejectCertificateTransferCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RejectCertificateTransferCommandOutput> {
-    return deserializeAws_restJson1RejectCertificateTransferCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RejectCertificateTransferCommandInput;
+      output: RejectCertificateTransferCommandOutput;
+    };
+  };
 }

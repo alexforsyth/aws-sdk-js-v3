@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetDevEndpointRequest, GetDevEndpointResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetDevEndpointCommand,
-  serializeAws_json1_1GetDevEndpointCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDevEndpointRequest, GetDevEndpointResponse } from "../models/models_2";
+import { GetDevEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDevEndpointCommand}.
+ */
 export interface GetDevEndpointCommandInput extends GetDevEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDevEndpointCommand}.
+ */
 export interface GetDevEndpointCommandOutput extends GetDevEndpointResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +34,91 @@ export interface GetDevEndpointCommandOutput extends GetDevEndpointResponse, __M
  * ```javascript
  * import { GlueClient, GetDevEndpointCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetDevEndpointCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetDevEndpointRequest
+ *   EndpointName: "STRING_VALUE", // required
+ * };
  * const command = new GetDevEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // GetDevEndpointResponse
+ * //   DevEndpoint: { // DevEndpoint
+ * //     EndpointName: "STRING_VALUE",
+ * //     RoleArn: "STRING_VALUE",
+ * //     SecurityGroupIds: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SubnetId: "STRING_VALUE",
+ * //     YarnEndpointAddress: "STRING_VALUE",
+ * //     PrivateAddress: "STRING_VALUE",
+ * //     ZeppelinRemoteSparkInterpreterPort: Number("int"),
+ * //     PublicAddress: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     WorkerType: "Standard" || "G.1X" || "G.2X" || "G.4X" || "G.8X" || "G.025X" || "Z.2X" || "G.12X" || "G.16X" || "R.1X" || "R.2X" || "R.4X" || "R.8X",
+ * //     GlueVersion: "STRING_VALUE",
+ * //     NumberOfWorkers: Number("int"),
+ * //     NumberOfNodes: Number("int"),
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     ExtraPythonLibsS3Path: "STRING_VALUE",
+ * //     ExtraJarsS3Path: "STRING_VALUE",
+ * //     FailureReason: "STRING_VALUE",
+ * //     LastUpdateStatus: "STRING_VALUE",
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //     LastModifiedTimestamp: new Date("TIMESTAMP"),
+ * //     PublicKey: "STRING_VALUE",
+ * //     PublicKeys: [ // PublicKeysList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SecurityConfiguration: "STRING_VALUE",
+ * //     Arguments: { // MapValue
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDevEndpointCommandInput - {@link GetDevEndpointCommandInput}
+ * @returns {@link GetDevEndpointCommandOutput}
  * @see {@link GetDevEndpointCommandInput} for command's `input` shape.
  * @see {@link GetDevEndpointCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetDevEndpointCommand extends $Command<
-  GetDevEndpointCommandInput,
-  GetDevEndpointCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDevEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDevEndpointCommandInput, GetDevEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetDevEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDevEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDevEndpointResponse.filterSensitiveLog,
+export class GetDevEndpointCommand extends command<GetDevEndpointCommandInput, GetDevEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDevEndpoint",
+  GetDevEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDevEndpointRequest;
+      output: GetDevEndpointResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDevEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDevEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDevEndpointCommandOutput> {
-    return deserializeAws_json1_1GetDevEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDevEndpointCommandInput;
+      output: GetDevEndpointCommandOutput;
+    };
+  };
 }

@@ -1,78 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { XmlMapsInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restXmlXmlEmptyMapsCommand,
-  serializeAws_restXmlXmlEmptyMapsCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { XmlEmptyMapsRequest, XmlEmptyMapsResponse } from "../models/models_0";
+import { de_XmlEmptyMapsCommand, se_XmlEmptyMapsCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
-export interface XmlEmptyMapsCommandInput extends XmlMapsInputOutput {}
-export interface XmlEmptyMapsCommandOutput extends XmlMapsInputOutput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlEmptyMapsCommand}.
+ */
+export interface XmlEmptyMapsCommandInput extends XmlEmptyMapsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link XmlEmptyMapsCommand}.
+ */
+export interface XmlEmptyMapsCommandOutput extends XmlEmptyMapsResponse, __MetadataBearer {}
 
-export class XmlEmptyMapsCommand extends $Command<
-  XmlEmptyMapsCommandInput,
-  XmlEmptyMapsCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: XmlEmptyMapsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<XmlEmptyMapsCommandInput, XmlEmptyMapsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "XmlEmptyMapsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: XmlMapsInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: XmlMapsInputOutput.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, XmlEmptyMapsCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
+ * // const { RestXmlProtocolClient, XmlEmptyMapsCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // XmlEmptyMapsRequest
+ *   myMap: { // XmlMapsInputOutputMap
+ *     "<keys>": { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   },
+ * };
+ * const command = new XmlEmptyMapsCommand(input);
+ * const response = await client.send(command);
+ * // { // XmlEmptyMapsResponse
+ * //   myMap: { // XmlMapsInputOutputMap
+ * //     "<keys>": { // GreetingStruct
+ * //       hi: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param XmlEmptyMapsCommandInput - {@link XmlEmptyMapsCommandInput}
+ * @returns {@link XmlEmptyMapsCommandOutput}
+ * @see {@link XmlEmptyMapsCommandInput} for command's `input` shape.
+ * @see {@link XmlEmptyMapsCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ */
+export class XmlEmptyMapsCommand extends $Command
+  .classBuilder<
+    XmlEmptyMapsCommandInput,
+    XmlEmptyMapsCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "XmlEmptyMaps", {})
+  .n("RestXmlProtocolClient", "XmlEmptyMapsCommand")
+  .f(void 0, void 0)
+  .ser(se_XmlEmptyMapsCommand)
+  .de(de_XmlEmptyMapsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: XmlEmptyMapsRequest;
+      output: XmlEmptyMapsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: XmlEmptyMapsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlXmlEmptyMapsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<XmlEmptyMapsCommandOutput> {
-    return deserializeAws_restXmlXmlEmptyMapsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: XmlEmptyMapsCommandInput;
+      output: XmlEmptyMapsCommandOutput;
+    };
+  };
 }

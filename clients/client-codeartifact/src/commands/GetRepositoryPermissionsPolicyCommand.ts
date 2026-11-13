@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeartifactClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeartifactClient";
-import { GetRepositoryPermissionsPolicyRequest, GetRepositoryPermissionsPolicyResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRepositoryPermissionsPolicyCommand,
-  serializeAws_restJson1GetRepositoryPermissionsPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRepositoryPermissionsPolicyRequest, GetRepositoryPermissionsPolicyResult } from "../models/models_0";
+import { GetRepositoryPermissionsPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRepositoryPermissionsPolicyCommand}.
+ */
 export interface GetRepositoryPermissionsPolicyCommandInput extends GetRepositoryPermissionsPolicyRequest {}
-export interface GetRepositoryPermissionsPolicyCommandOutput
-  extends GetRepositoryPermissionsPolicyResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetRepositoryPermissionsPolicyCommand}.
+ */
+export interface GetRepositoryPermissionsPolicyCommandOutput extends GetRepositoryPermissionsPolicyResult, __MetadataBearer {}
 
 /**
  * <p>
@@ -32,74 +31,76 @@ export interface GetRepositoryPermissionsPolicyCommandOutput
  * ```javascript
  * import { CodeartifactClient, GetRepositoryPermissionsPolicyCommand } from "@aws-sdk/client-codeartifact"; // ES Modules import
  * // const { CodeartifactClient, GetRepositoryPermissionsPolicyCommand } = require("@aws-sdk/client-codeartifact"); // CommonJS import
+ * // import type { CodeartifactClientConfig } from "@aws-sdk/client-codeartifact";
+ * const config = {}; // type is CodeartifactClientConfig
  * const client = new CodeartifactClient(config);
+ * const input = { // GetRepositoryPermissionsPolicyRequest
+ *   domain: "STRING_VALUE", // required
+ *   domainOwner: "STRING_VALUE",
+ *   repository: "STRING_VALUE", // required
+ * };
  * const command = new GetRepositoryPermissionsPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetRepositoryPermissionsPolicyResult
+ * //   policy: { // ResourcePolicy
+ * //     resourceArn: "STRING_VALUE",
+ * //     revision: "STRING_VALUE",
+ * //     document: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRepositoryPermissionsPolicyCommandInput - {@link GetRepositoryPermissionsPolicyCommandInput}
+ * @returns {@link GetRepositoryPermissionsPolicyCommandOutput}
  * @see {@link GetRepositoryPermissionsPolicyCommandInput} for command's `input` shape.
  * @see {@link GetRepositoryPermissionsPolicyCommandOutput} for command's `response` shape.
- * @see {@link CodeartifactClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeartifactClientResolvedConfig | config} for CodeartifactClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>
+ *         The operation did not succeed because of an unauthorized access attempt.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The operation did not succeed because of an error that occurred inside CodeArtifact. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>
+ *       The operation did not succeed because the resource requested is not found in the service.
+ *     </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>
+ *       The operation did not succeed because too many requests are sent to the service.
+ *     </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>
+ *       The operation did not succeed because a parameter in the request was sent with an invalid value.
+ *     </p>
+ *
+ * @throws {@link CodeartifactServiceException}
+ * <p>Base exception class for all service exceptions from Codeartifact service.</p>
+ *
+ *
+ * @public
  */
-export class GetRepositoryPermissionsPolicyCommand extends $Command<
-  GetRepositoryPermissionsPolicyCommandInput,
-  GetRepositoryPermissionsPolicyCommandOutput,
-  CodeartifactClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRepositoryPermissionsPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeartifactClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRepositoryPermissionsPolicyCommandInput, GetRepositoryPermissionsPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeartifactClient";
-    const commandName = "GetRepositoryPermissionsPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRepositoryPermissionsPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRepositoryPermissionsPolicyResult.filterSensitiveLog,
+export class GetRepositoryPermissionsPolicyCommand extends command<GetRepositoryPermissionsPolicyCommandInput, GetRepositoryPermissionsPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRepositoryPermissionsPolicy",
+  GetRepositoryPermissionsPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRepositoryPermissionsPolicyRequest;
+      output: GetRepositoryPermissionsPolicyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetRepositoryPermissionsPolicyCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRepositoryPermissionsPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetRepositoryPermissionsPolicyCommandOutput> {
-    return deserializeAws_restJson1GetRepositoryPermissionsPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRepositoryPermissionsPolicyCommandInput;
+      output: GetRepositoryPermissionsPolicyCommandOutput;
+    };
+  };
 }

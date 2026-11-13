@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { DeletePendingAggregationRequestRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeletePendingAggregationRequestCommand,
-  serializeAws_json1_1DeletePendingAggregationRequestCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePendingAggregationRequestRequest } from "../models/models_0";
+import { DeletePendingAggregationRequest$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePendingAggregationRequestCommand}.
+ */
 export interface DeletePendingAggregationRequestCommandInput extends DeletePendingAggregationRequestRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePendingAggregationRequestCommand}.
+ */
 export interface DeletePendingAggregationRequestCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,74 +30,50 @@ export interface DeletePendingAggregationRequestCommandOutput extends __Metadata
  * ```javascript
  * import { ConfigServiceClient, DeletePendingAggregationRequestCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DeletePendingAggregationRequestCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DeletePendingAggregationRequestRequest
+ *   RequesterAccountId: "STRING_VALUE", // required
+ *   RequesterAwsRegion: "STRING_VALUE", // required
+ * };
  * const command = new DeletePendingAggregationRequestCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePendingAggregationRequestCommandInput - {@link DeletePendingAggregationRequestCommandInput}
+ * @returns {@link DeletePendingAggregationRequestCommandOutput}
  * @see {@link DeletePendingAggregationRequestCommandInput} for command's `input` shape.
  * @see {@link DeletePendingAggregationRequestCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more of the specified parameters are not valid. Verify
+ * 			that your parameters are valid and try again.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePendingAggregationRequestCommand extends $Command<
-  DeletePendingAggregationRequestCommandInput,
-  DeletePendingAggregationRequestCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePendingAggregationRequestCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePendingAggregationRequestCommandInput, DeletePendingAggregationRequestCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DeletePendingAggregationRequestCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePendingAggregationRequestRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeletePendingAggregationRequestCommand extends command<DeletePendingAggregationRequestCommandInput, DeletePendingAggregationRequestCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePendingAggregationRequest",
+  DeletePendingAggregationRequest$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePendingAggregationRequestRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeletePendingAggregationRequestCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeletePendingAggregationRequestCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeletePendingAggregationRequestCommandOutput> {
-    return deserializeAws_json1_1DeletePendingAggregationRequestCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePendingAggregationRequestCommandInput;
+      output: DeletePendingAggregationRequestCommandOutput;
+    };
+  };
 }

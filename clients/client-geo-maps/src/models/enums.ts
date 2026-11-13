@@ -1,0 +1,252 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const Buildings = {
+  BUILDINGS_3D: "Buildings3D",
+} as const;
+/**
+ * @public
+ */
+export type Buildings = (typeof Buildings)[keyof typeof Buildings];
+
+/**
+ * @public
+ * @enum
+ */
+export const ColorScheme = {
+  DARK: "Dark",
+  LIGHT: "Light",
+} as const;
+/**
+ * @public
+ */
+export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContourDensity = {
+  HIGH: "High",
+  LOW: "Low",
+  MEDIUM: "Medium",
+} as const;
+/**
+ * @public
+ */
+export type ContourDensity = (typeof ContourDensity)[keyof typeof ContourDensity];
+
+/**
+ * @public
+ * @enum
+ */
+export const MapStyle = {
+  HYBRID: "Hybrid",
+  MONOCHROME: "Monochrome",
+  SATELLITE: "Satellite",
+  STANDARD: "Standard",
+} as const;
+/**
+ * @public
+ */
+export type MapStyle = (typeof MapStyle)[keyof typeof MapStyle];
+
+/**
+ * @public
+ * @enum
+ */
+export const Variant = {
+  DEFAULT: "Default",
+} as const;
+/**
+ * @public
+ */
+export type Variant = (typeof Variant)[keyof typeof Variant];
+
+/**
+ * @public
+ * @enum
+ */
+export const LabelSize = {
+  LARGE: "Large",
+  SMALL: "Small",
+} as const;
+/**
+ * @public
+ */
+export type LabelSize = (typeof LabelSize)[keyof typeof LabelSize];
+
+/**
+ * @public
+ * @enum
+ */
+export const MapFeatureMode = {
+  DISABLED: "Disabled",
+  ENABLED: "Enabled",
+} as const;
+/**
+ * @public
+ */
+export type MapFeatureMode = (typeof MapFeatureMode)[keyof typeof MapFeatureMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScaleBarUnit = {
+  KILOMETERS: "Kilometers",
+  KILOMETERS_MILES: "KilometersMiles",
+  MILES: "Miles",
+  MILES_KILOMETERS: "MilesKilometers",
+} as const;
+/**
+ * @public
+ */
+export type ScaleBarUnit = (typeof ScaleBarUnit)[keyof typeof ScaleBarUnit];
+
+/**
+ * @public
+ * @enum
+ */
+export const StaticMapStyle = {
+  SATELLITE: "Satellite",
+  STANDARD: "Standard",
+} as const;
+/**
+ * @public
+ */
+export type StaticMapStyle = (typeof StaticMapStyle)[keyof typeof StaticMapStyle];
+
+/**
+ * @public
+ * @enum
+ */
+export const ValidationExceptionReason = {
+  CANNOT_PARSE: "CannotParse",
+  FIELD_VALIDATION_FAILED: "FieldValidationFailed",
+  /**
+   * The required input is missing.
+   */
+  MISSING: "Missing",
+  /**
+   * The input is invalid but no more specific reason is applicable.
+   */
+  OTHER: "Other",
+  /**
+   * No such field is supported.
+   */
+  UNKNOWN_FIELD: "UnknownField",
+  /**
+   * No such operation is supported.
+   */
+  UNKNOWN_OPERATION: "UnknownOperation",
+} as const;
+/**
+ * @public
+ */
+export type ValidationExceptionReason = (typeof ValidationExceptionReason)[keyof typeof ValidationExceptionReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const PoiCategory = {
+  ACCOMMODATIONS: "Accommodations",
+  BUSINESS_AND_SERVICES: "BusinessAndServices",
+  ENTERTAINMENT: "Entertainment",
+  FACILITIES_AND_BUILDINGS: "FacilitiesAndBuildings",
+  FOOD_AND_DRINK: "FoodAndDrink",
+  LEISURE_AND_OUTDOOR: "LeisureAndOutdoor",
+  SHOPPING: "Shopping",
+  SIGHTS_AND_MUSEUMS: "SightsAndMuseums",
+  TRANSPORTATION: "Transportation",
+} as const;
+/**
+ * @public
+ */
+export type PoiCategory = (typeof PoiCategory)[keyof typeof PoiCategory];
+
+/**
+ * @public
+ * @enum
+ */
+export const PoiDensity = {
+  DEFAULT: "Default",
+  DENSE: "Dense",
+  OFF: "Off",
+  SPARSE: "Sparse",
+  VERY_DENSE: "VeryDense",
+  VERY_SPARSE: "VerySparse",
+} as const;
+/**
+ * @public
+ */
+export type PoiDensity = (typeof PoiDensity)[keyof typeof PoiDensity];
+
+/**
+ * @public
+ * @enum
+ */
+export const Terrain = {
+  HILLSHADE: "Hillshade",
+  TERRAIN_3D: "Terrain3D",
+} as const;
+/**
+ * @public
+ */
+export type Terrain = (typeof Terrain)[keyof typeof Terrain];
+
+/**
+ * @public
+ * @enum
+ */
+export const Traffic = {
+  ALL: "All",
+  CONGESTION: "Congestion",
+} as const;
+/**
+ * @public
+ */
+export type Traffic = (typeof Traffic)[keyof typeof Traffic];
+
+/**
+ * @public
+ * @enum
+ */
+export const TravelMode = {
+  TRANSIT: "Transit",
+  TRUCK: "Truck",
+} as const;
+/**
+ * @public
+ */
+export type TravelMode = (typeof TravelMode)[keyof typeof TravelMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const TileAdditionalFeature = {
+  /**
+   * Map elevation contour lines.
+   */
+  CONTOUR_LINES: "ContourLines",
+  /**
+   * Map hillshading details for shading elevation changes.
+   */
+  HILLSHADE: "Hillshade",
+  /**
+   * Map logistics details, including advanced pois and road networks.
+   */
+  LOGISTICS: "Logistics",
+  /**
+   * Map transit details.
+   */
+  TRANSIT: "Transit",
+} as const;
+/**
+ * @public
+ */
+export type TileAdditionalFeature = (typeof TileAdditionalFeature)[keyof typeof TileAdditionalFeature];

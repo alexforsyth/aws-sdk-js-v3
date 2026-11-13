@@ -1,88 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KendraClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KendraClient";
-import { ListFaqsRequest, ListFaqsResponse } from "../models/models_0";
-import { deserializeAws_json1_1ListFaqsCommand, serializeAws_json1_1ListFaqsCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFaqsRequest, ListFaqsResponse } from "../models/models_0";
+import { ListFaqs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFaqsCommand}.
+ */
 export interface ListFaqsCommandInput extends ListFaqsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFaqsCommand}.
+ */
 export interface ListFaqsCommandOutput extends ListFaqsResponse, __MetadataBearer {}
 
 /**
- * <p>Gets a list of FAQ lists associated with an index.</p>
+ * <p>Gets a list of FAQs associated with an index.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KendraClient, ListFaqsCommand } from "@aws-sdk/client-kendra"; // ES Modules import
  * // const { KendraClient, ListFaqsCommand } = require("@aws-sdk/client-kendra"); // CommonJS import
+ * // import type { KendraClientConfig } from "@aws-sdk/client-kendra";
+ * const config = {}; // type is KendraClientConfig
  * const client = new KendraClient(config);
+ * const input = { // ListFaqsRequest
+ *   IndexId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListFaqsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFaqsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   FaqSummaryItems: [ // FaqSummaryItems
+ * //     { // FaqSummary
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Status: "CREATING" || "UPDATING" || "ACTIVE" || "DELETING" || "FAILED",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //       FileFormat: "CSV" || "CSV_WITH_HEADER" || "JSON",
+ * //       LanguageCode: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListFaqsCommandInput - {@link ListFaqsCommandInput}
+ * @returns {@link ListFaqsCommandOutput}
  * @see {@link ListFaqsCommandInput} for command's `input` shape.
  * @see {@link ListFaqsCommandOutput} for command's `response` shape.
- * @see {@link KendraClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KendraClientResolvedConfig | config} for KendraClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action. Please ensure you have the
+ *             required permission policies and user accounts and try again.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An issue occurred with the internal server used for your Amazon Kendra service.
+ *             Please wait a few minutes and try again, or contact <a href="http://aws.amazon.com/contact-us/">Support</a> for help.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource you want to use doesn’t exist. Please check you have provided the correct
+ *             resource and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. Please reduce the number of requests
+ *             and try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints set by the Amazon Kendra service.
+ *             Please provide the correct input and try again.</p>
+ *
+ * @throws {@link KendraServiceException}
+ * <p>Base exception class for all service exceptions from Kendra service.</p>
+ *
+ *
+ * @public
  */
-export class ListFaqsCommand extends $Command<ListFaqsCommandInput, ListFaqsCommandOutput, KendraClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFaqsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KendraClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFaqsCommandInput, ListFaqsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KendraClient";
-    const commandName = "ListFaqsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFaqsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFaqsResponse.filterSensitiveLog,
+export class ListFaqsCommand extends command<ListFaqsCommandInput, ListFaqsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFaqs",
+  ListFaqs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFaqsRequest;
+      output: ListFaqsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFaqsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListFaqsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFaqsCommandOutput> {
-    return deserializeAws_json1_1ListFaqsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFaqsCommandInput;
+      output: ListFaqsCommandOutput;
+    };
+  };
 }

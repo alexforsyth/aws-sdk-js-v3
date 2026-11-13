@@ -1,0 +1,49 @@
+// smithy-typescript generated code
+import { AwsSdkSigV4Signer } from "@aws-sdk/core/httpAuthSchemes";
+import { AwsJson1_0Protocol } from "@aws-sdk/core/protocols";
+import { Sha256 } from "@smithy/core/checksum";
+import { NoOpLogger } from "@smithy/core/client";
+import { parseUrl } from "@smithy/core/protocols";
+import { fromBase64, fromUtf8, toBase64, toUtf8 } from "@smithy/core/serde";
+import type { IdentityProviderConfig } from "@smithy/types";
+
+import { defaultJSONRPC10HttpAuthSchemeProvider } from "./auth/httpAuthSchemeProvider";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
+import type { JSONRPC10ClientConfig } from "./JSONRPC10Client";
+import { errorTypeRegistries } from "./schemas/schemas_0";
+
+/**
+ * @internal
+ */
+export const getRuntimeConfig = (config: JSONRPC10ClientConfig) => {
+  return {
+    apiVersion: "2020-07-14",
+    base64Decoder: config?.base64Decoder ?? fromBase64,
+    base64Encoder: config?.base64Encoder ?? toBase64,
+    disableHostPrefix: config?.disableHostPrefix ?? false,
+    endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
+    extensions: config?.extensions ?? [],
+    httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultJSONRPC10HttpAuthSchemeProvider,
+    httpAuthSchemes: config?.httpAuthSchemes ?? [
+      {
+        schemeId: "aws.auth#sigv4",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4"),
+        signer: new AwsSdkSigV4Signer(),
+      },
+    ],
+    logger: config?.logger ?? new NoOpLogger(),
+    protocol: config?.protocol ?? AwsJson1_0Protocol,
+    protocolSettings: config?.protocolSettings ?? {
+      defaultNamespace: "aws.protocoltests.json10",
+      errorTypeRegistries,
+      version: "2020-07-14",
+      serviceTarget: "JsonRpc10",
+    },
+    serviceId: config?.serviceId ?? "JSON RPC 10",
+    sha256: config?.sha256 ?? Sha256,
+    urlParser: config?.urlParser ?? parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+  };
+};

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageClient";
-import { UpdateChannelRequest, UpdateChannelResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateChannelCommand,
-  serializeAws_restJson1UpdateChannelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateChannelRequest, UpdateChannelResponse } from "../models/models_0";
+import { UpdateChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateChannelCommand}.
+ */
 export interface UpdateChannelCommandInput extends UpdateChannelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateChannelCommand}.
+ */
 export interface UpdateChannelCommandOutput extends UpdateChannelResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,88 @@ export interface UpdateChannelCommandOutput extends UpdateChannelResponse, __Met
  * ```javascript
  * import { MediaPackageClient, UpdateChannelCommand } from "@aws-sdk/client-mediapackage"; // ES Modules import
  * // const { MediaPackageClient, UpdateChannelCommand } = require("@aws-sdk/client-mediapackage"); // CommonJS import
+ * // import type { MediaPackageClientConfig } from "@aws-sdk/client-mediapackage";
+ * const config = {}; // type is MediaPackageClientConfig
  * const client = new MediaPackageClient(config);
+ * const input = { // UpdateChannelRequest
+ *   Description: "STRING_VALUE",
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new UpdateChannelCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateChannelResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreatedAt: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   EgressAccessLogs: { // EgressAccessLogs
+ * //     LogGroupName: "STRING_VALUE",
+ * //   },
+ * //   HlsIngest: { // HlsIngest
+ * //     IngestEndpoints: [ // __listOfIngestEndpoint
+ * //       { // IngestEndpoint
+ * //         Id: "STRING_VALUE",
+ * //         Password: "STRING_VALUE",
+ * //         Url: "STRING_VALUE",
+ * //         Username: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   IngressAccessLogs: { // IngressAccessLogs
+ * //     LogGroupName: "STRING_VALUE",
+ * //   },
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateChannelCommandInput - {@link UpdateChannelCommandInput}
+ * @returns {@link UpdateChannelCommandOutput}
  * @see {@link UpdateChannelCommandInput} for command's `input` shape.
  * @see {@link UpdateChannelCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageClientResolvedConfig | config} for MediaPackageClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackage service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateChannelCommand extends $Command<
-  UpdateChannelCommandInput,
-  UpdateChannelCommandOutput,
-  MediaPackageClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateChannelCommandInput, UpdateChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageClient";
-    const commandName = "UpdateChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateChannelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateChannelResponse.filterSensitiveLog,
+export class UpdateChannelCommand extends command<UpdateChannelCommandInput, UpdateChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateChannel",
+  UpdateChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateChannelRequest;
+      output: UpdateChannelResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateChannelCommandOutput> {
-    return deserializeAws_restJson1UpdateChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateChannelCommandInput;
+      output: UpdateChannelCommandOutput;
+    };
+  };
 }

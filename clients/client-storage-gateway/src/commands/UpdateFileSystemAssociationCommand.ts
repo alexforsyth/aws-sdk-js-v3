@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateFileSystemAssociationInput, UpdateFileSystemAssociationOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateFileSystemAssociationCommand,
-  serializeAws_json1_1UpdateFileSystemAssociationCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFileSystemAssociationInput, UpdateFileSystemAssociationOutput } from "../models/models_0";
+import { UpdateFileSystemAssociation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFileSystemAssociationCommand}.
+ */
 export interface UpdateFileSystemAssociationCommandInput extends UpdateFileSystemAssociationInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFileSystemAssociationCommand}.
+ */
 export interface UpdateFileSystemAssociationCommandOutput extends UpdateFileSystemAssociationOutput, __MetadataBearer {}
 
 /**
@@ -29,71 +30,61 @@ export interface UpdateFileSystemAssociationCommandOutput extends UpdateFileSyst
  * ```javascript
  * import { StorageGatewayClient, UpdateFileSystemAssociationCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, UpdateFileSystemAssociationCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // UpdateFileSystemAssociationInput
+ *   FileSystemAssociationARN: "STRING_VALUE", // required
+ *   UserName: "STRING_VALUE",
+ *   Password: "STRING_VALUE",
+ *   AuditDestinationARN: "STRING_VALUE",
+ *   CacheAttributes: { // CacheAttributes
+ *     CacheStaleTimeoutInSeconds: Number("int"),
+ *   },
+ * };
  * const command = new UpdateFileSystemAssociationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateFileSystemAssociationOutput
+ * //   FileSystemAssociationARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateFileSystemAssociationCommandInput - {@link UpdateFileSystemAssociationCommandInput}
+ * @returns {@link UpdateFileSystemAssociationCommandOutput}
  * @see {@link UpdateFileSystemAssociationCommandInput} for command's `input` shape.
  * @see {@link UpdateFileSystemAssociationCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateFileSystemAssociationCommand extends $Command<
-  UpdateFileSystemAssociationCommandInput,
-  UpdateFileSystemAssociationCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFileSystemAssociationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFileSystemAssociationCommandInput, UpdateFileSystemAssociationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "UpdateFileSystemAssociationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFileSystemAssociationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateFileSystemAssociationOutput.filterSensitiveLog,
+export class UpdateFileSystemAssociationCommand extends command<UpdateFileSystemAssociationCommandInput, UpdateFileSystemAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFileSystemAssociation",
+  UpdateFileSystemAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFileSystemAssociationInput;
+      output: UpdateFileSystemAssociationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateFileSystemAssociationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateFileSystemAssociationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateFileSystemAssociationCommandOutput> {
-    return deserializeAws_json1_1UpdateFileSystemAssociationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFileSystemAssociationCommandInput;
+      output: UpdateFileSystemAssociationCommandOutput;
+    };
+  };
 }

@@ -1,41 +1,42 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisClient";
-import { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListStreamsCommand,
-  serializeAws_json1_1ListStreamsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep1, _mw0, command } from "../commandBuilder";
+import type { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
+import { ListStreams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandInput extends ListStreamsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataBearer {}
 
 /**
  * <p>Lists your Kinesis data streams.</p>
- *         <p>The number of streams may be too large to return from a single call to
+ *          <p>The number of streams may be too large to return from a single call to
  *                 <code>ListStreams</code>. You can limit the number of returned streams using the
  *                 <code>Limit</code> parameter. If you do not specify a value for the
  *                 <code>Limit</code> parameter, Kinesis Data Streams uses the default limit, which is
- *             currently 10.</p>
- *         <p>You can detect if there are more streams available to list by using the
+ *             currently 100.</p>
+ *          <p>You can detect if there are more streams available to list by using the
  *                 <code>HasMoreStreams</code> flag from the returned output. If there are more streams
  *             available, you can request more streams by using the name of the last stream returned by
  *             the <code>ListStreams</code> request in the <code>ExclusiveStartStreamName</code>
  *             parameter in a subsequent request to <code>ListStreams</code>. The group of stream names
  *             returned by the subsequent request is then added to the list. You can continue this
  *             process until all the stream names have been collected in the list. </p>
- *         <p>
+ *          <p>
  *             <a>ListStreams</a> has a limit of five transactions per second per
  *             account.</p>
  * @example
@@ -43,68 +44,75 @@ export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataB
  * ```javascript
  * import { KinesisClient, ListStreamsCommand } from "@aws-sdk/client-kinesis"; // ES Modules import
  * // const { KinesisClient, ListStreamsCommand } = require("@aws-sdk/client-kinesis"); // CommonJS import
+ * // import type { KinesisClientConfig } from "@aws-sdk/client-kinesis";
+ * const config = {}; // type is KinesisClientConfig
  * const client = new KinesisClient(config);
+ * const input = { // ListStreamsInput
+ *   Limit: Number("int"),
+ *   ExclusiveStartStreamName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListStreamsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStreamsOutput
+ * //   StreamNames: [ // StreamNameList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   HasMoreStreams: true || false, // required
+ * //   NextToken: "STRING_VALUE",
+ * //   StreamSummaries: [ // StreamSummaryList
+ * //     { // StreamSummary
+ * //       StreamName: "STRING_VALUE", // required
+ * //       StreamARN: "STRING_VALUE", // required
+ * //       StreamStatus: "CREATING" || "DELETING" || "ACTIVE" || "UPDATING", // required
+ * //       StreamModeDetails: { // StreamModeDetails
+ * //         StreamMode: "PROVISIONED" || "ON_DEMAND", // required
+ * //       },
+ * //       StreamCreationTimestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListStreamsCommandInput - {@link ListStreamsCommandInput}
+ * @returns {@link ListStreamsCommandOutput}
  * @see {@link ListStreamsCommandInput} for command's `input` shape.
  * @see {@link ListStreamsCommandOutput} for command's `response` shape.
- * @see {@link KinesisClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisClientResolvedConfig | config} for KinesisClient's `config` shape.
  *
+ * @throws {@link ExpiredNextTokenException} (client fault)
+ *  <p>The pagination token passed to the operation is expired.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>A specified parameter exceeds its restrictions, is not supported, or can't be used.
+ *             For more information, see the returned message.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
+ *             stream requests exceeds the maximum number allowed. </p>
+ *
+ * @throws {@link KinesisServiceException}
+ * <p>Base exception class for all service exceptions from Kinesis service.</p>
+ *
+ *
+ * @public
  */
-export class ListStreamsCommand extends $Command<
-  ListStreamsCommandInput,
-  ListStreamsCommandOutput,
-  KinesisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStreamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStreamsCommandInput, ListStreamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisClient";
-    const commandName = "ListStreamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStreamsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStreamsOutput.filterSensitiveLog,
+export class ListStreamsCommand extends command<ListStreamsCommandInput, ListStreamsCommandOutput>(
+  _ep1,
+  _mw0,
+  "ListStreams",
+  ListStreams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamsInput;
+      output: ListStreamsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStreamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListStreamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStreamsCommandOutput> {
-    return deserializeAws_json1_1ListStreamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStreamsCommandInput;
+      output: ListStreamsCommandOutput;
+    };
+  };
 }

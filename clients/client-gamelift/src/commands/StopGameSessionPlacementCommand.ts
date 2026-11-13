@@ -1,112 +1,140 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { StopGameSessionPlacementInput, StopGameSessionPlacementOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopGameSessionPlacementCommand,
-  serializeAws_json1_1StopGameSessionPlacementCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopGameSessionPlacementInput, StopGameSessionPlacementOutput } from "../models/models_0";
+import { StopGameSessionPlacement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopGameSessionPlacementCommand}.
+ */
 export interface StopGameSessionPlacementCommandInput extends StopGameSessionPlacementInput {}
+/**
+ * @public
+ *
+ * The output of {@link StopGameSessionPlacementCommand}.
+ */
 export interface StopGameSessionPlacementCommandOutput extends StopGameSessionPlacementOutput, __MetadataBearer {}
 
 /**
- * <p>Cancels a game session placement that is in <code>PENDING</code> status. To stop a
- *         placement, provide the placement ID values. If successful, the placement is moved to
- *         <code>CANCELLED</code> status.</p>
- *          <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateGameSession</a> |
- *                     <a>DescribeGameSessions</a> |
- *                     <a>DescribeGameSessionDetails</a> |
- *                     <a>SearchGameSessions</a> |
- *                     <a>UpdateGameSession</a> |
- *                     <a>GetGameSessionLogUrl</a> |
- *                     <a>StartGameSessionPlacement</a> |
- *                     <a>DescribeGameSessionPlacement</a> |
- *                     <a>StopGameSessionPlacement</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Cancels a game session placement that's in <code>PENDING</code> status. To stop a
+ *             placement, provide the placement ID value. </p>
+ *          <p>Results</p>
+ *          <p>If successful, this operation removes the placement request from the queue and moves
+ *             the <code>GameSessionPlacement</code> to <code>CANCELLED</code> status.</p>
+ *          <p>This operation results in an <code>InvalidRequestException</code> (400) error if a
+ *             game session has already been created for this placement. You can clean up an unneeded
+ *             game session by calling <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_TerminateGameSession">TerminateGameSession</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, StopGameSessionPlacementCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, StopGameSessionPlacementCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // StopGameSessionPlacementInput
+ *   PlacementId: "STRING_VALUE", // required
+ * };
  * const command = new StopGameSessionPlacementCommand(input);
  * const response = await client.send(command);
+ * // { // StopGameSessionPlacementOutput
+ * //   GameSessionPlacement: { // GameSessionPlacement
+ * //     PlacementId: "STRING_VALUE",
+ * //     GameSessionQueueName: "STRING_VALUE",
+ * //     Status: "PENDING" || "FULFILLED" || "CANCELLED" || "TIMED_OUT" || "FAILED",
+ * //     GameProperties: [ // GamePropertyList
+ * //       { // GameProperty
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     MaximumPlayerSessionCount: Number("int"),
+ * //     GameSessionName: "STRING_VALUE",
+ * //     GameSessionId: "STRING_VALUE",
+ * //     GameSessionArn: "STRING_VALUE",
+ * //     GameSessionRegion: "STRING_VALUE",
+ * //     PlayerLatencies: [ // PlayerLatencyList
+ * //       { // PlayerLatency
+ * //         PlayerId: "STRING_VALUE",
+ * //         RegionIdentifier: "STRING_VALUE",
+ * //         LatencyInMilliseconds: Number("float"),
+ * //       },
+ * //     ],
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //     IpAddress: "STRING_VALUE",
+ * //     DnsName: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     PlacedPlayerSessions: [ // PlacedPlayerSessionList
+ * //       { // PlacedPlayerSession
+ * //         PlayerId: "STRING_VALUE",
+ * //         PlayerSessionId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     GameSessionData: "STRING_VALUE",
+ * //     MatchmakerData: "STRING_VALUE",
+ * //     PriorityConfigurationOverride: { // PriorityConfigurationOverride
+ * //       PlacementFallbackStrategy: "DEFAULT_AFTER_SINGLE_PASS" || "NONE",
+ * //       LocationOrder: [ // LocationOrderOverrideList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     PlayerGatewayStatus: "DISABLED" || "ENABLED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StopGameSessionPlacementCommandInput - {@link StopGameSessionPlacementCommandInput}
+ * @returns {@link StopGameSessionPlacementCommandOutput}
  * @see {@link StopGameSessionPlacementCommandInput} for command's `input` shape.
  * @see {@link StopGameSessionPlacementCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class StopGameSessionPlacementCommand extends $Command<
-  StopGameSessionPlacementCommandInput,
-  StopGameSessionPlacementCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopGameSessionPlacementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopGameSessionPlacementCommandInput, StopGameSessionPlacementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "StopGameSessionPlacementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopGameSessionPlacementInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StopGameSessionPlacementOutput.filterSensitiveLog,
+export class StopGameSessionPlacementCommand extends command<StopGameSessionPlacementCommandInput, StopGameSessionPlacementCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopGameSessionPlacement",
+  StopGameSessionPlacement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopGameSessionPlacementInput;
+      output: StopGameSessionPlacementOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopGameSessionPlacementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopGameSessionPlacementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopGameSessionPlacementCommandOutput> {
-    return deserializeAws_json1_1StopGameSessionPlacementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopGameSessionPlacementCommandInput;
+      output: StopGameSessionPlacementCommandOutput;
+    };
+  };
 }

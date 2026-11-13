@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListWebACLsRequest, ListWebACLsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListWebACLsCommand,
-  serializeAws_json1_1ListWebACLsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFV2ClientResolvedConfig } from "../WAFV2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWebACLsRequest, ListWebACLsResponse } from "../models/models_0";
+import { ListWebACLs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWebACLsCommand}.
+ */
 export interface ListWebACLsCommandInput extends ListWebACLsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWebACLsCommand}.
+ */
 export interface ListWebACLsCommandOutput extends ListWebACLsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,86 @@ export interface ListWebACLsCommandOutput extends ListWebACLsResponse, __Metadat
  * ```javascript
  * import { WAFV2Client, ListWebACLsCommand } from "@aws-sdk/client-wafv2"; // ES Modules import
  * // const { WAFV2Client, ListWebACLsCommand } = require("@aws-sdk/client-wafv2"); // CommonJS import
+ * // import type { WAFV2ClientConfig } from "@aws-sdk/client-wafv2";
+ * const config = {}; // type is WAFV2ClientConfig
  * const client = new WAFV2Client(config);
+ * const input = { // ListWebACLsRequest
+ *   Scope: "CLOUDFRONT" || "REGIONAL", // required
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListWebACLsCommand(input);
  * const response = await client.send(command);
+ * // { // ListWebACLsResponse
+ * //   NextMarker: "STRING_VALUE",
+ * //   WebACLs: [ // WebACLSummaries
+ * //     { // WebACLSummary
+ * //       Name: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       LockToken: "STRING_VALUE",
+ * //       ARN: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListWebACLsCommandInput - {@link ListWebACLsCommandInput}
+ * @returns {@link ListWebACLsCommandOutput}
  * @see {@link ListWebACLsCommandInput} for command's `input` shape.
  * @see {@link ListWebACLsCommandOutput} for command's `response` shape.
- * @see {@link WAFV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFV2ClientResolvedConfig | config} for WAFV2Client's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>Your request is valid, but WAF couldn’t perform the operation because of a system
+ *          problem. Retry your request. </p>
+ *
+ * @throws {@link WAFInvalidOperationException} (client fault)
+ *  <p>The operation isn't valid. </p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because WAF didn't recognize a parameter in the request. For
+ *          example: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified a parameter name or value that isn't valid.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your nested statement isn't valid. You might have tried to nest a statement that
+ *                can’t be nested. </p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that
+ *                isn't among the types available at <a>DefaultAction</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                with which a web ACL can't be associated.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFV2ServiceException}
+ * <p>Base exception class for all service exceptions from WAFV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListWebACLsCommand extends $Command<
-  ListWebACLsCommandInput,
-  ListWebACLsCommandOutput,
-  WAFV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListWebACLsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListWebACLsCommandInput, ListWebACLsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFV2Client";
-    const commandName = "ListWebACLsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListWebACLsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListWebACLsResponse.filterSensitiveLog,
+export class ListWebACLsCommand extends command<ListWebACLsCommandInput, ListWebACLsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWebACLs",
+  ListWebACLs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWebACLsRequest;
+      output: ListWebACLsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListWebACLsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListWebACLsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListWebACLsCommandOutput> {
-    return deserializeAws_json1_1ListWebACLsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListWebACLsCommandInput;
+      output: ListWebACLsCommandOutput;
+    };
+  };
 }

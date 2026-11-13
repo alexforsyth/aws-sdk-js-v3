@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetPlatformApplicationAttributesInput, GetPlatformApplicationAttributesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryGetPlatformApplicationAttributesCommand,
-  serializeAws_queryGetPlatformApplicationAttributesCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetPlatformApplicationAttributesInput,
+  GetPlatformApplicationAttributesResponse,
+} from "../models/models_0";
+import { GetPlatformApplicationAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPlatformApplicationAttributesCommand}.
+ */
 export interface GetPlatformApplicationAttributesCommandInput extends GetPlatformApplicationAttributesInput {}
-export interface GetPlatformApplicationAttributesCommandOutput
-  extends GetPlatformApplicationAttributesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetPlatformApplicationAttributesCommand}.
+ */
+export interface GetPlatformApplicationAttributesCommandOutput extends GetPlatformApplicationAttributesResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the attributes of the platform application object for the supported push
@@ -32,74 +34,62 @@ export interface GetPlatformApplicationAttributesCommandOutput
  * ```javascript
  * import { SNSClient, GetPlatformApplicationAttributesCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, GetPlatformApplicationAttributesCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // GetPlatformApplicationAttributesInput
+ *   PlatformApplicationArn: "STRING_VALUE", // required
+ * };
  * const command = new GetPlatformApplicationAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // GetPlatformApplicationAttributesResponse
+ * //   Attributes: { // MapStringToString
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetPlatformApplicationAttributesCommandInput - {@link GetPlatformApplicationAttributesCommandInput}
+ * @returns {@link GetPlatformApplicationAttributesCommandOutput}
  * @see {@link GetPlatformApplicationAttributesCommandInput} for command's `input` shape.
  * @see {@link GetPlatformApplicationAttributesCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Indicates that the requested resource does not exist.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class GetPlatformApplicationAttributesCommand extends $Command<
-  GetPlatformApplicationAttributesCommandInput,
-  GetPlatformApplicationAttributesCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPlatformApplicationAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPlatformApplicationAttributesCommandInput, GetPlatformApplicationAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "GetPlatformApplicationAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPlatformApplicationAttributesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPlatformApplicationAttributesResponse.filterSensitiveLog,
+export class GetPlatformApplicationAttributesCommand extends command<GetPlatformApplicationAttributesCommandInput, GetPlatformApplicationAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPlatformApplicationAttributes",
+  GetPlatformApplicationAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPlatformApplicationAttributesInput;
+      output: GetPlatformApplicationAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetPlatformApplicationAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryGetPlatformApplicationAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetPlatformApplicationAttributesCommandOutput> {
-    return deserializeAws_queryGetPlatformApplicationAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPlatformApplicationAttributesCommandInput;
+      output: GetPlatformApplicationAttributesCommandOutput;
+    };
+  };
 }

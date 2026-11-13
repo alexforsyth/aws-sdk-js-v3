@@ -1,101 +1,86 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { DeleteRealtimeLogConfigRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteRealtimeLogConfigCommand,
-  serializeAws_restXmlDeleteRealtimeLogConfigCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRealtimeLogConfigRequest } from "../models/models_0";
+import { DeleteRealtimeLogConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRealtimeLogConfigCommand}.
+ */
 export interface DeleteRealtimeLogConfigCommandInput extends DeleteRealtimeLogConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRealtimeLogConfigCommand}.
+ */
 export interface DeleteRealtimeLogConfigCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes a real-time log configuration.</p>
- * 		       <p>You cannot delete a real-time log configuration if it’s attached to a cache behavior.
- * 			First update your distributions to remove the real-time log configuration from all cache
- * 			behaviors, then delete the real-time log configuration.</p>
- * 		       <p>To delete a real-time log configuration, you can provide the configuration’s name or its
- * 			Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront
- * 			uses the name to identify the real-time log configuration to delete.</p>
+ * <p>Deletes a real-time log configuration.</p> <p>You cannot delete a real-time log configuration if it's attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration.</p> <p>To delete a real-time log configuration, you can provide the configuration's name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, DeleteRealtimeLogConfigCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, DeleteRealtimeLogConfigCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // DeleteRealtimeLogConfigRequest
+ *   Name: "STRING_VALUE",
+ *   ARN: "STRING_VALUE",
+ * };
  * const command = new DeleteRealtimeLogConfigCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteRealtimeLogConfigCommandInput - {@link DeleteRealtimeLogConfigCommandInput}
+ * @returns {@link DeleteRealtimeLogConfigCommandOutput}
  * @see {@link DeleteRealtimeLogConfigCommandInput} for command's `input` shape.
  * @see {@link DeleteRealtimeLogConfigCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link NoSuchRealtimeLogConfig} (client fault)
+ *  <p>The real-time log configuration does not exist.</p>
+ *
+ * @throws {@link RealtimeLogConfigInUse} (client fault)
+ *  <p>Cannot delete the real-time log configuration because it is attached to one or more cache behaviors.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRealtimeLogConfigCommand extends $Command<
-  DeleteRealtimeLogConfigCommandInput,
-  DeleteRealtimeLogConfigCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRealtimeLogConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRealtimeLogConfigCommandInput, DeleteRealtimeLogConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "DeleteRealtimeLogConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRealtimeLogConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteRealtimeLogConfigCommand extends command<DeleteRealtimeLogConfigCommandInput, DeleteRealtimeLogConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRealtimeLogConfig",
+  DeleteRealtimeLogConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRealtimeLogConfigRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRealtimeLogConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteRealtimeLogConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRealtimeLogConfigCommandOutput> {
-    return deserializeAws_restXmlDeleteRealtimeLogConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRealtimeLogConfigCommandInput;
+      output: DeleteRealtimeLogConfigCommandOutput;
+    };
+  };
 }

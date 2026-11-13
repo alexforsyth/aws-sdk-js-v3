@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateHsmConfigurationMessage, CreateHsmConfigurationResult } from "../models/models_0";
-import {
-  deserializeAws_queryCreateHsmConfigurationCommand,
-  serializeAws_queryCreateHsmConfigurationCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateHsmConfigurationMessage, CreateHsmConfigurationResult } from "../models/models_0";
+import { CreateHsmConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateHsmConfigurationCommand}.
+ */
 export interface CreateHsmConfigurationCommandInput extends CreateHsmConfigurationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateHsmConfigurationCommand}.
+ */
 export interface CreateHsmConfigurationCommandOutput extends CreateHsmConfigurationResult, __MetadataBearer {}
 
 /**
@@ -26,7 +27,7 @@ export interface CreateHsmConfigurationCommandOutput extends CreateHsmConfigurat
  *             cluster to store and use database encryption keys in a Hardware Security Module (HSM).
  *             After creating the HSM configuration, you can specify it as a parameter when creating a
  *             cluster. The cluster will then store its encryption keys in the HSM.</p>
- *         <p>In addition to creating an HSM configuration, you must also create an HSM client
+ *          <p>In addition to creating an HSM configuration, you must also create an HSM client
  *             certificate. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a>
  *             in the Amazon Redshift Cluster Management Guide.</p>
  * @example
@@ -34,68 +35,85 @@ export interface CreateHsmConfigurationCommandOutput extends CreateHsmConfigurat
  * ```javascript
  * import { RedshiftClient, CreateHsmConfigurationCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CreateHsmConfigurationCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CreateHsmConfigurationMessage
+ *   HsmConfigurationIdentifier: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE", // required
+ *   HsmIpAddress: "STRING_VALUE", // required
+ *   HsmPartitionName: "STRING_VALUE", // required
+ *   HsmPartitionPassword: "STRING_VALUE", // required
+ *   HsmServerPublicCertificate: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateHsmConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateHsmConfigurationResult
+ * //   HsmConfiguration: { // HsmConfiguration
+ * //     HsmConfigurationIdentifier: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     HsmIpAddress: "STRING_VALUE",
+ * //     HsmPartitionName: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateHsmConfigurationCommandInput - {@link CreateHsmConfigurationCommandInput}
+ * @returns {@link CreateHsmConfigurationCommandOutput}
  * @see {@link CreateHsmConfigurationCommandInput} for command's `input` shape.
  * @see {@link CreateHsmConfigurationCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link HsmConfigurationAlreadyExistsFault} (client fault)
+ *  <p>There is already an existing Amazon Redshift HSM configuration with the specified
+ *             identifier.</p>
+ *
+ * @throws {@link HsmConfigurationQuotaExceededFault} (client fault)
+ *  <p>The quota for HSM configurations has been reached.
+ * For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
+ * in the <i>Amazon Redshift Cluster Management Guide</i>.
+ * </p>
+ *
+ * @throws {@link InvalidTagFault} (client fault)
+ *  <p>The tag is invalid.</p>
+ *
+ * @throws {@link TagLimitExceededFault} (client fault)
+ *  <p>You have exceeded the number of tags allowed.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateHsmConfigurationCommand extends $Command<
-  CreateHsmConfigurationCommandInput,
-  CreateHsmConfigurationCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateHsmConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateHsmConfigurationCommandInput, CreateHsmConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CreateHsmConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateHsmConfigurationMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateHsmConfigurationResult.filterSensitiveLog,
+export class CreateHsmConfigurationCommand extends command<CreateHsmConfigurationCommandInput, CreateHsmConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateHsmConfiguration",
+  CreateHsmConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateHsmConfigurationMessage;
+      output: CreateHsmConfigurationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateHsmConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateHsmConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateHsmConfigurationCommandOutput> {
-    return deserializeAws_queryCreateHsmConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateHsmConfigurationCommandInput;
+      output: CreateHsmConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeGuruProfilerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeGuruProfilerClient";
-import { ListProfilingGroupsRequest, ListProfilingGroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListProfilingGroupsCommand,
-  serializeAws_restJson1ListProfilingGroupsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProfilingGroupsRequest, ListProfilingGroupsResponse } from "../models/models_0";
+import { ListProfilingGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProfilingGroupsCommand}.
+ */
 export interface ListProfilingGroupsCommandInput extends ListProfilingGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListProfilingGroupsCommand}.
+ */
 export interface ListProfilingGroupsCommandOutput extends ListProfilingGroupsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +35,81 @@ export interface ListProfilingGroupsCommandOutput extends ListProfilingGroupsRes
  * ```javascript
  * import { CodeGuruProfilerClient, ListProfilingGroupsCommand } from "@aws-sdk/client-codeguruprofiler"; // ES Modules import
  * // const { CodeGuruProfilerClient, ListProfilingGroupsCommand } = require("@aws-sdk/client-codeguruprofiler"); // CommonJS import
+ * // import type { CodeGuruProfilerClientConfig } from "@aws-sdk/client-codeguruprofiler";
+ * const config = {}; // type is CodeGuruProfilerClientConfig
  * const client = new CodeGuruProfilerClient(config);
+ * const input = { // ListProfilingGroupsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   includeDescription: true || false,
+ * };
  * const command = new ListProfilingGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListProfilingGroupsResponse
+ * //   profilingGroupNames: [ // ProfilingGroupNames // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   profilingGroups: [ // ProfilingGroupDescriptions
+ * //     { // ProfilingGroupDescription
+ * //       name: "STRING_VALUE",
+ * //       agentOrchestrationConfig: { // AgentOrchestrationConfig
+ * //         profilingEnabled: true || false, // required
+ * //       },
+ * //       arn: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       profilingStatus: { // ProfilingStatus
+ * //         latestAgentProfileReportedAt: new Date("TIMESTAMP"),
+ * //         latestAggregatedProfile: { // AggregatedProfileTime
+ * //           start: new Date("TIMESTAMP"),
+ * //           period: "STRING_VALUE",
+ * //         },
+ * //         latestAgentOrchestratedAt: new Date("TIMESTAMP"),
+ * //       },
+ * //       computePlatform: "STRING_VALUE",
+ * //       tags: { // TagsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProfilingGroupsCommandInput - {@link ListProfilingGroupsCommandInput}
+ * @returns {@link ListProfilingGroupsCommandOutput}
  * @see {@link ListProfilingGroupsCommandInput} for command's `input` shape.
  * @see {@link ListProfilingGroupsCommandOutput} for command's `response` shape.
- * @see {@link CodeGuruProfilerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeGuruProfilerClientResolvedConfig | config} for CodeGuruProfilerClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link CodeGuruProfilerServiceException}
+ * <p>Base exception class for all service exceptions from CodeGuruProfiler service.</p>
+ *
+ *
+ * @public
  */
-export class ListProfilingGroupsCommand extends $Command<
-  ListProfilingGroupsCommandInput,
-  ListProfilingGroupsCommandOutput,
-  CodeGuruProfilerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProfilingGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeGuruProfilerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProfilingGroupsCommandInput, ListProfilingGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeGuruProfilerClient";
-    const commandName = "ListProfilingGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProfilingGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProfilingGroupsResponse.filterSensitiveLog,
+export class ListProfilingGroupsCommand extends command<ListProfilingGroupsCommandInput, ListProfilingGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProfilingGroups",
+  ListProfilingGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProfilingGroupsRequest;
+      output: ListProfilingGroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProfilingGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListProfilingGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProfilingGroupsCommandOutput> {
-    return deserializeAws_restJson1ListProfilingGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProfilingGroupsCommandInput;
+      output: ListProfilingGroupsCommandOutput;
+    };
+  };
 }

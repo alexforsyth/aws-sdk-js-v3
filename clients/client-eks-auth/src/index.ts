@@ -1,0 +1,20 @@
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used by the EKS Pod Identity Agent.</p>
+ *
+ * @packageDocumentation
+ */
+export * from "./EKSAuthClient";
+export * from "./EKSAuth";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { EKSAuthExtensionConfiguration } from "./extensionConfiguration";
+export * from "./commands";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./schemas/schemas_0";
+
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { EKSAuthServiceException } from "./models/EKSAuthServiceException";

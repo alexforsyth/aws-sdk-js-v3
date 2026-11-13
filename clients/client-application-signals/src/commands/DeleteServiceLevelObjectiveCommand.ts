@@ -1,0 +1,82 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteServiceLevelObjectiveInput, DeleteServiceLevelObjectiveOutput } from "../models/models_0";
+import { DeleteServiceLevelObjective$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteServiceLevelObjectiveCommand}.
+ */
+export interface DeleteServiceLevelObjectiveCommandInput extends DeleteServiceLevelObjectiveInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteServiceLevelObjectiveCommand}.
+ */
+export interface DeleteServiceLevelObjectiveCommandOutput extends DeleteServiceLevelObjectiveOutput, __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified service level objective.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ApplicationSignalsClient, DeleteServiceLevelObjectiveCommand } from "@aws-sdk/client-application-signals"; // ES Modules import
+ * // const { ApplicationSignalsClient, DeleteServiceLevelObjectiveCommand } = require("@aws-sdk/client-application-signals"); // CommonJS import
+ * // import type { ApplicationSignalsClientConfig } from "@aws-sdk/client-application-signals";
+ * const config = {}; // type is ApplicationSignalsClientConfig
+ * const client = new ApplicationSignalsClient(config);
+ * const input = { // DeleteServiceLevelObjectiveInput
+ *   Id: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteServiceLevelObjectiveCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteServiceLevelObjectiveCommandInput - {@link DeleteServiceLevelObjectiveCommandInput}
+ * @returns {@link DeleteServiceLevelObjectiveCommandOutput}
+ * @see {@link DeleteServiceLevelObjectiveCommandInput} for command's `input` shape.
+ * @see {@link DeleteServiceLevelObjectiveCommandOutput} for command's `response` shape.
+ * @see {@link ApplicationSignalsClientResolvedConfig | config} for ApplicationSignalsClient's `config` shape.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled because of quota limits.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The resource is not valid.</p>
+ *
+ * @throws {@link ApplicationSignalsServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationSignals service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteServiceLevelObjectiveCommand extends command<DeleteServiceLevelObjectiveCommandInput, DeleteServiceLevelObjectiveCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteServiceLevelObjective",
+  DeleteServiceLevelObjective$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteServiceLevelObjectiveInput;
+      output: {};
+    };
+    sdk: {
+      input: DeleteServiceLevelObjectiveCommandInput;
+      output: DeleteServiceLevelObjectiveCommandOutput;
+    };
+  };
+}

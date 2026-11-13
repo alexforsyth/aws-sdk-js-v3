@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RevokeClusterSecurityGroupIngressMessage, RevokeClusterSecurityGroupIngressResult } from "../models/models_1";
-import {
-  deserializeAws_queryRevokeClusterSecurityGroupIngressCommand,
-  serializeAws_queryRevokeClusterSecurityGroupIngressCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  RevokeClusterSecurityGroupIngressMessage,
+  RevokeClusterSecurityGroupIngressResult,
+} from "../models/models_1";
+import { RevokeClusterSecurityGroupIngress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RevokeClusterSecurityGroupIngressCommand}.
+ */
 export interface RevokeClusterSecurityGroupIngressCommandInput extends RevokeClusterSecurityGroupIngressMessage {}
-export interface RevokeClusterSecurityGroupIngressCommandOutput
-  extends RevokeClusterSecurityGroupIngressResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link RevokeClusterSecurityGroupIngressCommand}.
+ */
+export interface RevokeClusterSecurityGroupIngressCommandOutput extends RevokeClusterSecurityGroupIngressResult, __MetadataBearer {}
 
 /**
  * <p>Revokes an ingress rule in an Amazon Redshift security group for a previously authorized
@@ -34,74 +36,95 @@ export interface RevokeClusterSecurityGroupIngressCommandOutput
  * ```javascript
  * import { RedshiftClient, RevokeClusterSecurityGroupIngressCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, RevokeClusterSecurityGroupIngressCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // RevokeClusterSecurityGroupIngressMessage
+ *   ClusterSecurityGroupName: "STRING_VALUE", // required
+ *   CIDRIP: "STRING_VALUE",
+ *   EC2SecurityGroupName: "STRING_VALUE",
+ *   EC2SecurityGroupOwnerId: "STRING_VALUE",
+ * };
  * const command = new RevokeClusterSecurityGroupIngressCommand(input);
  * const response = await client.send(command);
+ * // { // RevokeClusterSecurityGroupIngressResult
+ * //   ClusterSecurityGroup: { // ClusterSecurityGroup
+ * //     ClusterSecurityGroupName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     EC2SecurityGroups: [ // EC2SecurityGroupList
+ * //       { // EC2SecurityGroup
+ * //         Status: "STRING_VALUE",
+ * //         EC2SecurityGroupName: "STRING_VALUE",
+ * //         EC2SecurityGroupOwnerId: "STRING_VALUE",
+ * //         Tags: [ // TagList
+ * //           { // Tag
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     IPRanges: [ // IPRangeList
+ * //       { // IPRange
+ * //         Status: "STRING_VALUE",
+ * //         CIDRIP: "STRING_VALUE",
+ * //         Tags: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     Tags: [
+ * //       {
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RevokeClusterSecurityGroupIngressCommandInput - {@link RevokeClusterSecurityGroupIngressCommandInput}
+ * @returns {@link RevokeClusterSecurityGroupIngressCommandOutput}
  * @see {@link RevokeClusterSecurityGroupIngressCommandInput} for command's `input` shape.
  * @see {@link RevokeClusterSecurityGroupIngressCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link AuthorizationNotFoundFault} (client fault)
+ *  <p>The specified CIDR IP range or EC2 security group is not authorized for the
+ *             specified cluster security group.</p>
+ *
+ * @throws {@link ClusterSecurityGroupNotFoundFault} (client fault)
+ *  <p>The cluster security group name does not refer to an existing cluster security
+ *             group.</p>
+ *
+ * @throws {@link InvalidClusterSecurityGroupStateFault} (client fault)
+ *  <p>The state of the cluster security group is not <code>available</code>. </p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class RevokeClusterSecurityGroupIngressCommand extends $Command<
-  RevokeClusterSecurityGroupIngressCommandInput,
-  RevokeClusterSecurityGroupIngressCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RevokeClusterSecurityGroupIngressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RevokeClusterSecurityGroupIngressCommandInput, RevokeClusterSecurityGroupIngressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "RevokeClusterSecurityGroupIngressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RevokeClusterSecurityGroupIngressMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: RevokeClusterSecurityGroupIngressResult.filterSensitiveLog,
+export class RevokeClusterSecurityGroupIngressCommand extends command<RevokeClusterSecurityGroupIngressCommandInput, RevokeClusterSecurityGroupIngressCommandOutput>(
+  _ep0,
+  _mw0,
+  "RevokeClusterSecurityGroupIngress",
+  RevokeClusterSecurityGroupIngress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeClusterSecurityGroupIngressMessage;
+      output: RevokeClusterSecurityGroupIngressResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RevokeClusterSecurityGroupIngressCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryRevokeClusterSecurityGroupIngressCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RevokeClusterSecurityGroupIngressCommandOutput> {
-    return deserializeAws_queryRevokeClusterSecurityGroupIngressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RevokeClusterSecurityGroupIngressCommandInput;
+      output: RevokeClusterSecurityGroupIngressCommandOutput;
+    };
+  };
 }

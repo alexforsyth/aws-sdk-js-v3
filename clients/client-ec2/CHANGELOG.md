@@ -3,6 +3,7422 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1168.0...v3.1169.0) (2026-11-13)
+
+
+### Features
+
+* **client-ec2:** Adds support for Networking Flexible Cost Allocation APIs, enabling Network Admin, Architect, and Engineers to break down shared networking costs by the resources that generated the traffic. ([bbbe5b9](https://github.com/aws/aws-sdk-js-v3/commit/bbbe5b9f4bacc5d8ace9a51c033ce8796c0d0efd))
+
+
+
+
+
+# [3.1168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1167.0...v3.1168.0) (2026-11-12)
+
+
+### Features
+
+* **client-ec2:** This release adds support for multiple features, including EC2 Image Builder image recipes and container recipes in AMI usage reports, Amazon EC2 Detailed Monitoring adds opt-in metrics, and Global Accelerator and API Gateway V2 as resource exclusions for VPC Encryption Control. ([83c2b64](https://github.com/aws/aws-sdk-js-v3/commit/83c2b64f7438f56a5b05a7c9a6fad8524158ff84))
+
+
+
+
+
+# [3.1167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1166.0...v3.1167.0) (2026-11-11)
+
+
+### Features
+
+* **client-ec2:** Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks. ([c3c8697](https://github.com/aws/aws-sdk-js-v3/commit/c3c8697b1e8087a44beee2df81be10f38b042885))
+
+
+
+
+
+# [3.1166.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1165.0...v3.1166.0) (2026-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1164.0...v3.1165.0) (2026-11-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1164.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1163.0...v3.1164.0) (2026-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1162.0...v3.1163.0) (2026-11-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1161.0...v3.1162.0) (2026-11-04)
+
+
+### Features
+
+* **client-ec2:** Add the Unsupported SupportabilityScore to GetCapacityManagerSupportabilityScores. ([e8a84dc](https://github.com/aws/aws-sdk-js-v3/commit/e8a84dc8f593404bfb3344342d2b73daf9d46e1d))
+* **codegen:** add a default socket timeout per service ([#8396](https://github.com/aws/aws-sdk-js-v3/issues/8396)) ([8f62478](https://github.com/aws/aws-sdk-js-v3/commit/8f62478cf179dc3e0807dae1721a669e08d98074))
+
+
+
+
+
+# [3.1161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1160.0...v3.1161.0) (2026-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1159.0...v3.1160.0) (2026-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1158.0...v3.1159.0) (2026-10-28)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 Capacity Manager adds supportability checks and capacity fulfillment metrics. Use GetCapacityManagerSupportabilityScores to score how well instance types and Availability Zones can support a capacity request, and GetCapacityManagerMetricData to retrieve fulfillment metrics. ([2ab4457](https://github.com/aws/aws-sdk-js-v3/commit/2ab44578e3f5129552a3641256a8fbf04915ac36))
+
+
+
+
+
+# [3.1158.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1157.0...v3.1158.0) (2026-10-27)
+
+
+### Features
+
+* **client-ec2:** EC2 AMIs can now show vulnerability data and be targeted directly for scanning. ([4f53b1c](https://github.com/aws/aws-sdk-js-v3/commit/4f53b1cfed2ce7a6f0f5e4720eba209812ae639b))
+
+
+
+
+
+# [3.1157.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1156.0...v3.1157.0) (2026-10-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1156.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1155.0...v3.1156.0) (2026-10-22)
+
+
+### Features
+
+* **client-ec2:** AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them. ([68bea2c](https://github.com/aws/aws-sdk-js-v3/commit/68bea2cef8d723af4127391ac755fb37827d15c1))
+
+
+
+
+
+# [3.1155.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1154.0...v3.1155.0) (2026-10-21)
+
+
+### Features
+
+* **client-ec2:** Adds new response fields to DescribeInstanceStatus and Network Insights analysis results. ([8e37969](https://github.com/aws/aws-sdk-js-v3/commit/8e3796951062c3771c28ae881296628ae483d70b))
+
+
+
+
+
+# [3.1154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1153.0...v3.1154.0) (2026-10-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1153.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1152.0...v3.1153.0) (2026-10-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1152.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1151.0...v3.1152.0) (2026-10-14)
+
+
+### Features
+
+* **client-ec2:** Adds T8i instance sizes to the InstanceType enum. T8i instances are low-cost burstable instances powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards ([65c6056](https://github.com/aws/aws-sdk-js-v3/commit/65c6056b0bc8fab6261ac7b52e8a3421a4281152))
+
+
+
+
+
+# [3.1151.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1150.0...v3.1151.0) (2026-10-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1149.0...v3.1150.0) (2026-10-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1149.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1148.0...v3.1149.0) (2026-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1148.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1147.0...v3.1148.0) (2026-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1147.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1146.0...v3.1147.0) (2026-10-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1146.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1145.0...v3.1146.0) (2026-10-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1144.0...v3.1145.0) (2026-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1144.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1143.0...v3.1144.0) (2026-09-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1143.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1142.0...v3.1143.0) (2026-09-29)
+
+
+### Features
+
+* **client-ec2:** Adds the LaunchStatus field to CapacityReservation in the DescribeCapacityReservations response. This field indicates whether you can currently launch instances into an UltraServer. ([5bb9e11](https://github.com/aws/aws-sdk-js-v3/commit/5bb9e1160a914a0c45cfe017bcc60450bd439be9))
+
+
+
+
+
+# [3.1142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1141.0...v3.1142.0) (2026-09-28)
+
+
+### Features
+
+* **client-ec2:** API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies ([6afa3ce](https://github.com/aws/aws-sdk-js-v3/commit/6afa3ce42e13620f18ae182d0fc1ab2fb91bc742))
+
+
+
+
+
+# [3.1141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1140.0...v3.1141.0) (2026-09-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1140.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1139.0...v3.1140.0) (2026-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1139.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1138.0...v3.1139.0) (2026-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1138.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1137.0...v3.1138.0) (2026-09-22)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations ([f1cb11a](https://github.com/aws/aws-sdk-js-v3/commit/f1cb11a81d0d2e2f0cabfe3885db7c883e6a01aa))
+
+
+
+
+
+# [3.1137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1136.0...v3.1137.0) (2026-09-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1135.0...v3.1136.0) (2026-09-18)
+
+
+### Features
+
+* **client-ec2:** This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs. ([27cc9e3](https://github.com/aws/aws-sdk-js-v3/commit/27cc9e36fc67080fa5bd9b33207bd111405e36ef))
+
+
+
+
+
+# [3.1135.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1134.0...v3.1135.0) (2026-09-17)
+
+
+### Features
+
+* **client-ec2:** Adding support for "Tunnel" VPC Endpoint ([cb7c9bc](https://github.com/aws/aws-sdk-js-v3/commit/cb7c9bc5cf6f5a1534e7215500bde8a8275aa397))
+
+
+
+
+
+# [3.1134.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1133.0...v3.1134.0) (2026-09-16)
+
+
+### Features
+
+* **client-ec2:** Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage. ([30aea54](https://github.com/aws/aws-sdk-js-v3/commit/30aea54d19a29107a368df6bff4d1e3a9dc9c940))
+
+
+
+
+
+# [3.1133.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1132.0...v3.1133.0) (2026-09-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1132.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1131.0...v3.1132.0) (2026-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1130.0...v3.1131.0) (2026-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1129.0...v3.1130.0) (2026-09-10)
+
+
+### Features
+
+* **client-ec2:** The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode. ([c47027f](https://github.com/aws/aws-sdk-js-v3/commit/c47027fb758c788adc42d44e02df1fcaee9e9e6a))
+
+
+
+
+
+# [3.1129.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1128.0...v3.1129.0) (2026-09-09)
+
+
+### Features
+
+* **client-ec2:** This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key. ([2fd8923](https://github.com/aws/aws-sdk-js-v3/commit/2fd8923f32c751562094cb79611cd8cc99c74b77))
+
+
+
+
+
+# [3.1128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1127.0...v3.1128.0) (2026-09-08)
+
+
+### Features
+
+* **client-ec2:** Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card. ([9336e68](https://github.com/aws/aws-sdk-js-v3/commit/9336e689cde8ef1f4501c7739a445328ce2ef52d))
+
+
+
+
+
+# [3.1127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1126.0...v3.1127.0) (2026-09-04)
+
+
+### Features
+
+* **client-ec2:** Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface. ([f51c3b3](https://github.com/aws/aws-sdk-js-v3/commit/f51c3b3e30327dd6fa45a9b8398422c7078d905d))
+
+
+
+
+
+# [3.1126.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1125.0...v3.1126.0) (2026-09-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1125.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1124.0...v3.1125.0) (2026-09-02)
+
+
+### Features
+
+* **client-ec2:** This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed. ([336c789](https://github.com/aws/aws-sdk-js-v3/commit/336c7896d1103fd5ad3d049ac4b18cc30b9295a2))
+
+
+
+
+
+# [3.1124.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1123.0...v3.1124.0) (2026-09-01)
+
+
+### Features
+
+* **client-ec2:** Update UserData and UploadPolicy shapes to use SecureBlob ([0369a0e](https://github.com/aws/aws-sdk-js-v3/commit/0369a0ea4d2a035f83ed50bee70c2dde699aaa67))
+
+
+
+
+
+# [3.1123.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1122.0...v3.1123.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1122.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1121.0...v3.1122.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1120.0...v3.1121.0) (2026-08-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1120.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1119.0...v3.1120.0) (2026-08-27)
+
+
+### Features
+
+* **client-ec2:** EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types. ([311b3b2](https://github.com/aws/aws-sdk-js-v3/commit/311b3b26dbad32a32a94713fca4ffb65eaf2ec61))
+
+
+
+
+
+# [3.1119.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1118.0...v3.1119.0) (2026-08-26)
+
+
+### Features
+
+* **client-ec2:** Adds deleting state to possible VPC States. ([43091d5](https://github.com/aws/aws-sdk-js-v3/commit/43091d55b3ca5ef039506afdcbd9c293162c61f3))
+
+
+
+
+
+# [3.1118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1117.0...v3.1118.0) (2026-08-25)
+
+
+### Features
+
+* **client-ec2:** Fleet feature to support Capacity Reservation Resource Groups with Amazon EC2 Capacity Blocks and interruptible Capacity Reservations ([144e994](https://github.com/aws/aws-sdk-js-v3/commit/144e9945727c1f0ad29a8802a71252ccfa45685b))
+
+
+
+
+
+# [3.1117.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1116.0...v3.1117.0) (2026-08-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1116.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1115.0...v3.1116.0) (2026-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1115.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1114.0...v3.1115.0) (2026-08-20)
+
+
+### Features
+
+* **client-ec2:** EC2 marks UEFI instance metadata field as sensitive. ([c232746](https://github.com/aws/aws-sdk-js-v3/commit/c232746ad78da7961a997005c6102943c392c30c))
+
+
+
+
+
+# [3.1114.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1113.0...v3.1114.0) (2026-08-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1113.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1112.0...v3.1113.0) (2026-08-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1111.0...v3.1112.0) (2026-08-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1111.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1110.0...v3.1111.0) (2026-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1109.0...v3.1110.0) (2026-08-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1108.0...v3.1109.0) (2026-08-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1108.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1107.0...v3.1108.0) (2026-08-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1107.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1106.0...v3.1107.0) (2026-08-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1106.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1105.0...v3.1106.0) (2026-08-07)
+
+
+### Features
+
+* **client-ec2:** This release adds support for BGP route protection in Amazon VPC IP Address Manager (IPAM), including route discovery, RPKI route protection findings, and delegated RPKI (Internet Registry Associations, routing policy registrations, and ROA management) for BYOIP prefixes. ([62f281d](https://github.com/aws/aws-sdk-js-v3/commit/62f281df5a1d7476485851907d2331f35c480d8e))
+
+
+
+
+
+# [3.1105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1104.0...v3.1105.0) (2026-08-06)
+
+
+### Features
+
+* **client-ec2:** Adds a new optional IncludeLocalZones parameter to the Spot Placement Score API that defaults to false. When set to true, the Spot Placement Score API will consider the relevant Local Zones with Spot capacity when computing the Spot Placement Score. ([4367384](https://github.com/aws/aws-sdk-js-v3/commit/43673842a0545caf2e6843c7d3e82349270f48df))
+
+
+
+
+
+# [3.1104.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1103.0...v3.1104.0) (2026-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1103.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1102.0...v3.1103.0) (2026-08-04)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments. ([b66fadc](https://github.com/aws/aws-sdk-js-v3/commit/b66fadcac6a74c151a905255046f72f2ec15331b))
+
+
+
+
+
+# [3.1102.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1101.0...v3.1102.0) (2026-08-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1101.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1100.0...v3.1101.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1099.0...v3.1100.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1099.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1098.0...v3.1099.0) (2026-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1098.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1097.0...v3.1098.0) (2026-07-29)
+
+
+### Features
+
+* **client-ec2:** This release adds support for policy-based routing on AWS Transit Gateway, enabling you to route traffic based on 5-tuple matching (source IP, destination IP, source port, destination port, and protocol) using new policy table entry APIs that direct matching traffic to a target route table. ([8ef115c](https://github.com/aws/aws-sdk-js-v3/commit/8ef115c88858d5f900ff24de4e3c8ed649e48ff3))
+
+
+
+
+
+# [3.1097.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1096.0...v3.1097.0) (2026-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1096.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1095.0...v3.1096.0) (2026-07-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1095.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1094.0...v3.1095.0) (2026-07-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1094.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1093.0...v3.1094.0) (2026-07-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1093.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1092.0...v3.1093.0) (2026-07-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1092.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1091.0...v3.1092.0) (2026-07-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1091.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1090.0...v3.1091.0) (2026-07-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1090.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1089.0...v3.1090.0) (2026-07-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1089.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1088.0...v3.1089.0) (2026-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1088.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1087.0...v3.1088.0) (2026-07-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1087.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1086.0...v3.1087.0) (2026-07-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1086.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1085.0...v3.1086.0) (2026-07-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1085.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1084.0...v3.1085.0) (2026-07-10)
+
+
+### Features
+
+* **client-ec2:** New Amazon EC2 instances. M9g, M9gd, C9g, and C9gd on AWS Graviton5. C8in, M8in, and R8in add 600 Gbps network. C8ib, M8ib, and R8ib add 300 Gbps EBS. C8ine, M8ine, M8idn, R8idn, M8idb, and R8idb round out Intel Xeon 6. Mac-m3ultra with Apple M3 Ultra. G7 with NVIDIA RTX PRO 4500 Blackwell GPUs. ([35aaf38](https://github.com/aws/aws-sdk-js-v3/commit/35aaf38707d66fa250c40fbef879fb9254a38cab))
+
+
+
+
+
+# [3.1084.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1083.0...v3.1084.0) (2026-07-09)
+
+
+### Features
+
+* **client-ec2:** Added support for additional override parameters in CreateFleet, including LaunchTemplateSpecificationUserData, KeyName, IamInstanceProfile, and MetadataOptions. The CreateFleet response now also includes SubnetId, AvailabilityZone, and AvailabilityZoneId for launched instances. ([6fcc95d](https://github.com/aws/aws-sdk-js-v3/commit/6fcc95d184daf8db8b4ab131932b86d011628deb))
+
+
+
+
+
+# [3.1083.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1082.0...v3.1083.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1082.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1081.0...v3.1082.0) (2026-07-08)
+
+
+### Features
+
+* **client-ec2:** Replace Root Volume now supports a VolumeId parameter. This allows the customer to pass in a pre-prepared volume as the target root volume for an RRV workflow. ([76859d4](https://github.com/aws/aws-sdk-js-v3/commit/76859d480e3786942a43b82e55b74632fdce0ee1))
+
+
+
+
+
+# [3.1081.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1080.0...v3.1081.0) (2026-07-07)
+
+
+### Features
+
+* **client-ec2:** This launch surfaces the public SSM parameter associated with public AMIs in the AMI metadata. ([9e8f9fa](https://github.com/aws/aws-sdk-js-v3/commit/9e8f9fa870eab8f555c7caea5ca42a5e4a996533))
+
+
+
+
+
+# [3.1080.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1079.0...v3.1080.0) (2026-07-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1079.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1078.0...v3.1079.0) (2026-07-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1078.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1077.0...v3.1078.0) (2026-07-01)
+
+
+### Features
+
+* **client-ec2:** Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations. ([6d82b78](https://github.com/aws/aws-sdk-js-v3/commit/6d82b78d175808ca5fd5ab7d414d75c705d42930))
+
+
+
+
+
+# [3.1077.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1076.0...v3.1077.0) (2026-06-30)
+
+
+### Features
+
+* **client-ec2:** Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level ([843c934](https://github.com/aws/aws-sdk-js-v3/commit/843c934cc8917bee5e1246306a4e1fa0e83c4d23))
+
+
+
+
+
+# [3.1076.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1075.0...v3.1076.0) (2026-06-29)
+
+
+### Features
+
+* **client-ec2:** Adds support for the precision time strategy and a parentGroupId parameter on CreatePlacementGroup and DescribePlacementGroups. Precision time placement groups and cluster placement groups with a parent precision time placement group ensure instances launch on precision time capable hardware. ([3482937](https://github.com/aws/aws-sdk-js-v3/commit/3482937a47912a63508f7673372812c109e61578))
+
+
+
+
+
+# [3.1075.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1074.0...v3.1075.0) (2026-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1074.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1073.0...v3.1074.0) (2026-06-22)
+
+
+### Features
+
+* **client-ec2:** This release adds support for AMI Watermark and Allowed AMIs integration ([d1698be](https://github.com/aws/aws-sdk-js-v3/commit/d1698bed3961295343fdd86d0a57820538023bc7))
+
+
+
+
+
+# [3.1073.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1072.0...v3.1073.0) (2026-06-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1072.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1071.0...v3.1072.0) (2026-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1071.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1070.0...v3.1071.0) (2026-06-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1070.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1069.0...v3.1070.0) (2026-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1069.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1068.0...v3.1069.0) (2026-06-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1068.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1067.0...v3.1068.0) (2026-06-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1067.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1066.0...v3.1067.0) (2026-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1066.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1065.0...v3.1066.0) (2026-06-10)
+
+
+### Features
+
+* **client-ec2:** This release adds support for AMI Watermark which a structured identifier that helps in tracking AMI provenance ([e4a7c0b](https://github.com/aws/aws-sdk-js-v3/commit/e4a7c0b84264e82677ed15f2e9267118cf16b0c5))
+
+
+
+
+
+# [3.1065.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1064.0...v3.1065.0) (2026-06-09)
+
+
+### Features
+
+* **client-ec2:** Added TagFieldSpecifications to CreateFlowLogs and DescribeFlowLogs APIs. Customers can now specify tag keys in their Flow Logs subscriptions to capture associated EC2 resource tag values in their logs, enabling tag-based visibility. ([6a382a8](https://github.com/aws/aws-sdk-js-v3/commit/6a382a8a858c47a3304b80ac242882d2f1073f26))
+
+
+
+
+
+# [3.1064.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1063.0...v3.1064.0) (2026-06-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1063.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1062.0...v3.1063.0) (2026-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1062.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1061.0...v3.1062.0) (2026-06-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1061.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1060.0...v3.1061.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1060.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1059.0...v3.1060.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1059.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1058.0...v3.1059.0) (2026-06-02)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 now supports self-service cancellation of future-dated Capacity Reservations. A cancellation charge applies based on remaining commitment. Customers can generate a cancellation quote to review charges before confirming. ([bc81e97](https://github.com/aws/aws-sdk-js-v3/commit/bc81e97a5b305df40abb5b2665c8cc18c06a60c2))
+
+
+
+
+
+# [3.1058.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1057.0...v3.1058.0) (2026-06-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1057.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1056.0...v3.1057.0) (2026-05-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1056.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1055.0...v3.1056.0) (2026-05-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1055.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1054.0...v3.1055.0) (2026-05-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1054.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1053.0...v3.1054.0) (2026-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1053.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1052.0...v3.1053.0) (2026-05-22)
+
+
+### Features
+
+* **client-ec2:** The ModifyInstanceAttribute API now supports modification of EnclaveOptions for the instance as a typed parameter. ([bc91aa6](https://github.com/aws/aws-sdk-js-v3/commit/bc91aa621fed3c15fecfe07660458aafa59242df))
+
+
+
+
+
+# [3.1052.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1051.0...v3.1052.0) (2026-05-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1051.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1050.0...v3.1051.0) (2026-05-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1050.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1049.0...v3.1050.0) (2026-05-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1049.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1048.0...v3.1049.0) (2026-05-18)
+
+
+### Features
+
+* **client-ec2:** Amazon VPC IP Address Manager (IPAM) now supports tags on IPAM pool allocations, enabling all standard tagging features for allocations including tag-on-create. ([0ac6d44](https://github.com/aws/aws-sdk-js-v3/commit/0ac6d448ed6a0f04d45d59d1bcde953454b61f78))
+
+
+
+
+
+# [3.1048.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1047.0...v3.1048.0) (2026-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1047.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1046.0...v3.1047.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1046.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1045.0...v3.1046.0) (2026-05-14)
+
+
+### Features
+
+* **client-ec2:** Include length limits in the SDK and documentation for text fields in Image (AMI) APIs such as the image name and description ([9a5ca59](https://github.com/aws/aws-sdk-js-v3/commit/9a5ca595bb81a6b7e7064c5ad07d6baf650a7423))
+
+
+
+
+
+# [3.1045.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1044.0...v3.1045.0) (2026-05-07)
+
+
+### Features
+
+* **client-ec2:** DescribeInstanceTypes now accepts an IncludeUnsupportedInRegion parameter. When set, the response also lists instance types that are not available in the current Region. Each instance type includes a SupportedInRegion field indicating its regional availability. ([7026243](https://github.com/aws/aws-sdk-js-v3/commit/7026243303994e24be2996bf169b6acd50d5b081))
+
+
+
+
+
+# [3.1044.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1043.0...v3.1044.0) (2026-05-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1043.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1042.0...v3.1043.0) (2026-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1042.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1041.0...v3.1042.0) (2026-05-04)
+
+
+### Features
+
+* **client-ec2:** This feature allows customers to change the tunnel bandwidth on existing VPN connections using the ModifyVpnConnectionOptions API ([e37b846](https://github.com/aws/aws-sdk-js-v3/commit/e37b846c2470541a174027772d9c4f2dd14eebf3))
+
+
+
+
+
+# [3.1041.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1040.0...v3.1041.0) (2026-05-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1040.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1039.0...v3.1040.0) (2026-04-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1039.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1038.0...v3.1039.0) (2026-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1038.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1037.0...v3.1038.0) (2026-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1037.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1036.0...v3.1037.0) (2026-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1036.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1035.0...v3.1036.0) (2026-04-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1035.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1034.0...v3.1035.0) (2026-04-22)
+
+
+### Features
+
+* **client-ec2:** Managed resource visibility settings control whether resources that AWS services provision on your behalf within your AWS account appear in your Amazon console views and API list operations. ([698293a](https://github.com/aws/aws-sdk-js-v3/commit/698293af3f9151cc60a69347b140b2dc9dee7b41))
+
+
+
+
+
+# [3.1034.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1033.0...v3.1034.0) (2026-04-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1033.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1032.0...v3.1033.0) (2026-04-20)
+
+
+### Features
+
+* **client-ec2:** Added Transit Gateway Integration into AWS Client VPN. ([7ea00cb](https://github.com/aws/aws-sdk-js-v3/commit/7ea00cb503a5656383b41e0989f8d5f6eb6cf85e))
+* **clients:** use binary decision diagrams for endpoint resolution ([#7931](https://github.com/aws/aws-sdk-js-v3/issues/7931)) ([ff1b2ba](https://github.com/aws/aws-sdk-js-v3/commit/ff1b2baed919216fa1ddf3d116d500d05f0e436b))
+
+
+
+
+
+# [3.1032.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1031.0...v3.1032.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* **core:** reduce object allocations in protocol serde ([#7939](https://github.com/aws/aws-sdk-js-v3/issues/7939)) ([d0c9af0](https://github.com/aws/aws-sdk-js-v3/commit/d0c9af067e32d5e745bf08be5d932ba5e07ba3f2))
+
+
+
+
+
+# [3.1031.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1030.0...v3.1031.0) (2026-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1030.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1029.0...v3.1030.0) (2026-04-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1029.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1028.0...v3.1029.0) (2026-04-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1028.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1027.0...v3.1028.0) (2026-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1027.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1026.0...v3.1027.0) (2026-04-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1026.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1025.0...v3.1026.0) (2026-04-07)
+
+
+### Features
+
+* **client-ec2:** EC2 Capacity Manager adds new dimensions for grouping and filtering capacity metrics, including tag-based dimensions and Account Name. ([4f5a452](https://github.com/aws/aws-sdk-js-v3/commit/4f5a452ac08084462195df32604cd720a3d5951e))
+
+
+
+
+
+# [3.1025.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1024.0...v3.1025.0) (2026-04-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1024.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1023.0...v3.1024.0) (2026-04-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1023.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1022.0...v3.1023.0) (2026-04-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1022.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1021.0...v3.1022.0) (2026-04-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1021.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1020.0...v3.1021.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **codegen:** sync for adaptive retry throttling detection fix ([#7905](https://github.com/aws/aws-sdk-js-v3/issues/7905)) ([03f108d](https://github.com/aws/aws-sdk-js-v3/commit/03f108d08c37fcde9de0a62c29887458e980d84e))
+
+
+
+
+
+# [3.1020.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1019.0...v3.1020.0) (2026-03-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1019.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1018.0...v3.1019.0) (2026-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1018.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1017.0...v3.1018.0) (2026-03-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1017.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1016.0...v3.1017.0) (2026-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1016.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1015.0...v3.1016.0) (2026-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1015.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1014.0...v3.1015.0) (2026-03-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1014.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1013.0...v3.1014.0) (2026-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1013.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1012.0...v3.1013.0) (2026-03-19)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 Fleet instant mode now supports launching instances into Interruptible Capacity Reservations, enabling customers to use spare capacity shared by Capacity Reservation owners within their AWS Organization. ([5ae4a55](https://github.com/aws/aws-sdk-js-v3/commit/5ae4a552d7d650af248213fc7187842e89460820))
+
+
+
+
+
+# [3.1012.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1011.0...v3.1012.0) (2026-03-18)
+
+
+### Features
+
+* **client-ec2:** The DescribeInstanceTypes API now returns default connection tracking timeout values for TCP, UDP, and UDP stream via the new connectionTrackingConfiguration field on NetworkInfo. ([0ee6f8d](https://github.com/aws/aws-sdk-js-v3/commit/0ee6f8d16b85c73f7370a06a8edcc527011d45de))
+
+
+
+
+
+# [3.1011.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1010.0...v3.1011.0) (2026-03-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1010.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1009.0...v3.1010.0) (2026-03-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1009.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1008.0...v3.1009.0) (2026-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1008.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1007.0...v3.1008.0) (2026-03-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1007.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1006.0...v3.1007.0) (2026-03-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1006.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1005.0...v3.1006.0) (2026-03-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1005.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1004.0...v3.1005.0) (2026-03-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1004.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1003.0...v3.1004.0) (2026-03-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1003.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1002.0...v3.1003.0) (2026-03-05)
+
+
+### Features
+
+* **client-ec2:** Added metadata field to CapacityAllocation. ([d7cce1c](https://github.com/aws/aws-sdk-js-v3/commit/d7cce1c2a1a299c49f16f9bc02ee88d904d723de))
+
+
+
+
+
+# [3.1002.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1001.0...v3.1002.0) (2026-03-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1001.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1000.0...v3.1001.0) (2026-03-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.1000.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.999.0...v3.1000.0) (2026-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.999.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.998.0...v3.999.0) (2026-02-26)
+
+
+### Features
+
+* **client-ec2:** Add c8id, m8id and hpc8a instance types. ([f49cb0c](https://github.com/aws/aws-sdk-js-v3/commit/f49cb0c1d0d17b719175aa0b9fc54b10c18efe84))
+
+
+
+
+
+# [3.998.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.997.0...v3.998.0) (2026-02-25)
+
+
+### Features
+
+* **client-ec2:** Add support for EC2 Capacity Blocks in Local Zones. ([7029db2](https://github.com/aws/aws-sdk-js-v3/commit/7029db2c62ee83aa511910fdfeb85ebfc9a481a1))
+
+
+
+
+
+# [3.997.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.996.0...v3.997.0) (2026-02-24)
+
+
+### Features
+
+* **client-ec2:** Adds httpTokensEnforced property to ModifyInstanceMetadataDefaults API. Set per account or manage organization-wide using declarative policies to prevent IMDSv1-enabled instance launch and block attempts to enable IMDSv1 on existing IMDSv2-only instances. ([89d8e7e](https://github.com/aws/aws-sdk-js-v3/commit/89d8e7e9e19db2aaf746cf533b854befe840ce1e))
+
+
+
+
+
+# [3.996.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.995.0...v3.996.0) (2026-02-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.995.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.994.0...v3.995.0) (2026-02-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.994.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.993.0...v3.994.0) (2026-02-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.993.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.992.0...v3.993.0) (2026-02-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.992.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.991.0...v3.992.0) (2026-02-17)
+
+
+### Features
+
+* **client-ec2:** Add Operator field to CreatePlacementGroup and DescribePlacementGroup APIs. ([ccdf06a](https://github.com/aws/aws-sdk-js-v3/commit/ccdf06ad091052487c004656f37f2a7e0735e7fa))
+
+
+
+
+
+# [3.991.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.990.0...v3.991.0) (2026-02-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.990.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.989.0...v3.990.0) (2026-02-13)
+
+
+### Features
+
+* **client-ec2:** This release adds geography information to EC2 region and availability zone APIs. DescribeRegions now includes a Geography field, while DescribeAvailabilityZones includes both Geography and SubGeography fields, enabling better geographic classification for AWS regions and zones. ([eed96c0](https://github.com/aws/aws-sdk-js-v3/commit/eed96c0586c1200cce5e25077e0bfcb7902f185b))
+
+
+
+
+
+# [3.989.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.988.0...v3.989.0) (2026-02-12)
+
+
+### Features
+
+* **client-ec2:** Launching nested virtualization. This feature allows you to run nested VMs inside virtual (non-bare metal) EC2 instances. ([9541a83](https://github.com/aws/aws-sdk-js-v3/commit/9541a839f1825bd6fbb29a8708813fff67ce26ff))
+
+
+
+
+
+# [3.988.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.987.0...v3.988.0) (2026-02-11)
+
+
+### Features
+
+* **client-ec2:** R8i instances powered by custom Intel Xeon 6 processors available only on AWS with sustained all-core 3.9 GHz turbo frequency ([72ad526](https://github.com/aws/aws-sdk-js-v3/commit/72ad52628aea8adb0a856d5bc9ab7a09bd5f9fb7))
+
+
+
+
+
+# [3.987.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.986.0...v3.987.0) (2026-02-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.986.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.985.0...v3.986.0) (2026-02-09)
+
+
+### Features
+
+* **client-ec2:** Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads. ([0ba27c2](https://github.com/aws/aws-sdk-js-v3/commit/0ba27c28535f80e5156fe5d2f142c8999233674b))
+
+
+
+
+
+# [3.985.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.984.0...v3.985.0) (2026-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.984.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.983.0...v3.984.0) (2026-02-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.983.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.982.0...v3.983.0) (2026-02-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.982.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.981.0...v3.982.0) (2026-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.981.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.980.0...v3.981.0) (2026-02-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.980.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.979.0...v3.980.0) (2026-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.979.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.978.0...v3.979.0) (2026-01-29)
+
+
+### Features
+
+* **client-ec2:** G7e instances feature up to 8 NVIDIA RTX PRO 6000 Blackwell Server Edition GPUs with 768 GB of memory and 5th generation Intel Xeon Scalable processors. Supporting up to 192 vCPUs, 1600 Gbps networking bandwidth with EFA, up to 2 TiB of system memory, and up to 15.2 TB of local NVMe SSD storage. ([5678db8](https://github.com/aws/aws-sdk-js-v3/commit/5678db816bf3dc3b202016cd3fe8b70ab27f0b67))
+
+
+
+
+
+# [3.978.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.977.0...v3.978.0) (2026-01-28)
+
+
+### Features
+
+* **client-ec2:** SearchTransitGatewayRoutes API response now includes a NextToken field, enabling pagination when retrieving large sets of transit gateway routes. Pass the returned NextToken value in subsequent requests to retrieve the next page of results. ([11fdee1](https://github.com/aws/aws-sdk-js-v3/commit/11fdee1e4f51117f3025fb04b399e594021ad674))
+
+
+
+
+
+# [3.977.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.976.0...v3.977.0) (2026-01-27)
+
+
+### Features
+
+* **client-ec2:** Releasing new EC2 instances. C8gb and M8gb with highest EBS performance, M8gn with 600 Gbps network bandwidth, X8aedz and M8azn with 5GHz AMD processors, X8i with Intel Xeon 6 processors and up to 6TB memory, and Mac-m4max with Apple M4 Max chip for 25 percent faster builds. ([8c83ff9](https://github.com/aws/aws-sdk-js-v3/commit/8c83ff92b810d6de559bf97151093360201d7bd7))
+
+
+
+
+
+# [3.976.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.975.0...v3.976.0) (2026-01-26)
+
+
+### Features
+
+* **client-ec2:** DescribeInstanceTypes API response now includes an additionalFlexibleNetworkInterfaces field, the number of interfaces attachable to an instance when using flexible Elastic Network Adapter (ENA) queues in addition to the base number specified by maximumNetworkInterfaces. ([a5c51fb](https://github.com/aws/aws-sdk-js-v3/commit/a5c51fbbe99a723606f9bb3d6d6704cbab706d12))
+
+
+
+
+
+# [3.975.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.974.0...v3.975.0) (2026-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.974.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.973.0...v3.974.0) (2026-01-22)
+
+
+### Features
+
+* **client-ec2:** Add better support for fractional GPU instances in DescribeInstanceTypes API. The new fields, logicalGpuCount, gpuPartitionSize, and workload array enable better GPU resource selection and filtering for both full and fractional GPU instance types. ([72b8a1c](https://github.com/aws/aws-sdk-js-v3/commit/72b8a1cc9b45c014fb73934b8326cb69f35bde43))
+
+
+
+
+
+# [3.973.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.972.0...v3.973.0) (2026-01-21)
+
+
+### Features
+
+* **client-ec2:** Added support of multiple EBS cards. New EbsCardIndex parameter enables attaching volumes to specific EBS cards on supported instance types for improved storage performance. ([3066214](https://github.com/aws/aws-sdk-js-v3/commit/306621454badc231432a31e11508cfd5b2d75820))
+
+
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.971.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.970.0...v3.971.0) (2026-01-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.970.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.969.0...v3.970.0) (2026-01-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.967.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.966.0...v3.967.0) (2026-01-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.966.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.965.0...v3.966.0) (2026-01-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.964.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.963.0...v3.964.0) (2026-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.962.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.961.0...v3.962.0) (2026-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.958.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.957.0...v3.958.0) (2025-12-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+
+### Features
+
+* **client-ec2:** Adds support for linkedGroupId on the CreatePlacementGroup and DescribePlacementGroups APIs. The linkedGroupId parameter is reserved for future use. ([a492f73](https://github.com/aws/aws-sdk-js-v3/commit/a492f73438968bb208451503d32d196d2ff65a26))
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.955.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.954.0...v3.955.0) (2025-12-18)
+
+
+### Features
+
+* **client-ec2:** This release adds AvailabilityZoneId support for CreateFleet, ModifyFleet, DescribeFleets, RequestSpotFleet, ModifySpotFleetRequests and DescribeSpotFleetRequests APIs. ([4d1a66b](https://github.com/aws/aws-sdk-js-v3/commit/4d1a66b99fb9e1a3701abe4c9a7b3edd8c929872))
+
+
+
+
+
+# [3.954.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.953.0...v3.954.0) (2025-12-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.952.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.951.0...v3.952.0) (2025-12-15)
+
+
+### Features
+
+* **client-ec2:** EC2 Capacity Manager now supports SpotTotalCount, SpotTotalInterruptions and SpotInterruptionRate metrics for both vCPU and instance units. ([f5db7c3](https://github.com/aws/aws-sdk-js-v3/commit/f5db7c3c8a308db06b2fc42d82deecd5dfa9aef8))
+
+
+
+
+
+# [3.948.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.947.0...v3.948.0) (2025-12-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.947.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.946.0...v3.947.0) (2025-12-08)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 P6-B300 instances provide 8x NVIDIA Blackwell Ultra GPUs with 2.1 TB high bandwidth GPU memory, 6.4 Tbps EFA networking, 300 Gbps dedicated ENA throughput, and 4 TB of system memory. Amazon EC2 C8a instances are powered by 5th Gen AMD EPYC processors with a maximum frequency of 4.5 GHz. ([229ff01](https://github.com/aws/aws-sdk-js-v3/commit/229ff01153e039dff1feed4db33554b79c1b94ff))
+
+
+
+
+
+# [3.946.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.945.0...v3.946.0) (2025-12-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.943.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.942.0...v3.943.0) (2025-12-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.940.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.939.0...v3.940.0) (2025-11-25)
+
+
+### Features
+
+* **client-ec2:** This release adds support to view Network firewall proxy appliances attached to an existing NAT Gateway via DescribeNatGateways API NatGatewayAttachedAppliance structure. ([7d70b06](https://github.com/aws/aws-sdk-js-v3/commit/7d70b063103b71d5ae67bd2bf31ba423382e6352))
+
+
+
+
+
+# [3.939.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.938.0...v3.939.0) (2025-11-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.938.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.937.0...v3.938.0) (2025-11-21)
+
+
+### Features
+
+* **client-ec2:** This release adds a new capability to create and manage interruptible EC2 Capacity Reservations. ([3ffbbeb](https://github.com/aws/aws-sdk-js-v3/commit/3ffbbebe57640105407c4267cc1452774b568344))
+
+
+
+
+
+# [3.937.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.936.0...v3.937.0) (2025-11-20)
+
+
+### Features
+
+* **client-ec2:** This release adds support for multiple features including: VPC Encryption Control for the status of traffic flow; S2S VPN BGP Logging; TGW Flexible Costs; IPAM allocation of static IPs from IPAM pools to CF Anycast IP lists used on CloudFront distribution; and EBS Volume Integration with Recycle Bin ([6fdcb50](https://github.com/aws/aws-sdk-js-v3/commit/6fdcb506a307ba9e1c22d4d29e21383a7d4fd88d))
+
+
+
+
+
+# [3.936.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.935.0...v3.936.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.935.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.934.0...v3.935.0) (2025-11-19)
+
+
+### Features
+
+* **client-ec2:** This launch adds support for two new features: Regional NAT Gateway and IPAM Policies. IPAM policies offers customers central control for public IPv4 assignments across AWS services. Regional NAT is a single NAT Gateway that automatically expands across AZs in a VPC to maintain high availability. ([e6ed382](https://github.com/aws/aws-sdk-js-v3/commit/e6ed3823963b575cb33e7364cbceeee4b0bd54d1))
+
+
+
+
+
+# [3.934.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.933.0...v3.934.0) (2025-11-18)
+
+
+### Features
+
+* **client-ec2:** AWS Site-to-Site VPN now supports VPN Concentrator, a new feature that enables customers to connect multiple low-bandwidth sites connections through a single attachment, simplifying multi-site connectivity for distributed enterprises. ([b94cadf](https://github.com/aws/aws-sdk-js-v3/commit/b94cadfd704fa2cc3df6d60075aae1ce99212b2d))
+
+
+
+
+
+# [3.933.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.932.0...v3.933.0) (2025-11-17)
+
+
+### Features
+
+* **client-ec2:** This release introduces new APIs: DescribeInstanceSqlHaStates, DescribeInstanceSqlHaHistoryStates, EnableInstanceSqlHaStandbyDetections and DisableInstanceSqlHaStandbyDetections on Amazon EC2, allowing customers to enroll and monitor SQL Server licensing fee savings for their SQL HA EC2 instances. ([c0076d8](https://github.com/aws/aws-sdk-js-v3/commit/c0076d8e2ab6539cb54c8149a106220fc595fd30))
+
+
+
+
+
+# [3.932.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.931.0...v3.932.0) (2025-11-14)
+
+
+### Features
+
+* **client-ec2:** This release adds AvailabilityZoneId support for CreateInstanceConnectEndpoint, DescribeInstanceConnectEndpoints, and DeleteInstanceConnectEndpoint APIs. ([5ba1cf6](https://github.com/aws/aws-sdk-js-v3/commit/5ba1cf6493eb4d070d0df5d94c371859461b7167))
+
+
+
+
+
+# [3.931.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.930.0...v3.931.0) (2025-11-13)
+
+
+### Features
+
+* **client-ec2:** Added support for new accelerator types ("media") and accelerator names ("L4", "L40s", "GAUDI_HL_205", "INFERENTIA2", "TRAINIUM", "TRAINIUM2", "U30") in Attributes Based Instance Type Selection for launched instance types. ([6987186](https://github.com/aws/aws-sdk-js-v3/commit/69871860f86f6c54bb98ee0cbd96ffc5a5a92294))
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+
+### Features
+
+* **client-ec2:** Adds complete AMI ancestry tracing from immediate parent through each preceding generation back to the root AMI ([fa8c029](https://github.com/aws/aws-sdk-js-v3/commit/fa8c029baf52f395a7250b0061646a601a1aad1d))
+* **clients:** use schema-serde in AWS Query & EC2 Query clients ([#7489](https://github.com/aws/aws-sdk-js-v3/issues/7489)) ([e9b6da8](https://github.com/aws/aws-sdk-js-v3/commit/e9b6da8fd2a66809bb67e642fc254ede6bc16082))
+
+
+
+
+
+# [3.929.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.928.0...v3.929.0) (2025-11-11)
+
+
+### Features
+
+* **client-ec2:** AWS Site-to-Site VPN now supports VPN connections with up to 5 Gbps bandwidth per tunnel, a 4x improvement from existing limit of 1.25 Gbps. ([165cccc](https://github.com/aws/aws-sdk-js-v3/commit/165ccccacac38eca73c45fe5e21c04cf82751992))
+
+
+
+
+
+# [3.928.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.927.0...v3.928.0) (2025-11-10)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 Fleet customers can now filter instance types based on encryption-in-transit support using Attribute-Based Instance Type Selection (ABIS), eliminating the manual effort of identifying and selecting compatible instance types for security-sensitive workloads. ([2b4fb80](https://github.com/aws/aws-sdk-js-v3/commit/2b4fb8055ba029e7ccb89f97b764e3af5bf98236))
+
+
+
+
+
+# [3.927.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.926.0...v3.927.0) (2025-11-07)
+
+
+### Features
+
+* **client-ec2:** Adds PrivateDnsPreference and PrivateDnsSpecifiedDomains to control private DNS resolution for resource and service network VPC endpoints and IpamScopeExternalAuthorityConfiguration to integrate Amazon VPC IPAM with a third-party IPAM service ([650aa6d](https://github.com/aws/aws-sdk-js-v3/commit/650aa6de99e961e06fb85b3e447bced743b30a12))
+
+
+
+
+
+# [3.926.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.925.0...v3.926.0) (2025-11-06)
+
+
+### Features
+
+* **client-ec2:** Add Amazon EC2 R8a instance types ([7cb1367](https://github.com/aws/aws-sdk-js-v3/commit/7cb136792ee69d87da3be7e5c743056f81c0af65))
+
+
+
+
+
+# [3.925.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.924.0...v3.925.0) (2025-11-05)
+
+
+### Features
+
+* **client-ec2:** This release adds AvailabilityZoneId support for DescribeFastSnapshotRestores, DisableFastSnapshotRestores, and EnableFastSnapshotRestores APIs. ([68aae5b](https://github.com/aws/aws-sdk-js-v3/commit/68aae5bdcf47b1d87f8bda7213b1d4b3a4200349))
+
+
+
+
+
+# [3.923.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.922.0...v3.923.0) (2025-11-03)
+
+
+### Features
+
+* **client-ec2:** Add Amazon EC2 trn2.3xlarge instance type. ([338b58b](https://github.com/aws/aws-sdk-js-v3/commit/338b58ba1895b4799a35cd819048838805c1c813))
+
+
+
+
+
+# [3.922.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.921.0...v3.922.0) (2025-10-31)
+
+
+### Features
+
+* **client-ec2:** Amazon VPC IP Address Manager (IPAM) now supports automated prefix list management, allowing you to create rules that automatically populate customer-managed prefix lists with CIDRs from your IPAM pools or AWS resources based on tags, Regions, or other criteria. ([21a7dd3](https://github.com/aws/aws-sdk-js-v3/commit/21a7dd3827939fd8ad9ab779e846828c7c0886e9))
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.920.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.919.0...v3.920.0) (2025-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.919.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.918.0...v3.919.0) (2025-10-28)
+
+
+### Features
+
+* **client-ec2:** This released the DescribeCapacityReservationTopology API. ([245f5da](https://github.com/aws/aws-sdk-js-v3/commit/245f5dabc412ae36c47e54de61e931b20fd4c381))
+
+
+
+
+
+# [3.918.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.917.0...v3.918.0) (2025-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.917.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.916.0...v3.917.0) (2025-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.916.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.915.0...v3.916.0) (2025-10-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.915.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.914.0...v3.915.0) (2025-10-22)
+
+
+### Features
+
+* **client-ec2:** This release adds AvailabilityZoneId support for CreateNetworkInterface and DescribeNetworkInterfaces APIs. ([b0c3955](https://github.com/aws/aws-sdk-js-v3/commit/b0c395571242f9ab88976f3a3a213843047fece2))
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.913.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.912.0...v3.913.0) (2025-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.911.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.910.0...v3.911.0) (2025-10-15)
+
+
+### Features
+
+* **client-ec2:** Introducing EC2 Capacity Manager for monitoring and analyzing capacity usage across On-Demand Instances, Spot Instances, and Capacity Reservations. ([4d78ec9](https://github.com/aws/aws-sdk-js-v3/commit/4d78ec9bfb9780043f087f1539f3a12e715714e0))
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+
+### Features
+
+* **client-ec2:** This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone ([35be968](https://github.com/aws/aws-sdk-js-v3/commit/35be968f6e8fad594f291eccb3c96181c4fc00d2))
+
+
+
+
+
+# [3.909.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.908.0...v3.909.0) (2025-10-13)
+
+
+### Features
+
+* **client-ec2:** Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb ([d1cdea8](https://github.com/aws/aws-sdk-js-v3/commit/d1cdea81f536ca950897705143f076e348901bf8))
+
+
+
+
+
+# [3.908.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.907.0...v3.908.0) (2025-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.907.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.906.0...v3.907.0) (2025-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.906.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.905.0...v3.906.0) (2025-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.899.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.898.0...v3.899.0) (2025-09-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.898.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.897.0...v3.898.0) (2025-09-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.896.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.895.0...v3.896.0) (2025-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.895.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.894.0...v3.895.0) (2025-09-23)
+
+
+### Features
+
+* **client-ec2:** Add Amazon EC2 R8gn instance types ([6368fb5](https://github.com/aws/aws-sdk-js-v3/commit/6368fb54db116a7580a26284dd360bb3d9a756b5))
+
+
+
+
+
+# [3.894.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.893.0...v3.894.0) (2025-09-22)
+
+
+### Features
+
+* **xml-builder:** use DOMParser for browser XML parsing ([#7347](https://github.com/aws/aws-sdk-js-v3/issues/7347)) ([af40250](https://github.com/aws/aws-sdk-js-v3/commit/af4025005e5c251d64b5cf3840d24e48d7ae1d91))
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.892.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.891.0...v3.892.0) (2025-09-18)
+
+
+### Features
+
+* **client-ec2:** Allowed AMIs adds support for four new parameters - marketplaceProductCodes, deprecationTimeCondition, creationDateCondition and imageNames ([442403c](https://github.com/aws/aws-sdk-js-v3/commit/442403cd0d148527f1c65db584b99b8239c05c5b))
+
+
+
+
+
+# [3.891.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.890.0...v3.891.0) (2025-09-17)
+
+
+### Features
+
+* **client-ec2:** Add mac-m4.metal and mac-m4pro.metal instance types. ([542f2ab](https://github.com/aws/aws-sdk-js-v3/commit/542f2aba068fd6f180df5f7e7fb630dc1cdc5183))
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.888.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.887.0...v3.888.0) (2025-09-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.887.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.886.0...v3.887.0) (2025-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.886.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.885.0...v3.886.0) (2025-09-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.883.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.882.0...v3.883.0) (2025-09-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.882.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.881.0...v3.882.0) (2025-09-04)
+
+
+### Features
+
+* **client-ec2:** Add m8i, m8i-flex and i8ge instance types. ([19e055a](https://github.com/aws/aws-sdk-js-v3/commit/19e055a6279e7ef06bf7cb67f2ed569f5418e65d))
+
+
+
+
+
+# [3.880.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.879.0...v3.880.0) (2025-09-02)
+
+
+### Features
+
+* **client-ec2:** MaximumEbsAttachments and AttachmentLimitType fields added to DescribeInstanceTypesResponse. G6f, Gr6f, R8i, R8i-flex and p5.4xlarge instance types added to InstanceTypes enum. ([3a0683c](https://github.com/aws/aws-sdk-js-v3/commit/3a0683cfcb0668f7301b46d27b5cb5932e7cf638))
+
+
+
+
+
+# [3.879.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.878.0...v3.879.0) (2025-08-29)
+
+
+### Features
+
+* **client-ec2:** Release shows new route types such as filtered and advertisement. ([6f9b4a6](https://github.com/aws/aws-sdk-js-v3/commit/6f9b4a61e46ce9c61e32bd180ee1462490f6ca29))
+
+
+
+
+
+# [3.878.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.877.0...v3.878.0) (2025-08-28)
+
+
+### Features
+
+* **client-ec2:** This release adds support for copying Amazon EBS snapshot and AMIs to and from Local Zones. ([a43fb6c](https://github.com/aws/aws-sdk-js-v3/commit/a43fb6c01c6dd0c04ba57924535837b2a88e34c3))
+
+
+
+
+
+# [3.876.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.875.0...v3.876.0) (2025-08-26)
+
+
+### Features
+
+* **client-ec2:** Add new APIs for viewing how your shared AMIs are used by other accounts, and identify resources in your account that are dependent on particular AMIs ([40939d0](https://github.com/aws/aws-sdk-js-v3/commit/40939d05ad8fe5227f1566c699f7a50e28df2488))
+
+
+
+
+
+# [3.875.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.874.0...v3.875.0) (2025-08-25)
+
+
+### Features
+
+* **client-ec2:** Added IPv6 support for AWS Client VPN. ([48bb73d](https://github.com/aws/aws-sdk-js-v3/commit/48bb73dbd748287a35cea85a83974df0db8993d4))
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.872.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.871.0...v3.872.0) (2025-08-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.871.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.870.0...v3.871.0) (2025-08-19)
+
+
+### Features
+
+* **client-ec2:** Add support for "warning" volume status. ([7cf835a](https://github.com/aws/aws-sdk-js-v3/commit/7cf835a0c4d72eca66f31fccda2724c7aa0b64e0))
+
+
+
+
+
+# [3.868.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.867.0...v3.868.0) (2025-08-14)
+
+
+### Features
+
+* **client-ec2:** This release adds ModifyInstanceConnectEndpoint API to update configurations on existing EC2 Instance Connect Endpoints and improves IPv6 support through dualstack DNS names for EC2 Instance Connect Endpoints. ([a8bd4d8](https://github.com/aws/aws-sdk-js-v3/commit/a8bd4d8e7d81efae58c18983559a8c88090cb0f3))
+
+
+
+
+
+# [3.866.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.865.0...v3.866.0) (2025-08-12)
+
+
+### Features
+
+* **client-ec2:** Release to allow route table association with a PublicIpv4Pool. ([c62fd16](https://github.com/aws/aws-sdk-js-v3/commit/c62fd16991154bf8924f10981cfcd7d090e863be))
+
+
+
+
+
+# [3.865.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.864.0...v3.865.0) (2025-08-11)
+
+
+### Features
+
+* **client-ec2:** This release adds AvailabilityZoneId support for CreateVolume, DescribeVolume, LaunchTemplates, RunInstances, DescribeInstances, CreateDefaultSubnet, SpotInstances, and CreateDefaultSubnet APIs. ([d130b87](https://github.com/aws/aws-sdk-js-v3/commit/d130b8710967d2ecc226b7d1b3934cb31977c6c2))
+
+
+
+
+
+# [3.864.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.863.0...v3.864.0) (2025-08-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.863.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.862.0...v3.863.0) (2025-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+
+### Features
+
+* **client-ec2:** Mark Elastic Inference Accelerators and Elastic Graphics Processor parameters as deprecated on the RunInstances and LaunchTemplate APIs. ([aa76eb4](https://github.com/aws/aws-sdk-js-v3/commit/aa76eb4474aaf1b4c641aecfee8a13ce2737a253))
+
+
+
+
+
+# [3.859.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.858.0...v3.859.0) (2025-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.858.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.857.0...v3.858.0) (2025-07-31)
+
+
+### Features
+
+* **client-ec2:** Added support for the force option for the EC2 instance terminate command. This feature enables customers to recover resources associated with an instance stuck in the shutting-down state as a result of rare issues caused by a frozen operating system or an underlying hardware problem. ([d8adec8](https://github.com/aws/aws-sdk-js-v3/commit/d8adec80ddedc6a3c8d40a1ca6a9fd3cacb2ab85))
+
+
+
+
+
+# [3.857.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.856.0...v3.857.0) (2025-07-30)
+
+
+### Features
+
+* **client-ec2:** Release to show the next hop IP address for routes propagated by VPC Route Server into VPC route tables. ([ec57020](https://github.com/aws/aws-sdk-js-v3/commit/ec57020fb54f101e65bd7676f067f763ec555366))
+
+
+
+
+
+# [3.856.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.855.0...v3.856.0) (2025-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.855.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.854.0...v3.855.0) (2025-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.854.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.853.0...v3.854.0) (2025-07-25)
+
+
+### Features
+
+* **client-ec2:** Transit Gateway native integration with AWS Network Firewall. Adding new enum value for the new Transit Gateway Attachment type. ([97d8133](https://github.com/aws/aws-sdk-js-v3/commit/97d8133a118cf6385ff37d5de126e275d1452fa6))
+
+
+
+
+
+# [3.852.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.851.0...v3.852.0) (2025-07-23)
+
+
+### Features
+
+* **client-ec2:** Added support for skip-os-shutdown option for the EC2 instance stop and terminate operations. This feature enables customers to bypass the graceful OS shutdown, supporting faster state transitions when instance data preservation isn't critical. ([322ef3e](https://github.com/aws/aws-sdk-js-v3/commit/322ef3e9ca06fd132238db9bbc514b5be544bafd))
+
+
+
+
+
+# [3.850.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.849.0...v3.850.0) (2025-07-21)
+
+
+### Features
+
+* **client-ec2:** This release adds support for C8gn, F2 and P6e-GB200 Instance types ([3d8f2e1](https://github.com/aws/aws-sdk-js-v3/commit/3d8f2e1262c71a3b21095200a4e53b058d907ed6))
+
+
+
+
+
+# [3.848.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.847.0...v3.848.0) (2025-07-17)
+
+
+### Features
+
+* **client-ec2:** AWS Free Tier Version2 Support ([1356a46](https://github.com/aws/aws-sdk-js-v3/commit/1356a462bacc1925301805789570fa914844eb19))
+
+
+
+
+
+# [3.846.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.845.0...v3.846.0) (2025-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.845.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.844.0...v3.845.0) (2025-07-15)
+
+
+### Bug Fixes
+
+* **clients:** upgrade @smithy/middleware-endpoint to fix file/env endpoint resolution ([#7206](https://github.com/aws/aws-sdk-js-v3/issues/7206)) ([37a6275](https://github.com/aws/aws-sdk-js-v3/commit/37a627510bc53ad0ce8d3ef10a2a5ec8ad195ee2))
+
+
+### Features
+
+* **client-ec2:** This release adds support for volume initialization status, which enables you to monitor when the initialization process for an EBS volume is completed. This release also adds IPv6 support to EC2 Instance Connect Endpoints, allowing you to connect to your EC2 Instance via a private IPv6 address. ([ba3d837](https://github.com/aws/aws-sdk-js-v3/commit/ba3d83753c3d4edf3b3e240a9697e9f9c9293644))
+
+
+
+
+
+# [3.844.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.843.0...v3.844.0) (2025-07-09)
+
+
+### Features
+
+* **client-ec2:** Adds support to Capacity Blocks for ML for purchasing EC2 P6e-GB200 UltraServers. Customers can now purchase u-p6e-gb200x72 and u-p6e-gb200x36 UltraServers. Adds new DescribeCapacityBlocks andDescribeCapacityBlockStatus APIs. Adds support for CapacityBlockId to DescribeInstanceTopology. ([202ec5f](https://github.com/aws/aws-sdk-js-v3/commit/202ec5f1f458aac73c8b78558ddfdba9a9595542))
+
+
+
+
+
+# [3.843.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.842.0...v3.843.0) (2025-07-03)
+
+
+### Features
+
+* **client-ec2:** This release adds GroupOwnerId as a response member to the DescribeSecurityGroupVpcAssociations API and also adds waiters for SecurityGroupVpcAssociations (SecurityGroupVpcAssociationAssociated and SecurityGroupVpcAssociationDisassociated). ([69f38fa](https://github.com/aws/aws-sdk-js-v3/commit/69f38fa850383d24be3650e605fbdcf508869084))
+
+
+
+
+
+# [3.842.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.841.0...v3.842.0) (2025-07-02)
+
+
+### Features
+
+* **client-ec2:** AWS Site-to-Site VPN now supports IPv6 addresses on outer tunnel IPs, making it easier for customers to build or transition to IPv6-only networks. ([af240bd](https://github.com/aws/aws-sdk-js-v3/commit/af240bd17f5cd88164d6b68ade05f2b092817757))
+
+
+
+
+
+# [3.841.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.840.0...v3.841.0) (2025-07-01)
+
+
+### Features
+
+* **client-ec2:** Add Context to GetInstanceTypesFromInstanceRequirements API ([f300167](https://github.com/aws/aws-sdk-js-v3/commit/f300167ad149be18f74c767373817618fa07fc10))
+
+
+
+
+
+# [3.840.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.839.0...v3.840.0) (2025-06-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.839.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.838.0...v3.839.0) (2025-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.838.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.837.0...v3.838.0) (2025-06-26)
+
+
+### Features
+
+* **client-ec2:** This release adds support for OdbNetworkArn as a target in VPC Route Tables ([cf3c376](https://github.com/aws/aws-sdk-js-v3/commit/cf3c376223fb9a18988854c1a6e4e44ff0bb5528))
+
+
+
+
+
+# [3.836.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.835.0...v3.836.0) (2025-06-24)
+
+
+### Features
+
+* **client-ec2:** This release allows you to create and register AMIs while maintaining their underlying EBS snapshots within Local Zones. ([cefd9f2](https://github.com/aws/aws-sdk-js-v3/commit/cefd9f2f5fa77e3792c333a0e8dd68f9bc873f4a))
+
+
+
+
+
+# [3.835.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.834.0...v3.835.0) (2025-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.830.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.829.0...v3.830.0) (2025-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.828.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.827.1...v3.828.0) (2025-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.827.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.826.0...v3.827.0) (2025-06-09)
+
+
+### Features
+
+* **client-ec2:** Release to support Elastic VMware Service (Amazon EVS) Subnet and Amazon EVS Network Interface Types. ([5b52d8f](https://github.com/aws/aws-sdk-js-v3/commit/5b52d8f7e73edcdd601ac03482dc2db82a977587))
+
+
+
+
+
+# [3.826.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.825.0...v3.826.0) (2025-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.825.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.824.0...v3.825.0) (2025-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.823.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.822.0...v3.823.0) (2025-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.819.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.818.0...v3.819.0) (2025-05-28)
+
+
+### Features
+
+* **client-ec2:** Enable the option to automatically delete underlying Amazon EBS snapshots when deregistering Amazon Machine Images (AMIs) ([93df0c5](https://github.com/aws/aws-sdk-js-v3/commit/93df0c5dcb98390d1c7fbd443269e71fdb426788))
+
+
+
+
+
+# [3.818.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.817.0...v3.818.0) (2025-05-27)
+
+
+### Features
+
+* **client-ec2:** This release adds three features - option to store AWS Site-to-Site VPN pre-shared keys in AWS Secrets Manager, GetActiveVpnTunnelStatus API to check the in-use VPN algorithms, and SampleType option in GetVpnConnectionDeviceSampleConfiguration API to get recommended sample configs for VPN devices. ([4bc58af](https://github.com/aws/aws-sdk-js-v3/commit/4bc58afe31771e9341607a8261609275f0db232a))
+
+
+
+
+
+# [3.817.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.816.0...v3.817.0) (2025-05-23)
+
+
+### Features
+
+* **client-ec2:** This release adds support for the C7i-flex, M7i-flex, I7i, I7ie, I8g, P6-b200, Trn2, C8gd, M8gd and R8gd instances ([b99e6ed](https://github.com/aws/aws-sdk-js-v3/commit/b99e6ed089786925c196421ae93fc3ce3bc2d30a))
+
+
+
+
+
+# [3.816.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.815.0...v3.816.0) (2025-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.815.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.814.0...v3.815.0) (2025-05-21)
+
+
+### Features
+
+* **client-ec2:** Release of Dualstack and Ipv6-only EC2 Public DNS hostnames ([b9f691a](https://github.com/aws/aws-sdk-js-v3/commit/b9f691a5bacc61a12b266eabd9fb2848aee6708c))
+
+
+
+
+
+# [3.814.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.813.0...v3.814.0) (2025-05-20)
+
+
+### Features
+
+* **client-ec2:** This release expands the ModifyInstanceMaintenanceOptions API to enable or disable instance migration during customer-initiated reboots for EC2 Scheduled Reboot Events. ([fde0963](https://github.com/aws/aws-sdk-js-v3/commit/fde096353d5706fed085bfd8d18bb29b8ae8eedb))
+
+
+
+
+
+# [3.813.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.812.0...v3.813.0) (2025-05-19)
+
+
+### Features
+
+* **client-ec2:** This release includes new APIs for System Integrity Protection (SIP) configuration and automated root volume ownership delegation for EC2 Mac instances. ([374726f](https://github.com/aws/aws-sdk-js-v3/commit/374726ff745820ef6d4f9712574398e1d61ddf95))
+
+
+
+
+
+# [3.812.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.811.0...v3.812.0) (2025-05-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.810.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.809.0...v3.810.0) (2025-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.808.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.807.0...v3.808.0) (2025-05-12)
+
+
+### Features
+
+* **client-ec2:** EC2 - Adding support for AvailabilityZoneId ([c7ea904](https://github.com/aws/aws-sdk-js-v3/commit/c7ea90417645b33c4445840da7867bbdabf3fe84))
+
+
+
+
+
+# [3.806.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.805.0...v3.806.0) (2025-05-08)
+
+
+### Features
+
+* **client-ec2:** Launching the feature to support ENA queues offering flexibility to support multiple queues per Enhanced Network Interface (ENI) ([b9b5b6c](https://github.com/aws/aws-sdk-js-v3/commit/b9b5b6ce947372911eb64e9f7ba043ac0d7f398b))
+
+
+
+
+
+# [3.805.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.804.0...v3.805.0) (2025-05-07)
+
+
+### Features
+
+* **client-ec2:** This release adds API support for Path Component Exclusion (Filter Out ARN) for Reachability Analyzer ([5690387](https://github.com/aws/aws-sdk-js-v3/commit/5690387b145d3ff891195681b912235afe2d7cda))
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+
+### Features
+
+* **client-ec2:** This release adds support for Amazon EBS Provisioned Rate for Volume Initialization, which lets you specify a volume initialization rate to ensure that your EBS volumes are initialized in a predictable amount of time. ([03ae328](https://github.com/aws/aws-sdk-js-v3/commit/03ae3280687f7624e6d141fb9e75bcfc7c7407cd))
+
+
+
+
+
+# [3.803.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.802.0...v3.803.0) (2025-05-05)
+
+
+### Features
+
+* **client-ec2:** This update introduces API operations to manage and create local gateway VIF and VIF groups. It also includes API operations to describe Outpost LAGs and service link VIFs. ([0332513](https://github.com/aws/aws-sdk-js-v3/commit/0332513e4095ec8615fd6a755efee4c3d8d48ce3))
+
+
+
+
+
+# [3.800.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.799.0...v3.800.0) (2025-04-30)
+
+
+### Features
+
+* **client-ec2:** Launch of cost distribution feature for IPAM owners to distribute costs to internal teams. ([69fe645](https://github.com/aws/aws-sdk-js-v3/commit/69fe6453c8d2065494c38c2ee28ff117ec09c4bb))
+
+
+
+
+
+# [3.799.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.798.0...v3.799.0) (2025-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.797.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.796.0...v3.797.0) (2025-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.796.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.795.0...v3.796.0) (2025-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.794.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.793.0...v3.794.0) (2025-04-22)
+
+
+### Features
+
+* **client-ec2:** Added support for  ClientRouteEnforcementOptions flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses ([216c012](https://github.com/aws/aws-sdk-js-v3/commit/216c0129a3ef1dc1e03342a347be727a31a22b01))
+
+
+
+
+
+# [3.787.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.786.0...v3.787.0) (2025-04-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.783.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.782.0...v3.783.0) (2025-04-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.782.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.781.0...v3.782.0) (2025-04-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.779.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.778.0...v3.779.0) (2025-03-31)
+
+
+### Features
+
+* **client-ec2:** Release VPC Route Server, a new feature allowing dynamic routing in VPCs. ([3740252](https://github.com/aws/aws-sdk-js-v3/commit/374025226e8233ec427c4924946dd9c6a2bda634))
+
+
+
+
+
+# [3.777.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.776.0...v3.777.0) (2025-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.775.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.774.0...v3.775.0) (2025-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.774.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.773.0...v3.774.0) (2025-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.772.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.771.0...v3.772.0) (2025-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.771.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.770.0...v3.771.0) (2025-03-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.767.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.766.0...v3.767.0) (2025-03-13)
+
+
+### Features
+
+* **client-ec2:** This release changes the CreateLaunchTemplate, CreateLaunchTemplateVersion, ModifyLaunchTemplate CLI and SDKs such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. ([60c47be](https://github.com/aws/aws-sdk-js-v3/commit/60c47be9bdd6320cb5a3f827ed647cff034dfed8))
+
+
+
+
+
+# [3.766.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.765.0...v3.766.0) (2025-03-11)
+
+
+### Features
+
+* **client-ec2:** This release adds the GroupLongName field to the response of the DescribeAvailabilityZones API. ([c2ccb07](https://github.com/aws/aws-sdk-js-v3/commit/c2ccb07c2282b37c49a0438bf41d028663d1e659))
+
+
+
+
+
+# [3.764.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.763.0...v3.764.0) (2025-03-07)
+
+
+### Features
+
+* **client-ec2:** Add serviceManaged field to DescribeAddresses API response. ([23d9c73](https://github.com/aws/aws-sdk-js-v3/commit/23d9c730a344af79e6be0073b1d7736e68200087))
+
+
+
+
+
+# [3.760.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.759.0...v3.760.0) (2025-03-03)
+
+
+### Features
+
+* **client-ec2:** Update the DescribeVpcs response ([893a566](https://github.com/aws/aws-sdk-js-v3/commit/893a566d2191831ef8508f8344b34365525f68a7))
+
+
+
+
+
+# [3.758.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.757.0...v3.758.0) (2025-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.757.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.756.0...v3.757.0) (2025-02-26)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 Fleet customers can now override the Block Device Mapping specified in the Launch Template when creating a new Fleet request, saving the effort of creating and associating new Launch Templates to customize the Block Device Mapping. ([7ac960d](https://github.com/aws/aws-sdk-js-v3/commit/7ac960d6d3ee35faaddce19443478a54097eed98))
+
+
+
+
+
+# [3.756.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.755.0...v3.756.0) (2025-02-25)
+
+
+### Features
+
+* **client-ec2:** Adds support for time-based EBS-backed AMI copy operations. Time-based copy ensures that EBS-backed AMIs are copied within and across Regions in a specified timeframe. ([027515e](https://github.com/aws/aws-sdk-js-v3/commit/027515e1b2e32bd18737e41ecae2d5721490cafb))
+
+
+
+
+
+# [3.750.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.749.0...v3.750.0) (2025-02-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.749.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.748.0...v3.749.0) (2025-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.746.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.745.0...v3.746.0) (2025-02-11)
+
+
+### Features
+
+* **client-ec2:** Adding support for the new fullSnapshotSizeInBytes field in the response of the EC2 EBS DescribeSnapshots API. This field represents the size of all the blocks that were written to the source volume at the time the snapshot was created. ([2962b1b](https://github.com/aws/aws-sdk-js-v3/commit/2962b1bca17eaaacc3f6b8930648cfb632bca653))
+
+
+
+
+
+# [3.744.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.743.0...v3.744.0) (2025-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.743.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.742.1...v3.743.0) (2025-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.741.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.740.0...v3.741.0) (2025-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.738.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.737.0...v3.738.0) (2025-01-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.737.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.736.0...v3.737.0) (2025-01-28)
+
+
+### Features
+
+* **client-ec2:** This release changes the CreateFleet CLI and SDK's such that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. ([f3e70c5](https://github.com/aws/aws-sdk-js-v3/commit/f3e70c5ab8531e86b8adc0821b8d9e4b4a486b94))
+
+
+
+
+
+# [3.734.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.733.0...v3.734.0) (2025-01-23)
+
+
+### Features
+
+* **client-ec2:** Added "future" allocation type for future dated capacity reservation ([752ea12](https://github.com/aws/aws-sdk-js-v3/commit/752ea1281ed4e46ccba73e24d6703284a48900e5))
+
+
+
+
+
+## [3.731.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.731.0...v3.731.1) (2025-01-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.731.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.730.0...v3.731.0) (2025-01-17)
+
+
+### Features
+
+* **client-ec2:** Release u7i-6tb.112xlarge, u7i-8tb.112xlarge, u7inh-32tb.480xlarge, p5e.48xlarge, p5en.48xlarge, f2.12xlarge, f2.48xlarge, trn2.48xlarge instance types. ([8fa946c](https://github.com/aws/aws-sdk-js-v3/commit/8fa946c9178cfbc48d4f7de4876440aa712e9f9e))
+
+
+
+
+
+# [3.730.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.729.0...v3.730.0) (2025-01-16)
+
+
+### Bug Fixes
+
+* **nested-clients:** create nested clients for internal use ([#6791](https://github.com/aws/aws-sdk-js-v3/issues/6791)) ([5c53685](https://github.com/aws/aws-sdk-js-v3/commit/5c5368554d13a3b798a72c53e30cd3d897621135))
+
+
+
+
+
+# [3.727.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.726.1...v3.727.0) (2025-01-13)
+
+
+### Features
+
+* **client-ec2:** Add support for DisconnectOnSessionTimeout flag in CreateClientVpnEndpoint and ModifyClientVpnEndpoint requests and DescribeClientVpnEndpoints responses ([9b98cef](https://github.com/aws/aws-sdk-js-v3/commit/9b98cefc05259870bb11229feb9b136afa1ed813))
+
+
+
+
+
+## [3.726.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.726.0...v3.726.1) (2025-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.726.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.725.0...v3.726.0) (2025-01-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.721.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.720.0...v3.721.0) (2025-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.716.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.715.0...v3.716.0) (2024-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.714.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.713.0...v3.714.0) (2024-12-17)
+
+
+### Features
+
+* **clients:** profile setting for clients ([#6728](https://github.com/aws/aws-sdk-js-v3/issues/6728)) ([afd9eea](https://github.com/aws/aws-sdk-js-v3/commit/afd9eea89fd0d63a377123f1ca999daeefd904a7))
+
+
+
+
+
+# [3.713.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.712.0...v3.713.0) (2024-12-16)
+
+
+### Features
+
+* **client-ec2:** This release adds support for EBS local snapshots in AWS Dedicated Local Zones, which allows you to store snapshots of EBS volumes locally in Dedicated Local Zones. ([0a3b2ac](https://github.com/aws/aws-sdk-js-v3/commit/0a3b2ac392812b1959d28336025b20ff5425233f))
+
+
+
+
+
+# [3.712.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.711.0...v3.712.0) (2024-12-13)
+
+
+### Features
+
+* **client-ec2:** This release adds GroupId to the response for DeleteSecurityGroup. ([537aeca](https://github.com/aws/aws-sdk-js-v3/commit/537aeca538d1256bb1583fc2a7574b7729fed159))
+
+
+
+
+
+# [3.709.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.708.0...v3.709.0) (2024-12-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.708.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.707.0...v3.708.0) (2024-12-09)
+
+
+### Features
+
+* **client-ec2:** This release includes a new API for modifying instance network-performance-options after launch. ([2f49c14](https://github.com/aws/aws-sdk-js-v3/commit/2f49c14f1a0d86c9bba35757784eb1f317008542))
+
+
+
+
+
+# [3.703.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.702.0...v3.703.0) (2024-12-02)
+
+
+### Features
+
+* **client-ec2:** Adds support for declarative policies that allow you to enforce desired configuration across an AWS organization through configuring account attributes. Adds support for Allowed AMIs that allows you to limit the use of AMIs in AWS accounts. Adds support for connectivity over non-HTTP protocols. ([478480a](https://github.com/aws/aws-sdk-js-v3/commit/478480a6c172c0f48ea39b501c9ec1fef66d9a20))
+
+
+
+
+
+# [3.701.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.700.0...v3.701.0) (2024-11-26)
+
+
+### Features
+
+* **client-ec2:** Adds support for Time-based Copy for EBS Snapshots and Cross Region PrivateLink. Time-based Copy ensures that EBS Snapshots are copied within and across AWS Regions in a specified timeframe. Cross Region PrivateLink enables customers to connect to VPC endpoint services hosted in other AWS Regions. ([a370f24](https://github.com/aws/aws-sdk-js-v3/commit/a370f241842b10a3cff90de23a697026638af7bb))
+
+
+
+
+
+# [3.699.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.698.0...v3.699.0) (2024-11-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.698.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.697.0...v3.698.0) (2024-11-21)
+
+
+### Features
+
+* **client-ec2:** Adds support for requesting future-dated Capacity Reservations with a minimum commitment duration, enabling IPAM for organizational units within AWS Organizations, reserving EC2 Capacity Blocks that start in 30 minutes, and extending the end date of existing Capacity Blocks. ([074cf4e](https://github.com/aws/aws-sdk-js-v3/commit/074cf4e830fce887c7920010dc966257e45c185d))
+
+
+
+
+
+# [3.697.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.696.0...v3.697.0) (2024-11-20)
+
+
+### Features
+
+* **client-ec2:** With this release, customers can express their desire to launch instances only in an ODCR or ODCR group rather than OnDemand capacity. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family. ([7cf2a36](https://github.com/aws/aws-sdk-js-v3/commit/7cf2a366d851d60a621b90ec296f49ec832fc666))
+
+
+
+
+
+# [3.696.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.695.0...v3.696.0) (2024-11-19)
+
+
+### Features
+
+* **client-ec2:** This release adds VPC Block Public Access (VPC BPA), a new declarative control which blocks resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. ([7905a8e](https://github.com/aws/aws-sdk-js-v3/commit/7905a8e0411106fb5e50118d6602e83016c8f349))
+
+
+
+
+
+# [3.695.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.694.0...v3.695.0) (2024-11-18)
+
+
+### Features
+
+* **client-ec2:** Adding request and response elements for managed resources. ([be4dacb](https://github.com/aws/aws-sdk-js-v3/commit/be4dacb1b18a92244302ac4e47bc3d7712a699b1))
+
+
+
+
+
+# [3.694.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.693.0...v3.694.0) (2024-11-15)
+
+
+### Features
+
+* **client-ec2:** Remove non-functional enum variants for FleetCapacityReservationUsageStrategy ([b25f0b0](https://github.com/aws/aws-sdk-js-v3/commit/b25f0b06188e1ad01e2515f080ead4b0e9f070d2))
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.692.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.691.0...v3.692.0) (2024-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.691.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.690.0...v3.691.0) (2024-11-13)
+
+
+### Features
+
+* **client-ec2:** This release adds the source AMI details in DescribeImages API ([67fa666](https://github.com/aws/aws-sdk-js-v3/commit/67fa666deb5d55b9a03fb504deaee20c6684d6e9))
+
+
+
+
+
+# [3.687.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.686.0...v3.687.0) (2024-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.686.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.685.0...v3.686.0) (2024-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.683.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.682.0...v3.683.0) (2024-10-30)
+
+
+### Features
+
+* **client-ec2:** This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups. ([095a3b8](https://github.com/aws/aws-sdk-js-v3/commit/095a3b870df7963495a112130f1526506f9cda99))
+
+
+
+
+
+# [3.682.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.681.0...v3.682.0) (2024-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+
+### Features
+
+* **client-ec2:** This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use. ([f624638](https://github.com/aws/aws-sdk-js-v3/commit/f6246389e5c8ba06f29eca28ee8fc2728a596419))
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 X8g, C8g and M8g instances are powered by AWS Graviton4 processors. X8g provide the lowest cost per GiB of memory among Graviton4 instances. C8g provide the best price performance for compute-intensive workloads. M8g provide the best price performance in for general purpose workloads. ([fe1251e](https://github.com/aws/aws-sdk-js-v3/commit/fe1251ec777e4ad3ecce38427dfda02d6cb774a5))
+
+
+
+
+
+# [3.677.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.676.0...v3.677.0) (2024-10-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.676.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.675.0...v3.676.0) (2024-10-21)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only. ([67509d4](https://github.com/aws/aws-sdk-js-v3/commit/67509d43371d9854fb3e55586d493bc16446e8c4))
+
+
+
+
+
+# [3.675.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.674.0...v3.675.0) (2024-10-18)
+
+
+### Features
+
+* **client-ec2:** RequestSpotInstances and RequestSpotFleet feature release. ([a4c0494](https://github.com/aws/aws-sdk-js-v3/commit/a4c0494312674818ec78e7e3a59f81e0c5031822))
+
+
+
+
+
+# [3.674.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.673.0...v3.674.0) (2024-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.670.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.669.0...v3.670.0) (2024-10-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.669.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.668.0...v3.669.0) (2024-10-10)
+
+
+### Features
+
+* **client-ec2:** This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations. ([88ca256](https://github.com/aws/aws-sdk-js-v3/commit/88ca2562eaf47545a2759bf132de91ea8c9a2208))
+
+
+
+
+
+# [3.668.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.667.0...v3.668.0) (2024-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.665.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.664.0...v3.665.0) (2024-10-04)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Amazon EC2. ([404a00a](https://github.com/aws/aws-sdk-js-v3/commit/404a00ac9719d5b59bb9d37151d8abed23616789))
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+
+### Features
+
+* **client-ec2:** This release includes a new API for modifying instance cpu-options after launch. ([a29a5e4](https://github.com/aws/aws-sdk-js-v3/commit/a29a5e4450c9a1c7ccd90889be2dd1b443b62c61))
+* **middleware-user-agent:** add client config for userAgentAppId ([#6524](https://github.com/aws/aws-sdk-js-v3/issues/6524)) ([2990ea8](https://github.com/aws/aws-sdk-js-v3/commit/2990ea8f0d689966a9de0000d579f147c2d4af81))
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.658.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.657.0...v3.658.0) (2024-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.657.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.656.0...v3.657.0) (2024-09-23)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 G6e instances powered by NVIDIA L40S Tensor Core GPUs are the most cost-efficient GPU instances for deploying generative AI models and the highest performance GPU instances for spatial computing workloads. ([a99738f](https://github.com/aws/aws-sdk-js-v3/commit/a99738f66b48e16c5df6e2f7cf56285ba37ef1c7))
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.651.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.0...v3.651.1) (2024-09-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.650.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.649.0...v3.650.0) (2024-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.645.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.644.0...v3.645.0) (2024-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.641.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.640.0...v3.641.0) (2024-08-28)
+
+
+### Features
+
+* **client-ec2:** Amazon VPC IP Address Manager (IPAM) now allows customers to provision IPv4 CIDR blocks and allocate Elastic IP Addresses directly from IPAM pools with public IPv4 space ([4f1d59b](https://github.com/aws/aws-sdk-js-v3/commit/4f1d59bf3763bc9b84108cc4e5b2910a9b3ddc33))
+
+
+
+
+
+# [3.637.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.636.0...v3.637.0) (2024-08-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.636.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.635.0...v3.636.0) (2024-08-21)
+
+
+### Features
+
+* **client-ec2:** DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances ([1baa7ea](https://github.com/aws/aws-sdk-js-v3/commit/1baa7ea8b6561e800c4d9895862bc3f6b4bf1f1b))
+
+
+
+
+
+# [3.635.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.634.0...v3.635.0) (2024-08-20)
+
+
+### Features
+
+* **codegen:** add Smithy RPCv2 CBOR to list of protocols ([#6096](https://github.com/aws/aws-sdk-js-v3/issues/6096)) ([5154d4f](https://github.com/aws/aws-sdk-js-v3/commit/5154d4f19bc77a7bad075b35ce135d3b5f60ad1d))
+
+
+
+
+
+# [3.632.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.631.0...v3.632.0) (2024-08-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.631.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.630.0...v3.631.0) (2024-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.629.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.628.0...v3.629.0) (2024-08-12)
+
+
+### Features
+
+* **client-ec2:** This release adds new capabilities to manage On-Demand Capacity Reservations including the ability to split your reservation, move capacity between reservations, and modify the instance eligibility of your reservation. ([6e0db43](https://github.com/aws/aws-sdk-js-v3/commit/6e0db432b8b0f0e85123c972640c2df1cb77c29d))
+
+
+
+
+
+# [3.627.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.626.0...v3.627.0) (2024-08-08)
+
+
+### Features
+
+* **client-ec2:** Launch of private IPv6 addressing for VPCs and Subnets. VPC IPAM supports the planning and monitoring of private IPv6 usage. ([94af5dd](https://github.com/aws/aws-sdk-js-v3/commit/94af5ddc7f131af9a7258bcf802ea9b9d2a1e7d3))
+
+
+
+
+
+# [3.624.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.623.0...v3.624.0) (2024-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.623.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.622.0...v3.623.0) (2024-08-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.622.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.621.0...v3.622.0) (2024-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.621.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.1...v3.621.0) (2024-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.620.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.0...v3.620.1) (2024-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.620.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.619.0...v3.620.0) (2024-07-25)
+
+
+### Features
+
+* **client-ec2:** EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types. ([88cbe69](https://github.com/aws/aws-sdk-js-v3/commit/88cbe697deec217c20b874a5208a763a4f89143d))
+
+
+
+
+
+# [3.616.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.615.0...v3.616.0) (2024-07-18)
+
+
+### Features
+
+* **client-ec2:** Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range. ([337c43d](https://github.com/aws/aws-sdk-js-v3/commit/337c43d0ad9dcd59b12a9d338c76c19a9e8bf11a))
+
+
+
+
+
+# [3.614.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.613.0...v3.614.0) (2024-07-10)
+
+
+### Features
+
+* **client-ec2:** Add parameters to enable provisioning IPAM BYOIPv4 space at a Local Zone Network Border Group level ([d835dbb](https://github.com/aws/aws-sdk-js-v3/commit/d835dbb9b6eaa07b851e5eb826bcd947a45ee1ec))
+
+
+
+
+
+# [3.613.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.612.0...v3.613.0) (2024-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.609.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.608.0...v3.609.0) (2024-07-02)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Elastic Compute Cloud (EC2). ([c155b9e](https://github.com/aws/aws-sdk-js-v3/commit/c155b9e2ca52f81da287efb0c184de8f5388884d))
+
+
+
+
+
+# [3.606.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.605.0...v3.606.0) (2024-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.604.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.603.0...v3.604.0) (2024-06-25)
+
+
+### Features
+
+* **client-ec2:** This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types ([50f2aa7](https://github.com/aws/aws-sdk-js-v3/commit/50f2aa73483c58a071914efc256fefeb81cf3128))
+
+
+
+
+
+# [3.600.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.599.0...v3.600.0) (2024-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.598.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.597.0...v3.598.0) (2024-06-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.596.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.595.0...v3.596.0) (2024-06-12)
+
+
+### Features
+
+* **client-ec2:** Tagging support for Traffic Mirroring FilterRule resource ([9539a33](https://github.com/aws/aws-sdk-js-v3/commit/9539a33ea4fcd0bfa5dd74cb8863c38636fdcfe0))
+
+
+
+
+
+# [3.592.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.591.0...v3.592.0) (2024-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.590.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.589.0...v3.590.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **codegen:** consistently add region as config option when generated client is Sigv4 but not AWS ([#6156](https://github.com/aws/aws-sdk-js-v3/issues/6156)) ([06f51cc](https://github.com/aws/aws-sdk-js-v3/commit/06f51ccdc1c825f4b4de6a865520ace78c098ff3))
+
+
+### Features
+
+* **client-ec2:** U7i instances with up to 32 TiB of DDR5 memory and 896 vCPUs are now available. C7i-flex instances are launched and are lower-priced variants of the Amazon EC2 C7i instances that offer a baseline level of CPU performance with the ability to scale up to the full compute performance 95% of the time. ([370c001](https://github.com/aws/aws-sdk-js-v3/commit/370c001783ddf3927e9c4088be411a485f972991))
+
+
+
+
+
+# [3.588.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.587.0...v3.588.0) (2024-05-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.587.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.586.0...v3.587.0) (2024-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.585.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.584.0...v3.585.0) (2024-05-28)
+
+
+### Features
+
+* **client-ec2:** Providing support to accept BgpAsnExtended attribute ([1be7eb2](https://github.com/aws/aws-sdk-js-v3/commit/1be7eb260caf2b8073eb80c92faa942d3d15a296))
+
+
+
+
+
+# [3.583.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.582.0...v3.583.0) (2024-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.582.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.581.0...v3.582.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* **client-ec2:** ec2 query no longer serialize empty lists ([#6119](https://github.com/aws/aws-sdk-js-v3/issues/6119)) ([d4b286c](https://github.com/aws/aws-sdk-js-v3/commit/d4b286c6cc63b6281cfb3bedf5c519fa0c5020d9))
+
+
+
+
+
+# [3.577.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.576.0...v3.577.0) (2024-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.576.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.575.0...v3.576.0) (2024-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.575.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.574.0...v3.575.0) (2024-05-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.574.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.573.0...v3.574.0) (2024-05-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.572.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.571.0...v3.572.0) (2024-05-08)
+
+
+### Features
+
+* **client-ec2:** Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes ([711a8ff](https://github.com/aws/aws-sdk-js-v3/commit/711a8ff4e4db701bc19faa32cf84fb4857679717))
+
+
+
+
+
+# [3.569.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.568.0...v3.569.0) (2024-05-03)
+
+
+### Bug Fixes
+
+* **clients:** add deps required by default credential providers ([#6055](https://github.com/aws/aws-sdk-js-v3/issues/6055)) ([bfa8626](https://github.com/aws/aws-sdk-js-v3/commit/bfa86268540d197a21f13e8d2e8bced10b78d480))
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+
+### Features
+
+* **client-ec2:** This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM). ([0903d38](https://github.com/aws/aws-sdk-js-v3/commit/0903d38f5d8e42c03a022003546ccacff35e0e5e))
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.565.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.564.0...v3.565.0) (2024-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.564.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.563.0...v3.564.0) (2024-04-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.563.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.562.0...v3.563.0) (2024-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.562.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.561.0...v3.562.0) (2024-04-24)
+
+
+### Features
+
+* **client-ec2:** Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface ([6121a23](https://github.com/aws/aws-sdk-js-v3/commit/6121a23480f7be708bad3b2d4e50eeec7b5fe667))
+
+
+
+
+
+# [3.561.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.560.0...v3.561.0) (2024-04-23)
+
+
+### Features
+
+* **client-ec2:** This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API. ([4fcf9f7](https://github.com/aws/aws-sdk-js-v3/commit/4fcf9f7235d718e620e3fa4df1253aa1fd2dd453))
+
+
+
+
+
+# [3.557.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.556.0...v3.557.0) (2024-04-17)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Elastic Compute Cloud (EC2). ([08bd27c](https://github.com/aws/aws-sdk-js-v3/commit/08bd27c46fa8739c1c50e5ba4c78a121e89c1685))
+
+
+
+
+
+# [3.556.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.555.0...v3.556.0) (2024-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.554.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.553.0...v3.554.0) (2024-04-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.552.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.551.0...v3.552.0) (2024-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.549.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.548.0...v3.549.0) (2024-04-04)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements. ([379b756](https://github.com/aws/aws-sdk-js-v3/commit/379b756b05ad7b0cf768380d5bdc305a9e7b28ec))
+
+
+
+
+
+# [3.544.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.543.0...v3.544.0) (2024-03-28)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances. ([790018d](https://github.com/aws/aws-sdk-js-v3/commit/790018dce662cdea619ab14a4a0b0df8699bff22))
+
+
+
+
+
+# [3.542.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.541.0...v3.542.0) (2024-03-26)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Elastic Compute Cloud (EC2). ([5f6803a](https://github.com/aws/aws-sdk-js-v3/commit/5f6803ae75603a4e7e95e020447e676a7a6bf8eb))
+
+
+
+
+
+# [3.541.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.540.0...v3.541.0) (2024-03-25)
+
+
+### Features
+
+* **client-ec2:** Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults ([cdacf23](https://github.com/aws/aws-sdk-js-v3/commit/cdacf23276c4ed985d6510f396bde4689d10ef20))
+
+
+
+
+
+# [3.540.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.539.0...v3.540.0) (2024-03-22)
+
+
+### Bug Fixes
+
+* **util-endpoints:** augment endpointFunctions inline in endpointResolver functions ([#5933](https://github.com/aws/aws-sdk-js-v3/issues/5933)) ([42a791d](https://github.com/aws/aws-sdk-js-v3/commit/42a791defb20c697fefc985f1f2b22fc9e5be388))
+
+
+
+
+
+# [3.537.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.536.0...v3.537.0) (2024-03-19)
+
+
+### Features
+
+* **client-ec2:** This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated. ([b2f3261](https://github.com/aws/aws-sdk-js-v3/commit/b2f3261a37a5edfc0c8b1664f9cb8e4609dcd798))
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+
+### Features
+
+* **client-ec2:** Add media accelerator and neuron device information on the describe instance types API. ([1d943e0](https://github.com/aws/aws-sdk-js-v3/commit/1d943e009b635ec2e87809553ddd2b8ae8e514ca))
+
+
+
+
+
+# [3.533.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.532.0...v3.533.0) (2024-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.532.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.531.0...v3.532.0) (2024-03-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.529.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.529.0...v3.529.1) (2024-03-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.529.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.528.0...v3.529.0) (2024-03-07)
+
+
+### Features
+
+* **client-ec2:** This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation. ([b6f2e1d](https://github.com/aws/aws-sdk-js-v3/commit/b6f2e1d506d7cb6cf015ed5b3280187c71bc01ce))
+
+
+
+
+
+## [3.525.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.525.0...v3.525.1) (2024-03-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.525.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.524.0...v3.525.0) (2024-02-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.523.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.522.0...v3.523.0) (2024-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.521.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.520.0...v3.521.0) (2024-02-23)
+
+
+### Features
+
+* requestHandler ctor param pass-through ([#5820](https://github.com/aws/aws-sdk-js-v3/issues/5820)) ([9fec71d](https://github.com/aws/aws-sdk-js-v3/commit/9fec71d1933cd8e3db118c164bca16edc2305532))
+
+
+
+
+
+# [3.515.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.514.0...v3.515.0) (2024-02-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.514.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.513.0...v3.514.0) (2024-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.513.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.512.0...v3.513.0) (2024-02-13)
+
+
+### Features
+
+* **experimentalIdentityAndAuth:** release phase for services without customizations ([#5787](https://github.com/aws/aws-sdk-js-v3/issues/5787)) ([4004ff6](https://github.com/aws/aws-sdk-js-v3/commit/4004ff68a8ad20f6e60e8fab1f8952928f92f4b7))
+
+
+
+
+
+# [3.511.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.510.0...v3.511.0) (2024-02-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.509.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.508.0...v3.509.0) (2024-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.507.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.506.0...v3.507.0) (2024-02-05)
+
+
+### Features
+
+* unified error dispatcher in protocols ([#5756](https://github.com/aws/aws-sdk-js-v3/issues/5756)) ([0872087](https://github.com/aws/aws-sdk-js-v3/commit/0872087ef56422541bd38d293f97613dfd10236f))
+
+
+
+
+
+# [3.504.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.1...v3.504.0) (2024-01-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.503.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.0...v3.503.1) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.503.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.502.0...v3.503.0) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.502.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.501.0...v3.502.0) (2024-01-29)
+
+
+### Features
+
+* **client-ec2:** EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type. ([5465534](https://github.com/aws/aws-sdk-js-v3/commit/5465534c6854f6c797940fa6eea57709a985c46c))
+* **credential-providers:** lazy load STS & SSO clients in credential providers ([#5681](https://github.com/aws/aws-sdk-js-v3/issues/5681)) ([d27301d](https://github.com/aws/aws-sdk-js-v3/commit/d27301d48f3e75fdaccabf58f779f0b33a70664e))
+
+
+
+
+
+# [3.501.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.500.0...v3.501.0) (2024-01-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.499.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.498.0...v3.499.0) (2024-01-24)
+
+
+### Features
+
+* **client-ec2:** Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs. ([65a1927](https://github.com/aws/aws-sdk-js-v3/commit/65a1927ac166f2aa7ff449b72256f900f1c8d104))
+
+
+
+
+
+# [3.498.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.497.0...v3.498.0) (2024-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.497.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.496.0...v3.497.0) (2024-01-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.496.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.495.0...v3.496.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* get full list of exports for esm compat in dist-cjs ([#5694](https://github.com/aws/aws-sdk-js-v3/issues/5694)) ([5d26da6](https://github.com/aws/aws-sdk-js-v3/commit/5d26da6d07b593ae286ca674fb3cbff7c833cbb0))
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.490.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.489.0...v3.490.0) (2024-01-11)
+
+
+### Bug Fixes
+
+* **experimentalIdentityAndAuth:** rename `AWSSDKSigV4` to `AwsSdkSigV4` ([#5667](https://github.com/aws/aws-sdk-js-v3/issues/5667)) ([9c3e91a](https://github.com/aws/aws-sdk-js-v3/commit/9c3e91aeb155cad42ce56cc116aa71bc8f2457c9))
+
+
+### Features
+
+* **client-ec2:** This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks. ([dd0cdf2](https://github.com/aws/aws-sdk-js-v3/commit/dd0cdf2e755ed6702e14174510958c4609cd8748))
+* **experimentalIdentityAndAuth:** release phase for services with customizations ([#5288](https://github.com/aws/aws-sdk-js-v3/issues/5288)) ([ddc477c](https://github.com/aws/aws-sdk-js-v3/commit/ddc477c39da563db4d26e552f9e6edf7254d4ea3))
+
+
+
+
+
+# [3.489.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.488.0...v3.489.0) (2024-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.488.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.487.0...v3.488.0) (2024-01-08)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors. ([c62c9b2](https://github.com/aws/aws-sdk-js-v3/commit/c62c9b2628e47193267498ae6463197c7d0ce275))
+* **experimentalIdentityAndAuth:** release phase for services with signing customizations ([#5286](https://github.com/aws/aws-sdk-js-v3/issues/5286)) ([1ba36c4](https://github.com/aws/aws-sdk-js-v3/commit/1ba36c483267397a903d8cf6dde068641772b552))
+
+
+
+
+
+# [3.485.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.484.0...v3.485.0) (2024-01-03)
+
+
+### Features
+
+* **credential-providers:** add credentialScope field ([#5606](https://github.com/aws/aws-sdk-js-v3/issues/5606)) ([04c1459](https://github.com/aws/aws-sdk-js-v3/commit/04c14592898ac63ed87d47f2a53320ccaa991083))
+
+
+
+
+
+# [3.484.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.483.0...v3.484.0) (2023-12-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.481.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.480.0...v3.481.0) (2023-12-26)
+
+
+### Features
+
+* codegen for command class builder ([#5604](https://github.com/aws/aws-sdk-js-v3/issues/5604)) ([4835de4](https://github.com/aws/aws-sdk-js-v3/commit/4835de4ebb8f302ae1e838ac1efaf5f12384910d))
+
+
+
+
+
+# [3.478.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.477.0...v3.478.0) (2023-12-20)
+
+
+### Features
+
+* codegen for paginator factory ([#5590](https://github.com/aws/aws-sdk-js-v3/issues/5590)) ([e54099b](https://github.com/aws/aws-sdk-js-v3/commit/e54099b7c1eb3b1de5737d5494821b1dae045fca))
+
+
+
+
+
+# [3.477.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.476.0...v3.477.0) (2023-12-19)
+
+
+### Features
+
+* **client-ec2:** Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones. ([0d9d3e8](https://github.com/aws/aws-sdk-js-v3/commit/0d9d3e82ea19aa0cf6930ba02282277b92bc2d29))
+* xml codegen reduction ([#5566](https://github.com/aws/aws-sdk-js-v3/issues/5566)) ([3ed7c81](https://github.com/aws/aws-sdk-js-v3/commit/3ed7c81f9191182826de7645078cc6ed1d2ee959))
+
+
+
+
+
+# [3.476.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.475.0...v3.476.0) (2023-12-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.474.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.473.0...v3.474.0) (2023-12-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.473.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.472.0...v3.473.0) (2023-12-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.470.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.469.0...v3.470.0) (2023-12-08)
+
+
+### Features
+
+* **client-ec2:** M2 Mac instances are built on Apple M2 Mac mini computers. I4i instances are powered by 3rd generation Intel Xeon Scalable processors. C7i compute optimized, M7i general purpose and R7i memory optimized instances are powered by custom 4th Generation Intel Xeon Scalable processors. ([1a9fca9](https://github.com/aws/aws-sdk-js-v3/commit/1a9fca9ee989d89c444a78d8e7f6664d38055e69))
+
+
+
+
+
+# [3.468.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.467.0...v3.468.0) (2023-12-06)
+
+
+### Features
+
+* **client-ec2:** Releasing the new cpuManufacturer attribute within the DescribeInstanceTypes API response which notifies our customers with information on who the Manufacturer is for the processor attached to the instance, for example: Intel. ([35fbeb8](https://github.com/aws/aws-sdk-js-v3/commit/35fbeb846843da47b950e7e03be3370489cab5bc))
+
+
+
+
+
+# [3.467.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.466.0...v3.467.0) (2023-12-05)
+
+
+### Features
+
+* **client-ec2:** Adds A10G, T4G, and H100 as accelerator name options and Habana as an accelerator manufacturer option for attribute based selection ([9e3bce6](https://github.com/aws/aws-sdk-js-v3/commit/9e3bce603ad5e74fe11d657183655ec656036b2d))
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.462.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.461.0...v3.462.0) (2023-11-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.461.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.460.0...v3.461.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.460.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.459.0...v3.460.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.458.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.457.0...v3.458.0) (2023-11-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.456.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.455.0...v3.456.0) (2023-11-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.455.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.454.0...v3.455.0) (2023-11-20)
+
+
+### Features
+
+* **client-ec2:** This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway. ([740d241](https://github.com/aws/aws-sdk-js-v3/commit/740d2418d9da9c6bac0f7dcc6bf1987fd7ced101))
+
+
+
+
+
+# [3.454.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.453.0...v3.454.0) (2023-11-17)
+
+
+### Features
+
+* **client-ec2:** This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM. ([7a42bf1](https://github.com/aws/aws-sdk-js-v3/commit/7a42bf10ea54a082b3b4f2e0a6a9b8edefacd584))
+
+
+
+
+
+# [3.453.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.452.0...v3.453.0) (2023-11-16)
+
+
+### Features
+
+* **client-ec2:** Enable use of tenant-specific PublicSigningKeyUrl from device trust providers and onboard jumpcloud as a new device trust provider. ([9e1a837](https://github.com/aws/aws-sdk-js-v3/commit/9e1a8373e3df5bac1de43327eb9ecb0063882ad1))
+
+
+
+
+
+# [3.452.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.451.0...v3.452.0) (2023-11-15)
+
+
+### Features
+
+* **client-ec2:** AWS EBS now supports Snapshot Lock, giving users the ability to lock an EBS Snapshot to prohibit deletion of the snapshot. This release introduces the LockSnapshot, UnlockSnapshot & DescribeLockedSnapshots APIs to manage lock configuration for snapshots. The release also includes the dl2q_24xlarge. ([8177a46](https://github.com/aws/aws-sdk-js-v3/commit/8177a4654cf77422903e41ccacd07601b149c533))
+
+
+
+
+
+# [3.451.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.450.0...v3.451.0) (2023-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.450.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.449.0...v3.450.0) (2023-11-13)
+
+
+### Features
+
+* **client-ec2:** Adds the new EC2 DescribeInstanceTopology API, which you can use to retrieve the network topology of your running instances on select platform types to determine their relative proximity to each other. ([ce5a2b0](https://github.com/aws/aws-sdk-js-v3/commit/ce5a2b07a6afc8d6b7140efe8010de1940c6285f))
+
+
+
+
+
+# [3.449.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.448.0...v3.449.0) (2023-11-10)
+
+
+### Features
+
+* **client-ec2:** EC2 adds API updates to enable ENA Express at instance launch time. ([b4b5fdd](https://github.com/aws/aws-sdk-js-v3/commit/b4b5fdd592628cf4ec167571570ae44b0bed4de6))
+
+
+
+
+
+# [3.448.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.447.0...v3.448.0) (2023-11-09)
+
+
+### Features
+
+* **client-ec2:** AWS EBS now supports Block Public Access for EBS Snapshots. This release introduces the EnableSnapshotBlockPublicAccess, DisableSnapshotBlockPublicAccess and GetSnapshotBlockPublicAccessState APIs to manage account-level public access settings for EBS Snapshots in an AWS Region. ([dd46083](https://github.com/aws/aws-sdk-js-v3/commit/dd46083495489c001d1a125e0574179a20a17415))
+
+
+
+
+
+# [3.445.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.444.0...v3.445.0) (2023-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.441.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.440.0...v3.441.0) (2023-11-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.440.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.439.0...v3.440.0) (2023-10-31)
+
+
+### Features
+
+* **client-ec2:** Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking. ([5f73bcd](https://github.com/aws/aws-sdk-js-v3/commit/5f73bcda5288d895451b0a3b2e9fdf7ff00e46fe))
+
+
+
+
+
+# [3.438.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.437.0...v3.438.0) (2023-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.437.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.436.0...v3.437.0) (2023-10-26)
+
+
+### Features
+
+* **client-ec2:** Launching GetSecurityGroupsForVpc API. This API gets security groups that can be associated by the AWS account making the request with network interfaces in the specified VPC. ([0bc9a39](https://github.com/aws/aws-sdk-js-v3/commit/0bc9a39b6069ab8a1df7b29798e93045167dcffe))
+
+
+
+
+
+# [3.436.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.435.0...v3.436.0) (2023-10-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.435.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.434.0...v3.435.0) (2023-10-24)
+
+
+### Features
+
+* **client-ec2:** This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation. ([4e920f1](https://github.com/aws/aws-sdk-js-v3/commit/4e920f178227b3f01d436ce0e291a13fcdc07387))
+
+
+
+
+
+# [3.433.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.432.0...v3.433.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* **codegen:** use partial record for enum keyed types ([#5391](https://github.com/aws/aws-sdk-js-v3/issues/5391)) ([70c2107](https://github.com/aws/aws-sdk-js-v3/commit/70c2107b970d035bfedb211278c88fdbfc2e5334))
+
+
+
+
+
+# [3.432.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.431.0...v3.432.0) (2023-10-19)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors. ([99fa7ff](https://github.com/aws/aws-sdk-js-v3/commit/99fa7ffef1d3950aaa630736b6170e752c1b8529))
+
+
+
+
+
+# [3.431.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.430.0...v3.431.0) (2023-10-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.430.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.429.0...v3.430.0) (2023-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.429.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.428.0...v3.429.0) (2023-10-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.428.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.427.0...v3.428.0) (2023-10-12)
+
+
+### Features
+
+* **client-ec2:** This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it. ([9c57ae3](https://github.com/aws/aws-sdk-js-v3/commit/9c57ae3280837f11350664050bb11d0ba768f149))
+
+
+
+
+
+# [3.427.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.426.0...v3.427.0) (2023-10-06)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Elastic Compute Cloud (EC2). ([fe0f676](https://github.com/aws/aws-sdk-js-v3/commit/fe0f6765d217c2d55faf7451baaf64c2a7f517a3))
+
+
+
+
+
+# [3.425.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.424.0...v3.425.0) (2023-10-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.423.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.422.0...v3.423.0) (2023-10-02)
+
+
+### Features
+
+* **client-ec2:** Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances. ([bd24ace](https://github.com/aws/aws-sdk-js-v3/commit/bd24ace57c22b3a28cb5c9526e36ed5eac6d89b3))
+
+
+
+
+
+# [3.422.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.421.0...v3.422.0) (2023-09-28)
+
+
+### Features
+
+* **client-ec2:** Adds support for Customer Managed Key encryption for Amazon Verified Access resources ([5ba0655](https://github.com/aws/aws-sdk-js-v3/commit/5ba06550cd42b318766df784175c926c1ca820db))
+
+
+
+
+
+# [3.421.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.420.0...v3.421.0) (2023-09-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.420.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.419.0...v3.420.0) (2023-09-26)
+
+
+### Features
+
+* **client-ec2:** The release includes AWS verified access to support FIPs compliance in North America regions ([2cb7f26](https://github.com/aws/aws-sdk-js-v3/commit/2cb7f26f20e1f4bde32ab4693c95d0f3d52b6402))
+
+
+
+
+
+# [3.418.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.417.0...v3.418.0) (2023-09-22)
+
+
+### Features
+
+* **client-ec2:** EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections. ([987ec95](https://github.com/aws/aws-sdk-js-v3/commit/987ec95712b7f9a51af7936cd51109e155ea1cb1))
+
+
+
+
+
+# [3.416.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.415.0...v3.416.0) (2023-09-19)
+
+
+### Features
+
+* **client-ec2:** This release adds support for C7i, and R7a instance types. ([871a04d](https://github.com/aws/aws-sdk-js-v3/commit/871a04d972e665cb0febf293f0c08c9eb8362a89))
+
+
+
+
+
+# [3.414.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.413.0...v3.414.0) (2023-09-15)
+
+
+### Features
+
+* **region-config:** add aws region runtime extension codegen ([#5157](https://github.com/aws/aws-sdk-js-v3/issues/5157)) ([b9d59e8](https://github.com/aws/aws-sdk-js-v3/commit/b9d59e81696f9628c6502473bb01a2d1a617e928))
+
+
+
+
+
+# [3.413.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.412.0...v3.413.0) (2023-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.411.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.410.0...v3.411.0) (2023-09-12)
+
+
+### Features
+
+* **client-ec2:** This release adds support for restricting public sharing of AMIs through AMI Block Public Access ([0528034](https://github.com/aws/aws-sdk-js-v3/commit/052803455bd5838c040957ed30ae4e24c1384d41))
+
+
+
+
+
+# [3.410.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.409.0...v3.410.0) (2023-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.409.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.408.0...v3.409.0) (2023-09-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.408.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.407.0...v3.408.0) (2023-09-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.407.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.406.0...v3.407.0) (2023-09-06)
+
+
+### Features
+
+* **client-ec2:** This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API. ([fc64a50](https://github.com/aws/aws-sdk-js-v3/commit/fc64a50cab1dc6820ee6b27174c20788305352ed))
+
+
+
+
+
+# [3.406.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.405.0...v3.406.0) (2023-09-05)
+
+
+### Features
+
+* **client-ec2:** Introducing Amazon EC2 C7gd, M7gd, and R7gd Instances with up to 3.8 TB of local NVMe-based SSD block-level storage. These instances are powered by AWS Graviton3 processors, delivering up to 25% better performance over Graviton2-based instances. ([5117dcb](https://github.com/aws/aws-sdk-js-v3/commit/5117dcbba1eb3024a2ba498fb9ad47fbe504069f))
+
+
+
+
+
+# [3.405.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.404.0...v3.405.0) (2023-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.399.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.398.0...v3.399.0) (2023-08-24)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 M7a instances, powered by 4th generation AMD EPYC processors, deliver up to 50% higher performance compared to M6a instances. Amazon EC2 Hpc7a instances, powered by 4th Gen AMD EPYC processors, deliver up to 2.5x better performance compared to Amazon EC2 Hpc6a instances. ([81ae519](https://github.com/aws/aws-sdk-js-v3/commit/81ae519f8bb8628d64469ddb827af9190924a201))
+
+
+
+
+
+# [3.398.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.397.0...v3.398.0) (2023-08-23)
+
+
+### Features
+
+* **client-ec2:** Marking fields as sensitive on BundleTask and GetPasswordData ([31c9785](https://github.com/aws/aws-sdk-js-v3/commit/31c97854bf96506192d2d7a13a2d4b3b0d5e173a))
+
+
+
+
+
+# [3.396.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.395.0...v3.396.0) (2023-08-21)
+
+
+### Features
+
+* **client-ec2:** The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted. ([5009701](https://github.com/aws/aws-sdk-js-v3/commit/50097011ce78c144fcd821b3225adc467e0e06cd))
+
+
+
+
+
+# [3.395.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.394.0...v3.395.0) (2023-08-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.394.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.393.0...v3.394.0) (2023-08-17)
+
+
+### Features
+
+* **client-ec2:** Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints ([d377dfd](https://github.com/aws/aws-sdk-js-v3/commit/d377dfd296a989a07b8c1eaab1b5887a9e4ac14a))
+
+
+
+
+
+# [3.392.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.391.0...v3.392.0) (2023-08-15)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Elastic Compute Cloud (EC2). ([cd827e7](https://github.com/aws/aws-sdk-js-v3/commit/cd827e78b43f73434cc5b52071b0eec966e8a262))
+
+
+
+
+
+# [3.391.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.390.0...v3.391.0) (2023-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.390.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.389.0...v3.390.0) (2023-08-11)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 P5 instances, powered by the latest NVIDIA H100 Tensor Core GPUs, deliver the highest performance in EC2 for deep learning (DL) and HPC applications. M7i-flex and M7i instances are next-generation general purpose instances powered by custom 4th Generation Intel Xeon Scalable processors. ([071580d](https://github.com/aws/aws-sdk-js-v3/commit/071580d972d290165090d3f3805dd35961c9ae67))
+
+
+
+
+
+# [3.388.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.387.0...v3.388.0) (2023-08-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.387.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.386.0...v3.387.0) (2023-08-08)
+
+
+### Features
+
+* **clients:** allow client creation without configuration ([#5060](https://github.com/aws/aws-sdk-js-v3/issues/5060)) ([a9723dc](https://github.com/aws/aws-sdk-js-v3/commit/a9723dcbbf970402a3131a8ff79153a04b2cfb89))
+
+
+
+
+
+# [3.386.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.385.0...v3.386.0) (2023-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.385.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.384.0...v3.385.0) (2023-08-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.384.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.383.0...v3.384.0) (2023-08-03)
+
+
+### Features
+
+* **client-ec2:** This release adds new parameter isPrimaryIPv6 to  allow assigning an IPv6 address as a primary IPv6 address to a network interface which cannot be changed to give equivalent functionality available for network interfaces with primary IPv4 address. ([e8eae85](https://github.com/aws/aws-sdk-js-v3/commit/e8eae855ee894e0a22a641683bb9b2e769844a4d))
+
+
+
+
+
+# [3.382.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.381.0...v3.382.0) (2023-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.379.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.379.0...v3.379.1) (2023-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.379.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.378.0...v3.379.0) (2023-07-27)
+
+
+### Features
+
+* **client-ec2:** SDK and documentation updates for Amazon Elastic Block Store APIs ([340ee0b](https://github.com/aws/aws-sdk-js-v3/commit/340ee0b95903702d27a1a7fad285c0519c3fa173))
+
+
+
+
+
+# [3.378.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.377.0...v3.378.0) (2023-07-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.377.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.376.0...v3.377.0) (2023-07-25)
+
+
+### Features
+
+* **client-ec2:** This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes. ([691ecdb](https://github.com/aws/aws-sdk-js-v3/commit/691ecdb836d909b7ea2a35a3bc826081c9dd1b5f))
+
+
+
+
+
+# [3.376.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.375.0...v3.376.0) (2023-07-24)
+
+
+### Features
+
+* **client-ec2:** Add "disabled" enum value to SpotInstanceState. ([dedea39](https://github.com/aws/aws-sdk-js-v3/commit/dedea39839bd1f09445a96fce5ef1aace18aed1e))
+
+
+
+
+
+# [3.373.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.372.0...v3.373.0) (2023-07-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.371.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.370.0...v3.371.0) (2023-07-17)
+
+
+### Features
+
+* **client-ec2:** Add Nitro TPM support on DescribeInstanceTypes ([001f5d7](https://github.com/aws/aws-sdk-js-v3/commit/001f5d7d9ac7edd2ea2f58285206f07352faf1ef))
+
+
+
+
+
+# [3.370.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.369.0...v3.370.0) (2023-07-13)
+
+
+### Bug Fixes
+
+* **codegen:** pkg.json merge behavior ([#4954](https://github.com/aws/aws-sdk-js-v3/issues/4954)) ([4fc0b7f](https://github.com/aws/aws-sdk-js-v3/commit/4fc0b7f3961fe8a88c781c8f34269aef12d5f620))
+
+
+### Features
+
+* **client-ec2:** This release adds support for the C7gn and Hpc7g instances. C7gn instances are powered by AWS Graviton3 processors and the fifth-generation AWS Nitro Cards. Hpc7g instances are powered by AWS Graviton 3E processors and provide up to 200 Gbps network bandwidth. ([b3fabe8](https://github.com/aws/aws-sdk-js-v3/commit/b3fabe846589ac537b96629043fd475122431a1f))
+
+
+
+
+
+# [3.369.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.368.0...v3.369.0) (2023-07-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.367.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.366.0...v3.367.0) (2023-07-06)
+
+
+### Features
+
+* **client-ec2:** Add Nitro Enclaves support on DescribeInstanceTypes ([1db6ac4](https://github.com/aws/aws-sdk-js-v3/commit/1db6ac4a611406765828d4842ad2c6eda8604159))
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.362.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.361.0...v3.362.0) (2023-06-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.360.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.359.0...v3.360.0) (2023-06-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.359.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.358.0...v3.359.0) (2023-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.358.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.357.0...v3.358.0) (2023-06-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.357.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.356.0...v3.357.0) (2023-06-21)
+
+
+### Features
+
+* **clients:** automatic blob type conversions ([#4836](https://github.com/aws/aws-sdk-js-v3/issues/4836)) ([60ec921](https://github.com/aws/aws-sdk-js-v3/commit/60ec921c879ae8363f32ebbe9e1ecd6062df1081))
+
+
+
+
+
+# [3.356.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.355.0...v3.356.0) (2023-06-20)
+
+
+### Features
+
+* **client-ec2:** Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts ([fa71f14](https://github.com/aws/aws-sdk-js-v3/commit/fa71f14130ba8705d77f2276e5edebe97f17b258))
+
+
+
+
+
+# [3.355.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.354.0...v3.355.0) (2023-06-19)
+
+
+### Features
+
+* **client-ec2:** API changes to AWS Verified Access to include data from trust providers in logs ([880a917](https://github.com/aws/aws-sdk-js-v3/commit/880a91710f54e50a0ef2e9415a11b69b72c526c3))
+
+
+
+
+
+# [3.354.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.353.0...v3.354.0) (2023-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.353.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.352.0...v3.353.0) (2023-06-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.352.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.351.0...v3.352.0) (2023-06-13)
+
+
+### Features
+
+* **client-ec2:** This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address. ([c1ce7e1](https://github.com/aws/aws-sdk-js-v3/commit/c1ce7e11bc65d65d8f6f1a3e18878d3589d5abad))
+
+
+
+
+
+# [3.350.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.349.0...v3.350.0) (2023-06-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.348.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.347.1...v3.348.0) (2023-06-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.347.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.347.0...v3.347.1) (2023-06-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.347.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.346.0...v3.347.0) (2023-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.346.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.345.0...v3.346.0) (2023-06-05)
+
+
+### Features
+
+* **client-ec2:** Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs. ([8329d54](https://github.com/aws/aws-sdk-js-v3/commit/8329d543de7b03f322eca4bfe88f3cec81770552))
+
+
+
+
+
+# [3.345.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.344.0...v3.345.0) (2023-06-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.344.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.343.0...v3.344.0) (2023-06-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.342.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.341.0...v3.342.0) (2023-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.341.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.340.0...v3.341.0) (2023-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.338.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.337.0...v3.338.0) (2023-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.337.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.336.0...v3.337.0) (2023-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.335.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.334.0...v3.335.0) (2023-05-18)
+
+
+### Features
+
+* **client-ec2:** Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances. ([6d1ea0b](https://github.com/aws/aws-sdk-js-v3/commit/6d1ea0bacba489db15f50954aeeb5dc358e94678))
+* **deps:** use [@smithy](https://github.com/smithy) types and protocol-http ([#4722](https://github.com/aws/aws-sdk-js-v3/issues/4722)) ([7ed7101](https://github.com/aws/aws-sdk-js-v3/commit/7ed7101dcc4e81038b6c7f581162b959e6b33a04))
+
+
+
+
+
+# [3.332.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.331.0...v3.332.0) (2023-05-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.329.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.328.0...v3.329.0) (2023-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.328.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.327.0...v3.328.0) (2023-05-05)
+
+
+### Features
+
+* **client-ec2:** This release adds support the inf2 and trn1n instances. inf2 instances are purpose built for deep learning inference while trn1n instances are powered by AWS Trainium accelerators and they build on the capabilities of Trainium-powered trn1 instances. ([81d3554](https://github.com/aws/aws-sdk-js-v3/commit/81d3554c4abecc9eae694c91e59655b0286ad259))
+
+
+
+
+
+# [3.327.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.326.0...v3.327.0) (2023-05-04)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.326.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.325.0...v3.326.0) (2023-05-03)
+
+
+### Features
+
+* **client-ec2:** Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings ([ed4b264](https://github.com/aws/aws-sdk-js-v3/commit/ed4b26446960bb721350031cfaa6aa794b673bb7))
+
+
+
+
+
+# [3.325.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.324.0...v3.325.0) (2023-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.322.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.321.1...v3.322.0) (2023-04-27)
+
+
+### Features
+
+* **client-ec2:** This release adds support for AMD SEV-SNP on EC2 instances. ([c57a8bf](https://github.com/aws/aws-sdk-js-v3/commit/c57a8bf3a499e5838896e485354947f1521042bc))
+
+
+
+
+
+## [3.321.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.321.0...v3.321.1) (2023-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.321.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.320.0...v3.321.0) (2023-04-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.319.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.318.0...v3.319.0) (2023-04-24)
+
+
+### Features
+
+* **client-ec2:** API changes to AWS Verified Access related to identity providers' information. ([5e3d812](https://github.com/aws/aws-sdk-js-v3/commit/5e3d812ccab033ba391ad1b6e0f6907650e1c39f))
+
+
+
+
+
+# [3.316.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.315.0...v3.316.0) (2023-04-19)
+
+
+### Features
+
+* **smithy-client:** factory for aggregated clients ([#4639](https://github.com/aws/aws-sdk-js-v3/issues/4639)) ([852b99d](https://github.com/aws/aws-sdk-js-v3/commit/852b99d393fe5f1a9ff6345f797949f3901a9cbf))
+
+
+
+
+
+# [3.315.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.314.0...v3.315.0) (2023-04-17)
+
+
+### Features
+
+* **codegen:** shorten serialization and deserialization code in protocols files ([#4625](https://github.com/aws/aws-sdk-js-v3/issues/4625)) ([8798a6e](https://github.com/aws/aws-sdk-js-v3/commit/8798a6eac1b48f0a807c51e38b864ef62b712943))
+
+
+
+
+
+# [3.312.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.311.0...v3.312.0) (2023-04-12)
+
+
+### Features
+
+* **client:** reduce generated HTTP request header code size ([#4594](https://github.com/aws/aws-sdk-js-v3/issues/4594)) ([fe91123](https://github.com/aws/aws-sdk-js-v3/commit/fe91123411499b5932b406fb813e69f4a0d36503))
+
+
+
+
+
+# [3.311.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.310.0...v3.311.0) (2023-04-11)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.310.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.309.0...v3.310.0) (2023-04-10)
+
+
+### Bug Fixes
+
+* use updated dist glob pattern in package.json ([#4628](https://github.com/aws/aws-sdk-js-v3/issues/4628)) ([352393d](https://github.com/aws/aws-sdk-js-v3/commit/352393dcdba5ba16dca589c265c40e22913c7f2b))
+
+
+
+
+
+# [3.309.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.308.0...v3.309.0) (2023-04-07)
+
+
+### Features
+
+* **codegen:** shorten internal serde function names ([#4611](https://github.com/aws/aws-sdk-js-v3/issues/4611)) ([e385e85](https://github.com/aws/aws-sdk-js-v3/commit/e385e85938d112434b752abb38ab5de2d094f669))
+
+
+
+
+
+# [3.306.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.305.0...v3.306.0) (2023-04-04)
+
+
+### Features
+
+* **client-ec2:** C6in, M6in, M6idn, R6in and R6idn bare metal instances are powered by 3rd Generation Intel Xeon Scalable processors and offer up to 200 Gbps of network bandwidth. ([01bddbc](https://github.com/aws/aws-sdk-js-v3/commit/01bddbc14a6fec92283fa53e5050d50f5fb63750))
+
+
+
+
+
+# [3.304.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.303.0...v3.304.0) (2023-03-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.303.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.302.0...v3.303.0) (2023-03-30)
+
+
+### Features
+
+* **client-ec2:** This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates. ([daa7956](https://github.com/aws/aws-sdk-js-v3/commit/daa79569c2e9e636a2ed9cd7a5425bdbc5d491e4))
+
+
+
+
+
+# [3.301.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.300.0...v3.301.0) (2023-03-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.300.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.299.0...v3.300.0) (2023-03-27)
+
+
+### Features
+
+* **clients:** codegen for structural hint documentation in commands ([#4573](https://github.com/aws/aws-sdk-js-v3/issues/4573)) ([b3ff58d](https://github.com/aws/aws-sdk-js-v3/commit/b3ff58d3606ceefcdd04ac82fc1ca54f5f811989))
+
+
+
+
+
+# [3.299.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.298.0...v3.299.0) (2023-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.298.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.297.0...v3.298.0) (2023-03-23)
+
+
+### Features
+
+* **clients:** remove generated log filters for data with no sensitive data ([#4544](https://github.com/aws/aws-sdk-js-v3/issues/4544)) ([569155d](https://github.com/aws/aws-sdk-js-v3/commit/569155d6cce710b102cefa7511ba1bc1d28bc87e))
+
+
+
+
+
+# [3.297.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.296.0...v3.297.0) (2023-03-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.296.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.295.0...v3.296.0) (2023-03-21)
+
+
+### Features
+
+* **client-ec2:** This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided. ([eb6d517](https://github.com/aws/aws-sdk-js-v3/commit/eb6d51786513297ec1921bd98aa064a058721331))
+
+
+
+
+
+# [3.295.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.294.0...v3.295.0) (2023-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.294.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.293.0...v3.294.0) (2023-03-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.293.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.292.1...v3.293.0) (2023-03-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.292.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.291.0...v3.292.0) (2023-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.291.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.290.0...v3.291.0) (2023-03-14)
+
+
+### Features
+
+* **client-ec2:** This release adds a new DnsOptions key (PrivateDnsOnlyForInboundResolverEndpoint) to CreateVpcEndpoint and ModifyVpcEndpoint APIs. ([8911e55](https://github.com/aws/aws-sdk-js-v3/commit/8911e55be1b00218d79eea86de3659559a88b0ad))
+
+
+
+
+
+# [3.290.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.289.0...v3.290.0) (2023-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.289.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.288.0...v3.289.0) (2023-03-10)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.288.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.287.0...v3.288.0) (2023-03-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.287.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.286.0...v3.287.0) (2023-03-08)
+
+
+### Bug Fixes
+
+* **clients:** remove aggregated client from paginators ([#4496](https://github.com/aws/aws-sdk-js-v3/issues/4496)) ([aea457a](https://github.com/aws/aws-sdk-js-v3/commit/aea457ab5d4e72939f2f608140d82b60526eb716))
+
+
+### Features
+
+* **client-ec2:** Introducing Amazon EC2 C7g, M7g and R7g instances, powered by the latest generation AWS Graviton3 processors and deliver up to 25% better performance over Graviton2-based instances. ([8a6dcfa](https://github.com/aws/aws-sdk-js-v3/commit/8a6dcfa8eda7070a60be8b37dcc8a421a96559c2))
+
+
+
+
+
+# [3.284.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.283.0...v3.284.0) (2023-03-03)
+
+
+### Features
+
+* **client-ec2:** This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'. ([e5182e1](https://github.com/aws/aws-sdk-js-v3/commit/e5182e146e2ad9925525dbb2cde72732b8813834))
+
+
+
+
+
+# [3.282.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.281.0...v3.282.0) (2023-03-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.281.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.280.0...v3.281.0) (2023-02-28)
+
+
+### Features
+
+* **client-ec2:** This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default. ([b623f24](https://github.com/aws/aws-sdk-js-v3/commit/b623f244863585e9dc752a707a276f475568ae40))
+
+
+
+
+
+# [3.279.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.278.0...v3.279.0) (2023-02-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.278.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.277.0...v3.278.0) (2023-02-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.276.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.275.0...v3.276.0) (2023-02-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.272.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.271.0...v3.272.0) (2023-02-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.271.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.270.0...v3.271.0) (2023-02-14)
+
+
+### Features
+
+* **client-ec2:** With this release customers can turn host maintenance on or off when allocating or modifying a supported dedicated host. Host maintenance is turned on by default for supported hosts. ([62c8b91](https://github.com/aws/aws-sdk-js-v3/commit/62c8b91bc9598ed13801c2643c8b077aca297a6e))
+
+
+
+
+
+# [3.269.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.268.0...v3.269.0) (2023-02-10)
+
+
+### Features
+
+* **client-ec2:** Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state. ([f4a09f3](https://github.com/aws/aws-sdk-js-v3/commit/f4a09f3ecaf92fd97252a5aaff706c056f7278bb))
+
+
+
+
+
+# [3.267.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.1...v3.267.0) (2023-02-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.266.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.0...v3.266.1) (2023-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.266.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.265.0...v3.266.0) (2023-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.264.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.263.0...v3.264.0) (2023-02-02)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for EC2. ([3ff7382](https://github.com/aws/aws-sdk-js-v3/commit/3ff7382c23805549032fe911ea4fd3a52cba3ce3))
+
+
+
+
+
+# [3.262.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.261.0...v3.262.0) (2023-01-31)
+
+
+### Features
+
+* **client-ec2:** This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K. ([02a5e1a](https://github.com/aws/aws-sdk-js-v3/commit/02a5e1a84c3db2e8599b374e46e98756ca1dbb5e))
+
+
+
+
+
+# [3.261.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.260.0...v3.261.0) (2023-01-30)
+
+
+### Bug Fixes
+
+* **codegen:** safe access for error code location ([#4367](https://github.com/aws/aws-sdk-js-v3/issues/4367)) ([8991512](https://github.com/aws/aws-sdk-js-v3/commit/899151267fe593bb3cf18917a09108b93cf96fa2))
+
+
+### Features
+
+* **client-ec2:** We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route. ([52a9d0c](https://github.com/aws/aws-sdk-js-v3/commit/52a9d0c3609b4c47bf405e49422887c748970926))
+
+
+
+
+
+# [3.259.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.258.0...v3.259.0) (2023-01-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.258.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.257.0...v3.258.0) (2023-01-25)
+
+
+### Features
+
+* **client-ec2:** This release adds new functionality that allows customers to provision IPv6 CIDR blocks through Amazon VPC IP Address Manager (IPAM) as well as allowing customers to utilize IPAM Resource Discovery APIs. ([8973fbd](https://github.com/aws/aws-sdk-js-v3/commit/8973fbd8b97ea952c3ab2ef7feebdbecd83d3b41))
+
+
+
+
+
+# [3.257.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.256.0...v3.257.0) (2023-01-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.256.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.255.0...v3.256.0) (2023-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.255.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.254.0...v3.255.0) (2023-01-20)
+
+
+### Features
+
+* **client-ec2:** C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz. ([2b55e36](https://github.com/aws/aws-sdk-js-v3/commit/2b55e365809f2194fdac6809c5c06609205204fd))
+
+
+
+
+
+# [3.254.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.253.0...v3.254.0) (2023-01-19)
+
+
+### Features
+
+* **checksum:** replace Hash with Checksum ([#4346](https://github.com/aws/aws-sdk-js-v3/issues/4346)) ([172b4f3](https://github.com/aws/aws-sdk-js-v3/commit/172b4f3475370b386271750436004706b36bc056))
+* **client-ec2:** Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value. ([a165989](https://github.com/aws/aws-sdk-js-v3/commit/a16598929907a89e0c293678c2f2e1c3d7faf865))
+
+
+
+
+
+# [3.252.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.251.0...v3.252.0) (2023-01-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.251.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.250.0...v3.251.0) (2023-01-13)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for EC2. ([975395f](https://github.com/aws/aws-sdk-js-v3/commit/975395f139e53dd47ac063d0ad950031ddcb6cba))
+
+
+
+
+
+# [3.245.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.244.0...v3.245.0) (2023-01-05)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.241.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.240.0...v3.241.0) (2022-12-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.238.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.237.0...v3.238.0) (2022-12-23)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.236.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.235.0...v3.236.0) (2022-12-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.235.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.234.0...v3.235.0) (2022-12-20)
+
+
+### Features
+
+* **client-ec2:** Adds support for pagination in the EC2 DescribeImages API. ([a1e5ea8](https://github.com/aws/aws-sdk-js-v3/commit/a1e5ea842369429ccb818b2f4bcb26c432b97e70))
+
+
+
+
+
+# [3.234.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.233.0...v3.234.0) (2022-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.231.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.230.0...v3.231.0) (2022-12-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.229.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.228.0...v3.229.0) (2022-12-12)
+
+
+### Features
+
+* **client-ec2:** This release updates DescribeFpgaImages to show supported instance types of AFIs in its response. ([e6f3672](https://github.com/aws/aws-sdk-js-v3/commit/e6f36721554bcbdaf46d7ed34d83dcdf111c519e))
+
+
+
+
+
+# [3.226.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.225.0...v3.226.0) (2022-12-07)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.224.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.223.0...v3.224.0) (2022-12-05)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for EC2. ([7446494](https://github.com/aws/aws-sdk-js-v3/commit/74464943a89d7d7785cf8fa1ba17f8146dd5bb3d))
+
+
+
+
+
+# [3.223.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.222.0...v3.223.0) (2022-12-02)
+
+
+### Bug Fixes
+
+* **clients:** remove unconditional inclusion of util-retry ([#4246](https://github.com/aws/aws-sdk-js-v3/issues/4246)) ([3baeb44](https://github.com/aws/aws-sdk-js-v3/commit/3baeb445fb399fa3b6d81e89e88c22b0c0a691cc))
+
+
+
+
+
+# [3.222.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.221.0...v3.222.0) (2022-12-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.220.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.219.0...v3.220.0) (2022-11-29)
+
+
+### Features
+
+* **client-ec2:** This release adds support for AWS Verified Access and the Hpc6id Amazon EC2 compute optimized instance type, which features 3rd generation Intel Xeon Scalable processors. ([e0d2198](https://github.com/aws/aws-sdk-js-v3/commit/e0d219808aa30864e04ed31da29d1d2563d2e757))
+
+
+
+
+
+# [3.219.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.218.0...v3.219.0) (2022-11-29)
+
+
+### Features
+
+* **client-ec2:** Introduces ENA Express, which uses AWS SRD and dynamic routing to increase throughput and minimize latency, adds support for trust relationships between Reachability Analyzer and AWS Organizations to enable cross-account analysis, and adds support for Infrastructure Performance metric subscriptions. ([394dcfc](https://github.com/aws/aws-sdk-js-v3/commit/394dcfcf94f76142605687ba21f7fde13ae94714))
+
+
+
+
+
+# [3.218.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.217.0...v3.218.0) (2022-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.216.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.215.0...v3.216.0) (2022-11-22)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.215.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.214.0...v3.215.0) (2022-11-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.214.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.213.0...v3.214.0) (2022-11-18)
+
+
+### Features
+
+* **client-ec2:** This release adds support for copying an Amazon Machine Image's tags when copying an AMI. ([14571fb](https://github.com/aws/aws-sdk-js-v3/commit/14571fb91d6d9581fb625e45b25abd49f1eb2380))
+
+
+
+
+
+# [3.213.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.212.0...v3.213.0) (2022-11-17)
+
+
+### Features
+
+* **client-ec2:** This release adds a new optional parameter "privateIpAddress" for the CreateNatGateway API. PrivateIPAddress will allow customers to select a custom Private IPv4 address instead of having it be auto-assigned. ([db91280](https://github.com/aws/aws-sdk-js-v3/commit/db912805033a437cc63004f8caafbdd595abf1a1))
+
+
+
+
+
+# [3.212.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.211.0...v3.212.0) (2022-11-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.211.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.210.0...v3.211.0) (2022-11-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.210.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.209.0...v3.210.0) (2022-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.209.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.208.0...v3.209.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* **clients:** remove unconditional add of util-base64 node and browser modules ([#4170](https://github.com/aws/aws-sdk-js-v3/issues/4170)) ([24ec718](https://github.com/aws/aws-sdk-js-v3/commit/24ec718ea19309059d8b923c0b5c4265d308a36f))
+* **clients:** use default no-op logger in clients codegen ([#4171](https://github.com/aws/aws-sdk-js-v3/issues/4171)) ([9721730](https://github.com/aws/aws-sdk-js-v3/commit/9721730bc3ceba8a8b80ad95e9c893e55e30272e))
+
+
+
+
+
+# [3.208.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.207.0...v3.208.0) (2022-11-10)
+
+
+### Features
+
+* **client-ec2:** This release adds a new price capacity optimized allocation strategy for Spot Instances to help customers optimize provisioning of Spot Instances via EC2 Auto Scaling, EC2 Fleet, and Spot Fleet. It allocates Spot Instances based on both spare capacity availability and Spot Instance price. ([6f4d604](https://github.com/aws/aws-sdk-js-v3/commit/6f4d6046af15788874f42229fae1a5103d2c80b5))
+
+
+
+
+
+# [3.207.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.206.0...v3.207.0) (2022-11-09)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 Trn1 instances, powered by AWS Trainium chips, are purpose built for high-performance deep learning training. u-24tb1.112xlarge and u-18tb1.112xlarge High Memory instances are purpose-built to run large in-memory databases. ([f0aeeb1](https://github.com/aws/aws-sdk-js-v3/commit/f0aeeb1a032045f9ec3959f58139f47a3715503f))
+
+
+
+
+
+# [3.206.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.205.0...v3.206.0) (2022-11-08)
+
+
+### Features
+
+* **client-ec2:** This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager ([66a8faf](https://github.com/aws/aws-sdk-js-v3/commit/66a8faff173adb0ccfb654b99d5e7a3cfd9622d8))
+
+
+
+
+
+# [3.205.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.204.0...v3.205.0) (2022-11-07)
+
+
+### Features
+
+* **client-ec2:** This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes. ([f7b7c63](https://github.com/aws/aws-sdk-js-v3/commit/f7b7c6377423d6759d4172b2aaba8aa93c5b617a))
+
+
+
+
+
+# [3.204.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.203.0...v3.204.0) (2022-11-04)
+
+
+### Features
+
+* **client-ec2:** This release adds API support for the recipient of an AMI account share to remove shared AMI launch permissions. ([59dc76d](https://github.com/aws/aws-sdk-js-v3/commit/59dc76dd5fc2a5a2bb56982b55ccbce6fa9b7ed6))
+
+
+
+
+
+# [3.202.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.201.0...v3.202.0) (2022-11-02)
+
+
+### Bug Fixes
+
+* **codegen:** aws-query protocol, distinguish explicit empty list ([#4003](https://github.com/aws/aws-sdk-js-v3/issues/4003)) ([8e10769](https://github.com/aws/aws-sdk-js-v3/commit/8e10769b6146f93c0674686fa547290292714917))
+
+
+
+
+
+# [3.201.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.200.0...v3.201.0) (2022-11-01)
+
+
+### Features
+
+* end support for Node.js 12.x ([#4123](https://github.com/aws/aws-sdk-js-v3/issues/4123)) ([83f913e](https://github.com/aws/aws-sdk-js-v3/commit/83f913ec2ac3878d8726c6964f585550dc5caf3e))
+
+
+
+
+
+# [3.200.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.199.0...v3.200.0) (2022-10-31)
+
+
+### Features
+
+* **client-ec2:** Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another. ([dba90b0](https://github.com/aws/aws-sdk-js-v3/commit/dba90b03c11ef100ad1afa36c8ffabb729f05b4e))
+
+
+
+
+
+# [3.199.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.198.0...v3.199.0) (2022-10-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.198.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.197.0...v3.198.0) (2022-10-27)
+
+
+### Features
+
+* **client-ec2:** Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance. ([c980e67](https://github.com/aws/aws-sdk-js-v3/commit/c980e67bfad3191dab93e0cf1aa9eaec6addf08b))
+
+
+
+
+
+# [3.197.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.196.0...v3.197.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* **types:** expand custom endpoint type ([#4097](https://github.com/aws/aws-sdk-js-v3/issues/4097)) ([3620ce4](https://github.com/aws/aws-sdk-js-v3/commit/3620ce4162435b9688823162281140f40365b14c))
+
+
+
+
+
+# [3.196.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.195.0...v3.196.0) (2022-10-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.194.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.193.0...v3.194.0) (2022-10-21)
+
+
+### Features
+
+* **endpoint:** endpoint models for awsquery protocol ([#4070](https://github.com/aws/aws-sdk-js-v3/issues/4070)) ([41bb10d](https://github.com/aws/aws-sdk-js-v3/commit/41bb10dc09390b4fe0a6578feb6584c15b8b8186))
+
+
+
+
+
+# [3.193.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.192.0...v3.193.0) (2022-10-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.192.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.191.0...v3.192.0) (2022-10-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.190.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.189.0...v3.190.0) (2022-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.188.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.187.0...v3.188.0) (2022-10-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.186.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.185.0...v3.186.0) (2022-10-06)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-10-06 ([ef071d5](https://github.com/aws/aws-sdk-js-v3/commit/ef071d5e47566def814205ab35907391a2918266))
+
+
+
+
+
+# [3.185.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.184.0...v3.185.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* **codegen:** add deser check for x-amz-request-id ([#4015](https://github.com/aws/aws-sdk-js-v3/issues/4015)) ([6ff07bd](https://github.com/aws/aws-sdk-js-v3/commit/6ff07bd7e72bd56725f318013ac1d6d0fbbcdd9a))
+
+
+
+
+
+# [3.184.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.183.0...v3.184.0) (2022-10-04)
+
+
+### Features
+
+* **client-ec2:** Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs. ([cbd2640](https://github.com/aws/aws-sdk-js-v3/commit/cbd2640efb3ace31a5abb75d603599324c413f57))
+
+
+
+
+
+# [3.183.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.182.0...v3.183.0) (2022-10-03)
+
+
+### Features
+
+* **client-ec2:** Adding an imdsSupport attribute to EC2 AMIs ([7304adf](https://github.com/aws/aws-sdk-js-v3/commit/7304adf7306997875f660cb0f2beab7efd3a9fbd))
+
+
+
+
+
+# [3.181.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.180.0...v3.181.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* **clients:** make parseErrorBody async ([#3999](https://github.com/aws/aws-sdk-js-v3/issues/3999)) ([2558c93](https://github.com/aws/aws-sdk-js-v3/commit/2558c93c050357ac6dc47aa0452b15b12ebfd676))
+* **clients:** populate message field when parsing errors ([#3995](https://github.com/aws/aws-sdk-js-v3/issues/3995)) ([02e47f1](https://github.com/aws/aws-sdk-js-v3/commit/02e47f14397ae0a5d2e2883350d038b307fdcdb4))
+* **clients:** update message in Error key in case of XML protocol ([#4000](https://github.com/aws/aws-sdk-js-v3/issues/4000)) ([057f686](https://github.com/aws/aws-sdk-js-v3/commit/057f686f217caa4e277bbe6e2905decf97b0fad1))
+
+
+### Features
+
+* **client-ec2:** u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases. ([66a6a45](https://github.com/aws/aws-sdk-js-v3/commit/66a6a455dd580ebadbcdb1bb5dbc07b753aca2ff))
+
+
+
+
+
+# [3.180.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.179.0...v3.180.0) (2022-09-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.179.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.178.0...v3.179.0) (2022-09-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.178.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.177.0...v3.178.0) (2022-09-23)
+
+
+### Features
+
+* **client-ec2:** Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest ([8c58db8](https://github.com/aws/aws-sdk-js-v3/commit/8c58db801d6687226d6462c491f42af303f554bb))
+
+
+
+
+
+# [3.177.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.176.0...v3.177.0) (2022-09-22)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Amazon EC2. ([36ac02c](https://github.com/aws/aws-sdk-js-v3/commit/36ac02ce71f727af23452bc3e024707d1840f6b4))
+
+
+
+
+
+# [3.175.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.174.0...v3.175.0) (2022-09-20)
+
+
+### Features
+
+* **client-ec2:** This release adds support for blocked paths to Amazon VPC Reachability Analyzer. ([5412f69](https://github.com/aws/aws-sdk-js-v3/commit/5412f69bb3d6cc2897833d080dc15e8c1b7868a1))
+
+
+
+
+
+# [3.174.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.173.0...v3.174.0) (2022-09-19)
+
+
+### Features
+
+* **client-ec2:** This release adds CapacityAllocations field to DescribeCapacityReservations ([22b9a0e](https://github.com/aws/aws-sdk-js-v3/commit/22b9a0e6996809435dee2611b42e6ec654086ac0))
+
+
+
+
+
+# [3.172.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.171.0...v3.172.0) (2022-09-15)
+
+
+### Features
+
+* **client-ec2:** This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions. ([7b3d77d](https://github.com/aws/aws-sdk-js-v3/commit/7b3d77d6af837ee5f263005a647c132de43a99b9))
+
+
+
+
+
+# [3.171.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.170.0...v3.171.0) (2022-09-14)
+
+
+### Features
+
+* **client-ec2:** This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations. ([272b997](https://github.com/aws/aws-sdk-js-v3/commit/272b99714de58fe75354127bfc69ae7585839b9e))
+
+
+
+
+
+# [3.170.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.169.0...v3.170.0) (2022-09-13)
+
+
+### Features
+
+* **client-ec2:** Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing. ([9346a11](https://github.com/aws/aws-sdk-js-v3/commit/9346a11303f2f657e408a95e926c262905d701ff))
+
+
+
+
+
+# [3.169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.168.0...v3.169.0) (2022-09-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.167.0...v3.168.0) (2022-09-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.166.0...v3.167.0) (2022-09-08)
+
+
+### Features
+
+* **client-ec2:** This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type ([aa03c47](https://github.com/aws/aws-sdk-js-v3/commit/aa03c472758ead17d235499a496ea7613eb0f2ce))
+
+
+
+
+
+# [3.166.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.165.0...v3.166.0) (2022-09-07)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Amazon EC2. ([234c407](https://github.com/aws/aws-sdk-js-v3/commit/234c40716996fc0b9b6904740c2bce44ff21ed7e))
+
+
+
+
+
+# [3.165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.164.0...v3.165.0) (2022-09-06)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.162.0...v3.163.0) (2022-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.161.0...v3.162.0) (2022-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.160.0...v3.161.0) (2022-08-30)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-08-30 ([59043d3](https://github.com/aws/aws-sdk-js-v3/commit/59043d3755015c9185990f3ad850aaded13bd58c))
+
+
+
+
+
+# [3.160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.159.0...v3.160.0) (2022-08-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.158.0...v3.159.0) (2022-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.155.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.154.0...v3.155.0) (2022-08-22)
+
+
+### Features
+
+* **client-ec2:** R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz. ([5265b7b](https://github.com/aws/aws-sdk-js-v3/commit/5265b7b39b10d2e864e3e4ab0e5646d148c70954))
+
+
+
+
+
+# [3.154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.153.0...v3.154.0) (2022-08-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.153.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.152.0...v3.153.0) (2022-08-18)
+
+
+### Features
+
+* **client-ec2:** This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs ([a7c0bbd](https://github.com/aws/aws-sdk-js-v3/commit/a7c0bbd50e15fdfe4b59669684bbea9f9427002f))
+
+
+
+
+
+# [3.150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.149.0...v3.150.0) (2022-08-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.147.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.146.0...v3.147.0) (2022-08-10)
+
+
+### Features
+
+* **client-ec2:** This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances. ([8917e47](https://github.com/aws/aws-sdk-js-v3/commit/8917e47393dc7ba118a5ddc0580f4ad43eaa731a))
+
+
+
+
+
+# [3.145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.144.0...v3.145.0) (2022-08-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.141.0...v3.142.0) (2022-08-02)
+
+
+### Features
+
+* **codegen:** general data mapping function ([#3830](https://github.com/aws/aws-sdk-js-v3/issues/3830)) ([9417eae](https://github.com/aws/aws-sdk-js-v3/commit/9417eae722806799fb4c15c07921574268c1165c))
+
+
+
+
+
+# [3.141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.140.0...v3.141.0) (2022-08-01)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-08-01 ([aaf49f2](https://github.com/aws/aws-sdk-js-v3/commit/aaf49f21b371412e6ea7e00890b71a7b31991b66))
+
+
+
+
+
+# [3.140.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.139.0...v3.140.0) (2022-07-29)
+
+
+### Features
+
+* **client-ec2:** Documentation updates for Amazon EC2. ([504891a](https://github.com/aws/aws-sdk-js-v3/commit/504891a60f4cf5f642a8092f32747fad0d8d3f99))
+
+
+
+
+
+# [3.139.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.138.0...v3.139.0) (2022-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.136.1...v3.137.0) (2022-07-26)
+
+
+### Features
+
+* **namespaces:** remove namespaces with only a log filter ([#3823](https://github.com/aws/aws-sdk-js-v3/issues/3823)) ([33e6822](https://github.com/aws/aws-sdk-js-v3/commit/33e68228fb64c53dd8f89e6be76dd5f46edc3cfd))
+
+
+
+
+
+# [3.136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.135.0...v3.136.0) (2022-07-22)
+
+
+### Features
+
+* **client-ec2:** Added support for EC2 M1 Mac instances. For more information, please visit aws.amazon.com/mac. ([23fdb65](https://github.com/aws/aws-sdk-js-v3/commit/23fdb65cf942843e68b2f7f6057bea5965ad7d2f))
+
+
+
+
+
+# [3.132.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.131.0...v3.132.0) (2022-07-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.130.0...v3.131.0) (2022-07-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.129.0...v3.130.0) (2022-07-14)
+
+
+### Features
+
+* **client-ec2:** This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways. ([57b3f71](https://github.com/aws/aws-sdk-js-v3/commit/57b3f71b0466f9b6048ce4368a4d7f75dc38bab8))
+
+
+
+
+
+# [3.128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.127.0...v3.128.0) (2022-07-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.126.0...v3.127.0) (2022-07-11)
+
+
+### Features
+
+* **client-ec2:** Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs. ([5105355](https://github.com/aws/aws-sdk-js-v3/commit/5105355828f8ca0d581309866f885d80b535f88b))
+
+
+
+
+
+# [3.121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.120.0...v3.121.0) (2022-06-30)
+
+
+### Features
+
+* **clients:** fallback to status code for unmodeled errors ([#3752](https://github.com/aws/aws-sdk-js-v3/issues/3752)) ([49bcc4f](https://github.com/aws/aws-sdk-js-v3/commit/49bcc4f153e890e798a8e82fd5fc397b2dcc449f))
+
+
+
+
+
+# [3.119.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.118.1...v3.119.0) (2022-06-28)
+
+
+### Features
+
+* **client-ec2:** This release adds a new spread placement group to EC2 Placement Groups: host level spread, which spread instances between physical hosts, available to Outpost customers only. CreatePlacementGroup and DescribePlacementGroups APIs were updated with a new parameter: SpreadLevel to support this feature. ([89baffe](https://github.com/aws/aws-sdk-js-v3/commit/89baffe64c90d3cbc83222d3ce26e6f2fbe70ccb))
+
+
+
+
+
+## [3.118.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.118.0...v3.118.1) (2022-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.117.0...v3.118.0) (2022-06-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.115.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.114.0...v3.115.0) (2022-06-21)
+
+
+### Features
+
+* **client-ec2:** This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport. ([8f2eb0c](https://github.com/aws/aws-sdk-js-v3/commit/8f2eb0cff2321db7ee3623599d7173dfba9e3785))
+
+
+
+
+
+# [3.112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.111.0...v3.112.0) (2022-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.109.0...v3.110.0) (2022-06-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.108.1...v3.109.0) (2022-06-13)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.107.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.106.0...v3.107.0) (2022-06-08)
+
+
+### Bug Fixes
+
+* **clients:** handle empty xml tags ([#3623](https://github.com/aws/aws-sdk-js-v3/issues/3623)) ([543a0ce](https://github.com/aws/aws-sdk-js-v3/commit/543a0ce13bebc6e8a5f4cc8e1bd4de67692d4034))
+
+
+
+
+
+# [3.105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.104.0...v3.105.0) (2022-06-06)
+
+
+### Features
+
+* **clients:** support recursion detection in Lambda ([#3654](https://github.com/aws/aws-sdk-js-v3/issues/3654)) ([ecfe46e](https://github.com/aws/aws-sdk-js-v3/commit/ecfe46ea1fd8b6e3812b75b3dc6c03554fb4b3fa))
+
+
+
+
+
+# [3.100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.99.0...v3.100.0) (2022-05-26)
+
+
+### Features
+
+* **client-ec2:** C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads. ([58efcc5](https://github.com/aws/aws-sdk-js-v3/commit/58efcc5c87d9de1ebf8c939e46e3f75f8ebd58f1))
+
+
+
+
+
+# [3.99.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.98.0...v3.99.0) (2022-05-25)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.98.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.97.0...v3.98.0) (2022-05-24)
+
+
+### Features
+
+* **client-ec2:** Stop Protection feature enables customers to protect their instances from accidental stop actions. ([097a389](https://github.com/aws/aws-sdk-js-v3/commit/097a38940e73dfbe0f732680e6c5360488ebc799))
+
+
+
+
+
+# [3.95.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.94.0...v3.95.0) (2022-05-19)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.94.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.93.0...v3.94.0) (2022-05-18)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.92.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.91.0...v3.92.0) (2022-05-16)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.90.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.89.0...v3.90.0) (2022-05-12)
+
+
+### Features
+
+* **client-ec2:** This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target. ([ed7b520](https://github.com/aws/aws-sdk-js-v3/commit/ed7b5208c5072a12a20e7080e84ac9e3091b6f99))
+
+
+
+
+
+# [3.89.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.88.0...v3.89.0) (2022-05-11)
+
+
+### Features
+
+* **client-ec2:** This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'. ([afd213b](https://github.com/aws/aws-sdk-js-v3/commit/afd213b43be257f4192f12b197c98f9870bd5a06))
+
+
+
+
+
+# [3.88.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.87.0...v3.88.0) (2022-05-10)
+
+
+### Features
+
+* **client-ec2:** Added support for using NitroTPM and UEFI Secure Boot on EC2 instances. ([2ad1bbf](https://github.com/aws/aws-sdk-js-v3/commit/2ad1bbf5783e1f469cf2253609cda57b40f8325e))
+
+
+
+
+
+# [3.87.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.86.0...v3.87.0) (2022-05-09)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.86.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.85.0...v3.86.0) (2022-05-06)
+
+
+### Features
+
+* **client-ec2:** Add new state values for IPAMs, IPAM Scopes, and IPAM Pools. ([6c6525c](https://github.com/aws/aws-sdk-js-v3/commit/6c6525cf6f4f7bd129bb202a1b338af01dc5e57f))
+
+
+
+
+
+# [3.85.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.84.0...v3.85.0) (2022-05-05)
+
+
+### Features
+
+* **client-ec2:** Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage ([1aefead](https://github.com/aws/aws-sdk-js-v3/commit/1aefead30f40900f31c31d8b8afb95ce8a1aeda2))
+* **codegen:** add codegen indicator comment to all generated files ([#3592](https://github.com/aws/aws-sdk-js-v3/issues/3592)) ([567a530](https://github.com/aws/aws-sdk-js-v3/commit/567a5304232fcc1f9db3fd3df545054de8336b4b))
+
+
+
+
+
+# [3.83.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.82.0...v3.83.0) (2022-05-03)
+
+
+### Features
+
+* **client-ec2:** Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter. ([75a68fd](https://github.com/aws/aws-sdk-js-v3/commit/75a68fd0fa8a44060c46771f323083d9e25c17f3))
+
+
+
+
+
+# [3.82.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.81.0...v3.82.0) (2022-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.81.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.80.0...v3.81.0) (2022-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.80.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.79.0...v3.80.0) (2022-04-28)
+
+
+### Features
+
+* **client-ec2:** This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair. ([61e9e39](https://github.com/aws/aws-sdk-js-v3/commit/61e9e39be52d91cca705d0386a119bd62ab748c8))
+
+
+
+
+
+# [3.79.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.78.0...v3.79.0) (2022-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.78.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.77.0...v3.78.0) (2022-04-26)
+
+
+### Features
+
+* **types:** add pagination stopOnSameToken option ([#3524](https://github.com/aws/aws-sdk-js-v3/issues/3524)) ([9bf73e8](https://github.com/aws/aws-sdk-js-v3/commit/9bf73e81b8d9be9f12c72cbefbe26c502d1873c6))
+
+
+
+
+
+# [3.76.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.75.0...v3.76.0) (2022-04-22)
+
+
+### Features
+
+* **client-ec2:** Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state. ([047c131](https://github.com/aws/aws-sdk-js-v3/commit/047c13158e4f43b53dd1525e028888907026a278))
+
+
+
+
+
+# [3.75.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.74.0...v3.75.0) (2022-04-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.74.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.73.0...v3.74.0) (2022-04-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.72.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.71.0...v3.72.0) (2022-04-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.71.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.70.0...v3.71.0) (2022-04-14)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.69.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.68.0...v3.69.0) (2022-04-12)
+
+
+### Features
+
+* **client-ec2:** X2idn and X2iedn instances are powered by 3rd generation Intel Xeon Scalable processors with an all-core turbo frequency up to 3.5 GHzAmazon EC2. C6a instances are powered by 3rd generation AMD EPYC processors. ([57c38e8](https://github.com/aws/aws-sdk-js-v3/commit/57c38e8466cfe494da95fa3964967ab8272e6152))
+
+
+
+
+
+# [3.67.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.66.0...v3.67.0) (2022-04-08)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.60.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.59.0...v3.60.0) (2022-03-30)
+
+
+### Features
+
+* **client-ec2:** This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default ([4e3290e](https://github.com/aws/aws-sdk-js-v3/commit/4e3290e38f5a6d984aaf293c303f92f09ec9a229))
+
+
+
+
+
+# [3.58.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.57.0...v3.58.0) (2022-03-28)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.57.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.56.0...v3.57.0) (2022-03-25)
+
+
+### Features
+
+* **client-ec2:** This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway. ([62b49fc](https://github.com/aws/aws-sdk-js-v3/commit/62b49fcdf2a24f886b9b621047c1e49b9fb721e4))
+
+
+
+
+
+# [3.56.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.55.0...v3.56.0) (2022-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.55.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.1...v3.55.0) (2022-03-21)
+
+
+### Features
+
+* **clients:** update clients as of 03/21/2022 ([#3455](https://github.com/aws/aws-sdk-js-v3/issues/3455)) ([7cd40a5](https://github.com/aws/aws-sdk-js-v3/commit/7cd40a5aeaddf03b8d27e814b3a2b441c1217dfb))
+
+
+
+
+
+## [3.54.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.0...v3.54.1) (2022-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.54.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.53.1...v3.54.0) (2022-03-11)
+
+
+### Features
+
+* **clients:** update clients as of 2022/03/10 ([#3411](https://github.com/aws/aws-sdk-js-v3/issues/3411)) ([8fa517a](https://github.com/aws/aws-sdk-js-v3/commit/8fa517a2c56d2f98a2e4a9c4ea6fd99b6ce61a71))
+
+
+
+
+
+# [3.53.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.52.0...v3.53.0) (2022-02-24)
+
+
+### Features
+
+* **clients:** generate service exceptions as classes ([#3267](https://github.com/aws/aws-sdk-js-v3/issues/3267)) ([ca64fee](https://github.com/aws/aws-sdk-js-v3/commit/ca64feed3351c394c07dc26b782a5760a396a074))
+* **clients:** update clients as of 2022/02/23 ([#3356](https://github.com/aws/aws-sdk-js-v3/issues/3356)) ([b6b2e25](https://github.com/aws/aws-sdk-js-v3/commit/b6b2e258add12c73d807483ca078401a6d84a12b))
+
+
+
+
+
+# [3.52.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.51.0...v3.52.0) (2022-02-18)
+
+
+### Features
+
+* **clients:** update clients as of 2022/02/18 ([#3335](https://github.com/aws/aws-sdk-js-v3/issues/3335)) ([717b06f](https://github.com/aws/aws-sdk-js-v3/commit/717b06fc43e9876a6f8040147b75ad5da38b1e0f))
+
+
+
+
+
+# [3.51.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.50.0...v3.51.0) (2022-02-12)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.50.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.49.0...v3.50.0) (2022-02-08)
+
+
+### Features
+
+* **clients:** update clients as of 02/04/2022 ([#3280](https://github.com/aws/aws-sdk-js-v3/issues/3280)) ([63d7f8c](https://github.com/aws/aws-sdk-js-v3/commit/63d7f8c539e0fd782fa5bf997bd6ac2730e4bfda))
+
+
+
+
+
+# [3.49.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.48.0...v3.49.0) (2022-01-29)
+
+
+### Features
+
+* **clients:** update clients as of 01/28/2022 ([#3263](https://github.com/aws/aws-sdk-js-v3/issues/3263)) ([c207cf4](https://github.com/aws/aws-sdk-js-v3/commit/c207cf4a70ba9ef14dc5b94da7883b0889d64918))
+
+
+
+
+
+# [3.48.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.2...v3.48.0) (2022-01-22)
+
+
+### Features
+
+* **clients:** update clients as of 2022/01/21 ([#3228](https://github.com/aws/aws-sdk-js-v3/issues/3228)) ([fa713ef](https://github.com/aws/aws-sdk-js-v3/commit/fa713efca6b2f424c27535d000359f08830960b1))
+
+
+
+
+
+## [3.47.2](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.1...v3.47.2) (2022-01-21)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+## [3.47.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.0-release-test-1...v3.47.1) (2022-01-20)
+
+**Note:** Version bump only for package @aws-sdk/client-ec2
+
+
+
+
+
+# [3.47.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.46.0...v3.47.0) (2022-01-15)
+
+
+### Features
+
+* **clients:** update clients to use default values inferred from defaults mode ([#3192](https://github.com/aws/aws-sdk-js-v3/issues/3192)) ([9152e21](https://github.com/aws/aws-sdk-js-v3/commit/9152e210c6ec29f34bb070eaf2874039022e6ab7))
+
+
+
+
+
+# [3.46.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.45.0...v3.46.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* **clients:** update clean:dist script to delete dist-* folder ([#3155](https://github.com/aws/aws-sdk-js-v3/issues/3155)) ([cdb1709](https://github.com/aws/aws-sdk-js-v3/commit/cdb17090f82d1fc8755811c82cbed5976ec7e60b))
+
+
+### Features
+
+* **clients:** extend typedoc.json from root ([#3136](https://github.com/aws/aws-sdk-js-v3/issues/3136)) ([f6a3ef5](https://github.com/aws/aws-sdk-js-v3/commit/f6a3ef541ae2d92872d09d8cab6727911287ebb2))
+* **clients:** update clients as of 2021/01/07 ([#3163](https://github.com/aws/aws-sdk-js-v3/issues/3163)) ([6648b07](https://github.com/aws/aws-sdk-js-v3/commit/6648b07ea97691d2fed55eab49831646543b648b))
+* end support for Node.js 10.x ([#3122](https://github.com/aws/aws-sdk-js-v3/issues/3122)) ([7acf18a](https://github.com/aws/aws-sdk-js-v3/commit/7acf18abd3fb1cc461f809110cdb0d7968c2070e))
+
+
+
+
+
+# [3.45.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.44.0...v3.45.0) (2021-12-23)
+
+
+### Features
+
+* **clients:** update clients as of 2021/12/23 ([#3110](https://github.com/aws/aws-sdk-js-v3/issues/3110)) ([5d638e1](https://github.com/aws/aws-sdk-js-v3/commit/5d638e188ce64fa80fe36b8cba79ba63b80b50b7))
+
+
+
+
+
+# [3.44.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.43.0...v3.44.0) (2021-12-02)
+
+
+### Features
+
+* **clients:** update clients as of 2021/11/30 ([#3077](https://github.com/aws/aws-sdk-js-v3/issues/3077)) ([2bdba30](https://github.com/aws/aws-sdk-js-v3/commit/2bdba30963e550728ba2903d57daa1e666a29d71))
+* **clients:** update clients as of 2021/12/01 ([#3078](https://github.com/aws/aws-sdk-js-v3/issues/3078)) ([9c44188](https://github.com/aws/aws-sdk-js-v3/commit/9c44188265ea484d55c50848d7daae5571007ce0))
+
+
+
+
+
+# [3.43.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.42.0...v3.43.0) (2021-11-29)
+
+
+### Features
+
+* **clients:** update clients as of 11/28/2021 ([#3072](https://github.com/aws/aws-sdk-js-v3/issues/3072)) ([2ad1622](https://github.com/aws/aws-sdk-js-v3/commit/2ad1622ba8586b926fe508055211803bb29e3976))
+
+
+
+
+
+# [3.42.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.41.0...v3.42.0) (2021-11-19)
+
+
+### Features
+
+* **clients:** update clients as of 11/18/2021 ([#3039](https://github.com/aws/aws-sdk-js-v3/issues/3039)) ([d2b2c45](https://github.com/aws/aws-sdk-js-v3/commit/d2b2c453315fc7bff798c1fb97c792e59274b4d6))
+
+
+
+
+
+# [3.41.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.40.1...v3.41.0) (2021-11-11)
+
+
+### Features
+
+* **clients:** update clients as of 2021/11/11 ([#3015](https://github.com/aws/aws-sdk-js-v3/issues/3015)) ([3d82c4e](https://github.com/aws/aws-sdk-js-v3/commit/3d82c4e3c4d174533f46ce35495cf5cffabdb35a))
+
+
+
+
+
+# [3.40.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.39.0...v3.40.0) (2021-11-05)
+
+
+### Features
+
+* **clients:** populate variants in endpoints hashes ([#2974](https://github.com/aws/aws-sdk-js-v3/issues/2974)) ([0dd68ef](https://github.com/aws/aws-sdk-js-v3/commit/0dd68ef8b04ea0e96e43b05a9a10221e433fdf86))
+* **clients:** update clients as of 2021/11/05 ([#2994](https://github.com/aws/aws-sdk-js-v3/issues/2994)) ([f5ecc31](https://github.com/aws/aws-sdk-js-v3/commit/f5ecc3147035a1f3d2d74cfed147999927ea8256))
+
+
+
+
+
 # [3.39.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.38.0...v3.39.0) (2021-10-29)
 
 

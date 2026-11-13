@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import { ListConnectionsRequest, ListConnectionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListConnectionsCommand,
-  serializeAws_json1_0ListConnectionsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListConnectionsRequest, ListConnectionsResponse } from "../models/models_0";
+import { ListConnections$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListConnectionsCommand}.
+ */
 export interface ListConnectionsCommandInput extends ListConnectionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListConnectionsCommand}.
+ */
 export interface ListConnectionsCommandOutput extends ListConnectionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface ListConnectionsCommandOutput extends ListConnectionsResponse, _
  * ```javascript
  * import { AppRunnerClient, ListConnectionsCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, ListConnectionsCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // ListConnectionsRequest
+ *   ConnectionName: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListConnectionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListConnectionsResponse
+ * //   ConnectionSummaryList: [ // ConnectionSummaryList // required
+ * //     { // ConnectionSummary
+ * //       ConnectionName: "STRING_VALUE",
+ * //       ConnectionArn: "STRING_VALUE",
+ * //       ProviderType: "GITHUB" || "BITBUCKET",
+ * //       Status: "PENDING_HANDSHAKE" || "AVAILABLE" || "ERROR" || "DELETED",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListConnectionsCommandInput - {@link ListConnectionsCommandInput}
+ * @returns {@link ListConnectionsCommandOutput}
  * @see {@link ListConnectionsCommandInput} for command's `input` shape.
  * @see {@link ListConnectionsCommandOutput} for command's `response` shape.
- * @see {@link AppRunnerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class ListConnectionsCommand extends $Command<
-  ListConnectionsCommandInput,
-  ListConnectionsCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListConnectionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListConnectionsCommandInput, ListConnectionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "ListConnectionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListConnectionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListConnectionsResponse.filterSensitiveLog,
+export class ListConnectionsCommand extends command<ListConnectionsCommandInput, ListConnectionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListConnections",
+  ListConnections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListConnectionsRequest;
+      output: ListConnectionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListConnectionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListConnectionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListConnectionsCommandOutput> {
-    return deserializeAws_json1_0ListConnectionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListConnectionsCommandInput;
+      output: ListConnectionsCommandOutput;
+    };
+  };
 }

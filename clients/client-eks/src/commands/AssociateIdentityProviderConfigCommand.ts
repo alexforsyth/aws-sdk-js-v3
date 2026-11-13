@@ -1,110 +1,157 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { AssociateIdentityProviderConfigRequest, AssociateIdentityProviderConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AssociateIdentityProviderConfigCommand,
-  serializeAws_restJson1AssociateIdentityProviderConfigCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface AssociateIdentityProviderConfigCommandInput extends AssociateIdentityProviderConfigRequest {}
-export interface AssociateIdentityProviderConfigCommandOutput
-  extends AssociateIdentityProviderConfigResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  AssociateIdentityProviderConfigRequest,
+  AssociateIdentityProviderConfigResponse,
+} from "../models/models_0";
+import { AssociateIdentityProviderConfig$ } from "../schemas/schemas_0";
 
 /**
- * <p>Associate an identity provider configuration to a cluster.</p>
- *         <p>If you want to authenticate identities using an identity provider, you can create an
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateIdentityProviderConfigCommand}.
+ */
+export interface AssociateIdentityProviderConfigCommandInput extends AssociateIdentityProviderConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateIdentityProviderConfigCommand}.
+ */
+export interface AssociateIdentityProviderConfigCommandOutput extends AssociateIdentityProviderConfigResponse, __MetadataBearer {}
+
+/**
+ * <p>Associates an identity provider configuration to a cluster.</p>
+ *          <p>If you want to authenticate identities using an identity provider, you can create an
  *             identity provider configuration and associate it to your cluster. After configuring
- *             authentication to your cluster you can create Kubernetes <code>roles</code> and
- *                 <code>clusterroles</code> to assign permissions to the roles, and then bind the
- *             roles to the identities using Kubernetes <code>rolebindings</code> and
- *                 <code>clusterrolebindings</code>. For more information see <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Using RBAC
+ *             authentication to your cluster you can create Kubernetes <code>Role</code> and
+ *                 <code>ClusterRole</code> objects, assign permissions to them, and then bind them to
+ *             the identities using Kubernetes <code>RoleBinding</code> and <code>ClusterRoleBinding</code>
+ *             objects. For more information see <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Using RBAC
  *                 Authorization</a> in the Kubernetes documentation.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, AssociateIdentityProviderConfigCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, AssociateIdentityProviderConfigCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // AssociateIdentityProviderConfigRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   oidc: { // OidcIdentityProviderConfigRequest
+ *     identityProviderConfigName: "STRING_VALUE", // required
+ *     issuerUrl: "STRING_VALUE", // required
+ *     clientId: "STRING_VALUE", // required
+ *     usernameClaim: "STRING_VALUE",
+ *     usernamePrefix: "STRING_VALUE",
+ *     groupsClaim: "STRING_VALUE",
+ *     groupsPrefix: "STRING_VALUE",
+ *     requiredClaims: { // requiredClaimsMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   clientRequestToken: "STRING_VALUE",
+ * };
  * const command = new AssociateIdentityProviderConfigCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateIdentityProviderConfigResponse
+ * //   update: { // Update
+ * //     id: "STRING_VALUE",
+ * //     status: "InProgress" || "Failed" || "Cancelled" || "Successful",
+ * //     type: "VersionUpdate" || "EndpointAccessUpdate" || "LoggingUpdate" || "ConfigUpdate" || "AssociateIdentityProviderConfig" || "DisassociateIdentityProviderConfig" || "AssociateEncryptionConfig" || "AddonUpdate" || "VpcConfigUpdate" || "AccessConfigUpdate" || "UpgradePolicyUpdate" || "ZonalShiftConfigUpdate" || "AutoModeUpdate" || "RemoteNetworkConfigUpdate" || "DeletionProtectionUpdate" || "CapabilityUpdate" || "ControlPlaneScalingConfigUpdate" || "VendedLogsUpdate" || "ControlPlaneEgressUpdate" || "VersionRollback" || "ControlPlaneComponentConfigUpdate" || "CertificateAuthorityUpdate",
+ * //     params: [ // UpdateParams
+ * //       { // UpdateParam
+ * //         type: "Version" || "PlatformVersion" || "EndpointPrivateAccess" || "EndpointPublicAccess" || "ClusterLogging" || "DesiredSize" || "LabelsToAdd" || "LabelsToRemove" || "TaintsToAdd" || "TaintsToRemove" || "MaxSize" || "MinSize" || "ReleaseVersion" || "PublicAccessCidrs" || "LaunchTemplateName" || "LaunchTemplateVersion" || "IdentityProviderConfig" || "EncryptionConfig" || "AddonVersion" || "ServiceAccountRoleArn" || "ResolveConflicts" || "MaxUnavailable" || "MaxUnavailablePercentage" || "NodeRepairEnabled" || "UpdateStrategy" || "ConfigurationValues" || "SecurityGroups" || "Subnets" || "AuthenticationMode" || "PodIdentityAssociations" || "UpgradePolicy" || "ZonalShiftConfig" || "ComputeConfig" || "StorageConfig" || "KubernetesNetworkConfig" || "RemoteNetworkConfig" || "DeletionProtection" || "NodeRepairConfig" || "RoleArn" || "RoleMappingsToAddOrUpdate" || "RoleMappingsToRemove" || "NetworkAccess" || "VendedLogs" || "UpdatedTier" || "PreviousTier" || "EnableCrossNamespace" || "DisabledServices" || "WarmPoolEnabled" || "WarmPoolMaxGroupPreparedCapacity" || "WarmPoolMinSize" || "WarmPoolState" || "WarmPoolReuseOnScaleIn" || "ControlPlaneEgressMode" || "KubeApiServerConfig" || "KubeSchedulerConfig" || "KubeControllerManagerConfig" || "ActiveCertificateAuthority" || "TrustedCertificateAuthorities" || "CertificateAuthorityId" || "SigningStatus",
+ * //         value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     errors: [ // ErrorDetails
+ * //       { // ErrorDetail
+ * //         errorCode: "SubnetNotFound" || "SecurityGroupNotFound" || "EniLimitReached" || "IpNotAvailable" || "AccessDenied" || "OperationNotPermitted" || "VpcIdNotFound" || "Unknown" || "NodeCreationFailure" || "PodEvictionFailure" || "InsufficientFreeAddresses" || "ClusterUnreachable" || "InsufficientNumberOfReplicas" || "ConfigurationConflict" || "AdmissionRequestDenied" || "UnsupportedAddonModification" || "K8sResourceNotFound",
+ * //         errorMessage: "STRING_VALUE",
+ * //         resourceIds: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     cancellation: { // Cancellation
+ * //       status: "InProgress" || "Failed" || "Successful",
+ * //       reason: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociateIdentityProviderConfigCommandInput - {@link AssociateIdentityProviderConfigCommandInput}
+ * @returns {@link AssociateIdentityProviderConfigCommandOutput}
  * @see {@link AssociateIdentityProviderConfigCommandInput} for command's `input` shape.
  * @see {@link AssociateIdentityProviderConfigCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid given the state of the cluster. Check the state of the cluster
+ *             and the associated operations.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request or operation couldn't be performed because a service is throttling
+ *             requests.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateIdentityProviderConfigCommand extends $Command<
-  AssociateIdentityProviderConfigCommandInput,
-  AssociateIdentityProviderConfigCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateIdentityProviderConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateIdentityProviderConfigCommandInput, AssociateIdentityProviderConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "AssociateIdentityProviderConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateIdentityProviderConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateIdentityProviderConfigResponse.filterSensitiveLog,
+export class AssociateIdentityProviderConfigCommand extends command<AssociateIdentityProviderConfigCommandInput, AssociateIdentityProviderConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateIdentityProviderConfig",
+  AssociateIdentityProviderConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateIdentityProviderConfigRequest;
+      output: AssociateIdentityProviderConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateIdentityProviderConfigCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociateIdentityProviderConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateIdentityProviderConfigCommandOutput> {
-    return deserializeAws_restJson1AssociateIdentityProviderConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateIdentityProviderConfigCommandInput;
+      output: AssociateIdentityProviderConfigCommandOutput;
+    };
+  };
 }

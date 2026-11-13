@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDimensionKeysRequest, DescribeDimensionKeysResponse } from "../models/models_0";
-import { PIClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PIClient";
-import {
-  deserializeAws_json1_1DescribeDimensionKeysCommand,
-  serializeAws_json1_1DescribeDimensionKeysCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDimensionKeysRequest, DescribeDimensionKeysResponse } from "../models/models_0";
+import { DescribeDimensionKeys$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDimensionKeysCommand}.
+ */
 export interface DescribeDimensionKeysCommandInput extends DescribeDimensionKeysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDimensionKeysCommand}.
+ */
 export interface DescribeDimensionKeysCommandOutput extends DescribeDimensionKeysResponse, __MetadataBearer {}
 
 /**
- * <p>For a specific time period, retrieve the top <code>N</code> dimension keys for a
- *       metric.</p>
+ * <p>For a specific time period, retrieve the top <code>N</code> dimension keys for a metric.
+ *       </p>
  *          <note>
  *             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements,
  *         only the first 500 bytes are returned.</p>
@@ -33,68 +34,106 @@ export interface DescribeDimensionKeysCommandOutput extends DescribeDimensionKey
  * ```javascript
  * import { PIClient, DescribeDimensionKeysCommand } from "@aws-sdk/client-pi"; // ES Modules import
  * // const { PIClient, DescribeDimensionKeysCommand } = require("@aws-sdk/client-pi"); // CommonJS import
+ * // import type { PIClientConfig } from "@aws-sdk/client-pi";
+ * const config = {}; // type is PIClientConfig
  * const client = new PIClient(config);
+ * const input = { // DescribeDimensionKeysRequest
+ *   ServiceType: "RDS" || "DOCDB", // required
+ *   Identifier: "STRING_VALUE", // required
+ *   StartTime: new Date("TIMESTAMP"), // required
+ *   EndTime: new Date("TIMESTAMP"), // required
+ *   Metric: "STRING_VALUE", // required
+ *   PeriodInSeconds: Number("int"),
+ *   GroupBy: { // DimensionGroup
+ *     Group: "STRING_VALUE", // required
+ *     Dimensions: [ // SanitizedStringList
+ *       "STRING_VALUE",
+ *     ],
+ *     Limit: Number("int"),
+ *   },
+ *   AdditionalMetrics: [ // AdditionalMetricsList
+ *     "STRING_VALUE",
+ *   ],
+ *   PartitionBy: {
+ *     Group: "STRING_VALUE", // required
+ *     Dimensions: [
+ *       "STRING_VALUE",
+ *     ],
+ *     Limit: Number("int"),
+ *   },
+ *   Filter: { // MetricQueryFilterMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeDimensionKeysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDimensionKeysResponse
+ * //   AlignedStartTime: new Date("TIMESTAMP"),
+ * //   AlignedEndTime: new Date("TIMESTAMP"),
+ * //   PartitionKeys: [ // ResponsePartitionKeyList
+ * //     { // ResponsePartitionKey
+ * //       Dimensions: { // DimensionMap // required
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   Keys: [ // DimensionKeyDescriptionList
+ * //     { // DimensionKeyDescription
+ * //       Dimensions: {
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       Total: Number("double"),
+ * //       AdditionalMetrics: { // AdditionalMetricsMap
+ * //         "<keys>": Number("double"),
+ * //       },
+ * //       Partitions: [ // MetricValuesList
+ * //         Number("double"),
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDimensionKeysCommandInput - {@link DescribeDimensionKeysCommandInput}
+ * @returns {@link DescribeDimensionKeysCommandOutput}
  * @see {@link DescribeDimensionKeysCommandInput} for command's `input` shape.
  * @see {@link DescribeDimensionKeysCommandOutput} for command's `response` shape.
- * @see {@link PIClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PIClientResolvedConfig | config} for PIClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>The request failed due to an unknown error.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>One of the arguments provided is invalid for this request.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>The user is not authorized to perform this request.</p>
+ *
+ * @throws {@link PIServiceException}
+ * <p>Base exception class for all service exceptions from PI service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDimensionKeysCommand extends $Command<
-  DescribeDimensionKeysCommandInput,
-  DescribeDimensionKeysCommandOutput,
-  PIClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDimensionKeysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PIClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDimensionKeysCommandInput, DescribeDimensionKeysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PIClient";
-    const commandName = "DescribeDimensionKeysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDimensionKeysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDimensionKeysResponse.filterSensitiveLog,
+export class DescribeDimensionKeysCommand extends command<DescribeDimensionKeysCommandInput, DescribeDimensionKeysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDimensionKeys",
+  DescribeDimensionKeys$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDimensionKeysRequest;
+      output: DescribeDimensionKeysResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDimensionKeysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDimensionKeysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDimensionKeysCommandOutput> {
-    return deserializeAws_json1_1DescribeDimensionKeysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDimensionKeysCommandInput;
+      output: DescribeDimensionKeysCommandOutput;
+    };
+  };
 }

@@ -1,81 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MalformedTimestampPathEpochInput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { MalformedTimestampPathEpochInput } from "../models/models_0";
 import {
-  deserializeAws_restJson1MalformedTimestampPathEpochCommand,
-  serializeAws_restJson1MalformedTimestampPathEpochCommand,
+  de_MalformedTimestampPathEpochCommand,
+  se_MalformedTimestampPathEpochCommand,
 } from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedTimestampPathEpochCommand}.
+ */
 export interface MalformedTimestampPathEpochCommandInput extends MalformedTimestampPathEpochInput {}
+/**
+ * @public
+ *
+ * The output of {@link MalformedTimestampPathEpochCommand}.
+ */
 export interface MalformedTimestampPathEpochCommandOutput extends __MetadataBearer {}
 
-export class MalformedTimestampPathEpochCommand extends $Command<
-  MalformedTimestampPathEpochCommandInput,
-  MalformedTimestampPathEpochCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: MalformedTimestampPathEpochCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<MalformedTimestampPathEpochCommandInput, MalformedTimestampPathEpochCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "MalformedTimestampPathEpochCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: MalformedTimestampPathEpochInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedTimestampPathEpochCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedTimestampPathEpochCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // MalformedTimestampPathEpochInput
+ *   timestamp: new Date("TIMESTAMP"), // required
+ * };
+ * const command = new MalformedTimestampPathEpochCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param MalformedTimestampPathEpochCommandInput - {@link MalformedTimestampPathEpochCommandInput}
+ * @returns {@link MalformedTimestampPathEpochCommandOutput}
+ * @see {@link MalformedTimestampPathEpochCommandInput} for command's `input` shape.
+ * @see {@link MalformedTimestampPathEpochCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedTimestampPathEpochCommand extends $Command
+  .classBuilder<
+    MalformedTimestampPathEpochCommandInput,
+    MalformedTimestampPathEpochCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "MalformedTimestampPathEpoch", {})
+  .n("RestJsonProtocolClient", "MalformedTimestampPathEpochCommand")
+  .f(void 0, void 0)
+  .ser(se_MalformedTimestampPathEpochCommand)
+  .de(de_MalformedTimestampPathEpochCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: MalformedTimestampPathEpochInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: MalformedTimestampPathEpochCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1MalformedTimestampPathEpochCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<MalformedTimestampPathEpochCommandOutput> {
-    return deserializeAws_restJson1MalformedTimestampPathEpochCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: MalformedTimestampPathEpochCommandInput;
+      output: MalformedTimestampPathEpochCommandOutput;
+    };
+  };
 }

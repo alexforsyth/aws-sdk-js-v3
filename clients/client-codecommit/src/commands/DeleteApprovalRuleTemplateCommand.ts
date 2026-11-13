@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { DeleteApprovalRuleTemplateInput, DeleteApprovalRuleTemplateOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteApprovalRuleTemplateCommand,
-  serializeAws_json1_1DeleteApprovalRuleTemplateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteApprovalRuleTemplateInput, DeleteApprovalRuleTemplateOutput } from "../models/models_0";
+import { DeleteApprovalRuleTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteApprovalRuleTemplateCommand}.
+ */
 export interface DeleteApprovalRuleTemplateCommandInput extends DeleteApprovalRuleTemplateInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteApprovalRuleTemplateCommand}.
+ */
 export interface DeleteApprovalRuleTemplateCommandOutput extends DeleteApprovalRuleTemplateOutput, __MetadataBearer {}
 
 /**
@@ -28,71 +29,60 @@ export interface DeleteApprovalRuleTemplateCommandOutput extends DeleteApprovalR
  * ```javascript
  * import { CodeCommitClient, DeleteApprovalRuleTemplateCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, DeleteApprovalRuleTemplateCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // DeleteApprovalRuleTemplateInput
+ *   approvalRuleTemplateName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteApprovalRuleTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteApprovalRuleTemplateOutput
+ * //   approvalRuleTemplateId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteApprovalRuleTemplateCommandInput - {@link DeleteApprovalRuleTemplateCommandInput}
+ * @returns {@link DeleteApprovalRuleTemplateCommandOutput}
  * @see {@link DeleteApprovalRuleTemplateCommandInput} for command's `input` shape.
  * @see {@link DeleteApprovalRuleTemplateCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link ApprovalRuleTemplateInUseException} (client fault)
+ *  <p>The approval rule template is associated with one or more repositories. You cannot delete a template that is associated with a repository. Remove
+ *         all associations, and then try again.</p>
+ *
+ * @throws {@link ApprovalRuleTemplateNameRequiredException} (client fault)
+ *  <p>An approval rule template name is required, but was not specified.</p>
+ *
+ * @throws {@link InvalidApprovalRuleTemplateNameException} (client fault)
+ *  <p>The name of the approval rule template is not valid. Template names must be between 1
+ *             and 100 valid characters in length. For more information about limits in CodeCommit,
+ *             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>
+ *                CodeCommit User Guide</i>.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteApprovalRuleTemplateCommand extends $Command<
-  DeleteApprovalRuleTemplateCommandInput,
-  DeleteApprovalRuleTemplateCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteApprovalRuleTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteApprovalRuleTemplateCommandInput, DeleteApprovalRuleTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "DeleteApprovalRuleTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteApprovalRuleTemplateInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteApprovalRuleTemplateOutput.filterSensitiveLog,
+export class DeleteApprovalRuleTemplateCommand extends command<DeleteApprovalRuleTemplateCommandInput, DeleteApprovalRuleTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteApprovalRuleTemplate",
+  DeleteApprovalRuleTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApprovalRuleTemplateInput;
+      output: DeleteApprovalRuleTemplateOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteApprovalRuleTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteApprovalRuleTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteApprovalRuleTemplateCommandOutput> {
-    return deserializeAws_json1_1DeleteApprovalRuleTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteApprovalRuleTemplateCommandInput;
+      output: DeleteApprovalRuleTemplateCommandOutput;
+    };
+  };
 }

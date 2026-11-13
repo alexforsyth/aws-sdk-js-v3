@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { ListTestGridSessionActionsRequest, ListTestGridSessionActionsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListTestGridSessionActionsCommand,
-  serializeAws_json1_1ListTestGridSessionActionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTestGridSessionActionsRequest, ListTestGridSessionActionsResult } from "../models/models_0";
+import { ListTestGridSessionActions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTestGridSessionActionsCommand}.
+ */
 export interface ListTestGridSessionActionsCommandInput extends ListTestGridSessionActionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTestGridSessionActionsCommand}.
+ */
 export interface ListTestGridSessionActionsCommandOutput extends ListTestGridSessionActionsResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,68 @@ export interface ListTestGridSessionActionsCommandOutput extends ListTestGridSes
  * ```javascript
  * import { DeviceFarmClient, ListTestGridSessionActionsCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, ListTestGridSessionActionsCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // ListTestGridSessionActionsRequest
+ *   sessionArn: "STRING_VALUE", // required
+ *   maxResult: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListTestGridSessionActionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTestGridSessionActionsResult
+ * //   actions: [ // TestGridSessionActions
+ * //     { // TestGridSessionAction
+ * //       action: "STRING_VALUE",
+ * //       started: new Date("TIMESTAMP"),
+ * //       duration: Number("long"),
+ * //       statusCode: "STRING_VALUE",
+ * //       requestMethod: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTestGridSessionActionsCommandInput - {@link ListTestGridSessionActionsCommandInput}
+ * @returns {@link ListTestGridSessionActionsCommandOutput}
  * @see {@link ListTestGridSessionActionsCommandInput} for command's `input` shape.
  * @see {@link ListTestGridSessionActionsCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal exception was raised in the service. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you see this
+ *          error. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class ListTestGridSessionActionsCommand extends $Command<
-  ListTestGridSessionActionsCommandInput,
-  ListTestGridSessionActionsCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTestGridSessionActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTestGridSessionActionsCommandInput, ListTestGridSessionActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "ListTestGridSessionActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTestGridSessionActionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTestGridSessionActionsResult.filterSensitiveLog,
+export class ListTestGridSessionActionsCommand extends command<ListTestGridSessionActionsCommandInput, ListTestGridSessionActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTestGridSessionActions",
+  ListTestGridSessionActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTestGridSessionActionsRequest;
+      output: ListTestGridSessionActionsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTestGridSessionActionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTestGridSessionActionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListTestGridSessionActionsCommandOutput> {
-    return deserializeAws_json1_1ListTestGridSessionActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTestGridSessionActionsCommandInput;
+      output: ListTestGridSessionActionsCommandOutput;
+    };
+  };
 }

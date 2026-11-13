@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import { Connections, DescribeHostedConnectionsRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeHostedConnectionsCommand,
-  serializeAws_json1_1DescribeHostedConnectionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Connections, DescribeHostedConnectionsRequest } from "../models/models_0";
+import { DescribeHostedConnections$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeHostedConnectionsCommand}.
+ */
 export interface DescribeHostedConnectionsCommandInput extends DescribeHostedConnectionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeHostedConnectionsCommand}.
+ */
 export interface DescribeHostedConnectionsCommandOutput extends Connections, __MetadataBearer {}
 
 /**
@@ -32,71 +33,105 @@ export interface DescribeHostedConnectionsCommandOutput extends Connections, __M
  * ```javascript
  * import { DirectConnectClient, DescribeHostedConnectionsCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, DescribeHostedConnectionsCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = { // DescribeHostedConnectionsRequest
+ *   connectionId: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeHostedConnectionsCommand(input);
  * const response = await client.send(command);
+ * // { // Connections
+ * //   connections: [ // ConnectionList
+ * //     { // Connection
+ * //       ownerAccount: "STRING_VALUE",
+ * //       connectionId: "STRING_VALUE",
+ * //       connectionName: "STRING_VALUE",
+ * //       connectionState: "ordering" || "requested" || "pending" || "available" || "down" || "deleting" || "deleted" || "rejected" || "unknown",
+ * //       region: "STRING_VALUE",
+ * //       location: "STRING_VALUE",
+ * //       bandwidth: "STRING_VALUE",
+ * //       vlan: Number("int"),
+ * //       partnerName: "STRING_VALUE",
+ * //       loaIssueTime: new Date("TIMESTAMP"),
+ * //       lagId: "STRING_VALUE",
+ * //       awsDevice: "STRING_VALUE",
+ * //       jumboFrameCapable: true || false,
+ * //       awsDeviceV2: "STRING_VALUE",
+ * //       awsLogicalDeviceId: "STRING_VALUE",
+ * //       hasLogicalRedundancy: "unknown" || "yes" || "no",
+ * //       tags: [ // TagList
+ * //         { // Tag
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       providerName: "STRING_VALUE",
+ * //       macSecCapable: true || false,
+ * //       portEncryptionStatus: "STRING_VALUE",
+ * //       encryptionMode: "STRING_VALUE",
+ * //       macSecKeys: [ // MacSecKeyList
+ * //         { // MacSecKey
+ * //           secretARN: "STRING_VALUE",
+ * //           ckn: "STRING_VALUE",
+ * //           state: "STRING_VALUE",
+ * //           startOn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       rateLimiterStatus: { // RateLimiterStatus
+ * //         maxAllowed: Number("int"),
+ * //         inUse: Number("int"),
+ * //         remaining: Number("int"),
+ * //         totalBandwidth: "STRING_VALUE",
+ * //       },
+ * //       partnerInterconnectMacSecCapable: true || false,
+ * //       prefixPoolSizeIpv4: Number("int"),
+ * //       prefixPoolSizeIpv6: Number("int"),
+ * //       prefixPoolUnallocatedCountIpv4: Number("int"),
+ * //       prefixPoolUnallocatedCountIpv6: Number("int"),
+ * //       billingMode: "PayAsYouGo" || "FlatRateTier1" || "FlatRateTier2" || "FlatRateTier3" || "FlatRateTier4" || "FlatRateTier5" || "PortPairFlatRateTier1" || "PortPairFlatRateTier2" || "PortPairFlatRateTier3" || "PortPairFlatRateTier4" || "PortPairFlatRateTier5",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeHostedConnectionsCommandInput - {@link DescribeHostedConnectionsCommandInput}
+ * @returns {@link DescribeHostedConnectionsCommandOutput}
  * @see {@link DescribeHostedConnectionsCommandInput} for command's `input` shape.
  * @see {@link DescribeHostedConnectionsCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeHostedConnectionsCommand extends $Command<
-  DescribeHostedConnectionsCommandInput,
-  DescribeHostedConnectionsCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeHostedConnectionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeHostedConnectionsCommandInput, DescribeHostedConnectionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "DescribeHostedConnectionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeHostedConnectionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Connections.filterSensitiveLog,
+export class DescribeHostedConnectionsCommand extends command<DescribeHostedConnectionsCommandInput, DescribeHostedConnectionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeHostedConnections",
+  DescribeHostedConnections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeHostedConnectionsRequest;
+      output: Connections;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeHostedConnectionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeHostedConnectionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeHostedConnectionsCommandOutput> {
-    return deserializeAws_json1_1DescribeHostedConnectionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeHostedConnectionsCommandInput;
+      output: DescribeHostedConnectionsCommandOutput;
+    };
+  };
 }

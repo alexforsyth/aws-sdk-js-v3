@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePolicyStatementInput, DeletePolicyStatementOutput } from "../models/models_0";
+import { DeletePolicyStatement$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePolicyStatementCommand}.
+ */
+export interface DeletePolicyStatementCommandInput extends DeletePolicyStatementInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePolicyStatementCommand}.
+ */
+export interface DeletePolicyStatementCommandOutput extends DeletePolicyStatementOutput, __MetadataBearer {}
+
+/**
+ * <p>Deletes the policy statement.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EntityResolutionClient, DeletePolicyStatementCommand } from "@aws-sdk/client-entityresolution"; // ES Modules import
+ * // const { EntityResolutionClient, DeletePolicyStatementCommand } = require("@aws-sdk/client-entityresolution"); // CommonJS import
+ * // import type { EntityResolutionClientConfig } from "@aws-sdk/client-entityresolution";
+ * const config = {}; // type is EntityResolutionClientConfig
+ * const client = new EntityResolutionClient(config);
+ * const input = { // DeletePolicyStatementInput
+ *   arn: "STRING_VALUE", // required
+ *   statementId: "STRING_VALUE", // required
+ * };
+ * const command = new DeletePolicyStatementCommand(input);
+ * const response = await client.send(command);
+ * // { // DeletePolicyStatementOutput
+ * //   arn: "STRING_VALUE", // required
+ * //   token: "STRING_VALUE", // required
+ * //   policy: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DeletePolicyStatementCommandInput - {@link DeletePolicyStatementCommandInput}
+ * @returns {@link DeletePolicyStatementCommandOutput}
+ * @see {@link DeletePolicyStatementCommandInput} for command's `input` shape.
+ * @see {@link DeletePolicyStatementCommandOutput} for command's `response` shape.
+ * @see {@link EntityResolutionClientResolvedConfig | config} for EntityResolutionClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request couldn't be processed because of conflict in the current state of the resource. Example: Workflow already exists, Schema already exists, Workflow is currently running, etc. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Entity Resolution service. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by Entity Resolution. </p>
+ *
+ * @throws {@link EntityResolutionServiceException}
+ * <p>Base exception class for all service exceptions from EntityResolution service.</p>
+ *
+ *
+ * @public
+ */
+export class DeletePolicyStatementCommand extends command<DeletePolicyStatementCommandInput, DeletePolicyStatementCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePolicyStatement",
+  DeletePolicyStatement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePolicyStatementInput;
+      output: DeletePolicyStatementOutput;
+    };
+    sdk: {
+      input: DeletePolicyStatementCommandInput;
+      output: DeletePolicyStatementCommandOutput;
+    };
+  };
+}

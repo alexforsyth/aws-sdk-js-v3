@@ -1,0 +1,109 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteClusterSnapshotInput, DeleteClusterSnapshotOutput } from "../models/models_0";
+import { DeleteClusterSnapshot$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteClusterSnapshotCommand}.
+ */
+export interface DeleteClusterSnapshotCommandInput extends DeleteClusterSnapshotInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteClusterSnapshotCommand}.
+ */
+export interface DeleteClusterSnapshotCommandOutput extends DeleteClusterSnapshotOutput, __MetadataBearer {}
+
+/**
+ * <p>Delete an elastic cluster snapshot.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DocDBElasticClient, DeleteClusterSnapshotCommand } from "@aws-sdk/client-docdb-elastic"; // ES Modules import
+ * // const { DocDBElasticClient, DeleteClusterSnapshotCommand } = require("@aws-sdk/client-docdb-elastic"); // CommonJS import
+ * // import type { DocDBElasticClientConfig } from "@aws-sdk/client-docdb-elastic";
+ * const config = {}; // type is DocDBElasticClientConfig
+ * const client = new DocDBElasticClient(config);
+ * const input = { // DeleteClusterSnapshotInput
+ *   snapshotArn: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteClusterSnapshotCommand(input);
+ * const response = await client.send(command);
+ * // { // DeleteClusterSnapshotOutput
+ * //   snapshot: { // ClusterSnapshot
+ * //     subnetIds: [ // StringList // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     snapshotName: "STRING_VALUE", // required
+ * //     snapshotArn: "STRING_VALUE", // required
+ * //     snapshotCreationTime: "STRING_VALUE", // required
+ * //     clusterArn: "STRING_VALUE", // required
+ * //     clusterCreationTime: "STRING_VALUE", // required
+ * //     status: "STRING_VALUE", // required
+ * //     vpcSecurityGroupIds: [ // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     adminUserName: "STRING_VALUE", // required
+ * //     kmsKeyId: "STRING_VALUE", // required
+ * //     snapshotType: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DeleteClusterSnapshotCommandInput - {@link DeleteClusterSnapshotCommandInput}
+ * @returns {@link DeleteClusterSnapshotCommandOutput}
+ * @see {@link DeleteClusterSnapshotCommandInput} for command's `input` shape.
+ * @see {@link DeleteClusterSnapshotCommandOutput} for command's `response` shape.
+ * @see {@link DocDBElasticClientResolvedConfig | config} for DocDBElasticClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>An exception that occurs when there are not sufficient permissions to perform an action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was an access conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be located.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>ThrottlingException will be thrown when request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A structure defining a validation exception.</p>
+ *
+ * @throws {@link DocDBElasticServiceException}
+ * <p>Base exception class for all service exceptions from DocDBElastic service.</p>
+ *
+ *
+ * @public
+ */
+export class DeleteClusterSnapshotCommand extends command<DeleteClusterSnapshotCommandInput, DeleteClusterSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteClusterSnapshot",
+  DeleteClusterSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteClusterSnapshotInput;
+      output: DeleteClusterSnapshotOutput;
+    };
+    sdk: {
+      input: DeleteClusterSnapshotCommandInput;
+      output: DeleteClusterSnapshotCommandOutput;
+    };
+  };
+}

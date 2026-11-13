@@ -1,37 +1,28 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadInputTypes } from "@smithy/types";
 
-import {
-  CloudSearchDomainClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CloudSearchDomainClient";
-import { UploadDocumentsRequest, UploadDocumentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UploadDocumentsCommand,
-  serializeAws_restJson1UploadDocumentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UploadDocumentsRequest, UploadDocumentsResponse } from "../models/models_0";
+import { UploadDocuments$ } from "../schemas/schemas_0";
 
-type UploadDocumentsCommandInputType = Omit<UploadDocumentsRequest, "documents"> & {
-  /**
-   * For *`UploadDocumentsRequest["documents"]`*, see {@link UploadDocumentsRequest.documents}.
-   */
-  documents: UploadDocumentsRequest["documents"] | string | Uint8Array | Buffer;
-};
 /**
- * This interface extends from `UploadDocumentsRequest` interface. There are more parameters than `documents` defined in {@link UploadDocumentsRequest}
+ * @public
  */
-export interface UploadDocumentsCommandInput extends UploadDocumentsCommandInputType {}
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UploadDocumentsCommand}.
+ */
+export interface UploadDocumentsCommandInput extends Omit<UploadDocumentsRequest, "documents"> {
+  documents: StreamingBlobPayloadInputTypes;
+}
+
+/**
+ * @public
+ *
+ * The output of {@link UploadDocumentsCommand}.
+ */
 export interface UploadDocumentsCommandOutput extends UploadDocumentsResponse, __MetadataBearer {}
 
 /**
@@ -44,68 +35,58 @@ export interface UploadDocumentsCommandOutput extends UploadDocumentsResponse, _
  * ```javascript
  * import { CloudSearchDomainClient, UploadDocumentsCommand } from "@aws-sdk/client-cloudsearch-domain"; // ES Modules import
  * // const { CloudSearchDomainClient, UploadDocumentsCommand } = require("@aws-sdk/client-cloudsearch-domain"); // CommonJS import
+ * // import type { CloudSearchDomainClientConfig } from "@aws-sdk/client-cloudsearch-domain";
+ * const config = {}; // type is CloudSearchDomainClientConfig
  * const client = new CloudSearchDomainClient(config);
+ * const input = { // UploadDocumentsRequest
+ *   documents: "MULTIPLE_TYPES_ACCEPTED", // see \@smithy/types -> StreamingBlobPayloadInputTypes // required
+ *   contentType: "application/json" || "application/xml", // required
+ * };
  * const command = new UploadDocumentsCommand(input);
  * const response = await client.send(command);
+ * // { // UploadDocumentsResponse
+ * //   status: "STRING_VALUE",
+ * //   adds: Number("long"),
+ * //   deletes: Number("long"),
+ * //   warnings: [ // DocumentServiceWarnings
+ * //     { // DocumentServiceWarning
+ * //       message: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UploadDocumentsCommandInput - {@link UploadDocumentsCommandInput}
+ * @returns {@link UploadDocumentsCommandOutput}
  * @see {@link UploadDocumentsCommandInput} for command's `input` shape.
  * @see {@link UploadDocumentsCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchDomainClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchDomainClientResolvedConfig | config} for CloudSearchDomainClient's `config` shape.
  *
+ * @throws {@link DocumentServiceException} (client fault)
+ *  <p>Information about any problems encountered while processing an upload request.</p>
+ *
+ * @throws {@link CloudSearchDomainServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearchDomain service.</p>
+ *
+ *
+ * @public
  */
-export class UploadDocumentsCommand extends $Command<
-  UploadDocumentsCommandInput,
-  UploadDocumentsCommandOutput,
-  CloudSearchDomainClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UploadDocumentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchDomainClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UploadDocumentsCommandInput, UploadDocumentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchDomainClient";
-    const commandName = "UploadDocumentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UploadDocumentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UploadDocumentsResponse.filterSensitiveLog,
+export class UploadDocumentsCommand extends command<UploadDocumentsCommandInput, UploadDocumentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UploadDocuments",
+  UploadDocuments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadDocumentsRequest;
+      output: UploadDocumentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UploadDocumentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UploadDocumentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UploadDocumentsCommandOutput> {
-    return deserializeAws_restJson1UploadDocumentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UploadDocumentsCommandInput;
+      output: UploadDocumentsCommandOutput;
+    };
+  };
 }

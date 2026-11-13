@@ -1,31 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { UpdateDatasetGroupRequest, UpdateDatasetGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateDatasetGroupCommand,
-  serializeAws_json1_1UpdateDatasetGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDatasetGroupRequest, UpdateDatasetGroupResponse } from "../models/models_0";
+import { UpdateDatasetGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDatasetGroupCommand}.
+ */
 export interface UpdateDatasetGroupCommandInput extends UpdateDatasetGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDatasetGroupCommand}.
+ */
 export interface UpdateDatasetGroupCommandOutput extends UpdateDatasetGroupResponse, __MetadataBearer {}
 
 /**
  * <p>Replaces the datasets in a dataset group with the specified datasets.</p>
  *          <note>
  *             <p>The <code>Status</code> of the dataset group must be <code>ACTIVE</code> before you can
- *         use the dataset group to create a predictor. Use the <a>DescribeDatasetGroup</a>
+ *         use the dataset group to create a predictor. Use the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html">DescribeDatasetGroup</a>
  *         operation to get the status.</p>
  *          </note>
  * @example
@@ -33,68 +34,59 @@ export interface UpdateDatasetGroupCommandOutput extends UpdateDatasetGroupRespo
  * ```javascript
  * import { ForecastClient, UpdateDatasetGroupCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, UpdateDatasetGroupCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // UpdateDatasetGroupRequest
+ *   DatasetGroupArn: "STRING_VALUE", // required
+ *   DatasetArns: [ // ArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdateDatasetGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateDatasetGroupCommandInput - {@link UpdateDatasetGroupCommandInput}
+ * @returns {@link UpdateDatasetGroupCommandOutput}
  * @see {@link UpdateDatasetGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateDatasetGroupCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDatasetGroupCommand extends $Command<
-  UpdateDatasetGroupCommandInput,
-  UpdateDatasetGroupCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDatasetGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDatasetGroupCommandInput, UpdateDatasetGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "UpdateDatasetGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDatasetGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDatasetGroupResponse.filterSensitiveLog,
+export class UpdateDatasetGroupCommand extends command<UpdateDatasetGroupCommandInput, UpdateDatasetGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDatasetGroup",
+  UpdateDatasetGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDatasetGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDatasetGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateDatasetGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDatasetGroupCommandOutput> {
-    return deserializeAws_json1_1UpdateDatasetGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDatasetGroupCommandInput;
+      output: UpdateDatasetGroupCommandOutput;
+    };
+  };
 }

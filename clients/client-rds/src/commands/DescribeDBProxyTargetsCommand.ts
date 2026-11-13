@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDBProxyTargetsRequest } from "../models/models_0";
-import { DescribeDBProxyTargetsResponse } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeDBProxyTargetsCommand,
-  serializeAws_queryDescribeDBProxyTargetsCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDBProxyTargetsRequest, DescribeDBProxyTargetsResponse } from "../models/models_0";
+import { DescribeDBProxyTargets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDBProxyTargetsCommand}.
+ */
 export interface DescribeDBProxyTargetsCommandInput extends DescribeDBProxyTargetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDBProxyTargetsCommand}.
+ */
 export interface DescribeDBProxyTargetsCommandOutput extends DescribeDBProxyTargetsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +29,86 @@ export interface DescribeDBProxyTargetsCommandOutput extends DescribeDBProxyTarg
  * ```javascript
  * import { RDSClient, DescribeDBProxyTargetsCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribeDBProxyTargetsCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribeDBProxyTargetsRequest
+ *   DBProxyName: "STRING_VALUE", // required
+ *   TargetGroupName: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribeDBProxyTargetsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDBProxyTargetsResponse
+ * //   Targets: [ // TargetList
+ * //     { // DBProxyTarget
+ * //       TargetArn: "STRING_VALUE",
+ * //       Endpoint: "STRING_VALUE",
+ * //       TrackedClusterId: "STRING_VALUE",
+ * //       RdsResourceId: "STRING_VALUE",
+ * //       Port: Number("int"),
+ * //       Type: "RDS_INSTANCE" || "RDS_SERVERLESS_ENDPOINT" || "TRACKED_CLUSTER",
+ * //       Role: "READ_WRITE" || "READ_ONLY" || "UNKNOWN",
+ * //       TargetHealth: { // TargetHealth
+ * //         State: "REGISTERING" || "AVAILABLE" || "UNAVAILABLE" || "UNUSED",
+ * //         Reason: "UNREACHABLE" || "CONNECTION_FAILED" || "AUTH_FAILURE" || "PENDING_PROXY_CAPACITY" || "INVALID_REPLICATION_STATE" || "PROMOTED",
+ * //         Description: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDBProxyTargetsCommandInput - {@link DescribeDBProxyTargetsCommandInput}
+ * @returns {@link DescribeDBProxyTargetsCommandOutput}
  * @see {@link DescribeDBProxyTargetsCommandInput} for command's `input` shape.
  * @see {@link DescribeDBProxyTargetsCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBProxyNotFoundFault} (client fault)
+ *  <p>The specified proxy name doesn't correspond to a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link DBProxyTargetGroupNotFoundFault} (client fault)
+ *  <p>The specified target group isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link DBProxyTargetNotFoundFault} (client fault)
+ *  <p>The specified RDS DB instance or Aurora DB cluster isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
+ *
+ * @throws {@link InvalidDBProxyStateFault} (client fault)
+ *  <p>The requested operation can't be performed while the proxy is in this state.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDBProxyTargetsCommand extends $Command<
-  DescribeDBProxyTargetsCommandInput,
-  DescribeDBProxyTargetsCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDBProxyTargetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDBProxyTargetsCommandInput, DescribeDBProxyTargetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribeDBProxyTargetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDBProxyTargetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDBProxyTargetsResponse.filterSensitiveLog,
+export class DescribeDBProxyTargetsCommand extends command<DescribeDBProxyTargetsCommandInput, DescribeDBProxyTargetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDBProxyTargets",
+  DescribeDBProxyTargets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDBProxyTargetsRequest;
+      output: DescribeDBProxyTargetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDBProxyTargetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDBProxyTargetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDBProxyTargetsCommandOutput> {
-    return deserializeAws_queryDescribeDBProxyTargetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDBProxyTargetsCommandInput;
+      output: DescribeDBProxyTargetsCommandOutput;
+    };
+  };
 }

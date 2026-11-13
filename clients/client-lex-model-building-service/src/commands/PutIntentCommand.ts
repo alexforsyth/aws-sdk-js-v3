@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LexModelBuildingServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LexModelBuildingServiceClient";
-import { PutIntentRequest, PutIntentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutIntentCommand,
-  serializeAws_restJson1PutIntentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutIntentRequest, PutIntentResponse } from "../models/models_0";
+import { PutIntent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutIntentCommand}.
+ */
 export interface PutIntentCommandInput extends PutIntentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutIntentCommand}.
+ */
 export interface PutIntentCommandOutput extends PutIntentResponse, __MetadataBearer {}
 
 /**
@@ -57,7 +54,6 @@ export interface PutIntentCommandOutput extends PutIntentResponse, __MetadataBea
  *          </ul>
  *          <p>You can specify other optional information in the request, such
  *       as:</p>
- *
  *          <ul>
  *             <li>
  *                <p>A confirmation prompt to ask the user to confirm an intent. For
@@ -84,73 +80,548 @@ export interface PutIntentCommandOutput extends PutIntentResponse, __MetadataBea
  *          <p>For more information, see <a>how-it-works</a>.</p>
  *          <p>This operation requires permissions for the
  *         <code>lex:PutIntent</code> action.</p>
+ *
+ * @deprecated (since 2025-09-08) Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelBuildingServiceClient, PutIntentCommand } from "@aws-sdk/client-lex-model-building-service"; // ES Modules import
  * // const { LexModelBuildingServiceClient, PutIntentCommand } = require("@aws-sdk/client-lex-model-building-service"); // CommonJS import
+ * // import type { LexModelBuildingServiceClientConfig } from "@aws-sdk/client-lex-model-building-service";
+ * const config = {}; // type is LexModelBuildingServiceClientConfig
  * const client = new LexModelBuildingServiceClient(config);
+ * const input = { // PutIntentRequest
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   slots: [ // SlotList
+ *     { // Slot
+ *       name: "STRING_VALUE", // required
+ *       description: "STRING_VALUE",
+ *       slotConstraint: "Required" || "Optional", // required
+ *       slotType: "STRING_VALUE",
+ *       slotTypeVersion: "STRING_VALUE",
+ *       valueElicitationPrompt: { // Prompt
+ *         messages: [ // MessageList // required
+ *           { // Message
+ *             contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ *             content: "STRING_VALUE", // required
+ *             groupNumber: Number("int"),
+ *           },
+ *         ],
+ *         maxAttempts: Number("int"), // required
+ *         responseCard: "STRING_VALUE",
+ *       },
+ *       priority: Number("int"),
+ *       sampleUtterances: [ // SlotUtteranceList
+ *         "STRING_VALUE",
+ *       ],
+ *       responseCard: "STRING_VALUE",
+ *       obfuscationSetting: "NONE" || "DEFAULT_OBFUSCATION",
+ *       defaultValueSpec: { // SlotDefaultValueSpec
+ *         defaultValueList: [ // SlotDefaultValueList // required
+ *           { // SlotDefaultValue
+ *             defaultValue: "STRING_VALUE", // required
+ *           },
+ *         ],
+ *       },
+ *     },
+ *   ],
+ *   sampleUtterances: [ // IntentUtteranceList
+ *     "STRING_VALUE",
+ *   ],
+ *   confirmationPrompt: {
+ *     messages: [ // required
+ *       {
+ *         contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ *         content: "STRING_VALUE", // required
+ *         groupNumber: Number("int"),
+ *       },
+ *     ],
+ *     maxAttempts: Number("int"), // required
+ *     responseCard: "STRING_VALUE",
+ *   },
+ *   rejectionStatement: { // Statement
+ *     messages: [ // required
+ *       {
+ *         contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ *         content: "STRING_VALUE", // required
+ *         groupNumber: Number("int"),
+ *       },
+ *     ],
+ *     responseCard: "STRING_VALUE",
+ *   },
+ *   followUpPrompt: { // FollowUpPrompt
+ *     prompt: "<Prompt>", // required
+ *     rejectionStatement: {
+ *       messages: "<MessageList>", // required
+ *       responseCard: "STRING_VALUE",
+ *     },
+ *   },
+ *   conclusionStatement: {
+ *     messages: "<MessageList>", // required
+ *     responseCard: "STRING_VALUE",
+ *   },
+ *   dialogCodeHook: { // CodeHook
+ *     uri: "STRING_VALUE", // required
+ *     messageVersion: "STRING_VALUE", // required
+ *   },
+ *   fulfillmentActivity: { // FulfillmentActivity
+ *     type: "ReturnIntent" || "CodeHook", // required
+ *     codeHook: {
+ *       uri: "STRING_VALUE", // required
+ *       messageVersion: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   parentIntentSignature: "STRING_VALUE",
+ *   checksum: "STRING_VALUE",
+ *   createVersion: true || false,
+ *   kendraConfiguration: { // KendraConfiguration
+ *     kendraIndex: "STRING_VALUE", // required
+ *     queryFilterString: "STRING_VALUE",
+ *     role: "STRING_VALUE", // required
+ *   },
+ *   inputContexts: [ // InputContextList
+ *     { // InputContext
+ *       name: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   outputContexts: [ // OutputContextList
+ *     { // OutputContext
+ *       name: "STRING_VALUE", // required
+ *       timeToLiveInSeconds: Number("int"), // required
+ *       turnsToLive: Number("int"), // required
+ *     },
+ *   ],
+ * };
  * const command = new PutIntentCommand(input);
  * const response = await client.send(command);
+ * // { // PutIntentResponse
+ * //   name: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   slots: [ // SlotList
+ * //     { // Slot
+ * //       name: "STRING_VALUE", // required
+ * //       description: "STRING_VALUE",
+ * //       slotConstraint: "Required" || "Optional", // required
+ * //       slotType: "STRING_VALUE",
+ * //       slotTypeVersion: "STRING_VALUE",
+ * //       valueElicitationPrompt: { // Prompt
+ * //         messages: [ // MessageList // required
+ * //           { // Message
+ * //             contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ * //             content: "STRING_VALUE", // required
+ * //             groupNumber: Number("int"),
+ * //           },
+ * //         ],
+ * //         maxAttempts: Number("int"), // required
+ * //         responseCard: "STRING_VALUE",
+ * //       },
+ * //       priority: Number("int"),
+ * //       sampleUtterances: [ // SlotUtteranceList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       responseCard: "STRING_VALUE",
+ * //       obfuscationSetting: "NONE" || "DEFAULT_OBFUSCATION",
+ * //       defaultValueSpec: { // SlotDefaultValueSpec
+ * //         defaultValueList: [ // SlotDefaultValueList // required
+ * //           { // SlotDefaultValue
+ * //             defaultValue: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * //   sampleUtterances: [ // IntentUtteranceList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   confirmationPrompt: {
+ * //     messages: [ // required
+ * //       {
+ * //         contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ * //         content: "STRING_VALUE", // required
+ * //         groupNumber: Number("int"),
+ * //       },
+ * //     ],
+ * //     maxAttempts: Number("int"), // required
+ * //     responseCard: "STRING_VALUE",
+ * //   },
+ * //   rejectionStatement: { // Statement
+ * //     messages: [ // required
+ * //       {
+ * //         contentType: "PlainText" || "SSML" || "CustomPayload", // required
+ * //         content: "STRING_VALUE", // required
+ * //         groupNumber: Number("int"),
+ * //       },
+ * //     ],
+ * //     responseCard: "STRING_VALUE",
+ * //   },
+ * //   followUpPrompt: { // FollowUpPrompt
+ * //     prompt: "<Prompt>", // required
+ * //     rejectionStatement: {
+ * //       messages: "<MessageList>", // required
+ * //       responseCard: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   conclusionStatement: {
+ * //     messages: "<MessageList>", // required
+ * //     responseCard: "STRING_VALUE",
+ * //   },
+ * //   dialogCodeHook: { // CodeHook
+ * //     uri: "STRING_VALUE", // required
+ * //     messageVersion: "STRING_VALUE", // required
+ * //   },
+ * //   fulfillmentActivity: { // FulfillmentActivity
+ * //     type: "ReturnIntent" || "CodeHook", // required
+ * //     codeHook: {
+ * //       uri: "STRING_VALUE", // required
+ * //       messageVersion: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * //   parentIntentSignature: "STRING_VALUE",
+ * //   lastUpdatedDate: new Date("TIMESTAMP"),
+ * //   createdDate: new Date("TIMESTAMP"),
+ * //   version: "STRING_VALUE",
+ * //   checksum: "STRING_VALUE",
+ * //   createVersion: true || false,
+ * //   kendraConfiguration: { // KendraConfiguration
+ * //     kendraIndex: "STRING_VALUE", // required
+ * //     queryFilterString: "STRING_VALUE",
+ * //     role: "STRING_VALUE", // required
+ * //   },
+ * //   inputContexts: [ // InputContextList
+ * //     { // InputContext
+ * //       name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   outputContexts: [ // OutputContextList
+ * //     { // OutputContext
+ * //       name: "STRING_VALUE", // required
+ * //       timeToLiveInSeconds: Number("int"), // required
+ * //       turnsToLive: Number("int"), // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param PutIntentCommandInput - {@link PutIntentCommandInput}
+ * @returns {@link PutIntentCommandOutput}
  * @see {@link PutIntentCommandInput} for command's `input` shape.
  * @see {@link PutIntentCommandOutput} for command's `response` shape.
- * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelBuildingServiceClientResolvedConfig | config} for LexModelBuildingServiceClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or
+ *       a required field is missing. Check the field values, and try
+ *       again.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> There was a conflict processing the request. Try your request
+ *       again. </p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal Amazon Lex error occurred. Try your request again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request exceeded a limit. Try your request again.</p>
+ *
+ * @throws {@link PreconditionFailedException} (client fault)
+ *  <p> The checksum of the resource that you are trying to change does
+ *       not match the checksum in the request. Check the resource's checksum and
+ *       try again.</p>
+ *
+ * @throws {@link LexModelBuildingServiceServiceException}
+ * <p>Base exception class for all service exceptions from LexModelBuildingService service.</p>
+ *
+ *
+ * @example To create an intent
+ * ```javascript
+ * // This example shows how to create an intent for ordering pizzas.
+ * const input = {
+ *   conclusionStatement: {
+ *     messages: [
+ *       {
+ *         content: "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.",
+ *         contentType: "PlainText"
+ *       },
+ *       {
+ *         content: "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.",
+ *         contentType: "PlainText"
+ *       }
+ *     ],
+ *     responseCard: "foo"
+ *   },
+ *   confirmationPrompt: {
+ *     maxAttempts: 1,
+ *     messages: [
+ *       {
+ *         content: "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?",
+ *         contentType: "PlainText"
+ *       }
+ *     ]
+ *   },
+ *   description: "Order a pizza from a local pizzeria.",
+ *   fulfillmentActivity: {
+ *     type: "ReturnIntent"
+ *   },
+ *   name: "DocOrderPizza",
+ *   rejectionStatement: {
+ *     messages: [
+ *       {
+ *         content: "Ok, I'll cancel your order.",
+ *         contentType: "PlainText"
+ *       },
+ *       {
+ *         content: "I cancelled your order.",
+ *         contentType: "PlainText"
+ *       }
+ *     ]
+ *   },
+ *   sampleUtterances: [
+ *     "Order me a pizza.",
+ *     "Order me a {Type} pizza.",
+ *     "I want a {Crust} crust {Type} pizza",
+ *     "I want a {Crust} crust {Type} pizza with {Sauce} sauce."
+ *   ],
+ *   slots: [
+ *     {
+ *       description: "The type of pizza to order.",
+ *       name: "Type",
+ *       priority: 1,
+ *       sampleUtterances: [
+ *         "Get me a {Type} pizza.",
+ *         "A {Type} pizza please.",
+ *         "I'd like a {Type} pizza."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "What type of pizza would you like?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Vegie or cheese pizza?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "I can get you a vegie or a cheese pizza.",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     },
+ *     {
+ *       description: "The type of pizza crust to order.",
+ *       name: "Crust",
+ *       priority: 2,
+ *       sampleUtterances: [
+ *         "Make it a {Crust} crust.",
+ *         "I'd like a {Crust} crust."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaCrustType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "What type of crust would you like?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Thick or thin crust?",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     },
+ *     {
+ *       description: "The type of sauce to use on the pizza.",
+ *       name: "Sauce",
+ *       priority: 3,
+ *       sampleUtterances: [
+ *         "Make it {Sauce} sauce.",
+ *         "I'd like {Sauce} sauce."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaSauceType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "White or red sauce?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Garlic or tomato sauce?",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     }
+ *   ]
+ * };
+ * const command = new PutIntentCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   checksum: "ca9bc13d-afc8-4706-bbaf-091f7a5935d6",
+ *   conclusionStatement: {
+ *     messages: [
+ *       {
+ *         content: "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.",
+ *         contentType: "PlainText"
+ *       },
+ *       {
+ *         content: "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.",
+ *         contentType: "PlainText"
+ *       }
+ *     ],
+ *     responseCard: "foo"
+ *   },
+ *   confirmationPrompt: {
+ *     maxAttempts: 1,
+ *     messages: [
+ *       {
+ *         content: "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?",
+ *         contentType: "PlainText"
+ *       }
+ *     ]
+ *   },
+ *   createdDate: 1.494359783453E9,
+ *   description: "Order a pizza from a local pizzeria.",
+ *   fulfillmentActivity: {
+ *     type: "ReturnIntent"
+ *   },
+ *   lastUpdatedDate: 1.494359783453E9,
+ *   name: "DocOrderPizza",
+ *   rejectionStatement: {
+ *     messages: [
+ *       {
+ *         content: "Ok, I'll cancel your order.",
+ *         contentType: "PlainText"
+ *       },
+ *       {
+ *         content: "I cancelled your order.",
+ *         contentType: "PlainText"
+ *       }
+ *     ]
+ *   },
+ *   sampleUtterances: [
+ *     "Order me a pizza.",
+ *     "Order me a {Type} pizza.",
+ *     "I want a {Crust} crust {Type} pizza",
+ *     "I want a {Crust} crust {Type} pizza with {Sauce} sauce."
+ *   ],
+ *   slots: [
+ *     {
+ *       description: "The type of sauce to use on the pizza.",
+ *       name: "Sauce",
+ *       priority: 3,
+ *       sampleUtterances: [
+ *         "Make it {Sauce} sauce.",
+ *         "I'd like {Sauce} sauce."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaSauceType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "White or red sauce?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Garlic or tomato sauce?",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     },
+ *     {
+ *       description: "The type of pizza to order.",
+ *       name: "Type",
+ *       priority: 1,
+ *       sampleUtterances: [
+ *         "Get me a {Type} pizza.",
+ *         "A {Type} pizza please.",
+ *         "I'd like a {Type} pizza."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "What type of pizza would you like?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Vegie or cheese pizza?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "I can get you a vegie or a cheese pizza.",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     },
+ *     {
+ *       description: "The type of pizza crust to order.",
+ *       name: "Crust",
+ *       priority: 2,
+ *       sampleUtterances: [
+ *         "Make it a {Crust} crust.",
+ *         "I'd like a {Crust} crust."
+ *       ],
+ *       slotConstraint: "Required",
+ *       slotType: "DocPizzaCrustType",
+ *       slotTypeVersion: "$LATEST",
+ *       valueElicitationPrompt: {
+ *         maxAttempts: 1,
+ *         messages: [
+ *           {
+ *             content: "What type of crust would you like?",
+ *             contentType: "PlainText"
+ *           },
+ *           {
+ *             content: "Thick or thin crust?",
+ *             contentType: "PlainText"
+ *           }
+ *         ]
+ *       }
+ *     }
+ *   ],
+ *   version: "$LATEST"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class PutIntentCommand extends $Command<
-  PutIntentCommandInput,
-  PutIntentCommandOutput,
-  LexModelBuildingServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutIntentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelBuildingServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutIntentCommandInput, PutIntentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelBuildingServiceClient";
-    const commandName = "PutIntentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutIntentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutIntentResponse.filterSensitiveLog,
+export class PutIntentCommand extends command<PutIntentCommandInput, PutIntentCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutIntent",
+  PutIntent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutIntentRequest;
+      output: PutIntentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutIntentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutIntentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutIntentCommandOutput> {
-    return deserializeAws_restJson1PutIntentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutIntentCommandInput;
+      output: PutIntentCommandOutput;
+    };
+  };
 }

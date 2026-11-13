@@ -1,0 +1,151 @@
+/**
+ * Checks devDependency declarations for runtime packages.
+ * They should be moved to the dependencies section even if only imported for types.
+ */
+
+const fs = require("node:fs");
+const path = require("node:path");
+const pkgJsonEnforcement = require("./package-json-enforcement");
+
+const root = path.join(__dirname, "..", "..");
+const packages = path.join(root, "packages");
+const packagesInternal = path.join(root, "packages-internal");
+const lib = path.join(root, "lib");
+const preview = path.join(root, "preview");
+const _private = path.join(root, "private");
+const topLevelFolders = [packages, packagesInternal, preview, _private, lib];
+const packageFolders = [];
+const walk = require("../utils/walk");
+const { listFolders } = require("../utils/list-folders");
+
+for (const topLevelFolder of topLevelFolders) {
+  packageFolders.push(...listFolders(topLevelFolder));
+}
+
+const node_libraries = [
+  "buffer",
+  "child_process",
+  "crypto",
+  "dns",
+  "dns/promises",
+  "events",
+  "fs",
+  "fs/promises",
+  "http",
+  "http2",
+  "https",
+  "os",
+  "path",
+  "path/posix",
+  "path/win32",
+  "process",
+  "stream",
+  "stream/consumers",
+  "stream/promises",
+  "stream/web",
+  "tls",
+  "url",
+  "util",
+  "worker_threads",
+  "zlib",
+];
+
+const ignored = [...node_libraries, "vitest"];
+
+// Check if a dependency should be ignored (including node: prefixed modules)
+const shouldIgnore = (dep) => ignored.includes(dep) || (dep.startsWith("node:") && ignored.includes(dep.slice(5)));
+
+(async () => {
+  const errors = [];
+
+  for (const packageFolder of packageFolders) {
+    const containingFolder = topLevelFolders.find((f) => fs.existsSync(path.join(f, packageFolder, "package.json")));
+
+    const pkgJsonPath = path.join(containingFolder, packageFolder, "package.json");
+
+    if (
+      containingFolder === packages ||
+      containingFolder === packagesInternal ||
+      containingFolder === preview ||
+      containingFolder === lib
+    ) {
+      errors.push(...pkgJsonEnforcement(pkgJsonPath, true));
+    }
+
+    const srcPath = path.join(containingFolder, packageFolder, "src");
+    const pkgJson = require(pkgJsonPath);
+
+    if (!pkgJson.dependencies.tslib) {
+      errors.push(`Missing tslib in ${pkgJson.name}`);
+    }
+
+    for await (const file of walk(srcPath, ["node_modules"])) {
+      const contents = fs.readFileSync(file);
+
+      if (file.endsWith(".spec.ts")) {
+        continue;
+      }
+
+      if (!file.endsWith(".ts")) {
+        continue;
+      }
+
+      const importedDependencies = [];
+      importedDependencies.push(
+        ...new Set(
+          [...(contents.toString().match(/(from |import\()"(.*?)"\)?;/g) ?? [])]
+            .map((_) => _.replace(/(from ")|(import\(")/g, "").replace(/"\)?;$/, ""))
+            .filter((_) => !_.startsWith(".") && !shouldIgnore(_))
+        )
+      );
+
+      for (const dependency of importedDependencies) {
+        const dependencyPackageName = dependency.startsWith("@")
+          ? dependency.split("/").slice(0, 2).join("/")
+          : dependency.split("/")[0];
+
+        if (
+          !(dependencyPackageName in (pkgJson.dependencies ?? {})) &&
+          !(dependencyPackageName in (pkgJson.peerDependencies ?? {})) &&
+          dependencyPackageName !== pkgJson.name
+        ) {
+          if (
+            [
+              "@aws-sdk/client-cognito-identity",
+              "@aws-sdk/client-sso",
+              "@aws-sdk/client-sts",
+              "@aws-sdk/client-sso-oidc",
+              "@aws-sdk/client-signin",
+            ].includes(dependency) &&
+            ["@aws-sdk/nested-clients"].includes(pkgJson.name)
+          ) {
+            continue;
+          }
+          errors.push(`${dependency} undeclared but imported in ${pkgJson.name} ${file}}`);
+        }
+      }
+
+      for (const [dep, version] of Object.entries(pkgJson.devDependencies ?? {})) {
+        if ((dep.startsWith("@smithy") || dep.startsWith("@aws-sdk")) && contents.includes(`from "${dep}";`)) {
+          if (dep in pkgJson.peerDependencies) {
+            // peers can be declared in devDeps to set correct build order.
+            continue;
+          }
+
+          errors.push(`${dep} incorrectly declared in devDependencies of ${packageFolder}`);
+          delete pkgJson.devDependencies[dep];
+          if (!pkgJson.dependencies) {
+            pkgJson.dependencies = {};
+          }
+          pkgJson.dependencies[dep] = version;
+
+          fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + "\n");
+        }
+      }
+    }
+  }
+
+  if (errors.length) {
+    throw new Error(errors.join("\n"));
+  }
+})();

@@ -1,34 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   CancelReplicationTaskAssessmentRunMessage,
   CancelReplicationTaskAssessmentRunResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1CancelReplicationTaskAssessmentRunCommand,
-  serializeAws_json1_1CancelReplicationTaskAssessmentRunCommand,
-} from "../protocols/Aws_json1_1";
+import { CancelReplicationTaskAssessmentRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelReplicationTaskAssessmentRunCommand}.
+ */
 export interface CancelReplicationTaskAssessmentRunCommandInput extends CancelReplicationTaskAssessmentRunMessage {}
-export interface CancelReplicationTaskAssessmentRunCommandOutput
-  extends CancelReplicationTaskAssessmentRunResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CancelReplicationTaskAssessmentRunCommand}.
+ */
+export interface CancelReplicationTaskAssessmentRunCommandOutput extends CancelReplicationTaskAssessmentRunResponse, __MetadataBearer {}
 
 /**
  * <p>Cancels a single premigration assessment run.</p>
@@ -40,74 +35,82 @@ export interface CancelReplicationTaskAssessmentRunCommandOutput
  * ```javascript
  * import { DatabaseMigrationServiceClient, CancelReplicationTaskAssessmentRunCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, CancelReplicationTaskAssessmentRunCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // CancelReplicationTaskAssessmentRunMessage
+ *   ReplicationTaskAssessmentRunArn: "STRING_VALUE", // required
+ * };
  * const command = new CancelReplicationTaskAssessmentRunCommand(input);
  * const response = await client.send(command);
+ * // { // CancelReplicationTaskAssessmentRunResponse
+ * //   ReplicationTaskAssessmentRun: { // ReplicationTaskAssessmentRun
+ * //     ReplicationTaskAssessmentRunArn: "STRING_VALUE",
+ * //     ReplicationTaskArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     ReplicationTaskAssessmentRunCreationDate: new Date("TIMESTAMP"),
+ * //     AssessmentProgress: { // ReplicationTaskAssessmentRunProgress
+ * //       IndividualAssessmentCount: Number("int"),
+ * //       IndividualAssessmentCompletedCount: Number("int"),
+ * //     },
+ * //     LastFailureMessage: "STRING_VALUE",
+ * //     ServiceAccessRoleArn: "STRING_VALUE",
+ * //     ResultLocationBucket: "STRING_VALUE",
+ * //     ResultLocationFolder: "STRING_VALUE",
+ * //     ResultEncryptionMode: "STRING_VALUE",
+ * //     ResultKmsKeyArn: "STRING_VALUE",
+ * //     AssessmentRunName: "STRING_VALUE",
+ * //     IsLatestTaskAssessmentRun: true || false,
+ * //     ResultStatistic: { // ReplicationTaskAssessmentRunResultStatistic
+ * //       Passed: Number("int"),
+ * //       Failed: Number("int"),
+ * //       Error: Number("int"),
+ * //       Warning: Number("int"),
+ * //       Cancelled: Number("int"),
+ * //       Skipped: Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CancelReplicationTaskAssessmentRunCommandInput - {@link CancelReplicationTaskAssessmentRunCommandInput}
+ * @returns {@link CancelReplicationTaskAssessmentRunCommandOutput}
  * @see {@link CancelReplicationTaskAssessmentRunCommandInput} for command's `input` shape.
  * @see {@link CancelReplicationTaskAssessmentRunCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class CancelReplicationTaskAssessmentRunCommand extends $Command<
-  CancelReplicationTaskAssessmentRunCommandInput,
-  CancelReplicationTaskAssessmentRunCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelReplicationTaskAssessmentRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelReplicationTaskAssessmentRunCommandInput, CancelReplicationTaskAssessmentRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "CancelReplicationTaskAssessmentRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelReplicationTaskAssessmentRunMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelReplicationTaskAssessmentRunResponse.filterSensitiveLog,
+export class CancelReplicationTaskAssessmentRunCommand extends command<CancelReplicationTaskAssessmentRunCommandInput, CancelReplicationTaskAssessmentRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelReplicationTaskAssessmentRun",
+  CancelReplicationTaskAssessmentRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelReplicationTaskAssessmentRunMessage;
+      output: CancelReplicationTaskAssessmentRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CancelReplicationTaskAssessmentRunCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1CancelReplicationTaskAssessmentRunCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CancelReplicationTaskAssessmentRunCommandOutput> {
-    return deserializeAws_json1_1CancelReplicationTaskAssessmentRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelReplicationTaskAssessmentRunCommandInput;
+      output: CancelReplicationTaskAssessmentRunCommandOutput;
+    };
+  };
 }

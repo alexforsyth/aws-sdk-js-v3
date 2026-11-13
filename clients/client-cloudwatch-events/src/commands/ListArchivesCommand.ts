@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { ListArchivesRequest, ListArchivesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListArchivesCommand,
-  serializeAws_json1_1ListArchivesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListArchivesRequest, ListArchivesResponse } from "../models/models_0";
+import { ListArchives$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListArchivesCommand}.
+ */
 export interface ListArchivesCommandInput extends ListArchivesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListArchivesCommand}.
+ */
 export interface ListArchivesCommandOutput extends ListArchivesResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,69 @@ export interface ListArchivesCommandOutput extends ListArchivesResponse, __Metad
  * ```javascript
  * import { CloudWatchEventsClient, ListArchivesCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, ListArchivesCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // ListArchivesRequest
+ *   NamePrefix: "STRING_VALUE",
+ *   EventSourceArn: "STRING_VALUE",
+ *   State: "ENABLED" || "DISABLED" || "CREATING" || "UPDATING" || "CREATE_FAILED" || "UPDATE_FAILED",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListArchivesCommand(input);
  * const response = await client.send(command);
+ * // { // ListArchivesResponse
+ * //   Archives: [ // ArchiveResponseList
+ * //     { // Archive
+ * //       ArchiveName: "STRING_VALUE",
+ * //       EventSourceArn: "STRING_VALUE",
+ * //       State: "ENABLED" || "DISABLED" || "CREATING" || "UPDATING" || "CREATE_FAILED" || "UPDATE_FAILED",
+ * //       StateReason: "STRING_VALUE",
+ * //       RetentionDays: Number("int"),
+ * //       SizeBytes: Number("long"),
+ * //       EventCount: Number("long"),
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListArchivesCommandInput - {@link ListArchivesCommandInput}
+ * @returns {@link ListArchivesCommandOutput}
  * @see {@link ListArchivesCommandInput} for command's `input` shape.
  * @see {@link ListArchivesCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class ListArchivesCommand extends $Command<
-  ListArchivesCommandInput,
-  ListArchivesCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListArchivesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListArchivesCommandInput, ListArchivesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "ListArchivesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListArchivesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListArchivesResponse.filterSensitiveLog,
+export class ListArchivesCommand extends command<ListArchivesCommandInput, ListArchivesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListArchives",
+  ListArchives$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListArchivesRequest;
+      output: ListArchivesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListArchivesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListArchivesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListArchivesCommandOutput> {
-    return deserializeAws_json1_1ListArchivesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListArchivesCommandInput;
+      output: ListArchivesCommandOutput;
+    };
+  };
 }

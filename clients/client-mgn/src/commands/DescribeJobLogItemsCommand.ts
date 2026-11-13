@@ -1,95 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MgnClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MgnClient";
-import { DescribeJobLogItemsRequest, DescribeJobLogItemsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeJobLogItemsCommand,
-  serializeAws_restJson1DescribeJobLogItemsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeJobLogItemsRequest, DescribeJobLogItemsResponse } from "../models/models_0";
+import { DescribeJobLogItems$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeJobLogItemsCommand}.
+ */
 export interface DescribeJobLogItemsCommandInput extends DescribeJobLogItemsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeJobLogItemsCommand}.
+ */
 export interface DescribeJobLogItemsCommandOutput extends DescribeJobLogItemsResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves detailed Job log with paging.</p>
+ * <p>Retrieves detailed job log items with paging.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MgnClient, DescribeJobLogItemsCommand } from "@aws-sdk/client-mgn"; // ES Modules import
  * // const { MgnClient, DescribeJobLogItemsCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
  * const client = new MgnClient(config);
+ * const input = { // DescribeJobLogItemsRequest
+ *   jobID: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   accountID: "STRING_VALUE",
+ * };
  * const command = new DescribeJobLogItemsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeJobLogItemsResponse
+ * //   items: [ // JobLogs
+ * //     { // JobLog
+ * //       logDateTime: "STRING_VALUE",
+ * //       event: "STRING_VALUE",
+ * //       eventData: { // JobLogEventData
+ * //         sourceServerID: "STRING_VALUE",
+ * //         conversionServerID: "STRING_VALUE",
+ * //         targetInstanceID: "STRING_VALUE",
+ * //         rawError: "STRING_VALUE",
+ * //         attemptCount: Number("int"),
+ * //         maxAttemptsCount: Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeJobLogItemsCommandInput - {@link DescribeJobLogItemsCommandInput}
+ * @returns {@link DescribeJobLogItemsCommandOutput}
  * @see {@link DescribeJobLogItemsCommandInput} for command's `input` shape.
  * @see {@link DescribeJobLogItemsCommandOutput} for command's `response` shape.
- * @see {@link MgnClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
  *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validate exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeJobLogItemsCommand extends $Command<
-  DescribeJobLogItemsCommandInput,
-  DescribeJobLogItemsCommandOutput,
-  MgnClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeJobLogItemsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MgnClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeJobLogItemsCommandInput, DescribeJobLogItemsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MgnClient";
-    const commandName = "DescribeJobLogItemsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeJobLogItemsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeJobLogItemsResponse.filterSensitiveLog,
+export class DescribeJobLogItemsCommand extends command<DescribeJobLogItemsCommandInput, DescribeJobLogItemsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeJobLogItems",
+  DescribeJobLogItems$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeJobLogItemsRequest;
+      output: DescribeJobLogItemsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeJobLogItemsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeJobLogItemsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeJobLogItemsCommandOutput> {
-    return deserializeAws_restJson1DescribeJobLogItemsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeJobLogItemsCommandInput;
+      output: DescribeJobLogItemsCommandOutput;
+    };
+  };
 }

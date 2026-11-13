@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { GetPipelineInput, GetPipelineOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetPipelineCommand,
-  serializeAws_json1_1GetPipelineCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPipelineInput, GetPipelineOutput } from "../models/models_0";
+import { GetPipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPipelineCommand}.
+ */
 export interface GetPipelineCommandInput extends GetPipelineInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetPipelineCommand}.
+ */
 export interface GetPipelineCommandOutput extends GetPipelineOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,310 @@ export interface GetPipelineCommandOutput extends GetPipelineOutput, __MetadataB
  * ```javascript
  * import { CodePipelineClient, GetPipelineCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, GetPipelineCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // GetPipelineInput
+ *   name: "STRING_VALUE", // required
+ *   version: Number("int"),
+ * };
  * const command = new GetPipelineCommand(input);
  * const response = await client.send(command);
+ * // { // GetPipelineOutput
+ * //   pipeline: { // PipelineDeclaration
+ * //     name: "STRING_VALUE", // required
+ * //     roleArn: "STRING_VALUE", // required
+ * //     artifactStore: { // ArtifactStore
+ * //       type: "S3", // required
+ * //       location: "STRING_VALUE", // required
+ * //       encryptionKey: { // EncryptionKey
+ * //         id: "STRING_VALUE", // required
+ * //         type: "KMS", // required
+ * //       },
+ * //     },
+ * //     artifactStores: { // ArtifactStoreMap
+ * //       "<keys>": {
+ * //         type: "S3", // required
+ * //         location: "STRING_VALUE", // required
+ * //         encryptionKey: {
+ * //           id: "STRING_VALUE", // required
+ * //           type: "KMS", // required
+ * //         },
+ * //       },
+ * //     },
+ * //     stages: [ // PipelineStageDeclarationList // required
+ * //       { // StageDeclaration
+ * //         name: "STRING_VALUE", // required
+ * //         blockers: [ // StageBlockerDeclarationList
+ * //           { // BlockerDeclaration
+ * //             name: "STRING_VALUE", // required
+ * //             type: "Schedule", // required
+ * //           },
+ * //         ],
+ * //         actions: [ // StageActionDeclarationList // required
+ * //           { // ActionDeclaration
+ * //             name: "STRING_VALUE", // required
+ * //             actionTypeId: { // ActionTypeId
+ * //               category: "Source" || "Build" || "Deploy" || "Test" || "Invoke" || "Approval" || "Compute", // required
+ * //               owner: "AWS" || "ThirdParty" || "Custom", // required
+ * //               provider: "STRING_VALUE", // required
+ * //               version: "STRING_VALUE", // required
+ * //             },
+ * //             runOrder: Number("int"),
+ * //             configuration: { // ActionConfigurationMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             commands: [ // CommandList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             outputArtifacts: [ // OutputArtifactList
+ * //               { // OutputArtifact
+ * //                 name: "STRING_VALUE", // required
+ * //                 files: [ // FilePathList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             ],
+ * //             inputArtifacts: [ // InputArtifactList
+ * //               { // InputArtifact
+ * //                 name: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //             outputVariables: [ // OutputVariableList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             roleArn: "STRING_VALUE",
+ * //             region: "STRING_VALUE",
+ * //             namespace: "STRING_VALUE",
+ * //             timeoutInMinutes: Number("int"),
+ * //             environmentVariables: [ // EnvironmentVariableList
+ * //               { // EnvironmentVariable
+ * //                 name: "STRING_VALUE", // required
+ * //                 value: "STRING_VALUE", // required
+ * //                 type: "PLAINTEXT" || "SECRETS_MANAGER",
+ * //               },
+ * //             ],
+ * //           },
+ * //         ],
+ * //         onFailure: { // FailureConditions
+ * //           result: "ROLLBACK" || "FAIL" || "RETRY" || "SKIP",
+ * //           retryConfiguration: { // RetryConfiguration
+ * //             retryMode: "FAILED_ACTIONS" || "ALL_ACTIONS",
+ * //           },
+ * //           conditions: [ // ConditionList
+ * //             { // Condition
+ * //               result: "ROLLBACK" || "FAIL" || "RETRY" || "SKIP",
+ * //               rules: [ // RuleDeclarationList
+ * //                 { // RuleDeclaration
+ * //                   name: "STRING_VALUE", // required
+ * //                   ruleTypeId: { // RuleTypeId
+ * //                     category: "Rule", // required
+ * //                     owner: "AWS",
+ * //                     provider: "STRING_VALUE", // required
+ * //                     version: "STRING_VALUE",
+ * //                   },
+ * //                   configuration: { // RuleConfigurationMap
+ * //                     "<keys>": "STRING_VALUE",
+ * //                   },
+ * //                   commands: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                   inputArtifacts: [
+ * //                     {
+ * //                       name: "STRING_VALUE", // required
+ * //                     },
+ * //                   ],
+ * //                   roleArn: "STRING_VALUE",
+ * //                   region: "STRING_VALUE",
+ * //                   timeoutInMinutes: Number("int"),
+ * //                 },
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //         onSuccess: { // SuccessConditions
+ * //           conditions: [ // required
+ * //             {
+ * //               result: "ROLLBACK" || "FAIL" || "RETRY" || "SKIP",
+ * //               rules: [
+ * //                 {
+ * //                   name: "STRING_VALUE", // required
+ * //                   ruleTypeId: {
+ * //                     category: "Rule", // required
+ * //                     owner: "AWS",
+ * //                     provider: "STRING_VALUE", // required
+ * //                     version: "STRING_VALUE",
+ * //                   },
+ * //                   configuration: {
+ * //                     "<keys>": "STRING_VALUE",
+ * //                   },
+ * //                   commands: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                   inputArtifacts: [
+ * //                     {
+ * //                       name: "STRING_VALUE", // required
+ * //                     },
+ * //                   ],
+ * //                   roleArn: "STRING_VALUE",
+ * //                   region: "STRING_VALUE",
+ * //                   timeoutInMinutes: Number("int"),
+ * //                 },
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //         beforeEntry: { // BeforeEntryConditions
+ * //           conditions: [ // required
+ * //             {
+ * //               result: "ROLLBACK" || "FAIL" || "RETRY" || "SKIP",
+ * //               rules: [
+ * //                 {
+ * //                   name: "STRING_VALUE", // required
+ * //                   ruleTypeId: {
+ * //                     category: "Rule", // required
+ * //                     owner: "AWS",
+ * //                     provider: "STRING_VALUE", // required
+ * //                     version: "STRING_VALUE",
+ * //                   },
+ * //                   configuration: {
+ * //                     "<keys>": "STRING_VALUE",
+ * //                   },
+ * //                   commands: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                   inputArtifacts: [
+ * //                     {
+ * //                       name: "STRING_VALUE", // required
+ * //                     },
+ * //                   ],
+ * //                   roleArn: "STRING_VALUE",
+ * //                   region: "STRING_VALUE",
+ * //                   timeoutInMinutes: Number("int"),
+ * //                 },
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     version: Number("int"),
+ * //     executionMode: "QUEUED" || "SUPERSEDED" || "PARALLEL",
+ * //     pipelineType: "V1" || "V2",
+ * //     variables: [ // PipelineVariableDeclarationList
+ * //       { // PipelineVariableDeclaration
+ * //         name: "STRING_VALUE", // required
+ * //         defaultValue: "STRING_VALUE",
+ * //         description: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     triggers: [ // PipelineTriggerDeclarationList
+ * //       { // PipelineTriggerDeclaration
+ * //         providerType: "CodeStarSourceConnection", // required
+ * //         gitConfiguration: { // GitConfiguration
+ * //           sourceActionName: "STRING_VALUE", // required
+ * //           push: [ // GitPushFilterList
+ * //             { // GitPushFilter
+ * //               tags: { // GitTagFilterCriteria
+ * //                 includes: [ // GitTagPatternList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 excludes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //               branches: { // GitBranchFilterCriteria
+ * //                 includes: [ // GitBranchPatternList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 excludes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //               filePaths: { // GitFilePathFilterCriteria
+ * //                 includes: [ // GitFilePathPatternList
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 excludes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             },
+ * //           ],
+ * //           pullRequest: [ // GitPullRequestFilterList
+ * //             { // GitPullRequestFilter
+ * //               events: [ // GitPullRequestEventTypeList
+ * //                 "OPEN" || "UPDATED" || "CLOSED",
+ * //               ],
+ * //               branches: {
+ * //                 includes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 excludes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //               filePaths: {
+ * //                 includes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 excludes: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   metadata: { // PipelineMetadata
+ * //     pipelineArn: "STRING_VALUE",
+ * //     created: new Date("TIMESTAMP"),
+ * //     updated: new Date("TIMESTAMP"),
+ * //     pollingDisabledAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetPipelineCommandInput - {@link GetPipelineCommandInput}
+ * @returns {@link GetPipelineCommandOutput}
  * @see {@link GetPipelineCommandInput} for command's `input` shape.
  * @see {@link GetPipelineCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The pipeline was specified in an invalid format or cannot be found.</p>
+ *
+ * @throws {@link PipelineVersionNotFoundException} (client fault)
+ *  <p>The pipeline version was specified in an invalid format or cannot be
+ *             found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class GetPipelineCommand extends $Command<
-  GetPipelineCommandInput,
-  GetPipelineCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPipelineCommandInput, GetPipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "GetPipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPipelineInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPipelineOutput.filterSensitiveLog,
+export class GetPipelineCommand extends command<GetPipelineCommandInput, GetPipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPipeline",
+  GetPipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPipelineInput;
+      output: GetPipelineOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetPipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPipelineCommandOutput> {
-    return deserializeAws_json1_1GetPipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPipelineCommandInput;
+      output: GetPipelineCommandOutput;
+    };
+  };
 }

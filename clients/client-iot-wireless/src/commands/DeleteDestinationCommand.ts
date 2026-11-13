@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { DeleteDestinationRequest, DeleteDestinationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteDestinationCommand,
-  serializeAws_restJson1DeleteDestinationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDestinationRequest, DeleteDestinationResponse } from "../models/models_0";
+import { DeleteDestination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDestinationCommand}.
+ */
 export interface DeleteDestinationCommandInput extends DeleteDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDestinationCommand}.
+ */
 export interface DeleteDestinationCommandOutput extends DeleteDestinationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface DeleteDestinationCommandOutput extends DeleteDestinationRespons
  * ```javascript
  * import { IoTWirelessClient, DeleteDestinationCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, DeleteDestinationCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // DeleteDestinationRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteDestinationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDestinationCommandInput - {@link DeleteDestinationCommandInput}
+ * @returns {@link DeleteDestinationCommandOutput}
  * @see {@link DeleteDestinationCommandInput} for command's `input` shape.
  * @see {@link DeleteDestinationCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDestinationCommand extends $Command<
-  DeleteDestinationCommandInput,
-  DeleteDestinationCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDestinationCommandInput, DeleteDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "DeleteDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteDestinationResponse.filterSensitiveLog,
+export class DeleteDestinationCommand extends command<DeleteDestinationCommandInput, DeleteDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDestination",
+  DeleteDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDestinationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDestinationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteDestinationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDestinationCommandOutput> {
-    return deserializeAws_restJson1DeleteDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDestinationCommandInput;
+      output: DeleteDestinationCommandOutput;
+    };
+  };
 }

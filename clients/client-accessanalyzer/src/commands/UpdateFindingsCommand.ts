@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { UpdateFindingsRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateFindingsCommand,
-  serializeAws_restJson1UpdateFindingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFindingsRequest } from "../models/models_0";
+import { UpdateFindings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFindingsCommand}.
+ */
 export interface UpdateFindingsCommandInput extends UpdateFindingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFindingsCommand}.
+ */
 export interface UpdateFindingsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface UpdateFindingsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { AccessAnalyzerClient, UpdateFindingsCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, UpdateFindingsCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // UpdateFindingsRequest
+ *   analyzerArn: "STRING_VALUE", // required
+ *   status: "STRING_VALUE", // required
+ *   ids: [ // FindingIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   resourceArn: "STRING_VALUE",
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new UpdateFindingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateFindingsCommandInput - {@link UpdateFindingsCommandInput}
+ * @returns {@link UpdateFindingsCommandOutput}
  * @see {@link UpdateFindingsCommandInput} for command's `input` shape.
  * @see {@link UpdateFindingsCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateFindingsCommand extends $Command<
-  UpdateFindingsCommandInput,
-  UpdateFindingsCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFindingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFindingsCommandInput, UpdateFindingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "UpdateFindingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFindingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateFindingsCommand extends command<UpdateFindingsCommandInput, UpdateFindingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFindings",
+  UpdateFindings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFindingsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateFindingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateFindingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateFindingsCommandOutput> {
-    return deserializeAws_restJson1UpdateFindingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFindingsCommandInput;
+      output: UpdateFindingsCommandOutput;
+    };
+  };
 }

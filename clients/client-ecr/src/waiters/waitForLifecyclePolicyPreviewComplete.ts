@@ -1,20 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type GetLifecyclePolicyPreviewCommandInput,
+  type GetLifecyclePolicyPreviewCommandOutput,
   GetLifecyclePolicyPreviewCommand,
-  GetLifecyclePolicyPreviewCommandInput,
 } from "../commands/GetLifecyclePolicyPreviewCommand";
-import { ECRClient } from "../ECRClient";
+import type { ECRClient } from "../ECRClient";
+import type { ECRServiceException } from "../models/ECRServiceException";
 
-const checkState = async (client: ECRClient, input: GetLifecyclePolicyPreviewCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ECRClient, input: GetLifecyclePolicyPreviewCommandInput): Promise<WaiterResult<GetLifecyclePolicyPreviewCommandOutput | ECRServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetLifecyclePolicyPreviewCommand(input));
+    let result: GetLifecyclePolicyPreviewCommandOutput & any = await client.send(new GetLifecyclePolicyPreviewCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "COMPLETE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -22,7 +31,7 @@ const checkState = async (client: ECRClient, input: GetLifecyclePolicyPreviewCom
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -39,7 +48,7 @@ const checkState = async (client: ECRClient, input: GetLifecyclePolicyPreviewCom
 export const waitForLifecyclePolicyPreviewComplete = async (
   params: WaiterConfiguration<ECRClient>,
   input: GetLifecyclePolicyPreviewCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetLifecyclePolicyPreviewCommandOutput | ECRServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +60,8 @@ export const waitForLifecyclePolicyPreviewComplete = async (
 export const waitUntilLifecyclePolicyPreviewComplete = async (
   params: WaiterConfiguration<ECRClient>,
   input: GetLifecyclePolicyPreviewCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetLifecyclePolicyPreviewCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetLifecyclePolicyPreviewCommandOutput>;
 };

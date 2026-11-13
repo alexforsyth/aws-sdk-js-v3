@@ -1,0 +1,735 @@
+import {
+  ActionConfiguration$,
+  ActionsSuppressedBy,
+  AlarmContributor$,
+  AlarmHistoryItem$,
+  AlarmMuteRuleStatus,
+  AlarmMuteRuleSummary$,
+  AlarmPromQLCriteria$,
+  AlarmTagsPropagation$,
+  AlarmType,
+  AnomalyDetector$,
+  AnomalyDetectorAdaptationSpeed,
+  AnomalyDetectorConfiguration$,
+  AnomalyDetectorOutlierFilteringStrength,
+  AnomalyDetectorStateValue,
+  AnomalyDetectorType,
+  AssociateDatasetKmsKey$,
+  AssociateDatasetKmsKeyCommand,
+  AssociateDatasetKmsKeyInput$,
+  AssociateDatasetKmsKeyOutput$,
+  CloudWatch,
+  CloudWatchClient,
+  CloudWatchServiceException,
+  ComparisonOperator,
+  CompositeAlarm$,
+  ConcurrentModificationException,
+  ConcurrentModificationException$,
+  ConflictException,
+  ConflictException$,
+  CreateResourceMetricsConfiguration$,
+  CreateResourceMetricsConfigurationCommand,
+  CreateResourceMetricsConfigurationInput$,
+  CreateResourceMetricsConfigurationOutput$,
+  DashboardEntry$,
+  DashboardInvalidInputError,
+  DashboardInvalidInputError$,
+  DashboardNotFoundError,
+  DashboardNotFoundError$,
+  DashboardValidationMessage$,
+  Datapoint$,
+  DeleteAlarmMuteRule$,
+  DeleteAlarmMuteRuleCommand,
+  DeleteAlarmMuteRuleInput$,
+  DeleteAlarms$,
+  DeleteAlarmsCommand,
+  DeleteAlarmsInput$,
+  DeleteAnomalyDetector$,
+  DeleteAnomalyDetectorCommand,
+  DeleteAnomalyDetectorInput$,
+  DeleteAnomalyDetectorOutput$,
+  DeleteDashboards$,
+  DeleteDashboardsCommand,
+  DeleteDashboardsInput$,
+  DeleteDashboardsOutput$,
+  DeleteInsightRules$,
+  DeleteInsightRulesCommand,
+  DeleteInsightRulesInput$,
+  DeleteInsightRulesOutput$,
+  DeleteMetricDataQueryDefinition$,
+  DeleteMetricDataQueryDefinitionCommand,
+  DeleteMetricDataQueryDefinitionInput$,
+  DeleteMetricDataQueryDefinitionOutput$,
+  DeleteMetricStream$,
+  DeleteMetricStreamCommand,
+  DeleteMetricStreamInput$,
+  DeleteMetricStreamOutput$,
+  DeleteResourceMetricsConfiguration$,
+  DeleteResourceMetricsConfigurationCommand,
+  DeleteResourceMetricsConfigurationInput$,
+  DeleteResourceMetricsConfigurationOutput$,
+  DescribeAlarmContributors$,
+  DescribeAlarmContributorsCommand,
+  DescribeAlarmContributorsInput$,
+  DescribeAlarmContributorsOutput$,
+  DescribeAlarmHistory$,
+  DescribeAlarmHistoryCommand,
+  DescribeAlarmHistoryInput$,
+  DescribeAlarmHistoryOutput$,
+  DescribeAlarms$,
+  DescribeAlarmsCommand,
+  DescribeAlarmsForMetric$,
+  DescribeAlarmsForMetricCommand,
+  DescribeAlarmsForMetricInput$,
+  DescribeAlarmsForMetricOutput$,
+  DescribeAlarmsInput$,
+  DescribeAlarmsOutput$,
+  DescribeAnomalyDetectors$,
+  DescribeAnomalyDetectorsCommand,
+  DescribeAnomalyDetectorsInput$,
+  DescribeAnomalyDetectorsOutput$,
+  DescribeInsightRules$,
+  DescribeInsightRulesCommand,
+  DescribeInsightRulesInput$,
+  DescribeInsightRulesOutput$,
+  Dimension$,
+  DimensionFilter$,
+  DisableAlarmActions$,
+  DisableAlarmActionsCommand,
+  DisableAlarmActionsInput$,
+  DisableInsightRules$,
+  DisableInsightRulesCommand,
+  DisableInsightRulesInput$,
+  DisableInsightRulesOutput$,
+  DisassociateDatasetKmsKey$,
+  DisassociateDatasetKmsKeyCommand,
+  DisassociateDatasetKmsKeyInput$,
+  DisassociateDatasetKmsKeyOutput$,
+  EnableAlarmActions$,
+  EnableAlarmActionsCommand,
+  EnableAlarmActionsInput$,
+  EnableInsightRules$,
+  EnableInsightRulesCommand,
+  EnableInsightRulesInput$,
+  EnableInsightRulesOutput$,
+  Entity$,
+  EntityMetricData$,
+  EvaluationCriteria$,
+  EvaluationState,
+  EvaluationWindow$,
+  GetAlarmMuteRule$,
+  GetAlarmMuteRuleCommand,
+  GetAlarmMuteRuleInput$,
+  GetAlarmMuteRuleOutput$,
+  GetDashboard$,
+  GetDashboardCommand,
+  GetDashboardInput$,
+  GetDashboardOutput$,
+  GetDataset$,
+  GetDatasetCommand,
+  GetDatasetInput$,
+  GetDatasetOutput$,
+  GetInsightRuleReport$,
+  GetInsightRuleReportCommand,
+  GetInsightRuleReportInput$,
+  GetInsightRuleReportOutput$,
+  GetMetricData$,
+  GetMetricDataCommand,
+  GetMetricDataInput$,
+  GetMetricDataOutput$,
+  GetMetricDataQueryDefinition$,
+  GetMetricDataQueryDefinitionCommand,
+  GetMetricDataQueryDefinitionInput$,
+  GetMetricDataQueryDefinitionOutput$,
+  GetMetricStatistics$,
+  GetMetricStatisticsCommand,
+  GetMetricStatisticsInput$,
+  GetMetricStatisticsOutput$,
+  GetMetricStream$,
+  GetMetricStreamCommand,
+  GetMetricStreamInput$,
+  GetMetricStreamOutput$,
+  GetMetricWidgetImage$,
+  GetMetricWidgetImageCommand,
+  GetMetricWidgetImageInput$,
+  GetMetricWidgetImageOutput$,
+  GetOTelEnrichment$,
+  GetOTelEnrichmentCommand,
+  GetOTelEnrichmentInput$,
+  GetOTelEnrichmentOutput$,
+  GetResourceMetricsConfiguration$,
+  GetResourceMetricsConfigurationCommand,
+  GetResourceMetricsConfigurationInput$,
+  GetResourceMetricsConfigurationOutput$,
+  HistoryItemType,
+  InsightRule$,
+  InsightRuleContributor$,
+  InsightRuleContributorDatapoint$,
+  InsightRuleMetricDatapoint$,
+  InternalServiceFault,
+  InternalServiceFault$,
+  InvalidFormatFault,
+  InvalidFormatFault$,
+  InvalidNextToken,
+  InvalidNextToken$,
+  InvalidParameterCombinationException,
+  InvalidParameterCombinationException$,
+  InvalidParameterValueException,
+  InvalidParameterValueException$,
+  KmsAccessDeniedException,
+  KmsAccessDeniedException$,
+  KmsKeyDisabledException,
+  KmsKeyDisabledException$,
+  KmsKeyNotFoundException,
+  KmsKeyNotFoundException$,
+  LabelOptions$,
+  LimitExceededException,
+  LimitExceededException$,
+  LimitExceededFault,
+  LimitExceededFault$,
+  ListAlarmMuteRules$,
+  ListAlarmMuteRulesCommand,
+  ListAlarmMuteRulesInput$,
+  ListAlarmMuteRulesOutput$,
+  ListDashboards$,
+  ListDashboardsCommand,
+  ListDashboardsInput$,
+  ListDashboardsOutput$,
+  ListManagedInsightRules$,
+  ListManagedInsightRulesCommand,
+  ListManagedInsightRulesInput$,
+  ListManagedInsightRulesOutput$,
+  ListMetricDataQueryDefinitions$,
+  ListMetricDataQueryDefinitionsCommand,
+  ListMetricDataQueryDefinitionsInput$,
+  ListMetricDataQueryDefinitionsOutput$,
+  ListMetrics$,
+  ListMetricsCommand,
+  ListMetricsInput$,
+  ListMetricsOutput$,
+  ListMetricStreams$,
+  ListMetricStreamsCommand,
+  ListMetricStreamsInput$,
+  ListMetricStreamsOutput$,
+  ListTagsForResource$,
+  ListTagsForResourceCommand,
+  ListTagsForResourceInput$,
+  ListTagsForResourceOutput$,
+  LogAlarm$,
+  ManagedRule$,
+  ManagedRuleDescription$,
+  ManagedRuleState$,
+  MessageData$,
+  Metric$,
+  MetricAlarm$,
+  MetricCharacteristics$,
+  MetricDataQuery$,
+  MetricDataQueryDefinitionSummary$,
+  MetricDataResult$,
+  MetricDatum$,
+  MetricMathAnomalyDetector$,
+  MetricStat$,
+  MetricStreamEntry$,
+  MetricStreamFilter$,
+  MetricStreamOutputFormat,
+  MetricStreamStatisticsConfiguration$,
+  MetricStreamStatisticsMetric$,
+  MissingRequiredParameterException,
+  MissingRequiredParameterException$,
+  MuteTargets$,
+  OTelEnrichmentMetricSelector$,
+  OTelEnrichmentStatus,
+  paginateDescribeAlarmHistory,
+  paginateDescribeAlarms,
+  paginateDescribeAnomalyDetectors,
+  paginateDescribeInsightRules,
+  paginateGetMetricData,
+  paginateListAlarmMuteRules,
+  paginateListDashboards,
+  paginateListManagedInsightRules,
+  paginateListMetricDataQueryDefinitions,
+  paginateListMetrics,
+  paginateListMetricStreams,
+  PartialFailure$,
+  PutAlarmMuteRule$,
+  PutAlarmMuteRuleCommand,
+  PutAlarmMuteRuleInput$,
+  PutAnomalyDetector$,
+  PutAnomalyDetectorCommand,
+  PutAnomalyDetectorInput$,
+  PutAnomalyDetectorOutput$,
+  PutCompositeAlarm$,
+  PutCompositeAlarmCommand,
+  PutCompositeAlarmInput$,
+  PutDashboard$,
+  PutDashboardCommand,
+  PutDashboardInput$,
+  PutDashboardOutput$,
+  PutInsightRule$,
+  PutInsightRuleCommand,
+  PutInsightRuleInput$,
+  PutInsightRuleOutput$,
+  PutLogAlarm$,
+  PutLogAlarmCommand,
+  PutLogAlarmInput$,
+  PutManagedInsightRules$,
+  PutManagedInsightRulesCommand,
+  PutManagedInsightRulesInput$,
+  PutManagedInsightRulesOutput$,
+  PutMetricAlarm$,
+  PutMetricAlarmCommand,
+  PutMetricAlarmInput$,
+  PutMetricData$,
+  PutMetricDataCommand,
+  PutMetricDataInput$,
+  PutMetricDataQueryDefinition$,
+  PutMetricDataQueryDefinitionCommand,
+  PutMetricDataQueryDefinitionInput$,
+  PutMetricDataQueryDefinitionOutput$,
+  PutMetricStream$,
+  PutMetricStreamCommand,
+  PutMetricStreamInput$,
+  PutMetricStreamOutput$,
+  QueryType,
+  Range$,
+  RecentlyActive,
+  ResourceConflict,
+  ResourceConflict$,
+  ResourceMetricsConfiguration$,
+  ResourceMetricSelection$,
+  ResourceNotFound,
+  ResourceNotFound$,
+  ResourceNotFoundException,
+  ResourceNotFoundException$,
+  Rule$,
+  ScanBy,
+  Schedule$,
+  ScheduleConfiguration$,
+  ScheduledQueryConfiguration$,
+  SetAlarmState$,
+  SetAlarmStateCommand,
+  SetAlarmStateInput$,
+  SingleMetricAnomalyDetector$,
+  SlidingWindow$,
+  StandardUnit,
+  StartMetricStreams$,
+  StartMetricStreamsCommand,
+  StartMetricStreamsInput$,
+  StartMetricStreamsOutput$,
+  StartOTelEnrichment$,
+  StartOTelEnrichmentCommand,
+  StartOTelEnrichmentInput$,
+  StartOTelEnrichmentOutput$,
+  StateValue,
+  Statistic,
+  StatisticSet$,
+  StatusCode,
+  StopMetricStreams$,
+  StopMetricStreamsCommand,
+  StopMetricStreamsInput$,
+  StopMetricStreamsOutput$,
+  StopOTelEnrichment$,
+  StopOTelEnrichmentCommand,
+  StopOTelEnrichmentInput$,
+  StopOTelEnrichmentOutput$,
+  Tag$,
+  TagResource$,
+  TagResourceCommand,
+  TagResourceInput$,
+  TagResourceOutput$,
+  UntagResource$,
+  UntagResourceCommand,
+  UntagResourceInput$,
+  UntagResourceOutput$,
+  UpdateOTelEnrichment$,
+  UpdateOTelEnrichmentCommand,
+  UpdateOTelEnrichmentInput$,
+  UpdateOTelEnrichmentOutput$,
+  UpdateResourceMetricsConfiguration$,
+  UpdateResourceMetricsConfigurationCommand,
+  UpdateResourceMetricsConfigurationInput$,
+  UpdateResourceMetricsConfigurationOutput$,
+  ValidationException,
+  ValidationException$,
+  waitForAlarmExists,
+  waitForAlarmMuteRuleExists,
+  waitForCompositeAlarmExists,
+  waitForLogAlarmExists,
+  waitUntilAlarmExists,
+  waitUntilAlarmMuteRuleExists,
+  waitUntilCompositeAlarmExists,
+  waitUntilLogAlarmExists,
+  WallClockWindow$,
+  WarmUpConfiguration$,
+} from "../dist-cjs/index.js";
+import assert from "node:assert";
+// clients
+assert(typeof CloudWatchClient === "function");
+assert(typeof CloudWatch === "function");
+// commands
+assert(typeof AssociateDatasetKmsKeyCommand === "function");
+assert(typeof AssociateDatasetKmsKey$ === "object");
+assert(typeof CreateResourceMetricsConfigurationCommand === "function");
+assert(typeof CreateResourceMetricsConfiguration$ === "object");
+assert(typeof DeleteAlarmMuteRuleCommand === "function");
+assert(typeof DeleteAlarmMuteRule$ === "object");
+assert(typeof DeleteAlarmsCommand === "function");
+assert(typeof DeleteAlarms$ === "object");
+assert(typeof DeleteAnomalyDetectorCommand === "function");
+assert(typeof DeleteAnomalyDetector$ === "object");
+assert(typeof DeleteDashboardsCommand === "function");
+assert(typeof DeleteDashboards$ === "object");
+assert(typeof DeleteInsightRulesCommand === "function");
+assert(typeof DeleteInsightRules$ === "object");
+assert(typeof DeleteMetricDataQueryDefinitionCommand === "function");
+assert(typeof DeleteMetricDataQueryDefinition$ === "object");
+assert(typeof DeleteMetricStreamCommand === "function");
+assert(typeof DeleteMetricStream$ === "object");
+assert(typeof DeleteResourceMetricsConfigurationCommand === "function");
+assert(typeof DeleteResourceMetricsConfiguration$ === "object");
+assert(typeof DescribeAlarmContributorsCommand === "function");
+assert(typeof DescribeAlarmContributors$ === "object");
+assert(typeof DescribeAlarmHistoryCommand === "function");
+assert(typeof DescribeAlarmHistory$ === "object");
+assert(typeof DescribeAlarmsCommand === "function");
+assert(typeof DescribeAlarms$ === "object");
+assert(typeof DescribeAlarmsForMetricCommand === "function");
+assert(typeof DescribeAlarmsForMetric$ === "object");
+assert(typeof DescribeAnomalyDetectorsCommand === "function");
+assert(typeof DescribeAnomalyDetectors$ === "object");
+assert(typeof DescribeInsightRulesCommand === "function");
+assert(typeof DescribeInsightRules$ === "object");
+assert(typeof DisableAlarmActionsCommand === "function");
+assert(typeof DisableAlarmActions$ === "object");
+assert(typeof DisableInsightRulesCommand === "function");
+assert(typeof DisableInsightRules$ === "object");
+assert(typeof DisassociateDatasetKmsKeyCommand === "function");
+assert(typeof DisassociateDatasetKmsKey$ === "object");
+assert(typeof EnableAlarmActionsCommand === "function");
+assert(typeof EnableAlarmActions$ === "object");
+assert(typeof EnableInsightRulesCommand === "function");
+assert(typeof EnableInsightRules$ === "object");
+assert(typeof GetAlarmMuteRuleCommand === "function");
+assert(typeof GetAlarmMuteRule$ === "object");
+assert(typeof GetDashboardCommand === "function");
+assert(typeof GetDashboard$ === "object");
+assert(typeof GetDatasetCommand === "function");
+assert(typeof GetDataset$ === "object");
+assert(typeof GetInsightRuleReportCommand === "function");
+assert(typeof GetInsightRuleReport$ === "object");
+assert(typeof GetMetricDataCommand === "function");
+assert(typeof GetMetricData$ === "object");
+assert(typeof GetMetricDataQueryDefinitionCommand === "function");
+assert(typeof GetMetricDataQueryDefinition$ === "object");
+assert(typeof GetMetricStatisticsCommand === "function");
+assert(typeof GetMetricStatistics$ === "object");
+assert(typeof GetMetricStreamCommand === "function");
+assert(typeof GetMetricStream$ === "object");
+assert(typeof GetMetricWidgetImageCommand === "function");
+assert(typeof GetMetricWidgetImage$ === "object");
+assert(typeof GetOTelEnrichmentCommand === "function");
+assert(typeof GetOTelEnrichment$ === "object");
+assert(typeof GetResourceMetricsConfigurationCommand === "function");
+assert(typeof GetResourceMetricsConfiguration$ === "object");
+assert(typeof ListAlarmMuteRulesCommand === "function");
+assert(typeof ListAlarmMuteRules$ === "object");
+assert(typeof ListDashboardsCommand === "function");
+assert(typeof ListDashboards$ === "object");
+assert(typeof ListManagedInsightRulesCommand === "function");
+assert(typeof ListManagedInsightRules$ === "object");
+assert(typeof ListMetricDataQueryDefinitionsCommand === "function");
+assert(typeof ListMetricDataQueryDefinitions$ === "object");
+assert(typeof ListMetricsCommand === "function");
+assert(typeof ListMetrics$ === "object");
+assert(typeof ListMetricStreamsCommand === "function");
+assert(typeof ListMetricStreams$ === "object");
+assert(typeof ListTagsForResourceCommand === "function");
+assert(typeof ListTagsForResource$ === "object");
+assert(typeof PutAlarmMuteRuleCommand === "function");
+assert(typeof PutAlarmMuteRule$ === "object");
+assert(typeof PutAnomalyDetectorCommand === "function");
+assert(typeof PutAnomalyDetector$ === "object");
+assert(typeof PutCompositeAlarmCommand === "function");
+assert(typeof PutCompositeAlarm$ === "object");
+assert(typeof PutDashboardCommand === "function");
+assert(typeof PutDashboard$ === "object");
+assert(typeof PutInsightRuleCommand === "function");
+assert(typeof PutInsightRule$ === "object");
+assert(typeof PutLogAlarmCommand === "function");
+assert(typeof PutLogAlarm$ === "object");
+assert(typeof PutManagedInsightRulesCommand === "function");
+assert(typeof PutManagedInsightRules$ === "object");
+assert(typeof PutMetricAlarmCommand === "function");
+assert(typeof PutMetricAlarm$ === "object");
+assert(typeof PutMetricDataCommand === "function");
+assert(typeof PutMetricData$ === "object");
+assert(typeof PutMetricDataQueryDefinitionCommand === "function");
+assert(typeof PutMetricDataQueryDefinition$ === "object");
+assert(typeof PutMetricStreamCommand === "function");
+assert(typeof PutMetricStream$ === "object");
+assert(typeof SetAlarmStateCommand === "function");
+assert(typeof SetAlarmState$ === "object");
+assert(typeof StartMetricStreamsCommand === "function");
+assert(typeof StartMetricStreams$ === "object");
+assert(typeof StartOTelEnrichmentCommand === "function");
+assert(typeof StartOTelEnrichment$ === "object");
+assert(typeof StopMetricStreamsCommand === "function");
+assert(typeof StopMetricStreams$ === "object");
+assert(typeof StopOTelEnrichmentCommand === "function");
+assert(typeof StopOTelEnrichment$ === "object");
+assert(typeof TagResourceCommand === "function");
+assert(typeof TagResource$ === "object");
+assert(typeof UntagResourceCommand === "function");
+assert(typeof UntagResource$ === "object");
+assert(typeof UpdateOTelEnrichmentCommand === "function");
+assert(typeof UpdateOTelEnrichment$ === "object");
+assert(typeof UpdateResourceMetricsConfigurationCommand === "function");
+assert(typeof UpdateResourceMetricsConfiguration$ === "object");
+// structural schemas
+assert(typeof ActionConfiguration$ === "object");
+assert(typeof AlarmContributor$ === "object");
+assert(typeof AlarmHistoryItem$ === "object");
+assert(typeof AlarmMuteRuleSummary$ === "object");
+assert(typeof AlarmPromQLCriteria$ === "object");
+assert(typeof AlarmTagsPropagation$ === "object");
+assert(typeof AnomalyDetector$ === "object");
+assert(typeof AnomalyDetectorConfiguration$ === "object");
+assert(typeof AssociateDatasetKmsKeyInput$ === "object");
+assert(typeof AssociateDatasetKmsKeyOutput$ === "object");
+assert(typeof CompositeAlarm$ === "object");
+assert(typeof CreateResourceMetricsConfigurationInput$ === "object");
+assert(typeof CreateResourceMetricsConfigurationOutput$ === "object");
+assert(typeof DashboardEntry$ === "object");
+assert(typeof DashboardValidationMessage$ === "object");
+assert(typeof Datapoint$ === "object");
+assert(typeof DeleteAlarmMuteRuleInput$ === "object");
+assert(typeof DeleteAlarmsInput$ === "object");
+assert(typeof DeleteAnomalyDetectorInput$ === "object");
+assert(typeof DeleteAnomalyDetectorOutput$ === "object");
+assert(typeof DeleteDashboardsInput$ === "object");
+assert(typeof DeleteDashboardsOutput$ === "object");
+assert(typeof DeleteInsightRulesInput$ === "object");
+assert(typeof DeleteInsightRulesOutput$ === "object");
+assert(typeof DeleteMetricDataQueryDefinitionInput$ === "object");
+assert(typeof DeleteMetricDataQueryDefinitionOutput$ === "object");
+assert(typeof DeleteMetricStreamInput$ === "object");
+assert(typeof DeleteMetricStreamOutput$ === "object");
+assert(typeof DeleteResourceMetricsConfigurationInput$ === "object");
+assert(typeof DeleteResourceMetricsConfigurationOutput$ === "object");
+assert(typeof DescribeAlarmContributorsInput$ === "object");
+assert(typeof DescribeAlarmContributorsOutput$ === "object");
+assert(typeof DescribeAlarmHistoryInput$ === "object");
+assert(typeof DescribeAlarmHistoryOutput$ === "object");
+assert(typeof DescribeAlarmsForMetricInput$ === "object");
+assert(typeof DescribeAlarmsForMetricOutput$ === "object");
+assert(typeof DescribeAlarmsInput$ === "object");
+assert(typeof DescribeAlarmsOutput$ === "object");
+assert(typeof DescribeAnomalyDetectorsInput$ === "object");
+assert(typeof DescribeAnomalyDetectorsOutput$ === "object");
+assert(typeof DescribeInsightRulesInput$ === "object");
+assert(typeof DescribeInsightRulesOutput$ === "object");
+assert(typeof Dimension$ === "object");
+assert(typeof DimensionFilter$ === "object");
+assert(typeof DisableAlarmActionsInput$ === "object");
+assert(typeof DisableInsightRulesInput$ === "object");
+assert(typeof DisableInsightRulesOutput$ === "object");
+assert(typeof DisassociateDatasetKmsKeyInput$ === "object");
+assert(typeof DisassociateDatasetKmsKeyOutput$ === "object");
+assert(typeof EnableAlarmActionsInput$ === "object");
+assert(typeof EnableInsightRulesInput$ === "object");
+assert(typeof EnableInsightRulesOutput$ === "object");
+assert(typeof Entity$ === "object");
+assert(typeof EntityMetricData$ === "object");
+assert(typeof EvaluationCriteria$ === "object");
+assert(typeof EvaluationWindow$ === "object");
+assert(typeof GetAlarmMuteRuleInput$ === "object");
+assert(typeof GetAlarmMuteRuleOutput$ === "object");
+assert(typeof GetDashboardInput$ === "object");
+assert(typeof GetDashboardOutput$ === "object");
+assert(typeof GetDatasetInput$ === "object");
+assert(typeof GetDatasetOutput$ === "object");
+assert(typeof GetInsightRuleReportInput$ === "object");
+assert(typeof GetInsightRuleReportOutput$ === "object");
+assert(typeof GetMetricDataInput$ === "object");
+assert(typeof GetMetricDataOutput$ === "object");
+assert(typeof GetMetricDataQueryDefinitionInput$ === "object");
+assert(typeof GetMetricDataQueryDefinitionOutput$ === "object");
+assert(typeof GetMetricStatisticsInput$ === "object");
+assert(typeof GetMetricStatisticsOutput$ === "object");
+assert(typeof GetMetricStreamInput$ === "object");
+assert(typeof GetMetricStreamOutput$ === "object");
+assert(typeof GetMetricWidgetImageInput$ === "object");
+assert(typeof GetMetricWidgetImageOutput$ === "object");
+assert(typeof GetOTelEnrichmentInput$ === "object");
+assert(typeof GetOTelEnrichmentOutput$ === "object");
+assert(typeof GetResourceMetricsConfigurationInput$ === "object");
+assert(typeof GetResourceMetricsConfigurationOutput$ === "object");
+assert(typeof InsightRule$ === "object");
+assert(typeof InsightRuleContributor$ === "object");
+assert(typeof InsightRuleContributorDatapoint$ === "object");
+assert(typeof InsightRuleMetricDatapoint$ === "object");
+assert(typeof LabelOptions$ === "object");
+assert(typeof ListAlarmMuteRulesInput$ === "object");
+assert(typeof ListAlarmMuteRulesOutput$ === "object");
+assert(typeof ListDashboardsInput$ === "object");
+assert(typeof ListDashboardsOutput$ === "object");
+assert(typeof ListManagedInsightRulesInput$ === "object");
+assert(typeof ListManagedInsightRulesOutput$ === "object");
+assert(typeof ListMetricDataQueryDefinitionsInput$ === "object");
+assert(typeof ListMetricDataQueryDefinitionsOutput$ === "object");
+assert(typeof ListMetricsInput$ === "object");
+assert(typeof ListMetricsOutput$ === "object");
+assert(typeof ListMetricStreamsInput$ === "object");
+assert(typeof ListMetricStreamsOutput$ === "object");
+assert(typeof ListTagsForResourceInput$ === "object");
+assert(typeof ListTagsForResourceOutput$ === "object");
+assert(typeof LogAlarm$ === "object");
+assert(typeof ManagedRule$ === "object");
+assert(typeof ManagedRuleDescription$ === "object");
+assert(typeof ManagedRuleState$ === "object");
+assert(typeof MessageData$ === "object");
+assert(typeof Metric$ === "object");
+assert(typeof MetricAlarm$ === "object");
+assert(typeof MetricCharacteristics$ === "object");
+assert(typeof MetricDataQuery$ === "object");
+assert(typeof MetricDataQueryDefinitionSummary$ === "object");
+assert(typeof MetricDataResult$ === "object");
+assert(typeof MetricDatum$ === "object");
+assert(typeof MetricMathAnomalyDetector$ === "object");
+assert(typeof MetricStat$ === "object");
+assert(typeof MetricStreamEntry$ === "object");
+assert(typeof MetricStreamFilter$ === "object");
+assert(typeof MetricStreamStatisticsConfiguration$ === "object");
+assert(typeof MetricStreamStatisticsMetric$ === "object");
+assert(typeof MuteTargets$ === "object");
+assert(typeof OTelEnrichmentMetricSelector$ === "object");
+assert(typeof PartialFailure$ === "object");
+assert(typeof PutAlarmMuteRuleInput$ === "object");
+assert(typeof PutAnomalyDetectorInput$ === "object");
+assert(typeof PutAnomalyDetectorOutput$ === "object");
+assert(typeof PutCompositeAlarmInput$ === "object");
+assert(typeof PutDashboardInput$ === "object");
+assert(typeof PutDashboardOutput$ === "object");
+assert(typeof PutInsightRuleInput$ === "object");
+assert(typeof PutInsightRuleOutput$ === "object");
+assert(typeof PutLogAlarmInput$ === "object");
+assert(typeof PutManagedInsightRulesInput$ === "object");
+assert(typeof PutManagedInsightRulesOutput$ === "object");
+assert(typeof PutMetricAlarmInput$ === "object");
+assert(typeof PutMetricDataInput$ === "object");
+assert(typeof PutMetricDataQueryDefinitionInput$ === "object");
+assert(typeof PutMetricDataQueryDefinitionOutput$ === "object");
+assert(typeof PutMetricStreamInput$ === "object");
+assert(typeof PutMetricStreamOutput$ === "object");
+assert(typeof Range$ === "object");
+assert(typeof ResourceMetricsConfiguration$ === "object");
+assert(typeof ResourceMetricSelection$ === "object");
+assert(typeof Rule$ === "object");
+assert(typeof Schedule$ === "object");
+assert(typeof ScheduleConfiguration$ === "object");
+assert(typeof ScheduledQueryConfiguration$ === "object");
+assert(typeof SetAlarmStateInput$ === "object");
+assert(typeof SingleMetricAnomalyDetector$ === "object");
+assert(typeof SlidingWindow$ === "object");
+assert(typeof StartMetricStreamsInput$ === "object");
+assert(typeof StartMetricStreamsOutput$ === "object");
+assert(typeof StartOTelEnrichmentInput$ === "object");
+assert(typeof StartOTelEnrichmentOutput$ === "object");
+assert(typeof StatisticSet$ === "object");
+assert(typeof StopMetricStreamsInput$ === "object");
+assert(typeof StopMetricStreamsOutput$ === "object");
+assert(typeof StopOTelEnrichmentInput$ === "object");
+assert(typeof StopOTelEnrichmentOutput$ === "object");
+assert(typeof Tag$ === "object");
+assert(typeof TagResourceInput$ === "object");
+assert(typeof TagResourceOutput$ === "object");
+assert(typeof UntagResourceInput$ === "object");
+assert(typeof UntagResourceOutput$ === "object");
+assert(typeof UpdateOTelEnrichmentInput$ === "object");
+assert(typeof UpdateOTelEnrichmentOutput$ === "object");
+assert(typeof UpdateResourceMetricsConfigurationInput$ === "object");
+assert(typeof UpdateResourceMetricsConfigurationOutput$ === "object");
+assert(typeof WallClockWindow$ === "object");
+assert(typeof WarmUpConfiguration$ === "object");
+// enums
+assert(typeof ActionsSuppressedBy === "object");
+assert(typeof AlarmMuteRuleStatus === "object");
+assert(typeof AlarmType === "object");
+assert(typeof AnomalyDetectorAdaptationSpeed === "object");
+assert(typeof AnomalyDetectorOutlierFilteringStrength === "object");
+assert(typeof AnomalyDetectorStateValue === "object");
+assert(typeof AnomalyDetectorType === "object");
+assert(typeof ComparisonOperator === "object");
+assert(typeof EvaluationState === "object");
+assert(typeof HistoryItemType === "object");
+assert(typeof MetricStreamOutputFormat === "object");
+assert(typeof OTelEnrichmentStatus === "object");
+assert(typeof QueryType === "object");
+assert(typeof RecentlyActive === "object");
+assert(typeof ScanBy === "object");
+assert(typeof StandardUnit === "object");
+assert(typeof StateValue === "object");
+assert(typeof Statistic === "object");
+assert(typeof StatusCode === "object");
+// errors
+assert(ConcurrentModificationException.prototype instanceof CloudWatchServiceException);
+assert(typeof ConcurrentModificationException$ === "object");
+assert(ConflictException.prototype instanceof CloudWatchServiceException);
+assert(typeof ConflictException$ === "object");
+assert(DashboardInvalidInputError.prototype instanceof CloudWatchServiceException);
+assert(typeof DashboardInvalidInputError$ === "object");
+assert(DashboardNotFoundError.prototype instanceof CloudWatchServiceException);
+assert(typeof DashboardNotFoundError$ === "object");
+assert(InternalServiceFault.prototype instanceof CloudWatchServiceException);
+assert(typeof InternalServiceFault$ === "object");
+assert(InvalidFormatFault.prototype instanceof CloudWatchServiceException);
+assert(typeof InvalidFormatFault$ === "object");
+assert(InvalidNextToken.prototype instanceof CloudWatchServiceException);
+assert(typeof InvalidNextToken$ === "object");
+assert(InvalidParameterCombinationException.prototype instanceof CloudWatchServiceException);
+assert(typeof InvalidParameterCombinationException$ === "object");
+assert(InvalidParameterValueException.prototype instanceof CloudWatchServiceException);
+assert(typeof InvalidParameterValueException$ === "object");
+assert(KmsAccessDeniedException.prototype instanceof CloudWatchServiceException);
+assert(typeof KmsAccessDeniedException$ === "object");
+assert(KmsKeyDisabledException.prototype instanceof CloudWatchServiceException);
+assert(typeof KmsKeyDisabledException$ === "object");
+assert(KmsKeyNotFoundException.prototype instanceof CloudWatchServiceException);
+assert(typeof KmsKeyNotFoundException$ === "object");
+assert(LimitExceededException.prototype instanceof CloudWatchServiceException);
+assert(typeof LimitExceededException$ === "object");
+assert(LimitExceededFault.prototype instanceof CloudWatchServiceException);
+assert(typeof LimitExceededFault$ === "object");
+assert(MissingRequiredParameterException.prototype instanceof CloudWatchServiceException);
+assert(typeof MissingRequiredParameterException$ === "object");
+assert(ResourceConflict.prototype instanceof CloudWatchServiceException);
+assert(typeof ResourceConflict$ === "object");
+assert(ResourceNotFound.prototype instanceof CloudWatchServiceException);
+assert(typeof ResourceNotFound$ === "object");
+assert(ResourceNotFoundException.prototype instanceof CloudWatchServiceException);
+assert(typeof ResourceNotFoundException$ === "object");
+assert(ValidationException.prototype instanceof CloudWatchServiceException);
+assert(typeof ValidationException$ === "object");
+assert(CloudWatchServiceException.prototype instanceof Error);
+// waiters
+assert(typeof waitForAlarmExists === "function");
+assert(typeof waitForAlarmMuteRuleExists === "function");
+assert(typeof waitForCompositeAlarmExists === "function");
+assert(typeof waitForLogAlarmExists === "function");
+assert(typeof waitUntilAlarmExists === "function");
+assert(typeof waitUntilAlarmMuteRuleExists === "function");
+assert(typeof waitUntilCompositeAlarmExists === "function");
+assert(typeof waitUntilLogAlarmExists === "function");
+// paginators
+assert(typeof paginateDescribeAlarmHistory === "function");
+assert(typeof paginateDescribeAlarms === "function");
+assert(typeof paginateDescribeAnomalyDetectors === "function");
+assert(typeof paginateDescribeInsightRules === "function");
+assert(typeof paginateGetMetricData === "function");
+assert(typeof paginateListAlarmMuteRules === "function");
+assert(typeof paginateListDashboards === "function");
+assert(typeof paginateListManagedInsightRules === "function");
+assert(typeof paginateListMetricDataQueryDefinitions === "function");
+assert(typeof paginateListMetricStreams === "function");
+assert(typeof paginateListMetrics === "function");
+console.log(`CloudWatch index test passed.`);

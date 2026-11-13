@@ -1,0 +1,1621 @@
+import {
+  AcceleratorCountRequest$,
+  AcceleratorManufacturer,
+  AcceleratorName,
+  AcceleratorTotalMemoryMiBRequest$,
+  AcceleratorType,
+  AccessDeniedException,
+  AccessDeniedException$,
+  AccessType,
+  AdvancedConfiguration$,
+  AgentUpdateStatus,
+  ApplicationProtocol,
+  AssignPublicIp,
+  AssociateGatewayWithCluster$,
+  AssociateGatewayWithClusterCommand,
+  AssociateGatewayWithClusterRequest$,
+  AssociateGatewayWithClusterResponse$,
+  Attachment$,
+  AttachmentStateChange$,
+  AttestationPolicyStatus,
+  Attribute$,
+  AttributeLimitExceededException,
+  AttributeLimitExceededException$,
+  AutoRepairActionsStatus,
+  AutoRepairConfiguration$,
+  AutoScalingGroupProvider$,
+  AutoScalingGroupProviderUpdate$,
+  AvailabilityZoneRebalancing,
+  AwsVpcConfiguration$,
+  BareMetal,
+  BaselineEbsBandwidthMbpsRequest$,
+  BlockedException,
+  BlockedException$,
+  BurstablePerformance,
+  CanaryConfiguration$,
+  CapacityOptionType,
+  CapacityProvider$,
+  CapacityProviderField,
+  CapacityProviderStatus,
+  CapacityProviderStrategyItem$,
+  CapacityProviderType,
+  CapacityProviderUpdateStatus,
+  CapacityReservationPreference,
+  CapacityReservationRequest$,
+  ClientException,
+  ClientException$,
+  Cluster$,
+  ClusterConfiguration$,
+  ClusterContainsCapacityProviderException,
+  ClusterContainsCapacityProviderException$,
+  ClusterContainsContainerInstancesException,
+  ClusterContainsContainerInstancesException$,
+  ClusterContainsServicesException,
+  ClusterContainsServicesException$,
+  ClusterContainsTasksException,
+  ClusterContainsTasksException$,
+  ClusterField,
+  ClusterNotFoundException,
+  ClusterNotFoundException$,
+  ClusterServiceConnectDefaults$,
+  ClusterServiceConnectDefaultsRequest$,
+  ClusterSetting$,
+  ClusterSettingName,
+  Compatibility,
+  ConflictException,
+  ConflictException$,
+  Connectivity,
+  Container$,
+  ContainerCondition,
+  ContainerDefinition$,
+  ContainerDependency$,
+  ContainerImage$,
+  ContainerInstance$,
+  ContainerInstanceField,
+  ContainerInstanceHealthStatus$,
+  ContainerInstanceStatus,
+  ContainerOverride$,
+  ContainerRestartPolicy$,
+  ContainerStateChange$,
+  ContinueServiceDeployment$,
+  ContinueServiceDeploymentCommand,
+  ContinueServiceDeploymentRequest$,
+  ContinueServiceDeploymentResponse$,
+  CPUArchitecture,
+  CpuManufacturer,
+  CreateCapacityProvider$,
+  CreateCapacityProviderCommand,
+  CreateCapacityProviderRequest$,
+  CreateCapacityProviderResponse$,
+  CreateCluster$,
+  CreateClusterCommand,
+  CreateClusterRequest$,
+  CreateClusterResponse$,
+  CreateDaemon$,
+  CreateDaemonCommand,
+  CreateDaemonRequest$,
+  CreateDaemonResponse$,
+  CreatedAt$,
+  CreateExpressGatewayService$,
+  CreateExpressGatewayServiceCommand,
+  CreateExpressGatewayServiceRequest$,
+  CreateExpressGatewayServiceResponse$,
+  CreateGateway$,
+  CreateGatewayCommand,
+  CreateGatewayRequest$,
+  CreateGatewayResponse$,
+  CreateManagedInstancesProviderConfiguration$,
+  CreateService$,
+  CreateServiceCommand,
+  CreateServiceRequest$,
+  CreateServiceResponse$,
+  CreateTaskSet$,
+  CreateTaskSetCommand,
+  CreateTaskSetRequest$,
+  CreateTaskSetResponse$,
+  DaemonAlarmConfiguration$,
+  DaemonCapacityProvider$,
+  DaemonCircuitBreaker$,
+  DaemonContainerDefinition$,
+  DaemonContainerImage$,
+  DaemonDeployment$,
+  DaemonDeploymentAlarms$,
+  DaemonDeploymentCapacityProvider$,
+  DaemonDeploymentConfiguration$,
+  DaemonDeploymentRevisionDetail$,
+  DaemonDeploymentRollbackMonitorsStatus,
+  DaemonDeploymentStatus,
+  DaemonDeploymentSummary$,
+  DaemonDetail$,
+  DaemonIpcMode,
+  DaemonLinuxParameters$,
+  DaemonNotActiveException,
+  DaemonNotActiveException$,
+  DaemonNotFoundException,
+  DaemonNotFoundException$,
+  DaemonPidMode,
+  DaemonPropagateTags,
+  DaemonRevision$,
+  DaemonRevisionDetail$,
+  DaemonRollback$,
+  DaemonStatus,
+  DaemonSummary$,
+  DaemonTaskDefinition$,
+  DaemonTaskDefinitionRevisionFilter,
+  DaemonTaskDefinitionStatus,
+  DaemonTaskDefinitionStatusFilter,
+  DaemonTaskDefinitionSummary$,
+  DaemonVolume$,
+  DeleteAccountSetting$,
+  DeleteAccountSettingCommand,
+  DeleteAccountSettingRequest$,
+  DeleteAccountSettingResponse$,
+  DeleteAttributes$,
+  DeleteAttributesCommand,
+  DeleteAttributesRequest$,
+  DeleteAttributesResponse$,
+  DeleteCapacityProvider$,
+  DeleteCapacityProviderCommand,
+  DeleteCapacityProviderRequest$,
+  DeleteCapacityProviderResponse$,
+  DeleteCluster$,
+  DeleteClusterCommand,
+  DeleteClusterRequest$,
+  DeleteClusterResponse$,
+  DeleteDaemon$,
+  DeleteDaemonCommand,
+  DeleteDaemonRequest$,
+  DeleteDaemonResponse$,
+  DeleteDaemonTaskDefinition$,
+  DeleteDaemonTaskDefinitionCommand,
+  DeleteDaemonTaskDefinitionRequest$,
+  DeleteDaemonTaskDefinitionResponse$,
+  DeleteExpressGatewayService$,
+  DeleteExpressGatewayServiceCommand,
+  DeleteExpressGatewayServiceRequest$,
+  DeleteExpressGatewayServiceResponse$,
+  DeleteGateway$,
+  DeleteGatewayCommand,
+  DeleteGatewayRequest$,
+  DeleteGatewayResponse$,
+  DeleteService$,
+  DeleteServiceCommand,
+  DeleteServiceRequest$,
+  DeleteServiceResponse$,
+  DeleteTaskDefinitions$,
+  DeleteTaskDefinitionsCommand,
+  DeleteTaskDefinitionsRequest$,
+  DeleteTaskDefinitionsResponse$,
+  DeleteTaskSet$,
+  DeleteTaskSetCommand,
+  DeleteTaskSetRequest$,
+  DeleteTaskSetResponse$,
+  Deployment$,
+  DeploymentAlarms$,
+  DeploymentCircuitBreaker$,
+  DeploymentConfiguration$,
+  DeploymentController$,
+  DeploymentControllerType,
+  DeploymentEarlySuccessCriteria$,
+  DeploymentEphemeralStorage$,
+  DeploymentLifecycleHook$,
+  DeploymentLifecycleHookAction,
+  DeploymentLifecycleHookDetail$,
+  DeploymentLifecycleHookStage,
+  DeploymentLifecycleHookStatus,
+  DeploymentLifecycleHookTargetType,
+  DeploymentLifecycleHookTimeoutConfiguration$,
+  DeploymentRolloutState,
+  DeploymentStrategy,
+  DeregisterContainerInstance$,
+  DeregisterContainerInstanceCommand,
+  DeregisterContainerInstanceRequest$,
+  DeregisterContainerInstanceResponse$,
+  DeregisterTaskDefinition$,
+  DeregisterTaskDefinitionCommand,
+  DeregisterTaskDefinitionRequest$,
+  DeregisterTaskDefinitionResponse$,
+  DescribeCapacityProviders$,
+  DescribeCapacityProvidersCommand,
+  DescribeCapacityProvidersRequest$,
+  DescribeCapacityProvidersResponse$,
+  DescribeClusters$,
+  DescribeClustersCommand,
+  DescribeClustersRequest$,
+  DescribeClustersResponse$,
+  DescribeContainerInstances$,
+  DescribeContainerInstancesCommand,
+  DescribeContainerInstancesRequest$,
+  DescribeContainerInstancesResponse$,
+  DescribeDaemon$,
+  DescribeDaemonCommand,
+  DescribeDaemonDeployments$,
+  DescribeDaemonDeploymentsCommand,
+  DescribeDaemonDeploymentsRequest$,
+  DescribeDaemonDeploymentsResponse$,
+  DescribeDaemonRequest$,
+  DescribeDaemonResponse$,
+  DescribeDaemonRevisions$,
+  DescribeDaemonRevisionsCommand,
+  DescribeDaemonRevisionsRequest$,
+  DescribeDaemonRevisionsResponse$,
+  DescribeDaemonTaskDefinition$,
+  DescribeDaemonTaskDefinitionCommand,
+  DescribeDaemonTaskDefinitionRequest$,
+  DescribeDaemonTaskDefinitionResponse$,
+  DescribeExpressGatewayService$,
+  DescribeExpressGatewayServiceCommand,
+  DescribeExpressGatewayServiceRequest$,
+  DescribeExpressGatewayServiceResponse$,
+  DescribeGateway$,
+  DescribeGatewayAlbConfiguration$,
+  DescribeGatewayCommand,
+  DescribeGatewayConfiguration$,
+  DescribeGatewayRequest$,
+  DescribeGatewayResources$,
+  DescribeGatewayResourcesCommand,
+  DescribeGatewayResourcesRequest$,
+  DescribeGatewayResourcesResponse$,
+  DescribeGatewayResponse$,
+  DescribeGatewayRoute$,
+  DescribeGatewayRouteCommand,
+  DescribeGatewayRouteRequest$,
+  DescribeGatewayRouteResponse$,
+  DescribeServiceDeployments$,
+  DescribeServiceDeploymentsCommand,
+  DescribeServiceDeploymentsRequest$,
+  DescribeServiceDeploymentsResponse$,
+  DescribeServiceRevisions$,
+  DescribeServiceRevisionsCommand,
+  DescribeServiceRevisionsRequest$,
+  DescribeServiceRevisionsResponse$,
+  DescribeServices$,
+  DescribeServicesCommand,
+  DescribeServicesRequest$,
+  DescribeServicesResponse$,
+  DescribeTaskDefinition$,
+  DescribeTaskDefinitionCommand,
+  DescribeTaskDefinitionRequest$,
+  DescribeTaskDefinitionResponse$,
+  DescribeTasks$,
+  DescribeTasksCommand,
+  DescribeTaskSets$,
+  DescribeTaskSetsCommand,
+  DescribeTaskSetsRequest$,
+  DescribeTaskSetsResponse$,
+  DescribeTasksRequest$,
+  DescribeTasksResponse$,
+  DesiredStatus,
+  Device$,
+  DeviceCgroupPermission,
+  DisassociateGatewayFromCluster$,
+  DisassociateGatewayFromClusterCommand,
+  DisassociateGatewayFromClusterRequest$,
+  DisassociateGatewayFromClusterResponse$,
+  DiscoverPollEndpoint$,
+  DiscoverPollEndpointCommand,
+  DiscoverPollEndpointRequest$,
+  DiscoverPollEndpointResponse$,
+  DockerVolumeConfiguration$,
+  EBSResourceType,
+  EBSTagSpecification$,
+  ECS,
+  ECSClient,
+  ECSExpressGatewayService$,
+  ECSManagedResources$,
+  ECSServiceException,
+  EFSAuthorizationConfig$,
+  EFSAuthorizationConfigIAM,
+  EFSTransitEncryption,
+  EFSVolumeConfiguration$,
+  ElbGatewayResources$,
+  EnvironmentFile$,
+  EnvironmentFileType,
+  EphemeralStorage$,
+  ExecuteCommand$,
+  ExecuteCommandCommand,
+  ExecuteCommandConfiguration$,
+  ExecuteCommandLogConfiguration$,
+  ExecuteCommandLogging,
+  ExecuteCommandRequest$,
+  ExecuteCommandResponse$,
+  ExpressCpuArchitecture,
+  ExpressGatewayContainer$,
+  ExpressGatewayRepositoryCredentials$,
+  ExpressGatewayScalingTarget$,
+  ExpressGatewayServiceAwsLogsConfiguration$,
+  ExpressGatewayServiceConfiguration$,
+  ExpressGatewayServiceInclude,
+  ExpressGatewayServiceNetworkConfiguration$,
+  ExpressGatewayServiceScalingMetric,
+  ExpressGatewayServiceStatus$,
+  ExpressGatewayServiceStatusCode,
+  Failure$,
+  FirelensConfiguration$,
+  FirelensConfigurationType,
+  FSxWindowsFileServerAuthorizationConfig$,
+  FSxWindowsFileServerVolumeConfiguration$,
+  Gateway$,
+  GatewayAlbDesyncMitigationMode,
+  GatewayAlbProtocol,
+  GatewayAlbTestTrafficRules$,
+  GatewayClusterAssociationStatus,
+  GatewayClusterAssociationSummary$,
+  GatewayConfiguration$,
+  GatewayConnection$,
+  GatewayConnectionAlbResources$,
+  GatewayConnectionResources$,
+  GatewayConnector$,
+  GatewayConnectorFilters$,
+  GatewayConnectorHealthCheck$,
+  GatewayConnectorHealthCheckMatcher$,
+  GatewayConnectorHealthCheckProtocol,
+  GatewayElbAccessLogConfiguration$,
+  GatewayElbAccessLogDestination$,
+  GatewayElbAccessLogS3Destination$,
+  GatewayElbIpAddressType,
+  GatewayElbNetworkConfiguration$,
+  GatewayElbScheme,
+  GatewayInfrastructureResources$,
+  GatewayNotFoundException,
+  GatewayNotFoundException$,
+  GatewayOperationError$,
+  GatewayResourceFailure$,
+  GatewayResources$,
+  GatewayRoute$,
+  GatewayRouteAlbResources$,
+  GatewayRouteLoadBalancerSecurityGroup$,
+  GatewayRouteResources$,
+  GatewayRouteStatus,
+  GatewayRouteSummary$,
+  GatewayStatus,
+  GatewaySummary$,
+  GatewayTestTrafficHeader$,
+  GetTaskProtection$,
+  GetTaskProtectionCommand,
+  GetTaskProtectionRequest$,
+  GetTaskProtectionResponse$,
+  GpuDevice$,
+  GpuSharingMode,
+  HealthCheck$,
+  HealthStatus,
+  HostEntry$,
+  HostSharedAlbConfiguration$,
+  HostVolumeProperties$,
+  InferenceAccelerator$,
+  InferenceAcceleratorOverride$,
+  InfrastructureOptimization$,
+  IngressPathSummary$,
+  InstanceGeneration,
+  InstanceHealthCheckResult$,
+  InstanceHealthCheckState,
+  InstanceHealthCheckType,
+  InstanceLaunchTemplate$,
+  InstanceLaunchTemplateUpdate$,
+  InstanceRequirementsRequest$,
+  InvalidParameterException,
+  InvalidParameterException$,
+  IpcMode,
+  IsolationMode,
+  KernelCapabilities$,
+  KeyValuePair$,
+  LaunchType,
+  LimitExceededException,
+  LimitExceededException$,
+  LinearConfiguration$,
+  LinuxParameters$,
+  ListAccountSettings$,
+  ListAccountSettingsCommand,
+  ListAccountSettingsRequest$,
+  ListAccountSettingsResponse$,
+  ListAttributes$,
+  ListAttributesCommand,
+  ListAttributesRequest$,
+  ListAttributesResponse$,
+  ListClusters$,
+  ListClustersCommand,
+  ListClustersRequest$,
+  ListClustersResponse$,
+  ListContainerInstances$,
+  ListContainerInstancesCommand,
+  ListContainerInstancesRequest$,
+  ListContainerInstancesResponse$,
+  ListDaemonDeployments$,
+  ListDaemonDeploymentsCommand,
+  ListDaemonDeploymentsRequest$,
+  ListDaemonDeploymentsResponse$,
+  ListDaemons$,
+  ListDaemonsCommand,
+  ListDaemonsRequest$,
+  ListDaemonsResponse$,
+  ListDaemonTaskDefinitions$,
+  ListDaemonTaskDefinitionsCommand,
+  ListDaemonTaskDefinitionsRequest$,
+  ListDaemonTaskDefinitionsResponse$,
+  ListGatewayClusterAssociations$,
+  ListGatewayClusterAssociationsCommand,
+  ListGatewayClusterAssociationsRequest$,
+  ListGatewayClusterAssociationsResponse$,
+  ListGatewayRoutes$,
+  ListGatewayRoutesCommand,
+  ListGatewayRoutesRequest$,
+  ListGatewayRoutesResponse$,
+  ListGateways$,
+  ListGatewaysCommand,
+  ListGatewaysRequest$,
+  ListGatewaysResponse$,
+  ListServiceDeployments$,
+  ListServiceDeploymentsCommand,
+  ListServiceDeploymentsRequest$,
+  ListServiceDeploymentsResponse$,
+  ListServices$,
+  ListServicesByNamespace$,
+  ListServicesByNamespaceCommand,
+  ListServicesByNamespaceRequest$,
+  ListServicesByNamespaceResponse$,
+  ListServicesCommand,
+  ListServicesRequest$,
+  ListServicesResponse$,
+  ListTagsForResource$,
+  ListTagsForResourceCommand,
+  ListTagsForResourceRequest$,
+  ListTagsForResourceResponse$,
+  ListTaskDefinitionFamilies$,
+  ListTaskDefinitionFamiliesCommand,
+  ListTaskDefinitionFamiliesRequest$,
+  ListTaskDefinitionFamiliesResponse$,
+  ListTaskDefinitions$,
+  ListTaskDefinitionsCommand,
+  ListTaskDefinitionsRequest$,
+  ListTaskDefinitionsResponse$,
+  ListTasks$,
+  ListTasksCommand,
+  ListTasksRequest$,
+  ListTasksResponse$,
+  LoadBalancer$,
+  LocalStorage,
+  LocalStorageType,
+  LogConfiguration$,
+  LogDriver,
+  LogDriverVolumeConfiguration$,
+  ManagedAgent$,
+  ManagedAgentName,
+  ManagedAgentStateChange$,
+  ManagedApplicationAutoScalingPolicy$,
+  ManagedAutoScaling$,
+  ManagedCertificate$,
+  ManagedDraining,
+  ManagedIngressPath$,
+  ManagedInstancesLocalStorageConfiguration$,
+  ManagedInstancesMonitoringOptions,
+  ManagedInstancesNetworkConfiguration$,
+  ManagedInstancesProvider$,
+  ManagedInstancesStorageConfiguration$,
+  ManagedListener$,
+  ManagedListenerRule$,
+  ManagedLoadBalancer$,
+  ManagedLogGroup$,
+  ManagedMetricAlarm$,
+  ManagedResourceStatus,
+  ManagedScalableTarget$,
+  ManagedScaling$,
+  ManagedScalingStatus,
+  ManagedSecurityGroup$,
+  ManagedStorageConfiguration$,
+  ManagedTargetGroup$,
+  ManagedTerminationProtection,
+  MemoryGiBPerVCpuRequest$,
+  MemoryMiBRequest$,
+  MetricConfiguration$,
+  MissingVersionException,
+  MissingVersionException$,
+  MonitoringConfiguration$,
+  MountPoint$,
+  NamespaceNotFoundException,
+  NamespaceNotFoundException$,
+  NetworkBandwidthGbpsRequest$,
+  NetworkBinding$,
+  NetworkConfiguration$,
+  NetworkInterface$,
+  NetworkInterfaceCountRequest$,
+  NetworkMode,
+  NoUpdateAvailableException,
+  NoUpdateAvailableException$,
+  NvidiaMpsAllocation$,
+  OSFamily,
+  paginateListAccountSettings,
+  paginateListAttributes,
+  paginateListClusters,
+  paginateListContainerInstances,
+  paginateListGatewayClusterAssociations,
+  paginateListGatewayRoutes,
+  paginateListGateways,
+  paginateListServices,
+  paginateListServicesByNamespace,
+  paginateListTaskDefinitionFamilies,
+  paginateListTaskDefinitions,
+  paginateListTasks,
+  PidMode,
+  PlacementConstraint$,
+  PlacementConstraintType,
+  PlacementStrategy$,
+  PlacementStrategyType,
+  PlatformDevice$,
+  PlatformDeviceType,
+  PlatformTaskDefinitionIncompatibilityException,
+  PlatformTaskDefinitionIncompatibilityException$,
+  PlatformUnknownException,
+  PlatformUnknownException$,
+  PortMapping$,
+  PropagateGatewayTags,
+  PropagateMITags,
+  PropagateTags,
+  ProtectedTask$,
+  ProxyConfiguration$,
+  ProxyConfigurationType,
+  PutAccountSetting$,
+  PutAccountSettingCommand,
+  PutAccountSettingDefault$,
+  PutAccountSettingDefaultCommand,
+  PutAccountSettingDefaultRequest$,
+  PutAccountSettingDefaultResponse$,
+  PutAccountSettingRequest$,
+  PutAccountSettingResponse$,
+  PutAttributes$,
+  PutAttributesCommand,
+  PutAttributesRequest$,
+  PutAttributesResponse$,
+  PutClusterCapacityProviders$,
+  PutClusterCapacityProvidersCommand,
+  PutClusterCapacityProvidersRequest$,
+  PutClusterCapacityProvidersResponse$,
+  RegisterContainerInstance$,
+  RegisterContainerInstanceCommand,
+  RegisterContainerInstanceRequest$,
+  RegisterContainerInstanceResponse$,
+  RegisterDaemonTaskDefinition$,
+  RegisterDaemonTaskDefinitionCommand,
+  RegisterDaemonTaskDefinitionRequest$,
+  RegisterDaemonTaskDefinitionResponse$,
+  RegisterTaskDefinition$,
+  RegisterTaskDefinitionCommand,
+  RegisterTaskDefinitionRequest$,
+  RegisterTaskDefinitionResponse$,
+  RepositoryCredentials$,
+  ResolvedConfiguration$,
+  Resource$,
+  ResourceInUseException,
+  ResourceInUseException$,
+  ResourceManagementType,
+  ResourceNotFoundException,
+  ResourceNotFoundException$,
+  ResourceRequirement$,
+  ResourceType,
+  Rollback$,
+  RunTask$,
+  RunTaskCommand,
+  RunTaskRequest$,
+  RunTaskResponse$,
+  RuntimePlatform$,
+  RuntimePlatformOverride$,
+  S3FilesVolumeConfiguration$,
+  Scale$,
+  ScaleUnit,
+  SchedulingStrategy,
+  Scope,
+  Secret$,
+  ServerException,
+  ServerException$,
+  Service$,
+  ServiceConnectAccessLogConfiguration$,
+  ServiceConnectAccessLoggingFormat,
+  ServiceConnectClientAlias$,
+  ServiceConnectConfiguration$,
+  ServiceConnectContainerConfiguration$,
+  ServiceConnectContainerLogLevel,
+  ServiceConnectIncludeQueryParameters,
+  ServiceConnectService$,
+  ServiceConnectServiceResource$,
+  ServiceConnectTestTrafficHeaderMatchRules$,
+  ServiceConnectTestTrafficHeaderRules$,
+  ServiceConnectTestTrafficRules$,
+  ServiceConnectTlsCertificateAuthority$,
+  ServiceConnectTlsConfiguration$,
+  ServiceCurrentRevisionSummary$,
+  ServiceDeployment$,
+  ServiceDeploymentAlarms$,
+  ServiceDeploymentBrief$,
+  ServiceDeploymentCircuitBreaker$,
+  ServiceDeploymentLifecycleStage,
+  ServiceDeploymentNotFoundException,
+  ServiceDeploymentNotFoundException$,
+  ServiceDeploymentRollbackMonitorsStatus,
+  ServiceDeploymentStatus,
+  ServiceEvent$,
+  ServiceField,
+  ServiceManagedEBSVolumeConfiguration$,
+  ServiceNotActiveException,
+  ServiceNotActiveException$,
+  ServiceNotFoundException,
+  ServiceNotFoundException$,
+  ServiceRegistry$,
+  ServiceRevision$,
+  ServiceRevisionCleanup,
+  ServiceRevisionLoadBalancer$,
+  ServiceRevisionOverrides$,
+  ServiceRevisionSummary$,
+  ServiceRevisionVpcLatticeConfiguration$,
+  ServiceVolumeConfiguration$,
+  Session$,
+  Setting$,
+  SettingName,
+  SettingType,
+  SharingStrategy$,
+  SortOrder,
+  StabilityStatus,
+  StartTask$,
+  StartTaskCommand,
+  StartTaskRequest$,
+  StartTaskResponse$,
+  StopServiceDeployment$,
+  StopServiceDeploymentCommand,
+  StopServiceDeploymentRequest$,
+  StopServiceDeploymentResponse$,
+  StopServiceDeploymentStopType,
+  StopTask$,
+  StopTaskCommand,
+  StopTaskRequest$,
+  StopTaskResponse$,
+  SubmitAttachmentStateChanges$,
+  SubmitAttachmentStateChangesCommand,
+  SubmitAttachmentStateChangesRequest$,
+  SubmitAttachmentStateChangesResponse$,
+  SubmitContainerStateChange$,
+  SubmitContainerStateChangeCommand,
+  SubmitContainerStateChangeRequest$,
+  SubmitContainerStateChangeResponse$,
+  SubmitTaskStateChange$,
+  SubmitTaskStateChangeCommand,
+  SubmitTaskStateChangeRequest$,
+  SubmitTaskStateChangeResponse$,
+  SystemControl$,
+  Tag$,
+  TagResource$,
+  TagResourceCommand,
+  TagResourceRequest$,
+  TagResourceResponse$,
+  TargetNotConnectedException,
+  TargetNotConnectedException$,
+  TargetNotFoundException,
+  TargetNotFoundException$,
+  TargetType,
+  Task$,
+  TaskDefinition$,
+  TaskDefinitionFamilyStatus,
+  TaskDefinitionField,
+  TaskDefinitionPlacementConstraint$,
+  TaskDefinitionPlacementConstraintType,
+  TaskDefinitionStatus,
+  TaskEphemeralStorage$,
+  TaskField,
+  TaskFilesystemType,
+  TaskManagedEBSVolumeConfiguration$,
+  TaskManagedEBSVolumeTerminationPolicy$,
+  TaskOverride$,
+  TaskSet$,
+  TaskSetField,
+  TaskSetNotFoundException,
+  TaskSetNotFoundException$,
+  TaskStopCode,
+  TaskVolumeConfiguration$,
+  ThresholdConfiguration$,
+  ThresholdType,
+  TimeoutConfiguration$,
+  Tmpfs$,
+  TotalLocalStorageGBRequest$,
+  TransportProtocol,
+  TrustedExecutionConfiguration$,
+  TrustedExecutionSummary$,
+  Ulimit$,
+  UlimitName,
+  UnsupportedFeatureException,
+  UnsupportedFeatureException$,
+  UntagResource$,
+  UntagResourceCommand,
+  UntagResourceRequest$,
+  UntagResourceResponse$,
+  UpdateCapacityProvider$,
+  UpdateCapacityProviderCommand,
+  UpdateCapacityProviderRequest$,
+  UpdateCapacityProviderResponse$,
+  UpdateCluster$,
+  UpdateClusterCommand,
+  UpdateClusterRequest$,
+  UpdateClusterResponse$,
+  UpdateClusterSettings$,
+  UpdateClusterSettingsCommand,
+  UpdateClusterSettingsRequest$,
+  UpdateClusterSettingsResponse$,
+  UpdateContainerAgent$,
+  UpdateContainerAgentCommand,
+  UpdateContainerAgentRequest$,
+  UpdateContainerAgentResponse$,
+  UpdateContainerInstancesState$,
+  UpdateContainerInstancesStateCommand,
+  UpdateContainerInstancesStateRequest$,
+  UpdateContainerInstancesStateResponse$,
+  UpdateDaemon$,
+  UpdateDaemonCommand,
+  UpdateDaemonRequest$,
+  UpdateDaemonResponse$,
+  UpdatedExpressGatewayService$,
+  UpdateExpressGatewayService$,
+  UpdateExpressGatewayServiceCommand,
+  UpdateExpressGatewayServiceRequest$,
+  UpdateExpressGatewayServiceResponse$,
+  UpdateGateway$,
+  UpdateGatewayAlbConfiguration$,
+  UpdateGatewayCommand,
+  UpdateGatewayConfiguration$,
+  UpdateGatewayNetworkConfiguration$,
+  UpdateGatewayRequest$,
+  UpdateGatewayResponse$,
+  UpdateInProgressException,
+  UpdateInProgressException$,
+  UpdateManagedInstancesProviderConfiguration$,
+  UpdateService$,
+  UpdateServiceCommand,
+  UpdateServicePrimaryTaskSet$,
+  UpdateServicePrimaryTaskSetCommand,
+  UpdateServicePrimaryTaskSetRequest$,
+  UpdateServicePrimaryTaskSetResponse$,
+  UpdateServiceRequest$,
+  UpdateServiceResponse$,
+  UpdateTaskProtection$,
+  UpdateTaskProtectionCommand,
+  UpdateTaskProtectionRequest$,
+  UpdateTaskProtectionResponse$,
+  UpdateTaskSet$,
+  UpdateTaskSetCommand,
+  UpdateTaskSetRequest$,
+  UpdateTaskSetResponse$,
+  VCpuCountRangeRequest$,
+  VersionConsistency,
+  VersionInfo$,
+  Volume$,
+  VolumeFrom$,
+  VpcLatticeAdvancedConfiguration$,
+  VpcLatticeConfiguration$,
+  waitForDaemonActive,
+  waitForDaemonDeploymentStopped,
+  waitForDaemonDeploymentSuccessful,
+  waitForDaemonTaskDefinitionActive,
+  waitForDaemonTaskDefinitionDeleted,
+  waitForServicesInactive,
+  waitForServicesStable,
+  waitForTasksRunning,
+  waitForTasksStopped,
+  waitUntilDaemonActive,
+  waitUntilDaemonDeploymentStopped,
+  waitUntilDaemonDeploymentSuccessful,
+  waitUntilDaemonTaskDefinitionActive,
+  waitUntilDaemonTaskDefinitionDeleted,
+  waitUntilServicesInactive,
+  waitUntilServicesStable,
+  waitUntilTasksRunning,
+  waitUntilTasksStopped,
+} from "../dist-cjs/index.js";
+import assert from "node:assert";
+// clients
+assert(typeof ECSClient === "function");
+assert(typeof ECS === "function");
+// commands
+assert(typeof AssociateGatewayWithClusterCommand === "function");
+assert(typeof AssociateGatewayWithCluster$ === "object");
+assert(typeof ContinueServiceDeploymentCommand === "function");
+assert(typeof ContinueServiceDeployment$ === "object");
+assert(typeof CreateCapacityProviderCommand === "function");
+assert(typeof CreateCapacityProvider$ === "object");
+assert(typeof CreateClusterCommand === "function");
+assert(typeof CreateCluster$ === "object");
+assert(typeof CreateDaemonCommand === "function");
+assert(typeof CreateDaemon$ === "object");
+assert(typeof CreateExpressGatewayServiceCommand === "function");
+assert(typeof CreateExpressGatewayService$ === "object");
+assert(typeof CreateGatewayCommand === "function");
+assert(typeof CreateGateway$ === "object");
+assert(typeof CreateServiceCommand === "function");
+assert(typeof CreateService$ === "object");
+assert(typeof CreateTaskSetCommand === "function");
+assert(typeof CreateTaskSet$ === "object");
+assert(typeof DeleteAccountSettingCommand === "function");
+assert(typeof DeleteAccountSetting$ === "object");
+assert(typeof DeleteAttributesCommand === "function");
+assert(typeof DeleteAttributes$ === "object");
+assert(typeof DeleteCapacityProviderCommand === "function");
+assert(typeof DeleteCapacityProvider$ === "object");
+assert(typeof DeleteClusterCommand === "function");
+assert(typeof DeleteCluster$ === "object");
+assert(typeof DeleteDaemonCommand === "function");
+assert(typeof DeleteDaemon$ === "object");
+assert(typeof DeleteDaemonTaskDefinitionCommand === "function");
+assert(typeof DeleteDaemonTaskDefinition$ === "object");
+assert(typeof DeleteExpressGatewayServiceCommand === "function");
+assert(typeof DeleteExpressGatewayService$ === "object");
+assert(typeof DeleteGatewayCommand === "function");
+assert(typeof DeleteGateway$ === "object");
+assert(typeof DeleteServiceCommand === "function");
+assert(typeof DeleteService$ === "object");
+assert(typeof DeleteTaskDefinitionsCommand === "function");
+assert(typeof DeleteTaskDefinitions$ === "object");
+assert(typeof DeleteTaskSetCommand === "function");
+assert(typeof DeleteTaskSet$ === "object");
+assert(typeof DeregisterContainerInstanceCommand === "function");
+assert(typeof DeregisterContainerInstance$ === "object");
+assert(typeof DeregisterTaskDefinitionCommand === "function");
+assert(typeof DeregisterTaskDefinition$ === "object");
+assert(typeof DescribeCapacityProvidersCommand === "function");
+assert(typeof DescribeCapacityProviders$ === "object");
+assert(typeof DescribeClustersCommand === "function");
+assert(typeof DescribeClusters$ === "object");
+assert(typeof DescribeContainerInstancesCommand === "function");
+assert(typeof DescribeContainerInstances$ === "object");
+assert(typeof DescribeDaemonCommand === "function");
+assert(typeof DescribeDaemon$ === "object");
+assert(typeof DescribeDaemonDeploymentsCommand === "function");
+assert(typeof DescribeDaemonDeployments$ === "object");
+assert(typeof DescribeDaemonRevisionsCommand === "function");
+assert(typeof DescribeDaemonRevisions$ === "object");
+assert(typeof DescribeDaemonTaskDefinitionCommand === "function");
+assert(typeof DescribeDaemonTaskDefinition$ === "object");
+assert(typeof DescribeExpressGatewayServiceCommand === "function");
+assert(typeof DescribeExpressGatewayService$ === "object");
+assert(typeof DescribeGatewayCommand === "function");
+assert(typeof DescribeGateway$ === "object");
+assert(typeof DescribeGatewayResourcesCommand === "function");
+assert(typeof DescribeGatewayResources$ === "object");
+assert(typeof DescribeGatewayRouteCommand === "function");
+assert(typeof DescribeGatewayRoute$ === "object");
+assert(typeof DescribeServiceDeploymentsCommand === "function");
+assert(typeof DescribeServiceDeployments$ === "object");
+assert(typeof DescribeServiceRevisionsCommand === "function");
+assert(typeof DescribeServiceRevisions$ === "object");
+assert(typeof DescribeServicesCommand === "function");
+assert(typeof DescribeServices$ === "object");
+assert(typeof DescribeTaskDefinitionCommand === "function");
+assert(typeof DescribeTaskDefinition$ === "object");
+assert(typeof DescribeTasksCommand === "function");
+assert(typeof DescribeTasks$ === "object");
+assert(typeof DescribeTaskSetsCommand === "function");
+assert(typeof DescribeTaskSets$ === "object");
+assert(typeof DisassociateGatewayFromClusterCommand === "function");
+assert(typeof DisassociateGatewayFromCluster$ === "object");
+assert(typeof DiscoverPollEndpointCommand === "function");
+assert(typeof DiscoverPollEndpoint$ === "object");
+assert(typeof ExecuteCommandCommand === "function");
+assert(typeof ExecuteCommand$ === "object");
+assert(typeof GetTaskProtectionCommand === "function");
+assert(typeof GetTaskProtection$ === "object");
+assert(typeof ListAccountSettingsCommand === "function");
+assert(typeof ListAccountSettings$ === "object");
+assert(typeof ListAttributesCommand === "function");
+assert(typeof ListAttributes$ === "object");
+assert(typeof ListClustersCommand === "function");
+assert(typeof ListClusters$ === "object");
+assert(typeof ListContainerInstancesCommand === "function");
+assert(typeof ListContainerInstances$ === "object");
+assert(typeof ListDaemonDeploymentsCommand === "function");
+assert(typeof ListDaemonDeployments$ === "object");
+assert(typeof ListDaemonsCommand === "function");
+assert(typeof ListDaemons$ === "object");
+assert(typeof ListDaemonTaskDefinitionsCommand === "function");
+assert(typeof ListDaemonTaskDefinitions$ === "object");
+assert(typeof ListGatewayClusterAssociationsCommand === "function");
+assert(typeof ListGatewayClusterAssociations$ === "object");
+assert(typeof ListGatewayRoutesCommand === "function");
+assert(typeof ListGatewayRoutes$ === "object");
+assert(typeof ListGatewaysCommand === "function");
+assert(typeof ListGateways$ === "object");
+assert(typeof ListServiceDeploymentsCommand === "function");
+assert(typeof ListServiceDeployments$ === "object");
+assert(typeof ListServicesCommand === "function");
+assert(typeof ListServices$ === "object");
+assert(typeof ListServicesByNamespaceCommand === "function");
+assert(typeof ListServicesByNamespace$ === "object");
+assert(typeof ListTagsForResourceCommand === "function");
+assert(typeof ListTagsForResource$ === "object");
+assert(typeof ListTaskDefinitionFamiliesCommand === "function");
+assert(typeof ListTaskDefinitionFamilies$ === "object");
+assert(typeof ListTaskDefinitionsCommand === "function");
+assert(typeof ListTaskDefinitions$ === "object");
+assert(typeof ListTasksCommand === "function");
+assert(typeof ListTasks$ === "object");
+assert(typeof PutAccountSettingCommand === "function");
+assert(typeof PutAccountSetting$ === "object");
+assert(typeof PutAccountSettingDefaultCommand === "function");
+assert(typeof PutAccountSettingDefault$ === "object");
+assert(typeof PutAttributesCommand === "function");
+assert(typeof PutAttributes$ === "object");
+assert(typeof PutClusterCapacityProvidersCommand === "function");
+assert(typeof PutClusterCapacityProviders$ === "object");
+assert(typeof RegisterContainerInstanceCommand === "function");
+assert(typeof RegisterContainerInstance$ === "object");
+assert(typeof RegisterDaemonTaskDefinitionCommand === "function");
+assert(typeof RegisterDaemonTaskDefinition$ === "object");
+assert(typeof RegisterTaskDefinitionCommand === "function");
+assert(typeof RegisterTaskDefinition$ === "object");
+assert(typeof RunTaskCommand === "function");
+assert(typeof RunTask$ === "object");
+assert(typeof StartTaskCommand === "function");
+assert(typeof StartTask$ === "object");
+assert(typeof StopServiceDeploymentCommand === "function");
+assert(typeof StopServiceDeployment$ === "object");
+assert(typeof StopTaskCommand === "function");
+assert(typeof StopTask$ === "object");
+assert(typeof SubmitAttachmentStateChangesCommand === "function");
+assert(typeof SubmitAttachmentStateChanges$ === "object");
+assert(typeof SubmitContainerStateChangeCommand === "function");
+assert(typeof SubmitContainerStateChange$ === "object");
+assert(typeof SubmitTaskStateChangeCommand === "function");
+assert(typeof SubmitTaskStateChange$ === "object");
+assert(typeof TagResourceCommand === "function");
+assert(typeof TagResource$ === "object");
+assert(typeof UntagResourceCommand === "function");
+assert(typeof UntagResource$ === "object");
+assert(typeof UpdateCapacityProviderCommand === "function");
+assert(typeof UpdateCapacityProvider$ === "object");
+assert(typeof UpdateClusterCommand === "function");
+assert(typeof UpdateCluster$ === "object");
+assert(typeof UpdateClusterSettingsCommand === "function");
+assert(typeof UpdateClusterSettings$ === "object");
+assert(typeof UpdateContainerAgentCommand === "function");
+assert(typeof UpdateContainerAgent$ === "object");
+assert(typeof UpdateContainerInstancesStateCommand === "function");
+assert(typeof UpdateContainerInstancesState$ === "object");
+assert(typeof UpdateDaemonCommand === "function");
+assert(typeof UpdateDaemon$ === "object");
+assert(typeof UpdateExpressGatewayServiceCommand === "function");
+assert(typeof UpdateExpressGatewayService$ === "object");
+assert(typeof UpdateGatewayCommand === "function");
+assert(typeof UpdateGateway$ === "object");
+assert(typeof UpdateServiceCommand === "function");
+assert(typeof UpdateService$ === "object");
+assert(typeof UpdateServicePrimaryTaskSetCommand === "function");
+assert(typeof UpdateServicePrimaryTaskSet$ === "object");
+assert(typeof UpdateTaskProtectionCommand === "function");
+assert(typeof UpdateTaskProtection$ === "object");
+assert(typeof UpdateTaskSetCommand === "function");
+assert(typeof UpdateTaskSet$ === "object");
+// structural schemas
+assert(typeof AcceleratorCountRequest$ === "object");
+assert(typeof AcceleratorTotalMemoryMiBRequest$ === "object");
+assert(typeof AdvancedConfiguration$ === "object");
+assert(typeof AssociateGatewayWithClusterRequest$ === "object");
+assert(typeof AssociateGatewayWithClusterResponse$ === "object");
+assert(typeof Attachment$ === "object");
+assert(typeof AttachmentStateChange$ === "object");
+assert(typeof Attribute$ === "object");
+assert(typeof AutoRepairConfiguration$ === "object");
+assert(typeof AutoScalingGroupProvider$ === "object");
+assert(typeof AutoScalingGroupProviderUpdate$ === "object");
+assert(typeof AwsVpcConfiguration$ === "object");
+assert(typeof BaselineEbsBandwidthMbpsRequest$ === "object");
+assert(typeof CanaryConfiguration$ === "object");
+assert(typeof CapacityProvider$ === "object");
+assert(typeof CapacityProviderStrategyItem$ === "object");
+assert(typeof CapacityReservationRequest$ === "object");
+assert(typeof Cluster$ === "object");
+assert(typeof ClusterConfiguration$ === "object");
+assert(typeof ClusterServiceConnectDefaults$ === "object");
+assert(typeof ClusterServiceConnectDefaultsRequest$ === "object");
+assert(typeof ClusterSetting$ === "object");
+assert(typeof Container$ === "object");
+assert(typeof ContainerDefinition$ === "object");
+assert(typeof ContainerDependency$ === "object");
+assert(typeof ContainerImage$ === "object");
+assert(typeof ContainerInstance$ === "object");
+assert(typeof ContainerInstanceHealthStatus$ === "object");
+assert(typeof ContainerOverride$ === "object");
+assert(typeof ContainerRestartPolicy$ === "object");
+assert(typeof ContainerStateChange$ === "object");
+assert(typeof ContinueServiceDeploymentRequest$ === "object");
+assert(typeof ContinueServiceDeploymentResponse$ === "object");
+assert(typeof CreateCapacityProviderRequest$ === "object");
+assert(typeof CreateCapacityProviderResponse$ === "object");
+assert(typeof CreateClusterRequest$ === "object");
+assert(typeof CreateClusterResponse$ === "object");
+assert(typeof CreateDaemonRequest$ === "object");
+assert(typeof CreateDaemonResponse$ === "object");
+assert(typeof CreatedAt$ === "object");
+assert(typeof CreateExpressGatewayServiceRequest$ === "object");
+assert(typeof CreateExpressGatewayServiceResponse$ === "object");
+assert(typeof CreateGatewayRequest$ === "object");
+assert(typeof CreateGatewayResponse$ === "object");
+assert(typeof CreateManagedInstancesProviderConfiguration$ === "object");
+assert(typeof CreateServiceRequest$ === "object");
+assert(typeof CreateServiceResponse$ === "object");
+assert(typeof CreateTaskSetRequest$ === "object");
+assert(typeof CreateTaskSetResponse$ === "object");
+assert(typeof DaemonAlarmConfiguration$ === "object");
+assert(typeof DaemonCapacityProvider$ === "object");
+assert(typeof DaemonCircuitBreaker$ === "object");
+assert(typeof DaemonContainerDefinition$ === "object");
+assert(typeof DaemonContainerImage$ === "object");
+assert(typeof DaemonDeployment$ === "object");
+assert(typeof DaemonDeploymentAlarms$ === "object");
+assert(typeof DaemonDeploymentCapacityProvider$ === "object");
+assert(typeof DaemonDeploymentConfiguration$ === "object");
+assert(typeof DaemonDeploymentRevisionDetail$ === "object");
+assert(typeof DaemonDeploymentSummary$ === "object");
+assert(typeof DaemonDetail$ === "object");
+assert(typeof DaemonLinuxParameters$ === "object");
+assert(typeof DaemonRevision$ === "object");
+assert(typeof DaemonRevisionDetail$ === "object");
+assert(typeof DaemonRollback$ === "object");
+assert(typeof DaemonSummary$ === "object");
+assert(typeof DaemonTaskDefinition$ === "object");
+assert(typeof DaemonTaskDefinitionSummary$ === "object");
+assert(typeof DaemonVolume$ === "object");
+assert(typeof DeleteAccountSettingRequest$ === "object");
+assert(typeof DeleteAccountSettingResponse$ === "object");
+assert(typeof DeleteAttributesRequest$ === "object");
+assert(typeof DeleteAttributesResponse$ === "object");
+assert(typeof DeleteCapacityProviderRequest$ === "object");
+assert(typeof DeleteCapacityProviderResponse$ === "object");
+assert(typeof DeleteClusterRequest$ === "object");
+assert(typeof DeleteClusterResponse$ === "object");
+assert(typeof DeleteDaemonRequest$ === "object");
+assert(typeof DeleteDaemonResponse$ === "object");
+assert(typeof DeleteDaemonTaskDefinitionRequest$ === "object");
+assert(typeof DeleteDaemonTaskDefinitionResponse$ === "object");
+assert(typeof DeleteExpressGatewayServiceRequest$ === "object");
+assert(typeof DeleteExpressGatewayServiceResponse$ === "object");
+assert(typeof DeleteGatewayRequest$ === "object");
+assert(typeof DeleteGatewayResponse$ === "object");
+assert(typeof DeleteServiceRequest$ === "object");
+assert(typeof DeleteServiceResponse$ === "object");
+assert(typeof DeleteTaskDefinitionsRequest$ === "object");
+assert(typeof DeleteTaskDefinitionsResponse$ === "object");
+assert(typeof DeleteTaskSetRequest$ === "object");
+assert(typeof DeleteTaskSetResponse$ === "object");
+assert(typeof Deployment$ === "object");
+assert(typeof DeploymentAlarms$ === "object");
+assert(typeof DeploymentCircuitBreaker$ === "object");
+assert(typeof DeploymentConfiguration$ === "object");
+assert(typeof DeploymentController$ === "object");
+assert(typeof DeploymentEarlySuccessCriteria$ === "object");
+assert(typeof DeploymentEphemeralStorage$ === "object");
+assert(typeof DeploymentLifecycleHook$ === "object");
+assert(typeof DeploymentLifecycleHookDetail$ === "object");
+assert(typeof DeploymentLifecycleHookTimeoutConfiguration$ === "object");
+assert(typeof DeregisterContainerInstanceRequest$ === "object");
+assert(typeof DeregisterContainerInstanceResponse$ === "object");
+assert(typeof DeregisterTaskDefinitionRequest$ === "object");
+assert(typeof DeregisterTaskDefinitionResponse$ === "object");
+assert(typeof DescribeCapacityProvidersRequest$ === "object");
+assert(typeof DescribeCapacityProvidersResponse$ === "object");
+assert(typeof DescribeClustersRequest$ === "object");
+assert(typeof DescribeClustersResponse$ === "object");
+assert(typeof DescribeContainerInstancesRequest$ === "object");
+assert(typeof DescribeContainerInstancesResponse$ === "object");
+assert(typeof DescribeDaemonDeploymentsRequest$ === "object");
+assert(typeof DescribeDaemonDeploymentsResponse$ === "object");
+assert(typeof DescribeDaemonRequest$ === "object");
+assert(typeof DescribeDaemonResponse$ === "object");
+assert(typeof DescribeDaemonRevisionsRequest$ === "object");
+assert(typeof DescribeDaemonRevisionsResponse$ === "object");
+assert(typeof DescribeDaemonTaskDefinitionRequest$ === "object");
+assert(typeof DescribeDaemonTaskDefinitionResponse$ === "object");
+assert(typeof DescribeExpressGatewayServiceRequest$ === "object");
+assert(typeof DescribeExpressGatewayServiceResponse$ === "object");
+assert(typeof DescribeGatewayAlbConfiguration$ === "object");
+assert(typeof DescribeGatewayConfiguration$ === "object");
+assert(typeof DescribeGatewayRequest$ === "object");
+assert(typeof DescribeGatewayResourcesRequest$ === "object");
+assert(typeof DescribeGatewayResourcesResponse$ === "object");
+assert(typeof DescribeGatewayResponse$ === "object");
+assert(typeof DescribeGatewayRouteRequest$ === "object");
+assert(typeof DescribeGatewayRouteResponse$ === "object");
+assert(typeof DescribeServiceDeploymentsRequest$ === "object");
+assert(typeof DescribeServiceDeploymentsResponse$ === "object");
+assert(typeof DescribeServiceRevisionsRequest$ === "object");
+assert(typeof DescribeServiceRevisionsResponse$ === "object");
+assert(typeof DescribeServicesRequest$ === "object");
+assert(typeof DescribeServicesResponse$ === "object");
+assert(typeof DescribeTaskDefinitionRequest$ === "object");
+assert(typeof DescribeTaskDefinitionResponse$ === "object");
+assert(typeof DescribeTaskSetsRequest$ === "object");
+assert(typeof DescribeTaskSetsResponse$ === "object");
+assert(typeof DescribeTasksRequest$ === "object");
+assert(typeof DescribeTasksResponse$ === "object");
+assert(typeof Device$ === "object");
+assert(typeof DisassociateGatewayFromClusterRequest$ === "object");
+assert(typeof DisassociateGatewayFromClusterResponse$ === "object");
+assert(typeof DiscoverPollEndpointRequest$ === "object");
+assert(typeof DiscoverPollEndpointResponse$ === "object");
+assert(typeof DockerVolumeConfiguration$ === "object");
+assert(typeof EBSTagSpecification$ === "object");
+assert(typeof ECSExpressGatewayService$ === "object");
+assert(typeof ECSManagedResources$ === "object");
+assert(typeof EFSAuthorizationConfig$ === "object");
+assert(typeof EFSVolumeConfiguration$ === "object");
+assert(typeof ElbGatewayResources$ === "object");
+assert(typeof EnvironmentFile$ === "object");
+assert(typeof EphemeralStorage$ === "object");
+assert(typeof ExecuteCommandConfiguration$ === "object");
+assert(typeof ExecuteCommandLogConfiguration$ === "object");
+assert(typeof ExecuteCommandRequest$ === "object");
+assert(typeof ExecuteCommandResponse$ === "object");
+assert(typeof ExpressGatewayContainer$ === "object");
+assert(typeof ExpressGatewayRepositoryCredentials$ === "object");
+assert(typeof ExpressGatewayScalingTarget$ === "object");
+assert(typeof ExpressGatewayServiceAwsLogsConfiguration$ === "object");
+assert(typeof ExpressGatewayServiceConfiguration$ === "object");
+assert(typeof ExpressGatewayServiceNetworkConfiguration$ === "object");
+assert(typeof ExpressGatewayServiceStatus$ === "object");
+assert(typeof Failure$ === "object");
+assert(typeof FirelensConfiguration$ === "object");
+assert(typeof FSxWindowsFileServerAuthorizationConfig$ === "object");
+assert(typeof FSxWindowsFileServerVolumeConfiguration$ === "object");
+assert(typeof Gateway$ === "object");
+assert(typeof GatewayAlbTestTrafficRules$ === "object");
+assert(typeof GatewayClusterAssociationSummary$ === "object");
+assert(typeof GatewayConfiguration$ === "object");
+assert(typeof GatewayConnection$ === "object");
+assert(typeof GatewayConnectionAlbResources$ === "object");
+assert(typeof GatewayConnectionResources$ === "object");
+assert(typeof GatewayConnector$ === "object");
+assert(typeof GatewayConnectorFilters$ === "object");
+assert(typeof GatewayConnectorHealthCheck$ === "object");
+assert(typeof GatewayConnectorHealthCheckMatcher$ === "object");
+assert(typeof GatewayElbAccessLogConfiguration$ === "object");
+assert(typeof GatewayElbAccessLogDestination$ === "object");
+assert(typeof GatewayElbAccessLogS3Destination$ === "object");
+assert(typeof GatewayElbNetworkConfiguration$ === "object");
+assert(typeof GatewayInfrastructureResources$ === "object");
+assert(typeof GatewayOperationError$ === "object");
+assert(typeof GatewayResourceFailure$ === "object");
+assert(typeof GatewayResources$ === "object");
+assert(typeof GatewayRoute$ === "object");
+assert(typeof GatewayRouteAlbResources$ === "object");
+assert(typeof GatewayRouteLoadBalancerSecurityGroup$ === "object");
+assert(typeof GatewayRouteResources$ === "object");
+assert(typeof GatewayRouteSummary$ === "object");
+assert(typeof GatewaySummary$ === "object");
+assert(typeof GatewayTestTrafficHeader$ === "object");
+assert(typeof GetTaskProtectionRequest$ === "object");
+assert(typeof GetTaskProtectionResponse$ === "object");
+assert(typeof GpuDevice$ === "object");
+assert(typeof HealthCheck$ === "object");
+assert(typeof HostEntry$ === "object");
+assert(typeof HostSharedAlbConfiguration$ === "object");
+assert(typeof HostVolumeProperties$ === "object");
+assert(typeof InferenceAccelerator$ === "object");
+assert(typeof InferenceAcceleratorOverride$ === "object");
+assert(typeof InfrastructureOptimization$ === "object");
+assert(typeof IngressPathSummary$ === "object");
+assert(typeof InstanceHealthCheckResult$ === "object");
+assert(typeof InstanceLaunchTemplate$ === "object");
+assert(typeof InstanceLaunchTemplateUpdate$ === "object");
+assert(typeof InstanceRequirementsRequest$ === "object");
+assert(typeof KernelCapabilities$ === "object");
+assert(typeof KeyValuePair$ === "object");
+assert(typeof LinearConfiguration$ === "object");
+assert(typeof LinuxParameters$ === "object");
+assert(typeof ListAccountSettingsRequest$ === "object");
+assert(typeof ListAccountSettingsResponse$ === "object");
+assert(typeof ListAttributesRequest$ === "object");
+assert(typeof ListAttributesResponse$ === "object");
+assert(typeof ListClustersRequest$ === "object");
+assert(typeof ListClustersResponse$ === "object");
+assert(typeof ListContainerInstancesRequest$ === "object");
+assert(typeof ListContainerInstancesResponse$ === "object");
+assert(typeof ListDaemonDeploymentsRequest$ === "object");
+assert(typeof ListDaemonDeploymentsResponse$ === "object");
+assert(typeof ListDaemonsRequest$ === "object");
+assert(typeof ListDaemonsResponse$ === "object");
+assert(typeof ListDaemonTaskDefinitionsRequest$ === "object");
+assert(typeof ListDaemonTaskDefinitionsResponse$ === "object");
+assert(typeof ListGatewayClusterAssociationsRequest$ === "object");
+assert(typeof ListGatewayClusterAssociationsResponse$ === "object");
+assert(typeof ListGatewayRoutesRequest$ === "object");
+assert(typeof ListGatewayRoutesResponse$ === "object");
+assert(typeof ListGatewaysRequest$ === "object");
+assert(typeof ListGatewaysResponse$ === "object");
+assert(typeof ListServiceDeploymentsRequest$ === "object");
+assert(typeof ListServiceDeploymentsResponse$ === "object");
+assert(typeof ListServicesByNamespaceRequest$ === "object");
+assert(typeof ListServicesByNamespaceResponse$ === "object");
+assert(typeof ListServicesRequest$ === "object");
+assert(typeof ListServicesResponse$ === "object");
+assert(typeof ListTagsForResourceRequest$ === "object");
+assert(typeof ListTagsForResourceResponse$ === "object");
+assert(typeof ListTaskDefinitionFamiliesRequest$ === "object");
+assert(typeof ListTaskDefinitionFamiliesResponse$ === "object");
+assert(typeof ListTaskDefinitionsRequest$ === "object");
+assert(typeof ListTaskDefinitionsResponse$ === "object");
+assert(typeof ListTasksRequest$ === "object");
+assert(typeof ListTasksResponse$ === "object");
+assert(typeof LoadBalancer$ === "object");
+assert(typeof LogConfiguration$ === "object");
+assert(typeof LogDriverVolumeConfiguration$ === "object");
+assert(typeof ManagedAgent$ === "object");
+assert(typeof ManagedAgentStateChange$ === "object");
+assert(typeof ManagedApplicationAutoScalingPolicy$ === "object");
+assert(typeof ManagedAutoScaling$ === "object");
+assert(typeof ManagedCertificate$ === "object");
+assert(typeof ManagedIngressPath$ === "object");
+assert(typeof ManagedInstancesLocalStorageConfiguration$ === "object");
+assert(typeof ManagedInstancesNetworkConfiguration$ === "object");
+assert(typeof ManagedInstancesProvider$ === "object");
+assert(typeof ManagedInstancesStorageConfiguration$ === "object");
+assert(typeof ManagedListener$ === "object");
+assert(typeof ManagedListenerRule$ === "object");
+assert(typeof ManagedLoadBalancer$ === "object");
+assert(typeof ManagedLogGroup$ === "object");
+assert(typeof ManagedMetricAlarm$ === "object");
+assert(typeof ManagedScalableTarget$ === "object");
+assert(typeof ManagedScaling$ === "object");
+assert(typeof ManagedSecurityGroup$ === "object");
+assert(typeof ManagedStorageConfiguration$ === "object");
+assert(typeof ManagedTargetGroup$ === "object");
+assert(typeof MemoryGiBPerVCpuRequest$ === "object");
+assert(typeof MemoryMiBRequest$ === "object");
+assert(typeof MetricConfiguration$ === "object");
+assert(typeof MonitoringConfiguration$ === "object");
+assert(typeof MountPoint$ === "object");
+assert(typeof NetworkBandwidthGbpsRequest$ === "object");
+assert(typeof NetworkBinding$ === "object");
+assert(typeof NetworkConfiguration$ === "object");
+assert(typeof NetworkInterface$ === "object");
+assert(typeof NetworkInterfaceCountRequest$ === "object");
+assert(typeof NvidiaMpsAllocation$ === "object");
+assert(typeof PlacementConstraint$ === "object");
+assert(typeof PlacementStrategy$ === "object");
+assert(typeof PlatformDevice$ === "object");
+assert(typeof PortMapping$ === "object");
+assert(typeof ProtectedTask$ === "object");
+assert(typeof ProxyConfiguration$ === "object");
+assert(typeof PutAccountSettingDefaultRequest$ === "object");
+assert(typeof PutAccountSettingDefaultResponse$ === "object");
+assert(typeof PutAccountSettingRequest$ === "object");
+assert(typeof PutAccountSettingResponse$ === "object");
+assert(typeof PutAttributesRequest$ === "object");
+assert(typeof PutAttributesResponse$ === "object");
+assert(typeof PutClusterCapacityProvidersRequest$ === "object");
+assert(typeof PutClusterCapacityProvidersResponse$ === "object");
+assert(typeof RegisterContainerInstanceRequest$ === "object");
+assert(typeof RegisterContainerInstanceResponse$ === "object");
+assert(typeof RegisterDaemonTaskDefinitionRequest$ === "object");
+assert(typeof RegisterDaemonTaskDefinitionResponse$ === "object");
+assert(typeof RegisterTaskDefinitionRequest$ === "object");
+assert(typeof RegisterTaskDefinitionResponse$ === "object");
+assert(typeof RepositoryCredentials$ === "object");
+assert(typeof ResolvedConfiguration$ === "object");
+assert(typeof Resource$ === "object");
+assert(typeof ResourceRequirement$ === "object");
+assert(typeof Rollback$ === "object");
+assert(typeof RunTaskRequest$ === "object");
+assert(typeof RunTaskResponse$ === "object");
+assert(typeof RuntimePlatform$ === "object");
+assert(typeof RuntimePlatformOverride$ === "object");
+assert(typeof S3FilesVolumeConfiguration$ === "object");
+assert(typeof Scale$ === "object");
+assert(typeof Secret$ === "object");
+assert(typeof Service$ === "object");
+assert(typeof ServiceConnectAccessLogConfiguration$ === "object");
+assert(typeof ServiceConnectClientAlias$ === "object");
+assert(typeof ServiceConnectConfiguration$ === "object");
+assert(typeof ServiceConnectContainerConfiguration$ === "object");
+assert(typeof ServiceConnectService$ === "object");
+assert(typeof ServiceConnectServiceResource$ === "object");
+assert(typeof ServiceConnectTestTrafficHeaderMatchRules$ === "object");
+assert(typeof ServiceConnectTestTrafficHeaderRules$ === "object");
+assert(typeof ServiceConnectTestTrafficRules$ === "object");
+assert(typeof ServiceConnectTlsCertificateAuthority$ === "object");
+assert(typeof ServiceConnectTlsConfiguration$ === "object");
+assert(typeof ServiceCurrentRevisionSummary$ === "object");
+assert(typeof ServiceDeployment$ === "object");
+assert(typeof ServiceDeploymentAlarms$ === "object");
+assert(typeof ServiceDeploymentBrief$ === "object");
+assert(typeof ServiceDeploymentCircuitBreaker$ === "object");
+assert(typeof ServiceEvent$ === "object");
+assert(typeof ServiceManagedEBSVolumeConfiguration$ === "object");
+assert(typeof ServiceRegistry$ === "object");
+assert(typeof ServiceRevision$ === "object");
+assert(typeof ServiceRevisionLoadBalancer$ === "object");
+assert(typeof ServiceRevisionOverrides$ === "object");
+assert(typeof ServiceRevisionSummary$ === "object");
+assert(typeof ServiceRevisionVpcLatticeConfiguration$ === "object");
+assert(typeof ServiceVolumeConfiguration$ === "object");
+assert(typeof Session$ === "object");
+assert(typeof Setting$ === "object");
+assert(typeof SharingStrategy$ === "object");
+assert(typeof StartTaskRequest$ === "object");
+assert(typeof StartTaskResponse$ === "object");
+assert(typeof StopServiceDeploymentRequest$ === "object");
+assert(typeof StopServiceDeploymentResponse$ === "object");
+assert(typeof StopTaskRequest$ === "object");
+assert(typeof StopTaskResponse$ === "object");
+assert(typeof SubmitAttachmentStateChangesRequest$ === "object");
+assert(typeof SubmitAttachmentStateChangesResponse$ === "object");
+assert(typeof SubmitContainerStateChangeRequest$ === "object");
+assert(typeof SubmitContainerStateChangeResponse$ === "object");
+assert(typeof SubmitTaskStateChangeRequest$ === "object");
+assert(typeof SubmitTaskStateChangeResponse$ === "object");
+assert(typeof SystemControl$ === "object");
+assert(typeof Tag$ === "object");
+assert(typeof TagResourceRequest$ === "object");
+assert(typeof TagResourceResponse$ === "object");
+assert(typeof Task$ === "object");
+assert(typeof TaskDefinition$ === "object");
+assert(typeof TaskDefinitionPlacementConstraint$ === "object");
+assert(typeof TaskEphemeralStorage$ === "object");
+assert(typeof TaskManagedEBSVolumeConfiguration$ === "object");
+assert(typeof TaskManagedEBSVolumeTerminationPolicy$ === "object");
+assert(typeof TaskOverride$ === "object");
+assert(typeof TaskSet$ === "object");
+assert(typeof TaskVolumeConfiguration$ === "object");
+assert(typeof ThresholdConfiguration$ === "object");
+assert(typeof TimeoutConfiguration$ === "object");
+assert(typeof Tmpfs$ === "object");
+assert(typeof TotalLocalStorageGBRequest$ === "object");
+assert(typeof TrustedExecutionConfiguration$ === "object");
+assert(typeof TrustedExecutionSummary$ === "object");
+assert(typeof Ulimit$ === "object");
+assert(typeof UntagResourceRequest$ === "object");
+assert(typeof UntagResourceResponse$ === "object");
+assert(typeof UpdateCapacityProviderRequest$ === "object");
+assert(typeof UpdateCapacityProviderResponse$ === "object");
+assert(typeof UpdateClusterRequest$ === "object");
+assert(typeof UpdateClusterResponse$ === "object");
+assert(typeof UpdateClusterSettingsRequest$ === "object");
+assert(typeof UpdateClusterSettingsResponse$ === "object");
+assert(typeof UpdateContainerAgentRequest$ === "object");
+assert(typeof UpdateContainerAgentResponse$ === "object");
+assert(typeof UpdateContainerInstancesStateRequest$ === "object");
+assert(typeof UpdateContainerInstancesStateResponse$ === "object");
+assert(typeof UpdateDaemonRequest$ === "object");
+assert(typeof UpdateDaemonResponse$ === "object");
+assert(typeof UpdatedExpressGatewayService$ === "object");
+assert(typeof UpdateExpressGatewayServiceRequest$ === "object");
+assert(typeof UpdateExpressGatewayServiceResponse$ === "object");
+assert(typeof UpdateGatewayAlbConfiguration$ === "object");
+assert(typeof UpdateGatewayConfiguration$ === "object");
+assert(typeof UpdateGatewayNetworkConfiguration$ === "object");
+assert(typeof UpdateGatewayRequest$ === "object");
+assert(typeof UpdateGatewayResponse$ === "object");
+assert(typeof UpdateManagedInstancesProviderConfiguration$ === "object");
+assert(typeof UpdateServicePrimaryTaskSetRequest$ === "object");
+assert(typeof UpdateServicePrimaryTaskSetResponse$ === "object");
+assert(typeof UpdateServiceRequest$ === "object");
+assert(typeof UpdateServiceResponse$ === "object");
+assert(typeof UpdateTaskProtectionRequest$ === "object");
+assert(typeof UpdateTaskProtectionResponse$ === "object");
+assert(typeof UpdateTaskSetRequest$ === "object");
+assert(typeof UpdateTaskSetResponse$ === "object");
+assert(typeof VCpuCountRangeRequest$ === "object");
+assert(typeof VersionInfo$ === "object");
+assert(typeof Volume$ === "object");
+assert(typeof VolumeFrom$ === "object");
+assert(typeof VpcLatticeAdvancedConfiguration$ === "object");
+assert(typeof VpcLatticeConfiguration$ === "object");
+// enums
+assert(typeof AcceleratorManufacturer === "object");
+assert(typeof AcceleratorName === "object");
+assert(typeof AcceleratorType === "object");
+assert(typeof AccessType === "object");
+assert(typeof AgentUpdateStatus === "object");
+assert(typeof ApplicationProtocol === "object");
+assert(typeof AssignPublicIp === "object");
+assert(typeof AttestationPolicyStatus === "object");
+assert(typeof AutoRepairActionsStatus === "object");
+assert(typeof AvailabilityZoneRebalancing === "object");
+assert(typeof BareMetal === "object");
+assert(typeof BurstablePerformance === "object");
+assert(typeof CapacityOptionType === "object");
+assert(typeof CapacityProviderField === "object");
+assert(typeof CapacityProviderStatus === "object");
+assert(typeof CapacityProviderType === "object");
+assert(typeof CapacityProviderUpdateStatus === "object");
+assert(typeof CapacityReservationPreference === "object");
+assert(typeof ClusterField === "object");
+assert(typeof ClusterSettingName === "object");
+assert(typeof Compatibility === "object");
+assert(typeof Connectivity === "object");
+assert(typeof ContainerCondition === "object");
+assert(typeof ContainerInstanceField === "object");
+assert(typeof ContainerInstanceStatus === "object");
+assert(typeof CPUArchitecture === "object");
+assert(typeof CpuManufacturer === "object");
+assert(typeof DaemonDeploymentRollbackMonitorsStatus === "object");
+assert(typeof DaemonDeploymentStatus === "object");
+assert(typeof DaemonIpcMode === "object");
+assert(typeof DaemonPidMode === "object");
+assert(typeof DaemonPropagateTags === "object");
+assert(typeof DaemonStatus === "object");
+assert(typeof DaemonTaskDefinitionRevisionFilter === "object");
+assert(typeof DaemonTaskDefinitionStatus === "object");
+assert(typeof DaemonTaskDefinitionStatusFilter === "object");
+assert(typeof DeploymentControllerType === "object");
+assert(typeof DeploymentLifecycleHookAction === "object");
+assert(typeof DeploymentLifecycleHookStage === "object");
+assert(typeof DeploymentLifecycleHookStatus === "object");
+assert(typeof DeploymentLifecycleHookTargetType === "object");
+assert(typeof DeploymentRolloutState === "object");
+assert(typeof DeploymentStrategy === "object");
+assert(typeof DesiredStatus === "object");
+assert(typeof DeviceCgroupPermission === "object");
+assert(typeof EBSResourceType === "object");
+assert(typeof EFSAuthorizationConfigIAM === "object");
+assert(typeof EFSTransitEncryption === "object");
+assert(typeof EnvironmentFileType === "object");
+assert(typeof ExecuteCommandLogging === "object");
+assert(typeof ExpressCpuArchitecture === "object");
+assert(typeof ExpressGatewayServiceInclude === "object");
+assert(typeof ExpressGatewayServiceScalingMetric === "object");
+assert(typeof ExpressGatewayServiceStatusCode === "object");
+assert(typeof FirelensConfigurationType === "object");
+assert(typeof GatewayAlbDesyncMitigationMode === "object");
+assert(typeof GatewayAlbProtocol === "object");
+assert(typeof GatewayClusterAssociationStatus === "object");
+assert(typeof GatewayConnectorHealthCheckProtocol === "object");
+assert(typeof GatewayElbIpAddressType === "object");
+assert(typeof GatewayElbScheme === "object");
+assert(typeof GatewayRouteStatus === "object");
+assert(typeof GatewayStatus === "object");
+assert(typeof GpuSharingMode === "object");
+assert(typeof HealthStatus === "object");
+assert(typeof InstanceGeneration === "object");
+assert(typeof InstanceHealthCheckState === "object");
+assert(typeof InstanceHealthCheckType === "object");
+assert(typeof IpcMode === "object");
+assert(typeof IsolationMode === "object");
+assert(typeof LaunchType === "object");
+assert(typeof LocalStorage === "object");
+assert(typeof LocalStorageType === "object");
+assert(typeof LogDriver === "object");
+assert(typeof ManagedAgentName === "object");
+assert(typeof ManagedDraining === "object");
+assert(typeof ManagedInstancesMonitoringOptions === "object");
+assert(typeof ManagedResourceStatus === "object");
+assert(typeof ManagedScalingStatus === "object");
+assert(typeof ManagedTerminationProtection === "object");
+assert(typeof NetworkMode === "object");
+assert(typeof OSFamily === "object");
+assert(typeof PidMode === "object");
+assert(typeof PlacementConstraintType === "object");
+assert(typeof PlacementStrategyType === "object");
+assert(typeof PlatformDeviceType === "object");
+assert(typeof PropagateGatewayTags === "object");
+assert(typeof PropagateMITags === "object");
+assert(typeof PropagateTags === "object");
+assert(typeof ProxyConfigurationType === "object");
+assert(typeof ResourceManagementType === "object");
+assert(typeof ResourceType === "object");
+assert(typeof ScaleUnit === "object");
+assert(typeof SchedulingStrategy === "object");
+assert(typeof Scope === "object");
+assert(typeof ServiceConnectAccessLoggingFormat === "object");
+assert(typeof ServiceConnectContainerLogLevel === "object");
+assert(typeof ServiceConnectIncludeQueryParameters === "object");
+assert(typeof ServiceDeploymentLifecycleStage === "object");
+assert(typeof ServiceDeploymentRollbackMonitorsStatus === "object");
+assert(typeof ServiceDeploymentStatus === "object");
+assert(typeof ServiceField === "object");
+assert(typeof ServiceRevisionCleanup === "object");
+assert(typeof SettingName === "object");
+assert(typeof SettingType === "object");
+assert(typeof SortOrder === "object");
+assert(typeof StabilityStatus === "object");
+assert(typeof StopServiceDeploymentStopType === "object");
+assert(typeof TargetType === "object");
+assert(typeof TaskDefinitionFamilyStatus === "object");
+assert(typeof TaskDefinitionField === "object");
+assert(typeof TaskDefinitionPlacementConstraintType === "object");
+assert(typeof TaskDefinitionStatus === "object");
+assert(typeof TaskField === "object");
+assert(typeof TaskFilesystemType === "object");
+assert(typeof TaskSetField === "object");
+assert(typeof TaskStopCode === "object");
+assert(typeof ThresholdType === "object");
+assert(typeof TransportProtocol === "object");
+assert(typeof UlimitName === "object");
+assert(typeof VersionConsistency === "object");
+// errors
+assert(AccessDeniedException.prototype instanceof ECSServiceException);
+assert(typeof AccessDeniedException$ === "object");
+assert(AttributeLimitExceededException.prototype instanceof ECSServiceException);
+assert(typeof AttributeLimitExceededException$ === "object");
+assert(BlockedException.prototype instanceof ECSServiceException);
+assert(typeof BlockedException$ === "object");
+assert(ClientException.prototype instanceof ECSServiceException);
+assert(typeof ClientException$ === "object");
+assert(ClusterContainsCapacityProviderException.prototype instanceof ECSServiceException);
+assert(typeof ClusterContainsCapacityProviderException$ === "object");
+assert(ClusterContainsContainerInstancesException.prototype instanceof ECSServiceException);
+assert(typeof ClusterContainsContainerInstancesException$ === "object");
+assert(ClusterContainsServicesException.prototype instanceof ECSServiceException);
+assert(typeof ClusterContainsServicesException$ === "object");
+assert(ClusterContainsTasksException.prototype instanceof ECSServiceException);
+assert(typeof ClusterContainsTasksException$ === "object");
+assert(ClusterNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof ClusterNotFoundException$ === "object");
+assert(ConflictException.prototype instanceof ECSServiceException);
+assert(typeof ConflictException$ === "object");
+assert(DaemonNotActiveException.prototype instanceof ECSServiceException);
+assert(typeof DaemonNotActiveException$ === "object");
+assert(DaemonNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof DaemonNotFoundException$ === "object");
+assert(GatewayNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof GatewayNotFoundException$ === "object");
+assert(InvalidParameterException.prototype instanceof ECSServiceException);
+assert(typeof InvalidParameterException$ === "object");
+assert(LimitExceededException.prototype instanceof ECSServiceException);
+assert(typeof LimitExceededException$ === "object");
+assert(MissingVersionException.prototype instanceof ECSServiceException);
+assert(typeof MissingVersionException$ === "object");
+assert(NamespaceNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof NamespaceNotFoundException$ === "object");
+assert(NoUpdateAvailableException.prototype instanceof ECSServiceException);
+assert(typeof NoUpdateAvailableException$ === "object");
+assert(PlatformTaskDefinitionIncompatibilityException.prototype instanceof ECSServiceException);
+assert(typeof PlatformTaskDefinitionIncompatibilityException$ === "object");
+assert(PlatformUnknownException.prototype instanceof ECSServiceException);
+assert(typeof PlatformUnknownException$ === "object");
+assert(ResourceInUseException.prototype instanceof ECSServiceException);
+assert(typeof ResourceInUseException$ === "object");
+assert(ResourceNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof ResourceNotFoundException$ === "object");
+assert(ServerException.prototype instanceof ECSServiceException);
+assert(typeof ServerException$ === "object");
+assert(ServiceDeploymentNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof ServiceDeploymentNotFoundException$ === "object");
+assert(ServiceNotActiveException.prototype instanceof ECSServiceException);
+assert(typeof ServiceNotActiveException$ === "object");
+assert(ServiceNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof ServiceNotFoundException$ === "object");
+assert(TargetNotConnectedException.prototype instanceof ECSServiceException);
+assert(typeof TargetNotConnectedException$ === "object");
+assert(TargetNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof TargetNotFoundException$ === "object");
+assert(TaskSetNotFoundException.prototype instanceof ECSServiceException);
+assert(typeof TaskSetNotFoundException$ === "object");
+assert(UnsupportedFeatureException.prototype instanceof ECSServiceException);
+assert(typeof UnsupportedFeatureException$ === "object");
+assert(UpdateInProgressException.prototype instanceof ECSServiceException);
+assert(typeof UpdateInProgressException$ === "object");
+assert(ECSServiceException.prototype instanceof Error);
+// waiters
+assert(typeof waitForDaemonActive === "function");
+assert(typeof waitForDaemonDeploymentStopped === "function");
+assert(typeof waitForDaemonDeploymentSuccessful === "function");
+assert(typeof waitForDaemonTaskDefinitionActive === "function");
+assert(typeof waitForDaemonTaskDefinitionDeleted === "function");
+assert(typeof waitForServicesInactive === "function");
+assert(typeof waitForServicesStable === "function");
+assert(typeof waitForTasksRunning === "function");
+assert(typeof waitForTasksStopped === "function");
+assert(typeof waitUntilDaemonActive === "function");
+assert(typeof waitUntilDaemonDeploymentStopped === "function");
+assert(typeof waitUntilDaemonDeploymentSuccessful === "function");
+assert(typeof waitUntilDaemonTaskDefinitionActive === "function");
+assert(typeof waitUntilDaemonTaskDefinitionDeleted === "function");
+assert(typeof waitUntilServicesInactive === "function");
+assert(typeof waitUntilServicesStable === "function");
+assert(typeof waitUntilTasksRunning === "function");
+assert(typeof waitUntilTasksStopped === "function");
+// paginators
+assert(typeof paginateListAccountSettings === "function");
+assert(typeof paginateListAttributes === "function");
+assert(typeof paginateListClusters === "function");
+assert(typeof paginateListContainerInstances === "function");
+assert(typeof paginateListGatewayClusterAssociations === "function");
+assert(typeof paginateListGatewayRoutes === "function");
+assert(typeof paginateListGateways === "function");
+assert(typeof paginateListServices === "function");
+assert(typeof paginateListServicesByNamespace === "function");
+assert(typeof paginateListTaskDefinitionFamilies === "function");
+assert(typeof paginateListTaskDefinitions === "function");
+assert(typeof paginateListTasks === "function");
+console.log(`ECS index test passed.`);

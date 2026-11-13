@@ -1,776 +1,829 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateSignalingChannelCommandInput,
+  type CreateSignalingChannelCommandOutput,
   CreateSignalingChannelCommand,
-  CreateSignalingChannelCommandInput,
-  CreateSignalingChannelCommandOutput,
 } from "./commands/CreateSignalingChannelCommand";
 import {
+  type CreateStreamCommandInput,
+  type CreateStreamCommandOutput,
   CreateStreamCommand,
-  CreateStreamCommandInput,
-  CreateStreamCommandOutput,
 } from "./commands/CreateStreamCommand";
 import {
+  type DeleteEdgeConfigurationCommandInput,
+  type DeleteEdgeConfigurationCommandOutput,
+  DeleteEdgeConfigurationCommand,
+} from "./commands/DeleteEdgeConfigurationCommand";
+import {
+  type DeleteSignalingChannelCommandInput,
+  type DeleteSignalingChannelCommandOutput,
   DeleteSignalingChannelCommand,
-  DeleteSignalingChannelCommandInput,
-  DeleteSignalingChannelCommandOutput,
 } from "./commands/DeleteSignalingChannelCommand";
 import {
+  type DeleteStreamCommandInput,
+  type DeleteStreamCommandOutput,
   DeleteStreamCommand,
-  DeleteStreamCommandInput,
-  DeleteStreamCommandOutput,
 } from "./commands/DeleteStreamCommand";
 import {
+  type DescribeEdgeConfigurationCommandInput,
+  type DescribeEdgeConfigurationCommandOutput,
+  DescribeEdgeConfigurationCommand,
+} from "./commands/DescribeEdgeConfigurationCommand";
+import {
+  type DescribeImageGenerationConfigurationCommandInput,
+  type DescribeImageGenerationConfigurationCommandOutput,
+  DescribeImageGenerationConfigurationCommand,
+} from "./commands/DescribeImageGenerationConfigurationCommand";
+import {
+  type DescribeMappedResourceConfigurationCommandInput,
+  type DescribeMappedResourceConfigurationCommandOutput,
+  DescribeMappedResourceConfigurationCommand,
+} from "./commands/DescribeMappedResourceConfigurationCommand";
+import {
+  type DescribeMediaStorageConfigurationCommandInput,
+  type DescribeMediaStorageConfigurationCommandOutput,
+  DescribeMediaStorageConfigurationCommand,
+} from "./commands/DescribeMediaStorageConfigurationCommand";
+import {
+  type DescribeNotificationConfigurationCommandInput,
+  type DescribeNotificationConfigurationCommandOutput,
+  DescribeNotificationConfigurationCommand,
+} from "./commands/DescribeNotificationConfigurationCommand";
+import {
+  type DescribeSignalingChannelCommandInput,
+  type DescribeSignalingChannelCommandOutput,
   DescribeSignalingChannelCommand,
-  DescribeSignalingChannelCommandInput,
-  DescribeSignalingChannelCommandOutput,
 } from "./commands/DescribeSignalingChannelCommand";
 import {
+  type DescribeStreamCommandInput,
+  type DescribeStreamCommandOutput,
   DescribeStreamCommand,
-  DescribeStreamCommandInput,
-  DescribeStreamCommandOutput,
 } from "./commands/DescribeStreamCommand";
 import {
+  type DescribeStreamStorageConfigurationCommandInput,
+  type DescribeStreamStorageConfigurationCommandOutput,
+  DescribeStreamStorageConfigurationCommand,
+} from "./commands/DescribeStreamStorageConfigurationCommand";
+import {
+  type GetDataEndpointCommandInput,
+  type GetDataEndpointCommandOutput,
   GetDataEndpointCommand,
-  GetDataEndpointCommandInput,
-  GetDataEndpointCommandOutput,
 } from "./commands/GetDataEndpointCommand";
 import {
+  type GetSignalingChannelEndpointCommandInput,
+  type GetSignalingChannelEndpointCommandOutput,
   GetSignalingChannelEndpointCommand,
-  GetSignalingChannelEndpointCommandInput,
-  GetSignalingChannelEndpointCommandOutput,
 } from "./commands/GetSignalingChannelEndpointCommand";
 import {
-  ListSignalingChannelsCommand,
-  ListSignalingChannelsCommandInput,
-  ListSignalingChannelsCommandOutput,
-} from "./commands/ListSignalingChannelsCommand";
-import { ListStreamsCommand, ListStreamsCommandInput, ListStreamsCommandOutput } from "./commands/ListStreamsCommand";
+  type ListEdgeAgentConfigurationsCommandInput,
+  type ListEdgeAgentConfigurationsCommandOutput,
+  ListEdgeAgentConfigurationsCommand,
+} from "./commands/ListEdgeAgentConfigurationsCommand";
 import {
+  type ListSignalingChannelsCommandInput,
+  type ListSignalingChannelsCommandOutput,
+  ListSignalingChannelsCommand,
+} from "./commands/ListSignalingChannelsCommand";
+import {
+  type ListStreamsCommandInput,
+  type ListStreamsCommandOutput,
+  ListStreamsCommand,
+} from "./commands/ListStreamsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTagsForStreamCommandInput,
+  type ListTagsForStreamCommandOutput,
   ListTagsForStreamCommand,
-  ListTagsForStreamCommandInput,
-  ListTagsForStreamCommandOutput,
 } from "./commands/ListTagsForStreamCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { TagStreamCommand, TagStreamCommandInput, TagStreamCommandOutput } from "./commands/TagStreamCommand";
 import {
+  type StartEdgeConfigurationUpdateCommandInput,
+  type StartEdgeConfigurationUpdateCommandOutput,
+  StartEdgeConfigurationUpdateCommand,
+} from "./commands/StartEdgeConfigurationUpdateCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import { type TagStreamCommandInput, type TagStreamCommandOutput, TagStreamCommand } from "./commands/TagStreamCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UntagStreamCommand, UntagStreamCommandInput, UntagStreamCommandOutput } from "./commands/UntagStreamCommand";
 import {
+  type UntagStreamCommandInput,
+  type UntagStreamCommandOutput,
+  UntagStreamCommand,
+} from "./commands/UntagStreamCommand";
+import {
+  type UpdateDataRetentionCommandInput,
+  type UpdateDataRetentionCommandOutput,
   UpdateDataRetentionCommand,
-  UpdateDataRetentionCommandInput,
-  UpdateDataRetentionCommandOutput,
 } from "./commands/UpdateDataRetentionCommand";
 import {
+  type UpdateImageGenerationConfigurationCommandInput,
+  type UpdateImageGenerationConfigurationCommandOutput,
+  UpdateImageGenerationConfigurationCommand,
+} from "./commands/UpdateImageGenerationConfigurationCommand";
+import {
+  type UpdateMediaStorageConfigurationCommandInput,
+  type UpdateMediaStorageConfigurationCommandOutput,
+  UpdateMediaStorageConfigurationCommand,
+} from "./commands/UpdateMediaStorageConfigurationCommand";
+import {
+  type UpdateNotificationConfigurationCommandInput,
+  type UpdateNotificationConfigurationCommandOutput,
+  UpdateNotificationConfigurationCommand,
+} from "./commands/UpdateNotificationConfigurationCommand";
+import {
+  type UpdateSignalingChannelCommandInput,
+  type UpdateSignalingChannelCommandOutput,
   UpdateSignalingChannelCommand,
-  UpdateSignalingChannelCommandInput,
-  UpdateSignalingChannelCommandOutput,
 } from "./commands/UpdateSignalingChannelCommand";
 import {
+  type UpdateStreamCommandInput,
+  type UpdateStreamCommandOutput,
   UpdateStreamCommand,
-  UpdateStreamCommandInput,
-  UpdateStreamCommandOutput,
 } from "./commands/UpdateStreamCommand";
+import {
+  type UpdateStreamStorageConfigurationCommandInput,
+  type UpdateStreamStorageConfigurationCommandOutput,
+  UpdateStreamStorageConfigurationCommand,
+} from "./commands/UpdateStreamStorageConfigurationCommand";
 import { KinesisVideoClient } from "./KinesisVideoClient";
+import { paginateDescribeMappedResourceConfiguration } from "./pagination/DescribeMappedResourceConfigurationPaginator";
+import { paginateListEdgeAgentConfigurations } from "./pagination/ListEdgeAgentConfigurationsPaginator";
+import { paginateListSignalingChannels } from "./pagination/ListSignalingChannelsPaginator";
+import { paginateListStreams } from "./pagination/ListStreamsPaginator";
+
+const commands = {
+  CreateSignalingChannelCommand,
+  CreateStreamCommand,
+  DeleteEdgeConfigurationCommand,
+  DeleteSignalingChannelCommand,
+  DeleteStreamCommand,
+  DescribeEdgeConfigurationCommand,
+  DescribeImageGenerationConfigurationCommand,
+  DescribeMappedResourceConfigurationCommand,
+  DescribeMediaStorageConfigurationCommand,
+  DescribeNotificationConfigurationCommand,
+  DescribeSignalingChannelCommand,
+  DescribeStreamCommand,
+  DescribeStreamStorageConfigurationCommand,
+  GetDataEndpointCommand,
+  GetSignalingChannelEndpointCommand,
+  ListEdgeAgentConfigurationsCommand,
+  ListSignalingChannelsCommand,
+  ListStreamsCommand,
+  ListTagsForResourceCommand,
+  ListTagsForStreamCommand,
+  StartEdgeConfigurationUpdateCommand,
+  TagResourceCommand,
+  TagStreamCommand,
+  UntagResourceCommand,
+  UntagStreamCommand,
+  UpdateDataRetentionCommand,
+  UpdateImageGenerationConfigurationCommand,
+  UpdateMediaStorageConfigurationCommand,
+  UpdateNotificationConfigurationCommand,
+  UpdateSignalingChannelCommand,
+  UpdateStreamCommand,
+  UpdateStreamStorageConfigurationCommand,
+};
+const paginators = {
+  paginateDescribeMappedResourceConfiguration,
+  paginateListEdgeAgentConfigurations,
+  paginateListSignalingChannels,
+  paginateListStreams,
+};
+
+/**
+ * @public
+ */
+export interface KinesisVideoRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface KinesisVideo {
+  /**
+   * @see {@link CreateSignalingChannelCommand}
+   */
+  createSignalingChannel(
+    args: CreateSignalingChannelCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<CreateSignalingChannelCommandOutput>;
+  createSignalingChannel(
+    args: CreateSignalingChannelCommandInput,
+    cb: (err: any, data?: CreateSignalingChannelCommandOutput) => void
+  ): void;
+  createSignalingChannel(
+    args: CreateSignalingChannelCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: CreateSignalingChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamCommand}
+   */
+  createStream(
+    args: CreateStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<CreateStreamCommandOutput>;
+  createStream(
+    args: CreateStreamCommandInput,
+    cb: (err: any, data?: CreateStreamCommandOutput) => void
+  ): void;
+  createStream(
+    args: CreateStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: CreateStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEdgeConfigurationCommand}
+   */
+  deleteEdgeConfiguration(): Promise<DeleteEdgeConfigurationCommandOutput>;
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DeleteEdgeConfigurationCommandOutput>;
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    cb: (err: any, data?: DeleteEdgeConfigurationCommandOutput) => void
+  ): void;
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DeleteEdgeConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSignalingChannelCommand}
+   */
+  deleteSignalingChannel(
+    args: DeleteSignalingChannelCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DeleteSignalingChannelCommandOutput>;
+  deleteSignalingChannel(
+    args: DeleteSignalingChannelCommandInput,
+    cb: (err: any, data?: DeleteSignalingChannelCommandOutput) => void
+  ): void;
+  deleteSignalingChannel(
+    args: DeleteSignalingChannelCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DeleteSignalingChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStreamCommand}
+   */
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DeleteStreamCommandOutput>;
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    cb: (err: any, data?: DeleteStreamCommandOutput) => void
+  ): void;
+  deleteStream(
+    args: DeleteStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DeleteStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEdgeConfigurationCommand}
+   */
+  describeEdgeConfiguration(): Promise<DescribeEdgeConfigurationCommandOutput>;
+  describeEdgeConfiguration(
+    args: DescribeEdgeConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeEdgeConfigurationCommandOutput>;
+  describeEdgeConfiguration(
+    args: DescribeEdgeConfigurationCommandInput,
+    cb: (err: any, data?: DescribeEdgeConfigurationCommandOutput) => void
+  ): void;
+  describeEdgeConfiguration(
+    args: DescribeEdgeConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeEdgeConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeImageGenerationConfigurationCommand}
+   */
+  describeImageGenerationConfiguration(): Promise<DescribeImageGenerationConfigurationCommandOutput>;
+  describeImageGenerationConfiguration(
+    args: DescribeImageGenerationConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeImageGenerationConfigurationCommandOutput>;
+  describeImageGenerationConfiguration(
+    args: DescribeImageGenerationConfigurationCommandInput,
+    cb: (err: any, data?: DescribeImageGenerationConfigurationCommandOutput) => void
+  ): void;
+  describeImageGenerationConfiguration(
+    args: DescribeImageGenerationConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeImageGenerationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMappedResourceConfigurationCommand}
+   */
+  describeMappedResourceConfiguration(): Promise<DescribeMappedResourceConfigurationCommandOutput>;
+  describeMappedResourceConfiguration(
+    args: DescribeMappedResourceConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeMappedResourceConfigurationCommandOutput>;
+  describeMappedResourceConfiguration(
+    args: DescribeMappedResourceConfigurationCommandInput,
+    cb: (err: any, data?: DescribeMappedResourceConfigurationCommandOutput) => void
+  ): void;
+  describeMappedResourceConfiguration(
+    args: DescribeMappedResourceConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeMappedResourceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMediaStorageConfigurationCommand}
+   */
+  describeMediaStorageConfiguration(): Promise<DescribeMediaStorageConfigurationCommandOutput>;
+  describeMediaStorageConfiguration(
+    args: DescribeMediaStorageConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeMediaStorageConfigurationCommandOutput>;
+  describeMediaStorageConfiguration(
+    args: DescribeMediaStorageConfigurationCommandInput,
+    cb: (err: any, data?: DescribeMediaStorageConfigurationCommandOutput) => void
+  ): void;
+  describeMediaStorageConfiguration(
+    args: DescribeMediaStorageConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeMediaStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNotificationConfigurationCommand}
+   */
+  describeNotificationConfiguration(): Promise<DescribeNotificationConfigurationCommandOutput>;
+  describeNotificationConfiguration(
+    args: DescribeNotificationConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeNotificationConfigurationCommandOutput>;
+  describeNotificationConfiguration(
+    args: DescribeNotificationConfigurationCommandInput,
+    cb: (err: any, data?: DescribeNotificationConfigurationCommandOutput) => void
+  ): void;
+  describeNotificationConfiguration(
+    args: DescribeNotificationConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeNotificationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSignalingChannelCommand}
+   */
+  describeSignalingChannel(): Promise<DescribeSignalingChannelCommandOutput>;
+  describeSignalingChannel(
+    args: DescribeSignalingChannelCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeSignalingChannelCommandOutput>;
+  describeSignalingChannel(
+    args: DescribeSignalingChannelCommandInput,
+    cb: (err: any, data?: DescribeSignalingChannelCommandOutput) => void
+  ): void;
+  describeSignalingChannel(
+    args: DescribeSignalingChannelCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeSignalingChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStreamCommand}
+   */
+  describeStream(): Promise<DescribeStreamCommandOutput>;
+  describeStream(
+    args: DescribeStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeStreamCommandOutput>;
+  describeStream(
+    args: DescribeStreamCommandInput,
+    cb: (err: any, data?: DescribeStreamCommandOutput) => void
+  ): void;
+  describeStream(
+    args: DescribeStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStreamStorageConfigurationCommand}
+   */
+  describeStreamStorageConfiguration(): Promise<DescribeStreamStorageConfigurationCommandOutput>;
+  describeStreamStorageConfiguration(
+    args: DescribeStreamStorageConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<DescribeStreamStorageConfigurationCommandOutput>;
+  describeStreamStorageConfiguration(
+    args: DescribeStreamStorageConfigurationCommandInput,
+    cb: (err: any, data?: DescribeStreamStorageConfigurationCommandOutput) => void
+  ): void;
+  describeStreamStorageConfiguration(
+    args: DescribeStreamStorageConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: DescribeStreamStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataEndpointCommand}
+   */
+  getDataEndpoint(
+    args: GetDataEndpointCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<GetDataEndpointCommandOutput>;
+  getDataEndpoint(
+    args: GetDataEndpointCommandInput,
+    cb: (err: any, data?: GetDataEndpointCommandOutput) => void
+  ): void;
+  getDataEndpoint(
+    args: GetDataEndpointCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: GetDataEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSignalingChannelEndpointCommand}
+   */
+  getSignalingChannelEndpoint(
+    args: GetSignalingChannelEndpointCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<GetSignalingChannelEndpointCommandOutput>;
+  getSignalingChannelEndpoint(
+    args: GetSignalingChannelEndpointCommandInput,
+    cb: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
+  ): void;
+  getSignalingChannelEndpoint(
+    args: GetSignalingChannelEndpointCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEdgeAgentConfigurationsCommand}
+   */
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<ListEdgeAgentConfigurationsCommandOutput>;
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    cb: (err: any, data?: ListEdgeAgentConfigurationsCommandOutput) => void
+  ): void;
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: ListEdgeAgentConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSignalingChannelsCommand}
+   */
+  listSignalingChannels(): Promise<ListSignalingChannelsCommandOutput>;
+  listSignalingChannels(
+    args: ListSignalingChannelsCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<ListSignalingChannelsCommandOutput>;
+  listSignalingChannels(
+    args: ListSignalingChannelsCommandInput,
+    cb: (err: any, data?: ListSignalingChannelsCommandOutput) => void
+  ): void;
+  listSignalingChannels(
+    args: ListSignalingChannelsCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: ListSignalingChannelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamsCommand}
+   */
+  listStreams(): Promise<ListStreamsCommandOutput>;
+  listStreams(
+    args: ListStreamsCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<ListStreamsCommandOutput>;
+  listStreams(
+    args: ListStreamsCommandInput,
+    cb: (err: any, data?: ListStreamsCommandOutput) => void
+  ): void;
+  listStreams(
+    args: ListStreamsCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: ListStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForStreamCommand}
+   */
+  listTagsForStream(): Promise<ListTagsForStreamCommandOutput>;
+  listTagsForStream(
+    args: ListTagsForStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<ListTagsForStreamCommandOutput>;
+  listTagsForStream(
+    args: ListTagsForStreamCommandInput,
+    cb: (err: any, data?: ListTagsForStreamCommandOutput) => void
+  ): void;
+  listTagsForStream(
+    args: ListTagsForStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: ListTagsForStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartEdgeConfigurationUpdateCommand}
+   */
+  startEdgeConfigurationUpdate(
+    args: StartEdgeConfigurationUpdateCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<StartEdgeConfigurationUpdateCommandOutput>;
+  startEdgeConfigurationUpdate(
+    args: StartEdgeConfigurationUpdateCommandInput,
+    cb: (err: any, data?: StartEdgeConfigurationUpdateCommandOutput) => void
+  ): void;
+  startEdgeConfigurationUpdate(
+    args: StartEdgeConfigurationUpdateCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: StartEdgeConfigurationUpdateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagStreamCommand}
+   */
+  tagStream(
+    args: TagStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<TagStreamCommandOutput>;
+  tagStream(
+    args: TagStreamCommandInput,
+    cb: (err: any, data?: TagStreamCommandOutput) => void
+  ): void;
+  tagStream(
+    args: TagStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: TagStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagStreamCommand}
+   */
+  untagStream(
+    args: UntagStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UntagStreamCommandOutput>;
+  untagStream(
+    args: UntagStreamCommandInput,
+    cb: (err: any, data?: UntagStreamCommandOutput) => void
+  ): void;
+  untagStream(
+    args: UntagStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UntagStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataRetentionCommand}
+   */
+  updateDataRetention(
+    args: UpdateDataRetentionCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateDataRetentionCommandOutput>;
+  updateDataRetention(
+    args: UpdateDataRetentionCommandInput,
+    cb: (err: any, data?: UpdateDataRetentionCommandOutput) => void
+  ): void;
+  updateDataRetention(
+    args: UpdateDataRetentionCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateDataRetentionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateImageGenerationConfigurationCommand}
+   */
+  updateImageGenerationConfiguration(): Promise<UpdateImageGenerationConfigurationCommandOutput>;
+  updateImageGenerationConfiguration(
+    args: UpdateImageGenerationConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateImageGenerationConfigurationCommandOutput>;
+  updateImageGenerationConfiguration(
+    args: UpdateImageGenerationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateImageGenerationConfigurationCommandOutput) => void
+  ): void;
+  updateImageGenerationConfiguration(
+    args: UpdateImageGenerationConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateImageGenerationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMediaStorageConfigurationCommand}
+   */
+  updateMediaStorageConfiguration(
+    args: UpdateMediaStorageConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateMediaStorageConfigurationCommandOutput>;
+  updateMediaStorageConfiguration(
+    args: UpdateMediaStorageConfigurationCommandInput,
+    cb: (err: any, data?: UpdateMediaStorageConfigurationCommandOutput) => void
+  ): void;
+  updateMediaStorageConfiguration(
+    args: UpdateMediaStorageConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateMediaStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNotificationConfigurationCommand}
+   */
+  updateNotificationConfiguration(): Promise<UpdateNotificationConfigurationCommandOutput>;
+  updateNotificationConfiguration(
+    args: UpdateNotificationConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateNotificationConfigurationCommandOutput>;
+  updateNotificationConfiguration(
+    args: UpdateNotificationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateNotificationConfigurationCommandOutput) => void
+  ): void;
+  updateNotificationConfiguration(
+    args: UpdateNotificationConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateNotificationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSignalingChannelCommand}
+   */
+  updateSignalingChannel(
+    args: UpdateSignalingChannelCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateSignalingChannelCommandOutput>;
+  updateSignalingChannel(
+    args: UpdateSignalingChannelCommandInput,
+    cb: (err: any, data?: UpdateSignalingChannelCommandOutput) => void
+  ): void;
+  updateSignalingChannel(
+    args: UpdateSignalingChannelCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateSignalingChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStreamCommand}
+   */
+  updateStream(
+    args: UpdateStreamCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateStreamCommandOutput>;
+  updateStream(
+    args: UpdateStreamCommandInput,
+    cb: (err: any, data?: UpdateStreamCommandOutput) => void
+  ): void;
+  updateStream(
+    args: UpdateStreamCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStreamStorageConfigurationCommand}
+   */
+  updateStreamStorageConfiguration(
+    args: UpdateStreamStorageConfigurationCommandInput,
+    options?: KinesisVideoRequestOptions
+  ): Promise<UpdateStreamStorageConfigurationCommandOutput>;
+  updateStreamStorageConfiguration(
+    args: UpdateStreamStorageConfigurationCommandInput,
+    cb: (err: any, data?: UpdateStreamStorageConfigurationCommandOutput) => void
+  ): void;
+  updateStreamStorageConfiguration(
+    args: UpdateStreamStorageConfigurationCommandInput,
+    options: KinesisVideoRequestOptions,
+    cb: (err: any, data?: UpdateStreamStorageConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMappedResourceConfigurationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeMappedResourceConfigurationCommandOutput}.
+   */
+  paginateDescribeMappedResourceConfiguration(
+    args?: DescribeMappedResourceConfigurationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeMappedResourceConfigurationCommandOutput>;
+
+  /**
+   * @see {@link ListEdgeAgentConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEdgeAgentConfigurationsCommandOutput}.
+   */
+  paginateListEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEdgeAgentConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListSignalingChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSignalingChannelsCommandOutput}.
+   */
+  paginateListSignalingChannels(
+    args?: ListSignalingChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSignalingChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamsCommandOutput}.
+   */
+  paginateListStreams(
+    args?: ListStreamsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamsCommandOutput>;
+}
 
 /**
  * <p></p>
+ * @public
  */
-export class KinesisVideo extends KinesisVideoClient {
-  /**
-   * <p>Creates a signaling channel. </p>
-   *         <p>
-   *             <code>CreateSignalingChannel</code> is an asynchronous operation.</p>
-   */
-  public createSignalingChannel(
-    args: CreateSignalingChannelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSignalingChannelCommandOutput>;
-  public createSignalingChannel(
-    args: CreateSignalingChannelCommandInput,
-    cb: (err: any, data?: CreateSignalingChannelCommandOutput) => void
-  ): void;
-  public createSignalingChannel(
-    args: CreateSignalingChannelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSignalingChannelCommandOutput) => void
-  ): void;
-  public createSignalingChannel(
-    args: CreateSignalingChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSignalingChannelCommandOutput) => void),
-    cb?: (err: any, data?: CreateSignalingChannelCommandOutput) => void
-  ): Promise<CreateSignalingChannelCommandOutput> | void {
-    const command = new CreateSignalingChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new Kinesis video stream. </p>
-   *
-   *         <p>When you create a new stream, Kinesis Video Streams assigns it a version number.
-   *             When you change the stream's metadata, Kinesis Video Streams updates the version. </p>
-   *         <p>
-   *             <code>CreateStream</code> is an asynchronous operation.</p>
-   *         <p>For information about how the service works, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html">How it Works</a>. </p>
-   *         <p>You must have permissions for the <code>KinesisVideo:CreateStream</code>
-   *             action.</p>
-   */
-  public createStream(
-    args: CreateStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateStreamCommandOutput>;
-  public createStream(args: CreateStreamCommandInput, cb: (err: any, data?: CreateStreamCommandOutput) => void): void;
-  public createStream(
-    args: CreateStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateStreamCommandOutput) => void
-  ): void;
-  public createStream(
-    args: CreateStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStreamCommandOutput) => void),
-    cb?: (err: any, data?: CreateStreamCommandOutput) => void
-  ): Promise<CreateStreamCommandOutput> | void {
-    const command = new CreateStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specified signaling channel. <code>DeleteSignalingChannel</code> is an
-   *             asynchronous operation. If you don't specify the channel's current version, the most
-   *             recent version is deleted.</p>
-   */
-  public deleteSignalingChannel(
-    args: DeleteSignalingChannelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSignalingChannelCommandOutput>;
-  public deleteSignalingChannel(
-    args: DeleteSignalingChannelCommandInput,
-    cb: (err: any, data?: DeleteSignalingChannelCommandOutput) => void
-  ): void;
-  public deleteSignalingChannel(
-    args: DeleteSignalingChannelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSignalingChannelCommandOutput) => void
-  ): void;
-  public deleteSignalingChannel(
-    args: DeleteSignalingChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSignalingChannelCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSignalingChannelCommandOutput) => void
-  ): Promise<DeleteSignalingChannelCommandOutput> | void {
-    const command = new DeleteSignalingChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Kinesis video stream and the data contained in the stream. </p>
-   *         <p>This method marks the stream for deletion, and makes the data in the stream
-   *             inaccessible immediately.</p>
-   *         <p> </p>
-   *         <p> To ensure that you have the latest version of the stream before deleting it, you
-   *             can specify the stream version. Kinesis Video Streams assigns a version to each stream.
-   *             When you update a stream, Kinesis Video Streams assigns a new version number. To get the
-   *             latest stream version, use the <code>DescribeStream</code> API. </p>
-   *         <p>This operation requires permission for the <code>KinesisVideo:DeleteStream</code>
-   *             action.</p>
-   */
-  public deleteStream(
-    args: DeleteStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteStreamCommandOutput>;
-  public deleteStream(args: DeleteStreamCommandInput, cb: (err: any, data?: DeleteStreamCommandOutput) => void): void;
-  public deleteStream(
-    args: DeleteStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteStreamCommandOutput) => void
-  ): void;
-  public deleteStream(
-    args: DeleteStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStreamCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStreamCommandOutput) => void
-  ): Promise<DeleteStreamCommandOutput> | void {
-    const command = new DeleteStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the most current information about the signaling channel. You must specify
-   *             either the name or the Amazon Resource Name (ARN) of the channel that you want to
-   *             describe.</p>
-   */
-  public describeSignalingChannel(
-    args: DescribeSignalingChannelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSignalingChannelCommandOutput>;
-  public describeSignalingChannel(
-    args: DescribeSignalingChannelCommandInput,
-    cb: (err: any, data?: DescribeSignalingChannelCommandOutput) => void
-  ): void;
-  public describeSignalingChannel(
-    args: DescribeSignalingChannelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSignalingChannelCommandOutput) => void
-  ): void;
-  public describeSignalingChannel(
-    args: DescribeSignalingChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSignalingChannelCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSignalingChannelCommandOutput) => void
-  ): Promise<DescribeSignalingChannelCommandOutput> | void {
-    const command = new DescribeSignalingChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the most current information about the specified stream. You must specify
-   *             either the <code>StreamName</code> or the <code>StreamARN</code>. </p>
-   */
-  public describeStream(
-    args: DescribeStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeStreamCommandOutput>;
-  public describeStream(
-    args: DescribeStreamCommandInput,
-    cb: (err: any, data?: DescribeStreamCommandOutput) => void
-  ): void;
-  public describeStream(
-    args: DescribeStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeStreamCommandOutput) => void
-  ): void;
-  public describeStream(
-    args: DescribeStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStreamCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStreamCommandOutput) => void
-  ): Promise<DescribeStreamCommandOutput> | void {
-    const command = new DescribeStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets an endpoint for a specified stream for either reading or writing. Use this
-   *             endpoint in your application to read from the specified stream (using the
-   *                 <code>GetMedia</code> or <code>GetMediaForFragmentList</code> operations) or write
-   *             to it (using the <code>PutMedia</code> operation).
-   *             </p>
-   *         <note>
-   *             <p>The returned endpoint does not have the API name appended. The client needs to
-   *                 add the API name to the returned endpoint.</p>
-   *         </note>
-   *
-   *         <p>In the request, specify the stream either by <code>StreamName</code> or
-   *                 <code>StreamARN</code>.</p>
-   */
-  public getDataEndpoint(
-    args: GetDataEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDataEndpointCommandOutput>;
-  public getDataEndpoint(
-    args: GetDataEndpointCommandInput,
-    cb: (err: any, data?: GetDataEndpointCommandOutput) => void
-  ): void;
-  public getDataEndpoint(
-    args: GetDataEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDataEndpointCommandOutput) => void
-  ): void;
-  public getDataEndpoint(
-    args: GetDataEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetDataEndpointCommandOutput) => void
-  ): Promise<GetDataEndpointCommandOutput> | void {
-    const command = new GetDataEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides an endpoint for the specified signaling channel to send and receive messages.
-   *             This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter,
-   *             which consists of the <code>Protocols</code> and <code>Role</code> properties.</p>
-   *         <p>
-   *             <code>Protocols</code> is used to determine the communication mechanism. For example,
-   *             if you specify <code>WSS</code> as the protocol, this API produces a secure websocket
-   *             endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS
-   *             endpoint. </p>
-   *         <p>
-   *             <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role
-   *             results in this API generating an endpoint that a client can use to communicate with any
-   *             of the viewers on the channel. A <code>VIEWER</code> role results in this API generating
-   *             an endpoint that a client can use to communicate only with a
-   *                 <code>MASTER</code>. </p>
-   */
-  public getSignalingChannelEndpoint(
-    args: GetSignalingChannelEndpointCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSignalingChannelEndpointCommandOutput>;
-  public getSignalingChannelEndpoint(
-    args: GetSignalingChannelEndpointCommandInput,
-    cb: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
-  ): void;
-  public getSignalingChannelEndpoint(
-    args: GetSignalingChannelEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
-  ): void;
-  public getSignalingChannelEndpoint(
-    args: GetSignalingChannelEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSignalingChannelEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
-  ): Promise<GetSignalingChannelEndpointCommandOutput> | void {
-    const command = new GetSignalingChannelEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of <code>ChannelInfo</code> objects. Each object describes a
-   *             signaling channel. To retrieve only those channels that satisfy a specific condition, you can
-   *             specify a <code>ChannelNameCondition</code>.</p>
-   */
-  public listSignalingChannels(
-    args: ListSignalingChannelsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSignalingChannelsCommandOutput>;
-  public listSignalingChannels(
-    args: ListSignalingChannelsCommandInput,
-    cb: (err: any, data?: ListSignalingChannelsCommandOutput) => void
-  ): void;
-  public listSignalingChannels(
-    args: ListSignalingChannelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSignalingChannelsCommandOutput) => void
-  ): void;
-  public listSignalingChannels(
-    args: ListSignalingChannelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSignalingChannelsCommandOutput) => void),
-    cb?: (err: any, data?: ListSignalingChannelsCommandOutput) => void
-  ): Promise<ListSignalingChannelsCommandOutput> | void {
-    const command = new ListSignalingChannelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of <code>StreamInfo</code> objects. Each object describes a
-   *             stream. To retrieve only streams that satisfy a specific condition, you can specify a
-   *                 <code>StreamNameCondition</code>. </p>
-   */
-  public listStreams(args: ListStreamsCommandInput, options?: __HttpHandlerOptions): Promise<ListStreamsCommandOutput>;
-  public listStreams(args: ListStreamsCommandInput, cb: (err: any, data?: ListStreamsCommandOutput) => void): void;
-  public listStreams(
-    args: ListStreamsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListStreamsCommandOutput) => void
-  ): void;
-  public listStreams(
-    args: ListStreamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStreamsCommandOutput) => void),
-    cb?: (err: any, data?: ListStreamsCommandOutput) => void
-  ): Promise<ListStreamsCommandOutput> | void {
-    const command = new ListStreamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of tags associated with the specified signaling channel.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of tags associated with the specified stream.</p>
-   *         <p>In the request, you must specify either the <code>StreamName</code> or the
-   *                 <code>StreamARN</code>. </p>
-   */
-  public listTagsForStream(
-    args: ListTagsForStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForStreamCommandOutput>;
-  public listTagsForStream(
-    args: ListTagsForStreamCommandInput,
-    cb: (err: any, data?: ListTagsForStreamCommandOutput) => void
-  ): void;
-  public listTagsForStream(
-    args: ListTagsForStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForStreamCommandOutput) => void
-  ): void;
-  public listTagsForStream(
-    args: ListTagsForStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForStreamCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForStreamCommandOutput) => void
-  ): Promise<ListTagsForStreamCommandOutput> | void {
-    const command = new ListTagsForStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds one or more tags to a signaling channel. A <i>tag</i> is a
-   *             key-value pair (the value is optional) that you can define and assign to AWS resources.
-   *             If you specify a tag that already exists, the tag value is replaced with the value that
-   *             you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
-   *                 Tags</a> in the <i>AWS Billing and Cost Management User
-   *             Guide</i>.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair
-   *             (the value is optional) that you can define and assign to AWS resources. If you specify
-   *             a tag that already exists, the tag value is replaced with the value that you specify in
-   *             the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
-   *                 Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>
-   *         <p>You must provide either the <code>StreamName</code> or the
-   *             <code>StreamARN</code>.</p>
-   *         <p>This operation requires permission for the <code>KinesisVideo:TagStream</code>
-   *             action.</p>
-   *         <p>Kinesis video streams support up to 50 tags.</p>
-   */
-  public tagStream(args: TagStreamCommandInput, options?: __HttpHandlerOptions): Promise<TagStreamCommandOutput>;
-  public tagStream(args: TagStreamCommandInput, cb: (err: any, data?: TagStreamCommandOutput) => void): void;
-  public tagStream(
-    args: TagStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagStreamCommandOutput) => void
-  ): void;
-  public tagStream(
-    args: TagStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagStreamCommandOutput) => void),
-    cb?: (err: any, data?: TagStreamCommandOutput) => void
-  ): Promise<TagStreamCommandOutput> | void {
-    const command = new TagStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes one or more tags from a signaling channel. In the request, specify only a tag
-   *             key or keys; don't specify the value. If you specify a tag key that does not exist, it's
-   *             ignored.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes one or more tags from a stream. In the request, specify only a tag key or
-   *             keys; don't specify the value. If you specify a tag key that does not exist, it's
-   *             ignored.</p>
-   *         <p>In the request, you must provide the <code>StreamName</code> or
-   *                 <code>StreamARN</code>.</p>
-   */
-  public untagStream(args: UntagStreamCommandInput, options?: __HttpHandlerOptions): Promise<UntagStreamCommandOutput>;
-  public untagStream(args: UntagStreamCommandInput, cb: (err: any, data?: UntagStreamCommandOutput) => void): void;
-  public untagStream(
-    args: UntagStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagStreamCommandOutput) => void
-  ): void;
-  public untagStream(
-    args: UntagStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagStreamCommandOutput) => void),
-    cb?: (err: any, data?: UntagStreamCommandOutput) => void
-  ): Promise<UntagStreamCommandOutput> | void {
-    const command = new UntagStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p> Increases or decreases the stream's data retention period by the value that you
-   *             specify. To indicate whether you want to increase or decrease the data retention period,
-   *             specify the <code>Operation</code> parameter in the request body. In the request, you
-   *             must specify either the <code>StreamName</code> or the <code>StreamARN</code>. </p>
-   *         <note>
-   *             <p>The retention period that you specify replaces the current value.</p>
-   *         </note>
-   *
-   *         <p>This operation requires permission for the
-   *                 <code>KinesisVideo:UpdateDataRetention</code> action.</p>
-   *
-   *         <p>Changing the data retention period affects the data in the stream as
-   *             follows:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>If the data retention period is increased, existing data is retained for
-   *                     the new retention period. For example, if the data retention period is increased
-   *                     from one hour to seven hours, all existing data is retained for seven
-   *                     hours.</p>
-   *             </li>
-   *             <li>
-   *                 <p>If the data retention period is decreased, existing data is retained for
-   *                     the new retention period. For example, if the data retention period is decreased
-   *                     from seven hours to one hour, all existing data is retained for one hour, and
-   *                     any data older than one hour is deleted immediately.</p>
-   *             </li>
-   *          </ul>
-   */
-  public updateDataRetention(
-    args: UpdateDataRetentionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDataRetentionCommandOutput>;
-  public updateDataRetention(
-    args: UpdateDataRetentionCommandInput,
-    cb: (err: any, data?: UpdateDataRetentionCommandOutput) => void
-  ): void;
-  public updateDataRetention(
-    args: UpdateDataRetentionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDataRetentionCommandOutput) => void
-  ): void;
-  public updateDataRetention(
-    args: UpdateDataRetentionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataRetentionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataRetentionCommandOutput) => void
-  ): Promise<UpdateDataRetentionCommandOutput> | void {
-    const command = new UpdateDataRetentionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the existing signaling channel. This is an asynchronous operation and takes
-   *             time to complete. </p>
-   *         <p>If the <code>MessageTtlSeconds</code> value is updated (either increased or reduced),
-   *             it only applies to new messages sent via this channel after it's been updated. Existing
-   *             messages are still expired as per the previous <code>MessageTtlSeconds</code>
-   *             value.</p>
-   */
-  public updateSignalingChannel(
-    args: UpdateSignalingChannelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSignalingChannelCommandOutput>;
-  public updateSignalingChannel(
-    args: UpdateSignalingChannelCommandInput,
-    cb: (err: any, data?: UpdateSignalingChannelCommandOutput) => void
-  ): void;
-  public updateSignalingChannel(
-    args: UpdateSignalingChannelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSignalingChannelCommandOutput) => void
-  ): void;
-  public updateSignalingChannel(
-    args: UpdateSignalingChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSignalingChannelCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSignalingChannelCommandOutput) => void
-  ): Promise<UpdateSignalingChannelCommandOutput> | void {
-    const command = new UpdateSignalingChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates stream metadata, such as the device name and media type.</p>
-   *         <p>You must provide the stream name or the Amazon Resource Name (ARN) of the
-   *             stream.</p>
-   *         <p>To make sure that you have the latest version of the stream before updating it, you
-   *             can specify the stream version. Kinesis Video Streams assigns a version to each stream.
-   *             When you update a stream, Kinesis Video Streams assigns a new version number. To get the
-   *             latest stream version, use the <code>DescribeStream</code> API. </p>
-   *         <p>
-   *             <code>UpdateStream</code> is an asynchronous operation, and takes time to
-   *             complete.</p>
-   */
-  public updateStream(
-    args: UpdateStreamCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateStreamCommandOutput>;
-  public updateStream(args: UpdateStreamCommandInput, cb: (err: any, data?: UpdateStreamCommandOutput) => void): void;
-  public updateStream(
-    args: UpdateStreamCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateStreamCommandOutput) => void
-  ): void;
-  public updateStream(
-    args: UpdateStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStreamCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStreamCommandOutput) => void
-  ): Promise<UpdateStreamCommandOutput> | void {
-    const command = new UpdateStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class KinesisVideo extends KinesisVideoClient implements KinesisVideo {}
+createAggregatedClient(commands, KinesisVideo, { paginators });

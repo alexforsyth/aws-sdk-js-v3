@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListOutgoingCertificatesRequest, ListOutgoingCertificatesResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListOutgoingCertificatesCommand,
-  serializeAws_restJson1ListOutgoingCertificatesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListOutgoingCertificatesRequest, ListOutgoingCertificatesResponse } from "../models/models_1";
+import { ListOutgoingCertificates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListOutgoingCertificatesCommand}.
+ */
 export interface ListOutgoingCertificatesCommandInput extends ListOutgoingCertificatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListOutgoingCertificatesCommand}.
+ */
 export interface ListOutgoingCertificatesCommandOutput extends ListOutgoingCertificatesResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,74 @@ export interface ListOutgoingCertificatesCommandOutput extends ListOutgoingCerti
  * ```javascript
  * import { IoTClient, ListOutgoingCertificatesCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListOutgoingCertificatesCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListOutgoingCertificatesRequest
+ *   pageSize: Number("int"),
+ *   marker: "STRING_VALUE",
+ *   ascendingOrder: true || false,
+ * };
  * const command = new ListOutgoingCertificatesCommand(input);
  * const response = await client.send(command);
+ * // { // ListOutgoingCertificatesResponse
+ * //   outgoingCertificates: [ // OutgoingCertificates
+ * //     { // OutgoingCertificate
+ * //       certificateArn: "STRING_VALUE",
+ * //       certificateId: "STRING_VALUE",
+ * //       transferredTo: "STRING_VALUE",
+ * //       transferDate: new Date("TIMESTAMP"),
+ * //       transferMessage: "STRING_VALUE",
+ * //       creationDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListOutgoingCertificatesCommandInput - {@link ListOutgoingCertificatesCommandInput}
+ * @returns {@link ListOutgoingCertificatesCommandOutput}
  * @see {@link ListOutgoingCertificatesCommandInput} for command's `input` shape.
  * @see {@link ListOutgoingCertificatesCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListOutgoingCertificatesCommand extends $Command<
-  ListOutgoingCertificatesCommandInput,
-  ListOutgoingCertificatesCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListOutgoingCertificatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListOutgoingCertificatesCommandInput, ListOutgoingCertificatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListOutgoingCertificatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListOutgoingCertificatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListOutgoingCertificatesResponse.filterSensitiveLog,
+export class ListOutgoingCertificatesCommand extends command<ListOutgoingCertificatesCommandInput, ListOutgoingCertificatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListOutgoingCertificates",
+  ListOutgoingCertificates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOutgoingCertificatesRequest;
+      output: ListOutgoingCertificatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListOutgoingCertificatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListOutgoingCertificatesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListOutgoingCertificatesCommandOutput> {
-    return deserializeAws_restJson1ListOutgoingCertificatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListOutgoingCertificatesCommandInput;
+      output: ListOutgoingCertificatesCommandOutput;
+    };
+  };
 }

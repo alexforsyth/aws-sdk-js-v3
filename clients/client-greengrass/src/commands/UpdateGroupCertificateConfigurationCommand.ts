@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   UpdateGroupCertificateConfigurationRequest,
   UpdateGroupCertificateConfigurationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateGroupCertificateConfigurationCommand,
-  serializeAws_restJson1UpdateGroupCertificateConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { UpdateGroupCertificateConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateGroupCertificateConfigurationCommand}.
+ */
 export interface UpdateGroupCertificateConfigurationCommandInput extends UpdateGroupCertificateConfigurationRequest {}
-export interface UpdateGroupCertificateConfigurationCommandOutput
-  extends UpdateGroupCertificateConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateGroupCertificateConfigurationCommand}.
+ */
+export interface UpdateGroupCertificateConfigurationCommandOutput extends UpdateGroupCertificateConfigurationResponse, __MetadataBearer {}
 
 /**
  * Updates the Certificate expiry time for a group.
@@ -33,74 +32,56 @@ export interface UpdateGroupCertificateConfigurationCommandOutput
  * ```javascript
  * import { GreengrassClient, UpdateGroupCertificateConfigurationCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, UpdateGroupCertificateConfigurationCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // UpdateGroupCertificateConfigurationRequest
+ *   CertificateExpiryInMilliseconds: "STRING_VALUE",
+ *   GroupId: "STRING_VALUE", // required
+ * };
  * const command = new UpdateGroupCertificateConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateGroupCertificateConfigurationResponse
+ * //   CertificateAuthorityExpiryInMilliseconds: "STRING_VALUE",
+ * //   CertificateExpiryInMilliseconds: "STRING_VALUE",
+ * //   GroupId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateGroupCertificateConfigurationCommandInput - {@link UpdateGroupCertificateConfigurationCommandInput}
+ * @returns {@link UpdateGroupCertificateConfigurationCommandOutput}
  * @see {@link UpdateGroupCertificateConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateGroupCertificateConfigurationCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateGroupCertificateConfigurationCommand extends $Command<
-  UpdateGroupCertificateConfigurationCommandInput,
-  UpdateGroupCertificateConfigurationCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateGroupCertificateConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateGroupCertificateConfigurationCommandInput, UpdateGroupCertificateConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "UpdateGroupCertificateConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateGroupCertificateConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateGroupCertificateConfigurationResponse.filterSensitiveLog,
+export class UpdateGroupCertificateConfigurationCommand extends command<UpdateGroupCertificateConfigurationCommandInput, UpdateGroupCertificateConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateGroupCertificateConfiguration",
+  UpdateGroupCertificateConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateGroupCertificateConfigurationRequest;
+      output: UpdateGroupCertificateConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateGroupCertificateConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateGroupCertificateConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateGroupCertificateConfigurationCommandOutput> {
-    return deserializeAws_restJson1UpdateGroupCertificateConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateGroupCertificateConfigurationCommandInput;
+      output: UpdateGroupCertificateConfigurationCommandOutput;
+    };
+  };
 }

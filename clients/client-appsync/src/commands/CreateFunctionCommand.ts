@@ -1,97 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { CreateFunctionRequest, CreateFunctionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateFunctionCommand,
-  serializeAws_restJson1CreateFunctionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFunctionRequest, CreateFunctionResponse } from "../models/models_0";
+import { CreateFunction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFunctionCommand}.
+ */
 export interface CreateFunctionCommandInput extends CreateFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFunctionCommand}.
+ */
 export interface CreateFunctionCommandOutput extends CreateFunctionResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a <code>Function</code> object.</p>
- *          <p>A function is a reusable entity. Multiple functions can be used to compose the resolver
+ *          <p>A function is a reusable entity. You can use multiple functions to compose the resolver
  *          logic.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AppSyncClient, CreateFunctionCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, CreateFunctionCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // CreateFunctionRequest
+ *   apiId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   dataSourceName: "STRING_VALUE", // required
+ *   requestMappingTemplate: "STRING_VALUE",
+ *   responseMappingTemplate: "STRING_VALUE",
+ *   functionVersion: "STRING_VALUE",
+ *   syncConfig: { // SyncConfig
+ *     conflictHandler: "OPTIMISTIC_CONCURRENCY" || "LAMBDA" || "AUTOMERGE" || "NONE",
+ *     conflictDetection: "VERSION" || "NONE",
+ *     lambdaConflictHandlerConfig: { // LambdaConflictHandlerConfig
+ *       lambdaConflictHandlerArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   maxBatchSize: Number("int"),
+ *   runtime: { // AppSyncRuntime
+ *     name: "APPSYNC_JS", // required
+ *     runtimeVersion: "STRING_VALUE", // required
+ *   },
+ *   code: "STRING_VALUE",
+ * };
  * const command = new CreateFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFunctionResponse
+ * //   functionConfiguration: { // FunctionConfiguration
+ * //     functionId: "STRING_VALUE",
+ * //     functionArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     dataSourceName: "STRING_VALUE",
+ * //     requestMappingTemplate: "STRING_VALUE",
+ * //     responseMappingTemplate: "STRING_VALUE",
+ * //     functionVersion: "STRING_VALUE",
+ * //     syncConfig: { // SyncConfig
+ * //       conflictHandler: "OPTIMISTIC_CONCURRENCY" || "LAMBDA" || "AUTOMERGE" || "NONE",
+ * //       conflictDetection: "VERSION" || "NONE",
+ * //       lambdaConflictHandlerConfig: { // LambdaConflictHandlerConfig
+ * //         lambdaConflictHandlerArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     maxBatchSize: Number("int"),
+ * //     runtime: { // AppSyncRuntime
+ * //       name: "APPSYNC_JS", // required
+ * //       runtimeVersion: "STRING_VALUE", // required
+ * //     },
+ * //     code: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateFunctionCommandInput - {@link CreateFunctionCommandInput}
+ * @returns {@link CreateFunctionCommandOutput}
  * @see {@link CreateFunctionCommandInput} for command's `input` shape.
  * @see {@link CreateFunctionCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Another modification is in progress at this time and it must complete before you can
+ *          make your change.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFunctionCommand extends $Command<
-  CreateFunctionCommandInput,
-  CreateFunctionCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFunctionCommandInput, CreateFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "CreateFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFunctionResponse.filterSensitiveLog,
+export class CreateFunctionCommand extends command<CreateFunctionCommandInput, CreateFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFunction",
+  CreateFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFunctionRequest;
+      output: CreateFunctionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFunctionCommandOutput> {
-    return deserializeAws_restJson1CreateFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFunctionCommandInput;
+      output: CreateFunctionCommandOutput;
+    };
+  };
 }

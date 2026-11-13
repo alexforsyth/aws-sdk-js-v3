@@ -1,29 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { StopCanaryRequest, StopCanaryResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopCanaryCommand,
-  serializeAws_restJson1StopCanaryCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SyntheticsClientResolvedConfig } from "../SyntheticsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopCanaryRequest, StopCanaryResponse } from "../models/models_0";
+import { StopCanary$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopCanaryCommand}.
+ */
 export interface StopCanaryCommandInput extends StopCanaryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopCanaryCommand}.
+ */
 export interface StopCanaryCommandOutput extends StopCanaryResponse, __MetadataBearer {}
 
 /**
- * <p>Stops the canary to prevent all future runs. If the canary is currently running,
- *          Synthetics stops waiting for the current run of the specified canary to complete. The
+ * <p>Stops the canary to prevent all future runs. If the canary is currently running,the
  *         run that is in progress completes on its own, publishes metrics, and uploads artifacts, but
  *          it is not recorded in Synthetics as a completed run.</p>
  *          <p>You can use <code>StartCanary</code> to start it running again
@@ -33,68 +33,57 @@ export interface StopCanaryCommandOutput extends StopCanaryResponse, __MetadataB
  * ```javascript
  * import { SyntheticsClient, StopCanaryCommand } from "@aws-sdk/client-synthetics"; // ES Modules import
  * // const { SyntheticsClient, StopCanaryCommand } = require("@aws-sdk/client-synthetics"); // CommonJS import
+ * // import type { SyntheticsClientConfig } from "@aws-sdk/client-synthetics";
+ * const config = {}; // type is SyntheticsClientConfig
  * const client = new SyntheticsClient(config);
+ * const input = { // StopCanaryRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new StopCanaryCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopCanaryCommandInput - {@link StopCanaryCommandInput}
+ * @returns {@link StopCanaryCommandOutput}
  * @see {@link StopCanaryCommandInput} for command's `input` shape.
  * @see {@link StopCanaryCommandOutput} for command's `response` shape.
- * @see {@link SyntheticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SyntheticsClientResolvedConfig | config} for SyntheticsClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflicting operation is already in progress.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One of the specified resources was not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter could not be validated.</p>
+ *
+ * @throws {@link SyntheticsServiceException}
+ * <p>Base exception class for all service exceptions from Synthetics service.</p>
+ *
+ *
+ * @public
  */
-export class StopCanaryCommand extends $Command<
-  StopCanaryCommandInput,
-  StopCanaryCommandOutput,
-  SyntheticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopCanaryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SyntheticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopCanaryCommandInput, StopCanaryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SyntheticsClient";
-    const commandName = "StopCanaryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopCanaryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopCanaryResponse.filterSensitiveLog,
+export class StopCanaryCommand extends command<StopCanaryCommandInput, StopCanaryCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopCanary",
+  StopCanary$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopCanaryRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopCanaryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopCanaryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopCanaryCommandOutput> {
-    return deserializeAws_restJson1StopCanaryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopCanaryCommandInput;
+      output: StopCanaryCommandOutput;
+    };
+  };
 }

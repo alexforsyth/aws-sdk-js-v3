@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationCostProfilerClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationCostProfilerClient";
-import { DeleteReportDefinitionRequest, DeleteReportDefinitionResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteReportDefinitionCommand,
-  serializeAws_restJson1DeleteReportDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteReportDefinitionRequest, DeleteReportDefinitionResult } from "../models/models_0";
+import { DeleteReportDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteReportDefinitionCommand}.
+ */
 export interface DeleteReportDefinitionCommandInput extends DeleteReportDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteReportDefinitionCommand}.
+ */
 export interface DeleteReportDefinitionCommandOutput extends DeleteReportDefinitionResult, __MetadataBearer {}
 
 /**
@@ -33,68 +30,59 @@ export interface DeleteReportDefinitionCommandOutput extends DeleteReportDefinit
  * ```javascript
  * import { ApplicationCostProfilerClient, DeleteReportDefinitionCommand } from "@aws-sdk/client-applicationcostprofiler"; // ES Modules import
  * // const { ApplicationCostProfilerClient, DeleteReportDefinitionCommand } = require("@aws-sdk/client-applicationcostprofiler"); // CommonJS import
+ * // import type { ApplicationCostProfilerClientConfig } from "@aws-sdk/client-applicationcostprofiler";
+ * const config = {}; // type is ApplicationCostProfilerClientConfig
  * const client = new ApplicationCostProfilerClient(config);
+ * const input = { // DeleteReportDefinitionRequest
+ *   reportId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteReportDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteReportDefinitionResult
+ * //   reportId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteReportDefinitionCommandInput - {@link DeleteReportDefinitionCommandInput}
+ * @returns {@link DeleteReportDefinitionCommandOutput}
  * @see {@link DeleteReportDefinitionCommandInput} for command's `input` shape.
  * @see {@link DeleteReportDefinitionCommandOutput} for command's `response` shape.
- * @see {@link ApplicationCostProfilerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationCostProfilerClientResolvedConfig | config} for ApplicationCostProfilerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The calls to AWS Application Cost Profiler API are throttled. The request was denied.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints for the API.</p>
+ *
+ * @throws {@link ApplicationCostProfilerServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationCostProfiler service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteReportDefinitionCommand extends $Command<
-  DeleteReportDefinitionCommandInput,
-  DeleteReportDefinitionCommandOutput,
-  ApplicationCostProfilerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteReportDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationCostProfilerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteReportDefinitionCommandInput, DeleteReportDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationCostProfilerClient";
-    const commandName = "DeleteReportDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteReportDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteReportDefinitionResult.filterSensitiveLog,
+export class DeleteReportDefinitionCommand extends command<DeleteReportDefinitionCommandInput, DeleteReportDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteReportDefinition",
+  DeleteReportDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReportDefinitionRequest;
+      output: DeleteReportDefinitionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteReportDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteReportDefinitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteReportDefinitionCommandOutput> {
-    return deserializeAws_restJson1DeleteReportDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteReportDefinitionCommandInput;
+      output: DeleteReportDefinitionCommandOutput;
+    };
+  };
 }

@@ -1,98 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { GetHostedConfigurationVersionRequest, HostedConfigurationVersion } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetHostedConfigurationVersionCommand,
-  serializeAws_restJson1GetHostedConfigurationVersionCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetHostedConfigurationVersionCommandInput extends GetHostedConfigurationVersionRequest {}
-export interface GetHostedConfigurationVersionCommandOutput extends HostedConfigurationVersion, __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetHostedConfigurationVersionRequest, HostedConfigurationVersion } from "../models/models_0";
+import { GetHostedConfigurationVersion$ } from "../schemas/schemas_0";
 
 /**
- * <p>Get information about a specific configuration version.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetHostedConfigurationVersionCommand}.
+ */
+export interface GetHostedConfigurationVersionCommandInput extends GetHostedConfigurationVersionRequest {}
+/**
+ * @public
+ */
+export type GetHostedConfigurationVersionCommandOutputType = Omit<HostedConfigurationVersion, "Content"> & {
+  Content?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetHostedConfigurationVersionCommand}.
+ */
+export interface GetHostedConfigurationVersionCommandOutput extends GetHostedConfigurationVersionCommandOutputType, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about a specific configuration version.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AppConfigClient, GetHostedConfigurationVersionCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, GetHostedConfigurationVersionCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // GetHostedConfigurationVersionRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   ConfigurationProfileId: "STRING_VALUE", // required
+ *   VersionNumber: Number("int"), // required
+ * };
  * const command = new GetHostedConfigurationVersionCommand(input);
  * const response = await client.send(command);
+ * // { // HostedConfigurationVersion
+ * //   ApplicationId: "STRING_VALUE",
+ * //   ConfigurationProfileId: "STRING_VALUE",
+ * //   VersionNumber: Number("int"),
+ * //   Description: "STRING_VALUE",
+ * //   Content: new Uint8Array(),
+ * //   ContentType: "STRING_VALUE",
+ * //   VersionLabel: "STRING_VALUE",
+ * //   KmsKeyArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetHostedConfigurationVersionCommandInput - {@link GetHostedConfigurationVersionCommandInput}
+ * @returns {@link GetHostedConfigurationVersionCommandOutput}
  * @see {@link GetHostedConfigurationVersionCommandInput} for command's `input` shape.
  * @see {@link GetHostedConfigurationVersionCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To retrieve hosted configuration details
+ * ```javascript
+ * // The following get-hosted-configuration-version example retrieves the configuration details of the AWS AppConfig hosted configuration.
+ * const input = {
+ *   ApplicationId: "339ohji",
+ *   ConfigurationProfileId: "ur8hx2f",
+ *   VersionNumber: 1
+ * };
+ * const command = new GetHostedConfigurationVersionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ApplicationId: "339ohji",
+ *   ConfigurationProfileId: "ur8hx2f",
+ *   ContentType: "application/json",
+ *   VersionNumber: 1
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetHostedConfigurationVersionCommand extends $Command<
-  GetHostedConfigurationVersionCommandInput,
-  GetHostedConfigurationVersionCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetHostedConfigurationVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetHostedConfigurationVersionCommandInput, GetHostedConfigurationVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "GetHostedConfigurationVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetHostedConfigurationVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: HostedConfigurationVersion.filterSensitiveLog,
+export class GetHostedConfigurationVersionCommand extends command<GetHostedConfigurationVersionCommandInput, GetHostedConfigurationVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetHostedConfigurationVersion",
+  GetHostedConfigurationVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetHostedConfigurationVersionRequest;
+      output: HostedConfigurationVersion;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetHostedConfigurationVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetHostedConfigurationVersionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetHostedConfigurationVersionCommandOutput> {
-    return deserializeAws_restJson1GetHostedConfigurationVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetHostedConfigurationVersionCommandInput;
+      output: GetHostedConfigurationVersionCommandOutput;
+    };
+  };
 }

@@ -1,114 +1,128 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EnableSecurityHubRequest, EnableSecurityHubResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1EnableSecurityHubCommand,
-  serializeAws_restJson1EnableSecurityHubCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableSecurityHubRequest, EnableSecurityHubResponse } from "../models/models_2";
+import { EnableSecurityHub$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableSecurityHubCommand}.
+ */
 export interface EnableSecurityHubCommandInput extends EnableSecurityHubRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableSecurityHubCommand}.
+ */
 export interface EnableSecurityHubCommandOutput extends EnableSecurityHubResponse, __MetadataBearer {}
 
 /**
- * <p>Enables Security Hub for your account in the current Region or the Region you specify in the
+ * <p>Enables Security Hub CSPM for your account in the current Region or the Region you specify in the
  *          request.</p>
- *          <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings
- *          from other services that are integrated with Security Hub.</p>
- *          <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also
- *          automatically enable the following standards.</p>
+ *          <p>When you enable Security Hub CSPM, you grant to Security Hub CSPM the permissions necessary to gather findings
+ *          from other services that are integrated with Security Hub CSPM.</p>
+ *          <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub CSPM, you also
+ *          automatically enable the following standards:</p>
  *          <ul>
  *             <li>
- *                <p>CIS Amazon Web Services Foundations</p>
+ *                <p>Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark v1.2.0</p>
  *             </li>
  *             <li>
  *                <p>Amazon Web Services Foundational Security Best Practices</p>
  *             </li>
  *          </ul>
- *          <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p>
- *          <p>To not enable the automatically enabled standards, set
+ *          <p>Other standards are not automatically enabled. </p>
+ *          <p>To opt out of automatically enabled standards, set
  *             <code>EnableDefaultStandards</code> to <code>false</code>.</p>
- *          <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the
+ *          <p>After you enable Security Hub CSPM, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the
  *                <code>BatchDisableStandards</code> operation.</p>
- *          <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>
+ *          <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub CSPM User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, EnableSecurityHubCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, EnableSecurityHubCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // EnableSecurityHubRequest
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   EnableDefaultStandards: true || false,
+ *   ControlFindingGenerator: "STANDARD_CONTROL" || "SECURITY_CONTROL",
+ * };
  * const command = new EnableSecurityHubCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param EnableSecurityHubCommandInput - {@link EnableSecurityHubCommandInput}
+ * @returns {@link EnableSecurityHubCommandOutput}
  * @see {@link EnableSecurityHubCommandInput} for command's `input` shape.
  * @see {@link EnableSecurityHubCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action specified in the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource specified in the request conflicts with an existing resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To activate Security Hub
+ * ```javascript
+ * // The following example activates the Security Hub service in the requesting AWS account. The service is activated in the current AWS Region or the Region that you specify in the request. Some standards are automatically turned on in your account unless you opt out. To determine which standards are automatically turned on, see the Security Hub documentation.
+ * const input = {
+ *   EnableDefaultStandards: true,
+ *   Tags: {
+ *     Department: "Security"
+ *   }
+ * };
+ * const command = new EnableSecurityHubCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class EnableSecurityHubCommand extends $Command<
-  EnableSecurityHubCommandInput,
-  EnableSecurityHubCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableSecurityHubCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableSecurityHubCommandInput, EnableSecurityHubCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "EnableSecurityHubCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableSecurityHubRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: EnableSecurityHubResponse.filterSensitiveLog,
+export class EnableSecurityHubCommand extends command<EnableSecurityHubCommandInput, EnableSecurityHubCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableSecurityHub",
+  EnableSecurityHub$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableSecurityHubRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EnableSecurityHubCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1EnableSecurityHubCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<EnableSecurityHubCommandOutput> {
-    return deserializeAws_restJson1EnableSecurityHubCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableSecurityHubCommandInput;
+      output: EnableSecurityHubCommandOutput;
+    };
+  };
 }

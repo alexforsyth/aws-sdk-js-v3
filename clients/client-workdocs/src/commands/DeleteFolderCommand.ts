@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteFolderRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteFolderCommand,
-  serializeAws_restJson1DeleteFolderCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFolderRequest } from "../models/models_0";
+import { DeleteFolder$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFolderCommand}.
+ */
 export interface DeleteFolderCommandInput extends DeleteFolderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFolderCommand}.
+ */
 export interface DeleteFolderCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface DeleteFolderCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { WorkDocsClient, DeleteFolderCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, DeleteFolderCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // DeleteFolderRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   FolderId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFolderCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteFolderCommandInput - {@link DeleteFolderCommandInput}
+ * @returns {@link DeleteFolderCommandOutput}
  * @see {@link DeleteFolderCommandInput} for command's `input` shape.
  * @see {@link DeleteFolderCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The resource hierarchy is changing.</p>
+ *
+ * @throws {@link ConflictingOperationException} (client fault)
+ *  <p>Another operation is in progress on the resource that conflicts with the current operation.</p>
+ *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The maximum of 100,000 files and folders under the parent folder has been exceeded.</p>
+ *
+ * @throws {@link ProhibitedStateException} (client fault)
+ *  <p>The specified document version is not in the INITIALIZED state.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFolderCommand extends $Command<
-  DeleteFolderCommandInput,
-  DeleteFolderCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFolderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFolderCommandInput, DeleteFolderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "DeleteFolderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFolderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteFolderCommand extends command<DeleteFolderCommandInput, DeleteFolderCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFolder",
+  DeleteFolder$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFolderRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFolderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteFolderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFolderCommandOutput> {
-    return deserializeAws_restJson1DeleteFolderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFolderCommandInput;
+      output: DeleteFolderCommandOutput;
+    };
+  };
 }

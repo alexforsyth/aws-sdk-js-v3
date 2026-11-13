@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ClusterCredentials } from "../models/models_0";
-import { GetClusterCredentialsMessage } from "../models/models_1";
-import {
-  deserializeAws_queryGetClusterCredentialsCommand,
-  serializeAws_queryGetClusterCredentialsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ClusterCredentials, GetClusterCredentialsMessage } from "../models/models_0";
+import { GetClusterCredentials$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetClusterCredentialsCommand}.
+ */
 export interface GetClusterCredentialsCommandInput extends GetClusterCredentialsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link GetClusterCredentialsCommand}.
+ */
 export interface GetClusterCredentialsCommandOutput extends ClusterCredentials, __MetadataBearer {}
 
 /**
@@ -32,85 +32,81 @@ export interface GetClusterCredentialsCommandOutput extends ClusterCredentials, 
  *             a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more
  *             information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication
  *                 to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p>
- *         <p>The Identity and Access Management (IAM) user or role that runs
+ *          <p>The Identity and Access Management (IAM) user or role that runs
  *             GetClusterCredentials must have an IAM policy attached that allows access to all
  *             necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the
  *             Amazon Redshift Cluster Management Guide.</p>
- *         <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the
+ *          <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the
  *                 <code>redshift:JoinGroup</code> action with access to the listed
  *                 <code>dbgroups</code>. </p>
- *         <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>,
+ *          <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>,
  *             then the policy must include the <code>redshift:CreateClusterUser</code>
- *             privilege.</p>
- *         <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access
+ *             permission.</p>
+ *          <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access
  *             to the resource <code>dbname</code> for the specified database name. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftClient, GetClusterCredentialsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, GetClusterCredentialsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // GetClusterCredentialsMessage
+ *   DbUser: "STRING_VALUE", // required
+ *   DbName: "STRING_VALUE",
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   DurationSeconds: Number("int"),
+ *   AutoCreate: true || false,
+ *   DbGroups: [ // DbGroupList
+ *     "STRING_VALUE",
+ *   ],
+ *   CustomDomainName: "STRING_VALUE",
+ * };
  * const command = new GetClusterCredentialsCommand(input);
  * const response = await client.send(command);
+ * // { // ClusterCredentials
+ * //   DbUser: "STRING_VALUE",
+ * //   DbPassword: "STRING_VALUE",
+ * //   Expiration: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetClusterCredentialsCommandInput - {@link GetClusterCredentialsCommandInput}
+ * @returns {@link GetClusterCredentialsCommandOutput}
  * @see {@link GetClusterCredentialsCommandInput} for command's `input` shape.
  * @see {@link GetClusterCredentialsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class GetClusterCredentialsCommand extends $Command<
-  GetClusterCredentialsCommandInput,
-  GetClusterCredentialsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetClusterCredentialsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetClusterCredentialsCommandInput, GetClusterCredentialsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "GetClusterCredentialsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetClusterCredentialsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ClusterCredentials.filterSensitiveLog,
+export class GetClusterCredentialsCommand extends command<GetClusterCredentialsCommandInput, GetClusterCredentialsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetClusterCredentials",
+  GetClusterCredentials$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetClusterCredentialsMessage;
+      output: ClusterCredentials;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetClusterCredentialsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetClusterCredentialsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetClusterCredentialsCommandOutput> {
-    return deserializeAws_queryGetClusterCredentialsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetClusterCredentialsCommandInput;
+      output: GetClusterCredentialsCommandOutput;
+    };
+  };
 }

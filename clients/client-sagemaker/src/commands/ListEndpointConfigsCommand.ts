@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListEndpointConfigsInput, ListEndpointConfigsOutput } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListEndpointConfigsCommand,
-  serializeAws_json1_1ListEndpointConfigsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEndpointConfigsInput, ListEndpointConfigsOutput } from "../models/models_4";
+import { ListEndpointConfigs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEndpointConfigsCommand}.
+ */
 export interface ListEndpointConfigsCommandInput extends ListEndpointConfigsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListEndpointConfigsCommand}.
+ */
 export interface ListEndpointConfigsCommandOutput extends ListEndpointConfigsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface ListEndpointConfigsCommandOutput extends ListEndpointConfigsOut
  * ```javascript
  * import { SageMakerClient, ListEndpointConfigsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListEndpointConfigsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListEndpointConfigsInput
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NameContains: "STRING_VALUE",
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ * };
  * const command = new ListEndpointConfigsCommand(input);
  * const response = await client.send(command);
+ * // { // ListEndpointConfigsOutput
+ * //   EndpointConfigs: [ // EndpointConfigSummaryList // required
+ * //     { // EndpointConfigSummary
+ * //       EndpointConfigName: "STRING_VALUE", // required
+ * //       EndpointConfigArn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEndpointConfigsCommandInput - {@link ListEndpointConfigsCommandInput}
+ * @returns {@link ListEndpointConfigsCommandOutput}
  * @see {@link ListEndpointConfigsCommandInput} for command's `input` shape.
  * @see {@link ListEndpointConfigsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListEndpointConfigsCommand extends $Command<
-  ListEndpointConfigsCommandInput,
-  ListEndpointConfigsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEndpointConfigsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEndpointConfigsCommandInput, ListEndpointConfigsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListEndpointConfigsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEndpointConfigsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEndpointConfigsOutput.filterSensitiveLog,
+export class ListEndpointConfigsCommand extends command<ListEndpointConfigsCommandInput, ListEndpointConfigsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEndpointConfigs",
+  ListEndpointConfigs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEndpointConfigsInput;
+      output: ListEndpointConfigsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEndpointConfigsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEndpointConfigsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEndpointConfigsCommandOutput> {
-    return deserializeAws_json1_1ListEndpointConfigsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEndpointConfigsCommandInput;
+      output: ListEndpointConfigsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CloudFormationClient } from "../CloudFormationClient";
-import { DescribeStacksCommand, DescribeStacksCommandInput } from "../commands/DescribeStacksCommand";
+import type { CloudFormationClient } from "../CloudFormationClient";
+import {
+  type DescribeStacksCommandInput,
+  type DescribeStacksCommandOutput,
+  DescribeStacksCommand,
+} from "../commands/DescribeStacksCommand";
+import type { CloudFormationServiceException } from "../models/CloudFormationServiceException";
 
-const checkState = async (client: CloudFormationClient, input: DescribeStacksCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: CloudFormationClient, input: DescribeStacksCommandInput): Promise<WaiterResult<DescribeStacksCommandOutput | CloudFormationServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeStacksCommand(input));
+    let result: DescribeStacksCommandOutput & any = await client.send(new DescribeStacksCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Stacks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Stacks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.StackStatus;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "UPDATE_ROLLBACK_COMPLETE";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "UPDATE_ROLLBACK_COMPLETE")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,13 +38,13 @@ const checkState = async (client: CloudFormationClient, input: DescribeStacksCom
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Stacks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Stacks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.StackStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "UPDATE_FAILED") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -40,13 +52,13 @@ const checkState = async (client: CloudFormationClient, input: DescribeStacksCom
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Stacks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Stacks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.StackStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "UPDATE_ROLLBACK_FAILED") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -54,13 +66,13 @@ const checkState = async (client: CloudFormationClient, input: DescribeStacksCom
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Stacks);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Stacks);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.StackStatus;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "DELETE_FAILED") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -68,7 +80,7 @@ const checkState = async (client: CloudFormationClient, input: DescribeStacksCom
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ValidationError") {
+    if (exception.name === "ValidationError") {
       return { state: WaiterState.FAILURE, reason };
     }
   }
@@ -81,7 +93,7 @@ const checkState = async (client: CloudFormationClient, input: DescribeStacksCom
 export const waitForStackRollbackComplete = async (
   params: WaiterConfiguration<CloudFormationClient>,
   input: DescribeStacksCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeStacksCommandOutput | CloudFormationServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -93,8 +105,8 @@ export const waitForStackRollbackComplete = async (
 export const waitUntilStackRollbackComplete = async (
   params: WaiterConfiguration<CloudFormationClient>,
   input: DescribeStacksCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeStacksCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeStacksCommandOutput>;
 };

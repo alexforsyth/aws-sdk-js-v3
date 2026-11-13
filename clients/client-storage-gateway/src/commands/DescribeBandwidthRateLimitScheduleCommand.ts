@@ -1,42 +1,42 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeBandwidthRateLimitScheduleInput, DescribeBandwidthRateLimitScheduleOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeBandwidthRateLimitScheduleCommand,
-  serializeAws_json1_1DescribeBandwidthRateLimitScheduleCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeBandwidthRateLimitScheduleInput,
+  DescribeBandwidthRateLimitScheduleOutput,
+} from "../models/models_0";
+import { DescribeBandwidthRateLimitSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBandwidthRateLimitScheduleCommand}.
+ */
 export interface DescribeBandwidthRateLimitScheduleCommandInput extends DescribeBandwidthRateLimitScheduleInput {}
-export interface DescribeBandwidthRateLimitScheduleCommandOutput
-  extends DescribeBandwidthRateLimitScheduleOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBandwidthRateLimitScheduleCommand}.
+ */
+export interface DescribeBandwidthRateLimitScheduleCommandOutput extends DescribeBandwidthRateLimitScheduleOutput, __MetadataBearer {}
 
 /**
  * <p> Returns information about the bandwidth rate limit schedule of a gateway. By default,
  *          gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting
- *          is in effect. This operation is supported only in the volume and tape gateway types. </p>
- *
+ *          is in effect. This operation is supported only for volume, tape and S3 file gateways. FSx
+ *          file gateways do not support bandwidth rate limits.</p>
  *          <p>This operation returns information about a gateway's bandwidth rate limit schedule. A
  *          bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A
  *          bandwidth rate limit interval defines a period of time on one or more days of the week,
  *          during which bandwidth rate limits are specified for uploading, downloading, or both. </p>
- *
  *          <p> A bandwidth rate limit interval consists of one or more days of the week, a start hour
  *          and minute, an ending hour and minute, and bandwidth rate limits for uploading and
  *          downloading </p>
- *
  *          <p> If no bandwidth rate limit schedule intervals are set for the gateway, this operation
  *          returns an empty response. To specify which gateway to describe, use the Amazon Resource
  *          Name (ARN) of the gateway in your request.</p>
@@ -45,74 +45,68 @@ export interface DescribeBandwidthRateLimitScheduleCommandOutput
  * ```javascript
  * import { StorageGatewayClient, DescribeBandwidthRateLimitScheduleCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, DescribeBandwidthRateLimitScheduleCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // DescribeBandwidthRateLimitScheduleInput
+ *   GatewayARN: "STRING_VALUE", // required
+ * };
  * const command = new DescribeBandwidthRateLimitScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBandwidthRateLimitScheduleOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * //   BandwidthRateLimitIntervals: [ // BandwidthRateLimitIntervals
+ * //     { // BandwidthRateLimitInterval
+ * //       StartHourOfDay: Number("int"), // required
+ * //       StartMinuteOfHour: Number("int"), // required
+ * //       EndHourOfDay: Number("int"), // required
+ * //       EndMinuteOfHour: Number("int"), // required
+ * //       DaysOfWeek: [ // DaysOfWeek // required
+ * //         Number("int"),
+ * //       ],
+ * //       AverageUploadRateLimitInBitsPerSec: Number("long"),
+ * //       AverageDownloadRateLimitInBitsPerSec: Number("long"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeBandwidthRateLimitScheduleCommandInput - {@link DescribeBandwidthRateLimitScheduleCommandInput}
+ * @returns {@link DescribeBandwidthRateLimitScheduleCommandOutput}
  * @see {@link DescribeBandwidthRateLimitScheduleCommandInput} for command's `input` shape.
  * @see {@link DescribeBandwidthRateLimitScheduleCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBandwidthRateLimitScheduleCommand extends $Command<
-  DescribeBandwidthRateLimitScheduleCommandInput,
-  DescribeBandwidthRateLimitScheduleCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBandwidthRateLimitScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBandwidthRateLimitScheduleCommandInput, DescribeBandwidthRateLimitScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "DescribeBandwidthRateLimitScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBandwidthRateLimitScheduleInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBandwidthRateLimitScheduleOutput.filterSensitiveLog,
+export class DescribeBandwidthRateLimitScheduleCommand extends command<DescribeBandwidthRateLimitScheduleCommandInput, DescribeBandwidthRateLimitScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBandwidthRateLimitSchedule",
+  DescribeBandwidthRateLimitSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBandwidthRateLimitScheduleInput;
+      output: DescribeBandwidthRateLimitScheduleOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeBandwidthRateLimitScheduleCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeBandwidthRateLimitScheduleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBandwidthRateLimitScheduleCommandOutput> {
-    return deserializeAws_json1_1DescribeBandwidthRateLimitScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBandwidthRateLimitScheduleCommandInput;
+      output: DescribeBandwidthRateLimitScheduleCommandOutput;
+    };
+  };
 }

@@ -1,1022 +1,1040 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AuthenticationMethod,
+  Protocol,
+  Status,
+  SuiteRunStatus,
+  TestCaseScenarioStatus,
+  TestCaseScenarioType,
+} from "./enums";
 
 /**
- * <p>Sends Conflict Exception.</p>
- */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  /**
-   * <p>Sends Conflict Exception message.</p>
-   */
-  message?: string;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Lists all the devices under test</p>
+ * <p>Information of a test device. A thing ARN, certificate ARN
+ *             or device role ARN is required.</p>
+ * @public
  */
 export interface DeviceUnderTest {
   /**
-   * <p>Lists devices thing arn</p>
+   * <p>Lists device's thing ARN.</p>
+   * @public
    */
-  thingArn?: string;
+  thingArn?: string | undefined;
 
   /**
-   * <p>Lists devices certificate arn</p>
+   * <p>Lists device's certificate ARN.</p>
+   * @public
    */
-  certificateArn?: string;
-}
+  certificateArn?: string | undefined;
 
-export namespace DeviceUnderTest {
   /**
-   * @internal
+   * <p>Lists device's role ARN.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeviceUnderTest): any => ({
-    ...obj,
-  });
+  deviceRoleArn?: string | undefined;
 }
 
 /**
- * <p>Gets Suite Definition Configuration.</p>
+ * <p>Gets the suite definition configuration.</p>
+ * @public
  */
 export interface SuiteDefinitionConfiguration {
   /**
-   * <p>Gets Suite Definition Configuration name.</p>
+   * <p>Gets the suite definition name. This is a required parameter.</p>
+   * @public
    */
-  suiteDefinitionName?: string;
+  suiteDefinitionName: string | undefined;
 
   /**
    * <p>Gets the devices configured.</p>
+   * @public
    */
-  devices?: DeviceUnderTest[];
+  devices?: DeviceUnderTest[] | undefined;
 
   /**
    * <p>Gets the tests intended for qualification in a suite.</p>
+   * @public
    */
-  intendedForQualification?: boolean;
+  intendedForQualification?: boolean | undefined;
 
   /**
-   * <p>Gets test suite root group.</p>
+   * <p>Verifies if the test suite is a long duration test.</p>
+   * @public
    */
-  rootGroup?: string;
+  isLongDurationTest?: boolean | undefined;
 
   /**
-   * <p>Gets device permission arn.</p>
+   * <p>Gets the test suite root group. This is a required parameter.
+   *             For updating or creating the latest qualification suite,
+   *             if <code>intendedForQualification</code> is set to true,
+   *             <code>rootGroup</code> can be an empty string. If <code>intendedForQualification</code> is false,
+   *             <code>rootGroup</code> cannot be an empty string.
+   *             If <code>rootGroup</code> is empty, and
+   *             <code>intendedForQualification</code> is set to true,
+   *             all the qualification tests are included, and the configuration is default.</p>
+   *          <p>
+   *             For a qualification suite, the minimum length is 0, and the maximum is 2048.  For a
+   *             non-qualification suite, the minimum length is 1, and the maximum is 2048.
+   *         </p>
+   * @public
    */
-  devicePermissionRoleArn?: string;
+  rootGroup: string | undefined;
+
+  /**
+   * <p>Gets the device permission ARN. This is a required parameter.</p>
+   * @public
+   */
+  devicePermissionRoleArn: string | undefined;
+
+  /**
+   * <p>Sets the MQTT protocol that is configured in the suite definition.</p>
+   * @public
+   */
+  protocol?: Protocol | undefined;
 }
 
-export namespace SuiteDefinitionConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SuiteDefinitionConfiguration): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSuiteDefinitionRequest {
   /**
    * <p>Creates a Device Advisor test suite with suite definition configuration.</p>
+   * @public
    */
-  suiteDefinitionConfiguration?: SuiteDefinitionConfiguration;
+  suiteDefinitionConfiguration: SuiteDefinitionConfiguration | undefined;
 
   /**
    * <p>The tags to be attached to the suite definition.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace CreateSuiteDefinitionRequest {
   /**
-   * @internal
+   * <p>The client token for the test suite definition creation.
+   *             This token is used for tracking test suite definition creation
+   *             using retries and obtaining its status. This parameter is optional.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateSuiteDefinitionRequest): any => ({
-    ...obj,
-  });
+  clientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSuiteDefinitionResponse {
   /**
-   * <p>Creates a Device Advisor test suite with suite UUID.</p>
+   * <p>The UUID of the test suite created.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
-   * <p>Creates a Device Advisor test suite with Amazon Resource name.</p>
+   * <p>The Amazon Resource Name (ARN) of the test suite.</p>
+   * @public
    */
-  suiteDefinitionArn?: string;
+  suiteDefinitionArn?: string | undefined;
 
   /**
-   * <p>Creates a Device Advisor test suite with suite definition name.</p>
+   * <p>The suite definition name of the test suite. This is a required parameter.</p>
+   * @public
    */
-  suiteDefinitionName?: string;
+  suiteDefinitionName?: string | undefined;
 
   /**
-   * <p>Creates a Device Advisor test suite with TimeStamp of when it was created.</p>
+   * <p>The timestamp of when the test suite was created.</p>
+   * @public
    */
-  createdAt?: Date;
-}
-
-export namespace CreateSuiteDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSuiteDefinitionResponse): any => ({
-    ...obj,
-  });
+  createdAt?: Date | undefined;
 }
 
 /**
- * <p>Sends Internal Failure Exception.</p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  /**
-   * <p>Sends Internal Failure Exception message.</p>
-   */
-  message?: string;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Sends invalid request exception.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  /**
-   * <p>Sends invalid request exception message.</p>
-   */
-  message?: string;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteSuiteDefinitionRequest {
   /**
-   * <p>Suite definition Id of the test suite to be deleted.</p>
+   * <p>Suite definition ID of the test suite to be deleted.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 }
 
-export namespace DeleteSuiteDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSuiteDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSuiteDefinitionResponse {}
 
-export namespace DeleteSuiteDefinitionResponse {
+/**
+ * @public
+ */
+export interface GetEndpointRequest {
   /**
-   * @internal
+   * <p>The thing ARN of the device. This is an optional parameter.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteSuiteDefinitionResponse): any => ({
-    ...obj,
-  });
+  thingArn?: string | undefined;
+
+  /**
+   * <p>The certificate ARN of the device. This is an optional parameter.</p>
+   * @public
+   */
+  certificateArn?: string | undefined;
+
+  /**
+   * <p>The device role ARN of the device. This is an optional parameter.</p>
+   * @public
+   */
+  deviceRoleArn?: string | undefined;
+
+  /**
+   * <p>The authentication method used during the device connection.</p>
+   * @public
+   */
+  authenticationMethod?: AuthenticationMethod | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetEndpointResponse {
+  /**
+   * <p>The response of an Device Advisor endpoint.</p>
+   * @public
+   */
+  endpoint?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetSuiteDefinitionRequest {
   /**
-   * <p>Suite definition Id of the test suite to get.</p>
+   * <p>Suite definition ID of the test suite to get.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
    * <p>Suite definition version of the test suite to get.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
-}
-
-export namespace GetSuiteDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface GetSuiteDefinitionResponse {
-  /**
-   * <p>Suite definition Id of the suite definition.</p>
-   */
-  suiteDefinitionId?: string;
-
-  /**
-   * <p>The ARN of the suite definition.</p>
-   */
-  suiteDefinitionArn?: string;
-
-  /**
-   * <p>Suite definition version of the suite definition.</p>
-   */
-  suiteDefinitionVersion?: string;
-
-  /**
-   * <p>Latest suite definition version of the suite definition.</p>
-   */
-  latestVersion?: string;
-
-  /**
-   * <p>Suite configuration of the suite definition.</p>
-   */
-  suiteDefinitionConfiguration?: SuiteDefinitionConfiguration;
-
-  /**
-   * <p>Date (in Unix epoch time) when the suite definition was created.</p>
-   */
-  createdAt?: Date;
-
-  /**
-   * <p>Date (in Unix epoch time) when the suite definition was last modified.</p>
-   */
-  lastModifiedAt?: Date;
-
-  /**
-   * <p>Tags attached to the suite definition.</p>
-   */
-  tags?: { [key: string]: string };
-}
-
-export namespace GetSuiteDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteDefinitionResponse): any => ({
-    ...obj,
-  });
+  suiteDefinitionVersion?: string | undefined;
 }
 
 /**
- * <p>Sends Resource Not Found Exception.</p>
+ * @public
  */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
+export interface GetSuiteDefinitionResponse {
   /**
-   * <p>Sends Resource Not Found Exception message.</p>
+   * <p>Suite definition ID of the suite definition.</p>
+   * @public
    */
-  message?: string;
+  suiteDefinitionId?: string | undefined;
+
+  /**
+   * <p>The ARN of the suite definition.</p>
+   * @public
+   */
+  suiteDefinitionArn?: string | undefined;
+
+  /**
+   * <p>Suite definition version of the suite definition.</p>
+   * @public
+   */
+  suiteDefinitionVersion?: string | undefined;
+
+  /**
+   * <p>Latest suite definition version of the suite definition.</p>
+   * @public
+   */
+  latestVersion?: string | undefined;
+
+  /**
+   * <p>Suite configuration of the suite definition.</p>
+   * @public
+   */
+  suiteDefinitionConfiguration?: SuiteDefinitionConfiguration | undefined;
+
+  /**
+   * <p>Date (in Unix epoch time) when the suite definition was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>Date (in Unix epoch time) when the suite definition was last modified.</p>
+   * @public
+   */
+  lastModifiedAt?: Date | undefined;
+
+  /**
+   * <p>Tags attached to the suite definition.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSuiteRunRequest {
   /**
-   * <p>Suite definition Id for the test suite run.</p>
+   * <p>Suite definition ID for the test suite run.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
-   * <p>Suite run Id for the test suite run.</p>
+   * <p>Suite run ID for the test suite run.</p>
+   * @public
    */
   suiteRunId: string | undefined;
-}
-
-export namespace GetSuiteRunRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteRunRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SuiteRunStatus {
-  CANCELED = "CANCELED",
-  ERROR = "ERROR",
-  FAIL = "FAIL",
-  PASS = "PASS",
-  PASS_WITH_WARNINGS = "PASS_WITH_WARNINGS",
-  PENDING = "PENDING",
-  RUNNING = "RUNNING",
-  STOPPED = "STOPPED",
-  STOPPING = "STOPPING",
 }
 
 /**
  * <p>Gets suite run configuration.</p>
+ * @public
  */
 export interface SuiteRunConfiguration {
   /**
-   * <p>Gets the primary device for suite run.</p>
+   * <p>Sets the primary device for the test suite run. This requires a thing ARN or a
+   *             certificate ARN.</p>
+   * @public
    */
-  primaryDevice?: DeviceUnderTest;
+  primaryDevice: DeviceUnderTest | undefined;
 
   /**
-   * <p>Gets test case list.</p>
+   * <p>Sets test case list.</p>
+   * @public
    */
-  selectedTestList?: string[];
-}
+  selectedTestList?: string[] | undefined;
 
-export namespace SuiteRunConfiguration {
   /**
-   * @internal
+   * <p>TRUE if multiple test suites run in parallel.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SuiteRunConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export enum Status {
-  CANCELED = "CANCELED",
-  ERROR = "ERROR",
-  FAIL = "FAIL",
-  PASS = "PASS",
-  PASS_WITH_WARNINGS = "PASS_WITH_WARNINGS",
-  PENDING = "PENDING",
-  RUNNING = "RUNNING",
-  STOPPED = "STOPPED",
-  STOPPING = "STOPPING",
+  parallelRun?: boolean | undefined;
 }
 
 /**
- * <p>Provides test case run.</p>
+ * <p>Provides test case scenario.</p>
+ * @public
+ */
+export interface TestCaseScenario {
+  /**
+   * <p>Provides test case scenario ID.</p>
+   * @public
+   */
+  testCaseScenarioId?: string | undefined;
+
+  /**
+   * <p>Provides test case scenario type. Type is one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Advanced</p>
+   *             </li>
+   *             <li>
+   *                <p>Basic</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  testCaseScenarioType?: TestCaseScenarioType | undefined;
+
+  /**
+   * <p>Provides the test case scenario status. Status is one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PASS</code>: Test passed.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAIL</code>: Test failed.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING</code>: Test has not started running but is scheduled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RUNNING</code>: Test is running.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STOPPING</code>: Test is performing cleanup steps. You will see this
+   *                     status only if you stop a suite run.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STOPPED</code> Test is stopped. You will see this status only if you
+   *                     stop a suite run.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ERORR</code>: Test faced an error when running due to an internal
+   *                     issue.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  status?: TestCaseScenarioStatus | undefined;
+
+  /**
+   * <p>Provides test case scenario failure result.</p>
+   * @public
+   */
+  failure?: string | undefined;
+
+  /**
+   * <p>Provides test case scenario system messages if any.</p>
+   * @public
+   */
+  systemMessage?: string | undefined;
+}
+
+/**
+ * <p>Provides the test case run.</p>
+ * @public
  */
 export interface TestCaseRun {
   /**
-   * <p>Provides test case run Id.</p>
+   * <p>Provides the test case run ID.</p>
+   * @public
    */
-  testCaseRunId?: string;
+  testCaseRunId?: string | undefined;
 
   /**
-   * <p>Provides test case run definition Id.</p>
+   * <p>Provides the test case run definition ID.</p>
+   * @public
    */
-  testCaseDefinitionId?: string;
+  testCaseDefinitionId?: string | undefined;
 
   /**
-   * <p>Provides test case run definition Name.</p>
+   * <p>Provides the test case run definition name.</p>
+   * @public
    */
-  testCaseDefinitionName?: string;
+  testCaseDefinitionName?: string | undefined;
 
   /**
-   * <p>Provides test case run status.</p>
+   * <p>Provides the test case run status. Status is one of the following:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PASS</code>: Test passed.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAIL</code>: Test failed.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING</code>: Test has not started running but is scheduled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RUNNING</code>: Test is running.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STOPPING</code>: Test is performing cleanup steps. You will see this
+   *                     status only if you stop a suite run.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>STOPPED</code> Test is stopped. You will see this status only if you
+   *                     stop a suite run.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ERORR</code>: Test faced an error when running due to an internal
+   *                     issue.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  status?: Status | string;
+  status?: Status | undefined;
 
   /**
    * <p>Provides test case run start time.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>Provides test case run end time.</p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
-   * <p>Provides test case run log Url.</p>
+   * <p>Provides test case run log URL.</p>
+   * @public
    */
-  logUrl?: string;
+  logUrl?: string | undefined;
 
   /**
    * <p>Provides test case run warnings.</p>
+   * @public
    */
-  warnings?: string;
+  warnings?: string | undefined;
 
   /**
    * <p>Provides test case run failure result.</p>
+   * @public
    */
-  failure?: string;
-}
+  failure?: string | undefined;
 
-export namespace TestCaseRun {
   /**
-   * @internal
+   * <p> Provides the test scenarios for the test case run. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TestCaseRun): any => ({
-    ...obj,
-  });
+  testScenarios?: TestCaseScenario[] | undefined;
 }
 
 /**
  * <p>Show Group Result.</p>
+ * @public
  */
 export interface GroupResult {
   /**
-   * <p>Group result Id.</p>
+   * <p>Group result ID.</p>
+   * @public
    */
-  groupId?: string;
+  groupId?: string | undefined;
 
   /**
    * <p>Group Result Name.</p>
+   * @public
    */
-  groupName?: string;
+  groupName?: string | undefined;
 
   /**
    * <p>Tests under Group Result.</p>
+   * @public
    */
-  tests?: TestCaseRun[];
-}
-
-export namespace GroupResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupResult): any => ({
-    ...obj,
-  });
+  tests?: TestCaseRun[] | undefined;
 }
 
 /**
  * <p>Show each group result.</p>
+ * @public
  */
 export interface TestResult {
   /**
    * <p>Show each group of test results.</p>
+   * @public
    */
-  groups?: GroupResult[];
+  groups?: GroupResult[] | undefined;
 }
 
-export namespace TestResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TestResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSuiteRunResponse {
   /**
-   * <p>Suite definition Id for the test suite run.</p>
+   * <p>Suite definition ID for the test suite run.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
    * <p>Suite definition version for the test suite run.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
+  suiteDefinitionVersion?: string | undefined;
 
   /**
-   * <p>Suite run Id for the test suite run.</p>
+   * <p>Suite run ID for the test suite run.</p>
+   * @public
    */
-  suiteRunId?: string;
+  suiteRunId?: string | undefined;
 
   /**
    * <p>The ARN of the suite run.</p>
+   * @public
    */
-  suiteRunArn?: string;
+  suiteRunArn?: string | undefined;
 
   /**
    * <p>Suite run configuration for the test suite run.</p>
+   * @public
    */
-  suiteRunConfiguration?: SuiteRunConfiguration;
+  suiteRunConfiguration?: SuiteRunConfiguration | undefined;
 
   /**
    * <p>Test results for the test suite run.</p>
+   * @public
    */
-  testResult?: TestResult;
+  testResult?: TestResult | undefined;
 
   /**
-   * <p>Date (in Unix epoch time) when the test suite run was started.</p>
+   * <p>Date (in Unix epoch time) when the test suite run started.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>Date (in Unix epoch time) when the test suite run ended.</p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
    * <p>Status for the test suite run.</p>
+   * @public
    */
-  status?: SuiteRunStatus | string;
+  status?: SuiteRunStatus | undefined;
 
   /**
    * <p>Error reason for any test suite run failure.</p>
+   * @public
    */
-  errorReason?: string;
+  errorReason?: string | undefined;
 
   /**
    * <p>The tags attached to the suite run.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace GetSuiteRunResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteRunResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSuiteRunReportRequest {
   /**
-   * <p>Suite definition Id of the test suite.</p>
+   * <p>Suite definition ID of the test suite.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
-   * <p>Suite run Id of the test suite run.</p>
+   * <p>Suite run ID of the test suite run.</p>
+   * @public
    */
   suiteRunId: string | undefined;
 }
 
-export namespace GetSuiteRunReportRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteRunReportRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetSuiteRunReportResponse {
   /**
    * <p>Download URL of the qualification report.</p>
+   * @public
    */
-  qualificationReportDownloadUrl?: string;
+  qualificationReportDownloadUrl?: string | undefined;
 }
 
-export namespace GetSuiteRunReportResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetSuiteRunReportResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSuiteDefinitionsRequest {
   /**
    * <p>The maximum number of results to return at once.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>A token used to get the next set of results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListSuiteDefinitionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSuiteDefinitionsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Information about the suite definition.</p>
+ * @public
  */
 export interface SuiteDefinitionInformation {
   /**
-   * <p>Suite definition Id of the test suite.</p>
+   * <p>Suite definition ID of the test suite.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
    * <p>Suite name of the test suite.</p>
+   * @public
    */
-  suiteDefinitionName?: string;
+  suiteDefinitionName?: string | undefined;
 
   /**
-   * <p>Specifies the devices under test for the test suite.</p>
+   * <p>Specifies the devices that are under test for the test suite.</p>
+   * @public
    */
-  defaultDevices?: DeviceUnderTest[];
+  defaultDevices?: DeviceUnderTest[] | undefined;
 
   /**
    * <p>Specifies if the test suite is intended for qualification.</p>
+   * @public
    */
-  intendedForQualification?: boolean;
+  intendedForQualification?: boolean | undefined;
+
+  /**
+   * <p>Verifies if the test suite is a long duration test.</p>
+   * @public
+   */
+  isLongDurationTest?: boolean | undefined;
+
+  /**
+   * <p>Gets the MQTT protocol that is configured in the suite definition.</p>
+   * @public
+   */
+  protocol?: Protocol | undefined;
 
   /**
    * <p>Date (in Unix epoch time) when the test suite was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 }
 
-export namespace SuiteDefinitionInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SuiteDefinitionInformation): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSuiteDefinitionsResponse {
   /**
-   * <p>An array of objects that provide summaries of information about the suite definitions in the list.</p>
+   * <p>An array of objects that provide summaries of information about the suite definitions
+   *             in the list.</p>
+   * @public
    */
-  suiteDefinitionInformationList?: SuiteDefinitionInformation[];
+  suiteDefinitionInformationList?: SuiteDefinitionInformation[] | undefined;
 
   /**
    * <p>A token used to get the next set of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListSuiteDefinitionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSuiteDefinitionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSuiteRunsRequest {
   /**
-   * <p>Lists the test suite runs of the specified test suite based on suite definition Id.</p>
+   * <p>Lists the test suite runs of the specified test suite based on suite definition
+   *             ID.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
-   * <p>Must be passed along with suiteDefinitionId. Lists the test suite runs of the specified test suite based on suite definition version.</p>
+   * <p>Must be passed along with <code>suiteDefinitionId</code>. Lists the test suite runs of
+   *             the specified test suite based on suite definition version.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
+  suiteDefinitionVersion?: string | undefined;
 
   /**
    * <p>The maximum number of results to return at once.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>A token to retrieve the next set of results.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace ListSuiteRunsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSuiteRunsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>Information about the suite run.</p>
+ *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">SuiteRunInformation</a> action.</p>
+ * @public
  */
 export interface SuiteRunInformation {
   /**
-   * <p>Suite definition Id of the suite run.</p>
+   * <p>Suite definition ID of the suite run.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
    * <p>Suite definition version of the suite run.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
+  suiteDefinitionVersion?: string | undefined;
 
   /**
    * <p>Suite definition name of the suite run.</p>
+   * @public
    */
-  suiteDefinitionName?: string;
+  suiteDefinitionName?: string | undefined;
 
   /**
-   * <p>Suite run Id of the suite run.</p>
+   * <p>Suite run ID of the suite run.</p>
+   * @public
    */
-  suiteRunId?: string;
+  suiteRunId?: string | undefined;
 
   /**
    * <p>Date (in Unix epoch time) when the suite run was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>Date (in Unix epoch time) when the suite run was started.</p>
+   * @public
    */
-  startedAt?: Date;
+  startedAt?: Date | undefined;
 
   /**
    * <p>Date (in Unix epoch time) when the suite run ended.</p>
+   * @public
    */
-  endAt?: Date;
+  endAt?: Date | undefined;
 
   /**
    * <p>Status of the suite run.</p>
+   * @public
    */
-  status?: SuiteRunStatus | string;
+  status?: SuiteRunStatus | undefined;
 
   /**
    * <p>Number of test cases that passed in the suite run.</p>
+   * @public
    */
-  passed?: number;
+  passed?: number | undefined;
 
   /**
    * <p>Number of test cases that failed in the suite run.</p>
+   * @public
    */
-  failed?: number;
+  failed?: number | undefined;
 }
 
-export namespace SuiteRunInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SuiteRunInformation): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSuiteRunsResponse {
   /**
-   * <p>An array of objects that provide summaries of information about the suite runs in the list.</p>
+   * <p>An array of objects that provide summaries of information about the suite runs in the
+   *             list.</p>
+   * @public
    */
-  suiteRunsList?: SuiteRunInformation[];
+  suiteRunsList?: SuiteRunInformation[] | undefined;
 
   /**
    * <p>A token to retrieve the next set of results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListSuiteRunsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSuiteRunsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
-   * <p>The ARN of the IoT Device Advisor resource.</p>
+   * <p>The resource ARN of the IoT Device Advisor resource. This can be SuiteDefinition ARN or
+   *             SuiteRun ARN.</p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>The tags attached to the IoT Device Advisor resource.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartSuiteRunRequest {
   /**
-   * <p>Suite definition Id of the test suite.</p>
+   * <p>Suite definition ID of the test suite.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
    * <p>Suite definition version of the test suite.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
+  suiteDefinitionVersion?: string | undefined;
 
   /**
    * <p>Suite run configuration.</p>
+   * @public
    */
-  suiteRunConfiguration?: SuiteRunConfiguration;
+  suiteRunConfiguration: SuiteRunConfiguration | undefined;
 
   /**
    * <p>The tags to be attached to the suite run.</p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace StartSuiteRunRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSuiteRunRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartSuiteRunResponse {
   /**
-   * <p>Suite Run Id of the started suite run.</p>
+   * <p>Suite Run ID of the started suite run.</p>
+   * @public
    */
-  suiteRunId?: string;
+  suiteRunId?: string | undefined;
 
   /**
-   * <p>Amazon resource name of the started suite run.</p>
+   * <p>Amazon Resource Name (ARN) of the started suite run.</p>
+   * @public
    */
-  suiteRunArn?: string;
+  suiteRunArn?: string | undefined;
 
   /**
-   * <p>Date (in Unix epoch time) when the suite run was created.</p>
+   * <p>Starts a Device Advisor test suite run based on suite create time.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The response of an Device Advisor test endpoint.</p>
+   * @public
+   */
+  endpoint?: string | undefined;
 }
 
-export namespace StartSuiteRunResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSuiteRunResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopSuiteRunRequest {
   /**
-   * <p>Suite definition Id of the test suite run to be stopped.</p>
+   * <p>Suite definition ID of the test suite run to be stopped.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
-   * <p>Suite run Id of the test suite run to be stopped.</p>
+   * <p>Suite run ID of the test suite run to be stopped.</p>
+   * @public
    */
   suiteRunId: string | undefined;
 }
 
-export namespace StopSuiteRunRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopSuiteRunRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopSuiteRunResponse {}
 
-export namespace StopSuiteRunResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopSuiteRunResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
-   * <p>The resource ARN of an IoT Device Advisor resource.</p>
+   * <p>The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or
+   *             SuiteRun ARN.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>The tags to be attached to the IoT Device Advisor resource.</p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
+  tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
-   * <p>The resource ARN of an IoT Device Advisor resource.</p>
+   * <p>The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or
+   *             SuiteRun ARN.</p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p>List of tag keys to remove from the IoT Device Advisor resource.</p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSuiteDefinitionRequest {
   /**
-   * <p>Suite definition Id of the test suite to be updated.</p>
+   * <p>Suite definition ID of the test suite to be updated.</p>
+   * @public
    */
   suiteDefinitionId: string | undefined;
 
   /**
    * <p>Updates a Device Advisor test suite with suite definition configuration.</p>
+   * @public
    */
-  suiteDefinitionConfiguration?: SuiteDefinitionConfiguration;
+  suiteDefinitionConfiguration: SuiteDefinitionConfiguration | undefined;
 }
 
-export namespace UpdateSuiteDefinitionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSuiteDefinitionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSuiteDefinitionResponse {
   /**
-   * <p>Suite definition Id of the updated test suite.</p>
+   * <p>Suite definition ID of the updated test suite.</p>
+   * @public
    */
-  suiteDefinitionId?: string;
+  suiteDefinitionId?: string | undefined;
 
   /**
-   * <p>Amazon Resource name of the updated test suite.</p>
+   * <p>Amazon Resource Name (ARN) of the updated test suite.</p>
+   * @public
    */
-  suiteDefinitionArn?: string;
+  suiteDefinitionArn?: string | undefined;
 
   /**
-   * <p>Suite definition name of the updated test suite.</p>
+   * <p>Updates the suite definition name. This is a required parameter.</p>
+   * @public
    */
-  suiteDefinitionName?: string;
+  suiteDefinitionName?: string | undefined;
 
   /**
    * <p>Suite definition version of the updated test suite.</p>
+   * @public
    */
-  suiteDefinitionVersion?: string;
+  suiteDefinitionVersion?: string | undefined;
 
   /**
    * <p>Timestamp of when the test suite was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>Timestamp of when the test suite was updated.</p>
+   * @public
    */
-  lastUpdatedAt?: Date;
-}
-
-export namespace UpdateSuiteDefinitionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSuiteDefinitionResponse): any => ({
-    ...obj,
-  });
+  lastUpdatedAt?: Date | undefined;
 }

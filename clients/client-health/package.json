@@ -1,94 +1,69 @@
 {
   "name": "@aws-sdk/client-health",
+  "version": "3.1169.0",
   "description": "AWS SDK for JavaScript Health Client for Node.js, Browser and React Native",
-  "version": "3.39.0",
-  "scripts": {
-    "build": "yarn build:cjs && yarn build:es && yarn build:types",
-    "build:cjs": "tsc -p tsconfig.json",
-    "build:docs": "yarn clean:docs && typedoc ./",
-    "build:es": "tsc -p tsconfig.es.json",
-    "build:types": "tsc -p tsconfig.types.json",
-    "clean": "yarn clean:dist && yarn clean:docs",
-    "clean:dist": "rimraf ./dist",
-    "clean:docs": "rimraf ./docs",
-    "downlevel-dts": "downlevel-dts dist-types dist-types/ts3.4",
-    "test": "exit 0"
+  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-health",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "AWS SDK for JavaScript Team",
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
   },
-  "main": "./dist-cjs/index.js",
-  "types": "./dist-types/index.d.ts",
-  "module": "./dist-es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-sdk-js-v3.git",
+    "directory": "clients/client-health"
+  },
+  "files": [
+    "dist-*/**"
+  ],
   "sideEffects": false,
-  "dependencies": {
-    "@aws-crypto/sha256-browser": "2.0.0",
-    "@aws-crypto/sha256-js": "2.0.0",
-    "@aws-sdk/client-sts": "3.39.0",
-    "@aws-sdk/config-resolver": "3.39.0",
-    "@aws-sdk/credential-provider-node": "3.39.0",
-    "@aws-sdk/fetch-http-handler": "3.38.0",
-    "@aws-sdk/hash-node": "3.38.0",
-    "@aws-sdk/invalid-dependency": "3.38.0",
-    "@aws-sdk/middleware-content-length": "3.38.0",
-    "@aws-sdk/middleware-host-header": "3.38.0",
-    "@aws-sdk/middleware-logger": "3.38.0",
-    "@aws-sdk/middleware-retry": "3.39.0",
-    "@aws-sdk/middleware-serde": "3.38.0",
-    "@aws-sdk/middleware-signing": "3.39.0",
-    "@aws-sdk/middleware-stack": "3.38.0",
-    "@aws-sdk/middleware-user-agent": "3.38.0",
-    "@aws-sdk/node-config-provider": "3.39.0",
-    "@aws-sdk/node-http-handler": "3.38.0",
-    "@aws-sdk/protocol-http": "3.38.0",
-    "@aws-sdk/smithy-client": "3.38.0",
-    "@aws-sdk/types": "3.38.0",
-    "@aws-sdk/url-parser": "3.38.0",
-    "@aws-sdk/util-base64-browser": "3.37.0",
-    "@aws-sdk/util-base64-node": "3.37.0",
-    "@aws-sdk/util-body-length-browser": "3.37.0",
-    "@aws-sdk/util-body-length-node": "3.37.0",
-    "@aws-sdk/util-user-agent-browser": "3.38.0",
-    "@aws-sdk/util-user-agent-node": "3.39.0",
-    "@aws-sdk/util-utf8-browser": "3.37.0",
-    "@aws-sdk/util-utf8-node": "3.37.0",
-    "tslib": "^2.3.0"
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "browser": {
+    "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.browser"
   },
-  "devDependencies": {
-    "@aws-sdk/service-client-documentation-generator": "3.38.0",
-    "@types/node": "^12.7.5",
-    "downlevel-dts": "0.7.0",
-    "jest": "^26.1.0",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^26.4.1",
-    "typedoc": "^0.19.2",
-    "typescript": "~4.3.5"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
+  "types": "./dist-types/index.d.ts",
   "typesVersions": {
-    "<4.0": {
+    "<4.5": {
       "dist-types/*": [
         "dist-types/ts3.4/*"
       ]
     }
   },
-  "files": [
-    "dist-*"
-  ],
-  "author": {
-    "name": "AWS SDK for JavaScript Team",
-    "url": "https://aws.amazon.com/javascript/"
-  },
-  "license": "Apache-2.0",
-  "browser": {
-    "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.browser"
-  },
   "react-native": {
     "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.native"
   },
-  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-health",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aws/aws-sdk-js-v3.git",
-    "directory": "clients/client-health"
+  "scripts": {
+    "build": "concurrently 'yarn:build:types' 'yarn:build:es' && yarn build:cjs",
+    "build:cjs": "node ../../scripts/compilation/inline",
+    "build:es": "premove dist-es && tsc -p tsconfig.es.json",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "premove dist-types && tsc -p tsconfig.types.json",
+    "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+    "clean": "premove dist-cjs dist-es dist-types",
+    "extract:docs": "api-extractor run --local",
+    "generate:client": "node ../../scripts/generate-clients/single-service",
+    "test:index": "tsc -p tsconfig.test.json && node ./test/index-objects.spec.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/core": "workspace:^3.981.0",
+    "@aws-sdk/credential-provider-node": "workspace:^3.972.97",
+    "@aws-sdk/types": "workspace:^3.975.1",
+    "@smithy/core": "^3.40.0",
+    "@smithy/fetch-http-handler": "^5.8.1",
+    "@smithy/node-http-handler": "^4.14.2",
+    "@smithy/types": "^4.20.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "20.1.8",
+    "@types/node": "^20.14.8",
+    "concurrently": "7.0.0",
+    "downlevel-dts": "0.10.1",
+    "premove": "4.0.0",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

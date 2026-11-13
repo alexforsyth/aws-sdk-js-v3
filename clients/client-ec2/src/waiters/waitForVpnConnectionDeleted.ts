@@ -1,27 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeVpnConnectionsCommandInput,
+  type DescribeVpnConnectionsCommandOutput,
   DescribeVpnConnectionsCommand,
-  DescribeVpnConnectionsCommandInput,
 } from "../commands/DescribeVpnConnectionsCommand";
-import { EC2Client } from "../EC2Client";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeVpnConnectionsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeVpnConnectionsCommandInput): Promise<WaiterResult<DescribeVpnConnectionsCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeVpnConnectionsCommand(input));
+    let result: DescribeVpnConnectionsCommandOutput & any = await client.send(new DescribeVpnConnectionsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.VpnConnections);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.VpnConnections);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "deleted";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "deleted")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -29,13 +38,13 @@ const checkState = async (client: EC2Client, input: DescribeVpnConnectionsComman
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.VpnConnections);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.VpnConnections);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "pending") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -53,7 +62,7 @@ const checkState = async (client: EC2Client, input: DescribeVpnConnectionsComman
 export const waitForVpnConnectionDeleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVpnConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVpnConnectionsCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -65,8 +74,8 @@ export const waitForVpnConnectionDeleted = async (
 export const waitUntilVpnConnectionDeleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeVpnConnectionsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeVpnConnectionsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeVpnConnectionsCommandOutput>;
 };

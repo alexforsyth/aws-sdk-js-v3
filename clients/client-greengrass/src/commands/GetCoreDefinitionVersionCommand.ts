@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { GetCoreDefinitionVersionRequest, GetCoreDefinitionVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetCoreDefinitionVersionCommand,
-  serializeAws_restJson1GetCoreDefinitionVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCoreDefinitionVersionRequest, GetCoreDefinitionVersionResponse } from "../models/models_0";
+import { GetCoreDefinitionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCoreDefinitionVersionCommand}.
+ */
 export interface GetCoreDefinitionVersionCommandInput extends GetCoreDefinitionVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCoreDefinitionVersionCommand}.
+ */
 export interface GetCoreDefinitionVersionCommandOutput extends GetCoreDefinitionVersionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface GetCoreDefinitionVersionCommandOutput extends GetCoreDefinition
  * ```javascript
  * import { GreengrassClient, GetCoreDefinitionVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, GetCoreDefinitionVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // GetCoreDefinitionVersionRequest
+ *   CoreDefinitionId: "STRING_VALUE", // required
+ *   CoreDefinitionVersionId: "STRING_VALUE", // required
+ * };
  * const command = new GetCoreDefinitionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // GetCoreDefinitionVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Definition: { // CoreDefinitionVersion
+ * //     Cores: [ // __listOfCore
+ * //       { // Core
+ * //         CertificateArn: "STRING_VALUE", // required
+ * //         Id: "STRING_VALUE", // required
+ * //         SyncShadow: true || false,
+ * //         ThingArn: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   Id: "STRING_VALUE",
+ * //   NextToken: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCoreDefinitionVersionCommandInput - {@link GetCoreDefinitionVersionCommandInput}
+ * @returns {@link GetCoreDefinitionVersionCommandOutput}
  * @see {@link GetCoreDefinitionVersionCommandInput} for command's `input` shape.
  * @see {@link GetCoreDefinitionVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class GetCoreDefinitionVersionCommand extends $Command<
-  GetCoreDefinitionVersionCommandInput,
-  GetCoreDefinitionVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCoreDefinitionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCoreDefinitionVersionCommandInput, GetCoreDefinitionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "GetCoreDefinitionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCoreDefinitionVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCoreDefinitionVersionResponse.filterSensitiveLog,
+export class GetCoreDefinitionVersionCommand extends command<GetCoreDefinitionVersionCommandInput, GetCoreDefinitionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCoreDefinitionVersion",
+  GetCoreDefinitionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCoreDefinitionVersionRequest;
+      output: GetCoreDefinitionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCoreDefinitionVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCoreDefinitionVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCoreDefinitionVersionCommandOutput> {
-    return deserializeAws_restJson1GetCoreDefinitionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCoreDefinitionVersionCommandInput;
+      output: GetCoreDefinitionVersionCommandOutput;
+    };
+  };
 }

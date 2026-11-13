@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DescribeIndexFieldsRequest, DescribeIndexFieldsResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeIndexFieldsCommand,
-  serializeAws_queryDescribeIndexFieldsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeIndexFieldsRequest, DescribeIndexFieldsResponse } from "../models/models_0";
+import { DescribeIndexFields$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeIndexFieldsCommand}.
+ */
 export interface DescribeIndexFieldsCommandInput extends DescribeIndexFieldsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeIndexFieldsCommand}.
+ */
 export interface DescribeIndexFieldsCommandOutput extends DescribeIndexFieldsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,158 @@ export interface DescribeIndexFieldsCommandOutput extends DescribeIndexFieldsRes
  * ```javascript
  * import { CloudSearchClient, DescribeIndexFieldsCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DescribeIndexFieldsCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DescribeIndexFieldsRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   FieldNames: [ // DynamicFieldNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   Deployed: true || false,
+ * };
  * const command = new DescribeIndexFieldsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeIndexFieldsResponse
+ * //   IndexFields: [ // IndexFieldStatusList // required
+ * //     { // IndexFieldStatus
+ * //       Options: { // IndexField
+ * //         IndexFieldName: "STRING_VALUE", // required
+ * //         IndexFieldType: "int" || "double" || "literal" || "text" || "date" || "latlon" || "int-array" || "double-array" || "literal-array" || "text-array" || "date-array", // required
+ * //         IntOptions: { // IntOptions
+ * //           DefaultValue: Number("long"),
+ * //           SourceField: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //         },
+ * //         DoubleOptions: { // DoubleOptions
+ * //           DefaultValue: Number("double"),
+ * //           SourceField: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //         },
+ * //         LiteralOptions: { // LiteralOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceField: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //         },
+ * //         TextOptions: { // TextOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceField: "STRING_VALUE",
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //           HighlightEnabled: true || false,
+ * //           AnalysisScheme: "STRING_VALUE",
+ * //         },
+ * //         DateOptions: { // DateOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceField: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //         },
+ * //         LatLonOptions: { // LatLonOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceField: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //           SortEnabled: true || false,
+ * //         },
+ * //         IntArrayOptions: { // IntArrayOptions
+ * //           DefaultValue: Number("long"),
+ * //           SourceFields: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //         },
+ * //         DoubleArrayOptions: { // DoubleArrayOptions
+ * //           DefaultValue: Number("double"),
+ * //           SourceFields: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //         },
+ * //         LiteralArrayOptions: { // LiteralArrayOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceFields: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //         },
+ * //         TextArrayOptions: { // TextArrayOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceFields: "STRING_VALUE",
+ * //           ReturnEnabled: true || false,
+ * //           HighlightEnabled: true || false,
+ * //           AnalysisScheme: "STRING_VALUE",
+ * //         },
+ * //         DateArrayOptions: { // DateArrayOptions
+ * //           DefaultValue: "STRING_VALUE",
+ * //           SourceFields: "STRING_VALUE",
+ * //           FacetEnabled: true || false,
+ * //           SearchEnabled: true || false,
+ * //           ReturnEnabled: true || false,
+ * //         },
+ * //       },
+ * //       Status: { // OptionStatus
+ * //         CreationDate: new Date("TIMESTAMP"), // required
+ * //         UpdateDate: new Date("TIMESTAMP"), // required
+ * //         UpdateVersion: Number("int"),
+ * //         State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //         PendingDeletion: true || false,
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeIndexFieldsCommandInput - {@link DescribeIndexFieldsCommandInput}
+ * @returns {@link DescribeIndexFieldsCommandOutput}
  * @see {@link DescribeIndexFieldsCommandInput} for command's `input` shape.
  * @see {@link DescribeIndexFieldsCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeIndexFieldsCommand extends $Command<
-  DescribeIndexFieldsCommandInput,
-  DescribeIndexFieldsCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeIndexFieldsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeIndexFieldsCommandInput, DescribeIndexFieldsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DescribeIndexFieldsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeIndexFieldsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeIndexFieldsResponse.filterSensitiveLog,
+export class DescribeIndexFieldsCommand extends command<DescribeIndexFieldsCommandInput, DescribeIndexFieldsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeIndexFields",
+  DescribeIndexFields$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeIndexFieldsRequest;
+      output: DescribeIndexFieldsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeIndexFieldsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeIndexFieldsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeIndexFieldsCommandOutput> {
-    return deserializeAws_queryDescribeIndexFieldsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeIndexFieldsCommandInput;
+      output: DescribeIndexFieldsCommandOutput;
+    };
+  };
 }

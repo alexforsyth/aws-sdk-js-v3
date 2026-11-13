@@ -1,9 +1,10 @@
 // @ts-check
-import { exec } from "child_process";
-import { access, readFile, writeFile } from "fs/promises";
-import { join } from "path";
-import stripComments from "strip-comments";
-import { promisify } from "util";
+import { exec } from "node:child_process";
+import decomment from "decomment";
+import { access, readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { format } from "oxfmt";
+import { promisify } from "node:util";
 
 import { getAllFiles } from "./getAllFiles.mjs";
 import { getDeclarationDirname } from "./getDeclarationDirname.mjs";
@@ -13,6 +14,12 @@ const execPromise = promisify(exec);
 
 export const downlevelWorkspace = async (workspacesDir, workspaceName) => {
   const workspaceDir = join(workspacesDir, workspaceName);
+
+  const pkgJson = JSON.parse(await readFile(join(workspaceDir, "package.json"), "utf8"));
+  if (!pkgJson.scripts?.["build:types:downlevel"]) {
+    return;
+  }
+
   const downlevelDirname = await getDownlevelDirname(workspaceDir);
   const declarationDirname = await getDeclarationDirname(workspaceDir);
 
@@ -20,10 +27,8 @@ export const downlevelWorkspace = async (workspacesDir, workspaceName) => {
   try {
     await access(declarationDir);
   } catch (error) {
-    throw new Error(
-      `The types for "${workspaceName}" do not exist.\n` +
-        `Please build types for workspace "${workspaceDir}" before running downlevel-dts script.`
-    );
+    console.log(`The types for "${workspaceName}" do not exist.\n`);
+    return;
   }
 
   const downlevelDir = join(declarationDir, downlevelDirname);
@@ -31,7 +36,7 @@ export const downlevelWorkspace = async (workspacesDir, workspaceName) => {
   try {
     await access(downlevelDir);
   } catch (error) {
-    await execPromise(["yarn", "downlevel-dts"].join(" "), { cwd: workspaceDir });
+    await execPromise(["yarn", "build:types:downlevel"].join(" "), { cwd: workspaceDir });
   }
 
   // Strip comments from downlevel-dts files
@@ -41,7 +46,13 @@ export const downlevelWorkspace = async (workspacesDir, workspaceName) => {
     for (const downlevelTypesFilepath of files) {
       try {
         const content = await readFile(downlevelTypesFilepath, "utf8");
-        await writeFile(downlevelTypesFilepath, stripComments(content));
+        const decommentedContent = decomment(content);
+        try {
+          const formatted = (await format(downlevelTypesFilepath, decommentedContent)).code;
+          await writeFile(downlevelTypesFilepath, formatted);
+        } catch (error) {
+          console.warn(`Failed to format "${downlevelTypesFilepath}". Skipping...`);
+        }
       } catch (error) {
         console.error(`Error while stripping comments from "${downlevelTypesFilepath.replace(process.cwd(), "")}"`);
         console.error(error);

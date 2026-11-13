@@ -1,103 +1,122 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CancelCapacityReservationRequest, CancelCapacityReservationResult } from "../models/models_0";
-import {
-  deserializeAws_ec2CancelCapacityReservationCommand,
-  serializeAws_ec2CancelCapacityReservationCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelCapacityReservationRequest, CancelCapacityReservationResult } from "../models/models_0";
+import { CancelCapacityReservation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelCapacityReservationCommand}.
+ */
 export interface CancelCapacityReservationCommandInput extends CancelCapacityReservationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelCapacityReservationCommand}.
+ */
 export interface CancelCapacityReservationCommandOutput extends CancelCapacityReservationResult, __MetadataBearer {}
 
 /**
- * <p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to
- * 			<code>cancelled</code>.</p>
- * 		       <p>Instances running in the reserved capacity continue running until you stop them. Stopped
- * 			instances that target the Capacity Reservation can no longer launch. Modify these instances to either
- * 			target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation
- * 			that has matching attributes and sufficient capacity.</p>
+ * <p>Cancels the specified Capacity Reservation, releases the reserved capacity, and
+ * 			changes the Capacity Reservation's state to <code>cancelled</code>.</p>
+ *          <p>You can cancel a Capacity Reservation that is in the following states:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <code>assessing</code>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>scheduled</code> — requires a cancellation quote. Use
+ * 					<code>CreateCapacityReservationCancellationQuote</code> to generate a quote,
+ * 					then pass the quote ID with <code>ApplyCancellationCharges</code> set to
+ * 					<code>commitment-wind-down</code>. The cancellation charge depends on how
+ * 					close the reservation is to its start date.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>active</code> and there is no commitment duration or the commitment
+ * 					duration has elapsed.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>active</code> during the commitment duration — requires a
+ * 					cancellation quote. Use
+ * 					<code>CreateCapacityReservationCancellationQuote</code> to generate a quote,
+ * 					then pass the quote ID with <code>ApplyCancellationCharges</code> set to
+ * 					<code>commitment-wind-down</code>. The Capacity Reservation transitions to
+ * 					<code>cancelling</code> while charges are applied.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>delayed</code> — the commitment duration is waived, so no
+ * 					cancellation charge applies.</p>
+ *             </li>
+ *          </ul>
+ *          <note>
+ *             <p>You can't modify or cancel a Capacity Block. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html">Capacity Blocks for ML</a>.</p>
+ *          </note>
+ *          <p>Instances running in the reserved capacity continue running until you stop them.
+ * 			Stopped instances that target the Capacity Reservation can no longer launch. Modify
+ * 			these instances to either target a different Capacity Reservation, launch On-Demand
+ * 			Instance capacity, or run in any open Capacity Reservation that has matching attributes
+ * 			and sufficient capacity.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CancelCapacityReservationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CancelCapacityReservationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CancelCapacityReservationRequest
+ *   CapacityReservationId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ *   ApplyCancellationCharges: "commitment-wind-down",
+ *   QuoteId: "STRING_VALUE",
+ * };
  * const command = new CancelCapacityReservationCommand(input);
  * const response = await client.send(command);
+ * // { // CancelCapacityReservationResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param CancelCapacityReservationCommandInput - {@link CancelCapacityReservationCommandInput}
+ * @returns {@link CancelCapacityReservationCommandOutput}
  * @see {@link CancelCapacityReservationCommandInput} for command's `input` shape.
  * @see {@link CancelCapacityReservationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CancelCapacityReservationCommand extends $Command<
-  CancelCapacityReservationCommandInput,
-  CancelCapacityReservationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelCapacityReservationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelCapacityReservationCommandInput, CancelCapacityReservationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CancelCapacityReservationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelCapacityReservationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelCapacityReservationResult.filterSensitiveLog,
+export class CancelCapacityReservationCommand extends command<CancelCapacityReservationCommandInput, CancelCapacityReservationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelCapacityReservation",
+  CancelCapacityReservation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelCapacityReservationRequest;
+      output: CancelCapacityReservationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelCapacityReservationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CancelCapacityReservationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CancelCapacityReservationCommandOutput> {
-    return deserializeAws_ec2CancelCapacityReservationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelCapacityReservationCommandInput;
+      output: CancelCapacityReservationCommandOutput;
+    };
+  };
 }

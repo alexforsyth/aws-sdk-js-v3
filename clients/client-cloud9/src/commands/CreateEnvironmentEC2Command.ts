@@ -1,96 +1,139 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Cloud9ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Cloud9Client";
-import { CreateEnvironmentEC2Request, CreateEnvironmentEC2Result } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateEnvironmentEC2Command,
-  serializeAws_json1_1CreateEnvironmentEC2Command,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEnvironmentEC2Request, CreateEnvironmentEC2Result } from "../models/models_0";
+import { CreateEnvironmentEC2$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEnvironmentEC2Command}.
+ */
 export interface CreateEnvironmentEC2CommandInput extends CreateEnvironmentEC2Request {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEnvironmentEC2Command}.
+ */
 export interface CreateEnvironmentEC2CommandOutput extends CreateEnvironmentEC2Result, __MetadataBearer {}
 
 /**
  * <p>Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and
  *       then connects from the instance to the environment.</p>
+ *          <important>
+ *             <p>Cloud9 is no longer available to new customers. Existing customers of
+ *         Cloud9 can continue to use the service as normal.
+ *         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
+ *             </p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Cloud9Client, CreateEnvironmentEC2Command } from "@aws-sdk/client-cloud9"; // ES Modules import
  * // const { Cloud9Client, CreateEnvironmentEC2Command } = require("@aws-sdk/client-cloud9"); // CommonJS import
+ * // import type { Cloud9ClientConfig } from "@aws-sdk/client-cloud9";
+ * const config = {}; // type is Cloud9ClientConfig
  * const client = new Cloud9Client(config);
+ * const input = { // CreateEnvironmentEC2Request
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   clientRequestToken: "STRING_VALUE",
+ *   instanceType: "STRING_VALUE", // required
+ *   subnetId: "STRING_VALUE",
+ *   imageId: "STRING_VALUE", // required
+ *   automaticStopTimeMinutes: Number("int"),
+ *   ownerArn: "STRING_VALUE",
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   connectionType: "CONNECT_SSH" || "CONNECT_SSM",
+ *   dryRun: true || false,
+ * };
  * const command = new CreateEnvironmentEC2Command(input);
  * const response = await client.send(command);
+ * // { // CreateEnvironmentEC2Result
+ * //   environmentId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateEnvironmentEC2CommandInput - {@link CreateEnvironmentEC2CommandInput}
+ * @returns {@link CreateEnvironmentEC2CommandOutput}
  * @see {@link CreateEnvironmentEC2CommandInput} for command's `input` shape.
  * @see {@link CreateEnvironmentEC2CommandOutput} for command's `response` shape.
- * @see {@link Cloud9ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Cloud9ClientResolvedConfig | config} for Cloud9Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The target request is invalid.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflict occurred.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>An access permissions issue occurred.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error occurred.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A service limit was exceeded.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The target resource cannot be found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many service requests were made over the given time period.</p>
+ *
+ * @throws {@link Cloud9ServiceException}
+ * <p>Base exception class for all service exceptions from Cloud9 service.</p>
+ *
+ *
+ * @example CreateEnvironmentEC2
+ * ```javascript
+ * //
+ * const input = {
+ *   automaticStopTimeMinutes: 60,
+ *   description: "This is my demonstration environment.",
+ *   imageId: "amazonlinux-2023-x86_64",
+ *   instanceType: "t2.micro",
+ *   name: "my-demo-environment",
+ *   ownerArn: "arn:aws:iam::123456789012:user/MyDemoUser",
+ *   subnetId: "subnet-6300cd1b"
+ * };
+ * const command = new CreateEnvironmentEC2Command(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   environmentId: "8d9967e2f0624182b74e7690ad69ebEX"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateEnvironmentEC2Command extends $Command<
-  CreateEnvironmentEC2CommandInput,
-  CreateEnvironmentEC2CommandOutput,
-  Cloud9ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEnvironmentEC2CommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Cloud9ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEnvironmentEC2CommandInput, CreateEnvironmentEC2CommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Cloud9Client";
-    const commandName = "CreateEnvironmentEC2Command";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEnvironmentEC2Request.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateEnvironmentEC2Result.filterSensitiveLog,
+export class CreateEnvironmentEC2Command extends command<CreateEnvironmentEC2CommandInput, CreateEnvironmentEC2CommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEnvironmentEC2",
+  CreateEnvironmentEC2$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentEC2Request;
+      output: CreateEnvironmentEC2Result;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEnvironmentEC2CommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateEnvironmentEC2Command(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateEnvironmentEC2CommandOutput> {
-    return deserializeAws_json1_1CreateEnvironmentEC2Command(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEnvironmentEC2CommandInput;
+      output: CreateEnvironmentEC2CommandOutput;
+    };
+  };
 }

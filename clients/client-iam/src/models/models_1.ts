@@ -1,142 +1,246 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { AssertionEncryptionModeType, StatusType } from "./enums";
+import type { Role, ServerCertificateMetadata, SigningCertificate, SSHPublicKey, Tag } from "./models_0";
 
-import { Role, ServerCertificateMetadata, SigningCertificate, SSHPublicKey, StatusType, Tag } from "./models_0";
+/**
+ * @public
+ */
+export interface TagSAMLProviderRequest {
+  /**
+   * <p>The ARN of the SAML identity provider in IAM to which you want to add tags.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  SAMLProviderArn: string | undefined;
 
+  /**
+   * <p>The list of tags that you want to attach to the SAML identity provider in IAM.
+   *       Each tag consists of a key name and an associated value.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagServerCertificateRequest {
+  /**
+   * <p>The name of the IAM server certificate to which you want to add tags.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  ServerCertificateName: string | undefined;
+
+  /**
+   * <p>The list of tags that you want to attach to the IAM server certificate.
+   *       Each tag consists of a key name and an associated value.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagUserRequest {
+  /**
+   * <p>The name of the IAM user to which you want to add tags.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  UserName: string | undefined;
+
+  /**
+   * <p>The list of tags that you want to attach to the IAM user. Each tag consists of a key name and an associated value.</p>
+   * @public
+   */
+  Tags: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagInstanceProfileRequest {
+  /**
+   * <p>The name of the IAM instance profile from which you want to remove tags.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  InstanceProfileName: string | undefined;
+
+  /**
+   * <p>A list of key names as a simple array of strings. The tags with matching keys are
+   *       removed from the specified instance profile.</p>
+   * @public
+   */
+  TagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagMFADeviceRequest {
+  /**
+   * <p>The unique identifier for the IAM virtual MFA device from which you want to remove
+   *       tags. For virtual MFA devices, the serial number is the same as the ARN.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  SerialNumber: string | undefined;
+
+  /**
+   * <p>A list of key names as a simple array of strings. The tags with matching keys are
+   *       removed from the specified instance profile.</p>
+   * @public
+   */
+  TagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagOpenIDConnectProviderRequest {
+  /**
+   * <p>The ARN of the OIDC provider in IAM from which you want to remove tags.</p>
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
+   */
+  OpenIDConnectProviderArn: string | undefined;
+
+  /**
+   * <p>A list of key names as a simple array of strings. The tags with matching keys are
+   *       removed from the specified OIDC provider.</p>
+   * @public
+   */
+  TagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UntagPolicyRequest {
   /**
    * <p>The ARN of the IAM customer managed policy from which you want to remove
    *       tags.</p>
    *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   PolicyArn: string | undefined;
 
   /**
    * <p>A list of key names as a simple array of strings. The tags with matching keys are
    *       removed from the specified policy.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagPolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagPolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagRoleRequest {
   /**
    * <p>The name of the IAM role from which you want to remove tags.</p>
    *          <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   RoleName: string | undefined;
 
   /**
    * <p>A list of key names as a simple array of strings. The tags with matching keys are
    *       removed from the specified role.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagRoleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagRoleRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagSAMLProviderRequest {
   /**
    * <p>The ARN of the SAML identity provider in IAM from which you want to remove
    *       tags.</p>
    *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   SAMLProviderArn: string | undefined;
 
   /**
    * <p>A list of key names as a simple array of strings. The tags with matching keys are
    *       removed from the specified SAML identity provider.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagSAMLProviderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagSAMLProviderRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagServerCertificateRequest {
   /**
    * <p>The name of the IAM server certificate from which you want to remove tags.</p>
    *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   ServerCertificateName: string | undefined;
 
   /**
    * <p>A list of key names as a simple array of strings. The tags with matching keys are
    *       removed from the specified IAM server certificate.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagServerCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagServerCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagUserRequest {
   /**
    * <p>The name of the IAM user from which you want to remove tags.</p>
    *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>A list of key names as a simple array of strings. The tags with matching keys are
    *       removed from the specified user.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagUserRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAccessKeyRequest {
   /**
    * <p>The name of the user whose key you want to update.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The access key ID of the secret access key you want to update.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
    *     consist of any upper or lowercased letter or digit.</p>
+   * @public
    */
   AccessKeyId: string | undefined;
 
@@ -144,123 +248,134 @@ export interface UpdateAccessKeyRequest {
    * <p> The status you want to assign to the secret access key. <code>Active</code> means
    *             that the key can be used for programmatic calls to Amazon Web Services, while <code>Inactive</code>
    *             means that the key cannot be used.</p>
+   * @public
    */
-  Status: StatusType | string | undefined;
+  Status: StatusType | undefined;
 }
 
-export namespace UpdateAccessKeyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAccessKeyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAccountPasswordPolicyRequest {
   /**
    * <p>The minimum number of characters allowed in an IAM user password.</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>6</code>.</p>
+   * @public
    */
-  MinimumPasswordLength?: number;
+  MinimumPasswordLength?: number | undefined;
 
   /**
    * <p>Specifies whether IAM user passwords must contain at least one of the following
    *             non-alphanumeric characters:</p>
-   *         <p>! @ # $ % ^ & * ( ) _ + - = [ ] { } | '</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>! @ # $ % ^ &amp; * ( ) _ + - = [ ] \{ \} | '</p>
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that passwords do not require at least one
    *             symbol character.</p>
+   * @public
    */
-  RequireSymbols?: boolean;
+  RequireSymbols?: boolean | undefined;
 
   /**
    * <p>Specifies whether IAM user passwords must contain at least one numeric character (0
    *             to 9).</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that passwords do not require at least one
    *             numeric character.</p>
+   * @public
    */
-  RequireNumbers?: boolean;
+  RequireNumbers?: boolean | undefined;
 
   /**
    * <p>Specifies whether IAM user passwords must contain at least one uppercase character
    *             from the ISO basic Latin alphabet (A to Z).</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that passwords do not require at least one
    *             uppercase character.</p>
+   * @public
    */
-  RequireUppercaseCharacters?: boolean;
+  RequireUppercaseCharacters?: boolean | undefined;
 
   /**
    * <p>Specifies whether IAM user passwords must contain at least one lowercase character
    *             from the ISO basic Latin alphabet (a to z).</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that passwords do not require at least one
    *             lowercase character.</p>
+   * @public
    */
-  RequireLowercaseCharacters?: boolean;
+  RequireLowercaseCharacters?: boolean | undefined;
 
   /**
    * <p> Allows all IAM users in your account to use the Amazon Web Services Management Console to change their own
-   *             passwords. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html">Letting IAM users change their own
-   *                 passwords</a> in the <i>IAM User Guide</i>.</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *             passwords. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_enable-user-change.html">Permitting
+   *                 IAM users to change their own passwords</a> in the
+   *                 <i>IAM User Guide</i>.</p>
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that IAM users in the account do not
    *             automatically have permissions to change their own password.</p>
+   * @public
    */
-  AllowUsersToChangePassword?: boolean;
+  AllowUsersToChangePassword?: boolean | undefined;
 
   /**
    * <p>The number of days that an IAM user password is valid.</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>0</code>. The result is that IAM user passwords never expire.</p>
+   * @public
    */
-  MaxPasswordAge?: number;
+  MaxPasswordAge?: number | undefined;
 
   /**
    * <p>Specifies the number of previous passwords that IAM users are prevented from
    *             reusing.</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>0</code>. The result is that IAM users are not prevented from reusing
    *             previous passwords.</p>
+   * @public
    */
-  PasswordReusePrevention?: number;
+  PasswordReusePrevention?: number | undefined;
 
   /**
-   * <p>Prevents IAM users from setting a new password after their password has expired. The
-   *             IAM user cannot be accessed until an administrator resets the password.</p>
-   *         <p>If you do not specify a value for this parameter, then the operation uses the default
+   * <p> Prevents IAM users who are accessing the account via the Amazon Web Services Management Console from setting a
+   *             new console password after their password has expired. The IAM user cannot access the
+   *             console until an administrator resets the password.</p>
+   *          <p>If you do not specify a value for this parameter, then the operation uses the default
    *             value of <code>false</code>. The result is that IAM users can change their passwords
    *             after they expire and continue to sign in as the user.</p>
+   *          <note>
+   *             <p> In the Amazon Web Services Management Console, the custom password policy option <b>Allow
+   *                     users to change their own password</b> gives IAM users permissions to
+   *                     <code>iam:ChangePassword</code> for only their user and to the
+   *                     <code>iam:GetAccountPasswordPolicy</code> action. This option does not attach a
+   *                 permissions policy to each user, rather the permissions are applied at the
+   *                 account-level for all users by IAM. IAM users with
+   *                     <code>iam:ChangePassword</code> permission and active access keys can reset
+   *                 their own expired console password using the CLI or API.</p>
+   *          </note>
+   * @public
    */
-  HardExpiry?: boolean;
+  HardExpiry?: boolean | undefined;
 }
 
-export namespace UpdateAccountPasswordPolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAccountPasswordPolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssumeRolePolicyRequest {
   /**
    * <p>The name of the role to update with the new policy.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   RoleName: string | undefined;
 
   /**
    * <p>The policy that grants an entity permission to assume the role.</p>
-   *         <p>You must provide policies in JSON format in IAM. However, for CloudFormation
+   *          <p>You must provide policies in JSON format in IAM. However, for CloudFormation
    *             templates formatted in YAML, you can provide the policy in JSON or YAML format. CloudFormation always converts a YAML policy to JSON format before submitting it to
    *             IAM.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -276,66 +391,76 @@ export interface UpdateAssumeRolePolicyRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
   PolicyDocument: string | undefined;
 }
 
-export namespace UpdateAssumeRolePolicyRequest {
+/**
+ * @public
+ */
+export interface UpdateDelegationRequestRequest {
   /**
-   * @internal
+   * <p>The unique identifier of the delegation request to update.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateAssumeRolePolicyRequest): any => ({
-    ...obj,
-  });
+  DelegationRequestId: string | undefined;
+
+  /**
+   * <p>Additional notes or comments to add to the delegation request.</p>
+   * @public
+   */
+  Notes?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateGroupRequest {
   /**
    * <p>Name of the IAM group to update. If you're changing the name of the group, this is
    *             the original name.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   GroupName: string | undefined;
 
   /**
    * <p>New path for the IAM group. Only include this if changing the group's path.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
    *     of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
    *     In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
    *     most punctuation characters, digits, and upper and lowercased letters.</p>
+   * @public
    */
-  NewPath?: string;
+  NewPath?: string | undefined;
 
   /**
    * <p>New name for the IAM group. Only include this if changing the group's name.</p>
-   *         <p>IAM user, group, role, and policy names must be unique within the account. Names are
+   *          <p>IAM user, group, role, and policy names must be unique within the account. Names are
    *             not distinguished by case. For example, you cannot create resources named both
    *             "MyResource" and "myresource".</p>
+   * @public
    */
-  NewGroupName?: string;
+  NewGroupName?: string | undefined;
 }
 
-export namespace UpdateGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateLoginProfileRequest {
   /**
    * <p>The name of the user whose password you want to update.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>The new password for the specified IAM user.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -351,71 +476,64 @@ export interface UpdateLoginProfileRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
-   *         <p>However, the format can be further restricted by the account administrator by setting
-   *             a password policy on the Amazon Web Services account. For more information, see <a>UpdateAccountPasswordPolicy</a>.</p>
+   *          <p>However, the format can be further restricted by the account administrator by setting
+   *             a password policy on the Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAccountPasswordPolicy.html">UpdateAccountPasswordPolicy</a>.</p>
+   * @public
    */
-  Password?: string;
+  Password?: string | undefined;
 
   /**
    * <p>Allows this new password to be used only once by requiring the specified IAM user to
    *             set a new password on next sign-in.</p>
+   * @public
    */
-  PasswordResetRequired?: boolean;
+  PasswordResetRequired?: boolean | undefined;
 }
 
-export namespace UpdateLoginProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateLoginProfileRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateOpenIDConnectProviderThumbprintRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for which
    *             you want to update the thumbprint. You can get a list of OIDC provider ARNs by using the
-   *                 <a>ListOpenIDConnectProviders</a> operation.</p>
-   *         <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
+   *                 <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html">ListOpenIDConnectProviders</a> operation.</p>
+   *          <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
+   * @public
    */
   OpenIDConnectProviderArn: string | undefined;
 
   /**
    * <p>A list of certificate thumbprints that are associated with the specified IAM OpenID
-   *             Connect provider. For more information, see <a>CreateOpenIDConnectProvider</a>. </p>
+   *             Connect provider. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html">CreateOpenIDConnectProvider</a>. </p>
+   * @public
    */
   ThumbprintList: string[] | undefined;
 }
 
-export namespace UpdateOpenIDConnectProviderThumbprintRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateOpenIDConnectProviderThumbprintRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRoleRequest {
   /**
    * <p>The name of the role that you want to modify.</p>
+   * @public
    */
   RoleName: string | undefined;
 
   /**
    * <p>The new description that you want to apply to the specified role.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The maximum session duration (in seconds) that you want to set for the specified role.
-   *             If you do not specify a value for this setting, the default maximum of one hour is
+   *             If you do not specify a value for this setting, the default value of one hour is
    *             applied. This setting can have a value from 1 hour to 12 hours.</p>
-   *         <p>Anyone who assumes the role from the CLI or API can use the
-   *                 <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code> CLI
-   *             parameter to request a longer session. The <code>MaxSessionDuration</code> setting
+   *          <p>Anyone who assumes the role from the CLI or API can use the
+   *                 <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code>
+   *             CLI parameter to request a longer session. The <code>MaxSessionDuration</code> setting
    *             determines the maximum duration that can be requested using the
    *                 <code>DurationSeconds</code> parameter. If users don't specify a value for the
    *                 <code>DurationSeconds</code> parameter, their security credentials are valid for one
@@ -423,193 +541,182 @@ export interface UpdateRoleRequest {
    *             or the <code>assume-role*</code> CLI operations but does not apply when you use those
    *             operations to create a console URL. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM
    *                 roles</a> in the <i>IAM User Guide</i>.</p>
+   *          <note>
+   *             <p>IAM role credentials provided by Amazon EC2 instances assigned to the role are not
+   *                 subject to the specified maximum session duration.</p>
+   *          </note>
+   * @public
    */
-  MaxSessionDuration?: number;
+  MaxSessionDuration?: number | undefined;
 }
 
-export namespace UpdateRoleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoleRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRoleResponse {}
 
-export namespace UpdateRoleResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoleResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRoleDescriptionRequest {
   /**
    * <p>The name of the role that you want to modify.</p>
+   * @public
    */
   RoleName: string | undefined;
 
   /**
    * <p>The new description that you want to apply to the specified role.</p>
+   * @public
    */
   Description: string | undefined;
 }
 
-export namespace UpdateRoleDescriptionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoleDescriptionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRoleDescriptionResponse {
   /**
    * <p>A structure that contains details about the modified role.</p>
+   * @public
    */
-  Role?: Role;
+  Role?: Role | undefined;
 }
 
-export namespace UpdateRoleDescriptionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRoleDescriptionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSAMLProviderRequest {
   /**
    * <p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The
    *             document includes the issuer's name, expiration information, and keys that can be used
    *             to validate the SAML authentication response (assertions) that are received from the
    *             IdP. You must generate the metadata document using the identity management software that
-   *             is used as your organization's IdP.</p>
+   *             is used as your IdP.</p>
+   * @public
    */
-  SAMLMetadataDocument: string | undefined;
+  SAMLMetadataDocument?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the SAML provider to update.</p>
-   *         <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
+   *          <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
+   * @public
    */
   SAMLProviderArn: string | undefined;
-}
 
-export namespace UpdateSAMLProviderRequest {
   /**
-   * @internal
+   * <p>Specifies the encryption setting for the SAML provider.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateSAMLProviderRequest): any => ({
-    ...obj,
-  });
+  AssertionEncryptionMode?: AssertionEncryptionModeType | undefined;
+
+  /**
+   * <p>Specifies the new private key from your external identity provider. The private key
+   *             must be a .pem file that uses AES-GCM or AES-CBC encryption algorithm to decrypt SAML
+   *             assertions.</p>
+   * @public
+   */
+  AddPrivateKey?: string | undefined;
+
+  /**
+   * <p>The Key ID of the private key to remove.</p>
+   * @public
+   */
+  RemovePrivateKey?: string | undefined;
 }
 
 /**
- * <p>Contains the response to a successful <a>UpdateSAMLProvider</a> request.
- *     </p>
+ * <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html">UpdateSAMLProvider</a>
+ *       request. </p>
+ * @public
  */
 export interface UpdateSAMLProviderResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the SAML provider that was updated.</p>
+   * @public
    */
-  SAMLProviderArn?: string;
+  SAMLProviderArn?: string | undefined;
 }
 
-export namespace UpdateSAMLProviderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSAMLProviderResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateServerCertificateRequest {
   /**
    * <p>The name of the server certificate that you want to update.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   ServerCertificateName: string | undefined;
 
   /**
    * <p>The new path for the server certificate. Include this only if you are updating the
    *             server certificate's path.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
    *     of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
    *     In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
    *     most punctuation characters, digits, and upper and lowercased letters.</p>
+   * @public
    */
-  NewPath?: string;
+  NewPath?: string | undefined;
 
   /**
    * <p>The new name for the server certificate. Include this only if you are updating the
    *             server certificate's name. The name of the certificate cannot contain any spaces.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
-  NewServerCertificateName?: string;
+  NewServerCertificateName?: string | undefined;
 }
 
-export namespace UpdateServerCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateServerCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateServiceSpecificCredentialRequest {
   /**
    * <p>The name of the IAM user associated with the service-specific credential. If you do
    *             not specify this value, then the operation assumes the user whose credentials are used
    *             to call the operation.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The unique identifier of the service-specific credential.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
    *     consist of any upper or lowercased letter or digit.</p>
+   * @public
    */
   ServiceSpecificCredentialId: string | undefined;
 
   /**
    * <p>The status to be assigned to the service-specific credential.</p>
+   * @public
    */
-  Status: StatusType | string | undefined;
+  Status: StatusType | undefined;
 }
 
-export namespace UpdateServiceSpecificCredentialRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateServiceSpecificCredentialRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSigningCertificateRequest {
   /**
    * <p>The name of the IAM user the signing certificate belongs to.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The ID of the signing certificate you want to update.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
    *     consist of any upper or lowercased letter or digit.</p>
+   * @public
    */
   CertificateId: string | undefined;
 
@@ -617,31 +724,28 @@ export interface UpdateSigningCertificateRequest {
    * <p> The status you want to assign to the certificate. <code>Active</code> means that the
    *             certificate can be used for programmatic calls to Amazon Web Services <code>Inactive</code> means that
    *             the certificate cannot be used.</p>
+   * @public
    */
-  Status: StatusType | string | undefined;
+  Status: StatusType | undefined;
 }
 
-export namespace UpdateSigningCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSigningCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSSHPublicKeyRequest {
   /**
    * <p>The name of the IAM user associated with the SSH public key.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>The unique identifier for the SSH public key.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
    *     consist of any upper or lowercased letter or digit.</p>
+   * @public
    */
   SSHPublicKeyId: string | undefined;
 
@@ -649,124 +753,80 @@ export interface UpdateSSHPublicKeyRequest {
    * <p>The status to assign to the SSH public key. <code>Active</code> means that the key can
    *             be used for authentication with an CodeCommit repository. <code>Inactive</code> means that
    *             the key cannot be used.</p>
+   * @public
    */
-  Status: StatusType | string | undefined;
+  Status: StatusType | undefined;
 }
 
-export namespace UpdateSSHPublicKeyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSSHPublicKeyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateUserRequest {
   /**
    * <p>Name of the user to update. If you're changing the name of the user, this is the
    *             original user name.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   UserName: string | undefined;
 
   /**
    * <p>New path for the IAM user. Include this parameter only if you're changing the user's
    *             path.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
    *     of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
    *     In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
    *     most punctuation characters, digits, and upper and lowercased letters.</p>
+   * @public
    */
-  NewPath?: string;
+  NewPath?: string | undefined;
 
   /**
    * <p>New name for the user. Include this parameter only if you're changing the user's
    *             name.</p>
-   *         <p>IAM user, group, role, and policy names must be unique within the account. Names are
+   *          <p>IAM user, group, role, and policy names must be unique within the account. Names are
    *             not distinguished by case. For example, you cannot create resources named both
    *             "MyResource" and "myresource".</p>
+   * @public
    */
-  NewUserName?: string;
-}
-
-export namespace UpdateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateUserRequest): any => ({
-    ...obj,
-  });
+  NewUserName?: string | undefined;
 }
 
 /**
- * <p>The request was rejected because the public key certificate and the private key do not
- *       match.</p>
+ * @public
  */
-export interface KeyPairMismatchException extends __SmithyException, $MetadataBearer {
-  name: "KeyPairMismatchException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace KeyPairMismatchException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KeyPairMismatchException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was rejected because the certificate was malformed or expired. The error
- *       message describes the specific error.</p>
- */
-export interface MalformedCertificateException extends __SmithyException, $MetadataBearer {
-  name: "MalformedCertificateException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace MalformedCertificateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MalformedCertificateException): any => ({
-    ...obj,
-  });
-}
-
 export interface UploadServerCertificateRequest {
   /**
    * <p>The path for the server certificate. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
    *                 identifiers</a> in the <i>IAM User Guide</i>.</p>
-   *         <p>This parameter is optional. If it is not included, it defaults to a slash (/).
+   *          <p>This parameter is optional. If it is not included, it defaults to a slash (/).
    *             This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
    *     of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
    *     In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
    *     most punctuation characters, digits, and upper and lowercased letters.</p>
-   *         <note>
+   *          <note>
    *             <p> If you are uploading a server certificate specifically for use with Amazon
    *                 CloudFront distributions, you must specify a path using the <code>path</code>
    *                 parameter. The path must begin with <code>/cloudfront</code> and must include a
    *                 trailing slash (for example, <code>/cloudfront/test/</code>).</p>
-   *         </note>
+   *          </note>
+   * @public
    */
-  Path?: string;
+  Path?: string | undefined;
 
   /**
    * <p>The name for the server certificate. Do not include the path in this value. The name
    *             of the certificate cannot contain any spaces.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   ServerCertificateName: string | undefined;
 
   /**
    * <p>The contents of the public key certificate in PEM-encoded format.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -782,12 +842,13 @@ export interface UploadServerCertificateRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
   CertificateBody: string | undefined;
 
   /**
    * <p>The contents of the private key in PEM-encoded format.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -803,13 +864,14 @@ export interface UploadServerCertificateRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
   PrivateKey: string | undefined;
 
   /**
    * <p>The contents of the certificate chain. This is typically a concatenation of the
    *             PEM-encoded public key certificates of the chain.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -825,8 +887,9 @@ export interface UploadServerCertificateRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  CertificateChain?: string;
+  CertificateChain?: string | undefined;
 
   /**
    * <p>A list of tags that you want to attach to the new IAM server certificate resource.
@@ -836,96 +899,47 @@ export interface UploadServerCertificateRequest {
    *             <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
    *    fails and the resource is not created.</p>
    *          </note>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace UploadServerCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadServerCertificateRequest): any => ({
-    ...obj,
-    ...(obj.PrivateKey && { PrivateKey: SENSITIVE_STRING }),
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>Contains the response to a successful <a>UploadServerCertificate</a>
- *       request. </p>
+ * <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadServerCertificate.html">UploadServerCertificate</a> request. </p>
+ * @public
  */
 export interface UploadServerCertificateResponse {
   /**
    * <p>The meta information of the uploaded server certificate without its certificate body,
    *             certificate chain, and private key.</p>
+   * @public
    */
-  ServerCertificateMetadata?: ServerCertificateMetadata;
+  ServerCertificateMetadata?: ServerCertificateMetadata | undefined;
 
   /**
    * <p>A list of tags that are attached to the new IAM server certificate. The returned list of tags is sorted by tag key.
    *       For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
    *       <i>IAM User Guide</i>.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace UploadServerCertificateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadServerCertificateResponse): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>The request was rejected because the same certificate is associated with an IAM user in
- *       the account.</p>
+ * @public
  */
-export interface DuplicateCertificateException extends __SmithyException, $MetadataBearer {
-  name: "DuplicateCertificateException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DuplicateCertificateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DuplicateCertificateException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was rejected because the certificate is invalid.</p>
- */
-export interface InvalidCertificateException extends __SmithyException, $MetadataBearer {
-  name: "InvalidCertificateException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidCertificateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidCertificateException): any => ({
-    ...obj,
-  });
-}
-
 export interface UploadSigningCertificateRequest {
   /**
    * <p>The name of the user the signing certificate is for.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
-  UserName?: string;
+  UserName?: string | undefined;
 
   /**
    * <p>The contents of the signing certificate.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -941,81 +955,32 @@ export interface UploadSigningCertificateRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
   CertificateBody: string | undefined;
 }
 
-export namespace UploadSigningCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadSigningCertificateRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Contains the response to a successful <a>UploadSigningCertificate</a>
- *       request. </p>
+ * <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSigningCertificate.html">UploadSigningCertificate</a> request. </p>
+ * @public
  */
 export interface UploadSigningCertificateResponse {
   /**
    * <p>Information about the certificate.</p>
+   * @public
    */
   Certificate: SigningCertificate | undefined;
 }
 
-export namespace UploadSigningCertificateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadSigningCertificateResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The request was rejected because the SSH public key is already associated with the
- *       specified IAM user.</p>
+ * @public
  */
-export interface DuplicateSSHPublicKeyException extends __SmithyException, $MetadataBearer {
-  name: "DuplicateSSHPublicKeyException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DuplicateSSHPublicKeyException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DuplicateSSHPublicKeyException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request was rejected because the public key is malformed or otherwise invalid.</p>
- */
-export interface InvalidPublicKeyException extends __SmithyException, $MetadataBearer {
-  name: "InvalidPublicKeyException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidPublicKeyException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidPublicKeyException): any => ({
-    ...obj,
-  });
-}
-
 export interface UploadSSHPublicKeyRequest {
   /**
    * <p>The name of the IAM user to associate the SSH public key with.</p>
-   *         <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+   *          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
    *     characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
+   * @public
    */
   UserName: string | undefined;
 
@@ -1023,7 +988,7 @@ export interface UploadSSHPublicKeyRequest {
    * <p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
    *             The minimum bit-length of the public key is 2048 bits. For example, you can generate a
    *             2048-bit key, and the resulting PEM file is 1679 bytes long.</p>
-   *         <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+   *          <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
    *     used to validate this parameter is a string of characters consisting of the following:</p>
    *          <ul>
    *             <li>
@@ -1039,35 +1004,20 @@ export interface UploadSSHPublicKeyRequest {
    *     carriage return (<code>\u000D</code>)</p>
    *             </li>
    *          </ul>
+   * @public
    */
   SSHPublicKeyBody: string | undefined;
 }
 
-export namespace UploadSSHPublicKeyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadSSHPublicKeyRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Contains the response to a successful <a>UploadSSHPublicKey</a>
+ * <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSSHPublicKey.html">UploadSSHPublicKey</a>
  *       request.</p>
+ * @public
  */
 export interface UploadSSHPublicKeyResponse {
   /**
    * <p>Contains information about the SSH public key.</p>
+   * @public
    */
-  SSHPublicKey?: SSHPublicKey;
-}
-
-export namespace UploadSSHPublicKeyResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadSSHPublicKeyResponse): any => ({
-    ...obj,
-  });
+  SSHPublicKey?: SSHPublicKey | undefined;
 }

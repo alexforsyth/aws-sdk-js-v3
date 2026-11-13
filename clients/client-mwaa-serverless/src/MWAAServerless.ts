@@ -1,0 +1,453 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateAirflowUiUrlCommandInput,
+  type CreateAirflowUiUrlCommandOutput,
+  CreateAirflowUiUrlCommand,
+} from "./commands/CreateAirflowUiUrlCommand";
+import {
+  type CreateWorkflowCommandInput,
+  type CreateWorkflowCommandOutput,
+  CreateWorkflowCommand,
+} from "./commands/CreateWorkflowCommand";
+import {
+  type DeleteWorkflowCommandInput,
+  type DeleteWorkflowCommandOutput,
+  DeleteWorkflowCommand,
+} from "./commands/DeleteWorkflowCommand";
+import {
+  type GetTaskInstanceCommandInput,
+  type GetTaskInstanceCommandOutput,
+  GetTaskInstanceCommand,
+} from "./commands/GetTaskInstanceCommand";
+import {
+  type GetWorkflowCommandInput,
+  type GetWorkflowCommandOutput,
+  GetWorkflowCommand,
+} from "./commands/GetWorkflowCommand";
+import {
+  type GetWorkflowRunCommandInput,
+  type GetWorkflowRunCommandOutput,
+  GetWorkflowRunCommand,
+} from "./commands/GetWorkflowRunCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTaskInstancesCommandInput,
+  type ListTaskInstancesCommandOutput,
+  ListTaskInstancesCommand,
+} from "./commands/ListTaskInstancesCommand";
+import {
+  type ListWorkflowRunsCommandInput,
+  type ListWorkflowRunsCommandOutput,
+  ListWorkflowRunsCommand,
+} from "./commands/ListWorkflowRunsCommand";
+import {
+  type ListWorkflowsCommandInput,
+  type ListWorkflowsCommandOutput,
+  ListWorkflowsCommand,
+} from "./commands/ListWorkflowsCommand";
+import {
+  type ListWorkflowVersionsCommandInput,
+  type ListWorkflowVersionsCommandOutput,
+  ListWorkflowVersionsCommand,
+} from "./commands/ListWorkflowVersionsCommand";
+import {
+  type StartWorkflowRunCommandInput,
+  type StartWorkflowRunCommandOutput,
+  StartWorkflowRunCommand,
+} from "./commands/StartWorkflowRunCommand";
+import {
+  type StopWorkflowRunCommandInput,
+  type StopWorkflowRunCommandOutput,
+  StopWorkflowRunCommand,
+} from "./commands/StopWorkflowRunCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateWorkflowCommandInput,
+  type UpdateWorkflowCommandOutput,
+  UpdateWorkflowCommand,
+} from "./commands/UpdateWorkflowCommand";
+import { MWAAServerlessClient } from "./MWAAServerlessClient";
+import { paginateListTaskInstances } from "./pagination/ListTaskInstancesPaginator";
+import { paginateListWorkflowRuns } from "./pagination/ListWorkflowRunsPaginator";
+import { paginateListWorkflows } from "./pagination/ListWorkflowsPaginator";
+import { paginateListWorkflowVersions } from "./pagination/ListWorkflowVersionsPaginator";
+
+const commands = {
+  CreateAirflowUiUrlCommand,
+  CreateWorkflowCommand,
+  DeleteWorkflowCommand,
+  GetTaskInstanceCommand,
+  GetWorkflowCommand,
+  GetWorkflowRunCommand,
+  ListTagsForResourceCommand,
+  ListTaskInstancesCommand,
+  ListWorkflowRunsCommand,
+  ListWorkflowsCommand,
+  ListWorkflowVersionsCommand,
+  StartWorkflowRunCommand,
+  StopWorkflowRunCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateWorkflowCommand,
+};
+const paginators = {
+  paginateListTaskInstances,
+  paginateListWorkflowRuns,
+  paginateListWorkflows,
+  paginateListWorkflowVersions,
+};
+
+/**
+ * @public
+ */
+export interface MWAAServerlessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MWAAServerless {
+  /**
+   * @see {@link CreateAirflowUiUrlCommand}
+   */
+  createAirflowUiUrl(): Promise<CreateAirflowUiUrlCommandOutput>;
+  createAirflowUiUrl(
+    args: CreateAirflowUiUrlCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<CreateAirflowUiUrlCommandOutput>;
+  createAirflowUiUrl(
+    args: CreateAirflowUiUrlCommandInput,
+    cb: (err: any, data?: CreateAirflowUiUrlCommandOutput) => void
+  ): void;
+  createAirflowUiUrl(
+    args: CreateAirflowUiUrlCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: CreateAirflowUiUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkflowCommand}
+   */
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<CreateWorkflowCommandOutput>;
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
+  ): void;
+  createWorkflow(
+    args: CreateWorkflowCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: CreateWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowCommand}
+   */
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<DeleteWorkflowCommandOutput>;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+  deleteWorkflow(
+    args: DeleteWorkflowCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTaskInstanceCommand}
+   */
+  getTaskInstance(
+    args: GetTaskInstanceCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<GetTaskInstanceCommandOutput>;
+  getTaskInstance(
+    args: GetTaskInstanceCommandInput,
+    cb: (err: any, data?: GetTaskInstanceCommandOutput) => void
+  ): void;
+  getTaskInstance(
+    args: GetTaskInstanceCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: GetTaskInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowCommand}
+   */
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<GetWorkflowCommandOutput>;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+  getWorkflow(
+    args: GetWorkflowCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: GetWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowRunCommand}
+   */
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<GetWorkflowRunCommandOutput>;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTaskInstancesCommand}
+   */
+  listTaskInstances(
+    args: ListTaskInstancesCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<ListTaskInstancesCommandOutput>;
+  listTaskInstances(
+    args: ListTaskInstancesCommandInput,
+    cb: (err: any, data?: ListTaskInstancesCommandOutput) => void
+  ): void;
+  listTaskInstances(
+    args: ListTaskInstancesCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: ListTaskInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowRunsCommand}
+   */
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<ListWorkflowRunsCommandOutput>;
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    cb: (err: any, data?: ListWorkflowRunsCommandOutput) => void
+  ): void;
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: ListWorkflowRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   */
+  listWorkflows(): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+  listWorkflows(
+    args: ListWorkflowsCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: ListWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowVersionsCommand}
+   */
+  listWorkflowVersions(
+    args: ListWorkflowVersionsCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<ListWorkflowVersionsCommandOutput>;
+  listWorkflowVersions(
+    args: ListWorkflowVersionsCommandInput,
+    cb: (err: any, data?: ListWorkflowVersionsCommandOutput) => void
+  ): void;
+  listWorkflowVersions(
+    args: ListWorkflowVersionsCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: ListWorkflowVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartWorkflowRunCommand}
+   */
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<StartWorkflowRunCommandOutput>;
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
+  ): void;
+  startWorkflowRun(
+    args: StartWorkflowRunCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: StartWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopWorkflowRunCommand}
+   */
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<StopWorkflowRunCommandOutput>;
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
+  ): void;
+  stopWorkflowRun(
+    args: StopWorkflowRunCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: StopWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkflowCommand}
+   */
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    options?: MWAAServerlessRequestOptions
+  ): Promise<UpdateWorkflowCommandOutput>;
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
+  ): void;
+  updateWorkflow(
+    args: UpdateWorkflowCommandInput,
+    options: MWAAServerlessRequestOptions,
+    cb: (err: any, data?: UpdateWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTaskInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTaskInstancesCommandOutput}.
+   */
+  paginateListTaskInstances(
+    args: ListTaskInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTaskInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowRunsCommandOutput}.
+   */
+  paginateListWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowRunsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowsCommandOutput}.
+   */
+  paginateListWorkflows(
+    args?: ListWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowVersionsCommandOutput}.
+   */
+  paginateListWorkflowVersions(
+    args: ListWorkflowVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowVersionsCommandOutput>;
+}
+
+/**
+ * <p>Amazon Managed Workflows for Apache Airflow Serverless provides a managed workflow orchestration platform for running Apache Airflow workflows in a serverless environment. You can use Amazon Managed Workflows for Apache Airflow Serverless to create, manage, and run data processing workflows without managing the underlying infrastructure, Airflow clusters, metadata databases, or scheduling overhead. The service provides secure multi-tenant run environments with automatic scaling, comprehensive logging, and integration with multiple Amazon Web Services services for orchestrating complex analytics workloads.</p>
+ * @public
+ */
+export class MWAAServerless extends MWAAServerlessClient implements MWAAServerless {}
+createAggregatedClient(commands, MWAAServerless, { paginators });

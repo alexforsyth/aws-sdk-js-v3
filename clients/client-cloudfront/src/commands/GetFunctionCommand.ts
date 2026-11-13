@@ -1,98 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { GetFunctionRequest, GetFunctionResult } from "../models/models_1";
-import {
-  deserializeAws_restXmlGetFunctionCommand,
-  serializeAws_restXmlGetFunctionCommand,
-} from "../protocols/Aws_restXml";
-
-export interface GetFunctionCommandInput extends GetFunctionRequest {}
-export interface GetFunctionCommandOutput extends GetFunctionResult, __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFunctionRequest, GetFunctionResult } from "../models/models_0";
+import { GetFunction$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets the code of a CloudFront function. To get configuration information and metadata about
- * 			a function, use <code>DescribeFunction</code>.</p>
- * 		       <p>To get a function’s code, you must provide the function’s name and stage. To get these
- * 			values, you can use <code>ListFunctions</code>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFunctionCommand}.
+ */
+export interface GetFunctionCommandInput extends GetFunctionRequest {}
+/**
+ * @public
+ */
+export type GetFunctionCommandOutputType = Omit<GetFunctionResult, "FunctionCode"> & {
+  FunctionCode?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetFunctionCommand}.
+ */
+export interface GetFunctionCommandOutput extends GetFunctionCommandOutputType, __MetadataBearer {}
+
+/**
+ * <p>Gets the code of a CloudFront function. To get configuration information and metadata about a function, use <code>DescribeFunction</code>.</p> <p>To get a function's code, you must provide the function's name and stage. To get these values, you can use <code>ListFunctions</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, GetFunctionCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, GetFunctionCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // GetFunctionRequest
+ *   Name: "STRING_VALUE", // required
+ *   Stage: "DEVELOPMENT" || "LIVE",
+ * };
  * const command = new GetFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // GetFunctionResult
+ * //   FunctionCode: new Uint8Array(),
+ * //   ETag: "STRING_VALUE",
+ * //   ContentType: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetFunctionCommandInput - {@link GetFunctionCommandInput}
+ * @returns {@link GetFunctionCommandOutput}
  * @see {@link GetFunctionCommandInput} for command's `input` shape.
  * @see {@link GetFunctionCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link NoSuchFunctionExists} (client fault)
+ *  <p>The function does not exist.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>This operation is not supported in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class GetFunctionCommand extends $Command<
-  GetFunctionCommandInput,
-  GetFunctionCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFunctionCommandInput, GetFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "GetFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFunctionResult.filterSensitiveLog,
+export class GetFunctionCommand extends command<GetFunctionCommandInput, GetFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFunction",
+  GetFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionRequest;
+      output: GetFunctionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFunctionCommandOutput> {
-    return deserializeAws_restXmlGetFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFunctionCommandInput;
+      output: GetFunctionCommandOutput;
+    };
+  };
 }

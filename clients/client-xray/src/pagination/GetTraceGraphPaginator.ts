@@ -1,58 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   GetTraceGraphCommand,
   GetTraceGraphCommandInput,
   GetTraceGraphCommandOutput,
 } from "../commands/GetTraceGraphCommand";
-import { XRay } from "../XRay";
 import { XRayClient } from "../XRayClient";
-import { XRayPaginationConfiguration } from "./Interfaces";
+import type { XRayPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: XRayClient,
-  input: GetTraceGraphCommandInput,
-  ...args: any
-): Promise<GetTraceGraphCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new GetTraceGraphCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: XRay,
-  input: GetTraceGraphCommandInput,
-  ...args: any
-): Promise<GetTraceGraphCommandOutput> => {
-  // @ts-ignore
-  return await client.getTraceGraph(input, ...args);
-};
-export async function* paginateGetTraceGraph(
+export const paginateGetTraceGraph: (
   config: XRayPaginationConfiguration,
   input: GetTraceGraphCommandInput,
-  ...additionalArguments: any
-): Paginator<GetTraceGraphCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: GetTraceGraphCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    if (config.client instanceof XRay) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof XRayClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected XRay | XRayClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<GetTraceGraphCommandOutput> = createPaginator<
+  XRayPaginationConfiguration,
+  GetTraceGraphCommandInput,
+  GetTraceGraphCommandOutput
+>(XRayClient, GetTraceGraphCommand, "NextToken", "NextToken", "");

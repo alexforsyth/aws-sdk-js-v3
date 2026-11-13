@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AddSourceIdentifierToSubscriptionMessage, AddSourceIdentifierToSubscriptionResult } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryAddSourceIdentifierToSubscriptionCommand,
-  serializeAws_queryAddSourceIdentifierToSubscriptionCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  AddSourceIdentifierToSubscriptionMessage,
+  AddSourceIdentifierToSubscriptionResult,
+} from "../models/models_0";
+import { AddSourceIdentifierToSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddSourceIdentifierToSubscriptionCommand}.
+ */
 export interface AddSourceIdentifierToSubscriptionCommandInput extends AddSourceIdentifierToSubscriptionMessage {}
-export interface AddSourceIdentifierToSubscriptionCommandOutput
-  extends AddSourceIdentifierToSubscriptionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AddSourceIdentifierToSubscriptionCommand}.
+ */
+export interface AddSourceIdentifierToSubscriptionCommandOutput extends AddSourceIdentifierToSubscriptionResult, __MetadataBearer {}
 
 /**
  * <p>Adds a source identifier to an existing event notification subscription.</p>
@@ -30,74 +32,69 @@ export interface AddSourceIdentifierToSubscriptionCommandOutput
  * ```javascript
  * import { NeptuneClient, AddSourceIdentifierToSubscriptionCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, AddSourceIdentifierToSubscriptionCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // AddSourceIdentifierToSubscriptionMessage
+ *   SubscriptionName: "STRING_VALUE", // required
+ *   SourceIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new AddSourceIdentifierToSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // AddSourceIdentifierToSubscriptionResult
+ * //   EventSubscription: { // EventSubscription
+ * //     CustomerAwsId: "STRING_VALUE",
+ * //     CustSubscriptionId: "STRING_VALUE",
+ * //     SnsTopicArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     SubscriptionCreationTime: "STRING_VALUE",
+ * //     SourceType: "STRING_VALUE",
+ * //     SourceIdsList: [ // SourceIdsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     EventCategoriesList: [ // EventCategoriesList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Enabled: true || false,
+ * //     EventSubscriptionArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AddSourceIdentifierToSubscriptionCommandInput - {@link AddSourceIdentifierToSubscriptionCommandInput}
+ * @returns {@link AddSourceIdentifierToSubscriptionCommandOutput}
  * @see {@link AddSourceIdentifierToSubscriptionCommandInput} for command's `input` shape.
  * @see {@link AddSourceIdentifierToSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link SourceNotFoundFault} (client fault)
+ *  <p>The source could not be found.</p>
+ *
+ * @throws {@link SubscriptionNotFoundFault} (client fault)
+ *  <p>The designated subscription could not be found.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class AddSourceIdentifierToSubscriptionCommand extends $Command<
-  AddSourceIdentifierToSubscriptionCommandInput,
-  AddSourceIdentifierToSubscriptionCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddSourceIdentifierToSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddSourceIdentifierToSubscriptionCommandInput, AddSourceIdentifierToSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "AddSourceIdentifierToSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddSourceIdentifierToSubscriptionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: AddSourceIdentifierToSubscriptionResult.filterSensitiveLog,
+export class AddSourceIdentifierToSubscriptionCommand extends command<AddSourceIdentifierToSubscriptionCommandInput, AddSourceIdentifierToSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddSourceIdentifierToSubscription",
+  AddSourceIdentifierToSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddSourceIdentifierToSubscriptionMessage;
+      output: AddSourceIdentifierToSubscriptionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AddSourceIdentifierToSubscriptionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryAddSourceIdentifierToSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AddSourceIdentifierToSubscriptionCommandOutput> {
-    return deserializeAws_queryAddSourceIdentifierToSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddSourceIdentifierToSubscriptionCommandInput;
+      output: AddSourceIdentifierToSubscriptionCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteRegexPatternSetRequest, DeleteRegexPatternSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRegexPatternSetCommand,
-  serializeAws_json1_1DeleteRegexPatternSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRegexPatternSetRequest, DeleteRegexPatternSetResponse } from "../models/models_0";
+import { DeleteRegexPatternSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRegexPatternSetCommand}.
+ */
 export interface DeleteRegexPatternSetCommandInput extends DeleteRegexPatternSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRegexPatternSetCommand}.
+ */
 export interface DeleteRegexPatternSetCommandOutput extends DeleteRegexPatternSetResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +38,89 @@ export interface DeleteRegexPatternSetCommandOutput extends DeleteRegexPatternSe
  * ```javascript
  * import { WAFClient, DeleteRegexPatternSetCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, DeleteRegexPatternSetCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // DeleteRegexPatternSetRequest
+ *   RegexPatternSetId: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRegexPatternSetCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRegexPatternSetResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteRegexPatternSetCommandInput - {@link DeleteRegexPatternSetCommandInput}
+ * @returns {@link DeleteRegexPatternSetCommandOutput}
  * @see {@link DeleteRegexPatternSetCommandInput} for command's `input` shape.
  * @see {@link DeleteRegexPatternSetCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonEmptyEntityException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that isn't empty. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>WebACL</code> that still contains one or more <code>Rule</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that still contains one or more <code>ByteMatchSet</code> objects
+ * 				or other predicates.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that contains one or more <code>ByteMatchTuple</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete an <code>IPSet</code> that references one or more IP addresses.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFReferencedItemException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that is still in use. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that is still referenced by a <code>Rule</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that is still referenced by a <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRegexPatternSetCommand extends $Command<
-  DeleteRegexPatternSetCommandInput,
-  DeleteRegexPatternSetCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRegexPatternSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRegexPatternSetCommandInput, DeleteRegexPatternSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "DeleteRegexPatternSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRegexPatternSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRegexPatternSetResponse.filterSensitiveLog,
+export class DeleteRegexPatternSetCommand extends command<DeleteRegexPatternSetCommandInput, DeleteRegexPatternSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRegexPatternSet",
+  DeleteRegexPatternSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRegexPatternSetRequest;
+      output: DeleteRegexPatternSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRegexPatternSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRegexPatternSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRegexPatternSetCommandOutput> {
-    return deserializeAws_json1_1DeleteRegexPatternSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRegexPatternSetCommandInput;
+      output: DeleteRegexPatternSetCommandOutput;
+    };
+  };
 }

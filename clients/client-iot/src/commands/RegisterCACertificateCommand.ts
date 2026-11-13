@@ -1,101 +1,124 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { RegisterCACertificateRequest, RegisterCACertificateResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1RegisterCACertificateCommand,
-  serializeAws_restJson1RegisterCACertificateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterCACertificateRequest, RegisterCACertificateResponse } from "../models/models_2";
+import { RegisterCACertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterCACertificateCommand}.
+ */
 export interface RegisterCACertificateCommandInput extends RegisterCACertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterCACertificateCommand}.
+ */
 export interface RegisterCACertificateCommandOutput extends RegisterCACertificateResponse, __MetadataBearer {}
 
 /**
- * <p>Registers a CA certificate with IoT. This CA certificate can then be used to sign
- *          device certificates, which can be then registered with IoT. You can register up to 10
- *          CA certificates per Amazon Web Services account that have the same subject field. This enables you to have
- *          up to 10 certificate authorities sign your device certificates. If you have more than one
- *          CA certificate registered, make sure you pass the CA certificate when you register your
- *          device certificates with the <a>RegisterCertificate</a> action.</p>
+ * <p>Registers a CA certificate with Amazon Web Services IoT Core. There is no limit to the number of CA
+ *          certificates you can register in your Amazon Web Services account. You can register up to 10 CA
+ *          certificates with the same <code>CA subject field</code> per Amazon Web Services account.</p>
  *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">RegisterCACertificate</a> action.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTClient, RegisterCACertificateCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, RegisterCACertificateCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // RegisterCACertificateRequest
+ *   caCertificate: "STRING_VALUE", // required
+ *   verificationCertificate: "STRING_VALUE",
+ *   setAsActive: true || false,
+ *   allowAutoRegistration: true || false,
+ *   registrationConfig: { // RegistrationConfig
+ *     templateBody: "STRING_VALUE",
+ *     roleArn: "STRING_VALUE",
+ *     templateName: "STRING_VALUE",
+ *   },
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   certificateMode: "DEFAULT" || "SNI_ONLY",
+ * };
  * const command = new RegisterCACertificateCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterCACertificateResponse
+ * //   certificateArn: "STRING_VALUE",
+ * //   certificateId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RegisterCACertificateCommandInput - {@link RegisterCACertificateCommandInput}
+ * @returns {@link RegisterCACertificateCommandOutput}
  * @see {@link RegisterCACertificateCommandInput} for command's `input` shape.
  * @see {@link RegisterCACertificateCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link CertificateValidationException} (client fault)
+ *  <p>The certificate is invalid.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link RegistrationCodeValidationException} (client fault)
+ *  <p>The registration code is invalid.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterCACertificateCommand extends $Command<
-  RegisterCACertificateCommandInput,
-  RegisterCACertificateCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterCACertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterCACertificateCommandInput, RegisterCACertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "RegisterCACertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterCACertificateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterCACertificateResponse.filterSensitiveLog,
+export class RegisterCACertificateCommand extends command<RegisterCACertificateCommandInput, RegisterCACertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterCACertificate",
+  RegisterCACertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterCACertificateRequest;
+      output: RegisterCACertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterCACertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RegisterCACertificateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterCACertificateCommandOutput> {
-    return deserializeAws_restJson1RegisterCACertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterCACertificateCommandInput;
+      output: RegisterCACertificateCommandOutput;
+    };
+  };
 }

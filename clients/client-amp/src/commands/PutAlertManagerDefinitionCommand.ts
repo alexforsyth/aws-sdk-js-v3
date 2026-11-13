@@ -1,98 +1,101 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmpClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmpClient";
-import { PutAlertManagerDefinitionRequest, PutAlertManagerDefinitionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutAlertManagerDefinitionCommand,
-  serializeAws_restJson1PutAlertManagerDefinitionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAlertManagerDefinitionRequest, PutAlertManagerDefinitionResponse } from "../models/models_0";
+import { PutAlertManagerDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAlertManagerDefinitionCommand}.
+ */
 export interface PutAlertManagerDefinitionCommandInput extends PutAlertManagerDefinitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAlertManagerDefinitionCommand}.
+ */
 export interface PutAlertManagerDefinitionCommandOutput extends PutAlertManagerDefinitionResponse, __MetadataBearer {}
 
 /**
- * Update an alert manager definition.
+ * <p>Updates an existing alert manager definition in a workspace. If the workspace does not already have an alert manager definition, don't use this operation to create it. Instead, use <code>CreateAlertManagerDefinition</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmpClient, PutAlertManagerDefinitionCommand } from "@aws-sdk/client-amp"; // ES Modules import
  * // const { AmpClient, PutAlertManagerDefinitionCommand } = require("@aws-sdk/client-amp"); // CommonJS import
+ * // import type { AmpClientConfig } from "@aws-sdk/client-amp";
+ * const config = {}; // type is AmpClientConfig
  * const client = new AmpClient(config);
+ * const input = { // PutAlertManagerDefinitionRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new PutAlertManagerDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // PutAlertManagerDefinitionResponse
+ * //   status: { // AlertManagerDefinitionStatus
+ * //     statusCode: "STRING_VALUE", // required
+ * //     statusReason: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutAlertManagerDefinitionCommandInput - {@link PutAlertManagerDefinitionCommandInput}
+ * @returns {@link PutAlertManagerDefinitionCommandOutput}
  * @see {@link PutAlertManagerDefinitionCommandInput} for command's `input` shape.
  * @see {@link PutAlertManagerDefinitionCommandOutput} for command's `response` shape.
- * @see {@link AmpClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmpClientResolvedConfig | config} for AmpClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request would cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resources that doesn't exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Completing the request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link AmpServiceException}
+ * <p>Base exception class for all service exceptions from Amp service.</p>
+ *
+ *
+ * @public
  */
-export class PutAlertManagerDefinitionCommand extends $Command<
-  PutAlertManagerDefinitionCommandInput,
-  PutAlertManagerDefinitionCommandOutput,
-  AmpClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAlertManagerDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmpClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAlertManagerDefinitionCommandInput, PutAlertManagerDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmpClient";
-    const commandName = "PutAlertManagerDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAlertManagerDefinitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutAlertManagerDefinitionResponse.filterSensitiveLog,
+export class PutAlertManagerDefinitionCommand extends command<PutAlertManagerDefinitionCommandInput, PutAlertManagerDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAlertManagerDefinition",
+  PutAlertManagerDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAlertManagerDefinitionRequest;
+      output: PutAlertManagerDefinitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAlertManagerDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutAlertManagerDefinitionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutAlertManagerDefinitionCommandOutput> {
-    return deserializeAws_restJson1PutAlertManagerDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAlertManagerDefinitionCommandInput;
+      output: PutAlertManagerDefinitionCommandOutput;
+    };
+  };
 }

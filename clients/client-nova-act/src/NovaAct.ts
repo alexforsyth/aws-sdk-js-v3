@@ -1,0 +1,440 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { type CreateActCommandInput, type CreateActCommandOutput, CreateActCommand } from "./commands/CreateActCommand";
+import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
+  CreateSessionCommand,
+} from "./commands/CreateSessionCommand";
+import {
+  type CreateWorkflowDefinitionCommandInput,
+  type CreateWorkflowDefinitionCommandOutput,
+  CreateWorkflowDefinitionCommand,
+} from "./commands/CreateWorkflowDefinitionCommand";
+import {
+  type CreateWorkflowRunCommandInput,
+  type CreateWorkflowRunCommandOutput,
+  CreateWorkflowRunCommand,
+} from "./commands/CreateWorkflowRunCommand";
+import {
+  type DeleteWorkflowDefinitionCommandInput,
+  type DeleteWorkflowDefinitionCommandOutput,
+  DeleteWorkflowDefinitionCommand,
+} from "./commands/DeleteWorkflowDefinitionCommand";
+import {
+  type DeleteWorkflowRunCommandInput,
+  type DeleteWorkflowRunCommandOutput,
+  DeleteWorkflowRunCommand,
+} from "./commands/DeleteWorkflowRunCommand";
+import {
+  type GetWorkflowDefinitionCommandInput,
+  type GetWorkflowDefinitionCommandOutput,
+  GetWorkflowDefinitionCommand,
+} from "./commands/GetWorkflowDefinitionCommand";
+import {
+  type GetWorkflowRunCommandInput,
+  type GetWorkflowRunCommandOutput,
+  GetWorkflowRunCommand,
+} from "./commands/GetWorkflowRunCommand";
+import {
+  type InvokeActStepCommandInput,
+  type InvokeActStepCommandOutput,
+  InvokeActStepCommand,
+} from "./commands/InvokeActStepCommand";
+import { type ListActsCommandInput, type ListActsCommandOutput, ListActsCommand } from "./commands/ListActsCommand";
+import {
+  type ListModelsCommandInput,
+  type ListModelsCommandOutput,
+  ListModelsCommand,
+} from "./commands/ListModelsCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListWorkflowDefinitionsCommandInput,
+  type ListWorkflowDefinitionsCommandOutput,
+  ListWorkflowDefinitionsCommand,
+} from "./commands/ListWorkflowDefinitionsCommand";
+import {
+  type ListWorkflowRunsCommandInput,
+  type ListWorkflowRunsCommandOutput,
+  ListWorkflowRunsCommand,
+} from "./commands/ListWorkflowRunsCommand";
+import { type UpdateActCommandInput, type UpdateActCommandOutput, UpdateActCommand } from "./commands/UpdateActCommand";
+import {
+  type UpdateWorkflowRunCommandInput,
+  type UpdateWorkflowRunCommandOutput,
+  UpdateWorkflowRunCommand,
+} from "./commands/UpdateWorkflowRunCommand";
+import { NovaActClient } from "./NovaActClient";
+import { paginateListActs } from "./pagination/ListActsPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateListWorkflowDefinitions } from "./pagination/ListWorkflowDefinitionsPaginator";
+import { paginateListWorkflowRuns } from "./pagination/ListWorkflowRunsPaginator";
+
+const commands = {
+  CreateActCommand,
+  CreateSessionCommand,
+  CreateWorkflowDefinitionCommand,
+  CreateWorkflowRunCommand,
+  DeleteWorkflowDefinitionCommand,
+  DeleteWorkflowRunCommand,
+  GetWorkflowDefinitionCommand,
+  GetWorkflowRunCommand,
+  InvokeActStepCommand,
+  ListActsCommand,
+  ListModelsCommand,
+  ListSessionsCommand,
+  ListWorkflowDefinitionsCommand,
+  ListWorkflowRunsCommand,
+  UpdateActCommand,
+  UpdateWorkflowRunCommand,
+};
+const paginators = {
+  paginateListActs,
+  paginateListSessions,
+  paginateListWorkflowDefinitions,
+  paginateListWorkflowRuns,
+};
+
+/**
+ * @public
+ */
+export interface NovaActRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface NovaAct {
+  /**
+   * @see {@link CreateActCommand}
+   */
+  createAct(
+    args: CreateActCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<CreateActCommandOutput>;
+  createAct(
+    args: CreateActCommandInput,
+    cb: (err: any, data?: CreateActCommandOutput) => void
+  ): void;
+  createAct(
+    args: CreateActCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: CreateActCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSessionCommand}
+   */
+  createSession(
+    args: CreateSessionCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<CreateSessionCommandOutput>;
+  createSession(
+    args: CreateSessionCommandInput,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+  createSession(
+    args: CreateSessionCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkflowDefinitionCommand}
+   */
+  createWorkflowDefinition(
+    args: CreateWorkflowDefinitionCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<CreateWorkflowDefinitionCommandOutput>;
+  createWorkflowDefinition(
+    args: CreateWorkflowDefinitionCommandInput,
+    cb: (err: any, data?: CreateWorkflowDefinitionCommandOutput) => void
+  ): void;
+  createWorkflowDefinition(
+    args: CreateWorkflowDefinitionCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: CreateWorkflowDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkflowRunCommand}
+   */
+  createWorkflowRun(
+    args: CreateWorkflowRunCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<CreateWorkflowRunCommandOutput>;
+  createWorkflowRun(
+    args: CreateWorkflowRunCommandInput,
+    cb: (err: any, data?: CreateWorkflowRunCommandOutput) => void
+  ): void;
+  createWorkflowRun(
+    args: CreateWorkflowRunCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: CreateWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowDefinitionCommand}
+   */
+  deleteWorkflowDefinition(
+    args: DeleteWorkflowDefinitionCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<DeleteWorkflowDefinitionCommandOutput>;
+  deleteWorkflowDefinition(
+    args: DeleteWorkflowDefinitionCommandInput,
+    cb: (err: any, data?: DeleteWorkflowDefinitionCommandOutput) => void
+  ): void;
+  deleteWorkflowDefinition(
+    args: DeleteWorkflowDefinitionCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: DeleteWorkflowDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowRunCommand}
+   */
+  deleteWorkflowRun(
+    args: DeleteWorkflowRunCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<DeleteWorkflowRunCommandOutput>;
+  deleteWorkflowRun(
+    args: DeleteWorkflowRunCommandInput,
+    cb: (err: any, data?: DeleteWorkflowRunCommandOutput) => void
+  ): void;
+  deleteWorkflowRun(
+    args: DeleteWorkflowRunCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: DeleteWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowDefinitionCommand}
+   */
+  getWorkflowDefinition(
+    args: GetWorkflowDefinitionCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<GetWorkflowDefinitionCommandOutput>;
+  getWorkflowDefinition(
+    args: GetWorkflowDefinitionCommandInput,
+    cb: (err: any, data?: GetWorkflowDefinitionCommandOutput) => void
+  ): void;
+  getWorkflowDefinition(
+    args: GetWorkflowDefinitionCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: GetWorkflowDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkflowRunCommand}
+   */
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<GetWorkflowRunCommandOutput>;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+  getWorkflowRun(
+    args: GetWorkflowRunCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: GetWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeActStepCommand}
+   */
+  invokeActStep(
+    args: InvokeActStepCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<InvokeActStepCommandOutput>;
+  invokeActStep(
+    args: InvokeActStepCommandInput,
+    cb: (err: any, data?: InvokeActStepCommandOutput) => void
+  ): void;
+  invokeActStep(
+    args: InvokeActStepCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: InvokeActStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListActsCommand}
+   */
+  listActs(
+    args: ListActsCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<ListActsCommandOutput>;
+  listActs(
+    args: ListActsCommandInput,
+    cb: (err: any, data?: ListActsCommandOutput) => void
+  ): void;
+  listActs(
+    args: ListActsCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: ListActsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListModelsCommand}
+   */
+  listModels(
+    args: ListModelsCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<ListModelsCommandOutput>;
+  listModels(
+    args: ListModelsCommandInput,
+    cb: (err: any, data?: ListModelsCommandOutput) => void
+  ): void;
+  listModels(
+    args: ListModelsCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: ListModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowDefinitionsCommand}
+   */
+  listWorkflowDefinitions(): Promise<ListWorkflowDefinitionsCommandOutput>;
+  listWorkflowDefinitions(
+    args: ListWorkflowDefinitionsCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<ListWorkflowDefinitionsCommandOutput>;
+  listWorkflowDefinitions(
+    args: ListWorkflowDefinitionsCommandInput,
+    cb: (err: any, data?: ListWorkflowDefinitionsCommandOutput) => void
+  ): void;
+  listWorkflowDefinitions(
+    args: ListWorkflowDefinitionsCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: ListWorkflowDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowRunsCommand}
+   */
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<ListWorkflowRunsCommandOutput>;
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    cb: (err: any, data?: ListWorkflowRunsCommandOutput) => void
+  ): void;
+  listWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: ListWorkflowRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateActCommand}
+   */
+  updateAct(
+    args: UpdateActCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<UpdateActCommandOutput>;
+  updateAct(
+    args: UpdateActCommandInput,
+    cb: (err: any, data?: UpdateActCommandOutput) => void
+  ): void;
+  updateAct(
+    args: UpdateActCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: UpdateActCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkflowRunCommand}
+   */
+  updateWorkflowRun(
+    args: UpdateWorkflowRunCommandInput,
+    options?: NovaActRequestOptions
+  ): Promise<UpdateWorkflowRunCommandOutput>;
+  updateWorkflowRun(
+    args: UpdateWorkflowRunCommandInput,
+    cb: (err: any, data?: UpdateWorkflowRunCommandOutput) => void
+  ): void;
+  updateWorkflowRun(
+    args: UpdateWorkflowRunCommandInput,
+    options: NovaActRequestOptions,
+    cb: (err: any, data?: UpdateWorkflowRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListActsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListActsCommandOutput}.
+   */
+  paginateListActs(
+    args: ListActsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListActsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowDefinitionsCommandOutput}.
+   */
+  paginateListWorkflowDefinitions(
+    args?: ListWorkflowDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowRunsCommandOutput}.
+   */
+  paginateListWorkflowRuns(
+    args: ListWorkflowRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowRunsCommandOutput>;
+}
+
+/**
+ * <p>The Nova Act service provides a REST API for managing AI-powered workflow automation. It enables users to create workflow definitions, execute workflow runs, manage sessions, and orchestrate acts (individual AI tasks) with tool integrations.</p>
+ * @public
+ */
+export class NovaAct extends NovaActClient implements NovaAct {}
+createAggregatedClient(commands, NovaAct, { paginators });

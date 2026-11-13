@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { GetAccountPasswordPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_queryGetAccountPasswordPolicyCommand,
-  serializeAws_queryGetAccountPasswordPolicyCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAccountPasswordPolicyResponse } from "../models/models_0";
+import { GetAccountPasswordPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccountPasswordPolicyCommand}.
+ */
 export interface GetAccountPasswordPolicyCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccountPasswordPolicyCommand}.
+ */
 export interface GetAccountPasswordPolicyCommandOutput extends GetAccountPasswordPolicyResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,88 @@ export interface GetAccountPasswordPolicyCommandOutput extends GetAccountPasswor
  * ```javascript
  * import { IAMClient, GetAccountPasswordPolicyCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, GetAccountPasswordPolicyCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = {};
  * const command = new GetAccountPasswordPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetAccountPasswordPolicyResponse
+ * //   PasswordPolicy: { // PasswordPolicy
+ * //     MinimumPasswordLength: Number("int"),
+ * //     RequireSymbols: true || false,
+ * //     RequireNumbers: true || false,
+ * //     RequireUppercaseCharacters: true || false,
+ * //     RequireLowercaseCharacters: true || false,
+ * //     AllowUsersToChangePassword: true || false,
+ * //     ExpirePasswords: true || false,
+ * //     MaxPasswordAge: Number("int"),
+ * //     PasswordReusePrevention: Number("int"),
+ * //     HardExpiry: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAccountPasswordPolicyCommandInput - {@link GetAccountPasswordPolicyCommandInput}
+ * @returns {@link GetAccountPasswordPolicyCommandOutput}
  * @see {@link GetAccountPasswordPolicyCommandInput} for command's `input` shape.
  * @see {@link GetAccountPasswordPolicyCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To see the current account password policy
+ * ```javascript
+ * // The following command displays details about the password policy for the current AWS account.
+ * const input = { /* empty *\/ };
+ * const command = new GetAccountPasswordPolicyCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   PasswordPolicy: {
+ *     AllowUsersToChangePassword: false,
+ *     ExpirePasswords: false,
+ *     HardExpiry: false,
+ *     MaxPasswordAge: 90,
+ *     MinimumPasswordLength: 8,
+ *     PasswordReusePrevention: 12,
+ *     RequireLowercaseCharacters: false,
+ *     RequireNumbers: true,
+ *     RequireSymbols: true,
+ *     RequireUppercaseCharacters: false
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetAccountPasswordPolicyCommand extends $Command<
-  GetAccountPasswordPolicyCommandInput,
-  GetAccountPasswordPolicyCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAccountPasswordPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAccountPasswordPolicyCommandInput, GetAccountPasswordPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "GetAccountPasswordPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: (input: any) => input,
-      outputFilterSensitiveLog: GetAccountPasswordPolicyResponse.filterSensitiveLog,
+export class GetAccountPasswordPolicyCommand extends command<GetAccountPasswordPolicyCommandInput, GetAccountPasswordPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAccountPasswordPolicy",
+  GetAccountPasswordPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAccountPasswordPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAccountPasswordPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetAccountPasswordPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAccountPasswordPolicyCommandOutput> {
-    return deserializeAws_queryGetAccountPasswordPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAccountPasswordPolicyCommandInput;
+      output: GetAccountPasswordPolicyCommandOutput;
+    };
+  };
 }

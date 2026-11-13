@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticsearchServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticsearchServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AcceptInboundCrossClusterSearchConnectionRequest,
   AcceptInboundCrossClusterSearchConnectionResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1AcceptInboundCrossClusterSearchConnectionCommand,
-  serializeAws_restJson1AcceptInboundCrossClusterSearchConnectionCommand,
-} from "../protocols/Aws_restJson1";
+import { AcceptInboundCrossClusterSearchConnection$ } from "../schemas/schemas_0";
 
-export interface AcceptInboundCrossClusterSearchConnectionCommandInput
-  extends AcceptInboundCrossClusterSearchConnectionRequest {}
-export interface AcceptInboundCrossClusterSearchConnectionCommandOutput
-  extends AcceptInboundCrossClusterSearchConnectionResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AcceptInboundCrossClusterSearchConnectionCommand}.
+ */
+export interface AcceptInboundCrossClusterSearchConnectionCommandInput extends AcceptInboundCrossClusterSearchConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AcceptInboundCrossClusterSearchConnectionCommand}.
+ */
+export interface AcceptInboundCrossClusterSearchConnectionCommandOutput extends AcceptInboundCrossClusterSearchConnectionResponse, __MetadataBearer {}
 
 /**
  * <p>Allows the destination domain owner to accept an inbound cross-cluster search connection request.</p>
@@ -38,77 +32,72 @@ export interface AcceptInboundCrossClusterSearchConnectionCommandOutput
  * ```javascript
  * import { ElasticsearchServiceClient, AcceptInboundCrossClusterSearchConnectionCommand } from "@aws-sdk/client-elasticsearch-service"; // ES Modules import
  * // const { ElasticsearchServiceClient, AcceptInboundCrossClusterSearchConnectionCommand } = require("@aws-sdk/client-elasticsearch-service"); // CommonJS import
+ * // import type { ElasticsearchServiceClientConfig } from "@aws-sdk/client-elasticsearch-service";
+ * const config = {}; // type is ElasticsearchServiceClientConfig
  * const client = new ElasticsearchServiceClient(config);
+ * const input = { // AcceptInboundCrossClusterSearchConnectionRequest
+ *   CrossClusterSearchConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new AcceptInboundCrossClusterSearchConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // AcceptInboundCrossClusterSearchConnectionResponse
+ * //   CrossClusterSearchConnection: { // InboundCrossClusterSearchConnection
+ * //     SourceDomainInfo: { // DomainInformation
+ * //       OwnerId: "STRING_VALUE",
+ * //       DomainName: "STRING_VALUE", // required
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     DestinationDomainInfo: {
+ * //       OwnerId: "STRING_VALUE",
+ * //       DomainName: "STRING_VALUE", // required
+ * //       Region: "STRING_VALUE",
+ * //     },
+ * //     CrossClusterSearchConnectionId: "STRING_VALUE",
+ * //     ConnectionStatus: { // InboundCrossClusterSearchConnectionStatus
+ * //       StatusCode: "PENDING_ACCEPTANCE" || "APPROVED" || "REJECTING" || "REJECTED" || "DELETING" || "DELETED",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AcceptInboundCrossClusterSearchConnectionCommandInput - {@link AcceptInboundCrossClusterSearchConnectionCommandInput}
+ * @returns {@link AcceptInboundCrossClusterSearchConnectionCommandOutput}
  * @see {@link AcceptInboundCrossClusterSearchConnectionCommandInput} for command's `input` shape.
  * @see {@link AcceptInboundCrossClusterSearchConnectionCommandOutput} for command's `response` shape.
- * @see {@link ElasticsearchServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticsearchServiceClientResolvedConfig | config} for ElasticsearchServiceClient's `config` shape.
  *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access a not supported operation. Gives http status code of 409.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>An exception for trying to create more than allowed resources or sub-resources. Gives http status code of 409.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
+ *
+ * @throws {@link ElasticsearchServiceServiceException}
+ * <p>Base exception class for all service exceptions from ElasticsearchService service.</p>
+ *
+ *
+ * @public
  */
-export class AcceptInboundCrossClusterSearchConnectionCommand extends $Command<
-  AcceptInboundCrossClusterSearchConnectionCommandInput,
-  AcceptInboundCrossClusterSearchConnectionCommandOutput,
-  ElasticsearchServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AcceptInboundCrossClusterSearchConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticsearchServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    AcceptInboundCrossClusterSearchConnectionCommandInput,
-    AcceptInboundCrossClusterSearchConnectionCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticsearchServiceClient";
-    const commandName = "AcceptInboundCrossClusterSearchConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AcceptInboundCrossClusterSearchConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AcceptInboundCrossClusterSearchConnectionResponse.filterSensitiveLog,
+export class AcceptInboundCrossClusterSearchConnectionCommand extends command<AcceptInboundCrossClusterSearchConnectionCommandInput, AcceptInboundCrossClusterSearchConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "AcceptInboundCrossClusterSearchConnection",
+  AcceptInboundCrossClusterSearchConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AcceptInboundCrossClusterSearchConnectionRequest;
+      output: AcceptInboundCrossClusterSearchConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AcceptInboundCrossClusterSearchConnectionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1AcceptInboundCrossClusterSearchConnectionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AcceptInboundCrossClusterSearchConnectionCommandOutput> {
-    return deserializeAws_restJson1AcceptInboundCrossClusterSearchConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AcceptInboundCrossClusterSearchConnectionCommandInput;
+      output: AcceptInboundCrossClusterSearchConnectionCommandOutput;
+    };
+  };
 }

@@ -1,34 +1,35 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListRolePoliciesRequest, ListRolePoliciesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListRolePoliciesCommand,
-  serializeAws_queryListRolePoliciesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRolePoliciesRequest, ListRolePoliciesResponse } from "../models/models_0";
+import { ListRolePolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRolePoliciesCommand}.
+ */
 export interface ListRolePoliciesCommandInput extends ListRolePoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRolePoliciesCommand}.
+ */
 export interface ListRolePoliciesCommandOutput extends ListRolePoliciesResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the names of the inline policies that are embedded in the specified IAM
  *             role.</p>
- *         <p>An IAM role can also have managed policies attached to it. To list the managed
- *             policies that are attached to a role, use <a>ListAttachedRolePolicies</a>.
- *             For more information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
- *                 policies</a> in the <i>IAM User Guide</i>.</p>
- *         <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
+ *          <p>An IAM role can also have managed policies attached to it. To list the managed
+ *             policies that are attached to a role, use <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html">ListAttachedRolePolicies</a>. For more information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
+ *                 policies and inline policies</a> in the
+ *             <i>IAM User Guide</i>.</p>
+ *          <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
  *             parameters. If there are no inline policies embedded with the specified role, the
  *             operation returns an empty list.</p>
  * @example
@@ -36,68 +37,61 @@ export interface ListRolePoliciesCommandOutput extends ListRolePoliciesResponse,
  * ```javascript
  * import { IAMClient, ListRolePoliciesCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListRolePoliciesCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListRolePoliciesRequest
+ *   RoleName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListRolePoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // ListRolePoliciesResponse
+ * //   PolicyNames: [ // policyNameListType // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRolePoliciesCommandInput - {@link ListRolePoliciesCommandInput}
+ * @returns {@link ListRolePoliciesCommandOutput}
  * @see {@link ListRolePoliciesCommandInput} for command's `input` shape.
  * @see {@link ListRolePoliciesCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class ListRolePoliciesCommand extends $Command<
-  ListRolePoliciesCommandInput,
-  ListRolePoliciesCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRolePoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRolePoliciesCommandInput, ListRolePoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListRolePoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRolePoliciesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRolePoliciesResponse.filterSensitiveLog,
+export class ListRolePoliciesCommand extends command<ListRolePoliciesCommandInput, ListRolePoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRolePolicies",
+  ListRolePolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRolePoliciesRequest;
+      output: ListRolePoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRolePoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListRolePoliciesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRolePoliciesCommandOutput> {
-    return deserializeAws_queryListRolePoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRolePoliciesCommandInput;
+      output: ListRolePoliciesCommandOutput;
+    };
+  };
 }

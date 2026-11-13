@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisAnalyticsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisAnalyticsClient";
-import { StartApplicationRequest, StartApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StartApplicationCommand,
-  serializeAws_json1_1StartApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartApplicationRequest, StartApplicationResponse } from "../models/models_0";
+import { StartApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartApplicationCommand}.
+ */
 export interface StartApplicationCommandInput extends StartApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartApplicationCommand}.
+ */
 export interface StartApplicationCommandOutput extends StartApplicationResponse, __MetadataBearer {}
 
 /**
@@ -39,68 +40,68 @@ export interface StartApplicationCommandOutput extends StartApplicationResponse,
  * ```javascript
  * import { KinesisAnalyticsClient, StartApplicationCommand } from "@aws-sdk/client-kinesis-analytics"; // ES Modules import
  * // const { KinesisAnalyticsClient, StartApplicationCommand } = require("@aws-sdk/client-kinesis-analytics"); // CommonJS import
+ * // import type { KinesisAnalyticsClientConfig } from "@aws-sdk/client-kinesis-analytics";
+ * const config = {}; // type is KinesisAnalyticsClientConfig
  * const client = new KinesisAnalyticsClient(config);
+ * const input = { // StartApplicationRequest
+ *   ApplicationName: "STRING_VALUE", // required
+ *   InputConfigurations: [ // InputConfigurations // required
+ *     { // InputConfiguration
+ *       Id: "STRING_VALUE", // required
+ *       InputStartingPositionConfiguration: { // InputStartingPositionConfiguration
+ *         InputStartingPosition: "NOW" || "TRIM_HORIZON" || "LAST_STOPPED_POINT",
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new StartApplicationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartApplicationCommandInput - {@link StartApplicationCommandInput}
+ * @returns {@link StartApplicationCommandOutput}
  * @see {@link StartApplicationCommandInput} for command's `input` shape.
  * @see {@link StartApplicationCommandOutput} for command's `response` shape.
- * @see {@link KinesisAnalyticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisAnalyticsClientResolvedConfig | config} for KinesisAnalyticsClient's `config` shape.
  *
+ * @throws {@link InvalidApplicationConfigurationException} (client fault)
+ *  <p>User-provided application configuration is not valid.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>Specified input parameter value is invalid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>Application is not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Specified application can't be found.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation. </p>
+ *
+ * @throws {@link KinesisAnalyticsServiceException}
+ * <p>Base exception class for all service exceptions from KinesisAnalytics service.</p>
+ *
+ *
+ * @public
  */
-export class StartApplicationCommand extends $Command<
-  StartApplicationCommandInput,
-  StartApplicationCommandOutput,
-  KinesisAnalyticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisAnalyticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartApplicationCommandInput, StartApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisAnalyticsClient";
-    const commandName = "StartApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartApplicationResponse.filterSensitiveLog,
+export class StartApplicationCommand extends command<StartApplicationCommandInput, StartApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartApplication",
+  StartApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartApplicationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartApplicationCommandOutput> {
-    return deserializeAws_json1_1StartApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartApplicationCommandInput;
+      output: StartApplicationCommandOutput;
+    };
+  };
 }

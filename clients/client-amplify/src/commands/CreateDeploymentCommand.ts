@@ -1,96 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyClient";
-import { CreateDeploymentRequest, CreateDeploymentResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateDeploymentCommand,
-  serializeAws_restJson1CreateDeploymentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDeploymentRequest, CreateDeploymentResult } from "../models/models_0";
+import { CreateDeployment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDeploymentCommand}.
+ */
 export interface CreateDeploymentCommandInput extends CreateDeploymentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDeploymentCommand}.
+ */
 export interface CreateDeploymentCommandOutput extends CreateDeploymentResult, __MetadataBearer {}
 
 /**
- * <p> Creates a deployment for a manually deployed Amplify app. Manually deployed apps are
- *             not connected to a repository. </p>
+ * <p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are
+ *             not connected to a Git repository. </p>
+ *          <p>The maximum duration between the <code>CreateDeployment</code> call and the
+ *                 <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8
+ *             hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will
+ *             fail.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmplifyClient, CreateDeploymentCommand } from "@aws-sdk/client-amplify"; // ES Modules import
  * // const { AmplifyClient, CreateDeploymentCommand } = require("@aws-sdk/client-amplify"); // CommonJS import
+ * // import type { AmplifyClientConfig } from "@aws-sdk/client-amplify";
+ * const config = {}; // type is AmplifyClientConfig
  * const client = new AmplifyClient(config);
+ * const input = { // CreateDeploymentRequest
+ *   appId: "STRING_VALUE", // required
+ *   branchName: "STRING_VALUE", // required
+ *   fileMap: { // FileMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateDeploymentCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDeploymentResult
+ * //   jobId: "STRING_VALUE",
+ * //   fileUploadUrls: { // FileUploadUrls // required
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   zipUploadUrl: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateDeploymentCommandInput - {@link CreateDeploymentCommandInput}
+ * @returns {@link CreateDeploymentCommandOutput}
  * @see {@link CreateDeploymentCommandInput} for command's `input` shape.
  * @see {@link CreateDeploymentCommandOutput} for command's `response` shape.
- * @see {@link AmplifyClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmplifyClientResolvedConfig | config} for AmplifyClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>A request contains unexpected data. </p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>The service failed to perform an operation due to an internal issue. </p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A resource could not be created because service quotas were exceeded. </p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>An operation failed due to a lack of access. </p>
+ *
+ * @throws {@link AmplifyServiceException}
+ * <p>Base exception class for all service exceptions from Amplify service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDeploymentCommand extends $Command<
-  CreateDeploymentCommandInput,
-  CreateDeploymentCommandOutput,
-  AmplifyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDeploymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDeploymentCommandInput, CreateDeploymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyClient";
-    const commandName = "CreateDeploymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDeploymentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDeploymentResult.filterSensitiveLog,
+export class CreateDeploymentCommand extends command<CreateDeploymentCommandInput, CreateDeploymentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDeployment",
+  CreateDeployment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDeploymentRequest;
+      output: CreateDeploymentResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDeploymentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateDeploymentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDeploymentCommandOutput> {
-    return deserializeAws_restJson1CreateDeploymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDeploymentCommandInput;
+      output: CreateDeploymentCommandOutput;
+    };
+  };
 }

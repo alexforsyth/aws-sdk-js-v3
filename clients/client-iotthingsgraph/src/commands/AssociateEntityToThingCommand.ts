@@ -1,96 +1,90 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { AssociateEntityToThingRequest, AssociateEntityToThingResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateEntityToThingCommand,
-  serializeAws_json1_1AssociateEntityToThingCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateEntityToThingRequest, AssociateEntityToThingResponse } from "../models/models_0";
+import { AssociateEntityToThing$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateEntityToThingCommand}.
+ */
 export interface AssociateEntityToThingCommandInput extends AssociateEntityToThingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateEntityToThingCommand}.
+ */
 export interface AssociateEntityToThingCommandOutput extends AssociateEntityToThingResponse, __MetadataBearer {}
 
 /**
  * <p>Associates a device with a concrete thing that is in the user's registry.</p>
  *          <p>A thing can be associated with only one device at a time. If you associate a thing with a new device id, its previous association will be removed.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, AssociateEntityToThingCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, AssociateEntityToThingCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // AssociateEntityToThingRequest
+ *   thingName: "STRING_VALUE", // required
+ *   entityId: "STRING_VALUE", // required
+ *   namespaceVersion: Number("long"),
+ * };
  * const command = new AssociateEntityToThingCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateEntityToThingCommandInput - {@link AssociateEntityToThingCommandInput}
+ * @returns {@link AssociateEntityToThingCommandOutput}
  * @see {@link AssociateEntityToThingCommandInput} for command's `input` shape.
  * @see {@link AssociateEntityToThingCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateEntityToThingCommand extends $Command<
-  AssociateEntityToThingCommandInput,
-  AssociateEntityToThingCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateEntityToThingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateEntityToThingCommandInput, AssociateEntityToThingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "AssociateEntityToThingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateEntityToThingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateEntityToThingResponse.filterSensitiveLog,
+export class AssociateEntityToThingCommand extends command<AssociateEntityToThingCommandInput, AssociateEntityToThingCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateEntityToThing",
+  AssociateEntityToThing$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateEntityToThingRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateEntityToThingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateEntityToThingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateEntityToThingCommandOutput> {
-    return deserializeAws_json1_1AssociateEntityToThingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateEntityToThingCommandInput;
+      output: AssociateEntityToThingCommandOutput;
+    };
+  };
 }

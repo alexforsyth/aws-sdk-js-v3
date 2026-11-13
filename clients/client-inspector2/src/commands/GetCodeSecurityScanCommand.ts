@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCodeSecurityScanRequest, GetCodeSecurityScanResponse } from "../models/models_0";
+import { GetCodeSecurityScan$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCodeSecurityScanCommand}.
+ */
+export interface GetCodeSecurityScanCommandInput extends GetCodeSecurityScanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCodeSecurityScanCommand}.
+ */
+export interface GetCodeSecurityScanCommandOutput extends GetCodeSecurityScanResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about a specific code security scan.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { Inspector2Client, GetCodeSecurityScanCommand } from "@aws-sdk/client-inspector2"; // ES Modules import
+ * // const { Inspector2Client, GetCodeSecurityScanCommand } = require("@aws-sdk/client-inspector2"); // CommonJS import
+ * // import type { Inspector2ClientConfig } from "@aws-sdk/client-inspector2";
+ * const config = {}; // type is Inspector2ClientConfig
+ * const client = new Inspector2Client(config);
+ * const input = { // GetCodeSecurityScanRequest
+ *   resource: { // CodeSecurityResource Union: only one key present
+ *     projectId: "STRING_VALUE",
+ *   },
+ *   scanId: "STRING_VALUE", // required
+ * };
+ * const command = new GetCodeSecurityScanCommand(input);
+ * const response = await client.send(command);
+ * // { // GetCodeSecurityScanResponse
+ * //   scanId: "STRING_VALUE",
+ * //   resource: { // CodeSecurityResource Union: only one key present
+ * //     projectId: "STRING_VALUE",
+ * //   },
+ * //   accountId: "STRING_VALUE",
+ * //   status: "IN_PROGRESS" || "SUCCESSFUL" || "FAILED" || "SKIPPED",
+ * //   statusReason: "STRING_VALUE",
+ * //   createdAt: new Date("TIMESTAMP"),
+ * //   updatedAt: new Date("TIMESTAMP"),
+ * //   lastCommitId: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetCodeSecurityScanCommandInput - {@link GetCodeSecurityScanCommandInput}
+ * @returns {@link GetCodeSecurityScanCommandOutput}
+ * @see {@link GetCodeSecurityScanCommandInput} for command's `input` shape.
+ * @see {@link GetCodeSecurityScanCommandOutput} for command's `response` shape.
+ * @see {@link Inspector2ClientResolvedConfig | config} for Inspector2Client's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p> <p> For <code>Enable</code>, you receive this error if you attempt to use a feature in an unsupported Amazon Web Services Region. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflict occurred. This exception occurs when the same resource is being modified by concurrent requests.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal failure of the Amazon Inspector service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access an invalid resource. Make sure the resource is specified correctly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has failed validation due to missing required fields or having invalid inputs.</p>
+ *
+ * @throws {@link Inspector2ServiceException}
+ * <p>Base exception class for all service exceptions from Inspector2 service.</p>
+ *
+ *
+ * @public
+ */
+export class GetCodeSecurityScanCommand extends command<GetCodeSecurityScanCommandInput, GetCodeSecurityScanCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCodeSecurityScan",
+  GetCodeSecurityScan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCodeSecurityScanRequest;
+      output: GetCodeSecurityScanResponse;
+    };
+    sdk: {
+      input: GetCodeSecurityScanCommandInput;
+      output: GetCodeSecurityScanCommandOutput;
+    };
+  };
+}

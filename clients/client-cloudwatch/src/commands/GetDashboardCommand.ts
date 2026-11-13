@@ -1,95 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { GetDashboardInput, GetDashboardOutput } from "../models/models_0";
-import { deserializeAws_queryGetDashboardCommand, serializeAws_queryGetDashboardCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDashboardInput, GetDashboardOutput } from "../models/models_0";
+import { GetDashboard$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDashboardCommand}.
+ */
 export interface GetDashboardCommandInput extends GetDashboardInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetDashboardCommand}.
+ */
 export interface GetDashboardCommandOutput extends GetDashboardOutput, __MetadataBearer {}
 
 /**
  * <p>Displays the details of the dashboard that you specify.</p>
- * 		       <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned
- * 			within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create
- * 			the copy.</p>
+ *          <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data
+ *             returned within <code>DashboardBody</code> as the template for the new dashboard when
+ *             you call <code>PutDashboard</code> to create the copy.</p>
+ *          <p>You might have recently enabled an <a href="https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion">opt-in Region (Region that is disabled by default)</a> for your account. In
+ *             that Region, <code>GetDashboard</code> can return an access denied error for up to 24
+ *             hours after you enable the Region. This delay occurs while dashboard data propagates.
+ *             The error does not
+ *             indicate a problem with your permissions. Because dashboards are global, you can call
+ *             <code>GetDashboard</code> in any other enabled Region, or retry after propagation
+ *             completes.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchClient, GetDashboardCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, GetDashboardCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // GetDashboardInput
+ *   DashboardName: "STRING_VALUE", // required
+ * };
  * const command = new GetDashboardCommand(input);
  * const response = await client.send(command);
+ * // { // GetDashboardOutput
+ * //   DashboardArn: "STRING_VALUE",
+ * //   DashboardBody: "STRING_VALUE",
+ * //   DashboardName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDashboardCommandInput - {@link GetDashboardCommandInput}
+ * @returns {@link GetDashboardCommandOutput}
  * @see {@link GetDashboardCommandInput} for command's `input` shape.
  * @see {@link GetDashboardCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link DashboardNotFoundError} (client fault)
+ *  <p>The specified dashboard does not exist.</p>
+ *
+ * @throws {@link InternalServiceFault} (server fault)
+ *  <p>Request processing has failed due to some unknown error, exception, or
+ *             failure.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of an input parameter is bad or out-of-range.</p>
+ *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class GetDashboardCommand extends $Command<
-  GetDashboardCommandInput,
-  GetDashboardCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDashboardCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDashboardCommandInput, GetDashboardCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "GetDashboardCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDashboardInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDashboardOutput.filterSensitiveLog,
+export class GetDashboardCommand extends command<GetDashboardCommandInput, GetDashboardCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDashboard",
+  GetDashboard$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDashboardInput;
+      output: GetDashboardOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDashboardCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetDashboardCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDashboardCommandOutput> {
-    return deserializeAws_queryGetDashboardCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDashboardCommandInput;
+      output: GetDashboardCommandOutput;
+    };
+  };
 }

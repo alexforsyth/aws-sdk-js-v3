@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { UpdateServiceSettingsRequest, UpdateServiceSettingsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateServiceSettingsCommand,
-  serializeAws_json1_1UpdateServiceSettingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateServiceSettingsRequest, UpdateServiceSettingsResponse } from "../models/models_0";
+import { UpdateServiceSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateServiceSettingsCommand}.
+ */
 export interface UpdateServiceSettingsCommandInput extends UpdateServiceSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateServiceSettingsCommand}.
+ */
 export interface UpdateServiceSettingsCommandOutput extends UpdateServiceSettingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,75 @@ export interface UpdateServiceSettingsCommandOutput extends UpdateServiceSetting
  * ```javascript
  * import { LicenseManagerClient, UpdateServiceSettingsCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, UpdateServiceSettingsCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // UpdateServiceSettingsRequest
+ *   S3BucketArn: "STRING_VALUE",
+ *   SnsTopicArn: "STRING_VALUE",
+ *   OrganizationConfiguration: { // OrganizationConfiguration
+ *     EnableIntegration: true || false, // required
+ *   },
+ *   EnableCrossAccountsDiscovery: true || false,
+ *   EnabledDiscoverySourceRegions: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdateServiceSettingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateServiceSettingsCommandInput - {@link UpdateServiceSettingsCommandInput}
+ * @returns {@link UpdateServiceSettingsCommandOutput}
  * @see {@link UpdateServiceSettingsCommandInput} for command's `input` shape.
  * @see {@link UpdateServiceSettingsCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict processing the request. Try your request again.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The provided input is not valid. Try your request again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateServiceSettingsCommand extends $Command<
-  UpdateServiceSettingsCommandInput,
-  UpdateServiceSettingsCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateServiceSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateServiceSettingsCommandInput, UpdateServiceSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "UpdateServiceSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateServiceSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateServiceSettingsResponse.filterSensitiveLog,
+export class UpdateServiceSettingsCommand extends command<UpdateServiceSettingsCommandInput, UpdateServiceSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateServiceSettings",
+  UpdateServiceSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateServiceSettingsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateServiceSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateServiceSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateServiceSettingsCommandOutput> {
-    return deserializeAws_json1_1UpdateServiceSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateServiceSettingsCommandInput;
+      output: UpdateServiceSettingsCommandOutput;
+    };
+  };
 }

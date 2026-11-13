@@ -1,6 +1,7 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
+// smithy-typescript generated code
+import { invalidFunction } from "@smithy/core/client";
 
-import { PollyClientConfig } from "./PollyClient";
+import type { PollyClientConfig } from "./PollyClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -12,6 +13,8 @@ export const getRuntimeConfig = (config: PollyClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
+    eventStreamPayloadHandlerProvider: config?.eventStreamPayloadHandlerProvider ?? (() => ({
+      handle: invalidFunction("event stream request is not supported in ReactNative."),
+    })),
   };
 };

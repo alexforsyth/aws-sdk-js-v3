@@ -1,0 +1,83 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableImageRequest, EnableImageResult } from "../models/models_6";
+import { EnableImage$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableImageCommand}.
+ */
+export interface EnableImageCommandInput extends EnableImageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableImageCommand}.
+ */
+export interface EnableImageCommandOutput extends EnableImageResult, __MetadataBearer {}
+
+/**
+ * <p>Re-enables a disabled AMI. The re-enabled AMI is marked as <code>available</code> and can
+ *       be used for instance launches, appears in describe operations, and can be shared. Amazon Web Services
+ *       accounts, organizations, and Organizational Units that lost access to the AMI when it was
+ *       disabled do not regain access automatically. Once the AMI is available, it can be shared with
+ *       them again.</p>
+ *          <p>Only the AMI owner can re-enable a disabled AMI.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html">Disable an Amazon EC2 AMI</a>
+ *       in the <i>Amazon EC2 User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, EnableImageCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, EnableImageCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // EnableImageRequest
+ *   ImageId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new EnableImageCommand(input);
+ * const response = await client.send(command);
+ * // { // EnableImageResult
+ * //   Return: true || false,
+ * // };
+ *
+ * ```
+ *
+ * @param EnableImageCommandInput - {@link EnableImageCommandInput}
+ * @returns {@link EnableImageCommandOutput}
+ * @see {@link EnableImageCommandInput} for command's `input` shape.
+ * @see {@link EnableImageCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class EnableImageCommand extends command<EnableImageCommandInput, EnableImageCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableImage",
+  EnableImage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableImageRequest;
+      output: EnableImageResult;
+    };
+    sdk: {
+      input: EnableImageCommandInput;
+      output: EnableImageCommandOutput;
+    };
+  };
+}

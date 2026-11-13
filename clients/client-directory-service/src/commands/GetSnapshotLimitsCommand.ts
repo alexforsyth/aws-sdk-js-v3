@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { GetSnapshotLimitsRequest, GetSnapshotLimitsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetSnapshotLimitsCommand,
-  serializeAws_json1_1GetSnapshotLimitsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSnapshotLimitsRequest, GetSnapshotLimitsResult } from "../models/models_0";
+import { GetSnapshotLimits$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSnapshotLimitsCommand}.
+ */
 export interface GetSnapshotLimitsCommandInput extends GetSnapshotLimitsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSnapshotLimitsCommand}.
+ */
 export interface GetSnapshotLimitsCommandOutput extends GetSnapshotLimitsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,79 @@ export interface GetSnapshotLimitsCommandOutput extends GetSnapshotLimitsResult,
  * ```javascript
  * import { DirectoryServiceClient, GetSnapshotLimitsCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, GetSnapshotLimitsCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // GetSnapshotLimitsRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ * };
  * const command = new GetSnapshotLimitsCommand(input);
  * const response = await client.send(command);
+ * // { // GetSnapshotLimitsResult
+ * //   SnapshotLimits: { // SnapshotLimits
+ * //     ManualSnapshotsLimit: Number("int"),
+ * //     ManualSnapshotsCurrentCount: Number("int"),
+ * //     ManualSnapshotsLimitReached: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSnapshotLimitsCommandInput - {@link GetSnapshotLimitsCommandInput}
+ * @returns {@link GetSnapshotLimitsCommandOutput}
  * @see {@link GetSnapshotLimitsCommandInput} for command's `input` shape.
  * @see {@link GetSnapshotLimitsCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To get snapshot limits
+ * ```javascript
+ * // The following example obtains the manual snapshot limits for a specified directory.
+ * const input = {
+ *   DirectoryId: "d-92654abfed"
+ * };
+ * const command = new GetSnapshotLimitsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SnapshotLimits: {
+ *     ManualSnapshotsCurrentCount: 1,
+ *     ManualSnapshotsLimit: 5,
+ *     ManualSnapshotsLimitReached: false
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetSnapshotLimitsCommand extends $Command<
-  GetSnapshotLimitsCommandInput,
-  GetSnapshotLimitsCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSnapshotLimitsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSnapshotLimitsCommandInput, GetSnapshotLimitsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "GetSnapshotLimitsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSnapshotLimitsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSnapshotLimitsResult.filterSensitiveLog,
+export class GetSnapshotLimitsCommand extends command<GetSnapshotLimitsCommandInput, GetSnapshotLimitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSnapshotLimits",
+  GetSnapshotLimits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSnapshotLimitsRequest;
+      output: GetSnapshotLimitsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSnapshotLimitsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSnapshotLimitsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSnapshotLimitsCommandOutput> {
-    return deserializeAws_json1_1GetSnapshotLimitsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSnapshotLimitsCommandInput;
+      output: GetSnapshotLimitsCommandOutput;
+    };
+  };
 }

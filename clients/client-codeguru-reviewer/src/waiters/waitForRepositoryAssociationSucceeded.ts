@@ -1,23 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
-
-import { CodeGuruReviewerClient } from "../CodeGuruReviewerClient";
+// smithy-typescript generated code
 import {
-  DescribeRepositoryAssociationCommand,
-  DescribeRepositoryAssociationCommandInput,
-} from "../commands/DescribeRepositoryAssociationCommand";
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-const checkState = async (
-  client: CodeGuruReviewerClient,
-  input: DescribeRepositoryAssociationCommandInput
-): Promise<WaiterResult> => {
+import type { CodeGuruReviewerClient } from "../CodeGuruReviewerClient";
+import {
+  type DescribeRepositoryAssociationCommandInput,
+  type DescribeRepositoryAssociationCommandOutput,
+  DescribeRepositoryAssociationCommand,
+} from "../commands/DescribeRepositoryAssociationCommand";
+import type { CodeGuruReviewerServiceException } from "../models/CodeGuruReviewerServiceException";
+
+const checkState = async (client: CodeGuruReviewerClient, input: DescribeRepositoryAssociationCommandInput): Promise<WaiterResult<DescribeRepositoryAssociationCommandOutput | CodeGuruReviewerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeRepositoryAssociationCommand(input));
+    let result: DescribeRepositoryAssociationCommandOutput & any = await client.send(new DescribeRepositoryAssociationCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.RepositoryAssociation.State;
-      };
+      }
       if (returnComparator() === "Associated") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -25,7 +31,15 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.RepositoryAssociation.State;
-      };
+      }
+      if (returnComparator() === "Failed") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.RepositoryAssociation.State;
+      }
       if (returnComparator() === "Associating") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -42,7 +56,7 @@ const checkState = async (
 export const waitForRepositoryAssociationSucceeded = async (
   params: WaiterConfiguration<CodeGuruReviewerClient>,
   input: DescribeRepositoryAssociationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeRepositoryAssociationCommandOutput | CodeGuruReviewerServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -54,8 +68,8 @@ export const waitForRepositoryAssociationSucceeded = async (
 export const waitUntilRepositoryAssociationSucceeded = async (
   params: WaiterConfiguration<CodeGuruReviewerClient>,
   input: DescribeRepositoryAssociationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeRepositoryAssociationCommandOutput>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeRepositoryAssociationCommandOutput>;
 };

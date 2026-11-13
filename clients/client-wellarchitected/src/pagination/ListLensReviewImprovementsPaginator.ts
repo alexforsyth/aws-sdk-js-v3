@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListLensReviewImprovementsCommand,
   ListLensReviewImprovementsCommandInput,
   ListLensReviewImprovementsCommandOutput,
 } from "../commands/ListLensReviewImprovementsCommand";
-import { WellArchitected } from "../WellArchitected";
 import { WellArchitectedClient } from "../WellArchitectedClient";
-import { WellArchitectedPaginationConfiguration } from "./Interfaces";
+import type { WellArchitectedPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: WellArchitectedClient,
-  input: ListLensReviewImprovementsCommandInput,
-  ...args: any
-): Promise<ListLensReviewImprovementsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListLensReviewImprovementsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: WellArchitected,
-  input: ListLensReviewImprovementsCommandInput,
-  ...args: any
-): Promise<ListLensReviewImprovementsCommandOutput> => {
-  // @ts-ignore
-  return await client.listLensReviewImprovements(input, ...args);
-};
-export async function* paginateListLensReviewImprovements(
+export const paginateListLensReviewImprovements: (
   config: WellArchitectedPaginationConfiguration,
   input: ListLensReviewImprovementsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListLensReviewImprovementsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListLensReviewImprovementsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof WellArchitected) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof WellArchitectedClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected WellArchitected | WellArchitectedClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListLensReviewImprovementsCommandOutput> = createPaginator<
+  WellArchitectedPaginationConfiguration,
+  ListLensReviewImprovementsCommandInput,
+  ListLensReviewImprovementsCommandOutput
+>(WellArchitectedClient, ListLensReviewImprovementsCommand, "NextToken", "NextToken", "MaxResults");

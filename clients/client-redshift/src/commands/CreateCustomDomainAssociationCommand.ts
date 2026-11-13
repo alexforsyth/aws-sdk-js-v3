@@ -1,0 +1,91 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateCustomDomainAssociationMessage, CreateCustomDomainAssociationResult } from "../models/models_0";
+import { CreateCustomDomainAssociation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCustomDomainAssociationCommand}.
+ */
+export interface CreateCustomDomainAssociationCommandInput extends CreateCustomDomainAssociationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCustomDomainAssociationCommand}.
+ */
+export interface CreateCustomDomainAssociationCommandOutput extends CreateCustomDomainAssociationResult, __MetadataBearer {}
+
+/**
+ * <p>Used to create a custom domain name for a cluster. Properties include the custom domain name, the
+ *             cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RedshiftClient, CreateCustomDomainAssociationCommand } from "@aws-sdk/client-redshift"; // ES Modules import
+ * // const { RedshiftClient, CreateCustomDomainAssociationCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
+ * const client = new RedshiftClient(config);
+ * const input = { // CreateCustomDomainAssociationMessage
+ *   CustomDomainName: "STRING_VALUE", // required
+ *   CustomDomainCertificateArn: "STRING_VALUE", // required
+ *   ClusterIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new CreateCustomDomainAssociationCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateCustomDomainAssociationResult
+ * //   CustomDomainName: "STRING_VALUE",
+ * //   CustomDomainCertificateArn: "STRING_VALUE",
+ * //   ClusterIdentifier: "STRING_VALUE",
+ * //   CustomDomainCertExpiryTime: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateCustomDomainAssociationCommandInput - {@link CreateCustomDomainAssociationCommandInput}
+ * @returns {@link CreateCustomDomainAssociationCommandOutput}
+ * @see {@link CreateCustomDomainAssociationCommandInput} for command's `input` shape.
+ * @see {@link CreateCustomDomainAssociationCommandOutput} for command's `response` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
+ *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link CustomCnameAssociationFault} (client fault)
+ *  <p>An error occurred when an attempt was made to change the custom domain association.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateCustomDomainAssociationCommand extends command<CreateCustomDomainAssociationCommandInput, CreateCustomDomainAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateCustomDomainAssociation",
+  CreateCustomDomainAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCustomDomainAssociationMessage;
+      output: CreateCustomDomainAssociationResult;
+    };
+    sdk: {
+      input: CreateCustomDomainAssociationCommandInput;
+      output: CreateCustomDomainAssociationCommandOutput;
+    };
+  };
+}

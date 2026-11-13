@@ -1,1232 +1,2606 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AcceptAttachmentCommandInput,
+  type AcceptAttachmentCommandOutput,
+  AcceptAttachmentCommand,
+} from "./commands/AcceptAttachmentCommand";
+import {
+  type AssociateConnectPeerCommandInput,
+  type AssociateConnectPeerCommandOutput,
+  AssociateConnectPeerCommand,
+} from "./commands/AssociateConnectPeerCommand";
+import {
+  type AssociateCustomerGatewayCommandInput,
+  type AssociateCustomerGatewayCommandOutput,
   AssociateCustomerGatewayCommand,
-  AssociateCustomerGatewayCommandInput,
-  AssociateCustomerGatewayCommandOutput,
 } from "./commands/AssociateCustomerGatewayCommand";
 import {
+  type AssociateLinkCommandInput,
+  type AssociateLinkCommandOutput,
   AssociateLinkCommand,
-  AssociateLinkCommandInput,
-  AssociateLinkCommandOutput,
 } from "./commands/AssociateLinkCommand";
 import {
+  type AssociateTransitGatewayConnectPeerCommandInput,
+  type AssociateTransitGatewayConnectPeerCommandOutput,
   AssociateTransitGatewayConnectPeerCommand,
-  AssociateTransitGatewayConnectPeerCommandInput,
-  AssociateTransitGatewayConnectPeerCommandOutput,
 } from "./commands/AssociateTransitGatewayConnectPeerCommand";
 import {
+  type CreateConnectAttachmentCommandInput,
+  type CreateConnectAttachmentCommandOutput,
+  CreateConnectAttachmentCommand,
+} from "./commands/CreateConnectAttachmentCommand";
+import {
+  type CreateConnectionCommandInput,
+  type CreateConnectionCommandOutput,
   CreateConnectionCommand,
-  CreateConnectionCommandInput,
-  CreateConnectionCommandOutput,
 } from "./commands/CreateConnectionCommand";
 import {
+  type CreateConnectPeerCommandInput,
+  type CreateConnectPeerCommandOutput,
+  CreateConnectPeerCommand,
+} from "./commands/CreateConnectPeerCommand";
+import {
+  type CreateCoreNetworkCommandInput,
+  type CreateCoreNetworkCommandOutput,
+  CreateCoreNetworkCommand,
+} from "./commands/CreateCoreNetworkCommand";
+import {
+  type CreateCoreNetworkPrefixListAssociationCommandInput,
+  type CreateCoreNetworkPrefixListAssociationCommandOutput,
+  CreateCoreNetworkPrefixListAssociationCommand,
+} from "./commands/CreateCoreNetworkPrefixListAssociationCommand";
+import {
+  type CreateDeviceCommandInput,
+  type CreateDeviceCommandOutput,
   CreateDeviceCommand,
-  CreateDeviceCommandInput,
-  CreateDeviceCommandOutput,
 } from "./commands/CreateDeviceCommand";
 import {
-  CreateGlobalNetworkCommand,
-  CreateGlobalNetworkCommandInput,
-  CreateGlobalNetworkCommandOutput,
-} from "./commands/CreateGlobalNetworkCommand";
-import { CreateLinkCommand, CreateLinkCommandInput, CreateLinkCommandOutput } from "./commands/CreateLinkCommand";
-import { CreateSiteCommand, CreateSiteCommandInput, CreateSiteCommandOutput } from "./commands/CreateSiteCommand";
+  type CreateDirectConnectGatewayAttachmentCommandInput,
+  type CreateDirectConnectGatewayAttachmentCommandOutput,
+  CreateDirectConnectGatewayAttachmentCommand,
+} from "./commands/CreateDirectConnectGatewayAttachmentCommand";
 import {
+  type CreateGlobalNetworkCommandInput,
+  type CreateGlobalNetworkCommandOutput,
+  CreateGlobalNetworkCommand,
+} from "./commands/CreateGlobalNetworkCommand";
+import {
+  type CreateLinkCommandInput,
+  type CreateLinkCommandOutput,
+  CreateLinkCommand,
+} from "./commands/CreateLinkCommand";
+import {
+  type CreateSiteCommandInput,
+  type CreateSiteCommandOutput,
+  CreateSiteCommand,
+} from "./commands/CreateSiteCommand";
+import {
+  type CreateSiteToSiteVpnAttachmentCommandInput,
+  type CreateSiteToSiteVpnAttachmentCommandOutput,
+  CreateSiteToSiteVpnAttachmentCommand,
+} from "./commands/CreateSiteToSiteVpnAttachmentCommand";
+import {
+  type CreateTransitGatewayPeeringCommandInput,
+  type CreateTransitGatewayPeeringCommandOutput,
+  CreateTransitGatewayPeeringCommand,
+} from "./commands/CreateTransitGatewayPeeringCommand";
+import {
+  type CreateTransitGatewayRouteTableAttachmentCommandInput,
+  type CreateTransitGatewayRouteTableAttachmentCommandOutput,
+  CreateTransitGatewayRouteTableAttachmentCommand,
+} from "./commands/CreateTransitGatewayRouteTableAttachmentCommand";
+import {
+  type CreateVpcAttachmentCommandInput,
+  type CreateVpcAttachmentCommandOutput,
+  CreateVpcAttachmentCommand,
+} from "./commands/CreateVpcAttachmentCommand";
+import {
+  type DeleteAttachmentCommandInput,
+  type DeleteAttachmentCommandOutput,
+  DeleteAttachmentCommand,
+} from "./commands/DeleteAttachmentCommand";
+import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
   DeleteConnectionCommand,
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
 } from "./commands/DeleteConnectionCommand";
 import {
+  type DeleteConnectPeerCommandInput,
+  type DeleteConnectPeerCommandOutput,
+  DeleteConnectPeerCommand,
+} from "./commands/DeleteConnectPeerCommand";
+import {
+  type DeleteCoreNetworkCommandInput,
+  type DeleteCoreNetworkCommandOutput,
+  DeleteCoreNetworkCommand,
+} from "./commands/DeleteCoreNetworkCommand";
+import {
+  type DeleteCoreNetworkPolicyVersionCommandInput,
+  type DeleteCoreNetworkPolicyVersionCommandOutput,
+  DeleteCoreNetworkPolicyVersionCommand,
+} from "./commands/DeleteCoreNetworkPolicyVersionCommand";
+import {
+  type DeleteCoreNetworkPrefixListAssociationCommandInput,
+  type DeleteCoreNetworkPrefixListAssociationCommandOutput,
+  DeleteCoreNetworkPrefixListAssociationCommand,
+} from "./commands/DeleteCoreNetworkPrefixListAssociationCommand";
+import {
+  type DeleteDeviceCommandInput,
+  type DeleteDeviceCommandOutput,
   DeleteDeviceCommand,
-  DeleteDeviceCommandInput,
-  DeleteDeviceCommandOutput,
 } from "./commands/DeleteDeviceCommand";
 import {
+  type DeleteGlobalNetworkCommandInput,
+  type DeleteGlobalNetworkCommandOutput,
   DeleteGlobalNetworkCommand,
-  DeleteGlobalNetworkCommandInput,
-  DeleteGlobalNetworkCommandOutput,
 } from "./commands/DeleteGlobalNetworkCommand";
-import { DeleteLinkCommand, DeleteLinkCommandInput, DeleteLinkCommandOutput } from "./commands/DeleteLinkCommand";
-import { DeleteSiteCommand, DeleteSiteCommandInput, DeleteSiteCommandOutput } from "./commands/DeleteSiteCommand";
 import {
+  type DeleteLinkCommandInput,
+  type DeleteLinkCommandOutput,
+  DeleteLinkCommand,
+} from "./commands/DeleteLinkCommand";
+import {
+  type DeletePeeringCommandInput,
+  type DeletePeeringCommandOutput,
+  DeletePeeringCommand,
+} from "./commands/DeletePeeringCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteSiteCommandInput,
+  type DeleteSiteCommandOutput,
+  DeleteSiteCommand,
+} from "./commands/DeleteSiteCommand";
+import {
+  type DeregisterTransitGatewayCommandInput,
+  type DeregisterTransitGatewayCommandOutput,
   DeregisterTransitGatewayCommand,
-  DeregisterTransitGatewayCommandInput,
-  DeregisterTransitGatewayCommandOutput,
 } from "./commands/DeregisterTransitGatewayCommand";
 import {
+  type DescribeGlobalNetworksCommandInput,
+  type DescribeGlobalNetworksCommandOutput,
   DescribeGlobalNetworksCommand,
-  DescribeGlobalNetworksCommandInput,
-  DescribeGlobalNetworksCommandOutput,
 } from "./commands/DescribeGlobalNetworksCommand";
 import {
+  type DisassociateConnectPeerCommandInput,
+  type DisassociateConnectPeerCommandOutput,
+  DisassociateConnectPeerCommand,
+} from "./commands/DisassociateConnectPeerCommand";
+import {
+  type DisassociateCustomerGatewayCommandInput,
+  type DisassociateCustomerGatewayCommandOutput,
   DisassociateCustomerGatewayCommand,
-  DisassociateCustomerGatewayCommandInput,
-  DisassociateCustomerGatewayCommandOutput,
 } from "./commands/DisassociateCustomerGatewayCommand";
 import {
+  type DisassociateLinkCommandInput,
+  type DisassociateLinkCommandOutput,
   DisassociateLinkCommand,
-  DisassociateLinkCommandInput,
-  DisassociateLinkCommandOutput,
 } from "./commands/DisassociateLinkCommand";
 import {
+  type DisassociateTransitGatewayConnectPeerCommandInput,
+  type DisassociateTransitGatewayConnectPeerCommandOutput,
   DisassociateTransitGatewayConnectPeerCommand,
-  DisassociateTransitGatewayConnectPeerCommandInput,
-  DisassociateTransitGatewayConnectPeerCommandOutput,
 } from "./commands/DisassociateTransitGatewayConnectPeerCommand";
 import {
+  type ExecuteCoreNetworkChangeSetCommandInput,
+  type ExecuteCoreNetworkChangeSetCommandOutput,
+  ExecuteCoreNetworkChangeSetCommand,
+} from "./commands/ExecuteCoreNetworkChangeSetCommand";
+import {
+  type GetConnectAttachmentCommandInput,
+  type GetConnectAttachmentCommandOutput,
+  GetConnectAttachmentCommand,
+} from "./commands/GetConnectAttachmentCommand";
+import {
+  type GetConnectionsCommandInput,
+  type GetConnectionsCommandOutput,
   GetConnectionsCommand,
-  GetConnectionsCommandInput,
-  GetConnectionsCommandOutput,
 } from "./commands/GetConnectionsCommand";
 import {
+  type GetConnectPeerAssociationsCommandInput,
+  type GetConnectPeerAssociationsCommandOutput,
+  GetConnectPeerAssociationsCommand,
+} from "./commands/GetConnectPeerAssociationsCommand";
+import {
+  type GetConnectPeerCommandInput,
+  type GetConnectPeerCommandOutput,
+  GetConnectPeerCommand,
+} from "./commands/GetConnectPeerCommand";
+import {
+  type GetCoreNetworkChangeEventsCommandInput,
+  type GetCoreNetworkChangeEventsCommandOutput,
+  GetCoreNetworkChangeEventsCommand,
+} from "./commands/GetCoreNetworkChangeEventsCommand";
+import {
+  type GetCoreNetworkChangeSetCommandInput,
+  type GetCoreNetworkChangeSetCommandOutput,
+  GetCoreNetworkChangeSetCommand,
+} from "./commands/GetCoreNetworkChangeSetCommand";
+import {
+  type GetCoreNetworkCommandInput,
+  type GetCoreNetworkCommandOutput,
+  GetCoreNetworkCommand,
+} from "./commands/GetCoreNetworkCommand";
+import {
+  type GetCoreNetworkPolicyCommandInput,
+  type GetCoreNetworkPolicyCommandOutput,
+  GetCoreNetworkPolicyCommand,
+} from "./commands/GetCoreNetworkPolicyCommand";
+import {
+  type GetCustomerGatewayAssociationsCommandInput,
+  type GetCustomerGatewayAssociationsCommandOutput,
   GetCustomerGatewayAssociationsCommand,
-  GetCustomerGatewayAssociationsCommandInput,
-  GetCustomerGatewayAssociationsCommandOutput,
 } from "./commands/GetCustomerGatewayAssociationsCommand";
-import { GetDevicesCommand, GetDevicesCommandInput, GetDevicesCommandOutput } from "./commands/GetDevicesCommand";
 import {
+  type GetDevicesCommandInput,
+  type GetDevicesCommandOutput,
+  GetDevicesCommand,
+} from "./commands/GetDevicesCommand";
+import {
+  type GetDirectConnectGatewayAttachmentCommandInput,
+  type GetDirectConnectGatewayAttachmentCommandOutput,
+  GetDirectConnectGatewayAttachmentCommand,
+} from "./commands/GetDirectConnectGatewayAttachmentCommand";
+import {
+  type GetLinkAssociationsCommandInput,
+  type GetLinkAssociationsCommandOutput,
   GetLinkAssociationsCommand,
-  GetLinkAssociationsCommandInput,
-  GetLinkAssociationsCommandOutput,
 } from "./commands/GetLinkAssociationsCommand";
-import { GetLinksCommand, GetLinksCommandInput, GetLinksCommandOutput } from "./commands/GetLinksCommand";
-import { GetSitesCommand, GetSitesCommandInput, GetSitesCommandOutput } from "./commands/GetSitesCommand";
+import { type GetLinksCommandInput, type GetLinksCommandOutput, GetLinksCommand } from "./commands/GetLinksCommand";
 import {
+  type GetNetworkResourceCountsCommandInput,
+  type GetNetworkResourceCountsCommandOutput,
+  GetNetworkResourceCountsCommand,
+} from "./commands/GetNetworkResourceCountsCommand";
+import {
+  type GetNetworkResourceRelationshipsCommandInput,
+  type GetNetworkResourceRelationshipsCommandOutput,
+  GetNetworkResourceRelationshipsCommand,
+} from "./commands/GetNetworkResourceRelationshipsCommand";
+import {
+  type GetNetworkResourcesCommandInput,
+  type GetNetworkResourcesCommandOutput,
+  GetNetworkResourcesCommand,
+} from "./commands/GetNetworkResourcesCommand";
+import {
+  type GetNetworkRoutesCommandInput,
+  type GetNetworkRoutesCommandOutput,
+  GetNetworkRoutesCommand,
+} from "./commands/GetNetworkRoutesCommand";
+import {
+  type GetNetworkTelemetryCommandInput,
+  type GetNetworkTelemetryCommandOutput,
+  GetNetworkTelemetryCommand,
+} from "./commands/GetNetworkTelemetryCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetRouteAnalysisCommandInput,
+  type GetRouteAnalysisCommandOutput,
+  GetRouteAnalysisCommand,
+} from "./commands/GetRouteAnalysisCommand";
+import { type GetSitesCommandInput, type GetSitesCommandOutput, GetSitesCommand } from "./commands/GetSitesCommand";
+import {
+  type GetSiteToSiteVpnAttachmentCommandInput,
+  type GetSiteToSiteVpnAttachmentCommandOutput,
+  GetSiteToSiteVpnAttachmentCommand,
+} from "./commands/GetSiteToSiteVpnAttachmentCommand";
+import {
+  type GetTransitGatewayConnectPeerAssociationsCommandInput,
+  type GetTransitGatewayConnectPeerAssociationsCommandOutput,
   GetTransitGatewayConnectPeerAssociationsCommand,
-  GetTransitGatewayConnectPeerAssociationsCommandInput,
-  GetTransitGatewayConnectPeerAssociationsCommandOutput,
 } from "./commands/GetTransitGatewayConnectPeerAssociationsCommand";
 import {
+  type GetTransitGatewayPeeringCommandInput,
+  type GetTransitGatewayPeeringCommandOutput,
+  GetTransitGatewayPeeringCommand,
+} from "./commands/GetTransitGatewayPeeringCommand";
+import {
+  type GetTransitGatewayRegistrationsCommandInput,
+  type GetTransitGatewayRegistrationsCommandOutput,
   GetTransitGatewayRegistrationsCommand,
-  GetTransitGatewayRegistrationsCommandInput,
-  GetTransitGatewayRegistrationsCommandOutput,
 } from "./commands/GetTransitGatewayRegistrationsCommand";
 import {
+  type GetTransitGatewayRouteTableAttachmentCommandInput,
+  type GetTransitGatewayRouteTableAttachmentCommandOutput,
+  GetTransitGatewayRouteTableAttachmentCommand,
+} from "./commands/GetTransitGatewayRouteTableAttachmentCommand";
+import {
+  type GetVpcAttachmentCommandInput,
+  type GetVpcAttachmentCommandOutput,
+  GetVpcAttachmentCommand,
+} from "./commands/GetVpcAttachmentCommand";
+import {
+  type ListAttachmentNatConfigurationsCommandInput,
+  type ListAttachmentNatConfigurationsCommandOutput,
+  ListAttachmentNatConfigurationsCommand,
+} from "./commands/ListAttachmentNatConfigurationsCommand";
+import {
+  type ListAttachmentRoutingPolicyAssociationsCommandInput,
+  type ListAttachmentRoutingPolicyAssociationsCommandOutput,
+  ListAttachmentRoutingPolicyAssociationsCommand,
+} from "./commands/ListAttachmentRoutingPolicyAssociationsCommand";
+import {
+  type ListAttachmentsCommandInput,
+  type ListAttachmentsCommandOutput,
+  ListAttachmentsCommand,
+} from "./commands/ListAttachmentsCommand";
+import {
+  type ListConnectPeersCommandInput,
+  type ListConnectPeersCommandOutput,
+  ListConnectPeersCommand,
+} from "./commands/ListConnectPeersCommand";
+import {
+  type ListCoreNetworkPolicyVersionsCommandInput,
+  type ListCoreNetworkPolicyVersionsCommandOutput,
+  ListCoreNetworkPolicyVersionsCommand,
+} from "./commands/ListCoreNetworkPolicyVersionsCommand";
+import {
+  type ListCoreNetworkPrefixListAssociationsCommandInput,
+  type ListCoreNetworkPrefixListAssociationsCommandOutput,
+  ListCoreNetworkPrefixListAssociationsCommand,
+} from "./commands/ListCoreNetworkPrefixListAssociationsCommand";
+import {
+  type ListCoreNetworkRoutingInformationCommandInput,
+  type ListCoreNetworkRoutingInformationCommandOutput,
+  ListCoreNetworkRoutingInformationCommand,
+} from "./commands/ListCoreNetworkRoutingInformationCommand";
+import {
+  type ListCoreNetworksCommandInput,
+  type ListCoreNetworksCommandOutput,
+  ListCoreNetworksCommand,
+} from "./commands/ListCoreNetworksCommand";
+import {
+  type ListOrganizationServiceAccessStatusCommandInput,
+  type ListOrganizationServiceAccessStatusCommandOutput,
+  ListOrganizationServiceAccessStatusCommand,
+} from "./commands/ListOrganizationServiceAccessStatusCommand";
+import {
+  type ListPeeringsCommandInput,
+  type ListPeeringsCommandOutput,
+  ListPeeringsCommand,
+} from "./commands/ListPeeringsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
-  RegisterTransitGatewayCommand,
-  RegisterTransitGatewayCommandInput,
-  RegisterTransitGatewayCommandOutput,
-} from "./commands/RegisterTransitGatewayCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutAttachmentRoutingPolicyLabelCommandInput,
+  type PutAttachmentRoutingPolicyLabelCommandOutput,
+  PutAttachmentRoutingPolicyLabelCommand,
+} from "./commands/PutAttachmentRoutingPolicyLabelCommand";
 import {
+  type PutCoreNetworkPolicyCommandInput,
+  type PutCoreNetworkPolicyCommandOutput,
+  PutCoreNetworkPolicyCommand,
+} from "./commands/PutCoreNetworkPolicyCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type RegisterTransitGatewayCommandInput,
+  type RegisterTransitGatewayCommandOutput,
+  RegisterTransitGatewayCommand,
+} from "./commands/RegisterTransitGatewayCommand";
+import {
+  type RejectAttachmentCommandInput,
+  type RejectAttachmentCommandOutput,
+  RejectAttachmentCommand,
+} from "./commands/RejectAttachmentCommand";
+import {
+  type RemoveAttachmentRoutingPolicyLabelCommandInput,
+  type RemoveAttachmentRoutingPolicyLabelCommandOutput,
+  RemoveAttachmentRoutingPolicyLabelCommand,
+} from "./commands/RemoveAttachmentRoutingPolicyLabelCommand";
+import {
+  type RestoreCoreNetworkPolicyVersionCommandInput,
+  type RestoreCoreNetworkPolicyVersionCommandOutput,
+  RestoreCoreNetworkPolicyVersionCommand,
+} from "./commands/RestoreCoreNetworkPolicyVersionCommand";
+import {
+  type StartOrganizationServiceAccessUpdateCommandInput,
+  type StartOrganizationServiceAccessUpdateCommandOutput,
+  StartOrganizationServiceAccessUpdateCommand,
+} from "./commands/StartOrganizationServiceAccessUpdateCommand";
+import {
+  type StartRouteAnalysisCommandInput,
+  type StartRouteAnalysisCommandOutput,
+  StartRouteAnalysisCommand,
+} from "./commands/StartRouteAnalysisCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAttachmentNatConfigurationCommandInput,
+  type UpdateAttachmentNatConfigurationCommandOutput,
+  UpdateAttachmentNatConfigurationCommand,
+} from "./commands/UpdateAttachmentNatConfigurationCommand";
+import {
+  type UpdateConnectionCommandInput,
+  type UpdateConnectionCommandOutput,
   UpdateConnectionCommand,
-  UpdateConnectionCommandInput,
-  UpdateConnectionCommandOutput,
 } from "./commands/UpdateConnectionCommand";
 import {
+  type UpdateCoreNetworkCommandInput,
+  type UpdateCoreNetworkCommandOutput,
+  UpdateCoreNetworkCommand,
+} from "./commands/UpdateCoreNetworkCommand";
+import {
+  type UpdateDeviceCommandInput,
+  type UpdateDeviceCommandOutput,
   UpdateDeviceCommand,
-  UpdateDeviceCommandInput,
-  UpdateDeviceCommandOutput,
 } from "./commands/UpdateDeviceCommand";
 import {
+  type UpdateDirectConnectGatewayAttachmentCommandInput,
+  type UpdateDirectConnectGatewayAttachmentCommandOutput,
+  UpdateDirectConnectGatewayAttachmentCommand,
+} from "./commands/UpdateDirectConnectGatewayAttachmentCommand";
+import {
+  type UpdateGlobalNetworkCommandInput,
+  type UpdateGlobalNetworkCommandOutput,
   UpdateGlobalNetworkCommand,
-  UpdateGlobalNetworkCommandInput,
-  UpdateGlobalNetworkCommandOutput,
 } from "./commands/UpdateGlobalNetworkCommand";
-import { UpdateLinkCommand, UpdateLinkCommandInput, UpdateLinkCommandOutput } from "./commands/UpdateLinkCommand";
-import { UpdateSiteCommand, UpdateSiteCommandInput, UpdateSiteCommandOutput } from "./commands/UpdateSiteCommand";
+import {
+  type UpdateLinkCommandInput,
+  type UpdateLinkCommandOutput,
+  UpdateLinkCommand,
+} from "./commands/UpdateLinkCommand";
+import {
+  type UpdateNetworkResourceMetadataCommandInput,
+  type UpdateNetworkResourceMetadataCommandOutput,
+  UpdateNetworkResourceMetadataCommand,
+} from "./commands/UpdateNetworkResourceMetadataCommand";
+import {
+  type UpdateSiteCommandInput,
+  type UpdateSiteCommandOutput,
+  UpdateSiteCommand,
+} from "./commands/UpdateSiteCommand";
+import {
+  type UpdateVpcAttachmentCommandInput,
+  type UpdateVpcAttachmentCommandOutput,
+  UpdateVpcAttachmentCommand,
+} from "./commands/UpdateVpcAttachmentCommand";
 import { NetworkManagerClient } from "./NetworkManagerClient";
+import { paginateDescribeGlobalNetworks } from "./pagination/DescribeGlobalNetworksPaginator";
+import { paginateGetConnections } from "./pagination/GetConnectionsPaginator";
+import { paginateGetConnectPeerAssociations } from "./pagination/GetConnectPeerAssociationsPaginator";
+import { paginateGetCoreNetworkChangeEvents } from "./pagination/GetCoreNetworkChangeEventsPaginator";
+import { paginateGetCoreNetworkChangeSet } from "./pagination/GetCoreNetworkChangeSetPaginator";
+import { paginateGetCustomerGatewayAssociations } from "./pagination/GetCustomerGatewayAssociationsPaginator";
+import { paginateGetDevices } from "./pagination/GetDevicesPaginator";
+import { paginateGetLinkAssociations } from "./pagination/GetLinkAssociationsPaginator";
+import { paginateGetLinks } from "./pagination/GetLinksPaginator";
+import { paginateGetNetworkResourceCounts } from "./pagination/GetNetworkResourceCountsPaginator";
+import { paginateGetNetworkResourceRelationships } from "./pagination/GetNetworkResourceRelationshipsPaginator";
+import { paginateGetNetworkResources } from "./pagination/GetNetworkResourcesPaginator";
+import { paginateGetNetworkRoutes } from "./pagination/GetNetworkRoutesPaginator";
+import { paginateGetNetworkTelemetry } from "./pagination/GetNetworkTelemetryPaginator";
+import { paginateGetSites } from "./pagination/GetSitesPaginator";
+import {
+  paginateGetTransitGatewayConnectPeerAssociations,
+} from "./pagination/GetTransitGatewayConnectPeerAssociationsPaginator";
+import { paginateGetTransitGatewayRegistrations } from "./pagination/GetTransitGatewayRegistrationsPaginator";
+import { paginateListAttachmentNatConfigurations } from "./pagination/ListAttachmentNatConfigurationsPaginator";
+import {
+  paginateListAttachmentRoutingPolicyAssociations,
+} from "./pagination/ListAttachmentRoutingPolicyAssociationsPaginator";
+import { paginateListAttachments } from "./pagination/ListAttachmentsPaginator";
+import { paginateListConnectPeers } from "./pagination/ListConnectPeersPaginator";
+import { paginateListCoreNetworkPolicyVersions } from "./pagination/ListCoreNetworkPolicyVersionsPaginator";
+import {
+  paginateListCoreNetworkPrefixListAssociations,
+} from "./pagination/ListCoreNetworkPrefixListAssociationsPaginator";
+import { paginateListCoreNetworkRoutingInformation } from "./pagination/ListCoreNetworkRoutingInformationPaginator";
+import { paginateListCoreNetworks } from "./pagination/ListCoreNetworksPaginator";
+import { paginateListPeerings } from "./pagination/ListPeeringsPaginator";
+
+const commands = {
+  AcceptAttachmentCommand,
+  AssociateConnectPeerCommand,
+  AssociateCustomerGatewayCommand,
+  AssociateLinkCommand,
+  AssociateTransitGatewayConnectPeerCommand,
+  CreateConnectAttachmentCommand,
+  CreateConnectionCommand,
+  CreateConnectPeerCommand,
+  CreateCoreNetworkCommand,
+  CreateCoreNetworkPrefixListAssociationCommand,
+  CreateDeviceCommand,
+  CreateDirectConnectGatewayAttachmentCommand,
+  CreateGlobalNetworkCommand,
+  CreateLinkCommand,
+  CreateSiteCommand,
+  CreateSiteToSiteVpnAttachmentCommand,
+  CreateTransitGatewayPeeringCommand,
+  CreateTransitGatewayRouteTableAttachmentCommand,
+  CreateVpcAttachmentCommand,
+  DeleteAttachmentCommand,
+  DeleteConnectionCommand,
+  DeleteConnectPeerCommand,
+  DeleteCoreNetworkCommand,
+  DeleteCoreNetworkPolicyVersionCommand,
+  DeleteCoreNetworkPrefixListAssociationCommand,
+  DeleteDeviceCommand,
+  DeleteGlobalNetworkCommand,
+  DeleteLinkCommand,
+  DeletePeeringCommand,
+  DeleteResourcePolicyCommand,
+  DeleteSiteCommand,
+  DeregisterTransitGatewayCommand,
+  DescribeGlobalNetworksCommand,
+  DisassociateConnectPeerCommand,
+  DisassociateCustomerGatewayCommand,
+  DisassociateLinkCommand,
+  DisassociateTransitGatewayConnectPeerCommand,
+  ExecuteCoreNetworkChangeSetCommand,
+  GetConnectAttachmentCommand,
+  GetConnectionsCommand,
+  GetConnectPeerCommand,
+  GetConnectPeerAssociationsCommand,
+  GetCoreNetworkCommand,
+  GetCoreNetworkChangeEventsCommand,
+  GetCoreNetworkChangeSetCommand,
+  GetCoreNetworkPolicyCommand,
+  GetCustomerGatewayAssociationsCommand,
+  GetDevicesCommand,
+  GetDirectConnectGatewayAttachmentCommand,
+  GetLinkAssociationsCommand,
+  GetLinksCommand,
+  GetNetworkResourceCountsCommand,
+  GetNetworkResourceRelationshipsCommand,
+  GetNetworkResourcesCommand,
+  GetNetworkRoutesCommand,
+  GetNetworkTelemetryCommand,
+  GetResourcePolicyCommand,
+  GetRouteAnalysisCommand,
+  GetSitesCommand,
+  GetSiteToSiteVpnAttachmentCommand,
+  GetTransitGatewayConnectPeerAssociationsCommand,
+  GetTransitGatewayPeeringCommand,
+  GetTransitGatewayRegistrationsCommand,
+  GetTransitGatewayRouteTableAttachmentCommand,
+  GetVpcAttachmentCommand,
+  ListAttachmentNatConfigurationsCommand,
+  ListAttachmentRoutingPolicyAssociationsCommand,
+  ListAttachmentsCommand,
+  ListConnectPeersCommand,
+  ListCoreNetworkPolicyVersionsCommand,
+  ListCoreNetworkPrefixListAssociationsCommand,
+  ListCoreNetworkRoutingInformationCommand,
+  ListCoreNetworksCommand,
+  ListOrganizationServiceAccessStatusCommand,
+  ListPeeringsCommand,
+  ListTagsForResourceCommand,
+  PutAttachmentRoutingPolicyLabelCommand,
+  PutCoreNetworkPolicyCommand,
+  PutResourcePolicyCommand,
+  RegisterTransitGatewayCommand,
+  RejectAttachmentCommand,
+  RemoveAttachmentRoutingPolicyLabelCommand,
+  RestoreCoreNetworkPolicyVersionCommand,
+  StartOrganizationServiceAccessUpdateCommand,
+  StartRouteAnalysisCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAttachmentNatConfigurationCommand,
+  UpdateConnectionCommand,
+  UpdateCoreNetworkCommand,
+  UpdateDeviceCommand,
+  UpdateDirectConnectGatewayAttachmentCommand,
+  UpdateGlobalNetworkCommand,
+  UpdateLinkCommand,
+  UpdateNetworkResourceMetadataCommand,
+  UpdateSiteCommand,
+  UpdateVpcAttachmentCommand,
+};
+const paginators = {
+  paginateDescribeGlobalNetworks,
+  paginateGetConnections,
+  paginateGetConnectPeerAssociations,
+  paginateGetCoreNetworkChangeEvents,
+  paginateGetCoreNetworkChangeSet,
+  paginateGetCustomerGatewayAssociations,
+  paginateGetDevices,
+  paginateGetLinkAssociations,
+  paginateGetLinks,
+  paginateGetNetworkResourceCounts,
+  paginateGetNetworkResourceRelationships,
+  paginateGetNetworkResources,
+  paginateGetNetworkRoutes,
+  paginateGetNetworkTelemetry,
+  paginateGetSites,
+  paginateGetTransitGatewayConnectPeerAssociations,
+  paginateGetTransitGatewayRegistrations,
+  paginateListAttachmentNatConfigurations,
+  paginateListAttachmentRoutingPolicyAssociations,
+  paginateListAttachments,
+  paginateListConnectPeers,
+  paginateListCoreNetworkPolicyVersions,
+  paginateListCoreNetworkPrefixListAssociations,
+  paginateListCoreNetworkRoutingInformation,
+  paginateListCoreNetworks,
+  paginateListPeerings,
+};
 
 /**
- * <p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your
- *             AWS and on-premises networks that are built around transit gateways.</p>
- *         <p>The Network Manager APIs are supported in the US West (Oregon) Region only. You must specify the <code>us-west-2</code> Region in all requests made to Network Manager.</p>
+ * @public
  */
-export class NetworkManager extends NetworkManagerClient {
+export interface NetworkManagerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface NetworkManager {
   /**
-   * <p>Associates a customer gateway with a device and optionally, with a link. If you
-   *             specify a link, it must be associated with the specified device. </p>
-   *         <p>You can only associate customer gateways that are connected to a VPN attachment on a
-   *             transit gateway. The transit gateway must be registered in your global network. When
-   *             you register a transit gateway, customer gateways that are connected to the transit
-   *             gateway are automatically included in the global network. To list customer gateways
-   *             that are connected to a transit gateway, use the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html">DescribeVpnConnections</a> EC2 API and filter by
-   *                 <code>transit-gateway-id</code>.</p>
-   *         <p>You cannot associate a customer gateway with more than one device and link. </p>
+   * @see {@link AcceptAttachmentCommand}
    */
-  public associateCustomerGateway(
+  acceptAttachment(
+    args: AcceptAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<AcceptAttachmentCommandOutput>;
+  acceptAttachment(
+    args: AcceptAttachmentCommandInput,
+    cb: (err: any, data?: AcceptAttachmentCommandOutput) => void
+  ): void;
+  acceptAttachment(
+    args: AcceptAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: AcceptAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateConnectPeerCommand}
+   */
+  associateConnectPeer(
+    args: AssociateConnectPeerCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<AssociateConnectPeerCommandOutput>;
+  associateConnectPeer(
+    args: AssociateConnectPeerCommandInput,
+    cb: (err: any, data?: AssociateConnectPeerCommandOutput) => void
+  ): void;
+  associateConnectPeer(
+    args: AssociateConnectPeerCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: AssociateConnectPeerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateCustomerGatewayCommand}
+   */
+  associateCustomerGateway(
     args: AssociateCustomerGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<AssociateCustomerGatewayCommandOutput>;
-  public associateCustomerGateway(
+  associateCustomerGateway(
     args: AssociateCustomerGatewayCommandInput,
     cb: (err: any, data?: AssociateCustomerGatewayCommandOutput) => void
   ): void;
-  public associateCustomerGateway(
+  associateCustomerGateway(
     args: AssociateCustomerGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: AssociateCustomerGatewayCommandOutput) => void
   ): void;
-  public associateCustomerGateway(
-    args: AssociateCustomerGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateCustomerGatewayCommandOutput) => void),
-    cb?: (err: any, data?: AssociateCustomerGatewayCommandOutput) => void
-  ): Promise<AssociateCustomerGatewayCommandOutput> | void {
-    const command = new AssociateCustomerGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a link to a device. A device can be associated to multiple links and a link can be associated to multiple devices. The device and link must be in the same global network and the same site.</p>
+   * @see {@link AssociateLinkCommand}
    */
-  public associateLink(
+  associateLink(
     args: AssociateLinkCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<AssociateLinkCommandOutput>;
-  public associateLink(
+  associateLink(
     args: AssociateLinkCommandInput,
     cb: (err: any, data?: AssociateLinkCommandOutput) => void
   ): void;
-  public associateLink(
+  associateLink(
     args: AssociateLinkCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: AssociateLinkCommandOutput) => void
   ): void;
-  public associateLink(
-    args: AssociateLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateLinkCommandOutput) => void),
-    cb?: (err: any, data?: AssociateLinkCommandOutput) => void
-  ): Promise<AssociateLinkCommandOutput> | void {
-    const command = new AssociateLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a transit gateway Connect peer with a device, and optionally, with a link. If you
-   *             specify a link, it must be associated with the specified device. </p>
-   *         <p>You can only associate transit gateway Connect peers that have been created on a
-   *             transit gateway that's registered in your global network.</p>
-   *         <p>You cannot associate a transit gateway Connect peer with more than one device and link. </p>
+   * @see {@link AssociateTransitGatewayConnectPeerCommand}
    */
-  public associateTransitGatewayConnectPeer(
+  associateTransitGatewayConnectPeer(
     args: AssociateTransitGatewayConnectPeerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<AssociateTransitGatewayConnectPeerCommandOutput>;
-  public associateTransitGatewayConnectPeer(
+  associateTransitGatewayConnectPeer(
     args: AssociateTransitGatewayConnectPeerCommandInput,
     cb: (err: any, data?: AssociateTransitGatewayConnectPeerCommandOutput) => void
   ): void;
-  public associateTransitGatewayConnectPeer(
+  associateTransitGatewayConnectPeer(
     args: AssociateTransitGatewayConnectPeerCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: AssociateTransitGatewayConnectPeerCommandOutput) => void
   ): void;
-  public associateTransitGatewayConnectPeer(
-    args: AssociateTransitGatewayConnectPeerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateTransitGatewayConnectPeerCommandOutput) => void),
-    cb?: (err: any, data?: AssociateTransitGatewayConnectPeerCommandOutput) => void
-  ): Promise<AssociateTransitGatewayConnectPeerCommandOutput> | void {
-    const command = new AssociateTransitGatewayConnectPeerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.</p>
+   * @see {@link CreateConnectAttachmentCommand}
    */
-  public createConnection(
+  createConnectAttachment(
+    args: CreateConnectAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateConnectAttachmentCommandOutput>;
+  createConnectAttachment(
+    args: CreateConnectAttachmentCommandInput,
+    cb: (err: any, data?: CreateConnectAttachmentCommandOutput) => void
+  ): void;
+  createConnectAttachment(
+    args: CreateConnectAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateConnectAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectionCommand}
+   */
+  createConnection(
     args: CreateConnectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<CreateConnectionCommandOutput>;
-  public createConnection(
+  createConnection(
     args: CreateConnectionCommandInput,
     cb: (err: any, data?: CreateConnectionCommandOutput) => void
   ): void;
-  public createConnection(
+  createConnection(
     args: CreateConnectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: CreateConnectionCommandOutput) => void
   ): void;
-  public createConnection(
-    args: CreateConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateConnectionCommandOutput) => void),
-    cb?: (err: any, data?: CreateConnectionCommandOutput) => void
-  ): Promise<CreateConnectionCommandOutput> | void {
-    const command = new CreateConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new device in a global network. If you specify both a site ID and a
-   *             location, the location of the site is used for visualization in the Network Manager console.</p>
+   * @see {@link CreateConnectPeerCommand}
    */
-  public createDevice(
+  createConnectPeer(
+    args: CreateConnectPeerCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateConnectPeerCommandOutput>;
+  createConnectPeer(
+    args: CreateConnectPeerCommandInput,
+    cb: (err: any, data?: CreateConnectPeerCommandOutput) => void
+  ): void;
+  createConnectPeer(
+    args: CreateConnectPeerCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateConnectPeerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCoreNetworkCommand}
+   */
+  createCoreNetwork(
+    args: CreateCoreNetworkCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateCoreNetworkCommandOutput>;
+  createCoreNetwork(
+    args: CreateCoreNetworkCommandInput,
+    cb: (err: any, data?: CreateCoreNetworkCommandOutput) => void
+  ): void;
+  createCoreNetwork(
+    args: CreateCoreNetworkCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateCoreNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCoreNetworkPrefixListAssociationCommand}
+   */
+  createCoreNetworkPrefixListAssociation(
+    args: CreateCoreNetworkPrefixListAssociationCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateCoreNetworkPrefixListAssociationCommandOutput>;
+  createCoreNetworkPrefixListAssociation(
+    args: CreateCoreNetworkPrefixListAssociationCommandInput,
+    cb: (err: any, data?: CreateCoreNetworkPrefixListAssociationCommandOutput) => void
+  ): void;
+  createCoreNetworkPrefixListAssociation(
+    args: CreateCoreNetworkPrefixListAssociationCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateCoreNetworkPrefixListAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDeviceCommand}
+   */
+  createDevice(
     args: CreateDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<CreateDeviceCommandOutput>;
-  public createDevice(args: CreateDeviceCommandInput, cb: (err: any, data?: CreateDeviceCommandOutput) => void): void;
-  public createDevice(
+  createDevice(
     args: CreateDeviceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateDeviceCommandOutput) => void
   ): void;
-  public createDevice(
+  createDevice(
     args: CreateDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDeviceCommandOutput) => void),
-    cb?: (err: any, data?: CreateDeviceCommandOutput) => void
-  ): Promise<CreateDeviceCommandOutput> | void {
-    const command = new CreateDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a new, empty global network.</p>
+   * @see {@link CreateDirectConnectGatewayAttachmentCommand}
    */
-  public createGlobalNetwork(
+  createDirectConnectGatewayAttachment(
+    args: CreateDirectConnectGatewayAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateDirectConnectGatewayAttachmentCommandOutput>;
+  createDirectConnectGatewayAttachment(
+    args: CreateDirectConnectGatewayAttachmentCommandInput,
+    cb: (err: any, data?: CreateDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+  createDirectConnectGatewayAttachment(
+    args: CreateDirectConnectGatewayAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGlobalNetworkCommand}
+   */
+  createGlobalNetwork(): Promise<CreateGlobalNetworkCommandOutput>;
+  createGlobalNetwork(
     args: CreateGlobalNetworkCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<CreateGlobalNetworkCommandOutput>;
-  public createGlobalNetwork(
+  createGlobalNetwork(
     args: CreateGlobalNetworkCommandInput,
     cb: (err: any, data?: CreateGlobalNetworkCommandOutput) => void
   ): void;
-  public createGlobalNetwork(
+  createGlobalNetwork(
     args: CreateGlobalNetworkCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: CreateGlobalNetworkCommandOutput) => void
   ): void;
-  public createGlobalNetwork(
-    args: CreateGlobalNetworkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateGlobalNetworkCommandOutput) => void),
-    cb?: (err: any, data?: CreateGlobalNetworkCommandOutput) => void
-  ): Promise<CreateGlobalNetworkCommandOutput> | void {
-    const command = new CreateGlobalNetworkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new link for a specified site.</p>
+   * @see {@link CreateLinkCommand}
    */
-  public createLink(args: CreateLinkCommandInput, options?: __HttpHandlerOptions): Promise<CreateLinkCommandOutput>;
-  public createLink(args: CreateLinkCommandInput, cb: (err: any, data?: CreateLinkCommandOutput) => void): void;
-  public createLink(
+  createLink(
     args: CreateLinkCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateLinkCommandOutput>;
+  createLink(
+    args: CreateLinkCommandInput,
     cb: (err: any, data?: CreateLinkCommandOutput) => void
   ): void;
-  public createLink(
+  createLink(
     args: CreateLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLinkCommandOutput) => void),
-    cb?: (err: any, data?: CreateLinkCommandOutput) => void
-  ): Promise<CreateLinkCommandOutput> | void {
-    const command = new CreateLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateLinkCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a new site in a global network.</p>
+   * @see {@link CreateSiteCommand}
    */
-  public createSite(args: CreateSiteCommandInput, options?: __HttpHandlerOptions): Promise<CreateSiteCommandOutput>;
-  public createSite(args: CreateSiteCommandInput, cb: (err: any, data?: CreateSiteCommandOutput) => void): void;
-  public createSite(
+  createSite(
     args: CreateSiteCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateSiteCommandOutput>;
+  createSite(
+    args: CreateSiteCommandInput,
     cb: (err: any, data?: CreateSiteCommandOutput) => void
   ): void;
-  public createSite(
+  createSite(
     args: CreateSiteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSiteCommandOutput) => void),
-    cb?: (err: any, data?: CreateSiteCommandOutput) => void
-  ): Promise<CreateSiteCommandOutput> | void {
-    const command = new CreateSiteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateSiteCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified connection in your global network.</p>
+   * @see {@link CreateSiteToSiteVpnAttachmentCommand}
    */
-  public deleteConnection(
+  createSiteToSiteVpnAttachment(
+    args: CreateSiteToSiteVpnAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateSiteToSiteVpnAttachmentCommandOutput>;
+  createSiteToSiteVpnAttachment(
+    args: CreateSiteToSiteVpnAttachmentCommandInput,
+    cb: (err: any, data?: CreateSiteToSiteVpnAttachmentCommandOutput) => void
+  ): void;
+  createSiteToSiteVpnAttachment(
+    args: CreateSiteToSiteVpnAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateSiteToSiteVpnAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTransitGatewayPeeringCommand}
+   */
+  createTransitGatewayPeering(
+    args: CreateTransitGatewayPeeringCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateTransitGatewayPeeringCommandOutput>;
+  createTransitGatewayPeering(
+    args: CreateTransitGatewayPeeringCommandInput,
+    cb: (err: any, data?: CreateTransitGatewayPeeringCommandOutput) => void
+  ): void;
+  createTransitGatewayPeering(
+    args: CreateTransitGatewayPeeringCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateTransitGatewayPeeringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTransitGatewayRouteTableAttachmentCommand}
+   */
+  createTransitGatewayRouteTableAttachment(
+    args: CreateTransitGatewayRouteTableAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateTransitGatewayRouteTableAttachmentCommandOutput>;
+  createTransitGatewayRouteTableAttachment(
+    args: CreateTransitGatewayRouteTableAttachmentCommandInput,
+    cb: (err: any, data?: CreateTransitGatewayRouteTableAttachmentCommandOutput) => void
+  ): void;
+  createTransitGatewayRouteTableAttachment(
+    args: CreateTransitGatewayRouteTableAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateTransitGatewayRouteTableAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVpcAttachmentCommand}
+   */
+  createVpcAttachment(
+    args: CreateVpcAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<CreateVpcAttachmentCommandOutput>;
+  createVpcAttachment(
+    args: CreateVpcAttachmentCommandInput,
+    cb: (err: any, data?: CreateVpcAttachmentCommandOutput) => void
+  ): void;
+  createVpcAttachment(
+    args: CreateVpcAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: CreateVpcAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAttachmentCommand}
+   */
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteAttachmentCommandOutput>;
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    cb: (err: any, data?: DeleteAttachmentCommandOutput) => void
+  ): void;
+  deleteAttachment(
+    args: DeleteAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
     args: DeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DeleteConnectionCommandOutput>;
-  public deleteConnection(
+  deleteConnection(
     args: DeleteConnectionCommandInput,
     cb: (err: any, data?: DeleteConnectionCommandOutput) => void
   ): void;
-  public deleteConnection(
+  deleteConnection(
     args: DeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DeleteConnectionCommandOutput) => void
   ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): Promise<DeleteConnectionCommandOutput> | void {
-    const command = new DeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an existing device. You must first disassociate the device from any links and
-   *             customer gateways.</p>
+   * @see {@link DeleteConnectPeerCommand}
    */
-  public deleteDevice(
+  deleteConnectPeer(
+    args: DeleteConnectPeerCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteConnectPeerCommandOutput>;
+  deleteConnectPeer(
+    args: DeleteConnectPeerCommandInput,
+    cb: (err: any, data?: DeleteConnectPeerCommandOutput) => void
+  ): void;
+  deleteConnectPeer(
+    args: DeleteConnectPeerCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteConnectPeerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCoreNetworkCommand}
+   */
+  deleteCoreNetwork(
+    args: DeleteCoreNetworkCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteCoreNetworkCommandOutput>;
+  deleteCoreNetwork(
+    args: DeleteCoreNetworkCommandInput,
+    cb: (err: any, data?: DeleteCoreNetworkCommandOutput) => void
+  ): void;
+  deleteCoreNetwork(
+    args: DeleteCoreNetworkCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteCoreNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCoreNetworkPolicyVersionCommand}
+   */
+  deleteCoreNetworkPolicyVersion(
+    args: DeleteCoreNetworkPolicyVersionCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteCoreNetworkPolicyVersionCommandOutput>;
+  deleteCoreNetworkPolicyVersion(
+    args: DeleteCoreNetworkPolicyVersionCommandInput,
+    cb: (err: any, data?: DeleteCoreNetworkPolicyVersionCommandOutput) => void
+  ): void;
+  deleteCoreNetworkPolicyVersion(
+    args: DeleteCoreNetworkPolicyVersionCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteCoreNetworkPolicyVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCoreNetworkPrefixListAssociationCommand}
+   */
+  deleteCoreNetworkPrefixListAssociation(
+    args: DeleteCoreNetworkPrefixListAssociationCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteCoreNetworkPrefixListAssociationCommandOutput>;
+  deleteCoreNetworkPrefixListAssociation(
+    args: DeleteCoreNetworkPrefixListAssociationCommandInput,
+    cb: (err: any, data?: DeleteCoreNetworkPrefixListAssociationCommandOutput) => void
+  ): void;
+  deleteCoreNetworkPrefixListAssociation(
+    args: DeleteCoreNetworkPrefixListAssociationCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteCoreNetworkPrefixListAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDeviceCommand}
+   */
+  deleteDevice(
     args: DeleteDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DeleteDeviceCommandOutput>;
-  public deleteDevice(args: DeleteDeviceCommandInput, cb: (err: any, data?: DeleteDeviceCommandOutput) => void): void;
-  public deleteDevice(
+  deleteDevice(
     args: DeleteDeviceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteDeviceCommandOutput) => void
   ): void;
-  public deleteDevice(
+  deleteDevice(
     args: DeleteDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDeviceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDeviceCommandOutput) => void
-  ): Promise<DeleteDeviceCommandOutput> | void {
-    const command = new DeleteDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes an existing global network. You must first delete all global network objects
-   *             (devices, links, and sites) and deregister all transit gateways.</p>
+   * @see {@link DeleteGlobalNetworkCommand}
    */
-  public deleteGlobalNetwork(
+  deleteGlobalNetwork(
     args: DeleteGlobalNetworkCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DeleteGlobalNetworkCommandOutput>;
-  public deleteGlobalNetwork(
+  deleteGlobalNetwork(
     args: DeleteGlobalNetworkCommandInput,
     cb: (err: any, data?: DeleteGlobalNetworkCommandOutput) => void
   ): void;
-  public deleteGlobalNetwork(
+  deleteGlobalNetwork(
     args: DeleteGlobalNetworkCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DeleteGlobalNetworkCommandOutput) => void
   ): void;
-  public deleteGlobalNetwork(
-    args: DeleteGlobalNetworkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteGlobalNetworkCommandOutput) => void),
-    cb?: (err: any, data?: DeleteGlobalNetworkCommandOutput) => void
-  ): Promise<DeleteGlobalNetworkCommandOutput> | void {
-    const command = new DeleteGlobalNetworkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an existing link. You must first disassociate the link from any devices and
-   *             customer gateways.</p>
+   * @see {@link DeleteLinkCommand}
    */
-  public deleteLink(args: DeleteLinkCommandInput, options?: __HttpHandlerOptions): Promise<DeleteLinkCommandOutput>;
-  public deleteLink(args: DeleteLinkCommandInput, cb: (err: any, data?: DeleteLinkCommandOutput) => void): void;
-  public deleteLink(
+  deleteLink(
     args: DeleteLinkCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteLinkCommandOutput>;
+  deleteLink(
+    args: DeleteLinkCommandInput,
     cb: (err: any, data?: DeleteLinkCommandOutput) => void
   ): void;
-  public deleteLink(
+  deleteLink(
     args: DeleteLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLinkCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLinkCommandOutput) => void
-  ): Promise<DeleteLinkCommandOutput> | void {
-    const command = new DeleteLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteLinkCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes an existing site. The site cannot be associated with any device or link.</p>
+   * @see {@link DeletePeeringCommand}
    */
-  public deleteSite(args: DeleteSiteCommandInput, options?: __HttpHandlerOptions): Promise<DeleteSiteCommandOutput>;
-  public deleteSite(args: DeleteSiteCommandInput, cb: (err: any, data?: DeleteSiteCommandOutput) => void): void;
-  public deleteSite(
+  deletePeering(
+    args: DeletePeeringCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeletePeeringCommandOutput>;
+  deletePeering(
+    args: DeletePeeringCommandInput,
+    cb: (err: any, data?: DeletePeeringCommandOutput) => void
+  ): void;
+  deletePeering(
+    args: DeletePeeringCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeletePeeringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSiteCommand}
+   */
+  deleteSite(
     args: DeleteSiteCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DeleteSiteCommandOutput>;
+  deleteSite(
+    args: DeleteSiteCommandInput,
     cb: (err: any, data?: DeleteSiteCommandOutput) => void
   ): void;
-  public deleteSite(
+  deleteSite(
     args: DeleteSiteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSiteCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSiteCommandOutput) => void
-  ): Promise<DeleteSiteCommandOutput> | void {
-    const command = new DeleteSiteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DeleteSiteCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deregisters a transit gateway from your global network. This action does not delete
-   *             your transit gateway, or modify any of its attachments. This action removes any customer gateway associations.</p>
+   * @see {@link DeregisterTransitGatewayCommand}
    */
-  public deregisterTransitGateway(
+  deregisterTransitGateway(
     args: DeregisterTransitGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DeregisterTransitGatewayCommandOutput>;
-  public deregisterTransitGateway(
+  deregisterTransitGateway(
     args: DeregisterTransitGatewayCommandInput,
     cb: (err: any, data?: DeregisterTransitGatewayCommandOutput) => void
   ): void;
-  public deregisterTransitGateway(
+  deregisterTransitGateway(
     args: DeregisterTransitGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DeregisterTransitGatewayCommandOutput) => void
   ): void;
-  public deregisterTransitGateway(
-    args: DeregisterTransitGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeregisterTransitGatewayCommandOutput) => void),
-    cb?: (err: any, data?: DeregisterTransitGatewayCommandOutput) => void
-  ): Promise<DeregisterTransitGatewayCommandOutput> | void {
-    const command = new DeregisterTransitGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes one or more global networks. By default, all global networks are
-   *             described. To describe the objects in your global network, you must use the appropriate
-   *                 <code>Get*</code> action. For example, to list the transit gateways in your global
-   *             network, use <a>GetTransitGatewayRegistrations</a>.</p>
+   * @see {@link DescribeGlobalNetworksCommand}
    */
-  public describeGlobalNetworks(
+  describeGlobalNetworks(): Promise<DescribeGlobalNetworksCommandOutput>;
+  describeGlobalNetworks(
     args: DescribeGlobalNetworksCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DescribeGlobalNetworksCommandOutput>;
-  public describeGlobalNetworks(
+  describeGlobalNetworks(
     args: DescribeGlobalNetworksCommandInput,
     cb: (err: any, data?: DescribeGlobalNetworksCommandOutput) => void
   ): void;
-  public describeGlobalNetworks(
+  describeGlobalNetworks(
     args: DescribeGlobalNetworksCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DescribeGlobalNetworksCommandOutput) => void
   ): void;
-  public describeGlobalNetworks(
-    args: DescribeGlobalNetworksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeGlobalNetworksCommandOutput) => void),
-    cb?: (err: any, data?: DescribeGlobalNetworksCommandOutput) => void
-  ): Promise<DescribeGlobalNetworksCommandOutput> | void {
-    const command = new DescribeGlobalNetworksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a customer gateway from a device and a link.</p>
+   * @see {@link DisassociateConnectPeerCommand}
    */
-  public disassociateCustomerGateway(
+  disassociateConnectPeer(
+    args: DisassociateConnectPeerCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<DisassociateConnectPeerCommandOutput>;
+  disassociateConnectPeer(
+    args: DisassociateConnectPeerCommandInput,
+    cb: (err: any, data?: DisassociateConnectPeerCommandOutput) => void
+  ): void;
+  disassociateConnectPeer(
+    args: DisassociateConnectPeerCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: DisassociateConnectPeerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateCustomerGatewayCommand}
+   */
+  disassociateCustomerGateway(
     args: DisassociateCustomerGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DisassociateCustomerGatewayCommandOutput>;
-  public disassociateCustomerGateway(
+  disassociateCustomerGateway(
     args: DisassociateCustomerGatewayCommandInput,
     cb: (err: any, data?: DisassociateCustomerGatewayCommandOutput) => void
   ): void;
-  public disassociateCustomerGateway(
+  disassociateCustomerGateway(
     args: DisassociateCustomerGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DisassociateCustomerGatewayCommandOutput) => void
   ): void;
-  public disassociateCustomerGateway(
-    args: DisassociateCustomerGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateCustomerGatewayCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateCustomerGatewayCommandOutput) => void
-  ): Promise<DisassociateCustomerGatewayCommandOutput> | void {
-    const command = new DisassociateCustomerGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates an existing device from a link. You must first disassociate any customer
-   *             gateways that are associated with the link.</p>
+   * @see {@link DisassociateLinkCommand}
    */
-  public disassociateLink(
+  disassociateLink(
     args: DisassociateLinkCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DisassociateLinkCommandOutput>;
-  public disassociateLink(
+  disassociateLink(
     args: DisassociateLinkCommandInput,
     cb: (err: any, data?: DisassociateLinkCommandOutput) => void
   ): void;
-  public disassociateLink(
+  disassociateLink(
     args: DisassociateLinkCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DisassociateLinkCommandOutput) => void
   ): void;
-  public disassociateLink(
-    args: DisassociateLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateLinkCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateLinkCommandOutput) => void
-  ): Promise<DisassociateLinkCommandOutput> | void {
-    const command = new DisassociateLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a transit gateway Connect peer from a device and link.</p>
+   * @see {@link DisassociateTransitGatewayConnectPeerCommand}
    */
-  public disassociateTransitGatewayConnectPeer(
+  disassociateTransitGatewayConnectPeer(
     args: DisassociateTransitGatewayConnectPeerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<DisassociateTransitGatewayConnectPeerCommandOutput>;
-  public disassociateTransitGatewayConnectPeer(
+  disassociateTransitGatewayConnectPeer(
     args: DisassociateTransitGatewayConnectPeerCommandInput,
     cb: (err: any, data?: DisassociateTransitGatewayConnectPeerCommandOutput) => void
   ): void;
-  public disassociateTransitGatewayConnectPeer(
+  disassociateTransitGatewayConnectPeer(
     args: DisassociateTransitGatewayConnectPeerCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: DisassociateTransitGatewayConnectPeerCommandOutput) => void
   ): void;
-  public disassociateTransitGatewayConnectPeer(
-    args: DisassociateTransitGatewayConnectPeerCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateTransitGatewayConnectPeerCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateTransitGatewayConnectPeerCommandOutput) => void
-  ): Promise<DisassociateTransitGatewayConnectPeerCommandOutput> | void {
-    const command = new DisassociateTransitGatewayConnectPeerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about one or more of your connections in a global network.</p>
+   * @see {@link ExecuteCoreNetworkChangeSetCommand}
    */
-  public getConnections(
+  executeCoreNetworkChangeSet(
+    args: ExecuteCoreNetworkChangeSetCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ExecuteCoreNetworkChangeSetCommandOutput>;
+  executeCoreNetworkChangeSet(
+    args: ExecuteCoreNetworkChangeSetCommandInput,
+    cb: (err: any, data?: ExecuteCoreNetworkChangeSetCommandOutput) => void
+  ): void;
+  executeCoreNetworkChangeSet(
+    args: ExecuteCoreNetworkChangeSetCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ExecuteCoreNetworkChangeSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectAttachmentCommand}
+   */
+  getConnectAttachment(
+    args: GetConnectAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetConnectAttachmentCommandOutput>;
+  getConnectAttachment(
+    args: GetConnectAttachmentCommandInput,
+    cb: (err: any, data?: GetConnectAttachmentCommandOutput) => void
+  ): void;
+  getConnectAttachment(
+    args: GetConnectAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetConnectAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionsCommand}
+   */
+  getConnections(
     args: GetConnectionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<GetConnectionsCommandOutput>;
-  public getConnections(
+  getConnections(
     args: GetConnectionsCommandInput,
     cb: (err: any, data?: GetConnectionsCommandOutput) => void
   ): void;
-  public getConnections(
+  getConnections(
     args: GetConnectionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: GetConnectionsCommandOutput) => void
   ): void;
-  public getConnections(
-    args: GetConnectionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConnectionsCommandOutput) => void),
-    cb?: (err: any, data?: GetConnectionsCommandOutput) => void
-  ): Promise<GetConnectionsCommandOutput> | void {
-    const command = new GetConnectionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the association information for customer gateways that are associated with
-   *             devices and links in your global network.</p>
+   * @see {@link GetConnectPeerCommand}
    */
-  public getCustomerGatewayAssociations(
+  getConnectPeer(
+    args: GetConnectPeerCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetConnectPeerCommandOutput>;
+  getConnectPeer(
+    args: GetConnectPeerCommandInput,
+    cb: (err: any, data?: GetConnectPeerCommandOutput) => void
+  ): void;
+  getConnectPeer(
+    args: GetConnectPeerCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetConnectPeerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectPeerAssociationsCommand}
+   */
+  getConnectPeerAssociations(
+    args: GetConnectPeerAssociationsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetConnectPeerAssociationsCommandOutput>;
+  getConnectPeerAssociations(
+    args: GetConnectPeerAssociationsCommandInput,
+    cb: (err: any, data?: GetConnectPeerAssociationsCommandOutput) => void
+  ): void;
+  getConnectPeerAssociations(
+    args: GetConnectPeerAssociationsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetConnectPeerAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCoreNetworkCommand}
+   */
+  getCoreNetwork(
+    args: GetCoreNetworkCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetCoreNetworkCommandOutput>;
+  getCoreNetwork(
+    args: GetCoreNetworkCommandInput,
+    cb: (err: any, data?: GetCoreNetworkCommandOutput) => void
+  ): void;
+  getCoreNetwork(
+    args: GetCoreNetworkCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetCoreNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCoreNetworkChangeEventsCommand}
+   */
+  getCoreNetworkChangeEvents(
+    args: GetCoreNetworkChangeEventsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetCoreNetworkChangeEventsCommandOutput>;
+  getCoreNetworkChangeEvents(
+    args: GetCoreNetworkChangeEventsCommandInput,
+    cb: (err: any, data?: GetCoreNetworkChangeEventsCommandOutput) => void
+  ): void;
+  getCoreNetworkChangeEvents(
+    args: GetCoreNetworkChangeEventsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetCoreNetworkChangeEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCoreNetworkChangeSetCommand}
+   */
+  getCoreNetworkChangeSet(
+    args: GetCoreNetworkChangeSetCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetCoreNetworkChangeSetCommandOutput>;
+  getCoreNetworkChangeSet(
+    args: GetCoreNetworkChangeSetCommandInput,
+    cb: (err: any, data?: GetCoreNetworkChangeSetCommandOutput) => void
+  ): void;
+  getCoreNetworkChangeSet(
+    args: GetCoreNetworkChangeSetCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetCoreNetworkChangeSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCoreNetworkPolicyCommand}
+   */
+  getCoreNetworkPolicy(
+    args: GetCoreNetworkPolicyCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetCoreNetworkPolicyCommandOutput>;
+  getCoreNetworkPolicy(
+    args: GetCoreNetworkPolicyCommandInput,
+    cb: (err: any, data?: GetCoreNetworkPolicyCommandOutput) => void
+  ): void;
+  getCoreNetworkPolicy(
+    args: GetCoreNetworkPolicyCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetCoreNetworkPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCustomerGatewayAssociationsCommand}
+   */
+  getCustomerGatewayAssociations(
     args: GetCustomerGatewayAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<GetCustomerGatewayAssociationsCommandOutput>;
-  public getCustomerGatewayAssociations(
+  getCustomerGatewayAssociations(
     args: GetCustomerGatewayAssociationsCommandInput,
     cb: (err: any, data?: GetCustomerGatewayAssociationsCommandOutput) => void
   ): void;
-  public getCustomerGatewayAssociations(
+  getCustomerGatewayAssociations(
     args: GetCustomerGatewayAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: GetCustomerGatewayAssociationsCommandOutput) => void
   ): void;
-  public getCustomerGatewayAssociations(
-    args: GetCustomerGatewayAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCustomerGatewayAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: GetCustomerGatewayAssociationsCommandOutput) => void
-  ): Promise<GetCustomerGatewayAssociationsCommandOutput> | void {
-    const command = new GetCustomerGatewayAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about one or more of your devices in a global network.</p>
+   * @see {@link GetDevicesCommand}
    */
-  public getDevices(args: GetDevicesCommandInput, options?: __HttpHandlerOptions): Promise<GetDevicesCommandOutput>;
-  public getDevices(args: GetDevicesCommandInput, cb: (err: any, data?: GetDevicesCommandOutput) => void): void;
-  public getDevices(
+  getDevices(
     args: GetDevicesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetDevicesCommandOutput>;
+  getDevices(
+    args: GetDevicesCommandInput,
     cb: (err: any, data?: GetDevicesCommandOutput) => void
   ): void;
-  public getDevices(
+  getDevices(
     args: GetDevicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDevicesCommandOutput) => void),
-    cb?: (err: any, data?: GetDevicesCommandOutput) => void
-  ): Promise<GetDevicesCommandOutput> | void {
-    const command = new GetDevicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetDevicesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the link associations for a device or a link. Either the device ID or the link ID
-   *             must be specified.</p>
+   * @see {@link GetDirectConnectGatewayAttachmentCommand}
    */
-  public getLinkAssociations(
+  getDirectConnectGatewayAttachment(
+    args: GetDirectConnectGatewayAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetDirectConnectGatewayAttachmentCommandOutput>;
+  getDirectConnectGatewayAttachment(
+    args: GetDirectConnectGatewayAttachmentCommandInput,
+    cb: (err: any, data?: GetDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+  getDirectConnectGatewayAttachment(
+    args: GetDirectConnectGatewayAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLinkAssociationsCommand}
+   */
+  getLinkAssociations(
     args: GetLinkAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<GetLinkAssociationsCommandOutput>;
-  public getLinkAssociations(
+  getLinkAssociations(
     args: GetLinkAssociationsCommandInput,
     cb: (err: any, data?: GetLinkAssociationsCommandOutput) => void
   ): void;
-  public getLinkAssociations(
+  getLinkAssociations(
     args: GetLinkAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: GetLinkAssociationsCommandOutput) => void
   ): void;
-  public getLinkAssociations(
-    args: GetLinkAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLinkAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: GetLinkAssociationsCommandOutput) => void
-  ): Promise<GetLinkAssociationsCommandOutput> | void {
-    const command = new GetLinkAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about one or more links in a specified global network.</p>
-   *         <p>If you specify the site ID, you cannot specify the type or provider in the same request. You can specify the type and provider in the same request.</p>
+   * @see {@link GetLinksCommand}
    */
-  public getLinks(args: GetLinksCommandInput, options?: __HttpHandlerOptions): Promise<GetLinksCommandOutput>;
-  public getLinks(args: GetLinksCommandInput, cb: (err: any, data?: GetLinksCommandOutput) => void): void;
-  public getLinks(
+  getLinks(
     args: GetLinksCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetLinksCommandOutput>;
+  getLinks(
+    args: GetLinksCommandInput,
     cb: (err: any, data?: GetLinksCommandOutput) => void
   ): void;
-  public getLinks(
+  getLinks(
     args: GetLinksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLinksCommandOutput) => void),
-    cb?: (err: any, data?: GetLinksCommandOutput) => void
-  ): Promise<GetLinksCommandOutput> | void {
-    const command = new GetLinksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetLinksCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about one or more of your sites in a global network.</p>
+   * @see {@link GetNetworkResourceCountsCommand}
    */
-  public getSites(args: GetSitesCommandInput, options?: __HttpHandlerOptions): Promise<GetSitesCommandOutput>;
-  public getSites(args: GetSitesCommandInput, cb: (err: any, data?: GetSitesCommandOutput) => void): void;
-  public getSites(
+  getNetworkResourceCounts(
+    args: GetNetworkResourceCountsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetNetworkResourceCountsCommandOutput>;
+  getNetworkResourceCounts(
+    args: GetNetworkResourceCountsCommandInput,
+    cb: (err: any, data?: GetNetworkResourceCountsCommandOutput) => void
+  ): void;
+  getNetworkResourceCounts(
+    args: GetNetworkResourceCountsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetNetworkResourceCountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkResourceRelationshipsCommand}
+   */
+  getNetworkResourceRelationships(
+    args: GetNetworkResourceRelationshipsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetNetworkResourceRelationshipsCommandOutput>;
+  getNetworkResourceRelationships(
+    args: GetNetworkResourceRelationshipsCommandInput,
+    cb: (err: any, data?: GetNetworkResourceRelationshipsCommandOutput) => void
+  ): void;
+  getNetworkResourceRelationships(
+    args: GetNetworkResourceRelationshipsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetNetworkResourceRelationshipsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkResourcesCommand}
+   */
+  getNetworkResources(
+    args: GetNetworkResourcesCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetNetworkResourcesCommandOutput>;
+  getNetworkResources(
+    args: GetNetworkResourcesCommandInput,
+    cb: (err: any, data?: GetNetworkResourcesCommandOutput) => void
+  ): void;
+  getNetworkResources(
+    args: GetNetworkResourcesCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetNetworkResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkRoutesCommand}
+   */
+  getNetworkRoutes(
+    args: GetNetworkRoutesCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetNetworkRoutesCommandOutput>;
+  getNetworkRoutes(
+    args: GetNetworkRoutesCommandInput,
+    cb: (err: any, data?: GetNetworkRoutesCommandOutput) => void
+  ): void;
+  getNetworkRoutes(
+    args: GetNetworkRoutesCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetNetworkRoutesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkTelemetryCommand}
+   */
+  getNetworkTelemetry(
+    args: GetNetworkTelemetryCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetNetworkTelemetryCommandOutput>;
+  getNetworkTelemetry(
+    args: GetNetworkTelemetryCommandInput,
+    cb: (err: any, data?: GetNetworkTelemetryCommandOutput) => void
+  ): void;
+  getNetworkTelemetry(
+    args: GetNetworkTelemetryCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetNetworkTelemetryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRouteAnalysisCommand}
+   */
+  getRouteAnalysis(
+    args: GetRouteAnalysisCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetRouteAnalysisCommandOutput>;
+  getRouteAnalysis(
+    args: GetRouteAnalysisCommandInput,
+    cb: (err: any, data?: GetRouteAnalysisCommandOutput) => void
+  ): void;
+  getRouteAnalysis(
+    args: GetRouteAnalysisCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetRouteAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSitesCommand}
+   */
+  getSites(
     args: GetSitesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetSitesCommandOutput>;
+  getSites(
+    args: GetSitesCommandInput,
     cb: (err: any, data?: GetSitesCommandOutput) => void
   ): void;
-  public getSites(
+  getSites(
     args: GetSitesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSitesCommandOutput) => void),
-    cb?: (err: any, data?: GetSitesCommandOutput) => void
-  ): Promise<GetSitesCommandOutput> | void {
-    const command = new GetSitesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetSitesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about one or more of your transit gateway Connect peer associations in a global network.</p>
+   * @see {@link GetSiteToSiteVpnAttachmentCommand}
    */
-  public getTransitGatewayConnectPeerAssociations(
+  getSiteToSiteVpnAttachment(
+    args: GetSiteToSiteVpnAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetSiteToSiteVpnAttachmentCommandOutput>;
+  getSiteToSiteVpnAttachment(
+    args: GetSiteToSiteVpnAttachmentCommandInput,
+    cb: (err: any, data?: GetSiteToSiteVpnAttachmentCommandOutput) => void
+  ): void;
+  getSiteToSiteVpnAttachment(
+    args: GetSiteToSiteVpnAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetSiteToSiteVpnAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTransitGatewayConnectPeerAssociationsCommand}
+   */
+  getTransitGatewayConnectPeerAssociations(
     args: GetTransitGatewayConnectPeerAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<GetTransitGatewayConnectPeerAssociationsCommandOutput>;
-  public getTransitGatewayConnectPeerAssociations(
+  getTransitGatewayConnectPeerAssociations(
     args: GetTransitGatewayConnectPeerAssociationsCommandInput,
     cb: (err: any, data?: GetTransitGatewayConnectPeerAssociationsCommandOutput) => void
   ): void;
-  public getTransitGatewayConnectPeerAssociations(
+  getTransitGatewayConnectPeerAssociations(
     args: GetTransitGatewayConnectPeerAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: GetTransitGatewayConnectPeerAssociationsCommandOutput) => void
   ): void;
-  public getTransitGatewayConnectPeerAssociations(
-    args: GetTransitGatewayConnectPeerAssociationsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: GetTransitGatewayConnectPeerAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: GetTransitGatewayConnectPeerAssociationsCommandOutput) => void
-  ): Promise<GetTransitGatewayConnectPeerAssociationsCommandOutput> | void {
-    const command = new GetTransitGatewayConnectPeerAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about the transit gateway registrations in a specified
-   *             global network.</p>
+   * @see {@link GetTransitGatewayPeeringCommand}
    */
-  public getTransitGatewayRegistrations(
+  getTransitGatewayPeering(
+    args: GetTransitGatewayPeeringCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetTransitGatewayPeeringCommandOutput>;
+  getTransitGatewayPeering(
+    args: GetTransitGatewayPeeringCommandInput,
+    cb: (err: any, data?: GetTransitGatewayPeeringCommandOutput) => void
+  ): void;
+  getTransitGatewayPeering(
+    args: GetTransitGatewayPeeringCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetTransitGatewayPeeringCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTransitGatewayRegistrationsCommand}
+   */
+  getTransitGatewayRegistrations(
     args: GetTransitGatewayRegistrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<GetTransitGatewayRegistrationsCommandOutput>;
-  public getTransitGatewayRegistrations(
+  getTransitGatewayRegistrations(
     args: GetTransitGatewayRegistrationsCommandInput,
     cb: (err: any, data?: GetTransitGatewayRegistrationsCommandOutput) => void
   ): void;
-  public getTransitGatewayRegistrations(
+  getTransitGatewayRegistrations(
     args: GetTransitGatewayRegistrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: GetTransitGatewayRegistrationsCommandOutput) => void
   ): void;
-  public getTransitGatewayRegistrations(
-    args: GetTransitGatewayRegistrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTransitGatewayRegistrationsCommandOutput) => void),
-    cb?: (err: any, data?: GetTransitGatewayRegistrationsCommandOutput) => void
-  ): Promise<GetTransitGatewayRegistrationsCommandOutput> | void {
-    const command = new GetTransitGatewayRegistrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for a specified resource.</p>
+   * @see {@link GetTransitGatewayRouteTableAttachmentCommand}
    */
-  public listTagsForResource(
+  getTransitGatewayRouteTableAttachment(
+    args: GetTransitGatewayRouteTableAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetTransitGatewayRouteTableAttachmentCommandOutput>;
+  getTransitGatewayRouteTableAttachment(
+    args: GetTransitGatewayRouteTableAttachmentCommandInput,
+    cb: (err: any, data?: GetTransitGatewayRouteTableAttachmentCommandOutput) => void
+  ): void;
+  getTransitGatewayRouteTableAttachment(
+    args: GetTransitGatewayRouteTableAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetTransitGatewayRouteTableAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVpcAttachmentCommand}
+   */
+  getVpcAttachment(
+    args: GetVpcAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<GetVpcAttachmentCommandOutput>;
+  getVpcAttachment(
+    args: GetVpcAttachmentCommandInput,
+    cb: (err: any, data?: GetVpcAttachmentCommandOutput) => void
+  ): void;
+  getVpcAttachment(
+    args: GetVpcAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: GetVpcAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachmentNatConfigurationsCommand}
+   */
+  listAttachmentNatConfigurations(): Promise<ListAttachmentNatConfigurationsCommandOutput>;
+  listAttachmentNatConfigurations(
+    args: ListAttachmentNatConfigurationsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListAttachmentNatConfigurationsCommandOutput>;
+  listAttachmentNatConfigurations(
+    args: ListAttachmentNatConfigurationsCommandInput,
+    cb: (err: any, data?: ListAttachmentNatConfigurationsCommandOutput) => void
+  ): void;
+  listAttachmentNatConfigurations(
+    args: ListAttachmentNatConfigurationsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListAttachmentNatConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachmentRoutingPolicyAssociationsCommand}
+   */
+  listAttachmentRoutingPolicyAssociations(
+    args: ListAttachmentRoutingPolicyAssociationsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListAttachmentRoutingPolicyAssociationsCommandOutput>;
+  listAttachmentRoutingPolicyAssociations(
+    args: ListAttachmentRoutingPolicyAssociationsCommandInput,
+    cb: (err: any, data?: ListAttachmentRoutingPolicyAssociationsCommandOutput) => void
+  ): void;
+  listAttachmentRoutingPolicyAssociations(
+    args: ListAttachmentRoutingPolicyAssociationsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListAttachmentRoutingPolicyAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachmentsCommand}
+   */
+  listAttachments(): Promise<ListAttachmentsCommandOutput>;
+  listAttachments(
+    args: ListAttachmentsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListAttachmentsCommandOutput>;
+  listAttachments(
+    args: ListAttachmentsCommandInput,
+    cb: (err: any, data?: ListAttachmentsCommandOutput) => void
+  ): void;
+  listAttachments(
+    args: ListAttachmentsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListAttachmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectPeersCommand}
+   */
+  listConnectPeers(): Promise<ListConnectPeersCommandOutput>;
+  listConnectPeers(
+    args: ListConnectPeersCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListConnectPeersCommandOutput>;
+  listConnectPeers(
+    args: ListConnectPeersCommandInput,
+    cb: (err: any, data?: ListConnectPeersCommandOutput) => void
+  ): void;
+  listConnectPeers(
+    args: ListConnectPeersCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListConnectPeersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCoreNetworkPolicyVersionsCommand}
+   */
+  listCoreNetworkPolicyVersions(
+    args: ListCoreNetworkPolicyVersionsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListCoreNetworkPolicyVersionsCommandOutput>;
+  listCoreNetworkPolicyVersions(
+    args: ListCoreNetworkPolicyVersionsCommandInput,
+    cb: (err: any, data?: ListCoreNetworkPolicyVersionsCommandOutput) => void
+  ): void;
+  listCoreNetworkPolicyVersions(
+    args: ListCoreNetworkPolicyVersionsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListCoreNetworkPolicyVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCoreNetworkPrefixListAssociationsCommand}
+   */
+  listCoreNetworkPrefixListAssociations(
+    args: ListCoreNetworkPrefixListAssociationsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListCoreNetworkPrefixListAssociationsCommandOutput>;
+  listCoreNetworkPrefixListAssociations(
+    args: ListCoreNetworkPrefixListAssociationsCommandInput,
+    cb: (err: any, data?: ListCoreNetworkPrefixListAssociationsCommandOutput) => void
+  ): void;
+  listCoreNetworkPrefixListAssociations(
+    args: ListCoreNetworkPrefixListAssociationsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListCoreNetworkPrefixListAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCoreNetworkRoutingInformationCommand}
+   */
+  listCoreNetworkRoutingInformation(
+    args: ListCoreNetworkRoutingInformationCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListCoreNetworkRoutingInformationCommandOutput>;
+  listCoreNetworkRoutingInformation(
+    args: ListCoreNetworkRoutingInformationCommandInput,
+    cb: (err: any, data?: ListCoreNetworkRoutingInformationCommandOutput) => void
+  ): void;
+  listCoreNetworkRoutingInformation(
+    args: ListCoreNetworkRoutingInformationCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListCoreNetworkRoutingInformationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCoreNetworksCommand}
+   */
+  listCoreNetworks(): Promise<ListCoreNetworksCommandOutput>;
+  listCoreNetworks(
+    args: ListCoreNetworksCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListCoreNetworksCommandOutput>;
+  listCoreNetworks(
+    args: ListCoreNetworksCommandInput,
+    cb: (err: any, data?: ListCoreNetworksCommandOutput) => void
+  ): void;
+  listCoreNetworks(
+    args: ListCoreNetworksCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListCoreNetworksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOrganizationServiceAccessStatusCommand}
+   */
+  listOrganizationServiceAccessStatus(): Promise<ListOrganizationServiceAccessStatusCommandOutput>;
+  listOrganizationServiceAccessStatus(
+    args: ListOrganizationServiceAccessStatusCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListOrganizationServiceAccessStatusCommandOutput>;
+  listOrganizationServiceAccessStatus(
+    args: ListOrganizationServiceAccessStatusCommandInput,
+    cb: (err: any, data?: ListOrganizationServiceAccessStatusCommandOutput) => void
+  ): void;
+  listOrganizationServiceAccessStatus(
+    args: ListOrganizationServiceAccessStatusCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListOrganizationServiceAccessStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPeeringsCommand}
+   */
+  listPeerings(): Promise<ListPeeringsCommandOutput>;
+  listPeerings(
+    args: ListPeeringsCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<ListPeeringsCommandOutput>;
+  listPeerings(
+    args: ListPeeringsCommandInput,
+    cb: (err: any, data?: ListPeeringsCommandOutput) => void
+  ): void;
+  listPeerings(
+    args: ListPeeringsCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: ListPeeringsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Registers a transit gateway in your global network. The transit gateway can be in any
-   *             AWS Region, but it must be owned by the same AWS account that owns the global network.
-   *             You cannot register a transit gateway in more than one global network.</p>
+   * @see {@link PutAttachmentRoutingPolicyLabelCommand}
    */
-  public registerTransitGateway(
+  putAttachmentRoutingPolicyLabel(
+    args: PutAttachmentRoutingPolicyLabelCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<PutAttachmentRoutingPolicyLabelCommandOutput>;
+  putAttachmentRoutingPolicyLabel(
+    args: PutAttachmentRoutingPolicyLabelCommandInput,
+    cb: (err: any, data?: PutAttachmentRoutingPolicyLabelCommandOutput) => void
+  ): void;
+  putAttachmentRoutingPolicyLabel(
+    args: PutAttachmentRoutingPolicyLabelCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: PutAttachmentRoutingPolicyLabelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutCoreNetworkPolicyCommand}
+   */
+  putCoreNetworkPolicy(
+    args: PutCoreNetworkPolicyCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<PutCoreNetworkPolicyCommandOutput>;
+  putCoreNetworkPolicy(
+    args: PutCoreNetworkPolicyCommandInput,
+    cb: (err: any, data?: PutCoreNetworkPolicyCommandOutput) => void
+  ): void;
+  putCoreNetworkPolicy(
+    args: PutCoreNetworkPolicyCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: PutCoreNetworkPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterTransitGatewayCommand}
+   */
+  registerTransitGateway(
     args: RegisterTransitGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<RegisterTransitGatewayCommandOutput>;
-  public registerTransitGateway(
+  registerTransitGateway(
     args: RegisterTransitGatewayCommandInput,
     cb: (err: any, data?: RegisterTransitGatewayCommandOutput) => void
   ): void;
-  public registerTransitGateway(
+  registerTransitGateway(
     args: RegisterTransitGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: RegisterTransitGatewayCommandOutput) => void
   ): void;
-  public registerTransitGateway(
-    args: RegisterTransitGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterTransitGatewayCommandOutput) => void),
-    cb?: (err: any, data?: RegisterTransitGatewayCommandOutput) => void
-  ): Promise<RegisterTransitGatewayCommandOutput> | void {
-    const command = new RegisterTransitGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Tags a specified resource.</p>
+   * @see {@link RejectAttachmentCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  rejectAttachment(
+    args: RejectAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<RejectAttachmentCommandOutput>;
+  rejectAttachment(
+    args: RejectAttachmentCommandInput,
+    cb: (err: any, data?: RejectAttachmentCommandOutput) => void
+  ): void;
+  rejectAttachment(
+    args: RejectAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: RejectAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveAttachmentRoutingPolicyLabelCommand}
+   */
+  removeAttachmentRoutingPolicyLabel(
+    args: RemoveAttachmentRoutingPolicyLabelCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<RemoveAttachmentRoutingPolicyLabelCommandOutput>;
+  removeAttachmentRoutingPolicyLabel(
+    args: RemoveAttachmentRoutingPolicyLabelCommandInput,
+    cb: (err: any, data?: RemoveAttachmentRoutingPolicyLabelCommandOutput) => void
+  ): void;
+  removeAttachmentRoutingPolicyLabel(
+    args: RemoveAttachmentRoutingPolicyLabelCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: RemoveAttachmentRoutingPolicyLabelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreCoreNetworkPolicyVersionCommand}
+   */
+  restoreCoreNetworkPolicyVersion(
+    args: RestoreCoreNetworkPolicyVersionCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<RestoreCoreNetworkPolicyVersionCommandOutput>;
+  restoreCoreNetworkPolicyVersion(
+    args: RestoreCoreNetworkPolicyVersionCommandInput,
+    cb: (err: any, data?: RestoreCoreNetworkPolicyVersionCommandOutput) => void
+  ): void;
+  restoreCoreNetworkPolicyVersion(
+    args: RestoreCoreNetworkPolicyVersionCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: RestoreCoreNetworkPolicyVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOrganizationServiceAccessUpdateCommand}
+   */
+  startOrganizationServiceAccessUpdate(
+    args: StartOrganizationServiceAccessUpdateCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<StartOrganizationServiceAccessUpdateCommandOutput>;
+  startOrganizationServiceAccessUpdate(
+    args: StartOrganizationServiceAccessUpdateCommandInput,
+    cb: (err: any, data?: StartOrganizationServiceAccessUpdateCommandOutput) => void
+  ): void;
+  startOrganizationServiceAccessUpdate(
+    args: StartOrganizationServiceAccessUpdateCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: StartOrganizationServiceAccessUpdateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRouteAnalysisCommand}
+   */
+  startRouteAnalysis(
+    args: StartRouteAnalysisCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<StartRouteAnalysisCommandOutput>;
+  startRouteAnalysis(
+    args: StartRouteAnalysisCommandInput,
+    cb: (err: any, data?: StartRouteAnalysisCommandOutput) => void
+  ): void;
+  startRouteAnalysis(
+    args: StartRouteAnalysisCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: StartRouteAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from a specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the information for an existing connection. To remove information for any of the parameters,
-   *             specify an empty string.</p>
+   * @see {@link UpdateAttachmentNatConfigurationCommand}
    */
-  public updateConnection(
+  updateAttachmentNatConfiguration(
+    args: UpdateAttachmentNatConfigurationCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateAttachmentNatConfigurationCommandOutput>;
+  updateAttachmentNatConfiguration(
+    args: UpdateAttachmentNatConfigurationCommandInput,
+    cb: (err: any, data?: UpdateAttachmentNatConfigurationCommandOutput) => void
+  ): void;
+  updateAttachmentNatConfiguration(
+    args: UpdateAttachmentNatConfigurationCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateAttachmentNatConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectionCommand}
+   */
+  updateConnection(
     args: UpdateConnectionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<UpdateConnectionCommandOutput>;
-  public updateConnection(
+  updateConnection(
     args: UpdateConnectionCommandInput,
     cb: (err: any, data?: UpdateConnectionCommandOutput) => void
   ): void;
-  public updateConnection(
+  updateConnection(
     args: UpdateConnectionCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: UpdateConnectionCommandOutput) => void
   ): void;
-  public updateConnection(
-    args: UpdateConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateConnectionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateConnectionCommandOutput) => void
-  ): Promise<UpdateConnectionCommandOutput> | void {
-    const command = new UpdateConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the details for an existing device. To remove information for any of the
-   *             parameters, specify an empty string.</p>
+   * @see {@link UpdateCoreNetworkCommand}
    */
-  public updateDevice(
+  updateCoreNetwork(
+    args: UpdateCoreNetworkCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateCoreNetworkCommandOutput>;
+  updateCoreNetwork(
+    args: UpdateCoreNetworkCommandInput,
+    cb: (err: any, data?: UpdateCoreNetworkCommandOutput) => void
+  ): void;
+  updateCoreNetwork(
+    args: UpdateCoreNetworkCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateCoreNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDeviceCommand}
+   */
+  updateDevice(
     args: UpdateDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<UpdateDeviceCommandOutput>;
-  public updateDevice(args: UpdateDeviceCommandInput, cb: (err: any, data?: UpdateDeviceCommandOutput) => void): void;
-  public updateDevice(
+  updateDevice(
     args: UpdateDeviceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateDeviceCommandOutput) => void
   ): void;
-  public updateDevice(
+  updateDevice(
     args: UpdateDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDeviceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDeviceCommandOutput) => void
-  ): Promise<UpdateDeviceCommandOutput> | void {
-    const command = new UpdateDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates an existing global network. To remove information for any of the parameters,
-   *             specify an empty string.</p>
+   * @see {@link UpdateDirectConnectGatewayAttachmentCommand}
    */
-  public updateGlobalNetwork(
+  updateDirectConnectGatewayAttachment(
+    args: UpdateDirectConnectGatewayAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateDirectConnectGatewayAttachmentCommandOutput>;
+  updateDirectConnectGatewayAttachment(
+    args: UpdateDirectConnectGatewayAttachmentCommandInput,
+    cb: (err: any, data?: UpdateDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+  updateDirectConnectGatewayAttachment(
+    args: UpdateDirectConnectGatewayAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateDirectConnectGatewayAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateGlobalNetworkCommand}
+   */
+  updateGlobalNetwork(
     args: UpdateGlobalNetworkCommandInput,
-    options?: __HttpHandlerOptions
+    options?: NetworkManagerRequestOptions
   ): Promise<UpdateGlobalNetworkCommandOutput>;
-  public updateGlobalNetwork(
+  updateGlobalNetwork(
     args: UpdateGlobalNetworkCommandInput,
     cb: (err: any, data?: UpdateGlobalNetworkCommandOutput) => void
   ): void;
-  public updateGlobalNetwork(
+  updateGlobalNetwork(
     args: UpdateGlobalNetworkCommandInput,
-    options: __HttpHandlerOptions,
+    options: NetworkManagerRequestOptions,
     cb: (err: any, data?: UpdateGlobalNetworkCommandOutput) => void
   ): void;
-  public updateGlobalNetwork(
-    args: UpdateGlobalNetworkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateGlobalNetworkCommandOutput) => void),
-    cb?: (err: any, data?: UpdateGlobalNetworkCommandOutput) => void
-  ): Promise<UpdateGlobalNetworkCommandOutput> | void {
-    const command = new UpdateGlobalNetworkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the details for an existing link. To remove information for any of the
-   *             parameters, specify an empty string.</p>
+   * @see {@link UpdateLinkCommand}
    */
-  public updateLink(args: UpdateLinkCommandInput, options?: __HttpHandlerOptions): Promise<UpdateLinkCommandOutput>;
-  public updateLink(args: UpdateLinkCommandInput, cb: (err: any, data?: UpdateLinkCommandOutput) => void): void;
-  public updateLink(
+  updateLink(
     args: UpdateLinkCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateLinkCommandOutput>;
+  updateLink(
+    args: UpdateLinkCommandInput,
     cb: (err: any, data?: UpdateLinkCommandOutput) => void
   ): void;
-  public updateLink(
+  updateLink(
     args: UpdateLinkCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLinkCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLinkCommandOutput) => void
-  ): Promise<UpdateLinkCommandOutput> | void {
-    const command = new UpdateLinkCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateLinkCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the information for an existing site. To remove information for any of the
-   *             parameters, specify an empty string.</p>
+   * @see {@link UpdateNetworkResourceMetadataCommand}
    */
-  public updateSite(args: UpdateSiteCommandInput, options?: __HttpHandlerOptions): Promise<UpdateSiteCommandOutput>;
-  public updateSite(args: UpdateSiteCommandInput, cb: (err: any, data?: UpdateSiteCommandOutput) => void): void;
-  public updateSite(
+  updateNetworkResourceMetadata(
+    args: UpdateNetworkResourceMetadataCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateNetworkResourceMetadataCommandOutput>;
+  updateNetworkResourceMetadata(
+    args: UpdateNetworkResourceMetadataCommandInput,
+    cb: (err: any, data?: UpdateNetworkResourceMetadataCommandOutput) => void
+  ): void;
+  updateNetworkResourceMetadata(
+    args: UpdateNetworkResourceMetadataCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateNetworkResourceMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSiteCommand}
+   */
+  updateSite(
     args: UpdateSiteCommandInput,
-    options: __HttpHandlerOptions,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateSiteCommandOutput>;
+  updateSite(
+    args: UpdateSiteCommandInput,
     cb: (err: any, data?: UpdateSiteCommandOutput) => void
   ): void;
-  public updateSite(
+  updateSite(
     args: UpdateSiteCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSiteCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSiteCommandOutput) => void
-  ): Promise<UpdateSiteCommandOutput> | void {
-    const command = new UpdateSiteCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateSiteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVpcAttachmentCommand}
+   */
+  updateVpcAttachment(
+    args: UpdateVpcAttachmentCommandInput,
+    options?: NetworkManagerRequestOptions
+  ): Promise<UpdateVpcAttachmentCommandOutput>;
+  updateVpcAttachment(
+    args: UpdateVpcAttachmentCommandInput,
+    cb: (err: any, data?: UpdateVpcAttachmentCommandOutput) => void
+  ): void;
+  updateVpcAttachment(
+    args: UpdateVpcAttachmentCommandInput,
+    options: NetworkManagerRequestOptions,
+    cb: (err: any, data?: UpdateVpcAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeGlobalNetworksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeGlobalNetworksCommandOutput}.
+   */
+  paginateDescribeGlobalNetworks(
+    args?: DescribeGlobalNetworksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeGlobalNetworksCommandOutput>;
+
+  /**
+   * @see {@link GetConnectionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetConnectionsCommandOutput}.
+   */
+  paginateGetConnections(
+    args: GetConnectionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetConnectionsCommandOutput>;
+
+  /**
+   * @see {@link GetConnectPeerAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetConnectPeerAssociationsCommandOutput}.
+   */
+  paginateGetConnectPeerAssociations(
+    args: GetConnectPeerAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetConnectPeerAssociationsCommandOutput>;
+
+  /**
+   * @see {@link GetCoreNetworkChangeEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCoreNetworkChangeEventsCommandOutput}.
+   */
+  paginateGetCoreNetworkChangeEvents(
+    args: GetCoreNetworkChangeEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCoreNetworkChangeEventsCommandOutput>;
+
+  /**
+   * @see {@link GetCoreNetworkChangeSetCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCoreNetworkChangeSetCommandOutput}.
+   */
+  paginateGetCoreNetworkChangeSet(
+    args: GetCoreNetworkChangeSetCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCoreNetworkChangeSetCommandOutput>;
+
+  /**
+   * @see {@link GetCustomerGatewayAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCustomerGatewayAssociationsCommandOutput}.
+   */
+  paginateGetCustomerGatewayAssociations(
+    args: GetCustomerGatewayAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCustomerGatewayAssociationsCommandOutput>;
+
+  /**
+   * @see {@link GetDevicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetDevicesCommandOutput}.
+   */
+  paginateGetDevices(
+    args: GetDevicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetDevicesCommandOutput>;
+
+  /**
+   * @see {@link GetLinkAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetLinkAssociationsCommandOutput}.
+   */
+  paginateGetLinkAssociations(
+    args: GetLinkAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetLinkAssociationsCommandOutput>;
+
+  /**
+   * @see {@link GetLinksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetLinksCommandOutput}.
+   */
+  paginateGetLinks(
+    args: GetLinksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetLinksCommandOutput>;
+
+  /**
+   * @see {@link GetNetworkResourceCountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetNetworkResourceCountsCommandOutput}.
+   */
+  paginateGetNetworkResourceCounts(
+    args: GetNetworkResourceCountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetNetworkResourceCountsCommandOutput>;
+
+  /**
+   * @see {@link GetNetworkResourceRelationshipsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetNetworkResourceRelationshipsCommandOutput}.
+   */
+  paginateGetNetworkResourceRelationships(
+    args: GetNetworkResourceRelationshipsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetNetworkResourceRelationshipsCommandOutput>;
+
+  /**
+   * @see {@link GetNetworkResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetNetworkResourcesCommandOutput}.
+   */
+  paginateGetNetworkResources(
+    args: GetNetworkResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetNetworkResourcesCommandOutput>;
+
+  /**
+   * @see {@link GetNetworkRoutesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetNetworkRoutesCommandOutput}.
+   */
+  paginateGetNetworkRoutes(
+    args: GetNetworkRoutesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetNetworkRoutesCommandOutput>;
+
+  /**
+   * @see {@link GetNetworkTelemetryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetNetworkTelemetryCommandOutput}.
+   */
+  paginateGetNetworkTelemetry(
+    args: GetNetworkTelemetryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetNetworkTelemetryCommandOutput>;
+
+  /**
+   * @see {@link GetSitesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSitesCommandOutput}.
+   */
+  paginateGetSites(
+    args: GetSitesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSitesCommandOutput>;
+
+  /**
+   * @see {@link GetTransitGatewayConnectPeerAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTransitGatewayConnectPeerAssociationsCommandOutput}.
+   */
+  paginateGetTransitGatewayConnectPeerAssociations(
+    args: GetTransitGatewayConnectPeerAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTransitGatewayConnectPeerAssociationsCommandOutput>;
+
+  /**
+   * @see {@link GetTransitGatewayRegistrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTransitGatewayRegistrationsCommandOutput}.
+   */
+  paginateGetTransitGatewayRegistrations(
+    args: GetTransitGatewayRegistrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTransitGatewayRegistrationsCommandOutput>;
+
+  /**
+   * @see {@link ListAttachmentNatConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAttachmentNatConfigurationsCommandOutput}.
+   */
+  paginateListAttachmentNatConfigurations(
+    args?: ListAttachmentNatConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAttachmentNatConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListAttachmentRoutingPolicyAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAttachmentRoutingPolicyAssociationsCommandOutput}.
+   */
+  paginateListAttachmentRoutingPolicyAssociations(
+    args: ListAttachmentRoutingPolicyAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAttachmentRoutingPolicyAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListAttachmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAttachmentsCommandOutput}.
+   */
+  paginateListAttachments(
+    args?: ListAttachmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAttachmentsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectPeersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectPeersCommandOutput}.
+   */
+  paginateListConnectPeers(
+    args?: ListConnectPeersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectPeersCommandOutput>;
+
+  /**
+   * @see {@link ListCoreNetworkPolicyVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoreNetworkPolicyVersionsCommandOutput}.
+   */
+  paginateListCoreNetworkPolicyVersions(
+    args: ListCoreNetworkPolicyVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoreNetworkPolicyVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListCoreNetworkPrefixListAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoreNetworkPrefixListAssociationsCommandOutput}.
+   */
+  paginateListCoreNetworkPrefixListAssociations(
+    args: ListCoreNetworkPrefixListAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoreNetworkPrefixListAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListCoreNetworkRoutingInformationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoreNetworkRoutingInformationCommandOutput}.
+   */
+  paginateListCoreNetworkRoutingInformation(
+    args: ListCoreNetworkRoutingInformationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoreNetworkRoutingInformationCommandOutput>;
+
+  /**
+   * @see {@link ListCoreNetworksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoreNetworksCommandOutput}.
+   */
+  paginateListCoreNetworks(
+    args?: ListCoreNetworksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoreNetworksCommandOutput>;
+
+  /**
+   * @see {@link ListPeeringsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPeeringsCommandOutput}.
+   */
+  paginateListPeerings(
+    args?: ListPeeringsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPeeringsCommandOutput>;
 }
+
+/**
+ * <p>Amazon Web Services enables you to centrally manage your Amazon Web Services Cloud WAN core network and your Transit Gateway network across Amazon Web Services accounts, Regions, and on-premises locations.</p>
+ * @public
+ */
+export class NetworkManager extends NetworkManagerClient implements NetworkManager {}
+createAggregatedClient(commands, NetworkManager, { paginators });

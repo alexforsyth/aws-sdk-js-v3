@@ -1,833 +1,1875 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AddLFTagsToResourceCommandInput,
+  type AddLFTagsToResourceCommandOutput,
   AddLFTagsToResourceCommand,
-  AddLFTagsToResourceCommandInput,
-  AddLFTagsToResourceCommandOutput,
 } from "./commands/AddLFTagsToResourceCommand";
 import {
+  type AssumeDecoratedRoleWithSAMLCommandInput,
+  type AssumeDecoratedRoleWithSAMLCommandOutput,
+  AssumeDecoratedRoleWithSAMLCommand,
+} from "./commands/AssumeDecoratedRoleWithSAMLCommand";
+import {
+  type AttachRLSPolicyCommandInput,
+  type AttachRLSPolicyCommandOutput,
+  AttachRLSPolicyCommand,
+} from "./commands/AttachRLSPolicyCommand";
+import {
+  type BatchGrantPermissionsCommandInput,
+  type BatchGrantPermissionsCommandOutput,
   BatchGrantPermissionsCommand,
-  BatchGrantPermissionsCommandInput,
-  BatchGrantPermissionsCommandOutput,
 } from "./commands/BatchGrantPermissionsCommand";
 import {
+  type BatchRevokePermissionsCommandInput,
+  type BatchRevokePermissionsCommandOutput,
   BatchRevokePermissionsCommand,
-  BatchRevokePermissionsCommandInput,
-  BatchRevokePermissionsCommandOutput,
 } from "./commands/BatchRevokePermissionsCommand";
-import { CreateLFTagCommand, CreateLFTagCommandInput, CreateLFTagCommandOutput } from "./commands/CreateLFTagCommand";
-import { DeleteLFTagCommand, DeleteLFTagCommandInput, DeleteLFTagCommandOutput } from "./commands/DeleteLFTagCommand";
 import {
+  type CancelTransactionCommandInput,
+  type CancelTransactionCommandOutput,
+  CancelTransactionCommand,
+} from "./commands/CancelTransactionCommand";
+import {
+  type CommitTransactionCommandInput,
+  type CommitTransactionCommandOutput,
+  CommitTransactionCommand,
+} from "./commands/CommitTransactionCommand";
+import {
+  type CreateDataCellsFilterCommandInput,
+  type CreateDataCellsFilterCommandOutput,
+  CreateDataCellsFilterCommand,
+} from "./commands/CreateDataCellsFilterCommand";
+import {
+  type CreateLakeFormationIdentityCenterConfigurationCommandInput,
+  type CreateLakeFormationIdentityCenterConfigurationCommandOutput,
+  CreateLakeFormationIdentityCenterConfigurationCommand,
+} from "./commands/CreateLakeFormationIdentityCenterConfigurationCommand";
+import {
+  type CreateLakeFormationOptInCommandInput,
+  type CreateLakeFormationOptInCommandOutput,
+  CreateLakeFormationOptInCommand,
+} from "./commands/CreateLakeFormationOptInCommand";
+import {
+  type CreateLFTagCommandInput,
+  type CreateLFTagCommandOutput,
+  CreateLFTagCommand,
+} from "./commands/CreateLFTagCommand";
+import {
+  type CreateLFTagExpressionCommandInput,
+  type CreateLFTagExpressionCommandOutput,
+  CreateLFTagExpressionCommand,
+} from "./commands/CreateLFTagExpressionCommand";
+import {
+  type CreateRLSPolicyCommandInput,
+  type CreateRLSPolicyCommandOutput,
+  CreateRLSPolicyCommand,
+} from "./commands/CreateRLSPolicyCommand";
+import {
+  type DeleteDataCellsFilterCommandInput,
+  type DeleteDataCellsFilterCommandOutput,
+  DeleteDataCellsFilterCommand,
+} from "./commands/DeleteDataCellsFilterCommand";
+import {
+  type DeleteLakeFormationIdentityCenterConfigurationCommandInput,
+  type DeleteLakeFormationIdentityCenterConfigurationCommandOutput,
+  DeleteLakeFormationIdentityCenterConfigurationCommand,
+} from "./commands/DeleteLakeFormationIdentityCenterConfigurationCommand";
+import {
+  type DeleteLakeFormationOptInCommandInput,
+  type DeleteLakeFormationOptInCommandOutput,
+  DeleteLakeFormationOptInCommand,
+} from "./commands/DeleteLakeFormationOptInCommand";
+import {
+  type DeleteLFTagCommandInput,
+  type DeleteLFTagCommandOutput,
+  DeleteLFTagCommand,
+} from "./commands/DeleteLFTagCommand";
+import {
+  type DeleteLFTagExpressionCommandInput,
+  type DeleteLFTagExpressionCommandOutput,
+  DeleteLFTagExpressionCommand,
+} from "./commands/DeleteLFTagExpressionCommand";
+import {
+  type DeleteObjectsOnCancelCommandInput,
+  type DeleteObjectsOnCancelCommandOutput,
+  DeleteObjectsOnCancelCommand,
+} from "./commands/DeleteObjectsOnCancelCommand";
+import {
+  type DeleteRLSPolicyCommandInput,
+  type DeleteRLSPolicyCommandOutput,
+  DeleteRLSPolicyCommand,
+} from "./commands/DeleteRLSPolicyCommand";
+import {
+  type DeregisterResourceCommandInput,
+  type DeregisterResourceCommandOutput,
   DeregisterResourceCommand,
-  DeregisterResourceCommandInput,
-  DeregisterResourceCommandOutput,
 } from "./commands/DeregisterResourceCommand";
 import {
+  type DescribeLakeFormationIdentityCenterConfigurationCommandInput,
+  type DescribeLakeFormationIdentityCenterConfigurationCommandOutput,
+  DescribeLakeFormationIdentityCenterConfigurationCommand,
+} from "./commands/DescribeLakeFormationIdentityCenterConfigurationCommand";
+import {
+  type DescribeResourceCommandInput,
+  type DescribeResourceCommandOutput,
   DescribeResourceCommand,
-  DescribeResourceCommandInput,
-  DescribeResourceCommandOutput,
 } from "./commands/DescribeResourceCommand";
 import {
+  type DescribeTransactionCommandInput,
+  type DescribeTransactionCommandOutput,
+  DescribeTransactionCommand,
+} from "./commands/DescribeTransactionCommand";
+import {
+  type DetachRLSPolicyCommandInput,
+  type DetachRLSPolicyCommandOutput,
+  DetachRLSPolicyCommand,
+} from "./commands/DetachRLSPolicyCommand";
+import {
+  type ExtendTransactionCommandInput,
+  type ExtendTransactionCommandOutput,
+  ExtendTransactionCommand,
+} from "./commands/ExtendTransactionCommand";
+import {
+  type GetDataCellsFilterCommandInput,
+  type GetDataCellsFilterCommandOutput,
+  GetDataCellsFilterCommand,
+} from "./commands/GetDataCellsFilterCommand";
+import {
+  type GetDataLakePrincipalCommandInput,
+  type GetDataLakePrincipalCommandOutput,
+  GetDataLakePrincipalCommand,
+} from "./commands/GetDataLakePrincipalCommand";
+import {
+  type GetDataLakeSettingsCommandInput,
+  type GetDataLakeSettingsCommandOutput,
   GetDataLakeSettingsCommand,
-  GetDataLakeSettingsCommandInput,
-  GetDataLakeSettingsCommandOutput,
 } from "./commands/GetDataLakeSettingsCommand";
 import {
+  type GetEffectivePermissionsForPathCommandInput,
+  type GetEffectivePermissionsForPathCommandOutput,
   GetEffectivePermissionsForPathCommand,
-  GetEffectivePermissionsForPathCommandInput,
-  GetEffectivePermissionsForPathCommandOutput,
 } from "./commands/GetEffectivePermissionsForPathCommand";
-import { GetLFTagCommand, GetLFTagCommandInput, GetLFTagCommandOutput } from "./commands/GetLFTagCommand";
 import {
+  type GetGlueFunctionSessionContextCommandInput,
+  type GetGlueFunctionSessionContextCommandOutput,
+  GetGlueFunctionSessionContextCommand,
+} from "./commands/GetGlueFunctionSessionContextCommand";
+import { type GetLFTagCommandInput, type GetLFTagCommandOutput, GetLFTagCommand } from "./commands/GetLFTagCommand";
+import {
+  type GetLFTagExpressionCommandInput,
+  type GetLFTagExpressionCommandOutput,
+  GetLFTagExpressionCommand,
+} from "./commands/GetLFTagExpressionCommand";
+import {
+  type GetQueryStateCommandInput,
+  type GetQueryStateCommandOutput,
+  GetQueryStateCommand,
+} from "./commands/GetQueryStateCommand";
+import {
+  type GetQueryStatisticsCommandInput,
+  type GetQueryStatisticsCommandOutput,
+  GetQueryStatisticsCommand,
+} from "./commands/GetQueryStatisticsCommand";
+import {
+  type GetResourceLFTagsCommandInput,
+  type GetResourceLFTagsCommandOutput,
   GetResourceLFTagsCommand,
-  GetResourceLFTagsCommandInput,
-  GetResourceLFTagsCommandOutput,
 } from "./commands/GetResourceLFTagsCommand";
 import {
-  GrantPermissionsCommand,
-  GrantPermissionsCommandInput,
-  GrantPermissionsCommandOutput,
-} from "./commands/GrantPermissionsCommand";
-import { ListLFTagsCommand, ListLFTagsCommandInput, ListLFTagsCommandOutput } from "./commands/ListLFTagsCommand";
+  type GetRLSPolicyCommandInput,
+  type GetRLSPolicyCommandOutput,
+  GetRLSPolicyCommand,
+} from "./commands/GetRLSPolicyCommand";
 import {
+  type GetTableObjectsCommandInput,
+  type GetTableObjectsCommandOutput,
+  GetTableObjectsCommand,
+} from "./commands/GetTableObjectsCommand";
+import {
+  type GetTemporaryDataLocationCredentialsCommandInput,
+  type GetTemporaryDataLocationCredentialsCommandOutput,
+  GetTemporaryDataLocationCredentialsCommand,
+} from "./commands/GetTemporaryDataLocationCredentialsCommand";
+import {
+  type GetTemporaryGlueFunctionCredentialsCommandInput,
+  type GetTemporaryGlueFunctionCredentialsCommandOutput,
+  GetTemporaryGlueFunctionCredentialsCommand,
+} from "./commands/GetTemporaryGlueFunctionCredentialsCommand";
+import {
+  type GetTemporaryGluePartitionCredentialsCommandInput,
+  type GetTemporaryGluePartitionCredentialsCommandOutput,
+  GetTemporaryGluePartitionCredentialsCommand,
+} from "./commands/GetTemporaryGluePartitionCredentialsCommand";
+import {
+  type GetTemporaryGlueTableCredentialsCommandInput,
+  type GetTemporaryGlueTableCredentialsCommandOutput,
+  GetTemporaryGlueTableCredentialsCommand,
+} from "./commands/GetTemporaryGlueTableCredentialsCommand";
+import {
+  type GetWorkUnitResultsCommandInput,
+  type GetWorkUnitResultsCommandOutput,
+  GetWorkUnitResultsCommand,
+} from "./commands/GetWorkUnitResultsCommand";
+import {
+  type GetWorkUnitsCommandInput,
+  type GetWorkUnitsCommandOutput,
+  GetWorkUnitsCommand,
+} from "./commands/GetWorkUnitsCommand";
+import {
+  type GrantPermissionsCommandInput,
+  type GrantPermissionsCommandOutput,
+  GrantPermissionsCommand,
+} from "./commands/GrantPermissionsCommand";
+import {
+  type ListDataCellsFilterCommandInput,
+  type ListDataCellsFilterCommandOutput,
+  ListDataCellsFilterCommand,
+} from "./commands/ListDataCellsFilterCommand";
+import {
+  type ListLakeFormationOptInsCommandInput,
+  type ListLakeFormationOptInsCommandOutput,
+  ListLakeFormationOptInsCommand,
+} from "./commands/ListLakeFormationOptInsCommand";
+import {
+  type ListLFTagExpressionsCommandInput,
+  type ListLFTagExpressionsCommandOutput,
+  ListLFTagExpressionsCommand,
+} from "./commands/ListLFTagExpressionsCommand";
+import {
+  type ListLFTagsCommandInput,
+  type ListLFTagsCommandOutput,
+  ListLFTagsCommand,
+} from "./commands/ListLFTagsCommand";
+import {
+  type ListPermissionsCommandInput,
+  type ListPermissionsCommandOutput,
   ListPermissionsCommand,
-  ListPermissionsCommandInput,
-  ListPermissionsCommandOutput,
 } from "./commands/ListPermissionsCommand";
 import {
+  type ListResourcesCommandInput,
+  type ListResourcesCommandOutput,
   ListResourcesCommand,
-  ListResourcesCommandInput,
-  ListResourcesCommandOutput,
 } from "./commands/ListResourcesCommand";
 import {
+  type ListRLSPoliciesCommandInput,
+  type ListRLSPoliciesCommandOutput,
+  ListRLSPoliciesCommand,
+} from "./commands/ListRLSPoliciesCommand";
+import {
+  type ListRLSPolicyAttachmentsCommandInput,
+  type ListRLSPolicyAttachmentsCommandOutput,
+  ListRLSPolicyAttachmentsCommand,
+} from "./commands/ListRLSPolicyAttachmentsCommand";
+import {
+  type ListTableStorageOptimizersCommandInput,
+  type ListTableStorageOptimizersCommandOutput,
+  ListTableStorageOptimizersCommand,
+} from "./commands/ListTableStorageOptimizersCommand";
+import {
+  type ListTransactionsCommandInput,
+  type ListTransactionsCommandOutput,
+  ListTransactionsCommand,
+} from "./commands/ListTransactionsCommand";
+import {
+  type PutDataLakeSettingsCommandInput,
+  type PutDataLakeSettingsCommandOutput,
   PutDataLakeSettingsCommand,
-  PutDataLakeSettingsCommandInput,
-  PutDataLakeSettingsCommandOutput,
 } from "./commands/PutDataLakeSettingsCommand";
 import {
+  type RegisterResourceCommandInput,
+  type RegisterResourceCommandOutput,
   RegisterResourceCommand,
-  RegisterResourceCommandInput,
-  RegisterResourceCommandOutput,
 } from "./commands/RegisterResourceCommand";
 import {
+  type RemoveLFTagsFromResourceCommandInput,
+  type RemoveLFTagsFromResourceCommandOutput,
   RemoveLFTagsFromResourceCommand,
-  RemoveLFTagsFromResourceCommandInput,
-  RemoveLFTagsFromResourceCommandOutput,
 } from "./commands/RemoveLFTagsFromResourceCommand";
 import {
+  type RevokePermissionsCommandInput,
+  type RevokePermissionsCommandOutput,
   RevokePermissionsCommand,
-  RevokePermissionsCommandInput,
-  RevokePermissionsCommandOutput,
 } from "./commands/RevokePermissionsCommand";
 import {
+  type SearchDatabasesByLFTagsCommandInput,
+  type SearchDatabasesByLFTagsCommandOutput,
   SearchDatabasesByLFTagsCommand,
-  SearchDatabasesByLFTagsCommandInput,
-  SearchDatabasesByLFTagsCommandOutput,
 } from "./commands/SearchDatabasesByLFTagsCommand";
 import {
+  type SearchTablesByLFTagsCommandInput,
+  type SearchTablesByLFTagsCommandOutput,
   SearchTablesByLFTagsCommand,
-  SearchTablesByLFTagsCommandInput,
-  SearchTablesByLFTagsCommandOutput,
 } from "./commands/SearchTablesByLFTagsCommand";
-import { UpdateLFTagCommand, UpdateLFTagCommandInput, UpdateLFTagCommandOutput } from "./commands/UpdateLFTagCommand";
 import {
+  type StartQueryPlanningCommandInput,
+  type StartQueryPlanningCommandOutput,
+  StartQueryPlanningCommand,
+} from "./commands/StartQueryPlanningCommand";
+import {
+  type StartTransactionCommandInput,
+  type StartTransactionCommandOutput,
+  StartTransactionCommand,
+} from "./commands/StartTransactionCommand";
+import {
+  type UpdateDataCellsFilterCommandInput,
+  type UpdateDataCellsFilterCommandOutput,
+  UpdateDataCellsFilterCommand,
+} from "./commands/UpdateDataCellsFilterCommand";
+import {
+  type UpdateLakeFormationIdentityCenterConfigurationCommandInput,
+  type UpdateLakeFormationIdentityCenterConfigurationCommandOutput,
+  UpdateLakeFormationIdentityCenterConfigurationCommand,
+} from "./commands/UpdateLakeFormationIdentityCenterConfigurationCommand";
+import {
+  type UpdateLFTagCommandInput,
+  type UpdateLFTagCommandOutput,
+  UpdateLFTagCommand,
+} from "./commands/UpdateLFTagCommand";
+import {
+  type UpdateLFTagExpressionCommandInput,
+  type UpdateLFTagExpressionCommandOutput,
+  UpdateLFTagExpressionCommand,
+} from "./commands/UpdateLFTagExpressionCommand";
+import {
+  type UpdateResourceCommandInput,
+  type UpdateResourceCommandOutput,
   UpdateResourceCommand,
-  UpdateResourceCommandInput,
-  UpdateResourceCommandOutput,
 } from "./commands/UpdateResourceCommand";
+import {
+  type UpdateRLSPolicyCommandInput,
+  type UpdateRLSPolicyCommandOutput,
+  UpdateRLSPolicyCommand,
+} from "./commands/UpdateRLSPolicyCommand";
+import {
+  type UpdateTableObjectsCommandInput,
+  type UpdateTableObjectsCommandOutput,
+  UpdateTableObjectsCommand,
+} from "./commands/UpdateTableObjectsCommand";
+import {
+  type UpdateTableStorageOptimizerCommandInput,
+  type UpdateTableStorageOptimizerCommandOutput,
+  UpdateTableStorageOptimizerCommand,
+} from "./commands/UpdateTableStorageOptimizerCommand";
 import { LakeFormationClient } from "./LakeFormationClient";
+import { paginateGetEffectivePermissionsForPath } from "./pagination/GetEffectivePermissionsForPathPaginator";
+import { paginateGetTableObjects } from "./pagination/GetTableObjectsPaginator";
+import { paginateGetWorkUnits } from "./pagination/GetWorkUnitsPaginator";
+import { paginateListDataCellsFilter } from "./pagination/ListDataCellsFilterPaginator";
+import { paginateListLakeFormationOptIns } from "./pagination/ListLakeFormationOptInsPaginator";
+import { paginateListLFTagExpressions } from "./pagination/ListLFTagExpressionsPaginator";
+import { paginateListLFTags } from "./pagination/ListLFTagsPaginator";
+import { paginateListPermissions } from "./pagination/ListPermissionsPaginator";
+import { paginateListResources } from "./pagination/ListResourcesPaginator";
+import { paginateListRLSPolicies } from "./pagination/ListRLSPoliciesPaginator";
+import { paginateListRLSPolicyAttachments } from "./pagination/ListRLSPolicyAttachmentsPaginator";
+import { paginateListTableStorageOptimizers } from "./pagination/ListTableStorageOptimizersPaginator";
+import { paginateListTransactions } from "./pagination/ListTransactionsPaginator";
+import { paginateSearchDatabasesByLFTags } from "./pagination/SearchDatabasesByLFTagsPaginator";
+import { paginateSearchTablesByLFTags } from "./pagination/SearchTablesByLFTagsPaginator";
+
+const commands = {
+  AddLFTagsToResourceCommand,
+  AssumeDecoratedRoleWithSAMLCommand,
+  AttachRLSPolicyCommand,
+  BatchGrantPermissionsCommand,
+  BatchRevokePermissionsCommand,
+  CancelTransactionCommand,
+  CommitTransactionCommand,
+  CreateDataCellsFilterCommand,
+  CreateLakeFormationIdentityCenterConfigurationCommand,
+  CreateLakeFormationOptInCommand,
+  CreateLFTagCommand,
+  CreateLFTagExpressionCommand,
+  CreateRLSPolicyCommand,
+  DeleteDataCellsFilterCommand,
+  DeleteLakeFormationIdentityCenterConfigurationCommand,
+  DeleteLakeFormationOptInCommand,
+  DeleteLFTagCommand,
+  DeleteLFTagExpressionCommand,
+  DeleteObjectsOnCancelCommand,
+  DeleteRLSPolicyCommand,
+  DeregisterResourceCommand,
+  DescribeLakeFormationIdentityCenterConfigurationCommand,
+  DescribeResourceCommand,
+  DescribeTransactionCommand,
+  DetachRLSPolicyCommand,
+  ExtendTransactionCommand,
+  GetDataCellsFilterCommand,
+  GetDataLakePrincipalCommand,
+  GetDataLakeSettingsCommand,
+  GetEffectivePermissionsForPathCommand,
+  GetGlueFunctionSessionContextCommand,
+  GetLFTagCommand,
+  GetLFTagExpressionCommand,
+  GetQueryStateCommand,
+  GetQueryStatisticsCommand,
+  GetResourceLFTagsCommand,
+  GetRLSPolicyCommand,
+  GetTableObjectsCommand,
+  GetTemporaryDataLocationCredentialsCommand,
+  GetTemporaryGlueFunctionCredentialsCommand,
+  GetTemporaryGluePartitionCredentialsCommand,
+  GetTemporaryGlueTableCredentialsCommand,
+  GetWorkUnitResultsCommand,
+  GetWorkUnitsCommand,
+  GrantPermissionsCommand,
+  ListDataCellsFilterCommand,
+  ListLakeFormationOptInsCommand,
+  ListLFTagExpressionsCommand,
+  ListLFTagsCommand,
+  ListPermissionsCommand,
+  ListResourcesCommand,
+  ListRLSPoliciesCommand,
+  ListRLSPolicyAttachmentsCommand,
+  ListTableStorageOptimizersCommand,
+  ListTransactionsCommand,
+  PutDataLakeSettingsCommand,
+  RegisterResourceCommand,
+  RemoveLFTagsFromResourceCommand,
+  RevokePermissionsCommand,
+  SearchDatabasesByLFTagsCommand,
+  SearchTablesByLFTagsCommand,
+  StartQueryPlanningCommand,
+  StartTransactionCommand,
+  UpdateDataCellsFilterCommand,
+  UpdateLakeFormationIdentityCenterConfigurationCommand,
+  UpdateLFTagCommand,
+  UpdateLFTagExpressionCommand,
+  UpdateResourceCommand,
+  UpdateRLSPolicyCommand,
+  UpdateTableObjectsCommand,
+  UpdateTableStorageOptimizerCommand,
+};
+const paginators = {
+  paginateGetEffectivePermissionsForPath,
+  paginateGetTableObjects,
+  paginateGetWorkUnits,
+  paginateListDataCellsFilter,
+  paginateListLakeFormationOptIns,
+  paginateListLFTagExpressions,
+  paginateListLFTags,
+  paginateListPermissions,
+  paginateListResources,
+  paginateListRLSPolicies,
+  paginateListRLSPolicyAttachments,
+  paginateListTableStorageOptimizers,
+  paginateListTransactions,
+  paginateSearchDatabasesByLFTags,
+  paginateSearchTablesByLFTags,
+};
 
 /**
- * <fullname>AWS Lake Formation</fullname>
- *          <p>Defines the public endpoint for the AWS Lake Formation service.</p>
+ * @public
  */
-export class LakeFormation extends LakeFormationClient {
+export interface LakeFormationRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface LakeFormation {
   /**
-   * <p>Attaches one or more tags to an existing resource.</p>
+   * @see {@link AddLFTagsToResourceCommand}
    */
-  public addLFTagsToResource(
+  addLFTagsToResource(
     args: AddLFTagsToResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<AddLFTagsToResourceCommandOutput>;
-  public addLFTagsToResource(
+  addLFTagsToResource(
     args: AddLFTagsToResourceCommandInput,
     cb: (err: any, data?: AddLFTagsToResourceCommandOutput) => void
   ): void;
-  public addLFTagsToResource(
+  addLFTagsToResource(
     args: AddLFTagsToResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: AddLFTagsToResourceCommandOutput) => void
   ): void;
-  public addLFTagsToResource(
-    args: AddLFTagsToResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddLFTagsToResourceCommandOutput) => void),
-    cb?: (err: any, data?: AddLFTagsToResourceCommandOutput) => void
-  ): Promise<AddLFTagsToResourceCommandOutput> | void {
-    const command = new AddLFTagsToResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Batch operation to grant permissions to the principal.</p>
+   * @see {@link AssumeDecoratedRoleWithSAMLCommand}
    */
-  public batchGrantPermissions(
+  assumeDecoratedRoleWithSAML(
+    args: AssumeDecoratedRoleWithSAMLCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<AssumeDecoratedRoleWithSAMLCommandOutput>;
+  assumeDecoratedRoleWithSAML(
+    args: AssumeDecoratedRoleWithSAMLCommandInput,
+    cb: (err: any, data?: AssumeDecoratedRoleWithSAMLCommandOutput) => void
+  ): void;
+  assumeDecoratedRoleWithSAML(
+    args: AssumeDecoratedRoleWithSAMLCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: AssumeDecoratedRoleWithSAMLCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachRLSPolicyCommand}
+   */
+  attachRLSPolicy(
+    args: AttachRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<AttachRLSPolicyCommandOutput>;
+  attachRLSPolicy(
+    args: AttachRLSPolicyCommandInput,
+    cb: (err: any, data?: AttachRLSPolicyCommandOutput) => void
+  ): void;
+  attachRLSPolicy(
+    args: AttachRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: AttachRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGrantPermissionsCommand}
+   */
+  batchGrantPermissions(
     args: BatchGrantPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<BatchGrantPermissionsCommandOutput>;
-  public batchGrantPermissions(
+  batchGrantPermissions(
     args: BatchGrantPermissionsCommandInput,
     cb: (err: any, data?: BatchGrantPermissionsCommandOutput) => void
   ): void;
-  public batchGrantPermissions(
+  batchGrantPermissions(
     args: BatchGrantPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: BatchGrantPermissionsCommandOutput) => void
   ): void;
-  public batchGrantPermissions(
-    args: BatchGrantPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGrantPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: BatchGrantPermissionsCommandOutput) => void
-  ): Promise<BatchGrantPermissionsCommandOutput> | void {
-    const command = new BatchGrantPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Batch operation to revoke permissions from the principal.</p>
+   * @see {@link BatchRevokePermissionsCommand}
    */
-  public batchRevokePermissions(
+  batchRevokePermissions(
     args: BatchRevokePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<BatchRevokePermissionsCommandOutput>;
-  public batchRevokePermissions(
+  batchRevokePermissions(
     args: BatchRevokePermissionsCommandInput,
     cb: (err: any, data?: BatchRevokePermissionsCommandOutput) => void
   ): void;
-  public batchRevokePermissions(
+  batchRevokePermissions(
     args: BatchRevokePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: BatchRevokePermissionsCommandOutput) => void
   ): void;
-  public batchRevokePermissions(
-    args: BatchRevokePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchRevokePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: BatchRevokePermissionsCommandOutput) => void
-  ): Promise<BatchRevokePermissionsCommandOutput> | void {
-    const command = new BatchRevokePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a tag with the specified name and values.</p>
+   * @see {@link CancelTransactionCommand}
    */
-  public createLFTag(args: CreateLFTagCommandInput, options?: __HttpHandlerOptions): Promise<CreateLFTagCommandOutput>;
-  public createLFTag(args: CreateLFTagCommandInput, cb: (err: any, data?: CreateLFTagCommandOutput) => void): void;
-  public createLFTag(
+  cancelTransaction(
+    args: CancelTransactionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CancelTransactionCommandOutput>;
+  cancelTransaction(
+    args: CancelTransactionCommandInput,
+    cb: (err: any, data?: CancelTransactionCommandOutput) => void
+  ): void;
+  cancelTransaction(
+    args: CancelTransactionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CancelTransactionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CommitTransactionCommand}
+   */
+  commitTransaction(
+    args: CommitTransactionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CommitTransactionCommandOutput>;
+  commitTransaction(
+    args: CommitTransactionCommandInput,
+    cb: (err: any, data?: CommitTransactionCommandOutput) => void
+  ): void;
+  commitTransaction(
+    args: CommitTransactionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CommitTransactionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataCellsFilterCommand}
+   */
+  createDataCellsFilter(
+    args: CreateDataCellsFilterCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateDataCellsFilterCommandOutput>;
+  createDataCellsFilter(
+    args: CreateDataCellsFilterCommandInput,
+    cb: (err: any, data?: CreateDataCellsFilterCommandOutput) => void
+  ): void;
+  createDataCellsFilter(
+    args: CreateDataCellsFilterCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateDataCellsFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLakeFormationIdentityCenterConfigurationCommand}
+   */
+  createLakeFormationIdentityCenterConfiguration(): Promise<CreateLakeFormationIdentityCenterConfigurationCommandOutput>;
+  createLakeFormationIdentityCenterConfiguration(
+    args: CreateLakeFormationIdentityCenterConfigurationCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateLakeFormationIdentityCenterConfigurationCommandOutput>;
+  createLakeFormationIdentityCenterConfiguration(
+    args: CreateLakeFormationIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: CreateLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  createLakeFormationIdentityCenterConfiguration(
+    args: CreateLakeFormationIdentityCenterConfigurationCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLakeFormationOptInCommand}
+   */
+  createLakeFormationOptIn(
+    args: CreateLakeFormationOptInCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateLakeFormationOptInCommandOutput>;
+  createLakeFormationOptIn(
+    args: CreateLakeFormationOptInCommandInput,
+    cb: (err: any, data?: CreateLakeFormationOptInCommandOutput) => void
+  ): void;
+  createLakeFormationOptIn(
+    args: CreateLakeFormationOptInCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateLakeFormationOptInCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLFTagCommand}
+   */
+  createLFTag(
     args: CreateLFTagCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateLFTagCommandOutput>;
+  createLFTag(
+    args: CreateLFTagCommandInput,
     cb: (err: any, data?: CreateLFTagCommandOutput) => void
   ): void;
-  public createLFTag(
+  createLFTag(
     args: CreateLFTagCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLFTagCommandOutput) => void),
-    cb?: (err: any, data?: CreateLFTagCommandOutput) => void
-  ): Promise<CreateLFTagCommandOutput> | void {
-    const command = new CreateLFTagCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateLFTagCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified tag key name. If the attribute key does not exist or the tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message "Delete not allowed" as the tag key is still attached with resources. You can consider untagging resources with this tag key.</p>
+   * @see {@link CreateLFTagExpressionCommand}
    */
-  public deleteLFTag(args: DeleteLFTagCommandInput, options?: __HttpHandlerOptions): Promise<DeleteLFTagCommandOutput>;
-  public deleteLFTag(args: DeleteLFTagCommandInput, cb: (err: any, data?: DeleteLFTagCommandOutput) => void): void;
-  public deleteLFTag(
+  createLFTagExpression(
+    args: CreateLFTagExpressionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateLFTagExpressionCommandOutput>;
+  createLFTagExpression(
+    args: CreateLFTagExpressionCommandInput,
+    cb: (err: any, data?: CreateLFTagExpressionCommandOutput) => void
+  ): void;
+  createLFTagExpression(
+    args: CreateLFTagExpressionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateLFTagExpressionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRLSPolicyCommand}
+   */
+  createRLSPolicy(
+    args: CreateRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<CreateRLSPolicyCommandOutput>;
+  createRLSPolicy(
+    args: CreateRLSPolicyCommandInput,
+    cb: (err: any, data?: CreateRLSPolicyCommandOutput) => void
+  ): void;
+  createRLSPolicy(
+    args: CreateRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: CreateRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataCellsFilterCommand}
+   */
+  deleteDataCellsFilter(): Promise<DeleteDataCellsFilterCommandOutput>;
+  deleteDataCellsFilter(
+    args: DeleteDataCellsFilterCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteDataCellsFilterCommandOutput>;
+  deleteDataCellsFilter(
+    args: DeleteDataCellsFilterCommandInput,
+    cb: (err: any, data?: DeleteDataCellsFilterCommandOutput) => void
+  ): void;
+  deleteDataCellsFilter(
+    args: DeleteDataCellsFilterCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteDataCellsFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLakeFormationIdentityCenterConfigurationCommand}
+   */
+  deleteLakeFormationIdentityCenterConfiguration(): Promise<DeleteLakeFormationIdentityCenterConfigurationCommandOutput>;
+  deleteLakeFormationIdentityCenterConfiguration(
+    args: DeleteLakeFormationIdentityCenterConfigurationCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteLakeFormationIdentityCenterConfigurationCommandOutput>;
+  deleteLakeFormationIdentityCenterConfiguration(
+    args: DeleteLakeFormationIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: DeleteLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  deleteLakeFormationIdentityCenterConfiguration(
+    args: DeleteLakeFormationIdentityCenterConfigurationCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLakeFormationOptInCommand}
+   */
+  deleteLakeFormationOptIn(
+    args: DeleteLakeFormationOptInCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteLakeFormationOptInCommandOutput>;
+  deleteLakeFormationOptIn(
+    args: DeleteLakeFormationOptInCommandInput,
+    cb: (err: any, data?: DeleteLakeFormationOptInCommandOutput) => void
+  ): void;
+  deleteLakeFormationOptIn(
+    args: DeleteLakeFormationOptInCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteLakeFormationOptInCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLFTagCommand}
+   */
+  deleteLFTag(
     args: DeleteLFTagCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteLFTagCommandOutput>;
+  deleteLFTag(
+    args: DeleteLFTagCommandInput,
     cb: (err: any, data?: DeleteLFTagCommandOutput) => void
   ): void;
-  public deleteLFTag(
+  deleteLFTag(
     args: DeleteLFTagCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLFTagCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLFTagCommandOutput) => void
-  ): Promise<DeleteLFTagCommandOutput> | void {
-    const command = new DeleteLFTagCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteLFTagCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deregisters the resource as managed by the Data Catalog.</p>
-   *
-   *          <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>
+   * @see {@link DeleteLFTagExpressionCommand}
    */
-  public deregisterResource(
+  deleteLFTagExpression(
+    args: DeleteLFTagExpressionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteLFTagExpressionCommandOutput>;
+  deleteLFTagExpression(
+    args: DeleteLFTagExpressionCommandInput,
+    cb: (err: any, data?: DeleteLFTagExpressionCommandOutput) => void
+  ): void;
+  deleteLFTagExpression(
+    args: DeleteLFTagExpressionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteLFTagExpressionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteObjectsOnCancelCommand}
+   */
+  deleteObjectsOnCancel(
+    args: DeleteObjectsOnCancelCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteObjectsOnCancelCommandOutput>;
+  deleteObjectsOnCancel(
+    args: DeleteObjectsOnCancelCommandInput,
+    cb: (err: any, data?: DeleteObjectsOnCancelCommandOutput) => void
+  ): void;
+  deleteObjectsOnCancel(
+    args: DeleteObjectsOnCancelCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteObjectsOnCancelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRLSPolicyCommand}
+   */
+  deleteRLSPolicy(
+    args: DeleteRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DeleteRLSPolicyCommandOutput>;
+  deleteRLSPolicy(
+    args: DeleteRLSPolicyCommandInput,
+    cb: (err: any, data?: DeleteRLSPolicyCommandOutput) => void
+  ): void;
+  deleteRLSPolicy(
+    args: DeleteRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DeleteRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterResourceCommand}
+   */
+  deregisterResource(
     args: DeregisterResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<DeregisterResourceCommandOutput>;
-  public deregisterResource(
+  deregisterResource(
     args: DeregisterResourceCommandInput,
     cb: (err: any, data?: DeregisterResourceCommandOutput) => void
   ): void;
-  public deregisterResource(
+  deregisterResource(
     args: DeregisterResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: DeregisterResourceCommandOutput) => void
   ): void;
-  public deregisterResource(
-    args: DeregisterResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeregisterResourceCommandOutput) => void),
-    cb?: (err: any, data?: DeregisterResourceCommandOutput) => void
-  ): Promise<DeregisterResourceCommandOutput> | void {
-    const command = new DeregisterResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the current data access role for the given resource registered in AWS Lake Formation.</p>
+   * @see {@link DescribeLakeFormationIdentityCenterConfigurationCommand}
    */
-  public describeResource(
+  describeLakeFormationIdentityCenterConfiguration(): Promise<DescribeLakeFormationIdentityCenterConfigurationCommandOutput>;
+  describeLakeFormationIdentityCenterConfiguration(
+    args: DescribeLakeFormationIdentityCenterConfigurationCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DescribeLakeFormationIdentityCenterConfigurationCommandOutput>;
+  describeLakeFormationIdentityCenterConfiguration(
+    args: DescribeLakeFormationIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: DescribeLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  describeLakeFormationIdentityCenterConfiguration(
+    args: DescribeLakeFormationIdentityCenterConfigurationCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DescribeLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourceCommand}
+   */
+  describeResource(
     args: DescribeResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<DescribeResourceCommandOutput>;
-  public describeResource(
+  describeResource(
     args: DescribeResourceCommandInput,
     cb: (err: any, data?: DescribeResourceCommandOutput) => void
   ): void;
-  public describeResource(
+  describeResource(
     args: DescribeResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: DescribeResourceCommandOutput) => void
   ): void;
-  public describeResource(
-    args: DescribeResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResourceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResourceCommandOutput) => void
-  ): Promise<DescribeResourceCommandOutput> | void {
-    const command = new DescribeResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. </p>
+   * @see {@link DescribeTransactionCommand}
    */
-  public getDataLakeSettings(
+  describeTransaction(
+    args: DescribeTransactionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DescribeTransactionCommandOutput>;
+  describeTransaction(
+    args: DescribeTransactionCommandInput,
+    cb: (err: any, data?: DescribeTransactionCommandOutput) => void
+  ): void;
+  describeTransaction(
+    args: DescribeTransactionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DescribeTransactionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachRLSPolicyCommand}
+   */
+  detachRLSPolicy(
+    args: DetachRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<DetachRLSPolicyCommandOutput>;
+  detachRLSPolicy(
+    args: DetachRLSPolicyCommandInput,
+    cb: (err: any, data?: DetachRLSPolicyCommandOutput) => void
+  ): void;
+  detachRLSPolicy(
+    args: DetachRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: DetachRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExtendTransactionCommand}
+   */
+  extendTransaction(): Promise<ExtendTransactionCommandOutput>;
+  extendTransaction(
+    args: ExtendTransactionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ExtendTransactionCommandOutput>;
+  extendTransaction(
+    args: ExtendTransactionCommandInput,
+    cb: (err: any, data?: ExtendTransactionCommandOutput) => void
+  ): void;
+  extendTransaction(
+    args: ExtendTransactionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ExtendTransactionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataCellsFilterCommand}
+   */
+  getDataCellsFilter(
+    args: GetDataCellsFilterCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetDataCellsFilterCommandOutput>;
+  getDataCellsFilter(
+    args: GetDataCellsFilterCommandInput,
+    cb: (err: any, data?: GetDataCellsFilterCommandOutput) => void
+  ): void;
+  getDataCellsFilter(
+    args: GetDataCellsFilterCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetDataCellsFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataLakePrincipalCommand}
+   */
+  getDataLakePrincipal(): Promise<GetDataLakePrincipalCommandOutput>;
+  getDataLakePrincipal(
+    args: GetDataLakePrincipalCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetDataLakePrincipalCommandOutput>;
+  getDataLakePrincipal(
+    args: GetDataLakePrincipalCommandInput,
+    cb: (err: any, data?: GetDataLakePrincipalCommandOutput) => void
+  ): void;
+  getDataLakePrincipal(
+    args: GetDataLakePrincipalCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetDataLakePrincipalCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataLakeSettingsCommand}
+   */
+  getDataLakeSettings(): Promise<GetDataLakeSettingsCommandOutput>;
+  getDataLakeSettings(
     args: GetDataLakeSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<GetDataLakeSettingsCommandOutput>;
-  public getDataLakeSettings(
+  getDataLakeSettings(
     args: GetDataLakeSettingsCommandInput,
     cb: (err: any, data?: GetDataLakeSettingsCommandOutput) => void
   ): void;
-  public getDataLakeSettings(
+  getDataLakeSettings(
     args: GetDataLakeSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: GetDataLakeSettingsCommandOutput) => void
   ): void;
-  public getDataLakeSettings(
-    args: GetDataLakeSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataLakeSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetDataLakeSettingsCommandOutput) => void
-  ): Promise<GetDataLakeSettingsCommandOutput> | void {
-    const command = new GetDataLakeSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the Lake Formation permissions for a specified table or database resource located
-   *       at a path in Amazon S3. <code>GetEffectivePermissionsForPath</code> will not return databases and tables if the catalog is encrypted.</p>
+   * @see {@link GetEffectivePermissionsForPathCommand}
    */
-  public getEffectivePermissionsForPath(
+  getEffectivePermissionsForPath(
     args: GetEffectivePermissionsForPathCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<GetEffectivePermissionsForPathCommandOutput>;
-  public getEffectivePermissionsForPath(
+  getEffectivePermissionsForPath(
     args: GetEffectivePermissionsForPathCommandInput,
     cb: (err: any, data?: GetEffectivePermissionsForPathCommandOutput) => void
   ): void;
-  public getEffectivePermissionsForPath(
+  getEffectivePermissionsForPath(
     args: GetEffectivePermissionsForPathCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: GetEffectivePermissionsForPathCommandOutput) => void
   ): void;
-  public getEffectivePermissionsForPath(
-    args: GetEffectivePermissionsForPathCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEffectivePermissionsForPathCommandOutput) => void),
-    cb?: (err: any, data?: GetEffectivePermissionsForPathCommandOutput) => void
-  ): Promise<GetEffectivePermissionsForPathCommandOutput> | void {
-    const command = new GetEffectivePermissionsForPathCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a tag definition.</p>
+   * @see {@link GetGlueFunctionSessionContextCommand}
    */
-  public getLFTag(args: GetLFTagCommandInput, options?: __HttpHandlerOptions): Promise<GetLFTagCommandOutput>;
-  public getLFTag(args: GetLFTagCommandInput, cb: (err: any, data?: GetLFTagCommandOutput) => void): void;
-  public getLFTag(
+  getGlueFunctionSessionContext(
+    args: GetGlueFunctionSessionContextCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetGlueFunctionSessionContextCommandOutput>;
+  getGlueFunctionSessionContext(
+    args: GetGlueFunctionSessionContextCommandInput,
+    cb: (err: any, data?: GetGlueFunctionSessionContextCommandOutput) => void
+  ): void;
+  getGlueFunctionSessionContext(
+    args: GetGlueFunctionSessionContextCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetGlueFunctionSessionContextCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLFTagCommand}
+   */
+  getLFTag(
     args: GetLFTagCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetLFTagCommandOutput>;
+  getLFTag(
+    args: GetLFTagCommandInput,
     cb: (err: any, data?: GetLFTagCommandOutput) => void
   ): void;
-  public getLFTag(
+  getLFTag(
     args: GetLFTagCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLFTagCommandOutput) => void),
-    cb?: (err: any, data?: GetLFTagCommandOutput) => void
-  ): Promise<GetLFTagCommandOutput> | void {
-    const command = new GetLFTagCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetLFTagCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns the tags applied to a resource.</p>
+   * @see {@link GetLFTagExpressionCommand}
    */
-  public getResourceLFTags(
+  getLFTagExpression(
+    args: GetLFTagExpressionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetLFTagExpressionCommandOutput>;
+  getLFTagExpression(
+    args: GetLFTagExpressionCommandInput,
+    cb: (err: any, data?: GetLFTagExpressionCommandOutput) => void
+  ): void;
+  getLFTagExpression(
+    args: GetLFTagExpressionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetLFTagExpressionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQueryStateCommand}
+   */
+  getQueryState(
+    args: GetQueryStateCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetQueryStateCommandOutput>;
+  getQueryState(
+    args: GetQueryStateCommandInput,
+    cb: (err: any, data?: GetQueryStateCommandOutput) => void
+  ): void;
+  getQueryState(
+    args: GetQueryStateCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetQueryStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQueryStatisticsCommand}
+   */
+  getQueryStatistics(
+    args: GetQueryStatisticsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetQueryStatisticsCommandOutput>;
+  getQueryStatistics(
+    args: GetQueryStatisticsCommandInput,
+    cb: (err: any, data?: GetQueryStatisticsCommandOutput) => void
+  ): void;
+  getQueryStatistics(
+    args: GetQueryStatisticsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetQueryStatisticsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceLFTagsCommand}
+   */
+  getResourceLFTags(
     args: GetResourceLFTagsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<GetResourceLFTagsCommandOutput>;
-  public getResourceLFTags(
+  getResourceLFTags(
     args: GetResourceLFTagsCommandInput,
     cb: (err: any, data?: GetResourceLFTagsCommandOutput) => void
   ): void;
-  public getResourceLFTags(
+  getResourceLFTags(
     args: GetResourceLFTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: GetResourceLFTagsCommandOutput) => void
   ): void;
-  public getResourceLFTags(
-    args: GetResourceLFTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceLFTagsCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceLFTagsCommandOutput) => void
-  ): Promise<GetResourceLFTagsCommandOutput> | void {
-    const command = new GetResourceLFTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>
-   * 	        <p>For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>
+   * @see {@link GetRLSPolicyCommand}
    */
-  public grantPermissions(
+  getRLSPolicy(
+    args: GetRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetRLSPolicyCommandOutput>;
+  getRLSPolicy(
+    args: GetRLSPolicyCommandInput,
+    cb: (err: any, data?: GetRLSPolicyCommandOutput) => void
+  ): void;
+  getRLSPolicy(
+    args: GetRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableObjectsCommand}
+   */
+  getTableObjects(
+    args: GetTableObjectsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetTableObjectsCommandOutput>;
+  getTableObjects(
+    args: GetTableObjectsCommandInput,
+    cb: (err: any, data?: GetTableObjectsCommandOutput) => void
+  ): void;
+  getTableObjects(
+    args: GetTableObjectsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetTableObjectsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemporaryDataLocationCredentialsCommand}
+   */
+  getTemporaryDataLocationCredentials(): Promise<GetTemporaryDataLocationCredentialsCommandOutput>;
+  getTemporaryDataLocationCredentials(
+    args: GetTemporaryDataLocationCredentialsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetTemporaryDataLocationCredentialsCommandOutput>;
+  getTemporaryDataLocationCredentials(
+    args: GetTemporaryDataLocationCredentialsCommandInput,
+    cb: (err: any, data?: GetTemporaryDataLocationCredentialsCommandOutput) => void
+  ): void;
+  getTemporaryDataLocationCredentials(
+    args: GetTemporaryDataLocationCredentialsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetTemporaryDataLocationCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemporaryGlueFunctionCredentialsCommand}
+   */
+  getTemporaryGlueFunctionCredentials(
+    args: GetTemporaryGlueFunctionCredentialsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetTemporaryGlueFunctionCredentialsCommandOutput>;
+  getTemporaryGlueFunctionCredentials(
+    args: GetTemporaryGlueFunctionCredentialsCommandInput,
+    cb: (err: any, data?: GetTemporaryGlueFunctionCredentialsCommandOutput) => void
+  ): void;
+  getTemporaryGlueFunctionCredentials(
+    args: GetTemporaryGlueFunctionCredentialsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetTemporaryGlueFunctionCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemporaryGluePartitionCredentialsCommand}
+   */
+  getTemporaryGluePartitionCredentials(
+    args: GetTemporaryGluePartitionCredentialsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetTemporaryGluePartitionCredentialsCommandOutput>;
+  getTemporaryGluePartitionCredentials(
+    args: GetTemporaryGluePartitionCredentialsCommandInput,
+    cb: (err: any, data?: GetTemporaryGluePartitionCredentialsCommandOutput) => void
+  ): void;
+  getTemporaryGluePartitionCredentials(
+    args: GetTemporaryGluePartitionCredentialsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetTemporaryGluePartitionCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTemporaryGlueTableCredentialsCommand}
+   */
+  getTemporaryGlueTableCredentials(
+    args: GetTemporaryGlueTableCredentialsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetTemporaryGlueTableCredentialsCommandOutput>;
+  getTemporaryGlueTableCredentials(
+    args: GetTemporaryGlueTableCredentialsCommandInput,
+    cb: (err: any, data?: GetTemporaryGlueTableCredentialsCommandOutput) => void
+  ): void;
+  getTemporaryGlueTableCredentials(
+    args: GetTemporaryGlueTableCredentialsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetTemporaryGlueTableCredentialsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkUnitResultsCommand}
+   */
+  getWorkUnitResults(
+    args: GetWorkUnitResultsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetWorkUnitResultsCommandOutput>;
+  getWorkUnitResults(
+    args: GetWorkUnitResultsCommandInput,
+    cb: (err: any, data?: GetWorkUnitResultsCommandOutput) => void
+  ): void;
+  getWorkUnitResults(
+    args: GetWorkUnitResultsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetWorkUnitResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkUnitsCommand}
+   */
+  getWorkUnits(
+    args: GetWorkUnitsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<GetWorkUnitsCommandOutput>;
+  getWorkUnits(
+    args: GetWorkUnitsCommandInput,
+    cb: (err: any, data?: GetWorkUnitsCommandOutput) => void
+  ): void;
+  getWorkUnits(
+    args: GetWorkUnitsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: GetWorkUnitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GrantPermissionsCommand}
+   */
+  grantPermissions(
     args: GrantPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<GrantPermissionsCommandOutput>;
-  public grantPermissions(
+  grantPermissions(
     args: GrantPermissionsCommandInput,
     cb: (err: any, data?: GrantPermissionsCommandOutput) => void
   ): void;
-  public grantPermissions(
+  grantPermissions(
     args: GrantPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: GrantPermissionsCommandOutput) => void
   ): void;
-  public grantPermissions(
-    args: GrantPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GrantPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: GrantPermissionsCommandOutput) => void
-  ): Promise<GrantPermissionsCommandOutput> | void {
-    const command = new GrantPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists tags that the requester has permission to view. </p>
+   * @see {@link ListDataCellsFilterCommand}
    */
-  public listLFTags(args: ListLFTagsCommandInput, options?: __HttpHandlerOptions): Promise<ListLFTagsCommandOutput>;
-  public listLFTags(args: ListLFTagsCommandInput, cb: (err: any, data?: ListLFTagsCommandOutput) => void): void;
-  public listLFTags(
+  listDataCellsFilter(): Promise<ListDataCellsFilterCommandOutput>;
+  listDataCellsFilter(
+    args: ListDataCellsFilterCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListDataCellsFilterCommandOutput>;
+  listDataCellsFilter(
+    args: ListDataCellsFilterCommandInput,
+    cb: (err: any, data?: ListDataCellsFilterCommandOutput) => void
+  ): void;
+  listDataCellsFilter(
+    args: ListDataCellsFilterCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListDataCellsFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLakeFormationOptInsCommand}
+   */
+  listLakeFormationOptIns(): Promise<ListLakeFormationOptInsCommandOutput>;
+  listLakeFormationOptIns(
+    args: ListLakeFormationOptInsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListLakeFormationOptInsCommandOutput>;
+  listLakeFormationOptIns(
+    args: ListLakeFormationOptInsCommandInput,
+    cb: (err: any, data?: ListLakeFormationOptInsCommandOutput) => void
+  ): void;
+  listLakeFormationOptIns(
+    args: ListLakeFormationOptInsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListLakeFormationOptInsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLFTagExpressionsCommand}
+   */
+  listLFTagExpressions(): Promise<ListLFTagExpressionsCommandOutput>;
+  listLFTagExpressions(
+    args: ListLFTagExpressionsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListLFTagExpressionsCommandOutput>;
+  listLFTagExpressions(
+    args: ListLFTagExpressionsCommandInput,
+    cb: (err: any, data?: ListLFTagExpressionsCommandOutput) => void
+  ): void;
+  listLFTagExpressions(
+    args: ListLFTagExpressionsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListLFTagExpressionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLFTagsCommand}
+   */
+  listLFTags(): Promise<ListLFTagsCommandOutput>;
+  listLFTags(
     args: ListLFTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListLFTagsCommandOutput>;
+  listLFTags(
+    args: ListLFTagsCommandInput,
     cb: (err: any, data?: ListLFTagsCommandOutput) => void
   ): void;
-  public listLFTags(
+  listLFTags(
     args: ListLFTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLFTagsCommandOutput) => void),
-    cb?: (err: any, data?: ListLFTagsCommandOutput) => void
-  ): Promise<ListLFTagsCommandOutput> | void {
-    const command = new ListLFTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListLFTagsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>
-   * 	        <p>This operation returns only those permissions that have been explicitly granted.</p>
-   * 	        <p>For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>
+   * @see {@link ListPermissionsCommand}
    */
-  public listPermissions(
+  listPermissions(): Promise<ListPermissionsCommandOutput>;
+  listPermissions(
     args: ListPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<ListPermissionsCommandOutput>;
-  public listPermissions(
+  listPermissions(
     args: ListPermissionsCommandInput,
     cb: (err: any, data?: ListPermissionsCommandOutput) => void
   ): void;
-  public listPermissions(
+  listPermissions(
     args: ListPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: ListPermissionsCommandOutput) => void
   ): void;
-  public listPermissions(
-    args: ListPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: ListPermissionsCommandOutput) => void
-  ): Promise<ListPermissionsCommandOutput> | void {
-    const command = new ListPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the resources registered to be managed by the Data Catalog.</p>
+   * @see {@link ListResourcesCommand}
    */
-  public listResources(
+  listResources(): Promise<ListResourcesCommandOutput>;
+  listResources(
     args: ListResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<ListResourcesCommandOutput>;
-  public listResources(
+  listResources(
     args: ListResourcesCommandInput,
     cb: (err: any, data?: ListResourcesCommandOutput) => void
   ): void;
-  public listResources(
+  listResources(
     args: ListResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: ListResourcesCommandOutput) => void
   ): void;
-  public listResources(
-    args: ListResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListResourcesCommandOutput) => void
-  ): Promise<ListResourcesCommandOutput> | void {
-    const command = new ListResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html">Granting Lake Formation Permissions</a>.</p>
-   *
-   * 	        <p>This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.</p>
+   * @see {@link ListRLSPoliciesCommand}
    */
-  public putDataLakeSettings(
+  listRLSPolicies(): Promise<ListRLSPoliciesCommandOutput>;
+  listRLSPolicies(
+    args: ListRLSPoliciesCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListRLSPoliciesCommandOutput>;
+  listRLSPolicies(
+    args: ListRLSPoliciesCommandInput,
+    cb: (err: any, data?: ListRLSPoliciesCommandOutput) => void
+  ): void;
+  listRLSPolicies(
+    args: ListRLSPoliciesCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListRLSPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRLSPolicyAttachmentsCommand}
+   */
+  listRLSPolicyAttachments(): Promise<ListRLSPolicyAttachmentsCommandOutput>;
+  listRLSPolicyAttachments(
+    args: ListRLSPolicyAttachmentsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListRLSPolicyAttachmentsCommandOutput>;
+  listRLSPolicyAttachments(
+    args: ListRLSPolicyAttachmentsCommandInput,
+    cb: (err: any, data?: ListRLSPolicyAttachmentsCommandOutput) => void
+  ): void;
+  listRLSPolicyAttachments(
+    args: ListRLSPolicyAttachmentsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListRLSPolicyAttachmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTableStorageOptimizersCommand}
+   */
+  listTableStorageOptimizers(
+    args: ListTableStorageOptimizersCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListTableStorageOptimizersCommandOutput>;
+  listTableStorageOptimizers(
+    args: ListTableStorageOptimizersCommandInput,
+    cb: (err: any, data?: ListTableStorageOptimizersCommandOutput) => void
+  ): void;
+  listTableStorageOptimizers(
+    args: ListTableStorageOptimizersCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListTableStorageOptimizersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTransactionsCommand}
+   */
+  listTransactions(): Promise<ListTransactionsCommandOutput>;
+  listTransactions(
+    args: ListTransactionsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<ListTransactionsCommandOutput>;
+  listTransactions(
+    args: ListTransactionsCommandInput,
+    cb: (err: any, data?: ListTransactionsCommandOutput) => void
+  ): void;
+  listTransactions(
+    args: ListTransactionsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: ListTransactionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDataLakeSettingsCommand}
+   */
+  putDataLakeSettings(
     args: PutDataLakeSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<PutDataLakeSettingsCommandOutput>;
-  public putDataLakeSettings(
+  putDataLakeSettings(
     args: PutDataLakeSettingsCommandInput,
     cb: (err: any, data?: PutDataLakeSettingsCommandOutput) => void
   ): void;
-  public putDataLakeSettings(
+  putDataLakeSettings(
     args: PutDataLakeSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: PutDataLakeSettingsCommandOutput) => void
   ): void;
-  public putDataLakeSettings(
-    args: PutDataLakeSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDataLakeSettingsCommandOutput) => void),
-    cb?: (err: any, data?: PutDataLakeSettingsCommandOutput) => void
-  ): Promise<PutDataLakeSettingsCommandOutput> | void {
-    const command = new PutDataLakeSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Registers the resource as managed by the Data Catalog.</p>
-   *
-   * 	        <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>
-   *
-   *          <p>The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.</p>
-   *
-   *          <p>
-   *             <code>ResourceArn = arn:aws:s3:::my-bucket
-   * UseServiceLinkedRole = true</code>
-   *          </p>
-   *
-   * 	        <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>
-   *
-   *          <p>
-   *             <code>arn:aws:iam::12345:role/my-data-access-role</code>
-   *          </p>
+   * @see {@link RegisterResourceCommand}
    */
-  public registerResource(
+  registerResource(
     args: RegisterResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<RegisterResourceCommandOutput>;
-  public registerResource(
+  registerResource(
     args: RegisterResourceCommandInput,
     cb: (err: any, data?: RegisterResourceCommandOutput) => void
   ): void;
-  public registerResource(
+  registerResource(
     args: RegisterResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: RegisterResourceCommandOutput) => void
   ): void;
-  public registerResource(
-    args: RegisterResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterResourceCommandOutput) => void),
-    cb?: (err: any, data?: RegisterResourceCommandOutput) => void
-  ): Promise<RegisterResourceCommandOutput> | void {
-    const command = new RegisterResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>
+   * @see {@link RemoveLFTagsFromResourceCommand}
    */
-  public removeLFTagsFromResource(
+  removeLFTagsFromResource(
     args: RemoveLFTagsFromResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<RemoveLFTagsFromResourceCommandOutput>;
-  public removeLFTagsFromResource(
+  removeLFTagsFromResource(
     args: RemoveLFTagsFromResourceCommandInput,
     cb: (err: any, data?: RemoveLFTagsFromResourceCommandOutput) => void
   ): void;
-  public removeLFTagsFromResource(
+  removeLFTagsFromResource(
     args: RemoveLFTagsFromResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: RemoveLFTagsFromResourceCommandOutput) => void
   ): void;
-  public removeLFTagsFromResource(
-    args: RemoveLFTagsFromResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveLFTagsFromResourceCommandOutput) => void),
-    cb?: (err: any, data?: RemoveLFTagsFromResourceCommandOutput) => void
-  ): Promise<RemoveLFTagsFromResourceCommandOutput> | void {
-    const command = new RemoveLFTagsFromResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>
+   * @see {@link RevokePermissionsCommand}
    */
-  public revokePermissions(
+  revokePermissions(
     args: RevokePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<RevokePermissionsCommandOutput>;
-  public revokePermissions(
+  revokePermissions(
     args: RevokePermissionsCommandInput,
     cb: (err: any, data?: RevokePermissionsCommandOutput) => void
   ): void;
-  public revokePermissions(
+  revokePermissions(
     args: RevokePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: RevokePermissionsCommandOutput) => void
   ): void;
-  public revokePermissions(
-    args: RevokePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RevokePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: RevokePermissionsCommandOutput) => void
-  ): Promise<RevokePermissionsCommandOutput> | void {
-    const command = new RevokePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation allows a search on <code>DATABASE</code> resources by <code>TagCondition</code>. This operation is used by admins who want to grant user permissions on certain <code>TagConditions</code>. Before making a grant, the admin can use <code>SearchDatabasesByTags</code> to find all resources where the given <code>TagConditions</code> are valid to verify whether the returned resources can be shared.</p>
+   * @see {@link SearchDatabasesByLFTagsCommand}
    */
-  public searchDatabasesByLFTags(
+  searchDatabasesByLFTags(
     args: SearchDatabasesByLFTagsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<SearchDatabasesByLFTagsCommandOutput>;
-  public searchDatabasesByLFTags(
+  searchDatabasesByLFTags(
     args: SearchDatabasesByLFTagsCommandInput,
     cb: (err: any, data?: SearchDatabasesByLFTagsCommandOutput) => void
   ): void;
-  public searchDatabasesByLFTags(
+  searchDatabasesByLFTags(
     args: SearchDatabasesByLFTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: SearchDatabasesByLFTagsCommandOutput) => void
   ): void;
-  public searchDatabasesByLFTags(
-    args: SearchDatabasesByLFTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchDatabasesByLFTagsCommandOutput) => void),
-    cb?: (err: any, data?: SearchDatabasesByLFTagsCommandOutput) => void
-  ): Promise<SearchDatabasesByLFTagsCommandOutput> | void {
-    const command = new SearchDatabasesByLFTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>
+   * @see {@link SearchTablesByLFTagsCommand}
    */
-  public searchTablesByLFTags(
+  searchTablesByLFTags(
     args: SearchTablesByLFTagsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<SearchTablesByLFTagsCommandOutput>;
-  public searchTablesByLFTags(
+  searchTablesByLFTags(
     args: SearchTablesByLFTagsCommandInput,
     cb: (err: any, data?: SearchTablesByLFTagsCommandOutput) => void
   ): void;
-  public searchTablesByLFTags(
+  searchTablesByLFTags(
     args: SearchTablesByLFTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: SearchTablesByLFTagsCommandOutput) => void
   ): void;
-  public searchTablesByLFTags(
-    args: SearchTablesByLFTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchTablesByLFTagsCommandOutput) => void),
-    cb?: (err: any, data?: SearchTablesByLFTagsCommandOutput) => void
-  ): Promise<SearchTablesByLFTagsCommandOutput> | void {
-    const command = new SearchTablesByLFTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the list of possible values for the specified tag key. If the tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the tag key's value.  </p>
+   * @see {@link StartQueryPlanningCommand}
    */
-  public updateLFTag(args: UpdateLFTagCommandInput, options?: __HttpHandlerOptions): Promise<UpdateLFTagCommandOutput>;
-  public updateLFTag(args: UpdateLFTagCommandInput, cb: (err: any, data?: UpdateLFTagCommandOutput) => void): void;
-  public updateLFTag(
+  startQueryPlanning(
+    args: StartQueryPlanningCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<StartQueryPlanningCommandOutput>;
+  startQueryPlanning(
+    args: StartQueryPlanningCommandInput,
+    cb: (err: any, data?: StartQueryPlanningCommandOutput) => void
+  ): void;
+  startQueryPlanning(
+    args: StartQueryPlanningCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: StartQueryPlanningCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTransactionCommand}
+   */
+  startTransaction(): Promise<StartTransactionCommandOutput>;
+  startTransaction(
+    args: StartTransactionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<StartTransactionCommandOutput>;
+  startTransaction(
+    args: StartTransactionCommandInput,
+    cb: (err: any, data?: StartTransactionCommandOutput) => void
+  ): void;
+  startTransaction(
+    args: StartTransactionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: StartTransactionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataCellsFilterCommand}
+   */
+  updateDataCellsFilter(
+    args: UpdateDataCellsFilterCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateDataCellsFilterCommandOutput>;
+  updateDataCellsFilter(
+    args: UpdateDataCellsFilterCommandInput,
+    cb: (err: any, data?: UpdateDataCellsFilterCommandOutput) => void
+  ): void;
+  updateDataCellsFilter(
+    args: UpdateDataCellsFilterCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateDataCellsFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLakeFormationIdentityCenterConfigurationCommand}
+   */
+  updateLakeFormationIdentityCenterConfiguration(): Promise<UpdateLakeFormationIdentityCenterConfigurationCommandOutput>;
+  updateLakeFormationIdentityCenterConfiguration(
+    args: UpdateLakeFormationIdentityCenterConfigurationCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateLakeFormationIdentityCenterConfigurationCommandOutput>;
+  updateLakeFormationIdentityCenterConfiguration(
+    args: UpdateLakeFormationIdentityCenterConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+  updateLakeFormationIdentityCenterConfiguration(
+    args: UpdateLakeFormationIdentityCenterConfigurationCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateLakeFormationIdentityCenterConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLFTagCommand}
+   */
+  updateLFTag(
     args: UpdateLFTagCommandInput,
-    options: __HttpHandlerOptions,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateLFTagCommandOutput>;
+  updateLFTag(
+    args: UpdateLFTagCommandInput,
     cb: (err: any, data?: UpdateLFTagCommandOutput) => void
   ): void;
-  public updateLFTag(
+  updateLFTag(
     args: UpdateLFTagCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLFTagCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLFTagCommandOutput) => void
-  ): Promise<UpdateLFTagCommandOutput> | void {
-    const command = new UpdateLFTagCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateLFTagCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. </p>
+   * @see {@link UpdateLFTagExpressionCommand}
    */
-  public updateResource(
+  updateLFTagExpression(
+    args: UpdateLFTagExpressionCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateLFTagExpressionCommandOutput>;
+  updateLFTagExpression(
+    args: UpdateLFTagExpressionCommandInput,
+    cb: (err: any, data?: UpdateLFTagExpressionCommandOutput) => void
+  ): void;
+  updateLFTagExpression(
+    args: UpdateLFTagExpressionCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateLFTagExpressionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateResourceCommand}
+   */
+  updateResource(
     args: UpdateResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: LakeFormationRequestOptions
   ): Promise<UpdateResourceCommandOutput>;
-  public updateResource(
+  updateResource(
     args: UpdateResourceCommandInput,
     cb: (err: any, data?: UpdateResourceCommandOutput) => void
   ): void;
-  public updateResource(
+  updateResource(
     args: UpdateResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: LakeFormationRequestOptions,
     cb: (err: any, data?: UpdateResourceCommandOutput) => void
   ): void;
-  public updateResource(
-    args: UpdateResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceCommandOutput) => void
-  ): Promise<UpdateResourceCommandOutput> | void {
-    const command = new UpdateResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateRLSPolicyCommand}
+   */
+  updateRLSPolicy(
+    args: UpdateRLSPolicyCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateRLSPolicyCommandOutput>;
+  updateRLSPolicy(
+    args: UpdateRLSPolicyCommandInput,
+    cb: (err: any, data?: UpdateRLSPolicyCommandOutput) => void
+  ): void;
+  updateRLSPolicy(
+    args: UpdateRLSPolicyCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateRLSPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTableObjectsCommand}
+   */
+  updateTableObjects(
+    args: UpdateTableObjectsCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateTableObjectsCommandOutput>;
+  updateTableObjects(
+    args: UpdateTableObjectsCommandInput,
+    cb: (err: any, data?: UpdateTableObjectsCommandOutput) => void
+  ): void;
+  updateTableObjects(
+    args: UpdateTableObjectsCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateTableObjectsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTableStorageOptimizerCommand}
+   */
+  updateTableStorageOptimizer(
+    args: UpdateTableStorageOptimizerCommandInput,
+    options?: LakeFormationRequestOptions
+  ): Promise<UpdateTableStorageOptimizerCommandOutput>;
+  updateTableStorageOptimizer(
+    args: UpdateTableStorageOptimizerCommandInput,
+    cb: (err: any, data?: UpdateTableStorageOptimizerCommandOutput) => void
+  ): void;
+  updateTableStorageOptimizer(
+    args: UpdateTableStorageOptimizerCommandInput,
+    options: LakeFormationRequestOptions,
+    cb: (err: any, data?: UpdateTableStorageOptimizerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEffectivePermissionsForPathCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetEffectivePermissionsForPathCommandOutput}.
+   */
+  paginateGetEffectivePermissionsForPath(
+    args: GetEffectivePermissionsForPathCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetEffectivePermissionsForPathCommandOutput>;
+
+  /**
+   * @see {@link GetTableObjectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetTableObjectsCommandOutput}.
+   */
+  paginateGetTableObjects(
+    args: GetTableObjectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetTableObjectsCommandOutput>;
+
+  /**
+   * @see {@link GetWorkUnitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetWorkUnitsCommandOutput}.
+   */
+  paginateGetWorkUnits(
+    args: GetWorkUnitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetWorkUnitsCommandOutput>;
+
+  /**
+   * @see {@link ListDataCellsFilterCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataCellsFilterCommandOutput}.
+   */
+  paginateListDataCellsFilter(
+    args?: ListDataCellsFilterCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataCellsFilterCommandOutput>;
+
+  /**
+   * @see {@link ListLakeFormationOptInsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLakeFormationOptInsCommandOutput}.
+   */
+  paginateListLakeFormationOptIns(
+    args?: ListLakeFormationOptInsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLakeFormationOptInsCommandOutput>;
+
+  /**
+   * @see {@link ListLFTagExpressionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLFTagExpressionsCommandOutput}.
+   */
+  paginateListLFTagExpressions(
+    args?: ListLFTagExpressionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLFTagExpressionsCommandOutput>;
+
+  /**
+   * @see {@link ListLFTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLFTagsCommandOutput}.
+   */
+  paginateListLFTags(
+    args?: ListLFTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLFTagsCommandOutput>;
+
+  /**
+   * @see {@link ListPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPermissionsCommandOutput}.
+   */
+  paginateListPermissions(
+    args?: ListPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourcesCommandOutput}.
+   */
+  paginateListResources(
+    args?: ListResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListRLSPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRLSPoliciesCommandOutput}.
+   */
+  paginateListRLSPolicies(
+    args?: ListRLSPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRLSPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListRLSPolicyAttachmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRLSPolicyAttachmentsCommandOutput}.
+   */
+  paginateListRLSPolicyAttachments(
+    args?: ListRLSPolicyAttachmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRLSPolicyAttachmentsCommandOutput>;
+
+  /**
+   * @see {@link ListTableStorageOptimizersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTableStorageOptimizersCommandOutput}.
+   */
+  paginateListTableStorageOptimizers(
+    args: ListTableStorageOptimizersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTableStorageOptimizersCommandOutput>;
+
+  /**
+   * @see {@link ListTransactionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTransactionsCommandOutput}.
+   */
+  paginateListTransactions(
+    args?: ListTransactionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTransactionsCommandOutput>;
+
+  /**
+   * @see {@link SearchDatabasesByLFTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDatabasesByLFTagsCommandOutput}.
+   */
+  paginateSearchDatabasesByLFTags(
+    args: SearchDatabasesByLFTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDatabasesByLFTagsCommandOutput>;
+
+  /**
+   * @see {@link SearchTablesByLFTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchTablesByLFTagsCommandOutput}.
+   */
+  paginateSearchTablesByLFTags(
+    args: SearchTablesByLFTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchTablesByLFTagsCommandOutput>;
 }
+
+/**
+ * <fullname>Lake Formation</fullname>
+ *          <p>Defines the public endpoint for the Lake Formation service.</p>
+ * @public
+ */
+export class LakeFormation extends LakeFormationClient implements LakeFormation {}
+createAggregatedClient(commands, LakeFormation, { paginators });

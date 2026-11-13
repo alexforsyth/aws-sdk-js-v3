@@ -1,0 +1,934 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BedrockAgentRuntimeClient } from "./BedrockAgentRuntimeClient";
+import {
+  type AgenticRetrieveStreamCommandInput,
+  type AgenticRetrieveStreamCommandOutput,
+  AgenticRetrieveStreamCommand,
+} from "./commands/AgenticRetrieveStreamCommand";
+import {
+  type CheckIngestedDocumentAclCommandInput,
+  type CheckIngestedDocumentAclCommandOutput,
+  CheckIngestedDocumentAclCommand,
+} from "./commands/CheckIngestedDocumentAclCommand";
+import {
+  type CreateInvocationCommandInput,
+  type CreateInvocationCommandOutput,
+  CreateInvocationCommand,
+} from "./commands/CreateInvocationCommand";
+import {
+  type CreateSessionCommandInput,
+  type CreateSessionCommandOutput,
+  CreateSessionCommand,
+} from "./commands/CreateSessionCommand";
+import {
+  type DeleteAgentMemoryCommandInput,
+  type DeleteAgentMemoryCommandOutput,
+  DeleteAgentMemoryCommand,
+} from "./commands/DeleteAgentMemoryCommand";
+import {
+  type DeleteSessionCommandInput,
+  type DeleteSessionCommandOutput,
+  DeleteSessionCommand,
+} from "./commands/DeleteSessionCommand";
+import {
+  type EndSessionCommandInput,
+  type EndSessionCommandOutput,
+  EndSessionCommand,
+} from "./commands/EndSessionCommand";
+import {
+  type GenerateQueryCommandInput,
+  type GenerateQueryCommandOutput,
+  GenerateQueryCommand,
+} from "./commands/GenerateQueryCommand";
+import {
+  type GetAgentMemoryCommandInput,
+  type GetAgentMemoryCommandOutput,
+  GetAgentMemoryCommand,
+} from "./commands/GetAgentMemoryCommand";
+import {
+  type GetDocumentContentCommandInput,
+  type GetDocumentContentCommandOutput,
+  GetDocumentContentCommand,
+} from "./commands/GetDocumentContentCommand";
+import {
+  type GetExecutionFlowSnapshotCommandInput,
+  type GetExecutionFlowSnapshotCommandOutput,
+  GetExecutionFlowSnapshotCommand,
+} from "./commands/GetExecutionFlowSnapshotCommand";
+import {
+  type GetFlowExecutionCommandInput,
+  type GetFlowExecutionCommandOutput,
+  GetFlowExecutionCommand,
+} from "./commands/GetFlowExecutionCommand";
+import {
+  type GetIngestedDocumentAclCommandInput,
+  type GetIngestedDocumentAclCommandOutput,
+  GetIngestedDocumentAclCommand,
+} from "./commands/GetIngestedDocumentAclCommand";
+import {
+  type GetInvocationStepCommandInput,
+  type GetInvocationStepCommandOutput,
+  GetInvocationStepCommand,
+} from "./commands/GetInvocationStepCommand";
+import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type InvokeAgentCommandInput,
+  type InvokeAgentCommandOutput,
+  InvokeAgentCommand,
+} from "./commands/InvokeAgentCommand";
+import {
+  type InvokeFlowCommandInput,
+  type InvokeFlowCommandOutput,
+  InvokeFlowCommand,
+} from "./commands/InvokeFlowCommand";
+import {
+  type InvokeInlineAgentCommandInput,
+  type InvokeInlineAgentCommandOutput,
+  InvokeInlineAgentCommand,
+} from "./commands/InvokeInlineAgentCommand";
+import {
+  type ListFlowExecutionEventsCommandInput,
+  type ListFlowExecutionEventsCommandOutput,
+  ListFlowExecutionEventsCommand,
+} from "./commands/ListFlowExecutionEventsCommand";
+import {
+  type ListFlowExecutionsCommandInput,
+  type ListFlowExecutionsCommandOutput,
+  ListFlowExecutionsCommand,
+} from "./commands/ListFlowExecutionsCommand";
+import {
+  type ListInvocationsCommandInput,
+  type ListInvocationsCommandOutput,
+  ListInvocationsCommand,
+} from "./commands/ListInvocationsCommand";
+import {
+  type ListInvocationStepsCommandInput,
+  type ListInvocationStepsCommandOutput,
+  ListInvocationStepsCommand,
+} from "./commands/ListInvocationStepsCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type OptimizePromptCommandInput,
+  type OptimizePromptCommandOutput,
+  OptimizePromptCommand,
+} from "./commands/OptimizePromptCommand";
+import {
+  type PutInvocationStepCommandInput,
+  type PutInvocationStepCommandOutput,
+  PutInvocationStepCommand,
+} from "./commands/PutInvocationStepCommand";
+import { type RerankCommandInput, type RerankCommandOutput, RerankCommand } from "./commands/RerankCommand";
+import {
+  type RetrieveAndGenerateCommandInput,
+  type RetrieveAndGenerateCommandOutput,
+  RetrieveAndGenerateCommand,
+} from "./commands/RetrieveAndGenerateCommand";
+import {
+  type RetrieveAndGenerateStreamCommandInput,
+  type RetrieveAndGenerateStreamCommandOutput,
+  RetrieveAndGenerateStreamCommand,
+} from "./commands/RetrieveAndGenerateStreamCommand";
+import { type RetrieveCommandInput, type RetrieveCommandOutput, RetrieveCommand } from "./commands/RetrieveCommand";
+import {
+  type StartFlowExecutionCommandInput,
+  type StartFlowExecutionCommandOutput,
+  StartFlowExecutionCommand,
+} from "./commands/StartFlowExecutionCommand";
+import {
+  type StopFlowExecutionCommandInput,
+  type StopFlowExecutionCommandOutput,
+  StopFlowExecutionCommand,
+} from "./commands/StopFlowExecutionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateSessionCommandInput,
+  type UpdateSessionCommandOutput,
+  UpdateSessionCommand,
+} from "./commands/UpdateSessionCommand";
+import { paginateGetAgentMemory } from "./pagination/GetAgentMemoryPaginator";
+import { paginateListFlowExecutionEvents } from "./pagination/ListFlowExecutionEventsPaginator";
+import { paginateListFlowExecutions } from "./pagination/ListFlowExecutionsPaginator";
+import { paginateListInvocations } from "./pagination/ListInvocationsPaginator";
+import { paginateListInvocationSteps } from "./pagination/ListInvocationStepsPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateRerank } from "./pagination/RerankPaginator";
+import { paginateRetrieve } from "./pagination/RetrievePaginator";
+
+const commands = {
+  AgenticRetrieveStreamCommand,
+  CheckIngestedDocumentAclCommand,
+  CreateInvocationCommand,
+  CreateSessionCommand,
+  DeleteAgentMemoryCommand,
+  DeleteSessionCommand,
+  EndSessionCommand,
+  GenerateQueryCommand,
+  GetAgentMemoryCommand,
+  GetDocumentContentCommand,
+  GetExecutionFlowSnapshotCommand,
+  GetFlowExecutionCommand,
+  GetIngestedDocumentAclCommand,
+  GetInvocationStepCommand,
+  GetSessionCommand,
+  InvokeAgentCommand,
+  InvokeFlowCommand,
+  InvokeInlineAgentCommand,
+  ListFlowExecutionEventsCommand,
+  ListFlowExecutionsCommand,
+  ListInvocationsCommand,
+  ListInvocationStepsCommand,
+  ListSessionsCommand,
+  ListTagsForResourceCommand,
+  OptimizePromptCommand,
+  PutInvocationStepCommand,
+  RerankCommand,
+  RetrieveCommand,
+  RetrieveAndGenerateCommand,
+  RetrieveAndGenerateStreamCommand,
+  StartFlowExecutionCommand,
+  StopFlowExecutionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateSessionCommand,
+};
+const paginators = {
+  paginateGetAgentMemory,
+  paginateListFlowExecutionEvents,
+  paginateListFlowExecutions,
+  paginateListInvocations,
+  paginateListInvocationSteps,
+  paginateListSessions,
+  paginateRerank,
+  paginateRetrieve,
+};
+
+/**
+ * @public
+ */
+export interface BedrockAgentRuntimeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface BedrockAgentRuntime {
+  /**
+   * @see {@link AgenticRetrieveStreamCommand}
+   */
+  agenticRetrieveStream(
+    args: AgenticRetrieveStreamCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<AgenticRetrieveStreamCommandOutput>;
+  agenticRetrieveStream(
+    args: AgenticRetrieveStreamCommandInput,
+    cb: (err: any, data?: AgenticRetrieveStreamCommandOutput) => void
+  ): void;
+  agenticRetrieveStream(
+    args: AgenticRetrieveStreamCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: AgenticRetrieveStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CheckIngestedDocumentAclCommand}
+   */
+  checkIngestedDocumentAcl(
+    args: CheckIngestedDocumentAclCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<CheckIngestedDocumentAclCommandOutput>;
+  checkIngestedDocumentAcl(
+    args: CheckIngestedDocumentAclCommandInput,
+    cb: (err: any, data?: CheckIngestedDocumentAclCommandOutput) => void
+  ): void;
+  checkIngestedDocumentAcl(
+    args: CheckIngestedDocumentAclCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: CheckIngestedDocumentAclCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInvocationCommand}
+   */
+  createInvocation(
+    args: CreateInvocationCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<CreateInvocationCommandOutput>;
+  createInvocation(
+    args: CreateInvocationCommandInput,
+    cb: (err: any, data?: CreateInvocationCommandOutput) => void
+  ): void;
+  createInvocation(
+    args: CreateInvocationCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: CreateInvocationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSessionCommand}
+   */
+  createSession(): Promise<CreateSessionCommandOutput>;
+  createSession(
+    args: CreateSessionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<CreateSessionCommandOutput>;
+  createSession(
+    args: CreateSessionCommandInput,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+  createSession(
+    args: CreateSessionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: CreateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAgentMemoryCommand}
+   */
+  deleteAgentMemory(
+    args: DeleteAgentMemoryCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<DeleteAgentMemoryCommandOutput>;
+  deleteAgentMemory(
+    args: DeleteAgentMemoryCommandInput,
+    cb: (err: any, data?: DeleteAgentMemoryCommandOutput) => void
+  ): void;
+  deleteAgentMemory(
+    args: DeleteAgentMemoryCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: DeleteAgentMemoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSessionCommand}
+   */
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<DeleteSessionCommandOutput>;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+  deleteSession(
+    args: DeleteSessionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: DeleteSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EndSessionCommand}
+   */
+  endSession(
+    args: EndSessionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<EndSessionCommandOutput>;
+  endSession(
+    args: EndSessionCommandInput,
+    cb: (err: any, data?: EndSessionCommandOutput) => void
+  ): void;
+  endSession(
+    args: EndSessionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: EndSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateQueryCommand}
+   */
+  generateQuery(
+    args: GenerateQueryCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GenerateQueryCommandOutput>;
+  generateQuery(
+    args: GenerateQueryCommandInput,
+    cb: (err: any, data?: GenerateQueryCommandOutput) => void
+  ): void;
+  generateQuery(
+    args: GenerateQueryCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GenerateQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentMemoryCommand}
+   */
+  getAgentMemory(
+    args: GetAgentMemoryCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetAgentMemoryCommandOutput>;
+  getAgentMemory(
+    args: GetAgentMemoryCommandInput,
+    cb: (err: any, data?: GetAgentMemoryCommandOutput) => void
+  ): void;
+  getAgentMemory(
+    args: GetAgentMemoryCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetAgentMemoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDocumentContentCommand}
+   */
+  getDocumentContent(
+    args: GetDocumentContentCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetDocumentContentCommandOutput>;
+  getDocumentContent(
+    args: GetDocumentContentCommandInput,
+    cb: (err: any, data?: GetDocumentContentCommandOutput) => void
+  ): void;
+  getDocumentContent(
+    args: GetDocumentContentCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetDocumentContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExecutionFlowSnapshotCommand}
+   */
+  getExecutionFlowSnapshot(
+    args: GetExecutionFlowSnapshotCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetExecutionFlowSnapshotCommandOutput>;
+  getExecutionFlowSnapshot(
+    args: GetExecutionFlowSnapshotCommandInput,
+    cb: (err: any, data?: GetExecutionFlowSnapshotCommandOutput) => void
+  ): void;
+  getExecutionFlowSnapshot(
+    args: GetExecutionFlowSnapshotCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetExecutionFlowSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFlowExecutionCommand}
+   */
+  getFlowExecution(
+    args: GetFlowExecutionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetFlowExecutionCommandOutput>;
+  getFlowExecution(
+    args: GetFlowExecutionCommandInput,
+    cb: (err: any, data?: GetFlowExecutionCommandOutput) => void
+  ): void;
+  getFlowExecution(
+    args: GetFlowExecutionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetFlowExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngestedDocumentAclCommand}
+   */
+  getIngestedDocumentAcl(
+    args: GetIngestedDocumentAclCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetIngestedDocumentAclCommandOutput>;
+  getIngestedDocumentAcl(
+    args: GetIngestedDocumentAclCommandInput,
+    cb: (err: any, data?: GetIngestedDocumentAclCommandOutput) => void
+  ): void;
+  getIngestedDocumentAcl(
+    args: GetIngestedDocumentAclCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetIngestedDocumentAclCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInvocationStepCommand}
+   */
+  getInvocationStep(
+    args: GetInvocationStepCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetInvocationStepCommandOutput>;
+  getInvocationStep(
+    args: GetInvocationStepCommandInput,
+    cb: (err: any, data?: GetInvocationStepCommandOutput) => void
+  ): void;
+  getInvocationStep(
+    args: GetInvocationStepCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetInvocationStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionCommand}
+   */
+  getSession(
+    args: GetSessionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+  getSession(
+    args: GetSessionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeAgentCommand}
+   */
+  invokeAgent(
+    args: InvokeAgentCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<InvokeAgentCommandOutput>;
+  invokeAgent(
+    args: InvokeAgentCommandInput,
+    cb: (err: any, data?: InvokeAgentCommandOutput) => void
+  ): void;
+  invokeAgent(
+    args: InvokeAgentCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: InvokeAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeFlowCommand}
+   */
+  invokeFlow(
+    args: InvokeFlowCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<InvokeFlowCommandOutput>;
+  invokeFlow(
+    args: InvokeFlowCommandInput,
+    cb: (err: any, data?: InvokeFlowCommandOutput) => void
+  ): void;
+  invokeFlow(
+    args: InvokeFlowCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: InvokeFlowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InvokeInlineAgentCommand}
+   */
+  invokeInlineAgent(
+    args: InvokeInlineAgentCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<InvokeInlineAgentCommandOutput>;
+  invokeInlineAgent(
+    args: InvokeInlineAgentCommandInput,
+    cb: (err: any, data?: InvokeInlineAgentCommandOutput) => void
+  ): void;
+  invokeInlineAgent(
+    args: InvokeInlineAgentCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: InvokeInlineAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowExecutionEventsCommand}
+   */
+  listFlowExecutionEvents(
+    args: ListFlowExecutionEventsCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListFlowExecutionEventsCommandOutput>;
+  listFlowExecutionEvents(
+    args: ListFlowExecutionEventsCommandInput,
+    cb: (err: any, data?: ListFlowExecutionEventsCommandOutput) => void
+  ): void;
+  listFlowExecutionEvents(
+    args: ListFlowExecutionEventsCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListFlowExecutionEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFlowExecutionsCommand}
+   */
+  listFlowExecutions(
+    args: ListFlowExecutionsCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListFlowExecutionsCommandOutput>;
+  listFlowExecutions(
+    args: ListFlowExecutionsCommandInput,
+    cb: (err: any, data?: ListFlowExecutionsCommandOutput) => void
+  ): void;
+  listFlowExecutions(
+    args: ListFlowExecutionsCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListFlowExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInvocationsCommand}
+   */
+  listInvocations(
+    args: ListInvocationsCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListInvocationsCommandOutput>;
+  listInvocations(
+    args: ListInvocationsCommandInput,
+    cb: (err: any, data?: ListInvocationsCommandOutput) => void
+  ): void;
+  listInvocations(
+    args: ListInvocationsCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListInvocationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInvocationStepsCommand}
+   */
+  listInvocationSteps(
+    args: ListInvocationStepsCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListInvocationStepsCommandOutput>;
+  listInvocationSteps(
+    args: ListInvocationStepsCommandInput,
+    cb: (err: any, data?: ListInvocationStepsCommandOutput) => void
+  ): void;
+  listInvocationSteps(
+    args: ListInvocationStepsCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListInvocationStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OptimizePromptCommand}
+   */
+  optimizePrompt(
+    args: OptimizePromptCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<OptimizePromptCommandOutput>;
+  optimizePrompt(
+    args: OptimizePromptCommandInput,
+    cb: (err: any, data?: OptimizePromptCommandOutput) => void
+  ): void;
+  optimizePrompt(
+    args: OptimizePromptCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: OptimizePromptCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutInvocationStepCommand}
+   */
+  putInvocationStep(
+    args: PutInvocationStepCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<PutInvocationStepCommandOutput>;
+  putInvocationStep(
+    args: PutInvocationStepCommandInput,
+    cb: (err: any, data?: PutInvocationStepCommandOutput) => void
+  ): void;
+  putInvocationStep(
+    args: PutInvocationStepCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: PutInvocationStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RerankCommand}
+   */
+  rerank(
+    args: RerankCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<RerankCommandOutput>;
+  rerank(
+    args: RerankCommandInput,
+    cb: (err: any, data?: RerankCommandOutput) => void
+  ): void;
+  rerank(
+    args: RerankCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: RerankCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetrieveCommand}
+   */
+  retrieve(
+    args: RetrieveCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<RetrieveCommandOutput>;
+  retrieve(
+    args: RetrieveCommandInput,
+    cb: (err: any, data?: RetrieveCommandOutput) => void
+  ): void;
+  retrieve(
+    args: RetrieveCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: RetrieveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetrieveAndGenerateCommand}
+   */
+  retrieveAndGenerate(
+    args: RetrieveAndGenerateCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<RetrieveAndGenerateCommandOutput>;
+  retrieveAndGenerate(
+    args: RetrieveAndGenerateCommandInput,
+    cb: (err: any, data?: RetrieveAndGenerateCommandOutput) => void
+  ): void;
+  retrieveAndGenerate(
+    args: RetrieveAndGenerateCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: RetrieveAndGenerateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetrieveAndGenerateStreamCommand}
+   */
+  retrieveAndGenerateStream(
+    args: RetrieveAndGenerateStreamCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<RetrieveAndGenerateStreamCommandOutput>;
+  retrieveAndGenerateStream(
+    args: RetrieveAndGenerateStreamCommandInput,
+    cb: (err: any, data?: RetrieveAndGenerateStreamCommandOutput) => void
+  ): void;
+  retrieveAndGenerateStream(
+    args: RetrieveAndGenerateStreamCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: RetrieveAndGenerateStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFlowExecutionCommand}
+   */
+  startFlowExecution(
+    args: StartFlowExecutionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<StartFlowExecutionCommandOutput>;
+  startFlowExecution(
+    args: StartFlowExecutionCommandInput,
+    cb: (err: any, data?: StartFlowExecutionCommandOutput) => void
+  ): void;
+  startFlowExecution(
+    args: StartFlowExecutionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: StartFlowExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopFlowExecutionCommand}
+   */
+  stopFlowExecution(
+    args: StopFlowExecutionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<StopFlowExecutionCommandOutput>;
+  stopFlowExecution(
+    args: StopFlowExecutionCommandInput,
+    cb: (err: any, data?: StopFlowExecutionCommandOutput) => void
+  ): void;
+  stopFlowExecution(
+    args: StopFlowExecutionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: StopFlowExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSessionCommand}
+   */
+  updateSession(
+    args: UpdateSessionCommandInput,
+    options?: BedrockAgentRuntimeRequestOptions
+  ): Promise<UpdateSessionCommandOutput>;
+  updateSession(
+    args: UpdateSessionCommandInput,
+    cb: (err: any, data?: UpdateSessionCommandOutput) => void
+  ): void;
+  updateSession(
+    args: UpdateSessionCommandInput,
+    options: BedrockAgentRuntimeRequestOptions,
+    cb: (err: any, data?: UpdateSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAgentMemoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAgentMemoryCommandOutput}.
+   */
+  paginateGetAgentMemory(
+    args: GetAgentMemoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAgentMemoryCommandOutput>;
+
+  /**
+   * @see {@link ListFlowExecutionEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowExecutionEventsCommandOutput}.
+   */
+  paginateListFlowExecutionEvents(
+    args: ListFlowExecutionEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowExecutionEventsCommandOutput>;
+
+  /**
+   * @see {@link ListFlowExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFlowExecutionsCommandOutput}.
+   */
+  paginateListFlowExecutions(
+    args: ListFlowExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFlowExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListInvocationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInvocationsCommandOutput}.
+   */
+  paginateListInvocations(
+    args: ListInvocationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInvocationsCommandOutput>;
+
+  /**
+   * @see {@link ListInvocationStepsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInvocationStepsCommandOutput}.
+   */
+  paginateListInvocationSteps(
+    args: ListInvocationStepsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInvocationStepsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args?: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link RerankCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link RerankCommandOutput}.
+   */
+  paginateRerank(
+    args: RerankCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<RerankCommandOutput>;
+
+  /**
+   * @see {@link RetrieveCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link RetrieveCommandOutput}.
+   */
+  paginateRetrieve(
+    args: RetrieveCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<RetrieveCommandOutput>;
+}
+
+/**
+ * <note> <p>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html">Amazon Bedrock Agents Classic availability change</a>.</p> </note> <p>Contains APIs related to model invocation and querying of knowledge bases.</p>
+ * @public
+ */
+export class BedrockAgentRuntime extends BedrockAgentRuntimeClient implements BedrockAgentRuntime {}
+createAggregatedClient(commands, BedrockAgentRuntime, { paginators });

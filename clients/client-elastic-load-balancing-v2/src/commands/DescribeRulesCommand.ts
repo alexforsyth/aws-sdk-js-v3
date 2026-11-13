@@ -1,100 +1,339 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingV2Client";
-import { DescribeRulesInput, DescribeRulesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeRulesCommand,
-  serializeAws_queryDescribeRulesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRulesInput, DescribeRulesOutput } from "../models/models_0";
+import { DescribeRules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRulesCommand}.
+ */
 export interface DescribeRulesCommandInput extends DescribeRulesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRulesCommand}.
+ */
 export interface DescribeRulesCommandOutput extends DescribeRulesOutput, __MetadataBearer {}
 
 /**
  * <p>Describes the specified rules or the rules for the specified listener. You must specify
- *       either a listener or one or more rules.</p>
+ *       either a listener or rules.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticLoadBalancingV2Client, DescribeRulesCommand } from "@aws-sdk/client-elastic-load-balancing-v2"; // ES Modules import
  * // const { ElasticLoadBalancingV2Client, DescribeRulesCommand } = require("@aws-sdk/client-elastic-load-balancing-v2"); // CommonJS import
+ * // import type { ElasticLoadBalancingV2ClientConfig } from "@aws-sdk/client-elastic-load-balancing-v2";
+ * const config = {}; // type is ElasticLoadBalancingV2ClientConfig
  * const client = new ElasticLoadBalancingV2Client(config);
+ * const input = { // DescribeRulesInput
+ *   ListenerArn: "STRING_VALUE",
+ *   RuleArns: [ // RuleArns
+ *     "STRING_VALUE",
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ * };
  * const command = new DescribeRulesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRulesOutput
+ * //   Rules: [ // Rules
+ * //     { // Rule
+ * //       RuleArn: "STRING_VALUE",
+ * //       Priority: "STRING_VALUE",
+ * //       Conditions: [ // RuleConditionList
+ * //         { // RuleCondition
+ * //           Field: "STRING_VALUE",
+ * //           Values: [ // ListOfString
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           HostHeaderConfig: { // HostHeaderConditionConfig
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             RegexValues: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           PathPatternConfig: { // PathPatternConditionConfig
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             RegexValues: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           HttpHeaderConfig: { // HttpHeaderConditionConfig
+ * //             HttpHeaderName: "STRING_VALUE",
+ * //             Values: "<ListOfString>",
+ * //             RegexValues: "<ListOfString>",
+ * //           },
+ * //           QueryStringConfig: { // QueryStringConditionConfig
+ * //             Values: [ // QueryStringKeyValuePairList
+ * //               { // QueryStringKeyValuePair
+ * //                 Key: "STRING_VALUE",
+ * //                 Value: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //           HttpRequestMethodConfig: { // HttpRequestMethodConditionConfig
+ * //             Values: "<ListOfString>",
+ * //           },
+ * //           SourceIpConfig: { // SourceIpConditionConfig
+ * //             Values: "<ListOfString>",
+ * //             IpAddressType: "ipv4" || "ipv6",
+ * //           },
+ * //           RegexValues: "<ListOfString>",
+ * //         },
+ * //       ],
+ * //       Actions: [ // Actions
+ * //         { // Action
+ * //           Type: "forward" || "authenticate-oidc" || "authenticate-cognito" || "redirect" || "fixed-response" || "jwt-validation", // required
+ * //           TargetGroupArn: "STRING_VALUE",
+ * //           AuthenticateOidcConfig: { // AuthenticateOidcActionConfig
+ * //             Issuer: "STRING_VALUE", // required
+ * //             AuthorizationEndpoint: "STRING_VALUE", // required
+ * //             TokenEndpoint: "STRING_VALUE", // required
+ * //             UserInfoEndpoint: "STRING_VALUE", // required
+ * //             ClientId: "STRING_VALUE", // required
+ * //             ClientSecret: "STRING_VALUE",
+ * //             SessionCookieName: "STRING_VALUE",
+ * //             Scope: "STRING_VALUE",
+ * //             SessionTimeout: Number("long"),
+ * //             AuthenticationRequestExtraParams: { // AuthenticateOidcActionAuthenticationRequestExtraParams
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ * //             UseExistingClientSecret: true || false,
+ * //           },
+ * //           AuthenticateCognitoConfig: { // AuthenticateCognitoActionConfig
+ * //             UserPoolArn: "STRING_VALUE", // required
+ * //             UserPoolClientId: "STRING_VALUE", // required
+ * //             UserPoolDomain: "STRING_VALUE", // required
+ * //             SessionCookieName: "STRING_VALUE",
+ * //             Scope: "STRING_VALUE",
+ * //             SessionTimeout: Number("long"),
+ * //             AuthenticationRequestExtraParams: { // AuthenticateCognitoActionAuthenticationRequestExtraParams
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             OnUnauthenticatedRequest: "deny" || "allow" || "authenticate",
+ * //           },
+ * //           Order: Number("int"),
+ * //           RedirectConfig: { // RedirectActionConfig
+ * //             Protocol: "STRING_VALUE",
+ * //             Port: "STRING_VALUE",
+ * //             Host: "STRING_VALUE",
+ * //             Path: "STRING_VALUE",
+ * //             Query: "STRING_VALUE",
+ * //             StatusCode: "HTTP_301" || "HTTP_302", // required
+ * //           },
+ * //           FixedResponseConfig: { // FixedResponseActionConfig
+ * //             MessageBody: "STRING_VALUE",
+ * //             StatusCode: "STRING_VALUE", // required
+ * //             ContentType: "STRING_VALUE",
+ * //           },
+ * //           ForwardConfig: { // ForwardActionConfig
+ * //             TargetGroups: [ // TargetGroupList
+ * //               { // TargetGroupTuple
+ * //                 TargetGroupArn: "STRING_VALUE",
+ * //                 Weight: Number("int"),
+ * //               },
+ * //             ],
+ * //             TargetGroupStickinessConfig: { // TargetGroupStickinessConfig
+ * //               Enabled: true || false,
+ * //               DurationSeconds: Number("int"),
+ * //             },
+ * //           },
+ * //           JwtValidationConfig: { // JwtValidationActionConfig
+ * //             JwksEndpoint: "STRING_VALUE", // required
+ * //             Issuer: "STRING_VALUE", // required
+ * //             AdditionalClaims: [ // JwtValidationActionAdditionalClaims
+ * //               { // JwtValidationActionAdditionalClaim
+ * //                 Format: "single-string" || "string-array" || "space-separated-values", // required
+ * //                 Name: "STRING_VALUE", // required
+ * //                 Values: [ // JwtValidationActionAdditionalClaimValues // required
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //       IsDefault: true || false,
+ * //       Transforms: [ // RuleTransformList
+ * //         { // RuleTransform
+ * //           Type: "host-header-rewrite" || "url-rewrite", // required
+ * //           HostHeaderRewriteConfig: { // HostHeaderRewriteConfig
+ * //             Rewrites: [ // RewriteConfigList
+ * //               { // RewriteConfig
+ * //                 Regex: "STRING_VALUE", // required
+ * //                 Replace: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //           UrlRewriteConfig: { // UrlRewriteConfig
+ * //             Rewrites: [
+ * //               {
+ * //                 Regex: "STRING_VALUE", // required
+ * //                 Replace: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeRulesCommandInput - {@link DescribeRulesCommandInput}
+ * @returns {@link DescribeRulesCommandOutput}
  * @see {@link DescribeRulesCommandInput} for command's `input` shape.
  * @see {@link DescribeRulesCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingV2ClientResolvedConfig | config} for ElasticLoadBalancingV2Client's `config` shape.
  *
+ * @throws {@link ListenerNotFoundException} (client fault)
+ *  <p>The specified listener does not exist.</p>
+ *
+ * @throws {@link RuleNotFoundException} (client fault)
+ *  <p>The specified rule does not exist.</p>
+ *
+ * @throws {@link UnsupportedProtocolException} (client fault)
+ *  <p>The specified protocol is not supported.</p>
+ *
+ * @throws {@link ElasticLoadBalancingV2ServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancingV2 service.</p>
+ *
+ *
+ * @example To describe a rule
+ * ```javascript
+ * // This example describes the specified rule.
+ * const input = {
+ *   RuleArns: [
+ *     "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee"
+ *   ]
+ * };
+ * const command = new DescribeRulesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Rules: [
+ *     {
+ *       Actions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       Conditions: [
+ *         {
+ *           Field: "path-pattern",
+ *           Values: [
+ *             "/img/*"
+ *           ]
+ *         }
+ *       ],
+ *       IsDefault: false,
+ *       Priority: "10",
+ *       RuleArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example To describe rules for a Network Load Balancer listener
+ * ```javascript
+ * // This example describes the rules for the specified Network Load Balancer listener, including rules that route based on source IP address type.
+ * const input = {
+ *   ListenerArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/net/my-nlb/1234567890abcdef/1234567890abcdef"
+ * };
+ * const command = new DescribeRulesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Rules: [
+ *     {
+ *       Actions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       Conditions: [
+ *         {
+ *           Field: "source-ip",
+ *           SourceIpConfig: {
+ *             IpAddressType: "ipv4"
+ *           }
+ *         }
+ *       ],
+ *       IsDefault: false,
+ *       Priority: "10",
+ *       RuleArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/aabbccdd11223344"
+ *     },
+ *     {
+ *       Actions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv6-targets/abcdef1234567890",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       Conditions: [
+ *         {
+ *           Field: "source-ip",
+ *           SourceIpConfig: {
+ *             IpAddressType: "ipv6"
+ *           }
+ *         }
+ *       ],
+ *       IsDefault: false,
+ *       Priority: "20",
+ *       RuleArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/eeff00112233aabb"
+ *     },
+ *     {
+ *       Actions: [
+ *         {
+ *           TargetGroupArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-ipv4-targets/1234567890abcdef",
+ *           Type: "forward"
+ *         }
+ *       ],
+ *       Conditions:       [],
+ *       IsDefault: true,
+ *       Priority: "default",
+ *       RuleArn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/net/my-nlb/1234567890abcdef/1234567890abcdef/default"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeRulesCommand extends $Command<
-  DescribeRulesCommandInput,
-  DescribeRulesCommandOutput,
-  ElasticLoadBalancingV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRulesCommandInput, DescribeRulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingV2Client";
-    const commandName = "DescribeRulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRulesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRulesOutput.filterSensitiveLog,
+export class DescribeRulesCommand extends command<DescribeRulesCommandInput, DescribeRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRules",
+  DescribeRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRulesInput;
+      output: DescribeRulesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRulesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeRulesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRulesCommandOutput> {
-    return deserializeAws_queryDescribeRulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRulesCommandInput;
+      output: DescribeRulesCommandOutput;
+    };
+  };
 }

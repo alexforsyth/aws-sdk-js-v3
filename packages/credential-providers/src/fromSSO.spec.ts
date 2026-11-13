@@ -1,26 +1,21 @@
-import { SSOClient } from "@aws-sdk/client-sso";
+import { beforeEach, describe, expect, test as it, vi } from "vitest";
+
+vi.mock("@aws-sdk/credential-provider-sso", () => ({
+  fromSSO: vi.fn().mockReturnValue(vi.fn()),
+}));
+
+import { fromSSO as OG } from "@aws-sdk/credential-provider-sso";
 
 import { fromSSO } from "./fromSSO";
 
-jest.mock("@aws-sdk/client-sso", () => ({
-  SSOClient: jest.fn().mockImplementation(function () {
-    return "SSO_CLIENT";
-  }),
-}));
-
 describe("fromSSO", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it("should not inject SSO client if no client config supplied", async () => {
-    fromSSO();
-    expect(SSOClient as jest.Mock).not.toBeCalled();
-  });
-
-  it("should inject SSO client if client config is supplied", async () => {
-    const region = "us-foo-1";
-    fromSSO({ clientConfig: { region } });
-    expect(SSOClient as jest.Mock).toBeCalledWith({ region });
+  it("defers to credential-provider-sso", async () => {
+    const provider = fromSSO();
+    await provider({});
+    expect(vi.mocked(OG)).toHaveBeenCalled();
   });
 });

@@ -1,78 +1,314 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
-import { KitchenSink } from "../models/models_0";
-import {
-  deserializeAws_json1_1KitchenSinkOperationCommand,
-  serializeAws_json1_1KitchenSinkOperationCommand,
-} from "../protocols/Aws_json1_1";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
+import type { KitchenSink } from "../models/models_0";
+import { de_KitchenSinkOperationCommand, se_KitchenSinkOperationCommand } from "../protocols/Aws_json1_1";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link KitchenSinkOperationCommand}.
+ */
 export interface KitchenSinkOperationCommandInput extends KitchenSink {}
+/**
+ * @public
+ *
+ * The output of {@link KitchenSinkOperationCommand}.
+ */
 export interface KitchenSinkOperationCommandOutput extends KitchenSink, __MetadataBearer {}
 
-export class KitchenSinkOperationCommand extends $Command<
-  KitchenSinkOperationCommandInput,
-  KitchenSinkOperationCommandOutput,
-  JsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: KitchenSinkOperationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: JsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<KitchenSinkOperationCommandInput, KitchenSinkOperationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "JsonProtocolClient";
-    const commandName = "KitchenSinkOperationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: KitchenSink.filterSensitiveLog,
-      outputFilterSensitiveLog: KitchenSink.filterSensitiveLog,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { JsonProtocolClient, KitchenSinkOperationCommand } from "@aws-sdk/aws-protocoltests-json"; // ES Modules import
+ * // const { JsonProtocolClient, KitchenSinkOperationCommand } = require("@aws-sdk/aws-protocoltests-json"); // CommonJS import
+ * // import type { JsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-json";
+ * const config = {}; // type is JsonProtocolClientConfig
+ * const client = new JsonProtocolClient(config);
+ * const input = { // KitchenSink
+ *   Blob: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *   Boolean: true || false,
+ *   Double: Number("double"),
+ *   EmptyStruct: {},
+ *   Float: Number("float"),
+ *   HttpdateTimestamp: new Date("TIMESTAMP"),
+ *   Integer: Number("int"),
+ *   Iso8601Timestamp: new Date("TIMESTAMP"),
+ *   JsonValue: "STRING_VALUE",
+ *   ListOfLists: [ // ListOfListOfStrings
+ *     [ // ListOfStrings
+ *       "STRING_VALUE",
+ *     ],
+ *   ],
+ *   ListOfMapsOfStrings: [ // ListOfMapsOfStrings
+ *     { // MapOfStrings
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   ],
+ *   ListOfStrings: [
+ *     "STRING_VALUE",
+ *   ],
+ *   ListOfStructs: [ // ListOfStructs
+ *     { // SimpleStruct
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Long: Number("long"),
+ *   MapOfListsOfStrings: { // MapOfListsOfStrings
+ *     "<keys>": [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   MapOfMaps: { // MapOfMapOfStrings
+ *     "<keys>": {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   MapOfStrings: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   MapOfStructs: { // MapOfStructs
+ *     "<keys>": {
+ *       Value: "STRING_VALUE",
+ *     },
+ *   },
+ *   RecursiveList: [ // ListOfKitchenSinks
+ *     {
+ *       Blob: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *       Boolean: true || false,
+ *       Double: Number("double"),
+ *       EmptyStruct: {},
+ *       Float: Number("float"),
+ *       HttpdateTimestamp: new Date("TIMESTAMP"),
+ *       Integer: Number("int"),
+ *       Iso8601Timestamp: new Date("TIMESTAMP"),
+ *       JsonValue: "STRING_VALUE",
+ *       ListOfLists: [
+ *         "<ListOfStrings>",
+ *       ],
+ *       ListOfMapsOfStrings: [
+ *         "<MapOfStrings>",
+ *       ],
+ *       ListOfStrings: "<ListOfStrings>",
+ *       ListOfStructs: [
+ *         {
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *       Long: Number("long"),
+ *       MapOfListsOfStrings: {
+ *         "<keys>": "<ListOfStrings>",
+ *       },
+ *       MapOfMaps: {
+ *         "<keys>": "<MapOfStrings>",
+ *       },
+ *       MapOfStrings: "<MapOfStrings>",
+ *       MapOfStructs: {
+ *         "<keys>": {
+ *           Value: "STRING_VALUE",
+ *         },
+ *       },
+ *       RecursiveList: [
+ *         "<KitchenSink>",
+ *       ],
+ *       RecursiveMap: { // MapOfKitchenSinks
+ *         "<keys>": "<KitchenSink>",
+ *       },
+ *       RecursiveStruct: "<KitchenSink>",
+ *       SimpleStruct: "<SimpleStruct>",
+ *       String: "STRING_VALUE",
+ *       StructWithJsonName: { // StructWithJsonName
+ *         Value: "STRING_VALUE",
+ *       },
+ *       Timestamp: new Date("TIMESTAMP"),
+ *       UnixTimestamp: new Date("TIMESTAMP"),
+ *     },
+ *   ],
+ *   RecursiveMap: {
+ *     "<keys>": "<KitchenSink>",
+ *   },
+ *   RecursiveStruct: "<KitchenSink>",
+ *   SimpleStruct: "<SimpleStruct>",
+ *   String: "STRING_VALUE",
+ *   StructWithJsonName: {
+ *     Value: "STRING_VALUE",
+ *   },
+ *   Timestamp: new Date("TIMESTAMP"),
+ *   UnixTimestamp: new Date("TIMESTAMP"),
+ * };
+ * const command = new KitchenSinkOperationCommand(input);
+ * const response = await client.send(command);
+ * // { // KitchenSink
+ * //   Blob: new Uint8Array(),
+ * //   Boolean: true || false,
+ * //   Double: Number("double"),
+ * //   EmptyStruct: {},
+ * //   Float: Number("float"),
+ * //   HttpdateTimestamp: new Date("TIMESTAMP"),
+ * //   Integer: Number("int"),
+ * //   Iso8601Timestamp: new Date("TIMESTAMP"),
+ * //   JsonValue: "STRING_VALUE",
+ * //   ListOfLists: [ // ListOfListOfStrings
+ * //     [ // ListOfStrings
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   ],
+ * //   ListOfMapsOfStrings: [ // ListOfMapsOfStrings
+ * //     { // MapOfStrings
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   ListOfStrings: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ListOfStructs: [ // ListOfStructs
+ * //     { // SimpleStruct
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Long: Number("long"),
+ * //   MapOfListsOfStrings: { // MapOfListsOfStrings
+ * //     "<keys>": [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   MapOfMaps: { // MapOfMapOfStrings
+ * //     "<keys>": {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   MapOfStrings: {
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   MapOfStructs: { // MapOfStructs
+ * //     "<keys>": {
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   RecursiveList: [ // ListOfKitchenSinks
+ * //     {
+ * //       Blob: new Uint8Array(),
+ * //       Boolean: true || false,
+ * //       Double: Number("double"),
+ * //       EmptyStruct: {},
+ * //       Float: Number("float"),
+ * //       HttpdateTimestamp: new Date("TIMESTAMP"),
+ * //       Integer: Number("int"),
+ * //       Iso8601Timestamp: new Date("TIMESTAMP"),
+ * //       JsonValue: "STRING_VALUE",
+ * //       ListOfLists: [
+ * //         "<ListOfStrings>",
+ * //       ],
+ * //       ListOfMapsOfStrings: [
+ * //         "<MapOfStrings>",
+ * //       ],
+ * //       ListOfStrings: "<ListOfStrings>",
+ * //       ListOfStructs: [
+ * //         {
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Long: Number("long"),
+ * //       MapOfListsOfStrings: {
+ * //         "<keys>": "<ListOfStrings>",
+ * //       },
+ * //       MapOfMaps: {
+ * //         "<keys>": "<MapOfStrings>",
+ * //       },
+ * //       MapOfStrings: "<MapOfStrings>",
+ * //       MapOfStructs: {
+ * //         "<keys>": {
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       RecursiveList: [
+ * //         "<KitchenSink>",
+ * //       ],
+ * //       RecursiveMap: { // MapOfKitchenSinks
+ * //         "<keys>": "<KitchenSink>",
+ * //       },
+ * //       RecursiveStruct: "<KitchenSink>",
+ * //       SimpleStruct: "<SimpleStruct>",
+ * //       String: "STRING_VALUE",
+ * //       StructWithJsonName: { // StructWithJsonName
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //       UnixTimestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   RecursiveMap: {
+ * //     "<keys>": "<KitchenSink>",
+ * //   },
+ * //   RecursiveStruct: "<KitchenSink>",
+ * //   SimpleStruct: "<SimpleStruct>",
+ * //   String: "STRING_VALUE",
+ * //   StructWithJsonName: {
+ * //     Value: "STRING_VALUE",
+ * //   },
+ * //   Timestamp: new Date("TIMESTAMP"),
+ * //   UnixTimestamp: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param KitchenSinkOperationCommandInput - {@link KitchenSinkOperationCommandInput}
+ * @returns {@link KitchenSinkOperationCommandOutput}
+ * @see {@link KitchenSinkOperationCommandInput} for command's `input` shape.
+ * @see {@link KitchenSinkOperationCommandOutput} for command's `response` shape.
+ * @see {@link JsonProtocolClientResolvedConfig | config} for JsonProtocolClient's `config` shape.
+ *
+ * @throws {@link ErrorWithMembers} (client fault)
+ *
+ * @throws {@link ErrorWithoutMembers} (server fault)
+ *
+ * @throws {@link JsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from JsonProtocol service.</p>
+ *
+ *
+ */
+export class KitchenSinkOperationCommand extends $Command
+  .classBuilder<
+    KitchenSinkOperationCommandInput,
+    KitchenSinkOperationCommandOutput,
+    JsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: JsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("JsonProtocol", "KitchenSinkOperation", {})
+  .n("JsonProtocolClient", "KitchenSinkOperationCommand")
+  .f(void 0, void 0)
+  .ser(se_KitchenSinkOperationCommand)
+  .de(de_KitchenSinkOperationCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: KitchenSink;
+      output: KitchenSink;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: KitchenSinkOperationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1KitchenSinkOperationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<KitchenSinkOperationCommandOutput> {
-    return deserializeAws_json1_1KitchenSinkOperationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: KitchenSinkOperationCommandInput;
+      output: KitchenSinkOperationCommandOutput;
+    };
+  };
 }

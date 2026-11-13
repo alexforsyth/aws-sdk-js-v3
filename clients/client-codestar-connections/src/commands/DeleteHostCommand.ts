@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodeStarConnectionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodeStarConnectionsClient";
-import { DeleteHostInput, DeleteHostOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DeleteHostCommand,
-  serializeAws_json1_0DeleteHostCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteHostInput, DeleteHostOutput } from "../models/models_0";
+import { DeleteHost$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteHostCommand}.
+ */
 export interface DeleteHostCommandInput extends DeleteHostInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteHostCommand}.
+ */
 export interface DeleteHostCommandOutput extends DeleteHostOutput, __MetadataBearer {}
 
 /**
@@ -35,68 +32,51 @@ export interface DeleteHostCommandOutput extends DeleteHostOutput, __MetadataBea
  * ```javascript
  * import { CodeStarConnectionsClient, DeleteHostCommand } from "@aws-sdk/client-codestar-connections"; // ES Modules import
  * // const { CodeStarConnectionsClient, DeleteHostCommand } = require("@aws-sdk/client-codestar-connections"); // CommonJS import
+ * // import type { CodeStarConnectionsClientConfig } from "@aws-sdk/client-codestar-connections";
+ * const config = {}; // type is CodeStarConnectionsClientConfig
  * const client = new CodeStarConnectionsClient(config);
+ * const input = { // DeleteHostInput
+ *   HostArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteHostCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteHostCommandInput - {@link DeleteHostCommandInput}
+ * @returns {@link DeleteHostCommandOutput}
  * @see {@link DeleteHostCommandInput} for command's `input` shape.
  * @see {@link DeleteHostCommandOutput} for command's `response` shape.
- * @see {@link CodeStarConnectionsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeStarConnectionsClientResolvedConfig | config} for CodeStarConnectionsClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found. Verify the connection resource ARN and try again.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>Resource not found. Verify the ARN for the host resource and try again.</p>
+ *
+ * @throws {@link CodeStarConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeStarConnections service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteHostCommand extends $Command<
-  DeleteHostCommandInput,
-  DeleteHostCommandOutput,
-  CodeStarConnectionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteHostCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeStarConnectionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteHostCommandInput, DeleteHostCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeStarConnectionsClient";
-    const commandName = "DeleteHostCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteHostInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteHostOutput.filterSensitiveLog,
+export class DeleteHostCommand extends command<DeleteHostCommandInput, DeleteHostCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteHost",
+  DeleteHost$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteHostInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteHostCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeleteHostCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteHostCommandOutput> {
-    return deserializeAws_json1_0DeleteHostCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteHostCommandInput;
+      output: DeleteHostCommandOutput;
+    };
+  };
 }

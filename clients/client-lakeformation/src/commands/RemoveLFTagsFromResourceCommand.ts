@@ -1,95 +1,195 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { RemoveLFTagsFromResourceRequest, RemoveLFTagsFromResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1RemoveLFTagsFromResourceCommand,
-  serializeAws_json1_1RemoveLFTagsFromResourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveLFTagsFromResourceRequest, RemoveLFTagsFromResourceResponse } from "../models/models_0";
+import { RemoveLFTagsFromResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveLFTagsFromResourceCommand}.
+ */
 export interface RemoveLFTagsFromResourceCommandInput extends RemoveLFTagsFromResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveLFTagsFromResourceCommand}.
+ */
 export interface RemoveLFTagsFromResourceCommandOutput extends RemoveLFTagsFromResourceResponse, __MetadataBearer {}
 
 /**
- * <p>Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>
+ * <p>Removes an LF-tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LakeFormationClient, RemoveLFTagsFromResourceCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, RemoveLFTagsFromResourceCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // RemoveLFTagsFromResourceRequest
+ *   CatalogId: "STRING_VALUE",
+ *   Resource: { // Resource
+ *     AnyResource: { // AnyResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceType: "TABLE", // required
+ *     },
+ *     Catalog: { // CatalogResource
+ *       Id: "STRING_VALUE",
+ *     },
+ *     Database: { // DatabaseResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     Table: { // TableResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE",
+ *       TableWildcard: {},
+ *     },
+ *     TableWithColumns: { // TableWithColumnsResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE", // required
+ *       ColumnNames: [ // ColumnNames
+ *         "STRING_VALUE",
+ *       ],
+ *       ColumnWildcard: { // ColumnWildcard
+ *         ExcludedColumnNames: [
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     DataLocation: { // DataLocationResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceArn: "STRING_VALUE", // required
+ *     },
+ *     DataCellsFilter: { // DataCellsFilterResource
+ *       TableCatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE",
+ *       TableName: "STRING_VALUE",
+ *       Name: "STRING_VALUE",
+ *     },
+ *     LFTag: { // LFTagKeyResource
+ *       CatalogId: "STRING_VALUE",
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // TagValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *     LFTagPolicy: { // LFTagPolicyResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceType: "DATABASE" || "TABLE", // required
+ *       Expression: [ // Expression
+ *         { // LFTag
+ *           TagKey: "STRING_VALUE", // required
+ *           TagValues: [ // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       ExpressionName: "STRING_VALUE",
+ *     },
+ *     LFTagExpression: { // LFTagExpressionResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     RLSPolicy: { // RLSPolicyResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     UserDefinedFunction: { // UserDefinedFunctionResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE",
+ *       UserDefinedFunctionWildcard: {},
+ *     },
+ *   },
+ *   LFTags: [ // LFTagsList // required
+ *     { // LFTagPair
+ *       CatalogId: "STRING_VALUE",
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new RemoveLFTagsFromResourceCommand(input);
  * const response = await client.send(command);
+ * // { // RemoveLFTagsFromResourceResponse
+ * //   Failures: [ // LFTagErrors
+ * //     { // LFTagError
+ * //       LFTag: { // LFTagPair
+ * //         CatalogId: "STRING_VALUE",
+ * //         TagKey: "STRING_VALUE", // required
+ * //         TagValues: [ // TagValueList // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Error: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param RemoveLFTagsFromResourceCommandInput - {@link RemoveLFTagsFromResourceCommandInput}
+ * @returns {@link RemoveLFTagsFromResourceCommandOutput}
  * @see {@link RemoveLFTagsFromResourceCommandInput} for command's `input` shape.
  * @see {@link RemoveLFTagsFromResourceCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class RemoveLFTagsFromResourceCommand extends $Command<
-  RemoveLFTagsFromResourceCommandInput,
-  RemoveLFTagsFromResourceCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveLFTagsFromResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveLFTagsFromResourceCommandInput, RemoveLFTagsFromResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "RemoveLFTagsFromResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveLFTagsFromResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RemoveLFTagsFromResourceResponse.filterSensitiveLog,
+export class RemoveLFTagsFromResourceCommand extends command<RemoveLFTagsFromResourceCommandInput, RemoveLFTagsFromResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveLFTagsFromResource",
+  RemoveLFTagsFromResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveLFTagsFromResourceRequest;
+      output: RemoveLFTagsFromResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveLFTagsFromResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RemoveLFTagsFromResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RemoveLFTagsFromResourceCommandOutput> {
-    return deserializeAws_json1_1RemoveLFTagsFromResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveLFTagsFromResourceCommandInput;
+      output: RemoveLFTagsFromResourceCommandOutput;
+    };
+  };
 }

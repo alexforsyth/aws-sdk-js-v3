@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeRuntimeVersionsRequest, DescribeRuntimeVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeRuntimeVersionsCommand,
-  serializeAws_restJson1DescribeRuntimeVersionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SyntheticsClientResolvedConfig } from "../SyntheticsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeRuntimeVersionsRequest, DescribeRuntimeVersionsResponse } from "../models/models_0";
+import { DescribeRuntimeVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeRuntimeVersionsCommand}.
+ */
 export interface DescribeRuntimeVersionsCommandInput extends DescribeRuntimeVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeRuntimeVersionsCommand}.
+ */
 export interface DescribeRuntimeVersionsCommandOutput extends DescribeRuntimeVersionsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,62 @@ export interface DescribeRuntimeVersionsCommandOutput extends DescribeRuntimeVer
  * ```javascript
  * import { SyntheticsClient, DescribeRuntimeVersionsCommand } from "@aws-sdk/client-synthetics"; // ES Modules import
  * // const { SyntheticsClient, DescribeRuntimeVersionsCommand } = require("@aws-sdk/client-synthetics"); // CommonJS import
+ * // import type { SyntheticsClientConfig } from "@aws-sdk/client-synthetics";
+ * const config = {}; // type is SyntheticsClientConfig
  * const client = new SyntheticsClient(config);
+ * const input = { // DescribeRuntimeVersionsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeRuntimeVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeRuntimeVersionsResponse
+ * //   RuntimeVersions: [ // RuntimeVersionList
+ * //     { // RuntimeVersion
+ * //       VersionName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       ReleaseDate: new Date("TIMESTAMP"),
+ * //       DeprecationDate: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeRuntimeVersionsCommandInput - {@link DescribeRuntimeVersionsCommandInput}
+ * @returns {@link DescribeRuntimeVersionsCommandOutput}
  * @see {@link DescribeRuntimeVersionsCommandInput} for command's `input` shape.
  * @see {@link DescribeRuntimeVersionsCommandOutput} for command's `response` shape.
- * @see {@link SyntheticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SyntheticsClientResolvedConfig | config} for SyntheticsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter could not be validated.</p>
+ *
+ * @throws {@link SyntheticsServiceException}
+ * <p>Base exception class for all service exceptions from Synthetics service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeRuntimeVersionsCommand extends $Command<
-  DescribeRuntimeVersionsCommandInput,
-  DescribeRuntimeVersionsCommandOutput,
-  SyntheticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeRuntimeVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SyntheticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeRuntimeVersionsCommandInput, DescribeRuntimeVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SyntheticsClient";
-    const commandName = "DescribeRuntimeVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeRuntimeVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeRuntimeVersionsResponse.filterSensitiveLog,
+export class DescribeRuntimeVersionsCommand extends command<DescribeRuntimeVersionsCommandInput, DescribeRuntimeVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeRuntimeVersions",
+  DescribeRuntimeVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeRuntimeVersionsRequest;
+      output: DescribeRuntimeVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeRuntimeVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeRuntimeVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeRuntimeVersionsCommandOutput> {
-    return deserializeAws_restJson1DescribeRuntimeVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeRuntimeVersionsCommandInput;
+      output: DescribeRuntimeVersionsCommandOutput;
+    };
+  };
 }

@@ -1,101 +1,145 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { DescribeImagesRequest, DescribeImagesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeImagesCommand,
-  serializeAws_json1_1DescribeImagesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeImagesRequest, DescribeImagesResponse } from "../models/models_0";
+import { DescribeImages$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeImagesCommand}.
+ */
 export interface DescribeImagesCommandInput extends DescribeImagesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeImagesCommand}.
+ */
 export interface DescribeImagesCommandOutput extends DescribeImagesResponse, __MetadataBearer {}
 
 /**
  * <p>Returns metadata about the images in a repository.</p>
- *         <note>
- *             <p>Beginning with Docker version 1.9, the Docker client compresses image layers
- *                 before pushing them to a V2 Docker registry. The output of the <code>docker
- *                     images</code> command shows the uncompressed image size, so it may return a
- *                 larger image size than the image sizes returned by <a>DescribeImages</a>.</p>
- *         </note>
+ *          <note>
+ *             <p>Starting with Docker version 1.9, the Docker client compresses image layers before
+ *                 pushing them to a V2 Docker registry. The output of the <code>docker images</code>
+ *                 command shows the uncompressed image size. Therefore, Docker might return a larger
+ *                 image than the image shown in the Amazon Web Services Management Console.</p>
+ *          </note>
+ *          <important>
+ *             <p>The new version of Amazon ECR
+ *                 <i>Basic Scanning</i> doesn't use the <a>ImageDetail$imageScanFindingsSummary</a> and <a>ImageDetail$imageScanStatus</a> attributes from the API response to
+ *                 return scan results. Use the <a>DescribeImageScanFindings</a> API
+ *                 instead. For more information about Amazon Web Services native basic scanning, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html"> Scan
+ *                     images for software vulnerabilities in Amazon ECR</a>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECRClient, DescribeImagesCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, DescribeImagesCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // DescribeImagesRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   imageIds: [ // ImageIdentifierList
+ *     { // ImageIdentifier
+ *       imageDigest: "STRING_VALUE",
+ *       imageTag: "STRING_VALUE",
+ *     },
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   filter: { // DescribeImagesFilter
+ *     tagStatus: "TAGGED" || "UNTAGGED" || "ANY",
+ *     imageStatus: "ACTIVE" || "ARCHIVED" || "ACTIVATING" || "ANY",
+ *   },
+ * };
  * const command = new DescribeImagesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeImagesResponse
+ * //   imageDetails: [ // ImageDetailList
+ * //     { // ImageDetail
+ * //       registryId: "STRING_VALUE",
+ * //       repositoryName: "STRING_VALUE",
+ * //       imageDigest: "STRING_VALUE",
+ * //       imageTags: [ // ImageTagList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       imageSizeInBytes: Number("long"),
+ * //       imagePushedAt: new Date("TIMESTAMP"),
+ * //       imageScanStatus: { // ImageScanStatus
+ * //         status: "IN_PROGRESS" || "COMPLETE" || "FAILED" || "UNSUPPORTED_IMAGE" || "ACTIVE" || "PENDING" || "SCAN_ELIGIBILITY_EXPIRED" || "FINDINGS_UNAVAILABLE" || "LIMIT_EXCEEDED" || "IMAGE_ARCHIVED",
+ * //         description: "STRING_VALUE",
+ * //       },
+ * //       imageScanFindingsSummary: { // ImageScanFindingsSummary
+ * //         imageScanCompletedAt: new Date("TIMESTAMP"),
+ * //         vulnerabilitySourceUpdatedAt: new Date("TIMESTAMP"),
+ * //         findingSeverityCounts: { // FindingSeverityCounts
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //       },
+ * //       imageManifestMediaType: "STRING_VALUE",
+ * //       artifactMediaType: "STRING_VALUE",
+ * //       lastRecordedPullTime: new Date("TIMESTAMP"),
+ * //       subjectManifestDigest: "STRING_VALUE",
+ * //       imageStatus: "ACTIVE" || "ARCHIVED" || "ACTIVATING",
+ * //       lastArchivedAt: new Date("TIMESTAMP"),
+ * //       lastActivatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeImagesCommandInput - {@link DescribeImagesCommandInput}
+ * @returns {@link DescribeImagesCommandOutput}
  * @see {@link DescribeImagesCommandInput} for command's `input` shape.
  * @see {@link DescribeImagesCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link ImageNotFoundException} (client fault)
+ *  <p>The image requested does not exist in the specified repository.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeImagesCommand extends $Command<
-  DescribeImagesCommandInput,
-  DescribeImagesCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeImagesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeImagesCommandInput, DescribeImagesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "DescribeImagesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeImagesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeImagesResponse.filterSensitiveLog,
+export class DescribeImagesCommand extends command<DescribeImagesCommandInput, DescribeImagesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeImages",
+  DescribeImages$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeImagesRequest;
+      output: DescribeImagesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeImagesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeImagesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeImagesCommandOutput> {
-    return deserializeAws_json1_1DescribeImagesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeImagesCommandInput;
+      output: DescribeImagesCommandOutput;
+    };
+  };
 }

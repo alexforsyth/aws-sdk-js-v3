@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateEmergencyContactSettingsRequest, UpdateEmergencyContactSettingsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateEmergencyContactSettingsCommand,
-  serializeAws_json1_1UpdateEmergencyContactSettingsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateEmergencyContactSettingsRequest, UpdateEmergencyContactSettingsResponse } from "../models/models_0";
+import { UpdateEmergencyContactSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateEmergencyContactSettingsCommand}.
+ */
 export interface UpdateEmergencyContactSettingsCommandInput extends UpdateEmergencyContactSettingsRequest {}
-export interface UpdateEmergencyContactSettingsCommandOutput
-  extends UpdateEmergencyContactSettingsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateEmergencyContactSettingsCommand}.
+ */
+export interface UpdateEmergencyContactSettingsCommandOutput extends UpdateEmergencyContactSettingsResponse, __MetadataBearer {}
 
 /**
  * <p>Updates the details of the list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.</p>
@@ -30,74 +29,64 @@ export interface UpdateEmergencyContactSettingsCommandOutput
  * ```javascript
  * import { ShieldClient, UpdateEmergencyContactSettingsCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, UpdateEmergencyContactSettingsCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // UpdateEmergencyContactSettingsRequest
+ *   EmergencyContactList: [ // EmergencyContactList
+ *     { // EmergencyContact
+ *       EmailAddress: "STRING_VALUE", // required
+ *       PhoneNumber: "STRING_VALUE",
+ *       ContactNotes: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateEmergencyContactSettingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateEmergencyContactSettingsCommandInput - {@link UpdateEmergencyContactSettingsCommandInput}
+ * @returns {@link UpdateEmergencyContactSettingsCommandOutput}
  * @see {@link UpdateEmergencyContactSettingsCommandInput} for command's `input` shape.
  * @see {@link UpdateEmergencyContactSettingsCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link OptimisticLockException} (client fault)
+ *  <p>Exception that indicates that the resource state has been modified by another
+ *          client. Retrieve the resource and then retry your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateEmergencyContactSettingsCommand extends $Command<
-  UpdateEmergencyContactSettingsCommandInput,
-  UpdateEmergencyContactSettingsCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateEmergencyContactSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateEmergencyContactSettingsCommandInput, UpdateEmergencyContactSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "UpdateEmergencyContactSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateEmergencyContactSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateEmergencyContactSettingsResponse.filterSensitiveLog,
+export class UpdateEmergencyContactSettingsCommand extends command<UpdateEmergencyContactSettingsCommandInput, UpdateEmergencyContactSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateEmergencyContactSettings",
+  UpdateEmergencyContactSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEmergencyContactSettingsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateEmergencyContactSettingsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateEmergencyContactSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateEmergencyContactSettingsCommandOutput> {
-    return deserializeAws_json1_1UpdateEmergencyContactSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateEmergencyContactSettingsCommandInput;
+      output: UpdateEmergencyContactSettingsCommandOutput;
+    };
+  };
 }

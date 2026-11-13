@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DescribeDataSourcesInput, DescribeDataSourcesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeDataSourcesCommand,
-  serializeAws_json1_1DescribeDataSourcesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDataSourcesInput, DescribeDataSourcesOutput } from "../models/models_0";
+import { DescribeDataSources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDataSourcesCommand}.
+ */
 export interface DescribeDataSourcesCommandInput extends DescribeDataSourcesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDataSourcesCommand}.
+ */
 export interface DescribeDataSourcesCommandOutput extends DescribeDataSourcesOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,102 @@ export interface DescribeDataSourcesCommandOutput extends DescribeDataSourcesOut
  * ```javascript
  * import { MachineLearningClient, DescribeDataSourcesCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DescribeDataSourcesCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DescribeDataSourcesInput
+ *   FilterVariable: "CreatedAt" || "LastUpdatedAt" || "Status" || "Name" || "DataLocationS3" || "IAMUser",
+ *   EQ: "STRING_VALUE",
+ *   GT: "STRING_VALUE",
+ *   LT: "STRING_VALUE",
+ *   GE: "STRING_VALUE",
+ *   LE: "STRING_VALUE",
+ *   NE: "STRING_VALUE",
+ *   Prefix: "STRING_VALUE",
+ *   SortOrder: "asc" || "dsc",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new DescribeDataSourcesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDataSourcesOutput
+ * //   Results: [ // DataSources
+ * //     { // DataSource
+ * //       DataSourceId: "STRING_VALUE",
+ * //       DataLocationS3: "STRING_VALUE",
+ * //       DataRearrangement: "STRING_VALUE",
+ * //       CreatedByIamUser: "STRING_VALUE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       LastUpdatedAt: new Date("TIMESTAMP"),
+ * //       DataSizeInBytes: Number("long"),
+ * //       NumberOfFiles: Number("long"),
+ * //       Name: "STRING_VALUE",
+ * //       Status: "PENDING" || "INPROGRESS" || "FAILED" || "COMPLETED" || "DELETED",
+ * //       Message: "STRING_VALUE",
+ * //       RedshiftMetadata: { // RedshiftMetadata
+ * //         RedshiftDatabase: { // RedshiftDatabase
+ * //           DatabaseName: "STRING_VALUE", // required
+ * //           ClusterIdentifier: "STRING_VALUE", // required
+ * //         },
+ * //         DatabaseUserName: "STRING_VALUE",
+ * //         SelectSqlQuery: "STRING_VALUE",
+ * //       },
+ * //       RDSMetadata: { // RDSMetadata
+ * //         Database: { // RDSDatabase
+ * //           InstanceIdentifier: "STRING_VALUE", // required
+ * //           DatabaseName: "STRING_VALUE", // required
+ * //         },
+ * //         DatabaseUserName: "STRING_VALUE",
+ * //         SelectSqlQuery: "STRING_VALUE",
+ * //         ResourceRole: "STRING_VALUE",
+ * //         ServiceRole: "STRING_VALUE",
+ * //         DataPipelineId: "STRING_VALUE",
+ * //       },
+ * //       RoleARN: "STRING_VALUE",
+ * //       ComputeStatistics: true || false,
+ * //       ComputeTime: Number("long"),
+ * //       FinishedAt: new Date("TIMESTAMP"),
+ * //       StartedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDataSourcesCommandInput - {@link DescribeDataSourcesCommandInput}
+ * @returns {@link DescribeDataSourcesCommandOutput}
  * @see {@link DescribeDataSourcesCommandInput} for command's `input` shape.
  * @see {@link DescribeDataSourcesCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDataSourcesCommand extends $Command<
-  DescribeDataSourcesCommandInput,
-  DescribeDataSourcesCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDataSourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDataSourcesCommandInput, DescribeDataSourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DescribeDataSourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDataSourcesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDataSourcesOutput.filterSensitiveLog,
+export class DescribeDataSourcesCommand extends command<DescribeDataSourcesCommandInput, DescribeDataSourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDataSources",
+  DescribeDataSources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDataSourcesInput;
+      output: DescribeDataSourcesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDataSourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDataSourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDataSourcesCommandOutput> {
-    return deserializeAws_json1_1DescribeDataSourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDataSourcesCommandInput;
+      output: DescribeDataSourcesCommandOutput;
+    };
+  };
 }

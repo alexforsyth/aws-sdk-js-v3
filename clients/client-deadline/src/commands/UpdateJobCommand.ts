@@ -1,0 +1,102 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateJobRequest, UpdateJobResponse } from "../models/models_1";
+import { UpdateJob$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateJobCommand}.
+ */
+export interface UpdateJobCommandInput extends UpdateJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateJobCommand}.
+ */
+export interface UpdateJobCommandOutput extends UpdateJobResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates a job. </p> <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateJobCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateJobCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateJobRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   jobId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   targetTaskRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ *   priority: Number("int"),
+ *   maxFailedTasksCount: Number("int"),
+ *   maxRetriesPerTask: Number("int"),
+ *   lifecycleStatus: "ARCHIVED",
+ *   maxWorkerCount: Number("int"),
+ *   name: "STRING_VALUE",
+ *   description: "STRING_VALUE",
+ * };
+ * const command = new UpdateJobCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateJobCommandInput - {@link UpdateJobCommandInput}
+ * @returns {@link UpdateJobCommandOutput}
+ * @see {@link UpdateJobCommandInput} for command's `input` shape.
+ * @see {@link UpdateJobCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateJobCommand extends command<UpdateJobCommandInput, UpdateJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateJob",
+  UpdateJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateJobCommandInput;
+      output: UpdateJobCommandOutput;
+    };
+  };
+}

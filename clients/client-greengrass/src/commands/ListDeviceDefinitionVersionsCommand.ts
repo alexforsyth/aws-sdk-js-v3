@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { ListDeviceDefinitionVersionsRequest, ListDeviceDefinitionVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDeviceDefinitionVersionsCommand,
-  serializeAws_restJson1ListDeviceDefinitionVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDeviceDefinitionVersionsRequest, ListDeviceDefinitionVersionsResponse } from "../models/models_0";
+import { ListDeviceDefinitionVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDeviceDefinitionVersionsCommand}.
+ */
 export interface ListDeviceDefinitionVersionsCommandInput extends ListDeviceDefinitionVersionsRequest {}
-export interface ListDeviceDefinitionVersionsCommandOutput
-  extends ListDeviceDefinitionVersionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListDeviceDefinitionVersionsCommand}.
+ */
+export interface ListDeviceDefinitionVersionsCommandOutput extends ListDeviceDefinitionVersionsResponse, __MetadataBearer {}
 
 /**
  * Lists the versions of a device definition.
@@ -30,71 +29,60 @@ export interface ListDeviceDefinitionVersionsCommandOutput
  * ```javascript
  * import { GreengrassClient, ListDeviceDefinitionVersionsCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, ListDeviceDefinitionVersionsCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // ListDeviceDefinitionVersionsRequest
+ *   DeviceDefinitionId: "STRING_VALUE", // required
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListDeviceDefinitionVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDeviceDefinitionVersionsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Versions: [ // __listOfVersionInformation
+ * //     { // VersionInformation
+ * //       Arn: "STRING_VALUE",
+ * //       CreationTimestamp: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListDeviceDefinitionVersionsCommandInput - {@link ListDeviceDefinitionVersionsCommandInput}
+ * @returns {@link ListDeviceDefinitionVersionsCommandOutput}
  * @see {@link ListDeviceDefinitionVersionsCommandInput} for command's `input` shape.
  * @see {@link ListDeviceDefinitionVersionsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class ListDeviceDefinitionVersionsCommand extends $Command<
-  ListDeviceDefinitionVersionsCommandInput,
-  ListDeviceDefinitionVersionsCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDeviceDefinitionVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDeviceDefinitionVersionsCommandInput, ListDeviceDefinitionVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "ListDeviceDefinitionVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDeviceDefinitionVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListDeviceDefinitionVersionsResponse.filterSensitiveLog,
+export class ListDeviceDefinitionVersionsCommand extends command<ListDeviceDefinitionVersionsCommandInput, ListDeviceDefinitionVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDeviceDefinitionVersions",
+  ListDeviceDefinitionVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDeviceDefinitionVersionsRequest;
+      output: ListDeviceDefinitionVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDeviceDefinitionVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDeviceDefinitionVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListDeviceDefinitionVersionsCommandOutput> {
-    return deserializeAws_restJson1ListDeviceDefinitionVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDeviceDefinitionVersionsCommandInput;
+      output: ListDeviceDefinitionVersionsCommandOutput;
+    };
+  };
 }

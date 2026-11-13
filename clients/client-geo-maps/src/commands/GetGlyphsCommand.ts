@@ -1,0 +1,87 @@
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetGlyphsRequest, GetGlyphsResponse } from "../models/models_0";
+import { GetGlyphs$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetGlyphsCommand}.
+ */
+export interface GetGlyphsCommandInput extends GetGlyphsRequest {}
+/**
+ * @public
+ */
+export type GetGlyphsCommandOutputType = Omit<GetGlyphsResponse, "Blob"> & {
+  Blob?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetGlyphsCommand}.
+ */
+export interface GetGlyphsCommandOutput extends GetGlyphsCommandOutputType, __MetadataBearer {}
+
+/**
+ * <p> <code>GetGlyphs</code> returns the map's glyphs.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/styling-labels-with-glyphs.html">Style labels with glyphs</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { GeoMapsClient, GetGlyphsCommand } from "@aws-sdk/client-geo-maps"; // ES Modules import
+ * // const { GeoMapsClient, GetGlyphsCommand } = require("@aws-sdk/client-geo-maps"); // CommonJS import
+ * // import type { GeoMapsClientConfig } from "@aws-sdk/client-geo-maps";
+ * const config = {}; // type is GeoMapsClientConfig
+ * const client = new GeoMapsClient(config);
+ * const input = { // GetGlyphsRequest
+ *   FontStack: "STRING_VALUE", // required
+ *   FontUnicodeRange: "STRING_VALUE", // required
+ * };
+ * const command = new GetGlyphsCommand(input);
+ * const response = await client.send(command);
+ * // { // GetGlyphsResponse
+ * //   Blob: new Uint8Array(),
+ * //   ContentType: "STRING_VALUE",
+ * //   CacheControl: "STRING_VALUE",
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetGlyphsCommandInput - {@link GetGlyphsCommandInput}
+ * @returns {@link GetGlyphsCommandOutput}
+ * @see {@link GetGlyphsCommandInput} for command's `input` shape.
+ * @see {@link GetGlyphsCommandOutput} for command's `response` shape.
+ * @see {@link GeoMapsClientResolvedConfig | config} for GeoMapsClient's `config` shape.
+ *
+ * @throws {@link GeoMapsServiceException}
+ * <p>Base exception class for all service exceptions from GeoMaps service.</p>
+ *
+ *
+ * @public
+ */
+export class GetGlyphsCommand extends command<GetGlyphsCommandInput, GetGlyphsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetGlyphs",
+  GetGlyphs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetGlyphsRequest;
+      output: GetGlyphsResponse;
+    };
+    sdk: {
+      input: GetGlyphsCommandInput;
+      output: GetGlyphsCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListOpsItemEventsRequest, ListOpsItemEventsResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListOpsItemEventsCommand,
-  serializeAws_json1_1ListOpsItemEventsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListOpsItemEventsRequest, ListOpsItemEventsResponse } from "../models/models_1";
+import { ListOpsItemEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListOpsItemEventsCommand}.
+ */
 export interface ListOpsItemEventsCommandInput extends ListOpsItemEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListOpsItemEventsCommand}.
+ */
 export interface ListOpsItemEventsCommandOutput extends ListOpsItemEventsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,83 @@ export interface ListOpsItemEventsCommandOutput extends ListOpsItemEventsRespons
  * ```javascript
  * import { SSMClient, ListOpsItemEventsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, ListOpsItemEventsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // ListOpsItemEventsRequest
+ *   Filters: [ // OpsItemEventFilters
+ *     { // OpsItemEventFilter
+ *       Key: "OpsItemId", // required
+ *       Values: [ // OpsItemEventFilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Operator: "Equal", // required
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListOpsItemEventsCommand(input);
  * const response = await client.send(command);
+ * // { // ListOpsItemEventsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Summaries: [ // OpsItemEventSummaries
+ * //     { // OpsItemEventSummary
+ * //       OpsItemId: "STRING_VALUE",
+ * //       EventId: "STRING_VALUE",
+ * //       Source: "STRING_VALUE",
+ * //       DetailType: "STRING_VALUE",
+ * //       Detail: "STRING_VALUE",
+ * //       CreatedBy: { // OpsItemIdentity
+ * //         Arn: "STRING_VALUE",
+ * //       },
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListOpsItemEventsCommandInput - {@link ListOpsItemEventsCommandInput}
+ * @returns {@link ListOpsItemEventsCommandOutput}
  * @see {@link ListOpsItemEventsCommandInput} for command's `input` shape.
  * @see {@link ListOpsItemEventsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link OpsItemInvalidParameterException} (client fault)
+ *  <p>A specified parameter argument isn't valid. Verify the available arguments and try
+ *    again.</p>
+ *
+ * @throws {@link OpsItemLimitExceededException} (client fault)
+ *  <p>The request caused OpsItems to exceed one or more quotas.</p>
+ *
+ * @throws {@link OpsItemNotFoundException} (client fault)
+ *  <p>The specified OpsItem ID doesn't exist. Verify the ID and try again.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class ListOpsItemEventsCommand extends $Command<
-  ListOpsItemEventsCommandInput,
-  ListOpsItemEventsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListOpsItemEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListOpsItemEventsCommandInput, ListOpsItemEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "ListOpsItemEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListOpsItemEventsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListOpsItemEventsResponse.filterSensitiveLog,
+export class ListOpsItemEventsCommand extends command<ListOpsItemEventsCommandInput, ListOpsItemEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListOpsItemEvents",
+  ListOpsItemEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOpsItemEventsRequest;
+      output: ListOpsItemEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListOpsItemEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListOpsItemEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListOpsItemEventsCommandOutput> {
-    return deserializeAws_json1_1ListOpsItemEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListOpsItemEventsCommandInput;
+      output: ListOpsItemEventsCommandOutput;
+    };
+  };
 }

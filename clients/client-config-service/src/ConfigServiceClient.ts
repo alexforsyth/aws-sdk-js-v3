@@ -1,365 +1,450 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultConfigServiceHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AssociateResourceTypesCommandInput,
+  AssociateResourceTypesCommandOutput,
+} from "./commands/AssociateResourceTypesCommand";
+import type {
   BatchGetAggregateResourceConfigCommandInput,
   BatchGetAggregateResourceConfigCommandOutput,
 } from "./commands/BatchGetAggregateResourceConfigCommand";
-import {
+import type {
   BatchGetResourceConfigCommandInput,
   BatchGetResourceConfigCommandOutput,
 } from "./commands/BatchGetResourceConfigCommand";
-import {
+import type {
   DeleteAggregationAuthorizationCommandInput,
   DeleteAggregationAuthorizationCommandOutput,
 } from "./commands/DeleteAggregationAuthorizationCommand";
-import { DeleteConfigRuleCommandInput, DeleteConfigRuleCommandOutput } from "./commands/DeleteConfigRuleCommand";
-import {
+import type { DeleteConfigRuleCommandInput, DeleteConfigRuleCommandOutput } from "./commands/DeleteConfigRuleCommand";
+import type {
   DeleteConfigurationAggregatorCommandInput,
   DeleteConfigurationAggregatorCommandOutput,
 } from "./commands/DeleteConfigurationAggregatorCommand";
-import {
+import type {
   DeleteConfigurationRecorderCommandInput,
   DeleteConfigurationRecorderCommandOutput,
 } from "./commands/DeleteConfigurationRecorderCommand";
-import {
+import type {
   DeleteConformancePackCommandInput,
   DeleteConformancePackCommandOutput,
 } from "./commands/DeleteConformancePackCommand";
-import {
+import type { DeleteConnectorCommandInput, DeleteConnectorCommandOutput } from "./commands/DeleteConnectorCommand";
+import type {
   DeleteDeliveryChannelCommandInput,
   DeleteDeliveryChannelCommandOutput,
 } from "./commands/DeleteDeliveryChannelCommand";
-import {
+import type {
   DeleteEvaluationResultsCommandInput,
   DeleteEvaluationResultsCommandOutput,
 } from "./commands/DeleteEvaluationResultsCommand";
-import {
+import type {
   DeleteOrganizationConfigRuleCommandInput,
   DeleteOrganizationConfigRuleCommandOutput,
 } from "./commands/DeleteOrganizationConfigRuleCommand";
-import {
+import type {
   DeleteOrganizationConformancePackCommandInput,
   DeleteOrganizationConformancePackCommandOutput,
 } from "./commands/DeleteOrganizationConformancePackCommand";
-import {
+import type {
   DeletePendingAggregationRequestCommandInput,
   DeletePendingAggregationRequestCommandOutput,
 } from "./commands/DeletePendingAggregationRequestCommand";
-import {
+import type {
   DeleteRemediationConfigurationCommandInput,
   DeleteRemediationConfigurationCommandOutput,
 } from "./commands/DeleteRemediationConfigurationCommand";
-import {
+import type {
   DeleteRemediationExceptionsCommandInput,
   DeleteRemediationExceptionsCommandOutput,
 } from "./commands/DeleteRemediationExceptionsCommand";
-import {
+import type {
   DeleteResourceConfigCommandInput,
   DeleteResourceConfigCommandOutput,
 } from "./commands/DeleteResourceConfigCommand";
-import {
+import type {
   DeleteRetentionConfigurationCommandInput,
   DeleteRetentionConfigurationCommandOutput,
 } from "./commands/DeleteRetentionConfigurationCommand";
-import { DeleteStoredQueryCommandInput, DeleteStoredQueryCommandOutput } from "./commands/DeleteStoredQueryCommand";
-import {
+import type {
+  DeleteServiceLinkedConfigurationRecorderCommandInput,
+  DeleteServiceLinkedConfigurationRecorderCommandOutput,
+} from "./commands/DeleteServiceLinkedConfigurationRecorderCommand";
+import type {
+  DeleteStoredQueryCommandInput,
+  DeleteStoredQueryCommandOutput,
+} from "./commands/DeleteStoredQueryCommand";
+import type {
   DeliverConfigSnapshotCommandInput,
   DeliverConfigSnapshotCommandOutput,
 } from "./commands/DeliverConfigSnapshotCommand";
-import {
+import type {
   DescribeAggregateComplianceByConfigRulesCommandInput,
   DescribeAggregateComplianceByConfigRulesCommandOutput,
 } from "./commands/DescribeAggregateComplianceByConfigRulesCommand";
-import {
+import type {
   DescribeAggregateComplianceByConformancePacksCommandInput,
   DescribeAggregateComplianceByConformancePacksCommandOutput,
 } from "./commands/DescribeAggregateComplianceByConformancePacksCommand";
-import {
+import type {
   DescribeAggregationAuthorizationsCommandInput,
   DescribeAggregationAuthorizationsCommandOutput,
 } from "./commands/DescribeAggregationAuthorizationsCommand";
-import {
+import type {
   DescribeComplianceByConfigRuleCommandInput,
   DescribeComplianceByConfigRuleCommandOutput,
 } from "./commands/DescribeComplianceByConfigRuleCommand";
-import {
+import type {
   DescribeComplianceByResourceCommandInput,
   DescribeComplianceByResourceCommandOutput,
 } from "./commands/DescribeComplianceByResourceCommand";
-import {
+import type {
   DescribeConfigRuleEvaluationStatusCommandInput,
   DescribeConfigRuleEvaluationStatusCommandOutput,
 } from "./commands/DescribeConfigRuleEvaluationStatusCommand";
-import {
+import type {
   DescribeConfigRulesCommandInput,
   DescribeConfigRulesCommandOutput,
 } from "./commands/DescribeConfigRulesCommand";
-import {
+import type {
   DescribeConfigurationAggregatorsCommandInput,
   DescribeConfigurationAggregatorsCommandOutput,
 } from "./commands/DescribeConfigurationAggregatorsCommand";
-import {
+import type {
   DescribeConfigurationAggregatorSourcesStatusCommandInput,
   DescribeConfigurationAggregatorSourcesStatusCommandOutput,
 } from "./commands/DescribeConfigurationAggregatorSourcesStatusCommand";
-import {
+import type {
   DescribeConfigurationRecordersCommandInput,
   DescribeConfigurationRecordersCommandOutput,
 } from "./commands/DescribeConfigurationRecordersCommand";
-import {
+import type {
   DescribeConfigurationRecorderStatusCommandInput,
   DescribeConfigurationRecorderStatusCommandOutput,
 } from "./commands/DescribeConfigurationRecorderStatusCommand";
-import {
+import type {
   DescribeConformancePackComplianceCommandInput,
   DescribeConformancePackComplianceCommandOutput,
 } from "./commands/DescribeConformancePackComplianceCommand";
-import {
+import type {
   DescribeConformancePacksCommandInput,
   DescribeConformancePacksCommandOutput,
 } from "./commands/DescribeConformancePacksCommand";
-import {
+import type {
   DescribeConformancePackStatusCommandInput,
   DescribeConformancePackStatusCommandOutput,
 } from "./commands/DescribeConformancePackStatusCommand";
-import {
+import type {
   DescribeDeliveryChannelsCommandInput,
   DescribeDeliveryChannelsCommandOutput,
 } from "./commands/DescribeDeliveryChannelsCommand";
-import {
+import type {
   DescribeDeliveryChannelStatusCommandInput,
   DescribeDeliveryChannelStatusCommandOutput,
 } from "./commands/DescribeDeliveryChannelStatusCommand";
-import {
+import type {
   DescribeOrganizationConfigRulesCommandInput,
   DescribeOrganizationConfigRulesCommandOutput,
 } from "./commands/DescribeOrganizationConfigRulesCommand";
-import {
+import type {
   DescribeOrganizationConfigRuleStatusesCommandInput,
   DescribeOrganizationConfigRuleStatusesCommandOutput,
 } from "./commands/DescribeOrganizationConfigRuleStatusesCommand";
-import {
+import type {
   DescribeOrganizationConformancePacksCommandInput,
   DescribeOrganizationConformancePacksCommandOutput,
 } from "./commands/DescribeOrganizationConformancePacksCommand";
-import {
+import type {
   DescribeOrganizationConformancePackStatusesCommandInput,
   DescribeOrganizationConformancePackStatusesCommandOutput,
 } from "./commands/DescribeOrganizationConformancePackStatusesCommand";
-import {
+import type {
   DescribePendingAggregationRequestsCommandInput,
   DescribePendingAggregationRequestsCommandOutput,
 } from "./commands/DescribePendingAggregationRequestsCommand";
-import {
+import type {
   DescribeRemediationConfigurationsCommandInput,
   DescribeRemediationConfigurationsCommandOutput,
 } from "./commands/DescribeRemediationConfigurationsCommand";
-import {
+import type {
   DescribeRemediationExceptionsCommandInput,
   DescribeRemediationExceptionsCommandOutput,
 } from "./commands/DescribeRemediationExceptionsCommand";
-import {
+import type {
   DescribeRemediationExecutionStatusCommandInput,
   DescribeRemediationExecutionStatusCommandOutput,
 } from "./commands/DescribeRemediationExecutionStatusCommand";
-import {
+import type {
   DescribeRetentionConfigurationsCommandInput,
   DescribeRetentionConfigurationsCommandOutput,
 } from "./commands/DescribeRetentionConfigurationsCommand";
-import {
+import type {
+  DisassociateResourceTypesCommandInput,
+  DisassociateResourceTypesCommandOutput,
+} from "./commands/DisassociateResourceTypesCommand";
+import type {
   GetAggregateComplianceDetailsByConfigRuleCommandInput,
   GetAggregateComplianceDetailsByConfigRuleCommandOutput,
 } from "./commands/GetAggregateComplianceDetailsByConfigRuleCommand";
-import {
+import type {
   GetAggregateConfigRuleComplianceSummaryCommandInput,
   GetAggregateConfigRuleComplianceSummaryCommandOutput,
 } from "./commands/GetAggregateConfigRuleComplianceSummaryCommand";
-import {
+import type {
   GetAggregateConformancePackComplianceSummaryCommandInput,
   GetAggregateConformancePackComplianceSummaryCommandOutput,
 } from "./commands/GetAggregateConformancePackComplianceSummaryCommand";
-import {
+import type {
   GetAggregateDiscoveredResourceCountsCommandInput,
   GetAggregateDiscoveredResourceCountsCommandOutput,
 } from "./commands/GetAggregateDiscoveredResourceCountsCommand";
-import {
+import type {
   GetAggregateResourceConfigCommandInput,
   GetAggregateResourceConfigCommandOutput,
 } from "./commands/GetAggregateResourceConfigCommand";
-import {
+import type {
   GetComplianceDetailsByConfigRuleCommandInput,
   GetComplianceDetailsByConfigRuleCommandOutput,
 } from "./commands/GetComplianceDetailsByConfigRuleCommand";
-import {
+import type {
   GetComplianceDetailsByResourceCommandInput,
   GetComplianceDetailsByResourceCommandOutput,
 } from "./commands/GetComplianceDetailsByResourceCommand";
-import {
+import type {
   GetComplianceSummaryByConfigRuleCommandInput,
   GetComplianceSummaryByConfigRuleCommandOutput,
 } from "./commands/GetComplianceSummaryByConfigRuleCommand";
-import {
+import type {
   GetComplianceSummaryByResourceTypeCommandInput,
   GetComplianceSummaryByResourceTypeCommandOutput,
 } from "./commands/GetComplianceSummaryByResourceTypeCommand";
-import {
+import type {
   GetConformancePackComplianceDetailsCommandInput,
   GetConformancePackComplianceDetailsCommandOutput,
 } from "./commands/GetConformancePackComplianceDetailsCommand";
-import {
+import type {
   GetConformancePackComplianceSummaryCommandInput,
   GetConformancePackComplianceSummaryCommandOutput,
 } from "./commands/GetConformancePackComplianceSummaryCommand";
-import {
+import type { GetConnectorCommandInput, GetConnectorCommandOutput } from "./commands/GetConnectorCommand";
+import type {
+  GetCustomRulePolicyCommandInput,
+  GetCustomRulePolicyCommandOutput,
+} from "./commands/GetCustomRulePolicyCommand";
+import type {
   GetDiscoveredResourceCountsCommandInput,
   GetDiscoveredResourceCountsCommandOutput,
 } from "./commands/GetDiscoveredResourceCountsCommand";
-import {
+import type {
   GetOrganizationConfigRuleDetailedStatusCommandInput,
   GetOrganizationConfigRuleDetailedStatusCommandOutput,
 } from "./commands/GetOrganizationConfigRuleDetailedStatusCommand";
-import {
+import type {
   GetOrganizationConformancePackDetailedStatusCommandInput,
   GetOrganizationConformancePackDetailedStatusCommandOutput,
 } from "./commands/GetOrganizationConformancePackDetailedStatusCommand";
-import {
+import type {
+  GetOrganizationCustomRulePolicyCommandInput,
+  GetOrganizationCustomRulePolicyCommandOutput,
+} from "./commands/GetOrganizationCustomRulePolicyCommand";
+import type {
   GetResourceConfigHistoryCommandInput,
   GetResourceConfigHistoryCommandOutput,
 } from "./commands/GetResourceConfigHistoryCommand";
-import { GetStoredQueryCommandInput, GetStoredQueryCommandOutput } from "./commands/GetStoredQueryCommand";
-import {
+import type {
+  GetResourceEvaluationSummaryCommandInput,
+  GetResourceEvaluationSummaryCommandOutput,
+} from "./commands/GetResourceEvaluationSummaryCommand";
+import type { GetStoredQueryCommandInput, GetStoredQueryCommandOutput } from "./commands/GetStoredQueryCommand";
+import type {
   ListAggregateDiscoveredResourcesCommandInput,
   ListAggregateDiscoveredResourcesCommandOutput,
 } from "./commands/ListAggregateDiscoveredResourcesCommand";
-import {
+import type {
+  ListConfigurationRecordersCommandInput,
+  ListConfigurationRecordersCommandOutput,
+} from "./commands/ListConfigurationRecordersCommand";
+import type {
+  ListConformancePackComplianceScoresCommandInput,
+  ListConformancePackComplianceScoresCommandOutput,
+} from "./commands/ListConformancePackComplianceScoresCommand";
+import type { ListConnectorsCommandInput, ListConnectorsCommandOutput } from "./commands/ListConnectorsCommand";
+import type {
   ListDiscoveredResourcesCommandInput,
   ListDiscoveredResourcesCommandOutput,
 } from "./commands/ListDiscoveredResourcesCommand";
-import { ListStoredQueriesCommandInput, ListStoredQueriesCommandOutput } from "./commands/ListStoredQueriesCommand";
-import {
+import type {
+  ListResourceEvaluationsCommandInput,
+  ListResourceEvaluationsCommandOutput,
+} from "./commands/ListResourceEvaluationsCommand";
+import type {
+  ListStoredQueriesCommandInput,
+  ListStoredQueriesCommandOutput,
+} from "./commands/ListStoredQueriesCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   PutAggregationAuthorizationCommandInput,
   PutAggregationAuthorizationCommandOutput,
 } from "./commands/PutAggregationAuthorizationCommand";
-import { PutConfigRuleCommandInput, PutConfigRuleCommandOutput } from "./commands/PutConfigRuleCommand";
-import {
+import type { PutConfigRuleCommandInput, PutConfigRuleCommandOutput } from "./commands/PutConfigRuleCommand";
+import type {
   PutConfigurationAggregatorCommandInput,
   PutConfigurationAggregatorCommandOutput,
 } from "./commands/PutConfigurationAggregatorCommand";
-import {
+import type {
   PutConfigurationRecorderCommandInput,
   PutConfigurationRecorderCommandOutput,
 } from "./commands/PutConfigurationRecorderCommand";
-import { PutConformancePackCommandInput, PutConformancePackCommandOutput } from "./commands/PutConformancePackCommand";
-import { PutDeliveryChannelCommandInput, PutDeliveryChannelCommandOutput } from "./commands/PutDeliveryChannelCommand";
-import { PutEvaluationsCommandInput, PutEvaluationsCommandOutput } from "./commands/PutEvaluationsCommand";
-import {
+import type {
+  PutConformancePackCommandInput,
+  PutConformancePackCommandOutput,
+} from "./commands/PutConformancePackCommand";
+import type { PutConnectorCommandInput, PutConnectorCommandOutput } from "./commands/PutConnectorCommand";
+import type {
+  PutDeliveryChannelCommandInput,
+  PutDeliveryChannelCommandOutput,
+} from "./commands/PutDeliveryChannelCommand";
+import type { PutEvaluationsCommandInput, PutEvaluationsCommandOutput } from "./commands/PutEvaluationsCommand";
+import type {
   PutExternalEvaluationCommandInput,
   PutExternalEvaluationCommandOutput,
 } from "./commands/PutExternalEvaluationCommand";
-import {
+import type {
   PutOrganizationConfigRuleCommandInput,
   PutOrganizationConfigRuleCommandOutput,
 } from "./commands/PutOrganizationConfigRuleCommand";
-import {
+import type {
   PutOrganizationConformancePackCommandInput,
   PutOrganizationConformancePackCommandOutput,
 } from "./commands/PutOrganizationConformancePackCommand";
-import {
+import type {
   PutRemediationConfigurationsCommandInput,
   PutRemediationConfigurationsCommandOutput,
 } from "./commands/PutRemediationConfigurationsCommand";
-import {
+import type {
   PutRemediationExceptionsCommandInput,
   PutRemediationExceptionsCommandOutput,
 } from "./commands/PutRemediationExceptionsCommand";
-import { PutResourceConfigCommandInput, PutResourceConfigCommandOutput } from "./commands/PutResourceConfigCommand";
-import {
+import type {
+  PutResourceConfigCommandInput,
+  PutResourceConfigCommandOutput,
+} from "./commands/PutResourceConfigCommand";
+import type {
   PutRetentionConfigurationCommandInput,
   PutRetentionConfigurationCommandOutput,
 } from "./commands/PutRetentionConfigurationCommand";
-import { PutStoredQueryCommandInput, PutStoredQueryCommandOutput } from "./commands/PutStoredQueryCommand";
-import {
+import type {
+  PutServiceLinkedConfigurationRecorderCommandInput,
+  PutServiceLinkedConfigurationRecorderCommandOutput,
+} from "./commands/PutServiceLinkedConfigurationRecorderCommand";
+import type { PutStoredQueryCommandInput, PutStoredQueryCommandOutput } from "./commands/PutStoredQueryCommand";
+import type {
+  PutThirdPartyServiceLinkedConfigurationRecorderCommandInput,
+  PutThirdPartyServiceLinkedConfigurationRecorderCommandOutput,
+} from "./commands/PutThirdPartyServiceLinkedConfigurationRecorderCommand";
+import type {
   SelectAggregateResourceConfigCommandInput,
   SelectAggregateResourceConfigCommandOutput,
 } from "./commands/SelectAggregateResourceConfigCommand";
-import {
+import type {
   SelectResourceConfigCommandInput,
   SelectResourceConfigCommandOutput,
 } from "./commands/SelectResourceConfigCommand";
-import {
+import type {
   StartConfigRulesEvaluationCommandInput,
   StartConfigRulesEvaluationCommandOutput,
 } from "./commands/StartConfigRulesEvaluationCommand";
-import {
+import type {
   StartConfigurationRecorderCommandInput,
   StartConfigurationRecorderCommandOutput,
 } from "./commands/StartConfigurationRecorderCommand";
-import {
+import type {
   StartRemediationExecutionCommandInput,
   StartRemediationExecutionCommandOutput,
 } from "./commands/StartRemediationExecutionCommand";
-import {
+import type {
+  StartResourceEvaluationCommandInput,
+  StartResourceEvaluationCommandOutput,
+} from "./commands/StartResourceEvaluationCommand";
+import type {
   StopConfigurationRecorderCommandInput,
   StopConfigurationRecorderCommandOutput,
 } from "./commands/StopConfigurationRecorderCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AssociateResourceTypesCommandInput
   | BatchGetAggregateResourceConfigCommandInput
   | BatchGetResourceConfigCommandInput
   | DeleteAggregationAuthorizationCommandInput
@@ -367,6 +452,7 @@ export type ServiceInputTypes =
   | DeleteConfigurationAggregatorCommandInput
   | DeleteConfigurationRecorderCommandInput
   | DeleteConformancePackCommandInput
+  | DeleteConnectorCommandInput
   | DeleteDeliveryChannelCommandInput
   | DeleteEvaluationResultsCommandInput
   | DeleteOrganizationConfigRuleCommandInput
@@ -376,6 +462,7 @@ export type ServiceInputTypes =
   | DeleteRemediationExceptionsCommandInput
   | DeleteResourceConfigCommandInput
   | DeleteRetentionConfigurationCommandInput
+  | DeleteServiceLinkedConfigurationRecorderCommandInput
   | DeleteStoredQueryCommandInput
   | DeliverConfigSnapshotCommandInput
   | DescribeAggregateComplianceByConfigRulesCommandInput
@@ -403,6 +490,7 @@ export type ServiceInputTypes =
   | DescribeRemediationExceptionsCommandInput
   | DescribeRemediationExecutionStatusCommandInput
   | DescribeRetentionConfigurationsCommandInput
+  | DisassociateResourceTypesCommandInput
   | GetAggregateComplianceDetailsByConfigRuleCommandInput
   | GetAggregateConfigRuleComplianceSummaryCommandInput
   | GetAggregateConformancePackComplianceSummaryCommandInput
@@ -414,13 +502,21 @@ export type ServiceInputTypes =
   | GetComplianceSummaryByResourceTypeCommandInput
   | GetConformancePackComplianceDetailsCommandInput
   | GetConformancePackComplianceSummaryCommandInput
+  | GetConnectorCommandInput
+  | GetCustomRulePolicyCommandInput
   | GetDiscoveredResourceCountsCommandInput
   | GetOrganizationConfigRuleDetailedStatusCommandInput
   | GetOrganizationConformancePackDetailedStatusCommandInput
+  | GetOrganizationCustomRulePolicyCommandInput
   | GetResourceConfigHistoryCommandInput
+  | GetResourceEvaluationSummaryCommandInput
   | GetStoredQueryCommandInput
   | ListAggregateDiscoveredResourcesCommandInput
+  | ListConfigurationRecordersCommandInput
+  | ListConformancePackComplianceScoresCommandInput
+  | ListConnectorsCommandInput
   | ListDiscoveredResourcesCommandInput
+  | ListResourceEvaluationsCommandInput
   | ListStoredQueriesCommandInput
   | ListTagsForResourceCommandInput
   | PutAggregationAuthorizationCommandInput
@@ -428,6 +524,7 @@ export type ServiceInputTypes =
   | PutConfigurationAggregatorCommandInput
   | PutConfigurationRecorderCommandInput
   | PutConformancePackCommandInput
+  | PutConnectorCommandInput
   | PutDeliveryChannelCommandInput
   | PutEvaluationsCommandInput
   | PutExternalEvaluationCommandInput
@@ -437,17 +534,24 @@ export type ServiceInputTypes =
   | PutRemediationExceptionsCommandInput
   | PutResourceConfigCommandInput
   | PutRetentionConfigurationCommandInput
+  | PutServiceLinkedConfigurationRecorderCommandInput
   | PutStoredQueryCommandInput
+  | PutThirdPartyServiceLinkedConfigurationRecorderCommandInput
   | SelectAggregateResourceConfigCommandInput
   | SelectResourceConfigCommandInput
   | StartConfigRulesEvaluationCommandInput
   | StartConfigurationRecorderCommandInput
   | StartRemediationExecutionCommandInput
+  | StartResourceEvaluationCommandInput
   | StopConfigurationRecorderCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AssociateResourceTypesCommandOutput
   | BatchGetAggregateResourceConfigCommandOutput
   | BatchGetResourceConfigCommandOutput
   | DeleteAggregationAuthorizationCommandOutput
@@ -455,6 +559,7 @@ export type ServiceOutputTypes =
   | DeleteConfigurationAggregatorCommandOutput
   | DeleteConfigurationRecorderCommandOutput
   | DeleteConformancePackCommandOutput
+  | DeleteConnectorCommandOutput
   | DeleteDeliveryChannelCommandOutput
   | DeleteEvaluationResultsCommandOutput
   | DeleteOrganizationConfigRuleCommandOutput
@@ -464,6 +569,7 @@ export type ServiceOutputTypes =
   | DeleteRemediationExceptionsCommandOutput
   | DeleteResourceConfigCommandOutput
   | DeleteRetentionConfigurationCommandOutput
+  | DeleteServiceLinkedConfigurationRecorderCommandOutput
   | DeleteStoredQueryCommandOutput
   | DeliverConfigSnapshotCommandOutput
   | DescribeAggregateComplianceByConfigRulesCommandOutput
@@ -491,6 +597,7 @@ export type ServiceOutputTypes =
   | DescribeRemediationExceptionsCommandOutput
   | DescribeRemediationExecutionStatusCommandOutput
   | DescribeRetentionConfigurationsCommandOutput
+  | DisassociateResourceTypesCommandOutput
   | GetAggregateComplianceDetailsByConfigRuleCommandOutput
   | GetAggregateConfigRuleComplianceSummaryCommandOutput
   | GetAggregateConformancePackComplianceSummaryCommandOutput
@@ -502,13 +609,21 @@ export type ServiceOutputTypes =
   | GetComplianceSummaryByResourceTypeCommandOutput
   | GetConformancePackComplianceDetailsCommandOutput
   | GetConformancePackComplianceSummaryCommandOutput
+  | GetConnectorCommandOutput
+  | GetCustomRulePolicyCommandOutput
   | GetDiscoveredResourceCountsCommandOutput
   | GetOrganizationConfigRuleDetailedStatusCommandOutput
   | GetOrganizationConformancePackDetailedStatusCommandOutput
+  | GetOrganizationCustomRulePolicyCommandOutput
   | GetResourceConfigHistoryCommandOutput
+  | GetResourceEvaluationSummaryCommandOutput
   | GetStoredQueryCommandOutput
   | ListAggregateDiscoveredResourcesCommandOutput
+  | ListConfigurationRecordersCommandOutput
+  | ListConformancePackComplianceScoresCommandOutput
+  | ListConnectorsCommandOutput
   | ListDiscoveredResourcesCommandOutput
+  | ListResourceEvaluationsCommandOutput
   | ListStoredQueriesCommandOutput
   | ListTagsForResourceCommandOutput
   | PutAggregationAuthorizationCommandOutput
@@ -516,6 +631,7 @@ export type ServiceOutputTypes =
   | PutConfigurationAggregatorCommandOutput
   | PutConfigurationRecorderCommandOutput
   | PutConformancePackCommandOutput
+  | PutConnectorCommandOutput
   | PutDeliveryChannelCommandOutput
   | PutEvaluationsCommandOutput
   | PutExternalEvaluationCommandOutput
@@ -525,28 +641,34 @@ export type ServiceOutputTypes =
   | PutRemediationExceptionsCommandOutput
   | PutResourceConfigCommandOutput
   | PutRetentionConfigurationCommandOutput
+  | PutServiceLinkedConfigurationRecorderCommandOutput
   | PutStoredQueryCommandOutput
+  | PutThirdPartyServiceLinkedConfigurationRecorderCommandOutput
   | SelectAggregateResourceConfigCommandOutput
   | SelectResourceConfigCommandOutput
   | StartConfigRulesEvaluationCommandOutput
   | StartConfigurationRecorderCommandOutput
   | StartRemediationExecutionCommandOutput
+  | StartResourceEvaluationCommandOutput
   | StopConfigurationRecorderCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -558,7 +680,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -597,25 +719,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -628,65 +741,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ConfigServiceClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ConfigServiceClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ConfigServiceClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ConfigServiceClient class constructor that set the region, credentials and other options.
  */
 export interface ConfigServiceClientConfig extends ConfigServiceClientConfigType {}
 
-type ConfigServiceClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ConfigServiceClient class. This is resolved and normalized from the {@link ConfigServiceClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ConfigServiceClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ConfigServiceClient class. This is resolved and normalized from the {@link ConfigServiceClientConfig | constructor configuration interface}.
  */
 export interface ConfigServiceClientResolvedConfig extends ConfigServiceClientResolvedConfigType {}
 
 /**
  * <fullname>Config</fullname>
- *
- * 		       <p>Config provides a way to keep track of the configurations
+ *          <p>Config provides a way to keep track of the configurations
  * 			of all the Amazon Web Services resources associated with your Amazon Web Services account. You can
  * 			use Config to get the current and historical configurations of
  * 			each Amazon Web Services resource and also to get information about the relationship
@@ -694,8 +855,7 @@ export interface ConfigServiceClientResolvedConfig extends ConfigServiceClientRe
  * 			Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an
  * 			elastic network Interface (ENI), or a security group. For a complete
  * 			list of resources currently supported by Config, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Amazon Web Services resources</a>.</p>
- *
- * 		       <p>You can access and manage Config through the Amazon Web Services Management
+ *          <p>You can access and manage Config through the Amazon Web Services Management
  * 			Console, the Amazon Web Services Command Line Interface (Amazon Web Services CLI), the Config
  * 			API, or the Amazon Web Services SDKs for Config. This reference guide contains
  * 			documentation for the Config API and the Amazon Web Services CLI commands that
@@ -707,6 +867,7 @@ export interface ConfigServiceClientResolvedConfig extends ConfigServiceClientRe
  * 			about Config features and their associated actions or commands,
  * 			as well as how to work with Amazon Web Services Management Console, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What Is Config</a> in the <i>Config Developer
  * 				Guide</i>.</p>
+ * @public
  */
 export class ConfigServiceClient extends __Client<
   __HttpHandlerOptions,
@@ -719,22 +880,36 @@ export class ConfigServiceClient extends __Client<
    */
   readonly config: ConfigServiceClientResolvedConfig;
 
-  constructor(configuration: ConfigServiceClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ConfigServiceClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultConfigServiceHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ConfigServiceClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

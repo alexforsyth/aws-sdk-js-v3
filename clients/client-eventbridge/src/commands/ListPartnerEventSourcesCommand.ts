@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { ListPartnerEventSourcesRequest, ListPartnerEventSourcesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListPartnerEventSourcesCommand,
-  serializeAws_json1_1ListPartnerEventSourcesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPartnerEventSourcesRequest, ListPartnerEventSourcesResponse } from "../models/models_0";
+import { ListPartnerEventSources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPartnerEventSourcesCommand}.
+ */
 export interface ListPartnerEventSourcesCommandInput extends ListPartnerEventSourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPartnerEventSourcesCommand}.
+ */
 export interface ListPartnerEventSourcesCommandOutput extends ListPartnerEventSourcesResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface ListPartnerEventSourcesCommandOutput extends ListPartnerEventSo
  * ```javascript
  * import { EventBridgeClient, ListPartnerEventSourcesCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, ListPartnerEventSourcesCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // ListPartnerEventSourcesRequest
+ *   NamePrefix: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListPartnerEventSourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListPartnerEventSourcesResponse
+ * //   PartnerEventSources: [ // PartnerEventSourceList
+ * //     { // PartnerEventSource
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPartnerEventSourcesCommandInput - {@link ListPartnerEventSourcesCommandInput}
+ * @returns {@link ListPartnerEventSourcesCommandOutput}
  * @see {@link ListPartnerEventSourcesCommandInput} for command's `input` shape.
  * @see {@link ListPartnerEventSourcesCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class ListPartnerEventSourcesCommand extends $Command<
-  ListPartnerEventSourcesCommandInput,
-  ListPartnerEventSourcesCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPartnerEventSourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPartnerEventSourcesCommandInput, ListPartnerEventSourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "ListPartnerEventSourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPartnerEventSourcesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPartnerEventSourcesResponse.filterSensitiveLog,
+export class ListPartnerEventSourcesCommand extends command<ListPartnerEventSourcesCommandInput, ListPartnerEventSourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPartnerEventSources",
+  ListPartnerEventSources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPartnerEventSourcesRequest;
+      output: ListPartnerEventSourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPartnerEventSourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPartnerEventSourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPartnerEventSourcesCommandOutput> {
-    return deserializeAws_json1_1ListPartnerEventSourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPartnerEventSourcesCommandInput;
+      output: ListPartnerEventSourcesCommandOutput;
+    };
+  };
 }

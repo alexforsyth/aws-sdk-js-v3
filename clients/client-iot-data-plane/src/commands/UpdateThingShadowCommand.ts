@@ -1,25 +1,41 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { BlobPayloadInputTypes, MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTDataPlaneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTDataPlaneClient";
-import { UpdateThingShadowRequest, UpdateThingShadowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateThingShadowCommand,
-  serializeAws_restJson1UpdateThingShadowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateThingShadowRequest, UpdateThingShadowResponse } from "../models/models_0";
+import { UpdateThingShadow$ } from "../schemas/schemas_0";
 
-export interface UpdateThingShadowCommandInput extends UpdateThingShadowRequest {}
-export interface UpdateThingShadowCommandOutput extends UpdateThingShadowResponse, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ */
+export type UpdateThingShadowCommandInputType = Omit<UpdateThingShadowRequest, "payload"> & {
+  payload: BlobPayloadInputTypes;
+};
+
+/**
+ * @public
+ *
+ * The input for {@link UpdateThingShadowCommand}.
+ */
+export interface UpdateThingShadowCommandInput extends UpdateThingShadowCommandInputType {}
+/**
+ * @public
+ */
+export type UpdateThingShadowCommandOutputType = Omit<UpdateThingShadowResponse, "payload"> & {
+  payload?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link UpdateThingShadowCommand}.
+ */
+export interface UpdateThingShadowCommandOutput extends UpdateThingShadowCommandOutputType, __MetadataBearer {}
 
 /**
  * <p>Updates the shadow for the specified thing.</p>
@@ -31,68 +47,76 @@ export interface UpdateThingShadowCommandOutput extends UpdateThingShadowRespons
  * ```javascript
  * import { IoTDataPlaneClient, UpdateThingShadowCommand } from "@aws-sdk/client-iot-data-plane"; // ES Modules import
  * // const { IoTDataPlaneClient, UpdateThingShadowCommand } = require("@aws-sdk/client-iot-data-plane"); // CommonJS import
+ * // import type { IoTDataPlaneClientConfig } from "@aws-sdk/client-iot-data-plane";
+ * const config = {}; // type is IoTDataPlaneClientConfig
  * const client = new IoTDataPlaneClient(config);
+ * const input = { // UpdateThingShadowRequest
+ *   thingName: "STRING_VALUE", // required
+ *   shadowName: "STRING_VALUE",
+ *   payload: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ * };
  * const command = new UpdateThingShadowCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateThingShadowResponse
+ * //   payload: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param UpdateThingShadowCommandInput - {@link UpdateThingShadowCommandInput}
+ * @returns {@link UpdateThingShadowCommandOutput}
  * @see {@link UpdateThingShadowCommandInput} for command's `input` shape.
  * @see {@link UpdateThingShadowCommandOutput} for command's `response` shape.
- * @see {@link IoTDataPlaneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTDataPlaneClientResolvedConfig | config} for IoTDataPlaneClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The specified version does not match the version of the document.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The specified combination of HTTP verb and URI is not supported.</p>
+ *
+ * @throws {@link RequestEntityTooLargeException} (client fault)
+ *  <p>The payload exceeds the maximum size allowed.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link UnsupportedDocumentEncodingException} (client fault)
+ *  <p>The document encoding is not supported.</p>
+ *
+ * @throws {@link IoTDataPlaneServiceException}
+ * <p>Base exception class for all service exceptions from IoTDataPlane service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateThingShadowCommand extends $Command<
-  UpdateThingShadowCommandInput,
-  UpdateThingShadowCommandOutput,
-  IoTDataPlaneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateThingShadowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTDataPlaneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateThingShadowCommandInput, UpdateThingShadowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTDataPlaneClient";
-    const commandName = "UpdateThingShadowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateThingShadowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateThingShadowResponse.filterSensitiveLog,
+export class UpdateThingShadowCommand extends command<UpdateThingShadowCommandInput, UpdateThingShadowCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateThingShadow",
+  UpdateThingShadow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateThingShadowRequest;
+      output: UpdateThingShadowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateThingShadowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateThingShadowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateThingShadowCommandOutput> {
-    return deserializeAws_restJson1UpdateThingShadowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateThingShadowCommandInput;
+      output: UpdateThingShadowCommandOutput;
+    };
+  };
 }

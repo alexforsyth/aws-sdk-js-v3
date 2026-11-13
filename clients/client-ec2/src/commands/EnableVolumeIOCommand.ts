@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { EnableVolumeIORequest } from "../models/models_4";
-import { deserializeAws_ec2EnableVolumeIOCommand, serializeAws_ec2EnableVolumeIOCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableVolumeIORequest } from "../models/models_6";
+import { EnableVolumeIO$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableVolumeIOCommand}.
+ */
 export interface EnableVolumeIOCommandInput extends EnableVolumeIORequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableVolumeIOCommand}.
+ */
 export interface EnableVolumeIOCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,68 +30,59 @@ export interface EnableVolumeIOCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, EnableVolumeIOCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, EnableVolumeIOCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // EnableVolumeIORequest
+ *   DryRun: true || false,
+ *   VolumeId: "STRING_VALUE", // required
+ * };
  * const command = new EnableVolumeIOCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param EnableVolumeIOCommandInput - {@link EnableVolumeIOCommandInput}
+ * @returns {@link EnableVolumeIOCommandOutput}
  * @see {@link EnableVolumeIOCommandInput} for command's `input` shape.
  * @see {@link EnableVolumeIOCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To enable I/O for a volume
+ * ```javascript
+ * // This example enables I/O on volume ``vol-1234567890abcdef0``.
+ * const input = {
+ *   VolumeId: "vol-1234567890abcdef0"
+ * };
+ * const command = new EnableVolumeIOCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class EnableVolumeIOCommand extends $Command<
-  EnableVolumeIOCommandInput,
-  EnableVolumeIOCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableVolumeIOCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableVolumeIOCommandInput, EnableVolumeIOCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "EnableVolumeIOCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableVolumeIORequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class EnableVolumeIOCommand extends command<EnableVolumeIOCommandInput, EnableVolumeIOCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableVolumeIO",
+  EnableVolumeIO$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableVolumeIORequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: EnableVolumeIOCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2EnableVolumeIOCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<EnableVolumeIOCommandOutput> {
-    return deserializeAws_ec2EnableVolumeIOCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableVolumeIOCommandInput;
+      output: EnableVolumeIOCommandOutput;
+    };
+  };
 }

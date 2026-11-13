@@ -1,0 +1,21 @@
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Amazon CloudFront KeyValueStore Service to View and Update Data in a KVS Resource</p>
+ *
+ * @packageDocumentation
+ */
+export * from "./CloudFrontKeyValueStoreClient";
+export * from "./CloudFrontKeyValueStore";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { CloudFrontKeyValueStoreExtensionConfiguration } from "./extensionConfiguration";
+export * from "./commands";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./pagination";
+export * from "./schemas/schemas_0";
+
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { CloudFrontKeyValueStoreServiceException } from "./models/CloudFrontKeyValueStoreServiceException";

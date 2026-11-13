@@ -1,32 +1,38 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateJobStatusRequest, UpdateJobStatusResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlUpdateJobStatusCommand,
-  serializeAws_restXmlUpdateJobStatusCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { UpdateJobStatusRequest, UpdateJobStatusResult } from "../models/models_1";
+import { UpdateJobStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateJobStatusCommand}.
+ */
 export interface UpdateJobStatusCommandInput extends UpdateJobStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateJobStatusCommand}.
+ */
 export interface UpdateJobStatusCommandOutput extends UpdateJobStatusResult, __MetadataBearer {}
 
 /**
- * <p>Updates the status for the specified job. Use this action to confirm that you want to
- *          run a job or to cancel an existing job. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html">S3 Batch Operations</a> in the
- *             <i>Amazon S3 User Guide</i>.</p>
- *          <p></p>
+ * <p>Updates the status for the specified job. Use this operation to confirm that you want to
+ *          run a job or to cancel an existing job. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html">S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <p>To use the
+ *                   <code>UpdateJobStatus</code> operation, you must have permission to
+ *                   perform the <code>s3:UpdateJobStatus</code> action.</p>
+ *             </dd>
+ *          </dl>
  *          <p>Related actions include:</p>
  *          <ul>
  *             <li>
@@ -55,69 +61,67 @@ export interface UpdateJobStatusCommandOutput extends UpdateJobStatusResult, __M
  * ```javascript
  * import { S3ControlClient, UpdateJobStatusCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, UpdateJobStatusCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // UpdateJobStatusRequest
+ *   AccountId: "STRING_VALUE",
+ *   JobId: "STRING_VALUE", // required
+ *   RequestedJobStatus: "Cancelled" || "Ready", // required
+ *   StatusUpdateReason: "STRING_VALUE",
+ * };
  * const command = new UpdateJobStatusCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateJobStatusResult
+ * //   JobId: "STRING_VALUE",
+ * //   Status: "Active" || "Cancelled" || "Cancelling" || "Complete" || "Completing" || "Failed" || "Failing" || "New" || "Paused" || "Pausing" || "Preparing" || "Ready" || "Suspended",
+ * //   StatusUpdateReason: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateJobStatusCommandInput - {@link UpdateJobStatusCommandInput}
+ * @returns {@link UpdateJobStatusCommandOutput}
  * @see {@link UpdateJobStatusCommandInput} for command's `input` shape.
  * @see {@link UpdateJobStatusCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link JobStatusException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateJobStatusCommand extends $Command<
-  UpdateJobStatusCommandInput,
-  UpdateJobStatusCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateJobStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateJobStatusCommandInput, UpdateJobStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "UpdateJobStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateJobStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateJobStatusResult.filterSensitiveLog,
+export class UpdateJobStatusCommand extends command<UpdateJobStatusCommandInput, UpdateJobStatusCommandOutput>(
+  _ep0,
+  _mw1,
+  "UpdateJobStatus",
+  UpdateJobStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobStatusRequest;
+      output: UpdateJobStatusResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateJobStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlUpdateJobStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateJobStatusCommandOutput> {
-    return deserializeAws_restXmlUpdateJobStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateJobStatusCommandInput;
+      output: UpdateJobStatusCommandOutput;
+    };
+  };
 }

@@ -1,98 +1,115 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeActivationsRequest, DescribeActivationsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeActivationsCommand,
-  serializeAws_json1_1DescribeActivationsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeActivationsRequest, DescribeActivationsResult } from "../models/models_0";
+import { DescribeActivations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeActivationsCommand}.
+ */
 export interface DescribeActivationsCommandInput extends DescribeActivationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeActivationsCommand}.
+ */
 export interface DescribeActivationsCommandOutput extends DescribeActivationsResult, __MetadataBearer {}
 
 /**
  * <p>Describes details about the activation, such as the date and time the activation was
  *    created, its expiration date, the Identity and Access Management (IAM) role assigned to
- *    the instances in the activation, and the number of instances registered by using this
+ *    the managed nodes in the activation, and the number of nodes registered by using this
  *    activation.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, DescribeActivationsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribeActivationsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribeActivationsRequest
+ *   Filters: [ // DescribeActivationsFilterList
+ *     { // DescribeActivationsFilter
+ *       FilterKey: "ActivationIds" || "DefaultInstanceName" || "IamRole",
+ *       FilterValues: [ // StringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeActivationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeActivationsResult
+ * //   ActivationList: [ // ActivationList
+ * //     { // Activation
+ * //       ActivationId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       DefaultInstanceName: "STRING_VALUE",
+ * //       IamRole: "STRING_VALUE",
+ * //       RegistrationLimit: Number("int"),
+ * //       RegistrationsCount: Number("int"),
+ * //       ExpirationDate: new Date("TIMESTAMP"),
+ * //       Expired: true || false,
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeActivationsCommandInput - {@link DescribeActivationsCommandInput}
+ * @returns {@link DescribeActivationsCommandOutput}
  * @see {@link DescribeActivationsCommandInput} for command's `input` shape.
  * @see {@link DescribeActivationsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidFilter} (client fault)
+ *  <p>The filter name isn't valid. Verify that you entered the correct name and try again.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeActivationsCommand extends $Command<
-  DescribeActivationsCommandInput,
-  DescribeActivationsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeActivationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeActivationsCommandInput, DescribeActivationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribeActivationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeActivationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeActivationsResult.filterSensitiveLog,
+export class DescribeActivationsCommand extends command<DescribeActivationsCommandInput, DescribeActivationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeActivations",
+  DescribeActivations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeActivationsRequest;
+      output: DescribeActivationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeActivationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeActivationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeActivationsCommandOutput> {
-    return deserializeAws_json1_1DescribeActivationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeActivationsCommandInput;
+      output: DescribeActivationsCommandOutput;
+    };
+  };
 }

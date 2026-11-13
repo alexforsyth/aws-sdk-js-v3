@@ -1,0 +1,855 @@
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
+
+import {
+  type AddStreamGroupLocationsCommandInput,
+  type AddStreamGroupLocationsCommandOutput,
+  AddStreamGroupLocationsCommand,
+} from "./commands/AddStreamGroupLocationsCommand";
+import {
+  type AssociateApplicationsCommandInput,
+  type AssociateApplicationsCommandOutput,
+  AssociateApplicationsCommand,
+} from "./commands/AssociateApplicationsCommand";
+import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type CreateStreamGroupCommandInput,
+  type CreateStreamGroupCommandOutput,
+  CreateStreamGroupCommand,
+} from "./commands/CreateStreamGroupCommand";
+import {
+  type CreateStreamSessionAdminShellCommandInput,
+  type CreateStreamSessionAdminShellCommandOutput,
+  CreateStreamSessionAdminShellCommand,
+} from "./commands/CreateStreamSessionAdminShellCommand";
+import {
+  type CreateStreamSessionConnectionCommandInput,
+  type CreateStreamSessionConnectionCommandOutput,
+  CreateStreamSessionConnectionCommand,
+} from "./commands/CreateStreamSessionConnectionCommand";
+import {
+  type CreateStreamUrlCommandInput,
+  type CreateStreamUrlCommandOutput,
+  CreateStreamUrlCommand,
+} from "./commands/CreateStreamUrlCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteStreamGroupCommandInput,
+  type DeleteStreamGroupCommandOutput,
+  DeleteStreamGroupCommand,
+} from "./commands/DeleteStreamGroupCommand";
+import {
+  type DisassociateApplicationsCommandInput,
+  type DisassociateApplicationsCommandOutput,
+  DisassociateApplicationsCommand,
+} from "./commands/DisassociateApplicationsCommand";
+import {
+  type ExportStreamSessionFilesCommandInput,
+  type ExportStreamSessionFilesCommandOutput,
+  ExportStreamSessionFilesCommand,
+} from "./commands/ExportStreamSessionFilesCommand";
+import {
+  type GetApplicationCommandInput,
+  type GetApplicationCommandOutput,
+  GetApplicationCommand,
+} from "./commands/GetApplicationCommand";
+import {
+  type GetStreamGroupCommandInput,
+  type GetStreamGroupCommandOutput,
+  GetStreamGroupCommand,
+} from "./commands/GetStreamGroupCommand";
+import {
+  type GetStreamSessionCommandInput,
+  type GetStreamSessionCommandOutput,
+  GetStreamSessionCommand,
+} from "./commands/GetStreamSessionCommand";
+import {
+  type GetStreamUrlCommandInput,
+  type GetStreamUrlCommandOutput,
+  GetStreamUrlCommand,
+} from "./commands/GetStreamUrlCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListApplicationShaderCachesCommandInput,
+  type ListApplicationShaderCachesCommandOutput,
+  ListApplicationShaderCachesCommand,
+} from "./commands/ListApplicationShaderCachesCommand";
+import {
+  type ListStreamGroupsCommandInput,
+  type ListStreamGroupsCommandOutput,
+  ListStreamGroupsCommand,
+} from "./commands/ListStreamGroupsCommand";
+import {
+  type ListStreamSessionsByAccountCommandInput,
+  type ListStreamSessionsByAccountCommandOutput,
+  ListStreamSessionsByAccountCommand,
+} from "./commands/ListStreamSessionsByAccountCommand";
+import {
+  type ListStreamSessionsCommandInput,
+  type ListStreamSessionsCommandOutput,
+  ListStreamSessionsCommand,
+} from "./commands/ListStreamSessionsCommand";
+import {
+  type ListStreamUrlsCommandInput,
+  type ListStreamUrlsCommandOutput,
+  ListStreamUrlsCommand,
+} from "./commands/ListStreamUrlsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RemoveStreamGroupLocationsCommandInput,
+  type RemoveStreamGroupLocationsCommandOutput,
+  RemoveStreamGroupLocationsCommand,
+} from "./commands/RemoveStreamGroupLocationsCommand";
+import {
+  type RevokeStreamUrlCommandInput,
+  type RevokeStreamUrlCommandOutput,
+  RevokeStreamUrlCommand,
+} from "./commands/RevokeStreamUrlCommand";
+import {
+  type StartStreamSessionCommandInput,
+  type StartStreamSessionCommandOutput,
+  StartStreamSessionCommand,
+} from "./commands/StartStreamSessionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TerminateStreamSessionCommandInput,
+  type TerminateStreamSessionCommandOutput,
+  TerminateStreamSessionCommand,
+} from "./commands/TerminateStreamSessionCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import {
+  type UpdateStreamGroupCommandInput,
+  type UpdateStreamGroupCommandOutput,
+  UpdateStreamGroupCommand,
+} from "./commands/UpdateStreamGroupCommand";
+import { GameLiftStreamsClient } from "./GameLiftStreamsClient";
+import type { ResourceNotFoundException } from "./models/errors";
+import type { GameLiftStreamsServiceException } from "./models/GameLiftStreamsServiceException";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListStreamGroups } from "./pagination/ListStreamGroupsPaginator";
+import { paginateListStreamSessionsByAccount } from "./pagination/ListStreamSessionsByAccountPaginator";
+import { paginateListStreamSessions } from "./pagination/ListStreamSessionsPaginator";
+import { paginateListStreamUrls } from "./pagination/ListStreamUrlsPaginator";
+import { waitUntilApplicationDeleted } from "./waiters/waitForApplicationDeleted";
+import { waitUntilApplicationReady } from "./waiters/waitForApplicationReady";
+import { waitUntilStreamGroupActive } from "./waiters/waitForStreamGroupActive";
+import { waitUntilStreamGroupDeleted } from "./waiters/waitForStreamGroupDeleted";
+import { waitUntilStreamSessionActive } from "./waiters/waitForStreamSessionActive";
+
+const commands = {
+  AddStreamGroupLocationsCommand,
+  AssociateApplicationsCommand,
+  CreateApplicationCommand,
+  CreateStreamGroupCommand,
+  CreateStreamSessionAdminShellCommand,
+  CreateStreamSessionConnectionCommand,
+  CreateStreamUrlCommand,
+  DeleteApplicationCommand,
+  DeleteStreamGroupCommand,
+  DisassociateApplicationsCommand,
+  ExportStreamSessionFilesCommand,
+  GetApplicationCommand,
+  GetStreamGroupCommand,
+  GetStreamSessionCommand,
+  GetStreamUrlCommand,
+  ListApplicationsCommand,
+  ListApplicationShaderCachesCommand,
+  ListStreamGroupsCommand,
+  ListStreamSessionsCommand,
+  ListStreamSessionsByAccountCommand,
+  ListStreamUrlsCommand,
+  ListTagsForResourceCommand,
+  RemoveStreamGroupLocationsCommand,
+  RevokeStreamUrlCommand,
+  StartStreamSessionCommand,
+  TagResourceCommand,
+  TerminateStreamSessionCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+  UpdateStreamGroupCommand,
+};
+const paginators = {
+  paginateListApplications,
+  paginateListStreamGroups,
+  paginateListStreamSessions,
+  paginateListStreamSessionsByAccount,
+  paginateListStreamUrls,
+};
+const waiters = {
+  waitUntilApplicationReady,
+  waitUntilApplicationDeleted,
+  waitUntilStreamGroupActive,
+  waitUntilStreamGroupDeleted,
+  waitUntilStreamSessionActive,
+};
+
+/**
+ * @public
+ */
+export interface GameLiftStreamsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface GameLiftStreams {
+  /**
+   * @see {@link AddStreamGroupLocationsCommand}
+   */
+  addStreamGroupLocations(
+    args: AddStreamGroupLocationsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<AddStreamGroupLocationsCommandOutput>;
+  addStreamGroupLocations(
+    args: AddStreamGroupLocationsCommandInput,
+    cb: (err: any, data?: AddStreamGroupLocationsCommandOutput) => void
+  ): void;
+  addStreamGroupLocations(
+    args: AddStreamGroupLocationsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: AddStreamGroupLocationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateApplicationsCommand}
+   */
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<AssociateApplicationsCommandOutput>;
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    cb: (err: any, data?: AssociateApplicationsCommandOutput) => void
+  ): void;
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: AssociateApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateApplicationCommand}
+   */
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamGroupCommand}
+   */
+  createStreamGroup(
+    args: CreateStreamGroupCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<CreateStreamGroupCommandOutput>;
+  createStreamGroup(
+    args: CreateStreamGroupCommandInput,
+    cb: (err: any, data?: CreateStreamGroupCommandOutput) => void
+  ): void;
+  createStreamGroup(
+    args: CreateStreamGroupCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: CreateStreamGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamSessionAdminShellCommand}
+   */
+  createStreamSessionAdminShell(
+    args: CreateStreamSessionAdminShellCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<CreateStreamSessionAdminShellCommandOutput>;
+  createStreamSessionAdminShell(
+    args: CreateStreamSessionAdminShellCommandInput,
+    cb: (err: any, data?: CreateStreamSessionAdminShellCommandOutput) => void
+  ): void;
+  createStreamSessionAdminShell(
+    args: CreateStreamSessionAdminShellCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: CreateStreamSessionAdminShellCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamSessionConnectionCommand}
+   */
+  createStreamSessionConnection(
+    args: CreateStreamSessionConnectionCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<CreateStreamSessionConnectionCommandOutput>;
+  createStreamSessionConnection(
+    args: CreateStreamSessionConnectionCommandInput,
+    cb: (err: any, data?: CreateStreamSessionConnectionCommandOutput) => void
+  ): void;
+  createStreamSessionConnection(
+    args: CreateStreamSessionConnectionCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: CreateStreamSessionConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateStreamUrlCommand}
+   */
+  createStreamUrl(
+    args: CreateStreamUrlCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<CreateStreamUrlCommandOutput>;
+  createStreamUrl(
+    args: CreateStreamUrlCommandInput,
+    cb: (err: any, data?: CreateStreamUrlCommandOutput) => void
+  ): void;
+  createStreamUrl(
+    args: CreateStreamUrlCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: CreateStreamUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationCommand}
+   */
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteStreamGroupCommand}
+   */
+  deleteStreamGroup(
+    args: DeleteStreamGroupCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<DeleteStreamGroupCommandOutput>;
+  deleteStreamGroup(
+    args: DeleteStreamGroupCommandInput,
+    cb: (err: any, data?: DeleteStreamGroupCommandOutput) => void
+  ): void;
+  deleteStreamGroup(
+    args: DeleteStreamGroupCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: DeleteStreamGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateApplicationsCommand}
+   */
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<DisassociateApplicationsCommandOutput>;
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    cb: (err: any, data?: DisassociateApplicationsCommandOutput) => void
+  ): void;
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: DisassociateApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportStreamSessionFilesCommand}
+   */
+  exportStreamSessionFiles(
+    args: ExportStreamSessionFilesCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ExportStreamSessionFilesCommandOutput>;
+  exportStreamSessionFiles(
+    args: ExportStreamSessionFilesCommandInput,
+    cb: (err: any, data?: ExportStreamSessionFilesCommandOutput) => void
+  ): void;
+  exportStreamSessionFiles(
+    args: ExportStreamSessionFilesCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ExportStreamSessionFilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   */
+  getApplication(
+    args: GetApplicationCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<GetApplicationCommandOutput>;
+  getApplication(
+    args: GetApplicationCommandInput,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+  getApplication(
+    args: GetApplicationCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStreamGroupCommand}
+   */
+  getStreamGroup(
+    args: GetStreamGroupCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<GetStreamGroupCommandOutput>;
+  getStreamGroup(
+    args: GetStreamGroupCommandInput,
+    cb: (err: any, data?: GetStreamGroupCommandOutput) => void
+  ): void;
+  getStreamGroup(
+    args: GetStreamGroupCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: GetStreamGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStreamSessionCommand}
+   */
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<GetStreamSessionCommandOutput>;
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    cb: (err: any, data?: GetStreamSessionCommandOutput) => void
+  ): void;
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: GetStreamSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStreamUrlCommand}
+   */
+  getStreamUrl(
+    args: GetStreamUrlCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<GetStreamUrlCommandOutput>;
+  getStreamUrl(
+    args: GetStreamUrlCommandInput,
+    cb: (err: any, data?: GetStreamUrlCommandOutput) => void
+  ): void;
+  getStreamUrl(
+    args: GetStreamUrlCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: GetStreamUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationShaderCachesCommand}
+   */
+  listApplicationShaderCaches(
+    args: ListApplicationShaderCachesCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListApplicationShaderCachesCommandOutput>;
+  listApplicationShaderCaches(
+    args: ListApplicationShaderCachesCommandInput,
+    cb: (err: any, data?: ListApplicationShaderCachesCommandOutput) => void
+  ): void;
+  listApplicationShaderCaches(
+    args: ListApplicationShaderCachesCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListApplicationShaderCachesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamGroupsCommand}
+   */
+  listStreamGroups(): Promise<ListStreamGroupsCommandOutput>;
+  listStreamGroups(
+    args: ListStreamGroupsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListStreamGroupsCommandOutput>;
+  listStreamGroups(
+    args: ListStreamGroupsCommandInput,
+    cb: (err: any, data?: ListStreamGroupsCommandOutput) => void
+  ): void;
+  listStreamGroups(
+    args: ListStreamGroupsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListStreamGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamSessionsCommand}
+   */
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListStreamSessionsCommandOutput>;
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    cb: (err: any, data?: ListStreamSessionsCommandOutput) => void
+  ): void;
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListStreamSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamSessionsByAccountCommand}
+   */
+  listStreamSessionsByAccount(): Promise<ListStreamSessionsByAccountCommandOutput>;
+  listStreamSessionsByAccount(
+    args: ListStreamSessionsByAccountCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListStreamSessionsByAccountCommandOutput>;
+  listStreamSessionsByAccount(
+    args: ListStreamSessionsByAccountCommandInput,
+    cb: (err: any, data?: ListStreamSessionsByAccountCommandOutput) => void
+  ): void;
+  listStreamSessionsByAccount(
+    args: ListStreamSessionsByAccountCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListStreamSessionsByAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStreamUrlsCommand}
+   */
+  listStreamUrls(): Promise<ListStreamUrlsCommandOutput>;
+  listStreamUrls(
+    args: ListStreamUrlsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListStreamUrlsCommandOutput>;
+  listStreamUrls(
+    args: ListStreamUrlsCommandInput,
+    cb: (err: any, data?: ListStreamUrlsCommandOutput) => void
+  ): void;
+  listStreamUrls(
+    args: ListStreamUrlsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListStreamUrlsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveStreamGroupLocationsCommand}
+   */
+  removeStreamGroupLocations(
+    args: RemoveStreamGroupLocationsCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<RemoveStreamGroupLocationsCommandOutput>;
+  removeStreamGroupLocations(
+    args: RemoveStreamGroupLocationsCommandInput,
+    cb: (err: any, data?: RemoveStreamGroupLocationsCommandOutput) => void
+  ): void;
+  removeStreamGroupLocations(
+    args: RemoveStreamGroupLocationsCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: RemoveStreamGroupLocationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RevokeStreamUrlCommand}
+   */
+  revokeStreamUrl(
+    args: RevokeStreamUrlCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<RevokeStreamUrlCommandOutput>;
+  revokeStreamUrl(
+    args: RevokeStreamUrlCommandInput,
+    cb: (err: any, data?: RevokeStreamUrlCommandOutput) => void
+  ): void;
+  revokeStreamUrl(
+    args: RevokeStreamUrlCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: RevokeStreamUrlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartStreamSessionCommand}
+   */
+  startStreamSession(
+    args: StartStreamSessionCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<StartStreamSessionCommandOutput>;
+  startStreamSession(
+    args: StartStreamSessionCommandInput,
+    cb: (err: any, data?: StartStreamSessionCommandOutput) => void
+  ): void;
+  startStreamSession(
+    args: StartStreamSessionCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: StartStreamSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TerminateStreamSessionCommand}
+   */
+  terminateStreamSession(
+    args: TerminateStreamSessionCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<TerminateStreamSessionCommandOutput>;
+  terminateStreamSession(
+    args: TerminateStreamSessionCommandInput,
+    cb: (err: any, data?: TerminateStreamSessionCommandOutput) => void
+  ): void;
+  terminateStreamSession(
+    args: TerminateStreamSessionCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: TerminateStreamSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateApplicationCommand}
+   */
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStreamGroupCommand}
+   */
+  updateStreamGroup(
+    args: UpdateStreamGroupCommandInput,
+    options?: GameLiftStreamsRequestOptions
+  ): Promise<UpdateStreamGroupCommandOutput>;
+  updateStreamGroup(
+    args: UpdateStreamGroupCommandInput,
+    cb: (err: any, data?: UpdateStreamGroupCommandOutput) => void
+  ): void;
+  updateStreamGroup(
+    args: UpdateStreamGroupCommandInput,
+    options: GameLiftStreamsRequestOptions,
+    cb: (err: any, data?: UpdateStreamGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args?: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamGroupsCommandOutput}.
+   */
+  paginateListStreamGroups(
+    args?: ListStreamGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamSessionsCommandOutput}.
+   */
+  paginateListStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamSessionsByAccountCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamSessionsByAccountCommandOutput}.
+   */
+  paginateListStreamSessionsByAccount(
+    args?: ListStreamSessionsByAccountCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamSessionsByAccountCommandOutput>;
+
+  /**
+   * @see {@link ListStreamUrlsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamUrlsCommandOutput}.
+   */
+  paginateListStreamUrls(
+    args?: ListStreamUrlsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamUrlsCommandOutput>;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilApplicationReady(
+    args: GetApplicationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<GameLiftStreams>, "client">
+  ): Promise<WaiterResult<GetApplicationCommandOutput>>;
+
+  /**
+   * @see {@link GetApplicationCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilApplicationDeleted(
+    args: GetApplicationCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<GameLiftStreams>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link GetStreamGroupCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStreamGroupActive(
+    args: GetStreamGroupCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<GameLiftStreams>, "client">
+  ): Promise<WaiterResult<GetStreamGroupCommandOutput>>;
+
+  /**
+   * @see {@link GetStreamGroupCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStreamGroupDeleted(
+    args: GetStreamGroupCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<GameLiftStreams>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link GetStreamSessionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilStreamSessionActive(
+    args: GetStreamSessionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<GameLiftStreams>, "client">
+  ): Promise<WaiterResult<GetStreamSessionCommandOutput>>;
+}
+
+/**
+ * <fullname>Amazon GameLift Streams</fullname> <p>Amazon GameLift Streams provides a global cloud solution for content streaming experiences. Use Amazon GameLift Streams tools to upload and configure content for streaming, deploy and scale computing resources to host streams, and manage stream session placement to meet customer demand.</p> <p>This Reference Guide describes the Amazon GameLift Streams service API. You can use the API through the Amazon Web Services SDK, the Command Line Interface (CLI), or by making direct REST calls through HTTPS.</p> <p>See the <i>Amazon GameLift Streams Developer Guide</i> for more information on how Amazon GameLift Streams works and how to work with it.</p>
+ * @public
+ */
+export class GameLiftStreams extends GameLiftStreamsClient implements GameLiftStreams {}
+createAggregatedClient(commands, GameLiftStreams, { paginators, waiters });

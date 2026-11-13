@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { Cloud9 } from "../Cloud9";
 import { Cloud9Client } from "../Cloud9Client";
 import {
   ListEnvironmentsCommand,
   ListEnvironmentsCommandInput,
   ListEnvironmentsCommandOutput,
 } from "../commands/ListEnvironmentsCommand";
-import { Cloud9PaginationConfiguration } from "./Interfaces";
+import type { Cloud9PaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: Cloud9Client,
-  input: ListEnvironmentsCommandInput,
-  ...args: any
-): Promise<ListEnvironmentsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListEnvironmentsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Cloud9,
-  input: ListEnvironmentsCommandInput,
-  ...args: any
-): Promise<ListEnvironmentsCommandOutput> => {
-  // @ts-ignore
-  return await client.listEnvironments(input, ...args);
-};
-export async function* paginateListEnvironments(
+export const paginateListEnvironments: (
   config: Cloud9PaginationConfiguration,
   input: ListEnvironmentsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListEnvironmentsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListEnvironmentsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof Cloud9) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof Cloud9Client) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Cloud9 | Cloud9Client");
-    }
-    yield page;
-    token = page.nextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListEnvironmentsCommandOutput> = createPaginator<
+  Cloud9PaginationConfiguration,
+  ListEnvironmentsCommandInput,
+  ListEnvironmentsCommandOutput
+>(Cloud9Client, ListEnvironmentsCommand, "nextToken", "nextToken", "maxResults");

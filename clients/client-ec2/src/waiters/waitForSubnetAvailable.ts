@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeSubnetsCommand, DescribeSubnetsCommandInput } from "../commands/DescribeSubnetsCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type DescribeSubnetsCommandInput,
+  type DescribeSubnetsCommandOutput,
+  DescribeSubnetsCommand,
+} from "../commands/DescribeSubnetsCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeSubnetsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeSubnetsCommandInput): Promise<WaiterResult<DescribeSubnetsCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeSubnetsCommand(input));
+    let result: DescribeSubnetsCommandOutput & any = await client.send(new DescribeSubnetsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Subnets);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Subnets);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "available";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "available")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -36,7 +48,7 @@ const checkState = async (client: EC2Client, input: DescribeSubnetsCommandInput)
 export const waitForSubnetAvailable = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSubnetsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSubnetsCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -48,8 +60,8 @@ export const waitForSubnetAvailable = async (
 export const waitUntilSubnetAvailable = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeSubnetsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeSubnetsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeSubnetsCommandOutput>;
 };

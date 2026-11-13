@@ -1,96 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EKSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EKSClient";
-import { ListNodegroupsRequest, ListNodegroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListNodegroupsCommand,
-  serializeAws_restJson1ListNodegroupsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListNodegroupsRequest, ListNodegroupsResponse } from "../models/models_0";
+import { ListNodegroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListNodegroupsCommand}.
+ */
 export interface ListNodegroupsCommandInput extends ListNodegroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListNodegroupsCommand}.
+ */
 export interface ListNodegroupsCommandOutput extends ListNodegroupsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the Amazon EKS managed node groups associated with the specified cluster in your
- *             Amazon Web Services account in the specified Region. Self-managed node groups are not listed.</p>
+ * <p>Lists the managed node groups associated with the specified cluster in your Amazon Web Services
+ *             account in the specified Amazon Web Services Region. Self-managed node groups aren't listed.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EKSClient, ListNodegroupsCommand } from "@aws-sdk/client-eks"; // ES Modules import
  * // const { EKSClient, ListNodegroupsCommand } = require("@aws-sdk/client-eks"); // CommonJS import
+ * // import type { EKSClientConfig } from "@aws-sdk/client-eks";
+ * const config = {}; // type is EKSClientConfig
  * const client = new EKSClient(config);
+ * const input = { // ListNodegroupsRequest
+ *   clusterName: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListNodegroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListNodegroupsResponse
+ * //   nodegroups: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListNodegroupsCommandInput - {@link ListNodegroupsCommandInput}
+ * @returns {@link ListNodegroupsCommandOutput}
  * @see {@link ListNodegroupsCommandInput} for command's `input` shape.
  * @see {@link ListNodegroupsCommandOutput} for command's `response` shape.
- * @see {@link EKSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EKSClientResolvedConfig | config} for EKSClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. Actions can include using an
+ *             action or resource on behalf of an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a> that doesn't have permissions to use
+ *             the action or resource or specifying an identifier that is not valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found. You can view your available clusters with
+ *                 <code>ListClusters</code>. You can view your available managed node groups with
+ *                 <code>ListNodegroups</code>. Amazon EKS clusters and node groups are Amazon Web Services Region
+ *             specific.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is unavailable. Back off and retry the operation.</p>
+ *
+ * @throws {@link EKSServiceException}
+ * <p>Base exception class for all service exceptions from EKS service.</p>
+ *
+ *
+ * @public
  */
-export class ListNodegroupsCommand extends $Command<
-  ListNodegroupsCommandInput,
-  ListNodegroupsCommandOutput,
-  EKSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListNodegroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EKSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListNodegroupsCommandInput, ListNodegroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EKSClient";
-    const commandName = "ListNodegroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListNodegroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListNodegroupsResponse.filterSensitiveLog,
+export class ListNodegroupsCommand extends command<ListNodegroupsCommandInput, ListNodegroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListNodegroups",
+  ListNodegroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNodegroupsRequest;
+      output: ListNodegroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListNodegroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListNodegroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListNodegroupsCommandOutput> {
-    return deserializeAws_restJson1ListNodegroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListNodegroupsCommandInput;
+      output: ListNodegroupsCommandOutput;
+    };
+  };
 }

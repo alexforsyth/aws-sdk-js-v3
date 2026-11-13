@@ -1,46 +1,48 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KMSClient";
-import { ListGrantsRequest, ListGrantsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListGrantsCommand,
-  serializeAws_json1_1ListGrantsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListGrantsRequest, ListGrantsResponse } from "../models/models_0";
+import { ListGrants$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListGrantsCommand}.
+ */
 export interface ListGrantsCommandInput extends ListGrantsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListGrantsCommand}.
+ */
 export interface ListGrantsCommandOutput extends ListGrantsResponse, __MetadataBearer {}
 
 /**
  * <p>Gets a list of all grants for the specified KMS key. </p>
- *          <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID or
- *       grantee principal.</p>
- *          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Using grants</a> in the
+ *          <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID,
+ *       grantee principal, or grantee service principal.</p>
+ *          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Grants in KMS</a> in the
  *         <i>
  *                <i>Key Management Service Developer Guide</i>
- *             </i>. For examples of working with grants in several
- *       programming languages, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html">Programming grants</a>. </p>
+ *             </i>. For examples of creating grants in several
+ *       programming languages, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>
  *          <note>
- *             <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the
- *         user or role designated as the grantee principal in the grant. However, when the grantee
- *         principal in the grant is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains
- *         the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service
- *           principal</a>, which might represent several different grantee principals.</p>
+ *             <p>When a grant is created with the <code>GranteePrincipal</code> field, the <code>ListGrants</code>
+ *         response usually contains the user or role designated as the grantee principal in the grant. However, if the grantee principal
+ *         is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains an Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>, which
+ *         might correspond to several different grantee principals, such as an IAM user, IAM role, or Amazon Web Services account.</p>
+ *             <p>When a grant is created with the <code>GranteeServicePrincipal</code> field, the <code>ListGrants</code>
+ * 	      response always includes a <code>GranteeServicePrincipal</code> that indicates the grantee is actually
+ *         an Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>.</p>
  *          </note>
  *          <p>
  *             <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key
  *   ARN in the value of the <code>KeyId</code> parameter.</p>
- *
  *          <p>
  *             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:ListGrants</a> (key policy)</p>
  *          <p>
@@ -68,73 +70,129 @@ export interface ListGrantsCommandOutput extends ListGrantsResponse, __MetadataB
  *                </p>
  *             </li>
  *          </ul>
+ *          <p>
+ *             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+ *   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { KMSClient, ListGrantsCommand } from "@aws-sdk/client-kms"; // ES Modules import
  * // const { KMSClient, ListGrantsCommand } = require("@aws-sdk/client-kms"); // CommonJS import
+ * // import type { KMSClientConfig } from "@aws-sdk/client-kms";
+ * const config = {}; // type is KMSClientConfig
  * const client = new KMSClient(config);
+ * const input = { // ListGrantsRequest
+ *   Limit: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   KeyId: "STRING_VALUE", // required
+ *   GrantId: "STRING_VALUE",
+ *   GranteePrincipal: "STRING_VALUE",
+ *   GranteeServicePrincipal: "STRING_VALUE",
+ * };
  * const command = new ListGrantsCommand(input);
  * const response = await client.send(command);
+ * // { // ListGrantsResponse
+ * //   Grants: [ // GrantList
+ * //     { // GrantListEntry
+ * //       KeyId: "STRING_VALUE",
+ * //       GrantId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       CreationDate: new Date("TIMESTAMP"),
+ * //       GranteePrincipal: "STRING_VALUE",
+ * //       RetiringPrincipal: "STRING_VALUE",
+ * //       IssuingAccount: "STRING_VALUE",
+ * //       Operations: [ // GrantOperationList
+ * //         "Decrypt" || "Encrypt" || "GenerateDataKey" || "GenerateDataKeyWithoutPlaintext" || "ReEncryptFrom" || "ReEncryptTo" || "Sign" || "Verify" || "GetPublicKey" || "CreateGrant" || "RetireGrant" || "DescribeKey" || "GenerateDataKeyPair" || "GenerateDataKeyPairWithoutPlaintext" || "GenerateMac" || "VerifyMac" || "DeriveSharedSecret" || "Encapsulate" || "Decapsulate",
+ * //       ],
+ * //       Constraints: { // GrantConstraints
+ * //         EncryptionContextSubset: { // EncryptionContextType
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         EncryptionContextEquals: {
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         SourceArn: "STRING_VALUE",
+ * //       },
+ * //       GranteeServicePrincipal: "STRING_VALUE",
+ * //       RetiringServicePrincipal: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * //   Truncated: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ListGrantsCommandInput - {@link ListGrantsCommandInput}
+ * @returns {@link ListGrantsCommandOutput}
  * @see {@link ListGrantsCommandInput} for command's `input` shape.
  * @see {@link ListGrantsCommandOutput} for command's `response` shape.
- * @see {@link KMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KMSClientResolvedConfig | config} for KMSClient's `config` shape.
  *
+ * @throws {@link DependencyTimeoutException} (server fault)
+ *  <p>The system timed out while trying to fulfill the request. You can retry the
+ *       request.</p>
+ *
+ * @throws {@link InvalidArnException} (client fault)
+ *  <p>The request was rejected because a specified ARN, or an ARN in a key policy, is not
+ *       valid.</p>
+ *
+ * @throws {@link InvalidGrantIdException} (client fault)
+ *  <p>The request was rejected because the specified <code>GrantId</code> is not valid.</p>
+ *
+ * @throws {@link InvalidMarkerException} (client fault)
+ *  <p>The request was rejected because the marker that specifies where pagination should next
+ *       begin is not valid.</p>
+ *
+ * @throws {@link KMSInternalException} (server fault)
+ *  <p>The request was rejected because an internal exception occurred. The request can be
+ *       retried.</p>
+ *
+ * @throws {@link KMSInvalidStateException} (client fault)
+ *  <p>The request was rejected because the state of the specified resource is not valid for this
+ *       request.</p>
+ *          <p>This exceptions means one of the following:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The key state of the KMS key is not compatible with the operation. </p>
+ *                <p>To find the key state, use the <a>DescribeKey</a> operation. For more
+ *           information about which key states are compatible with each KMS operation, see
+ *           <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>
+ *                      <i>Key Management Service Developer Guide</i>
+ *                   </i>.</p>
+ *             </li>
+ *             <li>
+ *                <p>For cryptographic operations on KMS keys in custom key stores, this exception
+ *           represents a general failure with many possible causes. To identify the cause, see the
+ *           error message that accompanies the exception.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The request was rejected because the specified entity or resource could not be
+ *       found.</p>
+ *
+ * @throws {@link KMSServiceException}
+ * <p>Base exception class for all service exceptions from KMS service.</p>
+ *
+ *
+ * @public
  */
-export class ListGrantsCommand extends $Command<
-  ListGrantsCommandInput,
-  ListGrantsCommandOutput,
-  KMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListGrantsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListGrantsCommandInput, ListGrantsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KMSClient";
-    const commandName = "ListGrantsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListGrantsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListGrantsResponse.filterSensitiveLog,
+export class ListGrantsCommand extends command<ListGrantsCommandInput, ListGrantsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListGrants",
+  ListGrants$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListGrantsRequest;
+      output: ListGrantsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListGrantsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListGrantsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListGrantsCommandOutput> {
-    return deserializeAws_json1_1ListGrantsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListGrantsCommandInput;
+      output: ListGrantsCommandOutput;
+    };
+  };
 }

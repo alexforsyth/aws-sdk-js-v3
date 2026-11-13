@@ -1,95 +1,144 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { GrantFlowEntitlementsRequest, GrantFlowEntitlementsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GrantFlowEntitlementsCommand,
-  serializeAws_restJson1GrantFlowEntitlementsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GrantFlowEntitlementsRequest, GrantFlowEntitlementsResponse } from "../models/models_1";
+import { GrantFlowEntitlements$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GrantFlowEntitlementsCommand}.
+ */
 export interface GrantFlowEntitlementsCommandInput extends GrantFlowEntitlementsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GrantFlowEntitlementsCommand}.
+ */
 export interface GrantFlowEntitlementsCommandOutput extends GrantFlowEntitlementsResponse, __MetadataBearer {}
 
 /**
- * Grants entitlements to an existing flow.
+ * <p> Grants entitlements to an existing flow.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, GrantFlowEntitlementsCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, GrantFlowEntitlementsCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // GrantFlowEntitlementsRequest
+ *   Entitlements: [ // __listOfGrantEntitlementRequest // required
+ *     { // GrantEntitlementRequest
+ *       DataTransferSubscriberFeePercent: Number("int"),
+ *       Description: "STRING_VALUE",
+ *       Encryption: { // Encryption
+ *         Algorithm: "aes128" || "aes192" || "aes256",
+ *         ConstantInitializationVector: "STRING_VALUE",
+ *         DeviceId: "STRING_VALUE",
+ *         KeyType: "speke" || "static-key" || "srt-password",
+ *         Region: "STRING_VALUE",
+ *         ResourceId: "STRING_VALUE",
+ *         RoleArn: "STRING_VALUE", // required
+ *         SecretArn: "STRING_VALUE",
+ *         Url: "STRING_VALUE",
+ *       },
+ *       EntitlementStatus: "ENABLED" || "DISABLED",
+ *       Name: "STRING_VALUE",
+ *       Subscribers: [ // __listOfString // required
+ *         "STRING_VALUE",
+ *       ],
+ *       EntitlementTags: { // __mapOfString
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ *   FlowArn: "STRING_VALUE", // required
+ * };
  * const command = new GrantFlowEntitlementsCommand(input);
  * const response = await client.send(command);
+ * // { // GrantFlowEntitlementsResponse
+ * //   Entitlements: [ // __listOfEntitlement
+ * //     { // Entitlement
+ * //       DataTransferSubscriberFeePercent: Number("int"),
+ * //       Description: "STRING_VALUE",
+ * //       Encryption: { // Encryption
+ * //         Algorithm: "aes128" || "aes192" || "aes256",
+ * //         ConstantInitializationVector: "STRING_VALUE",
+ * //         DeviceId: "STRING_VALUE",
+ * //         KeyType: "speke" || "static-key" || "srt-password",
+ * //         Region: "STRING_VALUE",
+ * //         ResourceId: "STRING_VALUE",
+ * //         RoleArn: "STRING_VALUE", // required
+ * //         SecretArn: "STRING_VALUE",
+ * //         Url: "STRING_VALUE",
+ * //       },
+ * //       EntitlementArn: "STRING_VALUE", // required
+ * //       EntitlementStatus: "ENABLED" || "DISABLED",
+ * //       Name: "STRING_VALUE", // required
+ * //       Subscribers: [ // __listOfString // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   FlowArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GrantFlowEntitlementsCommandInput - {@link GrantFlowEntitlementsCommandInput}
+ * @returns {@link GrantFlowEntitlementsCommandOutput}
  * @see {@link GrantFlowEntitlementsCommandInput} for command's `input` shape.
  * @see {@link GrantFlowEntitlementsCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link GrantFlowEntitlements420Exception} (client fault)
+ *  <p>Exception raised by Elemental MediaConnect when granting the entitlement. See the error message for the operation for more information on the cause of this exception. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class GrantFlowEntitlementsCommand extends $Command<
-  GrantFlowEntitlementsCommandInput,
-  GrantFlowEntitlementsCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GrantFlowEntitlementsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GrantFlowEntitlementsCommandInput, GrantFlowEntitlementsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "GrantFlowEntitlementsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GrantFlowEntitlementsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GrantFlowEntitlementsResponse.filterSensitiveLog,
+export class GrantFlowEntitlementsCommand extends command<GrantFlowEntitlementsCommandInput, GrantFlowEntitlementsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GrantFlowEntitlements",
+  GrantFlowEntitlements$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GrantFlowEntitlementsRequest;
+      output: GrantFlowEntitlementsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GrantFlowEntitlementsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GrantFlowEntitlementsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GrantFlowEntitlementsCommandOutput> {
-    return deserializeAws_restJson1GrantFlowEntitlementsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GrantFlowEntitlementsCommandInput;
+      output: GrantFlowEntitlementsCommandOutput;
+    };
+  };
 }

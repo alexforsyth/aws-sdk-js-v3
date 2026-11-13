@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { DescribeNotificationRuleRequest, DescribeNotificationRuleResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeNotificationRuleCommand,
-  serializeAws_restJson1DescribeNotificationRuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeNotificationRuleRequest, DescribeNotificationRuleResult } from "../models/models_0";
+import { DescribeNotificationRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNotificationRuleCommand}.
+ */
 export interface DescribeNotificationRuleCommandInput extends DescribeNotificationRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNotificationRuleCommand}.
+ */
 export interface DescribeNotificationRuleCommandOutput extends DescribeNotificationRuleResult, __MetadataBearer {}
 
 /**
@@ -32,68 +29,79 @@ export interface DescribeNotificationRuleCommandOutput extends DescribeNotificat
  * ```javascript
  * import { CodestarNotificationsClient, DescribeNotificationRuleCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, DescribeNotificationRuleCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // DescribeNotificationRuleRequest
+ *   Arn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeNotificationRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeNotificationRuleResult
+ * //   Arn: "STRING_VALUE", // required
+ * //   Name: "STRING_VALUE",
+ * //   EventTypes: [ // EventTypeBatch
+ * //     { // EventTypeSummary
+ * //       EventTypeId: "STRING_VALUE",
+ * //       ServiceName: "STRING_VALUE",
+ * //       EventTypeName: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Resource: "STRING_VALUE",
+ * //   Targets: [ // TargetsBatch
+ * //     { // TargetSummary
+ * //       TargetAddress: "STRING_VALUE",
+ * //       TargetType: "STRING_VALUE",
+ * //       TargetStatus: "PENDING" || "ACTIVE" || "UNREACHABLE" || "INACTIVE" || "DEACTIVATED",
+ * //     },
+ * //   ],
+ * //   DetailType: "BASIC" || "FULL",
+ * //   CreatedBy: "STRING_VALUE",
+ * //   Status: "ENABLED" || "DISABLED",
+ * //   CreatedTimestamp: new Date("TIMESTAMP"),
+ * //   LastModifiedTimestamp: new Date("TIMESTAMP"),
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeNotificationRuleCommandInput - {@link DescribeNotificationRuleCommandInput}
+ * @returns {@link DescribeNotificationRuleCommandOutput}
  * @see {@link DescribeNotificationRuleCommandInput} for command's `input` shape.
  * @see {@link DescribeNotificationRuleCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>
+ *             CodeStar Notifications can't find a resource that matches the provided ARN. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeNotificationRuleCommand extends $Command<
-  DescribeNotificationRuleCommandInput,
-  DescribeNotificationRuleCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNotificationRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNotificationRuleCommandInput, DescribeNotificationRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "DescribeNotificationRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNotificationRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeNotificationRuleResult.filterSensitiveLog,
+export class DescribeNotificationRuleCommand extends command<DescribeNotificationRuleCommandInput, DescribeNotificationRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNotificationRule",
+  DescribeNotificationRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNotificationRuleRequest;
+      output: DescribeNotificationRuleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeNotificationRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeNotificationRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeNotificationRuleCommandOutput> {
-    return deserializeAws_restJson1DescribeNotificationRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNotificationRuleCommandInput;
+      output: DescribeNotificationRuleCommandOutput;
+    };
+  };
 }

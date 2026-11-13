@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeFlowCommand, DescribeFlowCommandInput } from "../commands/DescribeFlowCommand";
-import { MediaConnectClient } from "../MediaConnectClient";
+import {
+  type DescribeFlowCommandInput,
+  type DescribeFlowCommandOutput,
+  DescribeFlowCommand,
+} from "../commands/DescribeFlowCommand";
+import type { MediaConnectClient } from "../MediaConnectClient";
+import type { MediaConnectServiceException } from "../models/MediaConnectServiceException";
 
-const checkState = async (client: MediaConnectClient, input: DescribeFlowCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: MediaConnectClient, input: DescribeFlowCommandInput): Promise<WaiterResult<DescribeFlowCommandOutput | MediaConnectServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeFlowCommand(input));
+    let result: DescribeFlowCommandOutput & any = await client.send(new DescribeFlowCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Flow.Status;
-      };
+      }
       if (returnComparator() === "ACTIVE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: MediaConnectClient, input: DescribeFlowCommand
     try {
       const returnComparator = () => {
         return result.Flow.Status;
-      };
+      }
       if (returnComparator() === "STARTING") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -27,7 +39,7 @@ const checkState = async (client: MediaConnectClient, input: DescribeFlowCommand
     try {
       const returnComparator = () => {
         return result.Flow.Status;
-      };
+      }
       if (returnComparator() === "UPDATING") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -35,17 +47,25 @@ const checkState = async (client: MediaConnectClient, input: DescribeFlowCommand
     try {
       const returnComparator = () => {
         return result.Flow.Status;
-      };
+      }
+      if (returnComparator() === "STANDBY") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.Flow.Status;
+      }
       if (returnComparator() === "ERROR") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InternalServerErrorException") {
+    if (exception.name === "InternalServerErrorException") {
       return { state: WaiterState.RETRY, reason };
     }
-    if (exception.name && exception.name == "ServiceUnavailableException") {
+    if (exception.name === "ServiceUnavailableException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -58,7 +78,7 @@ const checkState = async (client: MediaConnectClient, input: DescribeFlowCommand
 export const waitForFlowActive = async (
   params: WaiterConfiguration<MediaConnectClient>,
   input: DescribeFlowCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeFlowCommandOutput | MediaConnectServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -70,8 +90,8 @@ export const waitForFlowActive = async (
 export const waitUntilFlowActive = async (
   params: WaiterConfiguration<MediaConnectClient>,
   input: DescribeFlowCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeFlowCommandOutput>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeFlowCommandOutput>;
 };

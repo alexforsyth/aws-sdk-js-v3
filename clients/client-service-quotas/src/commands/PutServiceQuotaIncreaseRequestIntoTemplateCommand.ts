@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   PutServiceQuotaIncreaseRequestIntoTemplateRequest,
   PutServiceQuotaIncreaseRequestIntoTemplateResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutServiceQuotaIncreaseRequestIntoTemplateCommand,
-  serializeAws_json1_1PutServiceQuotaIncreaseRequestIntoTemplateCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ServiceQuotasClientResolvedConfig } from "../ServiceQuotasClient";
+import { PutServiceQuotaIncreaseRequestIntoTemplate$ } from "../schemas/schemas_0";
 
-export interface PutServiceQuotaIncreaseRequestIntoTemplateCommandInput
-  extends PutServiceQuotaIncreaseRequestIntoTemplateRequest {}
-export interface PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput
-  extends PutServiceQuotaIncreaseRequestIntoTemplateResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutServiceQuotaIncreaseRequestIntoTemplateCommand}.
+ */
+export interface PutServiceQuotaIncreaseRequestIntoTemplateCommandInput extends PutServiceQuotaIncreaseRequestIntoTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutServiceQuotaIncreaseRequestIntoTemplateCommand}.
+ */
+export interface PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput extends PutServiceQuotaIncreaseRequestIntoTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Adds a quota increase request to your quota request template.</p>
@@ -34,77 +32,92 @@ export interface PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput
  * ```javascript
  * import { ServiceQuotasClient, PutServiceQuotaIncreaseRequestIntoTemplateCommand } from "@aws-sdk/client-service-quotas"; // ES Modules import
  * // const { ServiceQuotasClient, PutServiceQuotaIncreaseRequestIntoTemplateCommand } = require("@aws-sdk/client-service-quotas"); // CommonJS import
+ * // import type { ServiceQuotasClientConfig } from "@aws-sdk/client-service-quotas";
+ * const config = {}; // type is ServiceQuotasClientConfig
  * const client = new ServiceQuotasClient(config);
+ * const input = { // PutServiceQuotaIncreaseRequestIntoTemplateRequest
+ *   QuotaCode: "STRING_VALUE", // required
+ *   ServiceCode: "STRING_VALUE", // required
+ *   AwsRegion: "STRING_VALUE", // required
+ *   DesiredValue: Number("double"), // required
+ * };
  * const command = new PutServiceQuotaIncreaseRequestIntoTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // PutServiceQuotaIncreaseRequestIntoTemplateResponse
+ * //   ServiceQuotaIncreaseRequestInTemplate: { // ServiceQuotaIncreaseRequestInTemplate
+ * //     ServiceCode: "STRING_VALUE",
+ * //     ServiceName: "STRING_VALUE",
+ * //     QuotaCode: "STRING_VALUE",
+ * //     QuotaName: "STRING_VALUE",
+ * //     DesiredValue: Number("double"),
+ * //     AwsRegion: "STRING_VALUE",
+ * //     Unit: "STRING_VALUE",
+ * //     GlobalQuota: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutServiceQuotaIncreaseRequestIntoTemplateCommandInput - {@link PutServiceQuotaIncreaseRequestIntoTemplateCommandInput}
+ * @returns {@link PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput}
  * @see {@link PutServiceQuotaIncreaseRequestIntoTemplateCommandInput} for command's `input` shape.
  * @see {@link PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput} for command's `response` shape.
- * @see {@link ServiceQuotasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceQuotasClientResolvedConfig | config} for ServiceQuotasClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link AWSServiceAccessNotEnabledException} (client fault)
+ *  <p>The action you attempted is not allowed unless Service Access with Service Quotas is enabled in
+ *             your organization.</p>
+ *
+ * @throws {@link DependencyAccessDeniedException} (client fault)
+ *  <p>You can't perform this action because a dependency does not have access.</p>
+ *
+ * @throws {@link IllegalArgumentException} (client fault)
+ *  <p>Invalid input was provided.</p>
+ *
+ * @throws {@link NoAvailableOrganizationException} (client fault)
+ *  <p>The Amazon Web Services account making this call is not a member of an organization.</p>
+ *
+ * @throws {@link NoSuchResourceException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link QuotaExceededException} (client fault)
+ *  <p>You have exceeded your service quota. To perform the requested action, remove some of
+ *             the relevant resources, or use Service Quotas to request a service quota increase.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>Something went wrong.</p>
+ *
+ * @throws {@link TemplatesNotAvailableInRegionException} (client fault)
+ *  <p>The Service Quotas template is not available in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Due to throttling, the request was denied. Slow down the rate of request calls, or
+ *             request an increase for this quota.</p>
+ *
+ * @throws {@link ServiceQuotasServiceException}
+ * <p>Base exception class for all service exceptions from ServiceQuotas service.</p>
+ *
+ *
+ * @public
  */
-export class PutServiceQuotaIncreaseRequestIntoTemplateCommand extends $Command<
-  PutServiceQuotaIncreaseRequestIntoTemplateCommandInput,
-  PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput,
-  ServiceQuotasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutServiceQuotaIncreaseRequestIntoTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceQuotasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    PutServiceQuotaIncreaseRequestIntoTemplateCommandInput,
-    PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceQuotasClient";
-    const commandName = "PutServiceQuotaIncreaseRequestIntoTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutServiceQuotaIncreaseRequestIntoTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutServiceQuotaIncreaseRequestIntoTemplateResponse.filterSensitiveLog,
+export class PutServiceQuotaIncreaseRequestIntoTemplateCommand extends command<PutServiceQuotaIncreaseRequestIntoTemplateCommandInput, PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutServiceQuotaIncreaseRequestIntoTemplate",
+  PutServiceQuotaIncreaseRequestIntoTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutServiceQuotaIncreaseRequestIntoTemplateRequest;
+      output: PutServiceQuotaIncreaseRequestIntoTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: PutServiceQuotaIncreaseRequestIntoTemplateCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutServiceQuotaIncreaseRequestIntoTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput> {
-    return deserializeAws_json1_1PutServiceQuotaIncreaseRequestIntoTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutServiceQuotaIncreaseRequestIntoTemplateCommandInput;
+      output: PutServiceQuotaIncreaseRequestIntoTemplateCommandOutput;
+    };
+  };
 }

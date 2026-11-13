@@ -1,0 +1,100 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFarmsRequest, ListFarmsResponse } from "../models/models_0";
+import { ListFarms$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFarmsCommand}.
+ */
+export interface ListFarmsCommandInput extends ListFarmsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFarmsCommand}.
+ */
+export interface ListFarmsCommandOutput extends ListFarmsResponse, __MetadataBearer {}
+
+/**
+ * Lists farms.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListFarmsCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListFarmsCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListFarmsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   principalId: "STRING_VALUE",
+ * };
+ * const command = new ListFarmsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListFarmsResponse
+ * //   farms: [ // FarmSummaries // required
+ * //     { // FarmSummary
+ * //       farmId: "STRING_VALUE", // required
+ * //       displayName: "STRING_VALUE", // required
+ * //       kmsKeyArn: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListFarmsCommandInput - {@link ListFarmsCommandInput}
+ * @returns {@link ListFarmsCommandOutput}
+ * @see {@link ListFarmsCommandInput} for command's `input` shape.
+ * @see {@link ListFarmsCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListFarmsCommand extends command<ListFarmsCommandInput, ListFarmsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFarms",
+  ListFarms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFarmsRequest;
+      output: ListFarmsResponse;
+    };
+    sdk: {
+      input: ListFarmsCommandInput;
+      output: ListFarmsCommandOutput;
+    };
+  };
+}

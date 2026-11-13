@@ -1,0 +1,8321 @@
+// smithy-typescript generated code
+import type {
+  AccountTargeting,
+  AchievabilityStatus,
+  ActorType,
+  AlarmState,
+  AssertionSource,
+  AssessmentErrorCode,
+  AssessmentSortField,
+  AssessmentStatus,
+  AssessmentStep,
+  CostCurrency,
+  DependencyCriticality,
+  DependencyDiscoveryInput,
+  DependencyDiscoveryStatus,
+  DependencyInsightsErrorCode,
+  DependencyInsightsStatus,
+  DevOpsAgentConfidence,
+  DevOpsAgentConnectionStatus,
+  DevOpsAgentInvestigationStatus,
+  DevOpsAgentVerdict,
+  EksLabelSelectorOperator,
+  FailureCategory,
+  FindingSeverity,
+  FindingStatus,
+  InputSourceType,
+  InsightsCategory,
+  MultiAzDisasterRecoveryApproach,
+  MultiRegionDisasterRecoveryApproach,
+  ParameterType,
+  PolicyComponent,
+  PolicyDisassociationReason,
+  PolicyEventType,
+  PolicyValueSource,
+  QueryGranularity,
+  ReportGenerationErrorCode,
+  ReportGenerationStatus,
+  ReportType,
+  ResourceDiscoveryErrorCode,
+  ResourceDiscoveryRunStatus,
+  ServiceEventType,
+  ServiceFunctionCriticality,
+  ServiceFunctionSource,
+  SortOrder,
+  StopConditionSource,
+  SystemEventType,
+  TestRunDependencySource,
+  TestRunSourceEventErrorCode,
+  TestRunSourceEventType,
+  TestRunSourceType,
+  TestRunStatus,
+  TestSourceOutcome,
+  TestSourceType,
+  TopologyType,
+} from "./enums";
+
+/**
+ * <p>Describes the achievability status of a service's resilience targets based on the most recent assessment.</p>
+ * @public
+ */
+export interface Achievability {
+  /**
+   * <p>The achievability status of the availability SLO target for the service.</p>
+   * @public
+   */
+  availabilitySlo?: AchievabilityStatus | undefined;
+
+  /**
+   * <p>The achievability status of the multi-AZ RTO and RPO targets for the service.</p>
+   * @public
+   */
+  multiAzRtoRpo?: AchievabilityStatus | undefined;
+
+  /**
+   * <p>The achievability status of the multi-Region RTO and RPO targets for the service.</p>
+   * @public
+   */
+  multiRegionRtoRpo?: AchievabilityStatus | undefined;
+
+  /**
+   * <p>The achievability status of the data recovery time between backups for the service.</p>
+   * @public
+   */
+  dataRecoveryTimeBetweenBackups?: AchievabilityStatus | undefined;
+}
+
+/**
+ * <p>Details about a CloudWatch alarm state change observed during a test run.</p>
+ * @public
+ */
+export interface AlarmStateChangeDetail {
+  /**
+   * <p>The state the alarm transitioned to.</p>
+   * @public
+   */
+  state: AlarmState | undefined;
+
+  /**
+   * <p>The state the alarm transitioned from. Absent on the initial event, which records the alarm's state when collection began.</p>
+   * @public
+   */
+  previousState?: AlarmState | undefined;
+
+  /**
+   * <p>A human-readable explanation of the state change, as reported by CloudWatch.</p>
+   * @public
+   */
+  reason?: string | undefined;
+}
+
+/**
+ * <p>Represents a resilience assertion for a service.</p>
+ * @public
+ */
+export interface Assertion {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the assertion.</p>
+   * @public
+   */
+  assertionId: string | undefined;
+
+  /**
+   * <p>The text content of the assertion.</p>
+   * @public
+   */
+  text: string | undefined;
+
+  /**
+   * <p>The source of the assertion, indicating whether it was AI-generated or created by a user.</p>
+   * @public
+   */
+  source: AssertionSource | undefined;
+
+  /**
+   * <p>The timestamp when the assertion was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the assertion was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * <p>Metadata for an assertion created event.</p>
+ * @public
+ */
+export interface AssertionCreatedMetadata {
+  /**
+   * <p>The unique identifier of the created assertion.</p>
+   * @public
+   */
+  assertionId?: string | undefined;
+
+  /**
+   * <p>The name of the created assertion.</p>
+   * @public
+   */
+  assertionName?: string | undefined;
+}
+
+/**
+ * <p>Metadata for an assertion deleted event.</p>
+ * @public
+ */
+export interface AssertionDeletedMetadata {
+  /**
+   * <p>The unique identifier of the deleted assertion.</p>
+   * @public
+   */
+  assertionId?: string | undefined;
+
+  /**
+   * <p>The name of the deleted assertion.</p>
+   * @public
+   */
+  assertionName?: string | undefined;
+}
+
+/**
+ * <p>Metadata for an assertion updated event.</p>
+ * @public
+ */
+export interface AssertionUpdatedMetadata {
+  /**
+   * <p>The unique identifier of the updated assertion.</p>
+   * @public
+   */
+  assertionId?: string | undefined;
+
+  /**
+   * <p>The name of the updated assertion.</p>
+   * @public
+   */
+  assertionName?: string | undefined;
+}
+
+/**
+ * <p>Represents the cost of running a failure mode assessment.</p>
+ * @public
+ */
+export interface AssessmentCost {
+  /**
+   * <p>The cost amount for the assessment.</p>
+   * @public
+   */
+  amount?: number | undefined;
+
+  /**
+   * <p>The currency of the assessment cost.</p>
+   * @public
+   */
+  currency?: CostCurrency | undefined;
+}
+
+/**
+ * <p>Contains summary information about a failure mode assessment.</p>
+ * @public
+ */
+export interface AssessmentSummary {
+  /**
+   * <p>The unique identifier of the assessment.</p>
+   * @public
+   */
+  assessmentId: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The current status of the assessment.</p>
+   * @public
+   */
+  assessmentStatus?: AssessmentStatus | undefined;
+
+  /**
+   * <p>The current step of the assessment process.</p>
+   * @public
+   */
+  assessmentStep?: AssessmentStep | undefined;
+
+  /**
+   * <p>The total number of findings generated by the assessment.</p>
+   * @public
+   */
+  totalFindings?: number | undefined;
+
+  /**
+   * <p>The timestamp when the assessment started.</p>
+   * @public
+   */
+  startedAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the assessment ended.</p>
+   * @public
+   */
+  endedAt?: Date | undefined;
+
+  /**
+   * <p>A message describing the error if the assessment failed.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+
+  /**
+   * <p>The error code if the assessment failed.</p>
+   * @public
+   */
+  errorCode?: AssessmentErrorCode | undefined;
+
+  /**
+   * <p>The cost of the assessment.</p>
+   * @public
+   */
+  assessmentCost?: AssessmentCost | undefined;
+
+  /**
+   * <p>The number of billable assessment units consumed by the assessment.</p>
+   * @public
+   */
+  billableAssessmentUnitCount?: number | undefined;
+
+  /**
+   * <p>The achievability results from the assessment.</p>
+   * @public
+   */
+  achievability?: Achievability | undefined;
+}
+
+/**
+ * <p>Represents a system associated with a service.</p>
+ * @public
+ */
+export interface AssociatedSystem {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  systemName?: string | undefined;
+
+  /**
+   * <p>The list of user journey identifiers that associate this system with the service.</p>
+   * @public
+   */
+  userJourneyIds?: string[] | undefined;
+}
+
+/**
+ * <p>Defines the availability service level objective (SLO) for a resilience policy.</p>
+ * @public
+ */
+export interface AvailabilitySlo {
+  /**
+   * <p>The target availability percentage, expressed as a value between 0 and 100.</p>
+   * @public
+   */
+  target?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAssertionRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The text content of the assertion.</p>
+   * @public
+   */
+  text: string | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAssertionResponse {
+  /**
+   * <p>The created assertion.</p>
+   * @public
+   */
+  assertion: Assertion | undefined;
+}
+
+/**
+ * <p>Describes a field that failed validation.</p>
+ * @public
+ */
+export interface ValidationExceptionField {
+  /**
+   * <p>The name of the field that failed validation.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The validation error message for the field.</p>
+   * @public
+   */
+  message: string | undefined;
+}
+
+/**
+ * <p>A single label requirement in a label selector, expressed as a key, an operator, and an optional list of values.</p>
+ * @public
+ */
+export interface EksLabelSelectorRequirement {
+  /**
+   * <p>The label key that the requirement applies to.</p>
+   * @public
+   */
+  key: string | undefined;
+
+  /**
+   * <p>The operator that relates the label key to the values.</p>
+   * @public
+   */
+  operator: EksLabelSelectorOperator | undefined;
+
+  /**
+   * <p>The label values to compare against. Specify values when the operator is IN or NOT_IN. Leave this empty when the operator is EXISTS or DOES_NOT_EXIST.</p>
+   * @public
+   */
+  values?: string[] | undefined;
+}
+
+/**
+ * <p>A label selector that filters the Kubernetes objects discovered from an Amazon EKS input source. An object must satisfy both matchLabels and matchExpressions to match the selector. A selector with neither matches every object. The selector must render to 2,048 characters or fewer in Kubernetes label selector syntax.</p>
+ * @public
+ */
+export interface EksLabelSelector {
+  /**
+   * <p>The label key-value pairs that an object must have. All pairs must match for the object to be selected.</p>
+   * @public
+   */
+  matchLabels?: Record<string, string> | undefined;
+
+  /**
+   * <p>The label requirements that an object must satisfy. All requirements in the list must match for the object to be selected.</p>
+   * @public
+   */
+  matchExpressions?: EksLabelSelectorRequirement[] | undefined;
+}
+
+/**
+ * <p>Defines an Amazon EKS cluster and its namespaces as an input source for resource discovery.</p>
+ * @public
+ */
+export interface EksSource {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  clusterArn: string | undefined;
+
+  /**
+   * <p>The list of Kubernetes namespaces within the EKS cluster.</p>
+   * @public
+   */
+  namespaces: string[] | undefined;
+
+  /**
+   * <p>Filters discovery to the Kubernetes objects whose labels match the selector. When omitted, all supported objects in the specified namespaces are discovered.</p>
+   * @public
+   */
+  labelSelector?: EksLabelSelector | undefined;
+}
+
+/**
+ * <p>A tag key-value pair used for resource discovery.</p>
+ * @public
+ */
+export interface ResourceTag {
+  /**
+   * <p>Tag key.</p>
+   * @public
+   */
+  key: string | undefined;
+
+  /**
+   * <p>The list of tag values.</p>
+   * @public
+   */
+  values: string[] | undefined;
+}
+
+/**
+ * <p>Resource configuration for an input source. Provide exactly one field.</p>
+ * @public
+ */
+export type ResourceConfiguration =
+  | ResourceConfiguration.CfnStackArnMember
+  | ResourceConfiguration.DesignFileS3UrlMember
+  | ResourceConfiguration.EksMember
+  | ResourceConfiguration.ResourceTagsMember
+  | ResourceConfiguration.TfStateFileUrlMember
+  | ResourceConfiguration.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ResourceConfiguration {
+  /**
+   * <p>The resource tags for tag-based resource discovery.</p>
+   * @public
+   */
+  export interface ResourceTagsMember {
+    resourceTags: ResourceTag[];
+    cfnStackArn?: never;
+    tfStateFileUrl?: never;
+    eks?: never;
+    designFileS3Url?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  export interface CfnStackArnMember {
+    resourceTags?: never;
+    cfnStackArn: string;
+    tfStateFileUrl?: never;
+    eks?: never;
+    designFileS3Url?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>S3 URL — virtual hosted-style or s3:// URI.</p>
+   * @public
+   */
+  export interface TfStateFileUrlMember {
+    resourceTags?: never;
+    cfnStackArn?: never;
+    tfStateFileUrl: string;
+    eks?: never;
+    designFileS3Url?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The Amazon EKS configuration for resource discovery.</p>
+   * @public
+   */
+  export interface EksMember {
+    resourceTags?: never;
+    cfnStackArn?: never;
+    tfStateFileUrl?: never;
+    eks: EksSource;
+    designFileS3Url?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>S3 URL — virtual hosted-style or s3:// URI.</p>
+   * @public
+   */
+  export interface DesignFileS3UrlMember {
+    resourceTags?: never;
+    cfnStackArn?: never;
+    tfStateFileUrl?: never;
+    eks?: never;
+    designFileS3Url: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    resourceTags?: never;
+    cfnStackArn?: never;
+    tfStateFileUrl?: never;
+    eks?: never;
+    designFileS3Url?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    resourceTags: (value: ResourceTag[]) => T;
+    cfnStackArn: (value: string) => T;
+    tfStateFileUrl: (value: string) => T;
+    eks: (value: EksSource) => T;
+    designFileS3Url: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreateInputSourceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Resource configuration for an input source. Provide exactly one field.</p>
+   * @public
+   */
+  resourceConfiguration: ResourceConfiguration | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateInputSourceResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The unique identifier assigned to the created input source.</p>
+   * @public
+   */
+  inputSourceId: string | undefined;
+}
+
+/**
+ * <p>Defines data recovery targets for a resilience policy.</p>
+ * @public
+ */
+export interface DataRecoveryTargets {
+  /**
+   * <p>The target time between backups, in minutes.</p>
+   * @public
+   */
+  timeBetweenBackupsInMinutes?: number | undefined;
+}
+
+/**
+ * <p>Defines the multi-AZ disaster recovery targets for a resilience policy.</p>
+ * @public
+ */
+export interface MultiAzTargets {
+  /**
+   * <p>The recovery time objective (RTO) target for multi-AZ, in minutes.</p>
+   * @public
+   */
+  rtoInMinutes?: number | undefined;
+
+  /**
+   * <p>The recovery point objective (RPO) target for multi-AZ, in minutes.</p>
+   * @public
+   */
+  rpoInMinutes?: number | undefined;
+
+  /**
+   * <p>The disaster recovery approach for multi-AZ.</p>
+   * @public
+   */
+  disasterRecoveryApproach?: MultiAzDisasterRecoveryApproach | undefined;
+}
+
+/**
+ * <p>Defines the multi-Region disaster recovery targets for a resilience policy.</p>
+ * @public
+ */
+export interface MultiRegionTargets {
+  /**
+   * <p>The recovery time objective (RTO) target for multi-Region, in minutes.</p>
+   * @public
+   */
+  rtoInMinutes?: number | undefined;
+
+  /**
+   * <p>The recovery point objective (RPO) target for multi-Region, in minutes.</p>
+   * @public
+   */
+  rpoInMinutes?: number | undefined;
+
+  /**
+   * <p>The disaster recovery approach for multi-Region.</p>
+   * @public
+   */
+  disasterRecoveryApproach?: MultiRegionDisasterRecoveryApproach | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePolicyRequest {
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The availability SLO for the resilience policy.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The multi-AZ disaster recovery targets for the resilience policy.</p>
+   * @public
+   */
+  multiAz?: MultiAzTargets | undefined;
+
+  /**
+   * <p>The multi-Region disaster recovery targets for the resilience policy.</p>
+   * @public
+   */
+  multiRegion?: MultiRegionTargets | undefined;
+
+  /**
+   * <p>The data recovery targets for the resilience policy.</p>
+   * @public
+   */
+  dataRecovery?: DataRecoveryTargets | undefined;
+
+  /**
+   * <p>Specifies whether cross-account sharing is enabled for the policy. Only a delegated administrator or the management account can enable sharing.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Represents a resilience policy that defines availability and disaster recovery requirements.</p>
+ * @public
+ */
+export interface Policy {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The availability SLO defined in the policy.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The multi-AZ disaster recovery targets defined in the policy.</p>
+   * @public
+   */
+  multiAz?: MultiAzTargets | undefined;
+
+  /**
+   * <p>The multi-Region disaster recovery targets defined in the policy.</p>
+   * @public
+   */
+  multiRegion?: MultiRegionTargets | undefined;
+
+  /**
+   * <p>The data recovery targets defined in the policy.</p>
+   * @public
+   */
+  dataRecovery?: DataRecoveryTargets | undefined;
+
+  /**
+   * <p>Specifies whether cross-account sharing is enabled.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+
+  /**
+   * <p>The identifier of the organization this policy is shared with.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The number of services associated with this policy.</p>
+   * @public
+   */
+  associatedServiceCount?: number | undefined;
+
+  /**
+   * <p>The timestamp when the policy was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the policy was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePolicyResponse {
+  /**
+   * <p>The created resilience policy.</p>
+   * @public
+   */
+  policy: Policy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateReportRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The type of report to generate.</p>
+   * @public
+   */
+  reportType: ReportType | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Details when report generation failed.</p>
+ * @public
+ */
+export interface FailedReportOutput {
+  /**
+   * <p>The error code describing why the report generation failed.</p>
+   * @public
+   */
+  errorCode: ReportGenerationErrorCode | undefined;
+
+  /**
+   * <p>The error message describing why the report generation failed.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+}
+
+/**
+ * <p>S3 location where report was written.</p>
+ * @public
+ */
+export interface S3ReportOutput {
+  /**
+   * <p>The S3 object key for the generated report.</p>
+   * @public
+   */
+  s3ObjectKey: string | undefined;
+}
+
+/**
+ * <p>Union of possible report outputs.</p>
+ * @public
+ */
+export type ReportOutput =
+  | ReportOutput.FailedReportOutputMember
+  | ReportOutput.S3ReportOutputMember
+  | ReportOutput.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReportOutput {
+  /**
+   * <p>The S3 location where the report was written.</p>
+   * @public
+   */
+  export interface S3ReportOutputMember {
+    s3ReportOutput: S3ReportOutput;
+    failedReportOutput?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Details when report generation failed.</p>
+   * @public
+   */
+  export interface FailedReportOutputMember {
+    s3ReportOutput?: never;
+    failedReportOutput: FailedReportOutput;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    s3ReportOutput?: never;
+    failedReportOutput?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    s3ReportOutput: (value: S3ReportOutput) => T;
+    failedReportOutput: (value: FailedReportOutput) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Result of a report generation attempt.</p>
+ * @public
+ */
+export interface ReportGenerationResult {
+  /**
+   * <p>The type of the generated report.</p>
+   * @public
+   */
+  reportType: ReportType | undefined;
+
+  /**
+   * <p>The status of the report generation.</p>
+   * @public
+   */
+  status: ReportGenerationStatus | undefined;
+
+  /**
+   * <p>The service this report was generated for.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>Present for FAILURE_MODE reports.</p>
+   * @public
+   */
+  assessmentId?: string | undefined;
+
+  /**
+   * <p>The unique identifier of a test run.</p>
+   * @public
+   */
+  testRunId?: string | undefined;
+
+  /**
+   * <p>An ARN owned by the service. Accepts either a standard 12-digit account ID or the literal "aws" for AWS-managed resources, such as AWS-managed test templates.</p>
+   * @public
+   */
+  testTemplateArn?: string | undefined;
+
+  /**
+   * <p>The timestamp when the report was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>Present when status is SUCCEEDED or FAILED.</p>
+   * @public
+   */
+  reportOutput?: ReportOutput | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateReportResponse {
+  /**
+   * <p>The result of the report generation request.</p>
+   * @public
+   */
+  reportGenerationResult: ReportGenerationResult | undefined;
+}
+
+/**
+ * <p>The AWS DevOps Agent (DevOps Agent) integration configuration that you supply when creating or updating a service. Connecting a service to a DevOps Agent Agent Space lets DevOps Agent investigate the service's resilience test runs and attach its analysis to the results. Include this block with an Agent Space Amazon Resource Name (ARN) to connect or reconnect the service to an Agent Space. Include it without an Agent Space ARN to disconnect the service. Omit it to leave the existing linkage unchanged.</p>
+ * @public
+ */
+export interface DevOpsAgentConfiguration {
+  /**
+   * <p>The ARN of the DevOps Agent Agent Space to link to this service.</p>
+   * @public
+   */
+  agentSpaceArn?: string | undefined;
+}
+
+/**
+ * <p>Specifies a cross-account IAM role ARN and optional external ID.</p>
+ * @public
+ */
+export interface CrossAccountRole {
+  /**
+   * <p>ARN of the IAM Role for the profile. Null if the permission profile is the 'Admin' profile.</p>
+   * @public
+   */
+  crossAccountRoleArn: string | undefined;
+
+  /**
+   * <p>The external ID used for assuming the cross-account role.</p>
+   * @public
+   */
+  externalId?: string | undefined;
+}
+
+/**
+ * <p>Defines the permission model for a service.</p>
+ * @public
+ */
+export interface PermissionModel {
+  /**
+   * <p>IAM role name (supports up to 64 characters per IAM limits).</p>
+   * @public
+   */
+  invokerRoleName: string | undefined;
+
+  /**
+   * <p>The list of cross-account IAM role ARNs.</p>
+   * @public
+   */
+  crossAccountRoles?: CrossAccountRole[] | undefined;
+}
+
+/**
+ * <p>S3 configuration for report output.</p>
+ * @public
+ */
+export interface S3ReportOutputConfiguration {
+  /**
+   * <p>S3 bucket path where reports will be written (e.g., my-bucket/ngrh-reports/).</p>
+   * @public
+   */
+  bucketPath: string | undefined;
+
+  /**
+   * <p>Account ID of the bucket owner for cross-account access verification.</p>
+   * @public
+   */
+  bucketOwner: string | undefined;
+}
+
+/**
+ * <p>Configuration for a report output destination.</p>
+ * @public
+ */
+export type ReportOutputConfiguration =
+  | ReportOutputConfiguration.S3Member
+  | ReportOutputConfiguration.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ReportOutputConfiguration {
+  /**
+   * <p>S3 configuration for report output.</p>
+   * @public
+   */
+  export interface S3Member {
+    s3: S3ReportOutputConfiguration;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    s3?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    s3: (value: S3ReportOutputConfiguration) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Configuration for automatic report generation on a Service.</p>
+ * @public
+ */
+export interface ServiceReportConfiguration {
+  /**
+   * <p>Output destinations for generated reports.</p>
+   * @public
+   */
+  reportOutputs: ReportOutputConfiguration[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceRequest {
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The systems to associate with the service.</p>
+   * @public
+   */
+  associatedSystems?: AssociatedSystem[] | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The Regions where the service operates.</p>
+   * @public
+   */
+  regions: string[] | undefined;
+
+  /**
+   * <p>The permission model for the service.</p>
+   * @public
+   */
+  permissionModel: PermissionModel | undefined;
+
+  /**
+   * <p>Caller-settable values for dependency discovery. INITIALIZING is system-managed.</p>
+   * @public
+   */
+  dependencyDiscovery?: DependencyDiscoveryInput | undefined;
+
+  /**
+   * <p>Configuration for automatic report generation on a Service.</p>
+   * @public
+   */
+  reportConfiguration?: ServiceReportConfiguration | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>The optional DevOps Agent integration configuration to apply to the new service. If you omit this field, the new service has no DevOps Agent integration.</p>
+   * @public
+   */
+  devOpsAgentConfiguration?: DevOpsAgentConfiguration | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Configuration for dependency discovery on a service.</p>
+ * @public
+ */
+export interface DependencyDiscoveryConfig {
+  /**
+   * <p>The current status of dependency discovery.</p>
+   * @public
+   */
+  status: DependencyDiscoveryStatus | undefined;
+
+  /**
+   * <p>The timestamp when dependency discovery was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+
+  /**
+   * <p>The count of resources eligible for dependency attribution.</p>
+   * @public
+   */
+  eligibleResourceCount?: number | undefined;
+
+  /**
+   * <p>A status message for dependency discovery, displayed during the initialization state.</p>
+   * @public
+   */
+  message?: string | undefined;
+}
+
+/**
+ * <p>The current DevOps Agent integration state for a service. Read operations return this state.</p>
+ * @public
+ */
+export interface DevOpsAgentConfigurationView {
+  /**
+   * <p>The ARN of the linked DevOps Agent Agent Space.</p>
+   * @public
+   */
+  agentSpaceArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the linked DevOps Agent Agent Space.</p>
+   * @public
+   */
+  agentSpaceId?: string | undefined;
+
+  /**
+   * <p>The AWS Region of the linked DevOps Agent Agent Space.</p>
+   * @public
+   */
+  region?: string | undefined;
+
+  /**
+   * <p>The connection status of the DevOps Agent integration for this service. Valid values:</p> <ul> <li> <p>CONNECTING - The service is being connected to the Agent Space.</p> </li> <li> <p>CONNECTED - The service is connected to the Agent Space.</p> </li> <li> <p>DISCONNECTED - The service is not connected to an Agent Space.</p> </li> <li> <p>FAILED - The connection attempt failed. See statusReason for details.</p> </li> </ul>
+   * @public
+   */
+  status?: DevOpsAgentConnectionStatus | undefined;
+
+  /**
+   * <p>The URL of the DevOps Agent Operator App for the linked Agent Space. This URL is present when the connection status is CONNECTED.</p>
+   * @public
+   */
+  operatorAppUrl?: string | undefined;
+
+  /**
+   * <p>The timestamp when the service successfully connected to the DevOps Agent Agent Space.</p>
+   * @public
+   */
+  connectedAt?: Date | undefined;
+
+  /**
+   * <p>A human-readable explanation of the current connection status. This field explains the status when the connection fails.</p>
+   * @public
+   */
+  statusReason?: string | undefined;
+}
+
+/**
+ * <p>Contains the effective availability SLO value and its source.</p>
+ * @public
+ */
+export interface SloSource {
+  /**
+   * <p>The availability SLO percentage value.</p>
+   * @public
+   */
+  value?: number | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>
+   * @public
+   */
+  source?: PolicyValueSource | undefined;
+}
+
+/**
+ * <p>Contains an effective RTO or RPO value and its source.</p>
+ * @public
+ */
+export interface TargetSource {
+  /**
+   * <p>The RTO or RPO value in minutes.</p>
+   * @public
+   */
+  value?: number | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>
+   * @public
+   */
+  source?: PolicyValueSource | undefined;
+}
+
+/**
+ * <p>Contains the effective disaster recovery approach value for a service.</p>
+ * @public
+ */
+export interface DisasterRecoverySource {
+  /**
+   * <p>The disaster recovery approach value.</p>
+   * @public
+   */
+  value?: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>
+   * @public
+   */
+  source?: PolicyValueSource | undefined;
+}
+
+/**
+ * <p>Contains the effective resilience policy values for a service.</p>
+ * @public
+ */
+export interface EffectivePolicyValues {
+  /**
+   * <p>The effective availability SLO value for the service.</p>
+   * @public
+   */
+  availabilitySlo?: SloSource | undefined;
+
+  /**
+   * <p>The effective multi-AZ RTO value for the service, in minutes.</p>
+   * @public
+   */
+  multiAzRto?: TargetSource | undefined;
+
+  /**
+   * <p>The effective multi-AZ RPO value for the service, in minutes.</p>
+   * @public
+   */
+  multiAzRpo?: TargetSource | undefined;
+
+  /**
+   * <p>The effective multi-AZ disaster recovery approach for the service.</p>
+   * @public
+   */
+  multiAzDrApproach?: DisasterRecoverySource | undefined;
+
+  /**
+   * <p>The effective multi-Region RTO value for the service, in minutes.</p>
+   * @public
+   */
+  multiRegionRto?: TargetSource | undefined;
+
+  /**
+   * <p>The effective multi-Region RPO value for the service, in minutes.</p>
+   * @public
+   */
+  multiRegionRpo?: TargetSource | undefined;
+
+  /**
+   * <p>The effective multi-Region disaster recovery approach for the service.</p>
+   * @public
+   */
+  multiRegionDrApproach?: DisasterRecoverySource | undefined;
+
+  /**
+   * <p>The effective data recovery time between backups value for the service.</p>
+   * @public
+   */
+  dataRecoveryTimeBetweenBackups?: TargetSource | undefined;
+}
+
+/**
+ * <p>Contains the status of resource discovery for a service.</p>
+ * @public
+ */
+export interface ResourceDiscoveryStatus {
+  /**
+   * <p>The current status of resource discovery.</p>
+   * @public
+   */
+  status?: ResourceDiscoveryRunStatus | undefined;
+
+  /**
+   * <p>The timestamp of the last resource discovery run.</p>
+   * @public
+   */
+  lastRunAt?: Date | undefined;
+
+  /**
+   * <p>The error code if resource discovery failed.</p>
+   * @public
+   */
+  errorCode?: ResourceDiscoveryErrorCode | undefined;
+
+  /**
+   * <p>A message describing the error if resource discovery failed.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+}
+
+/**
+ * <p>Represents a service in Resilience Hub. A service is the primary unit of resilience assessment.</p>
+ * @public
+ */
+export interface Service {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The systems associated with the service.</p>
+   * @public
+   */
+  associatedSystems?: AssociatedSystem[] | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The Regions where the service operates.</p>
+   * @public
+   */
+  regions?: string[] | undefined;
+
+  /**
+   * <p>The permission model for the service.</p>
+   * @public
+   */
+  permissionModel?: PermissionModel | undefined;
+
+  /**
+   * <p>The dependency discovery configuration for the service.</p>
+   * @public
+   */
+  dependencyDiscovery?: DependencyDiscoveryConfig | undefined;
+
+  /**
+   * <p>The effective policy values for the service.</p>
+   * @public
+   */
+  effectivePolicyValues?: EffectivePolicyValues | undefined;
+
+  /**
+   * <p>The achievability status of the service's resilience targets.</p>
+   * @public
+   */
+  achievability?: Achievability | undefined;
+
+  /**
+   * <p>Configuration for automatic report generation on a Service.</p>
+   * @public
+   */
+  reportConfiguration?: ServiceReportConfiguration | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The estimated cost of running an assessment on the service.</p>
+   * @public
+   */
+  estimatedAssessmentCost?: AssessmentCost | undefined;
+
+  /**
+   * <p>The resource discovery status for the service.</p>
+   * @public
+   */
+  resourceDiscovery?: ResourceDiscoveryStatus | undefined;
+
+  /**
+   * <p>The current assessment status of the service.</p>
+   * @public
+   */
+  assessmentStatus?: AssessmentStatus | undefined;
+
+  /**
+   * <p>Indicates whether the assessment should be rerun.</p>
+   * @public
+   */
+  rerunAssessment?: boolean | undefined;
+
+  /**
+   * <p>The number of open findings for the service.</p>
+   * @public
+   */
+  openFindingsCount?: number | undefined;
+
+  /**
+   * <p>The number of resolved findings for the service.</p>
+   * @public
+   */
+  resolvedFindingsCount?: number | undefined;
+
+  /**
+   * <p>The AWS Organizations identifier for the service.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>The organizational unit (OU) identifier for the service.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>The AWS account ID that owns the service.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+
+  /**
+   * <p>The current DevOps Agent integration state for the service.</p>
+   * @public
+   */
+  devOpsAgentConfiguration?: DevOpsAgentConfigurationView | undefined;
+
+  /**
+   * <p>The timestamp when the service was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the service was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceResponse {
+  /**
+   * <p>The created service.</p>
+   * @public
+   */
+  service: Service | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceFunctionRequest {
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The criticality level of the service function.</p>
+   * @public
+   */
+  criticality: ServiceFunctionCriticality | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Represents a logical component of a service.</p>
+ * @public
+ */
+export interface ServiceFunction {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The criticality level of the service function.</p>
+   * @public
+   */
+  criticality: ServiceFunctionCriticality | undefined;
+
+  /**
+   * <p>The number of resources associated with the service function.</p>
+   * @public
+   */
+  resourceCount?: number | undefined;
+
+  /**
+   * <p>The source of the service function.</p>
+   * @public
+   */
+  source?: ServiceFunctionSource | undefined;
+
+  /**
+   * <p>The timestamp when the service function was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the service function was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceFunctionResponse {
+  /**
+   * <p>The created service function.</p>
+   * @public
+   */
+  serviceFunction: ServiceFunction | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceFunctionResourcesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the service function to associate resources with.</p>
+   * @public
+   */
+  serviceFunctionId: string | undefined;
+
+  /**
+   * <p>The list of resources to associate with the service function.</p>
+   * @public
+   */
+  resources: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateServiceFunctionResourcesResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The list of resources that were associated.</p>
+   * @public
+   */
+  resources?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateSystemRequest {
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Indicates whether cross-account sharing is enabled for the system.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Represents a system in Resilience Hub. A system is a logical grouping of services.</p>
+ * @public
+ */
+export interface System {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>System ID for cross-account use without exposing account structure.</p>
+   * @public
+   */
+  systemId: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Indicates whether cross-account sharing is enabled.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>The AWS Organizations identifier for the system.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>The organizational unit (OU) identifier for the system.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>The timestamp when the system was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the system was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateSystemResponse {
+  /**
+   * <p>The created system.</p>
+   * @public
+   */
+  system: System | undefined;
+}
+
+/**
+ * <p>Configuration for test execution logging destinations.</p>
+ * @public
+ */
+export interface LoggingConfiguration {
+  /**
+   * <p>The name of the S3 bucket for log delivery.</p>
+   * @public
+   */
+  s3BucketName?: string | undefined;
+
+  /**
+   * <p>The ARN of the CloudWatch Logs log group for log delivery.</p>
+   * @public
+   */
+  cloudWatchLogGroupArn?: string | undefined;
+
+  /**
+   * <p>The version of the log schema.</p>
+   * @public
+   */
+  logSchemaVersion?: string | undefined;
+}
+
+/**
+ * <p>A CloudWatch alarm that automatically stops a test run if it breaches its threshold.</p>
+ * @public
+ */
+export interface StopCondition {
+  /**
+   * <p>The source of the stop condition.</p>
+   * @public
+   */
+  source: StopConditionSource | undefined;
+
+  /**
+   * <p>The value of the stop condition, such as the ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  value: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTestRequest {
+  /**
+   * <p>The ARN of the service to create the test for.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The ARN of the test template to configure.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The logging configuration for the test.</p>
+   * @public
+   */
+  loggingConfiguration?: LoggingConfiguration | undefined;
+
+  /**
+   * <p>The stop conditions for the test.</p>
+   * @public
+   */
+  stopConditions?: StopCondition[] | undefined;
+
+  /**
+   * <p>The name of the IAM execution role to use when running the test.</p>
+   * @public
+   */
+  roleName?: string | undefined;
+
+  /**
+   * <p>The parameter values for the test.</p>
+   * @public
+   */
+  parameters?: Record<string, string[]> | undefined;
+}
+
+/**
+ * <p>Represents a fault action that a test runs, along with the resource type it targets.</p>
+ * @public
+ */
+export interface TestAction {
+  /**
+   * <p>The identifier of the fault action.</p>
+   * @public
+   */
+  actionId: string | undefined;
+
+  /**
+   * <p>A description of the fault action.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The resource type that the action targets.</p>
+   * @public
+   */
+  resourceType: string | undefined;
+}
+
+/**
+ * <p>Represents a test created for a service by configuring a test template.</p>
+ * @public
+ */
+export interface Test {
+  /**
+   * <p>The unique identifier of the test.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the test template the test was created from.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The name of the test.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The fault actions the test runs.</p>
+   * @public
+   */
+  actions?: TestAction[] | undefined;
+
+  /**
+   * <p>The logging configuration for the test.</p>
+   * @public
+   */
+  loggingConfiguration?: LoggingConfiguration | undefined;
+
+  /**
+   * <p>The stop conditions for the test.</p>
+   * @public
+   */
+  stopConditions?: StopCondition[] | undefined;
+
+  /**
+   * <p>The name of the IAM execution role used to run the test.</p>
+   * @public
+   */
+  roleName?: string | undefined;
+
+  /**
+   * <p>The parameter values configured for the test.</p>
+   * @public
+   */
+  parameters?: Record<string, string[]> | undefined;
+
+  /**
+   * <p>The total number of runs of the test.</p>
+   * @public
+   */
+  totalTestRuns: number | undefined;
+
+  /**
+   * <p>The number of successful runs of the test.</p>
+   * @public
+   */
+  successfulTestRuns: number | undefined;
+
+  /**
+   * <p>The timestamp when the test was created.</p>
+   * @public
+   */
+  creationTime: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateTestResponse {
+  /**
+   * <p>The created test.</p>
+   * @public
+   */
+  test: Test | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateUserJourneyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * <p>Represents a user journey that defines a critical path through a system.</p>
+ * @public
+ */
+export interface UserJourney {
+  /**
+   * <p>The unique identifier of the user journey.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The timestamp when the user journey was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the user journey was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateUserJourneyResponse {
+  /**
+   * <p>The created user journey.</p>
+   * @public
+   */
+  userJourney: UserJourney | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteAssertionRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the assertion to delete.</p>
+   * @public
+   */
+  assertionId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteAssertionResponse {
+  /**
+   * <p>The unique identifier of the deleted assertion.</p>
+   * @public
+   */
+  assertionId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteInputSourceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the input source to delete.</p>
+   * @public
+   */
+  inputSourceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteInputSourceResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the deleted input source.</p>
+   * @public
+   */
+  inputSourceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeletePolicyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeletePolicyResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceFunctionRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the service function to delete.</p>
+   * @public
+   */
+  serviceFunctionId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceFunctionResponse {
+  /**
+   * <p>The identifier of the deleted service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceFunctionResourcesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the service function to remove resources from.</p>
+   * @public
+   */
+  serviceFunctionId: string | undefined;
+
+  /**
+   * <p>The list of resources to remove from the service function.</p>
+   * @public
+   */
+  resources: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteServiceFunctionResourcesResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The list of resources that were removed.</p>
+   * @public
+   */
+  resources?: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteSystemRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteSystemResponse {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteTestRequest {
+  /**
+   * <p>The identifier of the test to delete.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteTestResponse {
+  /**
+   * <p>The identifier of the deleted test.</p>
+   * @public
+   */
+  testId: string | undefined;
+}
+
+/**
+ * <p>Identifies an observability alarm by its ARN.</p>
+ * @public
+ */
+export interface ObservabilityAlarmInput {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+}
+
+/**
+ * <p>Identifies a success criteria alarm by its ARN.</p>
+ * @public
+ */
+export interface SuccessCriteriaAlarmInput {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+}
+
+/**
+ * <p>Identifies a monitoring source to add to or remove from a test. Exactly one member is set.</p>
+ * @public
+ */
+export type TestSourceInput =
+  | TestSourceInput.ObservabilityAlarmMember
+  | TestSourceInput.SuccessCriteriaAlarmMember
+  | TestSourceInput.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TestSourceInput {
+  /**
+   * <p>A success criteria alarm that determines whether the test passes or fails.</p>
+   * @public
+   */
+  export interface SuccessCriteriaAlarmMember {
+    successCriteriaAlarm: SuccessCriteriaAlarmInput;
+    observabilityAlarm?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An observability alarm included for visibility only.</p>
+   * @public
+   */
+  export interface ObservabilityAlarmMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm: ObservabilityAlarmInput;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    successCriteriaAlarm: (value: SuccessCriteriaAlarmInput) => T;
+    observabilityAlarm: (value: ObservabilityAlarmInput) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface DeleteTestSourcesRequest {
+  /**
+   * <p>The identifier of the test to remove sources from.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The monitoring sources to remove.</p>
+   * @public
+   */
+  testSources: TestSourceInput[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteTestSourcesResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteUserJourneyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>The identifier of the user journey to delete.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteUserJourneyResponse {
+  /**
+   * <p>The identifier of the deleted user journey.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+}
+
+/**
+ * <p>Contains a single insight about a service's dependencies.</p>
+ * @public
+ */
+export interface DependencyInsight {
+  /**
+   * <p>The category of the insight. Valid values:</p> <ul> <li> <p>CROSS_REGION - The insight relates to dependencies used across multiple Regions.</p> </li> <li> <p>NEW_DEPENDENCY - The insight relates to a recently detected dependency.</p> </li> <li> <p>THIRD_PARTY - The insight relates to a third-party dependency.</p> </li> <li> <p>UNEVEN_USAGE - The insight relates to a dependency with uneven usage across the service.</p> </li> <li> <p>AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services service.</p> </li> </ul>
+   * @public
+   */
+  category: InsightsCategory | undefined;
+
+  /**
+   * <p>A human-readable explanation of the insight, describing the dependency behavior or condition that was detected.</p>
+   * @public
+   */
+  description: string | undefined;
+}
+
+/**
+ * <p>A data point in a dependency query range.</p>
+ * @public
+ */
+export interface QueryDataPoint {
+  /**
+   * <p>The timestamp of the data point.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>The number of queries at this data point.</p>
+   * @public
+   */
+  queryCount: number | undefined;
+}
+
+/**
+ * <p>Defines a time range for dependency query data.</p>
+ * @public
+ */
+export interface QueryRange {
+  /**
+   * <p>The start time of the query range.</p>
+   * @public
+   */
+  startTime: Date | undefined;
+
+  /**
+   * <p>The end time of the query range.</p>
+   * @public
+   */
+  endTime: Date | undefined;
+
+  /**
+   * <p>The granularity of the query range data points.</p>
+   * @public
+   */
+  granularity: QueryGranularity | undefined;
+
+  /**
+   * <p>The data points within the query range.</p>
+   * @public
+   */
+  dataPoints: QueryDataPoint[] | undefined;
+}
+
+/**
+ * <p>Contains summary information about a discovered dependency.</p>
+ * @public
+ */
+export interface DependencySummary {
+  /**
+   * <p>The unique identifier of the dependency.</p>
+   * @public
+   */
+  dependencyId: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The name of the dependency.</p>
+   * @public
+   */
+  dependencyName: string | undefined;
+
+  /**
+   * <p>The DNS name associated with the dependency.</p>
+   * @public
+   */
+  dnsName: string | undefined;
+
+  /**
+   * <p>The location of the dependency.</p>
+   * @public
+   */
+  location: string | undefined;
+
+  /**
+   * <p>The timestamp when the dependency was last detected.</p>
+   * @public
+   */
+  lastDetectedTime: Date | undefined;
+
+  /**
+   * <p>The source Regions from which the dependency was detected.</p>
+   * @public
+   */
+  sourceRegions: string[] | undefined;
+
+  /**
+   * <p>The provider of the dependency.</p>
+   * @public
+   */
+  provider?: string | undefined;
+
+  /**
+   * <p>The query range data for the dependency.</p>
+   * @public
+   */
+  queryRange: QueryRange | undefined;
+
+  /**
+   * <p>The criticality level of the dependency.</p>
+   * @public
+   */
+  criticality: DependencyCriticality | undefined;
+
+  /**
+   * <p>A user-provided comment about the dependency.</p>
+   * @public
+   */
+  comment?: string | undefined;
+}
+
+/**
+ * <p>The result when DevOps Agent investigates a resilience test run. The verdict is advisory and builds on the test run's own result, which remains authoritative.</p>
+ * @public
+ */
+export interface DevOpsAgentInvestigation {
+  /**
+   * <p>The investigation verdict. Valid values:</p> <ul> <li> <p>PASS - The resilience test run passed.</p> </li> <li> <p>FAIL - The resilience test run failed.</p> </li> <li> <p>INCONCLUSIVE - The investigation could not determine a clear outcome.</p> </li> </ul>
+   * @public
+   */
+  verdict?: DevOpsAgentVerdict | undefined;
+
+  /**
+   * <p>The confidence level of the verdict. Valid values:</p> <ul> <li> <p>HIGH - The verdict is highly reliable.</p> </li> <li> <p>MEDIUM - The verdict has moderate reliability.</p> </li> <li> <p>LOW - The verdict has low reliability.</p> </li> </ul>
+   * @public
+   */
+  confidence?: DevOpsAgentConfidence | undefined;
+
+  /**
+   * <p>A deep link to the interactive DevOps Agent investigation session.</p>
+   * @public
+   */
+  deepLink?: string | undefined;
+
+  /**
+   * <p>The lifecycle status of the investigation. Valid values:</p> <ul> <li> <p>PENDING - The investigation has been created but has not started.</p> </li> <li> <p>IN_PROGRESS - The investigation is running.</p> </li> <li> <p>COMPLETED - The investigation finished successfully.</p> </li> <li> <p>FAILED - The investigation failed to complete.</p> </li> <li> <p>TIMED_OUT - The investigation did not complete within the allotted time.</p> </li> <li> <p>CANCELED - The investigation was canceled.</p> </li> </ul>
+   * @public
+   */
+  status?: DevOpsAgentInvestigationStatus | undefined;
+
+  /**
+   * <p>The DevOps Agent analysis summary for the investigation.</p>
+   * @public
+   */
+  summary?: string | undefined;
+}
+
+/**
+ * <p>Contains property information for a service topology edge.</p>
+ * @public
+ */
+export interface EdgePropertySummary {
+  /**
+   * <p>The topology type of the edge.</p>
+   * @public
+   */
+  topologyType?: TopologyType | undefined;
+
+  /**
+   * <p>Human-readable relationship description. Only present for LLM-inferred edges.</p>
+   * @public
+   */
+  label?: string | undefined;
+}
+
+/**
+ * <p>Identifies the actor that triggered an event.</p>
+ * @public
+ */
+export interface EventActor {
+  /**
+   * <p>The type of actor, either USER or SYSTEM.</p>
+   * @public
+   */
+  type: ActorType | undefined;
+
+  /**
+   * <p>The principal ID of the actor.</p>
+   * @public
+   */
+  principalId: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the actor.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+
+  /**
+   * <p>The user name of the actor.</p>
+   * @public
+   */
+  userName?: string | undefined;
+}
+
+/**
+ * <p>Details about an AWS Fault Injection Service (AWS FIS) experiment run as part of a test run.</p>
+ * @public
+ */
+export interface ExperimentDetails {
+  /**
+   * <p>The ARN of the AWS FIS experiment.</p>
+   * @public
+   */
+  experimentArn: string | undefined;
+
+  /**
+   * <p>Additional details about the experiment.</p>
+   * @public
+   */
+  details?: string | undefined;
+}
+
+/**
+ * <p>An infrastructure and code recommendation to address a finding.</p>
+ * @public
+ */
+export interface InfrastructureAndCodeRecommendation {
+  /**
+   * <p>The list of suggested changes.</p>
+   * @public
+   */
+  suggestedChanges?: string[] | undefined;
+}
+
+/**
+ * <p>An observability recommendation to address a finding.</p>
+ * @public
+ */
+export interface ObservabilityRecommendation {
+  /**
+   * <p>The list of suggested observability changes.</p>
+   * @public
+   */
+  suggestedChanges?: string[] | undefined;
+}
+
+/**
+ * <p>A testing recommendation to address a finding.</p>
+ * @public
+ */
+export interface TestingRecommendation {
+  /**
+   * <p>The list of suggested testing changes.</p>
+   * @public
+   */
+  suggestedChanges?: string[] | undefined;
+}
+
+/**
+ * <p>Represents a resilience finding from a failure mode assessment.</p>
+ * @public
+ */
+export interface Finding {
+  /**
+   * <p>The unique identifier of the finding.</p>
+   * @public
+   */
+  findingId?: string | undefined;
+
+  /**
+   * <p>The name of the finding.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The failure category of the finding.</p>
+   * @public
+   */
+  failureCategory?: FailureCategory | undefined;
+
+  /**
+   * <p>The current status of the finding.</p>
+   * @public
+   */
+  status?: FindingStatus | undefined;
+
+  /**
+   * <p>The reasoning behind the finding.</p>
+   * @public
+   */
+  reasoning?: string | undefined;
+
+  /**
+   * <p>A user-provided comment about the finding.</p>
+   * @public
+   */
+  comment?: string | undefined;
+
+  /**
+   * <p>The severity of the finding.</p>
+   * @public
+   */
+  severity?: FindingSeverity | undefined;
+
+  /**
+   * <p>The service functions associated with the finding.</p>
+   * @public
+   */
+  serviceFunctions?: string[] | undefined;
+
+  /**
+   * <p>The policy component associated with the finding.</p>
+   * @public
+   */
+  policyComponent?: PolicyComponent | undefined;
+
+  /**
+   * <p>Infrastructure and code recommendations to address the finding.</p>
+   * @public
+   */
+  infrastructureAndCodeRecommendations?: InfrastructureAndCodeRecommendation[] | undefined;
+
+  /**
+   * <p>Observability recommendations to address the finding.</p>
+   * @public
+   */
+  observabilityRecommendations?: ObservabilityRecommendation[] | undefined;
+
+  /**
+   * <p>Testing recommendations to address the finding.</p>
+   * @public
+   */
+  testingRecommendations?: TestingRecommendation[] | undefined;
+
+  /**
+   * <p>The timestamp when the finding was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+
+  /**
+   * <p>A deep link to an interactive DevOps Agent investigation seeded with this finding. This value is null until DevOps Agent creates an investigation.</p>
+   * @public
+   */
+  investigationDeepLink?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a finding.</p>
+ * @public
+ */
+export interface FindingSummary {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the finding.</p>
+   * @public
+   */
+  findingId?: string | undefined;
+
+  /**
+   * <p>The name of the finding.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The failure category of the finding.</p>
+   * @public
+   */
+  failureCategory?: FailureCategory | undefined;
+
+  /**
+   * <p>The severity of the finding.</p>
+   * @public
+   */
+  severity?: FindingSeverity | undefined;
+
+  /**
+   * <p>The current status of the finding.</p>
+   * @public
+   */
+  status?: FindingStatus | undefined;
+
+  /**
+   * <p>The policy component associated with the finding.</p>
+   * @public
+   */
+  policyComponent?: PolicyComponent | undefined;
+
+  /**
+   * <p>The timestamp when the finding was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+
+  /**
+   * <p>A deep link to an interactive DevOps Agent investigation seeded with this finding. This value is null until DevOps Agent creates an investigation.</p>
+   * @public
+   */
+  investigationDeepLink?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDependencyInsightsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetDependencyInsightsResponse {
+  /**
+   * <p>A summary of the dependency insights for the service. This field is not returned until the status is COMPLETED.</p>
+   * @public
+   */
+  overview?: string | undefined;
+
+  /**
+   * <p>The list of dependency insights generated for the service. This field is not returned until the status is COMPLETED.</p>
+   * @public
+   */
+  insights?: DependencyInsight[] | undefined;
+
+  /**
+   * <p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. See errorCode and errorMessage for details.</p> </li> </ul>
+   * @public
+   */
+  status: DependencyInsightsStatus | undefined;
+
+  /**
+   * <p>The timestamp when the dependency insights were generated.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The error code returned when insights generation failed. Valid values:</p> <ul> <li> <p>INSUFFICIENT_DATA - There was not enough dependency data to generate insights.</p> </li> <li> <p>LLM_GENERATION_FAILED - The insights could not be generated.</p> </li> <li> <p>INTERNAL_ERROR - An internal error occurred while generating insights.</p> </li> </ul>
+   * @public
+   */
+  errorCode?: DependencyInsightsErrorCode | undefined;
+
+  /**
+   * <p>A message describing why insights generation failed.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetFailureModeFindingRequest {
+  /**
+   * <p>The unique identifier of the finding to retrieve.</p>
+   * @public
+   */
+  findingId: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetFailureModeFindingResponse {
+  /**
+   * <p>The requested finding.</p>
+   * @public
+   */
+  finding?: Finding | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetPolicyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetPolicyResponse {
+  /**
+   * <p>The requested resilience policy.</p>
+   * @public
+   */
+  policy: Policy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetServiceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetServiceResponse {
+  /**
+   * <p>The requested service.</p>
+   * @public
+   */
+  service: Service | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetSystemRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetSystemResponse {
+  /**
+   * <p>The requested system.</p>
+   * @public
+   */
+  system: System | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestRequest {
+  /**
+   * <p>The identifier of the test to retrieve.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestResponse {
+  /**
+   * <p>The requested test.</p>
+   * @public
+   */
+  test: Test | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestRunRequest {
+  /**
+   * <p>The identifier of the test run to retrieve.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * <p>A snapshot of the resilience policy captured onto a test run from the service when the run was started.</p>
+ * @public
+ */
+export interface TestRunPolicySnapshot {
+  /**
+   * <p>The ARN of the policy.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The name of the policy.</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The availability SLO targets.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The multi-AZ resilience targets.</p>
+   * @public
+   */
+  multiAz?: MultiAzTargets | undefined;
+
+  /**
+   * <p>The multi-Region resilience targets.</p>
+   * @public
+   */
+  multiRegion?: MultiRegionTargets | undefined;
+
+  /**
+   * <p>The data recovery targets.</p>
+   * @public
+   */
+  dataRecovery?: DataRecoveryTargets | undefined;
+}
+
+/**
+ * <p>A snapshot of the report configuration captured onto a test run from the service when the run was started.</p>
+ * @public
+ */
+export interface TestRunReportConfiguration {
+  /**
+   * <p>The output destinations for generated reports.</p>
+   * @public
+   */
+  reportOutput: ReportOutputConfiguration[] | undefined;
+}
+
+/**
+ * <p>Represents a single run of a test. Configuration is snapshotted from the test and service at the time the run is started.</p>
+ * @public
+ */
+export interface TestRun {
+  /**
+   * <p>The unique identifier of the test run.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The identifier of the test that was run.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The current status of the test run.</p>
+   * @public
+   */
+  status: TestRunStatus | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The timestamp when the test run started.</p>
+   * @public
+   */
+  startedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp when the test run ended.</p>
+   * @public
+   */
+  endedAt?: Date | undefined;
+
+  /**
+   * <p>The AWS Fault Injection Service (AWS FIS) experiments run as part of the test run.</p>
+   * @public
+   */
+  experiments?: ExperimentDetails[] | undefined;
+
+  /**
+   * <p>The number of events recorded for the test run. Use ListTestRunEvents to retrieve the details.</p>
+   * @public
+   */
+  eventCount?: number | undefined;
+
+  /**
+   * <p>The parameter values used for the test run.</p>
+   * @public
+   */
+  parameters?: Record<string, string[]> | undefined;
+
+  /**
+   * <p>A human-readable reason for test run failure. Only present when the status is FAILED or ERROR.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+
+  /**
+   * <p>The stop conditions snapshotted from the test when the run was started.</p>
+   * @public
+   */
+  stopConditions?: StopCondition[] | undefined;
+
+  /**
+   * <p>The logging configuration snapshotted from the test when the run was started.</p>
+   * @public
+   */
+  loggingConfiguration?: LoggingConfiguration | undefined;
+
+  /**
+   * <p>The IAM execution role name snapshotted from the test when the run was started.</p>
+   * @public
+   */
+  roleName?: string | undefined;
+
+  /**
+   * <p>The ARN of the test template snapshotted from the test when the run was started.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The report configuration snapshotted from the service when the run was started.</p>
+   * @public
+   */
+  reportConfiguration?: TestRunReportConfiguration | undefined;
+
+  /**
+   * <p>The resilience policy snapshotted from the service when the run was started.</p>
+   * @public
+   */
+  policy?: TestRunPolicySnapshot | undefined;
+
+  /**
+   * <p>The report generation result for the test run. Present after report generation completes or fails.</p>
+   * @public
+   */
+  reportOutput?: ReportGenerationResult | undefined;
+
+  /**
+   * <p>The ARN of the ARC Region switch plan associated with the test run.</p>
+   * @public
+   */
+  regionSwitchPlanArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the ARC Region switch execution detected during the test run.</p>
+   * @public
+   */
+  regionSwitchExecutionId?: string | undefined;
+
+  /**
+   * <p>The permission model snapshotted from the service when the run was started.</p>
+   * @public
+   */
+  permissionModel?: PermissionModel | undefined;
+
+  /**
+   * <p>The Regions snapshotted from the service when the run was started.</p>
+   * @public
+   */
+  regions?: string[] | undefined;
+
+  /**
+   * <p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>
+   * @public
+   */
+  accountTargeting?: AccountTargeting | undefined;
+
+  /**
+   * <p>The DevOps Agent investigation result for the test run, present when the integration is enabled for the service.</p>
+   * @public
+   */
+  devOpsAgentInvestigation?: DevOpsAgentInvestigation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestRunResponse {
+  /**
+   * <p>The requested test run.</p>
+   * @public
+   */
+  testRun: TestRun | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestTemplateRequest {
+  /**
+   * <p>The ARN of the test template to retrieve.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+}
+
+/**
+ * <p>Describes a parameter accepted by a test template.</p>
+ * @public
+ */
+export interface TestTemplateParameter {
+  /**
+   * <p>The name of the parameter.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>A description of the parameter.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The data type of the parameter.</p>
+   * @public
+   */
+  type: ParameterType | undefined;
+
+  /**
+   * <p>Indicates whether the parameter is required.</p>
+   * @public
+   */
+  required: boolean | undefined;
+
+  /**
+   * <p>The default value of the parameter.</p>
+   * @public
+   */
+  defaultValue?: string | undefined;
+
+  /**
+   * <p>The maximum number of values the parameter accepts.</p>
+   * @public
+   */
+  maxValues?: number | undefined;
+}
+
+/**
+ * <p>A pre-configured, AWS recommended test that defines which resilience capability to validate, the fault actions it runs, and the parameters it accepts.</p>
+ * @public
+ */
+export interface TestTemplate {
+  /**
+   * <p>The ARN of the test template.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The name of the test template.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>A description of the test template.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The parameters the test template accepts.</p>
+   * @public
+   */
+  parameters?: TestTemplateParameter[] | undefined;
+
+  /**
+   * <p>The fault actions the test template runs.</p>
+   * @public
+   */
+  actions?: TestAction[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetTestTemplateResponse {
+  /**
+   * <p>The requested test template.</p>
+   * @public
+   */
+  testTemplate: TestTemplate | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetUserJourneyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>The identifier of the user journey to retrieve.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetUserJourneyResponse {
+  /**
+   * <p>The requested user journey.</p>
+   * @public
+   */
+  userJourney: UserJourney | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ImportAppRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  v1AppArn: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>Whether to skip manually added resources during import.</p>
+   * @public
+   */
+  skipManuallyAddedResources?: boolean | undefined;
+
+  /**
+   * <p>The systems to associate with the imported service.</p>
+   * @public
+   */
+  associatedSystems?: AssociatedSystem[] | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ImportAppResponse {
+  /**
+   * <p>The imported service.</p>
+   * @public
+   */
+  service: Service | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ImportPolicyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  v1PolicyArn: string | undefined;
+
+  /**
+   * <p>KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.</p>
+   * @public
+   */
+  kmsKeyId?: string | undefined;
+
+  /**
+   * <p>The availability SLO to set on the imported policy.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The multi-AZ disaster recovery approach for the imported policy.</p>
+   * @public
+   */
+  multiAzDisasterRecoveryApproach?: MultiAzDisasterRecoveryApproach | undefined;
+
+  /**
+   * <p>The multi-Region disaster recovery approach for the imported policy.</p>
+   * @public
+   */
+  multiRegionDisasterRecoveryApproach?: MultiRegionDisasterRecoveryApproach | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ImportPolicyResponse {
+  /**
+   * <p>The imported policy.</p>
+   * @public
+   */
+  policy: Policy | undefined;
+}
+
+/**
+ * <p>Identifies an input source by its identifier and type.</p>
+ * @public
+ */
+export interface InputSource {
+  /**
+   * <p>The identifier of the input source.</p>
+   * @public
+   */
+  identifier: string | undefined;
+
+  /**
+   * <p>The type of the input source.</p>
+   * @public
+   */
+  type: InputSourceType | undefined;
+}
+
+/**
+ * <p>Contains summary information about an input source for a service.</p>
+ * @public
+ */
+export interface InputSourceSummary {
+  /**
+   * <p>The unique identifier of the input source.</p>
+   * @public
+   */
+  inputSourceId: string | undefined;
+
+  /**
+   * <p>The type of the input source.</p>
+   * @public
+   */
+  type?: InputSourceType | undefined;
+
+  /**
+   * <p>The resource tags used for discovery, if this input source uses tags.</p>
+   * @public
+   */
+  resourceTags?: ResourceTag[] | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  cfnStackArn?: string | undefined;
+
+  /**
+   * <p>S3 URL — virtual hosted-style or s3:// URI.</p>
+   * @public
+   */
+  tfStateFileUrl?: string | undefined;
+
+  /**
+   * <p>The Amazon EKS configuration, if this input source uses EKS.</p>
+   * @public
+   */
+  eks?: EksSource | undefined;
+
+  /**
+   * <p>S3 URL — virtual hosted-style or s3:// URI.</p>
+   * @public
+   */
+  designFileS3Url?: string | undefined;
+
+  /**
+   * <p>The timestamp when the input source was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAssertionsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter assertions by source type.</p>
+   * @public
+   */
+  source?: AssertionSource | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAssertionsResponse {
+  /**
+   * <p>The list of assertions.</p>
+   * @public
+   */
+  assertions: Assertion[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListDependenciesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The start time for the dependency query range.</p>
+   * @public
+   */
+  queryRangeStartTime?: Date | undefined;
+
+  /**
+   * <p>The end time for the dependency query range.</p>
+   * @public
+   */
+  queryRangeEndTime?: Date | undefined;
+
+  /**
+   * <p>The granularity for the dependency query range.</p>
+   * @public
+   */
+  queryRangeGranularity?: QueryGranularity | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListDependenciesResponse {
+  /**
+   * <p>The list of dependency summaries.</p>
+   * @public
+   */
+  dependencySummaries: DependencySummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListFailureModeAssessmentsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Specifies the assessment statuses to include in the results.</p>
+   * @public
+   */
+  assessmentStatuses?: AssessmentStatus[] | undefined;
+
+  /**
+   * <p>Specifies that only assessments that started at or after this timestamp appear in the results.</p>
+   * @public
+   */
+  startedAfter?: Date | undefined;
+
+  /**
+   * <p>Specifies that only assessments that ended at or before this timestamp appear in the results.</p>
+   * @public
+   */
+  endedBefore?: Date | undefined;
+
+  /**
+   * <p>The field to use for sorting failure mode assessments.</p>
+   * @public
+   */
+  sortBy?: AssessmentSortField | undefined;
+
+  /**
+   * <p>The sort order for results.</p>
+   * @public
+   */
+  sortOrder?: SortOrder | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListFailureModeAssessmentsResponse {
+  /**
+   * <p>The list of assessment summaries.</p>
+   * @public
+   */
+  assessmentSummaries: AssessmentSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListFailureModeFindingsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter findings by severity.</p>
+   * @public
+   */
+  severity?: FindingSeverity | undefined;
+
+  /**
+   * <p>Filter findings by failure category.</p>
+   * @public
+   */
+  failureCategory?: FailureCategory | undefined;
+
+  /**
+   * <p>Filter findings by status.</p>
+   * @public
+   */
+  status?: FindingStatus | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListFailureModeFindingsResponse {
+  /**
+   * <p>The list of finding summaries.</p>
+   * @public
+   */
+  findingsSummary: FindingSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListInputSourcesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter input sources by type.</p>
+   * @public
+   */
+  type?: InputSourceType | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListInputSourcesResponse {
+  /**
+   * <p>The list of input source summaries.</p>
+   * @public
+   */
+  inputSourceSummaries: InputSourceSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPoliciesRequest {
+  /**
+   * <p>The identifier of the account that owns the policies to include in the results.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a resilience policy.</p>
+ * @public
+ */
+export interface PolicySummary {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The availability SLO defined in the policy.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The multi-AZ disaster recovery targets defined in the policy.</p>
+   * @public
+   */
+  multiAz?: MultiAzTargets | undefined;
+
+  /**
+   * <p>The multi-Region disaster recovery targets defined in the policy.</p>
+   * @public
+   */
+  multiRegion?: MultiRegionTargets | undefined;
+
+  /**
+   * <p>The data recovery targets defined in the policy.</p>
+   * @public
+   */
+  dataRecovery?: DataRecoveryTargets | undefined;
+
+  /**
+   * <p>Specifies whether cross-account sharing is enabled.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+
+  /**
+   * <p>The identifier of the organization this policy is shared with.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>The number of services associated with this policy.</p>
+   * @public
+   */
+  associatedServiceCount?: number | undefined;
+
+  /**
+   * <p>The timestamp when the policy was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the policy was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPoliciesResponse {
+  /**
+   * <p>The list of policy summaries.</p>
+   * @public
+   */
+  policySummaries: PolicySummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPolicyEventsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+
+  /**
+   * <p>The type of events to include in the results.</p>
+   * @public
+   */
+  eventTypes?: PolicyEventType[] | undefined;
+
+  /**
+   * <p>The start time for filtering events.</p>
+   * @public
+   */
+  startTime?: Date | undefined;
+
+  /**
+   * <p>The end time for filtering events.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains details about the service that started using the policy, such as the account that owns the service.</p>
+ * @public
+ */
+export interface PolicyAttachedToServiceMetadata {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The account that owns the service.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+}
+
+/**
+ * <p>Contains details about a policy that was deleted, including the number of services that were affected.</p>
+ * @public
+ */
+export interface PolicyDeletedMetadata {
+  /**
+   * <p>The number of services that were using the policy when it was deleted.</p>
+   * @public
+   */
+  affectedServiceCount?: number | undefined;
+}
+
+/**
+ * <p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>
+ * @public
+ */
+export interface PolicyDetachedFromServiceMetadata {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The account that owns the service.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+}
+
+/**
+ * <p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>
+ * @public
+ */
+export interface PolicySharingRevokedMetadata {
+  /**
+   * <p>The number of services that were using the policy when sharing was revoked.</p>
+   * @public
+   */
+  affectedServiceCount?: number | undefined;
+}
+
+/**
+ * <p>Contains the event-specific metadata for a policy event. Exactly one member is populated, according to the event type.</p> <ul> <li> <p>policyAttachedToService — a service started using the policy.</p> </li> <li> <p>policyDetachedFromService — a service stopped using the policy.</p> </li> <li> <p>policySharingRevoked — cross-account sharing was disabled for the policy.</p> </li> <li> <p>policyDeleted — the policy was deleted.</p> </li> </ul>
+ * @public
+ */
+export type PolicyEventMetadata =
+  | PolicyEventMetadata.PolicyAttachedToServiceMember
+  | PolicyEventMetadata.PolicyDeletedMember
+  | PolicyEventMetadata.PolicyDetachedFromServiceMember
+  | PolicyEventMetadata.PolicySharingRevokedMember
+  | PolicyEventMetadata.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PolicyEventMetadata {
+  /**
+   * <p>Contains details about the service that started using the policy, such as the account that owns the service.</p>
+   * @public
+   */
+  export interface PolicyAttachedToServiceMember {
+    policyAttachedToService: PolicyAttachedToServiceMetadata;
+    policyDetachedFromService?: never;
+    policySharingRevoked?: never;
+    policyDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>
+   * @public
+   */
+  export interface PolicyDetachedFromServiceMember {
+    policyAttachedToService?: never;
+    policyDetachedFromService: PolicyDetachedFromServiceMetadata;
+    policySharingRevoked?: never;
+    policyDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>
+   * @public
+   */
+  export interface PolicySharingRevokedMember {
+    policyAttachedToService?: never;
+    policyDetachedFromService?: never;
+    policySharingRevoked: PolicySharingRevokedMetadata;
+    policyDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Contains details about a policy that was deleted, including the number of services that were affected.</p>
+   * @public
+   */
+  export interface PolicyDeletedMember {
+    policyAttachedToService?: never;
+    policyDetachedFromService?: never;
+    policySharingRevoked?: never;
+    policyDeleted: PolicyDeletedMetadata;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    policyAttachedToService?: never;
+    policyDetachedFromService?: never;
+    policySharingRevoked?: never;
+    policyDeleted?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    policyAttachedToService: (value: PolicyAttachedToServiceMetadata) => T;
+    policyDetachedFromService: (value: PolicyDetachedFromServiceMetadata) => T;
+    policySharingRevoked: (value: PolicySharingRevokedMetadata) => T;
+    policyDeleted: (value: PolicyDeletedMetadata) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Contains the title, description, and event-specific metadata for a single event on the timeline of a resilience policy.</p>
+ * @public
+ */
+export interface PolicyEventDetails {
+  /**
+   * <p>A short summary of the event.</p>
+   * @public
+   */
+  title: string | undefined;
+
+  /**
+   * <p>A description of the event.</p>
+   * @public
+   */
+  description: string | undefined;
+
+  /**
+   * <p>The event-specific metadata, with one member populated according to the event type.</p>
+   * @public
+   */
+  eventMetadata?: PolicyEventMetadata | undefined;
+}
+
+/**
+ * <p>An event on the timeline of a resilience policy.</p>
+ * @public
+ */
+export interface PolicyEvent {
+  /**
+   * <p>The identifier of the event.</p>
+   * @public
+   */
+  eventId: string | undefined;
+
+  /**
+   * <p>The time the event occurred.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>The type of the event.</p>
+   * @public
+   */
+  eventType: PolicyEventType | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+
+  /**
+   * <p>Identifies the actor that triggered an event.</p>
+   * @public
+   */
+  actor: EventActor | undefined;
+
+  /**
+   * <p>The details of the event.</p>
+   * @public
+   */
+  eventDetails: PolicyEventDetails | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListPolicyEventsResponse {
+  /**
+   * <p>The list of policy events.</p>
+   * @public
+   */
+  events: PolicyEvent[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListReportsRequest {
+  /**
+   * <p>Optional. If not provided, lists all reports owned by the account.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>Filter reports by type.</p>
+   * @public
+   */
+  reportType?: ReportType | undefined;
+
+  /**
+   * <p>The unique identifier of a test run.</p>
+   * @public
+   */
+  testRunId?: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListReportsResponse {
+  /**
+   * <p>The list of report generation results.</p>
+   * @public
+   */
+  reportGenerationResults: ReportGenerationResult[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListResolvedTestRunTargetResourcesRequest {
+  /**
+   * <p>The identifier of the test run to list resolved target resources for.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>A single AWS resource that AWS Fault Injection Service (AWS FIS) resolved as a target during a test run.</p>
+ * @public
+ */
+export interface ResolvedTargetResource {
+  /**
+   * <p>The AWS FIS resource type the target belongs to, such as aws:ec2:instance, aws:ecs:task, or aws:eks:pod.</p>
+   * @public
+   */
+  resourceType: string | undefined;
+
+  /**
+   * <p>The name of the target in the AWS FIS experiment template.</p>
+   * @public
+   */
+  targetName: string | undefined;
+
+  /**
+   * <p>The raw target information map as returned by AWS FIS.</p>
+   * @public
+   */
+  targetInformation: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListResolvedTestRunTargetResourcesResponse {
+  /**
+   * <p>The list of resolved target resources.</p>
+   * @public
+   */
+  resolvedTargetResources: ResolvedTargetResource[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListResourcesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter resources by service function identifier.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>Filter resources by AWS Region.</p>
+   * @public
+   */
+  awsRegion?: string | undefined;
+
+  /**
+   * <p>The CloudFormation resource types to include in the response.</p>
+   * @public
+   */
+  resourceTypes?: string[] | undefined;
+
+  /**
+   * <p>Specifies whether to filter non-billable resources. When true (the default), the operation returns only billable resources.</p>
+   * @public
+   */
+  billable?: boolean | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Represents an AWS resource discovered by Resilience Hub.</p>
+ * @public
+ */
+export interface Resource {
+  /**
+   * <p>The identifier of the resource.</p>
+   * @public
+   */
+  identifier: string | undefined;
+
+  /**
+   * <p>The AWS Region where the resource is located.</p>
+   * @public
+   */
+  awsRegion?: string | undefined;
+
+  /**
+   * <p>The AWS account ID that owns the resource.</p>
+   * @public
+   */
+  awsAccountId?: string | undefined;
+
+  /**
+   * <p>The type of the resource.</p>
+   * @public
+   */
+  resourceType?: string | undefined;
+
+  /**
+   * <p>The Availability Zone ID of the Availability Zone that hosts the resource, such as use1-az1. The Availability Zone ID is consistent across Amazon Web Services (AWS) accounts, unlike the Availability Zone name.</p>
+   * @public
+   */
+  availabilityZoneId?: string | undefined;
+
+  /**
+   * <p>The name of the Availability Zone that hosts the resource, such as us-west-2a.</p>
+   * @public
+   */
+  availabilityZoneName?: string | undefined;
+
+  /**
+   * <p>The identifier of the single parent resource that contains this resource, used to represent containment relationships in the resource topology. A resource has at most one containment parent.</p>
+   * @public
+   */
+  containmentParentId?: string | undefined;
+
+  /**
+   * <p>The identifier of the logical resource group that this resource belongs to. Resources that share this identifier are managed as a single unit.</p>
+   * @public
+   */
+  logicalResourceGroupId?: string | undefined;
+}
+
+/**
+ * <p>Represents a resource associated with a service.</p>
+ * @public
+ */
+export interface ServiceResource {
+  /**
+   * <p>The identifier of the resource.</p>
+   * @public
+   */
+  resourceIdentifier: string | undefined;
+
+  /**
+   * <p>The input source that discovered the resource.</p>
+   * @public
+   */
+  inputSource?: InputSource | undefined;
+
+  /**
+   * <p>The resource details.</p>
+   * @public
+   */
+  resource: Resource | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListResourcesResponse {
+  /**
+   * <p>The service function identifier for the returned resources.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The list of service resources.</p>
+   * @public
+   */
+  serviceResources?: ServiceResource[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceEventsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The type of events to include in the results.</p>
+   * @public
+   */
+  eventTypes?: ServiceEventType[] | undefined;
+
+  /**
+   * <p>The start time for filtering events.</p>
+   * @public
+   */
+  startTime?: Date | undefined;
+
+  /**
+   * <p>The end time for filtering events.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service achievability updated event.</p>
+ * @public
+ */
+export interface ServiceAchievabilityUpdatedMetadata {
+  /**
+   * <p>The assessment identifier that triggered the update.</p>
+   * @public
+   */
+  assessmentId?: string | undefined;
+
+  /**
+   * <p>The updated achievability status of the availability SLO.</p>
+   * @public
+   */
+  availabilitySlo?: string | undefined;
+
+  /**
+   * <p>The updated achievability status of the multi-AZ RTO and RPO targets.</p>
+   * @public
+   */
+  multiAzRtoRpo?: string | undefined;
+
+  /**
+   * <p>The updated achievability status of the multi-Region RTO and RPO targets.</p>
+   * @public
+   */
+  multiRegionRtoRpo?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service created event.</p>
+ * @public
+ */
+export interface ServiceCreatedMetadata {}
+
+/**
+ * <p>Metadata for a service deleted event.</p>
+ * @public
+ */
+export interface ServiceDeletedMetadata {}
+
+/**
+ * <p>Metadata for a service function created event.</p>
+ * @public
+ */
+export interface ServiceFunctionCreatedMetadata {
+  /**
+   * <p>The identifier of the created service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the created service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service function deleted event.</p>
+ * @public
+ */
+export interface ServiceFunctionDeletedMetadata {
+  /**
+   * <p>The identifier of the deleted service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the deleted service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service function resources added event.</p>
+ * @public
+ */
+export interface ServiceFunctionResourcesAddedMetadata {
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+
+  /**
+   * <p>The list of resource ARNs that were added.</p>
+   * @public
+   */
+  resourcesAdded?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a service function resources removed event.</p>
+ * @public
+ */
+export interface ServiceFunctionResourcesRemovedMetadata {
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+
+  /**
+   * <p>The list of resource ARNs that were removed.</p>
+   * @public
+   */
+  resourcesRemoved?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a service function updated event.</p>
+ * @public
+ */
+export interface ServiceFunctionUpdatedMetadata {
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+
+  /**
+   * <p>The list of resource ARNs that were added.</p>
+   * @public
+   */
+  resourcesAdded?: string[] | undefined;
+
+  /**
+   * <p>The list of resource ARNs that were removed.</p>
+   * @public
+   */
+  resourcesRemoved?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a service input sources updated event.</p>
+ * @public
+ */
+export interface ServiceInputSourcesUpdatedMetadata {}
+
+/**
+ * <p>Metadata for a service policy associated event.</p>
+ * @public
+ */
+export interface ServicePolicyAssociatedMetadata {
+  /**
+   * <p>The name of the associated policy.</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The account that owns the policy.</p>
+   * @public
+   */
+  policyOwnerAccountId?: string | undefined;
+
+  /**
+   * <p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>
+   * @public
+   */
+  policySource?: PolicyValueSource | undefined;
+}
+
+/**
+ * <p>Metadata for a service policy disassociated event.</p>
+ * @public
+ */
+export interface ServicePolicyDisassociatedMetadata {
+  /**
+   * <p>The name of the disassociated policy.</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The account that owns the policy.</p>
+   * @public
+   */
+  policyOwnerAccountId?: string | undefined;
+
+  /**
+   * <p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>
+   * @public
+   */
+  policySource?: PolicyValueSource | undefined;
+
+  /**
+   * <p>The reason the policy was disassociated from the service.</p>
+   * @public
+   */
+  reason?: PolicyDisassociationReason | undefined;
+}
+
+/**
+ * <p>Metadata for a service resources associated event.</p>
+ * @public
+ */
+export interface ServiceResourcesAssociatedMetadata {
+  /**
+   * <p>The number of resources associated.</p>
+   * @public
+   */
+  resourceCount?: number | undefined;
+
+  /**
+   * <p>The types of resources associated.</p>
+   * @public
+   */
+  resourceTypes?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a service resources disassociated event.</p>
+ * @public
+ */
+export interface ServiceResourcesDisassociatedMetadata {
+  /**
+   * <p>The number of resources disassociated.</p>
+   * @public
+   */
+  resourceCount?: number | undefined;
+
+  /**
+   * <p>The types of resources disassociated.</p>
+   * @public
+   */
+  resourceTypes?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a service system associated event.</p>
+ * @public
+ */
+export interface ServiceSystemAssociatedMetadata {
+  /**
+   * <p>The name of the associated system.</p>
+   * @public
+   */
+  systemName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service system disassociated event.</p>
+ * @public
+ */
+export interface ServiceSystemDisassociatedMetadata {
+  /**
+   * <p>The identifier of the disassociated system.</p>
+   * @public
+   */
+  systemId?: string | undefined;
+
+  /**
+   * <p>The name of the disassociated system.</p>
+   * @public
+   */
+  systemName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a service workflow updated event.</p>
+ * @public
+ */
+export interface ServiceWorkflowUpdatedMetadata {
+  /**
+   * <p>The identifier of the service function.</p>
+   * @public
+   */
+  serviceFunctionId?: string | undefined;
+
+  /**
+   * <p>The name of the service function.</p>
+   * @public
+   */
+  serviceFunctionName?: string | undefined;
+}
+
+/**
+ * <p>Type-specific metadata for each service event type.</p>
+ * @public
+ */
+export type ServiceEventMetadata =
+  | ServiceEventMetadata.AssertionCreatedMember
+  | ServiceEventMetadata.AssertionDeletedMember
+  | ServiceEventMetadata.AssertionUpdatedMember
+  | ServiceEventMetadata.ServiceAchievabilityUpdatedMember
+  | ServiceEventMetadata.ServiceCreatedMember
+  | ServiceEventMetadata.ServiceDeletedMember
+  | ServiceEventMetadata.ServiceFunctionCreatedMember
+  | ServiceEventMetadata.ServiceFunctionDeletedMember
+  | ServiceEventMetadata.ServiceFunctionResourcesAddedMember
+  | ServiceEventMetadata.ServiceFunctionResourcesRemovedMember
+  | ServiceEventMetadata.ServiceFunctionUpdatedMember
+  | ServiceEventMetadata.ServiceInputSourcesUpdatedMember
+  | ServiceEventMetadata.ServicePolicyAssociatedMember
+  | ServiceEventMetadata.ServicePolicyDisassociatedMember
+  | ServiceEventMetadata.ServiceResourcesAssociatedMember
+  | ServiceEventMetadata.ServiceResourcesDisassociatedMember
+  | ServiceEventMetadata.ServiceSystemAssociatedMember
+  | ServiceEventMetadata.ServiceSystemDisassociatedMember
+  | ServiceEventMetadata.ServiceWorkflowUpdatedMember
+  | ServiceEventMetadata.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ServiceEventMetadata {
+  /**
+   * <p>Metadata for a service created event.</p>
+   * @public
+   */
+  export interface ServiceCreatedMember {
+    serviceCreated: ServiceCreatedMetadata;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service deleted event.</p>
+   * @public
+   */
+  export interface ServiceDeletedMember {
+    serviceCreated?: never;
+    serviceDeleted: ServiceDeletedMetadata;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service system associated event.</p>
+   * @public
+   */
+  export interface ServiceSystemAssociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated: ServiceSystemAssociatedMetadata;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service system disassociated event.</p>
+   * @public
+   */
+  export interface ServiceSystemDisassociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated: ServiceSystemDisassociatedMetadata;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service resources associated event.</p>
+   * @public
+   */
+  export interface ServiceResourcesAssociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated: ServiceResourcesAssociatedMetadata;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service resources disassociated event.</p>
+   * @public
+   */
+  export interface ServiceResourcesDisassociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated: ServiceResourcesDisassociatedMetadata;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service workflow updated event.</p>
+   * @public
+   */
+  export interface ServiceWorkflowUpdatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated: ServiceWorkflowUpdatedMetadata;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service input sources updated event.</p>
+   * @public
+   */
+  export interface ServiceInputSourcesUpdatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated: ServiceInputSourcesUpdatedMetadata;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service policy associated event.</p>
+   * @public
+   */
+  export interface ServicePolicyAssociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated: ServicePolicyAssociatedMetadata;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service policy disassociated event.</p>
+   * @public
+   */
+  export interface ServicePolicyDisassociatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated: ServicePolicyDisassociatedMetadata;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service function created event.</p>
+   * @public
+   */
+  export interface ServiceFunctionCreatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated: ServiceFunctionCreatedMetadata;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service function updated event.</p>
+   * @public
+   */
+  export interface ServiceFunctionUpdatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated: ServiceFunctionUpdatedMetadata;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service function deleted event.</p>
+   * @public
+   */
+  export interface ServiceFunctionDeletedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted: ServiceFunctionDeletedMetadata;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service function resources added event.</p>
+   * @public
+   */
+  export interface ServiceFunctionResourcesAddedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded: ServiceFunctionResourcesAddedMetadata;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service function resources removed event.</p>
+   * @public
+   */
+  export interface ServiceFunctionResourcesRemovedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved: ServiceFunctionResourcesRemovedMetadata;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a service achievability updated event.</p>
+   * @public
+   */
+  export interface ServiceAchievabilityUpdatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated: ServiceAchievabilityUpdatedMetadata;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for an assertion created event.</p>
+   * @public
+   */
+  export interface AssertionCreatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated: AssertionCreatedMetadata;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for an assertion updated event.</p>
+   * @public
+   */
+  export interface AssertionUpdatedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated: AssertionUpdatedMetadata;
+    assertionDeleted?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for an assertion deleted event.</p>
+   * @public
+   */
+  export interface AssertionDeletedMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted: AssertionDeletedMetadata;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    serviceCreated?: never;
+    serviceDeleted?: never;
+    serviceSystemAssociated?: never;
+    serviceSystemDisassociated?: never;
+    serviceResourcesAssociated?: never;
+    serviceResourcesDisassociated?: never;
+    serviceWorkflowUpdated?: never;
+    serviceInputSourcesUpdated?: never;
+    servicePolicyAssociated?: never;
+    servicePolicyDisassociated?: never;
+    serviceFunctionCreated?: never;
+    serviceFunctionUpdated?: never;
+    serviceFunctionDeleted?: never;
+    serviceFunctionResourcesAdded?: never;
+    serviceFunctionResourcesRemoved?: never;
+    serviceAchievabilityUpdated?: never;
+    assertionCreated?: never;
+    assertionUpdated?: never;
+    assertionDeleted?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    serviceCreated: (value: ServiceCreatedMetadata) => T;
+    serviceDeleted: (value: ServiceDeletedMetadata) => T;
+    serviceSystemAssociated: (value: ServiceSystemAssociatedMetadata) => T;
+    serviceSystemDisassociated: (value: ServiceSystemDisassociatedMetadata) => T;
+    serviceResourcesAssociated: (value: ServiceResourcesAssociatedMetadata) => T;
+    serviceResourcesDisassociated: (value: ServiceResourcesDisassociatedMetadata) => T;
+    serviceWorkflowUpdated: (value: ServiceWorkflowUpdatedMetadata) => T;
+    serviceInputSourcesUpdated: (value: ServiceInputSourcesUpdatedMetadata) => T;
+    servicePolicyAssociated: (value: ServicePolicyAssociatedMetadata) => T;
+    servicePolicyDisassociated: (value: ServicePolicyDisassociatedMetadata) => T;
+    serviceFunctionCreated: (value: ServiceFunctionCreatedMetadata) => T;
+    serviceFunctionUpdated: (value: ServiceFunctionUpdatedMetadata) => T;
+    serviceFunctionDeleted: (value: ServiceFunctionDeletedMetadata) => T;
+    serviceFunctionResourcesAdded: (value: ServiceFunctionResourcesAddedMetadata) => T;
+    serviceFunctionResourcesRemoved: (value: ServiceFunctionResourcesRemovedMetadata) => T;
+    serviceAchievabilityUpdated: (value: ServiceAchievabilityUpdatedMetadata) => T;
+    assertionCreated: (value: AssertionCreatedMetadata) => T;
+    assertionUpdated: (value: AssertionUpdatedMetadata) => T;
+    assertionDeleted: (value: AssertionDeletedMetadata) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Contains the details of a service event.</p>
+ * @public
+ */
+export interface ServiceEventDetails {
+  /**
+   * <p>The title of the event.</p>
+   * @public
+   */
+  title: string | undefined;
+
+  /**
+   * <p>The description of the event.</p>
+   * @public
+   */
+  description: string | undefined;
+
+  /**
+   * <p>Type-specific metadata for each service event type.</p>
+   * @public
+   */
+  eventMetadata?: ServiceEventMetadata | undefined;
+}
+
+/**
+ * <p>Represents an event in the service event log.</p>
+ * @public
+ */
+export interface ServiceEvent {
+  /**
+   * <p>The unique identifier of the event.</p>
+   * @public
+   */
+  eventId: string | undefined;
+
+  /**
+   * <p>The timestamp of the event.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>The type of the event.</p>
+   * @public
+   */
+  eventType: ServiceEventType | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The actor that triggered the event.</p>
+   * @public
+   */
+  actor: EventActor | undefined;
+
+  /**
+   * <p>The details of the event.</p>
+   * @public
+   */
+  eventDetails: ServiceEventDetails | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceEventsResponse {
+  /**
+   * <p>The list of service events.</p>
+   * @public
+   */
+  events: ServiceEvent[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceFunctionsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceFunctionsResponse {
+  /**
+   * <p>The list of service functions.</p>
+   * @public
+   */
+  serviceFunctions: ServiceFunction[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServicesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn?: string | undefined;
+
+  /**
+   * <p>Filter services by user journey identifier.</p>
+   * @public
+   */
+  userJourneyId?: string | undefined;
+
+  /**
+   * <p>Filter services by organizational unit (OU) identifier.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>Filter services by AWS account ID.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+
+  /**
+   * <p>Filter services by assessment status.</p>
+   * @public
+   */
+  assessmentStatus?: AssessmentStatus | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a service.</p>
+ * @public
+ */
+export interface ServiceSummary {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The systems associated with the service.</p>
+   * @public
+   */
+  associatedSystems?: AssociatedSystem[] | undefined;
+
+  /**
+   * <p>The Regions where the service operates.</p>
+   * @public
+   */
+  regions?: string[] | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The current assessment status of the service.</p>
+   * @public
+   */
+  assessmentStatus?: AssessmentStatus | undefined;
+
+  /**
+   * <p>The DevOps Agent connection status for the service. Valid values:</p> <ul> <li> <p>CONNECTING - The service is being connected to the Agent Space.</p> </li> <li> <p>CONNECTED - The service is connected to the Agent Space.</p> </li> <li> <p>DISCONNECTED - The service is not connected to an Agent Space.</p> </li> <li> <p>FAILED - The connection attempt failed.</p> </li> </ul>
+   * @public
+   */
+  devOpsAgentStatus?: DevOpsAgentConnectionStatus | undefined;
+
+  /**
+   * <p>The ARN of the DevOps Agent Agent Space linked to the service, when the service is linked to one.</p>
+   * @public
+   */
+  devOpsAgentSpaceArn?: string | undefined;
+
+  /**
+   * <p>The number of open findings.</p>
+   * @public
+   */
+  openFindingsCount?: number | undefined;
+
+  /**
+   * <p>The number of resolved findings.</p>
+   * @public
+   */
+  resolvedFindingsCount?: number | undefined;
+
+  /**
+   * <p>The dependency discovery configuration.</p>
+   * @public
+   */
+  dependencyDiscovery?: DependencyDiscoveryConfig | undefined;
+
+  /**
+   * <p>The achievability status of the service's resilience targets.</p>
+   * @public
+   */
+  achievability?: Achievability | undefined;
+
+  /**
+   * <p>Displayed only if caller has access.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>Displayed only if caller has access.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>Displayed only if caller has access.</p>
+   * @public
+   */
+  accountId?: string | undefined;
+
+  /**
+   * <p>The timestamp when the service was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the service was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServicesResponse {
+  /**
+   * <p>The list of service summaries.</p>
+   * @public
+   */
+  serviceSummaries: ServiceSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceTopologyEdgesRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a service topology edge.</p>
+ * @public
+ */
+export interface ServiceTopologyEdgeSummary {
+  /**
+   * <p>The identifier of the source resource.</p>
+   * @public
+   */
+  sourceResourceIdentifier: string | undefined;
+
+  /**
+   * <p>The identifier of the destination resource.</p>
+   * @public
+   */
+  destinationResourceIdentifier: string | undefined;
+
+  /**
+   * <p>The AWS Region of the source resource.</p>
+   * @public
+   */
+  sourceRegion?: string | undefined;
+
+  /**
+   * <p>The AWS Region of the destination resource.</p>
+   * @public
+   */
+  destinationRegion?: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the source resource.</p>
+   * @public
+   */
+  sourceAccount?: string | undefined;
+
+  /**
+   * <p>The AWS account ID of the destination resource.</p>
+   * @public
+   */
+  destinationAccount?: string | undefined;
+
+  /**
+   * <p>The properties of the topology edge.</p>
+   * @public
+   */
+  properties?: EdgePropertySummary[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServiceTopologyEdgesResponse {
+  /**
+   * <p>The list of service topology edge summaries.</p>
+   * @public
+   */
+  serviceTopologyEdgeSummaries?: ServiceTopologyEdgeSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListSystemEventsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>The type of events to include in the results.</p>
+   * @public
+   */
+  eventTypes?: SystemEventType[] | undefined;
+
+  /**
+   * <p>The start time for filtering events.</p>
+   * @public
+   */
+  startTime?: Date | undefined;
+
+  /**
+   * <p>The end time for filtering events.</p>
+   * @public
+   */
+  endTime?: Date | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a system created event.</p>
+ * @public
+ */
+export interface SystemCreatedMetadata {}
+
+/**
+ * <p>Metadata for a system deleted event.</p>
+ * @public
+ */
+export interface SystemDeletedMetadata {}
+
+/**
+ * <p>Metadata for a system policy associated event.</p>
+ * @public
+ */
+export interface SystemPolicyAssociatedMetadata {
+  /**
+   * <p>The name of the associated policy.</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a system policy disassociated event.</p>
+ * @public
+ */
+export interface SystemPolicyDisassociatedMetadata {
+  /**
+   * <p>The name of the disassociated policy.</p>
+   * @public
+   */
+  policyName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a system service associated event.</p>
+ * @public
+ */
+export interface SystemServiceAssociatedMetadata {
+  /**
+   * <p>The name of the associated service.</p>
+   * @public
+   */
+  serviceName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The user journeys linking the service to the system.</p>
+   * @public
+   */
+  userJourneys?: string[] | undefined;
+}
+
+/**
+ * <p>Metadata for a system service disassociated event.</p>
+ * @public
+ */
+export interface SystemServiceDisassociatedMetadata {
+  /**
+   * <p>The name of the disassociated service.</p>
+   * @public
+   */
+  serviceName?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The user journeys affected by the disassociation.</p>
+   * @public
+   */
+  userJourneysAffected?: string[] | undefined;
+
+  /**
+   * <p>A comment about the disassociation.</p>
+   * @public
+   */
+  comment?: string | undefined;
+}
+
+/**
+ * <p>A reference to a service by ID and name.</p>
+ * @public
+ */
+export interface ServiceReference {
+  /**
+   * <p>The identifier of the referenced service.</p>
+   * @public
+   */
+  serviceId?: string | undefined;
+
+  /**
+   * <p>The name of the referenced service.</p>
+   * @public
+   */
+  serviceName?: string | undefined;
+}
+
+/**
+ * <p>Metadata for a system user journey created event.</p>
+ * @public
+ */
+export interface SystemUserJourneyCreatedMetadata {
+  /**
+   * <p>The name of the created user journey.</p>
+   * @public
+   */
+  userJourneyName?: string | undefined;
+
+  /**
+   * <p>The services associated with the created user journey.</p>
+   * @public
+   */
+  associatedServices?: ServiceReference[] | undefined;
+}
+
+/**
+ * <p>Metadata for a system user journey deleted event.</p>
+ * @public
+ */
+export interface SystemUserJourneyDeletedMetadata {
+  /**
+   * <p>The name of the deleted user journey.</p>
+   * @public
+   */
+  userJourneyName?: string | undefined;
+
+  /**
+   * <p>The services that were associated at the time of deletion.</p>
+   * @public
+   */
+  associatedServicesAtDeletion?: ServiceReference[] | undefined;
+}
+
+/**
+ * <p>Describes changes to service references.</p>
+ * @public
+ */
+export interface ServiceReferenceChanges {
+  /**
+   * <p>The list of service references that were added.</p>
+   * @public
+   */
+  added?: ServiceReference[] | undefined;
+
+  /**
+   * <p>The list of service references that were removed.</p>
+   * @public
+   */
+  removed?: ServiceReference[] | undefined;
+}
+
+/**
+ * <p>Describes a change from one string value to another.</p>
+ * @public
+ */
+export interface StringChange {
+  /**
+   * <p>The old value.</p>
+   * @public
+   */
+  oldValue?: string | undefined;
+
+  /**
+   * <p>The new value.</p>
+   * @public
+   */
+  newValue?: string | undefined;
+}
+
+/**
+ * <p>Describes changes made to a user journey.</p>
+ * @public
+ */
+export interface UserJourneyChanges {
+  /**
+   * <p>Changes to the user journey description.</p>
+   * @public
+   */
+  journeyDescription?: StringChange | undefined;
+
+  /**
+   * <p>Changes to the services associated with the user journey.</p>
+   * @public
+   */
+  associatedServices?: ServiceReferenceChanges | undefined;
+}
+
+/**
+ * <p>Metadata for a system user journey updated event.</p>
+ * @public
+ */
+export interface SystemUserJourneyUpdatedMetadata {
+  /**
+   * <p>The name of the updated user journey.</p>
+   * @public
+   */
+  userJourneyName?: string | undefined;
+
+  /**
+   * <p>The changes made to the user journey.</p>
+   * @public
+   */
+  changes?: UserJourneyChanges | undefined;
+}
+
+/**
+ * <p>Type-specific metadata for each system event type.</p>
+ * @public
+ */
+export type SystemEventMetadata =
+  | SystemEventMetadata.SystemCreatedMember
+  | SystemEventMetadata.SystemDeletedMember
+  | SystemEventMetadata.SystemPolicyAssociatedMember
+  | SystemEventMetadata.SystemPolicyDisassociatedMember
+  | SystemEventMetadata.SystemServiceAssociatedMember
+  | SystemEventMetadata.SystemServiceDisassociatedMember
+  | SystemEventMetadata.SystemUserJourneyCreatedMember
+  | SystemEventMetadata.SystemUserJourneyDeletedMember
+  | SystemEventMetadata.SystemUserJourneyUpdatedMember
+  | SystemEventMetadata.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace SystemEventMetadata {
+  /**
+   * <p>Metadata for a system created event.</p>
+   * @public
+   */
+  export interface SystemCreatedMember {
+    systemCreated: SystemCreatedMetadata;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system deleted event.</p>
+   * @public
+   */
+  export interface SystemDeletedMember {
+    systemCreated?: never;
+    systemDeleted: SystemDeletedMetadata;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system user journey created event.</p>
+   * @public
+   */
+  export interface SystemUserJourneyCreatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated: SystemUserJourneyCreatedMetadata;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system user journey updated event.</p>
+   * @public
+   */
+  export interface SystemUserJourneyUpdatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated: SystemUserJourneyUpdatedMetadata;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system user journey deleted event.</p>
+   * @public
+   */
+  export interface SystemUserJourneyDeletedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted: SystemUserJourneyDeletedMetadata;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system service associated event.</p>
+   * @public
+   */
+  export interface SystemServiceAssociatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated: SystemServiceAssociatedMetadata;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system service disassociated event.</p>
+   * @public
+   */
+  export interface SystemServiceDisassociatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated: SystemServiceDisassociatedMetadata;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system policy associated event.</p>
+   * @public
+   */
+  export interface SystemPolicyAssociatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated: SystemPolicyAssociatedMetadata;
+    systemPolicyDisassociated?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Metadata for a system policy disassociated event.</p>
+   * @public
+   */
+  export interface SystemPolicyDisassociatedMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated: SystemPolicyDisassociatedMetadata;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    systemCreated?: never;
+    systemDeleted?: never;
+    systemUserJourneyCreated?: never;
+    systemUserJourneyUpdated?: never;
+    systemUserJourneyDeleted?: never;
+    systemServiceAssociated?: never;
+    systemServiceDisassociated?: never;
+    systemPolicyAssociated?: never;
+    systemPolicyDisassociated?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    systemCreated: (value: SystemCreatedMetadata) => T;
+    systemDeleted: (value: SystemDeletedMetadata) => T;
+    systemUserJourneyCreated: (value: SystemUserJourneyCreatedMetadata) => T;
+    systemUserJourneyUpdated: (value: SystemUserJourneyUpdatedMetadata) => T;
+    systemUserJourneyDeleted: (value: SystemUserJourneyDeletedMetadata) => T;
+    systemServiceAssociated: (value: SystemServiceAssociatedMetadata) => T;
+    systemServiceDisassociated: (value: SystemServiceDisassociatedMetadata) => T;
+    systemPolicyAssociated: (value: SystemPolicyAssociatedMetadata) => T;
+    systemPolicyDisassociated: (value: SystemPolicyDisassociatedMetadata) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Contains the details of a system event.</p>
+ * @public
+ */
+export interface SystemEventDetails {
+  /**
+   * <p>The title of the event.</p>
+   * @public
+   */
+  title: string | undefined;
+
+  /**
+   * <p>The description of the event.</p>
+   * @public
+   */
+  description: string | undefined;
+
+  /**
+   * <p>Type-specific metadata for each system event type.</p>
+   * @public
+   */
+  eventMetadata?: SystemEventMetadata | undefined;
+}
+
+/**
+ * <p>Represents an event in the system event log.</p>
+ * @public
+ */
+export interface SystemEvent {
+  /**
+   * <p>The unique identifier of the event.</p>
+   * @public
+   */
+  eventId: string | undefined;
+
+  /**
+   * <p>The timestamp of the event.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>The type of the event.</p>
+   * @public
+   */
+  eventType: SystemEventType | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>The actor that triggered the event.</p>
+   * @public
+   */
+  actor: EventActor | undefined;
+
+  /**
+   * <p>The details of the event.</p>
+   * @public
+   */
+  eventDetails: SystemEventDetails | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListSystemEventsResponse {
+  /**
+   * <p>The list of system events.</p>
+   * @public
+   */
+  events: SystemEvent[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListSystemsRequest {
+  /**
+   * <p>Filter systems by organizational unit (OU) identifier.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a system.</p>
+ * @public
+ */
+export interface SystemSummary {
+  /**
+   * <p>System ID for cross-account use without exposing account structure.</p>
+   * @public
+   */
+  systemId: string | undefined;
+
+  /**
+   * <p>Resource name (used in ARN — no spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn?: string | undefined;
+
+  /**
+   * <p>The number of user journeys in the system.</p>
+   * @public
+   */
+  userJourneysCount?: number | undefined;
+
+  /**
+   * <p>The number of services in the system.</p>
+   * @public
+   */
+  servicesCount?: number | undefined;
+
+  /**
+   * <p>Displayed only if caller has access.</p>
+   * @public
+   */
+  organizationId?: string | undefined;
+
+  /**
+   * <p>Displayed only if caller has access.</p>
+   * @public
+   */
+  ouId?: string | undefined;
+
+  /**
+   * <p>The timestamp when the system was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the system was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListSystemsResponse {
+  /**
+   * <p>The list of system summaries.</p>
+   * @public
+   */
+  systemSummaries: SystemSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTagsForResourceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTagsForResourceResponse {
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunDependenciesRequest {
+  /**
+   * <p>The identifier of the test run to list dependencies for.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a dependency that a test run blocked, as captured when the run started.</p>
+ * @public
+ */
+export interface TestRunDependencySummary {
+  /**
+   * <p>The unique identifier of the dependency. Absent when the dependency was entered manually and was not part of dependency discovery.</p>
+   * @public
+   */
+  dependencyId?: string | undefined;
+
+  /**
+   * <p>The name of the dependency.</p>
+   * @public
+   */
+  dependencyName: string | undefined;
+
+  /**
+   * <p>The DNS name of the dependency that the test run blocked.</p>
+   * @public
+   */
+  dnsName: string | undefined;
+
+  /**
+   * <p>The criticality classification of the dependency when the run started. A dependency that was not discovered has the UNKNOWN criticality.</p>
+   * @public
+   */
+  criticality: DependencyCriticality | undefined;
+
+  /**
+   * <p>The origin of the dependency. A discovered dependency was found by dependency discovery; a manual dependency was entered when the run started.</p>
+   * @public
+   */
+  source: TestRunDependencySource | undefined;
+
+  /**
+   * <p>The location of the dependency.</p>
+   * @public
+   */
+  location?: string | undefined;
+
+  /**
+   * <p>The source Regions from which the dependency was detected.</p>
+   * @public
+   */
+  sourceRegions?: string[] | undefined;
+
+  /**
+   * <p>The provider of the dependency.</p>
+   * @public
+   */
+  provider?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunDependenciesResponse {
+  /**
+   * <p>The list of dependencies the test run blocked.</p>
+   * @public
+   */
+  dependencies: TestRunDependencySummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunEventsRequest {
+  /**
+   * <p>The identifier of the test run to list events for.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Return events at or after this timestamp.</p>
+   * @public
+   */
+  startedAt?: Date | undefined;
+
+  /**
+   * <p>Return events at or before this timestamp.</p>
+   * @public
+   */
+  endedAt?: Date | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>A single event in a test run's timeline.</p>
+ * @public
+ */
+export interface TestRunEvent {
+  /**
+   * <p>The unique identifier of the event.</p>
+   * @public
+   */
+  eventId: string | undefined;
+
+  /**
+   * <p>The type of the event, such as action_started, action_completed, or rto_recovery_detected.</p>
+   * @public
+   */
+  eventType: string | undefined;
+
+  /**
+   * <p>A human-readable description of what happened.</p>
+   * @public
+   */
+  message: string | undefined;
+
+  /**
+   * <p>The timestamp when the event occurred.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>Machine-parseable key-value attributes for the event.</p>
+   * @public
+   */
+  attributes?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunEventsResponse {
+  /**
+   * <p>The list of test run events.</p>
+   * @public
+   */
+  events: TestRunEvent[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunsRequest {
+  /**
+   * <p>The ARN of the service to list test runs for.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter test runs by test identifier.</p>
+   * @public
+   */
+  testId?: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a test run.</p>
+ * @public
+ */
+export interface TestRunSummary {
+  /**
+   * <p>The unique identifier of the test run.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The current status of the test run.</p>
+   * @public
+   */
+  status: TestRunStatus | undefined;
+
+  /**
+   * <p>The timestamp when the test run started.</p>
+   * @public
+   */
+  startedAt: Date | undefined;
+
+  /**
+   * <p>The timestamp when the test run ended.</p>
+   * @public
+   */
+  endedAt?: Date | undefined;
+
+  /**
+   * <p>The ARN of the test template the test run was based on.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>A human-readable reason for test run failure. Only present when the status is FAILED or ERROR.</p>
+   * @public
+   */
+  errorMessage?: string | undefined;
+
+  /**
+   * <p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>
+   * @public
+   */
+  accountTargeting?: AccountTargeting | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunsResponse {
+  /**
+   * <p>The list of test run summaries.</p>
+   * @public
+   */
+  testRuns: TestRunSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunSourceEventsRequest {
+  /**
+   * <p>The identifier of the test run to list source events for.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The ARN of the monitoring source to list events for, such as the ARN of a CloudWatch alarm. If the source was not monitored during the test run, the response is an empty list.</p>
+   * @public
+   */
+  sourceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Describes an error that prevented event collection from a test run monitoring source.</p>
+ * @public
+ */
+export interface TestRunSourceEventError {
+  /**
+   * <p>The error code.</p>
+   * @public
+   */
+  errorCode: TestRunSourceEventErrorCode | undefined;
+
+  /**
+   * <p>A human-readable description of the error.</p>
+   * @public
+   */
+  errorMessage: string | undefined;
+}
+
+/**
+ * <p>The payload of a test run source event. Exactly one member is set.</p>
+ * @public
+ */
+export type TestRunSourceEventDetail =
+  | TestRunSourceEventDetail.AlarmStateChangeMember
+  | TestRunSourceEventDetail.ErrorMember
+  | TestRunSourceEventDetail.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TestRunSourceEventDetail {
+  /**
+   * <p>A CloudWatch alarm state change.</p>
+   * @public
+   */
+  export interface AlarmStateChangeMember {
+    alarmStateChange: AlarmStateChangeDetail;
+    error?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An error that prevented event collection from the source.</p>
+   * @public
+   */
+  export interface ErrorMember {
+    alarmStateChange?: never;
+    error: TestRunSourceEventError;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    alarmStateChange?: never;
+    error?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    alarmStateChange: (value: AlarmStateChangeDetail) => T;
+    error: (value: TestRunSourceEventError) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>A state-change event observed for a test run monitoring source.</p>
+ * @public
+ */
+export interface TestRunSourceEvent {
+  /**
+   * <p>The timestamp when the event occurred.</p>
+   * @public
+   */
+  timestamp: Date | undefined;
+
+  /**
+   * <p>The ARN of the monitoring source the event belongs to.</p>
+   * @public
+   */
+  sourceArn: string | undefined;
+
+  /**
+   * <p>The type of the event. ALARM indicates an event from a CloudWatch alarm source; the detail member carries either the alarm state change or a collection error.</p>
+   * @public
+   */
+  eventType: TestRunSourceEventType | undefined;
+
+  /**
+   * <p>The event payload.</p>
+   * @public
+   */
+  detail: TestRunSourceEventDetail | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunSourceEventsResponse {
+  /**
+   * <p>The list of source events, in chronological order.</p>
+   * @public
+   */
+  testRunSourceEvents: TestRunSourceEvent[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunSourcesRequest {
+  /**
+   * <p>The identifier of the test run to list sources for.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter sources by type.</p>
+   * @public
+   */
+  type?: TestRunSourceType | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Summary information about an observability alarm snapshot captured for a test run.</p>
+ * @public
+ */
+export interface TestRunObservabilityAlarmSummary {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+
+  /**
+   * <p>The name of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmName: string | undefined;
+
+  /**
+   * <p>The Region of the CloudWatch alarm.</p>
+   * @public
+   */
+  region: string | undefined;
+
+  /**
+   * <p>The account ID that owns the CloudWatch alarm.</p>
+   * @public
+   */
+  accountId: string | undefined;
+}
+
+/**
+ * <p>Summary information about a success criteria alarm snapshot captured for a test run.</p>
+ * @public
+ */
+export interface TestRunSuccessCriteriaAlarmSummary {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+
+  /**
+   * <p>The name of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmName: string | undefined;
+
+  /**
+   * <p>The Region of the CloudWatch alarm.</p>
+   * @public
+   */
+  region: string | undefined;
+
+  /**
+   * <p>The account ID that owns the CloudWatch alarm.</p>
+   * @public
+   */
+  accountId: string | undefined;
+
+  /**
+   * <p>The evaluation outcome of the source. Absent while the source has not yet been evaluated; set to the terminal outcome afterwards.</p>
+   * @public
+   */
+  outcome?: TestSourceOutcome | undefined;
+
+  /**
+   * <p>A human-readable reason for the outcome.</p>
+   * @public
+   */
+  outcomeReason?: string | undefined;
+}
+
+/**
+ * <p>A monitoring-source snapshot captured for a test run. Exactly one member is set.</p>
+ * @public
+ */
+export type TestRunSourceSummary =
+  | TestRunSourceSummary.ObservabilityAlarmMember
+  | TestRunSourceSummary.SuccessCriteriaAlarmMember
+  | TestRunSourceSummary.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TestRunSourceSummary {
+  /**
+   * <p>A success criteria alarm snapshot captured for the test run.</p>
+   * @public
+   */
+  export interface SuccessCriteriaAlarmMember {
+    successCriteriaAlarm: TestRunSuccessCriteriaAlarmSummary;
+    observabilityAlarm?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An observability alarm snapshot captured for the test run.</p>
+   * @public
+   */
+  export interface ObservabilityAlarmMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm: TestRunObservabilityAlarmSummary;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    successCriteriaAlarm: (value: TestRunSuccessCriteriaAlarmSummary) => T;
+    observabilityAlarm: (value: TestRunObservabilityAlarmSummary) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface ListTestRunSourcesResponse {
+  /**
+   * <p>The list of monitoring source snapshots.</p>
+   * @public
+   */
+  testRunSources: TestRunSourceSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestsRequest {
+  /**
+   * <p>The ARN of the service to list tests for.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a test.</p>
+ * @public
+ */
+export interface TestSummary {
+  /**
+   * <p>The unique identifier of the test.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the test template the test was created from.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The total number of runs of the test.</p>
+   * @public
+   */
+  totalTestRuns: number | undefined;
+
+  /**
+   * <p>The number of successful runs of the test.</p>
+   * @public
+   */
+  successfulTestRuns: number | undefined;
+
+  /**
+   * <p>The timestamp when the test was created.</p>
+   * @public
+   */
+  creationTime: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestsResponse {
+  /**
+   * <p>The list of test summaries.</p>
+   * @public
+   */
+  tests: TestSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestSourcesRequest {
+  /**
+   * <p>The identifier of the test to list sources for.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Filter sources by type.</p>
+   * @public
+   */
+  type?: TestSourceType | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Summary information about a configured observability alarm.</p>
+ * @public
+ */
+export interface ObservabilityAlarmSummary {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+
+  /**
+   * <p>The name of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmName: string | undefined;
+
+  /**
+   * <p>The Region of the CloudWatch alarm.</p>
+   * @public
+   */
+  region: string | undefined;
+
+  /**
+   * <p>The account ID that owns the CloudWatch alarm.</p>
+   * @public
+   */
+  accountId: string | undefined;
+
+  /**
+   * <p>The timestamp when the source was configured.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+}
+
+/**
+ * <p>Summary information about a configured success criteria alarm.</p>
+ * @public
+ */
+export interface SuccessCriteriaAlarmSummary {
+  /**
+   * <p>The ARN of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmArn: string | undefined;
+
+  /**
+   * <p>The name of the CloudWatch alarm.</p>
+   * @public
+   */
+  alarmName: string | undefined;
+
+  /**
+   * <p>The Region of the CloudWatch alarm.</p>
+   * @public
+   */
+  region: string | undefined;
+
+  /**
+   * <p>The account ID that owns the CloudWatch alarm.</p>
+   * @public
+   */
+  accountId: string | undefined;
+
+  /**
+   * <p>The timestamp when the source was configured.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+}
+
+/**
+ * <p>A configured monitoring source returned by ListTestSources. Exactly one member is set.</p>
+ * @public
+ */
+export type TestSourceSummary =
+  | TestSourceSummary.ObservabilityAlarmMember
+  | TestSourceSummary.SuccessCriteriaAlarmMember
+  | TestSourceSummary.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace TestSourceSummary {
+  /**
+   * <p>A configured success criteria alarm.</p>
+   * @public
+   */
+  export interface SuccessCriteriaAlarmMember {
+    successCriteriaAlarm: SuccessCriteriaAlarmSummary;
+    observabilityAlarm?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>A configured observability alarm.</p>
+   * @public
+   */
+  export interface ObservabilityAlarmMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm: ObservabilityAlarmSummary;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    successCriteriaAlarm?: never;
+    observabilityAlarm?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    successCriteriaAlarm: (value: SuccessCriteriaAlarmSummary) => T;
+    observabilityAlarm: (value: ObservabilityAlarmSummary) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface ListTestSourcesResponse {
+  /**
+   * <p>The list of configured monitoring sources.</p>
+   * @public
+   */
+  testSources: TestSourceSummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestTemplatesRequest {}
+
+/**
+ * <p>Contains summary information about a test template.</p>
+ * @public
+ */
+export interface TestTemplateSummary {
+  /**
+   * <p>The ARN of the test template.</p>
+   * @public
+   */
+  testTemplateArn: string | undefined;
+
+  /**
+   * <p>The name of the test template.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>A description of the test template.</p>
+   * @public
+   */
+  description: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListTestTemplatesResponse {
+  /**
+   * <p>The list of test template summaries.</p>
+   * @public
+   */
+  testTemplates: TestTemplateSummary[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListUserJourneysRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>Pagination page size.</p>
+   * @public
+   */
+  maxResults?: number | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p>Contains summary information about a user journey.</p>
+ * @public
+ */
+export interface UserJourneySummary {
+  /**
+   * <p>The unique identifier of the user journey.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The timestamp when the user journey was created.</p>
+   * @public
+   */
+  createdAt?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the user journey was last updated.</p>
+   * @public
+   */
+  updatedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListUserJourneysResponse {
+  /**
+   * <p>The list of user journey summaries.</p>
+   * @public
+   */
+  userJourneySummaries: UserJourneySummary[] | undefined;
+
+  /**
+   * <p>Pagination token.</p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutTestSourcesRequest {
+  /**
+   * <p>The identifier of the test to add sources to.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The monitoring sources to add or update.</p>
+   * @public
+   */
+  testSources: TestSourceInput[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutTestSourcesResponse {}
+
+/**
+ * @public
+ */
+export interface StartDependencyInsightsRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartDependencyInsightsResponse {
+  /**
+   * <p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. Call GetDependencyInsights for the error code and message.</p> </li> </ul>
+   * @public
+   */
+  status: DependencyInsightsStatus | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartFailureModeAssessmentRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Idempotency token.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartFailureModeAssessmentResponse {
+  /**
+   * <p>The unique identifier of the started assessment.</p>
+   * @public
+   */
+  assessmentId?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn?: string | undefined;
+
+  /**
+   * <p>The status of the started assessment.</p>
+   * @public
+   */
+  assessmentStatus?: AssessmentStatus | undefined;
+
+  /**
+   * <p>The timestamp when the assessment started.</p>
+   * @public
+   */
+  startedAt?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartTestRunRequest {
+  /**
+   * <p>The identifier of the test to run.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StartTestRunResponse {
+  /**
+   * <p>The identifier of the started test run.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The status of the started test run.</p>
+   * @public
+   */
+  status: TestRunStatus | undefined;
+
+  /**
+   * <p>The ARNs of the AWS Fault Injection Service (AWS FIS) experiments started for the run.</p>
+   * @public
+   */
+  experimentArns: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StopTestRunRequest {
+  /**
+   * <p>The identifier of the test run to stop.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test run belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StopTestRunResponse {
+  /**
+   * <p>The identifier of the stopped test run.</p>
+   * @public
+   */
+  testRunId: string | undefined;
+
+  /**
+   * <p>The status of the test run.</p>
+   * @public
+   */
+  status: TestRunStatus | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>Resource tags.</p>
+   * @public
+   */
+  tags: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface UntagResourceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  resourceArn: string | undefined;
+
+  /**
+   * <p>The tag keys to remove from the resource.</p>
+   * @public
+   */
+  tagKeys: string[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UntagResourceResponse {}
+
+/**
+ * @public
+ */
+export interface UpdateAssertionRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the assertion to update.</p>
+   * @public
+   */
+  assertionId: string | undefined;
+
+  /**
+   * <p>The updated text content of the assertion.</p>
+   * @public
+   */
+  text?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateAssertionResponse {
+  /**
+   * <p>The updated assertion.</p>
+   * @public
+   */
+  assertion: Assertion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDependencyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the dependency to update.</p>
+   * @public
+   */
+  dependencyId: string | undefined;
+
+  /**
+   * <p>The updated criticality level of the dependency.</p>
+   * @public
+   */
+  criticality?: DependencyCriticality | undefined;
+
+  /**
+   * <p>A comment about the dependency.</p>
+   * @public
+   */
+  comment?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDependencyResponse {
+  /**
+   * <p>The identifier of the updated dependency.</p>
+   * @public
+   */
+  dependencyId: string | undefined;
+
+  /**
+   * <p>The name of the updated dependency.</p>
+   * @public
+   */
+  dependencyName: string | undefined;
+
+  /**
+   * <p>The location of the dependency.</p>
+   * @public
+   */
+  location: string | undefined;
+
+  /**
+   * <p>The criticality level of the dependency.</p>
+   * @public
+   */
+  criticality: DependencyCriticality | undefined;
+
+  /**
+   * <p>The comment about the dependency.</p>
+   * @public
+   */
+  comment?: string | undefined;
+
+  /**
+   * <p>The provider of the dependency.</p>
+   * @public
+   */
+  provider?: string | undefined;
+
+  /**
+   * <p>The timestamp when the dependency was updated.</p>
+   * @public
+   */
+  updatedAt: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateFailureModeFindingRequest {
+  /**
+   * <p>The identifier of the finding to update.</p>
+   * @public
+   */
+  findingId: string | undefined;
+
+  /**
+   * <p>The new status for the finding.</p>
+   * @public
+   */
+  status: FindingStatus | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>A comment about the finding update.</p>
+   * @public
+   */
+  comment?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateFailureModeFindingResponse {
+  /**
+   * <p>The updated finding.</p>
+   * @public
+   */
+  finding?: Finding | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdatePolicyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The updated availability SLO for the policy.</p>
+   * @public
+   */
+  availabilitySlo?: AvailabilitySlo | undefined;
+
+  /**
+   * <p>The updated multi-AZ disaster recovery targets for the policy.</p>
+   * @public
+   */
+  multiAz?: MultiAzTargets | undefined;
+
+  /**
+   * <p>The updated multi-Region disaster recovery targets for the policy.</p>
+   * @public
+   */
+  multiRegion?: MultiRegionTargets | undefined;
+
+  /**
+   * <p>The updated data recovery targets for the policy.</p>
+   * @public
+   */
+  dataRecovery?: DataRecoveryTargets | undefined;
+
+  /**
+   * <p>Specifies whether cross-account sharing is enabled for the policy. Disabling sharing stops member services from using the policy.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdatePolicyResponse {
+  /**
+   * <p>The updated policy.</p>
+   * @public
+   */
+  policy: Policy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateServiceRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>Resource description for services and policies.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The updated systems to associate with the service.</p>
+   * @public
+   */
+  associatedSystems?: AssociatedSystem[] | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+
+  /**
+   * <p>The updated AWS Regions where the service operates.</p>
+   * @public
+   */
+  regions?: string[] | undefined;
+
+  /**
+   * <p>The updated permission model for the service.</p>
+   * @public
+   */
+  permissionModel?: PermissionModel | undefined;
+
+  /**
+   * <p>Caller-settable values for dependency discovery. INITIALIZING is system-managed.</p>
+   * @public
+   */
+  dependencyDiscovery?: DependencyDiscoveryInput | undefined;
+
+  /**
+   * <p>Configuration for automatic report generation on a Service.</p>
+   * @public
+   */
+  reportConfiguration?: ServiceReportConfiguration | undefined;
+
+  /**
+   * <p>The optional DevOps Agent integration configuration to set, replace, or disconnect for the service. If you omit this field, the existing DevOps Agent linkage stays unchanged.</p>
+   * @public
+   */
+  devOpsAgentConfiguration?: DevOpsAgentConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateServiceResponse {
+  /**
+   * <p>The updated service.</p>
+   * @public
+   */
+  service: Service | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateServiceFunctionRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The identifier of the service function to update.</p>
+   * @public
+   */
+  serviceFunctionId: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The updated criticality level of the service function.</p>
+   * @public
+   */
+  criticality?: ServiceFunctionCriticality | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateServiceFunctionResponse {
+  /**
+   * <p>The updated service function.</p>
+   * @public
+   */
+  serviceFunction: ServiceFunction | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateSystemRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Whether cross-account sharing is enabled for the system.</p>
+   * @public
+   */
+  sharingEnabled?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateSystemResponse {
+  /**
+   * <p>The updated system.</p>
+   * @public
+   */
+  system: System | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateTestRequest {
+  /**
+   * <p>The identifier of the test to update.</p>
+   * @public
+   */
+  testId: string | undefined;
+
+  /**
+   * <p>The ARN of the service the test belongs to.</p>
+   * @public
+   */
+  serviceArn: string | undefined;
+
+  /**
+   * <p>The updated logging configuration for the test.</p>
+   * @public
+   */
+  loggingConfiguration?: LoggingConfiguration | undefined;
+
+  /**
+   * <p>The updated stop conditions for the test.</p>
+   * @public
+   */
+  stopConditions?: StopCondition[] | undefined;
+
+  /**
+   * <p>The updated IAM execution role name.</p>
+   * @public
+   */
+  roleName?: string | undefined;
+
+  /**
+   * <p>The updated parameter values for the test.</p>
+   * @public
+   */
+  parameters?: Record<string, string[]> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateTestResponse {
+  /**
+   * <p>The updated test.</p>
+   * @public
+   */
+  test: Test | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateUserJourneyRequest {
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  systemArn: string | undefined;
+
+  /**
+   * <p>The identifier of the user journey to update.</p>
+   * @public
+   */
+  userJourneyId: string | undefined;
+
+  /**
+   * <p>Entity label (not part of ARN — spaces allowed).</p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>Resource description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>ARN identifier.</p>
+   * @public
+   */
+  policyArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateUserJourneyResponse {
+  /**
+   * <p>The updated user journey.</p>
+   * @public
+   */
+  userJourney: UserJourney | undefined;
+}

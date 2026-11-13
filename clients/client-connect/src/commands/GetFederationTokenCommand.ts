@@ -1,34 +1,37 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { GetFederationTokenRequest, GetFederationTokenResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFederationTokenCommand,
-  serializeAws_restJson1GetFederationTokenCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFederationTokenRequest, GetFederationTokenResponse } from "../models/models_2";
+import { GetFederationToken$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFederationTokenCommand}.
+ */
 export interface GetFederationTokenCommandInput extends GetFederationTokenRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFederationTokenCommand}.
+ */
 export interface GetFederationTokenCommandOutput extends GetFederationTokenResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves a token for federation.</p>
+ * <p>Supports SAML sign-in for Connect Customer. Retrieves a token for federation. The token is for the Connect Customer user which corresponds to the IAM credentials that were used to invoke this action. </p>
+ *          <p>For more information about how SAML sign-in works in Connect Customer, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html ">Configure SAML with IAM for Connect Customer
+ *     in the <i>Connect Customer Administrator Guide</i>.</a>
+ *          </p>
  *          <note>
- *             <p>This API doesn't support root users. If you try to invoke GetFederationToken with root
- *     credentials, an error message similar to the following one appears: </p>
+ *             <p>This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error
+ *     message similar to the following one appears: </p>
  *             <p>
- *                <code>Provided identity: Principal: .... User: .... cannot be used for federation with
- *      Amazon Connect</code>
+ *                <code>Provided identity: Principal: .... User: .... cannot be used for federation with Connect Customer</code>
  *             </p>
  *          </note>
  * @example
@@ -36,68 +39,76 @@ export interface GetFederationTokenCommandOutput extends GetFederationTokenRespo
  * ```javascript
  * import { ConnectClient, GetFederationTokenCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, GetFederationTokenCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // GetFederationTokenRequest
+ *   InstanceId: "STRING_VALUE", // required
+ * };
  * const command = new GetFederationTokenCommand(input);
  * const response = await client.send(command);
+ * // { // GetFederationTokenResponse
+ * //   UserId: "STRING_VALUE",
+ * //   UserArn: "STRING_VALUE",
+ * //   Credentials: { // Credentials
+ * //     AccessToken: "STRING_VALUE",
+ * //     AccessTokenExpiration: new Date("TIMESTAMP"),
+ * //     RefreshToken: "STRING_VALUE",
+ * //     RefreshTokenExpiration: new Date("TIMESTAMP"),
+ * //   },
+ * //   SignInUrl: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetFederationTokenCommandInput - {@link GetFederationTokenCommandInput}
+ * @returns {@link GetFederationTokenCommandOutput}
  * @see {@link GetFederationTokenCommandInput} for command's `input` shape.
  * @see {@link GetFederationTokenCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>A resource with the specified name already exists.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link UserNotFoundException} (client fault)
+ *  <p>No user with the specified credentials was found in the Connect Customer instance.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class GetFederationTokenCommand extends $Command<
-  GetFederationTokenCommandInput,
-  GetFederationTokenCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFederationTokenCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFederationTokenCommandInput, GetFederationTokenCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "GetFederationTokenCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFederationTokenRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFederationTokenResponse.filterSensitiveLog,
+export class GetFederationTokenCommand extends command<GetFederationTokenCommandInput, GetFederationTokenCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFederationToken",
+  GetFederationToken$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFederationTokenRequest;
+      output: GetFederationTokenResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFederationTokenCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFederationTokenCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFederationTokenCommandOutput> {
-    return deserializeAws_restJson1GetFederationTokenCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFederationTokenCommandInput;
+      output: GetFederationTokenCommandOutput;
+    };
+  };
 }

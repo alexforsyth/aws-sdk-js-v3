@@ -1,0 +1,89 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { XmlTimestampsRequest, XmlTimestampsResponse } from "../models/models_0";
+import { XmlTimestamps$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link XmlTimestampsCommand}.
+ */
+export interface XmlTimestampsCommandInput extends XmlTimestampsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link XmlTimestampsCommand}.
+ */
+export interface XmlTimestampsCommandOutput extends XmlTimestampsResponse, __MetadataBearer {}
+
+/**
+ * This tests how timestamps are serialized, including using the
+ * default format of date-time and various @timestampFormat trait
+ * values.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, XmlTimestampsCommand } from "@aws-sdk/aws-protocoltests-restxml-schema"; // ES Modules import
+ * // const { RestXmlProtocolClient, XmlTimestampsCommand } = require("@aws-sdk/aws-protocoltests-restxml-schema"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml-schema";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // XmlTimestampsRequest
+ *   normal: new Date("TIMESTAMP"),
+ *   dateTime: new Date("TIMESTAMP"),
+ *   dateTimeOnTarget: new Date("TIMESTAMP"),
+ *   epochSeconds: new Date("TIMESTAMP"),
+ *   epochSecondsOnTarget: new Date("TIMESTAMP"),
+ *   httpDate: new Date("TIMESTAMP"),
+ *   httpDateOnTarget: new Date("TIMESTAMP"),
+ * };
+ * const command = new XmlTimestampsCommand(input);
+ * const response = await client.send(command);
+ * // { // XmlTimestampsResponse
+ * //   normal: new Date("TIMESTAMP"),
+ * //   dateTime: new Date("TIMESTAMP"),
+ * //   dateTimeOnTarget: new Date("TIMESTAMP"),
+ * //   epochSeconds: new Date("TIMESTAMP"),
+ * //   epochSecondsOnTarget: new Date("TIMESTAMP"),
+ * //   httpDate: new Date("TIMESTAMP"),
+ * //   httpDateOnTarget: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param XmlTimestampsCommandInput - {@link XmlTimestampsCommandInput}
+ * @returns {@link XmlTimestampsCommandOutput}
+ * @see {@link XmlTimestampsCommandInput} for command's `input` shape.
+ * @see {@link XmlTimestampsCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class XmlTimestampsCommand extends command<XmlTimestampsCommandInput, XmlTimestampsCommandOutput>(
+  _ep0,
+  _mw0,
+  "XmlTimestamps",
+  XmlTimestamps$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: XmlTimestampsRequest;
+      output: XmlTimestampsResponse;
+    };
+    sdk: {
+      input: XmlTimestampsCommandInput;
+      output: XmlTimestampsCommandOutput;
+    };
+  };
+}

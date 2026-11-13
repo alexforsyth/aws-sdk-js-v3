@@ -1,20 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CodeGuruReviewerClient } from "../CodeGuruReviewerClient";
-import { DescribeCodeReviewCommand, DescribeCodeReviewCommandInput } from "../commands/DescribeCodeReviewCommand";
+import type { CodeGuruReviewerClient } from "../CodeGuruReviewerClient";
+import {
+  type DescribeCodeReviewCommandInput,
+  type DescribeCodeReviewCommandOutput,
+  DescribeCodeReviewCommand,
+} from "../commands/DescribeCodeReviewCommand";
+import type { CodeGuruReviewerServiceException } from "../models/CodeGuruReviewerServiceException";
 
-const checkState = async (
-  client: CodeGuruReviewerClient,
-  input: DescribeCodeReviewCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: CodeGuruReviewerClient, input: DescribeCodeReviewCommandInput): Promise<WaiterResult<DescribeCodeReviewCommandOutput | CodeGuruReviewerServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeCodeReviewCommand(input));
+    let result: DescribeCodeReviewCommandOutput & any = await client.send(new DescribeCodeReviewCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.CodeReview.State;
-      };
+      }
       if (returnComparator() === "Completed") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -22,7 +31,15 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.CodeReview.State;
-      };
+      }
+      if (returnComparator() === "Failed") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.CodeReview.State;
+      }
       if (returnComparator() === "Pending") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -39,7 +56,7 @@ const checkState = async (
 export const waitForCodeReviewCompleted = async (
   params: WaiterConfiguration<CodeGuruReviewerClient>,
   input: DescribeCodeReviewCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCodeReviewCommandOutput | CodeGuruReviewerServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -51,8 +68,8 @@ export const waitForCodeReviewCompleted = async (
 export const waitUntilCodeReviewCompleted = async (
   params: WaiterConfiguration<CodeGuruReviewerClient>,
   input: DescribeCodeReviewCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeCodeReviewCommandOutput>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeCodeReviewCommandOutput>;
 };

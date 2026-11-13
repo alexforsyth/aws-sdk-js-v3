@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import { DeleteProtocolsListRequest } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteProtocolsListCommand,
-  serializeAws_json1_1DeleteProtocolsListCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteProtocolsListRequest } from "../models/models_0";
+import { DeleteProtocolsList$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteProtocolsListCommand}.
+ */
 export interface DeleteProtocolsListCommandInput extends DeleteProtocolsListRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteProtocolsListCommand}.
+ */
 export interface DeleteProtocolsListCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface DeleteProtocolsListCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { FMSClient, DeleteProtocolsListCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, DeleteProtocolsListCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = { // DeleteProtocolsListRequest
+ *   ListId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteProtocolsListCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteProtocolsListCommandInput - {@link DeleteProtocolsListCommandInput}
+ * @returns {@link DeleteProtocolsListCommandOutput}
  * @see {@link DeleteProtocolsListCommandInput} for command's `input` shape.
  * @see {@link DeleteProtocolsListCommandOutput} for command's `response` shape.
- * @see {@link FMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do or the operation wasn't possible. For example, you might have
+ *         submitted an <code>AssociateAdminAccount</code> request for an account ID that
+ *             was already set as the Firewall Manager administrator. Or you might have tried to access a Region
+ *   that's disabled by default, and that you need to enable for the Firewall Manager
+ *   administrator account and for Organizations before you can access it.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteProtocolsListCommand extends $Command<
-  DeleteProtocolsListCommandInput,
-  DeleteProtocolsListCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteProtocolsListCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteProtocolsListCommandInput, DeleteProtocolsListCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "DeleteProtocolsListCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteProtocolsListRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteProtocolsListCommand extends command<DeleteProtocolsListCommandInput, DeleteProtocolsListCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteProtocolsList",
+  DeleteProtocolsList$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProtocolsListRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteProtocolsListCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteProtocolsListCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteProtocolsListCommandOutput> {
-    return deserializeAws_json1_1DeleteProtocolsListCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteProtocolsListCommandInput;
+      output: DeleteProtocolsListCommandOutput;
+    };
+  };
 }

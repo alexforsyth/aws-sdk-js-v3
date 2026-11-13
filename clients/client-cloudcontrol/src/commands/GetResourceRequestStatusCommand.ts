@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudControlClient";
-import { GetResourceRequestStatusInput, GetResourceRequestStatusOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0GetResourceRequestStatusCommand,
-  serializeAws_json1_0GetResourceRequestStatusCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourceRequestStatusInput, GetResourceRequestStatusOutput } from "../models/models_0";
+import { GetResourceRequestStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourceRequestStatusCommand}.
+ */
 export interface GetResourceRequestStatusCommandInput extends GetResourceRequestStatusInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourceRequestStatusCommand}.
+ */
 export interface GetResourceRequestStatusCommandOutput extends GetResourceRequestStatusOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,74 @@ export interface GetResourceRequestStatusCommandOutput extends GetResourceReques
  * ```javascript
  * import { CloudControlClient, GetResourceRequestStatusCommand } from "@aws-sdk/client-cloudcontrol"; // ES Modules import
  * // const { CloudControlClient, GetResourceRequestStatusCommand } = require("@aws-sdk/client-cloudcontrol"); // CommonJS import
+ * // import type { CloudControlClientConfig } from "@aws-sdk/client-cloudcontrol";
+ * const config = {}; // type is CloudControlClientConfig
  * const client = new CloudControlClient(config);
+ * const input = { // GetResourceRequestStatusInput
+ *   RequestToken: "STRING_VALUE", // required
+ * };
  * const command = new GetResourceRequestStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetResourceRequestStatusOutput
+ * //   ProgressEvent: { // ProgressEvent
+ * //     TypeName: "STRING_VALUE",
+ * //     Identifier: "STRING_VALUE",
+ * //     RequestToken: "STRING_VALUE",
+ * //     HooksRequestToken: "STRING_VALUE",
+ * //     Operation: "STRING_VALUE",
+ * //     OperationStatus: "STRING_VALUE",
+ * //     EventTime: new Date("TIMESTAMP"),
+ * //     ResourceModel: "STRING_VALUE",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     ErrorCode: "STRING_VALUE",
+ * //     RetryAfter: new Date("TIMESTAMP"),
+ * //   },
+ * //   HooksProgressEvent: [ // HooksProgressEvent
+ * //     { // HookProgressEvent
+ * //       HookTypeName: "STRING_VALUE",
+ * //       HookTypeVersionId: "STRING_VALUE",
+ * //       HookTypeArn: "STRING_VALUE",
+ * //       InvocationPoint: "STRING_VALUE",
+ * //       HookStatus: "STRING_VALUE",
+ * //       HookEventTime: new Date("TIMESTAMP"),
+ * //       HookStatusMessage: "STRING_VALUE",
+ * //       FailureMode: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetResourceRequestStatusCommandInput - {@link GetResourceRequestStatusCommandInput}
+ * @returns {@link GetResourceRequestStatusCommandOutput}
  * @see {@link GetResourceRequestStatusCommandInput} for command's `input` shape.
  * @see {@link GetResourceRequestStatusCommandOutput} for command's `response` shape.
- * @see {@link CloudControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudControlClientResolvedConfig | config} for CloudControlClient's `config` shape.
  *
+ * @throws {@link RequestTokenNotFoundException} (client fault)
+ *  <p>A resource operation with the specified request token can't be found.</p>
+ *
+ * @throws {@link CloudControlServiceException}
+ * <p>Base exception class for all service exceptions from CloudControl service.</p>
+ *
+ *
+ * @public
  */
-export class GetResourceRequestStatusCommand extends $Command<
-  GetResourceRequestStatusCommandInput,
-  GetResourceRequestStatusCommandOutput,
-  CloudControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResourceRequestStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResourceRequestStatusCommandInput, GetResourceRequestStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudControlClient";
-    const commandName = "GetResourceRequestStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResourceRequestStatusInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetResourceRequestStatusOutput.filterSensitiveLog,
+export class GetResourceRequestStatusCommand extends command<GetResourceRequestStatusCommandInput, GetResourceRequestStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourceRequestStatus",
+  GetResourceRequestStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceRequestStatusInput;
+      output: GetResourceRequestStatusOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResourceRequestStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetResourceRequestStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetResourceRequestStatusCommandOutput> {
-    return deserializeAws_json1_0GetResourceRequestStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResourceRequestStatusCommandInput;
+      output: GetResourceRequestStatusCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ConfirmProductInstanceRequest, ConfirmProductInstanceResult } from "../models/models_0";
-import {
-  deserializeAws_ec2ConfirmProductInstanceCommand,
-  serializeAws_ec2ConfirmProductInstanceCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfirmProductInstanceRequest, ConfirmProductInstanceResult } from "../models/models_0";
+import { ConfirmProductInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConfirmProductInstanceCommand}.
+ */
 export interface ConfirmProductInstanceCommandInput extends ConfirmProductInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ConfirmProductInstanceCommand}.
+ */
 export interface ConfirmProductInstanceCommandOutput extends ConfirmProductInstanceResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,66 @@ export interface ConfirmProductInstanceCommandOutput extends ConfirmProductInsta
  * ```javascript
  * import { EC2Client, ConfirmProductInstanceCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ConfirmProductInstanceCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ConfirmProductInstanceRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ProductCode: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new ConfirmProductInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // ConfirmProductInstanceResult
+ * //   Return: true || false,
+ * //   OwnerId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ConfirmProductInstanceCommandInput - {@link ConfirmProductInstanceCommandInput}
+ * @returns {@link ConfirmProductInstanceCommandOutput}
  * @see {@link ConfirmProductInstanceCommandInput} for command's `input` shape.
  * @see {@link ConfirmProductInstanceCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To confirm the product instance
+ * ```javascript
+ * // This example determines whether the specified product code is associated with the specified instance.
+ * const input = {
+ *   InstanceId: "i-1234567890abcdef0",
+ *   ProductCode: "774F4FF8"
+ * };
+ * const command = new ConfirmProductInstanceCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   OwnerId: "123456789012"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ConfirmProductInstanceCommand extends $Command<
-  ConfirmProductInstanceCommandInput,
-  ConfirmProductInstanceCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ConfirmProductInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ConfirmProductInstanceCommandInput, ConfirmProductInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ConfirmProductInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ConfirmProductInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfirmProductInstanceResult.filterSensitiveLog,
+export class ConfirmProductInstanceCommand extends command<ConfirmProductInstanceCommandInput, ConfirmProductInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConfirmProductInstance",
+  ConfirmProductInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfirmProductInstanceRequest;
+      output: ConfirmProductInstanceResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ConfirmProductInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ConfirmProductInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ConfirmProductInstanceCommandOutput> {
-    return deserializeAws_ec2ConfirmProductInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ConfirmProductInstanceCommandInput;
+      output: ConfirmProductInstanceCommandOutput;
+    };
+  };
 }

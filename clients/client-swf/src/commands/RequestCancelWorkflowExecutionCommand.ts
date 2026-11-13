@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RequestCancelWorkflowExecutionInput } from "../models/models_0";
-import {
-  deserializeAws_json1_0RequestCancelWorkflowExecutionCommand,
-  serializeAws_json1_0RequestCancelWorkflowExecutionCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RequestCancelWorkflowExecutionInput } from "../models/models_0";
+import { RequestCancelWorkflowExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RequestCancelWorkflowExecutionCommand}.
+ */
 export interface RequestCancelWorkflowExecutionCommandInput extends RequestCancelWorkflowExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link RequestCancelWorkflowExecutionCommand}.
+ */
 export interface RequestCancelWorkflowExecutionCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,13 +27,11 @@ export interface RequestCancelWorkflowExecutionCommandOutput extends __MetadataB
  *       workflow execution identified by the given domain, workflowId, and runId. This logically
  *       requests the cancellation of the workflow execution as a whole. It is up to the decider to
  *       take appropriate actions when it receives an execution history with this event.</p>
- *
  *          <note>
  *             <p>If the runId isn't specified, the <code>WorkflowExecutionCancelRequested</code> event
  *         is recorded in the history of the current open workflow execution with the specified
  *         workflowId in the domain.</p>
  *          </note>
- *
  *          <note>
  *             <p>Because this action allows the workflow to properly clean up and gracefully close, it
  *         should be used instead of <a>TerminateWorkflowExecution</a> when
@@ -66,74 +65,53 @@ export interface RequestCancelWorkflowExecutionCommandOutput extends __MetadataB
  * ```javascript
  * import { SWFClient, RequestCancelWorkflowExecutionCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, RequestCancelWorkflowExecutionCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // RequestCancelWorkflowExecutionInput
+ *   domain: "STRING_VALUE", // required
+ *   workflowId: "STRING_VALUE", // required
+ *   runId: "STRING_VALUE",
+ * };
  * const command = new RequestCancelWorkflowExecutionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RequestCancelWorkflowExecutionCommandInput - {@link RequestCancelWorkflowExecutionCommandInput}
+ * @returns {@link RequestCancelWorkflowExecutionCommandOutput}
  * @see {@link RequestCancelWorkflowExecutionCommandInput} for command's `input` shape.
  * @see {@link RequestCancelWorkflowExecutionCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class RequestCancelWorkflowExecutionCommand extends $Command<
-  RequestCancelWorkflowExecutionCommandInput,
-  RequestCancelWorkflowExecutionCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RequestCancelWorkflowExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RequestCancelWorkflowExecutionCommandInput, RequestCancelWorkflowExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "RequestCancelWorkflowExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RequestCancelWorkflowExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RequestCancelWorkflowExecutionCommand extends command<RequestCancelWorkflowExecutionCommandInput, RequestCancelWorkflowExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RequestCancelWorkflowExecution",
+  RequestCancelWorkflowExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RequestCancelWorkflowExecutionInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: RequestCancelWorkflowExecutionCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0RequestCancelWorkflowExecutionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RequestCancelWorkflowExecutionCommandOutput> {
-    return deserializeAws_json1_0RequestCancelWorkflowExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RequestCancelWorkflowExecutionCommandInput;
+      output: RequestCancelWorkflowExecutionCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,326 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [3.1138.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1137.0...v3.1138.0) (2026-09-22)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1111.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1110.0...v3.1111.0) (2026-08-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1108.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1107.0...v3.1108.0) (2026-08-11)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1098.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1097.0...v3.1098.0) (2026-07-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1095.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1094.0...v3.1095.0) (2026-07-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1088.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1087.0...v3.1088.0) (2026-07-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1082.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1081.0...v3.1082.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1078.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1077.0...v3.1078.0) (2026-07-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1077.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1076.0...v3.1077.0) (2026-06-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1076.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1075.0...v3.1076.0) (2026-06-29)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1069.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1068.0...v3.1069.0) (2026-06-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1064.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1063.0...v3.1064.0) (2026-06-08)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1063.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1062.0...v3.1063.0) (2026-06-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1059.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1058.0...v3.1059.0) (2026-06-02)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1056.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1055.0...v3.1056.0) (2026-05-28)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1048.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1047.0...v3.1048.0) (2026-05-15)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1046.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1045.0...v3.1046.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1031.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1030.0...v3.1031.0) (2026-04-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1026.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1025.0...v3.1026.0) (2026-04-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1009.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1008.0...v3.1009.0) (2026-03-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.1003.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1002.0...v3.1003.0) (2026-03-05)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.998.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.997.0...v3.998.0) (2026-02-25)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.997.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.996.0...v3.997.0) (2026-02-24)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/signature-v4a
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+
+### Features
+
+* **signature-v4-multi-region:** add support for sigv4a package ([#6267](https://github.com/aws/aws-sdk-js-v3/issues/6267)) ([ecbba9f](https://github.com/aws/aws-sdk-js-v3/commit/ecbba9f6573ee0513a92b163f7b5db4c70e4390a))

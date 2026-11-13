@@ -1,0 +1,102 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTelemetryRulesInput, ListTelemetryRulesOutput } from "../models/models_0";
+import { ListTelemetryRules$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTelemetryRulesCommand}.
+ */
+export interface ListTelemetryRulesCommandInput extends ListTelemetryRulesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTelemetryRulesCommand}.
+ */
+export interface ListTelemetryRulesCommandOutput extends ListTelemetryRulesOutput, __MetadataBearer {}
+
+/**
+ * <p> Lists all telemetry rules in your account. You can filter the results by specifying a rule name prefix. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ObservabilityAdminClient, ListTelemetryRulesCommand } from "@aws-sdk/client-observabilityadmin"; // ES Modules import
+ * // const { ObservabilityAdminClient, ListTelemetryRulesCommand } = require("@aws-sdk/client-observabilityadmin"); // CommonJS import
+ * // import type { ObservabilityAdminClientConfig } from "@aws-sdk/client-observabilityadmin";
+ * const config = {}; // type is ObservabilityAdminClientConfig
+ * const client = new ObservabilityAdminClient(config);
+ * const input = { // ListTelemetryRulesInput
+ *   RuleNamePrefix: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListTelemetryRulesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListTelemetryRulesOutput
+ * //   TelemetryRuleSummaries: [ // TelemetryRuleSummaries
+ * //     { // TelemetryRuleSummary
+ * //       RuleName: "STRING_VALUE",
+ * //       RuleArn: "STRING_VALUE",
+ * //       CreatedTimeStamp: Number("long"),
+ * //       LastUpdateTimeStamp: Number("long"),
+ * //       ResourceType: "AWS::EC2::Instance" || "AWS::EC2::VPC" || "AWS::Lambda::Function" || "AWS::CloudTrail" || "AWS::EKS::Cluster" || "AWS::WAFv2::WebACL" || "AWS::ElasticLoadBalancingV2::LoadBalancer" || "AWS::Route53Resolver::ResolverEndpoint" || "AWS::BedrockAgentCore::Runtime" || "AWS::BedrockAgentCore::Browser" || "AWS::BedrockAgentCore::CodeInterpreter" || "AWS::BedrockAgentCore::Gateway" || "AWS::BedrockAgentCore::Memory" || "AWS::BedrockAgentCore::WorkloadIdentity" || "AWS::BedrockAgentCore::PaymentManager" || "AWS::SecurityHub::Hub" || "AWS::CloudFront::Distribution" || "AWS::SecurityHub::HubV2" || "AWS::CloudWatch::OTelEnrichment" || "AWS::MSK::Cluster" || "AWS::S3::Bucket" || "AWS::Bedrock::KnowledgeBase" || "AWS::XRay::TransactionSearchConfig",
+ * //       TelemetryType: "Logs" || "Metrics" || "Traces" || "Insights",
+ * //       TelemetrySourceTypes: [ // TelemetrySourceTypes
+ * //         "VPC_FLOW_LOGS" || "ROUTE53_RESOLVER_QUERY_LOGS" || "EKS_AUDIT_LOGS" || "EKS_AUTHENTICATOR_LOGS" || "EKS_CONTROLLER_MANAGER_LOGS" || "EKS_SCHEDULER_LOGS" || "EKS_API_LOGS",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListTelemetryRulesCommandInput - {@link ListTelemetryRulesCommandInput}
+ * @returns {@link ListTelemetryRulesCommandOutput}
+ * @see {@link ListTelemetryRulesCommandInput} for command's `input` shape.
+ * @see {@link ListTelemetryRulesCommandOutput} for command's `response` shape.
+ * @see {@link ObservabilityAdminClientResolvedConfig | config} for ObservabilityAdminClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Indicates you don't have permissions to perform the requested operation. The user or role that is making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access management for Amazon Web Services resources</a> in the IAM user guide. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Indicates the request has failed to process because of an unknown server error, exception, or failure. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> The request throughput limit was exceeded. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Indicates input validation failed. Check your request parameters and retry the request. </p>
+ *
+ * @throws {@link ObservabilityAdminServiceException}
+ * <p>Base exception class for all service exceptions from ObservabilityAdmin service.</p>
+ *
+ *
+ * @public
+ */
+export class ListTelemetryRulesCommand extends command<ListTelemetryRulesCommandInput, ListTelemetryRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTelemetryRules",
+  ListTelemetryRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTelemetryRulesInput;
+      output: ListTelemetryRulesOutput;
+    };
+    sdk: {
+      input: ListTelemetryRulesCommandInput;
+      output: ListTelemetryRulesCommandOutput;
+    };
+  };
+}

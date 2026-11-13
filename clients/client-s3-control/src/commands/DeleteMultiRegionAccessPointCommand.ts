@@ -1,41 +1,40 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteMultiRegionAccessPointRequest, DeleteMultiRegionAccessPointResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteMultiRegionAccessPointCommand,
-  serializeAws_restXmlDeleteMultiRegionAccessPointCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
-
-export interface DeleteMultiRegionAccessPointCommandInput extends DeleteMultiRegionAccessPointRequest {}
-export interface DeleteMultiRegionAccessPointCommandOutput
-  extends DeleteMultiRegionAccessPointResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMultiRegionAccessPointRequest, DeleteMultiRegionAccessPointResult } from "../models/models_0";
+import { DeleteMultiRegionAccessPoint$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point,
- *             only the Multi-Region Access Point itself.</p>
- *          <p>This action will always be routed to the US West (Oregon) Region. For more
- *             information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing
- *                 Multi-Region Access Points</a> in the
- *             <i>Amazon S3 User Guide</i>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMultiRegionAccessPointCommand}.
+ */
+export interface DeleteMultiRegionAccessPointCommandInput extends DeleteMultiRegionAccessPointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMultiRegionAccessPointCommand}.
+ */
+export interface DeleteMultiRegionAccessPointCommandOutput extends DeleteMultiRegionAccessPointResult, __MetadataBearer {}
+
+/**
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point,
+ *          only the Multi-Region Access Point itself.</p>
+ *          <p>This action will always be routed to the US West (Oregon) Region. For more information
+ *          about the restrictions around working with Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html">Multi-Region Access Point
+ *             restrictions and limitations</a> in the <i>Amazon S3 User Guide</i>.</p>
  *          <p>This request is asynchronous, meaning that you might receive a response before the
- *             command has completed. When this request provides a response, it provides a token that
- *             you can use to monitor the status of the request with
- *                 <code>DescribeMultiRegionAccessPointOperation</code>.</p>
+ *          command has completed. When this request provides a response, it provides a token that you
+ *          can use to monitor the status of the request with
+ *             <code>DescribeMultiRegionAccessPointOperation</code>.</p>
  *          <p>The following actions are related to <code>DeleteMultiRegionAccessPoint</code>:</p>
  *          <ul>
  *             <li>
@@ -64,73 +63,51 @@ export interface DeleteMultiRegionAccessPointCommandOutput
  * ```javascript
  * import { S3ControlClient, DeleteMultiRegionAccessPointCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, DeleteMultiRegionAccessPointCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // DeleteMultiRegionAccessPointRequest
+ *   AccountId: "STRING_VALUE",
+ *   ClientToken: "STRING_VALUE", // required
+ *   Details: { // DeleteMultiRegionAccessPointInput
+ *     Name: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new DeleteMultiRegionAccessPointCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteMultiRegionAccessPointResult
+ * //   RequestTokenARN: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteMultiRegionAccessPointCommandInput - {@link DeleteMultiRegionAccessPointCommandInput}
+ * @returns {@link DeleteMultiRegionAccessPointCommandOutput}
  * @see {@link DeleteMultiRegionAccessPointCommandInput} for command's `input` shape.
  * @see {@link DeleteMultiRegionAccessPointCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMultiRegionAccessPointCommand extends $Command<
-  DeleteMultiRegionAccessPointCommandInput,
-  DeleteMultiRegionAccessPointCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMultiRegionAccessPointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMultiRegionAccessPointCommandInput, DeleteMultiRegionAccessPointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "DeleteMultiRegionAccessPointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMultiRegionAccessPointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMultiRegionAccessPointResult.filterSensitiveLog,
+export class DeleteMultiRegionAccessPointCommand extends command<DeleteMultiRegionAccessPointCommandInput, DeleteMultiRegionAccessPointCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMultiRegionAccessPoint",
+  DeleteMultiRegionAccessPoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMultiRegionAccessPointRequest;
+      output: DeleteMultiRegionAccessPointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMultiRegionAccessPointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteMultiRegionAccessPointCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteMultiRegionAccessPointCommandOutput> {
-    return deserializeAws_restXmlDeleteMultiRegionAccessPointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMultiRegionAccessPointCommandInput;
+      output: DeleteMultiRegionAccessPointCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,34 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeInstanceHealthCommandInput,
+  type DescribeInstanceHealthCommandOutput,
   DescribeInstanceHealthCommand,
-  DescribeInstanceHealthCommandInput,
 } from "../commands/DescribeInstanceHealthCommand";
-import { ElasticLoadBalancingClient } from "../ElasticLoadBalancingClient";
+import type { ElasticLoadBalancingClient } from "../ElasticLoadBalancingClient";
+import type { ElasticLoadBalancingServiceException } from "../models/ElasticLoadBalancingServiceException";
 
-const checkState = async (
-  client: ElasticLoadBalancingClient,
-  input: DescribeInstanceHealthCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ElasticLoadBalancingClient, input: DescribeInstanceHealthCommandInput): Promise<WaiterResult<DescribeInstanceHealthCommandOutput | ElasticLoadBalancingServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeInstanceHealthCommand(input));
+    let result: DescribeInstanceHealthCommandOutput & any = await client.send(new DescribeInstanceHealthCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.InstanceStates);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.InstanceStates);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "InService") {
           return { state: WaiterState.SUCCESS, reason };
         }
@@ -40,7 +46,7 @@ const checkState = async (
 export const waitForAnyInstanceInService = async (
   params: WaiterConfiguration<ElasticLoadBalancingClient>,
   input: DescribeInstanceHealthCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInstanceHealthCommandOutput | ElasticLoadBalancingServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -52,8 +58,8 @@ export const waitForAnyInstanceInService = async (
 export const waitUntilAnyInstanceInService = async (
   params: WaiterConfiguration<ElasticLoadBalancingClient>,
   input: DescribeInstanceHealthCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeInstanceHealthCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeInstanceHealthCommandOutput>;
 };

@@ -1,0 +1,3523 @@
+const _A = "Account";
+const _AADD = "AnonymousAuthDisableDate";
+const _AAE = "AnonymousAuthEnabled";
+const _AAZC = "ActiveAvailabilityZoneCount";
+const _AC = "AppConfig";
+const _ACp = "AppConfigs";
+const _ACs = "AssociationConfiguration";
+const _ADE = "AccessDeniedException";
+const _ADL = "AllowDataLoss";
+const _ADNC = "AvailableDataNodeCount";
+const _ADQDS = "AddDirectQueryDataSource";
+const _ADQDSR = "AddDirectQueryDataSourceRequest";
+const _ADQDSRd = "AddDirectQueryDataSourceResponse";
+const _ADS = "AddDataSource";
+const _ADSR = "AddDataSourceRequest";
+const _ADSRd = "AddDataSourceResponse";
+const _ADSRt = "AttachDataSourceRequest";
+const _ADSRtt = "AttachDataSourceResponse";
+const _ADSt = "AttachDataSource";
+const _AIC = "AIConfig";
+const _AICR = "AcceptInboundConnectionRequest";
+const _AICRc = "AcceptInboundConnectionResponse";
+const _AICc = "AcceptInboundConnection";
+const _AID = "ActionID";
+const _AIMLO = "AIMLOptions";
+const _AIMLOI = "AIMLOptionsInput";
+const _AIMLOO = "AIMLOptionsOutput";
+const _AIMLOS = "AIMLOptionsStatus";
+const _AL = "AdditionalLimit";
+const _ALE = "AppLogsEnabled";
+const _ALL = "AdditionalLimitList";
+const _ALUL = "AllowListedUserList";
+const _ALd = "AdditionalLimits";
+const _AO = "AdvancedOptions";
+const _AOS = "AdvancedOptionsStatus";
+const _AP = "AuthorizedPrincipal";
+const _APC = "AvailablePackageConfiguration";
+const _APL = "AuthorizedPrincipalList";
+const _APP = "AvailablePluginProperties";
+const _APR = "AssociatePackageRequest";
+const _APRs = "AssociatePackageResponse";
+const _APRss = "AssociatePackagesRequest";
+const _APRsso = "AssociatePackagesResponse";
+const _APS = "AccessPoliciesStatus";
+const _APV = "AvailablePackageVersion";
+const _APc = "AccessPolicies";
+const _APs = "AssociatePackage";
+const _APss = "AssociatePackages";
+const _ARN = "ARN";
+const _ARP = "AddReplicationPeer";
+const _ARPR = "AddReplicationPeerRequest";
+const _ARPRd = "AddReplicationPeerResponse";
+const _AS = "ApplicationSummary";
+const _ASE = "AdvancedSecurityEnabled";
+const _ASO = "AdvancedSecurityOptions";
+const _ASOI = "AdvancedSecurityOptionsInput";
+const _ASOS = "AdvancedSecurityOptionsStatus";
+const _ASPO = "AutomatedSnapshotPauseOptions";
+const _ASPOS = "AutomatedSnapshotPauseOptionsStatus";
+const _ASPRO = "AutomatedSnapshotPauseRequestOptions";
+const _ASSH = "AutomatedSnapshotStartHour";
+const _ASUE = "AutoSoftwareUpdateEnabled";
+const _ASp = "ApplicationSummaries";
+const _AT = "AutoTune";
+const _ATD = "AutoTuneDetails";
+const _ATL = "AutoTuneList";
+const _ATMS = "AutoTuneMaintenanceSchedule";
+const _ATMSL = "AutoTuneMaintenanceScheduleList";
+const _ATO = "AutoTuneOptions";
+const _ATOI = "AutoTuneOptionsInput";
+const _ATOO = "AutoTuneOptionsOutput";
+const _ATOS = "AutoTuneOptionsStatus";
+const _ATR = "AddTagsRequest";
+const _ATS = "AutoTuneStatus";
+const _ATT = "AutoTuneType";
+const _ATc = "ActionType";
+const _ATd = "AddTags";
+const _ATu = "AutoTunes";
+const _AUD = "AutomatedUpdateDate";
+const _AV = "ActiveValue";
+const _AVEA = "AuthorizeVpcEndpointAccess";
+const _AVEAR = "AuthorizeVpcEndpointAccessRequest";
+const _AVEARu = "AuthorizeVpcEndpointAccessResponse";
+const _AW = "AcceptedWarnings";
+const _AWSDI = "AWSDomainInformation";
+const _AZ = "AvailabilityZone";
+const _AZC = "AvailabilityZoneCount";
+const _AZI = "AvailabilityZoneInfo";
+const _AZIL = "AvailabilityZoneInfoList";
+const _AZIv = "AvailabilityZoneInformation";
+const _AZN = "AvailabilityZoneName";
+const _AZv = "AvailabilityZones";
+const _Ac = "Action";
+const _BE = "BaseException";
+const _BSI = "BillingSubscriptionId";
+const _C = "Connection";
+const _CA = "ConnectionAlias";
+const _CAR = "CreateApplicationRequest";
+const _CARr = "CreateApplicationResponse";
+const _CAr = "CreatedAt";
+const _CAre = "CreateApplication";
+const _CBGO = "ClonedBlueGreenOptions";
+const _CBGSA = "ClonedBlueGreenScheduledAction";
+const _CBGUD = "ClonedBlueGreenUpgradeDetails";
+const _CBRC = "CapabilityBaseRequestConfig";
+const _CBRCa = "CapabilityBaseResponseConfig";
+const _CC = "ClusterConfig";
+const _CCI = "CancelledChangeIds";
+const _CCP = "CancelledChangeProperties";
+const _CCPL = "CancelledChangePropertyList";
+const _CCPa = "CancelledChangeProperty";
+const _CCS = "ConfigChangeStatus";
+const _CCSCP = "CrossClusterSearchConnectionProperties";
+const _CCSl = "ClusterConfigStatus";
+const _CCSr = "CrossClusterSearch";
+const _CCu = "CurrencyCode";
+const _CD = "CreationDate";
+const _CDC = "CompareDomainConfiguration";
+const _CDCC = "CancelDomainConfigChange";
+const _CDCCM = "CompareDomainConfigurationCategoryMap";
+const _CDCCR = "CancelDomainConfigChangeRequest";
+const _CDCCRa = "CancelDomainConfigChangeResponse";
+const _CDCR = "CompareDomainConfigurationRequest";
+const _CDCRo = "CompareDomainConfigurationResponse";
+const _CDNC = "ConfiguredDataNodeCount";
+const _CDR = "CategoryDiffResult";
+const _CDRr = "CreateDomainRequest";
+const _CDRre = "CreateDomainResponse";
+const _CDr = "CreateDomain";
+const _CE = "ConflictException";
+const _CECA = "CustomEndpointCertificateArn";
+const _CEE = "CustomEndpointEnabled";
+const _CEFR = "CronExpressionForRecurrence";
+const _CERC = "CapabilityExtendedResponseConfig";
+const _CEo = "CognitoEnabled";
+const _CEu = "CustomEndpoint";
+const _CF = "CapabilityFailure";
+const _CFa = "CapabilityFailures";
+const _CH = "ClusterHealth";
+const _CI = "ConnectionId";
+const _CIR = "CreateIndexRequest";
+const _CIRr = "CreateIndexResponse";
+const _CIh = "ChangeId";
+const _CIr = "CreateIndex";
+const _CM = "ConnectionMode";
+const _CMo = "CommitMessage";
+const _CN = "ClassName";
+const _CO = "CognitoOptions";
+const _COC = "CreateOutboundConnection";
+const _COCR = "CreateOutboundConnectionRequest";
+const _COCRr = "CreateOutboundConnectionResponse";
+const _COS = "CognitoOptionsStatus";
+const _COu = "CutoverOptions";
+const _CP = "CompletedProperties";
+const _CPD = "ChangeProgressDetails";
+const _CPR = "CreatePackageRequest";
+const _CPRr = "CreatePackageResponse";
+const _CPS = "ChangeProgressStage";
+const _CPSD = "ChangeProgressStatusDetails";
+const _CPSL = "ChangeProgressStageList";
+const _CPSh = "ChangeProgressStages";
+const _CPSha = "ChangeProgressStatus";
+const _CPo = "ConnectionProperties";
+const _CPr = "CreatePackage";
+const _CR = "ConfigurationRequirement";
+const _CRO = "CutoverRequestOptions";
+const _CRTP = "CloneReadTrafficPercent";
+const _CS = "ConnectionStatus";
+const _CSO = "ColdStorageOptions";
+const _CSSU = "CancelServiceSoftwareUpdate";
+const _CSSUR = "CancelServiceSoftwareUpdateRequest";
+const _CSSURa = "CancelServiceSoftwareUpdateResponse";
+const _CSu = "CurrentState";
+const _CT = "ClientToken";
+const _CTr = "CreationTime";
+const _CV = "CancelledValue";
+const _CVE = "CreateVpcEndpoint";
+const _CVER = "CreateVpcEndpointRequest";
+const _CVERr = "CreateVpcEndpointResponse";
+const _CVL = "CompatibleVersionsList";
+const _CVM = "CompatibleVersionsMap";
+const _CVo = "CompatibleVersions";
+const _CVu = "CurrentVersion";
+const _CWDQDS = "CloudWatchDirectQueryDataSource";
+const _CWL = "CloudWatchLog";
+const _CWLLGA = "CloudWatchLogsLogGroupArn";
+const _Ca = "Categories";
+const _Can = "Cancellable";
+const _Co = "Connections";
+const _Cod = "Code";
+const _Cou = "Count";
+const _Cr = "Created";
+const _Cu = "Current";
+const _D = "Description";
+const _DA = "DomainArn";
+const _DAR = "DeleteApplicationRequest";
+const _DARe = "DeleteApplicationResponse";
+const _DAe = "DeleteApplication";
+const _DC = "DomainConfig";
+const _DCR = "DeregisterCapabilityRequest";
+const _DCRe = "DeregisterCapabilityResponse";
+const _DCe = "DeregisterCapability";
+const _DD = "DeleteDomain";
+const _DDAT = "DescribeDomainAutoTunes";
+const _DDATR = "DescribeDomainAutoTunesRequest";
+const _DDATRe = "DescribeDomainAutoTunesResponse";
+const _DDC = "DescribeDomainConfig";
+const _DDCP = "DescribeDomainChangeProgress";
+const _DDCPR = "DescribeDomainChangeProgressRequest";
+const _DDCPRe = "DescribeDomainChangeProgressResponse";
+const _DDCR = "DescribeDomainConfigRequest";
+const _DDCRe = "DescribeDomainConfigResponse";
+const _DDH = "DescribeDomainHealth";
+const _DDHR = "DescribeDomainHealthRequest";
+const _DDHRe = "DescribeDomainHealthResponse";
+const _DDN = "DescribeDomainNodes";
+const _DDNR = "DescribeDomainNodesRequest";
+const _DDNRe = "DescribeDomainNodesResponse";
+const _DDQDS = "DeleteDirectQueryDataSource";
+const _DDQDSR = "DeleteDirectQueryDataSourceRequest";
+const _DDR = "DeleteDomainRequest";
+const _DDRP = "DescribeDryRunProgress";
+const _DDRPR = "DescribeDryRunProgressRequest";
+const _DDRPRe = "DescribeDryRunProgressResponse";
+const _DDRR = "DescribeDomainReplicationRequest";
+const _DDRRe = "DescribeDomainReplicationResponse";
+const _DDRe = "DeleteDomainResponse";
+const _DDRes = "DescribeDomainRequest";
+const _DDResc = "DescribeDomainResponse";
+const _DDRescr = "DescribeDomainsRequest";
+const _DDRescri = "DescribeDomainsResponse";
+const _DDRescrib = "DescribeDomainReplication";
+const _DDS = "DeleteDataSource";
+const _DDSA = "DescribeDataSourceAttachment";
+const _DDSAR = "DescribeDataSourceAttachmentRequest";
+const _DDSARe = "DescribeDataSourceAttachmentResponse";
+const _DDSR = "DeleteDataSourceRequest";
+const _DDSRe = "DeleteDataSourceResponse";
+const _DDSRet = "DetachDataSourceRequest";
+const _DDSReta = "DetachDataSourceResponse";
+const _DDSe = "DetachDataSource";
+const _DDe = "DescribeDomain";
+const _DDes = "DescribeDomains";
+const _DEO = "DomainEndpointOptions";
+const _DEOS = "DomainEndpointOptionsStatus";
+const _DEVHZI = "DomainEndpointV2HostedZoneId";
+const _DF = "DivergentField";
+const _DFE = "DependencyFailureException";
+const _DFL = "DivergentFieldList";
+const _DI = "DiffItems";
+const _DIC = "DomainInformationContainer";
+const _DICR = "DeleteInboundConnectionRequest";
+const _DICRe = "DeleteInboundConnectionResponse";
+const _DICRes = "DescribeInboundConnectionsRequest";
+const _DICResc = "DescribeInboundConnectionsResponse";
+const _DICe = "DeleteInboundConnection";
+const _DICes = "DescribeInboundConnections";
+const _DID = "DescribeInsightDetails";
+const _DIDR = "DescribeInsightDetailsRequest";
+const _DIDRe = "DescribeInsightDetailsResponse";
+const _DIL = "DivergentItemList";
+const _DILo = "DomainInfoList";
+const _DIR = "DeleteIndexRequest";
+const _DIRe = "DeleteIndexResponse";
+const _DITL = "DescribeInstanceTypeLimits";
+const _DITLR = "DescribeInstanceTypeLimitsRequest";
+const _DITLRe = "DescribeInstanceTypeLimitsResponse";
+const _DIe = "DeleteIndex";
+const _DIi = "DivergentItem";
+const _DIo = "DomainInfo";
+const _DIom = "DomainId";
+const _DM = "DedicatedMaster";
+const _DMC = "DedicatedMasterCount";
+const _DMD = "DomainMaintenanceDetails";
+const _DME = "DedicatedMasterEnabled";
+const _DML = "DomainMaintenanceList";
+const _DMT = "DedicatedMasterType";
+const _DMo = "DomainMaintenances";
+const _DN = "DomainName";
+const _DNC = "DataNodeCount";
+const _DNS = "DomainNodesStatus";
+const _DNSL = "DomainNodesStatusList";
+const _DNi = "DisplayName";
+const _DNo = "DomainNames";
+const _DOC = "DeleteOutboundConnection";
+const _DOCR = "DeleteOutboundConnectionRequest";
+const _DOCRe = "DeleteOutboundConnectionResponse";
+const _DOCRes = "DescribeOutboundConnectionsRequest";
+const _DOCResc = "DescribeOutboundConnectionsResponse";
+const _DOCe = "DescribeOutboundConnections";
+const _DOE = "DisabledOperationException";
+const _DP = "DeletePackage";
+const _DPD = "DomainPackageDetails";
+const _DPDL = "DomainPackageDetailsList";
+const _DPF = "DescribePackagesFilter";
+const _DPFL = "DescribePackagesFilterList";
+const _DPR = "DeletePackageRequest";
+const _DPRe = "DeletePackageResponse";
+const _DPRes = "DescribePackagesRequest";
+const _DPResc = "DescribePackagesResponse";
+const _DPRi = "DissociatePackageRequest";
+const _DPRis = "DissociatePackageResponse";
+const _DPRiss = "DissociatePackagesRequest";
+const _DPRisso = "DissociatePackagesResponse";
+const _DPS = "DomainPackageStatus";
+const _DPSo = "DomainProcessingStatus";
+const _DPe = "DescribePackages";
+const _DPi = "DissociatePackage";
+const _DPis = "DissociatePackages";
+const _DQDS = "DirectQueryDataSource";
+const _DQDSL = "DirectQueryDataSourceList";
+const _DQDST = "DirectQueryDataSourceType";
+const _DQDSi = "DirectQueryDataSources";
+const _DR = "DryRun";
+const _DRC = "DryRunConfig";
+const _DRI = "DryRunId";
+const _DRIO = "DescribeReservedInstanceOfferings";
+const _DRIOR = "DescribeReservedInstanceOfferingsRequest";
+const _DRIORe = "DescribeReservedInstanceOfferingsResponse";
+const _DRIR = "DescribeReservedInstancesRequest";
+const _DRIRe = "DescribeReservedInstancesResponse";
+const _DRIe = "DescribeReservedInstances";
+const _DRM = "DryRunMode";
+const _DRPS = "DryRunProgressStatus";
+const _DRR = "DryRunResults";
+const _DRS = "DryRunStatus";
+const _DS = "DesiredState";
+const _DSA = "DataSourceArn";
+const _DSAP = "DataSourceAccessPolicy";
+const _DSAS = "DataSourceAttachmentSummary";
+const _DSASL = "DataSourceAttachmentSummaryList";
+const _DSD = "DataSourceDetails";
+const _DSL = "DomainStatusList";
+const _DSLa = "DataSourceList";
+const _DSN = "DataSourceName";
+const _DSO = "DeploymentStrategyOptions";
+const _DSOO = "DeploymentStrategyOverrideOptions";
+const _DSOS = "DeploymentStrategyOptionsStatus";
+const _DST = "DataSourceType";
+const _DSTe = "DesiredStartTime";
+const _DSa = "DataSource";
+const _DSat = "DataSources";
+const _DSe = "DeploymentStrategy";
+const _DSo = "DomainStatus";
+const _DSom = "DomainState";
+const _DT = "DeploymentType";
+const _DVE = "DeleteVpcEndpoint";
+const _DVER = "DeleteVpcEndpointRequest";
+const _DVERe = "DeleteVpcEndpointResponse";
+const _DVERes = "DescribeVpcEndpointsRequest";
+const _DVEResc = "DescribeVpcEndpointsResponse";
+const _DVEe = "DescribeVpcEndpoints";
+const _Da = "Date";
+const _De = "Deleted";
+const _Di = "Diverged";
+const _Du = "Duration";
+const _E = "Enabled";
+const _EAPIA = "EnabledAPIAccess";
+const _EARO = "EncryptionAtRestOptions";
+const _EAROS = "EncryptionAtRestOptionsStatus";
+const _EBSE = "EBSEnabled";
+const _EBSO = "EBSOptions";
+const _EBSOS = "EBSOptionsStatus";
+const _EC = "ErrorCode";
+const _ED = "ErrorDetails";
+const _EE = "EncryptionEnabled";
+const _EEg = "EgressEnabled";
+const _EHTTPS = "EnforceHTTPS";
+const _EI = "EnvironmentInformation";
+const _EIL = "EnvironmentInfoList";
+const _EIn = "EnvironmentInfo";
+const _EInt = "EntityId";
+const _EM = "ErrorMessage";
+const _EMS = "EngineModeStatus";
+const _EMn = "EngineMode";
+const _EMnc = "EncryptionMode";
+const _EO = "ExportOptions";
+const _ET = "EndTime";
+const _ETn = "EngineType";
+const _ETr = "ErrorType";
+const _EV = "EngineVersion";
+const _EVn = "EndpointV2";
+const _En = "Endpoint";
+const _End = "Endpoints";
+const _Ent = "Entity";
+const _F = "Filters";
+const _FL = "FilterList";
+const _FP = "FixedPrice";
+const _FR = "FailoverReplication";
+const _FRR = "FailoverReplicationRequest";
+const _FRRa = "FailoverReplicationResponse";
+const _FT = "FeedbackText";
+const _Fi = "Fields";
+const _Fil = "Filter";
+const _Fr = "From";
+const _GA = "GetApplication";
+const _GAR = "GetApplicationRequest";
+const _GARe = "GetApplicationResponse";
+const _GC = "GetCapability";
+const _GCR = "GetCapabilityRequest";
+const _GCRe = "GetCapabilityResponse";
+const _GCV = "GetCompatibleVersions";
+const _GCVR = "GetCompatibleVersionsRequest";
+const _GCVRe = "GetCompatibleVersionsResponse";
+const _GDAS = "GetDefaultApplicationSetting";
+const _GDASR = "GetDefaultApplicationSettingRequest";
+const _GDASRe = "GetDefaultApplicationSettingResponse";
+const _GDMS = "GetDomainMaintenanceStatus";
+const _GDMSR = "GetDomainMaintenanceStatusRequest";
+const _GDMSRe = "GetDomainMaintenanceStatusResponse";
+const _GDQDS = "GetDirectQueryDataSource";
+const _GDQDSR = "GetDirectQueryDataSourceRequest";
+const _GDQDSRe = "GetDirectQueryDataSourceResponse";
+const _GDS = "GetDataSource";
+const _GDSR = "GetDataSourceRequest";
+const _GDSRe = "GetDataSourceResponse";
+const _GI = "GetIndex";
+const _GIR = "GetIndexRequest";
+const _GIRe = "GetIndexResponse";
+const _GM = "GetMigration";
+const _GMR = "GetMigrationRequest";
+const _GMRe = "GetMigrationResponse";
+const _GPVH = "GetPackageVersionHistory";
+const _GPVHR = "GetPackageVersionHistoryRequest";
+const _GPVHRe = "GetPackageVersionHistoryResponse";
+const _GUH = "GetUpgradeHistory";
+const _GUHR = "GetUpgradeHistoryRequest";
+const _GUHRe = "GetUpgradeHistoryResponse";
+const _GUS = "GetUpgradeStatus";
+const _GUSR = "GetUpgradeStatusRequest";
+const _GUSRe = "GetUpgradeStatusResponse";
+const _H = "Hours";
+const _I = "Items";
+const _IAMFO = "IAMFederationOptions";
+const _IAMFOI = "IAMFederationOptionsInput";
+const _IAMFOO = "IAMFederationOptionsOutput";
+const _IB = "InitiatedBy";
+const _IC = "InstanceCount";
+const _ICAARN = "IdentityCenterApplicationARN";
+const _ICIARN = "IdentityCenterInstanceARN";
+const _ICIR = "IdentityCenterInstanceRegion";
+const _ICL = "InstanceCountLimits";
+const _ICO = "IdentityCenterOptions";
+const _ICOI = "IdentityCenterOptionsInput";
+const _ICOS = "IdentityCenterOptionsStatus";
+const _ICS = "InboundConnectionStatus";
+const _ICn = "InboundConnection";
+const _ICnb = "InboundConnections";
+const _IE = "InternalException";
+const _IEn = "InsightEntity";
+const _IEs = "IsExperimental";
+const _IF = "InsightField";
+const _IFE = "InsightFeedbackEntity";
+const _IFL = "InsightFieldList";
+const _IFR = "InsightFeedbackRequest";
+const _IFRn = "InsightFeedbackResponse";
+const _IFn = "InsightFeedback";
+const _II = "InsightId";
+const _IICO = "IamIdentityCenterOptions";
+const _IICOI = "IamIdentityCenterOptionsInput";
+const _IL = "InstanceLimits";
+const _ILn = "InsightList";
+const _IN = "IndexName";
+const _IPAT = "IPAddressType";
+const _IPATS = "IPAddressTypeStatus";
+const _IPI = "IdentityPoolId";
+const _IPTE = "InvalidPaginationTokenException";
+const _IR = "InstanceRole";
+const _IS = "InSync";
+const _ISI = "IdentityStoreId";
+const _ISn = "IndexSchema";
+const _IT = "InstanceType";
+const _ITD = "InstanceTypeDetails";
+const _ITDL = "InstanceTypeDetailsList";
+const _ITE = "InvalidTypeException";
+const _ITR = "InsightTimeRange";
+const _IUDE = "InternalUserDatabaseEnabled";
+const _Id = "Idp";
+const _Id_ = "Id";
+const _In = "Insight";
+const _Ins = "Insights";
+const _Io = "Iops";
+const _Is = "Issues";
+const _JU = "JwksUrl";
+const _JWTO = "JWTOptions";
+const _JWTOI = "JWTOptionsInput";
+const _JWTOO = "JWTOptionsOutput";
+const _K = "Key";
+const _KARA = "KeyAccessRoleArn";
+const _KKI = "KmsKeyId";
+const _KKIm = "KmsKeyIdentifier";
+const _KSAE = "KeyStoreAccessEnabled";
+const _KSAO = "KeyStoreAccessOption";
+const _L = "Limits";
+const _LA = "ListApplications";
+const _LAR = "ListApplicationsRequest";
+const _LARi = "ListApplicationsResponse";
+const _LBR = "LimitsByRole";
+const _LDFP = "ListDomainsForPackage";
+const _LDFPR = "ListDomainsForPackageRequest";
+const _LDFPRi = "ListDomainsForPackageResponse";
+const _LDI = "LocalDomainInfo";
+const _LDM = "ListDomainMaintenances";
+const _LDMR = "ListDomainMaintenancesRequest";
+const _LDMRi = "ListDomainMaintenancesResponse";
+const _LDN = "ListDomainNames";
+const _LDNR = "ListDomainNamesRequest";
+const _LDNRi = "ListDomainNamesResponse";
+const _LDQDS = "ListDirectQueryDataSources";
+const _LDQDSR = "ListDirectQueryDataSourcesRequest";
+const _LDQDSRi = "ListDirectQueryDataSourcesResponse";
+const _LDRC = "LoadDryRunConfig";
+const _LDS = "ListDataSources";
+const _LDSA = "ListDataSourceAttachments";
+const _LDSAR = "ListDataSourceAttachmentsRequest";
+const _LDSARi = "ListDataSourceAttachmentsResponse";
+const _LDSR = "ListDataSourcesRequest";
+const _LDSRi = "ListDataSourcesResponse";
+const _LEE = "LimitExceededException";
+const _LF = "LicenseFilepath";
+const _LI = "ListInsights";
+const _LIR = "ListInsightsRequest";
+const _LIRi = "ListInsightsResponse";
+const _LITD = "ListInstanceTypeDetails";
+const _LITDR = "ListInstanceTypeDetailsRequest";
+const _LITDRi = "ListInstanceTypeDetailsResponse";
+const _LM = "ListMigrations";
+const _LMR = "ListMigrationsRequest";
+const _LMRi = "ListMigrationsResponse";
+const _LN = "LimitName";
+const _LPFD = "ListPackagesForDomain";
+const _LPFDR = "ListPackagesForDomainRequest";
+const _LPFDRi = "ListPackagesForDomainResponse";
+const _LPO = "LogPublishingOptions";
+const _LPOS = "LogPublishingOptionsStatus";
+const _LPOo = "LogPublishingOption";
+const _LR = "LicenseRequirement";
+const _LSA = "ListScheduledActions";
+const _LSAR = "ListScheduledActionsRequest";
+const _LSARi = "ListScheduledActionsResponse";
+const _LT = "ListTags";
+const _LTR = "ListTagsRequest";
+const _LTRi = "ListTagsResponse";
+const _LU = "LastUpdated";
+const _LUA = "LastUpdatedAt";
+const _LUT = "LastUpdatedTime";
+const _LV = "LimitValues";
+const _LVE = "ListVpcEndpoints";
+const _LVEA = "ListVpcEndpointAccess";
+const _LVEAR = "ListVpcEndpointAccessRequest";
+const _LVEARi = "ListVpcEndpointAccessResponse";
+const _LVEFD = "ListVpcEndpointsForDomain";
+const _LVEFDR = "ListVpcEndpointsForDomainRequest";
+const _LVEFDRi = "ListVpcEndpointsForDomainResponse";
+const _LVER = "ListVpcEndpointsRequest";
+const _LVERi = "ListVpcEndpointsResponse";
+const _LVR = "ListVersionsRequest";
+const _LVRi = "ListVersionsResponse";
+const _LVi = "ListVersions";
+const _M = "Message";
+const _MAZWSE = "MultiAZWithStandbyEnabled";
+const _MBR = "MasterBackendRole";
+const _MC = "MetadataContent";
+const _ME = "MigrationError";
+const _MENC = "MasterEligibleNodeCount";
+const _MI = "MaintenanceId";
+const _MIC = "MinimumInstanceCount";
+const _MICa = "MaximumInstanceCount";
+const _MN = "MasterNode";
+const _MO = "MigrationOptions";
+const _MP = "ModifyingProperties";
+const _MPL = "ModifyingPropertiesList";
+const _MR = "MaxResults";
+const _MS = "MaintenanceSchedules";
+const _MSL = "MigrationSummaryList";
+const _MSi = "MigrationSource";
+const _MSig = "MigrationSummary";
+const _MUARN = "MasterUserARN";
+const _MUN = "MasterUserName";
+const _MUO = "MasterUserOptions";
+const _MUP = "MasterUserPassword";
+const _MW = "MigrationWorkspace";
+const _Ma = "Mandatory";
+const _Mi = "Minutes";
+const _N = "Name";
+const _NC = "NodeConfig";
+const _NI = "NodeId";
+const _NLQGO = "NaturalLanguageQueryGenerationOptions";
+const _NLQGOI = "NaturalLanguageQueryGenerationOptionsInput";
+const _NLQGOO = "NaturalLanguageQueryGenerationOptionsOutput";
+const _NO = "NodeOptions";
+const _NOL = "NodeOptionsList";
+const _NOo = "NodeOption";
+const _NS = "NodeStatus";
+const _NT = "NextToken";
+const _NTNEO = "NodeToNodeEncryptionOptions";
+const _NTNEOS = "NodeToNodeEncryptionOptionsStatus";
+const _NTo = "NodeType";
+const _NV = "NewVersion";
+const _O = "Options";
+const _OC = "OutboundConnection";
+const _OCS = "OutboundConnectionStatus";
+const _OCu = "OutboundConnections";
+const _OD = "OptionalDeployment";
+const _OI = "OwnerId";
+const _OPW = "OffPeakWindow";
+const _OPWO = "OffPeakWindowOptions";
+const _OPWOS = "OffPeakWindowOptionsStatus";
+const _OS = "OptionStatus";
+const _OSA = "OpenSearchArns";
+const _Op = "Operation";
+const _P = "Password";
+const _PAC = "PackageAssociationConfiguration";
+const _PC = "PackageConfiguration";
+const _PCO = "PerformCheckOnly";
+const _PD = "PendingDeletion";
+const _PDA = "PeerDomainArn";
+const _PDAS = "PutDefaultApplicationSetting";
+const _PDASR = "PutDefaultApplicationSettingRequest";
+const _PDASRu = "PutDefaultApplicationSettingResponse";
+const _PDFA = "PackageDetailsForAssociation";
+const _PDFAL = "PackageDetailsForAssociationList";
+const _PDL = "PackageDetailsList";
+const _PDQDS = "PrometheusDirectQueryDataSource";
+const _PDa = "PackageDescription";
+const _PDac = "PackageDetails";
+const _PEO = "PackageEncryptionOptions";
+const _PID = "PackageID";
+const _PK = "PublicKey";
+const _PL = "PackageList";
+const _PN = "PropertyName";
+const _PNa = "PackageName";
+const _PO = "PackageOwner";
+const _POa = "PaymentOption";
+const _PP = "PendingProperties";
+const _PPIDL = "PrerequisitePackageIDList";
+const _PPl = "PluginProperties";
+const _PPr = "ProgressPercent";
+const _PR = "PeerRole";
+const _PRIO = "PurchaseReservedInstanceOffering";
+const _PRIOR = "PurchaseReservedInstanceOfferingRequest";
+const _PRIORu = "PurchaseReservedInstanceOfferingResponse";
+const _PRTP = "PrimaryReadTrafficPercent";
+const _PS = "PackageSource";
+const _PSa = "PackageStatus";
+const _PT = "PrincipalType";
+const _PTa = "PackageType";
+const _PUL = "PackageUserList";
+const _PV = "PackageVersion";
+const _PVH = "PackageVersionHistory";
+const _PVHL = "PackageVersionHistoryList";
+const _PVO = "PackageVendingOptions";
+const _PVe = "PendingValue";
+const _Pa = "Path";
+const _Pe = "Peers";
+const _Po = "Policy";
+const _Pr = "Principal";
+const _Pri = "Priority";
+const _Pro = "Processing";
+const _Prom = "Prometheus";
+const _R = "Region";
+const _RA = "RoleArn";
+const _RAEE = "ResourceAlreadyExistsException";
+const _RAZ = "RetrieveAZs";
+const _RAe = "RetentionAction";
+const _RAo = "RollbackAvailable";
+const _RC = "RecurringCharge";
+const _RCA = "RecurringChargeAmount";
+const _RCF = "RecurringChargeFrequency";
+const _RCL = "RecurringChargeList";
+const _RCR = "RegisterCapabilityRequest";
+const _RCRe = "RegisterCapabilityResponse";
+const _RCe = "RecurringCharges";
+const _RCeg = "RegisterCapability";
+const _RDI = "RemoteDomainInfo";
+const _RI = "ReservedInstances";
+const _RIC = "RejectInboundConnection";
+const _RICR = "RejectInboundConnectionRequest";
+const _RICRe = "RejectInboundConnectionResponse";
+const _RIH = "RetentionInHours";
+const _RII = "ReservedInstanceId";
+const _RIL = "ReservedInstanceList";
+const _RIO = "ReservedInstanceOfferings";
+const _RIOI = "ReservedInstanceOfferingId";
+const _RIOL = "ReservedInstanceOfferingList";
+const _RIOe = "ReservedInstanceOffering";
+const _RIe = "ReservedInstance";
+const _RK = "RolesKey";
+const _RN = "ReservationName";
+const _RNFE = "ResourceNotFoundException";
+const _RO = "RetentionOptions";
+const _ROD = "RollbackOnDisable";
+const _RP = "ReferencePath";
+const _RPL = "ReplicationPeerList";
+const _RPe = "ReplicationPeer";
+const _RRFCU = "RequiresRestartForConfigurationUpdate";
+const _RRP = "RemoveReplicationPeer";
+const _RRPR = "RemoveReplicationPeerRequest";
+const _RRPRe = "RemoveReplicationPeerResponse";
+const _RSSO = "RollbackServiceSoftwareOptions";
+const _RSSU = "RollbackServiceSoftwareUpdate";
+const _RSSUR = "RollbackServiceSoftwareUpdateRequest";
+const _RSSURo = "RollbackServiceSoftwareUpdateResponse";
+const _RT = "RemoveTags";
+const _RTR = "RemoveTagsRequest";
+const _RVEA = "RevokeVpcEndpointAccess";
+const _RVEAR = "RevokeVpcEndpointAccessRequest";
+const _RVEARe = "RevokeVpcEndpointAccessResponse";
+const _Ro = "Role";
+const _S = "Status";
+const _SA = "StartAt";
+const _SAL = "ScheduledActionsList";
+const _SAMLI = "SAMLIdp";
+const _SAMLO = "SAMLOptions";
+const _SAMLOI = "SAMLOptionsInput";
+const _SAMLOO = "SAMLOptionsOutput";
+const _SATD = "ScheduledAutoTuneDetails";
+const _SAc = "ScheduledAction";
+const _SAch = "ScheduledActions";
+const _SAche = "ScheduleAt";
+const _SB = "ScheduledBy";
+const _SBAZC = "StandByAvailabilityZoneCount";
+const _SBN = "S3BucketName";
+const _SC = "StatusCode";
+const _SDA = "SourceDomainArn";
+const _SDM = "StartDomainMaintenance";
+const _SDMR = "StartDomainMaintenanceRequest";
+const _SDMRt = "StartDomainMaintenanceResponse";
+const _SGDC = "S3GlueDataCatalog";
+const _SGI = "SecurityGroupIds";
+const _SHC = "ShowHtmlContent";
+const _SI = "SubnetIds";
+const _SK = "SubjectKey";
+const _SKe = "S3Key";
+const _SL = "StepsList";
+const _SLDQDS = "SecurityLakeDirectQueryDataSource";
+const _SLe = "SecurityLake";
+const _SM = "StatusMessage";
+const _SMR = "StartMigrationRequest";
+const _SMRt = "StartMigrationResponse";
+const _SMt = "StartMigration";
+const _SNAE = "SlotNotAvailableException";
+const _SO = "ServiceOptions";
+const _SOI = "SavedObjectIdentifier";
+const _SOIL = "SavedObjectIdentifierList";
+const _SOS = "SnapshotOptionsStatus";
+const _SOn = "SnapshotOptions";
+const _SOo = "SourceOnly";
+const _SOor = "SortOrder";
+const _SQEE = "ServiceQuotaExceededException";
+const _SR = "SupportedRegions";
+const _SRR = "SwitchoverReplicationRequest";
+const _SRRw = "SwitchoverReplicationResponse";
+const _SRw = "SwitchoverReplication";
+const _SS = "SlotSuggestions";
+const _SSO = "ServiceSoftwareOptions";
+const _SSSU = "StartServiceSoftwareUpdate";
+const _SSSUR = "StartServiceSoftwareUpdateRequest";
+const _SSSURt = "StartServiceSoftwareUpdateResponse";
+const _SSTN = "StorageSubTypeName";
+const _SSt = "StorageSize";
+const _SSte = "StepStatus";
+const _ST = "StartTime";
+const _STL = "StorageTypeLimits";
+const _STLL = "StorageTypeLimitList";
+const _STLt = "StorageTypeLimit";
+const _STLto = "StorageTypeList";
+const _STM = "SessionTimeoutMinutes";
+const _STN = "StorageTypeName";
+const _STc = "ScheduledTime";
+const _STt = "StorageType";
+const _STta = "StartTimestamp";
+const _STto = "StorageTypes";
+const _SU = "SkipUnavailable";
+const _SUO = "SoftwareUpdateOptions";
+const _SUOS = "SoftwareUpdateOptionsStatus";
+const _SV = "SourceVersion";
+const _SVA = "ServerlessVectorAcceleration";
+const _SVE = "S3VectorsEngine";
+const _SVT = "StorageVolumeType";
+const _SVo = "SourceValue";
+const _Se = "Service";
+const _Sev = "Severity";
+const _St = "State";
+const _Str = "Strategy";
+const _T = "Truncated";
+const _TDA = "TargetDomainArn";
+const _TE = "ThrottlingException";
+const _TK = "TagKeys";
+const _TL = "TagList";
+const _TLSSP = "TLSSecurityPolicy";
+const _TNOS = "TotalNumberOfStages";
+const _TO = "TargetOnly";
+const _TP = "TrafficPercents";
+const _TR = "TimeRange";
+const _TS = "TotalShards";
+const _TSO = "TrafficSplitOptions";
+const _TSRO = "TrafficSplitRequestOptions";
+const _TSr = "TrafficSplit";
+const _TUAS = "TotalUnAssignedShards";
+const _TV = "TargetVersions";
+const _TVa = "TargetValue";
+const _TVar = "TargetVersion";
+const _Ta = "Target";
+const _Tag = "Tag";
+const _Th = "Throughput";
+const _Thu = "Thumbs";
+const _To = "To";
+const _Ty = "Type";
+const _U = "Username";
+const _UA = "UpdatedAt";
+const _UAR = "UpdateApplicationRequest";
+const _UARp = "UpdateApplicationResponse";
+const _UAp = "UpdateAvailable";
+const _UApd = "UpdateApplication";
+const _UC = "UseCase";
+const _UCR = "UpdateCloneRequest";
+const _UCRp = "UpdateCloneResponse";
+const _UCS = "UseCaseStatus";
+const _UCp = "UpdateClone";
+const _UD = "UpdateDate";
+const _UDC = "UpdateDomainConfig";
+const _UDCR = "UpdateDomainConfigRequest";
+const _UDCRp = "UpdateDomainConfigResponse";
+const _UDQDS = "UpdateDirectQueryDataSource";
+const _UDQDSR = "UpdateDirectQueryDataSourceRequest";
+const _UDQDSRp = "UpdateDirectQueryDataSourceResponse";
+const _UDR = "UpgradeDomainRequest";
+const _UDRp = "UpgradeDomainResponse";
+const _UDS = "UpdateDataSource";
+const _UDSR = "UpdateDataSourceRequest";
+const _UDSRp = "UpdateDataSourceResponse";
+const _UDp = "UpgradeDomain";
+const _UH = "UpgradeHistories";
+const _UHL = "UpgradeHistoryList";
+const _UHp = "UpgradeHistory";
+const _UI = "UpgradeId";
+const _UIR = "UpdateIndexRequest";
+const _UIRp = "UpdateIndexResponse";
+const _UIp = "UpdateIndex";
+const _ULSSFBG = "UseLatestServiceSoftwareForBlueGreen";
+const _UN = "UpgradeName";
+const _UOPW = "UseOffPeakWindow";
+const _UP = "UpgradeProcessing";
+const _UPI = "UserPoolId";
+const _UPR = "UpdatePackageRequest";
+const _UPRp = "UpdatePackageResponse";
+const _UPS = "UpdatePackageScope";
+const _UPSR = "UpdatePackageScopeRequest";
+const _UPSRp = "UpdatePackageScopeResponse";
+const _UPp = "UpdatePackage";
+const _UPs = "UsagePrice";
+const _US = "UpgradeStep";
+const _USA = "UpdateScheduledAction";
+const _USAR = "UpdateScheduledActionRequest";
+const _USARp = "UpdateScheduledActionResponse";
+const _USI = "UpgradeStepItem";
+const _USIB = "UncompressedSizeInBytes";
+const _USL = "UpgradeStepsList";
+const _USS = "UpgradeStepStatus";
+const _USp = "UpdateStatus";
+const _USpg = "UpgradeStatus";
+const _UT = "UpdateTime";
+const _UV = "UpdateVersion";
+const _UVE = "UpdateVpcEndpoint";
+const _UVER = "UpdateVpcEndpointRequest";
+const _UVERp = "UpdateVpcEndpointResponse";
+const _Un = "Unit";
+const _V = "Value";
+const _VE = "ValidationException";
+const _VEE = "VpcEndpointErrors";
+const _VEEL = "VpcEndpointErrorList";
+const _VEEp = "VpcEndpointError";
+const _VEI = "VpcEndpointId";
+const _VEIp = "VpcEndpointIds";
+const _VEO = "VpcEndpointOwner";
+const _VES = "VpcEndpointSummary";
+const _VESL = "VpcEndpointSummaryList";
+const _VEe = "VendingEnabled";
+const _VEp = "VpcEndpoint";
+const _VEpc = "VpcEndpoints";
+const _VF = "ValidationFailures";
+const _VFa = "ValidationFailure";
+const _VO = "VpcOptions";
+const _VPCDI = "VPCDerivedInfo";
+const _VPCDIS = "VPCDerivedInfoStatus";
+const _VPCI = "VPCId";
+const _VPCO = "VPCOptions";
+const _VS = "VolumeSize";
+const _VSe = "VersionStatus";
+const _VT = "VolumeType";
+const _VTa = "ValueType";
+const _Va = "Values";
+const _Ve = "Versions";
+const _Ver = "Version";
+const _WA = "WorkspaceArn";
+const _WC = "WarmCount";
+const _WCI = "WorkspaceConfigurationInput";
+const _WE = "WarmEnabled";
+const _WNC = "WarmNodeCount";
+const _WST = "WindowStartTime";
+const _WT = "WarmType";
+const _ZAC = "ZoneAwarenessConfig";
+const _ZAE = "ZoneAwarenessEnabled";
+const _ZS = "ZoneStatus";
+const _a = "arn";
+const _aA = "applicationArn";
+const _aC = "appConfigs";
+const _aCi = "aiConfig";
+const _aI = "attachmentId";
+const _aIp = "applicationId";
+const _ac = "action";
+const _at = "attachments";
+const _c = "client";
+const _cA = "createdAt";
+const _cC = "capabilityConfig";
+const _cN = "capabilityName";
+const _cR = "conflictResolution";
+const _cT = "clientToken";
+const _cW = "createWorkspace";
+const _ch = "changeid";
+const _co = "code";
+const _d = "details";
+const _dA = "datasourceArn";
+const _dN = "domainName";
+const _dRI = "dryRunId";
+const _dS = "dataSources";
+const _dSA = "dataSourceArn";
+const _dSD = "dataSourceDescription";
+const _e = "error";
+const _eC = "exportedCount";
+const _eO = "exportOptions";
+const _eT = "engineType";
+const _en = "endpoint";
+const _ena = "enabled";
+const _f = "failures";
+const _h = "http";
+const _hE = "httpError";
+const _hQ = "httpQuery";
+const _i = "id";
+const _iC = "importedCount";
+const _iICAA = "iamIdentityCenterApplicationArn";
+const _iICIA = "iamIdentityCenterInstanceArn";
+const _iICO = "iamIdentityCenterOptions";
+const _iRD = "includeReferencesDeep";
+const _iRFDSA = "iamRoleForDataSourceArn";
+const _iRFICAA = "iamRoleForIdentityCenterApplicationArn";
+const _iT = "instanceType";
+const _k = "key";
+const _kKA = "kmsKeyArn";
+const _lDRC = "loadDryRunConfig";
+const _lUA = "lastUpdatedAt";
+const _m = "message";
+const _mI = "maintenanceId";
+const _mIi = "migrationId";
+const _mO = "migrationOptions";
+const _mR = "maxResults";
+const _mi = "migrations";
+const _n = "name";
+const _nT = "nextToken";
+const _ne = "nexttoken";
+const _o = "objects";
+const _oI = "offeringId";
+const _r = "reason";
+const _rAZ = "retrieveAZs";
+const _rI = "reservationId";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.opensearch";
+const _sAD = "setAsDefault";
+const _se = "server";
+const _so = "source";
+const _st = "status";
+const _sta = "statuses";
+const _t = "types";
+const _tL = "tagList";
+const _ty = "type";
+const _uA = "updatedAt";
+const _v = "value";
+const _w = "workspace";
+const _wC = "workspaceConfiguration";
+const _wI = "workspaceId";
+const _wT = "workspaceType";
+const _xN = "xmlName";
+const n0 = "com.amazonaws.opensearch";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  BaseException,
+  ConflictException,
+  DependencyFailureException,
+  DisabledOperationException,
+  InternalException,
+  InvalidPaginationTokenException,
+  InvalidTypeException,
+  LimitExceededException,
+  ResourceAlreadyExistsException,
+  ResourceNotFoundException,
+  ServiceQuotaExceededException,
+  SlotNotAvailableException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { OpenSearchServiceException } from "../models/OpenSearchServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var OpenSearchServiceException$: StaticErrorSchema = [-3, _s, "OpenSearchServiceException", 0, [], []];
+_s_registry.registerError(OpenSearchServiceException$, OpenSearchServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var BaseException$: StaticErrorSchema = [-3, n0, _BE,
+  { [_e]: _c },
+  [_m],
+  [0]
+];
+n0_registry.registerError(BaseException$, BaseException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var DependencyFailureException$: StaticErrorSchema = [-3, n0, _DFE,
+  { [_e]: _c, [_hE]: 424 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(DependencyFailureException$, DependencyFailureException);
+export var DisabledOperationException$: StaticErrorSchema = [-3, n0, _DOE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(DisabledOperationException$, DisabledOperationException);
+export var InternalException$: StaticErrorSchema = [-3, n0, _IE,
+  { [_e]: _se, [_hE]: 500 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InternalException$, InternalException);
+export var InvalidPaginationTokenException$: StaticErrorSchema = [-3, n0, _IPTE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidPaginationTokenException$, InvalidPaginationTokenException);
+export var InvalidTypeException$: StaticErrorSchema = [-3, n0, _ITE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidTypeException$, InvalidTypeException);
+export var LimitExceededException$: StaticErrorSchema = [-3, n0, _LEE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(LimitExceededException$, LimitExceededException);
+export var ResourceAlreadyExistsException$: StaticErrorSchema = [-3, n0, _RAEE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ResourceAlreadyExistsException$, ResourceAlreadyExistsException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 402 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var SlotNotAvailableException$: StaticErrorSchema = [-3, n0, _SNAE,
+  { [_e]: _c, [_hE]: 409 },
+  [_SS, _m],
+  [64 | 1, 0]
+];
+n0_registry.registerError(SlotNotAvailableException$, SlotNotAvailableException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var Password: StaticSimpleSchema = [0, n0, _P, 8, 0];
+var Username: StaticSimpleSchema = [0, n0, _U, 8, 0];
+export var AcceptInboundConnectionRequest$: StaticStructureSchema = [3, n0, _AICR,
+  0,
+  [_CI],
+  [[0, 1]], 1
+];
+export var AcceptInboundConnectionResponse$: StaticStructureSchema = [3, n0, _AICRc,
+  0,
+  [_C],
+  [() => InboundConnection$]
+];
+export var AccessPoliciesStatus$: StaticStructureSchema = [3, n0, _APS,
+  0,
+  [_O, _S],
+  [0, () => OptionStatus$], 2
+];
+export var AddDataSourceRequest$: StaticStructureSchema = [3, n0, _ADSR,
+  0,
+  [_DN, _N, _DST, _D],
+  [[0, 1], 0, () => DataSourceType$, 0], 3
+];
+export var AddDataSourceResponse$: StaticStructureSchema = [3, n0, _ADSRd,
+  0,
+  [_M],
+  [0]
+];
+export var AddDirectQueryDataSourceRequest$: StaticStructureSchema = [3, n0, _ADQDSR,
+  0,
+  [_DSN, _DST, _D, _OSA, _DSAP, _TL],
+  [0, () => DirectQueryDataSourceType$, 0, 64 | 0, 0, () => TagList], 2
+];
+export var AddDirectQueryDataSourceResponse$: StaticStructureSchema = [3, n0, _ADQDSRd,
+  0,
+  [_DSA],
+  [0]
+];
+export var AdditionalLimit$: StaticStructureSchema = [3, n0, _AL,
+  0,
+  [_LN, _LV],
+  [0, 64 | 0]
+];
+export var AddReplicationPeerRequest$: StaticStructureSchema = [3, n0, _ARPR,
+  0,
+  [_DN, _PDA, _DR],
+  [[0, 1], 0, 2], 2
+];
+export var AddReplicationPeerResponse$: StaticStructureSchema = [3, n0, _ARPRd,
+  0,
+  [_DA, _S],
+  [0, 0]
+];
+export var AddTagsRequest$: StaticStructureSchema = [3, n0, _ATR,
+  0,
+  [_ARN, _TL],
+  [0, () => TagList], 2
+];
+export var AdvancedOptionsStatus$: StaticStructureSchema = [3, n0, _AOS,
+  0,
+  [_O, _S],
+  [128 | 0, () => OptionStatus$], 2
+];
+export var AdvancedSecurityOptions$: StaticStructureSchema = [3, n0, _ASO,
+  0,
+  [_E, _IUDE, _SAMLO, _JWTO, _IAMFO, _AADD, _AAE],
+  [2, 2, () => SAMLOptionsOutput$, () => JWTOptionsOutput$, () => IAMFederationOptionsOutput$, 4, 2]
+];
+export var AdvancedSecurityOptionsInput$: StaticStructureSchema = [3, n0, _ASOI,
+  0,
+  [_E, _IUDE, _MUO, _SAMLO, _JWTO, _IAMFO, _AAE],
+  [2, 2, [() => MasterUserOptions$, 0], [() => SAMLOptionsInput$, 0], () => JWTOptionsInput$, () => IAMFederationOptionsInput$, 2]
+];
+export var AdvancedSecurityOptionsStatus$: StaticStructureSchema = [3, n0, _ASOS,
+  0,
+  [_O, _S],
+  [() => AdvancedSecurityOptions$, () => OptionStatus$], 2
+];
+export var AIConfig$: StaticStructureSchema = [3, n0, _AIC,
+  0,
+  [],
+  []
+];
+export var AIMLOptionsInput$: StaticStructureSchema = [3, n0, _AIMLOI,
+  0,
+  [_NLQGO, _SVE, _SVA],
+  [() => NaturalLanguageQueryGenerationOptionsInput$, () => S3VectorsEngine$, () => ServerlessVectorAcceleration$]
+];
+export var AIMLOptionsOutput$: StaticStructureSchema = [3, n0, _AIMLOO,
+  0,
+  [_NLQGO, _SVE, _SVA],
+  [() => NaturalLanguageQueryGenerationOptionsOutput$, () => S3VectorsEngine$, () => ServerlessVectorAcceleration$]
+];
+export var AIMLOptionsStatus$: StaticStructureSchema = [3, n0, _AIMLOS,
+  0,
+  [_O, _S],
+  [() => AIMLOptionsOutput$, () => OptionStatus$]
+];
+export var AppConfig$: StaticStructureSchema = [3, n0, _AC,
+  0,
+  [_k, _v],
+  [0, 0]
+];
+export var ApplicationSummary$: StaticStructureSchema = [3, n0, _AS,
+  0,
+  [_i, _a, _n, _en, _st, _cA, _lUA],
+  [0, 0, 0, 0, 0, 4, 4]
+];
+export var AssociatePackageRequest$: StaticStructureSchema = [3, n0, _APR,
+  0,
+  [_PID, _DN, _PPIDL, _ACs],
+  [[0, 1], [0, 1], 64 | 0, () => PackageAssociationConfiguration$], 2
+];
+export var AssociatePackageResponse$: StaticStructureSchema = [3, n0, _APRs,
+  0,
+  [_DPD],
+  [() => DomainPackageDetails$]
+];
+export var AssociatePackagesRequest$: StaticStructureSchema = [3, n0, _APRss,
+  0,
+  [_PL, _DN],
+  [() => PackageDetailsForAssociationList, 0], 2
+];
+export var AssociatePackagesResponse$: StaticStructureSchema = [3, n0, _APRsso,
+  0,
+  [_DPDL],
+  [() => DomainPackageDetailsList]
+];
+export var AttachDataSourceRequest$: StaticStructureSchema = [3, n0, _ADSRt,
+  0,
+  [_i, _dSA, _wI, _wC, _cT],
+  [[0, 1], 0, 0, () => WorkspaceConfigurationInput$, 0], 2
+];
+export var AttachDataSourceResponse$: StaticStructureSchema = [3, n0, _ADSRtt,
+  0,
+  [_aI, _i, _a, _dSA, _st],
+  [0, 0, 0, 0, 0]
+];
+export var AuthorizedPrincipal$: StaticStructureSchema = [3, n0, _AP,
+  0,
+  [_PT, _Pr, _SO],
+  [0, 0, () => ServiceOptions$]
+];
+export var AuthorizeVpcEndpointAccessRequest$: StaticStructureSchema = [3, n0, _AVEAR,
+  0,
+  [_DN, _A, _Se, _SO],
+  [[0, 1], 0, 0, () => ServiceOptions$], 1
+];
+export var AuthorizeVpcEndpointAccessResponse$: StaticStructureSchema = [3, n0, _AVEARu,
+  0,
+  [_AP],
+  [() => AuthorizedPrincipal$], 1
+];
+export var AutomatedSnapshotPauseOptions$: StaticStructureSchema = [3, n0, _ASPO,
+  0,
+  [_E, _ST, _ET, _St],
+  [2, 4, 4, 0], 1
+];
+export var AutomatedSnapshotPauseOptionsStatus$: StaticStructureSchema = [3, n0, _ASPOS,
+  0,
+  [_O, _S],
+  [() => AutomatedSnapshotPauseOptions$, () => OptionStatus$], 2
+];
+export var AutomatedSnapshotPauseRequestOptions$: StaticStructureSchema = [3, n0, _ASPRO,
+  0,
+  [_E, _ST, _ET],
+  [2, 4, 4], 1
+];
+export var AutoTune$: StaticStructureSchema = [3, n0, _AT,
+  0,
+  [_ATT, _ATD],
+  [0, () => AutoTuneDetails$]
+];
+export var AutoTuneDetails$: StaticStructureSchema = [3, n0, _ATD,
+  0,
+  [_SATD],
+  [() => ScheduledAutoTuneDetails$]
+];
+export var AutoTuneMaintenanceSchedule$: StaticStructureSchema = [3, n0, _ATMS,
+  0,
+  [_SA, _Du, _CEFR],
+  [4, () => Duration$, 0]
+];
+export var AutoTuneOptions$: StaticStructureSchema = [3, n0, _ATO,
+  0,
+  [_DS, _ROD, _MS, _UOPW],
+  [0, 0, () => AutoTuneMaintenanceScheduleList, 2]
+];
+export var AutoTuneOptionsInput$: StaticStructureSchema = [3, n0, _ATOI,
+  0,
+  [_DS, _MS, _UOPW],
+  [0, () => AutoTuneMaintenanceScheduleList, 2]
+];
+export var AutoTuneOptionsOutput$: StaticStructureSchema = [3, n0, _ATOO,
+  0,
+  [_St, _EM, _UOPW],
+  [0, 0, 2]
+];
+export var AutoTuneOptionsStatus$: StaticStructureSchema = [3, n0, _ATOS,
+  0,
+  [_O, _S],
+  [() => AutoTuneOptions$, () => AutoTuneStatus$]
+];
+export var AutoTuneStatus$: StaticStructureSchema = [3, n0, _ATS,
+  0,
+  [_CD, _UD, _St, _UV, _EM, _PD],
+  [4, 4, 0, 1, 0, 2], 3
+];
+export var AvailabilityZoneInfo$: StaticStructureSchema = [3, n0, _AZI,
+  0,
+  [_AZN, _ZS, _CDNC, _ADNC, _TS, _TUAS],
+  [0, 0, 0, 0, 0, 0]
+];
+export var AWSDomainInformation$: StaticStructureSchema = [3, n0, _AWSDI,
+  0,
+  [_DN, _OI, _R],
+  [0, 0, 0], 1
+];
+export var CancelDomainConfigChangeRequest$: StaticStructureSchema = [3, n0, _CDCCR,
+  0,
+  [_DN, _DR],
+  [[0, 1], 2], 1
+];
+export var CancelDomainConfigChangeResponse$: StaticStructureSchema = [3, n0, _CDCCRa,
+  0,
+  [_CCI, _CCP, _DR],
+  [64 | 0, () => CancelledChangePropertyList, 2]
+];
+export var CancelledChangeProperty$: StaticStructureSchema = [3, n0, _CCPa,
+  0,
+  [_PN, _CV, _AV],
+  [0, 0, 0]
+];
+export var CancelServiceSoftwareUpdateRequest$: StaticStructureSchema = [3, n0, _CSSUR,
+  0,
+  [_DN],
+  [0], 1
+];
+export var CancelServiceSoftwareUpdateResponse$: StaticStructureSchema = [3, n0, _CSSURa,
+  0,
+  [_SSO],
+  [() => ServiceSoftwareOptions$]
+];
+export var CapabilityFailure$: StaticStructureSchema = [3, n0, _CF,
+  0,
+  [_r, _d],
+  [0, 0]
+];
+export var CategoryDiffResult$: StaticStructureSchema = [3, n0, _CDR,
+  0,
+  [_S, _IS, _SOo, _TO, _Di, _I, _T],
+  [0, 1, 1, 1, 1, () => DiffItems$, 2]
+];
+export var ChangeProgressDetails$: StaticStructureSchema = [3, n0, _CPD,
+  0,
+  [_CIh, _M, _CCS, _IB, _ST, _LUT],
+  [0, 0, 0, 0, 4, 4]
+];
+export var ChangeProgressStage$: StaticStructureSchema = [3, n0, _CPS,
+  0,
+  [_N, _S, _D, _LU],
+  [0, 0, 0, 4]
+];
+export var ChangeProgressStatusDetails$: StaticStructureSchema = [3, n0, _CPSD,
+  0,
+  [_CIh, _ST, _S, _PP, _CP, _TNOS, _CPSh, _LUT, _CCS, _IB, _CBGUD, _VF, _AW],
+  [0, 4, 0, 64 | 0, 64 | 0, 1, () => ChangeProgressStageList, 4, 0, 0, () => ClonedBlueGreenUpgradeDetails$, () => ValidationFailures, 64 | 0]
+];
+export var ClonedBlueGreenOptions$: StaticStructureSchema = [3, n0, _CBGO,
+  0,
+  [_RO],
+  [() => RetentionOptions$]
+];
+export var ClonedBlueGreenScheduledAction$: StaticStructureSchema = [3, n0, _CBGSA,
+  0,
+  [_Ac, _STc],
+  [0, 4]
+];
+export var ClonedBlueGreenUpgradeDetails$: StaticStructureSchema = [3, n0, _CBGUD,
+  0,
+  [_TSr, _SAc, _RIH],
+  [() => TrafficPercents$, () => ClonedBlueGreenScheduledAction$, 1]
+];
+export var CloudWatchDirectQueryDataSource$: StaticStructureSchema = [3, n0, _CWDQDS,
+  0,
+  [_RA],
+  [0], 1
+];
+export var ClusterConfig$: StaticStructureSchema = [3, n0, _CC,
+  0,
+  [_IT, _IC, _DME, _ZAE, _ZAC, _DMT, _DMC, _WE, _WT, _WC, _CSO, _MAZWSE, _NO],
+  [0, 1, 2, 2, () => ZoneAwarenessConfig$, 0, 1, 2, 0, 1, () => ColdStorageOptions$, 2, () => NodeOptionsList]
+];
+export var ClusterConfigStatus$: StaticStructureSchema = [3, n0, _CCSl,
+  0,
+  [_O, _S],
+  [() => ClusterConfig$, () => OptionStatus$], 2
+];
+export var CognitoOptions$: StaticStructureSchema = [3, n0, _CO,
+  0,
+  [_E, _UPI, _IPI, _RA],
+  [2, 0, 0, 0]
+];
+export var CognitoOptionsStatus$: StaticStructureSchema = [3, n0, _COS,
+  0,
+  [_O, _S],
+  [() => CognitoOptions$, () => OptionStatus$], 2
+];
+export var ColdStorageOptions$: StaticStructureSchema = [3, n0, _CSO,
+  0,
+  [_E],
+  [2], 1
+];
+export var CompareDomainConfigurationRequest$: StaticStructureSchema = [3, n0, _CDCR,
+  0,
+  [_SDA, _TDA, _Ca],
+  [0, 0, 64 | 0], 3
+];
+export var CompareDomainConfigurationResponse$: StaticStructureSchema = [3, n0, _CDCRo,
+  0,
+  [_SDA, _TDA, _Ca],
+  [0, 0, () => CompareDomainConfigurationCategoryMap]
+];
+export var CompatibleVersionsMap$: StaticStructureSchema = [3, n0, _CVM,
+  0,
+  [_SV, _TV],
+  [0, 64 | 0]
+];
+export var ConnectionProperties$: StaticStructureSchema = [3, n0, _CPo,
+  0,
+  [_En, _CCSr],
+  [0, () => CrossClusterSearchConnectionProperties$]
+];
+export var CreateApplicationRequest$: StaticStructureSchema = [3, n0, _CAR,
+  0,
+  [_n, _cT, _dS, _iICO, _aC, _tL, _kKA],
+  [0, [0, 4], () => DataSources, () => IamIdentityCenterOptionsInput$, () => AppConfigs, () => TagList, 0], 1
+];
+export var CreateApplicationResponse$: StaticStructureSchema = [3, n0, _CARr,
+  0,
+  [_i, _n, _a, _dS, _iICO, _aC, _tL, _cA, _kKA],
+  [0, 0, 0, () => DataSources, () => IamIdentityCenterOptions$, () => AppConfigs, () => TagList, 4, 0]
+];
+export var CreateDomainRequest$: StaticStructureSchema = [3, n0, _CDRr,
+  0,
+  [_DN, _EV, _CC, _EBSO, _APc, _IPAT, _SOn, _VPCO, _CO, _EARO, _NTNEO, _AO, _LPO, _DEO, _ASO, _ICO, _TL, _ATO, _OPWO, _SUO, _AIMLO, _DSO, _ASPO, _UC, _EMn],
+  [0, 0, () => ClusterConfig$, () => EBSOptions$, 0, 0, () => SnapshotOptions$, () => VPCOptions$, () => CognitoOptions$, () => EncryptionAtRestOptions$, () => NodeToNodeEncryptionOptions$, 128 | 0, () => LogPublishingOptions, () => DomainEndpointOptions$, [() => AdvancedSecurityOptionsInput$, 0], () => IdentityCenterOptionsInput$, () => TagList, () => AutoTuneOptionsInput$, () => OffPeakWindowOptions$, () => SoftwareUpdateOptions$, () => AIMLOptionsInput$, () => DeploymentStrategyOptions$, () => AutomatedSnapshotPauseRequestOptions$, 0, 0], 1
+];
+export var CreateDomainResponse$: StaticStructureSchema = [3, n0, _CDRre,
+  0,
+  [_DSo],
+  [() => DomainStatus$]
+];
+export var CreateIndexRequest$: StaticStructureSchema = [3, n0, _CIR,
+  0,
+  [_DN, _IN, _ISn],
+  [[0, 1], 0, 15], 3
+];
+export var CreateIndexResponse$: StaticStructureSchema = [3, n0, _CIRr,
+  0,
+  [_S],
+  [0], 1
+];
+export var CreateOutboundConnectionRequest$: StaticStructureSchema = [3, n0, _COCR,
+  0,
+  [_LDI, _RDI, _CA, _CM, _CPo],
+  [() => DomainInformationContainer$, () => DomainInformationContainer$, 0, 0, () => ConnectionProperties$], 3
+];
+export var CreateOutboundConnectionResponse$: StaticStructureSchema = [3, n0, _COCRr,
+  0,
+  [_LDI, _RDI, _CA, _CS, _CI, _CM, _CPo],
+  [() => DomainInformationContainer$, () => DomainInformationContainer$, 0, () => OutboundConnectionStatus$, 0, 0, () => ConnectionProperties$]
+];
+export var CreatePackageRequest$: StaticStructureSchema = [3, n0, _CPR,
+  0,
+  [_PNa, _PTa, _PS, _PDa, _PC, _EV, _PVO, _PEO],
+  [0, 0, () => PackageSource$, 0, () => PackageConfiguration$, 0, () => PackageVendingOptions$, () => PackageEncryptionOptions$], 3
+];
+export var CreatePackageResponse$: StaticStructureSchema = [3, n0, _CPRr,
+  0,
+  [_PDac],
+  [() => PackageDetails$]
+];
+export var CreateVpcEndpointRequest$: StaticStructureSchema = [3, n0, _CVER,
+  0,
+  [_DA, _VO, _CT],
+  [0, () => VPCOptions$, 0], 2
+];
+export var CreateVpcEndpointResponse$: StaticStructureSchema = [3, n0, _CVERr,
+  0,
+  [_VEp],
+  [() => VpcEndpoint$], 1
+];
+export var CrossClusterSearchConnectionProperties$: StaticStructureSchema = [3, n0, _CCSCP,
+  0,
+  [_SU],
+  [0]
+];
+export var CutoverOptions$: StaticStructureSchema = [3, n0, _COu,
+  0,
+  [_Ta, _S],
+  [0, 0], 2
+];
+export var CutoverRequestOptions$: StaticStructureSchema = [3, n0, _CRO,
+  0,
+  [_Ta],
+  [0], 1
+];
+export var DataSource$: StaticStructureSchema = [3, n0, _DSa,
+  0,
+  [_dSA, _dSD, _iRFDSA],
+  [0, 0, 0]
+];
+export var DataSourceAttachmentSummary$: StaticStructureSchema = [3, n0, _DSAS,
+  0,
+  [_aI, _dSA, _st],
+  [0, 0, 0]
+];
+export var DataSourceDetails$: StaticStructureSchema = [3, n0, _DSD,
+  0,
+  [_DST, _N, _D, _S],
+  [() => DataSourceType$, 0, 0, 0]
+];
+export var DeleteApplicationRequest$: StaticStructureSchema = [3, n0, _DAR,
+  0,
+  [_i],
+  [[0, 1]], 1
+];
+export var DeleteApplicationResponse$: StaticStructureSchema = [3, n0, _DARe,
+  0,
+  [],
+  []
+];
+export var DeleteDataSourceRequest$: StaticStructureSchema = [3, n0, _DDSR,
+  0,
+  [_DN, _N],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteDataSourceResponse$: StaticStructureSchema = [3, n0, _DDSRe,
+  0,
+  [_M],
+  [0]
+];
+export var DeleteDirectQueryDataSourceRequest$: StaticStructureSchema = [3, n0, _DDQDSR,
+  0,
+  [_DSN],
+  [[0, 1]], 1
+];
+export var DeleteDomainRequest$: StaticStructureSchema = [3, n0, _DDR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DeleteDomainResponse$: StaticStructureSchema = [3, n0, _DDRe,
+  0,
+  [_DSo],
+  [() => DomainStatus$]
+];
+export var DeleteInboundConnectionRequest$: StaticStructureSchema = [3, n0, _DICR,
+  0,
+  [_CI],
+  [[0, 1]], 1
+];
+export var DeleteInboundConnectionResponse$: StaticStructureSchema = [3, n0, _DICRe,
+  0,
+  [_C],
+  [() => InboundConnection$]
+];
+export var DeleteIndexRequest$: StaticStructureSchema = [3, n0, _DIR,
+  0,
+  [_DN, _IN],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteIndexResponse$: StaticStructureSchema = [3, n0, _DIRe,
+  0,
+  [_S],
+  [0], 1
+];
+export var DeleteOutboundConnectionRequest$: StaticStructureSchema = [3, n0, _DOCR,
+  0,
+  [_CI],
+  [[0, 1]], 1
+];
+export var DeleteOutboundConnectionResponse$: StaticStructureSchema = [3, n0, _DOCRe,
+  0,
+  [_C],
+  [() => OutboundConnection$]
+];
+export var DeletePackageRequest$: StaticStructureSchema = [3, n0, _DPR,
+  0,
+  [_PID],
+  [[0, 1]], 1
+];
+export var DeletePackageResponse$: StaticStructureSchema = [3, n0, _DPRe,
+  0,
+  [_PDac],
+  [() => PackageDetails$]
+];
+export var DeleteVpcEndpointRequest$: StaticStructureSchema = [3, n0, _DVER,
+  0,
+  [_VEI],
+  [[0, 1]], 1
+];
+export var DeleteVpcEndpointResponse$: StaticStructureSchema = [3, n0, _DVERe,
+  0,
+  [_VES],
+  [() => VpcEndpointSummary$], 1
+];
+export var DeploymentStrategyOptions$: StaticStructureSchema = [3, n0, _DSO,
+  0,
+  [_DSe],
+  [0], 1
+];
+export var DeploymentStrategyOptionsStatus$: StaticStructureSchema = [3, n0, _DSOS,
+  0,
+  [_O, _S],
+  [() => DeploymentStrategyOptions$, () => OptionStatus$], 2
+];
+export var DeploymentStrategyOverrideOptions$: StaticStructureSchema = [3, n0, _DSOO,
+  0,
+  [_DSe, _CBGO],
+  [0, () => ClonedBlueGreenOptions$], 1
+];
+export var DeregisterCapabilityRequest$: StaticStructureSchema = [3, n0, _DCR,
+  0,
+  [_aIp, _cN],
+  [[0, 1], [0, 1]], 2
+];
+export var DeregisterCapabilityResponse$: StaticStructureSchema = [3, n0, _DCRe,
+  0,
+  [_st],
+  [0]
+];
+export var DescribeDataSourceAttachmentRequest$: StaticStructureSchema = [3, n0, _DDSAR,
+  0,
+  [_i, _dSA],
+  [[0, 1], 0], 2
+];
+export var DescribeDataSourceAttachmentResponse$: StaticStructureSchema = [3, n0, _DDSARe,
+  0,
+  [_aI, _i, _a, _dSA, _st],
+  [0, 0, 0, 0, 0]
+];
+export var DescribeDomainAutoTunesRequest$: StaticStructureSchema = [3, n0, _DDATR,
+  0,
+  [_DN, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var DescribeDomainAutoTunesResponse$: StaticStructureSchema = [3, n0, _DDATRe,
+  0,
+  [_ATu, _NT],
+  [() => AutoTuneList, 0]
+];
+export var DescribeDomainChangeProgressRequest$: StaticStructureSchema = [3, n0, _DDCPR,
+  0,
+  [_DN, _CIh],
+  [[0, 1], [0, { [_hQ]: _ch }]], 1
+];
+export var DescribeDomainChangeProgressResponse$: StaticStructureSchema = [3, n0, _DDCPRe,
+  0,
+  [_CPSha],
+  [() => ChangeProgressStatusDetails$]
+];
+export var DescribeDomainConfigRequest$: StaticStructureSchema = [3, n0, _DDCR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DescribeDomainConfigResponse$: StaticStructureSchema = [3, n0, _DDCRe,
+  0,
+  [_DC],
+  [() => DomainConfig$], 1
+];
+export var DescribeDomainHealthRequest$: StaticStructureSchema = [3, n0, _DDHR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DescribeDomainHealthResponse$: StaticStructureSchema = [3, n0, _DDHRe,
+  0,
+  [_DSom, _AZC, _AAZC, _SBAZC, _DNC, _DM, _MENC, _WNC, _MN, _CH, _TS, _TUAS, _EI],
+  [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, () => EnvironmentInfoList]
+];
+export var DescribeDomainNodesRequest$: StaticStructureSchema = [3, n0, _DDNR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DescribeDomainNodesResponse$: StaticStructureSchema = [3, n0, _DDNRe,
+  0,
+  [_DNSL],
+  [() => DomainNodesStatusList]
+];
+export var DescribeDomainReplicationRequest$: StaticStructureSchema = [3, n0, _DDRR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DescribeDomainReplicationResponse$: StaticStructureSchema = [3, n0, _DDRRe,
+  0,
+  [_DA, _Ro, _Pe],
+  [0, 0, () => ReplicationPeerList]
+];
+export var DescribeDomainRequest$: StaticStructureSchema = [3, n0, _DDRes,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var DescribeDomainResponse$: StaticStructureSchema = [3, n0, _DDResc,
+  0,
+  [_DSo],
+  [() => DomainStatus$], 1
+];
+export var DescribeDomainsRequest$: StaticStructureSchema = [3, n0, _DDRescr,
+  0,
+  [_DNo],
+  [64 | 0], 1
+];
+export var DescribeDomainsResponse$: StaticStructureSchema = [3, n0, _DDRescri,
+  0,
+  [_DSL],
+  [() => DomainStatusList], 1
+];
+export var DescribeDryRunProgressRequest$: StaticStructureSchema = [3, n0, _DDRPR,
+  0,
+  [_DN, _DRI, _LDRC],
+  [[0, 1], [0, { [_hQ]: _dRI }], [2, { [_hQ]: _lDRC }]], 1
+];
+export var DescribeDryRunProgressResponse$: StaticStructureSchema = [3, n0, _DDRPRe,
+  0,
+  [_DRPS, _DRC, _DRR],
+  [() => DryRunProgressStatus$, () => DomainStatus$, () => DryRunResults$]
+];
+export var DescribeInboundConnectionsRequest$: StaticStructureSchema = [3, n0, _DICRes,
+  0,
+  [_F, _MR, _NT],
+  [() => FilterList, 1, 0]
+];
+export var DescribeInboundConnectionsResponse$: StaticStructureSchema = [3, n0, _DICResc,
+  0,
+  [_Co, _NT],
+  [() => InboundConnections, 0]
+];
+export var DescribeInsightDetailsRequest$: StaticStructureSchema = [3, n0, _DIDR,
+  0,
+  [_Ent, _II, _SHC],
+  [() => InsightEntity$, 0, 2], 2
+];
+export var DescribeInsightDetailsResponse$: StaticStructureSchema = [3, n0, _DIDRe,
+  0,
+  [_Fi],
+  [() => InsightFieldList], 1
+];
+export var DescribeInstanceTypeLimitsRequest$: StaticStructureSchema = [3, n0, _DITLR,
+  0,
+  [_IT, _EV, _DN],
+  [[0, 1], [0, 1], [0, { [_hQ]: _dN }]], 2
+];
+export var DescribeInstanceTypeLimitsResponse$: StaticStructureSchema = [3, n0, _DITLRe,
+  0,
+  [_LBR],
+  [() => LimitsByRole]
+];
+export var DescribeOutboundConnectionsRequest$: StaticStructureSchema = [3, n0, _DOCRes,
+  0,
+  [_F, _MR, _NT],
+  [() => FilterList, 1, 0]
+];
+export var DescribeOutboundConnectionsResponse$: StaticStructureSchema = [3, n0, _DOCResc,
+  0,
+  [_Co, _NT],
+  [() => OutboundConnections, 0]
+];
+export var DescribePackagesFilter$: StaticStructureSchema = [3, n0, _DPF,
+  0,
+  [_N, _V],
+  [0, 64 | 0]
+];
+export var DescribePackagesRequest$: StaticStructureSchema = [3, n0, _DPRes,
+  0,
+  [_F, _MR, _NT],
+  [() => DescribePackagesFilterList, 1, 0]
+];
+export var DescribePackagesResponse$: StaticStructureSchema = [3, n0, _DPResc,
+  0,
+  [_PDL, _NT],
+  [() => PackageDetailsList, 0]
+];
+export var DescribeReservedInstanceOfferingsRequest$: StaticStructureSchema = [3, n0, _DRIOR,
+  0,
+  [_RIOI, _MR, _NT],
+  [[0, { [_hQ]: _oI }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]]
+];
+export var DescribeReservedInstanceOfferingsResponse$: StaticStructureSchema = [3, n0, _DRIORe,
+  0,
+  [_NT, _RIO],
+  [0, [() => ReservedInstanceOfferingList, 0]]
+];
+export var DescribeReservedInstancesRequest$: StaticStructureSchema = [3, n0, _DRIR,
+  0,
+  [_RII, _MR, _NT],
+  [[0, { [_hQ]: _rI }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]]
+];
+export var DescribeReservedInstancesResponse$: StaticStructureSchema = [3, n0, _DRIRe,
+  0,
+  [_NT, _RI],
+  [0, [() => ReservedInstanceList, 0]]
+];
+export var DescribeVpcEndpointsRequest$: StaticStructureSchema = [3, n0, _DVERes,
+  0,
+  [_VEIp],
+  [64 | 0], 1
+];
+export var DescribeVpcEndpointsResponse$: StaticStructureSchema = [3, n0, _DVEResc,
+  0,
+  [_VEpc, _VEE],
+  [() => VpcEndpoints, () => VpcEndpointErrorList], 2
+];
+export var DetachDataSourceRequest$: StaticStructureSchema = [3, n0, _DDSRet,
+  0,
+  [_i, _dSA],
+  [[0, 1], 0], 2
+];
+export var DetachDataSourceResponse$: StaticStructureSchema = [3, n0, _DDSReta,
+  0,
+  [_i, _a, _dSA],
+  [0, 0, 0]
+];
+export var DiffItems$: StaticStructureSchema = [3, n0, _DI,
+  0,
+  [_SOo, _TO, _Di],
+  [64 | 0, 64 | 0, () => DivergentItemList]
+];
+export var DirectQueryDataSource$: StaticStructureSchema = [3, n0, _DQDS,
+  0,
+  [_DSN, _DST, _D, _OSA, _DSA, _TL],
+  [0, () => DirectQueryDataSourceType$, 0, 64 | 0, 0, () => TagList]
+];
+export var DissociatePackageRequest$: StaticStructureSchema = [3, n0, _DPRi,
+  0,
+  [_PID, _DN],
+  [[0, 1], [0, 1]], 2
+];
+export var DissociatePackageResponse$: StaticStructureSchema = [3, n0, _DPRis,
+  0,
+  [_DPD],
+  [() => DomainPackageDetails$]
+];
+export var DissociatePackagesRequest$: StaticStructureSchema = [3, n0, _DPRiss,
+  0,
+  [_PL, _DN],
+  [64 | 0, 0], 2
+];
+export var DissociatePackagesResponse$: StaticStructureSchema = [3, n0, _DPRisso,
+  0,
+  [_DPDL],
+  [() => DomainPackageDetailsList]
+];
+export var DivergentField$: StaticStructureSchema = [3, n0, _DF,
+  0,
+  [_Pa, _SVo, _TVa, _Po],
+  [0, 0, 0, 0]
+];
+export var DivergentItem$: StaticStructureSchema = [3, n0, _DIi,
+  0,
+  [_N, _Fi],
+  [0, () => DivergentFieldList]
+];
+export var DomainConfig$: StaticStructureSchema = [3, n0, _DC,
+  0,
+  [_EV, _CC, _EBSO, _APc, _IPAT, _SOn, _VPCO, _CO, _EARO, _NTNEO, _AO, _LPO, _DEO, _ASO, _ICO, _ATO, _CPD, _OPWO, _SUO, _MP, _AIMLO, _DSO, _ASPO, _UC, _EMn],
+  [() => VersionStatus$, () => ClusterConfigStatus$, () => EBSOptionsStatus$, () => AccessPoliciesStatus$, () => IPAddressTypeStatus$, () => SnapshotOptionsStatus$, () => VPCDerivedInfoStatus$, () => CognitoOptionsStatus$, () => EncryptionAtRestOptionsStatus$, () => NodeToNodeEncryptionOptionsStatus$, () => AdvancedOptionsStatus$, () => LogPublishingOptionsStatus$, () => DomainEndpointOptionsStatus$, () => AdvancedSecurityOptionsStatus$, () => IdentityCenterOptionsStatus$, () => AutoTuneOptionsStatus$, () => ChangeProgressDetails$, () => OffPeakWindowOptionsStatus$, () => SoftwareUpdateOptionsStatus$, () => ModifyingPropertiesList, () => AIMLOptionsStatus$, () => DeploymentStrategyOptionsStatus$, () => AutomatedSnapshotPauseOptionsStatus$, () => UseCaseStatus$, () => EngineModeStatus$]
+];
+export var DomainEndpointOptions$: StaticStructureSchema = [3, n0, _DEO,
+  0,
+  [_EHTTPS, _TLSSP, _CEE, _CEu, _CECA],
+  [2, 0, 2, 0, 0]
+];
+export var DomainEndpointOptionsStatus$: StaticStructureSchema = [3, n0, _DEOS,
+  0,
+  [_O, _S],
+  [() => DomainEndpointOptions$, () => OptionStatus$], 2
+];
+export var DomainInfo$: StaticStructureSchema = [3, n0, _DIo,
+  0,
+  [_DN, _ETn],
+  [0, 0]
+];
+export var DomainInformationContainer$: StaticStructureSchema = [3, n0, _DIC,
+  0,
+  [_AWSDI],
+  [() => AWSDomainInformation$]
+];
+export var DomainMaintenanceDetails$: StaticStructureSchema = [3, n0, _DMD,
+  0,
+  [_MI, _DN, _Ac, _NI, _S, _SM, _CAr, _UA],
+  [0, 0, 0, 0, 0, 0, 4, 4]
+];
+export var DomainNodesStatus$: StaticStructureSchema = [3, n0, _DNS,
+  0,
+  [_NI, _NTo, _AZ, _IT, _NS, _STt, _SVT, _SSt],
+  [0, 0, 0, 0, 0, 0, 0, 0]
+];
+export var DomainPackageDetails$: StaticStructureSchema = [3, n0, _DPD,
+  0,
+  [_PID, _PNa, _PTa, _LU, _DN, _DPS, _PV, _PPIDL, _RP, _ED, _ACs],
+  [0, 0, 0, 4, 0, 0, 0, 64 | 0, 0, () => ErrorDetails$, () => PackageAssociationConfiguration$]
+];
+export var DomainStatus$: StaticStructureSchema = [3, n0, _DSo,
+  0,
+  [_DIom, _DN, _ARN, _CC, _Cr, _De, _En, _EVn, _End, _DEVHZI, _Pro, _UP, _EV, _EBSO, _APc, _IPAT, _SOn, _VPCO, _CO, _EARO, _NTNEO, _AO, _LPO, _SSO, _DEO, _ASO, _ICO, _ATO, _CPD, _OPWO, _SUO, _DPSo, _MP, _AIMLO, _DSO, _ASPO, _UC, _EMn],
+  [0, 0, 0, () => ClusterConfig$, 2, 2, 0, 0, 128 | 0, 0, 2, 2, 0, () => EBSOptions$, 0, 0, () => SnapshotOptions$, () => VPCDerivedInfo$, () => CognitoOptions$, () => EncryptionAtRestOptions$, () => NodeToNodeEncryptionOptions$, 128 | 0, () => LogPublishingOptions, () => ServiceSoftwareOptions$, () => DomainEndpointOptions$, () => AdvancedSecurityOptions$, () => IdentityCenterOptions$, () => AutoTuneOptionsOutput$, () => ChangeProgressDetails$, () => OffPeakWindowOptions$, () => SoftwareUpdateOptions$, 0, () => ModifyingPropertiesList, () => AIMLOptionsOutput$, () => DeploymentStrategyOptions$, () => AutomatedSnapshotPauseOptions$, 0, 0], 4
+];
+export var DryRunProgressStatus$: StaticStructureSchema = [3, n0, _DRPS,
+  0,
+  [_DRI, _DRS, _CD, _UD, _VF, _AW],
+  [0, 0, 0, 0, () => ValidationFailures, 64 | 0], 4
+];
+export var DryRunResults$: StaticStructureSchema = [3, n0, _DRR,
+  0,
+  [_DT, _M],
+  [0, 0]
+];
+export var Duration$: StaticStructureSchema = [3, n0, _Du,
+  0,
+  [_V, _Un],
+  [1, 0]
+];
+export var EBSOptions$: StaticStructureSchema = [3, n0, _EBSO,
+  0,
+  [_EBSE, _VT, _VS, _Io, _Th],
+  [2, 0, 1, 1, 1]
+];
+export var EBSOptionsStatus$: StaticStructureSchema = [3, n0, _EBSOS,
+  0,
+  [_O, _S],
+  [() => EBSOptions$, () => OptionStatus$], 2
+];
+export var EncryptionAtRestOptions$: StaticStructureSchema = [3, n0, _EARO,
+  0,
+  [_E, _KKI, _EMnc],
+  [2, 0, 0]
+];
+export var EncryptionAtRestOptionsStatus$: StaticStructureSchema = [3, n0, _EAROS,
+  0,
+  [_O, _S],
+  [() => EncryptionAtRestOptions$, () => OptionStatus$], 2
+];
+export var EngineModeStatus$: StaticStructureSchema = [3, n0, _EMS,
+  0,
+  [_O, _S],
+  [0, () => OptionStatus$], 2
+];
+export var EnvironmentInfo$: StaticStructureSchema = [3, n0, _EIn,
+  0,
+  [_AZIv],
+  [() => AvailabilityZoneInfoList]
+];
+export var ErrorDetails$: StaticStructureSchema = [3, n0, _ED,
+  0,
+  [_ETr, _EM],
+  [0, 0]
+];
+export var ExportOptions$: StaticStructureSchema = [3, n0, _EO,
+  0,
+  [_t, _o, _iRD],
+  [64 | 0, () => SavedObjectIdentifierList, 2]
+];
+export var FailoverReplicationRequest$: StaticStructureSchema = [3, n0, _FRR,
+  0,
+  [_DN, _PDA, _ADL],
+  [[0, 1], 0, 2], 3
+];
+export var FailoverReplicationResponse$: StaticStructureSchema = [3, n0, _FRRa,
+  0,
+  [_DA, _S],
+  [0, 0]
+];
+export var Filter$: StaticStructureSchema = [3, n0, _Fil,
+  0,
+  [_N, _Va],
+  [0, 64 | 0]
+];
+export var GetApplicationRequest$: StaticStructureSchema = [3, n0, _GAR,
+  0,
+  [_i],
+  [[0, 1]], 1
+];
+export var GetApplicationResponse$: StaticStructureSchema = [3, n0, _GARe,
+  0,
+  [_i, _a, _n, _en, _st, _iICO, _dS, _aC, _cA, _lUA, _kKA],
+  [0, 0, 0, 0, 0, () => IamIdentityCenterOptions$, () => DataSources, () => AppConfigs, 4, 4, 0]
+];
+export var GetCapabilityRequest$: StaticStructureSchema = [3, n0, _GCR,
+  0,
+  [_aIp, _cN],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCapabilityResponse$: StaticStructureSchema = [3, n0, _GCRe,
+  0,
+  [_cN, _aIp, _st, _cC, _f],
+  [0, 0, 0, () => CapabilityExtendedResponseConfig$, () => CapabilityFailures]
+];
+export var GetCompatibleVersionsRequest$: StaticStructureSchema = [3, n0, _GCVR,
+  0,
+  [_DN],
+  [[0, { [_hQ]: _dN }]]
+];
+export var GetCompatibleVersionsResponse$: StaticStructureSchema = [3, n0, _GCVRe,
+  0,
+  [_CVo],
+  [() => CompatibleVersionsList]
+];
+export var GetDataSourceRequest$: StaticStructureSchema = [3, n0, _GDSR,
+  0,
+  [_DN, _N],
+  [[0, 1], [0, 1]], 2
+];
+export var GetDataSourceResponse$: StaticStructureSchema = [3, n0, _GDSRe,
+  0,
+  [_DST, _N, _D, _S],
+  [() => DataSourceType$, 0, 0, 0]
+];
+export var GetDefaultApplicationSettingRequest$: StaticStructureSchema = [3, n0, _GDASR,
+  0,
+  [],
+  []
+];
+export var GetDefaultApplicationSettingResponse$: StaticStructureSchema = [3, n0, _GDASRe,
+  0,
+  [_aA],
+  [0]
+];
+export var GetDirectQueryDataSourceRequest$: StaticStructureSchema = [3, n0, _GDQDSR,
+  0,
+  [_DSN],
+  [[0, 1]], 1
+];
+export var GetDirectQueryDataSourceResponse$: StaticStructureSchema = [3, n0, _GDQDSRe,
+  0,
+  [_DSN, _DST, _D, _OSA, _DSAP, _DSA],
+  [0, () => DirectQueryDataSourceType$, 0, 64 | 0, 0, 0]
+];
+export var GetDomainMaintenanceStatusRequest$: StaticStructureSchema = [3, n0, _GDMSR,
+  0,
+  [_DN, _MI],
+  [[0, 1], [0, { [_hQ]: _mI }]], 2
+];
+export var GetDomainMaintenanceStatusResponse$: StaticStructureSchema = [3, n0, _GDMSRe,
+  0,
+  [_S, _SM, _NI, _Ac, _CAr, _UA],
+  [0, 0, 0, 0, 4, 4]
+];
+export var GetIndexRequest$: StaticStructureSchema = [3, n0, _GIR,
+  0,
+  [_DN, _IN],
+  [[0, 1], [0, 1]], 2
+];
+export var GetIndexResponse$: StaticStructureSchema = [3, n0, _GIRe,
+  0,
+  [_ISn],
+  [15], 1
+];
+export var GetMigrationRequest$: StaticStructureSchema = [3, n0, _GMR,
+  0,
+  [_mIi],
+  [[0, 1]], 1
+];
+export var GetMigrationResponse$: StaticStructureSchema = [3, n0, _GMRe,
+  0,
+  [_mIi, _st, _aIp, _so, _eC, _iC, _e, _cA, _uA],
+  [0, 0, 0, () => MigrationSource$, 1, 1, () => MigrationError$, 4, 4]
+];
+export var GetPackageVersionHistoryRequest$: StaticStructureSchema = [3, n0, _GPVHR,
+  0,
+  [_PID, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var GetPackageVersionHistoryResponse$: StaticStructureSchema = [3, n0, _GPVHRe,
+  0,
+  [_PID, _PVHL, _NT],
+  [0, () => PackageVersionHistoryList, 0]
+];
+export var GetUpgradeHistoryRequest$: StaticStructureSchema = [3, n0, _GUHR,
+  0,
+  [_DN, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var GetUpgradeHistoryResponse$: StaticStructureSchema = [3, n0, _GUHRe,
+  0,
+  [_UH, _NT],
+  [() => UpgradeHistoryList, 0]
+];
+export var GetUpgradeStatusRequest$: StaticStructureSchema = [3, n0, _GUSR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var GetUpgradeStatusResponse$: StaticStructureSchema = [3, n0, _GUSRe,
+  0,
+  [_US, _SSte, _UN],
+  [0, 0, 0]
+];
+export var IAMFederationOptionsInput$: StaticStructureSchema = [3, n0, _IAMFOI,
+  0,
+  [_E, _SK, _RK],
+  [2, 0, 0]
+];
+export var IAMFederationOptionsOutput$: StaticStructureSchema = [3, n0, _IAMFOO,
+  0,
+  [_E, _SK, _RK],
+  [2, 0, 0]
+];
+export var IamIdentityCenterOptions$: StaticStructureSchema = [3, n0, _IICO,
+  0,
+  [_ena, _iICIA, _iRFICAA, _iICAA],
+  [2, 0, 0, 0]
+];
+export var IamIdentityCenterOptionsInput$: StaticStructureSchema = [3, n0, _IICOI,
+  0,
+  [_ena, _iICIA, _iRFICAA],
+  [2, 0, 0]
+];
+export var IdentityCenterOptions$: StaticStructureSchema = [3, n0, _ICO,
+  0,
+  [_EAPIA, _ICIARN, _ICIR, _SK, _RK, _ICAARN, _ISI],
+  [2, 0, 0, 0, 0, 0, 0]
+];
+export var IdentityCenterOptionsInput$: StaticStructureSchema = [3, n0, _ICOI,
+  0,
+  [_EAPIA, _ICIARN, _ICIR, _SK, _RK],
+  [2, 0, 0, 0, 0]
+];
+export var IdentityCenterOptionsStatus$: StaticStructureSchema = [3, n0, _ICOS,
+  0,
+  [_O, _S],
+  [() => IdentityCenterOptions$, () => OptionStatus$], 2
+];
+export var InboundConnection$: StaticStructureSchema = [3, n0, _ICn,
+  0,
+  [_LDI, _RDI, _CI, _CS, _CM],
+  [() => DomainInformationContainer$, () => DomainInformationContainer$, 0, () => InboundConnectionStatus$, 0]
+];
+export var InboundConnectionStatus$: StaticStructureSchema = [3, n0, _ICS,
+  0,
+  [_SC, _M],
+  [0, 0]
+];
+export var Insight$: StaticStructureSchema = [3, n0, _In,
+  0,
+  [_II, _DNi, _Ty, _Pri, _S, _CTr, _UT, _IEs],
+  [0, 0, 0, 0, 0, 4, 4, 2]
+];
+export var InsightEntity$: StaticStructureSchema = [3, n0, _IEn,
+  0,
+  [_Ty, _V],
+  [0, 0], 1
+];
+export var InsightFeedbackEntity$: StaticStructureSchema = [3, n0, _IFE,
+  0,
+  [_Ty, _V],
+  [0, 0], 2
+];
+export var InsightFeedbackRequest$: StaticStructureSchema = [3, n0, _IFR,
+  0,
+  [_Ent, _II, _Thu, _FT],
+  [() => InsightFeedbackEntity$, 0, 0, 0], 3
+];
+export var InsightFeedbackResponse$: StaticStructureSchema = [3, n0, _IFRn,
+  0,
+  [_S],
+  [0]
+];
+export var InsightField$: StaticStructureSchema = [3, n0, _IF,
+  0,
+  [_N, _Ty, _V],
+  [0, 0, 0], 3
+];
+export var InsightTimeRange$: StaticStructureSchema = [3, n0, _ITR,
+  0,
+  [_Fr, _To],
+  [1, 1], 2
+];
+export var InstanceCountLimits$: StaticStructureSchema = [3, n0, _ICL,
+  0,
+  [_MIC, _MICa],
+  [1, 1]
+];
+export var InstanceLimits$: StaticStructureSchema = [3, n0, _IL,
+  0,
+  [_ICL],
+  [() => InstanceCountLimits$]
+];
+export var InstanceTypeDetails$: StaticStructureSchema = [3, n0, _ITD,
+  0,
+  [_IT, _EE, _CEo, _ALE, _ASE, _WE, _IR, _AZv],
+  [0, 2, 2, 2, 2, 2, 64 | 0, 64 | 0]
+];
+export var IPAddressTypeStatus$: StaticStructureSchema = [3, n0, _IPATS,
+  0,
+  [_O, _S],
+  [0, () => OptionStatus$], 2
+];
+export var JWTOptionsInput$: StaticStructureSchema = [3, n0, _JWTOI,
+  0,
+  [_E, _SK, _RK, _JU, _PK],
+  [2, 0, 0, 0, 0]
+];
+export var JWTOptionsOutput$: StaticStructureSchema = [3, n0, _JWTOO,
+  0,
+  [_E, _SK, _RK, _JU, _PK],
+  [2, 0, 0, 0, 0]
+];
+export var KeyStoreAccessOption$: StaticStructureSchema = [3, n0, _KSAO,
+  0,
+  [_KSAE, _KARA],
+  [2, 0], 1
+];
+export var Limits$: StaticStructureSchema = [3, n0, _L,
+  0,
+  [_STto, _IL, _ALd],
+  [() => StorageTypeList, () => InstanceLimits$, () => AdditionalLimitList]
+];
+export var ListApplicationsRequest$: StaticStructureSchema = [3, n0, _LAR,
+  0,
+  [_nT, _sta, _mR],
+  [[0, { [_hQ]: _nT }], [64 | 0, { [_hQ]: _sta }], [1, { [_hQ]: _mR }]]
+];
+export var ListApplicationsResponse$: StaticStructureSchema = [3, n0, _LARi,
+  0,
+  [_ASp, _nT],
+  [() => ApplicationSummaries, 0]
+];
+export var ListDataSourceAttachmentsRequest$: StaticStructureSchema = [3, n0, _LDSAR,
+  0,
+  [_i, _nT, _mR],
+  [[0, 1], 0, 1], 1
+];
+export var ListDataSourceAttachmentsResponse$: StaticStructureSchema = [3, n0, _LDSARi,
+  0,
+  [_at, _nT],
+  [() => DataSourceAttachmentSummaryList, 0]
+];
+export var ListDataSourcesRequest$: StaticStructureSchema = [3, n0, _LDSR,
+  0,
+  [_DN],
+  [[0, 1]], 1
+];
+export var ListDataSourcesResponse$: StaticStructureSchema = [3, n0, _LDSRi,
+  0,
+  [_DSat],
+  [() => DataSourceList]
+];
+export var ListDirectQueryDataSourcesRequest$: StaticStructureSchema = [3, n0, _LDQDSR,
+  0,
+  [_NT],
+  [[0, { [_hQ]: _ne }]]
+];
+export var ListDirectQueryDataSourcesResponse$: StaticStructureSchema = [3, n0, _LDQDSRi,
+  0,
+  [_NT, _DQDSi],
+  [0, () => DirectQueryDataSourceList]
+];
+export var ListDomainMaintenancesRequest$: StaticStructureSchema = [3, n0, _LDMR,
+  0,
+  [_DN, _Ac, _S, _MR, _NT],
+  [[0, 1], [0, { [_hQ]: _ac }], [0, { [_hQ]: _st }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListDomainMaintenancesResponse$: StaticStructureSchema = [3, n0, _LDMRi,
+  0,
+  [_DMo, _NT],
+  [() => DomainMaintenanceList, 0]
+];
+export var ListDomainNamesRequest$: StaticStructureSchema = [3, n0, _LDNR,
+  0,
+  [_ETn],
+  [[0, { [_hQ]: _eT }]]
+];
+export var ListDomainNamesResponse$: StaticStructureSchema = [3, n0, _LDNRi,
+  0,
+  [_DNo],
+  [() => DomainInfoList]
+];
+export var ListDomainsForPackageRequest$: StaticStructureSchema = [3, n0, _LDFPR,
+  0,
+  [_PID, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListDomainsForPackageResponse$: StaticStructureSchema = [3, n0, _LDFPRi,
+  0,
+  [_DPDL, _NT],
+  [() => DomainPackageDetailsList, 0]
+];
+export var ListInsightsRequest$: StaticStructureSchema = [3, n0, _LIR,
+  0,
+  [_Ent, _TR, _SOor, _MR, _NT],
+  [() => InsightEntity$, () => InsightTimeRange$, 0, 1, 0], 1
+];
+export var ListInsightsResponse$: StaticStructureSchema = [3, n0, _LIRi,
+  0,
+  [_Ins, _NT],
+  [() => InsightList, 0]
+];
+export var ListInstanceTypeDetailsRequest$: StaticStructureSchema = [3, n0, _LITDR,
+  0,
+  [_EV, _DN, _MR, _NT, _RAZ, _IT],
+  [[0, 1], [0, { [_hQ]: _dN }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [2, { [_hQ]: _rAZ }], [0, { [_hQ]: _iT }]], 1
+];
+export var ListInstanceTypeDetailsResponse$: StaticStructureSchema = [3, n0, _LITDRi,
+  0,
+  [_ITD, _NT],
+  [() => InstanceTypeDetailsList, 0]
+];
+export var ListMigrationsRequest$: StaticStructureSchema = [3, n0, _LMR,
+  0,
+  [_aIp, _st, _mR, _nT],
+  [[0, { [_hQ]: _aIp }], [0, { [_hQ]: _st }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListMigrationsResponse$: StaticStructureSchema = [3, n0, _LMRi,
+  0,
+  [_mi, _nT],
+  [() => MigrationSummaryList, 0]
+];
+export var ListPackagesForDomainRequest$: StaticStructureSchema = [3, n0, _LPFDR,
+  0,
+  [_DN, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListPackagesForDomainResponse$: StaticStructureSchema = [3, n0, _LPFDRi,
+  0,
+  [_DPDL, _NT],
+  [() => DomainPackageDetailsList, 0]
+];
+export var ListScheduledActionsRequest$: StaticStructureSchema = [3, n0, _LSAR,
+  0,
+  [_DN, _MR, _NT],
+  [[0, 1], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]], 1
+];
+export var ListScheduledActionsResponse$: StaticStructureSchema = [3, n0, _LSARi,
+  0,
+  [_SAch, _NT],
+  [() => ScheduledActionsList, 0]
+];
+export var ListTagsRequest$: StaticStructureSchema = [3, n0, _LTR,
+  0,
+  [_ARN],
+  [[0, { [_hQ]: _a }]], 1
+];
+export var ListTagsResponse$: StaticStructureSchema = [3, n0, _LTRi,
+  0,
+  [_TL],
+  [() => TagList]
+];
+export var ListVersionsRequest$: StaticStructureSchema = [3, n0, _LVR,
+  0,
+  [_MR, _NT],
+  [[1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }]]
+];
+export var ListVersionsResponse$: StaticStructureSchema = [3, n0, _LVRi,
+  0,
+  [_Ve, _NT],
+  [64 | 0, 0]
+];
+export var ListVpcEndpointAccessRequest$: StaticStructureSchema = [3, n0, _LVEAR,
+  0,
+  [_DN, _NT],
+  [[0, 1], [0, { [_hQ]: _nT }]], 1
+];
+export var ListVpcEndpointAccessResponse$: StaticStructureSchema = [3, n0, _LVEARi,
+  0,
+  [_APL, _NT],
+  [() => AuthorizedPrincipalList, 0], 2
+];
+export var ListVpcEndpointsForDomainRequest$: StaticStructureSchema = [3, n0, _LVEFDR,
+  0,
+  [_DN, _NT],
+  [[0, 1], [0, { [_hQ]: _nT }]], 1
+];
+export var ListVpcEndpointsForDomainResponse$: StaticStructureSchema = [3, n0, _LVEFDRi,
+  0,
+  [_VESL, _NT],
+  [() => VpcEndpointSummaryList, 0], 2
+];
+export var ListVpcEndpointsRequest$: StaticStructureSchema = [3, n0, _LVER,
+  0,
+  [_NT],
+  [[0, { [_hQ]: _nT }]]
+];
+export var ListVpcEndpointsResponse$: StaticStructureSchema = [3, n0, _LVERi,
+  0,
+  [_VESL, _NT],
+  [() => VpcEndpointSummaryList, 0], 2
+];
+export var LogPublishingOption$: StaticStructureSchema = [3, n0, _LPOo,
+  0,
+  [_CWLLGA, _E],
+  [0, 2]
+];
+export var LogPublishingOptionsStatus$: StaticStructureSchema = [3, n0, _LPOS,
+  0,
+  [_O, _S],
+  [() => LogPublishingOptions, () => OptionStatus$]
+];
+export var MasterUserOptions$: StaticStructureSchema = [3, n0, _MUO,
+  0,
+  [_MUARN, _MUN, _MUP],
+  [0, [() => Username, 0], [() => Password, 0]]
+];
+export var MigrationError$: StaticStructureSchema = [3, n0, _ME,
+  0,
+  [_co, _m],
+  [0, 0]
+];
+export var MigrationOptions$: StaticStructureSchema = [3, n0, _MO,
+  0,
+  [_so, _w, _eO, _cR],
+  [() => MigrationSource$, () => MigrationWorkspace$, () => ExportOptions$, 0], 2
+];
+export var MigrationSource$: StaticStructureSchema = [3, n0, _MSi,
+  0,
+  [_dA],
+  [0], 1
+];
+export var MigrationSummary$: StaticStructureSchema = [3, n0, _MSig,
+  0,
+  [_mIi, _st, _aIp, _so, _eC, _iC, _e, _cA, _uA],
+  [0, 0, 0, () => MigrationSource$, 1, 1, () => MigrationError$, 4, 4]
+];
+export var MigrationWorkspace$: StaticStructureSchema = [3, n0, _MW,
+  0,
+  [_wI, _cW, _n, _ty],
+  [0, 2, 0, 0]
+];
+export var ModifyingProperties$: StaticStructureSchema = [3, n0, _MP,
+  0,
+  [_N, _AV, _PVe, _VTa],
+  [0, 0, 0, 0]
+];
+export var NaturalLanguageQueryGenerationOptionsInput$: StaticStructureSchema = [3, n0, _NLQGOI,
+  0,
+  [_DS],
+  [0]
+];
+export var NaturalLanguageQueryGenerationOptionsOutput$: StaticStructureSchema = [3, n0, _NLQGOO,
+  0,
+  [_DS, _CSu],
+  [0, 0]
+];
+export var NodeConfig$: StaticStructureSchema = [3, n0, _NC,
+  0,
+  [_E, _Ty, _Cou],
+  [2, 0, 1]
+];
+export var NodeOption$: StaticStructureSchema = [3, n0, _NOo,
+  0,
+  [_NTo, _NC],
+  [0, () => NodeConfig$]
+];
+export var NodeToNodeEncryptionOptions$: StaticStructureSchema = [3, n0, _NTNEO,
+  0,
+  [_E],
+  [2]
+];
+export var NodeToNodeEncryptionOptionsStatus$: StaticStructureSchema = [3, n0, _NTNEOS,
+  0,
+  [_O, _S],
+  [() => NodeToNodeEncryptionOptions$, () => OptionStatus$], 2
+];
+export var OffPeakWindow$: StaticStructureSchema = [3, n0, _OPW,
+  0,
+  [_WST],
+  [() => WindowStartTime$]
+];
+export var OffPeakWindowOptions$: StaticStructureSchema = [3, n0, _OPWO,
+  0,
+  [_E, _OPW],
+  [2, () => OffPeakWindow$]
+];
+export var OffPeakWindowOptionsStatus$: StaticStructureSchema = [3, n0, _OPWOS,
+  0,
+  [_O, _S],
+  [() => OffPeakWindowOptions$, () => OptionStatus$]
+];
+export var OptionStatus$: StaticStructureSchema = [3, n0, _OS,
+  0,
+  [_CD, _UD, _St, _UV, _PD],
+  [4, 4, 0, 1, 2], 3
+];
+export var OutboundConnection$: StaticStructureSchema = [3, n0, _OC,
+  0,
+  [_LDI, _RDI, _CI, _CA, _CS, _CM, _CPo],
+  [() => DomainInformationContainer$, () => DomainInformationContainer$, 0, 0, () => OutboundConnectionStatus$, 0, () => ConnectionProperties$]
+];
+export var OutboundConnectionStatus$: StaticStructureSchema = [3, n0, _OCS,
+  0,
+  [_SC, _M],
+  [0, 0]
+];
+export var PackageAssociationConfiguration$: StaticStructureSchema = [3, n0, _PAC,
+  0,
+  [_KSAO],
+  [() => KeyStoreAccessOption$]
+];
+export var PackageConfiguration$: StaticStructureSchema = [3, n0, _PC,
+  0,
+  [_LR, _CR, _LF, _RRFCU],
+  [0, 0, 0, 2], 2
+];
+export var PackageDetails$: StaticStructureSchema = [3, n0, _PDac,
+  0,
+  [_PID, _PNa, _PTa, _PDa, _PSa, _CAr, _LUA, _APV, _ED, _EV, _APP, _APC, _ALUL, _PO, _PVO, _PEO],
+  [0, 0, 0, 0, 0, 4, 4, 0, () => ErrorDetails$, 0, () => PluginProperties$, () => PackageConfiguration$, 64 | 0, 0, () => PackageVendingOptions$, () => PackageEncryptionOptions$]
+];
+export var PackageDetailsForAssociation$: StaticStructureSchema = [3, n0, _PDFA,
+  0,
+  [_PID, _PPIDL, _ACs],
+  [0, 64 | 0, () => PackageAssociationConfiguration$], 1
+];
+export var PackageEncryptionOptions$: StaticStructureSchema = [3, n0, _PEO,
+  0,
+  [_EE, _KKIm],
+  [2, 0], 1
+];
+export var PackageSource$: StaticStructureSchema = [3, n0, _PS,
+  0,
+  [_SBN, _SKe],
+  [0, 0]
+];
+export var PackageVendingOptions$: StaticStructureSchema = [3, n0, _PVO,
+  0,
+  [_VEe],
+  [2], 1
+];
+export var PackageVersionHistory$: StaticStructureSchema = [3, n0, _PVH,
+  0,
+  [_PV, _CMo, _CAr, _PPl, _PC],
+  [0, 0, 4, () => PluginProperties$, () => PackageConfiguration$]
+];
+export var PluginProperties$: StaticStructureSchema = [3, n0, _PPl,
+  0,
+  [_N, _D, _Ver, _CN, _USIB],
+  [0, 0, 0, 0, 1]
+];
+export var PrometheusDirectQueryDataSource$: StaticStructureSchema = [3, n0, _PDQDS,
+  0,
+  [_RA, _WA],
+  [0, 0], 2
+];
+export var PurchaseReservedInstanceOfferingRequest$: StaticStructureSchema = [3, n0, _PRIOR,
+  0,
+  [_RIOI, _RN, _IC],
+  [0, 0, 1], 2
+];
+export var PurchaseReservedInstanceOfferingResponse$: StaticStructureSchema = [3, n0, _PRIORu,
+  0,
+  [_RII, _RN],
+  [0, 0]
+];
+export var PutDefaultApplicationSettingRequest$: StaticStructureSchema = [3, n0, _PDASR,
+  0,
+  [_aA, _sAD],
+  [0, 2], 2
+];
+export var PutDefaultApplicationSettingResponse$: StaticStructureSchema = [3, n0, _PDASRu,
+  0,
+  [_aA],
+  [0]
+];
+export var RecurringCharge$: StaticStructureSchema = [3, n0, _RC,
+  0,
+  [_RCA, _RCF],
+  [1, 0]
+];
+export var RegisterCapabilityRequest$: StaticStructureSchema = [3, n0, _RCR,
+  0,
+  [_aIp, _cN, _cC],
+  [[0, 1], 0, () => CapabilityBaseRequestConfig$], 3
+];
+export var RegisterCapabilityResponse$: StaticStructureSchema = [3, n0, _RCRe,
+  0,
+  [_cN, _aIp, _st, _cC],
+  [0, 0, 0, () => CapabilityBaseResponseConfig$]
+];
+export var RejectInboundConnectionRequest$: StaticStructureSchema = [3, n0, _RICR,
+  0,
+  [_CI],
+  [[0, 1]], 1
+];
+export var RejectInboundConnectionResponse$: StaticStructureSchema = [3, n0, _RICRe,
+  0,
+  [_C],
+  [() => InboundConnection$]
+];
+export var RemoveReplicationPeerRequest$: StaticStructureSchema = [3, n0, _RRPR,
+  0,
+  [_DN, _PDA],
+  [[0, 1], 0], 2
+];
+export var RemoveReplicationPeerResponse$: StaticStructureSchema = [3, n0, _RRPRe,
+  0,
+  [_DA, _S],
+  [0, 0]
+];
+export var RemoveTagsRequest$: StaticStructureSchema = [3, n0, _RTR,
+  0,
+  [_ARN, _TK],
+  [0, 64 | 0], 2
+];
+export var ReplicationPeer$: StaticStructureSchema = [3, n0, _RPe,
+  0,
+  [_PDA, _PR, _S, _SM],
+  [0, 0, 0, 0]
+];
+export var ReservedInstance$: StaticStructureSchema = [3, n0, _RIe,
+  0,
+  [_RN, _RII, _BSI, _RIOI, _IT, _ST, _Du, _FP, _UPs, _CCu, _IC, _St, _POa, _RCe],
+  [0, 0, 1, 0, 0, 4, 1, 1, 1, 0, 1, 0, 0, [() => RecurringChargeList, 0]]
+];
+export var ReservedInstanceOffering$: StaticStructureSchema = [3, n0, _RIOe,
+  0,
+  [_RIOI, _IT, _Du, _FP, _UPs, _CCu, _POa, _RCe],
+  [0, 0, 1, 1, 1, 0, 0, [() => RecurringChargeList, 0]]
+];
+export var RevokeVpcEndpointAccessRequest$: StaticStructureSchema = [3, n0, _RVEAR,
+  0,
+  [_DN, _A, _Se, _SO],
+  [[0, 1], 0, 0, () => ServiceOptions$], 1
+];
+export var RevokeVpcEndpointAccessResponse$: StaticStructureSchema = [3, n0, _RVEARe,
+  0,
+  [],
+  []
+];
+export var RollbackServiceSoftwareOptions$: StaticStructureSchema = [3, n0, _RSSO,
+  0,
+  [_CVu, _NV, _RAo, _D],
+  [0, 0, 2, 0]
+];
+export var RollbackServiceSoftwareUpdateRequest$: StaticStructureSchema = [3, n0, _RSSUR,
+  0,
+  [_DN],
+  [0], 1
+];
+export var RollbackServiceSoftwareUpdateResponse$: StaticStructureSchema = [3, n0, _RSSURo,
+  0,
+  [_RSSO],
+  [() => RollbackServiceSoftwareOptions$]
+];
+export var S3GlueDataCatalog$: StaticStructureSchema = [3, n0, _SGDC,
+  0,
+  [_RA],
+  [0]
+];
+export var S3VectorsEngine$: StaticStructureSchema = [3, n0, _SVE,
+  0,
+  [_E],
+  [2]
+];
+export var SAMLIdp$: StaticStructureSchema = [3, n0, _SAMLI,
+  0,
+  [_MC, _EInt],
+  [0, 0], 2
+];
+export var SAMLOptionsInput$: StaticStructureSchema = [3, n0, _SAMLOI,
+  0,
+  [_E, _Id, _MUN, _MBR, _SK, _RK, _STM],
+  [2, () => SAMLIdp$, [() => Username, 0], 0, 0, 0, 1]
+];
+export var SAMLOptionsOutput$: StaticStructureSchema = [3, n0, _SAMLOO,
+  0,
+  [_E, _Id, _SK, _RK, _STM],
+  [2, () => SAMLIdp$, 0, 0, 1]
+];
+export var SavedObjectIdentifier$: StaticStructureSchema = [3, n0, _SOI,
+  0,
+  [_ty, _i],
+  [0, 0], 2
+];
+export var ScheduledAction$: StaticStructureSchema = [3, n0, _SAc,
+  0,
+  [_Id_, _Ty, _Sev, _STc, _D, _SB, _S, _Ma, _Can],
+  [0, 0, 0, 1, 0, 0, 0, 2, 2], 4
+];
+export var ScheduledAutoTuneDetails$: StaticStructureSchema = [3, n0, _SATD,
+  0,
+  [_Da, _ATc, _Ac, _Sev],
+  [4, 0, 0, 0]
+];
+export var SecurityLakeDirectQueryDataSource$: StaticStructureSchema = [3, n0, _SLDQDS,
+  0,
+  [_RA],
+  [0], 1
+];
+export var ServerlessVectorAcceleration$: StaticStructureSchema = [3, n0, _SVA,
+  0,
+  [_E],
+  [2]
+];
+export var ServiceOptions$: StaticStructureSchema = [3, n0, _SO,
+  0,
+  [_SR],
+  [64 | 0]
+];
+export var ServiceSoftwareOptions$: StaticStructureSchema = [3, n0, _SSO,
+  0,
+  [_CVu, _NV, _UAp, _Can, _USp, _D, _AUD, _OD],
+  [0, 0, 2, 2, 0, 0, 4, 2]
+];
+export var SnapshotOptions$: StaticStructureSchema = [3, n0, _SOn,
+  0,
+  [_ASSH],
+  [1]
+];
+export var SnapshotOptionsStatus$: StaticStructureSchema = [3, n0, _SOS,
+  0,
+  [_O, _S],
+  [() => SnapshotOptions$, () => OptionStatus$], 2
+];
+export var SoftwareUpdateOptions$: StaticStructureSchema = [3, n0, _SUO,
+  0,
+  [_ASUE, _ULSSFBG],
+  [2, 2]
+];
+export var SoftwareUpdateOptionsStatus$: StaticStructureSchema = [3, n0, _SUOS,
+  0,
+  [_O, _S],
+  [() => SoftwareUpdateOptions$, () => OptionStatus$]
+];
+export var StartDomainMaintenanceRequest$: StaticStructureSchema = [3, n0, _SDMR,
+  0,
+  [_DN, _Ac, _NI],
+  [[0, 1], 0, 0], 2
+];
+export var StartDomainMaintenanceResponse$: StaticStructureSchema = [3, n0, _SDMRt,
+  0,
+  [_MI],
+  [0]
+];
+export var StartMigrationRequest$: StaticStructureSchema = [3, n0, _SMR,
+  0,
+  [_aIp, _mO, _cT],
+  [0, () => MigrationOptions$, 0], 2
+];
+export var StartMigrationResponse$: StaticStructureSchema = [3, n0, _SMRt,
+  0,
+  [_mIi, _st],
+  [0, 0]
+];
+export var StartServiceSoftwareUpdateRequest$: StaticStructureSchema = [3, n0, _SSSUR,
+  0,
+  [_DN, _SAche, _DSTe],
+  [0, 0, 1], 1
+];
+export var StartServiceSoftwareUpdateResponse$: StaticStructureSchema = [3, n0, _SSSURt,
+  0,
+  [_SSO],
+  [() => ServiceSoftwareOptions$]
+];
+export var StorageType$: StaticStructureSchema = [3, n0, _STt,
+  0,
+  [_STN, _SSTN, _STL],
+  [0, 0, () => StorageTypeLimitList]
+];
+export var StorageTypeLimit$: StaticStructureSchema = [3, n0, _STLt,
+  0,
+  [_LN, _LV],
+  [0, 64 | 0]
+];
+export var SwitchoverReplicationRequest$: StaticStructureSchema = [3, n0, _SRR,
+  0,
+  [_DN, _PDA],
+  [[0, 1], 0], 2
+];
+export var SwitchoverReplicationResponse$: StaticStructureSchema = [3, n0, _SRRw,
+  0,
+  [_DA, _S],
+  [0, 0]
+];
+export var Tag$: StaticStructureSchema = [3, n0, _Tag,
+  0,
+  [_K, _V],
+  [0, 0], 2
+];
+export var TrafficPercents$: StaticStructureSchema = [3, n0, _TP,
+  0,
+  [_PRTP, _CRTP],
+  [1, 1], 2
+];
+export var TrafficSplitOptions$: StaticStructureSchema = [3, n0, _TSO,
+  0,
+  [_Cu, _Ta, _S],
+  [() => TrafficPercents$, () => TrafficPercents$, 0], 3
+];
+export var TrafficSplitRequestOptions$: StaticStructureSchema = [3, n0, _TSRO,
+  0,
+  [_Str, _CRTP],
+  [0, 1], 2
+];
+export var UpdateApplicationRequest$: StaticStructureSchema = [3, n0, _UAR,
+  0,
+  [_i, _dS, _aC, _iICO],
+  [[0, 1], () => DataSources, () => AppConfigs, () => IamIdentityCenterOptionsInput$], 1
+];
+export var UpdateApplicationResponse$: StaticStructureSchema = [3, n0, _UARp,
+  0,
+  [_i, _n, _a, _dS, _iICO, _aC, _cA, _lUA],
+  [0, 0, 0, () => DataSources, () => IamIdentityCenterOptions$, () => AppConfigs, 4, 4]
+];
+export var UpdateCloneRequest$: StaticStructureSchema = [3, n0, _UCR,
+  0,
+  [_DN, _TSO, _COu, _RO],
+  [[0, 1], () => TrafficSplitRequestOptions$, () => CutoverRequestOptions$, () => RetentionOptions$], 1
+];
+export var UpdateCloneResponse$: StaticStructureSchema = [3, n0, _UCRp,
+  0,
+  [_DN, _CIh, _COu, _TSO, _RO],
+  [0, 0, () => CutoverOptions$, () => TrafficSplitOptions$, () => RetentionOptions$], 2
+];
+export var UpdateDataSourceRequest$: StaticStructureSchema = [3, n0, _UDSR,
+  0,
+  [_DN, _N, _DST, _D, _S],
+  [[0, 1], [0, 1], () => DataSourceType$, 0, 0], 3
+];
+export var UpdateDataSourceResponse$: StaticStructureSchema = [3, n0, _UDSRp,
+  0,
+  [_M],
+  [0]
+];
+export var UpdateDirectQueryDataSourceRequest$: StaticStructureSchema = [3, n0, _UDQDSR,
+  0,
+  [_DSN, _DST, _D, _OSA, _DSAP],
+  [[0, 1], () => DirectQueryDataSourceType$, 0, 64 | 0, 0], 2
+];
+export var UpdateDirectQueryDataSourceResponse$: StaticStructureSchema = [3, n0, _UDQDSRp,
+  0,
+  [_DSA],
+  [0]
+];
+export var UpdateDomainConfigRequest$: StaticStructureSchema = [3, n0, _UDCR,
+  0,
+  [_DN, _CC, _EBSO, _SOn, _VPCO, _CO, _AO, _APc, _IPAT, _LPO, _EARO, _DEO, _NTNEO, _ASO, _ICO, _ATO, _DR, _DRM, _OPWO, _SUO, _AIMLO, _DSO, _ASPO, _UC, _EMn, _AW],
+  [[0, 1], () => ClusterConfig$, () => EBSOptions$, () => SnapshotOptions$, () => VPCOptions$, () => CognitoOptions$, 128 | 0, 0, 0, () => LogPublishingOptions, () => EncryptionAtRestOptions$, () => DomainEndpointOptions$, () => NodeToNodeEncryptionOptions$, [() => AdvancedSecurityOptionsInput$, 0], () => IdentityCenterOptionsInput$, () => AutoTuneOptions$, 2, 0, () => OffPeakWindowOptions$, () => SoftwareUpdateOptions$, () => AIMLOptionsInput$, () => DeploymentStrategyOptions$, () => AutomatedSnapshotPauseRequestOptions$, 0, 0, 64 | 0], 1
+];
+export var UpdateDomainConfigResponse$: StaticStructureSchema = [3, n0, _UDCRp,
+  0,
+  [_DC, _DRR, _DRPS],
+  [() => DomainConfig$, () => DryRunResults$, () => DryRunProgressStatus$], 1
+];
+export var UpdateIndexRequest$: StaticStructureSchema = [3, n0, _UIR,
+  0,
+  [_DN, _IN, _ISn],
+  [[0, 1], [0, 1], 15], 3
+];
+export var UpdateIndexResponse$: StaticStructureSchema = [3, n0, _UIRp,
+  0,
+  [_S],
+  [0], 1
+];
+export var UpdatePackageRequest$: StaticStructureSchema = [3, n0, _UPR,
+  0,
+  [_PID, _PS, _PDa, _CMo, _PC, _PEO],
+  [0, () => PackageSource$, 0, 0, () => PackageConfiguration$, () => PackageEncryptionOptions$], 2
+];
+export var UpdatePackageResponse$: StaticStructureSchema = [3, n0, _UPRp,
+  0,
+  [_PDac],
+  [() => PackageDetails$]
+];
+export var UpdatePackageScopeRequest$: StaticStructureSchema = [3, n0, _UPSR,
+  0,
+  [_PID, _Op, _PUL],
+  [0, 0, 64 | 0], 3
+];
+export var UpdatePackageScopeResponse$: StaticStructureSchema = [3, n0, _UPSRp,
+  0,
+  [_PID, _Op, _PUL],
+  [0, 0, 64 | 0]
+];
+export var UpdateScheduledActionRequest$: StaticStructureSchema = [3, n0, _USAR,
+  0,
+  [_DN, _AID, _ATc, _SAche, _DSTe],
+  [[0, 1], 0, 0, 0, 1], 4
+];
+export var UpdateScheduledActionResponse$: StaticStructureSchema = [3, n0, _USARp,
+  0,
+  [_SAc],
+  [() => ScheduledAction$]
+];
+export var UpdateVpcEndpointRequest$: StaticStructureSchema = [3, n0, _UVER,
+  0,
+  [_VEI, _VO],
+  [0, () => VPCOptions$], 2
+];
+export var UpdateVpcEndpointResponse$: StaticStructureSchema = [3, n0, _UVERp,
+  0,
+  [_VEp],
+  [() => VpcEndpoint$], 1
+];
+export var UpgradeDomainRequest$: StaticStructureSchema = [3, n0, _UDR,
+  0,
+  [_DN, _TVar, _PCO, _AO, _DSO],
+  [0, 0, 2, 128 | 0, () => DeploymentStrategyOverrideOptions$], 2
+];
+export var UpgradeDomainResponse$: StaticStructureSchema = [3, n0, _UDRp,
+  0,
+  [_UI, _DN, _TVar, _PCO, _AO, _DSO, _CPD],
+  [0, 0, 0, 2, 128 | 0, () => DeploymentStrategyOverrideOptions$, () => ChangeProgressDetails$]
+];
+export var UpgradeHistory$: StaticStructureSchema = [3, n0, _UHp,
+  0,
+  [_UN, _STta, _USpg, _SL],
+  [0, 4, 0, () => UpgradeStepsList]
+];
+export var UpgradeStepItem$: StaticStructureSchema = [3, n0, _USI,
+  0,
+  [_US, _USS, _Is, _PPr],
+  [0, 0, 64 | 0, 1]
+];
+export var UseCaseStatus$: StaticStructureSchema = [3, n0, _UCS,
+  0,
+  [_O, _S],
+  [0, () => OptionStatus$], 2
+];
+export var ValidationFailure$: StaticStructureSchema = [3, n0, _VFa,
+  0,
+  [_Cod, _M, _Sev],
+  [0, 0, 0]
+];
+export var VersionStatus$: StaticStructureSchema = [3, n0, _VSe,
+  0,
+  [_O, _S],
+  [0, () => OptionStatus$], 2
+];
+export var VPCDerivedInfo$: StaticStructureSchema = [3, n0, _VPCDI,
+  0,
+  [_VPCI, _SI, _AZv, _SGI, _EEg],
+  [0, 64 | 0, 64 | 0, 64 | 0, 2]
+];
+export var VPCDerivedInfoStatus$: StaticStructureSchema = [3, n0, _VPCDIS,
+  0,
+  [_O, _S],
+  [() => VPCDerivedInfo$, () => OptionStatus$], 2
+];
+export var VpcEndpoint$: StaticStructureSchema = [3, n0, _VEp,
+  0,
+  [_VEI, _VEO, _DA, _VO, _S, _En],
+  [0, 0, 0, () => VPCDerivedInfo$, 0, 0]
+];
+export var VpcEndpointError$: StaticStructureSchema = [3, n0, _VEEp,
+  0,
+  [_VEI, _EC, _EM],
+  [0, 0, 0]
+];
+export var VpcEndpointSummary$: StaticStructureSchema = [3, n0, _VES,
+  0,
+  [_VEI, _VEO, _DA, _S],
+  [0, 0, 0, 0]
+];
+export var VPCOptions$: StaticStructureSchema = [3, n0, _VPCO,
+  0,
+  [_SI, _SGI, _EEg],
+  [64 | 0, 64 | 0, 2]
+];
+export var WindowStartTime$: StaticStructureSchema = [3, n0, _WST,
+  0,
+  [_H, _Mi],
+  [1, 1], 2
+];
+export var WorkspaceConfigurationInput$: StaticStructureSchema = [3, n0, _WCI,
+  0,
+  [_n, _wT],
+  [0, 0], 2
+];
+export var ZoneAwarenessConfig$: StaticStructureSchema = [3, n0, _ZAC,
+  0,
+  [_AZC],
+  [1]
+];
+var __Unit = "unit" as const;
+var AcceptedWarningsList = 64 | 0;
+var AdditionalLimitList: StaticListSchema = [1, n0, _ALL,
+  0, () => AdditionalLimit$
+];
+var AppConfigs: StaticListSchema = [1, n0, _ACp,
+  0, () => AppConfig$
+];
+var ApplicationStatuses = 64 | 0;
+var ApplicationSummaries: StaticListSchema = [1, n0, _ASp,
+  0, () => ApplicationSummary$
+];
+var AuthorizedPrincipalList: StaticListSchema = [1, n0, _APL,
+  0, () => AuthorizedPrincipal$
+];
+var AutoTuneList: StaticListSchema = [1, n0, _ATL,
+  0, () => AutoTune$
+];
+var AutoTuneMaintenanceScheduleList: StaticListSchema = [1, n0, _ATMSL,
+  0, () => AutoTuneMaintenanceSchedule$
+];
+var AvailabilityZoneInfoList: StaticListSchema = [1, n0, _AZIL,
+  0, () => AvailabilityZoneInfo$
+];
+var AvailabilityZoneList = 64 | 0;
+var CancelledChangePropertyList: StaticListSchema = [1, n0, _CCPL,
+  0, () => CancelledChangeProperty$
+];
+var CapabilityFailures: StaticListSchema = [1, n0, _CFa,
+  0, () => CapabilityFailure$
+];
+var ChangeProgressStageList: StaticListSchema = [1, n0, _CPSL,
+  0, () => ChangeProgressStage$
+];
+var CompatibleVersionsList: StaticListSchema = [1, n0, _CVL,
+  0, () => CompatibleVersionsMap$
+];
+var DataSourceAttachmentSummaryList: StaticListSchema = [1, n0, _DSASL,
+  0, () => DataSourceAttachmentSummary$
+];
+var DataSourceList: StaticListSchema = [1, n0, _DSLa,
+  0, () => DataSourceDetails$
+];
+var DataSources: StaticListSchema = [1, n0, _DSat,
+  0, () => DataSource$
+];
+var DescribePackagesFilterList: StaticListSchema = [1, n0, _DPFL,
+  0, () => DescribePackagesFilter$
+];
+var DescribePackagesFilterValues = 64 | 0;
+var DiffItemNameList = 64 | 0;
+var DirectQueryDataSourceList: StaticListSchema = [1, n0, _DQDSL,
+  0, () => DirectQueryDataSource$
+];
+var DirectQueryOpenSearchARNList = 64 | 0;
+var DivergentFieldList: StaticListSchema = [1, n0, _DFL,
+  0, () => DivergentField$
+];
+var DivergentItemList: StaticListSchema = [1, n0, _DIL,
+  0, () => DivergentItem$
+];
+var DomainInfoList: StaticListSchema = [1, n0, _DILo,
+  0, () => DomainInfo$
+];
+var DomainMaintenanceList: StaticListSchema = [1, n0, _DML,
+  0, () => DomainMaintenanceDetails$
+];
+var DomainNameList = 64 | 0;
+var DomainNodesStatusList: StaticListSchema = [1, n0, _DNSL,
+  0, () => DomainNodesStatus$
+];
+var DomainPackageDetailsList: StaticListSchema = [1, n0, _DPDL,
+  0, () => DomainPackageDetails$
+];
+var DomainStatusList: StaticListSchema = [1, n0, _DSL,
+  0, () => DomainStatus$
+];
+var EnvironmentInfoList: StaticListSchema = [1, n0, _EIL,
+  0, () => EnvironmentInfo$
+];
+var FilterList: StaticListSchema = [1, n0, _FL,
+  0, () => Filter$
+];
+var GUIDList = 64 | 0;
+var InboundConnections: StaticListSchema = [1, n0, _ICnb,
+  0, () => InboundConnection$
+];
+var InsightFieldList: StaticListSchema = [1, n0, _IFL,
+  0, () => InsightField$
+];
+var InsightList: StaticListSchema = [1, n0, _ILn,
+  0, () => Insight$
+];
+var InstanceRoleList = 64 | 0;
+var InstanceTypeDetailsList: StaticListSchema = [1, n0, _ITDL,
+  0, () => InstanceTypeDetails$
+];
+var Issues = 64 | 0;
+var LimitValueList = 64 | 0;
+var MetadataCategoryList = 64 | 0;
+var MigrationSummaryList: StaticListSchema = [1, n0, _MSL,
+  0, () => MigrationSummary$
+];
+var ModifyingPropertiesList: StaticListSchema = [1, n0, _MPL,
+  0, () => ModifyingProperties$
+];
+var NodeOptionsList: StaticListSchema = [1, n0, _NOL,
+  0, () => NodeOption$
+];
+var OutboundConnections: StaticListSchema = [1, n0, _OCu,
+  0, () => OutboundConnection$
+];
+var PackageDetailsForAssociationList: StaticListSchema = [1, n0, _PDFAL,
+  0, () => PackageDetailsForAssociation$
+];
+var PackageDetailsList: StaticListSchema = [1, n0, _PDL,
+  0, () => PackageDetails$
+];
+var PackageIDList = 64 | 0;
+var PackageUserList = 64 | 0;
+var PackageVersionHistoryList: StaticListSchema = [1, n0, _PVHL,
+  0, () => PackageVersionHistory$
+];
+var RecurringChargeList: StaticListSchema = [1, n0, _RCL,
+  0, [() => RecurringCharge$,
+    { [_xN]: _RC }]
+];
+var RegionsList = 64 | 0;
+var ReplicationPeerList: StaticListSchema = [1, n0, _RPL,
+  0, () => ReplicationPeer$
+];
+var ReservedInstanceList: StaticListSchema = [1, n0, _RIL,
+  0, [() => ReservedInstance$,
+    0]
+];
+var ReservedInstanceOfferingList: StaticListSchema = [1, n0, _RIOL,
+  0, [() => ReservedInstanceOffering$,
+    { [_xN]: _RIOe }]
+];
+var SavedObjectIdentifierList: StaticListSchema = [1, n0, _SOIL,
+  0, () => SavedObjectIdentifier$
+];
+var ScheduledActionsList: StaticListSchema = [1, n0, _SAL,
+  0, () => ScheduledAction$
+];
+var SlotList = 64 | 1;
+var StorageTypeLimitList: StaticListSchema = [1, n0, _STLL,
+  0, () => StorageTypeLimit$
+];
+var StorageTypeList: StaticListSchema = [1, n0, _STLto,
+  0, () => StorageType$
+];
+var StringList = 64 | 0;
+var TagList: StaticListSchema = [1, n0, _TL,
+  0, () => Tag$
+];
+var UpgradeHistoryList: StaticListSchema = [1, n0, _UHL,
+  0, () => UpgradeHistory$
+];
+var UpgradeStepsList: StaticListSchema = [1, n0, _USL,
+  0, () => UpgradeStepItem$
+];
+var ValidationFailures: StaticListSchema = [1, n0, _VF,
+  0, () => ValidationFailure$
+];
+var ValueStringList = 64 | 0;
+var VersionList = 64 | 0;
+var VpcEndpointErrorList: StaticListSchema = [1, n0, _VEEL,
+  0, () => VpcEndpointError$
+];
+var VpcEndpointIdList = 64 | 0;
+var VpcEndpoints: StaticListSchema = [1, n0, _VEpc,
+  0, () => VpcEndpoint$
+];
+var VpcEndpointSummaryList: StaticListSchema = [1, n0, _VESL,
+  0, () => VpcEndpointSummary$
+];
+var AdvancedOptions = 128 | 0;
+var CompareDomainConfigurationCategoryMap: StaticMapSchema = [2, n0, _CDCCM,
+  0, 0, () => CategoryDiffResult$
+];
+var EndpointsMap = 128 | 0;
+var LimitsByRole: StaticMapSchema = [2, n0, _LBR,
+  0, 0, () => Limits$
+];
+var LogPublishingOptions: StaticMapSchema = [2, n0, _LPO,
+  0, 0, () => LogPublishingOption$
+];
+export var CapabilityBaseRequestConfig$: StaticUnionSchema = [4, n0, _CBRC,
+  0,
+  [_aCi],
+  [() => AIConfig$]
+];
+export var CapabilityBaseResponseConfig$: StaticUnionSchema = [4, n0, _CBRCa,
+  0,
+  [_aCi],
+  [() => AIConfig$]
+];
+export var CapabilityExtendedResponseConfig$: StaticUnionSchema = [4, n0, _CERC,
+  0,
+  [_aCi],
+  [() => AIConfig$]
+];
+export var DataSourceType$: StaticUnionSchema = [4, n0, _DST,
+  0,
+  [_SGDC],
+  [() => S3GlueDataCatalog$]
+];
+export var DirectQueryDataSourceType$: StaticUnionSchema = [4, n0, _DQDST,
+  0,
+  [_CWL, _SLe, _Prom],
+  [() => CloudWatchDirectQueryDataSource$, () => SecurityLakeDirectQueryDataSource$, () => PrometheusDirectQueryDataSource$]
+];
+export var RetentionOptions$: StaticUnionSchema = [4, n0, _RO,
+  0,
+  [_RIH, _RAe],
+  [1, 0]
+];
+export var AcceptInboundConnection$: StaticOperationSchema = [9, n0, _AICc,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}/accept", 200] }, () => AcceptInboundConnectionRequest$, () => AcceptInboundConnectionResponse$
+];
+export var AddDataSource$: StaticOperationSchema = [9, n0, _ADS,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/dataSource", 200] }, () => AddDataSourceRequest$, () => AddDataSourceResponse$
+];
+export var AddDirectQueryDataSource$: StaticOperationSchema = [9, n0, _ADQDS,
+  { [_h]: ["POST", "/2021-01-01/opensearch/directQueryDataSource", 200] }, () => AddDirectQueryDataSourceRequest$, () => AddDirectQueryDataSourceResponse$
+];
+export var AddReplicationPeer$: StaticOperationSchema = [9, n0, _ARP,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/replication/addPeer", 200] }, () => AddReplicationPeerRequest$, () => AddReplicationPeerResponse$
+];
+export var AddTags$: StaticOperationSchema = [9, n0, _ATd,
+  { [_h]: ["POST", "/2021-01-01/tags", 200] }, () => AddTagsRequest$, () => __Unit
+];
+export var AssociatePackage$: StaticOperationSchema = [9, n0, _APs,
+  { [_h]: ["POST", "/2021-01-01/packages/associate/{PackageID}/{DomainName}", 200] }, () => AssociatePackageRequest$, () => AssociatePackageResponse$
+];
+export var AssociatePackages$: StaticOperationSchema = [9, n0, _APss,
+  { [_h]: ["POST", "/2021-01-01/packages/associateMultiple", 200] }, () => AssociatePackagesRequest$, () => AssociatePackagesResponse$
+];
+export var AttachDataSource$: StaticOperationSchema = [9, n0, _ADSt,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application/{id}/attachDataSource", 200] }, () => AttachDataSourceRequest$, () => AttachDataSourceResponse$
+];
+export var AuthorizeVpcEndpointAccess$: StaticOperationSchema = [9, n0, _AVEA,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/authorizeVpcEndpointAccess", 200] }, () => AuthorizeVpcEndpointAccessRequest$, () => AuthorizeVpcEndpointAccessResponse$
+];
+export var CancelDomainConfigChange$: StaticOperationSchema = [9, n0, _CDCC,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/config/cancel", 200] }, () => CancelDomainConfigChangeRequest$, () => CancelDomainConfigChangeResponse$
+];
+export var CancelServiceSoftwareUpdate$: StaticOperationSchema = [9, n0, _CSSU,
+  { [_h]: ["POST", "/2021-01-01/opensearch/serviceSoftwareUpdate/cancel", 200] }, () => CancelServiceSoftwareUpdateRequest$, () => CancelServiceSoftwareUpdateResponse$
+];
+export var CompareDomainConfiguration$: StaticOperationSchema = [9, n0, _CDC,
+  { [_h]: ["POST", "/2021-01-01/opensearch/compareDomainConfiguration", 200] }, () => CompareDomainConfigurationRequest$, () => CompareDomainConfigurationResponse$
+];
+export var CreateApplication$: StaticOperationSchema = [9, n0, _CAre,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application", 200] }, () => CreateApplicationRequest$, () => CreateApplicationResponse$
+];
+export var CreateDomain$: StaticOperationSchema = [9, n0, _CDr,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain", 200] }, () => CreateDomainRequest$, () => CreateDomainResponse$
+];
+export var CreateIndex$: StaticOperationSchema = [9, n0, _CIr,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/index", 200] }, () => CreateIndexRequest$, () => CreateIndexResponse$
+];
+export var CreateOutboundConnection$: StaticOperationSchema = [9, n0, _COC,
+  { [_h]: ["POST", "/2021-01-01/opensearch/cc/outboundConnection", 200] }, () => CreateOutboundConnectionRequest$, () => CreateOutboundConnectionResponse$
+];
+export var CreatePackage$: StaticOperationSchema = [9, n0, _CPr,
+  { [_h]: ["POST", "/2021-01-01/packages", 200] }, () => CreatePackageRequest$, () => CreatePackageResponse$
+];
+export var CreateVpcEndpoint$: StaticOperationSchema = [9, n0, _CVE,
+  { [_h]: ["POST", "/2021-01-01/opensearch/vpcEndpoints", 200] }, () => CreateVpcEndpointRequest$, () => CreateVpcEndpointResponse$
+];
+export var DeleteApplication$: StaticOperationSchema = [9, n0, _DAe,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/application/{id}", 200] }, () => DeleteApplicationRequest$, () => DeleteApplicationResponse$
+];
+export var DeleteDataSource$: StaticOperationSchema = [9, n0, _DDS,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", 200] }, () => DeleteDataSourceRequest$, () => DeleteDataSourceResponse$
+];
+export var DeleteDirectQueryDataSource$: StaticOperationSchema = [9, n0, _DDQDS,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}", 200] }, () => DeleteDirectQueryDataSourceRequest$, () => __Unit
+];
+export var DeleteDomain$: StaticOperationSchema = [9, n0, _DD,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/domain/{DomainName}", 200] }, () => DeleteDomainRequest$, () => DeleteDomainResponse$
+];
+export var DeleteInboundConnection$: StaticOperationSchema = [9, n0, _DICe,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}", 200] }, () => DeleteInboundConnectionRequest$, () => DeleteInboundConnectionResponse$
+];
+export var DeleteIndex$: StaticOperationSchema = [9, n0, _DIe,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", 200] }, () => DeleteIndexRequest$, () => DeleteIndexResponse$
+];
+export var DeleteOutboundConnection$: StaticOperationSchema = [9, n0, _DOC,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/cc/outboundConnection/{ConnectionId}", 200] }, () => DeleteOutboundConnectionRequest$, () => DeleteOutboundConnectionResponse$
+];
+export var DeletePackage$: StaticOperationSchema = [9, n0, _DP,
+  { [_h]: ["DELETE", "/2021-01-01/packages/{PackageID}", 200] }, () => DeletePackageRequest$, () => DeletePackageResponse$
+];
+export var DeleteVpcEndpoint$: StaticOperationSchema = [9, n0, _DVE,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/vpcEndpoints/{VpcEndpointId}", 200] }, () => DeleteVpcEndpointRequest$, () => DeleteVpcEndpointResponse$
+];
+export var DeregisterCapability$: StaticOperationSchema = [9, n0, _DCe,
+  { [_h]: ["DELETE", "/2021-01-01/opensearch/application/{applicationId}/capability/deregister/{capabilityName}", 200] }, () => DeregisterCapabilityRequest$, () => DeregisterCapabilityResponse$
+];
+export var DescribeDataSourceAttachment$: StaticOperationSchema = [9, n0, _DDSA,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application/{id}/describeDataSourceAttachment", 200] }, () => DescribeDataSourceAttachmentRequest$, () => DescribeDataSourceAttachmentResponse$
+];
+export var DescribeDomain$: StaticOperationSchema = [9, n0, _DDe,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}", 200] }, () => DescribeDomainRequest$, () => DescribeDomainResponse$
+];
+export var DescribeDomainAutoTunes$: StaticOperationSchema = [9, n0, _DDAT,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/autoTunes", 200] }, () => DescribeDomainAutoTunesRequest$, () => DescribeDomainAutoTunesResponse$
+];
+export var DescribeDomainChangeProgress$: StaticOperationSchema = [9, n0, _DDCP,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/progress", 200] }, () => DescribeDomainChangeProgressRequest$, () => DescribeDomainChangeProgressResponse$
+];
+export var DescribeDomainConfig$: StaticOperationSchema = [9, n0, _DDC,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/config", 200] }, () => DescribeDomainConfigRequest$, () => DescribeDomainConfigResponse$
+];
+export var DescribeDomainHealth$: StaticOperationSchema = [9, n0, _DDH,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/health", 200] }, () => DescribeDomainHealthRequest$, () => DescribeDomainHealthResponse$
+];
+export var DescribeDomainNodes$: StaticOperationSchema = [9, n0, _DDN,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/nodes", 200] }, () => DescribeDomainNodesRequest$, () => DescribeDomainNodesResponse$
+];
+export var DescribeDomainReplication$: StaticOperationSchema = [9, n0, _DDRescrib,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/replication", 200] }, () => DescribeDomainReplicationRequest$, () => DescribeDomainReplicationResponse$
+];
+export var DescribeDomains$: StaticOperationSchema = [9, n0, _DDes,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain-info", 200] }, () => DescribeDomainsRequest$, () => DescribeDomainsResponse$
+];
+export var DescribeDryRunProgress$: StaticOperationSchema = [9, n0, _DDRP,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/dryRun", 200] }, () => DescribeDryRunProgressRequest$, () => DescribeDryRunProgressResponse$
+];
+export var DescribeInboundConnections$: StaticOperationSchema = [9, n0, _DICes,
+  { [_h]: ["POST", "/2021-01-01/opensearch/cc/inboundConnection/search", 200] }, () => DescribeInboundConnectionsRequest$, () => DescribeInboundConnectionsResponse$
+];
+export var DescribeInsightDetails$: StaticOperationSchema = [9, n0, _DID,
+  { [_h]: ["POST", "/2021-01-01/opensearch/insight-details", 200] }, () => DescribeInsightDetailsRequest$, () => DescribeInsightDetailsResponse$
+];
+export var DescribeInstanceTypeLimits$: StaticOperationSchema = [9, n0, _DITL,
+  { [_h]: ["GET", "/2021-01-01/opensearch/instanceTypeLimits/{EngineVersion}/{InstanceType}", 200] }, () => DescribeInstanceTypeLimitsRequest$, () => DescribeInstanceTypeLimitsResponse$
+];
+export var DescribeOutboundConnections$: StaticOperationSchema = [9, n0, _DOCe,
+  { [_h]: ["POST", "/2021-01-01/opensearch/cc/outboundConnection/search", 200] }, () => DescribeOutboundConnectionsRequest$, () => DescribeOutboundConnectionsResponse$
+];
+export var DescribePackages$: StaticOperationSchema = [9, n0, _DPe,
+  { [_h]: ["POST", "/2021-01-01/packages/describe", 200] }, () => DescribePackagesRequest$, () => DescribePackagesResponse$
+];
+export var DescribeReservedInstanceOfferings$: StaticOperationSchema = [9, n0, _DRIO,
+  { [_h]: ["GET", "/2021-01-01/opensearch/reservedInstanceOfferings", 200] }, () => DescribeReservedInstanceOfferingsRequest$, () => DescribeReservedInstanceOfferingsResponse$
+];
+export var DescribeReservedInstances$: StaticOperationSchema = [9, n0, _DRIe,
+  { [_h]: ["GET", "/2021-01-01/opensearch/reservedInstances", 200] }, () => DescribeReservedInstancesRequest$, () => DescribeReservedInstancesResponse$
+];
+export var DescribeVpcEndpoints$: StaticOperationSchema = [9, n0, _DVEe,
+  { [_h]: ["POST", "/2021-01-01/opensearch/vpcEndpoints/describe", 200] }, () => DescribeVpcEndpointsRequest$, () => DescribeVpcEndpointsResponse$
+];
+export var DetachDataSource$: StaticOperationSchema = [9, n0, _DDSe,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application/{id}/detachDataSource", 200] }, () => DetachDataSourceRequest$, () => DetachDataSourceResponse$
+];
+export var DissociatePackage$: StaticOperationSchema = [9, n0, _DPi,
+  { [_h]: ["POST", "/2021-01-01/packages/dissociate/{PackageID}/{DomainName}", 200] }, () => DissociatePackageRequest$, () => DissociatePackageResponse$
+];
+export var DissociatePackages$: StaticOperationSchema = [9, n0, _DPis,
+  { [_h]: ["POST", "/2021-01-01/packages/dissociateMultiple", 200] }, () => DissociatePackagesRequest$, () => DissociatePackagesResponse$
+];
+export var FailoverReplication$: StaticOperationSchema = [9, n0, _FR,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/replication/failover", 200] }, () => FailoverReplicationRequest$, () => FailoverReplicationResponse$
+];
+export var GetApplication$: StaticOperationSchema = [9, n0, _GA,
+  { [_h]: ["GET", "/2021-01-01/opensearch/application/{id}", 200] }, () => GetApplicationRequest$, () => GetApplicationResponse$
+];
+export var GetCapability$: StaticOperationSchema = [9, n0, _GC,
+  { [_h]: ["GET", "/2021-01-01/opensearch/application/{applicationId}/capability/{capabilityName}", 200] }, () => GetCapabilityRequest$, () => GetCapabilityResponse$
+];
+export var GetCompatibleVersions$: StaticOperationSchema = [9, n0, _GCV,
+  { [_h]: ["GET", "/2021-01-01/opensearch/compatibleVersions", 200] }, () => GetCompatibleVersionsRequest$, () => GetCompatibleVersionsResponse$
+];
+export var GetDataSource$: StaticOperationSchema = [9, n0, _GDS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", 200] }, () => GetDataSourceRequest$, () => GetDataSourceResponse$
+];
+export var GetDefaultApplicationSetting$: StaticOperationSchema = [9, n0, _GDAS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/defaultApplicationSetting", 200] }, () => GetDefaultApplicationSettingRequest$, () => GetDefaultApplicationSettingResponse$
+];
+export var GetDirectQueryDataSource$: StaticOperationSchema = [9, n0, _GDQDS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}", 200] }, () => GetDirectQueryDataSourceRequest$, () => GetDirectQueryDataSourceResponse$
+];
+export var GetDomainMaintenanceStatus$: StaticOperationSchema = [9, n0, _GDMS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", 200] }, () => GetDomainMaintenanceStatusRequest$, () => GetDomainMaintenanceStatusResponse$
+];
+export var GetIndex$: StaticOperationSchema = [9, n0, _GI,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", 200] }, () => GetIndexRequest$, () => GetIndexResponse$
+];
+export var GetMigration$: StaticOperationSchema = [9, n0, _GM,
+  { [_h]: ["GET", "/2021-01-01/opensearch/app-migrations/{migrationId}", 200] }, () => GetMigrationRequest$, () => GetMigrationResponse$
+];
+export var GetPackageVersionHistory$: StaticOperationSchema = [9, n0, _GPVH,
+  { [_h]: ["GET", "/2021-01-01/packages/{PackageID}/history", 200] }, () => GetPackageVersionHistoryRequest$, () => GetPackageVersionHistoryResponse$
+];
+export var GetUpgradeHistory$: StaticOperationSchema = [9, n0, _GUH,
+  { [_h]: ["GET", "/2021-01-01/opensearch/upgradeDomain/{DomainName}/history", 200] }, () => GetUpgradeHistoryRequest$, () => GetUpgradeHistoryResponse$
+];
+export var GetUpgradeStatus$: StaticOperationSchema = [9, n0, _GUS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/upgradeDomain/{DomainName}/status", 200] }, () => GetUpgradeStatusRequest$, () => GetUpgradeStatusResponse$
+];
+export var InsightFeedback$: StaticOperationSchema = [9, n0, _IFn,
+  { [_h]: ["POST", "/2021-01-01/opensearch/insight-feedback", 200] }, () => InsightFeedbackRequest$, () => InsightFeedbackResponse$
+];
+export var ListApplications$: StaticOperationSchema = [9, n0, _LA,
+  { [_h]: ["GET", "/2021-01-01/opensearch/list-applications", 200] }, () => ListApplicationsRequest$, () => ListApplicationsResponse$
+];
+export var ListDataSourceAttachments$: StaticOperationSchema = [9, n0, _LDSA,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application/{id}/listDataSourceAttachments", 200] }, () => ListDataSourceAttachmentsRequest$, () => ListDataSourceAttachmentsResponse$
+];
+export var ListDataSources$: StaticOperationSchema = [9, n0, _LDS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/dataSource", 200] }, () => ListDataSourcesRequest$, () => ListDataSourcesResponse$
+];
+export var ListDirectQueryDataSources$: StaticOperationSchema = [9, n0, _LDQDS,
+  { [_h]: ["GET", "/2021-01-01/opensearch/directQueryDataSource", 200] }, () => ListDirectQueryDataSourcesRequest$, () => ListDirectQueryDataSourcesResponse$
+];
+export var ListDomainMaintenances$: StaticOperationSchema = [9, n0, _LDM,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenances", 200] }, () => ListDomainMaintenancesRequest$, () => ListDomainMaintenancesResponse$
+];
+export var ListDomainNames$: StaticOperationSchema = [9, n0, _LDN,
+  { [_h]: ["GET", "/2021-01-01/domain", 200] }, () => ListDomainNamesRequest$, () => ListDomainNamesResponse$
+];
+export var ListDomainsForPackage$: StaticOperationSchema = [9, n0, _LDFP,
+  { [_h]: ["GET", "/2021-01-01/packages/{PackageID}/domains", 200] }, () => ListDomainsForPackageRequest$, () => ListDomainsForPackageResponse$
+];
+export var ListInsights$: StaticOperationSchema = [9, n0, _LI,
+  { [_h]: ["POST", "/2021-01-01/opensearch/insights", 200] }, () => ListInsightsRequest$, () => ListInsightsResponse$
+];
+export var ListInstanceTypeDetails$: StaticOperationSchema = [9, n0, _LITD,
+  { [_h]: ["GET", "/2021-01-01/opensearch/instanceTypeDetails/{EngineVersion}", 200] }, () => ListInstanceTypeDetailsRequest$, () => ListInstanceTypeDetailsResponse$
+];
+export var ListMigrations$: StaticOperationSchema = [9, n0, _LM,
+  { [_h]: ["GET", "/2021-01-01/opensearch/app-migrations", 200] }, () => ListMigrationsRequest$, () => ListMigrationsResponse$
+];
+export var ListPackagesForDomain$: StaticOperationSchema = [9, n0, _LPFD,
+  { [_h]: ["GET", "/2021-01-01/domain/{DomainName}/packages", 200] }, () => ListPackagesForDomainRequest$, () => ListPackagesForDomainResponse$
+];
+export var ListScheduledActions$: StaticOperationSchema = [9, n0, _LSA,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/scheduledActions", 200] }, () => ListScheduledActionsRequest$, () => ListScheduledActionsResponse$
+];
+export var ListTags$: StaticOperationSchema = [9, n0, _LT,
+  { [_h]: ["GET", "/2021-01-01/tags", 200] }, () => ListTagsRequest$, () => ListTagsResponse$
+];
+export var ListVersions$: StaticOperationSchema = [9, n0, _LVi,
+  { [_h]: ["GET", "/2021-01-01/opensearch/versions", 200] }, () => ListVersionsRequest$, () => ListVersionsResponse$
+];
+export var ListVpcEndpointAccess$: StaticOperationSchema = [9, n0, _LVEA,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/listVpcEndpointAccess", 200] }, () => ListVpcEndpointAccessRequest$, () => ListVpcEndpointAccessResponse$
+];
+export var ListVpcEndpoints$: StaticOperationSchema = [9, n0, _LVE,
+  { [_h]: ["GET", "/2021-01-01/opensearch/vpcEndpoints", 200] }, () => ListVpcEndpointsRequest$, () => ListVpcEndpointsResponse$
+];
+export var ListVpcEndpointsForDomain$: StaticOperationSchema = [9, n0, _LVEFD,
+  { [_h]: ["GET", "/2021-01-01/opensearch/domain/{DomainName}/vpcEndpoints", 200] }, () => ListVpcEndpointsForDomainRequest$, () => ListVpcEndpointsForDomainResponse$
+];
+export var PurchaseReservedInstanceOffering$: StaticOperationSchema = [9, n0, _PRIO,
+  { [_h]: ["POST", "/2021-01-01/opensearch/purchaseReservedInstanceOffering", 200] }, () => PurchaseReservedInstanceOfferingRequest$, () => PurchaseReservedInstanceOfferingResponse$
+];
+export var PutDefaultApplicationSetting$: StaticOperationSchema = [9, n0, _PDAS,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/defaultApplicationSetting", 200] }, () => PutDefaultApplicationSettingRequest$, () => PutDefaultApplicationSettingResponse$
+];
+export var RegisterCapability$: StaticOperationSchema = [9, n0, _RCeg,
+  { [_h]: ["POST", "/2021-01-01/opensearch/application/{applicationId}/capability/register", 200] }, () => RegisterCapabilityRequest$, () => RegisterCapabilityResponse$
+];
+export var RejectInboundConnection$: StaticOperationSchema = [9, n0, _RIC,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}/reject", 200] }, () => RejectInboundConnectionRequest$, () => RejectInboundConnectionResponse$
+];
+export var RemoveReplicationPeer$: StaticOperationSchema = [9, n0, _RRP,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/replication/removePeer", 200] }, () => RemoveReplicationPeerRequest$, () => RemoveReplicationPeerResponse$
+];
+export var RemoveTags$: StaticOperationSchema = [9, n0, _RT,
+  { [_h]: ["POST", "/2021-01-01/tags-removal", 200] }, () => RemoveTagsRequest$, () => __Unit
+];
+export var RevokeVpcEndpointAccess$: StaticOperationSchema = [9, n0, _RVEA,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/revokeVpcEndpointAccess", 200] }, () => RevokeVpcEndpointAccessRequest$, () => RevokeVpcEndpointAccessResponse$
+];
+export var RollbackServiceSoftwareUpdate$: StaticOperationSchema = [9, n0, _RSSU,
+  { [_h]: ["POST", "/2021-01-01/opensearch/serviceSoftwareUpdate/rollback", 200] }, () => RollbackServiceSoftwareUpdateRequest$, () => RollbackServiceSoftwareUpdateResponse$
+];
+export var StartDomainMaintenance$: StaticOperationSchema = [9, n0, _SDM,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", 200] }, () => StartDomainMaintenanceRequest$, () => StartDomainMaintenanceResponse$
+];
+export var StartMigration$: StaticOperationSchema = [9, n0, _SMt,
+  { [_h]: ["POST", "/2021-01-01/opensearch/app-migrations", 200] }, () => StartMigrationRequest$, () => StartMigrationResponse$
+];
+export var StartServiceSoftwareUpdate$: StaticOperationSchema = [9, n0, _SSSU,
+  { [_h]: ["POST", "/2021-01-01/opensearch/serviceSoftwareUpdate/start", 200] }, () => StartServiceSoftwareUpdateRequest$, () => StartServiceSoftwareUpdateResponse$
+];
+export var SwitchoverReplication$: StaticOperationSchema = [9, n0, _SRw,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/replication/switchover", 200] }, () => SwitchoverReplicationRequest$, () => SwitchoverReplicationResponse$
+];
+export var UpdateApplication$: StaticOperationSchema = [9, n0, _UApd,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/application/{id}", 200] }, () => UpdateApplicationRequest$, () => UpdateApplicationResponse$
+];
+export var UpdateClone$: StaticOperationSchema = [9, n0, _UCp,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/clone", 200] }, () => UpdateCloneRequest$, () => UpdateCloneResponse$
+];
+export var UpdateDataSource$: StaticOperationSchema = [9, n0, _UDS,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", 200] }, () => UpdateDataSourceRequest$, () => UpdateDataSourceResponse$
+];
+export var UpdateDirectQueryDataSource$: StaticOperationSchema = [9, n0, _UDQDS,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}", 200] }, () => UpdateDirectQueryDataSourceRequest$, () => UpdateDirectQueryDataSourceResponse$
+];
+export var UpdateDomainConfig$: StaticOperationSchema = [9, n0, _UDC,
+  { [_h]: ["POST", "/2021-01-01/opensearch/domain/{DomainName}/config", 200] }, () => UpdateDomainConfigRequest$, () => UpdateDomainConfigResponse$
+];
+export var UpdateIndex$: StaticOperationSchema = [9, n0, _UIp,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", 200] }, () => UpdateIndexRequest$, () => UpdateIndexResponse$
+];
+export var UpdatePackage$: StaticOperationSchema = [9, n0, _UPp,
+  { [_h]: ["POST", "/2021-01-01/packages/update", 200] }, () => UpdatePackageRequest$, () => UpdatePackageResponse$
+];
+export var UpdatePackageScope$: StaticOperationSchema = [9, n0, _UPS,
+  { [_h]: ["POST", "/2021-01-01/packages/updateScope", 200] }, () => UpdatePackageScopeRequest$, () => UpdatePackageScopeResponse$
+];
+export var UpdateScheduledAction$: StaticOperationSchema = [9, n0, _USA,
+  { [_h]: ["PUT", "/2021-01-01/opensearch/domain/{DomainName}/scheduledAction/update", 200] }, () => UpdateScheduledActionRequest$, () => UpdateScheduledActionResponse$
+];
+export var UpdateVpcEndpoint$: StaticOperationSchema = [9, n0, _UVE,
+  { [_h]: ["POST", "/2021-01-01/opensearch/vpcEndpoints/update", 200] }, () => UpdateVpcEndpointRequest$, () => UpdateVpcEndpointResponse$
+];
+export var UpgradeDomain$: StaticOperationSchema = [9, n0, _UDp,
+  { [_h]: ["POST", "/2021-01-01/opensearch/upgradeDomain", 200] }, () => UpgradeDomainRequest$, () => UpgradeDomainResponse$
+];

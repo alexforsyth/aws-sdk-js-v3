@@ -1,0 +1,128 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWorkersRequest, ListWorkersResponse } from "../models/models_0";
+import { ListWorkers$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWorkersCommand}.
+ */
+export interface ListWorkersCommandInput extends ListWorkersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWorkersCommand}.
+ */
+export interface ListWorkersCommandOutput extends ListWorkersResponse, __MetadataBearer {}
+
+/**
+ * Lists workers.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListWorkersCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListWorkersCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListWorkersRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListWorkersCommand(input);
+ * const response = await client.send(command);
+ * // { // ListWorkersResponse
+ * //   workers: [ // WorkerSummaries // required
+ * //     { // WorkerSummary
+ * //       farmId: "STRING_VALUE", // required
+ * //       fleetId: "STRING_VALUE", // required
+ * //       workerId: "STRING_VALUE", // required
+ * //       hostProperties: { // HostPropertiesResponse
+ * //         ipAddresses: { // IpAddresses
+ * //           ipV4Addresses: [ // IpV4Addresses
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ipV6Addresses: [ // IpV6Addresses
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         hostName: "STRING_VALUE",
+ * //         ec2InstanceArn: "STRING_VALUE",
+ * //         ec2InstanceType: "STRING_VALUE",
+ * //       },
+ * //       status: "CREATED" || "STARTED" || "STOPPING" || "STOPPED" || "NOT_RESPONDING" || "NOT_COMPATIBLE" || "RUNNING" || "IDLE", // required
+ * //       log: { // LogConfiguration
+ * //         logDriver: "STRING_VALUE", // required
+ * //         options: { // LogOptions
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         parameters: { // LogParameters
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         error: "STRING_VALUE",
+ * //       },
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListWorkersCommandInput - {@link ListWorkersCommandInput}
+ * @returns {@link ListWorkersCommandOutput}
+ * @see {@link ListWorkersCommandInput} for command's `input` shape.
+ * @see {@link ListWorkersCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListWorkersCommand extends command<ListWorkersCommandInput, ListWorkersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWorkers",
+  ListWorkers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWorkersRequest;
+      output: ListWorkersResponse;
+    };
+    sdk: {
+      input: ListWorkersCommandInput;
+      output: ListWorkersCommandOutput;
+    };
+  };
+}

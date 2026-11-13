@@ -1,31 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeartifactClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeartifactClient";
-import { ListRepositoriesRequest, ListRepositoriesResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRepositoriesCommand,
-  serializeAws_restJson1ListRepositoriesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRepositoriesRequest, ListRepositoriesResult } from "../models/models_0";
+import { ListRepositories$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRepositoriesCommand}.
+ */
 export interface ListRepositoriesCommandInput extends ListRepositoriesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRepositoriesCommand}.
+ */
 export interface ListRepositoriesCommandOutput extends ListRepositoriesResult, __MetadataBearer {}
 
 /**
  * <p>
  *        Returns a list of
  *        <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a>
- *        objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input
+ *        objects. Each <code>RepositorySummary</code> contains information about a repository in the specified Amazon Web Services account and that matches the input
  *        parameters.
  *      </p>
  * @example
@@ -33,68 +34,78 @@ export interface ListRepositoriesCommandOutput extends ListRepositoriesResult, _
  * ```javascript
  * import { CodeartifactClient, ListRepositoriesCommand } from "@aws-sdk/client-codeartifact"; // ES Modules import
  * // const { CodeartifactClient, ListRepositoriesCommand } = require("@aws-sdk/client-codeartifact"); // CommonJS import
+ * // import type { CodeartifactClientConfig } from "@aws-sdk/client-codeartifact";
+ * const config = {}; // type is CodeartifactClientConfig
  * const client = new CodeartifactClient(config);
+ * const input = { // ListRepositoriesRequest
+ *   repositoryPrefix: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListRepositoriesCommand(input);
  * const response = await client.send(command);
+ * // { // ListRepositoriesResult
+ * //   repositories: [ // RepositorySummaryList
+ * //     { // RepositorySummary
+ * //       name: "STRING_VALUE",
+ * //       administratorAccount: "STRING_VALUE",
+ * //       domainName: "STRING_VALUE",
+ * //       domainOwner: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       createdTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRepositoriesCommandInput - {@link ListRepositoriesCommandInput}
+ * @returns {@link ListRepositoriesCommandOutput}
  * @see {@link ListRepositoriesCommandInput} for command's `input` shape.
  * @see {@link ListRepositoriesCommandOutput} for command's `response` shape.
- * @see {@link CodeartifactClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeartifactClientResolvedConfig | config} for CodeartifactClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>
+ *         The operation did not succeed because of an unauthorized access attempt.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The operation did not succeed because of an error that occurred inside CodeArtifact. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>
+ *       The operation did not succeed because too many requests are sent to the service.
+ *     </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>
+ *       The operation did not succeed because a parameter in the request was sent with an invalid value.
+ *     </p>
+ *
+ * @throws {@link CodeartifactServiceException}
+ * <p>Base exception class for all service exceptions from Codeartifact service.</p>
+ *
+ *
+ * @public
  */
-export class ListRepositoriesCommand extends $Command<
-  ListRepositoriesCommandInput,
-  ListRepositoriesCommandOutput,
-  CodeartifactClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRepositoriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeartifactClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRepositoriesCommandInput, ListRepositoriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeartifactClient";
-    const commandName = "ListRepositoriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRepositoriesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRepositoriesResult.filterSensitiveLog,
+export class ListRepositoriesCommand extends command<ListRepositoriesCommandInput, ListRepositoriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRepositories",
+  ListRepositories$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRepositoriesRequest;
+      output: ListRepositoriesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRepositoriesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRepositoriesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRepositoriesCommandOutput> {
-    return deserializeAws_restJson1ListRepositoriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRepositoriesCommandInput;
+      output: ListRepositoriesCommandOutput;
+    };
+  };
 }

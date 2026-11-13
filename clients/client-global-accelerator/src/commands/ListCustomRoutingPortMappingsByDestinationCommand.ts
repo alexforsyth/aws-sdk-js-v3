@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListCustomRoutingPortMappingsByDestinationRequest,
   ListCustomRoutingPortMappingsByDestinationResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListCustomRoutingPortMappingsByDestinationCommand,
-  serializeAws_json1_1ListCustomRoutingPortMappingsByDestinationCommand,
-} from "../protocols/Aws_json1_1";
+import { ListCustomRoutingPortMappingsByDestination$ } from "../schemas/schemas_0";
 
-export interface ListCustomRoutingPortMappingsByDestinationCommandInput
-  extends ListCustomRoutingPortMappingsByDestinationRequest {}
-export interface ListCustomRoutingPortMappingsByDestinationCommandOutput
-  extends ListCustomRoutingPortMappingsByDestinationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCustomRoutingPortMappingsByDestinationCommand}.
+ */
+export interface ListCustomRoutingPortMappingsByDestinationCommandInput extends ListCustomRoutingPortMappingsByDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCustomRoutingPortMappingsByDestinationCommand}.
+ */
+export interface ListCustomRoutingPortMappingsByDestinationCommandOutput extends ListCustomRoutingPortMappingsByDestinationResponse, __MetadataBearer {}
 
 /**
  * <p>List the port mappings for a specific EC2 instance (destination) in a VPC subnet endpoint. The
@@ -41,77 +35,82 @@ export interface ListCustomRoutingPortMappingsByDestinationCommandOutput
  * ```javascript
  * import { GlobalAcceleratorClient, ListCustomRoutingPortMappingsByDestinationCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, ListCustomRoutingPortMappingsByDestinationCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // ListCustomRoutingPortMappingsByDestinationRequest
+ *   EndpointId: "STRING_VALUE", // required
+ *   DestinationAddress: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListCustomRoutingPortMappingsByDestinationCommand(input);
  * const response = await client.send(command);
+ * // { // ListCustomRoutingPortMappingsByDestinationResponse
+ * //   DestinationPortMappings: [ // DestinationPortMappings
+ * //     { // DestinationPortMapping
+ * //       AcceleratorArn: "STRING_VALUE",
+ * //       AcceleratorSocketAddresses: [ // SocketAddresses
+ * //         { // SocketAddress
+ * //           IpAddress: "STRING_VALUE",
+ * //           Port: Number("int"),
+ * //         },
+ * //       ],
+ * //       EndpointGroupArn: "STRING_VALUE",
+ * //       EndpointId: "STRING_VALUE",
+ * //       EndpointGroupRegion: "STRING_VALUE",
+ * //       DestinationSocketAddress: {
+ * //         IpAddress: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //       },
+ * //       IpAddressType: "IPV4" || "DUAL_STACK",
+ * //       DestinationTrafficState: "ALLOW" || "DENY",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCustomRoutingPortMappingsByDestinationCommandInput - {@link ListCustomRoutingPortMappingsByDestinationCommandInput}
+ * @returns {@link ListCustomRoutingPortMappingsByDestinationCommandOutput}
  * @see {@link ListCustomRoutingPortMappingsByDestinationCommandInput} for command's `input` shape.
  * @see {@link ListCustomRoutingPortMappingsByDestinationCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link EndpointNotFoundException} (client fault)
+ *  <p>The endpoint that you specified doesn't exist.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>There isn't another item to return.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class ListCustomRoutingPortMappingsByDestinationCommand extends $Command<
-  ListCustomRoutingPortMappingsByDestinationCommandInput,
-  ListCustomRoutingPortMappingsByDestinationCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCustomRoutingPortMappingsByDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListCustomRoutingPortMappingsByDestinationCommandInput,
-    ListCustomRoutingPortMappingsByDestinationCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "ListCustomRoutingPortMappingsByDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCustomRoutingPortMappingsByDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListCustomRoutingPortMappingsByDestinationResponse.filterSensitiveLog,
+export class ListCustomRoutingPortMappingsByDestinationCommand extends command<ListCustomRoutingPortMappingsByDestinationCommandInput, ListCustomRoutingPortMappingsByDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCustomRoutingPortMappingsByDestination",
+  ListCustomRoutingPortMappingsByDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomRoutingPortMappingsByDestinationRequest;
+      output: ListCustomRoutingPortMappingsByDestinationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListCustomRoutingPortMappingsByDestinationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListCustomRoutingPortMappingsByDestinationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListCustomRoutingPortMappingsByDestinationCommandOutput> {
-    return deserializeAws_json1_1ListCustomRoutingPortMappingsByDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCustomRoutingPortMappingsByDestinationCommandInput;
+      output: ListCustomRoutingPortMappingsByDestinationCommandOutput;
+    };
+  };
 }

@@ -1,96 +1,132 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DeleteAccountSettingRequest, DeleteAccountSettingResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteAccountSettingCommand,
-  serializeAws_json1_1DeleteAccountSettingCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAccountSettingRequest, DeleteAccountSettingResponse } from "../models/models_0";
+import { DeleteAccountSetting$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAccountSettingCommand}.
+ */
 export interface DeleteAccountSettingCommandInput extends DeleteAccountSettingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAccountSettingCommand}.
+ */
 export interface DeleteAccountSettingCommandOutput extends DeleteAccountSettingResponse, __MetadataBearer {}
 
 /**
- * <p>Disables an account setting for a specified IAM user, IAM role, or the root user for
- * 			an account.</p>
+ * <p>Disables an account setting for a specified user, role, or the root user for an account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, DeleteAccountSettingCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DeleteAccountSettingCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DeleteAccountSettingRequest
+ *   name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows", // required
+ *   principalArn: "STRING_VALUE",
+ * };
  * const command = new DeleteAccountSettingCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteAccountSettingResponse
+ * //   setting: { // Setting
+ * //     name: "serviceLongArnFormat" || "taskLongArnFormat" || "containerInstanceLongArnFormat" || "awsvpcTrunking" || "containerInsights" || "fargateFIPSMode" || "tagResourceAuthorization" || "fargateTaskRetirementWaitPeriod" || "guardDutyActivate" || "defaultLogDriverMode" || "fargateEventWindows",
+ * //     value: "STRING_VALUE",
+ * //     principalArn: "STRING_VALUE",
+ * //     type: "user" || "aws_managed",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteAccountSettingCommandInput - {@link DeleteAccountSettingCommandInput}
+ * @returns {@link DeleteAccountSettingCommandOutput}
  * @see {@link DeleteAccountSettingCommandInput} for command's `input` shape.
  * @see {@link DeleteAccountSettingCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To delete your account setting
+ * ```javascript
+ * // This example deletes the account setting for your user for the specified resource type.
+ * const input = {
+ *   name: "serviceLongArnFormat"
+ * };
+ * const command = new DeleteAccountSettingCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   setting: {
+ *     name: "serviceLongArnFormat",
+ *     principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *     value: "enabled"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @example To delete the account settings for a specific IAM user or IAM role
+ * ```javascript
+ * // This example deletes the account setting for a specific IAM user or IAM role for the specified resource type. Only the root user can view or modify the account settings for another user.
+ * const input = {
+ *   name: "containerInstanceLongArnFormat",
+ *   principalArn: "arn:aws:iam::<aws_account_id>:user/principalName"
+ * };
+ * const command = new DeleteAccountSettingCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   setting: {
+ *     name: "containerInstanceLongArnFormat",
+ *     principalArn: "arn:aws:iam::<aws_account_id>:user/principalName",
+ *     value: "enabled"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteAccountSettingCommand extends $Command<
-  DeleteAccountSettingCommandInput,
-  DeleteAccountSettingCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAccountSettingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAccountSettingCommandInput, DeleteAccountSettingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DeleteAccountSettingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAccountSettingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAccountSettingResponse.filterSensitiveLog,
+export class DeleteAccountSettingCommand extends command<DeleteAccountSettingCommandInput, DeleteAccountSettingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAccountSetting",
+  DeleteAccountSetting$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAccountSettingRequest;
+      output: DeleteAccountSettingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAccountSettingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteAccountSettingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAccountSettingCommandOutput> {
-    return deserializeAws_json1_1DeleteAccountSettingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAccountSettingCommandInput;
+      output: DeleteAccountSettingCommandOutput;
+    };
+  };
 }

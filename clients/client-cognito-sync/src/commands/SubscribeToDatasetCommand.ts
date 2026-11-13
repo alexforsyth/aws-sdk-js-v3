@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { SubscribeToDatasetRequest, SubscribeToDatasetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SubscribeToDatasetCommand,
-  serializeAws_restJson1SubscribeToDatasetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SubscribeToDatasetRequest, SubscribeToDatasetResponse } from "../models/models_0";
+import { SubscribeToDataset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SubscribeToDatasetCommand}.
+ */
 export interface SubscribeToDatasetCommandInput extends SubscribeToDatasetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SubscribeToDatasetCommand}.
+ */
 export interface SubscribeToDatasetCommandOutput extends SubscribeToDatasetResponse, __MetadataBearer {}
 
 /**
@@ -37,17 +38,17 @@ export interface SubscribeToDatasetCommandOutput extends SubscribeToDatasetRespo
  * X-AMZ-SECURITY-TOKEN: <securitytoken>
  * AUTHORIZATION: AWS4-HMAC-SHA256 Credential=<credential>, SignedHeaders=content-type;content-length;host;x-amz-date;x-amz-target, Signature=<signature>
  *
- * {
+ * \{
  *     "Operation": "com.amazonaws.cognito.sync.model#SubscribeToDataset",
  *     "Service": "com.amazonaws.cognito.sync.model#AWSCognitoSyncService",
  *     "Input":
- *     {
+ *     \{
  *         "IdentityPoolId": "ID_POOL_ID",
  *         "IdentityId": "IDENTITY_ID",
  *         "DatasetName": "Rufus",
  *         "DeviceId": "5cd28fbe-dd83-47ab-9f83-19093a5fb014"
- *     }
- * }
+ *     \}
+ * \}
  *                </request>
  *             <response>
  * 1.1 200 OK
@@ -56,13 +57,13 @@ export interface SubscribeToDatasetCommandOutput extends SubscribeToDatasetRespo
  * content-type: application/json
  * content-length: 99
  *
- * {
+ * \{
  *     "Output":
- *     {
+ *     \{
  *         "__type": "com.amazonaws.cognito.sync.model#SubscribeToDatasetResponse"
- *     },
+ *     \},
  *     "Version": "1.0"
- * }
+ * \}
  *                </response>
  *          </example>
  *       </examples>
@@ -71,68 +72,70 @@ export interface SubscribeToDatasetCommandOutput extends SubscribeToDatasetRespo
  * ```javascript
  * import { CognitoSyncClient, SubscribeToDatasetCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, SubscribeToDatasetCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // SubscribeToDatasetRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ *   IdentityId: "STRING_VALUE", // required
+ *   DatasetName: "STRING_VALUE", // required
+ *   DeviceId: "STRING_VALUE", // required
+ * };
  * const command = new SubscribeToDatasetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SubscribeToDatasetCommandInput - {@link SubscribeToDatasetCommandInput}
+ * @returns {@link SubscribeToDatasetCommandOutput}
  * @see {@link SubscribeToDatasetCommandInput} for command's `input` shape.
  * @see {@link SubscribeToDatasetCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidConfigurationException} (client fault)
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Thrown if the request is
+ *       throttled.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class SubscribeToDatasetCommand extends $Command<
-  SubscribeToDatasetCommandInput,
-  SubscribeToDatasetCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SubscribeToDatasetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SubscribeToDatasetCommandInput, SubscribeToDatasetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "SubscribeToDatasetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SubscribeToDatasetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SubscribeToDatasetResponse.filterSensitiveLog,
+export class SubscribeToDatasetCommand extends command<SubscribeToDatasetCommandInput, SubscribeToDatasetCommandOutput>(
+  _ep0,
+  _mw0,
+  "SubscribeToDataset",
+  SubscribeToDataset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SubscribeToDatasetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SubscribeToDatasetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SubscribeToDatasetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SubscribeToDatasetCommandOutput> {
-    return deserializeAws_restJson1SubscribeToDatasetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SubscribeToDatasetCommandInput;
+      output: SubscribeToDatasetCommandOutput;
+    };
+  };
 }

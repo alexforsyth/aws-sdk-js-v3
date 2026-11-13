@@ -1,152 +1,195 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CancelKeyDeletionCommandInput, CancelKeyDeletionCommandOutput } from "./commands/CancelKeyDeletionCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultKMSHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  CancelKeyDeletionCommandInput,
+  CancelKeyDeletionCommandOutput,
+} from "./commands/CancelKeyDeletionCommand";
+import type {
   ConnectCustomKeyStoreCommandInput,
   ConnectCustomKeyStoreCommandOutput,
 } from "./commands/ConnectCustomKeyStoreCommand";
-import { CreateAliasCommandInput, CreateAliasCommandOutput } from "./commands/CreateAliasCommand";
-import {
+import type { CreateAliasCommandInput, CreateAliasCommandOutput } from "./commands/CreateAliasCommand";
+import type {
   CreateCustomKeyStoreCommandInput,
   CreateCustomKeyStoreCommandOutput,
 } from "./commands/CreateCustomKeyStoreCommand";
-import { CreateGrantCommandInput, CreateGrantCommandOutput } from "./commands/CreateGrantCommand";
-import { CreateKeyCommandInput, CreateKeyCommandOutput } from "./commands/CreateKeyCommand";
-import { DecryptCommandInput, DecryptCommandOutput } from "./commands/DecryptCommand";
-import { DeleteAliasCommandInput, DeleteAliasCommandOutput } from "./commands/DeleteAliasCommand";
-import {
+import type { CreateGrantCommandInput, CreateGrantCommandOutput } from "./commands/CreateGrantCommand";
+import type { CreateKeyCommandInput, CreateKeyCommandOutput } from "./commands/CreateKeyCommand";
+import type { DecapsulateCommandInput, DecapsulateCommandOutput } from "./commands/DecapsulateCommand";
+import type { DecryptCommandInput, DecryptCommandOutput } from "./commands/DecryptCommand";
+import type { DeleteAliasCommandInput, DeleteAliasCommandOutput } from "./commands/DeleteAliasCommand";
+import type {
   DeleteCustomKeyStoreCommandInput,
   DeleteCustomKeyStoreCommandOutput,
 } from "./commands/DeleteCustomKeyStoreCommand";
-import {
+import type {
   DeleteImportedKeyMaterialCommandInput,
   DeleteImportedKeyMaterialCommandOutput,
 } from "./commands/DeleteImportedKeyMaterialCommand";
-import {
+import type {
+  DeriveSharedSecretCommandInput,
+  DeriveSharedSecretCommandOutput,
+} from "./commands/DeriveSharedSecretCommand";
+import type {
   DescribeCustomKeyStoresCommandInput,
   DescribeCustomKeyStoresCommandOutput,
 } from "./commands/DescribeCustomKeyStoresCommand";
-import { DescribeKeyCommandInput, DescribeKeyCommandOutput } from "./commands/DescribeKeyCommand";
-import { DisableKeyCommandInput, DisableKeyCommandOutput } from "./commands/DisableKeyCommand";
-import { DisableKeyRotationCommandInput, DisableKeyRotationCommandOutput } from "./commands/DisableKeyRotationCommand";
-import {
+import type { DescribeKeyCommandInput, DescribeKeyCommandOutput } from "./commands/DescribeKeyCommand";
+import type { DisableKeyCommandInput, DisableKeyCommandOutput } from "./commands/DisableKeyCommand";
+import type {
+  DisableKeyRotationCommandInput,
+  DisableKeyRotationCommandOutput,
+} from "./commands/DisableKeyRotationCommand";
+import type {
   DisconnectCustomKeyStoreCommandInput,
   DisconnectCustomKeyStoreCommandOutput,
 } from "./commands/DisconnectCustomKeyStoreCommand";
-import { EnableKeyCommandInput, EnableKeyCommandOutput } from "./commands/EnableKeyCommand";
-import { EnableKeyRotationCommandInput, EnableKeyRotationCommandOutput } from "./commands/EnableKeyRotationCommand";
-import { EncryptCommandInput, EncryptCommandOutput } from "./commands/EncryptCommand";
-import { GenerateDataKeyCommandInput, GenerateDataKeyCommandOutput } from "./commands/GenerateDataKeyCommand";
-import {
+import type { EnableKeyCommandInput, EnableKeyCommandOutput } from "./commands/EnableKeyCommand";
+import type {
+  EnableKeyRotationCommandInput,
+  EnableKeyRotationCommandOutput,
+} from "./commands/EnableKeyRotationCommand";
+import type { EncapsulateCommandInput, EncapsulateCommandOutput } from "./commands/EncapsulateCommand";
+import type { EncryptCommandInput, EncryptCommandOutput } from "./commands/EncryptCommand";
+import type { GenerateDataKeyCommandInput, GenerateDataKeyCommandOutput } from "./commands/GenerateDataKeyCommand";
+import type {
   GenerateDataKeyPairCommandInput,
   GenerateDataKeyPairCommandOutput,
 } from "./commands/GenerateDataKeyPairCommand";
-import {
+import type {
   GenerateDataKeyPairWithoutPlaintextCommandInput,
   GenerateDataKeyPairWithoutPlaintextCommandOutput,
 } from "./commands/GenerateDataKeyPairWithoutPlaintextCommand";
-import {
+import type {
   GenerateDataKeyWithoutPlaintextCommandInput,
   GenerateDataKeyWithoutPlaintextCommandOutput,
 } from "./commands/GenerateDataKeyWithoutPlaintextCommand";
-import { GenerateRandomCommandInput, GenerateRandomCommandOutput } from "./commands/GenerateRandomCommand";
-import { GetKeyPolicyCommandInput, GetKeyPolicyCommandOutput } from "./commands/GetKeyPolicyCommand";
-import {
+import type { GenerateMacCommandInput, GenerateMacCommandOutput } from "./commands/GenerateMacCommand";
+import type { GenerateRandomCommandInput, GenerateRandomCommandOutput } from "./commands/GenerateRandomCommand";
+import type { GetKeyLastUsageCommandInput, GetKeyLastUsageCommandOutput } from "./commands/GetKeyLastUsageCommand";
+import type { GetKeyPolicyCommandInput, GetKeyPolicyCommandOutput } from "./commands/GetKeyPolicyCommand";
+import type {
   GetKeyRotationStatusCommandInput,
   GetKeyRotationStatusCommandOutput,
 } from "./commands/GetKeyRotationStatusCommand";
-import {
+import type {
   GetParametersForImportCommandInput,
   GetParametersForImportCommandOutput,
 } from "./commands/GetParametersForImportCommand";
-import { GetPublicKeyCommandInput, GetPublicKeyCommandOutput } from "./commands/GetPublicKeyCommand";
-import { ImportKeyMaterialCommandInput, ImportKeyMaterialCommandOutput } from "./commands/ImportKeyMaterialCommand";
-import { ListAliasesCommandInput, ListAliasesCommandOutput } from "./commands/ListAliasesCommand";
-import { ListGrantsCommandInput, ListGrantsCommandOutput } from "./commands/ListGrantsCommand";
-import { ListKeyPoliciesCommandInput, ListKeyPoliciesCommandOutput } from "./commands/ListKeyPoliciesCommand";
-import { ListKeysCommandInput, ListKeysCommandOutput } from "./commands/ListKeysCommand";
-import { ListResourceTagsCommandInput, ListResourceTagsCommandOutput } from "./commands/ListResourceTagsCommand";
-import {
+import type { GetPublicKeyCommandInput, GetPublicKeyCommandOutput } from "./commands/GetPublicKeyCommand";
+import type {
+  ImportKeyMaterialCommandInput,
+  ImportKeyMaterialCommandOutput,
+} from "./commands/ImportKeyMaterialCommand";
+import type { ListAliasesCommandInput, ListAliasesCommandOutput } from "./commands/ListAliasesCommand";
+import type { ListGrantsCommandInput, ListGrantsCommandOutput } from "./commands/ListGrantsCommand";
+import type { ListKeyPoliciesCommandInput, ListKeyPoliciesCommandOutput } from "./commands/ListKeyPoliciesCommand";
+import type { ListKeyRotationsCommandInput, ListKeyRotationsCommandOutput } from "./commands/ListKeyRotationsCommand";
+import type { ListKeysCommandInput, ListKeysCommandOutput } from "./commands/ListKeysCommand";
+import type { ListResourceTagsCommandInput, ListResourceTagsCommandOutput } from "./commands/ListResourceTagsCommand";
+import type {
   ListRetirableGrantsCommandInput,
   ListRetirableGrantsCommandOutput,
 } from "./commands/ListRetirableGrantsCommand";
-import { PutKeyPolicyCommandInput, PutKeyPolicyCommandOutput } from "./commands/PutKeyPolicyCommand";
-import { ReEncryptCommandInput, ReEncryptCommandOutput } from "./commands/ReEncryptCommand";
-import { ReplicateKeyCommandInput, ReplicateKeyCommandOutput } from "./commands/ReplicateKeyCommand";
-import { RetireGrantCommandInput, RetireGrantCommandOutput } from "./commands/RetireGrantCommand";
-import { RevokeGrantCommandInput, RevokeGrantCommandOutput } from "./commands/RevokeGrantCommand";
-import {
+import type { PutKeyPolicyCommandInput, PutKeyPolicyCommandOutput } from "./commands/PutKeyPolicyCommand";
+import type { ReEncryptCommandInput, ReEncryptCommandOutput } from "./commands/ReEncryptCommand";
+import type { ReplicateKeyCommandInput, ReplicateKeyCommandOutput } from "./commands/ReplicateKeyCommand";
+import type { RetireGrantCommandInput, RetireGrantCommandOutput } from "./commands/RetireGrantCommand";
+import type { RevokeGrantCommandInput, RevokeGrantCommandOutput } from "./commands/RevokeGrantCommand";
+import type {
+  RotateKeyOnDemandCommandInput,
+  RotateKeyOnDemandCommandOutput,
+} from "./commands/RotateKeyOnDemandCommand";
+import type {
   ScheduleKeyDeletionCommandInput,
   ScheduleKeyDeletionCommandOutput,
 } from "./commands/ScheduleKeyDeletionCommand";
-import { SignCommandInput, SignCommandOutput } from "./commands/SignCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateAliasCommandInput, UpdateAliasCommandOutput } from "./commands/UpdateAliasCommand";
-import {
+import type { SignCommandInput, SignCommandOutput } from "./commands/SignCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateAliasCommandInput, UpdateAliasCommandOutput } from "./commands/UpdateAliasCommand";
+import type {
   UpdateCustomKeyStoreCommandInput,
   UpdateCustomKeyStoreCommandOutput,
 } from "./commands/UpdateCustomKeyStoreCommand";
-import {
+import type {
   UpdateKeyDescriptionCommandInput,
   UpdateKeyDescriptionCommandOutput,
 } from "./commands/UpdateKeyDescriptionCommand";
-import {
+import type {
   UpdatePrimaryRegionCommandInput,
   UpdatePrimaryRegionCommandOutput,
 } from "./commands/UpdatePrimaryRegionCommand";
-import { VerifyCommandInput, VerifyCommandOutput } from "./commands/VerifyCommand";
+import type { VerifyCommandInput, VerifyCommandOutput } from "./commands/VerifyCommand";
+import type { VerifyMacCommandInput, VerifyMacCommandOutput } from "./commands/VerifyMacCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CancelKeyDeletionCommandInput
   | ConnectCustomKeyStoreCommandInput
@@ -154,10 +197,12 @@ export type ServiceInputTypes =
   | CreateCustomKeyStoreCommandInput
   | CreateGrantCommandInput
   | CreateKeyCommandInput
+  | DecapsulateCommandInput
   | DecryptCommandInput
   | DeleteAliasCommandInput
   | DeleteCustomKeyStoreCommandInput
   | DeleteImportedKeyMaterialCommandInput
+  | DeriveSharedSecretCommandInput
   | DescribeCustomKeyStoresCommandInput
   | DescribeKeyCommandInput
   | DisableKeyCommandInput
@@ -165,12 +210,15 @@ export type ServiceInputTypes =
   | DisconnectCustomKeyStoreCommandInput
   | EnableKeyCommandInput
   | EnableKeyRotationCommandInput
+  | EncapsulateCommandInput
   | EncryptCommandInput
   | GenerateDataKeyCommandInput
   | GenerateDataKeyPairCommandInput
   | GenerateDataKeyPairWithoutPlaintextCommandInput
   | GenerateDataKeyWithoutPlaintextCommandInput
+  | GenerateMacCommandInput
   | GenerateRandomCommandInput
+  | GetKeyLastUsageCommandInput
   | GetKeyPolicyCommandInput
   | GetKeyRotationStatusCommandInput
   | GetParametersForImportCommandInput
@@ -179,6 +227,7 @@ export type ServiceInputTypes =
   | ListAliasesCommandInput
   | ListGrantsCommandInput
   | ListKeyPoliciesCommandInput
+  | ListKeyRotationsCommandInput
   | ListKeysCommandInput
   | ListResourceTagsCommandInput
   | ListRetirableGrantsCommandInput
@@ -187,6 +236,7 @@ export type ServiceInputTypes =
   | ReplicateKeyCommandInput
   | RetireGrantCommandInput
   | RevokeGrantCommandInput
+  | RotateKeyOnDemandCommandInput
   | ScheduleKeyDeletionCommandInput
   | SignCommandInput
   | TagResourceCommandInput
@@ -195,8 +245,12 @@ export type ServiceInputTypes =
   | UpdateCustomKeyStoreCommandInput
   | UpdateKeyDescriptionCommandInput
   | UpdatePrimaryRegionCommandInput
-  | VerifyCommandInput;
+  | VerifyCommandInput
+  | VerifyMacCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CancelKeyDeletionCommandOutput
   | ConnectCustomKeyStoreCommandOutput
@@ -204,10 +258,12 @@ export type ServiceOutputTypes =
   | CreateCustomKeyStoreCommandOutput
   | CreateGrantCommandOutput
   | CreateKeyCommandOutput
+  | DecapsulateCommandOutput
   | DecryptCommandOutput
   | DeleteAliasCommandOutput
   | DeleteCustomKeyStoreCommandOutput
   | DeleteImportedKeyMaterialCommandOutput
+  | DeriveSharedSecretCommandOutput
   | DescribeCustomKeyStoresCommandOutput
   | DescribeKeyCommandOutput
   | DisableKeyCommandOutput
@@ -215,12 +271,15 @@ export type ServiceOutputTypes =
   | DisconnectCustomKeyStoreCommandOutput
   | EnableKeyCommandOutput
   | EnableKeyRotationCommandOutput
+  | EncapsulateCommandOutput
   | EncryptCommandOutput
   | GenerateDataKeyCommandOutput
   | GenerateDataKeyPairCommandOutput
   | GenerateDataKeyPairWithoutPlaintextCommandOutput
   | GenerateDataKeyWithoutPlaintextCommandOutput
+  | GenerateMacCommandOutput
   | GenerateRandomCommandOutput
+  | GetKeyLastUsageCommandOutput
   | GetKeyPolicyCommandOutput
   | GetKeyRotationStatusCommandOutput
   | GetParametersForImportCommandOutput
@@ -229,6 +288,7 @@ export type ServiceOutputTypes =
   | ListAliasesCommandOutput
   | ListGrantsCommandOutput
   | ListKeyPoliciesCommandOutput
+  | ListKeyRotationsCommandOutput
   | ListKeysCommandOutput
   | ListResourceTagsCommandOutput
   | ListRetirableGrantsCommandOutput
@@ -237,6 +297,7 @@ export type ServiceOutputTypes =
   | ReplicateKeyCommandOutput
   | RetireGrantCommandOutput
   | RevokeGrantCommandOutput
+  | RotateKeyOnDemandCommandOutput
   | ScheduleKeyDeletionCommandOutput
   | SignCommandOutput
   | TagResourceCommandOutput
@@ -245,20 +306,24 @@ export type ServiceOutputTypes =
   | UpdateCustomKeyStoreCommandOutput
   | UpdateKeyDescriptionCommandOutput
   | UpdatePrimaryRegionCommandOutput
-  | VerifyCommandOutput;
+  | VerifyCommandOutput
+  | VerifyMacCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -270,7 +335,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -309,25 +374,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -340,58 +396,107 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type KMSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of KMSClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type KMSClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of KMSClient class constructor that set the region, credentials and other options.
  */
 export interface KMSClientConfig extends KMSClientConfigType {}
 
-type KMSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of KMSClient class. This is resolved and normalized from the {@link KMSClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type KMSClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of KMSClient class. This is resolved and normalized from the {@link KMSClientConfig | constructor configuration interface}.
  */
 export interface KMSClientResolvedConfig extends KMSClientResolvedConfigType {}
 
@@ -403,29 +508,50 @@ export interface KMSClientResolvedConfig extends KMSClientResolvedConfigType {}
  *                <i>Key Management Service Developer Guide</i>
  *             </a>.</p>
  *          <note>
- *             <p>KMS is replacing the term <i>customer master key (CMK)</i> with <i>KMS key</i> and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
+ *             <p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i>
+ *   and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
  *             <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming
- *         languages and platforms (Java, Ruby, .Net, macOS, Android, etc.). The SDKs provide a
- *         convenient way to create programmatic access to KMS and other Amazon Web Services services. For example,
- *         the SDKs take care of tasks such as signing requests (see below), managing errors, and
- *         retrying requests automatically. For more information about the Amazon Web Services SDKs, including how to
- *         download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web
- *           Services</a>.</p>
+ *         languages and platforms (Java, Rust, Python, Ruby, .Net, macOS, Android, etc.). The SDKs
+ *         provide a convenient way to create programmatic access to KMS and other Amazon Web Services services.
+ *         For example, the SDKs take care of tasks such as signing requests (see below), managing
+ *         errors, and retrying requests automatically. For more information about the Amazon Web Services SDKs,
+ *         including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools
+ *           for Amazon Web Services</a>.</p>
  *          </note>
  *          <p>We recommend that you use the Amazon Web Services SDKs to make programmatic API calls to KMS.</p>
- *          <p>Clients must support TLS (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients
- *       must also support cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral
- *       Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most modern systems
- *       such as Java 7 and later support these modes.</p>
+ *          <p>If you need to use FIPS 140-2 validated cryptographic modules when communicating with
+ *       Amazon Web Services, use one of the FIPS endpoints in your preferred Amazon Web Services Region. If you need communicate
+ *       over IPv6, use the dual-stack endpoint in your preferred Amazon Web Services Region. For more information
+ *       see <a href="https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region">Service
+ *         endpoints</a> in the Key Management Service topic of the <i>Amazon Web Services General Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/ipv6-kms.html">Dual-stack endpoint
+ *         support</a> in the KMS Developer Guide.</p>
+ *          <p>All KMS API calls must be signed and be transmitted using Transport Layer Security
+ *       (TLS). KMS recommends you always use the latest supported TLS version. Clients must also
+ *       support cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral Diffie-Hellman
+ *       (DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most modern systems such as Java 7
+ *       and later support these modes.</p>
+ *          <note>
+ *             <p>With current technology, brute force attacks on KMS TLS cipher suite key exchange
+ *         mechanisms are not feasible. However, cipher suites that use Rivest–Shamir–Adleman (RSA)
+ *         or Diffie-Hellman (DH) key exchange will be susceptible if large-scale quantum computing
+ *         becomes practical.
+ *         <a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf">NIST IR 8547</a>
+ *         on the NIST website establishes a timeline to phase out quantum-vulnerable algorithms
+ *         by 2030 and disallow them entirely by 2035. If your applications rely on the long-term
+ *         confidentiality of KMS API traffic, we recommend that you
+ *         <a href="https://docs.aws.amazon.com/kms/latest/developerguide/pqtls.html">use post-quantum TLS with KMS</a>.
+ *         For more information about post-quantum cybersecurity, see <a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/">Post-Quantum Cybersecurity Resources</a> on the
+ *         National Security Agency (NSA) website.</p>
+ *          </note>
  *          <p>
  *             <b>Signing Requests</b>
  *          </p>
- *          <p>Requests must be signed by using an access key ID and a secret access key. We strongly
- *       recommend that you <i>do not</i> use your Amazon Web Services account (root) access key ID and
- *       secret key for everyday work with KMS. Instead, use the access key ID and secret access key
- *       for an IAM user. You can also use the Amazon Web Services Security Token Service to generate temporary
- *       security credentials that you can use to sign requests.</p>
- *          <p>All KMS operations require <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
+ *          <p>Requests must be signed using an access key ID and a secret access key. We strongly
+ *       recommend that you do not use your Amazon Web Services account root access key ID and secret access key for
+ *       everyday work. You can use the access key ID and secret access key for an IAM user or you
+ *       can use the Security Token Service (STS) to generate temporary security credentials and use those to sign
+ *       requests. </p>
+ *          <p>All KMS requests must be signed with <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
  *          <p>
  *             <b>Logging API Requests</b>
  *          </p>
@@ -486,6 +612,7 @@ export interface KMSClientResolvedConfig extends KMSClientResolvedConfigType {}
  *                </p>
  *             </li>
  *          </ul>
+ * @public
  */
 export class KMSClient extends __Client<
   __HttpHandlerOptions,
@@ -498,22 +625,36 @@ export class KMSClient extends __Client<
    */
   readonly config: KMSClientResolvedConfig;
 
-  constructor(configuration: KMSClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<KMSClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultKMSHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: KMSClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

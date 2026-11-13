@@ -1,0 +1,85 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DisableImageDeregistrationProtectionRequest,
+  DisableImageDeregistrationProtectionResult,
+} from "../models/models_5";
+import { DisableImageDeregistrationProtection$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableImageDeregistrationProtectionCommand}.
+ */
+export interface DisableImageDeregistrationProtectionCommandInput extends DisableImageDeregistrationProtectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableImageDeregistrationProtectionCommand}.
+ */
+export interface DisableImageDeregistrationProtectionCommandOutput extends DisableImageDeregistrationProtectionResult, __MetadataBearer {}
+
+/**
+ * <p>Disables deregistration protection for an AMI. When deregistration protection is disabled,
+ *       the AMI can be deregistered.</p>
+ *          <p>If you chose to include a 24-hour cooldown period when you enabled deregistration
+ *       protection for the AMI, then, when you disable deregistration protection, you won’t
+ *       immediately be able to deregister the AMI.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deregistration-protection.html">Protect an Amazon EC2 AMI from
+ *         deregistration</a> in the <i>Amazon EC2 User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EC2Client, DisableImageDeregistrationProtectionCommand } from "@aws-sdk/client-ec2"; // ES Modules import
+ * // const { EC2Client, DisableImageDeregistrationProtectionCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
+ * const client = new EC2Client(config);
+ * const input = { // DisableImageDeregistrationProtectionRequest
+ *   ImageId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
+ * const command = new DisableImageDeregistrationProtectionCommand(input);
+ * const response = await client.send(command);
+ * // { // DisableImageDeregistrationProtectionResult
+ * //   Return: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DisableImageDeregistrationProtectionCommandInput - {@link DisableImageDeregistrationProtectionCommandInput}
+ * @returns {@link DisableImageDeregistrationProtectionCommandOutput}
+ * @see {@link DisableImageDeregistrationProtectionCommandInput} for command's `input` shape.
+ * @see {@link DisableImageDeregistrationProtectionCommandOutput} for command's `response` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
+ *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
+ */
+export class DisableImageDeregistrationProtectionCommand extends command<DisableImageDeregistrationProtectionCommandInput, DisableImageDeregistrationProtectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableImageDeregistrationProtection",
+  DisableImageDeregistrationProtection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableImageDeregistrationProtectionRequest;
+      output: DisableImageDeregistrationProtectionResult;
+    };
+    sdk: {
+      input: DisableImageDeregistrationProtectionCommandInput;
+      output: DisableImageDeregistrationProtectionCommandOutput;
+    };
+  };
+}

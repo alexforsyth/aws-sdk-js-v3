@@ -1,0 +1,489 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+
+
+
+
+
+
+
+
+
+
+# 3.972.11 (2026-08-14)
+### Chores
+* upgrade to typescript 7 ([#8264](https://github.com/aws/aws-sdk-js-v3/issues/8264)) ([ca81fbb](https://github.com/aws/aws-sdk-js-v3/commit/ca81fbb7398345aa31482dd7aa1971bccf278989))
+
+
+
+# 3.972.10 (2026-08-11)
+### Chores
+* upgrade to typescript 6 ([#8257](https://github.com/aws/aws-sdk-js-v3/issues/8257)) ([edabd4a](https://github.com/aws/aws-sdk-js-v3/commit/edabd4a5228e259e9f3352cd47414069db755188))
+
+
+
+# 3.972.9 (2026-07-08)
+### Chores
+* use isolatedModules for types ([#8164](https://github.com/aws/aws-sdk-js-v3/issues/8164)) ([f274899](https://github.com/aws/aws-sdk-js-v3/commit/f274899d4ecfef189ed7f9b4d5d02c450e11d84d))
+
+
+
+# 3.972.8 (2026-06-13)
+### Chores
+* **scripts:** tuning the build graph ([#8095](https://github.com/aws/aws-sdk-js-v3/issues/8095)) ([67981c5](https://github.com/aws/aws-sdk-js-v3/commit/67981c5a65d6dd797a065df034a8d0fcdaa9b7bd))
+
+
+
+# 3.972.7 (2026-06-08)
+### Chores
+* **scripts:** update pkg json linting ([#8082](https://github.com/aws/aws-sdk-js-v3/issues/8082)) ([86792c5](https://github.com/aws/aws-sdk-js-v3/commit/86792c5e3b9c0b697161a5a14ef119153d1c17f5))
+
+
+
+# 3.972.6 (2026-06-05)
+### Chores
+* update author URL in package.json ([#8080](https://github.com/aws/aws-sdk-js-v3/issues/8080)) ([9bd1a86](https://github.com/aws/aws-sdk-js-v3/commit/9bd1a86b9bec0f69c58dcfdda481c9e1797dd73f))
+
+
+
+# 3.972.5 (2026-03-25)
+### Docs
+* **packages-internal:** readme updates for internal packages ([#7885](https://github.com/aws/aws-sdk-js-v3/issues/7885)) ([2da8b4c](https://github.com/aws/aws-sdk-js-v3/commit/2da8b4cd3ee660dcb14ca79d77cf942bd3405349))
+
+
+
+# 3.972.4 (2026-03-04)
+### Chores
+* set downlevel types to be used in typescript@'<4.5' ([#7817](https://github.com/aws/aws-sdk-js-v3/issues/7817)) ([03dad66](https://github.com/aws/aws-sdk-js-v3/commit/03dad66b98363f09d1f0984b670be110caea8f62))
+
+
+
+# 3.972.3 (2026-02-25)
+### Chores
+* **packages:** reapply eslint rules ([#7789](https://github.com/aws/aws-sdk-js-v3/issues/7789)) ([ab81c73](https://github.com/aws/aws-sdk-js-v3/commit/ab81c738436db219e5163ccaab953805776b33d6))
+
+
+
+# 3.972.2 (2026-01-25)
+### Chores
+* **packages-internal:** update metadata url paths ([#7679](https://github.com/aws/aws-sdk-js-v3/issues/7679)) ([c3a351c](https://github.com/aws/aws-sdk-js-v3/commit/c3a351c1fdbb8e8124ddadfd07a2d29f88ec47f1))
+
+
+
+# 3.972.1 (2026-01-21)
+### Chores
+* **packages:** move package folders for internal pkgs ([#7670](https://github.com/aws/aws-sdk-js-v3/issues/7670)) ([ce66606](https://github.com/aws/aws-sdk-js-v3/commit/ce66606d7028a9a2841fc27acdd4bab3a0917546))
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.971.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.970.0...v3.971.0) (2026-01-16)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.572.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.571.0...v3.572.0) (2024-05-08)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.310.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.309.0...v3.310.0) (2023-04-10)
+
+
+### Bug Fixes
+
+* use updated dist glob pattern in package.json ([#4628](https://github.com/aws/aws-sdk-js-v3/issues/4628)) ([352393d](https://github.com/aws/aws-sdk-js-v3/commit/352393dcdba5ba16dca589c265c40e22913c7f2b))
+
+
+
+
+
+# [3.303.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.302.0...v3.303.0) (2023-03-30)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.295.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.294.0...v3.295.0) (2023-03-20)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.292.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.291.0...v3.292.0) (2023-03-15)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.208.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.207.0...v3.208.0) (2022-11-10)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.201.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.200.0...v3.201.0) (2022-11-01)
+
+
+### Features
+
+* end support for Node.js 12.x ([#4123](https://github.com/aws/aws-sdk-js-v3/issues/4123)) ([83f913e](https://github.com/aws/aws-sdk-js-v3/commit/83f913ec2ac3878d8726c6964f585550dc5caf3e))
+
+
+
+
+
+# [3.188.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.187.0...v3.188.0) (2022-10-13)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.186.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.185.0...v3.186.0) (2022-10-06)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.183.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.182.0...v3.183.0) (2022-10-03)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.170.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.169.0...v3.170.0) (2022-09-13)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.167.0...v3.168.0) (2022-09-09)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.55.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.1...v3.55.0) (2022-03-21)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.52.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.51.0...v3.52.0) (2022-02-18)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.49.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.48.0...v3.49.0) (2022-01-29)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+## [3.47.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.0-release-test-1...v3.47.1) (2022-01-20)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.47.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.46.0...v3.47.0) (2022-01-15)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.46.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.45.0...v3.46.0) (2022-01-07)
+
+
+### Features
+
+* **packages:** end support for Node.js 10.x ([#3141](https://github.com/aws/aws-sdk-js-v3/issues/3141)) ([1a62865](https://github.com/aws/aws-sdk-js-v3/commit/1a6286513f7cdb556708845c512861c5f92eb883))
+
+
+
+
+
+# [3.36.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.35.0...v3.36.0) (2021-10-08)
+
+
+### Features
+
+* publish files in dist-* only ([#2873](https://github.com/aws/aws-sdk-js-v3/issues/2873)) ([53b4243](https://github.com/aws/aws-sdk-js-v3/commit/53b4243b066f25ff2412d5f0dea1036054b2df32))
+
+
+
+
+
+# [3.35.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.34.0...v3.35.0) (2021-10-04)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.34.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.33.0...v3.34.0) (2021-09-24)
+
+
+### Features
+
+* **non-clients:** remove comments from transpiled JS files ([#2813](https://github.com/aws/aws-sdk-js-v3/issues/2813)) ([e6fc7f3](https://github.com/aws/aws-sdk-js-v3/commit/e6fc7f3e0fa74785590ac19e7ed143c916bb9b6e))
+
+
+
+
+
+# [3.32.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.31.0...v3.32.0) (2021-09-17)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.29.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.28.0...v3.29.0) (2021-09-02)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.23.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.22.0...v3.23.0) (2021-07-23)
+
+
+### Bug Fixes
+
+* bump up tslib to 2.3.0 ([#2601](https://github.com/aws/aws-sdk-js-v3/issues/2601)) ([7040faa](https://github.com/aws/aws-sdk-js-v3/commit/7040faac07976c1dcfd5240675b82a2f275b2a55))
+
+
+
+
+
+# [3.22.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.21.0...v3.22.0) (2021-07-16)
+
+
+### Bug Fixes
+
+* **clients:** prefix `dist/` for typesVersions TS<4 ([#2580](https://github.com/aws/aws-sdk-js-v3/issues/2580)) ([dff5cd4](https://github.com/aws/aws-sdk-js-v3/commit/dff5cd4b6fa00453e938ce8f238c1542ee7ba3d6))
+
+
+
+
+
+# [3.20.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.19.0...v3.20.0) (2021-07-02)
+
+
+### Bug Fixes
+
+* replace prepublishOnly script with downlevel-dts ([#2537](https://github.com/aws/aws-sdk-js-v3/issues/2537)) ([63818a1](https://github.com/aws/aws-sdk-js-v3/commit/63818a1e47b08af56f092031a01bbbff0a9af590))
+
+
+
+
+
+# [3.18.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.17.0...v3.18.0) (2021-06-04)
+
+**Note:** Version bump only for package @aws-sdk/endpoint-cache
+
+
+
+
+
+# [3.17.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.16.0...v3.17.0) (2021-05-26)
+
+
+### Bug Fixes
+
+* **endpoint-cache:** reduce bundle size ([#2400](https://github.com/aws/aws-sdk-js-v3/issues/2400)) ([b157173](https://github.com/aws/aws-sdk-js-v3/commit/b1571731eef59271e1efb14d11a05854ad867ab9))
+
+
+
+
+
+# [3.16.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.15.0...v3.16.0) (2021-05-14)
+
+
+### Features
+
+* **endpoint-cache:** add EndpointCache for Endpoint Discovery ([#2355](https://github.com/aws/aws-sdk-js-v3/issues/2355)) ([f164177](https://github.com/aws/aws-sdk-js-v3/commit/f164177bf3cc1bb7986d38e9a4ded1e6723779c9))

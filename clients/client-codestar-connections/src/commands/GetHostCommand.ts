@@ -1,25 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodeStarConnectionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodeStarConnectionsClient";
-import { GetHostInput, GetHostOutput } from "../models/models_0";
-import { deserializeAws_json1_0GetHostCommand, serializeAws_json1_0GetHostCommand } from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetHostInput, GetHostOutput } from "../models/models_0";
+import { GetHost$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetHostCommand}.
+ */
 export interface GetHostCommandInput extends GetHostInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetHostCommand}.
+ */
 export interface GetHostCommandOutput extends GetHostOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +30,66 @@ export interface GetHostCommandOutput extends GetHostOutput, __MetadataBearer {}
  * ```javascript
  * import { CodeStarConnectionsClient, GetHostCommand } from "@aws-sdk/client-codestar-connections"; // ES Modules import
  * // const { CodeStarConnectionsClient, GetHostCommand } = require("@aws-sdk/client-codestar-connections"); // CommonJS import
+ * // import type { CodeStarConnectionsClientConfig } from "@aws-sdk/client-codestar-connections";
+ * const config = {}; // type is CodeStarConnectionsClientConfig
  * const client = new CodeStarConnectionsClient(config);
+ * const input = { // GetHostInput
+ *   HostArn: "STRING_VALUE", // required
+ * };
  * const command = new GetHostCommand(input);
  * const response = await client.send(command);
+ * // { // GetHostOutput
+ * //   Name: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   ProviderType: "Bitbucket" || "GitHub" || "GitHubEnterpriseServer" || "GitLab" || "GitLabSelfManaged",
+ * //   ProviderEndpoint: "STRING_VALUE",
+ * //   VpcConfiguration: { // VpcConfiguration
+ * //     VpcId: "STRING_VALUE", // required
+ * //     SubnetIds: [ // SubnetIds // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SecurityGroupIds: [ // SecurityGroupIds // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     TlsCertificate: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetHostCommandInput - {@link GetHostCommandInput}
+ * @returns {@link GetHostCommandOutput}
  * @see {@link GetHostCommandInput} for command's `input` shape.
  * @see {@link GetHostCommandOutput} for command's `response` shape.
- * @see {@link CodeStarConnectionsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeStarConnectionsClientResolvedConfig | config} for CodeStarConnectionsClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found. Verify the connection resource ARN and try again.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>Resource not found. Verify the ARN for the host resource and try again.</p>
+ *
+ * @throws {@link CodeStarConnectionsServiceException}
+ * <p>Base exception class for all service exceptions from CodeStarConnections service.</p>
+ *
+ *
+ * @public
  */
-export class GetHostCommand extends $Command<
-  GetHostCommandInput,
-  GetHostCommandOutput,
-  CodeStarConnectionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetHostCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeStarConnectionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetHostCommandInput, GetHostCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeStarConnectionsClient";
-    const commandName = "GetHostCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetHostInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetHostOutput.filterSensitiveLog,
+export class GetHostCommand extends command<GetHostCommandInput, GetHostCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetHost",
+  GetHost$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetHostInput;
+      output: GetHostOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetHostCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetHostCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetHostCommandOutput> {
-    return deserializeAws_json1_0GetHostCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetHostCommandInput;
+      output: GetHostCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { GetPullRequestOverrideStateInput, GetPullRequestOverrideStateOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetPullRequestOverrideStateCommand,
-  serializeAws_json1_1GetPullRequestOverrideStateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPullRequestOverrideStateInput, GetPullRequestOverrideStateOutput } from "../models/models_0";
+import { GetPullRequestOverrideState$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPullRequestOverrideStateCommand}.
+ */
 export interface GetPullRequestOverrideStateCommandInput extends GetPullRequestOverrideStateInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetPullRequestOverrideStateCommand}.
+ */
 export interface GetPullRequestOverrideStateCommandOutput extends GetPullRequestOverrideStateOutput, __MetadataBearer {}
 
 /**
@@ -29,71 +30,79 @@ export interface GetPullRequestOverrideStateCommandOutput extends GetPullRequest
  * ```javascript
  * import { CodeCommitClient, GetPullRequestOverrideStateCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, GetPullRequestOverrideStateCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // GetPullRequestOverrideStateInput
+ *   pullRequestId: "STRING_VALUE", // required
+ *   revisionId: "STRING_VALUE", // required
+ * };
  * const command = new GetPullRequestOverrideStateCommand(input);
  * const response = await client.send(command);
+ * // { // GetPullRequestOverrideStateOutput
+ * //   overridden: true || false,
+ * //   overrider: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetPullRequestOverrideStateCommandInput - {@link GetPullRequestOverrideStateCommandInput}
+ * @returns {@link GetPullRequestOverrideStateCommandOutput}
  * @see {@link GetPullRequestOverrideStateCommandInput} for command's `input` shape.
  * @see {@link GetPullRequestOverrideStateCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link InvalidPullRequestIdException} (client fault)
+ *  <p>The pull request ID is not valid. Make sure that you have provided the full ID and that the pull request is in the specified repository, and then try again.</p>
+ *
+ * @throws {@link InvalidRevisionIdException} (client fault)
+ *  <p>The revision ID is not valid. Use GetPullRequest to determine the value.</p>
+ *
+ * @throws {@link PullRequestDoesNotExistException} (client fault)
+ *  <p>The pull request ID could not be found. Make sure that you have specified the correct repository name and pull request ID, and then try again.</p>
+ *
+ * @throws {@link PullRequestIdRequiredException} (client fault)
+ *  <p>A pull request ID is required, but none was provided.</p>
+ *
+ * @throws {@link RevisionIdRequiredException} (client fault)
+ *  <p>A revision ID is required, but was not provided.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class GetPullRequestOverrideStateCommand extends $Command<
-  GetPullRequestOverrideStateCommandInput,
-  GetPullRequestOverrideStateCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPullRequestOverrideStateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPullRequestOverrideStateCommandInput, GetPullRequestOverrideStateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "GetPullRequestOverrideStateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPullRequestOverrideStateInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPullRequestOverrideStateOutput.filterSensitiveLog,
+export class GetPullRequestOverrideStateCommand extends command<GetPullRequestOverrideStateCommandInput, GetPullRequestOverrideStateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPullRequestOverrideState",
+  GetPullRequestOverrideState$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPullRequestOverrideStateInput;
+      output: GetPullRequestOverrideStateOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPullRequestOverrideStateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetPullRequestOverrideStateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetPullRequestOverrideStateCommandOutput> {
-    return deserializeAws_json1_1GetPullRequestOverrideStateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPullRequestOverrideStateCommandInput;
+      output: GetPullRequestOverrideStateCommandOutput;
+    };
+  };
 }

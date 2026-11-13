@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { ListTestGridProjectsRequest, ListTestGridProjectsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListTestGridProjectsCommand,
-  serializeAws_json1_1ListTestGridProjectsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTestGridProjectsRequest, ListTestGridProjectsResult } from "../models/models_0";
+import { ListTestGridProjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTestGridProjectsCommand}.
+ */
 export interface ListTestGridProjectsCommandInput extends ListTestGridProjectsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTestGridProjectsCommand}.
+ */
 export interface ListTestGridProjectsCommandOutput extends ListTestGridProjectsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface ListTestGridProjectsCommandOutput extends ListTestGridProjectsR
  * ```javascript
  * import { DeviceFarmClient, ListTestGridProjectsCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, ListTestGridProjectsCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // ListTestGridProjectsRequest
+ *   maxResult: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListTestGridProjectsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTestGridProjectsResult
+ * //   testGridProjects: [ // TestGridProjects
+ * //     { // TestGridProject
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       vpcConfig: { // TestGridVpcConfig
+ * //         securityGroupIds: [ // SecurityGroupIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         subnetIds: [ // SubnetIds // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         vpcId: "STRING_VALUE", // required
+ * //       },
+ * //       created: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTestGridProjectsCommandInput - {@link ListTestGridProjectsCommandInput}
+ * @returns {@link ListTestGridProjectsCommandOutput}
  * @see {@link ListTestGridProjectsCommandInput} for command's `input` shape.
  * @see {@link ListTestGridProjectsCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal exception was raised in the service. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you see this
+ *          error. </p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class ListTestGridProjectsCommand extends $Command<
-  ListTestGridProjectsCommandInput,
-  ListTestGridProjectsCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTestGridProjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTestGridProjectsCommandInput, ListTestGridProjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "ListTestGridProjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTestGridProjectsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTestGridProjectsResult.filterSensitiveLog,
+export class ListTestGridProjectsCommand extends command<ListTestGridProjectsCommandInput, ListTestGridProjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTestGridProjects",
+  ListTestGridProjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTestGridProjectsRequest;
+      output: ListTestGridProjectsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTestGridProjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListTestGridProjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTestGridProjectsCommandOutput> {
-    return deserializeAws_json1_1ListTestGridProjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTestGridProjectsCommandInput;
+      output: ListTestGridProjectsCommandOutput;
+    };
+  };
 }

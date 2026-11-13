@@ -1,0 +1,237 @@
+======================== minimal response ========================
+[status] 200
+  
+content-type: application/x-amz-json-1.1
+x-amzn-requestid: 1111amzn-requ-stid-uuid-000000001111
+
+[Uint8Array (json)]
+{}
+
+
+--- [output object] ---
+{
+  $metadata: {
+    httpStatusCode: (number) 200,
+    requestId: "1111amzn-requ-stid-uuid-000000001111",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+
+======================== w/ optional fields ========================
+[status] 200
+  
+content-type: application/x-amz-json-1.1
+x-amzn-requestid: 1111amzn-requ-stid-uuid-000000001111
+
+[Uint8Array (json)]
+{
+  "nextToken": "__nextToken__",
+  "scheduledQueries": [
+    {
+      "scheduledQueryArn": "__scheduledQueryArn__",
+      "name": "__name__",
+      "state": "__state__",
+      "scheduleType": "__scheduleType__",
+      "lastTriggeredTime": 0,
+      "lastExecutionStatus": "__lastExecutionStatus__",
+      "scheduleExpression": "__scheduleExpression__",
+      "timezone": "__timezone__",
+      "destinationConfiguration": {
+        "s3Configuration": {
+          "destinationIdentifier": "__destinationIdentifier__",
+          "roleArn": "__roleArn__",
+          "ownerAccountId": "__ownerAccountId__",
+          "kmsKeyId": "__kmsKeyId__"
+        },
+        "lookupTableConfiguration": {
+          "tableName": "__tableName__",
+          "roleArn": "__roleArn__",
+          "description": "__description__",
+          "kmsKeyId": "__kmsKeyId__",
+          "tags": {
+            "key1": "__value__",
+            "key2": "__value__",
+            "key3": "__value__"
+          }
+        }
+      },
+      "creationTime": 0,
+      "lastUpdatedTime": 0
+    },
+    {
+      "scheduledQueryArn": "__scheduledQueryArn__",
+      "name": "__name__",
+      "state": "__state__",
+      "scheduleType": "__scheduleType__",
+      "lastTriggeredTime": 0,
+      "lastExecutionStatus": "__lastExecutionStatus__",
+      "scheduleExpression": "__scheduleExpression__",
+      "timezone": "__timezone__",
+      "destinationConfiguration": {
+        "s3Configuration": {
+          "destinationIdentifier": "__destinationIdentifier__",
+          "roleArn": "__roleArn__",
+          "ownerAccountId": "__ownerAccountId__",
+          "kmsKeyId": "__kmsKeyId__"
+        },
+        "lookupTableConfiguration": {
+          "tableName": "__tableName__",
+          "roleArn": "__roleArn__",
+          "description": "__description__",
+          "kmsKeyId": "__kmsKeyId__",
+          "tags": {
+            "key1": "__value__",
+            "key2": "__value__",
+            "key3": "__value__"
+          }
+        }
+      },
+      "creationTime": 0,
+      "lastUpdatedTime": 0
+    },
+    {
+      "scheduledQueryArn": "__scheduledQueryArn__",
+      "name": "__name__",
+      "state": "__state__",
+      "scheduleType": "__scheduleType__",
+      "lastTriggeredTime": 0,
+      "lastExecutionStatus": "__lastExecutionStatus__",
+      "scheduleExpression": "__scheduleExpression__",
+      "timezone": "__timezone__",
+      "destinationConfiguration": {
+        "s3Configuration": {
+          "destinationIdentifier": "__destinationIdentifier__",
+          "roleArn": "__roleArn__",
+          "ownerAccountId": "__ownerAccountId__",
+          "kmsKeyId": "__kmsKeyId__"
+        },
+        "lookupTableConfiguration": {
+          "tableName": "__tableName__",
+          "roleArn": "__roleArn__",
+          "description": "__description__",
+          "kmsKeyId": "__kmsKeyId__",
+          "tags": {
+            "key1": "__value__",
+            "key2": "__value__",
+            "key3": "__value__"
+          }
+        }
+      },
+      "creationTime": 0,
+      "lastUpdatedTime": 0
+    }
+  ]
+}
+
+
+--- [output object] ---
+{
+  nextToken: "__nextToken__",
+  scheduledQueries: [
+    {
+      scheduledQueryArn: "__scheduledQueryArn__",
+      name: "__name__",
+      state: "__state__",
+      scheduleType: "__scheduleType__",
+      lastTriggeredTime: (number) 0,
+      lastExecutionStatus: "__lastExecutionStatus__",
+      scheduleExpression: "__scheduleExpression__",
+      timezone: "__timezone__",
+      destinationConfiguration: {
+        s3Configuration: {
+          destinationIdentifier: "__destinationIdentifier__",
+          roleArn: "__roleArn__",
+          ownerAccountId: "__ownerAccountId__",
+          kmsKeyId: "__kmsKeyId__"
+        },
+        lookupTableConfiguration: {
+          tableName: "__tableName__",
+          roleArn: "__roleArn__",
+          description: "__description__",
+          kmsKeyId: "__kmsKeyId__",
+          tags: {
+            key1: "__value__",
+            key2: "__value__",
+            key3: "__value__"
+          }
+        }
+      },
+      creationTime: (number) 0,
+      lastUpdatedTime: (number) 0
+    },
+    {
+      scheduledQueryArn: "__scheduledQueryArn__",
+      name: "__name__",
+      state: "__state__",
+      scheduleType: "__scheduleType__",
+      lastTriggeredTime: (number) 0,
+      lastExecutionStatus: "__lastExecutionStatus__",
+      scheduleExpression: "__scheduleExpression__",
+      timezone: "__timezone__",
+      destinationConfiguration: {
+        s3Configuration: {
+          destinationIdentifier: "__destinationIdentifier__",
+          roleArn: "__roleArn__",
+          ownerAccountId: "__ownerAccountId__",
+          kmsKeyId: "__kmsKeyId__"
+        },
+        lookupTableConfiguration: {
+          tableName: "__tableName__",
+          roleArn: "__roleArn__",
+          description: "__description__",
+          kmsKeyId: "__kmsKeyId__",
+          tags: {
+            key1: "__value__",
+            key2: "__value__",
+            key3: "__value__"
+          }
+        }
+      },
+      creationTime: (number) 0,
+      lastUpdatedTime: (number) 0
+    },
+    {
+      scheduledQueryArn: "__scheduledQueryArn__",
+      name: "__name__",
+      state: "__state__",
+      scheduleType: "__scheduleType__",
+      lastTriggeredTime: (number) 0,
+      lastExecutionStatus: "__lastExecutionStatus__",
+      scheduleExpression: "__scheduleExpression__",
+      timezone: "__timezone__",
+      destinationConfiguration: {
+        s3Configuration: {
+          destinationIdentifier: "__destinationIdentifier__",
+          roleArn: "__roleArn__",
+          ownerAccountId: "__ownerAccountId__",
+          kmsKeyId: "__kmsKeyId__"
+        },
+        lookupTableConfiguration: {
+          tableName: "__tableName__",
+          roleArn: "__roleArn__",
+          description: "__description__",
+          kmsKeyId: "__kmsKeyId__",
+          tags: {
+            key1: "__value__",
+            key2: "__value__",
+            key3: "__value__"
+          }
+        }
+      },
+      creationTime: (number) 0,
+      lastUpdatedTime: (number) 0
+    }
+  ],
+  $metadata: {
+    httpStatusCode: (number) 200,
+    requestId: "1111amzn-requ-stid-uuid-000000001111",
+    extendedRequestId: (undefined),
+    cfId: (undefined),
+    attempts: (number) 1,
+    totalRetryDelay: (number) 0
+  }
+}
+

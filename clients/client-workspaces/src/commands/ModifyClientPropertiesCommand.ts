@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ModifyClientPropertiesRequest, ModifyClientPropertiesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifyClientPropertiesCommand,
-  serializeAws_json1_1ModifyClientPropertiesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyClientPropertiesRequest, ModifyClientPropertiesResult } from "../models/models_0";
+import { ModifyClientProperties$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyClientPropertiesCommand}.
+ */
 export interface ModifyClientPropertiesCommandInput extends ModifyClientPropertiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyClientPropertiesCommand}.
+ */
 export interface ModifyClientPropertiesCommandOutput extends ModifyClientPropertiesResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface ModifyClientPropertiesCommandOutput extends ModifyClientPropert
  * ```javascript
  * import { WorkSpacesClient, ModifyClientPropertiesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, ModifyClientPropertiesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // ModifyClientPropertiesRequest
+ *   ResourceId: "STRING_VALUE", // required
+ *   ClientProperties: { // ClientProperties
+ *     ReconnectEnabled: "ENABLED" || "DISABLED",
+ *     LogUploadEnabled: "ENABLED" || "DISABLED",
+ *     ClientExperiencePolicy: "STRING_VALUE",
+ *   },
+ * };
  * const command = new ModifyClientPropertiesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifyClientPropertiesCommandInput - {@link ModifyClientPropertiesCommandInput}
+ * @returns {@link ModifyClientPropertiesCommandOutput}
  * @see {@link ModifyClientPropertiesCommandInput} for command's `input` shape.
  * @see {@link ModifyClientPropertiesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyClientPropertiesCommand extends $Command<
-  ModifyClientPropertiesCommandInput,
-  ModifyClientPropertiesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyClientPropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyClientPropertiesCommandInput, ModifyClientPropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "ModifyClientPropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyClientPropertiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyClientPropertiesResult.filterSensitiveLog,
+export class ModifyClientPropertiesCommand extends command<ModifyClientPropertiesCommandInput, ModifyClientPropertiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyClientProperties",
+  ModifyClientProperties$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClientPropertiesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyClientPropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifyClientPropertiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyClientPropertiesCommandOutput> {
-    return deserializeAws_json1_1ModifyClientPropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyClientPropertiesCommandInput;
+      output: ModifyClientPropertiesCommandOutput;
+    };
+  };
 }

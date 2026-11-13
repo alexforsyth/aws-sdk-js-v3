@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { DescribeOfferingRequest, DescribeOfferingResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DescribeOfferingCommand,
-  serializeAws_restJson1DescribeOfferingCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeOfferingRequest, DescribeOfferingResponse } from "../models/models_1";
+import { DescribeOffering$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeOfferingCommand}.
+ */
 export interface DescribeOfferingCommandInput extends DescribeOfferingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeOfferingCommand}.
+ */
 export interface DescribeOfferingCommandOutput extends DescribeOfferingResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,87 @@ export interface DescribeOfferingCommandOutput extends DescribeOfferingResponse,
  * ```javascript
  * import { MediaLiveClient, DescribeOfferingCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, DescribeOfferingCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // DescribeOfferingRequest
+ *   OfferingId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeOfferingCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeOfferingResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CurrencyCode: "STRING_VALUE",
+ * //   Duration: Number("int"),
+ * //   DurationUnits: "MONTHS",
+ * //   FixedPrice: Number("double"),
+ * //   OfferingDescription: "STRING_VALUE",
+ * //   OfferingId: "STRING_VALUE",
+ * //   OfferingType: "NO_UPFRONT",
+ * //   Region: "STRING_VALUE",
+ * //   ResourceSpecification: { // ReservationResourceSpecification
+ * //     ChannelClass: "STANDARD" || "SINGLE_PIPELINE",
+ * //     Codec: "MPEG2" || "AVC" || "HEVC" || "AUDIO" || "LINK" || "AV1",
+ * //     MaximumBitrate: "MAX_10_MBPS" || "MAX_20_MBPS" || "MAX_50_MBPS",
+ * //     MaximumFramerate: "MAX_30_FPS" || "MAX_60_FPS",
+ * //     Resolution: "SD" || "HD" || "FHD" || "UHD",
+ * //     ResourceType: "INPUT" || "OUTPUT" || "MULTIPLEX" || "CHANNEL",
+ * //     SpecialFeature: "ADVANCED_AUDIO" || "AUDIO_NORMALIZATION" || "MGHD" || "MGUHD",
+ * //     VideoQuality: "STANDARD" || "ENHANCED" || "PREMIUM",
+ * //   },
+ * //   UsagePrice: Number("double"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeOfferingCommandInput - {@link DescribeOfferingCommandInput}
+ * @returns {@link DescribeOfferingCommandOutput}
  * @see {@link DescribeOfferingCommandInput} for command's `input` shape.
  * @see {@link DescribeOfferingCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeOfferingCommand extends $Command<
-  DescribeOfferingCommandInput,
-  DescribeOfferingCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeOfferingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeOfferingCommandInput, DescribeOfferingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "DescribeOfferingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeOfferingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeOfferingResponse.filterSensitiveLog,
+export class DescribeOfferingCommand extends command<DescribeOfferingCommandInput, DescribeOfferingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeOffering",
+  DescribeOffering$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOfferingRequest;
+      output: DescribeOfferingResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeOfferingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeOfferingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeOfferingCommandOutput> {
-    return deserializeAws_restJson1DescribeOfferingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeOfferingCommandInput;
+      output: DescribeOfferingCommandOutput;
+    };
+  };
 }

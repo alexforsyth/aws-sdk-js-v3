@@ -1,0 +1,125 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetExecutionRequest, GetExecutionResponse } from "../models/models_0";
+import { GetExecution$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetExecutionCommand}.
+ */
+export interface GetExecutionCommandInput extends GetExecutionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetExecutionCommand}.
+ */
+export interface GetExecutionCommandOutput extends GetExecutionResponse, __MetadataBearer {}
+
+/**
+ * <p>Exports data based on the source data update.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BCMDataExportsClient, GetExecutionCommand } from "@aws-sdk/client-bcm-data-exports"; // ES Modules import
+ * // const { BCMDataExportsClient, GetExecutionCommand } = require("@aws-sdk/client-bcm-data-exports"); // CommonJS import
+ * // import type { BCMDataExportsClientConfig } from "@aws-sdk/client-bcm-data-exports";
+ * const config = {}; // type is BCMDataExportsClientConfig
+ * const client = new BCMDataExportsClient(config);
+ * const input = { // GetExecutionRequest
+ *   ExportArn: "STRING_VALUE", // required
+ *   ExecutionId: "STRING_VALUE", // required
+ * };
+ * const command = new GetExecutionCommand(input);
+ * const response = await client.send(command);
+ * // { // GetExecutionResponse
+ * //   ExecutionId: "STRING_VALUE",
+ * //   Export: { // Export
+ * //     ExportArn: "STRING_VALUE",
+ * //     Name: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     DataQuery: { // DataQuery
+ * //       QueryStatement: "STRING_VALUE", // required
+ * //       TableConfigurations: { // TableConfigurations
+ * //         "<keys>": { // TableProperties
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     DestinationConfigurations: { // DestinationConfigurations
+ * //       S3Destination: { // S3Destination
+ * //         S3Bucket: "STRING_VALUE", // required
+ * //         S3BucketOwner: "STRING_VALUE",
+ * //         S3Prefix: "STRING_VALUE", // required
+ * //         S3Region: "STRING_VALUE", // required
+ * //         S3OutputConfigurations: { // S3OutputConfigurations
+ * //           OutputType: "CUSTOM" || "ATHENA" || "REDSHIFT", // required
+ * //           Format: "TEXT_OR_CSV" || "PARQUET", // required
+ * //           Compression: "GZIP" || "PARQUET" || "ZIP", // required
+ * //           Overwrite: "CREATE_NEW_REPORT" || "OVERWRITE_REPORT", // required
+ * //         },
+ * //       },
+ * //     },
+ * //     RefreshCadence: { // RefreshCadence
+ * //       Frequency: "SYNCHRONOUS", // required
+ * //     },
+ * //   },
+ * //   ExecutionStatus: { // ExecutionStatus
+ * //     StatusCode: "INITIATION_IN_PROCESS" || "QUERY_QUEUED" || "QUERY_IN_PROCESS" || "QUERY_FAILURE" || "DELIVERY_IN_PROCESS" || "DELIVERY_SUCCESS" || "DELIVERY_FAILURE",
+ * //     StatusReason: "INSUFFICIENT_PERMISSION" || "BILL_OWNER_CHANGED" || "INTERNAL_FAILURE" || "DEPRECATED",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     CompletedAt: new Date("TIMESTAMP"),
+ * //     LastUpdatedAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetExecutionCommandInput - {@link GetExecutionCommandInput}
+ * @returns {@link GetExecutionCommandOutput}
+ * @see {@link GetExecutionCommandInput} for command's `input` shape.
+ * @see {@link GetExecutionCommandOutput} for command's `response` shape.
+ * @see {@link BCMDataExportsClientResolvedConfig | config} for BCMDataExportsClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred during the processing of your request. Try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Resource Name (ARN) in the request doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link BCMDataExportsServiceException}
+ * <p>Base exception class for all service exceptions from BCMDataExports service.</p>
+ *
+ *
+ * @public
+ */
+export class GetExecutionCommand extends command<GetExecutionCommandInput, GetExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetExecution",
+  GetExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetExecutionRequest;
+      output: GetExecutionResponse;
+    };
+    sdk: {
+      input: GetExecutionCommandInput;
+      output: GetExecutionCommandOutput;
+    };
+  };
+}

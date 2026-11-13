@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateAuthenticationProfileMessage, CreateAuthenticationProfileResult } from "../models/models_0";
-import {
-  deserializeAws_queryCreateAuthenticationProfileCommand,
-  serializeAws_queryCreateAuthenticationProfileCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAuthenticationProfileMessage, CreateAuthenticationProfileResult } from "../models/models_0";
+import { CreateAuthenticationProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAuthenticationProfileCommand}.
+ */
 export interface CreateAuthenticationProfileCommandInput extends CreateAuthenticationProfileMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAuthenticationProfileCommand}.
+ */
 export interface CreateAuthenticationProfileCommandOutput extends CreateAuthenticationProfileResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,60 @@ export interface CreateAuthenticationProfileCommandOutput extends CreateAuthenti
  * ```javascript
  * import { RedshiftClient, CreateAuthenticationProfileCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CreateAuthenticationProfileCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CreateAuthenticationProfileMessage
+ *   AuthenticationProfileName: "STRING_VALUE", // required
+ *   AuthenticationProfileContent: "STRING_VALUE", // required
+ * };
  * const command = new CreateAuthenticationProfileCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAuthenticationProfileResult
+ * //   AuthenticationProfileName: "STRING_VALUE",
+ * //   AuthenticationProfileContent: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateAuthenticationProfileCommandInput - {@link CreateAuthenticationProfileCommandInput}
+ * @returns {@link CreateAuthenticationProfileCommandOutput}
  * @see {@link CreateAuthenticationProfileCommandInput} for command's `input` shape.
  * @see {@link CreateAuthenticationProfileCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link AuthenticationProfileAlreadyExistsFault} (client fault)
+ *  <p>The authentication profile already exists.</p>
+ *
+ * @throws {@link AuthenticationProfileQuotaExceededFault} (client fault)
+ *  <p>The size or number of authentication profiles has exceeded the quota.
+ *             The maximum length of the JSON string and maximum number of authentication profiles is determined by a quota for your account.</p>
+ *
+ * @throws {@link InvalidAuthenticationProfileRequestFault} (client fault)
+ *  <p>The authentication profile request is not valid. The profile name can't be null or empty.
+ *             The authentication profile API operation must be available in the Amazon Web Services Region.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAuthenticationProfileCommand extends $Command<
-  CreateAuthenticationProfileCommandInput,
-  CreateAuthenticationProfileCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAuthenticationProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAuthenticationProfileCommandInput, CreateAuthenticationProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CreateAuthenticationProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAuthenticationProfileMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAuthenticationProfileResult.filterSensitiveLog,
+export class CreateAuthenticationProfileCommand extends command<CreateAuthenticationProfileCommandInput, CreateAuthenticationProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAuthenticationProfile",
+  CreateAuthenticationProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAuthenticationProfileMessage;
+      output: CreateAuthenticationProfileResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAuthenticationProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateAuthenticationProfileCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateAuthenticationProfileCommandOutput> {
-    return deserializeAws_queryCreateAuthenticationProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAuthenticationProfileCommandInput;
+      output: CreateAuthenticationProfileCommandOutput;
+    };
+  };
 }

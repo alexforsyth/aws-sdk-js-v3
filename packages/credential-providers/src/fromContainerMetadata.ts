@@ -1,10 +1,8 @@
-import {
-  fromContainerMetadata as _fromContainerMetadata,
-  RemoteProviderInit as _RemoteProviderInit,
-} from "@aws-sdk/credential-provider-imds";
-import { CredentialProvider } from "@aws-sdk/types";
+import type { AwsIdentityProperties, CredentialProviderOptions } from "@aws-sdk/types";
+import type { RemoteProviderInit as _RemoteProviderInit } from "@smithy/credential-provider-imds";
+import type { AwsCredentialIdentityProvider } from "@smithy/types";
 
-export interface RemoteProviderInit extends _RemoteProviderInit {}
+export interface RemoteProviderInit extends _RemoteProviderInit, CredentialProviderOptions {}
 
 /**
  * Create a credential provider function that reads from ECS container metadata service.
@@ -14,7 +12,7 @@ export interface RemoteProviderInit extends _RemoteProviderInit {}
  * // const { fromContainerMetadata } = require("@aws-sdk/credential-providers"); // CommonJS import
  *
  * const foo = new FooClient({
- *   credentials: fromInstanceMetadata({
+ *   credentials: fromContainerMetadata({
  *     // Optional. The connection timeout (in milliseconds) to apply to any remote requests. If not specified, a default value
  *     // of`1000` (one second) is used.
  *     timeout: 1000,
@@ -24,5 +22,13 @@ export interface RemoteProviderInit extends _RemoteProviderInit {}
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromContainerMetadata = (init?: RemoteProviderInit): CredentialProvider => _fromContainerMetadata(init);
+export const fromContainerMetadata = (init?: RemoteProviderInit): AwsCredentialIdentityProvider => {
+  return async (props?: AwsIdentityProperties) => {
+    init?.logger?.debug("@smithy/credential-provider-imds", "fromContainerMetadata");
+    const { fromContainerMetadata: _fromContainerMetadata } = await import("@smithy/credential-provider-imds");
+    return _fromContainerMetadata(init)();
+  };
+};

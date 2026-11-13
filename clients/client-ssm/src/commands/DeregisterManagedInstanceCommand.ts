@@ -1,100 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeregisterManagedInstanceRequest, DeregisterManagedInstanceResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeregisterManagedInstanceCommand,
-  serializeAws_json1_1DeregisterManagedInstanceCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeregisterManagedInstanceRequest, DeregisterManagedInstanceResult } from "../models/models_0";
+import { DeregisterManagedInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterManagedInstanceCommand}.
+ */
 export interface DeregisterManagedInstanceCommandInput extends DeregisterManagedInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterManagedInstanceCommand}.
+ */
 export interface DeregisterManagedInstanceCommandOutput extends DeregisterManagedInstanceResult, __MetadataBearer {}
 
 /**
- * <p>Removes the server or virtual machine from the list of registered servers. You can
- *    reregister the instance again at any time. If you don't plan to use Run Command on the server, we
- *    suggest uninstalling SSM Agent first.</p>
+ * <p>Removes the server or virtual machine from the list of registered servers.</p>
+ *          <p>If you want to reregister an on-premises server, edge device, or VM, you must use a
+ *    different Activation Code and Activation ID than used to register the machine previously. The
+ *    Activation Code and Activation ID must not have already been used on the maximum number of
+ *    activations specified when they were created. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-deregister-hybrid-nodes.html">Deregistering
+ *     managed nodes in a hybrid and multicloud environment</a> in the
+ *     <i>Amazon Web Services Systems Manager User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, DeregisterManagedInstanceCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DeregisterManagedInstanceCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DeregisterManagedInstanceRequest
+ *   InstanceId: "STRING_VALUE", // required
+ * };
  * const command = new DeregisterManagedInstanceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeregisterManagedInstanceCommandInput - {@link DeregisterManagedInstanceCommandInput}
+ * @returns {@link DeregisterManagedInstanceCommandOutput}
  * @see {@link DeregisterManagedInstanceCommandInput} for command's `input` shape.
  * @see {@link DeregisterManagedInstanceCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidInstanceId} (client fault)
+ *  <p>The following problems can cause this exception:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You don't have permission to access the managed node.</p>
+ *             </li>
+ *             <li>
+ *                <p>Amazon Web Services Systems Manager Agent (SSM Agent) isn't running. Verify that SSM Agent is
+ *      running.</p>
+ *             </li>
+ *             <li>
+ *                <p>SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM Agent.</p>
+ *             </li>
+ *             <li>
+ *                <p>The managed node isn't in a valid state. Valid states are: <code>Running</code>,
+ *       <code>Pending</code>, <code>Stopped</code>, and <code>Stopping</code>. Invalid states are:
+ *       <code>Shutting-down</code> and <code>Terminated</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DeregisterManagedInstanceCommand extends $Command<
-  DeregisterManagedInstanceCommandInput,
-  DeregisterManagedInstanceCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterManagedInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterManagedInstanceCommandInput, DeregisterManagedInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DeregisterManagedInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterManagedInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeregisterManagedInstanceResult.filterSensitiveLog,
+export class DeregisterManagedInstanceCommand extends command<DeregisterManagedInstanceCommandInput, DeregisterManagedInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterManagedInstance",
+  DeregisterManagedInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterManagedInstanceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeregisterManagedInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeregisterManagedInstanceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeregisterManagedInstanceCommandOutput> {
-    return deserializeAws_json1_1DeregisterManagedInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterManagedInstanceCommandInput;
+      output: DeregisterManagedInstanceCommandOutput;
+    };
+  };
 }

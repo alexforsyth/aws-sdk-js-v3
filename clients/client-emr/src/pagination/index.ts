@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./Interfaces";
 export * from "./ListBootstrapActionsPaginator";
 export * from "./ListClustersPaginator";
@@ -7,6 +8,8 @@ export * from "./ListInstancesPaginator";
 export * from "./ListNotebookExecutionsPaginator";
 export * from "./ListReleaseLabelsPaginator";
 export * from "./ListSecurityConfigurationsPaginator";
+export * from "./ListSessionsPaginator";
 export * from "./ListStepsPaginator";
-export * from "./ListStudioSessionMappingsPaginator";
 export * from "./ListStudiosPaginator";
+export * from "./ListStudioSessionMappingsPaginator";
+export * from "./ListSupportedInstanceTypesPaginator";

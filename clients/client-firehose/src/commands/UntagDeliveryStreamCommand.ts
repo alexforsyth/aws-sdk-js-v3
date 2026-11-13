@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FirehoseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FirehoseClient";
-import { UntagDeliveryStreamInput, UntagDeliveryStreamOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UntagDeliveryStreamCommand,
-  serializeAws_json1_1UntagDeliveryStreamCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UntagDeliveryStreamInput, UntagDeliveryStreamOutput } from "../models/models_0";
+import { UntagDeliveryStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UntagDeliveryStreamCommand}.
+ */
 export interface UntagDeliveryStreamCommandInput extends UntagDeliveryStreamInput {}
+/**
+ * @public
+ *
+ * The output of {@link UntagDeliveryStreamCommand}.
+ */
 export interface UntagDeliveryStreamCommandOutput extends UntagDeliveryStreamOutput, __MetadataBearer {}
 
 /**
- * <p>Removes tags from the specified delivery stream. Removed tags are deleted, and you
+ * <p>Removes tags from the specified Firehose stream. Removed tags are deleted, and you
  *          can't recover them after this operation successfully completes.</p>
  *          <p>If you specify a tag that doesn't exist, the operation ignores it.</p>
  *          <p>This operation has a limit of five transactions per second per account. </p>
@@ -31,68 +32,60 @@ export interface UntagDeliveryStreamCommandOutput extends UntagDeliveryStreamOut
  * ```javascript
  * import { FirehoseClient, UntagDeliveryStreamCommand } from "@aws-sdk/client-firehose"; // ES Modules import
  * // const { FirehoseClient, UntagDeliveryStreamCommand } = require("@aws-sdk/client-firehose"); // CommonJS import
+ * // import type { FirehoseClientConfig } from "@aws-sdk/client-firehose";
+ * const config = {}; // type is FirehoseClientConfig
  * const client = new FirehoseClient(config);
+ * const input = { // UntagDeliveryStreamInput
+ *   DeliveryStreamName: "STRING_VALUE", // required
+ *   TagKeys: [ // TagKeyList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UntagDeliveryStreamCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UntagDeliveryStreamCommandInput - {@link UntagDeliveryStreamCommandInput}
+ * @returns {@link UntagDeliveryStreamCommandOutput}
  * @see {@link UntagDeliveryStreamCommandInput} for command's `input` shape.
  * @see {@link UntagDeliveryStreamCommandOutput} for command's `response` shape.
- * @see {@link FirehoseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FirehoseClientResolvedConfig | config} for FirehoseClient's `config` shape.
  *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The specified input parameter has a value that is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You have already reached the limit for a requested resource.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The resource is already in use and not available for this operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link FirehoseServiceException}
+ * <p>Base exception class for all service exceptions from Firehose service.</p>
+ *
+ *
+ * @public
  */
-export class UntagDeliveryStreamCommand extends $Command<
-  UntagDeliveryStreamCommandInput,
-  UntagDeliveryStreamCommandOutput,
-  FirehoseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UntagDeliveryStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FirehoseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UntagDeliveryStreamCommandInput, UntagDeliveryStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FirehoseClient";
-    const commandName = "UntagDeliveryStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UntagDeliveryStreamInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UntagDeliveryStreamOutput.filterSensitiveLog,
+export class UntagDeliveryStreamCommand extends command<UntagDeliveryStreamCommandInput, UntagDeliveryStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "UntagDeliveryStream",
+  UntagDeliveryStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagDeliveryStreamInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UntagDeliveryStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UntagDeliveryStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UntagDeliveryStreamCommandOutput> {
-    return deserializeAws_json1_1UntagDeliveryStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UntagDeliveryStreamCommandInput;
+      output: UntagDeliveryStreamCommandOutput;
+    };
+  };
 }

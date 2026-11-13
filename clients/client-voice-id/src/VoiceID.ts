@@ -1,769 +1,778 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateFraudsterCommandInput,
+  type AssociateFraudsterCommandOutput,
+  AssociateFraudsterCommand,
+} from "./commands/AssociateFraudsterCommand";
+import {
+  type CreateDomainCommandInput,
+  type CreateDomainCommandOutput,
   CreateDomainCommand,
-  CreateDomainCommandInput,
-  CreateDomainCommandOutput,
 } from "./commands/CreateDomainCommand";
 import {
+  type CreateWatchlistCommandInput,
+  type CreateWatchlistCommandOutput,
+  CreateWatchlistCommand,
+} from "./commands/CreateWatchlistCommand";
+import {
+  type DeleteDomainCommandInput,
+  type DeleteDomainCommandOutput,
   DeleteDomainCommand,
-  DeleteDomainCommandInput,
-  DeleteDomainCommandOutput,
 } from "./commands/DeleteDomainCommand";
 import {
+  type DeleteFraudsterCommandInput,
+  type DeleteFraudsterCommandOutput,
   DeleteFraudsterCommand,
-  DeleteFraudsterCommandInput,
-  DeleteFraudsterCommandOutput,
 } from "./commands/DeleteFraudsterCommand";
 import {
+  type DeleteSpeakerCommandInput,
+  type DeleteSpeakerCommandOutput,
   DeleteSpeakerCommand,
-  DeleteSpeakerCommandInput,
-  DeleteSpeakerCommandOutput,
 } from "./commands/DeleteSpeakerCommand";
 import {
+  type DeleteWatchlistCommandInput,
+  type DeleteWatchlistCommandOutput,
+  DeleteWatchlistCommand,
+} from "./commands/DeleteWatchlistCommand";
+import {
+  type DescribeDomainCommandInput,
+  type DescribeDomainCommandOutput,
   DescribeDomainCommand,
-  DescribeDomainCommandInput,
-  DescribeDomainCommandOutput,
 } from "./commands/DescribeDomainCommand";
 import {
+  type DescribeFraudsterCommandInput,
+  type DescribeFraudsterCommandOutput,
   DescribeFraudsterCommand,
-  DescribeFraudsterCommandInput,
-  DescribeFraudsterCommandOutput,
 } from "./commands/DescribeFraudsterCommand";
 import {
+  type DescribeFraudsterRegistrationJobCommandInput,
+  type DescribeFraudsterRegistrationJobCommandOutput,
   DescribeFraudsterRegistrationJobCommand,
-  DescribeFraudsterRegistrationJobCommandInput,
-  DescribeFraudsterRegistrationJobCommandOutput,
 } from "./commands/DescribeFraudsterRegistrationJobCommand";
 import {
+  type DescribeSpeakerCommandInput,
+  type DescribeSpeakerCommandOutput,
   DescribeSpeakerCommand,
-  DescribeSpeakerCommandInput,
-  DescribeSpeakerCommandOutput,
 } from "./commands/DescribeSpeakerCommand";
 import {
+  type DescribeSpeakerEnrollmentJobCommandInput,
+  type DescribeSpeakerEnrollmentJobCommandOutput,
   DescribeSpeakerEnrollmentJobCommand,
-  DescribeSpeakerEnrollmentJobCommandInput,
-  DescribeSpeakerEnrollmentJobCommandOutput,
 } from "./commands/DescribeSpeakerEnrollmentJobCommand";
 import {
-  EvaluateSessionCommand,
-  EvaluateSessionCommandInput,
-  EvaluateSessionCommandOutput,
-} from "./commands/EvaluateSessionCommand";
-import { ListDomainsCommand, ListDomainsCommandInput, ListDomainsCommandOutput } from "./commands/ListDomainsCommand";
+  type DescribeWatchlistCommandInput,
+  type DescribeWatchlistCommandOutput,
+  DescribeWatchlistCommand,
+} from "./commands/DescribeWatchlistCommand";
 import {
+  type DisassociateFraudsterCommandInput,
+  type DisassociateFraudsterCommandOutput,
+  DisassociateFraudsterCommand,
+} from "./commands/DisassociateFraudsterCommand";
+import {
+  type EvaluateSessionCommandInput,
+  type EvaluateSessionCommandOutput,
+  EvaluateSessionCommand,
+} from "./commands/EvaluateSessionCommand";
+import {
+  type ListDomainsCommandInput,
+  type ListDomainsCommandOutput,
+  ListDomainsCommand,
+} from "./commands/ListDomainsCommand";
+import {
+  type ListFraudsterRegistrationJobsCommandInput,
+  type ListFraudsterRegistrationJobsCommandOutput,
   ListFraudsterRegistrationJobsCommand,
-  ListFraudsterRegistrationJobsCommandInput,
-  ListFraudsterRegistrationJobsCommandOutput,
 } from "./commands/ListFraudsterRegistrationJobsCommand";
 import {
+  type ListFraudstersCommandInput,
+  type ListFraudstersCommandOutput,
+  ListFraudstersCommand,
+} from "./commands/ListFraudstersCommand";
+import {
+  type ListSpeakerEnrollmentJobsCommandInput,
+  type ListSpeakerEnrollmentJobsCommandOutput,
   ListSpeakerEnrollmentJobsCommand,
-  ListSpeakerEnrollmentJobsCommandInput,
-  ListSpeakerEnrollmentJobsCommandOutput,
 } from "./commands/ListSpeakerEnrollmentJobsCommand";
 import {
+  type ListSpeakersCommandInput,
+  type ListSpeakersCommandOutput,
   ListSpeakersCommand,
-  ListSpeakersCommandInput,
-  ListSpeakersCommandOutput,
 } from "./commands/ListSpeakersCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListWatchlistsCommandInput,
+  type ListWatchlistsCommandOutput,
+  ListWatchlistsCommand,
+} from "./commands/ListWatchlistsCommand";
+import {
+  type OptOutSpeakerCommandInput,
+  type OptOutSpeakerCommandOutput,
   OptOutSpeakerCommand,
-  OptOutSpeakerCommandInput,
-  OptOutSpeakerCommandOutput,
 } from "./commands/OptOutSpeakerCommand";
 import {
+  type StartFraudsterRegistrationJobCommandInput,
+  type StartFraudsterRegistrationJobCommandOutput,
   StartFraudsterRegistrationJobCommand,
-  StartFraudsterRegistrationJobCommandInput,
-  StartFraudsterRegistrationJobCommandOutput,
 } from "./commands/StartFraudsterRegistrationJobCommand";
 import {
+  type StartSpeakerEnrollmentJobCommandInput,
+  type StartSpeakerEnrollmentJobCommandOutput,
   StartSpeakerEnrollmentJobCommand,
-  StartSpeakerEnrollmentJobCommandInput,
-  StartSpeakerEnrollmentJobCommandOutput,
 } from "./commands/StartSpeakerEnrollmentJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateDomainCommandInput,
+  type UpdateDomainCommandOutput,
   UpdateDomainCommand,
-  UpdateDomainCommandInput,
-  UpdateDomainCommandOutput,
 } from "./commands/UpdateDomainCommand";
+import {
+  type UpdateWatchlistCommandInput,
+  type UpdateWatchlistCommandOutput,
+  UpdateWatchlistCommand,
+} from "./commands/UpdateWatchlistCommand";
+import { paginateListDomains } from "./pagination/ListDomainsPaginator";
+import { paginateListFraudsterRegistrationJobs } from "./pagination/ListFraudsterRegistrationJobsPaginator";
+import { paginateListFraudsters } from "./pagination/ListFraudstersPaginator";
+import { paginateListSpeakerEnrollmentJobs } from "./pagination/ListSpeakerEnrollmentJobsPaginator";
+import { paginateListSpeakers } from "./pagination/ListSpeakersPaginator";
+import { paginateListWatchlists } from "./pagination/ListWatchlistsPaginator";
 import { VoiceIDClient } from "./VoiceIDClient";
 
+const commands = {
+  AssociateFraudsterCommand,
+  CreateDomainCommand,
+  CreateWatchlistCommand,
+  DeleteDomainCommand,
+  DeleteFraudsterCommand,
+  DeleteSpeakerCommand,
+  DeleteWatchlistCommand,
+  DescribeDomainCommand,
+  DescribeFraudsterCommand,
+  DescribeFraudsterRegistrationJobCommand,
+  DescribeSpeakerCommand,
+  DescribeSpeakerEnrollmentJobCommand,
+  DescribeWatchlistCommand,
+  DisassociateFraudsterCommand,
+  EvaluateSessionCommand,
+  ListDomainsCommand,
+  ListFraudsterRegistrationJobsCommand,
+  ListFraudstersCommand,
+  ListSpeakerEnrollmentJobsCommand,
+  ListSpeakersCommand,
+  ListTagsForResourceCommand,
+  ListWatchlistsCommand,
+  OptOutSpeakerCommand,
+  StartFraudsterRegistrationJobCommand,
+  StartSpeakerEnrollmentJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateDomainCommand,
+  UpdateWatchlistCommand,
+};
+const paginators = {
+  paginateListDomains,
+  paginateListFraudsterRegistrationJobs,
+  paginateListFraudsters,
+  paginateListSpeakerEnrollmentJobs,
+  paginateListSpeakers,
+  paginateListWatchlists,
+};
+
 /**
- * <p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide
- *             describes the APIs used for this service.
- *         </p>
+ * @public
  */
-export class VoiceID extends VoiceIDClient {
+export interface VoiceIDRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface VoiceID {
   /**
-   * <p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer
-   *             audio, and voiceprints.
-   *         </p>
+   * @see {@link AssociateFraudsterCommand}
    */
-  public createDomain(
+  associateFraudster(
+    args: AssociateFraudsterCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<AssociateFraudsterCommandOutput>;
+  associateFraudster(
+    args: AssociateFraudsterCommandInput,
+    cb: (err: any, data?: AssociateFraudsterCommandOutput) => void
+  ): void;
+  associateFraudster(
+    args: AssociateFraudsterCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: AssociateFraudsterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainCommand}
+   */
+  createDomain(
     args: CreateDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<CreateDomainCommandOutput>;
-  public createDomain(args: CreateDomainCommandInput, cb: (err: any, data?: CreateDomainCommandOutput) => void): void;
-  public createDomain(
+  createDomain(
     args: CreateDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateDomainCommandOutput) => void
   ): void;
-  public createDomain(
+  createDomain(
     args: CreateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainCommandOutput) => void
-  ): Promise<CreateDomainCommandOutput> | void {
-    const command = new CreateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified domain from the Amazon Connect Voice ID system.</p>
+   * @see {@link CreateWatchlistCommand}
    */
-  public deleteDomain(
+  createWatchlist(
+    args: CreateWatchlistCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<CreateWatchlistCommandOutput>;
+  createWatchlist(
+    args: CreateWatchlistCommandInput,
+    cb: (err: any, data?: CreateWatchlistCommandOutput) => void
+  ): void;
+  createWatchlist(
+    args: CreateWatchlistCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: CreateWatchlistCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainCommand}
+   */
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DeleteDomainCommandOutput>;
-  public deleteDomain(args: DeleteDomainCommandInput, cb: (err: any, data?: DeleteDomainCommandOutput) => void): void;
-  public deleteDomain(
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteDomainCommandOutput) => void
   ): void;
-  public deleteDomain(
+  deleteDomain(
     args: DeleteDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): Promise<DeleteDomainCommandOutput> | void {
-    const command = new DeleteDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified fraudster from the Amazon Connect Voice ID system.</p>
+   * @see {@link DeleteFraudsterCommand}
    */
-  public deleteFraudster(
+  deleteFraudster(
     args: DeleteFraudsterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DeleteFraudsterCommandOutput>;
-  public deleteFraudster(
+  deleteFraudster(
     args: DeleteFraudsterCommandInput,
     cb: (err: any, data?: DeleteFraudsterCommandOutput) => void
   ): void;
-  public deleteFraudster(
+  deleteFraudster(
     args: DeleteFraudsterCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DeleteFraudsterCommandOutput) => void
   ): void;
-  public deleteFraudster(
-    args: DeleteFraudsterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFraudsterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFraudsterCommandOutput) => void
-  ): Promise<DeleteFraudsterCommandOutput> | void {
-    const command = new DeleteFraudsterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified speaker from the Amazon Connect Voice ID system.</p>
+   * @see {@link DeleteSpeakerCommand}
    */
-  public deleteSpeaker(
+  deleteSpeaker(
     args: DeleteSpeakerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DeleteSpeakerCommandOutput>;
-  public deleteSpeaker(
+  deleteSpeaker(
     args: DeleteSpeakerCommandInput,
     cb: (err: any, data?: DeleteSpeakerCommandOutput) => void
   ): void;
-  public deleteSpeaker(
+  deleteSpeaker(
     args: DeleteSpeakerCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DeleteSpeakerCommandOutput) => void
   ): void;
-  public deleteSpeaker(
-    args: DeleteSpeakerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSpeakerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSpeakerCommandOutput) => void
-  ): Promise<DeleteSpeakerCommandOutput> | void {
-    const command = new DeleteSpeakerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified domain.</p>
+   * @see {@link DeleteWatchlistCommand}
    */
-  public describeDomain(
+  deleteWatchlist(
+    args: DeleteWatchlistCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<DeleteWatchlistCommandOutput>;
+  deleteWatchlist(
+    args: DeleteWatchlistCommandInput,
+    cb: (err: any, data?: DeleteWatchlistCommandOutput) => void
+  ): void;
+  deleteWatchlist(
+    args: DeleteWatchlistCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: DeleteWatchlistCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDomainCommand}
+   */
+  describeDomain(
     args: DescribeDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DescribeDomainCommandOutput>;
-  public describeDomain(
+  describeDomain(
     args: DescribeDomainCommandInput,
     cb: (err: any, data?: DescribeDomainCommandOutput) => void
   ): void;
-  public describeDomain(
+  describeDomain(
     args: DescribeDomainCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DescribeDomainCommandOutput) => void
   ): void;
-  public describeDomain(
-    args: DescribeDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDomainCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDomainCommandOutput) => void
-  ): Promise<DescribeDomainCommandOutput> | void {
-    const command = new DescribeDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified fraudster.</p>
+   * @see {@link DescribeFraudsterCommand}
    */
-  public describeFraudster(
+  describeFraudster(
     args: DescribeFraudsterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DescribeFraudsterCommandOutput>;
-  public describeFraudster(
+  describeFraudster(
     args: DescribeFraudsterCommandInput,
     cb: (err: any, data?: DescribeFraudsterCommandOutput) => void
   ): void;
-  public describeFraudster(
+  describeFraudster(
     args: DescribeFraudsterCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DescribeFraudsterCommandOutput) => void
   ): void;
-  public describeFraudster(
-    args: DescribeFraudsterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFraudsterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFraudsterCommandOutput) => void
-  ): Promise<DescribeFraudsterCommandOutput> | void {
-    const command = new DescribeFraudsterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified fraudster registration job.</p>
+   * @see {@link DescribeFraudsterRegistrationJobCommand}
    */
-  public describeFraudsterRegistrationJob(
+  describeFraudsterRegistrationJob(
     args: DescribeFraudsterRegistrationJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DescribeFraudsterRegistrationJobCommandOutput>;
-  public describeFraudsterRegistrationJob(
+  describeFraudsterRegistrationJob(
     args: DescribeFraudsterRegistrationJobCommandInput,
     cb: (err: any, data?: DescribeFraudsterRegistrationJobCommandOutput) => void
   ): void;
-  public describeFraudsterRegistrationJob(
+  describeFraudsterRegistrationJob(
     args: DescribeFraudsterRegistrationJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DescribeFraudsterRegistrationJobCommandOutput) => void
   ): void;
-  public describeFraudsterRegistrationJob(
-    args: DescribeFraudsterRegistrationJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFraudsterRegistrationJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFraudsterRegistrationJobCommandOutput) => void
-  ): Promise<DescribeFraudsterRegistrationJobCommandOutput> | void {
-    const command = new DescribeFraudsterRegistrationJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified speaker.</p>
+   * @see {@link DescribeSpeakerCommand}
    */
-  public describeSpeaker(
+  describeSpeaker(
     args: DescribeSpeakerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DescribeSpeakerCommandOutput>;
-  public describeSpeaker(
+  describeSpeaker(
     args: DescribeSpeakerCommandInput,
     cb: (err: any, data?: DescribeSpeakerCommandOutput) => void
   ): void;
-  public describeSpeaker(
+  describeSpeaker(
     args: DescribeSpeakerCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DescribeSpeakerCommandOutput) => void
   ): void;
-  public describeSpeaker(
-    args: DescribeSpeakerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSpeakerCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSpeakerCommandOutput) => void
-  ): Promise<DescribeSpeakerCommandOutput> | void {
-    const command = new DescribeSpeakerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the specified speaker enrollment job.</p>
+   * @see {@link DescribeSpeakerEnrollmentJobCommand}
    */
-  public describeSpeakerEnrollmentJob(
+  describeSpeakerEnrollmentJob(
     args: DescribeSpeakerEnrollmentJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<DescribeSpeakerEnrollmentJobCommandOutput>;
-  public describeSpeakerEnrollmentJob(
+  describeSpeakerEnrollmentJob(
     args: DescribeSpeakerEnrollmentJobCommandInput,
     cb: (err: any, data?: DescribeSpeakerEnrollmentJobCommandOutput) => void
   ): void;
-  public describeSpeakerEnrollmentJob(
+  describeSpeakerEnrollmentJob(
     args: DescribeSpeakerEnrollmentJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: DescribeSpeakerEnrollmentJobCommandOutput) => void
   ): void;
-  public describeSpeakerEnrollmentJob(
-    args: DescribeSpeakerEnrollmentJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSpeakerEnrollmentJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSpeakerEnrollmentJobCommandOutput) => void
-  ): Promise<DescribeSpeakerEnrollmentJobCommandOutput> | void {
-    const command = new DescribeSpeakerEnrollmentJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice
-   *             ID call.</p>
+   * @see {@link DescribeWatchlistCommand}
    */
-  public evaluateSession(
+  describeWatchlist(
+    args: DescribeWatchlistCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<DescribeWatchlistCommandOutput>;
+  describeWatchlist(
+    args: DescribeWatchlistCommandInput,
+    cb: (err: any, data?: DescribeWatchlistCommandOutput) => void
+  ): void;
+  describeWatchlist(
+    args: DescribeWatchlistCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: DescribeWatchlistCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateFraudsterCommand}
+   */
+  disassociateFraudster(
+    args: DisassociateFraudsterCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<DisassociateFraudsterCommandOutput>;
+  disassociateFraudster(
+    args: DisassociateFraudsterCommandInput,
+    cb: (err: any, data?: DisassociateFraudsterCommandOutput) => void
+  ): void;
+  disassociateFraudster(
+    args: DisassociateFraudsterCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: DisassociateFraudsterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EvaluateSessionCommand}
+   */
+  evaluateSession(
     args: EvaluateSessionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<EvaluateSessionCommandOutput>;
-  public evaluateSession(
+  evaluateSession(
     args: EvaluateSessionCommandInput,
     cb: (err: any, data?: EvaluateSessionCommandOutput) => void
   ): void;
-  public evaluateSession(
+  evaluateSession(
     args: EvaluateSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: EvaluateSessionCommandOutput) => void
   ): void;
-  public evaluateSession(
-    args: EvaluateSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EvaluateSessionCommandOutput) => void),
-    cb?: (err: any, data?: EvaluateSessionCommandOutput) => void
-  ): Promise<EvaluateSessionCommandOutput> | void {
-    const command = new EvaluateSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the domains in the Amazon Web Services account.
-   *         </p>
+   * @see {@link ListDomainsCommand}
    */
-  public listDomains(args: ListDomainsCommandInput, options?: __HttpHandlerOptions): Promise<ListDomainsCommandOutput>;
-  public listDomains(args: ListDomainsCommandInput, cb: (err: any, data?: ListDomainsCommandOutput) => void): void;
-  public listDomains(
+  listDomains(): Promise<ListDomainsCommandOutput>;
+  listDomains(
     args: ListDomainsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: VoiceIDRequestOptions
+  ): Promise<ListDomainsCommandOutput>;
+  listDomains(
+    args: ListDomainsCommandInput,
     cb: (err: any, data?: ListDomainsCommandOutput) => void
   ): void;
-  public listDomains(
+  listDomains(
     args: ListDomainsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDomainsCommandOutput) => void),
-    cb?: (err: any, data?: ListDomainsCommandOutput) => void
-  ): Promise<ListDomainsCommandOutput> | void {
-    const command = new ListDomainsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: ListDomainsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all the fraudster registration jobs in the domain with the given <code>JobStatus</code>.
-   *             If <code>JobStatus</code> is not provided, this lists all fraudster registration jobs in the given
-   *             domain.
-   *         </p>
+   * @see {@link ListFraudsterRegistrationJobsCommand}
    */
-  public listFraudsterRegistrationJobs(
+  listFraudsterRegistrationJobs(
     args: ListFraudsterRegistrationJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<ListFraudsterRegistrationJobsCommandOutput>;
-  public listFraudsterRegistrationJobs(
+  listFraudsterRegistrationJobs(
     args: ListFraudsterRegistrationJobsCommandInput,
     cb: (err: any, data?: ListFraudsterRegistrationJobsCommandOutput) => void
   ): void;
-  public listFraudsterRegistrationJobs(
+  listFraudsterRegistrationJobs(
     args: ListFraudsterRegistrationJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: ListFraudsterRegistrationJobsCommandOutput) => void
   ): void;
-  public listFraudsterRegistrationJobs(
-    args: ListFraudsterRegistrationJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFraudsterRegistrationJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListFraudsterRegistrationJobsCommandOutput) => void
-  ): Promise<ListFraudsterRegistrationJobsCommandOutput> | void {
-    const command = new ListFraudsterRegistrationJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all the speaker enrollment jobs in the domain with the specified <code>JobStatus</code>. If
-   *             <code>JobStatus</code> is not provided, this lists all jobs with all possible speaker enrollment job
-   *             statuses.</p>
+   * @see {@link ListFraudstersCommand}
    */
-  public listSpeakerEnrollmentJobs(
+  listFraudsters(
+    args: ListFraudstersCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<ListFraudstersCommandOutput>;
+  listFraudsters(
+    args: ListFraudstersCommandInput,
+    cb: (err: any, data?: ListFraudstersCommandOutput) => void
+  ): void;
+  listFraudsters(
+    args: ListFraudstersCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: ListFraudstersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSpeakerEnrollmentJobsCommand}
+   */
+  listSpeakerEnrollmentJobs(
     args: ListSpeakerEnrollmentJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<ListSpeakerEnrollmentJobsCommandOutput>;
-  public listSpeakerEnrollmentJobs(
+  listSpeakerEnrollmentJobs(
     args: ListSpeakerEnrollmentJobsCommandInput,
     cb: (err: any, data?: ListSpeakerEnrollmentJobsCommandOutput) => void
   ): void;
-  public listSpeakerEnrollmentJobs(
+  listSpeakerEnrollmentJobs(
     args: ListSpeakerEnrollmentJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: ListSpeakerEnrollmentJobsCommandOutput) => void
   ): void;
-  public listSpeakerEnrollmentJobs(
-    args: ListSpeakerEnrollmentJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSpeakerEnrollmentJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListSpeakerEnrollmentJobsCommandOutput) => void
-  ): Promise<ListSpeakerEnrollmentJobsCommandOutput> | void {
-    const command = new ListSpeakerEnrollmentJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all speakers in a specified domain.</p>
+   * @see {@link ListSpeakersCommand}
    */
-  public listSpeakers(
+  listSpeakers(
     args: ListSpeakersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<ListSpeakersCommandOutput>;
-  public listSpeakers(args: ListSpeakersCommandInput, cb: (err: any, data?: ListSpeakersCommandOutput) => void): void;
-  public listSpeakers(
+  listSpeakers(
     args: ListSpeakersCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListSpeakersCommandOutput) => void
   ): void;
-  public listSpeakers(
+  listSpeakers(
     args: ListSpeakersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSpeakersCommandOutput) => void),
-    cb?: (err: any, data?: ListSpeakersCommandOutput) => void
-  ): Promise<ListSpeakersCommandOutput> | void {
-    const command = new ListSpeakersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: ListSpeakersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all tags associated with a specified Voice ID resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Opts out a speaker from Voice ID system. A speaker can be opted out regardless of whether or not they
-   *             already exist in the system. If they don't yet exist, a new speaker is created in an opted out state.
-   *             If they already exist, their existing status is overridden and they are opted out. Enrollment and
-   *             evaluation authentication requests are rejected for opted out speakers, and opted out speakers have
-   *             no voice embeddings stored in the system.</p>
+   * @see {@link ListWatchlistsCommand}
    */
-  public optOutSpeaker(
+  listWatchlists(
+    args: ListWatchlistsCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<ListWatchlistsCommandOutput>;
+  listWatchlists(
+    args: ListWatchlistsCommandInput,
+    cb: (err: any, data?: ListWatchlistsCommandOutput) => void
+  ): void;
+  listWatchlists(
+    args: ListWatchlistsCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: ListWatchlistsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OptOutSpeakerCommand}
+   */
+  optOutSpeaker(
     args: OptOutSpeakerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<OptOutSpeakerCommandOutput>;
-  public optOutSpeaker(
+  optOutSpeaker(
     args: OptOutSpeakerCommandInput,
     cb: (err: any, data?: OptOutSpeakerCommandOutput) => void
   ): void;
-  public optOutSpeaker(
+  optOutSpeaker(
     args: OptOutSpeakerCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: OptOutSpeakerCommandOutput) => void
   ): void;
-  public optOutSpeaker(
-    args: OptOutSpeakerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: OptOutSpeakerCommandOutput) => void),
-    cb?: (err: any, data?: OptOutSpeakerCommandOutput) => void
-  ): Promise<OptOutSpeakerCommandOutput> | void {
-    const command = new OptOutSpeakerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a new batch fraudster registration job using provided details.</p>
+   * @see {@link StartFraudsterRegistrationJobCommand}
    */
-  public startFraudsterRegistrationJob(
+  startFraudsterRegistrationJob(
     args: StartFraudsterRegistrationJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<StartFraudsterRegistrationJobCommandOutput>;
-  public startFraudsterRegistrationJob(
+  startFraudsterRegistrationJob(
     args: StartFraudsterRegistrationJobCommandInput,
     cb: (err: any, data?: StartFraudsterRegistrationJobCommandOutput) => void
   ): void;
-  public startFraudsterRegistrationJob(
+  startFraudsterRegistrationJob(
     args: StartFraudsterRegistrationJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: StartFraudsterRegistrationJobCommandOutput) => void
   ): void;
-  public startFraudsterRegistrationJob(
-    args: StartFraudsterRegistrationJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFraudsterRegistrationJobCommandOutput) => void),
-    cb?: (err: any, data?: StartFraudsterRegistrationJobCommandOutput) => void
-  ): Promise<StartFraudsterRegistrationJobCommandOutput> | void {
-    const command = new StartFraudsterRegistrationJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a new batch speaker enrollment job using specified details.</p>
+   * @see {@link StartSpeakerEnrollmentJobCommand}
    */
-  public startSpeakerEnrollmentJob(
+  startSpeakerEnrollmentJob(
     args: StartSpeakerEnrollmentJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<StartSpeakerEnrollmentJobCommandOutput>;
-  public startSpeakerEnrollmentJob(
+  startSpeakerEnrollmentJob(
     args: StartSpeakerEnrollmentJobCommandInput,
     cb: (err: any, data?: StartSpeakerEnrollmentJobCommandOutput) => void
   ): void;
-  public startSpeakerEnrollmentJob(
+  startSpeakerEnrollmentJob(
     args: StartSpeakerEnrollmentJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: StartSpeakerEnrollmentJobCommandOutput) => void
   ): void;
-  public startSpeakerEnrollmentJob(
-    args: StartSpeakerEnrollmentJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartSpeakerEnrollmentJobCommandOutput) => void),
-    cb?: (err: any, data?: StartSpeakerEnrollmentJobCommandOutput) => void
-  ): Promise<StartSpeakerEnrollmentJobCommandOutput> | void {
-    const command = new StartSpeakerEnrollmentJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Tags an Amazon Connect Voice ID resource with the provided list of tags.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: VoiceIDRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes specified tags from a specified Amazon Connect Voice ID resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: VoiceIDRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the specified domain. This API has clobber behavior, and clears and replaces all attributes.
-   *             If an optional field, such as 'Description' is not provided, it is removed from the domain.</p>
+   * @see {@link UpdateDomainCommand}
    */
-  public updateDomain(
+  updateDomain(
     args: UpdateDomainCommandInput,
-    options?: __HttpHandlerOptions
+    options?: VoiceIDRequestOptions
   ): Promise<UpdateDomainCommandOutput>;
-  public updateDomain(args: UpdateDomainCommandInput, cb: (err: any, data?: UpdateDomainCommandOutput) => void): void;
-  public updateDomain(
+  updateDomain(
     args: UpdateDomainCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateDomainCommandOutput) => void
   ): void;
-  public updateDomain(
+  updateDomain(
     args: UpdateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDomainCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDomainCommandOutput) => void
-  ): Promise<UpdateDomainCommandOutput> | void {
-    const command = new UpdateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: UpdateDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWatchlistCommand}
+   */
+  updateWatchlist(
+    args: UpdateWatchlistCommandInput,
+    options?: VoiceIDRequestOptions
+  ): Promise<UpdateWatchlistCommandOutput>;
+  updateWatchlist(
+    args: UpdateWatchlistCommandInput,
+    cb: (err: any, data?: UpdateWatchlistCommandOutput) => void
+  ): void;
+  updateWatchlist(
+    args: UpdateWatchlistCommandInput,
+    options: VoiceIDRequestOptions,
+    cb: (err: any, data?: UpdateWatchlistCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDomainsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDomainsCommandOutput}.
+   */
+  paginateListDomains(
+    args?: ListDomainsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDomainsCommandOutput>;
+
+  /**
+   * @see {@link ListFraudsterRegistrationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFraudsterRegistrationJobsCommandOutput}.
+   */
+  paginateListFraudsterRegistrationJobs(
+    args: ListFraudsterRegistrationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFraudsterRegistrationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListFraudstersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFraudstersCommandOutput}.
+   */
+  paginateListFraudsters(
+    args: ListFraudstersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFraudstersCommandOutput>;
+
+  /**
+   * @see {@link ListSpeakerEnrollmentJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSpeakerEnrollmentJobsCommandOutput}.
+   */
+  paginateListSpeakerEnrollmentJobs(
+    args: ListSpeakerEnrollmentJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSpeakerEnrollmentJobsCommandOutput>;
+
+  /**
+   * @see {@link ListSpeakersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSpeakersCommandOutput}.
+   */
+  paginateListSpeakers(
+    args: ListSpeakersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSpeakersCommandOutput>;
+
+  /**
+   * @see {@link ListWatchlistsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWatchlistsCommandOutput}.
+   */
+  paginateListWatchlists(
+    args: ListWatchlistsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWatchlistsCommandOutput>;
 }
+
+/**
+ * <p>Amazon Connect Voice ID provides real-time caller authentication and fraud risk detection, which
+ *             make voice interactions in contact centers more secure and efficient.</p>
+ * @public
+ */
+export class VoiceID extends VoiceIDClient implements VoiceID {}
+createAggregatedClient(commands, VoiceID, { paginators });

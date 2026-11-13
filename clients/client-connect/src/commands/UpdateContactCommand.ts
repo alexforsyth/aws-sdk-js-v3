@@ -1,0 +1,161 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateContactResponse } from "../models/models_3";
+import type { UpdateContactRequest } from "../models/models_4";
+import { UpdateContact$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateContactCommand}.
+ */
+export interface UpdateContactCommandInput extends UpdateContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateContactCommand}.
+ */
+export interface UpdateContactCommandOutput extends UpdateContactResponse, __MetadataBearer {}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>Adds or updates user-defined contact information associated with the specified contact. At least one field to be
+ *    updated must be present in the request.</p>
+ *          <important>
+ *             <p>You can add or update user-defined contact information for both ongoing and completed contacts.</p>
+ *          </important>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, UpdateContactCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, UpdateContactCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // UpdateContactRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   References: { // ContactReferences
+ *     "<keys>": { // Reference
+ *       Value: "STRING_VALUE",
+ *       Type: "URL" || "ATTACHMENT" || "CONTACT_ANALYSIS" || "NUMBER" || "STRING" || "DATE" || "EMAIL" || "EMAIL_MESSAGE" || "EMAIL_MESSAGE_PLAIN_TEXT" || "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" || "EMAIL_MESSAGE_REDACTED", // required
+ *       Status: "AVAILABLE" || "DELETED" || "APPROVED" || "REJECTED" || "PROCESSING" || "FAILED" || "DRAFTING",
+ *       Arn: "STRING_VALUE",
+ *       StatusReason: "STRING_VALUE",
+ *     },
+ *   },
+ *   SegmentAttributes: { // SegmentAttributes
+ *     "<keys>": { // SegmentAttributeValue
+ *       ValueString: "STRING_VALUE",
+ *       ValueMap: { // SegmentAttributeValueMap
+ *         "<keys>": {
+ *           ValueString: "STRING_VALUE",
+ *           ValueMap: {
+ *             "<keys>": "<SegmentAttributeValue>",
+ *           },
+ *           ValueInteger: Number("int"),
+ *           ValueList: [ // SegmentAttributeValueList
+ *             "<SegmentAttributeValue>",
+ *           ],
+ *           ValueArn: "STRING_VALUE",
+ *         },
+ *       },
+ *       ValueInteger: Number("int"),
+ *       ValueList: [
+ *         "<SegmentAttributeValue>",
+ *       ],
+ *       ValueArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   QueueInfo: { // QueueInfoInput
+ *     Id: "STRING_VALUE",
+ *   },
+ *   UserInfo: { // UserInfo
+ *     UserId: "STRING_VALUE",
+ *   },
+ *   CustomerEndpoint: { // Endpoint
+ *     Type: "TELEPHONE_NUMBER" || "VOIP" || "CONTACT_FLOW" || "CONNECT_PHONENUMBER_ARN" || "EMAIL_ADDRESS",
+ *     Address: "STRING_VALUE",
+ *   },
+ *   SystemEndpoint: {
+ *     Type: "TELEPHONE_NUMBER" || "VOIP" || "CONTACT_FLOW" || "CONNECT_PHONENUMBER_ARN" || "EMAIL_ADDRESS",
+ *     Address: "STRING_VALUE",
+ *   },
+ *   AdditionalRecipients: { // NullableAdditionalRecipients
+ *     CcEmailAddresses: [ // OptionalEmailAddressRecipientList
+ *       { // EmailAddressInfo
+ *         EmailAddress: "STRING_VALUE", // required
+ *         DisplayName: "STRING_VALUE",
+ *       },
+ *     ],
+ *   },
+ * };
+ * const command = new UpdateContactCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateContactCommandInput - {@link UpdateContactCommandInput}
+ * @returns {@link UpdateContactCommandOutput}
+ * @see {@link UpdateContactCommandInput} for command's `input` shape.
+ * @see {@link UpdateContactCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Operation cannot be performed at this time as there is a conflict with another operation or contact
+ *    state.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidActiveRegionException} (client fault)
+ *  <p>This exception occurs when an API request is made to a non-active region in an Amazon Connect instance configured with Amazon Connect Global Resiliency. For example, if the active region is US West (Oregon) and a request is made to US East (N. Virginia), the exception will be returned.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateContactCommand extends command<UpdateContactCommandInput, UpdateContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateContact",
+  UpdateContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateContactRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateContactCommandInput;
+      output: UpdateContactCommandOutput;
+    };
+  };
+}

@@ -1,105 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EFSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EFSClient";
-import { DescribeTagsRequest, DescribeTagsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeTagsCommand,
-  serializeAws_restJson1DescribeTagsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTagsRequest, DescribeTagsResponse } from "../models/models_0";
+import { DescribeTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTagsCommand}.
+ */
 export interface DescribeTagsCommandInput extends DescribeTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTagsCommand}.
+ */
 export interface DescribeTagsCommandOutput extends DescribeTagsResponse, __MetadataBearer {}
 
 /**
- * @deprecated
- *
  * <note>
- *             <p>DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the
- *          API action to remove tags from EFS resources.</p>
+ *             <p>DEPRECATED - The <code>DescribeTags</code> action is deprecated and not maintained. To view
+ *         tags associated with EFS resources, use the <code>ListTagsForResource</code> API
+ *         action.</p>
  *          </note>
  *          <p>Returns the tags associated with a file system. The order of tags returned in the
  *       response of one <code>DescribeTags</code> call and the order of tags returned across the
  *       responses of a multiple-call iteration (when using pagination) is unspecified. </p>
  *          <p> This operation requires permissions for the
  *         <code>elasticfilesystem:DescribeTags</code> action. </p>
+ *
+ * @deprecated Use ListTagsForResource.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EFSClient, DescribeTagsCommand } from "@aws-sdk/client-efs"; // ES Modules import
  * // const { EFSClient, DescribeTagsCommand } = require("@aws-sdk/client-efs"); // CommonJS import
+ * // import type { EFSClientConfig } from "@aws-sdk/client-efs";
+ * const config = {}; // type is EFSClientConfig
  * const client = new EFSClient(config);
+ * const input = { // DescribeTagsRequest
+ *   MaxItems: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   FileSystemId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeTagsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTagsResponse
+ * //   Marker: "STRING_VALUE",
+ * //   Tags: [ // Tags // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTagsCommandInput - {@link DescribeTagsCommandInput}
+ * @returns {@link DescribeTagsCommandOutput}
  * @see {@link DescribeTagsCommandInput} for command's `input` shape.
  * @see {@link DescribeTagsCommandOutput} for command's `response` shape.
- * @see {@link EFSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EFSClientResolvedConfig | config} for EFSClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>Returned if the request is malformed or contains an error such as an invalid
+ *             parameter value or a missing required parameter.</p>
+ *
+ * @throws {@link FileSystemNotFound} (client fault)
+ *  <p>Returned if the specified <code>FileSystemId</code> value doesn't exist in the
+ *             requester's Amazon Web Services account.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Returned if an error occurred on the server side.</p>
+ *
+ * @throws {@link EFSServiceException}
+ * <p>Base exception class for all service exceptions from EFS service.</p>
+ *
+ *
+ * @example To describe the tags for a file system
+ * ```javascript
+ * // This operation describes all of a file system's tags.
+ * const input = {
+ *   FileSystemId: "fs-01234567"
+ * };
+ * const command = new DescribeTagsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Tags: [
+ *     {
+ *       Key: "Name",
+ *       Value: "MyFileSystem"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeTagsCommand extends $Command<
-  DescribeTagsCommandInput,
-  DescribeTagsCommandOutput,
-  EFSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EFSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTagsCommandInput, DescribeTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EFSClient";
-    const commandName = "DescribeTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTagsResponse.filterSensitiveLog,
+export class DescribeTagsCommand extends command<DescribeTagsCommandInput, DescribeTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTags",
+  DescribeTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTagsRequest;
+      output: DescribeTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTagsCommandOutput> {
-    return deserializeAws_restJson1DescribeTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTagsCommandInput;
+      output: DescribeTagsCommandOutput;
+    };
+  };
 }

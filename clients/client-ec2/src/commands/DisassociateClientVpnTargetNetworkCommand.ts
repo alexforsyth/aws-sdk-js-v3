@@ -1,122 +1,100 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisassociateClientVpnTargetNetworkRequest,
   DisassociateClientVpnTargetNetworkResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateClientVpnTargetNetworkCommand,
-  serializeAws_ec2DisassociateClientVpnTargetNetworkCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_6";
+import { DisassociateClientVpnTargetNetwork$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateClientVpnTargetNetworkCommand}.
+ */
 export interface DisassociateClientVpnTargetNetworkCommandInput extends DisassociateClientVpnTargetNetworkRequest {}
-export interface DisassociateClientVpnTargetNetworkCommandOutput
-  extends DisassociateClientVpnTargetNetworkResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateClientVpnTargetNetworkCommand}.
+ */
+export interface DisassociateClientVpnTargetNetworkCommandOutput extends DisassociateClientVpnTargetNetworkResult, __MetadataBearer {}
 
 /**
  * <p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the
  * 			last target network from a Client VPN, the following happens:</p>
- * 		       <ul>
+ *          <ul>
  *             <li>
- * 				           <p>The route that was automatically added for the VPC is deleted</p>
- * 			         </li>
+ *                <p>The route that was automatically added for the VPC is deleted</p>
+ *             </li>
  *             <li>
- * 				           <p>All active client connections are terminated</p>
- * 			         </li>
+ *                <p>All active client connections are terminated</p>
+ *             </li>
  *             <li>
- * 				           <p>New client connections are disallowed</p>
- * 			         </li>
+ *                <p>New client connections are disallowed</p>
+ *             </li>
  *             <li>
- * 				           <p>The Client VPN endpoint's status changes to <code>pending-associate</code>
+ *                <p>The Client VPN endpoint's status changes to <code>pending-associate</code>
  *                </p>
- * 			         </li>
+ *             </li>
  *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DisassociateClientVpnTargetNetworkCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateClientVpnTargetNetworkCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateClientVpnTargetNetworkRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   AssociationId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DisassociateClientVpnTargetNetworkCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateClientVpnTargetNetworkResult
+ * //   AssociationId: "STRING_VALUE",
+ * //   Status: { // AssociationStatus
+ * //     Code: "associating" || "associated" || "association-failed" || "disassociating" || "disassociated",
+ * //     Message: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisassociateClientVpnTargetNetworkCommandInput - {@link DisassociateClientVpnTargetNetworkCommandInput}
+ * @returns {@link DisassociateClientVpnTargetNetworkCommandOutput}
  * @see {@link DisassociateClientVpnTargetNetworkCommandInput} for command's `input` shape.
  * @see {@link DisassociateClientVpnTargetNetworkCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateClientVpnTargetNetworkCommand extends $Command<
-  DisassociateClientVpnTargetNetworkCommandInput,
-  DisassociateClientVpnTargetNetworkCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateClientVpnTargetNetworkCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateClientVpnTargetNetworkCommandInput, DisassociateClientVpnTargetNetworkCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateClientVpnTargetNetworkCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateClientVpnTargetNetworkRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateClientVpnTargetNetworkResult.filterSensitiveLog,
+export class DisassociateClientVpnTargetNetworkCommand extends command<DisassociateClientVpnTargetNetworkCommandInput, DisassociateClientVpnTargetNetworkCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateClientVpnTargetNetwork",
+  DisassociateClientVpnTargetNetwork$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateClientVpnTargetNetworkRequest;
+      output: DisassociateClientVpnTargetNetworkResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateClientVpnTargetNetworkCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateClientVpnTargetNetworkCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateClientVpnTargetNetworkCommandOutput> {
-    return deserializeAws_ec2DisassociateClientVpnTargetNetworkCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateClientVpnTargetNetworkCommandInput;
+      output: DisassociateClientVpnTargetNetworkCommandOutput;
+    };
+  };
 }

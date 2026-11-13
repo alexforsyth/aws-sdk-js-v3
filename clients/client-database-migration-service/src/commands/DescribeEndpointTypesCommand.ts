@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import { DescribeEndpointTypesMessage, DescribeEndpointTypesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEndpointTypesCommand,
-  serializeAws_json1_1DescribeEndpointTypesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEndpointTypesMessage, DescribeEndpointTypesResponse } from "../models/models_0";
+import { DescribeEndpointTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEndpointTypesCommand}.
+ */
 export interface DescribeEndpointTypesCommandInput extends DescribeEndpointTypesMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEndpointTypesCommand}.
+ */
 export interface DescribeEndpointTypesCommandOutput extends DescribeEndpointTypesResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,91 @@ export interface DescribeEndpointTypesCommandOutput extends DescribeEndpointType
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeEndpointTypesCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeEndpointTypesCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DescribeEndpointTypesMessage
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeEndpointTypesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEndpointTypesResponse
+ * //   Marker: "STRING_VALUE",
+ * //   SupportedEndpointTypes: [ // SupportedEndpointTypeList
+ * //     { // SupportedEndpointType
+ * //       EngineName: "STRING_VALUE",
+ * //       SupportsCDC: true || false,
+ * //       EndpointType: "source" || "target",
+ * //       ReplicationInstanceEngineMinimumVersion: "STRING_VALUE",
+ * //       EngineDisplayName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEndpointTypesCommandInput - {@link DescribeEndpointTypesCommandInput}
+ * @returns {@link DescribeEndpointTypesCommandOutput}
  * @see {@link DescribeEndpointTypesCommandInput} for command's `input` shape.
  * @see {@link DescribeEndpointTypesCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Describe endpoint types
+ * ```javascript
+ * // Returns information about the type of endpoints available.
+ * const input = {
+ *   Filters: [
+ *     {
+ *       Name: "string",
+ *       Values: [
+ *         "string",
+ *         "string"
+ *       ]
+ *     }
+ *   ],
+ *   Marker: "",
+ *   MaxRecords: 123
+ * };
+ * const command = new DescribeEndpointTypesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Marker: "",
+ *   SupportedEndpointTypes:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeEndpointTypesCommand extends $Command<
-  DescribeEndpointTypesCommandInput,
-  DescribeEndpointTypesCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEndpointTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEndpointTypesCommandInput, DescribeEndpointTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeEndpointTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEndpointTypesMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEndpointTypesResponse.filterSensitiveLog,
+export class DescribeEndpointTypesCommand extends command<DescribeEndpointTypesCommandInput, DescribeEndpointTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEndpointTypes",
+  DescribeEndpointTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndpointTypesMessage;
+      output: DescribeEndpointTypesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEndpointTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEndpointTypesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEndpointTypesCommandOutput> {
-    return deserializeAws_json1_1DescribeEndpointTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEndpointTypesCommandInput;
+      output: DescribeEndpointTypesCommandOutput;
+    };
+  };
 }

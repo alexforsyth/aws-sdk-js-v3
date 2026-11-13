@@ -1,101 +1,77 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { ModifyAvailabilityZoneGroupRequest, ModifyAvailabilityZoneGroupResult } from "../models/models_4";
-import {
-  deserializeAws_ec2ModifyAvailabilityZoneGroupCommand,
-  serializeAws_ec2ModifyAvailabilityZoneGroupCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyAvailabilityZoneGroupRequest, ModifyAvailabilityZoneGroupResult } from "../models/models_7";
+import { ModifyAvailabilityZoneGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyAvailabilityZoneGroupCommand}.
+ */
 export interface ModifyAvailabilityZoneGroupCommandInput extends ModifyAvailabilityZoneGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyAvailabilityZoneGroupCommand}.
+ */
 export interface ModifyAvailabilityZoneGroupCommandOutput extends ModifyAvailabilityZoneGroupResult, __MetadataBearer {}
 
 /**
- * <p>Changes the opt-in status of the Local Zone and Wavelength Zone group for your
- *       account.</p>
- *          <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html">
- *   		DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>
+ * <p>Changes the opt-in status of the specified zone group for your account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifyAvailabilityZoneGroupCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyAvailabilityZoneGroupCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyAvailabilityZoneGroupRequest
+ *   GroupName: "STRING_VALUE", // required
+ *   OptInStatus: "opted-in" || "not-opted-in", // required
+ *   DryRun: true || false,
+ * };
  * const command = new ModifyAvailabilityZoneGroupCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyAvailabilityZoneGroupResult
+ * //   Return: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyAvailabilityZoneGroupCommandInput - {@link ModifyAvailabilityZoneGroupCommandInput}
+ * @returns {@link ModifyAvailabilityZoneGroupCommandOutput}
  * @see {@link ModifyAvailabilityZoneGroupCommandInput} for command's `input` shape.
  * @see {@link ModifyAvailabilityZoneGroupCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyAvailabilityZoneGroupCommand extends $Command<
-  ModifyAvailabilityZoneGroupCommandInput,
-  ModifyAvailabilityZoneGroupCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyAvailabilityZoneGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyAvailabilityZoneGroupCommandInput, ModifyAvailabilityZoneGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyAvailabilityZoneGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyAvailabilityZoneGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyAvailabilityZoneGroupResult.filterSensitiveLog,
+export class ModifyAvailabilityZoneGroupCommand extends command<ModifyAvailabilityZoneGroupCommandInput, ModifyAvailabilityZoneGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyAvailabilityZoneGroup",
+  ModifyAvailabilityZoneGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyAvailabilityZoneGroupRequest;
+      output: ModifyAvailabilityZoneGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyAvailabilityZoneGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyAvailabilityZoneGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyAvailabilityZoneGroupCommandOutput> {
-    return deserializeAws_ec2ModifyAvailabilityZoneGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyAvailabilityZoneGroupCommandInput;
+      output: ModifyAvailabilityZoneGroupCommandOutput;
+    };
+  };
 }

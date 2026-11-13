@@ -1,0 +1,677 @@
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
+
+import { ARCRegionSwitchClient } from "./ARCRegionSwitchClient";
+import {
+  type ApprovePlanExecutionStepCommandInput,
+  type ApprovePlanExecutionStepCommandOutput,
+  ApprovePlanExecutionStepCommand,
+} from "./commands/ApprovePlanExecutionStepCommand";
+import {
+  type CancelPlanExecutionCommandInput,
+  type CancelPlanExecutionCommandOutput,
+  CancelPlanExecutionCommand,
+} from "./commands/CancelPlanExecutionCommand";
+import {
+  type CreatePlanCommandInput,
+  type CreatePlanCommandOutput,
+  CreatePlanCommand,
+} from "./commands/CreatePlanCommand";
+import {
+  type DeletePlanCommandInput,
+  type DeletePlanCommandOutput,
+  DeletePlanCommand,
+} from "./commands/DeletePlanCommand";
+import { type GetPlanCommandInput, type GetPlanCommandOutput, GetPlanCommand } from "./commands/GetPlanCommand";
+import {
+  type GetPlanEvaluationStatusCommandInput,
+  type GetPlanEvaluationStatusCommandOutput,
+  GetPlanEvaluationStatusCommand,
+} from "./commands/GetPlanEvaluationStatusCommand";
+import {
+  type GetPlanExecutionCommandInput,
+  type GetPlanExecutionCommandOutput,
+  GetPlanExecutionCommand,
+} from "./commands/GetPlanExecutionCommand";
+import {
+  type GetPlanInRegionCommandInput,
+  type GetPlanInRegionCommandOutput,
+  GetPlanInRegionCommand,
+} from "./commands/GetPlanInRegionCommand";
+import {
+  type ListPlanExecutionEventsCommandInput,
+  type ListPlanExecutionEventsCommandOutput,
+  ListPlanExecutionEventsCommand,
+} from "./commands/ListPlanExecutionEventsCommand";
+import {
+  type ListPlanExecutionsCommandInput,
+  type ListPlanExecutionsCommandOutput,
+  ListPlanExecutionsCommand,
+} from "./commands/ListPlanExecutionsCommand";
+import { type ListPlansCommandInput, type ListPlansCommandOutput, ListPlansCommand } from "./commands/ListPlansCommand";
+import {
+  type ListPlansInRegionCommandInput,
+  type ListPlansInRegionCommandOutput,
+  ListPlansInRegionCommand,
+} from "./commands/ListPlansInRegionCommand";
+import {
+  type ListRoute53HealthChecksCommandInput,
+  type ListRoute53HealthChecksCommandOutput,
+  ListRoute53HealthChecksCommand,
+} from "./commands/ListRoute53HealthChecksCommand";
+import {
+  type ListRoute53HealthChecksInRegionCommandInput,
+  type ListRoute53HealthChecksInRegionCommandOutput,
+  ListRoute53HealthChecksInRegionCommand,
+} from "./commands/ListRoute53HealthChecksInRegionCommand";
+import {
+  type ListServiceQuotaWarningsCommandInput,
+  type ListServiceQuotaWarningsCommandOutput,
+  ListServiceQuotaWarningsCommand,
+} from "./commands/ListServiceQuotaWarningsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type StartPlanExecutionCommandInput,
+  type StartPlanExecutionCommandOutput,
+  StartPlanExecutionCommand,
+} from "./commands/StartPlanExecutionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdatePlanCommandInput,
+  type UpdatePlanCommandOutput,
+  UpdatePlanCommand,
+} from "./commands/UpdatePlanCommand";
+import {
+  type UpdatePlanExecutionCommandInput,
+  type UpdatePlanExecutionCommandOutput,
+  UpdatePlanExecutionCommand,
+} from "./commands/UpdatePlanExecutionCommand";
+import {
+  type UpdatePlanExecutionStepCommandInput,
+  type UpdatePlanExecutionStepCommandOutput,
+  UpdatePlanExecutionStepCommand,
+} from "./commands/UpdatePlanExecutionStepCommand";
+import type { ARCRegionSwitchServiceException } from "./models/ARCRegionSwitchServiceException";
+import { paginateGetPlanEvaluationStatus } from "./pagination/GetPlanEvaluationStatusPaginator";
+import { paginateGetPlanExecution } from "./pagination/GetPlanExecutionPaginator";
+import { paginateListPlanExecutionEvents } from "./pagination/ListPlanExecutionEventsPaginator";
+import { paginateListPlanExecutions } from "./pagination/ListPlanExecutionsPaginator";
+import { paginateListPlansInRegion } from "./pagination/ListPlansInRegionPaginator";
+import { paginateListPlans } from "./pagination/ListPlansPaginator";
+import { paginateListRoute53HealthChecksInRegion } from "./pagination/ListRoute53HealthChecksInRegionPaginator";
+import { paginateListRoute53HealthChecks } from "./pagination/ListRoute53HealthChecksPaginator";
+import { paginateListServiceQuotaWarnings } from "./pagination/ListServiceQuotaWarningsPaginator";
+import { waitUntilPlanEvaluationStatusPassed } from "./waiters/waitForPlanEvaluationStatusPassed";
+import { waitUntilPlanExecutionCompleted } from "./waiters/waitForPlanExecutionCompleted";
+
+const commands = {
+  ApprovePlanExecutionStepCommand,
+  CancelPlanExecutionCommand,
+  CreatePlanCommand,
+  DeletePlanCommand,
+  GetPlanCommand,
+  GetPlanEvaluationStatusCommand,
+  GetPlanExecutionCommand,
+  GetPlanInRegionCommand,
+  ListPlanExecutionEventsCommand,
+  ListPlanExecutionsCommand,
+  ListPlansCommand,
+  ListPlansInRegionCommand,
+  ListRoute53HealthChecksCommand,
+  ListRoute53HealthChecksInRegionCommand,
+  ListServiceQuotaWarningsCommand,
+  ListTagsForResourceCommand,
+  StartPlanExecutionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdatePlanCommand,
+  UpdatePlanExecutionCommand,
+  UpdatePlanExecutionStepCommand,
+};
+const paginators = {
+  paginateGetPlanEvaluationStatus,
+  paginateGetPlanExecution,
+  paginateListPlanExecutionEvents,
+  paginateListPlanExecutions,
+  paginateListPlans,
+  paginateListPlansInRegion,
+  paginateListRoute53HealthChecks,
+  paginateListRoute53HealthChecksInRegion,
+  paginateListServiceQuotaWarnings,
+};
+const waiters = {
+  waitUntilPlanEvaluationStatusPassed,
+  waitUntilPlanExecutionCompleted,
+};
+
+/**
+ * @public
+ */
+export interface ARCRegionSwitchRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ARCRegionSwitch {
+  /**
+   * @see {@link ApprovePlanExecutionStepCommand}
+   */
+  approvePlanExecutionStep(
+    args: ApprovePlanExecutionStepCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ApprovePlanExecutionStepCommandOutput>;
+  approvePlanExecutionStep(
+    args: ApprovePlanExecutionStepCommandInput,
+    cb: (err: any, data?: ApprovePlanExecutionStepCommandOutput) => void
+  ): void;
+  approvePlanExecutionStep(
+    args: ApprovePlanExecutionStepCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ApprovePlanExecutionStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelPlanExecutionCommand}
+   */
+  cancelPlanExecution(
+    args: CancelPlanExecutionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<CancelPlanExecutionCommandOutput>;
+  cancelPlanExecution(
+    args: CancelPlanExecutionCommandInput,
+    cb: (err: any, data?: CancelPlanExecutionCommandOutput) => void
+  ): void;
+  cancelPlanExecution(
+    args: CancelPlanExecutionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: CancelPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePlanCommand}
+   */
+  createPlan(
+    args: CreatePlanCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<CreatePlanCommandOutput>;
+  createPlan(
+    args: CreatePlanCommandInput,
+    cb: (err: any, data?: CreatePlanCommandOutput) => void
+  ): void;
+  createPlan(
+    args: CreatePlanCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: CreatePlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePlanCommand}
+   */
+  deletePlan(
+    args: DeletePlanCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<DeletePlanCommandOutput>;
+  deletePlan(
+    args: DeletePlanCommandInput,
+    cb: (err: any, data?: DeletePlanCommandOutput) => void
+  ): void;
+  deletePlan(
+    args: DeletePlanCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: DeletePlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanCommand}
+   */
+  getPlan(
+    args: GetPlanCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<GetPlanCommandOutput>;
+  getPlan(
+    args: GetPlanCommandInput,
+    cb: (err: any, data?: GetPlanCommandOutput) => void
+  ): void;
+  getPlan(
+    args: GetPlanCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: GetPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanEvaluationStatusCommand}
+   */
+  getPlanEvaluationStatus(
+    args: GetPlanEvaluationStatusCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<GetPlanEvaluationStatusCommandOutput>;
+  getPlanEvaluationStatus(
+    args: GetPlanEvaluationStatusCommandInput,
+    cb: (err: any, data?: GetPlanEvaluationStatusCommandOutput) => void
+  ): void;
+  getPlanEvaluationStatus(
+    args: GetPlanEvaluationStatusCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: GetPlanEvaluationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanExecutionCommand}
+   */
+  getPlanExecution(
+    args: GetPlanExecutionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<GetPlanExecutionCommandOutput>;
+  getPlanExecution(
+    args: GetPlanExecutionCommandInput,
+    cb: (err: any, data?: GetPlanExecutionCommandOutput) => void
+  ): void;
+  getPlanExecution(
+    args: GetPlanExecutionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: GetPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanInRegionCommand}
+   */
+  getPlanInRegion(
+    args: GetPlanInRegionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<GetPlanInRegionCommandOutput>;
+  getPlanInRegion(
+    args: GetPlanInRegionCommandInput,
+    cb: (err: any, data?: GetPlanInRegionCommandOutput) => void
+  ): void;
+  getPlanInRegion(
+    args: GetPlanInRegionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: GetPlanInRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPlanExecutionEventsCommand}
+   */
+  listPlanExecutionEvents(
+    args: ListPlanExecutionEventsCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListPlanExecutionEventsCommandOutput>;
+  listPlanExecutionEvents(
+    args: ListPlanExecutionEventsCommandInput,
+    cb: (err: any, data?: ListPlanExecutionEventsCommandOutput) => void
+  ): void;
+  listPlanExecutionEvents(
+    args: ListPlanExecutionEventsCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListPlanExecutionEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPlanExecutionsCommand}
+   */
+  listPlanExecutions(
+    args: ListPlanExecutionsCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListPlanExecutionsCommandOutput>;
+  listPlanExecutions(
+    args: ListPlanExecutionsCommandInput,
+    cb: (err: any, data?: ListPlanExecutionsCommandOutput) => void
+  ): void;
+  listPlanExecutions(
+    args: ListPlanExecutionsCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListPlanExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPlansCommand}
+   */
+  listPlans(): Promise<ListPlansCommandOutput>;
+  listPlans(
+    args: ListPlansCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListPlansCommandOutput>;
+  listPlans(
+    args: ListPlansCommandInput,
+    cb: (err: any, data?: ListPlansCommandOutput) => void
+  ): void;
+  listPlans(
+    args: ListPlansCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListPlansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPlansInRegionCommand}
+   */
+  listPlansInRegion(): Promise<ListPlansInRegionCommandOutput>;
+  listPlansInRegion(
+    args: ListPlansInRegionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListPlansInRegionCommandOutput>;
+  listPlansInRegion(
+    args: ListPlansInRegionCommandInput,
+    cb: (err: any, data?: ListPlansInRegionCommandOutput) => void
+  ): void;
+  listPlansInRegion(
+    args: ListPlansInRegionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListPlansInRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoute53HealthChecksCommand}
+   */
+  listRoute53HealthChecks(
+    args: ListRoute53HealthChecksCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListRoute53HealthChecksCommandOutput>;
+  listRoute53HealthChecks(
+    args: ListRoute53HealthChecksCommandInput,
+    cb: (err: any, data?: ListRoute53HealthChecksCommandOutput) => void
+  ): void;
+  listRoute53HealthChecks(
+    args: ListRoute53HealthChecksCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListRoute53HealthChecksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRoute53HealthChecksInRegionCommand}
+   */
+  listRoute53HealthChecksInRegion(
+    args: ListRoute53HealthChecksInRegionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListRoute53HealthChecksInRegionCommandOutput>;
+  listRoute53HealthChecksInRegion(
+    args: ListRoute53HealthChecksInRegionCommandInput,
+    cb: (err: any, data?: ListRoute53HealthChecksInRegionCommandOutput) => void
+  ): void;
+  listRoute53HealthChecksInRegion(
+    args: ListRoute53HealthChecksInRegionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListRoute53HealthChecksInRegionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceQuotaWarningsCommand}
+   */
+  listServiceQuotaWarnings(): Promise<ListServiceQuotaWarningsCommandOutput>;
+  listServiceQuotaWarnings(
+    args: ListServiceQuotaWarningsCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListServiceQuotaWarningsCommandOutput>;
+  listServiceQuotaWarnings(
+    args: ListServiceQuotaWarningsCommandInput,
+    cb: (err: any, data?: ListServiceQuotaWarningsCommandOutput) => void
+  ): void;
+  listServiceQuotaWarnings(
+    args: ListServiceQuotaWarningsCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListServiceQuotaWarningsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartPlanExecutionCommand}
+   */
+  startPlanExecution(
+    args: StartPlanExecutionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<StartPlanExecutionCommandOutput>;
+  startPlanExecution(
+    args: StartPlanExecutionCommandInput,
+    cb: (err: any, data?: StartPlanExecutionCommandOutput) => void
+  ): void;
+  startPlanExecution(
+    args: StartPlanExecutionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: StartPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePlanCommand}
+   */
+  updatePlan(
+    args: UpdatePlanCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<UpdatePlanCommandOutput>;
+  updatePlan(
+    args: UpdatePlanCommandInput,
+    cb: (err: any, data?: UpdatePlanCommandOutput) => void
+  ): void;
+  updatePlan(
+    args: UpdatePlanCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: UpdatePlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePlanExecutionCommand}
+   */
+  updatePlanExecution(
+    args: UpdatePlanExecutionCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<UpdatePlanExecutionCommandOutput>;
+  updatePlanExecution(
+    args: UpdatePlanExecutionCommandInput,
+    cb: (err: any, data?: UpdatePlanExecutionCommandOutput) => void
+  ): void;
+  updatePlanExecution(
+    args: UpdatePlanExecutionCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: UpdatePlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePlanExecutionStepCommand}
+   */
+  updatePlanExecutionStep(
+    args: UpdatePlanExecutionStepCommandInput,
+    options?: ARCRegionSwitchRequestOptions
+  ): Promise<UpdatePlanExecutionStepCommandOutput>;
+  updatePlanExecutionStep(
+    args: UpdatePlanExecutionStepCommandInput,
+    cb: (err: any, data?: UpdatePlanExecutionStepCommandOutput) => void
+  ): void;
+  updatePlanExecutionStep(
+    args: UpdatePlanExecutionStepCommandInput,
+    options: ARCRegionSwitchRequestOptions,
+    cb: (err: any, data?: UpdatePlanExecutionStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlanEvaluationStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPlanEvaluationStatusCommandOutput}.
+   */
+  paginateGetPlanEvaluationStatus(
+    args: GetPlanEvaluationStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPlanEvaluationStatusCommandOutput>;
+
+  /**
+   * @see {@link GetPlanExecutionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPlanExecutionCommandOutput}.
+   */
+  paginateGetPlanExecution(
+    args: GetPlanExecutionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPlanExecutionCommandOutput>;
+
+  /**
+   * @see {@link ListPlanExecutionEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlanExecutionEventsCommandOutput}.
+   */
+  paginateListPlanExecutionEvents(
+    args: ListPlanExecutionEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlanExecutionEventsCommandOutput>;
+
+  /**
+   * @see {@link ListPlanExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlanExecutionsCommandOutput}.
+   */
+  paginateListPlanExecutions(
+    args: ListPlanExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlanExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListPlansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlansCommandOutput}.
+   */
+  paginateListPlans(
+    args?: ListPlansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlansCommandOutput>;
+
+  /**
+   * @see {@link ListPlansInRegionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlansInRegionCommandOutput}.
+   */
+  paginateListPlansInRegion(
+    args?: ListPlansInRegionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlansInRegionCommandOutput>;
+
+  /**
+   * @see {@link ListRoute53HealthChecksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoute53HealthChecksCommandOutput}.
+   */
+  paginateListRoute53HealthChecks(
+    args: ListRoute53HealthChecksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoute53HealthChecksCommandOutput>;
+
+  /**
+   * @see {@link ListRoute53HealthChecksInRegionCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRoute53HealthChecksInRegionCommandOutput}.
+   */
+  paginateListRoute53HealthChecksInRegion(
+    args: ListRoute53HealthChecksInRegionCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRoute53HealthChecksInRegionCommandOutput>;
+
+  /**
+   * @see {@link ListServiceQuotaWarningsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceQuotaWarningsCommandOutput}.
+   */
+  paginateListServiceQuotaWarnings(
+    args?: ListServiceQuotaWarningsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceQuotaWarningsCommandOutput>;
+
+  /**
+   * @see {@link GetPlanEvaluationStatusCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilPlanEvaluationStatusPassed(
+    args: GetPlanEvaluationStatusCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<ARCRegionSwitch>, "client">
+  ): Promise<WaiterResult<GetPlanEvaluationStatusCommandOutput>>;
+
+  /**
+   * @see {@link GetPlanExecutionCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilPlanExecutionCompleted(
+    args: GetPlanExecutionCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<ARCRegionSwitch>, "client">
+  ): Promise<WaiterResult<GetPlanExecutionCommandOutput>>;
+}
+
+/**
+ * <p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/region-switch.html">Region switch in ARC</a> in the <i>Amazon Application Recovery Controller User Guide</i>.</p>
+ * @public
+ */
+export class ARCRegionSwitch extends ARCRegionSwitchClient implements ARCRegionSwitch {}
+createAggregatedClient(commands, ARCRegionSwitch, { paginators, waiters });

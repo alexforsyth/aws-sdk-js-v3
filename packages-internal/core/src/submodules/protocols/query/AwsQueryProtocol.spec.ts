@@ -1,0 +1,220 @@
+import type { ExceptionOptionType, ServiceExceptionOptions } from "@smithy/core/client";
+import { ServiceException } from "@smithy/core/client";
+import { HttpResponse } from "@smithy/core/protocols";
+import { TypeRegistry } from "@smithy/core/schema";
+import type { StaticErrorSchema } from "@smithy/types";
+import { describe, expect, test as it } from "vitest";
+
+import { context } from "../test-schema.spec";
+import { AwsQueryProtocol } from "./AwsQueryProtocol";
+
+describe(AwsQueryProtocol.name, () => {
+  // synthetic base.
+  class GiraffeServiceException extends ServiceException {
+    constructor(options: ServiceExceptionOptions) {
+      super(options);
+      Object.setPrototypeOf(this, GiraffeServiceException.prototype);
+    }
+  }
+
+  // modeled error.
+  class SpecificGiraffeServiceException extends GiraffeServiceException {
+    constructor(options: ExceptionOptionType<SpecificGiraffeServiceException, GiraffeServiceException>) {
+      super({
+        name: "SpecificGiraffeServiceException",
+        $fault: "client",
+        ...options,
+      });
+      Object.setPrototypeOf(this, GiraffeServiceException.prototype);
+    }
+  }
+
+  const syntheticNamespace = "smithy.ts.sdk.synthetic.com.amazonaws.giraffes";
+  TypeRegistry.for(syntheticNamespace).registerError(
+    [-3, syntheticNamespace, "GiraffeServiceException", 0, [], []] satisfies StaticErrorSchema,
+    GiraffeServiceException
+  );
+
+  it("should have a shapeId of aws.protocols#awsQuery", () => {
+    expect(new AwsQueryProtocol({ version: "", defaultNamespace: "", xmlNamespace: "" }).getShapeId()).toEqual(
+      "aws.protocols#awsQuery"
+    );
+  });
+
+  it("uses compositeErrorRegistries from instantiation", () => {
+    const GenericServiceException$: StaticErrorSchema = [
+      -3,
+      "com.amazonaws.sdk.example",
+      "GenericServiceException",
+      0,
+      [],
+      [],
+    ];
+    class GenericServiceException extends Error {}
+
+    const registry = TypeRegistry.for("com.amazonaws.sdk.example");
+    registry.registerError(GenericServiceException$, GenericServiceException);
+
+    const protocol = new (class extends AwsQueryProtocol {
+      public getCompositeErrorRegistry() {
+        return this.compositeErrorRegistry;
+      }
+    })({
+      version: "",
+      defaultNamespace: "",
+      xmlNamespace: "",
+      errorTypeRegistries: [registry],
+    });
+
+    expect(protocol.getCompositeErrorRegistry()).not.toBe(registry);
+    expect(protocol.getCompositeErrorRegistry().getSchema("com.amazonaws.sdk.example#GenericServiceException")).toBe(
+      GenericServiceException$
+    );
+  });
+
+  it("decorates service exceptions with unmodeled fields", async () => {
+    const httpResponse = new HttpResponse({
+      statusCode: 400,
+      headers: {},
+      body: Buffer.from(`<Exception><Error><UnmodeledField>Oh no</UnmodeledField></Error></Exception>`),
+    });
+
+    const protocol = new AwsQueryProtocol({
+      version: "",
+      defaultNamespace: "",
+      xmlNamespace: "ns",
+    });
+
+    const output = await protocol
+      .deserializeResponse(
+        {
+          namespace: "ns",
+          name: "Empty",
+          traits: 0,
+          input: "unit" as const,
+          output: [3, "ns", "EmptyOutput", 0, [], []],
+        },
+        context,
+        httpResponse
+      )
+      .catch((e) => {
+        return e;
+      });
+
+    expect(output).toMatchObject({
+      UnmodeledField: "Oh no",
+      $metadata: {
+        httpStatusCode: 400,
+      },
+    });
+  });
+
+  it("should copy Error.Code to error.name and Error.Message to error.message", async () => {
+    const httpResponse = new HttpResponse({
+      statusCode: 400,
+      headers: {},
+      body: Buffer.from(
+        "<Exception>" +
+          "<Error>" +
+          "<Type>Sender</Type>" +
+          "<Code>SpecificGiraffeServiceException</Code>" +
+          "<Message>A giraffe has eaten your umbrella</Message>" +
+          "</Error>" +
+          "</Exception>"
+      ),
+    });
+
+    const protocol = new AwsQueryProtocol({
+      version: "1999-12-31",
+      defaultNamespace: "com.amazonaws.giraffes",
+      xmlNamespace: "ns",
+    });
+
+    const actual = await protocol
+      .deserializeResponse(
+        {
+          namespace: "ns",
+          name: "Empty",
+          traits: 0,
+          input: "unit" as const,
+          output: [3, "ns", "EmptyOutput", 0, [], []],
+        },
+        context,
+        httpResponse
+      )
+      .catch((e) => {
+        return e;
+      });
+
+    const expected = Object.assign(
+      new SpecificGiraffeServiceException({
+        message: "A giraffe has eaten your umbrella",
+        $metadata: {
+          cfId: undefined,
+          extendedRequestId: undefined,
+          httpStatusCode: 400,
+          requestId: undefined,
+        },
+      }),
+      {
+        Type: "Sender",
+        Code: "SpecificGiraffeServiceException",
+        Error: {
+          Code: "SpecificGiraffeServiceException",
+          Message: "A giraffe has eaten your umbrella",
+          Type: "Sender",
+        },
+      }
+    );
+
+    expect(actual.constructor).toBe(expected.constructor);
+    expect(actual.name).toEqual(expected.name);
+    expect(actual.message).toEqual(expected.message);
+    expect(actual.Type).toEqual(expected.Type);
+    expect(actual.Code).toEqual(expected.Code);
+    expect(actual.Error).toEqual(expected.Error);
+  });
+});
+
+it("should not crash when error response body is empty", async () => {
+  const httpResponse = new HttpResponse({
+    statusCode: 500,
+    headers: {
+      "content-type": "text/xml",
+    },
+    body: Buffer.from(""),
+  });
+
+  const protocol = new AwsQueryProtocol({
+    version: "1999-12-31",
+    defaultNamespace: "com.amazonaws.giraffes",
+    xmlNamespace: "ns",
+  });
+
+  const actual = await protocol
+    .deserializeResponse(
+      {
+        namespace: "ns",
+        name: "Empty",
+        traits: 0,
+        input: "unit" as const,
+        output: [3, "ns", "EmptyOutput", 0, [], []],
+      },
+      context,
+      httpResponse
+    )
+    .catch((e) => {
+      return e;
+    });
+
+  // The error should be a proper ServiceException, not a raw TypeError
+  expect(actual).toBeDefined();
+  expect(actual).not.toBeInstanceOf(TypeError);
+  expect(actual.$metadata.httpStatusCode).toBe(500);
+  expect(actual.message).toBe("Unknown");
+  expect(actual.Error).toEqual({
+    Type: undefined,
+    Code: undefined,
+    Message: "Unknown",
+  });
+});

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuditManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AuditManagerClient";
-import { UpdateAssessmentFrameworkRequest, UpdateAssessmentFrameworkResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateAssessmentFrameworkCommand,
-  serializeAws_restJson1UpdateAssessmentFrameworkCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAssessmentFrameworkRequest, UpdateAssessmentFrameworkResponse } from "../models/models_0";
+import { UpdateAssessmentFramework$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAssessmentFrameworkCommand}.
+ */
 export interface UpdateAssessmentFrameworkCommandInput extends UpdateAssessmentFrameworkRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAssessmentFrameworkCommand}.
+ */
 export interface UpdateAssessmentFrameworkCommandOutput extends UpdateAssessmentFrameworkResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,139 @@ export interface UpdateAssessmentFrameworkCommandOutput extends UpdateAssessment
  * ```javascript
  * import { AuditManagerClient, UpdateAssessmentFrameworkCommand } from "@aws-sdk/client-auditmanager"; // ES Modules import
  * // const { AuditManagerClient, UpdateAssessmentFrameworkCommand } = require("@aws-sdk/client-auditmanager"); // CommonJS import
+ * // import type { AuditManagerClientConfig } from "@aws-sdk/client-auditmanager";
+ * const config = {}; // type is AuditManagerClientConfig
  * const client = new AuditManagerClient(config);
+ * const input = { // UpdateAssessmentFrameworkRequest
+ *   frameworkId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   complianceType: "STRING_VALUE",
+ *   controlSets: [ // UpdateAssessmentFrameworkControlSets // required
+ *     { // UpdateAssessmentFrameworkControlSet
+ *       id: "STRING_VALUE",
+ *       name: "STRING_VALUE", // required
+ *       controls: [ // CreateAssessmentFrameworkControls // required
+ *         { // CreateAssessmentFrameworkControl
+ *           id: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new UpdateAssessmentFrameworkCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAssessmentFrameworkResponse
+ * //   framework: { // Framework
+ * //     arn: "STRING_VALUE",
+ * //     id: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     type: "Standard" || "Custom",
+ * //     complianceType: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     logo: "STRING_VALUE",
+ * //     controlSources: "STRING_VALUE",
+ * //     controlSets: [ // ControlSets
+ * //       { // ControlSet
+ * //         id: "STRING_VALUE",
+ * //         name: "STRING_VALUE",
+ * //         controls: [ // Controls
+ * //           { // Control
+ * //             arn: "STRING_VALUE",
+ * //             id: "STRING_VALUE",
+ * //             type: "Standard" || "Custom" || "Core",
+ * //             name: "STRING_VALUE",
+ * //             description: "STRING_VALUE",
+ * //             testingInformation: "STRING_VALUE",
+ * //             actionPlanTitle: "STRING_VALUE",
+ * //             actionPlanInstructions: "STRING_VALUE",
+ * //             controlSources: "STRING_VALUE",
+ * //             controlMappingSources: [ // ControlMappingSources
+ * //               { // ControlMappingSource
+ * //                 sourceId: "STRING_VALUE",
+ * //                 sourceName: "STRING_VALUE",
+ * //                 sourceDescription: "STRING_VALUE",
+ * //                 sourceSetUpOption: "System_Controls_Mapping" || "Procedural_Controls_Mapping",
+ * //                 sourceType: "AWS_Cloudtrail" || "AWS_Config" || "AWS_Security_Hub" || "AWS_API_Call" || "MANUAL" || "Common_Control" || "Core_Control",
+ * //                 sourceKeyword: { // SourceKeyword
+ * //                   keywordInputType: "SELECT_FROM_LIST" || "UPLOAD_FILE" || "INPUT_TEXT",
+ * //                   keywordValue: "STRING_VALUE",
+ * //                 },
+ * //                 sourceFrequency: "DAILY" || "WEEKLY" || "MONTHLY",
+ * //                 troubleshootingText: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //             createdAt: new Date("TIMESTAMP"),
+ * //             lastUpdatedAt: new Date("TIMESTAMP"),
+ * //             createdBy: "STRING_VALUE",
+ * //             lastUpdatedBy: "STRING_VALUE",
+ * //             tags: { // TagMap
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             state: "ACTIVE" || "END_OF_SUPPORT",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     lastUpdatedAt: new Date("TIMESTAMP"),
+ * //     createdBy: "STRING_VALUE",
+ * //     lastUpdatedBy: "STRING_VALUE",
+ * //     tags: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateAssessmentFrameworkCommandInput - {@link UpdateAssessmentFrameworkCommandInput}
+ * @returns {@link UpdateAssessmentFrameworkCommandOutput}
  * @see {@link UpdateAssessmentFrameworkCommandInput} for command's `input` shape.
  * @see {@link UpdateAssessmentFrameworkCommandOutput} for command's `response` shape.
- * @see {@link AuditManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AuditManagerClientResolvedConfig | config} for AuditManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Your account isn't registered with Audit Manager. Check the delegated
+ *          administrator setup on the Audit Manager settings page, and try again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *          later. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource that's specified in the request can't be found. </p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You've reached your account quota for this resource type. To perform the requested
+ *          action, delete some existing resources or <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">request a quota increase</a> from
+ *          the Service Quotas console. For a list of Audit Manager service quotas, see <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html">Quotas and
+ *             restrictions for Audit Manager</a>.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AuditManagerServiceException}
+ * <p>Base exception class for all service exceptions from AuditManager service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAssessmentFrameworkCommand extends $Command<
-  UpdateAssessmentFrameworkCommandInput,
-  UpdateAssessmentFrameworkCommandOutput,
-  AuditManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAssessmentFrameworkCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AuditManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAssessmentFrameworkCommandInput, UpdateAssessmentFrameworkCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AuditManagerClient";
-    const commandName = "UpdateAssessmentFrameworkCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAssessmentFrameworkRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAssessmentFrameworkResponse.filterSensitiveLog,
+export class UpdateAssessmentFrameworkCommand extends command<UpdateAssessmentFrameworkCommandInput, UpdateAssessmentFrameworkCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAssessmentFramework",
+  UpdateAssessmentFramework$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssessmentFrameworkRequest;
+      output: UpdateAssessmentFrameworkResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAssessmentFrameworkCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateAssessmentFrameworkCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateAssessmentFrameworkCommandOutput> {
-    return deserializeAws_restJson1UpdateAssessmentFrameworkCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAssessmentFrameworkCommandInput;
+      output: UpdateAssessmentFrameworkCommandOutput;
+    };
+  };
 }

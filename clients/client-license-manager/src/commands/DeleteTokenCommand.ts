@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { DeleteTokenRequest, DeleteTokenResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteTokenCommand,
-  serializeAws_json1_1DeleteTokenCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTokenRequest, DeleteTokenResponse } from "../models/models_0";
+import { DeleteToken$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTokenCommand}.
+ */
 export interface DeleteTokenCommandInput extends DeleteTokenRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTokenCommand}.
+ */
 export interface DeleteTokenCommandOutput extends DeleteTokenResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface DeleteTokenCommandOutput extends DeleteTokenResponse, __Metadat
  * ```javascript
  * import { LicenseManagerClient, DeleteTokenCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, DeleteTokenCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // DeleteTokenRequest
+ *   TokenId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteTokenCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteTokenCommandInput - {@link DeleteTokenCommandInput}
+ * @returns {@link DeleteTokenCommandOutput}
  * @see {@link DeleteTokenCommandInput} for command's `input` shape.
  * @see {@link DeleteTokenCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link RedirectException} (client fault)
+ *  <p>This is not the correct Region for the resource. Try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The provided input is not valid. Try your request again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTokenCommand extends $Command<
-  DeleteTokenCommandInput,
-  DeleteTokenCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTokenCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTokenCommandInput, DeleteTokenCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "DeleteTokenCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTokenRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTokenResponse.filterSensitiveLog,
+export class DeleteTokenCommand extends command<DeleteTokenCommandInput, DeleteTokenCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteToken",
+  DeleteToken$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTokenRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTokenCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteTokenCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTokenCommandOutput> {
-    return deserializeAws_json1_1DeleteTokenCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTokenCommandInput;
+      output: DeleteTokenCommandOutput;
+    };
+  };
 }

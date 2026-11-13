@@ -1,0 +1,107 @@
+const _BV = "BooleanValue";
+const _CAWSAI = "CustomerAWSAccountId";
+const _CI = "CustomerIdentifier";
+const _D = "Dimension";
+const _DV = "DoubleValue";
+const _E = "Entitlement";
+const _ED = "ExpirationDate";
+const _EL = "EntitlementList";
+const _EV = "EntitlementValue";
+const _En = "Entitlements";
+const _F = "Filter";
+const _GE = "GetEntitlements";
+const _GEF = "GetEntitlementFilters";
+const _GER = "GetEntitlementsRequest";
+const _GERe = "GetEntitlementsResult";
+const _IPE = "InvalidParameterException";
+const _ISEE = "InternalServiceErrorException";
+const _IV = "IntegerValue";
+const _LA = "LicenseArn";
+const _MR = "MaxResults";
+const _NT = "NextToken";
+const _PC = "ProductCode";
+const _SV = "StringValue";
+const _TE = "ThrottlingException";
+const _V = "Value";
+const _c = "client";
+const _e = "error";
+const _m = "message";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.marketplaceentitlementservice";
+const _se = "server";
+const n0 = "com.amazonaws.marketplaceentitlementservice";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import { InternalServiceErrorException, InvalidParameterException, ThrottlingException } from "../models/errors";
+import { MarketplaceEntitlementServiceServiceException } from "../models/MarketplaceEntitlementServiceServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var MarketplaceEntitlementServiceServiceException$: StaticErrorSchema = [-3, _s, "MarketplaceEntitlementServiceServiceException", 0, [], []];
+_s_registry.registerError(MarketplaceEntitlementServiceServiceException$, MarketplaceEntitlementServiceServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var InternalServiceErrorException$: StaticErrorSchema = [-3, n0, _ISEE,
+  { [_e]: _se },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InternalServiceErrorException$, InternalServiceErrorException);
+export var InvalidParameterException$: StaticErrorSchema = [-3, n0, _IPE,
+  { [_e]: _c },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InvalidParameterException$, InvalidParameterException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var Entitlement$: StaticStructureSchema = [3, n0, _E,
+  0,
+  [_PC, _D, _CI, _CAWSAI, _V, _ED, _LA],
+  [0, 0, 0, 0, () => EntitlementValue$, 4, 0]
+];
+export var EntitlementValue$: StaticStructureSchema = [3, n0, _EV,
+  0,
+  [_IV, _DV, _BV, _SV],
+  [1, 1, 2, 0]
+];
+export var GetEntitlementsRequest$: StaticStructureSchema = [3, n0, _GER,
+  0,
+  [_PC, _F, _NT, _MR],
+  [0, [2, n0, _GEF, 0, 0, 64 | 0], 0, 1], 1
+];
+export var GetEntitlementsResult$: StaticStructureSchema = [3, n0, _GERe,
+  0,
+  [_En, _NT],
+  [() => EntitlementList, 0]
+];
+var EntitlementList: StaticListSchema = [1, n0, _EL,
+  0, () => Entitlement$
+];
+var FilterValueList = 64 | 0;
+var GetEntitlementFilters: StaticMapSchema = [2, n0, _GEF,
+  0, 0, 64 | 0
+];
+export var GetEntitlements$: StaticOperationSchema = [9, n0, _GE,
+  0, () => GetEntitlementsRequest$, () => GetEntitlementsResult$
+];

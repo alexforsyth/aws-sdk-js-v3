@@ -1,0 +1,73 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { QueryIdempotencyTokenAutoFillInput } from "../models/models_0";
+import { QueryIdempotencyTokenAutoFill$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link QueryIdempotencyTokenAutoFillCommand}.
+ */
+export interface QueryIdempotencyTokenAutoFillCommandInput extends QueryIdempotencyTokenAutoFillInput {}
+/**
+ * @public
+ *
+ * The output of {@link QueryIdempotencyTokenAutoFillCommand}.
+ */
+export interface QueryIdempotencyTokenAutoFillCommandOutput extends __MetadataBearer {}
+
+/**
+ * Automatically adds idempotency tokens.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, QueryIdempotencyTokenAutoFillCommand } from "@aws-sdk/aws-protocoltests-restjson-schema"; // ES Modules import
+ * // const { RestJsonProtocolClient, QueryIdempotencyTokenAutoFillCommand } = require("@aws-sdk/aws-protocoltests-restjson-schema"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson-schema";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // QueryIdempotencyTokenAutoFillInput
+ *   token: "STRING_VALUE",
+ * };
+ * const command = new QueryIdempotencyTokenAutoFillCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param QueryIdempotencyTokenAutoFillCommandInput - {@link QueryIdempotencyTokenAutoFillCommandInput}
+ * @returns {@link QueryIdempotencyTokenAutoFillCommandOutput}
+ * @see {@link QueryIdempotencyTokenAutoFillCommandInput} for command's `input` shape.
+ * @see {@link QueryIdempotencyTokenAutoFillCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class QueryIdempotencyTokenAutoFillCommand extends command<QueryIdempotencyTokenAutoFillCommandInput, QueryIdempotencyTokenAutoFillCommandOutput>(
+  _ep0,
+  _mw0,
+  "QueryIdempotencyTokenAutoFill",
+  QueryIdempotencyTokenAutoFill$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: QueryIdempotencyTokenAutoFillInput;
+      output: {};
+    };
+    sdk: {
+      input: QueryIdempotencyTokenAutoFillCommandInput;
+      output: QueryIdempotencyTokenAutoFillCommandOutput;
+    };
+  };
+}

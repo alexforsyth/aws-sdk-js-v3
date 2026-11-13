@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeartifactClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeartifactClient";
-import { GetDomainPermissionsPolicyRequest, GetDomainPermissionsPolicyResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDomainPermissionsPolicyCommand,
-  serializeAws_restJson1GetDomainPermissionsPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDomainPermissionsPolicyRequest, GetDomainPermissionsPolicyResult } from "../models/models_0";
+import { GetDomainPermissionsPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDomainPermissionsPolicyCommand}.
+ */
 export interface GetDomainPermissionsPolicyCommandInput extends GetDomainPermissionsPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDomainPermissionsPolicyCommand}.
+ */
 export interface GetDomainPermissionsPolicyCommandOutput extends GetDomainPermissionsPolicyResult, __MetadataBearer {}
 
 /**
@@ -29,7 +30,7 @@ export interface GetDomainPermissionsPolicyCommandOutput extends GetDomainPermis
  *             <p>
  *          The policy is a resource-based policy, not an identity-based policy. For more information, see
  *          <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html">Identity-based policies
- *            and resource-based policies </a> in the <i>AWS Identity and Access Management User Guide</i>.
+ *            and resource-based policies </a> in the <i>IAM User Guide</i>.
  *        </p>
  *          </note>
  * @example
@@ -37,71 +38,75 @@ export interface GetDomainPermissionsPolicyCommandOutput extends GetDomainPermis
  * ```javascript
  * import { CodeartifactClient, GetDomainPermissionsPolicyCommand } from "@aws-sdk/client-codeartifact"; // ES Modules import
  * // const { CodeartifactClient, GetDomainPermissionsPolicyCommand } = require("@aws-sdk/client-codeartifact"); // CommonJS import
+ * // import type { CodeartifactClientConfig } from "@aws-sdk/client-codeartifact";
+ * const config = {}; // type is CodeartifactClientConfig
  * const client = new CodeartifactClient(config);
+ * const input = { // GetDomainPermissionsPolicyRequest
+ *   domain: "STRING_VALUE", // required
+ *   domainOwner: "STRING_VALUE",
+ * };
  * const command = new GetDomainPermissionsPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetDomainPermissionsPolicyResult
+ * //   policy: { // ResourcePolicy
+ * //     resourceArn: "STRING_VALUE",
+ * //     revision: "STRING_VALUE",
+ * //     document: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDomainPermissionsPolicyCommandInput - {@link GetDomainPermissionsPolicyCommandInput}
+ * @returns {@link GetDomainPermissionsPolicyCommandOutput}
  * @see {@link GetDomainPermissionsPolicyCommandInput} for command's `input` shape.
  * @see {@link GetDomainPermissionsPolicyCommandOutput} for command's `response` shape.
- * @see {@link CodeartifactClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeartifactClientResolvedConfig | config} for CodeartifactClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>
+ *         The operation did not succeed because of an unauthorized access attempt.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The operation did not succeed because of an error that occurred inside CodeArtifact. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>
+ *       The operation did not succeed because the resource requested is not found in the service.
+ *     </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>
+ *       The operation did not succeed because too many requests are sent to the service.
+ *     </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>
+ *       The operation did not succeed because a parameter in the request was sent with an invalid value.
+ *     </p>
+ *
+ * @throws {@link CodeartifactServiceException}
+ * <p>Base exception class for all service exceptions from Codeartifact service.</p>
+ *
+ *
+ * @public
  */
-export class GetDomainPermissionsPolicyCommand extends $Command<
-  GetDomainPermissionsPolicyCommandInput,
-  GetDomainPermissionsPolicyCommandOutput,
-  CodeartifactClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDomainPermissionsPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeartifactClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDomainPermissionsPolicyCommandInput, GetDomainPermissionsPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeartifactClient";
-    const commandName = "GetDomainPermissionsPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDomainPermissionsPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDomainPermissionsPolicyResult.filterSensitiveLog,
+export class GetDomainPermissionsPolicyCommand extends command<GetDomainPermissionsPolicyCommandInput, GetDomainPermissionsPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDomainPermissionsPolicy",
+  GetDomainPermissionsPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDomainPermissionsPolicyRequest;
+      output: GetDomainPermissionsPolicyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDomainPermissionsPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDomainPermissionsPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetDomainPermissionsPolicyCommandOutput> {
-    return deserializeAws_restJson1GetDomainPermissionsPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDomainPermissionsPolicyCommandInput;
+      output: GetDomainPermissionsPolicyCommandOutput;
+    };
+  };
 }

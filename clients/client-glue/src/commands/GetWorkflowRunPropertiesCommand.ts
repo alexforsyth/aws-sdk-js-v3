@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetWorkflowRunPropertiesRequest, GetWorkflowRunPropertiesResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetWorkflowRunPropertiesCommand,
-  serializeAws_json1_1GetWorkflowRunPropertiesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWorkflowRunPropertiesRequest, GetWorkflowRunPropertiesResponse } from "../models/models_2";
+import { GetWorkflowRunProperties$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWorkflowRunPropertiesCommand}.
+ */
 export interface GetWorkflowRunPropertiesCommandInput extends GetWorkflowRunPropertiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetWorkflowRunPropertiesCommand}.
+ */
 export interface GetWorkflowRunPropertiesCommandOutput extends GetWorkflowRunPropertiesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,62 @@ export interface GetWorkflowRunPropertiesCommandOutput extends GetWorkflowRunPro
  * ```javascript
  * import { GlueClient, GetWorkflowRunPropertiesCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetWorkflowRunPropertiesCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetWorkflowRunPropertiesRequest
+ *   Name: "STRING_VALUE", // required
+ *   RunId: "STRING_VALUE", // required
+ * };
  * const command = new GetWorkflowRunPropertiesCommand(input);
  * const response = await client.send(command);
+ * // { // GetWorkflowRunPropertiesResponse
+ * //   RunProperties: { // WorkflowRunProperties
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetWorkflowRunPropertiesCommandInput - {@link GetWorkflowRunPropertiesCommandInput}
+ * @returns {@link GetWorkflowRunPropertiesCommandOutput}
  * @see {@link GetWorkflowRunPropertiesCommandInput} for command's `input` shape.
  * @see {@link GetWorkflowRunPropertiesCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetWorkflowRunPropertiesCommand extends $Command<
-  GetWorkflowRunPropertiesCommandInput,
-  GetWorkflowRunPropertiesCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWorkflowRunPropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWorkflowRunPropertiesCommandInput, GetWorkflowRunPropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetWorkflowRunPropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWorkflowRunPropertiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetWorkflowRunPropertiesResponse.filterSensitiveLog,
+export class GetWorkflowRunPropertiesCommand extends command<GetWorkflowRunPropertiesCommandInput, GetWorkflowRunPropertiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWorkflowRunProperties",
+  GetWorkflowRunProperties$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkflowRunPropertiesRequest;
+      output: GetWorkflowRunPropertiesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWorkflowRunPropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetWorkflowRunPropertiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetWorkflowRunPropertiesCommandOutput> {
-    return deserializeAws_json1_1GetWorkflowRunPropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWorkflowRunPropertiesCommandInput;
+      output: GetWorkflowRunPropertiesCommandOutput;
+    };
+  };
 }

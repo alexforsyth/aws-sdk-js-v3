@@ -1,95 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmpClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmpClient";
-import { PutRuleGroupsNamespaceRequest, PutRuleGroupsNamespaceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1PutRuleGroupsNamespaceCommand,
-  serializeAws_restJson1PutRuleGroupsNamespaceCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutRuleGroupsNamespaceRequest, PutRuleGroupsNamespaceResponse } from "../models/models_0";
+import { PutRuleGroupsNamespace$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutRuleGroupsNamespaceCommand}.
+ */
 export interface PutRuleGroupsNamespaceCommandInput extends PutRuleGroupsNamespaceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutRuleGroupsNamespaceCommand}.
+ */
 export interface PutRuleGroupsNamespaceCommandOutput extends PutRuleGroupsNamespaceResponse, __MetadataBearer {}
 
 /**
- * Update a rule groups namespace.
+ * <p>Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <important> <p>The combined length of a rule group namespace and a rule group name cannot exceed 721 UTF-8 bytes.</p> </important> <p>Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use <code>CreateRuleGroupsNamespace</code>.</p> <p>You can't use this operation to add tags to an existing rule groups namespace. Instead, use <code>TagResource</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AmpClient, PutRuleGroupsNamespaceCommand } from "@aws-sdk/client-amp"; // ES Modules import
  * // const { AmpClient, PutRuleGroupsNamespaceCommand } = require("@aws-sdk/client-amp"); // CommonJS import
+ * // import type { AmpClientConfig } from "@aws-sdk/client-amp";
+ * const config = {}; // type is AmpClientConfig
  * const client = new AmpClient(config);
+ * const input = { // PutRuleGroupsNamespaceRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   name: "STRING_VALUE", // required
+ *   data: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new PutRuleGroupsNamespaceCommand(input);
  * const response = await client.send(command);
+ * // { // PutRuleGroupsNamespaceResponse
+ * //   name: "STRING_VALUE", // required
+ * //   arn: "STRING_VALUE", // required
+ * //   status: { // RuleGroupsNamespaceStatus
+ * //     statusCode: "STRING_VALUE", // required
+ * //     statusReason: "STRING_VALUE",
+ * //   },
+ * //   tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutRuleGroupsNamespaceCommandInput - {@link PutRuleGroupsNamespaceCommandInput}
+ * @returns {@link PutRuleGroupsNamespaceCommandOutput}
  * @see {@link PutRuleGroupsNamespaceCommandInput} for command's `input` shape.
  * @see {@link PutRuleGroupsNamespaceCommandOutput} for command's `response` shape.
- * @see {@link AmpClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AmpClientResolvedConfig | config} for AmpClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request would cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resources that doesn't exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Completing the request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link AmpServiceException}
+ * <p>Base exception class for all service exceptions from Amp service.</p>
+ *
+ *
+ * @public
  */
-export class PutRuleGroupsNamespaceCommand extends $Command<
-  PutRuleGroupsNamespaceCommandInput,
-  PutRuleGroupsNamespaceCommandOutput,
-  AmpClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutRuleGroupsNamespaceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmpClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutRuleGroupsNamespaceCommandInput, PutRuleGroupsNamespaceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmpClient";
-    const commandName = "PutRuleGroupsNamespaceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutRuleGroupsNamespaceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutRuleGroupsNamespaceResponse.filterSensitiveLog,
+export class PutRuleGroupsNamespaceCommand extends command<PutRuleGroupsNamespaceCommandInput, PutRuleGroupsNamespaceCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutRuleGroupsNamespace",
+  PutRuleGroupsNamespace$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutRuleGroupsNamespaceRequest;
+      output: PutRuleGroupsNamespaceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutRuleGroupsNamespaceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutRuleGroupsNamespaceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutRuleGroupsNamespaceCommandOutput> {
-    return deserializeAws_restJson1PutRuleGroupsNamespaceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutRuleGroupsNamespaceCommandInput;
+      output: PutRuleGroupsNamespaceCommandOutput;
+    };
+  };
 }

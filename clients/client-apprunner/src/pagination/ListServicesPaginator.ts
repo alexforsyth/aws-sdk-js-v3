@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { AppRunner } from "../AppRunner";
 import { AppRunnerClient } from "../AppRunnerClient";
 import {
   ListServicesCommand,
   ListServicesCommandInput,
   ListServicesCommandOutput,
 } from "../commands/ListServicesCommand";
-import { AppRunnerPaginationConfiguration } from "./Interfaces";
+import type { AppRunnerPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: AppRunnerClient,
-  input: ListServicesCommandInput,
-  ...args: any
-): Promise<ListServicesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListServicesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: AppRunner,
-  input: ListServicesCommandInput,
-  ...args: any
-): Promise<ListServicesCommandOutput> => {
-  // @ts-ignore
-  return await client.listServices(input, ...args);
-};
-export async function* paginateListServices(
+export const paginateListServices: (
   config: AppRunnerPaginationConfiguration,
   input: ListServicesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListServicesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListServicesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof AppRunner) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof AppRunnerClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected AppRunner | AppRunnerClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListServicesCommandOutput> = createPaginator<
+  AppRunnerPaginationConfiguration,
+  ListServicesCommandInput,
+  ListServicesCommandOutput
+>(AppRunnerClient, ListServicesCommand, "NextToken", "NextToken", "MaxResults");

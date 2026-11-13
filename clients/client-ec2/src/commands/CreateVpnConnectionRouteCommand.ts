@@ -1,99 +1,78 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateVpnConnectionRouteRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2CreateVpnConnectionRouteCommand,
-  serializeAws_ec2CreateVpnConnectionRouteCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateVpnConnectionRouteRequest } from "../models/models_2";
+import { CreateVpnConnectionRoute$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateVpnConnectionRouteCommand}.
+ */
 export interface CreateVpnConnectionRouteCommandInput extends CreateVpnConnectionRouteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateVpnConnectionRouteCommand}.
+ */
 export interface CreateVpnConnectionRouteCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Creates a static route associated with a VPN connection between an existing virtual
  *             private gateway and a VPN customer gateway. The static route allows traffic to be routed
  *             from the virtual private gateway to the VPN customer gateway.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN
  *                 User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateVpnConnectionRouteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateVpnConnectionRouteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateVpnConnectionRouteRequest
+ *   DestinationCidrBlock: "STRING_VALUE", // required
+ *   VpnConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new CreateVpnConnectionRouteCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateVpnConnectionRouteCommandInput - {@link CreateVpnConnectionRouteCommandInput}
+ * @returns {@link CreateVpnConnectionRouteCommandOutput}
  * @see {@link CreateVpnConnectionRouteCommandInput} for command's `input` shape.
  * @see {@link CreateVpnConnectionRouteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateVpnConnectionRouteCommand extends $Command<
-  CreateVpnConnectionRouteCommandInput,
-  CreateVpnConnectionRouteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateVpnConnectionRouteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateVpnConnectionRouteCommandInput, CreateVpnConnectionRouteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateVpnConnectionRouteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateVpnConnectionRouteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class CreateVpnConnectionRouteCommand extends command<CreateVpnConnectionRouteCommandInput, CreateVpnConnectionRouteCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateVpnConnectionRoute",
+  CreateVpnConnectionRoute$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVpnConnectionRouteRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateVpnConnectionRouteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateVpnConnectionRouteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateVpnConnectionRouteCommandOutput> {
-    return deserializeAws_ec2CreateVpnConnectionRouteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateVpnConnectionRouteCommandInput;
+      output: CreateVpnConnectionRouteCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { DeleteProfileKeyRequest, DeleteProfileKeyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteProfileKeyCommand,
-  serializeAws_restJson1DeleteProfileKeyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteProfileKeyRequest, DeleteProfileKeyResponse } from "../models/models_0";
+import { DeleteProfileKey$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteProfileKeyCommand}.
+ */
 export interface DeleteProfileKeyCommandInput extends DeleteProfileKeyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteProfileKeyCommand}.
+ */
 export interface DeleteProfileKeyCommandOutput extends DeleteProfileKeyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,67 @@ export interface DeleteProfileKeyCommandOutput extends DeleteProfileKeyResponse,
  * ```javascript
  * import { CustomerProfilesClient, DeleteProfileKeyCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, DeleteProfileKeyCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // DeleteProfileKeyRequest
+ *   ProfileId: "STRING_VALUE", // required
+ *   KeyName: "STRING_VALUE", // required
+ *   Values: [ // requestValueList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   DomainName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteProfileKeyCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteProfileKeyResponse
+ * //   Message: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteProfileKeyCommandInput - {@link DeleteProfileKeyCommandInput}
+ * @returns {@link DeleteProfileKeyCommandOutput}
  * @see {@link DeleteProfileKeyCommandInput} for command's `input` shape.
  * @see {@link DeleteProfileKeyCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteProfileKeyCommand extends $Command<
-  DeleteProfileKeyCommandInput,
-  DeleteProfileKeyCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteProfileKeyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteProfileKeyCommandInput, DeleteProfileKeyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "DeleteProfileKeyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteProfileKeyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteProfileKeyResponse.filterSensitiveLog,
+export class DeleteProfileKeyCommand extends command<DeleteProfileKeyCommandInput, DeleteProfileKeyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteProfileKey",
+  DeleteProfileKey$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProfileKeyRequest;
+      output: DeleteProfileKeyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteProfileKeyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteProfileKeyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteProfileKeyCommandOutput> {
-    return deserializeAws_restJson1DeleteProfileKeyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteProfileKeyCommandInput;
+      output: DeleteProfileKeyCommandOutput;
+    };
+  };
 }

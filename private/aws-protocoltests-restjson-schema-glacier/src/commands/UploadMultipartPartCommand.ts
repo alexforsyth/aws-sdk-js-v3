@@ -1,0 +1,93 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadInputTypes } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UploadMultipartPartInput, UploadMultipartPartOutput } from "../models/models_0";
+import { UploadMultipartPart$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UploadMultipartPartCommand}.
+ */
+export interface UploadMultipartPartCommandInput extends Omit<UploadMultipartPartInput, "body"> {
+  body?: StreamingBlobPayloadInputTypes;
+}
+
+/**
+ * @public
+ *
+ * The output of {@link UploadMultipartPartCommand}.
+ */
+export interface UploadMultipartPartCommandOutput extends UploadMultipartPartOutput, __MetadataBearer {}
+
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { GlacierClient, UploadMultipartPartCommand } from "@aws-sdk/aws-protocoltests-restjson-schema-glacier"; // ES Modules import
+ * // const { GlacierClient, UploadMultipartPartCommand } = require("@aws-sdk/aws-protocoltests-restjson-schema-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/aws-protocoltests-restjson-schema-glacier";
+ * const config = {}; // type is GlacierClientConfig
+ * const client = new GlacierClient(config);
+ * const input = { // UploadMultipartPartInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   uploadId: "STRING_VALUE", // required
+ *   checksum: "STRING_VALUE",
+ *   range: "STRING_VALUE",
+ *   body: "MULTIPLE_TYPES_ACCEPTED", // see \@smithy/types -> StreamingBlobPayloadInputTypes
+ * };
+ * const command = new UploadMultipartPartCommand(input);
+ * const response = await client.send(command);
+ * // { // UploadMultipartPartOutput
+ * //   checksum: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param UploadMultipartPartCommandInput - {@link UploadMultipartPartCommandInput}
+ * @returns {@link UploadMultipartPartCommandOutput}
+ * @see {@link UploadMultipartPartCommandInput} for command's `input` shape.
+ * @see {@link UploadMultipartPartCommandOutput} for command's `response` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *
+ * @throws {@link RequestTimeoutException} (client fault)
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ */
+export class UploadMultipartPartCommand extends command<UploadMultipartPartCommandInput, UploadMultipartPartCommandOutput>(
+  _ep0,
+  _mw0,
+  "UploadMultipartPart",
+  UploadMultipartPart$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UploadMultipartPartInput;
+      output: UploadMultipartPartOutput;
+    };
+    sdk: {
+      input: UploadMultipartPartCommandInput;
+      output: UploadMultipartPartCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,459 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const Action = {
+  ALLOW: "ALLOW",
+  BLOCK: "BLOCK",
+  CAPTCHA: "CAPTCHA",
+  CHALLENGE: "CHALLENGE",
+  COUNT: "COUNT",
+  EXCLUDED_AS_COUNT: "EXCLUDED_AS_COUNT",
+} as const;
+/**
+ * @public
+ */
+export type Action = (typeof Action)[keyof typeof Action];
+
+/**
+ * @public
+ * @enum
+ */
+export const CentralizationFailureReason = {
+  DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION: "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION",
+  INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+  TRUSTED_ACCESS_NOT_ENABLED: "TRUSTED_ACCESS_NOT_ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type CentralizationFailureReason =
+  (typeof CentralizationFailureReason)[keyof typeof CentralizationFailureReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const DeletionProtection = {
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type DeletionProtection = (typeof DeletionProtection)[keyof typeof DeletionProtection];
+
+/**
+ * @public
+ * @enum
+ */
+export const EncryptionConflictResolutionStrategy = {
+  ALLOW: "ALLOW",
+  SKIP: "SKIP",
+} as const;
+/**
+ * @public
+ */
+export type EncryptionConflictResolutionStrategy =
+  (typeof EncryptionConflictResolutionStrategy)[keyof typeof EncryptionConflictResolutionStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const EncryptionScope = {
+  /**
+   * <p>Only destination log groups whose source log group is encrypted with a customer managed KMS key use the configured <code>KmsKeyArn</code>. This is the default behavior.</p>
+   */
+  ENCRYPTED_SOURCE_ONLY: "ENCRYPTED_SOURCE_ONLY",
+  /**
+   * <p>Every new destination log group created by this rule uses the configured <code>KmsKeyArn</code>, regardless of whether the source log group is encrypted with a customer managed key or Amazon Web Services owned encryption.</p>
+   */
+  NEW_DESTINATION_LOG_GROUPS: "NEW_DESTINATION_LOG_GROUPS",
+} as const;
+/**
+ * @public
+ */
+export type EncryptionScope = (typeof EncryptionScope)[keyof typeof EncryptionScope];
+
+/**
+ * @public
+ * @enum
+ */
+export const EncryptionStrategy = {
+  AWS_OWNED: "AWS_OWNED",
+  CUSTOMER_MANAGED: "CUSTOMER_MANAGED",
+} as const;
+/**
+ * @public
+ */
+export type EncryptionStrategy = (typeof EncryptionStrategy)[keyof typeof EncryptionStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const TagConflictResolutionStrategy = {
+  ADD_ONLY: "ADD_ONLY",
+  IN_SYNC: "IN_SYNC",
+  UPDATE_SYNC: "UPDATE_SYNC",
+} as const;
+/**
+ * @public
+ */
+export type TagConflictResolutionStrategy =
+  (typeof TagConflictResolutionStrategy)[keyof typeof TagConflictResolutionStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const EncryptedLogGroupStrategy = {
+  ALLOW: "ALLOW",
+  SKIP: "SKIP",
+} as const;
+/**
+ * @public
+ */
+export type EncryptedLogGroupStrategy = (typeof EncryptedLogGroupStrategy)[keyof typeof EncryptedLogGroupStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContextGraphStatus = {
+  HEALTHY: "Healthy",
+  PROVISIONING: "Provisioning",
+  UNHEALTHY: "Unhealthy",
+} as const;
+/**
+ * @public
+ */
+export type ContextGraphStatus = (typeof ContextGraphStatus)[keyof typeof ContextGraphStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const RuleHealth = {
+  HEALTHY: "Healthy",
+  PROVISIONING: "Provisioning",
+  UNHEALTHY: "Unhealthy",
+} as const;
+/**
+ * @public
+ */
+export type RuleHealth = (typeof RuleHealth)[keyof typeof RuleHealth];
+
+/**
+ * @public
+ * @enum
+ */
+export const TagPropagationFailureReason = {
+  ROLE_LACKS_PERMISSIONS: "RoleLacksPermissions",
+  ROLE_NOT_ASSUMABLE: "RoleNotAssumable",
+} as const;
+/**
+ * @public
+ */
+export type TagPropagationFailureReason =
+  (typeof TagPropagationFailureReason)[keyof typeof TagPropagationFailureReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const TagPropagationStatus = {
+  HEALTHY: "Healthy",
+  UNHEALTHY: "Unhealthy",
+} as const;
+/**
+ * @public
+ */
+export type TagPropagationStatus = (typeof TagPropagationStatus)[keyof typeof TagPropagationStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const SSEAlgorithm = {
+  SSE_KMS: "aws:kms",
+  SSE_S3: "AES256",
+} as const;
+/**
+ * @public
+ */
+export type SSEAlgorithm = (typeof SSEAlgorithm)[keyof typeof SSEAlgorithm];
+
+/**
+ * @public
+ * @enum
+ */
+export const DestinationType = {
+  CLOUDWATCH_LOGS: "cloud-watch-logs",
+} as const;
+/**
+ * @public
+ */
+export type DestinationType = (typeof DestinationType)[keyof typeof DestinationType];
+
+/**
+ * @public
+ * @enum
+ */
+export const OutputFormat = {
+  JSON: "json",
+  PLAIN: "plain",
+} as const;
+/**
+ * @public
+ */
+export type OutputFormat = (typeof OutputFormat)[keyof typeof OutputFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const LogType = {
+  ACCESS: "ACCESS_LOGS",
+  ALB_ACCESS: "ALB_ACCESS_LOGS",
+  ALB_CONNECTION: "ALB_CONNECTION_LOGS",
+  ALB_HEALTH_CHECK: "ALB_HEALTH_CHECK_LOGS",
+  APPLICATION: "APPLICATION_LOGS",
+  CONNECTION: "CONNECTION_LOGS",
+  S3_SERVER_ACCESS: "S3_SERVER_ACCESS_LOGS",
+  SECURITY_FINDING: "SECURITY_FINDING_LOGS",
+  USAGE: "USAGE_LOGS",
+} as const;
+/**
+ * @public
+ */
+export type LogType = (typeof LogType)[keyof typeof LogType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MskEnhancedMonitoringLevel = {
+  DEFAULT: "DEFAULT",
+  PER_BROKER: "PER_BROKER",
+  PER_TOPIC_PER_BROKER: "PER_TOPIC_PER_BROKER",
+  PER_TOPIC_PER_PARTITION: "PER_TOPIC_PER_PARTITION",
+} as const;
+/**
+ * @public
+ */
+export type MskEnhancedMonitoringLevel = (typeof MskEnhancedMonitoringLevel)[keyof typeof MskEnhancedMonitoringLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const FilterBehavior = {
+  DROP: "DROP",
+  KEEP: "KEEP",
+} as const;
+/**
+ * @public
+ */
+export type FilterBehavior = (typeof FilterBehavior)[keyof typeof FilterBehavior];
+
+/**
+ * @public
+ * @enum
+ */
+export const FilterRequirement = {
+  MEETS_ALL: "MEETS_ALL",
+  MEETS_ANY: "MEETS_ANY",
+} as const;
+/**
+ * @public
+ */
+export type FilterRequirement = (typeof FilterRequirement)[keyof typeof FilterRequirement];
+
+/**
+ * @public
+ * @enum
+ */
+export const WAFLogType = {
+  WAF_LOGS: "WAF_LOGS",
+} as const;
+/**
+ * @public
+ */
+export type WAFLogType = (typeof WAFLogType)[keyof typeof WAFLogType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ResourceType = {
+  AWS_BEDROCK_AGENTCORE_BROWSER: "AWS::BedrockAgentCore::Browser",
+  AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER: "AWS::BedrockAgentCore::CodeInterpreter",
+  AWS_BEDROCK_AGENTCORE_GATEWAY: "AWS::BedrockAgentCore::Gateway",
+  AWS_BEDROCK_AGENTCORE_MEMORY: "AWS::BedrockAgentCore::Memory",
+  AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER: "AWS::BedrockAgentCore::PaymentManager",
+  AWS_BEDROCK_AGENTCORE_RUNTIME: "AWS::BedrockAgentCore::Runtime",
+  AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY: "AWS::BedrockAgentCore::WorkloadIdentity",
+  AWS_BEDROCK_KNOWLEDGEBASE: "AWS::Bedrock::KnowledgeBase",
+  AWS_CLOUDFRONT_DISTRIBUTION: "AWS::CloudFront::Distribution",
+  AWS_CLOUDTRAIL: "AWS::CloudTrail",
+  AWS_EC2_INSTANCE: "AWS::EC2::Instance",
+  AWS_EC2_VPC: "AWS::EC2::VPC",
+  AWS_EKS_CLUSTER: "AWS::EKS::Cluster",
+  AWS_ELB_LOADBALANCER: "AWS::ElasticLoadBalancingV2::LoadBalancer",
+  AWS_LAMDBA_FUNCTION: "AWS::Lambda::Function",
+  AWS_MSK_CLUSTER: "AWS::MSK::Cluster",
+  AWS_OTEL_ENRICHMENT: "AWS::CloudWatch::OTelEnrichment",
+  AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT: "AWS::Route53Resolver::ResolverEndpoint",
+  AWS_S3_BUCKET: "AWS::S3::Bucket",
+  AWS_SECURITY_HUB: "AWS::SecurityHub::Hub",
+  AWS_SECURITY_HUB_HUBV2: "AWS::SecurityHub::HubV2",
+  AWS_WAF_V2_WEB_ACL: "AWS::WAFv2::WebACL",
+  AWS_XRAY_TRANSACTION_SEARCH_CONFIG: "AWS::XRay::TransactionSearchConfig",
+} as const;
+/**
+ * @public
+ */
+export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const TelemetrySourceType = {
+  EKS_API_LOGS: "EKS_API_LOGS",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_AUTHENTICATOR_LOGS: "EKS_AUTHENTICATOR_LOGS",
+  EKS_CONTROLLER_MANAGER_LOGS: "EKS_CONTROLLER_MANAGER_LOGS",
+  EKS_SCHEDULER_LOGS: "EKS_SCHEDULER_LOGS",
+  ROUTE53_RESOLVER_QUERY_LOGS: "ROUTE53_RESOLVER_QUERY_LOGS",
+  VPC_FLOW_LOGS: "VPC_FLOW_LOGS",
+} as const;
+/**
+ * @public
+ */
+export type TelemetrySourceType = (typeof TelemetrySourceType)[keyof typeof TelemetrySourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const TelemetryType = {
+  INSIGHTS: "Insights",
+  LOGS: "Logs",
+  METRICS: "Metrics",
+  TRACES: "Traces",
+} as const;
+/**
+ * @public
+ */
+export type TelemetryType = (typeof TelemetryType)[keyof typeof TelemetryType];
+
+/**
+ * @public
+ * @enum
+ */
+export const IntegrationStatus = {
+  ACTIVE: "ACTIVE",
+  DELETING: "DELETING",
+} as const;
+/**
+ * @public
+ */
+export type IntegrationStatus = (typeof IntegrationStatus)[keyof typeof IntegrationStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const TelemetryEnrichmentStatus = {
+  IMPAIRED: "Impaired",
+  RUNNING: "Running",
+  STOPPED: "Stopped",
+} as const;
+/**
+ * @public
+ */
+export type TelemetryEnrichmentStatus = (typeof TelemetryEnrichmentStatus)[keyof typeof TelemetryEnrichmentStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const Status = {
+  FAILED_START: "FAILED_START",
+  FAILED_STOP: "FAILED_STOP",
+  NOT_STARTED: "NOT_STARTED",
+  RUNNING: "RUNNING",
+  STARTING: "STARTING",
+  STOPPED: "STOPPED",
+  STOPPING: "STOPPING",
+} as const;
+/**
+ * @public
+ */
+export type Status = (typeof Status)[keyof typeof Status];
+
+/**
+ * @public
+ * @enum
+ */
+export const TelemetryPipelineStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type TelemetryPipelineStatus = (typeof TelemetryPipelineStatus)[keyof typeof TelemetryPipelineStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const TelemetryState = {
+  DISABLED: "Disabled",
+  ENABLED: "Enabled",
+  NOT_APPLICABLE: "NotApplicable",
+} as const;
+/**
+ * @public
+ */
+export type TelemetryState = (typeof TelemetryState)[keyof typeof TelemetryState];
+
+/**
+ * @public
+ * @enum
+ */
+export const RecordFormat = {
+  JSON: "JSON",
+  STRING: "STRING",
+} as const;
+/**
+ * @public
+ */
+export type RecordFormat = (typeof RecordFormat)[keyof typeof RecordFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const SignalType = {
+  /**
+   * <p>Log signal type. The pipeline processes log records.</p>
+   */
+  LOG: "LOG",
+  /**
+   * <p>Metric signal type. The pipeline processes metric records.</p>
+   */
+  METRIC: "METRIC",
+} as const;
+/**
+ * @public
+ */
+export type SignalType = (typeof SignalType)[keyof typeof SignalType];

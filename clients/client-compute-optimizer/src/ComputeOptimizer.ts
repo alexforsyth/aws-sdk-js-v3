@@ -1,81 +1,756 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type DeleteRecommendationPreferencesCommandInput,
+  type DeleteRecommendationPreferencesCommandOutput,
+  DeleteRecommendationPreferencesCommand,
+} from "./commands/DeleteRecommendationPreferencesCommand";
+import {
+  type DescribeRecommendationExportJobsCommandInput,
+  type DescribeRecommendationExportJobsCommandOutput,
   DescribeRecommendationExportJobsCommand,
-  DescribeRecommendationExportJobsCommandInput,
-  DescribeRecommendationExportJobsCommandOutput,
 } from "./commands/DescribeRecommendationExportJobsCommand";
 import {
+  type ExportAutoScalingGroupRecommendationsCommandInput,
+  type ExportAutoScalingGroupRecommendationsCommandOutput,
   ExportAutoScalingGroupRecommendationsCommand,
-  ExportAutoScalingGroupRecommendationsCommandInput,
-  ExportAutoScalingGroupRecommendationsCommandOutput,
 } from "./commands/ExportAutoScalingGroupRecommendationsCommand";
 import {
+  type ExportEBSVolumeRecommendationsCommandInput,
+  type ExportEBSVolumeRecommendationsCommandOutput,
   ExportEBSVolumeRecommendationsCommand,
-  ExportEBSVolumeRecommendationsCommandInput,
-  ExportEBSVolumeRecommendationsCommandOutput,
 } from "./commands/ExportEBSVolumeRecommendationsCommand";
 import {
+  type ExportEC2InstanceRecommendationsCommandInput,
+  type ExportEC2InstanceRecommendationsCommandOutput,
   ExportEC2InstanceRecommendationsCommand,
-  ExportEC2InstanceRecommendationsCommandInput,
-  ExportEC2InstanceRecommendationsCommandOutput,
 } from "./commands/ExportEC2InstanceRecommendationsCommand";
 import {
+  type ExportECSServiceRecommendationsCommandInput,
+  type ExportECSServiceRecommendationsCommandOutput,
+  ExportECSServiceRecommendationsCommand,
+} from "./commands/ExportECSServiceRecommendationsCommand";
+import {
+  type ExportIdleRecommendationsCommandInput,
+  type ExportIdleRecommendationsCommandOutput,
+  ExportIdleRecommendationsCommand,
+} from "./commands/ExportIdleRecommendationsCommand";
+import {
+  type ExportLambdaFunctionRecommendationsCommandInput,
+  type ExportLambdaFunctionRecommendationsCommandOutput,
   ExportLambdaFunctionRecommendationsCommand,
-  ExportLambdaFunctionRecommendationsCommandInput,
-  ExportLambdaFunctionRecommendationsCommandOutput,
 } from "./commands/ExportLambdaFunctionRecommendationsCommand";
 import {
+  type ExportLicenseRecommendationsCommandInput,
+  type ExportLicenseRecommendationsCommandOutput,
+  ExportLicenseRecommendationsCommand,
+} from "./commands/ExportLicenseRecommendationsCommand";
+import {
+  type ExportRDSDatabaseRecommendationsCommandInput,
+  type ExportRDSDatabaseRecommendationsCommandOutput,
+  ExportRDSDatabaseRecommendationsCommand,
+} from "./commands/ExportRDSDatabaseRecommendationsCommand";
+import {
+  type GetAutoScalingGroupRecommendationsCommandInput,
+  type GetAutoScalingGroupRecommendationsCommandOutput,
   GetAutoScalingGroupRecommendationsCommand,
-  GetAutoScalingGroupRecommendationsCommandInput,
-  GetAutoScalingGroupRecommendationsCommandOutput,
 } from "./commands/GetAutoScalingGroupRecommendationsCommand";
 import {
+  type GetEBSVolumeRecommendationsCommandInput,
+  type GetEBSVolumeRecommendationsCommandOutput,
   GetEBSVolumeRecommendationsCommand,
-  GetEBSVolumeRecommendationsCommandInput,
-  GetEBSVolumeRecommendationsCommandOutput,
 } from "./commands/GetEBSVolumeRecommendationsCommand";
 import {
+  type GetEC2InstanceRecommendationsCommandInput,
+  type GetEC2InstanceRecommendationsCommandOutput,
   GetEC2InstanceRecommendationsCommand,
-  GetEC2InstanceRecommendationsCommandInput,
-  GetEC2InstanceRecommendationsCommandOutput,
 } from "./commands/GetEC2InstanceRecommendationsCommand";
 import {
+  type GetEC2RecommendationProjectedMetricsCommandInput,
+  type GetEC2RecommendationProjectedMetricsCommandOutput,
   GetEC2RecommendationProjectedMetricsCommand,
-  GetEC2RecommendationProjectedMetricsCommandInput,
-  GetEC2RecommendationProjectedMetricsCommandOutput,
 } from "./commands/GetEC2RecommendationProjectedMetricsCommand";
 import {
+  type GetECSServiceRecommendationProjectedMetricsCommandInput,
+  type GetECSServiceRecommendationProjectedMetricsCommandOutput,
+  GetECSServiceRecommendationProjectedMetricsCommand,
+} from "./commands/GetECSServiceRecommendationProjectedMetricsCommand";
+import {
+  type GetECSServiceRecommendationsCommandInput,
+  type GetECSServiceRecommendationsCommandOutput,
+  GetECSServiceRecommendationsCommand,
+} from "./commands/GetECSServiceRecommendationsCommand";
+import {
+  type GetEffectiveRecommendationPreferencesCommandInput,
+  type GetEffectiveRecommendationPreferencesCommandOutput,
+  GetEffectiveRecommendationPreferencesCommand,
+} from "./commands/GetEffectiveRecommendationPreferencesCommand";
+import {
+  type GetEnrollmentStatusCommandInput,
+  type GetEnrollmentStatusCommandOutput,
   GetEnrollmentStatusCommand,
-  GetEnrollmentStatusCommandInput,
-  GetEnrollmentStatusCommandOutput,
 } from "./commands/GetEnrollmentStatusCommand";
 import {
+  type GetEnrollmentStatusesForOrganizationCommandInput,
+  type GetEnrollmentStatusesForOrganizationCommandOutput,
   GetEnrollmentStatusesForOrganizationCommand,
-  GetEnrollmentStatusesForOrganizationCommandInput,
-  GetEnrollmentStatusesForOrganizationCommandOutput,
 } from "./commands/GetEnrollmentStatusesForOrganizationCommand";
 import {
+  type GetIdleRecommendationsCommandInput,
+  type GetIdleRecommendationsCommandOutput,
+  GetIdleRecommendationsCommand,
+} from "./commands/GetIdleRecommendationsCommand";
+import {
+  type GetLambdaFunctionRecommendationsCommandInput,
+  type GetLambdaFunctionRecommendationsCommandOutput,
   GetLambdaFunctionRecommendationsCommand,
-  GetLambdaFunctionRecommendationsCommandInput,
-  GetLambdaFunctionRecommendationsCommandOutput,
 } from "./commands/GetLambdaFunctionRecommendationsCommand";
 import {
+  type GetLicenseRecommendationsCommandInput,
+  type GetLicenseRecommendationsCommandOutput,
+  GetLicenseRecommendationsCommand,
+} from "./commands/GetLicenseRecommendationsCommand";
+import {
+  type GetRDSDatabaseRecommendationProjectedMetricsCommandInput,
+  type GetRDSDatabaseRecommendationProjectedMetricsCommandOutput,
+  GetRDSDatabaseRecommendationProjectedMetricsCommand,
+} from "./commands/GetRDSDatabaseRecommendationProjectedMetricsCommand";
+import {
+  type GetRDSDatabaseRecommendationsCommandInput,
+  type GetRDSDatabaseRecommendationsCommandOutput,
+  GetRDSDatabaseRecommendationsCommand,
+} from "./commands/GetRDSDatabaseRecommendationsCommand";
+import {
+  type GetRecommendationPreferencesCommandInput,
+  type GetRecommendationPreferencesCommandOutput,
+  GetRecommendationPreferencesCommand,
+} from "./commands/GetRecommendationPreferencesCommand";
+import {
+  type GetRecommendationSummariesCommandInput,
+  type GetRecommendationSummariesCommandOutput,
   GetRecommendationSummariesCommand,
-  GetRecommendationSummariesCommandInput,
-  GetRecommendationSummariesCommandOutput,
 } from "./commands/GetRecommendationSummariesCommand";
 import {
+  type PutRecommendationPreferencesCommandInput,
+  type PutRecommendationPreferencesCommandOutput,
+  PutRecommendationPreferencesCommand,
+} from "./commands/PutRecommendationPreferencesCommand";
+import {
+  type UpdateEnrollmentStatusCommandInput,
+  type UpdateEnrollmentStatusCommandOutput,
   UpdateEnrollmentStatusCommand,
-  UpdateEnrollmentStatusCommandInput,
-  UpdateEnrollmentStatusCommandOutput,
 } from "./commands/UpdateEnrollmentStatusCommand";
 import { ComputeOptimizerClient } from "./ComputeOptimizerClient";
+import { paginateDescribeRecommendationExportJobs } from "./pagination/DescribeRecommendationExportJobsPaginator";
+import {
+  paginateGetEnrollmentStatusesForOrganization,
+} from "./pagination/GetEnrollmentStatusesForOrganizationPaginator";
+import { paginateGetLambdaFunctionRecommendations } from "./pagination/GetLambdaFunctionRecommendationsPaginator";
+import { paginateGetRecommendationPreferences } from "./pagination/GetRecommendationPreferencesPaginator";
+import { paginateGetRecommendationSummaries } from "./pagination/GetRecommendationSummariesPaginator";
+
+const commands = {
+  DeleteRecommendationPreferencesCommand,
+  DescribeRecommendationExportJobsCommand,
+  ExportAutoScalingGroupRecommendationsCommand,
+  ExportEBSVolumeRecommendationsCommand,
+  ExportEC2InstanceRecommendationsCommand,
+  ExportECSServiceRecommendationsCommand,
+  ExportIdleRecommendationsCommand,
+  ExportLambdaFunctionRecommendationsCommand,
+  ExportLicenseRecommendationsCommand,
+  ExportRDSDatabaseRecommendationsCommand,
+  GetAutoScalingGroupRecommendationsCommand,
+  GetEBSVolumeRecommendationsCommand,
+  GetEC2InstanceRecommendationsCommand,
+  GetEC2RecommendationProjectedMetricsCommand,
+  GetECSServiceRecommendationProjectedMetricsCommand,
+  GetECSServiceRecommendationsCommand,
+  GetEffectiveRecommendationPreferencesCommand,
+  GetEnrollmentStatusCommand,
+  GetEnrollmentStatusesForOrganizationCommand,
+  GetIdleRecommendationsCommand,
+  GetLambdaFunctionRecommendationsCommand,
+  GetLicenseRecommendationsCommand,
+  GetRDSDatabaseRecommendationProjectedMetricsCommand,
+  GetRDSDatabaseRecommendationsCommand,
+  GetRecommendationPreferencesCommand,
+  GetRecommendationSummariesCommand,
+  PutRecommendationPreferencesCommand,
+  UpdateEnrollmentStatusCommand,
+};
+const paginators = {
+  paginateDescribeRecommendationExportJobs,
+  paginateGetEnrollmentStatusesForOrganization,
+  paginateGetLambdaFunctionRecommendations,
+  paginateGetRecommendationPreferences,
+  paginateGetRecommendationSummaries,
+};
+
+/**
+ * @public
+ */
+export interface ComputeOptimizerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ComputeOptimizer {
+  /**
+   * @see {@link DeleteRecommendationPreferencesCommand}
+   */
+  deleteRecommendationPreferences(
+    args: DeleteRecommendationPreferencesCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<DeleteRecommendationPreferencesCommandOutput>;
+  deleteRecommendationPreferences(
+    args: DeleteRecommendationPreferencesCommandInput,
+    cb: (err: any, data?: DeleteRecommendationPreferencesCommandOutput) => void
+  ): void;
+  deleteRecommendationPreferences(
+    args: DeleteRecommendationPreferencesCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: DeleteRecommendationPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecommendationExportJobsCommand}
+   */
+  describeRecommendationExportJobs(): Promise<DescribeRecommendationExportJobsCommandOutput>;
+  describeRecommendationExportJobs(
+    args: DescribeRecommendationExportJobsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<DescribeRecommendationExportJobsCommandOutput>;
+  describeRecommendationExportJobs(
+    args: DescribeRecommendationExportJobsCommandInput,
+    cb: (err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void
+  ): void;
+  describeRecommendationExportJobs(
+    args: DescribeRecommendationExportJobsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportAutoScalingGroupRecommendationsCommand}
+   */
+  exportAutoScalingGroupRecommendations(
+    args: ExportAutoScalingGroupRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportAutoScalingGroupRecommendationsCommandOutput>;
+  exportAutoScalingGroupRecommendations(
+    args: ExportAutoScalingGroupRecommendationsCommandInput,
+    cb: (err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void
+  ): void;
+  exportAutoScalingGroupRecommendations(
+    args: ExportAutoScalingGroupRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportEBSVolumeRecommendationsCommand}
+   */
+  exportEBSVolumeRecommendations(
+    args: ExportEBSVolumeRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportEBSVolumeRecommendationsCommandOutput>;
+  exportEBSVolumeRecommendations(
+    args: ExportEBSVolumeRecommendationsCommandInput,
+    cb: (err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void
+  ): void;
+  exportEBSVolumeRecommendations(
+    args: ExportEBSVolumeRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportEC2InstanceRecommendationsCommand}
+   */
+  exportEC2InstanceRecommendations(
+    args: ExportEC2InstanceRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportEC2InstanceRecommendationsCommandOutput>;
+  exportEC2InstanceRecommendations(
+    args: ExportEC2InstanceRecommendationsCommandInput,
+    cb: (err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void
+  ): void;
+  exportEC2InstanceRecommendations(
+    args: ExportEC2InstanceRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportECSServiceRecommendationsCommand}
+   */
+  exportECSServiceRecommendations(
+    args: ExportECSServiceRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportECSServiceRecommendationsCommandOutput>;
+  exportECSServiceRecommendations(
+    args: ExportECSServiceRecommendationsCommandInput,
+    cb: (err: any, data?: ExportECSServiceRecommendationsCommandOutput) => void
+  ): void;
+  exportECSServiceRecommendations(
+    args: ExportECSServiceRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportECSServiceRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportIdleRecommendationsCommand}
+   */
+  exportIdleRecommendations(
+    args: ExportIdleRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportIdleRecommendationsCommandOutput>;
+  exportIdleRecommendations(
+    args: ExportIdleRecommendationsCommandInput,
+    cb: (err: any, data?: ExportIdleRecommendationsCommandOutput) => void
+  ): void;
+  exportIdleRecommendations(
+    args: ExportIdleRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportIdleRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportLambdaFunctionRecommendationsCommand}
+   */
+  exportLambdaFunctionRecommendations(
+    args: ExportLambdaFunctionRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportLambdaFunctionRecommendationsCommandOutput>;
+  exportLambdaFunctionRecommendations(
+    args: ExportLambdaFunctionRecommendationsCommandInput,
+    cb: (err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void
+  ): void;
+  exportLambdaFunctionRecommendations(
+    args: ExportLambdaFunctionRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportLicenseRecommendationsCommand}
+   */
+  exportLicenseRecommendations(
+    args: ExportLicenseRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportLicenseRecommendationsCommandOutput>;
+  exportLicenseRecommendations(
+    args: ExportLicenseRecommendationsCommandInput,
+    cb: (err: any, data?: ExportLicenseRecommendationsCommandOutput) => void
+  ): void;
+  exportLicenseRecommendations(
+    args: ExportLicenseRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportLicenseRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportRDSDatabaseRecommendationsCommand}
+   */
+  exportRDSDatabaseRecommendations(
+    args: ExportRDSDatabaseRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<ExportRDSDatabaseRecommendationsCommandOutput>;
+  exportRDSDatabaseRecommendations(
+    args: ExportRDSDatabaseRecommendationsCommandInput,
+    cb: (err: any, data?: ExportRDSDatabaseRecommendationsCommandOutput) => void
+  ): void;
+  exportRDSDatabaseRecommendations(
+    args: ExportRDSDatabaseRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: ExportRDSDatabaseRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutoScalingGroupRecommendationsCommand}
+   */
+  getAutoScalingGroupRecommendations(): Promise<GetAutoScalingGroupRecommendationsCommandOutput>;
+  getAutoScalingGroupRecommendations(
+    args: GetAutoScalingGroupRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetAutoScalingGroupRecommendationsCommandOutput>;
+  getAutoScalingGroupRecommendations(
+    args: GetAutoScalingGroupRecommendationsCommandInput,
+    cb: (err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void
+  ): void;
+  getAutoScalingGroupRecommendations(
+    args: GetAutoScalingGroupRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEBSVolumeRecommendationsCommand}
+   */
+  getEBSVolumeRecommendations(): Promise<GetEBSVolumeRecommendationsCommandOutput>;
+  getEBSVolumeRecommendations(
+    args: GetEBSVolumeRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEBSVolumeRecommendationsCommandOutput>;
+  getEBSVolumeRecommendations(
+    args: GetEBSVolumeRecommendationsCommandInput,
+    cb: (err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void
+  ): void;
+  getEBSVolumeRecommendations(
+    args: GetEBSVolumeRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEC2InstanceRecommendationsCommand}
+   */
+  getEC2InstanceRecommendations(): Promise<GetEC2InstanceRecommendationsCommandOutput>;
+  getEC2InstanceRecommendations(
+    args: GetEC2InstanceRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEC2InstanceRecommendationsCommandOutput>;
+  getEC2InstanceRecommendations(
+    args: GetEC2InstanceRecommendationsCommandInput,
+    cb: (err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void
+  ): void;
+  getEC2InstanceRecommendations(
+    args: GetEC2InstanceRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEC2RecommendationProjectedMetricsCommand}
+   */
+  getEC2RecommendationProjectedMetrics(
+    args: GetEC2RecommendationProjectedMetricsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEC2RecommendationProjectedMetricsCommandOutput>;
+  getEC2RecommendationProjectedMetrics(
+    args: GetEC2RecommendationProjectedMetricsCommandInput,
+    cb: (err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+  getEC2RecommendationProjectedMetrics(
+    args: GetEC2RecommendationProjectedMetricsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetECSServiceRecommendationProjectedMetricsCommand}
+   */
+  getECSServiceRecommendationProjectedMetrics(
+    args: GetECSServiceRecommendationProjectedMetricsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetECSServiceRecommendationProjectedMetricsCommandOutput>;
+  getECSServiceRecommendationProjectedMetrics(
+    args: GetECSServiceRecommendationProjectedMetricsCommandInput,
+    cb: (err: any, data?: GetECSServiceRecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+  getECSServiceRecommendationProjectedMetrics(
+    args: GetECSServiceRecommendationProjectedMetricsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetECSServiceRecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetECSServiceRecommendationsCommand}
+   */
+  getECSServiceRecommendations(): Promise<GetECSServiceRecommendationsCommandOutput>;
+  getECSServiceRecommendations(
+    args: GetECSServiceRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetECSServiceRecommendationsCommandOutput>;
+  getECSServiceRecommendations(
+    args: GetECSServiceRecommendationsCommandInput,
+    cb: (err: any, data?: GetECSServiceRecommendationsCommandOutput) => void
+  ): void;
+  getECSServiceRecommendations(
+    args: GetECSServiceRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetECSServiceRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEffectiveRecommendationPreferencesCommand}
+   */
+  getEffectiveRecommendationPreferences(
+    args: GetEffectiveRecommendationPreferencesCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEffectiveRecommendationPreferencesCommandOutput>;
+  getEffectiveRecommendationPreferences(
+    args: GetEffectiveRecommendationPreferencesCommandInput,
+    cb: (err: any, data?: GetEffectiveRecommendationPreferencesCommandOutput) => void
+  ): void;
+  getEffectiveRecommendationPreferences(
+    args: GetEffectiveRecommendationPreferencesCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEffectiveRecommendationPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnrollmentStatusCommand}
+   */
+  getEnrollmentStatus(): Promise<GetEnrollmentStatusCommandOutput>;
+  getEnrollmentStatus(
+    args: GetEnrollmentStatusCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEnrollmentStatusCommandOutput>;
+  getEnrollmentStatus(
+    args: GetEnrollmentStatusCommandInput,
+    cb: (err: any, data?: GetEnrollmentStatusCommandOutput) => void
+  ): void;
+  getEnrollmentStatus(
+    args: GetEnrollmentStatusCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEnrollmentStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnrollmentStatusesForOrganizationCommand}
+   */
+  getEnrollmentStatusesForOrganization(): Promise<GetEnrollmentStatusesForOrganizationCommandOutput>;
+  getEnrollmentStatusesForOrganization(
+    args: GetEnrollmentStatusesForOrganizationCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetEnrollmentStatusesForOrganizationCommandOutput>;
+  getEnrollmentStatusesForOrganization(
+    args: GetEnrollmentStatusesForOrganizationCommandInput,
+    cb: (err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void
+  ): void;
+  getEnrollmentStatusesForOrganization(
+    args: GetEnrollmentStatusesForOrganizationCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdleRecommendationsCommand}
+   */
+  getIdleRecommendations(): Promise<GetIdleRecommendationsCommandOutput>;
+  getIdleRecommendations(
+    args: GetIdleRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetIdleRecommendationsCommandOutput>;
+  getIdleRecommendations(
+    args: GetIdleRecommendationsCommandInput,
+    cb: (err: any, data?: GetIdleRecommendationsCommandOutput) => void
+  ): void;
+  getIdleRecommendations(
+    args: GetIdleRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetIdleRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLambdaFunctionRecommendationsCommand}
+   */
+  getLambdaFunctionRecommendations(): Promise<GetLambdaFunctionRecommendationsCommandOutput>;
+  getLambdaFunctionRecommendations(
+    args: GetLambdaFunctionRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetLambdaFunctionRecommendationsCommandOutput>;
+  getLambdaFunctionRecommendations(
+    args: GetLambdaFunctionRecommendationsCommandInput,
+    cb: (err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void
+  ): void;
+  getLambdaFunctionRecommendations(
+    args: GetLambdaFunctionRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLicenseRecommendationsCommand}
+   */
+  getLicenseRecommendations(): Promise<GetLicenseRecommendationsCommandOutput>;
+  getLicenseRecommendations(
+    args: GetLicenseRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetLicenseRecommendationsCommandOutput>;
+  getLicenseRecommendations(
+    args: GetLicenseRecommendationsCommandInput,
+    cb: (err: any, data?: GetLicenseRecommendationsCommandOutput) => void
+  ): void;
+  getLicenseRecommendations(
+    args: GetLicenseRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetLicenseRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRDSDatabaseRecommendationProjectedMetricsCommand}
+   */
+  getRDSDatabaseRecommendationProjectedMetrics(
+    args: GetRDSDatabaseRecommendationProjectedMetricsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetRDSDatabaseRecommendationProjectedMetricsCommandOutput>;
+  getRDSDatabaseRecommendationProjectedMetrics(
+    args: GetRDSDatabaseRecommendationProjectedMetricsCommandInput,
+    cb: (err: any, data?: GetRDSDatabaseRecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+  getRDSDatabaseRecommendationProjectedMetrics(
+    args: GetRDSDatabaseRecommendationProjectedMetricsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetRDSDatabaseRecommendationProjectedMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRDSDatabaseRecommendationsCommand}
+   */
+  getRDSDatabaseRecommendations(): Promise<GetRDSDatabaseRecommendationsCommandOutput>;
+  getRDSDatabaseRecommendations(
+    args: GetRDSDatabaseRecommendationsCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetRDSDatabaseRecommendationsCommandOutput>;
+  getRDSDatabaseRecommendations(
+    args: GetRDSDatabaseRecommendationsCommandInput,
+    cb: (err: any, data?: GetRDSDatabaseRecommendationsCommandOutput) => void
+  ): void;
+  getRDSDatabaseRecommendations(
+    args: GetRDSDatabaseRecommendationsCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetRDSDatabaseRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationPreferencesCommand}
+   */
+  getRecommendationPreferences(
+    args: GetRecommendationPreferencesCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetRecommendationPreferencesCommandOutput>;
+  getRecommendationPreferences(
+    args: GetRecommendationPreferencesCommandInput,
+    cb: (err: any, data?: GetRecommendationPreferencesCommandOutput) => void
+  ): void;
+  getRecommendationPreferences(
+    args: GetRecommendationPreferencesCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetRecommendationPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationSummariesCommand}
+   */
+  getRecommendationSummaries(): Promise<GetRecommendationSummariesCommandOutput>;
+  getRecommendationSummaries(
+    args: GetRecommendationSummariesCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<GetRecommendationSummariesCommandOutput>;
+  getRecommendationSummaries(
+    args: GetRecommendationSummariesCommandInput,
+    cb: (err: any, data?: GetRecommendationSummariesCommandOutput) => void
+  ): void;
+  getRecommendationSummaries(
+    args: GetRecommendationSummariesCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: GetRecommendationSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRecommendationPreferencesCommand}
+   */
+  putRecommendationPreferences(
+    args: PutRecommendationPreferencesCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<PutRecommendationPreferencesCommandOutput>;
+  putRecommendationPreferences(
+    args: PutRecommendationPreferencesCommandInput,
+    cb: (err: any, data?: PutRecommendationPreferencesCommandOutput) => void
+  ): void;
+  putRecommendationPreferences(
+    args: PutRecommendationPreferencesCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: PutRecommendationPreferencesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEnrollmentStatusCommand}
+   */
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    options?: ComputeOptimizerRequestOptions
+  ): Promise<UpdateEnrollmentStatusCommandOutput>;
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
+  ): void;
+  updateEnrollmentStatus(
+    args: UpdateEnrollmentStatusCommandInput,
+    options: ComputeOptimizerRequestOptions,
+    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecommendationExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRecommendationExportJobsCommandOutput}.
+   */
+  paginateDescribeRecommendationExportJobs(
+    args?: DescribeRecommendationExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRecommendationExportJobsCommandOutput>;
+
+  /**
+   * @see {@link GetEnrollmentStatusesForOrganizationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetEnrollmentStatusesForOrganizationCommandOutput}.
+   */
+  paginateGetEnrollmentStatusesForOrganization(
+    args?: GetEnrollmentStatusesForOrganizationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetEnrollmentStatusesForOrganizationCommandOutput>;
+
+  /**
+   * @see {@link GetLambdaFunctionRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetLambdaFunctionRecommendationsCommandOutput}.
+   */
+  paginateGetLambdaFunctionRecommendations(
+    args?: GetLambdaFunctionRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetLambdaFunctionRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link GetRecommendationPreferencesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRecommendationPreferencesCommandOutput}.
+   */
+  paginateGetRecommendationPreferences(
+    args: GetRecommendationPreferencesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRecommendationPreferencesCommandOutput>;
+
+  /**
+   * @see {@link GetRecommendationSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRecommendationSummariesCommandOutput}.
+   */
+  paginateGetRecommendationSummaries(
+    args?: GetRecommendationSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRecommendationSummariesCommandOutput>;
+}
 
 /**
  * <p>Compute Optimizer is a service that analyzes the configuration and utilization
  *             metrics of your Amazon Web Services compute resources, such as Amazon EC2
- *             instances, Amazon EC2 Auto Scaling groups, Lambda functions, and Amazon EBS volumes. It reports whether your resources are optimal, and generates
+ *             instances, Amazon EC2 Auto Scaling groups, Lambda functions, Amazon EBS volumes, and Amazon ECS services on Fargate.
+ *             It reports whether your resources are optimal, and generates
  *             optimization recommendations to reduce the cost and improve the performance of your
  *             workloads. Compute Optimizer also provides recent utilization metric data, in addition
  *             to projected utilization metric data for the recommendations, which you can use to
@@ -84,558 +759,7 @@ import { ComputeOptimizerClient } from "./ComputeOptimizerClient";
  *             resources, and still meet your performance and capacity requirements. For more
  *             information about Compute Optimizer, including the required permissions to use the
  *             service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">Compute Optimizer User Guide</a>.</p>
+ * @public
  */
-export class ComputeOptimizer extends ComputeOptimizerClient {
-  /**
-   * <p>Describes recommendation export jobs created in the last seven days.</p>
-   *
-   *         <p>Use the <a>ExportAutoScalingGroupRecommendations</a> or <a>ExportEC2InstanceRecommendations</a> actions to request an export of your
-   *             recommendations. Then use the <a>DescribeRecommendationExportJobs</a> action
-   *             to view your export jobs.</p>
-   */
-  public describeRecommendationExportJobs(
-    args: DescribeRecommendationExportJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRecommendationExportJobsCommandOutput>;
-  public describeRecommendationExportJobs(
-    args: DescribeRecommendationExportJobsCommandInput,
-    cb: (err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void
-  ): void;
-  public describeRecommendationExportJobs(
-    args: DescribeRecommendationExportJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void
-  ): void;
-  public describeRecommendationExportJobs(
-    args: DescribeRecommendationExportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRecommendationExportJobsCommandOutput) => void
-  ): Promise<DescribeRecommendationExportJobsCommandOutput> | void {
-    const command = new DescribeRecommendationExportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Exports optimization recommendations for Auto Scaling groups.</p>
-   *
-   *         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata
-   *             in a JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting
-   *                 Recommendations</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   *
-   *         <p>You can have only one Auto Scaling group export job in progress per Amazon Web Services Region.</p>
-   */
-  public exportAutoScalingGroupRecommendations(
-    args: ExportAutoScalingGroupRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ExportAutoScalingGroupRecommendationsCommandOutput>;
-  public exportAutoScalingGroupRecommendations(
-    args: ExportAutoScalingGroupRecommendationsCommandInput,
-    cb: (err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void
-  ): void;
-  public exportAutoScalingGroupRecommendations(
-    args: ExportAutoScalingGroupRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void
-  ): void;
-  public exportAutoScalingGroupRecommendations(
-    args: ExportAutoScalingGroupRecommendationsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ExportAutoScalingGroupRecommendationsCommandOutput) => void
-  ): Promise<ExportAutoScalingGroupRecommendationsCommandOutput> | void {
-    const command = new ExportAutoScalingGroupRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Exports optimization recommendations for Amazon EBS volumes.</p>
-   *
-   *         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata
-   *             in a JavaScript Object Notation (JSON)   (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting
-   *                 Recommendations</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   *
-   *         <p>You can have only one Amazon EBS volume export job in progress per Amazon Web Services Region.</p>
-   */
-  public exportEBSVolumeRecommendations(
-    args: ExportEBSVolumeRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ExportEBSVolumeRecommendationsCommandOutput>;
-  public exportEBSVolumeRecommendations(
-    args: ExportEBSVolumeRecommendationsCommandInput,
-    cb: (err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void
-  ): void;
-  public exportEBSVolumeRecommendations(
-    args: ExportEBSVolumeRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void
-  ): void;
-  public exportEBSVolumeRecommendations(
-    args: ExportEBSVolumeRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ExportEBSVolumeRecommendationsCommandOutput) => void
-  ): Promise<ExportEBSVolumeRecommendationsCommandOutput> | void {
-    const command = new ExportEBSVolumeRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Exports optimization recommendations for Amazon EC2 instances.</p>
-   *
-   *         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata
-   *             in a JavaScript Object Notation (JSON)   (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting
-   *                 Recommendations</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   *
-   *         <p>You can have only one Amazon EC2 instance export job in progress per Amazon Web Services Region.</p>
-   */
-  public exportEC2InstanceRecommendations(
-    args: ExportEC2InstanceRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ExportEC2InstanceRecommendationsCommandOutput>;
-  public exportEC2InstanceRecommendations(
-    args: ExportEC2InstanceRecommendationsCommandInput,
-    cb: (err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void
-  ): void;
-  public exportEC2InstanceRecommendations(
-    args: ExportEC2InstanceRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void
-  ): void;
-  public exportEC2InstanceRecommendations(
-    args: ExportEC2InstanceRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ExportEC2InstanceRecommendationsCommandOutput) => void
-  ): Promise<ExportEC2InstanceRecommendationsCommandOutput> | void {
-    const command = new ExportEC2InstanceRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Exports optimization recommendations for Lambda functions.</p>
-   *
-   *         <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata
-   *             in a JavaScript Object Notation (JSON)   (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting
-   *                 Recommendations</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   *
-   *         <p>You can have only one Lambda function export job in progress per Amazon Web Services Region.</p>
-   */
-  public exportLambdaFunctionRecommendations(
-    args: ExportLambdaFunctionRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ExportLambdaFunctionRecommendationsCommandOutput>;
-  public exportLambdaFunctionRecommendations(
-    args: ExportLambdaFunctionRecommendationsCommandInput,
-    cb: (err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void
-  ): void;
-  public exportLambdaFunctionRecommendations(
-    args: ExportLambdaFunctionRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void
-  ): void;
-  public exportLambdaFunctionRecommendations(
-    args: ExportLambdaFunctionRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ExportLambdaFunctionRecommendationsCommandOutput) => void
-  ): Promise<ExportLambdaFunctionRecommendationsCommandOutput> | void {
-    const command = new ExportLambdaFunctionRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns Auto Scaling group recommendations.</p>
-   *
-   *         <p>Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that
-   *             meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported
-   *                 resources and requirements</a> in the <i>Compute Optimizer User
-   *                 Guide</i>.</p>
-   */
-  public getAutoScalingGroupRecommendations(
-    args: GetAutoScalingGroupRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAutoScalingGroupRecommendationsCommandOutput>;
-  public getAutoScalingGroupRecommendations(
-    args: GetAutoScalingGroupRecommendationsCommandInput,
-    cb: (err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void
-  ): void;
-  public getAutoScalingGroupRecommendations(
-    args: GetAutoScalingGroupRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void
-  ): void;
-  public getAutoScalingGroupRecommendations(
-    args: GetAutoScalingGroupRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetAutoScalingGroupRecommendationsCommandOutput) => void
-  ): Promise<GetAutoScalingGroupRecommendationsCommandOutput> | void {
-    const command = new GetAutoScalingGroupRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.</p>
-   *
-   *         <p>Compute Optimizer generates recommendations for Amazon EBS volumes that
-   *             meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported
-   *                 resources and requirements</a> in the <i>Compute Optimizer User
-   *                 Guide</i>.</p>
-   */
-  public getEBSVolumeRecommendations(
-    args: GetEBSVolumeRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEBSVolumeRecommendationsCommandOutput>;
-  public getEBSVolumeRecommendations(
-    args: GetEBSVolumeRecommendationsCommandInput,
-    cb: (err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void
-  ): void;
-  public getEBSVolumeRecommendations(
-    args: GetEBSVolumeRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void
-  ): void;
-  public getEBSVolumeRecommendations(
-    args: GetEBSVolumeRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetEBSVolumeRecommendationsCommandOutput) => void
-  ): Promise<GetEBSVolumeRecommendationsCommandOutput> | void {
-    const command = new GetEBSVolumeRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns Amazon EC2 instance recommendations.</p>
-   *
-   *         <p>Compute Optimizer generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that meet a specific set of requirements. For more
-   *             information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
-   *                 requirements</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   */
-  public getEC2InstanceRecommendations(
-    args: GetEC2InstanceRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEC2InstanceRecommendationsCommandOutput>;
-  public getEC2InstanceRecommendations(
-    args: GetEC2InstanceRecommendationsCommandInput,
-    cb: (err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void
-  ): void;
-  public getEC2InstanceRecommendations(
-    args: GetEC2InstanceRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void
-  ): void;
-  public getEC2InstanceRecommendations(
-    args: GetEC2InstanceRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetEC2InstanceRecommendationsCommandOutput) => void
-  ): Promise<GetEC2InstanceRecommendationsCommandOutput> | void {
-    const command = new GetEC2InstanceRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the projected utilization metrics of Amazon EC2 instance
-   *             recommendations.</p>
-   *
-   *         <note>
-   *             <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected
-   *                 utilization metrics returned when you run this action. Additionally, the
-   *                     <code>Memory</code> metric is returned only for resources that have the unified
-   *                     CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p>
-   *         </note>
-   */
-  public getEC2RecommendationProjectedMetrics(
-    args: GetEC2RecommendationProjectedMetricsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEC2RecommendationProjectedMetricsCommandOutput>;
-  public getEC2RecommendationProjectedMetrics(
-    args: GetEC2RecommendationProjectedMetricsCommandInput,
-    cb: (err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void
-  ): void;
-  public getEC2RecommendationProjectedMetrics(
-    args: GetEC2RecommendationProjectedMetricsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void
-  ): void;
-  public getEC2RecommendationProjectedMetrics(
-    args: GetEC2RecommendationProjectedMetricsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void),
-    cb?: (err: any, data?: GetEC2RecommendationProjectedMetricsCommandOutput) => void
-  ): Promise<GetEC2RecommendationProjectedMetricsCommandOutput> | void {
-    const command = new GetEC2RecommendationProjectedMetricsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the enrollment (opt in) status of an account to the Compute Optimizer
-   *             service.</p>
-   *
-   *         <p>If the account is the management account of an organization, this action also confirms
-   *             the enrollment status of member accounts of the organization. Use the <a>GetEnrollmentStatusesForOrganization</a> action to get detailed information
-   *             about the enrollment status of member accounts of an organization.</p>
-   */
-  public getEnrollmentStatus(
-    args: GetEnrollmentStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEnrollmentStatusCommandOutput>;
-  public getEnrollmentStatus(
-    args: GetEnrollmentStatusCommandInput,
-    cb: (err: any, data?: GetEnrollmentStatusCommandOutput) => void
-  ): void;
-  public getEnrollmentStatus(
-    args: GetEnrollmentStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEnrollmentStatusCommandOutput) => void
-  ): void;
-  public getEnrollmentStatus(
-    args: GetEnrollmentStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEnrollmentStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetEnrollmentStatusCommandOutput) => void
-  ): Promise<GetEnrollmentStatusCommandOutput> | void {
-    const command = new GetEnrollmentStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the Compute Optimizer enrollment (opt-in) status of organization member
-   *             accounts, if your account is an organization management account.</p>
-   *
-   *         <p>To get the enrollment status of standalone accounts, use the <a>GetEnrollmentStatus</a> action.</p>
-   */
-  public getEnrollmentStatusesForOrganization(
-    args: GetEnrollmentStatusesForOrganizationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEnrollmentStatusesForOrganizationCommandOutput>;
-  public getEnrollmentStatusesForOrganization(
-    args: GetEnrollmentStatusesForOrganizationCommandInput,
-    cb: (err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void
-  ): void;
-  public getEnrollmentStatusesForOrganization(
-    args: GetEnrollmentStatusesForOrganizationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void
-  ): void;
-  public getEnrollmentStatusesForOrganization(
-    args: GetEnrollmentStatusesForOrganizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void),
-    cb?: (err: any, data?: GetEnrollmentStatusesForOrganizationCommandOutput) => void
-  ): Promise<GetEnrollmentStatusesForOrganizationCommandOutput> | void {
-    const command = new GetEnrollmentStatusesForOrganizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns Lambda function recommendations.</p>
-   *
-   *         <p>Compute Optimizer generates recommendations for functions that meet a specific set
-   *             of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
-   *                 requirements</a> in the <i>Compute Optimizer User
-   *             Guide</i>.</p>
-   */
-  public getLambdaFunctionRecommendations(
-    args: GetLambdaFunctionRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLambdaFunctionRecommendationsCommandOutput>;
-  public getLambdaFunctionRecommendations(
-    args: GetLambdaFunctionRecommendationsCommandInput,
-    cb: (err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void
-  ): void;
-  public getLambdaFunctionRecommendations(
-    args: GetLambdaFunctionRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void
-  ): void;
-  public getLambdaFunctionRecommendations(
-    args: GetLambdaFunctionRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetLambdaFunctionRecommendationsCommandOutput) => void
-  ): Promise<GetLambdaFunctionRecommendationsCommandOutput> | void {
-    const command = new GetLambdaFunctionRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the optimization findings for an account.</p>
-   *
-   *         <p>It returns the number of:</p>
-   *
-   *         <ul>
-   *             <li>
-   *                 <p>Amazon EC2 instances in an account that are
-   *                         <code>Underprovisioned</code>, <code>Overprovisioned</code>, or
-   *                         <code>Optimized</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>Auto Scaling groups in an account that are <code>NotOptimized</code>, or
-   *                         <code>Optimized</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>,
-   *                     or <code>Optimized</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>Lambda functions in an account that are <code>NotOptimized</code>,
-   *                     or <code>Optimized</code>.</p>
-   *             </li>
-   *          </ul>
-   */
-  public getRecommendationSummaries(
-    args: GetRecommendationSummariesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRecommendationSummariesCommandOutput>;
-  public getRecommendationSummaries(
-    args: GetRecommendationSummariesCommandInput,
-    cb: (err: any, data?: GetRecommendationSummariesCommandOutput) => void
-  ): void;
-  public getRecommendationSummaries(
-    args: GetRecommendationSummariesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRecommendationSummariesCommandOutput) => void
-  ): void;
-  public getRecommendationSummaries(
-    args: GetRecommendationSummariesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecommendationSummariesCommandOutput) => void),
-    cb?: (err: any, data?: GetRecommendationSummariesCommandOutput) => void
-  ): Promise<GetRecommendationSummariesCommandOutput> | void {
-    const command = new GetRecommendationSummariesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the enrollment (opt in and opt out) status of an account to the Compute Optimizer service.</p>
-   *
-   *         <p>If the account is a management account of an organization, this action can also be
-   *             used to enroll member accounts of the organization.</p>
-   *
-   *         <p>You must have the appropriate permissions to opt in to Compute Optimizer, to view its
-   *             recommendations, and to opt out. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html">Controlling access with Amazon Web Services Identity and Access Management</a> in the <i>Compute Optimizer User Guide</i>.</p>
-   *
-   *         <p>When you opt in, Compute Optimizer automatically creates a service-linked role in your
-   *             account to access its data. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html">Using
-   *                 Service-Linked Roles for Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p>
-   */
-  public updateEnrollmentStatus(
-    args: UpdateEnrollmentStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateEnrollmentStatusCommandOutput>;
-  public updateEnrollmentStatus(
-    args: UpdateEnrollmentStatusCommandInput,
-    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
-  ): void;
-  public updateEnrollmentStatus(
-    args: UpdateEnrollmentStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
-  ): void;
-  public updateEnrollmentStatus(
-    args: UpdateEnrollmentStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEnrollmentStatusCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEnrollmentStatusCommandOutput) => void
-  ): Promise<UpdateEnrollmentStatusCommandOutput> | void {
-    const command = new UpdateEnrollmentStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class ComputeOptimizer extends ComputeOptimizerClient implements ComputeOptimizer {}
+createAggregatedClient(commands, ComputeOptimizer, { paginators });

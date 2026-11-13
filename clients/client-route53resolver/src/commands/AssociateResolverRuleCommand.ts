@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociateResolverRuleRequest, AssociateResolverRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateResolverRuleCommand,
-  serializeAws_json1_1AssociateResolverRuleCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateResolverRuleRequest, AssociateResolverRuleResponse } from "../models/models_0";
+import { AssociateResolverRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateResolverRuleCommand}.
+ */
 export interface AssociateResolverRuleCommandInput extends AssociateResolverRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateResolverRuleCommand}.
+ */
 export interface AssociateResolverRuleCommandOutput extends AssociateResolverRuleResponse, __MetadataBearer {}
 
 /**
@@ -31,68 +32,80 @@ export interface AssociateResolverRuleCommandOutput extends AssociateResolverRul
  * ```javascript
  * import { Route53ResolverClient, AssociateResolverRuleCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, AssociateResolverRuleCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // AssociateResolverRuleRequest
+ *   ResolverRuleId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   VPCId: "STRING_VALUE", // required
+ * };
  * const command = new AssociateResolverRuleCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateResolverRuleResponse
+ * //   ResolverRuleAssociation: { // ResolverRuleAssociation
+ * //     Id: "STRING_VALUE",
+ * //     ResolverRuleId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     VPCId: "STRING_VALUE",
+ * //     Status: "CREATING" || "COMPLETE" || "DELETING" || "FAILED" || "OVERRIDDEN",
+ * //     StatusMessage: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociateResolverRuleCommandInput - {@link AssociateResolverRuleCommandInput}
+ * @returns {@link AssociateResolverRuleCommandOutput}
  * @see {@link AssociateResolverRuleCommandInput} for command's `input` shape.
  * @see {@link AssociateResolverRuleCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters in this request are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request caused one or more limits to be exceeded.</p>
+ *
+ * @throws {@link ResourceExistsException} (client fault)
+ *  <p>The resource that you tried to create already exists.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource isn't available.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateResolverRuleCommand extends $Command<
-  AssociateResolverRuleCommandInput,
-  AssociateResolverRuleCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateResolverRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateResolverRuleCommandInput, AssociateResolverRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "AssociateResolverRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateResolverRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateResolverRuleResponse.filterSensitiveLog,
+export class AssociateResolverRuleCommand extends command<AssociateResolverRuleCommandInput, AssociateResolverRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateResolverRule",
+  AssociateResolverRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateResolverRuleRequest;
+      output: AssociateResolverRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateResolverRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateResolverRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateResolverRuleCommandOutput> {
-    return deserializeAws_json1_1AssociateResolverRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateResolverRuleCommandInput;
+      output: AssociateResolverRuleCommandOutput;
+    };
+  };
 }

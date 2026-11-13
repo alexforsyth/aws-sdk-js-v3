@@ -1,0 +1,876 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultDeadlineHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AssociateMemberToFarmCommandInput,
+  AssociateMemberToFarmCommandOutput,
+} from "./commands/AssociateMemberToFarmCommand";
+import type {
+  AssociateMemberToFleetCommandInput,
+  AssociateMemberToFleetCommandOutput,
+} from "./commands/AssociateMemberToFleetCommand";
+import type {
+  AssociateMemberToJobCommandInput,
+  AssociateMemberToJobCommandOutput,
+} from "./commands/AssociateMemberToJobCommand";
+import type {
+  AssociateMemberToQueueCommandInput,
+  AssociateMemberToQueueCommandOutput,
+} from "./commands/AssociateMemberToQueueCommand";
+import type {
+  AssumeFleetRoleForReadCommandInput,
+  AssumeFleetRoleForReadCommandOutput,
+} from "./commands/AssumeFleetRoleForReadCommand";
+import type {
+  AssumeFleetRoleForWorkerCommandInput,
+  AssumeFleetRoleForWorkerCommandOutput,
+} from "./commands/AssumeFleetRoleForWorkerCommand";
+import type {
+  AssumeQueueRoleForReadCommandInput,
+  AssumeQueueRoleForReadCommandOutput,
+} from "./commands/AssumeQueueRoleForReadCommand";
+import type {
+  AssumeQueueRoleForUserCommandInput,
+  AssumeQueueRoleForUserCommandOutput,
+} from "./commands/AssumeQueueRoleForUserCommand";
+import type {
+  AssumeQueueRoleForWorkerCommandInput,
+  AssumeQueueRoleForWorkerCommandOutput,
+} from "./commands/AssumeQueueRoleForWorkerCommand";
+import type { BatchGetJobCommandInput, BatchGetJobCommandOutput } from "./commands/BatchGetJobCommand";
+import type {
+  BatchGetJobEntityCommandInput,
+  BatchGetJobEntityCommandOutput,
+} from "./commands/BatchGetJobEntityCommand";
+import type {
+  BatchGetSessionActionCommandInput,
+  BatchGetSessionActionCommandOutput,
+} from "./commands/BatchGetSessionActionCommand";
+import type { BatchGetSessionCommandInput, BatchGetSessionCommandOutput } from "./commands/BatchGetSessionCommand";
+import type { BatchGetStepCommandInput, BatchGetStepCommandOutput } from "./commands/BatchGetStepCommand";
+import type { BatchGetTaskCommandInput, BatchGetTaskCommandOutput } from "./commands/BatchGetTaskCommand";
+import type { BatchGetWorkerCommandInput, BatchGetWorkerCommandOutput } from "./commands/BatchGetWorkerCommand";
+import type { BatchUpdateJobCommandInput, BatchUpdateJobCommandOutput } from "./commands/BatchUpdateJobCommand";
+import type { BatchUpdateTaskCommandInput, BatchUpdateTaskCommandOutput } from "./commands/BatchUpdateTaskCommand";
+import type { CopyJobTemplateCommandInput, CopyJobTemplateCommandOutput } from "./commands/CopyJobTemplateCommand";
+import type { CreateBudgetCommandInput, CreateBudgetCommandOutput } from "./commands/CreateBudgetCommand";
+import type { CreateFarmCommandInput, CreateFarmCommandOutput } from "./commands/CreateFarmCommand";
+import type { CreateFleetCommandInput, CreateFleetCommandOutput } from "./commands/CreateFleetCommand";
+import type { CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
+import type {
+  CreateLicenseEndpointCommandInput,
+  CreateLicenseEndpointCommandOutput,
+} from "./commands/CreateLicenseEndpointCommand";
+import type { CreateLimitCommandInput, CreateLimitCommandOutput } from "./commands/CreateLimitCommand";
+import type { CreateMonitorCommandInput, CreateMonitorCommandOutput } from "./commands/CreateMonitorCommand";
+import type { CreateQueueCommandInput, CreateQueueCommandOutput } from "./commands/CreateQueueCommand";
+import type {
+  CreateQueueEnvironmentCommandInput,
+  CreateQueueEnvironmentCommandOutput,
+} from "./commands/CreateQueueEnvironmentCommand";
+import type {
+  CreateQueueFleetAssociationCommandInput,
+  CreateQueueFleetAssociationCommandOutput,
+} from "./commands/CreateQueueFleetAssociationCommand";
+import type {
+  CreateQueueLimitAssociationCommandInput,
+  CreateQueueLimitAssociationCommandOutput,
+} from "./commands/CreateQueueLimitAssociationCommand";
+import type {
+  CreateStorageProfileCommandInput,
+  CreateStorageProfileCommandOutput,
+} from "./commands/CreateStorageProfileCommand";
+import type { CreateWorkerCommandInput, CreateWorkerCommandOutput } from "./commands/CreateWorkerCommand";
+import type { DeleteBudgetCommandInput, DeleteBudgetCommandOutput } from "./commands/DeleteBudgetCommand";
+import type { DeleteFarmCommandInput, DeleteFarmCommandOutput } from "./commands/DeleteFarmCommand";
+import type { DeleteFleetCommandInput, DeleteFleetCommandOutput } from "./commands/DeleteFleetCommand";
+import type {
+  DeleteLicenseEndpointCommandInput,
+  DeleteLicenseEndpointCommandOutput,
+} from "./commands/DeleteLicenseEndpointCommand";
+import type { DeleteLimitCommandInput, DeleteLimitCommandOutput } from "./commands/DeleteLimitCommand";
+import type {
+  DeleteMeteredProductCommandInput,
+  DeleteMeteredProductCommandOutput,
+} from "./commands/DeleteMeteredProductCommand";
+import type { DeleteMonitorCommandInput, DeleteMonitorCommandOutput } from "./commands/DeleteMonitorCommand";
+import type { DeleteQueueCommandInput, DeleteQueueCommandOutput } from "./commands/DeleteQueueCommand";
+import type {
+  DeleteQueueEnvironmentCommandInput,
+  DeleteQueueEnvironmentCommandOutput,
+} from "./commands/DeleteQueueEnvironmentCommand";
+import type {
+  DeleteQueueFleetAssociationCommandInput,
+  DeleteQueueFleetAssociationCommandOutput,
+} from "./commands/DeleteQueueFleetAssociationCommand";
+import type {
+  DeleteQueueLimitAssociationCommandInput,
+  DeleteQueueLimitAssociationCommandOutput,
+} from "./commands/DeleteQueueLimitAssociationCommand";
+import type {
+  DeleteStorageProfileCommandInput,
+  DeleteStorageProfileCommandOutput,
+} from "./commands/DeleteStorageProfileCommand";
+import type { DeleteVolumeCommandInput, DeleteVolumeCommandOutput } from "./commands/DeleteVolumeCommand";
+import type { DeleteWorkerCommandInput, DeleteWorkerCommandOutput } from "./commands/DeleteWorkerCommand";
+import type {
+  DisassociateMemberFromFarmCommandInput,
+  DisassociateMemberFromFarmCommandOutput,
+} from "./commands/DisassociateMemberFromFarmCommand";
+import type {
+  DisassociateMemberFromFleetCommandInput,
+  DisassociateMemberFromFleetCommandOutput,
+} from "./commands/DisassociateMemberFromFleetCommand";
+import type {
+  DisassociateMemberFromJobCommandInput,
+  DisassociateMemberFromJobCommandOutput,
+} from "./commands/DisassociateMemberFromJobCommand";
+import type {
+  DisassociateMemberFromQueueCommandInput,
+  DisassociateMemberFromQueueCommandOutput,
+} from "./commands/DisassociateMemberFromQueueCommand";
+import type { GetBudgetCommandInput, GetBudgetCommandOutput } from "./commands/GetBudgetCommand";
+import type { GetFarmCommandInput, GetFarmCommandOutput } from "./commands/GetFarmCommand";
+import type { GetFleetCommandInput, GetFleetCommandOutput } from "./commands/GetFleetCommand";
+import type { GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
+import type {
+  GetLicenseEndpointCommandInput,
+  GetLicenseEndpointCommandOutput,
+} from "./commands/GetLicenseEndpointCommand";
+import type { GetLimitCommandInput, GetLimitCommandOutput } from "./commands/GetLimitCommand";
+import type { GetMonitorCommandInput, GetMonitorCommandOutput } from "./commands/GetMonitorCommand";
+import type {
+  GetMonitorSettingsCommandInput,
+  GetMonitorSettingsCommandOutput,
+} from "./commands/GetMonitorSettingsCommand";
+import type { GetQueueCommandInput, GetQueueCommandOutput } from "./commands/GetQueueCommand";
+import type {
+  GetQueueEnvironmentCommandInput,
+  GetQueueEnvironmentCommandOutput,
+} from "./commands/GetQueueEnvironmentCommand";
+import type {
+  GetQueueFleetAssociationCommandInput,
+  GetQueueFleetAssociationCommandOutput,
+} from "./commands/GetQueueFleetAssociationCommand";
+import type {
+  GetQueueLimitAssociationCommandInput,
+  GetQueueLimitAssociationCommandOutput,
+} from "./commands/GetQueueLimitAssociationCommand";
+import type { GetSessionActionCommandInput, GetSessionActionCommandOutput } from "./commands/GetSessionActionCommand";
+import type { GetSessionCommandInput, GetSessionCommandOutput } from "./commands/GetSessionCommand";
+import type {
+  GetSessionsStatisticsAggregationCommandInput,
+  GetSessionsStatisticsAggregationCommandOutput,
+} from "./commands/GetSessionsStatisticsAggregationCommand";
+import type { GetStepCommandInput, GetStepCommandOutput } from "./commands/GetStepCommand";
+import type {
+  GetStorageProfileCommandInput,
+  GetStorageProfileCommandOutput,
+} from "./commands/GetStorageProfileCommand";
+import type {
+  GetStorageProfileForQueueCommandInput,
+  GetStorageProfileForQueueCommandOutput,
+} from "./commands/GetStorageProfileForQueueCommand";
+import type { GetTaskCommandInput, GetTaskCommandOutput } from "./commands/GetTaskCommand";
+import type { GetVolumeCommandInput, GetVolumeCommandOutput } from "./commands/GetVolumeCommand";
+import type { GetWorkerCommandInput, GetWorkerCommandOutput } from "./commands/GetWorkerCommand";
+import type {
+  ListAvailableMeteredProductsCommandInput,
+  ListAvailableMeteredProductsCommandOutput,
+} from "./commands/ListAvailableMeteredProductsCommand";
+import type { ListBudgetsCommandInput, ListBudgetsCommandOutput } from "./commands/ListBudgetsCommand";
+import type { ListFarmMembersCommandInput, ListFarmMembersCommandOutput } from "./commands/ListFarmMembersCommand";
+import type { ListFarmsCommandInput, ListFarmsCommandOutput } from "./commands/ListFarmsCommand";
+import type { ListFleetMembersCommandInput, ListFleetMembersCommandOutput } from "./commands/ListFleetMembersCommand";
+import type { ListFleetsCommandInput, ListFleetsCommandOutput } from "./commands/ListFleetsCommand";
+import type { ListJobMembersCommandInput, ListJobMembersCommandOutput } from "./commands/ListJobMembersCommand";
+import type {
+  ListJobParameterDefinitionsCommandInput,
+  ListJobParameterDefinitionsCommandOutput,
+} from "./commands/ListJobParameterDefinitionsCommand";
+import type { ListJobsCommandInput, ListJobsCommandOutput } from "./commands/ListJobsCommand";
+import type {
+  ListLicenseEndpointsCommandInput,
+  ListLicenseEndpointsCommandOutput,
+} from "./commands/ListLicenseEndpointsCommand";
+import type { ListLimitsCommandInput, ListLimitsCommandOutput } from "./commands/ListLimitsCommand";
+import type { ListMembershipsCommandInput, ListMembershipsCommandOutput } from "./commands/ListMembershipsCommand";
+import type {
+  ListMeteredProductsCommandInput,
+  ListMeteredProductsCommandOutput,
+} from "./commands/ListMeteredProductsCommand";
+import type { ListMonitorsCommandInput, ListMonitorsCommandOutput } from "./commands/ListMonitorsCommand";
+import type {
+  ListQueueEnvironmentsCommandInput,
+  ListQueueEnvironmentsCommandOutput,
+} from "./commands/ListQueueEnvironmentsCommand";
+import type {
+  ListQueueFleetAssociationsCommandInput,
+  ListQueueFleetAssociationsCommandOutput,
+} from "./commands/ListQueueFleetAssociationsCommand";
+import type {
+  ListQueueLimitAssociationsCommandInput,
+  ListQueueLimitAssociationsCommandOutput,
+} from "./commands/ListQueueLimitAssociationsCommand";
+import type { ListQueueMembersCommandInput, ListQueueMembersCommandOutput } from "./commands/ListQueueMembersCommand";
+import type { ListQueuesCommandInput, ListQueuesCommandOutput } from "./commands/ListQueuesCommand";
+import type {
+  ListSessionActionsCommandInput,
+  ListSessionActionsCommandOutput,
+} from "./commands/ListSessionActionsCommand";
+import type { ListSessionsCommandInput, ListSessionsCommandOutput } from "./commands/ListSessionsCommand";
+import type {
+  ListSessionsForWorkerCommandInput,
+  ListSessionsForWorkerCommandOutput,
+} from "./commands/ListSessionsForWorkerCommand";
+import type {
+  ListStepConsumersCommandInput,
+  ListStepConsumersCommandOutput,
+} from "./commands/ListStepConsumersCommand";
+import type {
+  ListStepDependenciesCommandInput,
+  ListStepDependenciesCommandOutput,
+} from "./commands/ListStepDependenciesCommand";
+import type { ListStepsCommandInput, ListStepsCommandOutput } from "./commands/ListStepsCommand";
+import type {
+  ListStorageProfilesCommandInput,
+  ListStorageProfilesCommandOutput,
+} from "./commands/ListStorageProfilesCommand";
+import type {
+  ListStorageProfilesForQueueCommandInput,
+  ListStorageProfilesForQueueCommandOutput,
+} from "./commands/ListStorageProfilesForQueueCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type { ListTasksCommandInput, ListTasksCommandOutput } from "./commands/ListTasksCommand";
+import type { ListVolumesCommandInput, ListVolumesCommandOutput } from "./commands/ListVolumesCommand";
+import type { ListWorkersCommandInput, ListWorkersCommandOutput } from "./commands/ListWorkersCommand";
+import type {
+  PutMeteredProductCommandInput,
+  PutMeteredProductCommandOutput,
+} from "./commands/PutMeteredProductCommand";
+import type { SearchJobsCommandInput, SearchJobsCommandOutput } from "./commands/SearchJobsCommand";
+import type { SearchStepsCommandInput, SearchStepsCommandOutput } from "./commands/SearchStepsCommand";
+import type { SearchTasksCommandInput, SearchTasksCommandOutput } from "./commands/SearchTasksCommand";
+import type { SearchWorkersCommandInput, SearchWorkersCommandOutput } from "./commands/SearchWorkersCommand";
+import type {
+  StartSessionsStatisticsAggregationCommandInput,
+  StartSessionsStatisticsAggregationCommandOutput,
+} from "./commands/StartSessionsStatisticsAggregationCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateBudgetCommandInput, UpdateBudgetCommandOutput } from "./commands/UpdateBudgetCommand";
+import type { UpdateFarmCommandInput, UpdateFarmCommandOutput } from "./commands/UpdateFarmCommand";
+import type { UpdateFleetCommandInput, UpdateFleetCommandOutput } from "./commands/UpdateFleetCommand";
+import type { UpdateJobCommandInput, UpdateJobCommandOutput } from "./commands/UpdateJobCommand";
+import type { UpdateLimitCommandInput, UpdateLimitCommandOutput } from "./commands/UpdateLimitCommand";
+import type { UpdateMonitorCommandInput, UpdateMonitorCommandOutput } from "./commands/UpdateMonitorCommand";
+import type {
+  UpdateMonitorSettingsCommandInput,
+  UpdateMonitorSettingsCommandOutput,
+} from "./commands/UpdateMonitorSettingsCommand";
+import type { UpdateQueueCommandInput, UpdateQueueCommandOutput } from "./commands/UpdateQueueCommand";
+import type {
+  UpdateQueueEnvironmentCommandInput,
+  UpdateQueueEnvironmentCommandOutput,
+} from "./commands/UpdateQueueEnvironmentCommand";
+import type {
+  UpdateQueueFleetAssociationCommandInput,
+  UpdateQueueFleetAssociationCommandOutput,
+} from "./commands/UpdateQueueFleetAssociationCommand";
+import type {
+  UpdateQueueLimitAssociationCommandInput,
+  UpdateQueueLimitAssociationCommandOutput,
+} from "./commands/UpdateQueueLimitAssociationCommand";
+import type { UpdateSessionCommandInput, UpdateSessionCommandOutput } from "./commands/UpdateSessionCommand";
+import type { UpdateStepCommandInput, UpdateStepCommandOutput } from "./commands/UpdateStepCommand";
+import type {
+  UpdateStorageProfileCommandInput,
+  UpdateStorageProfileCommandOutput,
+} from "./commands/UpdateStorageProfileCommand";
+import type { UpdateTaskCommandInput, UpdateTaskCommandOutput } from "./commands/UpdateTaskCommand";
+import type { UpdateWorkerCommandInput, UpdateWorkerCommandOutput } from "./commands/UpdateWorkerCommand";
+import type {
+  UpdateWorkerScheduleCommandInput,
+  UpdateWorkerScheduleCommandOutput,
+} from "./commands/UpdateWorkerScheduleCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | AssociateMemberToFarmCommandInput
+  | AssociateMemberToFleetCommandInput
+  | AssociateMemberToJobCommandInput
+  | AssociateMemberToQueueCommandInput
+  | AssumeFleetRoleForReadCommandInput
+  | AssumeFleetRoleForWorkerCommandInput
+  | AssumeQueueRoleForReadCommandInput
+  | AssumeQueueRoleForUserCommandInput
+  | AssumeQueueRoleForWorkerCommandInput
+  | BatchGetJobCommandInput
+  | BatchGetJobEntityCommandInput
+  | BatchGetSessionActionCommandInput
+  | BatchGetSessionCommandInput
+  | BatchGetStepCommandInput
+  | BatchGetTaskCommandInput
+  | BatchGetWorkerCommandInput
+  | BatchUpdateJobCommandInput
+  | BatchUpdateTaskCommandInput
+  | CopyJobTemplateCommandInput
+  | CreateBudgetCommandInput
+  | CreateFarmCommandInput
+  | CreateFleetCommandInput
+  | CreateJobCommandInput
+  | CreateLicenseEndpointCommandInput
+  | CreateLimitCommandInput
+  | CreateMonitorCommandInput
+  | CreateQueueCommandInput
+  | CreateQueueEnvironmentCommandInput
+  | CreateQueueFleetAssociationCommandInput
+  | CreateQueueLimitAssociationCommandInput
+  | CreateStorageProfileCommandInput
+  | CreateWorkerCommandInput
+  | DeleteBudgetCommandInput
+  | DeleteFarmCommandInput
+  | DeleteFleetCommandInput
+  | DeleteLicenseEndpointCommandInput
+  | DeleteLimitCommandInput
+  | DeleteMeteredProductCommandInput
+  | DeleteMonitorCommandInput
+  | DeleteQueueCommandInput
+  | DeleteQueueEnvironmentCommandInput
+  | DeleteQueueFleetAssociationCommandInput
+  | DeleteQueueLimitAssociationCommandInput
+  | DeleteStorageProfileCommandInput
+  | DeleteVolumeCommandInput
+  | DeleteWorkerCommandInput
+  | DisassociateMemberFromFarmCommandInput
+  | DisassociateMemberFromFleetCommandInput
+  | DisassociateMemberFromJobCommandInput
+  | DisassociateMemberFromQueueCommandInput
+  | GetBudgetCommandInput
+  | GetFarmCommandInput
+  | GetFleetCommandInput
+  | GetJobCommandInput
+  | GetLicenseEndpointCommandInput
+  | GetLimitCommandInput
+  | GetMonitorCommandInput
+  | GetMonitorSettingsCommandInput
+  | GetQueueCommandInput
+  | GetQueueEnvironmentCommandInput
+  | GetQueueFleetAssociationCommandInput
+  | GetQueueLimitAssociationCommandInput
+  | GetSessionActionCommandInput
+  | GetSessionCommandInput
+  | GetSessionsStatisticsAggregationCommandInput
+  | GetStepCommandInput
+  | GetStorageProfileCommandInput
+  | GetStorageProfileForQueueCommandInput
+  | GetTaskCommandInput
+  | GetVolumeCommandInput
+  | GetWorkerCommandInput
+  | ListAvailableMeteredProductsCommandInput
+  | ListBudgetsCommandInput
+  | ListFarmMembersCommandInput
+  | ListFarmsCommandInput
+  | ListFleetMembersCommandInput
+  | ListFleetsCommandInput
+  | ListJobMembersCommandInput
+  | ListJobParameterDefinitionsCommandInput
+  | ListJobsCommandInput
+  | ListLicenseEndpointsCommandInput
+  | ListLimitsCommandInput
+  | ListMembershipsCommandInput
+  | ListMeteredProductsCommandInput
+  | ListMonitorsCommandInput
+  | ListQueueEnvironmentsCommandInput
+  | ListQueueFleetAssociationsCommandInput
+  | ListQueueLimitAssociationsCommandInput
+  | ListQueueMembersCommandInput
+  | ListQueuesCommandInput
+  | ListSessionActionsCommandInput
+  | ListSessionsCommandInput
+  | ListSessionsForWorkerCommandInput
+  | ListStepConsumersCommandInput
+  | ListStepDependenciesCommandInput
+  | ListStepsCommandInput
+  | ListStorageProfilesCommandInput
+  | ListStorageProfilesForQueueCommandInput
+  | ListTagsForResourceCommandInput
+  | ListTasksCommandInput
+  | ListVolumesCommandInput
+  | ListWorkersCommandInput
+  | PutMeteredProductCommandInput
+  | SearchJobsCommandInput
+  | SearchStepsCommandInput
+  | SearchTasksCommandInput
+  | SearchWorkersCommandInput
+  | StartSessionsStatisticsAggregationCommandInput
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateBudgetCommandInput
+  | UpdateFarmCommandInput
+  | UpdateFleetCommandInput
+  | UpdateJobCommandInput
+  | UpdateLimitCommandInput
+  | UpdateMonitorCommandInput
+  | UpdateMonitorSettingsCommandInput
+  | UpdateQueueCommandInput
+  | UpdateQueueEnvironmentCommandInput
+  | UpdateQueueFleetAssociationCommandInput
+  | UpdateQueueLimitAssociationCommandInput
+  | UpdateSessionCommandInput
+  | UpdateStepCommandInput
+  | UpdateStorageProfileCommandInput
+  | UpdateTaskCommandInput
+  | UpdateWorkerCommandInput
+  | UpdateWorkerScheduleCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | AssociateMemberToFarmCommandOutput
+  | AssociateMemberToFleetCommandOutput
+  | AssociateMemberToJobCommandOutput
+  | AssociateMemberToQueueCommandOutput
+  | AssumeFleetRoleForReadCommandOutput
+  | AssumeFleetRoleForWorkerCommandOutput
+  | AssumeQueueRoleForReadCommandOutput
+  | AssumeQueueRoleForUserCommandOutput
+  | AssumeQueueRoleForWorkerCommandOutput
+  | BatchGetJobCommandOutput
+  | BatchGetJobEntityCommandOutput
+  | BatchGetSessionActionCommandOutput
+  | BatchGetSessionCommandOutput
+  | BatchGetStepCommandOutput
+  | BatchGetTaskCommandOutput
+  | BatchGetWorkerCommandOutput
+  | BatchUpdateJobCommandOutput
+  | BatchUpdateTaskCommandOutput
+  | CopyJobTemplateCommandOutput
+  | CreateBudgetCommandOutput
+  | CreateFarmCommandOutput
+  | CreateFleetCommandOutput
+  | CreateJobCommandOutput
+  | CreateLicenseEndpointCommandOutput
+  | CreateLimitCommandOutput
+  | CreateMonitorCommandOutput
+  | CreateQueueCommandOutput
+  | CreateQueueEnvironmentCommandOutput
+  | CreateQueueFleetAssociationCommandOutput
+  | CreateQueueLimitAssociationCommandOutput
+  | CreateStorageProfileCommandOutput
+  | CreateWorkerCommandOutput
+  | DeleteBudgetCommandOutput
+  | DeleteFarmCommandOutput
+  | DeleteFleetCommandOutput
+  | DeleteLicenseEndpointCommandOutput
+  | DeleteLimitCommandOutput
+  | DeleteMeteredProductCommandOutput
+  | DeleteMonitorCommandOutput
+  | DeleteQueueCommandOutput
+  | DeleteQueueEnvironmentCommandOutput
+  | DeleteQueueFleetAssociationCommandOutput
+  | DeleteQueueLimitAssociationCommandOutput
+  | DeleteStorageProfileCommandOutput
+  | DeleteVolumeCommandOutput
+  | DeleteWorkerCommandOutput
+  | DisassociateMemberFromFarmCommandOutput
+  | DisassociateMemberFromFleetCommandOutput
+  | DisassociateMemberFromJobCommandOutput
+  | DisassociateMemberFromQueueCommandOutput
+  | GetBudgetCommandOutput
+  | GetFarmCommandOutput
+  | GetFleetCommandOutput
+  | GetJobCommandOutput
+  | GetLicenseEndpointCommandOutput
+  | GetLimitCommandOutput
+  | GetMonitorCommandOutput
+  | GetMonitorSettingsCommandOutput
+  | GetQueueCommandOutput
+  | GetQueueEnvironmentCommandOutput
+  | GetQueueFleetAssociationCommandOutput
+  | GetQueueLimitAssociationCommandOutput
+  | GetSessionActionCommandOutput
+  | GetSessionCommandOutput
+  | GetSessionsStatisticsAggregationCommandOutput
+  | GetStepCommandOutput
+  | GetStorageProfileCommandOutput
+  | GetStorageProfileForQueueCommandOutput
+  | GetTaskCommandOutput
+  | GetVolumeCommandOutput
+  | GetWorkerCommandOutput
+  | ListAvailableMeteredProductsCommandOutput
+  | ListBudgetsCommandOutput
+  | ListFarmMembersCommandOutput
+  | ListFarmsCommandOutput
+  | ListFleetMembersCommandOutput
+  | ListFleetsCommandOutput
+  | ListJobMembersCommandOutput
+  | ListJobParameterDefinitionsCommandOutput
+  | ListJobsCommandOutput
+  | ListLicenseEndpointsCommandOutput
+  | ListLimitsCommandOutput
+  | ListMembershipsCommandOutput
+  | ListMeteredProductsCommandOutput
+  | ListMonitorsCommandOutput
+  | ListQueueEnvironmentsCommandOutput
+  | ListQueueFleetAssociationsCommandOutput
+  | ListQueueLimitAssociationsCommandOutput
+  | ListQueueMembersCommandOutput
+  | ListQueuesCommandOutput
+  | ListSessionActionsCommandOutput
+  | ListSessionsCommandOutput
+  | ListSessionsForWorkerCommandOutput
+  | ListStepConsumersCommandOutput
+  | ListStepDependenciesCommandOutput
+  | ListStepsCommandOutput
+  | ListStorageProfilesCommandOutput
+  | ListStorageProfilesForQueueCommandOutput
+  | ListTagsForResourceCommandOutput
+  | ListTasksCommandOutput
+  | ListVolumesCommandOutput
+  | ListWorkersCommandOutput
+  | PutMeteredProductCommandOutput
+  | SearchJobsCommandOutput
+  | SearchStepsCommandOutput
+  | SearchTasksCommandOutput
+  | SearchWorkersCommandOutput
+  | StartSessionsStatisticsAggregationCommandOutput
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateBudgetCommandOutput
+  | UpdateFarmCommandOutput
+  | UpdateFleetCommandOutput
+  | UpdateJobCommandOutput
+  | UpdateLimitCommandOutput
+  | UpdateMonitorCommandOutput
+  | UpdateMonitorSettingsCommandOutput
+  | UpdateQueueCommandOutput
+  | UpdateQueueEnvironmentCommandOutput
+  | UpdateQueueFleetAssociationCommandOutput
+  | UpdateQueueLimitAssociationCommandOutput
+  | UpdateSessionCommandOutput
+  | UpdateStepCommandOutput
+  | UpdateStorageProfileCommandOutput
+  | UpdateTaskCommandOutput
+  | UpdateWorkerCommandOutput
+  | UpdateWorkerScheduleCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type DeadlineClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of DeadlineClient class constructor that set the region, credentials and other options.
+ */
+export interface DeadlineClientConfig extends DeadlineClientConfigType {}
+
+/**
+ * @public
+ */
+export type DeadlineClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of DeadlineClient class. This is resolved and normalized from the {@link DeadlineClientConfig | constructor configuration interface}.
+ */
+export interface DeadlineClientResolvedConfig extends DeadlineClientResolvedConfigType {}
+
+/**
+ * The Amazon Web Services Deadline Cloud API provides infrastructure and centralized management for your projects. Use the Deadline Cloud API to onboard users, assign projects, and attach permissions specific to their job function.
+ *
+ * With Deadline Cloud, content production teams can deploy resources for their workforce securely in the cloud, reducing the costs of added physical infrastructure. Keep your content production operations secure, while allowing your contributors to access the tools they need, such as scalable high-speed storage, licenses, and cost management services.
+ *
+ * @public
+ */
+export class DeadlineClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  DeadlineClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of DeadlineClient class. This is resolved and normalized from the {@link DeadlineClientConfig | constructor configuration interface}.
+   */
+  readonly config: DeadlineClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<DeadlineClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultDeadlineHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: DeadlineClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

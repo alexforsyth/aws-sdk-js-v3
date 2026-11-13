@@ -1,102 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { DescribeInstanceStorageConfigRequest, DescribeInstanceStorageConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeInstanceStorageConfigCommand,
-  serializeAws_restJson1DescribeInstanceStorageConfigCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface DescribeInstanceStorageConfigCommandInput extends DescribeInstanceStorageConfigRequest {}
-export interface DescribeInstanceStorageConfigCommandOutput
-  extends DescribeInstanceStorageConfigResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeInstanceStorageConfigRequest, DescribeInstanceStorageConfigResponse } from "../models/models_1";
+import { DescribeInstanceStorageConfig$ } from "../schemas/schemas_0";
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>Retrieves the current storage configurations for the specified resource type, association
- *    ID, and instance ID.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeInstanceStorageConfigCommand}.
+ */
+export interface DescribeInstanceStorageConfigCommandInput extends DescribeInstanceStorageConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeInstanceStorageConfigCommand}.
+ */
+export interface DescribeInstanceStorageConfigCommandOutput extends DescribeInstanceStorageConfigResponse, __MetadataBearer {}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>Retrieves the current storage configurations for the specified resource type, association ID, and instance
+ *    ID.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, DescribeInstanceStorageConfigCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DescribeInstanceStorageConfigCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DescribeInstanceStorageConfigRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   AssociationId: "STRING_VALUE", // required
+ *   ResourceType: "CHAT_TRANSCRIPTS" || "CALL_RECORDINGS" || "SCHEDULED_REPORTS" || "MEDIA_STREAMS" || "CONTACT_TRACE_RECORDS" || "AGENT_EVENTS" || "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" || "ATTACHMENTS" || "CONTACT_EVALUATIONS" || "SCREEN_RECORDINGS" || "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" || "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS" || "EMAIL_MESSAGES", // required
+ * };
  * const command = new DescribeInstanceStorageConfigCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeInstanceStorageConfigResponse
+ * //   StorageConfig: { // InstanceStorageConfig
+ * //     AssociationId: "STRING_VALUE",
+ * //     StorageType: "S3" || "KINESIS_VIDEO_STREAM" || "KINESIS_STREAM" || "KINESIS_FIREHOSE", // required
+ * //     S3Config: { // S3Config
+ * //       BucketName: "STRING_VALUE", // required
+ * //       BucketPrefix: "STRING_VALUE", // required
+ * //       EncryptionConfig: { // EncryptionConfig
+ * //         EncryptionType: "KMS", // required
+ * //         KeyId: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //     KinesisVideoStreamConfig: { // KinesisVideoStreamConfig
+ * //       Prefix: "STRING_VALUE", // required
+ * //       RetentionPeriodHours: Number("int"), // required
+ * //       EncryptionConfig: {
+ * //         EncryptionType: "KMS", // required
+ * //         KeyId: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //     KinesisStreamConfig: { // KinesisStreamConfig
+ * //       StreamArn: "STRING_VALUE", // required
+ * //     },
+ * //     KinesisFirehoseConfig: { // KinesisFirehoseConfig
+ * //       FirehoseArn: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeInstanceStorageConfigCommandInput - {@link DescribeInstanceStorageConfigCommandInput}
+ * @returns {@link DescribeInstanceStorageConfigCommandOutput}
  * @see {@link DescribeInstanceStorageConfigCommandInput} for command's `input` shape.
  * @see {@link DescribeInstanceStorageConfigCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeInstanceStorageConfigCommand extends $Command<
-  DescribeInstanceStorageConfigCommandInput,
-  DescribeInstanceStorageConfigCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeInstanceStorageConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeInstanceStorageConfigCommandInput, DescribeInstanceStorageConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DescribeInstanceStorageConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeInstanceStorageConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeInstanceStorageConfigResponse.filterSensitiveLog,
+export class DescribeInstanceStorageConfigCommand extends command<DescribeInstanceStorageConfigCommandInput, DescribeInstanceStorageConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeInstanceStorageConfig",
+  DescribeInstanceStorageConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInstanceStorageConfigRequest;
+      output: DescribeInstanceStorageConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeInstanceStorageConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeInstanceStorageConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeInstanceStorageConfigCommandOutput> {
-    return deserializeAws_restJson1DescribeInstanceStorageConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeInstanceStorageConfigCommandInput;
+      output: DescribeInstanceStorageConfigCommandOutput;
+    };
+  };
 }

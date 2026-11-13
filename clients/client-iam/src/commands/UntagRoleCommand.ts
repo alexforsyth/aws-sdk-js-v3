@@ -1,21 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { UntagRoleRequest } from "../models/models_1";
-import { deserializeAws_queryUntagRoleCommand, serializeAws_queryUntagRoleCommand } from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UntagRoleRequest } from "../models/models_1";
+import { UntagRole$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UntagRoleCommand}.
+ */
 export interface UntagRoleCommandInput extends UntagRoleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UntagRoleCommand}.
+ */
 export interface UntagRoleCommandOutput extends __MetadataBearer {}
 
 /**
@@ -26,64 +30,76 @@ export interface UntagRoleCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IAMClient, UntagRoleCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, UntagRoleCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // UntagRoleRequest
+ *   RoleName: "STRING_VALUE", // required
+ *   TagKeys: [ // tagKeyListType // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UntagRoleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UntagRoleCommandInput - {@link UntagRoleCommandInput}
+ * @returns {@link UntagRoleCommandOutput}
  * @see {@link UntagRoleCommandInput} for command's `input` shape.
  * @see {@link UntagRoleCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The request was rejected because multiple requests to change this object were submitted
+ *       simultaneously. Wait a few minutes and submit your request again.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To remove a tag from an IAM role
+ * ```javascript
+ * // The following example shows how to remove a tag with the key 'Dept' from a role named 'taggedrole'.
+ * const input = {
+ *   RoleName: "taggedrole",
+ *   TagKeys: [
+ *     "Dept"
+ *   ]
+ * };
+ * const command = new UntagRoleCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UntagRoleCommand extends $Command<UntagRoleCommandInput, UntagRoleCommandOutput, IAMClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UntagRoleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UntagRoleCommandInput, UntagRoleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "UntagRoleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UntagRoleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UntagRoleCommand extends command<UntagRoleCommandInput, UntagRoleCommandOutput>(
+  _ep0,
+  _mw0,
+  "UntagRole",
+  UntagRole$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UntagRoleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UntagRoleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryUntagRoleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UntagRoleCommandOutput> {
-    return deserializeAws_queryUntagRoleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UntagRoleCommandInput;
+      output: UntagRoleCommandOutput;
+    };
+  };
 }

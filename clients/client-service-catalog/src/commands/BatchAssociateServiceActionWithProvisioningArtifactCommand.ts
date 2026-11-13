@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   BatchAssociateServiceActionWithProvisioningArtifactInput,
   BatchAssociateServiceActionWithProvisioningArtifactOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchAssociateServiceActionWithProvisioningArtifactCommand,
-  serializeAws_json1_1BatchAssociateServiceActionWithProvisioningArtifactCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { BatchAssociateServiceActionWithProvisioningArtifact$ } from "../schemas/schemas_0";
 
-export interface BatchAssociateServiceActionWithProvisioningArtifactCommandInput
-  extends BatchAssociateServiceActionWithProvisioningArtifactInput {}
-export interface BatchAssociateServiceActionWithProvisioningArtifactCommandOutput
-  extends BatchAssociateServiceActionWithProvisioningArtifactOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchAssociateServiceActionWithProvisioningArtifactCommand}.
+ */
+export interface BatchAssociateServiceActionWithProvisioningArtifactCommandInput extends BatchAssociateServiceActionWithProvisioningArtifactInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchAssociateServiceActionWithProvisioningArtifactCommand}.
+ */
+export interface BatchAssociateServiceActionWithProvisioningArtifactCommandOutput extends BatchAssociateServiceActionWithProvisioningArtifactOutput, __MetadataBearer {}
 
 /**
  * <p>Associates multiple self-service actions with provisioning artifacts.</p>
@@ -34,77 +32,65 @@ export interface BatchAssociateServiceActionWithProvisioningArtifactCommandOutpu
  * ```javascript
  * import { ServiceCatalogClient, BatchAssociateServiceActionWithProvisioningArtifactCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, BatchAssociateServiceActionWithProvisioningArtifactCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // BatchAssociateServiceActionWithProvisioningArtifactInput
+ *   ServiceActionAssociations: [ // ServiceActionAssociations // required
+ *     { // ServiceActionAssociation
+ *       ServiceActionId: "STRING_VALUE", // required
+ *       ProductId: "STRING_VALUE", // required
+ *       ProvisioningArtifactId: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   AcceptLanguage: "STRING_VALUE",
+ * };
  * const command = new BatchAssociateServiceActionWithProvisioningArtifactCommand(input);
  * const response = await client.send(command);
+ * // { // BatchAssociateServiceActionWithProvisioningArtifactOutput
+ * //   FailedServiceActionAssociations: [ // FailedServiceActionAssociations
+ * //     { // FailedServiceActionAssociation
+ * //       ServiceActionId: "STRING_VALUE",
+ * //       ProductId: "STRING_VALUE",
+ * //       ProvisioningArtifactId: "STRING_VALUE",
+ * //       ErrorCode: "DUPLICATE_RESOURCE" || "INTERNAL_FAILURE" || "LIMIT_EXCEEDED" || "RESOURCE_NOT_FOUND" || "THROTTLING" || "INVALID_PARAMETER",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchAssociateServiceActionWithProvisioningArtifactCommandInput - {@link BatchAssociateServiceActionWithProvisioningArtifactCommandInput}
+ * @returns {@link BatchAssociateServiceActionWithProvisioningArtifactCommandOutput}
  * @see {@link BatchAssociateServiceActionWithProvisioningArtifactCommandInput} for command's `input` shape.
  * @see {@link BatchAssociateServiceActionWithProvisioningArtifactCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class BatchAssociateServiceActionWithProvisioningArtifactCommand extends $Command<
-  BatchAssociateServiceActionWithProvisioningArtifactCommandInput,
-  BatchAssociateServiceActionWithProvisioningArtifactCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchAssociateServiceActionWithProvisioningArtifactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    BatchAssociateServiceActionWithProvisioningArtifactCommandInput,
-    BatchAssociateServiceActionWithProvisioningArtifactCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "BatchAssociateServiceActionWithProvisioningArtifactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchAssociateServiceActionWithProvisioningArtifactInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchAssociateServiceActionWithProvisioningArtifactOutput.filterSensitiveLog,
+export class BatchAssociateServiceActionWithProvisioningArtifactCommand extends command<BatchAssociateServiceActionWithProvisioningArtifactCommandInput, BatchAssociateServiceActionWithProvisioningArtifactCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchAssociateServiceActionWithProvisioningArtifact",
+  BatchAssociateServiceActionWithProvisioningArtifact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchAssociateServiceActionWithProvisioningArtifactInput;
+      output: BatchAssociateServiceActionWithProvisioningArtifactOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: BatchAssociateServiceActionWithProvisioningArtifactCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchAssociateServiceActionWithProvisioningArtifactCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchAssociateServiceActionWithProvisioningArtifactCommandOutput> {
-    return deserializeAws_json1_1BatchAssociateServiceActionWithProvisioningArtifactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchAssociateServiceActionWithProvisioningArtifactCommandInput;
+      output: BatchAssociateServiceActionWithProvisioningArtifactCommandOutput;
+    };
+  };
 }

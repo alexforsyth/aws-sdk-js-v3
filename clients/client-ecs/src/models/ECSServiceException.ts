@@ -1,0 +1,25 @@
+// smithy-typescript generated code
+import {
+  type ServiceExceptionOptions as __ServiceExceptionOptions,
+  ServiceException as __ServiceException,
+} from "@smithy/core/client";
+
+export type { __ServiceExceptionOptions };
+
+export { __ServiceException };
+
+/**
+ * @public
+ *
+ * Base exception class for all service exceptions from ECS service.
+ */
+export class ECSServiceException extends __ServiceException {
+  public static readonly shapeId: string = "smithy.ts.sdk.synthetic.com.amazonaws.ecs#ECSServiceException";
+  /**
+   * @internal
+   */
+  constructor(options: __ServiceExceptionOptions) {
+    super(options);
+    Object.setPrototypeOf(this, ECSServiceException.prototype);
+  }
+}

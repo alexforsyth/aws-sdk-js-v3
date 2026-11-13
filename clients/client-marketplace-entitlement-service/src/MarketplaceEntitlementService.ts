@@ -1,11 +1,63 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type GetEntitlementsCommandInput,
+  type GetEntitlementsCommandOutput,
   GetEntitlementsCommand,
-  GetEntitlementsCommandInput,
-  GetEntitlementsCommandOutput,
 } from "./commands/GetEntitlementsCommand";
 import { MarketplaceEntitlementServiceClient } from "./MarketplaceEntitlementServiceClient";
+import { paginateGetEntitlements } from "./pagination/GetEntitlementsPaginator";
+
+const commands = {
+  GetEntitlementsCommand,
+};
+const paginators = {
+  paginateGetEntitlements,
+};
+
+/**
+ * @public
+ */
+export interface MarketplaceEntitlementServiceRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MarketplaceEntitlementService {
+  /**
+   * @see {@link GetEntitlementsCommand}
+   */
+  getEntitlements(
+    args: GetEntitlementsCommandInput,
+    options?: MarketplaceEntitlementServiceRequestOptions
+  ): Promise<GetEntitlementsCommandOutput>;
+  getEntitlements(
+    args: GetEntitlementsCommandInput,
+    cb: (err: any, data?: GetEntitlementsCommandOutput) => void
+  ): void;
+  getEntitlements(
+    args: GetEntitlementsCommandInput,
+    options: MarketplaceEntitlementServiceRequestOptions,
+    cb: (err: any, data?: GetEntitlementsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEntitlementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetEntitlementsCommandOutput}.
+   */
+  paginateGetEntitlements(
+    args: GetEntitlementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetEntitlementsCommandOutput>;
+}
 
 /**
  * <fullname>AWS Marketplace Entitlement Service</fullname>
@@ -25,38 +77,7 @@ import { MarketplaceEntitlementServiceClient } from "./MarketplaceEntitlementSer
  *      product.</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class MarketplaceEntitlementService extends MarketplaceEntitlementServiceClient {
-  /**
-   * <p>GetEntitlements retrieves entitlement values for a given product. The results can be
-   *       filtered based on customer identifier or product dimensions.</p>
-   */
-  public getEntitlements(
-    args: GetEntitlementsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEntitlementsCommandOutput>;
-  public getEntitlements(
-    args: GetEntitlementsCommandInput,
-    cb: (err: any, data?: GetEntitlementsCommandOutput) => void
-  ): void;
-  public getEntitlements(
-    args: GetEntitlementsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEntitlementsCommandOutput) => void
-  ): void;
-  public getEntitlements(
-    args: GetEntitlementsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEntitlementsCommandOutput) => void),
-    cb?: (err: any, data?: GetEntitlementsCommandOutput) => void
-  ): Promise<GetEntitlementsCommandOutput> | void {
-    const command = new GetEntitlementsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class MarketplaceEntitlementService extends MarketplaceEntitlementServiceClient implements MarketplaceEntitlementService {}
+createAggregatedClient(commands, MarketplaceEntitlementService, { paginators });

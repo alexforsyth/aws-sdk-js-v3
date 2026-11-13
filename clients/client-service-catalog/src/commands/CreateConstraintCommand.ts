@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateConstraintInput, CreateConstraintOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateConstraintCommand,
-  serializeAws_json1_1CreateConstraintCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateConstraintInput, CreateConstraintOutput } from "../models/models_0";
+import { CreateConstraint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConstraintCommand}.
+ */
 export interface CreateConstraintCommandInput extends CreateConstraintInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConstraintCommand}.
+ */
 export interface CreateConstraintCommandOutput extends CreateConstraintOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,75 @@ export interface CreateConstraintCommandOutput extends CreateConstraintOutput, _
  * ```javascript
  * import { ServiceCatalogClient, CreateConstraintCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, CreateConstraintCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // CreateConstraintInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   PortfolioId: "STRING_VALUE", // required
+ *   ProductId: "STRING_VALUE", // required
+ *   Parameters: "STRING_VALUE", // required
+ *   Type: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   IdempotencyToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateConstraintCommand(input);
  * const response = await client.send(command);
+ * // { // CreateConstraintOutput
+ * //   ConstraintDetail: { // ConstraintDetail
+ * //     ConstraintId: "STRING_VALUE",
+ * //     Type: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Owner: "STRING_VALUE",
+ * //     ProductId: "STRING_VALUE",
+ * //     PortfolioId: "STRING_VALUE",
+ * //   },
+ * //   ConstraintParameters: "STRING_VALUE",
+ * //   Status: "AVAILABLE" || "CREATING" || "FAILED",
+ * // };
+ *
  * ```
  *
+ * @param CreateConstraintCommandInput - {@link CreateConstraintCommandInput}
+ * @returns {@link CreateConstraintCommandOutput}
  * @see {@link CreateConstraintCommandInput} for command's `input` shape.
  * @see {@link CreateConstraintCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link DuplicateResourceException} (client fault)
+ *  <p>The specified resource is a duplicate.</p>
+ *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The current limits of the service would have been exceeded by this operation. Decrease your
+ *          resource use or increase your service limits and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConstraintCommand extends $Command<
-  CreateConstraintCommandInput,
-  CreateConstraintCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConstraintCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConstraintCommandInput, CreateConstraintCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "CreateConstraintCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConstraintInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConstraintOutput.filterSensitiveLog,
+export class CreateConstraintCommand extends command<CreateConstraintCommandInput, CreateConstraintCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConstraint",
+  CreateConstraint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConstraintInput;
+      output: CreateConstraintOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateConstraintCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateConstraintCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateConstraintCommandOutput> {
-    return deserializeAws_json1_1CreateConstraintCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConstraintCommandInput;
+      output: CreateConstraintCommandOutput;
+    };
+  };
 }

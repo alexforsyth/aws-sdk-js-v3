@@ -1,106 +1,162 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateDefaultVpcRequest, CreateDefaultVpcResult } from "../models/models_0";
-import {
-  deserializeAws_ec2CreateDefaultVpcCommand,
-  serializeAws_ec2CreateDefaultVpcCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDefaultVpcRequest, CreateDefaultVpcResult } from "../models/models_1";
+import { CreateDefaultVpc$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDefaultVpcCommand}.
+ */
 export interface CreateDefaultVpcCommandInput extends CreateDefaultVpcRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDefaultVpcCommand}.
+ */
 export interface CreateDefaultVpcCommandOutput extends CreateDefaultVpcResult, __MetadataBearer {}
 
 /**
  * <p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet
  * 			in each Availability Zone. For more information about the components of a default VPC,
- * 			see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPC and
- * 			default subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot
- * 			specify the components of the default VPC yourself.</p>
- * 		       <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have
+ * 			see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html">Default VPCs</a>
+ * 		    in the <i>Amazon VPC User Guide</i>. You cannot specify the components of the
+ * 		    default VPC yourself.</p>
+ *          <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have
  * 			more than one default VPC per Region.</p>
- * 		       <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC
- * 			in a Region that supports EC2-Classic. If you want a default VPC in a Region that
- * 			supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is
- * 			that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs
- * 			FAQ</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateDefaultVpcCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateDefaultVpcCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateDefaultVpcRequest
+ *   DryRun: true || false,
+ * };
  * const command = new CreateDefaultVpcCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDefaultVpcResult
+ * //   Vpc: { // Vpc
+ * //     OwnerId: "STRING_VALUE",
+ * //     InstanceTenancy: "default" || "dedicated" || "host",
+ * //     Ipv6CidrBlockAssociationSet: [ // VpcIpv6CidrBlockAssociationSet
+ * //       { // VpcIpv6CidrBlockAssociation
+ * //         AssociationId: "STRING_VALUE",
+ * //         Ipv6CidrBlock: "STRING_VALUE",
+ * //         Ipv6CidrBlockState: { // VpcCidrBlockState
+ * //           State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //           StatusMessage: "STRING_VALUE",
+ * //         },
+ * //         NetworkBorderGroup: "STRING_VALUE",
+ * //         Ipv6Pool: "STRING_VALUE",
+ * //         Ipv6AddressAttribute: "public" || "private",
+ * //         IpSource: "amazon" || "byoip" || "none",
+ * //       },
+ * //     ],
+ * //     CidrBlockAssociationSet: [ // VpcCidrBlockAssociationSet
+ * //       { // VpcCidrBlockAssociation
+ * //         AssociationId: "STRING_VALUE",
+ * //         CidrBlock: "STRING_VALUE",
+ * //         CidrBlockState: {
+ * //           State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //           StatusMessage: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     IsDefault: true || false,
+ * //     EncryptionControl: { // VpcEncryptionControl
+ * //       VpcId: "STRING_VALUE",
+ * //       VpcEncryptionControlId: "STRING_VALUE",
+ * //       Mode: "monitor" || "enforce",
+ * //       State: "enforce-in-progress" || "monitor-in-progress" || "enforce-failed" || "monitor-failed" || "deleting" || "deleted" || "available" || "creating" || "delete-failed",
+ * //       StateMessage: "STRING_VALUE",
+ * //       ResourceExclusions: { // VpcEncryptionControlExclusions
+ * //         InternetGateway: { // VpcEncryptionControlExclusion
+ * //           State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //         EgressOnlyInternetGateway: {
+ * //           State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //         NatGateway: {
+ * //           State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //         VirtualPrivateGateway: {
+ * //           State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //         VpcPeering: {
+ * //           State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //           StateMessage: "STRING_VALUE",
+ * //         },
+ * //         Lambda: "<VpcEncryptionControlExclusion>",
+ * //         VpcLattice: "<VpcEncryptionControlExclusion>",
+ * //         ElasticFileSystem: "<VpcEncryptionControlExclusion>",
+ * //         GlobalAccelerator: "<VpcEncryptionControlExclusion>",
+ * //         ApiGatewayV2: "<VpcEncryptionControlExclusion>",
+ * //       },
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     Tags: [
+ * //       {
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     BlockPublicAccessStates: { // BlockPublicAccessStates
+ * //       InternetGatewayBlockMode: "off" || "block-bidirectional" || "block-ingress",
+ * //     },
+ * //     VpcId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "deleting",
+ * //     CidrBlock: "STRING_VALUE",
+ * //     DhcpOptionsId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDefaultVpcCommandInput - {@link CreateDefaultVpcCommandInput}
+ * @returns {@link CreateDefaultVpcCommandOutput}
  * @see {@link CreateDefaultVpcCommandInput} for command's `input` shape.
  * @see {@link CreateDefaultVpcCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDefaultVpcCommand extends $Command<
-  CreateDefaultVpcCommandInput,
-  CreateDefaultVpcCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDefaultVpcCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDefaultVpcCommandInput, CreateDefaultVpcCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateDefaultVpcCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDefaultVpcRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDefaultVpcResult.filterSensitiveLog,
+export class CreateDefaultVpcCommand extends command<CreateDefaultVpcCommandInput, CreateDefaultVpcCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDefaultVpc",
+  CreateDefaultVpc$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDefaultVpcRequest;
+      output: CreateDefaultVpcResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDefaultVpcCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateDefaultVpcCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDefaultVpcCommandOutput> {
-    return deserializeAws_ec2CreateDefaultVpcCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDefaultVpcCommandInput;
+      output: CreateDefaultVpcCommandOutput;
+    };
+  };
 }

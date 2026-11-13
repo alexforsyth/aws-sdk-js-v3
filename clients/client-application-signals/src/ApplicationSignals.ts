@@ -1,0 +1,859 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { ApplicationSignalsClient } from "./ApplicationSignalsClient";
+import {
+  type BatchDeleteInstrumentationConfigurationsCommandInput,
+  type BatchDeleteInstrumentationConfigurationsCommandOutput,
+  BatchDeleteInstrumentationConfigurationsCommand,
+} from "./commands/BatchDeleteInstrumentationConfigurationsCommand";
+import {
+  type BatchGetServiceLevelObjectiveBudgetReportCommandInput,
+  type BatchGetServiceLevelObjectiveBudgetReportCommandOutput,
+  BatchGetServiceLevelObjectiveBudgetReportCommand,
+} from "./commands/BatchGetServiceLevelObjectiveBudgetReportCommand";
+import {
+  type BatchUpdateExclusionWindowsCommandInput,
+  type BatchUpdateExclusionWindowsCommandOutput,
+  BatchUpdateExclusionWindowsCommand,
+} from "./commands/BatchUpdateExclusionWindowsCommand";
+import {
+  type CreateInstrumentationConfigurationCommandInput,
+  type CreateInstrumentationConfigurationCommandOutput,
+  CreateInstrumentationConfigurationCommand,
+} from "./commands/CreateInstrumentationConfigurationCommand";
+import {
+  type CreateServiceLevelObjectiveCommandInput,
+  type CreateServiceLevelObjectiveCommandOutput,
+  CreateServiceLevelObjectiveCommand,
+} from "./commands/CreateServiceLevelObjectiveCommand";
+import {
+  type DeleteGroupingConfigurationCommandInput,
+  type DeleteGroupingConfigurationCommandOutput,
+  DeleteGroupingConfigurationCommand,
+} from "./commands/DeleteGroupingConfigurationCommand";
+import {
+  type DeleteInstrumentationConfigurationCommandInput,
+  type DeleteInstrumentationConfigurationCommandOutput,
+  DeleteInstrumentationConfigurationCommand,
+} from "./commands/DeleteInstrumentationConfigurationCommand";
+import {
+  type DeleteServiceLevelObjectiveCommandInput,
+  type DeleteServiceLevelObjectiveCommandOutput,
+  DeleteServiceLevelObjectiveCommand,
+} from "./commands/DeleteServiceLevelObjectiveCommand";
+import {
+  type GetInstrumentationConfigurationCommandInput,
+  type GetInstrumentationConfigurationCommandOutput,
+  GetInstrumentationConfigurationCommand,
+} from "./commands/GetInstrumentationConfigurationCommand";
+import {
+  type GetInstrumentationConfigurationStatusCommandInput,
+  type GetInstrumentationConfigurationStatusCommandOutput,
+  GetInstrumentationConfigurationStatusCommand,
+} from "./commands/GetInstrumentationConfigurationStatusCommand";
+import {
+  type GetServiceCommandInput,
+  type GetServiceCommandOutput,
+  GetServiceCommand,
+} from "./commands/GetServiceCommand";
+import {
+  type GetServiceLevelObjectiveCommandInput,
+  type GetServiceLevelObjectiveCommandOutput,
+  GetServiceLevelObjectiveCommand,
+} from "./commands/GetServiceLevelObjectiveCommand";
+import {
+  type ListAuditFindingsCommandInput,
+  type ListAuditFindingsCommandOutput,
+  ListAuditFindingsCommand,
+} from "./commands/ListAuditFindingsCommand";
+import {
+  type ListEntityEventsCommandInput,
+  type ListEntityEventsCommandOutput,
+  ListEntityEventsCommand,
+} from "./commands/ListEntityEventsCommand";
+import {
+  type ListGroupingAttributeDefinitionsCommandInput,
+  type ListGroupingAttributeDefinitionsCommandOutput,
+  ListGroupingAttributeDefinitionsCommand,
+} from "./commands/ListGroupingAttributeDefinitionsCommand";
+import {
+  type ListInstrumentationConfigurationsCommandInput,
+  type ListInstrumentationConfigurationsCommandOutput,
+  ListInstrumentationConfigurationsCommand,
+} from "./commands/ListInstrumentationConfigurationsCommand";
+import {
+  type ListServiceDependenciesCommandInput,
+  type ListServiceDependenciesCommandOutput,
+  ListServiceDependenciesCommand,
+} from "./commands/ListServiceDependenciesCommand";
+import {
+  type ListServiceDependentsCommandInput,
+  type ListServiceDependentsCommandOutput,
+  ListServiceDependentsCommand,
+} from "./commands/ListServiceDependentsCommand";
+import {
+  type ListServiceLevelObjectiveExclusionWindowsCommandInput,
+  type ListServiceLevelObjectiveExclusionWindowsCommandOutput,
+  ListServiceLevelObjectiveExclusionWindowsCommand,
+} from "./commands/ListServiceLevelObjectiveExclusionWindowsCommand";
+import {
+  type ListServiceLevelObjectivesCommandInput,
+  type ListServiceLevelObjectivesCommandOutput,
+  ListServiceLevelObjectivesCommand,
+} from "./commands/ListServiceLevelObjectivesCommand";
+import {
+  type ListServiceOperationsCommandInput,
+  type ListServiceOperationsCommandOutput,
+  ListServiceOperationsCommand,
+} from "./commands/ListServiceOperationsCommand";
+import {
+  type ListServicesCommandInput,
+  type ListServicesCommandOutput,
+  ListServicesCommand,
+} from "./commands/ListServicesCommand";
+import {
+  type ListServiceStatesCommandInput,
+  type ListServiceStatesCommandOutput,
+  ListServiceStatesCommand,
+} from "./commands/ListServiceStatesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutGroupingConfigurationCommandInput,
+  type PutGroupingConfigurationCommandOutput,
+  PutGroupingConfigurationCommand,
+} from "./commands/PutGroupingConfigurationCommand";
+import {
+  type ReportInstrumentationConfigurationStatusCommandInput,
+  type ReportInstrumentationConfigurationStatusCommandOutput,
+  ReportInstrumentationConfigurationStatusCommand,
+} from "./commands/ReportInstrumentationConfigurationStatusCommand";
+import {
+  type StartDiscoveryCommandInput,
+  type StartDiscoveryCommandOutput,
+  StartDiscoveryCommand,
+} from "./commands/StartDiscoveryCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateServiceLevelObjectiveCommandInput,
+  type UpdateServiceLevelObjectiveCommandOutput,
+  UpdateServiceLevelObjectiveCommand,
+} from "./commands/UpdateServiceLevelObjectiveCommand";
+import {
+  paginateGetInstrumentationConfigurationStatus,
+} from "./pagination/GetInstrumentationConfigurationStatusPaginator";
+import { paginateListEntityEvents } from "./pagination/ListEntityEventsPaginator";
+import { paginateListInstrumentationConfigurations } from "./pagination/ListInstrumentationConfigurationsPaginator";
+import { paginateListServiceDependencies } from "./pagination/ListServiceDependenciesPaginator";
+import { paginateListServiceDependents } from "./pagination/ListServiceDependentsPaginator";
+import {
+  paginateListServiceLevelObjectiveExclusionWindows,
+} from "./pagination/ListServiceLevelObjectiveExclusionWindowsPaginator";
+import { paginateListServiceLevelObjectives } from "./pagination/ListServiceLevelObjectivesPaginator";
+import { paginateListServiceOperations } from "./pagination/ListServiceOperationsPaginator";
+import { paginateListServices } from "./pagination/ListServicesPaginator";
+import { paginateListServiceStates } from "./pagination/ListServiceStatesPaginator";
+
+const commands = {
+  BatchDeleteInstrumentationConfigurationsCommand,
+  BatchGetServiceLevelObjectiveBudgetReportCommand,
+  BatchUpdateExclusionWindowsCommand,
+  CreateInstrumentationConfigurationCommand,
+  CreateServiceLevelObjectiveCommand,
+  DeleteGroupingConfigurationCommand,
+  DeleteInstrumentationConfigurationCommand,
+  DeleteServiceLevelObjectiveCommand,
+  GetInstrumentationConfigurationCommand,
+  GetInstrumentationConfigurationStatusCommand,
+  GetServiceCommand,
+  GetServiceLevelObjectiveCommand,
+  ListAuditFindingsCommand,
+  ListEntityEventsCommand,
+  ListGroupingAttributeDefinitionsCommand,
+  ListInstrumentationConfigurationsCommand,
+  ListServiceDependenciesCommand,
+  ListServiceDependentsCommand,
+  ListServiceLevelObjectiveExclusionWindowsCommand,
+  ListServiceLevelObjectivesCommand,
+  ListServiceOperationsCommand,
+  ListServicesCommand,
+  ListServiceStatesCommand,
+  ListTagsForResourceCommand,
+  PutGroupingConfigurationCommand,
+  ReportInstrumentationConfigurationStatusCommand,
+  StartDiscoveryCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateServiceLevelObjectiveCommand,
+};
+const paginators = {
+  paginateGetInstrumentationConfigurationStatus,
+  paginateListEntityEvents,
+  paginateListInstrumentationConfigurations,
+  paginateListServiceDependencies,
+  paginateListServiceDependents,
+  paginateListServiceLevelObjectiveExclusionWindows,
+  paginateListServiceLevelObjectives,
+  paginateListServiceOperations,
+  paginateListServices,
+  paginateListServiceStates,
+};
+
+/**
+ * @public
+ */
+export interface ApplicationSignalsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ApplicationSignals {
+  /**
+   * @see {@link BatchDeleteInstrumentationConfigurationsCommand}
+   */
+  batchDeleteInstrumentationConfigurations(
+    args: BatchDeleteInstrumentationConfigurationsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<BatchDeleteInstrumentationConfigurationsCommandOutput>;
+  batchDeleteInstrumentationConfigurations(
+    args: BatchDeleteInstrumentationConfigurationsCommandInput,
+    cb: (err: any, data?: BatchDeleteInstrumentationConfigurationsCommandOutput) => void
+  ): void;
+  batchDeleteInstrumentationConfigurations(
+    args: BatchDeleteInstrumentationConfigurationsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: BatchDeleteInstrumentationConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetServiceLevelObjectiveBudgetReportCommand}
+   */
+  batchGetServiceLevelObjectiveBudgetReport(
+    args: BatchGetServiceLevelObjectiveBudgetReportCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<BatchGetServiceLevelObjectiveBudgetReportCommandOutput>;
+  batchGetServiceLevelObjectiveBudgetReport(
+    args: BatchGetServiceLevelObjectiveBudgetReportCommandInput,
+    cb: (err: any, data?: BatchGetServiceLevelObjectiveBudgetReportCommandOutput) => void
+  ): void;
+  batchGetServiceLevelObjectiveBudgetReport(
+    args: BatchGetServiceLevelObjectiveBudgetReportCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: BatchGetServiceLevelObjectiveBudgetReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateExclusionWindowsCommand}
+   */
+  batchUpdateExclusionWindows(
+    args: BatchUpdateExclusionWindowsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<BatchUpdateExclusionWindowsCommandOutput>;
+  batchUpdateExclusionWindows(
+    args: BatchUpdateExclusionWindowsCommandInput,
+    cb: (err: any, data?: BatchUpdateExclusionWindowsCommandOutput) => void
+  ): void;
+  batchUpdateExclusionWindows(
+    args: BatchUpdateExclusionWindowsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: BatchUpdateExclusionWindowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstrumentationConfigurationCommand}
+   */
+  createInstrumentationConfiguration(
+    args: CreateInstrumentationConfigurationCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<CreateInstrumentationConfigurationCommandOutput>;
+  createInstrumentationConfiguration(
+    args: CreateInstrumentationConfigurationCommandInput,
+    cb: (err: any, data?: CreateInstrumentationConfigurationCommandOutput) => void
+  ): void;
+  createInstrumentationConfiguration(
+    args: CreateInstrumentationConfigurationCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: CreateInstrumentationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateServiceLevelObjectiveCommand}
+   */
+  createServiceLevelObjective(
+    args: CreateServiceLevelObjectiveCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<CreateServiceLevelObjectiveCommandOutput>;
+  createServiceLevelObjective(
+    args: CreateServiceLevelObjectiveCommandInput,
+    cb: (err: any, data?: CreateServiceLevelObjectiveCommandOutput) => void
+  ): void;
+  createServiceLevelObjective(
+    args: CreateServiceLevelObjectiveCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: CreateServiceLevelObjectiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteGroupingConfigurationCommand}
+   */
+  deleteGroupingConfiguration(): Promise<DeleteGroupingConfigurationCommandOutput>;
+  deleteGroupingConfiguration(
+    args: DeleteGroupingConfigurationCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<DeleteGroupingConfigurationCommandOutput>;
+  deleteGroupingConfiguration(
+    args: DeleteGroupingConfigurationCommandInput,
+    cb: (err: any, data?: DeleteGroupingConfigurationCommandOutput) => void
+  ): void;
+  deleteGroupingConfiguration(
+    args: DeleteGroupingConfigurationCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: DeleteGroupingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstrumentationConfigurationCommand}
+   */
+  deleteInstrumentationConfiguration(
+    args: DeleteInstrumentationConfigurationCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<DeleteInstrumentationConfigurationCommandOutput>;
+  deleteInstrumentationConfiguration(
+    args: DeleteInstrumentationConfigurationCommandInput,
+    cb: (err: any, data?: DeleteInstrumentationConfigurationCommandOutput) => void
+  ): void;
+  deleteInstrumentationConfiguration(
+    args: DeleteInstrumentationConfigurationCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: DeleteInstrumentationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteServiceLevelObjectiveCommand}
+   */
+  deleteServiceLevelObjective(
+    args: DeleteServiceLevelObjectiveCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<DeleteServiceLevelObjectiveCommandOutput>;
+  deleteServiceLevelObjective(
+    args: DeleteServiceLevelObjectiveCommandInput,
+    cb: (err: any, data?: DeleteServiceLevelObjectiveCommandOutput) => void
+  ): void;
+  deleteServiceLevelObjective(
+    args: DeleteServiceLevelObjectiveCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: DeleteServiceLevelObjectiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstrumentationConfigurationCommand}
+   */
+  getInstrumentationConfiguration(
+    args: GetInstrumentationConfigurationCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<GetInstrumentationConfigurationCommandOutput>;
+  getInstrumentationConfiguration(
+    args: GetInstrumentationConfigurationCommandInput,
+    cb: (err: any, data?: GetInstrumentationConfigurationCommandOutput) => void
+  ): void;
+  getInstrumentationConfiguration(
+    args: GetInstrumentationConfigurationCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: GetInstrumentationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstrumentationConfigurationStatusCommand}
+   */
+  getInstrumentationConfigurationStatus(
+    args: GetInstrumentationConfigurationStatusCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<GetInstrumentationConfigurationStatusCommandOutput>;
+  getInstrumentationConfigurationStatus(
+    args: GetInstrumentationConfigurationStatusCommandInput,
+    cb: (err: any, data?: GetInstrumentationConfigurationStatusCommandOutput) => void
+  ): void;
+  getInstrumentationConfigurationStatus(
+    args: GetInstrumentationConfigurationStatusCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: GetInstrumentationConfigurationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceCommand}
+   */
+  getService(
+    args: GetServiceCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<GetServiceCommandOutput>;
+  getService(
+    args: GetServiceCommandInput,
+    cb: (err: any, data?: GetServiceCommandOutput) => void
+  ): void;
+  getService(
+    args: GetServiceCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: GetServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceLevelObjectiveCommand}
+   */
+  getServiceLevelObjective(
+    args: GetServiceLevelObjectiveCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<GetServiceLevelObjectiveCommandOutput>;
+  getServiceLevelObjective(
+    args: GetServiceLevelObjectiveCommandInput,
+    cb: (err: any, data?: GetServiceLevelObjectiveCommandOutput) => void
+  ): void;
+  getServiceLevelObjective(
+    args: GetServiceLevelObjectiveCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: GetServiceLevelObjectiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAuditFindingsCommand}
+   */
+  listAuditFindings(
+    args: ListAuditFindingsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListAuditFindingsCommandOutput>;
+  listAuditFindings(
+    args: ListAuditFindingsCommandInput,
+    cb: (err: any, data?: ListAuditFindingsCommandOutput) => void
+  ): void;
+  listAuditFindings(
+    args: ListAuditFindingsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListAuditFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntityEventsCommand}
+   */
+  listEntityEvents(
+    args: ListEntityEventsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListEntityEventsCommandOutput>;
+  listEntityEvents(
+    args: ListEntityEventsCommandInput,
+    cb: (err: any, data?: ListEntityEventsCommandOutput) => void
+  ): void;
+  listEntityEvents(
+    args: ListEntityEventsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListEntityEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListGroupingAttributeDefinitionsCommand}
+   */
+  listGroupingAttributeDefinitions(): Promise<ListGroupingAttributeDefinitionsCommandOutput>;
+  listGroupingAttributeDefinitions(
+    args: ListGroupingAttributeDefinitionsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListGroupingAttributeDefinitionsCommandOutput>;
+  listGroupingAttributeDefinitions(
+    args: ListGroupingAttributeDefinitionsCommandInput,
+    cb: (err: any, data?: ListGroupingAttributeDefinitionsCommandOutput) => void
+  ): void;
+  listGroupingAttributeDefinitions(
+    args: ListGroupingAttributeDefinitionsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListGroupingAttributeDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInstrumentationConfigurationsCommand}
+   */
+  listInstrumentationConfigurations(
+    args: ListInstrumentationConfigurationsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListInstrumentationConfigurationsCommandOutput>;
+  listInstrumentationConfigurations(
+    args: ListInstrumentationConfigurationsCommandInput,
+    cb: (err: any, data?: ListInstrumentationConfigurationsCommandOutput) => void
+  ): void;
+  listInstrumentationConfigurations(
+    args: ListInstrumentationConfigurationsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListInstrumentationConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceDependenciesCommand}
+   */
+  listServiceDependencies(
+    args: ListServiceDependenciesCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceDependenciesCommandOutput>;
+  listServiceDependencies(
+    args: ListServiceDependenciesCommandInput,
+    cb: (err: any, data?: ListServiceDependenciesCommandOutput) => void
+  ): void;
+  listServiceDependencies(
+    args: ListServiceDependenciesCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceDependenciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceDependentsCommand}
+   */
+  listServiceDependents(
+    args: ListServiceDependentsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceDependentsCommandOutput>;
+  listServiceDependents(
+    args: ListServiceDependentsCommandInput,
+    cb: (err: any, data?: ListServiceDependentsCommandOutput) => void
+  ): void;
+  listServiceDependents(
+    args: ListServiceDependentsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceDependentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceLevelObjectiveExclusionWindowsCommand}
+   */
+  listServiceLevelObjectiveExclusionWindows(
+    args: ListServiceLevelObjectiveExclusionWindowsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceLevelObjectiveExclusionWindowsCommandOutput>;
+  listServiceLevelObjectiveExclusionWindows(
+    args: ListServiceLevelObjectiveExclusionWindowsCommandInput,
+    cb: (err: any, data?: ListServiceLevelObjectiveExclusionWindowsCommandOutput) => void
+  ): void;
+  listServiceLevelObjectiveExclusionWindows(
+    args: ListServiceLevelObjectiveExclusionWindowsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceLevelObjectiveExclusionWindowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceLevelObjectivesCommand}
+   */
+  listServiceLevelObjectives(): Promise<ListServiceLevelObjectivesCommandOutput>;
+  listServiceLevelObjectives(
+    args: ListServiceLevelObjectivesCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceLevelObjectivesCommandOutput>;
+  listServiceLevelObjectives(
+    args: ListServiceLevelObjectivesCommandInput,
+    cb: (err: any, data?: ListServiceLevelObjectivesCommandOutput) => void
+  ): void;
+  listServiceLevelObjectives(
+    args: ListServiceLevelObjectivesCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceLevelObjectivesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceOperationsCommand}
+   */
+  listServiceOperations(
+    args: ListServiceOperationsCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceOperationsCommandOutput>;
+  listServiceOperations(
+    args: ListServiceOperationsCommandInput,
+    cb: (err: any, data?: ListServiceOperationsCommandOutput) => void
+  ): void;
+  listServiceOperations(
+    args: ListServiceOperationsCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServicesCommand}
+   */
+  listServices(
+    args: ListServicesCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServicesCommandOutput>;
+  listServices(
+    args: ListServicesCommandInput,
+    cb: (err: any, data?: ListServicesCommandOutput) => void
+  ): void;
+  listServices(
+    args: ListServicesCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServicesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListServiceStatesCommand}
+   */
+  listServiceStates(
+    args: ListServiceStatesCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListServiceStatesCommandOutput>;
+  listServiceStates(
+    args: ListServiceStatesCommandInput,
+    cb: (err: any, data?: ListServiceStatesCommandOutput) => void
+  ): void;
+  listServiceStates(
+    args: ListServiceStatesCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListServiceStatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutGroupingConfigurationCommand}
+   */
+  putGroupingConfiguration(
+    args: PutGroupingConfigurationCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<PutGroupingConfigurationCommandOutput>;
+  putGroupingConfiguration(
+    args: PutGroupingConfigurationCommandInput,
+    cb: (err: any, data?: PutGroupingConfigurationCommandOutput) => void
+  ): void;
+  putGroupingConfiguration(
+    args: PutGroupingConfigurationCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: PutGroupingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReportInstrumentationConfigurationStatusCommand}
+   */
+  reportInstrumentationConfigurationStatus(
+    args: ReportInstrumentationConfigurationStatusCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<ReportInstrumentationConfigurationStatusCommandOutput>;
+  reportInstrumentationConfigurationStatus(
+    args: ReportInstrumentationConfigurationStatusCommandInput,
+    cb: (err: any, data?: ReportInstrumentationConfigurationStatusCommandOutput) => void
+  ): void;
+  reportInstrumentationConfigurationStatus(
+    args: ReportInstrumentationConfigurationStatusCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: ReportInstrumentationConfigurationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartDiscoveryCommand}
+   */
+  startDiscovery(): Promise<StartDiscoveryCommandOutput>;
+  startDiscovery(
+    args: StartDiscoveryCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<StartDiscoveryCommandOutput>;
+  startDiscovery(
+    args: StartDiscoveryCommandInput,
+    cb: (err: any, data?: StartDiscoveryCommandOutput) => void
+  ): void;
+  startDiscovery(
+    args: StartDiscoveryCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: StartDiscoveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateServiceLevelObjectiveCommand}
+   */
+  updateServiceLevelObjective(
+    args: UpdateServiceLevelObjectiveCommandInput,
+    options?: ApplicationSignalsRequestOptions
+  ): Promise<UpdateServiceLevelObjectiveCommandOutput>;
+  updateServiceLevelObjective(
+    args: UpdateServiceLevelObjectiveCommandInput,
+    cb: (err: any, data?: UpdateServiceLevelObjectiveCommandOutput) => void
+  ): void;
+  updateServiceLevelObjective(
+    args: UpdateServiceLevelObjectiveCommandInput,
+    options: ApplicationSignalsRequestOptions,
+    cb: (err: any, data?: UpdateServiceLevelObjectiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstrumentationConfigurationStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetInstrumentationConfigurationStatusCommandOutput}.
+   */
+  paginateGetInstrumentationConfigurationStatus(
+    args: GetInstrumentationConfigurationStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetInstrumentationConfigurationStatusCommandOutput>;
+
+  /**
+   * @see {@link ListEntityEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntityEventsCommandOutput}.
+   */
+  paginateListEntityEvents(
+    args: ListEntityEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntityEventsCommandOutput>;
+
+  /**
+   * @see {@link ListInstrumentationConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInstrumentationConfigurationsCommandOutput}.
+   */
+  paginateListInstrumentationConfigurations(
+    args: ListInstrumentationConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInstrumentationConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListServiceDependenciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceDependenciesCommandOutput}.
+   */
+  paginateListServiceDependencies(
+    args: ListServiceDependenciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceDependenciesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceDependentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceDependentsCommandOutput}.
+   */
+  paginateListServiceDependents(
+    args: ListServiceDependentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceDependentsCommandOutput>;
+
+  /**
+   * @see {@link ListServiceLevelObjectiveExclusionWindowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceLevelObjectiveExclusionWindowsCommandOutput}.
+   */
+  paginateListServiceLevelObjectiveExclusionWindows(
+    args: ListServiceLevelObjectiveExclusionWindowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceLevelObjectiveExclusionWindowsCommandOutput>;
+
+  /**
+   * @see {@link ListServiceLevelObjectivesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceLevelObjectivesCommandOutput}.
+   */
+  paginateListServiceLevelObjectives(
+    args?: ListServiceLevelObjectivesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceLevelObjectivesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceOperationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceOperationsCommandOutput}.
+   */
+  paginateListServiceOperations(
+    args: ListServiceOperationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceOperationsCommandOutput>;
+
+  /**
+   * @see {@link ListServicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServicesCommandOutput}.
+   */
+  paginateListServices(
+    args: ListServicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServicesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceStatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceStatesCommandOutput}.
+   */
+  paginateListServiceStates(
+    args: ListServiceStatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceStatesCommandOutput>;
+}
+
+/**
+ * <p>Use CloudWatch Application Signals for comprehensive observability of your cloud-based applications. It enables real-time service health dashboards and helps you track long-term performance trends against your business goals. The application-centric view provides you with unified visibility across your applications, services, and dependencies, so you can proactively monitor and efficiently triage any issues that may arise, ensuring optimal customer experience.</p> <p>Application Signals provides the following benefits:</p> <ul> <li> <p>Automatically collect metrics and traces from your applications, and display key metrics such as call volume, availability, latency, faults, and errors. </p> </li> <li> <p>Create and monitor service level objectives (SLOs). </p> </li> <li> <p>See a map of your application topology that Application Signals automatically discovers, that gives you a visual representation of your applications, dependencies, and their connectivity.</p> </li> </ul> <p>Application Signals works with CloudWatch RUM, CloudWatch Synthetics canaries, and Amazon Web Services Service Catalog AppRegistry, to display your client pages, Synthetics canaries, and application names within dashboards and maps.</p>
+ * @public
+ */
+export class ApplicationSignals extends ApplicationSignalsClient implements ApplicationSignals {}
+createAggregatedClient(commands, ApplicationSignals, { paginators });

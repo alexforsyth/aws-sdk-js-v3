@@ -1,0 +1,84 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAccountSettingsRequest, GetAccountSettingsResponse } from "../models/models_0";
+import { GetAccountSettings$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccountSettingsCommand}.
+ */
+export interface GetAccountSettingsCommandInput extends GetAccountSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccountSettingsCommand}.
+ */
+export interface GetAccountSettingsCommandOutput extends GetAccountSettingsResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns account-level settings related to OpenSearch Serverless.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpenSearchServerlessClient, GetAccountSettingsCommand } from "@aws-sdk/client-opensearchserverless"; // ES Modules import
+ * // const { OpenSearchServerlessClient, GetAccountSettingsCommand } = require("@aws-sdk/client-opensearchserverless"); // CommonJS import
+ * // import type { OpenSearchServerlessClientConfig } from "@aws-sdk/client-opensearchserverless";
+ * const config = {}; // type is OpenSearchServerlessClientConfig
+ * const client = new OpenSearchServerlessClient(config);
+ * const input = {};
+ * const command = new GetAccountSettingsCommand(input);
+ * const response = await client.send(command);
+ * // { // GetAccountSettingsResponse
+ * //   accountSettingsDetail: { // AccountSettingsDetail
+ * //     capacityLimits: { // CapacityLimits
+ * //       maxIndexingCapacityInOCU: Number("int"),
+ * //       maxSearchCapacityInOCU: Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetAccountSettingsCommandInput - {@link GetAccountSettingsCommandInput}
+ * @returns {@link GetAccountSettingsCommandOutput}
+ * @see {@link GetAccountSettingsCommandInput} for command's `input` shape.
+ * @see {@link GetAccountSettingsCommandOutput} for command's `response` shape.
+ * @see {@link OpenSearchServerlessClientResolvedConfig | config} for OpenSearchServerlessClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Thrown when an error internal to the service occurs while processing a request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Thrown when the HTTP request contains invalid input or is missing required input.</p>
+ *
+ * @throws {@link OpenSearchServerlessServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearchServerless service.</p>
+ *
+ *
+ * @public
+ */
+export class GetAccountSettingsCommand extends command<GetAccountSettingsCommandInput, GetAccountSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAccountSettings",
+  GetAccountSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAccountSettingsResponse;
+    };
+    sdk: {
+      input: GetAccountSettingsCommandInput;
+      output: GetAccountSettingsCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateCodeRepositoryInput, UpdateCodeRepositoryOutput } from "../models/models_3";
-import {
-  deserializeAws_json1_1UpdateCodeRepositoryCommand,
-  serializeAws_json1_1UpdateCodeRepositoryCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCodeRepositoryInput, UpdateCodeRepositoryOutput } from "../models/models_5";
+import { UpdateCodeRepository$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCodeRepositoryCommand}.
+ */
 export interface UpdateCodeRepositoryCommandInput extends UpdateCodeRepositoryInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCodeRepositoryCommand}.
+ */
 export interface UpdateCodeRepositoryCommandOutput extends UpdateCodeRepositoryOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,53 @@ export interface UpdateCodeRepositoryCommandOutput extends UpdateCodeRepositoryO
  * ```javascript
  * import { SageMakerClient, UpdateCodeRepositoryCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, UpdateCodeRepositoryCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // UpdateCodeRepositoryInput
+ *   CodeRepositoryName: "STRING_VALUE", // required
+ *   GitConfig: { // GitConfigForUpdate
+ *     SecretArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new UpdateCodeRepositoryCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateCodeRepositoryOutput
+ * //   CodeRepositoryArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateCodeRepositoryCommandInput - {@link UpdateCodeRepositoryCommandInput}
+ * @returns {@link UpdateCodeRepositoryCommandOutput}
  * @see {@link UpdateCodeRepositoryCommandInput} for command's `input` shape.
  * @see {@link UpdateCodeRepositoryCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when you attempted to modify a SageMaker entity such as an <code>Experiment</code> or <code>Artifact</code>.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCodeRepositoryCommand extends $Command<
-  UpdateCodeRepositoryCommandInput,
-  UpdateCodeRepositoryCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCodeRepositoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateCodeRepositoryCommandInput, UpdateCodeRepositoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "UpdateCodeRepositoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCodeRepositoryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateCodeRepositoryOutput.filterSensitiveLog,
+export class UpdateCodeRepositoryCommand extends command<UpdateCodeRepositoryCommandInput, UpdateCodeRepositoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCodeRepository",
+  UpdateCodeRepository$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCodeRepositoryInput;
+      output: UpdateCodeRepositoryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateCodeRepositoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCodeRepositoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateCodeRepositoryCommandOutput> {
-    return deserializeAws_json1_1UpdateCodeRepositoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCodeRepositoryCommandInput;
+      output: UpdateCodeRepositoryCommandOutput;
+    };
+  };
 }

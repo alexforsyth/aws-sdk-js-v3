@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { ListFleetMetricsRequest, ListFleetMetricsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListFleetMetricsCommand,
-  serializeAws_restJson1ListFleetMetricsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFleetMetricsRequest, ListFleetMetricsResponse } from "../models/models_1";
+import { ListFleetMetrics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFleetMetricsCommand}.
+ */
 export interface ListFleetMetricsCommandInput extends ListFleetMetricsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFleetMetricsCommand}.
+ */
 export interface ListFleetMetricsCommandOutput extends ListFleetMetricsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,69 @@ export interface ListFleetMetricsCommandOutput extends ListFleetMetricsResponse,
  * ```javascript
  * import { IoTClient, ListFleetMetricsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, ListFleetMetricsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // ListFleetMetricsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListFleetMetricsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFleetMetricsResponse
+ * //   fleetMetrics: [ // FleetMetricNameAndArnList
+ * //     { // FleetMetricNameAndArn
+ * //       metricName: "STRING_VALUE",
+ * //       metricArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFleetMetricsCommandInput - {@link ListFleetMetricsCommandInput}
+ * @returns {@link ListFleetMetricsCommandOutput}
  * @see {@link ListFleetMetricsCommandInput} for command's `input` shape.
  * @see {@link ListFleetMetricsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class ListFleetMetricsCommand extends $Command<
-  ListFleetMetricsCommandInput,
-  ListFleetMetricsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFleetMetricsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFleetMetricsCommandInput, ListFleetMetricsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "ListFleetMetricsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFleetMetricsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFleetMetricsResponse.filterSensitiveLog,
+export class ListFleetMetricsCommand extends command<ListFleetMetricsCommandInput, ListFleetMetricsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFleetMetrics",
+  ListFleetMetrics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFleetMetricsRequest;
+      output: ListFleetMetricsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFleetMetricsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFleetMetricsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFleetMetricsCommandOutput> {
-    return deserializeAws_restJson1ListFleetMetricsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFleetMetricsCommandInput;
+      output: ListFleetMetricsCommandOutput;
+    };
+  };
 }

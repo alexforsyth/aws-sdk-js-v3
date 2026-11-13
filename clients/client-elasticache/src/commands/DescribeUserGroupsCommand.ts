@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElastiCacheClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElastiCacheClient";
-import { DescribeUserGroupsMessage, DescribeUserGroupsResult } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeUserGroupsCommand,
-  serializeAws_queryDescribeUserGroupsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserGroupsMessage, DescribeUserGroupsResult } from "../models/models_0";
+import { DescribeUserGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserGroupsCommand}.
+ */
 export interface DescribeUserGroupsCommandInput extends DescribeUserGroupsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserGroupsCommand}.
+ */
 export interface DescribeUserGroupsCommandOutput extends DescribeUserGroupsResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,84 @@ export interface DescribeUserGroupsCommandOutput extends DescribeUserGroupsResul
  * ```javascript
  * import { ElastiCacheClient, DescribeUserGroupsCommand } from "@aws-sdk/client-elasticache"; // ES Modules import
  * // const { ElastiCacheClient, DescribeUserGroupsCommand } = require("@aws-sdk/client-elasticache"); // CommonJS import
+ * // import type { ElastiCacheClientConfig } from "@aws-sdk/client-elasticache";
+ * const config = {}; // type is ElastiCacheClientConfig
  * const client = new ElastiCacheClient(config);
+ * const input = { // DescribeUserGroupsMessage
+ *   UserGroupId: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeUserGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserGroupsResult
+ * //   UserGroups: [ // UserGroupList
+ * //     { // UserGroup
+ * //       UserGroupId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Engine: "STRING_VALUE",
+ * //       UserIds: [ // UserIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MinimumEngineVersion: "STRING_VALUE",
+ * //       PendingChanges: { // UserGroupPendingChanges
+ * //         UserIdsToRemove: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         UserIdsToAdd: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       ReplicationGroups: [ // UGReplicationGroupIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ServerlessCaches: [ // UGServerlessCacheIdList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ARN: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserGroupsCommandInput - {@link DescribeUserGroupsCommandInput}
+ * @returns {@link DescribeUserGroupsCommandOutput}
  * @see {@link DescribeUserGroupsCommandInput} for command's `input` shape.
  * @see {@link DescribeUserGroupsCommandOutput} for command's `response` shape.
- * @see {@link ElastiCacheClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElastiCacheClientResolvedConfig | config} for ElastiCacheClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The specified service linked role (SLR) was not found.</p>
+ *
+ * @throws {@link UserGroupNotFoundFault} (client fault)
+ *  <p>The user group was not found or does not exist</p>
+ *
+ * @throws {@link ElastiCacheServiceException}
+ * <p>Base exception class for all service exceptions from ElastiCache service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserGroupsCommand extends $Command<
-  DescribeUserGroupsCommandInput,
-  DescribeUserGroupsCommandOutput,
-  ElastiCacheClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElastiCacheClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserGroupsCommandInput, DescribeUserGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElastiCacheClient";
-    const commandName = "DescribeUserGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserGroupsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserGroupsResult.filterSensitiveLog,
+export class DescribeUserGroupsCommand extends command<DescribeUserGroupsCommandInput, DescribeUserGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUserGroups",
+  DescribeUserGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserGroupsMessage;
+      output: DescribeUserGroupsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeUserGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserGroupsCommandOutput> {
-    return deserializeAws_queryDescribeUserGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserGroupsCommandInput;
+      output: DescribeUserGroupsCommandOutput;
+    };
+  };
 }

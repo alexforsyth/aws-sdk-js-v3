@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTemplateRequest, DeleteTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteTemplateCommand,
-  serializeAws_restJson1DeleteTemplateCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTemplateRequest, DeleteTemplateResponse } from "../models/models_3";
+import { DeleteTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTemplateCommand}.
+ */
 export interface DeleteTemplateCommandInput extends DeleteTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTemplateCommand}.
+ */
 export interface DeleteTemplateCommandOutput extends DeleteTemplateResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,76 @@ export interface DeleteTemplateCommandOutput extends DeleteTemplateResponse, __M
  * ```javascript
  * import { QuickSightClient, DeleteTemplateCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, DeleteTemplateCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // DeleteTemplateRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   TemplateId: "STRING_VALUE", // required
+ *   VersionNumber: Number("long"),
+ * };
  * const command = new DeleteTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTemplateResponse
+ * //   RequestId: "STRING_VALUE",
+ * //   Arn: "STRING_VALUE",
+ * //   TemplateId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param DeleteTemplateCommandInput - {@link DeleteTemplateCommandInput}
+ * @returns {@link DeleteTemplateCommandOutput}
  * @see {@link DeleteTemplateCommandInput} for command's `input` shape.
  * @see {@link DeleteTemplateCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit is exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTemplateCommand extends $Command<
-  DeleteTemplateCommandInput,
-  DeleteTemplateCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTemplateCommandInput, DeleteTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "DeleteTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTemplateResponse.filterSensitiveLog,
+export class DeleteTemplateCommand extends command<DeleteTemplateCommandInput, DeleteTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTemplate",
+  DeleteTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTemplateRequest;
+      output: DeleteTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTemplateCommandOutput> {
-    return deserializeAws_restJson1DeleteTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTemplateCommandInput;
+      output: DeleteTemplateCommandOutput;
+    };
+  };
 }

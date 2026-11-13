@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexModelsV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexModelsV2Client";
-import { ListBuiltInIntentsRequest, ListBuiltInIntentsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBuiltInIntentsCommand,
-  serializeAws_restJson1ListBuiltInIntentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBuiltInIntentsRequest, ListBuiltInIntentsResponse } from "../models/models_1";
+import { ListBuiltInIntents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBuiltInIntentsCommand}.
+ */
 export interface ListBuiltInIntentsCommandInput extends ListBuiltInIntentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBuiltInIntentsCommand}.
+ */
 export interface ListBuiltInIntentsCommandOutput extends ListBuiltInIntentsResponse, __MetadataBearer {}
 
 /**
@@ -27,74 +28,81 @@ export interface ListBuiltInIntentsCommandOutput extends ListBuiltInIntentsRespo
  *          <p>To use a built-in intent as a the base for your own intent, include
  *          the built-in intent signature in the <code>parentIntentSignature</code>
  *          parameter when you call the <code>CreateIntent</code> operation. For
- *          more information, see <a>CreateIntent</a>.</p>
+ *          more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html">CreateIntent</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LexModelsV2Client, ListBuiltInIntentsCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
  * // const { LexModelsV2Client, ListBuiltInIntentsCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
  * const client = new LexModelsV2Client(config);
+ * const input = { // ListBuiltInIntentsRequest
+ *   localeId: "STRING_VALUE", // required
+ *   sortBy: { // BuiltInIntentSortBy
+ *     attribute: "IntentSignature", // required
+ *     order: "Ascending" || "Descending", // required
+ *   },
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListBuiltInIntentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBuiltInIntentsResponse
+ * //   builtInIntentSummaries: [ // BuiltInIntentSummaryList
+ * //     { // BuiltInIntentSummary
+ * //       intentSignature: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * //   localeId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBuiltInIntentsCommandInput - {@link ListBuiltInIntentsCommandInput}
+ * @returns {@link ListBuiltInIntentsCommandOutput}
  * @see {@link ListBuiltInIntentsCommandInput} for command's `input` shape.
  * @see {@link ListBuiltInIntentsCommandOutput} for command's `response` shape.
- * @see {@link LexModelsV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have reached a quota for your bot. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListBuiltInIntentsCommand extends $Command<
-  ListBuiltInIntentsCommandInput,
-  ListBuiltInIntentsCommandOutput,
-  LexModelsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBuiltInIntentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBuiltInIntentsCommandInput, ListBuiltInIntentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelsV2Client";
-    const commandName = "ListBuiltInIntentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBuiltInIntentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBuiltInIntentsResponse.filterSensitiveLog,
+export class ListBuiltInIntentsCommand extends command<ListBuiltInIntentsCommandInput, ListBuiltInIntentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBuiltInIntents",
+  ListBuiltInIntents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBuiltInIntentsRequest;
+      output: ListBuiltInIntentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBuiltInIntentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBuiltInIntentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBuiltInIntentsCommandOutput> {
-    return deserializeAws_restJson1ListBuiltInIntentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBuiltInIntentsCommandInput;
+      output: ListBuiltInIntentsCommandOutput;
+    };
+  };
 }

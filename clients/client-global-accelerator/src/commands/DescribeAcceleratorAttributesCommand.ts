@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { DescribeAcceleratorAttributesRequest, DescribeAcceleratorAttributesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAcceleratorAttributesCommand,
-  serializeAws_json1_1DescribeAcceleratorAttributesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAcceleratorAttributesRequest, DescribeAcceleratorAttributesResponse } from "../models/models_0";
+import { DescribeAcceleratorAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAcceleratorAttributesCommand}.
+ */
 export interface DescribeAcceleratorAttributesCommandInput extends DescribeAcceleratorAttributesRequest {}
-export interface DescribeAcceleratorAttributesCommandOutput
-  extends DescribeAcceleratorAttributesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAcceleratorAttributesCommand}.
+ */
+export interface DescribeAcceleratorAttributesCommandOutput extends DescribeAcceleratorAttributesResponse, __MetadataBearer {}
 
 /**
  * <p>Describe the attributes of an accelerator.
@@ -35,71 +30,60 @@ export interface DescribeAcceleratorAttributesCommandOutput
  * ```javascript
  * import { GlobalAcceleratorClient, DescribeAcceleratorAttributesCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, DescribeAcceleratorAttributesCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // DescribeAcceleratorAttributesRequest
+ *   AcceleratorArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAcceleratorAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAcceleratorAttributesResponse
+ * //   AcceleratorAttributes: { // AcceleratorAttributes
+ * //     FlowLogsEnabled: true || false,
+ * //     FlowLogsS3Bucket: "STRING_VALUE",
+ * //     FlowLogsS3Prefix: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAcceleratorAttributesCommandInput - {@link DescribeAcceleratorAttributesCommandInput}
+ * @returns {@link DescribeAcceleratorAttributesCommandOutput}
  * @see {@link DescribeAcceleratorAttributesCommandInput} for command's `input` shape.
  * @see {@link DescribeAcceleratorAttributesCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link AcceleratorNotFoundException} (client fault)
+ *  <p>The accelerator that you specified doesn't exist.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAcceleratorAttributesCommand extends $Command<
-  DescribeAcceleratorAttributesCommandInput,
-  DescribeAcceleratorAttributesCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAcceleratorAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAcceleratorAttributesCommandInput, DescribeAcceleratorAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "DescribeAcceleratorAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAcceleratorAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAcceleratorAttributesResponse.filterSensitiveLog,
+export class DescribeAcceleratorAttributesCommand extends command<DescribeAcceleratorAttributesCommandInput, DescribeAcceleratorAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAcceleratorAttributes",
+  DescribeAcceleratorAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAcceleratorAttributesRequest;
+      output: DescribeAcceleratorAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAcceleratorAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAcceleratorAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAcceleratorAttributesCommandOutput> {
-    return deserializeAws_json1_1DescribeAcceleratorAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAcceleratorAttributesCommandInput;
+      output: DescribeAcceleratorAttributesCommandOutput;
+    };
+  };
 }

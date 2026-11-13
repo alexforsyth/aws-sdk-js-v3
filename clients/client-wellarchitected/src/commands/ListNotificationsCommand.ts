@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListNotificationsInput, ListNotificationsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListNotificationsCommand,
-  serializeAws_restJson1ListNotificationsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WellArchitectedClientResolvedConfig } from "../WellArchitectedClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListNotificationsInput, ListNotificationsOutput } from "../models/models_0";
+import { ListNotifications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListNotificationsCommand}.
+ */
 export interface ListNotificationsCommandInput extends ListNotificationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListNotificationsCommand}.
+ */
 export interface ListNotificationsCommandOutput extends ListNotificationsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,77 @@ export interface ListNotificationsCommandOutput extends ListNotificationsOutput,
  * ```javascript
  * import { WellArchitectedClient, ListNotificationsCommand } from "@aws-sdk/client-wellarchitected"; // ES Modules import
  * // const { WellArchitectedClient, ListNotificationsCommand } = require("@aws-sdk/client-wellarchitected"); // CommonJS import
+ * // import type { WellArchitectedClientConfig } from "@aws-sdk/client-wellarchitected";
+ * const config = {}; // type is WellArchitectedClientConfig
  * const client = new WellArchitectedClient(config);
+ * const input = { // ListNotificationsInput
+ *   WorkloadId: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   ResourceArn: "STRING_VALUE",
+ * };
  * const command = new ListNotificationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListNotificationsOutput
+ * //   NotificationSummaries: [ // NotificationSummaries
+ * //     { // NotificationSummary
+ * //       Type: "LENS_VERSION_UPGRADED" || "LENS_VERSION_DEPRECATED",
+ * //       LensUpgradeSummary: { // LensUpgradeSummary
+ * //         WorkloadId: "STRING_VALUE",
+ * //         WorkloadName: "STRING_VALUE",
+ * //         LensAlias: "STRING_VALUE",
+ * //         LensArn: "STRING_VALUE",
+ * //         CurrentLensVersion: "STRING_VALUE",
+ * //         LatestLensVersion: "STRING_VALUE",
+ * //         ResourceArn: "STRING_VALUE",
+ * //         ResourceName: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListNotificationsCommandInput - {@link ListNotificationsCommandInput}
+ * @returns {@link ListNotificationsCommandOutput}
  * @see {@link ListNotificationsCommandInput} for command's `input` shape.
  * @see {@link ListNotificationsCommandOutput} for command's `response` shape.
- * @see {@link WellArchitectedClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WellArchitectedClientResolvedConfig | config} for WellArchitectedClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is a problem with the Well-Architected Tool API service.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input is not valid.</p>
+ *
+ * @throws {@link WellArchitectedServiceException}
+ * <p>Base exception class for all service exceptions from WellArchitected service.</p>
+ *
+ *
+ * @public
  */
-export class ListNotificationsCommand extends $Command<
-  ListNotificationsCommandInput,
-  ListNotificationsCommandOutput,
-  WellArchitectedClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListNotificationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WellArchitectedClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListNotificationsCommandInput, ListNotificationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WellArchitectedClient";
-    const commandName = "ListNotificationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListNotificationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListNotificationsOutput.filterSensitiveLog,
+export class ListNotificationsCommand extends command<ListNotificationsCommandInput, ListNotificationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListNotifications",
+  ListNotifications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListNotificationsInput;
+      output: ListNotificationsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListNotificationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListNotificationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListNotificationsCommandOutput> {
-    return deserializeAws_restJson1ListNotificationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListNotificationsCommandInput;
+      output: ListNotificationsCommandOutput;
+    };
+  };
 }

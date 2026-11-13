@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { APIGateway } from "../APIGateway";
 import { APIGatewayClient } from "../APIGatewayClient";
 import {
   GetDeploymentsCommand,
   GetDeploymentsCommandInput,
   GetDeploymentsCommandOutput,
 } from "../commands/GetDeploymentsCommand";
-import { APIGatewayPaginationConfiguration } from "./Interfaces";
+import type { APIGatewayPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: APIGatewayClient,
-  input: GetDeploymentsCommandInput,
-  ...args: any
-): Promise<GetDeploymentsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new GetDeploymentsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: APIGateway,
-  input: GetDeploymentsCommandInput,
-  ...args: any
-): Promise<GetDeploymentsCommandOutput> => {
-  // @ts-ignore
-  return await client.getDeployments(input, ...args);
-};
-export async function* paginateGetDeployments(
+export const paginateGetDeployments: (
   config: APIGatewayPaginationConfiguration,
   input: GetDeploymentsCommandInput,
-  ...additionalArguments: any
-): Paginator<GetDeploymentsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.position
-  let token: typeof input.position | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: GetDeploymentsCommandOutput;
-  while (hasNext) {
-    input.position = token;
-    input["limit"] = config.pageSize;
-    if (config.client instanceof APIGateway) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof APIGatewayClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected APIGateway | APIGatewayClient");
-    }
-    yield page;
-    token = page.position;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<GetDeploymentsCommandOutput> = createPaginator<
+  APIGatewayPaginationConfiguration,
+  GetDeploymentsCommandInput,
+  GetDeploymentsCommandOutput
+>(APIGatewayClient, GetDeploymentsCommand, "position", "position", "limit");

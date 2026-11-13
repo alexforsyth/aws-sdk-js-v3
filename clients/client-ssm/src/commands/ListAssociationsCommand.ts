@@ -1,97 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAssociationsRequest, ListAssociationsResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListAssociationsCommand,
-  serializeAws_json1_1ListAssociationsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssociationsRequest, ListAssociationsResult } from "../models/models_1";
+import { ListAssociations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssociationsCommand}.
+ */
 export interface ListAssociationsCommandInput extends ListAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssociationsCommand}.
+ */
 export interface ListAssociationsCommandOutput extends ListAssociationsResult, __MetadataBearer {}
 
 /**
  * <p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You
- *    can limit the results to a specific State Manager association document or instance by specifying
- *    a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>
+ *    can limit the results to a specific State Manager association document or managed node by
+ *    specifying a filter. State Manager is a tool in Amazon Web Services Systems Manager.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, ListAssociationsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, ListAssociationsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // ListAssociationsRequest
+ *   AssociationFilterList: [ // AssociationFilterList
+ *     { // AssociationFilter
+ *       key: "InstanceId" || "Name" || "AssociationId" || "AssociationStatusName" || "LastExecutedBefore" || "LastExecutedAfter" || "AssociationName" || "ResourceGroupName" || "CloudConnectorId", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssociationsResult
+ * //   Associations: [ // AssociationList
+ * //     { // Association
+ * //       Name: "STRING_VALUE",
+ * //       InstanceId: "STRING_VALUE",
+ * //       AssociationId: "STRING_VALUE",
+ * //       AssociationVersion: "STRING_VALUE",
+ * //       DocumentVersion: "STRING_VALUE",
+ * //       Targets: [ // Targets
+ * //         { // Target
+ * //           Key: "STRING_VALUE",
+ * //           Values: [ // TargetValues
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       LastExecutionDate: new Date("TIMESTAMP"),
+ * //       Overview: { // AssociationOverview
+ * //         Status: "STRING_VALUE",
+ * //         DetailedStatus: "STRING_VALUE",
+ * //         AssociationStatusAggregatedCount: { // AssociationStatusAggregatedCount
+ * //           "<keys>": Number("int"),
+ * //         },
+ * //       },
+ * //       ScheduleExpression: "STRING_VALUE",
+ * //       AssociationName: "STRING_VALUE",
+ * //       ScheduleOffset: Number("int"),
+ * //       Duration: Number("int"),
+ * //       TargetMaps: [ // TargetMaps
+ * //         { // TargetMap
+ * //           "<keys>": [ // TargetMapValueList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssociationsCommandInput - {@link ListAssociationsCommandInput}
+ * @returns {@link ListAssociationsCommandOutput}
  * @see {@link ListAssociationsCommandInput} for command's `input` shape.
  * @see {@link ListAssociationsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The specified token isn't valid.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssociationsCommand extends $Command<
-  ListAssociationsCommandInput,
-  ListAssociationsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssociationsCommandInput, ListAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "ListAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssociationsResult.filterSensitiveLog,
+export class ListAssociationsCommand extends command<ListAssociationsCommandInput, ListAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssociations",
+  ListAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssociationsRequest;
+      output: ListAssociationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssociationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAssociationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssociationsCommandOutput> {
-    return deserializeAws_json1_1ListAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssociationsCommandInput;
+      output: ListAssociationsCommandOutput;
+    };
+  };
 }

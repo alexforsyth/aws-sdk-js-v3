@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import { DisassociateMemberRequest, DisassociateMemberResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateMemberCommand,
-  serializeAws_restJson1DisassociateMemberCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateMemberRequest, DisassociateMemberResponse } from "../models/models_0";
+import { DisassociateMember$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateMemberCommand}.
+ */
 export interface DisassociateMemberCommandInput extends DisassociateMemberRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateMemberCommand}.
+ */
 export interface DisassociateMemberCommandOutput extends DisassociateMemberResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,66 @@ export interface DisassociateMemberCommandOutput extends DisassociateMemberRespo
  * ```javascript
  * import { Macie2Client, DisassociateMemberCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, DisassociateMemberCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // DisassociateMemberRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateMemberCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateMemberCommandInput - {@link DisassociateMemberCommandInput}
+ * @returns {@link DisassociateMemberCommandOutput}
  * @see {@link DisassociateMemberCommandInput} for command's `input` shape.
  * @see {@link DisassociateMemberCommandOutput} for command's `response` shape.
- * @see {@link Macie2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateMemberCommand extends $Command<
-  DisassociateMemberCommandInput,
-  DisassociateMemberCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateMemberCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateMemberCommandInput, DisassociateMemberCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "DisassociateMemberCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateMemberRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateMemberResponse.filterSensitiveLog,
+export class DisassociateMemberCommand extends command<DisassociateMemberCommandInput, DisassociateMemberCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateMember",
+  DisassociateMember$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateMemberRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateMemberCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateMemberCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisassociateMemberCommandOutput> {
-    return deserializeAws_restJson1DisassociateMemberCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateMemberCommandInput;
+      output: DisassociateMemberCommandOutput;
+    };
+  };
 }

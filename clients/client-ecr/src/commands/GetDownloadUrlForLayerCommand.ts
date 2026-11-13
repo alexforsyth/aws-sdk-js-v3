@@ -1,30 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { GetDownloadUrlForLayerRequest, GetDownloadUrlForLayerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDownloadUrlForLayerCommand,
-  serializeAws_json1_1GetDownloadUrlForLayerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDownloadUrlForLayerRequest, GetDownloadUrlForLayerResponse } from "../models/models_0";
+import { GetDownloadUrlForLayer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDownloadUrlForLayerCommand}.
+ */
 export interface GetDownloadUrlForLayerCommandInput extends GetDownloadUrlForLayerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDownloadUrlForLayerCommand}.
+ */
 export interface GetDownloadUrlForLayerCommandOutput extends GetDownloadUrlForLayerResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can
  *             only get URLs for image layers that are referenced in an image.</p>
- *         <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer
+ *          <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer
  *             that is not already cached.</p>
  *          <note>
  *             <p>This operation is used by the Amazon ECR proxy and is not generally used by
@@ -35,68 +36,73 @@ export interface GetDownloadUrlForLayerCommandOutput extends GetDownloadUrlForLa
  * ```javascript
  * import { ECRClient, GetDownloadUrlForLayerCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, GetDownloadUrlForLayerCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // GetDownloadUrlForLayerRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   layerDigest: "STRING_VALUE", // required
+ * };
  * const command = new GetDownloadUrlForLayerCommand(input);
  * const response = await client.send(command);
+ * // { // GetDownloadUrlForLayerResponse
+ * //   downloadUrl: "STRING_VALUE",
+ * //   layerDigest: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDownloadUrlForLayerCommandInput - {@link GetDownloadUrlForLayerCommandInput}
+ * @returns {@link GetDownloadUrlForLayerCommandOutput}
  * @see {@link GetDownloadUrlForLayerCommandInput} for command's `input` shape.
  * @see {@link GetDownloadUrlForLayerCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link LayerInaccessibleException} (client fault)
+ *  <p>The specified layer is not available because it is not associated with an image.
+ *             Unassociated image layers may be cleaned up at any time.</p>
+ *
+ * @throws {@link LayersNotFoundException} (client fault)
+ *  <p>The specified layers could not be found, or the specified layer is not valid for this
+ *             repository.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link UnableToGetUpstreamLayerException} (client fault)
+ *  <p>There was an issue getting the upstream layer matching the pull through cache
+ *             rule.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class GetDownloadUrlForLayerCommand extends $Command<
-  GetDownloadUrlForLayerCommandInput,
-  GetDownloadUrlForLayerCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDownloadUrlForLayerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDownloadUrlForLayerCommandInput, GetDownloadUrlForLayerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "GetDownloadUrlForLayerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDownloadUrlForLayerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDownloadUrlForLayerResponse.filterSensitiveLog,
+export class GetDownloadUrlForLayerCommand extends command<GetDownloadUrlForLayerCommandInput, GetDownloadUrlForLayerCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDownloadUrlForLayer",
+  GetDownloadUrlForLayer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDownloadUrlForLayerRequest;
+      output: GetDownloadUrlForLayerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDownloadUrlForLayerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDownloadUrlForLayerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDownloadUrlForLayerCommandOutput> {
-    return deserializeAws_json1_1GetDownloadUrlForLayerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDownloadUrlForLayerCommandInput;
+      output: GetDownloadUrlForLayerCommandOutput;
+    };
+  };
 }

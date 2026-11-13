@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { CreatePlatformVersionRequest, CreatePlatformVersionResult } from "../models/models_0";
-import {
-  deserializeAws_queryCreatePlatformVersionCommand,
-  serializeAws_queryCreatePlatformVersionCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePlatformVersionRequest, CreatePlatformVersionResult } from "../models/models_0";
+import { CreatePlatformVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePlatformVersionCommand}.
+ */
 export interface CreatePlatformVersionCommandInput extends CreatePlatformVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePlatformVersionCommand}.
+ */
 export interface CreatePlatformVersionCommandOutput extends CreatePlatformVersionResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface CreatePlatformVersionCommandOutput extends CreatePlatformVersio
  * ```javascript
  * import { ElasticBeanstalkClient, CreatePlatformVersionCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, CreatePlatformVersionCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // CreatePlatformVersionRequest
+ *   PlatformName: "STRING_VALUE", // required
+ *   PlatformVersion: "STRING_VALUE", // required
+ *   PlatformDefinitionBundle: { // S3Location
+ *     S3Bucket: "STRING_VALUE",
+ *     S3Key: "STRING_VALUE",
+ *   },
+ *   EnvironmentName: "STRING_VALUE",
+ *   OptionSettings: [ // ConfigurationOptionSettingsList
+ *     { // ConfigurationOptionSetting
+ *       ResourceName: "STRING_VALUE",
+ *       Namespace: "STRING_VALUE",
+ *       OptionName: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreatePlatformVersionCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePlatformVersionResult
+ * //   PlatformSummary: { // PlatformSummary
+ * //     PlatformArn: "STRING_VALUE",
+ * //     PlatformOwner: "STRING_VALUE",
+ * //     PlatformStatus: "Creating" || "Failed" || "Ready" || "Deleting" || "Deleted",
+ * //     PlatformCategory: "STRING_VALUE",
+ * //     OperatingSystemName: "STRING_VALUE",
+ * //     OperatingSystemVersion: "STRING_VALUE",
+ * //     SupportedTierList: [ // SupportedTierList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SupportedAddonList: [ // SupportedAddonList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     PlatformLifecycleState: "STRING_VALUE",
+ * //     PlatformVersion: "STRING_VALUE",
+ * //     PlatformBranchName: "STRING_VALUE",
+ * //     PlatformBranchLifecycleState: "STRING_VALUE",
+ * //   },
+ * //   Builder: { // Builder
+ * //     ARN: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreatePlatformVersionCommandInput - {@link CreatePlatformVersionCommandInput}
+ * @returns {@link CreatePlatformVersionCommandOutput}
  * @see {@link CreatePlatformVersionCommandInput} for command's `input` shape.
  * @see {@link CreatePlatformVersionCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkServiceException} (client fault)
+ *  <p>A generic service exception has occurred.</p>
+ *
+ * @throws {@link InsufficientPrivilegesException} (client fault)
+ *  <p>The specified account does not have sufficient privileges for one or more Amazon Web Services services.</p>
+ *
+ * @throws {@link TooManyPlatformsException} (client fault)
+ *  <p>You have exceeded the maximum number of allowed platforms associated with the account.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePlatformVersionCommand extends $Command<
-  CreatePlatformVersionCommandInput,
-  CreatePlatformVersionCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePlatformVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePlatformVersionCommandInput, CreatePlatformVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "CreatePlatformVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePlatformVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreatePlatformVersionResult.filterSensitiveLog,
+export class CreatePlatformVersionCommand extends command<CreatePlatformVersionCommandInput, CreatePlatformVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePlatformVersion",
+  CreatePlatformVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePlatformVersionRequest;
+      output: CreatePlatformVersionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePlatformVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreatePlatformVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePlatformVersionCommandOutput> {
-    return deserializeAws_queryCreatePlatformVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePlatformVersionCommandInput;
+      output: CreatePlatformVersionCommandOutput;
+    };
+  };
 }

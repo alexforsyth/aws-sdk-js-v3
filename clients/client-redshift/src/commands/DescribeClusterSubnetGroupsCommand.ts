@@ -1,36 +1,37 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ClusterSubnetGroupMessage, DescribeClusterSubnetGroupsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeClusterSubnetGroupsCommand,
-  serializeAws_queryDescribeClusterSubnetGroupsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ClusterSubnetGroupMessage, DescribeClusterSubnetGroupsMessage } from "../models/models_0";
+import { DescribeClusterSubnetGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClusterSubnetGroupsCommand}.
+ */
 export interface DescribeClusterSubnetGroupsCommandInput extends DescribeClusterSubnetGroupsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClusterSubnetGroupsCommand}.
+ */
 export interface DescribeClusterSubnetGroupsCommandOutput extends ClusterSubnetGroupMessage, __MetadataBearer {}
 
 /**
  * <p>Returns one or more cluster subnet group objects, which contain metadata about your
  *             cluster subnet groups. By default, this operation returns information about all cluster
  *             subnet groups that are defined in your Amazon Web Services account.</p>
- *         <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns
+ *          <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns
  *             all subnet groups that match any combination of the specified keys and values. For
  *             example, if you have <code>owner</code> and <code>environment</code> for tag keys, and
  *                 <code>admin</code> and <code>test</code> for tag values, all subnet groups that have
  *             any combination of those values are returned.</p>
- *         <p>If both tag keys and values are omitted from the request, subnet groups are
+ *          <p>If both tag keys and values are omitted from the request, subnet groups are
  *             returned regardless of whether they have tag keys or values associated with
  *             them.</p>
  * @example
@@ -38,71 +39,93 @@ export interface DescribeClusterSubnetGroupsCommandOutput extends ClusterSubnetG
  * ```javascript
  * import { RedshiftClient, DescribeClusterSubnetGroupsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeClusterSubnetGroupsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeClusterSubnetGroupsMessage
+ *   ClusterSubnetGroupName: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   TagKeys: [ // TagKeyList
+ *     "STRING_VALUE",
+ *   ],
+ *   TagValues: [ // TagValueList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeClusterSubnetGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ClusterSubnetGroupMessage
+ * //   Marker: "STRING_VALUE",
+ * //   ClusterSubnetGroups: [ // ClusterSubnetGroups
+ * //     { // ClusterSubnetGroup
+ * //       ClusterSubnetGroupName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       VpcId: "STRING_VALUE",
+ * //       SubnetGroupStatus: "STRING_VALUE",
+ * //       Subnets: [ // SubnetList
+ * //         { // Subnet
+ * //           SubnetIdentifier: "STRING_VALUE",
+ * //           SubnetAvailabilityZone: { // AvailabilityZone
+ * //             Name: "STRING_VALUE",
+ * //             SupportedPlatforms: [ // SupportedPlatformsList
+ * //               { // SupportedPlatform
+ * //                 Name: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //           SubnetStatus: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       SupportedClusterIpAddressTypes: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeClusterSubnetGroupsCommandInput - {@link DescribeClusterSubnetGroupsCommandInput}
+ * @returns {@link DescribeClusterSubnetGroupsCommandOutput}
  * @see {@link DescribeClusterSubnetGroupsCommandInput} for command's `input` shape.
  * @see {@link DescribeClusterSubnetGroupsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterSubnetGroupNotFoundFault} (client fault)
+ *  <p>The cluster subnet group name does not refer to an existing cluster subnet
+ *             group.</p>
+ *
+ * @throws {@link InvalidTagFault} (client fault)
+ *  <p>The tag is invalid.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClusterSubnetGroupsCommand extends $Command<
-  DescribeClusterSubnetGroupsCommandInput,
-  DescribeClusterSubnetGroupsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClusterSubnetGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClusterSubnetGroupsCommandInput, DescribeClusterSubnetGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeClusterSubnetGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClusterSubnetGroupsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ClusterSubnetGroupMessage.filterSensitiveLog,
+export class DescribeClusterSubnetGroupsCommand extends command<DescribeClusterSubnetGroupsCommandInput, DescribeClusterSubnetGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeClusterSubnetGroups",
+  DescribeClusterSubnetGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClusterSubnetGroupsMessage;
+      output: ClusterSubnetGroupMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClusterSubnetGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeClusterSubnetGroupsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeClusterSubnetGroupsCommandOutput> {
-    return deserializeAws_queryDescribeClusterSubnetGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClusterSubnetGroupsCommandInput;
+      output: DescribeClusterSubnetGroupsCommandOutput;
+    };
+  };
 }

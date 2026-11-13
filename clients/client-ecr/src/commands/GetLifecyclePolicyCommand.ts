@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { GetLifecyclePolicyRequest, GetLifecyclePolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetLifecyclePolicyCommand,
-  serializeAws_json1_1GetLifecyclePolicyCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLifecyclePolicyRequest, GetLifecyclePolicyResponse } from "../models/models_0";
+import { GetLifecyclePolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLifecyclePolicyCommand}.
+ */
 export interface GetLifecyclePolicyCommandInput extends GetLifecyclePolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLifecyclePolicyCommand}.
+ */
 export interface GetLifecyclePolicyCommandOutput extends GetLifecyclePolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface GetLifecyclePolicyCommandOutput extends GetLifecyclePolicyRespo
  * ```javascript
  * import { ECRClient, GetLifecyclePolicyCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, GetLifecyclePolicyCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // GetLifecyclePolicyRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ * };
  * const command = new GetLifecyclePolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetLifecyclePolicyResponse
+ * //   registryId: "STRING_VALUE",
+ * //   repositoryName: "STRING_VALUE",
+ * //   lifecyclePolicyText: "STRING_VALUE",
+ * //   lastEvaluatedAt: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetLifecyclePolicyCommandInput - {@link GetLifecyclePolicyCommandInput}
+ * @returns {@link GetLifecyclePolicyCommandOutput}
  * @see {@link GetLifecyclePolicyCommandInput} for command's `input` shape.
  * @see {@link GetLifecyclePolicyCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link LifecyclePolicyNotFoundException} (client fault)
+ *  <p>The lifecycle policy could not be found, and no policy is set to the
+ *             repository.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There was an exception validating this request.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class GetLifecyclePolicyCommand extends $Command<
-  GetLifecyclePolicyCommandInput,
-  GetLifecyclePolicyCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLifecyclePolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLifecyclePolicyCommandInput, GetLifecyclePolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "GetLifecyclePolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLifecyclePolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLifecyclePolicyResponse.filterSensitiveLog,
+export class GetLifecyclePolicyCommand extends command<GetLifecyclePolicyCommandInput, GetLifecyclePolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLifecyclePolicy",
+  GetLifecyclePolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLifecyclePolicyRequest;
+      output: GetLifecyclePolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLifecyclePolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetLifecyclePolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLifecyclePolicyCommandOutput> {
-    return deserializeAws_json1_1GetLifecyclePolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLifecyclePolicyCommandInput;
+      output: GetLifecyclePolicyCommandOutput;
+    };
+  };
 }

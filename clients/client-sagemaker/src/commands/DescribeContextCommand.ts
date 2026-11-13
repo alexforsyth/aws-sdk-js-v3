@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeContextRequest, DescribeContextResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeContextCommand,
-  serializeAws_json1_1DescribeContextCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeContextRequest, DescribeContextResponse } from "../models/models_2";
+import { DescribeContext$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeContextCommand}.
+ */
 export interface DescribeContextCommandInput extends DescribeContextRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeContextCommand}.
+ */
 export interface DescribeContextCommandOutput extends DescribeContextResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,84 @@ export interface DescribeContextCommandOutput extends DescribeContextResponse, _
  * ```javascript
  * import { SageMakerClient, DescribeContextCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeContextCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeContextRequest
+ *   ContextName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeContextCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeContextResponse
+ * //   ContextName: "STRING_VALUE",
+ * //   ContextArn: "STRING_VALUE",
+ * //   Source: { // ContextSource
+ * //     SourceUri: "STRING_VALUE", // required
+ * //     SourceType: "STRING_VALUE",
+ * //     SourceId: "STRING_VALUE",
+ * //   },
+ * //   ContextType: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   Properties: { // LineageEntityParameters
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LineageGroupArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeContextCommandInput - {@link DescribeContextCommandInput}
+ * @returns {@link DescribeContextCommandOutput}
  * @see {@link DescribeContextCommandInput} for command's `input` shape.
  * @see {@link DescribeContextCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeContextCommand extends $Command<
-  DescribeContextCommandInput,
-  DescribeContextCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeContextCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeContextCommandInput, DescribeContextCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeContextCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeContextRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeContextResponse.filterSensitiveLog,
+export class DescribeContextCommand extends command<DescribeContextCommandInput, DescribeContextCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeContext",
+  DescribeContext$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContextRequest;
+      output: DescribeContextResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeContextCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeContextCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeContextCommandOutput> {
-    return deserializeAws_json1_1DescribeContextCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeContextCommandInput;
+      output: DescribeContextCommandOutput;
+    };
+  };
 }

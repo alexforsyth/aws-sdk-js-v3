@@ -1,905 +1,2604 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type ArchiveApplicationCommandInput,
+  type ArchiveApplicationCommandOutput,
+  ArchiveApplicationCommand,
+} from "./commands/ArchiveApplicationCommand";
+import {
+  type ArchiveWaveCommandInput,
+  type ArchiveWaveCommandOutput,
+  ArchiveWaveCommand,
+} from "./commands/ArchiveWaveCommand";
+import {
+  type AssociateApplicationsCommandInput,
+  type AssociateApplicationsCommandOutput,
+  AssociateApplicationsCommand,
+} from "./commands/AssociateApplicationsCommand";
+import {
+  type AssociateSourceServersCommandInput,
+  type AssociateSourceServersCommandOutput,
+  AssociateSourceServersCommand,
+} from "./commands/AssociateSourceServersCommand";
+import {
+  type ChangeServerLifeCycleStateCommandInput,
+  type ChangeServerLifeCycleStateCommandOutput,
   ChangeServerLifeCycleStateCommand,
-  ChangeServerLifeCycleStateCommandInput,
-  ChangeServerLifeCycleStateCommandOutput,
 } from "./commands/ChangeServerLifeCycleStateCommand";
 import {
-  CreateReplicationConfigurationTemplateCommand,
-  CreateReplicationConfigurationTemplateCommandInput,
-  CreateReplicationConfigurationTemplateCommandOutput,
-} from "./commands/CreateReplicationConfigurationTemplateCommand";
-import { DeleteJobCommand, DeleteJobCommandInput, DeleteJobCommandOutput } from "./commands/DeleteJobCommand";
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
 import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type CreateLaunchConfigurationTemplateCommandInput,
+  type CreateLaunchConfigurationTemplateCommandOutput,
+  CreateLaunchConfigurationTemplateCommand,
+} from "./commands/CreateLaunchConfigurationTemplateCommand";
+import {
+  type CreateNetworkMigrationDefinitionCommandInput,
+  type CreateNetworkMigrationDefinitionCommandOutput,
+  CreateNetworkMigrationDefinitionCommand,
+} from "./commands/CreateNetworkMigrationDefinitionCommand";
+import {
+  type CreateReplicationConfigurationTemplateCommandInput,
+  type CreateReplicationConfigurationTemplateCommandOutput,
+  CreateReplicationConfigurationTemplateCommand,
+} from "./commands/CreateReplicationConfigurationTemplateCommand";
+import {
+  type CreateWaveCommandInput,
+  type CreateWaveCommandOutput,
+  CreateWaveCommand,
+} from "./commands/CreateWaveCommand";
+import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import { type DeleteJobCommandInput, type DeleteJobCommandOutput, DeleteJobCommand } from "./commands/DeleteJobCommand";
+import {
+  type DeleteLaunchConfigurationTemplateCommandInput,
+  type DeleteLaunchConfigurationTemplateCommandOutput,
+  DeleteLaunchConfigurationTemplateCommand,
+} from "./commands/DeleteLaunchConfigurationTemplateCommand";
+import {
+  type DeleteNetworkMigrationDefinitionCommandInput,
+  type DeleteNetworkMigrationDefinitionCommandOutput,
+  DeleteNetworkMigrationDefinitionCommand,
+} from "./commands/DeleteNetworkMigrationDefinitionCommand";
+import {
+  type DeleteReplicationConfigurationTemplateCommandInput,
+  type DeleteReplicationConfigurationTemplateCommandOutput,
   DeleteReplicationConfigurationTemplateCommand,
-  DeleteReplicationConfigurationTemplateCommandInput,
-  DeleteReplicationConfigurationTemplateCommandOutput,
 } from "./commands/DeleteReplicationConfigurationTemplateCommand";
 import {
+  type DeleteSourceServerCommandInput,
+  type DeleteSourceServerCommandOutput,
   DeleteSourceServerCommand,
-  DeleteSourceServerCommandInput,
-  DeleteSourceServerCommandOutput,
 } from "./commands/DeleteSourceServerCommand";
 import {
+  type DeleteVcenterClientCommandInput,
+  type DeleteVcenterClientCommandOutput,
+  DeleteVcenterClientCommand,
+} from "./commands/DeleteVcenterClientCommand";
+import {
+  type DeleteWaveCommandInput,
+  type DeleteWaveCommandOutput,
+  DeleteWaveCommand,
+} from "./commands/DeleteWaveCommand";
+import {
+  type DescribeJobLogItemsCommandInput,
+  type DescribeJobLogItemsCommandOutput,
   DescribeJobLogItemsCommand,
-  DescribeJobLogItemsCommandInput,
-  DescribeJobLogItemsCommandOutput,
 } from "./commands/DescribeJobLogItemsCommand";
 import {
+  type DescribeJobsCommandInput,
+  type DescribeJobsCommandOutput,
   DescribeJobsCommand,
-  DescribeJobsCommandInput,
-  DescribeJobsCommandOutput,
 } from "./commands/DescribeJobsCommand";
 import {
+  type DescribeLaunchConfigurationTemplatesCommandInput,
+  type DescribeLaunchConfigurationTemplatesCommandOutput,
+  DescribeLaunchConfigurationTemplatesCommand,
+} from "./commands/DescribeLaunchConfigurationTemplatesCommand";
+import {
+  type DescribeReplicationConfigurationTemplatesCommandInput,
+  type DescribeReplicationConfigurationTemplatesCommandOutput,
   DescribeReplicationConfigurationTemplatesCommand,
-  DescribeReplicationConfigurationTemplatesCommandInput,
-  DescribeReplicationConfigurationTemplatesCommandOutput,
 } from "./commands/DescribeReplicationConfigurationTemplatesCommand";
 import {
+  type DescribeSourceServersCommandInput,
+  type DescribeSourceServersCommandOutput,
   DescribeSourceServersCommand,
-  DescribeSourceServersCommandInput,
-  DescribeSourceServersCommandOutput,
 } from "./commands/DescribeSourceServersCommand";
 import {
+  type DescribeVcenterClientsCommandInput,
+  type DescribeVcenterClientsCommandOutput,
+  DescribeVcenterClientsCommand,
+} from "./commands/DescribeVcenterClientsCommand";
+import {
+  type DisassociateApplicationsCommandInput,
+  type DisassociateApplicationsCommandOutput,
+  DisassociateApplicationsCommand,
+} from "./commands/DisassociateApplicationsCommand";
+import {
+  type DisassociateSourceServersCommandInput,
+  type DisassociateSourceServersCommandOutput,
+  DisassociateSourceServersCommand,
+} from "./commands/DisassociateSourceServersCommand";
+import {
+  type DisconnectFromServiceCommandInput,
+  type DisconnectFromServiceCommandOutput,
   DisconnectFromServiceCommand,
-  DisconnectFromServiceCommandInput,
-  DisconnectFromServiceCommandOutput,
 } from "./commands/DisconnectFromServiceCommand";
 import {
+  type FinalizeCutoverCommandInput,
+  type FinalizeCutoverCommandOutput,
   FinalizeCutoverCommand,
-  FinalizeCutoverCommandInput,
-  FinalizeCutoverCommandOutput,
 } from "./commands/FinalizeCutoverCommand";
 import {
+  type GetLaunchConfigurationCommandInput,
+  type GetLaunchConfigurationCommandOutput,
   GetLaunchConfigurationCommand,
-  GetLaunchConfigurationCommandInput,
-  GetLaunchConfigurationCommandOutput,
 } from "./commands/GetLaunchConfigurationCommand";
 import {
+  type GetNetworkMigrationDefinitionCommandInput,
+  type GetNetworkMigrationDefinitionCommandOutput,
+  GetNetworkMigrationDefinitionCommand,
+} from "./commands/GetNetworkMigrationDefinitionCommand";
+import {
+  type GetNetworkMigrationMapperSegmentConstructCommandInput,
+  type GetNetworkMigrationMapperSegmentConstructCommandOutput,
+  GetNetworkMigrationMapperSegmentConstructCommand,
+} from "./commands/GetNetworkMigrationMapperSegmentConstructCommand";
+import {
+  type GetReplicationConfigurationCommandInput,
+  type GetReplicationConfigurationCommandOutput,
   GetReplicationConfigurationCommand,
-  GetReplicationConfigurationCommandInput,
-  GetReplicationConfigurationCommandOutput,
 } from "./commands/GetReplicationConfigurationCommand";
 import {
+  type InitializeServiceCommandInput,
+  type InitializeServiceCommandOutput,
   InitializeServiceCommand,
-  InitializeServiceCommandInput,
-  InitializeServiceCommandOutput,
 } from "./commands/InitializeServiceCommand";
 import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListExportErrorsCommandInput,
+  type ListExportErrorsCommandOutput,
+  ListExportErrorsCommand,
+} from "./commands/ListExportErrorsCommand";
+import {
+  type ListExportsCommandInput,
+  type ListExportsCommandOutput,
+  ListExportsCommand,
+} from "./commands/ListExportsCommand";
+import {
+  type ListImportErrorsCommandInput,
+  type ListImportErrorsCommandOutput,
+  ListImportErrorsCommand,
+} from "./commands/ListImportErrorsCommand";
+import {
+  type ListImportFileEnrichmentsCommandInput,
+  type ListImportFileEnrichmentsCommandOutput,
+  ListImportFileEnrichmentsCommand,
+} from "./commands/ListImportFileEnrichmentsCommand";
+import {
+  type ListImportsCommandInput,
+  type ListImportsCommandOutput,
+  ListImportsCommand,
+} from "./commands/ListImportsCommand";
+import {
+  type ListManagedAccountsCommandInput,
+  type ListManagedAccountsCommandOutput,
+  ListManagedAccountsCommand,
+} from "./commands/ListManagedAccountsCommand";
+import {
+  type ListNetworkMigrationAnalysesCommandInput,
+  type ListNetworkMigrationAnalysesCommandOutput,
+  ListNetworkMigrationAnalysesCommand,
+} from "./commands/ListNetworkMigrationAnalysesCommand";
+import {
+  type ListNetworkMigrationAnalysisResultsCommandInput,
+  type ListNetworkMigrationAnalysisResultsCommandOutput,
+  ListNetworkMigrationAnalysisResultsCommand,
+} from "./commands/ListNetworkMigrationAnalysisResultsCommand";
+import {
+  type ListNetworkMigrationCodeGenerationsCommandInput,
+  type ListNetworkMigrationCodeGenerationsCommandOutput,
+  ListNetworkMigrationCodeGenerationsCommand,
+} from "./commands/ListNetworkMigrationCodeGenerationsCommand";
+import {
+  type ListNetworkMigrationCodeGenerationSegmentsCommandInput,
+  type ListNetworkMigrationCodeGenerationSegmentsCommandOutput,
+  ListNetworkMigrationCodeGenerationSegmentsCommand,
+} from "./commands/ListNetworkMigrationCodeGenerationSegmentsCommand";
+import {
+  type ListNetworkMigrationDefinitionsCommandInput,
+  type ListNetworkMigrationDefinitionsCommandOutput,
+  ListNetworkMigrationDefinitionsCommand,
+} from "./commands/ListNetworkMigrationDefinitionsCommand";
+import {
+  type ListNetworkMigrationDeployedStacksCommandInput,
+  type ListNetworkMigrationDeployedStacksCommandOutput,
+  ListNetworkMigrationDeployedStacksCommand,
+} from "./commands/ListNetworkMigrationDeployedStacksCommand";
+import {
+  type ListNetworkMigrationDeploymentsCommandInput,
+  type ListNetworkMigrationDeploymentsCommandOutput,
+  ListNetworkMigrationDeploymentsCommand,
+} from "./commands/ListNetworkMigrationDeploymentsCommand";
+import {
+  type ListNetworkMigrationExecutionsCommandInput,
+  type ListNetworkMigrationExecutionsCommandOutput,
+  ListNetworkMigrationExecutionsCommand,
+} from "./commands/ListNetworkMigrationExecutionsCommand";
+import {
+  type ListNetworkMigrationMapperSegmentConstructsCommandInput,
+  type ListNetworkMigrationMapperSegmentConstructsCommandOutput,
+  ListNetworkMigrationMapperSegmentConstructsCommand,
+} from "./commands/ListNetworkMigrationMapperSegmentConstructsCommand";
+import {
+  type ListNetworkMigrationMapperSegmentsCommandInput,
+  type ListNetworkMigrationMapperSegmentsCommandOutput,
+  ListNetworkMigrationMapperSegmentsCommand,
+} from "./commands/ListNetworkMigrationMapperSegmentsCommand";
+import {
+  type ListNetworkMigrationMappingsCommandInput,
+  type ListNetworkMigrationMappingsCommandOutput,
+  ListNetworkMigrationMappingsCommand,
+} from "./commands/ListNetworkMigrationMappingsCommand";
+import {
+  type ListNetworkMigrationMappingUpdatesCommandInput,
+  type ListNetworkMigrationMappingUpdatesCommandOutput,
+  ListNetworkMigrationMappingUpdatesCommand,
+} from "./commands/ListNetworkMigrationMappingUpdatesCommand";
+import {
+  type ListSourceServerActionsCommandInput,
+  type ListSourceServerActionsCommandOutput,
+  ListSourceServerActionsCommand,
+} from "./commands/ListSourceServerActionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTemplateActionsCommandInput,
+  type ListTemplateActionsCommandOutput,
+  ListTemplateActionsCommand,
+} from "./commands/ListTemplateActionsCommand";
+import { type ListWavesCommandInput, type ListWavesCommandOutput, ListWavesCommand } from "./commands/ListWavesCommand";
+import {
+  type MarkAsArchivedCommandInput,
+  type MarkAsArchivedCommandOutput,
   MarkAsArchivedCommand,
-  MarkAsArchivedCommandInput,
-  MarkAsArchivedCommandOutput,
 } from "./commands/MarkAsArchivedCommand";
 import {
+  type PauseReplicationCommandInput,
+  type PauseReplicationCommandOutput,
+  PauseReplicationCommand,
+} from "./commands/PauseReplicationCommand";
+import {
+  type PutSourceServerActionCommandInput,
+  type PutSourceServerActionCommandOutput,
+  PutSourceServerActionCommand,
+} from "./commands/PutSourceServerActionCommand";
+import {
+  type PutTemplateActionCommandInput,
+  type PutTemplateActionCommandOutput,
+  PutTemplateActionCommand,
+} from "./commands/PutTemplateActionCommand";
+import {
+  type RemoveSourceServerActionCommandInput,
+  type RemoveSourceServerActionCommandOutput,
+  RemoveSourceServerActionCommand,
+} from "./commands/RemoveSourceServerActionCommand";
+import {
+  type RemoveTemplateActionCommandInput,
+  type RemoveTemplateActionCommandOutput,
+  RemoveTemplateActionCommand,
+} from "./commands/RemoveTemplateActionCommand";
+import {
+  type ResumeReplicationCommandInput,
+  type ResumeReplicationCommandOutput,
+  ResumeReplicationCommand,
+} from "./commands/ResumeReplicationCommand";
+import {
+  type RetryDataReplicationCommandInput,
+  type RetryDataReplicationCommandOutput,
   RetryDataReplicationCommand,
-  RetryDataReplicationCommandInput,
-  RetryDataReplicationCommandOutput,
 } from "./commands/RetryDataReplicationCommand";
 import {
+  type StartCutoverCommandInput,
+  type StartCutoverCommandOutput,
   StartCutoverCommand,
-  StartCutoverCommandInput,
-  StartCutoverCommandOutput,
 } from "./commands/StartCutoverCommand";
-import { StartTestCommand, StartTestCommandInput, StartTestCommandOutput } from "./commands/StartTestCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartExportCommandInput,
+  type StartExportCommandOutput,
+  StartExportCommand,
+} from "./commands/StartExportCommand";
+import {
+  type StartImportCommandInput,
+  type StartImportCommandOutput,
+  StartImportCommand,
+} from "./commands/StartImportCommand";
+import {
+  type StartImportFileEnrichmentCommandInput,
+  type StartImportFileEnrichmentCommandOutput,
+  StartImportFileEnrichmentCommand,
+} from "./commands/StartImportFileEnrichmentCommand";
+import {
+  type StartNetworkMigrationAnalysisCommandInput,
+  type StartNetworkMigrationAnalysisCommandOutput,
+  StartNetworkMigrationAnalysisCommand,
+} from "./commands/StartNetworkMigrationAnalysisCommand";
+import {
+  type StartNetworkMigrationCodeGenerationCommandInput,
+  type StartNetworkMigrationCodeGenerationCommandOutput,
+  StartNetworkMigrationCodeGenerationCommand,
+} from "./commands/StartNetworkMigrationCodeGenerationCommand";
+import {
+  type StartNetworkMigrationDeploymentCommandInput,
+  type StartNetworkMigrationDeploymentCommandOutput,
+  StartNetworkMigrationDeploymentCommand,
+} from "./commands/StartNetworkMigrationDeploymentCommand";
+import {
+  type StartNetworkMigrationMappingCommandInput,
+  type StartNetworkMigrationMappingCommandOutput,
+  StartNetworkMigrationMappingCommand,
+} from "./commands/StartNetworkMigrationMappingCommand";
+import {
+  type StartNetworkMigrationMappingUpdateCommandInput,
+  type StartNetworkMigrationMappingUpdateCommandOutput,
+  StartNetworkMigrationMappingUpdateCommand,
+} from "./commands/StartNetworkMigrationMappingUpdateCommand";
+import {
+  type StartReplicationCommandInput,
+  type StartReplicationCommandOutput,
+  StartReplicationCommand,
+} from "./commands/StartReplicationCommand";
+import { type StartTestCommandInput, type StartTestCommandOutput, StartTestCommand } from "./commands/StartTestCommand";
+import {
+  type StopReplicationCommandInput,
+  type StopReplicationCommandOutput,
+  StopReplicationCommand,
+} from "./commands/StopReplicationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TerminateTargetInstancesCommandInput,
+  type TerminateTargetInstancesCommandOutput,
   TerminateTargetInstancesCommand,
-  TerminateTargetInstancesCommandInput,
-  TerminateTargetInstancesCommandOutput,
 } from "./commands/TerminateTargetInstancesCommand";
 import {
+  type UnarchiveApplicationCommandInput,
+  type UnarchiveApplicationCommandOutput,
+  UnarchiveApplicationCommand,
+} from "./commands/UnarchiveApplicationCommand";
+import {
+  type UnarchiveWaveCommandInput,
+  type UnarchiveWaveCommandOutput,
+  UnarchiveWaveCommand,
+} from "./commands/UnarchiveWaveCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import {
+  type UpdateConnectorCommandInput,
+  type UpdateConnectorCommandOutput,
+  UpdateConnectorCommand,
+} from "./commands/UpdateConnectorCommand";
+import {
+  type UpdateLaunchConfigurationCommandInput,
+  type UpdateLaunchConfigurationCommandOutput,
   UpdateLaunchConfigurationCommand,
-  UpdateLaunchConfigurationCommandInput,
-  UpdateLaunchConfigurationCommandOutput,
 } from "./commands/UpdateLaunchConfigurationCommand";
 import {
+  type UpdateLaunchConfigurationTemplateCommandInput,
+  type UpdateLaunchConfigurationTemplateCommandOutput,
+  UpdateLaunchConfigurationTemplateCommand,
+} from "./commands/UpdateLaunchConfigurationTemplateCommand";
+import {
+  type UpdateNetworkMigrationDefinitionCommandInput,
+  type UpdateNetworkMigrationDefinitionCommandOutput,
+  UpdateNetworkMigrationDefinitionCommand,
+} from "./commands/UpdateNetworkMigrationDefinitionCommand";
+import {
+  type UpdateNetworkMigrationMapperSegmentCommandInput,
+  type UpdateNetworkMigrationMapperSegmentCommandOutput,
+  UpdateNetworkMigrationMapperSegmentCommand,
+} from "./commands/UpdateNetworkMigrationMapperSegmentCommand";
+import {
+  type UpdateReplicationConfigurationCommandInput,
+  type UpdateReplicationConfigurationCommandOutput,
   UpdateReplicationConfigurationCommand,
-  UpdateReplicationConfigurationCommandInput,
-  UpdateReplicationConfigurationCommandOutput,
 } from "./commands/UpdateReplicationConfigurationCommand";
 import {
+  type UpdateReplicationConfigurationTemplateCommandInput,
+  type UpdateReplicationConfigurationTemplateCommandOutput,
   UpdateReplicationConfigurationTemplateCommand,
-  UpdateReplicationConfigurationTemplateCommandInput,
-  UpdateReplicationConfigurationTemplateCommandOutput,
 } from "./commands/UpdateReplicationConfigurationTemplateCommand";
+import {
+  type UpdateSourceServerCommandInput,
+  type UpdateSourceServerCommandOutput,
+  UpdateSourceServerCommand,
+} from "./commands/UpdateSourceServerCommand";
+import {
+  type UpdateSourceServerReplicationTypeCommandInput,
+  type UpdateSourceServerReplicationTypeCommandOutput,
+  UpdateSourceServerReplicationTypeCommand,
+} from "./commands/UpdateSourceServerReplicationTypeCommand";
+import {
+  type UpdateWaveCommandInput,
+  type UpdateWaveCommandOutput,
+  UpdateWaveCommand,
+} from "./commands/UpdateWaveCommand";
 import { MgnClient } from "./MgnClient";
+import { paginateDescribeJobLogItems } from "./pagination/DescribeJobLogItemsPaginator";
+import { paginateDescribeJobs } from "./pagination/DescribeJobsPaginator";
+import {
+  paginateDescribeLaunchConfigurationTemplates,
+} from "./pagination/DescribeLaunchConfigurationTemplatesPaginator";
+import {
+  paginateDescribeReplicationConfigurationTemplates,
+} from "./pagination/DescribeReplicationConfigurationTemplatesPaginator";
+import { paginateDescribeSourceServers } from "./pagination/DescribeSourceServersPaginator";
+import { paginateDescribeVcenterClients } from "./pagination/DescribeVcenterClientsPaginator";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { paginateListExportErrors } from "./pagination/ListExportErrorsPaginator";
+import { paginateListExports } from "./pagination/ListExportsPaginator";
+import { paginateListImportErrors } from "./pagination/ListImportErrorsPaginator";
+import { paginateListImportFileEnrichments } from "./pagination/ListImportFileEnrichmentsPaginator";
+import { paginateListImports } from "./pagination/ListImportsPaginator";
+import { paginateListManagedAccounts } from "./pagination/ListManagedAccountsPaginator";
+import { paginateListNetworkMigrationAnalyses } from "./pagination/ListNetworkMigrationAnalysesPaginator";
+import { paginateListNetworkMigrationAnalysisResults } from "./pagination/ListNetworkMigrationAnalysisResultsPaginator";
+import {
+  paginateListNetworkMigrationCodeGenerationSegments,
+} from "./pagination/ListNetworkMigrationCodeGenerationSegmentsPaginator";
+import { paginateListNetworkMigrationCodeGenerations } from "./pagination/ListNetworkMigrationCodeGenerationsPaginator";
+import { paginateListNetworkMigrationDefinitions } from "./pagination/ListNetworkMigrationDefinitionsPaginator";
+import { paginateListNetworkMigrationDeployedStacks } from "./pagination/ListNetworkMigrationDeployedStacksPaginator";
+import { paginateListNetworkMigrationDeployments } from "./pagination/ListNetworkMigrationDeploymentsPaginator";
+import { paginateListNetworkMigrationExecutions } from "./pagination/ListNetworkMigrationExecutionsPaginator";
+import {
+  paginateListNetworkMigrationMapperSegmentConstructs,
+} from "./pagination/ListNetworkMigrationMapperSegmentConstructsPaginator";
+import { paginateListNetworkMigrationMapperSegments } from "./pagination/ListNetworkMigrationMapperSegmentsPaginator";
+import { paginateListNetworkMigrationMappings } from "./pagination/ListNetworkMigrationMappingsPaginator";
+import { paginateListNetworkMigrationMappingUpdates } from "./pagination/ListNetworkMigrationMappingUpdatesPaginator";
+import { paginateListSourceServerActions } from "./pagination/ListSourceServerActionsPaginator";
+import { paginateListTemplateActions } from "./pagination/ListTemplateActionsPaginator";
+import { paginateListWaves } from "./pagination/ListWavesPaginator";
+
+const commands = {
+  ArchiveApplicationCommand,
+  ArchiveWaveCommand,
+  AssociateApplicationsCommand,
+  AssociateSourceServersCommand,
+  ChangeServerLifeCycleStateCommand,
+  CreateApplicationCommand,
+  CreateConnectorCommand,
+  CreateLaunchConfigurationTemplateCommand,
+  CreateNetworkMigrationDefinitionCommand,
+  CreateReplicationConfigurationTemplateCommand,
+  CreateWaveCommand,
+  DeleteApplicationCommand,
+  DeleteConnectorCommand,
+  DeleteJobCommand,
+  DeleteLaunchConfigurationTemplateCommand,
+  DeleteNetworkMigrationDefinitionCommand,
+  DeleteReplicationConfigurationTemplateCommand,
+  DeleteSourceServerCommand,
+  DeleteVcenterClientCommand,
+  DeleteWaveCommand,
+  DescribeJobLogItemsCommand,
+  DescribeJobsCommand,
+  DescribeLaunchConfigurationTemplatesCommand,
+  DescribeReplicationConfigurationTemplatesCommand,
+  DescribeSourceServersCommand,
+  DescribeVcenterClientsCommand,
+  DisassociateApplicationsCommand,
+  DisassociateSourceServersCommand,
+  DisconnectFromServiceCommand,
+  FinalizeCutoverCommand,
+  GetLaunchConfigurationCommand,
+  GetNetworkMigrationDefinitionCommand,
+  GetNetworkMigrationMapperSegmentConstructCommand,
+  GetReplicationConfigurationCommand,
+  InitializeServiceCommand,
+  ListApplicationsCommand,
+  ListConnectorsCommand,
+  ListExportErrorsCommand,
+  ListExportsCommand,
+  ListImportErrorsCommand,
+  ListImportFileEnrichmentsCommand,
+  ListImportsCommand,
+  ListManagedAccountsCommand,
+  ListNetworkMigrationAnalysesCommand,
+  ListNetworkMigrationAnalysisResultsCommand,
+  ListNetworkMigrationCodeGenerationsCommand,
+  ListNetworkMigrationCodeGenerationSegmentsCommand,
+  ListNetworkMigrationDefinitionsCommand,
+  ListNetworkMigrationDeployedStacksCommand,
+  ListNetworkMigrationDeploymentsCommand,
+  ListNetworkMigrationExecutionsCommand,
+  ListNetworkMigrationMapperSegmentConstructsCommand,
+  ListNetworkMigrationMapperSegmentsCommand,
+  ListNetworkMigrationMappingsCommand,
+  ListNetworkMigrationMappingUpdatesCommand,
+  ListSourceServerActionsCommand,
+  ListTagsForResourceCommand,
+  ListTemplateActionsCommand,
+  ListWavesCommand,
+  MarkAsArchivedCommand,
+  PauseReplicationCommand,
+  PutSourceServerActionCommand,
+  PutTemplateActionCommand,
+  RemoveSourceServerActionCommand,
+  RemoveTemplateActionCommand,
+  ResumeReplicationCommand,
+  RetryDataReplicationCommand,
+  StartCutoverCommand,
+  StartExportCommand,
+  StartImportCommand,
+  StartImportFileEnrichmentCommand,
+  StartNetworkMigrationAnalysisCommand,
+  StartNetworkMigrationCodeGenerationCommand,
+  StartNetworkMigrationDeploymentCommand,
+  StartNetworkMigrationMappingCommand,
+  StartNetworkMigrationMappingUpdateCommand,
+  StartReplicationCommand,
+  StartTestCommand,
+  StopReplicationCommand,
+  TagResourceCommand,
+  TerminateTargetInstancesCommand,
+  UnarchiveApplicationCommand,
+  UnarchiveWaveCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+  UpdateConnectorCommand,
+  UpdateLaunchConfigurationCommand,
+  UpdateLaunchConfigurationTemplateCommand,
+  UpdateNetworkMigrationDefinitionCommand,
+  UpdateNetworkMigrationMapperSegmentCommand,
+  UpdateReplicationConfigurationCommand,
+  UpdateReplicationConfigurationTemplateCommand,
+  UpdateSourceServerCommand,
+  UpdateSourceServerReplicationTypeCommand,
+  UpdateWaveCommand,
+};
+const paginators = {
+  paginateDescribeJobLogItems,
+  paginateDescribeJobs,
+  paginateDescribeLaunchConfigurationTemplates,
+  paginateDescribeReplicationConfigurationTemplates,
+  paginateDescribeSourceServers,
+  paginateDescribeVcenterClients,
+  paginateListApplications,
+  paginateListConnectors,
+  paginateListExportErrors,
+  paginateListExports,
+  paginateListImportErrors,
+  paginateListImportFileEnrichments,
+  paginateListImports,
+  paginateListManagedAccounts,
+  paginateListNetworkMigrationAnalyses,
+  paginateListNetworkMigrationAnalysisResults,
+  paginateListNetworkMigrationCodeGenerations,
+  paginateListNetworkMigrationCodeGenerationSegments,
+  paginateListNetworkMigrationDefinitions,
+  paginateListNetworkMigrationDeployedStacks,
+  paginateListNetworkMigrationDeployments,
+  paginateListNetworkMigrationExecutions,
+  paginateListNetworkMigrationMapperSegmentConstructs,
+  paginateListNetworkMigrationMapperSegments,
+  paginateListNetworkMigrationMappings,
+  paginateListNetworkMigrationMappingUpdates,
+  paginateListSourceServerActions,
+  paginateListTemplateActions,
+  paginateListWaves,
+};
 
 /**
- * <p>The Application Migration Service service.</p>
+ * @public
  */
-export class Mgn extends MgnClient {
+export interface MgnRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Mgn {
   /**
-   * <p>Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY_FOR_TEST or READY_FOR_CUTOVER. This command only works if the Source Server is already launchable (dataReplicationInfo.lagDuration is not null.)</p>
+   * @see {@link ArchiveApplicationCommand}
    */
-  public changeServerLifeCycleState(
+  archiveApplication(
+    args: ArchiveApplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ArchiveApplicationCommandOutput>;
+  archiveApplication(
+    args: ArchiveApplicationCommandInput,
+    cb: (err: any, data?: ArchiveApplicationCommandOutput) => void
+  ): void;
+  archiveApplication(
+    args: ArchiveApplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ArchiveApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ArchiveWaveCommand}
+   */
+  archiveWave(
+    args: ArchiveWaveCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ArchiveWaveCommandOutput>;
+  archiveWave(
+    args: ArchiveWaveCommandInput,
+    cb: (err: any, data?: ArchiveWaveCommandOutput) => void
+  ): void;
+  archiveWave(
+    args: ArchiveWaveCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ArchiveWaveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateApplicationsCommand}
+   */
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<AssociateApplicationsCommandOutput>;
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    cb: (err: any, data?: AssociateApplicationsCommandOutput) => void
+  ): void;
+  associateApplications(
+    args: AssociateApplicationsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: AssociateApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateSourceServersCommand}
+   */
+  associateSourceServers(
+    args: AssociateSourceServersCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<AssociateSourceServersCommandOutput>;
+  associateSourceServers(
+    args: AssociateSourceServersCommandInput,
+    cb: (err: any, data?: AssociateSourceServersCommandOutput) => void
+  ): void;
+  associateSourceServers(
+    args: AssociateSourceServersCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: AssociateSourceServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ChangeServerLifeCycleStateCommand}
+   */
+  changeServerLifeCycleState(
     args: ChangeServerLifeCycleStateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<ChangeServerLifeCycleStateCommandOutput>;
-  public changeServerLifeCycleState(
+  changeServerLifeCycleState(
     args: ChangeServerLifeCycleStateCommandInput,
     cb: (err: any, data?: ChangeServerLifeCycleStateCommandOutput) => void
   ): void;
-  public changeServerLifeCycleState(
+  changeServerLifeCycleState(
     args: ChangeServerLifeCycleStateCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: ChangeServerLifeCycleStateCommandOutput) => void
   ): void;
-  public changeServerLifeCycleState(
-    args: ChangeServerLifeCycleStateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ChangeServerLifeCycleStateCommandOutput) => void),
-    cb?: (err: any, data?: ChangeServerLifeCycleStateCommandOutput) => void
-  ): Promise<ChangeServerLifeCycleStateCommandOutput> | void {
-    const command = new ChangeServerLifeCycleStateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new ReplicationConfigurationTemplate.</p>
+   * @see {@link CreateApplicationCommand}
    */
-  public createReplicationConfigurationTemplate(
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLaunchConfigurationTemplateCommand}
+   */
+  createLaunchConfigurationTemplate(): Promise<CreateLaunchConfigurationTemplateCommandOutput>;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<CreateLaunchConfigurationTemplateCommandOutput>;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: CreateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: CreateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNetworkMigrationDefinitionCommand}
+   */
+  createNetworkMigrationDefinition(
+    args: CreateNetworkMigrationDefinitionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<CreateNetworkMigrationDefinitionCommandOutput>;
+  createNetworkMigrationDefinition(
+    args: CreateNetworkMigrationDefinitionCommandInput,
+    cb: (err: any, data?: CreateNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+  createNetworkMigrationDefinition(
+    args: CreateNetworkMigrationDefinitionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: CreateNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationConfigurationTemplateCommand}
+   */
+  createReplicationConfigurationTemplate(
     args: CreateReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<CreateReplicationConfigurationTemplateCommandOutput>;
-  public createReplicationConfigurationTemplate(
+  createReplicationConfigurationTemplate(
     args: CreateReplicationConfigurationTemplateCommandInput,
     cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public createReplicationConfigurationTemplate(
+  createReplicationConfigurationTemplate(
     args: CreateReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public createReplicationConfigurationTemplate(
-    args: CreateReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<CreateReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new CreateReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a single Job by ID.</p>
+   * @see {@link CreateWaveCommand}
    */
-  public deleteJob(args: DeleteJobCommandInput, options?: __HttpHandlerOptions): Promise<DeleteJobCommandOutput>;
-  public deleteJob(args: DeleteJobCommandInput, cb: (err: any, data?: DeleteJobCommandOutput) => void): void;
-  public deleteJob(
+  createWave(
+    args: CreateWaveCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<CreateWaveCommandOutput>;
+  createWave(
+    args: CreateWaveCommandInput,
+    cb: (err: any, data?: CreateWaveCommandOutput) => void
+  ): void;
+  createWave(
+    args: CreateWaveCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: CreateWaveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteApplicationCommand}
+   */
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteJobCommand}
+   */
+  deleteJob(
     args: DeleteJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MgnRequestOptions
+  ): Promise<DeleteJobCommandOutput>;
+  deleteJob(
+    args: DeleteJobCommandInput,
     cb: (err: any, data?: DeleteJobCommandOutput) => void
   ): void;
-  public deleteJob(
+  deleteJob(
     args: DeleteJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteJobCommandOutput) => void
-  ): Promise<DeleteJobCommandOutput> | void {
-    const command = new DeleteJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a single Replication Configuration Template by ID</p>
+   * @see {@link DeleteLaunchConfigurationTemplateCommand}
    */
-  public deleteReplicationConfigurationTemplate(
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteLaunchConfigurationTemplateCommandOutput>;
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: DeleteLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNetworkMigrationDefinitionCommand}
+   */
+  deleteNetworkMigrationDefinition(
+    args: DeleteNetworkMigrationDefinitionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteNetworkMigrationDefinitionCommandOutput>;
+  deleteNetworkMigrationDefinition(
+    args: DeleteNetworkMigrationDefinitionCommandInput,
+    cb: (err: any, data?: DeleteNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+  deleteNetworkMigrationDefinition(
+    args: DeleteNetworkMigrationDefinitionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationConfigurationTemplateCommand}
+   */
+  deleteReplicationConfigurationTemplate(
     args: DeleteReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DeleteReplicationConfigurationTemplateCommandOutput>;
-  public deleteReplicationConfigurationTemplate(
+  deleteReplicationConfigurationTemplate(
     args: DeleteReplicationConfigurationTemplateCommandInput,
     cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public deleteReplicationConfigurationTemplate(
+  deleteReplicationConfigurationTemplate(
     args: DeleteReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public deleteReplicationConfigurationTemplate(
-    args: DeleteReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<DeleteReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new DeleteReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a single source server by ID.</p>
+   * @see {@link DeleteSourceServerCommand}
    */
-  public deleteSourceServer(
+  deleteSourceServer(
     args: DeleteSourceServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DeleteSourceServerCommandOutput>;
-  public deleteSourceServer(
+  deleteSourceServer(
     args: DeleteSourceServerCommandInput,
     cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
   ): void;
-  public deleteSourceServer(
+  deleteSourceServer(
     args: DeleteSourceServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
   ): void;
-  public deleteSourceServer(
-    args: DeleteSourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSourceServerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSourceServerCommandOutput) => void
-  ): Promise<DeleteSourceServerCommandOutput> | void {
-    const command = new DeleteSourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves detailed Job log with paging.</p>
+   * @see {@link DeleteVcenterClientCommand}
    */
-  public describeJobLogItems(
+  deleteVcenterClient(
+    args: DeleteVcenterClientCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteVcenterClientCommandOutput>;
+  deleteVcenterClient(
+    args: DeleteVcenterClientCommandInput,
+    cb: (err: any, data?: DeleteVcenterClientCommandOutput) => void
+  ): void;
+  deleteVcenterClient(
+    args: DeleteVcenterClientCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteVcenterClientCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWaveCommand}
+   */
+  deleteWave(
+    args: DeleteWaveCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DeleteWaveCommandOutput>;
+  deleteWave(
+    args: DeleteWaveCommandInput,
+    cb: (err: any, data?: DeleteWaveCommandOutput) => void
+  ): void;
+  deleteWave(
+    args: DeleteWaveCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DeleteWaveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeJobLogItemsCommand}
+   */
+  describeJobLogItems(
     args: DescribeJobLogItemsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DescribeJobLogItemsCommandOutput>;
-  public describeJobLogItems(
+  describeJobLogItems(
     args: DescribeJobLogItemsCommandInput,
     cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
   ): void;
-  public describeJobLogItems(
+  describeJobLogItems(
     args: DescribeJobLogItemsCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
   ): void;
-  public describeJobLogItems(
-    args: DescribeJobLogItemsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeJobLogItemsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
-  ): Promise<DescribeJobLogItemsCommandOutput> | void {
-    const command = new DescribeJobLogItemsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normaly created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>
+   * @see {@link DescribeJobsCommand}
    */
-  public describeJobs(
+  describeJobs(): Promise<DescribeJobsCommandOutput>;
+  describeJobs(
     args: DescribeJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DescribeJobsCommandOutput>;
-  public describeJobs(args: DescribeJobsCommandInput, cb: (err: any, data?: DescribeJobsCommandOutput) => void): void;
-  public describeJobs(
+  describeJobs(
     args: DescribeJobsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeJobsCommandOutput) => void
   ): void;
-  public describeJobs(
+  describeJobs(
     args: DescribeJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeJobsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeJobsCommandOutput) => void
-  ): Promise<DescribeJobsCommandOutput> | void {
-    const command = new DescribeJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DescribeJobsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.</p>
+   * @see {@link DescribeLaunchConfigurationTemplatesCommand}
    */
-  public describeReplicationConfigurationTemplates(
+  describeLaunchConfigurationTemplates(): Promise<DescribeLaunchConfigurationTemplatesCommandOutput>;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DescribeLaunchConfigurationTemplatesCommandOutput>;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    cb: (err: any, data?: DescribeLaunchConfigurationTemplatesCommandOutput) => void
+  ): void;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DescribeLaunchConfigurationTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationConfigurationTemplatesCommand}
+   */
+  describeReplicationConfigurationTemplates(): Promise<DescribeReplicationConfigurationTemplatesCommandOutput>;
+  describeReplicationConfigurationTemplates(
     args: DescribeReplicationConfigurationTemplatesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DescribeReplicationConfigurationTemplatesCommandOutput>;
-  public describeReplicationConfigurationTemplates(
+  describeReplicationConfigurationTemplates(
     args: DescribeReplicationConfigurationTemplatesCommandInput,
     cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
   ): void;
-  public describeReplicationConfigurationTemplates(
+  describeReplicationConfigurationTemplates(
     args: DescribeReplicationConfigurationTemplatesCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
   ): void;
-  public describeReplicationConfigurationTemplates(
-    args: DescribeReplicationConfigurationTemplatesCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
-  ): Promise<DescribeReplicationConfigurationTemplatesCommandOutput> | void {
-    const command = new DescribeReplicationConfigurationTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves all SourceServers or multiple SourceServers by ID.</p>
+   * @see {@link DescribeSourceServersCommand}
    */
-  public describeSourceServers(
+  describeSourceServers(): Promise<DescribeSourceServersCommandOutput>;
+  describeSourceServers(
     args: DescribeSourceServersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DescribeSourceServersCommandOutput>;
-  public describeSourceServers(
+  describeSourceServers(
     args: DescribeSourceServersCommandInput,
     cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
   ): void;
-  public describeSourceServers(
+  describeSourceServers(
     args: DescribeSourceServersCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
   ): void;
-  public describeSourceServers(
-    args: DescribeSourceServersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSourceServersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSourceServersCommandOutput) => void
-  ): Promise<DescribeSourceServersCommandOutput> | void {
-    const command = new DescribeSourceServersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.</p>
+   * @see {@link DescribeVcenterClientsCommand}
    */
-  public disconnectFromService(
+  describeVcenterClients(): Promise<DescribeVcenterClientsCommandOutput>;
+  describeVcenterClients(
+    args: DescribeVcenterClientsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DescribeVcenterClientsCommandOutput>;
+  describeVcenterClients(
+    args: DescribeVcenterClientsCommandInput,
+    cb: (err: any, data?: DescribeVcenterClientsCommandOutput) => void
+  ): void;
+  describeVcenterClients(
+    args: DescribeVcenterClientsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DescribeVcenterClientsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateApplicationsCommand}
+   */
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DisassociateApplicationsCommandOutput>;
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    cb: (err: any, data?: DisassociateApplicationsCommandOutput) => void
+  ): void;
+  disassociateApplications(
+    args: DisassociateApplicationsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DisassociateApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateSourceServersCommand}
+   */
+  disassociateSourceServers(
+    args: DisassociateSourceServersCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<DisassociateSourceServersCommandOutput>;
+  disassociateSourceServers(
+    args: DisassociateSourceServersCommandInput,
+    cb: (err: any, data?: DisassociateSourceServersCommandOutput) => void
+  ): void;
+  disassociateSourceServers(
+    args: DisassociateSourceServersCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: DisassociateSourceServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisconnectFromServiceCommand}
+   */
+  disconnectFromService(
     args: DisconnectFromServiceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<DisconnectFromServiceCommandOutput>;
-  public disconnectFromService(
+  disconnectFromService(
     args: DisconnectFromServiceCommandInput,
     cb: (err: any, data?: DisconnectFromServiceCommandOutput) => void
   ): void;
-  public disconnectFromService(
+  disconnectFromService(
     args: DisconnectFromServiceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: DisconnectFromServiceCommandOutput) => void
   ): void;
-  public disconnectFromService(
-    args: DisconnectFromServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisconnectFromServiceCommandOutput) => void),
-    cb?: (err: any, data?: DisconnectFromServiceCommandOutput) => void
-  ): Promise<DisconnectFromServiceCommandOutput> | void {
-    const command = new DisconnectFromServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.</p>
+   * @see {@link FinalizeCutoverCommand}
    */
-  public finalizeCutover(
+  finalizeCutover(
     args: FinalizeCutoverCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<FinalizeCutoverCommandOutput>;
-  public finalizeCutover(
+  finalizeCutover(
     args: FinalizeCutoverCommandInput,
     cb: (err: any, data?: FinalizeCutoverCommandOutput) => void
   ): void;
-  public finalizeCutover(
+  finalizeCutover(
     args: FinalizeCutoverCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: FinalizeCutoverCommandOutput) => void
   ): void;
-  public finalizeCutover(
-    args: FinalizeCutoverCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FinalizeCutoverCommandOutput) => void),
-    cb?: (err: any, data?: FinalizeCutoverCommandOutput) => void
-  ): Promise<FinalizeCutoverCommandOutput> | void {
-    const command = new FinalizeCutoverCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all LaunchConfigurations available, filtered by Source Server IDs.</p>
+   * @see {@link GetLaunchConfigurationCommand}
    */
-  public getLaunchConfiguration(
+  getLaunchConfiguration(
     args: GetLaunchConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<GetLaunchConfigurationCommandOutput>;
-  public getLaunchConfiguration(
+  getLaunchConfiguration(
     args: GetLaunchConfigurationCommandInput,
     cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
   ): void;
-  public getLaunchConfiguration(
+  getLaunchConfiguration(
     args: GetLaunchConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
   ): void;
-  public getLaunchConfiguration(
-    args: GetLaunchConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLaunchConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
-  ): Promise<GetLaunchConfigurationCommandOutput> | void {
-    const command = new GetLaunchConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all ReplicationConfigurations, filtered by Source Server ID.</p>
+   * @see {@link GetNetworkMigrationDefinitionCommand}
    */
-  public getReplicationConfiguration(
+  getNetworkMigrationDefinition(
+    args: GetNetworkMigrationDefinitionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<GetNetworkMigrationDefinitionCommandOutput>;
+  getNetworkMigrationDefinition(
+    args: GetNetworkMigrationDefinitionCommandInput,
+    cb: (err: any, data?: GetNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+  getNetworkMigrationDefinition(
+    args: GetNetworkMigrationDefinitionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: GetNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkMigrationMapperSegmentConstructCommand}
+   */
+  getNetworkMigrationMapperSegmentConstruct(
+    args: GetNetworkMigrationMapperSegmentConstructCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<GetNetworkMigrationMapperSegmentConstructCommandOutput>;
+  getNetworkMigrationMapperSegmentConstruct(
+    args: GetNetworkMigrationMapperSegmentConstructCommandInput,
+    cb: (err: any, data?: GetNetworkMigrationMapperSegmentConstructCommandOutput) => void
+  ): void;
+  getNetworkMigrationMapperSegmentConstruct(
+    args: GetNetworkMigrationMapperSegmentConstructCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: GetNetworkMigrationMapperSegmentConstructCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReplicationConfigurationCommand}
+   */
+  getReplicationConfiguration(
     args: GetReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<GetReplicationConfigurationCommandOutput>;
-  public getReplicationConfiguration(
+  getReplicationConfiguration(
     args: GetReplicationConfigurationCommandInput,
     cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
   ): void;
-  public getReplicationConfiguration(
+  getReplicationConfiguration(
     args: GetReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
   ): void;
-  public getReplicationConfiguration(
-    args: GetReplicationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
-  ): Promise<GetReplicationConfigurationCommandOutput> | void {
-    const command = new GetReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Initialize Application Migration Service.</p>
+   * @see {@link InitializeServiceCommand}
    */
-  public initializeService(
+  initializeService(): Promise<InitializeServiceCommandOutput>;
+  initializeService(
     args: InitializeServiceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<InitializeServiceCommandOutput>;
-  public initializeService(
+  initializeService(
     args: InitializeServiceCommandInput,
     cb: (err: any, data?: InitializeServiceCommandOutput) => void
   ): void;
-  public initializeService(
+  initializeService(
     args: InitializeServiceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: InitializeServiceCommandOutput) => void
   ): void;
-  public initializeService(
-    args: InitializeServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InitializeServiceCommandOutput) => void),
-    cb?: (err: any, data?: InitializeServiceCommandOutput) => void
-  ): Promise<InitializeServiceCommandOutput> | void {
-    const command = new InitializeServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all tags for your Application Migration Service resources.</p>
+   * @see {@link ListApplicationsCommand}
    */
-  public listTagsForResource(
+  listApplications(): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExportErrorsCommand}
+   */
+  listExportErrors(
+    args: ListExportErrorsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListExportErrorsCommandOutput>;
+  listExportErrors(
+    args: ListExportErrorsCommandInput,
+    cb: (err: any, data?: ListExportErrorsCommandOutput) => void
+  ): void;
+  listExportErrors(
+    args: ListExportErrorsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListExportErrorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExportsCommand}
+   */
+  listExports(): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
+  listExports(
+    args: ListExportsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportErrorsCommand}
+   */
+  listImportErrors(
+    args: ListImportErrorsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListImportErrorsCommandOutput>;
+  listImportErrors(
+    args: ListImportErrorsCommandInput,
+    cb: (err: any, data?: ListImportErrorsCommandOutput) => void
+  ): void;
+  listImportErrors(
+    args: ListImportErrorsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListImportErrorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportFileEnrichmentsCommand}
+   */
+  listImportFileEnrichments(): Promise<ListImportFileEnrichmentsCommandOutput>;
+  listImportFileEnrichments(
+    args: ListImportFileEnrichmentsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListImportFileEnrichmentsCommandOutput>;
+  listImportFileEnrichments(
+    args: ListImportFileEnrichmentsCommandInput,
+    cb: (err: any, data?: ListImportFileEnrichmentsCommandOutput) => void
+  ): void;
+  listImportFileEnrichments(
+    args: ListImportFileEnrichmentsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListImportFileEnrichmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListImportsCommand}
+   */
+  listImports(): Promise<ListImportsCommandOutput>;
+  listImports(
+    args: ListImportsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListImportsCommandOutput>;
+  listImports(
+    args: ListImportsCommandInput,
+    cb: (err: any, data?: ListImportsCommandOutput) => void
+  ): void;
+  listImports(
+    args: ListImportsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListImportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListManagedAccountsCommand}
+   */
+  listManagedAccounts(): Promise<ListManagedAccountsCommandOutput>;
+  listManagedAccounts(
+    args: ListManagedAccountsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListManagedAccountsCommandOutput>;
+  listManagedAccounts(
+    args: ListManagedAccountsCommandInput,
+    cb: (err: any, data?: ListManagedAccountsCommandOutput) => void
+  ): void;
+  listManagedAccounts(
+    args: ListManagedAccountsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListManagedAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationAnalysesCommand}
+   */
+  listNetworkMigrationAnalyses(
+    args: ListNetworkMigrationAnalysesCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationAnalysesCommandOutput>;
+  listNetworkMigrationAnalyses(
+    args: ListNetworkMigrationAnalysesCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationAnalysesCommandOutput) => void
+  ): void;
+  listNetworkMigrationAnalyses(
+    args: ListNetworkMigrationAnalysesCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationAnalysesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationAnalysisResultsCommand}
+   */
+  listNetworkMigrationAnalysisResults(
+    args: ListNetworkMigrationAnalysisResultsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationAnalysisResultsCommandOutput>;
+  listNetworkMigrationAnalysisResults(
+    args: ListNetworkMigrationAnalysisResultsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationAnalysisResultsCommandOutput) => void
+  ): void;
+  listNetworkMigrationAnalysisResults(
+    args: ListNetworkMigrationAnalysisResultsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationAnalysisResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationCodeGenerationsCommand}
+   */
+  listNetworkMigrationCodeGenerations(
+    args: ListNetworkMigrationCodeGenerationsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationCodeGenerationsCommandOutput>;
+  listNetworkMigrationCodeGenerations(
+    args: ListNetworkMigrationCodeGenerationsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationCodeGenerationsCommandOutput) => void
+  ): void;
+  listNetworkMigrationCodeGenerations(
+    args: ListNetworkMigrationCodeGenerationsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationCodeGenerationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationCodeGenerationSegmentsCommand}
+   */
+  listNetworkMigrationCodeGenerationSegments(
+    args: ListNetworkMigrationCodeGenerationSegmentsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationCodeGenerationSegmentsCommandOutput>;
+  listNetworkMigrationCodeGenerationSegments(
+    args: ListNetworkMigrationCodeGenerationSegmentsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationCodeGenerationSegmentsCommandOutput) => void
+  ): void;
+  listNetworkMigrationCodeGenerationSegments(
+    args: ListNetworkMigrationCodeGenerationSegmentsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationCodeGenerationSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationDefinitionsCommand}
+   */
+  listNetworkMigrationDefinitions(): Promise<ListNetworkMigrationDefinitionsCommandOutput>;
+  listNetworkMigrationDefinitions(
+    args: ListNetworkMigrationDefinitionsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationDefinitionsCommandOutput>;
+  listNetworkMigrationDefinitions(
+    args: ListNetworkMigrationDefinitionsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationDefinitionsCommandOutput) => void
+  ): void;
+  listNetworkMigrationDefinitions(
+    args: ListNetworkMigrationDefinitionsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationDeployedStacksCommand}
+   */
+  listNetworkMigrationDeployedStacks(
+    args: ListNetworkMigrationDeployedStacksCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationDeployedStacksCommandOutput>;
+  listNetworkMigrationDeployedStacks(
+    args: ListNetworkMigrationDeployedStacksCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationDeployedStacksCommandOutput) => void
+  ): void;
+  listNetworkMigrationDeployedStacks(
+    args: ListNetworkMigrationDeployedStacksCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationDeployedStacksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationDeploymentsCommand}
+   */
+  listNetworkMigrationDeployments(
+    args: ListNetworkMigrationDeploymentsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationDeploymentsCommandOutput>;
+  listNetworkMigrationDeployments(
+    args: ListNetworkMigrationDeploymentsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationDeploymentsCommandOutput) => void
+  ): void;
+  listNetworkMigrationDeployments(
+    args: ListNetworkMigrationDeploymentsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationExecutionsCommand}
+   */
+  listNetworkMigrationExecutions(
+    args: ListNetworkMigrationExecutionsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationExecutionsCommandOutput>;
+  listNetworkMigrationExecutions(
+    args: ListNetworkMigrationExecutionsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationExecutionsCommandOutput) => void
+  ): void;
+  listNetworkMigrationExecutions(
+    args: ListNetworkMigrationExecutionsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationMapperSegmentConstructsCommand}
+   */
+  listNetworkMigrationMapperSegmentConstructs(
+    args: ListNetworkMigrationMapperSegmentConstructsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationMapperSegmentConstructsCommandOutput>;
+  listNetworkMigrationMapperSegmentConstructs(
+    args: ListNetworkMigrationMapperSegmentConstructsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationMapperSegmentConstructsCommandOutput) => void
+  ): void;
+  listNetworkMigrationMapperSegmentConstructs(
+    args: ListNetworkMigrationMapperSegmentConstructsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationMapperSegmentConstructsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationMapperSegmentsCommand}
+   */
+  listNetworkMigrationMapperSegments(
+    args: ListNetworkMigrationMapperSegmentsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationMapperSegmentsCommandOutput>;
+  listNetworkMigrationMapperSegments(
+    args: ListNetworkMigrationMapperSegmentsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationMapperSegmentsCommandOutput) => void
+  ): void;
+  listNetworkMigrationMapperSegments(
+    args: ListNetworkMigrationMapperSegmentsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationMapperSegmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationMappingsCommand}
+   */
+  listNetworkMigrationMappings(
+    args: ListNetworkMigrationMappingsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationMappingsCommandOutput>;
+  listNetworkMigrationMappings(
+    args: ListNetworkMigrationMappingsCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationMappingsCommandOutput) => void
+  ): void;
+  listNetworkMigrationMappings(
+    args: ListNetworkMigrationMappingsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkMigrationMappingUpdatesCommand}
+   */
+  listNetworkMigrationMappingUpdates(
+    args: ListNetworkMigrationMappingUpdatesCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListNetworkMigrationMappingUpdatesCommandOutput>;
+  listNetworkMigrationMappingUpdates(
+    args: ListNetworkMigrationMappingUpdatesCommandInput,
+    cb: (err: any, data?: ListNetworkMigrationMappingUpdatesCommandOutput) => void
+  ): void;
+  listNetworkMigrationMappingUpdates(
+    args: ListNetworkMigrationMappingUpdatesCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListNetworkMigrationMappingUpdatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSourceServerActionsCommand}
+   */
+  listSourceServerActions(
+    args: ListSourceServerActionsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListSourceServerActionsCommandOutput>;
+  listSourceServerActions(
+    args: ListSourceServerActionsCommandInput,
+    cb: (err: any, data?: ListSourceServerActionsCommandOutput) => void
+  ): void;
+  listSourceServerActions(
+    args: ListSourceServerActionsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListSourceServerActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle.state which equals DISCONNECTED or CUTOVER.</p>
+   * @see {@link ListTemplateActionsCommand}
    */
-  public markAsArchived(
+  listTemplateActions(
+    args: ListTemplateActionsCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListTemplateActionsCommandOutput>;
+  listTemplateActions(
+    args: ListTemplateActionsCommandInput,
+    cb: (err: any, data?: ListTemplateActionsCommandOutput) => void
+  ): void;
+  listTemplateActions(
+    args: ListTemplateActionsCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListTemplateActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWavesCommand}
+   */
+  listWaves(): Promise<ListWavesCommandOutput>;
+  listWaves(
+    args: ListWavesCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ListWavesCommandOutput>;
+  listWaves(
+    args: ListWavesCommandInput,
+    cb: (err: any, data?: ListWavesCommandOutput) => void
+  ): void;
+  listWaves(
+    args: ListWavesCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ListWavesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link MarkAsArchivedCommand}
+   */
+  markAsArchived(
     args: MarkAsArchivedCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<MarkAsArchivedCommandOutput>;
-  public markAsArchived(
+  markAsArchived(
     args: MarkAsArchivedCommandInput,
     cb: (err: any, data?: MarkAsArchivedCommandOutput) => void
   ): void;
-  public markAsArchived(
+  markAsArchived(
     args: MarkAsArchivedCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: MarkAsArchivedCommandOutput) => void
   ): void;
-  public markAsArchived(
-    args: MarkAsArchivedCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: MarkAsArchivedCommandOutput) => void),
-    cb?: (err: any, data?: MarkAsArchivedCommandOutput) => void
-  ): Promise<MarkAsArchivedCommandOutput> | void {
-    const command = new MarkAsArchivedCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started. This command will not work if the SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.</p>
+   * @see {@link PauseReplicationCommand}
    */
-  public retryDataReplication(
+  pauseReplication(
+    args: PauseReplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<PauseReplicationCommandOutput>;
+  pauseReplication(
+    args: PauseReplicationCommandInput,
+    cb: (err: any, data?: PauseReplicationCommandOutput) => void
+  ): void;
+  pauseReplication(
+    args: PauseReplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: PauseReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutSourceServerActionCommand}
+   */
+  putSourceServerAction(
+    args: PutSourceServerActionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<PutSourceServerActionCommandOutput>;
+  putSourceServerAction(
+    args: PutSourceServerActionCommandInput,
+    cb: (err: any, data?: PutSourceServerActionCommandOutput) => void
+  ): void;
+  putSourceServerAction(
+    args: PutSourceServerActionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: PutSourceServerActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutTemplateActionCommand}
+   */
+  putTemplateAction(
+    args: PutTemplateActionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<PutTemplateActionCommandOutput>;
+  putTemplateAction(
+    args: PutTemplateActionCommandInput,
+    cb: (err: any, data?: PutTemplateActionCommandOutput) => void
+  ): void;
+  putTemplateAction(
+    args: PutTemplateActionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: PutTemplateActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveSourceServerActionCommand}
+   */
+  removeSourceServerAction(
+    args: RemoveSourceServerActionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<RemoveSourceServerActionCommandOutput>;
+  removeSourceServerAction(
+    args: RemoveSourceServerActionCommandInput,
+    cb: (err: any, data?: RemoveSourceServerActionCommandOutput) => void
+  ): void;
+  removeSourceServerAction(
+    args: RemoveSourceServerActionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: RemoveSourceServerActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveTemplateActionCommand}
+   */
+  removeTemplateAction(
+    args: RemoveTemplateActionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<RemoveTemplateActionCommandOutput>;
+  removeTemplateAction(
+    args: RemoveTemplateActionCommandInput,
+    cb: (err: any, data?: RemoveTemplateActionCommandOutput) => void
+  ): void;
+  removeTemplateAction(
+    args: RemoveTemplateActionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: RemoveTemplateActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResumeReplicationCommand}
+   */
+  resumeReplication(
+    args: ResumeReplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<ResumeReplicationCommandOutput>;
+  resumeReplication(
+    args: ResumeReplicationCommandInput,
+    cb: (err: any, data?: ResumeReplicationCommandOutput) => void
+  ): void;
+  resumeReplication(
+    args: ResumeReplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: ResumeReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetryDataReplicationCommand}
+   */
+  retryDataReplication(
     args: RetryDataReplicationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<RetryDataReplicationCommandOutput>;
-  public retryDataReplication(
+  retryDataReplication(
     args: RetryDataReplicationCommandInput,
     cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
   ): void;
-  public retryDataReplication(
+  retryDataReplication(
     args: RetryDataReplicationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
   ): void;
-  public retryDataReplication(
-    args: RetryDataReplicationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RetryDataReplicationCommandOutput) => void),
-    cb?: (err: any, data?: RetryDataReplicationCommandOutput) => void
-  ): Promise<RetryDataReplicationCommandOutput> | void {
-    const command = new RetryDataReplicationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Launches a Cutover Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartCutover and changes the SourceServer.lifeCycle.state property to CUTTING_OVER.</p>
+   * @see {@link StartCutoverCommand}
    */
-  public startCutover(
+  startCutover(
     args: StartCutoverCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<StartCutoverCommandOutput>;
-  public startCutover(args: StartCutoverCommandInput, cb: (err: any, data?: StartCutoverCommandOutput) => void): void;
-  public startCutover(
+  startCutover(
     args: StartCutoverCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: StartCutoverCommandOutput) => void
   ): void;
-  public startCutover(
+  startCutover(
     args: StartCutoverCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartCutoverCommandOutput) => void),
-    cb?: (err: any, data?: StartCutoverCommandOutput) => void
-  ): Promise<StartCutoverCommandOutput> | void {
-    const command = new StartCutoverCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartCutoverCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.</p>
+   * @see {@link StartExportCommand}
    */
-  public startTest(args: StartTestCommandInput, options?: __HttpHandlerOptions): Promise<StartTestCommandOutput>;
-  public startTest(args: StartTestCommandInput, cb: (err: any, data?: StartTestCommandOutput) => void): void;
-  public startTest(
+  startExport(
+    args: StartExportCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartExportCommandOutput>;
+  startExport(
+    args: StartExportCommandInput,
+    cb: (err: any, data?: StartExportCommandOutput) => void
+  ): void;
+  startExport(
+    args: StartExportCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportCommand}
+   */
+  startImport(
+    args: StartImportCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartImportCommandOutput>;
+  startImport(
+    args: StartImportCommandInput,
+    cb: (err: any, data?: StartImportCommandOutput) => void
+  ): void;
+  startImport(
+    args: StartImportCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartImportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartImportFileEnrichmentCommand}
+   */
+  startImportFileEnrichment(
+    args: StartImportFileEnrichmentCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartImportFileEnrichmentCommandOutput>;
+  startImportFileEnrichment(
+    args: StartImportFileEnrichmentCommandInput,
+    cb: (err: any, data?: StartImportFileEnrichmentCommandOutput) => void
+  ): void;
+  startImportFileEnrichment(
+    args: StartImportFileEnrichmentCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartImportFileEnrichmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartNetworkMigrationAnalysisCommand}
+   */
+  startNetworkMigrationAnalysis(
+    args: StartNetworkMigrationAnalysisCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartNetworkMigrationAnalysisCommandOutput>;
+  startNetworkMigrationAnalysis(
+    args: StartNetworkMigrationAnalysisCommandInput,
+    cb: (err: any, data?: StartNetworkMigrationAnalysisCommandOutput) => void
+  ): void;
+  startNetworkMigrationAnalysis(
+    args: StartNetworkMigrationAnalysisCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartNetworkMigrationAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartNetworkMigrationCodeGenerationCommand}
+   */
+  startNetworkMigrationCodeGeneration(
+    args: StartNetworkMigrationCodeGenerationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartNetworkMigrationCodeGenerationCommandOutput>;
+  startNetworkMigrationCodeGeneration(
+    args: StartNetworkMigrationCodeGenerationCommandInput,
+    cb: (err: any, data?: StartNetworkMigrationCodeGenerationCommandOutput) => void
+  ): void;
+  startNetworkMigrationCodeGeneration(
+    args: StartNetworkMigrationCodeGenerationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartNetworkMigrationCodeGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartNetworkMigrationDeploymentCommand}
+   */
+  startNetworkMigrationDeployment(
+    args: StartNetworkMigrationDeploymentCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartNetworkMigrationDeploymentCommandOutput>;
+  startNetworkMigrationDeployment(
+    args: StartNetworkMigrationDeploymentCommandInput,
+    cb: (err: any, data?: StartNetworkMigrationDeploymentCommandOutput) => void
+  ): void;
+  startNetworkMigrationDeployment(
+    args: StartNetworkMigrationDeploymentCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartNetworkMigrationDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartNetworkMigrationMappingCommand}
+   */
+  startNetworkMigrationMapping(
+    args: StartNetworkMigrationMappingCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartNetworkMigrationMappingCommandOutput>;
+  startNetworkMigrationMapping(
+    args: StartNetworkMigrationMappingCommandInput,
+    cb: (err: any, data?: StartNetworkMigrationMappingCommandOutput) => void
+  ): void;
+  startNetworkMigrationMapping(
+    args: StartNetworkMigrationMappingCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartNetworkMigrationMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartNetworkMigrationMappingUpdateCommand}
+   */
+  startNetworkMigrationMappingUpdate(
+    args: StartNetworkMigrationMappingUpdateCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartNetworkMigrationMappingUpdateCommandOutput>;
+  startNetworkMigrationMappingUpdate(
+    args: StartNetworkMigrationMappingUpdateCommandInput,
+    cb: (err: any, data?: StartNetworkMigrationMappingUpdateCommandOutput) => void
+  ): void;
+  startNetworkMigrationMappingUpdate(
+    args: StartNetworkMigrationMappingUpdateCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartNetworkMigrationMappingUpdateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationCommand}
+   */
+  startReplication(
+    args: StartReplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StartReplicationCommandOutput>;
+  startReplication(
+    args: StartReplicationCommandInput,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+  startReplication(
+    args: StartReplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTestCommand}
+   */
+  startTest(
     args: StartTestCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MgnRequestOptions
+  ): Promise<StartTestCommandOutput>;
+  startTest(
+    args: StartTestCommandInput,
     cb: (err: any, data?: StartTestCommandOutput) => void
   ): void;
-  public startTest(
+  startTest(
     args: StartTestCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartTestCommandOutput) => void),
-    cb?: (err: any, data?: StartTestCommandOutput) => void
-  ): Promise<StartTestCommandOutput> | void {
-    const command = new StartTestCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StartTestCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.</p>
+   * @see {@link StopReplicationCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<StopReplicationCommandOutput>;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: MgnRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: MgnRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Starts a job that terminates specific launched EC2 Test and Cutover instances. This command will not work for any Source Server with a lifecycle.state of TESTING, CUTTING_OVER, or CUTOVER.</p>
+   * @see {@link TerminateTargetInstancesCommand}
    */
-  public terminateTargetInstances(
+  terminateTargetInstances(
     args: TerminateTargetInstancesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<TerminateTargetInstancesCommandOutput>;
-  public terminateTargetInstances(
+  terminateTargetInstances(
     args: TerminateTargetInstancesCommandInput,
     cb: (err: any, data?: TerminateTargetInstancesCommandOutput) => void
   ): void;
-  public terminateTargetInstances(
+  terminateTargetInstances(
     args: TerminateTargetInstancesCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: TerminateTargetInstancesCommandOutput) => void
   ): void;
-  public terminateTargetInstances(
-    args: TerminateTargetInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TerminateTargetInstancesCommandOutput) => void),
-    cb?: (err: any, data?: TerminateTargetInstancesCommandOutput) => void
-  ): Promise<TerminateTargetInstancesCommandOutput> | void {
-    const command = new TerminateTargetInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified set of tags from the specified set of Application Migration Service resources.</p>
+   * @see {@link UnarchiveApplicationCommand}
    */
-  public untagResource(
+  unarchiveApplication(
+    args: UnarchiveApplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UnarchiveApplicationCommandOutput>;
+  unarchiveApplication(
+    args: UnarchiveApplicationCommandInput,
+    cb: (err: any, data?: UnarchiveApplicationCommandOutput) => void
+  ): void;
+  unarchiveApplication(
+    args: UnarchiveApplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UnarchiveApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UnarchiveWaveCommand}
+   */
+  unarchiveWave(
+    args: UnarchiveWaveCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UnarchiveWaveCommandOutput>;
+  unarchiveWave(
+    args: UnarchiveWaveCommandInput,
+    cb: (err: any, data?: UnarchiveWaveCommandOutput) => void
+  ): void;
+  unarchiveWave(
+    args: UnarchiveWaveCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UnarchiveWaveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates multiple LaunchConfigurations by Source Server ID.</p>
+   * @see {@link UpdateApplicationCommand}
    */
-  public updateLaunchConfiguration(
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorCommand}
+   */
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateConnectorCommandOutput>;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLaunchConfigurationCommand}
+   */
+  updateLaunchConfiguration(
     args: UpdateLaunchConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<UpdateLaunchConfigurationCommandOutput>;
-  public updateLaunchConfiguration(
+  updateLaunchConfiguration(
     args: UpdateLaunchConfigurationCommandInput,
     cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
   ): void;
-  public updateLaunchConfiguration(
+  updateLaunchConfiguration(
     args: UpdateLaunchConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
   ): void;
-  public updateLaunchConfiguration(
-    args: UpdateLaunchConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLaunchConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
-  ): Promise<UpdateLaunchConfigurationCommandOutput> | void {
-    const command = new UpdateLaunchConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows you to update multiple ReplicationConfigurations by Source Server ID.</p>
+   * @see {@link UpdateLaunchConfigurationTemplateCommand}
    */
-  public updateReplicationConfiguration(
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateLaunchConfigurationTemplateCommandOutput>;
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: UpdateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNetworkMigrationDefinitionCommand}
+   */
+  updateNetworkMigrationDefinition(
+    args: UpdateNetworkMigrationDefinitionCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateNetworkMigrationDefinitionCommandOutput>;
+  updateNetworkMigrationDefinition(
+    args: UpdateNetworkMigrationDefinitionCommandInput,
+    cb: (err: any, data?: UpdateNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+  updateNetworkMigrationDefinition(
+    args: UpdateNetworkMigrationDefinitionCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateNetworkMigrationDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNetworkMigrationMapperSegmentCommand}
+   */
+  updateNetworkMigrationMapperSegment(
+    args: UpdateNetworkMigrationMapperSegmentCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateNetworkMigrationMapperSegmentCommandOutput>;
+  updateNetworkMigrationMapperSegment(
+    args: UpdateNetworkMigrationMapperSegmentCommandInput,
+    cb: (err: any, data?: UpdateNetworkMigrationMapperSegmentCommandOutput) => void
+  ): void;
+  updateNetworkMigrationMapperSegment(
+    args: UpdateNetworkMigrationMapperSegmentCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateNetworkMigrationMapperSegmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReplicationConfigurationCommand}
+   */
+  updateReplicationConfiguration(
     args: UpdateReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<UpdateReplicationConfigurationCommandOutput>;
-  public updateReplicationConfiguration(
+  updateReplicationConfiguration(
     args: UpdateReplicationConfigurationCommandInput,
     cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
   ): void;
-  public updateReplicationConfiguration(
+  updateReplicationConfiguration(
     args: UpdateReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
   ): void;
-  public updateReplicationConfiguration(
-    args: UpdateReplicationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
-  ): Promise<UpdateReplicationConfigurationCommandOutput> | void {
-    const command = new UpdateReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates multiple ReplicationConfigurationTemplates by ID.</p>
+   * @see {@link UpdateReplicationConfigurationTemplateCommand}
    */
-  public updateReplicationConfigurationTemplate(
+  updateReplicationConfigurationTemplate(
     args: UpdateReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: MgnRequestOptions
   ): Promise<UpdateReplicationConfigurationTemplateCommandOutput>;
-  public updateReplicationConfigurationTemplate(
+  updateReplicationConfigurationTemplate(
     args: UpdateReplicationConfigurationTemplateCommandInput,
     cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public updateReplicationConfigurationTemplate(
+  updateReplicationConfigurationTemplate(
     args: UpdateReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
+    options: MgnRequestOptions,
     cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
   ): void;
-  public updateReplicationConfigurationTemplate(
-    args: UpdateReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<UpdateReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new UpdateReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateSourceServerCommand}
+   */
+  updateSourceServer(
+    args: UpdateSourceServerCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateSourceServerCommandOutput>;
+  updateSourceServer(
+    args: UpdateSourceServerCommandInput,
+    cb: (err: any, data?: UpdateSourceServerCommandOutput) => void
+  ): void;
+  updateSourceServer(
+    args: UpdateSourceServerCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateSourceServerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSourceServerReplicationTypeCommand}
+   */
+  updateSourceServerReplicationType(
+    args: UpdateSourceServerReplicationTypeCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateSourceServerReplicationTypeCommandOutput>;
+  updateSourceServerReplicationType(
+    args: UpdateSourceServerReplicationTypeCommandInput,
+    cb: (err: any, data?: UpdateSourceServerReplicationTypeCommandOutput) => void
+  ): void;
+  updateSourceServerReplicationType(
+    args: UpdateSourceServerReplicationTypeCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateSourceServerReplicationTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWaveCommand}
+   */
+  updateWave(
+    args: UpdateWaveCommandInput,
+    options?: MgnRequestOptions
+  ): Promise<UpdateWaveCommandOutput>;
+  updateWave(
+    args: UpdateWaveCommandInput,
+    cb: (err: any, data?: UpdateWaveCommandOutput) => void
+  ): void;
+  updateWave(
+    args: UpdateWaveCommandInput,
+    options: MgnRequestOptions,
+    cb: (err: any, data?: UpdateWaveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeJobLogItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeJobLogItemsCommandOutput}.
+   */
+  paginateDescribeJobLogItems(
+    args: DescribeJobLogItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeJobLogItemsCommandOutput>;
+
+  /**
+   * @see {@link DescribeJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeJobsCommandOutput}.
+   */
+  paginateDescribeJobs(
+    args?: DescribeJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeJobsCommandOutput>;
+
+  /**
+   * @see {@link DescribeLaunchConfigurationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeLaunchConfigurationTemplatesCommandOutput}.
+   */
+  paginateDescribeLaunchConfigurationTemplates(
+    args?: DescribeLaunchConfigurationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeLaunchConfigurationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationConfigurationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationConfigurationTemplatesCommandOutput}.
+   */
+  paginateDescribeReplicationConfigurationTemplates(
+    args?: DescribeReplicationConfigurationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationConfigurationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeSourceServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSourceServersCommandOutput}.
+   */
+  paginateDescribeSourceServers(
+    args?: DescribeSourceServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSourceServersCommandOutput>;
+
+  /**
+   * @see {@link DescribeVcenterClientsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeVcenterClientsCommandOutput}.
+   */
+  paginateDescribeVcenterClients(
+    args?: DescribeVcenterClientsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeVcenterClientsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args?: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListExportErrorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportErrorsCommandOutput}.
+   */
+  paginateListExportErrors(
+    args: ListExportErrorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportErrorsCommandOutput>;
+
+  /**
+   * @see {@link ListExportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportsCommandOutput}.
+   */
+  paginateListExports(
+    args?: ListExportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportsCommandOutput>;
+
+  /**
+   * @see {@link ListImportErrorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportErrorsCommandOutput}.
+   */
+  paginateListImportErrors(
+    args: ListImportErrorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportErrorsCommandOutput>;
+
+  /**
+   * @see {@link ListImportFileEnrichmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportFileEnrichmentsCommandOutput}.
+   */
+  paginateListImportFileEnrichments(
+    args?: ListImportFileEnrichmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportFileEnrichmentsCommandOutput>;
+
+  /**
+   * @see {@link ListImportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListImportsCommandOutput}.
+   */
+  paginateListImports(
+    args?: ListImportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListImportsCommandOutput>;
+
+  /**
+   * @see {@link ListManagedAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedAccountsCommandOutput}.
+   */
+  paginateListManagedAccounts(
+    args?: ListManagedAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedAccountsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationAnalysesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationAnalysesCommandOutput}.
+   */
+  paginateListNetworkMigrationAnalyses(
+    args: ListNetworkMigrationAnalysesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationAnalysesCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationAnalysisResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationAnalysisResultsCommandOutput}.
+   */
+  paginateListNetworkMigrationAnalysisResults(
+    args: ListNetworkMigrationAnalysisResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationAnalysisResultsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationCodeGenerationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationCodeGenerationsCommandOutput}.
+   */
+  paginateListNetworkMigrationCodeGenerations(
+    args: ListNetworkMigrationCodeGenerationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationCodeGenerationsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationCodeGenerationSegmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationCodeGenerationSegmentsCommandOutput}.
+   */
+  paginateListNetworkMigrationCodeGenerationSegments(
+    args: ListNetworkMigrationCodeGenerationSegmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationCodeGenerationSegmentsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationDefinitionsCommandOutput}.
+   */
+  paginateListNetworkMigrationDefinitions(
+    args?: ListNetworkMigrationDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationDeployedStacksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationDeployedStacksCommandOutput}.
+   */
+  paginateListNetworkMigrationDeployedStacks(
+    args: ListNetworkMigrationDeployedStacksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationDeployedStacksCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationDeploymentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationDeploymentsCommandOutput}.
+   */
+  paginateListNetworkMigrationDeployments(
+    args: ListNetworkMigrationDeploymentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationDeploymentsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationExecutionsCommandOutput}.
+   */
+  paginateListNetworkMigrationExecutions(
+    args: ListNetworkMigrationExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationMapperSegmentConstructsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationMapperSegmentConstructsCommandOutput}.
+   */
+  paginateListNetworkMigrationMapperSegmentConstructs(
+    args: ListNetworkMigrationMapperSegmentConstructsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationMapperSegmentConstructsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationMapperSegmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationMapperSegmentsCommandOutput}.
+   */
+  paginateListNetworkMigrationMapperSegments(
+    args: ListNetworkMigrationMapperSegmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationMapperSegmentsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationMappingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationMappingsCommandOutput}.
+   */
+  paginateListNetworkMigrationMappings(
+    args: ListNetworkMigrationMappingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationMappingsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkMigrationMappingUpdatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkMigrationMappingUpdatesCommandOutput}.
+   */
+  paginateListNetworkMigrationMappingUpdates(
+    args: ListNetworkMigrationMappingUpdatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkMigrationMappingUpdatesCommandOutput>;
+
+  /**
+   * @see {@link ListSourceServerActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSourceServerActionsCommandOutput}.
+   */
+  paginateListSourceServerActions(
+    args: ListSourceServerActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSourceServerActionsCommandOutput>;
+
+  /**
+   * @see {@link ListTemplateActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTemplateActionsCommandOutput}.
+   */
+  paginateListTemplateActions(
+    args: ListTemplateActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTemplateActionsCommandOutput>;
+
+  /**
+   * @see {@link ListWavesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWavesCommandOutput}.
+   */
+  paginateListWaves(
+    args?: ListWavesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWavesCommandOutput>;
 }
+
+/**
+ * <p>Application Migration Service.</p>
+ * @public
+ */
+export class Mgn extends MgnClient implements Mgn {}
+createAggregatedClient(commands, Mgn, { paginators });

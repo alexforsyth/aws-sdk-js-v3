@@ -1,98 +1,82 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DescribeAccountLimitsInput, DescribeAccountLimitsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeAccountLimitsCommand,
-  serializeAws_queryDescribeAccountLimitsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccountLimitsInput, DescribeAccountLimitsOutput } from "../models/models_0";
+import { DescribeAccountLimits$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountLimitsCommand}.
+ */
 export interface DescribeAccountLimitsCommandInput extends DescribeAccountLimitsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountLimitsCommand}.
+ */
 export interface DescribeAccountLimitsCommandOutput extends DescribeAccountLimitsOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves your account's CloudFormation limits, such as the maximum number of
- *          stacks that you can create in your account. For more information about account limits, see
- *             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">CloudFormation
- *             Limits</a> in the <i>CloudFormation User Guide</i>.</p>
+ * <p>Retrieves your account's CloudFormation limits, such as the maximum number of stacks that you
+ *       can create in your account. For more information about account limits, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">Understand CloudFormation quotas</a> in the <i>CloudFormation User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DescribeAccountLimitsCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DescribeAccountLimitsCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DescribeAccountLimitsInput
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAccountLimitsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountLimitsOutput
+ * //   AccountLimits: [ // AccountLimitList
+ * //     { // AccountLimit
+ * //       Name: "STRING_VALUE",
+ * //       Value: Number("int"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountLimitsCommandInput - {@link DescribeAccountLimitsCommandInput}
+ * @returns {@link DescribeAccountLimitsCommandOutput}
  * @see {@link DescribeAccountLimitsCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountLimitsCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccountLimitsCommand extends $Command<
-  DescribeAccountLimitsCommandInput,
-  DescribeAccountLimitsCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountLimitsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountLimitsCommandInput, DescribeAccountLimitsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DescribeAccountLimitsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountLimitsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountLimitsOutput.filterSensitiveLog,
+export class DescribeAccountLimitsCommand extends command<DescribeAccountLimitsCommandInput, DescribeAccountLimitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountLimits",
+  DescribeAccountLimits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountLimitsInput;
+      output: DescribeAccountLimitsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccountLimitsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeAccountLimitsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAccountLimitsCommandOutput> {
-    return deserializeAws_queryDescribeAccountLimitsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountLimitsCommandInput;
+      output: DescribeAccountLimitsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaStoreClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaStoreClient";
-import { ListContainersInput, ListContainersOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListContainersCommand,
-  serializeAws_json1_1ListContainersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListContainersInput, ListContainersOutput } from "../models/models_0";
+import { ListContainers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListContainersCommand}.
+ */
 export interface ListContainersCommandInput extends ListContainersInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListContainersCommand}.
+ */
 export interface ListContainersCommandOutput extends ListContainersOutput, __MetadataBearer {}
 
 /**
@@ -36,68 +37,61 @@ export interface ListContainersCommandOutput extends ListContainersOutput, __Met
  * ```javascript
  * import { MediaStoreClient, ListContainersCommand } from "@aws-sdk/client-mediastore"; // ES Modules import
  * // const { MediaStoreClient, ListContainersCommand } = require("@aws-sdk/client-mediastore"); // CommonJS import
+ * // import type { MediaStoreClientConfig } from "@aws-sdk/client-mediastore";
+ * const config = {}; // type is MediaStoreClientConfig
  * const client = new MediaStoreClient(config);
+ * const input = { // ListContainersInput
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListContainersCommand(input);
  * const response = await client.send(command);
+ * // { // ListContainersOutput
+ * //   Containers: [ // ContainerList // required
+ * //     { // Container
+ * //       Endpoint: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       ARN: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "CREATING" || "DELETING",
+ * //       AccessLoggingEnabled: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListContainersCommandInput - {@link ListContainersCommandInput}
+ * @returns {@link ListContainersCommandOutput}
  * @see {@link ListContainersCommandInput} for command's `input` shape.
  * @see {@link ListContainersCommandOutput} for command's `response` shape.
- * @see {@link MediaStoreClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaStoreClientResolvedConfig | config} for MediaStoreClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link MediaStoreServiceException}
+ * <p>Base exception class for all service exceptions from MediaStore service.</p>
+ *
+ *
+ * @public
  */
-export class ListContainersCommand extends $Command<
-  ListContainersCommandInput,
-  ListContainersCommandOutput,
-  MediaStoreClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListContainersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaStoreClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListContainersCommandInput, ListContainersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaStoreClient";
-    const commandName = "ListContainersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListContainersInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListContainersOutput.filterSensitiveLog,
+export class ListContainersCommand extends command<ListContainersCommandInput, ListContainersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListContainers",
+  ListContainers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListContainersInput;
+      output: ListContainersOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListContainersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListContainersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListContainersCommandOutput> {
-    return deserializeAws_json1_1ListContainersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListContainersCommandInput;
+      output: ListContainersCommandOutput;
+    };
+  };
 }

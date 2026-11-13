@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeActivityInput, DescribeActivityOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeActivityCommand,
-  serializeAws_json1_0DescribeActivityCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeActivityInput, DescribeActivityOutput } from "../models/models_0";
+import { DescribeActivity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeActivityCommand}.
+ */
 export interface DescribeActivityCommandInput extends DescribeActivityInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeActivityCommand}.
+ */
 export interface DescribeActivityCommandOutput extends DescribeActivityOutput, __MetadataBearer {}
 
 /**
@@ -31,68 +32,60 @@ export interface DescribeActivityCommandOutput extends DescribeActivityOutput, _
  * ```javascript
  * import { SFNClient, DescribeActivityCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, DescribeActivityCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // DescribeActivityInput
+ *   activityArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeActivityCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeActivityOutput
+ * //   activityArn: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   creationDate: new Date("TIMESTAMP"), // required
+ * //   encryptionConfiguration: { // EncryptionConfiguration
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     kmsDataKeyReusePeriodSeconds: Number("int"),
+ * //     type: "AWS_OWNED_KEY" || "CUSTOMER_MANAGED_KMS_KEY", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeActivityCommandInput - {@link DescribeActivityCommandInput}
+ * @returns {@link DescribeActivityCommandOutput}
  * @see {@link DescribeActivityCommandInput} for command's `input` shape.
  * @see {@link DescribeActivityCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link ActivityDoesNotExist} (client fault)
+ *  <p>The specified activity does not exist.</p>
+ *
+ * @throws {@link InvalidArn} (client fault)
+ *  <p>The provided Amazon Resource Name (ARN) is not valid.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeActivityCommand extends $Command<
-  DescribeActivityCommandInput,
-  DescribeActivityCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeActivityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeActivityCommandInput, DescribeActivityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "DescribeActivityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeActivityInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeActivityOutput.filterSensitiveLog,
+export class DescribeActivityCommand extends command<DescribeActivityCommandInput, DescribeActivityCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeActivity",
+  DescribeActivity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeActivityInput;
+      output: DescribeActivityOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeActivityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeActivityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeActivityCommandOutput> {
-    return deserializeAws_json1_0DescribeActivityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeActivityCommandInput;
+      output: DescribeActivityCommandOutput;
+    };
+  };
 }

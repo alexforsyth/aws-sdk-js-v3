@@ -1,0 +1,113 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFormTypeInput, GetFormTypeOutput } from "../models/models_1";
+import { GetFormType$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFormTypeCommand}.
+ */
+export interface GetFormTypeCommandInput extends GetFormTypeInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetFormTypeCommand}.
+ */
+export interface GetFormTypeCommandOutput extends GetFormTypeOutput, __MetadataBearer {}
+
+/**
+ * <p>Gets a metadata form type in Amazon DataZone.</p> <p>Form types define the structure and validation rules for collecting metadata about assets in Amazon DataZone. They act as templates that ensure consistent metadata capture across similar types of assets, while allowing for customization to meet specific organizational needs. Form types can include required fields, validation rules, and dependencies, helping maintain high-quality metadata that makes data assets more discoverable and usable.</p> <ul> <li> <p>The form type with the specified identifier must exist in the given domain. </p> </li> <li> <p>The domain must be valid and active.</p> </li> <li> <p>User must have permission on the form type.</p> </li> <li> <p>The form type should not be deleted or in an invalid state.</p> </li> </ul> <p>One use case for this API is to determine whether a form field is indexed for search. </p> <p>A searchable field will be annotated with <code>@amazon.datazone#searchable</code>. By default, searchable fields are indexed for semantic search, where related query terms will match the attribute value even if they are not stemmed or keyword matches. If a field is indexed technical identifier search, it will be annotated with <code>@amazon.datazone#searchable(modes:["TECHNICAL"])</code>. If a field is indexed for lexical search (supports stemmed and prefix matches but not semantic matches), it will be annotated with <code>@amazon.datazone#searchable(modes:["LEXICAL"])</code>.</p> <p>A field storing glossary term IDs (which is filterable) will be annotated with <code>@amazon.datazone#glossaryterm("$\{glossaryId\}")</code>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DataZoneClient, GetFormTypeCommand } from "@aws-sdk/client-datazone"; // ES Modules import
+ * // const { DataZoneClient, GetFormTypeCommand } = require("@aws-sdk/client-datazone"); // CommonJS import
+ * // import type { DataZoneClientConfig } from "@aws-sdk/client-datazone";
+ * const config = {}; // type is DataZoneClientConfig
+ * const client = new DataZoneClient(config);
+ * const input = { // GetFormTypeInput
+ *   domainIdentifier: "STRING_VALUE", // required
+ *   formTypeIdentifier: "STRING_VALUE", // required
+ *   revision: "STRING_VALUE",
+ * };
+ * const command = new GetFormTypeCommand(input);
+ * const response = await client.send(command);
+ * // { // GetFormTypeOutput
+ * //   domainId: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   revision: "STRING_VALUE", // required
+ * //   model: { // Model Union: only one key present
+ * //     smithy: "STRING_VALUE",
+ * //   },
+ * //   owningProjectId: "STRING_VALUE",
+ * //   originDomainId: "STRING_VALUE",
+ * //   originProjectId: "STRING_VALUE",
+ * //   status: "ENABLED" || "DISABLED",
+ * //   createdAt: new Date("TIMESTAMP"),
+ * //   createdBy: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   imports: [ // ImportList
+ * //     { // Import
+ * //       name: "STRING_VALUE", // required
+ * //       revision: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param GetFormTypeCommandInput - {@link GetFormTypeCommandInput}
+ * @returns {@link GetFormTypeCommandOutput}
+ * @see {@link GetFormTypeCommandInput} for command's `input` shape.
+ * @see {@link GetFormTypeCommandOutput} for command's `response` shape.
+ * @see {@link DataZoneClientResolvedConfig | config} for DataZoneClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You do not have permission to perform this action.</p>
+ *
+ * @throws {@link DataZoneServiceException}
+ * <p>Base exception class for all service exceptions from DataZone service.</p>
+ *
+ *
+ * @public
+ */
+export class GetFormTypeCommand extends command<GetFormTypeCommandInput, GetFormTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFormType",
+  GetFormType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFormTypeInput;
+      output: GetFormTypeOutput;
+    };
+    sdk: {
+      input: GetFormTypeCommandInput;
+      output: GetFormTypeCommandOutput;
+    };
+  };
+}

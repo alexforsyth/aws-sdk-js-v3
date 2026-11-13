@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeClusterCommand, DescribeClusterCommandInput } from "../commands/DescribeClusterCommand";
-import { EMRClient } from "../EMRClient";
+import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
+  DescribeClusterCommand,
+} from "../commands/DescribeClusterCommand";
+import type { EMRClient } from "../EMRClient";
+import type { EMRServiceException } from "../models/EMRServiceException";
 
-const checkState = async (client: EMRClient, input: DescribeClusterCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EMRClient, input: DescribeClusterCommandInput): Promise<WaiterResult<DescribeClusterCommandOutput | EMRServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeClusterCommand(input));
+    let result: DescribeClusterCommandOutput & any = await client.send(new DescribeClusterCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Cluster.Status.State;
-      };
+      }
       if (returnComparator() === "RUNNING") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -19,7 +31,7 @@ const checkState = async (client: EMRClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.Cluster.Status.State;
-      };
+      }
       if (returnComparator() === "WAITING") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -27,7 +39,7 @@ const checkState = async (client: EMRClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.Cluster.Status.State;
-      };
+      }
       if (returnComparator() === "TERMINATING") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -35,7 +47,7 @@ const checkState = async (client: EMRClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.Cluster.Status.State;
-      };
+      }
       if (returnComparator() === "TERMINATED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -43,7 +55,7 @@ const checkState = async (client: EMRClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.Cluster.Status.State;
-      };
+      }
       if (returnComparator() === "TERMINATED_WITH_ERRORS") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -60,7 +72,7 @@ const checkState = async (client: EMRClient, input: DescribeClusterCommandInput)
 export const waitForClusterRunning = async (
   params: WaiterConfiguration<EMRClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput | EMRServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -72,8 +84,8 @@ export const waitForClusterRunning = async (
 export const waitUntilClusterRunning = async (
   params: WaiterConfiguration<EMRClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeClusterCommandOutput>;
 };

@@ -1,103 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePendingMaintenanceActionsMessage, PendingMaintenanceActionsMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribePendingMaintenanceActionsCommand,
-  serializeAws_queryDescribePendingMaintenanceActionsCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
-
-export interface DescribePendingMaintenanceActionsCommandInput extends DescribePendingMaintenanceActionsMessage {}
-export interface DescribePendingMaintenanceActionsCommandOutput
-  extends PendingMaintenanceActionsMessage,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePendingMaintenanceActionsMessage, PendingMaintenanceActionsMessage } from "../models/models_0";
+import { DescribePendingMaintenanceActions$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePendingMaintenanceActionsCommand}.
+ */
+export interface DescribePendingMaintenanceActionsCommandInput extends DescribePendingMaintenanceActionsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePendingMaintenanceActionsCommand}.
+ */
+export interface DescribePendingMaintenanceActionsCommandOutput extends PendingMaintenanceActionsMessage, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.</p> <p>This API follows an eventual consistency model. This means that the result of the <code>DescribePendingMaintenanceActions</code> command might not be immediately visible to all subsequent RDS commands. Keep this in mind when you use <code>DescribePendingMaintenanceActions</code> immediately after using a previous API command such as <code>ApplyPendingMaintenanceActions</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, DescribePendingMaintenanceActionsCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, DescribePendingMaintenanceActionsCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // DescribePendingMaintenanceActionsMessage
+ *   ResourceIdentifier: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribePendingMaintenanceActionsCommand(input);
  * const response = await client.send(command);
+ * // { // PendingMaintenanceActionsMessage
+ * //   PendingMaintenanceActions: [ // PendingMaintenanceActions
+ * //     { // ResourcePendingMaintenanceActions
+ * //       ResourceIdentifier: "STRING_VALUE",
+ * //       PendingMaintenanceActionDetails: [ // PendingMaintenanceActionDetails
+ * //         { // PendingMaintenanceAction
+ * //           Action: "STRING_VALUE",
+ * //           AutoAppliedAfterDate: new Date("TIMESTAMP"),
+ * //           ForcedApplyDate: new Date("TIMESTAMP"),
+ * //           OptInStatus: "STRING_VALUE",
+ * //           CurrentApplyDate: new Date("TIMESTAMP"),
+ * //           Description: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePendingMaintenanceActionsCommandInput - {@link DescribePendingMaintenanceActionsCommandInput}
+ * @returns {@link DescribePendingMaintenanceActionsCommandOutput}
  * @see {@link DescribePendingMaintenanceActionsCommandInput} for command's `input` shape.
  * @see {@link DescribePendingMaintenanceActionsCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The specified resource ID was not found.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To list resources with at least one pending maintenance action
+ * ```javascript
+ * // The following example lists the pending maintenace action for a DB instance.
+ * const input = { /* empty *\/ };
+ * const command = new DescribePendingMaintenanceActionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   PendingMaintenanceActions: [
+ *     {
+ *       PendingMaintenanceActionDetails: [
+ *         {
+ *           Action: "system-update",
+ *           Description: "Upgrade to Aurora PostgreSQL 2.4.2"
+ *         }
+ *       ],
+ *       ResourceIdentifier: "arn:aws:rds:us-west-2:123456789012:cluster:global-db1-cl1"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribePendingMaintenanceActionsCommand extends $Command<
-  DescribePendingMaintenanceActionsCommandInput,
-  DescribePendingMaintenanceActionsCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePendingMaintenanceActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePendingMaintenanceActionsCommandInput, DescribePendingMaintenanceActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "DescribePendingMaintenanceActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePendingMaintenanceActionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: PendingMaintenanceActionsMessage.filterSensitiveLog,
+export class DescribePendingMaintenanceActionsCommand extends command<DescribePendingMaintenanceActionsCommandInput, DescribePendingMaintenanceActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePendingMaintenanceActions",
+  DescribePendingMaintenanceActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePendingMaintenanceActionsMessage;
+      output: PendingMaintenanceActionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribePendingMaintenanceActionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribePendingMaintenanceActionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribePendingMaintenanceActionsCommandOutput> {
-    return deserializeAws_queryDescribePendingMaintenanceActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePendingMaintenanceActionsCommandInput;
+      output: DescribePendingMaintenanceActionsCommandOutput;
+    };
+  };
 }

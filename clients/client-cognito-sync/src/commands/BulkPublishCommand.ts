@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { BulkPublishRequest, BulkPublishResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BulkPublishCommand,
-  serializeAws_restJson1BulkPublishCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BulkPublishRequest, BulkPublishResponse } from "../models/models_0";
+import { BulkPublish$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BulkPublishCommand}.
+ */
 export interface BulkPublishCommandInput extends BulkPublishRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BulkPublishCommand}.
+ */
 export interface BulkPublishCommandOutput extends BulkPublishResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface BulkPublishCommandOutput extends BulkPublishResponse, __Metadat
  * ```javascript
  * import { CognitoSyncClient, BulkPublishCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, BulkPublishCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // BulkPublishRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ * };
  * const command = new BulkPublishCommand(input);
  * const response = await client.send(command);
+ * // { // BulkPublishResponse
+ * //   IdentityPoolId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param BulkPublishCommandInput - {@link BulkPublishCommandInput}
+ * @returns {@link BulkPublishCommandOutput}
  * @see {@link BulkPublishCommandInput} for command's `input` shape.
  * @see {@link BulkPublishCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link AlreadyStreamedException} (client fault)
+ *  An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
+ *
+ * @throws {@link DuplicateRequestException} (client fault)
+ *  An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class BulkPublishCommand extends $Command<
-  BulkPublishCommandInput,
-  BulkPublishCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BulkPublishCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BulkPublishCommandInput, BulkPublishCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "BulkPublishCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BulkPublishRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BulkPublishResponse.filterSensitiveLog,
+export class BulkPublishCommand extends command<BulkPublishCommandInput, BulkPublishCommandOutput>(
+  _ep0,
+  _mw0,
+  "BulkPublish",
+  BulkPublish$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BulkPublishRequest;
+      output: BulkPublishResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BulkPublishCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BulkPublishCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BulkPublishCommandOutput> {
-    return deserializeAws_restJson1BulkPublishCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BulkPublishCommandInput;
+      output: BulkPublishCommandOutput;
+    };
+  };
 }

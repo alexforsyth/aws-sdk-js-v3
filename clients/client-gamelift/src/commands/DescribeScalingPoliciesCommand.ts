@@ -1,117 +1,124 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DescribeScalingPoliciesInput, DescribeScalingPoliciesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeScalingPoliciesCommand,
-  serializeAws_json1_1DescribeScalingPoliciesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeScalingPoliciesInput, DescribeScalingPoliciesOutput } from "../models/models_0";
+import { DescribeScalingPolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeScalingPoliciesCommand}.
+ */
 export interface DescribeScalingPoliciesCommandInput extends DescribeScalingPoliciesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeScalingPoliciesCommand}.
+ */
 export interface DescribeScalingPoliciesCommandOutput extends DescribeScalingPoliciesOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves all scaling policies applied to a fleet.</p>
- *         <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this
- *             request by policy status, such as to retrieve only active scaling policies. Use the
- *             pagination parameters to retrieve results as a set of sequential pages. If successful,
- *             set of <a>ScalingPolicy</a> objects is returned for the fleet.</p>
- *         <p>A fleet may have all of its scaling policies suspended (<a>StopFleetActions</a>). This operation does not affect the status of the scaling
- *             policies, which remains ACTIVE. To see whether a fleet's scaling policies are in force
- *             or suspended, call <a>DescribeFleetAttributes</a> and check the stopped
- *             actions.</p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>DescribeFleetCapacity</a> |
- *                     <a>UpdateFleetCapacity</a> |
- *                     <a>DescribeEC2InstanceLimits</a> |
- *                     <a>PutScalingPolicy</a> |
- *                     <a>DescribeScalingPolicies</a> |
- *                     <a>DeleteScalingPolicy</a> |
- *                     <a>StopFleetActions</a> |
- *                     <a>StartFleetActions</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
- *          </p>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Container</p>
+ *          <p>Retrieves all scaling policies applied to a fleet.</p>
+ *          <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this request
+ *             by policy status, such as to retrieve only active scaling policies. Use the pagination
+ *             parameters to retrieve results as a set of sequential pages. If successful, set of
+ *                 <code>ScalingPolicy</code> objects is returned for the fleet.</p>
+ *          <p>A fleet may have all of its scaling policies suspended. This operation does not affect
+ *             the status of the scaling policies, which remains ACTIVE.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DescribeScalingPoliciesCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DescribeScalingPoliciesCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DescribeScalingPoliciesInput
+ *   FleetId: "STRING_VALUE", // required
+ *   StatusFilter: "ACTIVE" || "UPDATE_REQUESTED" || "UPDATING" || "DELETE_REQUESTED" || "DELETING" || "DELETED" || "ERROR",
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Location: "STRING_VALUE",
+ * };
  * const command = new DescribeScalingPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeScalingPoliciesOutput
+ * //   ScalingPolicies: [ // ScalingPolicyList
+ * //     { // ScalingPolicy
+ * //       FleetId: "STRING_VALUE",
+ * //       FleetArn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "UPDATE_REQUESTED" || "UPDATING" || "DELETE_REQUESTED" || "DELETING" || "DELETED" || "ERROR",
+ * //       ScalingAdjustment: Number("int"),
+ * //       ScalingAdjustmentType: "ChangeInCapacity" || "ExactCapacity" || "PercentChangeInCapacity",
+ * //       ComparisonOperator: "GreaterThanOrEqualToThreshold" || "GreaterThanThreshold" || "LessThanThreshold" || "LessThanOrEqualToThreshold",
+ * //       Threshold: Number("double"),
+ * //       EvaluationPeriods: Number("int"),
+ * //       MetricName: "ActivatingGameSessions" || "ActiveGameSessions" || "ActiveInstances" || "AvailableGameSessions" || "AvailablePlayerSessions" || "CurrentPlayerSessions" || "IdleInstances" || "PercentAvailableGameSessions" || "PercentIdleInstances" || "QueueDepth" || "WaitTime" || "ConcurrentActivatableGameSessions",
+ * //       PolicyType: "RuleBased" || "TargetBased",
+ * //       TargetConfiguration: { // TargetConfiguration
+ * //         TargetValue: Number("double"), // required
+ * //       },
+ * //       UpdateStatus: "PENDING_UPDATE",
+ * //       Location: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeScalingPoliciesCommandInput - {@link DescribeScalingPoliciesCommandInput}
+ * @returns {@link DescribeScalingPoliciesCommandOutput}
  * @see {@link DescribeScalingPoliciesCommandInput} for command's `input` shape.
  * @see {@link DescribeScalingPoliciesCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeScalingPoliciesCommand extends $Command<
-  DescribeScalingPoliciesCommandInput,
-  DescribeScalingPoliciesCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeScalingPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeScalingPoliciesCommandInput, DescribeScalingPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DescribeScalingPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeScalingPoliciesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeScalingPoliciesOutput.filterSensitiveLog,
+export class DescribeScalingPoliciesCommand extends command<DescribeScalingPoliciesCommandInput, DescribeScalingPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeScalingPolicies",
+  DescribeScalingPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScalingPoliciesInput;
+      output: DescribeScalingPoliciesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeScalingPoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeScalingPoliciesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeScalingPoliciesCommandOutput> {
-    return deserializeAws_json1_1DescribeScalingPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeScalingPoliciesCommandInput;
+      output: DescribeScalingPoliciesCommandOutput;
+    };
+  };
 }

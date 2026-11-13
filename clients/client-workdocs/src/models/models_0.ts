@@ -1,847 +1,618 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ActivityType,
+  AdditionalResponseFieldType,
+  BooleanEnumType,
+  CommentStatusType,
+  CommentVisibilityType,
+  ContentCategoryType,
+  DocumentSourceType,
+  DocumentStatusType,
+  DocumentThumbnailType,
+  DocumentVersionStatus,
+  FolderContentType,
+  LanguageCodeType,
+  LocaleType,
+  OrderByFieldType,
+  OrderType,
+  PrincipalRoleType,
+  PrincipalType,
+  ResourceCollectionType,
+  ResourceSortType,
+  ResourceStateType,
+  ResourceType,
+  ResponseItemType,
+  RolePermissionType,
+  RoleType,
+  SearchCollectionType,
+  SearchQueryScopeType,
+  SearchResourceType,
+  ShareStatusType,
+  SortOrder,
+  StorageType,
+  SubscriptionProtocolType,
+  SubscriptionType,
+  UserFilterType,
+  UserSortType,
+  UserStatusType,
+  UserType,
+} from "./enums";
 
+/**
+ * @public
+ */
 export interface AbortDocumentVersionUploadRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the version.</p>
+   * @public
    */
   VersionId: string | undefined;
 }
 
-export namespace AbortDocumentVersionUploadRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AbortDocumentVersionUploadRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
 /**
- * <p>The resource does not exist.</p>
+ * @public
  */
-export interface EntityNotExistsException extends __SmithyException, $MetadataBearer {
-  name: "EntityNotExistsException";
-  $fault: "client";
-  Message?: string;
-  EntityIds?: string[];
-}
-
-export namespace EntityNotExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EntityNotExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The AWS Directory Service cannot reach an on-premises instance. Or a dependency
- *             under the control of the organization is failing, such as a connected Active
- *             Directory.</p>
- */
-export interface FailedDependencyException extends __SmithyException, $MetadataBearer {
-  name: "FailedDependencyException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace FailedDependencyException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FailedDependencyException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified document version is not in the INITIALIZED state.</p>
- */
-export interface ProhibitedStateException extends __SmithyException, $MetadataBearer {
-  name: "ProhibitedStateException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ProhibitedStateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProhibitedStateException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more of the dependencies is unavailable.</p>
- */
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The operation is not permitted.</p>
- */
-export interface UnauthorizedOperationException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedOperationException";
-  $fault: "client";
-  Message?: string;
-  Code?: string;
-}
-
-export namespace UnauthorizedOperationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedOperationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The caller does not have access to perform the action on the resource.</p>
- */
-export interface UnauthorizedResourceAccessException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedResourceAccessException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace UnauthorizedResourceAccessException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedResourceAccessException): any => ({
-    ...obj,
-  });
-}
-
 export interface ActivateUserRequest {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
-}
-
-export namespace ActivateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ActivateUserRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export enum LocaleType {
-  DE = "de",
-  DEFAULT = "default",
-  EN = "en",
-  ES = "es",
-  FR = "fr",
-  JA = "ja",
-  KO = "ko",
-  PT_BR = "pt_BR",
-  RU = "ru",
-  ZH_CN = "zh_CN",
-  ZH_TW = "zh_TW",
-}
-
-export enum UserStatusType {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-  PENDING = "PENDING",
-}
-
-export enum StorageType {
-  QUOTA = "QUOTA",
-  UNLIMITED = "UNLIMITED",
+  AuthenticationToken?: string | undefined;
 }
 
 /**
  * <p>Describes the storage for a user.</p>
+ * @public
  */
 export interface StorageRuleType {
   /**
    * <p>The amount of storage allocated, in bytes.</p>
+   * @public
    */
-  StorageAllocatedInBytes?: number;
+  StorageAllocatedInBytes?: number | undefined;
 
   /**
    * <p>The type of storage.</p>
+   * @public
    */
-  StorageType?: StorageType | string;
-}
-
-export namespace StorageRuleType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StorageRuleType): any => ({
-    ...obj,
-  });
+  StorageType?: StorageType | undefined;
 }
 
 /**
  * <p>Describes the storage for a user.</p>
+ * @public
  */
 export interface UserStorageMetadata {
   /**
    * <p>The amount of storage used, in bytes.</p>
+   * @public
    */
-  StorageUtilizedInBytes?: number;
+  StorageUtilizedInBytes?: number | undefined;
 
   /**
    * <p>The storage for a user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
-}
-
-export namespace UserStorageMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserStorageMetadata): any => ({
-    ...obj,
-  });
-}
-
-export enum UserType {
-  ADMIN = "ADMIN",
-  MINIMALUSER = "MINIMALUSER",
-  POWERUSER = "POWERUSER",
-  USER = "USER",
-  WORKSPACESUSER = "WORKSPACESUSER",
+  StorageRule?: StorageRuleType | undefined;
 }
 
 /**
  * <p>Describes a user.</p>
+ * @public
  */
 export interface User {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The login name of the user.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
+  EmailAddress?: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The ID of the root folder.</p>
+   * @public
    */
-  RootFolderId?: string;
+  RootFolderId?: string | undefined;
 
   /**
    * <p>The ID of the recycle bin folder.</p>
+   * @public
    */
-  RecycleBinFolderId?: string;
+  RecycleBinFolderId?: string | undefined;
 
   /**
    * <p>The status of the user.</p>
+   * @public
    */
-  Status?: UserStatusType | string;
+  Status?: UserStatusType | undefined;
 
   /**
    * <p>The type of user.</p>
+   * @public
    */
-  Type?: UserType | string;
+  Type?: UserType | undefined;
 
   /**
    * <p>The time when the user was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the user was modified.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The locale of the user.</p>
+   * @public
    */
-  Locale?: LocaleType | string;
+  Locale?: LocaleType | undefined;
 
   /**
    * <p>The storage for the user.</p>
+   * @public
    */
-  Storage?: UserStorageMetadata;
+  Storage?: UserStorageMetadata | undefined;
 }
 
-export namespace User {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: User): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ActivateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
-}
-
-export namespace ActivateUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ActivateUserResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum CommentStatusType {
-  DELETED = "DELETED",
-  DRAFT = "DRAFT",
-  PUBLISHED = "PUBLISHED",
+  User?: User | undefined;
 }
 
 /**
  * <p>Describes the metadata of a comment.</p>
+ * @public
  */
 export interface CommentMetadata {
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
-  CommentId?: string;
+  CommentId?: string | undefined;
 
   /**
    * <p>The user who made the comment.</p>
+   * @public
    */
-  Contributor?: User;
+  Contributor?: User | undefined;
 
   /**
    * <p>The timestamp that the comment was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The status of the comment.</p>
+   * @public
    */
-  CommentStatus?: CommentStatusType | string;
+  CommentStatus?: CommentStatusType | undefined;
 
   /**
    * <p>The ID of the user being replied to.</p>
+   * @public
    */
-  RecipientId?: string;
-}
+  RecipientId?: string | undefined;
 
-export namespace CommentMetadata {
   /**
-   * @internal
+   * <p>The ID of the user who made the comment.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CommentMetadata): any => ({
-    ...obj,
-  });
+  ContributorId?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of the user.</p>
+ * @public
  */
 export interface UserMetadata {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the user.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 
   /**
    * <p>The given name of the user before a rename operation.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
-}
-
-export namespace UserMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UserMetadata): any => ({
-    ...obj,
-  });
-}
-
-export enum ResourceType {
-  DOCUMENT = "DOCUMENT",
-  FOLDER = "FOLDER",
+  EmailAddress?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of a resource.</p>
+ * @public
  */
 export interface ResourceMetadata {
   /**
    * <p>The type of resource.</p>
+   * @public
    */
-  Type?: ResourceType | string;
+  Type?: ResourceType | undefined;
 
   /**
    * <p>The name of the resource.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The original name of the resource before a rename operation.</p>
+   * @public
    */
-  OriginalName?: string;
+  OriginalName?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The version ID of the resource. This is an optional field and is filled for action
    *             on document version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>The owner of the resource.</p>
+   * @public
    */
-  Owner?: UserMetadata;
+  Owner?: UserMetadata | undefined;
 
   /**
    * <p>The parent ID of the resource before a rename operation.</p>
+   * @public
    */
-  ParentId?: string;
-}
-
-export namespace ResourceMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceMetadata): any => ({
-    ...obj,
-  });
+  ParentId?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of a user group.</p>
+ * @public
  */
 export interface GroupMetadata {
   /**
    * <p>The ID of the user group.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the group.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace GroupMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GroupMetadata): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes the users or user groups.</p>
+ * @public
  */
 export interface Participants {
   /**
    * <p>The list of users.</p>
+   * @public
    */
-  Users?: UserMetadata[];
+  Users?: UserMetadata[] | undefined;
 
   /**
    * <p>The list of user groups.</p>
+   * @public
    */
-  Groups?: GroupMetadata[];
-}
-
-export namespace Participants {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Participants): any => ({
-    ...obj,
-  });
-}
-
-export enum ActivityType {
-  DOCUMENT_ANNOTATION_ADDED = "DOCUMENT_ANNOTATION_ADDED",
-  DOCUMENT_ANNOTATION_DELETED = "DOCUMENT_ANNOTATION_DELETED",
-  DOCUMENT_CHECKED_IN = "DOCUMENT_CHECKED_IN",
-  DOCUMENT_CHECKED_OUT = "DOCUMENT_CHECKED_OUT",
-  DOCUMENT_COMMENT_ADDED = "DOCUMENT_COMMENT_ADDED",
-  DOCUMENT_COMMENT_DELETED = "DOCUMENT_COMMENT_DELETED",
-  DOCUMENT_MOVED = "DOCUMENT_MOVED",
-  DOCUMENT_RECYCLED = "DOCUMENT_RECYCLED",
-  DOCUMENT_RENAMED = "DOCUMENT_RENAMED",
-  DOCUMENT_RESTORED = "DOCUMENT_RESTORED",
-  DOCUMENT_REVERTED = "DOCUMENT_REVERTED",
-  DOCUMENT_SHAREABLE_LINK_CREATED = "DOCUMENT_SHAREABLE_LINK_CREATED",
-  DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED",
-  DOCUMENT_SHAREABLE_LINK_REMOVED = "DOCUMENT_SHAREABLE_LINK_REMOVED",
-  DOCUMENT_SHARED = "DOCUMENT_SHARED",
-  DOCUMENT_SHARE_PERMISSION_CHANGED = "DOCUMENT_SHARE_PERMISSION_CHANGED",
-  DOCUMENT_UNSHARED = "DOCUMENT_UNSHARED",
-  DOCUMENT_VERSION_DELETED = "DOCUMENT_VERSION_DELETED",
-  DOCUMENT_VERSION_DOWNLOADED = "DOCUMENT_VERSION_DOWNLOADED",
-  DOCUMENT_VERSION_UPLOADED = "DOCUMENT_VERSION_UPLOADED",
-  DOCUMENT_VERSION_VIEWED = "DOCUMENT_VERSION_VIEWED",
-  FOLDER_CREATED = "FOLDER_CREATED",
-  FOLDER_DELETED = "FOLDER_DELETED",
-  FOLDER_MOVED = "FOLDER_MOVED",
-  FOLDER_RECYCLED = "FOLDER_RECYCLED",
-  FOLDER_RENAMED = "FOLDER_RENAMED",
-  FOLDER_RESTORED = "FOLDER_RESTORED",
-  FOLDER_SHAREABLE_LINK_CREATED = "FOLDER_SHAREABLE_LINK_CREATED",
-  FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
-  FOLDER_SHAREABLE_LINK_REMOVED = "FOLDER_SHAREABLE_LINK_REMOVED",
-  FOLDER_SHARED = "FOLDER_SHARED",
-  FOLDER_SHARE_PERMISSION_CHANGED = "FOLDER_SHARE_PERMISSION_CHANGED",
-  FOLDER_UNSHARED = "FOLDER_UNSHARED",
+  Groups?: GroupMetadata[] | undefined;
 }
 
 /**
  * <p>Describes the activity information.</p>
+ * @public
  */
 export interface Activity {
   /**
    * <p>The activity type.</p>
+   * @public
    */
-  Type?: ActivityType | string;
+  Type?: ActivityType | undefined;
 
   /**
    * <p>The timestamp when the action was performed.</p>
+   * @public
    */
-  TimeStamp?: Date;
+  TimeStamp?: Date | undefined;
 
   /**
    * <p>Indicates whether an activity is indirect or direct. An indirect activity results
    *             from a direct activity performed on a parent resource. For example, sharing a parent
    *             folder (the direct activity) shares all of the subfolders and documents within the
    *             parent folder (the indirect activity).</p>
+   * @public
    */
-  IsIndirectActivity?: boolean;
+  IsIndirectActivity?: boolean | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The user who performed the action.</p>
+   * @public
    */
-  Initiator?: UserMetadata;
+  Initiator?: UserMetadata | undefined;
 
   /**
    * <p>The list of users or groups impacted by this action. This is an optional field and
    *             is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED,
    *             DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.</p>
+   * @public
    */
-  Participants?: Participants;
+  Participants?: Participants | undefined;
 
   /**
    * <p>The metadata of the resource involved in the user action.</p>
+   * @public
    */
-  ResourceMetadata?: ResourceMetadata;
+  ResourceMetadata?: ResourceMetadata | undefined;
 
   /**
    * <p>The original parent of the resource. This is an optional field and is filled for
    *             move activities.</p>
+   * @public
    */
-  OriginalParent?: ResourceMetadata;
+  OriginalParent?: ResourceMetadata | undefined;
 
   /**
    * <p>Metadata of the commenting activity. This is an optional field and is filled for
    *             commenting activities.</p>
+   * @public
    */
-  CommentMetadata?: CommentMetadata;
-}
-
-export namespace Activity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Activity): any => ({
-    ...obj,
-  });
+  CommentMetadata?: CommentMetadata | undefined;
 }
 
 /**
  * <p>Set of options which defines notification preferences of given action.</p>
+ * @public
  */
 export interface NotificationOptions {
   /**
    * <p>Boolean value to indicate an email notification should be sent to the
-   *             receipients.</p>
+   *             recipients.</p>
+   * @public
    */
-  SendEmail?: boolean;
+  SendEmail?: boolean | undefined;
 
   /**
    * <p>Text value to be included in the email body.</p>
+   * @public
    */
-  EmailMessage?: string;
-}
-
-export namespace NotificationOptions {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotificationOptions): any => ({
-    ...obj,
-    ...(obj.EmailMessage && { EmailMessage: SENSITIVE_STRING }),
-  });
-}
-
-export enum RoleType {
-  CONTRIBUTOR = "CONTRIBUTOR",
-  COOWNER = "COOWNER",
-  OWNER = "OWNER",
-  VIEWER = "VIEWER",
-}
-
-export enum PrincipalType {
-  ANONYMOUS = "ANONYMOUS",
-  GROUP = "GROUP",
-  INVITE = "INVITE",
-  ORGANIZATION = "ORGANIZATION",
-  USER = "USER",
+  EmailMessage?: string | undefined;
 }
 
 /**
  * <p>Describes the recipient type and ID, if available.</p>
+ * @public
  */
 export interface SharePrincipal {
   /**
    * <p>The ID of the recipient.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The type of the recipient.</p>
+   * @public
    */
-  Type: PrincipalType | string | undefined;
+  Type: PrincipalType | undefined;
 
   /**
    * <p>The role of the recipient.</p>
+   * @public
    */
-  Role: RoleType | string | undefined;
+  Role: RoleType | undefined;
 }
 
-export namespace SharePrincipal {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SharePrincipal): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The users, groups, or organization being granted permission.</p>
+   * @public
    */
   Principals: SharePrincipal[] | undefined;
 
   /**
    * <p>The notification options.</p>
+   * @public
    */
-  NotificationOptions?: NotificationOptions;
-}
-
-export namespace AddResourcePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddResourcePermissionsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-    ...(obj.NotificationOptions && {
-      NotificationOptions: NotificationOptions.filterSensitiveLog(obj.NotificationOptions),
-    }),
-  });
-}
-
-export enum ShareStatusType {
-  FAILURE = "FAILURE",
-  SUCCESS = "SUCCESS",
+  NotificationOptions?: NotificationOptions | undefined;
 }
 
 /**
  * <p>Describes the share results of a resource.</p>
+ * @public
  */
 export interface ShareResult {
   /**
    * <p>The ID of the principal.</p>
+   * @public
    */
-  PrincipalId?: string;
+  PrincipalId?: string | undefined;
 
   /**
    * <p>The ID of the invited user.</p>
+   * @public
    */
-  InviteePrincipalId?: string;
+  InviteePrincipalId?: string | undefined;
 
   /**
    * <p>The role.</p>
+   * @public
    */
-  Role?: RoleType | string;
+  Role?: RoleType | undefined;
 
   /**
    * <p>The status.</p>
+   * @public
    */
-  Status?: ShareStatusType | string;
+  Status?: ShareStatusType | undefined;
 
   /**
    * <p>The ID of the resource that was shared.</p>
+   * @public
    */
-  ShareId?: string;
+  ShareId?: string | undefined;
 
   /**
    * <p>The status message.</p>
+   * @public
    */
-  StatusMessage?: string;
+  StatusMessage?: string | undefined;
 }
 
-export namespace ShareResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ShareResult): any => ({
-    ...obj,
-    ...(obj.StatusMessage && { StatusMessage: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddResourcePermissionsResponse {
   /**
    * <p>The share results.</p>
+   * @public
    */
-  ShareResults?: ShareResult[];
+  ShareResults?: ShareResult[] | undefined;
 }
 
-export namespace AddResourcePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddResourcePermissionsResponse): any => ({
-    ...obj,
-    ...(obj.ShareResults && { ShareResults: obj.ShareResults.map((item) => ShareResult.filterSensitiveLog(item)) }),
-  });
-}
-
-export enum CommentVisibilityType {
-  PRIVATE = "PRIVATE",
-  PUBLIC = "PUBLIC",
-}
-
+/**
+ * @public
+ */
 export interface CreateCommentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The ID of the parent comment.</p>
+   * @public
    */
-  ParentId?: string;
+  ParentId?: string | undefined;
 
   /**
    * <p>The ID of the root comment in the thread.</p>
+   * @public
    */
-  ThreadId?: string;
+  ThreadId?: string | undefined;
 
   /**
    * <p>The text of the comment.</p>
+   * @public
    */
   Text: string | undefined;
 
@@ -849,2683 +620,2315 @@ export interface CreateCommentRequest {
    * <p>The visibility of the comment. Options are either PRIVATE, where the comment is
    *             visible only to the comment author and document owner and co-owners, or PUBLIC, where
    *             the comment is visible to document owners, co-owners, and contributors.</p>
+   * @public
    */
-  Visibility?: CommentVisibilityType | string;
+  Visibility?: CommentVisibilityType | undefined;
 
   /**
    * <p>Set this parameter to TRUE to send an email out to the document collaborators after
    *             the comment is created.</p>
+   * @public
    */
-  NotifyCollaborators?: boolean;
-}
-
-export namespace CreateCommentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCommentRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-    ...(obj.Text && { Text: SENSITIVE_STRING }),
-  });
+  NotifyCollaborators?: boolean | undefined;
 }
 
 /**
  * <p>Describes a comment.</p>
+ * @public
  */
 export interface Comment {
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
   CommentId: string | undefined;
 
   /**
    * <p>The ID of the parent comment.</p>
+   * @public
    */
-  ParentId?: string;
+  ParentId?: string | undefined;
 
   /**
    * <p>The ID of the root comment in the thread.</p>
+   * @public
    */
-  ThreadId?: string;
+  ThreadId?: string | undefined;
 
   /**
    * <p>The text of the comment.</p>
+   * @public
    */
-  Text?: string;
+  Text?: string | undefined;
 
   /**
    * <p>The details of the user who made the comment.</p>
+   * @public
    */
-  Contributor?: User;
+  Contributor?: User | undefined;
 
   /**
    * <p>The time that the comment was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The status of the comment.</p>
+   * @public
    */
-  Status?: CommentStatusType | string;
+  Status?: CommentStatusType | undefined;
 
   /**
    * <p>The visibility of the comment. Options are either PRIVATE, where the comment is
    *             visible only to the comment author and document owner and co-owners, or PUBLIC, where
    *             the comment is visible to document owners, co-owners, and contributors.</p>
+   * @public
    */
-  Visibility?: CommentVisibilityType | string;
+  Visibility?: CommentVisibilityType | undefined;
 
   /**
    * <p>If the comment is a reply to another user's comment, this field contains the user
    *             ID of the user being replied to.</p>
+   * @public
    */
-  RecipientId?: string;
+  RecipientId?: string | undefined;
 }
 
-export namespace Comment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Comment): any => ({
-    ...obj,
-    ...(obj.Text && { Text: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCommentResponse {
   /**
    * <p>The comment that has been created.</p>
+   * @public
    */
-  Comment?: Comment;
-}
-
-export namespace CreateCommentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCommentResponse): any => ({
-    ...obj,
-    ...(obj.Comment && { Comment: Comment.filterSensitiveLog(obj.Comment) }),
-  });
+  Comment?: Comment | undefined;
 }
 
 /**
- * <p>This exception is thrown when the document is locked for comments and user tries to
- *             create or delete a comment on that document.</p>
+ * @public
  */
-export interface DocumentLockedForCommentsException extends __SmithyException, $MetadataBearer {
-  name: "DocumentLockedForCommentsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace DocumentLockedForCommentsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DocumentLockedForCommentsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested operation is not allowed on the specified comment object.</p>
- */
-export interface InvalidCommentOperationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidCommentOperationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidCommentOperationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidCommentOperationException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateCustomMetadataRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the version, if the custom metadata is being added to a document
    *             version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>Custom metadata in the form of name-value pairs.</p>
+   * @public
    */
-  CustomMetadata: { [key: string]: string } | undefined;
+  CustomMetadata: Record<string, string> | undefined;
 }
 
-export namespace CreateCustomMetadataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCustomMetadataRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCustomMetadataResponse {}
 
-export namespace CreateCustomMetadataResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCustomMetadataResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>The limit has been reached on the number of custom properties for the specified
- *             resource.</p>
+ * @public
  */
-export interface CustomMetadataLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "CustomMetadataLimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace CustomMetadataLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomMetadataLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Another operation is in progress on the resource that conflicts with the current operation.</p>
- */
-export interface ConflictingOperationException extends __SmithyException, $MetadataBearer {
-  name: "ConflictingOperationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ConflictingOperationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictingOperationException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The name of the new folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
   ParentFolderId: string | undefined;
 }
 
-export namespace CreateFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export enum ResourceStateType {
-  ACTIVE = "ACTIVE",
-  RECYCLED = "RECYCLED",
-  RECYCLING = "RECYCLING",
-  RESTORING = "RESTORING",
-}
-
 /**
  * <p>Describes a folder.</p>
+ * @public
  */
 export interface FolderMetadata {
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The time when the folder was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the folder was updated.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The resource state of the folder.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 
   /**
    * <p>The unique identifier created from the subfolders and documents of the
    *             folder.</p>
+   * @public
    */
-  Signature?: string;
+  Signature?: string | undefined;
 
   /**
    * <p>List of labels on the folder.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 
   /**
    * <p>The size of the folder metadata.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 
   /**
    * <p>The size of the latest version of the folder metadata.</p>
+   * @public
    */
-  LatestVersionSize?: number;
+  LatestVersionSize?: number | undefined;
 }
 
-export namespace FolderMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FolderMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateFolderResponse {
   /**
    * <p>The metadata of the folder.</p>
+   * @public
    */
-  Metadata?: FolderMetadata;
-}
-
-export namespace CreateFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFolderResponse): any => ({
-    ...obj,
-  });
+  Metadata?: FolderMetadata | undefined;
 }
 
 /**
- * <p>The resource already exists.</p>
+ * @public
  */
-export interface EntityAlreadyExistsException extends __SmithyException, $MetadataBearer {
-  name: "EntityAlreadyExistsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace EntityAlreadyExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EntityAlreadyExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The maximum of 100,000 folders under the parent folder has been exceeded.</p>
- */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateLabelsRequest {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>List of labels to add to the resource.</p>
+   * @public
    */
   Labels: string[] | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
-}
-
-export namespace CreateLabelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLabelsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface CreateLabelsResponse {}
-
-export namespace CreateLabelsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateLabelsResponse): any => ({
-    ...obj,
-  });
+  AuthenticationToken?: string | undefined;
 }
 
 /**
- * <p>The limit has been reached on the number of labels for the specified
- *             resource.</p>
+ * @public
  */
-export interface TooManyLabelsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyLabelsException";
-  $fault: "client";
-  Message?: string;
-}
+export interface CreateLabelsResponse {}
 
-export namespace TooManyLabelsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyLabelsException): any => ({
-    ...obj,
-  });
-}
-
-export enum SubscriptionProtocolType {
-  HTTPS = "HTTPS",
-}
-
-export enum SubscriptionType {
-  ALL = "ALL",
-}
-
+/**
+ * @public
+ */
 export interface CreateNotificationSubscriptionRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 
   /**
    * <p>The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint
    *             is a URL that begins with <code>https</code>.</p>
+   * @public
    */
   Endpoint: string | undefined;
 
   /**
    * <p>The protocol to use. The supported value is https, which delivers JSON-encoded
    *             messages using HTTPS POST.</p>
+   * @public
    */
-  Protocol: SubscriptionProtocolType | string | undefined;
+  Protocol: SubscriptionProtocolType | undefined;
 
   /**
    * <p>The notification type.</p>
+   * @public
    */
-  SubscriptionType: SubscriptionType | string | undefined;
-}
-
-export namespace CreateNotificationSubscriptionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateNotificationSubscriptionRequest): any => ({
-    ...obj,
-  });
+  SubscriptionType: SubscriptionType | undefined;
 }
 
 /**
  * <p>Describes a subscription.</p>
+ * @public
  */
 export interface Subscription {
   /**
    * <p>The ID of the subscription.</p>
+   * @public
    */
-  SubscriptionId?: string;
+  SubscriptionId?: string | undefined;
 
   /**
    * <p>The endpoint of the subscription.</p>
+   * @public
    */
-  EndPoint?: string;
+  EndPoint?: string | undefined;
 
   /**
    * <p>The protocol of the subscription.</p>
+   * @public
    */
-  Protocol?: SubscriptionProtocolType | string;
-}
-
-export namespace Subscription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Subscription): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateNotificationSubscriptionResponse {
-  /**
-   * <p>The subscription.</p>
-   */
-  Subscription?: Subscription;
-}
-
-export namespace CreateNotificationSubscriptionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateNotificationSubscriptionResponse): any => ({
-    ...obj,
-  });
+  Protocol?: SubscriptionProtocolType | undefined;
 }
 
 /**
- * <p>You've reached the limit on the number of subscriptions for the WorkDocs
- *             instance.</p>
+ * @public
  */
-export interface TooManySubscriptionsException extends __SmithyException, $MetadataBearer {
-  name: "TooManySubscriptionsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace TooManySubscriptionsException {
+export interface CreateNotificationSubscriptionResponse {
   /**
-   * @internal
+   * <p>The subscription.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TooManySubscriptionsException): any => ({
-    ...obj,
-  });
+  Subscription?: Subscription | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateUserRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The login name of the user.</p>
+   * @public
    */
   Username: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
+  EmailAddress?: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
   GivenName: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
   Surname: string | undefined;
 
   /**
    * <p>The password of the user.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The amount of storage for the user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
+  StorageRule?: StorageRuleType | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 }
 
-export namespace CreateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateUserRequest): any => ({
-    ...obj,
-    ...(obj.Password && { Password: SENSITIVE_STRING }),
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
+  User?: User | undefined;
 }
 
-export namespace CreateUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateUserResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeactivateUserRequest {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 }
 
-export namespace DeactivateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeactivateUserRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCommentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
   CommentId: string | undefined;
 }
 
-export namespace DeleteCommentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCommentRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCustomMetadataRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource, either a document or folder.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the version, if the custom metadata is being deleted from a document
    *             version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>List of properties to remove.</p>
+   * @public
    */
-  Keys?: string[];
+  Keys?: string[] | undefined;
 
   /**
    * <p>Flag to indicate removal of all custom metadata properties from the specified
    *             resource.</p>
+   * @public
    */
-  DeleteAll?: boolean;
-}
-
-export namespace DeleteCustomMetadataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCustomMetadataRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface DeleteCustomMetadataResponse {}
-
-export namespace DeleteCustomMetadataResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCustomMetadataResponse): any => ({
-    ...obj,
-  });
+  DeleteAll?: boolean | undefined;
 }
 
 /**
- * <p>The resource hierarchy is changing.</p>
+ * @public
  */
-export interface ConcurrentModificationException extends __SmithyException, $MetadataBearer {
-  name: "ConcurrentModificationException";
-  $fault: "client";
-  Message?: string;
-}
+export interface DeleteCustomMetadataResponse {}
 
-export namespace ConcurrentModificationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConcurrentModificationException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDocumentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 }
 
-export namespace DeleteDocumentRequest {
+/**
+ * @public
+ */
+export interface DeleteDocumentVersionRequest {
   /**
-   * @internal
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteDocumentRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The ID of the document associated with the version being deleted.</p>
+   * @public
+   */
+  DocumentId: string | undefined;
+
+  /**
+   * <p>The ID of the version being deleted.</p>
+   * @public
+   */
+  VersionId: string | undefined;
+
+  /**
+   * <p>Deletes all versions of a document prior to the current version.</p>
+   * @public
+   */
+  DeletePriorVersions: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 }
 
-export namespace DeleteFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteFolderContentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 }
 
-export namespace DeleteFolderContentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFolderContentsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLabelsRequest {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>List of labels to delete from the resource.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 
   /**
    * <p>Flag to request removal of all labels from the specified resource.</p>
+   * @public
    */
-  DeleteAll?: boolean;
+  DeleteAll?: boolean | undefined;
 }
 
-export namespace DeleteLabelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLabelsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLabelsResponse {}
 
-export namespace DeleteLabelsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLabelsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteNotificationSubscriptionRequest {
   /**
    * <p>The ID of the subscription.</p>
+   * @public
    */
   SubscriptionId: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 }
 
-export namespace DeleteNotificationSubscriptionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteNotificationSubscriptionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteUserRequest {
   /**
    * <p>Amazon WorkDocs authentication token. Do not set this field when using
-   *             administrative API actions, as in accessing the API using AWS credentials.</p>
+   *             administrative API actions, as in accessing the API using Amazon Web Services credentials.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 }
 
-export namespace DeleteUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteUserRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeActivitiesRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The timestamp that determines the starting time of the activities. The response
    *             includes the activities performed after the specified timestamp.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The timestamp that determines the end time of the activities. The response includes
    *             the activities performed before the specified timestamp.</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 
   /**
    * <p>The ID of the organization. This is a mandatory parameter when using administrative
    *             API (SigV4) requests.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>Specifies which activity types to include in the response. If this field is left
    *             empty, all activity types are returned.</p>
+   * @public
    */
-  ActivityTypes?: string;
+  ActivityTypes?: string | undefined;
 
   /**
    * <p>The document or folder ID for which to describe activity types.</p>
+   * @public
    */
-  ResourceId?: string;
+  ResourceId?: string | undefined;
 
   /**
    * <p>The ID of the user who performed the action. The response includes activities
    *             pertaining to this user. This is an optional parameter and is only applicable for
    *             administrative API (SigV4) requests.</p>
+   * @public
    */
-  UserId?: string;
+  UserId?: string | undefined;
 
   /**
    * <p>Includes indirect activities. An indirect activity results from a direct activity
    *             performed on a parent resource. For example, sharing a parent folder (the direct
    *             activity) shares all of the subfolders and documents within the parent folder (the
    *             indirect activity).</p>
+   * @public
    */
-  IncludeIndirectActivities?: boolean;
+  IncludeIndirectActivities?: boolean | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export namespace DescribeActivitiesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeActivitiesRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface DescribeActivitiesResponse {
-  /**
-   * <p>The list of activities for the specified user and time period.</p>
-   */
-  UserActivities?: Activity[];
-
-  /**
-   * <p>The marker for the next set of results.</p>
-   */
-  Marker?: string;
-}
-
-export namespace DescribeActivitiesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeActivitiesResponse): any => ({
-    ...obj,
-  });
+  Marker?: string | undefined;
 }
 
 /**
- * <p>The pagination marker or limit fields are not valid.</p>
+ * @public
  */
-export interface InvalidArgumentException extends __SmithyException, $MetadataBearer {
-  name: "InvalidArgumentException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidArgumentException {
+export interface DescribeActivitiesResponse {
   /**
-   * @internal
+   * <p>The list of activities for the specified user and time period.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidArgumentException): any => ({
-    ...obj,
-  });
+  UserActivities?: Activity[] | undefined;
+
+  /**
+   * <p>The marker for the next set of results.</p>
+   * @public
+   */
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeCommentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeCommentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCommentsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeCommentsResponse {
   /**
    * <p>The list of comments for the specified document version.</p>
+   * @public
    */
-  Comments?: Comment[];
+  Comments?: Comment[] | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeCommentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCommentsResponse): any => ({
-    ...obj,
-    ...(obj.Comments && { Comments: obj.Comments.map((item) => Comment.filterSensitiveLog(item)) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDocumentVersionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of versions to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "INITIALIZED" to include incomplete
    *             versions.</p>
+   * @public
    */
-  Include?: string;
+  Include?: string | undefined;
 
   /**
    * <p>Specify "SOURCE" to include initialized versions and a URL for the source
    *             document.</p>
+   * @public
    */
-  Fields?: string;
-}
-
-export namespace DescribeDocumentVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDocumentVersionsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export enum DocumentSourceType {
-  ORIGINAL = "ORIGINAL",
-  WITH_COMMENTS = "WITH_COMMENTS",
-}
-
-export enum DocumentStatusType {
-  ACTIVE = "ACTIVE",
-  INITIALIZED = "INITIALIZED",
-}
-
-export enum DocumentThumbnailType {
-  LARGE = "LARGE",
-  SMALL = "SMALL",
-  SMALL_HQ = "SMALL_HQ",
+  Fields?: string | undefined;
 }
 
 /**
  * <p>Describes a version of a document.</p>
+ * @public
  */
 export interface DocumentVersionMetadata {
   /**
    * <p>The ID of the version.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the version.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The content type of the document.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The size of the document, in bytes.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 
   /**
    * <p>The signature of the document.</p>
+   * @public
    */
-  Signature?: string;
+  Signature?: string | undefined;
 
   /**
    * <p>The status of the document.</p>
+   * @public
    */
-  Status?: DocumentStatusType | string;
+  Status?: DocumentStatusType | undefined;
 
   /**
    * <p>The timestamp when the document was first uploaded.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the document was last uploaded.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was originally created.</p>
+   * @public
    */
-  ContentCreatedTimestamp?: Date;
+  ContentCreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was modified.</p>
+   * @public
    */
-  ContentModifiedTimestamp?: Date;
+  ContentModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The thumbnail of the document.</p>
+   * @public
    */
-  Thumbnail?: { [key: string]: string };
+  Thumbnail?: Partial<Record<DocumentThumbnailType, string>> | undefined;
 
   /**
    * <p>The source of the document.</p>
+   * @public
    */
-  Source?: { [key: string]: string };
+  Source?: Partial<Record<DocumentSourceType, string>> | undefined;
 }
 
-export namespace DocumentVersionMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DocumentVersionMetadata): any => ({
-    ...obj,
-    ...(obj.Thumbnail && { Thumbnail: SENSITIVE_STRING }),
-    ...(obj.Source && { Source: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDocumentVersionsResponse {
   /**
    * <p>The document versions.</p>
+   * @public
    */
-  DocumentVersions?: DocumentVersionMetadata[];
+  DocumentVersions?: DocumentVersionMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeDocumentVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDocumentVersionsResponse): any => ({
-    ...obj,
-    ...(obj.DocumentVersions && {
-      DocumentVersions: obj.DocumentVersions.map((item) => DocumentVersionMetadata.filterSensitiveLog(item)),
-    }),
-  });
-}
-
-export enum OrderType {
-  ASCENDING = "ASCENDING",
-  DESCENDING = "DESCENDING",
-}
-
-export enum ResourceSortType {
-  DATE = "DATE",
-  NAME = "NAME",
-}
-
-export enum FolderContentType {
-  ALL = "ALL",
-  DOCUMENT = "DOCUMENT",
-  FOLDER = "FOLDER",
-}
-
+/**
+ * @public
+ */
 export interface DescribeFolderContentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The sorting criteria.</p>
+   * @public
    */
-  Sort?: ResourceSortType | string;
+  Sort?: ResourceSortType | undefined;
 
   /**
    * <p>The order for the contents of the folder.</p>
+   * @public
    */
-  Order?: OrderType | string;
+  Order?: OrderType | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The type of items.</p>
+   * @public
    */
-  Type?: FolderContentType | string;
+  Type?: FolderContentType | undefined;
 
   /**
    * <p>The contents to include. Specify "INITIALIZED" to include initialized
    *             documents.</p>
+   * @public
    */
-  Include?: string;
-}
-
-export namespace DescribeFolderContentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderContentsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  Include?: string | undefined;
 }
 
 /**
  * <p>Describes the document.</p>
+ * @public
  */
 export interface DocumentMetadata {
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The time when the document was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the document was updated.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The latest version of the document.</p>
+   * @public
    */
-  LatestVersionMetadata?: DocumentVersionMetadata;
+  LatestVersionMetadata?: DocumentVersionMetadata | undefined;
 
   /**
    * <p>The resource state.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 
   /**
    * <p>List of labels on the document.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 }
 
-export namespace DocumentMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DocumentMetadata): any => ({
-    ...obj,
-    ...(obj.LatestVersionMetadata && {
-      LatestVersionMetadata: DocumentVersionMetadata.filterSensitiveLog(obj.LatestVersionMetadata),
-    }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeFolderContentsResponse {
   /**
    * <p>The subfolders in the specified folder.</p>
+   * @public
    */
-  Folders?: FolderMetadata[];
+  Folders?: FolderMetadata[] | undefined;
 
   /**
    * <p>The documents in the specified folder.</p>
+   * @public
    */
-  Documents?: DocumentMetadata[];
+  Documents?: DocumentMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeFolderContentsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeFolderContentsResponse): any => ({
-    ...obj,
-    ...(obj.Documents && { Documents: obj.Documents.map((item) => DocumentMetadata.filterSensitiveLog(item)) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeGroupsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>A query to describe groups by group name.</p>
+   * @public
    */
   SearchQuery: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
-export namespace DescribeGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGroupsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-    ...(obj.SearchQuery && { SearchQuery: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeGroupsResponse {
   /**
    * <p>The list of groups.</p>
+   * @public
    */
-  Groups?: GroupMetadata[];
+  Groups?: GroupMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no additional
    *             results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeNotificationSubscriptionsRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
-export namespace DescribeNotificationSubscriptionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeNotificationSubscriptionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeNotificationSubscriptionsResponse {
   /**
    * <p>The subscriptions.</p>
+   * @public
    */
-  Subscriptions?: Subscription[];
+  Subscriptions?: Subscription[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeNotificationSubscriptionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeNotificationSubscriptionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the principal to filter permissions by.</p>
+   * @public
    */
-  PrincipalId?: string;
+  PrincipalId?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call)</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export namespace DescribeResourcePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeResourcePermissionsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export enum RolePermissionType {
-  DIRECT = "DIRECT",
-  INHERITED = "INHERITED",
+  Marker?: string | undefined;
 }
 
 /**
  * <p>Describes the permissions.</p>
+ * @public
  */
 export interface PermissionInfo {
   /**
    * <p>The role of the user.</p>
+   * @public
    */
-  Role?: RoleType | string;
+  Role?: RoleType | undefined;
 
   /**
    * <p>The type of permissions.</p>
+   * @public
    */
-  Type?: RolePermissionType | string;
-}
-
-export namespace PermissionInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PermissionInfo): any => ({
-    ...obj,
-  });
+  Type?: RolePermissionType | undefined;
 }
 
 /**
  * <p>Describes a resource.</p>
+ * @public
  */
 export interface Principal {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The type of resource.</p>
+   * @public
    */
-  Type?: PrincipalType | string;
+  Type?: PrincipalType | undefined;
 
   /**
    * <p>The permission information for the resource.</p>
+   * @public
    */
-  Roles?: PermissionInfo[];
+  Roles?: PermissionInfo[] | undefined;
 }
 
-export namespace Principal {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Principal): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeResourcePermissionsResponse {
   /**
    * <p>The principals.</p>
+   * @public
    */
-  Principals?: Principal[];
+  Principals?: Principal[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeResourcePermissionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeResourcePermissionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRootFoldersRequest {
   /**
    * <p>Amazon WorkDocs authentication token.</p>
+   * @public
    */
   AuthenticationToken: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeRootFoldersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeRootFoldersRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRootFoldersResponse {
   /**
    * <p>The user's special folders.</p>
+   * @public
    */
-  Folders?: FolderMetadata[];
+  Folders?: FolderMetadata[] | undefined;
 
   /**
    * <p>The marker for the next set of results.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace DescribeRootFoldersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeRootFoldersResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum UserFilterType {
-  ACTIVE_PENDING = "ACTIVE_PENDING",
-  ALL = "ALL",
-}
-
-export enum UserSortType {
-  FULL_NAME = "FULL_NAME",
-  STORAGE_LIMIT = "STORAGE_LIMIT",
-  STORAGE_USED = "STORAGE_USED",
-  USER_NAME = "USER_NAME",
-  USER_STATUS = "USER_STATUS",
-}
-
+/**
+ * @public
+ */
 export interface DescribeUsersRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The IDs of the users.</p>
+   * @public
    */
-  UserIds?: string;
+  UserIds?: string | undefined;
 
   /**
-   * <p>A query to filter users by user name.</p>
+   * <p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p>
+   *          <ul>
+   *             <li>
+   *                <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p>
+   *             </li>
+   *             <li>
+   *                <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p>
+   *             </li>
+   *             <li>
+   *                <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p>
+   *             </li>
+   *             <li>
+   *                <p>The <code>Query</code> parameter runs a "prefix" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a
+   *                 <a href="https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html">CreateUser</a> API call. For example, querying on
+   *                 <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only
+   *                 returns Mateo Jackson.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  Query?: string;
+  Query?: string | undefined;
 
   /**
    * <p>The state of the users. Specify "ALL" to include inactive users.</p>
+   * @public
    */
-  Include?: UserFilterType | string;
+  Include?: UserFilterType | undefined;
 
   /**
    * <p>The order for the results.</p>
+   * @public
    */
-  Order?: OrderType | string;
+  Order?: OrderType | undefined;
 
   /**
    * <p>The sorting criteria.</p>
+   * @public
    */
-  Sort?: UserSortType | string;
+  Sort?: UserSortType | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "STORAGE_METADATA" to include the user
    *             storage quota and utilization information.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 }
 
-export namespace DescribeUsersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeUsersRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-    ...(obj.Query && { Query: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeUsersResponse {
   /**
    * <p>The users.</p>
+   * @public
    */
-  Users?: User[];
+  Users?: User[] | undefined;
 
   /**
-   * @deprecated
-   *
    * <p>The total number of users included in the results.</p>
+   *
+   * @deprecated deprecated.
+   * @public
    */
-  TotalNumberOfUsers?: number;
+  TotalNumberOfUsers?: number | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export namespace DescribeUsersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeUsersResponse): any => ({
-    ...obj,
-  });
+  Marker?: string | undefined;
 }
 
 /**
- * <p>The response is too large to return. The request must include a filter to reduce the size of the response.</p>
+ * @public
  */
-export interface RequestedEntityTooLargeException extends __SmithyException, $MetadataBearer {
-  name: "RequestedEntityTooLargeException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace RequestedEntityTooLargeException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RequestedEntityTooLargeException): any => ({
-    ...obj,
-  });
-}
-
 export interface GetCurrentUserRequest {
   /**
    * <p>Amazon WorkDocs authentication token.</p>
+   * @public
    */
   AuthenticationToken: string | undefined;
 }
 
-export namespace GetCurrentUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCurrentUserRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCurrentUserResponse {
   /**
    * <p>Metadata of the user.</p>
+   * @public
    */
-  User?: User;
+  User?: User | undefined;
 }
 
-export namespace GetCurrentUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCurrentUserResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDocumentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>Set this to <code>TRUE</code> to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
-}
-
-export namespace GetDocumentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface GetDocumentResponse {
-  /**
-   * <p>The metadata details of the document.</p>
-   */
-  Metadata?: DocumentMetadata;
-
-  /**
-   * <p>The custom metadata on the document.</p>
-   */
-  CustomMetadata?: { [key: string]: string };
-}
-
-export namespace GetDocumentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentResponse): any => ({
-    ...obj,
-    ...(obj.Metadata && { Metadata: DocumentMetadata.filterSensitiveLog(obj.Metadata) }),
-  });
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
 /**
- * <p>The password is invalid.</p>
+ * @public
  */
-export interface InvalidPasswordException extends __SmithyException, $MetadataBearer {
-  name: "InvalidPasswordException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidPasswordException {
+export interface GetDocumentResponse {
   /**
-   * @internal
+   * <p>The metadata details of the document.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidPasswordException): any => ({
-    ...obj,
-  });
+  Metadata?: DocumentMetadata | undefined;
+
+  /**
+   * <p>The custom metadata on the document.</p>
+   * @public
+   */
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentPathRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The maximum number of levels in the hierarchy to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify <code>NAME</code> to include the names of
    *             the parent folders.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>This value is not supported.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export namespace GetDocumentPathRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentPathRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  Marker?: string | undefined;
 }
 
 /**
  * <p>Describes the resource path.</p>
+ * @public
  */
 export interface ResourcePathComponent {
   /**
    * <p>The ID of the resource path.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the resource path.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace ResourcePathComponent {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourcePathComponent): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes the path information of a resource.</p>
+ * @public
  */
 export interface ResourcePath {
   /**
    * <p>The components of the resource path.</p>
+   * @public
    */
-  Components?: ResourcePathComponent[];
+  Components?: ResourcePathComponent[] | undefined;
 }
 
-export namespace ResourcePath {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourcePath): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDocumentPathResponse {
   /**
    * <p>The path information.</p>
+   * @public
    */
-  Path?: ResourcePath;
+  Path?: ResourcePath | undefined;
 }
 
-export namespace GetDocumentPathResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentPathResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDocumentVersionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The version ID of the document.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "SOURCE" to include a URL for the source
    *             document.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>Set this to TRUE to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
-export namespace GetDocumentVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentVersionRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDocumentVersionResponse {
   /**
    * <p>The version metadata.</p>
+   * @public
    */
-  Metadata?: DocumentVersionMetadata;
+  Metadata?: DocumentVersionMetadata | undefined;
 
   /**
    * <p>The custom metadata on the document version.</p>
+   * @public
    */
-  CustomMetadata?: { [key: string]: string };
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
-export namespace GetDocumentVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDocumentVersionResponse): any => ({
-    ...obj,
-    ...(obj.Metadata && { Metadata: DocumentVersionMetadata.filterSensitiveLog(obj.Metadata) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>Set to TRUE to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
-export namespace GetFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFolderRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFolderResponse {
   /**
    * <p>The metadata of the folder.</p>
+   * @public
    */
-  Metadata?: FolderMetadata;
+  Metadata?: FolderMetadata | undefined;
 
   /**
    * <p>The custom metadata on the folder.</p>
+   * @public
    */
-  CustomMetadata?: { [key: string]: string };
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
-export namespace GetFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFolderResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFolderPathRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The maximum number of levels in the hierarchy to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "NAME" to include the names of the parent
    *             folders.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>This value is not supported.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export namespace GetFolderPathRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFolderPathRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetFolderPathResponse {
   /**
    * <p>The path information.</p>
+   * @public
    */
-  Path?: ResourcePath;
+  Path?: ResourcePath | undefined;
 }
 
-export namespace GetFolderPathResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetFolderPathResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ResourceCollectionType {
-  SHARED_WITH_ME = "SHARED_WITH_ME",
-}
-
+/**
+ * @public
+ */
 export interface GetResourcesRequest {
   /**
-   * <p>The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>The Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The user ID for the resource collection. This is a required field for accessing the
    *             API operation using IAM credentials.</p>
+   * @public
    */
-  UserId?: string;
+  UserId?: string | undefined;
 
   /**
    * <p>The collection type.</p>
+   * @public
    */
-  CollectionType?: ResourceCollectionType | string;
+  CollectionType?: ResourceCollectionType | undefined;
 
   /**
    * <p>The maximum number of resources to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous call.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export namespace GetResourcesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourcesRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface GetResourcesResponse {
-  /**
-   * <p>The folders in the specified folder.</p>
-   */
-  Folders?: FolderMetadata[];
-
-  /**
-   * <p>The documents in the specified collection.</p>
-   */
-  Documents?: DocumentMetadata[];
-
-  /**
-   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
-   */
-  Marker?: string;
-}
-
-export namespace GetResourcesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourcesResponse): any => ({
-    ...obj,
-    ...(obj.Documents && { Documents: obj.Documents.map((item) => DocumentMetadata.filterSensitiveLog(item)) }),
-  });
+  Marker?: string | undefined;
 }
 
 /**
- * <p>This exception is thrown when a valid checkout ID is not presented on document
- *             version upload calls for a document that has been checked out from Web client.</p>
+ * @public
  */
-export interface DraftUploadOutOfSyncException extends __SmithyException, $MetadataBearer {
-  name: "DraftUploadOutOfSyncException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace DraftUploadOutOfSyncException {
+export interface GetResourcesResponse {
   /**
-   * @internal
+   * <p>The folders in the specified folder.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DraftUploadOutOfSyncException): any => ({
-    ...obj,
-  });
+  Folders?: FolderMetadata[] | undefined;
+
+  /**
+   * <p>The documents in the specified collection.</p>
+   * @public
+   */
+  Documents?: DocumentMetadata[] | undefined;
+
+  /**
+   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
+   * @public
+   */
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface InitiateDocumentVersionUploadRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the document.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The timestamp when the content of the document was originally created.</p>
+   * @public
    */
-  ContentCreatedTimestamp?: Date;
+  ContentCreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was modified.</p>
+   * @public
    */
-  ContentModifiedTimestamp?: Date;
+  ContentModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The content type of the document.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The size of the document, in bytes.</p>
+   * @public
    */
-  DocumentSizeInBytes?: number;
+  DocumentSizeInBytes?: number | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId: string | undefined;
-}
-
-export namespace InitiateDocumentVersionUploadRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InitiateDocumentVersionUploadRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  ParentFolderId?: string | undefined;
 }
 
 /**
  * <p>Describes the upload.</p>
+ * @public
  */
 export interface UploadMetadata {
   /**
    * <p>The URL of the upload.</p>
+   * @public
    */
-  UploadUrl?: string;
+  UploadUrl?: string | undefined;
 
   /**
    * <p>The signed headers.</p>
+   * @public
    */
-  SignedHeaders?: { [key: string]: string };
+  SignedHeaders?: Record<string, string> | undefined;
 }
 
-export namespace UploadMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UploadMetadata): any => ({
-    ...obj,
-    ...(obj.UploadUrl && { UploadUrl: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface InitiateDocumentVersionUploadResponse {
   /**
    * <p>The document metadata.</p>
+   * @public
    */
-  Metadata?: DocumentMetadata;
+  Metadata?: DocumentMetadata | undefined;
 
   /**
    * <p>The upload metadata.</p>
+   * @public
    */
-  UploadMetadata?: UploadMetadata;
-}
-
-export namespace InitiateDocumentVersionUploadResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InitiateDocumentVersionUploadResponse): any => ({
-    ...obj,
-    ...(obj.Metadata && { Metadata: DocumentMetadata.filterSensitiveLog(obj.Metadata) }),
-    ...(obj.UploadMetadata && { UploadMetadata: UploadMetadata.filterSensitiveLog(obj.UploadMetadata) }),
-  });
+  UploadMetadata?: UploadMetadata | undefined;
 }
 
 /**
- * <p>The resource is already checked out.</p>
+ * @public
  */
-export interface ResourceAlreadyCheckedOutException extends __SmithyException, $MetadataBearer {
-  name: "ResourceAlreadyCheckedOutException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace ResourceAlreadyCheckedOutException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceAlreadyCheckedOutException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The storage limit has been exceeded.</p>
- */
-export interface StorageLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "StorageLimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace StorageLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StorageLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The storage limit will be exceeded.</p>
- */
-export interface StorageLimitWillExceedException extends __SmithyException, $MetadataBearer {
-  name: "StorageLimitWillExceedException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace StorageLimitWillExceedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StorageLimitWillExceedException): any => ({
-    ...obj,
-  });
-}
-
 export interface RemoveAllResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 }
 
-export namespace RemoveAllResourcePermissionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RemoveAllResourcePermissionsRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface RemoveResourcePermissionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The principal ID of the resource.</p>
+   * @public
    */
   PrincipalId: string | undefined;
 
   /**
    * <p>The principal type of the resource.</p>
+   * @public
    */
-  PrincipalType?: PrincipalType | string;
+  PrincipalType?: PrincipalType | undefined;
 }
 
-export namespace RemoveResourcePermissionRequest {
+/**
+ * @public
+ */
+export interface RestoreDocumentVersionsRequest {
   /**
-   * @internal
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RemoveResourcePermissionRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
-export interface UpdateDocumentRequest {
-  /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
-   */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
+   */
+  DocumentId: string | undefined;
+}
+
+/**
+ * <p>Filters results based on timestamp range (in epochs).</p>
+ * @public
+ */
+export interface DateRangeType {
+  /**
+   * <p>Timestamp range start value (in epochs)</p>
+   * @public
+   */
+  StartValue?: Date | undefined;
+
+  /**
+   * <p>Timestamp range end value (in epochs).</p>
+   * @public
+   */
+  EndValue?: Date | undefined;
+}
+
+/**
+ * <p>Filter based on UserIds or GroupIds.</p>
+ * @public
+ */
+export interface SearchPrincipalType {
+  /**
+   * <p>UserIds or GroupIds.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Role of a User or Group.</p>
+   * @public
+   */
+  Roles?: PrincipalRoleType[] | undefined;
+}
+
+/**
+ * <p>Filter based on size (in bytes).</p>
+ * @public
+ */
+export interface LongRangeType {
+  /**
+   * <p>The size start range (in bytes).</p>
+   * @public
+   */
+  StartValue?: number | undefined;
+
+  /**
+   * <p>The size end range (in bytes).</p>
+   * @public
+   */
+  EndValue?: number | undefined;
+}
+
+/**
+ * <p>Filters results based on entity metadata.</p>
+ * @public
+ */
+export interface Filters {
+  /**
+   * <p>Filters by the locale of the content or comment.</p>
+   * @public
+   */
+  TextLocales?: LanguageCodeType[] | undefined;
+
+  /**
+   * <p>Filters by content category.</p>
+   * @public
+   */
+  ContentCategories?: ContentCategoryType[] | undefined;
+
+  /**
+   * <p>Filters based on entity type.</p>
+   * @public
+   */
+  ResourceTypes?: SearchResourceType[] | undefined;
+
+  /**
+   * <p>Filter by labels using exact match.</p>
+   * @public
+   */
+  Labels?: string[] | undefined;
+
+  /**
+   * <p>Filter based on UserIds or GroupIds.</p>
+   * @public
+   */
+  Principals?: SearchPrincipalType[] | undefined;
+
+  /**
+   * <p>Filter based on resource’s path.</p>
+   * @public
+   */
+  AncestorIds?: string[] | undefined;
+
+  /**
+   * <p>Filter based on file groupings.</p>
+   * @public
+   */
+  SearchCollectionTypes?: SearchCollectionType[] | undefined;
+
+  /**
+   * <p>Filter based on size (in bytes).</p>
+   * @public
+   */
+  SizeRange?: LongRangeType | undefined;
+
+  /**
+   * <p>Filter based on resource’s creation timestamp.</p>
+   * @public
+   */
+  CreatedRange?: DateRangeType | undefined;
+
+  /**
+   * <p>Filter based on resource’s modified timestamp.</p>
+   * @public
+   */
+  ModifiedRange?: DateRangeType | undefined;
+}
+
+/**
+ * <p>The result of the sort operation.</p>
+ * @public
+ */
+export interface SearchSortResult {
+  /**
+   * <p>Sort search results based on this field name.</p>
+   * @public
+   */
+  Field?: OrderByFieldType | undefined;
+
+  /**
+   * <p>Sort direction.</p>
+   * @public
+   */
+  Order?: SortOrder | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SearchResourcesRequest {
+  /**
+   * <p>WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
+   */
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.</p>
+   * @public
+   */
+  QueryText?: string | undefined;
+
+  /**
+   * <p>Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content</p>
+   * @public
+   */
+  QueryScopes?: SearchQueryScopeType[] | undefined;
+
+  /**
+   * <p>Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.</p>
+   * @public
+   */
+  OrganizationId?: string | undefined;
+
+  /**
+   * <p>A list of attributes to include in the response. Used to request fields that are not normally
+   *             returned in a standard response.</p>
+   * @public
+   */
+  AdditionalResponseFields?: AdditionalResponseFieldType[] | undefined;
+
+  /**
+   * <p>Filters results based on entity metadata.</p>
+   * @public
+   */
+  Filters?: Filters | undefined;
+
+  /**
+   * <p>Order by results in one or more categories.</p>
+   * @public
+   */
+  OrderBy?: SearchSortResult[] | undefined;
+
+  /**
+   * <p>Max results count per page.</p>
+   * @public
+   */
+  Limit?: number | undefined;
+
+  /**
+   * <p>The marker for the next set of results.</p>
+   * @public
+   */
+  Marker?: string | undefined;
+}
+
+/**
+ * <p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>
+ * @public
+ */
+export interface ResponseItem {
+  /**
+   * <p>The type of item being returned.</p>
+   * @public
+   */
+  ResourceType?: ResponseItemType | undefined;
+
+  /**
+   * <p>The webUrl of the item being returned.</p>
+   * @public
+   */
+  WebUrl?: string | undefined;
+
+  /**
+   * <p>The document that matches the query.</p>
+   * @public
+   */
+  DocumentMetadata?: DocumentMetadata | undefined;
+
+  /**
+   * <p>The folder that matches the query.</p>
+   * @public
+   */
+  FolderMetadata?: FolderMetadata | undefined;
+
+  /**
+   * <p>The comment that matches the query.</p>
+   * @public
+   */
+  CommentMetadata?: CommentMetadata | undefined;
+
+  /**
+   * <p>The document version that matches the metadata.</p>
+   * @public
+   */
+  DocumentVersionMetadata?: DocumentVersionMetadata | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SearchResourcesResponse {
+  /**
+   * <p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>
+   * @public
+   */
+  Items?: ResponseItem[] | undefined;
+
+  /**
+   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
+   * @public
+   */
+  Marker?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDocumentRequest {
+  /**
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
+   */
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The name of the document.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The resource state of the document. Only ACTIVE and RECYCLED are
    *             supported.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
-}
-
-export namespace UpdateDocumentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDocumentRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  ResourceState?: ResourceStateType | undefined;
 }
 
 /**
- * <p>The operation is invalid.</p>
+ * @public
  */
-export interface InvalidOperationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidOperationException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace InvalidOperationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidOperationException): any => ({
-    ...obj,
-  });
-}
-
-export enum DocumentVersionStatus {
-  ACTIVE = "ACTIVE",
-}
-
 export interface UpdateDocumentVersionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The version ID of the document.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The status of the version.</p>
+   * @public
    */
-  VersionStatus?: DocumentVersionStatus | string;
+  VersionStatus?: DocumentVersionStatus | undefined;
 }
 
-export namespace UpdateDocumentVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDocumentVersionRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The name of the folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from
    *             the API.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
-}
-
-export namespace UpdateFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateFolderRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
+  ResourceState?: ResourceStateType | undefined;
 }
 
 /**
- * <p>The last user in the organization is being deactivated.</p>
+ * @public
  */
-export interface DeactivatingLastSystemUserException extends __SmithyException, $MetadataBearer {
-  name: "DeactivatingLastSystemUserException";
-  $fault: "client";
-  Message?: string;
-  Code?: string;
-}
-
-export namespace DeactivatingLastSystemUserException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeactivatingLastSystemUserException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The user is undergoing transfer of ownership.</p>
- */
-export interface IllegalUserStateException extends __SmithyException, $MetadataBearer {
-  name: "IllegalUserStateException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace IllegalUserStateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IllegalUserStateException): any => ({
-    ...obj,
-  });
-}
-
-export enum BooleanEnumType {
-  FALSE = "FALSE",
-  TRUE = "TRUE",
-}
-
 export interface UpdateUserRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The type of the user.</p>
+   * @public
    */
-  Type?: UserType | string;
+  Type?: UserType | undefined;
 
   /**
    * <p>The amount of storage for the user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
+  StorageRule?: StorageRuleType | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The locale of the user.</p>
+   * @public
    */
-  Locale?: LocaleType | string;
+  Locale?: LocaleType | undefined;
 
   /**
-   * <p>Boolean value to determine whether the user is granted Poweruser privileges.</p>
+   * <p>Boolean value to determine whether the user is granted Power user privileges.</p>
+   * @public
    */
-  GrantPoweruserPrivileges?: BooleanEnumType | string;
+  GrantPoweruserPrivileges?: BooleanEnumType | undefined;
 }
 
-export namespace UpdateUserRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateUserRequest): any => ({
-    ...obj,
-    ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
-}
-
-export namespace UpdateUserResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateUserResponse): any => ({
-    ...obj,
-  });
+  User?: User | undefined;
 }

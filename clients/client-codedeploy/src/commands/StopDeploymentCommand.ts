@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { StopDeploymentInput, StopDeploymentOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopDeploymentCommand,
-  serializeAws_json1_1StopDeploymentCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopDeploymentInput, StopDeploymentOutput } from "../models/models_0";
+import { StopDeployment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopDeploymentCommand}.
+ */
 export interface StopDeploymentCommandInput extends StopDeploymentInput {}
+/**
+ * @public
+ *
+ * The output of {@link StopDeploymentCommand}.
+ */
 export interface StopDeploymentCommandOutput extends StopDeploymentOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface StopDeploymentCommandOutput extends StopDeploymentOutput, __Met
  * ```javascript
  * import { CodeDeployClient, StopDeploymentCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, StopDeploymentCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // StopDeploymentInput
+ *   deploymentId: "STRING_VALUE", // required
+ *   autoRollbackEnabled: true || false,
+ * };
  * const command = new StopDeploymentCommand(input);
  * const response = await client.send(command);
+ * // { // StopDeploymentOutput
+ * //   status: "Pending" || "Succeeded",
+ * //   statusMessage: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StopDeploymentCommandInput - {@link StopDeploymentCommandInput}
+ * @returns {@link StopDeploymentCommandOutput}
  * @see {@link StopDeploymentCommandInput} for command's `input` shape.
  * @see {@link StopDeploymentCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link DeploymentAlreadyCompletedException} (client fault)
+ *  <p>The deployment is already complete.</p>
+ *
+ * @throws {@link DeploymentDoesNotExistException} (client fault)
+ *  <p>The deployment with the user or Amazon Web Services account does not exist.</p>
+ *
+ * @throws {@link DeploymentGroupDoesNotExistException} (client fault)
+ *  <p>The named deployment group with the user or Amazon Web Services account does not
+ *             exist.</p>
+ *
+ * @throws {@link DeploymentIdRequiredException} (client fault)
+ *  <p>At least one deployment ID must be specified.</p>
+ *
+ * @throws {@link InvalidDeploymentIdException} (client fault)
+ *  <p>At least one of the deployment IDs was specified in an invalid format.</p>
+ *
+ * @throws {@link UnsupportedActionForDeploymentTypeException} (client fault)
+ *  <p>A call was submitted that is not supported for the specified deployment type.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class StopDeploymentCommand extends $Command<
-  StopDeploymentCommandInput,
-  StopDeploymentCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopDeploymentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopDeploymentCommandInput, StopDeploymentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "StopDeploymentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopDeploymentInput.filterSensitiveLog,
-      outputFilterSensitiveLog: StopDeploymentOutput.filterSensitiveLog,
+export class StopDeploymentCommand extends command<StopDeploymentCommandInput, StopDeploymentCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopDeployment",
+  StopDeployment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopDeploymentInput;
+      output: StopDeploymentOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopDeploymentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopDeploymentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopDeploymentCommandOutput> {
-    return deserializeAws_json1_1StopDeploymentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopDeploymentCommandInput;
+      output: StopDeploymentCommandOutput;
+    };
+  };
 }

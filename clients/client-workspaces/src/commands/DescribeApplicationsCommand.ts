@@ -1,0 +1,116 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeApplicationsRequest, DescribeApplicationsResult } from "../models/models_0";
+import { DescribeApplications$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeApplicationsCommand}.
+ */
+export interface DescribeApplicationsCommandInput extends DescribeApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeApplicationsCommand}.
+ */
+export interface DescribeApplicationsCommandOutput extends DescribeApplicationsResult, __MetadataBearer {}
+
+/**
+ * <p>Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { WorkSpacesClient, DescribeApplicationsCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
+ * // const { WorkSpacesClient, DescribeApplicationsCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
+ * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeApplicationsRequest
+ *   ApplicationIds: [ // WorkSpaceApplicationIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   ComputeTypeNames: [ // ComputeList
+ *     "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ *   ],
+ *   LicenseType: "LICENSED" || "UNLICENSED",
+ *   OperatingSystemNames: [ // OperatingSystemNameList
+ *     "AMAZON_LINUX_2" || "UBUNTU_18_04" || "UBUNTU_20_04" || "UBUNTU_22_04" || "UNKNOWN" || "WINDOWS_10" || "WINDOWS_11" || "WINDOWS_7" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "WINDOWS_SERVER_2022" || "WINDOWS_SERVER_2025" || "RHEL_8" || "ROCKY_8" || "UBUNTU_24_04" || "RHEL_9" || "ROCKY_9" || "UBUNTU_26_04" || "RHEL_10" || "ROCKY_10",
+ *   ],
+ *   Owner: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new DescribeApplicationsCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeApplicationsResult
+ * //   Applications: [ // WorkSpaceApplicationList
+ * //     { // WorkSpaceApplication
+ * //       ApplicationId: "STRING_VALUE",
+ * //       Created: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //       LicenseType: "LICENSED" || "UNLICENSED",
+ * //       Name: "STRING_VALUE",
+ * //       Owner: "STRING_VALUE",
+ * //       State: "PENDING" || "ERROR" || "AVAILABLE" || "UNINSTALL_ONLY",
+ * //       SupportedComputeTypeNames: [ // ComputeList
+ * //         "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ * //       ],
+ * //       SupportedOperatingSystemNames: [ // OperatingSystemNameList
+ * //         "AMAZON_LINUX_2" || "UBUNTU_18_04" || "UBUNTU_20_04" || "UBUNTU_22_04" || "UNKNOWN" || "WINDOWS_10" || "WINDOWS_11" || "WINDOWS_7" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "WINDOWS_SERVER_2022" || "WINDOWS_SERVER_2025" || "RHEL_8" || "ROCKY_8" || "UBUNTU_24_04" || "RHEL_9" || "ROCKY_9" || "UBUNTU_26_04" || "RHEL_10" || "ROCKY_10",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeApplicationsCommandInput - {@link DescribeApplicationsCommandInput}
+ * @returns {@link DescribeApplicationsCommandOutput}
+ * @see {@link DescribeApplicationsCommandInput} for command's `input` shape.
+ * @see {@link DescribeApplicationsCommandOutput} for command's `response` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeApplicationsCommand extends command<DescribeApplicationsCommandInput, DescribeApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeApplications",
+  DescribeApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeApplicationsRequest;
+      output: DescribeApplicationsResult;
+    };
+    sdk: {
+      input: DescribeApplicationsCommandInput;
+      output: DescribeApplicationsCommandOutput;
+    };
+  };
+}

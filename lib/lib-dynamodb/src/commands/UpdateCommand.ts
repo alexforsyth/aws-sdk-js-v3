@@ -1,79 +1,113 @@
-import {
-  AttributeValueUpdate,
-  ExpectedAttributeValue,
-  ItemCollectionMetrics,
-  UpdateItemCommand as __UpdateItemCommand,
-  UpdateItemCommandInput as __UpdateItemCommandInput,
-  UpdateItemCommandOutput as __UpdateItemCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
-import { marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
+import { ALL_MEMBERS, ALL_VALUES, SELF } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { UpdateItemCommand as __UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 
-export type UpdateCommandInput = Omit<
-  __UpdateItemCommandInput,
-  "Key" | "AttributeUpdates" | "Expected" | "ExpressionAttributeValues"
-> & {
-  Key: { [key: string]: NativeAttributeValue } | undefined;
-  AttributeUpdates?: {
-    [key: string]: Omit<AttributeValueUpdate, "Value"> & {
-      Value?: NativeAttributeValue;
-    };
-  };
-  Expected?: {
-    [key: string]: Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
-      Value?: NativeAttributeValue;
-      AttributeValueList?: NativeAttributeValue[];
-    };
-  };
-  ExpressionAttributeValues?: { [key: string]: NativeAttributeValue };
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type UpdateAttributeValueUpdate = Omit<AttributeValueUpdate, "Value"> & {
+  Value?: NativeAttributeValue | undefined;
 };
 
+/**
+ * @public
+ */
+export type UpdateExpectedAttributeValue = Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
+  Value?: NativeAttributeValue | undefined;
+  AttributeValueList?: NativeAttributeValue[] | undefined;
+};
+
+/**
+ * @public
+ */
+export type UpdateItemCollectionMetrics = Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
+  ItemCollectionKey?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type UpdateCommandInput = Omit<__UpdateItemCommandInput, "Key" | "AttributeUpdates" | "Expected" | "ExpressionAttributeValues"> & {
+  Key: Record<string, NativeAttributeValue> | undefined;
+  AttributeUpdates?: Record<
+    string,
+    UpdateAttributeValueUpdate
+  > | undefined;
+  Expected?: Record<
+    string,
+    UpdateExpectedAttributeValue
+  > | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
 export type UpdateCommandOutput = Omit<__UpdateItemCommandOutput, "Attributes" | "ItemCollectionMetrics"> & {
-  Attributes?: { [key: string]: NativeAttributeValue };
-  ItemCollectionMetrics?: Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
-    ItemCollectionKey?: { [key: string]: NativeAttributeValue };
-  };
+  Attributes?: Record<string, NativeAttributeValue> | undefined;
+  ItemCollectionMetrics?: UpdateItemCollectionMetrics | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * UpdateItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * UpdateItemCommand operation from {@link @aws-sdk/client-dynamodb#UpdateItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
-export class UpdateCommand extends $Command<
+export class UpdateCommand extends DynamoDBDocumentClientCommand<
   UpdateCommandInput,
   UpdateCommandOutput,
+  __UpdateItemCommandInput,
+  __UpdateItemCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  private readonly inputKeyNodes = [
-    { key: "Key" },
-    {
-      key: "AttributeUpdates",
-      children: {
-        children: [{ key: "Value" }],
+  protected readonly inputKeyNodes = {
+    Key: ALL_VALUES, // map with AttributeValue
+    AttributeUpdates: {
+      "*": {
+        Value: SELF,
       },
     },
-    {
-      key: "Expected",
-      children: {
-        children: [{ key: "Value" }, { key: "AttributeValueList" }],
+    Expected: {
+      "*": {
+        Value: SELF,
+        AttributeValueList: ALL_MEMBERS, // set/list of AttributeValue
       },
     },
-    { key: "ExpressionAttributeValues" },
-  ];
-  private readonly outputKeyNodes = [
-    { key: "Attributes" },
-    { key: "ItemCollectionMetrics", children: [{ key: "ItemCollectionKey" }] },
-  ];
+    ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Attributes: ALL_VALUES, // map with AttributeValue
+    ItemCollectionMetrics: {
+      ItemCollectionKey: ALL_VALUES, // map with AttributeValue
+    },
+  };
+
+  protected readonly clientCommand: __UpdateItemCommand;
+  public readonly middlewareStack: MiddlewareStack<UpdateCommandInput | __UpdateItemCommandInput,
+  UpdateCommandOutput | __UpdateItemCommandOutput>;
 
   constructor(readonly input: UpdateCommandInput) {
     super();
+    this.clientCommand = new __UpdateItemCommand(this.input as any);
+    this.middlewareStack = this.clientCommand.middlewareStack;
   }
 
   /**
@@ -84,16 +118,21 @@ export class UpdateCommand extends $Command<
     configuration: DynamoDBDocumentClientResolvedConfig,
     options?: __HttpHandlerOptions
   ): Handler<UpdateCommandInput, UpdateCommandOutput> {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
-    const command = new __UpdateItemCommand(marshallInput(this.input, this.inputKeyNodes, marshallOptions));
-    const handler = command.resolveMiddleware(clientStack, configuration, options);
+    this.addMarshallingMiddleware(configuration);
+    const stack = clientStack.concat(this.middlewareStack as typeof clientStack);
+    const handler = this.clientCommand.resolveMiddleware(stack, configuration, options);
 
-    return async () => {
-      const data = await handler(command);
-      return {
-        ...data,
-        output: unmarshallOutput(data.output, this.outputKeyNodes, unmarshallOptions),
-      };
-    };
+    return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  AttributeValueUpdate,
+  ExpectedAttributeValue,
+  ItemCollectionMetrics,
+  UpdateItemCommandInput as __UpdateItemCommandInput,
+  UpdateItemCommandOutput as __UpdateItemCommandOutput,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

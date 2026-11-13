@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationDiscoveryServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationDiscoveryServiceClient";
-import { DescribeExportTasksRequest, DescribeExportTasksResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeExportTasksCommand,
-  serializeAws_json1_1DescribeExportTasksCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeExportTasksRequest, DescribeExportTasksResponse } from "../models/models_0";
+import { DescribeExportTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeExportTasksCommand}.
+ */
 export interface DescribeExportTasksCommandInput extends DescribeExportTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeExportTasksCommand}.
+ */
 export interface DescribeExportTasksCommandOutput extends DescribeExportTasksResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +30,89 @@ export interface DescribeExportTasksCommandOutput extends DescribeExportTasksRes
  * ```javascript
  * import { ApplicationDiscoveryServiceClient, DescribeExportTasksCommand } from "@aws-sdk/client-application-discovery-service"; // ES Modules import
  * // const { ApplicationDiscoveryServiceClient, DescribeExportTasksCommand } = require("@aws-sdk/client-application-discovery-service"); // CommonJS import
+ * // import type { ApplicationDiscoveryServiceClientConfig } from "@aws-sdk/client-application-discovery-service";
+ * const config = {}; // type is ApplicationDiscoveryServiceClientConfig
  * const client = new ApplicationDiscoveryServiceClient(config);
+ * const input = { // DescribeExportTasksRequest
+ *   exportIds: [ // ExportIds
+ *     "STRING_VALUE",
+ *   ],
+ *   filters: [ // ExportFilters
+ *     { // ExportFilter
+ *       name: "STRING_VALUE", // required
+ *       values: [ // FilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       condition: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeExportTasksCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeExportTasksResponse
+ * //   exportsInfo: [ // ExportsInfo
+ * //     { // ExportInfo
+ * //       exportId: "STRING_VALUE", // required
+ * //       exportStatus: "FAILED" || "SUCCEEDED" || "IN_PROGRESS", // required
+ * //       statusMessage: "STRING_VALUE", // required
+ * //       configurationsDownloadUrl: "STRING_VALUE",
+ * //       exportRequestTime: new Date("TIMESTAMP"), // required
+ * //       isTruncated: true || false,
+ * //       requestedStartTime: new Date("TIMESTAMP"),
+ * //       requestedEndTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeExportTasksCommandInput - {@link DescribeExportTasksCommandInput}
+ * @returns {@link DescribeExportTasksCommandOutput}
  * @see {@link DescribeExportTasksCommandInput} for command's `input` shape.
  * @see {@link DescribeExportTasksCommandOutput} for command's `response` shape.
- * @see {@link ApplicationDiscoveryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationDiscoveryServiceClientResolvedConfig | config} for ApplicationDiscoveryServiceClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>The user does not have permission to perform the action. Check the IAM
+ *       policy associated with this user.</p>
+ *
+ * @throws {@link HomeRegionNotSetException} (client fault)
+ *  <p>The home Region is not set. Set the home Region to continue.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid. Verify the parameters and try again.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of one or more parameters are either invalid or out of range. Verify the
+ *       parameter values and try again.</p>
+ *
+ * @throws {@link ServerInternalErrorException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ApplicationDiscoveryServiceServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationDiscoveryService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeExportTasksCommand extends $Command<
-  DescribeExportTasksCommandInput,
-  DescribeExportTasksCommandOutput,
-  ApplicationDiscoveryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeExportTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationDiscoveryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeExportTasksCommandInput, DescribeExportTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationDiscoveryServiceClient";
-    const commandName = "DescribeExportTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeExportTasksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeExportTasksResponse.filterSensitiveLog,
+export class DescribeExportTasksCommand extends command<DescribeExportTasksCommandInput, DescribeExportTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeExportTasks",
+  DescribeExportTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeExportTasksRequest;
+      output: DescribeExportTasksResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeExportTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeExportTasksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeExportTasksCommandOutput> {
-    return deserializeAws_json1_1DescribeExportTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeExportTasksCommandInput;
+      output: DescribeExportTasksCommandOutput;
+    };
+  };
 }

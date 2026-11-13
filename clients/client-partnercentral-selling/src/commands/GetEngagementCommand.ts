@@ -1,0 +1,187 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEngagementRequest, GetEngagementResponse } from "../models/models_0";
+import { GetEngagement$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEngagementCommand}.
+ */
+export interface GetEngagementCommandInput extends GetEngagementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEngagementCommand}.
+ */
+export interface GetEngagementCommandOutput extends GetEngagementResponse, __MetadataBearer {}
+
+/**
+ * <p>Use this action to retrieve the engagement record for a given <code>EngagementIdentifier</code>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { PartnerCentralSellingClient, GetEngagementCommand } from "@aws-sdk/client-partnercentral-selling"; // ES Modules import
+ * // const { PartnerCentralSellingClient, GetEngagementCommand } = require("@aws-sdk/client-partnercentral-selling"); // CommonJS import
+ * // import type { PartnerCentralSellingClientConfig } from "@aws-sdk/client-partnercentral-selling";
+ * const config = {}; // type is PartnerCentralSellingClientConfig
+ * const client = new PartnerCentralSellingClient(config);
+ * const input = { // GetEngagementRequest
+ *   Catalog: "STRING_VALUE", // required
+ *   Identifier: "STRING_VALUE", // required
+ * };
+ * const command = new GetEngagementCommand(input);
+ * const response = await client.send(command);
+ * // { // GetEngagementResponse
+ * //   Id: "STRING_VALUE",
+ * //   Arn: "STRING_VALUE",
+ * //   Title: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   CreatedBy: "STRING_VALUE",
+ * //   MemberCount: Number("int"),
+ * //   ModifiedAt: new Date("TIMESTAMP"),
+ * //   ModifiedBy: "STRING_VALUE",
+ * //   Contexts: [ // EngagementContexts
+ * //     { // EngagementContextDetails
+ * //       Id: "STRING_VALUE",
+ * //       Type: "CustomerProject" || "Lead" || "ProspectingResult", // required
+ * //       Payload: { // EngagementContextPayload Union: only one key present
+ * //         CustomerProject: { // CustomerProjectsContext
+ * //           Customer: { // EngagementCustomer
+ * //             Industry: "Aerospace" || "Agriculture" || "Automotive" || "Computers and Electronics" || "Consumer Goods" || "Education" || "Energy - Oil and Gas" || "Energy - Power and Utilities" || "Financial Services" || "Gaming" || "Government" || "Healthcare" || "Hospitality" || "Life Sciences" || "Manufacturing" || "Marketing and Advertising" || "Media and Entertainment" || "Mining" || "Non-Profit Organization" || "Professional Services" || "Real Estate and Construction" || "Retail" || "Software and Internet" || "Telecommunications" || "Transportation and Logistics" || "Travel" || "Wholesale and Distribution" || "Other", // required
+ * //             CompanyName: "STRING_VALUE", // required
+ * //             WebsiteUrl: "STRING_VALUE", // required
+ * //             CountryCode: "US" || "AF" || "AX" || "AL" || "DZ" || "AS" || "AD" || "AO" || "AI" || "AQ" || "AG" || "AR" || "AM" || "AW" || "AU" || "AT" || "AZ" || "BS" || "BH" || "BD" || "BB" || "BY" || "BE" || "BZ" || "BJ" || "BM" || "BT" || "BO" || "BQ" || "BA" || "BW" || "BV" || "BR" || "IO" || "BN" || "BG" || "BF" || "BI" || "KH" || "CM" || "CA" || "CV" || "KY" || "CF" || "TD" || "CL" || "CN" || "CX" || "CC" || "CO" || "KM" || "CG" || "CK" || "CR" || "CI" || "HR" || "CU" || "CW" || "CY" || "CZ" || "CD" || "DK" || "DJ" || "DM" || "DO" || "EC" || "EG" || "SV" || "GQ" || "ER" || "EE" || "ET" || "FK" || "FO" || "FJ" || "FI" || "FR" || "GF" || "PF" || "TF" || "GA" || "GM" || "GE" || "DE" || "GH" || "GI" || "GR" || "GL" || "GD" || "GP" || "GU" || "GT" || "GG" || "GN" || "GW" || "GY" || "HT" || "HM" || "VA" || "HN" || "HK" || "HU" || "IS" || "IN" || "ID" || "IR" || "IQ" || "IE" || "IM" || "IL" || "IT" || "JM" || "JP" || "JE" || "JO" || "KZ" || "KE" || "KI" || "KR" || "KW" || "KG" || "LA" || "LV" || "LB" || "LS" || "LR" || "LY" || "LI" || "LT" || "LU" || "MO" || "MK" || "MG" || "MW" || "MY" || "MV" || "ML" || "MT" || "MH" || "MQ" || "MR" || "MU" || "YT" || "MX" || "FM" || "MD" || "MC" || "MN" || "ME" || "MS" || "MA" || "MZ" || "MM" || "NA" || "NR" || "NP" || "NL" || "AN" || "NC" || "NZ" || "NI" || "NE" || "NG" || "NU" || "NF" || "MP" || "NO" || "OM" || "PK" || "PW" || "PS" || "PA" || "PG" || "PY" || "PE" || "PH" || "PN" || "PL" || "PT" || "PR" || "QA" || "RE" || "RO" || "RU" || "RW" || "BL" || "SH" || "KN" || "LC" || "MF" || "PM" || "VC" || "WS" || "SM" || "ST" || "SA" || "SN" || "RS" || "SC" || "SL" || "SG" || "SX" || "SK" || "SI" || "SB" || "SO" || "ZA" || "GS" || "SS" || "ES" || "LK" || "SD" || "SR" || "SJ" || "SZ" || "SE" || "CH" || "SY" || "TW" || "TJ" || "TZ" || "TH" || "TL" || "TG" || "TK" || "TO" || "TT" || "TN" || "TR" || "TM" || "TC" || "TV" || "UG" || "UA" || "AE" || "GB" || "UM" || "UY" || "UZ" || "VU" || "VE" || "VN" || "VG" || "VI" || "WF" || "EH" || "YE" || "ZM" || "ZW", // required
+ * //           },
+ * //           Project: { // EngagementCustomerProjectDetails
+ * //             Title: "STRING_VALUE", // required
+ * //             BusinessProblem: "STRING_VALUE", // required
+ * //             TargetCompletionDate: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         Lead: { // LeadContext
+ * //           Insights: { // LeadInsights
+ * //             LeadReadinessScore: "STRING_VALUE",
+ * //           },
+ * //           QualificationStatus: "STRING_VALUE",
+ * //           Customer: { // LeadCustomer
+ * //             Industry: "STRING_VALUE",
+ * //             CompanyName: "STRING_VALUE", // required
+ * //             WebsiteUrl: "STRING_VALUE",
+ * //             Address: { // LeadAddress
+ * //               City: "STRING_VALUE",
+ * //               PostalCode: "STRING_VALUE",
+ * //               StateOrRegion: "STRING_VALUE",
+ * //               CountryCode: "STRING_VALUE",
+ * //             },
+ * //             AwsMaturity: "STRING_VALUE",
+ * //             MarketSegment: "STRING_VALUE",
+ * //           },
+ * //           Interactions: [ // LeadInteractionList // required
+ * //             { // LeadInteraction
+ * //               SourceType: "STRING_VALUE",
+ * //               SourceId: "STRING_VALUE",
+ * //               SourceName: "STRING_VALUE",
+ * //               Usecase: "STRING_VALUE",
+ * //               InteractionDate: new Date("TIMESTAMP"),
+ * //               CustomerAction: "STRING_VALUE",
+ * //               BusinessProblem: "STRING_VALUE",
+ * //               Contact: { // LeadContact
+ * //                 BusinessTitle: "STRING_VALUE", // required
+ * //                 Email: "STRING_VALUE", // required
+ * //                 FirstName: "STRING_VALUE", // required
+ * //                 LastName: "STRING_VALUE", // required
+ * //                 Phone: "STRING_VALUE",
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //         ProspectingResult: { // ProspectingResult
+ * //           Aws: { // ProspectingResultAws
+ * //             Customer: { // ProspectingResultCustomer
+ * //               AccountName: "STRING_VALUE",
+ * //               Geo: "STRING_VALUE",
+ * //               Region: "STRING_VALUE",
+ * //               SubRegion: "STRING_VALUE",
+ * //               Country: "US" || "AF" || "AX" || "AL" || "DZ" || "AS" || "AD" || "AO" || "AI" || "AQ" || "AG" || "AR" || "AM" || "AW" || "AU" || "AT" || "AZ" || "BS" || "BH" || "BD" || "BB" || "BY" || "BE" || "BZ" || "BJ" || "BM" || "BT" || "BO" || "BQ" || "BA" || "BW" || "BV" || "BR" || "IO" || "BN" || "BG" || "BF" || "BI" || "KH" || "CM" || "CA" || "CV" || "KY" || "CF" || "TD" || "CL" || "CN" || "CX" || "CC" || "CO" || "KM" || "CG" || "CK" || "CR" || "CI" || "HR" || "CU" || "CW" || "CY" || "CZ" || "CD" || "DK" || "DJ" || "DM" || "DO" || "EC" || "EG" || "SV" || "GQ" || "ER" || "EE" || "ET" || "FK" || "FO" || "FJ" || "FI" || "FR" || "GF" || "PF" || "TF" || "GA" || "GM" || "GE" || "DE" || "GH" || "GI" || "GR" || "GL" || "GD" || "GP" || "GU" || "GT" || "GG" || "GN" || "GW" || "GY" || "HT" || "HM" || "VA" || "HN" || "HK" || "HU" || "IS" || "IN" || "ID" || "IR" || "IQ" || "IE" || "IM" || "IL" || "IT" || "JM" || "JP" || "JE" || "JO" || "KZ" || "KE" || "KI" || "KR" || "KW" || "KG" || "LA" || "LV" || "LB" || "LS" || "LR" || "LY" || "LI" || "LT" || "LU" || "MO" || "MK" || "MG" || "MW" || "MY" || "MV" || "ML" || "MT" || "MH" || "MQ" || "MR" || "MU" || "YT" || "MX" || "FM" || "MD" || "MC" || "MN" || "ME" || "MS" || "MA" || "MZ" || "MM" || "NA" || "NR" || "NP" || "NL" || "AN" || "NC" || "NZ" || "NI" || "NE" || "NG" || "NU" || "NF" || "MP" || "NO" || "OM" || "PK" || "PW" || "PS" || "PA" || "PG" || "PY" || "PE" || "PH" || "PN" || "PL" || "PT" || "PR" || "QA" || "RE" || "RO" || "RU" || "RW" || "BL" || "SH" || "KN" || "LC" || "MF" || "PM" || "VC" || "WS" || "SM" || "ST" || "SA" || "SN" || "RS" || "SC" || "SL" || "SG" || "SX" || "SK" || "SI" || "SB" || "SO" || "ZA" || "GS" || "SS" || "ES" || "LK" || "SD" || "SR" || "SJ" || "SZ" || "SE" || "CH" || "SY" || "TW" || "TJ" || "TZ" || "TH" || "TL" || "TG" || "TK" || "TO" || "TT" || "TN" || "TR" || "TM" || "TC" || "TV" || "UG" || "UA" || "AE" || "GB" || "UM" || "UY" || "UZ" || "VU" || "VE" || "VN" || "VG" || "VI" || "WF" || "EH" || "YE" || "ZM" || "ZW",
+ * //               Industry: "Aerospace" || "Agriculture" || "Automotive" || "Computers and Electronics" || "Consumer Goods" || "Education" || "Energy - Oil and Gas" || "Energy - Power and Utilities" || "Financial Services" || "Gaming" || "Government" || "Healthcare" || "Hospitality" || "Life Sciences" || "Manufacturing" || "Marketing and Advertising" || "Media and Entertainment" || "Mining" || "Non-Profit Organization" || "Professional Services" || "Real Estate and Construction" || "Retail" || "Software and Internet" || "Telecommunications" || "Transportation and Logistics" || "Travel" || "Wholesale and Distribution" || "Other",
+ * //               SubIndustry: "STRING_VALUE",
+ * //               Segment: "STRING_VALUE",
+ * //               CompanySize: "STRING_VALUE",
+ * //               EligiblePrograms: [ // EligibleProgramsList
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               PublicProfileSummary: "STRING_VALUE",
+ * //             },
+ * //             Insights: { // ProspectingInsights
+ * //               MarketplaceEngagementScore: "STRING_VALUE",
+ * //               SolutionScore: "STRING_VALUE",
+ * //               SolutionCategory: "STRING_VALUE",
+ * //               SolutionSubCategory: "STRING_VALUE",
+ * //             },
+ * //             StartTime: new Date("TIMESTAMP"),
+ * //             EndTime: new Date("TIMESTAMP"),
+ * //             TaskId: "STRING_VALUE",
+ * //             TaskArn: "STRING_VALUE",
+ * //             TaskName: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param GetEngagementCommandInput - {@link GetEngagementCommandInput}
+ * @returns {@link GetEngagementCommandOutput}
+ * @see {@link GetEngagementCommandInput} for command's `input` shape.
+ * @see {@link GetEngagementCommandOutput} for command's `response` shape.
+ * @see {@link PartnerCentralSellingClientResolvedConfig | config} for PartnerCentralSellingClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>This error occurs when you don't have permission to perform the requested action.</p> <p>You don’t have access to this action or resource. Review IAM policies or contact your AWS administrator for assistance.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This error occurs when the specified resource can’t be found or doesn't exist. Resource ID and type might be incorrect.</p> <p>Suggested action: This is usually a transient error. Retry after the provided retry delay or a short interval. If the problem persists, contact AWS support.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This error occurs when the specified resource can't be found. The resource might not exist, or isn't visible with the current credentials.</p> <p>Suggested action: Verify that the resource ID is correct and the resource is in the expected AWS region. Check IAM permissions for accessing the resource.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>This error occurs when there are too many requests sent. Review the provided quotas and adapt your usage to avoid throttling.</p> <p>This error occurs when there are too many requests sent. Review the provided <a href="https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html">Quotas</a> and retry after the provided delay.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the service or business validation rules.</p> <p>Suggested action: Review the error message, including the failed fields and reasons, to correct the request payload.</p>
+ *
+ * @throws {@link PartnerCentralSellingServiceException}
+ * <p>Base exception class for all service exceptions from PartnerCentralSelling service.</p>
+ *
+ *
+ * @public
+ */
+export class GetEngagementCommand extends command<GetEngagementCommandInput, GetEngagementCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEngagement",
+  GetEngagement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEngagementRequest;
+      output: GetEngagementResponse;
+    };
+    sdk: {
+      input: GetEngagementCommandInput;
+      output: GetEngagementCommandOutput;
+    };
+  };
+}

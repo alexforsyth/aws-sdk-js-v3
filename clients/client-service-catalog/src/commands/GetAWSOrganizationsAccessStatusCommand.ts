@@ -1,104 +1,80 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAWSOrganizationsAccessStatusInput, GetAWSOrganizationsAccessStatusOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetAWSOrganizationsAccessStatusCommand,
-  serializeAws_json1_1GetAWSOrganizationsAccessStatusCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
-
-export interface GetAWSOrganizationsAccessStatusCommandInput extends GetAWSOrganizationsAccessStatusInput {}
-export interface GetAWSOrganizationsAccessStatusCommandOutput
-  extends GetAWSOrganizationsAccessStatusOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAWSOrganizationsAccessStatusInput, GetAWSOrganizationsAccessStatusOutput } from "../models/models_0";
+import { GetAWSOrganizationsAccessStatus$ } from "../schemas/schemas_0";
 
 /**
- * <p>Get the Access Status for AWS Organization portfolio share feature. This API can only be
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAWSOrganizationsAccessStatusCommand}.
+ */
+export interface GetAWSOrganizationsAccessStatusCommandInput extends GetAWSOrganizationsAccessStatusInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetAWSOrganizationsAccessStatusCommand}.
+ */
+export interface GetAWSOrganizationsAccessStatusCommandOutput extends GetAWSOrganizationsAccessStatusOutput, __MetadataBearer {}
+
+/**
+ * <p>Get the Access Status for Organizations portfolio share feature. This API can only be
  *          called by the management account in the organization or by a delegated admin.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogClient, GetAWSOrganizationsAccessStatusCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, GetAWSOrganizationsAccessStatusCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = {};
  * const command = new GetAWSOrganizationsAccessStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetAWSOrganizationsAccessStatusOutput
+ * //   AccessStatus: "ENABLED" || "UNDER_CHANGE" || "DISABLED",
+ * // };
+ *
  * ```
  *
+ * @param GetAWSOrganizationsAccessStatusCommandInput - {@link GetAWSOrganizationsAccessStatusCommandInput}
+ * @returns {@link GetAWSOrganizationsAccessStatusCommandOutput}
  * @see {@link GetAWSOrganizationsAccessStatusCommandInput} for command's `input` shape.
  * @see {@link GetAWSOrganizationsAccessStatusCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class GetAWSOrganizationsAccessStatusCommand extends $Command<
-  GetAWSOrganizationsAccessStatusCommandInput,
-  GetAWSOrganizationsAccessStatusCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAWSOrganizationsAccessStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAWSOrganizationsAccessStatusCommandInput, GetAWSOrganizationsAccessStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "GetAWSOrganizationsAccessStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAWSOrganizationsAccessStatusInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAWSOrganizationsAccessStatusOutput.filterSensitiveLog,
+export class GetAWSOrganizationsAccessStatusCommand extends command<GetAWSOrganizationsAccessStatusCommandInput, GetAWSOrganizationsAccessStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAWSOrganizationsAccessStatus",
+  GetAWSOrganizationsAccessStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAWSOrganizationsAccessStatusOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetAWSOrganizationsAccessStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetAWSOrganizationsAccessStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetAWSOrganizationsAccessStatusCommandOutput> {
-    return deserializeAws_json1_1GetAWSOrganizationsAccessStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAWSOrganizationsAccessStatusCommandInput;
+      output: GetAWSOrganizationsAccessStatusCommandOutput;
+    };
+  };
 }

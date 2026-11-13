@@ -1,5 +1,6 @@
-import { fromEnv as _fromEnv } from "@aws-sdk/credential-provider-env";
-import { CredentialProvider } from "@aws-sdk/types";
+import type { FromEnvInit } from "@aws-sdk/credential-provider-env";
+import type { AwsIdentityProperties } from "@aws-sdk/types";
+import type { AwsCredentialIdentityProvider } from "@smithy/types";
 
 /**
  * Create a credential provider that reads credentials from the following environment variables:
@@ -24,5 +25,12 @@ import { CredentialProvider } from "@aws-sdk/types";
  *   credentials: fromEnv(),
  * });
  * ```
+ *
+ * @public
  */
-export const fromEnv = (): CredentialProvider => _fromEnv();
+export const fromEnv = (init?: FromEnvInit): AwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromEnv: _fromEnv } = await import("@aws-sdk/credential-provider-env");
+    return _fromEnv(init)(args);
+  };
+};

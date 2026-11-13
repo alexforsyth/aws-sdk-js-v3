@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeFirewallPolicyRequest, DescribeFirewallPolicyResponse } from "../models/models_0";
-import { NetworkFirewallClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkFirewallClient";
-import {
-  deserializeAws_json1_0DescribeFirewallPolicyCommand,
-  serializeAws_json1_0DescribeFirewallPolicyCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFirewallPolicyRequest, DescribeFirewallPolicyResponse } from "../models/models_0";
+import { DescribeFirewallPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFirewallPolicyCommand}.
+ */
 export interface DescribeFirewallPolicyCommandInput extends DescribeFirewallPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFirewallPolicyCommand}.
+ */
 export interface DescribeFirewallPolicyCommandOutput extends DescribeFirewallPolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,178 @@ export interface DescribeFirewallPolicyCommandOutput extends DescribeFirewallPol
  * ```javascript
  * import { NetworkFirewallClient, DescribeFirewallPolicyCommand } from "@aws-sdk/client-network-firewall"; // ES Modules import
  * // const { NetworkFirewallClient, DescribeFirewallPolicyCommand } = require("@aws-sdk/client-network-firewall"); // CommonJS import
+ * // import type { NetworkFirewallClientConfig } from "@aws-sdk/client-network-firewall";
+ * const config = {}; // type is NetworkFirewallClientConfig
  * const client = new NetworkFirewallClient(config);
+ * const input = { // DescribeFirewallPolicyRequest
+ *   FirewallPolicyName: "STRING_VALUE",
+ *   FirewallPolicyArn: "STRING_VALUE",
+ * };
  * const command = new DescribeFirewallPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFirewallPolicyResponse
+ * //   UpdateToken: "STRING_VALUE", // required
+ * //   FirewallPolicyResponse: { // FirewallPolicyResponse
+ * //     FirewallPolicyName: "STRING_VALUE", // required
+ * //     FirewallPolicyArn: "STRING_VALUE", // required
+ * //     FirewallPolicyId: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     FirewallPolicyStatus: "ACTIVE" || "DELETING" || "ERROR" || "UPDATING",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     ConsumedStatelessRuleCapacity: Number("int"),
+ * //     ConsumedStatefulRuleCapacity: Number("int"),
+ * //     ConsumedStatefulDomainCapacity: Number("int"),
+ * //     NumberOfAssociations: Number("int"),
+ * //     EncryptionConfiguration: { // EncryptionConfiguration
+ * //       KeyId: "STRING_VALUE",
+ * //       Type: "CUSTOMER_KMS" || "AWS_OWNED_KMS_KEY", // required
+ * //     },
+ * //     Errors: [ // FirewallPolicyErrors
+ * //       { // FirewallPolicyError
+ * //         Code: "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE" || "ROUTE53_RESOLVED_IP_VALIDATION_MISSING", // required
+ * //         Message: "STRING_VALUE", // required
+ * //         ResourceId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //   },
+ * //   FirewallPolicy: { // FirewallPolicy
+ * //     StatelessRuleGroupReferences: [ // StatelessRuleGroupReferences
+ * //       { // StatelessRuleGroupReference
+ * //         ResourceArn: "STRING_VALUE", // required
+ * //         Priority: Number("int"), // required
+ * //       },
+ * //     ],
+ * //     StatelessDefaultActions: [ // StatelessActions // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     StatelessFragmentDefaultActions: [ // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     StatelessCustomActions: [ // CustomActions
+ * //       { // CustomAction
+ * //         ActionName: "STRING_VALUE", // required
+ * //         ActionDefinition: { // ActionDefinition
+ * //           PublishMetricAction: { // PublishMetricAction
+ * //             Dimensions: [ // Dimensions // required
+ * //               { // Dimension
+ * //                 Value: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //     StatefulRuleGroupReferences: [ // StatefulRuleGroupReferences
+ * //       { // StatefulRuleGroupReference
+ * //         ResourceArn: "STRING_VALUE", // required
+ * //         Priority: Number("int"),
+ * //         Override: { // StatefulRuleGroupOverride
+ * //           Action: "DROP_TO_ALERT",
+ * //         },
+ * //         DeepThreatInspection: true || false,
+ * //       },
+ * //     ],
+ * //     StatefulDefaultActions: [ // StatefulActions
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     StatefulEngineOptions: { // StatefulEngineOptions
+ * //       RuleOrder: "DEFAULT_ACTION_ORDER" || "STRICT_ORDER",
+ * //       StreamExceptionPolicy: "DROP" || "CONTINUE" || "REJECT",
+ * //       FlowTimeouts: { // FlowTimeouts
+ * //         TcpIdleTimeoutSeconds: Number("int"),
+ * //       },
+ * //     },
+ * //     TLSInspectionConfigurationArn: "STRING_VALUE",
+ * //     PolicyVariables: { // PolicyVariables
+ * //       RuleVariables: { // IPSets
+ * //         "<keys>": { // IPSet
+ * //           Definition: [ // VariableDefinitionList // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //     EnableTLSSessionHolding: true || false,
+ * //     Route53ResolvedIPValidation: { // Route53ResolvedIPValidation
+ * //       Action: "REJECT" || "DROP" || "ALERT", // required
+ * //       DNSFirewallRuleGroupId: "STRING_VALUE", // required
+ * //       DNSExpiryExceptionPolicy: "REJECT" || "DROP" || "CONTINUE", // required
+ * //       BypassDestinationValidationIPRanges: [ // Route53ResolvedIPValidationAddresses
+ * //         { // Address
+ * //           AddressDefinition: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       SourceIPRanges: [
+ * //         {
+ * //           AddressDefinition: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFirewallPolicyCommandInput - {@link DescribeFirewallPolicyCommandInput}
+ * @returns {@link DescribeFirewallPolicyCommandOutput}
  * @see {@link DescribeFirewallPolicyCommandInput} for command's `input` shape.
  * @see {@link DescribeFirewallPolicyCommandOutput} for command's `response` shape.
- * @see {@link NetworkFirewallClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkFirewallClientResolvedConfig | config} for NetworkFirewallClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Your request is valid, but Network Firewall couldn't perform the operation because of a
+ *          system problem. Retry your request. </p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The operation failed because of a problem with your request. Examples include: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified an unsupported parameter name or value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a property with a value that isn't among the available
+ *                types.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                that isn't valid in the context of the request.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Unable to locate a resource using the parameters that you provided.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Unable to process the request due to throttling limitations.</p>
+ *
+ * @throws {@link NetworkFirewallServiceException}
+ * <p>Base exception class for all service exceptions from NetworkFirewall service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFirewallPolicyCommand extends $Command<
-  DescribeFirewallPolicyCommandInput,
-  DescribeFirewallPolicyCommandOutput,
-  NetworkFirewallClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFirewallPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkFirewallClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFirewallPolicyCommandInput, DescribeFirewallPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkFirewallClient";
-    const commandName = "DescribeFirewallPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFirewallPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFirewallPolicyResponse.filterSensitiveLog,
+export class DescribeFirewallPolicyCommand extends command<DescribeFirewallPolicyCommandInput, DescribeFirewallPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFirewallPolicy",
+  DescribeFirewallPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFirewallPolicyRequest;
+      output: DescribeFirewallPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFirewallPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeFirewallPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFirewallPolicyCommandOutput> {
-    return deserializeAws_json1_0DescribeFirewallPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFirewallPolicyCommandInput;
+      output: DescribeFirewallPolicyCommandOutput;
+    };
+  };
 }

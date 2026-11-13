@@ -1,113 +1,151 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeConfigurationRecorderStatusRequest,
   DescribeConfigurationRecorderStatusResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConfigurationRecorderStatusCommand,
-  serializeAws_json1_1DescribeConfigurationRecorderStatusCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DescribeConfigurationRecorderStatusCommandInput extends DescribeConfigurationRecorderStatusRequest {}
-export interface DescribeConfigurationRecorderStatusCommandOutput
-  extends DescribeConfigurationRecorderStatusResponse,
-    __MetadataBearer {}
+import { DescribeConfigurationRecorderStatus$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns the current status of the specified configuration
- * 			recorder. If a configuration recorder is not specified, this action
- * 			returns the status of all configuration recorders associated with
- * 			the account.</p>
- * 		       <note>
- * 			         <p>Currently, you can specify only one configuration recorder
- * 				per region in your account.</p>
- * 		       </note>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConfigurationRecorderStatusCommand}.
+ */
+export interface DescribeConfigurationRecorderStatusCommandInput extends DescribeConfigurationRecorderStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConfigurationRecorderStatusCommand}.
+ */
+export interface DescribeConfigurationRecorderStatusCommandOutput extends DescribeConfigurationRecorderStatusResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns the current status of the configuration
+ * 			recorder you specify as well as the status of the last recording event for the configuration recorders.</p>
+ *          <p>For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics.</p>
+ *          <p>If a configuration recorder is not specified, this operation returns the status for the customer managed configuration recorder configured for the
+ * 			account, if applicable.</p>
+ *          <note>
+ *             <p>When making a request to this operation, you can only specify one configuration recorder.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConfigServiceClient, DescribeConfigurationRecorderStatusCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DescribeConfigurationRecorderStatusCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DescribeConfigurationRecorderStatusRequest
+ *   ConfigurationRecorderNames: [ // ConfigurationRecorderNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   ServicePrincipal: "STRING_VALUE",
+ *   Arn: "STRING_VALUE",
+ * };
  * const command = new DescribeConfigurationRecorderStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConfigurationRecorderStatusResponse
+ * //   ConfigurationRecordersStatus: [ // ConfigurationRecorderStatusList
+ * //     { // ConfigurationRecorderStatus
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       lastStartTime: new Date("TIMESTAMP"),
+ * //       lastStopTime: new Date("TIMESTAMP"),
+ * //       recording: true || false,
+ * //       lastStatus: "Pending" || "Success" || "Failure" || "NotApplicable",
+ * //       lastErrorCode: "STRING_VALUE",
+ * //       lastErrorMessage: "STRING_VALUE",
+ * //       lastStatusChangeTime: new Date("TIMESTAMP"),
+ * //       servicePrincipal: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeConfigurationRecorderStatusCommandInput - {@link DescribeConfigurationRecorderStatusCommandInput}
+ * @returns {@link DescribeConfigurationRecorderStatusCommandOutput}
  * @see {@link DescribeConfigurationRecorderStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeConfigurationRecorderStatusCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link NoSuchConfigurationRecorderException} (client fault)
+ *  <p>You have specified a configuration recorder that does not
+ * 			exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html">PutStoredQuery</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>There are missing required fields.</p>
+ *             </li>
+ *             <li>
+ *                <p>The input value fails the validation.</p>
+ *             </li>
+ *             <li>
+ *                <p>You are trying to create more than 300 queries.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html">DescribeConfigurationRecorders</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html">DescribeConfigurationRecorderStatus</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You have specified more than one configuration recorder.</p>
+ *             </li>
+ *             <li>
+ *                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html">AssociateResourceTypes</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html">DisassociateResourceTypes</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Your configuraiton recorder has a recording strategy that does not allow the association or disassociation of resource types.</p>
+ *             </li>
+ *             <li>
+ *                <p>One or more of the specified resource types are already associated or disassociated with the configuration recorder.</p>
+ *             </li>
+ *             <li>
+ *                <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You have provided both <code>Arn</code> and <code>ServicePrincipal</code>. Only one of <code>Arn</code> or <code>ServicePrincipal</code> can be specified.</p>
+ *             </li>
+ *             <li>
+ *                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConfigurationRecorderStatusCommand extends $Command<
-  DescribeConfigurationRecorderStatusCommandInput,
-  DescribeConfigurationRecorderStatusCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConfigurationRecorderStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConfigurationRecorderStatusCommandInput, DescribeConfigurationRecorderStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DescribeConfigurationRecorderStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConfigurationRecorderStatusRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConfigurationRecorderStatusResponse.filterSensitiveLog,
+export class DescribeConfigurationRecorderStatusCommand extends command<DescribeConfigurationRecorderStatusCommandInput, DescribeConfigurationRecorderStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConfigurationRecorderStatus",
+  DescribeConfigurationRecorderStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationRecorderStatusRequest;
+      output: DescribeConfigurationRecorderStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeConfigurationRecorderStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConfigurationRecorderStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConfigurationRecorderStatusCommandOutput> {
-    return deserializeAws_json1_1DescribeConfigurationRecorderStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConfigurationRecorderStatusCommandInput;
+      output: DescribeConfigurationRecorderStatusCommandOutput;
+    };
+  };
 }

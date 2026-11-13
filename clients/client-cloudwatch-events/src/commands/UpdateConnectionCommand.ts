@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { UpdateConnectionRequest, UpdateConnectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateConnectionCommand,
-  serializeAws_json1_1UpdateConnectionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateConnectionRequest, UpdateConnectionResponse } from "../models/models_0";
+import { UpdateConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConnectionCommand}.
+ */
 export interface UpdateConnectionCommandInput extends UpdateConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConnectionCommand}.
+ */
 export interface UpdateConnectionCommandOutput extends UpdateConnectionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,130 @@ export interface UpdateConnectionCommandOutput extends UpdateConnectionResponse,
  * ```javascript
  * import { CloudWatchEventsClient, UpdateConnectionCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, UpdateConnectionCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // UpdateConnectionRequest
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   AuthorizationType: "BASIC" || "OAUTH_CLIENT_CREDENTIALS" || "API_KEY",
+ *   AuthParameters: { // UpdateConnectionAuthRequestParameters
+ *     BasicAuthParameters: { // UpdateConnectionBasicAuthRequestParameters
+ *       Username: "STRING_VALUE",
+ *       Password: "STRING_VALUE",
+ *     },
+ *     OAuthParameters: { // UpdateConnectionOAuthRequestParameters
+ *       ClientParameters: { // UpdateConnectionOAuthClientRequestParameters
+ *         ClientID: "STRING_VALUE",
+ *         ClientSecret: "STRING_VALUE",
+ *       },
+ *       AuthorizationEndpoint: "STRING_VALUE",
+ *       HttpMethod: "GET" || "POST" || "PUT",
+ *       OAuthHttpParameters: { // ConnectionHttpParameters
+ *         HeaderParameters: [ // ConnectionHeaderParametersList
+ *           { // ConnectionHeaderParameter
+ *             Key: "STRING_VALUE",
+ *             Value: "STRING_VALUE",
+ *             IsValueSecret: true || false,
+ *           },
+ *         ],
+ *         QueryStringParameters: [ // ConnectionQueryStringParametersList
+ *           { // ConnectionQueryStringParameter
+ *             Key: "STRING_VALUE",
+ *             Value: "STRING_VALUE",
+ *             IsValueSecret: true || false,
+ *           },
+ *         ],
+ *         BodyParameters: [ // ConnectionBodyParametersList
+ *           { // ConnectionBodyParameter
+ *             Key: "STRING_VALUE",
+ *             Value: "STRING_VALUE",
+ *             IsValueSecret: true || false,
+ *           },
+ *         ],
+ *       },
+ *     },
+ *     ApiKeyAuthParameters: { // UpdateConnectionApiKeyAuthRequestParameters
+ *       ApiKeyName: "STRING_VALUE",
+ *       ApiKeyValue: "STRING_VALUE",
+ *     },
+ *     InvocationHttpParameters: {
+ *       HeaderParameters: [
+ *         {
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *           IsValueSecret: true || false,
+ *         },
+ *       ],
+ *       QueryStringParameters: [
+ *         {
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *           IsValueSecret: true || false,
+ *         },
+ *       ],
+ *       BodyParameters: [
+ *         {
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *           IsValueSecret: true || false,
+ *         },
+ *       ],
+ *     },
+ *   },
+ * };
  * const command = new UpdateConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateConnectionResponse
+ * //   ConnectionArn: "STRING_VALUE",
+ * //   ConnectionState: "CREATING" || "UPDATING" || "DELETING" || "AUTHORIZED" || "DEAUTHORIZED" || "AUTHORIZING" || "DEAUTHORIZING",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastAuthorizedTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateConnectionCommandInput - {@link UpdateConnectionCommandInput}
+ * @returns {@link UpdateConnectionCommandOutput}
  * @see {@link UpdateConnectionCommandInput} for command's `input` shape.
  * @see {@link UpdateConnectionCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request failed because it attempted to create resource beyond the allowed service
+ *       quota.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateConnectionCommand extends $Command<
-  UpdateConnectionCommandInput,
-  UpdateConnectionCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConnectionCommandInput, UpdateConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "UpdateConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateConnectionResponse.filterSensitiveLog,
+export class UpdateConnectionCommand extends command<UpdateConnectionCommandInput, UpdateConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConnection",
+  UpdateConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConnectionRequest;
+      output: UpdateConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateConnectionCommandOutput> {
-    return deserializeAws_json1_1UpdateConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConnectionCommandInput;
+      output: UpdateConnectionCommandOutput;
+    };
+  };
 }

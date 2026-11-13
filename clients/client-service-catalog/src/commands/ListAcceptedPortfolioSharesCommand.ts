@@ -1,98 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAcceptedPortfolioSharesInput, ListAcceptedPortfolioSharesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAcceptedPortfolioSharesCommand,
-  serializeAws_json1_1ListAcceptedPortfolioSharesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAcceptedPortfolioSharesInput, ListAcceptedPortfolioSharesOutput } from "../models/models_0";
+import { ListAcceptedPortfolioShares$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAcceptedPortfolioSharesCommand}.
+ */
 export interface ListAcceptedPortfolioSharesCommandInput extends ListAcceptedPortfolioSharesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListAcceptedPortfolioSharesCommand}.
+ */
 export interface ListAcceptedPortfolioSharesCommandOutput extends ListAcceptedPortfolioSharesOutput, __MetadataBearer {}
 
 /**
- * <p>Lists all portfolios for which sharing was accepted by this account.</p>
+ * <p>Lists all imported portfolios for which account-to-account shares were accepted by
+ *          this account. By specifying the <code>PortfolioShareType</code>, you can list portfolios for which
+ *          organizational shares were accepted by this account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ServiceCatalogClient, ListAcceptedPortfolioSharesCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, ListAcceptedPortfolioSharesCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // ListAcceptedPortfolioSharesInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   PageToken: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ *   PortfolioShareType: "IMPORTED" || "AWS_SERVICECATALOG" || "AWS_ORGANIZATIONS",
+ * };
  * const command = new ListAcceptedPortfolioSharesCommand(input);
  * const response = await client.send(command);
+ * // { // ListAcceptedPortfolioSharesOutput
+ * //   PortfolioDetails: [ // PortfolioDetails
+ * //     { // PortfolioDetail
+ * //       Id: "STRING_VALUE",
+ * //       ARN: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       ProviderName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAcceptedPortfolioSharesCommandInput - {@link ListAcceptedPortfolioSharesCommandInput}
+ * @returns {@link ListAcceptedPortfolioSharesCommandOutput}
  * @see {@link ListAcceptedPortfolioSharesCommandInput} for command's `input` shape.
  * @see {@link ListAcceptedPortfolioSharesCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The operation is not supported.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class ListAcceptedPortfolioSharesCommand extends $Command<
-  ListAcceptedPortfolioSharesCommandInput,
-  ListAcceptedPortfolioSharesCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAcceptedPortfolioSharesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAcceptedPortfolioSharesCommandInput, ListAcceptedPortfolioSharesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "ListAcceptedPortfolioSharesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAcceptedPortfolioSharesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAcceptedPortfolioSharesOutput.filterSensitiveLog,
+export class ListAcceptedPortfolioSharesCommand extends command<ListAcceptedPortfolioSharesCommandInput, ListAcceptedPortfolioSharesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAcceptedPortfolioShares",
+  ListAcceptedPortfolioShares$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAcceptedPortfolioSharesInput;
+      output: ListAcceptedPortfolioSharesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAcceptedPortfolioSharesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAcceptedPortfolioSharesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAcceptedPortfolioSharesCommandOutput> {
-    return deserializeAws_json1_1ListAcceptedPortfolioSharesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAcceptedPortfolioSharesCommandInput;
+      output: ListAcceptedPortfolioSharesCommandOutput;
+    };
+  };
 }

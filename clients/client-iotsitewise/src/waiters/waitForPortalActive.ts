@@ -1,17 +1,29 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribePortalCommand, DescribePortalCommandInput } from "../commands/DescribePortalCommand";
-import { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import {
+  type DescribePortalCommandInput,
+  type DescribePortalCommandOutput,
+  DescribePortalCommand,
+} from "../commands/DescribePortalCommand";
+import type { IoTSiteWiseClient } from "../IoTSiteWiseClient";
+import type { IoTSiteWiseServiceException } from "../models/IoTSiteWiseServiceException";
 
-const checkState = async (client: IoTSiteWiseClient, input: DescribePortalCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: IoTSiteWiseClient, input: DescribePortalCommandInput): Promise<WaiterResult<DescribePortalCommandOutput | IoTSiteWiseServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribePortalCommand(input));
+    let result: DescribePortalCommandOutput & any = await client.send(new DescribePortalCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.portalStatus.state;
-      };
+      }
       if (returnComparator() === "ACTIVE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -28,7 +40,7 @@ const checkState = async (client: IoTSiteWiseClient, input: DescribePortalComman
 export const waitForPortalActive = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribePortalCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribePortalCommandOutput | IoTSiteWiseServiceException>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -40,8 +52,8 @@ export const waitForPortalActive = async (
 export const waitUntilPortalActive = async (
   params: WaiterConfiguration<IoTSiteWiseClient>,
   input: DescribePortalCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribePortalCommandOutput>> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribePortalCommandOutput>;
 };

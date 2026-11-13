@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { DeleteNotificationRuleRequest, DeleteNotificationRuleResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteNotificationRuleCommand,
-  serializeAws_restJson1DeleteNotificationRuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteNotificationRuleRequest, DeleteNotificationRuleResult } from "../models/models_0";
+import { DeleteNotificationRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteNotificationRuleCommand}.
+ */
 export interface DeleteNotificationRuleCommandInput extends DeleteNotificationRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteNotificationRuleCommand}.
+ */
 export interface DeleteNotificationRuleCommandOutput extends DeleteNotificationRuleResult, __MetadataBearer {}
 
 /**
@@ -32,68 +29,60 @@ export interface DeleteNotificationRuleCommandOutput extends DeleteNotificationR
  * ```javascript
  * import { CodestarNotificationsClient, DeleteNotificationRuleCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, DeleteNotificationRuleCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // DeleteNotificationRuleRequest
+ *   Arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteNotificationRuleCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteNotificationRuleResult
+ * //   Arn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteNotificationRuleCommandInput - {@link DeleteNotificationRuleCommandInput}
+ * @returns {@link DeleteNotificationRuleCommandOutput}
  * @see {@link DeleteNotificationRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteNotificationRuleCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>
+ *             CodeStar Notifications can't complete the request because the resource is being modified by
+ *       another process. Wait a few minutes and try again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>One of the CodeStar Notifications limits has been exceeded. Limits apply to
+ *             accounts, notification rules, notifications, resources, and targets. For more
+ *             information, see Limits.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteNotificationRuleCommand extends $Command<
-  DeleteNotificationRuleCommandInput,
-  DeleteNotificationRuleCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteNotificationRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteNotificationRuleCommandInput, DeleteNotificationRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "DeleteNotificationRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteNotificationRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteNotificationRuleResult.filterSensitiveLog,
+export class DeleteNotificationRuleCommand extends command<DeleteNotificationRuleCommandInput, DeleteNotificationRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteNotificationRule",
+  DeleteNotificationRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteNotificationRuleRequest;
+      output: DeleteNotificationRuleResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteNotificationRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteNotificationRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteNotificationRuleCommandOutput> {
-    return deserializeAws_restJson1DeleteNotificationRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteNotificationRuleCommandInput;
+      output: DeleteNotificationRuleCommandOutput;
+    };
+  };
 }

@@ -1,42 +1,56 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateSolutionRequest, CreateSolutionResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1CreateSolutionCommand,
-  serializeAws_json1_1CreateSolutionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSolutionRequest, CreateSolutionResponse } from "../models/models_0";
+import { CreateSolution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSolutionCommand}.
+ */
 export interface CreateSolutionCommandInput extends CreateSolutionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSolutionCommand}.
+ */
 export interface CreateSolutionCommandOutput extends CreateSolutionResponse, __MetadataBearer {}
 
 /**
- * <p>Creates the configuration for training a model. A trained model is known as
- *       a solution. After the configuration is created, you train the model (create a solution)
- *       by calling the <a>CreateSolutionVersion</a> operation. Every time you call
- *       <code>CreateSolutionVersion</code>, a new version of the solution is created.</p>
- *          <p>After creating a solution version, you check its accuracy by calling
- *       <a>GetSolutionMetrics</a>. When you are satisfied with the version, you
- *       deploy it using <a>CreateCampaign</a>. The campaign provides recommendations
+ * <important>
+ *             <p>By default, all new solutions use automatic training. With automatic training, you incur training costs while
+ *            your solution is active. To avoid unnecessary costs, when you are finished you can
+ *            <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html">update the solution</a> to turn off automatic training.
+ *            For information about training
+ *   costs, see <a href="https://aws.amazon.com/personalize/pricing/">Amazon Personalize pricing</a>.</p>
+ *          </important>
+ *          <p>Creates the configuration for training a model (creating a solution version). This configuration
+ *       includes the recipe to use for model training and optional training configuration, such as columns to use
+ *       in training and feature transformation parameters. For more information about configuring a solution, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html">Creating and configuring a solution</a>.
+ *     </p>
+ *          <p>
+ *       By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency.
+ *       Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within
+ *       the hour, the solution skips the first automatic training. For more information,
+ *         see <a href="https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html">Configuring automatic training</a>.</p>
+ *          <p>
+ *       To turn off automatic training, set <code>performAutoTraining</code> to false. If you turn off automatic training, you must manually create a solution version
+ *       by calling the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html">CreateSolutionVersion</a> operation.</p>
+ *          <p>After training starts, you can
+ *         get the solution version's Amazon Resource Name (ARN) with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a> API operation.
+ *         To get its status, use the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html">DescribeSolutionVersion</a>.
+ *       </p>
+ *          <p>After training completes you can evaluate model accuracy by calling
+ *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html">GetSolutionMetrics</a>. When you are satisfied with the solution version, you
+ *       deploy it using <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html">CreateCampaign</a>. The campaign provides recommendations
  *       to a client through the
  *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a> API.</p>
- *          <p>To train a model, Amazon Personalize requires training data and a recipe. The training data
- *       comes from the dataset group that you provide in the request. A recipe specifies
- *       the training algorithm and a feature transformation. You can specify one of the predefined
- *       recipes provided by Amazon Personalize. Alternatively, you can specify
- *       <code>performAutoML</code> and Amazon Personalize will analyze your data and select the
- *       optimum USER_PERSONALIZATION recipe for you.</p>
  *          <note>
  *             <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code>
  *         for solution hyperparameter optimization at this time.</p>
@@ -53,45 +67,47 @@ export interface CreateSolutionCommandOutput extends CreateSolutionResponse, __M
  *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
  *             </li>
  *          </ul>
- *          <p>To get the status of the solution, call <a>DescribeSolution</a>. Wait
- *       until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p>
- *
- *
- *
+ *          <p>To get the status of the solution, call <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html">DescribeSolution</a>. If you use
+ *       manual training, the status must be ACTIVE before you call <code>CreateSolutionVersion</code>.</p>
  *          <p class="title">
  *             <b>Related APIs</b>
  *          </p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <a>ListSolutions</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html">UpdateSolution</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>CreateSolutionVersion</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html">ListSolutions</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>DescribeSolution</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html">CreateSolutionVersion</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>DeleteSolution</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html">DescribeSolution</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html">DeleteSolution</a>
  *                </p>
  *             </li>
  *          </ul>
  *          <ul>
  *             <li>
  *                <p>
- *                   <a>ListSolutionVersions</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
- *                   <a>DescribeSolutionVersion</a>
+ *                   <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html">DescribeSolutionVersion</a>
  *                </p>
  *             </li>
  *          </ul>
@@ -100,68 +116,156 @@ export interface CreateSolutionCommandOutput extends CreateSolutionResponse, __M
  * ```javascript
  * import { PersonalizeClient, CreateSolutionCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, CreateSolutionCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // CreateSolutionRequest
+ *   name: "STRING_VALUE", // required
+ *   performHPO: true || false,
+ *   performAutoML: true || false,
+ *   performAutoTraining: true || false,
+ *   performIncrementalUpdate: true || false,
+ *   recipeArn: "STRING_VALUE",
+ *   datasetGroupArn: "STRING_VALUE", // required
+ *   eventType: "STRING_VALUE",
+ *   solutionConfig: { // SolutionConfig
+ *     eventValueThreshold: "STRING_VALUE",
+ *     hpoConfig: { // HPOConfig
+ *       hpoObjective: { // HPOObjective
+ *         type: "STRING_VALUE",
+ *         metricName: "STRING_VALUE",
+ *         metricRegex: "STRING_VALUE",
+ *       },
+ *       hpoResourceConfig: { // HPOResourceConfig
+ *         maxNumberOfTrainingJobs: "STRING_VALUE",
+ *         maxParallelTrainingJobs: "STRING_VALUE",
+ *       },
+ *       algorithmHyperParameterRanges: { // HyperParameterRanges
+ *         integerHyperParameterRanges: [ // IntegerHyperParameterRanges
+ *           { // IntegerHyperParameterRange
+ *             name: "STRING_VALUE",
+ *             minValue: Number("int"),
+ *             maxValue: Number("int"),
+ *           },
+ *         ],
+ *         continuousHyperParameterRanges: [ // ContinuousHyperParameterRanges
+ *           { // ContinuousHyperParameterRange
+ *             name: "STRING_VALUE",
+ *             minValue: Number("double"),
+ *             maxValue: Number("double"),
+ *           },
+ *         ],
+ *         categoricalHyperParameterRanges: [ // CategoricalHyperParameterRanges
+ *           { // CategoricalHyperParameterRange
+ *             name: "STRING_VALUE",
+ *             values: [ // CategoricalValues
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         ],
+ *       },
+ *     },
+ *     algorithmHyperParameters: { // HyperParameters
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     featureTransformationParameters: { // FeatureTransformationParameters
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     autoMLConfig: { // AutoMLConfig
+ *       metricName: "STRING_VALUE",
+ *       recipeList: [ // ArnList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *     eventsConfig: { // EventsConfig
+ *       eventParametersList: [ // EventParametersList
+ *         { // EventParameters
+ *           eventType: "STRING_VALUE",
+ *           eventValueThreshold: Number("double"),
+ *           weight: Number("double"),
+ *         },
+ *       ],
+ *     },
+ *     optimizationObjective: { // OptimizationObjective
+ *       itemAttribute: "STRING_VALUE",
+ *       objectiveSensitivity: "LOW" || "MEDIUM" || "HIGH" || "OFF",
+ *     },
+ *     trainingDataConfig: { // TrainingDataConfig
+ *       excludedDatasetColumns: { // ExcludedDatasetColumns
+ *         "<keys>": [ // ColumnNamesList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       includedDatasetColumns: { // IncludedDatasetColumns
+ *         "<keys>": [
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     autoTrainingConfig: { // AutoTrainingConfig
+ *       schedulingExpression: "STRING_VALUE",
+ *     },
+ *   },
+ *   tags: [ // Tags
+ *     { // Tag
+ *       tagKey: "STRING_VALUE", // required
+ *       tagValue: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateSolutionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSolutionResponse
+ * //   solutionArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSolutionCommandInput - {@link CreateSolutionCommandInput}
+ * @returns {@link CreateSolutionCommandOutput}
  * @see {@link CreateSolutionCommandInput} for command's `input` shape.
  * @see {@link CreateSolutionCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of requests per second has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>You have exceeded the maximum number of tags you can apply to this resource. </p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSolutionCommand extends $Command<
-  CreateSolutionCommandInput,
-  CreateSolutionCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSolutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSolutionCommandInput, CreateSolutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "CreateSolutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSolutionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSolutionResponse.filterSensitiveLog,
+export class CreateSolutionCommand extends command<CreateSolutionCommandInput, CreateSolutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSolution",
+  CreateSolution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSolutionRequest;
+      output: CreateSolutionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSolutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateSolutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSolutionCommandOutput> {
-    return deserializeAws_json1_1CreateSolutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSolutionCommandInput;
+      output: CreateSolutionCommandOutput;
+    };
+  };
 }

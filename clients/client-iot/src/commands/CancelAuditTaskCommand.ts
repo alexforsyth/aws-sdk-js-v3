@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { CancelAuditTaskRequest, CancelAuditTaskResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CancelAuditTaskCommand,
-  serializeAws_restJson1CancelAuditTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelAuditTaskRequest, CancelAuditTaskResponse } from "../models/models_0";
+import { CancelAuditTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelAuditTaskCommand}.
+ */
 export interface CancelAuditTaskCommandInput extends CancelAuditTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelAuditTaskCommand}.
+ */
 export interface CancelAuditTaskCommandOutput extends CancelAuditTaskResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,57 @@ export interface CancelAuditTaskCommandOutput extends CancelAuditTaskResponse, _
  * ```javascript
  * import { IoTClient, CancelAuditTaskCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, CancelAuditTaskCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // CancelAuditTaskRequest
+ *   taskId: "STRING_VALUE", // required
+ * };
  * const command = new CancelAuditTaskCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CancelAuditTaskCommandInput - {@link CancelAuditTaskCommandInput}
+ * @returns {@link CancelAuditTaskCommandOutput}
  * @see {@link CancelAuditTaskCommandInput} for command's `input` shape.
  * @see {@link CancelAuditTaskCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class CancelAuditTaskCommand extends $Command<
-  CancelAuditTaskCommandInput,
-  CancelAuditTaskCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelAuditTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelAuditTaskCommandInput, CancelAuditTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "CancelAuditTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelAuditTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelAuditTaskResponse.filterSensitiveLog,
+export class CancelAuditTaskCommand extends command<CancelAuditTaskCommandInput, CancelAuditTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelAuditTask",
+  CancelAuditTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelAuditTaskRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelAuditTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CancelAuditTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelAuditTaskCommandOutput> {
-    return deserializeAws_restJson1CancelAuditTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelAuditTaskCommandInput;
+      output: CancelAuditTaskCommandOutput;
+    };
+  };
 }

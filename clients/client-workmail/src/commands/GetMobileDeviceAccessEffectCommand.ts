@@ -1,101 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetMobileDeviceAccessEffectRequest, GetMobileDeviceAccessEffectResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetMobileDeviceAccessEffectCommand,
-  serializeAws_json1_1GetMobileDeviceAccessEffectCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkMailClientResolvedConfig } from "../WorkMailClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMobileDeviceAccessEffectRequest, GetMobileDeviceAccessEffectResponse } from "../models/models_0";
+import { GetMobileDeviceAccessEffect$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMobileDeviceAccessEffectCommand}.
+ */
 export interface GetMobileDeviceAccessEffectCommandInput extends GetMobileDeviceAccessEffectRequest {}
-export interface GetMobileDeviceAccessEffectCommandOutput
-  extends GetMobileDeviceAccessEffectResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetMobileDeviceAccessEffectCommand}.
+ */
+export interface GetMobileDeviceAccessEffectCommandOutput extends GetMobileDeviceAccessEffectResponse, __MetadataBearer {}
 
 /**
  * <p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access
- *          rules for the Amazon WorkMail organization for a particular user's attributes.</p>
+ *          rules for the WorkMail organization for a particular user's attributes.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkMailClient, GetMobileDeviceAccessEffectCommand } from "@aws-sdk/client-workmail"; // ES Modules import
  * // const { WorkMailClient, GetMobileDeviceAccessEffectCommand } = require("@aws-sdk/client-workmail"); // CommonJS import
+ * // import type { WorkMailClientConfig } from "@aws-sdk/client-workmail";
+ * const config = {}; // type is WorkMailClientConfig
  * const client = new WorkMailClient(config);
+ * const input = { // GetMobileDeviceAccessEffectRequest
+ *   OrganizationId: "STRING_VALUE", // required
+ *   DeviceType: "STRING_VALUE",
+ *   DeviceModel: "STRING_VALUE",
+ *   DeviceOperatingSystem: "STRING_VALUE",
+ *   DeviceUserAgent: "STRING_VALUE",
+ * };
  * const command = new GetMobileDeviceAccessEffectCommand(input);
  * const response = await client.send(command);
+ * // { // GetMobileDeviceAccessEffectResponse
+ * //   Effect: "ALLOW" || "DENY",
+ * //   MatchedRules: [ // MobileDeviceAccessMatchedRuleList
+ * //     { // MobileDeviceAccessMatchedRule
+ * //       MobileDeviceAccessRuleId: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetMobileDeviceAccessEffectCommandInput - {@link GetMobileDeviceAccessEffectCommandInput}
+ * @returns {@link GetMobileDeviceAccessEffectCommandOutput}
  * @see {@link GetMobileDeviceAccessEffectCommandInput} for command's `input` shape.
  * @see {@link GetMobileDeviceAccessEffectCommandOutput} for command's `response` shape.
- * @see {@link WorkMailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailClientResolvedConfig | config} for WorkMailClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link OrganizationNotFoundException} (client fault)
+ *  <p>An operation received a valid organization identifier that either doesn't belong or
+ *          exist in the system.</p>
+ *
+ * @throws {@link OrganizationStateException} (client fault)
+ *  <p>The organization must have a valid state to perform certain
+ *          operations on the organization or its members.</p>
+ *
+ * @throws {@link WorkMailServiceException}
+ * <p>Base exception class for all service exceptions from WorkMail service.</p>
+ *
+ *
+ * @public
  */
-export class GetMobileDeviceAccessEffectCommand extends $Command<
-  GetMobileDeviceAccessEffectCommandInput,
-  GetMobileDeviceAccessEffectCommandOutput,
-  WorkMailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMobileDeviceAccessEffectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMobileDeviceAccessEffectCommandInput, GetMobileDeviceAccessEffectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailClient";
-    const commandName = "GetMobileDeviceAccessEffectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMobileDeviceAccessEffectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMobileDeviceAccessEffectResponse.filterSensitiveLog,
+export class GetMobileDeviceAccessEffectCommand extends command<GetMobileDeviceAccessEffectCommandInput, GetMobileDeviceAccessEffectCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMobileDeviceAccessEffect",
+  GetMobileDeviceAccessEffect$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMobileDeviceAccessEffectRequest;
+      output: GetMobileDeviceAccessEffectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMobileDeviceAccessEffectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetMobileDeviceAccessEffectCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetMobileDeviceAccessEffectCommandOutput> {
-    return deserializeAws_json1_1GetMobileDeviceAccessEffectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMobileDeviceAccessEffectCommandInput;
+      output: GetMobileDeviceAccessEffectCommandOutput;
+    };
+  };
 }

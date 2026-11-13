@@ -1,97 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListExperimentsRequest, ListExperimentsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListExperimentsCommand,
-  serializeAws_json1_1ListExperimentsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListExperimentsRequest, ListExperimentsResponse } from "../models/models_4";
+import { ListExperiments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListExperimentsCommand}.
+ */
 export interface ListExperimentsCommandInput extends ListExperimentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListExperimentsCommand}.
+ */
 export interface ListExperimentsCommandOutput extends ListExperimentsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists all the experiments in your account. The list can be filtered to show only
- *       experiments that were created in a specific time range. The list can be sorted by experiment
- *       name or creation time.</p>
+ * <p>Lists all the experiments in your account. The list can be filtered to show only experiments that were created in a specific time range. The list can be sorted by experiment name or creation time.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, ListExperimentsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListExperimentsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListExperimentsRequest
+ *   CreatedAfter: new Date("TIMESTAMP"),
+ *   CreatedBefore: new Date("TIMESTAMP"),
+ *   SortBy: "Name" || "CreationTime",
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListExperimentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListExperimentsResponse
+ * //   ExperimentSummaries: [ // ExperimentSummaries
+ * //     { // ExperimentSummary
+ * //       ExperimentArn: "STRING_VALUE",
+ * //       ExperimentName: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       ExperimentSource: { // ExperimentSource
+ * //         SourceArn: "STRING_VALUE", // required
+ * //         SourceType: "STRING_VALUE",
+ * //       },
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListExperimentsCommandInput - {@link ListExperimentsCommandInput}
+ * @returns {@link ListExperimentsCommandOutput}
  * @see {@link ListExperimentsCommandInput} for command's `input` shape.
  * @see {@link ListExperimentsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListExperimentsCommand extends $Command<
-  ListExperimentsCommandInput,
-  ListExperimentsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListExperimentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListExperimentsCommandInput, ListExperimentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListExperimentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListExperimentsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListExperimentsResponse.filterSensitiveLog,
+export class ListExperimentsCommand extends command<ListExperimentsCommandInput, ListExperimentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListExperiments",
+  ListExperiments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListExperimentsRequest;
+      output: ListExperimentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListExperimentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListExperimentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListExperimentsCommandOutput> {
-    return deserializeAws_json1_1ListExperimentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListExperimentsCommandInput;
+      output: ListExperimentsCommandOutput;
+    };
+  };
 }

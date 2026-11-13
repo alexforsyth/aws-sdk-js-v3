@@ -1,0 +1,295 @@
+const _ADE = "AccessDeniedException";
+const _BB = "BoundingBox";
+const _BFDT = "BlazeFaceDetectionThreshold";
+const _C = "Code";
+const _CC = "ChallengeConfig";
+const _CCST = "CurrentColorStartTimestamp";
+const _CCl = "ClientChallenge";
+const _CCu = "CurrentColor";
+const _CD = "ColorDisplayed";
+const _CE = "ChallengeEvent";
+const _CI = "ChallengeId";
+const _CS = "ColorSequence";
+const _CSIE = "ClientSessionInformationEvent";
+const _CSo = "ColorSequences";
+const _CV = "ChallengeVersions";
+const _CX = "CenterX";
+const _CY = "CenterY";
+const _Ch = "Challenge";
+const _DD = "DownscrollDuration";
+const _DE = "DisconnectionEvent";
+const _FC = "FreshnessColor";
+const _FDD = "FlatDisplayDuration";
+const _FDITPET = "FaceDetectedInTargetPositionEndTimestamp";
+const _FDITPST = "FaceDetectedInTargetPositionStartTimestamp";
+const _FDT = "FaceDistanceThreshold";
+const _FDTM = "FaceDistanceThresholdMin";
+const _FDTMa = "FaceDistanceThresholdMax";
+const _FIHT = "FaceIouHeightThreshold";
+const _FIWT = "FaceIouWidthThreshold";
+const _FMALC = "FaceMovementAndLightChallenge";
+const _FMALCC = "FaceMovementAndLightClientChallenge";
+const _FMALSC = "FaceMovementAndLightServerChallenge";
+const _FMC = "FaceMovementChallenge";
+const _FMCC = "FaceMovementClientChallenge";
+const _FMSC = "FaceMovementServerChallenge";
+const _H = "Height";
+const _IF = "InitialFace";
+const _IFDT = "InitialFaceDetectedTimestamp";
+const _ISE = "InternalServerException";
+const _L = "Left";
+const _LCT = "LightChallengeType";
+const _LRS = "LivenessRequestStream";
+const _LRSi = "LivenessResponseStream";
+const _M = "Message";
+const _OFT = "OvalFitTimeout";
+const _OHWR = "OvalHeightWidthRatio";
+const _OIHT = "OvalIouHeightThreshold";
+const _OIT = "OvalIouThreshold";
+const _OIWT = "OvalIouWidthThreshold";
+const _OP = "OvalParameters";
+const _PC = "PreviousColor";
+const _RGB = "RGB";
+const _SC = "ServerChallenge";
+const _SFLS = "StartFaceLivenessSession";
+const _SFLSR = "StartFaceLivenessSessionRequest";
+const _SFLSRt = "StartFaceLivenessSessionResponse";
+const _SI = "SessionInformation";
+const _SIe = "SessionId";
+const _SN = "SequenceNumber";
+const _SNFE = "SessionNotFoundException";
+const _SQEE = "ServiceQuotaExceededException";
+const _SSIE = "ServerSessionInformationEvent";
+const _SUE = "ServiceUnavailableException";
+const _T = "Top";
+const _TE = "ThrottlingException";
+const _TF = "TargetFace";
+const _TM = "TimestampMillis";
+const _Ty = "Type";
+const _V = "Version";
+const _VC = "VideoChunk";
+const _VE = "ValidationException";
+const _VET = "VideoEndTimestamp";
+const _VEi = "VideoEvent";
+const _VH = "VideoHeight";
+const _VST = "VideoStartTimestamp";
+const _VW = "VideoWidth";
+const _W = "Width";
+const _c = "client";
+const _e = "error";
+const _h = "http";
+const _hE = "httpError";
+const _hH = "httpHeader";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.rekognitionstreaming";
+const _se = "server";
+const _st = "streaming";
+const _xarslcv = "x-amz-rekognition-streaming-liveness-challenge-versions";
+const _xarslsi = "x-amz-rekognition-streaming-liveness-session-id";
+const _xarslvh = "x-amz-rekognition-streaming-liveness-video-height";
+const _xarslvw = "x-amz-rekognition-streaming-liveness-video-width";
+const n0 = "com.amazonaws.rekognitionstreaming";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  InternalServerException,
+  ServiceQuotaExceededException,
+  ServiceUnavailableException,
+  SessionNotFoundException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { RekognitionStreamingServiceException } from "../models/RekognitionStreamingServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var RekognitionStreamingServiceException$: StaticErrorSchema = [-3, _s, "RekognitionStreamingServiceException", 0, [], []];
+_s_registry.registerError(RekognitionStreamingServiceException$, RekognitionStreamingServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 429 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var ServiceUnavailableException$: StaticErrorSchema = [-3, n0, _SUE,
+  { [_e]: _se, [_hE]: 503 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(ServiceUnavailableException$, ServiceUnavailableException);
+export var SessionNotFoundException$: StaticErrorSchema = [-3, n0, _SNFE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(SessionNotFoundException$, SessionNotFoundException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M, _C],
+  [0, 0]
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var BoundingBox$: StaticStructureSchema = [3, n0, _BB,
+  0,
+  [_W, _H, _L, _T],
+  [1, 1, 1, 1], 4
+];
+export var ChallengeConfig$: StaticStructureSchema = [3, n0, _CC,
+  0,
+  [_BFDT, _FDTM, _FDT, _FDTMa, _OIT, _OHWR, _OIWT, _OIHT, _FIWT, _FIHT, _OFT],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+];
+export var ChallengeEvent$: StaticStructureSchema = [3, n0, _CE,
+  0,
+  [_V, _Ty],
+  [0, 0], 2
+];
+export var ClientSessionInformationEvent$: StaticStructureSchema = [3, n0, _CSIE,
+  0,
+  [_Ch],
+  [() => ClientChallenge$], 1
+];
+export var ColorDisplayed$: StaticStructureSchema = [3, n0, _CD,
+  0,
+  [_CCu, _SN, _CCST, _PC],
+  [() => FreshnessColor$, 1, 1, () => FreshnessColor$], 3
+];
+export var ColorSequence$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_FC, _DD, _FDD],
+  [() => FreshnessColor$, 1, 1], 3
+];
+export var DisconnectionEvent$: StaticStructureSchema = [3, n0, _DE,
+  0,
+  [_TM],
+  [1], 1
+];
+export var FaceMovementAndLightClientChallenge$: StaticStructureSchema = [3, n0, _FMALCC,
+  0,
+  [_CI, _VST, _VET, _IF, _TF, _CD],
+  [0, 1, 1, () => InitialFace$, () => TargetFace$, () => ColorDisplayed$], 1
+];
+export var FaceMovementAndLightServerChallenge$: StaticStructureSchema = [3, n0, _FMALSC,
+  0,
+  [_OP, _LCT, _CC, _CSo],
+  [() => OvalParameters$, 0, () => ChallengeConfig$, () => ColorSequences], 4
+];
+export var FaceMovementClientChallenge$: StaticStructureSchema = [3, n0, _FMCC,
+  0,
+  [_CI, _VST, _VET, _IF, _TF],
+  [0, 1, 1, () => InitialFace$, () => TargetFace$], 1
+];
+export var FaceMovementServerChallenge$: StaticStructureSchema = [3, n0, _FMSC,
+  0,
+  [_OP, _CC],
+  [() => OvalParameters$, () => ChallengeConfig$], 2
+];
+export var FreshnessColor$: StaticStructureSchema = [3, n0, _FC,
+  0,
+  [_RGB],
+  [64 | 1], 1
+];
+export var InitialFace$: StaticStructureSchema = [3, n0, _IF,
+  0,
+  [_BB, _IFDT],
+  [() => BoundingBox$, 1], 2
+];
+export var OvalParameters$: StaticStructureSchema = [3, n0, _OP,
+  0,
+  [_W, _H, _CX, _CY],
+  [1, 1, 1, 1], 4
+];
+export var ServerSessionInformationEvent$: StaticStructureSchema = [3, n0, _SSIE,
+  0,
+  [_SI],
+  [() => SessionInformation$], 1
+];
+export var SessionInformation$: StaticStructureSchema = [3, n0, _SI,
+  0,
+  [_Ch],
+  [() => ServerChallenge$], 1
+];
+export var StartFaceLivenessSessionRequest$: StaticStructureSchema = [3, n0, _SFLSR,
+  0,
+  [_SIe, _VW, _VH, _CV, _LRS],
+  [[0, { [_hH]: _xarslsi }], [0, { [_hH]: _xarslvw }], [0, { [_hH]: _xarslvh }], [0, { [_hH]: _xarslcv }], [() => LivenessRequestStream$, 16]], 4
+];
+export var StartFaceLivenessSessionResponse$: StaticStructureSchema = [3, n0, _SFLSRt,
+  0,
+  [_SIe, _LRSi],
+  [[0, { [_hH]: _xarslsi }], [() => LivenessResponseStream$, 16]], 1
+];
+export var TargetFace$: StaticStructureSchema = [3, n0, _TF,
+  0,
+  [_BB, _FDITPST, _FDITPET],
+  [() => BoundingBox$, 1, 1], 3
+];
+export var VideoEvent$: StaticStructureSchema = [3, n0, _VEi,
+  0,
+  [_VC, _TM],
+  [21, 1]
+];
+var ColorComponentList = 64 | 1;
+var ColorSequences: StaticListSchema = [1, n0, _CSo,
+  0, () => ColorSequence$
+];
+export var ClientChallenge$: StaticUnionSchema = [4, n0, _CCl,
+  0,
+  [_FMALC, _FMC],
+  [() => FaceMovementAndLightClientChallenge$, () => FaceMovementClientChallenge$]
+];
+export var LivenessRequestStream$: StaticUnionSchema = [4, n0, _LRS,
+  { [_st]: 1 },
+  [_VEi, _CSIE],
+  [() => VideoEvent$, () => ClientSessionInformationEvent$]
+];
+export var LivenessResponseStream$: StaticUnionSchema = [4, n0, _LRSi,
+  { [_st]: 1 },
+  [_SSIE, _DE, _CE, _VE, _ISE, _TE, _SQEE, _SUE],
+  [() => ServerSessionInformationEvent$, () => DisconnectionEvent$, () => ChallengeEvent$, [() => ValidationException$, 0], [() => InternalServerException$, 0], [() => ThrottlingException$, 0], [() => ServiceQuotaExceededException$, 0], [() => ServiceUnavailableException$, 0]]
+];
+export var ServerChallenge$: StaticUnionSchema = [4, n0, _SC,
+  0,
+  [_FMALC, _FMC],
+  [() => FaceMovementAndLightServerChallenge$, () => FaceMovementServerChallenge$]
+];
+export var StartFaceLivenessSession$: StaticOperationSchema = [9, n0, _SFLS,
+  { [_h]: ["POST", "/start-face-liveness-session", 200] }, () => StartFaceLivenessSessionRequest$, () => StartFaceLivenessSessionResponse$
+];

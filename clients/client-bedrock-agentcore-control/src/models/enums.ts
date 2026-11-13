@@ -1,0 +1,1774 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const CircuitBreakerMode = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type CircuitBreakerMode = (typeof CircuitBreakerMode)[keyof typeof CircuitBreakerMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const FallbackError = {
+  /**
+   * The gateway could not establish a connection to the destination (connection refused/reset,
+   * or connection timeout) — the attempt never reached the provider. Feeds the circuit breaker.
+   */
+  CONNECTION_ERROR: "CONNECTION_ERROR",
+  /**
+   * The destination accepted the connection but did not return the first response byte within
+   * firstByteTimeoutMilliseconds; the attempt is abandoned before any byte reaches the client.
+   * Feeds the circuit breaker.
+   */
+  FIRST_BYTE_TIMEOUT: "FIRST_BYTE_TIMEOUT",
+  /**
+   * Gateway-side: the target could not be routed to (target missing, or it does not support the
+   * request's API path). Deterministic — advances the chain but does NOT feed the breaker.
+   */
+  UNROUTABLE: "UNROUTABLE",
+} as const;
+/**
+ * @public
+ */
+export type FallbackError = (typeof FallbackError)[keyof typeof FallbackError];
+
+/**
+ * @public
+ * @enum
+ */
+export const ActorTokenContentType = {
+  AWS_IAM_ID_TOKEN_JWT: "AWS_IAM_ID_TOKEN_JWT",
+  M2M: "M2M",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type ActorTokenContentType = (typeof ActorTokenContentType)[keyof typeof ActorTokenContentType];
+
+/**
+ * @public
+ * @enum
+ */
+export const DatasetStatus = {
+  /**
+   * <p> Dataset is stable. All operations are allowed per operation-specific guards. </p>
+   */
+  ACTIVE: "ACTIVE",
+  /**
+   * <p> Initial ingestion failed. DRAFT record exists but contains no examples. </p>
+   */
+  CREATE_FAILED: "CREATE_FAILED",
+  /**
+   * <p> CreateDataset async ingestion in progress. All writes are blocked. </p>
+   */
+  CREATING: "CREATING",
+  /**
+   * <p> Delete failed after retries. Dataset record may be in an inconsistent state. </p>
+   */
+  DELETE_FAILED: "DELETE_FAILED",
+  /**
+   * <p> Full or version-specific delete is in progress. Read operations are still allowed. </p>
+   */
+  DELETING: "DELETING",
+  /**
+   * <p> Last example mutation or CreateDatasetVersion failed. DRAFT may be partially modified. </p>
+   */
+  UPDATE_FAILED: "UPDATE_FAILED",
+  /**
+   * <p> An async example mutation or CreateDatasetVersion is in progress. All writes are blocked. </p>
+   */
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type DatasetStatus = (typeof DatasetStatus)[keyof typeof DatasetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ValidationExceptionReason = {
+  CANNOT_PARSE: "CannotParse",
+  FIELD_VALIDATION_FAILED: "FieldValidationFailed",
+  IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION: "IdempotentParameterMismatchException",
+  RESOURCE_CONFLICT: "ResourceConflict",
+  ROOT_EVENT_IN_OTHER_SESSION: "EventInOtherSession",
+} as const;
+/**
+ * @public
+ */
+export type ValidationExceptionReason = (typeof ValidationExceptionReason)[keyof typeof ValidationExceptionReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgentRuntimeEndpointStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type AgentRuntimeEndpointStatus = (typeof AgentRuntimeEndpointStatus)[keyof typeof AgentRuntimeEndpointStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgentManagedRuntimeType = {
+  NODE_22: "NODE_22",
+  PYTHON_3_10: "PYTHON_3_10",
+  PYTHON_3_11: "PYTHON_3_11",
+  PYTHON_3_12: "PYTHON_3_12",
+  PYTHON_3_13: "PYTHON_3_13",
+  PYTHON_3_14: "PYTHON_3_14",
+} as const;
+/**
+ * @public
+ */
+export type AgentManagedRuntimeType = (typeof AgentManagedRuntimeType)[keyof typeof AgentManagedRuntimeType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ClaimMatchOperatorType = {
+  CONTAINS: "CONTAINS",
+  CONTAINS_ANY: "CONTAINS_ANY",
+  EQUALS: "EQUALS",
+} as const;
+/**
+ * @public
+ */
+export type ClaimMatchOperatorType = (typeof ClaimMatchOperatorType)[keyof typeof ClaimMatchOperatorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InboundTokenClaimValueType = {
+  STRING: "STRING",
+  STRING_ARRAY: "STRING_ARRAY",
+} as const;
+/**
+ * @public
+ */
+export type InboundTokenClaimValueType = (typeof InboundTokenClaimValueType)[keyof typeof InboundTokenClaimValueType];
+
+/**
+ * @public
+ * @enum
+ */
+export const EndpointIpAddressType = {
+  IPV4: "IPV4",
+  IPV6: "IPV6",
+} as const;
+/**
+ * @public
+ */
+export type EndpointIpAddressType = (typeof EndpointIpAddressType)[keyof typeof EndpointIpAddressType];
+
+/**
+ * @public
+ * @enum
+ */
+export const NetworkMode = {
+  PUBLIC: "PUBLIC",
+  VPC: "VPC",
+} as const;
+/**
+ * @public
+ */
+export type NetworkMode = (typeof NetworkMode)[keyof typeof NetworkMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const ServerProtocol = {
+  A2A: "A2A",
+  AGUI: "AGUI",
+  HTTP: "HTTP",
+  MCP: "MCP",
+} as const;
+/**
+ * @public
+ */
+export type ServerProtocol = (typeof ServerProtocol)[keyof typeof ServerProtocol];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgentRuntimeStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type AgentRuntimeStatus = (typeof AgentRuntimeStatus)[keyof typeof AgentRuntimeStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const SecretSourceType = {
+  EXTERNAL: "EXTERNAL",
+  MANAGED: "MANAGED",
+} as const;
+/**
+ * @public
+ */
+export type SecretSourceType = (typeof SecretSourceType)[keyof typeof SecretSourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const BrowserProfileStatus = {
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+  READY: "READY",
+  SAVING: "SAVING",
+} as const;
+/**
+ * @public
+ */
+export type BrowserProfileStatus = (typeof BrowserProfileStatus)[keyof typeof BrowserProfileStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const BrowserEnterprisePolicyType = {
+  MANAGED: "MANAGED",
+  RECOMMENDED: "RECOMMENDED",
+} as const;
+/**
+ * @public
+ */
+export type BrowserEnterprisePolicyType =
+  (typeof BrowserEnterprisePolicyType)[keyof typeof BrowserEnterprisePolicyType];
+
+/**
+ * @public
+ * @enum
+ */
+export const BrowserNetworkMode = {
+  PUBLIC: "PUBLIC",
+  VPC: "VPC",
+} as const;
+/**
+ * @public
+ */
+export type BrowserNetworkMode = (typeof BrowserNetworkMode)[keyof typeof BrowserNetworkMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const BrowserStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+} as const;
+/**
+ * @public
+ */
+export type BrowserStatus = (typeof BrowserStatus)[keyof typeof BrowserStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ResourceType = {
+  CUSTOM: "CUSTOM",
+  SYSTEM: "SYSTEM",
+} as const;
+/**
+ * @public
+ */
+export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const CapacityReservationPreference = {
+  CAPACITY_RESERVATIONS_ONLY: "capacity-reservations-only",
+  NONE: "none",
+  OPEN: "open",
+} as const;
+/**
+ * @public
+ */
+export type CapacityReservationPreference =
+  (typeof CapacityReservationPreference)[keyof typeof CapacityReservationPreference];
+
+/**
+ * @public
+ * @enum
+ */
+export const EbsVolumeType = {
+  GP2: "gp2",
+  GP3: "gp3",
+  IO1: "io1",
+  IO2: "io2",
+  SC1: "sc1",
+  ST1: "st1",
+  STANDARD: "standard",
+} as const;
+/**
+ * @public
+ */
+export type EbsVolumeType = (typeof EbsVolumeType)[keyof typeof EbsVolumeType];
+
+/**
+ * @public
+ * @enum
+ */
+export const Monitoring = {
+  BASIC: "BASIC",
+  DETAILED: "DETAILED",
+} as const;
+/**
+ * @public
+ */
+export type Monitoring = (typeof Monitoring)[keyof typeof Monitoring];
+
+/**
+ * @public
+ * @enum
+ */
+export const OperatingSystem = {
+  LINUX_ARM64: "LINUX_ARM64",
+  LINUX_X86_64: "LINUX_X86_64",
+} as const;
+/**
+ * @public
+ */
+export type OperatingSystem = (typeof OperatingSystem)[keyof typeof OperatingSystem];
+
+/**
+ * @public
+ * @enum
+ */
+export const CapacityProviderStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type CapacityProviderStatus = (typeof CapacityProviderStatus)[keyof typeof CapacityProviderStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const CapacityProviderStatusCode = {
+  INTERNAL_SERVER_EXCEPTION: "INTERNAL_SERVER_EXCEPTION",
+  QUOTA_EXCEEDED: "QUOTA_EXCEEDED",
+  THROTTLED: "THROTTLED",
+  VALIDATION_ERROR: "VALIDATION_ERROR",
+} as const;
+/**
+ * @public
+ */
+export type CapacityProviderStatusCode = (typeof CapacityProviderStatusCode)[keyof typeof CapacityProviderStatusCode];
+
+/**
+ * @public
+ * @enum
+ */
+export const CodeInterpreterNetworkMode = {
+  PUBLIC: "PUBLIC",
+  SANDBOX: "SANDBOX",
+  VPC: "VPC",
+} as const;
+/**
+ * @public
+ */
+export type CodeInterpreterNetworkMode = (typeof CodeInterpreterNetworkMode)[keyof typeof CodeInterpreterNetworkMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const CodeInterpreterStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+} as const;
+/**
+ * @public
+ */
+export type CodeInterpreterStatus = (typeof CodeInterpreterStatus)[keyof typeof CodeInterpreterStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConfigurationBundleStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type ConfigurationBundleStatus = (typeof ConfigurationBundleStatus)[keyof typeof ConfigurationBundleStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConsentPortalSourceType = {
+  AGENTCORE_GATEWAY: "agentcore-gateway",
+} as const;
+/**
+ * @public
+ */
+export type ConsentPortalSourceType = (typeof ConsentPortalSourceType)[keyof typeof ConsentPortalSourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConsentPortalStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type ConsentPortalStatus = (typeof ConsentPortalStatus)[keyof typeof ConsentPortalStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DatasetSchemaType = {
+  /**
+   * <p> AgentCore predefined evaluation schema, version 1. Dataset with pre-written inputs per conversation turn. </p>
+   */
+  AGENTCORE_EVALUATION_PREDEFINED_V1: "AGENTCORE_EVALUATION_PREDEFINED_V1",
+  /**
+   * <p> AgentCore simulated evaluation schema, version 1. Dataset for synthetic data generation where each example is a scenario used to generate full conversations. </p>
+   */
+  AGENTCORE_EVALUATION_SIMULATED_V1: "AGENTCORE_EVALUATION_SIMULATED_V1",
+  /**
+   * <p> Third-party evaluation schema, version 1. Supports single-turn (string input) and multi-turn (message list input) across third-party evaluation frameworks. </p>
+   */
+  THIRD_PARTY_EVALUATION_V1: "THIRD_PARTY_EVALUATION_V1",
+} as const;
+/**
+ * @public
+ */
+export type DatasetSchemaType = (typeof DatasetSchemaType)[keyof typeof DatasetSchemaType];
+
+/**
+ * @public
+ * @enum
+ */
+export const DraftStatus = {
+  /**
+   * <p> DRAFT has changes not yet reflected in any published version, or no versions have been published yet. </p>
+   */
+  MODIFIED: "MODIFIED",
+  /**
+   * <p> DRAFT content matches the latest published version exactly. </p>
+   */
+  UNMODIFIED: "UNMODIFIED",
+} as const;
+/**
+ * @public
+ */
+export type DraftStatus = (typeof DraftStatus)[keyof typeof DraftStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const EvaluatorLevel = {
+  SESSION: "SESSION",
+  TOOL_CALL: "TOOL_CALL",
+  TRACE: "TRACE",
+} as const;
+/**
+ * @public
+ */
+export type EvaluatorLevel = (typeof EvaluatorLevel)[keyof typeof EvaluatorLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const EvaluatorStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type EvaluatorStatus = (typeof EvaluatorStatus)[keyof typeof EvaluatorStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const IncludedData = {
+  ALL_DATA: "ALL_DATA",
+  METADATA_ONLY: "METADATA_ONLY",
+} as const;
+/**
+ * @public
+ */
+export type IncludedData = (typeof IncludedData)[keyof typeof IncludedData];
+
+/**
+ * @public
+ * @enum
+ */
+export const EvaluatorType = {
+  BUILTIN: "Builtin",
+  CODE: "CustomCode",
+  CUSTOM: "Custom",
+  CUSTOM_DERIVED: "CustomDerived",
+  THIRD_PARTY: "ThirdParty",
+} as const;
+/**
+ * @public
+ */
+export type EvaluatorType = (typeof EvaluatorType)[keyof typeof EvaluatorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const Provider = {
+  AUTO_EVAL: "AutoEval",
+  AWS: "AWS",
+  CUSTOM: "Custom",
+  DEEP_EVAL: "DeepEval",
+} as const;
+/**
+ * @public
+ */
+export type Provider = (typeof Provider)[keyof typeof Provider];
+
+/**
+ * @public
+ * @enum
+ */
+export const Period = {
+  MINUTE: "minute",
+  SECOND: "second",
+} as const;
+/**
+ * @public
+ */
+export type Period = (typeof Period)[keyof typeof Period];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayRateLimitStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type GatewayRateLimitStatus = (typeof GatewayRateLimitStatus)[keyof typeof GatewayRateLimitStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AuthorizerType = {
+  AUTHENTICATE_ONLY: "AUTHENTICATE_ONLY",
+  AWS_IAM: "AWS_IAM",
+  CUSTOM_JWT: "CUSTOM_JWT",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type AuthorizerType = (typeof AuthorizerType)[keyof typeof AuthorizerType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ExceptionLevel = {
+  DEBUG: "DEBUG",
+} as const;
+/**
+ * @public
+ */
+export type ExceptionLevel = (typeof ExceptionLevel)[keyof typeof ExceptionLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const InterceptorPayloadExclusion = {
+  RESPONSE_BODY: "RESPONSE_BODY",
+} as const;
+/**
+ * @public
+ */
+export type InterceptorPayloadExclusion =
+  (typeof InterceptorPayloadExclusion)[keyof typeof InterceptorPayloadExclusion];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayInterceptionPoint = {
+  REQUEST: "REQUEST",
+  RESPONSE: "RESPONSE",
+} as const;
+/**
+ * @public
+ */
+export type GatewayInterceptionPoint = (typeof GatewayInterceptionPoint)[keyof typeof GatewayInterceptionPoint];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayPolicyEngineMode = {
+  ENFORCE: "ENFORCE",
+  LOG_ONLY: "LOG_ONLY",
+} as const;
+/**
+ * @public
+ */
+export type GatewayPolicyEngineMode = (typeof GatewayPolicyEngineMode)[keyof typeof GatewayPolicyEngineMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const SearchType = {
+  SEMANTIC: "SEMANTIC",
+} as const;
+/**
+ * @public
+ */
+export type SearchType = (typeof SearchType)[keyof typeof SearchType];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayProtocolType = {
+  MCP: "MCP",
+} as const;
+/**
+ * @public
+ */
+export type GatewayProtocolType = (typeof GatewayProtocolType)[keyof typeof GatewayProtocolType];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayStatus = {
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+  READY: "READY",
+  UPDATE_UNSUCCESSFUL: "UPDATE_UNSUCCESSFUL",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type GatewayStatus = (typeof GatewayStatus)[keyof typeof GatewayStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const WafFailureMode = {
+  FAIL_CLOSE: "FAIL_CLOSE",
+  FAIL_OPEN: "FAIL_OPEN",
+} as const;
+/**
+ * @public
+ */
+export type WafFailureMode = (typeof WafFailureMode)[keyof typeof WafFailureMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const MatchOperator = {
+  StringEquals: "StringEquals",
+  StringLike: "StringLike",
+} as const;
+/**
+ * @public
+ */
+export type MatchOperator = (typeof MatchOperator)[keyof typeof MatchOperator];
+
+/**
+ * @public
+ * @enum
+ */
+export const PrincipalMatchOperator = {
+  StringEquals: "StringEquals",
+  StringLike: "StringLike",
+} as const;
+/**
+ * @public
+ */
+export type PrincipalMatchOperator = (typeof PrincipalMatchOperator)[keyof typeof PrincipalMatchOperator];
+
+/**
+ * @public
+ * @enum
+ */
+export const GatewayRuleStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type GatewayRuleStatus = (typeof GatewayRuleStatus)[keyof typeof GatewayRuleStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ApiKeyCredentialLocation = {
+  HEADER: "HEADER",
+  QUERY_PARAMETER: "QUERY_PARAMETER",
+} as const;
+/**
+ * @public
+ */
+export type ApiKeyCredentialLocation = (typeof ApiKeyCredentialLocation)[keyof typeof ApiKeyCredentialLocation];
+
+/**
+ * @public
+ * @enum
+ */
+export const OAuthGrantType = {
+  AUTHORIZATION_CODE: "AUTHORIZATION_CODE",
+  CLIENT_CREDENTIALS: "CLIENT_CREDENTIALS",
+  TOKEN_EXCHANGE: "TOKEN_EXCHANGE",
+} as const;
+/**
+ * @public
+ */
+export type OAuthGrantType = (typeof OAuthGrantType)[keyof typeof OAuthGrantType];
+
+/**
+ * @public
+ * @enum
+ */
+export const CredentialProviderType = {
+  API_KEY: "API_KEY",
+  CALLER_IAM_CREDENTIALS: "CALLER_IAM_CREDENTIALS",
+  GATEWAY_IAM_ROLE: "GATEWAY_IAM_ROLE",
+  JWT_PASSTHROUGH: "JWT_PASSTHROUGH",
+  OAUTH: "OAUTH",
+} as const;
+/**
+ * @public
+ */
+export type CredentialProviderType = (typeof CredentialProviderType)[keyof typeof CredentialProviderType];
+
+/**
+ * @public
+ * @enum
+ */
+export const PassthroughProtocolType = {
+  A2A: "A2A",
+  CUSTOM: "CUSTOM",
+  INFERENCE: "INFERENCE",
+  MCP: "MCP",
+} as const;
+/**
+ * @public
+ */
+export type PassthroughProtocolType = (typeof PassthroughProtocolType)[keyof typeof PassthroughProtocolType];
+
+/**
+ * @public
+ * @enum
+ */
+export const StaticQueryParameterConflictResolution = {
+  CLIENT_OVERRIDE: "CLIENT_OVERRIDE",
+  STATIC_OVERRIDE: "STATIC_OVERRIDE",
+} as const;
+/**
+ * @public
+ */
+export type StaticQueryParameterConflictResolution =
+  (typeof StaticQueryParameterConflictResolution)[keyof typeof StaticQueryParameterConflictResolution];
+
+/**
+ * @public
+ * @enum
+ */
+export const RestApiMethod = {
+  DELETE: "DELETE",
+  GET: "GET",
+  HEAD: "HEAD",
+  OPTIONS: "OPTIONS",
+  PATCH: "PATCH",
+  POST: "POST",
+  PUT: "PUT",
+} as const;
+/**
+ * @public
+ */
+export type RestApiMethod = (typeof RestApiMethod)[keyof typeof RestApiMethod];
+
+/**
+ * @public
+ * @enum
+ */
+export const SchemaType = {
+  ARRAY: "array",
+  BOOLEAN: "boolean",
+  INTEGER: "integer",
+  NUMBER: "number",
+  OBJECT: "object",
+  STRING: "string",
+} as const;
+/**
+ * @public
+ */
+export type SchemaType = (typeof SchemaType)[keyof typeof SchemaType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ListingMode = {
+  DEFAULT: "DEFAULT",
+  DYNAMIC: "DYNAMIC",
+} as const;
+/**
+ * @public
+ */
+export type ListingMode = (typeof ListingMode)[keyof typeof ListingMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const TargetProtocolType = {
+  HTTP: "HTTP",
+  MCP: "MCP",
+} as const;
+/**
+ * @public
+ */
+export type TargetProtocolType = (typeof TargetProtocolType)[keyof typeof TargetProtocolType];
+
+/**
+ * @public
+ * @enum
+ */
+export const TargetStatus = {
+  CREATE_PENDING_AUTH: "CREATE_PENDING_AUTH",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+  READY: "READY",
+  SYNCHRONIZE_PENDING_AUTH: "SYNCHRONIZE_PENDING_AUTH",
+  SYNCHRONIZE_UNSUCCESSFUL: "SYNCHRONIZE_UNSUCCESSFUL",
+  SYNCHRONIZING: "SYNCHRONIZING",
+  UPDATE_PENDING_AUTH: "UPDATE_PENDING_AUTH",
+  UPDATE_UNSUCCESSFUL: "UPDATE_UNSUCCESSFUL",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type TargetStatus = (typeof TargetStatus)[keyof typeof TargetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const TargetType = {
+  AGENTCORE_RUNTIME: "AGENTCORE_RUNTIME",
+  API_GATEWAY: "API_GATEWAY",
+  CONNECTOR: "CONNECTOR",
+  HTTP_CONNECTOR: "HTTP_CONNECTOR",
+  LAMBDA: "LAMBDA",
+  MCP_SERVER: "MCP_SERVER",
+  OPEN_API_SCHEMA: "OPEN_API_SCHEMA",
+  PASSTHROUGH: "PASSTHROUGH",
+  PROVIDER: "PROVIDER",
+  SMITHY_MODEL: "SMITHY_MODEL",
+} as const;
+/**
+ * @public
+ */
+export type TargetType = (typeof TargetType)[keyof typeof TargetType];
+
+/**
+ * @public
+ * @enum
+ */
+export const KeyType = {
+  CustomerManagedKey: "CustomerManagedKey",
+  ServiceManagedKey: "ServiceManagedKey",
+} as const;
+/**
+ * @public
+ */
+export type KeyType = (typeof KeyType)[keyof typeof KeyType];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessEndpointStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type HarnessEndpointStatus = (typeof HarnessEndpointStatus)[keyof typeof HarnessEndpointStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessHookFailureMode = {
+  /**
+   * <p>Specifies that the current action continues when the hook target fails.</p>
+   */
+  ALLOW: "allow",
+  /**
+   * <p>Specifies that the service denies the current action when the hook target fails.</p>
+   */
+  DENY: "deny",
+} as const;
+/**
+ * @public
+ */
+export type HarnessHookFailureMode = (typeof HarnessHookFailureMode)[keyof typeof HarnessHookFailureMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessManagedMemoryStrategyType = {
+  EPISODIC: "EPISODIC",
+  SEMANTIC: "SEMANTIC",
+  SUMMARIZATION: "SUMMARIZATION",
+  USER_PREFERENCE: "USER_PREFERENCE",
+} as const;
+/**
+ * @public
+ */
+export type HarnessManagedMemoryStrategyType =
+  (typeof HarnessManagedMemoryStrategyType)[keyof typeof HarnessManagedMemoryStrategyType];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessBedrockApiFormat = {
+  /**
+   * <p>Use the Chat Completions API format.</p>
+   */
+  CHAT_COMPLETIONS: "chat_completions",
+  /**
+   * <p>Use the Bedrock Converse Stream API format.</p>
+   */
+  CONVERSE_STREAM: "converse_stream",
+  /**
+   * <p>Use the Responses API format.</p>
+   */
+  RESPONSES: "responses",
+} as const;
+/**
+ * @public
+ */
+export type HarnessBedrockApiFormat = (typeof HarnessBedrockApiFormat)[keyof typeof HarnessBedrockApiFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessOpenAiApiFormat = {
+  /**
+   * <p>Use the Chat Completions API format.</p>
+   */
+  CHAT_COMPLETIONS: "chat_completions",
+  /**
+   * <p>Use the Responses API format.</p>
+   */
+  RESPONSES: "responses",
+} as const;
+/**
+ * @public
+ */
+export type HarnessOpenAiApiFormat = (typeof HarnessOpenAiApiFormat)[keyof typeof HarnessOpenAiApiFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessToolType = {
+  AGENTCORE_BROWSER: "agentcore_browser",
+  AGENTCORE_CODE_INTERPRETER: "agentcore_code_interpreter",
+  AGENTCORE_GATEWAY: "agentcore_gateway",
+  INLINE_FUNCTION: "inline_function",
+  REMOTE_MCP: "remote_mcp",
+} as const;
+/**
+ * @public
+ */
+export type HarnessToolType = (typeof HarnessToolType)[keyof typeof HarnessToolType];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessTruncationStrategy = {
+  NONE: "none",
+  SLIDING_WINDOW: "sliding_window",
+  SUMMARIZATION: "summarization",
+} as const;
+/**
+ * @public
+ */
+export type HarnessTruncationStrategy = (typeof HarnessTruncationStrategy)[keyof typeof HarnessTruncationStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const HarnessStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type HarnessStatus = (typeof HarnessStatus)[keyof typeof HarnessStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const MetadataValueType = {
+  NUMBER: "NUMBER",
+  STRING: "STRING",
+  STRINGLIST: "STRINGLIST",
+} as const;
+/**
+ * @public
+ */
+export type MetadataValueType = (typeof MetadataValueType)[keyof typeof MetadataValueType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ExtractionType = {
+  LLM_INFERRED: "LLM_INFERRED",
+  STRICTLY_CONSISTENT: "STRICTLY_CONSISTENT",
+} as const;
+/**
+ * @public
+ */
+export type ExtractionType = (typeof ExtractionType)[keyof typeof ExtractionType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RecordExpiryAction = {
+  REMOVE: "REMOVE",
+} as const;
+/**
+ * @public
+ */
+export type RecordExpiryAction = (typeof RecordExpiryAction)[keyof typeof RecordExpiryAction];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContentLevel = {
+  FULL_CONTENT: "FULL_CONTENT",
+  METADATA_ONLY: "METADATA_ONLY",
+} as const;
+/**
+ * @public
+ */
+export type ContentLevel = (typeof ContentLevel)[keyof typeof ContentLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContentType = {
+  MEMORY_RECORDS: "MEMORY_RECORDS",
+} as const;
+/**
+ * @public
+ */
+export type ContentType = (typeof ContentType)[keyof typeof ContentType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MemoryStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type MemoryStatus = (typeof MemoryStatus)[keyof typeof MemoryStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const OverrideType = {
+  EPISODIC_OVERRIDE: "EPISODIC_OVERRIDE",
+  SELF_MANAGED: "SELF_MANAGED",
+  SEMANTIC_OVERRIDE: "SEMANTIC_OVERRIDE",
+  SUMMARY_OVERRIDE: "SUMMARY_OVERRIDE",
+  USER_PREFERENCE_OVERRIDE: "USER_PREFERENCE_OVERRIDE",
+} as const;
+/**
+ * @public
+ */
+export type OverrideType = (typeof OverrideType)[keyof typeof OverrideType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MemoryStrategyStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+} as const;
+/**
+ * @public
+ */
+export type MemoryStrategyStatus = (typeof MemoryStrategyStatus)[keyof typeof MemoryStrategyStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const MemoryStrategyType = {
+  CUSTOM: "CUSTOM",
+  EPISODIC: "EPISODIC",
+  SEMANTIC: "SEMANTIC",
+  SUMMARIZATION: "SUMMARIZATION",
+  USER_PREFERENCE: "USER_PREFERENCE",
+} as const;
+/**
+ * @public
+ */
+export type MemoryStrategyType = (typeof MemoryStrategyType)[keyof typeof MemoryStrategyType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MemoryView = {
+  FULL: "full",
+  WITHOUT_DECRYPTION: "without_decryption",
+} as const;
+/**
+ * @public
+ */
+export type MemoryView = (typeof MemoryView)[keyof typeof MemoryView];
+
+/**
+ * @public
+ * @enum
+ */
+export const CredentialProviderVendorType = {
+  AtlassianOauth2: "AtlassianOauth2",
+  Auth0Oauth2: "Auth0Oauth2",
+  CognitoOauth2: "CognitoOauth2",
+  CustomOauth2: "CustomOauth2",
+  CyberArkOauth2: "CyberArkOauth2",
+  DropboxOauth2: "DropboxOauth2",
+  FacebookOauth2: "FacebookOauth2",
+  FusionAuthOauth2: "FusionAuthOauth2",
+  GithubOauth2: "GithubOauth2",
+  GoogleOauth2: "GoogleOauth2",
+  HubspotOauth2: "HubspotOauth2",
+  LinkedinOauth2: "LinkedinOauth2",
+  MicrosoftOauth2: "MicrosoftOauth2",
+  NotionOauth2: "NotionOauth2",
+  OktaOauth2: "OktaOauth2",
+  OneLoginOauth2: "OneLoginOauth2",
+  PingOneOauth2: "PingOneOauth2",
+  RedditOauth2: "RedditOauth2",
+  SalesforceOauth2: "SalesforceOauth2",
+  SlackOauth2: "SlackOauth2",
+  SpotifyOauth2: "SpotifyOauth2",
+  TwitchOauth2: "TwitchOauth2",
+  XOauth2: "XOauth2",
+  YandexOauth2: "YandexOauth2",
+  ZoomOauth2: "ZoomOauth2",
+} as const;
+/**
+ * @public
+ */
+export type CredentialProviderVendorType =
+  (typeof CredentialProviderVendorType)[keyof typeof CredentialProviderVendorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ClientAuthenticationMethodType = {
+  AWS_IAM_ID_TOKEN_JWT: "AWS_IAM_ID_TOKEN_JWT",
+  CLIENT_SECRET_BASIC: "CLIENT_SECRET_BASIC",
+  CLIENT_SECRET_POST: "CLIENT_SECRET_POST",
+  PRIVATE_KEY_JWT: "PRIVATE_KEY_JWT",
+} as const;
+/**
+ * @public
+ */
+export type ClientAuthenticationMethodType =
+  (typeof ClientAuthenticationMethodType)[keyof typeof ClientAuthenticationMethodType];
+
+/**
+ * @public
+ * @enum
+ */
+export const OnBehalfOfTokenExchangeGrantTypeType = {
+  /**
+   * <p>RFC 7523 JWT authorization grant, adopted by Microsoft Entra ID.</p>
+   */
+  JWT_AUTHORIZATION_GRANT: "JWT_AUTHORIZATION_GRANT",
+  /**
+   * <p>RFC 8693 token exchange, adopted by the majority of identity providers supporting on-behalf-of flows.</p>
+   */
+  TOKEN_EXCHANGE: "TOKEN_EXCHANGE",
+} as const;
+/**
+ * @public
+ */
+export type OnBehalfOfTokenExchangeGrantTypeType =
+  (typeof OnBehalfOfTokenExchangeGrantTypeType)[keyof typeof OnBehalfOfTokenExchangeGrantTypeType];
+
+/**
+ * @public
+ * @enum
+ */
+export const OnBehalfOfClientAuthenticationMethod = {
+  NO_CLIENT: "NO_CLIENT",
+} as const;
+/**
+ * @public
+ */
+export type OnBehalfOfClientAuthenticationMethod =
+  (typeof OnBehalfOfClientAuthenticationMethod)[keyof typeof OnBehalfOfClientAuthenticationMethod];
+
+/**
+ * @public
+ * @enum
+ */
+export const SigningAlgorithm = {
+  ES256: "ES256",
+  PS256: "PS256",
+  RS256: "RS256",
+} as const;
+/**
+ * @public
+ */
+export type SigningAlgorithm = (typeof SigningAlgorithm)[keyof typeof SigningAlgorithm];
+
+/**
+ * @public
+ * @enum
+ */
+export const Status = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type Status = (typeof Status)[keyof typeof Status];
+
+/**
+ * @public
+ * @enum
+ */
+export const ClusteringFrequency = {
+  DAILY: "DAILY",
+  MONTHLY: "MONTHLY",
+  WEEKLY: "WEEKLY",
+} as const;
+/**
+ * @public
+ */
+export type ClusteringFrequency = (typeof ClusteringFrequency)[keyof typeof ClusteringFrequency];
+
+/**
+ * @public
+ * @enum
+ */
+export const ResultDestination = {
+  DEDICATED_LOG_GROUP: "DEDICATED_LOG_GROUP",
+  SOURCE_LOG_GROUP: "SOURCE_LOG_GROUP",
+} as const;
+/**
+ * @public
+ */
+export type ResultDestination = (typeof ResultDestination)[keyof typeof ResultDestination];
+
+/**
+ * @public
+ * @enum
+ */
+export const FilterOperator = {
+  CONTAINS: "Contains",
+  EQUALS: "Equals",
+  GREATER_THAN: "GreaterThan",
+  GREATER_THAN_OR_EQUAL: "GreaterThanOrEqual",
+  LESS_THAN: "LessThan",
+  LESS_THAN_OR_EQUAL: "LessThanOrEqual",
+  NOT_CONTAINS: "NotContains",
+  NOT_EQUALS: "NotEquals",
+} as const;
+/**
+ * @public
+ */
+export type FilterOperator = (typeof FilterOperator)[keyof typeof FilterOperator];
+
+/**
+ * @public
+ * @enum
+ */
+export const OnlineEvaluationExecutionStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type OnlineEvaluationExecutionStatus =
+  (typeof OnlineEvaluationExecutionStatus)[keyof typeof OnlineEvaluationExecutionStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const OnlineEvaluationConfigStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  ERROR: "ERROR",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type OnlineEvaluationConfigStatus =
+  (typeof OnlineEvaluationConfigStatus)[keyof typeof OnlineEvaluationConfigStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentCredentialProviderVendorType = {
+  /**
+   * <p>Coinbase Developer Platform.</p>
+   */
+  CoinbaseCDP: "CoinbaseCDP",
+  /**
+   * <p>Stripe and Privy.</p>
+   */
+  StripePrivy: "StripePrivy",
+} as const;
+/**
+ * @public
+ */
+export type PaymentCredentialProviderVendorType =
+  (typeof PaymentCredentialProviderVendorType)[keyof typeof PaymentCredentialProviderVendorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentsAuthorizerType = {
+  AWS_IAM: "AWS_IAM",
+  CUSTOM_JWT: "CUSTOM_JWT",
+} as const;
+/**
+ * @public
+ */
+export type PaymentsAuthorizerType = (typeof PaymentsAuthorizerType)[keyof typeof PaymentsAuthorizerType];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentManagerStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type PaymentManagerStatus = (typeof PaymentManagerStatus)[keyof typeof PaymentManagerStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentConnectorProvisionMode = {
+  MANUAL: "MANUAL",
+  QUICK_CREATE: "QUICK_CREATE",
+} as const;
+/**
+ * @public
+ */
+export type PaymentConnectorProvisionMode =
+  (typeof PaymentConnectorProvisionMode)[keyof typeof PaymentConnectorProvisionMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentConnectorType = {
+  COINBASE_CDP: "CoinbaseCDP",
+  STRIPE_PRIVY: "StripePrivy",
+} as const;
+/**
+ * @public
+ */
+export type PaymentConnectorType = (typeof PaymentConnectorType)[keyof typeof PaymentConnectorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const PaymentConnectorStatus = {
+  AUTHENTICATION_EXPIRED: "AUTHENTICATION_EXPIRED",
+  AUTHENTICATION_FAILED: "AUTHENTICATION_FAILED",
+  AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED: "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  PENDING_AUTHENTICATION: "PENDING_AUTHENTICATION",
+  PROVISIONING: "PROVISIONING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type PaymentConnectorStatus = (typeof PaymentConnectorStatus)[keyof typeof PaymentConnectorStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const CoinbaseCdpSecret = {
+  API_KEY: "API_KEY",
+  WALLET_SECRET: "WALLET_SECRET",
+} as const;
+/**
+ * @public
+ */
+export type CoinbaseCdpSecret = (typeof CoinbaseCdpSecret)[keyof typeof CoinbaseCdpSecret];
+
+/**
+ * @public
+ * @enum
+ */
+export const PolicyEngineStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type PolicyEngineStatus = (typeof PolicyEngineStatus)[keyof typeof PolicyEngineStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PolicyGenerationStatus = {
+  DELETE_FAILED: "DELETE_FAILED",
+  GENERATED: "GENERATED",
+  GENERATE_FAILED: "GENERATE_FAILED",
+  GENERATING: "GENERATING",
+} as const;
+/**
+ * @public
+ */
+export type PolicyGenerationStatus = (typeof PolicyGenerationStatus)[keyof typeof PolicyGenerationStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const FindingType = {
+  ALLOW_ALL: "ALLOW_ALL",
+  ALLOW_NONE: "ALLOW_NONE",
+  DENY_ALL: "DENY_ALL",
+  DENY_NONE: "DENY_NONE",
+  INVALID: "INVALID",
+  NOT_TRANSLATABLE: "NOT_TRANSLATABLE",
+  VALID: "VALID",
+} as const;
+/**
+ * @public
+ */
+export type FindingType = (typeof FindingType)[keyof typeof FindingType];
+
+/**
+ * @public
+ * @enum
+ */
+export const EnforcementMode = {
+  ACTIVE: "ACTIVE",
+  LOG_ONLY: "LOG_ONLY",
+} as const;
+/**
+ * @public
+ */
+export type EnforcementMode = (typeof EnforcementMode)[keyof typeof EnforcementMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const PolicyValidationMode = {
+  FAIL_ON_ANY_FINDINGS: "FAIL_ON_ANY_FINDINGS",
+  IGNORE_ALL_FINDINGS: "IGNORE_ALL_FINDINGS",
+} as const;
+/**
+ * @public
+ */
+export type PolicyValidationMode = (typeof PolicyValidationMode)[keyof typeof PolicyValidationMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const PolicyStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type PolicyStatus = (typeof PolicyStatus)[keyof typeof PolicyStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DescriptorType = {
+  A2A: "A2A",
+  AGENT_SKILLS: "AGENT_SKILLS",
+  CUSTOM: "CUSTOM",
+  MCP: "MCP",
+} as const;
+/**
+ * @public
+ */
+export type DescriptorType = (typeof DescriptorType)[keyof typeof DescriptorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RegistryRecordOAuthGrantType = {
+  CLIENT_CREDENTIALS: "CLIENT_CREDENTIALS",
+} as const;
+/**
+ * @public
+ */
+export type RegistryRecordOAuthGrantType =
+  (typeof RegistryRecordOAuthGrantType)[keyof typeof RegistryRecordOAuthGrantType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RegistryRecordCredentialProviderType = {
+  IAM: "IAM",
+  OAUTH: "OAUTH",
+} as const;
+/**
+ * @public
+ */
+export type RegistryRecordCredentialProviderType =
+  (typeof RegistryRecordCredentialProviderType)[keyof typeof RegistryRecordCredentialProviderType];
+
+/**
+ * @public
+ * @enum
+ */
+export const SynchronizationType = {
+  URL: "URL",
+} as const;
+/**
+ * @public
+ */
+export type SynchronizationType = (typeof SynchronizationType)[keyof typeof SynchronizationType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RegistryRecordStatus = {
+  APPROVED: "APPROVED",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DEPRECATED: "DEPRECATED",
+  DRAFT: "DRAFT",
+  PENDING_APPROVAL: "PENDING_APPROVAL",
+  REJECTED: "REJECTED",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type RegistryRecordStatus = (typeof RegistryRecordStatus)[keyof typeof RegistryRecordStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const RegistryAuthorizerType = {
+  AWS_IAM: "AWS_IAM",
+  CUSTOM_JWT: "CUSTOM_JWT",
+} as const;
+/**
+ * @public
+ */
+export type RegistryAuthorizerType = (typeof RegistryAuthorizerType)[keyof typeof RegistryAuthorizerType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RegistryStatus = {
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETE_FAILED: "DELETE_FAILED",
+  DELETING: "DELETING",
+  READY: "READY",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type RegistryStatus = (typeof RegistryStatus)[keyof typeof RegistryStatus];

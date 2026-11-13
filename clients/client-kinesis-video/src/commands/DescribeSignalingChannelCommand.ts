@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import { DescribeSignalingChannelInput, DescribeSignalingChannelOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeSignalingChannelCommand,
-  serializeAws_restJson1DescribeSignalingChannelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSignalingChannelInput, DescribeSignalingChannelOutput } from "../models/models_0";
+import { DescribeSignalingChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSignalingChannelCommand}.
+ */
 export interface DescribeSignalingChannelCommandInput extends DescribeSignalingChannelInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSignalingChannelCommand}.
+ */
 export interface DescribeSignalingChannelCommandOutput extends DescribeSignalingChannelOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,71 @@ export interface DescribeSignalingChannelCommandOutput extends DescribeSignaling
  * ```javascript
  * import { KinesisVideoClient, DescribeSignalingChannelCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, DescribeSignalingChannelCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // DescribeSignalingChannelInput
+ *   ChannelName: "STRING_VALUE",
+ *   ChannelARN: "STRING_VALUE",
+ * };
  * const command = new DescribeSignalingChannelCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSignalingChannelOutput
+ * //   ChannelInfo: { // ChannelInfo
+ * //     ChannelName: "STRING_VALUE",
+ * //     ChannelARN: "STRING_VALUE",
+ * //     ChannelType: "SINGLE_MASTER" || "FULL_MESH",
+ * //     ChannelStatus: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     SingleMasterConfiguration: { // SingleMasterConfiguration
+ * //       MessageTtlSeconds: Number("int"),
+ * //     },
+ * //     Version: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeSignalingChannelCommandInput - {@link DescribeSignalingChannelCommandInput}
+ * @returns {@link DescribeSignalingChannelCommandOutput}
  * @see {@link DescribeSignalingChannelCommandInput} for command's `input` shape.
  * @see {@link DescribeSignalingChannelCommandOutput} for command's `response` shape.
- * @see {@link KinesisVideoClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to perform this operation.</p>
+ *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Amazon Kinesis Video Streams can't find the stream that you specified.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSignalingChannelCommand extends $Command<
-  DescribeSignalingChannelCommandInput,
-  DescribeSignalingChannelCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSignalingChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSignalingChannelCommandInput, DescribeSignalingChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "DescribeSignalingChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSignalingChannelInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSignalingChannelOutput.filterSensitiveLog,
+export class DescribeSignalingChannelCommand extends command<DescribeSignalingChannelCommandInput, DescribeSignalingChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSignalingChannel",
+  DescribeSignalingChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSignalingChannelInput;
+      output: DescribeSignalingChannelOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSignalingChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeSignalingChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSignalingChannelCommandOutput> {
-    return deserializeAws_restJson1DescribeSignalingChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSignalingChannelCommandInput;
+      output: DescribeSignalingChannelCommandOutput;
+    };
+  };
 }

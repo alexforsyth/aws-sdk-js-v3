@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
-import { GetDistributionMetricDataRequest, GetDistributionMetricDataResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetDistributionMetricDataCommand,
-  serializeAws_json1_1GetDistributionMetricDataCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDistributionMetricDataRequest, GetDistributionMetricDataResult } from "../models/models_0";
+import { GetDistributionMetricData$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDistributionMetricDataCommand}.
+ */
 export interface GetDistributionMetricDataCommandInput extends GetDistributionMetricDataRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDistributionMetricDataCommand}.
+ */
 export interface GetDistributionMetricDataCommandOutput extends GetDistributionMetricDataResult, __MetadataBearer {}
 
 /**
@@ -32,71 +33,92 @@ export interface GetDistributionMetricDataCommandOutput extends GetDistributionM
  * ```javascript
  * import { LightsailClient, GetDistributionMetricDataCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
  * // const { LightsailClient, GetDistributionMetricDataCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * // import type { LightsailClientConfig } from "@aws-sdk/client-lightsail";
+ * const config = {}; // type is LightsailClientConfig
  * const client = new LightsailClient(config);
+ * const input = { // GetDistributionMetricDataRequest
+ *   distributionName: "STRING_VALUE", // required
+ *   metricName: "Requests" || "BytesDownloaded" || "BytesUploaded" || "TotalErrorRate" || "Http4xxErrorRate" || "Http5xxErrorRate" || "WafAllowedRequests" || "WafBlockedRequests", // required
+ *   startTime: new Date("TIMESTAMP"), // required
+ *   endTime: new Date("TIMESTAMP"), // required
+ *   period: Number("int"), // required
+ *   unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None", // required
+ *   statistics: [ // MetricStatisticList // required
+ *     "Minimum" || "Maximum" || "Sum" || "Average" || "SampleCount",
+ *   ],
+ * };
  * const command = new GetDistributionMetricDataCommand(input);
  * const response = await client.send(command);
+ * // { // GetDistributionMetricDataResult
+ * //   metricName: "Requests" || "BytesDownloaded" || "BytesUploaded" || "TotalErrorRate" || "Http4xxErrorRate" || "Http5xxErrorRate" || "WafAllowedRequests" || "WafBlockedRequests",
+ * //   metricData: [ // MetricDatapointList
+ * //     { // MetricDatapoint
+ * //       average: Number("double"),
+ * //       maximum: Number("double"),
+ * //       minimum: Number("double"),
+ * //       sampleCount: Number("double"),
+ * //       sum: Number("double"),
+ * //       timestamp: new Date("TIMESTAMP"),
+ * //       unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetDistributionMetricDataCommandInput - {@link GetDistributionMetricDataCommandInput}
+ * @returns {@link GetDistributionMetricDataCommandOutput}
  * @see {@link GetDistributionMetricDataCommandInput} for command's `input` shape.
  * @see {@link GetDistributionMetricDataCommandOutput} for command's `response` shape.
- * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for LightsailClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Lightsail throws this exception when the user cannot be authenticated or uses invalid
+ *       credentials to access a resource.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Lightsail throws this exception when user input does not conform to the validation rules
+ *       of an input field.</p>
+ *          <note>
+ *             <p>Domain and distribution APIs are only available in the N. Virginia
+ *           (<code>us-east-1</code>) Amazon Web Services Region. Please set your Amazon Web Services
+ *         Region configuration to <code>us-east-1</code> to create, view, or edit these
+ *         resources.</p>
+ *          </note>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Lightsail throws this exception when it cannot find a resource.</p>
+ *
+ * @throws {@link OperationFailureException} (client fault)
+ *  <p>Lightsail throws this exception when an operation fails to execute.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>A general service exception.</p>
+ *
+ * @throws {@link UnauthenticatedException} (client fault)
+ *  <p>Lightsail throws this exception when the user has not been authenticated.</p>
+ *
+ * @throws {@link LightsailServiceException}
+ * <p>Base exception class for all service exceptions from Lightsail service.</p>
+ *
+ *
+ * @public
  */
-export class GetDistributionMetricDataCommand extends $Command<
-  GetDistributionMetricDataCommandInput,
-  GetDistributionMetricDataCommandOutput,
-  LightsailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDistributionMetricDataCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LightsailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDistributionMetricDataCommandInput, GetDistributionMetricDataCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LightsailClient";
-    const commandName = "GetDistributionMetricDataCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDistributionMetricDataRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDistributionMetricDataResult.filterSensitiveLog,
+export class GetDistributionMetricDataCommand extends command<GetDistributionMetricDataCommandInput, GetDistributionMetricDataCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDistributionMetricData",
+  GetDistributionMetricData$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDistributionMetricDataRequest;
+      output: GetDistributionMetricDataResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDistributionMetricDataCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetDistributionMetricDataCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetDistributionMetricDataCommandOutput> {
-    return deserializeAws_json1_1GetDistributionMetricDataCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDistributionMetricDataCommandInput;
+      output: GetDistributionMetricDataCommandOutput;
+    };
+  };
 }

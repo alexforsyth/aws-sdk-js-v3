@@ -1,0 +1,107 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourceGatewayRequest, GetResourceGatewayResponse } from "../models/models_0";
+import { GetResourceGateway$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourceGatewayCommand}.
+ */
+export interface GetResourceGatewayCommandInput extends GetResourceGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourceGatewayCommand}.
+ */
+export interface GetResourceGatewayCommandOutput extends GetResourceGatewayResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about the specified resource gateway.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { VPCLatticeClient, GetResourceGatewayCommand } from "@aws-sdk/client-vpc-lattice"; // ES Modules import
+ * // const { VPCLatticeClient, GetResourceGatewayCommand } = require("@aws-sdk/client-vpc-lattice"); // CommonJS import
+ * // import type { VPCLatticeClientConfig } from "@aws-sdk/client-vpc-lattice";
+ * const config = {}; // type is VPCLatticeClientConfig
+ * const client = new VPCLatticeClient(config);
+ * const input = { // GetResourceGatewayRequest
+ *   resourceGatewayIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new GetResourceGatewayCommand(input);
+ * const response = await client.send(command);
+ * // { // GetResourceGatewayResponse
+ * //   name: "STRING_VALUE",
+ * //   id: "STRING_VALUE",
+ * //   arn: "STRING_VALUE",
+ * //   status: "STRING_VALUE",
+ * //   vpcId: "STRING_VALUE",
+ * //   subnetIds: [ // SubnetList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   serviceManaged: true || false,
+ * //   managedBy: "STRING_VALUE",
+ * //   securityGroupIds: [ // SecurityGroupList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ipAddressType: "STRING_VALUE",
+ * //   ipv4AddressesPerEni: Number("int"),
+ * //   resourceConfigDnsResolution: "STRING_VALUE",
+ * //   createdAt: new Date("TIMESTAMP"),
+ * //   lastUpdatedAt: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param GetResourceGatewayCommandInput - {@link GetResourceGatewayCommandInput}
+ * @returns {@link GetResourceGatewayCommandOutput}
+ * @see {@link GetResourceGatewayCommandInput} for command's `input` shape.
+ * @see {@link GetResourceGatewayCommandOutput} for command's `response` shape.
+ * @see {@link VPCLatticeClientResolvedConfig | config} for VPCLatticeClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link VPCLatticeServiceException}
+ * <p>Base exception class for all service exceptions from VPCLattice service.</p>
+ *
+ *
+ * @public
+ */
+export class GetResourceGatewayCommand extends command<GetResourceGatewayCommandInput, GetResourceGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourceGateway",
+  GetResourceGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceGatewayRequest;
+      output: GetResourceGatewayResponse;
+    };
+    sdk: {
+      input: GetResourceGatewayCommandInput;
+      output: GetResourceGatewayCommandOutput;
+    };
+  };
+}

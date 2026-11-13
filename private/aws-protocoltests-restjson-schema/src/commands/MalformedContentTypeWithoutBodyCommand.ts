@@ -1,0 +1,70 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import { MalformedContentTypeWithoutBody$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link MalformedContentTypeWithoutBodyCommand}.
+ */
+export interface MalformedContentTypeWithoutBodyCommandInput {}
+/**
+ * @public
+ *
+ * The output of {@link MalformedContentTypeWithoutBodyCommand}.
+ */
+export interface MalformedContentTypeWithoutBodyCommandOutput extends __MetadataBearer {}
+
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, MalformedContentTypeWithoutBodyCommand } from "@aws-sdk/aws-protocoltests-restjson-schema"; // ES Modules import
+ * // const { RestJsonProtocolClient, MalformedContentTypeWithoutBodyCommand } = require("@aws-sdk/aws-protocoltests-restjson-schema"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson-schema";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = {};
+ * const command = new MalformedContentTypeWithoutBodyCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param MalformedContentTypeWithoutBodyCommandInput - {@link MalformedContentTypeWithoutBodyCommandInput}
+ * @returns {@link MalformedContentTypeWithoutBodyCommandOutput}
+ * @see {@link MalformedContentTypeWithoutBodyCommandInput} for command's `input` shape.
+ * @see {@link MalformedContentTypeWithoutBodyCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ */
+export class MalformedContentTypeWithoutBodyCommand extends command<MalformedContentTypeWithoutBodyCommandInput, MalformedContentTypeWithoutBodyCommandOutput>(
+  _ep0,
+  _mw0,
+  "MalformedContentTypeWithoutBody",
+  MalformedContentTypeWithoutBody$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: MalformedContentTypeWithoutBodyCommandInput;
+      output: MalformedContentTypeWithoutBodyCommandOutput;
+    };
+  };
+}

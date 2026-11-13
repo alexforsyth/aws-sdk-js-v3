@@ -1,98 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DevOpsGuruClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DevOpsGuruClient";
-import { DescribeAccountOverviewRequest, DescribeAccountOverviewResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAccountOverviewCommand,
-  serializeAws_restJson1DescribeAccountOverviewCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccountOverviewRequest, DescribeAccountOverviewResponse } from "../models/models_0";
+import { DescribeAccountOverview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountOverviewCommand}.
+ */
 export interface DescribeAccountOverviewCommandInput extends DescribeAccountOverviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountOverviewCommand}.
+ */
 export interface DescribeAccountOverviewCommandOutput extends DescribeAccountOverviewResponse, __MetadataBearer {}
 
 /**
- * <p>
- *    		For the time range passed in, returns the number of open reactive insight that were created, the number of open proactive insights
- *    		that were created, and the Mean Time to Recover (MTTR) for all closed reactive insights.
- *    	</p>
+ * <p> For the time range passed in, returns the number of open reactive insight that were
+ * 			created, the number of open proactive insights that were created, and the Mean Time to Recover (MTTR) for all
+ * 			closed reactive insights. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DevOpsGuruClient, DescribeAccountOverviewCommand } from "@aws-sdk/client-devops-guru"; // ES Modules import
  * // const { DevOpsGuruClient, DescribeAccountOverviewCommand } = require("@aws-sdk/client-devops-guru"); // CommonJS import
+ * // import type { DevOpsGuruClientConfig } from "@aws-sdk/client-devops-guru";
+ * const config = {}; // type is DevOpsGuruClientConfig
  * const client = new DevOpsGuruClient(config);
+ * const input = { // DescribeAccountOverviewRequest
+ *   FromTime: new Date("TIMESTAMP"), // required
+ *   ToTime: new Date("TIMESTAMP"),
+ * };
  * const command = new DescribeAccountOverviewCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountOverviewResponse
+ * //   ReactiveInsights: Number("int"), // required
+ * //   ProactiveInsights: Number("int"), // required
+ * //   MeanTimeToRecoverInMilliseconds: Number("long"), // required
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountOverviewCommandInput - {@link DescribeAccountOverviewCommandInput}
+ * @returns {@link DescribeAccountOverviewCommandOutput}
  * @see {@link DescribeAccountOverviewCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountOverviewCommandOutput} for command's `response` shape.
- * @see {@link DevOpsGuruClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DevOpsGuruClientResolvedConfig | config} for DevOpsGuruClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> You don't have permissions to perform the requested operation. The user or role that
+ * 			is making the request must have at least one IAM permissions policy attached that grants
+ * 			the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the
+ * 				<i>IAM User Guide</i>. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal failure in an Amazon service occurred.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to a request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Contains information about data passed in to a field during a request that is not
+ * 			valid. </p>
+ *
+ * @throws {@link DevOpsGuruServiceException}
+ * <p>Base exception class for all service exceptions from DevOpsGuru service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccountOverviewCommand extends $Command<
-  DescribeAccountOverviewCommandInput,
-  DescribeAccountOverviewCommandOutput,
-  DevOpsGuruClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountOverviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DevOpsGuruClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountOverviewCommandInput, DescribeAccountOverviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DevOpsGuruClient";
-    const commandName = "DescribeAccountOverviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountOverviewRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountOverviewResponse.filterSensitiveLog,
+export class DescribeAccountOverviewCommand extends command<DescribeAccountOverviewCommandInput, DescribeAccountOverviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountOverview",
+  DescribeAccountOverview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountOverviewRequest;
+      output: DescribeAccountOverviewResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccountOverviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAccountOverviewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAccountOverviewCommandOutput> {
-    return deserializeAws_restJson1DescribeAccountOverviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountOverviewCommandInput;
+      output: DescribeAccountOverviewCommandOutput;
+    };
+  };
 }

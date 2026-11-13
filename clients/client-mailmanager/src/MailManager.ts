@@ -1,0 +1,1571 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateAddonInstanceCommandInput,
+  type CreateAddonInstanceCommandOutput,
+  CreateAddonInstanceCommand,
+} from "./commands/CreateAddonInstanceCommand";
+import {
+  type CreateAddonSubscriptionCommandInput,
+  type CreateAddonSubscriptionCommandOutput,
+  CreateAddonSubscriptionCommand,
+} from "./commands/CreateAddonSubscriptionCommand";
+import {
+  type CreateAddressListCommandInput,
+  type CreateAddressListCommandOutput,
+  CreateAddressListCommand,
+} from "./commands/CreateAddressListCommand";
+import {
+  type CreateAddressListImportJobCommandInput,
+  type CreateAddressListImportJobCommandOutput,
+  CreateAddressListImportJobCommand,
+} from "./commands/CreateAddressListImportJobCommand";
+import {
+  type CreateArchiveCommandInput,
+  type CreateArchiveCommandOutput,
+  CreateArchiveCommand,
+} from "./commands/CreateArchiveCommand";
+import {
+  type CreateIngressPointCommandInput,
+  type CreateIngressPointCommandOutput,
+  CreateIngressPointCommand,
+} from "./commands/CreateIngressPointCommand";
+import {
+  type CreateRelayCommandInput,
+  type CreateRelayCommandOutput,
+  CreateRelayCommand,
+} from "./commands/CreateRelayCommand";
+import {
+  type CreateRuleSetCommandInput,
+  type CreateRuleSetCommandOutput,
+  CreateRuleSetCommand,
+} from "./commands/CreateRuleSetCommand";
+import {
+  type CreateTrafficPolicyCommandInput,
+  type CreateTrafficPolicyCommandOutput,
+  CreateTrafficPolicyCommand,
+} from "./commands/CreateTrafficPolicyCommand";
+import {
+  type DeleteAddonInstanceCommandInput,
+  type DeleteAddonInstanceCommandOutput,
+  DeleteAddonInstanceCommand,
+} from "./commands/DeleteAddonInstanceCommand";
+import {
+  type DeleteAddonSubscriptionCommandInput,
+  type DeleteAddonSubscriptionCommandOutput,
+  DeleteAddonSubscriptionCommand,
+} from "./commands/DeleteAddonSubscriptionCommand";
+import {
+  type DeleteAddressListCommandInput,
+  type DeleteAddressListCommandOutput,
+  DeleteAddressListCommand,
+} from "./commands/DeleteAddressListCommand";
+import {
+  type DeleteArchiveCommandInput,
+  type DeleteArchiveCommandOutput,
+  DeleteArchiveCommand,
+} from "./commands/DeleteArchiveCommand";
+import {
+  type DeleteIngressPointCommandInput,
+  type DeleteIngressPointCommandOutput,
+  DeleteIngressPointCommand,
+} from "./commands/DeleteIngressPointCommand";
+import {
+  type DeleteRelayCommandInput,
+  type DeleteRelayCommandOutput,
+  DeleteRelayCommand,
+} from "./commands/DeleteRelayCommand";
+import {
+  type DeleteRuleSetCommandInput,
+  type DeleteRuleSetCommandOutput,
+  DeleteRuleSetCommand,
+} from "./commands/DeleteRuleSetCommand";
+import {
+  type DeleteTrafficPolicyCommandInput,
+  type DeleteTrafficPolicyCommandOutput,
+  DeleteTrafficPolicyCommand,
+} from "./commands/DeleteTrafficPolicyCommand";
+import {
+  type DeregisterMemberFromAddressListCommandInput,
+  type DeregisterMemberFromAddressListCommandOutput,
+  DeregisterMemberFromAddressListCommand,
+} from "./commands/DeregisterMemberFromAddressListCommand";
+import {
+  type GetAddonInstanceCommandInput,
+  type GetAddonInstanceCommandOutput,
+  GetAddonInstanceCommand,
+} from "./commands/GetAddonInstanceCommand";
+import {
+  type GetAddonSubscriptionCommandInput,
+  type GetAddonSubscriptionCommandOutput,
+  GetAddonSubscriptionCommand,
+} from "./commands/GetAddonSubscriptionCommand";
+import {
+  type GetAddressListCommandInput,
+  type GetAddressListCommandOutput,
+  GetAddressListCommand,
+} from "./commands/GetAddressListCommand";
+import {
+  type GetAddressListImportJobCommandInput,
+  type GetAddressListImportJobCommandOutput,
+  GetAddressListImportJobCommand,
+} from "./commands/GetAddressListImportJobCommand";
+import {
+  type GetArchiveCommandInput,
+  type GetArchiveCommandOutput,
+  GetArchiveCommand,
+} from "./commands/GetArchiveCommand";
+import {
+  type GetArchiveExportCommandInput,
+  type GetArchiveExportCommandOutput,
+  GetArchiveExportCommand,
+} from "./commands/GetArchiveExportCommand";
+import {
+  type GetArchiveMessageCommandInput,
+  type GetArchiveMessageCommandOutput,
+  GetArchiveMessageCommand,
+} from "./commands/GetArchiveMessageCommand";
+import {
+  type GetArchiveMessageContentCommandInput,
+  type GetArchiveMessageContentCommandOutput,
+  GetArchiveMessageContentCommand,
+} from "./commands/GetArchiveMessageContentCommand";
+import {
+  type GetArchiveSearchCommandInput,
+  type GetArchiveSearchCommandOutput,
+  GetArchiveSearchCommand,
+} from "./commands/GetArchiveSearchCommand";
+import {
+  type GetArchiveSearchResultsCommandInput,
+  type GetArchiveSearchResultsCommandOutput,
+  GetArchiveSearchResultsCommand,
+} from "./commands/GetArchiveSearchResultsCommand";
+import {
+  type GetIngressPointCommandInput,
+  type GetIngressPointCommandOutput,
+  GetIngressPointCommand,
+} from "./commands/GetIngressPointCommand";
+import {
+  type GetMemberOfAddressListCommandInput,
+  type GetMemberOfAddressListCommandOutput,
+  GetMemberOfAddressListCommand,
+} from "./commands/GetMemberOfAddressListCommand";
+import { type GetRelayCommandInput, type GetRelayCommandOutput, GetRelayCommand } from "./commands/GetRelayCommand";
+import {
+  type GetRuleSetCommandInput,
+  type GetRuleSetCommandOutput,
+  GetRuleSetCommand,
+} from "./commands/GetRuleSetCommand";
+import {
+  type GetTrafficPolicyCommandInput,
+  type GetTrafficPolicyCommandOutput,
+  GetTrafficPolicyCommand,
+} from "./commands/GetTrafficPolicyCommand";
+import {
+  type ListAddonInstancesCommandInput,
+  type ListAddonInstancesCommandOutput,
+  ListAddonInstancesCommand,
+} from "./commands/ListAddonInstancesCommand";
+import {
+  type ListAddonSubscriptionsCommandInput,
+  type ListAddonSubscriptionsCommandOutput,
+  ListAddonSubscriptionsCommand,
+} from "./commands/ListAddonSubscriptionsCommand";
+import {
+  type ListAddressListImportJobsCommandInput,
+  type ListAddressListImportJobsCommandOutput,
+  ListAddressListImportJobsCommand,
+} from "./commands/ListAddressListImportJobsCommand";
+import {
+  type ListAddressListsCommandInput,
+  type ListAddressListsCommandOutput,
+  ListAddressListsCommand,
+} from "./commands/ListAddressListsCommand";
+import {
+  type ListArchiveExportsCommandInput,
+  type ListArchiveExportsCommandOutput,
+  ListArchiveExportsCommand,
+} from "./commands/ListArchiveExportsCommand";
+import {
+  type ListArchivesCommandInput,
+  type ListArchivesCommandOutput,
+  ListArchivesCommand,
+} from "./commands/ListArchivesCommand";
+import {
+  type ListArchiveSearchesCommandInput,
+  type ListArchiveSearchesCommandOutput,
+  ListArchiveSearchesCommand,
+} from "./commands/ListArchiveSearchesCommand";
+import {
+  type ListIngressPointsCommandInput,
+  type ListIngressPointsCommandOutput,
+  ListIngressPointsCommand,
+} from "./commands/ListIngressPointsCommand";
+import {
+  type ListMembersOfAddressListCommandInput,
+  type ListMembersOfAddressListCommandOutput,
+  ListMembersOfAddressListCommand,
+} from "./commands/ListMembersOfAddressListCommand";
+import {
+  type ListRelaysCommandInput,
+  type ListRelaysCommandOutput,
+  ListRelaysCommand,
+} from "./commands/ListRelaysCommand";
+import {
+  type ListRuleSetsCommandInput,
+  type ListRuleSetsCommandOutput,
+  ListRuleSetsCommand,
+} from "./commands/ListRuleSetsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTrafficPoliciesCommandInput,
+  type ListTrafficPoliciesCommandOutput,
+  ListTrafficPoliciesCommand,
+} from "./commands/ListTrafficPoliciesCommand";
+import {
+  type RegisterMemberToAddressListCommandInput,
+  type RegisterMemberToAddressListCommandOutput,
+  RegisterMemberToAddressListCommand,
+} from "./commands/RegisterMemberToAddressListCommand";
+import {
+  type StartAddressListImportJobCommandInput,
+  type StartAddressListImportJobCommandOutput,
+  StartAddressListImportJobCommand,
+} from "./commands/StartAddressListImportJobCommand";
+import {
+  type StartArchiveExportCommandInput,
+  type StartArchiveExportCommandOutput,
+  StartArchiveExportCommand,
+} from "./commands/StartArchiveExportCommand";
+import {
+  type StartArchiveSearchCommandInput,
+  type StartArchiveSearchCommandOutput,
+  StartArchiveSearchCommand,
+} from "./commands/StartArchiveSearchCommand";
+import {
+  type StopAddressListImportJobCommandInput,
+  type StopAddressListImportJobCommandOutput,
+  StopAddressListImportJobCommand,
+} from "./commands/StopAddressListImportJobCommand";
+import {
+  type StopArchiveExportCommandInput,
+  type StopArchiveExportCommandOutput,
+  StopArchiveExportCommand,
+} from "./commands/StopArchiveExportCommand";
+import {
+  type StopArchiveSearchCommandInput,
+  type StopArchiveSearchCommandOutput,
+  StopArchiveSearchCommand,
+} from "./commands/StopArchiveSearchCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateArchiveCommandInput,
+  type UpdateArchiveCommandOutput,
+  UpdateArchiveCommand,
+} from "./commands/UpdateArchiveCommand";
+import {
+  type UpdateIngressPointCommandInput,
+  type UpdateIngressPointCommandOutput,
+  UpdateIngressPointCommand,
+} from "./commands/UpdateIngressPointCommand";
+import {
+  type UpdateRelayCommandInput,
+  type UpdateRelayCommandOutput,
+  UpdateRelayCommand,
+} from "./commands/UpdateRelayCommand";
+import {
+  type UpdateRuleSetCommandInput,
+  type UpdateRuleSetCommandOutput,
+  UpdateRuleSetCommand,
+} from "./commands/UpdateRuleSetCommand";
+import {
+  type UpdateTrafficPolicyCommandInput,
+  type UpdateTrafficPolicyCommandOutput,
+  UpdateTrafficPolicyCommand,
+} from "./commands/UpdateTrafficPolicyCommand";
+import { MailManagerClient } from "./MailManagerClient";
+import { paginateListAddonInstances } from "./pagination/ListAddonInstancesPaginator";
+import { paginateListAddonSubscriptions } from "./pagination/ListAddonSubscriptionsPaginator";
+import { paginateListAddressListImportJobs } from "./pagination/ListAddressListImportJobsPaginator";
+import { paginateListAddressLists } from "./pagination/ListAddressListsPaginator";
+import { paginateListArchiveExports } from "./pagination/ListArchiveExportsPaginator";
+import { paginateListArchiveSearches } from "./pagination/ListArchiveSearchesPaginator";
+import { paginateListArchives } from "./pagination/ListArchivesPaginator";
+import { paginateListIngressPoints } from "./pagination/ListIngressPointsPaginator";
+import { paginateListMembersOfAddressList } from "./pagination/ListMembersOfAddressListPaginator";
+import { paginateListRelays } from "./pagination/ListRelaysPaginator";
+import { paginateListRuleSets } from "./pagination/ListRuleSetsPaginator";
+import { paginateListTrafficPolicies } from "./pagination/ListTrafficPoliciesPaginator";
+
+const commands = {
+  CreateAddonInstanceCommand,
+  CreateAddonSubscriptionCommand,
+  CreateAddressListCommand,
+  CreateAddressListImportJobCommand,
+  CreateArchiveCommand,
+  CreateIngressPointCommand,
+  CreateRelayCommand,
+  CreateRuleSetCommand,
+  CreateTrafficPolicyCommand,
+  DeleteAddonInstanceCommand,
+  DeleteAddonSubscriptionCommand,
+  DeleteAddressListCommand,
+  DeleteArchiveCommand,
+  DeleteIngressPointCommand,
+  DeleteRelayCommand,
+  DeleteRuleSetCommand,
+  DeleteTrafficPolicyCommand,
+  DeregisterMemberFromAddressListCommand,
+  GetAddonInstanceCommand,
+  GetAddonSubscriptionCommand,
+  GetAddressListCommand,
+  GetAddressListImportJobCommand,
+  GetArchiveCommand,
+  GetArchiveExportCommand,
+  GetArchiveMessageCommand,
+  GetArchiveMessageContentCommand,
+  GetArchiveSearchCommand,
+  GetArchiveSearchResultsCommand,
+  GetIngressPointCommand,
+  GetMemberOfAddressListCommand,
+  GetRelayCommand,
+  GetRuleSetCommand,
+  GetTrafficPolicyCommand,
+  ListAddonInstancesCommand,
+  ListAddonSubscriptionsCommand,
+  ListAddressListImportJobsCommand,
+  ListAddressListsCommand,
+  ListArchiveExportsCommand,
+  ListArchivesCommand,
+  ListArchiveSearchesCommand,
+  ListIngressPointsCommand,
+  ListMembersOfAddressListCommand,
+  ListRelaysCommand,
+  ListRuleSetsCommand,
+  ListTagsForResourceCommand,
+  ListTrafficPoliciesCommand,
+  RegisterMemberToAddressListCommand,
+  StartAddressListImportJobCommand,
+  StartArchiveExportCommand,
+  StartArchiveSearchCommand,
+  StopAddressListImportJobCommand,
+  StopArchiveExportCommand,
+  StopArchiveSearchCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateArchiveCommand,
+  UpdateIngressPointCommand,
+  UpdateRelayCommand,
+  UpdateRuleSetCommand,
+  UpdateTrafficPolicyCommand,
+};
+const paginators = {
+  paginateListAddonInstances,
+  paginateListAddonSubscriptions,
+  paginateListAddressListImportJobs,
+  paginateListAddressLists,
+  paginateListArchiveExports,
+  paginateListArchives,
+  paginateListArchiveSearches,
+  paginateListIngressPoints,
+  paginateListMembersOfAddressList,
+  paginateListRelays,
+  paginateListRuleSets,
+  paginateListTrafficPolicies,
+};
+
+/**
+ * @public
+ */
+export interface MailManagerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface MailManager {
+  /**
+   * @see {@link CreateAddonInstanceCommand}
+   */
+  createAddonInstance(
+    args: CreateAddonInstanceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateAddonInstanceCommandOutput>;
+  createAddonInstance(
+    args: CreateAddonInstanceCommandInput,
+    cb: (err: any, data?: CreateAddonInstanceCommandOutput) => void
+  ): void;
+  createAddonInstance(
+    args: CreateAddonInstanceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateAddonInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAddonSubscriptionCommand}
+   */
+  createAddonSubscription(
+    args: CreateAddonSubscriptionCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateAddonSubscriptionCommandOutput>;
+  createAddonSubscription(
+    args: CreateAddonSubscriptionCommandInput,
+    cb: (err: any, data?: CreateAddonSubscriptionCommandOutput) => void
+  ): void;
+  createAddonSubscription(
+    args: CreateAddonSubscriptionCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateAddonSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAddressListCommand}
+   */
+  createAddressList(
+    args: CreateAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateAddressListCommandOutput>;
+  createAddressList(
+    args: CreateAddressListCommandInput,
+    cb: (err: any, data?: CreateAddressListCommandOutput) => void
+  ): void;
+  createAddressList(
+    args: CreateAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAddressListImportJobCommand}
+   */
+  createAddressListImportJob(
+    args: CreateAddressListImportJobCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateAddressListImportJobCommandOutput>;
+  createAddressListImportJob(
+    args: CreateAddressListImportJobCommandInput,
+    cb: (err: any, data?: CreateAddressListImportJobCommandOutput) => void
+  ): void;
+  createAddressListImportJob(
+    args: CreateAddressListImportJobCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateAddressListImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateArchiveCommand}
+   */
+  createArchive(
+    args: CreateArchiveCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateArchiveCommandOutput>;
+  createArchive(
+    args: CreateArchiveCommandInput,
+    cb: (err: any, data?: CreateArchiveCommandOutput) => void
+  ): void;
+  createArchive(
+    args: CreateArchiveCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateArchiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIngressPointCommand}
+   */
+  createIngressPoint(
+    args: CreateIngressPointCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateIngressPointCommandOutput>;
+  createIngressPoint(
+    args: CreateIngressPointCommandInput,
+    cb: (err: any, data?: CreateIngressPointCommandOutput) => void
+  ): void;
+  createIngressPoint(
+    args: CreateIngressPointCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateIngressPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRelayCommand}
+   */
+  createRelay(
+    args: CreateRelayCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateRelayCommandOutput>;
+  createRelay(
+    args: CreateRelayCommandInput,
+    cb: (err: any, data?: CreateRelayCommandOutput) => void
+  ): void;
+  createRelay(
+    args: CreateRelayCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateRelayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRuleSetCommand}
+   */
+  createRuleSet(
+    args: CreateRuleSetCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateRuleSetCommandOutput>;
+  createRuleSet(
+    args: CreateRuleSetCommandInput,
+    cb: (err: any, data?: CreateRuleSetCommandOutput) => void
+  ): void;
+  createRuleSet(
+    args: CreateRuleSetCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTrafficPolicyCommand}
+   */
+  createTrafficPolicy(
+    args: CreateTrafficPolicyCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<CreateTrafficPolicyCommandOutput>;
+  createTrafficPolicy(
+    args: CreateTrafficPolicyCommandInput,
+    cb: (err: any, data?: CreateTrafficPolicyCommandOutput) => void
+  ): void;
+  createTrafficPolicy(
+    args: CreateTrafficPolicyCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: CreateTrafficPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAddonInstanceCommand}
+   */
+  deleteAddonInstance(
+    args: DeleteAddonInstanceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteAddonInstanceCommandOutput>;
+  deleteAddonInstance(
+    args: DeleteAddonInstanceCommandInput,
+    cb: (err: any, data?: DeleteAddonInstanceCommandOutput) => void
+  ): void;
+  deleteAddonInstance(
+    args: DeleteAddonInstanceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteAddonInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAddonSubscriptionCommand}
+   */
+  deleteAddonSubscription(
+    args: DeleteAddonSubscriptionCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteAddonSubscriptionCommandOutput>;
+  deleteAddonSubscription(
+    args: DeleteAddonSubscriptionCommandInput,
+    cb: (err: any, data?: DeleteAddonSubscriptionCommandOutput) => void
+  ): void;
+  deleteAddonSubscription(
+    args: DeleteAddonSubscriptionCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteAddonSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAddressListCommand}
+   */
+  deleteAddressList(
+    args: DeleteAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteAddressListCommandOutput>;
+  deleteAddressList(
+    args: DeleteAddressListCommandInput,
+    cb: (err: any, data?: DeleteAddressListCommandOutput) => void
+  ): void;
+  deleteAddressList(
+    args: DeleteAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteArchiveCommand}
+   */
+  deleteArchive(
+    args: DeleteArchiveCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteArchiveCommandOutput>;
+  deleteArchive(
+    args: DeleteArchiveCommandInput,
+    cb: (err: any, data?: DeleteArchiveCommandOutput) => void
+  ): void;
+  deleteArchive(
+    args: DeleteArchiveCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteArchiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIngressPointCommand}
+   */
+  deleteIngressPoint(
+    args: DeleteIngressPointCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteIngressPointCommandOutput>;
+  deleteIngressPoint(
+    args: DeleteIngressPointCommandInput,
+    cb: (err: any, data?: DeleteIngressPointCommandOutput) => void
+  ): void;
+  deleteIngressPoint(
+    args: DeleteIngressPointCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteIngressPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRelayCommand}
+   */
+  deleteRelay(
+    args: DeleteRelayCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteRelayCommandOutput>;
+  deleteRelay(
+    args: DeleteRelayCommandInput,
+    cb: (err: any, data?: DeleteRelayCommandOutput) => void
+  ): void;
+  deleteRelay(
+    args: DeleteRelayCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteRelayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRuleSetCommand}
+   */
+  deleteRuleSet(
+    args: DeleteRuleSetCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteRuleSetCommandOutput>;
+  deleteRuleSet(
+    args: DeleteRuleSetCommandInput,
+    cb: (err: any, data?: DeleteRuleSetCommandOutput) => void
+  ): void;
+  deleteRuleSet(
+    args: DeleteRuleSetCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTrafficPolicyCommand}
+   */
+  deleteTrafficPolicy(
+    args: DeleteTrafficPolicyCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeleteTrafficPolicyCommandOutput>;
+  deleteTrafficPolicy(
+    args: DeleteTrafficPolicyCommandInput,
+    cb: (err: any, data?: DeleteTrafficPolicyCommandOutput) => void
+  ): void;
+  deleteTrafficPolicy(
+    args: DeleteTrafficPolicyCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeleteTrafficPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeregisterMemberFromAddressListCommand}
+   */
+  deregisterMemberFromAddressList(
+    args: DeregisterMemberFromAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<DeregisterMemberFromAddressListCommandOutput>;
+  deregisterMemberFromAddressList(
+    args: DeregisterMemberFromAddressListCommandInput,
+    cb: (err: any, data?: DeregisterMemberFromAddressListCommandOutput) => void
+  ): void;
+  deregisterMemberFromAddressList(
+    args: DeregisterMemberFromAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: DeregisterMemberFromAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAddonInstanceCommand}
+   */
+  getAddonInstance(
+    args: GetAddonInstanceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetAddonInstanceCommandOutput>;
+  getAddonInstance(
+    args: GetAddonInstanceCommandInput,
+    cb: (err: any, data?: GetAddonInstanceCommandOutput) => void
+  ): void;
+  getAddonInstance(
+    args: GetAddonInstanceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetAddonInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAddonSubscriptionCommand}
+   */
+  getAddonSubscription(
+    args: GetAddonSubscriptionCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetAddonSubscriptionCommandOutput>;
+  getAddonSubscription(
+    args: GetAddonSubscriptionCommandInput,
+    cb: (err: any, data?: GetAddonSubscriptionCommandOutput) => void
+  ): void;
+  getAddonSubscription(
+    args: GetAddonSubscriptionCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetAddonSubscriptionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAddressListCommand}
+   */
+  getAddressList(
+    args: GetAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetAddressListCommandOutput>;
+  getAddressList(
+    args: GetAddressListCommandInput,
+    cb: (err: any, data?: GetAddressListCommandOutput) => void
+  ): void;
+  getAddressList(
+    args: GetAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAddressListImportJobCommand}
+   */
+  getAddressListImportJob(
+    args: GetAddressListImportJobCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetAddressListImportJobCommandOutput>;
+  getAddressListImportJob(
+    args: GetAddressListImportJobCommandInput,
+    cb: (err: any, data?: GetAddressListImportJobCommandOutput) => void
+  ): void;
+  getAddressListImportJob(
+    args: GetAddressListImportJobCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetAddressListImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveCommand}
+   */
+  getArchive(
+    args: GetArchiveCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveCommandOutput>;
+  getArchive(
+    args: GetArchiveCommandInput,
+    cb: (err: any, data?: GetArchiveCommandOutput) => void
+  ): void;
+  getArchive(
+    args: GetArchiveCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveExportCommand}
+   */
+  getArchiveExport(
+    args: GetArchiveExportCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveExportCommandOutput>;
+  getArchiveExport(
+    args: GetArchiveExportCommandInput,
+    cb: (err: any, data?: GetArchiveExportCommandOutput) => void
+  ): void;
+  getArchiveExport(
+    args: GetArchiveExportCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveMessageCommand}
+   */
+  getArchiveMessage(
+    args: GetArchiveMessageCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveMessageCommandOutput>;
+  getArchiveMessage(
+    args: GetArchiveMessageCommandInput,
+    cb: (err: any, data?: GetArchiveMessageCommandOutput) => void
+  ): void;
+  getArchiveMessage(
+    args: GetArchiveMessageCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveMessageContentCommand}
+   */
+  getArchiveMessageContent(
+    args: GetArchiveMessageContentCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveMessageContentCommandOutput>;
+  getArchiveMessageContent(
+    args: GetArchiveMessageContentCommandInput,
+    cb: (err: any, data?: GetArchiveMessageContentCommandOutput) => void
+  ): void;
+  getArchiveMessageContent(
+    args: GetArchiveMessageContentCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveMessageContentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveSearchCommand}
+   */
+  getArchiveSearch(
+    args: GetArchiveSearchCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveSearchCommandOutput>;
+  getArchiveSearch(
+    args: GetArchiveSearchCommandInput,
+    cb: (err: any, data?: GetArchiveSearchCommandOutput) => void
+  ): void;
+  getArchiveSearch(
+    args: GetArchiveSearchCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveSearchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetArchiveSearchResultsCommand}
+   */
+  getArchiveSearchResults(
+    args: GetArchiveSearchResultsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetArchiveSearchResultsCommandOutput>;
+  getArchiveSearchResults(
+    args: GetArchiveSearchResultsCommandInput,
+    cb: (err: any, data?: GetArchiveSearchResultsCommandOutput) => void
+  ): void;
+  getArchiveSearchResults(
+    args: GetArchiveSearchResultsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetArchiveSearchResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngressPointCommand}
+   */
+  getIngressPoint(
+    args: GetIngressPointCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetIngressPointCommandOutput>;
+  getIngressPoint(
+    args: GetIngressPointCommandInput,
+    cb: (err: any, data?: GetIngressPointCommandOutput) => void
+  ): void;
+  getIngressPoint(
+    args: GetIngressPointCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetIngressPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMemberOfAddressListCommand}
+   */
+  getMemberOfAddressList(
+    args: GetMemberOfAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetMemberOfAddressListCommandOutput>;
+  getMemberOfAddressList(
+    args: GetMemberOfAddressListCommandInput,
+    cb: (err: any, data?: GetMemberOfAddressListCommandOutput) => void
+  ): void;
+  getMemberOfAddressList(
+    args: GetMemberOfAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetMemberOfAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelayCommand}
+   */
+  getRelay(
+    args: GetRelayCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetRelayCommandOutput>;
+  getRelay(
+    args: GetRelayCommandInput,
+    cb: (err: any, data?: GetRelayCommandOutput) => void
+  ): void;
+  getRelay(
+    args: GetRelayCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetRelayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRuleSetCommand}
+   */
+  getRuleSet(
+    args: GetRuleSetCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetRuleSetCommandOutput>;
+  getRuleSet(
+    args: GetRuleSetCommandInput,
+    cb: (err: any, data?: GetRuleSetCommandOutput) => void
+  ): void;
+  getRuleSet(
+    args: GetRuleSetCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrafficPolicyCommand}
+   */
+  getTrafficPolicy(
+    args: GetTrafficPolicyCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<GetTrafficPolicyCommandOutput>;
+  getTrafficPolicy(
+    args: GetTrafficPolicyCommandInput,
+    cb: (err: any, data?: GetTrafficPolicyCommandOutput) => void
+  ): void;
+  getTrafficPolicy(
+    args: GetTrafficPolicyCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: GetTrafficPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddonInstancesCommand}
+   */
+  listAddonInstances(): Promise<ListAddonInstancesCommandOutput>;
+  listAddonInstances(
+    args: ListAddonInstancesCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListAddonInstancesCommandOutput>;
+  listAddonInstances(
+    args: ListAddonInstancesCommandInput,
+    cb: (err: any, data?: ListAddonInstancesCommandOutput) => void
+  ): void;
+  listAddonInstances(
+    args: ListAddonInstancesCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListAddonInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddonSubscriptionsCommand}
+   */
+  listAddonSubscriptions(): Promise<ListAddonSubscriptionsCommandOutput>;
+  listAddonSubscriptions(
+    args: ListAddonSubscriptionsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListAddonSubscriptionsCommandOutput>;
+  listAddonSubscriptions(
+    args: ListAddonSubscriptionsCommandInput,
+    cb: (err: any, data?: ListAddonSubscriptionsCommandOutput) => void
+  ): void;
+  listAddonSubscriptions(
+    args: ListAddonSubscriptionsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListAddonSubscriptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddressListImportJobsCommand}
+   */
+  listAddressListImportJobs(
+    args: ListAddressListImportJobsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListAddressListImportJobsCommandOutput>;
+  listAddressListImportJobs(
+    args: ListAddressListImportJobsCommandInput,
+    cb: (err: any, data?: ListAddressListImportJobsCommandOutput) => void
+  ): void;
+  listAddressListImportJobs(
+    args: ListAddressListImportJobsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListAddressListImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddressListsCommand}
+   */
+  listAddressLists(): Promise<ListAddressListsCommandOutput>;
+  listAddressLists(
+    args: ListAddressListsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListAddressListsCommandOutput>;
+  listAddressLists(
+    args: ListAddressListsCommandInput,
+    cb: (err: any, data?: ListAddressListsCommandOutput) => void
+  ): void;
+  listAddressLists(
+    args: ListAddressListsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListAddressListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListArchiveExportsCommand}
+   */
+  listArchiveExports(
+    args: ListArchiveExportsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListArchiveExportsCommandOutput>;
+  listArchiveExports(
+    args: ListArchiveExportsCommandInput,
+    cb: (err: any, data?: ListArchiveExportsCommandOutput) => void
+  ): void;
+  listArchiveExports(
+    args: ListArchiveExportsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListArchiveExportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListArchivesCommand}
+   */
+  listArchives(): Promise<ListArchivesCommandOutput>;
+  listArchives(
+    args: ListArchivesCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListArchivesCommandOutput>;
+  listArchives(
+    args: ListArchivesCommandInput,
+    cb: (err: any, data?: ListArchivesCommandOutput) => void
+  ): void;
+  listArchives(
+    args: ListArchivesCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListArchivesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListArchiveSearchesCommand}
+   */
+  listArchiveSearches(
+    args: ListArchiveSearchesCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListArchiveSearchesCommandOutput>;
+  listArchiveSearches(
+    args: ListArchiveSearchesCommandInput,
+    cb: (err: any, data?: ListArchiveSearchesCommandOutput) => void
+  ): void;
+  listArchiveSearches(
+    args: ListArchiveSearchesCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListArchiveSearchesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngressPointsCommand}
+   */
+  listIngressPoints(): Promise<ListIngressPointsCommandOutput>;
+  listIngressPoints(
+    args: ListIngressPointsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListIngressPointsCommandOutput>;
+  listIngressPoints(
+    args: ListIngressPointsCommandInput,
+    cb: (err: any, data?: ListIngressPointsCommandOutput) => void
+  ): void;
+  listIngressPoints(
+    args: ListIngressPointsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListIngressPointsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMembersOfAddressListCommand}
+   */
+  listMembersOfAddressList(
+    args: ListMembersOfAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListMembersOfAddressListCommandOutput>;
+  listMembersOfAddressList(
+    args: ListMembersOfAddressListCommandInput,
+    cb: (err: any, data?: ListMembersOfAddressListCommandOutput) => void
+  ): void;
+  listMembersOfAddressList(
+    args: ListMembersOfAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListMembersOfAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRelaysCommand}
+   */
+  listRelays(): Promise<ListRelaysCommandOutput>;
+  listRelays(
+    args: ListRelaysCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListRelaysCommandOutput>;
+  listRelays(
+    args: ListRelaysCommandInput,
+    cb: (err: any, data?: ListRelaysCommandOutput) => void
+  ): void;
+  listRelays(
+    args: ListRelaysCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListRelaysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRuleSetsCommand}
+   */
+  listRuleSets(): Promise<ListRuleSetsCommandOutput>;
+  listRuleSets(
+    args: ListRuleSetsCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListRuleSetsCommandOutput>;
+  listRuleSets(
+    args: ListRuleSetsCommandInput,
+    cb: (err: any, data?: ListRuleSetsCommandOutput) => void
+  ): void;
+  listRuleSets(
+    args: ListRuleSetsCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListRuleSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrafficPoliciesCommand}
+   */
+  listTrafficPolicies(): Promise<ListTrafficPoliciesCommandOutput>;
+  listTrafficPolicies(
+    args: ListTrafficPoliciesCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<ListTrafficPoliciesCommandOutput>;
+  listTrafficPolicies(
+    args: ListTrafficPoliciesCommandInput,
+    cb: (err: any, data?: ListTrafficPoliciesCommandOutput) => void
+  ): void;
+  listTrafficPolicies(
+    args: ListTrafficPoliciesCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: ListTrafficPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterMemberToAddressListCommand}
+   */
+  registerMemberToAddressList(
+    args: RegisterMemberToAddressListCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<RegisterMemberToAddressListCommandOutput>;
+  registerMemberToAddressList(
+    args: RegisterMemberToAddressListCommandInput,
+    cb: (err: any, data?: RegisterMemberToAddressListCommandOutput) => void
+  ): void;
+  registerMemberToAddressList(
+    args: RegisterMemberToAddressListCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: RegisterMemberToAddressListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAddressListImportJobCommand}
+   */
+  startAddressListImportJob(
+    args: StartAddressListImportJobCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StartAddressListImportJobCommandOutput>;
+  startAddressListImportJob(
+    args: StartAddressListImportJobCommandInput,
+    cb: (err: any, data?: StartAddressListImportJobCommandOutput) => void
+  ): void;
+  startAddressListImportJob(
+    args: StartAddressListImportJobCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StartAddressListImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartArchiveExportCommand}
+   */
+  startArchiveExport(
+    args: StartArchiveExportCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StartArchiveExportCommandOutput>;
+  startArchiveExport(
+    args: StartArchiveExportCommandInput,
+    cb: (err: any, data?: StartArchiveExportCommandOutput) => void
+  ): void;
+  startArchiveExport(
+    args: StartArchiveExportCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StartArchiveExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartArchiveSearchCommand}
+   */
+  startArchiveSearch(
+    args: StartArchiveSearchCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StartArchiveSearchCommandOutput>;
+  startArchiveSearch(
+    args: StartArchiveSearchCommandInput,
+    cb: (err: any, data?: StartArchiveSearchCommandOutput) => void
+  ): void;
+  startArchiveSearch(
+    args: StartArchiveSearchCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StartArchiveSearchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopAddressListImportJobCommand}
+   */
+  stopAddressListImportJob(
+    args: StopAddressListImportJobCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StopAddressListImportJobCommandOutput>;
+  stopAddressListImportJob(
+    args: StopAddressListImportJobCommandInput,
+    cb: (err: any, data?: StopAddressListImportJobCommandOutput) => void
+  ): void;
+  stopAddressListImportJob(
+    args: StopAddressListImportJobCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StopAddressListImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopArchiveExportCommand}
+   */
+  stopArchiveExport(
+    args: StopArchiveExportCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StopArchiveExportCommandOutput>;
+  stopArchiveExport(
+    args: StopArchiveExportCommandInput,
+    cb: (err: any, data?: StopArchiveExportCommandOutput) => void
+  ): void;
+  stopArchiveExport(
+    args: StopArchiveExportCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StopArchiveExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopArchiveSearchCommand}
+   */
+  stopArchiveSearch(
+    args: StopArchiveSearchCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<StopArchiveSearchCommandOutput>;
+  stopArchiveSearch(
+    args: StopArchiveSearchCommandInput,
+    cb: (err: any, data?: StopArchiveSearchCommandOutput) => void
+  ): void;
+  stopArchiveSearch(
+    args: StopArchiveSearchCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: StopArchiveSearchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateArchiveCommand}
+   */
+  updateArchive(
+    args: UpdateArchiveCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UpdateArchiveCommandOutput>;
+  updateArchive(
+    args: UpdateArchiveCommandInput,
+    cb: (err: any, data?: UpdateArchiveCommandOutput) => void
+  ): void;
+  updateArchive(
+    args: UpdateArchiveCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UpdateArchiveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIngressPointCommand}
+   */
+  updateIngressPoint(
+    args: UpdateIngressPointCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UpdateIngressPointCommandOutput>;
+  updateIngressPoint(
+    args: UpdateIngressPointCommandInput,
+    cb: (err: any, data?: UpdateIngressPointCommandOutput) => void
+  ): void;
+  updateIngressPoint(
+    args: UpdateIngressPointCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UpdateIngressPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRelayCommand}
+   */
+  updateRelay(
+    args: UpdateRelayCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UpdateRelayCommandOutput>;
+  updateRelay(
+    args: UpdateRelayCommandInput,
+    cb: (err: any, data?: UpdateRelayCommandOutput) => void
+  ): void;
+  updateRelay(
+    args: UpdateRelayCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UpdateRelayCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRuleSetCommand}
+   */
+  updateRuleSet(
+    args: UpdateRuleSetCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UpdateRuleSetCommandOutput>;
+  updateRuleSet(
+    args: UpdateRuleSetCommandInput,
+    cb: (err: any, data?: UpdateRuleSetCommandOutput) => void
+  ): void;
+  updateRuleSet(
+    args: UpdateRuleSetCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UpdateRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTrafficPolicyCommand}
+   */
+  updateTrafficPolicy(
+    args: UpdateTrafficPolicyCommandInput,
+    options?: MailManagerRequestOptions
+  ): Promise<UpdateTrafficPolicyCommandOutput>;
+  updateTrafficPolicy(
+    args: UpdateTrafficPolicyCommandInput,
+    cb: (err: any, data?: UpdateTrafficPolicyCommandOutput) => void
+  ): void;
+  updateTrafficPolicy(
+    args: UpdateTrafficPolicyCommandInput,
+    options: MailManagerRequestOptions,
+    cb: (err: any, data?: UpdateTrafficPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAddonInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAddonInstancesCommandOutput}.
+   */
+  paginateListAddonInstances(
+    args?: ListAddonInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAddonInstancesCommandOutput>;
+
+  /**
+   * @see {@link ListAddonSubscriptionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAddonSubscriptionsCommandOutput}.
+   */
+  paginateListAddonSubscriptions(
+    args?: ListAddonSubscriptionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAddonSubscriptionsCommandOutput>;
+
+  /**
+   * @see {@link ListAddressListImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAddressListImportJobsCommandOutput}.
+   */
+  paginateListAddressListImportJobs(
+    args: ListAddressListImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAddressListImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListAddressListsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAddressListsCommandOutput}.
+   */
+  paginateListAddressLists(
+    args?: ListAddressListsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAddressListsCommandOutput>;
+
+  /**
+   * @see {@link ListArchiveExportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListArchiveExportsCommandOutput}.
+   */
+  paginateListArchiveExports(
+    args: ListArchiveExportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListArchiveExportsCommandOutput>;
+
+  /**
+   * @see {@link ListArchivesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListArchivesCommandOutput}.
+   */
+  paginateListArchives(
+    args?: ListArchivesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListArchivesCommandOutput>;
+
+  /**
+   * @see {@link ListArchiveSearchesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListArchiveSearchesCommandOutput}.
+   */
+  paginateListArchiveSearches(
+    args: ListArchiveSearchesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListArchiveSearchesCommandOutput>;
+
+  /**
+   * @see {@link ListIngressPointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngressPointsCommandOutput}.
+   */
+  paginateListIngressPoints(
+    args?: ListIngressPointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngressPointsCommandOutput>;
+
+  /**
+   * @see {@link ListMembersOfAddressListCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMembersOfAddressListCommandOutput}.
+   */
+  paginateListMembersOfAddressList(
+    args: ListMembersOfAddressListCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMembersOfAddressListCommandOutput>;
+
+  /**
+   * @see {@link ListRelaysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRelaysCommandOutput}.
+   */
+  paginateListRelays(
+    args?: ListRelaysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRelaysCommandOutput>;
+
+  /**
+   * @see {@link ListRuleSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRuleSetsCommandOutput}.
+   */
+  paginateListRuleSets(
+    args?: ListRuleSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRuleSetsCommandOutput>;
+
+  /**
+   * @see {@link ListTrafficPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrafficPoliciesCommandOutput}.
+   */
+  paginateListTrafficPolicies(
+    args?: ListTrafficPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrafficPoliciesCommandOutput>;
+}
+
+/**
+ * <fullname>Amazon SES Mail Manager API</fullname> <p>The Amazon SES Mail Manager API contains operations and data types that comprise the Mail Manager feature of <a href="http://aws.amazon.com/ses">Amazon Simple Email Service (SES)</a>.</p> <p>Mail Manager is a set of Amazon SES email gateway features designed to help you strengthen your organization's email infrastructure, simplify email workflow management, and streamline email compliance control. To learn more, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/eb.html">Mail Manager chapter</a> in the <i>Amazon SES Developer Guide</i>.</p>
+ * @public
+ */
+export class MailManager extends MailManagerClient implements MailManager {}
+createAggregatedClient(commands, MailManager, { paginators });

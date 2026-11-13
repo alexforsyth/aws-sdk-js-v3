@@ -1,99 +1,168 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateServerRequest, UpdateServerResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateServerCommand,
-  serializeAws_json1_1UpdateServerCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateServerRequest, UpdateServerResponse } from "../models/models_0";
+import { UpdateServer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateServerCommand}.
+ */
 export interface UpdateServerCommandInput extends UpdateServerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateServerCommand}.
+ */
 export interface UpdateServerCommandOutput extends UpdateServerResponse, __MetadataBearer {}
 
 /**
- * <p>Updates the file transfer protocol-enabled server's properties after that server has
- *       been created.</p>
- *
- *          <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you
- *       updated.</p>
+ * <p>Updates the file transfer protocol-enabled server's properties after that server has been created.</p> <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you updated.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TransferClient, UpdateServerCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, UpdateServerCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // UpdateServerRequest
+ *   Certificate: "STRING_VALUE",
+ *   ProtocolDetails: { // ProtocolDetails
+ *     PassiveIp: "STRING_VALUE",
+ *     TlsSessionResumptionMode: "DISABLED" || "ENABLED" || "ENFORCED",
+ *     SetStatOption: "DEFAULT" || "ENABLE_NO_OP",
+ *     SftpPorts: [ // SftpPorts
+ *       { // SftpPortWithOptions
+ *         SftpPort: Number("int"), // required
+ *         CommunicationMode: "CLIENT_TALK_FIRST" || "SERVER_TALK_FIRST",
+ *       },
+ *     ],
+ *     As2Transports: [ // As2Transports
+ *       "HTTP",
+ *     ],
+ *     ProxyConfig: { // ProxyConfig
+ *       SftpMode: "NONE" || "PROXY_PROTOCOL_V2_ENFORCED",
+ *     },
+ *   },
+ *   EndpointDetails: { // EndpointDetails
+ *     AddressAllocationIds: [ // AddressAllocationIds
+ *       "STRING_VALUE",
+ *     ],
+ *     SubnetIds: [ // SubnetIds
+ *       "STRING_VALUE",
+ *     ],
+ *     VpcEndpointId: "STRING_VALUE",
+ *     VpcId: "STRING_VALUE",
+ *     SecurityGroupIds: [ // SecurityGroupIds
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   EndpointType: "PUBLIC" || "VPC" || "VPC_ENDPOINT",
+ *   HostKey: "STRING_VALUE",
+ *   IdentityProviderDetails: { // IdentityProviderDetails
+ *     Url: "STRING_VALUE",
+ *     InvocationRole: "STRING_VALUE",
+ *     DirectoryId: "STRING_VALUE",
+ *     Function: "STRING_VALUE",
+ *     SftpAuthenticationMethods: "PASSWORD" || "PUBLIC_KEY" || "PUBLIC_KEY_OR_PASSWORD" || "PUBLIC_KEY_AND_PASSWORD",
+ *   },
+ *   LoggingRole: "STRING_VALUE",
+ *   PostAuthenticationLoginBanner: "STRING_VALUE",
+ *   PreAuthenticationLoginBanner: "STRING_VALUE",
+ *   Protocols: [ // Protocols
+ *     "SFTP" || "FTP" || "FTPS" || "AS2",
+ *   ],
+ *   SecurityPolicyName: "STRING_VALUE",
+ *   ServerId: "STRING_VALUE", // required
+ *   WorkflowDetails: { // WorkflowDetails
+ *     OnUpload: [ // OnUploadWorkflowDetails
+ *       { // WorkflowDetail
+ *         WorkflowId: "STRING_VALUE", // required
+ *         ExecutionRole: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *     OnPartialUpload: [ // OnPartialUploadWorkflowDetails
+ *       {
+ *         WorkflowId: "STRING_VALUE", // required
+ *         ExecutionRole: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ *   StructuredLogDestinations: [ // StructuredLogDestinations
+ *     "STRING_VALUE",
+ *   ],
+ *   S3StorageOptions: { // S3StorageOptions
+ *     DirectoryListingOptimization: "ENABLED" || "DISABLED",
+ *   },
+ *   IpAddressType: "IPV4" || "DUALSTACK",
+ *   IdentityProviderType: "SERVICE_MANAGED" || "API_GATEWAY" || "AWS_DIRECTORY_SERVICE" || "AWS_LAMBDA",
+ * };
  * const command = new UpdateServerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateServerResponse
+ * //   ServerId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateServerCommandInput - {@link UpdateServerCommandInput}
+ * @returns {@link UpdateServerCommandOutput}
  * @see {@link UpdateServerCommandInput} for command's `input` shape.
  * @see {@link UpdateServerCommandOutput} for command's `response` shape.
- * @see {@link TransferClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>This exception is thrown when the <code>UpdateServer</code> is called for a file transfer protocol-enabled server that has VPC as the endpoint type and the server's <code>VpcEndpointID</code> is not in the available state.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceExistsException} (client fault)
+ *  <p>The requested resource does not exist, or exists in a region other than the one specified for the command.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateServerCommand extends $Command<
-  UpdateServerCommandInput,
-  UpdateServerCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateServerCommandInput, UpdateServerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "UpdateServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateServerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateServerResponse.filterSensitiveLog,
+export class UpdateServerCommand extends command<UpdateServerCommandInput, UpdateServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateServer",
+  UpdateServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateServerRequest;
+      output: UpdateServerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateServerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateServerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateServerCommandOutput> {
-    return deserializeAws_json1_1UpdateServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateServerCommandInput;
+      output: UpdateServerCommandOutput;
+    };
+  };
 }

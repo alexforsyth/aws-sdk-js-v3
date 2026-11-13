@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteTimelineEventInput, DeleteTimelineEventOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteTimelineEventCommand,
-  serializeAws_restJson1DeleteTimelineEventCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMIncidentsClientResolvedConfig } from "../SSMIncidentsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTimelineEventInput, DeleteTimelineEventOutput } from "../models/models_0";
+import { DeleteTimelineEvent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTimelineEventCommand}.
+ */
 export interface DeleteTimelineEventCommandInput extends DeleteTimelineEventInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTimelineEventCommand}.
+ */
 export interface DeleteTimelineEventCommandOutput extends DeleteTimelineEventOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface DeleteTimelineEventCommandOutput extends DeleteTimelineEventOut
  * ```javascript
  * import { SSMIncidentsClient, DeleteTimelineEventCommand } from "@aws-sdk/client-ssm-incidents"; // ES Modules import
  * // const { SSMIncidentsClient, DeleteTimelineEventCommand } = require("@aws-sdk/client-ssm-incidents"); // CommonJS import
+ * // import type { SSMIncidentsClientConfig } from "@aws-sdk/client-ssm-incidents";
+ * const config = {}; // type is SSMIncidentsClientConfig
  * const client = new SSMIncidentsClient(config);
+ * const input = { // DeleteTimelineEventInput
+ *   incidentRecordArn: "STRING_VALUE", // required
+ *   eventId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteTimelineEventCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteTimelineEventCommandInput - {@link DeleteTimelineEventCommandInput}
+ * @returns {@link DeleteTimelineEventCommandOutput}
  * @see {@link DeleteTimelineEventCommandInput} for command's `input` shape.
  * @see {@link DeleteTimelineEventCommandOutput} for command's `response` shape.
- * @see {@link SSMIncidentsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMIncidentsClientResolvedConfig | config} for SSMIncidentsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *       service.</p>
+ *
+ * @throws {@link SSMIncidentsServiceException}
+ * <p>Base exception class for all service exceptions from SSMIncidents service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTimelineEventCommand extends $Command<
-  DeleteTimelineEventCommandInput,
-  DeleteTimelineEventCommandOutput,
-  SSMIncidentsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTimelineEventCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMIncidentsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTimelineEventCommandInput, DeleteTimelineEventCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMIncidentsClient";
-    const commandName = "DeleteTimelineEventCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTimelineEventInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTimelineEventOutput.filterSensitiveLog,
+export class DeleteTimelineEventCommand extends command<DeleteTimelineEventCommandInput, DeleteTimelineEventCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTimelineEvent",
+  DeleteTimelineEvent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTimelineEventInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTimelineEventCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteTimelineEventCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteTimelineEventCommandOutput> {
-    return deserializeAws_restJson1DeleteTimelineEventCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTimelineEventCommandInput;
+      output: DeleteTimelineEventCommandOutput;
+    };
+  };
 }

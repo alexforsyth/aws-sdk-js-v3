@@ -1,154 +1,457 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreatePerformanceAnalysisReportCommandInput,
+  type CreatePerformanceAnalysisReportCommandOutput,
+  CreatePerformanceAnalysisReportCommand,
+} from "./commands/CreatePerformanceAnalysisReportCommand";
+import {
+  type DeletePerformanceAnalysisReportCommandInput,
+  type DeletePerformanceAnalysisReportCommandOutput,
+  DeletePerformanceAnalysisReportCommand,
+} from "./commands/DeletePerformanceAnalysisReportCommand";
+import {
+  type DescribeDimensionKeysCommandInput,
+  type DescribeDimensionKeysCommandOutput,
   DescribeDimensionKeysCommand,
-  DescribeDimensionKeysCommandInput,
-  DescribeDimensionKeysCommandOutput,
 } from "./commands/DescribeDimensionKeysCommand";
 import {
+  type GetDimensionKeyDetailsCommandInput,
+  type GetDimensionKeyDetailsCommandOutput,
   GetDimensionKeyDetailsCommand,
-  GetDimensionKeyDetailsCommandInput,
-  GetDimensionKeyDetailsCommandOutput,
 } from "./commands/GetDimensionKeyDetailsCommand";
 import {
+  type GetPerformanceAnalysisReportCommandInput,
+  type GetPerformanceAnalysisReportCommandOutput,
+  GetPerformanceAnalysisReportCommand,
+} from "./commands/GetPerformanceAnalysisReportCommand";
+import {
+  type GetResourceMetadataCommandInput,
+  type GetResourceMetadataCommandOutput,
+  GetResourceMetadataCommand,
+} from "./commands/GetResourceMetadataCommand";
+import {
+  type GetResourceMetricsCommandInput,
+  type GetResourceMetricsCommandOutput,
   GetResourceMetricsCommand,
-  GetResourceMetricsCommandInput,
-  GetResourceMetricsCommandOutput,
 } from "./commands/GetResourceMetricsCommand";
+import {
+  type ListAvailableResourceDimensionsCommandInput,
+  type ListAvailableResourceDimensionsCommandOutput,
+  ListAvailableResourceDimensionsCommand,
+} from "./commands/ListAvailableResourceDimensionsCommand";
+import {
+  type ListAvailableResourceMetricsCommandInput,
+  type ListAvailableResourceMetricsCommandOutput,
+  ListAvailableResourceMetricsCommand,
+} from "./commands/ListAvailableResourceMetricsCommand";
+import {
+  type ListPerformanceAnalysisReportRecommendationsCommandInput,
+  type ListPerformanceAnalysisReportRecommendationsCommandOutput,
+  ListPerformanceAnalysisReportRecommendationsCommand,
+} from "./commands/ListPerformanceAnalysisReportRecommendationsCommand";
+import {
+  type ListPerformanceAnalysisReportsCommandInput,
+  type ListPerformanceAnalysisReportsCommandOutput,
+  ListPerformanceAnalysisReportsCommand,
+} from "./commands/ListPerformanceAnalysisReportsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import { paginateDescribeDimensionKeys } from "./pagination/DescribeDimensionKeysPaginator";
+import { paginateGetResourceMetrics } from "./pagination/GetResourceMetricsPaginator";
+import { paginateListAvailableResourceDimensions } from "./pagination/ListAvailableResourceDimensionsPaginator";
+import { paginateListAvailableResourceMetrics } from "./pagination/ListAvailableResourceMetricsPaginator";
+import {
+  paginateListPerformanceAnalysisReportRecommendations,
+} from "./pagination/ListPerformanceAnalysisReportRecommendationsPaginator";
+import { paginateListPerformanceAnalysisReports } from "./pagination/ListPerformanceAnalysisReportsPaginator";
 import { PIClient } from "./PIClient";
+
+const commands = {
+  CreatePerformanceAnalysisReportCommand,
+  DeletePerformanceAnalysisReportCommand,
+  DescribeDimensionKeysCommand,
+  GetDimensionKeyDetailsCommand,
+  GetPerformanceAnalysisReportCommand,
+  GetResourceMetadataCommand,
+  GetResourceMetricsCommand,
+  ListAvailableResourceDimensionsCommand,
+  ListAvailableResourceMetricsCommand,
+  ListPerformanceAnalysisReportRecommendationsCommand,
+  ListPerformanceAnalysisReportsCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateDescribeDimensionKeys,
+  paginateGetResourceMetrics,
+  paginateListAvailableResourceDimensions,
+  paginateListAvailableResourceMetrics,
+  paginateListPerformanceAnalysisReportRecommendations,
+  paginateListPerformanceAnalysisReports,
+};
+
+/**
+ * @public
+ */
+export interface PIRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PI {
+  /**
+   * @see {@link CreatePerformanceAnalysisReportCommand}
+   */
+  createPerformanceAnalysisReport(
+    args: CreatePerformanceAnalysisReportCommandInput,
+    options?: PIRequestOptions
+  ): Promise<CreatePerformanceAnalysisReportCommandOutput>;
+  createPerformanceAnalysisReport(
+    args: CreatePerformanceAnalysisReportCommandInput,
+    cb: (err: any, data?: CreatePerformanceAnalysisReportCommandOutput) => void
+  ): void;
+  createPerformanceAnalysisReport(
+    args: CreatePerformanceAnalysisReportCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: CreatePerformanceAnalysisReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePerformanceAnalysisReportCommand}
+   */
+  deletePerformanceAnalysisReport(
+    args: DeletePerformanceAnalysisReportCommandInput,
+    options?: PIRequestOptions
+  ): Promise<DeletePerformanceAnalysisReportCommandOutput>;
+  deletePerformanceAnalysisReport(
+    args: DeletePerformanceAnalysisReportCommandInput,
+    cb: (err: any, data?: DeletePerformanceAnalysisReportCommandOutput) => void
+  ): void;
+  deletePerformanceAnalysisReport(
+    args: DeletePerformanceAnalysisReportCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: DeletePerformanceAnalysisReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDimensionKeysCommand}
+   */
+  describeDimensionKeys(
+    args: DescribeDimensionKeysCommandInput,
+    options?: PIRequestOptions
+  ): Promise<DescribeDimensionKeysCommandOutput>;
+  describeDimensionKeys(
+    args: DescribeDimensionKeysCommandInput,
+    cb: (err: any, data?: DescribeDimensionKeysCommandOutput) => void
+  ): void;
+  describeDimensionKeys(
+    args: DescribeDimensionKeysCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: DescribeDimensionKeysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDimensionKeyDetailsCommand}
+   */
+  getDimensionKeyDetails(
+    args: GetDimensionKeyDetailsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<GetDimensionKeyDetailsCommandOutput>;
+  getDimensionKeyDetails(
+    args: GetDimensionKeyDetailsCommandInput,
+    cb: (err: any, data?: GetDimensionKeyDetailsCommandOutput) => void
+  ): void;
+  getDimensionKeyDetails(
+    args: GetDimensionKeyDetailsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: GetDimensionKeyDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPerformanceAnalysisReportCommand}
+   */
+  getPerformanceAnalysisReport(
+    args: GetPerformanceAnalysisReportCommandInput,
+    options?: PIRequestOptions
+  ): Promise<GetPerformanceAnalysisReportCommandOutput>;
+  getPerformanceAnalysisReport(
+    args: GetPerformanceAnalysisReportCommandInput,
+    cb: (err: any, data?: GetPerformanceAnalysisReportCommandOutput) => void
+  ): void;
+  getPerformanceAnalysisReport(
+    args: GetPerformanceAnalysisReportCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: GetPerformanceAnalysisReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceMetadataCommand}
+   */
+  getResourceMetadata(
+    args: GetResourceMetadataCommandInput,
+    options?: PIRequestOptions
+  ): Promise<GetResourceMetadataCommandOutput>;
+  getResourceMetadata(
+    args: GetResourceMetadataCommandInput,
+    cb: (err: any, data?: GetResourceMetadataCommandOutput) => void
+  ): void;
+  getResourceMetadata(
+    args: GetResourceMetadataCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: GetResourceMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceMetricsCommand}
+   */
+  getResourceMetrics(
+    args: GetResourceMetricsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<GetResourceMetricsCommandOutput>;
+  getResourceMetrics(
+    args: GetResourceMetricsCommandInput,
+    cb: (err: any, data?: GetResourceMetricsCommandOutput) => void
+  ): void;
+  getResourceMetrics(
+    args: GetResourceMetricsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: GetResourceMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAvailableResourceDimensionsCommand}
+   */
+  listAvailableResourceDimensions(
+    args: ListAvailableResourceDimensionsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<ListAvailableResourceDimensionsCommandOutput>;
+  listAvailableResourceDimensions(
+    args: ListAvailableResourceDimensionsCommandInput,
+    cb: (err: any, data?: ListAvailableResourceDimensionsCommandOutput) => void
+  ): void;
+  listAvailableResourceDimensions(
+    args: ListAvailableResourceDimensionsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: ListAvailableResourceDimensionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAvailableResourceMetricsCommand}
+   */
+  listAvailableResourceMetrics(
+    args: ListAvailableResourceMetricsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<ListAvailableResourceMetricsCommandOutput>;
+  listAvailableResourceMetrics(
+    args: ListAvailableResourceMetricsCommandInput,
+    cb: (err: any, data?: ListAvailableResourceMetricsCommandOutput) => void
+  ): void;
+  listAvailableResourceMetrics(
+    args: ListAvailableResourceMetricsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: ListAvailableResourceMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPerformanceAnalysisReportRecommendationsCommand}
+   */
+  listPerformanceAnalysisReportRecommendations(
+    args: ListPerformanceAnalysisReportRecommendationsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<ListPerformanceAnalysisReportRecommendationsCommandOutput>;
+  listPerformanceAnalysisReportRecommendations(
+    args: ListPerformanceAnalysisReportRecommendationsCommandInput,
+    cb: (err: any, data?: ListPerformanceAnalysisReportRecommendationsCommandOutput) => void
+  ): void;
+  listPerformanceAnalysisReportRecommendations(
+    args: ListPerformanceAnalysisReportRecommendationsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: ListPerformanceAnalysisReportRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPerformanceAnalysisReportsCommand}
+   */
+  listPerformanceAnalysisReports(
+    args: ListPerformanceAnalysisReportsCommandInput,
+    options?: PIRequestOptions
+  ): Promise<ListPerformanceAnalysisReportsCommandOutput>;
+  listPerformanceAnalysisReports(
+    args: ListPerformanceAnalysisReportsCommandInput,
+    cb: (err: any, data?: ListPerformanceAnalysisReportsCommandOutput) => void
+  ): void;
+  listPerformanceAnalysisReports(
+    args: ListPerformanceAnalysisReportsCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: ListPerformanceAnalysisReportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PIRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PIRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PIRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PIRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDimensionKeysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeDimensionKeysCommandOutput}.
+   */
+  paginateDescribeDimensionKeys(
+    args: DescribeDimensionKeysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeDimensionKeysCommandOutput>;
+
+  /**
+   * @see {@link GetResourceMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourceMetricsCommandOutput}.
+   */
+  paginateGetResourceMetrics(
+    args: GetResourceMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourceMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListAvailableResourceDimensionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAvailableResourceDimensionsCommandOutput}.
+   */
+  paginateListAvailableResourceDimensions(
+    args: ListAvailableResourceDimensionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAvailableResourceDimensionsCommandOutput>;
+
+  /**
+   * @see {@link ListAvailableResourceMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAvailableResourceMetricsCommandOutput}.
+   */
+  paginateListAvailableResourceMetrics(
+    args: ListAvailableResourceMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAvailableResourceMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListPerformanceAnalysisReportRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPerformanceAnalysisReportRecommendationsCommandOutput}.
+   */
+  paginateListPerformanceAnalysisReportRecommendations(
+    args: ListPerformanceAnalysisReportRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPerformanceAnalysisReportRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListPerformanceAnalysisReportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPerformanceAnalysisReportsCommandOutput}.
+   */
+  paginateListPerformanceAnalysisReports(
+    args: ListPerformanceAnalysisReportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPerformanceAnalysisReportsCommandOutput>;
+}
 
 /**
  * <fullname>Amazon RDS Performance Insights</fullname>
- *
- *          <p>Amazon RDS Performance Insights enables you to monitor and explore different dimensions of
- *       database load based on data captured from a running DB instance. The guide provides detailed
- *       information about Performance Insights data types, parameters and errors.</p>
- *
- *          <p>When Performance Insights is enabled, the Amazon RDS Performance Insights API provides visibility into the performance of your DB instance. Amazon
- *       CloudWatch provides the authoritative source for AWS service-vended monitoring metrics.  Performance Insights offers a domain-specific
- *       view of DB load. </p>
- *          <p>DB load is measured as Average Active Sessions. Performance Insights provides the data to API consumers as a two-dimensional
- *       time-series dataset. The time dimension provides DB load data for each time point in the queried time range. Each time
- *       point decomposes overall load in relation to the requested dimensions, measured at that time point. Examples include
- *       SQL, Wait event, User, and Host.</p>
- *
+ *          <p>Amazon RDS Performance Insights enables you to monitor and explore different dimensions of database load based on data captured from a running DB instance. The guide
+ *             provides detailed information about Performance Insights data types, parameters and errors.</p>
+ *          <p>When Performance Insights is enabled, the Amazon RDS Performance Insights API provides visibility into the performance of your DB instance. Amazon CloudWatch provides the
+ *             authoritative source for Amazon Web Services service-vended monitoring metrics. Performance Insights offers a domain-specific view of DB load.</p>
+ *          <p>DB load is measured as average active sessions. Performance Insights provides the data to API consumers as a two-dimensional time-series dataset. The time dimension
+ *             provides DB load data for each time point in the queried time range. Each time point decomposes overall load in relation to the requested
+ *             dimensions, measured at that time point. Examples include SQL, Wait event, User, and Host.</p>
  *          <ul>
  *             <li>
- *                <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html">Amazon Aurora User Guide</a>.</p>
+ *                <p>To learn more about Performance Insights and Amazon Aurora DB instances, go to the <i>
+ *                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html"> Amazon Aurora User Guide</a>
+ *                   </i>. </p>
  *             </li>
  *             <li>
- *                <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html">Amazon RDS User Guide</a>.</p>
+ *                <p>To learn more about Performance Insights and Amazon RDS DB instances, go to the <i>
+ *                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html"> Amazon RDS User Guide</a>
+ *                   </i>. </p>
+ *             </li>
+ *             <li>
+ *                <p>To learn more about Performance Insights and Amazon DocumentDB clusters, go to the <i>
+ *                      <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html"> Amazon DocumentDB Developer Guide</a>
+ *                   </i>.</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class PI extends PIClient {
-  /**
-   * <p>For a specific time period, retrieve the top <code>N</code> dimension keys for a
-   *       metric.</p>
-   *          <note>
-   *             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements,
-   *         only the first 500 bytes are returned.</p>
-   *          </note>
-   */
-  public describeDimensionKeys(
-    args: DescribeDimensionKeysCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDimensionKeysCommandOutput>;
-  public describeDimensionKeys(
-    args: DescribeDimensionKeysCommandInput,
-    cb: (err: any, data?: DescribeDimensionKeysCommandOutput) => void
-  ): void;
-  public describeDimensionKeys(
-    args: DescribeDimensionKeysCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDimensionKeysCommandOutput) => void
-  ): void;
-  public describeDimensionKeys(
-    args: DescribeDimensionKeysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDimensionKeysCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDimensionKeysCommandOutput) => void
-  ): Promise<DescribeDimensionKeysCommandOutput> | void {
-    const command = new DescribeDimensionKeysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a
-   *       SQL ID, <code>GetDimensionKeyDetails</code> retrieves the full text of the dimension <code>db.sql.statement</code>
-   *       associated with this ID. This operation is useful because <code>GetResourceMetrics</code> and
-   *         <code>DescribeDimensionKeys</code> don't support retrieval of large SQL statement text.</p>
-   */
-  public getDimensionKeyDetails(
-    args: GetDimensionKeyDetailsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDimensionKeyDetailsCommandOutput>;
-  public getDimensionKeyDetails(
-    args: GetDimensionKeyDetailsCommandInput,
-    cb: (err: any, data?: GetDimensionKeyDetailsCommandOutput) => void
-  ): void;
-  public getDimensionKeyDetails(
-    args: GetDimensionKeyDetailsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDimensionKeyDetailsCommandOutput) => void
-  ): void;
-  public getDimensionKeyDetails(
-    args: GetDimensionKeyDetailsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDimensionKeyDetailsCommandOutput) => void),
-    cb?: (err: any, data?: GetDimensionKeyDetailsCommandOutput) => void
-  ): Promise<GetDimensionKeyDetailsCommandOutput> | void {
-    const command = new GetDimensionKeyDetailsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieve Performance Insights metrics for a set of data sources, over a time period. You can provide
-   *       specific dimension groups and dimensions, and provide aggregation and filtering criteria for
-   *       each group.</p>
-   *          <note>
-   *             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements,
-   *                only the first 500 bytes are returned.</p>
-   *          </note>
-   */
-  public getResourceMetrics(
-    args: GetResourceMetricsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetResourceMetricsCommandOutput>;
-  public getResourceMetrics(
-    args: GetResourceMetricsCommandInput,
-    cb: (err: any, data?: GetResourceMetricsCommandOutput) => void
-  ): void;
-  public getResourceMetrics(
-    args: GetResourceMetricsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetResourceMetricsCommandOutput) => void
-  ): void;
-  public getResourceMetrics(
-    args: GetResourceMetricsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceMetricsCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceMetricsCommandOutput) => void
-  ): Promise<GetResourceMetricsCommandOutput> | void {
-    const command = new GetResourceMetricsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class PI extends PIClient implements PI {}
+createAggregatedClient(commands, PI, { paginators });

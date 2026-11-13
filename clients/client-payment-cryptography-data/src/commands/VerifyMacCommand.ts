@@ -1,0 +1,125 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { VerifyMacInput, VerifyMacOutput } from "../models/models_0";
+import { VerifyMac$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link VerifyMacCommand}.
+ */
+export interface VerifyMacCommandInput extends VerifyMacInput {}
+/**
+ * @public
+ *
+ * The output of {@link VerifyMacCommand}.
+ */
+export interface VerifyMacCommandOutput extends VerifyMacOutput, __MetadataBearer {}
+
+/**
+ * <p>Verifies a Message Authentication Code (MAC). </p> <p>You can use this operation to verify MAC for message data authentication such as . In this operation, you must use the same message data, secret encryption key and MAC algorithm that was used to generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. </p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p> <p> <b>Cross-account use</b>: This operation supports cross-account use when the key has a resource-based policy that grants access. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html">Resource-based policies</a>.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>GenerateMac</a> </p> </li> </ul>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { PaymentCryptographyDataClient, VerifyMacCommand } from "@aws-sdk/client-payment-cryptography-data"; // ES Modules import
+ * // const { PaymentCryptographyDataClient, VerifyMacCommand } = require("@aws-sdk/client-payment-cryptography-data"); // CommonJS import
+ * // import type { PaymentCryptographyDataClientConfig } from "@aws-sdk/client-payment-cryptography-data";
+ * const config = {}; // type is PaymentCryptographyDataClientConfig
+ * const client = new PaymentCryptographyDataClient(config);
+ * const input = { // VerifyMacInput
+ *   KeyIdentifier: "STRING_VALUE", // required
+ *   MessageData: "STRING_VALUE", // required
+ *   Mac: "STRING_VALUE", // required
+ *   VerificationAttributes: { // MacAttributes Union: only one key present
+ *     Algorithm: "ISO9797_ALGORITHM1" || "ISO9797_ALGORITHM3" || "CMAC" || "HMAC" || "HMAC_SHA224" || "HMAC_SHA256" || "HMAC_SHA384" || "HMAC_SHA512" || "AS2805_4_1",
+ *     EmvMac: { // MacAlgorithmEmv
+ *       MajorKeyDerivationMode: "EMV_OPTION_A" || "EMV_OPTION_B", // required
+ *       PrimaryAccountNumber: "STRING_VALUE", // required
+ *       PanSequenceNumber: "STRING_VALUE", // required
+ *       SessionKeyDerivationMode: "EMV_COMMON_SESSION_KEY" || "EMV2000" || "AMEX" || "MASTERCARD_SESSION_KEY" || "VISA" || "UNION_PAY", // required
+ *       SessionKeyDerivationValue: { // SessionKeyDerivationValue Union: only one key present
+ *         ApplicationCryptogram: "STRING_VALUE",
+ *         ApplicationTransactionCounter: "STRING_VALUE",
+ *       },
+ *     },
+ *     DukptIso9797Algorithm1: { // MacAlgorithmDukpt
+ *       KeySerialNumber: "STRING_VALUE", // required
+ *       DukptKeyVariant: "BIDIRECTIONAL" || "REQUEST" || "RESPONSE", // required
+ *       DukptDerivationType: "TDES_2KEY" || "TDES_3KEY" || "AES_128" || "AES_192" || "AES_256",
+ *     },
+ *     DukptIso9797Algorithm3: {
+ *       KeySerialNumber: "STRING_VALUE", // required
+ *       DukptKeyVariant: "BIDIRECTIONAL" || "REQUEST" || "RESPONSE", // required
+ *       DukptDerivationType: "TDES_2KEY" || "TDES_3KEY" || "AES_128" || "AES_192" || "AES_256",
+ *     },
+ *     DukptCmac: {
+ *       KeySerialNumber: "STRING_VALUE", // required
+ *       DukptKeyVariant: "BIDIRECTIONAL" || "REQUEST" || "RESPONSE", // required
+ *       DukptDerivationType: "TDES_2KEY" || "TDES_3KEY" || "AES_128" || "AES_192" || "AES_256",
+ *     },
+ *   },
+ *   MacLength: Number("int"),
+ * };
+ * const command = new VerifyMacCommand(input);
+ * const response = await client.send(command);
+ * // { // VerifyMacOutput
+ * //   KeyArn: "STRING_VALUE", // required
+ * //   KeyCheckValue: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param VerifyMacCommandInput - {@link VerifyMacCommandInput}
+ * @returns {@link VerifyMacCommandOutput}
+ * @see {@link VerifyMacCommandInput} for command's `input` shape.
+ * @see {@link VerifyMacCommandOutput} for command's `response` shape.
+ * @see {@link PaymentCryptographyDataClientResolvedConfig | config} for PaymentCryptographyDataClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was denied due to an invalid resource error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was denied due to an invalid request error.</p>
+ *
+ * @throws {@link VerificationFailedException} (client fault)
+ *  <p>This request failed verification.</p>
+ *
+ * @throws {@link PaymentCryptographyDataServiceException}
+ * <p>Base exception class for all service exceptions from PaymentCryptographyData service.</p>
+ *
+ *
+ * @public
+ */
+export class VerifyMacCommand extends command<VerifyMacCommandInput, VerifyMacCommandOutput>(
+  _ep0,
+  _mw0,
+  "VerifyMac",
+  VerifyMac$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: VerifyMacInput;
+      output: VerifyMacOutput;
+    };
+    sdk: {
+      input: VerifyMacCommandInput;
+      output: VerifyMacCommandOutput;
+    };
+  };
+}

@@ -1,10 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "importHelpers": true,
-    "module": "commonjs",
-    "noEmitHelpers": true,
-    "target": "ES2018",
-    "strict": true
-  }
+    "noCheck": true
+  },
+  "exclude": ["node_modules/", "**/*.spec.ts", "**/*.fixture.ts", "vitest.*.ts"]
 }

@@ -1,31 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetConfigurationSetRequest, GetConfigurationSetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetConfigurationSetCommand,
-  serializeAws_restJson1GetConfigurationSetCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SESv2ClientResolvedConfig } from "../SESv2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetConfigurationSetRequest, GetConfigurationSetResponse } from "../models/models_0";
+import { GetConfigurationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetConfigurationSetCommand}.
+ */
 export interface GetConfigurationSetCommandInput extends GetConfigurationSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetConfigurationSetCommand}.
+ */
 export interface GetConfigurationSetCommandOutput extends GetConfigurationSetResponse, __MetadataBearer {}
 
 /**
  * <p>Get information about an existing configuration set, including the dedicated IP pool
  *             that it's associated with, whether or not it's enabled for sending email, and
  *             more.</p>
- *         <p>
+ *          <p>
  *             <i>Configuration sets</i> are groups of rules that you can apply to the
  *             emails you send. You apply a configuration set to an email by including a reference to
  *             the configuration set in the headers of the email. When you apply a configuration set to
@@ -35,68 +36,111 @@ export interface GetConfigurationSetCommandOutput extends GetConfigurationSetRes
  * ```javascript
  * import { SESv2Client, GetConfigurationSetCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
  * // const { SESv2Client, GetConfigurationSetCommand } = require("@aws-sdk/client-sesv2"); // CommonJS import
+ * // import type { SESv2ClientConfig } from "@aws-sdk/client-sesv2";
+ * const config = {}; // type is SESv2ClientConfig
  * const client = new SESv2Client(config);
+ * const input = { // GetConfigurationSetRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ * };
  * const command = new GetConfigurationSetCommand(input);
  * const response = await client.send(command);
+ * // { // GetConfigurationSetResponse
+ * //   ConfigurationSetName: "STRING_VALUE",
+ * //   TrackingOptions: { // TrackingOptions
+ * //     CustomRedirectDomain: "STRING_VALUE", // required
+ * //     HttpsPolicy: "REQUIRE" || "REQUIRE_OPEN_ONLY" || "OPTIONAL",
+ * //   },
+ * //   DeliveryOptions: { // DeliveryOptions
+ * //     TlsPolicy: "REQUIRE" || "OPTIONAL",
+ * //     SendingPoolName: "STRING_VALUE",
+ * //     MaxDeliverySeconds: Number("long"),
+ * //   },
+ * //   ReputationOptions: { // ReputationOptions
+ * //     ReputationMetricsEnabled: true || false,
+ * //     LastFreshStart: new Date("TIMESTAMP"),
+ * //   },
+ * //   SendingOptions: { // SendingOptions
+ * //     SendingEnabled: true || false,
+ * //   },
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   SuppressionOptions: { // SuppressionOptions
+ * //     SuppressedReasons: [ // SuppressionListReasons
+ * //       "BOUNCE" || "COMPLAINT",
+ * //     ],
+ * //     SuppressionScope: "ACCOUNT" || "TENANT",
+ * //     ValidationOptions: { // SuppressionValidationOptions
+ * //       ConditionThreshold: { // SuppressionConditionThreshold
+ * //         ConditionThresholdEnabled: "ENABLED" || "DISABLED", // required
+ * //         OverallConfidenceThreshold: { // SuppressionConfidenceThreshold
+ * //           ConfidenceVerdictThreshold: "MEDIUM" || "HIGH" || "MANAGED", // required
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * //   VdmOptions: { // VdmOptions
+ * //     DashboardOptions: { // DashboardOptions
+ * //       EngagementMetrics: "ENABLED" || "DISABLED",
+ * //     },
+ * //     GuardianOptions: { // GuardianOptions
+ * //       OptimizedSharedDelivery: "ENABLED" || "DISABLED",
+ * //     },
+ * //   },
+ * //   ArchivingOptions: { // ArchivingOptions
+ * //     ArchiveArn: "STRING_VALUE",
+ * //   },
+ * //   MessageSecurityOptions: { // MessageSecurityOptions
+ * //     SigningScheme: { // SigningScheme Union: only one key present
+ * //       DefaultScheme: {},
+ * //       SmimeScheme: { // SmimeSigningScheme
+ * //         SignatureFormat: "DETACHED",
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetConfigurationSetCommandInput - {@link GetConfigurationSetCommandInput}
+ * @returns {@link GetConfigurationSetCommandOutput}
  * @see {@link GetConfigurationSetCommandInput} for command's `input` shape.
  * @see {@link GetConfigurationSetCommandOutput} for command's `response` shape.
- * @see {@link SESv2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESv2ClientResolvedConfig | config} for SESv2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link SESv2ServiceException}
+ * <p>Base exception class for all service exceptions from SESv2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetConfigurationSetCommand extends $Command<
-  GetConfigurationSetCommandInput,
-  GetConfigurationSetCommandOutput,
-  SESv2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetConfigurationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESv2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetConfigurationSetCommandInput, GetConfigurationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESv2Client";
-    const commandName = "GetConfigurationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetConfigurationSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetConfigurationSetResponse.filterSensitiveLog,
+export class GetConfigurationSetCommand extends command<GetConfigurationSetCommandInput, GetConfigurationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetConfigurationSet",
+  GetConfigurationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConfigurationSetRequest;
+      output: GetConfigurationSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetConfigurationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetConfigurationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetConfigurationSetCommandOutput> {
-    return deserializeAws_restJson1GetConfigurationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetConfigurationSetCommandInput;
+      output: GetConfigurationSetCommandOutput;
+    };
+  };
 }

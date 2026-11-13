@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetCalendarStateRequest, GetCalendarStateResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetCalendarStateCommand,
-  serializeAws_json1_1GetCalendarStateCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCalendarStateRequest, GetCalendarStateResponse } from "../models/models_0";
+import { GetCalendarState$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCalendarStateCommand}.
+ */
 export interface GetCalendarStateCommandInput extends GetCalendarStateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCalendarStateCommand}.
+ */
 export interface GetCalendarStateCommandOutput extends GetCalendarStateResponse, __MetadataBearer {}
 
 /**
@@ -30,74 +31,71 @@ export interface GetCalendarStateCommandOutput extends GetCalendarStateResponse,
  *          <p>If you specify more than one calendar in a request, the command returns the status of
  *     <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the
  *    request are closed, the status returned is <code>CLOSED</code>.</p>
- *          <p>For more information about Change Calendar, a capability of Amazon Web Services Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">Amazon Web Services Systems Manager Change Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+ *          <p>For more information about Change Calendar, a tool in Amazon Web Services Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">Amazon Web Services Systems Manager Change Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMClient, GetCalendarStateCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, GetCalendarStateCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // GetCalendarStateRequest
+ *   CalendarNames: [ // CalendarNameOrARNList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   AtTime: "STRING_VALUE",
+ * };
  * const command = new GetCalendarStateCommand(input);
  * const response = await client.send(command);
+ * // { // GetCalendarStateResponse
+ * //   State: "OPEN" || "CLOSED",
+ * //   AtTime: "STRING_VALUE",
+ * //   NextTransitionTime: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCalendarStateCommandInput - {@link GetCalendarStateCommandInput}
+ * @returns {@link GetCalendarStateCommandOutput}
  * @see {@link GetCalendarStateCommandInput} for command's `input` shape.
  * @see {@link GetCalendarStateCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidDocument} (client fault)
+ *  <p>The specified SSM document doesn't exist.</p>
+ *
+ * @throws {@link InvalidDocumentType} (client fault)
+ *  <p>The SSM document type isn't valid. Valid document types are described in the
+ *     <code>DocumentType</code> property.</p>
+ *
+ * @throws {@link UnsupportedCalendarException} (client fault)
+ *  <p>The calendar entry contained in the specified SSM document isn't supported.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class GetCalendarStateCommand extends $Command<
-  GetCalendarStateCommandInput,
-  GetCalendarStateCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCalendarStateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCalendarStateCommandInput, GetCalendarStateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "GetCalendarStateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCalendarStateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCalendarStateResponse.filterSensitiveLog,
+export class GetCalendarStateCommand extends command<GetCalendarStateCommandInput, GetCalendarStateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCalendarState",
+  GetCalendarState$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCalendarStateRequest;
+      output: GetCalendarStateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCalendarStateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetCalendarStateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCalendarStateCommandOutput> {
-    return deserializeAws_json1_1GetCalendarStateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCalendarStateCommandInput;
+      output: GetCalendarStateCommandOutput;
+    };
+  };
 }

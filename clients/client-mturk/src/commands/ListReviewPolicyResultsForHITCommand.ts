@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListReviewPolicyResultsForHITRequest, ListReviewPolicyResultsForHITResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1ListReviewPolicyResultsForHITCommand,
-  serializeAws_json1_1ListReviewPolicyResultsForHITCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReviewPolicyResultsForHITRequest, ListReviewPolicyResultsForHITResponse } from "../models/models_0";
+import { ListReviewPolicyResultsForHIT$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReviewPolicyResultsForHITCommand}.
+ */
 export interface ListReviewPolicyResultsForHITCommandInput extends ListReviewPolicyResultsForHITRequest {}
-export interface ListReviewPolicyResultsForHITCommandOutput
-  extends ListReviewPolicyResultsForHITResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListReviewPolicyResultsForHITCommand}.
+ */
+export interface ListReviewPolicyResultsForHITCommandOutput extends ListReviewPolicyResultsForHITResponse, __MetadataBearer {}
 
 /**
  * <p>
@@ -36,71 +35,147 @@ export interface ListReviewPolicyResultsForHITCommandOutput
  * ```javascript
  * import { MTurkClient, ListReviewPolicyResultsForHITCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, ListReviewPolicyResultsForHITCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // ListReviewPolicyResultsForHITRequest
+ *   HITId: "STRING_VALUE", // required
+ *   PolicyLevels: [ // ReviewPolicyLevelList
+ *     "Assignment" || "HIT",
+ *   ],
+ *   RetrieveActions: true || false,
+ *   RetrieveResults: true || false,
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListReviewPolicyResultsForHITCommand(input);
  * const response = await client.send(command);
+ * // { // ListReviewPolicyResultsForHITResponse
+ * //   HITId: "STRING_VALUE",
+ * //   AssignmentReviewPolicy: { // ReviewPolicy
+ * //     PolicyName: "STRING_VALUE", // required
+ * //     Parameters: [ // PolicyParameterList
+ * //       { // PolicyParameter
+ * //         Key: "STRING_VALUE",
+ * //         Values: [ // StringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         MapEntries: [ // ParameterMapEntryList
+ * //           { // ParameterMapEntry
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * //   HITReviewPolicy: {
+ * //     PolicyName: "STRING_VALUE", // required
+ * //     Parameters: [
+ * //       {
+ * //         Key: "STRING_VALUE",
+ * //         Values: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         MapEntries: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * //   AssignmentReviewReport: { // ReviewReport
+ * //     ReviewResults: [ // ReviewResultDetailList
+ * //       { // ReviewResultDetail
+ * //         ActionId: "STRING_VALUE",
+ * //         SubjectId: "STRING_VALUE",
+ * //         SubjectType: "STRING_VALUE",
+ * //         QuestionId: "STRING_VALUE",
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ReviewActions: [ // ReviewActionDetailList
+ * //       { // ReviewActionDetail
+ * //         ActionId: "STRING_VALUE",
+ * //         ActionName: "STRING_VALUE",
+ * //         TargetId: "STRING_VALUE",
+ * //         TargetType: "STRING_VALUE",
+ * //         Status: "Intended" || "Succeeded" || "Failed" || "Cancelled",
+ * //         CompleteTime: new Date("TIMESTAMP"),
+ * //         Result: "STRING_VALUE",
+ * //         ErrorCode: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * //   HITReviewReport: {
+ * //     ReviewResults: [
+ * //       {
+ * //         ActionId: "STRING_VALUE",
+ * //         SubjectId: "STRING_VALUE",
+ * //         SubjectType: "STRING_VALUE",
+ * //         QuestionId: "STRING_VALUE",
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ReviewActions: [
+ * //       {
+ * //         ActionId: "STRING_VALUE",
+ * //         ActionName: "STRING_VALUE",
+ * //         TargetId: "STRING_VALUE",
+ * //         TargetType: "STRING_VALUE",
+ * //         Status: "Intended" || "Succeeded" || "Failed" || "Cancelled",
+ * //         CompleteTime: new Date("TIMESTAMP"),
+ * //         Result: "STRING_VALUE",
+ * //         ErrorCode: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListReviewPolicyResultsForHITCommandInput - {@link ListReviewPolicyResultsForHITCommandInput}
+ * @returns {@link ListReviewPolicyResultsForHITCommandOutput}
  * @see {@link ListReviewPolicyResultsForHITCommandInput} for command's `input` shape.
  * @see {@link ListReviewPolicyResultsForHITCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class ListReviewPolicyResultsForHITCommand extends $Command<
-  ListReviewPolicyResultsForHITCommandInput,
-  ListReviewPolicyResultsForHITCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReviewPolicyResultsForHITCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReviewPolicyResultsForHITCommandInput, ListReviewPolicyResultsForHITCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "ListReviewPolicyResultsForHITCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReviewPolicyResultsForHITRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReviewPolicyResultsForHITResponse.filterSensitiveLog,
+export class ListReviewPolicyResultsForHITCommand extends command<ListReviewPolicyResultsForHITCommandInput, ListReviewPolicyResultsForHITCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReviewPolicyResultsForHIT",
+  ListReviewPolicyResultsForHIT$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReviewPolicyResultsForHITRequest;
+      output: ListReviewPolicyResultsForHITResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReviewPolicyResultsForHITCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListReviewPolicyResultsForHITCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListReviewPolicyResultsForHITCommandOutput> {
-    return deserializeAws_json1_1ListReviewPolicyResultsForHITCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReviewPolicyResultsForHITCommandInput;
+      output: ListReviewPolicyResultsForHITCommandOutput;
+    };
+  };
 }

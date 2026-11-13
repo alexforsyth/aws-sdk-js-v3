@@ -1,352 +1,223 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-export enum AbortAction {
-  CANCEL = "CANCEL",
-}
-
-export enum JobExecutionFailureType {
-  ALL = "ALL",
-  FAILED = "FAILED",
-  REJECTED = "REJECTED",
-  TIMED_OUT = "TIMED_OUT",
-}
+// smithy-typescript generated code
+import type {
+  AbortAction,
+  ActionType,
+  AggregationTypeName,
+  AlertTargetType,
+  ApplicationProtocol,
+  AuditCheckRunStatus,
+  AuditFindingSeverity,
+  AuditFrequency,
+  AuditMitigationActionsExecutionStatus,
+  AuditMitigationActionsTaskStatus,
+  AuditTaskStatus,
+  AuditTaskType,
+  AuthDecision,
+  AuthenticationType,
+  AuthorizerStatus,
+  AwsJobAbortCriteriaAbortAction,
+  AwsJobAbortCriteriaFailureType,
+  CACertificateUpdateAction,
+  CannedAccessControlList,
+  CertificateProviderOperation,
+  CommandNamespace,
+  CommandParameterType,
+  CommandParameterValueComparisonOperator,
+  ComparisonOperator,
+  ConfidenceLevel,
+  ConfigName,
+  CustomMetricType,
+  DayOfWeek,
+  DeviceCertificateUpdateAction,
+  DimensionType,
+  DimensionValueOperator,
+  DynamoKeyType,
+  FleetMetricUnit,
+  InfluxDBSecretType,
+  InfluxDBTimestampUnit,
+  InfluxDBVersion,
+  JobEndBehavior,
+  JobExecutionFailureType,
+  LogLevel,
+  MessageFormat,
+  OTAUpdateStatus,
+  OutputFormat,
+  PackageVersionStatus,
+  PolicyTemplateName,
+  Protocol,
+  ResourceType,
+  RetryableFailureType,
+  SbomValidationStatus,
+  ServiceType,
+  TargetSelection,
+  TemplateType,
+  ThingPrincipalType,
+  TopicRuleDestinationStatus,
+  VerificationState,
+} from "./enums";
 
 /**
  * <p>The criteria that determine when and how a job abort takes place.</p>
+ * @public
  */
 export interface AbortCriteria {
   /**
    * <p>The type of job execution failures that can initiate a job abort.</p>
+   * @public
    */
-  failureType: JobExecutionFailureType | string | undefined;
+  failureType: JobExecutionFailureType | undefined;
 
   /**
    * <p>The type of job action to take to initiate the job abort.</p>
+   * @public
    */
-  action: AbortAction | string | undefined;
+  action: AbortAction | undefined;
 
   /**
-   * <p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>
-   *         <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>
+   * <p>The minimum percentage of job execution failures that must occur to initiate the
+   *             job abort.</p>
+   *          <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99,
+   *             but not 10.999).</p>
+   * @public
    */
   thresholdPercentage: number | undefined;
 
   /**
-   * <p>The minimum number of things which must receive job execution notifications before the job
-   *             can be aborted.</p>
+   * <p>The minimum number of things which must receive job execution notifications before
+   *             the job can be aborted.</p>
+   * @public
    */
   minNumberOfExecutedThings: number | undefined;
 }
 
-export namespace AbortCriteria {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AbortCriteria): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The criteria that determine when and how a job abort takes place.</p>
+ * @public
  */
 export interface AbortConfig {
   /**
    * <p>The list of criteria that determine when and how to abort the job.</p>
+   * @public
    */
   criteriaList: AbortCriteria[] | undefined;
 }
 
-export namespace AbortConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AbortConfig): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The input for the AcceptCertificateTransfer operation.</p>
+ * @public
  */
 export interface AcceptCertificateTransferRequest {
   /**
    * <p>The ID of the certificate. (The last part of the certificate ARN contains the
    *          certificate ID.)</p>
+   * @public
    */
   certificateId: string | undefined;
 
   /**
    * <p>Specifies whether the certificate is active.</p>
+   * @public
    */
-  setAsActive?: boolean;
-}
-
-export namespace AcceptCertificateTransferRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AcceptCertificateTransferRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An unexpected error has occurred.</p>
- */
-export interface InternalFailureException extends __SmithyException, $MetadataBearer {
-  name: "InternalFailureException";
-  $fault: "server";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace InternalFailureException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalFailureException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request is not valid.</p>
- */
-export interface InvalidRequestException extends __SmithyException, $MetadataBearer {
-  name: "InvalidRequestException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace InvalidRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified resource does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The service is temporarily unavailable.</p>
- */
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The rate exceeds the limit.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You can't revert the certificate transfer because the transfer is already
- *          complete.</p>
- */
-export interface TransferAlreadyCompletedException extends __SmithyException, $MetadataBearer {
-  name: "TransferAlreadyCompletedException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace TransferAlreadyCompletedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TransferAlreadyCompletedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You are not authorized to perform this operation.</p>
- */
-export interface UnauthorizedException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace UnauthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedException): any => ({
-    ...obj,
-  });
+  setAsActive?: boolean | undefined;
 }
 
 /**
  * <p>Describes an action that updates a CloudWatch alarm.</p>
+ * @public
  */
 export interface CloudwatchAlarmAction {
   /**
    * <p>The IAM role that allows access to the CloudWatch alarm.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The CloudWatch alarm name.</p>
+   * @public
    */
   alarmName: string | undefined;
 
   /**
    * <p>The reason for the alarm change.</p>
+   * @public
    */
   stateReason: string | undefined;
 
   /**
    * <p>The value of the alarm state. Acceptable values are: OK, ALARM,
    *          INSUFFICIENT_DATA.</p>
+   * @public
    */
   stateValue: string | undefined;
 }
 
-export namespace CloudwatchAlarmAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CloudwatchAlarmAction): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Describes an action that sends data to CloudWatch Logs.</p>
+ * @public
  */
 export interface CloudwatchLogsAction {
   /**
    * <p>The IAM role that allows access to the CloudWatch log.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The CloudWatch log group to which the action sends data.</p>
+   * @public
    */
   logGroupName: string | undefined;
-}
 
-export namespace CloudwatchLogsAction {
   /**
-   * @internal
+   * <p>Indicates whether batches of log records will be extracted and uploaded into CloudWatch. Values include <code>true</code> or <code>false</code>
+   *             <i>(default)</i>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CloudwatchLogsAction): any => ({
-    ...obj,
-  });
+  batchMode?: boolean | undefined;
 }
 
 /**
  * <p>Describes an action that captures a CloudWatch metric.</p>
+ * @public
  */
 export interface CloudwatchMetricAction {
   /**
    * <p>The IAM role that allows access to the CloudWatch metric.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The CloudWatch metric namespace name.</p>
+   * @public
    */
   metricNamespace: string | undefined;
 
   /**
    * <p>The CloudWatch metric name.</p>
+   * @public
    */
   metricName: string | undefined;
 
   /**
    * <p>The CloudWatch metric value.</p>
+   * @public
    */
   metricValue: string | undefined;
 
   /**
    * <p>The <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric
    *             unit</a> supported by CloudWatch.</p>
+   * @public
    */
   metricUnit: string | undefined;
 
   /**
    * <p>An optional <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.</p>
+   * @public
    */
-  metricTimestamp?: string;
-}
-
-export namespace CloudwatchMetricAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CloudwatchMetricAction): any => ({
-    ...obj,
-  });
-}
-
-export enum DynamoKeyType {
-  NUMBER = "NUMBER",
-  STRING = "STRING",
+  metricTimestamp?: string | undefined;
 }
 
 /**
@@ -355,109 +226,106 @@ export enum DynamoKeyType {
  *          values must match the values used when you created the table.</p>
  *          <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a
  *          substitution template syntax. These templates provide data at runtime. The syntax is as
- *          follows: ${<i>sql-expression</i>}.</p>
+ *          follows: $\{<i>sql-expression</i>\}.</p>
  *          <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON
  *          properties, comparisons, calculations, and functions. For example, the following field uses
  *          the third level of the topic:</p>
  *          <p>
- *             <code>"hashKeyValue": "${topic(3)}"</code>
+ *             <code>"hashKeyValue": "$\{topic(3)\}"</code>
  *          </p>
  *          <p>The following field uses the timestamp:</p>
  *          <p>
- *             <code>"rangeKeyValue": "${timestamp()}"</code>
+ *             <code>"rangeKeyValue": "$\{timestamp()\}"</code>
  *          </p>
+ * @public
  */
 export interface DynamoDBAction {
   /**
    * <p>The name of the DynamoDB table.</p>
+   * @public
    */
   tableName: string | undefined;
 
   /**
    * <p>The ARN of the IAM role that grants access to the DynamoDB table.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The type of operation to be performed. This follows the substitution template, so it
-   *          can be <code>${operation}</code>, but the substitution must result in one of the following:
+   *          can be <code>$\{operation\}</code>, but the substitution must result in one of the following:
    *             <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.</p>
+   * @public
    */
-  operation?: string;
+  operation?: string | undefined;
 
   /**
    * <p>The hash key name.</p>
+   * @public
    */
   hashKeyField: string | undefined;
 
   /**
    * <p>The hash key value.</p>
+   * @public
    */
   hashKeyValue: string | undefined;
 
   /**
    * <p>The hash key type. Valid values are "STRING" or "NUMBER"</p>
+   * @public
    */
-  hashKeyType?: DynamoKeyType | string;
+  hashKeyType?: DynamoKeyType | undefined;
 
   /**
    * <p>The range key name.</p>
+   * @public
    */
-  rangeKeyField?: string;
+  rangeKeyField?: string | undefined;
 
   /**
    * <p>The range key value.</p>
+   * @public
    */
-  rangeKeyValue?: string;
+  rangeKeyValue?: string | undefined;
 
   /**
    * <p>The range key type. Valid values are "STRING" or "NUMBER"</p>
+   * @public
    */
-  rangeKeyType?: DynamoKeyType | string;
+  rangeKeyType?: DynamoKeyType | undefined;
 
   /**
    * <p>The action payload. This name can be customized.</p>
+   * @public
    */
-  payloadField?: string;
-}
-
-export namespace DynamoDBAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DynamoDBAction): any => ({
-    ...obj,
-  });
+  payloadField?: string | undefined;
 }
 
 /**
  * <p>The input for the DynamoActionVS action that specifies the DynamoDB table to which
  *          the message data will be written.</p>
+ * @public
  */
 export interface PutItemInput {
   /**
    * <p>The table where the message data will be written.</p>
+   * @public
    */
   tableName: string | undefined;
-}
-
-export namespace PutItemInput {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutItemInput): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>Describes an action to write to a DynamoDB table.</p>
  *          <p>This DynamoDB action writes each attribute in the message payload into it's own
  *          column in the DynamoDB table.</p>
+ * @public
  */
 export interface DynamoDBv2Action {
   /**
    * <p>The ARN of the IAM role that grants access to the DynamoDB table.</p>
+   * @public
    */
   roleArn: string | undefined;
 
@@ -465,22 +333,14 @@ export interface DynamoDBv2Action {
    * <p>Specifies the DynamoDB table to which the message data will be written. For
    *          example:</p>
    *          <p>
-   *             <code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName":
-   *             "my-table" } } }</code>
+   *             <code>\{ "dynamoDBv2": \{ "roleArn": "aws:iam:12341251:my-role" "putItem": \{ "tableName":
+   *             "my-table" \} \} \}</code>
    *          </p>
    *          <p>Each attribute in the message payload will be written to a separate column in the
    *          DynamoDB database.</p>
+   * @public
    */
   putItem: PutItemInput | undefined;
-}
-
-export namespace DynamoDBv2Action {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DynamoDBv2Action): any => ({
-    ...obj,
-  });
 }
 
 /**
@@ -491,54 +351,54 @@ export namespace DynamoDBv2Action {
  *          new rule action or to update an existing rule action, use the
  *          <code>OpenSearch</code> rule action instead. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html">OpenSearchAction</a>.</p>
  *          </note>
+ * @public
  */
 export interface ElasticsearchAction {
   /**
    * <p>The IAM role ARN that has access to OpenSearch.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The endpoint of your OpenSearch domain.</p>
+   * @public
    */
   endpoint: string | undefined;
 
   /**
    * <p>The index where you want to store your data.</p>
+   * @public
    */
   index: string | undefined;
 
   /**
    * <p>The type of document you are storing.</p>
+   * @public
    */
   type: string | undefined;
 
   /**
    * <p>The unique identifier for the document you are storing.</p>
+   * @public
    */
   id: string | undefined;
 }
 
-export namespace ElasticsearchAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ElasticsearchAction): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>
+ * @public
  */
 export interface FirehoseAction {
   /**
    * <p>The IAM role that grants access to the Amazon Kinesis Firehose stream.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The delivery stream name.</p>
+   * @public
    */
   deliveryStreamName: string | undefined;
 
@@ -546,8 +406,9 @@ export interface FirehoseAction {
    * <p>A character separator that will be used to separate records written to the Firehose
    *          stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ','
    *          (comma).</p>
+   * @public
    */
-  separator?: string;
+  separator?: string | undefined;
 
   /**
    * <p>Whether to deliver the Kinesis Data Firehose stream as a batch by using <a href="https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html">
@@ -559,100 +420,116 @@ export interface FirehoseAction {
    *                <code>PutRecordBatch</code>
    *             </a> request. The resulting array can't have more
    *          than 500 records.</p>
+   * @public
    */
-  batchMode?: boolean;
-}
-
-export namespace FirehoseAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FirehoseAction): any => ({
-    ...obj,
-  });
+  batchMode?: boolean | undefined;
 }
 
 /**
  * <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 signing process</a>.</p>
+ * @public
  */
 export interface SigV4Authorization {
   /**
    * <p>The signing region.</p>
+   * @public
    */
   signingRegion: string | undefined;
 
   /**
    * <p>The service name to use while signing with Sig V4.</p>
+   * @public
    */
   serviceName: string | undefined;
 
   /**
    * <p>The ARN of the signing role.</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace SigV4Authorization {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigV4Authorization): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The authorization method used to send messages.</p>
+ * @public
  */
 export interface HttpAuthorization {
   /**
    * <p>Use Sig V4 authorization. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature
    *             Version 4 Signing Process</a>.</p>
+   * @public
    */
-  sigv4?: SigV4Authorization;
+  sigv4?: SigV4Authorization | undefined;
 }
 
-export namespace HttpAuthorization {
+/**
+ * <p>Configuration settings for batching.</p>
+ * @public
+ */
+export interface BatchConfig {
   /**
-   * @internal
+   * <p>The maximum amount of time (in milliseconds) that an outgoing call waits for other calls
+   *          with which it batches messages of the same type. The higher the setting, the longer the
+   *          latency of the batched HTTP Action will be.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: HttpAuthorization): any => ({
-    ...obj,
-  });
+  maxBatchOpenMs?: number | undefined;
+
+  /**
+   * <p>The maximum number of messages that are batched together in a single action
+   *          execution.</p>
+   * @public
+   */
+  maxBatchSize?: number | undefined;
+
+  /**
+   * <p>Maximum size of a message batch, in bytes.</p>
+   * @public
+   */
+  maxBatchSizeBytes?: number | undefined;
+
+  /**
+   * <p>Whether to allow batching messages from different MQTT topics into a single HTTP request.
+   *          By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>
+   *          <note>
+   *             <p>When <code>batchAcrossTopics</code> is enabled, the error payload format changes: the <code>topic</code> field moves from the top level to inside each entry in the <code>payloadsWithMetadata</code> array, since each message in the batch may originate from a different topic.</p>
+   *          </note>
+   *          <note>
+   *             <p>Messages are always batched within the scope of the same account, rule name, target HTTP endpoint URL, and billing group. Messages that differ in any of these attributes are never combined into the same batch, regardless of the <code>batchAcrossTopics</code> setting.</p>
+   *          </note>
+   * @public
+   */
+  batchAcrossTopics?: boolean | undefined;
 }
 
 /**
  * <p>The HTTP action header.</p>
+ * @public
  */
 export interface HttpActionHeader {
   /**
    * <p>The HTTP header key.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>The HTTP header value. Substitution templates are supported.</p>
+   * @public
    */
   value: string | undefined;
 }
 
-export namespace HttpActionHeader {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: HttpActionHeader): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Send data to an HTTPS endpoint.</p>
+ * @public
  */
 export interface HttpAction {
   /**
    * <p>The endpoint URL. If substitution templates are used in the URL, you must also specify a
    *             <code>confirmationUrl</code>. If this is a new destination, a new
    *             <code>TopicRuleDestination</code> is created if possible.</p>
+   * @public
    */
   url: string | undefined;
 
@@ -663,43 +540,168 @@ export interface HttpAction {
    *          confirmationUrl, you must create and enable topic rule destinations that match each
    *          possible value of the substitution template before traffic is allowed to your endpoint
    *          URL.</p>
+   * @public
    */
-  confirmationUrl?: string;
+  confirmationUrl?: string | undefined;
 
   /**
    * <p>The HTTP headers to send with the message data.</p>
+   * @public
    */
-  headers?: HttpActionHeader[];
+  headers?: HttpActionHeader[] | undefined;
 
   /**
    * <p>The authentication method to use when sending data to an HTTPS endpoint.</p>
+   * @public
    */
-  auth?: HttpAuthorization;
+  auth?: HttpAuthorization | undefined;
+
+  /**
+   * <p>Whether to process the HTTP action messages into a single request. Value can be true or false.</p>
+   * @public
+   */
+  enableBatching?: boolean | undefined;
+
+  /**
+   * <p>The configuration settings for batching. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html">
+   *          Batching HTTP action messages</a>.</p>
+   * @public
+   */
+  batchConfig?: BatchConfig | undefined;
 }
 
-export namespace HttpAction {
+/**
+ * <p>The batching configuration of an InfluxDB rule action. IoT closes a batch and writes
+ *       it to InfluxDB when the first of the configured limits is reached.</p>
+ * @public
+ */
+export interface InfluxDBBatchConfig {
   /**
-   * @internal
+   * <p>The maximum number of data points to collect in a batch.</p>
+   *          <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+   *       when another configured limit is reached.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: HttpAction): any => ({
-    ...obj,
-  });
+  maxBatchSize?: number | undefined;
+
+  /**
+   * <p>The maximum length of time, in milliseconds, to keep a batch open before writing it to
+   *       InfluxDB.</p>
+   *          <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+   *       when another configured limit is reached.</p>
+   * @public
+   */
+  maxBatchOpenMs?: number | undefined;
+
+  /**
+   * <p>The maximum size of a batch, in bytes, before IoT writes it to InfluxDB.</p>
+   *          <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+   *       when another configured limit is reached.</p>
+   * @public
+   */
+  maxBatchSizeBytes?: number | undefined;
+
+  /**
+   * <p>Specifies whether to collect data points from different topics into the same
+   *       batch.</p>
+   *          <p>If omitted or <code>false</code>, IoT batches data points for each topic
+   *       separately.</p>
+   * @public
+   */
+  batchAcrossTopics?: boolean | undefined;
+}
+
+/**
+ * <p>The InfluxDB rule action converts the message payload into InfluxDB line protocol. It
+ *       writes the result to a table in an InfluxDB database. The database can be an Amazon
+ *       Timestream for InfluxDB instance or a self-managed InfluxDB cluster.</p>
+ *          <p>The action connects to InfluxDB through an InfluxDB topic rule destination, which must
+ *       be in the <code>ENABLED</code> state before the action can write data.</p>
+ * @public
+ */
+export interface InfluxDBAction {
+  /**
+   * <p>The ARN of the InfluxDB topic rule destination that identifies the InfluxDB instance to
+   *       write to.</p>
+   * @public
+   */
+  destinationArn: string | undefined;
+
+  /**
+   * <p>The ARN of the role that grants permission to retrieve the InfluxDB API token from
+   *       Amazon Web Services Secrets Manager.</p>
+   * @public
+   */
+  roleArn: string | undefined;
+
+  /**
+   * <p>The name of the InfluxDB database to write to. In InfluxDB 2, this is the name of the
+   *       bucket.</p>
+   * @public
+   */
+  databaseName: string | undefined;
+
+  /**
+   * <p>The name of the table to write the data point to. This is the measurement name of the
+   *       InfluxDB line protocol record.</p>
+   *          <p>Accepts substitution templates.</p>
+   * @public
+   */
+  tableName: string | undefined;
+
+  /**
+   * <p>The name of the InfluxDB organization that owns the database.</p>
+   *          <p>A write to an InfluxDB 2 instance fails if this value isn't set. This value isn't used
+   *       when the destination is an InfluxDB 3 instance.</p>
+   * @public
+   */
+  organization?: string | undefined;
+
+  /**
+   * <p>The set of tags to write with each data point. Tags are the indexed metadata of an
+   *       InfluxDB data point.</p>
+   *          <p>Tag names and tag values accept substitution templates. A tag name can't use the
+   *         <code>@\{...\}</code> per-element form. A tag name must resolve to the same value for every
+   *       element of an array payload.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The precision of the timestamp written with each data point. Valid values are
+   *         <code>s</code> (seconds), <code>ms</code> (milliseconds), <code>us</code> (microseconds),
+   *       and <code>ns</code> (nanoseconds).</p>
+   *          <p>If omitted, the topic rule action uses <code>ms</code>.</p>
+   * @public
+   */
+  timestampUnit?: InfluxDBTimestampUnit | undefined;
+
+  /**
+   * <p>The batching configuration for the action. When present, IoT collects data points
+   *       from multiple messages and writes them to InfluxDB in a single request.</p>
+   *          <p>If omitted, each message is written to InfluxDB in its own request.</p>
+   * @public
+   */
+  batchConfig?: InfluxDBBatchConfig | undefined;
 }
 
 /**
  * <p>Sends message data to an IoT Analytics channel.</p>
+ * @public
  */
 export interface IotAnalyticsAction {
   /**
    * <p>(deprecated) The ARN of the IoT Analytics channel to which message data will be
    *          sent.</p>
+   * @public
    */
-  channelArn?: string;
+  channelArn?: string | undefined;
 
   /**
    * <p>The name of the IoT Analytics channel to which message data will be sent.</p>
+   * @public
    */
-  channelName?: string;
+  channelName?: string | undefined;
 
   /**
    * <p>Whether to process the action as a batch. The default value is
@@ -709,31 +711,26 @@ export interface IotAnalyticsAction {
    *                <code>BatchPutMessage</code>
    *             </a> to the IoT Analytics channel. The resulting array can't have more
    *          than 100 messages.</p>
+   * @public
    */
-  batchMode?: boolean;
+  batchMode?: boolean | undefined;
 
   /**
    * <p>The ARN of the role which has a policy that grants IoT Analytics permission to send
    *          message data via IoT Analytics (iotanalytics:BatchPutMessage).</p>
+   * @public
    */
-  roleArn?: string;
-}
-
-export namespace IotAnalyticsAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IotAnalyticsAction): any => ({
-    ...obj,
-  });
+  roleArn?: string | undefined;
 }
 
 /**
  * <p>Sends an input to an IoT Events detector.</p>
+ * @public
  */
 export interface IotEventsAction {
   /**
    * <p>The name of the IoT Events input.</p>
+   * @public
    */
   inputName: string | undefined;
 
@@ -743,8 +740,9 @@ export interface IotEventsAction {
    *         <code>messageId</code>--a new UUID value will be assigned.</p>
    *          <p>Assign a value to this property to ensure that only one input (message) with a given
    *             <code>messageId</code> will be processed by an IoT Events detector.</p>
+   * @public
    */
-  messageId?: string;
+  messageId?: string | undefined;
 
   /**
    * <p>Whether to process the event actions as a batch. The default value is
@@ -757,53 +755,41 @@ export interface IotEventsAction {
    *                <code>BatchPutMessage</code>
    *             </a>.  The resulting array can't have more
    *          than 10 messages.</p>
+   * @public
    */
-  batchMode?: boolean;
+  batchMode?: boolean | undefined;
 
   /**
    * <p>The ARN of the role that grants IoT permission to send an input to an IoT
    *       Events detector. ("Action":"iotevents:BatchPutMessage").</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace IotEventsAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IotEventsAction): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>An asset property timestamp entry containing the following information.</p>
+ * @public
  */
 export interface AssetPropertyTimestamp {
   /**
    * <p>A string that contains the time in seconds since epoch. Accepts substitution
    *       templates.</p>
+   * @public
    */
   timeInSeconds: string | undefined;
 
   /**
    * <p>Optional. A string that contains the nanosecond time offset. Accepts substitution
    *       templates.</p>
+   * @public
    */
-  offsetInNanos?: string;
-}
-
-export namespace AssetPropertyTimestamp {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetPropertyTimestamp): any => ({
-    ...obj,
-  });
+  offsetInNanos?: string | undefined;
 }
 
 /**
  * <p>Contains an asset property value (of a single type).</p>
+ * @public
  */
 export type AssetPropertyVariant =
   | AssetPropertyVariant.BooleanValueMember
@@ -812,9 +798,13 @@ export type AssetPropertyVariant =
   | AssetPropertyVariant.StringValueMember
   | AssetPropertyVariant.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace AssetPropertyVariant {
   /**
    * <p>Optional. The string value of the value entry. Accepts substitution templates.</p>
+   * @public
    */
   export interface StringValueMember {
     stringValue: string;
@@ -827,6 +817,7 @@ export namespace AssetPropertyVariant {
   /**
    * <p>Optional. A string that contains the integer value of the value entry. Accepts
    *       substitution templates.</p>
+   * @public
    */
   export interface IntegerValueMember {
     stringValue?: never;
@@ -839,6 +830,7 @@ export namespace AssetPropertyVariant {
   /**
    * <p>Optional. A string that contains the double value of the value entry. Accepts substitution
    *       templates.</p>
+   * @public
    */
   export interface DoubleValueMember {
     stringValue?: never;
@@ -851,6 +843,7 @@ export namespace AssetPropertyVariant {
   /**
    * <p>Optional. A string that contains the boolean value (<code>true</code> or
    *         <code>false</code>) of the value entry. Accepts substitution templates.</p>
+   * @public
    */
   export interface BooleanValueMember {
     stringValue?: never;
@@ -860,6 +853,9 @@ export namespace AssetPropertyVariant {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     stringValue?: never;
     integerValue?: never;
@@ -868,6 +864,10 @@ export namespace AssetPropertyVariant {
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     stringValue: (value: string) => T;
     integerValue: (value: string) => T;
@@ -875,382 +875,498 @@ export namespace AssetPropertyVariant {
     booleanValue: (value: string) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: AssetPropertyVariant, visitor: Visitor<T>): T => {
-    if (value.stringValue !== undefined) return visitor.stringValue(value.stringValue);
-    if (value.integerValue !== undefined) return visitor.integerValue(value.integerValue);
-    if (value.doubleValue !== undefined) return visitor.doubleValue(value.doubleValue);
-    if (value.booleanValue !== undefined) return visitor.booleanValue(value.booleanValue);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetPropertyVariant): any => {
-    if (obj.stringValue !== undefined) return { stringValue: obj.stringValue };
-    if (obj.integerValue !== undefined) return { integerValue: obj.integerValue };
-    if (obj.doubleValue !== undefined) return { doubleValue: obj.doubleValue };
-    if (obj.booleanValue !== undefined) return { booleanValue: obj.booleanValue };
-    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-  };
 }
 
 /**
  * <p>An asset property value entry containing the following information.</p>
+ * @public
  */
 export interface AssetPropertyValue {
   /**
    * <p>The value of the asset property.</p>
+   * @public
    */
   value: AssetPropertyVariant | undefined;
 
   /**
    * <p>The asset property value timestamp.</p>
+   * @public
    */
   timestamp: AssetPropertyTimestamp | undefined;
 
   /**
    * <p>Optional. A string that describes the quality of the value. Accepts substitution
    *       templates. Must be <code>GOOD</code>, <code>BAD</code>, or <code>UNCERTAIN</code>.</p>
+   * @public
    */
-  quality?: string;
-}
-
-export namespace AssetPropertyValue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssetPropertyValue): any => ({
-    ...obj,
-    ...(obj.value && { value: AssetPropertyVariant.filterSensitiveLog(obj.value) }),
-  });
+  quality?: string | undefined;
 }
 
 /**
  * <p>An asset property value entry containing the following information.</p>
+ * @public
  */
 export interface PutAssetPropertyValueEntry {
   /**
    * <p>Optional. A unique identifier for this entry that you can define to better track which
    *       message caused an error in case of failure. Accepts substitution templates. Defaults to a new
    *       UUID.</p>
+   * @public
    */
-  entryId?: string;
+  entryId?: string | undefined;
 
   /**
    * <p>The ID of the IoT SiteWise asset. You must specify either a <code>propertyAlias</code>
    *       or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution
    *       templates.</p>
+   * @public
    */
-  assetId?: string;
+  assetId?: string | undefined;
 
   /**
    * <p>The ID of the asset's property. You must specify either a <code>propertyAlias</code> or
    *       both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution
    *       templates.</p>
+   * @public
    */
-  propertyId?: string;
+  propertyId?: string | undefined;
 
   /**
    * <p>The name of the property alias associated with your asset property. You must specify
    *       either a <code>propertyAlias</code> or both an <code>aliasId</code> and a
    *         <code>propertyId</code>. Accepts substitution templates.</p>
+   * @public
    */
-  propertyAlias?: string;
+  propertyAlias?: string | undefined;
 
   /**
    * <p>A list of property values to insert that each contain timestamp, quality, and value (TQV)
    *       information.</p>
+   * @public
    */
   propertyValues: AssetPropertyValue[] | undefined;
-}
-
-export namespace PutAssetPropertyValueEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutAssetPropertyValueEntry): any => ({
-    ...obj,
-    ...(obj.propertyValues && {
-      propertyValues: obj.propertyValues.map((item) => AssetPropertyValue.filterSensitiveLog(item)),
-    }),
-  });
 }
 
 /**
  * <p>Describes an action to send data from an MQTT message that triggered the rule to IoT
  *       SiteWise asset properties.</p>
+ * @public
  */
 export interface IotSiteWiseAction {
   /**
    * <p>A list of asset property value entries.</p>
+   * @public
    */
   putAssetPropertyValueEntries: PutAssetPropertyValueEntry[] | undefined;
 
   /**
    * <p>The ARN of the role that grants IoT permission to send an asset property value to IoT SiteWise. (<code>"Action": "iotsitewise:BatchPutAssetPropertyValue"</code>). The trust
    *       policy can restrict access to specific asset hierarchy paths.</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace IotSiteWiseAction {
+/**
+ * <p>Specifies a Kafka header using key-value pairs when you create a Rule’s Kafka Action.
+ *          You can use these headers to route data from IoT clients to downstream Kafka clusters
+ *          without modifying your message payload.</p>
+ *          <p>For more information about Rule's Kafka action, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/apache-kafka-rule-action.html">Apache Kafka</a>.
+ *       </p>
+ * @public
+ */
+export interface KafkaActionHeader {
   /**
-   * @internal
+   * <p>The key of the Kafka header.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: IotSiteWiseAction): any => ({
-    ...obj,
-  });
+  key: string | undefined;
+
+  /**
+   * <p>The value of the Kafka header.</p>
+   * @public
+   */
+  value: string | undefined;
 }
 
 /**
  * <p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>
+ * @public
  */
 export interface KafkaAction {
   /**
    * <p>The ARN of Kafka action's VPC <code>TopicRuleDestination</code>.</p>
+   * @public
    */
   destinationArn: string | undefined;
 
   /**
    * <p>The Kafka topic for messages to be sent to the Kafka broker.</p>
+   * @public
    */
   topic: string | undefined;
 
   /**
    * <p>The Kafka message key.</p>
+   * @public
    */
-  key?: string;
+  key?: string | undefined;
 
   /**
    * <p>The Kafka message partition.</p>
+   * @public
    */
-  partition?: string;
+  partition?: string | undefined;
 
   /**
    * <p>Properties of the Apache Kafka producer client.</p>
+   * @public
    */
-  clientProperties: { [key: string]: string } | undefined;
-}
+  clientProperties: Record<string, string> | undefined;
 
-export namespace KafkaAction {
   /**
-   * @internal
+   * <p>The list of Kafka headers that you specify.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: KafkaAction): any => ({
-    ...obj,
-  });
+  headers?: KafkaActionHeader[] | undefined;
 }
 
 /**
  * <p>Describes an action to write data to an Amazon Kinesis stream.</p>
+ * @public
  */
 export interface KinesisAction {
   /**
    * <p>The ARN of the IAM role that grants access to the Amazon Kinesis stream.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The name of the Amazon Kinesis stream.</p>
+   * @public
    */
   streamName: string | undefined;
 
   /**
    * <p>The partition key.</p>
+   * @public
    */
-  partitionKey?: string;
-}
-
-export namespace KinesisAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KinesisAction): any => ({
-    ...obj,
-  });
+  partitionKey?: string | undefined;
 }
 
 /**
  * <p>Describes an action to invoke a Lambda function.</p>
+ * @public
  */
 export interface LambdaAction {
   /**
    * <p>The ARN of the Lambda function.</p>
+   * @public
    */
   functionArn: string | undefined;
 }
 
-export namespace LambdaAction {
+/**
+ * <p>Describes how to interpret an application-defined timestamp value from an MQTT message
+ *          payload and the precision of that value.</p>
+ * @public
+ */
+export interface LocationTimestamp {
   /**
-   * @internal
+   * <p>An expression that returns a long epoch time value.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: LambdaAction): any => ({
-    ...obj,
-  });
+  value: string | undefined;
+
+  /**
+   * <p>The precision of the timestamp value that results from the expression
+   *          described in <code>value</code>.</p>
+   *          <p>Valid values:  <code>SECONDS</code> | <code>MILLISECONDS</code> |
+   *          <code>MICROSECONDS</code> | <code>NANOSECONDS</code>. The default is
+   *          <code>MILLISECONDS</code>.</p>
+   * @public
+   */
+  unit?: string | undefined;
+}
+
+/**
+ * <p>The Amazon Location rule action sends device location updates from
+ *          an MQTT message to an Amazon Location tracker resource.</p>
+ * @public
+ */
+export interface LocationAction {
+  /**
+   * <p>The IAM role that grants permission to write to the Amazon Location resource.</p>
+   * @public
+   */
+  roleArn: string | undefined;
+
+  /**
+   * <p>The name of the tracker resource in Amazon Location in which the location is updated.</p>
+   * @public
+   */
+  trackerName: string | undefined;
+
+  /**
+   * <p>The unique ID of the device providing the location data.</p>
+   * @public
+   */
+  deviceId: string | undefined;
+
+  /**
+   * <p>The time that the location data was sampled. The default value is
+   *       the time the MQTT message was processed.</p>
+   * @public
+   */
+  timestamp?: LocationTimestamp | undefined;
+
+  /**
+   * <p>A string that evaluates to a double value that represents the
+   *          latitude of the device's location.</p>
+   * @public
+   */
+  latitude: string | undefined;
+
+  /**
+   * <p>A string that evaluates to a double value that represents the
+   *          longitude of the device's location.</p>
+   * @public
+   */
+  longitude: string | undefined;
 }
 
 /**
  * <p>Describes an action that writes data to an Amazon OpenSearch Service
  *          domain.</p>
+ * @public
  */
 export interface OpenSearchAction {
   /**
    * <p>The IAM role ARN that has access to OpenSearch.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The endpoint of your OpenSearch domain.</p>
+   * @public
    */
   endpoint: string | undefined;
 
   /**
    * <p>The OpenSearch index where you want to store your data.</p>
+   * @public
    */
   index: string | undefined;
 
   /**
    * <p>The type of document you are storing.</p>
+   * @public
    */
   type: string | undefined;
 
   /**
    * <p>The unique identifier for the document you are storing.</p>
+   * @public
    */
   id: string | undefined;
 }
 
-export namespace OpenSearchAction {
+/**
+ * <p>A key-value pair that you define in the header. Both the key and the value are either
+ *          literal strings or valid <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+ *             templates</a>.</p>
+ * @public
+ */
+export interface UserProperty {
   /**
-   * @internal
+   * <p>A key to be specified in <code>UserProperty</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: OpenSearchAction): any => ({
-    ...obj,
-  });
+  key: string | undefined;
+
+  /**
+   * <p>A value to be specified in <code>UserProperty</code>.</p>
+   * @public
+   */
+  value: string | undefined;
+}
+
+/**
+ * <p>Specifies MQTT Version 5.0 headers information. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html"> MQTT</a> from
+ *          Amazon Web Services IoT Core Developer Guide.</p>
+ * @public
+ */
+export interface MqttHeaders {
+  /**
+   * <p>An <code>Enum</code> string value that indicates whether the payload is formatted as
+   *          UTF-8.</p>
+   *          <p>Valid values are <code>UNSPECIFIED_BYTES</code> and <code>UTF8_DATA</code>.</p>
+   *          <p>For more information, see <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901111">
+   *          Payload Format Indicator</a> from the MQTT Version 5.0 specification.</p>
+   *          <p>Supports <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+   *          templates</a>.</p>
+   * @public
+   */
+  payloadFormatIndicator?: string | undefined;
+
+  /**
+   * <p>A UTF-8 encoded string that describes the content of the publishing message.</p>
+   *          <p>For more information, see <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901118">
+   *          Content Type</a> from the MQTT Version 5.0 specification.</p>
+   *          <p>Supports <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+   *          templates</a>.</p>
+   * @public
+   */
+  contentType?: string | undefined;
+
+  /**
+   * <p>A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe
+   *          the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard
+   *          characters.</p>
+   *          <p>For more information, see <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901114">
+   *          Response Topic</a> from the MQTT Version 5.0 specification.</p>
+   *          <p>Supports <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+   *          templates</a>.</p>
+   * @public
+   */
+  responseTopic?: string | undefined;
+
+  /**
+   * <p>The base64-encoded binary data used by the sender of the request message to identify which request the response message is
+   *          for when it's received.</p>
+   *          <p>For more information, see <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901115">
+   *          Correlation Data</a> from the MQTT Version 5.0 specification.</p>
+   *          <note>
+   *             <p>
+   *          This binary data must be based64-encoded.
+   *       </p>
+   *          </note>
+   *          <p>Supports <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+   *          templates</a>.</p>
+   * @public
+   */
+  correlationData?: string | undefined;
+
+  /**
+   * <p>A user-defined integer value that will persist a message at the message broker for a
+   *          specified amount of time to ensure that the message will expire if it's no longer relevant to
+   *          the subscriber. The value of <code>messageExpiry</code> represents the number of seconds
+   *          before it expires. For more information about the limits of <code>messageExpiry</code>, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html">Amazon Web Services IoT Core message broker and protocol
+   *             limits and quotas </a> from the Amazon Web Services Reference Guide.</p>
+   *          <p>Supports <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html">substitution
+   *          templates</a>.</p>
+   * @public
+   */
+  messageExpiry?: string | undefined;
+
+  /**
+   * <p>An array of key-value pairs that you define in the MQTT5 header.</p>
+   * @public
+   */
+  userProperties?: UserProperty[] | undefined;
 }
 
 /**
  * <p>Describes an action to republish to another topic.</p>
+ * @public
  */
 export interface RepublishAction {
   /**
    * <p>The ARN of the IAM role that grants access.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The name of the MQTT topic.</p>
+   * @public
    */
   topic: string | undefined;
 
   /**
    * <p>The Quality of Service (QoS) level to use when republishing messages. The default value
    *          is 0.</p>
+   * @public
    */
-  qos?: number;
-}
+  qos?: number | undefined;
 
-export namespace RepublishAction {
   /**
-   * @internal
+   * <p>MQTT Version 5.0 headers information. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html">
+   *          MQTT</a> from the Amazon Web Services IoT Core Developer Guide.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: RepublishAction): any => ({
-    ...obj,
-  });
-}
-
-export enum CannedAccessControlList {
-  AuthenticatedRead = "authenticated-read",
-  AwsExecRead = "aws-exec-read",
-  BucketOwnerFullControl = "bucket-owner-full-control",
-  BucketOwnerRead = "bucket-owner-read",
-  LogDeliveryWrite = "log-delivery-write",
-  Private = "private",
-  PublicRead = "public-read",
-  PublicReadWrite = "public-read-write",
+  headers?: MqttHeaders | undefined;
 }
 
 /**
  * <p>Describes an action to write data to an Amazon S3 bucket.</p>
+ * @public
  */
 export interface S3Action {
   /**
    * <p>The ARN of the IAM role that grants access.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The Amazon S3 bucket.</p>
+   * @public
    */
   bucketName: string | undefined;
 
   /**
    * <p>The object key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html">Actions, resources, and condition keys for Amazon S3</a>.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>The Amazon S3 canned ACL that controls access to the object identified by the object
    *          key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.</p>
+   * @public
    */
-  cannedAcl?: CannedAccessControlList | string;
-}
-
-export namespace S3Action {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Action): any => ({
-    ...obj,
-  });
+  cannedAcl?: CannedAccessControlList | undefined;
 }
 
 /**
  * <p>Describes an action to write a message to a Salesforce IoT Cloud Input
  *          Stream.</p>
+ * @public
  */
 export interface SalesforceAction {
   /**
    * <p>The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The
    *          token is available from the Salesforce IoT Cloud platform after creation of the Input
    *          Stream.</p>
+   * @public
    */
   token: string | undefined;
 
   /**
    * <p>The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from
    *          the Salesforce IoT Cloud platform after creation of the Input Stream.</p>
+   * @public
    */
   url: string | undefined;
 }
 
-export namespace SalesforceAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SalesforceAction): any => ({
-    ...obj,
-  });
-}
-
-export enum MessageFormat {
-  JSON = "JSON",
-  RAW = "RAW",
-}
-
 /**
  * <p>Describes an action to publish to an Amazon SNS topic.</p>
+ * @public
  */
 export interface SnsAction {
   /**
    * <p>The ARN of the SNS topic.</p>
+   * @public
    */
   targetArn: string | undefined;
 
   /**
    * <p>The ARN of the IAM role that grants access.</p>
+   * @public
    */
   roleArn: string | undefined;
 
@@ -1259,82 +1375,65 @@ export interface SnsAction {
    *          and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine
    *          if the payload should be parsed and relevant platform-specific bits of the payload should
    *          be extracted. To read more about SNS message formats, see <a href="https://docs.aws.amazon.com/sns/latest/dg/json-formats.html">https://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.</p>
+   * @public
    */
-  messageFormat?: MessageFormat | string;
-}
-
-export namespace SnsAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnsAction): any => ({
-    ...obj,
-  });
+  messageFormat?: MessageFormat | undefined;
 }
 
 /**
  * <p>Describes an action to publish data to an Amazon SQS queue.</p>
+ * @public
  */
 export interface SqsAction {
   /**
    * <p>The ARN of the IAM role that grants access.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The URL of the Amazon SQS queue.</p>
+   * @public
    */
   queueUrl: string | undefined;
 
   /**
    * <p>Specifies whether to use Base64 encoding.</p>
+   * @public
    */
-  useBase64?: boolean;
-}
-
-export namespace SqsAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SqsAction): any => ({
-    ...obj,
-  });
+  useBase64?: boolean | undefined;
 }
 
 /**
  * <p>Starts execution of a Step Functions state machine.</p>
+ * @public
  */
 export interface StepFunctionsAction {
   /**
    * <p>(Optional) A name will be given to the state machine execution consisting of this
    *       prefix followed by a UUID. Step Functions automatically creates a unique name for each state
    *       machine execution if one is not provided.</p>
+   * @public
    */
-  executionNamePrefix?: string;
+  executionNamePrefix?: string | undefined;
 
   /**
    * <p>The name of the Step Functions state machine whose execution will be started.</p>
+   * @public
    */
   stateMachineName: string | undefined;
 
   /**
    * <p>The ARN of the role that grants IoT permission to start execution of a state machine
    *       ("Action":"states:StartExecution").</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace StepFunctionsAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StepFunctionsAction): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Metadata attributes of the time series that are written in each measure record.</p>
+ * @public
  */
 export interface TimestreamDimension {
   /**
@@ -1346,31 +1445,26 @@ export interface TimestreamDimension {
    *          with <code>ts_</code> or <code>measure_value</code> and
    *          they cannot contain the colon (<code>:</code>)
    *          character.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The value to write in this column of the database record.</p>
+   * @public
    */
   value: string | undefined;
-}
-
-export namespace TimestreamDimension {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimestreamDimension): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>Describes how to interpret an application-defined timestamp value from an MQTT message
  *          payload and the precision of that value.</p>
+ * @public
  */
 export interface TimestreamTimestamp {
   /**
    * <p>An expression that returns a long epoch time value.</p>
+   * @public
    */
   value: string | undefined;
 
@@ -1380,43 +1474,40 @@ export interface TimestreamTimestamp {
    *          <p>Valid values:  <code>SECONDS</code> | <code>MILLISECONDS</code> |
    *             <code>MICROSECONDS</code> | <code>NANOSECONDS</code>. The default is
    *             <code>MILLISECONDS</code>.</p>
+   * @public
    */
   unit: string | undefined;
-}
-
-export namespace TimestreamTimestamp {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimestreamTimestamp): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p>The Timestream rule action writes attributes (measures) from an MQTT message
  *          into an Amazon Timestream table. For more information, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html">Timestream</a>
  *          topic rule action documentation.</p>
+ * @public
  */
 export interface TimestreamAction {
   /**
    * <p>The ARN of the role that grants permission to write to the
    *          Amazon Timestream database table.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>The name of an Amazon Timestream database.</p>
+   * @public
    */
   databaseName: string | undefined;
 
   /**
    * <p>The name of the database table into which to write the measure records.</p>
+   * @public
    */
   tableName: string | undefined;
 
   /**
    * <p>Metadata attributes of the time series that are written in each measure record.</p>
+   * @public
    */
   dimensions: TimestreamDimension[] | undefined;
 
@@ -1428,84 +1519,89 @@ export interface TimestreamAction {
    *          a substitution template.</p>
    *          <p>If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it
    *          processed the rule. </p>
+   * @public
    */
-  timestamp?: TimestreamTimestamp;
-}
-
-export namespace TimestreamAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimestreamAction): any => ({
-    ...obj,
-  });
+  timestamp?: TimestreamTimestamp | undefined;
 }
 
 /**
  * <p>Describes the actions associated with a rule.</p>
+ * @public
  */
 export interface Action {
   /**
    * <p>Write to a DynamoDB table.</p>
+   * @public
    */
-  dynamoDB?: DynamoDBAction;
+  dynamoDB?: DynamoDBAction | undefined;
 
   /**
    * <p>Write to a DynamoDB table. This is a new version of the DynamoDB action. It allows
    *          you to write each attribute in an MQTT message payload into a separate DynamoDB
    *          column.</p>
+   * @public
    */
-  dynamoDBv2?: DynamoDBv2Action;
+  dynamoDBv2?: DynamoDBv2Action | undefined;
 
   /**
    * <p>Invoke a Lambda function.</p>
+   * @public
    */
-  lambda?: LambdaAction;
+  lambda?: LambdaAction | undefined;
 
   /**
    * <p>Publish to an Amazon SNS topic.</p>
+   * @public
    */
-  sns?: SnsAction;
+  sns?: SnsAction | undefined;
 
   /**
    * <p>Publish to an Amazon SQS queue.</p>
+   * @public
    */
-  sqs?: SqsAction;
+  sqs?: SqsAction | undefined;
 
   /**
    * <p>Write data to an Amazon Kinesis stream.</p>
+   * @public
    */
-  kinesis?: KinesisAction;
+  kinesis?: KinesisAction | undefined;
 
   /**
    * <p>Publish to another MQTT topic.</p>
+   * @public
    */
-  republish?: RepublishAction;
+  republish?: RepublishAction | undefined;
 
   /**
    * <p>Write to an Amazon S3 bucket.</p>
+   * @public
    */
-  s3?: S3Action;
+  s3?: S3Action | undefined;
 
   /**
    * <p>Write to an Amazon Kinesis Firehose stream.</p>
+   * @public
    */
-  firehose?: FirehoseAction;
+  firehose?: FirehoseAction | undefined;
 
   /**
    * <p>Capture a CloudWatch metric.</p>
+   * @public
    */
-  cloudwatchMetric?: CloudwatchMetricAction;
+  cloudwatchMetric?: CloudwatchMetricAction | undefined;
 
   /**
    * <p>Change the state of a CloudWatch alarm.</p>
+   * @public
    */
-  cloudwatchAlarm?: CloudwatchAlarmAction;
+  cloudwatchAlarm?: CloudwatchAlarmAction | undefined;
 
   /**
    * <p>Send data to CloudWatch Logs.</p>
+   * @public
    */
-  cloudwatchLogs?: CloudwatchLogsAction;
+  cloudwatchLogs?: CloudwatchLogsAction | undefined;
 
   /**
    * <p>Write data to an Amazon OpenSearch Service domain.</p>
@@ -1515,120 +1611,102 @@ export interface Action {
    *             <code>OpenSearch</code> rule action instead. For more information, see
    *             <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html">OpenSearchAction</a>.</p>
    *          </note>
+   * @public
    */
-  elasticsearch?: ElasticsearchAction;
+  elasticsearch?: ElasticsearchAction | undefined;
 
   /**
    * <p>Send a message to a Salesforce IoT Cloud Input Stream.</p>
+   * @public
    */
-  salesforce?: SalesforceAction;
+  salesforce?: SalesforceAction | undefined;
 
   /**
    * <p>Sends message data to an IoT Analytics channel.</p>
+   * @public
    */
-  iotAnalytics?: IotAnalyticsAction;
+  iotAnalytics?: IotAnalyticsAction | undefined;
 
   /**
    * <p>Sends an input to an IoT Events detector.</p>
+   * @public
    */
-  iotEvents?: IotEventsAction;
+  iotEvents?: IotEventsAction | undefined;
 
   /**
    * <p>Sends data from the MQTT message that triggered the rule to IoT SiteWise asset
    *       properties.</p>
+   * @public
    */
-  iotSiteWise?: IotSiteWiseAction;
+  iotSiteWise?: IotSiteWiseAction | undefined;
 
   /**
    * <p>Starts execution of a Step Functions state machine.</p>
+   * @public
    */
-  stepFunctions?: StepFunctionsAction;
+  stepFunctions?: StepFunctionsAction | undefined;
 
   /**
    * <p>The Timestream rule action writes attributes (measures) from an MQTT message
    *          into an Amazon Timestream table. For more information, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html">Timestream</a>
    *             topic rule action documentation.</p>
+   * @public
    */
-  timestream?: TimestreamAction;
+  timestream?: TimestreamAction | undefined;
 
   /**
    * <p>Send data to an HTTPS endpoint.</p>
+   * @public
    */
-  http?: HttpAction;
+  http?: HttpAction | undefined;
 
   /**
    * <p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>
+   * @public
    */
-  kafka?: KafkaAction;
+  kafka?: KafkaAction | undefined;
 
   /**
    * <p>Write data to an Amazon OpenSearch Service domain.</p>
+   * @public
    */
-  openSearch?: OpenSearchAction;
-}
+  openSearch?: OpenSearchAction | undefined;
 
-export namespace Action {
   /**
-   * @internal
+   * <p>The Amazon Location Service rule action sends device location updates from
+   *          an MQTT message to an Amazon Location tracker resource.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Action): any => ({
-    ...obj,
-  });
-}
+  location?: LocationAction | undefined;
 
-export enum ActionType {
-  CONNECT = "CONNECT",
-  PUBLISH = "PUBLISH",
-  RECEIVE = "RECEIVE",
-  SUBSCRIBE = "SUBSCRIBE",
-}
-
-export enum ComparisonOperator {
-  GREATER_THAN = "greater-than",
-  GREATER_THAN_EQUALS = "greater-than-equals",
-  IN_CIDR_SET = "in-cidr-set",
-  IN_PORT_SET = "in-port-set",
-  IN_SET = "in-set",
-  LESS_THAN = "less-than",
-  LESS_THAN_EQUALS = "less-than-equals",
-  NOT_IN_CIDR_SET = "not-in-cidr-set",
-  NOT_IN_PORT_SET = "not-in-port-set",
-  NOT_IN_SET = "not-in-set",
-}
-
-export enum ConfidenceLevel {
-  HIGH = "HIGH",
-  LOW = "LOW",
-  MEDIUM = "MEDIUM",
+  /**
+   * <p>Write data to an InfluxDB database.</p>
+   * @public
+   */
+  influxDB?: InfluxDBAction | undefined;
 }
 
 /**
  * <p>
  *             The configuration of an ML Detect Security Profile.
  *         </p>
+ * @public
  */
 export interface MachineLearningDetectionConfig {
   /**
    * <p>
    *             The sensitivity of anomalous behavior evaluation. Can be <code>Low</code>, <code>Medium</code>, or <code>High</code>.
    *         </p>
+   * @public
    */
-  confidenceLevel: ConfidenceLevel | string | undefined;
-}
-
-export namespace MachineLearningDetectionConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MachineLearningDetectionConfig): any => ({
-    ...obj,
-  });
+  confidenceLevel: ConfidenceLevel | undefined;
 }
 
 /**
  * <p>A statistical ranking (percentile) that
  *       indicates a threshold value by which a behavior is determined to be in compliance or in
  *       violation of the behavior.</p>
+ * @public
  */
 export interface StatisticalThreshold {
   /**
@@ -1640,74 +1718,65 @@ export interface StatisticalThreshold {
    *       below (<code>comparisonOperator</code>) the value associated with the percentile specified,
    *       then the device is considered to be in compliance with the behavior, otherwise a violation
    *       occurs.</p>
+   * @public
    */
-  statistic?: string;
-}
-
-export namespace StatisticalThreshold {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StatisticalThreshold): any => ({
-    ...obj,
-  });
+  statistic?: string | undefined;
 }
 
 /**
  * <p>The value to be compared with the <code>metric</code>.</p>
+ * @public
  */
 export interface MetricValue {
   /**
    * <p>If the <code>comparisonOperator</code> calls for a numeric value, use this
    *           to specify that numeric value to be compared with the <code>metric</code>.</p>
+   * @public
    */
-  count?: number;
+  count?: number | undefined;
 
   /**
    * <p>If the <code>comparisonOperator</code> calls for a set of CIDRs, use this
    *           to specify that set to be compared with the <code>metric</code>.</p>
+   * @public
    */
-  cidrs?: string[];
+  cidrs?: string[] | undefined;
 
   /**
    * <p>If the <code>comparisonOperator</code> calls for a set of ports, use this
    *           to specify that set to be compared with the <code>metric</code>.</p>
+   * @public
    */
-  ports?: number[];
+  ports?: number[] | undefined;
 
   /**
    * <p>
    *             The numeral value of a metric.
    *         </p>
+   * @public
    */
-  number?: number;
+  number?: number | undefined;
 
   /**
    * <p>
    *             The numeral values of a metric.
    *         </p>
+   * @public
    */
-  numbers?: number[];
+  numbers?: number[] | undefined;
 
   /**
    * <p>
    *             The string values of a metric.
    *         </p>
+   * @public
    */
-  strings?: string[];
-}
-
-export namespace MetricValue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricValue): any => ({
-    ...obj,
-  });
+  strings?: string[] | undefined;
 }
 
 /**
  * <p>The criteria by which the behavior is determined to be normal.</p>
+ * @public
  */
 export interface BehaviorCriteria {
   /**
@@ -1735,13 +1804,15 @@ export interface BehaviorCriteria {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  comparisonOperator?: ComparisonOperator | string;
+  comparisonOperator?: ComparisonOperator | undefined;
 
   /**
    * <p>The value to be compared with the <code>metric</code>.</p>
+   * @public
    */
-  value?: MetricValue;
+  value?: MetricValue | undefined;
 
   /**
    * <p>Use this to specify the time duration over which the behavior is evaluated, for those criteria that
@@ -1750,1237 +1821,1144 @@ export interface BehaviorCriteria {
    *       accumulated over this time duration before being used to calculate percentiles, and later,
    *       measurements from an individual device are also accumulated over this time duration before
    *       being given a percentile rank. Cannot be used with list-based metric datatypes.</p>
+   * @public
    */
-  durationSeconds?: number;
+  durationSeconds?: number | undefined;
 
   /**
    * <p>If a device is in violation of the behavior for the specified number of consecutive
    *           datapoints, an alarm occurs. If not specified, the default is 1.</p>
+   * @public
    */
-  consecutiveDatapointsToAlarm?: number;
+  consecutiveDatapointsToAlarm?: number | undefined;
 
   /**
    * <p>If an alarm has occurred and the offending device is no longer in violation of the behavior
    *           for the specified number of consecutive datapoints, the alarm is cleared. If not specified,
    *           the default is 1.</p>
+   * @public
    */
-  consecutiveDatapointsToClear?: number;
+  consecutiveDatapointsToClear?: number | undefined;
 
   /**
    * <p>A statistical ranking (percentile)that
    *       indicates a threshold value by which a behavior is determined to be in compliance or in
    *       violation of the behavior.</p>
+   * @public
    */
-  statisticalThreshold?: StatisticalThreshold;
+  statisticalThreshold?: StatisticalThreshold | undefined;
 
   /**
    * <p>
    *             The configuration of an ML Detect
    *         </p>
+   * @public
    */
-  mlDetectionConfig?: MachineLearningDetectionConfig;
-}
-
-export namespace BehaviorCriteria {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BehaviorCriteria): any => ({
-    ...obj,
-  });
-}
-
-export enum DimensionValueOperator {
-  IN = "IN",
-  NOT_IN = "NOT_IN",
+  mlDetectionConfig?: MachineLearningDetectionConfig | undefined;
 }
 
 /**
  * <p>The dimension of a metric.</p>
+ * @public
  */
 export interface MetricDimension {
   /**
    * <p>A unique identifier for the dimension.</p>
+   * @public
    */
   dimensionName: string | undefined;
 
   /**
    * <p>Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.</p>
+   * @public
    */
-  operator?: DimensionValueOperator | string;
-}
-
-export namespace MetricDimension {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDimension): any => ({
-    ...obj,
-  });
+  operator?: DimensionValueOperator | undefined;
 }
 
 /**
  * <p>A Device Defender security profile behavior.</p>
+ * @public
  */
 export interface Behavior {
   /**
    * <p>The name
    *       you've given to the behavior.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>What is measured by the behavior.</p>
+   * @public
    */
-  metric?: string;
+  metric?: string | undefined;
 
   /**
    * <p>The dimension for a metric in your behavior. For example, using a
    *                 <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric to only MQTT topics where the name matches the pattern specified in the dimension. This can't be used with custom metrics.</p>
+   * @public
    */
-  metricDimension?: MetricDimension;
+  metricDimension?: MetricDimension | undefined;
 
   /**
-   * <p>The criteria that determine if a device is behaving normally in regard to
-   *           the <code>metric</code>.</p>
+   * <p>The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.</p>
+   *          <note>
+   *             <p>In the IoT console, you can choose to be sent an alert through Amazon SNS when IoT Device Defender detects that a device is behaving anomalously.</p>
+   *          </note>
+   * @public
    */
-  criteria?: BehaviorCriteria;
+  criteria?: BehaviorCriteria | undefined;
 
   /**
    * <p>
    *             Suppresses alerts.
    *         </p>
+   * @public
    */
-  suppressAlerts?: boolean;
-}
+  suppressAlerts?: boolean | undefined;
 
-export namespace Behavior {
   /**
-   * @internal
+   * <p>Value indicates exporting metrics related to the behavior when it is true.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Behavior): any => ({
-    ...obj,
-  });
-}
-
-export enum VerificationState {
-  BENIGN_POSITIVE = "BENIGN_POSITIVE",
-  FALSE_POSITIVE = "FALSE_POSITIVE",
-  TRUE_POSITIVE = "TRUE_POSITIVE",
-  UNKNOWN = "UNKNOWN",
+  exportMetric?: boolean | undefined;
 }
 
 /**
  * <p>
  *             The details of a violation event.
  *         </p>
+ * @public
  */
 export interface ViolationEventAdditionalInfo {
   /**
    * <p>
    *             The sensitivity of anomalous behavior evaluation. Can be <code>Low</code>, <code>Medium</code>, or <code>High</code>.
    *         </p>
+   * @public
    */
-  confidenceLevel?: ConfidenceLevel | string;
-}
-
-export namespace ViolationEventAdditionalInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ViolationEventAdditionalInfo): any => ({
-    ...obj,
-  });
+  confidenceLevel?: ConfidenceLevel | undefined;
 }
 
 /**
  * <p>Information about an active Device Defender security profile behavior violation.</p>
+ * @public
  */
 export interface ActiveViolation {
   /**
    * <p>The ID of the active violation.</p>
+   * @public
    */
-  violationId?: string;
+  violationId?: string | undefined;
 
   /**
    * <p>The name of the thing responsible for the active violation.</p>
+   * @public
    */
-  thingName?: string;
+  thingName?: string | undefined;
 
   /**
    * <p>The security profile with the behavior is in violation.</p>
+   * @public
    */
-  securityProfileName?: string;
+  securityProfileName?: string | undefined;
 
   /**
    * <p>The behavior that is being violated.</p>
+   * @public
    */
-  behavior?: Behavior;
+  behavior?: Behavior | undefined;
 
   /**
    * <p>The value of the metric (the measurement) that caused the most recent violation.</p>
+   * @public
    */
-  lastViolationValue?: MetricValue;
+  lastViolationValue?: MetricValue | undefined;
 
   /**
    * <p>
    *             The details of a violation event.
    *         </p>
+   * @public
    */
-  violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
+  violationEventAdditionalInfo?: ViolationEventAdditionalInfo | undefined;
 
   /**
    * <p>The verification state of the violation (detect alarm).</p>
+   * @public
    */
-  verificationState?: VerificationState | string;
+  verificationState?: VerificationState | undefined;
 
   /**
    * <p>The description of the verification state of the violation.</p>
+   * @public
    */
-  verificationStateDescription?: string;
+  verificationStateDescription?: string | undefined;
 
   /**
    * <p>The time the most recent violation occurred.</p>
+   * @public
    */
-  lastViolationTime?: Date;
+  lastViolationTime?: Date | undefined;
 
   /**
    * <p>The time the violation started.</p>
+   * @public
    */
-  violationStartTime?: Date;
-}
-
-export namespace ActiveViolation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ActiveViolation): any => ({
-    ...obj,
-  });
+  violationStartTime?: Date | undefined;
 }
 
 /**
  * <p>The metric you want to retain. Dimensions are optional.</p>
+ * @public
  */
 export interface MetricToRetain {
   /**
    * <p>What is measured by the behavior.</p>
+   * @public
    */
   metric: string | undefined;
 
   /**
    * <p>The dimension of a metric. This can't be used with custom metrics.</p>
+   * @public
    */
-  metricDimension?: MetricDimension;
-}
+  metricDimension?: MetricDimension | undefined;
 
-export namespace MetricToRetain {
   /**
-   * @internal
+   * <p>The value indicates exporting metrics related to the <code>MetricToRetain </code> when it's true.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: MetricToRetain): any => ({
-    ...obj,
-  });
+  exportMetric?: boolean | undefined;
 }
 
 /**
  * <p>Parameters used when defining a mitigation action that move a set of things to a thing group.</p>
+ * @public
  */
 export interface AddThingsToThingGroupParams {
   /**
    * <p>The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you can't add a thing to more than one group in the same hierarchy.</p>
+   * @public
    */
   thingGroupNames: string[] | undefined;
 
   /**
    * <p>Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.</p>
+   * @public
    */
-  overrideDynamicGroups?: boolean;
+  overrideDynamicGroups?: boolean | undefined;
 }
 
-export namespace AddThingsToThingGroupParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddThingsToThingGroupParams): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddThingToBillingGroupRequest {
   /**
    * <p>The name of the billing group.</p>
+   *          <note>
+   *             <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>
+   *          </note>
+   * @public
    */
-  billingGroupName?: string;
+  billingGroupName?: string | undefined;
 
   /**
    * <p>The ARN of the billing group.</p>
+   * @public
    */
-  billingGroupArn?: string;
+  billingGroupArn?: string | undefined;
 
   /**
    * <p>The name of the thing to be added to the billing group.</p>
+   * @public
    */
-  thingName?: string;
+  thingName?: string | undefined;
 
   /**
    * <p>The ARN of the thing to be added to the billing group.</p>
+   * @public
    */
-  thingArn?: string;
+  thingArn?: string | undefined;
 }
 
-export namespace AddThingToBillingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddThingToBillingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddThingToBillingGroupResponse {}
 
-export namespace AddThingToBillingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddThingToBillingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AddThingToThingGroupRequest {
   /**
    * <p>The name of the group to which you are adding a thing.</p>
+   * @public
    */
-  thingGroupName?: string;
+  thingGroupName?: string | undefined;
 
   /**
    * <p>The ARN of the group to which you are adding a thing.</p>
+   * @public
    */
-  thingGroupArn?: string;
+  thingGroupArn?: string | undefined;
 
   /**
    * <p>The name of the thing to add to a group.</p>
+   * @public
    */
-  thingName?: string;
+  thingName?: string | undefined;
 
   /**
    * <p>The ARN of the thing to add to a group.</p>
+   * @public
    */
-  thingArn?: string;
+  thingArn?: string | undefined;
 
   /**
    * <p>Override dynamic thing groups with static thing groups when 10-group limit is
    * 			reached. If a thing belongs to 10 thing groups, and one or more of those groups are
    * 			dynamic thing groups, adding a thing to a static group removes the thing from the last
    * 			dynamic group.</p>
+   * @public
    */
-  overrideDynamicGroups?: boolean;
-}
-
-export namespace AddThingToThingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddThingToThingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface AddThingToThingGroupResponse {}
-
-export namespace AddThingToThingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AddThingToThingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum AggregationTypeName {
-  CARDINALITY = "Cardinality",
-  PERCENTILES = "Percentiles",
-  STATISTICS = "Statistics",
+  overrideDynamicGroups?: boolean | undefined;
 }
 
 /**
+ * @public
+ */
+export interface AddThingToThingGroupResponse {}
+
+/**
  * <p>The type of aggregation queries.</p>
+ * @public
  */
 export interface AggregationType {
   /**
    * <p>The name of the aggregation type.</p>
+   * @public
    */
-  name: AggregationTypeName | string | undefined;
+  name: AggregationTypeName | undefined;
 
   /**
    * <p>A list of the values of aggregation types.</p>
+   * @public
    */
-  values?: string[];
-}
-
-export namespace AggregationType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AggregationType): any => ({
-    ...obj,
-  });
+  values?: string[] | undefined;
 }
 
 /**
  * <p>A structure containing the alert target ARN and the role ARN.</p>
+ * @public
  */
 export interface AlertTarget {
   /**
    * <p>The Amazon Resource Name (ARN) of the notification target to which alerts are sent.</p>
+   * @public
    */
   alertTargetArn: string | undefined;
 
   /**
    * <p>The ARN of the role that grants permission to send alerts to the
    *         notification target.</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace AlertTarget {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AlertTarget): any => ({
-    ...obj,
-  });
-}
-
-export enum AlertTargetType {
-  SNS = "SNS",
-}
-
 /**
  * <p>Describes an IoT policy.</p>
+ * @public
  */
 export interface Policy {
   /**
    * <p>The policy name.</p>
+   * @public
    */
-  policyName?: string;
+  policyName?: string | undefined;
 
   /**
    * <p>The policy ARN.</p>
+   * @public
    */
-  policyArn?: string;
-}
-
-export namespace Policy {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Policy): any => ({
-    ...obj,
-  });
+  policyArn?: string | undefined;
 }
 
 /**
  * <p>Contains information that allowed the authorization.</p>
+ * @public
  */
 export interface Allowed {
   /**
    * <p>A list of policies that allowed the authentication.</p>
+   * @public
    */
-  policies?: Policy[];
+  policies?: Policy[] | undefined;
 }
 
-export namespace Allowed {
+/**
+ * <p>The S3 location.</p>
+ * @public
+ */
+export interface S3Location {
   /**
-   * @internal
+   * <p>The S3 bucket.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Allowed): any => ({
-    ...obj,
-  });
+  bucket?: string | undefined;
+
+  /**
+   * <p>The S3 key.</p>
+   * @public
+   */
+  key?: string | undefined;
+
+  /**
+   * <p>The S3 bucket version.</p>
+   * @public
+   */
+  version?: string | undefined;
 }
 
+/**
+ * <p>A specific software bill of matrerials associated with a software
+ *          package version.</p>
+ * @public
+ */
+export interface Sbom {
+  /**
+   * <p>The S3 location.</p>
+   * @public
+   */
+  s3Location?: S3Location | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateSbomWithPackageVersionRequest {
+  /**
+   * <p>The name of the new software package.</p>
+   * @public
+   */
+  packageName: string | undefined;
+
+  /**
+   * <p>The name of the new package version.</p>
+   * @public
+   */
+  versionName: string | undefined;
+
+  /**
+   * <p>A specific software bill of matrerials associated with a software
+   *          package version.</p>
+   * @public
+   */
+  sbom: Sbom | undefined;
+
+  /**
+   * <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateSbomWithPackageVersionResponse {
+  /**
+   * <p>The name of the new software package.</p>
+   * @public
+   */
+  packageName?: string | undefined;
+
+  /**
+   * <p>The name of the new package version.</p>
+   * @public
+   */
+  versionName?: string | undefined;
+
+  /**
+   * <p>A specific software bill of matrerials associated with a software
+   *          package version.</p>
+   * @public
+   */
+  sbom?: Sbom | undefined;
+
+  /**
+   * <p>The status of the initial validation for the software bill of materials against the Software Package Data Exchange (SPDX) and CycloneDX industry standard formats.</p>
+   * @public
+   */
+  sbomValidationStatus?: SbomValidationStatus | undefined;
+}
+
+/**
+ * @public
+ */
 export interface AssociateTargetsWithJobRequest {
   /**
    * <p>A list of thing group ARNs that define the targets of the job.</p>
+   * @public
    */
   targets: string[] | undefined;
 
   /**
    * <p>The unique identifier you assigned to this job when it was created.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
-   * <p>An optional comment string describing why the job was associated with the targets.</p>
+   * <p>An optional comment string describing why the job was associated with the
+   *             targets.</p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 
   /**
    * <p>The namespace used to indicate that a job is a customer-managed job.</p>
-   *         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that
-   *             contain the value in the following format.</p>
-   *         <p>
+   *          <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to
+   *             MQTT topics that contain the value in the following format.</p>
+   *          <p>
    *             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
    *          </p>
-   *         <note>
-   *             <p>The <code>namespaceId</code> feature is in public preview.</p>
+   *          <note>
+   *             <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html">Setting up IoT Greengrass core devices.</a>
+   *             </p>
    *          </note>
+   * @public
    */
-  namespaceId?: string;
-}
-
-export namespace AssociateTargetsWithJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateTargetsWithJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface AssociateTargetsWithJobResponse {
-  /**
-   * <p>An ARN identifying the job.</p>
-   */
-  jobArn?: string;
-
-  /**
-   * <p>The unique identifier you assigned to this job when it was created.</p>
-   */
-  jobId?: string;
-
-  /**
-   * <p>A short text description of the job.</p>
-   */
-  description?: string;
-}
-
-export namespace AssociateTargetsWithJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateTargetsWithJobResponse): any => ({
-    ...obj,
-  });
+  namespaceId?: string | undefined;
 }
 
 /**
- * <p>A limit has been exceeded.</p>
+ * @public
  */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
+export interface AssociateTargetsWithJobResponse {
   /**
-   * <p>The message for the exception.</p>
+   * <p>An ARN identifying the job.</p>
+   * @public
    */
-  message?: string;
+  jobArn?: string | undefined;
+
+  /**
+   * <p>The unique identifier you assigned to this job when it was created.</p>
+   * @public
+   */
+  jobId?: string | undefined;
+
+  /**
+   * <p>A short text description of the job.</p>
+   * @public
+   */
+  description?: string | undefined;
 }
 
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AttachPolicyRequest {
   /**
    * <p>The name of the policy to attach.</p>
+   * @public
    */
   policyName: string | undefined;
 
   /**
    * <p>The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html">identity</a> to which the policy is attached. For example, a thing group or a certificate.</p>
+   * @public
    */
   target: string | undefined;
 }
 
-export namespace AttachPolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttachPolicyRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The input for the AttachPrincipalPolicy operation.</p>
+ * @public
  */
 export interface AttachPrincipalPolicyRequest {
   /**
    * <p>The policy name.</p>
+   * @public
    */
   policyName: string | undefined;
 
   /**
    * <p>The principal, which can be a certificate ARN (as returned from the CreateCertificate
    *          operation) or an Amazon Cognito ID.</p>
+   * @public
    */
   principal: string | undefined;
 }
 
-export namespace AttachPrincipalPolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttachPrincipalPolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AttachSecurityProfileRequest {
   /**
    * <p>The security profile that is attached.</p>
+   * @public
    */
   securityProfileName: string | undefined;
 
   /**
    * <p>The ARN of the target (thing group) to which the security profile is attached.</p>
+   * @public
    */
   securityProfileTargetArn: string | undefined;
 }
 
-export namespace AttachSecurityProfileRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttachSecurityProfileRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface AttachSecurityProfileResponse {}
-
-export namespace AttachSecurityProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttachSecurityProfileResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>An exception thrown when the version of an entity specified with the
- *             <code>expectedVersion</code> parameter does not match the latest version in the
- *          system.</p>
+ * @public
  */
-export interface VersionConflictException extends __SmithyException, $MetadataBearer {
-  name: "VersionConflictException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace VersionConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VersionConflictException): any => ({
-    ...obj,
-  });
-}
+export interface AttachSecurityProfileResponse {}
 
 /**
  * <p>The input for the AttachThingPrincipal operation.</p>
+ * @public
  */
 export interface AttachThingPrincipalRequest {
   /**
    * <p>The name of the thing.</p>
+   * @public
    */
   thingName: string | undefined;
 
   /**
    * <p>The principal, which can be a certificate ARN (as returned from the
    * 			CreateCertificate operation) or an Amazon Cognito ID.</p>
+   * @public
    */
   principal: string | undefined;
-}
 
-export namespace AttachThingPrincipalRequest {
   /**
-   * @internal
+   * <p>The type of the relation you want to specify when you attach a principal to a thing.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
+   * 						The thing will be the only thing that’s attached to the principal.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.
+   * 						Multiple things can be attached to the principal.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AttachThingPrincipalRequest): any => ({
-    ...obj,
-  });
+  thingPrincipalType?: ThingPrincipalType | undefined;
 }
 
 /**
  * <p>The output from the AttachThingPrincipal operation.</p>
+ * @public
  */
 export interface AttachThingPrincipalResponse {}
 
-export namespace AttachThingPrincipalResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttachThingPrincipalResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The attribute payload.</p>
+ * @public
  */
 export interface AttributePayload {
   /**
    * <p>A JSON string containing up to three key-value pair in JSON format. For example:</p>
-   * 		       <p>
-   * 			         <code>{\"attributes\":{\"string1\":\"string2\"}}</code>
-   * 		       </p>
+   *          <p>
+   *             <code>\{\"attributes\":\{\"string1\":\"string2\"\}\}</code>
+   *          </p>
+   * @public
    */
-  attributes?: { [key: string]: string };
+  attributes?: Record<string, string> | undefined;
 
   /**
    * <p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with
    * 			the attributes stored in the registry, instead of overwriting them.</p>
-   * 		       <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p>
-   * 		       <note>
-   * 			         <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p>
-   * 		       </note>
+   *          <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p>
+   *          <note>
+   *             <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code> or <code>UpdateThingGroup</code>.</p>
+   *          </note>
+   * @public
    */
-  merge?: boolean;
-}
-
-export namespace AttributePayload {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AttributePayload): any => ({
-    ...obj,
-  });
+  merge?: boolean | undefined;
 }
 
 /**
  * <p>Which audit checks are enabled and disabled for this account.</p>
+ * @public
  */
 export interface AuditCheckConfiguration {
   /**
    * <p>True if this audit check is enabled for this account.</p>
+   * @public
    */
-  enabled?: boolean;
-}
+  enabled?: boolean | undefined;
 
-export namespace AuditCheckConfiguration {
   /**
-   * @internal
+   * <p>A structure containing the configName and corresponding configValue for configuring audit checks.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AuditCheckConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditCheckRunStatus {
-  CANCELED = "CANCELED",
-  COMPLETED_COMPLIANT = "COMPLETED_COMPLIANT",
-  COMPLETED_NON_COMPLIANT = "COMPLETED_NON_COMPLIANT",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  WAITING_FOR_DATA_COLLECTION = "WAITING_FOR_DATA_COLLECTION",
+  configuration?: Partial<Record<ConfigName, string>> | undefined;
 }
 
 /**
  * <p>Information about the audit check.</p>
+ * @public
  */
 export interface AuditCheckDetails {
   /**
    * <p>The completion status of this check. One of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION",
    *         "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".</p>
+   * @public
    */
-  checkRunStatus?: AuditCheckRunStatus | string;
+  checkRunStatus?: AuditCheckRunStatus | undefined;
 
   /**
    * <p>True if the check is complete and found all resources compliant.</p>
+   * @public
    */
-  checkCompliant?: boolean;
+  checkCompliant?: boolean | undefined;
 
   /**
    * <p>The number of resources on which the check was performed.</p>
+   * @public
    */
-  totalResourcesCount?: number;
+  totalResourcesCount?: number | undefined;
 
   /**
    * <p>The number of resources that were found noncompliant during the check.</p>
+   * @public
    */
-  nonCompliantResourcesCount?: number;
+  nonCompliantResourcesCount?: number | undefined;
 
   /**
    * <p>
    *             Describes how many of the non-compliant resources created during the evaluation of an audit check were marked as suppressed.
    *         </p>
+   * @public
    */
-  suppressedNonCompliantResourcesCount?: number;
+  suppressedNonCompliantResourcesCount?: number | undefined;
 
   /**
    * <p>The code of any error encountered when this check is performed during this audit.
    *           One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".</p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
    * <p>The message associated with any error encountered when this check is performed during this audit.</p>
+   * @public
    */
-  message?: string;
+  message?: string | undefined;
 }
 
-export namespace AuditCheckDetails {
+/**
+ * <p>The certificate issuer indentifier.</p>
+ * @public
+ */
+export interface IssuerCertificateIdentifier {
   /**
-   * @internal
+   * <p>The subject of the issuer certificate.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AuditCheckDetails): any => ({
-    ...obj,
-  });
+  issuerCertificateSubject?: string | undefined;
+
+  /**
+   * <p>The issuer ID.</p>
+   * @public
+   */
+  issuerId?: string | undefined;
+
+  /**
+   * <p>The issuer certificate serial number.</p>
+   * @public
+   */
+  issuerCertificateSerialNumber?: string | undefined;
 }
 
 /**
  * <p>Information about the version of the policy associated with the resource.</p>
+ * @public
  */
 export interface PolicyVersionIdentifier {
   /**
    * <p>The name of the policy.</p>
+   * @public
    */
-  policyName?: string;
+  policyName?: string | undefined;
 
   /**
    * <p>The ID of the version of the policy associated with the resource.</p>
+   * @public
    */
-  policyVersionId?: string;
-}
-
-export namespace PolicyVersionIdentifier {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PolicyVersionIdentifier): any => ({
-    ...obj,
-  });
+  policyVersionId?: string | undefined;
 }
 
 /**
  * <p>Information that identifies the noncompliant resource.</p>
+ * @public
  */
 export interface ResourceIdentifier {
   /**
    * <p>The ID of the certificate attached to the resource.</p>
+   * @public
    */
-  deviceCertificateId?: string;
+  deviceCertificateId?: string | undefined;
 
   /**
    * <p>The ID of the CA certificate used to authorize the certificate.</p>
+   * @public
    */
-  caCertificateId?: string;
+  caCertificateId?: string | undefined;
 
   /**
    * <p>The ID of the Amazon Cognito identity pool.</p>
+   * @public
    */
-  cognitoIdentityPoolId?: string;
+  cognitoIdentityPoolId?: string | undefined;
 
   /**
    * <p>The client ID.</p>
+   * @public
    */
-  clientId?: string;
+  clientId?: string | undefined;
 
   /**
    * <p>The version of the policy associated with the resource.</p>
+   * @public
    */
-  policyVersionIdentifier?: PolicyVersionIdentifier;
+  policyVersionIdentifier?: PolicyVersionIdentifier | undefined;
 
   /**
    * <p>The account with which the resource is associated.</p>
+   * @public
    */
-  account?: string;
+  account?: string | undefined;
 
   /**
    * <p>The ARN of the IAM role that has overly permissive actions.</p>
+   * @public
    */
-  iamRoleArn?: string;
+  iamRoleArn?: string | undefined;
 
   /**
    * <p>The ARN of the role alias that has overly permissive actions.</p>
+   * @public
    */
-  roleAliasArn?: string;
-}
+  roleAliasArn?: string | undefined;
 
-export namespace ResourceIdentifier {
   /**
-   * @internal
+   * <p>The issuer certificate identifier.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResourceIdentifier): any => ({
-    ...obj,
-  });
-}
+  issuerCertificateIdentifier?: IssuerCertificateIdentifier | undefined;
 
-export enum ResourceType {
-  ACCOUNT_SETTINGS = "ACCOUNT_SETTINGS",
-  CA_CERTIFICATE = "CA_CERTIFICATE",
-  CLIENT_ID = "CLIENT_ID",
-  COGNITO_IDENTITY_POOL = "COGNITO_IDENTITY_POOL",
-  DEVICE_CERTIFICATE = "DEVICE_CERTIFICATE",
-  IAM_ROLE = "IAM_ROLE",
-  IOT_POLICY = "IOT_POLICY",
-  ROLE_ALIAS = "ROLE_ALIAS",
+  /**
+   * <p>The ARN of the identified device certificate.</p>
+   * @public
+   */
+  deviceCertificateArn?: string | undefined;
 }
 
 /**
  * <p>Information about the resource that was noncompliant with the audit check.</p>
+ * @public
  */
 export interface NonCompliantResource {
   /**
    * <p>The type of the noncompliant resource.</p>
+   * @public
    */
-  resourceType?: ResourceType | string;
+  resourceType?: ResourceType | undefined;
 
   /**
    * <p>Information that identifies the noncompliant resource.</p>
+   * @public
    */
-  resourceIdentifier?: ResourceIdentifier;
+  resourceIdentifier?: ResourceIdentifier | undefined;
 
   /**
    * <p>Other information about the noncompliant resource.</p>
+   * @public
    */
-  additionalInfo?: { [key: string]: string };
-}
-
-export namespace NonCompliantResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NonCompliantResource): any => ({
-    ...obj,
-  });
+  additionalInfo?: Record<string, string> | undefined;
 }
 
 /**
  * <p>Information about a related resource.</p>
+ * @public
  */
 export interface RelatedResource {
   /**
    * <p>The type of resource.</p>
+   * @public
    */
-  resourceType?: ResourceType | string;
+  resourceType?: ResourceType | undefined;
 
   /**
    * <p>Information that identifies the resource.</p>
+   * @public
    */
-  resourceIdentifier?: ResourceIdentifier;
+  resourceIdentifier?: ResourceIdentifier | undefined;
 
   /**
    * <p>Other information about the resource.</p>
+   * @public
    */
-  additionalInfo?: { [key: string]: string };
-}
-
-export namespace RelatedResource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RelatedResource): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditFindingSeverity {
-  CRITICAL = "CRITICAL",
-  HIGH = "HIGH",
-  LOW = "LOW",
-  MEDIUM = "MEDIUM",
+  additionalInfo?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The findings (results) of the audit.</p>
+ * @public
  */
 export interface AuditFinding {
   /**
    * <p>A unique identifier for this set of audit findings. This identifier is used to apply
    *       mitigation tasks to one or more sets of findings.</p>
+   * @public
    */
-  findingId?: string;
+  findingId?: string | undefined;
 
   /**
    * <p>The ID of the audit that generated this result (finding).</p>
+   * @public
    */
-  taskId?: string;
+  taskId?: string | undefined;
 
   /**
    * <p>The audit check that generated this result.</p>
+   * @public
    */
-  checkName?: string;
+  checkName?: string | undefined;
 
   /**
    * <p>The time the audit started.</p>
+   * @public
    */
-  taskStartTime?: Date;
+  taskStartTime?: Date | undefined;
 
   /**
    * <p>The time the result (finding) was discovered.</p>
+   * @public
    */
-  findingTime?: Date;
+  findingTime?: Date | undefined;
 
   /**
    * <p>The severity of the result (finding).</p>
+   * @public
    */
-  severity?: AuditFindingSeverity | string;
+  severity?: AuditFindingSeverity | undefined;
 
   /**
    * <p>The resource that was found to be noncompliant with the
    *         audit check.</p>
+   * @public
    */
-  nonCompliantResource?: NonCompliantResource;
+  nonCompliantResource?: NonCompliantResource | undefined;
 
   /**
    * <p>The list of related resources.</p>
+   * @public
    */
-  relatedResources?: RelatedResource[];
+  relatedResources?: RelatedResource[] | undefined;
 
   /**
    * <p>The reason the resource was noncompliant.</p>
+   * @public
    */
-  reasonForNonCompliance?: string;
+  reasonForNonCompliance?: string | undefined;
 
   /**
    * <p>A code that indicates the reason that the resource was noncompliant.</p>
+   * @public
    */
-  reasonForNonComplianceCode?: string;
+  reasonForNonComplianceCode?: string | undefined;
 
   /**
    * <p>
    *             Indicates whether the audit finding was suppressed or not during reporting.
    *         </p>
+   * @public
    */
-  isSuppressed?: boolean;
-}
-
-export namespace AuditFinding {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditFinding): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditFrequency {
-  BIWEEKLY = "BIWEEKLY",
-  DAILY = "DAILY",
-  MONTHLY = "MONTHLY",
-  WEEKLY = "WEEKLY",
-}
-
-export enum AuditMitigationActionsExecutionStatus {
-  CANCELED = "CANCELED",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  PENDING = "PENDING",
-  SKIPPED = "SKIPPED",
+  isSuppressed?: boolean | undefined;
 }
 
 /**
  * <p>Returned by ListAuditMitigationActionsTask, this object contains information that describes a mitigation action that has been started.</p>
+ * @public
  */
 export interface AuditMitigationActionExecutionMetadata {
   /**
    * <p>The unique identifier for the task that applies the mitigation action.</p>
+   * @public
    */
-  taskId?: string;
+  taskId?: string | undefined;
 
   /**
    * <p>The unique identifier for the findings to which the task and associated mitigation action are applied.</p>
+   * @public
    */
-  findingId?: string;
+  findingId?: string | undefined;
 
   /**
    * <p>The friendly name of the mitigation action being applied by the task.</p>
+   * @public
    */
-  actionName?: string;
+  actionName?: string | undefined;
 
   /**
    * <p>The unique identifier for the mitigation action being applied by the task.</p>
+   * @public
    */
-  actionId?: string;
+  actionId?: string | undefined;
 
   /**
    * <p>The current status of the task being executed.</p>
+   * @public
    */
-  status?: AuditMitigationActionsExecutionStatus | string;
+  status?: AuditMitigationActionsExecutionStatus | undefined;
 
   /**
    * <p>The date and time when the task was started.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>The date and time when the task was completed or canceled. Blank if the task is still running.</p>
+   * @public
    */
-  endTime?: Date;
+  endTime?: Date | undefined;
 
   /**
    * <p>If an error occurred, the code that indicates which type of error occurred.</p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
    * <p>If an error occurred, a message that describes the error.</p>
+   * @public
    */
-  message?: string;
-}
-
-export namespace AuditMitigationActionExecutionMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditMitigationActionExecutionMetadata): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditMitigationActionsTaskStatus {
-  CANCELED = "CANCELED",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
+  message?: string | undefined;
 }
 
 /**
  * <p>Information about an audit mitigation actions task that is returned by <code>ListAuditMitigationActionsTasks</code>.</p>
+ * @public
  */
 export interface AuditMitigationActionsTaskMetadata {
   /**
    * <p>The unique identifier for the task.</p>
+   * @public
    */
-  taskId?: string;
+  taskId?: string | undefined;
 
   /**
    * <p>The time at which the audit mitigation actions task was started.</p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p>The current state of the audit mitigation actions task.</p>
+   * @public
    */
-  taskStatus?: AuditMitigationActionsTaskStatus | string;
-}
-
-export namespace AuditMitigationActionsTaskMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditMitigationActionsTaskMetadata): any => ({
-    ...obj,
-  });
+  taskStatus?: AuditMitigationActionsTaskStatus | undefined;
 }
 
 /**
  * <p>Provides summary counts of how many tasks for findings are in a particular state. This information is included in the response from DescribeAuditMitigationActionsTask.</p>
+ * @public
  */
 export interface TaskStatisticsForAuditCheck {
   /**
    * <p>The total number of findings to which a task is being applied.</p>
+   * @public
    */
-  totalFindingsCount?: number;
+  totalFindingsCount?: number | undefined;
 
   /**
    * <p>The number of findings for which at least one of the actions failed when applied.</p>
+   * @public
    */
-  failedFindingsCount?: number;
+  failedFindingsCount?: number | undefined;
 
   /**
    * <p>The number of findings for which all mitigation actions succeeded when applied.</p>
+   * @public
    */
-  succeededFindingsCount?: number;
+  succeededFindingsCount?: number | undefined;
 
   /**
    * <p>The number of findings skipped because of filter conditions provided in the parameters to the command.</p>
+   * @public
    */
-  skippedFindingsCount?: number;
+  skippedFindingsCount?: number | undefined;
 
   /**
    * <p>The number of findings to which the mitigation action task was canceled when applied.</p>
+   * @public
    */
-  canceledFindingsCount?: number;
-}
-
-export namespace TaskStatisticsForAuditCheck {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TaskStatisticsForAuditCheck): any => ({
-    ...obj,
-  });
+  canceledFindingsCount?: number | undefined;
 }
 
 /**
  * <p>Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.</p>
+ * @public
  */
 export interface AuditMitigationActionsTaskTarget {
   /**
    * <p>If the task will apply a mitigation action to findings from a specific audit, this value uniquely identifies the audit.</p>
+   * @public
    */
-  auditTaskId?: string;
+  auditTaskId?: string | undefined;
 
   /**
    * <p>If the task will apply a mitigation action to one or more listed findings, this value uniquely identifies those findings.</p>
+   * @public
    */
-  findingIds?: string[];
+  findingIds?: string[] | undefined;
 
   /**
    * <p>Specifies a filter in the form of an audit check and set of reason codes that identify the findings from the audit to which the audit mitigation actions task apply.</p>
+   * @public
    */
-  auditCheckToReasonCodeFilter?: { [key: string]: string[] };
-}
-
-export namespace AuditMitigationActionsTaskTarget {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditMitigationActionsTaskTarget): any => ({
-    ...obj,
-  });
+  auditCheckToReasonCodeFilter?: Record<string, string[]> | undefined;
 }
 
 /**
  * <p>Information about the targets to which audit notifications are sent.</p>
+ * @public
  */
 export interface AuditNotificationTarget {
   /**
    * <p>The ARN of the target (SNS topic) to which audit notifications are sent.</p>
+   * @public
    */
-  targetArn?: string;
+  targetArn?: string | undefined;
 
   /**
    * <p>The ARN of the role that grants permission to send notifications to the target.</p>
+   * @public
    */
-  roleArn?: string;
+  roleArn?: string | undefined;
 
   /**
    * <p>True if notifications to the target are enabled.</p>
+   * @public
    */
-  enabled?: boolean;
-}
-
-export namespace AuditNotificationTarget {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditNotificationTarget): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditNotificationType {
-  SNS = "SNS",
+  enabled?: boolean | undefined;
 }
 
 /**
  * <p> Filters out specific findings of a Device Defender audit. </p>
+ * @public
  */
 export interface AuditSuppression {
   /**
@@ -2988,11 +2966,13 @@ export interface AuditSuppression {
    *         for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
    *         of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
    *         to select which checks are enabled.)</p>
+   * @public
    */
   checkName: string | undefined;
 
   /**
    * <p>Information that identifies the noncompliant resource.</p>
+   * @public
    */
   resourceIdentifier: ResourceIdentifier | undefined;
 
@@ -3000,672 +2980,473 @@ export interface AuditSuppression {
    * <p>
    *             The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to.
    *         </p>
+   * @public
    */
-  expirationDate?: Date;
+  expirationDate?: Date | undefined;
 
   /**
    * <p>
    *             Indicates whether a suppression should exist indefinitely or not.
    *         </p>
+   * @public
    */
-  suppressIndefinitely?: boolean;
+  suppressIndefinitely?: boolean | undefined;
 
   /**
    * <p>
    *             The description of the audit suppression.
    *         </p>
+   * @public
    */
-  description?: string;
-}
-
-export namespace AuditSuppression {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditSuppression): any => ({
-    ...obj,
-  });
-}
-
-export enum AuditTaskStatus {
-  CANCELED = "CANCELED",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-}
-
-export enum AuditTaskType {
-  ON_DEMAND_AUDIT_TASK = "ON_DEMAND_AUDIT_TASK",
-  SCHEDULED_AUDIT_TASK = "SCHEDULED_AUDIT_TASK",
+  description?: string | undefined;
 }
 
 /**
  * <p>The audits that were performed.</p>
+ * @public
  */
 export interface AuditTaskMetadata {
   /**
    * <p>The ID of this audit.</p>
+   * @public
    */
-  taskId?: string;
+  taskId?: string | undefined;
 
   /**
    * <p>The status of this audit. One of "IN_PROGRESS", "COMPLETED",
    *         "FAILED", or "CANCELED".</p>
+   * @public
    */
-  taskStatus?: AuditTaskStatus | string;
+  taskStatus?: AuditTaskStatus | undefined;
 
   /**
    * <p>The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".</p>
+   * @public
    */
-  taskType?: AuditTaskType | string;
-}
-
-export namespace AuditTaskMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuditTaskMetadata): any => ({
-    ...obj,
-  });
-}
-
-export enum AuthDecision {
-  ALLOWED = "ALLOWED",
-  EXPLICIT_DENY = "EXPLICIT_DENY",
-  IMPLICIT_DENY = "IMPLICIT_DENY",
+  taskType?: AuditTaskType | undefined;
 }
 
 /**
  * <p>A collection of authorization information.</p>
+ * @public
  */
 export interface AuthInfo {
   /**
    * <p>The type of action for which the principal is being authorized.</p>
+   * @public
    */
-  actionType?: ActionType | string;
+  actionType?: ActionType | undefined;
 
   /**
    * <p>The resources for which the principal is being authorized to perform the specified
    *          action.</p>
+   * @public
    */
   resources: string[] | undefined;
 }
 
-export namespace AuthInfo {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthInfo): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>An object that specifies the authorization service for a domain.</p>
+ * @public
  */
 export interface AuthorizerConfig {
   /**
    * <p>The name of the authorization service for a domain configuration.</p>
+   * @public
    */
-  defaultAuthorizerName?: string;
+  defaultAuthorizerName?: string | undefined;
 
   /**
    * <p>A Boolean that specifies whether the domain configuration's authorization service can be overridden.</p>
+   * @public
    */
-  allowAuthorizerOverride?: boolean;
-}
-
-export namespace AuthorizerConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthorizerConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum AuthorizerStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
+  allowAuthorizerOverride?: boolean | undefined;
 }
 
 /**
  * <p>The authorizer description.</p>
+ * @public
  */
 export interface AuthorizerDescription {
   /**
    * <p>The authorizer name.</p>
+   * @public
    */
-  authorizerName?: string;
+  authorizerName?: string | undefined;
 
   /**
    * <p>The authorizer ARN.</p>
+   * @public
    */
-  authorizerArn?: string;
+  authorizerArn?: string | undefined;
 
   /**
    * <p>The authorizer's Lambda function ARN.</p>
+   * @public
    */
-  authorizerFunctionArn?: string;
+  authorizerFunctionArn?: string | undefined;
 
   /**
    * <p>The key used to extract the token from the HTTP headers.</p>
+   * @public
    */
-  tokenKeyName?: string;
+  tokenKeyName?: string | undefined;
 
   /**
    * <p>The public keys used to validate the token signature returned by your custom
    *          authentication service.</p>
+   * @public
    */
-  tokenSigningPublicKeys?: { [key: string]: string };
+  tokenSigningPublicKeys?: Record<string, string> | undefined;
 
   /**
    * <p>The status of the authorizer.</p>
+   * @public
    */
-  status?: AuthorizerStatus | string;
+  status?: AuthorizerStatus | undefined;
 
   /**
    * <p>The UNIX timestamp of when the authorizer was created.</p>
+   * @public
    */
-  creationDate?: Date;
+  creationDate?: Date | undefined;
 
   /**
    * <p>The UNIX timestamp of when the authorizer was last updated.</p>
+   * @public
    */
-  lastModifiedDate?: Date;
+  lastModifiedDate?: Date | undefined;
 
   /**
    * <p>Specifies whether IoT validates the token signature in an authorization request.</p>
+   * @public
    */
-  signingDisabled?: boolean;
-}
+  signingDisabled?: boolean | undefined;
 
-export namespace AuthorizerDescription {
   /**
-   * @internal
+   * <p>When <code>true</code>, the result from the authorizer’s Lambda function is
+   * 	  cached for the time specified in <code>refreshAfterInSeconds</code>. The cached
+   * 	  result is used while the device reuses the same HTTP connection.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AuthorizerDescription): any => ({
-    ...obj,
-  });
+  enableCachingForHttp?: boolean | undefined;
 }
 
 /**
  * <p>The authorizer summary.</p>
+ * @public
  */
 export interface AuthorizerSummary {
   /**
    * <p>The authorizer name.</p>
+   * @public
    */
-  authorizerName?: string;
+  authorizerName?: string | undefined;
 
   /**
    * <p>The authorizer ARN.</p>
+   * @public
    */
-  authorizerArn?: string;
-}
-
-export namespace AuthorizerSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthorizerSummary): any => ({
-    ...obj,
-  });
+  authorizerArn?: string | undefined;
 }
 
 /**
  * <p>Information that explicitly denies authorization.</p>
+ * @public
  */
 export interface ExplicitDeny {
   /**
    * <p>The policies that denied the authorization.</p>
+   * @public
    */
-  policies?: Policy[];
-}
-
-export namespace ExplicitDeny {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExplicitDeny): any => ({
-    ...obj,
-  });
+  policies?: Policy[] | undefined;
 }
 
 /**
  * <p>Information that implicitly denies authorization. When policy doesn't explicitly deny
  *          or allow an action on a resource it is considered an implicit deny.</p>
+ * @public
  */
 export interface ImplicitDeny {
   /**
    * <p>Policies that don't contain a matching allow or deny statement for the specified
    *          action on the specified resource. </p>
+   * @public
    */
-  policies?: Policy[];
-}
-
-export namespace ImplicitDeny {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ImplicitDeny): any => ({
-    ...obj,
-  });
+  policies?: Policy[] | undefined;
 }
 
 /**
  * <p>Contains information that denied the authorization.</p>
+ * @public
  */
 export interface Denied {
   /**
    * <p>Information that implicitly denies the authorization. When a policy doesn't
    *          explicitly deny or allow an action on a resource it is considered an implicit
    *          deny.</p>
+   * @public
    */
-  implicitDeny?: ImplicitDeny;
+  implicitDeny?: ImplicitDeny | undefined;
 
   /**
    * <p>Information that explicitly denies the authorization. </p>
+   * @public
    */
-  explicitDeny?: ExplicitDeny;
-}
-
-export namespace Denied {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Denied): any => ({
-    ...obj,
-  });
+  explicitDeny?: ExplicitDeny | undefined;
 }
 
 /**
  * <p>The authorizer result.</p>
+ * @public
  */
 export interface AuthResult {
   /**
    * <p>Authorization information.</p>
+   * @public
    */
-  authInfo?: AuthInfo;
+  authInfo?: AuthInfo | undefined;
 
   /**
    * <p>The policies and statements that allowed the specified action.</p>
+   * @public
    */
-  allowed?: Allowed;
+  allowed?: Allowed | undefined;
 
   /**
    * <p>The policies and statements that denied the specified action.</p>
+   * @public
    */
-  denied?: Denied;
+  denied?: Denied | undefined;
 
   /**
    * <p>The final authorization decision of this scenario. Multiple statements are taken into
    *          account when determining the authorization decision. An explicit deny statement can
    *          override multiple allow statements.</p>
+   * @public
    */
-  authDecision?: AuthDecision | string;
+  authDecision?: AuthDecision | undefined;
 
   /**
    * <p>Contains any missing context values found while evaluating policy.</p>
+   * @public
    */
-  missingContextValues?: string[];
+  missingContextValues?: string[] | undefined;
 }
 
-export namespace AuthResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AuthResult): any => ({
-    ...obj,
-  });
-}
-
-export enum AutoRegistrationStatus {
-  DISABLE = "DISABLE",
-  ENABLE = "ENABLE",
-}
-
+/**
+ * @public
+ */
 export interface CancelAuditMitigationActionsTaskRequest {
   /**
    * <p>The unique identifier for the task that you want to cancel. </p>
+   * @public
    */
   taskId: string | undefined;
 }
 
-export namespace CancelAuditMitigationActionsTaskRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelAuditMitigationActionsTaskRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelAuditMitigationActionsTaskResponse {}
 
-export namespace CancelAuditMitigationActionsTaskResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelAuditMitigationActionsTaskResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelAuditTaskRequest {
   /**
    * <p>The ID of the audit you want to cancel. You can only cancel an
    *               audit that is "IN_PROGRESS".</p>
+   * @public
    */
   taskId: string | undefined;
 }
 
-export namespace CancelAuditTaskRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelAuditTaskRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelAuditTaskResponse {}
-
-export namespace CancelAuditTaskResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelAuditTaskResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>The input for the CancelCertificateTransfer operation.</p>
+ * @public
  */
 export interface CancelCertificateTransferRequest {
   /**
    * <p>The ID of the certificate. (The last part of the certificate ARN contains the
    *          certificate ID.)</p>
+   * @public
    */
   certificateId: string | undefined;
 }
 
-export namespace CancelCertificateTransferRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelCertificateTransferRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelDetectMitigationActionsTaskRequest {
   /**
    * <p>
    *       The unique identifier of the task.
    *     </p>
+   * @public
    */
   taskId: string | undefined;
 }
 
-export namespace CancelDetectMitigationActionsTaskRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelDetectMitigationActionsTaskRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelDetectMitigationActionsTaskResponse {}
 
-export namespace CancelDetectMitigationActionsTaskResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelDetectMitigationActionsTaskResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelJobRequest {
   /**
    * <p>The unique identifier you assigned to this job when it was created.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>(Optional)A reason code string that explains why the job was canceled.</p>
+   * @public
    */
-  reasonCode?: string;
+  reasonCode?: string | undefined;
 
   /**
    * <p>An optional comment string describing why the job was canceled.</p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 
   /**
-   * <p>(Optional) If <code>true</code> job executions with status "IN_PROGRESS" and "QUEUED"
-   *           are canceled, otherwise only job executions with status "QUEUED" are canceled. The default
-   *           is <code>false</code>.</p>
-   *         <p>Canceling a job which is "IN_PROGRESS", will cause a device which is executing
-   *           the job to be unable to update the job execution status.  Use caution and ensure that each
-   *           device executing a job which is canceled is able to recover to a valid state.</p>
+   * <p>(Optional) If <code>true</code> job executions with status "IN_PROGRESS" and
+   *             "QUEUED" are canceled, otherwise only job executions with status "QUEUED" are canceled.
+   *             The default is <code>false</code>.</p>
+   *          <p>Canceling a job which is "IN_PROGRESS", will cause a device which is executing the
+   *             job to be unable to update the job execution status. Use caution and ensure that each
+   *             device executing a job which is canceled is able to recover to a valid state.</p>
+   * @public
    */
-  force?: boolean;
+  force?: boolean | undefined;
 }
 
-export namespace CancelJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelJobResponse {
   /**
    * <p>The job ARN.</p>
+   * @public
    */
-  jobArn?: string;
+  jobArn?: string | undefined;
 
   /**
    * <p>The unique identifier you assigned to this job when it was created.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>A short text description of the job.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 }
 
-export namespace CancelJobResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelJobResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelJobExecutionRequest {
   /**
    * <p>The ID of the job to be canceled.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>The name of the thing whose execution of the job will be canceled.</p>
+   * @public
    */
   thingName: string | undefined;
 
   /**
    * <p>(Optional) If <code>true</code> the job execution will be canceled if it has status
-   *           IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status
-   *           QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set
-   *           <code>force</code> to <code>true</code>, then an <code>InvalidStateTransitionException</code>
-   *           will be thrown. The default is <code>false</code>.</p>
-   *         <p>Canceling a job execution which is "IN_PROGRESS", will cause the device to be unable
-   *           to update the job execution status.  Use caution and ensure that the device is able to
-   *           recover to a valid state.</p>
+   *             IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has
+   *             status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do
+   *             not set <code>force</code> to <code>true</code>, then an
+   *                 <code>InvalidStateTransitionException</code> will be thrown. The default is
+   *                 <code>false</code>.</p>
+   *          <p>Canceling a job execution which is "IN_PROGRESS", will cause the device to be
+   *             unable to update the job execution status. Use caution and ensure that the device is
+   *             able to recover to a valid state.</p>
+   * @public
    */
-  force?: boolean;
+  force?: boolean | undefined;
 
   /**
-   * <p>(Optional) The expected current version of the job execution. Each time you update the job
-   *           execution, its version is incremented. If the version of the job execution stored in Jobs does
-   *           not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that
-   *           contains the current job execution status data is returned. (This makes it unnecessary to
-   *           perform a separate DescribeJobExecution request in order to obtain the job execution status
-   *           data.)</p>
+   * <p>(Optional) The expected current version of the job execution. Each time you update
+   *             the job execution, its version is incremented. If the version of the job execution
+   *             stored in Jobs does not match, the update is rejected with a VersionMismatch error, and
+   *             an ErrorResponse that contains the current job execution status data is returned. (This
+   *             makes it unnecessary to perform a separate DescribeJobExecution request in order to
+   *             obtain the job execution status data.)</p>
+   * @public
    */
-  expectedVersion?: number;
+  expectedVersion?: number | undefined;
 
   /**
-   * <p>A collection of name/value pairs that describe the status of the job execution. If not
-   *           specified, the statusDetails are unchanged. You can specify at most 10 name/value pairs.</p>
+   * <p>A collection of name/value pairs that describe the status of the job execution. If
+   *             not specified, the statusDetails are unchanged. You can specify at most 10 name/value
+   *             pairs.</p>
+   * @public
    */
-  statusDetails?: { [key: string]: string };
-}
-
-export namespace CancelJobExecutionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelJobExecutionRequest): any => ({
-    ...obj,
-  });
+  statusDetails?: Record<string, string> | undefined;
 }
 
 /**
- * <p>An attempt was made to change to an invalid state, for example by deleting a job or a
- *          job execution which is "IN_PROGRESS" without setting the <code>force</code>
- *          parameter.</p>
+ * @public
  */
-export interface InvalidStateTransitionException extends __SmithyException, $MetadataBearer {
-  name: "InvalidStateTransitionException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace InvalidStateTransitionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidStateTransitionException): any => ({
-    ...obj,
-  });
-}
-
 export interface ClearDefaultAuthorizerRequest {}
 
-export namespace ClearDefaultAuthorizerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClearDefaultAuthorizerRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ClearDefaultAuthorizerResponse {}
 
-export namespace ClearDefaultAuthorizerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClearDefaultAuthorizerResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ConfirmTopicRuleDestinationRequest {
   /**
    * <p>The token used to confirm ownership or access to the topic rule confirmation URL.</p>
+   * @public
    */
   confirmationToken: string | undefined;
 }
 
-export namespace ConfirmTopicRuleDestinationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfirmTopicRuleDestinationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ConfirmTopicRuleDestinationResponse {}
 
-export namespace ConfirmTopicRuleDestinationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfirmTopicRuleDestinationResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A conflicting resource update exception. This exception is thrown when two pending
- *          updates cause a conflict.</p>
+ * @public
  */
-export interface ConflictingResourceUpdateException extends __SmithyException, $MetadataBearer {
-  name: "ConflictingResourceUpdateException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace ConflictingResourceUpdateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictingResourceUpdateException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An unexpected error has occurred.</p>
- */
-export interface InternalException extends __SmithyException, $MetadataBearer {
-  name: "InternalException";
-  $fault: "server";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace InternalException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateAuditSuppressionRequest {
   /**
    * <p>An audit check name. Checks must be enabled
    *         for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
    *         of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
    *         to select which checks are enabled.)</p>
+   * @public
    */
   checkName: string | undefined;
 
   /**
    * <p>Information that identifies the noncompliant resource.</p>
+   * @public
    */
   resourceIdentifier: ResourceIdentifier | undefined;
 
@@ -3673,134 +3454,93 @@ export interface CreateAuditSuppressionRequest {
    * <p>
    *       The epoch timestamp in seconds at which this suppression expires.
    *     </p>
+   * @public
    */
-  expirationDate?: Date;
+  expirationDate?: Date | undefined;
 
   /**
    * <p>
    *       Indicates whether a suppression should exist indefinitely or not.
    *     </p>
+   * @public
    */
-  suppressIndefinitely?: boolean;
+  suppressIndefinitely?: boolean | undefined;
 
   /**
    * <p>
    *       The description of the audit suppression.
    *     </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>
    *       Each audit supression must have a unique client request token. If you try to create a new audit
    *       suppression with the same token as one that already exists, an exception occurs. If you omit this
-   *       value, Amazon Web Services SDKs will automatically generate a unique client request.
-   *     </p>
+   *       value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
+   * @public
    */
-  clientRequestToken?: string;
-}
-
-export namespace CreateAuditSuppressionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAuditSuppressionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateAuditSuppressionResponse {}
-
-export namespace CreateAuditSuppressionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAuditSuppressionResponse): any => ({
-    ...obj,
-  });
+  clientRequestToken?: string | undefined;
 }
 
 /**
- * <p>The resource already exists.</p>
+ * @public
  */
-export interface ResourceAlreadyExistsException extends __SmithyException, $MetadataBearer {
-  name: "ResourceAlreadyExistsException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-
-  /**
-   * <p>The ID of the resource that caused the exception.</p>
-   */
-  resourceId?: string;
-
-  /**
-   * <p>The ARN of the resource that caused the exception.</p>
-   */
-  resourceArn?: string;
-}
-
-export namespace ResourceAlreadyExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceAlreadyExistsException): any => ({
-    ...obj,
-  });
-}
+export interface CreateAuditSuppressionResponse {}
 
 /**
  * <p>A set of key/value pairs that are used to manage the resource.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>The tag's key.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>The tag's value.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAuthorizerRequest {
   /**
    * <p>The authorizer name.</p>
+   * @public
    */
   authorizerName: string | undefined;
 
   /**
    * <p>The ARN of the authorizer's Lambda function.</p>
+   * @public
    */
   authorizerFunctionArn: string | undefined;
 
   /**
    * <p>The name of the token key used to extract the token from the HTTP headers.</p>
+   * @public
    */
-  tokenKeyName?: string;
+  tokenKeyName?: string | undefined;
 
   /**
    * <p>The public keys used to verify the digital signature returned by your custom
    *          authentication service.</p>
+   * @public
    */
-  tokenSigningPublicKeys?: { [key: string]: string };
+  tokenSigningPublicKeys?: Record<string, string> | undefined;
 
   /**
    * <p>The status of the create authorizer request.</p>
+   * @public
    */
-  status?: AuthorizerStatus | string;
+  status?: AuthorizerStatus | undefined;
 
   /**
    * <p>Metadata which can be used to manage the custom authorizer.</p>
@@ -3811,209 +3551,569 @@ export interface CreateAuthorizerRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 
   /**
    * <p>Specifies whether IoT validates the token signature in an authorization request.</p>
+   * @public
    */
-  signingDisabled?: boolean;
-}
+  signingDisabled?: boolean | undefined;
 
-export namespace CreateAuthorizerRequest {
   /**
-   * @internal
+   * <p>When <code>true</code>, the result from the authorizer’s Lambda function is
+   * 	  cached for clients that use persistent HTTP connections. The results are cached for the time
+   * 	  specified by the Lambda function in <code>refreshAfterInSeconds</code>. This value
+   *      does not affect authorization of clients that use MQTT connections.</p>
+   *          <p>The default value is <code>false</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateAuthorizerRequest): any => ({
-    ...obj,
-  });
+  enableCachingForHttp?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateAuthorizerResponse {
   /**
    * <p>The authorizer's name.</p>
+   * @public
    */
-  authorizerName?: string;
+  authorizerName?: string | undefined;
 
   /**
    * <p>The authorizer ARN.</p>
+   * @public
    */
-  authorizerArn?: string;
-}
-
-export namespace CreateAuthorizerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAuthorizerResponse): any => ({
-    ...obj,
-  });
+  authorizerArn?: string | undefined;
 }
 
 /**
  * <p>The properties of a billing group.</p>
+ * @public
  */
 export interface BillingGroupProperties {
   /**
    * <p>The description of the billing group.</p>
+   * @public
    */
-  billingGroupDescription?: string;
+  billingGroupDescription?: string | undefined;
 }
 
-export namespace BillingGroupProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BillingGroupProperties): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateBillingGroupRequest {
   /**
    * <p>The name you wish to give to the billing group.</p>
+   * @public
    */
   billingGroupName: string | undefined;
 
   /**
    * <p>The properties of the billing group.</p>
+   * @public
    */
-  billingGroupProperties?: BillingGroupProperties;
+  billingGroupProperties?: BillingGroupProperties | undefined;
 
   /**
    * <p>Metadata which can be used to manage the billing group.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateBillingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBillingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateBillingGroupResponse {
   /**
    * <p>The name you gave to the billing group.</p>
+   * @public
    */
-  billingGroupName?: string;
+  billingGroupName?: string | undefined;
 
   /**
    * <p>The ARN of the billing group.</p>
+   * @public
    */
-  billingGroupArn?: string;
+  billingGroupArn?: string | undefined;
 
   /**
    * <p>The ID of the billing group.</p>
+   * @public
    */
-  billingGroupId?: string;
-}
-
-export namespace CreateBillingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBillingGroupResponse): any => ({
-    ...obj,
-  });
+  billingGroupId?: string | undefined;
 }
 
 /**
  * <p>The input for the CreateCertificateFromCsr operation.</p>
+ * @public
  */
 export interface CreateCertificateFromCsrRequest {
   /**
    * <p>The certificate signing request (CSR).</p>
+   * @public
    */
   certificateSigningRequest: string | undefined;
 
   /**
    * <p>Specifies whether the certificate is active.</p>
+   * @public
    */
-  setAsActive?: boolean;
-}
-
-export namespace CreateCertificateFromCsrRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCertificateFromCsrRequest): any => ({
-    ...obj,
-  });
+  setAsActive?: boolean | undefined;
 }
 
 /**
  * <p>The output from the CreateCertificateFromCsr operation.</p>
+ * @public
  */
 export interface CreateCertificateFromCsrResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the certificate. You can use the ARN as a principal
    *          for policy operations.</p>
+   * @public
    */
-  certificateArn?: string;
+  certificateArn?: string | undefined;
 
   /**
    * <p>The ID of the certificate. Certificate management operations only take a
    *          certificateId.</p>
+   * @public
    */
-  certificateId?: string;
+  certificateId?: string | undefined;
 
   /**
    * <p>The certificate data, in PEM format.</p>
+   * @public
    */
-  certificatePem?: string;
+  certificatePem?: string | undefined;
 }
 
-export namespace CreateCertificateFromCsrResponse {
+/**
+ * @public
+ */
+export interface CreateCertificateProviderRequest {
   /**
-   * @internal
+   * <p>The name of the certificate provider.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateCertificateFromCsrResponse): any => ({
-    ...obj,
-  });
+  certificateProviderName: string | undefined;
+
+  /**
+   * <p>The ARN of the Lambda function that defines the authentication logic.</p>
+   * @public
+   */
+  lambdaFunctionArn: string | undefined;
+
+  /**
+   * <p>A list of the operations that the certificate provider will use to generate certificates.
+   *          Valid value: <code>CreateCertificateFromCsr</code>.</p>
+   * @public
+   */
+  accountDefaultForOperations: CertificateProviderOperation[] | undefined;
+
+  /**
+   * <p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure
+   *          the request is idempotent.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+
+  /**
+   * <p>Metadata which can be used to manage the certificate provider.</p>
+   * @public
+   */
+  tags?: Tag[] | undefined;
 }
 
-export enum CustomMetricType {
-  IP_ADDRESS_LIST = "ip-address-list",
-  NUMBER = "number",
-  NUMBER_LIST = "number-list",
-  STRING_LIST = "string-list",
+/**
+ * @public
+ */
+export interface CreateCertificateProviderResponse {
+  /**
+   * <p>The name of the certificate provider.</p>
+   * @public
+   */
+  certificateProviderName?: string | undefined;
+
+  /**
+   * <p>The ARN of the certificate provider.</p>
+   * @public
+   */
+  certificateProviderArn?: string | undefined;
 }
 
+/**
+ * <p>The value of a command parameter used to create a command execution.</p>
+ *          <note>
+ *             <p>The <code>commandParameterValue</code> can only have one of the below fields
+ *                 listed.</p>
+ *          </note>
+ * @public
+ */
+export interface CommandParameterValue {
+  /**
+   * <p>An attribute of type String. For example:</p>
+   *          <p>
+   *             <code>"S": "Hello"</code>
+   *          </p>
+   * @public
+   */
+  S?: string | undefined;
+
+  /**
+   * <p>An attribute of type Boolean. For example:</p>
+   *          <p>
+   *             <code>"BOOL": true</code>
+   *          </p>
+   * @public
+   */
+  B?: boolean | undefined;
+
+  /**
+   * <p>An attribute of type Integer (Thirty-Two Bits).</p>
+   * @public
+   */
+  I?: number | undefined;
+
+  /**
+   * <p>An attribute of type Long.</p>
+   * @public
+   */
+  L?: number | undefined;
+
+  /**
+   * <p>An attribute of type Double (Sixty-Four Bits).</p>
+   * @public
+   */
+  D?: number | undefined;
+
+  /**
+   * <p>An attribute of type Binary. For example:</p>
+   *          <p>
+   *             <code>"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"</code>
+   *          </p>
+   * @public
+   */
+  BIN?: Uint8Array | undefined;
+
+  /**
+   * <p>An attribute of type unsigned long.</p>
+   * @public
+   */
+  UL?: string | undefined;
+}
+
+/**
+ * <p>The numerical range value type to compare a command parameter value against.</p>
+ * @public
+ */
+export interface CommandParameterValueNumberRange {
+  /**
+   * <p>The minimum value of a numerical range of a command parameter value.</p>
+   * @public
+   */
+  min: string | undefined;
+
+  /**
+   * <p>The maximum value of a numerical range of a command parameter value.</p>
+   * @public
+   */
+  max: string | undefined;
+}
+
+/**
+ * <p>The comparison operand used to compare the defined value against the value supplied in request.</p>
+ * @public
+ */
+export interface CommandParameterValueComparisonOperand {
+  /**
+   * <p>An operand of number value type, defined as a string.</p>
+   * @public
+   */
+  number?: string | undefined;
+
+  /**
+   * <p>A List of operands of numerical value type, defined as strings.</p>
+   * @public
+   */
+  numbers?: string[] | undefined;
+
+  /**
+   * <p>An operand of string value type.</p>
+   * @public
+   */
+  string?: string | undefined;
+
+  /**
+   * <p>A List of operands of string value type.</p>
+   * @public
+   */
+  strings?: string[] | undefined;
+
+  /**
+   * <p>An operand of numerical range value type.</p>
+   * @public
+   */
+  numberRange?: CommandParameterValueNumberRange | undefined;
+}
+
+/**
+ * <p>A condition for the command parameter that must be evaluated to true for successful creation of a command execution.</p>
+ * @public
+ */
+export interface CommandParameterValueCondition {
+  /**
+   * <p>The comparison operator for the command parameter.</p>
+   *          <note>
+   *             <p>IN_RANGE, and NOT_IN_RANGE operators include boundary values.</p>
+   *          </note>
+   * @public
+   */
+  comparisonOperator: CommandParameterValueComparisonOperator | undefined;
+
+  /**
+   * <p>The comparison operand for the command parameter.</p>
+   * @public
+   */
+  operand: CommandParameterValueComparisonOperand | undefined;
+}
+
+/**
+ * <p>A map of key-value pairs that describe the command.</p>
+ * @public
+ */
+export interface CommandParameter {
+  /**
+   * <p>The name of a specific parameter used in a command and command execution.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>The type of the command parameter.</p>
+   * @public
+   */
+  type?: CommandParameterType | undefined;
+
+  /**
+   * <p>Parameter value that overrides the default value, if set.</p>
+   * @public
+   */
+  value?: CommandParameterValue | undefined;
+
+  /**
+   * <p>The default value used to describe the command. This is the value assumed by the
+   *             parameter if no other value is assigned to it.</p>
+   * @public
+   */
+  defaultValue?: CommandParameterValue | undefined;
+
+  /**
+   * <p>The list of conditions that a command parameter value must satisfy to create a command execution.</p>
+   * @public
+   */
+  valueConditions?: CommandParameterValueCondition[] | undefined;
+
+  /**
+   * <p>The description of the command parameter.</p>
+   * @public
+   */
+  description?: string | undefined;
+}
+
+/**
+ * <p>The command payload object that contains the instructions for the device
+ *         to process.</p>
+ * @public
+ */
+export interface CommandPayload {
+  /**
+   * <p>The static payload file for the command.</p>
+   * @public
+   */
+  content?: Uint8Array | undefined;
+
+  /**
+   * <p>The content type that specifies the format type of the payload file. This
+   *         field must use a type/subtype format, such as <code>application/json</code>.
+   *         For information about various content types, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types">Common MIME types</a>.</p>
+   * @public
+   */
+  contentType?: string | undefined;
+}
+
+/**
+ * <p>Configures the command to treat the <code>payloadTemplate</code> as a JSON document for preprocessing.
+ *             This preprocessor substitutes placeholders with parameter values to generate the command execution request payload.
+ *             </p>
+ * @public
+ */
+export interface AwsJsonSubstitutionCommandPreprocessorConfig {
+  /**
+   * <p>Converts the command preprocessor result to the format defined by this parameter, before sending it to the device.</p>
+   * @public
+   */
+  outputFormat: OutputFormat | undefined;
+}
+
+/**
+ * <p>Configuration that determines how the <code>payloadTemplate</code> is processed by the service to generate the final payload sent to
+ *             devices at <code>StartCommandExecution</code> API invocation.</p>
+ * @public
+ */
+export interface CommandPreprocessor {
+  /**
+   * <p>Configuration for the JSON substitution preprocessor.</p>
+   * @public
+   */
+  awsJsonSubstitution?: AwsJsonSubstitutionCommandPreprocessorConfig | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCommandRequest {
+  /**
+   * <p>A unique identifier for the command. We recommend using UUID. Alpha-numeric
+   *             characters, hyphens, and underscores are valid for use here.</p>
+   * @public
+   */
+  commandId: string | undefined;
+
+  /**
+   * <p>The namespace of the command. The MQTT reserved topics and validations will be used
+   *             for command executions according to the namespace setting.</p>
+   * @public
+   */
+  namespace?: CommandNamespace | undefined;
+
+  /**
+   * <p>The user-friendly name in the console for the command. This name doesn't have to be
+   *             unique. You can update the user-friendly name after you define it.</p>
+   * @public
+   */
+  displayName?: string | undefined;
+
+  /**
+   * <p>A short text decription of the command.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>The payload object for the static command.</p>
+   *          <p>You can upload a static payload file from your local storage that contains the
+   *         instructions for the device to process. The payload file can use any format. To
+   *         make sure that the device correctly interprets the payload, we recommend you to
+   *         specify the payload content type.</p>
+   * @public
+   */
+  payload?: CommandPayload | undefined;
+
+  /**
+   * <p>The payload template for the dynamic command.</p>
+   *          <note>
+   *             <p>This parameter is required for dynamic commands where the
+   *                 command execution placeholders are supplied either from <code>mandatoryParameters</code> or when
+   *                     <code>StartCommandExecution</code> is invoked.</p>
+   *          </note>
+   * @public
+   */
+  payloadTemplate?: string | undefined;
+
+  /**
+   * <p>Configuration that determines how <code>payloadTemplate</code> is processed to generate command execution payload.</p>
+   *          <note>
+   *             <p>This parameter is required for dynamic commands, along with <code>payloadTemplate</code>,
+   *                 and <code>mandatoryParameters</code>.</p>
+   *          </note>
+   * @public
+   */
+  preprocessor?: CommandPreprocessor | undefined;
+
+  /**
+   * <p>A list of parameters that are used by <code>StartCommandExecution</code> API for
+   *             execution payload generation.</p>
+   * @public
+   */
+  mandatoryParameters?: CommandParameter[] | undefined;
+
+  /**
+   * <p>The IAM role that you must provide when using the <code>AWS-IoT-FleetWise</code> namespace.
+   *         The role grants IoT Device Management the permission to access IoT FleetWise resources
+   *         for generating the payload for the command. This field is not supported when you use the
+   *         <code>AWS-IoT</code> namespace.</p>
+   * @public
+   */
+  roleArn?: string | undefined;
+
+  /**
+   * <p>Name-value pairs that are used as metadata to manage a command.</p>
+   * @public
+   */
+  tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateCommandResponse {
+  /**
+   * <p>The unique identifier for the command.</p>
+   * @public
+   */
+  commandId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Number (ARN) of the command. For example,
+   *                 <code>arn:aws:iot:<region>:<accountid>:command/<commandId></code>
+   *          </p>
+   * @public
+   */
+  commandArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateCustomMetricRequest {
   /**
-   * <p> The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with <code>aws:</code>.
-   *       Cannot be updated
-   *       once defined.</p>
+   * <p> The name of the custom metric. This will be used in the metric report submitted from the
+   *       device/thing. The name can't begin with <code>aws:</code>. You can't change the name after you
+   *       define it.</p>
+   * @public
    */
   metricName: string | undefined;
 
   /**
-   * <p>
-   *       Field
-   *       represents a friendly name in the console for the custom metric;
-   *       it
-   *       doesn't have to be unique. Don't use this name as the metric identifier in
-   *       the device metric report. Can be updated once defined.</p>
+   * <p> The friendly name in the console for the custom metric. This name doesn't have to be
+   *       unique. Don't use this name as the metric identifier in the device metric report. You can
+   *       update the friendly name after you define it.</p>
+   * @public
    */
-  displayName?: string;
+  displayName?: string | undefined;
 
   /**
-   * <p>
-   *       The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.
-   *     </p>
+   * <p> The type of the custom metric. </p>
+   *          <important>
+   *             <p>The type <code>number</code> only takes a single metric value as an input, but when you
+   *         submit the metrics value in the DeviceMetrics report, you must pass it as an array with a
+   *         single value.</p>
+   *          </important>
+   * @public
    */
-  metricType: CustomMetricType | string | undefined;
+  metricType: CustomMetricType | undefined;
 
   /**
    * <p>
    *       Metadata that can be used to manage the custom metric.
    *     </p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 
   /**
    * <p>Each custom
@@ -4021,173 +4121,199 @@ export interface CreateCustomMetricRequest {
    *       already exists with a different token,
    *       an exception
    *       occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>
+   * @public
    */
-  clientRequestToken?: string;
+  clientRequestToken?: string | undefined;
 }
 
-export namespace CreateCustomMetricRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCustomMetricRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateCustomMetricResponse {
   /**
    * <p>
    *       The name of the custom metric to be used in the metric report.
    *     </p>
+   * @public
    */
-  metricName?: string;
+  metricName?: string | undefined;
 
   /**
-   * <p>
-   *       The Amazon Resource Number (ARN) of the custom metric, e.g. <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>
+   * <p> The Amazon Resource Number (ARN) of the custom metric. For example,
+   *           <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>
    *             </code>
    *          </p>
+   * @public
    */
-  metricArn?: string;
+  metricArn?: string | undefined;
 }
 
-export namespace CreateCustomMetricResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateCustomMetricResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum DimensionType {
-  TOPIC_FILTER = "TOPIC_FILTER",
-}
-
+/**
+ * @public
+ */
 export interface CreateDimensionRequest {
   /**
    * <p>A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>Specifies the type of dimension. Supported types: <code>TOPIC_FILTER.</code>
    *          </p>
+   * @public
    */
-  type: DimensionType | string | undefined;
+  type: DimensionType | undefined;
 
   /**
    * <p>Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").</p>
+   * @public
    */
   stringValues: string[] | undefined;
 
   /**
    * <p>Metadata that can be used to manage the dimension.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 
   /**
    * <p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs.
    *       If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
+   * @public
    */
-  clientRequestToken?: string;
+  clientRequestToken?: string | undefined;
 }
 
-export namespace CreateDimensionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDimensionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDimensionResponse {
   /**
    * <p>A unique identifier for the dimension.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name
    *       (ARN)
    *       of
    *       the created dimension.</p>
+   * @public
    */
-  arn?: string;
-}
-
-export namespace CreateDimensionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDimensionResponse): any => ({
-    ...obj,
-  });
+  arn?: string | undefined;
 }
 
 /**
- * <p>The certificate is invalid.</p>
+ * <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
+ * @public
  */
-export interface CertificateValidationException extends __SmithyException, $MetadataBearer {
-  name: "CertificateValidationException";
-  $fault: "client";
+export interface ClientCertificateConfig {
   /**
-   * <p>Additional information about the exception.</p>
+   * <p>The ARN of the Lambda function that IoT invokes after mutual TLS authentication during the connection.</p>
+   * @public
    */
-  message?: string;
+  clientCertificateCallbackArn?: string | undefined;
 }
 
-export namespace CertificateValidationException {
+/**
+ * <p>The server certificate configuration.</p>
+ * @public
+ */
+export interface ServerCertificateConfig {
   /**
-   * @internal
+   * <p>A Boolean value that indicates whether Online Certificate Status Protocol (OCSP) server
+   *          certificate check is enabled or not.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html">
+   *          Server certificate configuration for OCSP stapling</a> from Amazon Web Services IoT Core Developer Guide.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CertificateValidationException): any => ({
-    ...obj,
-  });
+  enableOCSPCheck?: boolean | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for Comments
+   *          (RFC) 6960-compliant Online Certificate Status Protocol (OCSP) responder, supporting basic
+   *          OCSP responses. The Lambda function accepts a base64-encoding of the OCSP request in the
+   *          Distinguished Encoding Rules (DER) format. The Lambda function's response is also a
+   *          base64-encoded OCSP response in the DER format. The response size must not exceed 4
+   *          kilobytes (KiB). The Lambda function must be in the same Amazon Web Services account and region as the
+   *          domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html#iot-custom-endpoints-cert-config-ocsp-private-endpoint.html">Configuring server certificate OCSP for private endpoints in Amazon Web Services IoT Core</a> from the
+   *          Amazon Web Services IoT Core developer guide.</p>
+   * @public
+   */
+  ocspLambdaArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web Services Certificate
+   *          Manager (ACM). If provided, Amazon Web Services IoT Core will use this certificate to validate the signature
+   *          of the received OCSP response. The OCSP responder must sign responses using either this
+   *          authorized responder certificate or the issuing certificate, depending on whether the ARN
+   *          is provided or not. The certificate must be in the same Amazon Web Services account and region as the
+   *          domain configuration.</p>
+   * @public
+   */
+  ocspAuthorizedResponderArn?: string | undefined;
 }
 
-export enum ServiceType {
-  CREDENTIAL_PROVIDER = "CREDENTIAL_PROVIDER",
-  DATA = "DATA",
-  JOBS = "JOBS",
+/**
+ * <p>An object that specifies the TLS configuration for a domain.</p>
+ * @public
+ */
+export interface TlsConfig {
+  /**
+   * <p>The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security
+   *             policies </a> in the <i>Amazon Web Services IoT Core developer
+   *          guide</i>.</p>
+   * @public
+   */
+  securityPolicy?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateDomainConfigurationRequest {
   /**
    * <p>The name of the domain configuration. This value must be unique to a region.</p>
+   * @public
    */
   domainConfigurationName: string | undefined;
 
   /**
    * <p>The name of the domain.</p>
+   * @public
    */
-  domainName?: string;
+  domainName?: string | undefined;
 
   /**
    * <p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN.
    *       This value is not required for Amazon Web Services-managed domains.</p>
+   * @public
    */
-  serverCertificateArns?: string[];
+  serverCertificateArns?: string[] | undefined;
 
   /**
    * <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority.
    *          This value is not required for Amazon Web Services-managed domains.</p>
+   * @public
    */
-  validationCertificateArn?: string;
+  validationCertificateArn?: string | undefined;
 
   /**
    * <p>An object that specifies the authorization service for a domain.</p>
+   * @public
    */
-  authorizerConfig?: AuthorizerConfig;
+  authorizerConfig?: AuthorizerConfig | undefined;
 
   /**
    * <p>The type of service delivered by the endpoint.</p>
    *          <note>
    *             <p>Amazon Web Services IoT Core currently supports only the <code>DATA</code> service type.</p>
    *          </note>
+   * @public
    */
-  serviceType?: ServiceType | string;
+  serviceType?: ServiceType | undefined;
 
   /**
    * <p>Metadata which can be used to manage the domain configuration.</p>
@@ -4198,1168 +4324,1154 @@ export interface CreateDomainConfigurationRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: Tag[];
-}
+  tags?: Tag[] | undefined;
 
-export namespace CreateDomainConfigurationRequest {
   /**
-   * @internal
+   * <p>An object that specifies the TLS configuration for a domain.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateDomainConfigurationRequest): any => ({
-    ...obj,
-  });
+  tlsConfig?: TlsConfig | undefined;
+
+  /**
+   * <p>The server certificate configuration.</p>
+   * @public
+   */
+  serverCertificateConfig?: ServerCertificateConfig | undefined;
+
+  /**
+   * <p>An enumerated string that speciﬁes the authentication type.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>CUSTOM_AUTH_X509</code> - Use custom authentication and authorization with additional details from the X.509 client certificate.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>CUSTOM_AUTH</code> - Use custom authentication and authorization. For more
+   *                information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html">Custom authentication and authorization</a>.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>AWS_X509</code> - Use X.509 client certificates without custom authentication and authorization. For more information,
+   *                see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html">X.509 client certificates</a>.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>AWS_SIGV4</code> - Use Amazon Web Services Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html">IAM users, groups, and roles</a>.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify authentication type.
+   *                For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  authenticationType?: AuthenticationType | undefined;
+
+  /**
+   * <p>An enumerated string that speciﬁes the application-layer protocol.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SECURE_MQTT</code> - MQTT over TLS.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MQTT_WSS</code> - MQTT over WebSocket.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>HTTPS</code> - HTTP over TLS.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
+   *                For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  applicationProtocol?: ApplicationProtocol | undefined;
+
+  /**
+   * <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
+   * @public
+   */
+  clientCertificateConfig?: ClientCertificateConfig | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateDomainConfigurationResponse {
   /**
    * <p>The name of the domain configuration.</p>
+   * @public
    */
-  domainConfigurationName?: string;
+  domainConfigurationName?: string | undefined;
 
   /**
    * <p>The ARN of the domain configuration.</p>
+   * @public
    */
-  domainConfigurationArn?: string;
-}
-
-export namespace CreateDomainConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDomainConfigurationResponse): any => ({
-    ...obj,
-  });
+  domainConfigurationArn?: string | undefined;
 }
 
 /**
  * <p>Thing group properties.</p>
+ * @public
  */
 export interface ThingGroupProperties {
   /**
    * <p>The thing group description.</p>
+   * @public
    */
-  thingGroupDescription?: string;
+  thingGroupDescription?: string | undefined;
 
   /**
    * <p>The thing group attributes in JSON format.</p>
+   * @public
    */
-  attributePayload?: AttributePayload;
+  attributePayload?: AttributePayload | undefined;
 }
 
-export namespace ThingGroupProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThingGroupProperties): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDynamicThingGroupRequest {
   /**
    * <p>The dynamic thing group name to create.</p>
+   * @public
    */
   thingGroupName: string | undefined;
 
   /**
    * <p>The dynamic thing group properties.</p>
+   * @public
    */
-  thingGroupProperties?: ThingGroupProperties;
+  thingGroupProperties?: ThingGroupProperties | undefined;
 
   /**
    * <p>The dynamic thing group index name.</p>
-   * 		       <note>
-   * 			         <p>Currently one index is supported: <code>AWS_Things</code>.</p>
-   * 		       </note>
+   *          <note>
+   *             <p>Currently one index is supported: <code>AWS_Things</code>.</p>
+   *          </note>
+   * @public
    */
-  indexName?: string;
+  indexName?: string | undefined;
 
   /**
    * <p>The dynamic thing group search query string.</p>
-   * 		       <p>See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html">Query Syntax</a> for information about query string syntax.</p>
+   *          <p>See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html">Query Syntax</a> for information about query string syntax.</p>
+   * @public
    */
   queryString: string | undefined;
 
   /**
    * <p>The dynamic thing group query version.</p>
-   * 		       <note>
-   * 			         <p>Currently one query version is supported: "2017-09-30". If not specified, the
+   *          <note>
+   *             <p>Currently one query version is supported: "2017-09-30". If not specified, the
    * 				query version defaults to this value.</p>
-   * 		       </note>
+   *          </note>
+   * @public
    */
-  queryVersion?: string;
+  queryVersion?: string | undefined;
 
   /**
    * <p>Metadata which can be used to manage the dynamic thing group.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreateDynamicThingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDynamicThingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateDynamicThingGroupResponse {
-  /**
-   * <p>The dynamic thing group name.</p>
-   */
-  thingGroupName?: string;
-
-  /**
-   * <p>The dynamic thing group ARN.</p>
-   */
-  thingGroupArn?: string;
-
-  /**
-   * <p>The dynamic thing group ID.</p>
-   */
-  thingGroupId?: string;
-
-  /**
-   * <p>The dynamic thing group index name.</p>
-   */
-  indexName?: string;
-
-  /**
-   * <p>The dynamic thing group search query string.</p>
-   */
-  queryString?: string;
-
-  /**
-   * <p>The dynamic thing group query version.</p>
-   */
-  queryVersion?: string;
-}
-
-export namespace CreateDynamicThingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDynamicThingGroupResponse): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
- * <p>The query is invalid.</p>
+ * @public
  */
-export interface InvalidQueryException extends __SmithyException, $MetadataBearer {
-  name: "InvalidQueryException";
-  $fault: "client";
+export interface CreateDynamicThingGroupResponse {
   /**
-   * <p>The message for the exception.</p>
+   * <p>The dynamic thing group name.</p>
+   * @public
    */
-  message?: string;
-}
+  thingGroupName?: string | undefined;
 
-export namespace InvalidQueryException {
   /**
-   * @internal
+   * <p>The dynamic thing group ARN.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidQueryException): any => ({
-    ...obj,
-  });
+  thingGroupArn?: string | undefined;
+
+  /**
+   * <p>The dynamic thing group ID.</p>
+   * @public
+   */
+  thingGroupId?: string | undefined;
+
+  /**
+   * <p>The dynamic thing group index name.</p>
+   * @public
+   */
+  indexName?: string | undefined;
+
+  /**
+   * <p>The dynamic thing group search query string.</p>
+   * @public
+   */
+  queryString?: string | undefined;
+
+  /**
+   * <p>The dynamic thing group query version.</p>
+   * @public
+   */
+  queryVersion?: string | undefined;
 }
 
-export enum FleetMetricUnit {
-  Bits = "Bits",
-  BitsSecond = "Bits/Second",
-  Bytes = "Bytes",
-  BytesSecond = "Bytes/Second",
-  Count = "Count",
-  CountSecond = "Count/Second",
-  Gigabits = "Gigabits",
-  GigabitsSecond = "Gigabits/Second",
-  Gigabytes = "Gigabytes",
-  GigabytesSecond = "Gigabytes/Second",
-  Kilobits = "Kilobits",
-  KilobitsSecond = "Kilobits/Second",
-  Kilobytes = "Kilobytes",
-  KilobytesSecond = "Kilobytes/Second",
-  Megabits = "Megabits",
-  MegabitsSecond = "Megabits/Second",
-  Megabytes = "Megabytes",
-  MegabytesSecond = "Megabytes/Second",
-  Microseconds = "Microseconds",
-  Milliseconds = "Milliseconds",
-  None = "None",
-  Percent = "Percent",
-  Seconds = "Seconds",
-  Terabits = "Terabits",
-  TerabitsSecond = "Terabits/Second",
-  Terabytes = "Terabytes",
-  TerabytesSecond = "Terabytes/Second",
-}
-
+/**
+ * @public
+ */
 export interface CreateFleetMetricRequest {
   /**
    * <p>The name of the fleet metric to create.</p>
+   * @public
    */
   metricName: string | undefined;
 
   /**
    * <p>The search query string.</p>
+   * @public
    */
   queryString: string | undefined;
 
   /**
    * <p>The type of the aggregation query.</p>
+   * @public
    */
   aggregationType: AggregationType | undefined;
 
   /**
    * <p>The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.</p>
+   * @public
    */
   period: number | undefined;
 
   /**
    * <p>The field to aggregate.</p>
+   * @public
    */
   aggregationField: string | undefined;
 
   /**
    * <p>The fleet metric description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The query version.</p>
+   * @public
    */
-  queryVersion?: string;
+  queryVersion?: string | undefined;
 
   /**
    * <p>The name of the index to search.</p>
+   * @public
    */
-  indexName?: string;
+  indexName?: string | undefined;
 
   /**
    * <p>Used to support unit transformation such as milliseconds to seconds. The unit must be
-   *       supported by <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.</p>
+   *       supported by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.</p>
+   * @public
    */
-  unit?: FleetMetricUnit | string;
+  unit?: FleetMetricUnit | undefined;
 
   /**
    * <p>Metadata, which can be used to manage the fleet metric.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateFleetMetricRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFleetMetricRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateFleetMetricResponse {
   /**
    * <p>The name of the fleet metric to create.</p>
+   * @public
    */
-  metricName?: string;
+  metricName?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the new fleet metric.</p>
+   * @public
    */
-  metricArn?: string;
-}
-
-export namespace CreateFleetMetricResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateFleetMetricResponse): any => ({
-    ...obj,
-  });
+  metricArn?: string | undefined;
 }
 
 /**
- * <p>The index is not ready.</p>
+ * <p>The criteria that determines how many retries are allowed for each failure type for a
+ *             job.</p>
+ * @public
  */
-export interface IndexNotReadyException extends __SmithyException, $MetadataBearer {
-  name: "IndexNotReadyException";
-  $fault: "client";
+export interface RetryCriteria {
   /**
-   * <p>The message for the exception.</p>
+   * <p>The type of job execution failures that can initiate a job retry.</p>
+   * @public
    */
-  message?: string;
-}
+  failureType: RetryableFailureType | undefined;
 
-export namespace IndexNotReadyException {
   /**
-   * @internal
+   * <p>The number of retries allowed for a failure type for the job.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: IndexNotReadyException): any => ({
-    ...obj,
-  });
+  numberOfRetries: number | undefined;
 }
 
 /**
- * <p>The aggregation is invalid.</p>
+ * <p>The configuration that determines how many retries are allowed for each failure type
+ *             for a job.</p>
+ * @public
  */
-export interface InvalidAggregationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidAggregationException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidAggregationException {
+export interface JobExecutionsRetryConfig {
   /**
-   * @internal
+   * <p>The list of criteria that determines how many retries are allowed for each failure
+   *             type for a job.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidAggregationException): any => ({
-    ...obj,
-  });
+  criteriaList: RetryCriteria[] | undefined;
 }
 
 /**
- * <p>Allows you to define a criteria to initiate the increase in rate of rollout for a job.</p>
+ * <p>Allows you to define a criteria to initiate the increase in rate of rollout for a
+ *             job.</p>
+ * @public
  */
 export interface RateIncreaseCriteria {
   /**
-   * <p>The threshold for number of notified things that will initiate the increase in rate of rollout.</p>
+   * <p>The threshold for number of notified things that will initiate the increase in rate
+   *             of rollout.</p>
+   * @public
    */
-  numberOfNotifiedThings?: number;
+  numberOfNotifiedThings?: number | undefined;
 
   /**
-   * <p>The threshold for number of succeeded things that will initiate the increase in rate of rollout.</p>
+   * <p>The threshold for number of succeeded things that will initiate the increase in
+   *             rate of rollout.</p>
+   * @public
    */
-  numberOfSucceededThings?: number;
-}
-
-export namespace RateIncreaseCriteria {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RateIncreaseCriteria): any => ({
-    ...obj,
-  });
+  numberOfSucceededThings?: number | undefined;
 }
 
 /**
  * <p>Allows you to create an exponential rate of rollout for a job.</p>
+ * @public
  */
 export interface ExponentialRolloutRate {
   /**
-   * <p>The minimum number of things that will be notified of a pending job, per minute at the start of job rollout.
-   *             This parameter allows you to define the initial rate of rollout.</p>
+   * <p>The minimum number of things that will be notified of a pending job, per minute at
+   *             the start of job rollout. This parameter allows you to define the initial rate of
+   *             rollout.</p>
+   * @public
    */
   baseRatePerMinute: number | undefined;
 
   /**
    * <p>The exponential factor to increase the rate of rollout for a job.</p>
-   *         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>
+   *          <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not
+   *             1.55).</p>
+   * @public
    */
   incrementFactor: number | undefined;
 
   /**
    * <p>The criteria to initiate the increase in rate of rollout for a job.</p>
+   * @public
    */
   rateIncreaseCriteria: RateIncreaseCriteria | undefined;
 }
 
-export namespace ExponentialRolloutRate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExponentialRolloutRate): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Allows you to create a staged rollout of a job.</p>
+ * @public
  */
 export interface JobExecutionsRolloutConfig {
   /**
    * <p>The maximum number of things that will be notified of a pending job, per minute.
-   *         This parameter allows you to create a staged rollout.</p>
+   *             This parameter allows you to create a staged rollout.</p>
+   * @public
    */
-  maximumPerMinute?: number;
+  maximumPerMinute?: number | undefined;
 
   /**
-   * <p>The rate of increase for a job rollout.
-   *             This parameter allows you to define an exponential rate for a job rollout.</p>
+   * <p>The rate of increase for a job rollout. This parameter allows you to define an
+   *             exponential rate for a job rollout.</p>
+   * @public
    */
-  exponentialRate?: ExponentialRolloutRate;
-}
-
-export namespace JobExecutionsRolloutConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: JobExecutionsRolloutConfig): any => ({
-    ...obj,
-  });
+  exponentialRate?: ExponentialRolloutRate | undefined;
 }
 
 /**
  * <p>Configuration for pre-signed S3 URLs.</p>
+ * @public
  */
 export interface PresignedUrlConfig {
   /**
-   * <p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job
-   *             data/updates are stored. The role must also grant permission for IoT to download the files.</p>
+   * <p>The ARN of an IAM role that grants permission to download files from the S3 bucket
+   *             where the job data/updates are stored. The role must also grant permission for IoT to
+   *             download the files.</p>
+   *          <important>
+   *             <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core
+   *                     developer guide</i>.</p>
+   *          </important>
+   * @public
    */
-  roleArn?: string;
+  roleArn?: string | undefined;
 
   /**
-   * <p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600
-   *             seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.</p>
+   * <p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the
+   *             default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT
+   *             request for the job document.</p>
+   * @public
    */
-  expiresInSec?: number;
-}
-
-export namespace PresignedUrlConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PresignedUrlConfig): any => ({
-    ...obj,
-  });
-}
-
-export enum TargetSelection {
-  CONTINUOUS = "CONTINUOUS",
-  SNAPSHOT = "SNAPSHOT",
+  expiresInSec?: number | undefined;
 }
 
 /**
- * <p>Specifies the amount of time each device has to finish its execution of the job.  A timer
- *            is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job
- *            execution status is not set to another terminal state before the timer expires, it will
- *            be automatically set to <code>TIMED_OUT</code>.</p>
+ * <p>An optional configuration within the <code>SchedulingConfig</code> to setup a
+ *             recurring maintenance window with a predetermined start time and duration for the
+ *             rollout of a job document to all devices in a target group for a job.</p>
+ * @public
+ */
+export interface MaintenanceWindow {
+  /**
+   * <p>Displays the start time of the next maintenance window.</p>
+   * @public
+   */
+  startTime: string | undefined;
+
+  /**
+   * <p>Displays the duration of the next maintenance window.</p>
+   * @public
+   */
+  durationInMinutes: number | undefined;
+}
+
+/**
+ * <p>Specifies the date and time that a job will begin the rollout of the job document to
+ *             all devices in the target group. Additionally, you can specify the end behavior for each
+ *             job execution when it reaches the scheduled end time.</p>
+ * @public
+ */
+export interface SchedulingConfig {
+  /**
+   * <p>The time a job will begin rollout of the job document to all devices in the target
+   *             group for a job. The <code>startTime</code> can be scheduled up to a year in advance and
+   *             must be scheduled a minimum of thirty minutes from the current time. The date and time
+   *             format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the
+   *             time.</p>
+   *          <p>For more information on the syntax for <code>startTime</code> when using an API
+   *             command or the Command Line Interface, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp">Timestamp</a>.</p>
+   * @public
+   */
+  startTime?: string | undefined;
+
+  /**
+   * <p>The time a job will stop rollout of the job document to all devices in the target
+   *             group for a job. The <code>endTime</code> must take place no later than two years from
+   *             the current time and be scheduled a minimum of thirty minutes from the current time. The
+   *             minimum duration between <code>startTime</code> and <code>endTime</code> is thirty
+   *             minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is
+   *             two years. The date and time format for the <code>endTime</code> is YYYY-MM-DD for the
+   *             date and HH:MM for the time.</p>
+   *          <p>For more information on the syntax for <code>endTime</code> when using an API command
+   *             or the Command Line Interface, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp">Timestamp</a>.</p>
+   * @public
+   */
+  endTime?: string | undefined;
+
+  /**
+   * <p>Specifies the end behavior for all job executions after a job reaches the selected
+   *                 <code>endTime</code>. If <code>endTime</code> is not selected when creating the job,
+   *             then <code>endBehavior</code> does not apply.</p>
+   * @public
+   */
+  endBehavior?: JobEndBehavior | undefined;
+
+  /**
+   * <p>An optional configuration within the <code>SchedulingConfig</code> to setup a
+   *             recurring maintenance window with a predetermined start time and duration for the
+   *             rollout of a job document to all devices in a target group for a job.</p>
+   * @public
+   */
+  maintenanceWindows?: MaintenanceWindow[] | undefined;
+}
+
+/**
+ * <p>Specifies the amount of time each device has to finish its execution of the job. A
+ *             timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If
+ *             the job execution status is not set to another terminal state before the timer expires,
+ *             it will be automatically set to <code>TIMED_OUT</code>.</p>
+ * @public
  */
 export interface TimeoutConfig {
   /**
-   * <p>Specifies the amount of time, in minutes, this device has to finish execution of this job.
-   *            The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The
-   *            in progress timer can't be updated and will apply to all job executions for the job. Whenever a job
-   *            execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail
-   *            and switch to the terminal <code>TIMED_OUT</code> status.</p>
+   * <p>Specifies the amount of time, in minutes, this device has to finish execution of this
+   *             job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080
+   *             minutes). The in progress timer can't be updated and will apply to all job executions
+   *             for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than
+   *             this interval, the job execution will fail and switch to the terminal
+   *                 <code>TIMED_OUT</code> status.</p>
+   * @public
    */
-  inProgressTimeoutInMinutes?: number;
+  inProgressTimeoutInMinutes?: number | undefined;
 }
 
-export namespace TimeoutConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimeoutConfig): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateJobRequest {
   /**
-   * <p>A job identifier which must be unique for your Amazon Web Services account. We recommend using a UUID. Alpha-numeric
-   *             characters, "-" and "_" are valid for use here.</p>
+   * <p>A job identifier which must be unique for your account. We recommend using a UUID.
+   *             Alpha-numeric characters, "-" and "_" are valid for use here.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>A list of things and thing groups to which the job should be sent.</p>
+   * @public
    */
   targets: string[] | undefined;
 
   /**
-   * <p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p>
-   *         <note>
-   *             <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>
-   *             <p>The placeholder link is of the following form:</p>
-   *             <p>
-   *                <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>
-   *             </p>
-   *             <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>
-   *         </note>
+   * <p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL
+   *             and is required if you don't specify a value for <code>document</code>.</p>
+   *          <p>For example, <code>--document-source
+   *                 https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>
+   *          </p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a
+   *                 bucket</a>.</p>
+   * @public
    */
-  documentSource?: string;
+  documentSource?: string | undefined;
 
   /**
-   * <p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>
+   * <p>The job document. Required if you don't specify a value for
+   *                 <code>documentSource</code>.</p>
+   * @public
    */
-  document?: string;
+  document?: string | undefined;
 
   /**
    * <p>A short text description of the job.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Configuration information for pre-signed S3 URLs.</p>
+   * @public
    */
-  presignedUrlConfig?: PresignedUrlConfig;
+  presignedUrlConfig?: PresignedUrlConfig | undefined;
 
   /**
-   * <p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things
-   *             specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing
-   *             when a change is detected in a target. For example, a job will run on a thing when the thing is added to a
-   *             target group, even after the job was completed by all things originally in the group.</p>
+   * <p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete
+   *             after all those things specified as targets have completed the job (SNAPSHOT). If
+   *             continuous, the job may also be run on a thing when a change is detected in a target.
+   *             For example, a job will run on a thing when the thing is added to a target group, even
+   *             after the job was completed by all things originally in the group.</p>
+   *          <note>
+   *             <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic
+   *                 thing group targets. By using continuous jobs, devices that join the group receive
+   *                 the job execution even after the job has been created.</p>
+   *          </note>
+   * @public
    */
-  targetSelection?: TargetSelection | string;
+  targetSelection?: TargetSelection | undefined;
 
   /**
    * <p>Allows you to create a staged rollout of the job.</p>
+   * @public
    */
-  jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+  jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig | undefined;
 
   /**
-   * <p>Allows you to create criteria to abort a job.</p>
+   * <p>Allows you to create the criteria to abort a job.</p>
+   * @public
    */
-  abortConfig?: AbortConfig;
+  abortConfig?: AbortConfig | undefined;
 
   /**
-   * <p>Specifies the amount of time each device has to finish its execution of the job. The timer
-   *            is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job
-   *            execution status is not set to another terminal state before the time expires, it will be
-   *            automatically set to <code>TIMED_OUT</code>.</p>
+   * <p>Specifies the amount of time each device has to finish its execution of the job. The
+   *             timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If
+   *             the job execution status is not set to another terminal state before the time expires,
+   *             it will be automatically set to <code>TIMED_OUT</code>.</p>
+   * @public
    */
-  timeoutConfig?: TimeoutConfig;
+  timeoutConfig?: TimeoutConfig | undefined;
 
   /**
    * <p>Metadata which can be used to manage the job.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 
   /**
    * <p>The namespace used to indicate that a job is a customer-managed job.</p>
-   *         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that
-   *             contain the value in the following format.</p>
-   *         <p>
+   *          <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to
+   *             MQTT topics that contain the value in the following format.</p>
+   *          <p>
    *             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
    *          </p>
-   *         <note>
-   *             <p>The <code>namespaceId</code> feature is in public preview.</p>
+   *          <note>
+   *             <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html">Setting up IoT Greengrass core devices.</a>
+   *             </p>
    *          </note>
+   * @public
    */
-  namespaceId?: string;
+  namespaceId?: string | undefined;
 
   /**
    * <p>The ARN of the job template used to create the job.</p>
+   * @public
    */
-  jobTemplateArn?: string;
-}
-
-export namespace CreateJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateJobResponse {
-  /**
-   * <p>The job ARN.</p>
-   */
-  jobArn?: string;
+  jobTemplateArn?: string | undefined;
 
   /**
-   * <p>The unique identifier you assigned to this job.</p>
+   * <p>Allows you to create the criteria to retry a job.</p>
+   * @public
    */
-  jobId?: string;
+  jobExecutionsRetryConfig?: JobExecutionsRetryConfig | undefined;
 
   /**
-   * <p>The job description.</p>
+   * <p>Parameters of an Amazon Web Services managed template that you can specify to create the job
+   *             document.</p>
+   *          <note>
+   *             <p>
+   *                <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services
+   *                 managed templates. This parameter can't be used with custom job templates or to
+   *                 create jobs from them.</p>
+   *          </note>
+   * @public
    */
-  description?: string;
-}
+  documentParameters?: Record<string, string> | undefined;
 
-export namespace CreateJobResponse {
   /**
-   * @internal
+   * <p>The configuration that allows you to schedule a job for a future date and time in
+   *             addition to specifying the end behavior for each job execution.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateJobResponse): any => ({
-    ...obj,
-  });
+  schedulingConfig?: SchedulingConfig | undefined;
+
+  /**
+   * <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job
+   *             successfully completes. The package version must be in either the Published or
+   *             Deprecated state when the job deploys. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>. </p>
+   *          <p>
+   *             <b>Note:</b>The following Length Constraints relates to a
+   *             single ARN. Up to 25 package version ARNs are allowed.</p>
+   * @public
+   */
+  destinationPackageVersions?: string[] | undefined;
 }
 
 /**
- * <p>A resource with the same name already exists.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ConflictException {
+export interface CreateJobResponse {
   /**
-   * @internal
+   * <p>The job ARN.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
+  jobArn?: string | undefined;
+
+  /**
+   * <p>The unique identifier you assigned to this job.</p>
+   * @public
+   */
+  jobId?: string | undefined;
+
+  /**
+   * <p>The job description.</p>
+   * @public
+   */
+  description?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateJobTemplateRequest {
   /**
    * <p>A unique identifier for the job template. We recommend using a UUID. Alpha-numeric
-   *         characters, "-", and "_" are valid for use here.</p>
+   *             characters, "-", and "_" are valid for use here.</p>
+   * @public
    */
   jobTemplateId: string | undefined;
 
   /**
    * <p>The ARN of the job to use as the basis for the job template.</p>
+   * @public
    */
-  jobArn?: string;
+  jobArn?: string | undefined;
 
   /**
-   * <p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p>
-   *         <note>
-   *             <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>
-   *             <p>The placeholder link is of the following form:</p>
-   *             <p>
-   *                <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>
-   *             </p>
-   *             <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>
-   *         </note>
+   * <p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL
+   *             and is required if you don't specify a value for <code>document</code>.</p>
+   *          <p>For example, <code>--document-source
+   *                 https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>
+   *          </p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a
+   *                 bucket</a>.</p>
+   * @public
    */
-  documentSource?: string;
+  documentSource?: string | undefined;
 
   /**
-   * <p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>
+   * <p>The job document. Required if you don't specify a value for
+   *                 <code>documentSource</code>.</p>
+   * @public
    */
-  document?: string;
+  document?: string | undefined;
 
   /**
    * <p>A description of the job document.</p>
+   * @public
    */
   description: string | undefined;
 
   /**
    * <p>Configuration for pre-signed S3 URLs.</p>
+   * @public
    */
-  presignedUrlConfig?: PresignedUrlConfig;
+  presignedUrlConfig?: PresignedUrlConfig | undefined;
 
   /**
    * <p>Allows you to create a staged rollout of a job.</p>
+   * @public
    */
-  jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+  jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig | undefined;
 
   /**
    * <p>The criteria that determine when and how a job abort takes place.</p>
+   * @public
    */
-  abortConfig?: AbortConfig;
+  abortConfig?: AbortConfig | undefined;
 
   /**
-   * <p>Specifies the amount of time each device has to finish its execution of the job.  A timer
-   *            is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job
-   *            execution status is not set to another terminal state before the timer expires, it will
-   *            be automatically set to <code>TIMED_OUT</code>.</p>
+   * <p>Specifies the amount of time each device has to finish its execution of the job. A
+   *             timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If
+   *             the job execution status is not set to another terminal state before the timer expires,
+   *             it will be automatically set to <code>TIMED_OUT</code>.</p>
+   * @public
    */
-  timeoutConfig?: TimeoutConfig;
+  timeoutConfig?: TimeoutConfig | undefined;
 
   /**
    * <p>Metadata that can be used to manage the job template.</p>
+   * @public
    */
-  tags?: Tag[];
-}
+  tags?: Tag[] | undefined;
 
-export namespace CreateJobTemplateRequest {
   /**
-   * @internal
+   * <p>Allows you to create the criteria to retry a job.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateJobTemplateRequest): any => ({
-    ...obj,
-  });
+  jobExecutionsRetryConfig?: JobExecutionsRetryConfig | undefined;
+
+  /**
+   * <p>Allows you to configure an optional maintenance window for the rollout of a job
+   *             document to all devices in the target group for a job.</p>
+   * @public
+   */
+  maintenanceWindows?: MaintenanceWindow[] | undefined;
+
+  /**
+   * <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job
+   *             successfully completes. The package version must be in either the Published or
+   *             Deprecated state when the job deploys. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+   *          <p>
+   *             <b>Note:</b>The following Length Constraints relates to a
+   *             single ARN. Up to 25 package version ARNs are allowed.</p>
+   * @public
+   */
+  destinationPackageVersions?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateJobTemplateResponse {
   /**
    * <p>The ARN of the job template.</p>
+   * @public
    */
-  jobTemplateArn?: string;
+  jobTemplateArn?: string | undefined;
 
   /**
    * <p>The unique identifier of the job template.</p>
+   * @public
    */
-  jobTemplateId?: string;
-}
-
-export namespace CreateJobTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateJobTemplateResponse): any => ({
-    ...obj,
-  });
+  jobTemplateId?: string | undefined;
 }
 
 /**
  * <p>The input for the CreateKeysAndCertificate operation.</p>
  *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateKeysAndCertificateRequest</a> action.</p>
+ * @public
  */
 export interface CreateKeysAndCertificateRequest {
   /**
    * <p>Specifies whether the certificate is active.</p>
+   * @public
    */
-  setAsActive?: boolean;
-}
-
-export namespace CreateKeysAndCertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateKeysAndCertificateRequest): any => ({
-    ...obj,
-  });
+  setAsActive?: boolean | undefined;
 }
 
 /**
  * <p>Describes a key pair.</p>
+ * @public
  */
 export interface KeyPair {
   /**
    * <p>The public key.</p>
+   * @public
    */
-  PublicKey?: string;
+  PublicKey?: string | undefined;
 
   /**
    * <p>The private key.</p>
+   * @public
    */
-  PrivateKey?: string;
-}
-
-export namespace KeyPair {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KeyPair): any => ({
-    ...obj,
-    ...(obj.PrivateKey && { PrivateKey: SENSITIVE_STRING }),
-  });
+  PrivateKey?: string | undefined;
 }
 
 /**
  * <p>The output of the CreateKeysAndCertificate operation.</p>
+ * @public
  */
 export interface CreateKeysAndCertificateResponse {
   /**
    * <p>The ARN of the certificate.</p>
+   * @public
    */
-  certificateArn?: string;
+  certificateArn?: string | undefined;
 
   /**
    * <p>The ID of the certificate. IoT issues a default subject name for the certificate
    *          (for example, IoT Certificate).</p>
+   * @public
    */
-  certificateId?: string;
+  certificateId?: string | undefined;
 
   /**
    * <p>The certificate data, in PEM format.</p>
+   * @public
    */
-  certificatePem?: string;
+  certificatePem?: string | undefined;
 
   /**
    * <p>The generated key pair.</p>
+   * @public
    */
-  keyPair?: KeyPair;
-}
-
-export namespace CreateKeysAndCertificateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateKeysAndCertificateResponse): any => ({
-    ...obj,
-    ...(obj.keyPair && { keyPair: KeyPair.filterSensitiveLog(obj.keyPair) }),
-  });
-}
-
-export enum LogLevel {
-  DEBUG = "DEBUG",
-  DISABLED = "DISABLED",
-  ERROR = "ERROR",
-  INFO = "INFO",
-  WARN = "WARN",
+  keyPair?: KeyPair | undefined;
 }
 
 /**
  * <p>Parameters used when defining a mitigation action that enable Amazon Web Services IoT Core logging.</p>
+ * @public
  */
 export interface EnableIoTLoggingParams {
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM role used for logging.</p>
+   * @public
    */
   roleArnForLogging: string | undefined;
 
   /**
    * <p>Specifies the type of information to be logged.</p>
+   * @public
    */
-  logLevel: LogLevel | string | undefined;
-}
-
-export namespace EnableIoTLoggingParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnableIoTLoggingParams): any => ({
-    ...obj,
-  });
+  logLevel: LogLevel | undefined;
 }
 
 /**
  * <p>Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.</p>
+ * @public
  */
 export interface PublishFindingToSnsParams {
   /**
    * <p>The ARN of the topic to which you want to publish the findings.</p>
+   * @public
    */
   topicArn: string | undefined;
 }
 
-export namespace PublishFindingToSnsParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PublishFindingToSnsParams): any => ({
-    ...obj,
-  });
-}
-
-export enum PolicyTemplateName {
-  BLANK_POLICY = "BLANK_POLICY",
-}
-
 /**
  * <p>Parameters to define a mitigation action that adds a blank policy to restrict permissions.</p>
+ * @public
  */
 export interface ReplaceDefaultPolicyVersionParams {
   /**
    * <p>The name of the template to be applied. The only supported value is <code>BLANK_POLICY</code>.</p>
+   * @public
    */
-  templateName: PolicyTemplateName | string | undefined;
-}
-
-export namespace ReplaceDefaultPolicyVersionParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ReplaceDefaultPolicyVersionParams): any => ({
-    ...obj,
-  });
-}
-
-export enum CACertificateUpdateAction {
-  DEACTIVATE = "DEACTIVATE",
+  templateName: PolicyTemplateName | undefined;
 }
 
 /**
  * <p>Parameters to define a mitigation action that changes the state of the CA certificate to inactive.</p>
+ * @public
  */
 export interface UpdateCACertificateParams {
   /**
    * <p>The action that you want to apply to the CA certificate. The only supported value is <code>DEACTIVATE</code>.</p>
+   * @public
    */
-  action: CACertificateUpdateAction | string | undefined;
-}
-
-export namespace UpdateCACertificateParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateCACertificateParams): any => ({
-    ...obj,
-  });
-}
-
-export enum DeviceCertificateUpdateAction {
-  DEACTIVATE = "DEACTIVATE",
+  action: CACertificateUpdateAction | undefined;
 }
 
 /**
  * <p>Parameters to define a mitigation action that changes the state of the device certificate to inactive.</p>
+ * @public
  */
 export interface UpdateDeviceCertificateParams {
   /**
    * <p>The action that you want to apply to the device certificate. The only supported value is <code>DEACTIVATE</code>.</p>
+   * @public
    */
-  action: DeviceCertificateUpdateAction | string | undefined;
-}
-
-export namespace UpdateDeviceCertificateParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDeviceCertificateParams): any => ({
-    ...obj,
-  });
+  action: DeviceCertificateUpdateAction | undefined;
 }
 
 /**
  * <p>The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).</p>
+ * @public
  */
 export interface MitigationActionParams {
   /**
    * <p>Parameters to define a mitigation action that changes the state of the device certificate to inactive.</p>
+   * @public
    */
-  updateDeviceCertificateParams?: UpdateDeviceCertificateParams;
+  updateDeviceCertificateParams?: UpdateDeviceCertificateParams | undefined;
 
   /**
    * <p>Parameters to define a mitigation action that changes the state of the CA certificate to inactive.</p>
+   * @public
    */
-  updateCACertificateParams?: UpdateCACertificateParams;
+  updateCACertificateParams?: UpdateCACertificateParams | undefined;
 
   /**
    * <p>Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.</p>
+   * @public
    */
-  addThingsToThingGroupParams?: AddThingsToThingGroupParams;
+  addThingsToThingGroupParams?: AddThingsToThingGroupParams | undefined;
 
   /**
    * <p>Parameters to define a mitigation action that adds a blank policy to restrict permissions.</p>
+   * @public
    */
-  replaceDefaultPolicyVersionParams?: ReplaceDefaultPolicyVersionParams;
+  replaceDefaultPolicyVersionParams?: ReplaceDefaultPolicyVersionParams | undefined;
 
   /**
    * <p>Parameters to define a mitigation action that enables Amazon Web Services IoT Core logging at a specified level of detail.</p>
+   * @public
    */
-  enableIoTLoggingParams?: EnableIoTLoggingParams;
+  enableIoTLoggingParams?: EnableIoTLoggingParams | undefined;
 
   /**
    * <p>Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.</p>
+   * @public
    */
-  publishFindingToSnsParams?: PublishFindingToSnsParams;
+  publishFindingToSnsParams?: PublishFindingToSnsParams | undefined;
 }
 
-export namespace MitigationActionParams {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MitigationActionParams): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateMitigationActionRequest {
   /**
    * <p>A friendly name for the action. Choose a friendly name that accurately describes the action (for example, <code>EnableLoggingAction</code>).</p>
+   * @public
    */
   actionName: string | undefined;
 
   /**
    * <p>The ARN of the IAM role that is used to apply the mitigation action.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>Defines the type of action and the parameters for that action.</p>
+   * @public
    */
   actionParams: MitigationActionParams | undefined;
 
   /**
    * <p>Metadata that can be used to manage the mitigation action.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateMitigationActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateMitigationActionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateMitigationActionResponse {
   /**
    * <p>The ARN for the new mitigation action.</p>
+   * @public
    */
-  actionArn?: string;
+  actionArn?: string | undefined;
 
   /**
    * <p>A unique identifier for the new mitigation action.</p>
+   * @public
    */
-  actionId?: string;
-}
-
-export namespace CreateMitigationActionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateMitigationActionResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum AwsJobAbortCriteriaAbortAction {
-  CANCEL = "CANCEL",
-}
-
-export enum AwsJobAbortCriteriaFailureType {
-  ALL = "ALL",
-  FAILED = "FAILED",
-  REJECTED = "REJECTED",
-  TIMED_OUT = "TIMED_OUT",
+  actionId?: string | undefined;
 }
 
 /**
  * <p>The criteria that determine when and how a job abort takes place.</p>
+ * @public
  */
 export interface AwsJobAbortCriteria {
   /**
    * <p>The type of job execution failures that can initiate a job abort.</p>
+   * @public
    */
-  failureType: AwsJobAbortCriteriaFailureType | string | undefined;
+  failureType: AwsJobAbortCriteriaFailureType | undefined;
 
   /**
    * <p>The type of job action to take to initiate the job abort.</p>
+   * @public
    */
-  action: AwsJobAbortCriteriaAbortAction | string | undefined;
+  action: AwsJobAbortCriteriaAbortAction | undefined;
 
   /**
    * <p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>
    *          <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>
+   * @public
    */
   thresholdPercentage: number | undefined;
 
   /**
    * <p>The minimum number of things which must receive job execution notifications before the job
    *           can be aborted.</p>
+   * @public
    */
   minNumberOfExecutedThings: number | undefined;
 }
 
-export namespace AwsJobAbortCriteria {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobAbortCriteria): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The criteria that determine when and how a job abort takes place.</p>
+ * @public
  */
 export interface AwsJobAbortConfig {
   /**
    * <p>The list of criteria that determine when and how to abort the job.</p>
+   * @public
    */
   abortCriteriaList: AwsJobAbortCriteria[] | undefined;
 }
 
-export namespace AwsJobAbortConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobAbortConfig): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The criteria to initiate the increase in rate of rollout for a job.</p>
+ * @public
  */
 export interface AwsJobRateIncreaseCriteria {
   /**
    * <p>When this number of things have been notified, it will initiate an increase in the rollout
    *             rate.</p>
+   * @public
    */
-  numberOfNotifiedThings?: number;
+  numberOfNotifiedThings?: number | undefined;
 
   /**
    * <p>When this number of things have succeeded in their job execution, it will initiate an
    *             increase in the rollout rate.</p>
+   * @public
    */
-  numberOfSucceededThings?: number;
-}
-
-export namespace AwsJobRateIncreaseCriteria {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobRateIncreaseCriteria): any => ({
-    ...obj,
-  });
+  numberOfSucceededThings?: number | undefined;
 }
 
 /**
  * <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate
  *             increase for a job rollout.</p>
+ * @public
  */
 export interface AwsJobExponentialRolloutRate {
   /**
    * <p>The minimum number of things that will be notified of a pending job, per minute, at the start
    *             of the job rollout. This is the initial rate of the rollout.</p>
+   * @public
    */
   baseRatePerMinute: number | undefined;
 
   /**
    * <p>The rate of increase for a job rollout. The number of things notified is multiplied by this
    *             factor.</p>
+   * @public
    */
   incrementFactor: number | undefined;
 
   /**
    * <p>The criteria to initiate the increase in rate of rollout for a job.</p>
-   *         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>
+   *          <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>
+   * @public
    */
   rateIncreaseCriteria: AwsJobRateIncreaseCriteria | undefined;
 }
 
-export namespace AwsJobExponentialRolloutRate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobExponentialRolloutRate): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Configuration for the rollout of OTA updates.</p>
+ * @public
  */
 export interface AwsJobExecutionsRolloutConfig {
   /**
    * <p>The maximum number of OTA update job executions started per minute.</p>
+   * @public
    */
-  maximumPerMinute?: number;
+  maximumPerMinute?: number | undefined;
 
   /**
    * <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate
    *             increase for a job rollout.</p>
+   * @public
    */
-  exponentialRate?: AwsJobExponentialRolloutRate;
-}
-
-export namespace AwsJobExecutionsRolloutConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobExecutionsRolloutConfig): any => ({
-    ...obj,
-  });
+  exponentialRate?: AwsJobExponentialRolloutRate | undefined;
 }
 
 /**
  * <p>Configuration information for pre-signed URLs. Valid when <code>protocols</code>
  *            contains HTTP.</p>
+ * @public
  */
 export interface AwsJobPresignedUrlConfig {
   /**
    * <p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 1800
    *             seconds. Pre-signed URLs are generated when a request for the job document is received.</p>
+   * @public
    */
-  expiresInSec?: number;
-}
-
-export namespace AwsJobPresignedUrlConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobPresignedUrlConfig): any => ({
-    ...obj,
-  });
+  expiresInSec?: number | undefined;
 }
 
 /**
@@ -5367,6 +5479,7 @@ export namespace AwsJobPresignedUrlConfig {
  *             started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution
  *             status is not set to another terminal state before the timer expires, it will be automatically
  *             set to <code>TIMED_OUT</code>.</p>
+ * @public
  */
 export interface AwsJobTimeoutConfig {
   /**
@@ -5375,374 +5488,280 @@ export interface AwsJobTimeoutConfig {
    *             timer can't be updated and will apply to all job executions for the job. Whenever a job execution
    *             remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and
    *             switch to the terminal <code>TIMED_OUT</code> status.</p>
+   * @public
    */
-  inProgressTimeoutInMinutes?: number;
-}
-
-export namespace AwsJobTimeoutConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AwsJobTimeoutConfig): any => ({
-    ...obj,
-  });
+  inProgressTimeoutInMinutes?: number | undefined;
 }
 
 /**
  * <p>Describes the certificate chain being used when code signing a file.</p>
+ * @public
  */
 export interface CodeSigningCertificateChain {
   /**
    * <p>The name of the certificate.</p>
+   * @public
    */
-  certificateName?: string;
+  certificateName?: string | undefined;
 
   /**
    * <p>A base64 encoded binary representation of the code signing certificate chain.</p>
+   * @public
    */
-  inlineDocument?: string;
-}
-
-export namespace CodeSigningCertificateChain {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CodeSigningCertificateChain): any => ({
-    ...obj,
-  });
+  inlineDocument?: string | undefined;
 }
 
 /**
  * <p>Describes the signature for a file.</p>
+ * @public
  */
 export interface CodeSigningSignature {
   /**
    * <p>A base64 encoded binary representation of the code signing signature.</p>
+   * @public
    */
-  inlineDocument?: Uint8Array;
-}
-
-export namespace CodeSigningSignature {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CodeSigningSignature): any => ({
-    ...obj,
-  });
+  inlineDocument?: Uint8Array | undefined;
 }
 
 /**
  * <p>Describes a custom method used to code sign a file.</p>
+ * @public
  */
 export interface CustomCodeSigning {
   /**
    * <p>The signature for the file.</p>
+   * @public
    */
-  signature?: CodeSigningSignature;
+  signature?: CodeSigningSignature | undefined;
 
   /**
    * <p>The certificate chain.</p>
+   * @public
    */
-  certificateChain?: CodeSigningCertificateChain;
+  certificateChain?: CodeSigningCertificateChain | undefined;
 
   /**
-   * <p>The hash algorithm used to code sign the file.</p>
+   * <p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>
+   * @public
    */
-  hashAlgorithm?: string;
+  hashAlgorithm?: string | undefined;
 
   /**
-   * <p>The signature algorithm used to code sign the file.</p>
+   * <p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>
+   * @public
    */
-  signatureAlgorithm?: string;
-}
-
-export namespace CustomCodeSigning {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomCodeSigning): any => ({
-    ...obj,
-  });
+  signatureAlgorithm?: string | undefined;
 }
 
 /**
  * <p>Describes the location of updated firmware in S3.</p>
+ * @public
  */
 export interface S3Destination {
   /**
    * <p>The S3 bucket that contains the updated firmware.</p>
+   * @public
    */
-  bucket?: string;
+  bucket?: string | undefined;
 
   /**
    * <p>The S3 prefix.</p>
+   * @public
    */
-  prefix?: string;
-}
-
-export namespace S3Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Destination): any => ({
-    ...obj,
-  });
+  prefix?: string | undefined;
 }
 
 /**
  * <p>Describes the location of the updated firmware.</p>
+ * @public
  */
 export interface Destination {
   /**
    * <p>Describes the location in S3 of the updated firmware.</p>
+   * @public
    */
-  s3Destination?: S3Destination;
-}
-
-export namespace Destination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Destination): any => ({
-    ...obj,
-  });
+  s3Destination?: S3Destination | undefined;
 }
 
 /**
  * <p>Describes the code-signing profile.</p>
+ * @public
  */
 export interface SigningProfileParameter {
   /**
    * <p>Certificate ARN.</p>
+   * @public
    */
-  certificateArn?: string;
+  certificateArn?: string | undefined;
 
   /**
    * <p>The hardware platform of your device.</p>
+   * @public
    */
-  platform?: string;
+  platform?: string | undefined;
 
   /**
    * <p>The location of the code-signing certificate on your device.</p>
+   * @public
    */
-  certificatePathOnDevice?: string;
-}
-
-export namespace SigningProfileParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SigningProfileParameter): any => ({
-    ...obj,
-  });
+  certificatePathOnDevice?: string | undefined;
 }
 
 /**
  * <p>Information required to start a signing job.</p>
+ * @public
  */
 export interface StartSigningJobParameter {
   /**
    * <p>Describes the code-signing profile.</p>
+   * @public
    */
-  signingProfileParameter?: SigningProfileParameter;
+  signingProfileParameter?: SigningProfileParameter | undefined;
 
   /**
    * <p>The code-signing profile name.</p>
+   * @public
    */
-  signingProfileName?: string;
+  signingProfileName?: string | undefined;
 
   /**
    * <p>The location to write the code-signed file.</p>
+   * @public
    */
-  destination?: Destination;
-}
-
-export namespace StartSigningJobParameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartSigningJobParameter): any => ({
-    ...obj,
-  });
+  destination?: Destination | undefined;
 }
 
 /**
  * <p>Describes the method to use when code signing a file.</p>
+ * @public
  */
 export interface CodeSigning {
   /**
    * <p>The ID of the <code>AWSSignerJob</code> which was created to sign the file.</p>
+   * @public
    */
-  awsSignerJobId?: string;
+  awsSignerJobId?: string | undefined;
 
   /**
    * <p>Describes the code-signing job.</p>
+   * @public
    */
-  startSigningJobParameter?: StartSigningJobParameter;
+  startSigningJobParameter?: StartSigningJobParameter | undefined;
 
   /**
    * <p>A custom method for code signing a file.</p>
+   * @public
    */
-  customCodeSigning?: CustomCodeSigning;
-}
-
-export namespace CodeSigning {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CodeSigning): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The S3 location.</p>
- */
-export interface S3Location {
-  /**
-   * <p>The S3 bucket.</p>
-   */
-  bucket?: string;
-
-  /**
-   * <p>The S3 key.</p>
-   */
-  key?: string;
-
-  /**
-   * <p>The S3 bucket version.</p>
-   */
-  version?: string;
-}
-
-export namespace S3Location {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Location): any => ({
-    ...obj,
-  });
+  customCodeSigning?: CustomCodeSigning | undefined;
 }
 
 /**
  * <p>Describes a group of files that can be streamed.</p>
+ * @public
  */
 export interface _Stream {
   /**
    * <p>The stream ID.</p>
+   * @public
    */
-  streamId?: string;
+  streamId?: string | undefined;
 
   /**
    * <p>The ID of a file associated with a stream.</p>
+   * @public
    */
-  fileId?: number;
-}
-
-export namespace _Stream {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: _Stream): any => ({
-    ...obj,
-  });
+  fileId?: number | undefined;
 }
 
 /**
  * <p>The location of the OTA update.</p>
+ * @public
  */
 export interface FileLocation {
   /**
    * <p>The stream that contains the OTA update.</p>
+   * @public
    */
-  stream?: _Stream;
+  stream?: _Stream | undefined;
 
   /**
    * <p>The location of the updated firmware in S3.</p>
+   * @public
    */
-  s3Location?: S3Location;
-}
-
-export namespace FileLocation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FileLocation): any => ({
-    ...obj,
-  });
+  s3Location?: S3Location | undefined;
 }
 
 /**
  * <p>Describes a file to be associated with an OTA update.</p>
+ * @public
  */
 export interface OTAUpdateFile {
   /**
    * <p>The name of the file.</p>
+   * @public
    */
-  fileName?: string;
+  fileName?: string | undefined;
 
   /**
    * <p>An integer value you can include in the job document to allow your devices to identify the type of file received
    *             from the cloud.</p>
+   * @public
    */
-  fileType?: number;
+  fileType?: number | undefined;
 
   /**
    * <p>The file version.</p>
+   * @public
    */
-  fileVersion?: string;
+  fileVersion?: string | undefined;
 
   /**
    * <p>The location of the updated firmware.</p>
+   * @public
    */
-  fileLocation?: FileLocation;
+  fileLocation?: FileLocation | undefined;
 
   /**
    * <p>The code signing method of the file.</p>
+   * @public
    */
-  codeSigning?: CodeSigning;
+  codeSigning?: CodeSigning | undefined;
 
   /**
-   * <p>A list of name/attribute pairs.</p>
+   * <p>A list of name-attribute pairs. They won't be sent to devices as a part of the Job document.</p>
+   * @public
    */
-  attributes?: { [key: string]: string };
+  attributes?: Record<string, string> | undefined;
 }
 
-export namespace OTAUpdateFile {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OTAUpdateFile): any => ({
-    ...obj,
-  });
-}
-
-export enum Protocol {
-  HTTP = "HTTP",
-  MQTT = "MQTT",
-}
-
+/**
+ * @public
+ */
 export interface CreateOTAUpdateRequest {
   /**
    * <p>The ID of the OTA update to be created.</p>
+   * @public
    */
   otaUpdateId: string | undefined;
 
   /**
    * <p>The description of the OTA update.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The devices targeted to receive OTA updates.</p>
+   * @public
    */
   targets: string[] | undefined;
 
   /**
    * <p>The protocol used to transfer the OTA update image. Valid values are [HTTP], [MQTT], [HTTP, MQTT]. When both
    *            HTTP and MQTT are specified, the target device can choose the protocol.</p>
+   * @public
    */
-  protocols?: (Protocol | string)[];
+  protocols?: Protocol[] | undefined;
 
   /**
    * <p>Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things
@@ -5750,118 +5769,283 @@ export interface CreateOTAUpdateRequest {
    *             thing when a change is detected in a target. For example, an update will run on a thing when the thing is
    *             added to a target group, even after the update was completed by all things originally in the group. Valid
    *             values: CONTINUOUS | SNAPSHOT.</p>
+   * @public
    */
-  targetSelection?: TargetSelection | string;
+  targetSelection?: TargetSelection | undefined;
 
   /**
    * <p>Configuration for the rollout of OTA updates.</p>
+   * @public
    */
-  awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
+  awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig | undefined;
 
   /**
    * <p>Configuration information for pre-signed URLs.</p>
+   * @public
    */
-  awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig;
+  awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig | undefined;
 
   /**
    * <p>The criteria that determine when and how a job abort takes place.</p>
+   * @public
    */
-  awsJobAbortConfig?: AwsJobAbortConfig;
+  awsJobAbortConfig?: AwsJobAbortConfig | undefined;
 
   /**
    * <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is
    *             started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution
    *             status is not set to another terminal state before the timer expires, it will be automatically
    *             set to <code>TIMED_OUT</code>.</p>
+   * @public
    */
-  awsJobTimeoutConfig?: AwsJobTimeoutConfig;
+  awsJobTimeoutConfig?: AwsJobTimeoutConfig | undefined;
 
   /**
    * <p>The files to be streamed by the OTA update.</p>
+   * @public
    */
   files: OTAUpdateFile[] | undefined;
 
   /**
    * <p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources
    *             to create an OTA update job.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
-   * <p>A list of additional OTA update parameters which are name-value pairs.</p>
+   * <p>A list of additional OTA update parameters, which are name-value pairs.
+   *             They won't be sent to devices as a part of the Job document.</p>
+   * @public
    */
-  additionalParameters?: { [key: string]: string };
+  additionalParameters?: Record<string, string> | undefined;
 
   /**
    * <p>Metadata which can be used to manage updates.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateOTAUpdateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateOTAUpdateRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum OTAUpdateStatus {
-  CREATE_COMPLETE = "CREATE_COMPLETE",
-  CREATE_FAILED = "CREATE_FAILED",
-  CREATE_IN_PROGRESS = "CREATE_IN_PROGRESS",
-  CREATE_PENDING = "CREATE_PENDING",
-}
-
+/**
+ * @public
+ */
 export interface CreateOTAUpdateResponse {
   /**
    * <p>The OTA update ID.</p>
+   * @public
    */
-  otaUpdateId?: string;
+  otaUpdateId?: string | undefined;
 
   /**
    * <p>The IoT job ID associated with the OTA update.</p>
+   * @public
    */
-  awsIotJobId?: string;
+  awsIotJobId?: string | undefined;
 
   /**
    * <p>The OTA update ARN.</p>
+   * @public
    */
-  otaUpdateArn?: string;
+  otaUpdateArn?: string | undefined;
 
   /**
    * <p>The IoT job ARN associated with the OTA update.</p>
+   * @public
    */
-  awsIotJobArn?: string;
+  awsIotJobArn?: string | undefined;
 
   /**
    * <p>The OTA update status.</p>
+   * @public
    */
-  otaUpdateStatus?: OTAUpdateStatus | string;
+  otaUpdateStatus?: OTAUpdateStatus | undefined;
 }
 
-export namespace CreateOTAUpdateResponse {
+/**
+ * @public
+ */
+export interface CreatePackageRequest {
   /**
-   * @internal
+   * <p>The name of the new software package.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateOTAUpdateResponse): any => ({
-    ...obj,
-  });
+  packageName: string | undefined;
+
+  /**
+   * <p>A summary of the package being created. This can be used to outline the package's contents or purpose.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Metadata that can be used to manage the package.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+   *       Don't reuse this client token if a new idempotent request is required.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePackageResponse {
+  /**
+   * <p>The name of the software package.</p>
+   * @public
+   */
+  packageName?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the package.</p>
+   * @public
+   */
+  packageArn?: string | undefined;
+
+  /**
+   * <p>The package description.</p>
+   * @public
+   */
+  description?: string | undefined;
+}
+
+/**
+ * <p>A specific package version artifact associated with a software package version.</p>
+ * @public
+ */
+export interface PackageVersionArtifact {
+  /**
+   * <p>The S3 location.</p>
+   * @public
+   */
+  s3Location?: S3Location | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePackageVersionRequest {
+  /**
+   * <p>The name of the associated software package.</p>
+   * @public
+   */
+  packageName: string | undefined;
+
+  /**
+   * <p>The name of the new package version.</p>
+   * @public
+   */
+  versionName: string | undefined;
+
+  /**
+   * <p>A summary of the package version being created. This can be used to outline the package's contents or purpose.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.</p>
+   *          <p>The combined size of all the attributes on a package version is limited to 3KB.</p>
+   * @public
+   */
+  attributes?: Record<string, string> | undefined;
+
+  /**
+   * <p>The various build components created during the build process such as libraries and
+   *          configuration files that make up a software package version.</p>
+   * @public
+   */
+  artifact?: PackageVersionArtifact | undefined;
+
+  /**
+   * <p>The inline job document associated with a software package version used for a quick job
+   *          deployment.</p>
+   * @public
+   */
+  recipe?: string | undefined;
+
+  /**
+   * <p>Metadata that can be used to manage the package version.</p>
+   * @public
+   */
+  tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+   *       Don't reuse this client token if a new idempotent request is required.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePackageVersionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the package.</p>
+   * @public
+   */
+  packageVersionArn?: string | undefined;
+
+  /**
+   * <p>The name of the associated software package.</p>
+   * @public
+   */
+  packageName?: string | undefined;
+
+  /**
+   * <p>The name of the new package version.</p>
+   * @public
+   */
+  versionName?: string | undefined;
+
+  /**
+   * <p>The package version description.</p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>Metadata that were added to the package version that can be used to define a package version’s configuration.</p>
+   * @public
+   */
+  attributes?: Record<string, string> | undefined;
+
+  /**
+   * <p>The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+   * @public
+   */
+  status?: PackageVersionStatus | undefined;
+
+  /**
+   * <p>Error reason for a package version failure during creation or update.</p>
+   * @public
+   */
+  errorReason?: string | undefined;
 }
 
 /**
  * <p>The input for the CreatePolicy operation.</p>
+ * @public
  */
 export interface CreatePolicyRequest {
   /**
    * <p>The policy name.</p>
+   * @public
    */
   policyName: string | undefined;
 
   /**
    * <p>The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of
    *          2048, excluding whitespace.</p>
+   * @public
    */
   policyDocument: string | undefined;
 
@@ -5874,86 +6058,56 @@ export interface CreatePolicyRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreatePolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePolicyRequest): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
  * <p>The output from the CreatePolicy operation.</p>
+ * @public
  */
 export interface CreatePolicyResponse {
   /**
    * <p>The policy name.</p>
+   * @public
    */
-  policyName?: string;
+  policyName?: string | undefined;
 
   /**
    * <p>The policy ARN.</p>
+   * @public
    */
-  policyArn?: string;
+  policyArn?: string | undefined;
 
   /**
    * <p>The JSON document that describes the policy.</p>
+   * @public
    */
-  policyDocument?: string;
+  policyDocument?: string | undefined;
 
   /**
    * <p>The policy version ID.</p>
+   * @public
    */
-  policyVersionId?: string;
-}
-
-export namespace CreatePolicyResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePolicyResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The policy documentation is not valid.</p>
- */
-export interface MalformedPolicyException extends __SmithyException, $MetadataBearer {
-  name: "MalformedPolicyException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace MalformedPolicyException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MalformedPolicyException): any => ({
-    ...obj,
-  });
+  policyVersionId?: string | undefined;
 }
 
 /**
  * <p>The input for the CreatePolicyVersion operation.</p>
+ * @public
  */
 export interface CreatePolicyVersionRequest {
   /**
    * <p>The policy name.</p>
+   * @public
    */
   policyName: string | undefined;
 
   /**
    * <p>The JSON document that describes the policy. Minimum length of 1. Maximum length of
    *          2048, excluding whitespace.</p>
+   * @public
    */
   policyDocument: string | undefined;
 
@@ -5961,185 +6115,149 @@ export interface CreatePolicyVersionRequest {
    * <p>Specifies whether the policy version is set as the default. When this parameter is
    *          true, the new policy version becomes the operative version (that is, the version that is in
    *          effect for the certificates to which the policy is attached).</p>
+   * @public
    */
-  setAsDefault?: boolean;
-}
-
-export namespace CreatePolicyVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePolicyVersionRequest): any => ({
-    ...obj,
-  });
+  setAsDefault?: boolean | undefined;
 }
 
 /**
  * <p>The output of the CreatePolicyVersion operation.</p>
+ * @public
  */
 export interface CreatePolicyVersionResponse {
   /**
    * <p>The policy ARN.</p>
+   * @public
    */
-  policyArn?: string;
+  policyArn?: string | undefined;
 
   /**
    * <p>The JSON document that describes the policy.</p>
+   * @public
    */
-  policyDocument?: string;
+  policyDocument?: string | undefined;
 
   /**
    * <p>The policy version ID.</p>
+   * @public
    */
-  policyVersionId?: string;
+  policyVersionId?: string | undefined;
 
   /**
    * <p>Specifies whether the policy version is the default.</p>
+   * @public
    */
-  isDefaultVersion?: boolean;
-}
-
-export namespace CreatePolicyVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePolicyVersionResponse): any => ({
-    ...obj,
-  });
+  isDefaultVersion?: boolean | undefined;
 }
 
 /**
- * <p>The number of policy versions exceeds the limit.</p>
+ * @public
  */
-export interface VersionsLimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "VersionsLimitExceededException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace VersionsLimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VersionsLimitExceededException): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateProvisioningClaimRequest {
   /**
    * <p>The name of the provisioning template to use.</p>
+   * @public
    */
   templateName: string | undefined;
 }
 
-export namespace CreateProvisioningClaimRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProvisioningClaimRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateProvisioningClaimResponse {
   /**
    * <p>The ID of the certificate.</p>
+   * @public
    */
-  certificateId?: string;
+  certificateId?: string | undefined;
 
   /**
    * <p>The provisioning claim certificate.</p>
+   * @public
    */
-  certificatePem?: string;
+  certificatePem?: string | undefined;
 
   /**
    * <p>The provisioning claim key pair.</p>
+   * @public
    */
-  keyPair?: KeyPair;
+  keyPair?: KeyPair | undefined;
 
   /**
    * <p>The provisioning claim expiration time.</p>
+   * @public
    */
-  expiration?: Date;
-}
-
-export namespace CreateProvisioningClaimResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProvisioningClaimResponse): any => ({
-    ...obj,
-    ...(obj.keyPair && { keyPair: KeyPair.filterSensitiveLog(obj.keyPair) }),
-  });
+  expiration?: Date | undefined;
 }
 
 /**
  * <p>Structure that contains <code>payloadVersion</code> and
  *          <code>targetArn</code>.</p>
+ * @public
  */
 export interface ProvisioningHook {
   /**
    * <p>The payload that was sent to the target function.</p>
    *          <p>
    *             <i>Note:</i> Only Lambda functions are currently supported.</p>
+   * @public
    */
-  payloadVersion?: string;
+  payloadVersion?: string | undefined;
 
   /**
    * <p>The ARN of the target function.</p>
    *          <p>
    *             <i>Note:</i> Only Lambda functions are currently supported.</p>
+   * @public
    */
   targetArn: string | undefined;
 }
 
-export namespace ProvisioningHook {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ProvisioningHook): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateProvisioningTemplateRequest {
   /**
-   * <p>The name of the fleet provisioning template.</p>
+   * <p>The name of the provisioning template.</p>
+   * @public
    */
   templateName: string | undefined;
 
   /**
-   * <p>The description of the fleet provisioning template.</p>
+   * <p>The description of the provisioning template.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p>The JSON formatted contents of the fleet provisioning template.</p>
+   * <p>The JSON formatted contents of the provisioning template.</p>
+   * @public
    */
   templateBody: string | undefined;
 
   /**
-   * <p>True to enable the fleet provisioning template, otherwise false.</p>
+   * <p>True to enable the provisioning template, otherwise false.</p>
+   * @public
    */
-  enabled?: boolean;
+  enabled?: boolean | undefined;
 
   /**
-   * <p>The role ARN for the role associated with the fleet provisioning template. This IoT role
+   * <p>The role ARN for the role associated with the provisioning template. This IoT role
    *          grants permission to provision a device.</p>
+   * @public
    */
   provisioningRoleArn: string | undefined;
 
   /**
-   * <p>Creates a pre-provisioning hook template.</p>
+   * <p>Creates a pre-provisioning hook template. Only supports template of type
+   *             <code>FLEET_PROVISIONING</code>. For more information about provisioning template types,
+   *          see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type">type</a>.</p>
+   * @public
    */
-  preProvisioningHook?: ProvisioningHook;
+  preProvisioningHook?: ProvisioningHook | undefined;
 
   /**
-   * <p>Metadata which can be used to manage the fleet provisioning template.</p>
+   * <p>Metadata which can be used to manage the provisioning template.</p>
    *          <note>
    *             <p>For URI Request parameters use format: ...key1=value1&key2=value2...</p>
    *             <p>For the CLI command-line parameter use format: &&tags
@@ -6147,119 +6265,120 @@ export interface CreateProvisioningTemplateRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: Tag[];
-}
+  tags?: Tag[] | undefined;
 
-export namespace CreateProvisioningTemplateRequest {
   /**
-   * @internal
+   * <p>The type you define in a provisioning template. You can create a template with only one type.
+   *          You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>.
+   *          For more information about provisioning template, see: <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html">Provisioning template</a>.
+   *       </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateProvisioningTemplateRequest): any => ({
-    ...obj,
-  });
+  type?: TemplateType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateProvisioningTemplateResponse {
   /**
    * <p>The ARN that identifies the provisioning template.</p>
+   * @public
    */
-  templateArn?: string;
+  templateArn?: string | undefined;
 
   /**
-   * <p>The name of the fleet provisioning template.</p>
+   * <p>The name of the provisioning template.</p>
+   * @public
    */
-  templateName?: string;
+  templateName?: string | undefined;
 
   /**
-   * <p>The default version of the fleet provisioning template.</p>
+   * <p>The default version of the provisioning template.</p>
+   * @public
    */
-  defaultVersionId?: number;
+  defaultVersionId?: number | undefined;
 }
 
-export namespace CreateProvisioningTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProvisioningTemplateResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateProvisioningTemplateVersionRequest {
   /**
-   * <p>The name of the fleet provisioning template.</p>
+   * <p>The name of the provisioning template.</p>
+   * @public
    */
   templateName: string | undefined;
 
   /**
-   * <p>The JSON formatted contents of the fleet provisioning template.</p>
+   * <p>The JSON formatted contents of the provisioning template.</p>
+   * @public
    */
   templateBody: string | undefined;
 
   /**
    * <p>Sets a fleet provision template version as the default version.</p>
+   * @public
    */
-  setAsDefault?: boolean;
+  setAsDefault?: boolean | undefined;
 }
 
-export namespace CreateProvisioningTemplateVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProvisioningTemplateVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateProvisioningTemplateVersionResponse {
   /**
    * <p>The ARN that identifies the provisioning template.</p>
+   * @public
    */
-  templateArn?: string;
+  templateArn?: string | undefined;
 
   /**
-   * <p>The name of the fleet provisioning template.</p>
+   * <p>The name of the provisioning template.</p>
+   * @public
    */
-  templateName?: string;
+  templateName?: string | undefined;
 
   /**
-   * <p>The version of the fleet provisioning template.</p>
+   * <p>The version of the provisioning template.</p>
+   * @public
    */
-  versionId?: number;
+  versionId?: number | undefined;
 
   /**
-   * <p>True if the fleet provisioning template version is the default version, otherwise
+   * <p>True if the provisioning template version is the default version, otherwise
    *          false.</p>
+   * @public
    */
-  isDefaultVersion?: boolean;
+  isDefaultVersion?: boolean | undefined;
 }
 
-export namespace CreateProvisioningTemplateVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateProvisioningTemplateVersionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRoleAliasRequest {
   /**
    * <p>The role alias that points to a role ARN. This allows you to change the role without
    *          having to update the device.</p>
+   * @public
    */
   roleAlias: string | undefined;
 
   /**
    * <p>The role ARN.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p>
+   *          <p>This value must be less than or equal to the maximum session duration of the IAM role
+   *       that the role alias references.</p>
+   * @public
    */
-  credentialDurationSeconds?: number;
+  credentialDurationSeconds?: number | undefined;
 
   /**
    * <p>Metadata which can be used to manage the role alias.</p>
@@ -6270,50 +6389,31 @@ export interface CreateRoleAliasRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateRoleAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRoleAliasRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRoleAliasResponse {
   /**
    * <p>The role alias.</p>
+   * @public
    */
-  roleAlias?: string;
+  roleAlias?: string | undefined;
 
   /**
    * <p>The role alias ARN.</p>
+   * @public
    */
-  roleAliasArn?: string;
+  roleAliasArn?: string | undefined;
 }
 
-export namespace CreateRoleAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRoleAliasResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum DayOfWeek {
-  FRI = "FRI",
-  MON = "MON",
-  SAT = "SAT",
-  SUN = "SUN",
-  THU = "THU",
-  TUE = "TUE",
-  WED = "WED",
-}
-
+/**
+ * @public
+ */
 export interface CreateScheduledAuditRequest {
   /**
    * <p>How often the scheduled audit takes
@@ -6321,8 +6421,9 @@ export interface CreateScheduledAuditRequest {
    *       <code>DAILY</code>,
    *       <code>WEEKLY</code>, <code>BIWEEKLY</code> or <code>MONTHLY</code>. The start time of each audit is
    *       determined by the system.</p>
+   * @public
    */
-  frequency: AuditFrequency | string | undefined;
+  frequency: AuditFrequency | undefined;
 
   /**
    * <p>The day of the month on which the scheduled audit takes place.
@@ -6333,8 +6434,9 @@ export interface CreateScheduledAuditRequest {
    *       to 31 are specified, and the month
    *       doesn't
    *       have that many days, the audit takes place on the <code>LAST</code> day of the month.</p>
+   * @public
    */
-  dayOfMonth?: string;
+  dayOfMonth?: string | undefined;
 
   /**
    * <p>The day of the week on which the scheduled audit takes
@@ -6343,376 +6445,404 @@ export interface CreateScheduledAuditRequest {
    *       <code>SUN</code>,
    *       <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the <code>frequency</code>
    *       parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>
+   * @public
    */
-  dayOfWeek?: DayOfWeek | string;
+  dayOfWeek?: DayOfWeek | undefined;
 
   /**
    * <p>Which checks are performed during the scheduled audit. Checks must be enabled
    *             for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
    *             of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
    *             to select which checks are enabled.)</p>
+   * @public
    */
   targetCheckNames: string[] | undefined;
 
   /**
    * <p>The name you want to give to the scheduled audit. (Max. 128 chars)</p>
+   * @public
    */
   scheduledAuditName: string | undefined;
 
   /**
    * <p>Metadata that can be used to manage the scheduled audit.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateScheduledAuditRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateScheduledAuditRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateScheduledAuditResponse {
   /**
    * <p>The ARN of the scheduled audit.</p>
+   * @public
    */
-  scheduledAuditArn?: string;
+  scheduledAuditArn?: string | undefined;
 }
 
-export namespace CreateScheduledAuditResponse {
+/**
+ * <p>Set configurations for metrics export.</p>
+ * @public
+ */
+export interface MetricsExportConfig {
   /**
-   * @internal
+   * <p>The MQTT topic that Device Defender Detect should publish messages to for metrics
+   *       export.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateScheduledAuditResponse): any => ({
-    ...obj,
-  });
+  mqttTopic: string | undefined;
+
+  /**
+   * <p>This role ARN has permission to publish MQTT messages, after which Device Defender Detect
+   *       can assume the role and publish messages on your behalf.</p>
+   * @public
+   */
+  roleArn: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSecurityProfileRequest {
   /**
    * <p>The name you are giving to the security profile.</p>
+   * @public
    */
   securityProfileName: string | undefined;
 
   /**
    * <p>A description of the security profile.</p>
+   * @public
    */
-  securityProfileDescription?: string;
+  securityProfileDescription?: string | undefined;
 
   /**
    * <p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>
+   * @public
    */
-  behaviors?: Behavior[];
+  behaviors?: Behavior[] | undefined;
 
   /**
    * <p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the
    *         console.) Alerts are generated when a device (thing) violates a behavior.</p>
+   * @public
    */
-  alertTargets?: { [key: string]: AlertTarget };
+  alertTargets?: Partial<Record<AlertTargetType, AlertTarget>> | undefined;
 
   /**
-   * @deprecated
-   *
    * <p>
    *             <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i>
    *          </p>
    *          <p>A list of metrics whose data is retained (stored). By default, data is retained
    *         for any metric used in the profile's <code>behaviors</code>, but it is also retained for
    *         any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
+   *
+   * @deprecated Use additionalMetricsToRetainV2.
+   * @public
    */
-  additionalMetricsToRetain?: string[];
+  additionalMetricsToRetain?: string[] | undefined;
 
   /**
    * <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
+   * @public
    */
-  additionalMetricsToRetainV2?: MetricToRetain[];
+  additionalMetricsToRetainV2?: MetricToRetain[] | undefined;
 
   /**
    * <p>Metadata that can be used to manage the security profile.</p>
+   * @public
    */
-  tags?: Tag[];
-}
+  tags?: Tag[] | undefined;
 
-export namespace CreateSecurityProfileRequest {
   /**
-   * @internal
+   * <p>Specifies the MQTT topic and role ARN required for metric export.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateSecurityProfileRequest): any => ({
-    ...obj,
-  });
+  metricsExportConfig?: MetricsExportConfig | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSecurityProfileResponse {
   /**
    * <p>The name you gave to the security profile.</p>
+   * @public
    */
-  securityProfileName?: string;
+  securityProfileName?: string | undefined;
 
   /**
    * <p>The ARN of the security profile.</p>
+   * @public
    */
-  securityProfileArn?: string;
-}
-
-export namespace CreateSecurityProfileResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSecurityProfileResponse): any => ({
-    ...obj,
-  });
+  securityProfileArn?: string | undefined;
 }
 
 /**
  * <p>Represents a file to stream.</p>
+ * @public
  */
 export interface StreamFile {
   /**
    * <p>The file ID.</p>
+   * @public
    */
-  fileId?: number;
+  fileId?: number | undefined;
 
   /**
    * <p>The location of the file in S3.</p>
+   * @public
    */
-  s3Location?: S3Location;
+  s3Location?: S3Location | undefined;
 }
 
-export namespace StreamFile {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StreamFile): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateStreamRequest {
   /**
    * <p>The stream ID.</p>
+   * @public
    */
   streamId: string | undefined;
 
   /**
    * <p>A description of the stream.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The files to stream.</p>
+   * @public
    */
   files: StreamFile[] | undefined;
 
   /**
-   * <p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>
+   * <p>An IAM role that allows the IoT service principal to access your S3 files.</p>
+   * @public
    */
   roleArn: string | undefined;
 
   /**
    * <p>Metadata which can be used to manage streams.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateStreamRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateStreamRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateStreamResponse {
   /**
    * <p>The stream ID.</p>
+   * @public
    */
-  streamId?: string;
+  streamId?: string | undefined;
 
   /**
    * <p>The stream ARN.</p>
+   * @public
    */
-  streamArn?: string;
+  streamArn?: string | undefined;
 
   /**
    * <p>A description of the stream.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The version of the stream.</p>
+   * @public
    */
-  streamVersion?: number;
-}
-
-export namespace CreateStreamResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateStreamResponse): any => ({
-    ...obj,
-  });
+  streamVersion?: number | undefined;
 }
 
 /**
  * <p>The input for the CreateThing operation.</p>
+ * @public
  */
 export interface CreateThingRequest {
   /**
    * <p>The name of the thing to create.</p>
-   * 		       <p>You can't change a thing's name after you create it. To change a thing's name, you must create a
+   *          <p>You can't change a thing's name after you create it. To change a thing's name, you must create a
    * 			new thing, give it the new name, and then delete the old thing.</p>
+   * @public
    */
   thingName: string | undefined;
 
   /**
    * <p>The name of the thing type associated with the new thing.</p>
+   * @public
    */
-  thingTypeName?: string;
+  thingTypeName?: string | undefined;
 
   /**
    * <p>The attribute payload, which consists of up to three name/value pairs in a JSON
    * 			document. For example:</p>
-   * 		       <p>
-   * 			         <code>{\"attributes\":{\"string1\":\"string2\"}}</code>
-   * 		       </p>
+   *          <p>
+   *             <code>\{\"attributes\":\{\"string1\":\"string2\"\}\}</code>
+   *          </p>
+   * @public
    */
-  attributePayload?: AttributePayload;
+  attributePayload?: AttributePayload | undefined;
 
   /**
    * <p>The name of the billing group the thing will be added to.</p>
+   * @public
    */
-  billingGroupName?: string;
-}
-
-export namespace CreateThingRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThingRequest): any => ({
-    ...obj,
-  });
+  billingGroupName?: string | undefined;
 }
 
 /**
  * <p>The output of the CreateThing operation.</p>
+ * @public
  */
 export interface CreateThingResponse {
   /**
    * <p>The name of the new thing.</p>
+   * @public
    */
-  thingName?: string;
+  thingName?: string | undefined;
 
   /**
    * <p>The ARN of the new thing.</p>
+   * @public
    */
-  thingArn?: string;
+  thingArn?: string | undefined;
 
   /**
    * <p>The thing ID.</p>
+   * @public
    */
-  thingId?: string;
+  thingId?: string | undefined;
 }
 
-export namespace CreateThingResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThingResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateThingGroupRequest {
   /**
    * <p>The thing group name to create.</p>
+   * @public
    */
   thingGroupName: string | undefined;
 
   /**
    * <p>The name of the parent thing group.</p>
+   * @public
    */
-  parentGroupName?: string;
+  parentGroupName?: string | undefined;
 
   /**
    * <p>The thing group properties.</p>
+   * @public
    */
-  thingGroupProperties?: ThingGroupProperties;
+  thingGroupProperties?: ThingGroupProperties | undefined;
 
   /**
    * <p>Metadata which can be used to manage the thing group.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateThingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateThingGroupResponse {
   /**
    * <p>The thing group name.</p>
+   * @public
    */
-  thingGroupName?: string;
+  thingGroupName?: string | undefined;
 
   /**
    * <p>The thing group ARN.</p>
+   * @public
    */
-  thingGroupArn?: string;
+  thingGroupArn?: string | undefined;
 
   /**
    * <p>The thing group ID.</p>
+   * @public
    */
-  thingGroupId?: string;
+  thingGroupId?: string | undefined;
 }
 
-export namespace CreateThingGroupResponse {
+/**
+ * <p>An object that represents the connection attribute, thing attribute, and the user property key.</p>
+ * @public
+ */
+export interface PropagatingAttribute {
   /**
-   * @internal
+   * <p>The key of the user property key-value pair.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateThingGroupResponse): any => ({
-    ...obj,
-  });
+  userPropertyKey?: string | undefined;
+
+  /**
+   * <p>The user-defined thing attribute that is propagating for MQTT 5 message enrichment.</p>
+   * @public
+   */
+  thingAttribute?: string | undefined;
+
+  /**
+   * <p>The attribute associated with the connection between a device and Amazon Web Services IoT Core.</p>
+   * @public
+   */
+  connectionAttribute?: string | undefined;
+}
+
+/**
+ * <p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>
+ * @public
+ */
+export interface Mqtt5Configuration {
+  /**
+   * <p>An object that represents the propagating thing attributes and the connection attributes.</p>
+   * @public
+   */
+  propagatingAttributes?: PropagatingAttribute[] | undefined;
 }
 
 /**
  * <p>The ThingTypeProperties contains information about the thing type including: a thing type description,
  * 			and a list of searchable thing attribute names.</p>
+ * @public
  */
 export interface ThingTypeProperties {
   /**
    * <p>The description of the thing type.</p>
+   * @public
    */
-  thingTypeDescription?: string;
+  thingTypeDescription?: string | undefined;
 
   /**
    * <p>A list of searchable thing attribute names.</p>
+   * @public
    */
-  searchableAttributes?: string[];
-}
+  searchableAttributes?: string[] | undefined;
 
-export namespace ThingTypeProperties {
   /**
-   * @internal
+   * <p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ThingTypeProperties): any => ({
-    ...obj,
-  });
+  mqtt5Configuration?: Mqtt5Configuration | undefined;
 }
 
 /**
  * <p>The input for the CreateThingType operation.</p>
+ * @public
  */
 export interface CreateThingTypeRequest {
   /**
    * <p>The name of the thing type.</p>
+   * @public
    */
   thingTypeName: string | undefined;
 
@@ -6720,109 +6850,98 @@ export interface CreateThingTypeRequest {
    * <p>The ThingTypeProperties for the thing type to create. It contains information about
    * 			the new thing type including a description, and a list of searchable thing attribute
    * 			names.</p>
+   * @public
    */
-  thingTypeProperties?: ThingTypeProperties;
+  thingTypeProperties?: ThingTypeProperties | undefined;
 
   /**
    * <p>Metadata which can be used to manage the thing type.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreateThingTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThingTypeRequest): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
  * <p>The output of the CreateThingType operation.</p>
+ * @public
  */
 export interface CreateThingTypeResponse {
   /**
    * <p>The name of the thing type.</p>
+   * @public
    */
-  thingTypeName?: string;
+  thingTypeName?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the thing type.</p>
+   * @public
    */
-  thingTypeArn?: string;
+  thingTypeArn?: string | undefined;
 
   /**
    * <p>The thing type ID.</p>
+   * @public
    */
-  thingTypeId?: string;
-}
-
-export namespace CreateThingTypeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateThingTypeResponse): any => ({
-    ...obj,
-  });
+  thingTypeId?: string | undefined;
 }
 
 /**
  * <p>Describes a rule.</p>
+ * @public
  */
 export interface TopicRulePayload {
   /**
    * <p>The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">IoT SQL
    *             Reference</a> in the <i>IoT Developer Guide</i>.</p>
+   * @public
    */
   sql: string | undefined;
 
   /**
    * <p>The description of the rule.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The actions associated with the rule.</p>
+   * @public
    */
   actions: Action[] | undefined;
 
   /**
    * <p>Specifies whether the rule is disabled.</p>
+   * @public
    */
-  ruleDisabled?: boolean;
+  ruleDisabled?: boolean | undefined;
 
   /**
    * <p>The version of the SQL rules engine to use when evaluating the rule.</p>
+   * @public
    */
-  awsIotSqlVersion?: string;
+  awsIotSqlVersion?: string | undefined;
 
   /**
    * <p>The action to take when an error occurs.</p>
+   * @public
    */
-  errorAction?: Action;
-}
-
-export namespace TopicRulePayload {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TopicRulePayload): any => ({
-    ...obj,
-  });
+  errorAction?: Action | undefined;
 }
 
 /**
  * <p>The input for the CreateTopicRule operation.</p>
+ * @public
  */
 export interface CreateTopicRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   ruleName: string | undefined;
 
   /**
    * <p>The rule payload.</p>
+   * @public
    */
   topicRulePayload: TopicRulePayload | undefined;
 
@@ -6835,203 +6954,225 @@ export interface CreateTopicRuleRequest {
    *             <p>For the cli-input-json file use format: "tags":
    *             "key1=value1&key2=value2..."</p>
    *          </note>
+   * @public
    */
-  tags?: string;
-}
-
-export namespace CreateTopicRuleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTopicRuleRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The Rule-SQL expression can't be parsed correctly.</p>
- */
-export interface SqlParseException extends __SmithyException, $MetadataBearer {
-  name: "SqlParseException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace SqlParseException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SqlParseException): any => ({
-    ...obj,
-  });
+  tags?: string | undefined;
 }
 
 /**
  * <p>HTTP URL destination configuration used by the topic rule's HTTP action.</p>
+ * @public
  */
 export interface HttpUrlDestinationConfiguration {
   /**
    * <p>The URL IoT uses to confirm ownership of or access to the topic rule destination
    *          URL.</p>
+   * @public
    */
   confirmationUrl: string | undefined;
 }
 
-export namespace HttpUrlDestinationConfiguration {
+/**
+ * <p>The configuration of an InfluxDB topic rule destination.</p>
+ * @public
+ */
+export interface InfluxDBDestinationConfiguration {
   /**
-   * @internal
+   * <p>The URL of the InfluxDB instance to write to.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: HttpUrlDestinationConfiguration): any => ({
-    ...obj,
-  });
+  endpoint: string | undefined;
+
+  /**
+   * <p>The major version of the InfluxDB instance. Valid values are <code>V2</code> and
+   *         <code>V3</code>.</p>
+   * @public
+   */
+  influxDBVersion: InfluxDBVersion | undefined;
+
+  /**
+   * <p>The ARN or name of the Amazon Web Services Secrets Manager secret that contains the InfluxDB API
+   *       token.</p>
+   * @public
+   */
+  secretId: string | undefined;
+
+  /**
+   * <p>The type of the secret that contains the InfluxDB API token. Valid values are
+   *         <code>SecretString</code> and <code>SecretBinary</code>.</p>
+   *          <p>If omitted, IoT reads the secret as a string.</p>
+   * @public
+   */
+  secretType?: InfluxDBSecretType | undefined;
+
+  /**
+   * <p>The key to read from the secret value when the secret contains a JSON object. If
+   *       omitted, IoT uses the entire secret value as the InfluxDB API token.</p>
+   * @public
+   */
+  secretKey?: string | undefined;
 }
 
 /**
  * <p>The configuration information for a virtual private cloud (VPC) destination.</p>
+ * @public
  */
 export interface VpcDestinationConfiguration {
   /**
    * <p>The subnet IDs of the VPC destination.</p>
+   * @public
    */
   subnetIds: string[] | undefined;
 
   /**
    * <p>The security groups of the VPC destination.</p>
+   * @public
    */
-  securityGroups?: string[];
+  securityGroups?: string[] | undefined;
 
   /**
    * <p>The ID of the VPC.</p>
+   * @public
    */
   vpcId: string | undefined;
 
   /**
    * <p>The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).</p>
+   * @public
    */
   roleArn: string | undefined;
 }
 
-export namespace VpcDestinationConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VpcDestinationConfiguration): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Configuration of the topic rule destination.</p>
+ * @public
  */
 export interface TopicRuleDestinationConfiguration {
   /**
    * <p>Configuration of the HTTP URL.</p>
+   * @public
    */
-  httpUrlConfiguration?: HttpUrlDestinationConfiguration;
+  httpUrlConfiguration?: HttpUrlDestinationConfiguration | undefined;
 
   /**
    * <p>Configuration of the virtual private cloud (VPC) connection.</p>
+   * @public
    */
-  vpcConfiguration?: VpcDestinationConfiguration;
-}
+  vpcConfiguration?: VpcDestinationConfiguration | undefined;
 
-export namespace TopicRuleDestinationConfiguration {
   /**
-   * @internal
+   * <p>The configuration of an InfluxDB topic rule destination, which you specify when you
+   *       call <code>CreateTopicRuleDestination</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TopicRuleDestinationConfiguration): any => ({
-    ...obj,
-  });
+  influxDBConfiguration?: InfluxDBDestinationConfiguration | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateTopicRuleDestinationRequest {
   /**
    * <p>The topic rule destination configuration.</p>
+   * @public
    */
   destinationConfiguration: TopicRuleDestinationConfiguration | undefined;
 }
 
-export namespace CreateTopicRuleDestinationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTopicRuleDestinationRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>HTTP URL destination properties.</p>
+ * @public
  */
 export interface HttpUrlDestinationProperties {
   /**
    * <p>The URL used to confirm the HTTP topic rule destination URL.</p>
+   * @public
    */
-  confirmationUrl?: string;
+  confirmationUrl?: string | undefined;
 }
 
-export namespace HttpUrlDestinationProperties {
+/**
+ * <p>The properties of an existing InfluxDB topic rule destination, as returned by
+ *         <code>CreateTopicRuleDestination</code> and
+ *       <code>GetTopicRuleDestination</code>.</p>
+ * @public
+ */
+export interface InfluxDBDestinationProperties {
   /**
-   * @internal
+   * <p>The URL of the InfluxDB instance that the destination writes to.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: HttpUrlDestinationProperties): any => ({
-    ...obj,
-  });
-}
+  endpoint?: string | undefined;
 
-export enum TopicRuleDestinationStatus {
-  DELETING = "DELETING",
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-  ERROR = "ERROR",
-  IN_PROGRESS = "IN_PROGRESS",
+  /**
+   * <p>The major version of the InfluxDB instance. Valid values are <code>V2</code> and
+   *         <code>V3</code>.</p>
+   * @public
+   */
+  influxDBVersion?: InfluxDBVersion | undefined;
+
+  /**
+   * <p>The ARN or name of the Amazon Web Services Secrets Manager secret that contains the InfluxDB API
+   *       token.</p>
+   * @public
+   */
+  secretId?: string | undefined;
+
+  /**
+   * <p>The type of the secret that contains the InfluxDB API token. Valid values are
+   *         <code>SecretString</code> and <code>SecretBinary</code>.</p>
+   * @public
+   */
+  secretType?: InfluxDBSecretType | undefined;
+
+  /**
+   * <p>The key that is read from the secret value when the secret contains a JSON
+   *       object.</p>
+   * @public
+   */
+  secretKey?: string | undefined;
 }
 
 /**
  * <p>The properties of a virtual private cloud (VPC) destination.</p>
+ * @public
  */
 export interface VpcDestinationProperties {
   /**
    * <p>The subnet IDs of the VPC destination.</p>
+   * @public
    */
-  subnetIds?: string[];
+  subnetIds?: string[] | undefined;
 
   /**
    * <p>The security groups of the VPC destination.</p>
+   * @public
    */
-  securityGroups?: string[];
+  securityGroups?: string[] | undefined;
 
   /**
    * <p>The ID of the VPC.</p>
+   * @public
    */
-  vpcId?: string;
+  vpcId?: string | undefined;
 
   /**
    * <p>The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).</p>
+   * @public
    */
-  roleArn?: string;
-}
-
-export namespace VpcDestinationProperties {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VpcDestinationProperties): any => ({
-    ...obj,
-  });
+  roleArn?: string | undefined;
 }
 
 /**
  * <p>A topic rule destination.</p>
+ * @public
  */
 export interface TopicRuleDestination {
   /**
    * <p>The topic rule destination URL.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>The status of the topic rule destination. Valid values are:</p>
@@ -7066,175 +7207,125 @@ export interface TopicRuleDestination {
    *                   be sent to your confirmation endpoint.</p>
    *             </dd>
    *          </dl>
+   * @public
    */
-  status?: TopicRuleDestinationStatus | string;
+  status?: TopicRuleDestinationStatus | undefined;
 
   /**
    * <p>The date and time when the topic rule destination was created.</p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
    * <p>The date and time when the topic rule destination was last updated.</p>
+   * @public
    */
-  lastUpdatedAt?: Date;
+  lastUpdatedAt?: Date | undefined;
 
   /**
    * <p>Additional details or reason why the topic rule destination is in the current
    *          status.</p>
+   * @public
    */
-  statusReason?: string;
+  statusReason?: string | undefined;
 
   /**
    * <p>Properties of the HTTP URL.</p>
+   * @public
    */
-  httpUrlProperties?: HttpUrlDestinationProperties;
+  httpUrlProperties?: HttpUrlDestinationProperties | undefined;
 
   /**
    * <p>Properties of the virtual private cloud (VPC) connection.</p>
+   * @public
    */
-  vpcProperties?: VpcDestinationProperties;
-}
+  vpcProperties?: VpcDestinationProperties | undefined;
 
-export namespace TopicRuleDestination {
   /**
-   * @internal
+   * <p>The properties of an InfluxDB topic rule destination, as returned by
+   *         <code>CreateTopicRuleDestination</code> and
+   *       <code>GetTopicRuleDestination</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TopicRuleDestination): any => ({
-    ...obj,
-  });
+  influxDBProperties?: InfluxDBDestinationProperties | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateTopicRuleDestinationResponse {
   /**
    * <p>The topic rule destination.</p>
+   * @public
    */
-  topicRuleDestination?: TopicRuleDestination;
+  topicRuleDestination?: TopicRuleDestination | undefined;
 }
 
-export namespace CreateTopicRuleDestinationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateTopicRuleDestinationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAccountAuditConfigurationRequest {
   /**
    * <p>If true, all scheduled audits are deleted.</p>
+   * @public
    */
-  deleteScheduledAudits?: boolean;
+  deleteScheduledAudits?: boolean | undefined;
 }
 
-export namespace DeleteAccountAuditConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAccountAuditConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAccountAuditConfigurationResponse {}
 
-export namespace DeleteAccountAuditConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAccountAuditConfigurationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAuditSuppressionRequest {
   /**
    * <p>An audit check name. Checks must be enabled
    *         for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
    *         of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
    *         to select which checks are enabled.)</p>
+   * @public
    */
   checkName: string | undefined;
 
   /**
    * <p>Information that identifies the noncompliant resource.</p>
+   * @public
    */
   resourceIdentifier: ResourceIdentifier | undefined;
 }
 
-export namespace DeleteAuditSuppressionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAuditSuppressionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAuditSuppressionResponse {}
 
-export namespace DeleteAuditSuppressionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAuditSuppressionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAuthorizerRequest {
   /**
    * <p>The name of the authorizer to delete.</p>
+   * @public
    */
   authorizerName: string | undefined;
 }
 
-export namespace DeleteAuthorizerRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAuthorizerRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAuthorizerResponse {}
 
-export namespace DeleteAuthorizerResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAuthorizerResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>You can't delete the resource because it is attached to one or more
- *          resources.</p>
+ * @public
  */
-export interface DeleteConflictException extends __SmithyException, $MetadataBearer {
-  name: "DeleteConflictException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace DeleteConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConflictException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteBillingGroupRequest {
   /**
    * <p>The name of the billing group.</p>
+   * @public
    */
   billingGroupName: string | undefined;
 
@@ -7243,615 +7334,550 @@ export interface DeleteBillingGroupRequest {
    * 			not match the expected version specified in the request, the
    * 				<code>DeleteBillingGroup</code> request is rejected with a
    * 				<code>VersionConflictException</code>.</p>
+   * @public
    */
-  expectedVersion?: number;
-}
-
-export namespace DeleteBillingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBillingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteBillingGroupResponse {}
-
-export namespace DeleteBillingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBillingGroupResponse): any => ({
-    ...obj,
-  });
+  expectedVersion?: number | undefined;
 }
 
 /**
- * <p>The certificate operation is not allowed.</p>
+ * @public
  */
-export interface CertificateStateException extends __SmithyException, $MetadataBearer {
-  name: "CertificateStateException";
-  $fault: "client";
-  /**
-   * <p>The message for the exception.</p>
-   */
-  message?: string;
-}
-
-export namespace CertificateStateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CertificateStateException): any => ({
-    ...obj,
-  });
-}
+export interface DeleteBillingGroupResponse {}
 
 /**
  * <p>Input for the DeleteCACertificate operation.</p>
+ * @public
  */
 export interface DeleteCACertificateRequest {
   /**
    * <p>The ID of the certificate to delete. (The last part of the certificate ARN contains
    *          the certificate ID.)</p>
+   * @public
    */
   certificateId: string | undefined;
 }
 
-export namespace DeleteCACertificateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCACertificateRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The output for the DeleteCACertificate operation.</p>
+ * @public
  */
 export interface DeleteCACertificateResponse {}
 
-export namespace DeleteCACertificateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCACertificateResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The input for the DeleteCertificate operation.</p>
+ * @public
  */
 export interface DeleteCertificateRequest {
   /**
    * <p>The ID of the certificate. (The last part of the certificate ARN contains the
    *          certificate ID.)</p>
+   * @public
    */
   certificateId: string | undefined;
 
   /**
    * <p>Forces the deletion of a certificate if it is inactive and is not attached to an IoT
    *          thing.</p>
+   * @public
    */
-  forceDelete?: boolean;
+  forceDelete?: boolean | undefined;
 }
 
-export namespace DeleteCertificateRequest {
+/**
+ * @public
+ */
+export interface DeleteCertificateProviderRequest {
   /**
-   * @internal
+   * <p>The name of the certificate provider.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteCertificateRequest): any => ({
-    ...obj,
-  });
+  certificateProviderName: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteCertificateProviderResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteCommandRequest {
+  /**
+   * <p>The unique identifier of the command to be deleted.</p>
+   * @public
+   */
+  commandId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCommandResponse {
+  /**
+   * <p>The status code for the command deletion request. The status code is in the 200 range
+   *         for a successful request.</p>
+   *          <ul>
+   *             <li>
+   *                <p>If the command hasn't been deprecated, or has been deprecated for a duration that
+   *             is shorter than the maximum time out duration of 12 hours, when calling the
+   *             <code>DeleteCommand</code> request, the deletion will be scheduled and a 202 status code
+   *             will be returned. While the command is being deleted, it will be in a
+   *             <code>pendingDeletion</code> state. Once the time out duration has been reached,
+   *             the command will be permanently removed from your account.</p>
+   *             </li>
+   *             <li>
+   *                <p>If the command has been deprecated for a duration that is longer than the
+   *             maximum time out duration of 12 hours, when calling the <code>DeleteCommand</code> request,
+   *             the command will be deleted immediately and a 204 status code will be returned.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  statusCode?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCommandExecutionRequest {
+  /**
+   * <p>The unique identifier of the command execution that you want to delete from your
+   *       account.</p>
+   * @public
+   */
+  executionId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Number (ARN) of the target device for which you want to delete
+   *       command executions.</p>
+   * @public
+   */
+  targetArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteCommandExecutionResponse {}
+
+/**
+ * @public
+ */
 export interface DeleteCustomMetricRequest {
   /**
    * <p>
    *       The name of the custom metric.
    *     </p>
+   * @public
    */
   metricName: string | undefined;
 }
 
-export namespace DeleteCustomMetricRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCustomMetricRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteCustomMetricResponse {}
 
-export namespace DeleteCustomMetricResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteCustomMetricResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDimensionRequest {
   /**
    * <p>The unique identifier for the dimension that you want to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteDimensionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDimensionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDimensionResponse {}
 
-export namespace DeleteDimensionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDimensionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDomainConfigurationRequest {
   /**
    * <p>The name of the domain configuration to be deleted.</p>
+   * @public
    */
   domainConfigurationName: string | undefined;
 }
 
-export namespace DeleteDomainConfigurationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDomainConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDomainConfigurationResponse {}
 
-export namespace DeleteDomainConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDomainConfigurationResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDynamicThingGroupRequest {
   /**
    * <p>The name of the dynamic thing group to delete.</p>
+   * @public
    */
   thingGroupName: string | undefined;
 
   /**
    * <p>The expected version of the dynamic thing group to delete.</p>
+   * @public
    */
-  expectedVersion?: number;
+  expectedVersion?: number | undefined;
 }
 
-export namespace DeleteDynamicThingGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDynamicThingGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDynamicThingGroupResponse {}
 
-export namespace DeleteDynamicThingGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDynamicThingGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteFleetMetricRequest {
   /**
    * <p>The name of the fleet metric to delete.</p>
+   * @public
    */
   metricName: string | undefined;
 
   /**
    * <p>The expected version of the fleet metric to delete.</p>
+   * @public
    */
-  expectedVersion?: number;
+  expectedVersion?: number | undefined;
 }
 
-export namespace DeleteFleetMetricRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteFleetMetricRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteJobRequest {
   /**
    * <p>The ID of the job to be deleted.</p>
-   *          <p>After a job deletion is completed, you may reuse this jobId when you create a new job.
-   *         However, this is not recommended, and you must ensure that your devices are not using the
-   *         jobId to refer to the deleted job.</p>
+   *          <p>After a job deletion is completed, you may reuse this jobId when you create a new
+   *             job. However, this is not recommended, and you must ensure that your devices are not
+   *             using the jobId to refer to the deleted job.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
-   * <p>(Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can
-   *         only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception
-   *         will occur. The default is false.</p>
+   * <p>(Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you
+   *             can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an
+   *             exception will occur. The default is false.</p>
    *          <note>
    *             <p>Deleting a job which is "IN_PROGRESS", will cause a device which is executing
-   *         the job to be unable to access job information or update the job execution status.
-   *         Use caution and ensure that each device executing a job which is deleted is able to recover to
-   *         a valid state.</p>
+   *                 the job to be unable to access job information or update the job execution status.
+   *                 Use caution and ensure that each device executing a job which is deleted is able to
+   *                 recover to a valid state.</p>
    *          </note>
+   * @public
    */
-  force?: boolean;
+  force?: boolean | undefined;
 
   /**
    * <p>The namespace used to indicate that a job is a customer-managed job.</p>
-   *         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that
-   *             contain the value in the following format.</p>
-   *         <p>
+   *          <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to
+   *             MQTT topics that contain the value in the following format.</p>
+   *          <p>
    *             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
    *          </p>
-   *         <note>
-   *             <p>The <code>namespaceId</code> feature is in public preview.</p>
+   *          <note>
+   *             <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html">Setting up IoT Greengrass core devices.</a>
+   *             </p>
    *          </note>
+   * @public
    */
-  namespaceId?: string;
+  namespaceId?: string | undefined;
 }
 
-export namespace DeleteJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteJobExecutionRequest {
   /**
    * <p>The ID of the job whose execution on a particular device will be deleted.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>The name of the thing whose job execution will be deleted.</p>
+   * @public
    */
   thingName: string | undefined;
 
   /**
-   * <p>The ID of the job execution to be deleted. The <code>executionNumber</code> refers to the
-   *         execution of a particular job on a particular device.</p>
-   *          <p>Note that once a job execution is deleted, the <code>executionNumber</code> may be reused
-   *         by IoT, so be sure you get and use the correct value here.</p>
+   * <p>The ID of the job execution to be deleted. The <code>executionNumber</code> refers
+   *             to the execution of a particular job on a particular device.</p>
+   *          <p>Note that once a job execution is deleted, the <code>executionNumber</code> may be
+   *             reused by IoT, so be sure you get and use the correct value here.</p>
+   * @public
    */
   executionNumber: number | undefined;
 
   /**
-   * <p>(Optional) When true, you can delete a job execution which is "IN_PROGRESS". Otherwise,
-   *         you can only delete a job execution which is in a terminal state ("SUCCEEDED", "FAILED",
-   *         "REJECTED", "REMOVED" or "CANCELED") or an exception will occur. The default is false.</p>
+   * <p>(Optional) When true, you can delete a job execution which is "IN_PROGRESS".
+   *             Otherwise, you can only delete a job execution which is in a terminal state
+   *             ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception will occur.
+   *             The default is false.</p>
    *          <note>
-   *             <p>Deleting a job execution which is "IN_PROGRESS", will cause the device
-   *         to be unable to access job information or update the job execution status.
-   *         Use caution and ensure that the device is able to recover to a valid state.</p>
+   *             <p>Deleting a job execution which is "IN_PROGRESS", will cause the device to be
+   *                 unable to access job information or update the job execution status. Use caution and
+   *                 ensure that the device is able to recover to a valid state.</p>
    *          </note>
+   * @public
    */
-  force?: boolean;
+  force?: boolean | undefined;
 
   /**
    * <p>The namespace used to indicate that a job is a customer-managed job.</p>
-   *         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that
-   *             contain the value in the following format.</p>
-   *         <p>
+   *          <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to
+   *             MQTT topics that contain the value in the following format.</p>
+   *          <p>
    *             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
    *          </p>
-   *         <note>
-   *             <p>The <code>namespaceId</code> feature is in public preview.</p>
+   *          <note>
+   *             <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For
+   *                 more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html">Setting up IoT Greengrass core devices.</a>
+   *             </p>
    *          </note>
+   * @public
    */
-  namespaceId?: string;
+  namespaceId?: string | undefined;
 }
 
-export namespace DeleteJobExecutionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteJobExecutionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteJobTemplateRequest {
   /**
    * <p>The unique identifier of the job template to delete.</p>
+   * @public
    */
   jobTemplateId: string | undefined;
 }
 
-export namespace DeleteJobTemplateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteJobTemplateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteMitigationActionRequest {
   /**
    * <p>The name of the mitigation action that you want to delete.</p>
+   * @public
    */
   actionName: string | undefined;
 }
 
-export namespace DeleteMitigationActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteMitigationActionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteMitigationActionResponse {}
 
-export namespace DeleteMitigationActionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteMitigationActionResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteOTAUpdateRequest {
   /**
    * <p>The ID of the OTA update to delete.</p>
+   * @public
    */
   otaUpdateId: string | undefined;
 
   /**
    * <p>When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted.
    *             Ignored if the stream specified in the OTAUpdate is supplied by the user.</p>
+   * @public
    */
-  deleteStream?: boolean;
+  deleteStream?: boolean | undefined;
 
   /**
    * <p>When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the
    *             job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will occur. The default is false.</p>
+   * @public
    */
-  forceDeleteAWSJob?: boolean;
-}
-
-export namespace DeleteOTAUpdateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOTAUpdateRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteOTAUpdateResponse {}
-
-export namespace DeleteOTAUpdateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOTAUpdateResponse): any => ({
-    ...obj,
-  });
+  forceDeleteAWSJob?: boolean | undefined;
 }
 
 /**
+ * @public
+ */
+export interface DeleteOTAUpdateResponse {}
+
+/**
+ * @public
+ */
+export interface DeletePackageRequest {
+  /**
+   * <p>The name of the target software package.</p>
+   * @public
+   */
+  packageName: string | undefined;
+
+  /**
+   * <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+   *       Don't reuse this client token if a new idempotent request is required.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeletePackageResponse {}
+
+/**
+ * @public
+ */
+export interface DeletePackageVersionRequest {
+  /**
+   * <p>The name of the associated software package.</p>
+   * @public
+   */
+  packageName: string | undefined;
+
+  /**
+   * <p>The name of the target package version.</p>
+   * @public
+   */
+  versionName: string | undefined;
+
+  /**
+   * <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+   *       Don't reuse this client token if a new idempotent request is required.</p>
+   * @public
+   */
+  clientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeletePackageVersionResponse {}
+
+/**
  * <p>The input for the DeletePolicy operation.</p>
+ * @public
  */
 export interface DeletePolicyRequest {
   /**
    * <p>The name of the policy to delete.</p>
+   * @public
    */
   policyName: string | undefined;
 }
 
-export namespace DeletePolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeletePolicyRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The input for the DeletePolicyVersion operation.</p>
+ * @public
  */
 export interface DeletePolicyVersionRequest {
   /**
    * <p>The name of the policy.</p>
+   * @public
    */
   policyName: string | undefined;
 
   /**
    * <p>The policy version ID.</p>
+   * @public
    */
   policyVersionId: string | undefined;
 }
 
-export namespace DeletePolicyVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeletePolicyVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProvisioningTemplateRequest {
   /**
    * <p>The name of the fleet provision template to delete.</p>
+   * @public
    */
   templateName: string | undefined;
 }
 
-export namespace DeleteProvisioningTemplateRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProvisioningTemplateRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProvisioningTemplateResponse {}
 
-export namespace DeleteProvisioningTemplateResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProvisioningTemplateResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProvisioningTemplateVersionRequest {
   /**
-   * <p>The name of the fleet provisioning template version to delete.</p>
+   * <p>The name of the provisioning template version to delete.</p>
+   * @public
    */
   templateName: string | undefined;
 
   /**
-   * <p>The fleet provisioning template version ID to delete.</p>
+   * <p>The provisioning template version ID to delete.</p>
+   * @public
    */
   versionId: number | undefined;
 }
 
-export namespace DeleteProvisioningTemplateVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProvisioningTemplateVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteProvisioningTemplateVersionResponse {}
-
-export namespace DeleteProvisioningTemplateVersionResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteProvisioningTemplateVersionResponse): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p>The input for the DeleteRegistrationCode operation.</p>
+ * @public
  */
 export interface DeleteRegistrationCodeRequest {}
 
-export namespace DeleteRegistrationCodeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRegistrationCodeRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The output for the DeleteRegistrationCode operation.</p>
+ * @public
  */
 export interface DeleteRegistrationCodeResponse {}
 
-export namespace DeleteRegistrationCodeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRegistrationCodeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRoleAliasRequest {
   /**
    * <p>The role alias to delete.</p>
+   * @public
    */
   roleAlias: string | undefined;
 }
 
-export namespace DeleteRoleAliasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRoleAliasRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRoleAliasResponse {}
 
-export namespace DeleteRoleAliasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRoleAliasResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteScheduledAuditRequest {
   /**
    * <p>The name of the scheduled audit you want to delete.</p>
+   * @public
    */
   scheduledAuditName: string | undefined;
 }
 
-export namespace DeleteScheduledAuditRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteScheduledAuditRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteScheduledAuditResponse {}
 
-export namespace DeleteScheduledAuditResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteScheduledAuditResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSecurityProfileRequest {
   /**
    * <p>The name of the security profile to be deleted.</p>
+   * @public
    */
   securityProfileName: string | undefined;
 
@@ -7859,15 +7885,118 @@ export interface DeleteSecurityProfileRequest {
    * <p>The expected version of the security profile. A new version is generated whenever
    *         the security profile is updated. If you specify a value that is different from the actual
    *         version, a <code>VersionConflictException</code> is thrown.</p>
+   * @public
    */
-  expectedVersion?: number;
+  expectedVersion?: number | undefined;
 }
 
-export namespace DeleteSecurityProfileRequest {
+/**
+ * @public
+ */
+export interface DeleteSecurityProfileResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteStreamRequest {
   /**
-   * @internal
+   * <p>The stream ID.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteSecurityProfileRequest): any => ({
-    ...obj,
-  });
+  streamId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteStreamResponse {}
+
+/**
+ * <p>The input for the DeleteThing operation.</p>
+ * @public
+ */
+export interface DeleteThingRequest {
+  /**
+   * <p>The name of the thing to delete.</p>
+   * @public
+   */
+  thingName: string | undefined;
+
+  /**
+   * <p>The expected version of the thing record in the registry. If the version of the
+   * 			record in the registry does not match the expected version specified in the request, the
+   * 				<code>DeleteThing</code> request is rejected with a
+   * 				<code>VersionConflictException</code>.</p>
+   * @public
+   */
+  expectedVersion?: number | undefined;
+}
+
+/**
+ * <p>The output of the DeleteThing operation.</p>
+ * @public
+ */
+export interface DeleteThingResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteThingGroupRequest {
+  /**
+   * <p>The name of the thing group to delete.</p>
+   * @public
+   */
+  thingGroupName: string | undefined;
+
+  /**
+   * <p>The expected version of the thing group to delete.</p>
+   * @public
+   */
+  expectedVersion?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteThingGroupResponse {}
+
+/**
+ * <p>The input for the DeleteThingType operation.</p>
+ * @public
+ */
+export interface DeleteThingTypeRequest {
+  /**
+   * <p>The name of the thing type.</p>
+   * @public
+   */
+  thingTypeName: string | undefined;
+}
+
+/**
+ * <p>The output for the DeleteThingType operation.</p>
+ * @public
+ */
+export interface DeleteThingTypeResponse {}
+
+/**
+ * <p>The input for the DeleteTopicRule operation.</p>
+ * @public
+ */
+export interface DeleteTopicRuleRequest {
+  /**
+   * <p>The name of the rule.</p>
+   * @public
+   */
+  ruleName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteTopicRuleDestinationRequest {
+  /**
+   * <p>The ARN of the topic rule destination to delete.</p>
+   * @public
+   */
+  arn: string | undefined;
 }

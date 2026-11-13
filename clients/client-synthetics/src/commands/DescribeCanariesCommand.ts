@@ -1,100 +1,232 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeCanariesRequest, DescribeCanariesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeCanariesCommand,
-  serializeAws_restJson1DescribeCanariesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SyntheticsClientResolvedConfig } from "../SyntheticsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeCanariesRequest, DescribeCanariesResponse } from "../models/models_0";
+import { DescribeCanaries$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeCanariesCommand}.
+ */
 export interface DescribeCanariesCommandInput extends DescribeCanariesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeCanariesCommand}.
+ */
 export interface DescribeCanariesCommandOutput extends DescribeCanariesResponse, __MetadataBearer {}
 
 /**
  * <p>This operation returns a list of the canaries in your account, along with full details
  *       about each canary.</p>
- *         <p>This operation does not have resource-level authorization, so if a user is able to use
- *             <code>DescribeCanaries</code>, the user can see all of the canaries in the account. A
- *          deny policy can only be used to restrict access to all canaries. It cannot be used on
- *          specific resources. </p>
+ *          <p>This operation supports resource-level authorization using an IAM policy and
+ *       the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view
+ *          all the canaries that you specify in your request. If you do not have permission to view any of
+ *          the canaries, the request fails with a 403 response.</p>
+ *          <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an
+ *          IAM policy that restricts which canaries that you are allowed to view. For more information,
+ *          see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
+ *             Limiting a user to viewing specific canaries</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SyntheticsClient, DescribeCanariesCommand } from "@aws-sdk/client-synthetics"; // ES Modules import
  * // const { SyntheticsClient, DescribeCanariesCommand } = require("@aws-sdk/client-synthetics"); // CommonJS import
+ * // import type { SyntheticsClientConfig } from "@aws-sdk/client-synthetics";
+ * const config = {}; // type is SyntheticsClientConfig
  * const client = new SyntheticsClient(config);
+ * const input = { // DescribeCanariesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Names: [ // DescribeCanariesNameFilter
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeCanariesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeCanariesResponse
+ * //   Canaries: [ // Canaries
+ * //     { // Canary
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Code: { // CanaryCodeOutput
+ * //         SourceLocationArn: "STRING_VALUE",
+ * //         Handler: "STRING_VALUE",
+ * //         BlueprintTypes: [ // BlueprintTypes
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Dependencies: [ // Dependencies
+ * //           { // Dependency
+ * //             Type: "LambdaLayer",
+ * //             Reference: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //       ExecutionRoleArn: "STRING_VALUE",
+ * //       Schedule: { // CanaryScheduleOutput
+ * //         Expression: "STRING_VALUE",
+ * //         DurationInSeconds: Number("long"),
+ * //         RetryConfig: { // RetryConfigOutput
+ * //           MaxRetries: Number("int"),
+ * //         },
+ * //       },
+ * //       RunConfig: { // CanaryRunConfigOutput
+ * //         TimeoutInSeconds: Number("int"),
+ * //         MemoryInMB: Number("int"),
+ * //         ActiveTracing: true || false,
+ * //         EphemeralStorage: Number("int"),
+ * //       },
+ * //       SuccessRetentionPeriodInDays: Number("int"),
+ * //       FailureRetentionPeriodInDays: Number("int"),
+ * //       Status: { // CanaryStatus
+ * //         State: "CREATING" || "READY" || "STARTING" || "RUNNING" || "UPDATING" || "STOPPING" || "STOPPED" || "ERROR" || "DELETING",
+ * //         StateReason: "STRING_VALUE",
+ * //         StateReasonCode: "INVALID_PERMISSIONS" || "CREATE_PENDING" || "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "UPDATE_PENDING" || "UPDATE_IN_PROGRESS" || "UPDATE_COMPLETE" || "ROLLBACK_COMPLETE" || "ROLLBACK_FAILED" || "DELETE_IN_PROGRESS" || "DELETE_FAILED" || "SYNC_DELETE_IN_PROGRESS",
+ * //       },
+ * //       Timeline: { // CanaryTimeline
+ * //         Created: new Date("TIMESTAMP"),
+ * //         LastModified: new Date("TIMESTAMP"),
+ * //         LastStarted: new Date("TIMESTAMP"),
+ * //         LastStopped: new Date("TIMESTAMP"),
+ * //       },
+ * //       ArtifactS3Location: "STRING_VALUE",
+ * //       EngineArn: "STRING_VALUE",
+ * //       RuntimeVersion: "STRING_VALUE",
+ * //       VpcConfig: { // VpcConfigOutput
+ * //         VpcId: "STRING_VALUE",
+ * //         SubnetIds: [ // SubnetIds
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SecurityGroupIds: [ // SecurityGroupIds
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6AllowedForDualStack: true || false,
+ * //       },
+ * //       VisualReference: { // VisualReferenceOutput
+ * //         BaseScreenshots: [ // BaseScreenshots
+ * //           { // BaseScreenshot
+ * //             ScreenshotName: "STRING_VALUE", // required
+ * //             IgnoreCoordinates: [ // BaseScreenshotIgnoreCoordinates
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         BaseCanaryRunId: "STRING_VALUE",
+ * //         BrowserType: "CHROME" || "FIREFOX",
+ * //       },
+ * //       ProvisionedResourceCleanup: "AUTOMATIC" || "OFF",
+ * //       BrowserConfigs: [ // BrowserConfigs
+ * //         { // BrowserConfig
+ * //           BrowserType: "CHROME" || "FIREFOX",
+ * //         },
+ * //       ],
+ * //       EngineConfigs: [ // EngineConfigs
+ * //         { // EngineConfig
+ * //           EngineArn: "STRING_VALUE",
+ * //           BrowserType: "CHROME" || "FIREFOX",
+ * //         },
+ * //       ],
+ * //       VisualReferences: [ // VisualReferencesOutput
+ * //         {
+ * //           BaseScreenshots: [
+ * //             {
+ * //               ScreenshotName: "STRING_VALUE", // required
+ * //               IgnoreCoordinates: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //           BaseCanaryRunId: "STRING_VALUE",
+ * //           BrowserType: "CHROME" || "FIREFOX",
+ * //         },
+ * //       ],
+ * //       MultiLocationConfig: { // MultiLocationConfig
+ * //         LocationType: "Primary" || "Replica",
+ * //         PrimaryLocation: "STRING_VALUE",
+ * //         Replicas: [ // Replicas
+ * //           { // Replica
+ * //             Location: "STRING_VALUE",
+ * //             ReplicationStatus: { // ReplicationStatus
+ * //               State: "InProgress" || "InSync" || "Inconsistent",
+ * //               StateReason: "STRING_VALUE",
+ * //               StateReasonCode: "STRING_VALUE",
+ * //             },
+ * //             CanaryState: "CREATING" || "READY" || "STARTING" || "RUNNING" || "UPDATING" || "STOPPING" || "STOPPED" || "ERROR" || "DELETING",
+ * //             LastModified: new Date("TIMESTAMP"),
+ * //             VpcConfig: {
+ * //               VpcId: "STRING_VALUE",
+ * //               SubnetIds: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               SecurityGroupIds: [
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               Ipv6AllowedForDualStack: true || false,
+ * //             },
+ * //           },
+ * //         ],
+ * //         ReplicationState: "InProgress" || "InSync" || "Inconsistent",
+ * //       },
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       ArtifactConfig: { // ArtifactConfigOutput
+ * //         S3Encryption: { // S3EncryptionConfig
+ * //           EncryptionMode: "SSE_S3" || "SSE_KMS",
+ * //           KmsKeyArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       KmsKeyArn: "STRING_VALUE",
+ * //       DryRunConfig: { // DryRunConfigOutput
+ * //         DryRunId: "STRING_VALUE",
+ * //         LastDryRunExecutionStatus: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeCanariesCommandInput - {@link DescribeCanariesCommandInput}
+ * @returns {@link DescribeCanariesCommandOutput}
  * @see {@link DescribeCanariesCommandInput} for command's `input` shape.
  * @see {@link DescribeCanariesCommandOutput} for command's `response` shape.
- * @see {@link SyntheticsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SyntheticsClientResolvedConfig | config} for SyntheticsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter could not be validated.</p>
+ *
+ * @throws {@link SyntheticsServiceException}
+ * <p>Base exception class for all service exceptions from Synthetics service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeCanariesCommand extends $Command<
-  DescribeCanariesCommandInput,
-  DescribeCanariesCommandOutput,
-  SyntheticsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeCanariesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SyntheticsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeCanariesCommandInput, DescribeCanariesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SyntheticsClient";
-    const commandName = "DescribeCanariesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeCanariesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeCanariesResponse.filterSensitiveLog,
+export class DescribeCanariesCommand extends command<DescribeCanariesCommandInput, DescribeCanariesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCanaries",
+  DescribeCanaries$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCanariesRequest;
+      output: DescribeCanariesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeCanariesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeCanariesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeCanariesCommandOutput> {
-    return deserializeAws_restJson1DescribeCanariesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeCanariesCommandInput;
+      output: DescribeCanariesCommandOutput;
+    };
+  };
 }

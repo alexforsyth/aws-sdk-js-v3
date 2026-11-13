@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { UpdateAssetPropertyRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateAssetPropertyCommand,
-  serializeAws_restJson1UpdateAssetPropertyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAssetPropertyRequest } from "../models/models_1";
+import { UpdateAssetProperty$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAssetPropertyCommand}.
+ */
 export interface UpdateAssetPropertyCommandInput extends UpdateAssetPropertyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAssetPropertyCommand}.
+ */
 export interface UpdateAssetPropertyCommandOutput extends __MetadataBearer {}
 
 /**
@@ -33,68 +34,70 @@ export interface UpdateAssetPropertyCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IoTSiteWiseClient, UpdateAssetPropertyCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, UpdateAssetPropertyCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // UpdateAssetPropertyRequest
+ *   assetId: "STRING_VALUE", // required
+ *   propertyId: "STRING_VALUE", // required
+ *   propertyAlias: "STRING_VALUE",
+ *   propertyNotificationState: "ENABLED" || "DISABLED",
+ *   clientToken: "STRING_VALUE",
+ *   propertyUnit: "STRING_VALUE",
+ * };
  * const command = new UpdateAssetPropertyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateAssetPropertyCommandInput - {@link UpdateAssetPropertyCommandInput}
+ * @returns {@link UpdateAssetPropertyCommandOutput}
  * @see {@link UpdateAssetPropertyCommandInput} for command's `input` shape.
  * @see {@link UpdateAssetPropertyCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link ConflictingOperationException} (client fault)
+ *  <p>Your request has conflicting operations. This can occur if you're trying to perform more
+ *       than one operation on the same resource at the same time.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAssetPropertyCommand extends $Command<
-  UpdateAssetPropertyCommandInput,
-  UpdateAssetPropertyCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAssetPropertyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAssetPropertyCommandInput, UpdateAssetPropertyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "UpdateAssetPropertyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAssetPropertyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateAssetPropertyCommand extends command<UpdateAssetPropertyCommandInput, UpdateAssetPropertyCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAssetProperty",
+  UpdateAssetProperty$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAssetPropertyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAssetPropertyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateAssetPropertyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateAssetPropertyCommandOutput> {
-    return deserializeAws_restJson1UpdateAssetPropertyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAssetPropertyCommandInput;
+      output: UpdateAssetPropertyCommandOutput;
+    };
+  };
 }

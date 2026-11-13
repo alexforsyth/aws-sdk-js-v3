@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListMembersRequest, ListMembersResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListMembersCommand,
-  serializeAws_restJson1ListMembersCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMembersRequest, ListMembersResponse } from "../models/models_3";
+import { ListMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMembersCommand}.
+ */
 export interface ListMembersCommandInput extends ListMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMembersCommand}.
+ */
 export interface ListMembersCommandOutput extends ListMembersResponse, __MetadataBearer {}
 
 /**
- * <p>Lists details about all member accounts for the current Security Hub administrator
+ * <p>Lists details about all member accounts for the current Security Hub CSPM administrator
  *          account.</p>
  *          <p>The results include both member accounts that belong to an organization and member
  *          accounts that were invited manually.</p>
@@ -31,68 +32,74 @@ export interface ListMembersCommandOutput extends ListMembersResponse, __Metadat
  * ```javascript
  * import { SecurityHubClient, ListMembersCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, ListMembersCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // ListMembersRequest
+ *   OnlyAssociated: true || false,
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListMembersCommand(input);
  * const response = await client.send(command);
+ * // { // ListMembersResponse
+ * //   Members: [ // MemberList
+ * //     { // Member
+ * //       AccountId: "STRING_VALUE",
+ * //       Email: "STRING_VALUE",
+ * //       MasterId: "STRING_VALUE",
+ * //       AdministratorId: "STRING_VALUE",
+ * //       MemberStatus: "STRING_VALUE",
+ * //       InvitedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMembersCommandInput - {@link ListMembersCommandInput}
+ * @returns {@link ListMembersCommandOutput}
  * @see {@link ListMembersCommandInput} for command's `input` shape.
  * @see {@link ListMembersCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @public
  */
-export class ListMembersCommand extends $Command<
-  ListMembersCommandInput,
-  ListMembersCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMembersCommandInput, ListMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "ListMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMembersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListMembersResponse.filterSensitiveLog,
+export class ListMembersCommand extends command<ListMembersCommandInput, ListMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMembers",
+  ListMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMembersRequest;
+      output: ListMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMembersCommandOutput> {
-    return deserializeAws_restJson1ListMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMembersCommandInput;
+      output: ListMembersCommandOutput;
+    };
+  };
 }

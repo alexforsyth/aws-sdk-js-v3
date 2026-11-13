@@ -1,104 +1,93 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteTransitGatewayRouteTableRequest, DeleteTransitGatewayRouteTableResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayRouteTableCommand,
-  serializeAws_ec2DeleteTransitGatewayRouteTableCommand,
-} from "../protocols/Aws_ec2";
-
-export interface DeleteTransitGatewayRouteTableCommandInput extends DeleteTransitGatewayRouteTableRequest {}
-export interface DeleteTransitGatewayRouteTableCommandOutput
-  extends DeleteTransitGatewayRouteTableResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTransitGatewayRouteTableRequest, DeleteTransitGatewayRouteTableResult } from "../models/models_3";
+import { DeleteTransitGatewayRouteTable$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes the specified transit gateway route table. You must disassociate the route table from any
- *           transit gateway route tables before you can delete it.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayRouteTableCommand}.
+ */
+export interface DeleteTransitGatewayRouteTableCommandInput extends DeleteTransitGatewayRouteTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayRouteTableCommand}.
+ */
+export interface DeleteTransitGatewayRouteTableCommandOutput extends DeleteTransitGatewayRouteTableResult, __MetadataBearer {}
+
+/**
+ * <p>Deletes the specified transit gateway route table. Before you can delete a transit gateway route table, you
+ *          must disassociate all attachments from it by using <a>DisassociateTransitGatewayRouteTable</a> and wait for the disassociations to
+ *          complete. You can't delete a transit gateway route table that is the default association route table
+ *          or default propagation route table for the transit gateway. To change the default route tables, use
+ *          <a>ModifyTransitGateway</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayRouteTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayRouteTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayRouteTableRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayRouteTableCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayRouteTableResult
+ * //   TransitGatewayRouteTable: { // TransitGatewayRouteTable
+ * //     TransitGatewayRouteTableId: "STRING_VALUE",
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "deleting" || "deleted",
+ * //     DefaultAssociationRouteTable: true || false,
+ * //     DefaultPropagationRouteTable: true || false,
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayRouteTableCommandInput - {@link DeleteTransitGatewayRouteTableCommandInput}
+ * @returns {@link DeleteTransitGatewayRouteTableCommandOutput}
  * @see {@link DeleteTransitGatewayRouteTableCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayRouteTableCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayRouteTableCommand extends $Command<
-  DeleteTransitGatewayRouteTableCommandInput,
-  DeleteTransitGatewayRouteTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayRouteTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTransitGatewayRouteTableCommandInput, DeleteTransitGatewayRouteTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayRouteTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayRouteTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayRouteTableResult.filterSensitiveLog,
+export class DeleteTransitGatewayRouteTableCommand extends command<DeleteTransitGatewayRouteTableCommandInput, DeleteTransitGatewayRouteTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayRouteTable",
+  DeleteTransitGatewayRouteTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayRouteTableRequest;
+      output: DeleteTransitGatewayRouteTableResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteTransitGatewayRouteTableCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayRouteTableCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTransitGatewayRouteTableCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayRouteTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayRouteTableCommandInput;
+      output: DeleteTransitGatewayRouteTableCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,355 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDataProviderMessage, CreateDataProviderResponse } from "../models/models_0";
+import { CreateDataProvider$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDataProviderCommand}.
+ */
+export interface CreateDataProviderCommandInput extends CreateDataProviderMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDataProviderCommand}.
+ */
+export interface CreateDataProviderCommandOutput extends CreateDataProviderResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a data provider using the provided settings. A data provider stores a data store
+ *          type and location information about your database. </p>
+ *          <p>
+ *             <b>Required permissions:</b>
+ *             <code>dms:CreateDataProvider</code>. For more information, see
+ *          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DatabaseMigrationServiceClient, CreateDataProviderCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
+ * // const { DatabaseMigrationServiceClient, CreateDataProviderCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
+ * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // CreateDataProviderMessage
+ *   DataProviderName: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   Engine: "STRING_VALUE", // required
+ *   Virtual: true || false,
+ *   Settings: { // DataProviderSettings Union: only one key present
+ *     RedshiftSettings: { // RedshiftDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     PostgreSqlSettings: { // PostgreSqlDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     MySqlSettings: { // MySqlDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     OracleSettings: { // OracleDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       AsmServer: "STRING_VALUE",
+ *       SecretsManagerOracleAsmSecretId: "STRING_VALUE",
+ *       SecretsManagerOracleAsmAccessRoleArn: "STRING_VALUE",
+ *       SecretsManagerSecurityDbEncryptionSecretId: "STRING_VALUE",
+ *       SecretsManagerSecurityDbEncryptionAccessRoleArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     SybaseAseSettings: { // SybaseAseDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       EncryptPassword: true || false,
+ *       CertificateArn: "STRING_VALUE",
+ *     },
+ *     MicrosoftSqlServerSettings: { // MicrosoftSqlServerDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     DocDbSettings: { // DocDbDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *     },
+ *     MariaDbSettings: { // MariaDbDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     IbmDb2LuwSettings: { // IbmDb2LuwDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       EncryptionAlgorithm: Number("int"),
+ *       SecurityMechanism: Number("int"),
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     IbmDb2zOsSettings: { // IbmDb2zOsDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       S3Path: "STRING_VALUE",
+ *       S3AccessRoleArn: "STRING_VALUE",
+ *     },
+ *     MongoDbSettings: { // MongoDbDataProviderSettings
+ *       ServerName: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       DatabaseName: "STRING_VALUE",
+ *       SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ *       CertificateArn: "STRING_VALUE",
+ *       AuthType: "no" || "password",
+ *       AuthSource: "STRING_VALUE",
+ *       AuthMechanism: "default" || "mongodb_cr" || "scram_sha_1",
+ *     },
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *       ResourceArn: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
+ * const command = new CreateDataProviderCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateDataProviderResponse
+ * //   DataProvider: { // DataProvider
+ * //     DataProviderName: "STRING_VALUE",
+ * //     DataProviderArn: "STRING_VALUE",
+ * //     DataProviderCreationTime: new Date("TIMESTAMP"),
+ * //     Description: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     Virtual: true || false,
+ * //     Settings: { // DataProviderSettings Union: only one key present
+ * //       RedshiftSettings: { // RedshiftDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       PostgreSqlSettings: { // PostgreSqlDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       MySqlSettings: { // MySqlDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       OracleSettings: { // OracleDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         AsmServer: "STRING_VALUE",
+ * //         SecretsManagerOracleAsmSecretId: "STRING_VALUE",
+ * //         SecretsManagerOracleAsmAccessRoleArn: "STRING_VALUE",
+ * //         SecretsManagerSecurityDbEncryptionSecretId: "STRING_VALUE",
+ * //         SecretsManagerSecurityDbEncryptionAccessRoleArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       SybaseAseSettings: { // SybaseAseDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         EncryptPassword: true || false,
+ * //         CertificateArn: "STRING_VALUE",
+ * //       },
+ * //       MicrosoftSqlServerSettings: { // MicrosoftSqlServerDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       DocDbSettings: { // DocDbDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //       },
+ * //       MariaDbSettings: { // MariaDbDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       IbmDb2LuwSettings: { // IbmDb2LuwDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         EncryptionAlgorithm: Number("int"),
+ * //         SecurityMechanism: Number("int"),
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       IbmDb2zOsSettings: { // IbmDb2zOsDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         S3Path: "STRING_VALUE",
+ * //         S3AccessRoleArn: "STRING_VALUE",
+ * //       },
+ * //       MongoDbSettings: { // MongoDbDataProviderSettings
+ * //         ServerName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         DatabaseName: "STRING_VALUE",
+ * //         SslMode: "none" || "require" || "verify-ca" || "verify-full",
+ * //         CertificateArn: "STRING_VALUE",
+ * //         AuthType: "no" || "password",
+ * //         AuthSource: "STRING_VALUE",
+ * //         AuthMechanism: "default" || "mongodb_cr" || "scram_sha_1",
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param CreateDataProviderCommandInput - {@link CreateDataProviderCommandInput}
+ * @returns {@link CreateDataProviderCommandOutput}
+ * @see {@link CreateDataProviderCommandInput} for command's `input` shape.
+ * @see {@link CreateDataProviderCommandOutput} for command's `response` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link FailedDependencyFault} (client fault)
+ *  <p>A dependency threw an exception.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsFault} (client fault)
+ *  <p>The resource you are attempting to create already exists.</p>
+ *
+ * @throws {@link ResourceQuotaExceededFault} (client fault)
+ *  <p>The quota for this resource quota has been exceeded.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @example Create a Microsoft SQL Server data provider
+ * ```javascript
+ * // The following example creates a Microsoft SQL Server data provider.
+ * const input = {
+ *   DataProviderName: "example-data-provider",
+ *   Description: "Example data provider for documentation",
+ *   Engine: "sqlserver",
+ *   Settings: {
+ *     MicrosoftSqlServerSettings: {
+ *       CertificateArn: "arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS",
+ *       DatabaseName: "ExampleDatabase",
+ *       Port: 1433,
+ *       ServerName: "example-source-server.us-east-1.rds.amazonaws.com",
+ *       SslMode: "verify-full"
+ *     }
+ *   }
+ * };
+ * const command = new CreateDataProviderCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DataProvider: {
+ *     DataProviderArn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+ *     DataProviderCreationTime: "2026-01-09T12:30:00.000000Z",
+ *     DataProviderName: "example-data-provider",
+ *     Description: "Example data provider for documentation",
+ *     Engine: "sqlserver",
+ *     Settings: {
+ *       MicrosoftSqlServerSettings: {
+ *         CertificateArn: "arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS",
+ *         DatabaseName: "ExampleDatabase",
+ *         Port: 1433,
+ *         ServerName: "example-source-server.us-east-1.rds.amazonaws.com",
+ *         SslMode: "verify-full"
+ *       }
+ *     }
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class CreateDataProviderCommand extends command<CreateDataProviderCommandInput, CreateDataProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDataProvider",
+  CreateDataProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataProviderMessage;
+      output: CreateDataProviderResponse;
+    };
+    sdk: {
+      input: CreateDataProviderCommandInput;
+      output: CreateDataProviderCommandOutput;
+    };
+  };
+}

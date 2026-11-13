@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { CheckDNSAvailabilityMessage, CheckDNSAvailabilityResultMessage } from "../models/models_0";
-import {
-  deserializeAws_queryCheckDNSAvailabilityCommand,
-  serializeAws_queryCheckDNSAvailabilityCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CheckDNSAvailabilityMessage, CheckDNSAvailabilityResultMessage } from "../models/models_0";
+import { CheckDNSAvailability$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CheckDNSAvailabilityCommand}.
+ */
 export interface CheckDNSAvailabilityCommandInput extends CheckDNSAvailabilityMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CheckDNSAvailabilityCommand}.
+ */
 export interface CheckDNSAvailabilityCommandOutput extends CheckDNSAvailabilityResultMessage, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface CheckDNSAvailabilityCommandOutput extends CheckDNSAvailabilityR
  * ```javascript
  * import { ElasticBeanstalkClient, CheckDNSAvailabilityCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, CheckDNSAvailabilityCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // CheckDNSAvailabilityMessage
+ *   CNAMEPrefix: "STRING_VALUE", // required
+ * };
  * const command = new CheckDNSAvailabilityCommand(input);
  * const response = await client.send(command);
+ * // { // CheckDNSAvailabilityResultMessage
+ * //   Available: true || false,
+ * //   FullyQualifiedCNAME: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CheckDNSAvailabilityCommandInput - {@link CheckDNSAvailabilityCommandInput}
+ * @returns {@link CheckDNSAvailabilityCommandOutput}
  * @see {@link CheckDNSAvailabilityCommandInput} for command's `input` shape.
  * @see {@link CheckDNSAvailabilityCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To check the availability of a CNAME
+ * ```javascript
+ * // The following operation checks the availability of the subdomain my-cname:
+ * const input = {
+ *   CNAMEPrefix: "my-cname"
+ * };
+ * const command = new CheckDNSAvailabilityCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Available: true,
+ *   FullyQualifiedCNAME: "my-cname.us-west-2.elasticbeanstalk.com"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CheckDNSAvailabilityCommand extends $Command<
-  CheckDNSAvailabilityCommandInput,
-  CheckDNSAvailabilityCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CheckDNSAvailabilityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CheckDNSAvailabilityCommandInput, CheckDNSAvailabilityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "CheckDNSAvailabilityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CheckDNSAvailabilityMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CheckDNSAvailabilityResultMessage.filterSensitiveLog,
+export class CheckDNSAvailabilityCommand extends command<CheckDNSAvailabilityCommandInput, CheckDNSAvailabilityCommandOutput>(
+  _ep0,
+  _mw0,
+  "CheckDNSAvailability",
+  CheckDNSAvailability$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CheckDNSAvailabilityMessage;
+      output: CheckDNSAvailabilityResultMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CheckDNSAvailabilityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCheckDNSAvailabilityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CheckDNSAvailabilityCommandOutput> {
-    return deserializeAws_queryCheckDNSAvailabilityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CheckDNSAvailabilityCommandInput;
+      output: CheckDNSAvailabilityCommandOutput;
+    };
+  };
 }

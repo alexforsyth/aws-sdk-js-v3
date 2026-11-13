@@ -1,97 +1,137 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthLakeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthLakeClient";
-import { DescribeFHIRDatastoreRequest, DescribeFHIRDatastoreResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeFHIRDatastoreCommand,
-  serializeAws_json1_0DescribeFHIRDatastoreCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFHIRDatastoreRequest, DescribeFHIRDatastoreResponse } from "../models/models_0";
+import { DescribeFHIRDatastore$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFHIRDatastoreCommand}.
+ */
 export interface DescribeFHIRDatastoreCommandInput extends DescribeFHIRDatastoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFHIRDatastoreCommand}.
+ */
 export interface DescribeFHIRDatastoreCommandOutput extends DescribeFHIRDatastoreResponse, __MetadataBearer {}
 
 /**
- * <p>Gets the properties associated with the FHIR Data Store, including the Data Store ID,
- *          Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and
- *          Data Store endpoint.</p>
+ * <p>Get properties for a FHIR-enabled data store.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { HealthLakeClient, DescribeFHIRDatastoreCommand } from "@aws-sdk/client-healthlake"; // ES Modules import
  * // const { HealthLakeClient, DescribeFHIRDatastoreCommand } = require("@aws-sdk/client-healthlake"); // CommonJS import
+ * // import type { HealthLakeClientConfig } from "@aws-sdk/client-healthlake";
+ * const config = {}; // type is HealthLakeClientConfig
  * const client = new HealthLakeClient(config);
+ * const input = { // DescribeFHIRDatastoreRequest
+ *   DatastoreId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeFHIRDatastoreCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFHIRDatastoreResponse
+ * //   DatastoreProperties: { // DatastoreProperties
+ * //     DatastoreId: "STRING_VALUE", // required
+ * //     DatastoreArn: "STRING_VALUE", // required
+ * //     DatastoreName: "STRING_VALUE",
+ * //     DatastoreStatus: "CREATING" || "ACTIVE" || "DELETING" || "DELETED" || "CREATE_FAILED" || "UPDATING" || "UPDATE_FAILED", // required
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     DatastoreTypeVersion: "R4", // required
+ * //     DatastoreEndpoint: "STRING_VALUE", // required
+ * //     SseConfiguration: { // SseConfiguration
+ * //       KmsEncryptionConfig: { // KmsEncryptionConfig
+ * //         CmkType: "CUSTOMER_MANAGED_KMS_KEY" || "AWS_OWNED_KMS_KEY", // required
+ * //         KmsKeyId: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     PreloadDataConfig: { // PreloadDataConfig
+ * //       PreloadDataType: "SYNTHEA", // required
+ * //     },
+ * //     IdentityProviderConfiguration: { // IdentityProviderConfiguration
+ * //       AuthorizationStrategy: "SMART_ON_FHIR_V1" || "SMART_ON_FHIR" || "AWS_AUTH", // required
+ * //       FineGrainedAuthorizationEnabled: true || false,
+ * //       Metadata: "STRING_VALUE",
+ * //       IdpLambdaArn: "STRING_VALUE",
+ * //     },
+ * //     ErrorCause: { // ErrorCause
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       ErrorCategory: "RETRYABLE_ERROR" || "NON_RETRYABLE_ERROR",
+ * //     },
+ * //     NlpConfiguration: { // NlpConfiguration
+ * //       Status: "ENABLED" || "ENABLING" || "DISABLED" || "DISABLING",
+ * //     },
+ * //     AnalyticsConfiguration: { // AnalyticsConfiguration
+ * //       Status: "ENABLED" || "ENABLING" || "DISABLED" || "DISABLING" || "PAUSING" || "PAUSED",
+ * //     },
+ * //     ProfileConfiguration: { // ProfileConfiguration
+ * //       DefaultProfiles: [ // DefaultProfiles
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     BackupStatusInfo: { // DatastoreBackupStatus
+ * //       Configuration: { // BackupConfiguration
+ * //         Status: "ENABLED" || "DISABLED",
+ * //         BackupType: "CONTINUOUS",
+ * //         RetentionPeriodInDays: Number("int"),
+ * //         BackupTagsEnabled: true || false,
+ * //       },
+ * //       BackupEnabledAt: new Date("TIMESTAMP"),
+ * //       EarliestRestorePoint: new Date("TIMESTAMP"),
+ * //       LatestRestorePoint: new Date("TIMESTAMP"),
+ * //       ScheduledPermanentDeletionTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeFHIRDatastoreCommandInput - {@link DescribeFHIRDatastoreCommandInput}
+ * @returns {@link DescribeFHIRDatastoreCommandOutput}
  * @see {@link DescribeFHIRDatastoreCommandInput} for command's `input` shape.
  * @see {@link DescribeFHIRDatastoreCommandOutput} for command's `response` shape.
- * @see {@link HealthLakeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link HealthLakeClientResolvedConfig | config} for HealthLakeClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred in the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested data store was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The user has exceeded their maximum number of allowed calls to the given API. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input parameter was invalid.</p>
+ *
+ * @throws {@link HealthLakeServiceException}
+ * <p>Base exception class for all service exceptions from HealthLake service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFHIRDatastoreCommand extends $Command<
-  DescribeFHIRDatastoreCommandInput,
-  DescribeFHIRDatastoreCommandOutput,
-  HealthLakeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFHIRDatastoreCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthLakeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFHIRDatastoreCommandInput, DescribeFHIRDatastoreCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthLakeClient";
-    const commandName = "DescribeFHIRDatastoreCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFHIRDatastoreRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFHIRDatastoreResponse.filterSensitiveLog,
+export class DescribeFHIRDatastoreCommand extends command<DescribeFHIRDatastoreCommandInput, DescribeFHIRDatastoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFHIRDatastore",
+  DescribeFHIRDatastore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFHIRDatastoreRequest;
+      output: DescribeFHIRDatastoreResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFHIRDatastoreCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeFHIRDatastoreCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFHIRDatastoreCommandOutput> {
-    return deserializeAws_json1_0DescribeFHIRDatastoreCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFHIRDatastoreCommandInput;
+      output: DescribeFHIRDatastoreCommandOutput;
+    };
+  };
 }

@@ -1,107 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { RemoveRoleFromInstanceProfileRequest } from "../models/models_0";
-import {
-  deserializeAws_queryRemoveRoleFromInstanceProfileCommand,
-  serializeAws_queryRemoveRoleFromInstanceProfileCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RemoveRoleFromInstanceProfileRequest } from "../models/models_0";
+import { RemoveRoleFromInstanceProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RemoveRoleFromInstanceProfileCommand}.
+ */
 export interface RemoveRoleFromInstanceProfileCommandInput extends RemoveRoleFromInstanceProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RemoveRoleFromInstanceProfileCommand}.
+ */
 export interface RemoveRoleFromInstanceProfileCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Removes the specified IAM role from the specified EC2 instance profile.</p>
- *         <important>
- *             <p>Make sure that you do not have any Amazon EC2 instances running with the role you
- *                 are about to remove from the instance profile. Removing a role from an instance
- *                 profile that is associated with a running instance might break any applications
- *                 running on the instance.</p>
- *         </important>
- *         <p> For more information about IAM roles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">Working with roles</a>. For more
- *             information about instance profiles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About instance
- *             profiles</a>.</p>
+ * <p>Removes the specified IAM role from the specified Amazon EC2 instance profile.</p>
+ *          <important>
+ *             <p>Make sure that you do not have any Amazon EC2 instances running with the role you are
+ *                 about to remove from the instance profile. Removing a role from an instance profile
+ *                 that is associated with a running instance might break any applications running on
+ *                 the instance.</p>
+ *          </important>
+ *          <p> For more information about roles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM roles</a> in the
+ *                 <i>IAM User Guide</i>. For more information about instance profiles,
+ *             see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using
+ *                 instance profiles</a> in the <i>IAM User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, RemoveRoleFromInstanceProfileCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, RemoveRoleFromInstanceProfileCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // RemoveRoleFromInstanceProfileRequest
+ *   InstanceProfileName: "STRING_VALUE", // required
+ *   RoleName: "STRING_VALUE", // required
+ * };
  * const command = new RemoveRoleFromInstanceProfileCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RemoveRoleFromInstanceProfileCommandInput - {@link RemoveRoleFromInstanceProfileCommandInput}
+ * @returns {@link RemoveRoleFromInstanceProfileCommandOutput}
  * @see {@link RemoveRoleFromInstanceProfileCommandInput} for command's `input` shape.
  * @see {@link RemoveRoleFromInstanceProfileCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current
+ *       Amazon Web Services account limits. The error message describes the limit exceeded.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link UnmodifiableEntityException} (client fault)
+ *  <p>The request was rejected because service-linked roles are protected Amazon Web Services resources. Only
+ *       the service that depends on the service-linked role can modify or delete the role on your
+ *       behalf. The error message includes the name of the service that depends on this service-linked
+ *       role. You must request the change through that service.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To remove a role from an instance profile
+ * ```javascript
+ * // The following command removes the role named Test-Role from the instance profile named ExampleInstanceProfile.
+ * const input = {
+ *   InstanceProfileName: "ExampleInstanceProfile",
+ *   RoleName: "Test-Role"
+ * };
+ * const command = new RemoveRoleFromInstanceProfileCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RemoveRoleFromInstanceProfileCommand extends $Command<
-  RemoveRoleFromInstanceProfileCommandInput,
-  RemoveRoleFromInstanceProfileCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RemoveRoleFromInstanceProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RemoveRoleFromInstanceProfileCommandInput, RemoveRoleFromInstanceProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "RemoveRoleFromInstanceProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RemoveRoleFromInstanceProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RemoveRoleFromInstanceProfileCommand extends command<RemoveRoleFromInstanceProfileCommandInput, RemoveRoleFromInstanceProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "RemoveRoleFromInstanceProfile",
+  RemoveRoleFromInstanceProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RemoveRoleFromInstanceProfileRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RemoveRoleFromInstanceProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRemoveRoleFromInstanceProfileCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RemoveRoleFromInstanceProfileCommandOutput> {
-    return deserializeAws_queryRemoveRoleFromInstanceProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RemoveRoleFromInstanceProfileCommandInput;
+      output: RemoveRoleFromInstanceProfileCommandOutput;
+    };
+  };
 }

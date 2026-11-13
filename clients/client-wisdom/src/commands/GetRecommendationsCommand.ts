@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRecommendationsRequest, GetRecommendationsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRecommendationsCommand,
-  serializeAws_restJson1GetRecommendationsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WisdomClientResolvedConfig } from "../WisdomClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRecommendationsRequest, GetRecommendationsResponse } from "../models/models_0";
+import { GetRecommendations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRecommendationsCommand}.
+ */
 export interface GetRecommendationsCommandInput extends GetRecommendationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRecommendationsCommand}.
+ */
 export interface GetRecommendationsCommandOutput extends GetRecommendationsResponse, __MetadataBearer {}
 
 /**
@@ -26,73 +27,114 @@ export interface GetRecommendationsCommandOutput extends GetRecommendationsRespo
  *       recommendations in subsequent calls, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_NotifyRecommendationsReceived.html">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the
  *         <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns
  *       recommendations already available. To perform a manual query against an assistant, use <a href="https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html">QueryAssistant</a>.</p>
+ *
+ * @deprecated GetRecommendations API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WisdomClient, GetRecommendationsCommand } from "@aws-sdk/client-wisdom"; // ES Modules import
  * // const { WisdomClient, GetRecommendationsCommand } = require("@aws-sdk/client-wisdom"); // CommonJS import
+ * // import type { WisdomClientConfig } from "@aws-sdk/client-wisdom";
+ * const config = {}; // type is WisdomClientConfig
  * const client = new WisdomClient(config);
+ * const input = { // GetRecommendationsRequest
+ *   assistantId: "STRING_VALUE", // required
+ *   sessionId: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   waitTimeSeconds: Number("int"),
+ * };
  * const command = new GetRecommendationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetRecommendationsResponse
+ * //   recommendations: [ // RecommendationList // required
+ * //     { // RecommendationData
+ * //       recommendationId: "STRING_VALUE", // required
+ * //       document: { // Document
+ * //         contentReference: { // ContentReference
+ * //           knowledgeBaseArn: "STRING_VALUE",
+ * //           knowledgeBaseId: "STRING_VALUE",
+ * //           contentArn: "STRING_VALUE",
+ * //           contentId: "STRING_VALUE",
+ * //         },
+ * //         title: { // DocumentText
+ * //           text: "STRING_VALUE",
+ * //           highlights: [ // Highlights
+ * //             { // Highlight
+ * //               beginOffsetInclusive: Number("int"),
+ * //               endOffsetExclusive: Number("int"),
+ * //             },
+ * //           ],
+ * //         },
+ * //         excerpt: {
+ * //           text: "STRING_VALUE",
+ * //           highlights: [
+ * //             {
+ * //               beginOffsetInclusive: Number("int"),
+ * //               endOffsetExclusive: Number("int"),
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //       relevanceScore: Number("double"),
+ * //       relevanceLevel: "STRING_VALUE",
+ * //       type: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   triggers: [ // RecommendationTriggerList
+ * //     { // RecommendationTrigger
+ * //       id: "STRING_VALUE", // required
+ * //       type: "STRING_VALUE", // required
+ * //       source: "STRING_VALUE", // required
+ * //       data: { // RecommendationTriggerData Union: only one key present
+ * //         query: { // QueryRecommendationTriggerData
+ * //           text: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       recommendationIds: [ // RecommendationIdList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetRecommendationsCommandInput - {@link GetRecommendationsCommandInput}
+ * @returns {@link GetRecommendationsCommandOutput}
  * @see {@link GetRecommendationsCommandInput} for command's `input` shape.
  * @see {@link GetRecommendationsCommandOutput} for command's `response` shape.
- * @see {@link WisdomClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WisdomClientResolvedConfig | config} for WisdomClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by a service.</p>
+ *
+ * @throws {@link WisdomServiceException}
+ * <p>Base exception class for all service exceptions from Wisdom service.</p>
+ *
+ *
+ * @public
  */
-export class GetRecommendationsCommand extends $Command<
-  GetRecommendationsCommandInput,
-  GetRecommendationsCommandOutput,
-  WisdomClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRecommendationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WisdomClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRecommendationsCommandInput, GetRecommendationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WisdomClient";
-    const commandName = "GetRecommendationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRecommendationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRecommendationsResponse.filterSensitiveLog,
+export class GetRecommendationsCommand extends command<GetRecommendationsCommandInput, GetRecommendationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRecommendations",
+  GetRecommendations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRecommendationsRequest;
+      output: GetRecommendationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRecommendationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRecommendationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRecommendationsCommandOutput> {
-    return deserializeAws_restJson1GetRecommendationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRecommendationsCommandInput;
+      output: GetRecommendationsCommandOutput;
+    };
+  };
 }

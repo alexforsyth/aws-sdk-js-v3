@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { RegisterEventTopicRequest, RegisterEventTopicResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1RegisterEventTopicCommand,
-  serializeAws_json1_1RegisterEventTopicCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterEventTopicRequest, RegisterEventTopicResult } from "../models/models_0";
+import { RegisterEventTopic$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterEventTopicCommand}.
+ */
 export interface RegisterEventTopicCommandInput extends RegisterEventTopicRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterEventTopicCommand}.
+ */
 export interface RegisterEventTopicCommandOutput extends RegisterEventTopicResult, __MetadataBearer {}
 
 /**
@@ -32,68 +33,72 @@ export interface RegisterEventTopicCommandOutput extends RegisterEventTopicResul
  * ```javascript
  * import { DirectoryServiceClient, RegisterEventTopicCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, RegisterEventTopicCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // RegisterEventTopicRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   TopicName: "STRING_VALUE", // required
+ * };
  * const command = new RegisterEventTopicCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RegisterEventTopicCommandInput - {@link RegisterEventTopicCommandInput}
+ * @returns {@link RegisterEventTopicCommandOutput}
  * @see {@link RegisterEventTopicCommandInput} for command's `input` shape.
  * @see {@link RegisterEventTopicCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To register an event topic
+ * ```javascript
+ * // The following example associates a directory with an SNS topic.
+ * const input = {
+ *   DirectoryId: "d-92654abfed",
+ *   TopicName: "snstopicexample"
+ * };
+ * const command = new RegisterEventTopicCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class RegisterEventTopicCommand extends $Command<
-  RegisterEventTopicCommandInput,
-  RegisterEventTopicCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterEventTopicCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterEventTopicCommandInput, RegisterEventTopicCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "RegisterEventTopicCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterEventTopicRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterEventTopicResult.filterSensitiveLog,
+export class RegisterEventTopicCommand extends command<RegisterEventTopicCommandInput, RegisterEventTopicCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterEventTopic",
+  RegisterEventTopic$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterEventTopicRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterEventTopicCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RegisterEventTopicCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterEventTopicCommandOutput> {
-    return deserializeAws_json1_1RegisterEventTopicCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterEventTopicCommandInput;
+      output: RegisterEventTopicCommandOutput;
+    };
+  };
 }

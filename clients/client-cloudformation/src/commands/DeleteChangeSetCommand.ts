@@ -1,102 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DeleteChangeSetInput, DeleteChangeSetOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteChangeSetCommand,
-  serializeAws_queryDeleteChangeSetCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteChangeSetInput, DeleteChangeSetOutput } from "../models/models_0";
+import { DeleteChangeSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteChangeSetCommand}.
+ */
 export interface DeleteChangeSetCommandInput extends DeleteChangeSetInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteChangeSetCommand}.
+ */
 export interface DeleteChangeSetCommandOutput extends DeleteChangeSetOutput, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified change set. Deleting change sets ensures that no one executes
- *          the wrong change set.</p>
- *          <p>If the call successfully completes, CloudFormation successfully deleted the
- *          change set.</p>
- *          <p>If <code>IncludeNestedStacks</code> specifies <code>True</code> during the creation of
- *          the nested change set, then <code>DeleteChangeSet</code> will delete all change sets that
- *          belong to the stacks hierarchy and will also delete all change sets for nested stacks with
- *          the status of <code>REVIEW_IN_PROGRESS</code>.</p>
+ * <p>Deletes the specified change set. Deleting change sets ensures that no one executes the
+ *       wrong change set.</p>
+ *          <p>If the call successfully completes, CloudFormation successfully deleted the change set.</p>
+ *          <p>If <code>IncludeNestedStacks</code> specifies <code>True</code> during the creation of the
+ *       nested change set, then <code>DeleteChangeSet</code> will delete all change sets that belong
+ *       to the stacks hierarchy and will also delete all change sets for nested stacks with the status
+ *       of <code>REVIEW_IN_PROGRESS</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DeleteChangeSetCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DeleteChangeSetCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DeleteChangeSetInput
+ *   ChangeSetName: "STRING_VALUE", // required
+ *   StackName: "STRING_VALUE",
+ * };
  * const command = new DeleteChangeSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteChangeSetCommandInput - {@link DeleteChangeSetCommandInput}
+ * @returns {@link DeleteChangeSetCommandOutput}
  * @see {@link DeleteChangeSetCommandInput} for command's `input` shape.
  * @see {@link DeleteChangeSetCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link InvalidChangeSetStatusException} (client fault)
+ *  <p>The specified change set can't be used to update the stack. For example, the change set status might be
+ *    <code>CREATE_IN_PROGRESS</code>, or the stack status might be <code>UPDATE_IN_PROGRESS</code>.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteChangeSetCommand extends $Command<
-  DeleteChangeSetCommandInput,
-  DeleteChangeSetCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteChangeSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteChangeSetCommandInput, DeleteChangeSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DeleteChangeSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteChangeSetInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteChangeSetOutput.filterSensitiveLog,
+export class DeleteChangeSetCommand extends command<DeleteChangeSetCommandInput, DeleteChangeSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteChangeSet",
+  DeleteChangeSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteChangeSetInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteChangeSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteChangeSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteChangeSetCommandOutput> {
-    return deserializeAws_queryDeleteChangeSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteChangeSetCommandInput;
+      output: DeleteChangeSetCommandOutput;
+    };
+  };
 }

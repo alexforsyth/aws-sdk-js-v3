@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetResponsePlanInput, GetResponsePlanOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetResponsePlanCommand,
-  serializeAws_restJson1GetResponsePlanCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMIncidentsClientResolvedConfig } from "../SSMIncidentsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResponsePlanInput, GetResponsePlanOutput } from "../models/models_0";
+import { GetResponsePlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResponsePlanCommand}.
+ */
 export interface GetResponsePlanCommandInput extends GetResponsePlanInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetResponsePlanCommand}.
+ */
 export interface GetResponsePlanCommandOutput extends GetResponsePlanOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,120 @@ export interface GetResponsePlanCommandOutput extends GetResponsePlanOutput, __M
  * ```javascript
  * import { SSMIncidentsClient, GetResponsePlanCommand } from "@aws-sdk/client-ssm-incidents"; // ES Modules import
  * // const { SSMIncidentsClient, GetResponsePlanCommand } = require("@aws-sdk/client-ssm-incidents"); // CommonJS import
+ * // import type { SSMIncidentsClientConfig } from "@aws-sdk/client-ssm-incidents";
+ * const config = {}; // type is SSMIncidentsClientConfig
  * const client = new SSMIncidentsClient(config);
+ * const input = { // GetResponsePlanInput
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new GetResponsePlanCommand(input);
  * const response = await client.send(command);
+ * // { // GetResponsePlanOutput
+ * //   arn: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   displayName: "STRING_VALUE",
+ * //   incidentTemplate: { // IncidentTemplate
+ * //     title: "STRING_VALUE", // required
+ * //     impact: Number("int"), // required
+ * //     summary: "STRING_VALUE",
+ * //     dedupeString: "STRING_VALUE",
+ * //     notificationTargets: [ // NotificationTargetSet
+ * //       { // NotificationTargetItem Union: only one key present
+ * //         snsTopicArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     incidentTags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   chatChannel: { // ChatChannel Union: only one key present
+ * //     empty: {},
+ * //     chatbotSns: [ // ChatbotSnsConfigurationSet
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * //   engagements: [ // EngagementSet
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   actions: [ // ActionsList
+ * //     { // Action Union: only one key present
+ * //       ssmAutomation: { // SsmAutomation
+ * //         roleArn: "STRING_VALUE", // required
+ * //         documentName: "STRING_VALUE", // required
+ * //         documentVersion: "STRING_VALUE",
+ * //         targetAccount: "STRING_VALUE",
+ * //         parameters: { // SsmParameters
+ * //           "<keys>": [ // SsmParameterValues
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         dynamicParameters: { // DynamicSsmParameters
+ * //           "<keys>": { // DynamicSsmParameterValue Union: only one key present
+ * //             variable: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   integrations: [ // Integrations
+ * //     { // Integration Union: only one key present
+ * //       pagerDutyConfiguration: { // PagerDutyConfiguration
+ * //         name: "STRING_VALUE", // required
+ * //         secretId: "STRING_VALUE", // required
+ * //         pagerDutyIncidentConfiguration: { // PagerDutyIncidentConfiguration
+ * //           serviceId: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetResponsePlanCommandInput - {@link GetResponsePlanCommandInput}
+ * @returns {@link GetResponsePlanCommandOutput}
  * @see {@link GetResponsePlanCommandInput} for command's `input` shape.
  * @see {@link GetResponsePlanCommandOutput} for command's `response` shape.
- * @see {@link SSMIncidentsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMIncidentsClientResolvedConfig | config} for SSMIncidentsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *       service.</p>
+ *
+ * @throws {@link SSMIncidentsServiceException}
+ * <p>Base exception class for all service exceptions from SSMIncidents service.</p>
+ *
+ *
+ * @public
  */
-export class GetResponsePlanCommand extends $Command<
-  GetResponsePlanCommandInput,
-  GetResponsePlanCommandOutput,
-  SSMIncidentsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResponsePlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMIncidentsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResponsePlanCommandInput, GetResponsePlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMIncidentsClient";
-    const commandName = "GetResponsePlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResponsePlanInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetResponsePlanOutput.filterSensitiveLog,
+export class GetResponsePlanCommand extends command<GetResponsePlanCommandInput, GetResponsePlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResponsePlan",
+  GetResponsePlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResponsePlanInput;
+      output: GetResponsePlanOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResponsePlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetResponsePlanCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetResponsePlanCommandOutput> {
-    return deserializeAws_restJson1GetResponsePlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResponsePlanCommandInput;
+      output: GetResponsePlanCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListConnectorsRequest, ListConnectorsResponse } from "../models/models_0";
+import { ListConnectors$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListConnectorsCommand}.
+ */
+export interface ListConnectorsCommandInput extends ListConnectorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListConnectorsCommand}.
+ */
+export interface ListConnectorsCommandOutput extends ListConnectorsResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns the list of all registered custom connectors in your Amazon Web Services account.
+ *       This API lists only custom connectors registered in this account, not the Amazon Web Services
+ *       authored connectors. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AppflowClient, ListConnectorsCommand } from "@aws-sdk/client-appflow"; // ES Modules import
+ * // const { AppflowClient, ListConnectorsCommand } = require("@aws-sdk/client-appflow"); // CommonJS import
+ * // import type { AppflowClientConfig } from "@aws-sdk/client-appflow";
+ * const config = {}; // type is AppflowClientConfig
+ * const client = new AppflowClient(config);
+ * const input = { // ListConnectorsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListConnectorsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListConnectorsResponse
+ * //   connectors: [ // ConnectorList
+ * //     { // ConnectorDetail
+ * //       connectorDescription: "STRING_VALUE",
+ * //       connectorName: "STRING_VALUE",
+ * //       connectorOwner: "STRING_VALUE",
+ * //       connectorVersion: "STRING_VALUE",
+ * //       applicationType: "STRING_VALUE",
+ * //       connectorType: "Salesforce" || "Singular" || "Slack" || "Redshift" || "S3" || "Marketo" || "Googleanalytics" || "Zendesk" || "Servicenow" || "Datadog" || "Trendmicro" || "Snowflake" || "Dynatrace" || "Infornexus" || "Amplitude" || "Veeva" || "EventBridge" || "LookoutMetrics" || "Upsolver" || "Honeycode" || "CustomerProfiles" || "SAPOData" || "CustomConnector" || "Pardot",
+ * //       connectorLabel: "STRING_VALUE",
+ * //       registeredAt: new Date("TIMESTAMP"),
+ * //       registeredBy: "STRING_VALUE",
+ * //       connectorProvisioningType: "LAMBDA",
+ * //       connectorModes: [ // ConnectorModeList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       supportedDataTransferTypes: [ // SupportedDataTransferTypeList
+ * //         "RECORD" || "FILE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListConnectorsCommandInput - {@link ListConnectorsCommandInput}
+ * @returns {@link ListConnectorsCommandOutput}
+ * @see {@link ListConnectorsCommandInput} for command's `input` shape.
+ * @see {@link ListConnectorsCommandOutput} for command's `response` shape.
+ * @see {@link AppflowClientResolvedConfig | config} for AppflowClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *       later. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AppflowServiceException}
+ * <p>Base exception class for all service exceptions from Appflow service.</p>
+ *
+ *
+ * @public
+ */
+export class ListConnectorsCommand extends command<ListConnectorsCommandInput, ListConnectorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListConnectors",
+  ListConnectors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListConnectorsRequest;
+      output: ListConnectorsResponse;
+    };
+    sdk: {
+      input: ListConnectorsCommandInput;
+      output: ListConnectorsCommandOutput;
+    };
+  };
+}

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataPipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataPipelineClient";
-import { ValidatePipelineDefinitionInput, ValidatePipelineDefinitionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ValidatePipelineDefinitionCommand,
-  serializeAws_json1_1ValidatePipelineDefinitionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ValidatePipelineDefinitionInput, ValidatePipelineDefinitionOutput } from "../models/models_0";
+import { ValidatePipelineDefinition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ValidatePipelineDefinitionCommand}.
+ */
 export interface ValidatePipelineDefinitionCommandInput extends ValidatePipelineDefinitionInput {}
+/**
+ * @public
+ *
+ * The output of {@link ValidatePipelineDefinitionCommand}.
+ */
 export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelineDefinitionOutput, __MetadataBearer {}
 
 /**
@@ -40,48 +41,48 @@ export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelin
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"pipelineId": "df-06372391ZG65EXAMPLE",
+ * \{"pipelineId": "df-06372391ZG65EXAMPLE",
  *  "pipelineObjects":
  *   [
- *     {"id": "Default",
+ *     \{"id": "Default",
  *      "name": "Default",
  *      "fields":
  *       [
- *         {"key": "workerGroup",
- *          "stringValue": "MyworkerGroup"}
+ *         \{"key": "workerGroup",
+ *          "stringValue": "MyworkerGroup"\}
  *       ]
- *     },
- *     {"id": "Schedule",
+ *     \},
+ *     \{"id": "Schedule",
  *      "name": "Schedule",
  *      "fields":
  *       [
- *        {"key": "startDateTime",
- *          "stringValue": "2012-09-25T17:00:00"},
- *         {"key": "type",
- *          "stringValue": "Schedule"},
- *         {"key": "period",
- *          "stringValue": "1 hour"},
- *         {"key": "endDateTime",
- *          "stringValue": "2012-09-25T18:00:00"}
+ *        \{"key": "startDateTime",
+ *          "stringValue": "2012-09-25T17:00:00"\},
+ *         \{"key": "type",
+ *          "stringValue": "Schedule"\},
+ *         \{"key": "period",
+ *          "stringValue": "1 hour"\},
+ *         \{"key": "endDateTime",
+ *          "stringValue": "2012-09-25T18:00:00"\}
  *       ]
- *     },
- *     {"id": "SayHello",
+ *     \},
+ *     \{"id": "SayHello",
  *      "name": "SayHello",
  *      "fields":
  *       [
- *         {"key": "type",
- *          "stringValue": "ShellCommandActivity"},
- *         {"key": "command",
- *          "stringValue": "echo hello"},
- *         {"key": "parent",
- *          "refValue": "Default"},
- *         {"key": "schedule",
- *          "refValue": "Schedule"}
+ *         \{"key": "type",
+ *          "stringValue": "ShellCommandActivity"\},
+ *         \{"key": "command",
+ *          "stringValue": "echo hello"\},
+ *         \{"key": "parent",
+ *          "refValue": "Default"\},
+ *         \{"key": "schedule",
+ *          "refValue": "Schedule"\}
  *
  *       ]
- *     }
+ *     \}
  *   ]
- * }
+ * \}
  *
  *             </request>
  *             <response>
@@ -91,7 +92,7 @@ export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelin
  * Content-Length: 18
  * Date: Mon, 12 Nov 2012 17:50:53 GMT
  *
- * {"errored": false}
+ * \{"errored": false\}
  *
  *             </response>
  *             </example>
@@ -111,48 +112,48 @@ export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelin
  * X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
  * Authorization: AuthParams
  *
- * {"pipelineId": "df-06372391ZG65EXAMPLE",
+ * \{"pipelineId": "df-06372391ZG65EXAMPLE",
  *  "pipelineObjects":
  *   [
- *     {"id": "Default",
+ *     \{"id": "Default",
  *      "name": "Default",
  *      "fields":
  *       [
- *         {"key": "workerGroup",
- *          "stringValue": "MyworkerGroup"}
+ *         \{"key": "workerGroup",
+ *          "stringValue": "MyworkerGroup"\}
  *       ]
- *     },
- *     {"id": "Schedule",
+ *     \},
+ *     \{"id": "Schedule",
  *      "name": "Schedule",
  *      "fields":
  *       [
- *        {"key": "startDateTime",
- *          "stringValue": "bad-time"},
- *         {"key": "type",
- *          "stringValue": "Schedule"},
- *         {"key": "period",
- *          "stringValue": "1 hour"},
- *         {"key": "endDateTime",
- *          "stringValue": "2012-09-25T18:00:00"}
+ *        \{"key": "startDateTime",
+ *          "stringValue": "bad-time"\},
+ *         \{"key": "type",
+ *          "stringValue": "Schedule"\},
+ *         \{"key": "period",
+ *          "stringValue": "1 hour"\},
+ *         \{"key": "endDateTime",
+ *          "stringValue": "2012-09-25T18:00:00"\}
  *       ]
- *     },
- *     {"id": "SayHello",
+ *     \},
+ *     \{"id": "SayHello",
  *      "name": "SayHello",
  *      "fields":
  *       [
- *         {"key": "type",
- *          "stringValue": "ShellCommandActivity"},
- *         {"key": "command",
- *          "stringValue": "echo hello"},
- *         {"key": "parent",
- *          "refValue": "Default"},
- *         {"key": "schedule",
- *          "refValue": "Schedule"}
+ *         \{"key": "type",
+ *          "stringValue": "ShellCommandActivity"\},
+ *         \{"key": "command",
+ *          "stringValue": "echo hello"\},
+ *         \{"key": "parent",
+ *          "refValue": "Default"\},
+ *         \{"key": "schedule",
+ *          "refValue": "Schedule"\}
  *
  *       ]
- *     }
+ *     \}
  *   ]
- * }
+ * \}
  *
  *             </request>
  *             <response>
@@ -162,14 +163,14 @@ export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelin
  * Content-Length: 278
  * Date: Mon, 12 Nov 2012 17:50:53 GMT
  *
- * {"errored": true,
+ * \{"errored": true,
  *  "validationErrors":
  *   [
- *     {"errors":
+ *     \{"errors":
  *       ["INVALID_FIELD_VALUE:  'startDateTime' value must be a literal datetime value."],
- *      "id": "Schedule"}
+ *      "id": "Schedule"\}
  *   ]
- * }
+ * \}
  *
  *             </response>
  *                 </example>
@@ -179,71 +180,105 @@ export interface ValidatePipelineDefinitionCommandOutput extends ValidatePipelin
  * ```javascript
  * import { DataPipelineClient, ValidatePipelineDefinitionCommand } from "@aws-sdk/client-data-pipeline"; // ES Modules import
  * // const { DataPipelineClient, ValidatePipelineDefinitionCommand } = require("@aws-sdk/client-data-pipeline"); // CommonJS import
+ * // import type { DataPipelineClientConfig } from "@aws-sdk/client-data-pipeline";
+ * const config = {}; // type is DataPipelineClientConfig
  * const client = new DataPipelineClient(config);
+ * const input = { // ValidatePipelineDefinitionInput
+ *   pipelineId: "STRING_VALUE", // required
+ *   pipelineObjects: [ // PipelineObjectList // required
+ *     { // PipelineObject
+ *       id: "STRING_VALUE", // required
+ *       name: "STRING_VALUE", // required
+ *       fields: [ // fieldList // required
+ *         { // Field
+ *           key: "STRING_VALUE", // required
+ *           stringValue: "STRING_VALUE",
+ *           refValue: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   parameterObjects: [ // ParameterObjectList
+ *     { // ParameterObject
+ *       id: "STRING_VALUE", // required
+ *       attributes: [ // ParameterAttributeList // required
+ *         { // ParameterAttribute
+ *           key: "STRING_VALUE", // required
+ *           stringValue: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   parameterValues: [ // ParameterValueList
+ *     { // ParameterValue
+ *       id: "STRING_VALUE", // required
+ *       stringValue: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new ValidatePipelineDefinitionCommand(input);
  * const response = await client.send(command);
+ * // { // ValidatePipelineDefinitionOutput
+ * //   validationErrors: [ // ValidationErrors
+ * //     { // ValidationError
+ * //       id: "STRING_VALUE",
+ * //       errors: [ // validationMessages
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   validationWarnings: [ // ValidationWarnings
+ * //     { // ValidationWarning
+ * //       id: "STRING_VALUE",
+ * //       warnings: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   errored: true || false, // required
+ * // };
+ *
  * ```
  *
+ * @param ValidatePipelineDefinitionCommandInput - {@link ValidatePipelineDefinitionCommandInput}
+ * @returns {@link ValidatePipelineDefinitionCommandOutput}
  * @see {@link ValidatePipelineDefinitionCommandInput} for command's `input` shape.
  * @see {@link ValidatePipelineDefinitionCommandOutput} for command's `response` shape.
- * @see {@link DataPipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataPipelineClientResolvedConfig | config} for DataPipelineClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
+ *
+ * @throws {@link PipelineDeletedException} (client fault)
+ *  <p>The specified pipeline has been deleted.</p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
+ *
+ * @throws {@link DataPipelineServiceException}
+ * <p>Base exception class for all service exceptions from DataPipeline service.</p>
+ *
+ *
+ * @public
  */
-export class ValidatePipelineDefinitionCommand extends $Command<
-  ValidatePipelineDefinitionCommandInput,
-  ValidatePipelineDefinitionCommandOutput,
-  DataPipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ValidatePipelineDefinitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataPipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ValidatePipelineDefinitionCommandInput, ValidatePipelineDefinitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataPipelineClient";
-    const commandName = "ValidatePipelineDefinitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ValidatePipelineDefinitionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ValidatePipelineDefinitionOutput.filterSensitiveLog,
+export class ValidatePipelineDefinitionCommand extends command<ValidatePipelineDefinitionCommandInput, ValidatePipelineDefinitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ValidatePipelineDefinition",
+  ValidatePipelineDefinition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ValidatePipelineDefinitionInput;
+      output: ValidatePipelineDefinitionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ValidatePipelineDefinitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ValidatePipelineDefinitionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ValidatePipelineDefinitionCommandOutput> {
-    return deserializeAws_json1_1ValidatePipelineDefinitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ValidatePipelineDefinitionCommandInput;
+      output: ValidatePipelineDefinitionCommandOutput;
+    };
+  };
 }

@@ -1,95 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTailorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaTailorClient";
-import { UpdateVodSourceRequest, UpdateVodSourceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateVodSourceCommand,
-  serializeAws_restJson1UpdateVodSourceCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateVodSourceRequest, UpdateVodSourceResponse } from "../models/models_0";
+import { UpdateVodSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateVodSourceCommand}.
+ */
 export interface UpdateVodSourceCommandInput extends UpdateVodSourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateVodSourceCommand}.
+ */
 export interface UpdateVodSourceCommandOutput extends UpdateVodSourceResponse, __MetadataBearer {}
 
 /**
- * <p>Updates a specific VOD source in a specific source location.</p>
+ * <p>Updates a VOD source's configuration.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaTailorClient, UpdateVodSourceCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
  * // const { MediaTailorClient, UpdateVodSourceCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
  * const client = new MediaTailorClient(config);
+ * const input = { // UpdateVodSourceRequest
+ *   HttpPackageConfigurations: [ // HttpPackageConfigurations // required
+ *     { // HttpPackageConfiguration
+ *       Path: "STRING_VALUE", // required
+ *       SourceGroup: "STRING_VALUE", // required
+ *       Type: "DASH" || "HLS", // required
+ *     },
+ *   ],
+ *   SourceLocationName: "STRING_VALUE", // required
+ *   VodSourceName: "STRING_VALUE", // required
+ * };
  * const command = new UpdateVodSourceCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateVodSourceResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   HttpPackageConfigurations: [ // HttpPackageConfigurations
+ * //     { // HttpPackageConfiguration
+ * //       Path: "STRING_VALUE", // required
+ * //       SourceGroup: "STRING_VALUE", // required
+ * //       Type: "DASH" || "HLS", // required
+ * //     },
+ * //   ],
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   SourceLocationName: "STRING_VALUE",
+ * //   Tags: { // __mapOf__string
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   VodSourceName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateVodSourceCommandInput - {@link UpdateVodSourceCommandInput}
+ * @returns {@link UpdateVodSourceCommandOutput}
  * @see {@link UpdateVodSourceCommandInput} for command's `input` shape.
  * @see {@link UpdateVodSourceCommandOutput} for command's `response` shape.
- * @see {@link MediaTailorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
  *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateVodSourceCommand extends $Command<
-  UpdateVodSourceCommandInput,
-  UpdateVodSourceCommandOutput,
-  MediaTailorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateVodSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaTailorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateVodSourceCommandInput, UpdateVodSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaTailorClient";
-    const commandName = "UpdateVodSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateVodSourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateVodSourceResponse.filterSensitiveLog,
+export class UpdateVodSourceCommand extends command<UpdateVodSourceCommandInput, UpdateVodSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateVodSource",
+  UpdateVodSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateVodSourceRequest;
+      output: UpdateVodSourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateVodSourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateVodSourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateVodSourceCommandOutput> {
-    return deserializeAws_restJson1UpdateVodSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateVodSourceCommandInput;
+      output: UpdateVodSourceCommandOutput;
+    };
+  };
 }

@@ -1,106 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
-import { UpdateContinuousBackupsInput, UpdateContinuousBackupsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0UpdateContinuousBackupsCommand,
-  serializeAws_json1_0UpdateContinuousBackupsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type { UpdateContinuousBackupsInput, UpdateContinuousBackupsOutput } from "../models/models_0";
+import { UpdateContinuousBackups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateContinuousBackupsCommand}.
+ */
 export interface UpdateContinuousBackupsCommandInput extends UpdateContinuousBackupsInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateContinuousBackupsCommand}.
+ */
 export interface UpdateContinuousBackupsCommandOutput extends UpdateContinuousBackupsOutput, __MetadataBearer {}
 
 /**
  * <p>
- *             <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table.
- *       A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>.
- *       Continuous backups are <code>ENABLED</code> on all tables at table creation.
- *       If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>
- *          <p>
- *       Once continuous backups and point in time recovery are enabled, you can restore to any point in time within
- *       <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>.
- *      </p>
+ *             <code>UpdateContinuousBackups</code> enables or disables point in time recovery for
+ *             the specified table. A successful <code>UpdateContinuousBackups</code> call returns the
+ *             current <code>ContinuousBackupsDescription</code>. Continuous backups are
+ *                 <code>ENABLED</code> on all tables at table creation. If point in time recovery is
+ *             enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>
+ *          <p> Once continuous backups and point in time recovery are enabled, you can restore to
+ *             any point in time within <code>EarliestRestorableDateTime</code> and
+ *                 <code>LatestRestorableDateTime</code>. </p>
  *          <p>
  *             <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.
- *             You can restore your table to any point in time during the last 35 days. </p>
+ *             You can restore your table to any point in time in the last 35 days. You can set the
+ *                 <code>RecoveryPeriodInDays</code> to any value between 1 and 35 days.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DynamoDBClient, UpdateContinuousBackupsCommand } from "@aws-sdk/client-dynamodb"; // ES Modules import
  * // const { DynamoDBClient, UpdateContinuousBackupsCommand } = require("@aws-sdk/client-dynamodb"); // CommonJS import
+ * // import type { DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+ * const config = {}; // type is DynamoDBClientConfig
  * const client = new DynamoDBClient(config);
+ * const input = { // UpdateContinuousBackupsInput
+ *   TableName: "STRING_VALUE", // required
+ *   PointInTimeRecoverySpecification: { // PointInTimeRecoverySpecification
+ *     PointInTimeRecoveryEnabled: true || false, // required
+ *     RecoveryPeriodInDays: Number("int"),
+ *   },
+ * };
  * const command = new UpdateContinuousBackupsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateContinuousBackupsOutput
+ * //   ContinuousBackupsDescription: { // ContinuousBackupsDescription
+ * //     ContinuousBackupsStatus: "ENABLED" || "DISABLED", // required
+ * //     PointInTimeRecoveryDescription: { // PointInTimeRecoveryDescription
+ * //       PointInTimeRecoveryStatus: "ENABLED" || "DISABLED",
+ * //       RecoveryPeriodInDays: Number("int"),
+ * //       EarliestRestorableDateTime: new Date("TIMESTAMP"),
+ * //       LatestRestorableDateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateContinuousBackupsCommandInput - {@link UpdateContinuousBackupsCommandInput}
+ * @returns {@link UpdateContinuousBackupsCommandOutput}
  * @see {@link UpdateContinuousBackupsCommandInput} for command's `input` shape.
  * @see {@link UpdateContinuousBackupsCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBClientResolvedConfig | config} for DynamoDBClient's `config` shape.
  *
+ * @throws {@link ContinuousBackupsUnavailableException} (client fault)
+ *  <p>Backups have not yet been enabled for this table.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *
+ * @throws {@link TableNotFoundException} (client fault)
+ *  <p>A source table with the name <code>TableName</code> does not currently exist within
+ *             the subscriber's account or the subscriber is operating in the wrong Amazon Web Services
+ *             Region.</p>
+ *
+ * @throws {@link DynamoDBServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDB service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateContinuousBackupsCommand extends $Command<
-  UpdateContinuousBackupsCommandInput,
-  UpdateContinuousBackupsCommandOutput,
-  DynamoDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateContinuousBackupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateContinuousBackupsCommandInput, UpdateContinuousBackupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBClient";
-    const commandName = "UpdateContinuousBackupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateContinuousBackupsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateContinuousBackupsOutput.filterSensitiveLog,
+export class UpdateContinuousBackupsCommand extends command<UpdateContinuousBackupsCommandInput, UpdateContinuousBackupsCommandOutput>(
+  _ep3,
+  _mw0,
+  "UpdateContinuousBackups",
+  UpdateContinuousBackups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateContinuousBackupsInput;
+      output: UpdateContinuousBackupsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateContinuousBackupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0UpdateContinuousBackupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateContinuousBackupsCommandOutput> {
-    return deserializeAws_json1_0UpdateContinuousBackupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateContinuousBackupsCommandInput;
+      output: UpdateContinuousBackupsCommandOutput;
+    };
+  };
 }

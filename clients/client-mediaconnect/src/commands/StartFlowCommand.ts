@@ -1,95 +1,94 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { StartFlowRequest, StartFlowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartFlowCommand,
-  serializeAws_restJson1StartFlowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartFlowRequest, StartFlowResponse } from "../models/models_1";
+import { StartFlow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartFlowCommand}.
+ */
 export interface StartFlowCommandInput extends StartFlowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartFlowCommand}.
+ */
 export interface StartFlowCommandOutput extends StartFlowResponse, __MetadataBearer {}
 
 /**
- * Starts a flow.
+ * <p> Starts a flow.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, StartFlowCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, StartFlowCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // StartFlowRequest
+ *   FlowArn: "STRING_VALUE", // required
+ * };
  * const command = new StartFlowCommand(input);
  * const response = await client.send(command);
+ * // { // StartFlowResponse
+ * //   FlowArn: "STRING_VALUE",
+ * //   Status: "STANDBY" || "ACTIVE" || "UPDATING" || "DELETING" || "STARTING" || "STOPPING" || "ERROR",
+ * // };
+ *
  * ```
  *
+ * @param StartFlowCommandInput - {@link StartFlowCommandInput}
+ * @returns {@link StartFlowCommandOutput}
  * @see {@link StartFlowCommandInput} for command's `input` shape.
  * @see {@link StartFlowCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class StartFlowCommand extends $Command<
-  StartFlowCommandInput,
-  StartFlowCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartFlowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartFlowCommandInput, StartFlowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "StartFlowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartFlowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartFlowResponse.filterSensitiveLog,
+export class StartFlowCommand extends command<StartFlowCommandInput, StartFlowCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartFlow",
+  StartFlow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartFlowRequest;
+      output: StartFlowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartFlowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartFlowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartFlowCommandOutput> {
-    return deserializeAws_restJson1StartFlowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartFlowCommandInput;
+      output: StartFlowCommandOutput;
+    };
+  };
 }

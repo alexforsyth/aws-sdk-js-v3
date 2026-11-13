@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import { UpdateJobQueueRequest, UpdateJobQueueResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateJobQueueCommand,
-  serializeAws_restJson1UpdateJobQueueCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateJobQueueRequest, UpdateJobQueueResponse } from "../models/models_0";
+import { UpdateJobQueue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateJobQueueCommand}.
+ */
 export interface UpdateJobQueueCommandInput extends UpdateJobQueueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateJobQueueCommand}.
+ */
 export interface UpdateJobQueueCommandOutput extends UpdateJobQueueResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface UpdateJobQueueCommandOutput extends UpdateJobQueueResponse, __M
  * ```javascript
  * import { BatchClient, UpdateJobQueueCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, UpdateJobQueueCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // UpdateJobQueueRequest
+ *   jobQueue: "STRING_VALUE", // required
+ *   state: "ENABLED" || "DISABLED",
+ *   schedulingPolicyArn: "STRING_VALUE",
+ *   priority: Number("int"),
+ *   computeEnvironmentOrder: [ // ComputeEnvironmentOrders
+ *     { // ComputeEnvironmentOrder
+ *       order: Number("int"), // required
+ *       computeEnvironment: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   serviceEnvironmentOrder: [ // ServiceEnvironmentOrders
+ *     { // ServiceEnvironmentOrder
+ *       order: Number("int"), // required
+ *       serviceEnvironment: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   jobStateTimeLimitActions: [ // JobStateTimeLimitActions
+ *     { // JobStateTimeLimitAction
+ *       reason: "STRING_VALUE", // required
+ *       state: "RUNNABLE", // required
+ *       maxTimeSeconds: Number("int"), // required
+ *       action: "CANCEL" || "TERMINATE", // required
+ *     },
+ *   ],
+ * };
  * const command = new UpdateJobQueueCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateJobQueueResponse
+ * //   jobQueueName: "STRING_VALUE",
+ * //   jobQueueArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateJobQueueCommandInput - {@link UpdateJobQueueCommandInput}
+ * @returns {@link UpdateJobQueueCommandOutput}
  * @see {@link UpdateJobQueueCommandInput} for command's `input` shape.
  * @see {@link UpdateJobQueueCommandOutput} for command's `response` shape.
- * @see {@link BatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @example To update a job queue
+ * ```javascript
+ * // This example disables a job queue so that it can be deleted.
+ * const input = {
+ *   jobQueue: "GPGPU",
+ *   state: "DISABLED"
+ * };
+ * const command = new UpdateJobQueueCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   jobQueueArn: "arn:aws:batch:us-east-1:012345678910:job-queue/GPGPU",
+ *   jobQueueName: "GPGPU"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateJobQueueCommand extends $Command<
-  UpdateJobQueueCommandInput,
-  UpdateJobQueueCommandOutput,
-  BatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateJobQueueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateJobQueueCommandInput, UpdateJobQueueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "UpdateJobQueueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateJobQueueRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateJobQueueResponse.filterSensitiveLog,
+export class UpdateJobQueueCommand extends command<UpdateJobQueueCommandInput, UpdateJobQueueCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateJobQueue",
+  UpdateJobQueue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateJobQueueRequest;
+      output: UpdateJobQueueResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateJobQueueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateJobQueueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateJobQueueCommandOutput> {
-    return deserializeAws_restJson1UpdateJobQueueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateJobQueueCommandInput;
+      output: UpdateJobQueueCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchGetTracesRequest, BatchGetTracesResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchGetTracesCommand,
-  serializeAws_restJson1BatchGetTracesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetTracesRequest, BatchGetTracesResult } from "../models/models_0";
+import { BatchGetTraces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetTracesCommand}.
+ */
 export interface BatchGetTracesCommandInput extends BatchGetTracesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetTracesCommand}.
+ */
 export interface BatchGetTracesCommandOutput extends BatchGetTracesResult, __MetadataBearer {}
 
 /**
- * <p>Retrieves a list of traces specified by ID. Each trace is a collection of segment
+ * <note>
+ *             <p>You cannot find traces through this API if Transaction Search is enabled since trace is not indexed in X-Ray.</p>
+ *          </note>
+ *          <p>Retrieves a list of traces specified by ID. Each trace is a collection of segment
  *       documents that originates from a single request. Use <code>GetTraceSummaries</code> to get a
  *       list of trace IDs.</p>
  * @example
@@ -30,68 +34,72 @@ export interface BatchGetTracesCommandOutput extends BatchGetTracesResult, __Met
  * ```javascript
  * import { XRayClient, BatchGetTracesCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, BatchGetTracesCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // BatchGetTracesRequest
+ *   TraceIds: [ // TraceIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new BatchGetTracesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetTracesResult
+ * //   Traces: [ // TraceList
+ * //     { // Trace
+ * //       Id: "STRING_VALUE",
+ * //       Duration: Number("double"),
+ * //       LimitExceeded: true || false,
+ * //       Segments: [ // SegmentList
+ * //         { // Segment
+ * //           Id: "STRING_VALUE",
+ * //           Document: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   UnprocessedTraceIds: [ // UnprocessedTraceIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param BatchGetTracesCommandInput - {@link BatchGetTracesCommandInput}
+ * @returns {@link BatchGetTracesCommandOutput}
  * @see {@link BatchGetTracesCommandInput} for command's `input` shape.
  * @see {@link BatchGetTracesCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetTracesCommand extends $Command<
-  BatchGetTracesCommandInput,
-  BatchGetTracesCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetTracesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetTracesCommandInput, BatchGetTracesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "BatchGetTracesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetTracesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetTracesResult.filterSensitiveLog,
+export class BatchGetTracesCommand extends command<BatchGetTracesCommandInput, BatchGetTracesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetTraces",
+  BatchGetTraces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetTracesRequest;
+      output: BatchGetTracesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetTracesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchGetTracesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetTracesCommandOutput> {
-    return deserializeAws_restJson1BatchGetTracesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetTracesCommandInput;
+      output: BatchGetTracesCommandOutput;
+    };
+  };
 }

@@ -17,34 +17,54 @@ jspm_packages
 .node_repl_history
 *.tgz
 .yarn-integrity
+.yarn/*
+**/.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 .DS_Store
 .vscode/launch.json
 
+Makefile.private.mk
 lerna-debug.log
 package-lock.json
 
 !serviceModels/logs
 dist
+tests/bundlers/dist-min
+tests/bundlers/dist-vite
 
 .idea/
 *.iml
 *.iws
 
 codegen/**/build
+codegen/**/build-single
+codegen/sdk-codegen/aws-models-examples
 codegen/sdk-codegen/smithy-build.json
+codegen/sdk-codegen/smithy-build-*.json
 .gradle
 */out/
 */*/out/
+workspace
+./scripts/compilation/tmp/*.mjs
 
+.turbo
+turbo.dev.json
+.rollup.cache
 coverage
-dist
 dist-*
 
 /verdaccio/*
+/storage/.verdaccio-db.json
 !/verdaccio/config.yaml
 
 *.tsbuildinfo
 
+codegen/.attach*
 codegen/.project
 codegen/.classpath
 codegen/.settings/
@@ -52,3 +72,17 @@ codegen/*/.project
 codegen/*/.classpath
 codegen/*/.settings/
 codegen/*/bin
+
+benchmark/size/raw
+
+etc/
+temp/
+temp-packages/
+temp-lib/
+temp-tarball/
+
+/tmp/*
+!/tmp/.gitkeep
+
+# Gradle composite build properties
+codegen/local.properties

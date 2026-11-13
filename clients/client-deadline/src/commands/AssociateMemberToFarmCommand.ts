@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateMemberToFarmRequest, AssociateMemberToFarmResponse } from "../models/models_0";
+import { AssociateMemberToFarm$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateMemberToFarmCommand}.
+ */
+export interface AssociateMemberToFarmCommandInput extends AssociateMemberToFarmRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateMemberToFarmCommand}.
+ */
+export interface AssociateMemberToFarmCommandOutput extends AssociateMemberToFarmResponse, __MetadataBearer {}
+
+/**
+ * Assigns a farm membership level to a member.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, AssociateMemberToFarmCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, AssociateMemberToFarmCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // AssociateMemberToFarmRequest
+ *   farmId: "STRING_VALUE", // required
+ *   principalType: "USER" || "GROUP", // required
+ *   identityStoreId: "STRING_VALUE", // required
+ *   membershipLevel: "VIEWER" || "CONTRIBUTOR" || "OWNER" || "MANAGER", // required
+ *   principalId: "STRING_VALUE", // required
+ *   identityCenterRegion: "STRING_VALUE",
+ * };
+ * const command = new AssociateMemberToFarmCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param AssociateMemberToFarmCommandInput - {@link AssociateMemberToFarmCommandInput}
+ * @returns {@link AssociateMemberToFarmCommandOutput}
+ * @see {@link AssociateMemberToFarmCommandInput} for command's `input` shape.
+ * @see {@link AssociateMemberToFarmCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class AssociateMemberToFarmCommand extends command<AssociateMemberToFarmCommandInput, AssociateMemberToFarmCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateMemberToFarm",
+  AssociateMemberToFarm$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateMemberToFarmRequest;
+      output: {};
+    };
+    sdk: {
+      input: AssociateMemberToFarmCommandInput;
+      output: AssociateMemberToFarmCommandOutput;
+    };
+  };
+}

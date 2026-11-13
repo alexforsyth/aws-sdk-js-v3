@@ -1,1228 +1,1865 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type CreateAccessCommandInput,
+  type CreateAccessCommandOutput,
   CreateAccessCommand,
-  CreateAccessCommandInput,
-  CreateAccessCommandOutput,
 } from "./commands/CreateAccessCommand";
 import {
-  CreateServerCommand,
-  CreateServerCommandInput,
-  CreateServerCommandOutput,
-} from "./commands/CreateServerCommand";
-import { CreateUserCommand, CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+  type CreateAgreementCommandInput,
+  type CreateAgreementCommandOutput,
+  CreateAgreementCommand,
+} from "./commands/CreateAgreementCommand";
 import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type CreateProfileCommandInput,
+  type CreateProfileCommandOutput,
+  CreateProfileCommand,
+} from "./commands/CreateProfileCommand";
+import {
+  type CreateServerCommandInput,
+  type CreateServerCommandOutput,
+  CreateServerCommand,
+} from "./commands/CreateServerCommand";
+import {
+  type CreateUserCommandInput,
+  type CreateUserCommandOutput,
+  CreateUserCommand,
+} from "./commands/CreateUserCommand";
+import {
+  type CreateWebAppCommandInput,
+  type CreateWebAppCommandOutput,
+  CreateWebAppCommand,
+} from "./commands/CreateWebAppCommand";
+import {
+  type CreateWorkflowCommandInput,
+  type CreateWorkflowCommandOutput,
   CreateWorkflowCommand,
-  CreateWorkflowCommandInput,
-  CreateWorkflowCommandOutput,
 } from "./commands/CreateWorkflowCommand";
 import {
+  type DeleteAccessCommandInput,
+  type DeleteAccessCommandOutput,
   DeleteAccessCommand,
-  DeleteAccessCommandInput,
-  DeleteAccessCommandOutput,
 } from "./commands/DeleteAccessCommand";
 import {
+  type DeleteAgreementCommandInput,
+  type DeleteAgreementCommandOutput,
+  DeleteAgreementCommand,
+} from "./commands/DeleteAgreementCommand";
+import {
+  type DeleteCertificateCommandInput,
+  type DeleteCertificateCommandOutput,
+  DeleteCertificateCommand,
+} from "./commands/DeleteCertificateCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import {
+  type DeleteHostKeyCommandInput,
+  type DeleteHostKeyCommandOutput,
+  DeleteHostKeyCommand,
+} from "./commands/DeleteHostKeyCommand";
+import {
+  type DeleteProfileCommandInput,
+  type DeleteProfileCommandOutput,
+  DeleteProfileCommand,
+} from "./commands/DeleteProfileCommand";
+import {
+  type DeleteServerCommandInput,
+  type DeleteServerCommandOutput,
   DeleteServerCommand,
-  DeleteServerCommandInput,
-  DeleteServerCommandOutput,
 } from "./commands/DeleteServerCommand";
 import {
+  type DeleteSshPublicKeyCommandInput,
+  type DeleteSshPublicKeyCommandOutput,
   DeleteSshPublicKeyCommand,
-  DeleteSshPublicKeyCommandInput,
-  DeleteSshPublicKeyCommandOutput,
 } from "./commands/DeleteSshPublicKeyCommand";
-import { DeleteUserCommand, DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
 import {
+  type DeleteUserCommandInput,
+  type DeleteUserCommandOutput,
+  DeleteUserCommand,
+} from "./commands/DeleteUserCommand";
+import {
+  type DeleteWebAppCommandInput,
+  type DeleteWebAppCommandOutput,
+  DeleteWebAppCommand,
+} from "./commands/DeleteWebAppCommand";
+import {
+  type DeleteWebAppCustomizationCommandInput,
+  type DeleteWebAppCustomizationCommandOutput,
+  DeleteWebAppCustomizationCommand,
+} from "./commands/DeleteWebAppCustomizationCommand";
+import {
+  type DeleteWorkflowCommandInput,
+  type DeleteWorkflowCommandOutput,
   DeleteWorkflowCommand,
-  DeleteWorkflowCommandInput,
-  DeleteWorkflowCommandOutput,
 } from "./commands/DeleteWorkflowCommand";
 import {
+  type DescribeAccessCommandInput,
+  type DescribeAccessCommandOutput,
   DescribeAccessCommand,
-  DescribeAccessCommandInput,
-  DescribeAccessCommandOutput,
 } from "./commands/DescribeAccessCommand";
 import {
+  type DescribeAgreementCommandInput,
+  type DescribeAgreementCommandOutput,
+  DescribeAgreementCommand,
+} from "./commands/DescribeAgreementCommand";
+import {
+  type DescribeCertificateCommandInput,
+  type DescribeCertificateCommandOutput,
+  DescribeCertificateCommand,
+} from "./commands/DescribeCertificateCommand";
+import {
+  type DescribeConnectorCommandInput,
+  type DescribeConnectorCommandOutput,
+  DescribeConnectorCommand,
+} from "./commands/DescribeConnectorCommand";
+import {
+  type DescribeExecutionCommandInput,
+  type DescribeExecutionCommandOutput,
   DescribeExecutionCommand,
-  DescribeExecutionCommandInput,
-  DescribeExecutionCommandOutput,
 } from "./commands/DescribeExecutionCommand";
 import {
+  type DescribeHostKeyCommandInput,
+  type DescribeHostKeyCommandOutput,
+  DescribeHostKeyCommand,
+} from "./commands/DescribeHostKeyCommand";
+import {
+  type DescribeProfileCommandInput,
+  type DescribeProfileCommandOutput,
+  DescribeProfileCommand,
+} from "./commands/DescribeProfileCommand";
+import {
+  type DescribeSecurityPolicyCommandInput,
+  type DescribeSecurityPolicyCommandOutput,
   DescribeSecurityPolicyCommand,
-  DescribeSecurityPolicyCommandInput,
-  DescribeSecurityPolicyCommandOutput,
 } from "./commands/DescribeSecurityPolicyCommand";
 import {
+  type DescribeServerCommandInput,
+  type DescribeServerCommandOutput,
   DescribeServerCommand,
-  DescribeServerCommandInput,
-  DescribeServerCommandOutput,
 } from "./commands/DescribeServerCommand";
 import {
+  type DescribeUserCommandInput,
+  type DescribeUserCommandOutput,
   DescribeUserCommand,
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
 } from "./commands/DescribeUserCommand";
 import {
+  type DescribeWebAppCommandInput,
+  type DescribeWebAppCommandOutput,
+  DescribeWebAppCommand,
+} from "./commands/DescribeWebAppCommand";
+import {
+  type DescribeWebAppCustomizationCommandInput,
+  type DescribeWebAppCustomizationCommandOutput,
+  DescribeWebAppCustomizationCommand,
+} from "./commands/DescribeWebAppCustomizationCommand";
+import {
+  type DescribeWorkflowCommandInput,
+  type DescribeWorkflowCommandOutput,
   DescribeWorkflowCommand,
-  DescribeWorkflowCommandInput,
-  DescribeWorkflowCommandOutput,
 } from "./commands/DescribeWorkflowCommand";
 import {
+  type ImportCertificateCommandInput,
+  type ImportCertificateCommandOutput,
+  ImportCertificateCommand,
+} from "./commands/ImportCertificateCommand";
+import {
+  type ImportHostKeyCommandInput,
+  type ImportHostKeyCommandOutput,
+  ImportHostKeyCommand,
+} from "./commands/ImportHostKeyCommand";
+import {
+  type ImportSshPublicKeyCommandInput,
+  type ImportSshPublicKeyCommandOutput,
   ImportSshPublicKeyCommand,
-  ImportSshPublicKeyCommandInput,
-  ImportSshPublicKeyCommandOutput,
 } from "./commands/ImportSshPublicKeyCommand";
 import {
+  type ListAccessesCommandInput,
+  type ListAccessesCommandOutput,
   ListAccessesCommand,
-  ListAccessesCommandInput,
-  ListAccessesCommandOutput,
 } from "./commands/ListAccessesCommand";
 import {
+  type ListAgreementsCommandInput,
+  type ListAgreementsCommandOutput,
+  ListAgreementsCommand,
+} from "./commands/ListAgreementsCommand";
+import {
+  type ListCertificatesCommandInput,
+  type ListCertificatesCommandOutput,
+  ListCertificatesCommand,
+} from "./commands/ListCertificatesCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListExecutionsCommandInput,
+  type ListExecutionsCommandOutput,
   ListExecutionsCommand,
-  ListExecutionsCommandInput,
-  ListExecutionsCommandOutput,
 } from "./commands/ListExecutionsCommand";
 import {
+  type ListFileTransferResultsCommandInput,
+  type ListFileTransferResultsCommandOutput,
+  ListFileTransferResultsCommand,
+} from "./commands/ListFileTransferResultsCommand";
+import {
+  type ListHostKeysCommandInput,
+  type ListHostKeysCommandOutput,
+  ListHostKeysCommand,
+} from "./commands/ListHostKeysCommand";
+import {
+  type ListProfilesCommandInput,
+  type ListProfilesCommandOutput,
+  ListProfilesCommand,
+} from "./commands/ListProfilesCommand";
+import {
+  type ListSecurityPoliciesCommandInput,
+  type ListSecurityPoliciesCommandOutput,
   ListSecurityPoliciesCommand,
-  ListSecurityPoliciesCommandInput,
-  ListSecurityPoliciesCommandOutput,
 } from "./commands/ListSecurityPoliciesCommand";
-import { ListServersCommand, ListServersCommandInput, ListServersCommandOutput } from "./commands/ListServersCommand";
 import {
+  type ListServersCommandInput,
+  type ListServersCommandOutput,
+  ListServersCommand,
+} from "./commands/ListServersCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ListUsersCommand, ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+import { type ListUsersCommandInput, type ListUsersCommandOutput, ListUsersCommand } from "./commands/ListUsersCommand";
 import {
+  type ListWebAppsCommandInput,
+  type ListWebAppsCommandOutput,
+  ListWebAppsCommand,
+} from "./commands/ListWebAppsCommand";
+import {
+  type ListWorkflowsCommandInput,
+  type ListWorkflowsCommandOutput,
   ListWorkflowsCommand,
-  ListWorkflowsCommandInput,
-  ListWorkflowsCommandOutput,
 } from "./commands/ListWorkflowsCommand";
 import {
+  type SendWorkflowStepStateCommandInput,
+  type SendWorkflowStepStateCommandOutput,
   SendWorkflowStepStateCommand,
-  SendWorkflowStepStateCommandInput,
-  SendWorkflowStepStateCommandOutput,
 } from "./commands/SendWorkflowStepStateCommand";
-import { StartServerCommand, StartServerCommandInput, StartServerCommandOutput } from "./commands/StartServerCommand";
-import { StopServerCommand, StopServerCommandInput, StopServerCommandOutput } from "./commands/StopServerCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartDirectoryListingCommandInput,
+  type StartDirectoryListingCommandOutput,
+  StartDirectoryListingCommand,
+} from "./commands/StartDirectoryListingCommand";
+import {
+  type StartFileTransferCommandInput,
+  type StartFileTransferCommandOutput,
+  StartFileTransferCommand,
+} from "./commands/StartFileTransferCommand";
+import {
+  type StartRemoteDeleteCommandInput,
+  type StartRemoteDeleteCommandOutput,
+  StartRemoteDeleteCommand,
+} from "./commands/StartRemoteDeleteCommand";
+import {
+  type StartRemoteMoveCommandInput,
+  type StartRemoteMoveCommandOutput,
+  StartRemoteMoveCommand,
+} from "./commands/StartRemoteMoveCommand";
+import {
+  type StartServerCommandInput,
+  type StartServerCommandOutput,
+  StartServerCommand,
+} from "./commands/StartServerCommand";
+import {
+  type StopServerCommandInput,
+  type StopServerCommandOutput,
+  StopServerCommand,
+} from "./commands/StopServerCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TestConnectionCommandInput,
+  type TestConnectionCommandOutput,
+  TestConnectionCommand,
+} from "./commands/TestConnectionCommand";
+import {
+  type TestIdentityProviderCommandInput,
+  type TestIdentityProviderCommandOutput,
   TestIdentityProviderCommand,
-  TestIdentityProviderCommandInput,
-  TestIdentityProviderCommandOutput,
 } from "./commands/TestIdentityProviderCommand";
 import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAccessCommandInput,
+  type UpdateAccessCommandOutput,
   UpdateAccessCommand,
-  UpdateAccessCommandInput,
-  UpdateAccessCommandOutput,
 } from "./commands/UpdateAccessCommand";
 import {
+  type UpdateAgreementCommandInput,
+  type UpdateAgreementCommandOutput,
+  UpdateAgreementCommand,
+} from "./commands/UpdateAgreementCommand";
+import {
+  type UpdateCertificateCommandInput,
+  type UpdateCertificateCommandOutput,
+  UpdateCertificateCommand,
+} from "./commands/UpdateCertificateCommand";
+import {
+  type UpdateConnectorCommandInput,
+  type UpdateConnectorCommandOutput,
+  UpdateConnectorCommand,
+} from "./commands/UpdateConnectorCommand";
+import {
+  type UpdateHostKeyCommandInput,
+  type UpdateHostKeyCommandOutput,
+  UpdateHostKeyCommand,
+} from "./commands/UpdateHostKeyCommand";
+import {
+  type UpdateProfileCommandInput,
+  type UpdateProfileCommandOutput,
+  UpdateProfileCommand,
+} from "./commands/UpdateProfileCommand";
+import {
+  type UpdateServerCommandInput,
+  type UpdateServerCommandOutput,
   UpdateServerCommand,
-  UpdateServerCommandInput,
-  UpdateServerCommandOutput,
 } from "./commands/UpdateServerCommand";
-import { UpdateUserCommand, UpdateUserCommandInput, UpdateUserCommandOutput } from "./commands/UpdateUserCommand";
+import {
+  type UpdateUserCommandInput,
+  type UpdateUserCommandOutput,
+  UpdateUserCommand,
+} from "./commands/UpdateUserCommand";
+import {
+  type UpdateWebAppCommandInput,
+  type UpdateWebAppCommandOutput,
+  UpdateWebAppCommand,
+} from "./commands/UpdateWebAppCommand";
+import {
+  type UpdateWebAppCustomizationCommandInput,
+  type UpdateWebAppCustomizationCommandOutput,
+  UpdateWebAppCustomizationCommand,
+} from "./commands/UpdateWebAppCustomizationCommand";
+import type { TransferServiceException } from "./models/TransferServiceException";
+import { paginateListAccesses } from "./pagination/ListAccessesPaginator";
+import { paginateListAgreements } from "./pagination/ListAgreementsPaginator";
+import { paginateListCertificates } from "./pagination/ListCertificatesPaginator";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { paginateListExecutions } from "./pagination/ListExecutionsPaginator";
+import { paginateListFileTransferResults } from "./pagination/ListFileTransferResultsPaginator";
+import { paginateListProfiles } from "./pagination/ListProfilesPaginator";
+import { paginateListSecurityPolicies } from "./pagination/ListSecurityPoliciesPaginator";
+import { paginateListServers } from "./pagination/ListServersPaginator";
+import { paginateListTagsForResource } from "./pagination/ListTagsForResourcePaginator";
+import { paginateListUsers } from "./pagination/ListUsersPaginator";
+import { paginateListWebApps } from "./pagination/ListWebAppsPaginator";
+import { paginateListWorkflows } from "./pagination/ListWorkflowsPaginator";
 import { TransferClient } from "./TransferClient";
+import { waitUntilServerOffline } from "./waiters/waitForServerOffline";
+import { waitUntilServerOnline } from "./waiters/waitForServerOnline";
+
+const commands = {
+  CreateAccessCommand,
+  CreateAgreementCommand,
+  CreateConnectorCommand,
+  CreateProfileCommand,
+  CreateServerCommand,
+  CreateUserCommand,
+  CreateWebAppCommand,
+  CreateWorkflowCommand,
+  DeleteAccessCommand,
+  DeleteAgreementCommand,
+  DeleteCertificateCommand,
+  DeleteConnectorCommand,
+  DeleteHostKeyCommand,
+  DeleteProfileCommand,
+  DeleteServerCommand,
+  DeleteSshPublicKeyCommand,
+  DeleteUserCommand,
+  DeleteWebAppCommand,
+  DeleteWebAppCustomizationCommand,
+  DeleteWorkflowCommand,
+  DescribeAccessCommand,
+  DescribeAgreementCommand,
+  DescribeCertificateCommand,
+  DescribeConnectorCommand,
+  DescribeExecutionCommand,
+  DescribeHostKeyCommand,
+  DescribeProfileCommand,
+  DescribeSecurityPolicyCommand,
+  DescribeServerCommand,
+  DescribeUserCommand,
+  DescribeWebAppCommand,
+  DescribeWebAppCustomizationCommand,
+  DescribeWorkflowCommand,
+  ImportCertificateCommand,
+  ImportHostKeyCommand,
+  ImportSshPublicKeyCommand,
+  ListAccessesCommand,
+  ListAgreementsCommand,
+  ListCertificatesCommand,
+  ListConnectorsCommand,
+  ListExecutionsCommand,
+  ListFileTransferResultsCommand,
+  ListHostKeysCommand,
+  ListProfilesCommand,
+  ListSecurityPoliciesCommand,
+  ListServersCommand,
+  ListTagsForResourceCommand,
+  ListUsersCommand,
+  ListWebAppsCommand,
+  ListWorkflowsCommand,
+  SendWorkflowStepStateCommand,
+  StartDirectoryListingCommand,
+  StartFileTransferCommand,
+  StartRemoteDeleteCommand,
+  StartRemoteMoveCommand,
+  StartServerCommand,
+  StopServerCommand,
+  TagResourceCommand,
+  TestConnectionCommand,
+  TestIdentityProviderCommand,
+  UntagResourceCommand,
+  UpdateAccessCommand,
+  UpdateAgreementCommand,
+  UpdateCertificateCommand,
+  UpdateConnectorCommand,
+  UpdateHostKeyCommand,
+  UpdateProfileCommand,
+  UpdateServerCommand,
+  UpdateUserCommand,
+  UpdateWebAppCommand,
+  UpdateWebAppCustomizationCommand,
+};
+const paginators = {
+  paginateListAccesses,
+  paginateListAgreements,
+  paginateListCertificates,
+  paginateListConnectors,
+  paginateListExecutions,
+  paginateListFileTransferResults,
+  paginateListProfiles,
+  paginateListSecurityPolicies,
+  paginateListServers,
+  paginateListTagsForResource,
+  paginateListUsers,
+  paginateListWebApps,
+  paginateListWorkflows,
+};
+const waiters = {
+  waitUntilServerOffline,
+  waitUntilServerOnline,
+};
 
 /**
- * <p>Amazon Web Services Transfer Family is a fully managed service that enables the transfer of files over the
- *       File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH)
- *       File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon
- *       S3). Amazon Web Services helps you seamlessly migrate your file transfer workflows to Amazon Web Services Transfer Family by
- *       integrating with existing authentication systems, and providing DNS routing with Amazon Route
- *       53 so nothing changes for your customers and partners, or their applications. With your data
- *       in Amazon S3, you can use it with Amazon Web Services services for processing, analytics, machine learning,
- *       and archiving. Getting started with Amazon Web Services Transfer Family is easy since there is no
- *       infrastructure to buy and set up.</p>
+ * @public
  */
-export class Transfer extends TransferClient {
+export interface TransferRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Transfer {
   /**
-   * <p>Used by administrators to choose which groups in the directory should have access to
-   *       upload and download files over the enabled protocols using Amazon Web Services Transfer Family. For example, a
-   *       Microsoft Active Directory might contain 50,000 users, but only a small fraction might need
-   *       the ability to transfer files to the server. An administrator can use
-   *         <code>CreateAccess</code> to limit the access to the correct set of users who need this
-   *       ability.</p>
+   * @see {@link CreateAccessCommand}
    */
-  public createAccess(
+  createAccess(
     args: CreateAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<CreateAccessCommandOutput>;
-  public createAccess(args: CreateAccessCommandInput, cb: (err: any, data?: CreateAccessCommandOutput) => void): void;
-  public createAccess(
+  createAccess(
     args: CreateAccessCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateAccessCommandOutput) => void
   ): void;
-  public createAccess(
+  createAccess(
     args: CreateAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAccessCommandOutput) => void),
-    cb?: (err: any, data?: CreateAccessCommandOutput) => void
-  ): Promise<CreateAccessCommandOutput> | void {
-    const command = new CreateAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateAccessCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Instantiates an auto-scaling virtual server based on the selected file transfer protocol
-   *       in Amazon Web Services. When you make updates to your file transfer protocol-enabled server or when you work
-   *       with users, use the service-generated <code>ServerId</code> property that is assigned to the
-   *       newly created server.</p>
+   * @see {@link CreateAgreementCommand}
    */
-  public createServer(
+  createAgreement(
+    args: CreateAgreementCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<CreateAgreementCommandOutput>;
+  createAgreement(
+    args: CreateAgreementCommandInput,
+    cb: (err: any, data?: CreateAgreementCommandOutput) => void
+  ): void;
+  createAgreement(
+    args: CreateAgreementCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProfileCommand}
+   */
+  createProfile(
+    args: CreateProfileCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<CreateProfileCommandOutput>;
+  createProfile(
+    args: CreateProfileCommandInput,
+    cb: (err: any, data?: CreateProfileCommandOutput) => void
+  ): void;
+  createProfile(
+    args: CreateProfileCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateServerCommand}
+   */
+  createServer(): Promise<CreateServerCommandOutput>;
+  createServer(
     args: CreateServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<CreateServerCommandOutput>;
-  public createServer(args: CreateServerCommandInput, cb: (err: any, data?: CreateServerCommandOutput) => void): void;
-  public createServer(
+  createServer(
     args: CreateServerCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateServerCommandOutput) => void
   ): void;
-  public createServer(
+  createServer(
     args: CreateServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateServerCommandOutput) => void),
-    cb?: (err: any, data?: CreateServerCommandOutput) => void
-  ): Promise<CreateServerCommandOutput> | void {
-    const command = new CreateServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateServerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a user and associates them with an existing file transfer protocol-enabled server.
-   *       You can only create and associate users with servers that have the
-   *         <code>IdentityProviderType</code> set to <code>SERVICE_MANAGED</code>. Using parameters for
-   *         <code>CreateUser</code>, you can specify the user name, set the home directory, store the
-   *       user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM)
-   *       role. You can also optionally add a session policy, and assign metadata with tags that can
-   *       be used to group and search for users.</p>
+   * @see {@link CreateUserCommand}
    */
-  public createUser(args: CreateUserCommandInput, options?: __HttpHandlerOptions): Promise<CreateUserCommandOutput>;
-  public createUser(args: CreateUserCommandInput, cb: (err: any, data?: CreateUserCommandOutput) => void): void;
-  public createUser(
+  createUser(
     args: CreateUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<CreateUserCommandOutput>;
+  createUser(
+    args: CreateUserCommandInput,
     cb: (err: any, data?: CreateUserCommandOutput) => void
   ): void;
-  public createUser(
+  createUser(
     args: CreateUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserCommandOutput) => void
-  ): Promise<CreateUserCommandOutput> | void {
-    const command = new CreateUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *       Allows you to create a workflow with specified steps and step details the workflow invokes after file transfer completes.
-   *       After creating a workflow, you can associate the workflow created with any transfer servers by specifying the <code>workflow-details</code> field in <code>CreateServer</code> and <code>UpdateServer</code> operations.
-   *     </p>
+   * @see {@link CreateWebAppCommand}
    */
-  public createWorkflow(
+  createWebApp(
+    args: CreateWebAppCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<CreateWebAppCommandOutput>;
+  createWebApp(
+    args: CreateWebAppCommandInput,
+    cb: (err: any, data?: CreateWebAppCommandOutput) => void
+  ): void;
+  createWebApp(
+    args: CreateWebAppCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: CreateWebAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkflowCommand}
+   */
+  createWorkflow(
     args: CreateWorkflowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<CreateWorkflowCommandOutput>;
-  public createWorkflow(
+  createWorkflow(
     args: CreateWorkflowCommandInput,
     cb: (err: any, data?: CreateWorkflowCommandOutput) => void
   ): void;
-  public createWorkflow(
+  createWorkflow(
     args: CreateWorkflowCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: CreateWorkflowCommandOutput) => void
   ): void;
-  public createWorkflow(
-    args: CreateWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkflowCommandOutput) => void
-  ): Promise<CreateWorkflowCommandOutput> | void {
-    const command = new CreateWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows you to delete the access specified in the <code>ServerID</code> and
-   *       <code>ExternalID</code> parameters.</p>
+   * @see {@link DeleteAccessCommand}
    */
-  public deleteAccess(
+  deleteAccess(
     args: DeleteAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DeleteAccessCommandOutput>;
-  public deleteAccess(args: DeleteAccessCommandInput, cb: (err: any, data?: DeleteAccessCommandOutput) => void): void;
-  public deleteAccess(
+  deleteAccess(
     args: DeleteAccessCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteAccessCommandOutput) => void
   ): void;
-  public deleteAccess(
+  deleteAccess(
     args: DeleteAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAccessCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAccessCommandOutput) => void
-  ): Promise<DeleteAccessCommandOutput> | void {
-    const command = new DeleteAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteAccessCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the file transfer protocol-enabled server that you specify.</p>
-   *
-   *          <p>No response returns from this operation.</p>
+   * @see {@link DeleteAgreementCommand}
    */
-  public deleteServer(
+  deleteAgreement(
+    args: DeleteAgreementCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteAgreementCommandOutput>;
+  deleteAgreement(
+    args: DeleteAgreementCommandInput,
+    cb: (err: any, data?: DeleteAgreementCommandOutput) => void
+  ): void;
+  deleteAgreement(
+    args: DeleteAgreementCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCertificateCommand}
+   */
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteCertificateCommandOutput>;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteHostKeyCommand}
+   */
+  deleteHostKey(
+    args: DeleteHostKeyCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteHostKeyCommandOutput>;
+  deleteHostKey(
+    args: DeleteHostKeyCommandInput,
+    cb: (err: any, data?: DeleteHostKeyCommandOutput) => void
+  ): void;
+  deleteHostKey(
+    args: DeleteHostKeyCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteHostKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProfileCommand}
+   */
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteProfileCommandOutput>;
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    cb: (err: any, data?: DeleteProfileCommandOutput) => void
+  ): void;
+  deleteProfile(
+    args: DeleteProfileCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteServerCommand}
+   */
+  deleteServer(
     args: DeleteServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DeleteServerCommandOutput>;
-  public deleteServer(args: DeleteServerCommandInput, cb: (err: any, data?: DeleteServerCommandOutput) => void): void;
-  public deleteServer(
+  deleteServer(
     args: DeleteServerCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteServerCommandOutput) => void
   ): void;
-  public deleteServer(
+  deleteServer(
     args: DeleteServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteServerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteServerCommandOutput) => void
-  ): Promise<DeleteServerCommandOutput> | void {
-    const command = new DeleteServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteServerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a user's Secure Shell (SSH) public key.</p>
+   * @see {@link DeleteSshPublicKeyCommand}
    */
-  public deleteSshPublicKey(
+  deleteSshPublicKey(
     args: DeleteSshPublicKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DeleteSshPublicKeyCommandOutput>;
-  public deleteSshPublicKey(
+  deleteSshPublicKey(
     args: DeleteSshPublicKeyCommandInput,
     cb: (err: any, data?: DeleteSshPublicKeyCommandOutput) => void
   ): void;
-  public deleteSshPublicKey(
+  deleteSshPublicKey(
     args: DeleteSshPublicKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DeleteSshPublicKeyCommandOutput) => void
   ): void;
-  public deleteSshPublicKey(
-    args: DeleteSshPublicKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSshPublicKeyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSshPublicKeyCommandOutput) => void
-  ): Promise<DeleteSshPublicKeyCommandOutput> | void {
-    const command = new DeleteSshPublicKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the user belonging to a file transfer protocol-enabled server you specify.</p>
-   *
-   *          <p>No response returns from this operation.</p>
-   *
-   *          <note>
-   *             <p>When you delete a user from a server, the user's information is lost.</p>
-   *          </note>
+   * @see {@link DeleteUserCommand}
    */
-  public deleteUser(args: DeleteUserCommandInput, options?: __HttpHandlerOptions): Promise<DeleteUserCommandOutput>;
-  public deleteUser(args: DeleteUserCommandInput, cb: (err: any, data?: DeleteUserCommandOutput) => void): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<DeleteUserCommandOutput>;
+  deleteUser(
+    args: DeleteUserCommandInput,
     cb: (err: any, data?: DeleteUserCommandOutput) => void
   ): void;
-  public deleteUser(
+  deleteUser(
     args: DeleteUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserCommandOutput) => void
-  ): Promise<DeleteUserCommandOutput> | void {
-    const command = new DeleteUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the specified workflow.</p>
+   * @see {@link DeleteWebAppCommand}
    */
-  public deleteWorkflow(
+  deleteWebApp(
+    args: DeleteWebAppCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteWebAppCommandOutput>;
+  deleteWebApp(
+    args: DeleteWebAppCommandInput,
+    cb: (err: any, data?: DeleteWebAppCommandOutput) => void
+  ): void;
+  deleteWebApp(
+    args: DeleteWebAppCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteWebAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWebAppCustomizationCommand}
+   */
+  deleteWebAppCustomization(
+    args: DeleteWebAppCustomizationCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DeleteWebAppCustomizationCommandOutput>;
+  deleteWebAppCustomization(
+    args: DeleteWebAppCustomizationCommandInput,
+    cb: (err: any, data?: DeleteWebAppCustomizationCommandOutput) => void
+  ): void;
+  deleteWebAppCustomization(
+    args: DeleteWebAppCustomizationCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DeleteWebAppCustomizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkflowCommand}
+   */
+  deleteWorkflow(
     args: DeleteWorkflowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DeleteWorkflowCommandOutput>;
-  public deleteWorkflow(
+  deleteWorkflow(
     args: DeleteWorkflowCommandInput,
     cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
   ): void;
-  public deleteWorkflow(
+  deleteWorkflow(
     args: DeleteWorkflowCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DeleteWorkflowCommandOutput) => void
   ): void;
-  public deleteWorkflow(
-    args: DeleteWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkflowCommandOutput) => void
-  ): Promise<DeleteWorkflowCommandOutput> | void {
-    const command = new DeleteWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the access that is assigned to the specific file transfer protocol-enabled
-   *       server, as identified by its <code>ServerId</code> property and its
-   *       <code>ExternalID</code>.</p>
-   *
-   *          <p>The response from this call returns the properties of the access that is associated with
-   *       the <code>ServerId</code> value that was specified.</p>
+   * @see {@link DescribeAccessCommand}
    */
-  public describeAccess(
+  describeAccess(
     args: DescribeAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeAccessCommandOutput>;
-  public describeAccess(
+  describeAccess(
     args: DescribeAccessCommandInput,
     cb: (err: any, data?: DescribeAccessCommandOutput) => void
   ): void;
-  public describeAccess(
+  describeAccess(
     args: DescribeAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DescribeAccessCommandOutput) => void
   ): void;
-  public describeAccess(
-    args: DescribeAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAccessCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAccessCommandOutput) => void
-  ): Promise<DescribeAccessCommandOutput> | void {
-    const command = new DescribeAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>
+   * @see {@link DescribeAgreementCommand}
    */
-  public describeExecution(
+  describeAgreement(
+    args: DescribeAgreementCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeAgreementCommandOutput>;
+  describeAgreement(
+    args: DescribeAgreementCommandInput,
+    cb: (err: any, data?: DescribeAgreementCommandOutput) => void
+  ): void;
+  describeAgreement(
+    args: DescribeAgreementCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCertificateCommand}
+   */
+  describeCertificate(
+    args: DescribeCertificateCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeCertificateCommandOutput>;
+  describeCertificate(
+    args: DescribeCertificateCommandInput,
+    cb: (err: any, data?: DescribeCertificateCommandOutput) => void
+  ): void;
+  describeCertificate(
+    args: DescribeCertificateCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConnectorCommand}
+   */
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeConnectorCommandOutput>;
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
+  ): void;
+  describeConnector(
+    args: DescribeConnectorCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeExecutionCommand}
+   */
+  describeExecution(
     args: DescribeExecutionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeExecutionCommandOutput>;
-  public describeExecution(
+  describeExecution(
     args: DescribeExecutionCommandInput,
     cb: (err: any, data?: DescribeExecutionCommandOutput) => void
   ): void;
-  public describeExecution(
+  describeExecution(
     args: DescribeExecutionCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DescribeExecutionCommandOutput) => void
   ): void;
-  public describeExecution(
-    args: DescribeExecutionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeExecutionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeExecutionCommandOutput) => void
-  ): Promise<DescribeExecutionCommandOutput> | void {
-    const command = new DescribeExecutionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the security policy that is attached to your file transfer protocol-enabled
-   *       server. The response contains a description of the security policy's properties. For more
-   *       information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security
-   *         policies</a>.</p>
+   * @see {@link DescribeHostKeyCommand}
    */
-  public describeSecurityPolicy(
+  describeHostKey(
+    args: DescribeHostKeyCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeHostKeyCommandOutput>;
+  describeHostKey(
+    args: DescribeHostKeyCommandInput,
+    cb: (err: any, data?: DescribeHostKeyCommandOutput) => void
+  ): void;
+  describeHostKey(
+    args: DescribeHostKeyCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeHostKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeProfileCommand}
+   */
+  describeProfile(
+    args: DescribeProfileCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeProfileCommandOutput>;
+  describeProfile(
+    args: DescribeProfileCommandInput,
+    cb: (err: any, data?: DescribeProfileCommandOutput) => void
+  ): void;
+  describeProfile(
+    args: DescribeProfileCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSecurityPolicyCommand}
+   */
+  describeSecurityPolicy(
     args: DescribeSecurityPolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeSecurityPolicyCommandOutput>;
-  public describeSecurityPolicy(
+  describeSecurityPolicy(
     args: DescribeSecurityPolicyCommandInput,
     cb: (err: any, data?: DescribeSecurityPolicyCommandOutput) => void
   ): void;
-  public describeSecurityPolicy(
+  describeSecurityPolicy(
     args: DescribeSecurityPolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DescribeSecurityPolicyCommandOutput) => void
   ): void;
-  public describeSecurityPolicy(
-    args: DescribeSecurityPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSecurityPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSecurityPolicyCommandOutput) => void
-  ): Promise<DescribeSecurityPolicyCommandOutput> | void {
-    const command = new DescribeSecurityPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes a file transfer protocol-enabled server that you specify by passing the
-   *         <code>ServerId</code> parameter.</p>
-   *
-   *          <p>The response contains a description of a server's properties. When you set
-   *         <code>EndpointType</code> to VPC, the response will contain the
-   *       <code>EndpointDetails</code>.</p>
+   * @see {@link DescribeServerCommand}
    */
-  public describeServer(
+  describeServer(
     args: DescribeServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeServerCommandOutput>;
-  public describeServer(
+  describeServer(
     args: DescribeServerCommandInput,
     cb: (err: any, data?: DescribeServerCommandOutput) => void
   ): void;
-  public describeServer(
+  describeServer(
     args: DescribeServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DescribeServerCommandOutput) => void
   ): void;
-  public describeServer(
-    args: DescribeServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeServerCommandOutput) => void),
-    cb?: (err: any, data?: DescribeServerCommandOutput) => void
-  ): Promise<DescribeServerCommandOutput> | void {
-    const command = new DescribeServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Describes the user assigned to the specific file transfer protocol-enabled server, as
-   *       identified by its <code>ServerId</code> property.</p>
-   *
-   *          <p>The response from this call returns the properties of the user associated with the
-   *         <code>ServerId</code> value that was specified.</p>
+   * @see {@link DescribeUserCommand}
    */
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeUserCommandOutput>;
-  public describeUser(args: DescribeUserCommandInput, cb: (err: any, data?: DescribeUserCommandOutput) => void): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DescribeUserCommandOutput) => void
   ): void;
-  public describeUser(
+  describeUser(
     args: DescribeUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeUserCommandOutput) => void),
-    cb?: (err: any, data?: DescribeUserCommandOutput) => void
-  ): Promise<DescribeUserCommandOutput> | void {
-    const command = new DescribeUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeUserCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Describes the specified workflow.</p>
+   * @see {@link DescribeWebAppCommand}
    */
-  public describeWorkflow(
+  describeWebApp(
+    args: DescribeWebAppCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeWebAppCommandOutput>;
+  describeWebApp(
+    args: DescribeWebAppCommandInput,
+    cb: (err: any, data?: DescribeWebAppCommandOutput) => void
+  ): void;
+  describeWebApp(
+    args: DescribeWebAppCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeWebAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWebAppCustomizationCommand}
+   */
+  describeWebAppCustomization(
+    args: DescribeWebAppCustomizationCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<DescribeWebAppCustomizationCommandOutput>;
+  describeWebAppCustomization(
+    args: DescribeWebAppCustomizationCommandInput,
+    cb: (err: any, data?: DescribeWebAppCustomizationCommandOutput) => void
+  ): void;
+  describeWebAppCustomization(
+    args: DescribeWebAppCustomizationCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: DescribeWebAppCustomizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWorkflowCommand}
+   */
+  describeWorkflow(
     args: DescribeWorkflowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<DescribeWorkflowCommandOutput>;
-  public describeWorkflow(
+  describeWorkflow(
     args: DescribeWorkflowCommandInput,
     cb: (err: any, data?: DescribeWorkflowCommandOutput) => void
   ): void;
-  public describeWorkflow(
+  describeWorkflow(
     args: DescribeWorkflowCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: DescribeWorkflowCommandOutput) => void
   ): void;
-  public describeWorkflow(
-    args: DescribeWorkflowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeWorkflowCommandOutput) => void),
-    cb?: (err: any, data?: DescribeWorkflowCommandOutput) => void
-  ): Promise<DescribeWorkflowCommandOutput> | void {
-    const command = new DescribeWorkflowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds a Secure Shell (SSH) public key to a user account identified by a
-   *         <code>UserName</code> value assigned to the specific file transfer protocol-enabled server,
-   *       identified by <code>ServerId</code>.</p>
-   *
-   *          <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and
-   *       the name of the <code>SshPublicKeyId</code>.</p>
+   * @see {@link ImportCertificateCommand}
    */
-  public importSshPublicKey(
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ImportCertificateCommandOutput>;
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    cb: (err: any, data?: ImportCertificateCommandOutput) => void
+  ): void;
+  importCertificate(
+    args: ImportCertificateCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ImportCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportHostKeyCommand}
+   */
+  importHostKey(
+    args: ImportHostKeyCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ImportHostKeyCommandOutput>;
+  importHostKey(
+    args: ImportHostKeyCommandInput,
+    cb: (err: any, data?: ImportHostKeyCommandOutput) => void
+  ): void;
+  importHostKey(
+    args: ImportHostKeyCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ImportHostKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportSshPublicKeyCommand}
+   */
+  importSshPublicKey(
     args: ImportSshPublicKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ImportSshPublicKeyCommandOutput>;
-  public importSshPublicKey(
+  importSshPublicKey(
     args: ImportSshPublicKeyCommandInput,
     cb: (err: any, data?: ImportSshPublicKeyCommandOutput) => void
   ): void;
-  public importSshPublicKey(
+  importSshPublicKey(
     args: ImportSshPublicKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: ImportSshPublicKeyCommandOutput) => void
   ): void;
-  public importSshPublicKey(
-    args: ImportSshPublicKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportSshPublicKeyCommandOutput) => void),
-    cb?: (err: any, data?: ImportSshPublicKeyCommandOutput) => void
-  ): Promise<ImportSshPublicKeyCommandOutput> | void {
-    const command = new ImportSshPublicKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the details for all the accesses you have on your server.</p>
+   * @see {@link ListAccessesCommand}
    */
-  public listAccesses(
+  listAccesses(
     args: ListAccessesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ListAccessesCommandOutput>;
-  public listAccesses(args: ListAccessesCommandInput, cb: (err: any, data?: ListAccessesCommandOutput) => void): void;
-  public listAccesses(
+  listAccesses(
     args: ListAccessesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListAccessesCommandOutput) => void
   ): void;
-  public listAccesses(
+  listAccesses(
     args: ListAccessesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccessesCommandOutput) => void),
-    cb?: (err: any, data?: ListAccessesCommandOutput) => void
-  ): Promise<ListAccessesCommandOutput> | void {
-    const command = new ListAccessesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListAccessesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all executions for the specified workflow.</p>
+   * @see {@link ListAgreementsCommand}
    */
-  public listExecutions(
+  listAgreements(
+    args: ListAgreementsCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListAgreementsCommandOutput>;
+  listAgreements(
+    args: ListAgreementsCommandInput,
+    cb: (err: any, data?: ListAgreementsCommandOutput) => void
+  ): void;
+  listAgreements(
+    args: ListAgreementsCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListAgreementsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCertificatesCommand}
+   */
+  listCertificates(): Promise<ListCertificatesCommandOutput>;
+  listCertificates(
+    args: ListCertificatesCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListCertificatesCommandOutput>;
+  listCertificates(
+    args: ListCertificatesCommandInput,
+    cb: (err: any, data?: ListCertificatesCommandOutput) => void
+  ): void;
+  listCertificates(
+    args: ListCertificatesCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListCertificatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExecutionsCommand}
+   */
+  listExecutions(
     args: ListExecutionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ListExecutionsCommandOutput>;
-  public listExecutions(
+  listExecutions(
     args: ListExecutionsCommandInput,
     cb: (err: any, data?: ListExecutionsCommandOutput) => void
   ): void;
-  public listExecutions(
+  listExecutions(
     args: ListExecutionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: ListExecutionsCommandOutput) => void
   ): void;
-  public listExecutions(
-    args: ListExecutionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExecutionsCommandOutput) => void),
-    cb?: (err: any, data?: ListExecutionsCommandOutput) => void
-  ): Promise<ListExecutionsCommandOutput> | void {
-    const command = new ListExecutionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the security policies that are attached to your file transfer protocol-enabled
-   *       servers.</p>
+   * @see {@link ListFileTransferResultsCommand}
    */
-  public listSecurityPolicies(
+  listFileTransferResults(
+    args: ListFileTransferResultsCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListFileTransferResultsCommandOutput>;
+  listFileTransferResults(
+    args: ListFileTransferResultsCommandInput,
+    cb: (err: any, data?: ListFileTransferResultsCommandOutput) => void
+  ): void;
+  listFileTransferResults(
+    args: ListFileTransferResultsCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListFileTransferResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListHostKeysCommand}
+   */
+  listHostKeys(
+    args: ListHostKeysCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListHostKeysCommandOutput>;
+  listHostKeys(
+    args: ListHostKeysCommandInput,
+    cb: (err: any, data?: ListHostKeysCommandOutput) => void
+  ): void;
+  listHostKeys(
+    args: ListHostKeysCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListHostKeysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProfilesCommand}
+   */
+  listProfiles(): Promise<ListProfilesCommandOutput>;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListProfilesCommandOutput>;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    cb: (err: any, data?: ListProfilesCommandOutput) => void
+  ): void;
+  listProfiles(
+    args: ListProfilesCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListProfilesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityPoliciesCommand}
+   */
+  listSecurityPolicies(): Promise<ListSecurityPoliciesCommandOutput>;
+  listSecurityPolicies(
     args: ListSecurityPoliciesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ListSecurityPoliciesCommandOutput>;
-  public listSecurityPolicies(
+  listSecurityPolicies(
     args: ListSecurityPoliciesCommandInput,
     cb: (err: any, data?: ListSecurityPoliciesCommandOutput) => void
   ): void;
-  public listSecurityPolicies(
+  listSecurityPolicies(
     args: ListSecurityPoliciesCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: ListSecurityPoliciesCommandOutput) => void
   ): void;
-  public listSecurityPolicies(
-    args: ListSecurityPoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSecurityPoliciesCommandOutput) => void),
-    cb?: (err: any, data?: ListSecurityPoliciesCommandOutput) => void
-  ): Promise<ListSecurityPoliciesCommandOutput> | void {
-    const command = new ListSecurityPoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the file transfer protocol-enabled servers that are associated with your Amazon Web Services
-   *       account.</p>
+   * @see {@link ListServersCommand}
    */
-  public listServers(args: ListServersCommandInput, options?: __HttpHandlerOptions): Promise<ListServersCommandOutput>;
-  public listServers(args: ListServersCommandInput, cb: (err: any, data?: ListServersCommandOutput) => void): void;
-  public listServers(
+  listServers(): Promise<ListServersCommandOutput>;
+  listServers(
     args: ListServersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<ListServersCommandOutput>;
+  listServers(
+    args: ListServersCommandInput,
     cb: (err: any, data?: ListServersCommandOutput) => void
   ): void;
-  public listServers(
+  listServers(
     args: ListServersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListServersCommandOutput) => void),
-    cb?: (err: any, data?: ListServersCommandOutput) => void
-  ): Promise<ListServersCommandOutput> | void {
-    const command = new ListServersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListServersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The
-   *       resource can be a user, server, or role.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the users for a file transfer protocol-enabled server that you specify by passing
-   *       the <code>ServerId</code> parameter.</p>
+   * @see {@link ListUsersCommand}
    */
-  public listUsers(args: ListUsersCommandInput, options?: __HttpHandlerOptions): Promise<ListUsersCommandOutput>;
-  public listUsers(args: ListUsersCommandInput, cb: (err: any, data?: ListUsersCommandOutput) => void): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<ListUsersCommandOutput>;
+  listUsers(
+    args: ListUsersCommandInput,
     cb: (err: any, data?: ListUsersCommandOutput) => void
   ): void;
-  public listUsers(
+  listUsers(
     args: ListUsersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsersCommandOutput) => void),
-    cb?: (err: any, data?: ListUsersCommandOutput) => void
-  ): Promise<ListUsersCommandOutput> | void {
-    const command = new ListUsersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListUsersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all of your workflows.</p>
+   * @see {@link ListWebAppsCommand}
    */
-  public listWorkflows(
+  listWebApps(): Promise<ListWebAppsCommandOutput>;
+  listWebApps(
+    args: ListWebAppsCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<ListWebAppsCommandOutput>;
+  listWebApps(
+    args: ListWebAppsCommandInput,
+    cb: (err: any, data?: ListWebAppsCommandOutput) => void
+  ): void;
+  listWebApps(
+    args: ListWebAppsCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: ListWebAppsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   */
+  listWorkflows(): Promise<ListWorkflowsCommandOutput>;
+  listWorkflows(
     args: ListWorkflowsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<ListWorkflowsCommandOutput>;
-  public listWorkflows(
+  listWorkflows(
     args: ListWorkflowsCommandInput,
     cb: (err: any, data?: ListWorkflowsCommandOutput) => void
   ): void;
-  public listWorkflows(
+  listWorkflows(
     args: ListWorkflowsCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: ListWorkflowsCommandOutput) => void
   ): void;
-  public listWorkflows(
-    args: ListWorkflowsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkflowsCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkflowsCommandOutput) => void
-  ): Promise<ListWorkflowsCommandOutput> | void {
-    const command = new ListWorkflowsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends a callback for asynchronous custom steps.</p>
-   *          <p>
-   *       The <code>ExecutionId</code>, <code>WorkflowId</code>, and <code>Token</code> are passed to the target resource during execution of a custom step of a workflow.
-   *       You must include those with their callback as well as providing a status.
-   *     </p>
+   * @see {@link SendWorkflowStepStateCommand}
    */
-  public sendWorkflowStepState(
+  sendWorkflowStepState(
     args: SendWorkflowStepStateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<SendWorkflowStepStateCommandOutput>;
-  public sendWorkflowStepState(
+  sendWorkflowStepState(
     args: SendWorkflowStepStateCommandInput,
     cb: (err: any, data?: SendWorkflowStepStateCommandOutput) => void
   ): void;
-  public sendWorkflowStepState(
+  sendWorkflowStepState(
     args: SendWorkflowStepStateCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: SendWorkflowStepStateCommandOutput) => void
   ): void;
-  public sendWorkflowStepState(
-    args: SendWorkflowStepStateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendWorkflowStepStateCommandOutput) => void),
-    cb?: (err: any, data?: SendWorkflowStepStateCommandOutput) => void
-  ): Promise<SendWorkflowStepStateCommandOutput> | void {
-    const command = new SendWorkflowStepStateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Changes the state of a file transfer protocol-enabled server from <code>OFFLINE</code> to
-   *         <code>ONLINE</code>. It has no impact on a server that is already <code>ONLINE</code>. An
-   *         <code>ONLINE</code> server can accept and process file transfer jobs.</p>
-   *
-   *          <p>The state of <code>STARTING</code> indicates that the server is in an intermediate state,
-   *       either not fully able to respond, or not fully online. The values of <code>START_FAILED</code>
-   *       can indicate an error condition.</p>
-   *
-   *          <p>No response is returned from this call.</p>
+   * @see {@link StartDirectoryListingCommand}
    */
-  public startServer(args: StartServerCommandInput, options?: __HttpHandlerOptions): Promise<StartServerCommandOutput>;
-  public startServer(args: StartServerCommandInput, cb: (err: any, data?: StartServerCommandOutput) => void): void;
-  public startServer(
+  startDirectoryListing(
+    args: StartDirectoryListingCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<StartDirectoryListingCommandOutput>;
+  startDirectoryListing(
+    args: StartDirectoryListingCommandInput,
+    cb: (err: any, data?: StartDirectoryListingCommandOutput) => void
+  ): void;
+  startDirectoryListing(
+    args: StartDirectoryListingCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StartDirectoryListingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFileTransferCommand}
+   */
+  startFileTransfer(
+    args: StartFileTransferCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<StartFileTransferCommandOutput>;
+  startFileTransfer(
+    args: StartFileTransferCommandInput,
+    cb: (err: any, data?: StartFileTransferCommandOutput) => void
+  ): void;
+  startFileTransfer(
+    args: StartFileTransferCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StartFileTransferCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRemoteDeleteCommand}
+   */
+  startRemoteDelete(
+    args: StartRemoteDeleteCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<StartRemoteDeleteCommandOutput>;
+  startRemoteDelete(
+    args: StartRemoteDeleteCommandInput,
+    cb: (err: any, data?: StartRemoteDeleteCommandOutput) => void
+  ): void;
+  startRemoteDelete(
+    args: StartRemoteDeleteCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StartRemoteDeleteCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRemoteMoveCommand}
+   */
+  startRemoteMove(
+    args: StartRemoteMoveCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<StartRemoteMoveCommandOutput>;
+  startRemoteMove(
+    args: StartRemoteMoveCommandInput,
+    cb: (err: any, data?: StartRemoteMoveCommandOutput) => void
+  ): void;
+  startRemoteMove(
+    args: StartRemoteMoveCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StartRemoteMoveCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartServerCommand}
+   */
+  startServer(
     args: StartServerCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<StartServerCommandOutput>;
+  startServer(
+    args: StartServerCommandInput,
     cb: (err: any, data?: StartServerCommandOutput) => void
   ): void;
-  public startServer(
+  startServer(
     args: StartServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartServerCommandOutput) => void),
-    cb?: (err: any, data?: StartServerCommandOutput) => void
-  ): Promise<StartServerCommandOutput> | void {
-    const command = new StartServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StartServerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Changes the state of a file transfer protocol-enabled server from <code>ONLINE</code> to
-   *         <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer
-   *       jobs. Information tied to your server, such as server and user properties, are not affected by
-   *       stopping your server.</p>
-   *
-   *          <note>
-   *             <p>Stopping the server will not reduce or impact your file transfer protocol endpoint
-   *         billing; you must delete the server to stop being billed.</p>
-   *          </note>
-   *
-   *          <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state,
-   *       either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code>
-   *       can indicate an error condition.</p>
-   *
-   *          <p>No response is returned from this call.</p>
+   * @see {@link StopServerCommand}
    */
-  public stopServer(args: StopServerCommandInput, options?: __HttpHandlerOptions): Promise<StopServerCommandOutput>;
-  public stopServer(args: StopServerCommandInput, cb: (err: any, data?: StopServerCommandOutput) => void): void;
-  public stopServer(
+  stopServer(
     args: StopServerCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<StopServerCommandOutput>;
+  stopServer(
+    args: StopServerCommandInput,
     cb: (err: any, data?: StopServerCommandOutput) => void
   ): void;
-  public stopServer(
+  stopServer(
     args: StopServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopServerCommandOutput) => void),
-    cb?: (err: any, data?: StopServerCommandOutput) => void
-  ): Promise<StopServerCommandOutput> | void {
-    const command = new StopServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: StopServerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
-   *       Resources are users, servers, roles, and other entities.</p>
-   *
-   *          <p>There is no response returned from this call.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>If the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is
-   *         <code>AWS_DIRECTORY_SERVICE</code> or <code>API_Gateway</code>, tests whether your identity
-   *       provider is set up successfully. We highly recommend that you call this operation to test your
-   *       authentication method as soon as you create your server. By doing so, you can troubleshoot
-   *       issues with the identity provider integration to ensure that your users can successfully use
-   *       the service.</p>
-   *          <p>
-   *       The <code>ServerId</code> and <code>UserName</code> parameters are required. The <code>ServerProtocol</code>, <code>SourceIp</code>, and <code>UserPassword</code> are all optional.
-   *     </p>
-   *          <note>
-   *             <p>
-   *         You cannot use <code>TestIdentityProvider</code> if the <code>IdentityProviderType</code> of your server is <code>SERVICE_MANAGED</code>.
-   *       </p>
-   *          </note>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *         If you provide any incorrect values for any parameters, the <code>Response</code> field is empty.
-   *       </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *         If you provide a server ID for a server that uses service-managed users, you get an error:
-   *       </p>
-   *                <p>
-   *                   <code>
-   *         An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-<i>server-ID</i> not configured for external auth
-   *       </code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *           If you enter a Server ID for the <code>--server-id</code> parameter that does not identify an actual Transfer server, you receive the following error:
-   *         </p>
-   *                <p>
-   *                   <code>An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server</code>
-   *                </p>
-   *             </li>
-   *          </ul>
+   * @see {@link TestConnectionCommand}
    */
-  public testIdentityProvider(
+  testConnection(
+    args: TestConnectionCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<TestConnectionCommandOutput>;
+  testConnection(
+    args: TestConnectionCommandInput,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+  testConnection(
+    args: TestConnectionCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: TestConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestIdentityProviderCommand}
+   */
+  testIdentityProvider(
     args: TestIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<TestIdentityProviderCommandOutput>;
-  public testIdentityProvider(
+  testIdentityProvider(
     args: TestIdentityProviderCommandInput,
     cb: (err: any, data?: TestIdentityProviderCommandOutput) => void
   ): void;
-  public testIdentityProvider(
+  testIdentityProvider(
     args: TestIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: TestIdentityProviderCommandOutput) => void
   ): void;
-  public testIdentityProvider(
-    args: TestIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: TestIdentityProviderCommandOutput) => void
-  ): Promise<TestIdentityProviderCommandOutput> | void {
-    const command = new TestIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name
-   *       (ARN). Resources are users, servers, roles, and other entities.</p>
-   *
-   *          <p>No response is returned from this call.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: TransferRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Allows you to update parameters for the access specified in the <code>ServerID</code> and
-   *       <code>ExternalID</code> parameters.</p>
+   * @see {@link UpdateAccessCommand}
    */
-  public updateAccess(
+  updateAccess(
     args: UpdateAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<UpdateAccessCommandOutput>;
-  public updateAccess(args: UpdateAccessCommandInput, cb: (err: any, data?: UpdateAccessCommandOutput) => void): void;
-  public updateAccess(
+  updateAccess(
     args: UpdateAccessCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateAccessCommandOutput) => void
   ): void;
-  public updateAccess(
+  updateAccess(
     args: UpdateAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAccessCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAccessCommandOutput) => void
-  ): Promise<UpdateAccessCommandOutput> | void {
-    const command = new UpdateAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateAccessCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the file transfer protocol-enabled server's properties after that server has
-   *       been created.</p>
-   *
-   *          <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you
-   *       updated.</p>
+   * @see {@link UpdateAgreementCommand}
    */
-  public updateServer(
+  updateAgreement(
+    args: UpdateAgreementCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateAgreementCommandOutput>;
+  updateAgreement(
+    args: UpdateAgreementCommandInput,
+    cb: (err: any, data?: UpdateAgreementCommandOutput) => void
+  ): void;
+  updateAgreement(
+    args: UpdateAgreementCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateAgreementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCertificateCommand}
+   */
+  updateCertificate(
+    args: UpdateCertificateCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateCertificateCommandOutput>;
+  updateCertificate(
+    args: UpdateCertificateCommandInput,
+    cb: (err: any, data?: UpdateCertificateCommandOutput) => void
+  ): void;
+  updateCertificate(
+    args: UpdateCertificateCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorCommand}
+   */
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateConnectorCommandOutput>;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateHostKeyCommand}
+   */
+  updateHostKey(
+    args: UpdateHostKeyCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateHostKeyCommandOutput>;
+  updateHostKey(
+    args: UpdateHostKeyCommandInput,
+    cb: (err: any, data?: UpdateHostKeyCommandOutput) => void
+  ): void;
+  updateHostKey(
+    args: UpdateHostKeyCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateHostKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProfileCommand}
+   */
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateProfileCommandOutput>;
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    cb: (err: any, data?: UpdateProfileCommandOutput) => void
+  ): void;
+  updateProfile(
+    args: UpdateProfileCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateServerCommand}
+   */
+  updateServer(
     args: UpdateServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: TransferRequestOptions
   ): Promise<UpdateServerCommandOutput>;
-  public updateServer(args: UpdateServerCommandInput, cb: (err: any, data?: UpdateServerCommandOutput) => void): void;
-  public updateServer(
+  updateServer(
     args: UpdateServerCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateServerCommandOutput) => void
   ): void;
-  public updateServer(
+  updateServer(
     args: UpdateServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateServerCommandOutput) => void),
-    cb?: (err: any, data?: UpdateServerCommandOutput) => void
-  ): Promise<UpdateServerCommandOutput> | void {
-    const command = new UpdateServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateServerCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Assigns new properties to a user. Parameters you pass modify any or all of the following:
-   *       the home directory, role, and policy for the <code>UserName</code> and <code>ServerId</code>
-   *       you specify.</p>
-   *
-   *          <p>The response returns the <code>ServerId</code> and the <code>UserName</code> for the
-   *       updated user.</p>
+   * @see {@link UpdateUserCommand}
    */
-  public updateUser(args: UpdateUserCommandInput, options?: __HttpHandlerOptions): Promise<UpdateUserCommandOutput>;
-  public updateUser(args: UpdateUserCommandInput, cb: (err: any, data?: UpdateUserCommandOutput) => void): void;
-  public updateUser(
+  updateUser(
     args: UpdateUserCommandInput,
-    options: __HttpHandlerOptions,
+    options?: TransferRequestOptions
+  ): Promise<UpdateUserCommandOutput>;
+  updateUser(
+    args: UpdateUserCommandInput,
     cb: (err: any, data?: UpdateUserCommandOutput) => void
   ): void;
-  public updateUser(
+  updateUser(
     args: UpdateUserCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserCommandOutput) => void
-  ): Promise<UpdateUserCommandOutput> | void {
-    const command = new UpdateUserCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateUserCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWebAppCommand}
+   */
+  updateWebApp(
+    args: UpdateWebAppCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateWebAppCommandOutput>;
+  updateWebApp(
+    args: UpdateWebAppCommandInput,
+    cb: (err: any, data?: UpdateWebAppCommandOutput) => void
+  ): void;
+  updateWebApp(
+    args: UpdateWebAppCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateWebAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWebAppCustomizationCommand}
+   */
+  updateWebAppCustomization(
+    args: UpdateWebAppCustomizationCommandInput,
+    options?: TransferRequestOptions
+  ): Promise<UpdateWebAppCustomizationCommandOutput>;
+  updateWebAppCustomization(
+    args: UpdateWebAppCustomizationCommandInput,
+    cb: (err: any, data?: UpdateWebAppCustomizationCommandOutput) => void
+  ): void;
+  updateWebAppCustomization(
+    args: UpdateWebAppCustomizationCommandInput,
+    options: TransferRequestOptions,
+    cb: (err: any, data?: UpdateWebAppCustomizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccessesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccessesCommandOutput}.
+   */
+  paginateListAccesses(
+    args: ListAccessesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccessesCommandOutput>;
+
+  /**
+   * @see {@link ListAgreementsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAgreementsCommandOutput}.
+   */
+  paginateListAgreements(
+    args: ListAgreementsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAgreementsCommandOutput>;
+
+  /**
+   * @see {@link ListCertificatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCertificatesCommandOutput}.
+   */
+  paginateListCertificates(
+    args?: ListCertificatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCertificatesCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExecutionsCommandOutput}.
+   */
+  paginateListExecutions(
+    args: ListExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListFileTransferResultsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFileTransferResultsCommandOutput}.
+   */
+  paginateListFileTransferResults(
+    args: ListFileTransferResultsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFileTransferResultsCommandOutput>;
+
+  /**
+   * @see {@link ListProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProfilesCommandOutput}.
+   */
+  paginateListProfiles(
+    args?: ListProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityPoliciesCommandOutput}.
+   */
+  paginateListSecurityPolicies(
+    args?: ListSecurityPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServersCommandOutput}.
+   */
+  paginateListServers(
+    args?: ListServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServersCommandOutput>;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTagsForResourceCommandOutput}.
+   */
+  paginateListTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTagsForResourceCommandOutput>;
+
+  /**
+   * @see {@link ListUsersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsersCommandOutput}.
+   */
+  paginateListUsers(
+    args: ListUsersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsersCommandOutput>;
+
+  /**
+   * @see {@link ListWebAppsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWebAppsCommandOutput}.
+   */
+  paginateListWebApps(
+    args?: ListWebAppsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWebAppsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkflowsCommandOutput}.
+   */
+  paginateListWorkflows(
+    args?: ListWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link DescribeServerCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilServerOffline(
+    args: DescribeServerCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transfer>, "client">
+  ): Promise<WaiterResult<DescribeServerCommandOutput>>;
+
+  /**
+   * @see {@link DescribeServerCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilServerOnline(
+    args: DescribeServerCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transfer>, "client">
+  ): Promise<WaiterResult<DescribeServerCommandOutput>>;
 }
+
+/**
+ * <p>Transfer Family offers fully managed support for the transfer of files over SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of Amazon Web Services storage services.</p> <p>File transfer protocols are used in data exchange workflows across different industries such as financial services, healthcare, advertising, and retail, among others. Transfer Family simplifies the migration of file transfer workflows to Amazon Web Services.</p> <p>To use the Transfer Family service, you instantiate a server in the Amazon Web Services Region of your choice. You can create the server, list available servers, and update and delete servers. The server is the entity that requests file operations from Transfer Family. Servers have a number of important properties. The server is a named instance as identified by a system assigned <code>ServerId</code> identifier. You can optionally assign a hostname, or even a custom hostname to a server. The service bills for any instantiated servers (even ones <code>OFFLINE</code>), and for the amount of data transferred.</p> <p>Users must be known to the server that requests file operations. A user as identified by their username is assigned to a server. Usernames are used to authenticate requests. A server can have only one authentication method: <code>AWS_DIRECTORY_SERVICE</code>, <code>SERVICE_MANAGED</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> <p>Transfer Family also supports web applications that provide browser-based file transfer capabilities. Web applications can be configured with VPC endpoints to enable secure, private connectivity within your Virtual Private Cloud (VPC). This allows you to control network access and route traffic through your VPC infrastructure while maintaining the managed benefits of Transfer Family.</p> <p>This API interface reference for Transfer Family contains documentation for a programming interface that you can use to manage Transfer Family. The reference structure is as follows:</p> <ul> <li> <p>For the alphabetical list of API actions, see .</p> </li> <li> <p>For the alphabetical list of data types, see .</p> </li> <li> <p>For a list of common query parameters, see <a>CommonParameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a>CommonErrors</a>.</p> </li> </ul> <note> <p>Rather than actually running a command, you can use the <code>--generate-cli-skeleton</code> parameter with any API call to generate and display a parameter template. You can then use the generated template to customize and use as input on a later command. For details, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html#cli-usage-skeleton-generate">Generate and use a parameter skeleton file</a>.</p> </note>
+ * @public
+ */
+export class Transfer extends TransferClient implements Transfer {}
+createAggregatedClient(commands, Transfer, { paginators, waiters });

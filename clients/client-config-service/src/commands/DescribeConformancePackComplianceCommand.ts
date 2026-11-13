@@ -1,34 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeConformancePackComplianceRequest,
   DescribeConformancePackComplianceResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConformancePackComplianceCommand,
-  serializeAws_json1_1DescribeConformancePackComplianceCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeConformancePackCompliance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConformancePackComplianceCommand}.
+ */
 export interface DescribeConformancePackComplianceCommandInput extends DescribeConformancePackComplianceRequest {}
-export interface DescribeConformancePackComplianceCommandOutput
-  extends DescribeConformancePackComplianceResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConformancePackComplianceCommand}.
+ */
+export interface DescribeConformancePackComplianceCommandOutput extends DescribeConformancePackComplianceResponse, __MetadataBearer {}
 
 /**
  * <p>Returns compliance details for each rule in that conformance pack.</p>
- * 		       <note>
+ *          <note>
  *             <p>You must provide exact rule names.</p>
  *          </note>
  * @example
@@ -36,74 +35,83 @@ export interface DescribeConformancePackComplianceCommandOutput
  * ```javascript
  * import { ConfigServiceClient, DescribeConformancePackComplianceCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DescribeConformancePackComplianceCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DescribeConformancePackComplianceRequest
+ *   ConformancePackName: "STRING_VALUE", // required
+ *   Filters: { // ConformancePackComplianceFilters
+ *     ConfigRuleNames: [ // ConformancePackConfigRuleNames
+ *       "STRING_VALUE",
+ *     ],
+ *     ComplianceType: "COMPLIANT" || "NON_COMPLIANT" || "INSUFFICIENT_DATA",
+ *   },
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeConformancePackComplianceCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConformancePackComplianceResponse
+ * //   ConformancePackName: "STRING_VALUE", // required
+ * //   ConformancePackRuleComplianceList: [ // ConformancePackRuleComplianceList // required
+ * //     { // ConformancePackRuleCompliance
+ * //       ConfigRuleName: "STRING_VALUE",
+ * //       ComplianceType: "COMPLIANT" || "NON_COMPLIANT" || "INSUFFICIENT_DATA",
+ * //       Controls: [ // ControlsList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeConformancePackComplianceCommandInput - {@link DescribeConformancePackComplianceCommandInput}
+ * @returns {@link DescribeConformancePackComplianceCommandOutput}
  * @see {@link DescribeConformancePackComplianceCommandInput} for command's `input` shape.
  * @see {@link DescribeConformancePackComplianceCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidLimitException} (client fault)
+ *  <p>The specified limit is outside the allowable range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The specified next token is not valid. Specify the
+ * 				<code>nextToken</code> string that was returned in the previous
+ * 			response to get the next page of results.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more of the specified parameters are not valid. Verify
+ * 			that your parameters are valid and try again.</p>
+ *
+ * @throws {@link NoSuchConfigRuleInConformancePackException} (client fault)
+ *  <p>Config rule that you passed in the filter does not exist.</p>
+ *
+ * @throws {@link NoSuchConformancePackException} (client fault)
+ *  <p>You specified one or more conformance packs that do not exist.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConformancePackComplianceCommand extends $Command<
-  DescribeConformancePackComplianceCommandInput,
-  DescribeConformancePackComplianceCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConformancePackComplianceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConformancePackComplianceCommandInput, DescribeConformancePackComplianceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DescribeConformancePackComplianceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConformancePackComplianceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConformancePackComplianceResponse.filterSensitiveLog,
+export class DescribeConformancePackComplianceCommand extends command<DescribeConformancePackComplianceCommandInput, DescribeConformancePackComplianceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConformancePackCompliance",
+  DescribeConformancePackCompliance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConformancePackComplianceRequest;
+      output: DescribeConformancePackComplianceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeConformancePackComplianceCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConformancePackComplianceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConformancePackComplianceCommandOutput> {
-    return deserializeAws_json1_1DescribeConformancePackComplianceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConformancePackComplianceCommandInput;
+      output: DescribeConformancePackComplianceCommandOutput;
+    };
+  };
 }

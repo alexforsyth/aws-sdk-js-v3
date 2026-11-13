@@ -1,0 +1,131 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSecurityProfileRequest, DescribeSecurityProfileResponse } from "../models/models_1";
+import { DescribeSecurityProfile$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSecurityProfileCommand}.
+ */
+export interface DescribeSecurityProfileCommandInput extends DescribeSecurityProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSecurityProfileCommand}.
+ */
+export interface DescribeSecurityProfileCommandOutput extends DescribeSecurityProfileResponse, __MetadataBearer {}
+
+/**
+ * <p>Gets basic information about the security profile.</p>
+ *          <p>For information about security profiles, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html">Security Profiles</a> in the <i>Connect Customer Administrator Guide</i>. For a mapping of the API name and user interface name of the security
+ *    profile permissions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html">List
+ *     of security profile permissions</a>. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, DescribeSecurityProfileCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, DescribeSecurityProfileCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // DescribeSecurityProfileRequest
+ *   SecurityProfileId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ * };
+ * const command = new DescribeSecurityProfileCommand(input);
+ * const response = await client.send(command);
+ * // { // DescribeSecurityProfileResponse
+ * //   SecurityProfile: { // SecurityProfile
+ * //     Id: "STRING_VALUE",
+ * //     OrganizationResourceId: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     SecurityProfileName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     AllowedAccessControlTags: { // AllowedAccessControlTags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     TagRestrictedResources: [ // TagRestrictedResourceList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedRegion: "STRING_VALUE",
+ * //     HierarchyRestrictedResources: [ // HierarchyRestrictedResourceList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     AllowedAccessControlHierarchyGroupId: "STRING_VALUE",
+ * //     GranularAccessControlConfiguration: { // GranularAccessControlConfiguration
+ * //       DataTableAccessControlConfiguration: { // DataTableAccessControlConfiguration
+ * //         PrimaryAttributeAccessControlConfiguration: { // PrimaryAttributeAccessControlConfigurationItem
+ * //           PrimaryAttributeValues: [ // PrimaryAttributeValuesSet
+ * //             { // PrimaryAttributeValue
+ * //               AccessType: "ALLOW",
+ * //               AttributeName: "STRING_VALUE",
+ * //               Values: [ // PrimaryValueList
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //     Type: "AWS_MANAGED" || "CUSTOMER_MANAGED",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param DescribeSecurityProfileCommandInput - {@link DescribeSecurityProfileCommandInput}
+ * @returns {@link DescribeSecurityProfileCommandOutput}
+ * @see {@link DescribeSecurityProfileCommandInput} for command's `input` shape.
+ * @see {@link DescribeSecurityProfileCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class DescribeSecurityProfileCommand extends command<DescribeSecurityProfileCommandInput, DescribeSecurityProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSecurityProfile",
+  DescribeSecurityProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSecurityProfileRequest;
+      output: DescribeSecurityProfileResponse;
+    };
+    sdk: {
+      input: DescribeSecurityProfileCommandInput;
+      output: DescribeSecurityProfileCommandOutput;
+    };
+  };
+}

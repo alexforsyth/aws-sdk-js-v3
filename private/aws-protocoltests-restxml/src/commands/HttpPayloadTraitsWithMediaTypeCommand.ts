@@ -1,104 +1,118 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin, Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { BlobPayloadInputTypes, MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HttpPayloadTraitsWithMediaTypeInputOutput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { HttpPayloadTraitsWithMediaTypeInputOutput } from "../models/models_0";
 import {
-  deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand,
-  serializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand,
+  de_HttpPayloadTraitsWithMediaTypeCommand,
+  se_HttpPayloadTraitsWithMediaTypeCommand,
 } from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
-
-export interface HttpPayloadTraitsWithMediaTypeCommandInput extends HttpPayloadTraitsWithMediaTypeInputOutput {}
-export interface HttpPayloadTraitsWithMediaTypeCommandOutput
-  extends HttpPayloadTraitsWithMediaTypeInputOutput,
-    __MetadataBearer {}
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
 /**
- * This examples uses a `@mediaType` trait on the payload to force a custom
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ */
+export type HttpPayloadTraitsWithMediaTypeCommandInputType = Omit<HttpPayloadTraitsWithMediaTypeInputOutput, "blob"> & {
+  blob?: BlobPayloadInputTypes;
+};
+
+/**
+ * @public
+ *
+ * The input for {@link HttpPayloadTraitsWithMediaTypeCommand}.
+ */
+export interface HttpPayloadTraitsWithMediaTypeCommandInput extends HttpPayloadTraitsWithMediaTypeCommandInputType {}
+/**
+ * @public
+ */
+export type HttpPayloadTraitsWithMediaTypeCommandOutputType = Omit<HttpPayloadTraitsWithMediaTypeInputOutput, "blob"> & {
+  blob?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link HttpPayloadTraitsWithMediaTypeCommand}.
+ */
+export interface HttpPayloadTraitsWithMediaTypeCommandOutput extends HttpPayloadTraitsWithMediaTypeCommandOutputType, __MetadataBearer {}
+
+/**
+ * This example uses a `@mediaType` trait on the payload to force a custom
  * content-type to be serialized.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RestXmlProtocolClient, HttpPayloadTraitsWithMediaTypeCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, HttpPayloadTraitsWithMediaTypeCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = { // HttpPayloadTraitsWithMediaTypeInputOutput
+ *   foo: "STRING_VALUE",
+ *   blob: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ * };
  * const command = new HttpPayloadTraitsWithMediaTypeCommand(input);
  * const response = await client.send(command);
+ * // { // HttpPayloadTraitsWithMediaTypeInputOutput
+ * //   foo: "STRING_VALUE",
+ * //   blob: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param HttpPayloadTraitsWithMediaTypeCommandInput - {@link HttpPayloadTraitsWithMediaTypeCommandInput}
+ * @returns {@link HttpPayloadTraitsWithMediaTypeCommandOutput}
  * @see {@link HttpPayloadTraitsWithMediaTypeCommandInput} for command's `input` shape.
  * @see {@link HttpPayloadTraitsWithMediaTypeCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class HttpPayloadTraitsWithMediaTypeCommand extends $Command<
-  HttpPayloadTraitsWithMediaTypeCommandInput,
-  HttpPayloadTraitsWithMediaTypeCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HttpPayloadTraitsWithMediaTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HttpPayloadTraitsWithMediaTypeCommandInput, HttpPayloadTraitsWithMediaTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "HttpPayloadTraitsWithMediaTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: HttpPayloadTraitsWithMediaTypeInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: HttpPayloadTraitsWithMediaTypeInputOutput.filterSensitiveLog,
+export class HttpPayloadTraitsWithMediaTypeCommand extends $Command
+  .classBuilder<
+    HttpPayloadTraitsWithMediaTypeCommandInput,
+    HttpPayloadTraitsWithMediaTypeCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "HttpPayloadTraitsWithMediaType", {})
+  .n("RestXmlProtocolClient", "HttpPayloadTraitsWithMediaTypeCommand")
+  .f(void 0, void 0)
+  .ser(se_HttpPayloadTraitsWithMediaTypeCommand)
+  .de(de_HttpPayloadTraitsWithMediaTypeCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HttpPayloadTraitsWithMediaTypeInputOutput;
+      output: HttpPayloadTraitsWithMediaTypeInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: HttpPayloadTraitsWithMediaTypeCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> {
-    return deserializeAws_restXmlHttpPayloadTraitsWithMediaTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HttpPayloadTraitsWithMediaTypeCommandInput;
+      output: HttpPayloadTraitsWithMediaTypeCommandOutput;
+    };
+  };
 }

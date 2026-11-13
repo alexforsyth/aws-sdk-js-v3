@@ -1,106 +1,138 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeSavingsPlansOfferingRatesRequest,
   DescribeSavingsPlansOfferingRatesResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeSavingsPlansOfferingRatesCommand,
-  serializeAws_restJson1DescribeSavingsPlansOfferingRatesCommand,
-} from "../protocols/Aws_restJson1";
-import { SavingsplansClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SavingsplansClient";
-
-export interface DescribeSavingsPlansOfferingRatesCommandInput extends DescribeSavingsPlansOfferingRatesRequest {}
-export interface DescribeSavingsPlansOfferingRatesCommandOutput
-  extends DescribeSavingsPlansOfferingRatesResponse,
-    __MetadataBearer {}
+import { DescribeSavingsPlansOfferingRates$ } from "../schemas/schemas_0";
 
 /**
- * <p>Describes the specified Savings Plans offering rates.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSavingsPlansOfferingRatesCommand}.
+ */
+export interface DescribeSavingsPlansOfferingRatesCommandInput extends DescribeSavingsPlansOfferingRatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSavingsPlansOfferingRatesCommand}.
+ */
+export interface DescribeSavingsPlansOfferingRatesCommandOutput extends DescribeSavingsPlansOfferingRatesResponse, __MetadataBearer {}
+
+/**
+ * <p>Describes the offering rates for Savings Plans you might want to purchase.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SavingsplansClient, DescribeSavingsPlansOfferingRatesCommand } from "@aws-sdk/client-savingsplans"; // ES Modules import
  * // const { SavingsplansClient, DescribeSavingsPlansOfferingRatesCommand } = require("@aws-sdk/client-savingsplans"); // CommonJS import
+ * // import type { SavingsplansClientConfig } from "@aws-sdk/client-savingsplans";
+ * const config = {}; // type is SavingsplansClientConfig
  * const client = new SavingsplansClient(config);
+ * const input = { // DescribeSavingsPlansOfferingRatesRequest
+ *   savingsPlanOfferingIds: [ // UUIDs
+ *     "STRING_VALUE",
+ *   ],
+ *   savingsPlanPaymentOptions: [ // SavingsPlanPaymentOptionList
+ *     "All Upfront" || "Partial Upfront" || "No Upfront",
+ *   ],
+ *   savingsPlanTypes: [ // SavingsPlanTypeList
+ *     "Compute" || "EC2Instance" || "SageMaker" || "Database",
+ *   ],
+ *   products: [ // SavingsPlanProductTypeList
+ *     "EC2" || "Fargate" || "Lambda" || "SageMaker" || "RDS" || "DSQL" || "DynamoDB" || "ElastiCache" || "DocDB" || "Neptune" || "Timestream" || "Keyspaces" || "DMS" || "OpenSearch",
+ *   ],
+ *   serviceCodes: [ // SavingsPlanRateServiceCodeList
+ *     "AmazonEC2" || "AmazonECS" || "AmazonEKS" || "AWSLambda" || "AmazonSageMaker" || "AmazonRDS" || "AuroraDSQL" || "AmazonDynamoDB" || "AmazonElastiCache" || "AmazonDocDB" || "AmazonNeptune" || "AmazonTimestream" || "AmazonMCS" || "AWSDatabaseMigrationSvc" || "AmazonES",
+ *   ],
+ *   usageTypes: [ // SavingsPlanRateUsageTypeList
+ *     "STRING_VALUE",
+ *   ],
+ *   operations: [ // SavingsPlanRateOperationList
+ *     "STRING_VALUE",
+ *   ],
+ *   filters: [ // SavingsPlanOfferingRateFiltersList
+ *     { // SavingsPlanOfferingRateFilterElement
+ *       name: "region" || "instanceFamily" || "instanceType" || "productDescription" || "tenancy" || "productId",
+ *       values: [ // FilterValuesList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new DescribeSavingsPlansOfferingRatesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSavingsPlansOfferingRatesResponse
+ * //   searchResults: [ // SavingsPlanOfferingRatesList
+ * //     { // SavingsPlanOfferingRate
+ * //       savingsPlanOffering: { // ParentSavingsPlanOffering
+ * //         offeringId: "STRING_VALUE",
+ * //         paymentOption: "All Upfront" || "Partial Upfront" || "No Upfront",
+ * //         planType: "Compute" || "EC2Instance" || "SageMaker" || "Database",
+ * //         durationSeconds: Number("long"),
+ * //         currency: "CNY" || "USD" || "EUR",
+ * //         planDescription: "STRING_VALUE",
+ * //       },
+ * //       rate: "STRING_VALUE",
+ * //       unit: "Hrs" || "Lambda-GB-Second" || "Request" || "ACU-Hr" || "ReadRequestUnits" || "WriteRequestUnits" || "ReadCapacityUnit-Hrs" || "WriteCapacityUnit-Hrs" || "ReplicatedWriteRequestUnits" || "ReplicatedWriteCapacityUnit-Hrs" || "GB-Hours" || "DPU" || "ElastiCacheProcessingUnit" || "DCU-Hr" || "NCU-hr" || "OCU-hours" || "Jobs",
+ * //       productType: "EC2" || "Fargate" || "Lambda" || "SageMaker" || "RDS" || "DSQL" || "DynamoDB" || "ElastiCache" || "DocDB" || "Neptune" || "Timestream" || "Keyspaces" || "DMS" || "OpenSearch",
+ * //       serviceCode: "AmazonEC2" || "AmazonECS" || "AmazonEKS" || "AWSLambda" || "AmazonSageMaker" || "AmazonRDS" || "AuroraDSQL" || "AmazonDynamoDB" || "AmazonElastiCache" || "AmazonDocDB" || "AmazonNeptune" || "AmazonTimestream" || "AmazonMCS" || "AWSDatabaseMigrationSvc" || "AmazonES",
+ * //       usageType: "STRING_VALUE",
+ * //       operation: "STRING_VALUE",
+ * //       properties: [ // SavingsPlanOfferingRatePropertyList
+ * //         { // SavingsPlanOfferingRateProperty
+ * //           name: "STRING_VALUE",
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeSavingsPlansOfferingRatesCommandInput - {@link DescribeSavingsPlansOfferingRatesCommandInput}
+ * @returns {@link DescribeSavingsPlansOfferingRatesCommandOutput}
  * @see {@link DescribeSavingsPlansOfferingRatesCommandInput} for command's `input` shape.
  * @see {@link DescribeSavingsPlansOfferingRatesCommandOutput} for command's `response` shape.
- * @see {@link SavingsplansClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SavingsplansClientResolvedConfig | config} for SavingsplansClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters is not valid.</p>
+ *
+ * @throws {@link SavingsplansServiceException}
+ * <p>Base exception class for all service exceptions from Savingsplans service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSavingsPlansOfferingRatesCommand extends $Command<
-  DescribeSavingsPlansOfferingRatesCommandInput,
-  DescribeSavingsPlansOfferingRatesCommandOutput,
-  SavingsplansClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSavingsPlansOfferingRatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SavingsplansClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSavingsPlansOfferingRatesCommandInput, DescribeSavingsPlansOfferingRatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SavingsplansClient";
-    const commandName = "DescribeSavingsPlansOfferingRatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSavingsPlansOfferingRatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSavingsPlansOfferingRatesResponse.filterSensitiveLog,
+export class DescribeSavingsPlansOfferingRatesCommand extends command<DescribeSavingsPlansOfferingRatesCommandInput, DescribeSavingsPlansOfferingRatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSavingsPlansOfferingRates",
+  DescribeSavingsPlansOfferingRates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSavingsPlansOfferingRatesRequest;
+      output: DescribeSavingsPlansOfferingRatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeSavingsPlansOfferingRatesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeSavingsPlansOfferingRatesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSavingsPlansOfferingRatesCommandOutput> {
-    return deserializeAws_restJson1DescribeSavingsPlansOfferingRatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSavingsPlansOfferingRatesCommandInput;
+      output: DescribeSavingsPlansOfferingRatesCommandOutput;
+    };
+  };
 }

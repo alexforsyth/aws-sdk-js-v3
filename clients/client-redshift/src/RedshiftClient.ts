@@ -1,439 +1,581 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultRedshiftHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AcceptReservedNodeExchangeCommandInput,
   AcceptReservedNodeExchangeCommandOutput,
 } from "./commands/AcceptReservedNodeExchangeCommand";
-import { AddPartnerCommandInput, AddPartnerCommandOutput } from "./commands/AddPartnerCommand";
-import {
+import type { AddPartnerCommandInput, AddPartnerCommandOutput } from "./commands/AddPartnerCommand";
+import type {
   AssociateDataShareConsumerCommandInput,
   AssociateDataShareConsumerCommandOutput,
 } from "./commands/AssociateDataShareConsumerCommand";
-import {
+import type {
   AuthorizeClusterSecurityGroupIngressCommandInput,
   AuthorizeClusterSecurityGroupIngressCommandOutput,
 } from "./commands/AuthorizeClusterSecurityGroupIngressCommand";
-import { AuthorizeDataShareCommandInput, AuthorizeDataShareCommandOutput } from "./commands/AuthorizeDataShareCommand";
-import {
+import type {
+  AuthorizeDataShareCommandInput,
+  AuthorizeDataShareCommandOutput,
+} from "./commands/AuthorizeDataShareCommand";
+import type {
   AuthorizeEndpointAccessCommandInput,
   AuthorizeEndpointAccessCommandOutput,
 } from "./commands/AuthorizeEndpointAccessCommand";
-import {
+import type {
   AuthorizeSnapshotAccessCommandInput,
   AuthorizeSnapshotAccessCommandOutput,
 } from "./commands/AuthorizeSnapshotAccessCommand";
-import {
+import type {
   BatchDeleteClusterSnapshotsCommandInput,
   BatchDeleteClusterSnapshotsCommandOutput,
 } from "./commands/BatchDeleteClusterSnapshotsCommand";
-import {
+import type {
   BatchModifyClusterSnapshotsCommandInput,
   BatchModifyClusterSnapshotsCommandOutput,
 } from "./commands/BatchModifyClusterSnapshotsCommand";
-import { CancelResizeCommandInput, CancelResizeCommandOutput } from "./commands/CancelResizeCommand";
-import {
+import type { CancelResizeCommandInput, CancelResizeCommandOutput } from "./commands/CancelResizeCommand";
+import type {
   CopyClusterSnapshotCommandInput,
   CopyClusterSnapshotCommandOutput,
 } from "./commands/CopyClusterSnapshotCommand";
-import {
+import type {
   CreateAuthenticationProfileCommandInput,
   CreateAuthenticationProfileCommandOutput,
 } from "./commands/CreateAuthenticationProfileCommand";
-import { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
-import {
+import type { CreateClusterCommandInput, CreateClusterCommandOutput } from "./commands/CreateClusterCommand";
+import type {
   CreateClusterParameterGroupCommandInput,
   CreateClusterParameterGroupCommandOutput,
 } from "./commands/CreateClusterParameterGroupCommand";
-import {
+import type {
   CreateClusterSecurityGroupCommandInput,
   CreateClusterSecurityGroupCommandOutput,
 } from "./commands/CreateClusterSecurityGroupCommand";
-import {
+import type {
   CreateClusterSnapshotCommandInput,
   CreateClusterSnapshotCommandOutput,
 } from "./commands/CreateClusterSnapshotCommand";
-import {
+import type {
   CreateClusterSubnetGroupCommandInput,
   CreateClusterSubnetGroupCommandOutput,
 } from "./commands/CreateClusterSubnetGroupCommand";
-import {
+import type {
+  CreateCustomDomainAssociationCommandInput,
+  CreateCustomDomainAssociationCommandOutput,
+} from "./commands/CreateCustomDomainAssociationCommand";
+import type {
   CreateEndpointAccessCommandInput,
   CreateEndpointAccessCommandOutput,
 } from "./commands/CreateEndpointAccessCommand";
-import {
+import type {
   CreateEventSubscriptionCommandInput,
   CreateEventSubscriptionCommandOutput,
 } from "./commands/CreateEventSubscriptionCommand";
-import {
+import type {
   CreateHsmClientCertificateCommandInput,
   CreateHsmClientCertificateCommandOutput,
 } from "./commands/CreateHsmClientCertificateCommand";
-import {
+import type {
   CreateHsmConfigurationCommandInput,
   CreateHsmConfigurationCommandOutput,
 } from "./commands/CreateHsmConfigurationCommand";
-import {
+import type {
+  CreateIntegrationCommandInput,
+  CreateIntegrationCommandOutput,
+} from "./commands/CreateIntegrationCommand";
+import type {
+  CreateQev2IdcApplicationCommandInput,
+  CreateQev2IdcApplicationCommandOutput,
+} from "./commands/CreateQev2IdcApplicationCommand";
+import type {
+  CreateRedshiftIdcApplicationCommandInput,
+  CreateRedshiftIdcApplicationCommandOutput,
+} from "./commands/CreateRedshiftIdcApplicationCommand";
+import type {
   CreateScheduledActionCommandInput,
   CreateScheduledActionCommandOutput,
 } from "./commands/CreateScheduledActionCommand";
-import {
+import type {
   CreateSnapshotCopyGrantCommandInput,
   CreateSnapshotCopyGrantCommandOutput,
 } from "./commands/CreateSnapshotCopyGrantCommand";
-import {
+import type {
   CreateSnapshotScheduleCommandInput,
   CreateSnapshotScheduleCommandOutput,
 } from "./commands/CreateSnapshotScheduleCommand";
-import { CreateTagsCommandInput, CreateTagsCommandOutput } from "./commands/CreateTagsCommand";
-import { CreateUsageLimitCommandInput, CreateUsageLimitCommandOutput } from "./commands/CreateUsageLimitCommand";
-import {
+import type { CreateTagsCommandInput, CreateTagsCommandOutput } from "./commands/CreateTagsCommand";
+import type { CreateUsageLimitCommandInput, CreateUsageLimitCommandOutput } from "./commands/CreateUsageLimitCommand";
+import type {
   DeauthorizeDataShareCommandInput,
   DeauthorizeDataShareCommandOutput,
 } from "./commands/DeauthorizeDataShareCommand";
-import {
+import type {
   DeleteAuthenticationProfileCommandInput,
   DeleteAuthenticationProfileCommandOutput,
 } from "./commands/DeleteAuthenticationProfileCommand";
-import { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
-import {
+import type { DeleteClusterCommandInput, DeleteClusterCommandOutput } from "./commands/DeleteClusterCommand";
+import type {
   DeleteClusterParameterGroupCommandInput,
   DeleteClusterParameterGroupCommandOutput,
 } from "./commands/DeleteClusterParameterGroupCommand";
-import {
+import type {
   DeleteClusterSecurityGroupCommandInput,
   DeleteClusterSecurityGroupCommandOutput,
 } from "./commands/DeleteClusterSecurityGroupCommand";
-import {
+import type {
   DeleteClusterSnapshotCommandInput,
   DeleteClusterSnapshotCommandOutput,
 } from "./commands/DeleteClusterSnapshotCommand";
-import {
+import type {
   DeleteClusterSubnetGroupCommandInput,
   DeleteClusterSubnetGroupCommandOutput,
 } from "./commands/DeleteClusterSubnetGroupCommand";
-import {
+import type {
+  DeleteCustomDomainAssociationCommandInput,
+  DeleteCustomDomainAssociationCommandOutput,
+} from "./commands/DeleteCustomDomainAssociationCommand";
+import type {
   DeleteEndpointAccessCommandInput,
   DeleteEndpointAccessCommandOutput,
 } from "./commands/DeleteEndpointAccessCommand";
-import {
+import type {
   DeleteEventSubscriptionCommandInput,
   DeleteEventSubscriptionCommandOutput,
 } from "./commands/DeleteEventSubscriptionCommand";
-import {
+import type {
   DeleteHsmClientCertificateCommandInput,
   DeleteHsmClientCertificateCommandOutput,
 } from "./commands/DeleteHsmClientCertificateCommand";
-import {
+import type {
   DeleteHsmConfigurationCommandInput,
   DeleteHsmConfigurationCommandOutput,
 } from "./commands/DeleteHsmConfigurationCommand";
-import { DeletePartnerCommandInput, DeletePartnerCommandOutput } from "./commands/DeletePartnerCommand";
-import {
+import type {
+  DeleteIntegrationCommandInput,
+  DeleteIntegrationCommandOutput,
+} from "./commands/DeleteIntegrationCommand";
+import type { DeletePartnerCommandInput, DeletePartnerCommandOutput } from "./commands/DeletePartnerCommand";
+import type {
+  DeleteQev2IdcApplicationCommandInput,
+  DeleteQev2IdcApplicationCommandOutput,
+} from "./commands/DeleteQev2IdcApplicationCommand";
+import type {
+  DeleteRedshiftIdcApplicationCommandInput,
+  DeleteRedshiftIdcApplicationCommandOutput,
+} from "./commands/DeleteRedshiftIdcApplicationCommand";
+import type {
+  DeleteResourcePolicyCommandInput,
+  DeleteResourcePolicyCommandOutput,
+} from "./commands/DeleteResourcePolicyCommand";
+import type {
   DeleteScheduledActionCommandInput,
   DeleteScheduledActionCommandOutput,
 } from "./commands/DeleteScheduledActionCommand";
-import {
+import type {
   DeleteSnapshotCopyGrantCommandInput,
   DeleteSnapshotCopyGrantCommandOutput,
 } from "./commands/DeleteSnapshotCopyGrantCommand";
-import {
+import type {
   DeleteSnapshotScheduleCommandInput,
   DeleteSnapshotScheduleCommandOutput,
 } from "./commands/DeleteSnapshotScheduleCommand";
-import { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
-import { DeleteUsageLimitCommandInput, DeleteUsageLimitCommandOutput } from "./commands/DeleteUsageLimitCommand";
-import {
+import type { DeleteTagsCommandInput, DeleteTagsCommandOutput } from "./commands/DeleteTagsCommand";
+import type { DeleteUsageLimitCommandInput, DeleteUsageLimitCommandOutput } from "./commands/DeleteUsageLimitCommand";
+import type {
+  DeregisterNamespaceCommandInput,
+  DeregisterNamespaceCommandOutput,
+} from "./commands/DeregisterNamespaceCommand";
+import type {
   DescribeAccountAttributesCommandInput,
   DescribeAccountAttributesCommandOutput,
 } from "./commands/DescribeAccountAttributesCommand";
-import {
+import type {
   DescribeAuthenticationProfilesCommandInput,
   DescribeAuthenticationProfilesCommandOutput,
 } from "./commands/DescribeAuthenticationProfilesCommand";
-import {
+import type {
   DescribeClusterDbRevisionsCommandInput,
   DescribeClusterDbRevisionsCommandOutput,
 } from "./commands/DescribeClusterDbRevisionsCommand";
-import {
+import type {
   DescribeClusterParameterGroupsCommandInput,
   DescribeClusterParameterGroupsCommandOutput,
 } from "./commands/DescribeClusterParameterGroupsCommand";
-import {
+import type {
   DescribeClusterParametersCommandInput,
   DescribeClusterParametersCommandOutput,
 } from "./commands/DescribeClusterParametersCommand";
-import { DescribeClustersCommandInput, DescribeClustersCommandOutput } from "./commands/DescribeClustersCommand";
-import {
+import type { DescribeClustersCommandInput, DescribeClustersCommandOutput } from "./commands/DescribeClustersCommand";
+import type {
   DescribeClusterSecurityGroupsCommandInput,
   DescribeClusterSecurityGroupsCommandOutput,
 } from "./commands/DescribeClusterSecurityGroupsCommand";
-import {
+import type {
   DescribeClusterSnapshotsCommandInput,
   DescribeClusterSnapshotsCommandOutput,
 } from "./commands/DescribeClusterSnapshotsCommand";
-import {
+import type {
   DescribeClusterSubnetGroupsCommandInput,
   DescribeClusterSubnetGroupsCommandOutput,
 } from "./commands/DescribeClusterSubnetGroupsCommand";
-import {
+import type {
   DescribeClusterTracksCommandInput,
   DescribeClusterTracksCommandOutput,
 } from "./commands/DescribeClusterTracksCommand";
-import {
+import type {
   DescribeClusterVersionsCommandInput,
   DescribeClusterVersionsCommandOutput,
 } from "./commands/DescribeClusterVersionsCommand";
-import { DescribeDataSharesCommandInput, DescribeDataSharesCommandOutput } from "./commands/DescribeDataSharesCommand";
-import {
+import type {
+  DescribeCustomDomainAssociationsCommandInput,
+  DescribeCustomDomainAssociationsCommandOutput,
+} from "./commands/DescribeCustomDomainAssociationsCommand";
+import type {
+  DescribeDataSharesCommandInput,
+  DescribeDataSharesCommandOutput,
+} from "./commands/DescribeDataSharesCommand";
+import type {
   DescribeDataSharesForConsumerCommandInput,
   DescribeDataSharesForConsumerCommandOutput,
 } from "./commands/DescribeDataSharesForConsumerCommand";
-import {
+import type {
   DescribeDataSharesForProducerCommandInput,
   DescribeDataSharesForProducerCommandOutput,
 } from "./commands/DescribeDataSharesForProducerCommand";
-import {
+import type {
   DescribeDefaultClusterParametersCommandInput,
   DescribeDefaultClusterParametersCommandOutput,
 } from "./commands/DescribeDefaultClusterParametersCommand";
-import {
+import type {
   DescribeEndpointAccessCommandInput,
   DescribeEndpointAccessCommandOutput,
 } from "./commands/DescribeEndpointAccessCommand";
-import {
+import type {
   DescribeEndpointAuthorizationCommandInput,
   DescribeEndpointAuthorizationCommandOutput,
 } from "./commands/DescribeEndpointAuthorizationCommand";
-import {
+import type {
   DescribeEventCategoriesCommandInput,
   DescribeEventCategoriesCommandOutput,
 } from "./commands/DescribeEventCategoriesCommand";
-import { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
-import {
+import type { DescribeEventsCommandInput, DescribeEventsCommandOutput } from "./commands/DescribeEventsCommand";
+import type {
   DescribeEventSubscriptionsCommandInput,
   DescribeEventSubscriptionsCommandOutput,
 } from "./commands/DescribeEventSubscriptionsCommand";
-import {
+import type {
   DescribeHsmClientCertificatesCommandInput,
   DescribeHsmClientCertificatesCommandOutput,
 } from "./commands/DescribeHsmClientCertificatesCommand";
-import {
+import type {
   DescribeHsmConfigurationsCommandInput,
   DescribeHsmConfigurationsCommandOutput,
 } from "./commands/DescribeHsmConfigurationsCommand";
-import {
+import type {
+  DescribeInboundIntegrationsCommandInput,
+  DescribeInboundIntegrationsCommandOutput,
+} from "./commands/DescribeInboundIntegrationsCommand";
+import type {
+  DescribeIntegrationsCommandInput,
+  DescribeIntegrationsCommandOutput,
+} from "./commands/DescribeIntegrationsCommand";
+import type {
   DescribeLoggingStatusCommandInput,
   DescribeLoggingStatusCommandOutput,
 } from "./commands/DescribeLoggingStatusCommand";
-import {
+import type {
   DescribeNodeConfigurationOptionsCommandInput,
   DescribeNodeConfigurationOptionsCommandOutput,
 } from "./commands/DescribeNodeConfigurationOptionsCommand";
-import {
+import type {
   DescribeOrderableClusterOptionsCommandInput,
   DescribeOrderableClusterOptionsCommandOutput,
 } from "./commands/DescribeOrderableClusterOptionsCommand";
-import { DescribePartnersCommandInput, DescribePartnersCommandOutput } from "./commands/DescribePartnersCommand";
-import {
+import type { DescribePartnersCommandInput, DescribePartnersCommandOutput } from "./commands/DescribePartnersCommand";
+import type {
+  DescribeQev2IdcApplicationsCommandInput,
+  DescribeQev2IdcApplicationsCommandOutput,
+} from "./commands/DescribeQev2IdcApplicationsCommand";
+import type {
+  DescribeRedshiftIdcApplicationsCommandInput,
+  DescribeRedshiftIdcApplicationsCommandOutput,
+} from "./commands/DescribeRedshiftIdcApplicationsCommand";
+import type {
+  DescribeReservedNodeExchangeStatusCommandInput,
+  DescribeReservedNodeExchangeStatusCommandOutput,
+} from "./commands/DescribeReservedNodeExchangeStatusCommand";
+import type {
   DescribeReservedNodeOfferingsCommandInput,
   DescribeReservedNodeOfferingsCommandOutput,
 } from "./commands/DescribeReservedNodeOfferingsCommand";
-import {
+import type {
   DescribeReservedNodesCommandInput,
   DescribeReservedNodesCommandOutput,
 } from "./commands/DescribeReservedNodesCommand";
-import { DescribeResizeCommandInput, DescribeResizeCommandOutput } from "./commands/DescribeResizeCommand";
-import {
+import type { DescribeResizeCommandInput, DescribeResizeCommandOutput } from "./commands/DescribeResizeCommand";
+import type {
   DescribeScheduledActionsCommandInput,
   DescribeScheduledActionsCommandOutput,
 } from "./commands/DescribeScheduledActionsCommand";
-import {
+import type {
   DescribeSnapshotCopyGrantsCommandInput,
   DescribeSnapshotCopyGrantsCommandOutput,
 } from "./commands/DescribeSnapshotCopyGrantsCommand";
-import {
+import type {
   DescribeSnapshotSchedulesCommandInput,
   DescribeSnapshotSchedulesCommandOutput,
 } from "./commands/DescribeSnapshotSchedulesCommand";
-import { DescribeStorageCommandInput, DescribeStorageCommandOutput } from "./commands/DescribeStorageCommand";
-import {
+import type { DescribeStorageCommandInput, DescribeStorageCommandOutput } from "./commands/DescribeStorageCommand";
+import type {
   DescribeTableRestoreStatusCommandInput,
   DescribeTableRestoreStatusCommandOutput,
 } from "./commands/DescribeTableRestoreStatusCommand";
-import { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
-import {
+import type { DescribeTagsCommandInput, DescribeTagsCommandOutput } from "./commands/DescribeTagsCommand";
+import type {
   DescribeUsageLimitsCommandInput,
   DescribeUsageLimitsCommandOutput,
 } from "./commands/DescribeUsageLimitsCommand";
-import { DisableLoggingCommandInput, DisableLoggingCommandOutput } from "./commands/DisableLoggingCommand";
-import {
+import type { DisableLoggingCommandInput, DisableLoggingCommandOutput } from "./commands/DisableLoggingCommand";
+import type {
   DisableSnapshotCopyCommandInput,
   DisableSnapshotCopyCommandOutput,
 } from "./commands/DisableSnapshotCopyCommand";
-import {
+import type {
   DisassociateDataShareConsumerCommandInput,
   DisassociateDataShareConsumerCommandOutput,
 } from "./commands/DisassociateDataShareConsumerCommand";
-import { EnableLoggingCommandInput, EnableLoggingCommandOutput } from "./commands/EnableLoggingCommand";
-import { EnableSnapshotCopyCommandInput, EnableSnapshotCopyCommandOutput } from "./commands/EnableSnapshotCopyCommand";
-import {
+import type { EnableLoggingCommandInput, EnableLoggingCommandOutput } from "./commands/EnableLoggingCommand";
+import type {
+  EnableSnapshotCopyCommandInput,
+  EnableSnapshotCopyCommandOutput,
+} from "./commands/EnableSnapshotCopyCommand";
+import type {
+  FailoverPrimaryComputeCommandInput,
+  FailoverPrimaryComputeCommandOutput,
+} from "./commands/FailoverPrimaryComputeCommand";
+import type {
   GetClusterCredentialsCommandInput,
   GetClusterCredentialsCommandOutput,
 } from "./commands/GetClusterCredentialsCommand";
-import {
+import type {
+  GetClusterCredentialsWithIAMCommandInput,
+  GetClusterCredentialsWithIAMCommandOutput,
+} from "./commands/GetClusterCredentialsWithIAMCommand";
+import type {
+  GetIdentityCenterAuthTokenCommandInput,
+  GetIdentityCenterAuthTokenCommandOutput,
+} from "./commands/GetIdentityCenterAuthTokenCommand";
+import type {
+  GetReservedNodeExchangeConfigurationOptionsCommandInput,
+  GetReservedNodeExchangeConfigurationOptionsCommandOutput,
+} from "./commands/GetReservedNodeExchangeConfigurationOptionsCommand";
+import type {
   GetReservedNodeExchangeOfferingsCommandInput,
   GetReservedNodeExchangeOfferingsCommandOutput,
 } from "./commands/GetReservedNodeExchangeOfferingsCommand";
-import {
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type {
+  ListRecommendationsCommandInput,
+  ListRecommendationsCommandOutput,
+} from "./commands/ListRecommendationsCommand";
+import type {
   ModifyAquaConfigurationCommandInput,
   ModifyAquaConfigurationCommandOutput,
 } from "./commands/ModifyAquaConfigurationCommand";
-import {
+import type {
   ModifyAuthenticationProfileCommandInput,
   ModifyAuthenticationProfileCommandOutput,
 } from "./commands/ModifyAuthenticationProfileCommand";
-import { ModifyClusterCommandInput, ModifyClusterCommandOutput } from "./commands/ModifyClusterCommand";
-import {
+import type { ModifyClusterCommandInput, ModifyClusterCommandOutput } from "./commands/ModifyClusterCommand";
+import type {
   ModifyClusterDbRevisionCommandInput,
   ModifyClusterDbRevisionCommandOutput,
 } from "./commands/ModifyClusterDbRevisionCommand";
-import {
+import type {
   ModifyClusterIamRolesCommandInput,
   ModifyClusterIamRolesCommandOutput,
 } from "./commands/ModifyClusterIamRolesCommand";
-import {
+import type {
   ModifyClusterMaintenanceCommandInput,
   ModifyClusterMaintenanceCommandOutput,
 } from "./commands/ModifyClusterMaintenanceCommand";
-import {
+import type {
   ModifyClusterParameterGroupCommandInput,
   ModifyClusterParameterGroupCommandOutput,
 } from "./commands/ModifyClusterParameterGroupCommand";
-import {
+import type {
   ModifyClusterSnapshotCommandInput,
   ModifyClusterSnapshotCommandOutput,
 } from "./commands/ModifyClusterSnapshotCommand";
-import {
+import type {
   ModifyClusterSnapshotScheduleCommandInput,
   ModifyClusterSnapshotScheduleCommandOutput,
 } from "./commands/ModifyClusterSnapshotScheduleCommand";
-import {
+import type {
   ModifyClusterSubnetGroupCommandInput,
   ModifyClusterSubnetGroupCommandOutput,
 } from "./commands/ModifyClusterSubnetGroupCommand";
-import {
+import type {
+  ModifyCustomDomainAssociationCommandInput,
+  ModifyCustomDomainAssociationCommandOutput,
+} from "./commands/ModifyCustomDomainAssociationCommand";
+import type {
   ModifyEndpointAccessCommandInput,
   ModifyEndpointAccessCommandOutput,
 } from "./commands/ModifyEndpointAccessCommand";
-import {
+import type {
   ModifyEventSubscriptionCommandInput,
   ModifyEventSubscriptionCommandOutput,
 } from "./commands/ModifyEventSubscriptionCommand";
-import {
+import type {
+  ModifyIntegrationCommandInput,
+  ModifyIntegrationCommandOutput,
+} from "./commands/ModifyIntegrationCommand";
+import type {
+  ModifyLakehouseConfigurationCommandInput,
+  ModifyLakehouseConfigurationCommandOutput,
+} from "./commands/ModifyLakehouseConfigurationCommand";
+import type {
+  ModifyQev2IdcApplicationCommandInput,
+  ModifyQev2IdcApplicationCommandOutput,
+} from "./commands/ModifyQev2IdcApplicationCommand";
+import type {
+  ModifyRedshiftIdcApplicationCommandInput,
+  ModifyRedshiftIdcApplicationCommandOutput,
+} from "./commands/ModifyRedshiftIdcApplicationCommand";
+import type {
   ModifyScheduledActionCommandInput,
   ModifyScheduledActionCommandOutput,
 } from "./commands/ModifyScheduledActionCommand";
-import {
+import type {
   ModifySnapshotCopyRetentionPeriodCommandInput,
   ModifySnapshotCopyRetentionPeriodCommandOutput,
 } from "./commands/ModifySnapshotCopyRetentionPeriodCommand";
-import {
+import type {
   ModifySnapshotScheduleCommandInput,
   ModifySnapshotScheduleCommandOutput,
 } from "./commands/ModifySnapshotScheduleCommand";
-import { ModifyUsageLimitCommandInput, ModifyUsageLimitCommandOutput } from "./commands/ModifyUsageLimitCommand";
-import { PauseClusterCommandInput, PauseClusterCommandOutput } from "./commands/PauseClusterCommand";
-import {
+import type { ModifyUsageLimitCommandInput, ModifyUsageLimitCommandOutput } from "./commands/ModifyUsageLimitCommand";
+import type { PauseClusterCommandInput, PauseClusterCommandOutput } from "./commands/PauseClusterCommand";
+import type {
   PurchaseReservedNodeOfferingCommandInput,
   PurchaseReservedNodeOfferingCommandOutput,
 } from "./commands/PurchaseReservedNodeOfferingCommand";
-import { RebootClusterCommandInput, RebootClusterCommandOutput } from "./commands/RebootClusterCommand";
-import { RejectDataShareCommandInput, RejectDataShareCommandOutput } from "./commands/RejectDataShareCommand";
-import {
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type { RebootClusterCommandInput, RebootClusterCommandOutput } from "./commands/RebootClusterCommand";
+import type {
+  RegisterNamespaceCommandInput,
+  RegisterNamespaceCommandOutput,
+} from "./commands/RegisterNamespaceCommand";
+import type { RejectDataShareCommandInput, RejectDataShareCommandOutput } from "./commands/RejectDataShareCommand";
+import type {
   ResetClusterParameterGroupCommandInput,
   ResetClusterParameterGroupCommandOutput,
 } from "./commands/ResetClusterParameterGroupCommand";
-import { ResizeClusterCommandInput, ResizeClusterCommandOutput } from "./commands/ResizeClusterCommand";
-import {
+import type { ResizeClusterCommandInput, ResizeClusterCommandOutput } from "./commands/ResizeClusterCommand";
+import type {
   RestoreFromClusterSnapshotCommandInput,
   RestoreFromClusterSnapshotCommandOutput,
 } from "./commands/RestoreFromClusterSnapshotCommand";
-import {
+import type {
   RestoreTableFromClusterSnapshotCommandInput,
   RestoreTableFromClusterSnapshotCommandOutput,
 } from "./commands/RestoreTableFromClusterSnapshotCommand";
-import { ResumeClusterCommandInput, ResumeClusterCommandOutput } from "./commands/ResumeClusterCommand";
-import {
+import type { ResumeClusterCommandInput, ResumeClusterCommandOutput } from "./commands/ResumeClusterCommand";
+import type {
   RevokeClusterSecurityGroupIngressCommandInput,
   RevokeClusterSecurityGroupIngressCommandOutput,
 } from "./commands/RevokeClusterSecurityGroupIngressCommand";
-import {
+import type {
   RevokeEndpointAccessCommandInput,
   RevokeEndpointAccessCommandOutput,
 } from "./commands/RevokeEndpointAccessCommand";
-import {
+import type {
   RevokeSnapshotAccessCommandInput,
   RevokeSnapshotAccessCommandOutput,
 } from "./commands/RevokeSnapshotAccessCommand";
-import {
+import type {
   RotateEncryptionKeyCommandInput,
   RotateEncryptionKeyCommandOutput,
 } from "./commands/RotateEncryptionKeyCommand";
-import {
+import type {
   UpdatePartnerStatusCommandInput,
   UpdatePartnerStatusCommandOutput,
 } from "./commands/UpdatePartnerStatusCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AcceptReservedNodeExchangeCommandInput
   | AddPartnerCommandInput
@@ -452,10 +594,14 @@ export type ServiceInputTypes =
   | CreateClusterSecurityGroupCommandInput
   | CreateClusterSnapshotCommandInput
   | CreateClusterSubnetGroupCommandInput
+  | CreateCustomDomainAssociationCommandInput
   | CreateEndpointAccessCommandInput
   | CreateEventSubscriptionCommandInput
   | CreateHsmClientCertificateCommandInput
   | CreateHsmConfigurationCommandInput
+  | CreateIntegrationCommandInput
+  | CreateQev2IdcApplicationCommandInput
+  | CreateRedshiftIdcApplicationCommandInput
   | CreateScheduledActionCommandInput
   | CreateSnapshotCopyGrantCommandInput
   | CreateSnapshotScheduleCommandInput
@@ -468,16 +614,22 @@ export type ServiceInputTypes =
   | DeleteClusterSecurityGroupCommandInput
   | DeleteClusterSnapshotCommandInput
   | DeleteClusterSubnetGroupCommandInput
+  | DeleteCustomDomainAssociationCommandInput
   | DeleteEndpointAccessCommandInput
   | DeleteEventSubscriptionCommandInput
   | DeleteHsmClientCertificateCommandInput
   | DeleteHsmConfigurationCommandInput
+  | DeleteIntegrationCommandInput
   | DeletePartnerCommandInput
+  | DeleteQev2IdcApplicationCommandInput
+  | DeleteRedshiftIdcApplicationCommandInput
+  | DeleteResourcePolicyCommandInput
   | DeleteScheduledActionCommandInput
   | DeleteSnapshotCopyGrantCommandInput
   | DeleteSnapshotScheduleCommandInput
   | DeleteTagsCommandInput
   | DeleteUsageLimitCommandInput
+  | DeregisterNamespaceCommandInput
   | DescribeAccountAttributesCommandInput
   | DescribeAuthenticationProfilesCommandInput
   | DescribeClusterDbRevisionsCommandInput
@@ -489,6 +641,7 @@ export type ServiceInputTypes =
   | DescribeClusterTracksCommandInput
   | DescribeClusterVersionsCommandInput
   | DescribeClustersCommandInput
+  | DescribeCustomDomainAssociationsCommandInput
   | DescribeDataSharesCommandInput
   | DescribeDataSharesForConsumerCommandInput
   | DescribeDataSharesForProducerCommandInput
@@ -500,10 +653,15 @@ export type ServiceInputTypes =
   | DescribeEventsCommandInput
   | DescribeHsmClientCertificatesCommandInput
   | DescribeHsmConfigurationsCommandInput
+  | DescribeInboundIntegrationsCommandInput
+  | DescribeIntegrationsCommandInput
   | DescribeLoggingStatusCommandInput
   | DescribeNodeConfigurationOptionsCommandInput
   | DescribeOrderableClusterOptionsCommandInput
   | DescribePartnersCommandInput
+  | DescribeQev2IdcApplicationsCommandInput
+  | DescribeRedshiftIdcApplicationsCommandInput
+  | DescribeReservedNodeExchangeStatusCommandInput
   | DescribeReservedNodeOfferingsCommandInput
   | DescribeReservedNodesCommandInput
   | DescribeResizeCommandInput
@@ -519,8 +677,14 @@ export type ServiceInputTypes =
   | DisassociateDataShareConsumerCommandInput
   | EnableLoggingCommandInput
   | EnableSnapshotCopyCommandInput
+  | FailoverPrimaryComputeCommandInput
   | GetClusterCredentialsCommandInput
+  | GetClusterCredentialsWithIAMCommandInput
+  | GetIdentityCenterAuthTokenCommandInput
+  | GetReservedNodeExchangeConfigurationOptionsCommandInput
   | GetReservedNodeExchangeOfferingsCommandInput
+  | GetResourcePolicyCommandInput
+  | ListRecommendationsCommandInput
   | ModifyAquaConfigurationCommandInput
   | ModifyAuthenticationProfileCommandInput
   | ModifyClusterCommandInput
@@ -531,15 +695,22 @@ export type ServiceInputTypes =
   | ModifyClusterSnapshotCommandInput
   | ModifyClusterSnapshotScheduleCommandInput
   | ModifyClusterSubnetGroupCommandInput
+  | ModifyCustomDomainAssociationCommandInput
   | ModifyEndpointAccessCommandInput
   | ModifyEventSubscriptionCommandInput
+  | ModifyIntegrationCommandInput
+  | ModifyLakehouseConfigurationCommandInput
+  | ModifyQev2IdcApplicationCommandInput
+  | ModifyRedshiftIdcApplicationCommandInput
   | ModifyScheduledActionCommandInput
   | ModifySnapshotCopyRetentionPeriodCommandInput
   | ModifySnapshotScheduleCommandInput
   | ModifyUsageLimitCommandInput
   | PauseClusterCommandInput
   | PurchaseReservedNodeOfferingCommandInput
+  | PutResourcePolicyCommandInput
   | RebootClusterCommandInput
+  | RegisterNamespaceCommandInput
   | RejectDataShareCommandInput
   | ResetClusterParameterGroupCommandInput
   | ResizeClusterCommandInput
@@ -552,6 +723,9 @@ export type ServiceInputTypes =
   | RotateEncryptionKeyCommandInput
   | UpdatePartnerStatusCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AcceptReservedNodeExchangeCommandOutput
   | AddPartnerCommandOutput
@@ -570,10 +744,14 @@ export type ServiceOutputTypes =
   | CreateClusterSecurityGroupCommandOutput
   | CreateClusterSnapshotCommandOutput
   | CreateClusterSubnetGroupCommandOutput
+  | CreateCustomDomainAssociationCommandOutput
   | CreateEndpointAccessCommandOutput
   | CreateEventSubscriptionCommandOutput
   | CreateHsmClientCertificateCommandOutput
   | CreateHsmConfigurationCommandOutput
+  | CreateIntegrationCommandOutput
+  | CreateQev2IdcApplicationCommandOutput
+  | CreateRedshiftIdcApplicationCommandOutput
   | CreateScheduledActionCommandOutput
   | CreateSnapshotCopyGrantCommandOutput
   | CreateSnapshotScheduleCommandOutput
@@ -586,16 +764,22 @@ export type ServiceOutputTypes =
   | DeleteClusterSecurityGroupCommandOutput
   | DeleteClusterSnapshotCommandOutput
   | DeleteClusterSubnetGroupCommandOutput
+  | DeleteCustomDomainAssociationCommandOutput
   | DeleteEndpointAccessCommandOutput
   | DeleteEventSubscriptionCommandOutput
   | DeleteHsmClientCertificateCommandOutput
   | DeleteHsmConfigurationCommandOutput
+  | DeleteIntegrationCommandOutput
   | DeletePartnerCommandOutput
+  | DeleteQev2IdcApplicationCommandOutput
+  | DeleteRedshiftIdcApplicationCommandOutput
+  | DeleteResourcePolicyCommandOutput
   | DeleteScheduledActionCommandOutput
   | DeleteSnapshotCopyGrantCommandOutput
   | DeleteSnapshotScheduleCommandOutput
   | DeleteTagsCommandOutput
   | DeleteUsageLimitCommandOutput
+  | DeregisterNamespaceCommandOutput
   | DescribeAccountAttributesCommandOutput
   | DescribeAuthenticationProfilesCommandOutput
   | DescribeClusterDbRevisionsCommandOutput
@@ -607,6 +791,7 @@ export type ServiceOutputTypes =
   | DescribeClusterTracksCommandOutput
   | DescribeClusterVersionsCommandOutput
   | DescribeClustersCommandOutput
+  | DescribeCustomDomainAssociationsCommandOutput
   | DescribeDataSharesCommandOutput
   | DescribeDataSharesForConsumerCommandOutput
   | DescribeDataSharesForProducerCommandOutput
@@ -618,10 +803,15 @@ export type ServiceOutputTypes =
   | DescribeEventsCommandOutput
   | DescribeHsmClientCertificatesCommandOutput
   | DescribeHsmConfigurationsCommandOutput
+  | DescribeInboundIntegrationsCommandOutput
+  | DescribeIntegrationsCommandOutput
   | DescribeLoggingStatusCommandOutput
   | DescribeNodeConfigurationOptionsCommandOutput
   | DescribeOrderableClusterOptionsCommandOutput
   | DescribePartnersCommandOutput
+  | DescribeQev2IdcApplicationsCommandOutput
+  | DescribeRedshiftIdcApplicationsCommandOutput
+  | DescribeReservedNodeExchangeStatusCommandOutput
   | DescribeReservedNodeOfferingsCommandOutput
   | DescribeReservedNodesCommandOutput
   | DescribeResizeCommandOutput
@@ -637,8 +827,14 @@ export type ServiceOutputTypes =
   | DisassociateDataShareConsumerCommandOutput
   | EnableLoggingCommandOutput
   | EnableSnapshotCopyCommandOutput
+  | FailoverPrimaryComputeCommandOutput
   | GetClusterCredentialsCommandOutput
+  | GetClusterCredentialsWithIAMCommandOutput
+  | GetIdentityCenterAuthTokenCommandOutput
+  | GetReservedNodeExchangeConfigurationOptionsCommandOutput
   | GetReservedNodeExchangeOfferingsCommandOutput
+  | GetResourcePolicyCommandOutput
+  | ListRecommendationsCommandOutput
   | ModifyAquaConfigurationCommandOutput
   | ModifyAuthenticationProfileCommandOutput
   | ModifyClusterCommandOutput
@@ -649,15 +845,22 @@ export type ServiceOutputTypes =
   | ModifyClusterSnapshotCommandOutput
   | ModifyClusterSnapshotScheduleCommandOutput
   | ModifyClusterSubnetGroupCommandOutput
+  | ModifyCustomDomainAssociationCommandOutput
   | ModifyEndpointAccessCommandOutput
   | ModifyEventSubscriptionCommandOutput
+  | ModifyIntegrationCommandOutput
+  | ModifyLakehouseConfigurationCommandOutput
+  | ModifyQev2IdcApplicationCommandOutput
+  | ModifyRedshiftIdcApplicationCommandOutput
   | ModifyScheduledActionCommandOutput
   | ModifySnapshotCopyRetentionPeriodCommandOutput
   | ModifySnapshotScheduleCommandOutput
   | ModifyUsageLimitCommandOutput
   | PauseClusterCommandOutput
   | PurchaseReservedNodeOfferingCommandOutput
+  | PutResourcePolicyCommandOutput
   | RebootClusterCommandOutput
+  | RegisterNamespaceCommandOutput
   | RejectDataShareCommandOutput
   | ResetClusterParameterGroupCommandOutput
   | ResizeClusterCommandOutput
@@ -670,18 +873,21 @@ export type ServiceOutputTypes =
   | RotateEncryptionKeyCommandOutput
   | UpdatePartnerStatusCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -693,7 +899,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -732,25 +938,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -763,67 +960,116 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type RedshiftClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of RedshiftClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type RedshiftClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of RedshiftClient class constructor that set the region, credentials and other options.
  */
 export interface RedshiftClientConfig extends RedshiftClientConfigType {}
 
-type RedshiftClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of RedshiftClient class. This is resolved and normalized from the {@link RedshiftClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type RedshiftClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of RedshiftClient class. This is resolved and normalized from the {@link RedshiftClientConfig | constructor configuration interface}.
  */
 export interface RedshiftClientResolvedConfig extends RedshiftClientResolvedConfigType {}
 
 /**
  * <fullname>Amazon Redshift</fullname>
- *         <p>
+ *          <p>
  *             <b>Overview</b>
- *         </p>
- *         <p>This is an interface reference for Amazon Redshift. It contains documentation for one of
+ *          </p>
+ *          <p>This is an interface reference for Amazon Redshift. It contains documentation for one of
  *             the programming or command line interfaces you can use to manage Amazon Redshift clusters.
  *             Note that Amazon Redshift is asynchronous, which means that some interfaces may require
  *             techniques, such as polling or asynchronous callback handlers, to determine when a
@@ -832,15 +1078,15 @@ export interface RedshiftClientResolvedConfig extends RedshiftClientResolvedConf
  *             maintenance window. For a summary of the Amazon Redshift cluster management interfaces, go to
  *                 <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/using-aws-sdk.html">Using the
  *                 Amazon Redshift Management Interfaces</a>.</p>
- *         <p>Amazon Redshift manages all the work of setting up, operating, and scaling a data
+ *          <p>Amazon Redshift manages all the work of setting up, operating, and scaling a data
  *             warehouse: provisioning capacity, monitoring and backing up the cluster, and applying
  *             patches and upgrades to the Amazon Redshift engine. You can focus on using your data to
  *             acquire new insights for your business and customers.</p>
- *         <p>If you are a first-time user of Amazon Redshift, we recommend that you begin by reading
+ *          <p>If you are a first-time user of Amazon Redshift, we recommend that you begin by reading
  *             the <a href="https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html">Amazon Redshift Getting Started Guide</a>.</p>
- *
- *         <p>If you are a database developer, the <a href="https://docs.aws.amazon.com/redshift/latest/dg/welcome.html">Amazon Redshift Database Developer Guide</a> explains how to design,
+ *          <p>If you are a database developer, the <a href="https://docs.aws.amazon.com/redshift/latest/dg/welcome.html">Amazon Redshift Database Developer Guide</a> explains how to design,
  *             build, query, and maintain the databases that make up your data warehouse. </p>
+ * @public
  */
 export class RedshiftClient extends __Client<
   __HttpHandlerOptions,
@@ -853,22 +1099,36 @@ export class RedshiftClient extends __Client<
    */
   readonly config: RedshiftClientResolvedConfig;
 
-  constructor(configuration: RedshiftClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<RedshiftClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultRedshiftHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: RedshiftClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,99 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CodestarNotificationsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CodestarNotificationsClient";
-import { ListTargetsRequest, ListTargetsResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListTargetsCommand,
-  serializeAws_restJson1ListTargetsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTargetsRequest, ListTargetsResult } from "../models/models_0";
+import { ListTargets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTargetsCommand}.
+ */
 export interface ListTargetsCommandInput extends ListTargetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTargetsCommand}.
+ */
 export interface ListTargetsCommandOutput extends ListTargetsResult, __MetadataBearer {}
 
 /**
- * <p>Returns a list of the notification rule targets for an AWS account.</p>
+ * <p>Returns a list of the notification rule targets for an Amazon Web Services account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodestarNotificationsClient, ListTargetsCommand } from "@aws-sdk/client-codestar-notifications"; // ES Modules import
  * // const { CodestarNotificationsClient, ListTargetsCommand } = require("@aws-sdk/client-codestar-notifications"); // CommonJS import
+ * // import type { CodestarNotificationsClientConfig } from "@aws-sdk/client-codestar-notifications";
+ * const config = {}; // type is CodestarNotificationsClientConfig
  * const client = new CodestarNotificationsClient(config);
+ * const input = { // ListTargetsRequest
+ *   Filters: [ // ListTargetsFilters
+ *     { // ListTargetsFilter
+ *       Name: "TARGET_TYPE" || "TARGET_ADDRESS" || "TARGET_STATUS", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListTargetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTargetsResult
+ * //   Targets: [ // TargetsBatch
+ * //     { // TargetSummary
+ * //       TargetAddress: "STRING_VALUE",
+ * //       TargetType: "STRING_VALUE",
+ * //       TargetStatus: "PENDING" || "ACTIVE" || "UNREACHABLE" || "INACTIVE" || "DEACTIVATED",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTargetsCommandInput - {@link ListTargetsCommandInput}
+ * @returns {@link ListTargetsCommandOutput}
  * @see {@link ListTargetsCommandInput} for command's `input` shape.
  * @see {@link ListTargetsCommandOutput} for command's `response` shape.
- * @see {@link CodestarNotificationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodestarNotificationsClientResolvedConfig | config} for CodestarNotificationsClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The value for the enumeration token used in the request to return the next batch of the results is not valid. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link CodestarNotificationsServiceException}
+ * <p>Base exception class for all service exceptions from CodestarNotifications service.</p>
+ *
+ *
+ * @public
  */
-export class ListTargetsCommand extends $Command<
-  ListTargetsCommandInput,
-  ListTargetsCommandOutput,
-  CodestarNotificationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTargetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodestarNotificationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTargetsCommandInput, ListTargetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodestarNotificationsClient";
-    const commandName = "ListTargetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTargetsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTargetsResult.filterSensitiveLog,
+export class ListTargetsCommand extends command<ListTargetsCommandInput, ListTargetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTargets",
+  ListTargets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTargetsRequest;
+      output: ListTargetsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTargetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTargetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTargetsCommandOutput> {
-    return deserializeAws_restJson1ListTargetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTargetsCommandInput;
+      output: ListTargetsCommandOutput;
+    };
+  };
 }

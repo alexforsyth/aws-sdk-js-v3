@@ -1,98 +1,140 @@
-import {
-  BatchWriteItemCommand as __BatchWriteItemCommand,
-  BatchWriteItemCommandInput as __BatchWriteItemCommandInput,
-  BatchWriteItemCommandOutput as __BatchWriteItemCommandOutput,
-  DeleteRequest,
-  ItemCollectionMetrics,
-  PutRequest,
-  WriteRequest,
-} from "@aws-sdk/client-dynamodb";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
-import { marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
+import { ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { BatchWriteItemCommand as __BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
 
-export type BatchWriteCommandInput = Omit<__BatchWriteItemCommandInput, "RequestItems"> & {
-  RequestItems:
-    | {
-        [key: string]: (Omit<WriteRequest, "PutRequest" | "DeleteRequest"> & {
-          PutRequest?: Omit<PutRequest, "Item"> & {
-            Item: { [key: string]: NativeAttributeValue } | undefined;
-          };
-          DeleteRequest?: Omit<DeleteRequest, "Key"> & {
-            Key: { [key: string]: NativeAttributeValue } | undefined;
-          };
-        })[];
-      }
-    | undefined;
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type BatchWritePutRequest = Omit<PutRequest, "Item"> & {
+  Item: Record<string, NativeAttributeValue> | undefined;
 };
 
-export type BatchWriteCommandOutput = Omit<
-  __BatchWriteItemCommandOutput,
-  "UnprocessedItems" | "ItemCollectionMetrics"
-> & {
-  UnprocessedItems?: {
-    [key: string]: (Omit<WriteRequest, "PutRequest" | "DeleteRequest"> & {
-      PutRequest?: Omit<PutRequest, "Item"> & {
-        Item: { [key: string]: NativeAttributeValue } | undefined;
-      };
-      DeleteRequest?: Omit<DeleteRequest, "Key"> & {
-        Key: { [key: string]: NativeAttributeValue } | undefined;
-      };
-    })[];
-  };
-  ItemCollectionMetrics?: {
-    [key: string]: (Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
-      ItemCollectionKey?: { [key: string]: NativeAttributeValue };
-    })[];
-  };
+/**
+ * @public
+ */
+export type BatchWriteDeleteRequest = Omit<DeleteRequest, "Key"> & {
+  Key: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchWriteWriteRequest = Omit<WriteRequest, "PutRequest" | "DeleteRequest"> & {
+  PutRequest?: BatchWritePutRequest | undefined;
+  DeleteRequest?: BatchWriteDeleteRequest | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchWriteItemCollectionMetrics = Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
+  ItemCollectionKey?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchWriteCommandInput = Omit<__BatchWriteItemCommandInput, "RequestItems"> & {
+  RequestItems: Record<
+    string,
+    (
+      BatchWriteWriteRequest
+    )[]
+  > | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchWriteCommandOutput = Omit<__BatchWriteItemCommandOutput, "UnprocessedItems" | "ItemCollectionMetrics"> & {
+  UnprocessedItems?: Record<
+    string,
+    (
+      BatchWriteWriteRequest
+    )[]
+  > | undefined;
+  ItemCollectionMetrics?: Record<
+    string,
+    (
+      BatchWriteItemCollectionMetrics
+    )[]
+  > | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * BatchWriteItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * BatchWriteItemCommand operation from {@link @aws-sdk/client-dynamodb#BatchWriteItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
-export class BatchWriteCommand extends $Command<
+export class BatchWriteCommand extends DynamoDBDocumentClientCommand<
   BatchWriteCommandInput,
   BatchWriteCommandOutput,
+  __BatchWriteItemCommandInput,
+  __BatchWriteItemCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  private readonly inputKeyNodes = [
-    {
-      key: "RequestItems",
-      children: {
-        children: [
-          { key: "PutRequest", children: [{ key: "Item" }] },
-          { key: "DeleteRequest", children: [{ key: "Key" }] },
-        ],
+  protected readonly inputKeyNodes = {
+    RequestItems: {
+      "*": {
+        "*": {
+          PutRequest: {
+            Item: ALL_VALUES, // map with AttributeValue
+          },
+          DeleteRequest: {
+            Key: ALL_VALUES, // map with AttributeValue
+          },
+        },
       },
     },
-  ];
-  private readonly outputKeyNodes = [
-    {
-      key: "UnprocessedItems",
-      children: {
-        children: [
-          { key: "PutRequest", children: [{ key: "Item" }] },
-          { key: "DeleteRequest", children: [{ key: "Key" }] },
-        ],
+  };
+  protected readonly outputKeyNodes = {
+    UnprocessedItems: {
+      "*": {
+        "*": {
+          PutRequest: {
+            Item: ALL_VALUES, // map with AttributeValue
+          },
+          DeleteRequest: {
+            Key: ALL_VALUES, // map with AttributeValue
+          },
+        },
       },
     },
-    {
-      key: "ItemCollectionMetrics",
-      children: {
-        children: [{ key: "ItemCollectionKey" }],
+    ItemCollectionMetrics: {
+      "*": {
+        "*": {
+          ItemCollectionKey: ALL_VALUES, // map with AttributeValue
+        },
       },
     },
-  ];
+  };
+
+  protected readonly clientCommand: __BatchWriteItemCommand;
+  public readonly middlewareStack: MiddlewareStack<BatchWriteCommandInput | __BatchWriteItemCommandInput,
+  BatchWriteCommandOutput | __BatchWriteItemCommandOutput>;
 
   constructor(readonly input: BatchWriteCommandInput) {
     super();
+    this.clientCommand = new __BatchWriteItemCommand(this.input as any);
+    this.middlewareStack = this.clientCommand.middlewareStack;
   }
 
   /**
@@ -103,16 +145,22 @@ export class BatchWriteCommand extends $Command<
     configuration: DynamoDBDocumentClientResolvedConfig,
     options?: __HttpHandlerOptions
   ): Handler<BatchWriteCommandInput, BatchWriteCommandOutput> {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
-    const command = new __BatchWriteItemCommand(marshallInput(this.input, this.inputKeyNodes, marshallOptions));
-    const handler = command.resolveMiddleware(clientStack, configuration, options);
+    this.addMarshallingMiddleware(configuration);
+    const stack = clientStack.concat(this.middlewareStack as typeof clientStack);
+    const handler = this.clientCommand.resolveMiddleware(stack, configuration, options);
 
-    return async () => {
-      const data = await handler(command);
-      return {
-        ...data,
-        output: unmarshallOutput(data.output, this.outputKeyNodes, unmarshallOptions),
-      };
-    };
+    return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  BatchWriteItemCommandInput as __BatchWriteItemCommandInput,
+  BatchWriteItemCommandOutput as __BatchWriteItemCommandOutput,
+  DeleteRequest,
+  ItemCollectionMetrics,
+  PutRequest,
+  WriteRequest,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

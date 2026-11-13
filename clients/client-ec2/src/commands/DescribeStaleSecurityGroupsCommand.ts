@@ -1,98 +1,141 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeStaleSecurityGroupsRequest, DescribeStaleSecurityGroupsResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeStaleSecurityGroupsCommand,
-  serializeAws_ec2DescribeStaleSecurityGroupsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStaleSecurityGroupsRequest, DescribeStaleSecurityGroupsResult } from "../models/models_5";
+import { DescribeStaleSecurityGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStaleSecurityGroupsCommand}.
+ */
 export interface DescribeStaleSecurityGroupsCommandInput extends DescribeStaleSecurityGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStaleSecurityGroupsCommand}.
+ */
 export interface DescribeStaleSecurityGroupsCommandOutput extends DescribeStaleSecurityGroupsResult, __MetadataBearer {}
 
 /**
- * <p>[VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.</p>
+ * <p>Describes the stale security group rules for security groups referenced across a VPC
+ *             peering connection, transit gateway connection, or with a security group VPC
+ *             association. Rules are stale when they reference a deleted security group. Rules can
+ *             also be stale if they reference a security group in a peer VPC for which the VPC peering
+ *             connection has been deleted, across a transit gateway where the transit gateway has been
+ *             deleted (or <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security">the transit
+ *                 gateway security group referencing feature</a> has been disabled), or if a
+ *             security group VPC association has been disassociated.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeStaleSecurityGroupsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeStaleSecurityGroupsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeStaleSecurityGroupsRequest
+ *   DryRun: true || false,
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   VpcId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeStaleSecurityGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStaleSecurityGroupsResult
+ * //   NextToken: "STRING_VALUE",
+ * //   StaleSecurityGroupSet: [ // StaleSecurityGroupSet
+ * //     { // StaleSecurityGroup
+ * //       Description: "STRING_VALUE",
+ * //       GroupId: "STRING_VALUE",
+ * //       GroupName: "STRING_VALUE",
+ * //       StaleIpPermissions: [ // StaleIpPermissionSet
+ * //         { // StaleIpPermission
+ * //           FromPort: Number("int"),
+ * //           IpProtocol: "STRING_VALUE",
+ * //           IpRanges: [ // IpRanges
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           PrefixListIds: [ // PrefixListIdSet
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ToPort: Number("int"),
+ * //           UserIdGroupPairs: [ // UserIdGroupPairSet
+ * //             { // UserIdGroupPair
+ * //               Description: "STRING_VALUE",
+ * //               UserId: "STRING_VALUE",
+ * //               GroupName: "STRING_VALUE",
+ * //               GroupId: "STRING_VALUE",
+ * //               VpcId: "STRING_VALUE",
+ * //               VpcPeeringConnectionId: "STRING_VALUE",
+ * //               PeeringStatus: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       StaleIpPermissionsEgress: [
+ * //         {
+ * //           FromPort: Number("int"),
+ * //           IpProtocol: "STRING_VALUE",
+ * //           IpRanges: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           PrefixListIds: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ToPort: Number("int"),
+ * //           UserIdGroupPairs: [
+ * //             {
+ * //               Description: "STRING_VALUE",
+ * //               UserId: "STRING_VALUE",
+ * //               GroupName: "STRING_VALUE",
+ * //               GroupId: "STRING_VALUE",
+ * //               VpcId: "STRING_VALUE",
+ * //               VpcPeeringConnectionId: "STRING_VALUE",
+ * //               PeeringStatus: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       VpcId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeStaleSecurityGroupsCommandInput - {@link DescribeStaleSecurityGroupsCommandInput}
+ * @returns {@link DescribeStaleSecurityGroupsCommandOutput}
  * @see {@link DescribeStaleSecurityGroupsCommandInput} for command's `input` shape.
  * @see {@link DescribeStaleSecurityGroupsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStaleSecurityGroupsCommand extends $Command<
-  DescribeStaleSecurityGroupsCommandInput,
-  DescribeStaleSecurityGroupsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStaleSecurityGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStaleSecurityGroupsCommandInput, DescribeStaleSecurityGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeStaleSecurityGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStaleSecurityGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStaleSecurityGroupsResult.filterSensitiveLog,
+export class DescribeStaleSecurityGroupsCommand extends command<DescribeStaleSecurityGroupsCommandInput, DescribeStaleSecurityGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStaleSecurityGroups",
+  DescribeStaleSecurityGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStaleSecurityGroupsRequest;
+      output: DescribeStaleSecurityGroupsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStaleSecurityGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeStaleSecurityGroupsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeStaleSecurityGroupsCommandOutput> {
-    return deserializeAws_ec2DescribeStaleSecurityGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStaleSecurityGroupsCommandInput;
+      output: DescribeStaleSecurityGroupsCommandOutput;
+    };
+  };
 }

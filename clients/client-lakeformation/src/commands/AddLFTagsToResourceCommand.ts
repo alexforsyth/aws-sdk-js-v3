@@ -1,95 +1,192 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { AddLFTagsToResourceRequest, AddLFTagsToResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1AddLFTagsToResourceCommand,
-  serializeAws_json1_1AddLFTagsToResourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddLFTagsToResourceRequest, AddLFTagsToResourceResponse } from "../models/models_0";
+import { AddLFTagsToResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddLFTagsToResourceCommand}.
+ */
 export interface AddLFTagsToResourceCommandInput extends AddLFTagsToResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddLFTagsToResourceCommand}.
+ */
 export interface AddLFTagsToResourceCommandOutput extends AddLFTagsToResourceResponse, __MetadataBearer {}
 
 /**
- * <p>Attaches one or more tags to an existing resource.</p>
+ * <p>Attaches one or more LF-tags to an existing resource.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LakeFormationClient, AddLFTagsToResourceCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, AddLFTagsToResourceCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // AddLFTagsToResourceRequest
+ *   CatalogId: "STRING_VALUE",
+ *   Resource: { // Resource
+ *     AnyResource: { // AnyResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceType: "TABLE", // required
+ *     },
+ *     Catalog: { // CatalogResource
+ *       Id: "STRING_VALUE",
+ *     },
+ *     Database: { // DatabaseResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     Table: { // TableResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE",
+ *       TableWildcard: {},
+ *     },
+ *     TableWithColumns: { // TableWithColumnsResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE", // required
+ *       ColumnNames: [ // ColumnNames
+ *         "STRING_VALUE",
+ *       ],
+ *       ColumnWildcard: { // ColumnWildcard
+ *         ExcludedColumnNames: [
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     DataLocation: { // DataLocationResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceArn: "STRING_VALUE", // required
+ *     },
+ *     DataCellsFilter: { // DataCellsFilterResource
+ *       TableCatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE",
+ *       TableName: "STRING_VALUE",
+ *       Name: "STRING_VALUE",
+ *     },
+ *     LFTag: { // LFTagKeyResource
+ *       CatalogId: "STRING_VALUE",
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // TagValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *     LFTagPolicy: { // LFTagPolicyResource
+ *       CatalogId: "STRING_VALUE",
+ *       ResourceType: "DATABASE" || "TABLE", // required
+ *       Expression: [ // Expression
+ *         { // LFTag
+ *           TagKey: "STRING_VALUE", // required
+ *           TagValues: [ // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       ExpressionName: "STRING_VALUE",
+ *     },
+ *     LFTagExpression: { // LFTagExpressionResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     RLSPolicy: { // RLSPolicyResource
+ *       CatalogId: "STRING_VALUE",
+ *       Name: "STRING_VALUE", // required
+ *     },
+ *     UserDefinedFunction: { // UserDefinedFunctionResource
+ *       CatalogId: "STRING_VALUE",
+ *       DatabaseName: "STRING_VALUE", // required
+ *       Name: "STRING_VALUE",
+ *       UserDefinedFunctionWildcard: {},
+ *     },
+ *   },
+ *   LFTags: [ // LFTagsList // required
+ *     { // LFTagPair
+ *       CatalogId: "STRING_VALUE",
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new AddLFTagsToResourceCommand(input);
  * const response = await client.send(command);
+ * // { // AddLFTagsToResourceResponse
+ * //   Failures: [ // LFTagErrors
+ * //     { // LFTagError
+ * //       LFTag: { // LFTagPair
+ * //         CatalogId: "STRING_VALUE",
+ * //         TagKey: "STRING_VALUE", // required
+ * //         TagValues: [ // TagValueList // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Error: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AddLFTagsToResourceCommandInput - {@link AddLFTagsToResourceCommandInput}
+ * @returns {@link AddLFTagsToResourceCommandOutput}
  * @see {@link AddLFTagsToResourceCommandInput} for command's `input` shape.
  * @see {@link AddLFTagsToResourceCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class AddLFTagsToResourceCommand extends $Command<
-  AddLFTagsToResourceCommandInput,
-  AddLFTagsToResourceCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddLFTagsToResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddLFTagsToResourceCommandInput, AddLFTagsToResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "AddLFTagsToResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddLFTagsToResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddLFTagsToResourceResponse.filterSensitiveLog,
+export class AddLFTagsToResourceCommand extends command<AddLFTagsToResourceCommandInput, AddLFTagsToResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddLFTagsToResource",
+  AddLFTagsToResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddLFTagsToResourceRequest;
+      output: AddLFTagsToResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddLFTagsToResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AddLFTagsToResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddLFTagsToResourceCommandOutput> {
-    return deserializeAws_json1_1AddLFTagsToResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddLFTagsToResourceCommandInput;
+      output: AddLFTagsToResourceCommandOutput;
+    };
+  };
 }

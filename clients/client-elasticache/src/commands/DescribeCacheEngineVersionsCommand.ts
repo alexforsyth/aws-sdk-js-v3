@@ -1,99 +1,262 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElastiCacheClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElastiCacheClient";
-import { CacheEngineVersionMessage, DescribeCacheEngineVersionsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeCacheEngineVersionsCommand,
-  serializeAws_queryDescribeCacheEngineVersionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CacheEngineVersionMessage, DescribeCacheEngineVersionsMessage } from "../models/models_0";
+import { DescribeCacheEngineVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeCacheEngineVersionsCommand}.
+ */
 export interface DescribeCacheEngineVersionsCommandInput extends DescribeCacheEngineVersionsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeCacheEngineVersionsCommand}.
+ */
 export interface DescribeCacheEngineVersionsCommandOutput extends CacheEngineVersionMessage, __MetadataBearer {}
 
 /**
- * <p>Returns a list of the available cache
- *             engines and their versions.</p>
+ * <p>Returns a list of the available cache engines and their versions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElastiCacheClient, DescribeCacheEngineVersionsCommand } from "@aws-sdk/client-elasticache"; // ES Modules import
  * // const { ElastiCacheClient, DescribeCacheEngineVersionsCommand } = require("@aws-sdk/client-elasticache"); // CommonJS import
+ * // import type { ElastiCacheClientConfig } from "@aws-sdk/client-elasticache";
+ * const config = {}; // type is ElastiCacheClientConfig
  * const client = new ElastiCacheClient(config);
+ * const input = { // DescribeCacheEngineVersionsMessage
+ *   Engine: "STRING_VALUE",
+ *   EngineVersion: "STRING_VALUE",
+ *   CacheParameterGroupFamily: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ *   DefaultOnly: true || false,
+ * };
  * const command = new DescribeCacheEngineVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // CacheEngineVersionMessage
+ * //   Marker: "STRING_VALUE",
+ * //   CacheEngineVersions: [ // CacheEngineVersionList
+ * //     { // CacheEngineVersion
+ * //       Engine: "STRING_VALUE",
+ * //       EngineVersion: "STRING_VALUE",
+ * //       CacheParameterGroupFamily: "STRING_VALUE",
+ * //       CacheEngineDescription: "STRING_VALUE",
+ * //       CacheEngineVersionDescription: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeCacheEngineVersionsCommandInput - {@link DescribeCacheEngineVersionsCommandInput}
+ * @returns {@link DescribeCacheEngineVersionsCommandOutput}
  * @see {@link DescribeCacheEngineVersionsCommandInput} for command's `input` shape.
  * @see {@link DescribeCacheEngineVersionsCommandOutput} for command's `response` shape.
- * @see {@link ElastiCacheClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElastiCacheClientResolvedConfig | config} for ElastiCacheClient's `config` shape.
  *
+ * @throws {@link ElastiCacheServiceException}
+ * <p>Base exception class for all service exceptions from ElastiCache service.</p>
+ *
+ *
+ * @example DescribeCacheEngineVersions
+ * ```javascript
+ * // Lists the details for up to 25 Memcached and Redis cache engine versions.
+ * const input = { /* empty *\/ };
+ * const command = new DescribeCacheEngineVersionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   CacheEngineVersions: [
+ *     {
+ *       CacheEngineDescription: "memcached",
+ *       CacheEngineVersionDescription: "memcached version 1.4.14",
+ *       CacheParameterGroupFamily: "memcached1.4",
+ *       Engine: "memcached",
+ *       EngineVersion: "1.4.14"
+ *     },
+ *     {
+ *       CacheEngineDescription: "memcached",
+ *       CacheEngineVersionDescription: "memcached version 1.4.24",
+ *       CacheParameterGroupFamily: "memcached1.4",
+ *       Engine: "memcached",
+ *       EngineVersion: "1.4.24"
+ *     },
+ *     {
+ *       CacheEngineDescription: "memcached",
+ *       CacheEngineVersionDescription: "memcached version 1.4.33",
+ *       CacheParameterGroupFamily: "memcached1.4",
+ *       Engine: "memcached",
+ *       EngineVersion: "1.4.33"
+ *     },
+ *     {
+ *       CacheEngineDescription: "memcached",
+ *       CacheEngineVersionDescription: "memcached version 1.4.5",
+ *       CacheParameterGroupFamily: "memcached1.4",
+ *       Engine: "memcached",
+ *       EngineVersion: "1.4.5"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.6.13",
+ *       CacheParameterGroupFamily: "redis2.6",
+ *       Engine: "redis",
+ *       EngineVersion: "2.6.13"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.19",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.19"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.21",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.21"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.22 R5",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.22"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.23 R4",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.23"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.24 R3",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.24"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.6",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.6"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 3.2.4",
+ *       CacheParameterGroupFamily: "redis3.2",
+ *       Engine: "redis",
+ *       EngineVersion: "3.2.4"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @example DescribeCacheEngineVersions
+ * ```javascript
+ * // Lists the details for up to 50 Redis cache engine versions.
+ * const input = {
+ *   DefaultOnly: false,
+ *   Engine: "redis",
+ *   MaxRecords: 50
+ * };
+ * const command = new DescribeCacheEngineVersionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   CacheEngineVersions: [
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.6.13",
+ *       CacheParameterGroupFamily: "redis2.6",
+ *       Engine: "redis",
+ *       EngineVersion: "2.6.13"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.19",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.19"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.21",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.21"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.22 R5",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.22"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.23 R4",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.23"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.24 R3",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.24"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 2.8.6",
+ *       CacheParameterGroupFamily: "redis2.8",
+ *       Engine: "redis",
+ *       EngineVersion: "2.8.6"
+ *     },
+ *     {
+ *       CacheEngineDescription: "Redis",
+ *       CacheEngineVersionDescription: "redis version 3.2.4",
+ *       CacheParameterGroupFamily: "redis3.2",
+ *       Engine: "redis",
+ *       EngineVersion: "3.2.4"
+ *     }
+ *   ],
+ *   Marker: ""
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeCacheEngineVersionsCommand extends $Command<
-  DescribeCacheEngineVersionsCommandInput,
-  DescribeCacheEngineVersionsCommandOutput,
-  ElastiCacheClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeCacheEngineVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElastiCacheClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeCacheEngineVersionsCommandInput, DescribeCacheEngineVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElastiCacheClient";
-    const commandName = "DescribeCacheEngineVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeCacheEngineVersionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CacheEngineVersionMessage.filterSensitiveLog,
+export class DescribeCacheEngineVersionsCommand extends command<DescribeCacheEngineVersionsCommandInput, DescribeCacheEngineVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeCacheEngineVersions",
+  DescribeCacheEngineVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeCacheEngineVersionsMessage;
+      output: CacheEngineVersionMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeCacheEngineVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeCacheEngineVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeCacheEngineVersionsCommandOutput> {
-    return deserializeAws_queryDescribeCacheEngineVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeCacheEngineVersionsCommandInput;
+      output: DescribeCacheEngineVersionsCommandOutput;
+    };
+  };
 }

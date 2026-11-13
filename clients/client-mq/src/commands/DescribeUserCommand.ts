@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1DescribeUserCommand,
-  serializeAws_restJson1DescribeUserCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserRequest, DescribeUserResponse } from "../models/models_0";
+import { DescribeUser$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandInput extends DescribeUserRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserCommand}.
+ */
 export interface DescribeUserCommandOutput extends DescribeUserResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface DescribeUserCommandOutput extends DescribeUserResponse, __Metad
  * ```javascript
  * import { MqClient, DescribeUserCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, DescribeUserCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // DescribeUserRequest
+ *   BrokerId: "STRING_VALUE", // required
+ *   Username: "STRING_VALUE", // required
+ * };
  * const command = new DescribeUserCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserResponse
+ * //   BrokerId: "STRING_VALUE",
+ * //   ConsoleAccess: true || false,
+ * //   Groups: [ // __listOf__string
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Pending: { // UserPendingChanges
+ * //     ConsoleAccess: true || false,
+ * //     Groups: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     PendingChange: "CREATE" || "UPDATE" || "DELETE", // required
+ * //   },
+ * //   Username: "STRING_VALUE",
+ * //   ReplicationUser: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserCommandInput - {@link DescribeUserCommandInput}
+ * @returns {@link DescribeUserCommandOutput}
  * @see {@link DescribeUserCommandInput} for command's `input` shape.
  * @see {@link DescribeUserCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserCommand extends $Command<
-  DescribeUserCommandInput,
-  DescribeUserCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserCommandInput, DescribeUserCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "DescribeUserCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserResponse.filterSensitiveLog,
+export class DescribeUserCommand extends command<DescribeUserCommandInput, DescribeUserCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUser",
+  DescribeUser$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserRequest;
+      output: DescribeUserResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeUserCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserCommandOutput> {
-    return deserializeAws_restJson1DescribeUserCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserCommandInput;
+      output: DescribeUserCommandOutput;
+    };
+  };
 }

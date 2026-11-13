@@ -1,0 +1,118 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartImportTaskInput, StartImportTaskOutput } from "../models/models_0";
+import { StartImportTask$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartImportTaskCommand}.
+ */
+export interface StartImportTaskCommandInput extends StartImportTaskInput {}
+/**
+ * @public
+ *
+ * The output of {@link StartImportTaskCommand}.
+ */
+export interface StartImportTaskCommandOutput extends StartImportTaskOutput, __MetadataBearer {}
+
+/**
+ * <p>Import data into existing Neptune Analytics graph from Amazon Simple Storage Service (S3). The graph needs to be empty and in the AVAILABLE state.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NeptuneGraphClient, StartImportTaskCommand } from "@aws-sdk/client-neptune-graph"; // ES Modules import
+ * // const { NeptuneGraphClient, StartImportTaskCommand } = require("@aws-sdk/client-neptune-graph"); // CommonJS import
+ * // import type { NeptuneGraphClientConfig } from "@aws-sdk/client-neptune-graph";
+ * const config = {}; // type is NeptuneGraphClientConfig
+ * const client = new NeptuneGraphClient(config);
+ * const input = { // StartImportTaskInput
+ *   importOptions: { // ImportOptions Union: only one key present
+ *     neptune: { // NeptuneImportOptions
+ *       s3ExportPath: "STRING_VALUE", // required
+ *       s3ExportKmsKeyId: "STRING_VALUE", // required
+ *       preserveDefaultVertexLabels: true || false,
+ *       preserveEdgeIds: true || false,
+ *     },
+ *   },
+ *   failOnError: true || false,
+ *   source: "STRING_VALUE", // required
+ *   format: "CSV" || "OPEN_CYPHER" || "PARQUET" || "NTRIPLES",
+ *   parquetType: "COLUMNAR",
+ *   blankNodeHandling: "convertToIri",
+ *   graphIdentifier: "STRING_VALUE", // required
+ *   roleArn: "STRING_VALUE", // required
+ * };
+ * const command = new StartImportTaskCommand(input);
+ * const response = await client.send(command);
+ * // { // StartImportTaskOutput
+ * //   graphId: "STRING_VALUE",
+ * //   taskId: "STRING_VALUE", // required
+ * //   source: "STRING_VALUE", // required
+ * //   format: "CSV" || "OPEN_CYPHER" || "PARQUET" || "NTRIPLES",
+ * //   parquetType: "COLUMNAR",
+ * //   roleArn: "STRING_VALUE", // required
+ * //   status: "INITIALIZING" || "EXPORTING" || "ANALYZING_DATA" || "IMPORTING" || "REPROVISIONING" || "ROLLING_BACK" || "SUCCEEDED" || "FAILED" || "CANCELLING" || "CANCELLED" || "DELETED", // required
+ * //   importOptions: { // ImportOptions Union: only one key present
+ * //     neptune: { // NeptuneImportOptions
+ * //       s3ExportPath: "STRING_VALUE", // required
+ * //       s3ExportKmsKeyId: "STRING_VALUE", // required
+ * //       preserveDefaultVertexLabels: true || false,
+ * //       preserveEdgeIds: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param StartImportTaskCommandInput - {@link StartImportTaskCommandInput}
+ * @returns {@link StartImportTaskCommandOutput}
+ * @see {@link StartImportTaskCommandInput} for command's `input` shape.
+ * @see {@link StartImportTaskCommandOutput} for command's `response` shape.
+ * @see {@link NeptuneGraphClientResolvedConfig | config} for NeptuneGraphClient's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Raised when a conflict is encountered.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>A failure occurred on the server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource could not be located.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The exception was interrupted by throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A resource could not be validated.</p>
+ *
+ * @throws {@link NeptuneGraphServiceException}
+ * <p>Base exception class for all service exceptions from NeptuneGraph service.</p>
+ *
+ *
+ * @public
+ */
+export class StartImportTaskCommand extends command<StartImportTaskCommandInput, StartImportTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartImportTask",
+  StartImportTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartImportTaskInput;
+      output: StartImportTaskOutput;
+    };
+    sdk: {
+      input: StartImportTaskCommandInput;
+      output: StartImportTaskCommandOutput;
+    };
+  };
+}

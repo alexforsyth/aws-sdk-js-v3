@@ -1,0 +1,106 @@
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { PostUnionWithJsonNameInput, PostUnionWithJsonNameOutput } from "../models/models_0";
+import { de_PostUnionWithJsonNameCommand, se_PostUnionWithJsonNameCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PostUnionWithJsonNameCommand}.
+ */
+export interface PostUnionWithJsonNameCommandInput extends PostUnionWithJsonNameInput {}
+/**
+ * @public
+ *
+ * The output of {@link PostUnionWithJsonNameCommand}.
+ */
+export interface PostUnionWithJsonNameCommandOutput extends PostUnionWithJsonNameOutput, __MetadataBearer {}
+
+/**
+ * This operation defines a union that uses jsonName on some members.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, PostUnionWithJsonNameCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
+ * // const { RestJsonProtocolClient, PostUnionWithJsonNameCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // PostUnionWithJsonNameInput
+ *   value: { // UnionWithJsonName Union: only one key present
+ *     foo: "STRING_VALUE",
+ *     bar: "STRING_VALUE",
+ *     baz: "STRING_VALUE",
+ *   },
+ * };
+ * const command = new PostUnionWithJsonNameCommand(input);
+ * const response = await client.send(command);
+ * // { // PostUnionWithJsonNameOutput
+ * //   value: { // UnionWithJsonName Union: only one key present
+ * //     foo: "STRING_VALUE",
+ * //     bar: "STRING_VALUE",
+ * //     baz: "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param PostUnionWithJsonNameCommandInput - {@link PostUnionWithJsonNameCommandInput}
+ * @returns {@link PostUnionWithJsonNameCommandOutput}
+ * @see {@link PostUnionWithJsonNameCommandInput} for command's `input` shape.
+ * @see {@link PostUnionWithJsonNameCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class PostUnionWithJsonNameCommand extends $Command
+  .classBuilder<
+    PostUnionWithJsonNameCommandInput,
+    PostUnionWithJsonNameCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "PostUnionWithJsonName", {})
+  .n("RestJsonProtocolClient", "PostUnionWithJsonNameCommand")
+  .f(void 0, void 0)
+  .ser(se_PostUnionWithJsonNameCommand)
+  .de(de_PostUnionWithJsonNameCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PostUnionWithJsonNameInput;
+      output: PostUnionWithJsonNameOutput;
+    };
+    sdk: {
+      input: PostUnionWithJsonNameCommandInput;
+      output: PostUnionWithJsonNameCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,162 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetOrganizationRecommendationRequest, GetOrganizationRecommendationResponse } from "../models/models_0";
+import { GetOrganizationRecommendation$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetOrganizationRecommendationCommand}.
+ */
+export interface GetOrganizationRecommendationCommandInput extends GetOrganizationRecommendationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetOrganizationRecommendationCommand}.
+ */
+export interface GetOrganizationRecommendationCommandOutput extends GetOrganizationRecommendationResponse, __MetadataBearer {}
+
+/**
+ * <p>Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { TrustedAdvisorClient, GetOrganizationRecommendationCommand } from "@aws-sdk/client-trustedadvisor"; // ES Modules import
+ * // const { TrustedAdvisorClient, GetOrganizationRecommendationCommand } = require("@aws-sdk/client-trustedadvisor"); // CommonJS import
+ * // import type { TrustedAdvisorClientConfig } from "@aws-sdk/client-trustedadvisor";
+ * const config = {}; // type is TrustedAdvisorClientConfig
+ * const client = new TrustedAdvisorClient(config);
+ * const input = { // GetOrganizationRecommendationRequest
+ *   organizationRecommendationIdentifier: "STRING_VALUE", // required
+ * };
+ * const command = new GetOrganizationRecommendationCommand(input);
+ * const response = await client.send(command);
+ * // { // GetOrganizationRecommendationResponse
+ * //   organizationRecommendation: { // OrganizationRecommendation
+ * //     id: "STRING_VALUE", // required
+ * //     type: "standard" || "priority", // required
+ * //     checkArn: "STRING_VALUE",
+ * //     status: "ok" || "warning" || "error", // required
+ * //     lifecycleStage: "in_progress" || "pending_response" || "dismissed" || "resolved",
+ * //     pillars: [ // RecommendationPillarList // required
+ * //       "cost_optimizing" || "performance" || "security" || "service_limits" || "fault_tolerance" || "operational_excellence",
+ * //     ],
+ * //     source: "aws_config" || "compute_optimizer" || "cost_explorer" || "lse" || "manual" || "pse" || "rds" || "resilience" || "resilience_hub" || "security_hub" || "stir" || "ta_check" || "well_architected" || "cost_optimization_hub", // required
+ * //     awsServices: [ // RecommendationAwsServiceList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     name: "STRING_VALUE", // required
+ * //     resourcesAggregates: { // RecommendationResourcesAggregates
+ * //       okCount: Number("long"), // required
+ * //       warningCount: Number("long"), // required
+ * //       errorCount: Number("long"), // required
+ * //       excludedCount: Number("long"),
+ * //     },
+ * //     pillarSpecificAggregates: { // RecommendationPillarSpecificAggregates
+ * //       costOptimizing: { // RecommendationCostOptimizingAggregates
+ * //         estimatedMonthlySavings: Number("double"), // required
+ * //         estimatedPercentMonthlySavings: Number("double"), // required
+ * //       },
+ * //     },
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     lastUpdatedAt: new Date("TIMESTAMP"),
+ * //     arn: "STRING_VALUE", // required
+ * //     description: "STRING_VALUE", // required
+ * //     createdBy: "STRING_VALUE",
+ * //     updatedOnBehalfOf: "STRING_VALUE",
+ * //     updatedOnBehalfOfJobTitle: "STRING_VALUE",
+ * //     updateReason: "STRING_VALUE",
+ * //     updateReasonCode: "non_critical_account" || "temporary_account" || "valid_business_case" || "other_methods_available" || "low_priority" || "not_applicable" || "other",
+ * //     resolvedAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetOrganizationRecommendationCommandInput - {@link GetOrganizationRecommendationCommandInput}
+ * @returns {@link GetOrganizationRecommendationCommandOutput}
+ * @see {@link GetOrganizationRecommendationCommandInput} for command's `input` shape.
+ * @see {@link GetOrganizationRecommendationCommandOutput} for command's `response` shape.
+ * @see {@link TrustedAdvisorClientResolvedConfig | config} for TrustedAdvisorClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Exception that access has been denied due to insufficient access</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Exception to notify that an unexpected internal error occurred during processing of the request</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception that the requested resource has not been found</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Exception to notify that requests are being throttled</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Exception that the request failed to satisfy service constraints</p>
+ *
+ * @throws {@link TrustedAdvisorServiceException}
+ * <p>Base exception class for all service exceptions from TrustedAdvisor service.</p>
+ *
+ *
+ * @example Get an AWS Organization's Recommendation by ARN
+ * ```javascript
+ * //
+ * const input = {
+ *   organizationRecommendationIdentifier: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5"
+ * };
+ * const command = new GetOrganizationRecommendationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   organizationRecommendation: {
+ *     arn: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5",
+ *     awsServices: [
+ *       "lambda"
+ *     ],
+ *     checkArn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5",
+ *     description: "One or more lambdas are using a deprecated runtime",
+ *     id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5",
+ *     lifecycleStage: "resolved",
+ *     name: "Lambda Runtime Deprecation Warning",
+ *     pillars: [
+ *       "security"
+ *     ],
+ *     resourcesAggregates: {
+ *       errorCount: 0,
+ *       okCount: 0,
+ *       warningCount: 0
+ *     },
+ *     source: "ta_check",
+ *     status: "warning",
+ *     type: "priority"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class GetOrganizationRecommendationCommand extends command<GetOrganizationRecommendationCommandInput, GetOrganizationRecommendationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetOrganizationRecommendation",
+  GetOrganizationRecommendation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOrganizationRecommendationRequest;
+      output: GetOrganizationRecommendationResponse;
+    };
+    sdk: {
+      input: GetOrganizationRecommendationCommandInput;
+      output: GetOrganizationRecommendationCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,99 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateMonitorRequest, CreateMonitorResponse } from "../models/models_0";
+import { CreateMonitor$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateMonitorCommand}.
+ */
+export interface CreateMonitorCommandInput extends CreateMonitorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateMonitorCommand}.
+ */
+export interface CreateMonitorCommandOutput extends CreateMonitorResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and fleets. After you submit a job, you can track the progress of the tasks and steps that make up the job, and then download the job's results. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, CreateMonitorCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, CreateMonitorCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // CreateMonitorRequest
+ *   clientToken: "STRING_VALUE",
+ *   displayName: "STRING_VALUE", // required
+ *   identityCenterInstanceArn: "STRING_VALUE", // required
+ *   identityCenterRegion: "STRING_VALUE",
+ *   subdomain: "STRING_VALUE", // required
+ *   roleArn: "STRING_VALUE", // required
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new CreateMonitorCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateMonitorResponse
+ * //   monitorId: "STRING_VALUE", // required
+ * //   identityCenterApplicationArn: "STRING_VALUE", // required
+ * // };
+ *
+ * ```
+ *
+ * @param CreateMonitorCommandInput - {@link CreateMonitorCommandInput}
+ * @returns {@link CreateMonitorCommandOutput}
+ * @see {@link CreateMonitorCommandInput} for command's `input` shape.
+ * @see {@link CreateMonitorCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateMonitorCommand extends command<CreateMonitorCommandInput, CreateMonitorCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateMonitor",
+  CreateMonitor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMonitorRequest;
+      output: CreateMonitorResponse;
+    };
+    sdk: {
+      input: CreateMonitorCommandInput;
+      output: CreateMonitorCommandOutput;
+    };
+  };
+}

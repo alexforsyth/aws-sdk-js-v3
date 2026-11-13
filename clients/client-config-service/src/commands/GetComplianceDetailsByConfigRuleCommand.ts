@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { GetComplianceDetailsByConfigRuleRequest, GetComplianceDetailsByConfigRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetComplianceDetailsByConfigRuleCommand,
-  serializeAws_json1_1GetComplianceDetailsByConfigRuleCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetComplianceDetailsByConfigRuleRequest,
+  GetComplianceDetailsByConfigRuleResponse,
+} from "../models/models_0";
+import { GetComplianceDetailsByConfigRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetComplianceDetailsByConfigRuleCommand}.
+ */
 export interface GetComplianceDetailsByConfigRuleCommandInput extends GetComplianceDetailsByConfigRuleRequest {}
-export interface GetComplianceDetailsByConfigRuleCommandOutput
-  extends GetComplianceDetailsByConfigRuleResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetComplianceDetailsByConfigRuleCommand}.
+ */
+export interface GetComplianceDetailsByConfigRuleCommandOutput extends GetComplianceDetailsByConfigRuleResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the evaluation results for the specified Config
@@ -33,74 +35,83 @@ export interface GetComplianceDetailsByConfigRuleCommandOutput
  * ```javascript
  * import { ConfigServiceClient, GetComplianceDetailsByConfigRuleCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, GetComplianceDetailsByConfigRuleCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // GetComplianceDetailsByConfigRuleRequest
+ *   ConfigRuleName: "STRING_VALUE", // required
+ *   ComplianceTypes: [ // ComplianceTypes
+ *     "COMPLIANT" || "NON_COMPLIANT" || "NOT_APPLICABLE" || "INSUFFICIENT_DATA",
+ *   ],
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetComplianceDetailsByConfigRuleCommand(input);
  * const response = await client.send(command);
+ * // { // GetComplianceDetailsByConfigRuleResponse
+ * //   EvaluationResults: [ // EvaluationResults
+ * //     { // EvaluationResult
+ * //       EvaluationResultIdentifier: { // EvaluationResultIdentifier
+ * //         EvaluationResultQualifier: { // EvaluationResultQualifier
+ * //           ConfigRuleName: "STRING_VALUE",
+ * //           ResourceType: "STRING_VALUE",
+ * //           ResourceId: "STRING_VALUE",
+ * //           EvaluationMode: "DETECTIVE" || "PROACTIVE",
+ * //         },
+ * //         OrderingTimestamp: new Date("TIMESTAMP"),
+ * //         ResourceEvaluationId: "STRING_VALUE",
+ * //       },
+ * //       ComplianceType: "COMPLIANT" || "NON_COMPLIANT" || "NOT_APPLICABLE" || "INSUFFICIENT_DATA",
+ * //       ResultRecordedTime: new Date("TIMESTAMP"),
+ * //       ConfigRuleInvokedTime: new Date("TIMESTAMP"),
+ * //       Annotation: "STRING_VALUE",
+ * //       ResultToken: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetComplianceDetailsByConfigRuleCommandInput - {@link GetComplianceDetailsByConfigRuleCommandInput}
+ * @returns {@link GetComplianceDetailsByConfigRuleCommandOutput}
  * @see {@link GetComplianceDetailsByConfigRuleCommandInput} for command's `input` shape.
  * @see {@link GetComplianceDetailsByConfigRuleCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The specified next token is not valid. Specify the
+ * 				<code>nextToken</code> string that was returned in the previous
+ * 			response to get the next page of results.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more of the specified parameters are not valid. Verify
+ * 			that your parameters are valid and try again.</p>
+ *
+ * @throws {@link NoSuchConfigRuleException} (client fault)
+ *  <p>The Config rule in the request is not valid. Verify that the rule is an Config Process Check rule, that the rule name is correct, and that valid Amazon Resouce Names (ARNs) are used before trying again.</p>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class GetComplianceDetailsByConfigRuleCommand extends $Command<
-  GetComplianceDetailsByConfigRuleCommandInput,
-  GetComplianceDetailsByConfigRuleCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetComplianceDetailsByConfigRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetComplianceDetailsByConfigRuleCommandInput, GetComplianceDetailsByConfigRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "GetComplianceDetailsByConfigRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetComplianceDetailsByConfigRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetComplianceDetailsByConfigRuleResponse.filterSensitiveLog,
+export class GetComplianceDetailsByConfigRuleCommand extends command<GetComplianceDetailsByConfigRuleCommandInput, GetComplianceDetailsByConfigRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetComplianceDetailsByConfigRule",
+  GetComplianceDetailsByConfigRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetComplianceDetailsByConfigRuleRequest;
+      output: GetComplianceDetailsByConfigRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetComplianceDetailsByConfigRuleCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetComplianceDetailsByConfigRuleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetComplianceDetailsByConfigRuleCommandOutput> {
-    return deserializeAws_json1_1GetComplianceDetailsByConfigRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetComplianceDetailsByConfigRuleCommandInput;
+      output: GetComplianceDetailsByConfigRuleCommandOutput;
+    };
+  };
 }

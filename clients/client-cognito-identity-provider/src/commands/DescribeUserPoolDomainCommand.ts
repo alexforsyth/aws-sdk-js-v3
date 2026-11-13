@@ -1,101 +1,138 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { DescribeUserPoolDomainRequest, DescribeUserPoolDomainResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUserPoolDomainCommand,
-  serializeAws_json1_1DescribeUserPoolDomainCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserPoolDomainRequest, DescribeUserPoolDomainResponse } from "../models/models_0";
+import { DescribeUserPoolDomain$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserPoolDomainCommand}.
+ */
 export interface DescribeUserPoolDomainCommandInput extends DescribeUserPoolDomainRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserPoolDomainCommand}.
+ */
 export interface DescribeUserPoolDomainCommandOutput extends DescribeUserPoolDomainResponse, __MetadataBearer {}
 
 /**
- * <p>Gets information about a domain.</p>
+ * <p>Given a user pool domain name, returns information about the domain
+ *             configuration.</p>
+ *          <note>
+ *             <p>This operation doesn't return results when you query a prefix domain in a
+ *                 secondary Region. Prefix domains are Region-specific and can only be described in
+ *                 the Region where they were created. To describe a prefix domain for a replica user
+ *                 pool, make the request to the primary Region's endpoint.</p>
+ *          </note>
+ *          <note>
+ *             <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For
+ *     this operation, you must use IAM credentials to authorize requests, and you must
+ *     grant yourself the corresponding IAM permission in a policy.</p>
+ *             <p class="title">
+ *                <b>Learn more</b>
+ *             </p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html">Signing Amazon Web Services API Requests</a>
+ *                   </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html">Using the Amazon Cognito user pools API and user pool endpoints</a>
+ *                   </p>
+ *                </li>
+ *             </ul>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, DescribeUserPoolDomainCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, DescribeUserPoolDomainCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // DescribeUserPoolDomainRequest
+ *   Domain: "STRING_VALUE", // required
+ * };
  * const command = new DescribeUserPoolDomainCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserPoolDomainResponse
+ * //   DomainDescription: { // DomainDescriptionType
+ * //     UserPoolId: "STRING_VALUE",
+ * //     AWSAccountId: "STRING_VALUE",
+ * //     Domain: "STRING_VALUE",
+ * //     S3Bucket: "STRING_VALUE",
+ * //     CloudFrontDistribution: "STRING_VALUE",
+ * //     Version: "STRING_VALUE",
+ * //     Status: "CREATING" || "DELETING" || "UPDATING" || "ACTIVE" || "FAILED",
+ * //     CustomDomainConfig: { // CustomDomainConfigType
+ * //       CertificateArn: "STRING_VALUE", // required
+ * //       SecurityPolicy: "TLS_V1" || "TLS_V1_2_2021" || "TLS_V1_3_2025",
+ * //     },
+ * //     ManagedLoginVersion: Number("int"),
+ * //     Routing: { // RoutingType
+ * //       Failover: { // FailoverType
+ * //         SecondaryRegion: "STRING_VALUE", // required
+ * //         PrimaryRoute53HealthCheckId: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserPoolDomainCommandInput - {@link DescribeUserPoolDomainCommandInput}
+ * @returns {@link DescribeUserPoolDomainCommandOutput}
  * @see {@link DescribeUserPoolDomainCommandInput} for command's `input` shape.
  * @see {@link DescribeUserPoolDomainCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link OperationNotEnabledException} (client fault)
+ *  <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserPoolDomainCommand extends $Command<
-  DescribeUserPoolDomainCommandInput,
-  DescribeUserPoolDomainCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserPoolDomainCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserPoolDomainCommandInput, DescribeUserPoolDomainCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "DescribeUserPoolDomainCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserPoolDomainRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserPoolDomainResponse.filterSensitiveLog,
+export class DescribeUserPoolDomainCommand extends command<DescribeUserPoolDomainCommandInput, DescribeUserPoolDomainCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUserPoolDomain",
+  DescribeUserPoolDomain$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserPoolDomainRequest;
+      output: DescribeUserPoolDomainResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserPoolDomainCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUserPoolDomainCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUserPoolDomainCommandOutput> {
-    return deserializeAws_json1_1DescribeUserPoolDomainCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserPoolDomainCommandInput;
+      output: DescribeUserPoolDomainCommandOutput;
+    };
+  };
 }

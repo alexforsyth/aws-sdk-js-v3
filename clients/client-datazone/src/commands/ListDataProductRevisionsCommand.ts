@@ -1,0 +1,105 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDataProductRevisionsInput, ListDataProductRevisionsOutput } from "../models/models_1";
+import { ListDataProductRevisions$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDataProductRevisionsCommand}.
+ */
+export interface ListDataProductRevisionsCommandInput extends ListDataProductRevisionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListDataProductRevisionsCommand}.
+ */
+export interface ListDataProductRevisionsCommandOutput extends ListDataProductRevisionsOutput, __MetadataBearer {}
+
+/**
+ * <p>Lists data product revisions.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product ID must exist within the domain. </p> </li> <li> <p>User must have view permissions on the data product.</p> </li> <li> <p>The domain must be in a valid and accessible state.</p> </li> </ul>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DataZoneClient, ListDataProductRevisionsCommand } from "@aws-sdk/client-datazone"; // ES Modules import
+ * // const { DataZoneClient, ListDataProductRevisionsCommand } = require("@aws-sdk/client-datazone"); // CommonJS import
+ * // import type { DataZoneClientConfig } from "@aws-sdk/client-datazone";
+ * const config = {}; // type is DataZoneClientConfig
+ * const client = new DataZoneClient(config);
+ * const input = { // ListDataProductRevisionsInput
+ *   domainIdentifier: "STRING_VALUE", // required
+ *   identifier: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
+ * const command = new ListDataProductRevisionsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListDataProductRevisionsOutput
+ * //   items: [ // DataProductRevisions // required
+ * //     { // DataProductRevision
+ * //       domainId: "STRING_VALUE",
+ * //       id: "STRING_VALUE",
+ * //       revision: "STRING_VALUE",
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       createdBy: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListDataProductRevisionsCommandInput - {@link ListDataProductRevisionsCommandInput}
+ * @returns {@link ListDataProductRevisionsCommandOutput}
+ * @see {@link ListDataProductRevisionsCommandInput} for command's `input` shape.
+ * @see {@link ListDataProductRevisionsCommandOutput} for command's `response` shape.
+ * @see {@link DataZoneClientResolvedConfig | config} for DataZoneClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You do not have permission to perform this action.</p>
+ *
+ * @throws {@link DataZoneServiceException}
+ * <p>Base exception class for all service exceptions from DataZone service.</p>
+ *
+ *
+ * @public
+ */
+export class ListDataProductRevisionsCommand extends command<ListDataProductRevisionsCommandInput, ListDataProductRevisionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDataProductRevisions",
+  ListDataProductRevisions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDataProductRevisionsInput;
+      output: ListDataProductRevisionsOutput;
+    };
+    sdk: {
+      input: ListDataProductRevisionsCommandInput;
+      output: ListDataProductRevisionsCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,691 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { AppFabricClient } from "./AppFabricClient";
+import {
+  type BatchGetUserAccessTasksCommandInput,
+  type BatchGetUserAccessTasksCommandOutput,
+  BatchGetUserAccessTasksCommand,
+} from "./commands/BatchGetUserAccessTasksCommand";
+import {
+  type ConnectAppAuthorizationCommandInput,
+  type ConnectAppAuthorizationCommandOutput,
+  ConnectAppAuthorizationCommand,
+} from "./commands/ConnectAppAuthorizationCommand";
+import {
+  type CreateAppAuthorizationCommandInput,
+  type CreateAppAuthorizationCommandOutput,
+  CreateAppAuthorizationCommand,
+} from "./commands/CreateAppAuthorizationCommand";
+import {
+  type CreateAppBundleCommandInput,
+  type CreateAppBundleCommandOutput,
+  CreateAppBundleCommand,
+} from "./commands/CreateAppBundleCommand";
+import {
+  type CreateIngestionCommandInput,
+  type CreateIngestionCommandOutput,
+  CreateIngestionCommand,
+} from "./commands/CreateIngestionCommand";
+import {
+  type CreateIngestionDestinationCommandInput,
+  type CreateIngestionDestinationCommandOutput,
+  CreateIngestionDestinationCommand,
+} from "./commands/CreateIngestionDestinationCommand";
+import {
+  type DeleteAppAuthorizationCommandInput,
+  type DeleteAppAuthorizationCommandOutput,
+  DeleteAppAuthorizationCommand,
+} from "./commands/DeleteAppAuthorizationCommand";
+import {
+  type DeleteAppBundleCommandInput,
+  type DeleteAppBundleCommandOutput,
+  DeleteAppBundleCommand,
+} from "./commands/DeleteAppBundleCommand";
+import {
+  type DeleteIngestionCommandInput,
+  type DeleteIngestionCommandOutput,
+  DeleteIngestionCommand,
+} from "./commands/DeleteIngestionCommand";
+import {
+  type DeleteIngestionDestinationCommandInput,
+  type DeleteIngestionDestinationCommandOutput,
+  DeleteIngestionDestinationCommand,
+} from "./commands/DeleteIngestionDestinationCommand";
+import {
+  type GetAppAuthorizationCommandInput,
+  type GetAppAuthorizationCommandOutput,
+  GetAppAuthorizationCommand,
+} from "./commands/GetAppAuthorizationCommand";
+import {
+  type GetAppBundleCommandInput,
+  type GetAppBundleCommandOutput,
+  GetAppBundleCommand,
+} from "./commands/GetAppBundleCommand";
+import {
+  type GetIngestionCommandInput,
+  type GetIngestionCommandOutput,
+  GetIngestionCommand,
+} from "./commands/GetIngestionCommand";
+import {
+  type GetIngestionDestinationCommandInput,
+  type GetIngestionDestinationCommandOutput,
+  GetIngestionDestinationCommand,
+} from "./commands/GetIngestionDestinationCommand";
+import {
+  type ListAppAuthorizationsCommandInput,
+  type ListAppAuthorizationsCommandOutput,
+  ListAppAuthorizationsCommand,
+} from "./commands/ListAppAuthorizationsCommand";
+import {
+  type ListAppBundlesCommandInput,
+  type ListAppBundlesCommandOutput,
+  ListAppBundlesCommand,
+} from "./commands/ListAppBundlesCommand";
+import {
+  type ListIngestionDestinationsCommandInput,
+  type ListIngestionDestinationsCommandOutput,
+  ListIngestionDestinationsCommand,
+} from "./commands/ListIngestionDestinationsCommand";
+import {
+  type ListIngestionsCommandInput,
+  type ListIngestionsCommandOutput,
+  ListIngestionsCommand,
+} from "./commands/ListIngestionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type StartIngestionCommandInput,
+  type StartIngestionCommandOutput,
+  StartIngestionCommand,
+} from "./commands/StartIngestionCommand";
+import {
+  type StartUserAccessTasksCommandInput,
+  type StartUserAccessTasksCommandOutput,
+  StartUserAccessTasksCommand,
+} from "./commands/StartUserAccessTasksCommand";
+import {
+  type StopIngestionCommandInput,
+  type StopIngestionCommandOutput,
+  StopIngestionCommand,
+} from "./commands/StopIngestionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAppAuthorizationCommandInput,
+  type UpdateAppAuthorizationCommandOutput,
+  UpdateAppAuthorizationCommand,
+} from "./commands/UpdateAppAuthorizationCommand";
+import {
+  type UpdateIngestionDestinationCommandInput,
+  type UpdateIngestionDestinationCommandOutput,
+  UpdateIngestionDestinationCommand,
+} from "./commands/UpdateIngestionDestinationCommand";
+import { paginateListAppAuthorizations } from "./pagination/ListAppAuthorizationsPaginator";
+import { paginateListAppBundles } from "./pagination/ListAppBundlesPaginator";
+import { paginateListIngestionDestinations } from "./pagination/ListIngestionDestinationsPaginator";
+import { paginateListIngestions } from "./pagination/ListIngestionsPaginator";
+
+const commands = {
+  BatchGetUserAccessTasksCommand,
+  ConnectAppAuthorizationCommand,
+  CreateAppAuthorizationCommand,
+  CreateAppBundleCommand,
+  CreateIngestionCommand,
+  CreateIngestionDestinationCommand,
+  DeleteAppAuthorizationCommand,
+  DeleteAppBundleCommand,
+  DeleteIngestionCommand,
+  DeleteIngestionDestinationCommand,
+  GetAppAuthorizationCommand,
+  GetAppBundleCommand,
+  GetIngestionCommand,
+  GetIngestionDestinationCommand,
+  ListAppAuthorizationsCommand,
+  ListAppBundlesCommand,
+  ListIngestionDestinationsCommand,
+  ListIngestionsCommand,
+  ListTagsForResourceCommand,
+  StartIngestionCommand,
+  StartUserAccessTasksCommand,
+  StopIngestionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAppAuthorizationCommand,
+  UpdateIngestionDestinationCommand,
+};
+const paginators = {
+  paginateListAppAuthorizations,
+  paginateListAppBundles,
+  paginateListIngestionDestinations,
+  paginateListIngestions,
+};
+
+/**
+ * @public
+ */
+export interface AppFabricRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface AppFabric {
+  /**
+   * @see {@link BatchGetUserAccessTasksCommand}
+   */
+  batchGetUserAccessTasks(
+    args: BatchGetUserAccessTasksCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<BatchGetUserAccessTasksCommandOutput>;
+  batchGetUserAccessTasks(
+    args: BatchGetUserAccessTasksCommandInput,
+    cb: (err: any, data?: BatchGetUserAccessTasksCommandOutput) => void
+  ): void;
+  batchGetUserAccessTasks(
+    args: BatchGetUserAccessTasksCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: BatchGetUserAccessTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ConnectAppAuthorizationCommand}
+   */
+  connectAppAuthorization(
+    args: ConnectAppAuthorizationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ConnectAppAuthorizationCommandOutput>;
+  connectAppAuthorization(
+    args: ConnectAppAuthorizationCommandInput,
+    cb: (err: any, data?: ConnectAppAuthorizationCommandOutput) => void
+  ): void;
+  connectAppAuthorization(
+    args: ConnectAppAuthorizationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ConnectAppAuthorizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppAuthorizationCommand}
+   */
+  createAppAuthorization(
+    args: CreateAppAuthorizationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<CreateAppAuthorizationCommandOutput>;
+  createAppAuthorization(
+    args: CreateAppAuthorizationCommandInput,
+    cb: (err: any, data?: CreateAppAuthorizationCommandOutput) => void
+  ): void;
+  createAppAuthorization(
+    args: CreateAppAuthorizationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: CreateAppAuthorizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppBundleCommand}
+   */
+  createAppBundle(): Promise<CreateAppBundleCommandOutput>;
+  createAppBundle(
+    args: CreateAppBundleCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<CreateAppBundleCommandOutput>;
+  createAppBundle(
+    args: CreateAppBundleCommandInput,
+    cb: (err: any, data?: CreateAppBundleCommandOutput) => void
+  ): void;
+  createAppBundle(
+    args: CreateAppBundleCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: CreateAppBundleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIngestionCommand}
+   */
+  createIngestion(
+    args: CreateIngestionCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<CreateIngestionCommandOutput>;
+  createIngestion(
+    args: CreateIngestionCommandInput,
+    cb: (err: any, data?: CreateIngestionCommandOutput) => void
+  ): void;
+  createIngestion(
+    args: CreateIngestionCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: CreateIngestionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIngestionDestinationCommand}
+   */
+  createIngestionDestination(
+    args: CreateIngestionDestinationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<CreateIngestionDestinationCommandOutput>;
+  createIngestionDestination(
+    args: CreateIngestionDestinationCommandInput,
+    cb: (err: any, data?: CreateIngestionDestinationCommandOutput) => void
+  ): void;
+  createIngestionDestination(
+    args: CreateIngestionDestinationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: CreateIngestionDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppAuthorizationCommand}
+   */
+  deleteAppAuthorization(
+    args: DeleteAppAuthorizationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<DeleteAppAuthorizationCommandOutput>;
+  deleteAppAuthorization(
+    args: DeleteAppAuthorizationCommandInput,
+    cb: (err: any, data?: DeleteAppAuthorizationCommandOutput) => void
+  ): void;
+  deleteAppAuthorization(
+    args: DeleteAppAuthorizationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: DeleteAppAuthorizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppBundleCommand}
+   */
+  deleteAppBundle(
+    args: DeleteAppBundleCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<DeleteAppBundleCommandOutput>;
+  deleteAppBundle(
+    args: DeleteAppBundleCommandInput,
+    cb: (err: any, data?: DeleteAppBundleCommandOutput) => void
+  ): void;
+  deleteAppBundle(
+    args: DeleteAppBundleCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: DeleteAppBundleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIngestionCommand}
+   */
+  deleteIngestion(
+    args: DeleteIngestionCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<DeleteIngestionCommandOutput>;
+  deleteIngestion(
+    args: DeleteIngestionCommandInput,
+    cb: (err: any, data?: DeleteIngestionCommandOutput) => void
+  ): void;
+  deleteIngestion(
+    args: DeleteIngestionCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: DeleteIngestionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIngestionDestinationCommand}
+   */
+  deleteIngestionDestination(
+    args: DeleteIngestionDestinationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<DeleteIngestionDestinationCommandOutput>;
+  deleteIngestionDestination(
+    args: DeleteIngestionDestinationCommandInput,
+    cb: (err: any, data?: DeleteIngestionDestinationCommandOutput) => void
+  ): void;
+  deleteIngestionDestination(
+    args: DeleteIngestionDestinationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: DeleteIngestionDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAppAuthorizationCommand}
+   */
+  getAppAuthorization(
+    args: GetAppAuthorizationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<GetAppAuthorizationCommandOutput>;
+  getAppAuthorization(
+    args: GetAppAuthorizationCommandInput,
+    cb: (err: any, data?: GetAppAuthorizationCommandOutput) => void
+  ): void;
+  getAppAuthorization(
+    args: GetAppAuthorizationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: GetAppAuthorizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAppBundleCommand}
+   */
+  getAppBundle(
+    args: GetAppBundleCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<GetAppBundleCommandOutput>;
+  getAppBundle(
+    args: GetAppBundleCommandInput,
+    cb: (err: any, data?: GetAppBundleCommandOutput) => void
+  ): void;
+  getAppBundle(
+    args: GetAppBundleCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: GetAppBundleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngestionCommand}
+   */
+  getIngestion(
+    args: GetIngestionCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<GetIngestionCommandOutput>;
+  getIngestion(
+    args: GetIngestionCommandInput,
+    cb: (err: any, data?: GetIngestionCommandOutput) => void
+  ): void;
+  getIngestion(
+    args: GetIngestionCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: GetIngestionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIngestionDestinationCommand}
+   */
+  getIngestionDestination(
+    args: GetIngestionDestinationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<GetIngestionDestinationCommandOutput>;
+  getIngestionDestination(
+    args: GetIngestionDestinationCommandInput,
+    cb: (err: any, data?: GetIngestionDestinationCommandOutput) => void
+  ): void;
+  getIngestionDestination(
+    args: GetIngestionDestinationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: GetIngestionDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppAuthorizationsCommand}
+   */
+  listAppAuthorizations(
+    args: ListAppAuthorizationsCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ListAppAuthorizationsCommandOutput>;
+  listAppAuthorizations(
+    args: ListAppAuthorizationsCommandInput,
+    cb: (err: any, data?: ListAppAuthorizationsCommandOutput) => void
+  ): void;
+  listAppAuthorizations(
+    args: ListAppAuthorizationsCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ListAppAuthorizationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppBundlesCommand}
+   */
+  listAppBundles(): Promise<ListAppBundlesCommandOutput>;
+  listAppBundles(
+    args: ListAppBundlesCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ListAppBundlesCommandOutput>;
+  listAppBundles(
+    args: ListAppBundlesCommandInput,
+    cb: (err: any, data?: ListAppBundlesCommandOutput) => void
+  ): void;
+  listAppBundles(
+    args: ListAppBundlesCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ListAppBundlesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngestionDestinationsCommand}
+   */
+  listIngestionDestinations(
+    args: ListIngestionDestinationsCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ListIngestionDestinationsCommandOutput>;
+  listIngestionDestinations(
+    args: ListIngestionDestinationsCommandInput,
+    cb: (err: any, data?: ListIngestionDestinationsCommandOutput) => void
+  ): void;
+  listIngestionDestinations(
+    args: ListIngestionDestinationsCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ListIngestionDestinationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIngestionsCommand}
+   */
+  listIngestions(
+    args: ListIngestionsCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ListIngestionsCommandOutput>;
+  listIngestions(
+    args: ListIngestionsCommandInput,
+    cb: (err: any, data?: ListIngestionsCommandOutput) => void
+  ): void;
+  listIngestions(
+    args: ListIngestionsCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ListIngestionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartIngestionCommand}
+   */
+  startIngestion(
+    args: StartIngestionCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<StartIngestionCommandOutput>;
+  startIngestion(
+    args: StartIngestionCommandInput,
+    cb: (err: any, data?: StartIngestionCommandOutput) => void
+  ): void;
+  startIngestion(
+    args: StartIngestionCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: StartIngestionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartUserAccessTasksCommand}
+   */
+  startUserAccessTasks(
+    args: StartUserAccessTasksCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<StartUserAccessTasksCommandOutput>;
+  startUserAccessTasks(
+    args: StartUserAccessTasksCommandInput,
+    cb: (err: any, data?: StartUserAccessTasksCommandOutput) => void
+  ): void;
+  startUserAccessTasks(
+    args: StartUserAccessTasksCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: StartUserAccessTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopIngestionCommand}
+   */
+  stopIngestion(
+    args: StopIngestionCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<StopIngestionCommandOutput>;
+  stopIngestion(
+    args: StopIngestionCommandInput,
+    cb: (err: any, data?: StopIngestionCommandOutput) => void
+  ): void;
+  stopIngestion(
+    args: StopIngestionCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: StopIngestionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppAuthorizationCommand}
+   */
+  updateAppAuthorization(
+    args: UpdateAppAuthorizationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<UpdateAppAuthorizationCommandOutput>;
+  updateAppAuthorization(
+    args: UpdateAppAuthorizationCommandInput,
+    cb: (err: any, data?: UpdateAppAuthorizationCommandOutput) => void
+  ): void;
+  updateAppAuthorization(
+    args: UpdateAppAuthorizationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: UpdateAppAuthorizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIngestionDestinationCommand}
+   */
+  updateIngestionDestination(
+    args: UpdateIngestionDestinationCommandInput,
+    options?: AppFabricRequestOptions
+  ): Promise<UpdateIngestionDestinationCommandOutput>;
+  updateIngestionDestination(
+    args: UpdateIngestionDestinationCommandInput,
+    cb: (err: any, data?: UpdateIngestionDestinationCommandOutput) => void
+  ): void;
+  updateIngestionDestination(
+    args: UpdateIngestionDestinationCommandInput,
+    options: AppFabricRequestOptions,
+    cb: (err: any, data?: UpdateIngestionDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppAuthorizationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppAuthorizationsCommandOutput}.
+   */
+  paginateListAppAuthorizations(
+    args: ListAppAuthorizationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppAuthorizationsCommandOutput>;
+
+  /**
+   * @see {@link ListAppBundlesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppBundlesCommandOutput}.
+   */
+  paginateListAppBundles(
+    args?: ListAppBundlesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppBundlesCommandOutput>;
+
+  /**
+   * @see {@link ListIngestionDestinationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngestionDestinationsCommandOutput}.
+   */
+  paginateListIngestionDestinations(
+    args: ListIngestionDestinationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngestionDestinationsCommandOutput>;
+
+  /**
+   * @see {@link ListIngestionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIngestionsCommandOutput}.
+   */
+  paginateListIngestions(
+    args: ListIngestionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIngestionsCommandOutput>;
+}
+
+/**
+ * <p>Amazon Web Services AppFabric quickly connects software as a service (SaaS) applications across your
+ *          organization. This allows IT and security teams to easily manage and secure applications
+ *          using a standard schema, and employees can complete everyday tasks faster using generative
+ *          artificial intelligence (AI). You can use these APIs to complete AppFabric tasks, such as
+ *          setting up audit log ingestions or viewing user access. For more information about AppFabric,
+ *          including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/appfabric/latest/adminguide/">Amazon Web Services AppFabric Administration Guide</a>. For more
+ *          information about using the Command Line Interface (CLI) to manage your
+ *          AppFabric resources, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/appfabric/index.html">AppFabric section of the CLI
+ *             Reference</a>.</p>
+ * @public
+ */
+export class AppFabric extends AppFabricClient implements AppFabric {}
+createAggregatedClient(commands, AppFabric, { paginators });

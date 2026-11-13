@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListAssignmentsForHITRequest, ListAssignmentsForHITResponse } from "../models/models_0";
-import { MTurkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MTurkClient";
-import {
-  deserializeAws_json1_1ListAssignmentsForHITCommand,
-  serializeAws_json1_1ListAssignmentsForHITCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssignmentsForHITRequest, ListAssignmentsForHITResponse } from "../models/models_0";
+import { ListAssignmentsForHIT$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssignmentsForHITCommand}.
+ */
 export interface ListAssignmentsForHITCommandInput extends ListAssignmentsForHITRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssignmentsForHITCommand}.
+ */
 export interface ListAssignmentsForHITCommandOutput extends ListAssignmentsForHITResponse, __MetadataBearer {}
 
 /**
@@ -54,68 +55,75 @@ export interface ListAssignmentsForHITCommandOutput extends ListAssignmentsForHI
  * ```javascript
  * import { MTurkClient, ListAssignmentsForHITCommand } from "@aws-sdk/client-mturk"; // ES Modules import
  * // const { MTurkClient, ListAssignmentsForHITCommand } = require("@aws-sdk/client-mturk"); // CommonJS import
+ * // import type { MTurkClientConfig } from "@aws-sdk/client-mturk";
+ * const config = {}; // type is MTurkClientConfig
  * const client = new MTurkClient(config);
+ * const input = { // ListAssignmentsForHITRequest
+ *   HITId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   AssignmentStatuses: [ // AssignmentStatusList
+ *     "Submitted" || "Approved" || "Rejected",
+ *   ],
+ * };
  * const command = new ListAssignmentsForHITCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssignmentsForHITResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   NumResults: Number("int"),
+ * //   Assignments: [ // AssignmentList
+ * //     { // Assignment
+ * //       AssignmentId: "STRING_VALUE",
+ * //       WorkerId: "STRING_VALUE",
+ * //       HITId: "STRING_VALUE",
+ * //       AssignmentStatus: "Submitted" || "Approved" || "Rejected",
+ * //       AutoApprovalTime: new Date("TIMESTAMP"),
+ * //       AcceptTime: new Date("TIMESTAMP"),
+ * //       SubmitTime: new Date("TIMESTAMP"),
+ * //       ApprovalTime: new Date("TIMESTAMP"),
+ * //       RejectionTime: new Date("TIMESTAMP"),
+ * //       Deadline: new Date("TIMESTAMP"),
+ * //       Answer: "STRING_VALUE",
+ * //       RequesterFeedback: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListAssignmentsForHITCommandInput - {@link ListAssignmentsForHITCommandInput}
+ * @returns {@link ListAssignmentsForHITCommandOutput}
  * @see {@link ListAssignmentsForHITCommandInput} for command's `input` shape.
  * @see {@link ListAssignmentsForHITCommandOutput} for command's `response` shape.
- * @see {@link MTurkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MTurkClientResolvedConfig | config} for MTurkClient's `config` shape.
  *
+ * @throws {@link RequestError} (client fault)
+ *  <p>Your request is invalid.</p>
+ *
+ * @throws {@link ServiceFault} (server fault)
+ *  <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
+ *
+ * @throws {@link MTurkServiceException}
+ * <p>Base exception class for all service exceptions from MTurk service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssignmentsForHITCommand extends $Command<
-  ListAssignmentsForHITCommandInput,
-  ListAssignmentsForHITCommandOutput,
-  MTurkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssignmentsForHITCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MTurkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssignmentsForHITCommandInput, ListAssignmentsForHITCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MTurkClient";
-    const commandName = "ListAssignmentsForHITCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssignmentsForHITRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssignmentsForHITResponse.filterSensitiveLog,
+export class ListAssignmentsForHITCommand extends command<ListAssignmentsForHITCommandInput, ListAssignmentsForHITCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssignmentsForHIT",
+  ListAssignmentsForHIT$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssignmentsForHITRequest;
+      output: ListAssignmentsForHITResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssignmentsForHITCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAssignmentsForHITCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssignmentsForHITCommandOutput> {
-    return deserializeAws_json1_1ListAssignmentsForHITCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssignmentsForHITCommandInput;
+      output: ListAssignmentsForHITCommandOutput;
+    };
+  };
 }

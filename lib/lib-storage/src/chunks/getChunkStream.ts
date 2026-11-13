@@ -1,25 +1,26 @@
-import { Buffer } from "buffer";
+// eslint-disable-next-line n/prefer-node-protocol
+import { Buffer } from "buffer"; // do not remove this import: Node.js buffer or buffer NPM module for browser.
 
-import { RawDataPart } from "../Upload";
+import type { RawDataPart } from "../Upload";
 
 interface Buffers {
-  chunks: Buffer[];
+  chunks: Uint8Array[];
   length: number;
 }
 
 export async function* getChunkStream<T>(
   data: T,
   partSize: number,
-  getNextData: (data: T) => AsyncGenerator<Buffer>
+  getNextData: (data: T) => AsyncGenerator<Uint8Array>
 ): AsyncGenerator<RawDataPart, void, undefined> {
   let partNumber = 1;
   const currentBuffer: Buffers = { chunks: [], length: 0 };
 
   for await (const datum of getNextData(data)) {
     currentBuffer.chunks.push(datum);
-    currentBuffer.length += datum.length;
+    currentBuffer.length += datum.byteLength;
 
-    while (currentBuffer.length >= partSize) {
+    while (currentBuffer.length > partSize) {
       /**
        * Concat all the buffers together once if there is more than one to concat. Attempt
        * to minimize concats as Buffer.Concat is an extremely expensive operation.
@@ -28,18 +29,19 @@ export async function* getChunkStream<T>(
 
       yield {
         partNumber,
-        data: dataChunk.slice(0, partSize),
+        data: dataChunk.subarray(0, partSize),
       };
 
       // Reset the buffer.
-      currentBuffer.chunks = [dataChunk.slice(partSize)];
-      currentBuffer.length = currentBuffer.chunks[0].length;
+      currentBuffer.chunks = [dataChunk.subarray(partSize)];
+      currentBuffer.length = currentBuffer.chunks[0].byteLength;
       partNumber += 1;
     }
   }
+
   yield {
     partNumber,
-    data: Buffer.concat(currentBuffer.chunks),
+    data: currentBuffer.chunks.length !== 1 ? Buffer.concat(currentBuffer.chunks) : currentBuffer.chunks[0],
     lastPart: true,
   };
 }

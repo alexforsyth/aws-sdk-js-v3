@@ -1,95 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRContainersClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRContainersClient";
-import { DeleteVirtualClusterRequest, DeleteVirtualClusterResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteVirtualClusterCommand,
-  serializeAws_restJson1DeleteVirtualClusterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteVirtualClusterRequest, DeleteVirtualClusterResponse } from "../models/models_0";
+import { DeleteVirtualCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteVirtualClusterCommand}.
+ */
 export interface DeleteVirtualClusterCommandInput extends DeleteVirtualClusterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteVirtualClusterCommand}.
+ */
 export interface DeleteVirtualClusterCommandOutput extends DeleteVirtualClusterResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>
+ * <p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual clusters. They do not consume any
+ *          additional resource in your system. A single virtual cluster maps to a single Kubernetes
+ *          namespace. Given this relationship, you can model virtual clusters the same way you model
+ *          Kubernetes namespaces to meet your requirements.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EMRContainersClient, DeleteVirtualClusterCommand } from "@aws-sdk/client-emr-containers"; // ES Modules import
  * // const { EMRContainersClient, DeleteVirtualClusterCommand } = require("@aws-sdk/client-emr-containers"); // CommonJS import
+ * // import type { EMRContainersClientConfig } from "@aws-sdk/client-emr-containers";
+ * const config = {}; // type is EMRContainersClientConfig
  * const client = new EMRContainersClient(config);
+ * const input = { // DeleteVirtualClusterRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteVirtualClusterCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteVirtualClusterResponse
+ * //   id: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteVirtualClusterCommandInput - {@link DeleteVirtualClusterCommandInput}
+ * @returns {@link DeleteVirtualClusterCommandOutput}
  * @see {@link DeleteVirtualClusterCommandInput} for command's `input` shape.
  * @see {@link DeleteVirtualClusterCommandOutput} for command's `response` shape.
- * @see {@link EMRContainersClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRContainersClientResolvedConfig | config} for EMRContainersClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This is an internal server exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There are invalid parameters in the client request.</p>
+ *
+ * @throws {@link EMRContainersServiceException}
+ * <p>Base exception class for all service exceptions from EMRContainers service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteVirtualClusterCommand extends $Command<
-  DeleteVirtualClusterCommandInput,
-  DeleteVirtualClusterCommandOutput,
-  EMRContainersClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteVirtualClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRContainersClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteVirtualClusterCommandInput, DeleteVirtualClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRContainersClient";
-    const commandName = "DeleteVirtualClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteVirtualClusterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteVirtualClusterResponse.filterSensitiveLog,
+export class DeleteVirtualClusterCommand extends command<DeleteVirtualClusterCommandInput, DeleteVirtualClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteVirtualCluster",
+  DeleteVirtualCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteVirtualClusterRequest;
+      output: DeleteVirtualClusterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteVirtualClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteVirtualClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteVirtualClusterCommandOutput> {
-    return deserializeAws_restJson1DeleteVirtualClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteVirtualClusterCommandInput;
+      output: DeleteVirtualClusterCommandOutput;
+    };
+  };
 }

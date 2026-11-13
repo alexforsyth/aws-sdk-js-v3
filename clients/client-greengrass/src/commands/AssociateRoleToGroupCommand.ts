@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { AssociateRoleToGroupRequest, AssociateRoleToGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AssociateRoleToGroupCommand,
-  serializeAws_restJson1AssociateRoleToGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateRoleToGroupRequest, AssociateRoleToGroupResponse } from "../models/models_0";
+import { AssociateRoleToGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateRoleToGroupCommand}.
+ */
 export interface AssociateRoleToGroupCommandInput extends AssociateRoleToGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateRoleToGroupCommand}.
+ */
 export interface AssociateRoleToGroupCommandOutput extends AssociateRoleToGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,54 @@ export interface AssociateRoleToGroupCommandOutput extends AssociateRoleToGroupR
  * ```javascript
  * import { GreengrassClient, AssociateRoleToGroupCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, AssociateRoleToGroupCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // AssociateRoleToGroupRequest
+ *   GroupId: "STRING_VALUE", // required
+ *   RoleArn: "STRING_VALUE", // required
+ * };
  * const command = new AssociateRoleToGroupCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateRoleToGroupResponse
+ * //   AssociatedAt: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param AssociateRoleToGroupCommandInput - {@link AssociateRoleToGroupCommandInput}
+ * @returns {@link AssociateRoleToGroupCommandOutput}
  * @see {@link AssociateRoleToGroupCommandInput} for command's `input` shape.
  * @see {@link AssociateRoleToGroupCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateRoleToGroupCommand extends $Command<
-  AssociateRoleToGroupCommandInput,
-  AssociateRoleToGroupCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateRoleToGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateRoleToGroupCommandInput, AssociateRoleToGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "AssociateRoleToGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateRoleToGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateRoleToGroupResponse.filterSensitiveLog,
+export class AssociateRoleToGroupCommand extends command<AssociateRoleToGroupCommandInput, AssociateRoleToGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateRoleToGroup",
+  AssociateRoleToGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateRoleToGroupRequest;
+      output: AssociateRoleToGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateRoleToGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociateRoleToGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AssociateRoleToGroupCommandOutput> {
-    return deserializeAws_restJson1AssociateRoleToGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateRoleToGroupCommandInput;
+      output: AssociateRoleToGroupCommandOutput;
+    };
+  };
 }

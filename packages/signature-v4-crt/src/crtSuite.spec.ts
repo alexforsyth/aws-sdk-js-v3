@@ -1,5 +1,6 @@
-import { Sha256 } from "@aws-crypto/sha256-js";
-import { HttpRequest } from "@aws-sdk/protocol-http";
+import { describe, expect, it } from "vitest";
+import { Sha256 } from "@smithy/core/checksum";
+import { HttpRequest } from "@smithy/core/protocols";
 
 import { CrtSignerV4 } from "./CrtSignerV4";
 import { getHeaderValue } from "./headerUtil";

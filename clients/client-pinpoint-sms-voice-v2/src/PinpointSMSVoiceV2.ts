@@ -1,0 +1,2957 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AssociateOriginationIdentityCommandInput,
+  type AssociateOriginationIdentityCommandOutput,
+  AssociateOriginationIdentityCommand,
+} from "./commands/AssociateOriginationIdentityCommand";
+import {
+  type AssociateProtectConfigurationCommandInput,
+  type AssociateProtectConfigurationCommandOutput,
+  AssociateProtectConfigurationCommand,
+} from "./commands/AssociateProtectConfigurationCommand";
+import {
+  type CarrierLookupCommandInput,
+  type CarrierLookupCommandOutput,
+  CarrierLookupCommand,
+} from "./commands/CarrierLookupCommand";
+import {
+  type CreateConfigurationSetCommandInput,
+  type CreateConfigurationSetCommandOutput,
+  CreateConfigurationSetCommand,
+} from "./commands/CreateConfigurationSetCommand";
+import {
+  type CreateEventDestinationCommandInput,
+  type CreateEventDestinationCommandOutput,
+  CreateEventDestinationCommand,
+} from "./commands/CreateEventDestinationCommand";
+import {
+  type CreateNotifyConfigurationCommandInput,
+  type CreateNotifyConfigurationCommandOutput,
+  CreateNotifyConfigurationCommand,
+} from "./commands/CreateNotifyConfigurationCommand";
+import {
+  type CreateOptOutListCommandInput,
+  type CreateOptOutListCommandOutput,
+  CreateOptOutListCommand,
+} from "./commands/CreateOptOutListCommand";
+import {
+  type CreatePoolCommandInput,
+  type CreatePoolCommandOutput,
+  CreatePoolCommand,
+} from "./commands/CreatePoolCommand";
+import {
+  type CreateProtectConfigurationCommandInput,
+  type CreateProtectConfigurationCommandOutput,
+  CreateProtectConfigurationCommand,
+} from "./commands/CreateProtectConfigurationCommand";
+import {
+  type CreateRcsAgentCommandInput,
+  type CreateRcsAgentCommandOutput,
+  CreateRcsAgentCommand,
+} from "./commands/CreateRcsAgentCommand";
+import {
+  type CreateRegistrationAssociationCommandInput,
+  type CreateRegistrationAssociationCommandOutput,
+  CreateRegistrationAssociationCommand,
+} from "./commands/CreateRegistrationAssociationCommand";
+import {
+  type CreateRegistrationAttachmentCommandInput,
+  type CreateRegistrationAttachmentCommandOutput,
+  CreateRegistrationAttachmentCommand,
+} from "./commands/CreateRegistrationAttachmentCommand";
+import {
+  type CreateRegistrationCommandInput,
+  type CreateRegistrationCommandOutput,
+  CreateRegistrationCommand,
+} from "./commands/CreateRegistrationCommand";
+import {
+  type CreateRegistrationVersionCommandInput,
+  type CreateRegistrationVersionCommandOutput,
+  CreateRegistrationVersionCommand,
+} from "./commands/CreateRegistrationVersionCommand";
+import {
+  type CreateVerifiedDestinationNumberCommandInput,
+  type CreateVerifiedDestinationNumberCommandOutput,
+  CreateVerifiedDestinationNumberCommand,
+} from "./commands/CreateVerifiedDestinationNumberCommand";
+import {
+  type DeleteAccountDefaultProtectConfigurationCommandInput,
+  type DeleteAccountDefaultProtectConfigurationCommandOutput,
+  DeleteAccountDefaultProtectConfigurationCommand,
+} from "./commands/DeleteAccountDefaultProtectConfigurationCommand";
+import {
+  type DeleteConfigurationSetCommandInput,
+  type DeleteConfigurationSetCommandOutput,
+  DeleteConfigurationSetCommand,
+} from "./commands/DeleteConfigurationSetCommand";
+import {
+  type DeleteDefaultMessageTypeCommandInput,
+  type DeleteDefaultMessageTypeCommandOutput,
+  DeleteDefaultMessageTypeCommand,
+} from "./commands/DeleteDefaultMessageTypeCommand";
+import {
+  type DeleteDefaultSenderIdCommandInput,
+  type DeleteDefaultSenderIdCommandOutput,
+  DeleteDefaultSenderIdCommand,
+} from "./commands/DeleteDefaultSenderIdCommand";
+import {
+  type DeleteEventDestinationCommandInput,
+  type DeleteEventDestinationCommandOutput,
+  DeleteEventDestinationCommand,
+} from "./commands/DeleteEventDestinationCommand";
+import {
+  type DeleteKeywordCommandInput,
+  type DeleteKeywordCommandOutput,
+  DeleteKeywordCommand,
+} from "./commands/DeleteKeywordCommand";
+import {
+  type DeleteMediaMessageSpendLimitOverrideCommandInput,
+  type DeleteMediaMessageSpendLimitOverrideCommandOutput,
+  DeleteMediaMessageSpendLimitOverrideCommand,
+} from "./commands/DeleteMediaMessageSpendLimitOverrideCommand";
+import {
+  type DeleteNotifyConfigurationCommandInput,
+  type DeleteNotifyConfigurationCommandOutput,
+  DeleteNotifyConfigurationCommand,
+} from "./commands/DeleteNotifyConfigurationCommand";
+import {
+  type DeleteNotifyMessageSpendLimitOverrideCommandInput,
+  type DeleteNotifyMessageSpendLimitOverrideCommandOutput,
+  DeleteNotifyMessageSpendLimitOverrideCommand,
+} from "./commands/DeleteNotifyMessageSpendLimitOverrideCommand";
+import {
+  type DeleteOptedOutNumberCommandInput,
+  type DeleteOptedOutNumberCommandOutput,
+  DeleteOptedOutNumberCommand,
+} from "./commands/DeleteOptedOutNumberCommand";
+import {
+  type DeleteOptOutListCommandInput,
+  type DeleteOptOutListCommandOutput,
+  DeleteOptOutListCommand,
+} from "./commands/DeleteOptOutListCommand";
+import {
+  type DeletePoolCommandInput,
+  type DeletePoolCommandOutput,
+  DeletePoolCommand,
+} from "./commands/DeletePoolCommand";
+import {
+  type DeleteProtectConfigurationCommandInput,
+  type DeleteProtectConfigurationCommandOutput,
+  DeleteProtectConfigurationCommand,
+} from "./commands/DeleteProtectConfigurationCommand";
+import {
+  type DeleteProtectConfigurationRuleSetNumberOverrideCommandInput,
+  type DeleteProtectConfigurationRuleSetNumberOverrideCommandOutput,
+  DeleteProtectConfigurationRuleSetNumberOverrideCommand,
+} from "./commands/DeleteProtectConfigurationRuleSetNumberOverrideCommand";
+import {
+  type DeleteRcsAgentCommandInput,
+  type DeleteRcsAgentCommandOutput,
+  DeleteRcsAgentCommand,
+} from "./commands/DeleteRcsAgentCommand";
+import {
+  type DeleteRcsMessageSpendLimitOverrideCommandInput,
+  type DeleteRcsMessageSpendLimitOverrideCommandOutput,
+  DeleteRcsMessageSpendLimitOverrideCommand,
+} from "./commands/DeleteRcsMessageSpendLimitOverrideCommand";
+import {
+  type DeleteRegistrationAttachmentCommandInput,
+  type DeleteRegistrationAttachmentCommandOutput,
+  DeleteRegistrationAttachmentCommand,
+} from "./commands/DeleteRegistrationAttachmentCommand";
+import {
+  type DeleteRegistrationCommandInput,
+  type DeleteRegistrationCommandOutput,
+  DeleteRegistrationCommand,
+} from "./commands/DeleteRegistrationCommand";
+import {
+  type DeleteRegistrationFieldValueCommandInput,
+  type DeleteRegistrationFieldValueCommandOutput,
+  DeleteRegistrationFieldValueCommand,
+} from "./commands/DeleteRegistrationFieldValueCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteTextMessageSpendLimitOverrideCommandInput,
+  type DeleteTextMessageSpendLimitOverrideCommandOutput,
+  DeleteTextMessageSpendLimitOverrideCommand,
+} from "./commands/DeleteTextMessageSpendLimitOverrideCommand";
+import {
+  type DeleteVerifiedDestinationNumberCommandInput,
+  type DeleteVerifiedDestinationNumberCommandOutput,
+  DeleteVerifiedDestinationNumberCommand,
+} from "./commands/DeleteVerifiedDestinationNumberCommand";
+import {
+  type DeleteVoiceMessageSpendLimitOverrideCommandInput,
+  type DeleteVoiceMessageSpendLimitOverrideCommandOutput,
+  DeleteVoiceMessageSpendLimitOverrideCommand,
+} from "./commands/DeleteVoiceMessageSpendLimitOverrideCommand";
+import {
+  type DescribeAccountAttributesCommandInput,
+  type DescribeAccountAttributesCommandOutput,
+  DescribeAccountAttributesCommand,
+} from "./commands/DescribeAccountAttributesCommand";
+import {
+  type DescribeAccountLimitsCommandInput,
+  type DescribeAccountLimitsCommandOutput,
+  DescribeAccountLimitsCommand,
+} from "./commands/DescribeAccountLimitsCommand";
+import {
+  type DescribeConfigurationSetsCommandInput,
+  type DescribeConfigurationSetsCommandOutput,
+  DescribeConfigurationSetsCommand,
+} from "./commands/DescribeConfigurationSetsCommand";
+import {
+  type DescribeKeywordsCommandInput,
+  type DescribeKeywordsCommandOutput,
+  DescribeKeywordsCommand,
+} from "./commands/DescribeKeywordsCommand";
+import {
+  type DescribeNotifyConfigurationsCommandInput,
+  type DescribeNotifyConfigurationsCommandOutput,
+  DescribeNotifyConfigurationsCommand,
+} from "./commands/DescribeNotifyConfigurationsCommand";
+import {
+  type DescribeNotifyTemplatesCommandInput,
+  type DescribeNotifyTemplatesCommandOutput,
+  DescribeNotifyTemplatesCommand,
+} from "./commands/DescribeNotifyTemplatesCommand";
+import {
+  type DescribeOptedOutNumbersCommandInput,
+  type DescribeOptedOutNumbersCommandOutput,
+  DescribeOptedOutNumbersCommand,
+} from "./commands/DescribeOptedOutNumbersCommand";
+import {
+  type DescribeOptOutListsCommandInput,
+  type DescribeOptOutListsCommandOutput,
+  DescribeOptOutListsCommand,
+} from "./commands/DescribeOptOutListsCommand";
+import {
+  type DescribePhoneNumbersCommandInput,
+  type DescribePhoneNumbersCommandOutput,
+  DescribePhoneNumbersCommand,
+} from "./commands/DescribePhoneNumbersCommand";
+import {
+  type DescribePoolsCommandInput,
+  type DescribePoolsCommandOutput,
+  DescribePoolsCommand,
+} from "./commands/DescribePoolsCommand";
+import {
+  type DescribeProtectConfigurationsCommandInput,
+  type DescribeProtectConfigurationsCommandOutput,
+  DescribeProtectConfigurationsCommand,
+} from "./commands/DescribeProtectConfigurationsCommand";
+import {
+  type DescribeRcsAgentCountryLaunchStatusCommandInput,
+  type DescribeRcsAgentCountryLaunchStatusCommandOutput,
+  DescribeRcsAgentCountryLaunchStatusCommand,
+} from "./commands/DescribeRcsAgentCountryLaunchStatusCommand";
+import {
+  type DescribeRcsAgentsCommandInput,
+  type DescribeRcsAgentsCommandOutput,
+  DescribeRcsAgentsCommand,
+} from "./commands/DescribeRcsAgentsCommand";
+import {
+  type DescribeRegistrationAttachmentsCommandInput,
+  type DescribeRegistrationAttachmentsCommandOutput,
+  DescribeRegistrationAttachmentsCommand,
+} from "./commands/DescribeRegistrationAttachmentsCommand";
+import {
+  type DescribeRegistrationFieldDefinitionsCommandInput,
+  type DescribeRegistrationFieldDefinitionsCommandOutput,
+  DescribeRegistrationFieldDefinitionsCommand,
+} from "./commands/DescribeRegistrationFieldDefinitionsCommand";
+import {
+  type DescribeRegistrationFieldValuesCommandInput,
+  type DescribeRegistrationFieldValuesCommandOutput,
+  DescribeRegistrationFieldValuesCommand,
+} from "./commands/DescribeRegistrationFieldValuesCommand";
+import {
+  type DescribeRegistrationsCommandInput,
+  type DescribeRegistrationsCommandOutput,
+  DescribeRegistrationsCommand,
+} from "./commands/DescribeRegistrationsCommand";
+import {
+  type DescribeRegistrationSectionDefinitionsCommandInput,
+  type DescribeRegistrationSectionDefinitionsCommandOutput,
+  DescribeRegistrationSectionDefinitionsCommand,
+} from "./commands/DescribeRegistrationSectionDefinitionsCommand";
+import {
+  type DescribeRegistrationTypeDefinitionsCommandInput,
+  type DescribeRegistrationTypeDefinitionsCommandOutput,
+  DescribeRegistrationTypeDefinitionsCommand,
+} from "./commands/DescribeRegistrationTypeDefinitionsCommand";
+import {
+  type DescribeRegistrationVersionsCommandInput,
+  type DescribeRegistrationVersionsCommandOutput,
+  DescribeRegistrationVersionsCommand,
+} from "./commands/DescribeRegistrationVersionsCommand";
+import {
+  type DescribeSenderIdsCommandInput,
+  type DescribeSenderIdsCommandOutput,
+  DescribeSenderIdsCommand,
+} from "./commands/DescribeSenderIdsCommand";
+import {
+  type DescribeSpendLimitsCommandInput,
+  type DescribeSpendLimitsCommandOutput,
+  DescribeSpendLimitsCommand,
+} from "./commands/DescribeSpendLimitsCommand";
+import {
+  type DescribeVerifiedDestinationNumbersCommandInput,
+  type DescribeVerifiedDestinationNumbersCommandOutput,
+  DescribeVerifiedDestinationNumbersCommand,
+} from "./commands/DescribeVerifiedDestinationNumbersCommand";
+import {
+  type DisassociateOriginationIdentityCommandInput,
+  type DisassociateOriginationIdentityCommandOutput,
+  DisassociateOriginationIdentityCommand,
+} from "./commands/DisassociateOriginationIdentityCommand";
+import {
+  type DisassociateProtectConfigurationCommandInput,
+  type DisassociateProtectConfigurationCommandOutput,
+  DisassociateProtectConfigurationCommand,
+} from "./commands/DisassociateProtectConfigurationCommand";
+import {
+  type DiscardRegistrationVersionCommandInput,
+  type DiscardRegistrationVersionCommandOutput,
+  DiscardRegistrationVersionCommand,
+} from "./commands/DiscardRegistrationVersionCommand";
+import {
+  type GetProtectConfigurationCountryRuleSetCommandInput,
+  type GetProtectConfigurationCountryRuleSetCommandOutput,
+  GetProtectConfigurationCountryRuleSetCommand,
+} from "./commands/GetProtectConfigurationCountryRuleSetCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type ListAvailablePhoneNumbersCommandInput,
+  type ListAvailablePhoneNumbersCommandOutput,
+  ListAvailablePhoneNumbersCommand,
+} from "./commands/ListAvailablePhoneNumbersCommand";
+import {
+  type ListNotifyCountriesCommandInput,
+  type ListNotifyCountriesCommandOutput,
+  ListNotifyCountriesCommand,
+} from "./commands/ListNotifyCountriesCommand";
+import {
+  type ListPoolOriginationIdentitiesCommandInput,
+  type ListPoolOriginationIdentitiesCommandOutput,
+  ListPoolOriginationIdentitiesCommand,
+} from "./commands/ListPoolOriginationIdentitiesCommand";
+import {
+  type ListProtectConfigurationRuleSetNumberOverridesCommandInput,
+  type ListProtectConfigurationRuleSetNumberOverridesCommandOutput,
+  ListProtectConfigurationRuleSetNumberOverridesCommand,
+} from "./commands/ListProtectConfigurationRuleSetNumberOverridesCommand";
+import {
+  type ListRegistrationAssociationsCommandInput,
+  type ListRegistrationAssociationsCommandOutput,
+  ListRegistrationAssociationsCommand,
+} from "./commands/ListRegistrationAssociationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutKeywordCommandInput,
+  type PutKeywordCommandOutput,
+  PutKeywordCommand,
+} from "./commands/PutKeywordCommand";
+import {
+  type PutMessageFeedbackCommandInput,
+  type PutMessageFeedbackCommandOutput,
+  PutMessageFeedbackCommand,
+} from "./commands/PutMessageFeedbackCommand";
+import {
+  type PutOptedOutNumberCommandInput,
+  type PutOptedOutNumberCommandOutput,
+  PutOptedOutNumberCommand,
+} from "./commands/PutOptedOutNumberCommand";
+import {
+  type PutProtectConfigurationRuleSetNumberOverrideCommandInput,
+  type PutProtectConfigurationRuleSetNumberOverrideCommandOutput,
+  PutProtectConfigurationRuleSetNumberOverrideCommand,
+} from "./commands/PutProtectConfigurationRuleSetNumberOverrideCommand";
+import {
+  type PutRegistrationFieldValueCommandInput,
+  type PutRegistrationFieldValueCommandOutput,
+  PutRegistrationFieldValueCommand,
+} from "./commands/PutRegistrationFieldValueCommand";
+import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type ReleasePhoneNumberCommandInput,
+  type ReleasePhoneNumberCommandOutput,
+  ReleasePhoneNumberCommand,
+} from "./commands/ReleasePhoneNumberCommand";
+import {
+  type ReleaseSenderIdCommandInput,
+  type ReleaseSenderIdCommandOutput,
+  ReleaseSenderIdCommand,
+} from "./commands/ReleaseSenderIdCommand";
+import {
+  type RequestPhoneNumberCommandInput,
+  type RequestPhoneNumberCommandOutput,
+  RequestPhoneNumberCommand,
+} from "./commands/RequestPhoneNumberCommand";
+import {
+  type RequestSenderIdCommandInput,
+  type RequestSenderIdCommandOutput,
+  RequestSenderIdCommand,
+} from "./commands/RequestSenderIdCommand";
+import {
+  type SendDestinationNumberVerificationCodeCommandInput,
+  type SendDestinationNumberVerificationCodeCommandOutput,
+  SendDestinationNumberVerificationCodeCommand,
+} from "./commands/SendDestinationNumberVerificationCodeCommand";
+import {
+  type SendMediaMessageCommandInput,
+  type SendMediaMessageCommandOutput,
+  SendMediaMessageCommand,
+} from "./commands/SendMediaMessageCommand";
+import {
+  type SendNotifyTextMessageCommandInput,
+  type SendNotifyTextMessageCommandOutput,
+  SendNotifyTextMessageCommand,
+} from "./commands/SendNotifyTextMessageCommand";
+import {
+  type SendNotifyVoiceMessageCommandInput,
+  type SendNotifyVoiceMessageCommandOutput,
+  SendNotifyVoiceMessageCommand,
+} from "./commands/SendNotifyVoiceMessageCommand";
+import {
+  type SendRcsMessageCommandInput,
+  type SendRcsMessageCommandOutput,
+  SendRcsMessageCommand,
+} from "./commands/SendRcsMessageCommand";
+import {
+  type SendTextMessageCommandInput,
+  type SendTextMessageCommandOutput,
+  SendTextMessageCommand,
+} from "./commands/SendTextMessageCommand";
+import {
+  type SendVoiceMessageCommandInput,
+  type SendVoiceMessageCommandOutput,
+  SendVoiceMessageCommand,
+} from "./commands/SendVoiceMessageCommand";
+import {
+  type SetAccountDefaultProtectConfigurationCommandInput,
+  type SetAccountDefaultProtectConfigurationCommandOutput,
+  SetAccountDefaultProtectConfigurationCommand,
+} from "./commands/SetAccountDefaultProtectConfigurationCommand";
+import {
+  type SetDefaultMessageFeedbackEnabledCommandInput,
+  type SetDefaultMessageFeedbackEnabledCommandOutput,
+  SetDefaultMessageFeedbackEnabledCommand,
+} from "./commands/SetDefaultMessageFeedbackEnabledCommand";
+import {
+  type SetDefaultMessageTypeCommandInput,
+  type SetDefaultMessageTypeCommandOutput,
+  SetDefaultMessageTypeCommand,
+} from "./commands/SetDefaultMessageTypeCommand";
+import {
+  type SetDefaultSenderIdCommandInput,
+  type SetDefaultSenderIdCommandOutput,
+  SetDefaultSenderIdCommand,
+} from "./commands/SetDefaultSenderIdCommand";
+import {
+  type SetMediaMessageSpendLimitOverrideCommandInput,
+  type SetMediaMessageSpendLimitOverrideCommandOutput,
+  SetMediaMessageSpendLimitOverrideCommand,
+} from "./commands/SetMediaMessageSpendLimitOverrideCommand";
+import {
+  type SetNotifyMessageSpendLimitOverrideCommandInput,
+  type SetNotifyMessageSpendLimitOverrideCommandOutput,
+  SetNotifyMessageSpendLimitOverrideCommand,
+} from "./commands/SetNotifyMessageSpendLimitOverrideCommand";
+import {
+  type SetRcsMessageSpendLimitOverrideCommandInput,
+  type SetRcsMessageSpendLimitOverrideCommandOutput,
+  SetRcsMessageSpendLimitOverrideCommand,
+} from "./commands/SetRcsMessageSpendLimitOverrideCommand";
+import {
+  type SetTextMessageSpendLimitOverrideCommandInput,
+  type SetTextMessageSpendLimitOverrideCommandOutput,
+  SetTextMessageSpendLimitOverrideCommand,
+} from "./commands/SetTextMessageSpendLimitOverrideCommand";
+import {
+  type SetVoiceMessageSpendLimitOverrideCommandInput,
+  type SetVoiceMessageSpendLimitOverrideCommandOutput,
+  SetVoiceMessageSpendLimitOverrideCommand,
+} from "./commands/SetVoiceMessageSpendLimitOverrideCommand";
+import {
+  type SubmitRegistrationVersionCommandInput,
+  type SubmitRegistrationVersionCommandOutput,
+  SubmitRegistrationVersionCommand,
+} from "./commands/SubmitRegistrationVersionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateEventDestinationCommandInput,
+  type UpdateEventDestinationCommandOutput,
+  UpdateEventDestinationCommand,
+} from "./commands/UpdateEventDestinationCommand";
+import {
+  type UpdateNotifyConfigurationCommandInput,
+  type UpdateNotifyConfigurationCommandOutput,
+  UpdateNotifyConfigurationCommand,
+} from "./commands/UpdateNotifyConfigurationCommand";
+import {
+  type UpdatePhoneNumberCommandInput,
+  type UpdatePhoneNumberCommandOutput,
+  UpdatePhoneNumberCommand,
+} from "./commands/UpdatePhoneNumberCommand";
+import {
+  type UpdatePoolCommandInput,
+  type UpdatePoolCommandOutput,
+  UpdatePoolCommand,
+} from "./commands/UpdatePoolCommand";
+import {
+  type UpdateProtectConfigurationCommandInput,
+  type UpdateProtectConfigurationCommandOutput,
+  UpdateProtectConfigurationCommand,
+} from "./commands/UpdateProtectConfigurationCommand";
+import {
+  type UpdateProtectConfigurationCountryRuleSetCommandInput,
+  type UpdateProtectConfigurationCountryRuleSetCommandOutput,
+  UpdateProtectConfigurationCountryRuleSetCommand,
+} from "./commands/UpdateProtectConfigurationCountryRuleSetCommand";
+import {
+  type UpdateRcsAgentCommandInput,
+  type UpdateRcsAgentCommandOutput,
+  UpdateRcsAgentCommand,
+} from "./commands/UpdateRcsAgentCommand";
+import {
+  type UpdateSenderIdCommandInput,
+  type UpdateSenderIdCommandOutput,
+  UpdateSenderIdCommand,
+} from "./commands/UpdateSenderIdCommand";
+import {
+  type VerifyDestinationNumberCommandInput,
+  type VerifyDestinationNumberCommandOutput,
+  VerifyDestinationNumberCommand,
+} from "./commands/VerifyDestinationNumberCommand";
+import { paginateDescribeAccountAttributes } from "./pagination/DescribeAccountAttributesPaginator";
+import { paginateDescribeAccountLimits } from "./pagination/DescribeAccountLimitsPaginator";
+import { paginateDescribeConfigurationSets } from "./pagination/DescribeConfigurationSetsPaginator";
+import { paginateDescribeKeywords } from "./pagination/DescribeKeywordsPaginator";
+import { paginateDescribeNotifyConfigurations } from "./pagination/DescribeNotifyConfigurationsPaginator";
+import { paginateDescribeNotifyTemplates } from "./pagination/DescribeNotifyTemplatesPaginator";
+import { paginateDescribeOptedOutNumbers } from "./pagination/DescribeOptedOutNumbersPaginator";
+import { paginateDescribeOptOutLists } from "./pagination/DescribeOptOutListsPaginator";
+import { paginateDescribePhoneNumbers } from "./pagination/DescribePhoneNumbersPaginator";
+import { paginateDescribePools } from "./pagination/DescribePoolsPaginator";
+import { paginateDescribeProtectConfigurations } from "./pagination/DescribeProtectConfigurationsPaginator";
+import { paginateDescribeRcsAgentCountryLaunchStatus } from "./pagination/DescribeRcsAgentCountryLaunchStatusPaginator";
+import { paginateDescribeRcsAgents } from "./pagination/DescribeRcsAgentsPaginator";
+import { paginateDescribeRegistrationAttachments } from "./pagination/DescribeRegistrationAttachmentsPaginator";
+import {
+  paginateDescribeRegistrationFieldDefinitions,
+} from "./pagination/DescribeRegistrationFieldDefinitionsPaginator";
+import { paginateDescribeRegistrationFieldValues } from "./pagination/DescribeRegistrationFieldValuesPaginator";
+import {
+  paginateDescribeRegistrationSectionDefinitions,
+} from "./pagination/DescribeRegistrationSectionDefinitionsPaginator";
+import { paginateDescribeRegistrations } from "./pagination/DescribeRegistrationsPaginator";
+import { paginateDescribeRegistrationTypeDefinitions } from "./pagination/DescribeRegistrationTypeDefinitionsPaginator";
+import { paginateDescribeRegistrationVersions } from "./pagination/DescribeRegistrationVersionsPaginator";
+import { paginateDescribeSenderIds } from "./pagination/DescribeSenderIdsPaginator";
+import { paginateDescribeSpendLimits } from "./pagination/DescribeSpendLimitsPaginator";
+import { paginateDescribeVerifiedDestinationNumbers } from "./pagination/DescribeVerifiedDestinationNumbersPaginator";
+import { paginateListAvailablePhoneNumbers } from "./pagination/ListAvailablePhoneNumbersPaginator";
+import { paginateListNotifyCountries } from "./pagination/ListNotifyCountriesPaginator";
+import { paginateListPoolOriginationIdentities } from "./pagination/ListPoolOriginationIdentitiesPaginator";
+import {
+  paginateListProtectConfigurationRuleSetNumberOverrides,
+} from "./pagination/ListProtectConfigurationRuleSetNumberOverridesPaginator";
+import { paginateListRegistrationAssociations } from "./pagination/ListRegistrationAssociationsPaginator";
+import { PinpointSMSVoiceV2Client } from "./PinpointSMSVoiceV2Client";
+
+const commands = {
+  AssociateOriginationIdentityCommand,
+  AssociateProtectConfigurationCommand,
+  CarrierLookupCommand,
+  CreateConfigurationSetCommand,
+  CreateEventDestinationCommand,
+  CreateNotifyConfigurationCommand,
+  CreateOptOutListCommand,
+  CreatePoolCommand,
+  CreateProtectConfigurationCommand,
+  CreateRcsAgentCommand,
+  CreateRegistrationCommand,
+  CreateRegistrationAssociationCommand,
+  CreateRegistrationAttachmentCommand,
+  CreateRegistrationVersionCommand,
+  CreateVerifiedDestinationNumberCommand,
+  DeleteAccountDefaultProtectConfigurationCommand,
+  DeleteConfigurationSetCommand,
+  DeleteDefaultMessageTypeCommand,
+  DeleteDefaultSenderIdCommand,
+  DeleteEventDestinationCommand,
+  DeleteKeywordCommand,
+  DeleteMediaMessageSpendLimitOverrideCommand,
+  DeleteNotifyConfigurationCommand,
+  DeleteNotifyMessageSpendLimitOverrideCommand,
+  DeleteOptedOutNumberCommand,
+  DeleteOptOutListCommand,
+  DeletePoolCommand,
+  DeleteProtectConfigurationCommand,
+  DeleteProtectConfigurationRuleSetNumberOverrideCommand,
+  DeleteRcsAgentCommand,
+  DeleteRcsMessageSpendLimitOverrideCommand,
+  DeleteRegistrationCommand,
+  DeleteRegistrationAttachmentCommand,
+  DeleteRegistrationFieldValueCommand,
+  DeleteResourcePolicyCommand,
+  DeleteTextMessageSpendLimitOverrideCommand,
+  DeleteVerifiedDestinationNumberCommand,
+  DeleteVoiceMessageSpendLimitOverrideCommand,
+  DescribeAccountAttributesCommand,
+  DescribeAccountLimitsCommand,
+  DescribeConfigurationSetsCommand,
+  DescribeKeywordsCommand,
+  DescribeNotifyConfigurationsCommand,
+  DescribeNotifyTemplatesCommand,
+  DescribeOptedOutNumbersCommand,
+  DescribeOptOutListsCommand,
+  DescribePhoneNumbersCommand,
+  DescribePoolsCommand,
+  DescribeProtectConfigurationsCommand,
+  DescribeRcsAgentCountryLaunchStatusCommand,
+  DescribeRcsAgentsCommand,
+  DescribeRegistrationAttachmentsCommand,
+  DescribeRegistrationFieldDefinitionsCommand,
+  DescribeRegistrationFieldValuesCommand,
+  DescribeRegistrationsCommand,
+  DescribeRegistrationSectionDefinitionsCommand,
+  DescribeRegistrationTypeDefinitionsCommand,
+  DescribeRegistrationVersionsCommand,
+  DescribeSenderIdsCommand,
+  DescribeSpendLimitsCommand,
+  DescribeVerifiedDestinationNumbersCommand,
+  DisassociateOriginationIdentityCommand,
+  DisassociateProtectConfigurationCommand,
+  DiscardRegistrationVersionCommand,
+  GetProtectConfigurationCountryRuleSetCommand,
+  GetResourcePolicyCommand,
+  ListAvailablePhoneNumbersCommand,
+  ListNotifyCountriesCommand,
+  ListPoolOriginationIdentitiesCommand,
+  ListProtectConfigurationRuleSetNumberOverridesCommand,
+  ListRegistrationAssociationsCommand,
+  ListTagsForResourceCommand,
+  PutKeywordCommand,
+  PutMessageFeedbackCommand,
+  PutOptedOutNumberCommand,
+  PutProtectConfigurationRuleSetNumberOverrideCommand,
+  PutRegistrationFieldValueCommand,
+  PutResourcePolicyCommand,
+  ReleasePhoneNumberCommand,
+  ReleaseSenderIdCommand,
+  RequestPhoneNumberCommand,
+  RequestSenderIdCommand,
+  SendDestinationNumberVerificationCodeCommand,
+  SendMediaMessageCommand,
+  SendNotifyTextMessageCommand,
+  SendNotifyVoiceMessageCommand,
+  SendRcsMessageCommand,
+  SendTextMessageCommand,
+  SendVoiceMessageCommand,
+  SetAccountDefaultProtectConfigurationCommand,
+  SetDefaultMessageFeedbackEnabledCommand,
+  SetDefaultMessageTypeCommand,
+  SetDefaultSenderIdCommand,
+  SetMediaMessageSpendLimitOverrideCommand,
+  SetNotifyMessageSpendLimitOverrideCommand,
+  SetRcsMessageSpendLimitOverrideCommand,
+  SetTextMessageSpendLimitOverrideCommand,
+  SetVoiceMessageSpendLimitOverrideCommand,
+  SubmitRegistrationVersionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateEventDestinationCommand,
+  UpdateNotifyConfigurationCommand,
+  UpdatePhoneNumberCommand,
+  UpdatePoolCommand,
+  UpdateProtectConfigurationCommand,
+  UpdateProtectConfigurationCountryRuleSetCommand,
+  UpdateRcsAgentCommand,
+  UpdateSenderIdCommand,
+  VerifyDestinationNumberCommand,
+};
+const paginators = {
+  paginateDescribeAccountAttributes,
+  paginateDescribeAccountLimits,
+  paginateDescribeConfigurationSets,
+  paginateDescribeKeywords,
+  paginateDescribeNotifyConfigurations,
+  paginateDescribeNotifyTemplates,
+  paginateDescribeOptedOutNumbers,
+  paginateDescribeOptOutLists,
+  paginateDescribePhoneNumbers,
+  paginateDescribePools,
+  paginateDescribeProtectConfigurations,
+  paginateDescribeRcsAgentCountryLaunchStatus,
+  paginateDescribeRcsAgents,
+  paginateDescribeRegistrationAttachments,
+  paginateDescribeRegistrationFieldDefinitions,
+  paginateDescribeRegistrationFieldValues,
+  paginateDescribeRegistrations,
+  paginateDescribeRegistrationSectionDefinitions,
+  paginateDescribeRegistrationTypeDefinitions,
+  paginateDescribeRegistrationVersions,
+  paginateDescribeSenderIds,
+  paginateDescribeSpendLimits,
+  paginateDescribeVerifiedDestinationNumbers,
+  paginateListAvailablePhoneNumbers,
+  paginateListNotifyCountries,
+  paginateListPoolOriginationIdentities,
+  paginateListProtectConfigurationRuleSetNumberOverrides,
+  paginateListRegistrationAssociations,
+};
+
+/**
+ * @public
+ */
+export interface PinpointSMSVoiceV2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PinpointSMSVoiceV2 {
+  /**
+   * @see {@link AssociateOriginationIdentityCommand}
+   */
+  associateOriginationIdentity(
+    args: AssociateOriginationIdentityCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<AssociateOriginationIdentityCommandOutput>;
+  associateOriginationIdentity(
+    args: AssociateOriginationIdentityCommandInput,
+    cb: (err: any, data?: AssociateOriginationIdentityCommandOutput) => void
+  ): void;
+  associateOriginationIdentity(
+    args: AssociateOriginationIdentityCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: AssociateOriginationIdentityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateProtectConfigurationCommand}
+   */
+  associateProtectConfiguration(
+    args: AssociateProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<AssociateProtectConfigurationCommandOutput>;
+  associateProtectConfiguration(
+    args: AssociateProtectConfigurationCommandInput,
+    cb: (err: any, data?: AssociateProtectConfigurationCommandOutput) => void
+  ): void;
+  associateProtectConfiguration(
+    args: AssociateProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: AssociateProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CarrierLookupCommand}
+   */
+  carrierLookup(
+    args: CarrierLookupCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CarrierLookupCommandOutput>;
+  carrierLookup(
+    args: CarrierLookupCommandInput,
+    cb: (err: any, data?: CarrierLookupCommandOutput) => void
+  ): void;
+  carrierLookup(
+    args: CarrierLookupCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CarrierLookupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfigurationSetCommand}
+   */
+  createConfigurationSet(
+    args: CreateConfigurationSetCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateConfigurationSetCommandOutput>;
+  createConfigurationSet(
+    args: CreateConfigurationSetCommandInput,
+    cb: (err: any, data?: CreateConfigurationSetCommandOutput) => void
+  ): void;
+  createConfigurationSet(
+    args: CreateConfigurationSetCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateConfigurationSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventDestinationCommand}
+   */
+  createEventDestination(
+    args: CreateEventDestinationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateEventDestinationCommandOutput>;
+  createEventDestination(
+    args: CreateEventDestinationCommandInput,
+    cb: (err: any, data?: CreateEventDestinationCommandOutput) => void
+  ): void;
+  createEventDestination(
+    args: CreateEventDestinationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateEventDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNotifyConfigurationCommand}
+   */
+  createNotifyConfiguration(
+    args: CreateNotifyConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateNotifyConfigurationCommandOutput>;
+  createNotifyConfiguration(
+    args: CreateNotifyConfigurationCommandInput,
+    cb: (err: any, data?: CreateNotifyConfigurationCommandOutput) => void
+  ): void;
+  createNotifyConfiguration(
+    args: CreateNotifyConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateNotifyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateOptOutListCommand}
+   */
+  createOptOutList(
+    args: CreateOptOutListCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateOptOutListCommandOutput>;
+  createOptOutList(
+    args: CreateOptOutListCommandInput,
+    cb: (err: any, data?: CreateOptOutListCommandOutput) => void
+  ): void;
+  createOptOutList(
+    args: CreateOptOutListCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateOptOutListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePoolCommand}
+   */
+  createPool(
+    args: CreatePoolCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreatePoolCommandOutput>;
+  createPool(
+    args: CreatePoolCommandInput,
+    cb: (err: any, data?: CreatePoolCommandOutput) => void
+  ): void;
+  createPool(
+    args: CreatePoolCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreatePoolCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateProtectConfigurationCommand}
+   */
+  createProtectConfiguration(): Promise<CreateProtectConfigurationCommandOutput>;
+  createProtectConfiguration(
+    args: CreateProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateProtectConfigurationCommandOutput>;
+  createProtectConfiguration(
+    args: CreateProtectConfigurationCommandInput,
+    cb: (err: any, data?: CreateProtectConfigurationCommandOutput) => void
+  ): void;
+  createProtectConfiguration(
+    args: CreateProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRcsAgentCommand}
+   */
+  createRcsAgent(): Promise<CreateRcsAgentCommandOutput>;
+  createRcsAgent(
+    args: CreateRcsAgentCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateRcsAgentCommandOutput>;
+  createRcsAgent(
+    args: CreateRcsAgentCommandInput,
+    cb: (err: any, data?: CreateRcsAgentCommandOutput) => void
+  ): void;
+  createRcsAgent(
+    args: CreateRcsAgentCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateRcsAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRegistrationCommand}
+   */
+  createRegistration(
+    args: CreateRegistrationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateRegistrationCommandOutput>;
+  createRegistration(
+    args: CreateRegistrationCommandInput,
+    cb: (err: any, data?: CreateRegistrationCommandOutput) => void
+  ): void;
+  createRegistration(
+    args: CreateRegistrationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRegistrationAssociationCommand}
+   */
+  createRegistrationAssociation(
+    args: CreateRegistrationAssociationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateRegistrationAssociationCommandOutput>;
+  createRegistrationAssociation(
+    args: CreateRegistrationAssociationCommandInput,
+    cb: (err: any, data?: CreateRegistrationAssociationCommandOutput) => void
+  ): void;
+  createRegistrationAssociation(
+    args: CreateRegistrationAssociationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateRegistrationAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRegistrationAttachmentCommand}
+   */
+  createRegistrationAttachment(): Promise<CreateRegistrationAttachmentCommandOutput>;
+  createRegistrationAttachment(
+    args: CreateRegistrationAttachmentCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateRegistrationAttachmentCommandOutput>;
+  createRegistrationAttachment(
+    args: CreateRegistrationAttachmentCommandInput,
+    cb: (err: any, data?: CreateRegistrationAttachmentCommandOutput) => void
+  ): void;
+  createRegistrationAttachment(
+    args: CreateRegistrationAttachmentCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateRegistrationAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRegistrationVersionCommand}
+   */
+  createRegistrationVersion(
+    args: CreateRegistrationVersionCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateRegistrationVersionCommandOutput>;
+  createRegistrationVersion(
+    args: CreateRegistrationVersionCommandInput,
+    cb: (err: any, data?: CreateRegistrationVersionCommandOutput) => void
+  ): void;
+  createRegistrationVersion(
+    args: CreateRegistrationVersionCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateRegistrationVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVerifiedDestinationNumberCommand}
+   */
+  createVerifiedDestinationNumber(
+    args: CreateVerifiedDestinationNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<CreateVerifiedDestinationNumberCommandOutput>;
+  createVerifiedDestinationNumber(
+    args: CreateVerifiedDestinationNumberCommandInput,
+    cb: (err: any, data?: CreateVerifiedDestinationNumberCommandOutput) => void
+  ): void;
+  createVerifiedDestinationNumber(
+    args: CreateVerifiedDestinationNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: CreateVerifiedDestinationNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountDefaultProtectConfigurationCommand}
+   */
+  deleteAccountDefaultProtectConfiguration(): Promise<DeleteAccountDefaultProtectConfigurationCommandOutput>;
+  deleteAccountDefaultProtectConfiguration(
+    args: DeleteAccountDefaultProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteAccountDefaultProtectConfigurationCommandOutput>;
+  deleteAccountDefaultProtectConfiguration(
+    args: DeleteAccountDefaultProtectConfigurationCommandInput,
+    cb: (err: any, data?: DeleteAccountDefaultProtectConfigurationCommandOutput) => void
+  ): void;
+  deleteAccountDefaultProtectConfiguration(
+    args: DeleteAccountDefaultProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteAccountDefaultProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfigurationSetCommand}
+   */
+  deleteConfigurationSet(
+    args: DeleteConfigurationSetCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteConfigurationSetCommandOutput>;
+  deleteConfigurationSet(
+    args: DeleteConfigurationSetCommandInput,
+    cb: (err: any, data?: DeleteConfigurationSetCommandOutput) => void
+  ): void;
+  deleteConfigurationSet(
+    args: DeleteConfigurationSetCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteConfigurationSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDefaultMessageTypeCommand}
+   */
+  deleteDefaultMessageType(
+    args: DeleteDefaultMessageTypeCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteDefaultMessageTypeCommandOutput>;
+  deleteDefaultMessageType(
+    args: DeleteDefaultMessageTypeCommandInput,
+    cb: (err: any, data?: DeleteDefaultMessageTypeCommandOutput) => void
+  ): void;
+  deleteDefaultMessageType(
+    args: DeleteDefaultMessageTypeCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteDefaultMessageTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDefaultSenderIdCommand}
+   */
+  deleteDefaultSenderId(
+    args: DeleteDefaultSenderIdCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteDefaultSenderIdCommandOutput>;
+  deleteDefaultSenderId(
+    args: DeleteDefaultSenderIdCommandInput,
+    cb: (err: any, data?: DeleteDefaultSenderIdCommandOutput) => void
+  ): void;
+  deleteDefaultSenderId(
+    args: DeleteDefaultSenderIdCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteDefaultSenderIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventDestinationCommand}
+   */
+  deleteEventDestination(
+    args: DeleteEventDestinationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteEventDestinationCommandOutput>;
+  deleteEventDestination(
+    args: DeleteEventDestinationCommandInput,
+    cb: (err: any, data?: DeleteEventDestinationCommandOutput) => void
+  ): void;
+  deleteEventDestination(
+    args: DeleteEventDestinationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteEventDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKeywordCommand}
+   */
+  deleteKeyword(
+    args: DeleteKeywordCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteKeywordCommandOutput>;
+  deleteKeyword(
+    args: DeleteKeywordCommandInput,
+    cb: (err: any, data?: DeleteKeywordCommandOutput) => void
+  ): void;
+  deleteKeyword(
+    args: DeleteKeywordCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteKeywordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMediaMessageSpendLimitOverrideCommand}
+   */
+  deleteMediaMessageSpendLimitOverride(): Promise<DeleteMediaMessageSpendLimitOverrideCommandOutput>;
+  deleteMediaMessageSpendLimitOverride(
+    args: DeleteMediaMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteMediaMessageSpendLimitOverrideCommandOutput>;
+  deleteMediaMessageSpendLimitOverride(
+    args: DeleteMediaMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: DeleteMediaMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  deleteMediaMessageSpendLimitOverride(
+    args: DeleteMediaMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteMediaMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNotifyConfigurationCommand}
+   */
+  deleteNotifyConfiguration(
+    args: DeleteNotifyConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteNotifyConfigurationCommandOutput>;
+  deleteNotifyConfiguration(
+    args: DeleteNotifyConfigurationCommandInput,
+    cb: (err: any, data?: DeleteNotifyConfigurationCommandOutput) => void
+  ): void;
+  deleteNotifyConfiguration(
+    args: DeleteNotifyConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteNotifyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNotifyMessageSpendLimitOverrideCommand}
+   */
+  deleteNotifyMessageSpendLimitOverride(): Promise<DeleteNotifyMessageSpendLimitOverrideCommandOutput>;
+  deleteNotifyMessageSpendLimitOverride(
+    args: DeleteNotifyMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteNotifyMessageSpendLimitOverrideCommandOutput>;
+  deleteNotifyMessageSpendLimitOverride(
+    args: DeleteNotifyMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: DeleteNotifyMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  deleteNotifyMessageSpendLimitOverride(
+    args: DeleteNotifyMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteNotifyMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteOptedOutNumberCommand}
+   */
+  deleteOptedOutNumber(
+    args: DeleteOptedOutNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteOptedOutNumberCommandOutput>;
+  deleteOptedOutNumber(
+    args: DeleteOptedOutNumberCommandInput,
+    cb: (err: any, data?: DeleteOptedOutNumberCommandOutput) => void
+  ): void;
+  deleteOptedOutNumber(
+    args: DeleteOptedOutNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteOptedOutNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteOptOutListCommand}
+   */
+  deleteOptOutList(
+    args: DeleteOptOutListCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteOptOutListCommandOutput>;
+  deleteOptOutList(
+    args: DeleteOptOutListCommandInput,
+    cb: (err: any, data?: DeleteOptOutListCommandOutput) => void
+  ): void;
+  deleteOptOutList(
+    args: DeleteOptOutListCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteOptOutListCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePoolCommand}
+   */
+  deletePool(
+    args: DeletePoolCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeletePoolCommandOutput>;
+  deletePool(
+    args: DeletePoolCommandInput,
+    cb: (err: any, data?: DeletePoolCommandOutput) => void
+  ): void;
+  deletePool(
+    args: DeletePoolCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeletePoolCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProtectConfigurationCommand}
+   */
+  deleteProtectConfiguration(
+    args: DeleteProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteProtectConfigurationCommandOutput>;
+  deleteProtectConfiguration(
+    args: DeleteProtectConfigurationCommandInput,
+    cb: (err: any, data?: DeleteProtectConfigurationCommandOutput) => void
+  ): void;
+  deleteProtectConfiguration(
+    args: DeleteProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteProtectConfigurationRuleSetNumberOverrideCommand}
+   */
+  deleteProtectConfigurationRuleSetNumberOverride(
+    args: DeleteProtectConfigurationRuleSetNumberOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteProtectConfigurationRuleSetNumberOverrideCommandOutput>;
+  deleteProtectConfigurationRuleSetNumberOverride(
+    args: DeleteProtectConfigurationRuleSetNumberOverrideCommandInput,
+    cb: (err: any, data?: DeleteProtectConfigurationRuleSetNumberOverrideCommandOutput) => void
+  ): void;
+  deleteProtectConfigurationRuleSetNumberOverride(
+    args: DeleteProtectConfigurationRuleSetNumberOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteProtectConfigurationRuleSetNumberOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRcsAgentCommand}
+   */
+  deleteRcsAgent(
+    args: DeleteRcsAgentCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteRcsAgentCommandOutput>;
+  deleteRcsAgent(
+    args: DeleteRcsAgentCommandInput,
+    cb: (err: any, data?: DeleteRcsAgentCommandOutput) => void
+  ): void;
+  deleteRcsAgent(
+    args: DeleteRcsAgentCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteRcsAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRcsMessageSpendLimitOverrideCommand}
+   */
+  deleteRcsMessageSpendLimitOverride(): Promise<DeleteRcsMessageSpendLimitOverrideCommandOutput>;
+  deleteRcsMessageSpendLimitOverride(
+    args: DeleteRcsMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteRcsMessageSpendLimitOverrideCommandOutput>;
+  deleteRcsMessageSpendLimitOverride(
+    args: DeleteRcsMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: DeleteRcsMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  deleteRcsMessageSpendLimitOverride(
+    args: DeleteRcsMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteRcsMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRegistrationCommand}
+   */
+  deleteRegistration(
+    args: DeleteRegistrationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteRegistrationCommandOutput>;
+  deleteRegistration(
+    args: DeleteRegistrationCommandInput,
+    cb: (err: any, data?: DeleteRegistrationCommandOutput) => void
+  ): void;
+  deleteRegistration(
+    args: DeleteRegistrationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRegistrationAttachmentCommand}
+   */
+  deleteRegistrationAttachment(
+    args: DeleteRegistrationAttachmentCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteRegistrationAttachmentCommandOutput>;
+  deleteRegistrationAttachment(
+    args: DeleteRegistrationAttachmentCommandInput,
+    cb: (err: any, data?: DeleteRegistrationAttachmentCommandOutput) => void
+  ): void;
+  deleteRegistrationAttachment(
+    args: DeleteRegistrationAttachmentCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteRegistrationAttachmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRegistrationFieldValueCommand}
+   */
+  deleteRegistrationFieldValue(
+    args: DeleteRegistrationFieldValueCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteRegistrationFieldValueCommandOutput>;
+  deleteRegistrationFieldValue(
+    args: DeleteRegistrationFieldValueCommandInput,
+    cb: (err: any, data?: DeleteRegistrationFieldValueCommandOutput) => void
+  ): void;
+  deleteRegistrationFieldValue(
+    args: DeleteRegistrationFieldValueCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteRegistrationFieldValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTextMessageSpendLimitOverrideCommand}
+   */
+  deleteTextMessageSpendLimitOverride(): Promise<DeleteTextMessageSpendLimitOverrideCommandOutput>;
+  deleteTextMessageSpendLimitOverride(
+    args: DeleteTextMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteTextMessageSpendLimitOverrideCommandOutput>;
+  deleteTextMessageSpendLimitOverride(
+    args: DeleteTextMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: DeleteTextMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  deleteTextMessageSpendLimitOverride(
+    args: DeleteTextMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteTextMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVerifiedDestinationNumberCommand}
+   */
+  deleteVerifiedDestinationNumber(
+    args: DeleteVerifiedDestinationNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteVerifiedDestinationNumberCommandOutput>;
+  deleteVerifiedDestinationNumber(
+    args: DeleteVerifiedDestinationNumberCommandInput,
+    cb: (err: any, data?: DeleteVerifiedDestinationNumberCommandOutput) => void
+  ): void;
+  deleteVerifiedDestinationNumber(
+    args: DeleteVerifiedDestinationNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteVerifiedDestinationNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVoiceMessageSpendLimitOverrideCommand}
+   */
+  deleteVoiceMessageSpendLimitOverride(): Promise<DeleteVoiceMessageSpendLimitOverrideCommandOutput>;
+  deleteVoiceMessageSpendLimitOverride(
+    args: DeleteVoiceMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DeleteVoiceMessageSpendLimitOverrideCommandOutput>;
+  deleteVoiceMessageSpendLimitOverride(
+    args: DeleteVoiceMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: DeleteVoiceMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  deleteVoiceMessageSpendLimitOverride(
+    args: DeleteVoiceMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DeleteVoiceMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountAttributesCommand}
+   */
+  describeAccountAttributes(): Promise<DescribeAccountAttributesCommandOutput>;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeAccountAttributesCommandOutput>;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
+  ): void;
+  describeAccountAttributes(
+    args: DescribeAccountAttributesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeAccountAttributesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountLimitsCommand}
+   */
+  describeAccountLimits(): Promise<DescribeAccountLimitsCommandOutput>;
+  describeAccountLimits(
+    args: DescribeAccountLimitsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeAccountLimitsCommandOutput>;
+  describeAccountLimits(
+    args: DescribeAccountLimitsCommandInput,
+    cb: (err: any, data?: DescribeAccountLimitsCommandOutput) => void
+  ): void;
+  describeAccountLimits(
+    args: DescribeAccountLimitsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeAccountLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeConfigurationSetsCommand}
+   */
+  describeConfigurationSets(): Promise<DescribeConfigurationSetsCommandOutput>;
+  describeConfigurationSets(
+    args: DescribeConfigurationSetsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeConfigurationSetsCommandOutput>;
+  describeConfigurationSets(
+    args: DescribeConfigurationSetsCommandInput,
+    cb: (err: any, data?: DescribeConfigurationSetsCommandOutput) => void
+  ): void;
+  describeConfigurationSets(
+    args: DescribeConfigurationSetsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeConfigurationSetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeKeywordsCommand}
+   */
+  describeKeywords(
+    args: DescribeKeywordsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeKeywordsCommandOutput>;
+  describeKeywords(
+    args: DescribeKeywordsCommandInput,
+    cb: (err: any, data?: DescribeKeywordsCommandOutput) => void
+  ): void;
+  describeKeywords(
+    args: DescribeKeywordsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeKeywordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNotifyConfigurationsCommand}
+   */
+  describeNotifyConfigurations(): Promise<DescribeNotifyConfigurationsCommandOutput>;
+  describeNotifyConfigurations(
+    args: DescribeNotifyConfigurationsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeNotifyConfigurationsCommandOutput>;
+  describeNotifyConfigurations(
+    args: DescribeNotifyConfigurationsCommandInput,
+    cb: (err: any, data?: DescribeNotifyConfigurationsCommandOutput) => void
+  ): void;
+  describeNotifyConfigurations(
+    args: DescribeNotifyConfigurationsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeNotifyConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeNotifyTemplatesCommand}
+   */
+  describeNotifyTemplates(): Promise<DescribeNotifyTemplatesCommandOutput>;
+  describeNotifyTemplates(
+    args: DescribeNotifyTemplatesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeNotifyTemplatesCommandOutput>;
+  describeNotifyTemplates(
+    args: DescribeNotifyTemplatesCommandInput,
+    cb: (err: any, data?: DescribeNotifyTemplatesCommandOutput) => void
+  ): void;
+  describeNotifyTemplates(
+    args: DescribeNotifyTemplatesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeNotifyTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOptedOutNumbersCommand}
+   */
+  describeOptedOutNumbers(
+    args: DescribeOptedOutNumbersCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeOptedOutNumbersCommandOutput>;
+  describeOptedOutNumbers(
+    args: DescribeOptedOutNumbersCommandInput,
+    cb: (err: any, data?: DescribeOptedOutNumbersCommandOutput) => void
+  ): void;
+  describeOptedOutNumbers(
+    args: DescribeOptedOutNumbersCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeOptedOutNumbersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOptOutListsCommand}
+   */
+  describeOptOutLists(): Promise<DescribeOptOutListsCommandOutput>;
+  describeOptOutLists(
+    args: DescribeOptOutListsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeOptOutListsCommandOutput>;
+  describeOptOutLists(
+    args: DescribeOptOutListsCommandInput,
+    cb: (err: any, data?: DescribeOptOutListsCommandOutput) => void
+  ): void;
+  describeOptOutLists(
+    args: DescribeOptOutListsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeOptOutListsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePhoneNumbersCommand}
+   */
+  describePhoneNumbers(): Promise<DescribePhoneNumbersCommandOutput>;
+  describePhoneNumbers(
+    args: DescribePhoneNumbersCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribePhoneNumbersCommandOutput>;
+  describePhoneNumbers(
+    args: DescribePhoneNumbersCommandInput,
+    cb: (err: any, data?: DescribePhoneNumbersCommandOutput) => void
+  ): void;
+  describePhoneNumbers(
+    args: DescribePhoneNumbersCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribePhoneNumbersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribePoolsCommand}
+   */
+  describePools(): Promise<DescribePoolsCommandOutput>;
+  describePools(
+    args: DescribePoolsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribePoolsCommandOutput>;
+  describePools(
+    args: DescribePoolsCommandInput,
+    cb: (err: any, data?: DescribePoolsCommandOutput) => void
+  ): void;
+  describePools(
+    args: DescribePoolsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribePoolsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeProtectConfigurationsCommand}
+   */
+  describeProtectConfigurations(): Promise<DescribeProtectConfigurationsCommandOutput>;
+  describeProtectConfigurations(
+    args: DescribeProtectConfigurationsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeProtectConfigurationsCommandOutput>;
+  describeProtectConfigurations(
+    args: DescribeProtectConfigurationsCommandInput,
+    cb: (err: any, data?: DescribeProtectConfigurationsCommandOutput) => void
+  ): void;
+  describeProtectConfigurations(
+    args: DescribeProtectConfigurationsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeProtectConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRcsAgentCountryLaunchStatusCommand}
+   */
+  describeRcsAgentCountryLaunchStatus(
+    args: DescribeRcsAgentCountryLaunchStatusCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRcsAgentCountryLaunchStatusCommandOutput>;
+  describeRcsAgentCountryLaunchStatus(
+    args: DescribeRcsAgentCountryLaunchStatusCommandInput,
+    cb: (err: any, data?: DescribeRcsAgentCountryLaunchStatusCommandOutput) => void
+  ): void;
+  describeRcsAgentCountryLaunchStatus(
+    args: DescribeRcsAgentCountryLaunchStatusCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRcsAgentCountryLaunchStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRcsAgentsCommand}
+   */
+  describeRcsAgents(): Promise<DescribeRcsAgentsCommandOutput>;
+  describeRcsAgents(
+    args: DescribeRcsAgentsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRcsAgentsCommandOutput>;
+  describeRcsAgents(
+    args: DescribeRcsAgentsCommandInput,
+    cb: (err: any, data?: DescribeRcsAgentsCommandOutput) => void
+  ): void;
+  describeRcsAgents(
+    args: DescribeRcsAgentsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRcsAgentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationAttachmentsCommand}
+   */
+  describeRegistrationAttachments(): Promise<DescribeRegistrationAttachmentsCommandOutput>;
+  describeRegistrationAttachments(
+    args: DescribeRegistrationAttachmentsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationAttachmentsCommandOutput>;
+  describeRegistrationAttachments(
+    args: DescribeRegistrationAttachmentsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationAttachmentsCommandOutput) => void
+  ): void;
+  describeRegistrationAttachments(
+    args: DescribeRegistrationAttachmentsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationAttachmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationFieldDefinitionsCommand}
+   */
+  describeRegistrationFieldDefinitions(
+    args: DescribeRegistrationFieldDefinitionsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationFieldDefinitionsCommandOutput>;
+  describeRegistrationFieldDefinitions(
+    args: DescribeRegistrationFieldDefinitionsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationFieldDefinitionsCommandOutput) => void
+  ): void;
+  describeRegistrationFieldDefinitions(
+    args: DescribeRegistrationFieldDefinitionsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationFieldDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationFieldValuesCommand}
+   */
+  describeRegistrationFieldValues(
+    args: DescribeRegistrationFieldValuesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationFieldValuesCommandOutput>;
+  describeRegistrationFieldValues(
+    args: DescribeRegistrationFieldValuesCommandInput,
+    cb: (err: any, data?: DescribeRegistrationFieldValuesCommandOutput) => void
+  ): void;
+  describeRegistrationFieldValues(
+    args: DescribeRegistrationFieldValuesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationFieldValuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationsCommand}
+   */
+  describeRegistrations(): Promise<DescribeRegistrationsCommandOutput>;
+  describeRegistrations(
+    args: DescribeRegistrationsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationsCommandOutput>;
+  describeRegistrations(
+    args: DescribeRegistrationsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationsCommandOutput) => void
+  ): void;
+  describeRegistrations(
+    args: DescribeRegistrationsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationSectionDefinitionsCommand}
+   */
+  describeRegistrationSectionDefinitions(
+    args: DescribeRegistrationSectionDefinitionsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationSectionDefinitionsCommandOutput>;
+  describeRegistrationSectionDefinitions(
+    args: DescribeRegistrationSectionDefinitionsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationSectionDefinitionsCommandOutput) => void
+  ): void;
+  describeRegistrationSectionDefinitions(
+    args: DescribeRegistrationSectionDefinitionsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationSectionDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationTypeDefinitionsCommand}
+   */
+  describeRegistrationTypeDefinitions(): Promise<DescribeRegistrationTypeDefinitionsCommandOutput>;
+  describeRegistrationTypeDefinitions(
+    args: DescribeRegistrationTypeDefinitionsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationTypeDefinitionsCommandOutput>;
+  describeRegistrationTypeDefinitions(
+    args: DescribeRegistrationTypeDefinitionsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationTypeDefinitionsCommandOutput) => void
+  ): void;
+  describeRegistrationTypeDefinitions(
+    args: DescribeRegistrationTypeDefinitionsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationTypeDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRegistrationVersionsCommand}
+   */
+  describeRegistrationVersions(
+    args: DescribeRegistrationVersionsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeRegistrationVersionsCommandOutput>;
+  describeRegistrationVersions(
+    args: DescribeRegistrationVersionsCommandInput,
+    cb: (err: any, data?: DescribeRegistrationVersionsCommandOutput) => void
+  ): void;
+  describeRegistrationVersions(
+    args: DescribeRegistrationVersionsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeRegistrationVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSenderIdsCommand}
+   */
+  describeSenderIds(): Promise<DescribeSenderIdsCommandOutput>;
+  describeSenderIds(
+    args: DescribeSenderIdsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeSenderIdsCommandOutput>;
+  describeSenderIds(
+    args: DescribeSenderIdsCommandInput,
+    cb: (err: any, data?: DescribeSenderIdsCommandOutput) => void
+  ): void;
+  describeSenderIds(
+    args: DescribeSenderIdsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeSenderIdsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSpendLimitsCommand}
+   */
+  describeSpendLimits(): Promise<DescribeSpendLimitsCommandOutput>;
+  describeSpendLimits(
+    args: DescribeSpendLimitsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeSpendLimitsCommandOutput>;
+  describeSpendLimits(
+    args: DescribeSpendLimitsCommandInput,
+    cb: (err: any, data?: DescribeSpendLimitsCommandOutput) => void
+  ): void;
+  describeSpendLimits(
+    args: DescribeSpendLimitsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeSpendLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeVerifiedDestinationNumbersCommand}
+   */
+  describeVerifiedDestinationNumbers(): Promise<DescribeVerifiedDestinationNumbersCommandOutput>;
+  describeVerifiedDestinationNumbers(
+    args: DescribeVerifiedDestinationNumbersCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DescribeVerifiedDestinationNumbersCommandOutput>;
+  describeVerifiedDestinationNumbers(
+    args: DescribeVerifiedDestinationNumbersCommandInput,
+    cb: (err: any, data?: DescribeVerifiedDestinationNumbersCommandOutput) => void
+  ): void;
+  describeVerifiedDestinationNumbers(
+    args: DescribeVerifiedDestinationNumbersCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DescribeVerifiedDestinationNumbersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateOriginationIdentityCommand}
+   */
+  disassociateOriginationIdentity(
+    args: DisassociateOriginationIdentityCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DisassociateOriginationIdentityCommandOutput>;
+  disassociateOriginationIdentity(
+    args: DisassociateOriginationIdentityCommandInput,
+    cb: (err: any, data?: DisassociateOriginationIdentityCommandOutput) => void
+  ): void;
+  disassociateOriginationIdentity(
+    args: DisassociateOriginationIdentityCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DisassociateOriginationIdentityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateProtectConfigurationCommand}
+   */
+  disassociateProtectConfiguration(
+    args: DisassociateProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DisassociateProtectConfigurationCommandOutput>;
+  disassociateProtectConfiguration(
+    args: DisassociateProtectConfigurationCommandInput,
+    cb: (err: any, data?: DisassociateProtectConfigurationCommandOutput) => void
+  ): void;
+  disassociateProtectConfiguration(
+    args: DisassociateProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DisassociateProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DiscardRegistrationVersionCommand}
+   */
+  discardRegistrationVersion(
+    args: DiscardRegistrationVersionCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<DiscardRegistrationVersionCommandOutput>;
+  discardRegistrationVersion(
+    args: DiscardRegistrationVersionCommandInput,
+    cb: (err: any, data?: DiscardRegistrationVersionCommandOutput) => void
+  ): void;
+  discardRegistrationVersion(
+    args: DiscardRegistrationVersionCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: DiscardRegistrationVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProtectConfigurationCountryRuleSetCommand}
+   */
+  getProtectConfigurationCountryRuleSet(
+    args: GetProtectConfigurationCountryRuleSetCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<GetProtectConfigurationCountryRuleSetCommandOutput>;
+  getProtectConfigurationCountryRuleSet(
+    args: GetProtectConfigurationCountryRuleSetCommandInput,
+    cb: (err: any, data?: GetProtectConfigurationCountryRuleSetCommandOutput) => void
+  ): void;
+  getProtectConfigurationCountryRuleSet(
+    args: GetProtectConfigurationCountryRuleSetCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: GetProtectConfigurationCountryRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAvailablePhoneNumbersCommand}
+   */
+  listAvailablePhoneNumbers(
+    args: ListAvailablePhoneNumbersCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListAvailablePhoneNumbersCommandOutput>;
+  listAvailablePhoneNumbers(
+    args: ListAvailablePhoneNumbersCommandInput,
+    cb: (err: any, data?: ListAvailablePhoneNumbersCommandOutput) => void
+  ): void;
+  listAvailablePhoneNumbers(
+    args: ListAvailablePhoneNumbersCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListAvailablePhoneNumbersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNotifyCountriesCommand}
+   */
+  listNotifyCountries(): Promise<ListNotifyCountriesCommandOutput>;
+  listNotifyCountries(
+    args: ListNotifyCountriesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListNotifyCountriesCommandOutput>;
+  listNotifyCountries(
+    args: ListNotifyCountriesCommandInput,
+    cb: (err: any, data?: ListNotifyCountriesCommandOutput) => void
+  ): void;
+  listNotifyCountries(
+    args: ListNotifyCountriesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListNotifyCountriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPoolOriginationIdentitiesCommand}
+   */
+  listPoolOriginationIdentities(
+    args: ListPoolOriginationIdentitiesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListPoolOriginationIdentitiesCommandOutput>;
+  listPoolOriginationIdentities(
+    args: ListPoolOriginationIdentitiesCommandInput,
+    cb: (err: any, data?: ListPoolOriginationIdentitiesCommandOutput) => void
+  ): void;
+  listPoolOriginationIdentities(
+    args: ListPoolOriginationIdentitiesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListPoolOriginationIdentitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProtectConfigurationRuleSetNumberOverridesCommand}
+   */
+  listProtectConfigurationRuleSetNumberOverrides(
+    args: ListProtectConfigurationRuleSetNumberOverridesCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListProtectConfigurationRuleSetNumberOverridesCommandOutput>;
+  listProtectConfigurationRuleSetNumberOverrides(
+    args: ListProtectConfigurationRuleSetNumberOverridesCommandInput,
+    cb: (err: any, data?: ListProtectConfigurationRuleSetNumberOverridesCommandOutput) => void
+  ): void;
+  listProtectConfigurationRuleSetNumberOverrides(
+    args: ListProtectConfigurationRuleSetNumberOverridesCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListProtectConfigurationRuleSetNumberOverridesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRegistrationAssociationsCommand}
+   */
+  listRegistrationAssociations(
+    args: ListRegistrationAssociationsCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListRegistrationAssociationsCommandOutput>;
+  listRegistrationAssociations(
+    args: ListRegistrationAssociationsCommandInput,
+    cb: (err: any, data?: ListRegistrationAssociationsCommandOutput) => void
+  ): void;
+  listRegistrationAssociations(
+    args: ListRegistrationAssociationsCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListRegistrationAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutKeywordCommand}
+   */
+  putKeyword(
+    args: PutKeywordCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutKeywordCommandOutput>;
+  putKeyword(
+    args: PutKeywordCommandInput,
+    cb: (err: any, data?: PutKeywordCommandOutput) => void
+  ): void;
+  putKeyword(
+    args: PutKeywordCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutKeywordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutMessageFeedbackCommand}
+   */
+  putMessageFeedback(
+    args: PutMessageFeedbackCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutMessageFeedbackCommandOutput>;
+  putMessageFeedback(
+    args: PutMessageFeedbackCommandInput,
+    cb: (err: any, data?: PutMessageFeedbackCommandOutput) => void
+  ): void;
+  putMessageFeedback(
+    args: PutMessageFeedbackCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutMessageFeedbackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutOptedOutNumberCommand}
+   */
+  putOptedOutNumber(
+    args: PutOptedOutNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutOptedOutNumberCommandOutput>;
+  putOptedOutNumber(
+    args: PutOptedOutNumberCommandInput,
+    cb: (err: any, data?: PutOptedOutNumberCommandOutput) => void
+  ): void;
+  putOptedOutNumber(
+    args: PutOptedOutNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutOptedOutNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutProtectConfigurationRuleSetNumberOverrideCommand}
+   */
+  putProtectConfigurationRuleSetNumberOverride(
+    args: PutProtectConfigurationRuleSetNumberOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutProtectConfigurationRuleSetNumberOverrideCommandOutput>;
+  putProtectConfigurationRuleSetNumberOverride(
+    args: PutProtectConfigurationRuleSetNumberOverrideCommandInput,
+    cb: (err: any, data?: PutProtectConfigurationRuleSetNumberOverrideCommandOutput) => void
+  ): void;
+  putProtectConfigurationRuleSetNumberOverride(
+    args: PutProtectConfigurationRuleSetNumberOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutProtectConfigurationRuleSetNumberOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRegistrationFieldValueCommand}
+   */
+  putRegistrationFieldValue(
+    args: PutRegistrationFieldValueCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutRegistrationFieldValueCommandOutput>;
+  putRegistrationFieldValue(
+    args: PutRegistrationFieldValueCommandInput,
+    cb: (err: any, data?: PutRegistrationFieldValueCommandOutput) => void
+  ): void;
+  putRegistrationFieldValue(
+    args: PutRegistrationFieldValueCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutRegistrationFieldValueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReleasePhoneNumberCommand}
+   */
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ReleasePhoneNumberCommandOutput>;
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    cb: (err: any, data?: ReleasePhoneNumberCommandOutput) => void
+  ): void;
+  releasePhoneNumber(
+    args: ReleasePhoneNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ReleasePhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReleaseSenderIdCommand}
+   */
+  releaseSenderId(
+    args: ReleaseSenderIdCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<ReleaseSenderIdCommandOutput>;
+  releaseSenderId(
+    args: ReleaseSenderIdCommandInput,
+    cb: (err: any, data?: ReleaseSenderIdCommandOutput) => void
+  ): void;
+  releaseSenderId(
+    args: ReleaseSenderIdCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: ReleaseSenderIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RequestPhoneNumberCommand}
+   */
+  requestPhoneNumber(
+    args: RequestPhoneNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<RequestPhoneNumberCommandOutput>;
+  requestPhoneNumber(
+    args: RequestPhoneNumberCommandInput,
+    cb: (err: any, data?: RequestPhoneNumberCommandOutput) => void
+  ): void;
+  requestPhoneNumber(
+    args: RequestPhoneNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: RequestPhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RequestSenderIdCommand}
+   */
+  requestSenderId(
+    args: RequestSenderIdCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<RequestSenderIdCommandOutput>;
+  requestSenderId(
+    args: RequestSenderIdCommandInput,
+    cb: (err: any, data?: RequestSenderIdCommandOutput) => void
+  ): void;
+  requestSenderId(
+    args: RequestSenderIdCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: RequestSenderIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendDestinationNumberVerificationCodeCommand}
+   */
+  sendDestinationNumberVerificationCode(
+    args: SendDestinationNumberVerificationCodeCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendDestinationNumberVerificationCodeCommandOutput>;
+  sendDestinationNumberVerificationCode(
+    args: SendDestinationNumberVerificationCodeCommandInput,
+    cb: (err: any, data?: SendDestinationNumberVerificationCodeCommandOutput) => void
+  ): void;
+  sendDestinationNumberVerificationCode(
+    args: SendDestinationNumberVerificationCodeCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendDestinationNumberVerificationCodeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendMediaMessageCommand}
+   */
+  sendMediaMessage(
+    args: SendMediaMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendMediaMessageCommandOutput>;
+  sendMediaMessage(
+    args: SendMediaMessageCommandInput,
+    cb: (err: any, data?: SendMediaMessageCommandOutput) => void
+  ): void;
+  sendMediaMessage(
+    args: SendMediaMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendMediaMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendNotifyTextMessageCommand}
+   */
+  sendNotifyTextMessage(
+    args: SendNotifyTextMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendNotifyTextMessageCommandOutput>;
+  sendNotifyTextMessage(
+    args: SendNotifyTextMessageCommandInput,
+    cb: (err: any, data?: SendNotifyTextMessageCommandOutput) => void
+  ): void;
+  sendNotifyTextMessage(
+    args: SendNotifyTextMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendNotifyTextMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendNotifyVoiceMessageCommand}
+   */
+  sendNotifyVoiceMessage(
+    args: SendNotifyVoiceMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendNotifyVoiceMessageCommandOutput>;
+  sendNotifyVoiceMessage(
+    args: SendNotifyVoiceMessageCommandInput,
+    cb: (err: any, data?: SendNotifyVoiceMessageCommandOutput) => void
+  ): void;
+  sendNotifyVoiceMessage(
+    args: SendNotifyVoiceMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendNotifyVoiceMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendRcsMessageCommand}
+   */
+  sendRcsMessage(
+    args: SendRcsMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendRcsMessageCommandOutput>;
+  sendRcsMessage(
+    args: SendRcsMessageCommandInput,
+    cb: (err: any, data?: SendRcsMessageCommandOutput) => void
+  ): void;
+  sendRcsMessage(
+    args: SendRcsMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendRcsMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendTextMessageCommand}
+   */
+  sendTextMessage(
+    args: SendTextMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendTextMessageCommandOutput>;
+  sendTextMessage(
+    args: SendTextMessageCommandInput,
+    cb: (err: any, data?: SendTextMessageCommandOutput) => void
+  ): void;
+  sendTextMessage(
+    args: SendTextMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendTextMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendVoiceMessageCommand}
+   */
+  sendVoiceMessage(
+    args: SendVoiceMessageCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SendVoiceMessageCommandOutput>;
+  sendVoiceMessage(
+    args: SendVoiceMessageCommandInput,
+    cb: (err: any, data?: SendVoiceMessageCommandOutput) => void
+  ): void;
+  sendVoiceMessage(
+    args: SendVoiceMessageCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SendVoiceMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetAccountDefaultProtectConfigurationCommand}
+   */
+  setAccountDefaultProtectConfiguration(
+    args: SetAccountDefaultProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetAccountDefaultProtectConfigurationCommandOutput>;
+  setAccountDefaultProtectConfiguration(
+    args: SetAccountDefaultProtectConfigurationCommandInput,
+    cb: (err: any, data?: SetAccountDefaultProtectConfigurationCommandOutput) => void
+  ): void;
+  setAccountDefaultProtectConfiguration(
+    args: SetAccountDefaultProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetAccountDefaultProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetDefaultMessageFeedbackEnabledCommand}
+   */
+  setDefaultMessageFeedbackEnabled(
+    args: SetDefaultMessageFeedbackEnabledCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetDefaultMessageFeedbackEnabledCommandOutput>;
+  setDefaultMessageFeedbackEnabled(
+    args: SetDefaultMessageFeedbackEnabledCommandInput,
+    cb: (err: any, data?: SetDefaultMessageFeedbackEnabledCommandOutput) => void
+  ): void;
+  setDefaultMessageFeedbackEnabled(
+    args: SetDefaultMessageFeedbackEnabledCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetDefaultMessageFeedbackEnabledCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetDefaultMessageTypeCommand}
+   */
+  setDefaultMessageType(
+    args: SetDefaultMessageTypeCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetDefaultMessageTypeCommandOutput>;
+  setDefaultMessageType(
+    args: SetDefaultMessageTypeCommandInput,
+    cb: (err: any, data?: SetDefaultMessageTypeCommandOutput) => void
+  ): void;
+  setDefaultMessageType(
+    args: SetDefaultMessageTypeCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetDefaultMessageTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetDefaultSenderIdCommand}
+   */
+  setDefaultSenderId(
+    args: SetDefaultSenderIdCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetDefaultSenderIdCommandOutput>;
+  setDefaultSenderId(
+    args: SetDefaultSenderIdCommandInput,
+    cb: (err: any, data?: SetDefaultSenderIdCommandOutput) => void
+  ): void;
+  setDefaultSenderId(
+    args: SetDefaultSenderIdCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetDefaultSenderIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetMediaMessageSpendLimitOverrideCommand}
+   */
+  setMediaMessageSpendLimitOverride(
+    args: SetMediaMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetMediaMessageSpendLimitOverrideCommandOutput>;
+  setMediaMessageSpendLimitOverride(
+    args: SetMediaMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: SetMediaMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  setMediaMessageSpendLimitOverride(
+    args: SetMediaMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetMediaMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetNotifyMessageSpendLimitOverrideCommand}
+   */
+  setNotifyMessageSpendLimitOverride(
+    args: SetNotifyMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetNotifyMessageSpendLimitOverrideCommandOutput>;
+  setNotifyMessageSpendLimitOverride(
+    args: SetNotifyMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: SetNotifyMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  setNotifyMessageSpendLimitOverride(
+    args: SetNotifyMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetNotifyMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetRcsMessageSpendLimitOverrideCommand}
+   */
+  setRcsMessageSpendLimitOverride(
+    args: SetRcsMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetRcsMessageSpendLimitOverrideCommandOutput>;
+  setRcsMessageSpendLimitOverride(
+    args: SetRcsMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: SetRcsMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  setRcsMessageSpendLimitOverride(
+    args: SetRcsMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetRcsMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetTextMessageSpendLimitOverrideCommand}
+   */
+  setTextMessageSpendLimitOverride(
+    args: SetTextMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetTextMessageSpendLimitOverrideCommandOutput>;
+  setTextMessageSpendLimitOverride(
+    args: SetTextMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: SetTextMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  setTextMessageSpendLimitOverride(
+    args: SetTextMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetTextMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetVoiceMessageSpendLimitOverrideCommand}
+   */
+  setVoiceMessageSpendLimitOverride(
+    args: SetVoiceMessageSpendLimitOverrideCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SetVoiceMessageSpendLimitOverrideCommandOutput>;
+  setVoiceMessageSpendLimitOverride(
+    args: SetVoiceMessageSpendLimitOverrideCommandInput,
+    cb: (err: any, data?: SetVoiceMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+  setVoiceMessageSpendLimitOverride(
+    args: SetVoiceMessageSpendLimitOverrideCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SetVoiceMessageSpendLimitOverrideCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SubmitRegistrationVersionCommand}
+   */
+  submitRegistrationVersion(
+    args: SubmitRegistrationVersionCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<SubmitRegistrationVersionCommandOutput>;
+  submitRegistrationVersion(
+    args: SubmitRegistrationVersionCommandInput,
+    cb: (err: any, data?: SubmitRegistrationVersionCommandOutput) => void
+  ): void;
+  submitRegistrationVersion(
+    args: SubmitRegistrationVersionCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: SubmitRegistrationVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEventDestinationCommand}
+   */
+  updateEventDestination(
+    args: UpdateEventDestinationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateEventDestinationCommandOutput>;
+  updateEventDestination(
+    args: UpdateEventDestinationCommandInput,
+    cb: (err: any, data?: UpdateEventDestinationCommandOutput) => void
+  ): void;
+  updateEventDestination(
+    args: UpdateEventDestinationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateEventDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNotifyConfigurationCommand}
+   */
+  updateNotifyConfiguration(
+    args: UpdateNotifyConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateNotifyConfigurationCommandOutput>;
+  updateNotifyConfiguration(
+    args: UpdateNotifyConfigurationCommandInput,
+    cb: (err: any, data?: UpdateNotifyConfigurationCommandOutput) => void
+  ): void;
+  updateNotifyConfiguration(
+    args: UpdateNotifyConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateNotifyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePhoneNumberCommand}
+   */
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdatePhoneNumberCommandOutput>;
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    cb: (err: any, data?: UpdatePhoneNumberCommandOutput) => void
+  ): void;
+  updatePhoneNumber(
+    args: UpdatePhoneNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdatePhoneNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePoolCommand}
+   */
+  updatePool(
+    args: UpdatePoolCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdatePoolCommandOutput>;
+  updatePool(
+    args: UpdatePoolCommandInput,
+    cb: (err: any, data?: UpdatePoolCommandOutput) => void
+  ): void;
+  updatePool(
+    args: UpdatePoolCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdatePoolCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProtectConfigurationCommand}
+   */
+  updateProtectConfiguration(
+    args: UpdateProtectConfigurationCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateProtectConfigurationCommandOutput>;
+  updateProtectConfiguration(
+    args: UpdateProtectConfigurationCommandInput,
+    cb: (err: any, data?: UpdateProtectConfigurationCommandOutput) => void
+  ): void;
+  updateProtectConfiguration(
+    args: UpdateProtectConfigurationCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateProtectConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateProtectConfigurationCountryRuleSetCommand}
+   */
+  updateProtectConfigurationCountryRuleSet(
+    args: UpdateProtectConfigurationCountryRuleSetCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateProtectConfigurationCountryRuleSetCommandOutput>;
+  updateProtectConfigurationCountryRuleSet(
+    args: UpdateProtectConfigurationCountryRuleSetCommandInput,
+    cb: (err: any, data?: UpdateProtectConfigurationCountryRuleSetCommandOutput) => void
+  ): void;
+  updateProtectConfigurationCountryRuleSet(
+    args: UpdateProtectConfigurationCountryRuleSetCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateProtectConfigurationCountryRuleSetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRcsAgentCommand}
+   */
+  updateRcsAgent(
+    args: UpdateRcsAgentCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateRcsAgentCommandOutput>;
+  updateRcsAgent(
+    args: UpdateRcsAgentCommandInput,
+    cb: (err: any, data?: UpdateRcsAgentCommandOutput) => void
+  ): void;
+  updateRcsAgent(
+    args: UpdateRcsAgentCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateRcsAgentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSenderIdCommand}
+   */
+  updateSenderId(
+    args: UpdateSenderIdCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<UpdateSenderIdCommandOutput>;
+  updateSenderId(
+    args: UpdateSenderIdCommandInput,
+    cb: (err: any, data?: UpdateSenderIdCommandOutput) => void
+  ): void;
+  updateSenderId(
+    args: UpdateSenderIdCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: UpdateSenderIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link VerifyDestinationNumberCommand}
+   */
+  verifyDestinationNumber(
+    args: VerifyDestinationNumberCommandInput,
+    options?: PinpointSMSVoiceV2RequestOptions
+  ): Promise<VerifyDestinationNumberCommandOutput>;
+  verifyDestinationNumber(
+    args: VerifyDestinationNumberCommandInput,
+    cb: (err: any, data?: VerifyDestinationNumberCommandOutput) => void
+  ): void;
+  verifyDestinationNumber(
+    args: VerifyDestinationNumberCommandInput,
+    options: PinpointSMSVoiceV2RequestOptions,
+    cb: (err: any, data?: VerifyDestinationNumberCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAccountAttributesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAccountAttributesCommandOutput}.
+   */
+  paginateDescribeAccountAttributes(
+    args?: DescribeAccountAttributesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAccountAttributesCommandOutput>;
+
+  /**
+   * @see {@link DescribeAccountLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeAccountLimitsCommandOutput}.
+   */
+  paginateDescribeAccountLimits(
+    args?: DescribeAccountLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeAccountLimitsCommandOutput>;
+
+  /**
+   * @see {@link DescribeConfigurationSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeConfigurationSetsCommandOutput}.
+   */
+  paginateDescribeConfigurationSets(
+    args?: DescribeConfigurationSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeConfigurationSetsCommandOutput>;
+
+  /**
+   * @see {@link DescribeKeywordsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeKeywordsCommandOutput}.
+   */
+  paginateDescribeKeywords(
+    args: DescribeKeywordsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeKeywordsCommandOutput>;
+
+  /**
+   * @see {@link DescribeNotifyConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeNotifyConfigurationsCommandOutput}.
+   */
+  paginateDescribeNotifyConfigurations(
+    args?: DescribeNotifyConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeNotifyConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeNotifyTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeNotifyTemplatesCommandOutput}.
+   */
+  paginateDescribeNotifyTemplates(
+    args?: DescribeNotifyTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeNotifyTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeOptedOutNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeOptedOutNumbersCommandOutput}.
+   */
+  paginateDescribeOptedOutNumbers(
+    args: DescribeOptedOutNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeOptedOutNumbersCommandOutput>;
+
+  /**
+   * @see {@link DescribeOptOutListsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeOptOutListsCommandOutput}.
+   */
+  paginateDescribeOptOutLists(
+    args?: DescribeOptOutListsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeOptOutListsCommandOutput>;
+
+  /**
+   * @see {@link DescribePhoneNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribePhoneNumbersCommandOutput}.
+   */
+  paginateDescribePhoneNumbers(
+    args?: DescribePhoneNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribePhoneNumbersCommandOutput>;
+
+  /**
+   * @see {@link DescribePoolsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribePoolsCommandOutput}.
+   */
+  paginateDescribePools(
+    args?: DescribePoolsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribePoolsCommandOutput>;
+
+  /**
+   * @see {@link DescribeProtectConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeProtectConfigurationsCommandOutput}.
+   */
+  paginateDescribeProtectConfigurations(
+    args?: DescribeProtectConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeProtectConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRcsAgentCountryLaunchStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRcsAgentCountryLaunchStatusCommandOutput}.
+   */
+  paginateDescribeRcsAgentCountryLaunchStatus(
+    args: DescribeRcsAgentCountryLaunchStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRcsAgentCountryLaunchStatusCommandOutput>;
+
+  /**
+   * @see {@link DescribeRcsAgentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRcsAgentsCommandOutput}.
+   */
+  paginateDescribeRcsAgents(
+    args?: DescribeRcsAgentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRcsAgentsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationAttachmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationAttachmentsCommandOutput}.
+   */
+  paginateDescribeRegistrationAttachments(
+    args?: DescribeRegistrationAttachmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationAttachmentsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationFieldDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationFieldDefinitionsCommandOutput}.
+   */
+  paginateDescribeRegistrationFieldDefinitions(
+    args: DescribeRegistrationFieldDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationFieldDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationFieldValuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationFieldValuesCommandOutput}.
+   */
+  paginateDescribeRegistrationFieldValues(
+    args: DescribeRegistrationFieldValuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationFieldValuesCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationsCommandOutput}.
+   */
+  paginateDescribeRegistrations(
+    args?: DescribeRegistrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationSectionDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationSectionDefinitionsCommandOutput}.
+   */
+  paginateDescribeRegistrationSectionDefinitions(
+    args: DescribeRegistrationSectionDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationSectionDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationTypeDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationTypeDefinitionsCommandOutput}.
+   */
+  paginateDescribeRegistrationTypeDefinitions(
+    args?: DescribeRegistrationTypeDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationTypeDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeRegistrationVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRegistrationVersionsCommandOutput}.
+   */
+  paginateDescribeRegistrationVersions(
+    args: DescribeRegistrationVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRegistrationVersionsCommandOutput>;
+
+  /**
+   * @see {@link DescribeSenderIdsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSenderIdsCommandOutput}.
+   */
+  paginateDescribeSenderIds(
+    args?: DescribeSenderIdsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSenderIdsCommandOutput>;
+
+  /**
+   * @see {@link DescribeSpendLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSpendLimitsCommandOutput}.
+   */
+  paginateDescribeSpendLimits(
+    args?: DescribeSpendLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSpendLimitsCommandOutput>;
+
+  /**
+   * @see {@link DescribeVerifiedDestinationNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeVerifiedDestinationNumbersCommandOutput}.
+   */
+  paginateDescribeVerifiedDestinationNumbers(
+    args?: DescribeVerifiedDestinationNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeVerifiedDestinationNumbersCommandOutput>;
+
+  /**
+   * @see {@link ListAvailablePhoneNumbersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAvailablePhoneNumbersCommandOutput}.
+   */
+  paginateListAvailablePhoneNumbers(
+    args: ListAvailablePhoneNumbersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAvailablePhoneNumbersCommandOutput>;
+
+  /**
+   * @see {@link ListNotifyCountriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNotifyCountriesCommandOutput}.
+   */
+  paginateListNotifyCountries(
+    args?: ListNotifyCountriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNotifyCountriesCommandOutput>;
+
+  /**
+   * @see {@link ListPoolOriginationIdentitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPoolOriginationIdentitiesCommandOutput}.
+   */
+  paginateListPoolOriginationIdentities(
+    args: ListPoolOriginationIdentitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPoolOriginationIdentitiesCommandOutput>;
+
+  /**
+   * @see {@link ListProtectConfigurationRuleSetNumberOverridesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProtectConfigurationRuleSetNumberOverridesCommandOutput}.
+   */
+  paginateListProtectConfigurationRuleSetNumberOverrides(
+    args: ListProtectConfigurationRuleSetNumberOverridesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProtectConfigurationRuleSetNumberOverridesCommandOutput>;
+
+  /**
+   * @see {@link ListRegistrationAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRegistrationAssociationsCommandOutput}.
+   */
+  paginateListRegistrationAssociations(
+    args: ListRegistrationAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRegistrationAssociationsCommandOutput>;
+}
+
+/**
+ * <p>Welcome to the <i>End User Messaging SMS, version 2 API Reference</i>. This guide provides information about End User Messaging SMS, version 2 API resources, including supported HTTP methods, parameters, and schemas.</p> <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with your recipients across multiple messaging channels. The End User Messaging SMS, version 2 API provides programmatic access to options that are unique to the SMS and voice channels. End User Messaging SMS, version 2 resources such as phone numbers, sender IDs, and opt-out lists can be used by the Amazon Pinpoint API.</p> <p>If you're new to End User Messaging SMS, it's also helpful to review the <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html"> End User Messaging SMS User Guide</a>, where you'll find tutorials, code samples, and procedures that demonstrate how to use End User Messaging SMS features programmatically and how to integrate functionality into mobile apps and other types of applications. The guide also provides key information, such as End User Messaging SMS integration with other Amazon Web Services services, and the quotas that apply to use of the service.</p> <p> <b>Regional availability</b> </p> <p>The <i>End User Messaging SMS version 2 API Reference</i> is available in several Amazon Web Services Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href="https://docs.aws.amazon.com/hgeneral/latest/gr/rande.html#pinpoint_region">Amazon Web Services Service Endpoints</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/pinpoint.html">Amazon Pinpoint endpoints and quotas</a> in the Amazon Web Services General Reference. To learn more about Amazon Web Services Regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html">Managing Amazon Web Services Regions</a> in the Amazon Web Services General Reference.</p> <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href="http://aws.amazon.com/about-aws/global-infrastructure/">Amazon Web Services Global Infrastructure.</a> </p>
+ * @public
+ */
+export class PinpointSMSVoiceV2 extends PinpointSMSVoiceV2Client implements PinpointSMSVoiceV2 {}
+createAggregatedClient(commands, PinpointSMSVoiceV2, { paginators });

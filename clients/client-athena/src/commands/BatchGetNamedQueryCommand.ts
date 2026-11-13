@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import { BatchGetNamedQueryInput, BatchGetNamedQueryOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetNamedQueryCommand,
-  serializeAws_json1_1BatchGetNamedQueryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetNamedQueryInput, BatchGetNamedQueryOutput } from "../models/models_0";
+import { BatchGetNamedQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetNamedQueryCommand}.
+ */
 export interface BatchGetNamedQueryCommandInput extends BatchGetNamedQueryInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetNamedQueryCommand}.
+ */
 export interface BatchGetNamedQueryCommandOutput extends BatchGetNamedQueryOutput, __MetadataBearer {}
 
 /**
@@ -36,68 +37,73 @@ export interface BatchGetNamedQueryCommandOutput extends BatchGetNamedQueryOutpu
  * ```javascript
  * import { AthenaClient, BatchGetNamedQueryCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, BatchGetNamedQueryCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // BatchGetNamedQueryInput
+ *   NamedQueryIds: [ // NamedQueryIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetNamedQueryCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetNamedQueryOutput
+ * //   NamedQueries: [ // NamedQueryList
+ * //     { // NamedQuery
+ * //       Name: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE",
+ * //       Database: "STRING_VALUE", // required
+ * //       QueryString: "STRING_VALUE", // required
+ * //       NamedQueryId: "STRING_VALUE",
+ * //       WorkGroup: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   UnprocessedNamedQueryIds: [ // UnprocessedNamedQueryIdList
+ * //     { // UnprocessedNamedQueryId
+ * //       NamedQueryId: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetNamedQueryCommandInput - {@link BatchGetNamedQueryCommandInput}
+ * @returns {@link BatchGetNamedQueryCommandOutput}
  * @see {@link BatchGetNamedQueryCommandInput} for command's `input` shape.
  * @see {@link BatchGetNamedQueryCommandOutput} for command's `response` shape.
- * @see {@link AthenaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetNamedQueryCommand extends $Command<
-  BatchGetNamedQueryCommandInput,
-  BatchGetNamedQueryCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetNamedQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetNamedQueryCommandInput, BatchGetNamedQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "BatchGetNamedQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetNamedQueryInput.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetNamedQueryOutput.filterSensitiveLog,
+export class BatchGetNamedQueryCommand extends command<BatchGetNamedQueryCommandInput, BatchGetNamedQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetNamedQuery",
+  BatchGetNamedQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetNamedQueryInput;
+      output: BatchGetNamedQueryOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetNamedQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetNamedQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetNamedQueryCommandOutput> {
-    return deserializeAws_json1_1BatchGetNamedQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetNamedQueryCommandInput;
+      output: BatchGetNamedQueryCommandOutput;
+    };
+  };
 }

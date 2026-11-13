@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteDhcpOptionsRequest } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteDhcpOptionsCommand,
-  serializeAws_ec2DeleteDhcpOptionsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDhcpOptionsRequest } from "../models/models_2";
+import { DeleteDhcpOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDhcpOptionsCommand}.
+ */
 export interface DeleteDhcpOptionsCommandInput extends DeleteDhcpOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDhcpOptionsCommand}.
+ */
 export interface DeleteDhcpOptionsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,59 @@ export interface DeleteDhcpOptionsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, DeleteDhcpOptionsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteDhcpOptionsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteDhcpOptionsRequest
+ *   DhcpOptionsId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteDhcpOptionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDhcpOptionsCommandInput - {@link DeleteDhcpOptionsCommandInput}
+ * @returns {@link DeleteDhcpOptionsCommandOutput}
  * @see {@link DeleteDhcpOptionsCommandInput} for command's `input` shape.
  * @see {@link DeleteDhcpOptionsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To delete a DHCP options set
+ * ```javascript
+ * // This example deletes the specified DHCP options set.
+ * const input = {
+ *   DhcpOptionsId: "dopt-d9070ebb"
+ * };
+ * const command = new DeleteDhcpOptionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteDhcpOptionsCommand extends $Command<
-  DeleteDhcpOptionsCommandInput,
-  DeleteDhcpOptionsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDhcpOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDhcpOptionsCommandInput, DeleteDhcpOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteDhcpOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDhcpOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteDhcpOptionsCommand extends command<DeleteDhcpOptionsCommandInput, DeleteDhcpOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDhcpOptions",
+  DeleteDhcpOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDhcpOptionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDhcpOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteDhcpOptionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDhcpOptionsCommandOutput> {
-    return deserializeAws_ec2DeleteDhcpOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDhcpOptionsCommandInput;
+      output: DeleteDhcpOptionsCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { AddProfileKeyRequest, AddProfileKeyResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AddProfileKeyCommand,
-  serializeAws_restJson1AddProfileKeyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddProfileKeyRequest, AddProfileKeyResponse } from "../models/models_0";
+import { AddProfileKey$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddProfileKeyCommand}.
+ */
 export interface AddProfileKeyCommandInput extends AddProfileKeyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddProfileKeyCommand}.
+ */
 export interface AddProfileKeyCommandOutput extends AddProfileKeyResponse, __MetadataBearer {}
 
 /**
- * <p>Associates a new key value with a specific profile, such as a Contact Trace Record (CTR)
+ * <p>Associates a new key value with a specific profile, such as a Contact Record
  *          ContactId.</p>
  *          <p>A profile object can have a single unique key and any number of additional keys that can
  *          be used to identify the profile that it belongs to.</p>
@@ -31,68 +32,70 @@ export interface AddProfileKeyCommandOutput extends AddProfileKeyResponse, __Met
  * ```javascript
  * import { CustomerProfilesClient, AddProfileKeyCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, AddProfileKeyCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // AddProfileKeyRequest
+ *   ProfileId: "STRING_VALUE", // required
+ *   KeyName: "STRING_VALUE", // required
+ *   Values: [ // requestValueList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   DomainName: "STRING_VALUE", // required
+ * };
  * const command = new AddProfileKeyCommand(input);
  * const response = await client.send(command);
+ * // { // AddProfileKeyResponse
+ * //   KeyName: "STRING_VALUE",
+ * //   Values: [ // requestValueList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AddProfileKeyCommandInput - {@link AddProfileKeyCommandInput}
+ * @returns {@link AddProfileKeyCommandOutput}
  * @see {@link AddProfileKeyCommandInput} for command's `input` shape.
  * @see {@link AddProfileKeyCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class AddProfileKeyCommand extends $Command<
-  AddProfileKeyCommandInput,
-  AddProfileKeyCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddProfileKeyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddProfileKeyCommandInput, AddProfileKeyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "AddProfileKeyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddProfileKeyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddProfileKeyResponse.filterSensitiveLog,
+export class AddProfileKeyCommand extends command<AddProfileKeyCommandInput, AddProfileKeyCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddProfileKey",
+  AddProfileKey$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddProfileKeyRequest;
+      output: AddProfileKeyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddProfileKeyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AddProfileKeyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddProfileKeyCommandOutput> {
-    return deserializeAws_restJson1AddProfileKeyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddProfileKeyCommandInput;
+      output: AddProfileKeyCommandOutput;
+    };
+  };
 }

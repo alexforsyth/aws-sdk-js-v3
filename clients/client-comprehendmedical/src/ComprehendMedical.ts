@@ -1,795 +1,623 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type DescribeEntitiesDetectionV2JobCommandInput,
+  type DescribeEntitiesDetectionV2JobCommandOutput,
   DescribeEntitiesDetectionV2JobCommand,
-  DescribeEntitiesDetectionV2JobCommandInput,
-  DescribeEntitiesDetectionV2JobCommandOutput,
 } from "./commands/DescribeEntitiesDetectionV2JobCommand";
 import {
+  type DescribeICD10CMInferenceJobCommandInput,
+  type DescribeICD10CMInferenceJobCommandOutput,
   DescribeICD10CMInferenceJobCommand,
-  DescribeICD10CMInferenceJobCommandInput,
-  DescribeICD10CMInferenceJobCommandOutput,
 } from "./commands/DescribeICD10CMInferenceJobCommand";
 import {
+  type DescribePHIDetectionJobCommandInput,
+  type DescribePHIDetectionJobCommandOutput,
   DescribePHIDetectionJobCommand,
-  DescribePHIDetectionJobCommandInput,
-  DescribePHIDetectionJobCommandOutput,
 } from "./commands/DescribePHIDetectionJobCommand";
 import {
+  type DescribeRxNormInferenceJobCommandInput,
+  type DescribeRxNormInferenceJobCommandOutput,
   DescribeRxNormInferenceJobCommand,
-  DescribeRxNormInferenceJobCommandInput,
-  DescribeRxNormInferenceJobCommandOutput,
 } from "./commands/DescribeRxNormInferenceJobCommand";
 import {
+  type DescribeSNOMEDCTInferenceJobCommandInput,
+  type DescribeSNOMEDCTInferenceJobCommandOutput,
+  DescribeSNOMEDCTInferenceJobCommand,
+} from "./commands/DescribeSNOMEDCTInferenceJobCommand";
+import {
+  type DetectEntitiesCommandInput,
+  type DetectEntitiesCommandOutput,
   DetectEntitiesCommand,
-  DetectEntitiesCommandInput,
-  DetectEntitiesCommandOutput,
 } from "./commands/DetectEntitiesCommand";
 import {
+  type DetectEntitiesV2CommandInput,
+  type DetectEntitiesV2CommandOutput,
   DetectEntitiesV2Command,
-  DetectEntitiesV2CommandInput,
-  DetectEntitiesV2CommandOutput,
 } from "./commands/DetectEntitiesV2Command";
-import { DetectPHICommand, DetectPHICommandInput, DetectPHICommandOutput } from "./commands/DetectPHICommand";
+import { type DetectPHICommandInput, type DetectPHICommandOutput, DetectPHICommand } from "./commands/DetectPHICommand";
 import {
+  type InferICD10CMCommandInput,
+  type InferICD10CMCommandOutput,
   InferICD10CMCommand,
-  InferICD10CMCommandInput,
-  InferICD10CMCommandOutput,
 } from "./commands/InferICD10CMCommand";
-import { InferRxNormCommand, InferRxNormCommandInput, InferRxNormCommandOutput } from "./commands/InferRxNormCommand";
 import {
+  type InferRxNormCommandInput,
+  type InferRxNormCommandOutput,
+  InferRxNormCommand,
+} from "./commands/InferRxNormCommand";
+import {
+  type InferSNOMEDCTCommandInput,
+  type InferSNOMEDCTCommandOutput,
+  InferSNOMEDCTCommand,
+} from "./commands/InferSNOMEDCTCommand";
+import {
+  type ListEntitiesDetectionV2JobsCommandInput,
+  type ListEntitiesDetectionV2JobsCommandOutput,
   ListEntitiesDetectionV2JobsCommand,
-  ListEntitiesDetectionV2JobsCommandInput,
-  ListEntitiesDetectionV2JobsCommandOutput,
 } from "./commands/ListEntitiesDetectionV2JobsCommand";
 import {
+  type ListICD10CMInferenceJobsCommandInput,
+  type ListICD10CMInferenceJobsCommandOutput,
   ListICD10CMInferenceJobsCommand,
-  ListICD10CMInferenceJobsCommandInput,
-  ListICD10CMInferenceJobsCommandOutput,
 } from "./commands/ListICD10CMInferenceJobsCommand";
 import {
+  type ListPHIDetectionJobsCommandInput,
+  type ListPHIDetectionJobsCommandOutput,
   ListPHIDetectionJobsCommand,
-  ListPHIDetectionJobsCommandInput,
-  ListPHIDetectionJobsCommandOutput,
 } from "./commands/ListPHIDetectionJobsCommand";
 import {
+  type ListRxNormInferenceJobsCommandInput,
+  type ListRxNormInferenceJobsCommandOutput,
   ListRxNormInferenceJobsCommand,
-  ListRxNormInferenceJobsCommandInput,
-  ListRxNormInferenceJobsCommandOutput,
 } from "./commands/ListRxNormInferenceJobsCommand";
 import {
+  type ListSNOMEDCTInferenceJobsCommandInput,
+  type ListSNOMEDCTInferenceJobsCommandOutput,
+  ListSNOMEDCTInferenceJobsCommand,
+} from "./commands/ListSNOMEDCTInferenceJobsCommand";
+import {
+  type StartEntitiesDetectionV2JobCommandInput,
+  type StartEntitiesDetectionV2JobCommandOutput,
   StartEntitiesDetectionV2JobCommand,
-  StartEntitiesDetectionV2JobCommandInput,
-  StartEntitiesDetectionV2JobCommandOutput,
 } from "./commands/StartEntitiesDetectionV2JobCommand";
 import {
+  type StartICD10CMInferenceJobCommandInput,
+  type StartICD10CMInferenceJobCommandOutput,
   StartICD10CMInferenceJobCommand,
-  StartICD10CMInferenceJobCommandInput,
-  StartICD10CMInferenceJobCommandOutput,
 } from "./commands/StartICD10CMInferenceJobCommand";
 import {
+  type StartPHIDetectionJobCommandInput,
+  type StartPHIDetectionJobCommandOutput,
   StartPHIDetectionJobCommand,
-  StartPHIDetectionJobCommandInput,
-  StartPHIDetectionJobCommandOutput,
 } from "./commands/StartPHIDetectionJobCommand";
 import {
+  type StartRxNormInferenceJobCommandInput,
+  type StartRxNormInferenceJobCommandOutput,
   StartRxNormInferenceJobCommand,
-  StartRxNormInferenceJobCommandInput,
-  StartRxNormInferenceJobCommandOutput,
 } from "./commands/StartRxNormInferenceJobCommand";
 import {
+  type StartSNOMEDCTInferenceJobCommandInput,
+  type StartSNOMEDCTInferenceJobCommandOutput,
+  StartSNOMEDCTInferenceJobCommand,
+} from "./commands/StartSNOMEDCTInferenceJobCommand";
+import {
+  type StopEntitiesDetectionV2JobCommandInput,
+  type StopEntitiesDetectionV2JobCommandOutput,
   StopEntitiesDetectionV2JobCommand,
-  StopEntitiesDetectionV2JobCommandInput,
-  StopEntitiesDetectionV2JobCommandOutput,
 } from "./commands/StopEntitiesDetectionV2JobCommand";
 import {
+  type StopICD10CMInferenceJobCommandInput,
+  type StopICD10CMInferenceJobCommandOutput,
   StopICD10CMInferenceJobCommand,
-  StopICD10CMInferenceJobCommandInput,
-  StopICD10CMInferenceJobCommandOutput,
 } from "./commands/StopICD10CMInferenceJobCommand";
 import {
+  type StopPHIDetectionJobCommandInput,
+  type StopPHIDetectionJobCommandOutput,
   StopPHIDetectionJobCommand,
-  StopPHIDetectionJobCommandInput,
-  StopPHIDetectionJobCommandOutput,
 } from "./commands/StopPHIDetectionJobCommand";
 import {
+  type StopRxNormInferenceJobCommandInput,
+  type StopRxNormInferenceJobCommandOutput,
   StopRxNormInferenceJobCommand,
-  StopRxNormInferenceJobCommandInput,
-  StopRxNormInferenceJobCommandOutput,
 } from "./commands/StopRxNormInferenceJobCommand";
+import {
+  type StopSNOMEDCTInferenceJobCommandInput,
+  type StopSNOMEDCTInferenceJobCommandOutput,
+  StopSNOMEDCTInferenceJobCommand,
+} from "./commands/StopSNOMEDCTInferenceJobCommand";
 import { ComprehendMedicalClient } from "./ComprehendMedicalClient";
 
+const commands = {
+  DescribeEntitiesDetectionV2JobCommand,
+  DescribeICD10CMInferenceJobCommand,
+  DescribePHIDetectionJobCommand,
+  DescribeRxNormInferenceJobCommand,
+  DescribeSNOMEDCTInferenceJobCommand,
+  DetectEntitiesCommand,
+  DetectEntitiesV2Command,
+  DetectPHICommand,
+  InferICD10CMCommand,
+  InferRxNormCommand,
+  InferSNOMEDCTCommand,
+  ListEntitiesDetectionV2JobsCommand,
+  ListICD10CMInferenceJobsCommand,
+  ListPHIDetectionJobsCommand,
+  ListRxNormInferenceJobsCommand,
+  ListSNOMEDCTInferenceJobsCommand,
+  StartEntitiesDetectionV2JobCommand,
+  StartICD10CMInferenceJobCommand,
+  StartPHIDetectionJobCommand,
+  StartRxNormInferenceJobCommand,
+  StartSNOMEDCTInferenceJobCommand,
+  StopEntitiesDetectionV2JobCommand,
+  StopICD10CMInferenceJobCommand,
+  StopPHIDetectionJobCommand,
+  StopRxNormInferenceJobCommand,
+  StopSNOMEDCTInferenceJobCommand,
+};
+
 /**
- * <p> Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions
- *       to gain insight in your documents. </p>
+ * @public
  */
-export class ComprehendMedical extends ComprehendMedicalClient {
+export interface ComprehendMedicalRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ComprehendMedical {
   /**
-   * <p>Gets the properties associated with a medical entities detection job. Use this operation
-   *       to get the status of a detection job.</p>
+   * @see {@link DescribeEntitiesDetectionV2JobCommand}
    */
-  public describeEntitiesDetectionV2Job(
+  describeEntitiesDetectionV2Job(
     args: DescribeEntitiesDetectionV2JobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DescribeEntitiesDetectionV2JobCommandOutput>;
-  public describeEntitiesDetectionV2Job(
+  describeEntitiesDetectionV2Job(
     args: DescribeEntitiesDetectionV2JobCommandInput,
     cb: (err: any, data?: DescribeEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public describeEntitiesDetectionV2Job(
+  describeEntitiesDetectionV2Job(
     args: DescribeEntitiesDetectionV2JobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DescribeEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public describeEntitiesDetectionV2Job(
-    args: DescribeEntitiesDetectionV2JobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEntitiesDetectionV2JobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEntitiesDetectionV2JobCommandOutput) => void
-  ): Promise<DescribeEntitiesDetectionV2JobCommandOutput> | void {
-    const command = new DescribeEntitiesDetectionV2JobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the properties associated with an InferICD10CM job. Use this operation to get the
-   *       status of an inference job.</p>
+   * @see {@link DescribeICD10CMInferenceJobCommand}
    */
-  public describeICD10CMInferenceJob(
+  describeICD10CMInferenceJob(
     args: DescribeICD10CMInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DescribeICD10CMInferenceJobCommandOutput>;
-  public describeICD10CMInferenceJob(
+  describeICD10CMInferenceJob(
     args: DescribeICD10CMInferenceJobCommandInput,
     cb: (err: any, data?: DescribeICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public describeICD10CMInferenceJob(
+  describeICD10CMInferenceJob(
     args: DescribeICD10CMInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DescribeICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public describeICD10CMInferenceJob(
-    args: DescribeICD10CMInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeICD10CMInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeICD10CMInferenceJobCommandOutput) => void
-  ): Promise<DescribeICD10CMInferenceJobCommandOutput> | void {
-    const command = new DescribeICD10CMInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the properties associated with a protected health information (PHI) detection job.
-   *       Use this operation to get the status of a detection job.</p>
+   * @see {@link DescribePHIDetectionJobCommand}
    */
-  public describePHIDetectionJob(
+  describePHIDetectionJob(
     args: DescribePHIDetectionJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DescribePHIDetectionJobCommandOutput>;
-  public describePHIDetectionJob(
+  describePHIDetectionJob(
     args: DescribePHIDetectionJobCommandInput,
     cb: (err: any, data?: DescribePHIDetectionJobCommandOutput) => void
   ): void;
-  public describePHIDetectionJob(
+  describePHIDetectionJob(
     args: DescribePHIDetectionJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DescribePHIDetectionJobCommandOutput) => void
   ): void;
-  public describePHIDetectionJob(
-    args: DescribePHIDetectionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribePHIDetectionJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribePHIDetectionJobCommandOutput) => void
-  ): Promise<DescribePHIDetectionJobCommandOutput> | void {
-    const command = new DescribePHIDetectionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the properties associated with an InferRxNorm job. Use this operation to get the
-   *       status of an inference job.</p>
+   * @see {@link DescribeRxNormInferenceJobCommand}
    */
-  public describeRxNormInferenceJob(
+  describeRxNormInferenceJob(
     args: DescribeRxNormInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DescribeRxNormInferenceJobCommandOutput>;
-  public describeRxNormInferenceJob(
+  describeRxNormInferenceJob(
     args: DescribeRxNormInferenceJobCommandInput,
     cb: (err: any, data?: DescribeRxNormInferenceJobCommandOutput) => void
   ): void;
-  public describeRxNormInferenceJob(
+  describeRxNormInferenceJob(
     args: DescribeRxNormInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DescribeRxNormInferenceJobCommandOutput) => void
   ): void;
-  public describeRxNormInferenceJob(
-    args: DescribeRxNormInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRxNormInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRxNormInferenceJobCommandOutput) => void
-  ): Promise<DescribeRxNormInferenceJobCommandOutput> | void {
-    const command = new DescribeRxNormInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * @deprecated
-   *
-   * <p>The <code>DetectEntities</code> operation is deprecated. You should use the <a>DetectEntitiesV2</a> operation instead.</p>
-   *          <p> Inspects the clinical text for a variety of medical entities and returns specific
-   *       information about them such as entity category, location, and confidence score on that
-   *       information .</p>
+   * @see {@link DescribeSNOMEDCTInferenceJobCommand}
    */
-  public detectEntities(
+  describeSNOMEDCTInferenceJob(
+    args: DescribeSNOMEDCTInferenceJobCommandInput,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<DescribeSNOMEDCTInferenceJobCommandOutput>;
+  describeSNOMEDCTInferenceJob(
+    args: DescribeSNOMEDCTInferenceJobCommandInput,
+    cb: (err: any, data?: DescribeSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
+  describeSNOMEDCTInferenceJob(
+    args: DescribeSNOMEDCTInferenceJobCommandInput,
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: DescribeSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetectEntitiesCommand}
+   */
+  detectEntities(
     args: DetectEntitiesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DetectEntitiesCommandOutput>;
-  public detectEntities(
+  detectEntities(
     args: DetectEntitiesCommandInput,
     cb: (err: any, data?: DetectEntitiesCommandOutput) => void
   ): void;
-  public detectEntities(
+  detectEntities(
     args: DetectEntitiesCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DetectEntitiesCommandOutput) => void
   ): void;
-  public detectEntities(
-    args: DetectEntitiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectEntitiesCommandOutput) => void),
-    cb?: (err: any, data?: DetectEntitiesCommandOutput) => void
-  ): Promise<DetectEntitiesCommandOutput> | void {
-    const command = new DetectEntitiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Inspects the clinical text for a variety of medical entities and returns specific
-   *       information about them such as entity category, location, and confidence score on that
-   *       information. Amazon Comprehend Medical only detects medical entities in English language
-   *       texts.</p>
-   *          <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a>
-   *       operation. This new action uses a different model for determining the entities in your medical
-   *       text and changes the way that some entities are returned in the output. You should use the
-   *         <code>DetectEntitiesV2</code> operation in all new applications.</p>
-   *          <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and
-   *         <code>Direction</code> entities as attributes instead of types. </p>
+   * @see {@link DetectEntitiesV2Command}
    */
-  public detectEntitiesV2(
+  detectEntitiesV2(
     args: DetectEntitiesV2CommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<DetectEntitiesV2CommandOutput>;
-  public detectEntitiesV2(
+  detectEntitiesV2(
     args: DetectEntitiesV2CommandInput,
     cb: (err: any, data?: DetectEntitiesV2CommandOutput) => void
   ): void;
-  public detectEntitiesV2(
+  detectEntitiesV2(
     args: DetectEntitiesV2CommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: DetectEntitiesV2CommandOutput) => void
   ): void;
-  public detectEntitiesV2(
-    args: DetectEntitiesV2CommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectEntitiesV2CommandOutput) => void),
-    cb?: (err: any, data?: DetectEntitiesV2CommandOutput) => void
-  ): Promise<DetectEntitiesV2CommandOutput> | void {
-    const command = new DetectEntitiesV2Command(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p> Inspects the clinical text for protected health information (PHI) entities and returns
-   *       the entity category, location, and confidence score for each entity. Amazon Comprehend Medical
-   *       only detects entities in English language texts.</p>
+   * @see {@link DetectPHICommand}
    */
-  public detectPHI(args: DetectPHICommandInput, options?: __HttpHandlerOptions): Promise<DetectPHICommandOutput>;
-  public detectPHI(args: DetectPHICommandInput, cb: (err: any, data?: DetectPHICommandOutput) => void): void;
-  public detectPHI(
+  detectPHI(
     args: DetectPHICommandInput,
-    options: __HttpHandlerOptions,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<DetectPHICommandOutput>;
+  detectPHI(
+    args: DetectPHICommandInput,
     cb: (err: any, data?: DetectPHICommandOutput) => void
   ): void;
-  public detectPHI(
+  detectPHI(
     args: DetectPHICommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetectPHICommandOutput) => void),
-    cb?: (err: any, data?: DetectPHICommandOutput) => void
-  ): Promise<DetectPHICommandOutput> | void {
-    const command = new DetectPHICommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: DetectPHICommandOutput) => void
+  ): void;
 
   /**
-   * <p>InferICD10CM detects medical conditions as entities listed in a patient record and links
-   *       those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the
-   *       Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in
-   *       English language texts.  </p>
+   * @see {@link InferICD10CMCommand}
    */
-  public inferICD10CM(
+  inferICD10CM(
     args: InferICD10CMCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<InferICD10CMCommandOutput>;
-  public inferICD10CM(args: InferICD10CMCommandInput, cb: (err: any, data?: InferICD10CMCommandOutput) => void): void;
-  public inferICD10CM(
+  inferICD10CM(
     args: InferICD10CMCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: InferICD10CMCommandOutput) => void
   ): void;
-  public inferICD10CM(
+  inferICD10CM(
     args: InferICD10CMCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InferICD10CMCommandOutput) => void),
-    cb?: (err: any, data?: InferICD10CMCommandOutput) => void
-  ): Promise<InferICD10CMCommandOutput> | void {
-    const command = new InferICD10CMCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: InferICD10CMCommandOutput) => void
+  ): void;
 
   /**
-   * <p>InferRxNorm detects medications as entities listed in a patient record and links to the
-   *       normalized concept identifiers in the RxNorm database from the National Library of Medicine.
-   *       Amazon Comprehend Medical only detects medical entities in English language texts.  </p>
+   * @see {@link InferRxNormCommand}
    */
-  public inferRxNorm(args: InferRxNormCommandInput, options?: __HttpHandlerOptions): Promise<InferRxNormCommandOutput>;
-  public inferRxNorm(args: InferRxNormCommandInput, cb: (err: any, data?: InferRxNormCommandOutput) => void): void;
-  public inferRxNorm(
+  inferRxNorm(
     args: InferRxNormCommandInput,
-    options: __HttpHandlerOptions,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<InferRxNormCommandOutput>;
+  inferRxNorm(
+    args: InferRxNormCommandInput,
     cb: (err: any, data?: InferRxNormCommandOutput) => void
   ): void;
-  public inferRxNorm(
+  inferRxNorm(
     args: InferRxNormCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InferRxNormCommandOutput) => void),
-    cb?: (err: any, data?: InferRxNormCommandOutput) => void
-  ): Promise<InferRxNormCommandOutput> | void {
-    const command = new InferRxNormCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: InferRxNormCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a list of medical entity detection jobs that you have submitted.</p>
+   * @see {@link InferSNOMEDCTCommand}
    */
-  public listEntitiesDetectionV2Jobs(
+  inferSNOMEDCT(
+    args: InferSNOMEDCTCommandInput,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<InferSNOMEDCTCommandOutput>;
+  inferSNOMEDCT(
+    args: InferSNOMEDCTCommandInput,
+    cb: (err: any, data?: InferSNOMEDCTCommandOutput) => void
+  ): void;
+  inferSNOMEDCT(
+    args: InferSNOMEDCTCommandInput,
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: InferSNOMEDCTCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEntitiesDetectionV2JobsCommand}
+   */
+  listEntitiesDetectionV2Jobs(): Promise<ListEntitiesDetectionV2JobsCommandOutput>;
+  listEntitiesDetectionV2Jobs(
     args: ListEntitiesDetectionV2JobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<ListEntitiesDetectionV2JobsCommandOutput>;
-  public listEntitiesDetectionV2Jobs(
+  listEntitiesDetectionV2Jobs(
     args: ListEntitiesDetectionV2JobsCommandInput,
     cb: (err: any, data?: ListEntitiesDetectionV2JobsCommandOutput) => void
   ): void;
-  public listEntitiesDetectionV2Jobs(
+  listEntitiesDetectionV2Jobs(
     args: ListEntitiesDetectionV2JobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: ListEntitiesDetectionV2JobsCommandOutput) => void
   ): void;
-  public listEntitiesDetectionV2Jobs(
-    args: ListEntitiesDetectionV2JobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEntitiesDetectionV2JobsCommandOutput) => void),
-    cb?: (err: any, data?: ListEntitiesDetectionV2JobsCommandOutput) => void
-  ): Promise<ListEntitiesDetectionV2JobsCommandOutput> | void {
-    const command = new ListEntitiesDetectionV2JobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of InferICD10CM jobs that you have submitted.</p>
+   * @see {@link ListICD10CMInferenceJobsCommand}
    */
-  public listICD10CMInferenceJobs(
+  listICD10CMInferenceJobs(): Promise<ListICD10CMInferenceJobsCommandOutput>;
+  listICD10CMInferenceJobs(
     args: ListICD10CMInferenceJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<ListICD10CMInferenceJobsCommandOutput>;
-  public listICD10CMInferenceJobs(
+  listICD10CMInferenceJobs(
     args: ListICD10CMInferenceJobsCommandInput,
     cb: (err: any, data?: ListICD10CMInferenceJobsCommandOutput) => void
   ): void;
-  public listICD10CMInferenceJobs(
+  listICD10CMInferenceJobs(
     args: ListICD10CMInferenceJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: ListICD10CMInferenceJobsCommandOutput) => void
   ): void;
-  public listICD10CMInferenceJobs(
-    args: ListICD10CMInferenceJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListICD10CMInferenceJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListICD10CMInferenceJobsCommandOutput) => void
-  ): Promise<ListICD10CMInferenceJobsCommandOutput> | void {
-    const command = new ListICD10CMInferenceJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of protected health information (PHI) detection jobs that you have
-   *       submitted.</p>
+   * @see {@link ListPHIDetectionJobsCommand}
    */
-  public listPHIDetectionJobs(
+  listPHIDetectionJobs(): Promise<ListPHIDetectionJobsCommandOutput>;
+  listPHIDetectionJobs(
     args: ListPHIDetectionJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<ListPHIDetectionJobsCommandOutput>;
-  public listPHIDetectionJobs(
+  listPHIDetectionJobs(
     args: ListPHIDetectionJobsCommandInput,
     cb: (err: any, data?: ListPHIDetectionJobsCommandOutput) => void
   ): void;
-  public listPHIDetectionJobs(
+  listPHIDetectionJobs(
     args: ListPHIDetectionJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: ListPHIDetectionJobsCommandOutput) => void
   ): void;
-  public listPHIDetectionJobs(
-    args: ListPHIDetectionJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPHIDetectionJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListPHIDetectionJobsCommandOutput) => void
-  ): Promise<ListPHIDetectionJobsCommandOutput> | void {
-    const command = new ListPHIDetectionJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a list of InferRxNorm jobs that you have submitted.</p>
+   * @see {@link ListRxNormInferenceJobsCommand}
    */
-  public listRxNormInferenceJobs(
+  listRxNormInferenceJobs(): Promise<ListRxNormInferenceJobsCommandOutput>;
+  listRxNormInferenceJobs(
     args: ListRxNormInferenceJobsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<ListRxNormInferenceJobsCommandOutput>;
-  public listRxNormInferenceJobs(
+  listRxNormInferenceJobs(
     args: ListRxNormInferenceJobsCommandInput,
     cb: (err: any, data?: ListRxNormInferenceJobsCommandOutput) => void
   ): void;
-  public listRxNormInferenceJobs(
+  listRxNormInferenceJobs(
     args: ListRxNormInferenceJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: ListRxNormInferenceJobsCommandOutput) => void
   ): void;
-  public listRxNormInferenceJobs(
-    args: ListRxNormInferenceJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRxNormInferenceJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListRxNormInferenceJobsCommandOutput) => void
-  ): Promise<ListRxNormInferenceJobsCommandOutput> | void {
-    const command = new ListRxNormInferenceJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts an asynchronous medical entity detection job for a collection of documents. Use the
-   *         <code>DescribeEntitiesDetectionV2Job</code> operation to track the status of a job.</p>
+   * @see {@link ListSNOMEDCTInferenceJobsCommand}
    */
-  public startEntitiesDetectionV2Job(
+  listSNOMEDCTInferenceJobs(): Promise<ListSNOMEDCTInferenceJobsCommandOutput>;
+  listSNOMEDCTInferenceJobs(
+    args: ListSNOMEDCTInferenceJobsCommandInput,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<ListSNOMEDCTInferenceJobsCommandOutput>;
+  listSNOMEDCTInferenceJobs(
+    args: ListSNOMEDCTInferenceJobsCommandInput,
+    cb: (err: any, data?: ListSNOMEDCTInferenceJobsCommandOutput) => void
+  ): void;
+  listSNOMEDCTInferenceJobs(
+    args: ListSNOMEDCTInferenceJobsCommandInput,
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: ListSNOMEDCTInferenceJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartEntitiesDetectionV2JobCommand}
+   */
+  startEntitiesDetectionV2Job(
     args: StartEntitiesDetectionV2JobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StartEntitiesDetectionV2JobCommandOutput>;
-  public startEntitiesDetectionV2Job(
+  startEntitiesDetectionV2Job(
     args: StartEntitiesDetectionV2JobCommandInput,
     cb: (err: any, data?: StartEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public startEntitiesDetectionV2Job(
+  startEntitiesDetectionV2Job(
     args: StartEntitiesDetectionV2JobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StartEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public startEntitiesDetectionV2Job(
-    args: StartEntitiesDetectionV2JobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartEntitiesDetectionV2JobCommandOutput) => void),
-    cb?: (err: any, data?: StartEntitiesDetectionV2JobCommandOutput) => void
-  ): Promise<StartEntitiesDetectionV2JobCommandOutput> | void {
-    const command = new StartEntitiesDetectionV2JobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM
-   *       ontology. Use the <code>DescribeICD10CMInferenceJob</code> operation to track the status of a
-   *       job.</p>
+   * @see {@link StartICD10CMInferenceJobCommand}
    */
-  public startICD10CMInferenceJob(
+  startICD10CMInferenceJob(
     args: StartICD10CMInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StartICD10CMInferenceJobCommandOutput>;
-  public startICD10CMInferenceJob(
+  startICD10CMInferenceJob(
     args: StartICD10CMInferenceJobCommandInput,
     cb: (err: any, data?: StartICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public startICD10CMInferenceJob(
+  startICD10CMInferenceJob(
     args: StartICD10CMInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StartICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public startICD10CMInferenceJob(
-    args: StartICD10CMInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartICD10CMInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: StartICD10CMInferenceJobCommandOutput) => void
-  ): Promise<StartICD10CMInferenceJobCommandOutput> | void {
-    const command = new StartICD10CMInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts an asynchronous job to detect protected health information (PHI). Use the
-   *         <code>DescribePHIDetectionJob</code> operation to track the status of a job.</p>
+   * @see {@link StartPHIDetectionJobCommand}
    */
-  public startPHIDetectionJob(
+  startPHIDetectionJob(
     args: StartPHIDetectionJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StartPHIDetectionJobCommandOutput>;
-  public startPHIDetectionJob(
+  startPHIDetectionJob(
     args: StartPHIDetectionJobCommandInput,
     cb: (err: any, data?: StartPHIDetectionJobCommandOutput) => void
   ): void;
-  public startPHIDetectionJob(
+  startPHIDetectionJob(
     args: StartPHIDetectionJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StartPHIDetectionJobCommandOutput) => void
   ): void;
-  public startPHIDetectionJob(
-    args: StartPHIDetectionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartPHIDetectionJobCommandOutput) => void),
-    cb?: (err: any, data?: StartPHIDetectionJobCommandOutput) => void
-  ): Promise<StartPHIDetectionJobCommandOutput> | void {
-    const command = new StartPHIDetectionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts an asynchronous job to detect medication entities and link them to the RxNorm
-   *       ontology. Use the <code>DescribeRxNormInferenceJob</code> operation to track the status of a
-   *       job.</p>
+   * @see {@link StartRxNormInferenceJobCommand}
    */
-  public startRxNormInferenceJob(
+  startRxNormInferenceJob(
     args: StartRxNormInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StartRxNormInferenceJobCommandOutput>;
-  public startRxNormInferenceJob(
+  startRxNormInferenceJob(
     args: StartRxNormInferenceJobCommandInput,
     cb: (err: any, data?: StartRxNormInferenceJobCommandOutput) => void
   ): void;
-  public startRxNormInferenceJob(
+  startRxNormInferenceJob(
     args: StartRxNormInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StartRxNormInferenceJobCommandOutput) => void
   ): void;
-  public startRxNormInferenceJob(
-    args: StartRxNormInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartRxNormInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: StartRxNormInferenceJobCommandOutput) => void
-  ): Promise<StartRxNormInferenceJobCommandOutput> | void {
-    const command = new StartRxNormInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops a medical entities detection job in progress.</p>
+   * @see {@link StartSNOMEDCTInferenceJobCommand}
    */
-  public stopEntitiesDetectionV2Job(
+  startSNOMEDCTInferenceJob(
+    args: StartSNOMEDCTInferenceJobCommandInput,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<StartSNOMEDCTInferenceJobCommandOutput>;
+  startSNOMEDCTInferenceJob(
+    args: StartSNOMEDCTInferenceJobCommandInput,
+    cb: (err: any, data?: StartSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
+  startSNOMEDCTInferenceJob(
+    args: StartSNOMEDCTInferenceJobCommandInput,
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: StartSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopEntitiesDetectionV2JobCommand}
+   */
+  stopEntitiesDetectionV2Job(
     args: StopEntitiesDetectionV2JobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StopEntitiesDetectionV2JobCommandOutput>;
-  public stopEntitiesDetectionV2Job(
+  stopEntitiesDetectionV2Job(
     args: StopEntitiesDetectionV2JobCommandInput,
     cb: (err: any, data?: StopEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public stopEntitiesDetectionV2Job(
+  stopEntitiesDetectionV2Job(
     args: StopEntitiesDetectionV2JobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StopEntitiesDetectionV2JobCommandOutput) => void
   ): void;
-  public stopEntitiesDetectionV2Job(
-    args: StopEntitiesDetectionV2JobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopEntitiesDetectionV2JobCommandOutput) => void),
-    cb?: (err: any, data?: StopEntitiesDetectionV2JobCommandOutput) => void
-  ): Promise<StopEntitiesDetectionV2JobCommandOutput> | void {
-    const command = new StopEntitiesDetectionV2JobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops an InferICD10CM inference job in progress.</p>
+   * @see {@link StopICD10CMInferenceJobCommand}
    */
-  public stopICD10CMInferenceJob(
+  stopICD10CMInferenceJob(
     args: StopICD10CMInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StopICD10CMInferenceJobCommandOutput>;
-  public stopICD10CMInferenceJob(
+  stopICD10CMInferenceJob(
     args: StopICD10CMInferenceJobCommandInput,
     cb: (err: any, data?: StopICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public stopICD10CMInferenceJob(
+  stopICD10CMInferenceJob(
     args: StopICD10CMInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StopICD10CMInferenceJobCommandOutput) => void
   ): void;
-  public stopICD10CMInferenceJob(
-    args: StopICD10CMInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopICD10CMInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: StopICD10CMInferenceJobCommandOutput) => void
-  ): Promise<StopICD10CMInferenceJobCommandOutput> | void {
-    const command = new StopICD10CMInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops a protected health information (PHI) detection job in progress.</p>
+   * @see {@link StopPHIDetectionJobCommand}
    */
-  public stopPHIDetectionJob(
+  stopPHIDetectionJob(
     args: StopPHIDetectionJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StopPHIDetectionJobCommandOutput>;
-  public stopPHIDetectionJob(
+  stopPHIDetectionJob(
     args: StopPHIDetectionJobCommandInput,
     cb: (err: any, data?: StopPHIDetectionJobCommandOutput) => void
   ): void;
-  public stopPHIDetectionJob(
+  stopPHIDetectionJob(
     args: StopPHIDetectionJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StopPHIDetectionJobCommandOutput) => void
   ): void;
-  public stopPHIDetectionJob(
-    args: StopPHIDetectionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopPHIDetectionJobCommandOutput) => void),
-    cb?: (err: any, data?: StopPHIDetectionJobCommandOutput) => void
-  ): Promise<StopPHIDetectionJobCommandOutput> | void {
-    const command = new StopPHIDetectionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Stops an InferRxNorm inference job in progress.</p>
+   * @see {@link StopRxNormInferenceJobCommand}
    */
-  public stopRxNormInferenceJob(
+  stopRxNormInferenceJob(
     args: StopRxNormInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
+    options?: ComprehendMedicalRequestOptions
   ): Promise<StopRxNormInferenceJobCommandOutput>;
-  public stopRxNormInferenceJob(
+  stopRxNormInferenceJob(
     args: StopRxNormInferenceJobCommandInput,
     cb: (err: any, data?: StopRxNormInferenceJobCommandOutput) => void
   ): void;
-  public stopRxNormInferenceJob(
+  stopRxNormInferenceJob(
     args: StopRxNormInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
+    options: ComprehendMedicalRequestOptions,
     cb: (err: any, data?: StopRxNormInferenceJobCommandOutput) => void
   ): void;
-  public stopRxNormInferenceJob(
-    args: StopRxNormInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopRxNormInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: StopRxNormInferenceJobCommandOutput) => void
-  ): Promise<StopRxNormInferenceJobCommandOutput> | void {
-    const command = new StopRxNormInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link StopSNOMEDCTInferenceJobCommand}
+   */
+  stopSNOMEDCTInferenceJob(
+    args: StopSNOMEDCTInferenceJobCommandInput,
+    options?: ComprehendMedicalRequestOptions
+  ): Promise<StopSNOMEDCTInferenceJobCommandOutput>;
+  stopSNOMEDCTInferenceJob(
+    args: StopSNOMEDCTInferenceJobCommandInput,
+    cb: (err: any, data?: StopSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
+  stopSNOMEDCTInferenceJob(
+    args: StopSNOMEDCTInferenceJobCommandInput,
+    options: ComprehendMedicalRequestOptions,
+    cb: (err: any, data?: StopSNOMEDCTInferenceJobCommandOutput) => void
+  ): void;
 }
+
+/**
+ * <p>Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. Amazon Comprehend Medical only detects entities in English language texts. Amazon Comprehend Medical places limits on the sizes of files allowed for different API operations. To learn more, see <a href="https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html">Guidelines and quotas</a> in the <i>Amazon Comprehend Medical Developer Guide</i>.</p>
+ * @public
+ */
+export class ComprehendMedical extends ComprehendMedicalClient implements ComprehendMedical {}
+createAggregatedClient(commands, ComprehendMedical);

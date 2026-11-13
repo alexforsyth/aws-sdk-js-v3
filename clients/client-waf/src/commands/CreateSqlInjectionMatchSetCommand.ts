@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateSqlInjectionMatchSetRequest, CreateSqlInjectionMatchSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateSqlInjectionMatchSetCommand,
-  serializeAws_json1_1CreateSqlInjectionMatchSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFClientResolvedConfig } from "../WAFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSqlInjectionMatchSetRequest, CreateSqlInjectionMatchSetResponse } from "../models/models_0";
+import { CreateSqlInjectionMatchSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSqlInjectionMatchSetCommand}.
+ */
 export interface CreateSqlInjectionMatchSetCommandInput extends CreateSqlInjectionMatchSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSqlInjectionMatchSetCommand}.
+ */
 export interface CreateSqlInjectionMatchSetCommandOutput extends CreateSqlInjectionMatchSetResponse, __MetadataBearer {}
 
 /**
@@ -57,71 +58,146 @@ export interface CreateSqlInjectionMatchSetCommandOutput extends CreateSqlInject
  * ```javascript
  * import { WAFClient, CreateSqlInjectionMatchSetCommand } from "@aws-sdk/client-waf"; // ES Modules import
  * // const { WAFClient, CreateSqlInjectionMatchSetCommand } = require("@aws-sdk/client-waf"); // CommonJS import
+ * // import type { WAFClientConfig } from "@aws-sdk/client-waf";
+ * const config = {}; // type is WAFClientConfig
  * const client = new WAFClient(config);
+ * const input = { // CreateSqlInjectionMatchSetRequest
+ *   Name: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateSqlInjectionMatchSetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSqlInjectionMatchSetResponse
+ * //   SqlInjectionMatchSet: { // SqlInjectionMatchSet
+ * //     SqlInjectionMatchSetId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     SqlInjectionMatchTuples: [ // SqlInjectionMatchTuples // required
+ * //       { // SqlInjectionMatchTuple
+ * //         FieldToMatch: { // FieldToMatch
+ * //           Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ * //           Data: "STRING_VALUE",
+ * //         },
+ * //         TextTransformation: "NONE" || "COMPRESS_WHITE_SPACE" || "HTML_ENTITY_DECODE" || "LOWERCASE" || "CMD_LINE" || "URL_DECODE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSqlInjectionMatchSetCommandInput - {@link CreateSqlInjectionMatchSetCommandInput}
+ * @returns {@link CreateSqlInjectionMatchSetCommandOutput}
  * @see {@link CreateSqlInjectionMatchSetCommandInput} for command's `input` shape.
  * @see {@link CreateSqlInjectionMatchSetCommandOutput} for command's `response` shape.
- * @see {@link WAFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFClientResolvedConfig | config} for WAFClient's `config` shape.
  *
+ * @throws {@link WAFDisallowedNameException} (client fault)
+ *  <p>The name specified is invalid.</p>
+ *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p>
+ * 			      <ul>
+ *             <li>
+ *                <p>You specified an invalid parameter name.</p>
+ *             </li>
+ *             <li>
+ *                <p>You specified an invalid value.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update an object (<code>ByteMatchSet</code>, <code>IPSet</code>, <code>Rule</code>, or <code>WebACL</code>)
+ * 					using an action other than <code>INSERT</code> or <code>DELETE</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to create a <code>WebACL</code> with a <code>DefaultAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ * 		 	           <p>You tried to create a <code>RateBasedRule</code> with a <code>RateKey</code> value other than <code>IP</code>.</p>
+ * 		          </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>WafAction</code>
+ *                   <code>Type</code> other than
+ * 					<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>FieldToMatch</code>
+ *                   <code>Type</code> other than
+ * 					HEADER, METHOD, QUERY_STRING, URI, or BODY.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>ByteMatchSet</code> with a <code>Field</code> of <code>HEADER</code>
+ * 					but no value for <code>Data</code>.</p>
+ *             </li>
+ *             <li>
+ * 			   		       <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL cannot be associated.</p>
+ * 			   	     </li>
+ *          </ul>
+ *
+ * @throws {@link WAFLimitsExceededException} (client fault)
+ *  <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create
+ * 			for an AWS account. For more information, see
+ * 			<a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFServiceException}
+ * <p>Base exception class for all service exceptions from WAF service.</p>
+ *
+ *
+ * @example To create a SQL injection match set
+ * ```javascript
+ * // The following example creates a SQL injection match set named MySQLInjectionMatchSet.
+ * const input = {
+ *   ChangeToken: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f",
+ *   Name: "MySQLInjectionMatchSet"
+ * };
+ * const command = new CreateSqlInjectionMatchSetCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ChangeToken: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f",
+ *   SqlInjectionMatchSet: {
+ *     Name: "MySQLInjectionMatchSet",
+ *     SqlInjectionMatchSetId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5",
+ *     SqlInjectionMatchTuples: [
+ *       {
+ *         FieldToMatch: {
+ *           Type: "QUERY_STRING"
+ *         },
+ *         TextTransformation: "URL_DECODE"
+ *       }
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateSqlInjectionMatchSetCommand extends $Command<
-  CreateSqlInjectionMatchSetCommandInput,
-  CreateSqlInjectionMatchSetCommandOutput,
-  WAFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSqlInjectionMatchSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSqlInjectionMatchSetCommandInput, CreateSqlInjectionMatchSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFClient";
-    const commandName = "CreateSqlInjectionMatchSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSqlInjectionMatchSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSqlInjectionMatchSetResponse.filterSensitiveLog,
+export class CreateSqlInjectionMatchSetCommand extends command<CreateSqlInjectionMatchSetCommandInput, CreateSqlInjectionMatchSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSqlInjectionMatchSet",
+  CreateSqlInjectionMatchSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSqlInjectionMatchSetRequest;
+      output: CreateSqlInjectionMatchSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSqlInjectionMatchSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateSqlInjectionMatchSetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateSqlInjectionMatchSetCommandOutput> {
-    return deserializeAws_json1_1CreateSqlInjectionMatchSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSqlInjectionMatchSetCommandInput;
+      output: CreateSqlInjectionMatchSetCommandOutput;
+    };
+  };
 }

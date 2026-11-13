@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSizeConstraintSetRequest, GetSizeConstraintSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetSizeConstraintSetCommand,
-  serializeAws_json1_1GetSizeConstraintSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSizeConstraintSetRequest, GetSizeConstraintSetResponse } from "../models/models_0";
+import { GetSizeConstraintSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSizeConstraintSetCommand}.
+ */
 export interface GetSizeConstraintSetCommandInput extends GetSizeConstraintSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSizeConstraintSetCommand}.
+ */
 export interface GetSizeConstraintSetCommandOutput extends GetSizeConstraintSetResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +37,98 @@ export interface GetSizeConstraintSetCommandOutput extends GetSizeConstraintSetR
  * ```javascript
  * import { WAFRegionalClient, GetSizeConstraintSetCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, GetSizeConstraintSetCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // GetSizeConstraintSetRequest
+ *   SizeConstraintSetId: "STRING_VALUE", // required
+ * };
  * const command = new GetSizeConstraintSetCommand(input);
  * const response = await client.send(command);
+ * // { // GetSizeConstraintSetResponse
+ * //   SizeConstraintSet: { // SizeConstraintSet
+ * //     SizeConstraintSetId: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     SizeConstraints: [ // SizeConstraints // required
+ * //       { // SizeConstraint
+ * //         FieldToMatch: { // FieldToMatch
+ * //           Type: "URI" || "QUERY_STRING" || "HEADER" || "METHOD" || "BODY" || "SINGLE_QUERY_ARG" || "ALL_QUERY_ARGS", // required
+ * //           Data: "STRING_VALUE",
+ * //         },
+ * //         TextTransformation: "NONE" || "COMPRESS_WHITE_SPACE" || "HTML_ENTITY_DECODE" || "LOWERCASE" || "CMD_LINE" || "URL_DECODE", // required
+ * //         ComparisonOperator: "EQ" || "NE" || "LE" || "LT" || "GE" || "GT", // required
+ * //         Size: Number("long"), // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSizeConstraintSetCommandInput - {@link GetSizeConstraintSetCommandInput}
+ * @returns {@link GetSizeConstraintSetCommandOutput}
  * @see {@link GetSizeConstraintSetCommandInput} for command's `input` shape.
  * @see {@link GetSizeConstraintSetCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @example To get a size constraint set
+ * ```javascript
+ * // The following example returns the details of a size constraint match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+ * const input = {
+ *   SizeConstraintSetId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5"
+ * };
+ * const command = new GetSizeConstraintSetCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   SizeConstraintSet: {
+ *     Name: "MySampleSizeConstraintSet",
+ *     SizeConstraintSetId: "example1ds3t-46da-4fdb-b8d5-abc321j569j5",
+ *     SizeConstraints: [
+ *       {
+ *         ComparisonOperator: "GT",
+ *         FieldToMatch: {
+ *           Type: "QUERY_STRING"
+ *         },
+ *         Size: 0,
+ *         TextTransformation: "NONE"
+ *       }
+ *     ]
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetSizeConstraintSetCommand extends $Command<
-  GetSizeConstraintSetCommandInput,
-  GetSizeConstraintSetCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSizeConstraintSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSizeConstraintSetCommandInput, GetSizeConstraintSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "GetSizeConstraintSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSizeConstraintSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSizeConstraintSetResponse.filterSensitiveLog,
+export class GetSizeConstraintSetCommand extends command<GetSizeConstraintSetCommandInput, GetSizeConstraintSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSizeConstraintSet",
+  GetSizeConstraintSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSizeConstraintSetRequest;
+      output: GetSizeConstraintSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSizeConstraintSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSizeConstraintSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSizeConstraintSetCommandOutput> {
-    return deserializeAws_json1_1GetSizeConstraintSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSizeConstraintSetCommandInput;
+      output: GetSizeConstraintSetCommandOutput;
+    };
+  };
 }

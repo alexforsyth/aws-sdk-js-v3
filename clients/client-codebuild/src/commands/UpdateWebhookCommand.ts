@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeBuildClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeBuildClient";
-import { UpdateWebhookInput, UpdateWebhookOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateWebhookCommand,
-  serializeAws_json1_1UpdateWebhookCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateWebhookInput, UpdateWebhookOutput } from "../models/models_0";
+import { UpdateWebhook$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateWebhookCommand}.
+ */
 export interface UpdateWebhookCommandInput extends UpdateWebhookInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateWebhookCommand}.
+ */
 export interface UpdateWebhookCommandOutput extends UpdateWebhookOutput, __MetadataBearer {}
 
 /**
@@ -32,68 +33,104 @@ export interface UpdateWebhookCommandOutput extends UpdateWebhookOutput, __Metad
  * ```javascript
  * import { CodeBuildClient, UpdateWebhookCommand } from "@aws-sdk/client-codebuild"; // ES Modules import
  * // const { CodeBuildClient, UpdateWebhookCommand } = require("@aws-sdk/client-codebuild"); // CommonJS import
+ * // import type { CodeBuildClientConfig } from "@aws-sdk/client-codebuild";
+ * const config = {}; // type is CodeBuildClientConfig
  * const client = new CodeBuildClient(config);
+ * const input = { // UpdateWebhookInput
+ *   projectName: "STRING_VALUE", // required
+ *   branchFilter: "STRING_VALUE",
+ *   rotateSecret: true || false,
+ *   filterGroups: [ // FilterGroups
+ *     [ // FilterGroup
+ *       { // WebhookFilter
+ *         type: "EVENT" || "BASE_REF" || "HEAD_REF" || "ACTOR_ACCOUNT_ID" || "FILE_PATH" || "COMMIT_MESSAGE" || "WORKFLOW_NAME" || "TAG_NAME" || "RELEASE_NAME" || "REPOSITORY_NAME" || "ORGANIZATION_NAME", // required
+ *         pattern: "STRING_VALUE", // required
+ *         excludeMatchedPattern: true || false,
+ *       },
+ *     ],
+ *   ],
+ *   buildType: "BUILD" || "BUILD_BATCH" || "RUNNER_BUILDKITE_BUILD",
+ *   pullRequestBuildPolicy: { // PullRequestBuildPolicy
+ *     requiresCommentApproval: "DISABLED" || "ALL_PULL_REQUESTS" || "FORK_PULL_REQUESTS", // required
+ *     approverRoles: [ // PullRequestBuildApproverRoles
+ *       "GITHUB_READ" || "GITHUB_TRIAGE" || "GITHUB_WRITE" || "GITHUB_MAINTAIN" || "GITHUB_ADMIN" || "GITLAB_GUEST" || "GITLAB_PLANNER" || "GITLAB_REPORTER" || "GITLAB_DEVELOPER" || "GITLAB_MAINTAINER" || "GITLAB_OWNER" || "BITBUCKET_READ" || "BITBUCKET_WRITE" || "BITBUCKET_ADMIN",
+ *     ],
+ *   },
+ * };
  * const command = new UpdateWebhookCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateWebhookOutput
+ * //   webhook: { // Webhook
+ * //     url: "STRING_VALUE",
+ * //     payloadUrl: "STRING_VALUE",
+ * //     secret: "STRING_VALUE",
+ * //     branchFilter: "STRING_VALUE",
+ * //     filterGroups: [ // FilterGroups
+ * //       [ // FilterGroup
+ * //         { // WebhookFilter
+ * //           type: "EVENT" || "BASE_REF" || "HEAD_REF" || "ACTOR_ACCOUNT_ID" || "FILE_PATH" || "COMMIT_MESSAGE" || "WORKFLOW_NAME" || "TAG_NAME" || "RELEASE_NAME" || "REPOSITORY_NAME" || "ORGANIZATION_NAME", // required
+ * //           pattern: "STRING_VALUE", // required
+ * //           excludeMatchedPattern: true || false,
+ * //         },
+ * //       ],
+ * //     ],
+ * //     buildType: "BUILD" || "BUILD_BATCH" || "RUNNER_BUILDKITE_BUILD",
+ * //     manualCreation: true || false,
+ * //     lastModifiedSecret: new Date("TIMESTAMP"),
+ * //     scopeConfiguration: { // ScopeConfiguration
+ * //       name: "STRING_VALUE", // required
+ * //       domain: "STRING_VALUE",
+ * //       scope: "GITHUB_ORGANIZATION" || "GITHUB_GLOBAL" || "GITLAB_GROUP", // required
+ * //     },
+ * //     status: "CREATING" || "CREATE_FAILED" || "ACTIVE" || "DELETING",
+ * //     statusMessage: "STRING_VALUE",
+ * //     pullRequestBuildPolicy: { // PullRequestBuildPolicy
+ * //       requiresCommentApproval: "DISABLED" || "ALL_PULL_REQUESTS" || "FORK_PULL_REQUESTS", // required
+ * //       approverRoles: [ // PullRequestBuildApproverRoles
+ * //         "GITHUB_READ" || "GITHUB_TRIAGE" || "GITHUB_WRITE" || "GITHUB_MAINTAIN" || "GITHUB_ADMIN" || "GITLAB_GUEST" || "GITLAB_PLANNER" || "GITLAB_REPORTER" || "GITLAB_DEVELOPER" || "GITLAB_MAINTAINER" || "GITLAB_OWNER" || "BITBUCKET_READ" || "BITBUCKET_WRITE" || "BITBUCKET_ADMIN",
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateWebhookCommandInput - {@link UpdateWebhookCommandInput}
+ * @returns {@link UpdateWebhookCommandOutput}
  * @see {@link UpdateWebhookCommandInput} for command's `input` shape.
  * @see {@link UpdateWebhookCommandOutput} for command's `response` shape.
- * @see {@link CodeBuildClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeBuildClientResolvedConfig | config} for CodeBuildClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input value that was provided is not valid.</p>
+ *
+ * @throws {@link OAuthProviderException} (client fault)
+ *  <p>There was a problem with the underlying OAuth provider.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified Amazon Web Services resource cannot be found.</p>
+ *
+ * @throws {@link CodeBuildServiceException}
+ * <p>Base exception class for all service exceptions from CodeBuild service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateWebhookCommand extends $Command<
-  UpdateWebhookCommandInput,
-  UpdateWebhookCommandOutput,
-  CodeBuildClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateWebhookCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeBuildClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateWebhookCommandInput, UpdateWebhookCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeBuildClient";
-    const commandName = "UpdateWebhookCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateWebhookInput.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateWebhookOutput.filterSensitiveLog,
+export class UpdateWebhookCommand extends command<UpdateWebhookCommandInput, UpdateWebhookCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateWebhook",
+  UpdateWebhook$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateWebhookInput;
+      output: UpdateWebhookOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateWebhookCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateWebhookCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateWebhookCommandOutput> {
-    return deserializeAws_json1_1UpdateWebhookCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateWebhookCommandInput;
+      output: UpdateWebhookCommandOutput;
+    };
+  };
 }

@@ -1,99 +1,281 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DescribeContainerInstancesRequest, DescribeContainerInstancesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeContainerInstancesCommand,
-  serializeAws_json1_1DescribeContainerInstancesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeContainerInstancesRequest, DescribeContainerInstancesResponse } from "../models/models_0";
+import { DescribeContainerInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeContainerInstancesCommand}.
+ */
 export interface DescribeContainerInstancesCommandInput extends DescribeContainerInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeContainerInstancesCommand}.
+ */
 export interface DescribeContainerInstancesCommandOutput extends DescribeContainerInstancesResponse, __MetadataBearer {}
 
 /**
- * <p>Describes one or more container instances. Returns metadata about each container
- * 			instance requested.</p>
+ * <p>Describes one or more container instances. Returns metadata about each container instance requested.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECSClient, DescribeContainerInstancesCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DescribeContainerInstancesCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DescribeContainerInstancesRequest
+ *   cluster: "STRING_VALUE",
+ *   containerInstances: [ // StringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   include: [ // ContainerInstanceFieldList
+ *     "TAGS" || "CONTAINER_INSTANCE_HEALTH",
+ *   ],
+ * };
  * const command = new DescribeContainerInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeContainerInstancesResponse
+ * //   containerInstances: [ // ContainerInstances
+ * //     { // ContainerInstance
+ * //       containerInstanceArn: "STRING_VALUE",
+ * //       ec2InstanceId: "STRING_VALUE",
+ * //       capacityProviderName: "STRING_VALUE",
+ * //       version: Number("long"),
+ * //       versionInfo: { // VersionInfo
+ * //         agentVersion: "STRING_VALUE",
+ * //         agentHash: "STRING_VALUE",
+ * //         dockerVersion: "STRING_VALUE",
+ * //       },
+ * //       remainingResources: [ // Resources
+ * //         { // Resource
+ * //           name: "STRING_VALUE",
+ * //           type: "STRING_VALUE",
+ * //           doubleValue: Number("double"),
+ * //           longValue: Number("long"),
+ * //           integerValue: Number("int"),
+ * //           stringSetValue: [ // StringList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       registeredResources: [
+ * //         {
+ * //           name: "STRING_VALUE",
+ * //           type: "STRING_VALUE",
+ * //           doubleValue: Number("double"),
+ * //           longValue: Number("long"),
+ * //           integerValue: Number("int"),
+ * //           stringSetValue: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       status: "STRING_VALUE",
+ * //       statusReason: "STRING_VALUE",
+ * //       agentConnected: true || false,
+ * //       runningTasksCount: Number("int"),
+ * //       pendingTasksCount: Number("int"),
+ * //       agentUpdateStatus: "PENDING" || "STAGING" || "STAGED" || "UPDATING" || "UPDATED" || "FAILED",
+ * //       attributes: [ // Attributes
+ * //         { // Attribute
+ * //           name: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //           targetType: "container-instance",
+ * //           targetId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       registeredAt: new Date("TIMESTAMP"),
+ * //       attachments: [ // Attachments
+ * //         { // Attachment
+ * //           id: "STRING_VALUE",
+ * //           type: "STRING_VALUE",
+ * //           status: "STRING_VALUE",
+ * //           details: [ // AttachmentDetails
+ * //             { // KeyValuePair
+ * //               name: "STRING_VALUE",
+ * //               value: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       tags: [ // Tags
+ * //         { // Tag
+ * //           key: "STRING_VALUE",
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       healthStatus: { // ContainerInstanceHealthStatus
+ * //         overallStatus: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //         details: [ // InstanceHealthCheckResultList
+ * //           { // InstanceHealthCheckResult
+ * //             type: "CONTAINER_RUNTIME" || "ACCELERATED_COMPUTE" || "DAEMON" || "AGENT_CONNECTIVITY",
+ * //             status: "OK" || "IMPAIRED" || "INSUFFICIENT_DATA" || "INITIALIZING",
+ * //             statusReason: "STRING_VALUE",
+ * //             lastUpdated: new Date("TIMESTAMP"),
+ * //             lastStatusChange: new Date("TIMESTAMP"),
+ * //           },
+ * //         ],
+ * //       },
+ * //       gpuDevices: [ // GpuDevices
+ * //         { // GpuDevice
+ * //           gpuId: "STRING_VALUE",
+ * //           sharingMode: "IDLE" || "NVIDIA_MPS" || "DEDICATED",
+ * //           totalMemoryInMiB: Number("int"),
+ * //           remainingMemoryInMiB: Number("int"),
+ * //           containerCount: Number("int"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   failures: [ // Failures
+ * //     { // Failure
+ * //       arn: "STRING_VALUE",
+ * //       reason: "STRING_VALUE",
+ * //       detail: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeContainerInstancesCommandInput - {@link DescribeContainerInstancesCommandInput}
+ * @returns {@link DescribeContainerInstancesCommandOutput}
  * @see {@link DescribeContainerInstancesCommandInput} for command's `input` shape.
  * @see {@link DescribeContainerInstancesCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To describe container instance
+ * ```javascript
+ * // This example provides a description of the specified container instance in your default region, using the container instance UUID as an identifier.
+ * const input = {
+ *   cluster: "default",
+ *   containerInstances: [
+ *     "f2756532-8f13-4d53-87c9-aed50dc94cd7"
+ *   ]
+ * };
+ * const command = new DescribeContainerInstancesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   containerInstances: [
+ *     {
+ *       agentConnected: true,
+ *       containerInstanceArn: "arn:aws:ecs:us-east-1:012345678910:container-instance/default/f2756532-8f13-4d53-87c9-aed50dc94cd7",
+ *       ec2InstanceId: "i-807f3249",
+ *       pendingTasksCount: 0,
+ *       registeredResources: [
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 2048,
+ *           longValue: 0,
+ *           name: "CPU",
+ *           type: "INTEGER"
+ *         },
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 3768,
+ *           longValue: 0,
+ *           name: "MEMORY",
+ *           type: "INTEGER"
+ *         },
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 0,
+ *           longValue: 0,
+ *           name: "PORTS",
+ *           stringSetValue: [
+ *             "2376",
+ *             "22",
+ *             "51678",
+ *             "2375"
+ *           ],
+ *           type: "STRINGSET"
+ *         }
+ *       ],
+ *       remainingResources: [
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 1948,
+ *           longValue: 0,
+ *           name: "CPU",
+ *           type: "INTEGER"
+ *         },
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 3668,
+ *           longValue: 0,
+ *           name: "MEMORY",
+ *           type: "INTEGER"
+ *         },
+ *         {
+ *           doubleValue: 0.0,
+ *           integerValue: 0,
+ *           longValue: 0,
+ *           name: "PORTS",
+ *           stringSetValue: [
+ *             "2376",
+ *             "22",
+ *             "80",
+ *             "51678",
+ *             "2375"
+ *           ],
+ *           type: "STRINGSET"
+ *         }
+ *       ],
+ *       runningTasksCount: 1,
+ *       status: "ACTIVE"
+ *     }
+ *   ],
+ *   failures:   []
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeContainerInstancesCommand extends $Command<
-  DescribeContainerInstancesCommandInput,
-  DescribeContainerInstancesCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeContainerInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeContainerInstancesCommandInput, DescribeContainerInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DescribeContainerInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeContainerInstancesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeContainerInstancesResponse.filterSensitiveLog,
+export class DescribeContainerInstancesCommand extends command<DescribeContainerInstancesCommandInput, DescribeContainerInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeContainerInstances",
+  DescribeContainerInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeContainerInstancesRequest;
+      output: DescribeContainerInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeContainerInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeContainerInstancesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeContainerInstancesCommandOutput> {
-    return deserializeAws_json1_1DescribeContainerInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeContainerInstancesCommandInput;
+      output: DescribeContainerInstancesCommandOutput;
+    };
+  };
 }

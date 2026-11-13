@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeviceFarmClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DeviceFarmClient";
-import { RenewOfferingRequest, RenewOfferingResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1RenewOfferingCommand,
-  serializeAws_json1_1RenewOfferingCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RenewOfferingRequest, RenewOfferingResult } from "../models/models_0";
+import { RenewOffering$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RenewOfferingCommand}.
+ */
 export interface RenewOfferingCommandInput extends RenewOfferingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RenewOfferingCommand}.
+ */
 export interface RenewOfferingCommandOutput extends RenewOfferingResult, __MetadataBearer {}
 
 /**
@@ -30,68 +31,92 @@ export interface RenewOfferingCommandOutput extends RenewOfferingResult, __Metad
  * ```javascript
  * import { DeviceFarmClient, RenewOfferingCommand } from "@aws-sdk/client-device-farm"; // ES Modules import
  * // const { DeviceFarmClient, RenewOfferingCommand } = require("@aws-sdk/client-device-farm"); // CommonJS import
+ * // import type { DeviceFarmClientConfig } from "@aws-sdk/client-device-farm";
+ * const config = {}; // type is DeviceFarmClientConfig
  * const client = new DeviceFarmClient(config);
+ * const input = { // RenewOfferingRequest
+ *   offeringId: "STRING_VALUE", // required
+ *   quantity: Number("int"), // required
+ * };
  * const command = new RenewOfferingCommand(input);
  * const response = await client.send(command);
+ * // { // RenewOfferingResult
+ * //   offeringTransaction: { // OfferingTransaction
+ * //     offeringStatus: { // OfferingStatus
+ * //       type: "PURCHASE" || "RENEW" || "SYSTEM",
+ * //       offering: { // Offering
+ * //         id: "STRING_VALUE",
+ * //         description: "STRING_VALUE",
+ * //         type: "RECURRING",
+ * //         platform: "ANDROID" || "IOS",
+ * //         recurringCharges: [ // RecurringCharges
+ * //           { // RecurringCharge
+ * //             cost: { // MonetaryAmount
+ * //               amount: Number("double"),
+ * //               currencyCode: "USD",
+ * //             },
+ * //             frequency: "MONTHLY",
+ * //           },
+ * //         ],
+ * //       },
+ * //       quantity: Number("int"),
+ * //       effectiveOn: new Date("TIMESTAMP"),
+ * //     },
+ * //     transactionId: "STRING_VALUE",
+ * //     offeringPromotionId: "STRING_VALUE",
+ * //     createdOn: new Date("TIMESTAMP"),
+ * //     cost: {
+ * //       amount: Number("double"),
+ * //       currencyCode: "USD",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RenewOfferingCommandInput - {@link RenewOfferingCommandInput}
+ * @returns {@link RenewOfferingCommandOutput}
  * @see {@link RenewOfferingCommandInput} for command's `input` shape.
  * @see {@link RenewOfferingCommandOutput} for command's `response` shape.
- * @see {@link DeviceFarmClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DeviceFarmClientResolvedConfig | config} for DeviceFarmClient's `config` shape.
  *
+ * @throws {@link ArgumentException} (client fault)
+ *  <p>An invalid argument was specified.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit was exceeded.</p>
+ *
+ * @throws {@link NotEligibleException} (client fault)
+ *  <p>Exception gets thrown when a user is not eligible to perform the specified
+ *             transaction.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified entity was not found.</p>
+ *
+ * @throws {@link ServiceAccountException} (client fault)
+ *  <p>There was a problem with the service account.</p>
+ *
+ * @throws {@link DeviceFarmServiceException}
+ * <p>Base exception class for all service exceptions from DeviceFarm service.</p>
+ *
+ *
+ * @public
  */
-export class RenewOfferingCommand extends $Command<
-  RenewOfferingCommandInput,
-  RenewOfferingCommandOutput,
-  DeviceFarmClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RenewOfferingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DeviceFarmClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RenewOfferingCommandInput, RenewOfferingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DeviceFarmClient";
-    const commandName = "RenewOfferingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RenewOfferingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RenewOfferingResult.filterSensitiveLog,
+export class RenewOfferingCommand extends command<RenewOfferingCommandInput, RenewOfferingCommandOutput>(
+  _ep0,
+  _mw0,
+  "RenewOffering",
+  RenewOffering$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RenewOfferingRequest;
+      output: RenewOfferingResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RenewOfferingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RenewOfferingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RenewOfferingCommandOutput> {
-    return deserializeAws_json1_1RenewOfferingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RenewOfferingCommandInput;
+      output: RenewOfferingCommandOutput;
+    };
+  };
 }

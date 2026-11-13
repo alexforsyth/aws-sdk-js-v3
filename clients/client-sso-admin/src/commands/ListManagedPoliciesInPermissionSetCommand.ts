@@ -1,106 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListManagedPoliciesInPermissionSetRequest,
   ListManagedPoliciesInPermissionSetResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListManagedPoliciesInPermissionSetCommand,
-  serializeAws_json1_1ListManagedPoliciesInPermissionSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSOAdminClientResolvedConfig } from "../SSOAdminClient";
-
-export interface ListManagedPoliciesInPermissionSetCommandInput extends ListManagedPoliciesInPermissionSetRequest {}
-export interface ListManagedPoliciesInPermissionSetCommandOutput
-  extends ListManagedPoliciesInPermissionSetResponse,
-    __MetadataBearer {}
+import { ListManagedPoliciesInPermissionSet$ } from "../schemas/schemas_0";
 
 /**
- * <p>Lists the IAM managed policy that is attached to a specified permission set.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListManagedPoliciesInPermissionSetCommand}.
+ */
+export interface ListManagedPoliciesInPermissionSetCommandInput extends ListManagedPoliciesInPermissionSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListManagedPoliciesInPermissionSetCommand}.
+ */
+export interface ListManagedPoliciesInPermissionSetCommandOutput extends ListManagedPoliciesInPermissionSetResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists the Amazon Web Services managed policy that is attached to a specified permission set.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSOAdminClient, ListManagedPoliciesInPermissionSetCommand } from "@aws-sdk/client-sso-admin"; // ES Modules import
  * // const { SSOAdminClient, ListManagedPoliciesInPermissionSetCommand } = require("@aws-sdk/client-sso-admin"); // CommonJS import
+ * // import type { SSOAdminClientConfig } from "@aws-sdk/client-sso-admin";
+ * const config = {}; // type is SSOAdminClientConfig
  * const client = new SSOAdminClient(config);
+ * const input = { // ListManagedPoliciesInPermissionSetRequest
+ *   InstanceArn: "STRING_VALUE", // required
+ *   PermissionSetArn: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListManagedPoliciesInPermissionSetCommand(input);
  * const response = await client.send(command);
+ * // { // ListManagedPoliciesInPermissionSetResponse
+ * //   AttachedManagedPolicies: [ // AttachedManagedPolicyList
+ * //     { // AttachedManagedPolicy
+ * //       Name: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListManagedPoliciesInPermissionSetCommandInput - {@link ListManagedPoliciesInPermissionSetCommandInput}
+ * @returns {@link ListManagedPoliciesInPermissionSetCommandOutput}
  * @see {@link ListManagedPoliciesInPermissionSetCommandInput} for command's `input` shape.
  * @see {@link ListManagedPoliciesInPermissionSetCommandOutput} for command's `response` shape.
- * @see {@link SSOAdminClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSOAdminClientResolvedConfig | config} for SSOAdminClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Indicates that a requested resource is not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request failed because it contains a syntax error.</p>
+ *
+ * @throws {@link SSOAdminServiceException}
+ * <p>Base exception class for all service exceptions from SSOAdmin service.</p>
+ *
+ *
+ * @public
  */
-export class ListManagedPoliciesInPermissionSetCommand extends $Command<
-  ListManagedPoliciesInPermissionSetCommandInput,
-  ListManagedPoliciesInPermissionSetCommandOutput,
-  SSOAdminClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListManagedPoliciesInPermissionSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSOAdminClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListManagedPoliciesInPermissionSetCommandInput, ListManagedPoliciesInPermissionSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSOAdminClient";
-    const commandName = "ListManagedPoliciesInPermissionSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListManagedPoliciesInPermissionSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListManagedPoliciesInPermissionSetResponse.filterSensitiveLog,
+export class ListManagedPoliciesInPermissionSetCommand extends command<ListManagedPoliciesInPermissionSetCommandInput, ListManagedPoliciesInPermissionSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListManagedPoliciesInPermissionSet",
+  ListManagedPoliciesInPermissionSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListManagedPoliciesInPermissionSetRequest;
+      output: ListManagedPoliciesInPermissionSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListManagedPoliciesInPermissionSetCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListManagedPoliciesInPermissionSetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListManagedPoliciesInPermissionSetCommandOutput> {
-    return deserializeAws_json1_1ListManagedPoliciesInPermissionSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListManagedPoliciesInPermissionSetCommandInput;
+      output: ListManagedPoliciesInPermissionSetCommandOutput;
+    };
+  };
 }

@@ -3,6 +3,5804 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1168.0...v3.1169.0) (2026-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1167.0...v3.1168.0) (2026-11-12)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions. ([e27754f](https://github.com/aws/aws-sdk-js-v3/commit/e27754fe5659d9fc97735939b83feffc1c90d381))
+
+
+
+
+
+# [3.1167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1166.0...v3.1167.0) (2026-11-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1166.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1165.0...v3.1166.0) (2026-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1164.0...v3.1165.0) (2026-11-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1164.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1163.0...v3.1164.0) (2026-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1162.0...v3.1163.0) (2026-11-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1161.0...v3.1162.0) (2026-11-04)
+
+
+### Features
+
+* **codegen:** add a default socket timeout per service ([#8396](https://github.com/aws/aws-sdk-js-v3/issues/8396)) ([8f62478](https://github.com/aws/aws-sdk-js-v3/commit/8f62478cf179dc3e0807dae1721a669e08d98074))
+
+
+
+
+
+# [3.1161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1160.0...v3.1161.0) (2026-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1159.0...v3.1160.0) (2026-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1158.0...v3.1159.0) (2026-10-28)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface. ([d44798e](https://github.com/aws/aws-sdk-js-v3/commit/d44798e55f1def7812786944012e0714aa95b724))
+
+
+
+
+
+# [3.1158.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1157.0...v3.1158.0) (2026-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1157.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1156.0...v3.1157.0) (2026-10-26)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now lets you control whether explicit weighted prediction is applied to H.264 outputs. It also introduces Perceptual Filter, a new noise reduction filter designed to improve video quality by increasing VMAF scores, now with Auto, None, and strength options. ([b515e6c](https://github.com/aws/aws-sdk-js-v3/commit/b515e6cd0343182b9964a59704510a7798156dbb))
+
+
+
+
+
+# [3.1156.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1155.0...v3.1156.0) (2026-10-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1155.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1154.0...v3.1155.0) (2026-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1153.0...v3.1154.0) (2026-10-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1153.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1152.0...v3.1153.0) (2026-10-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1152.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1151.0...v3.1152.0) (2026-10-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1151.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1150.0...v3.1151.0) (2026-10-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1149.0...v3.1150.0) (2026-10-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1149.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1148.0...v3.1149.0) (2026-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1148.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1147.0...v3.1148.0) (2026-10-08)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive Workflow Monitor now supports AWS Elemental Inference feeds as a target resource type for CloudWatch alarm templates. ([e335e5d](https://github.com/aws/aws-sdk-js-v3/commit/e335e5dc0cadc7e5e180c19ab1acdd9ce90cc2d6))
+
+
+
+
+
+# [3.1147.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1146.0...v3.1147.0) (2026-10-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1146.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1145.0...v3.1146.0) (2026-10-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1144.0...v3.1145.0) (2026-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1144.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1143.0...v3.1144.0) (2026-09-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1143.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1142.0...v3.1143.0) (2026-09-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1141.0...v3.1142.0) (2026-09-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1140.0...v3.1141.0) (2026-09-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1140.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1139.0...v3.1140.0) (2026-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1139.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1138.0...v3.1139.0) (2026-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1138.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1137.0...v3.1138.0) (2026-09-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1136.0...v3.1137.0) (2026-09-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1135.0...v3.1136.0) (2026-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1135.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1134.0...v3.1135.0) (2026-09-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1134.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1133.0...v3.1134.0) (2026-09-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1133.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1132.0...v3.1133.0) (2026-09-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1132.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1131.0...v3.1132.0) (2026-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1130.0...v3.1131.0) (2026-09-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1129.0...v3.1130.0) (2026-09-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1129.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1128.0...v3.1129.0) (2026-09-09)
+
+
+### Features
+
+* **client-medialive:** MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation. ([a546f70](https://github.com/aws/aws-sdk-js-v3/commit/a546f70b5763c8a2fa4724eda58da5412dfd9572))
+
+
+
+
+
+# [3.1128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1127.0...v3.1128.0) (2026-09-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1126.0...v3.1127.0) (2026-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1126.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1125.0...v3.1126.0) (2026-09-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1125.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1124.0...v3.1125.0) (2026-09-02)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports AB forensic video watermarking ([d48e9e1](https://github.com/aws/aws-sdk-js-v3/commit/d48e9e1515040ea6a95361bee682b12ba6814fea))
+
+
+
+
+
+# [3.1124.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1123.0...v3.1124.0) (2026-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1123.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1122.0...v3.1123.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1122.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1121.0...v3.1122.0) (2026-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1120.0...v3.1121.0) (2026-08-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1120.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1119.0...v3.1120.0) (2026-08-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1119.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1118.0...v3.1119.0) (2026-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1117.0...v3.1118.0) (2026-08-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1117.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1116.0...v3.1117.0) (2026-08-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1116.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1115.0...v3.1116.0) (2026-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1115.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1114.0...v3.1115.0) (2026-08-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1114.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1113.0...v3.1114.0) (2026-08-19)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black. ([2bf1331](https://github.com/aws/aws-sdk-js-v3/commit/2bf1331a81cddad987b30380c685cc3b4f85f18b))
+
+
+
+
+
+# [3.1113.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1112.0...v3.1113.0) (2026-08-18)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs. ([b93c2f3](https://github.com/aws/aws-sdk-js-v3/commit/b93c2f346ea5540ad7fef15147c0a1f4ebdf1627))
+
+
+
+
+
+# [3.1112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1111.0...v3.1112.0) (2026-08-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1111.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1110.0...v3.1111.0) (2026-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1109.0...v3.1110.0) (2026-08-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1108.0...v3.1109.0) (2026-08-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1108.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1107.0...v3.1108.0) (2026-08-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1107.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1106.0...v3.1107.0) (2026-08-10)
+
+
+### Features
+
+* **client-medialive:** Added VirtualSourceAddress to multicast output destinations for MediaLive Anywhere channels. Specifies the source IP address for outbound multicast packets when downstream networks enforce source-IP filtering. ([dc24c64](https://github.com/aws/aws-sdk-js-v3/commit/dc24c644a6c8380230b7f35eaa874dd697af8faa))
+
+
+
+
+
+# [3.1106.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1105.0...v3.1106.0) (2026-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1104.0...v3.1105.0) (2026-08-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1104.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1103.0...v3.1104.0) (2026-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1103.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1102.0...v3.1103.0) (2026-08-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1102.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1101.0...v3.1102.0) (2026-08-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1101.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1100.0...v3.1101.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1099.0...v3.1100.0) (2026-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1099.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1098.0...v3.1099.0) (2026-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1098.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1097.0...v3.1098.0) (2026-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1097.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1096.0...v3.1097.0) (2026-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1096.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1095.0...v3.1096.0) (2026-07-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1095.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1094.0...v3.1095.0) (2026-07-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1094.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1093.0...v3.1094.0) (2026-07-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1093.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1092.0...v3.1093.0) (2026-07-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1092.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1091.0...v3.1092.0) (2026-07-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1091.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1090.0...v3.1091.0) (2026-07-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1090.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1089.0...v3.1090.0) (2026-07-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1089.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1088.0...v3.1089.0) (2026-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1088.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1087.0...v3.1088.0) (2026-07-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1087.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1086.0...v3.1087.0) (2026-07-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1086.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1085.0...v3.1086.0) (2026-07-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1085.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1084.0...v3.1085.0) (2026-07-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1084.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1083.0...v3.1084.0) (2026-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1083.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1082.0...v3.1083.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1082.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1081.0...v3.1082.0) (2026-07-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1081.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1080.0...v3.1081.0) (2026-07-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1080.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1079.0...v3.1080.0) (2026-07-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1079.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1078.0...v3.1079.0) (2026-07-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1078.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1077.0...v3.1078.0) (2026-07-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1077.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1076.0...v3.1077.0) (2026-06-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1076.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1075.0...v3.1076.0) (2026-06-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1075.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1074.0...v3.1075.0) (2026-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1074.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1073.0...v3.1074.0) (2026-06-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1073.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1072.0...v3.1073.0) (2026-06-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1072.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1071.0...v3.1072.0) (2026-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1071.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1070.0...v3.1071.0) (2026-06-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1070.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1069.0...v3.1070.0) (2026-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1069.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1068.0...v3.1069.0) (2026-06-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1068.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1067.0...v3.1068.0) (2026-06-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1067.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1066.0...v3.1067.0) (2026-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1066.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1065.0...v3.1066.0) (2026-06-10)
+
+
+### Features
+
+* **client-medialive:** Adding premixer settings to pid and track audio inputs in MediaLIve to allow greater control over mixing audio from multiple source streams including support for AudioPidSelectors made up of multiple audio PIDs. ([82f4fa6](https://github.com/aws/aws-sdk-js-v3/commit/82f4fa6a5d267d9078c2b90ef4fe589ff3db241a))
+
+
+
+
+
+# [3.1065.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1064.0...v3.1065.0) (2026-06-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1064.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1063.0...v3.1064.0) (2026-06-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1063.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1062.0...v3.1063.0) (2026-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1062.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1061.0...v3.1062.0) (2026-06-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1061.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1060.0...v3.1061.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1060.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1059.0...v3.1060.0) (2026-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1059.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1058.0...v3.1059.0) (2026-06-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1058.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1057.0...v3.1058.0) (2026-06-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1057.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1056.0...v3.1057.0) (2026-05-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1056.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1055.0...v3.1056.0) (2026-05-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1055.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1054.0...v3.1055.0) (2026-05-27)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports Smart Subtitles, a new caption source that uses AWS Elemental Inference to automatically generate WebVTT and TTML captions from source audio. Available in English, Spanish, French, German, Italian, and Portuguese. ([fea4801](https://github.com/aws/aws-sdk-js-v3/commit/fea480170c75800e8dc5604c637b7040e6397249))
+
+
+
+
+
+# [3.1054.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1053.0...v3.1054.0) (2026-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1053.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1052.0...v3.1053.0) (2026-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1052.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1051.0...v3.1052.0) (2026-05-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1051.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1050.0...v3.1051.0) (2026-05-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1050.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1049.0...v3.1050.0) (2026-05-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1049.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1048.0...v3.1049.0) (2026-05-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1048.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1047.0...v3.1048.0) (2026-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1047.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1046.0...v3.1047.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1046.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1045.0...v3.1046.0) (2026-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1045.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1044.0...v3.1045.0) (2026-05-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1044.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1043.0...v3.1044.0) (2026-05-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1043.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1042.0...v3.1043.0) (2026-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1042.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1041.0...v3.1042.0) (2026-05-04)
+
+
+### Features
+
+* **client-medialive:** Updates the type of the MediaLiveRouterOutputConnectionMap. ([6a558da](https://github.com/aws/aws-sdk-js-v3/commit/6a558da2679ce6e5395c215b398b67ffaf8ac52a))
+
+
+
+
+
+# [3.1041.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1040.0...v3.1041.0) (2026-05-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1040.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1039.0...v3.1040.0) (2026-04-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1039.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1038.0...v3.1039.0) (2026-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1038.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1037.0...v3.1038.0) (2026-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1037.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1036.0...v3.1037.0) (2026-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1036.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1035.0...v3.1036.0) (2026-04-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1035.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1034.0...v3.1035.0) (2026-04-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1034.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1033.0...v3.1034.0) (2026-04-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1033.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1032.0...v3.1033.0) (2026-04-20)
+
+
+### Features
+
+* **clients:** use binary decision diagrams for endpoint resolution ([#7931](https://github.com/aws/aws-sdk-js-v3/issues/7931)) ([ff1b2ba](https://github.com/aws/aws-sdk-js-v3/commit/ff1b2baed919216fa1ddf3d116d500d05f0e436b))
+
+
+
+
+
+# [3.1032.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1031.0...v3.1032.0) (2026-04-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1031.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1030.0...v3.1031.0) (2026-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1030.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1029.0...v3.1030.0) (2026-04-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1029.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1028.0...v3.1029.0) (2026-04-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1028.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1027.0...v3.1028.0) (2026-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1027.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1026.0...v3.1027.0) (2026-04-08)
+
+
+### Features
+
+* **client-medialive:** MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router. ([9d257a3](https://github.com/aws/aws-sdk-js-v3/commit/9d257a3f456eb61ebd2e6e823e80797b31bfc182))
+
+
+
+
+
+# [3.1026.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1025.0...v3.1026.0) (2026-04-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1025.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1024.0...v3.1025.0) (2026-04-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1024.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1023.0...v3.1024.0) (2026-04-03)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec. ([b9ff368](https://github.com/aws/aws-sdk-js-v3/commit/b9ff368c11c6747f7d104bda4955407cfea000c1))
+
+
+
+
+
+# [3.1023.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1022.0...v3.1023.0) (2026-04-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1022.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1021.0...v3.1022.0) (2026-04-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1021.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1020.0...v3.1021.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **codegen:** sync for adaptive retry throttling detection fix ([#7905](https://github.com/aws/aws-sdk-js-v3/issues/7905)) ([03f108d](https://github.com/aws/aws-sdk-js-v3/commit/03f108d08c37fcde9de0a62c29887458e980d84e))
+
+
+
+
+
+# [3.1020.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1019.0...v3.1020.0) (2026-03-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1019.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1018.0...v3.1019.0) (2026-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1018.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1017.0...v3.1018.0) (2026-03-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1017.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1016.0...v3.1017.0) (2026-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1016.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1015.0...v3.1016.0) (2026-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1015.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1014.0...v3.1015.0) (2026-03-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1014.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1013.0...v3.1014.0) (2026-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1013.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1012.0...v3.1013.0) (2026-03-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1012.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1011.0...v3.1012.0) (2026-03-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1011.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1010.0...v3.1011.0) (2026-03-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1010.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1009.0...v3.1010.0) (2026-03-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1009.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1008.0...v3.1009.0) (2026-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1008.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1007.0...v3.1008.0) (2026-03-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1007.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1006.0...v3.1007.0) (2026-03-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1006.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1005.0...v3.1006.0) (2026-03-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1005.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1004.0...v3.1005.0) (2026-03-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1004.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1003.0...v3.1004.0) (2026-03-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1003.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1002.0...v3.1003.0) (2026-03-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1002.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1001.0...v3.1002.0) (2026-03-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1001.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1000.0...v3.1001.0) (2026-03-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.1000.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.999.0...v3.1000.0) (2026-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.999.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.998.0...v3.999.0) (2026-02-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.998.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.997.0...v3.998.0) (2026-02-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.997.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.996.0...v3.997.0) (2026-02-24)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive. ([967c712](https://github.com/aws/aws-sdk-js-v3/commit/967c712b99caf0598ffcb345d8b061bcced9dd3b))
+
+
+
+
+
+# [3.996.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.995.0...v3.996.0) (2026-02-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.995.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.994.0...v3.995.0) (2026-02-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.994.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.993.0...v3.994.0) (2026-02-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.993.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.992.0...v3.993.0) (2026-02-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.992.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.991.0...v3.992.0) (2026-02-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.991.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.990.0...v3.991.0) (2026-02-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.990.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.989.0...v3.990.0) (2026-02-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.989.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.988.0...v3.989.0) (2026-02-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.988.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.987.0...v3.988.0) (2026-02-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.987.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.986.0...v3.987.0) (2026-02-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.986.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.985.0...v3.986.0) (2026-02-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.985.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.984.0...v3.985.0) (2026-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.984.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.983.0...v3.984.0) (2026-02-05)
+
+
+### Features
+
+* **client-medialive:** Outputs using the AV1 codec in CMAF Ingest output groups in MediaLive now have the ability to specify a target bit depth of 8 or 10. ([35dbef6](https://github.com/aws/aws-sdk-js-v3/commit/35dbef6f9cb267592714406bc350eacf697713bd))
+
+
+
+
+
+# [3.983.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.982.0...v3.983.0) (2026-02-04)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports SRT listener mode for inputs and outputs, in addition to the existing SRT caller mode. ([25287d4](https://github.com/aws/aws-sdk-js-v3/commit/25287d4b47742c81c1d600d3739635e2a07acd74))
+
+
+
+
+
+# [3.982.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.981.0...v3.982.0) (2026-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.981.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.980.0...v3.981.0) (2026-02-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.980.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.979.0...v3.980.0) (2026-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.978.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.977.0...v3.978.0) (2026-01-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.977.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.976.0...v3.977.0) (2026-01-27)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive released two new features that allows customers 1) to set Output Timecode for AV1 encoder, 2) to set a Custom Epoch for CMAF Ingest and MediaPackage V2 output groups when using Pipeline Locking or Disabled Locking modes. ([58a0492](https://github.com/aws/aws-sdk-js-v3/commit/58a0492ca28565442f98e6e0abd123721a54aab5))
+
+
+
+
+
+# [3.975.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.974.0...v3.975.0) (2026-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.974.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.973.0...v3.974.0) (2026-01-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.971.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.970.0...v3.971.0) (2026-01-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.970.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.969.0...v3.970.0) (2026-01-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.967.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.966.0...v3.967.0) (2026-01-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.966.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.965.0...v3.966.0) (2026-01-09)
+
+
+### Features
+
+* **client-medialive:** MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels. ([ce03931](https://github.com/aws/aws-sdk-js-v3/commit/ce039310db8a23f0a23c6632ad1046ef977ed04e))
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.964.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.963.0...v3.964.0) (2026-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.962.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.961.0...v3.962.0) (2026-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.959.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.958.0...v3.959.0) (2025-12-26)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports Pipeline Locking using Video Alignment as well as linked single pipeline channels to enable cross-channel and cross-region Pipeline Locking workflows. ([c42cdab](https://github.com/aws/aws-sdk-js-v3/commit/c42cdab1d40bf8e05b4f9ac2b3c3fd01a216a5c2))
+
+
+
+
+
+# [3.958.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.957.0...v3.958.0) (2025-12-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.955.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.954.0...v3.955.0) (2025-12-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.954.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.953.0...v3.954.0) (2025-12-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.952.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.951.0...v3.952.0) (2025-12-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.948.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.947.0...v3.948.0) (2025-12-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.947.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.946.0...v3.947.0) (2025-12-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.946.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.945.0...v3.946.0) (2025-12-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.943.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.942.0...v3.943.0) (2025-12-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.940.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.939.0...v3.940.0) (2025-11-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.939.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.938.0...v3.939.0) (2025-11-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.936.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.935.0...v3.936.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.935.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.934.0...v3.935.0) (2025-11-19)
+
+
+### Features
+
+* **client-medialive:** MediaLive is adding support for MediaConnect Router by supporting a new input type called MEDIACONNECT_ROUTER. This new input type will provide seamless encrypted transport between MediaConnect Router and your MediaLive channel. ([1667189](https://github.com/aws/aws-sdk-js-v3/commit/1667189eeecb33a4cb76c16304ca115a355242e2))
+
+
+
+
+
+# [3.934.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.933.0...v3.934.0) (2025-11-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.933.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.932.0...v3.933.0) (2025-11-17)
+
+
+### Features
+
+* **client-medialive:** Adds configurations for spatial/temporal adaptive quantization in AV1 codec, and conversion to HLG output color space in H265 codec. ([d994f74](https://github.com/aws/aws-sdk-js-v3/commit/d994f74e2a042dac2b828d8acf2c229e14f6b5c6))
+
+
+
+
+
+# [3.932.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.931.0...v3.932.0) (2025-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.931.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.930.0...v3.931.0) (2025-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.929.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.928.0...v3.929.0) (2025-11-11)
+
+
+### Features
+
+* **clients:** use schema-serde in AWS REST JSON clients ([#7485](https://github.com/aws/aws-sdk-js-v3/issues/7485)) ([99a3693](https://github.com/aws/aws-sdk-js-v3/commit/99a36932937fa5def2b0371b989c6df4d9358044))
+
+
+
+
+
+# [3.928.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.927.0...v3.928.0) (2025-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.927.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.926.0...v3.927.0) (2025-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.926.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.925.0...v3.926.0) (2025-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.925.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.924.0...v3.925.0) (2025-11-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.922.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.921.0...v3.922.0) (2025-10-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.920.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.919.0...v3.920.0) (2025-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.919.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.918.0...v3.919.0) (2025-10-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.918.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.917.0...v3.918.0) (2025-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.917.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.916.0...v3.917.0) (2025-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.916.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.915.0...v3.916.0) (2025-10-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.915.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.914.0...v3.915.0) (2025-10-22)
+
+
+### Features
+
+* **client-medialive:** Add 3 API operations for fetching alerts: ListAlerts (Channels), ListClusterAlerts (MediaLive Anywhere), and ListMultiplexAlerts ([6eeb9ba](https://github.com/aws/aws-sdk-js-v3/commit/6eeb9ba15c46777be8854b67db6a7e54fce08ebc))
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.913.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.912.0...v3.913.0) (2025-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.911.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.910.0...v3.911.0) (2025-10-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.908.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.907.0...v3.908.0) (2025-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.907.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.906.0...v3.907.0) (2025-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.906.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.905.0...v3.906.0) (2025-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.903.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.902.0...v3.903.0) (2025-10-03)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive enables Mediapackage V2 users to configure ID3, KLV, Nielsen ID3, and Segment Length related parameters through the Mediapackage output group. ([5187cdb](https://github.com/aws/aws-sdk-js-v3/commit/5187cdb83466572ae903fb9dbad8f1e5267d73cb))
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.899.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.898.0...v3.899.0) (2025-09-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.896.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.895.0...v3.896.0) (2025-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.895.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.894.0...v3.895.0) (2025-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.894.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.893.0...v3.894.0) (2025-09-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+
+### Features
+
+* **client-medialive:** Add MinBitrate for QVBR mode under H264/H265/AV1 output codec. Add GopBReference, GopNumBFrames, SubGopLength fields under H265 output codec. ([25f22be](https://github.com/aws/aws-sdk-js-v3/commit/25f22be24f9da78e6bdcb984915a527cb64f83c9))
+
+
+
+
+
+# [3.891.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.890.0...v3.891.0) (2025-09-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.888.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.887.0...v3.888.0) (2025-09-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.887.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.886.0...v3.887.0) (2025-09-11)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive adds a new feature in MediaPackage output group that enables MediaPackage V2 users to control HLS-related parameters directly in MediaLive. These parameter settings are then reflected in MediaPackage outputs, providing more streamlined control over HLS configurations. ([36b2bf0](https://github.com/aws/aws-sdk-js-v3/commit/36b2bf07c1453e44bdf9452bd89027c104141d59))
+
+
+
+
+
+# [3.886.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.885.0...v3.886.0) (2025-09-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.883.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.882.0...v3.883.0) (2025-09-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.882.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.881.0...v3.882.0) (2025-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.879.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.878.0...v3.879.0) (2025-08-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.876.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.875.0...v3.876.0) (2025-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.874.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.873.0...v3.874.0) (2025-08-22)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now has a field called "SubtitleRows" for controlling subtitle row count for DVB-Sub and Burn-In captions outputs ([e3fb3ad](https://github.com/aws/aws-sdk-js-v3/commit/e3fb3ad420a9a5635ad60c1cae13530618c49d70))
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.872.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.871.0...v3.872.0) (2025-08-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.868.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.867.0...v3.868.0) (2025-08-14)
+
+
+### Features
+
+* **client-medialive:** CMAF Ingest output groups in MediaLive can now accept one additional destination url for single pipeline channels and up to two additional destination urls for standard channels. ([761c811](https://github.com/aws/aws-sdk-js-v3/commit/761c8112d37c9974d38eeeaa8e17efd82c330fe8))
+
+
+
+
+
+# [3.864.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.863.0...v3.864.0) (2025-08-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.863.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.862.0...v3.863.0) (2025-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.859.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.858.0...v3.859.0) (2025-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.858.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.857.0...v3.858.0) (2025-07-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.857.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.856.0...v3.857.0) (2025-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.856.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.855.0...v3.856.0) (2025-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.855.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.854.0...v3.855.0) (2025-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.848.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.847.0...v3.848.0) (2025-07-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.846.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.845.0...v3.846.0) (2025-07-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.845.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.844.0...v3.845.0) (2025-07-15)
+
+
+### Bug Fixes
+
+* **clients:** upgrade @smithy/middleware-endpoint to fix file/env endpoint resolution ([#7206](https://github.com/aws/aws-sdk-js-v3/issues/7206)) ([37a6275](https://github.com/aws/aws-sdk-js-v3/commit/37a627510bc53ad0ce8d3ef10a2a5ec8ad195ee2))
+
+
+
+
+
+# [3.844.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.843.0...v3.844.0) (2025-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.840.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.839.0...v3.840.0) (2025-06-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.839.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.838.0...v3.839.0) (2025-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.835.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.834.0...v3.835.0) (2025-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.830.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.829.0...v3.830.0) (2025-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.828.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.827.1...v3.828.0) (2025-06-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.826.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.825.0...v3.826.0) (2025-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.825.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.824.0...v3.825.0) (2025-06-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.823.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.822.0...v3.823.0) (2025-06-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.817.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.816.0...v3.817.0) (2025-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.816.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.815.0...v3.816.0) (2025-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.812.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.811.0...v3.812.0) (2025-05-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.810.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.809.0...v3.810.0) (2025-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.808.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.807.0...v3.808.0) (2025-05-12)
+
+
+### Features
+
+* **client-medialive:** Add support to the AV1 rate control mode ([f8e9f56](https://github.com/aws/aws-sdk-js-v3/commit/f8e9f56730fcac2a715e0180e58a9f690614b629))
+
+
+
+
+
+# [3.806.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.805.0...v3.806.0) (2025-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.805.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.804.0...v3.805.0) (2025-05-07)
+
+
+### Features
+
+* **client-medialive:** Enables Updating Anywhere Settings on a MediaLive Anywhere Channel. ([9b00708](https://github.com/aws/aws-sdk-js-v3/commit/9b00708e65ad343ffc4507ec4b9234c0c059594c))
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.803.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.802.0...v3.803.0) (2025-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.799.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.798.0...v3.799.0) (2025-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.797.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.796.0...v3.797.0) (2025-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.796.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.795.0...v3.796.0) (2025-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.787.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.786.0...v3.787.0) (2025-04-10)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive / Features : Add support for CMAF Ingest CaptionLanguageMappings, TimedMetadataId3 settings, and Link InputResolution. ([4f30f3e](https://github.com/aws/aws-sdk-js-v3/commit/4f30f3e3ed9a90764f870fdb88298f864fbbe763))
+
+
+
+
+
+# [3.784.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.783.0...v3.784.0) (2025-04-07)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports SDI inputs to MediaLive Anywhere Channels in workflows that use AWS SDKs. ([2f69ce5](https://github.com/aws/aws-sdk-js-v3/commit/2f69ce562534ce1f992c591f18d6eb3b4b602fe3))
+
+
+
+
+
+# [3.782.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.781.0...v3.782.0) (2025-04-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.781.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.780.0...v3.781.0) (2025-04-02)
+
+
+### Features
+
+* **client-medialive:** Added support for SMPTE 2110 inputs when running a channel in a MediaLive Anywhere cluster. This feature enables ingestion of SMPTE 2110-compliant video, audio, and ancillary streams by reading SDP files that AWS Elemental MediaLive can retrieve from a network source. ([ba33fb0](https://github.com/aws/aws-sdk-js-v3/commit/ba33fb0fd2ac762f0662f04f72066909ec5f3b02))
+
+
+
+
+
+# [3.777.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.776.0...v3.777.0) (2025-03-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.775.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.774.0...v3.775.0) (2025-03-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.774.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.773.0...v3.774.0) (2025-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.772.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.771.0...v3.772.0) (2025-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.766.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.765.0...v3.766.0) (2025-03-11)
+
+
+### Features
+
+* **client-medialive:** Add an enum option DISABLED for Output Locking Mode under Global Configuration. ([f868479](https://github.com/aws/aws-sdk-js-v3/commit/f86847919b612511546507c3d1255304457be12a))
+
+
+
+
+
+# [3.765.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.764.0...v3.765.0) (2025-03-10)
+
+
+### Features
+
+* **client-medialive:** Adds defaultFontSize and defaultLineHeight as options in the EbuTtDDestinationSettings within the caption descriptions for an output stream. ([3466124](https://github.com/aws/aws-sdk-js-v3/commit/3466124484ed19aad5447a83d3052da2df8ecd44))
+
+
+
+
+
+# [3.758.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.757.0...v3.758.0) (2025-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.751.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.750.0...v3.751.0) (2025-02-18)
+
+
+### Features
+
+* **client-medialive:** Adds support for creating CloudWatchAlarmTemplates for AWS Elemental MediaTailor Playback Configuration resources. ([91498e9](https://github.com/aws/aws-sdk-js-v3/commit/91498e96cb9db531de47532d77a9be191e8dbd89))
+
+
+
+
+
+# [3.750.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.749.0...v3.750.0) (2025-02-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.749.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.748.0...v3.749.0) (2025-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.747.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.746.0...v3.747.0) (2025-02-12)
+
+
+### Features
+
+* **client-medialive:** Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations. ([c4598a2](https://github.com/aws/aws-sdk-js-v3/commit/c4598a298a36eed409ce499b66abcebf494e2765))
+
+
+
+
+
+# [3.744.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.743.0...v3.744.0) (2025-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.743.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.742.1...v3.743.0) (2025-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.741.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.740.0...v3.741.0) (2025-02-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.738.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.737.0...v3.738.0) (2025-01-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.734.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.733.0...v3.734.0) (2025-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.733.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.732.0...v3.733.0) (2025-01-22)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive adds a new feature, ID3 segment tagging, in CMAF Ingest output groups. It allows customers to insert ID3 tags into every output segment, controlled by a newly added channel schedule action Id3SegmentTagging. ([9a07043](https://github.com/aws/aws-sdk-js-v3/commit/9a070435a8a9f703a148d51bf29c85d231ea9f8e))
+
+
+
+
+
+## [3.731.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.731.0...v3.731.1) (2025-01-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.731.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.730.0...v3.731.0) (2025-01-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.730.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.729.0...v3.730.0) (2025-01-16)
+
+
+### Bug Fixes
+
+* **nested-clients:** create nested clients for internal use ([#6791](https://github.com/aws/aws-sdk-js-v3/issues/6791)) ([5c53685](https://github.com/aws/aws-sdk-js-v3/commit/5c5368554d13a3b798a72c53e30cd3d897621135))
+
+
+
+
+
+## [3.726.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.726.0...v3.726.1) (2025-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.726.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.725.0...v3.726.0) (2025-01-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.721.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.720.0...v3.721.0) (2025-01-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.716.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.715.0...v3.716.0) (2024-12-19)
+
+
+### Features
+
+* **client-medialive:** MediaLive is releasing ListVersions api ([c6e1d2f](https://github.com/aws/aws-sdk-js-v3/commit/c6e1d2f3a425f3f77770734f4f334acfbb61dae4))
+
+
+
+
+
+# [3.714.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.713.0...v3.714.0) (2024-12-17)
+
+
+### Features
+
+* **clients:** profile setting for clients ([#6728](https://github.com/aws/aws-sdk-js-v3/issues/6728)) ([afd9eea](https://github.com/aws/aws-sdk-js-v3/commit/afd9eea89fd0d63a377123f1ca999daeefd904a7))
+
+
+
+
+
+# [3.713.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.712.0...v3.713.0) (2024-12-16)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive adds three new features: MediaPackage v2 endpoint support for live stream delivery, KLV metadata passthrough in CMAF Ingest output groups, and Metadata Name Modifier in CMAF Ingest output groups for customizing metadata track names in output streams. ([7567d64](https://github.com/aws/aws-sdk-js-v3/commit/7567d643e3d1b8520b334aeba8622880e80dc690))
+
+
+
+
+
+# [3.712.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.711.0...v3.712.0) (2024-12-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.709.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.708.0...v3.709.0) (2024-12-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.708.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.707.0...v3.708.0) (2024-12-09)
+
+
+### Features
+
+* **client-medialive:** H265 outputs now support disabling the deblocking filter. ([4adf1d4](https://github.com/aws/aws-sdk-js-v3/commit/4adf1d4f213a291bed030c31dbe7e3dfd1135561))
+
+
+
+
+
+# [3.699.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.698.0...v3.699.0) (2024-11-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.696.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.695.0...v3.696.0) (2024-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.692.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.691.0...v3.692.0) (2024-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.691.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.690.0...v3.691.0) (2024-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.687.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.686.0...v3.687.0) (2024-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.686.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.685.0...v3.686.0) (2024-11-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.682.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.681.0...v3.682.0) (2024-10-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.677.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.676.0...v3.677.0) (2024-10-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.675.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.674.0...v3.675.0) (2024-10-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.674.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.673.0...v3.674.0) (2024-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.670.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.669.0...v3.670.0) (2024-10-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.669.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.668.0...v3.669.0) (2024-10-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.668.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.667.0...v3.668.0) (2024-10-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.665.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.664.0...v3.665.0) (2024-10-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+
+### Features
+
+* **middleware-user-agent:** add client config for userAgentAppId ([#6524](https://github.com/aws/aws-sdk-js-v3/issues/6524)) ([2990ea8](https://github.com/aws/aws-sdk-js-v3/commit/2990ea8f0d689966a9de0000d579f147c2d4af81))
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.658.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.657.0...v3.658.0) (2024-09-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.655.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.654.0...v3.655.0) (2024-09-19)
+
+
+### Features
+
+* **client-medialive:** Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings. ([dacf7b5](https://github.com/aws/aws-sdk-js-v3/commit/dacf7b55b14d6d11af10696b8a22081263a4187e))
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.652.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.1...v3.652.0) (2024-09-16)
+
+
+### Features
+
+* **client-medialive:** Removing the ON_PREMISE enum from the input settings field. ([52794ee](https://github.com/aws/aws-sdk-js-v3/commit/52794eee9c7643946b2a94459c5efe1f32effe05))
+
+
+
+
+
+## [3.651.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.651.0...v3.651.1) (2024-09-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.650.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.649.0...v3.650.0) (2024-09-11)
+
+
+### Features
+
+* **client-medialive:** Adds AV1 Codec support, SRT ouputs, and MediaLive Anywhere support. ([1a98084](https://github.com/aws/aws-sdk-js-v3/commit/1a9808455818f27648227582b6f565470046a122))
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.645.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.644.0...v3.645.0) (2024-09-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.644.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.643.0...v3.644.0) (2024-09-03)
+
+
+### Features
+
+* **client-medialive:** Added MinQP as a Rate Control option for H264 and H265 encodes. ([c4db70b](https://github.com/aws/aws-sdk-js-v3/commit/c4db70bf921d7cfa1793293059a35b87955ea427))
+
+
+
+
+
+# [3.637.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.636.0...v3.637.0) (2024-08-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.635.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.634.0...v3.635.0) (2024-08-20)
+
+
+### Features
+
+* **codegen:** add Smithy RPCv2 CBOR to list of protocols ([#6096](https://github.com/aws/aws-sdk-js-v3/issues/6096)) ([5154d4f](https://github.com/aws/aws-sdk-js-v3/commit/5154d4f19bc77a7bad075b35ce135d3b5f60ad1d))
+
+
+
+
+
+# [3.632.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.631.0...v3.632.0) (2024-08-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.631.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.630.0...v3.631.0) (2024-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.629.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.628.0...v3.629.0) (2024-08-12)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex. ([4f1db8e](https://github.com/aws/aws-sdk-js-v3/commit/4f1db8e5f44cf24b54cfbe92240384be53dfe3bb))
+
+
+
+
+
+# [3.624.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.623.0...v3.624.0) (2024-08-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.623.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.622.0...v3.623.0) (2024-08-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.622.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.621.0...v3.622.0) (2024-08-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.621.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.1...v3.621.0) (2024-07-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.620.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.0...v3.620.1) (2024-07-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.620.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.619.0...v3.620.0) (2024-07-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.616.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.615.0...v3.616.0) (2024-07-18)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type. ([91134df](https://github.com/aws/aws-sdk-js-v3/commit/91134dfbe4a20433cc8949ba404fa58b3e64d4f1))
+
+
+
+
+
+# [3.614.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.613.0...v3.614.0) (2024-07-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.613.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.612.0...v3.613.0) (2024-07-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.609.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.608.0...v3.609.0) (2024-07-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.608.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.607.0...v3.608.0) (2024-07-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.606.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.605.0...v3.606.0) (2024-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.600.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.599.0...v3.600.0) (2024-06-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.598.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.597.0...v3.598.0) (2024-06-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.596.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.595.0...v3.596.0) (2024-06-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.592.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.591.0...v3.592.0) (2024-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.590.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.589.0...v3.590.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **codegen:** consistently add region as config option when generated client is Sigv4 but not AWS ([#6156](https://github.com/aws/aws-sdk-js-v3/issues/6156)) ([06f51cc](https://github.com/aws/aws-sdk-js-v3/commit/06f51ccdc1c825f4b4de6a865520ace78c098ff3))
+
+
+
+
+
+# [3.588.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.587.0...v3.588.0) (2024-05-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.587.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.586.0...v3.587.0) (2024-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.583.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.582.0...v3.583.0) (2024-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.582.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.581.0...v3.582.0) (2024-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.577.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.576.0...v3.577.0) (2024-05-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.576.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.575.0...v3.576.0) (2024-05-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.575.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.574.0...v3.575.0) (2024-05-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.574.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.573.0...v3.574.0) (2024-05-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.572.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.571.0...v3.572.0) (2024-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.570.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.569.0...v3.570.0) (2024-05-06)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports configuring how SCTE 35 passthrough triggers segment breaks in HLS and MediaPackage output groups. Previously, messages triggered breaks in all these output groups. The new option is to trigger segment breaks only in groups that have SCTE 35 passthrough enabled. ([ae28fe7](https://github.com/aws/aws-sdk-js-v3/commit/ae28fe7272bc5f27d048c772db2d76e74d430913))
+
+
+
+
+
+# [3.569.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.568.0...v3.569.0) (2024-05-03)
+
+
+### Bug Fixes
+
+* **clients:** add deps required by default credential providers ([#6055](https://github.com/aws/aws-sdk-js-v3/issues/6055)) ([bfa8626](https://github.com/aws/aws-sdk-js-v3/commit/bfa86268540d197a21f13e8d2e8bced10b78d480))
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.565.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.564.0...v3.565.0) (2024-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.564.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.563.0...v3.564.0) (2024-04-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.563.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.562.0...v3.563.0) (2024-04-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.556.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.555.0...v3.556.0) (2024-04-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.554.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.553.0...v3.554.0) (2024-04-11)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive introduces workflow monitor, a new feature that enables the visualization and monitoring of your media workflows. Create signal maps of your existing workflows and monitor them by creating notification and monitoring template groups. ([17570f0](https://github.com/aws/aws-sdk-js-v3/commit/17570f048757c559c1734d696e4e9df0cdfdb014))
+
+
+
+
+
+# [3.552.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.551.0...v3.552.0) (2024-04-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.549.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.548.0...v3.549.0) (2024-04-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.548.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.547.0...v3.548.0) (2024-04-03)
+
+
+### Features
+
+* **client-medialive:** Cmaf Ingest outputs are now supported in Media Live ([e6543fe](https://github.com/aws/aws-sdk-js-v3/commit/e6543febeebec5a16022ffa806947fd4014dcc98))
+
+
+
+
+
+# [3.541.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.540.0...v3.541.0) (2024-03-25)
+
+
+### Features
+
+* **client-medialive:** Exposing TileMedia H265 options ([98c8bf8](https://github.com/aws/aws-sdk-js-v3/commit/98c8bf8f89666c71da47f1142e0b10282bc7a5ba))
+
+
+
+
+
+# [3.540.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.539.0...v3.540.0) (2024-03-22)
+
+
+### Bug Fixes
+
+* **util-endpoints:** augment endpointFunctions inline in endpointResolver functions ([#5933](https://github.com/aws/aws-sdk-js-v3/issues/5933)) ([42a791d](https://github.com/aws/aws-sdk-js-v3/commit/42a791defb20c697fefc985f1f2b22fc9e5be388))
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.533.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.532.0...v3.533.0) (2024-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.529.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.529.0...v3.529.1) (2024-03-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.529.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.528.0...v3.529.0) (2024-03-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.525.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.524.0...v3.525.0) (2024-02-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.523.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.522.0...v3.523.0) (2024-02-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.521.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.520.0...v3.521.0) (2024-02-23)
+
+
+### Features
+
+* requestHandler ctor param pass-through ([#5820](https://github.com/aws/aws-sdk-js-v3/issues/5820)) ([9fec71d](https://github.com/aws/aws-sdk-js-v3/commit/9fec71d1933cd8e3db118c164bca16edc2305532))
+
+
+
+
+
+# [3.519.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.518.0...v3.519.0) (2024-02-21)
+
+
+### Features
+
+* **client-medialive:** MediaLive now supports the ability to restart pipelines in a running channel. ([edcc296](https://github.com/aws/aws-sdk-js-v3/commit/edcc29652308d696c69d29bd761946fe1c29f4d4))
+
+
+
+
+
+# [3.515.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.514.0...v3.515.0) (2024-02-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.514.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.513.0...v3.514.0) (2024-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.513.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.512.0...v3.513.0) (2024-02-13)
+
+
+### Features
+
+* **experimentalIdentityAndAuth:** release phase for services without customizations ([#5787](https://github.com/aws/aws-sdk-js-v3/issues/5787)) ([4004ff6](https://github.com/aws/aws-sdk-js-v3/commit/4004ff68a8ad20f6e60e8fab1f8952928f92f4b7))
+
+
+
+
+
+# [3.511.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.510.0...v3.511.0) (2024-02-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.509.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.508.0...v3.509.0) (2024-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.507.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.506.0...v3.507.0) (2024-02-05)
+
+
+### Features
+
+* unified error dispatcher in protocols ([#5756](https://github.com/aws/aws-sdk-js-v3/issues/5756)) ([0872087](https://github.com/aws/aws-sdk-js-v3/commit/0872087ef56422541bd38d293f97613dfd10236f))
+
+
+
+
+
+# [3.504.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.1...v3.504.0) (2024-01-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.503.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.0...v3.503.1) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.503.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.502.0...v3.503.0) (2024-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.502.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.501.0...v3.502.0) (2024-01-29)
+
+
+### Features
+
+* **credential-providers:** lazy load STS & SSO clients in credential providers ([#5681](https://github.com/aws/aws-sdk-js-v3/issues/5681)) ([d27301d](https://github.com/aws/aws-sdk-js-v3/commit/d27301d48f3e75fdaccabf58f779f0b33a70664e))
+
+
+
+
+
+# [3.501.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.500.0...v3.501.0) (2024-01-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.499.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.498.0...v3.499.0) (2024-01-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.496.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.495.0...v3.496.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* get full list of exports for esm compat in dist-cjs ([#5694](https://github.com/aws/aws-sdk-js-v3/issues/5694)) ([5d26da6](https://github.com/aws/aws-sdk-js-v3/commit/5d26da6d07b593ae286ca674fb3cbff7c833cbb0))
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.490.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.489.0...v3.490.0) (2024-01-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.489.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.488.0...v3.489.0) (2024-01-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.485.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.484.0...v3.485.0) (2024-01-03)
+
+
+### Features
+
+* **credential-providers:** add credentialScope field ([#5606](https://github.com/aws/aws-sdk-js-v3/issues/5606)) ([04c1459](https://github.com/aws/aws-sdk-js-v3/commit/04c14592898ac63ed87d47f2a53320ccaa991083))
+
+
+
+
+
+# [3.484.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.483.0...v3.484.0) (2023-12-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.481.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.480.0...v3.481.0) (2023-12-26)
+
+
+### Features
+
+* codegen for command class builder ([#5604](https://github.com/aws/aws-sdk-js-v3/issues/5604)) ([4835de4](https://github.com/aws/aws-sdk-js-v3/commit/4835de4ebb8f302ae1e838ac1efaf5f12384910d))
+
+
+
+
+
+# [3.479.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.478.0...v3.479.0) (2023-12-21)
+
+
+### Features
+
+* **client-medialive:** MediaLive now supports the ability to configure the audio that an AWS Elemental Link UHD device produces, when the device is configured as the source for a flow in AWS Elemental MediaConnect. ([6325d6e](https://github.com/aws/aws-sdk-js-v3/commit/6325d6ee9dbc016a7ccbbc3c4a3d22d42191e90c))
+
+
+
+
+
+# [3.478.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.477.0...v3.478.0) (2023-12-20)
+
+
+### Features
+
+* codegen for paginator factory ([#5590](https://github.com/aws/aws-sdk-js-v3/issues/5590)) ([e54099b](https://github.com/aws/aws-sdk-js-v3/commit/e54099b7c1eb3b1de5737d5494821b1dae045fca))
+
+
+
+
+
+# [3.477.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.476.0...v3.477.0) (2023-12-19)
+
+
+### Features
+
+* xml codegen reduction ([#5566](https://github.com/aws/aws-sdk-js-v3/issues/5566)) ([3ed7c81](https://github.com/aws/aws-sdk-js-v3/commit/3ed7c81f9191182826de7645078cc6ed1d2ee959))
+
+
+
+
+
+# [3.476.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.475.0...v3.476.0) (2023-12-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.474.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.473.0...v3.474.0) (2023-12-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.473.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.472.0...v3.473.0) (2023-12-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.470.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.469.0...v3.470.0) (2023-12-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.468.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.467.0...v3.468.0) (2023-12-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.466.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.465.0...v3.466.0) (2023-12-04)
+
+
+### Features
+
+* **client-medialive:** Adds support for custom color correction on channels using 3D LUT files. ([6fc2986](https://github.com/aws/aws-sdk-js-v3/commit/6fc298635f6156678b35ecd7022249648314fa28))
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.462.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.461.0...v3.462.0) (2023-11-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.461.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.460.0...v3.461.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.460.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.459.0...v3.460.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.458.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.457.0...v3.458.0) (2023-11-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.454.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.453.0...v3.454.0) (2023-11-17)
+
+
+### Features
+
+* **client-medialive:** MediaLive has now added support for per-output static image overlay. ([02cc208](https://github.com/aws/aws-sdk-js-v3/commit/02cc208bfab4a89d29500dd924964d143019dc09))
+
+
+
+
+
+# [3.451.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.450.0...v3.451.0) (2023-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.450.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.449.0...v3.450.0) (2023-11-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.449.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.448.0...v3.449.0) (2023-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.445.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.444.0...v3.445.0) (2023-11-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.441.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.440.0...v3.441.0) (2023-11-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.438.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.437.0...v3.438.0) (2023-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.437.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.436.0...v3.437.0) (2023-10-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.436.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.435.0...v3.436.0) (2023-10-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.435.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.434.0...v3.435.0) (2023-10-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.433.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.432.0...v3.433.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* **codegen:** use partial record for enum keyed types ([#5391](https://github.com/aws/aws-sdk-js-v3/issues/5391)) ([70c2107](https://github.com/aws/aws-sdk-js-v3/commit/70c2107b970d035bfedb211278c88fdbfc2e5334))
+
+
+
+
+
+# [3.431.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.430.0...v3.431.0) (2023-10-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.430.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.429.0...v3.430.0) (2023-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.429.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.428.0...v3.429.0) (2023-10-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.428.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.427.0...v3.428.0) (2023-10-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.427.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.426.0...v3.427.0) (2023-10-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.425.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.424.0...v3.425.0) (2023-10-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.423.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.422.0...v3.423.0) (2023-10-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.421.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.420.0...v3.421.0) (2023-09-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.418.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.417.0...v3.418.0) (2023-09-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.414.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.413.0...v3.414.0) (2023-09-15)
+
+
+### Features
+
+* **region-config:** add aws region runtime extension codegen ([#5157](https://github.com/aws/aws-sdk-js-v3/issues/5157)) ([b9d59e8](https://github.com/aws/aws-sdk-js-v3/commit/b9d59e81696f9628c6502473bb01a2d1a617e928))
+
+
+
+
+
+# [3.413.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.412.0...v3.413.0) (2023-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.410.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.409.0...v3.410.0) (2023-09-11)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow. ([29e9aba](https://github.com/aws/aws-sdk-js-v3/commit/29e9aba17cf814ad0ce4c8662e786dc70e419daa))
+
+
+
+
+
+# [3.409.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.408.0...v3.409.0) (2023-09-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.408.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.407.0...v3.408.0) (2023-09-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.407.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.406.0...v3.407.0) (2023-09-06)
+
+
+### Features
+
+* **client-medialive:** Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time ([91ec93d](https://github.com/aws/aws-sdk-js-v3/commit/91ec93df6fdc37ec2c91af89186cd934e0e1ed89))
+
+
+
+
+
+# [3.405.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.404.0...v3.405.0) (2023-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.399.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.398.0...v3.399.0) (2023-08-24)
+
+
+### Features
+
+* **client-medialive:** MediaLive now supports passthrough of KLV data to a HLS output group with a TS container. MediaLive now supports setting an attenuation mode for AC3 audio when the coding mode is 3/2 LFE. MediaLive now supports specifying whether to include filler NAL units in RTMP output group settings. ([82c8bee](https://github.com/aws/aws-sdk-js-v3/commit/82c8beecc2e0820a6429bf748b5c9a983ce50677))
+
+
+
+
+
+# [3.398.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.397.0...v3.398.0) (2023-08-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.395.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.394.0...v3.395.0) (2023-08-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.391.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.390.0...v3.391.0) (2023-08-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.388.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.387.0...v3.388.0) (2023-08-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.387.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.386.0...v3.387.0) (2023-08-08)
+
+
+### Features
+
+* **clients:** allow client creation without configuration ([#5060](https://github.com/aws/aws-sdk-js-v3/issues/5060)) ([a9723dc](https://github.com/aws/aws-sdk-js-v3/commit/a9723dcbbf970402a3131a8ff79153a04b2cfb89))
+
+
+
+
+
+# [3.386.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.385.0...v3.386.0) (2023-08-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.385.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.384.0...v3.385.0) (2023-08-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.382.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.381.0...v3.382.0) (2023-08-01)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental Link devices now report their Availability Zone. Link devices now support the ability to change their Availability Zone. ([c6e9083](https://github.com/aws/aws-sdk-js-v3/commit/c6e9083c4adc688ed0033a7ad22649eee0d661c0))
+
+
+
+
+
+## [3.379.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.379.0...v3.379.1) (2023-07-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.378.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.377.0...v3.378.0) (2023-07-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.377.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.376.0...v3.377.0) (2023-07-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.370.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.369.0...v3.370.0) (2023-07-13)
+
+
+### Bug Fixes
+
+* **codegen:** pkg.json merge behavior ([#4954](https://github.com/aws/aws-sdk-js-v3/issues/4954)) ([4fc0b7f](https://github.com/aws/aws-sdk-js-v3/commit/4fc0b7f3961fe8a88c781c8f34269aef12d5f620))
+
+
+
+
+
+# [3.369.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.368.0...v3.369.0) (2023-07-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.368.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.367.0...v3.368.0) (2023-07-07)
+
+
+### Features
+
+* **client-medialive:** This release enables the use of Thumbnails in AWS Elemental MediaLive. ([cf90da6](https://github.com/aws/aws-sdk-js-v3/commit/cf90da6315029b53aea1585a36ad7145337a40e6))
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.362.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.361.0...v3.362.0) (2023-06-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.360.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.359.0...v3.360.0) (2023-06-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.359.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.358.0...v3.359.0) (2023-06-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.358.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.357.0...v3.358.0) (2023-06-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.357.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.356.0...v3.357.0) (2023-06-21)
+
+
+### Features
+
+* **clients:** automatic blob type conversions ([#4836](https://github.com/aws/aws-sdk-js-v3/issues/4836)) ([60ec921](https://github.com/aws/aws-sdk-js-v3/commit/60ec921c879ae8363f32ebbe9e1ecd6062df1081))
+
+
+
+
+
+# [3.354.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.353.0...v3.354.0) (2023-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.353.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.352.0...v3.353.0) (2023-06-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.352.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.351.0...v3.352.0) (2023-06-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.350.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.349.0...v3.350.0) (2023-06-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.348.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.347.1...v3.348.0) (2023-06-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.347.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.347.0...v3.347.1) (2023-06-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.347.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.346.0...v3.347.0) (2023-06-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.345.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.344.0...v3.345.0) (2023-06-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.344.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.343.0...v3.344.0) (2023-06-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.342.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.341.0...v3.342.0) (2023-05-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.341.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.340.0...v3.341.0) (2023-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.338.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.337.0...v3.338.0) (2023-05-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.337.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.336.0...v3.337.0) (2023-05-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.335.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.334.0...v3.335.0) (2023-05-18)
+
+
+### Features
+
+* **deps:** use [@smithy](https://github.com/smithy) types and protocol-http ([#4722](https://github.com/aws/aws-sdk-js-v3/issues/4722)) ([7ed7101](https://github.com/aws/aws-sdk-js-v3/commit/7ed7101dcc4e81038b6c7f581162b959e6b33a04))
+
+
+
+
+
+# [3.332.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.331.0...v3.332.0) (2023-05-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.331.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.330.0...v3.331.0) (2023-05-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.329.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.328.0...v3.329.0) (2023-05-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.328.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.327.0...v3.328.0) (2023-05-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.327.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.326.0...v3.327.0) (2023-05-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.326.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.325.0...v3.326.0) (2023-05-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.325.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.324.0...v3.325.0) (2023-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.321.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.321.0...v3.321.1) (2023-04-27)
+
+
+### Bug Fixes
+
+* **clients:** deserialization of jsonName complex shapes ([#4670](https://github.com/aws/aws-sdk-js-v3/issues/4670)) ([d79d141](https://github.com/aws/aws-sdk-js-v3/commit/d79d1414b5af2b985631127a3b3cdc03956a5dc8))
+
+
+
+
+
+# [3.319.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.318.0...v3.319.0) (2023-04-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.316.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.315.0...v3.316.0) (2023-04-19)
+
+
+### Bug Fixes
+
+* **clients:** always allow idempotency token ([#4642](https://github.com/aws/aws-sdk-js-v3/issues/4642)) ([aaff894](https://github.com/aws/aws-sdk-js-v3/commit/aaff894f7840d199bae043594ca56e290d5f3deb))
+
+
+### Features
+
+* **smithy-client:** factory for aggregated clients ([#4639](https://github.com/aws/aws-sdk-js-v3/issues/4639)) ([852b99d](https://github.com/aws/aws-sdk-js-v3/commit/852b99d393fe5f1a9ff6345f797949f3901a9cbf))
+
+
+
+
+
+# [3.315.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.314.0...v3.315.0) (2023-04-17)
+
+
+### Features
+
+* **codegen:** shorten serialization and deserialization code in protocols files ([#4625](https://github.com/aws/aws-sdk-js-v3/issues/4625)) ([8798a6e](https://github.com/aws/aws-sdk-js-v3/commit/8798a6eac1b48f0a807c51e38b864ef62b712943))
+
+
+
+
+
+# [3.312.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.311.0...v3.312.0) (2023-04-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.310.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.309.0...v3.310.0) (2023-04-10)
+
+
+### Bug Fixes
+
+* use updated dist glob pattern in package.json ([#4628](https://github.com/aws/aws-sdk-js-v3/issues/4628)) ([352393d](https://github.com/aws/aws-sdk-js-v3/commit/352393dcdba5ba16dca589c265c40e22913c7f2b))
+
+
+
+
+
+# [3.309.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.308.0...v3.309.0) (2023-04-07)
+
+
+### Features
+
+* **codegen:** shorten internal serde function names ([#4611](https://github.com/aws/aws-sdk-js-v3/issues/4611)) ([e385e85](https://github.com/aws/aws-sdk-js-v3/commit/e385e85938d112434b752abb38ab5de2d094f669))
+
+
+
+
+
+# [3.306.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.305.0...v3.306.0) (2023-04-04)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.303.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.302.0...v3.303.0) (2023-03-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.301.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.300.0...v3.301.0) (2023-03-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.300.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.299.0...v3.300.0) (2023-03-27)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging. ([fce0f2f](https://github.com/aws/aws-sdk-js-v3/commit/fce0f2fa40e682c2fc75f5094827038da5f510b5))
+* **clients:** codegen for structural hint documentation in commands ([#4573](https://github.com/aws/aws-sdk-js-v3/issues/4573)) ([b3ff58d](https://github.com/aws/aws-sdk-js-v3/commit/b3ff58d3606ceefcdd04ac82fc1ca54f5f811989))
+
+
+
+
+
+# [3.299.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.298.0...v3.299.0) (2023-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.298.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.297.0...v3.298.0) (2023-03-23)
+
+
+### Features
+
+* **clients:** remove generated log filters for data with no sensitive data ([#4544](https://github.com/aws/aws-sdk-js-v3/issues/4544)) ([569155d](https://github.com/aws/aws-sdk-js-v3/commit/569155d6cce710b102cefa7511ba1bc1d28bc87e))
+
+
+
+
+
+# [3.297.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.296.0...v3.297.0) (2023-03-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.296.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.295.0...v3.296.0) (2023-03-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.295.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.294.0...v3.295.0) (2023-03-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.294.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.293.0...v3.294.0) (2023-03-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.293.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.292.1...v3.293.0) (2023-03-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.292.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.291.0...v3.292.0) (2023-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.290.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.289.0...v3.290.0) (2023-03-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.289.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.288.0...v3.289.0) (2023-03-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.288.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.287.0...v3.288.0) (2023-03-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.287.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.286.0...v3.287.0) (2023-03-08)
+
+
+### Bug Fixes
+
+* **clients:** remove aggregated client from paginators ([#4496](https://github.com/aws/aws-sdk-js-v3/issues/4496)) ([aea457a](https://github.com/aws/aws-sdk-js-v3/commit/aea457ab5d4e72939f2f608140d82b60526eb716))
+
+
+
+
+
+# [3.284.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.283.0...v3.284.0) (2023-03-03)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive adds support for Nielsen watermark timezones. ([878da7a](https://github.com/aws/aws-sdk-js-v3/commit/878da7a805559174c3b8cd0753049e51f920cb70))
+
+
+
+
+
+# [3.282.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.281.0...v3.282.0) (2023-03-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.281.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.280.0...v3.281.0) (2023-02-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.279.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.278.0...v3.279.0) (2023-02-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.278.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.277.0...v3.278.0) (2023-02-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.276.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.275.0...v3.276.0) (2023-02-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.272.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.271.0...v3.272.0) (2023-02-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.271.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.270.0...v3.271.0) (2023-02-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.267.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.1...v3.267.0) (2023-02-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.266.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.266.0...v3.266.1) (2023-02-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.266.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.265.0...v3.266.0) (2023-02-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.264.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.263.0...v3.264.0) (2023-02-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.262.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.261.0...v3.262.0) (2023-01-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.261.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.260.0...v3.261.0) (2023-01-30)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.259.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.258.0...v3.259.0) (2023-01-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.258.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.257.0...v3.258.0) (2023-01-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.257.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.256.0...v3.257.0) (2023-01-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.256.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.255.0...v3.256.0) (2023-01-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.254.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.253.0...v3.254.0) (2023-01-19)
+
+
+### Features
+
+* **checksum:** replace Hash with Checksum ([#4346](https://github.com/aws/aws-sdk-js-v3/issues/4346)) ([172b4f3](https://github.com/aws/aws-sdk-js-v3/commit/172b4f3475370b386271750436004706b36bc056))
+* **client-medialive:** AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds. ([8f23e93](https://github.com/aws/aws-sdk-js-v3/commit/8f23e93e0483e431f5ea70a1990395283ed76e05))
+
+
+
+
+
+# [3.252.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.251.0...v3.252.0) (2023-01-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.245.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.244.0...v3.245.0) (2023-01-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.241.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.240.0...v3.241.0) (2022-12-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.238.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.237.0...v3.238.0) (2022-12-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.236.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.235.0...v3.236.0) (2022-12-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.235.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.234.0...v3.235.0) (2022-12-20)
+
+
+### Features
+
+* **client-medialive:** This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input. ([49b07b3](https://github.com/aws/aws-sdk-js-v3/commit/49b07b3f01e29fcd629803cb319028e2b0918e78))
+
+
+
+
+
+# [3.234.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.233.0...v3.234.0) (2022-12-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.231.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.230.0...v3.231.0) (2022-12-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.229.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.228.0...v3.229.0) (2022-12-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.228.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.227.0...v3.228.0) (2022-12-09)
+
+
+### Features
+
+* **client-medialive:** Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency. ([e581155](https://github.com/aws/aws-sdk-js-v3/commit/e5811558346eed729862445b80af4aad2a23362d))
+
+
+
+
+
+# [3.226.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.225.0...v3.226.0) (2022-12-07)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.224.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.223.0...v3.224.0) (2022-12-05)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.223.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.222.0...v3.223.0) (2022-12-02)
+
+
+### Bug Fixes
+
+* **clients:** remove unconditional inclusion of util-retry ([#4246](https://github.com/aws/aws-sdk-js-v3/issues/4246)) ([3baeb44](https://github.com/aws/aws-sdk-js-v3/commit/3baeb445fb399fa3b6d81e89e88c22b0c0a691cc))
+
+
+### Features
+
+* **client-medialive:** Updates to Event Signaling and Management (ESAM) API and documentation. ([a684000](https://github.com/aws/aws-sdk-js-v3/commit/a68400099e3ca5f9944d63675fd97023ffa9e827))
+
+
+
+
+
+# [3.222.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.221.0...v3.222.0) (2022-12-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.218.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.217.0...v3.218.0) (2022-11-28)
+
+
+### Bug Fixes
+
+* **codegen:** add check for required query parameters ([#4223](https://github.com/aws/aws-sdk-js-v3/issues/4223)) ([b941f46](https://github.com/aws/aws-sdk-js-v3/commit/b941f4646518aacec2d7709eb673e5b2d90f0b04))
+
+
+
+
+
+# [3.216.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.215.0...v3.216.0) (2022-11-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.215.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.214.0...v3.215.0) (2022-11-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.213.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.212.0...v3.213.0) (2022-11-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.212.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.211.0...v3.212.0) (2022-11-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.211.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.210.0...v3.211.0) (2022-11-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.210.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.209.0...v3.210.0) (2022-11-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.209.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.208.0...v3.209.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* **clients:** remove unconditional add of util-base64 node and browser modules ([#4170](https://github.com/aws/aws-sdk-js-v3/issues/4170)) ([24ec718](https://github.com/aws/aws-sdk-js-v3/commit/24ec718ea19309059d8b923c0b5c4265d308a36f))
+* **clients:** use default no-op logger in clients codegen ([#4171](https://github.com/aws/aws-sdk-js-v3/issues/4171)) ([9721730](https://github.com/aws/aws-sdk-js-v3/commit/9721730bc3ceba8a8b80ad95e9c893e55e30272e))
+
+
+
+
+
+# [3.208.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.207.0...v3.208.0) (2022-11-10)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.204.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.203.0...v3.204.0) (2022-11-04)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-11-04 ([7471107](https://github.com/aws/aws-sdk-js-v3/commit/7471107c0881b5d9e474447a660dd3354a50b195))
+
+
+
+
+
+# [3.202.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.201.0...v3.202.0) (2022-11-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.201.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.200.0...v3.201.0) (2022-11-01)
+
+
+### Features
+
+* end support for Node.js 12.x ([#4123](https://github.com/aws/aws-sdk-js-v3/issues/4123)) ([83f913e](https://github.com/aws/aws-sdk-js-v3/commit/83f913ec2ac3878d8726c6964f585550dc5caf3e))
+
+
+
+
+
+# [3.200.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.199.0...v3.200.0) (2022-10-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.199.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.198.0...v3.199.0) (2022-10-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.198.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.197.0...v3.198.0) (2022-10-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.197.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.196.0...v3.197.0) (2022-10-26)
+
+
+### Bug Fixes
+
+* **types:** expand custom endpoint type ([#4097](https://github.com/aws/aws-sdk-js-v3/issues/4097)) ([3620ce4](https://github.com/aws/aws-sdk-js-v3/commit/3620ce4162435b9688823162281140f40365b14c))
+
+
+
+
+
+# [3.196.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.195.0...v3.196.0) (2022-10-25)
+
+
+### Features
+
+* **endpoint:** add remaining restJson1 services endpoint models ([#4090](https://github.com/aws/aws-sdk-js-v3/issues/4090)) ([998113b](https://github.com/aws/aws-sdk-js-v3/commit/998113bd0a70a7de4bf5d975cb5f7524098866a0))
+
+
+
+
+
+# [3.194.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.193.0...v3.194.0) (2022-10-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.193.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.192.0...v3.193.0) (2022-10-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.192.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.191.0...v3.192.0) (2022-10-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.190.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.189.0...v3.190.0) (2022-10-17)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.188.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.187.0...v3.188.0) (2022-10-13)
+
+
+### Features
+
+* **client-medialive:** AWS Elemental MediaLive now supports forwarding SCTE-35 messages through the Event Signaling and Management (ESAM) API, and can read those SCTE-35 messages from an inactive source. ([3e59a7a](https://github.com/aws/aws-sdk-js-v3/commit/3e59a7ac4d2d0901637af72c5312549f2309b9a7))
+* **clients:** support util functions to consume response streams ([#3977](https://github.com/aws/aws-sdk-js-v3/issues/3977)) ([ad99b66](https://github.com/aws/aws-sdk-js-v3/commit/ad99b66944b6fe1ce83082c1a33193dff033cfaf))
+
+
+
+
+
+# [3.186.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.185.0...v3.186.0) (2022-10-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.185.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.184.0...v3.185.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* **codegen:** add deser check for x-amz-request-id ([#4015](https://github.com/aws/aws-sdk-js-v3/issues/4015)) ([6ff07bd](https://github.com/aws/aws-sdk-js-v3/commit/6ff07bd7e72bd56725f318013ac1d6d0fbbcdd9a))
+
+
+
+
+
+# [3.183.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.182.0...v3.183.0) (2022-10-03)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.181.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.180.0...v3.181.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* **clients:** make parseErrorBody async ([#3999](https://github.com/aws/aws-sdk-js-v3/issues/3999)) ([2558c93](https://github.com/aws/aws-sdk-js-v3/commit/2558c93c050357ac6dc47aa0452b15b12ebfd676))
+* **clients:** populate message field when parsing errors ([#3995](https://github.com/aws/aws-sdk-js-v3/issues/3995)) ([02e47f1](https://github.com/aws/aws-sdk-js-v3/commit/02e47f14397ae0a5d2e2883350d038b307fdcdb4))
+
+
+
+
+
+# [3.180.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.179.0...v3.180.0) (2022-09-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.179.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.178.0...v3.179.0) (2022-09-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.178.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.177.0...v3.178.0) (2022-09-23)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.171.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.170.0...v3.171.0) (2022-09-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.170.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.169.0...v3.170.0) (2022-09-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.169.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.168.0...v3.169.0) (2022-09-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.168.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.167.0...v3.168.0) (2022-09-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.167.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.166.0...v3.167.0) (2022-09-08)
+
+
+### Features
+
+* **client-medialive:** This change exposes API settings which allow Dolby Atmos and Dolby Vision to be used when running a channel using Elemental Media Live ([c7ddd0d](https://github.com/aws/aws-sdk-js-v3/commit/c7ddd0d3ae20acc26ad64e80816b028e93441c5a))
+
+
+
+
+
+# [3.165.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.164.0...v3.165.0) (2022-09-06)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.163.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.162.0...v3.163.0) (2022-09-01)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.162.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.161.0...v3.162.0) (2022-08-31)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.161.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.160.0...v3.161.0) (2022-08-30)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-08-30 ([59043d3](https://github.com/aws/aws-sdk-js-v3/commit/59043d3755015c9185990f3ad850aaded13bd58c))
+
+
+
+
+
+# [3.160.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.159.0...v3.160.0) (2022-08-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.159.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.158.0...v3.159.0) (2022-08-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.154.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.153.0...v3.154.0) (2022-08-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.150.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.149.0...v3.150.0) (2022-08-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.145.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.144.0...v3.145.0) (2022-08-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.142.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.141.0...v3.142.0) (2022-08-02)
+
+
+### Features
+
+* **codegen:** general data mapping function ([#3830](https://github.com/aws/aws-sdk-js-v3/issues/3830)) ([9417eae](https://github.com/aws/aws-sdk-js-v3/commit/9417eae722806799fb4c15c07921574268c1165c))
+
+
+
+
+
+# [3.141.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.140.0...v3.141.0) (2022-08-01)
+
+
+### Features
+
+* **clients:** update client endpoints as of 2022-08-01 ([aaf49f2](https://github.com/aws/aws-sdk-js-v3/commit/aaf49f21b371412e6ea7e00890b71a7b31991b66))
+
+
+
+
+
+# [3.137.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.136.1...v3.137.0) (2022-07-26)
+
+
+### Features
+
+* **namespaces:** remove namespaces with only a log filter ([#3823](https://github.com/aws/aws-sdk-js-v3/issues/3823)) ([33e6822](https://github.com/aws/aws-sdk-js-v3/commit/33e68228fb64c53dd8f89e6be76dd5f46edc3cfd))
+
+
+
+
+
+# [3.136.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.135.0...v3.136.0) (2022-07-22)
+
+
+### Features
+
+* **client-medialive:** Link devices now support remote rebooting. Link devices now support maintenance windows. Maintenance windows allow a Link device to install software updates without stopping the MediaLive channel. The channel will experience a brief loss of input from the device while updates are installed. ([3cef41f](https://github.com/aws/aws-sdk-js-v3/commit/3cef41f821a5c7f34ca7a7d0ba3f63fffdf25b56))
+
+
+
+
+
+# [3.131.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.130.0...v3.131.0) (2022-07-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.130.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.129.0...v3.130.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* **codegen:** fix error code parsing when it's a number ([#3371](https://github.com/aws/aws-sdk-js-v3/issues/3371)) ([c2d8522](https://github.com/aws/aws-sdk-js-v3/commit/c2d852279a3d23958521a6ceb4f4c642b0cb1848))
+
+
+
+
+
+# [3.128.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.127.0...v3.128.0) (2022-07-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.127.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.126.0...v3.127.0) (2022-07-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.121.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.120.0...v3.121.0) (2022-06-30)
+
+
+### Features
+
+* **clients:** fallback to status code for unmodeled errors ([#3752](https://github.com/aws/aws-sdk-js-v3/issues/3752)) ([49bcc4f](https://github.com/aws/aws-sdk-js-v3/commit/49bcc4f153e890e798a8e82fd5fc397b2dcc449f))
+
+
+
+
+
+# [3.120.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.119.0...v3.120.0) (2022-06-29)
+
+
+### Features
+
+* **client-medialive:** This release adds support for automatic renewal of MediaLive reservations at the end of each reservation term. Automatic renewal is optional. This release also adds support for labelling accessibility-focused audio and caption tracks in HLS outputs. ([1737bf6](https://github.com/aws/aws-sdk-js-v3/commit/1737bf6183f15701b0edfa43606dd37b5f619430))
+
+
+
+
+
+## [3.118.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.118.0...v3.118.1) (2022-06-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.118.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.117.0...v3.118.0) (2022-06-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.112.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.111.0...v3.112.0) (2022-06-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.110.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.109.0...v3.110.0) (2022-06-14)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.109.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.108.1...v3.109.0) (2022-06-13)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.105.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.104.0...v3.105.0) (2022-06-06)
+
+
+### Features
+
+* **clients:** support recursion detection in Lambda ([#3654](https://github.com/aws/aws-sdk-js-v3/issues/3654)) ([ecfe46e](https://github.com/aws/aws-sdk-js-v3/commit/ecfe46ea1fd8b6e3812b75b3dc6c03554fb4b3fa))
+
+
+
+
+
+# [3.100.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.99.0...v3.100.0) (2022-05-26)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.99.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.98.0...v3.99.0) (2022-05-25)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.95.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.94.0...v3.95.0) (2022-05-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.94.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.93.0...v3.94.0) (2022-05-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.92.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.91.0...v3.92.0) (2022-05-16)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.87.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.86.0...v3.87.0) (2022-05-09)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.85.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.84.0...v3.85.0) (2022-05-05)
+
+
+### Features
+
+* **codegen:** add codegen indicator comment to all generated files ([#3592](https://github.com/aws/aws-sdk-js-v3/issues/3592)) ([567a530](https://github.com/aws/aws-sdk-js-v3/commit/567a5304232fcc1f9db3fd3df545054de8336b4b))
+
+
+
+
+
+# [3.82.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.81.0...v3.82.0) (2022-05-02)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.81.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.80.0...v3.81.0) (2022-04-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.80.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.79.0...v3.80.0) (2022-04-28)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.79.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.78.0...v3.79.0) (2022-04-27)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.78.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.77.0...v3.78.0) (2022-04-26)
+
+
+### Features
+
+* **types:** add pagination stopOnSameToken option ([#3524](https://github.com/aws/aws-sdk-js-v3/issues/3524)) ([9bf73e8](https://github.com/aws/aws-sdk-js-v3/commit/9bf73e81b8d9be9f12c72cbefbe26c502d1873c6))
+
+
+
+
+
+# [3.76.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.75.0...v3.76.0) (2022-04-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.75.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.74.0...v3.75.0) (2022-04-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.74.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.73.0...v3.74.0) (2022-04-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.72.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.71.0...v3.72.0) (2022-04-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.67.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.66.0...v3.67.0) (2022-04-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.58.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.57.0...v3.58.0) (2022-03-28)
+
+
+### Features
+
+* **client-medialive:** This release adds support for selecting a maintenance window. ([1d78757](https://github.com/aws/aws-sdk-js-v3/commit/1d787579e0e35a1c407d7d78af2b116daef76868))
+
+
+
+
+
+# [3.56.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.55.0...v3.56.0) (2022-03-24)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.55.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.1...v3.55.0) (2022-03-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.54.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.54.0...v3.54.1) (2022-03-15)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.54.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.53.1...v3.54.0) (2022-03-11)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.53.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.52.0...v3.53.0) (2022-02-24)
+
+
+### Features
+
+* **clients:** generate service exceptions as classes ([#3267](https://github.com/aws/aws-sdk-js-v3/issues/3267)) ([ca64fee](https://github.com/aws/aws-sdk-js-v3/commit/ca64feed3351c394c07dc26b782a5760a396a074))
+
+
+
+
+
+# [3.52.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.51.0...v3.52.0) (2022-02-18)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.51.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.50.0...v3.51.0) (2022-02-12)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.50.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.49.0...v3.50.0) (2022-02-08)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.49.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.48.0...v3.49.0) (2022-01-29)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.48.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.2...v3.48.0) (2022-01-22)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.47.2](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.1...v3.47.2) (2022-01-21)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+## [3.47.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.47.0-release-test-1...v3.47.1) (2022-01-20)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.47.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.46.0...v3.47.0) (2022-01-15)
+
+
+### Features
+
+* **clients:** update clients to use default values inferred from defaults mode ([#3192](https://github.com/aws/aws-sdk-js-v3/issues/3192)) ([9152e21](https://github.com/aws/aws-sdk-js-v3/commit/9152e210c6ec29f34bb070eaf2874039022e6ab7))
+
+
+
+
+
+# [3.46.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.45.0...v3.46.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* **clients:** update clean:dist script to delete dist-* folder ([#3155](https://github.com/aws/aws-sdk-js-v3/issues/3155)) ([cdb1709](https://github.com/aws/aws-sdk-js-v3/commit/cdb17090f82d1fc8755811c82cbed5976ec7e60b))
+
+
+### Features
+
+* **clients:** extend typedoc.json from root ([#3136](https://github.com/aws/aws-sdk-js-v3/issues/3136)) ([f6a3ef5](https://github.com/aws/aws-sdk-js-v3/commit/f6a3ef541ae2d92872d09d8cab6727911287ebb2))
+* **clients:** update clients as of 2021/01/07 ([#3163](https://github.com/aws/aws-sdk-js-v3/issues/3163)) ([6648b07](https://github.com/aws/aws-sdk-js-v3/commit/6648b07ea97691d2fed55eab49831646543b648b))
+* end support for Node.js 10.x ([#3122](https://github.com/aws/aws-sdk-js-v3/issues/3122)) ([7acf18a](https://github.com/aws/aws-sdk-js-v3/commit/7acf18abd3fb1cc461f809110cdb0d7968c2070e))
+
+
+
+
+
+# [3.45.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.44.0...v3.45.0) (2021-12-23)
+
+
+### Features
+
+* **clients:** update clients as of 2021/12/23 ([#3110](https://github.com/aws/aws-sdk-js-v3/issues/3110)) ([5d638e1](https://github.com/aws/aws-sdk-js-v3/commit/5d638e188ce64fa80fe36b8cba79ba63b80b50b7))
+
+
+
+
+
+# [3.43.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.42.0...v3.43.0) (2021-11-29)
+
+
+### Features
+
+* **clients:** update clients as of 11/28/2021 ([#3072](https://github.com/aws/aws-sdk-js-v3/issues/3072)) ([2ad1622](https://github.com/aws/aws-sdk-js-v3/commit/2ad1622ba8586b926fe508055211803bb29e3976))
+
+
+
+
+
+# [3.42.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.41.0...v3.42.0) (2021-11-19)
+
+**Note:** Version bump only for package @aws-sdk/client-medialive
+
+
+
+
+
+# [3.41.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.40.1...v3.41.0) (2021-11-11)
+
+
+### Features
+
+* **clients:** update clients as of 2021/11/11 ([#3015](https://github.com/aws/aws-sdk-js-v3/issues/3015)) ([3d82c4e](https://github.com/aws/aws-sdk-js-v3/commit/3d82c4e3c4d174533f46ce35495cf5cffabdb35a))
+
+
+
+
+
+# [3.40.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.39.0...v3.40.0) (2021-11-05)
+
+
+### Features
+
+* **clients:** populate variants in endpoints hashes ([#2974](https://github.com/aws/aws-sdk-js-v3/issues/2974)) ([0dd68ef](https://github.com/aws/aws-sdk-js-v3/commit/0dd68ef8b04ea0e96e43b05a9a10221e433fdf86))
+
+
+
+
+
 # [3.39.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.38.0...v3.39.0) (2021-10-29)
 
 **Note:** Version bump only for package @aws-sdk/client-medialive

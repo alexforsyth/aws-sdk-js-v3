@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeEnvironmentManagedActionHistoryRequest,
   DescribeEnvironmentManagedActionHistoryResult,
 } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEnvironmentManagedActionHistoryCommand,
-  serializeAws_queryDescribeEnvironmentManagedActionHistoryCommand,
-} from "../protocols/Aws_query";
+import { DescribeEnvironmentManagedActionHistory$ } from "../schemas/schemas_0";
 
-export interface DescribeEnvironmentManagedActionHistoryCommandInput
-  extends DescribeEnvironmentManagedActionHistoryRequest {}
-export interface DescribeEnvironmentManagedActionHistoryCommandOutput
-  extends DescribeEnvironmentManagedActionHistoryResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEnvironmentManagedActionHistoryCommand}.
+ */
+export interface DescribeEnvironmentManagedActionHistoryCommandInput extends DescribeEnvironmentManagedActionHistoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEnvironmentManagedActionHistoryCommand}.
+ */
+export interface DescribeEnvironmentManagedActionHistoryCommandOutput extends DescribeEnvironmentManagedActionHistoryResult, __MetadataBearer {}
 
 /**
  * <p>Lists an environment's completed and failed managed actions.</p>
@@ -34,77 +32,65 @@ export interface DescribeEnvironmentManagedActionHistoryCommandOutput
  * ```javascript
  * import { ElasticBeanstalkClient, DescribeEnvironmentManagedActionHistoryCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, DescribeEnvironmentManagedActionHistoryCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // DescribeEnvironmentManagedActionHistoryRequest
+ *   EnvironmentId: "STRING_VALUE",
+ *   EnvironmentName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new DescribeEnvironmentManagedActionHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEnvironmentManagedActionHistoryResult
+ * //   ManagedActionHistoryItems: [ // ManagedActionHistoryItems
+ * //     { // ManagedActionHistoryItem
+ * //       ActionId: "STRING_VALUE",
+ * //       ActionType: "InstanceRefresh" || "PlatformUpdate" || "Unknown",
+ * //       ActionDescription: "STRING_VALUE",
+ * //       FailureType: "UpdateCancelled" || "CancellationFailed" || "RollbackFailed" || "RollbackSuccessful" || "InternalFailure" || "InvalidEnvironmentState" || "PermissionsError",
+ * //       Status: "Completed" || "Failed" || "Unknown",
+ * //       FailureDescription: "STRING_VALUE",
+ * //       ExecutedTime: new Date("TIMESTAMP"),
+ * //       FinishedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEnvironmentManagedActionHistoryCommandInput - {@link DescribeEnvironmentManagedActionHistoryCommandInput}
+ * @returns {@link DescribeEnvironmentManagedActionHistoryCommandOutput}
  * @see {@link DescribeEnvironmentManagedActionHistoryCommandInput} for command's `input` shape.
  * @see {@link DescribeEnvironmentManagedActionHistoryCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkServiceException} (client fault)
+ *  <p>A generic service exception has occurred.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEnvironmentManagedActionHistoryCommand extends $Command<
-  DescribeEnvironmentManagedActionHistoryCommandInput,
-  DescribeEnvironmentManagedActionHistoryCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEnvironmentManagedActionHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeEnvironmentManagedActionHistoryCommandInput,
-    DescribeEnvironmentManagedActionHistoryCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "DescribeEnvironmentManagedActionHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEnvironmentManagedActionHistoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEnvironmentManagedActionHistoryResult.filterSensitiveLog,
+export class DescribeEnvironmentManagedActionHistoryCommand extends command<DescribeEnvironmentManagedActionHistoryCommandInput, DescribeEnvironmentManagedActionHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEnvironmentManagedActionHistory",
+  DescribeEnvironmentManagedActionHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEnvironmentManagedActionHistoryRequest;
+      output: DescribeEnvironmentManagedActionHistoryResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeEnvironmentManagedActionHistoryCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEnvironmentManagedActionHistoryCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEnvironmentManagedActionHistoryCommandOutput> {
-    return deserializeAws_queryDescribeEnvironmentManagedActionHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEnvironmentManagedActionHistoryCommandInput;
+      output: DescribeEnvironmentManagedActionHistoryCommandOutput;
+    };
+  };
 }

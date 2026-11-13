@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { DeleteApiCacheRequest, DeleteApiCacheResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteApiCacheCommand,
-  serializeAws_restJson1DeleteApiCacheCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteApiCacheRequest, DeleteApiCacheResponse } from "../models/models_0";
+import { DeleteApiCache$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteApiCacheCommand}.
+ */
 export interface DeleteApiCacheCommandInput extends DeleteApiCacheRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteApiCacheCommand}.
+ */
 export interface DeleteApiCacheCommandOutput extends DeleteApiCacheResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface DeleteApiCacheCommandOutput extends DeleteApiCacheResponse, __M
  * ```javascript
  * import { AppSyncClient, DeleteApiCacheCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, DeleteApiCacheCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // DeleteApiCacheRequest
+ *   apiId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteApiCacheCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteApiCacheCommandInput - {@link DeleteApiCacheCommandInput}
+ * @returns {@link DeleteApiCacheCommandOutput}
  * @see {@link DeleteApiCacheCommandInput} for command's `input` shape.
  * @see {@link DeleteApiCacheCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Another modification is in progress at this time and it must complete before you can
+ *          make your change.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteApiCacheCommand extends $Command<
-  DeleteApiCacheCommandInput,
-  DeleteApiCacheCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteApiCacheCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteApiCacheCommandInput, DeleteApiCacheCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "DeleteApiCacheCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteApiCacheRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteApiCacheResponse.filterSensitiveLog,
+export class DeleteApiCacheCommand extends command<DeleteApiCacheCommandInput, DeleteApiCacheCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteApiCache",
+  DeleteApiCache$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteApiCacheRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteApiCacheCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteApiCacheCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteApiCacheCommandOutput> {
-    return deserializeAws_restJson1DeleteApiCacheCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteApiCacheCommandInput;
+      output: DeleteApiCacheCommandOutput;
+    };
+  };
 }

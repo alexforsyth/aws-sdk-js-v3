@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeAttackStatisticsRequest, DescribeAttackStatisticsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAttackStatisticsCommand,
-  serializeAws_json1_1DescribeAttackStatisticsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAttackStatisticsRequest, DescribeAttackStatisticsResponse } from "../models/models_0";
+import { DescribeAttackStatistics$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAttackStatisticsCommand}.
+ */
 export interface DescribeAttackStatisticsCommandInput extends DescribeAttackStatisticsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAttackStatisticsCommand}.
+ */
 export interface DescribeAttackStatisticsCommandOutput extends DescribeAttackStatisticsResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,67 @@ export interface DescribeAttackStatisticsCommandOutput extends DescribeAttackSta
  * ```javascript
  * import { ShieldClient, DescribeAttackStatisticsCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, DescribeAttackStatisticsCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = {};
  * const command = new DescribeAttackStatisticsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAttackStatisticsResponse
+ * //   TimeRange: { // TimeRange
+ * //     FromInclusive: new Date("TIMESTAMP"),
+ * //     ToExclusive: new Date("TIMESTAMP"),
+ * //   },
+ * //   DataItems: [ // AttackStatisticsDataList // required
+ * //     { // AttackStatisticsDataItem
+ * //       AttackVolume: { // AttackVolume
+ * //         BitsPerSecond: { // AttackVolumeStatistics
+ * //           Max: Number("double"), // required
+ * //         },
+ * //         PacketsPerSecond: {
+ * //           Max: Number("double"), // required
+ * //         },
+ * //         RequestsPerSecond: {
+ * //           Max: Number("double"), // required
+ * //         },
+ * //       },
+ * //       AttackCount: Number("long"), // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeAttackStatisticsCommandInput - {@link DescribeAttackStatisticsCommandInput}
+ * @returns {@link DescribeAttackStatisticsCommandOutput}
  * @see {@link DescribeAttackStatisticsCommandInput} for command's `input` shape.
  * @see {@link DescribeAttackStatisticsCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAttackStatisticsCommand extends $Command<
-  DescribeAttackStatisticsCommandInput,
-  DescribeAttackStatisticsCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAttackStatisticsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAttackStatisticsCommandInput, DescribeAttackStatisticsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "DescribeAttackStatisticsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAttackStatisticsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAttackStatisticsResponse.filterSensitiveLog,
+export class DescribeAttackStatisticsCommand extends command<DescribeAttackStatisticsCommandInput, DescribeAttackStatisticsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAttackStatistics",
+  DescribeAttackStatistics$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeAttackStatisticsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAttackStatisticsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAttackStatisticsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAttackStatisticsCommandOutput> {
-    return deserializeAws_json1_1DescribeAttackStatisticsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAttackStatisticsCommandInput;
+      output: DescribeAttackStatisticsCommandOutput;
+    };
+  };
 }

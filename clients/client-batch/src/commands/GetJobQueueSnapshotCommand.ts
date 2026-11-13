@@ -1,0 +1,141 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetJobQueueSnapshotRequest, GetJobQueueSnapshotResponse } from "../models/models_0";
+import { GetJobQueueSnapshot$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJobQueueSnapshotCommand}.
+ */
+export interface GetJobQueueSnapshotCommandInput extends GetJobQueueSnapshotRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetJobQueueSnapshotCommand}.
+ */
+export interface GetJobQueueSnapshotCommandOutput extends GetJobQueueSnapshotResponse, __MetadataBearer {}
+
+/**
+ * <p>Provides a snapshot of job queue state, including ordering of <code>RUNNABLE</code> jobs, as well as capacity utilization for already dispatched jobs.
+ *     The first 100 <code>RUNNABLE</code> jobs in the job queue are listed in order of dispatch. For job queues with an attached
+ *     quota-share policy, the first <code>RUNNABLE</code> job in each quota share is also listed. Capacity utilization for the job queue is provided, as well as
+ *     break downs by share for job queues with attached fair-share or quota-share scheduling policies.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BatchClient, GetJobQueueSnapshotCommand } from "@aws-sdk/client-batch"; // ES Modules import
+ * // const { BatchClient, GetJobQueueSnapshotCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
+ * const client = new BatchClient(config);
+ * const input = { // GetJobQueueSnapshotRequest
+ *   jobQueue: "STRING_VALUE", // required
+ * };
+ * const command = new GetJobQueueSnapshotCommand(input);
+ * const response = await client.send(command);
+ * // { // GetJobQueueSnapshotResponse
+ * //   frontOfQueue: { // FrontOfQueueDetail
+ * //     jobs: [ // FrontOfQueueJobSummaryList
+ * //       { // FrontOfQueueJobSummary
+ * //         jobArn: "STRING_VALUE",
+ * //         earliestTimeAtPosition: Number("long"),
+ * //       },
+ * //     ],
+ * //     lastUpdatedAt: Number("long"),
+ * //   },
+ * //   frontOfQuotaShares: { // FrontOfQuotaSharesDetail
+ * //     quotaShares: { // FrontOfQuotaSharesJobSummaryMap
+ * //       "<keys>": [ // FrontOfQuotaShareJobSummaryList
+ * //         { // FrontOfQuotaShareJobSummary
+ * //           jobArn: "STRING_VALUE",
+ * //           earliestTimeAtPosition: Number("long"),
+ * //         },
+ * //       ],
+ * //     },
+ * //     lastUpdatedAt: Number("long"),
+ * //   },
+ * //   queueUtilization: { // QueueSnapshotUtilizationDetail
+ * //     totalCapacityUsage: [ // QueueSnapshotCapacityUsageList
+ * //       { // QueueSnapshotCapacityUsage
+ * //         capacityUnit: "STRING_VALUE",
+ * //         quantity: Number("double"),
+ * //       },
+ * //     ],
+ * //     fairshareUtilization: { // FairshareUtilizationDetail
+ * //       activeShareCount: Number("long"),
+ * //       topCapacityUtilization: [ // FairshareCapacityUtilizationList
+ * //         { // FairshareCapacityUtilization
+ * //           shareIdentifier: "STRING_VALUE",
+ * //           capacityUsage: [ // FairshareCapacityUsageList
+ * //             { // FairshareCapacityUsage
+ * //               capacityUnit: "STRING_VALUE",
+ * //               quantity: Number("double"),
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     quotaShareUtilization: { // QuotaShareUtilizationDetail
+ * //       topCapacityUtilization: [ // QuotaShareCapacityUtilizationList
+ * //         { // QuotaShareCapacityUtilization
+ * //           quotaShareName: "STRING_VALUE",
+ * //           capacityUsage: [ // QuotaShareCapacityUsageList
+ * //             { // QuotaShareCapacityUsage
+ * //               capacityUnit: "STRING_VALUE",
+ * //               quantity: Number("double"),
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     lastUpdatedAt: Number("long"),
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetJobQueueSnapshotCommandInput - {@link GetJobQueueSnapshotCommandInput}
+ * @returns {@link GetJobQueueSnapshotCommandOutput}
+ * @see {@link GetJobQueueSnapshotCommandInput} for command's `input` shape.
+ * @see {@link GetJobQueueSnapshotCommandOutput} for command's `response` shape.
+ * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @public
+ */
+export class GetJobQueueSnapshotCommand extends command<GetJobQueueSnapshotCommandInput, GetJobQueueSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJobQueueSnapshot",
+  GetJobQueueSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobQueueSnapshotRequest;
+      output: GetJobQueueSnapshotResponse;
+    };
+    sdk: {
+      input: GetJobQueueSnapshotCommandInput;
+      output: GetJobQueueSnapshotCommandOutput;
+    };
+  };
+}

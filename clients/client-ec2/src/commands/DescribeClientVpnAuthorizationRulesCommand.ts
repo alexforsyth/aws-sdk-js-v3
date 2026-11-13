@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeClientVpnAuthorizationRulesRequest,
   DescribeClientVpnAuthorizationRulesResult,
-} from "../models/models_2";
-import {
-  deserializeAws_ec2DescribeClientVpnAuthorizationRulesCommand,
-  serializeAws_ec2DescribeClientVpnAuthorizationRulesCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_3";
+import { DescribeClientVpnAuthorizationRules$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClientVpnAuthorizationRulesCommand}.
+ */
 export interface DescribeClientVpnAuthorizationRulesCommandInput extends DescribeClientVpnAuthorizationRulesRequest {}
-export interface DescribeClientVpnAuthorizationRulesCommandOutput
-  extends DescribeClientVpnAuthorizationRulesResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClientVpnAuthorizationRulesCommand}.
+ */
+export interface DescribeClientVpnAuthorizationRulesCommandOutput extends DescribeClientVpnAuthorizationRulesResult, __MetadataBearer {}
 
 /**
  * <p>Describes the authorization rules for a specified Client VPN endpoint.</p>
@@ -33,74 +32,71 @@ export interface DescribeClientVpnAuthorizationRulesCommandOutput
  * ```javascript
  * import { EC2Client, DescribeClientVpnAuthorizationRulesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeClientVpnAuthorizationRulesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeClientVpnAuthorizationRulesRequest
+ *   ClientVpnEndpointId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeClientVpnAuthorizationRulesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeClientVpnAuthorizationRulesResult
+ * //   AuthorizationRules: [ // AuthorizationRuleSet
+ * //     { // AuthorizationRule
+ * //       ClientVpnEndpointId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       GroupId: "STRING_VALUE",
+ * //       AccessAll: true || false,
+ * //       DestinationCidr: "STRING_VALUE",
+ * //       Status: { // ClientVpnAuthorizationRuleStatus
+ * //         Code: "authorizing" || "active" || "failed" || "revoking",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeClientVpnAuthorizationRulesCommandInput - {@link DescribeClientVpnAuthorizationRulesCommandInput}
+ * @returns {@link DescribeClientVpnAuthorizationRulesCommandOutput}
  * @see {@link DescribeClientVpnAuthorizationRulesCommandInput} for command's `input` shape.
  * @see {@link DescribeClientVpnAuthorizationRulesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClientVpnAuthorizationRulesCommand extends $Command<
-  DescribeClientVpnAuthorizationRulesCommandInput,
-  DescribeClientVpnAuthorizationRulesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClientVpnAuthorizationRulesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClientVpnAuthorizationRulesCommandInput, DescribeClientVpnAuthorizationRulesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeClientVpnAuthorizationRulesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClientVpnAuthorizationRulesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeClientVpnAuthorizationRulesResult.filterSensitiveLog,
+export class DescribeClientVpnAuthorizationRulesCommand extends command<DescribeClientVpnAuthorizationRulesCommandInput, DescribeClientVpnAuthorizationRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeClientVpnAuthorizationRules",
+  DescribeClientVpnAuthorizationRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClientVpnAuthorizationRulesRequest;
+      output: DescribeClientVpnAuthorizationRulesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeClientVpnAuthorizationRulesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeClientVpnAuthorizationRulesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeClientVpnAuthorizationRulesCommandOutput> {
-    return deserializeAws_ec2DescribeClientVpnAuthorizationRulesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClientVpnAuthorizationRulesCommandInput;
+      output: DescribeClientVpnAuthorizationRulesCommandOutput;
+    };
+  };
 }

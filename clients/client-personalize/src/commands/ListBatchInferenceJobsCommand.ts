@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListBatchInferenceJobsRequest, ListBatchInferenceJobsResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1ListBatchInferenceJobsCommand,
-  serializeAws_json1_1ListBatchInferenceJobsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBatchInferenceJobsRequest, ListBatchInferenceJobsResponse } from "../models/models_0";
+import { ListBatchInferenceJobs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBatchInferenceJobsCommand}.
+ */
 export interface ListBatchInferenceJobsCommandInput extends ListBatchInferenceJobsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBatchInferenceJobsCommand}.
+ */
 export interface ListBatchInferenceJobsCommandOutput extends ListBatchInferenceJobsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,67 @@ export interface ListBatchInferenceJobsCommandOutput extends ListBatchInferenceJ
  * ```javascript
  * import { PersonalizeClient, ListBatchInferenceJobsCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, ListBatchInferenceJobsCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // ListBatchInferenceJobsRequest
+ *   solutionVersionArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListBatchInferenceJobsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBatchInferenceJobsResponse
+ * //   batchInferenceJobs: [ // BatchInferenceJobs
+ * //     { // BatchInferenceJobSummary
+ * //       batchInferenceJobArn: "STRING_VALUE",
+ * //       jobName: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //       failureReason: "STRING_VALUE",
+ * //       solutionVersionArn: "STRING_VALUE",
+ * //       batchInferenceJobMode: "BATCH_INFERENCE" || "THEME_GENERATION",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBatchInferenceJobsCommandInput - {@link ListBatchInferenceJobsCommandInput}
+ * @returns {@link ListBatchInferenceJobsCommandOutput}
  * @see {@link ListBatchInferenceJobsCommandInput} for command's `input` shape.
  * @see {@link ListBatchInferenceJobsCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class ListBatchInferenceJobsCommand extends $Command<
-  ListBatchInferenceJobsCommandInput,
-  ListBatchInferenceJobsCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBatchInferenceJobsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBatchInferenceJobsCommandInput, ListBatchInferenceJobsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "ListBatchInferenceJobsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBatchInferenceJobsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBatchInferenceJobsResponse.filterSensitiveLog,
+export class ListBatchInferenceJobsCommand extends command<ListBatchInferenceJobsCommandInput, ListBatchInferenceJobsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBatchInferenceJobs",
+  ListBatchInferenceJobs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBatchInferenceJobsRequest;
+      output: ListBatchInferenceJobsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBatchInferenceJobsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListBatchInferenceJobsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBatchInferenceJobsCommandOutput> {
-    return deserializeAws_json1_1ListBatchInferenceJobsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBatchInferenceJobsCommandInput;
+      output: ListBatchInferenceJobsCommandOutput;
+    };
+  };
 }

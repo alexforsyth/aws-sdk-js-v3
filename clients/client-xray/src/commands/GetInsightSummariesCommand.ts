@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetInsightSummariesRequest, GetInsightSummariesResult } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetInsightSummariesCommand,
-  serializeAws_restJson1GetInsightSummariesCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, XRayClientResolvedConfig } from "../XRayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInsightSummariesRequest, GetInsightSummariesResult } from "../models/models_0";
+import { GetInsightSummaries$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInsightSummariesCommand}.
+ */
 export interface GetInsightSummariesCommandInput extends GetInsightSummariesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetInsightSummariesCommand}.
+ */
 export interface GetInsightSummariesCommandOutput extends GetInsightSummariesResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,106 @@ export interface GetInsightSummariesCommandOutput extends GetInsightSummariesRes
  * ```javascript
  * import { XRayClient, GetInsightSummariesCommand } from "@aws-sdk/client-xray"; // ES Modules import
  * // const { XRayClient, GetInsightSummariesCommand } = require("@aws-sdk/client-xray"); // CommonJS import
+ * // import type { XRayClientConfig } from "@aws-sdk/client-xray";
+ * const config = {}; // type is XRayClientConfig
  * const client = new XRayClient(config);
+ * const input = { // GetInsightSummariesRequest
+ *   States: [ // InsightStateList
+ *     "ACTIVE" || "CLOSED",
+ *   ],
+ *   GroupARN: "STRING_VALUE",
+ *   GroupName: "STRING_VALUE",
+ *   StartTime: new Date("TIMESTAMP"), // required
+ *   EndTime: new Date("TIMESTAMP"), // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetInsightSummariesCommand(input);
  * const response = await client.send(command);
+ * // { // GetInsightSummariesResult
+ * //   InsightSummaries: [ // InsightSummaryList
+ * //     { // InsightSummary
+ * //       InsightId: "STRING_VALUE",
+ * //       GroupARN: "STRING_VALUE",
+ * //       GroupName: "STRING_VALUE",
+ * //       RootCauseServiceId: { // ServiceId
+ * //         Name: "STRING_VALUE",
+ * //         Names: [ // ServiceNames
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         AccountId: "STRING_VALUE",
+ * //         Type: "STRING_VALUE",
+ * //       },
+ * //       Categories: [ // InsightCategoryList
+ * //         "FAULT",
+ * //       ],
+ * //       State: "ACTIVE" || "CLOSED",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       Summary: "STRING_VALUE",
+ * //       ClientRequestImpactStatistics: { // RequestImpactStatistics
+ * //         FaultCount: Number("long"),
+ * //         OkCount: Number("long"),
+ * //         TotalCount: Number("long"),
+ * //       },
+ * //       RootCauseServiceRequestImpactStatistics: {
+ * //         FaultCount: Number("long"),
+ * //         OkCount: Number("long"),
+ * //         TotalCount: Number("long"),
+ * //       },
+ * //       TopAnomalousServices: [ // AnomalousServiceList
+ * //         { // AnomalousService
+ * //           ServiceId: {
+ * //             Name: "STRING_VALUE",
+ * //             Names: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             AccountId: "STRING_VALUE",
+ * //             Type: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //       LastUpdateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetInsightSummariesCommandInput - {@link GetInsightSummariesCommandInput}
+ * @returns {@link GetInsightSummariesCommandOutput}
  * @see {@link GetInsightSummariesCommandInput} for command's `input` shape.
  * @see {@link GetInsightSummariesCommandOutput} for command's `response` shape.
- * @see {@link XRayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link XRayClientResolvedConfig | config} for XRayClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is missing required parameters or has invalid parameters.</p>
+ *
+ * @throws {@link ThrottledException} (client fault)
+ *  <p>The request exceeds the maximum number of requests per second.</p>
+ *
+ * @throws {@link XRayServiceException}
+ * <p>Base exception class for all service exceptions from XRay service.</p>
+ *
+ *
+ * @public
  */
-export class GetInsightSummariesCommand extends $Command<
-  GetInsightSummariesCommandInput,
-  GetInsightSummariesCommandOutput,
-  XRayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInsightSummariesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: XRayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInsightSummariesCommandInput, GetInsightSummariesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "XRayClient";
-    const commandName = "GetInsightSummariesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInsightSummariesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetInsightSummariesResult.filterSensitiveLog,
+export class GetInsightSummariesCommand extends command<GetInsightSummariesCommandInput, GetInsightSummariesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInsightSummaries",
+  GetInsightSummaries$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInsightSummariesRequest;
+      output: GetInsightSummariesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetInsightSummariesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetInsightSummariesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetInsightSummariesCommandOutput> {
-    return deserializeAws_restJson1GetInsightSummariesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInsightSummariesCommandInput;
+      output: GetInsightSummariesCommandOutput;
+    };
+  };
 }

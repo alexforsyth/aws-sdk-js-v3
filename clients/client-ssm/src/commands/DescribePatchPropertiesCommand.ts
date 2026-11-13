@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePatchPropertiesRequest, DescribePatchPropertiesResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribePatchPropertiesCommand,
-  serializeAws_json1_1DescribePatchPropertiesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePatchPropertiesRequest, DescribePatchPropertiesResult } from "../models/models_0";
+import { DescribePatchProperties$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePatchPropertiesCommand}.
+ */
 export interface DescribePatchPropertiesCommandInput extends DescribePatchPropertiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePatchPropertiesCommand}.
+ */
 export interface DescribePatchPropertiesCommandOutput extends DescribePatchPropertiesResult, __MetadataBearer {}
 
 /**
@@ -35,6 +36,12 @@ export interface DescribePatchPropertiesCommandOutput extends DescribePatchPrope
  *                </p>
  *             </dd>
  *             <dt>AMAZON_LINUX_2</dt>
+ *             <dd>
+ *                <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |
+ *        <code>SEVERITY</code>
+ *                </p>
+ *             </dd>
+ *             <dt>AMAZON_LINUX_2023</dt>
  *             <dd>
  *                <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |
  *        <code>SEVERITY</code>
@@ -91,68 +98,59 @@ export interface DescribePatchPropertiesCommandOutput extends DescribePatchPrope
  * ```javascript
  * import { SSMClient, DescribePatchPropertiesCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, DescribePatchPropertiesCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // DescribePatchPropertiesRequest
+ *   OperatingSystem: "WINDOWS" || "AMAZON_LINUX" || "AMAZON_LINUX_2" || "AMAZON_LINUX_2022" || "UBUNTU" || "REDHAT_ENTERPRISE_LINUX" || "SUSE" || "CENTOS" || "ORACLE_LINUX" || "DEBIAN" || "MACOS" || "RASPBIAN" || "ROCKY_LINUX" || "ALMA_LINUX" || "AMAZON_LINUX_2023", // required
+ *   Property: "PRODUCT" || "PRODUCT_FAMILY" || "CLASSIFICATION" || "MSRC_SEVERITY" || "PRIORITY" || "SEVERITY", // required
+ *   PatchSet: "OS" || "APPLICATION",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribePatchPropertiesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePatchPropertiesResult
+ * //   Properties: [ // PatchPropertiesList
+ * //     { // PatchPropertyEntry
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePatchPropertiesCommandInput - {@link DescribePatchPropertiesCommandInput}
+ * @returns {@link DescribePatchPropertiesCommandOutput}
  * @see {@link DescribePatchPropertiesCommandInput} for command's `input` shape.
  * @see {@link DescribePatchPropertiesCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePatchPropertiesCommand extends $Command<
-  DescribePatchPropertiesCommandInput,
-  DescribePatchPropertiesCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePatchPropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePatchPropertiesCommandInput, DescribePatchPropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "DescribePatchPropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePatchPropertiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePatchPropertiesResult.filterSensitiveLog,
+export class DescribePatchPropertiesCommand extends command<DescribePatchPropertiesCommandInput, DescribePatchPropertiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePatchProperties",
+  DescribePatchProperties$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePatchPropertiesRequest;
+      output: DescribePatchPropertiesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePatchPropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePatchPropertiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePatchPropertiesCommandOutput> {
-    return deserializeAws_json1_1DescribePatchPropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePatchPropertiesCommandInput;
+      output: DescribePatchPropertiesCommandOutput;
+    };
+  };
 }

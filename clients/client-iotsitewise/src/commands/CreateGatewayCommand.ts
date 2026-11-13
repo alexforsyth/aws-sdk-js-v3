@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import { CreateGatewayRequest, CreateGatewayResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateGatewayCommand,
-  serializeAws_restJson1CreateGatewayCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGatewayRequest, CreateGatewayResponse } from "../models/models_0";
+import { CreateGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGatewayCommand}.
+ */
 export interface CreateGatewayCommandInput extends CreateGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGatewayCommand}.
+ */
 export interface CreateGatewayCommandOutput extends CreateGatewayResponse, __MetadataBearer {}
 
 /**
@@ -30,68 +31,86 @@ export interface CreateGatewayCommandOutput extends CreateGatewayResponse, __Met
  * ```javascript
  * import { IoTSiteWiseClient, CreateGatewayCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, CreateGatewayCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // CreateGatewayRequest
+ *   gatewayName: "STRING_VALUE", // required
+ *   gatewayPlatform: { // GatewayPlatform
+ *     greengrass: { // Greengrass
+ *       groupArn: "STRING_VALUE", // required
+ *     },
+ *     greengrassV2: { // GreengrassV2
+ *       coreDeviceThingName: "STRING_VALUE", // required
+ *       coreDeviceOperatingSystem: "LINUX_AARCH64" || "LINUX_AMD64" || "WINDOWS_AMD64",
+ *     },
+ *     siemensIE: { // SiemensIE
+ *       iotCoreThingName: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   gatewayVersion: "STRING_VALUE",
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateGatewayCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGatewayResponse
+ * //   gatewayId: "STRING_VALUE", // required
+ * //   gatewayArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateGatewayCommandInput - {@link CreateGatewayCommandInput}
+ * @returns {@link CreateGatewayCommandOutput}
  * @see {@link CreateGatewayCommandInput} for command's `input` shape.
  * @see {@link CreateGatewayCommandOutput} for command's `response` shape.
- * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You've reached the quota for a resource. For example, this can occur if you're trying to
+ *       associate more than the allowed number of child assets or attempting to create more than the
+ *       allowed number of properties for an asset model.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGatewayCommand extends $Command<
-  CreateGatewayCommandInput,
-  CreateGatewayCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGatewayCommandInput, CreateGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "CreateGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGatewayResponse.filterSensitiveLog,
+export class CreateGatewayCommand extends command<CreateGatewayCommandInput, CreateGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGateway",
+  CreateGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGatewayRequest;
+      output: CreateGatewayResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGatewayCommandOutput> {
-    return deserializeAws_restJson1CreateGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGatewayCommandInput;
+      output: CreateGatewayCommandOutput;
+    };
+  };
 }

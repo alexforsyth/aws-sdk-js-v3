@@ -1,97 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { CreateFlowTemplateRequest, CreateFlowTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateFlowTemplateCommand,
-  serializeAws_json1_1CreateFlowTemplateCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateFlowTemplateRequest, CreateFlowTemplateResponse } from "../models/models_0";
+import { CreateFlowTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateFlowTemplateCommand}.
+ */
 export interface CreateFlowTemplateCommandInput extends CreateFlowTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateFlowTemplateCommand}.
+ */
 export interface CreateFlowTemplateCommandOutput extends CreateFlowTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a workflow template. Workflows can be created only in the user's namespace. (The public namespace contains only
  *          entities.) The workflow can contain only entities in the specified namespace. The workflow is validated against the entities in the
  *       latest version of the user's namespace unless another namespace version is specified in the request.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, CreateFlowTemplateCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, CreateFlowTemplateCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // CreateFlowTemplateRequest
+ *   definition: { // DefinitionDocument
+ *     language: "GRAPHQL", // required
+ *     text: "STRING_VALUE", // required
+ *   },
+ *   compatibleNamespaceVersion: Number("long"),
+ * };
  * const command = new CreateFlowTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // CreateFlowTemplateResponse
+ * //   summary: { // FlowTemplateSummary
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     revisionNumber: Number("long"),
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateFlowTemplateCommandInput - {@link CreateFlowTemplateCommandInput}
+ * @returns {@link CreateFlowTemplateCommandOutput}
  * @see {@link CreateFlowTemplateCommandInput} for command's `input` shape.
  * @see {@link CreateFlowTemplateCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class CreateFlowTemplateCommand extends $Command<
-  CreateFlowTemplateCommandInput,
-  CreateFlowTemplateCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateFlowTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateFlowTemplateCommandInput, CreateFlowTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "CreateFlowTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateFlowTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateFlowTemplateResponse.filterSensitiveLog,
+export class CreateFlowTemplateCommand extends command<CreateFlowTemplateCommandInput, CreateFlowTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateFlowTemplate",
+  CreateFlowTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateFlowTemplateRequest;
+      output: CreateFlowTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateFlowTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateFlowTemplateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateFlowTemplateCommandOutput> {
-    return deserializeAws_json1_1CreateFlowTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateFlowTemplateCommandInput;
+      output: CreateFlowTemplateCommandOutput;
+    };
+  };
 }

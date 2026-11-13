@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ComprehendMedicalClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ComprehendMedicalClient";
-import { StopEntitiesDetectionV2JobRequest, StopEntitiesDetectionV2JobResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopEntitiesDetectionV2JobCommand,
-  serializeAws_json1_1StopEntitiesDetectionV2JobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopEntitiesDetectionV2JobRequest, StopEntitiesDetectionV2JobResponse } from "../models/models_0";
+import { StopEntitiesDetectionV2Job$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopEntitiesDetectionV2JobCommand}.
+ */
 export interface StopEntitiesDetectionV2JobCommandInput extends StopEntitiesDetectionV2JobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopEntitiesDetectionV2JobCommand}.
+ */
 export interface StopEntitiesDetectionV2JobCommandOutput extends StopEntitiesDetectionV2JobResponse, __MetadataBearer {}
 
 /**
@@ -32,71 +29,58 @@ export interface StopEntitiesDetectionV2JobCommandOutput extends StopEntitiesDet
  * ```javascript
  * import { ComprehendMedicalClient, StopEntitiesDetectionV2JobCommand } from "@aws-sdk/client-comprehendmedical"; // ES Modules import
  * // const { ComprehendMedicalClient, StopEntitiesDetectionV2JobCommand } = require("@aws-sdk/client-comprehendmedical"); // CommonJS import
+ * // import type { ComprehendMedicalClientConfig } from "@aws-sdk/client-comprehendmedical";
+ * const config = {}; // type is ComprehendMedicalClientConfig
  * const client = new ComprehendMedicalClient(config);
+ * const input = { // StopEntitiesDetectionV2JobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new StopEntitiesDetectionV2JobCommand(input);
  * const response = await client.send(command);
+ * // { // StopEntitiesDetectionV2JobResponse
+ * //   JobId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StopEntitiesDetectionV2JobCommandInput - {@link StopEntitiesDetectionV2JobCommandInput}
+ * @returns {@link StopEntitiesDetectionV2JobCommandOutput}
  * @see {@link StopEntitiesDetectionV2JobCommandInput} for command's `input` shape.
  * @see {@link StopEntitiesDetectionV2JobCommandOutput} for command's `response` shape.
- * @see {@link ComprehendMedicalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ComprehendMedicalClientResolvedConfig | config} for ComprehendMedicalClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal server error occurred. Retry your request. </p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p> The request that you made is invalid. Check your request to determine why it's invalid
+ *       and then retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource identified by the specified Amazon Resource Name (ARN) was not found. Check
+ *       the ARN and try your request again.</p>
+ *
+ * @throws {@link ComprehendMedicalServiceException}
+ * <p>Base exception class for all service exceptions from ComprehendMedical service.</p>
+ *
+ *
+ * @public
  */
-export class StopEntitiesDetectionV2JobCommand extends $Command<
-  StopEntitiesDetectionV2JobCommandInput,
-  StopEntitiesDetectionV2JobCommandOutput,
-  ComprehendMedicalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopEntitiesDetectionV2JobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendMedicalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopEntitiesDetectionV2JobCommandInput, StopEntitiesDetectionV2JobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendMedicalClient";
-    const commandName = "StopEntitiesDetectionV2JobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopEntitiesDetectionV2JobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopEntitiesDetectionV2JobResponse.filterSensitiveLog,
+export class StopEntitiesDetectionV2JobCommand extends command<StopEntitiesDetectionV2JobCommandInput, StopEntitiesDetectionV2JobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopEntitiesDetectionV2Job",
+  StopEntitiesDetectionV2Job$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopEntitiesDetectionV2JobRequest;
+      output: StopEntitiesDetectionV2JobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopEntitiesDetectionV2JobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopEntitiesDetectionV2JobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StopEntitiesDetectionV2JobCommandOutput> {
-    return deserializeAws_json1_1StopEntitiesDetectionV2JobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopEntitiesDetectionV2JobCommandInput;
+      output: StopEntitiesDetectionV2JobCommandOutput;
+    };
+  };
 }

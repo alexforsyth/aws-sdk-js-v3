@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationAutoScalingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationAutoScalingClient";
-import { DescribeScalingPoliciesRequest, DescribeScalingPoliciesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeScalingPoliciesCommand,
-  serializeAws_json1_1DescribeScalingPoliciesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeScalingPoliciesRequest, DescribeScalingPoliciesResponse } from "../models/models_0";
+import { DescribeScalingPolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeScalingPoliciesCommand}.
+ */
 export interface DescribeScalingPoliciesCommandInput extends DescribeScalingPoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeScalingPoliciesCommand}.
+ */
 export interface DescribeScalingPoliciesCommandOutput extends DescribeScalingPoliciesResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +32,285 @@ export interface DescribeScalingPoliciesCommandOutput extends DescribeScalingPol
  * ```javascript
  * import { ApplicationAutoScalingClient, DescribeScalingPoliciesCommand } from "@aws-sdk/client-application-auto-scaling"; // ES Modules import
  * // const { ApplicationAutoScalingClient, DescribeScalingPoliciesCommand } = require("@aws-sdk/client-application-auto-scaling"); // CommonJS import
+ * // import type { ApplicationAutoScalingClientConfig } from "@aws-sdk/client-application-auto-scaling";
+ * const config = {}; // type is ApplicationAutoScalingClientConfig
  * const client = new ApplicationAutoScalingClient(config);
+ * const input = { // DescribeScalingPoliciesRequest
+ *   PolicyNames: [ // ResourceIdsMaxLen1600
+ *     "STRING_VALUE",
+ *   ],
+ *   ServiceNamespace: "ecs" || "elasticmapreduce" || "ec2" || "appstream" || "dynamodb" || "rds" || "sagemaker" || "custom-resource" || "comprehend" || "lambda" || "cassandra" || "kafka" || "elasticache" || "neptune" || "workspaces", // required
+ *   ResourceId: "STRING_VALUE",
+ *   ScalableDimension: "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "elasticmapreduce:instancegroup:InstanceCount" || "appstream:fleet:DesiredCapacity" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits" || "rds:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredInstanceCount" || "custom-resource:ResourceType:Property" || "comprehend:document-classifier-endpoint:DesiredInferenceUnits" || "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" || "lambda:function:ProvisionedConcurrency" || "cassandra:table:ReadCapacityUnits" || "cassandra:table:WriteCapacityUnits" || "kafka:broker-storage:VolumeSize" || "elasticache:cache-cluster:Nodes" || "elasticache:replication-group:NodeGroups" || "elasticache:replication-group:Replicas" || "neptune:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredProvisionedConcurrency" || "sagemaker:inference-component:DesiredCopyCount" || "workspaces:workspacespool:DesiredUserSessions",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeScalingPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeScalingPoliciesResponse
+ * //   ScalingPolicies: [ // ScalingPolicies
+ * //     { // ScalingPolicy
+ * //       PolicyARN: "STRING_VALUE", // required
+ * //       PolicyName: "STRING_VALUE", // required
+ * //       ServiceNamespace: "ecs" || "elasticmapreduce" || "ec2" || "appstream" || "dynamodb" || "rds" || "sagemaker" || "custom-resource" || "comprehend" || "lambda" || "cassandra" || "kafka" || "elasticache" || "neptune" || "workspaces", // required
+ * //       ResourceId: "STRING_VALUE", // required
+ * //       ScalableDimension: "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "elasticmapreduce:instancegroup:InstanceCount" || "appstream:fleet:DesiredCapacity" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits" || "rds:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredInstanceCount" || "custom-resource:ResourceType:Property" || "comprehend:document-classifier-endpoint:DesiredInferenceUnits" || "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" || "lambda:function:ProvisionedConcurrency" || "cassandra:table:ReadCapacityUnits" || "cassandra:table:WriteCapacityUnits" || "kafka:broker-storage:VolumeSize" || "elasticache:cache-cluster:Nodes" || "elasticache:replication-group:NodeGroups" || "elasticache:replication-group:Replicas" || "neptune:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredProvisionedConcurrency" || "sagemaker:inference-component:DesiredCopyCount" || "workspaces:workspacespool:DesiredUserSessions", // required
+ * //       PolicyType: "StepScaling" || "TargetTrackingScaling" || "PredictiveScaling", // required
+ * //       StepScalingPolicyConfiguration: { // StepScalingPolicyConfiguration
+ * //         AdjustmentType: "ChangeInCapacity" || "PercentChangeInCapacity" || "ExactCapacity",
+ * //         StepAdjustments: [ // StepAdjustments
+ * //           { // StepAdjustment
+ * //             MetricIntervalLowerBound: Number("double"),
+ * //             MetricIntervalUpperBound: Number("double"),
+ * //             ScalingAdjustment: Number("int"), // required
+ * //           },
+ * //         ],
+ * //         MinAdjustmentMagnitude: Number("int"),
+ * //         Cooldown: Number("int"),
+ * //         MetricAggregationType: "Average" || "Minimum" || "Maximum",
+ * //       },
+ * //       TargetTrackingScalingPolicyConfiguration: { // TargetTrackingScalingPolicyConfiguration
+ * //         TargetValue: Number("double"), // required
+ * //         PredefinedMetricSpecification: { // PredefinedMetricSpecification
+ * //           PredefinedMetricType: "DynamoDBReadCapacityUtilization" || "DynamoDBWriteCapacityUtilization" || "ALBRequestCountPerTarget" || "RDSReaderAverageCPUUtilization" || "RDSReaderAverageDatabaseConnections" || "EC2SpotFleetRequestAverageCPUUtilization" || "EC2SpotFleetRequestAverageNetworkIn" || "EC2SpotFleetRequestAverageNetworkOut" || "SageMakerVariantInvocationsPerInstance" || "ECSServiceAverageCPUUtilization" || "ECSServiceAverageMemoryUtilization" || "AppStreamAverageCapacityUtilization" || "ComprehendInferenceUtilization" || "LambdaProvisionedConcurrencyUtilization" || "CassandraReadCapacityUtilization" || "CassandraWriteCapacityUtilization" || "KafkaBrokerStorageUtilization" || "ElastiCacheEngineCPUUtilization" || "ElastiCacheDatabaseMemoryUsagePercentage" || "ElastiCachePrimaryEngineCPUUtilization" || "ElastiCacheReplicaEngineCPUUtilization" || "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage" || "NeptuneReaderAverageCPUUtilization" || "SageMakerVariantProvisionedConcurrencyUtilization" || "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" || "SageMakerInferenceComponentInvocationsPerCopy" || "WorkSpacesAverageUserSessionsCapacityUtilization" || "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution" || "SageMakerVariantConcurrentRequestsPerModelHighResolution" || "ECSServiceAverageCPUUtilizationHighResolution" || "ECSServiceAverageMemoryUtilizationHighResolution", // required
+ * //           ResourceLabel: "STRING_VALUE",
+ * //         },
+ * //         CustomizedMetricSpecification: { // CustomizedMetricSpecification
+ * //           MetricName: "STRING_VALUE",
+ * //           Namespace: "STRING_VALUE",
+ * //           Dimensions: [ // MetricDimensions
+ * //             { // MetricDimension
+ * //               Name: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //           Statistic: "Average" || "Minimum" || "Maximum" || "SampleCount" || "Sum",
+ * //           Unit: "STRING_VALUE",
+ * //           Metrics: [ // TargetTrackingMetricDataQueries
+ * //             { // TargetTrackingMetricDataQuery
+ * //               Expression: "STRING_VALUE",
+ * //               Id: "STRING_VALUE", // required
+ * //               Label: "STRING_VALUE",
+ * //               MetricStat: { // TargetTrackingMetricStat
+ * //                 Metric: { // TargetTrackingMetric
+ * //                   Dimensions: [ // TargetTrackingMetricDimensions
+ * //                     { // TargetTrackingMetricDimension
+ * //                       Name: "STRING_VALUE", // required
+ * //                       Value: "STRING_VALUE", // required
+ * //                     },
+ * //                   ],
+ * //                   MetricName: "STRING_VALUE",
+ * //                   Namespace: "STRING_VALUE",
+ * //                 },
+ * //                 Stat: "STRING_VALUE", // required
+ * //                 Unit: "STRING_VALUE",
+ * //               },
+ * //               ReturnData: true || false,
+ * //             },
+ * //           ],
+ * //         },
+ * //         ScaleOutCooldown: Number("int"),
+ * //         ScaleInCooldown: Number("int"),
+ * //         DisableScaleIn: true || false,
+ * //       },
+ * //       PredictiveScalingPolicyConfiguration: { // PredictiveScalingPolicyConfiguration
+ * //         MetricSpecifications: [ // PredictiveScalingMetricSpecifications // required
+ * //           { // PredictiveScalingMetricSpecification
+ * //             TargetValue: Number("double"), // required
+ * //             PredefinedMetricPairSpecification: { // PredictiveScalingPredefinedMetricPairSpecification
+ * //               PredefinedMetricType: "STRING_VALUE", // required
+ * //               ResourceLabel: "STRING_VALUE",
+ * //             },
+ * //             PredefinedScalingMetricSpecification: { // PredictiveScalingPredefinedScalingMetricSpecification
+ * //               PredefinedMetricType: "STRING_VALUE", // required
+ * //               ResourceLabel: "STRING_VALUE",
+ * //             },
+ * //             PredefinedLoadMetricSpecification: { // PredictiveScalingPredefinedLoadMetricSpecification
+ * //               PredefinedMetricType: "STRING_VALUE", // required
+ * //               ResourceLabel: "STRING_VALUE",
+ * //             },
+ * //             CustomizedScalingMetricSpecification: { // PredictiveScalingCustomizedMetricSpecification
+ * //               MetricDataQueries: [ // PredictiveScalingMetricDataQueries // required
+ * //                 { // PredictiveScalingMetricDataQuery
+ * //                   Id: "STRING_VALUE", // required
+ * //                   Expression: "STRING_VALUE",
+ * //                   MetricStat: { // PredictiveScalingMetricStat
+ * //                     Metric: { // PredictiveScalingMetric
+ * //                       Dimensions: [ // PredictiveScalingMetricDimensions
+ * //                         { // PredictiveScalingMetricDimension
+ * //                           Name: "STRING_VALUE", // required
+ * //                           Value: "STRING_VALUE", // required
+ * //                         },
+ * //                       ],
+ * //                       MetricName: "STRING_VALUE",
+ * //                       Namespace: "STRING_VALUE",
+ * //                     },
+ * //                     Stat: "STRING_VALUE", // required
+ * //                     Unit: "STRING_VALUE",
+ * //                   },
+ * //                   Label: "STRING_VALUE",
+ * //                   ReturnData: true || false,
+ * //                 },
+ * //               ],
+ * //             },
+ * //             CustomizedLoadMetricSpecification: {
+ * //               MetricDataQueries: [ // required
+ * //                 {
+ * //                   Id: "STRING_VALUE", // required
+ * //                   Expression: "STRING_VALUE",
+ * //                   MetricStat: {
+ * //                     Metric: {
+ * //                       Dimensions: [
+ * //                         {
+ * //                           Name: "STRING_VALUE", // required
+ * //                           Value: "STRING_VALUE", // required
+ * //                         },
+ * //                       ],
+ * //                       MetricName: "STRING_VALUE",
+ * //                       Namespace: "STRING_VALUE",
+ * //                     },
+ * //                     Stat: "STRING_VALUE", // required
+ * //                     Unit: "STRING_VALUE",
+ * //                   },
+ * //                   Label: "STRING_VALUE",
+ * //                   ReturnData: true || false,
+ * //                 },
+ * //               ],
+ * //             },
+ * //             CustomizedCapacityMetricSpecification: {
+ * //               MetricDataQueries: [ // required
+ * //                 {
+ * //                   Id: "STRING_VALUE", // required
+ * //                   Expression: "STRING_VALUE",
+ * //                   MetricStat: {
+ * //                     Metric: {
+ * //                       Dimensions: [
+ * //                         {
+ * //                           Name: "STRING_VALUE", // required
+ * //                           Value: "STRING_VALUE", // required
+ * //                         },
+ * //                       ],
+ * //                       MetricName: "STRING_VALUE",
+ * //                       Namespace: "STRING_VALUE",
+ * //                     },
+ * //                     Stat: "STRING_VALUE", // required
+ * //                     Unit: "STRING_VALUE",
+ * //                   },
+ * //                   Label: "STRING_VALUE",
+ * //                   ReturnData: true || false,
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //         ],
+ * //         Mode: "ForecastOnly" || "ForecastAndScale",
+ * //         SchedulingBufferTime: Number("int"),
+ * //         MaxCapacityBreachBehavior: "HonorMaxCapacity" || "IncreaseMaxCapacity",
+ * //         MaxCapacityBuffer: Number("int"),
+ * //       },
+ * //       Alarms: [ // Alarms
+ * //         { // Alarm
+ * //           AlarmName: "STRING_VALUE", // required
+ * //           AlarmARN: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeScalingPoliciesCommandInput - {@link DescribeScalingPoliciesCommandInput}
+ * @returns {@link DescribeScalingPoliciesCommandOutput}
  * @see {@link DescribeScalingPoliciesCommandInput} for command's `input` shape.
  * @see {@link DescribeScalingPoliciesCommandOutput} for command's `response` shape.
- * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for ApplicationAutoScalingClient's `config` shape.
  *
+ * @throws {@link ConcurrentUpdateException} (server fault)
+ *  <p>Concurrent updates caused an exception, for example, if you request an update to an
+ *          Application Auto Scaling resource that already has a pending update.</p>
+ *
+ * @throws {@link FailedResourceAccessException} (client fault)
+ *  <p>Failed access to resources caused an exception. This exception is thrown when Application Auto Scaling
+ *          is unable to retrieve the alarms associated with a scaling policy due to a client error,
+ *          for example, if the role ARN specified for a scalable target does not have permission to
+ *          call the CloudWatch <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html">DescribeAlarms</a> on your behalf.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an internal error.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token supplied was invalid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception was thrown for a validation issue. Review the available parameters for the
+ *          API request.</p>
+ *
+ * @throws {@link ApplicationAutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationAutoScaling service.</p>
+ *
+ *
+ * @example To describe scaling policies
+ * ```javascript
+ * // This example describes the scaling policies for the ECS service namespace.
+ * const input = {
+ *   ServiceNamespace: "ecs"
+ * };
+ * const command = new DescribeScalingPoliciesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   NextToken: "",
+ *   ScalingPolicies: [
+ *     {
+ *       Alarms: [
+ *         {
+ *           AlarmARN: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:web-app-cpu-gt-75",
+ *           AlarmName: "web-app-cpu-gt-75"
+ *         }
+ *       ],
+ *       CreationTime: "2019-05-06T12:11:39.230Z",
+ *       PolicyARN: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75",
+ *       PolicyName: "web-app-cpu-gt-75",
+ *       PolicyType: "StepScaling",
+ *       ResourceId: "service/default/web-app",
+ *       ScalableDimension: "ecs:service:DesiredCount",
+ *       ServiceNamespace: "ecs",
+ *       StepScalingPolicyConfiguration: {
+ *         AdjustmentType: "PercentChangeInCapacity",
+ *         Cooldown: 60,
+ *         StepAdjustments: [
+ *           {
+ *             MetricIntervalLowerBound: 0,
+ *             ScalingAdjustment: 200
+ *           }
+ *         ]
+ *       }
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeScalingPoliciesCommand extends $Command<
-  DescribeScalingPoliciesCommandInput,
-  DescribeScalingPoliciesCommandOutput,
-  ApplicationAutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeScalingPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationAutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeScalingPoliciesCommandInput, DescribeScalingPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationAutoScalingClient";
-    const commandName = "DescribeScalingPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeScalingPoliciesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeScalingPoliciesResponse.filterSensitiveLog,
+export class DescribeScalingPoliciesCommand extends command<DescribeScalingPoliciesCommandInput, DescribeScalingPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeScalingPolicies",
+  DescribeScalingPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScalingPoliciesRequest;
+      output: DescribeScalingPoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeScalingPoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeScalingPoliciesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeScalingPoliciesCommandOutput> {
-    return deserializeAws_json1_1DescribeScalingPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeScalingPoliciesCommandInput;
+      output: DescribeScalingPoliciesCommandOutput;
+    };
+  };
 }

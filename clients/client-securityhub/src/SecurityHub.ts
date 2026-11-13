@@ -1,286 +1,3403 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AcceptAdministratorInvitationCommandInput,
+  type AcceptAdministratorInvitationCommandOutput,
   AcceptAdministratorInvitationCommand,
-  AcceptAdministratorInvitationCommandInput,
-  AcceptAdministratorInvitationCommandOutput,
 } from "./commands/AcceptAdministratorInvitationCommand";
 import {
+  type AcceptInvitationCommandInput,
+  type AcceptInvitationCommandOutput,
   AcceptInvitationCommand,
-  AcceptInvitationCommandInput,
-  AcceptInvitationCommandOutput,
 } from "./commands/AcceptInvitationCommand";
 import {
+  type BatchDeleteAutomationRulesCommandInput,
+  type BatchDeleteAutomationRulesCommandOutput,
+  BatchDeleteAutomationRulesCommand,
+} from "./commands/BatchDeleteAutomationRulesCommand";
+import {
+  type BatchDisableStandardsCommandInput,
+  type BatchDisableStandardsCommandOutput,
   BatchDisableStandardsCommand,
-  BatchDisableStandardsCommandInput,
-  BatchDisableStandardsCommandOutput,
 } from "./commands/BatchDisableStandardsCommand";
 import {
+  type BatchEnableStandardsCommandInput,
+  type BatchEnableStandardsCommandOutput,
   BatchEnableStandardsCommand,
-  BatchEnableStandardsCommandInput,
-  BatchEnableStandardsCommandOutput,
 } from "./commands/BatchEnableStandardsCommand";
 import {
+  type BatchGetAutomationRulesCommandInput,
+  type BatchGetAutomationRulesCommandOutput,
+  BatchGetAutomationRulesCommand,
+} from "./commands/BatchGetAutomationRulesCommand";
+import {
+  type BatchGetConfigurationPolicyAssociationsCommandInput,
+  type BatchGetConfigurationPolicyAssociationsCommandOutput,
+  BatchGetConfigurationPolicyAssociationsCommand,
+} from "./commands/BatchGetConfigurationPolicyAssociationsCommand";
+import {
+  type BatchGetSecurityControlsCommandInput,
+  type BatchGetSecurityControlsCommandOutput,
+  BatchGetSecurityControlsCommand,
+} from "./commands/BatchGetSecurityControlsCommand";
+import {
+  type BatchGetStandardsControlAssociationsCommandInput,
+  type BatchGetStandardsControlAssociationsCommandOutput,
+  BatchGetStandardsControlAssociationsCommand,
+} from "./commands/BatchGetStandardsControlAssociationsCommand";
+import {
+  type BatchImportFindingsCommandInput,
+  type BatchImportFindingsCommandOutput,
   BatchImportFindingsCommand,
-  BatchImportFindingsCommandInput,
-  BatchImportFindingsCommandOutput,
 } from "./commands/BatchImportFindingsCommand";
 import {
+  type BatchUpdateAutomationRulesCommandInput,
+  type BatchUpdateAutomationRulesCommandOutput,
+  BatchUpdateAutomationRulesCommand,
+} from "./commands/BatchUpdateAutomationRulesCommand";
+import {
+  type BatchUpdateFindingsCommandInput,
+  type BatchUpdateFindingsCommandOutput,
   BatchUpdateFindingsCommand,
-  BatchUpdateFindingsCommandInput,
-  BatchUpdateFindingsCommandOutput,
 } from "./commands/BatchUpdateFindingsCommand";
 import {
+  type BatchUpdateFindingsV2CommandInput,
+  type BatchUpdateFindingsV2CommandOutput,
+  BatchUpdateFindingsV2Command,
+} from "./commands/BatchUpdateFindingsV2Command";
+import {
+  type BatchUpdateStandardsControlAssociationsCommandInput,
+  type BatchUpdateStandardsControlAssociationsCommandOutput,
+  BatchUpdateStandardsControlAssociationsCommand,
+} from "./commands/BatchUpdateStandardsControlAssociationsCommand";
+import {
+  type CancelExportJobV2CommandInput,
+  type CancelExportJobV2CommandOutput,
+  CancelExportJobV2Command,
+} from "./commands/CancelExportJobV2Command";
+import {
+  type CreateActionTargetCommandInput,
+  type CreateActionTargetCommandOutput,
   CreateActionTargetCommand,
-  CreateActionTargetCommandInput,
-  CreateActionTargetCommandOutput,
 } from "./commands/CreateActionTargetCommand";
 import {
+  type CreateAggregatorV2CommandInput,
+  type CreateAggregatorV2CommandOutput,
+  CreateAggregatorV2Command,
+} from "./commands/CreateAggregatorV2Command";
+import {
+  type CreateAutomationRuleCommandInput,
+  type CreateAutomationRuleCommandOutput,
+  CreateAutomationRuleCommand,
+} from "./commands/CreateAutomationRuleCommand";
+import {
+  type CreateAutomationRuleV2CommandInput,
+  type CreateAutomationRuleV2CommandOutput,
+  CreateAutomationRuleV2Command,
+} from "./commands/CreateAutomationRuleV2Command";
+import {
+  type CreateConfigurationPolicyCommandInput,
+  type CreateConfigurationPolicyCommandOutput,
+  CreateConfigurationPolicyCommand,
+} from "./commands/CreateConfigurationPolicyCommand";
+import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type CreateConnectorV2CommandInput,
+  type CreateConnectorV2CommandOutput,
+  CreateConnectorV2Command,
+} from "./commands/CreateConnectorV2Command";
+import {
+  type CreateFindingAggregatorCommandInput,
+  type CreateFindingAggregatorCommandOutput,
   CreateFindingAggregatorCommand,
-  CreateFindingAggregatorCommandInput,
-  CreateFindingAggregatorCommandOutput,
 } from "./commands/CreateFindingAggregatorCommand";
 import {
+  type CreateInsightCommandInput,
+  type CreateInsightCommandOutput,
   CreateInsightCommand,
-  CreateInsightCommandInput,
-  CreateInsightCommandOutput,
 } from "./commands/CreateInsightCommand";
 import {
+  type CreateMembersCommandInput,
+  type CreateMembersCommandOutput,
   CreateMembersCommand,
-  CreateMembersCommandInput,
-  CreateMembersCommandOutput,
 } from "./commands/CreateMembersCommand";
 import {
+  type CreateTicketV2CommandInput,
+  type CreateTicketV2CommandOutput,
+  CreateTicketV2Command,
+} from "./commands/CreateTicketV2Command";
+import {
+  type DeclineInvitationsCommandInput,
+  type DeclineInvitationsCommandOutput,
   DeclineInvitationsCommand,
-  DeclineInvitationsCommandInput,
-  DeclineInvitationsCommandOutput,
 } from "./commands/DeclineInvitationsCommand";
 import {
+  type DeleteActionTargetCommandInput,
+  type DeleteActionTargetCommandOutput,
   DeleteActionTargetCommand,
-  DeleteActionTargetCommandInput,
-  DeleteActionTargetCommandOutput,
 } from "./commands/DeleteActionTargetCommand";
 import {
+  type DeleteAggregatorV2CommandInput,
+  type DeleteAggregatorV2CommandOutput,
+  DeleteAggregatorV2Command,
+} from "./commands/DeleteAggregatorV2Command";
+import {
+  type DeleteAutomationRuleV2CommandInput,
+  type DeleteAutomationRuleV2CommandOutput,
+  DeleteAutomationRuleV2Command,
+} from "./commands/DeleteAutomationRuleV2Command";
+import {
+  type DeleteConfigurationPolicyCommandInput,
+  type DeleteConfigurationPolicyCommandOutput,
+  DeleteConfigurationPolicyCommand,
+} from "./commands/DeleteConfigurationPolicyCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import {
+  type DeleteConnectorV2CommandInput,
+  type DeleteConnectorV2CommandOutput,
+  DeleteConnectorV2Command,
+} from "./commands/DeleteConnectorV2Command";
+import {
+  type DeleteFindingAggregatorCommandInput,
+  type DeleteFindingAggregatorCommandOutput,
   DeleteFindingAggregatorCommand,
-  DeleteFindingAggregatorCommandInput,
-  DeleteFindingAggregatorCommandOutput,
 } from "./commands/DeleteFindingAggregatorCommand";
 import {
+  type DeleteInsightCommandInput,
+  type DeleteInsightCommandOutput,
   DeleteInsightCommand,
-  DeleteInsightCommandInput,
-  DeleteInsightCommandOutput,
 } from "./commands/DeleteInsightCommand";
 import {
+  type DeleteInvitationsCommandInput,
+  type DeleteInvitationsCommandOutput,
   DeleteInvitationsCommand,
-  DeleteInvitationsCommandInput,
-  DeleteInvitationsCommandOutput,
 } from "./commands/DeleteInvitationsCommand";
 import {
+  type DeleteMembersCommandInput,
+  type DeleteMembersCommandOutput,
   DeleteMembersCommand,
-  DeleteMembersCommandInput,
-  DeleteMembersCommandOutput,
 } from "./commands/DeleteMembersCommand";
 import {
+  type DescribeActionTargetsCommandInput,
+  type DescribeActionTargetsCommandOutput,
   DescribeActionTargetsCommand,
-  DescribeActionTargetsCommandInput,
-  DescribeActionTargetsCommandOutput,
 } from "./commands/DescribeActionTargetsCommand";
-import { DescribeHubCommand, DescribeHubCommandInput, DescribeHubCommandOutput } from "./commands/DescribeHubCommand";
 import {
+  type DescribeHubCommandInput,
+  type DescribeHubCommandOutput,
+  DescribeHubCommand,
+} from "./commands/DescribeHubCommand";
+import {
+  type DescribeOrganizationConfigurationCommandInput,
+  type DescribeOrganizationConfigurationCommandOutput,
   DescribeOrganizationConfigurationCommand,
-  DescribeOrganizationConfigurationCommandInput,
-  DescribeOrganizationConfigurationCommandOutput,
 } from "./commands/DescribeOrganizationConfigurationCommand";
 import {
+  type DescribeProductsCommandInput,
+  type DescribeProductsCommandOutput,
   DescribeProductsCommand,
-  DescribeProductsCommandInput,
-  DescribeProductsCommandOutput,
 } from "./commands/DescribeProductsCommand";
 import {
+  type DescribeProductsV2CommandInput,
+  type DescribeProductsV2CommandOutput,
+  DescribeProductsV2Command,
+} from "./commands/DescribeProductsV2Command";
+import {
+  type DescribeSecurityHubV2CommandInput,
+  type DescribeSecurityHubV2CommandOutput,
+  DescribeSecurityHubV2Command,
+} from "./commands/DescribeSecurityHubV2Command";
+import {
+  type DescribeStandardsCommandInput,
+  type DescribeStandardsCommandOutput,
   DescribeStandardsCommand,
-  DescribeStandardsCommandInput,
-  DescribeStandardsCommandOutput,
 } from "./commands/DescribeStandardsCommand";
 import {
+  type DescribeStandardsControlsCommandInput,
+  type DescribeStandardsControlsCommandOutput,
   DescribeStandardsControlsCommand,
-  DescribeStandardsControlsCommandInput,
-  DescribeStandardsControlsCommandOutput,
 } from "./commands/DescribeStandardsControlsCommand";
 import {
+  type DisableImportFindingsForProductCommandInput,
+  type DisableImportFindingsForProductCommandOutput,
   DisableImportFindingsForProductCommand,
-  DisableImportFindingsForProductCommandInput,
-  DisableImportFindingsForProductCommandOutput,
 } from "./commands/DisableImportFindingsForProductCommand";
 import {
+  type DisableOrganizationAdminAccountCommandInput,
+  type DisableOrganizationAdminAccountCommandOutput,
   DisableOrganizationAdminAccountCommand,
-  DisableOrganizationAdminAccountCommandInput,
-  DisableOrganizationAdminAccountCommandOutput,
 } from "./commands/DisableOrganizationAdminAccountCommand";
 import {
+  type DisableSecurityHubCommandInput,
+  type DisableSecurityHubCommandOutput,
   DisableSecurityHubCommand,
-  DisableSecurityHubCommandInput,
-  DisableSecurityHubCommandOutput,
 } from "./commands/DisableSecurityHubCommand";
 import {
+  type DisableSecurityHubFeatureV2CommandInput,
+  type DisableSecurityHubFeatureV2CommandOutput,
+  DisableSecurityHubFeatureV2Command,
+} from "./commands/DisableSecurityHubFeatureV2Command";
+import {
+  type DisableSecurityHubV2CommandInput,
+  type DisableSecurityHubV2CommandOutput,
+  DisableSecurityHubV2Command,
+} from "./commands/DisableSecurityHubV2Command";
+import {
+  type DisassociateFromAdministratorAccountCommandInput,
+  type DisassociateFromAdministratorAccountCommandOutput,
   DisassociateFromAdministratorAccountCommand,
-  DisassociateFromAdministratorAccountCommandInput,
-  DisassociateFromAdministratorAccountCommandOutput,
 } from "./commands/DisassociateFromAdministratorAccountCommand";
 import {
+  type DisassociateFromMasterAccountCommandInput,
+  type DisassociateFromMasterAccountCommandOutput,
   DisassociateFromMasterAccountCommand,
-  DisassociateFromMasterAccountCommandInput,
-  DisassociateFromMasterAccountCommandOutput,
 } from "./commands/DisassociateFromMasterAccountCommand";
 import {
+  type DisassociateMembersCommandInput,
+  type DisassociateMembersCommandOutput,
   DisassociateMembersCommand,
-  DisassociateMembersCommandInput,
-  DisassociateMembersCommandOutput,
 } from "./commands/DisassociateMembersCommand";
 import {
+  type EnableImportFindingsForProductCommandInput,
+  type EnableImportFindingsForProductCommandOutput,
   EnableImportFindingsForProductCommand,
-  EnableImportFindingsForProductCommandInput,
-  EnableImportFindingsForProductCommandOutput,
 } from "./commands/EnableImportFindingsForProductCommand";
 import {
+  type EnableOrganizationAdminAccountCommandInput,
+  type EnableOrganizationAdminAccountCommandOutput,
   EnableOrganizationAdminAccountCommand,
-  EnableOrganizationAdminAccountCommandInput,
-  EnableOrganizationAdminAccountCommandOutput,
 } from "./commands/EnableOrganizationAdminAccountCommand";
 import {
+  type EnableSecurityHubCommandInput,
+  type EnableSecurityHubCommandOutput,
   EnableSecurityHubCommand,
-  EnableSecurityHubCommandInput,
-  EnableSecurityHubCommandOutput,
 } from "./commands/EnableSecurityHubCommand";
 import {
+  type EnableSecurityHubFeatureV2CommandInput,
+  type EnableSecurityHubFeatureV2CommandOutput,
+  EnableSecurityHubFeatureV2Command,
+} from "./commands/EnableSecurityHubFeatureV2Command";
+import {
+  type EnableSecurityHubV2CommandInput,
+  type EnableSecurityHubV2CommandOutput,
+  EnableSecurityHubV2Command,
+} from "./commands/EnableSecurityHubV2Command";
+import {
+  type GenerateRecommendedPolicyV2CommandInput,
+  type GenerateRecommendedPolicyV2CommandOutput,
+  GenerateRecommendedPolicyV2Command,
+} from "./commands/GenerateRecommendedPolicyV2Command";
+import {
+  type GetAdministratorAccountCommandInput,
+  type GetAdministratorAccountCommandOutput,
   GetAdministratorAccountCommand,
-  GetAdministratorAccountCommandInput,
-  GetAdministratorAccountCommandOutput,
 } from "./commands/GetAdministratorAccountCommand";
 import {
+  type GetAggregatorV2CommandInput,
+  type GetAggregatorV2CommandOutput,
+  GetAggregatorV2Command,
+} from "./commands/GetAggregatorV2Command";
+import {
+  type GetAutomationRuleV2CommandInput,
+  type GetAutomationRuleV2CommandOutput,
+  GetAutomationRuleV2Command,
+} from "./commands/GetAutomationRuleV2Command";
+import {
+  type GetConfigurationPolicyAssociationCommandInput,
+  type GetConfigurationPolicyAssociationCommandOutput,
+  GetConfigurationPolicyAssociationCommand,
+} from "./commands/GetConfigurationPolicyAssociationCommand";
+import {
+  type GetConfigurationPolicyCommandInput,
+  type GetConfigurationPolicyCommandOutput,
+  GetConfigurationPolicyCommand,
+} from "./commands/GetConfigurationPolicyCommand";
+import {
+  type GetConnectorCommandInput,
+  type GetConnectorCommandOutput,
+  GetConnectorCommand,
+} from "./commands/GetConnectorCommand";
+import {
+  type GetConnectorV2CommandInput,
+  type GetConnectorV2CommandOutput,
+  GetConnectorV2Command,
+} from "./commands/GetConnectorV2Command";
+import {
+  type GetEnabledStandardsCommandInput,
+  type GetEnabledStandardsCommandOutput,
   GetEnabledStandardsCommand,
-  GetEnabledStandardsCommandInput,
-  GetEnabledStandardsCommandOutput,
 } from "./commands/GetEnabledStandardsCommand";
 import {
+  type GetExportJobV2CommandInput,
+  type GetExportJobV2CommandOutput,
+  GetExportJobV2Command,
+} from "./commands/GetExportJobV2Command";
+import {
+  type GetFindingAggregatorCommandInput,
+  type GetFindingAggregatorCommandOutput,
   GetFindingAggregatorCommand,
-  GetFindingAggregatorCommandInput,
-  GetFindingAggregatorCommandOutput,
 } from "./commands/GetFindingAggregatorCommand";
-import { GetFindingsCommand, GetFindingsCommandInput, GetFindingsCommandOutput } from "./commands/GetFindingsCommand";
 import {
+  type GetFindingHistoryCommandInput,
+  type GetFindingHistoryCommandOutput,
+  GetFindingHistoryCommand,
+} from "./commands/GetFindingHistoryCommand";
+import {
+  type GetFindingsCommandInput,
+  type GetFindingsCommandOutput,
+  GetFindingsCommand,
+} from "./commands/GetFindingsCommand";
+import {
+  type GetFindingStatisticsV2CommandInput,
+  type GetFindingStatisticsV2CommandOutput,
+  GetFindingStatisticsV2Command,
+} from "./commands/GetFindingStatisticsV2Command";
+import {
+  type GetFindingsTrendsV2CommandInput,
+  type GetFindingsTrendsV2CommandOutput,
+  GetFindingsTrendsV2Command,
+} from "./commands/GetFindingsTrendsV2Command";
+import {
+  type GetFindingsV2CommandInput,
+  type GetFindingsV2CommandOutput,
+  GetFindingsV2Command,
+} from "./commands/GetFindingsV2Command";
+import {
+  type GetInsightResultsCommandInput,
+  type GetInsightResultsCommandOutput,
   GetInsightResultsCommand,
-  GetInsightResultsCommandInput,
-  GetInsightResultsCommandOutput,
 } from "./commands/GetInsightResultsCommand";
-import { GetInsightsCommand, GetInsightsCommandInput, GetInsightsCommandOutput } from "./commands/GetInsightsCommand";
 import {
+  type GetInsightsCommandInput,
+  type GetInsightsCommandOutput,
+  GetInsightsCommand,
+} from "./commands/GetInsightsCommand";
+import {
+  type GetInvitationsCountCommandInput,
+  type GetInvitationsCountCommandOutput,
   GetInvitationsCountCommand,
-  GetInvitationsCountCommandInput,
-  GetInvitationsCountCommandOutput,
 } from "./commands/GetInvitationsCountCommand";
 import {
+  type GetMasterAccountCommandInput,
+  type GetMasterAccountCommandOutput,
   GetMasterAccountCommand,
-  GetMasterAccountCommandInput,
-  GetMasterAccountCommandOutput,
 } from "./commands/GetMasterAccountCommand";
-import { GetMembersCommand, GetMembersCommandInput, GetMembersCommandOutput } from "./commands/GetMembersCommand";
 import {
+  type GetMembersCommandInput,
+  type GetMembersCommandOutput,
+  GetMembersCommand,
+} from "./commands/GetMembersCommand";
+import {
+  type GetRecommendedPolicyV2CommandInput,
+  type GetRecommendedPolicyV2CommandOutput,
+  GetRecommendedPolicyV2Command,
+} from "./commands/GetRecommendedPolicyV2Command";
+import {
+  type GetRemediationsV2CommandInput,
+  type GetRemediationsV2CommandOutput,
+  GetRemediationsV2Command,
+} from "./commands/GetRemediationsV2Command";
+import {
+  type GetResourcesStatisticsV2CommandInput,
+  type GetResourcesStatisticsV2CommandOutput,
+  GetResourcesStatisticsV2Command,
+} from "./commands/GetResourcesStatisticsV2Command";
+import {
+  type GetResourcesTrendsV2CommandInput,
+  type GetResourcesTrendsV2CommandOutput,
+  GetResourcesTrendsV2Command,
+} from "./commands/GetResourcesTrendsV2Command";
+import {
+  type GetResourcesV2CommandInput,
+  type GetResourcesV2CommandOutput,
+  GetResourcesV2Command,
+} from "./commands/GetResourcesV2Command";
+import {
+  type GetSecurityControlDefinitionCommandInput,
+  type GetSecurityControlDefinitionCommandOutput,
+  GetSecurityControlDefinitionCommand,
+} from "./commands/GetSecurityControlDefinitionCommand";
+import {
+  type GetSoftwareResourcesV2CommandInput,
+  type GetSoftwareResourcesV2CommandOutput,
+  GetSoftwareResourcesV2Command,
+} from "./commands/GetSoftwareResourcesV2Command";
+import {
+  type GetSoftwareStatisticsV2CommandInput,
+  type GetSoftwareStatisticsV2CommandOutput,
+  GetSoftwareStatisticsV2Command,
+} from "./commands/GetSoftwareStatisticsV2Command";
+import {
+  type GetSoftwareV2CommandInput,
+  type GetSoftwareV2CommandOutput,
+  GetSoftwareV2Command,
+} from "./commands/GetSoftwareV2Command";
+import {
+  type InviteMembersCommandInput,
+  type InviteMembersCommandOutput,
   InviteMembersCommand,
-  InviteMembersCommandInput,
-  InviteMembersCommandOutput,
 } from "./commands/InviteMembersCommand";
 import {
+  type ListAggregatorsV2CommandInput,
+  type ListAggregatorsV2CommandOutput,
+  ListAggregatorsV2Command,
+} from "./commands/ListAggregatorsV2Command";
+import {
+  type ListAutomationRulesCommandInput,
+  type ListAutomationRulesCommandOutput,
+  ListAutomationRulesCommand,
+} from "./commands/ListAutomationRulesCommand";
+import {
+  type ListAutomationRulesV2CommandInput,
+  type ListAutomationRulesV2CommandOutput,
+  ListAutomationRulesV2Command,
+} from "./commands/ListAutomationRulesV2Command";
+import {
+  type ListConfigurationPoliciesCommandInput,
+  type ListConfigurationPoliciesCommandOutput,
+  ListConfigurationPoliciesCommand,
+} from "./commands/ListConfigurationPoliciesCommand";
+import {
+  type ListConfigurationPolicyAssociationsCommandInput,
+  type ListConfigurationPolicyAssociationsCommandOutput,
+  ListConfigurationPolicyAssociationsCommand,
+} from "./commands/ListConfigurationPolicyAssociationsCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListConnectorsV2CommandInput,
+  type ListConnectorsV2CommandOutput,
+  ListConnectorsV2Command,
+} from "./commands/ListConnectorsV2Command";
+import {
+  type ListEnabledProductsForImportCommandInput,
+  type ListEnabledProductsForImportCommandOutput,
   ListEnabledProductsForImportCommand,
-  ListEnabledProductsForImportCommandInput,
-  ListEnabledProductsForImportCommandOutput,
 } from "./commands/ListEnabledProductsForImportCommand";
 import {
+  type ListExportJobsV2CommandInput,
+  type ListExportJobsV2CommandOutput,
+  ListExportJobsV2Command,
+} from "./commands/ListExportJobsV2Command";
+import {
+  type ListExposuresByRemediationV2CommandInput,
+  type ListExposuresByRemediationV2CommandOutput,
+  ListExposuresByRemediationV2Command,
+} from "./commands/ListExposuresByRemediationV2Command";
+import {
+  type ListFindingAggregatorsCommandInput,
+  type ListFindingAggregatorsCommandOutput,
   ListFindingAggregatorsCommand,
-  ListFindingAggregatorsCommandInput,
-  ListFindingAggregatorsCommandOutput,
 } from "./commands/ListFindingAggregatorsCommand";
 import {
-  ListInvitationsCommand,
-  ListInvitationsCommandInput,
-  ListInvitationsCommandOutput,
-} from "./commands/ListInvitationsCommand";
-import { ListMembersCommand, ListMembersCommandInput, ListMembersCommandOutput } from "./commands/ListMembersCommand";
+  type ListFreeTrialStatusesV2CommandInput,
+  type ListFreeTrialStatusesV2CommandOutput,
+  ListFreeTrialStatusesV2Command,
+} from "./commands/ListFreeTrialStatusesV2Command";
 import {
+  type ListInvitationsCommandInput,
+  type ListInvitationsCommandOutput,
+  ListInvitationsCommand,
+} from "./commands/ListInvitationsCommand";
+import {
+  type ListMembersCommandInput,
+  type ListMembersCommandOutput,
+  ListMembersCommand,
+} from "./commands/ListMembersCommand";
+import {
+  type ListOrganizationAdminAccountsCommandInput,
+  type ListOrganizationAdminAccountsCommandOutput,
   ListOrganizationAdminAccountsCommand,
-  ListOrganizationAdminAccountsCommandInput,
-  ListOrganizationAdminAccountsCommandOutput,
 } from "./commands/ListOrganizationAdminAccountsCommand";
 import {
-  ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
-} from "./commands/ListTagsForResourceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type ListSecurityControlDefinitionsCommandInput,
+  type ListSecurityControlDefinitionsCommandOutput,
+  ListSecurityControlDefinitionsCommand,
+} from "./commands/ListSecurityControlDefinitionsCommand";
 import {
+  type ListStandardsControlAssociationsCommandInput,
+  type ListStandardsControlAssociationsCommandOutput,
+  ListStandardsControlAssociationsCommand,
+} from "./commands/ListStandardsControlAssociationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RegisterConnectorV2CommandInput,
+  type RegisterConnectorV2CommandOutput,
+  RegisterConnectorV2Command,
+} from "./commands/RegisterConnectorV2Command";
+import {
+  type StartConfigurationPolicyAssociationCommandInput,
+  type StartConfigurationPolicyAssociationCommandOutput,
+  StartConfigurationPolicyAssociationCommand,
+} from "./commands/StartConfigurationPolicyAssociationCommand";
+import {
+  type StartConfigurationPolicyDisassociationCommandInput,
+  type StartConfigurationPolicyDisassociationCommandOutput,
+  StartConfigurationPolicyDisassociationCommand,
+} from "./commands/StartConfigurationPolicyDisassociationCommand";
+import {
+  type StartExportJobV2CommandInput,
+  type StartExportJobV2CommandOutput,
+  StartExportJobV2Command,
+} from "./commands/StartExportJobV2Command";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateActionTargetCommandInput,
+  type UpdateActionTargetCommandOutput,
   UpdateActionTargetCommand,
-  UpdateActionTargetCommandInput,
-  UpdateActionTargetCommandOutput,
 } from "./commands/UpdateActionTargetCommand";
 import {
+  type UpdateAggregatorV2CommandInput,
+  type UpdateAggregatorV2CommandOutput,
+  UpdateAggregatorV2Command,
+} from "./commands/UpdateAggregatorV2Command";
+import {
+  type UpdateAutomationRuleV2CommandInput,
+  type UpdateAutomationRuleV2CommandOutput,
+  UpdateAutomationRuleV2Command,
+} from "./commands/UpdateAutomationRuleV2Command";
+import {
+  type UpdateConfigurationPolicyCommandInput,
+  type UpdateConfigurationPolicyCommandOutput,
+  UpdateConfigurationPolicyCommand,
+} from "./commands/UpdateConfigurationPolicyCommand";
+import {
+  type UpdateConnectorCommandInput,
+  type UpdateConnectorCommandOutput,
+  UpdateConnectorCommand,
+} from "./commands/UpdateConnectorCommand";
+import {
+  type UpdateConnectorV2CommandInput,
+  type UpdateConnectorV2CommandOutput,
+  UpdateConnectorV2Command,
+} from "./commands/UpdateConnectorV2Command";
+import {
+  type UpdateFindingAggregatorCommandInput,
+  type UpdateFindingAggregatorCommandOutput,
   UpdateFindingAggregatorCommand,
-  UpdateFindingAggregatorCommandInput,
-  UpdateFindingAggregatorCommandOutput,
 } from "./commands/UpdateFindingAggregatorCommand";
 import {
+  type UpdateFindingsCommandInput,
+  type UpdateFindingsCommandOutput,
   UpdateFindingsCommand,
-  UpdateFindingsCommandInput,
-  UpdateFindingsCommandOutput,
 } from "./commands/UpdateFindingsCommand";
 import {
+  type UpdateInsightCommandInput,
+  type UpdateInsightCommandOutput,
   UpdateInsightCommand,
-  UpdateInsightCommandInput,
-  UpdateInsightCommandOutput,
 } from "./commands/UpdateInsightCommand";
 import {
+  type UpdateOrganizationConfigurationCommandInput,
+  type UpdateOrganizationConfigurationCommandOutput,
   UpdateOrganizationConfigurationCommand,
-  UpdateOrganizationConfigurationCommandInput,
-  UpdateOrganizationConfigurationCommandOutput,
 } from "./commands/UpdateOrganizationConfigurationCommand";
 import {
+  type UpdateSecurityControlCommandInput,
+  type UpdateSecurityControlCommandOutput,
+  UpdateSecurityControlCommand,
+} from "./commands/UpdateSecurityControlCommand";
+import {
+  type UpdateSecurityHubConfigurationCommandInput,
+  type UpdateSecurityHubConfigurationCommandOutput,
   UpdateSecurityHubConfigurationCommand,
-  UpdateSecurityHubConfigurationCommandInput,
-  UpdateSecurityHubConfigurationCommandOutput,
 } from "./commands/UpdateSecurityHubConfigurationCommand";
 import {
+  type UpdateStandardsControlCommandInput,
+  type UpdateStandardsControlCommandOutput,
   UpdateStandardsControlCommand,
-  UpdateStandardsControlCommandInput,
-  UpdateStandardsControlCommandOutput,
 } from "./commands/UpdateStandardsControlCommand";
+import { paginateDescribeActionTargets } from "./pagination/DescribeActionTargetsPaginator";
+import { paginateDescribeProducts } from "./pagination/DescribeProductsPaginator";
+import { paginateDescribeProductsV2 } from "./pagination/DescribeProductsV2Paginator";
+import { paginateDescribeStandardsControls } from "./pagination/DescribeStandardsControlsPaginator";
+import { paginateDescribeStandards } from "./pagination/DescribeStandardsPaginator";
+import { paginateGetEnabledStandards } from "./pagination/GetEnabledStandardsPaginator";
+import { paginateGetFindingHistory } from "./pagination/GetFindingHistoryPaginator";
+import { paginateGetFindings } from "./pagination/GetFindingsPaginator";
+import { paginateGetFindingsTrendsV2 } from "./pagination/GetFindingsTrendsV2Paginator";
+import { paginateGetFindingsV2 } from "./pagination/GetFindingsV2Paginator";
+import { paginateGetInsights } from "./pagination/GetInsightsPaginator";
+import { paginateGetRecommendedPolicyV2 } from "./pagination/GetRecommendedPolicyV2Paginator";
+import { paginateGetRemediationsV2 } from "./pagination/GetRemediationsV2Paginator";
+import { paginateGetResourcesTrendsV2 } from "./pagination/GetResourcesTrendsV2Paginator";
+import { paginateGetResourcesV2 } from "./pagination/GetResourcesV2Paginator";
+import { paginateGetSoftwareResourcesV2 } from "./pagination/GetSoftwareResourcesV2Paginator";
+import { paginateGetSoftwareV2 } from "./pagination/GetSoftwareV2Paginator";
+import { paginateListAggregatorsV2 } from "./pagination/ListAggregatorsV2Paginator";
+import { paginateListConfigurationPolicies } from "./pagination/ListConfigurationPoliciesPaginator";
+import { paginateListConfigurationPolicyAssociations } from "./pagination/ListConfigurationPolicyAssociationsPaginator";
+import { paginateListEnabledProductsForImport } from "./pagination/ListEnabledProductsForImportPaginator";
+import { paginateListExportJobsV2 } from "./pagination/ListExportJobsV2Paginator";
+import { paginateListExposuresByRemediationV2 } from "./pagination/ListExposuresByRemediationV2Paginator";
+import { paginateListFindingAggregators } from "./pagination/ListFindingAggregatorsPaginator";
+import { paginateListFreeTrialStatusesV2 } from "./pagination/ListFreeTrialStatusesV2Paginator";
+import { paginateListInvitations } from "./pagination/ListInvitationsPaginator";
+import { paginateListMembers } from "./pagination/ListMembersPaginator";
+import { paginateListOrganizationAdminAccounts } from "./pagination/ListOrganizationAdminAccountsPaginator";
+import { paginateListSecurityControlDefinitions } from "./pagination/ListSecurityControlDefinitionsPaginator";
+import { paginateListStandardsControlAssociations } from "./pagination/ListStandardsControlAssociationsPaginator";
 import { SecurityHubClient } from "./SecurityHubClient";
 
+const commands = {
+  AcceptAdministratorInvitationCommand,
+  AcceptInvitationCommand,
+  BatchDeleteAutomationRulesCommand,
+  BatchDisableStandardsCommand,
+  BatchEnableStandardsCommand,
+  BatchGetAutomationRulesCommand,
+  BatchGetConfigurationPolicyAssociationsCommand,
+  BatchGetSecurityControlsCommand,
+  BatchGetStandardsControlAssociationsCommand,
+  BatchImportFindingsCommand,
+  BatchUpdateAutomationRulesCommand,
+  BatchUpdateFindingsCommand,
+  BatchUpdateFindingsV2Command,
+  BatchUpdateStandardsControlAssociationsCommand,
+  CancelExportJobV2Command,
+  CreateActionTargetCommand,
+  CreateAggregatorV2Command,
+  CreateAutomationRuleCommand,
+  CreateAutomationRuleV2Command,
+  CreateConfigurationPolicyCommand,
+  CreateConnectorCommand,
+  CreateConnectorV2Command,
+  CreateFindingAggregatorCommand,
+  CreateInsightCommand,
+  CreateMembersCommand,
+  CreateTicketV2Command,
+  DeclineInvitationsCommand,
+  DeleteActionTargetCommand,
+  DeleteAggregatorV2Command,
+  DeleteAutomationRuleV2Command,
+  DeleteConfigurationPolicyCommand,
+  DeleteConnectorCommand,
+  DeleteConnectorV2Command,
+  DeleteFindingAggregatorCommand,
+  DeleteInsightCommand,
+  DeleteInvitationsCommand,
+  DeleteMembersCommand,
+  DescribeActionTargetsCommand,
+  DescribeHubCommand,
+  DescribeOrganizationConfigurationCommand,
+  DescribeProductsCommand,
+  DescribeProductsV2Command,
+  DescribeSecurityHubV2Command,
+  DescribeStandardsCommand,
+  DescribeStandardsControlsCommand,
+  DisableImportFindingsForProductCommand,
+  DisableOrganizationAdminAccountCommand,
+  DisableSecurityHubCommand,
+  DisableSecurityHubFeatureV2Command,
+  DisableSecurityHubV2Command,
+  DisassociateFromAdministratorAccountCommand,
+  DisassociateFromMasterAccountCommand,
+  DisassociateMembersCommand,
+  EnableImportFindingsForProductCommand,
+  EnableOrganizationAdminAccountCommand,
+  EnableSecurityHubCommand,
+  EnableSecurityHubFeatureV2Command,
+  EnableSecurityHubV2Command,
+  GenerateRecommendedPolicyV2Command,
+  GetAdministratorAccountCommand,
+  GetAggregatorV2Command,
+  GetAutomationRuleV2Command,
+  GetConfigurationPolicyCommand,
+  GetConfigurationPolicyAssociationCommand,
+  GetConnectorCommand,
+  GetConnectorV2Command,
+  GetEnabledStandardsCommand,
+  GetExportJobV2Command,
+  GetFindingAggregatorCommand,
+  GetFindingHistoryCommand,
+  GetFindingsCommand,
+  GetFindingStatisticsV2Command,
+  GetFindingsTrendsV2Command,
+  GetFindingsV2Command,
+  GetInsightResultsCommand,
+  GetInsightsCommand,
+  GetInvitationsCountCommand,
+  GetMasterAccountCommand,
+  GetMembersCommand,
+  GetRecommendedPolicyV2Command,
+  GetRemediationsV2Command,
+  GetResourcesStatisticsV2Command,
+  GetResourcesTrendsV2Command,
+  GetResourcesV2Command,
+  GetSecurityControlDefinitionCommand,
+  GetSoftwareResourcesV2Command,
+  GetSoftwareStatisticsV2Command,
+  GetSoftwareV2Command,
+  InviteMembersCommand,
+  ListAggregatorsV2Command,
+  ListAutomationRulesCommand,
+  ListAutomationRulesV2Command,
+  ListConfigurationPoliciesCommand,
+  ListConfigurationPolicyAssociationsCommand,
+  ListConnectorsCommand,
+  ListConnectorsV2Command,
+  ListEnabledProductsForImportCommand,
+  ListExportJobsV2Command,
+  ListExposuresByRemediationV2Command,
+  ListFindingAggregatorsCommand,
+  ListFreeTrialStatusesV2Command,
+  ListInvitationsCommand,
+  ListMembersCommand,
+  ListOrganizationAdminAccountsCommand,
+  ListSecurityControlDefinitionsCommand,
+  ListStandardsControlAssociationsCommand,
+  ListTagsForResourceCommand,
+  RegisterConnectorV2Command,
+  StartConfigurationPolicyAssociationCommand,
+  StartConfigurationPolicyDisassociationCommand,
+  StartExportJobV2Command,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateActionTargetCommand,
+  UpdateAggregatorV2Command,
+  UpdateAutomationRuleV2Command,
+  UpdateConfigurationPolicyCommand,
+  UpdateConnectorCommand,
+  UpdateConnectorV2Command,
+  UpdateFindingAggregatorCommand,
+  UpdateFindingsCommand,
+  UpdateInsightCommand,
+  UpdateOrganizationConfigurationCommand,
+  UpdateSecurityControlCommand,
+  UpdateSecurityHubConfigurationCommand,
+  UpdateStandardsControlCommand,
+};
+const paginators = {
+  paginateDescribeActionTargets,
+  paginateDescribeProducts,
+  paginateDescribeProductsV2,
+  paginateDescribeStandards,
+  paginateDescribeStandardsControls,
+  paginateGetEnabledStandards,
+  paginateGetFindingHistory,
+  paginateGetFindings,
+  paginateGetFindingsTrendsV2,
+  paginateGetFindingsV2,
+  paginateGetInsights,
+  paginateGetRecommendedPolicyV2,
+  paginateGetRemediationsV2,
+  paginateGetResourcesTrendsV2,
+  paginateGetResourcesV2,
+  paginateGetSoftwareResourcesV2,
+  paginateGetSoftwareV2,
+  paginateListAggregatorsV2,
+  paginateListConfigurationPolicies,
+  paginateListConfigurationPolicyAssociations,
+  paginateListEnabledProductsForImport,
+  paginateListExportJobsV2,
+  paginateListExposuresByRemediationV2,
+  paginateListFindingAggregators,
+  paginateListFreeTrialStatusesV2,
+  paginateListInvitations,
+  paginateListMembers,
+  paginateListOrganizationAdminAccounts,
+  paginateListSecurityControlDefinitions,
+  paginateListStandardsControlAssociations,
+};
+
 /**
- * <p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status
- *          of your environment based on controls from supported security standards. Security Hub collects
- *          security data from Amazon Web Services accounts, services, and integrated third-party products and helps
- *          you analyze security trends in your environment to identify the highest priority security
- *          issues. For more information about Security Hub, see the <i>Security Hub<a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">User
- *                Guide</a>
- *             </i>.</p>
- *          <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services
- *          Region that is currently active or in the specific Amazon Web Services Region that you specify in your
- *          request. Any configuration or settings change that results from the operation is applied
- *          only to that Region. To make the same change in other Regions, execute the same command for
- *          each Region to apply the change to.</p>
- *          <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of
- *          the member account with the administrator account is created only in the <code>us-west-2</code>
- *          Region. Security Hub must be enabled for the member account in the same Region that the invitation
- *          was sent from.</p>
- *          <p>The following throttling limits apply to using Security Hub API operations.</p>
+ * @public
+ */
+export interface SecurityHubRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface SecurityHub {
+  /**
+   * @see {@link AcceptAdministratorInvitationCommand}
+   */
+  acceptAdministratorInvitation(
+    args: AcceptAdministratorInvitationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<AcceptAdministratorInvitationCommandOutput>;
+  acceptAdministratorInvitation(
+    args: AcceptAdministratorInvitationCommandInput,
+    cb: (err: any, data?: AcceptAdministratorInvitationCommandOutput) => void
+  ): void;
+  acceptAdministratorInvitation(
+    args: AcceptAdministratorInvitationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: AcceptAdministratorInvitationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AcceptInvitationCommand}
+   */
+  acceptInvitation(
+    args: AcceptInvitationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<AcceptInvitationCommandOutput>;
+  acceptInvitation(
+    args: AcceptInvitationCommandInput,
+    cb: (err: any, data?: AcceptInvitationCommandOutput) => void
+  ): void;
+  acceptInvitation(
+    args: AcceptInvitationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: AcceptInvitationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteAutomationRulesCommand}
+   */
+  batchDeleteAutomationRules(
+    args: BatchDeleteAutomationRulesCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchDeleteAutomationRulesCommandOutput>;
+  batchDeleteAutomationRules(
+    args: BatchDeleteAutomationRulesCommandInput,
+    cb: (err: any, data?: BatchDeleteAutomationRulesCommandOutput) => void
+  ): void;
+  batchDeleteAutomationRules(
+    args: BatchDeleteAutomationRulesCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchDeleteAutomationRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDisableStandardsCommand}
+   */
+  batchDisableStandards(
+    args: BatchDisableStandardsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchDisableStandardsCommandOutput>;
+  batchDisableStandards(
+    args: BatchDisableStandardsCommandInput,
+    cb: (err: any, data?: BatchDisableStandardsCommandOutput) => void
+  ): void;
+  batchDisableStandards(
+    args: BatchDisableStandardsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchDisableStandardsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchEnableStandardsCommand}
+   */
+  batchEnableStandards(
+    args: BatchEnableStandardsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchEnableStandardsCommandOutput>;
+  batchEnableStandards(
+    args: BatchEnableStandardsCommandInput,
+    cb: (err: any, data?: BatchEnableStandardsCommandOutput) => void
+  ): void;
+  batchEnableStandards(
+    args: BatchEnableStandardsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchEnableStandardsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetAutomationRulesCommand}
+   */
+  batchGetAutomationRules(
+    args: BatchGetAutomationRulesCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchGetAutomationRulesCommandOutput>;
+  batchGetAutomationRules(
+    args: BatchGetAutomationRulesCommandInput,
+    cb: (err: any, data?: BatchGetAutomationRulesCommandOutput) => void
+  ): void;
+  batchGetAutomationRules(
+    args: BatchGetAutomationRulesCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchGetAutomationRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetConfigurationPolicyAssociationsCommand}
+   */
+  batchGetConfigurationPolicyAssociations(
+    args: BatchGetConfigurationPolicyAssociationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchGetConfigurationPolicyAssociationsCommandOutput>;
+  batchGetConfigurationPolicyAssociations(
+    args: BatchGetConfigurationPolicyAssociationsCommandInput,
+    cb: (err: any, data?: BatchGetConfigurationPolicyAssociationsCommandOutput) => void
+  ): void;
+  batchGetConfigurationPolicyAssociations(
+    args: BatchGetConfigurationPolicyAssociationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchGetConfigurationPolicyAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetSecurityControlsCommand}
+   */
+  batchGetSecurityControls(
+    args: BatchGetSecurityControlsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchGetSecurityControlsCommandOutput>;
+  batchGetSecurityControls(
+    args: BatchGetSecurityControlsCommandInput,
+    cb: (err: any, data?: BatchGetSecurityControlsCommandOutput) => void
+  ): void;
+  batchGetSecurityControls(
+    args: BatchGetSecurityControlsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchGetSecurityControlsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetStandardsControlAssociationsCommand}
+   */
+  batchGetStandardsControlAssociations(
+    args: BatchGetStandardsControlAssociationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchGetStandardsControlAssociationsCommandOutput>;
+  batchGetStandardsControlAssociations(
+    args: BatchGetStandardsControlAssociationsCommandInput,
+    cb: (err: any, data?: BatchGetStandardsControlAssociationsCommandOutput) => void
+  ): void;
+  batchGetStandardsControlAssociations(
+    args: BatchGetStandardsControlAssociationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchGetStandardsControlAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchImportFindingsCommand}
+   */
+  batchImportFindings(
+    args: BatchImportFindingsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchImportFindingsCommandOutput>;
+  batchImportFindings(
+    args: BatchImportFindingsCommandInput,
+    cb: (err: any, data?: BatchImportFindingsCommandOutput) => void
+  ): void;
+  batchImportFindings(
+    args: BatchImportFindingsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchImportFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateAutomationRulesCommand}
+   */
+  batchUpdateAutomationRules(
+    args: BatchUpdateAutomationRulesCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchUpdateAutomationRulesCommandOutput>;
+  batchUpdateAutomationRules(
+    args: BatchUpdateAutomationRulesCommandInput,
+    cb: (err: any, data?: BatchUpdateAutomationRulesCommandOutput) => void
+  ): void;
+  batchUpdateAutomationRules(
+    args: BatchUpdateAutomationRulesCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchUpdateAutomationRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateFindingsCommand}
+   */
+  batchUpdateFindings(
+    args: BatchUpdateFindingsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchUpdateFindingsCommandOutput>;
+  batchUpdateFindings(
+    args: BatchUpdateFindingsCommandInput,
+    cb: (err: any, data?: BatchUpdateFindingsCommandOutput) => void
+  ): void;
+  batchUpdateFindings(
+    args: BatchUpdateFindingsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchUpdateFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateFindingsV2Command}
+   */
+  batchUpdateFindingsV2(): Promise<BatchUpdateFindingsV2CommandOutput>;
+  batchUpdateFindingsV2(
+    args: BatchUpdateFindingsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchUpdateFindingsV2CommandOutput>;
+  batchUpdateFindingsV2(
+    args: BatchUpdateFindingsV2CommandInput,
+    cb: (err: any, data?: BatchUpdateFindingsV2CommandOutput) => void
+  ): void;
+  batchUpdateFindingsV2(
+    args: BatchUpdateFindingsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchUpdateFindingsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateStandardsControlAssociationsCommand}
+   */
+  batchUpdateStandardsControlAssociations(
+    args: BatchUpdateStandardsControlAssociationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<BatchUpdateStandardsControlAssociationsCommandOutput>;
+  batchUpdateStandardsControlAssociations(
+    args: BatchUpdateStandardsControlAssociationsCommandInput,
+    cb: (err: any, data?: BatchUpdateStandardsControlAssociationsCommandOutput) => void
+  ): void;
+  batchUpdateStandardsControlAssociations(
+    args: BatchUpdateStandardsControlAssociationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: BatchUpdateStandardsControlAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelExportJobV2Command}
+   */
+  cancelExportJobV2(
+    args: CancelExportJobV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CancelExportJobV2CommandOutput>;
+  cancelExportJobV2(
+    args: CancelExportJobV2CommandInput,
+    cb: (err: any, data?: CancelExportJobV2CommandOutput) => void
+  ): void;
+  cancelExportJobV2(
+    args: CancelExportJobV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CancelExportJobV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateActionTargetCommand}
+   */
+  createActionTarget(
+    args: CreateActionTargetCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateActionTargetCommandOutput>;
+  createActionTarget(
+    args: CreateActionTargetCommandInput,
+    cb: (err: any, data?: CreateActionTargetCommandOutput) => void
+  ): void;
+  createActionTarget(
+    args: CreateActionTargetCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateActionTargetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAggregatorV2Command}
+   */
+  createAggregatorV2(
+    args: CreateAggregatorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateAggregatorV2CommandOutput>;
+  createAggregatorV2(
+    args: CreateAggregatorV2CommandInput,
+    cb: (err: any, data?: CreateAggregatorV2CommandOutput) => void
+  ): void;
+  createAggregatorV2(
+    args: CreateAggregatorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateAggregatorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomationRuleCommand}
+   */
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateAutomationRuleCommandOutput>;
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    cb: (err: any, data?: CreateAutomationRuleCommandOutput) => void
+  ): void;
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateAutomationRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomationRuleV2Command}
+   */
+  createAutomationRuleV2(
+    args: CreateAutomationRuleV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateAutomationRuleV2CommandOutput>;
+  createAutomationRuleV2(
+    args: CreateAutomationRuleV2CommandInput,
+    cb: (err: any, data?: CreateAutomationRuleV2CommandOutput) => void
+  ): void;
+  createAutomationRuleV2(
+    args: CreateAutomationRuleV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateAutomationRuleV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfigurationPolicyCommand}
+   */
+  createConfigurationPolicy(
+    args: CreateConfigurationPolicyCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateConfigurationPolicyCommandOutput>;
+  createConfigurationPolicy(
+    args: CreateConfigurationPolicyCommandInput,
+    cb: (err: any, data?: CreateConfigurationPolicyCommandOutput) => void
+  ): void;
+  createConfigurationPolicy(
+    args: CreateConfigurationPolicyCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateConfigurationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorV2Command}
+   */
+  createConnectorV2(
+    args: CreateConnectorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateConnectorV2CommandOutput>;
+  createConnectorV2(
+    args: CreateConnectorV2CommandInput,
+    cb: (err: any, data?: CreateConnectorV2CommandOutput) => void
+  ): void;
+  createConnectorV2(
+    args: CreateConnectorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateConnectorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFindingAggregatorCommand}
+   */
+  createFindingAggregator(
+    args: CreateFindingAggregatorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateFindingAggregatorCommandOutput>;
+  createFindingAggregator(
+    args: CreateFindingAggregatorCommandInput,
+    cb: (err: any, data?: CreateFindingAggregatorCommandOutput) => void
+  ): void;
+  createFindingAggregator(
+    args: CreateFindingAggregatorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateFindingAggregatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInsightCommand}
+   */
+  createInsight(
+    args: CreateInsightCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateInsightCommandOutput>;
+  createInsight(
+    args: CreateInsightCommandInput,
+    cb: (err: any, data?: CreateInsightCommandOutput) => void
+  ): void;
+  createInsight(
+    args: CreateInsightCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateInsightCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMembersCommand}
+   */
+  createMembers(
+    args: CreateMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateMembersCommandOutput>;
+  createMembers(
+    args: CreateMembersCommandInput,
+    cb: (err: any, data?: CreateMembersCommandOutput) => void
+  ): void;
+  createMembers(
+    args: CreateMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTicketV2Command}
+   */
+  createTicketV2(
+    args: CreateTicketV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<CreateTicketV2CommandOutput>;
+  createTicketV2(
+    args: CreateTicketV2CommandInput,
+    cb: (err: any, data?: CreateTicketV2CommandOutput) => void
+  ): void;
+  createTicketV2(
+    args: CreateTicketV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: CreateTicketV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeclineInvitationsCommand}
+   */
+  declineInvitations(
+    args: DeclineInvitationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeclineInvitationsCommandOutput>;
+  declineInvitations(
+    args: DeclineInvitationsCommandInput,
+    cb: (err: any, data?: DeclineInvitationsCommandOutput) => void
+  ): void;
+  declineInvitations(
+    args: DeclineInvitationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeclineInvitationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteActionTargetCommand}
+   */
+  deleteActionTarget(
+    args: DeleteActionTargetCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteActionTargetCommandOutput>;
+  deleteActionTarget(
+    args: DeleteActionTargetCommandInput,
+    cb: (err: any, data?: DeleteActionTargetCommandOutput) => void
+  ): void;
+  deleteActionTarget(
+    args: DeleteActionTargetCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteActionTargetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAggregatorV2Command}
+   */
+  deleteAggregatorV2(
+    args: DeleteAggregatorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteAggregatorV2CommandOutput>;
+  deleteAggregatorV2(
+    args: DeleteAggregatorV2CommandInput,
+    cb: (err: any, data?: DeleteAggregatorV2CommandOutput) => void
+  ): void;
+  deleteAggregatorV2(
+    args: DeleteAggregatorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteAggregatorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutomationRuleV2Command}
+   */
+  deleteAutomationRuleV2(
+    args: DeleteAutomationRuleV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteAutomationRuleV2CommandOutput>;
+  deleteAutomationRuleV2(
+    args: DeleteAutomationRuleV2CommandInput,
+    cb: (err: any, data?: DeleteAutomationRuleV2CommandOutput) => void
+  ): void;
+  deleteAutomationRuleV2(
+    args: DeleteAutomationRuleV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteAutomationRuleV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfigurationPolicyCommand}
+   */
+  deleteConfigurationPolicy(
+    args: DeleteConfigurationPolicyCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteConfigurationPolicyCommandOutput>;
+  deleteConfigurationPolicy(
+    args: DeleteConfigurationPolicyCommandInput,
+    cb: (err: any, data?: DeleteConfigurationPolicyCommandOutput) => void
+  ): void;
+  deleteConfigurationPolicy(
+    args: DeleteConfigurationPolicyCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteConfigurationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorV2Command}
+   */
+  deleteConnectorV2(
+    args: DeleteConnectorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteConnectorV2CommandOutput>;
+  deleteConnectorV2(
+    args: DeleteConnectorV2CommandInput,
+    cb: (err: any, data?: DeleteConnectorV2CommandOutput) => void
+  ): void;
+  deleteConnectorV2(
+    args: DeleteConnectorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteConnectorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFindingAggregatorCommand}
+   */
+  deleteFindingAggregator(
+    args: DeleteFindingAggregatorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteFindingAggregatorCommandOutput>;
+  deleteFindingAggregator(
+    args: DeleteFindingAggregatorCommandInput,
+    cb: (err: any, data?: DeleteFindingAggregatorCommandOutput) => void
+  ): void;
+  deleteFindingAggregator(
+    args: DeleteFindingAggregatorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteFindingAggregatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInsightCommand}
+   */
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteInsightCommandOutput>;
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    cb: (err: any, data?: DeleteInsightCommandOutput) => void
+  ): void;
+  deleteInsight(
+    args: DeleteInsightCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteInsightCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInvitationsCommand}
+   */
+  deleteInvitations(
+    args: DeleteInvitationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteInvitationsCommandOutput>;
+  deleteInvitations(
+    args: DeleteInvitationsCommandInput,
+    cb: (err: any, data?: DeleteInvitationsCommandOutput) => void
+  ): void;
+  deleteInvitations(
+    args: DeleteInvitationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteInvitationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMembersCommand}
+   */
+  deleteMembers(
+    args: DeleteMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DeleteMembersCommandOutput>;
+  deleteMembers(
+    args: DeleteMembersCommandInput,
+    cb: (err: any, data?: DeleteMembersCommandOutput) => void
+  ): void;
+  deleteMembers(
+    args: DeleteMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DeleteMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeActionTargetsCommand}
+   */
+  describeActionTargets(): Promise<DescribeActionTargetsCommandOutput>;
+  describeActionTargets(
+    args: DescribeActionTargetsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeActionTargetsCommandOutput>;
+  describeActionTargets(
+    args: DescribeActionTargetsCommandInput,
+    cb: (err: any, data?: DescribeActionTargetsCommandOutput) => void
+  ): void;
+  describeActionTargets(
+    args: DescribeActionTargetsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeActionTargetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeHubCommand}
+   */
+  describeHub(): Promise<DescribeHubCommandOutput>;
+  describeHub(
+    args: DescribeHubCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeHubCommandOutput>;
+  describeHub(
+    args: DescribeHubCommandInput,
+    cb: (err: any, data?: DescribeHubCommandOutput) => void
+  ): void;
+  describeHub(
+    args: DescribeHubCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeHubCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeOrganizationConfigurationCommand}
+   */
+  describeOrganizationConfiguration(): Promise<DescribeOrganizationConfigurationCommandOutput>;
+  describeOrganizationConfiguration(
+    args: DescribeOrganizationConfigurationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeOrganizationConfigurationCommandOutput>;
+  describeOrganizationConfiguration(
+    args: DescribeOrganizationConfigurationCommandInput,
+    cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
+  ): void;
+  describeOrganizationConfiguration(
+    args: DescribeOrganizationConfigurationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeProductsCommand}
+   */
+  describeProducts(): Promise<DescribeProductsCommandOutput>;
+  describeProducts(
+    args: DescribeProductsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeProductsCommandOutput>;
+  describeProducts(
+    args: DescribeProductsCommandInput,
+    cb: (err: any, data?: DescribeProductsCommandOutput) => void
+  ): void;
+  describeProducts(
+    args: DescribeProductsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeProductsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeProductsV2Command}
+   */
+  describeProductsV2(): Promise<DescribeProductsV2CommandOutput>;
+  describeProductsV2(
+    args: DescribeProductsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeProductsV2CommandOutput>;
+  describeProductsV2(
+    args: DescribeProductsV2CommandInput,
+    cb: (err: any, data?: DescribeProductsV2CommandOutput) => void
+  ): void;
+  describeProductsV2(
+    args: DescribeProductsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeProductsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSecurityHubV2Command}
+   */
+  describeSecurityHubV2(): Promise<DescribeSecurityHubV2CommandOutput>;
+  describeSecurityHubV2(
+    args: DescribeSecurityHubV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeSecurityHubV2CommandOutput>;
+  describeSecurityHubV2(
+    args: DescribeSecurityHubV2CommandInput,
+    cb: (err: any, data?: DescribeSecurityHubV2CommandOutput) => void
+  ): void;
+  describeSecurityHubV2(
+    args: DescribeSecurityHubV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeSecurityHubV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStandardsCommand}
+   */
+  describeStandards(): Promise<DescribeStandardsCommandOutput>;
+  describeStandards(
+    args: DescribeStandardsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeStandardsCommandOutput>;
+  describeStandards(
+    args: DescribeStandardsCommandInput,
+    cb: (err: any, data?: DescribeStandardsCommandOutput) => void
+  ): void;
+  describeStandards(
+    args: DescribeStandardsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeStandardsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeStandardsControlsCommand}
+   */
+  describeStandardsControls(
+    args: DescribeStandardsControlsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DescribeStandardsControlsCommandOutput>;
+  describeStandardsControls(
+    args: DescribeStandardsControlsCommandInput,
+    cb: (err: any, data?: DescribeStandardsControlsCommandOutput) => void
+  ): void;
+  describeStandardsControls(
+    args: DescribeStandardsControlsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DescribeStandardsControlsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableImportFindingsForProductCommand}
+   */
+  disableImportFindingsForProduct(
+    args: DisableImportFindingsForProductCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisableImportFindingsForProductCommandOutput>;
+  disableImportFindingsForProduct(
+    args: DisableImportFindingsForProductCommandInput,
+    cb: (err: any, data?: DisableImportFindingsForProductCommandOutput) => void
+  ): void;
+  disableImportFindingsForProduct(
+    args: DisableImportFindingsForProductCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisableImportFindingsForProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableOrganizationAdminAccountCommand}
+   */
+  disableOrganizationAdminAccount(
+    args: DisableOrganizationAdminAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisableOrganizationAdminAccountCommandOutput>;
+  disableOrganizationAdminAccount(
+    args: DisableOrganizationAdminAccountCommandInput,
+    cb: (err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void
+  ): void;
+  disableOrganizationAdminAccount(
+    args: DisableOrganizationAdminAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableSecurityHubCommand}
+   */
+  disableSecurityHub(): Promise<DisableSecurityHubCommandOutput>;
+  disableSecurityHub(
+    args: DisableSecurityHubCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisableSecurityHubCommandOutput>;
+  disableSecurityHub(
+    args: DisableSecurityHubCommandInput,
+    cb: (err: any, data?: DisableSecurityHubCommandOutput) => void
+  ): void;
+  disableSecurityHub(
+    args: DisableSecurityHubCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisableSecurityHubCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableSecurityHubFeatureV2Command}
+   */
+  disableSecurityHubFeatureV2(
+    args: DisableSecurityHubFeatureV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisableSecurityHubFeatureV2CommandOutput>;
+  disableSecurityHubFeatureV2(
+    args: DisableSecurityHubFeatureV2CommandInput,
+    cb: (err: any, data?: DisableSecurityHubFeatureV2CommandOutput) => void
+  ): void;
+  disableSecurityHubFeatureV2(
+    args: DisableSecurityHubFeatureV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisableSecurityHubFeatureV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableSecurityHubV2Command}
+   */
+  disableSecurityHubV2(): Promise<DisableSecurityHubV2CommandOutput>;
+  disableSecurityHubV2(
+    args: DisableSecurityHubV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisableSecurityHubV2CommandOutput>;
+  disableSecurityHubV2(
+    args: DisableSecurityHubV2CommandInput,
+    cb: (err: any, data?: DisableSecurityHubV2CommandOutput) => void
+  ): void;
+  disableSecurityHubV2(
+    args: DisableSecurityHubV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisableSecurityHubV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateFromAdministratorAccountCommand}
+   */
+  disassociateFromAdministratorAccount(): Promise<DisassociateFromAdministratorAccountCommandOutput>;
+  disassociateFromAdministratorAccount(
+    args: DisassociateFromAdministratorAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisassociateFromAdministratorAccountCommandOutput>;
+  disassociateFromAdministratorAccount(
+    args: DisassociateFromAdministratorAccountCommandInput,
+    cb: (err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void
+  ): void;
+  disassociateFromAdministratorAccount(
+    args: DisassociateFromAdministratorAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateFromMasterAccountCommand}
+   */
+  disassociateFromMasterAccount(): Promise<DisassociateFromMasterAccountCommandOutput>;
+  disassociateFromMasterAccount(
+    args: DisassociateFromMasterAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisassociateFromMasterAccountCommandOutput>;
+  disassociateFromMasterAccount(
+    args: DisassociateFromMasterAccountCommandInput,
+    cb: (err: any, data?: DisassociateFromMasterAccountCommandOutput) => void
+  ): void;
+  disassociateFromMasterAccount(
+    args: DisassociateFromMasterAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisassociateFromMasterAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateMembersCommand}
+   */
+  disassociateMembers(
+    args: DisassociateMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<DisassociateMembersCommandOutput>;
+  disassociateMembers(
+    args: DisassociateMembersCommandInput,
+    cb: (err: any, data?: DisassociateMembersCommandOutput) => void
+  ): void;
+  disassociateMembers(
+    args: DisassociateMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: DisassociateMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableImportFindingsForProductCommand}
+   */
+  enableImportFindingsForProduct(
+    args: EnableImportFindingsForProductCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<EnableImportFindingsForProductCommandOutput>;
+  enableImportFindingsForProduct(
+    args: EnableImportFindingsForProductCommandInput,
+    cb: (err: any, data?: EnableImportFindingsForProductCommandOutput) => void
+  ): void;
+  enableImportFindingsForProduct(
+    args: EnableImportFindingsForProductCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: EnableImportFindingsForProductCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableOrganizationAdminAccountCommand}
+   */
+  enableOrganizationAdminAccount(
+    args: EnableOrganizationAdminAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<EnableOrganizationAdminAccountCommandOutput>;
+  enableOrganizationAdminAccount(
+    args: EnableOrganizationAdminAccountCommandInput,
+    cb: (err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void
+  ): void;
+  enableOrganizationAdminAccount(
+    args: EnableOrganizationAdminAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableSecurityHubCommand}
+   */
+  enableSecurityHub(): Promise<EnableSecurityHubCommandOutput>;
+  enableSecurityHub(
+    args: EnableSecurityHubCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<EnableSecurityHubCommandOutput>;
+  enableSecurityHub(
+    args: EnableSecurityHubCommandInput,
+    cb: (err: any, data?: EnableSecurityHubCommandOutput) => void
+  ): void;
+  enableSecurityHub(
+    args: EnableSecurityHubCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: EnableSecurityHubCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableSecurityHubFeatureV2Command}
+   */
+  enableSecurityHubFeatureV2(
+    args: EnableSecurityHubFeatureV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<EnableSecurityHubFeatureV2CommandOutput>;
+  enableSecurityHubFeatureV2(
+    args: EnableSecurityHubFeatureV2CommandInput,
+    cb: (err: any, data?: EnableSecurityHubFeatureV2CommandOutput) => void
+  ): void;
+  enableSecurityHubFeatureV2(
+    args: EnableSecurityHubFeatureV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: EnableSecurityHubFeatureV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableSecurityHubV2Command}
+   */
+  enableSecurityHubV2(): Promise<EnableSecurityHubV2CommandOutput>;
+  enableSecurityHubV2(
+    args: EnableSecurityHubV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<EnableSecurityHubV2CommandOutput>;
+  enableSecurityHubV2(
+    args: EnableSecurityHubV2CommandInput,
+    cb: (err: any, data?: EnableSecurityHubV2CommandOutput) => void
+  ): void;
+  enableSecurityHubV2(
+    args: EnableSecurityHubV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: EnableSecurityHubV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateRecommendedPolicyV2Command}
+   */
+  generateRecommendedPolicyV2(
+    args: GenerateRecommendedPolicyV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GenerateRecommendedPolicyV2CommandOutput>;
+  generateRecommendedPolicyV2(
+    args: GenerateRecommendedPolicyV2CommandInput,
+    cb: (err: any, data?: GenerateRecommendedPolicyV2CommandOutput) => void
+  ): void;
+  generateRecommendedPolicyV2(
+    args: GenerateRecommendedPolicyV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GenerateRecommendedPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAdministratorAccountCommand}
+   */
+  getAdministratorAccount(): Promise<GetAdministratorAccountCommandOutput>;
+  getAdministratorAccount(
+    args: GetAdministratorAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetAdministratorAccountCommandOutput>;
+  getAdministratorAccount(
+    args: GetAdministratorAccountCommandInput,
+    cb: (err: any, data?: GetAdministratorAccountCommandOutput) => void
+  ): void;
+  getAdministratorAccount(
+    args: GetAdministratorAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetAdministratorAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAggregatorV2Command}
+   */
+  getAggregatorV2(
+    args: GetAggregatorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetAggregatorV2CommandOutput>;
+  getAggregatorV2(
+    args: GetAggregatorV2CommandInput,
+    cb: (err: any, data?: GetAggregatorV2CommandOutput) => void
+  ): void;
+  getAggregatorV2(
+    args: GetAggregatorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetAggregatorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomationRuleV2Command}
+   */
+  getAutomationRuleV2(
+    args: GetAutomationRuleV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetAutomationRuleV2CommandOutput>;
+  getAutomationRuleV2(
+    args: GetAutomationRuleV2CommandInput,
+    cb: (err: any, data?: GetAutomationRuleV2CommandOutput) => void
+  ): void;
+  getAutomationRuleV2(
+    args: GetAutomationRuleV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetAutomationRuleV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfigurationPolicyCommand}
+   */
+  getConfigurationPolicy(
+    args: GetConfigurationPolicyCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetConfigurationPolicyCommandOutput>;
+  getConfigurationPolicy(
+    args: GetConfigurationPolicyCommandInput,
+    cb: (err: any, data?: GetConfigurationPolicyCommandOutput) => void
+  ): void;
+  getConfigurationPolicy(
+    args: GetConfigurationPolicyCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetConfigurationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfigurationPolicyAssociationCommand}
+   */
+  getConfigurationPolicyAssociation(
+    args: GetConfigurationPolicyAssociationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetConfigurationPolicyAssociationCommandOutput>;
+  getConfigurationPolicyAssociation(
+    args: GetConfigurationPolicyAssociationCommandInput,
+    cb: (err: any, data?: GetConfigurationPolicyAssociationCommandOutput) => void
+  ): void;
+  getConfigurationPolicyAssociation(
+    args: GetConfigurationPolicyAssociationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetConfigurationPolicyAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectorCommand}
+   */
+  getConnector(
+    args: GetConnectorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetConnectorCommandOutput>;
+  getConnector(
+    args: GetConnectorCommandInput,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+  getConnector(
+    args: GetConnectorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectorV2Command}
+   */
+  getConnectorV2(
+    args: GetConnectorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetConnectorV2CommandOutput>;
+  getConnectorV2(
+    args: GetConnectorV2CommandInput,
+    cb: (err: any, data?: GetConnectorV2CommandOutput) => void
+  ): void;
+  getConnectorV2(
+    args: GetConnectorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetConnectorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnabledStandardsCommand}
+   */
+  getEnabledStandards(): Promise<GetEnabledStandardsCommandOutput>;
+  getEnabledStandards(
+    args: GetEnabledStandardsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetEnabledStandardsCommandOutput>;
+  getEnabledStandards(
+    args: GetEnabledStandardsCommandInput,
+    cb: (err: any, data?: GetEnabledStandardsCommandOutput) => void
+  ): void;
+  getEnabledStandards(
+    args: GetEnabledStandardsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetEnabledStandardsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExportJobV2Command}
+   */
+  getExportJobV2(
+    args: GetExportJobV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetExportJobV2CommandOutput>;
+  getExportJobV2(
+    args: GetExportJobV2CommandInput,
+    cb: (err: any, data?: GetExportJobV2CommandOutput) => void
+  ): void;
+  getExportJobV2(
+    args: GetExportJobV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetExportJobV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingAggregatorCommand}
+   */
+  getFindingAggregator(
+    args: GetFindingAggregatorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingAggregatorCommandOutput>;
+  getFindingAggregator(
+    args: GetFindingAggregatorCommandInput,
+    cb: (err: any, data?: GetFindingAggregatorCommandOutput) => void
+  ): void;
+  getFindingAggregator(
+    args: GetFindingAggregatorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingAggregatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingHistoryCommand}
+   */
+  getFindingHistory(
+    args: GetFindingHistoryCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingHistoryCommandOutput>;
+  getFindingHistory(
+    args: GetFindingHistoryCommandInput,
+    cb: (err: any, data?: GetFindingHistoryCommandOutput) => void
+  ): void;
+  getFindingHistory(
+    args: GetFindingHistoryCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingsCommand}
+   */
+  getFindings(): Promise<GetFindingsCommandOutput>;
+  getFindings(
+    args: GetFindingsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingsCommandOutput>;
+  getFindings(
+    args: GetFindingsCommandInput,
+    cb: (err: any, data?: GetFindingsCommandOutput) => void
+  ): void;
+  getFindings(
+    args: GetFindingsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingStatisticsV2Command}
+   */
+  getFindingStatisticsV2(
+    args: GetFindingStatisticsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingStatisticsV2CommandOutput>;
+  getFindingStatisticsV2(
+    args: GetFindingStatisticsV2CommandInput,
+    cb: (err: any, data?: GetFindingStatisticsV2CommandOutput) => void
+  ): void;
+  getFindingStatisticsV2(
+    args: GetFindingStatisticsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingStatisticsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingsTrendsV2Command}
+   */
+  getFindingsTrendsV2(
+    args: GetFindingsTrendsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingsTrendsV2CommandOutput>;
+  getFindingsTrendsV2(
+    args: GetFindingsTrendsV2CommandInput,
+    cb: (err: any, data?: GetFindingsTrendsV2CommandOutput) => void
+  ): void;
+  getFindingsTrendsV2(
+    args: GetFindingsTrendsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingsTrendsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingsV2Command}
+   */
+  getFindingsV2(): Promise<GetFindingsV2CommandOutput>;
+  getFindingsV2(
+    args: GetFindingsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetFindingsV2CommandOutput>;
+  getFindingsV2(
+    args: GetFindingsV2CommandInput,
+    cb: (err: any, data?: GetFindingsV2CommandOutput) => void
+  ): void;
+  getFindingsV2(
+    args: GetFindingsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetFindingsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInsightResultsCommand}
+   */
+  getInsightResults(
+    args: GetInsightResultsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetInsightResultsCommandOutput>;
+  getInsightResults(
+    args: GetInsightResultsCommandInput,
+    cb: (err: any, data?: GetInsightResultsCommandOutput) => void
+  ): void;
+  getInsightResults(
+    args: GetInsightResultsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetInsightResultsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInsightsCommand}
+   */
+  getInsights(): Promise<GetInsightsCommandOutput>;
+  getInsights(
+    args: GetInsightsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetInsightsCommandOutput>;
+  getInsights(
+    args: GetInsightsCommandInput,
+    cb: (err: any, data?: GetInsightsCommandOutput) => void
+  ): void;
+  getInsights(
+    args: GetInsightsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetInsightsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInvitationsCountCommand}
+   */
+  getInvitationsCount(): Promise<GetInvitationsCountCommandOutput>;
+  getInvitationsCount(
+    args: GetInvitationsCountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetInvitationsCountCommandOutput>;
+  getInvitationsCount(
+    args: GetInvitationsCountCommandInput,
+    cb: (err: any, data?: GetInvitationsCountCommandOutput) => void
+  ): void;
+  getInvitationsCount(
+    args: GetInvitationsCountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetInvitationsCountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMasterAccountCommand}
+   */
+  getMasterAccount(): Promise<GetMasterAccountCommandOutput>;
+  getMasterAccount(
+    args: GetMasterAccountCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetMasterAccountCommandOutput>;
+  getMasterAccount(
+    args: GetMasterAccountCommandInput,
+    cb: (err: any, data?: GetMasterAccountCommandOutput) => void
+  ): void;
+  getMasterAccount(
+    args: GetMasterAccountCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetMasterAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMembersCommand}
+   */
+  getMembers(
+    args: GetMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetMembersCommandOutput>;
+  getMembers(
+    args: GetMembersCommandInput,
+    cb: (err: any, data?: GetMembersCommandOutput) => void
+  ): void;
+  getMembers(
+    args: GetMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendedPolicyV2Command}
+   */
+  getRecommendedPolicyV2(
+    args: GetRecommendedPolicyV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetRecommendedPolicyV2CommandOutput>;
+  getRecommendedPolicyV2(
+    args: GetRecommendedPolicyV2CommandInput,
+    cb: (err: any, data?: GetRecommendedPolicyV2CommandOutput) => void
+  ): void;
+  getRecommendedPolicyV2(
+    args: GetRecommendedPolicyV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetRecommendedPolicyV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRemediationsV2Command}
+   */
+  getRemediationsV2(): Promise<GetRemediationsV2CommandOutput>;
+  getRemediationsV2(
+    args: GetRemediationsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetRemediationsV2CommandOutput>;
+  getRemediationsV2(
+    args: GetRemediationsV2CommandInput,
+    cb: (err: any, data?: GetRemediationsV2CommandOutput) => void
+  ): void;
+  getRemediationsV2(
+    args: GetRemediationsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetRemediationsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcesStatisticsV2Command}
+   */
+  getResourcesStatisticsV2(
+    args: GetResourcesStatisticsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetResourcesStatisticsV2CommandOutput>;
+  getResourcesStatisticsV2(
+    args: GetResourcesStatisticsV2CommandInput,
+    cb: (err: any, data?: GetResourcesStatisticsV2CommandOutput) => void
+  ): void;
+  getResourcesStatisticsV2(
+    args: GetResourcesStatisticsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetResourcesStatisticsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcesTrendsV2Command}
+   */
+  getResourcesTrendsV2(
+    args: GetResourcesTrendsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetResourcesTrendsV2CommandOutput>;
+  getResourcesTrendsV2(
+    args: GetResourcesTrendsV2CommandInput,
+    cb: (err: any, data?: GetResourcesTrendsV2CommandOutput) => void
+  ): void;
+  getResourcesTrendsV2(
+    args: GetResourcesTrendsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetResourcesTrendsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcesV2Command}
+   */
+  getResourcesV2(): Promise<GetResourcesV2CommandOutput>;
+  getResourcesV2(
+    args: GetResourcesV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetResourcesV2CommandOutput>;
+  getResourcesV2(
+    args: GetResourcesV2CommandInput,
+    cb: (err: any, data?: GetResourcesV2CommandOutput) => void
+  ): void;
+  getResourcesV2(
+    args: GetResourcesV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetResourcesV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSecurityControlDefinitionCommand}
+   */
+  getSecurityControlDefinition(
+    args: GetSecurityControlDefinitionCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetSecurityControlDefinitionCommandOutput>;
+  getSecurityControlDefinition(
+    args: GetSecurityControlDefinitionCommandInput,
+    cb: (err: any, data?: GetSecurityControlDefinitionCommandOutput) => void
+  ): void;
+  getSecurityControlDefinition(
+    args: GetSecurityControlDefinitionCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetSecurityControlDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSoftwareResourcesV2Command}
+   */
+  getSoftwareResourcesV2(
+    args: GetSoftwareResourcesV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetSoftwareResourcesV2CommandOutput>;
+  getSoftwareResourcesV2(
+    args: GetSoftwareResourcesV2CommandInput,
+    cb: (err: any, data?: GetSoftwareResourcesV2CommandOutput) => void
+  ): void;
+  getSoftwareResourcesV2(
+    args: GetSoftwareResourcesV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetSoftwareResourcesV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSoftwareStatisticsV2Command}
+   */
+  getSoftwareStatisticsV2(
+    args: GetSoftwareStatisticsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetSoftwareStatisticsV2CommandOutput>;
+  getSoftwareStatisticsV2(
+    args: GetSoftwareStatisticsV2CommandInput,
+    cb: (err: any, data?: GetSoftwareStatisticsV2CommandOutput) => void
+  ): void;
+  getSoftwareStatisticsV2(
+    args: GetSoftwareStatisticsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetSoftwareStatisticsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSoftwareV2Command}
+   */
+  getSoftwareV2(): Promise<GetSoftwareV2CommandOutput>;
+  getSoftwareV2(
+    args: GetSoftwareV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<GetSoftwareV2CommandOutput>;
+  getSoftwareV2(
+    args: GetSoftwareV2CommandInput,
+    cb: (err: any, data?: GetSoftwareV2CommandOutput) => void
+  ): void;
+  getSoftwareV2(
+    args: GetSoftwareV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: GetSoftwareV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InviteMembersCommand}
+   */
+  inviteMembers(
+    args: InviteMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<InviteMembersCommandOutput>;
+  inviteMembers(
+    args: InviteMembersCommandInput,
+    cb: (err: any, data?: InviteMembersCommandOutput) => void
+  ): void;
+  inviteMembers(
+    args: InviteMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: InviteMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAggregatorsV2Command}
+   */
+  listAggregatorsV2(): Promise<ListAggregatorsV2CommandOutput>;
+  listAggregatorsV2(
+    args: ListAggregatorsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListAggregatorsV2CommandOutput>;
+  listAggregatorsV2(
+    args: ListAggregatorsV2CommandInput,
+    cb: (err: any, data?: ListAggregatorsV2CommandOutput) => void
+  ): void;
+  listAggregatorsV2(
+    args: ListAggregatorsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListAggregatorsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationRulesCommand}
+   */
+  listAutomationRules(): Promise<ListAutomationRulesCommandOutput>;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListAutomationRulesCommandOutput>;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    cb: (err: any, data?: ListAutomationRulesCommandOutput) => void
+  ): void;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListAutomationRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationRulesV2Command}
+   */
+  listAutomationRulesV2(): Promise<ListAutomationRulesV2CommandOutput>;
+  listAutomationRulesV2(
+    args: ListAutomationRulesV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListAutomationRulesV2CommandOutput>;
+  listAutomationRulesV2(
+    args: ListAutomationRulesV2CommandInput,
+    cb: (err: any, data?: ListAutomationRulesV2CommandOutput) => void
+  ): void;
+  listAutomationRulesV2(
+    args: ListAutomationRulesV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListAutomationRulesV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfigurationPoliciesCommand}
+   */
+  listConfigurationPolicies(): Promise<ListConfigurationPoliciesCommandOutput>;
+  listConfigurationPolicies(
+    args: ListConfigurationPoliciesCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListConfigurationPoliciesCommandOutput>;
+  listConfigurationPolicies(
+    args: ListConfigurationPoliciesCommandInput,
+    cb: (err: any, data?: ListConfigurationPoliciesCommandOutput) => void
+  ): void;
+  listConfigurationPolicies(
+    args: ListConfigurationPoliciesCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListConfigurationPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfigurationPolicyAssociationsCommand}
+   */
+  listConfigurationPolicyAssociations(): Promise<ListConfigurationPolicyAssociationsCommandOutput>;
+  listConfigurationPolicyAssociations(
+    args: ListConfigurationPolicyAssociationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListConfigurationPolicyAssociationsCommandOutput>;
+  listConfigurationPolicyAssociations(
+    args: ListConfigurationPolicyAssociationsCommandInput,
+    cb: (err: any, data?: ListConfigurationPolicyAssociationsCommandOutput) => void
+  ): void;
+  listConfigurationPolicyAssociations(
+    args: ListConfigurationPolicyAssociationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListConfigurationPolicyAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsV2Command}
+   */
+  listConnectorsV2(): Promise<ListConnectorsV2CommandOutput>;
+  listConnectorsV2(
+    args: ListConnectorsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListConnectorsV2CommandOutput>;
+  listConnectorsV2(
+    args: ListConnectorsV2CommandInput,
+    cb: (err: any, data?: ListConnectorsV2CommandOutput) => void
+  ): void;
+  listConnectorsV2(
+    args: ListConnectorsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListConnectorsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEnabledProductsForImportCommand}
+   */
+  listEnabledProductsForImport(): Promise<ListEnabledProductsForImportCommandOutput>;
+  listEnabledProductsForImport(
+    args: ListEnabledProductsForImportCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListEnabledProductsForImportCommandOutput>;
+  listEnabledProductsForImport(
+    args: ListEnabledProductsForImportCommandInput,
+    cb: (err: any, data?: ListEnabledProductsForImportCommandOutput) => void
+  ): void;
+  listEnabledProductsForImport(
+    args: ListEnabledProductsForImportCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListEnabledProductsForImportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExportJobsV2Command}
+   */
+  listExportJobsV2(): Promise<ListExportJobsV2CommandOutput>;
+  listExportJobsV2(
+    args: ListExportJobsV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListExportJobsV2CommandOutput>;
+  listExportJobsV2(
+    args: ListExportJobsV2CommandInput,
+    cb: (err: any, data?: ListExportJobsV2CommandOutput) => void
+  ): void;
+  listExportJobsV2(
+    args: ListExportJobsV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListExportJobsV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExposuresByRemediationV2Command}
+   */
+  listExposuresByRemediationV2(
+    args: ListExposuresByRemediationV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListExposuresByRemediationV2CommandOutput>;
+  listExposuresByRemediationV2(
+    args: ListExposuresByRemediationV2CommandInput,
+    cb: (err: any, data?: ListExposuresByRemediationV2CommandOutput) => void
+  ): void;
+  listExposuresByRemediationV2(
+    args: ListExposuresByRemediationV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListExposuresByRemediationV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFindingAggregatorsCommand}
+   */
+  listFindingAggregators(): Promise<ListFindingAggregatorsCommandOutput>;
+  listFindingAggregators(
+    args: ListFindingAggregatorsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListFindingAggregatorsCommandOutput>;
+  listFindingAggregators(
+    args: ListFindingAggregatorsCommandInput,
+    cb: (err: any, data?: ListFindingAggregatorsCommandOutput) => void
+  ): void;
+  listFindingAggregators(
+    args: ListFindingAggregatorsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListFindingAggregatorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFreeTrialStatusesV2Command}
+   */
+  listFreeTrialStatusesV2(): Promise<ListFreeTrialStatusesV2CommandOutput>;
+  listFreeTrialStatusesV2(
+    args: ListFreeTrialStatusesV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListFreeTrialStatusesV2CommandOutput>;
+  listFreeTrialStatusesV2(
+    args: ListFreeTrialStatusesV2CommandInput,
+    cb: (err: any, data?: ListFreeTrialStatusesV2CommandOutput) => void
+  ): void;
+  listFreeTrialStatusesV2(
+    args: ListFreeTrialStatusesV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListFreeTrialStatusesV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListInvitationsCommand}
+   */
+  listInvitations(): Promise<ListInvitationsCommandOutput>;
+  listInvitations(
+    args: ListInvitationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListInvitationsCommandOutput>;
+  listInvitations(
+    args: ListInvitationsCommandInput,
+    cb: (err: any, data?: ListInvitationsCommandOutput) => void
+  ): void;
+  listInvitations(
+    args: ListInvitationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListInvitationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMembersCommand}
+   */
+  listMembers(): Promise<ListMembersCommandOutput>;
+  listMembers(
+    args: ListMembersCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListMembersCommandOutput>;
+  listMembers(
+    args: ListMembersCommandInput,
+    cb: (err: any, data?: ListMembersCommandOutput) => void
+  ): void;
+  listMembers(
+    args: ListMembersCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListMembersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListOrganizationAdminAccountsCommand}
+   */
+  listOrganizationAdminAccounts(): Promise<ListOrganizationAdminAccountsCommandOutput>;
+  listOrganizationAdminAccounts(
+    args: ListOrganizationAdminAccountsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListOrganizationAdminAccountsCommandOutput>;
+  listOrganizationAdminAccounts(
+    args: ListOrganizationAdminAccountsCommandInput,
+    cb: (err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void
+  ): void;
+  listOrganizationAdminAccounts(
+    args: ListOrganizationAdminAccountsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSecurityControlDefinitionsCommand}
+   */
+  listSecurityControlDefinitions(): Promise<ListSecurityControlDefinitionsCommandOutput>;
+  listSecurityControlDefinitions(
+    args: ListSecurityControlDefinitionsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListSecurityControlDefinitionsCommandOutput>;
+  listSecurityControlDefinitions(
+    args: ListSecurityControlDefinitionsCommandInput,
+    cb: (err: any, data?: ListSecurityControlDefinitionsCommandOutput) => void
+  ): void;
+  listSecurityControlDefinitions(
+    args: ListSecurityControlDefinitionsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListSecurityControlDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStandardsControlAssociationsCommand}
+   */
+  listStandardsControlAssociations(
+    args: ListStandardsControlAssociationsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListStandardsControlAssociationsCommandOutput>;
+  listStandardsControlAssociations(
+    args: ListStandardsControlAssociationsCommandInput,
+    cb: (err: any, data?: ListStandardsControlAssociationsCommandOutput) => void
+  ): void;
+  listStandardsControlAssociations(
+    args: ListStandardsControlAssociationsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListStandardsControlAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterConnectorV2Command}
+   */
+  registerConnectorV2(
+    args: RegisterConnectorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<RegisterConnectorV2CommandOutput>;
+  registerConnectorV2(
+    args: RegisterConnectorV2CommandInput,
+    cb: (err: any, data?: RegisterConnectorV2CommandOutput) => void
+  ): void;
+  registerConnectorV2(
+    args: RegisterConnectorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: RegisterConnectorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartConfigurationPolicyAssociationCommand}
+   */
+  startConfigurationPolicyAssociation(
+    args: StartConfigurationPolicyAssociationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<StartConfigurationPolicyAssociationCommandOutput>;
+  startConfigurationPolicyAssociation(
+    args: StartConfigurationPolicyAssociationCommandInput,
+    cb: (err: any, data?: StartConfigurationPolicyAssociationCommandOutput) => void
+  ): void;
+  startConfigurationPolicyAssociation(
+    args: StartConfigurationPolicyAssociationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: StartConfigurationPolicyAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartConfigurationPolicyDisassociationCommand}
+   */
+  startConfigurationPolicyDisassociation(
+    args: StartConfigurationPolicyDisassociationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<StartConfigurationPolicyDisassociationCommandOutput>;
+  startConfigurationPolicyDisassociation(
+    args: StartConfigurationPolicyDisassociationCommandInput,
+    cb: (err: any, data?: StartConfigurationPolicyDisassociationCommandOutput) => void
+  ): void;
+  startConfigurationPolicyDisassociation(
+    args: StartConfigurationPolicyDisassociationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: StartConfigurationPolicyDisassociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartExportJobV2Command}
+   */
+  startExportJobV2(
+    args: StartExportJobV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<StartExportJobV2CommandOutput>;
+  startExportJobV2(
+    args: StartExportJobV2CommandInput,
+    cb: (err: any, data?: StartExportJobV2CommandOutput) => void
+  ): void;
+  startExportJobV2(
+    args: StartExportJobV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: StartExportJobV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateActionTargetCommand}
+   */
+  updateActionTarget(
+    args: UpdateActionTargetCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateActionTargetCommandOutput>;
+  updateActionTarget(
+    args: UpdateActionTargetCommandInput,
+    cb: (err: any, data?: UpdateActionTargetCommandOutput) => void
+  ): void;
+  updateActionTarget(
+    args: UpdateActionTargetCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateActionTargetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAggregatorV2Command}
+   */
+  updateAggregatorV2(
+    args: UpdateAggregatorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateAggregatorV2CommandOutput>;
+  updateAggregatorV2(
+    args: UpdateAggregatorV2CommandInput,
+    cb: (err: any, data?: UpdateAggregatorV2CommandOutput) => void
+  ): void;
+  updateAggregatorV2(
+    args: UpdateAggregatorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateAggregatorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAutomationRuleV2Command}
+   */
+  updateAutomationRuleV2(
+    args: UpdateAutomationRuleV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateAutomationRuleV2CommandOutput>;
+  updateAutomationRuleV2(
+    args: UpdateAutomationRuleV2CommandInput,
+    cb: (err: any, data?: UpdateAutomationRuleV2CommandOutput) => void
+  ): void;
+  updateAutomationRuleV2(
+    args: UpdateAutomationRuleV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateAutomationRuleV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConfigurationPolicyCommand}
+   */
+  updateConfigurationPolicy(
+    args: UpdateConfigurationPolicyCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateConfigurationPolicyCommandOutput>;
+  updateConfigurationPolicy(
+    args: UpdateConfigurationPolicyCommandInput,
+    cb: (err: any, data?: UpdateConfigurationPolicyCommandOutput) => void
+  ): void;
+  updateConfigurationPolicy(
+    args: UpdateConfigurationPolicyCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateConfigurationPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorCommand}
+   */
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateConnectorCommandOutput>;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorV2Command}
+   */
+  updateConnectorV2(
+    args: UpdateConnectorV2CommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateConnectorV2CommandOutput>;
+  updateConnectorV2(
+    args: UpdateConnectorV2CommandInput,
+    cb: (err: any, data?: UpdateConnectorV2CommandOutput) => void
+  ): void;
+  updateConnectorV2(
+    args: UpdateConnectorV2CommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateConnectorV2CommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFindingAggregatorCommand}
+   */
+  updateFindingAggregator(
+    args: UpdateFindingAggregatorCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateFindingAggregatorCommandOutput>;
+  updateFindingAggregator(
+    args: UpdateFindingAggregatorCommandInput,
+    cb: (err: any, data?: UpdateFindingAggregatorCommandOutput) => void
+  ): void;
+  updateFindingAggregator(
+    args: UpdateFindingAggregatorCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateFindingAggregatorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFindingsCommand}
+   */
+  updateFindings(
+    args: UpdateFindingsCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateFindingsCommandOutput>;
+  updateFindings(
+    args: UpdateFindingsCommandInput,
+    cb: (err: any, data?: UpdateFindingsCommandOutput) => void
+  ): void;
+  updateFindings(
+    args: UpdateFindingsCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateFindingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateInsightCommand}
+   */
+  updateInsight(
+    args: UpdateInsightCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateInsightCommandOutput>;
+  updateInsight(
+    args: UpdateInsightCommandInput,
+    cb: (err: any, data?: UpdateInsightCommandOutput) => void
+  ): void;
+  updateInsight(
+    args: UpdateInsightCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateInsightCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateOrganizationConfigurationCommand}
+   */
+  updateOrganizationConfiguration(
+    args: UpdateOrganizationConfigurationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateOrganizationConfigurationCommandOutput>;
+  updateOrganizationConfiguration(
+    args: UpdateOrganizationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
+  ): void;
+  updateOrganizationConfiguration(
+    args: UpdateOrganizationConfigurationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSecurityControlCommand}
+   */
+  updateSecurityControl(
+    args: UpdateSecurityControlCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateSecurityControlCommandOutput>;
+  updateSecurityControl(
+    args: UpdateSecurityControlCommandInput,
+    cb: (err: any, data?: UpdateSecurityControlCommandOutput) => void
+  ): void;
+  updateSecurityControl(
+    args: UpdateSecurityControlCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateSecurityControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSecurityHubConfigurationCommand}
+   */
+  updateSecurityHubConfiguration(): Promise<UpdateSecurityHubConfigurationCommandOutput>;
+  updateSecurityHubConfiguration(
+    args: UpdateSecurityHubConfigurationCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateSecurityHubConfigurationCommandOutput>;
+  updateSecurityHubConfiguration(
+    args: UpdateSecurityHubConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void
+  ): void;
+  updateSecurityHubConfiguration(
+    args: UpdateSecurityHubConfigurationCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateStandardsControlCommand}
+   */
+  updateStandardsControl(
+    args: UpdateStandardsControlCommandInput,
+    options?: SecurityHubRequestOptions
+  ): Promise<UpdateStandardsControlCommandOutput>;
+  updateStandardsControl(
+    args: UpdateStandardsControlCommandInput,
+    cb: (err: any, data?: UpdateStandardsControlCommandOutput) => void
+  ): void;
+  updateStandardsControl(
+    args: UpdateStandardsControlCommandInput,
+    options: SecurityHubRequestOptions,
+    cb: (err: any, data?: UpdateStandardsControlCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeActionTargetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeActionTargetsCommandOutput}.
+   */
+  paginateDescribeActionTargets(
+    args?: DescribeActionTargetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeActionTargetsCommandOutput>;
+
+  /**
+   * @see {@link DescribeProductsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeProductsCommandOutput}.
+   */
+  paginateDescribeProducts(
+    args?: DescribeProductsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeProductsCommandOutput>;
+
+  /**
+   * @see {@link DescribeProductsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeProductsV2CommandOutput}.
+   */
+  paginateDescribeProductsV2(
+    args?: DescribeProductsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeProductsV2CommandOutput>;
+
+  /**
+   * @see {@link DescribeStandardsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeStandardsCommandOutput}.
+   */
+  paginateDescribeStandards(
+    args?: DescribeStandardsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeStandardsCommandOutput>;
+
+  /**
+   * @see {@link DescribeStandardsControlsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeStandardsControlsCommandOutput}.
+   */
+  paginateDescribeStandardsControls(
+    args: DescribeStandardsControlsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeStandardsControlsCommandOutput>;
+
+  /**
+   * @see {@link GetEnabledStandardsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetEnabledStandardsCommandOutput}.
+   */
+  paginateGetEnabledStandards(
+    args?: GetEnabledStandardsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetEnabledStandardsCommandOutput>;
+
+  /**
+   * @see {@link GetFindingHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetFindingHistoryCommandOutput}.
+   */
+  paginateGetFindingHistory(
+    args: GetFindingHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetFindingHistoryCommandOutput>;
+
+  /**
+   * @see {@link GetFindingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetFindingsCommandOutput}.
+   */
+  paginateGetFindings(
+    args?: GetFindingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetFindingsCommandOutput>;
+
+  /**
+   * @see {@link GetFindingsTrendsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetFindingsTrendsV2CommandOutput}.
+   */
+  paginateGetFindingsTrendsV2(
+    args: GetFindingsTrendsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetFindingsTrendsV2CommandOutput>;
+
+  /**
+   * @see {@link GetFindingsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetFindingsV2CommandOutput}.
+   */
+  paginateGetFindingsV2(
+    args?: GetFindingsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetFindingsV2CommandOutput>;
+
+  /**
+   * @see {@link GetInsightsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetInsightsCommandOutput}.
+   */
+  paginateGetInsights(
+    args?: GetInsightsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetInsightsCommandOutput>;
+
+  /**
+   * @see {@link GetRecommendedPolicyV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRecommendedPolicyV2CommandOutput}.
+   */
+  paginateGetRecommendedPolicyV2(
+    args: GetRecommendedPolicyV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRecommendedPolicyV2CommandOutput>;
+
+  /**
+   * @see {@link GetRemediationsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRemediationsV2CommandOutput}.
+   */
+  paginateGetRemediationsV2(
+    args?: GetRemediationsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRemediationsV2CommandOutput>;
+
+  /**
+   * @see {@link GetResourcesTrendsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourcesTrendsV2CommandOutput}.
+   */
+  paginateGetResourcesTrendsV2(
+    args: GetResourcesTrendsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourcesTrendsV2CommandOutput>;
+
+  /**
+   * @see {@link GetResourcesV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetResourcesV2CommandOutput}.
+   */
+  paginateGetResourcesV2(
+    args?: GetResourcesV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetResourcesV2CommandOutput>;
+
+  /**
+   * @see {@link GetSoftwareResourcesV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSoftwareResourcesV2CommandOutput}.
+   */
+  paginateGetSoftwareResourcesV2(
+    args: GetSoftwareResourcesV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSoftwareResourcesV2CommandOutput>;
+
+  /**
+   * @see {@link GetSoftwareV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSoftwareV2CommandOutput}.
+   */
+  paginateGetSoftwareV2(
+    args?: GetSoftwareV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSoftwareV2CommandOutput>;
+
+  /**
+   * @see {@link ListAggregatorsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAggregatorsV2CommandOutput}.
+   */
+  paginateListAggregatorsV2(
+    args?: ListAggregatorsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAggregatorsV2CommandOutput>;
+
+  /**
+   * @see {@link ListConfigurationPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfigurationPoliciesCommandOutput}.
+   */
+  paginateListConfigurationPolicies(
+    args?: ListConfigurationPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfigurationPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListConfigurationPolicyAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfigurationPolicyAssociationsCommandOutput}.
+   */
+  paginateListConfigurationPolicyAssociations(
+    args?: ListConfigurationPolicyAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfigurationPolicyAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListEnabledProductsForImportCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEnabledProductsForImportCommandOutput}.
+   */
+  paginateListEnabledProductsForImport(
+    args?: ListEnabledProductsForImportCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEnabledProductsForImportCommandOutput>;
+
+  /**
+   * @see {@link ListExportJobsV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportJobsV2CommandOutput}.
+   */
+  paginateListExportJobsV2(
+    args?: ListExportJobsV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportJobsV2CommandOutput>;
+
+  /**
+   * @see {@link ListExposuresByRemediationV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExposuresByRemediationV2CommandOutput}.
+   */
+  paginateListExposuresByRemediationV2(
+    args: ListExposuresByRemediationV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExposuresByRemediationV2CommandOutput>;
+
+  /**
+   * @see {@link ListFindingAggregatorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFindingAggregatorsCommandOutput}.
+   */
+  paginateListFindingAggregators(
+    args?: ListFindingAggregatorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFindingAggregatorsCommandOutput>;
+
+  /**
+   * @see {@link ListFreeTrialStatusesV2Command}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFreeTrialStatusesV2CommandOutput}.
+   */
+  paginateListFreeTrialStatusesV2(
+    args?: ListFreeTrialStatusesV2CommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFreeTrialStatusesV2CommandOutput>;
+
+  /**
+   * @see {@link ListInvitationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListInvitationsCommandOutput}.
+   */
+  paginateListInvitations(
+    args?: ListInvitationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListInvitationsCommandOutput>;
+
+  /**
+   * @see {@link ListMembersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMembersCommandOutput}.
+   */
+  paginateListMembers(
+    args?: ListMembersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMembersCommandOutput>;
+
+  /**
+   * @see {@link ListOrganizationAdminAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOrganizationAdminAccountsCommandOutput}.
+   */
+  paginateListOrganizationAdminAccounts(
+    args?: ListOrganizationAdminAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOrganizationAdminAccountsCommandOutput>;
+
+  /**
+   * @see {@link ListSecurityControlDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSecurityControlDefinitionsCommandOutput}.
+   */
+  paginateListSecurityControlDefinitions(
+    args?: ListSecurityControlDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSecurityControlDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListStandardsControlAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStandardsControlAssociationsCommandOutput}.
+   */
+  paginateListStandardsControlAssociations(
+    args: ListStandardsControlAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStandardsControlAssociationsCommandOutput>;
+}
+
+/**
+ * <p>Security Hub CSPM provides you with a comprehensive view of your security state in Amazon Web Services and helps
+ *            you assess your Amazon Web Services environment against security industry standards and best practices.</p>
+ *          <p>Security Hub CSPM collects security data across Amazon Web Services accounts, Amazon Web Services services, and
+ *             supported third-party products and helps you analyze your security trends and identify the highest priority security
+ *             issues.</p>
+ *          <p>To help you manage the security state of your organization, Security Hub CSPM supports multiple security standards.
+ *            These include the Amazon Web Services Foundational Security Best Practices (FSBP) standard developed by Amazon Web Services,
+ *             and external compliance frameworks such as the Center for Internet Security (CIS), the Payment Card Industry Data
+ *             Security Standard (PCI DSS), and the National Institute of Standards and Technology (NIST). Each standard includes
+ *             several security controls, each of which represents a security best practice. Security Hub CSPM runs checks against
+ *             security controls and generates control findings to help you assess your compliance against security best practices.</p>
+ *          <p>In addition to generating control findings, Security Hub CSPM also receives findings from other Amazon Web Services services,
+ *             such as Amazon GuardDuty and Amazon Inspector, and
+ *             supported third-party products. This gives you a single pane of glass into a variety of security-related issues. You
+ *             can also send Security Hub CSPM findings to other Amazon Web Services services and supported third-party products.</p>
+ *          <p>Security Hub CSPM offers automation features that help you triage and remediate security issues. For example,
+ *            you can use automation rules to automatically update critical findings when a security check fails. You can also leverage the integration with
+ *            Amazon EventBridge  to trigger automatic responses to specific findings.</p>
+ *          <p>This guide, the <i>Security Hub CSPM API Reference</i>, provides
+ *            information about the Security Hub CSPM API. This includes supported resources, HTTP methods, parameters,
+ *            and schemas. If you're new to Security Hub CSPM, you might find it helpful to also review the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">
+ *                <i>Security Hub CSPM User Guide</i>
+ *             </a>. The
+ *            user guide explains key concepts and provides procedures
+ *            that demonstrate how to use Security Hub CSPM features. It also provides information about topics such as
+ *            integrating Security Hub CSPM with other Amazon Web Services services.</p>
+ *          <p>In addition to interacting with Security Hub CSPM  by making calls to the Security Hub CSPM API, you can
+ *            use a current version of an Amazon Web Services command line tool or SDK. Amazon Web Services provides tools
+ *             and SDKs that consist of libraries and sample code for various languages and platforms, such as PowerShell,
+ *            Java, Go, Python, C++, and .NET. These tools and SDKs provide convenient, programmatic access to
+ *            Security Hub CSPM  and other Amazon Web Services services . They also handle tasks such as signing requests,
+ *            managing errors, and retrying requests automatically. For information about installing and using the Amazon Web Services  tools
+ *            and SDKs, see <a href="http://aws.amazon.com/developer/tools/">Tools to Build on Amazon Web Services</a>.</p>
+ *          <p>With the exception of operations that are related to central configuration, Security Hub CSPM API requests are executed only in
+ *          the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change
+ *          that results from the operation is applied only to that Region. To make the same change in
+ *          other Regions, call the same API operation in each Region in which you want to apply the change. When you use central configuration,
+ * API requests for enabling Security Hub CSPM, standards, and controls are executed in the home Region and all linked Regions. For a list of
+ * central configuration operations, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html#central-configuration-concepts">Central configuration
+ * terms and concepts</a> section of the <i>Security Hub CSPM User Guide</i>.</p>
+ *          <p>The following throttling limits apply to Security Hub CSPM API operations.</p>
  *          <ul>
  *             <li>
  *                <p>
- *                   <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1
- *                request per second, <code>BurstLimit</code> of 1 request per second.</p>
+ *                   <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per
+ *                second. <code>BurstLimit</code> of 1 request per second.</p>
  *             </li>
  *             <li>
  *                <p>
@@ -289,2055 +3406,25 @@ import { SecurityHubClient } from "./SecurityHubClient";
  *             </li>
  *             <li>
  *                <p>
- *                   <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per
- *                second. <code>BurstLimit</code> of 5 requests per second.</p>
+ *                   <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.
+ *             <code>BurstLimit</code> of 30 requests per second.</p>
  *             </li>
  *             <li>
  *                <p>
- *                   <code>UpdateStandardsControl</code> - <code>RateLimit</code> of
- *                1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>
+ *                   <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.
+ *             <code>BurstLimit</code> of 30 requests per second.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per
+ *                second. <code>BurstLimit</code> of 5 requests per second.</p>
  *             </li>
  *             <li>
  *                <p>All other operations - <code>RateLimit</code> of 10 requests per second.
  *                   <code>BurstLimit</code> of 30 requests per second.</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class SecurityHub extends SecurityHubClient {
-  /**
-   * <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator
-   *          account that the invitation was sent from.</p>
-   *          <p>This operation is only used by member accounts that are not added through
-   *          Organizations.</p>
-   *          <p>When the member account accepts the invitation, permission is granted to the administrator
-   *          account to view findings generated in the member account.</p>
-   */
-  public acceptAdministratorInvitation(
-    args: AcceptAdministratorInvitationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AcceptAdministratorInvitationCommandOutput>;
-  public acceptAdministratorInvitation(
-    args: AcceptAdministratorInvitationCommandInput,
-    cb: (err: any, data?: AcceptAdministratorInvitationCommandOutput) => void
-  ): void;
-  public acceptAdministratorInvitation(
-    args: AcceptAdministratorInvitationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AcceptAdministratorInvitationCommandOutput) => void
-  ): void;
-  public acceptAdministratorInvitation(
-    args: AcceptAdministratorInvitationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AcceptAdministratorInvitationCommandOutput) => void),
-    cb?: (err: any, data?: AcceptAdministratorInvitationCommandOutput) => void
-  ): Promise<AcceptAdministratorInvitationCommandOutput> | void {
-    const command = new AcceptAdministratorInvitationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * @deprecated
-   *
-   * <p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p>
-   *          <p>The Security Hub console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p>
-   *          <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator
-   *          account that the invitation was sent from.</p>
-   *          <p>This operation is only used by member accounts that are not added through
-   *          Organizations.</p>
-   *          <p>When the member account accepts the invitation, permission is granted to the administrator
-   *          account to view findings generated in the member account.</p>
-   */
-  public acceptInvitation(
-    args: AcceptInvitationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AcceptInvitationCommandOutput>;
-  public acceptInvitation(
-    args: AcceptInvitationCommandInput,
-    cb: (err: any, data?: AcceptInvitationCommandOutput) => void
-  ): void;
-  public acceptInvitation(
-    args: AcceptInvitationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AcceptInvitationCommandOutput) => void
-  ): void;
-  public acceptInvitation(
-    args: AcceptInvitationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AcceptInvitationCommandOutput) => void),
-    cb?: (err: any, data?: AcceptInvitationCommandOutput) => void
-  ): Promise<AcceptInvitationCommandOutput> | void {
-    const command = new AcceptInvitationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables the standards specified by the provided
-   *          <code>StandardsSubscriptionArns</code>.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>Security Hub User
-   *          Guide</i>.</p>
-   */
-  public batchDisableStandards(
-    args: BatchDisableStandardsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchDisableStandardsCommandOutput>;
-  public batchDisableStandards(
-    args: BatchDisableStandardsCommandInput,
-    cb: (err: any, data?: BatchDisableStandardsCommandOutput) => void
-  ): void;
-  public batchDisableStandards(
-    args: BatchDisableStandardsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchDisableStandardsCommandOutput) => void
-  ): void;
-  public batchDisableStandards(
-    args: BatchDisableStandardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchDisableStandardsCommandOutput) => void),
-    cb?: (err: any, data?: BatchDisableStandardsCommandOutput) => void
-  ): Promise<BatchDisableStandardsCommandOutput> | void {
-    const command = new BatchDisableStandardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the
-   *          ARN for a standard, use the <code>DescribeStandards</code>
-   *          operation.</p>
-   *          <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a>
-   *          section of the <i>Security Hub User Guide</i>.</p>
-   */
-  public batchEnableStandards(
-    args: BatchEnableStandardsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchEnableStandardsCommandOutput>;
-  public batchEnableStandards(
-    args: BatchEnableStandardsCommandInput,
-    cb: (err: any, data?: BatchEnableStandardsCommandOutput) => void
-  ): void;
-  public batchEnableStandards(
-    args: BatchEnableStandardsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchEnableStandardsCommandOutput) => void
-  ): void;
-  public batchEnableStandards(
-    args: BatchEnableStandardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchEnableStandardsCommandOutput) => void),
-    cb?: (err: any, data?: BatchEnableStandardsCommandOutput) => void
-  ): Promise<BatchEnableStandardsCommandOutput> | void {
-    const command = new BatchEnableStandardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports security findings generated from an integrated product into Security Hub.
-   *          This action is requested by the integrated product to import its findings into
-   *          Security Hub.</p>
-   *          <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding
-   *          larger than 240 Kb.</p>
-   *          <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update
-   *          the following finding fields and objects, which Security Hub customers use to manage their
-   *          investigation workflow.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>Note</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>UserDefinedFields</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>VerificationState</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Workflow</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p>Finding providers also should not use <code>BatchImportFindings</code> to update the following attributes.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>Confidence</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Criticality</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>RelatedFindings</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Severity</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Types</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p>Instead, finding providers use <code>FindingProviderFields</code> to provide values for these attributes.</p>
-   */
-  public batchImportFindings(
-    args: BatchImportFindingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchImportFindingsCommandOutput>;
-  public batchImportFindings(
-    args: BatchImportFindingsCommandInput,
-    cb: (err: any, data?: BatchImportFindingsCommandOutput) => void
-  ): void;
-  public batchImportFindings(
-    args: BatchImportFindingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchImportFindingsCommandOutput) => void
-  ): void;
-  public batchImportFindings(
-    args: BatchImportFindingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchImportFindingsCommandOutput) => void),
-    cb?: (err: any, data?: BatchImportFindingsCommandOutput) => void
-  ): Promise<BatchImportFindingsCommandOutput> | void {
-    const command = new BatchImportFindingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Used by Security Hub customers to update information about their investigation into a finding.
-   *          Requested by administrator accounts or member accounts. Administrator accounts can update findings for
-   *          their account and their member accounts. Member accounts can update findings for their
-   *          account.</p>
-   *          <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of
-   *             <code>UpdatedAt</code> for a finding.</p>
-   *          <p>Administrator and member accounts can use <code>BatchUpdateFindings</code> to update the
-   *          following finding fields and objects.</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>Confidence</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Criticality</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Note</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>RelatedFindings</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Severity</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Types</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>UserDefinedFields</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>VerificationState</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Workflow</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p>You can configure IAM policies to restrict access to fields and field values. For
-   *          example, you might not want member accounts to be able to suppress findings or change the
-   *          finding severity. See <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the
-   *          <i>Security Hub User Guide</i>.</p>
-   */
-  public batchUpdateFindings(
-    args: BatchUpdateFindingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<BatchUpdateFindingsCommandOutput>;
-  public batchUpdateFindings(
-    args: BatchUpdateFindingsCommandInput,
-    cb: (err: any, data?: BatchUpdateFindingsCommandOutput) => void
-  ): void;
-  public batchUpdateFindings(
-    args: BatchUpdateFindingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: BatchUpdateFindingsCommandOutput) => void
-  ): void;
-  public batchUpdateFindings(
-    args: BatchUpdateFindingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchUpdateFindingsCommandOutput) => void),
-    cb?: (err: any, data?: BatchUpdateFindingsCommandOutput) => void
-  ): Promise<BatchUpdateFindingsCommandOutput> | void {
-    const command = new BatchUpdateFindingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a custom action target in Security Hub.</p>
-   *          <p>You can use custom actions on findings and insights in Security Hub to trigger target actions
-   *          in Amazon CloudWatch Events.</p>
-   */
-  public createActionTarget(
-    args: CreateActionTargetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateActionTargetCommandOutput>;
-  public createActionTarget(
-    args: CreateActionTargetCommandInput,
-    cb: (err: any, data?: CreateActionTargetCommandOutput) => void
-  ): void;
-  public createActionTarget(
-    args: CreateActionTargetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateActionTargetCommandOutput) => void
-  ): void;
-  public createActionTarget(
-    args: CreateActionTargetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateActionTargetCommandOutput) => void),
-    cb?: (err: any, data?: CreateActionTargetCommandOutput) => void
-  ): Promise<CreateActionTargetCommandOutput> | void {
-    const command = new CreateActionTargetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Used to enable finding aggregation. Must be called from the aggregation Region.</p>
-   *          <p>For more details about cross-Region replication, see <a href="securityhub/latest/userguide/finding-aggregation.html">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>.
-   *       </p>
-   */
-  public createFindingAggregator(
-    args: CreateFindingAggregatorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateFindingAggregatorCommandOutput>;
-  public createFindingAggregator(
-    args: CreateFindingAggregatorCommandInput,
-    cb: (err: any, data?: CreateFindingAggregatorCommandOutput) => void
-  ): void;
-  public createFindingAggregator(
-    args: CreateFindingAggregatorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateFindingAggregatorCommandOutput) => void
-  ): void;
-  public createFindingAggregator(
-    args: CreateFindingAggregatorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFindingAggregatorCommandOutput) => void),
-    cb?: (err: any, data?: CreateFindingAggregatorCommandOutput) => void
-  ): Promise<CreateFindingAggregatorCommandOutput> | void {
-    const command = new CreateFindingAggregatorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate
-   *          to a security issue that requires attention or remediation.</p>
-   *          <p>To group the related findings in the insight, use the
-   *          <code>GroupByAttribute</code>.</p>
-   */
-  public createInsight(
-    args: CreateInsightCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateInsightCommandOutput>;
-  public createInsight(
-    args: CreateInsightCommandInput,
-    cb: (err: any, data?: CreateInsightCommandOutput) => void
-  ): void;
-  public createInsight(
-    args: CreateInsightCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateInsightCommandOutput) => void
-  ): void;
-  public createInsight(
-    args: CreateInsightCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateInsightCommandOutput) => void),
-    cb?: (err: any, data?: CreateInsightCommandOutput) => void
-  ): Promise<CreateInsightCommandOutput> | void {
-    const command = new CreateInsightCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a member association in Security Hub between the specified accounts and the account
-   *          used to make the request, which is the administrator account. If you are integrated with
-   *          Organizations, then the administrator account is designated by the organization management account.</p>
-   *          <p>
-   *             <code>CreateMembers</code> is always used to add accounts that are not organization
-   *          members.</p>
-   *          <p>For accounts that are managed using Organizations, <code>CreateMembers</code> is only used
-   *          in the following cases:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Security Hub is not configured to automatically add new organization accounts.</p>
-   *             </li>
-   *             <li>
-   *                <p>The account was disassociated or deleted in Security Hub.</p>
-   *             </li>
-   *          </ul>
-   *          <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you
-   *          can use the <code>EnableSecurityHub</code> operation.</p>
-   *          <p>For accounts that are not organization members, you create the account association and
-   *          then send an invitation to the member account. To send the invitation, you use the
-   *                <code>InviteMembers</code> operation. If the account owner accepts
-   *          the invitation, the account becomes a member account in Security Hub.</p>
-   *          <p>Accounts that are managed using Organizations do not receive an invitation. They
-   *          automatically become a member account in Security Hub.</p>
-   *          <ul>
-   *             <li>
-   *                <p>If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p>
-   *             </li>
-   *             <li>
-   *                <p>For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.</p>
-   *             </li>
-   *          </ul>
-   *
-   *          <p>A permissions policy is added that permits the administrator account to view the findings
-   *          generated in the member account.</p>
-   *          <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>
-   */
-  public createMembers(
-    args: CreateMembersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateMembersCommandOutput>;
-  public createMembers(
-    args: CreateMembersCommandInput,
-    cb: (err: any, data?: CreateMembersCommandOutput) => void
-  ): void;
-  public createMembers(
-    args: CreateMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateMembersCommandOutput) => void
-  ): void;
-  public createMembers(
-    args: CreateMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateMembersCommandOutput) => void),
-    cb?: (err: any, data?: CreateMembersCommandOutput) => void
-  ): Promise<CreateMembersCommandOutput> | void {
-    const command = new CreateMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Declines invitations to become a member account.</p>
-   *          <p>This operation is only used by accounts that are not part of an organization.
-   *          Organization accounts do not receive invitations.</p>
-   */
-  public declineInvitations(
-    args: DeclineInvitationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeclineInvitationsCommandOutput>;
-  public declineInvitations(
-    args: DeclineInvitationsCommandInput,
-    cb: (err: any, data?: DeclineInvitationsCommandOutput) => void
-  ): void;
-  public declineInvitations(
-    args: DeclineInvitationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeclineInvitationsCommandOutput) => void
-  ): void;
-  public declineInvitations(
-    args: DeclineInvitationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeclineInvitationsCommandOutput) => void),
-    cb?: (err: any, data?: DeclineInvitationsCommandOutput) => void
-  ): Promise<DeclineInvitationsCommandOutput> | void {
-    const command = new DeclineInvitationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a custom action target from Security Hub.</p>
-   *          <p>Deleting a custom action target does not affect any findings or insights that were
-   *          already sent to Amazon CloudWatch Events using the custom action.</p>
-   */
-  public deleteActionTarget(
-    args: DeleteActionTargetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteActionTargetCommandOutput>;
-  public deleteActionTarget(
-    args: DeleteActionTargetCommandInput,
-    cb: (err: any, data?: DeleteActionTargetCommandOutput) => void
-  ): void;
-  public deleteActionTarget(
-    args: DeleteActionTargetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteActionTargetCommandOutput) => void
-  ): void;
-  public deleteActionTarget(
-    args: DeleteActionTargetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteActionTargetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteActionTargetCommandOutput) => void
-  ): Promise<DeleteActionTargetCommandOutput> | void {
-    const command = new DeleteActionTargetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation.</p>
-   *          <p>When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated.
-   *       </p>
-   */
-  public deleteFindingAggregator(
-    args: DeleteFindingAggregatorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteFindingAggregatorCommandOutput>;
-  public deleteFindingAggregator(
-    args: DeleteFindingAggregatorCommandInput,
-    cb: (err: any, data?: DeleteFindingAggregatorCommandOutput) => void
-  ): void;
-  public deleteFindingAggregator(
-    args: DeleteFindingAggregatorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteFindingAggregatorCommandOutput) => void
-  ): void;
-  public deleteFindingAggregator(
-    args: DeleteFindingAggregatorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFindingAggregatorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFindingAggregatorCommandOutput) => void
-  ): Promise<DeleteFindingAggregatorCommandOutput> | void {
-    const command = new DeleteFindingAggregatorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the insight specified by the <code>InsightArn</code>.</p>
-   */
-  public deleteInsight(
-    args: DeleteInsightCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteInsightCommandOutput>;
-  public deleteInsight(
-    args: DeleteInsightCommandInput,
-    cb: (err: any, data?: DeleteInsightCommandOutput) => void
-  ): void;
-  public deleteInsight(
-    args: DeleteInsightCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteInsightCommandOutput) => void
-  ): void;
-  public deleteInsight(
-    args: DeleteInsightCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInsightCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInsightCommandOutput) => void
-  ): Promise<DeleteInsightCommandOutput> | void {
-    const command = new DeleteInsightCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes invitations received by the Amazon Web Services account to become a member account.</p>
-   *          <p>This operation is only used by accounts that are not part of an organization.
-   *          Organization accounts do not receive invitations.</p>
-   */
-  public deleteInvitations(
-    args: DeleteInvitationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteInvitationsCommandOutput>;
-  public deleteInvitations(
-    args: DeleteInvitationsCommandInput,
-    cb: (err: any, data?: DeleteInvitationsCommandOutput) => void
-  ): void;
-  public deleteInvitations(
-    args: DeleteInvitationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteInvitationsCommandOutput) => void
-  ): void;
-  public deleteInvitations(
-    args: DeleteInvitationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInvitationsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInvitationsCommandOutput) => void
-  ): Promise<DeleteInvitationsCommandOutput> | void {
-    const command = new DeleteInvitationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified member accounts from Security Hub.</p>
-   *          <p>Can be used to delete member accounts that belong to an organization as well as member
-   *          accounts that were invited manually.</p>
-   */
-  public deleteMembers(
-    args: DeleteMembersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteMembersCommandOutput>;
-  public deleteMembers(
-    args: DeleteMembersCommandInput,
-    cb: (err: any, data?: DeleteMembersCommandOutput) => void
-  ): void;
-  public deleteMembers(
-    args: DeleteMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteMembersCommandOutput) => void
-  ): void;
-  public deleteMembers(
-    args: DeleteMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMembersCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMembersCommandOutput) => void
-  ): Promise<DeleteMembersCommandOutput> | void {
-    const command = new DeleteMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the custom action targets in Security Hub in your account.</p>
-   */
-  public describeActionTargets(
-    args: DescribeActionTargetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeActionTargetsCommandOutput>;
-  public describeActionTargets(
-    args: DescribeActionTargetsCommandInput,
-    cb: (err: any, data?: DescribeActionTargetsCommandOutput) => void
-  ): void;
-  public describeActionTargets(
-    args: DescribeActionTargetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeActionTargetsCommandOutput) => void
-  ): void;
-  public describeActionTargets(
-    args: DescribeActionTargetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeActionTargetsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeActionTargetsCommandOutput) => void
-  ): Promise<DescribeActionTargetsCommandOutput> | void {
-    const command = new DescribeActionTargetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns details about the Hub resource in your account, including the
-   *          <code>HubArn</code> and the time when you enabled Security Hub.</p>
-   */
-  public describeHub(args: DescribeHubCommandInput, options?: __HttpHandlerOptions): Promise<DescribeHubCommandOutput>;
-  public describeHub(args: DescribeHubCommandInput, cb: (err: any, data?: DescribeHubCommandOutput) => void): void;
-  public describeHub(
-    args: DescribeHubCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeHubCommandOutput) => void
-  ): void;
-  public describeHub(
-    args: DescribeHubCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeHubCommandOutput) => void),
-    cb?: (err: any, data?: DescribeHubCommandOutput) => void
-  ): Promise<DescribeHubCommandOutput> | void {
-    const command = new DescribeHubCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the Organizations configuration for Security Hub. Can only be
-   *          called from a Security Hub administrator account.</p>
-   */
-  public describeOrganizationConfiguration(
-    args: DescribeOrganizationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeOrganizationConfigurationCommandOutput>;
-  public describeOrganizationConfiguration(
-    args: DescribeOrganizationConfigurationCommandInput,
-    cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
-  ): void;
-  public describeOrganizationConfiguration(
-    args: DescribeOrganizationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
-  ): void;
-  public describeOrganizationConfiguration(
-    args: DescribeOrganizationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
-  ): Promise<DescribeOrganizationConfigurationCommandOutput> | void {
-    const command = new DescribeOrganizationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about product integrations in Security Hub.</p>
-   *          <p>You can optionally provide an integration ARN. If you provide an integration ARN, then
-   *          the results only include that integration.</p>
-   *          <p>If you do not provide an integration ARN, then the results include all of the available
-   *          product integrations. </p>
-   */
-  public describeProducts(
-    args: DescribeProductsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeProductsCommandOutput>;
-  public describeProducts(
-    args: DescribeProductsCommandInput,
-    cb: (err: any, data?: DescribeProductsCommandOutput) => void
-  ): void;
-  public describeProducts(
-    args: DescribeProductsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeProductsCommandOutput) => void
-  ): void;
-  public describeProducts(
-    args: DescribeProductsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeProductsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeProductsCommandOutput) => void
-  ): Promise<DescribeProductsCommandOutput> | void {
-    const command = new DescribeProductsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the available standards in Security Hub.</p>
-   *          <p>For each standard, the results include the standard ARN, the name, and a description. </p>
-   */
-  public describeStandards(
-    args: DescribeStandardsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeStandardsCommandOutput>;
-  public describeStandards(
-    args: DescribeStandardsCommandInput,
-    cb: (err: any, data?: DescribeStandardsCommandOutput) => void
-  ): void;
-  public describeStandards(
-    args: DescribeStandardsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeStandardsCommandOutput) => void
-  ): void;
-  public describeStandards(
-    args: DescribeStandardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStandardsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStandardsCommandOutput) => void
-  ): Promise<DescribeStandardsCommandOutput> | void {
-    const command = new DescribeStandardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of security standards controls.</p>
-   *          <p>For each control, the results include information about whether it is currently enabled,
-   *          the severity, and a link to remediation information.</p>
-   */
-  public describeStandardsControls(
-    args: DescribeStandardsControlsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeStandardsControlsCommandOutput>;
-  public describeStandardsControls(
-    args: DescribeStandardsControlsCommandInput,
-    cb: (err: any, data?: DescribeStandardsControlsCommandOutput) => void
-  ): void;
-  public describeStandardsControls(
-    args: DescribeStandardsControlsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeStandardsControlsCommandOutput) => void
-  ): void;
-  public describeStandardsControls(
-    args: DescribeStandardsControlsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeStandardsControlsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeStandardsControlsCommandOutput) => void
-  ): Promise<DescribeStandardsControlsCommandOutput> | void {
-    const command = new DescribeStandardsControlsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables the integration of the specified product with Security Hub. After the integration is
-   *          disabled, findings from that product are no longer sent to Security Hub.</p>
-   */
-  public disableImportFindingsForProduct(
-    args: DisableImportFindingsForProductCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisableImportFindingsForProductCommandOutput>;
-  public disableImportFindingsForProduct(
-    args: DisableImportFindingsForProductCommandInput,
-    cb: (err: any, data?: DisableImportFindingsForProductCommandOutput) => void
-  ): void;
-  public disableImportFindingsForProduct(
-    args: DisableImportFindingsForProductCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisableImportFindingsForProductCommandOutput) => void
-  ): void;
-  public disableImportFindingsForProduct(
-    args: DisableImportFindingsForProductCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableImportFindingsForProductCommandOutput) => void),
-    cb?: (err: any, data?: DisableImportFindingsForProductCommandOutput) => void
-  ): Promise<DisableImportFindingsForProductCommandOutput> | void {
-    const command = new DisableImportFindingsForProductCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables a Security Hub administrator account. Can only be called by the organization
-   *          management account.</p>
-   */
-  public disableOrganizationAdminAccount(
-    args: DisableOrganizationAdminAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisableOrganizationAdminAccountCommandOutput>;
-  public disableOrganizationAdminAccount(
-    args: DisableOrganizationAdminAccountCommandInput,
-    cb: (err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void
-  ): void;
-  public disableOrganizationAdminAccount(
-    args: DisableOrganizationAdminAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void
-  ): void;
-  public disableOrganizationAdminAccount(
-    args: DisableOrganizationAdminAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void),
-    cb?: (err: any, data?: DisableOrganizationAdminAccountCommandOutput) => void
-  ): Promise<DisableOrganizationAdminAccountCommandOutput> | void {
-    const command = new DisableOrganizationAdminAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables Security Hub in your account only in the current Region. To disable Security Hub in all
-   *          Regions, you must submit one request per Region where you have enabled Security Hub.</p>
-   *          <p>When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated
-   *          member accounts.</p>
-   *          <p>When you disable Security Hub, your existing findings and insights and any Security Hub configuration
-   *          settings are deleted after 90 days and cannot be recovered. Any standards that were enabled
-   *          are disabled, and your administrator and member account associations are removed.</p>
-   *          <p>If you want to save your existing findings, you must export them before you disable
-   *          Security Hub.</p>
-   */
-  public disableSecurityHub(
-    args: DisableSecurityHubCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisableSecurityHubCommandOutput>;
-  public disableSecurityHub(
-    args: DisableSecurityHubCommandInput,
-    cb: (err: any, data?: DisableSecurityHubCommandOutput) => void
-  ): void;
-  public disableSecurityHub(
-    args: DisableSecurityHubCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisableSecurityHubCommandOutput) => void
-  ): void;
-  public disableSecurityHub(
-    args: DisableSecurityHubCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableSecurityHubCommandOutput) => void),
-    cb?: (err: any, data?: DisableSecurityHubCommandOutput) => void
-  ): Promise<DisableSecurityHubCommandOutput> | void {
-    const command = new DisableSecurityHubCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disassociates the current Security Hub member account from the associated administrator
-   *          account.</p>
-   *          <p>This operation is only used by accounts that are not part of an organization. For
-   *          organization accounts, only the administrator account can
-   *          disassociate a member account.</p>
-   */
-  public disassociateFromAdministratorAccount(
-    args: DisassociateFromAdministratorAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateFromAdministratorAccountCommandOutput>;
-  public disassociateFromAdministratorAccount(
-    args: DisassociateFromAdministratorAccountCommandInput,
-    cb: (err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void
-  ): void;
-  public disassociateFromAdministratorAccount(
-    args: DisassociateFromAdministratorAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void
-  ): void;
-  public disassociateFromAdministratorAccount(
-    args: DisassociateFromAdministratorAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateFromAdministratorAccountCommandOutput) => void
-  ): Promise<DisassociateFromAdministratorAccountCommandOutput> | void {
-    const command = new DisassociateFromAdministratorAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * @deprecated
-   *
-   * <p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p>
-   *          <p>The Security Hub console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p>
-   *          <p>Disassociates the current Security Hub member account from the associated administrator
-   *          account.</p>
-   *          <p>This operation is only used by accounts that are not part of an organization. For
-   *          organization accounts, only the administrator account can
-   *          disassociate a member account.</p>
-   */
-  public disassociateFromMasterAccount(
-    args: DisassociateFromMasterAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateFromMasterAccountCommandOutput>;
-  public disassociateFromMasterAccount(
-    args: DisassociateFromMasterAccountCommandInput,
-    cb: (err: any, data?: DisassociateFromMasterAccountCommandOutput) => void
-  ): void;
-  public disassociateFromMasterAccount(
-    args: DisassociateFromMasterAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateFromMasterAccountCommandOutput) => void
-  ): void;
-  public disassociateFromMasterAccount(
-    args: DisassociateFromMasterAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateFromMasterAccountCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateFromMasterAccountCommandOutput) => void
-  ): Promise<DisassociateFromMasterAccountCommandOutput> | void {
-    const command = new DisassociateFromMasterAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disassociates the specified member accounts from the associated administrator account.</p>
-   *          <p>Can be used to disassociate both accounts that are managed using Organizations and accounts that
-   *          were invited manually.</p>
-   */
-  public disassociateMembers(
-    args: DisassociateMembersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisassociateMembersCommandOutput>;
-  public disassociateMembers(
-    args: DisassociateMembersCommandInput,
-    cb: (err: any, data?: DisassociateMembersCommandOutput) => void
-  ): void;
-  public disassociateMembers(
-    args: DisassociateMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisassociateMembersCommandOutput) => void
-  ): void;
-  public disassociateMembers(
-    args: DisassociateMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateMembersCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateMembersCommandOutput) => void
-  ): Promise<DisassociateMembersCommandOutput> | void {
-    const command = new DisassociateMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables the integration of a partner product with Security Hub. Integrated products send
-   *          findings to Security Hub.</p>
-   *          <p>When you enable a product integration, a permissions policy that grants permission for
-   *          the product to send findings to Security Hub is applied.</p>
-   */
-  public enableImportFindingsForProduct(
-    args: EnableImportFindingsForProductCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<EnableImportFindingsForProductCommandOutput>;
-  public enableImportFindingsForProduct(
-    args: EnableImportFindingsForProductCommandInput,
-    cb: (err: any, data?: EnableImportFindingsForProductCommandOutput) => void
-  ): void;
-  public enableImportFindingsForProduct(
-    args: EnableImportFindingsForProductCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: EnableImportFindingsForProductCommandOutput) => void
-  ): void;
-  public enableImportFindingsForProduct(
-    args: EnableImportFindingsForProductCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableImportFindingsForProductCommandOutput) => void),
-    cb?: (err: any, data?: EnableImportFindingsForProductCommandOutput) => void
-  ): Promise<EnableImportFindingsForProductCommandOutput> | void {
-    const command = new EnableImportFindingsForProductCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Designates the Security Hub administrator account for an organization. Can only be called by
-   *          the organization management account.</p>
-   */
-  public enableOrganizationAdminAccount(
-    args: EnableOrganizationAdminAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<EnableOrganizationAdminAccountCommandOutput>;
-  public enableOrganizationAdminAccount(
-    args: EnableOrganizationAdminAccountCommandInput,
-    cb: (err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void
-  ): void;
-  public enableOrganizationAdminAccount(
-    args: EnableOrganizationAdminAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void
-  ): void;
-  public enableOrganizationAdminAccount(
-    args: EnableOrganizationAdminAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void),
-    cb?: (err: any, data?: EnableOrganizationAdminAccountCommandOutput) => void
-  ): Promise<EnableOrganizationAdminAccountCommandOutput> | void {
-    const command = new EnableOrganizationAdminAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables Security Hub for your account in the current Region or the Region you specify in the
-   *          request.</p>
-   *          <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings
-   *          from other services that are integrated with Security Hub.</p>
-   *          <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also
-   *          automatically enable the following standards.</p>
-   *          <ul>
-   *             <li>
-   *                <p>CIS Amazon Web Services Foundations</p>
-   *             </li>
-   *             <li>
-   *                <p>Amazon Web Services Foundational Security Best Practices</p>
-   *             </li>
-   *          </ul>
-   *          <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p>
-   *          <p>To not enable the automatically enabled standards, set
-   *             <code>EnableDefaultStandards</code> to <code>false</code>.</p>
-   *          <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the
-   *                <code>BatchDisableStandards</code> operation.</p>
-   *          <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>
-   */
-  public enableSecurityHub(
-    args: EnableSecurityHubCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<EnableSecurityHubCommandOutput>;
-  public enableSecurityHub(
-    args: EnableSecurityHubCommandInput,
-    cb: (err: any, data?: EnableSecurityHubCommandOutput) => void
-  ): void;
-  public enableSecurityHub(
-    args: EnableSecurityHubCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: EnableSecurityHubCommandOutput) => void
-  ): void;
-  public enableSecurityHub(
-    args: EnableSecurityHubCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableSecurityHubCommandOutput) => void),
-    cb?: (err: any, data?: EnableSecurityHubCommandOutput) => void
-  ): Promise<EnableSecurityHubCommandOutput> | void {
-    const command = new EnableSecurityHubCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides the details for the Security Hub administrator account for the current member account.</p>
-   *          <p>Can be used by both member accounts that are managed using Organizations and accounts that were
-   *          invited manually.</p>
-   */
-  public getAdministratorAccount(
-    args: GetAdministratorAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAdministratorAccountCommandOutput>;
-  public getAdministratorAccount(
-    args: GetAdministratorAccountCommandInput,
-    cb: (err: any, data?: GetAdministratorAccountCommandOutput) => void
-  ): void;
-  public getAdministratorAccount(
-    args: GetAdministratorAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAdministratorAccountCommandOutput) => void
-  ): void;
-  public getAdministratorAccount(
-    args: GetAdministratorAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAdministratorAccountCommandOutput) => void),
-    cb?: (err: any, data?: GetAdministratorAccountCommandOutput) => void
-  ): Promise<GetAdministratorAccountCommandOutput> | void {
-    const command = new GetAdministratorAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of the standards that are currently enabled.</p>
-   */
-  public getEnabledStandards(
-    args: GetEnabledStandardsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetEnabledStandardsCommandOutput>;
-  public getEnabledStandards(
-    args: GetEnabledStandardsCommandInput,
-    cb: (err: any, data?: GetEnabledStandardsCommandOutput) => void
-  ): void;
-  public getEnabledStandards(
-    args: GetEnabledStandardsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEnabledStandardsCommandOutput) => void
-  ): void;
-  public getEnabledStandards(
-    args: GetEnabledStandardsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEnabledStandardsCommandOutput) => void),
-    cb?: (err: any, data?: GetEnabledStandardsCommandOutput) => void
-  ): Promise<GetEnabledStandardsCommandOutput> | void {
-    const command = new GetEnabledStandardsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the current finding aggregation configuration.</p>
-   */
-  public getFindingAggregator(
-    args: GetFindingAggregatorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetFindingAggregatorCommandOutput>;
-  public getFindingAggregator(
-    args: GetFindingAggregatorCommandInput,
-    cb: (err: any, data?: GetFindingAggregatorCommandOutput) => void
-  ): void;
-  public getFindingAggregator(
-    args: GetFindingAggregatorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetFindingAggregatorCommandOutput) => void
-  ): void;
-  public getFindingAggregator(
-    args: GetFindingAggregatorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFindingAggregatorCommandOutput) => void),
-    cb?: (err: any, data?: GetFindingAggregatorCommandOutput) => void
-  ): Promise<GetFindingAggregatorCommandOutput> | void {
-    const command = new GetFindingAggregatorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of findings that match the specified criteria.</p>
-   *          <p>If finding aggregation is enabled, then when you call <code>GetFindings</code> from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.</p>
-   */
-  public getFindings(args: GetFindingsCommandInput, options?: __HttpHandlerOptions): Promise<GetFindingsCommandOutput>;
-  public getFindings(args: GetFindingsCommandInput, cb: (err: any, data?: GetFindingsCommandOutput) => void): void;
-  public getFindings(
-    args: GetFindingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetFindingsCommandOutput) => void
-  ): void;
-  public getFindings(
-    args: GetFindingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFindingsCommandOutput) => void),
-    cb?: (err: any, data?: GetFindingsCommandOutput) => void
-  ): Promise<GetFindingsCommandOutput> | void {
-    const command = new GetFindingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the results of the Security Hub insight specified by the insight ARN.</p>
-   */
-  public getInsightResults(
-    args: GetInsightResultsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInsightResultsCommandOutput>;
-  public getInsightResults(
-    args: GetInsightResultsCommandInput,
-    cb: (err: any, data?: GetInsightResultsCommandOutput) => void
-  ): void;
-  public getInsightResults(
-    args: GetInsightResultsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInsightResultsCommandOutput) => void
-  ): void;
-  public getInsightResults(
-    args: GetInsightResultsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInsightResultsCommandOutput) => void),
-    cb?: (err: any, data?: GetInsightResultsCommandOutput) => void
-  ): Promise<GetInsightResultsCommandOutput> | void {
-    const command = new GetInsightResultsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists and describes insights for the specified insight ARNs.</p>
-   */
-  public getInsights(args: GetInsightsCommandInput, options?: __HttpHandlerOptions): Promise<GetInsightsCommandOutput>;
-  public getInsights(args: GetInsightsCommandInput, cb: (err: any, data?: GetInsightsCommandOutput) => void): void;
-  public getInsights(
-    args: GetInsightsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInsightsCommandOutput) => void
-  ): void;
-  public getInsights(
-    args: GetInsightsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInsightsCommandOutput) => void),
-    cb?: (err: any, data?: GetInsightsCommandOutput) => void
-  ): Promise<GetInsightsCommandOutput> | void {
-    const command = new GetInsightsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the count of all Security Hub membership invitations that were sent to the
-   *          current member account, not including the currently accepted invitation. </p>
-   */
-  public getInvitationsCount(
-    args: GetInvitationsCountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInvitationsCountCommandOutput>;
-  public getInvitationsCount(
-    args: GetInvitationsCountCommandInput,
-    cb: (err: any, data?: GetInvitationsCountCommandOutput) => void
-  ): void;
-  public getInvitationsCount(
-    args: GetInvitationsCountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInvitationsCountCommandOutput) => void
-  ): void;
-  public getInvitationsCount(
-    args: GetInvitationsCountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInvitationsCountCommandOutput) => void),
-    cb?: (err: any, data?: GetInvitationsCountCommandOutput) => void
-  ): Promise<GetInvitationsCountCommandOutput> | void {
-    const command = new GetInvitationsCountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * @deprecated
-   *
-   * <p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p>
-   *          <p>The Security Hub console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p>
-   *          <p>Provides the details for the Security Hub administrator account for the current member account.</p>
-   *          <p>Can be used by both member accounts that are managed using Organizations and accounts that were
-   *          invited manually.</p>
-   */
-  public getMasterAccount(
-    args: GetMasterAccountCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMasterAccountCommandOutput>;
-  public getMasterAccount(
-    args: GetMasterAccountCommandInput,
-    cb: (err: any, data?: GetMasterAccountCommandOutput) => void
-  ): void;
-  public getMasterAccount(
-    args: GetMasterAccountCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMasterAccountCommandOutput) => void
-  ): void;
-  public getMasterAccount(
-    args: GetMasterAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMasterAccountCommandOutput) => void),
-    cb?: (err: any, data?: GetMasterAccountCommandOutput) => void
-  ): Promise<GetMasterAccountCommandOutput> | void {
-    const command = new GetMasterAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the details for the Security Hub member accounts for the specified account IDs.</p>
-   *          <p>An administrator account can be either the delegated Security Hub administrator account for an
-   *          organization or an administrator account that enabled Security Hub manually.</p>
-   *          <p>The results include both member accounts that are managed using Organizations and accounts that
-   *          were invited manually.</p>
-   */
-  public getMembers(args: GetMembersCommandInput, options?: __HttpHandlerOptions): Promise<GetMembersCommandOutput>;
-  public getMembers(args: GetMembersCommandInput, cb: (err: any, data?: GetMembersCommandOutput) => void): void;
-  public getMembers(
-    args: GetMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMembersCommandOutput) => void
-  ): void;
-  public getMembers(
-    args: GetMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMembersCommandOutput) => void),
-    cb?: (err: any, data?: GetMembersCommandOutput) => void
-  ): Promise<GetMembersCommandOutput> | void {
-    const command = new GetMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that
-   *          the invitation is sent from.</p>
-   *          <p>This operation is only used to invite accounts that do not belong to an organization.
-   *          Organization accounts do not receive invitations.</p>
-   *          <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub.</p>
-   *          <p>When the account owner enables Security Hub and accepts the invitation to become a member
-   *          account, the administrator account can view the findings generated from the member account.</p>
-   */
-  public inviteMembers(
-    args: InviteMembersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<InviteMembersCommandOutput>;
-  public inviteMembers(
-    args: InviteMembersCommandInput,
-    cb: (err: any, data?: InviteMembersCommandOutput) => void
-  ): void;
-  public inviteMembers(
-    args: InviteMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: InviteMembersCommandOutput) => void
-  ): void;
-  public inviteMembers(
-    args: InviteMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InviteMembersCommandOutput) => void),
-    cb?: (err: any, data?: InviteMembersCommandOutput) => void
-  ): Promise<InviteMembersCommandOutput> | void {
-    const command = new InviteMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all findings-generating solutions (products) that you are subscribed to receive
-   *          findings from in Security Hub.</p>
-   */
-  public listEnabledProductsForImport(
-    args: ListEnabledProductsForImportCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListEnabledProductsForImportCommandOutput>;
-  public listEnabledProductsForImport(
-    args: ListEnabledProductsForImportCommandInput,
-    cb: (err: any, data?: ListEnabledProductsForImportCommandOutput) => void
-  ): void;
-  public listEnabledProductsForImport(
-    args: ListEnabledProductsForImportCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListEnabledProductsForImportCommandOutput) => void
-  ): void;
-  public listEnabledProductsForImport(
-    args: ListEnabledProductsForImportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEnabledProductsForImportCommandOutput) => void),
-    cb?: (err: any, data?: ListEnabledProductsForImportCommandOutput) => void
-  ): Promise<ListEnabledProductsForImportCommandOutput> | void {
-    const command = new ListEnabledProductsForImportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>If finding aggregation is enabled, then <code>ListFindingAggregators</code> returns the ARN of the finding aggregator. You can run this operation from any Region.</p>
-   */
-  public listFindingAggregators(
-    args: ListFindingAggregatorsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListFindingAggregatorsCommandOutput>;
-  public listFindingAggregators(
-    args: ListFindingAggregatorsCommandInput,
-    cb: (err: any, data?: ListFindingAggregatorsCommandOutput) => void
-  ): void;
-  public listFindingAggregators(
-    args: ListFindingAggregatorsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListFindingAggregatorsCommandOutput) => void
-  ): void;
-  public listFindingAggregators(
-    args: ListFindingAggregatorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFindingAggregatorsCommandOutput) => void),
-    cb?: (err: any, data?: ListFindingAggregatorsCommandOutput) => void
-  ): Promise<ListFindingAggregatorsCommandOutput> | void {
-    const command = new ListFindingAggregatorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all Security Hub membership invitations that were sent to the current Amazon Web Services account.</p>
-   *          <p>This operation is only used by accounts that are managed by invitation.
-   *          Accounts that are managed using the integration with Organizations do not receive invitations.</p>
-   */
-  public listInvitations(
-    args: ListInvitationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListInvitationsCommandOutput>;
-  public listInvitations(
-    args: ListInvitationsCommandInput,
-    cb: (err: any, data?: ListInvitationsCommandOutput) => void
-  ): void;
-  public listInvitations(
-    args: ListInvitationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListInvitationsCommandOutput) => void
-  ): void;
-  public listInvitations(
-    args: ListInvitationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListInvitationsCommandOutput) => void),
-    cb?: (err: any, data?: ListInvitationsCommandOutput) => void
-  ): Promise<ListInvitationsCommandOutput> | void {
-    const command = new ListInvitationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists details about all member accounts for the current Security Hub administrator
-   *          account.</p>
-   *          <p>The results include both member accounts that belong to an organization and member
-   *          accounts that were invited manually.</p>
-   */
-  public listMembers(args: ListMembersCommandInput, options?: __HttpHandlerOptions): Promise<ListMembersCommandOutput>;
-  public listMembers(args: ListMembersCommandInput, cb: (err: any, data?: ListMembersCommandOutput) => void): void;
-  public listMembers(
-    args: ListMembersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListMembersCommandOutput) => void
-  ): void;
-  public listMembers(
-    args: ListMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMembersCommandOutput) => void),
-    cb?: (err: any, data?: ListMembersCommandOutput) => void
-  ): Promise<ListMembersCommandOutput> | void {
-    const command = new ListMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Security Hub administrator accounts. Can only be called by the organization
-   *          management account.</p>
-   */
-  public listOrganizationAdminAccounts(
-    args: ListOrganizationAdminAccountsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListOrganizationAdminAccountsCommandOutput>;
-  public listOrganizationAdminAccounts(
-    args: ListOrganizationAdminAccountsCommandInput,
-    cb: (err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void
-  ): void;
-  public listOrganizationAdminAccounts(
-    args: ListOrganizationAdminAccountsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void
-  ): void;
-  public listOrganizationAdminAccounts(
-    args: ListOrganizationAdminAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void),
-    cb?: (err: any, data?: ListOrganizationAdminAccountsCommandOutput) => void
-  ): Promise<ListOrganizationAdminAccountsCommandOutput> | void {
-    const command = new ListOrganizationAdminAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of tags associated with a resource.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds one or more tags to a resource.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes one or more tags from a resource.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the name and description of a custom action target in Security Hub.</p>
-   */
-  public updateActionTarget(
-    args: UpdateActionTargetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateActionTargetCommandOutput>;
-  public updateActionTarget(
-    args: UpdateActionTargetCommandInput,
-    cb: (err: any, data?: UpdateActionTargetCommandOutput) => void
-  ): void;
-  public updateActionTarget(
-    args: UpdateActionTargetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateActionTargetCommandOutput) => void
-  ): void;
-  public updateActionTarget(
-    args: UpdateActionTargetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateActionTargetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateActionTargetCommandOutput) => void
-  ): Promise<UpdateActionTargetCommandOutput> | void {
-    const command = new UpdateActionTargetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use <code>UpdateFindingAggregator</code> to change the aggregation Region.</p>
-   *          <p>You must run <code>UpdateFindingAggregator</code> from the current aggregation Region.
-   *       </p>
-   */
-  public updateFindingAggregator(
-    args: UpdateFindingAggregatorCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFindingAggregatorCommandOutput>;
-  public updateFindingAggregator(
-    args: UpdateFindingAggregatorCommandInput,
-    cb: (err: any, data?: UpdateFindingAggregatorCommandOutput) => void
-  ): void;
-  public updateFindingAggregator(
-    args: UpdateFindingAggregatorCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFindingAggregatorCommandOutput) => void
-  ): void;
-  public updateFindingAggregator(
-    args: UpdateFindingAggregatorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFindingAggregatorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFindingAggregatorCommandOutput) => void
-  ): Promise<UpdateFindingAggregatorCommandOutput> | void {
-    const command = new UpdateFindingAggregatorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *             <code>UpdateFindings</code> is deprecated. Instead of <code>UpdateFindings</code>, use
-   *             <code>BatchUpdateFindings</code>.</p>
-   *          <p>Updates the <code>Note</code> and <code>RecordState</code> of the Security Hub-aggregated
-   *          findings that the filter attributes specify. Any member account that can view the finding
-   *          also sees the update to the finding.</p>
-   */
-  public updateFindings(
-    args: UpdateFindingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFindingsCommandOutput>;
-  public updateFindings(
-    args: UpdateFindingsCommandInput,
-    cb: (err: any, data?: UpdateFindingsCommandOutput) => void
-  ): void;
-  public updateFindings(
-    args: UpdateFindingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFindingsCommandOutput) => void
-  ): void;
-  public updateFindings(
-    args: UpdateFindingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFindingsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFindingsCommandOutput) => void
-  ): Promise<UpdateFindingsCommandOutput> | void {
-    const command = new UpdateFindingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the Security Hub insight identified by the specified insight ARN.</p>
-   */
-  public updateInsight(
-    args: UpdateInsightCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateInsightCommandOutput>;
-  public updateInsight(
-    args: UpdateInsightCommandInput,
-    cb: (err: any, data?: UpdateInsightCommandOutput) => void
-  ): void;
-  public updateInsight(
-    args: UpdateInsightCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateInsightCommandOutput) => void
-  ): void;
-  public updateInsight(
-    args: UpdateInsightCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateInsightCommandOutput) => void),
-    cb?: (err: any, data?: UpdateInsightCommandOutput) => void
-  ): Promise<UpdateInsightCommandOutput> | void {
-    const command = new UpdateInsightCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Used to update the configuration related to Organizations. Can only be called from a
-   *          Security Hub administrator account.</p>
-   */
-  public updateOrganizationConfiguration(
-    args: UpdateOrganizationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateOrganizationConfigurationCommandOutput>;
-  public updateOrganizationConfiguration(
-    args: UpdateOrganizationConfigurationCommandInput,
-    cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
-  ): void;
-  public updateOrganizationConfiguration(
-    args: UpdateOrganizationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
-  ): void;
-  public updateOrganizationConfiguration(
-    args: UpdateOrganizationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
-  ): Promise<UpdateOrganizationConfigurationCommandOutput> | void {
-    const command = new UpdateOrganizationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates configuration options for Security Hub.</p>
-   */
-  public updateSecurityHubConfiguration(
-    args: UpdateSecurityHubConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSecurityHubConfigurationCommandOutput>;
-  public updateSecurityHubConfiguration(
-    args: UpdateSecurityHubConfigurationCommandInput,
-    cb: (err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void
-  ): void;
-  public updateSecurityHubConfiguration(
-    args: UpdateSecurityHubConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void
-  ): void;
-  public updateSecurityHubConfiguration(
-    args: UpdateSecurityHubConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSecurityHubConfigurationCommandOutput) => void
-  ): Promise<UpdateSecurityHubConfigurationCommandOutput> | void {
-    const command = new UpdateSecurityHubConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Used to control whether an individual security standard control is enabled or
-   *          disabled.</p>
-   */
-  public updateStandardsControl(
-    args: UpdateStandardsControlCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateStandardsControlCommandOutput>;
-  public updateStandardsControl(
-    args: UpdateStandardsControlCommandInput,
-    cb: (err: any, data?: UpdateStandardsControlCommandOutput) => void
-  ): void;
-  public updateStandardsControl(
-    args: UpdateStandardsControlCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateStandardsControlCommandOutput) => void
-  ): void;
-  public updateStandardsControl(
-    args: UpdateStandardsControlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateStandardsControlCommandOutput) => void),
-    cb?: (err: any, data?: UpdateStandardsControlCommandOutput) => void
-  ): Promise<UpdateStandardsControlCommandOutput> | void {
-    const command = new UpdateStandardsControlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class SecurityHub extends SecurityHubClient implements SecurityHub {}
+createAggregatedClient(commands, SecurityHub, { paginators });

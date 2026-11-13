@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MachineLearningClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MachineLearningClient";
-import { DescribeBatchPredictionsInput, DescribeBatchPredictionsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeBatchPredictionsCommand,
-  serializeAws_json1_1DescribeBatchPredictionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBatchPredictionsInput, DescribeBatchPredictionsOutput } from "../models/models_0";
+import { DescribeBatchPredictions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBatchPredictionsCommand}.
+ */
 export interface DescribeBatchPredictionsCommandInput extends DescribeBatchPredictionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBatchPredictionsCommand}.
+ */
 export interface DescribeBatchPredictionsCommandOutput extends DescribeBatchPredictionsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,83 @@ export interface DescribeBatchPredictionsCommandOutput extends DescribeBatchPred
  * ```javascript
  * import { MachineLearningClient, DescribeBatchPredictionsCommand } from "@aws-sdk/client-machine-learning"; // ES Modules import
  * // const { MachineLearningClient, DescribeBatchPredictionsCommand } = require("@aws-sdk/client-machine-learning"); // CommonJS import
+ * // import type { MachineLearningClientConfig } from "@aws-sdk/client-machine-learning";
+ * const config = {}; // type is MachineLearningClientConfig
  * const client = new MachineLearningClient(config);
+ * const input = { // DescribeBatchPredictionsInput
+ *   FilterVariable: "CreatedAt" || "LastUpdatedAt" || "Status" || "Name" || "IAMUser" || "MLModelId" || "DataSourceId" || "DataURI",
+ *   EQ: "STRING_VALUE",
+ *   GT: "STRING_VALUE",
+ *   LT: "STRING_VALUE",
+ *   GE: "STRING_VALUE",
+ *   LE: "STRING_VALUE",
+ *   NE: "STRING_VALUE",
+ *   Prefix: "STRING_VALUE",
+ *   SortOrder: "asc" || "dsc",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new DescribeBatchPredictionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBatchPredictionsOutput
+ * //   Results: [ // BatchPredictions
+ * //     { // BatchPrediction
+ * //       BatchPredictionId: "STRING_VALUE",
+ * //       MLModelId: "STRING_VALUE",
+ * //       BatchPredictionDataSourceId: "STRING_VALUE",
+ * //       InputDataLocationS3: "STRING_VALUE",
+ * //       CreatedByIamUser: "STRING_VALUE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       LastUpdatedAt: new Date("TIMESTAMP"),
+ * //       Name: "STRING_VALUE",
+ * //       Status: "PENDING" || "INPROGRESS" || "FAILED" || "COMPLETED" || "DELETED",
+ * //       OutputUri: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       ComputeTime: Number("long"),
+ * //       FinishedAt: new Date("TIMESTAMP"),
+ * //       StartedAt: new Date("TIMESTAMP"),
+ * //       TotalRecordCount: Number("long"),
+ * //       InvalidRecordCount: Number("long"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBatchPredictionsCommandInput - {@link DescribeBatchPredictionsCommandInput}
+ * @returns {@link DescribeBatchPredictionsCommandOutput}
  * @see {@link DescribeBatchPredictionsCommandInput} for command's `input` shape.
  * @see {@link DescribeBatchPredictionsCommandOutput} for command's `response` shape.
- * @see {@link MachineLearningClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MachineLearningClientResolvedConfig | config} for MachineLearningClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An error on the server occurred when trying to process a request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link MachineLearningServiceException}
+ * <p>Base exception class for all service exceptions from MachineLearning service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBatchPredictionsCommand extends $Command<
-  DescribeBatchPredictionsCommandInput,
-  DescribeBatchPredictionsCommandOutput,
-  MachineLearningClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBatchPredictionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MachineLearningClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBatchPredictionsCommandInput, DescribeBatchPredictionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MachineLearningClient";
-    const commandName = "DescribeBatchPredictionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBatchPredictionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBatchPredictionsOutput.filterSensitiveLog,
+export class DescribeBatchPredictionsCommand extends command<DescribeBatchPredictionsCommandInput, DescribeBatchPredictionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBatchPredictions",
+  DescribeBatchPredictions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBatchPredictionsInput;
+      output: DescribeBatchPredictionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBatchPredictionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeBatchPredictionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeBatchPredictionsCommandOutput> {
-    return deserializeAws_json1_1DescribeBatchPredictionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBatchPredictionsCommandInput;
+      output: DescribeBatchPredictionsCommandOutput;
+    };
+  };
 }

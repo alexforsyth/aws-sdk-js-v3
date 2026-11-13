@@ -1,890 +1,734 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import { AmplifyBackendClient } from "./AmplifyBackendClient";
 import {
+  type CloneBackendCommandInput,
+  type CloneBackendCommandOutput,
   CloneBackendCommand,
-  CloneBackendCommandInput,
-  CloneBackendCommandOutput,
 } from "./commands/CloneBackendCommand";
 import {
+  type CreateBackendAPICommandInput,
+  type CreateBackendAPICommandOutput,
   CreateBackendAPICommand,
-  CreateBackendAPICommandInput,
-  CreateBackendAPICommandOutput,
 } from "./commands/CreateBackendAPICommand";
 import {
+  type CreateBackendAuthCommandInput,
+  type CreateBackendAuthCommandOutput,
   CreateBackendAuthCommand,
-  CreateBackendAuthCommandInput,
-  CreateBackendAuthCommandOutput,
 } from "./commands/CreateBackendAuthCommand";
 import {
+  type CreateBackendCommandInput,
+  type CreateBackendCommandOutput,
   CreateBackendCommand,
-  CreateBackendCommandInput,
-  CreateBackendCommandOutput,
 } from "./commands/CreateBackendCommand";
 import {
+  type CreateBackendConfigCommandInput,
+  type CreateBackendConfigCommandOutput,
   CreateBackendConfigCommand,
-  CreateBackendConfigCommandInput,
-  CreateBackendConfigCommandOutput,
 } from "./commands/CreateBackendConfigCommand";
-import { CreateTokenCommand, CreateTokenCommandInput, CreateTokenCommandOutput } from "./commands/CreateTokenCommand";
 import {
+  type CreateBackendStorageCommandInput,
+  type CreateBackendStorageCommandOutput,
+  CreateBackendStorageCommand,
+} from "./commands/CreateBackendStorageCommand";
+import {
+  type CreateTokenCommandInput,
+  type CreateTokenCommandOutput,
+  CreateTokenCommand,
+} from "./commands/CreateTokenCommand";
+import {
+  type DeleteBackendAPICommandInput,
+  type DeleteBackendAPICommandOutput,
   DeleteBackendAPICommand,
-  DeleteBackendAPICommandInput,
-  DeleteBackendAPICommandOutput,
 } from "./commands/DeleteBackendAPICommand";
 import {
+  type DeleteBackendAuthCommandInput,
+  type DeleteBackendAuthCommandOutput,
   DeleteBackendAuthCommand,
-  DeleteBackendAuthCommandInput,
-  DeleteBackendAuthCommandOutput,
 } from "./commands/DeleteBackendAuthCommand";
 import {
+  type DeleteBackendCommandInput,
+  type DeleteBackendCommandOutput,
   DeleteBackendCommand,
-  DeleteBackendCommandInput,
-  DeleteBackendCommandOutput,
 } from "./commands/DeleteBackendCommand";
-import { DeleteTokenCommand, DeleteTokenCommandInput, DeleteTokenCommandOutput } from "./commands/DeleteTokenCommand";
 import {
+  type DeleteBackendStorageCommandInput,
+  type DeleteBackendStorageCommandOutput,
+  DeleteBackendStorageCommand,
+} from "./commands/DeleteBackendStorageCommand";
+import {
+  type DeleteTokenCommandInput,
+  type DeleteTokenCommandOutput,
+  DeleteTokenCommand,
+} from "./commands/DeleteTokenCommand";
+import {
+  type GenerateBackendAPIModelsCommandInput,
+  type GenerateBackendAPIModelsCommandOutput,
   GenerateBackendAPIModelsCommand,
-  GenerateBackendAPIModelsCommandInput,
-  GenerateBackendAPIModelsCommandOutput,
 } from "./commands/GenerateBackendAPIModelsCommand";
 import {
+  type GetBackendAPICommandInput,
+  type GetBackendAPICommandOutput,
   GetBackendAPICommand,
-  GetBackendAPICommandInput,
-  GetBackendAPICommandOutput,
 } from "./commands/GetBackendAPICommand";
 import {
+  type GetBackendAPIModelsCommandInput,
+  type GetBackendAPIModelsCommandOutput,
   GetBackendAPIModelsCommand,
-  GetBackendAPIModelsCommandInput,
-  GetBackendAPIModelsCommandOutput,
 } from "./commands/GetBackendAPIModelsCommand";
 import {
+  type GetBackendAuthCommandInput,
+  type GetBackendAuthCommandOutput,
   GetBackendAuthCommand,
-  GetBackendAuthCommandInput,
-  GetBackendAuthCommandOutput,
 } from "./commands/GetBackendAuthCommand";
-import { GetBackendCommand, GetBackendCommandInput, GetBackendCommandOutput } from "./commands/GetBackendCommand";
 import {
+  type GetBackendCommandInput,
+  type GetBackendCommandOutput,
+  GetBackendCommand,
+} from "./commands/GetBackendCommand";
+import {
+  type GetBackendJobCommandInput,
+  type GetBackendJobCommandOutput,
   GetBackendJobCommand,
-  GetBackendJobCommandInput,
-  GetBackendJobCommandOutput,
 } from "./commands/GetBackendJobCommand";
-import { GetTokenCommand, GetTokenCommandInput, GetTokenCommandOutput } from "./commands/GetTokenCommand";
 import {
+  type GetBackendStorageCommandInput,
+  type GetBackendStorageCommandOutput,
+  GetBackendStorageCommand,
+} from "./commands/GetBackendStorageCommand";
+import { type GetTokenCommandInput, type GetTokenCommandOutput, GetTokenCommand } from "./commands/GetTokenCommand";
+import {
+  type ImportBackendAuthCommandInput,
+  type ImportBackendAuthCommandOutput,
   ImportBackendAuthCommand,
-  ImportBackendAuthCommandInput,
-  ImportBackendAuthCommandOutput,
 } from "./commands/ImportBackendAuthCommand";
 import {
+  type ImportBackendStorageCommandInput,
+  type ImportBackendStorageCommandOutput,
+  ImportBackendStorageCommand,
+} from "./commands/ImportBackendStorageCommand";
+import {
+  type ListBackendJobsCommandInput,
+  type ListBackendJobsCommandOutput,
   ListBackendJobsCommand,
-  ListBackendJobsCommandInput,
-  ListBackendJobsCommandOutput,
 } from "./commands/ListBackendJobsCommand";
 import {
+  type ListS3BucketsCommandInput,
+  type ListS3BucketsCommandOutput,
+  ListS3BucketsCommand,
+} from "./commands/ListS3BucketsCommand";
+import {
+  type RemoveAllBackendsCommandInput,
+  type RemoveAllBackendsCommandOutput,
   RemoveAllBackendsCommand,
-  RemoveAllBackendsCommandInput,
-  RemoveAllBackendsCommandOutput,
 } from "./commands/RemoveAllBackendsCommand";
 import {
+  type RemoveBackendConfigCommandInput,
+  type RemoveBackendConfigCommandOutput,
   RemoveBackendConfigCommand,
-  RemoveBackendConfigCommandInput,
-  RemoveBackendConfigCommandOutput,
 } from "./commands/RemoveBackendConfigCommand";
 import {
+  type UpdateBackendAPICommandInput,
+  type UpdateBackendAPICommandOutput,
   UpdateBackendAPICommand,
-  UpdateBackendAPICommandInput,
-  UpdateBackendAPICommandOutput,
 } from "./commands/UpdateBackendAPICommand";
 import {
+  type UpdateBackendAuthCommandInput,
+  type UpdateBackendAuthCommandOutput,
   UpdateBackendAuthCommand,
-  UpdateBackendAuthCommandInput,
-  UpdateBackendAuthCommandOutput,
 } from "./commands/UpdateBackendAuthCommand";
 import {
+  type UpdateBackendConfigCommandInput,
+  type UpdateBackendConfigCommandOutput,
   UpdateBackendConfigCommand,
-  UpdateBackendConfigCommandInput,
-  UpdateBackendConfigCommandOutput,
 } from "./commands/UpdateBackendConfigCommand";
 import {
+  type UpdateBackendJobCommandInput,
+  type UpdateBackendJobCommandOutput,
   UpdateBackendJobCommand,
-  UpdateBackendJobCommandInput,
-  UpdateBackendJobCommandOutput,
 } from "./commands/UpdateBackendJobCommand";
+import {
+  type UpdateBackendStorageCommandInput,
+  type UpdateBackendStorageCommandOutput,
+  UpdateBackendStorageCommand,
+} from "./commands/UpdateBackendStorageCommand";
+
+const commands = {
+  CloneBackendCommand,
+  CreateBackendCommand,
+  CreateBackendAPICommand,
+  CreateBackendAuthCommand,
+  CreateBackendConfigCommand,
+  CreateBackendStorageCommand,
+  CreateTokenCommand,
+  DeleteBackendCommand,
+  DeleteBackendAPICommand,
+  DeleteBackendAuthCommand,
+  DeleteBackendStorageCommand,
+  DeleteTokenCommand,
+  GenerateBackendAPIModelsCommand,
+  GetBackendCommand,
+  GetBackendAPICommand,
+  GetBackendAPIModelsCommand,
+  GetBackendAuthCommand,
+  GetBackendJobCommand,
+  GetBackendStorageCommand,
+  GetTokenCommand,
+  ImportBackendAuthCommand,
+  ImportBackendStorageCommand,
+  ListBackendJobsCommand,
+  ListS3BucketsCommand,
+  RemoveAllBackendsCommand,
+  RemoveBackendConfigCommand,
+  UpdateBackendAPICommand,
+  UpdateBackendAuthCommand,
+  UpdateBackendConfigCommand,
+  UpdateBackendJobCommand,
+  UpdateBackendStorageCommand,
+};
+
+/**
+ * @public
+ */
+export interface AmplifyBackendRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface AmplifyBackend {
+  /**
+   * @see {@link CloneBackendCommand}
+   */
+  cloneBackend(
+    args: CloneBackendCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CloneBackendCommandOutput>;
+  cloneBackend(
+    args: CloneBackendCommandInput,
+    cb: (err: any, data?: CloneBackendCommandOutput) => void
+  ): void;
+  cloneBackend(
+    args: CloneBackendCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CloneBackendCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBackendCommand}
+   */
+  createBackend(
+    args: CreateBackendCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateBackendCommandOutput>;
+  createBackend(
+    args: CreateBackendCommandInput,
+    cb: (err: any, data?: CreateBackendCommandOutput) => void
+  ): void;
+  createBackend(
+    args: CreateBackendCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateBackendCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBackendAPICommand}
+   */
+  createBackendAPI(
+    args: CreateBackendAPICommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateBackendAPICommandOutput>;
+  createBackendAPI(
+    args: CreateBackendAPICommandInput,
+    cb: (err: any, data?: CreateBackendAPICommandOutput) => void
+  ): void;
+  createBackendAPI(
+    args: CreateBackendAPICommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateBackendAPICommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBackendAuthCommand}
+   */
+  createBackendAuth(
+    args: CreateBackendAuthCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateBackendAuthCommandOutput>;
+  createBackendAuth(
+    args: CreateBackendAuthCommandInput,
+    cb: (err: any, data?: CreateBackendAuthCommandOutput) => void
+  ): void;
+  createBackendAuth(
+    args: CreateBackendAuthCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateBackendAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBackendConfigCommand}
+   */
+  createBackendConfig(
+    args: CreateBackendConfigCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateBackendConfigCommandOutput>;
+  createBackendConfig(
+    args: CreateBackendConfigCommandInput,
+    cb: (err: any, data?: CreateBackendConfigCommandOutput) => void
+  ): void;
+  createBackendConfig(
+    args: CreateBackendConfigCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateBackendConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBackendStorageCommand}
+   */
+  createBackendStorage(
+    args: CreateBackendStorageCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateBackendStorageCommandOutput>;
+  createBackendStorage(
+    args: CreateBackendStorageCommandInput,
+    cb: (err: any, data?: CreateBackendStorageCommandOutput) => void
+  ): void;
+  createBackendStorage(
+    args: CreateBackendStorageCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateBackendStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTokenCommand}
+   */
+  createToken(
+    args: CreateTokenCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<CreateTokenCommandOutput>;
+  createToken(
+    args: CreateTokenCommandInput,
+    cb: (err: any, data?: CreateTokenCommandOutput) => void
+  ): void;
+  createToken(
+    args: CreateTokenCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: CreateTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBackendCommand}
+   */
+  deleteBackend(
+    args: DeleteBackendCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<DeleteBackendCommandOutput>;
+  deleteBackend(
+    args: DeleteBackendCommandInput,
+    cb: (err: any, data?: DeleteBackendCommandOutput) => void
+  ): void;
+  deleteBackend(
+    args: DeleteBackendCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: DeleteBackendCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBackendAPICommand}
+   */
+  deleteBackendAPI(
+    args: DeleteBackendAPICommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<DeleteBackendAPICommandOutput>;
+  deleteBackendAPI(
+    args: DeleteBackendAPICommandInput,
+    cb: (err: any, data?: DeleteBackendAPICommandOutput) => void
+  ): void;
+  deleteBackendAPI(
+    args: DeleteBackendAPICommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: DeleteBackendAPICommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBackendAuthCommand}
+   */
+  deleteBackendAuth(
+    args: DeleteBackendAuthCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<DeleteBackendAuthCommandOutput>;
+  deleteBackendAuth(
+    args: DeleteBackendAuthCommandInput,
+    cb: (err: any, data?: DeleteBackendAuthCommandOutput) => void
+  ): void;
+  deleteBackendAuth(
+    args: DeleteBackendAuthCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: DeleteBackendAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBackendStorageCommand}
+   */
+  deleteBackendStorage(
+    args: DeleteBackendStorageCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<DeleteBackendStorageCommandOutput>;
+  deleteBackendStorage(
+    args: DeleteBackendStorageCommandInput,
+    cb: (err: any, data?: DeleteBackendStorageCommandOutput) => void
+  ): void;
+  deleteBackendStorage(
+    args: DeleteBackendStorageCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: DeleteBackendStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTokenCommand}
+   */
+  deleteToken(
+    args: DeleteTokenCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<DeleteTokenCommandOutput>;
+  deleteToken(
+    args: DeleteTokenCommandInput,
+    cb: (err: any, data?: DeleteTokenCommandOutput) => void
+  ): void;
+  deleteToken(
+    args: DeleteTokenCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: DeleteTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateBackendAPIModelsCommand}
+   */
+  generateBackendAPIModels(
+    args: GenerateBackendAPIModelsCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GenerateBackendAPIModelsCommandOutput>;
+  generateBackendAPIModels(
+    args: GenerateBackendAPIModelsCommandInput,
+    cb: (err: any, data?: GenerateBackendAPIModelsCommandOutput) => void
+  ): void;
+  generateBackendAPIModels(
+    args: GenerateBackendAPIModelsCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GenerateBackendAPIModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendCommand}
+   */
+  getBackend(
+    args: GetBackendCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendCommandOutput>;
+  getBackend(
+    args: GetBackendCommandInput,
+    cb: (err: any, data?: GetBackendCommandOutput) => void
+  ): void;
+  getBackend(
+    args: GetBackendCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendAPICommand}
+   */
+  getBackendAPI(
+    args: GetBackendAPICommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendAPICommandOutput>;
+  getBackendAPI(
+    args: GetBackendAPICommandInput,
+    cb: (err: any, data?: GetBackendAPICommandOutput) => void
+  ): void;
+  getBackendAPI(
+    args: GetBackendAPICommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendAPICommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendAPIModelsCommand}
+   */
+  getBackendAPIModels(
+    args: GetBackendAPIModelsCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendAPIModelsCommandOutput>;
+  getBackendAPIModels(
+    args: GetBackendAPIModelsCommandInput,
+    cb: (err: any, data?: GetBackendAPIModelsCommandOutput) => void
+  ): void;
+  getBackendAPIModels(
+    args: GetBackendAPIModelsCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendAPIModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendAuthCommand}
+   */
+  getBackendAuth(
+    args: GetBackendAuthCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendAuthCommandOutput>;
+  getBackendAuth(
+    args: GetBackendAuthCommandInput,
+    cb: (err: any, data?: GetBackendAuthCommandOutput) => void
+  ): void;
+  getBackendAuth(
+    args: GetBackendAuthCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendJobCommand}
+   */
+  getBackendJob(
+    args: GetBackendJobCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendJobCommandOutput>;
+  getBackendJob(
+    args: GetBackendJobCommandInput,
+    cb: (err: any, data?: GetBackendJobCommandOutput) => void
+  ): void;
+  getBackendJob(
+    args: GetBackendJobCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBackendStorageCommand}
+   */
+  getBackendStorage(
+    args: GetBackendStorageCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetBackendStorageCommandOutput>;
+  getBackendStorage(
+    args: GetBackendStorageCommandInput,
+    cb: (err: any, data?: GetBackendStorageCommandOutput) => void
+  ): void;
+  getBackendStorage(
+    args: GetBackendStorageCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetBackendStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTokenCommand}
+   */
+  getToken(
+    args: GetTokenCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<GetTokenCommandOutput>;
+  getToken(
+    args: GetTokenCommandInput,
+    cb: (err: any, data?: GetTokenCommandOutput) => void
+  ): void;
+  getToken(
+    args: GetTokenCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: GetTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportBackendAuthCommand}
+   */
+  importBackendAuth(
+    args: ImportBackendAuthCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<ImportBackendAuthCommandOutput>;
+  importBackendAuth(
+    args: ImportBackendAuthCommandInput,
+    cb: (err: any, data?: ImportBackendAuthCommandOutput) => void
+  ): void;
+  importBackendAuth(
+    args: ImportBackendAuthCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: ImportBackendAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportBackendStorageCommand}
+   */
+  importBackendStorage(
+    args: ImportBackendStorageCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<ImportBackendStorageCommandOutput>;
+  importBackendStorage(
+    args: ImportBackendStorageCommandInput,
+    cb: (err: any, data?: ImportBackendStorageCommandOutput) => void
+  ): void;
+  importBackendStorage(
+    args: ImportBackendStorageCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: ImportBackendStorageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBackendJobsCommand}
+   */
+  listBackendJobs(
+    args: ListBackendJobsCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<ListBackendJobsCommandOutput>;
+  listBackendJobs(
+    args: ListBackendJobsCommandInput,
+    cb: (err: any, data?: ListBackendJobsCommandOutput) => void
+  ): void;
+  listBackendJobs(
+    args: ListBackendJobsCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: ListBackendJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListS3BucketsCommand}
+   */
+  listS3Buckets(): Promise<ListS3BucketsCommandOutput>;
+  listS3Buckets(
+    args: ListS3BucketsCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<ListS3BucketsCommandOutput>;
+  listS3Buckets(
+    args: ListS3BucketsCommandInput,
+    cb: (err: any, data?: ListS3BucketsCommandOutput) => void
+  ): void;
+  listS3Buckets(
+    args: ListS3BucketsCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: ListS3BucketsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveAllBackendsCommand}
+   */
+  removeAllBackends(
+    args: RemoveAllBackendsCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<RemoveAllBackendsCommandOutput>;
+  removeAllBackends(
+    args: RemoveAllBackendsCommandInput,
+    cb: (err: any, data?: RemoveAllBackendsCommandOutput) => void
+  ): void;
+  removeAllBackends(
+    args: RemoveAllBackendsCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: RemoveAllBackendsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveBackendConfigCommand}
+   */
+  removeBackendConfig(
+    args: RemoveBackendConfigCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<RemoveBackendConfigCommandOutput>;
+  removeBackendConfig(
+    args: RemoveBackendConfigCommandInput,
+    cb: (err: any, data?: RemoveBackendConfigCommandOutput) => void
+  ): void;
+  removeBackendConfig(
+    args: RemoveBackendConfigCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: RemoveBackendConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBackendAPICommand}
+   */
+  updateBackendAPI(
+    args: UpdateBackendAPICommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<UpdateBackendAPICommandOutput>;
+  updateBackendAPI(
+    args: UpdateBackendAPICommandInput,
+    cb: (err: any, data?: UpdateBackendAPICommandOutput) => void
+  ): void;
+  updateBackendAPI(
+    args: UpdateBackendAPICommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: UpdateBackendAPICommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBackendAuthCommand}
+   */
+  updateBackendAuth(
+    args: UpdateBackendAuthCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<UpdateBackendAuthCommandOutput>;
+  updateBackendAuth(
+    args: UpdateBackendAuthCommandInput,
+    cb: (err: any, data?: UpdateBackendAuthCommandOutput) => void
+  ): void;
+  updateBackendAuth(
+    args: UpdateBackendAuthCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: UpdateBackendAuthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBackendConfigCommand}
+   */
+  updateBackendConfig(
+    args: UpdateBackendConfigCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<UpdateBackendConfigCommandOutput>;
+  updateBackendConfig(
+    args: UpdateBackendConfigCommandInput,
+    cb: (err: any, data?: UpdateBackendConfigCommandOutput) => void
+  ): void;
+  updateBackendConfig(
+    args: UpdateBackendConfigCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: UpdateBackendConfigCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBackendJobCommand}
+   */
+  updateBackendJob(
+    args: UpdateBackendJobCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<UpdateBackendJobCommandOutput>;
+  updateBackendJob(
+    args: UpdateBackendJobCommandInput,
+    cb: (err: any, data?: UpdateBackendJobCommandOutput) => void
+  ): void;
+  updateBackendJob(
+    args: UpdateBackendJobCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: UpdateBackendJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBackendStorageCommand}
+   */
+  updateBackendStorage(
+    args: UpdateBackendStorageCommandInput,
+    options?: AmplifyBackendRequestOptions
+  ): Promise<UpdateBackendStorageCommandOutput>;
+  updateBackendStorage(
+    args: UpdateBackendStorageCommandInput,
+    cb: (err: any, data?: UpdateBackendStorageCommandOutput) => void
+  ): void;
+  updateBackendStorage(
+    args: UpdateBackendStorageCommandInput,
+    options: AmplifyBackendRequestOptions,
+    cb: (err: any, data?: UpdateBackendStorageCommandOutput) => void
+  ): void;
+}
 
 /**
  * <p>AWS Amplify Admin API</p>
+ * @public
  */
-export class AmplifyBackend extends AmplifyBackendClient {
-  /**
-   * <p>This operation clones an existing backend.</p>
-   */
-  public cloneBackend(
-    args: CloneBackendCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CloneBackendCommandOutput>;
-  public cloneBackend(args: CloneBackendCommandInput, cb: (err: any, data?: CloneBackendCommandOutput) => void): void;
-  public cloneBackend(
-    args: CloneBackendCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CloneBackendCommandOutput) => void
-  ): void;
-  public cloneBackend(
-    args: CloneBackendCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CloneBackendCommandOutput) => void),
-    cb?: (err: any, data?: CloneBackendCommandOutput) => void
-  ): Promise<CloneBackendCommandOutput> | void {
-    const command = new CloneBackendCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>This operation creates a backend for an Amplify app. Backends are automatically created at the time of app creation.</p>
-   */
-  public createBackend(
-    args: CreateBackendCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBackendCommandOutput>;
-  public createBackend(
-    args: CreateBackendCommandInput,
-    cb: (err: any, data?: CreateBackendCommandOutput) => void
-  ): void;
-  public createBackend(
-    args: CreateBackendCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBackendCommandOutput) => void
-  ): void;
-  public createBackend(
-    args: CreateBackendCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBackendCommandOutput) => void),
-    cb?: (err: any, data?: CreateBackendCommandOutput) => void
-  ): Promise<CreateBackendCommandOutput> | void {
-    const command = new CreateBackendCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new backend API resource.</p>
-   */
-  public createBackendAPI(
-    args: CreateBackendAPICommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBackendAPICommandOutput>;
-  public createBackendAPI(
-    args: CreateBackendAPICommandInput,
-    cb: (err: any, data?: CreateBackendAPICommandOutput) => void
-  ): void;
-  public createBackendAPI(
-    args: CreateBackendAPICommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBackendAPICommandOutput) => void
-  ): void;
-  public createBackendAPI(
-    args: CreateBackendAPICommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBackendAPICommandOutput) => void),
-    cb?: (err: any, data?: CreateBackendAPICommandOutput) => void
-  ): Promise<CreateBackendAPICommandOutput> | void {
-    const command = new CreateBackendAPICommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new backend authentication resource.</p>
-   */
-  public createBackendAuth(
-    args: CreateBackendAuthCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBackendAuthCommandOutput>;
-  public createBackendAuth(
-    args: CreateBackendAuthCommandInput,
-    cb: (err: any, data?: CreateBackendAuthCommandOutput) => void
-  ): void;
-  public createBackendAuth(
-    args: CreateBackendAuthCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBackendAuthCommandOutput) => void
-  ): void;
-  public createBackendAuth(
-    args: CreateBackendAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBackendAuthCommandOutput) => void),
-    cb?: (err: any, data?: CreateBackendAuthCommandOutput) => void
-  ): Promise<CreateBackendAuthCommandOutput> | void {
-    const command = new CreateBackendAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a config object for a backend.</p>
-   */
-  public createBackendConfig(
-    args: CreateBackendConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBackendConfigCommandOutput>;
-  public createBackendConfig(
-    args: CreateBackendConfigCommandInput,
-    cb: (err: any, data?: CreateBackendConfigCommandOutput) => void
-  ): void;
-  public createBackendConfig(
-    args: CreateBackendConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBackendConfigCommandOutput) => void
-  ): void;
-  public createBackendConfig(
-    args: CreateBackendConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBackendConfigCommandOutput) => void),
-    cb?: (err: any, data?: CreateBackendConfigCommandOutput) => void
-  ): Promise<CreateBackendConfigCommandOutput> | void {
-    const command = new CreateBackendConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.</p>
-   */
-  public createToken(args: CreateTokenCommandInput, options?: __HttpHandlerOptions): Promise<CreateTokenCommandOutput>;
-  public createToken(args: CreateTokenCommandInput, cb: (err: any, data?: CreateTokenCommandOutput) => void): void;
-  public createToken(
-    args: CreateTokenCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateTokenCommandOutput) => void
-  ): void;
-  public createToken(
-    args: CreateTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTokenCommandOutput) => void),
-    cb?: (err: any, data?: CreateTokenCommandOutput) => void
-  ): Promise<CreateTokenCommandOutput> | void {
-    const command = new CreateTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes an existing environment from your Amplify project.</p>
-   */
-  public deleteBackend(
-    args: DeleteBackendCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBackendCommandOutput>;
-  public deleteBackend(
-    args: DeleteBackendCommandInput,
-    cb: (err: any, data?: DeleteBackendCommandOutput) => void
-  ): void;
-  public deleteBackend(
-    args: DeleteBackendCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBackendCommandOutput) => void
-  ): void;
-  public deleteBackend(
-    args: DeleteBackendCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBackendCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBackendCommandOutput) => void
-  ): Promise<DeleteBackendCommandOutput> | void {
-    const command = new DeleteBackendCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an existing backend API resource.</p>
-   */
-  public deleteBackendAPI(
-    args: DeleteBackendAPICommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBackendAPICommandOutput>;
-  public deleteBackendAPI(
-    args: DeleteBackendAPICommandInput,
-    cb: (err: any, data?: DeleteBackendAPICommandOutput) => void
-  ): void;
-  public deleteBackendAPI(
-    args: DeleteBackendAPICommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBackendAPICommandOutput) => void
-  ): void;
-  public deleteBackendAPI(
-    args: DeleteBackendAPICommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBackendAPICommandOutput) => void),
-    cb?: (err: any, data?: DeleteBackendAPICommandOutput) => void
-  ): Promise<DeleteBackendAPICommandOutput> | void {
-    const command = new DeleteBackendAPICommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an existing backend authentication resource.</p>
-   */
-  public deleteBackendAuth(
-    args: DeleteBackendAuthCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBackendAuthCommandOutput>;
-  public deleteBackendAuth(
-    args: DeleteBackendAuthCommandInput,
-    cb: (err: any, data?: DeleteBackendAuthCommandOutput) => void
-  ): void;
-  public deleteBackendAuth(
-    args: DeleteBackendAuthCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBackendAuthCommandOutput) => void
-  ): void;
-  public deleteBackendAuth(
-    args: DeleteBackendAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBackendAuthCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBackendAuthCommandOutput) => void
-  ): Promise<DeleteBackendAuthCommandOutput> | void {
-    const command = new DeleteBackendAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the challenge token based on the given appId and sessionId.</p>
-   */
-  public deleteToken(args: DeleteTokenCommandInput, options?: __HttpHandlerOptions): Promise<DeleteTokenCommandOutput>;
-  public deleteToken(args: DeleteTokenCommandInput, cb: (err: any, data?: DeleteTokenCommandOutput) => void): void;
-  public deleteToken(
-    args: DeleteTokenCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteTokenCommandOutput) => void
-  ): void;
-  public deleteToken(
-    args: DeleteTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTokenCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTokenCommandOutput) => void
-  ): Promise<DeleteTokenCommandOutput> | void {
-    const command = new DeleteTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Generates a model schema for an existing backend API resource.</p>
-   */
-  public generateBackendAPIModels(
-    args: GenerateBackendAPIModelsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GenerateBackendAPIModelsCommandOutput>;
-  public generateBackendAPIModels(
-    args: GenerateBackendAPIModelsCommandInput,
-    cb: (err: any, data?: GenerateBackendAPIModelsCommandOutput) => void
-  ): void;
-  public generateBackendAPIModels(
-    args: GenerateBackendAPIModelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GenerateBackendAPIModelsCommandOutput) => void
-  ): void;
-  public generateBackendAPIModels(
-    args: GenerateBackendAPIModelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GenerateBackendAPIModelsCommandOutput) => void),
-    cb?: (err: any, data?: GenerateBackendAPIModelsCommandOutput) => void
-  ): Promise<GenerateBackendAPIModelsCommandOutput> | void {
-    const command = new GenerateBackendAPIModelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides project-level details for your Amplify UI project.</p>
-   */
-  public getBackend(args: GetBackendCommandInput, options?: __HttpHandlerOptions): Promise<GetBackendCommandOutput>;
-  public getBackend(args: GetBackendCommandInput, cb: (err: any, data?: GetBackendCommandOutput) => void): void;
-  public getBackend(
-    args: GetBackendCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBackendCommandOutput) => void
-  ): void;
-  public getBackend(
-    args: GetBackendCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBackendCommandOutput) => void),
-    cb?: (err: any, data?: GetBackendCommandOutput) => void
-  ): Promise<GetBackendCommandOutput> | void {
-    const command = new GetBackendCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the details for a backend API.</p>
-   */
-  public getBackendAPI(
-    args: GetBackendAPICommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBackendAPICommandOutput>;
-  public getBackendAPI(
-    args: GetBackendAPICommandInput,
-    cb: (err: any, data?: GetBackendAPICommandOutput) => void
-  ): void;
-  public getBackendAPI(
-    args: GetBackendAPICommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBackendAPICommandOutput) => void
-  ): void;
-  public getBackendAPI(
-    args: GetBackendAPICommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBackendAPICommandOutput) => void),
-    cb?: (err: any, data?: GetBackendAPICommandOutput) => void
-  ): Promise<GetBackendAPICommandOutput> | void {
-    const command = new GetBackendAPICommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Generates a model schema for existing backend API resource.</p>
-   */
-  public getBackendAPIModels(
-    args: GetBackendAPIModelsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBackendAPIModelsCommandOutput>;
-  public getBackendAPIModels(
-    args: GetBackendAPIModelsCommandInput,
-    cb: (err: any, data?: GetBackendAPIModelsCommandOutput) => void
-  ): void;
-  public getBackendAPIModels(
-    args: GetBackendAPIModelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBackendAPIModelsCommandOutput) => void
-  ): void;
-  public getBackendAPIModels(
-    args: GetBackendAPIModelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBackendAPIModelsCommandOutput) => void),
-    cb?: (err: any, data?: GetBackendAPIModelsCommandOutput) => void
-  ): Promise<GetBackendAPIModelsCommandOutput> | void {
-    const command = new GetBackendAPIModelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a backend auth details.</p>
-   */
-  public getBackendAuth(
-    args: GetBackendAuthCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBackendAuthCommandOutput>;
-  public getBackendAuth(
-    args: GetBackendAuthCommandInput,
-    cb: (err: any, data?: GetBackendAuthCommandOutput) => void
-  ): void;
-  public getBackendAuth(
-    args: GetBackendAuthCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBackendAuthCommandOutput) => void
-  ): void;
-  public getBackendAuth(
-    args: GetBackendAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBackendAuthCommandOutput) => void),
-    cb?: (err: any, data?: GetBackendAuthCommandOutput) => void
-  ): Promise<GetBackendAuthCommandOutput> | void {
-    const command = new GetBackendAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific job.</p>
-   */
-  public getBackendJob(
-    args: GetBackendJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBackendJobCommandOutput>;
-  public getBackendJob(
-    args: GetBackendJobCommandInput,
-    cb: (err: any, data?: GetBackendJobCommandOutput) => void
-  ): void;
-  public getBackendJob(
-    args: GetBackendJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBackendJobCommandOutput) => void
-  ): void;
-  public getBackendJob(
-    args: GetBackendJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBackendJobCommandOutput) => void),
-    cb?: (err: any, data?: GetBackendJobCommandOutput) => void
-  ): Promise<GetBackendJobCommandOutput> | void {
-    const command = new GetBackendJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the challenge token based on the given appId and sessionId.</p>
-   */
-  public getToken(args: GetTokenCommandInput, options?: __HttpHandlerOptions): Promise<GetTokenCommandOutput>;
-  public getToken(args: GetTokenCommandInput, cb: (err: any, data?: GetTokenCommandOutput) => void): void;
-  public getToken(
-    args: GetTokenCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTokenCommandOutput) => void
-  ): void;
-  public getToken(
-    args: GetTokenCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTokenCommandOutput) => void),
-    cb?: (err: any, data?: GetTokenCommandOutput) => void
-  ): Promise<GetTokenCommandOutput> | void {
-    const command = new GetTokenCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports an existing backend authentication resource.</p>
-   */
-  public importBackendAuth(
-    args: ImportBackendAuthCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ImportBackendAuthCommandOutput>;
-  public importBackendAuth(
-    args: ImportBackendAuthCommandInput,
-    cb: (err: any, data?: ImportBackendAuthCommandOutput) => void
-  ): void;
-  public importBackendAuth(
-    args: ImportBackendAuthCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportBackendAuthCommandOutput) => void
-  ): void;
-  public importBackendAuth(
-    args: ImportBackendAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportBackendAuthCommandOutput) => void),
-    cb?: (err: any, data?: ImportBackendAuthCommandOutput) => void
-  ): Promise<ImportBackendAuthCommandOutput> | void {
-    const command = new ImportBackendAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the jobs for the backend of an Amplify app.</p>
-   */
-  public listBackendJobs(
-    args: ListBackendJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListBackendJobsCommandOutput>;
-  public listBackendJobs(
-    args: ListBackendJobsCommandInput,
-    cb: (err: any, data?: ListBackendJobsCommandOutput) => void
-  ): void;
-  public listBackendJobs(
-    args: ListBackendJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListBackendJobsCommandOutput) => void
-  ): void;
-  public listBackendJobs(
-    args: ListBackendJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBackendJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListBackendJobsCommandOutput) => void
-  ): Promise<ListBackendJobsCommandOutput> | void {
-    const command = new ListBackendJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes all backend environments from your Amplify project.</p>
-   */
-  public removeAllBackends(
-    args: RemoveAllBackendsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RemoveAllBackendsCommandOutput>;
-  public removeAllBackends(
-    args: RemoveAllBackendsCommandInput,
-    cb: (err: any, data?: RemoveAllBackendsCommandOutput) => void
-  ): void;
-  public removeAllBackends(
-    args: RemoveAllBackendsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RemoveAllBackendsCommandOutput) => void
-  ): void;
-  public removeAllBackends(
-    args: RemoveAllBackendsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveAllBackendsCommandOutput) => void),
-    cb?: (err: any, data?: RemoveAllBackendsCommandOutput) => void
-  ): Promise<RemoveAllBackendsCommandOutput> | void {
-    const command = new RemoveAllBackendsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the AWS resources required to access the Amplify Admin UI.</p>
-   */
-  public removeBackendConfig(
-    args: RemoveBackendConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RemoveBackendConfigCommandOutput>;
-  public removeBackendConfig(
-    args: RemoveBackendConfigCommandInput,
-    cb: (err: any, data?: RemoveBackendConfigCommandOutput) => void
-  ): void;
-  public removeBackendConfig(
-    args: RemoveBackendConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RemoveBackendConfigCommandOutput) => void
-  ): void;
-  public removeBackendConfig(
-    args: RemoveBackendConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RemoveBackendConfigCommandOutput) => void),
-    cb?: (err: any, data?: RemoveBackendConfigCommandOutput) => void
-  ): Promise<RemoveBackendConfigCommandOutput> | void {
-    const command = new RemoveBackendConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing backend API resource.</p>
-   */
-  public updateBackendAPI(
-    args: UpdateBackendAPICommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBackendAPICommandOutput>;
-  public updateBackendAPI(
-    args: UpdateBackendAPICommandInput,
-    cb: (err: any, data?: UpdateBackendAPICommandOutput) => void
-  ): void;
-  public updateBackendAPI(
-    args: UpdateBackendAPICommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBackendAPICommandOutput) => void
-  ): void;
-  public updateBackendAPI(
-    args: UpdateBackendAPICommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBackendAPICommandOutput) => void),
-    cb?: (err: any, data?: UpdateBackendAPICommandOutput) => void
-  ): Promise<UpdateBackendAPICommandOutput> | void {
-    const command = new UpdateBackendAPICommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing backend authentication resource.</p>
-   */
-  public updateBackendAuth(
-    args: UpdateBackendAuthCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBackendAuthCommandOutput>;
-  public updateBackendAuth(
-    args: UpdateBackendAuthCommandInput,
-    cb: (err: any, data?: UpdateBackendAuthCommandOutput) => void
-  ): void;
-  public updateBackendAuth(
-    args: UpdateBackendAuthCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBackendAuthCommandOutput) => void
-  ): void;
-  public updateBackendAuth(
-    args: UpdateBackendAuthCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBackendAuthCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBackendAuthCommandOutput) => void
-  ): Promise<UpdateBackendAuthCommandOutput> | void {
-    const command = new UpdateBackendAuthCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the AWS resources required to access the Amplify Admin UI.</p>
-   */
-  public updateBackendConfig(
-    args: UpdateBackendConfigCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBackendConfigCommandOutput>;
-  public updateBackendConfig(
-    args: UpdateBackendConfigCommandInput,
-    cb: (err: any, data?: UpdateBackendConfigCommandOutput) => void
-  ): void;
-  public updateBackendConfig(
-    args: UpdateBackendConfigCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBackendConfigCommandOutput) => void
-  ): void;
-  public updateBackendConfig(
-    args: UpdateBackendConfigCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBackendConfigCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBackendConfigCommandOutput) => void
-  ): Promise<UpdateBackendConfigCommandOutput> | void {
-    const command = new UpdateBackendConfigCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a specific job.</p>
-   */
-  public updateBackendJob(
-    args: UpdateBackendJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBackendJobCommandOutput>;
-  public updateBackendJob(
-    args: UpdateBackendJobCommandInput,
-    cb: (err: any, data?: UpdateBackendJobCommandOutput) => void
-  ): void;
-  public updateBackendJob(
-    args: UpdateBackendJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBackendJobCommandOutput) => void
-  ): void;
-  public updateBackendJob(
-    args: UpdateBackendJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBackendJobCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBackendJobCommandOutput) => void
-  ): Promise<UpdateBackendJobCommandOutput> | void {
-    const command = new UpdateBackendJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class AmplifyBackend extends AmplifyBackendClient implements AmplifyBackend {}
+createAggregatedClient(commands, AmplifyBackend);

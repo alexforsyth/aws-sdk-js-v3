@@ -1,0 +1,795 @@
+// smithy-typescript generated code
+import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
+  getHostHeaderPlugin,
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
+  getUserAgentPlugin,
+  resolveHostHeaderConfig,
+  resolveUserAgentConfig,
+} from "@aws-sdk/core/client";
+import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+  Client as __Client,
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
+import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@smithy/types";
+
+import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultOdbHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  AcceptMarketplaceRegistrationCommandInput,
+  AcceptMarketplaceRegistrationCommandOutput,
+} from "./commands/AcceptMarketplaceRegistrationCommand";
+import type {
+  AssociateIamRoleToResourceCommandInput,
+  AssociateIamRoleToResourceCommandOutput,
+} from "./commands/AssociateIamRoleToResourceCommand";
+import type {
+  AssociateVirtualMachinesToCloudVmClusterCommandInput,
+  AssociateVirtualMachinesToCloudVmClusterCommandOutput,
+} from "./commands/AssociateVirtualMachinesToCloudVmClusterCommand";
+import type {
+  AssociateVirtualMachinesToExadbVmClusterCommandInput,
+  AssociateVirtualMachinesToExadbVmClusterCommandOutput,
+} from "./commands/AssociateVirtualMachinesToExadbVmClusterCommand";
+import type {
+  CreateAutonomousDatabaseBackupCommandInput,
+  CreateAutonomousDatabaseBackupCommandOutput,
+} from "./commands/CreateAutonomousDatabaseBackupCommand";
+import type {
+  CreateAutonomousDatabaseCommandInput,
+  CreateAutonomousDatabaseCommandOutput,
+} from "./commands/CreateAutonomousDatabaseCommand";
+import type {
+  CreateAutonomousDatabaseWalletCommandInput,
+  CreateAutonomousDatabaseWalletCommandOutput,
+} from "./commands/CreateAutonomousDatabaseWalletCommand";
+import type {
+  CreateCloudAutonomousVmClusterCommandInput,
+  CreateCloudAutonomousVmClusterCommandOutput,
+} from "./commands/CreateCloudAutonomousVmClusterCommand";
+import type {
+  CreateCloudExadataInfrastructureCommandInput,
+  CreateCloudExadataInfrastructureCommandOutput,
+} from "./commands/CreateCloudExadataInfrastructureCommand";
+import type {
+  CreateCloudVmClusterCommandInput,
+  CreateCloudVmClusterCommandOutput,
+} from "./commands/CreateCloudVmClusterCommand";
+import type {
+  CreateExadbVmClusterCommandInput,
+  CreateExadbVmClusterCommandOutput,
+} from "./commands/CreateExadbVmClusterCommand";
+import type {
+  CreateExascaleDbStorageVaultCommandInput,
+  CreateExascaleDbStorageVaultCommandOutput,
+} from "./commands/CreateExascaleDbStorageVaultCommand";
+import type { CreateOdbNetworkCommandInput, CreateOdbNetworkCommandOutput } from "./commands/CreateOdbNetworkCommand";
+import type {
+  CreateOdbPeeringConnectionCommandInput,
+  CreateOdbPeeringConnectionCommandOutput,
+} from "./commands/CreateOdbPeeringConnectionCommand";
+import type {
+  DeleteAutonomousDatabaseBackupCommandInput,
+  DeleteAutonomousDatabaseBackupCommandOutput,
+} from "./commands/DeleteAutonomousDatabaseBackupCommand";
+import type {
+  DeleteAutonomousDatabaseCommandInput,
+  DeleteAutonomousDatabaseCommandOutput,
+} from "./commands/DeleteAutonomousDatabaseCommand";
+import type {
+  DeleteCloudAutonomousVmClusterCommandInput,
+  DeleteCloudAutonomousVmClusterCommandOutput,
+} from "./commands/DeleteCloudAutonomousVmClusterCommand";
+import type {
+  DeleteCloudExadataInfrastructureCommandInput,
+  DeleteCloudExadataInfrastructureCommandOutput,
+} from "./commands/DeleteCloudExadataInfrastructureCommand";
+import type {
+  DeleteCloudVmClusterCommandInput,
+  DeleteCloudVmClusterCommandOutput,
+} from "./commands/DeleteCloudVmClusterCommand";
+import type {
+  DeleteExadbVmClusterCommandInput,
+  DeleteExadbVmClusterCommandOutput,
+} from "./commands/DeleteExadbVmClusterCommand";
+import type {
+  DeleteExascaleDbStorageVaultCommandInput,
+  DeleteExascaleDbStorageVaultCommandOutput,
+} from "./commands/DeleteExascaleDbStorageVaultCommand";
+import type { DeleteOdbNetworkCommandInput, DeleteOdbNetworkCommandOutput } from "./commands/DeleteOdbNetworkCommand";
+import type {
+  DeleteOdbPeeringConnectionCommandInput,
+  DeleteOdbPeeringConnectionCommandOutput,
+} from "./commands/DeleteOdbPeeringConnectionCommand";
+import type {
+  DisassociateIamRoleFromResourceCommandInput,
+  DisassociateIamRoleFromResourceCommandOutput,
+} from "./commands/DisassociateIamRoleFromResourceCommand";
+import type {
+  DisassociateVirtualMachinesFromCloudVmClusterCommandInput,
+  DisassociateVirtualMachinesFromCloudVmClusterCommandOutput,
+} from "./commands/DisassociateVirtualMachinesFromCloudVmClusterCommand";
+import type {
+  DisassociateVirtualMachinesFromExadbVmClusterCommandInput,
+  DisassociateVirtualMachinesFromExadbVmClusterCommandOutput,
+} from "./commands/DisassociateVirtualMachinesFromExadbVmClusterCommand";
+import type {
+  FailoverAutonomousDatabaseCommandInput,
+  FailoverAutonomousDatabaseCommandOutput,
+} from "./commands/FailoverAutonomousDatabaseCommand";
+import type {
+  GetAutonomousDatabaseBackupCommandInput,
+  GetAutonomousDatabaseBackupCommandOutput,
+} from "./commands/GetAutonomousDatabaseBackupCommand";
+import type {
+  GetAutonomousDatabaseCommandInput,
+  GetAutonomousDatabaseCommandOutput,
+} from "./commands/GetAutonomousDatabaseCommand";
+import type {
+  GetAutonomousDatabaseWalletDetailsCommandInput,
+  GetAutonomousDatabaseWalletDetailsCommandOutput,
+} from "./commands/GetAutonomousDatabaseWalletDetailsCommand";
+import type {
+  GetCloudAutonomousVmClusterCommandInput,
+  GetCloudAutonomousVmClusterCommandOutput,
+} from "./commands/GetCloudAutonomousVmClusterCommand";
+import type {
+  GetCloudExadataInfrastructureCommandInput,
+  GetCloudExadataInfrastructureCommandOutput,
+} from "./commands/GetCloudExadataInfrastructureCommand";
+import type {
+  GetCloudExadataInfrastructureUnallocatedResourcesCommandInput,
+  GetCloudExadataInfrastructureUnallocatedResourcesCommandOutput,
+} from "./commands/GetCloudExadataInfrastructureUnallocatedResourcesCommand";
+import type {
+  GetCloudVmClusterCommandInput,
+  GetCloudVmClusterCommandOutput,
+} from "./commands/GetCloudVmClusterCommand";
+import type { GetDbNodeCommandInput, GetDbNodeCommandOutput } from "./commands/GetDbNodeCommand";
+import type { GetDbServerCommandInput, GetDbServerCommandOutput } from "./commands/GetDbServerCommand";
+import type {
+  GetExadbVmClusterCommandInput,
+  GetExadbVmClusterCommandOutput,
+} from "./commands/GetExadbVmClusterCommand";
+import type {
+  GetExascaleDbStorageVaultCommandInput,
+  GetExascaleDbStorageVaultCommandOutput,
+} from "./commands/GetExascaleDbStorageVaultCommand";
+import type {
+  GetOciOnboardingStatusCommandInput,
+  GetOciOnboardingStatusCommandOutput,
+} from "./commands/GetOciOnboardingStatusCommand";
+import type { GetOdbNetworkCommandInput, GetOdbNetworkCommandOutput } from "./commands/GetOdbNetworkCommand";
+import type {
+  GetOdbPeeringConnectionCommandInput,
+  GetOdbPeeringConnectionCommandOutput,
+} from "./commands/GetOdbPeeringConnectionCommand";
+import type {
+  InitializeServiceCommandInput,
+  InitializeServiceCommandOutput,
+} from "./commands/InitializeServiceCommand";
+import type {
+  ListAutonomousDatabaseBackupsCommandInput,
+  ListAutonomousDatabaseBackupsCommandOutput,
+} from "./commands/ListAutonomousDatabaseBackupsCommand";
+import type {
+  ListAutonomousDatabaseCharacterSetsCommandInput,
+  ListAutonomousDatabaseCharacterSetsCommandOutput,
+} from "./commands/ListAutonomousDatabaseCharacterSetsCommand";
+import type {
+  ListAutonomousDatabaseClonesCommandInput,
+  ListAutonomousDatabaseClonesCommandOutput,
+} from "./commands/ListAutonomousDatabaseClonesCommand";
+import type {
+  ListAutonomousDatabasePeersCommandInput,
+  ListAutonomousDatabasePeersCommandOutput,
+} from "./commands/ListAutonomousDatabasePeersCommand";
+import type {
+  ListAutonomousDatabasesCommandInput,
+  ListAutonomousDatabasesCommandOutput,
+} from "./commands/ListAutonomousDatabasesCommand";
+import type {
+  ListAutonomousDatabaseVersionsCommandInput,
+  ListAutonomousDatabaseVersionsCommandOutput,
+} from "./commands/ListAutonomousDatabaseVersionsCommand";
+import type {
+  ListAutonomousVirtualMachinesCommandInput,
+  ListAutonomousVirtualMachinesCommandOutput,
+} from "./commands/ListAutonomousVirtualMachinesCommand";
+import type {
+  ListCloudAutonomousVmClustersCommandInput,
+  ListCloudAutonomousVmClustersCommandOutput,
+} from "./commands/ListCloudAutonomousVmClustersCommand";
+import type {
+  ListCloudExadataInfrastructuresCommandInput,
+  ListCloudExadataInfrastructuresCommandOutput,
+} from "./commands/ListCloudExadataInfrastructuresCommand";
+import type {
+  ListCloudVmClustersCommandInput,
+  ListCloudVmClustersCommandOutput,
+} from "./commands/ListCloudVmClustersCommand";
+import type { ListDbNodesCommandInput, ListDbNodesCommandOutput } from "./commands/ListDbNodesCommand";
+import type { ListDbServersCommandInput, ListDbServersCommandOutput } from "./commands/ListDbServersCommand";
+import type {
+  ListDbSystemShapesCommandInput,
+  ListDbSystemShapesCommandOutput,
+} from "./commands/ListDbSystemShapesCommand";
+import type {
+  ListExadbVmClustersCommandInput,
+  ListExadbVmClustersCommandOutput,
+} from "./commands/ListExadbVmClustersCommand";
+import type {
+  ListExascaleDbStorageVaultsCommandInput,
+  ListExascaleDbStorageVaultsCommandOutput,
+} from "./commands/ListExascaleDbStorageVaultsCommand";
+import type {
+  ListFlexComponentsCommandInput,
+  ListFlexComponentsCommandOutput,
+} from "./commands/ListFlexComponentsCommand";
+import type {
+  ListGiMinorVersionsCommandInput,
+  ListGiMinorVersionsCommandOutput,
+} from "./commands/ListGiMinorVersionsCommand";
+import type { ListGiVersionsCommandInput, ListGiVersionsCommandOutput } from "./commands/ListGiVersionsCommand";
+import type { ListOdbNetworksCommandInput, ListOdbNetworksCommandOutput } from "./commands/ListOdbNetworksCommand";
+import type {
+  ListOdbPeeringConnectionsCommandInput,
+  ListOdbPeeringConnectionsCommandOutput,
+} from "./commands/ListOdbPeeringConnectionsCommand";
+import type {
+  ListSystemVersionsCommandInput,
+  ListSystemVersionsCommandOutput,
+} from "./commands/ListSystemVersionsCommand";
+import type {
+  ListTagsForResourceCommandInput,
+  ListTagsForResourceCommandOutput,
+} from "./commands/ListTagsForResourceCommand";
+import type {
+  RebootAutonomousDatabaseCommandInput,
+  RebootAutonomousDatabaseCommandOutput,
+} from "./commands/RebootAutonomousDatabaseCommand";
+import type { RebootDbNodeCommandInput, RebootDbNodeCommandOutput } from "./commands/RebootDbNodeCommand";
+import type {
+  RestoreAutonomousDatabaseCommandInput,
+  RestoreAutonomousDatabaseCommandOutput,
+} from "./commands/RestoreAutonomousDatabaseCommand";
+import type {
+  ShrinkAutonomousDatabaseCommandInput,
+  ShrinkAutonomousDatabaseCommandOutput,
+} from "./commands/ShrinkAutonomousDatabaseCommand";
+import type {
+  StartAutonomousDatabaseCommandInput,
+  StartAutonomousDatabaseCommandOutput,
+} from "./commands/StartAutonomousDatabaseCommand";
+import type { StartDbNodeCommandInput, StartDbNodeCommandOutput } from "./commands/StartDbNodeCommand";
+import type {
+  StopAutonomousDatabaseCommandInput,
+  StopAutonomousDatabaseCommandOutput,
+} from "./commands/StopAutonomousDatabaseCommand";
+import type { StopDbNodeCommandInput, StopDbNodeCommandOutput } from "./commands/StopDbNodeCommand";
+import type {
+  SwitchoverAutonomousDatabaseCommandInput,
+  SwitchoverAutonomousDatabaseCommandOutput,
+} from "./commands/SwitchoverAutonomousDatabaseCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAutonomousDatabaseBackupCommandInput,
+  UpdateAutonomousDatabaseBackupCommandOutput,
+} from "./commands/UpdateAutonomousDatabaseBackupCommand";
+import type {
+  UpdateAutonomousDatabaseCommandInput,
+  UpdateAutonomousDatabaseCommandOutput,
+} from "./commands/UpdateAutonomousDatabaseCommand";
+import type {
+  UpdateCloudAutonomousVmClusterCommandInput,
+  UpdateCloudAutonomousVmClusterCommandOutput,
+} from "./commands/UpdateCloudAutonomousVmClusterCommand";
+import type {
+  UpdateCloudExadataInfrastructureCommandInput,
+  UpdateCloudExadataInfrastructureCommandOutput,
+} from "./commands/UpdateCloudExadataInfrastructureCommand";
+import type {
+  UpdateCloudExadataInfrastructureStorageCapacityCommandInput,
+  UpdateCloudExadataInfrastructureStorageCapacityCommandOutput,
+} from "./commands/UpdateCloudExadataInfrastructureStorageCapacityCommand";
+import type {
+  UpdateCloudVmClusterCommandInput,
+  UpdateCloudVmClusterCommandOutput,
+} from "./commands/UpdateCloudVmClusterCommand";
+import type {
+  UpdateExadbVmClusterCommandInput,
+  UpdateExadbVmClusterCommandOutput,
+} from "./commands/UpdateExadbVmClusterCommand";
+import type {
+  UpdateExascaleCloudExadataInfrastructureCommandInput,
+  UpdateExascaleCloudExadataInfrastructureCommandOutput,
+} from "./commands/UpdateExascaleCloudExadataInfrastructureCommand";
+import type {
+  UpdateExascaleDbStorageVaultCommandInput,
+  UpdateExascaleDbStorageVaultCommandOutput,
+} from "./commands/UpdateExascaleDbStorageVaultCommand";
+import type { UpdateOdbNetworkCommandInput, UpdateOdbNetworkCommandOutput } from "./commands/UpdateOdbNetworkCommand";
+import type {
+  UpdateOdbPeeringConnectionCommandInput,
+  UpdateOdbPeeringConnectionCommandOutput,
+} from "./commands/UpdateOdbPeeringConnectionCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
+
+export { __Client };
+
+/**
+ * @public
+ */
+export type ServiceInputTypes =
+  | AcceptMarketplaceRegistrationCommandInput
+  | AssociateIamRoleToResourceCommandInput
+  | AssociateVirtualMachinesToCloudVmClusterCommandInput
+  | AssociateVirtualMachinesToExadbVmClusterCommandInput
+  | CreateAutonomousDatabaseBackupCommandInput
+  | CreateAutonomousDatabaseCommandInput
+  | CreateAutonomousDatabaseWalletCommandInput
+  | CreateCloudAutonomousVmClusterCommandInput
+  | CreateCloudExadataInfrastructureCommandInput
+  | CreateCloudVmClusterCommandInput
+  | CreateExadbVmClusterCommandInput
+  | CreateExascaleDbStorageVaultCommandInput
+  | CreateOdbNetworkCommandInput
+  | CreateOdbPeeringConnectionCommandInput
+  | DeleteAutonomousDatabaseBackupCommandInput
+  | DeleteAutonomousDatabaseCommandInput
+  | DeleteCloudAutonomousVmClusterCommandInput
+  | DeleteCloudExadataInfrastructureCommandInput
+  | DeleteCloudVmClusterCommandInput
+  | DeleteExadbVmClusterCommandInput
+  | DeleteExascaleDbStorageVaultCommandInput
+  | DeleteOdbNetworkCommandInput
+  | DeleteOdbPeeringConnectionCommandInput
+  | DisassociateIamRoleFromResourceCommandInput
+  | DisassociateVirtualMachinesFromCloudVmClusterCommandInput
+  | DisassociateVirtualMachinesFromExadbVmClusterCommandInput
+  | FailoverAutonomousDatabaseCommandInput
+  | GetAutonomousDatabaseBackupCommandInput
+  | GetAutonomousDatabaseCommandInput
+  | GetAutonomousDatabaseWalletDetailsCommandInput
+  | GetCloudAutonomousVmClusterCommandInput
+  | GetCloudExadataInfrastructureCommandInput
+  | GetCloudExadataInfrastructureUnallocatedResourcesCommandInput
+  | GetCloudVmClusterCommandInput
+  | GetDbNodeCommandInput
+  | GetDbServerCommandInput
+  | GetExadbVmClusterCommandInput
+  | GetExascaleDbStorageVaultCommandInput
+  | GetOciOnboardingStatusCommandInput
+  | GetOdbNetworkCommandInput
+  | GetOdbPeeringConnectionCommandInput
+  | InitializeServiceCommandInput
+  | ListAutonomousDatabaseBackupsCommandInput
+  | ListAutonomousDatabaseCharacterSetsCommandInput
+  | ListAutonomousDatabaseClonesCommandInput
+  | ListAutonomousDatabasePeersCommandInput
+  | ListAutonomousDatabaseVersionsCommandInput
+  | ListAutonomousDatabasesCommandInput
+  | ListAutonomousVirtualMachinesCommandInput
+  | ListCloudAutonomousVmClustersCommandInput
+  | ListCloudExadataInfrastructuresCommandInput
+  | ListCloudVmClustersCommandInput
+  | ListDbNodesCommandInput
+  | ListDbServersCommandInput
+  | ListDbSystemShapesCommandInput
+  | ListExadbVmClustersCommandInput
+  | ListExascaleDbStorageVaultsCommandInput
+  | ListFlexComponentsCommandInput
+  | ListGiMinorVersionsCommandInput
+  | ListGiVersionsCommandInput
+  | ListOdbNetworksCommandInput
+  | ListOdbPeeringConnectionsCommandInput
+  | ListSystemVersionsCommandInput
+  | ListTagsForResourceCommandInput
+  | RebootAutonomousDatabaseCommandInput
+  | RebootDbNodeCommandInput
+  | RestoreAutonomousDatabaseCommandInput
+  | ShrinkAutonomousDatabaseCommandInput
+  | StartAutonomousDatabaseCommandInput
+  | StartDbNodeCommandInput
+  | StopAutonomousDatabaseCommandInput
+  | StopDbNodeCommandInput
+  | SwitchoverAutonomousDatabaseCommandInput
+  | TagResourceCommandInput
+  | UntagResourceCommandInput
+  | UpdateAutonomousDatabaseBackupCommandInput
+  | UpdateAutonomousDatabaseCommandInput
+  | UpdateCloudAutonomousVmClusterCommandInput
+  | UpdateCloudExadataInfrastructureCommandInput
+  | UpdateCloudExadataInfrastructureStorageCapacityCommandInput
+  | UpdateCloudVmClusterCommandInput
+  | UpdateExadbVmClusterCommandInput
+  | UpdateExascaleCloudExadataInfrastructureCommandInput
+  | UpdateExascaleDbStorageVaultCommandInput
+  | UpdateOdbNetworkCommandInput
+  | UpdateOdbPeeringConnectionCommandInput;
+
+/**
+ * @public
+ */
+export type ServiceOutputTypes =
+  | AcceptMarketplaceRegistrationCommandOutput
+  | AssociateIamRoleToResourceCommandOutput
+  | AssociateVirtualMachinesToCloudVmClusterCommandOutput
+  | AssociateVirtualMachinesToExadbVmClusterCommandOutput
+  | CreateAutonomousDatabaseBackupCommandOutput
+  | CreateAutonomousDatabaseCommandOutput
+  | CreateAutonomousDatabaseWalletCommandOutput
+  | CreateCloudAutonomousVmClusterCommandOutput
+  | CreateCloudExadataInfrastructureCommandOutput
+  | CreateCloudVmClusterCommandOutput
+  | CreateExadbVmClusterCommandOutput
+  | CreateExascaleDbStorageVaultCommandOutput
+  | CreateOdbNetworkCommandOutput
+  | CreateOdbPeeringConnectionCommandOutput
+  | DeleteAutonomousDatabaseBackupCommandOutput
+  | DeleteAutonomousDatabaseCommandOutput
+  | DeleteCloudAutonomousVmClusterCommandOutput
+  | DeleteCloudExadataInfrastructureCommandOutput
+  | DeleteCloudVmClusterCommandOutput
+  | DeleteExadbVmClusterCommandOutput
+  | DeleteExascaleDbStorageVaultCommandOutput
+  | DeleteOdbNetworkCommandOutput
+  | DeleteOdbPeeringConnectionCommandOutput
+  | DisassociateIamRoleFromResourceCommandOutput
+  | DisassociateVirtualMachinesFromCloudVmClusterCommandOutput
+  | DisassociateVirtualMachinesFromExadbVmClusterCommandOutput
+  | FailoverAutonomousDatabaseCommandOutput
+  | GetAutonomousDatabaseBackupCommandOutput
+  | GetAutonomousDatabaseCommandOutput
+  | GetAutonomousDatabaseWalletDetailsCommandOutput
+  | GetCloudAutonomousVmClusterCommandOutput
+  | GetCloudExadataInfrastructureCommandOutput
+  | GetCloudExadataInfrastructureUnallocatedResourcesCommandOutput
+  | GetCloudVmClusterCommandOutput
+  | GetDbNodeCommandOutput
+  | GetDbServerCommandOutput
+  | GetExadbVmClusterCommandOutput
+  | GetExascaleDbStorageVaultCommandOutput
+  | GetOciOnboardingStatusCommandOutput
+  | GetOdbNetworkCommandOutput
+  | GetOdbPeeringConnectionCommandOutput
+  | InitializeServiceCommandOutput
+  | ListAutonomousDatabaseBackupsCommandOutput
+  | ListAutonomousDatabaseCharacterSetsCommandOutput
+  | ListAutonomousDatabaseClonesCommandOutput
+  | ListAutonomousDatabasePeersCommandOutput
+  | ListAutonomousDatabaseVersionsCommandOutput
+  | ListAutonomousDatabasesCommandOutput
+  | ListAutonomousVirtualMachinesCommandOutput
+  | ListCloudAutonomousVmClustersCommandOutput
+  | ListCloudExadataInfrastructuresCommandOutput
+  | ListCloudVmClustersCommandOutput
+  | ListDbNodesCommandOutput
+  | ListDbServersCommandOutput
+  | ListDbSystemShapesCommandOutput
+  | ListExadbVmClustersCommandOutput
+  | ListExascaleDbStorageVaultsCommandOutput
+  | ListFlexComponentsCommandOutput
+  | ListGiMinorVersionsCommandOutput
+  | ListGiVersionsCommandOutput
+  | ListOdbNetworksCommandOutput
+  | ListOdbPeeringConnectionsCommandOutput
+  | ListSystemVersionsCommandOutput
+  | ListTagsForResourceCommandOutput
+  | RebootAutonomousDatabaseCommandOutput
+  | RebootDbNodeCommandOutput
+  | RestoreAutonomousDatabaseCommandOutput
+  | ShrinkAutonomousDatabaseCommandOutput
+  | StartAutonomousDatabaseCommandOutput
+  | StartDbNodeCommandOutput
+  | StopAutonomousDatabaseCommandOutput
+  | StopDbNodeCommandOutput
+  | SwitchoverAutonomousDatabaseCommandOutput
+  | TagResourceCommandOutput
+  | UntagResourceCommandOutput
+  | UpdateAutonomousDatabaseBackupCommandOutput
+  | UpdateAutonomousDatabaseCommandOutput
+  | UpdateCloudAutonomousVmClusterCommandOutput
+  | UpdateCloudExadataInfrastructureCommandOutput
+  | UpdateCloudExadataInfrastructureStorageCapacityCommandOutput
+  | UpdateCloudVmClusterCommandOutput
+  | UpdateExadbVmClusterCommandOutput
+  | UpdateExascaleCloudExadataInfrastructureCommandOutput
+  | UpdateExascaleDbStorageVaultCommandOutput
+  | UpdateOdbNetworkCommandOutput
+  | UpdateOdbPeeringConnectionCommandOutput;
+
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandlerUserInput;
+
+  /**
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __ChecksumConstructor | __HashConstructor;
+
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: __BodyLengthCalculator;
+
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+
+  /**
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+
+  /**
+   * Enables IPv6/IPv4 dualstack endpoint.
+   */
+  useDualstackEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * Enables FIPS compatible endpoints.
+   */
+  useFipsEndpoint?: boolean | __Provider<boolean>;
+
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+
+  /**
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
+   */
+  profile?: string;
+
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
+}
+
+/**
+ * @public
+ */
+export type OdbClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of OdbClient class constructor that set the region, credentials and other options.
+ */
+export interface OdbClientConfig extends OdbClientConfigType {}
+
+/**
+ * @public
+ */
+export type OdbClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of OdbClient class. This is resolved and normalized from the {@link OdbClientConfig | constructor configuration interface}.
+ */
+export interface OdbClientResolvedConfig extends OdbClientResolvedConfigType {}
+
+/**
+ * <p>Oracle Database@Amazon Web Services is an offering that enables you to access Oracle Exadata infrastructure managed by Oracle Cloud Infrastructure (OCI) inside Amazon Web Services data centers. You can migrate your Oracle Exadata workloads, establish low-latency connectivity with applications running on Amazon Web Services, and integrate with Amazon Web Services services. For example, you can run application servers in a Virtual Private Cloud (VPC) and access an Oracle Exadata system running in Oracle Database@Amazon Web Services. You can get started with Oracle Database@Amazon Web Services by using the familiar Amazon Web Services Management Console, APIs, or CLI.</p> <p>This interface reference for Oracle Database@Amazon Web Services contains documentation for a programming or command line interface that you can use to manage Oracle Database@Amazon Web Services. Oracle Database@Amazon Web Services is asynchronous, which means that some interfaces might require techniques such as polling or callback functions to determine when a command has been applied. The reference structure is as follows.</p> <p> <b>Oracle Database@Amazon Web Services API Reference</b> </p> <ul> <li> <p>For the alphabetical list of API actions, see <a href="https://docs.aws.amazon.com/odb/latest/APIReference/API_Operations.html">API Actions</a>.</p> </li> <li> <p>For the alphabetical list of data types, see <a href="https://docs.aws.amazon.com/odb/latest/APIReference/API_Types.html">Data Types</a>.</p> </li> <li> <p>For a list of common query parameters, see <a href="https://docs.aws.amazon.com/odb/latest/APIReference/CommonParameters.html">Common Parameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a href="https://docs.aws.amazon.com/odb/latest/APIReference/CommonErrors.html">Common Errors</a>.</p> </li> </ul>
+ * @public
+ */
+export class OdbClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  OdbClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of OdbClient class. This is resolved and normalized from the {@link OdbClientConfig | constructor configuration interface}.
+   */
+  readonly config: OdbClientResolvedConfig;
+
+  constructor(...[configuration]: __CheckOptionalClientConfig<OdbClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
+    const _config_3 = resolveRetryConfig(_config_2);
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRetryPlugin(this.config));
+    this.middlewareStack.use(getContentLengthPlugin(this.config));
+    this.middlewareStack.use(getHostHeaderPlugin(this.config));
+    this.middlewareStack.use(getLoggerPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultOdbHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: OdbClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
+  }
+
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void {
+    super.destroy();
+  }
+}

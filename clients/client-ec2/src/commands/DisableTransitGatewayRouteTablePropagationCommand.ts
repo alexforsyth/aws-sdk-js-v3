@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisableTransitGatewayRouteTablePropagationRequest,
   DisableTransitGatewayRouteTablePropagationResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DisableTransitGatewayRouteTablePropagationCommand,
-  serializeAws_ec2DisableTransitGatewayRouteTablePropagationCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_5";
+import { DisableTransitGatewayRouteTablePropagation$ } from "../schemas/schemas_0";
 
-export interface DisableTransitGatewayRouteTablePropagationCommandInput
-  extends DisableTransitGatewayRouteTablePropagationRequest {}
-export interface DisableTransitGatewayRouteTablePropagationCommandOutput
-  extends DisableTransitGatewayRouteTablePropagationResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableTransitGatewayRouteTablePropagationCommand}.
+ */
+export interface DisableTransitGatewayRouteTablePropagationCommandInput extends DisableTransitGatewayRouteTablePropagationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableTransitGatewayRouteTablePropagationCommand}.
+ */
+export interface DisableTransitGatewayRouteTablePropagationCommandOutput extends DisableTransitGatewayRouteTablePropagationResult, __MetadataBearer {}
 
 /**
  * <p>Disables the specified resource attachment from propagating routes to the specified
@@ -35,77 +33,57 @@ export interface DisableTransitGatewayRouteTablePropagationCommandOutput
  * ```javascript
  * import { EC2Client, DisableTransitGatewayRouteTablePropagationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisableTransitGatewayRouteTablePropagationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisableTransitGatewayRouteTablePropagationRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   TransitGatewayAttachmentId: "STRING_VALUE",
+ *   DryRun: true || false,
+ *   TransitGatewayRouteTableAnnouncementId: "STRING_VALUE",
+ * };
  * const command = new DisableTransitGatewayRouteTablePropagationCommand(input);
  * const response = await client.send(command);
+ * // { // DisableTransitGatewayRouteTablePropagationResult
+ * //   Propagation: { // TransitGatewayPropagation
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     ResourceId: "STRING_VALUE",
+ * //     ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //     TransitGatewayRouteTableId: "STRING_VALUE",
+ * //     State: "enabling" || "enabled" || "disabling" || "disabled",
+ * //     TransitGatewayRouteTableAnnouncementId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisableTransitGatewayRouteTablePropagationCommandInput - {@link DisableTransitGatewayRouteTablePropagationCommandInput}
+ * @returns {@link DisableTransitGatewayRouteTablePropagationCommandOutput}
  * @see {@link DisableTransitGatewayRouteTablePropagationCommandInput} for command's `input` shape.
  * @see {@link DisableTransitGatewayRouteTablePropagationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisableTransitGatewayRouteTablePropagationCommand extends $Command<
-  DisableTransitGatewayRouteTablePropagationCommandInput,
-  DisableTransitGatewayRouteTablePropagationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableTransitGatewayRouteTablePropagationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DisableTransitGatewayRouteTablePropagationCommandInput,
-    DisableTransitGatewayRouteTablePropagationCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisableTransitGatewayRouteTablePropagationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableTransitGatewayRouteTablePropagationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisableTransitGatewayRouteTablePropagationResult.filterSensitiveLog,
+export class DisableTransitGatewayRouteTablePropagationCommand extends command<DisableTransitGatewayRouteTablePropagationCommandInput, DisableTransitGatewayRouteTablePropagationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableTransitGatewayRouteTablePropagation",
+  DisableTransitGatewayRouteTablePropagation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableTransitGatewayRouteTablePropagationRequest;
+      output: DisableTransitGatewayRouteTablePropagationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisableTransitGatewayRouteTablePropagationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DisableTransitGatewayRouteTablePropagationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisableTransitGatewayRouteTablePropagationCommandOutput> {
-    return deserializeAws_ec2DisableTransitGatewayRouteTablePropagationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableTransitGatewayRouteTablePropagationCommandInput;
+      output: DisableTransitGatewayRouteTablePropagationCommandOutput;
+    };
+  };
 }

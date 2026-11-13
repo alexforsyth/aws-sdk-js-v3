@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutFirewallRuleGroupPolicyRequest, PutFirewallRuleGroupPolicyResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutFirewallRuleGroupPolicyCommand,
-  serializeAws_json1_1PutFirewallRuleGroupPolicyCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutFirewallRuleGroupPolicyRequest, PutFirewallRuleGroupPolicyResponse } from "../models/models_0";
+import { PutFirewallRuleGroupPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutFirewallRuleGroupPolicyCommand}.
+ */
 export interface PutFirewallRuleGroupPolicyCommandInput extends PutFirewallRuleGroupPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutFirewallRuleGroupPolicyCommand}.
+ */
 export interface PutFirewallRuleGroupPolicyCommandOutput extends PutFirewallRuleGroupPolicyResponse, __MetadataBearer {}
 
 /**
@@ -30,71 +31,66 @@ export interface PutFirewallRuleGroupPolicyCommandOutput extends PutFirewallRule
  * ```javascript
  * import { Route53ResolverClient, PutFirewallRuleGroupPolicyCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, PutFirewallRuleGroupPolicyCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // PutFirewallRuleGroupPolicyRequest
+ *   Arn: "STRING_VALUE", // required
+ *   FirewallRuleGroupPolicy: "STRING_VALUE", // required
+ * };
  * const command = new PutFirewallRuleGroupPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // PutFirewallRuleGroupPolicyResponse
+ * //   ReturnValue: true || false,
+ * // };
+ *
  * ```
  *
+ * @param PutFirewallRuleGroupPolicyCommandInput - {@link PutFirewallRuleGroupPolicyCommandInput}
+ * @returns {@link PutFirewallRuleGroupPolicyCommandOutput}
  * @see {@link PutFirewallRuleGroupPolicyCommandInput} for command's `input` shape.
  * @see {@link PutFirewallRuleGroupPolicyCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The current account doesn't have the IAM permissions required to perform the specified Resolver operation.</p>
+ *          <p>This error can also be thrown when a customer has reached the 5120 character limit for a
+ * 			resource policy for CloudWatch Logs.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>You have provided an invalid command. If you ran the <code>UpdateFirewallDomains</code> request. supported values are <code>ADD</code>,
+ * 			<code>REMOVE</code>, or <code>REPLACE</code> a domain.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class PutFirewallRuleGroupPolicyCommand extends $Command<
-  PutFirewallRuleGroupPolicyCommandInput,
-  PutFirewallRuleGroupPolicyCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutFirewallRuleGroupPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutFirewallRuleGroupPolicyCommandInput, PutFirewallRuleGroupPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "PutFirewallRuleGroupPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutFirewallRuleGroupPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutFirewallRuleGroupPolicyResponse.filterSensitiveLog,
+export class PutFirewallRuleGroupPolicyCommand extends command<PutFirewallRuleGroupPolicyCommandInput, PutFirewallRuleGroupPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutFirewallRuleGroupPolicy",
+  PutFirewallRuleGroupPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutFirewallRuleGroupPolicyRequest;
+      output: PutFirewallRuleGroupPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutFirewallRuleGroupPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutFirewallRuleGroupPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<PutFirewallRuleGroupPolicyCommandOutput> {
-    return deserializeAws_json1_1PutFirewallRuleGroupPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutFirewallRuleGroupPolicyCommandInput;
+      output: PutFirewallRuleGroupPolicyCommandOutput;
+    };
+  };
 }

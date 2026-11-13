@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECSClient";
-import { DeleteAttributesRequest, DeleteAttributesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteAttributesCommand,
-  serializeAws_json1_1DeleteAttributesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAttributesRequest, DeleteAttributesResponse } from "../models/models_0";
+import { DeleteAttributes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAttributesCommand}.
+ */
 export interface DeleteAttributesCommandInput extends DeleteAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAttributesCommand}.
+ */
 export interface DeleteAttributesCommandOutput extends DeleteAttributesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,106 @@ export interface DeleteAttributesCommandOutput extends DeleteAttributesResponse,
  * ```javascript
  * import { ECSClient, DeleteAttributesCommand } from "@aws-sdk/client-ecs"; // ES Modules import
  * // const { ECSClient, DeleteAttributesCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * // import type { ECSClientConfig } from "@aws-sdk/client-ecs";
+ * const config = {}; // type is ECSClientConfig
  * const client = new ECSClient(config);
+ * const input = { // DeleteAttributesRequest
+ *   cluster: "STRING_VALUE",
+ *   attributes: [ // Attributes // required
+ *     { // Attribute
+ *       name: "STRING_VALUE", // required
+ *       value: "STRING_VALUE",
+ *       targetType: "container-instance",
+ *       targetId: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new DeleteAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteAttributesResponse
+ * //   attributes: [ // Attributes
+ * //     { // Attribute
+ * //       name: "STRING_VALUE", // required
+ * //       value: "STRING_VALUE",
+ * //       targetType: "container-instance",
+ * //       targetId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteAttributesCommandInput - {@link DeleteAttributesCommandInput}
+ * @returns {@link DeleteAttributesCommandOutput}
  * @see {@link DeleteAttributesCommandInput} for command's `input` shape.
  * @see {@link DeleteAttributesCommandOutput} for command's `response` shape.
- * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECSClientResolvedConfig | config} for ECSClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have authorization to perform the requested action.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+ *
+ * @throws {@link ClusterNotFoundException} (client fault)
+ *  <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link TargetNotFoundException} (client fault)
+ *  <p>The specified target wasn't found. You can view your available container instances with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html">ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and Region-specific.</p>
+ *
+ * @throws {@link ECSServiceException}
+ * <p>Base exception class for all service exceptions from ECS service.</p>
+ *
+ *
+ * @example To delete a custom attribute from an Amazon ECS instance
+ * ```javascript
+ * // This example deletes an attribute named stack from a container instance.
+ * const input = {
+ *   attributes: [
+ *     {
+ *       name: "stack",
+ *       targetId: "aws:ecs:us-west-2:130757420319:container-instance/1c3be8ed-df30-47b4-8f1e-6e68ebd01f34"
+ *     }
+ *   ]
+ * };
+ * const command = new DeleteAttributesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   attributes: [
+ *     {
+ *       name: "stack",
+ *       targetId: "aws:ecs:us-west-2:130757420319:container-instance/1c3be8ed-df30-47b4-8f1e-6e68ebd01f34",
+ *       value: "production"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteAttributesCommand extends $Command<
-  DeleteAttributesCommandInput,
-  DeleteAttributesCommandOutput,
-  ECSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAttributesCommandInput, DeleteAttributesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECSClient";
-    const commandName = "DeleteAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAttributesResponse.filterSensitiveLog,
+export class DeleteAttributesCommand extends command<DeleteAttributesCommandInput, DeleteAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAttributes",
+  DeleteAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAttributesRequest;
+      output: DeleteAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAttributesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteAttributesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAttributesCommandOutput> {
-    return deserializeAws_json1_1DeleteAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAttributesCommandInput;
+      output: DeleteAttributesCommandOutput;
+    };
+  };
 }

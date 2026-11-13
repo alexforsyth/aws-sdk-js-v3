@@ -1,24 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { DeleteTopicRuleDestinationRequest, DeleteTopicRuleDestinationResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1DeleteTopicRuleDestinationCommand,
-  serializeAws_restJson1DeleteTopicRuleDestinationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTopicRuleDestinationRequest } from "../models/models_0";
+import type { DeleteTopicRuleDestinationResponse } from "../models/models_1";
+import { DeleteTopicRuleDestination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTopicRuleDestinationCommand}.
+ */
 export interface DeleteTopicRuleDestinationCommandInput extends DeleteTopicRuleDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTopicRuleDestinationCommand}.
+ */
 export interface DeleteTopicRuleDestinationCommandOutput extends DeleteTopicRuleDestinationResponse, __MetadataBearer {}
 
 /**
@@ -29,71 +31,61 @@ export interface DeleteTopicRuleDestinationCommandOutput extends DeleteTopicRule
  * ```javascript
  * import { IoTClient, DeleteTopicRuleDestinationCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DeleteTopicRuleDestinationCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DeleteTopicRuleDestinationRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteTopicRuleDestinationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteTopicRuleDestinationCommandInput - {@link DeleteTopicRuleDestinationCommandInput}
+ * @returns {@link DeleteTopicRuleDestinationCommandOutput}
  * @see {@link DeleteTopicRuleDestinationCommandInput} for command's `input` shape.
  * @see {@link DeleteTopicRuleDestinationCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link ConflictingResourceUpdateException} (client fault)
+ *  <p>A conflicting resource update exception. This exception is thrown when two pending
+ *          updates cause a conflict.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTopicRuleDestinationCommand extends $Command<
-  DeleteTopicRuleDestinationCommandInput,
-  DeleteTopicRuleDestinationCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTopicRuleDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTopicRuleDestinationCommandInput, DeleteTopicRuleDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DeleteTopicRuleDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTopicRuleDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTopicRuleDestinationResponse.filterSensitiveLog,
+export class DeleteTopicRuleDestinationCommand extends command<DeleteTopicRuleDestinationCommandInput, DeleteTopicRuleDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTopicRuleDestination",
+  DeleteTopicRuleDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTopicRuleDestinationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTopicRuleDestinationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteTopicRuleDestinationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTopicRuleDestinationCommandOutput> {
-    return deserializeAws_restJson1DeleteTopicRuleDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTopicRuleDestinationCommandInput;
+      output: DeleteTopicRuleDestinationCommandOutput;
+    };
+  };
 }

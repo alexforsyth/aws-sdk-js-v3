@@ -1,0 +1,57 @@
+{
+  "name": "@aws-sdk/aws-client-retry-test",
+  "version": "3.1169.0",
+  "private": true,
+  "description": "Integration test suite for middleware-retry",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "AWS SDK for JavaScript Team",
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-sdk-js-v3.git",
+    "directory": "private/aws-client-retry-test"
+  },
+  "files": [
+    "dist-*/**"
+  ],
+  "sideEffects": false,
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "types": "./dist-types/index.d.ts",
+  "typesVersions": {
+    "<4.5": {
+      "dist-types/*": [
+        "dist-types/ts3.4/*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "concurrently 'yarn:build:types' 'yarn:build:es' && yarn build:cjs",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:es": "tsc -p tsconfig.es.json",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+    "clean": "premove dist-cjs dist-es dist-types tsconfig.cjs.tsbuildinfo tsconfig.es.tsbuildinfo tsconfig.types.tsbuildinfo",
+    "test": "yarn g:vitest run",
+    "test:watch": "yarn g:vitest watch"
+  },
+  "dependencies": {
+    "@aws-sdk/client-lambda": "workspace:3.1169.0",
+    "@smithy/core": "^3.40.0",
+    "@smithy/types": "^4.20.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "20.1.8",
+    "@types/node": "^20.14.8",
+    "concurrently": "7.0.0",
+    "downlevel-dts": "0.10.1",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

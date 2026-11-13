@@ -1,0 +1,235 @@
+const _AC = "AndCondition";
+const _ADE = "AccessDeniedException";
+const _BOC = "BeginOffsetChar";
+const _BOM = "BeginOffsetMillis";
+const _C = "Categories";
+const _CAAC = "CategoriesAttributeAndCondition";
+const _CAF = "CategoriesAttributeFilter";
+const _CAOCL = "CategoriesAttributeOrConditionList";
+const _CD = "CategoryDetails";
+const _CI = "ContactId";
+const _CO = "CharacterOffsets";
+const _CT = "ComparisonType";
+const _Co = "Content";
+const _EDDL = "ExtractionDefinitionDisplayLabel";
+const _EDI = "ExtractionDefinitionId";
+const _EDN = "ExtractionDefinitionName";
+const _EI = "ExtractedInformation";
+const _EIV = "ExtractedInformationValue";
+const _EIVx = "ExtractedInformationValues";
+const _EOC = "EndOffsetChar";
+const _EOM = "EndOffsetMillis";
+const _EV = "ExtractedValues";
+const _FC = "FailureCode";
+const _I = "Id";
+const _ID = "IssueDetected";
+const _IDs = "IssuesDetected";
+const _II = "InstanceId";
+const _IRE = "InvalidRequestException";
+const _ISE = "InternalServiceException";
+const _LF = "ListFilter";
+const _LRCAS = "ListRealtimeContactAnalysisSegments";
+const _LRCASR = "ListRealtimeContactAnalysisSegmentsRequest";
+const _LRCASRi = "ListRealtimeContactAnalysisSegmentsResponse";
+const _M = "Message";
+const _MC = "MatchedCategories";
+const _MD = "MatchedDetails";
+const _MR = "MaxResults";
+const _NT = "NextToken";
+const _OC = "OrConditions";
+const _PCS = "PostContactSummary";
+const _PI = "ParticipantId";
+const _POI = "PointsOfInterest";
+const _POIo = "PointOfInterest";
+const _PR = "ParticipantRole";
+const _RCAS = "RealtimeContactAnalysisSegment";
+const _RCASe = "RealtimeContactAnalysisSegments";
+const _RI = "RuleId";
+const _RNFE = "ResourceNotFoundException";
+const _RTCASF = "RealTimeContactAnalysisSegmentsFilter";
+const _S = "Segments";
+const _Se = "Sentiment";
+const _St = "Status";
+const _T = "Transcript";
+const _TACL = "TagAndConditionList";
+const _TC = "TagConditions";
+const _TCa = "TagCondition";
+const _TE = "ThrottlingException";
+const _TK = "TagKey";
+const _TV = "TagValue";
+const _c = "client";
+const _e = "error";
+const _h = "http";
+const _hE = "httpError";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.connectcontactlens";
+const _se = "server";
+const n0 = "com.amazonaws.connectcontactlens";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import { ConnectContactLensServiceException } from "../models/ConnectContactLensServiceException";
+import {
+  AccessDeniedException,
+  InternalServiceException,
+  InvalidRequestException,
+  ResourceNotFoundException,
+  ThrottlingException,
+} from "../models/errors";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var ConnectContactLensServiceException$: StaticErrorSchema = [-3, _s, "ConnectContactLensServiceException", 0, [], []];
+_s_registry.registerError(ConnectContactLensServiceException$, ConnectContactLensServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var InternalServiceException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InternalServiceException$, InternalServiceException);
+export var InvalidRequestException$: StaticErrorSchema = [-3, n0, _IRE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InvalidRequestException$, InvalidRequestException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_M],
+  [0], 1
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+export var Categories$: StaticStructureSchema = [3, n0, _C,
+  0,
+  [_MC, _MD],
+  [64 | 0, () => MatchedDetails], 2
+];
+export var CategoriesAttributeAndCondition$: StaticStructureSchema = [3, n0, _CAAC,
+  0,
+  [_TC],
+  [() => TagAndConditionList]
+];
+export var CategoriesAttributeFilter$: StaticStructureSchema = [3, n0, _CAF,
+  0,
+  [_OC, _AC, _TCa],
+  [() => CategoriesAttributeOrConditionList, () => CategoriesAttributeAndCondition$, () => TagCondition$]
+];
+export var CategoryDetails$: StaticStructureSchema = [3, n0, _CD,
+  0,
+  [_POI, _RI],
+  [() => PointsOfInterest, 0], 1
+];
+export var CharacterOffsets$: StaticStructureSchema = [3, n0, _CO,
+  0,
+  [_BOC, _EOC],
+  [1, 1], 2
+];
+export var ExtractedInformation$: StaticStructureSchema = [3, n0, _EI,
+  0,
+  [_EDI, _EDN, _EDDL, _EV, _FC],
+  [0, 0, 0, () => ExtractedInformationValues, 0], 2
+];
+export var ExtractedInformationValue$: StaticStructureSchema = [3, n0, _EIV,
+  0,
+  [_Co, _POI],
+  [0, () => PointsOfInterest], 2
+];
+export var IssueDetected$: StaticStructureSchema = [3, n0, _ID,
+  0,
+  [_CO],
+  [() => CharacterOffsets$], 1
+];
+export var ListRealtimeContactAnalysisSegmentsRequest$: StaticStructureSchema = [3, n0, _LRCASR,
+  0,
+  [_II, _CI, _MR, _NT, _LF],
+  [0, 0, 1, 0, () => RealTimeContactAnalysisSegmentsFilter$], 2
+];
+export var ListRealtimeContactAnalysisSegmentsResponse$: StaticStructureSchema = [3, n0, _LRCASRi,
+  0,
+  [_S, _NT],
+  [() => RealtimeContactAnalysisSegments, 0], 1
+];
+export var PointOfInterest$: StaticStructureSchema = [3, n0, _POIo,
+  0,
+  [_BOM, _EOM],
+  [1, 1], 2
+];
+export var PostContactSummary$: StaticStructureSchema = [3, n0, _PCS,
+  0,
+  [_St, _Co, _FC],
+  [0, 0, 0], 1
+];
+export var RealtimeContactAnalysisSegment$: StaticStructureSchema = [3, n0, _RCAS,
+  0,
+  [_T, _C, _PCS, _EI],
+  [() => Transcript$, () => Categories$, () => PostContactSummary$, () => ExtractedInformation$]
+];
+export var RealTimeContactAnalysisSegmentsFilter$: StaticStructureSchema = [3, n0, _RTCASF,
+  0,
+  [_CAF],
+  [() => CategoriesAttributeFilter$]
+];
+export var TagCondition$: StaticStructureSchema = [3, n0, _TCa,
+  0,
+  [_TK, _TV, _CT],
+  [0, 0, 0]
+];
+export var Transcript$: StaticStructureSchema = [3, n0, _T,
+  0,
+  [_I, _PI, _PR, _Co, _BOM, _EOM, _Se, _IDs],
+  [0, 0, 0, 0, 1, 1, 0, () => IssuesDetected], 6
+];
+var CategoriesAttributeOrConditionList: StaticListSchema = [1, n0, _CAOCL,
+  0, () => CategoriesAttributeAndCondition$
+];
+var ExtractedInformationValues: StaticListSchema = [1, n0, _EIVx,
+  0, () => ExtractedInformationValue$
+];
+var IssuesDetected: StaticListSchema = [1, n0, _IDs,
+  0, () => IssueDetected$
+];
+var MatchedCategories = 64 | 0;
+var PointsOfInterest: StaticListSchema = [1, n0, _POI,
+  0, () => PointOfInterest$
+];
+var RealtimeContactAnalysisSegments: StaticListSchema = [1, n0, _RCASe,
+  0, () => RealtimeContactAnalysisSegment$
+];
+var TagAndConditionList: StaticListSchema = [1, n0, _TACL,
+  0, () => TagCondition$
+];
+var MatchedDetails: StaticMapSchema = [2, n0, _MD,
+  0, 0, () => CategoryDetails$
+];
+export var ListRealtimeContactAnalysisSegments$: StaticOperationSchema = [9, n0, _LRCAS,
+  { [_h]: ["POST", "/realtime-contact-analysis/analysis-segments", 200] }, () => ListRealtimeContactAnalysisSegmentsRequest$, () => ListRealtimeContactAnalysisSegmentsResponse$
+];

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeCommitClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeCommitClient";
-import { GetRepositoryTriggersInput, GetRepositoryTriggersOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetRepositoryTriggersCommand,
-  serializeAws_json1_1GetRepositoryTriggersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRepositoryTriggersInput, GetRepositoryTriggersOutput } from "../models/models_0";
+import { GetRepositoryTriggers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRepositoryTriggersCommand}.
+ */
 export interface GetRepositoryTriggersCommandInput extends GetRepositoryTriggersInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetRepositoryTriggersCommand}.
+ */
 export interface GetRepositoryTriggersCommandOutput extends GetRepositoryTriggersOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface GetRepositoryTriggersCommandOutput extends GetRepositoryTrigger
  * ```javascript
  * import { CodeCommitClient, GetRepositoryTriggersCommand } from "@aws-sdk/client-codecommit"; // ES Modules import
  * // const { CodeCommitClient, GetRepositoryTriggersCommand } = require("@aws-sdk/client-codecommit"); // CommonJS import
+ * // import type { CodeCommitClientConfig } from "@aws-sdk/client-codecommit";
+ * const config = {}; // type is CodeCommitClientConfig
  * const client = new CodeCommitClient(config);
+ * const input = { // GetRepositoryTriggersInput
+ *   repositoryName: "STRING_VALUE", // required
+ * };
  * const command = new GetRepositoryTriggersCommand(input);
  * const response = await client.send(command);
+ * // { // GetRepositoryTriggersOutput
+ * //   configurationId: "STRING_VALUE",
+ * //   triggers: [ // RepositoryTriggersList
+ * //     { // RepositoryTrigger
+ * //       name: "STRING_VALUE", // required
+ * //       destinationArn: "STRING_VALUE", // required
+ * //       customData: "STRING_VALUE",
+ * //       branches: [ // BranchNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       events: [ // RepositoryTriggerEventList // required
+ * //         "all" || "updateReference" || "createReference" || "deleteReference",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetRepositoryTriggersCommandInput - {@link GetRepositoryTriggersCommandInput}
+ * @returns {@link GetRepositoryTriggersCommandOutput}
  * @see {@link GetRepositoryTriggersCommandInput} for command's `input` shape.
  * @see {@link GetRepositoryTriggersCommandOutput} for command's `response` shape.
- * @see {@link CodeCommitClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeCommitClientResolvedConfig | config} for CodeCommitClient's `config` shape.
  *
+ * @throws {@link EncryptionIntegrityChecksFailedException} (server fault)
+ *  <p>An encryption integrity check failed.</p>
+ *
+ * @throws {@link EncryptionKeyAccessDeniedException} (client fault)
+ *  <p>An encryption key could not be accessed.</p>
+ *
+ * @throws {@link EncryptionKeyDisabledException} (client fault)
+ *  <p>The encryption key is disabled.</p>
+ *
+ * @throws {@link EncryptionKeyNotFoundException} (client fault)
+ *  <p>No encryption key was found.</p>
+ *
+ * @throws {@link EncryptionKeyUnavailableException} (client fault)
+ *  <p>The encryption key is not available.</p>
+ *
+ * @throws {@link InvalidRepositoryNameException} (client fault)
+ *  <p>A specified repository name is not valid.</p>
+ *          <note>
+ *             <p>This exception occurs only when a specified repository name is not valid. Other
+ *                 exceptions occur when a required repository parameter is missing, or when a
+ *                 specified repository does not exist.</p>
+ *          </note>
+ *
+ * @throws {@link RepositoryDoesNotExistException} (client fault)
+ *  <p>The specified repository does not exist.</p>
+ *
+ * @throws {@link RepositoryNameRequiredException} (client fault)
+ *  <p>A repository name is required, but was not specified.</p>
+ *
+ * @throws {@link CodeCommitServiceException}
+ * <p>Base exception class for all service exceptions from CodeCommit service.</p>
+ *
+ *
+ * @public
  */
-export class GetRepositoryTriggersCommand extends $Command<
-  GetRepositoryTriggersCommandInput,
-  GetRepositoryTriggersCommandOutput,
-  CodeCommitClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRepositoryTriggersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeCommitClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRepositoryTriggersCommandInput, GetRepositoryTriggersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeCommitClient";
-    const commandName = "GetRepositoryTriggersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRepositoryTriggersInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRepositoryTriggersOutput.filterSensitiveLog,
+export class GetRepositoryTriggersCommand extends command<GetRepositoryTriggersCommandInput, GetRepositoryTriggersCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRepositoryTriggers",
+  GetRepositoryTriggers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRepositoryTriggersInput;
+      output: GetRepositoryTriggersOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRepositoryTriggersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRepositoryTriggersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRepositoryTriggersCommandOutput> {
-    return deserializeAws_json1_1GetRepositoryTriggersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRepositoryTriggersCommandInput;
+      output: GetRepositoryTriggersCommandOutput;
+    };
+  };
 }

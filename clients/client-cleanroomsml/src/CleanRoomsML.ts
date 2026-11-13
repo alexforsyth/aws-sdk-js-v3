@@ -1,0 +1,1610 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { CleanRoomsMLClient } from "./CleanRoomsMLClient";
+import {
+  type CancelTrainedModelCommandInput,
+  type CancelTrainedModelCommandOutput,
+  CancelTrainedModelCommand,
+} from "./commands/CancelTrainedModelCommand";
+import {
+  type CancelTrainedModelInferenceJobCommandInput,
+  type CancelTrainedModelInferenceJobCommandOutput,
+  CancelTrainedModelInferenceJobCommand,
+} from "./commands/CancelTrainedModelInferenceJobCommand";
+import {
+  type CreateAudienceModelCommandInput,
+  type CreateAudienceModelCommandOutput,
+  CreateAudienceModelCommand,
+} from "./commands/CreateAudienceModelCommand";
+import {
+  type CreateConfiguredAudienceModelCommandInput,
+  type CreateConfiguredAudienceModelCommandOutput,
+  CreateConfiguredAudienceModelCommand,
+} from "./commands/CreateConfiguredAudienceModelCommand";
+import {
+  type CreateConfiguredModelAlgorithmAssociationCommandInput,
+  type CreateConfiguredModelAlgorithmAssociationCommandOutput,
+  CreateConfiguredModelAlgorithmAssociationCommand,
+} from "./commands/CreateConfiguredModelAlgorithmAssociationCommand";
+import {
+  type CreateConfiguredModelAlgorithmCommandInput,
+  type CreateConfiguredModelAlgorithmCommandOutput,
+  CreateConfiguredModelAlgorithmCommand,
+} from "./commands/CreateConfiguredModelAlgorithmCommand";
+import {
+  type CreateMLInputChannelCommandInput,
+  type CreateMLInputChannelCommandOutput,
+  CreateMLInputChannelCommand,
+} from "./commands/CreateMLInputChannelCommand";
+import {
+  type CreateTrainedModelCommandInput,
+  type CreateTrainedModelCommandOutput,
+  CreateTrainedModelCommand,
+} from "./commands/CreateTrainedModelCommand";
+import {
+  type CreateTrainingDatasetCommandInput,
+  type CreateTrainingDatasetCommandOutput,
+  CreateTrainingDatasetCommand,
+} from "./commands/CreateTrainingDatasetCommand";
+import {
+  type DeleteAudienceGenerationJobCommandInput,
+  type DeleteAudienceGenerationJobCommandOutput,
+  DeleteAudienceGenerationJobCommand,
+} from "./commands/DeleteAudienceGenerationJobCommand";
+import {
+  type DeleteAudienceModelCommandInput,
+  type DeleteAudienceModelCommandOutput,
+  DeleteAudienceModelCommand,
+} from "./commands/DeleteAudienceModelCommand";
+import {
+  type DeleteConfiguredAudienceModelCommandInput,
+  type DeleteConfiguredAudienceModelCommandOutput,
+  DeleteConfiguredAudienceModelCommand,
+} from "./commands/DeleteConfiguredAudienceModelCommand";
+import {
+  type DeleteConfiguredAudienceModelPolicyCommandInput,
+  type DeleteConfiguredAudienceModelPolicyCommandOutput,
+  DeleteConfiguredAudienceModelPolicyCommand,
+} from "./commands/DeleteConfiguredAudienceModelPolicyCommand";
+import {
+  type DeleteConfiguredModelAlgorithmAssociationCommandInput,
+  type DeleteConfiguredModelAlgorithmAssociationCommandOutput,
+  DeleteConfiguredModelAlgorithmAssociationCommand,
+} from "./commands/DeleteConfiguredModelAlgorithmAssociationCommand";
+import {
+  type DeleteConfiguredModelAlgorithmCommandInput,
+  type DeleteConfiguredModelAlgorithmCommandOutput,
+  DeleteConfiguredModelAlgorithmCommand,
+} from "./commands/DeleteConfiguredModelAlgorithmCommand";
+import {
+  type DeleteMLConfigurationCommandInput,
+  type DeleteMLConfigurationCommandOutput,
+  DeleteMLConfigurationCommand,
+} from "./commands/DeleteMLConfigurationCommand";
+import {
+  type DeleteMLInputChannelDataCommandInput,
+  type DeleteMLInputChannelDataCommandOutput,
+  DeleteMLInputChannelDataCommand,
+} from "./commands/DeleteMLInputChannelDataCommand";
+import {
+  type DeleteTrainedModelOutputCommandInput,
+  type DeleteTrainedModelOutputCommandOutput,
+  DeleteTrainedModelOutputCommand,
+} from "./commands/DeleteTrainedModelOutputCommand";
+import {
+  type DeleteTrainingDatasetCommandInput,
+  type DeleteTrainingDatasetCommandOutput,
+  DeleteTrainingDatasetCommand,
+} from "./commands/DeleteTrainingDatasetCommand";
+import {
+  type GetAudienceGenerationJobCommandInput,
+  type GetAudienceGenerationJobCommandOutput,
+  GetAudienceGenerationJobCommand,
+} from "./commands/GetAudienceGenerationJobCommand";
+import {
+  type GetAudienceModelCommandInput,
+  type GetAudienceModelCommandOutput,
+  GetAudienceModelCommand,
+} from "./commands/GetAudienceModelCommand";
+import {
+  type GetCollaborationConfiguredModelAlgorithmAssociationCommandInput,
+  type GetCollaborationConfiguredModelAlgorithmAssociationCommandOutput,
+  GetCollaborationConfiguredModelAlgorithmAssociationCommand,
+} from "./commands/GetCollaborationConfiguredModelAlgorithmAssociationCommand";
+import {
+  type GetCollaborationMLInputChannelCommandInput,
+  type GetCollaborationMLInputChannelCommandOutput,
+  GetCollaborationMLInputChannelCommand,
+} from "./commands/GetCollaborationMLInputChannelCommand";
+import {
+  type GetCollaborationTrainedModelCommandInput,
+  type GetCollaborationTrainedModelCommandOutput,
+  GetCollaborationTrainedModelCommand,
+} from "./commands/GetCollaborationTrainedModelCommand";
+import {
+  type GetConfiguredAudienceModelCommandInput,
+  type GetConfiguredAudienceModelCommandOutput,
+  GetConfiguredAudienceModelCommand,
+} from "./commands/GetConfiguredAudienceModelCommand";
+import {
+  type GetConfiguredAudienceModelPolicyCommandInput,
+  type GetConfiguredAudienceModelPolicyCommandOutput,
+  GetConfiguredAudienceModelPolicyCommand,
+} from "./commands/GetConfiguredAudienceModelPolicyCommand";
+import {
+  type GetConfiguredModelAlgorithmAssociationCommandInput,
+  type GetConfiguredModelAlgorithmAssociationCommandOutput,
+  GetConfiguredModelAlgorithmAssociationCommand,
+} from "./commands/GetConfiguredModelAlgorithmAssociationCommand";
+import {
+  type GetConfiguredModelAlgorithmCommandInput,
+  type GetConfiguredModelAlgorithmCommandOutput,
+  GetConfiguredModelAlgorithmCommand,
+} from "./commands/GetConfiguredModelAlgorithmCommand";
+import {
+  type GetMLConfigurationCommandInput,
+  type GetMLConfigurationCommandOutput,
+  GetMLConfigurationCommand,
+} from "./commands/GetMLConfigurationCommand";
+import {
+  type GetMLInputChannelCommandInput,
+  type GetMLInputChannelCommandOutput,
+  GetMLInputChannelCommand,
+} from "./commands/GetMLInputChannelCommand";
+import {
+  type GetTrainedModelCommandInput,
+  type GetTrainedModelCommandOutput,
+  GetTrainedModelCommand,
+} from "./commands/GetTrainedModelCommand";
+import {
+  type GetTrainedModelInferenceJobCommandInput,
+  type GetTrainedModelInferenceJobCommandOutput,
+  GetTrainedModelInferenceJobCommand,
+} from "./commands/GetTrainedModelInferenceJobCommand";
+import {
+  type GetTrainingDatasetCommandInput,
+  type GetTrainingDatasetCommandOutput,
+  GetTrainingDatasetCommand,
+} from "./commands/GetTrainingDatasetCommand";
+import {
+  type ListAudienceExportJobsCommandInput,
+  type ListAudienceExportJobsCommandOutput,
+  ListAudienceExportJobsCommand,
+} from "./commands/ListAudienceExportJobsCommand";
+import {
+  type ListAudienceGenerationJobsCommandInput,
+  type ListAudienceGenerationJobsCommandOutput,
+  ListAudienceGenerationJobsCommand,
+} from "./commands/ListAudienceGenerationJobsCommand";
+import {
+  type ListAudienceModelsCommandInput,
+  type ListAudienceModelsCommandOutput,
+  ListAudienceModelsCommand,
+} from "./commands/ListAudienceModelsCommand";
+import {
+  type ListCollaborationConfiguredModelAlgorithmAssociationsCommandInput,
+  type ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput,
+  ListCollaborationConfiguredModelAlgorithmAssociationsCommand,
+} from "./commands/ListCollaborationConfiguredModelAlgorithmAssociationsCommand";
+import {
+  type ListCollaborationMLInputChannelsCommandInput,
+  type ListCollaborationMLInputChannelsCommandOutput,
+  ListCollaborationMLInputChannelsCommand,
+} from "./commands/ListCollaborationMLInputChannelsCommand";
+import {
+  type ListCollaborationTrainedModelExportJobsCommandInput,
+  type ListCollaborationTrainedModelExportJobsCommandOutput,
+  ListCollaborationTrainedModelExportJobsCommand,
+} from "./commands/ListCollaborationTrainedModelExportJobsCommand";
+import {
+  type ListCollaborationTrainedModelInferenceJobsCommandInput,
+  type ListCollaborationTrainedModelInferenceJobsCommandOutput,
+  ListCollaborationTrainedModelInferenceJobsCommand,
+} from "./commands/ListCollaborationTrainedModelInferenceJobsCommand";
+import {
+  type ListCollaborationTrainedModelsCommandInput,
+  type ListCollaborationTrainedModelsCommandOutput,
+  ListCollaborationTrainedModelsCommand,
+} from "./commands/ListCollaborationTrainedModelsCommand";
+import {
+  type ListConfiguredAudienceModelsCommandInput,
+  type ListConfiguredAudienceModelsCommandOutput,
+  ListConfiguredAudienceModelsCommand,
+} from "./commands/ListConfiguredAudienceModelsCommand";
+import {
+  type ListConfiguredModelAlgorithmAssociationsCommandInput,
+  type ListConfiguredModelAlgorithmAssociationsCommandOutput,
+  ListConfiguredModelAlgorithmAssociationsCommand,
+} from "./commands/ListConfiguredModelAlgorithmAssociationsCommand";
+import {
+  type ListConfiguredModelAlgorithmsCommandInput,
+  type ListConfiguredModelAlgorithmsCommandOutput,
+  ListConfiguredModelAlgorithmsCommand,
+} from "./commands/ListConfiguredModelAlgorithmsCommand";
+import {
+  type ListMLInputChannelsCommandInput,
+  type ListMLInputChannelsCommandOutput,
+  ListMLInputChannelsCommand,
+} from "./commands/ListMLInputChannelsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ListTrainedModelInferenceJobsCommandInput,
+  type ListTrainedModelInferenceJobsCommandOutput,
+  ListTrainedModelInferenceJobsCommand,
+} from "./commands/ListTrainedModelInferenceJobsCommand";
+import {
+  type ListTrainedModelsCommandInput,
+  type ListTrainedModelsCommandOutput,
+  ListTrainedModelsCommand,
+} from "./commands/ListTrainedModelsCommand";
+import {
+  type ListTrainedModelVersionsCommandInput,
+  type ListTrainedModelVersionsCommandOutput,
+  ListTrainedModelVersionsCommand,
+} from "./commands/ListTrainedModelVersionsCommand";
+import {
+  type ListTrainingDatasetsCommandInput,
+  type ListTrainingDatasetsCommandOutput,
+  ListTrainingDatasetsCommand,
+} from "./commands/ListTrainingDatasetsCommand";
+import {
+  type PutConfiguredAudienceModelPolicyCommandInput,
+  type PutConfiguredAudienceModelPolicyCommandOutput,
+  PutConfiguredAudienceModelPolicyCommand,
+} from "./commands/PutConfiguredAudienceModelPolicyCommand";
+import {
+  type PutMLConfigurationCommandInput,
+  type PutMLConfigurationCommandOutput,
+  PutMLConfigurationCommand,
+} from "./commands/PutMLConfigurationCommand";
+import {
+  type StartAudienceExportJobCommandInput,
+  type StartAudienceExportJobCommandOutput,
+  StartAudienceExportJobCommand,
+} from "./commands/StartAudienceExportJobCommand";
+import {
+  type StartAudienceGenerationJobCommandInput,
+  type StartAudienceGenerationJobCommandOutput,
+  StartAudienceGenerationJobCommand,
+} from "./commands/StartAudienceGenerationJobCommand";
+import {
+  type StartTrainedModelExportJobCommandInput,
+  type StartTrainedModelExportJobCommandOutput,
+  StartTrainedModelExportJobCommand,
+} from "./commands/StartTrainedModelExportJobCommand";
+import {
+  type StartTrainedModelInferenceJobCommandInput,
+  type StartTrainedModelInferenceJobCommandOutput,
+  StartTrainedModelInferenceJobCommand,
+} from "./commands/StartTrainedModelInferenceJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateConfiguredAudienceModelCommandInput,
+  type UpdateConfiguredAudienceModelCommandOutput,
+  UpdateConfiguredAudienceModelCommand,
+} from "./commands/UpdateConfiguredAudienceModelCommand";
+import { paginateListAudienceExportJobs } from "./pagination/ListAudienceExportJobsPaginator";
+import { paginateListAudienceGenerationJobs } from "./pagination/ListAudienceGenerationJobsPaginator";
+import { paginateListAudienceModels } from "./pagination/ListAudienceModelsPaginator";
+import {
+  paginateListCollaborationConfiguredModelAlgorithmAssociations,
+} from "./pagination/ListCollaborationConfiguredModelAlgorithmAssociationsPaginator";
+import { paginateListCollaborationMLInputChannels } from "./pagination/ListCollaborationMLInputChannelsPaginator";
+import {
+  paginateListCollaborationTrainedModelExportJobs,
+} from "./pagination/ListCollaborationTrainedModelExportJobsPaginator";
+import {
+  paginateListCollaborationTrainedModelInferenceJobs,
+} from "./pagination/ListCollaborationTrainedModelInferenceJobsPaginator";
+import { paginateListCollaborationTrainedModels } from "./pagination/ListCollaborationTrainedModelsPaginator";
+import { paginateListConfiguredAudienceModels } from "./pagination/ListConfiguredAudienceModelsPaginator";
+import {
+  paginateListConfiguredModelAlgorithmAssociations,
+} from "./pagination/ListConfiguredModelAlgorithmAssociationsPaginator";
+import { paginateListConfiguredModelAlgorithms } from "./pagination/ListConfiguredModelAlgorithmsPaginator";
+import { paginateListMLInputChannels } from "./pagination/ListMLInputChannelsPaginator";
+import { paginateListTrainedModelInferenceJobs } from "./pagination/ListTrainedModelInferenceJobsPaginator";
+import { paginateListTrainedModels } from "./pagination/ListTrainedModelsPaginator";
+import { paginateListTrainedModelVersions } from "./pagination/ListTrainedModelVersionsPaginator";
+import { paginateListTrainingDatasets } from "./pagination/ListTrainingDatasetsPaginator";
+
+const commands = {
+  CancelTrainedModelCommand,
+  CancelTrainedModelInferenceJobCommand,
+  CreateAudienceModelCommand,
+  CreateConfiguredAudienceModelCommand,
+  CreateConfiguredModelAlgorithmCommand,
+  CreateConfiguredModelAlgorithmAssociationCommand,
+  CreateMLInputChannelCommand,
+  CreateTrainedModelCommand,
+  CreateTrainingDatasetCommand,
+  DeleteAudienceGenerationJobCommand,
+  DeleteAudienceModelCommand,
+  DeleteConfiguredAudienceModelCommand,
+  DeleteConfiguredAudienceModelPolicyCommand,
+  DeleteConfiguredModelAlgorithmCommand,
+  DeleteConfiguredModelAlgorithmAssociationCommand,
+  DeleteMLConfigurationCommand,
+  DeleteMLInputChannelDataCommand,
+  DeleteTrainedModelOutputCommand,
+  DeleteTrainingDatasetCommand,
+  GetAudienceGenerationJobCommand,
+  GetAudienceModelCommand,
+  GetCollaborationConfiguredModelAlgorithmAssociationCommand,
+  GetCollaborationMLInputChannelCommand,
+  GetCollaborationTrainedModelCommand,
+  GetConfiguredAudienceModelCommand,
+  GetConfiguredAudienceModelPolicyCommand,
+  GetConfiguredModelAlgorithmCommand,
+  GetConfiguredModelAlgorithmAssociationCommand,
+  GetMLConfigurationCommand,
+  GetMLInputChannelCommand,
+  GetTrainedModelCommand,
+  GetTrainedModelInferenceJobCommand,
+  GetTrainingDatasetCommand,
+  ListAudienceExportJobsCommand,
+  ListAudienceGenerationJobsCommand,
+  ListAudienceModelsCommand,
+  ListCollaborationConfiguredModelAlgorithmAssociationsCommand,
+  ListCollaborationMLInputChannelsCommand,
+  ListCollaborationTrainedModelExportJobsCommand,
+  ListCollaborationTrainedModelInferenceJobsCommand,
+  ListCollaborationTrainedModelsCommand,
+  ListConfiguredAudienceModelsCommand,
+  ListConfiguredModelAlgorithmAssociationsCommand,
+  ListConfiguredModelAlgorithmsCommand,
+  ListMLInputChannelsCommand,
+  ListTagsForResourceCommand,
+  ListTrainedModelInferenceJobsCommand,
+  ListTrainedModelsCommand,
+  ListTrainedModelVersionsCommand,
+  ListTrainingDatasetsCommand,
+  PutConfiguredAudienceModelPolicyCommand,
+  PutMLConfigurationCommand,
+  StartAudienceExportJobCommand,
+  StartAudienceGenerationJobCommand,
+  StartTrainedModelExportJobCommand,
+  StartTrainedModelInferenceJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateConfiguredAudienceModelCommand,
+};
+const paginators = {
+  paginateListAudienceExportJobs,
+  paginateListAudienceGenerationJobs,
+  paginateListAudienceModels,
+  paginateListCollaborationConfiguredModelAlgorithmAssociations,
+  paginateListCollaborationMLInputChannels,
+  paginateListCollaborationTrainedModelExportJobs,
+  paginateListCollaborationTrainedModelInferenceJobs,
+  paginateListCollaborationTrainedModels,
+  paginateListConfiguredAudienceModels,
+  paginateListConfiguredModelAlgorithmAssociations,
+  paginateListConfiguredModelAlgorithms,
+  paginateListMLInputChannels,
+  paginateListTrainedModelInferenceJobs,
+  paginateListTrainedModels,
+  paginateListTrainedModelVersions,
+  paginateListTrainingDatasets,
+};
+
+/**
+ * @public
+ */
+export interface CleanRoomsMLRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CleanRoomsML {
+  /**
+   * @see {@link CancelTrainedModelCommand}
+   */
+  cancelTrainedModel(
+    args: CancelTrainedModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CancelTrainedModelCommandOutput>;
+  cancelTrainedModel(
+    args: CancelTrainedModelCommandInput,
+    cb: (err: any, data?: CancelTrainedModelCommandOutput) => void
+  ): void;
+  cancelTrainedModel(
+    args: CancelTrainedModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CancelTrainedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelTrainedModelInferenceJobCommand}
+   */
+  cancelTrainedModelInferenceJob(
+    args: CancelTrainedModelInferenceJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CancelTrainedModelInferenceJobCommandOutput>;
+  cancelTrainedModelInferenceJob(
+    args: CancelTrainedModelInferenceJobCommandInput,
+    cb: (err: any, data?: CancelTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+  cancelTrainedModelInferenceJob(
+    args: CancelTrainedModelInferenceJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CancelTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAudienceModelCommand}
+   */
+  createAudienceModel(
+    args: CreateAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateAudienceModelCommandOutput>;
+  createAudienceModel(
+    args: CreateAudienceModelCommandInput,
+    cb: (err: any, data?: CreateAudienceModelCommandOutput) => void
+  ): void;
+  createAudienceModel(
+    args: CreateAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfiguredAudienceModelCommand}
+   */
+  createConfiguredAudienceModel(
+    args: CreateConfiguredAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateConfiguredAudienceModelCommandOutput>;
+  createConfiguredAudienceModel(
+    args: CreateConfiguredAudienceModelCommandInput,
+    cb: (err: any, data?: CreateConfiguredAudienceModelCommandOutput) => void
+  ): void;
+  createConfiguredAudienceModel(
+    args: CreateConfiguredAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateConfiguredAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfiguredModelAlgorithmCommand}
+   */
+  createConfiguredModelAlgorithm(
+    args: CreateConfiguredModelAlgorithmCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateConfiguredModelAlgorithmCommandOutput>;
+  createConfiguredModelAlgorithm(
+    args: CreateConfiguredModelAlgorithmCommandInput,
+    cb: (err: any, data?: CreateConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+  createConfiguredModelAlgorithm(
+    args: CreateConfiguredModelAlgorithmCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConfiguredModelAlgorithmAssociationCommand}
+   */
+  createConfiguredModelAlgorithmAssociation(
+    args: CreateConfiguredModelAlgorithmAssociationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateConfiguredModelAlgorithmAssociationCommandOutput>;
+  createConfiguredModelAlgorithmAssociation(
+    args: CreateConfiguredModelAlgorithmAssociationCommandInput,
+    cb: (err: any, data?: CreateConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+  createConfiguredModelAlgorithmAssociation(
+    args: CreateConfiguredModelAlgorithmAssociationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMLInputChannelCommand}
+   */
+  createMLInputChannel(
+    args: CreateMLInputChannelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateMLInputChannelCommandOutput>;
+  createMLInputChannel(
+    args: CreateMLInputChannelCommandInput,
+    cb: (err: any, data?: CreateMLInputChannelCommandOutput) => void
+  ): void;
+  createMLInputChannel(
+    args: CreateMLInputChannelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateMLInputChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTrainedModelCommand}
+   */
+  createTrainedModel(
+    args: CreateTrainedModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateTrainedModelCommandOutput>;
+  createTrainedModel(
+    args: CreateTrainedModelCommandInput,
+    cb: (err: any, data?: CreateTrainedModelCommandOutput) => void
+  ): void;
+  createTrainedModel(
+    args: CreateTrainedModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateTrainedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTrainingDatasetCommand}
+   */
+  createTrainingDataset(
+    args: CreateTrainingDatasetCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<CreateTrainingDatasetCommandOutput>;
+  createTrainingDataset(
+    args: CreateTrainingDatasetCommandInput,
+    cb: (err: any, data?: CreateTrainingDatasetCommandOutput) => void
+  ): void;
+  createTrainingDataset(
+    args: CreateTrainingDatasetCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: CreateTrainingDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAudienceGenerationJobCommand}
+   */
+  deleteAudienceGenerationJob(
+    args: DeleteAudienceGenerationJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteAudienceGenerationJobCommandOutput>;
+  deleteAudienceGenerationJob(
+    args: DeleteAudienceGenerationJobCommandInput,
+    cb: (err: any, data?: DeleteAudienceGenerationJobCommandOutput) => void
+  ): void;
+  deleteAudienceGenerationJob(
+    args: DeleteAudienceGenerationJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteAudienceGenerationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAudienceModelCommand}
+   */
+  deleteAudienceModel(
+    args: DeleteAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteAudienceModelCommandOutput>;
+  deleteAudienceModel(
+    args: DeleteAudienceModelCommandInput,
+    cb: (err: any, data?: DeleteAudienceModelCommandOutput) => void
+  ): void;
+  deleteAudienceModel(
+    args: DeleteAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfiguredAudienceModelCommand}
+   */
+  deleteConfiguredAudienceModel(
+    args: DeleteConfiguredAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteConfiguredAudienceModelCommandOutput>;
+  deleteConfiguredAudienceModel(
+    args: DeleteConfiguredAudienceModelCommandInput,
+    cb: (err: any, data?: DeleteConfiguredAudienceModelCommandOutput) => void
+  ): void;
+  deleteConfiguredAudienceModel(
+    args: DeleteConfiguredAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteConfiguredAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfiguredAudienceModelPolicyCommand}
+   */
+  deleteConfiguredAudienceModelPolicy(
+    args: DeleteConfiguredAudienceModelPolicyCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteConfiguredAudienceModelPolicyCommandOutput>;
+  deleteConfiguredAudienceModelPolicy(
+    args: DeleteConfiguredAudienceModelPolicyCommandInput,
+    cb: (err: any, data?: DeleteConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+  deleteConfiguredAudienceModelPolicy(
+    args: DeleteConfiguredAudienceModelPolicyCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfiguredModelAlgorithmCommand}
+   */
+  deleteConfiguredModelAlgorithm(
+    args: DeleteConfiguredModelAlgorithmCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteConfiguredModelAlgorithmCommandOutput>;
+  deleteConfiguredModelAlgorithm(
+    args: DeleteConfiguredModelAlgorithmCommandInput,
+    cb: (err: any, data?: DeleteConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+  deleteConfiguredModelAlgorithm(
+    args: DeleteConfiguredModelAlgorithmCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConfiguredModelAlgorithmAssociationCommand}
+   */
+  deleteConfiguredModelAlgorithmAssociation(
+    args: DeleteConfiguredModelAlgorithmAssociationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteConfiguredModelAlgorithmAssociationCommandOutput>;
+  deleteConfiguredModelAlgorithmAssociation(
+    args: DeleteConfiguredModelAlgorithmAssociationCommandInput,
+    cb: (err: any, data?: DeleteConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+  deleteConfiguredModelAlgorithmAssociation(
+    args: DeleteConfiguredModelAlgorithmAssociationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMLConfigurationCommand}
+   */
+  deleteMLConfiguration(
+    args: DeleteMLConfigurationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteMLConfigurationCommandOutput>;
+  deleteMLConfiguration(
+    args: DeleteMLConfigurationCommandInput,
+    cb: (err: any, data?: DeleteMLConfigurationCommandOutput) => void
+  ): void;
+  deleteMLConfiguration(
+    args: DeleteMLConfigurationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteMLConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMLInputChannelDataCommand}
+   */
+  deleteMLInputChannelData(
+    args: DeleteMLInputChannelDataCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteMLInputChannelDataCommandOutput>;
+  deleteMLInputChannelData(
+    args: DeleteMLInputChannelDataCommandInput,
+    cb: (err: any, data?: DeleteMLInputChannelDataCommandOutput) => void
+  ): void;
+  deleteMLInputChannelData(
+    args: DeleteMLInputChannelDataCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteMLInputChannelDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTrainedModelOutputCommand}
+   */
+  deleteTrainedModelOutput(
+    args: DeleteTrainedModelOutputCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteTrainedModelOutputCommandOutput>;
+  deleteTrainedModelOutput(
+    args: DeleteTrainedModelOutputCommandInput,
+    cb: (err: any, data?: DeleteTrainedModelOutputCommandOutput) => void
+  ): void;
+  deleteTrainedModelOutput(
+    args: DeleteTrainedModelOutputCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteTrainedModelOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTrainingDatasetCommand}
+   */
+  deleteTrainingDataset(
+    args: DeleteTrainingDatasetCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<DeleteTrainingDatasetCommandOutput>;
+  deleteTrainingDataset(
+    args: DeleteTrainingDatasetCommandInput,
+    cb: (err: any, data?: DeleteTrainingDatasetCommandOutput) => void
+  ): void;
+  deleteTrainingDataset(
+    args: DeleteTrainingDatasetCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: DeleteTrainingDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAudienceGenerationJobCommand}
+   */
+  getAudienceGenerationJob(
+    args: GetAudienceGenerationJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetAudienceGenerationJobCommandOutput>;
+  getAudienceGenerationJob(
+    args: GetAudienceGenerationJobCommandInput,
+    cb: (err: any, data?: GetAudienceGenerationJobCommandOutput) => void
+  ): void;
+  getAudienceGenerationJob(
+    args: GetAudienceGenerationJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetAudienceGenerationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAudienceModelCommand}
+   */
+  getAudienceModel(
+    args: GetAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetAudienceModelCommandOutput>;
+  getAudienceModel(
+    args: GetAudienceModelCommandInput,
+    cb: (err: any, data?: GetAudienceModelCommandOutput) => void
+  ): void;
+  getAudienceModel(
+    args: GetAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCollaborationConfiguredModelAlgorithmAssociationCommand}
+   */
+  getCollaborationConfiguredModelAlgorithmAssociation(
+    args: GetCollaborationConfiguredModelAlgorithmAssociationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetCollaborationConfiguredModelAlgorithmAssociationCommandOutput>;
+  getCollaborationConfiguredModelAlgorithmAssociation(
+    args: GetCollaborationConfiguredModelAlgorithmAssociationCommandInput,
+    cb: (err: any, data?: GetCollaborationConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+  getCollaborationConfiguredModelAlgorithmAssociation(
+    args: GetCollaborationConfiguredModelAlgorithmAssociationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetCollaborationConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCollaborationMLInputChannelCommand}
+   */
+  getCollaborationMLInputChannel(
+    args: GetCollaborationMLInputChannelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetCollaborationMLInputChannelCommandOutput>;
+  getCollaborationMLInputChannel(
+    args: GetCollaborationMLInputChannelCommandInput,
+    cb: (err: any, data?: GetCollaborationMLInputChannelCommandOutput) => void
+  ): void;
+  getCollaborationMLInputChannel(
+    args: GetCollaborationMLInputChannelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetCollaborationMLInputChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCollaborationTrainedModelCommand}
+   */
+  getCollaborationTrainedModel(
+    args: GetCollaborationTrainedModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetCollaborationTrainedModelCommandOutput>;
+  getCollaborationTrainedModel(
+    args: GetCollaborationTrainedModelCommandInput,
+    cb: (err: any, data?: GetCollaborationTrainedModelCommandOutput) => void
+  ): void;
+  getCollaborationTrainedModel(
+    args: GetCollaborationTrainedModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetCollaborationTrainedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfiguredAudienceModelCommand}
+   */
+  getConfiguredAudienceModel(
+    args: GetConfiguredAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetConfiguredAudienceModelCommandOutput>;
+  getConfiguredAudienceModel(
+    args: GetConfiguredAudienceModelCommandInput,
+    cb: (err: any, data?: GetConfiguredAudienceModelCommandOutput) => void
+  ): void;
+  getConfiguredAudienceModel(
+    args: GetConfiguredAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetConfiguredAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfiguredAudienceModelPolicyCommand}
+   */
+  getConfiguredAudienceModelPolicy(
+    args: GetConfiguredAudienceModelPolicyCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetConfiguredAudienceModelPolicyCommandOutput>;
+  getConfiguredAudienceModelPolicy(
+    args: GetConfiguredAudienceModelPolicyCommandInput,
+    cb: (err: any, data?: GetConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+  getConfiguredAudienceModelPolicy(
+    args: GetConfiguredAudienceModelPolicyCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfiguredModelAlgorithmCommand}
+   */
+  getConfiguredModelAlgorithm(
+    args: GetConfiguredModelAlgorithmCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetConfiguredModelAlgorithmCommandOutput>;
+  getConfiguredModelAlgorithm(
+    args: GetConfiguredModelAlgorithmCommandInput,
+    cb: (err: any, data?: GetConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+  getConfiguredModelAlgorithm(
+    args: GetConfiguredModelAlgorithmCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetConfiguredModelAlgorithmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfiguredModelAlgorithmAssociationCommand}
+   */
+  getConfiguredModelAlgorithmAssociation(
+    args: GetConfiguredModelAlgorithmAssociationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetConfiguredModelAlgorithmAssociationCommandOutput>;
+  getConfiguredModelAlgorithmAssociation(
+    args: GetConfiguredModelAlgorithmAssociationCommandInput,
+    cb: (err: any, data?: GetConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+  getConfiguredModelAlgorithmAssociation(
+    args: GetConfiguredModelAlgorithmAssociationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetConfiguredModelAlgorithmAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLConfigurationCommand}
+   */
+  getMLConfiguration(
+    args: GetMLConfigurationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetMLConfigurationCommandOutput>;
+  getMLConfiguration(
+    args: GetMLConfigurationCommandInput,
+    cb: (err: any, data?: GetMLConfigurationCommandOutput) => void
+  ): void;
+  getMLConfiguration(
+    args: GetMLConfigurationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetMLConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMLInputChannelCommand}
+   */
+  getMLInputChannel(
+    args: GetMLInputChannelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetMLInputChannelCommandOutput>;
+  getMLInputChannel(
+    args: GetMLInputChannelCommandInput,
+    cb: (err: any, data?: GetMLInputChannelCommandOutput) => void
+  ): void;
+  getMLInputChannel(
+    args: GetMLInputChannelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetMLInputChannelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrainedModelCommand}
+   */
+  getTrainedModel(
+    args: GetTrainedModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetTrainedModelCommandOutput>;
+  getTrainedModel(
+    args: GetTrainedModelCommandInput,
+    cb: (err: any, data?: GetTrainedModelCommandOutput) => void
+  ): void;
+  getTrainedModel(
+    args: GetTrainedModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetTrainedModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrainedModelInferenceJobCommand}
+   */
+  getTrainedModelInferenceJob(
+    args: GetTrainedModelInferenceJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetTrainedModelInferenceJobCommandOutput>;
+  getTrainedModelInferenceJob(
+    args: GetTrainedModelInferenceJobCommandInput,
+    cb: (err: any, data?: GetTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+  getTrainedModelInferenceJob(
+    args: GetTrainedModelInferenceJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrainingDatasetCommand}
+   */
+  getTrainingDataset(
+    args: GetTrainingDatasetCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<GetTrainingDatasetCommandOutput>;
+  getTrainingDataset(
+    args: GetTrainingDatasetCommandInput,
+    cb: (err: any, data?: GetTrainingDatasetCommandOutput) => void
+  ): void;
+  getTrainingDataset(
+    args: GetTrainingDatasetCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: GetTrainingDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAudienceExportJobsCommand}
+   */
+  listAudienceExportJobs(): Promise<ListAudienceExportJobsCommandOutput>;
+  listAudienceExportJobs(
+    args: ListAudienceExportJobsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListAudienceExportJobsCommandOutput>;
+  listAudienceExportJobs(
+    args: ListAudienceExportJobsCommandInput,
+    cb: (err: any, data?: ListAudienceExportJobsCommandOutput) => void
+  ): void;
+  listAudienceExportJobs(
+    args: ListAudienceExportJobsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListAudienceExportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAudienceGenerationJobsCommand}
+   */
+  listAudienceGenerationJobs(): Promise<ListAudienceGenerationJobsCommandOutput>;
+  listAudienceGenerationJobs(
+    args: ListAudienceGenerationJobsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListAudienceGenerationJobsCommandOutput>;
+  listAudienceGenerationJobs(
+    args: ListAudienceGenerationJobsCommandInput,
+    cb: (err: any, data?: ListAudienceGenerationJobsCommandOutput) => void
+  ): void;
+  listAudienceGenerationJobs(
+    args: ListAudienceGenerationJobsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListAudienceGenerationJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAudienceModelsCommand}
+   */
+  listAudienceModels(): Promise<ListAudienceModelsCommandOutput>;
+  listAudienceModels(
+    args: ListAudienceModelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListAudienceModelsCommandOutput>;
+  listAudienceModels(
+    args: ListAudienceModelsCommandInput,
+    cb: (err: any, data?: ListAudienceModelsCommandOutput) => void
+  ): void;
+  listAudienceModels(
+    args: ListAudienceModelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListAudienceModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollaborationConfiguredModelAlgorithmAssociationsCommand}
+   */
+  listCollaborationConfiguredModelAlgorithmAssociations(
+    args: ListCollaborationConfiguredModelAlgorithmAssociationsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput>;
+  listCollaborationConfiguredModelAlgorithmAssociations(
+    args: ListCollaborationConfiguredModelAlgorithmAssociationsCommandInput,
+    cb: (err: any, data?: ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput) => void
+  ): void;
+  listCollaborationConfiguredModelAlgorithmAssociations(
+    args: ListCollaborationConfiguredModelAlgorithmAssociationsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollaborationMLInputChannelsCommand}
+   */
+  listCollaborationMLInputChannels(
+    args: ListCollaborationMLInputChannelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListCollaborationMLInputChannelsCommandOutput>;
+  listCollaborationMLInputChannels(
+    args: ListCollaborationMLInputChannelsCommandInput,
+    cb: (err: any, data?: ListCollaborationMLInputChannelsCommandOutput) => void
+  ): void;
+  listCollaborationMLInputChannels(
+    args: ListCollaborationMLInputChannelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListCollaborationMLInputChannelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelExportJobsCommand}
+   */
+  listCollaborationTrainedModelExportJobs(
+    args: ListCollaborationTrainedModelExportJobsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListCollaborationTrainedModelExportJobsCommandOutput>;
+  listCollaborationTrainedModelExportJobs(
+    args: ListCollaborationTrainedModelExportJobsCommandInput,
+    cb: (err: any, data?: ListCollaborationTrainedModelExportJobsCommandOutput) => void
+  ): void;
+  listCollaborationTrainedModelExportJobs(
+    args: ListCollaborationTrainedModelExportJobsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListCollaborationTrainedModelExportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelInferenceJobsCommand}
+   */
+  listCollaborationTrainedModelInferenceJobs(
+    args: ListCollaborationTrainedModelInferenceJobsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListCollaborationTrainedModelInferenceJobsCommandOutput>;
+  listCollaborationTrainedModelInferenceJobs(
+    args: ListCollaborationTrainedModelInferenceJobsCommandInput,
+    cb: (err: any, data?: ListCollaborationTrainedModelInferenceJobsCommandOutput) => void
+  ): void;
+  listCollaborationTrainedModelInferenceJobs(
+    args: ListCollaborationTrainedModelInferenceJobsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListCollaborationTrainedModelInferenceJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelsCommand}
+   */
+  listCollaborationTrainedModels(
+    args: ListCollaborationTrainedModelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListCollaborationTrainedModelsCommandOutput>;
+  listCollaborationTrainedModels(
+    args: ListCollaborationTrainedModelsCommandInput,
+    cb: (err: any, data?: ListCollaborationTrainedModelsCommandOutput) => void
+  ): void;
+  listCollaborationTrainedModels(
+    args: ListCollaborationTrainedModelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListCollaborationTrainedModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfiguredAudienceModelsCommand}
+   */
+  listConfiguredAudienceModels(): Promise<ListConfiguredAudienceModelsCommandOutput>;
+  listConfiguredAudienceModels(
+    args: ListConfiguredAudienceModelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListConfiguredAudienceModelsCommandOutput>;
+  listConfiguredAudienceModels(
+    args: ListConfiguredAudienceModelsCommandInput,
+    cb: (err: any, data?: ListConfiguredAudienceModelsCommandOutput) => void
+  ): void;
+  listConfiguredAudienceModels(
+    args: ListConfiguredAudienceModelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListConfiguredAudienceModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfiguredModelAlgorithmAssociationsCommand}
+   */
+  listConfiguredModelAlgorithmAssociations(
+    args: ListConfiguredModelAlgorithmAssociationsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListConfiguredModelAlgorithmAssociationsCommandOutput>;
+  listConfiguredModelAlgorithmAssociations(
+    args: ListConfiguredModelAlgorithmAssociationsCommandInput,
+    cb: (err: any, data?: ListConfiguredModelAlgorithmAssociationsCommandOutput) => void
+  ): void;
+  listConfiguredModelAlgorithmAssociations(
+    args: ListConfiguredModelAlgorithmAssociationsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListConfiguredModelAlgorithmAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConfiguredModelAlgorithmsCommand}
+   */
+  listConfiguredModelAlgorithms(): Promise<ListConfiguredModelAlgorithmsCommandOutput>;
+  listConfiguredModelAlgorithms(
+    args: ListConfiguredModelAlgorithmsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListConfiguredModelAlgorithmsCommandOutput>;
+  listConfiguredModelAlgorithms(
+    args: ListConfiguredModelAlgorithmsCommandInput,
+    cb: (err: any, data?: ListConfiguredModelAlgorithmsCommandOutput) => void
+  ): void;
+  listConfiguredModelAlgorithms(
+    args: ListConfiguredModelAlgorithmsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListConfiguredModelAlgorithmsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMLInputChannelsCommand}
+   */
+  listMLInputChannels(
+    args: ListMLInputChannelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListMLInputChannelsCommandOutput>;
+  listMLInputChannels(
+    args: ListMLInputChannelsCommandInput,
+    cb: (err: any, data?: ListMLInputChannelsCommandOutput) => void
+  ): void;
+  listMLInputChannels(
+    args: ListMLInputChannelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListMLInputChannelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrainedModelInferenceJobsCommand}
+   */
+  listTrainedModelInferenceJobs(
+    args: ListTrainedModelInferenceJobsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListTrainedModelInferenceJobsCommandOutput>;
+  listTrainedModelInferenceJobs(
+    args: ListTrainedModelInferenceJobsCommandInput,
+    cb: (err: any, data?: ListTrainedModelInferenceJobsCommandOutput) => void
+  ): void;
+  listTrainedModelInferenceJobs(
+    args: ListTrainedModelInferenceJobsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListTrainedModelInferenceJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrainedModelsCommand}
+   */
+  listTrainedModels(
+    args: ListTrainedModelsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListTrainedModelsCommandOutput>;
+  listTrainedModels(
+    args: ListTrainedModelsCommandInput,
+    cb: (err: any, data?: ListTrainedModelsCommandOutput) => void
+  ): void;
+  listTrainedModels(
+    args: ListTrainedModelsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListTrainedModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrainedModelVersionsCommand}
+   */
+  listTrainedModelVersions(
+    args: ListTrainedModelVersionsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListTrainedModelVersionsCommandOutput>;
+  listTrainedModelVersions(
+    args: ListTrainedModelVersionsCommandInput,
+    cb: (err: any, data?: ListTrainedModelVersionsCommandOutput) => void
+  ): void;
+  listTrainedModelVersions(
+    args: ListTrainedModelVersionsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListTrainedModelVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTrainingDatasetsCommand}
+   */
+  listTrainingDatasets(): Promise<ListTrainingDatasetsCommandOutput>;
+  listTrainingDatasets(
+    args: ListTrainingDatasetsCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<ListTrainingDatasetsCommandOutput>;
+  listTrainingDatasets(
+    args: ListTrainingDatasetsCommandInput,
+    cb: (err: any, data?: ListTrainingDatasetsCommandOutput) => void
+  ): void;
+  listTrainingDatasets(
+    args: ListTrainingDatasetsCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: ListTrainingDatasetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutConfiguredAudienceModelPolicyCommand}
+   */
+  putConfiguredAudienceModelPolicy(
+    args: PutConfiguredAudienceModelPolicyCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<PutConfiguredAudienceModelPolicyCommandOutput>;
+  putConfiguredAudienceModelPolicy(
+    args: PutConfiguredAudienceModelPolicyCommandInput,
+    cb: (err: any, data?: PutConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+  putConfiguredAudienceModelPolicy(
+    args: PutConfiguredAudienceModelPolicyCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: PutConfiguredAudienceModelPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutMLConfigurationCommand}
+   */
+  putMLConfiguration(
+    args: PutMLConfigurationCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<PutMLConfigurationCommandOutput>;
+  putMLConfiguration(
+    args: PutMLConfigurationCommandInput,
+    cb: (err: any, data?: PutMLConfigurationCommandOutput) => void
+  ): void;
+  putMLConfiguration(
+    args: PutMLConfigurationCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: PutMLConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAudienceExportJobCommand}
+   */
+  startAudienceExportJob(
+    args: StartAudienceExportJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<StartAudienceExportJobCommandOutput>;
+  startAudienceExportJob(
+    args: StartAudienceExportJobCommandInput,
+    cb: (err: any, data?: StartAudienceExportJobCommandOutput) => void
+  ): void;
+  startAudienceExportJob(
+    args: StartAudienceExportJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: StartAudienceExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAudienceGenerationJobCommand}
+   */
+  startAudienceGenerationJob(
+    args: StartAudienceGenerationJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<StartAudienceGenerationJobCommandOutput>;
+  startAudienceGenerationJob(
+    args: StartAudienceGenerationJobCommandInput,
+    cb: (err: any, data?: StartAudienceGenerationJobCommandOutput) => void
+  ): void;
+  startAudienceGenerationJob(
+    args: StartAudienceGenerationJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: StartAudienceGenerationJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTrainedModelExportJobCommand}
+   */
+  startTrainedModelExportJob(
+    args: StartTrainedModelExportJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<StartTrainedModelExportJobCommandOutput>;
+  startTrainedModelExportJob(
+    args: StartTrainedModelExportJobCommandInput,
+    cb: (err: any, data?: StartTrainedModelExportJobCommandOutput) => void
+  ): void;
+  startTrainedModelExportJob(
+    args: StartTrainedModelExportJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: StartTrainedModelExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTrainedModelInferenceJobCommand}
+   */
+  startTrainedModelInferenceJob(
+    args: StartTrainedModelInferenceJobCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<StartTrainedModelInferenceJobCommandOutput>;
+  startTrainedModelInferenceJob(
+    args: StartTrainedModelInferenceJobCommandInput,
+    cb: (err: any, data?: StartTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+  startTrainedModelInferenceJob(
+    args: StartTrainedModelInferenceJobCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: StartTrainedModelInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConfiguredAudienceModelCommand}
+   */
+  updateConfiguredAudienceModel(
+    args: UpdateConfiguredAudienceModelCommandInput,
+    options?: CleanRoomsMLRequestOptions
+  ): Promise<UpdateConfiguredAudienceModelCommandOutput>;
+  updateConfiguredAudienceModel(
+    args: UpdateConfiguredAudienceModelCommandInput,
+    cb: (err: any, data?: UpdateConfiguredAudienceModelCommandOutput) => void
+  ): void;
+  updateConfiguredAudienceModel(
+    args: UpdateConfiguredAudienceModelCommandInput,
+    options: CleanRoomsMLRequestOptions,
+    cb: (err: any, data?: UpdateConfiguredAudienceModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAudienceExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAudienceExportJobsCommandOutput}.
+   */
+  paginateListAudienceExportJobs(
+    args?: ListAudienceExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAudienceExportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListAudienceGenerationJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAudienceGenerationJobsCommandOutput}.
+   */
+  paginateListAudienceGenerationJobs(
+    args?: ListAudienceGenerationJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAudienceGenerationJobsCommandOutput>;
+
+  /**
+   * @see {@link ListAudienceModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAudienceModelsCommandOutput}.
+   */
+  paginateListAudienceModels(
+    args?: ListAudienceModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAudienceModelsCommandOutput>;
+
+  /**
+   * @see {@link ListCollaborationConfiguredModelAlgorithmAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput}.
+   */
+  paginateListCollaborationConfiguredModelAlgorithmAssociations(
+    args: ListCollaborationConfiguredModelAlgorithmAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollaborationConfiguredModelAlgorithmAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListCollaborationMLInputChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollaborationMLInputChannelsCommandOutput}.
+   */
+  paginateListCollaborationMLInputChannels(
+    args: ListCollaborationMLInputChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollaborationMLInputChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollaborationTrainedModelExportJobsCommandOutput}.
+   */
+  paginateListCollaborationTrainedModelExportJobs(
+    args: ListCollaborationTrainedModelExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollaborationTrainedModelExportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelInferenceJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollaborationTrainedModelInferenceJobsCommandOutput}.
+   */
+  paginateListCollaborationTrainedModelInferenceJobs(
+    args: ListCollaborationTrainedModelInferenceJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollaborationTrainedModelInferenceJobsCommandOutput>;
+
+  /**
+   * @see {@link ListCollaborationTrainedModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCollaborationTrainedModelsCommandOutput}.
+   */
+  paginateListCollaborationTrainedModels(
+    args: ListCollaborationTrainedModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCollaborationTrainedModelsCommandOutput>;
+
+  /**
+   * @see {@link ListConfiguredAudienceModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfiguredAudienceModelsCommandOutput}.
+   */
+  paginateListConfiguredAudienceModels(
+    args?: ListConfiguredAudienceModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfiguredAudienceModelsCommandOutput>;
+
+  /**
+   * @see {@link ListConfiguredModelAlgorithmAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfiguredModelAlgorithmAssociationsCommandOutput}.
+   */
+  paginateListConfiguredModelAlgorithmAssociations(
+    args: ListConfiguredModelAlgorithmAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfiguredModelAlgorithmAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListConfiguredModelAlgorithmsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConfiguredModelAlgorithmsCommandOutput}.
+   */
+  paginateListConfiguredModelAlgorithms(
+    args?: ListConfiguredModelAlgorithmsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConfiguredModelAlgorithmsCommandOutput>;
+
+  /**
+   * @see {@link ListMLInputChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMLInputChannelsCommandOutput}.
+   */
+  paginateListMLInputChannels(
+    args: ListMLInputChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMLInputChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListTrainedModelInferenceJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrainedModelInferenceJobsCommandOutput}.
+   */
+  paginateListTrainedModelInferenceJobs(
+    args: ListTrainedModelInferenceJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrainedModelInferenceJobsCommandOutput>;
+
+  /**
+   * @see {@link ListTrainedModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrainedModelsCommandOutput}.
+   */
+  paginateListTrainedModels(
+    args: ListTrainedModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrainedModelsCommandOutput>;
+
+  /**
+   * @see {@link ListTrainedModelVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrainedModelVersionsCommandOutput}.
+   */
+  paginateListTrainedModelVersions(
+    args: ListTrainedModelVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrainedModelVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListTrainingDatasetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrainingDatasetsCommandOutput}.
+   */
+  paginateListTrainingDatasets(
+    args?: ListTrainingDatasetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrainingDatasetsCommandOutput>;
+}
+
+/**
+ * <p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p> <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms and generates an audience (lookalike segment) that resembles the training data.</p> <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html">Clean Rooms User Guide</a>.</p> <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html">Clean Rooms SQL Reference</a>.</p> <p/>
+ * @public
+ */
+export class CleanRoomsML extends CleanRoomsMLClient implements CleanRoomsML {}
+createAggregatedClient(commands, CleanRoomsML, { paginators });

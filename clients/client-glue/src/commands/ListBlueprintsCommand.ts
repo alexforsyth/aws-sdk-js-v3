@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { ListBlueprintsRequest, ListBlueprintsResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1ListBlueprintsCommand,
-  serializeAws_json1_1ListBlueprintsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBlueprintsRequest, ListBlueprintsResponse } from "../models/models_2";
+import { ListBlueprints$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBlueprintsCommand}.
+ */
 export interface ListBlueprintsCommandInput extends ListBlueprintsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBlueprintsCommand}.
+ */
 export interface ListBlueprintsCommandOutput extends ListBlueprintsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,63 @@ export interface ListBlueprintsCommandOutput extends ListBlueprintsResponse, __M
  * ```javascript
  * import { GlueClient, ListBlueprintsCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, ListBlueprintsCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // ListBlueprintsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new ListBlueprintsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBlueprintsResponse
+ * //   Blueprints: [ // BlueprintNames
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBlueprintsCommandInput - {@link ListBlueprintsCommandInput}
+ * @returns {@link ListBlueprintsCommandOutput}
  * @see {@link ListBlueprintsCommandInput} for command's `input` shape.
  * @see {@link ListBlueprintsCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class ListBlueprintsCommand extends $Command<
-  ListBlueprintsCommandInput,
-  ListBlueprintsCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBlueprintsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBlueprintsCommandInput, ListBlueprintsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "ListBlueprintsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBlueprintsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBlueprintsResponse.filterSensitiveLog,
+export class ListBlueprintsCommand extends command<ListBlueprintsCommandInput, ListBlueprintsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBlueprints",
+  ListBlueprints$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBlueprintsRequest;
+      output: ListBlueprintsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBlueprintsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListBlueprintsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBlueprintsCommandOutput> {
-    return deserializeAws_json1_1ListBlueprintsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBlueprintsCommandInput;
+      output: ListBlueprintsCommandOutput;
+    };
+  };
 }

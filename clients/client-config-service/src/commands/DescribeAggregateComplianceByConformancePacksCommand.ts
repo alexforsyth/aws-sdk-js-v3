@@ -1,36 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeAggregateComplianceByConformancePacksRequest,
   DescribeAggregateComplianceByConformancePacksResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAggregateComplianceByConformancePacksCommand,
-  serializeAws_json1_1DescribeAggregateComplianceByConformancePacksCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DescribeAggregateComplianceByConformancePacksCommandInput
-  extends DescribeAggregateComplianceByConformancePacksRequest {}
-export interface DescribeAggregateComplianceByConformancePacksCommandOutput
-  extends DescribeAggregateComplianceByConformancePacksResponse,
-    __MetadataBearer {}
+import { DescribeAggregateComplianceByConformancePacks$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each conformance pack.
- * 			Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>
- * 		       <note>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAggregateComplianceByConformancePacksCommand}.
+ */
+export interface DescribeAggregateComplianceByConformancePacksCommandInput extends DescribeAggregateComplianceByConformancePacksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAggregateComplianceByConformancePacksCommand}.
+ */
+export interface DescribeAggregateComplianceByConformancePacksCommandOutput extends DescribeAggregateComplianceByConformancePacksResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each
+ * 			conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>
+ *          <note>
  *             <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>
  *          </note>
  * @example
@@ -38,77 +36,124 @@ export interface DescribeAggregateComplianceByConformancePacksCommandOutput
  * ```javascript
  * import { ConfigServiceClient, DescribeAggregateComplianceByConformancePacksCommand } from "@aws-sdk/client-config-service"; // ES Modules import
  * // const { ConfigServiceClient, DescribeAggregateComplianceByConformancePacksCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * // import type { ConfigServiceClientConfig } from "@aws-sdk/client-config-service";
+ * const config = {}; // type is ConfigServiceClientConfig
  * const client = new ConfigServiceClient(config);
+ * const input = { // DescribeAggregateComplianceByConformancePacksRequest
+ *   ConfigurationAggregatorName: "STRING_VALUE", // required
+ *   Filters: { // AggregateConformancePackComplianceFilters
+ *     ConformancePackName: "STRING_VALUE",
+ *     ComplianceType: "COMPLIANT" || "NON_COMPLIANT" || "INSUFFICIENT_DATA",
+ *     AccountId: "STRING_VALUE",
+ *     AwsRegion: "STRING_VALUE",
+ *   },
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAggregateComplianceByConformancePacksCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAggregateComplianceByConformancePacksResponse
+ * //   AggregateComplianceByConformancePacks: [ // AggregateComplianceByConformancePackList
+ * //     { // AggregateComplianceByConformancePack
+ * //       ConformancePackName: "STRING_VALUE",
+ * //       Compliance: { // AggregateConformancePackCompliance
+ * //         ComplianceType: "COMPLIANT" || "NON_COMPLIANT" || "INSUFFICIENT_DATA",
+ * //         CompliantRuleCount: Number("int"),
+ * //         NonCompliantRuleCount: Number("int"),
+ * //         TotalRuleCount: Number("int"),
+ * //       },
+ * //       AccountId: "STRING_VALUE",
+ * //       AwsRegion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAggregateComplianceByConformancePacksCommandInput - {@link DescribeAggregateComplianceByConformancePacksCommandInput}
+ * @returns {@link DescribeAggregateComplianceByConformancePacksCommandOutput}
  * @see {@link DescribeAggregateComplianceByConformancePacksCommandInput} for command's `input` shape.
  * @see {@link DescribeAggregateComplianceByConformancePacksCommandOutput} for command's `response` shape.
- * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for ConfigServiceClient's `config` shape.
  *
+ * @throws {@link InvalidLimitException} (client fault)
+ *  <p>The specified limit is outside the allowable range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The specified next token is not valid. Specify the
+ * 				<code>nextToken</code> string that was returned in the previous
+ * 			response to get the next page of results.</p>
+ *
+ * @throws {@link NoSuchConfigurationAggregatorException} (client fault)
+ *  <p>You have specified a configuration aggregator that does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html">PutStoredQuery</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>There are missing required fields.</p>
+ *             </li>
+ *             <li>
+ *                <p>The input value fails the validation.</p>
+ *             </li>
+ *             <li>
+ *                <p>You are trying to create more than 300 queries.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html">DescribeConfigurationRecorders</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html">DescribeConfigurationRecorderStatus</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You have specified more than one configuration recorder.</p>
+ *             </li>
+ *             <li>
+ *                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html">AssociateResourceTypes</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html">DisassociateResourceTypes</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Your configuraiton recorder has a recording strategy that does not allow the association or disassociation of resource types.</p>
+ *             </li>
+ *             <li>
+ *                <p>One or more of the specified resource types are already associated or disassociated with the configuration recorder.</p>
+ *             </li>
+ *             <li>
+ *                <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>
+ *             </li>
+ *          </ul>
+ *          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, one of the following errors:</p>
+ *          <ul>
+ *             <li>
+ *                <p>You have provided both <code>Arn</code> and <code>ServicePrincipal</code>. Only one of <code>Arn</code> or <code>ServicePrincipal</code> can be specified.</p>
+ *             </li>
+ *             <li>
+ *                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ConfigServiceServiceException}
+ * <p>Base exception class for all service exceptions from ConfigService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAggregateComplianceByConformancePacksCommand extends $Command<
-  DescribeAggregateComplianceByConformancePacksCommandInput,
-  DescribeAggregateComplianceByConformancePacksCommandOutput,
-  ConfigServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAggregateComplianceByConformancePacksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConfigServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeAggregateComplianceByConformancePacksCommandInput,
-    DescribeAggregateComplianceByConformancePacksCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConfigServiceClient";
-    const commandName = "DescribeAggregateComplianceByConformancePacksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAggregateComplianceByConformancePacksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAggregateComplianceByConformancePacksResponse.filterSensitiveLog,
+export class DescribeAggregateComplianceByConformancePacksCommand extends command<DescribeAggregateComplianceByConformancePacksCommandInput, DescribeAggregateComplianceByConformancePacksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAggregateComplianceByConformancePacks",
+  DescribeAggregateComplianceByConformancePacks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAggregateComplianceByConformancePacksRequest;
+      output: DescribeAggregateComplianceByConformancePacksResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeAggregateComplianceByConformancePacksCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAggregateComplianceByConformancePacksCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAggregateComplianceByConformancePacksCommandOutput> {
-    return deserializeAws_json1_1DescribeAggregateComplianceByConformancePacksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAggregateComplianceByConformancePacksCommandInput;
+      output: DescribeAggregateComplianceByConformancePacksCommandOutput;
+    };
+  };
 }

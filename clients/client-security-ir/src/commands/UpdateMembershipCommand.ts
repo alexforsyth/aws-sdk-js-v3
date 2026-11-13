@@ -1,0 +1,159 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMembershipRequest, UpdateMembershipResponse } from "../models/models_0";
+import { UpdateMembership$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMembershipCommand}.
+ */
+export interface UpdateMembershipCommandInput extends UpdateMembershipRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMembershipCommand}.
+ */
+export interface UpdateMembershipCommandOutput extends UpdateMembershipResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates membership configuration.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SecurityIRClient, UpdateMembershipCommand } from "@aws-sdk/client-security-ir"; // ES Modules import
+ * // const { SecurityIRClient, UpdateMembershipCommand } = require("@aws-sdk/client-security-ir"); // CommonJS import
+ * // import type { SecurityIRClientConfig } from "@aws-sdk/client-security-ir";
+ * const config = {}; // type is SecurityIRClientConfig
+ * const client = new SecurityIRClient(config);
+ * const input = { // UpdateMembershipRequest
+ *   membershipId: "STRING_VALUE", // required
+ *   membershipName: "STRING_VALUE",
+ *   incidentResponseTeam: [ // IncidentResponseTeam
+ *     { // IncidentResponder
+ *       name: "STRING_VALUE", // required
+ *       jobTitle: "STRING_VALUE", // required
+ *       email: "STRING_VALUE", // required
+ *       communicationPreferences: [ // CommunicationPreferences
+ *         "Case Created" || "Case Updated" || "Case Acknowledged" || "Case Closed" || "Case Updated To Service Managed" || "Case Status Updated" || "Case Pending Customer Action Reminder" || "Case Attachment Url Uploaded" || "Case Comment Added" || "Case Comment Updated" || "Membership Created" || "Membership Updated" || "Membership Cancelled" || "Register Delegated Administrator" || "Deregister Delegated Administrator" || "Disable AWS Service Access",
+ *       ],
+ *     },
+ *   ],
+ *   optInFeatures: [ // OptInFeatures
+ *     { // OptInFeature
+ *       featureName: "Triage", // required
+ *       isEnabled: true || false, // required
+ *     },
+ *   ],
+ *   membershipAccountsConfigurationsUpdate: { // MembershipAccountsConfigurationsUpdate
+ *     coverEntireOrganization: true || false,
+ *     organizationalUnitsToAdd: [ // OrganizationalUnits
+ *       "STRING_VALUE",
+ *     ],
+ *     organizationalUnitsToRemove: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   undoMembershipCancellation: true || false,
+ * };
+ * const command = new UpdateMembershipCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateMembershipCommandInput - {@link UpdateMembershipCommandInput}
+ * @returns {@link UpdateMembershipCommandOutput}
+ * @see {@link UpdateMembershipCommandInput} for command's `input` shape.
+ * @see {@link UpdateMembershipCommandOutput} for command's `response` shape.
+ * @see {@link SecurityIRClientResolvedConfig | config} for SecurityIRClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p/>
+ *
+ * @throws {@link InvalidTokenException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link SecurityIncidentResponseNotActiveException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link SecurityIRServiceException}
+ * <p>Base exception class for all service exceptions from SecurityIR service.</p>
+ *
+ *
+ * @example Invoke UpdateMembership
+ * ```javascript
+ * //
+ * const input = {
+ *   incidentResponseTeam: [
+ *     {
+ *       email: "bob.jones@gmail.com",
+ *       jobTitle: "Security Responder",
+ *       name: "Bob Jones"
+ *     },
+ *     {
+ *       email: "alice@example.com",
+ *       jobTitle: "CEO",
+ *       name: "Alice"
+ *     }
+ *   ],
+ *   membershipId: "m-abcd1234efgh",
+ *   membershipName: "New membership name",
+ *   optInFeatures: [
+ *     {
+ *       featureName: "Triage",
+ *       isEnabled: true
+ *     }
+ *   ]
+ * };
+ * const command = new UpdateMembershipCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* empty *\/ }
+ * *\/
+ * ```
+ *
+ * @public
+ */
+export class UpdateMembershipCommand extends command<UpdateMembershipCommandInput, UpdateMembershipCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMembership",
+  UpdateMembership$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMembershipRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateMembershipCommandInput;
+      output: UpdateMembershipCommandOutput;
+    };
+  };
+}

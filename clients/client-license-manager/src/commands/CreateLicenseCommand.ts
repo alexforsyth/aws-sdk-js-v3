@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { CreateLicenseRequest, CreateLicenseResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateLicenseCommand,
-  serializeAws_json1_1CreateLicenseCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateLicenseRequest, CreateLicenseResponse } from "../models/models_0";
+import { CreateLicense$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLicenseCommand}.
+ */
 export interface CreateLicenseCommandInput extends CreateLicenseRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLicenseCommand}.
+ */
 export interface CreateLicenseCommandOutput extends CreateLicenseResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,116 @@ export interface CreateLicenseCommandOutput extends CreateLicenseResponse, __Met
  * ```javascript
  * import { LicenseManagerClient, CreateLicenseCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, CreateLicenseCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // CreateLicenseRequest
+ *   LicenseName: "STRING_VALUE", // required
+ *   ProductName: "STRING_VALUE", // required
+ *   ProductSKU: "STRING_VALUE", // required
+ *   Issuer: { // Issuer
+ *     Name: "STRING_VALUE", // required
+ *     SignKey: "STRING_VALUE",
+ *   },
+ *   HomeRegion: "STRING_VALUE", // required
+ *   Validity: { // DatetimeRange
+ *     Begin: "STRING_VALUE", // required
+ *     End: "STRING_VALUE",
+ *   },
+ *   Entitlements: [ // EntitlementList // required
+ *     { // Entitlement
+ *       Name: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *       MaxCount: Number("long"),
+ *       Overage: true || false,
+ *       Unit: "Count" || "None" || "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second", // required
+ *       AllowCheckIn: true || false,
+ *     },
+ *   ],
+ *   Beneficiary: "STRING_VALUE", // required
+ *   ConsumptionConfiguration: { // ConsumptionConfiguration
+ *     RenewType: "None" || "Weekly" || "Monthly",
+ *     ProvisionalConfiguration: { // ProvisionalConfiguration
+ *       MaxTimeToLiveInMinutes: Number("int"), // required
+ *     },
+ *     BorrowConfiguration: { // BorrowConfiguration
+ *       AllowEarlyCheckIn: true || false, // required
+ *       MaxTimeToLiveInMinutes: Number("int"), // required
+ *     },
+ *   },
+ *   LicenseMetadata: [ // MetadataList
+ *     { // Metadata
+ *       Name: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   ClientToken: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateLicenseCommand(input);
  * const response = await client.send(command);
+ * // { // CreateLicenseResponse
+ * //   LicenseArn: "STRING_VALUE",
+ * //   Status: "AVAILABLE" || "PENDING_AVAILABLE" || "DEACTIVATED" || "SUSPENDED" || "EXPIRED" || "PENDING_DELETE" || "DELETED",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateLicenseCommandInput - {@link CreateLicenseCommandInput}
+ * @returns {@link CreateLicenseCommandOutput}
  * @see {@link CreateLicenseCommandInput} for command's `input` shape.
  * @see {@link CreateLicenseCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link RedirectException} (client fault)
+ *  <p>This is not the correct Region for the resource. Try again.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The provided input is not valid. Try your request again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class CreateLicenseCommand extends $Command<
-  CreateLicenseCommandInput,
-  CreateLicenseCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateLicenseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateLicenseCommandInput, CreateLicenseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "CreateLicenseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateLicenseRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateLicenseResponse.filterSensitiveLog,
+export class CreateLicenseCommand extends command<CreateLicenseCommandInput, CreateLicenseCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLicense",
+  CreateLicense$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLicenseRequest;
+      output: CreateLicenseResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateLicenseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateLicenseCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateLicenseCommandOutput> {
-    return deserializeAws_json1_1CreateLicenseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateLicenseCommandInput;
+      output: CreateLicenseCommandOutput;
+    };
+  };
 }

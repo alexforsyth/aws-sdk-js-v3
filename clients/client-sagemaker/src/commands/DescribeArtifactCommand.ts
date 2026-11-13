@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeArtifactRequest, DescribeArtifactResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeArtifactCommand,
-  serializeAws_json1_1DescribeArtifactCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeArtifactRequest, DescribeArtifactResponse } from "../models/models_2";
+import { DescribeArtifact$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeArtifactCommand}.
+ */
 export interface DescribeArtifactCommandInput extends DescribeArtifactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeArtifactCommand}.
+ */
 export interface DescribeArtifactCommandOutput extends DescribeArtifactResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,93 @@ export interface DescribeArtifactCommandOutput extends DescribeArtifactResponse,
  * ```javascript
  * import { SageMakerClient, DescribeArtifactCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeArtifactCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeArtifactRequest
+ *   ArtifactArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeArtifactCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeArtifactResponse
+ * //   ArtifactName: "STRING_VALUE",
+ * //   ArtifactArn: "STRING_VALUE",
+ * //   Source: { // ArtifactSource
+ * //     SourceUri: "STRING_VALUE", // required
+ * //     SourceTypes: [ // ArtifactSourceTypes
+ * //       { // ArtifactSourceType
+ * //         SourceIdType: "MD5Hash" || "S3ETag" || "S3Version" || "Custom", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   ArtifactType: "STRING_VALUE",
+ * //   Properties: { // LineageEntityParameters
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   MetadataProperties: { // MetadataProperties
+ * //     CommitId: "STRING_VALUE",
+ * //     Repository: "STRING_VALUE",
+ * //     GeneratedBy: "STRING_VALUE",
+ * //     ProjectId: "STRING_VALUE",
+ * //   },
+ * //   LineageGroupArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeArtifactCommandInput - {@link DescribeArtifactCommandInput}
+ * @returns {@link DescribeArtifactCommandOutput}
  * @see {@link DescribeArtifactCommandInput} for command's `input` shape.
  * @see {@link DescribeArtifactCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeArtifactCommand extends $Command<
-  DescribeArtifactCommandInput,
-  DescribeArtifactCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeArtifactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeArtifactCommandInput, DescribeArtifactCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeArtifactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeArtifactRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeArtifactResponse.filterSensitiveLog,
+export class DescribeArtifactCommand extends command<DescribeArtifactCommandInput, DescribeArtifactCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeArtifact",
+  DescribeArtifact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeArtifactRequest;
+      output: DescribeArtifactResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeArtifactCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeArtifactCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeArtifactCommandOutput> {
-    return deserializeAws_json1_1DescribeArtifactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeArtifactCommandInput;
+      output: DescribeArtifactCommandOutput;
+    };
+  };
 }

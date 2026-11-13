@@ -1,102 +1,87 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ApplyEnvironmentManagedActionRequest, ApplyEnvironmentManagedActionResult } from "../models/models_0";
-import {
-  deserializeAws_queryApplyEnvironmentManagedActionCommand,
-  serializeAws_queryApplyEnvironmentManagedActionCommand,
-} from "../protocols/Aws_query";
-
-export interface ApplyEnvironmentManagedActionCommandInput extends ApplyEnvironmentManagedActionRequest {}
-export interface ApplyEnvironmentManagedActionCommandOutput
-  extends ApplyEnvironmentManagedActionResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ApplyEnvironmentManagedActionRequest, ApplyEnvironmentManagedActionResult } from "../models/models_0";
+import { ApplyEnvironmentManagedAction$ } from "../schemas/schemas_0";
 
 /**
- * <p>Applies a scheduled managed action immediately. A managed action can be applied only if
- *       its status is <code>Scheduled</code>. Get the status and action ID of a managed action with
- *         <a>DescribeEnvironmentManagedActions</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ApplyEnvironmentManagedActionCommand}.
+ */
+export interface ApplyEnvironmentManagedActionCommandInput extends ApplyEnvironmentManagedActionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ApplyEnvironmentManagedActionCommand}.
+ */
+export interface ApplyEnvironmentManagedActionCommandOutput extends ApplyEnvironmentManagedActionResult, __MetadataBearer {}
+
+/**
+ * <p>Applies a scheduled managed action immediately. A managed action can be applied only if its status is <code>Scheduled</code>. Get the status and
+ *       action ID of a managed action with <a>DescribeEnvironmentManagedActions</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, ApplyEnvironmentManagedActionCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, ApplyEnvironmentManagedActionCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // ApplyEnvironmentManagedActionRequest
+ *   EnvironmentName: "STRING_VALUE",
+ *   EnvironmentId: "STRING_VALUE",
+ *   ActionId: "STRING_VALUE", // required
+ * };
  * const command = new ApplyEnvironmentManagedActionCommand(input);
  * const response = await client.send(command);
+ * // { // ApplyEnvironmentManagedActionResult
+ * //   ActionId: "STRING_VALUE",
+ * //   ActionDescription: "STRING_VALUE",
+ * //   ActionType: "InstanceRefresh" || "PlatformUpdate" || "Unknown",
+ * //   Status: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ApplyEnvironmentManagedActionCommandInput - {@link ApplyEnvironmentManagedActionCommandInput}
+ * @returns {@link ApplyEnvironmentManagedActionCommandOutput}
  * @see {@link ApplyEnvironmentManagedActionCommandInput} for command's `input` shape.
  * @see {@link ApplyEnvironmentManagedActionCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link ElasticBeanstalkServiceException} (client fault)
+ *  <p>A generic service exception has occurred.</p>
+ *
+ * @throws {@link ManagedActionInvalidStateException} (client fault)
+ *  <p>Cannot modify the managed action in its current state.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @public
  */
-export class ApplyEnvironmentManagedActionCommand extends $Command<
-  ApplyEnvironmentManagedActionCommandInput,
-  ApplyEnvironmentManagedActionCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ApplyEnvironmentManagedActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ApplyEnvironmentManagedActionCommandInput, ApplyEnvironmentManagedActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "ApplyEnvironmentManagedActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ApplyEnvironmentManagedActionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ApplyEnvironmentManagedActionResult.filterSensitiveLog,
+export class ApplyEnvironmentManagedActionCommand extends command<ApplyEnvironmentManagedActionCommandInput, ApplyEnvironmentManagedActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ApplyEnvironmentManagedAction",
+  ApplyEnvironmentManagedAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ApplyEnvironmentManagedActionRequest;
+      output: ApplyEnvironmentManagedActionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ApplyEnvironmentManagedActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryApplyEnvironmentManagedActionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ApplyEnvironmentManagedActionCommandOutput> {
-    return deserializeAws_queryApplyEnvironmentManagedActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ApplyEnvironmentManagedActionCommandInput;
+      output: ApplyEnvironmentManagedActionCommandOutput;
+    };
+  };
 }

@@ -1,116 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteConfigurationSetTrackingOptionsRequest,
   DeleteConfigurationSetTrackingOptionsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteConfigurationSetTrackingOptionsCommand,
-  serializeAws_queryDeleteConfigurationSetTrackingOptionsCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { DeleteConfigurationSetTrackingOptions$ } from "../schemas/schemas_0";
 
-export interface DeleteConfigurationSetTrackingOptionsCommandInput
-  extends DeleteConfigurationSetTrackingOptionsRequest {}
-export interface DeleteConfigurationSetTrackingOptionsCommandOutput
-  extends DeleteConfigurationSetTrackingOptionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteConfigurationSetTrackingOptionsCommand}.
+ */
+export interface DeleteConfigurationSetTrackingOptionsCommandInput extends DeleteConfigurationSetTrackingOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteConfigurationSetTrackingOptionsCommand}.
+ */
+export interface DeleteConfigurationSetTrackingOptionsCommandOutput extends DeleteConfigurationSetTrackingOptionsResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes an association between a configuration set and a custom domain for open and
  *             click event tracking.</p>
- *         <p>By default, images and links used for tracking open and click events are hosted on
+ *          <p>By default, images and links used for tracking open and click events are hosted on
  *             domains operated by Amazon SES. You can configure a subdomain of your own to handle these
- *             events. For information about using custom domains, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html">Amazon SES Developer Guide</a>.</p>
- *         <note>
- *             <p>Deleting this kind of association will result in emails sent using the specified
+ *             events. For information about using custom domains, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html">Amazon SES Developer Guide</a>.</p>
+ *          <note>
+ *             <p>Deleting this kind of association results in emails sent using the specified
  *                 configuration set to capture open and click events using the standard,
  *                 Amazon SES-operated domains.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, DeleteConfigurationSetTrackingOptionsCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, DeleteConfigurationSetTrackingOptionsCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // DeleteConfigurationSetTrackingOptionsRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteConfigurationSetTrackingOptionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteConfigurationSetTrackingOptionsCommandInput - {@link DeleteConfigurationSetTrackingOptionsCommandInput}
+ * @returns {@link DeleteConfigurationSetTrackingOptionsCommandOutput}
  * @see {@link DeleteConfigurationSetTrackingOptionsCommandInput} for command's `input` shape.
  * @see {@link DeleteConfigurationSetTrackingOptionsCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link ConfigurationSetDoesNotExistException} (client fault)
+ *  <p>Indicates that the configuration set does not exist.</p>
+ *
+ * @throws {@link TrackingOptionsDoesNotExistException} (client fault)
+ *  <p>Indicates that the TrackingOptions object you specified does not exist.</p>
+ *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteConfigurationSetTrackingOptionsCommand extends $Command<
-  DeleteConfigurationSetTrackingOptionsCommandInput,
-  DeleteConfigurationSetTrackingOptionsCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteConfigurationSetTrackingOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteConfigurationSetTrackingOptionsCommandInput, DeleteConfigurationSetTrackingOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "DeleteConfigurationSetTrackingOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteConfigurationSetTrackingOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteConfigurationSetTrackingOptionsResponse.filterSensitiveLog,
+export class DeleteConfigurationSetTrackingOptionsCommand extends command<DeleteConfigurationSetTrackingOptionsCommandInput, DeleteConfigurationSetTrackingOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteConfigurationSetTrackingOptions",
+  DeleteConfigurationSetTrackingOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteConfigurationSetTrackingOptionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteConfigurationSetTrackingOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteConfigurationSetTrackingOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteConfigurationSetTrackingOptionsCommandOutput> {
-    return deserializeAws_queryDeleteConfigurationSetTrackingOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteConfigurationSetTrackingOptionsCommandInput;
+      output: DeleteConfigurationSetTrackingOptionsCommandOutput;
+    };
+  };
 }

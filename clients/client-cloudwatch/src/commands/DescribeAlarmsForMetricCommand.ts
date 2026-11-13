@@ -1,99 +1,186 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { DescribeAlarmsForMetricInput, DescribeAlarmsForMetricOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeAlarmsForMetricCommand,
-  serializeAws_queryDescribeAlarmsForMetricCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAlarmsForMetricInput, DescribeAlarmsForMetricOutput } from "../models/models_0";
+import { DescribeAlarmsForMetric$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAlarmsForMetricCommand}.
+ */
 export interface DescribeAlarmsForMetricCommandInput extends DescribeAlarmsForMetricInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAlarmsForMetricCommand}.
+ */
 export interface DescribeAlarmsForMetricCommandOutput extends DescribeAlarmsForMetricOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves the alarms for the specified metric. To
- * 			filter the results, specify a statistic, period, or unit.</p>
- * 		       <p>This operation retrieves only standard alarms that are based on
- * 		the specified metric. It does not return alarms based on math expressions that
- * 		use the specified metric, or composite alarms that use the specified metric.</p>
+ * <p>Retrieves the alarms for the specified metric. To filter the results, specify a
+ *             statistic, period, or unit.</p>
+ *          <p>This operation retrieves only standard alarms that are based on the specified
+ *             metric. It does not return alarms based on math expressions that use the specified
+ *             metric, or composite alarms that use the specified metric.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchClient, DescribeAlarmsForMetricCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, DescribeAlarmsForMetricCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // DescribeAlarmsForMetricInput
+ *   MetricName: "STRING_VALUE", // required
+ *   Namespace: "STRING_VALUE", // required
+ *   Statistic: "SampleCount" || "Average" || "Sum" || "Minimum" || "Maximum",
+ *   ExtendedStatistic: "STRING_VALUE",
+ *   Dimensions: [ // Dimensions
+ *     { // Dimension
+ *       Name: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   Period: Number("int"),
+ *   Unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * };
  * const command = new DescribeAlarmsForMetricCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAlarmsForMetricOutput
+ * //   MetricAlarms: [ // MetricAlarms
+ * //     { // MetricAlarm
+ * //       AlarmName: "STRING_VALUE",
+ * //       AlarmArn: "STRING_VALUE",
+ * //       AlarmDescription: "STRING_VALUE",
+ * //       AlarmConfigurationUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       ActionsEnabled: true || false,
+ * //       OKActions: [ // ResourceList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AlarmActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       InsufficientDataActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       StateValue: "OK" || "ALARM" || "INSUFFICIENT_DATA",
+ * //       StateReason: "STRING_VALUE",
+ * //       StateReasonData: "STRING_VALUE",
+ * //       StateUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       MetricName: "STRING_VALUE",
+ * //       Namespace: "STRING_VALUE",
+ * //       Statistic: "SampleCount" || "Average" || "Sum" || "Minimum" || "Maximum",
+ * //       ExtendedStatistic: "STRING_VALUE",
+ * //       Dimensions: [ // Dimensions
+ * //         { // Dimension
+ * //           Name: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       Period: Number("int"),
+ * //       Unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * //       EvaluationPeriods: Number("int"),
+ * //       DatapointsToAlarm: Number("int"),
+ * //       Threshold: Number("double"),
+ * //       ComparisonOperator: "GreaterThanOrEqualToThreshold" || "GreaterThanThreshold" || "LessThanThreshold" || "LessThanOrEqualToThreshold" || "LessThanLowerOrGreaterThanUpperThreshold" || "LessThanLowerThreshold" || "GreaterThanUpperThreshold",
+ * //       TreatMissingData: "STRING_VALUE",
+ * //       EvaluateLowSampleCountPercentile: "STRING_VALUE",
+ * //       Metrics: [ // MetricDataQueries
+ * //         { // MetricDataQuery
+ * //           Id: "STRING_VALUE", // required
+ * //           MetricStat: { // MetricStat
+ * //             Metric: { // Metric
+ * //               Namespace: "STRING_VALUE",
+ * //               MetricName: "STRING_VALUE",
+ * //               Dimensions: [
+ * //                 {
+ * //                   Name: "STRING_VALUE", // required
+ * //                   Value: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             Period: Number("int"), // required
+ * //             Stat: "STRING_VALUE", // required
+ * //             Unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * //           },
+ * //           Expression: "STRING_VALUE",
+ * //           Label: "STRING_VALUE",
+ * //           ReturnData: true || false,
+ * //           Period: Number("int"),
+ * //           AccountId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ThresholdMetricId: "STRING_VALUE",
+ * //       EvaluationState: "PARTIAL_DATA" || "EVALUATION_FAILURE" || "EVALUATION_ERROR",
+ * //       StateTransitionedTimestamp: new Date("TIMESTAMP"),
+ * //       EvaluationWindow: { // EvaluationWindow Union: only one key present
+ * //         WallClockWindow: { // WallClockWindow
+ * //           Timezone: "STRING_VALUE",
+ * //         },
+ * //         SlidingWindow: {},
+ * //       },
+ * //       WarmUpConfiguration: { // WarmUpConfiguration
+ * //         WarmUpPeriodDurationInMinutes: Number("int"), // required
+ * //         OnlyStartEvaluatingAfterWarmUpPeriodEnds: true || false,
+ * //       },
+ * //       EvaluationCriteria: { // EvaluationCriteria Union: only one key present
+ * //         PromQLCriteria: { // AlarmPromQLCriteria
+ * //           Query: "STRING_VALUE", // required
+ * //           PendingPeriod: Number("int"),
+ * //           RecoveryPeriod: Number("int"),
+ * //         },
+ * //       },
+ * //       EvaluationInterval: Number("int"),
+ * //       ActionConfiguration: { // ActionConfiguration
+ * //         AlarmTagsPropagation: { // AlarmTagsPropagation
+ * //           Enabled: true || false, // required
+ * //           IncludedTagKeys: [ // AlarmTagsPropagationTagKeys
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ExcludedTagKeys: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeAlarmsForMetricCommandInput - {@link DescribeAlarmsForMetricCommandInput}
+ * @returns {@link DescribeAlarmsForMetricCommandOutput}
  * @see {@link DescribeAlarmsForMetricCommandInput} for command's `input` shape.
  * @see {@link DescribeAlarmsForMetricCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAlarmsForMetricCommand extends $Command<
-  DescribeAlarmsForMetricCommandInput,
-  DescribeAlarmsForMetricCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAlarmsForMetricCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAlarmsForMetricCommandInput, DescribeAlarmsForMetricCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "DescribeAlarmsForMetricCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAlarmsForMetricInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAlarmsForMetricOutput.filterSensitiveLog,
+export class DescribeAlarmsForMetricCommand extends command<DescribeAlarmsForMetricCommandInput, DescribeAlarmsForMetricCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAlarmsForMetric",
+  DescribeAlarmsForMetric$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAlarmsForMetricInput;
+      output: DescribeAlarmsForMetricOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAlarmsForMetricCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeAlarmsForMetricCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAlarmsForMetricCommandOutput> {
-    return deserializeAws_queryDescribeAlarmsForMetricCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAlarmsForMetricCommandInput;
+      output: DescribeAlarmsForMetricCommandOutput;
+    };
+  };
 }

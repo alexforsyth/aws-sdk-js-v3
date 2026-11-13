@@ -1,116 +1,198 @@
-import { getCrossRegionPresignedUrlPlugin } from "@aws-sdk/middleware-sdk-rds";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type {
   StartDBInstanceAutomatedBackupsReplicationMessage,
   StartDBInstanceAutomatedBackupsReplicationResult,
 } from "../models/models_1";
-import {
-  deserializeAws_queryStartDBInstanceAutomatedBackupsReplicationCommand,
-  serializeAws_queryStartDBInstanceAutomatedBackupsReplicationCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
-
-export interface StartDBInstanceAutomatedBackupsReplicationCommandInput
-  extends StartDBInstanceAutomatedBackupsReplicationMessage {}
-export interface StartDBInstanceAutomatedBackupsReplicationCommandOutput
-  extends StartDBInstanceAutomatedBackupsReplicationResult,
-    __MetadataBearer {}
+import { StartDBInstanceAutomatedBackupsReplication$ } from "../schemas/schemas_0";
 
 /**
- * <p>Enables replication of automated backups to a different Amazon Web Services Region.</p>
- *         <p>This command doesn't apply to RDS Custom.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html">
- *             Replicating Automated Backups to Another Amazon Web Services Region</a> in the <i>Amazon RDS User Guide.</i>
- *          </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartDBInstanceAutomatedBackupsReplicationCommand}.
+ */
+export interface StartDBInstanceAutomatedBackupsReplicationCommandInput extends StartDBInstanceAutomatedBackupsReplicationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link StartDBInstanceAutomatedBackupsReplicationCommand}.
+ */
+export interface StartDBInstanceAutomatedBackupsReplicationCommandOutput extends StartDBInstanceAutomatedBackupsReplicationResult, __MetadataBearer {}
+
+/**
+ * <p>Enables replication of automated backups to a different Amazon Web Services Region.</p> <p>This command doesn't apply to RDS Custom.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html"> Replicating Automated Backups to Another Amazon Web Services Region</a> in the <i>Amazon RDS User Guide.</i> </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RDSClient, StartDBInstanceAutomatedBackupsReplicationCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, StartDBInstanceAutomatedBackupsReplicationCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // StartDBInstanceAutomatedBackupsReplicationMessage
+ *   SourceDBInstanceArn: "STRING_VALUE", // required
+ *   BackupRetentionPeriod: Number("int"),
+ *   KmsKeyId: "STRING_VALUE",
+ *   PreSignedUrl: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new StartDBInstanceAutomatedBackupsReplicationCommand(input);
  * const response = await client.send(command);
+ * // { // StartDBInstanceAutomatedBackupsReplicationResult
+ * //   DBInstanceAutomatedBackup: { // DBInstanceAutomatedBackup
+ * //     DBInstanceArn: "STRING_VALUE",
+ * //     DbiResourceId: "STRING_VALUE",
+ * //     Region: "STRING_VALUE",
+ * //     DBInstanceIdentifier: "STRING_VALUE",
+ * //     RestoreWindow: { // RestoreWindow
+ * //       EarliestTime: new Date("TIMESTAMP"),
+ * //       LatestTime: new Date("TIMESTAMP"),
+ * //     },
+ * //     AllocatedStorage: Number("int"),
+ * //     Status: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     InstanceCreateTime: new Date("TIMESTAMP"),
+ * //     MasterUsername: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     LicenseModel: "STRING_VALUE",
+ * //     Iops: Number("int"),
+ * //     StorageThroughput: Number("int"),
+ * //     OptionGroupName: "STRING_VALUE",
+ * //     TdeCredentialArn: "STRING_VALUE",
+ * //     Encrypted: true || false,
+ * //     StorageEncryptionType: "none" || "sse-kms" || "sse-rds",
+ * //     StorageType: "STRING_VALUE",
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     Timezone: "STRING_VALUE",
+ * //     IAMDatabaseAuthenticationEnabled: true || false,
+ * //     BackupRetentionPeriod: Number("int"),
+ * //     PreferredBackupWindow: "STRING_VALUE",
+ * //     DBInstanceAutomatedBackupsArn: "STRING_VALUE",
+ * //     DBInstanceAutomatedBackupsReplications: [ // DBInstanceAutomatedBackupsReplicationList
+ * //       { // DBInstanceAutomatedBackupsReplication
+ * //         DBInstanceAutomatedBackupsArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     BackupTarget: "STRING_VALUE",
+ * //     MultiTenant: true || false,
+ * //     AwsBackupRecoveryPointArn: "STRING_VALUE",
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     DedicatedLogVolume: true || false,
+ * //     AdditionalStorageVolumes: [ // AdditionalStorageVolumesList
+ * //       { // AdditionalStorageVolume
+ * //         VolumeName: "STRING_VALUE", // required
+ * //         AllocatedStorage: Number("int"),
+ * //         IOPS: Number("int"),
+ * //         MaxAllocatedStorage: Number("int"),
+ * //         StorageThroughput: Number("int"),
+ * //         StorageType: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartDBInstanceAutomatedBackupsReplicationCommandInput - {@link StartDBInstanceAutomatedBackupsReplicationCommandInput}
+ * @returns {@link StartDBInstanceAutomatedBackupsReplicationCommandOutput}
  * @see {@link StartDBInstanceAutomatedBackupsReplicationCommandInput} for command's `input` shape.
  * @see {@link StartDBInstanceAutomatedBackupsReplicationCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link DBInstanceAutomatedBackupQuotaExceededFault} (client fault)
+ *  <p>The quota for retained automated backups was exceeded. This prevents you from retaining any additional automated backups. The retained automated backups quota is the same as your DB instance quota.</p>
+ *
+ * @throws {@link DBInstanceNotFoundFault} (client fault)
+ *  <p> <code>DBInstanceIdentifier</code> doesn't refer to an existing DB instance.</p>
+ *
+ * @throws {@link InvalidDBInstanceAutomatedBackupStateFault} (client fault)
+ *  <p>The automated backup is in an invalid state. For example, this automated backup is associated with an active instance.</p>
+ *
+ * @throws {@link InvalidDBInstanceStateFault} (client fault)
+ *  <p>The DB instance isn't in a valid state.</p>
+ *
+ * @throws {@link KMSKeyNotAccessibleFault} (client fault)
+ *  <p>An error occurred accessing an Amazon Web Services KMS key.</p>
+ *
+ * @throws {@link StorageTypeNotSupportedFault} (client fault)
+ *  <p>The specified <code>StorageType</code> can't be associated with the DB instance.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To enable cross-Region automated backups
+ * ```javascript
+ * // The following example replicates automated backups from a DB instance in the US East (N. Virginia) Region. The backup retention period is 14 days.
+ * const input = {
+ *   BackupRetentionPeriod: 14,
+ *   SourceDBInstanceArn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db"
+ * };
+ * const command = new StartDBInstanceAutomatedBackupsReplicationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   DBInstanceAutomatedBackup: {
+ *     AllocatedStorage: 20,
+ *     BackupRetentionPeriod: 14,
+ *     DBInstanceArn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db",
+ *     DBInstanceAutomatedBackupsArn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example",
+ *     DBInstanceIdentifier: "new-orcl-db",
+ *     DbiResourceId: "db-JKIB2GFQ5RV7REPLZA4EXAMPLE",
+ *     Encrypted: false,
+ *     Engine: "oracle-se2",
+ *     EngineVersion: "12.1.0.2.v21",
+ *     IAMDatabaseAuthenticationEnabled: false,
+ *     InstanceCreateTime: "2020-12-04T15:28:31Z",
+ *     LicenseModel: "bring-your-own-license",
+ *     MasterUsername: "admin",
+ *     OptionGroupName: "default:oracle-se2-12-1",
+ *     Port: 1521,
+ *     Region: "us-east-1",
+ *     RestoreWindow:     { /* empty *\/ },
+ *     Status: "pending",
+ *     StorageType: "gp2"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class StartDBInstanceAutomatedBackupsReplicationCommand extends $Command<
-  StartDBInstanceAutomatedBackupsReplicationCommandInput,
-  StartDBInstanceAutomatedBackupsReplicationCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartDBInstanceAutomatedBackupsReplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    StartDBInstanceAutomatedBackupsReplicationCommandInput,
-    StartDBInstanceAutomatedBackupsReplicationCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getCrossRegionPresignedUrlPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "StartDBInstanceAutomatedBackupsReplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartDBInstanceAutomatedBackupsReplicationMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: StartDBInstanceAutomatedBackupsReplicationResult.filterSensitiveLog,
+export class StartDBInstanceAutomatedBackupsReplicationCommand extends command<StartDBInstanceAutomatedBackupsReplicationCommandInput, StartDBInstanceAutomatedBackupsReplicationCommandOutput>(
+  _ep0,
+  _mw1,
+  "StartDBInstanceAutomatedBackupsReplication",
+  StartDBInstanceAutomatedBackupsReplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartDBInstanceAutomatedBackupsReplicationMessage;
+      output: StartDBInstanceAutomatedBackupsReplicationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StartDBInstanceAutomatedBackupsReplicationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryStartDBInstanceAutomatedBackupsReplicationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartDBInstanceAutomatedBackupsReplicationCommandOutput> {
-    return deserializeAws_queryStartDBInstanceAutomatedBackupsReplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartDBInstanceAutomatedBackupsReplicationCommandInput;
+      output: StartDBInstanceAutomatedBackupsReplicationCommandOutput;
+    };
+  };
 }

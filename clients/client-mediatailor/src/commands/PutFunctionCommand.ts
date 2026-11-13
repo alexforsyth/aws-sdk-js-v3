@@ -1,0 +1,264 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutFunctionRequest, PutFunctionResponse } from "../models/models_0";
+import { PutFunction$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutFunctionCommand}.
+ */
+export interface PutFunctionCommandInput extends PutFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutFunctionCommand}.
+ */
+export interface PutFunctionCommandOutput extends PutFunctionResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates or updates a function. A function defines reusable logic that MediaTailor executes at lifecycle hooks during ad insertion. For more information about functions, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html">Working with functions</a> in the <i>MediaTailor User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaTailorClient, PutFunctionCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
+ * // const { MediaTailorClient, PutFunctionCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
+ * const client = new MediaTailorClient(config);
+ * const input = { // PutFunctionRequest
+ *   FunctionId: "STRING_VALUE", // required
+ *   FunctionType: "HTTP_REQUEST" || "AWS_SERVICE_REQUEST" || "CUSTOM_OUTPUT" || "CONCURRENT_EXECUTOR" || "SEQUENTIAL_EXECUTOR" || "VAST_REQUEST" || "HLS_TAG_PROCESSOR", // required
+ *   Description: "STRING_VALUE",
+ *   HttpRequestConfiguration: { // HttpRequestConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: { // __mapOf__string
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     MethodType: "GET" || "POST", // required
+ *     RequestTimeoutMilliseconds: Number("int"), // required
+ *     Url: "STRING_VALUE", // required
+ *     Body: "STRING_VALUE",
+ *     Headers: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     Cache: { // HttpRequestCacheConfiguration
+ *       TtlMinimumSeconds: Number("int"), // required
+ *       TtlMaximumSeconds: Number("int"), // required
+ *       Key: "STRING_VALUE",
+ *     },
+ *   },
+ *   AwsServiceRequestConfiguration: { // AwsServiceRequestConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     MethodType: "GET" || "POST", // required
+ *     RequestTimeoutMilliseconds: Number("int"), // required
+ *     Url: "STRING_VALUE", // required
+ *     Body: "STRING_VALUE",
+ *     Headers: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     Cache: {
+ *       TtlMinimumSeconds: Number("int"), // required
+ *       TtlMaximumSeconds: Number("int"), // required
+ *       Key: "STRING_VALUE",
+ *     },
+ *     TargetService: "STRING_VALUE", // required
+ *     TargetRegion: "STRING_VALUE", // required
+ *   },
+ *   CustomOutputConfiguration: { // CustomOutputConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   ConcurrentExecutorConfiguration: { // ConcurrentExecutorConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: "<__mapOf__string>", // required
+ *     FunctionList: [ // __listOfFunctionsRef // required
+ *       { // FunctionRef
+ *         RunCondition: "STRING_VALUE",
+ *         FunctionId: "STRING_VALUE",
+ *         Alias: "STRING_VALUE",
+ *       },
+ *     ],
+ *     TimeoutMilliseconds: Number("int"), // required
+ *     MaxConcurrency: Number("int"), // required
+ *   },
+ *   SequentialExecutorConfiguration: { // SequentialExecutorConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: "<__mapOf__string>",
+ *     FunctionList: [ // required
+ *       {
+ *         RunCondition: "STRING_VALUE",
+ *         FunctionId: "STRING_VALUE",
+ *         Alias: "STRING_VALUE",
+ *       },
+ *     ],
+ *     TimeoutMilliseconds: Number("int"), // required
+ *   },
+ *   VastRequestConfiguration: { // VastRequestConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: "<__mapOf__string>",
+ *     MethodType: "GET" || "POST", // required
+ *     RequestTimeoutMilliseconds: Number("int"), // required
+ *     Url: "STRING_VALUE", // required
+ *     Body: "STRING_VALUE",
+ *     Headers: "<__mapOf__string>",
+ *     Cache: {
+ *       TtlMinimumSeconds: Number("int"), // required
+ *       TtlMaximumSeconds: Number("int"), // required
+ *       Key: "STRING_VALUE",
+ *     },
+ *   },
+ *   HlsTagProcessorConfiguration: { // HlsTagProcessorConfiguration
+ *     Runtime: "JSONATA", // required
+ *     Output: "<__mapOf__string>",
+ *     TagFilter: [ // TagFilterList // required
+ *       "EXT-X-DATERANGE",
+ *     ],
+ *     RunCondition: "STRING_VALUE",
+ *   },
+ *   Tags: "<__mapOf__string>",
+ * };
+ * const command = new PutFunctionCommand(input);
+ * const response = await client.send(command);
+ * // { // PutFunctionResponse
+ * //   FunctionId: "STRING_VALUE", // required
+ * //   FunctionType: "HTTP_REQUEST" || "AWS_SERVICE_REQUEST" || "CUSTOM_OUTPUT" || "CONCURRENT_EXECUTOR" || "SEQUENTIAL_EXECUTOR" || "VAST_REQUEST" || "HLS_TAG_PROCESSOR", // required
+ * //   Description: "STRING_VALUE",
+ * //   HttpRequestConfiguration: { // HttpRequestConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: { // __mapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     MethodType: "GET" || "POST", // required
+ * //     RequestTimeoutMilliseconds: Number("int"), // required
+ * //     Url: "STRING_VALUE", // required
+ * //     Body: "STRING_VALUE",
+ * //     Headers: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     Cache: { // HttpRequestCacheConfiguration
+ * //       TtlMinimumSeconds: Number("int"), // required
+ * //       TtlMaximumSeconds: Number("int"), // required
+ * //       Key: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   AwsServiceRequestConfiguration: { // AwsServiceRequestConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     MethodType: "GET" || "POST", // required
+ * //     RequestTimeoutMilliseconds: Number("int"), // required
+ * //     Url: "STRING_VALUE", // required
+ * //     Body: "STRING_VALUE",
+ * //     Headers: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     Cache: {
+ * //       TtlMinimumSeconds: Number("int"), // required
+ * //       TtlMaximumSeconds: Number("int"), // required
+ * //       Key: "STRING_VALUE",
+ * //     },
+ * //     TargetService: "STRING_VALUE", // required
+ * //     TargetRegion: "STRING_VALUE", // required
+ * //   },
+ * //   CustomOutputConfiguration: { // CustomOutputConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   ConcurrentExecutorConfiguration: { // ConcurrentExecutorConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: "<__mapOf__string>", // required
+ * //     FunctionList: [ // __listOfFunctionsRef // required
+ * //       { // FunctionRef
+ * //         RunCondition: "STRING_VALUE",
+ * //         FunctionId: "STRING_VALUE",
+ * //         Alias: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     TimeoutMilliseconds: Number("int"), // required
+ * //     MaxConcurrency: Number("int"), // required
+ * //   },
+ * //   SequentialExecutorConfiguration: { // SequentialExecutorConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: "<__mapOf__string>",
+ * //     FunctionList: [ // required
+ * //       {
+ * //         RunCondition: "STRING_VALUE",
+ * //         FunctionId: "STRING_VALUE",
+ * //         Alias: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     TimeoutMilliseconds: Number("int"), // required
+ * //   },
+ * //   VastRequestConfiguration: { // VastRequestConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: "<__mapOf__string>",
+ * //     MethodType: "GET" || "POST", // required
+ * //     RequestTimeoutMilliseconds: Number("int"), // required
+ * //     Url: "STRING_VALUE", // required
+ * //     Body: "STRING_VALUE",
+ * //     Headers: "<__mapOf__string>",
+ * //     Cache: {
+ * //       TtlMinimumSeconds: Number("int"), // required
+ * //       TtlMaximumSeconds: Number("int"), // required
+ * //       Key: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   HlsTagProcessorConfiguration: { // HlsTagProcessorConfiguration
+ * //     Runtime: "JSONATA", // required
+ * //     Output: "<__mapOf__string>",
+ * //     TagFilter: [ // TagFilterList // required
+ * //       "EXT-X-DATERANGE",
+ * //     ],
+ * //     RunCondition: "STRING_VALUE",
+ * //   },
+ * //   Tags: "<__mapOf__string>",
+ * //   Arn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param PutFunctionCommandInput - {@link PutFunctionCommandInput}
+ * @returns {@link PutFunctionCommandOutput}
+ * @see {@link PutFunctionCommandInput} for command's `input` shape.
+ * @see {@link PutFunctionCommandOutput} for command's `response` shape.
+ * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
+ *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
+ */
+export class PutFunctionCommand extends command<PutFunctionCommandInput, PutFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutFunction",
+  PutFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutFunctionRequest;
+      output: PutFunctionResponse;
+    };
+    sdk: {
+      input: PutFunctionCommandInput;
+      output: PutFunctionCommandOutput;
+    };
+  };
+}

@@ -1,105 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { ListInstanceProfilesForRoleRequest, ListInstanceProfilesForRoleResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListInstanceProfilesForRoleCommand,
-  serializeAws_queryListInstanceProfilesForRoleCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInstanceProfilesForRoleRequest, ListInstanceProfilesForRoleResponse } from "../models/models_0";
+import { ListInstanceProfilesForRole$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInstanceProfilesForRoleCommand}.
+ */
 export interface ListInstanceProfilesForRoleCommandInput extends ListInstanceProfilesForRoleRequest {}
-export interface ListInstanceProfilesForRoleCommandOutput
-  extends ListInstanceProfilesForRoleResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListInstanceProfilesForRoleCommand}.
+ */
+export interface ListInstanceProfilesForRoleCommandOutput extends ListInstanceProfilesForRoleResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the instance profiles that have the specified associated IAM role. If there
  *             are none, the operation returns an empty list. For more information about instance
- *             profiles, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About instance
- *             profiles</a>.</p>
- *         <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
+ *             profiles, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using
+ *                 instance profiles</a> in the <i>IAM User Guide</i>.</p>
+ *          <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
  *             parameters.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, ListInstanceProfilesForRoleCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, ListInstanceProfilesForRoleCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // ListInstanceProfilesForRoleRequest
+ *   RoleName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListInstanceProfilesForRoleCommand(input);
  * const response = await client.send(command);
+ * // { // ListInstanceProfilesForRoleResponse
+ * //   InstanceProfiles: [ // instanceProfileListType // required
+ * //     { // InstanceProfile
+ * //       Path: "STRING_VALUE", // required
+ * //       InstanceProfileName: "STRING_VALUE", // required
+ * //       InstanceProfileId: "STRING_VALUE", // required
+ * //       Arn: "STRING_VALUE", // required
+ * //       CreateDate: new Date("TIMESTAMP"), // required
+ * //       Roles: [ // roleListType // required
+ * //         { // Role
+ * //           Path: "STRING_VALUE", // required
+ * //           RoleName: "STRING_VALUE", // required
+ * //           RoleId: "STRING_VALUE", // required
+ * //           Arn: "STRING_VALUE", // required
+ * //           CreateDate: new Date("TIMESTAMP"), // required
+ * //           AssumeRolePolicyDocument: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           MaxSessionDuration: Number("int"),
+ * //           PermissionsBoundary: { // AttachedPermissionsBoundary
+ * //             PermissionsBoundaryType: "PermissionsBoundaryPolicy",
+ * //             PermissionsBoundaryArn: "STRING_VALUE",
+ * //           },
+ * //           Tags: [ // tagListType
+ * //             { // Tag
+ * //               Key: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //           RoleLastUsed: { // RoleLastUsed
+ * //             LastUsedDate: new Date("TIMESTAMP"),
+ * //             Region: "STRING_VALUE",
+ * //           },
+ * //           SourceRoleTemplate: { // SourceRoleTemplate
+ * //             TemplateArn: "STRING_VALUE", // required
+ * //             TemplateMinorVersion: Number("int"), // required
+ * //           },
+ * //         },
+ * //       ],
+ * //       Tags: [
+ * //         {
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInstanceProfilesForRoleCommandInput - {@link ListInstanceProfilesForRoleCommandInput}
+ * @returns {@link ListInstanceProfilesForRoleCommandOutput}
  * @see {@link ListInstanceProfilesForRoleCommandInput} for command's `input` shape.
  * @see {@link ListInstanceProfilesForRoleCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class ListInstanceProfilesForRoleCommand extends $Command<
-  ListInstanceProfilesForRoleCommandInput,
-  ListInstanceProfilesForRoleCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInstanceProfilesForRoleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInstanceProfilesForRoleCommandInput, ListInstanceProfilesForRoleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "ListInstanceProfilesForRoleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInstanceProfilesForRoleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListInstanceProfilesForRoleResponse.filterSensitiveLog,
+export class ListInstanceProfilesForRoleCommand extends command<ListInstanceProfilesForRoleCommandInput, ListInstanceProfilesForRoleCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInstanceProfilesForRole",
+  ListInstanceProfilesForRole$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInstanceProfilesForRoleRequest;
+      output: ListInstanceProfilesForRoleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInstanceProfilesForRoleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListInstanceProfilesForRoleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListInstanceProfilesForRoleCommandOutput> {
-    return deserializeAws_queryListInstanceProfilesForRoleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInstanceProfilesForRoleCommandInput;
+      output: ListInstanceProfilesForRoleCommandOutput;
+    };
+  };
 }

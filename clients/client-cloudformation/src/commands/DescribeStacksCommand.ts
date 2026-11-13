@@ -1,100 +1,156 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DescribeStacksInput, DescribeStacksOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeStacksCommand,
-  serializeAws_queryDescribeStacksCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStacksInput, DescribeStacksOutput } from "../models/models_0";
+import { DescribeStacks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStacksCommand}.
+ */
 export interface DescribeStacksCommandInput extends DescribeStacksInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStacksCommand}.
+ */
 export interface DescribeStacksCommandOutput extends DescribeStacksOutput, __MetadataBearer {}
 
 /**
- * <p>Returns the description for the specified stack; if no stack name was specified, then
- *          it returns the description for all the stacks created.</p>
+ * <p>Returns the description for the specified stack; if no stack name was specified, then it
+ *       returns the description for all the stacks created. For more information about a stack's event
+ *       history, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html">Understand CloudFormation stack creation events</a> in the
+ *         <i>CloudFormation User Guide</i>.</p>
  *          <note>
- *             <p>If the stack does not exist, an <code>ValidationError</code> is
- *             returned.</p>
+ *             <p>If the stack doesn't exist, a <code>ValidationError</code> is returned.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DescribeStacksCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DescribeStacksCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DescribeStacksInput
+ *   StackName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeStacksCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStacksOutput
+ * //   Stacks: [ // Stacks
+ * //     { // Stack
+ * //       StackId: "STRING_VALUE",
+ * //       StackName: "STRING_VALUE", // required
+ * //       ChangeSetId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Parameters: [ // Parameters
+ * //         { // Parameter
+ * //           ParameterKey: "STRING_VALUE",
+ * //           ParameterValue: "STRING_VALUE",
+ * //           UsePreviousValue: true || false,
+ * //           ResolvedValue: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       DeletionTime: new Date("TIMESTAMP"),
+ * //       LastUpdatedTime: new Date("TIMESTAMP"),
+ * //       RollbackConfiguration: { // RollbackConfiguration
+ * //         RollbackTriggers: [ // RollbackTriggers
+ * //           { // RollbackTrigger
+ * //             Arn: "STRING_VALUE", // required
+ * //             Type: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         MonitoringTimeInMinutes: Number("int"),
+ * //       },
+ * //       StackStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "ROLLBACK_IN_PROGRESS" || "ROLLBACK_FAILED" || "ROLLBACK_COMPLETE" || "DELETE_IN_PROGRESS" || "DELETE_FAILED" || "DELETE_COMPLETE" || "UPDATE_IN_PROGRESS" || "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" || "UPDATE_COMPLETE" || "UPDATE_FAILED" || "UPDATE_ROLLBACK_IN_PROGRESS" || "UPDATE_ROLLBACK_FAILED" || "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" || "UPDATE_ROLLBACK_COMPLETE" || "REVIEW_IN_PROGRESS" || "IMPORT_IN_PROGRESS" || "IMPORT_COMPLETE" || "IMPORT_ROLLBACK_IN_PROGRESS" || "IMPORT_ROLLBACK_FAILED" || "IMPORT_ROLLBACK_COMPLETE", // required
+ * //       StackStatusReason: "STRING_VALUE",
+ * //       DisableRollback: true || false,
+ * //       DeploymentConfig: { // DeploymentConfig
+ * //         Mode: "STANDARD" || "EXPRESS",
+ * //         DisableRollback: true || false,
+ * //       },
+ * //       NotificationARNs: [ // NotificationARNs
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       TimeoutInMinutes: Number("int"),
+ * //       Capabilities: [ // Capabilities
+ * //         "CAPABILITY_IAM" || "CAPABILITY_NAMED_IAM" || "CAPABILITY_AUTO_EXPAND",
+ * //       ],
+ * //       Outputs: [ // Outputs
+ * //         { // Output
+ * //           OutputKey: "STRING_VALUE",
+ * //           OutputValue: "STRING_VALUE",
+ * //           Description: "STRING_VALUE",
+ * //           ExportName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       RoleARN: "STRING_VALUE",
+ * //       Tags: [ // Tags
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       EnableTerminationProtection: true || false,
+ * //       ParentId: "STRING_VALUE",
+ * //       RootId: "STRING_VALUE",
+ * //       DriftInformation: { // StackDriftInformation
+ * //         StackDriftStatus: "DRIFTED" || "IN_SYNC" || "UNKNOWN" || "NOT_CHECKED", // required
+ * //         LastCheckTimestamp: new Date("TIMESTAMP"),
+ * //       },
+ * //       RetainExceptOnCreate: true || false,
+ * //       DeletionMode: "STANDARD" || "FORCE_DELETE_STACK",
+ * //       DetailedStatus: "CONFIGURATION_COMPLETE" || "VALIDATION_FAILED",
+ * //       LastOperations: [ // LastOperations
+ * //         { // OperationEntry
+ * //           OperationType: "CREATE_STACK" || "UPDATE_STACK" || "DELETE_STACK" || "CONTINUE_ROLLBACK" || "ROLLBACK" || "CREATE_CHANGESET",
+ * //           OperationId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       AliasName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeStacksCommandInput - {@link DescribeStacksCommandInput}
+ * @returns {@link DescribeStacksCommandOutput}
  * @see {@link DescribeStacksCommandInput} for command's `input` shape.
  * @see {@link DescribeStacksCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStacksCommand extends $Command<
-  DescribeStacksCommandInput,
-  DescribeStacksCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStacksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStacksCommandInput, DescribeStacksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DescribeStacksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStacksInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStacksOutput.filterSensitiveLog,
+export class DescribeStacksCommand extends command<DescribeStacksCommandInput, DescribeStacksCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStacks",
+  DescribeStacks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStacksInput;
+      output: DescribeStacksOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStacksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeStacksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeStacksCommandOutput> {
-    return deserializeAws_queryDescribeStacksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStacksCommandInput;
+      output: DescribeStacksCommandOutput;
+    };
+  };
 }

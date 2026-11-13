@@ -1,0 +1,109 @@
+// smithy-typescript generated code
+import type { ExceptionOptionType as __ExceptionOptionType } from "@smithy/core/client";
+
+import { DirectConnectServiceException as __BaseException } from "./DirectConnectServiceException";
+
+/**
+ * <p>One or more parameters are not valid.</p>
+ * @public
+ */
+export class DirectConnectClientException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.directconnect#DirectConnectClientException";
+  readonly name = "DirectConnectClientException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<DirectConnectClientException, __BaseException>) {
+    super({
+      name: "DirectConnectClientException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, DirectConnectClientException.prototype);
+  }
+}
+
+/**
+ * <p>A server-side error occurred.</p>
+ * @public
+ */
+export class DirectConnectServerException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.directconnect#DirectConnectServerException";
+  readonly name = "DirectConnectServerException" as const;
+  readonly $fault = "server" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<DirectConnectServerException, __BaseException>) {
+    super({
+      name: "DirectConnectServerException",
+      $fault: "server",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, DirectConnectServerException.prototype);
+  }
+}
+
+/**
+ * <p>A tag key was specified more than once.</p>
+ * @public
+ */
+export class DuplicateTagKeysException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.directconnect#DuplicateTagKeysException";
+  readonly name = "DuplicateTagKeysException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<DuplicateTagKeysException, __BaseException>) {
+    super({
+      name: "DuplicateTagKeysException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, DuplicateTagKeysException.prototype);
+  }
+}
+
+/**
+ * <p>You have reached the limit on the number of tags that can be assigned.</p>
+ * @public
+ */
+export class TooManyTagsException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.directconnect#TooManyTagsException";
+  readonly name = "TooManyTagsException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<TooManyTagsException, __BaseException>) {
+    super({
+      name: "TooManyTagsException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, TooManyTagsException.prototype);
+  }
+}
+
+/**
+ * <p>The rate limiter limit has been exceeded for the connection. You cannot add more rate limiters to virtual interfaces on this connection.</p>
+ * @public
+ */
+export class LimitExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.directconnect#LimitExceededException";
+  readonly name = "LimitExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<LimitExceededException, __BaseException>) {
+    super({
+      name: "LimitExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, LimitExceededException.prototype);
+  }
+}

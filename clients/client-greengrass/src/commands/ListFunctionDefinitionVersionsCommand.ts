@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { ListFunctionDefinitionVersionsRequest, ListFunctionDefinitionVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListFunctionDefinitionVersionsCommand,
-  serializeAws_restJson1ListFunctionDefinitionVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFunctionDefinitionVersionsRequest, ListFunctionDefinitionVersionsResponse } from "../models/models_0";
+import { ListFunctionDefinitionVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFunctionDefinitionVersionsCommand}.
+ */
 export interface ListFunctionDefinitionVersionsCommandInput extends ListFunctionDefinitionVersionsRequest {}
-export interface ListFunctionDefinitionVersionsCommandOutput
-  extends ListFunctionDefinitionVersionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListFunctionDefinitionVersionsCommand}.
+ */
+export interface ListFunctionDefinitionVersionsCommandOutput extends ListFunctionDefinitionVersionsResponse, __MetadataBearer {}
 
 /**
  * Lists the versions of a Lambda function definition.
@@ -30,74 +29,60 @@ export interface ListFunctionDefinitionVersionsCommandOutput
  * ```javascript
  * import { GreengrassClient, ListFunctionDefinitionVersionsCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, ListFunctionDefinitionVersionsCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // ListFunctionDefinitionVersionsRequest
+ *   FunctionDefinitionId: "STRING_VALUE", // required
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListFunctionDefinitionVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFunctionDefinitionVersionsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Versions: [ // __listOfVersionInformation
+ * //     { // VersionInformation
+ * //       Arn: "STRING_VALUE",
+ * //       CreationTimestamp: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListFunctionDefinitionVersionsCommandInput - {@link ListFunctionDefinitionVersionsCommandInput}
+ * @returns {@link ListFunctionDefinitionVersionsCommandOutput}
  * @see {@link ListFunctionDefinitionVersionsCommandInput} for command's `input` shape.
  * @see {@link ListFunctionDefinitionVersionsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class ListFunctionDefinitionVersionsCommand extends $Command<
-  ListFunctionDefinitionVersionsCommandInput,
-  ListFunctionDefinitionVersionsCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFunctionDefinitionVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFunctionDefinitionVersionsCommandInput, ListFunctionDefinitionVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "ListFunctionDefinitionVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFunctionDefinitionVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFunctionDefinitionVersionsResponse.filterSensitiveLog,
+export class ListFunctionDefinitionVersionsCommand extends command<ListFunctionDefinitionVersionsCommandInput, ListFunctionDefinitionVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFunctionDefinitionVersions",
+  ListFunctionDefinitionVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFunctionDefinitionVersionsRequest;
+      output: ListFunctionDefinitionVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListFunctionDefinitionVersionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFunctionDefinitionVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListFunctionDefinitionVersionsCommandOutput> {
-    return deserializeAws_restJson1ListFunctionDefinitionVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFunctionDefinitionVersionsCommandInput;
+      output: ListFunctionDefinitionVersionsCommandOutput;
+    };
+  };
 }

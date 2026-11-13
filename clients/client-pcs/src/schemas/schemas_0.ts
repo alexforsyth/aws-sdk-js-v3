@@ -1,0 +1,840 @@
+const _A = "Accounting";
+const _ADE = "AccessDeniedException";
+const _AR = "AccountingRequest";
+const _C = "Cluster";
+const _CC = "CreateCluster";
+const _CCNG = "CreateComputeNodeGroup";
+const _CCNGR = "CreateComputeNodeGroupRequest";
+const _CCNGRr = "CreateComputeNodeGroupResponse";
+const _CCR = "CreateClusterRequest";
+const _CCRr = "CreateClusterResponse";
+const _CCS = "CgroupCustomSetting";
+const _CCSg = "CgroupCustomSettings";
+const _CE = "ConflictException";
+const _CL = "ClusterList";
+const _CLT = "CustomLaunchTemplate";
+const _CNG = "ComputeNodeGroup";
+const _CNGC = "ComputeNodeGroupConfiguration";
+const _CNGCL = "ComputeNodeGroupConfigurationList";
+const _CNGL = "ComputeNodeGroupList";
+const _CNGS = "ComputeNodeGroupSummary";
+const _CNGSC = "ComputeNodeGroupSlurmConfiguration";
+const _CNGSCR = "ComputeNodeGroupSlurmConfigurationRequest";
+const _CQ = "CreateQueue";
+const _CQR = "CreateQueueRequest";
+const _CQRr = "CreateQueueResponse";
+const _CS = "ClusterSummary";
+const _CSC = "ClusterSlurmConfiguration";
+const _CSCR = "ClusterSlurmConfigurationRequest";
+const _DC = "DeleteCluster";
+const _DCNG = "DeleteComputeNodeGroup";
+const _DCNGR = "DeleteComputeNodeGroupRequest";
+const _DCNGRe = "DeleteComputeNodeGroupResponse";
+const _DCR = "DeleteClusterRequest";
+const _DCRe = "DeleteClusterResponse";
+const _DQ = "DeleteQueue";
+const _DQR = "DeleteQueueRequest";
+const _DQRe = "DeleteQueueResponse";
+const _E = "Endpoint";
+const _EI = "ErrorInfo";
+const _EIL = "ErrorInfoList";
+const _En = "Endpoints";
+const _GC = "GetCluster";
+const _GCNG = "GetComputeNodeGroup";
+const _GCNGR = "GetComputeNodeGroupRequest";
+const _GCNGRe = "GetComputeNodeGroupResponse";
+const _GCR = "GetClusterRequest";
+const _GCRe = "GetClusterResponse";
+const _GCS = "GresCustomSettings";
+const _GQ = "GetQueue";
+const _GQR = "GetQueueRequest";
+const _GQRe = "GetQueueResponse";
+const _IC = "InstanceConfig";
+const _IL = "InstanceList";
+const _ISE = "InternalServerException";
+const _JA = "JwtAuth";
+const _JK = "JwtKey";
+const _LC = "ListClusters";
+const _LCNG = "ListComputeNodeGroups";
+const _LCNGR = "ListComputeNodeGroupsRequest";
+const _LCNGRi = "ListComputeNodeGroupsResponse";
+const _LCR = "ListClustersRequest";
+const _LCRi = "ListClustersResponse";
+const _LQ = "ListQueues";
+const _LQR = "ListQueuesRequest";
+const _LQRi = "ListQueuesResponse";
+const _LTFR = "ListTagsForResource";
+const _LTFRR = "ListTagsForResourceRequest";
+const _LTFRRi = "ListTagsForResourceResponse";
+const _N = "Networking";
+const _NLA = "NodeLifecycleActions";
+const _NLAR = "NodeLifecycleActionsRequest";
+const _NLS = "NodeLifecycleScript";
+const _NLSL = "NodeLifecycleScriptList";
+const _NLSo = "NodeLifecycleStages";
+const _NR = "NetworkingRequest";
+const _Q = "Queue";
+const _QL = "QueueList";
+const _QS = "QueueSummary";
+const _QSC = "QueueSlurmConfiguration";
+const _QSCR = "QueueSlurmConfigurationRequest";
+const _RA = "Retry-After";
+const _RCNGI = "RegisterComputeNodeGroupInstance";
+const _RCNGIR = "RegisterComputeNodeGroupInstanceRequest";
+const _RCNGIRe = "RegisterComputeNodeGroupInstanceResponse";
+const _RNFE = "ResourceNotFoundException";
+const _S = "Scheduler";
+const _SAK = "SlurmAuthKey";
+const _SC = "ScalingConfiguration";
+const _SCR = "ScalingConfigurationRequest";
+const _SCS = "SlurmCustomSetting";
+const _SCSl = "SlurmdbdCustomSetting";
+const _SCSlu = "SlurmCustomSettings";
+const _SCSlur = "SlurmdbdCustomSettings";
+const _SO = "SpotOptions";
+const _SQEE = "ServiceQuotaExceededException";
+const _SR = "SchedulerRequest";
+const _SRR = "SlurmRestRequest";
+const _SRl = "SlurmRest";
+const _SS = "SharedSecret";
+const _SSc = "ScriptSource";
+const _TE = "ThrottlingException";
+const _TR = "TagResource";
+const _TRR = "TagResourceRequest";
+const _TRRa = "TagResourceResponse";
+const _UAR = "UpdateAccountingRequest";
+const _UC = "UpdateCluster";
+const _UCNG = "UpdateComputeNodeGroup";
+const _UCNGR = "UpdateComputeNodeGroupRequest";
+const _UCNGRp = "UpdateComputeNodeGroupResponse";
+const _UCNGSCR = "UpdateComputeNodeGroupSlurmConfigurationRequest";
+const _UCR = "UpdateClusterRequest";
+const _UCRp = "UpdateClusterResponse";
+const _UCSCR = "UpdateClusterSlurmConfigurationRequest";
+const _UNLAR = "UpdateNodeLifecycleActionsRequest";
+const _UQ = "UpdateQueue";
+const _UQR = "UpdateQueueRequest";
+const _UQRp = "UpdateQueueResponse";
+const _UQSCR = "UpdateQueueSlurmConfigurationRequest";
+const _UR = "UntagResource";
+const _URR = "UntagResourceRequest";
+const _URRn = "UntagResourceResponse";
+const _USR = "UpdateSchedulerRequest";
+const _USRR = "UpdateSlurmRestRequest";
+const _VE = "ValidationException";
+const _VEF = "ValidationExceptionField";
+const _VEFL = "ValidationExceptionFieldList";
+const _a = "arn";
+const _aI = "amiId";
+const _aK = "authKey";
+const _aS = "allocationStrategy";
+const _ac = "accounting";
+const _ar = "arguments";
+const _bI = "bootstrapId";
+const _c = "client";
+const _cA = "createdAt";
+const _cCS = "cgroupCustomSettings";
+const _cI = "clusterId";
+const _cIl = "clusterIdentifier";
+const _cLT = "customLaunchTemplate";
+const _cN = "clusterName";
+const _cNG = "computeNodeGroup";
+const _cNGC = "computeNodeGroupConfigurations";
+const _cNGI = "computeNodeGroupId";
+const _cNGIo = "computeNodeGroupIdentifier";
+const _cNGN = "computeNodeGroupName";
+const _cNGo = "computeNodeGroups";
+const _cT = "clientToken";
+const _ch = "checksum";
+const _cl = "cluster";
+const _clu = "clusters";
+const _co = "code";
+const _dPTID = "defaultPurgeTimeInDays";
+const _e = "error";
+const _eI = "errorInfo";
+const _eP = "executionPolicy";
+const _en = "endpoints";
+const _fL = "fieldList";
+const _gCS = "gresCustomSettings";
+const _hE = "httpError";
+const _hH = "httpHeader";
+const _hQ = "httpQuery";
+const _i = "id";
+const _iA = "ipv6Address";
+const _iC = "instanceConfigs";
+const _iIPA = "iamInstanceProfileArn";
+const _iT = "instanceType";
+const _jA = "jwtAuth";
+const _jK = "jwtKey";
+const _lTM = "launchTemplateMode";
+const _m = "message";
+const _mA = "modifiedAt";
+const _mIC = "minInstanceCount";
+const _mICa = "maxInstanceCount";
+const _mR = "maxResults";
+const _mo = "mode";
+const _n = "name";
+const _nB = "nodeBootstrapped";
+const _nID = "nodeID";
+const _nLA = "nodeLifecycleActions";
+const _nR = "nodeReady";
+const _nT = "nextToken";
+const _nTe = "networkType";
+const _ne = "networking";
+const _oE = "onError";
+const _p = "port";
+const _pIA = "privateIpAddress";
+const _pIAu = "publicIpAddress";
+const _pN = "parameterName";
+const _pO = "purchaseOption";
+const _pV = "parameterValue";
+const _q = "queue";
+const _qC = "quotaCode";
+const _qI = "queueIdentifier";
+const _qN = "queueName";
+const _qu = "queues";
+const _r = "reason";
+const _rA = "resourceArn";
+const _rAS = "retryAfterSeconds";
+const _rI = "resourceId";
+const _rT = "resourceType";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.pcs";
+const _sA = "secretArn";
+const _sC = "serviceCode";
+const _sCP = "scriptCachingPolicy";
+const _sCS = "slurmCustomSettings";
+const _sCSl = "slurmdbdCustomSettings";
+const _sCc = "scalingConfiguration";
+const _sCl = "slurmConfiguration";
+const _sDITIS = "scaleDownIdleTimeInSeconds";
+const _sGI = "securityGroupIds";
+const _sI = "subnetIds";
+const _sKN = "sshKeyName";
+const _sL = "scriptLocation";
+const _sO = "spotOptions";
+const _sR = "slurmRest";
+const _sS = "scriptSource";
+const _sSh = "sharedSecret";
+const _sV = "secretVersion";
+const _sVI = "s3VersionId";
+const _sVc = "schedulerVersion";
+const _sc = "scheduler";
+const _se = "server";
+const _si = "size";
+const _st = "status";
+const _sta = "stages";
+const _t = "tags";
+const _tK = "tagKeys";
+const _ty = "type";
+const _v = "version";
+const n0 = "com.amazonaws.pcs";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  ConflictException,
+  InternalServerException,
+  ResourceNotFoundException,
+  ServiceQuotaExceededException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { PCSServiceException } from "../models/PCSServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var PCSServiceException$: StaticErrorSchema = [-3, _s, "PCSServiceException", 0, [], []];
+_s_registry.registerError(PCSServiceException$, PCSServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m, _rI, _rT],
+  [0, 0, 0], 3
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_m],
+  [0], 1
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_m, _rI, _rT],
+  [0, 0, 0], 3
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 402 },
+  [_m, _sC, _rI, _rT, _qC],
+  [0, 0, 0, 0, 0], 2
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_m, _rAS],
+  [0, [1, { [_hH]: _RA }]], 1
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m, _r, _fL],
+  [0, 0, () => ValidationExceptionFieldList], 2
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var SharedSecret: StaticSimpleSchema = [0, n0, _SS, 8, 0];
+export var Accounting$: StaticStructureSchema = [3, n0, _A,
+  0,
+  [_mo, _dPTID],
+  [0, 1], 1
+];
+export var AccountingRequest$: StaticStructureSchema = [3, n0, _AR,
+  0,
+  [_mo, _dPTID],
+  [0, 1], 1
+];
+export var CgroupCustomSetting$: StaticStructureSchema = [3, n0, _CCS,
+  0,
+  [_pN, _pV],
+  [0, 0], 2
+];
+export var Cluster$: StaticStructureSchema = [3, n0, _C,
+  0,
+  [_n, _i, _a, _st, _cA, _mA, _sc, _si, _ne, _sCl, _en, _eI],
+  [0, 0, 0, 0, 5, 5, () => Scheduler$, 0, () => Networking$, () => ClusterSlurmConfiguration$, () => Endpoints, () => ErrorInfoList], 9
+];
+export var ClusterSlurmConfiguration$: StaticStructureSchema = [3, n0, _CSC,
+  0,
+  [_sDITIS, _sCS, _sCSl, _cCS, _aK, _jA, _ac, _sR],
+  [1, () => SlurmCustomSettings, () => SlurmdbdCustomSettings, () => CgroupCustomSettings, () => SlurmAuthKey$, () => JwtAuth$, () => Accounting$, () => SlurmRest$]
+];
+export var ClusterSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _CSCR,
+  0,
+  [_sDITIS, _sCS, _sCSl, _cCS, _ac, _sR],
+  [1, () => SlurmCustomSettings, () => SlurmdbdCustomSettings, () => CgroupCustomSettings, () => AccountingRequest$, () => SlurmRestRequest$]
+];
+export var ClusterSummary$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_n, _i, _a, _cA, _mA, _st],
+  [0, 0, 0, 5, 5, 0], 6
+];
+export var ComputeNodeGroup$: StaticStructureSchema = [3, n0, _CNG,
+  0,
+  [_n, _i, _a, _cI, _cA, _mA, _st, _sI, _iIPA, _sCc, _iC, _aI, _sGI, _sKN, _pO, _lTM, _cLT, _sO, _sCl, _nLA, _eI],
+  [0, 0, 0, 0, 5, 5, 0, 64 | 0, 0, () => ScalingConfiguration$, () => InstanceList, 0, 64 | 0, 0, 0, 0, () => CustomLaunchTemplate$, () => SpotOptions$, () => ComputeNodeGroupSlurmConfiguration$, () => NodeLifecycleActions$, () => ErrorInfoList], 11
+];
+export var ComputeNodeGroupConfiguration$: StaticStructureSchema = [3, n0, _CNGC,
+  0,
+  [_cNGI],
+  [0]
+];
+export var ComputeNodeGroupSlurmConfiguration$: StaticStructureSchema = [3, n0, _CNGSC,
+  0,
+  [_sDITIS, _sCS, _gCS],
+  [1, () => SlurmCustomSettings, [1, n0, _GCS, 0, 128 | 0]]
+];
+export var ComputeNodeGroupSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _CNGSCR,
+  0,
+  [_sDITIS, _sCS, _gCS],
+  [1, () => SlurmCustomSettings, [1, n0, _GCS, 0, 128 | 0]]
+];
+export var ComputeNodeGroupSummary$: StaticStructureSchema = [3, n0, _CNGS,
+  0,
+  [_n, _i, _a, _cI, _cA, _mA, _st],
+  [0, 0, 0, 0, 5, 5, 0], 7
+];
+export var CreateClusterRequest$: StaticStructureSchema = [3, n0, _CCR,
+  0,
+  [_cN, _sc, _si, _ne, _sCl, _cT, _t],
+  [0, () => SchedulerRequest$, 0, () => NetworkingRequest$, () => ClusterSlurmConfigurationRequest$, [0, 4], 128 | 0], 4
+];
+export var CreateClusterResponse$: StaticStructureSchema = [3, n0, _CCRr,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var CreateComputeNodeGroupRequest$: StaticStructureSchema = [3, n0, _CCNGR,
+  0,
+  [_cIl, _cNGN, _sI, _iIPA, _sCc, _iC, _aI, _sGI, _sKN, _pO, _lTM, _cLT, _sO, _sCl, _nLA, _cT, _t],
+  [0, 0, 64 | 0, 0, () => ScalingConfigurationRequest$, () => InstanceList, 0, 64 | 0, 0, 0, 0, () => CustomLaunchTemplate$, () => SpotOptions$, () => ComputeNodeGroupSlurmConfigurationRequest$, () => NodeLifecycleActionsRequest$, [0, 4], 128 | 0], 6
+];
+export var CreateComputeNodeGroupResponse$: StaticStructureSchema = [3, n0, _CCNGRr,
+  0,
+  [_cNG],
+  [() => ComputeNodeGroup$]
+];
+export var CreateQueueRequest$: StaticStructureSchema = [3, n0, _CQR,
+  0,
+  [_cIl, _qN, _cNGC, _sCl, _cT, _t],
+  [0, 0, () => ComputeNodeGroupConfigurationList, () => QueueSlurmConfigurationRequest$, [0, 4], 128 | 0], 2
+];
+export var CreateQueueResponse$: StaticStructureSchema = [3, n0, _CQRr,
+  0,
+  [_q],
+  [() => Queue$]
+];
+export var CustomLaunchTemplate$: StaticStructureSchema = [3, n0, _CLT,
+  0,
+  [_i, _v],
+  [0, 0], 2
+];
+export var DeleteClusterRequest$: StaticStructureSchema = [3, n0, _DCR,
+  0,
+  [_cIl, _cT],
+  [0, [0, 4]], 1
+];
+export var DeleteClusterResponse$: StaticStructureSchema = [3, n0, _DCRe,
+  0,
+  [],
+  []
+];
+export var DeleteComputeNodeGroupRequest$: StaticStructureSchema = [3, n0, _DCNGR,
+  0,
+  [_cIl, _cNGIo, _cT],
+  [0, 0, [0, 4]], 2
+];
+export var DeleteComputeNodeGroupResponse$: StaticStructureSchema = [3, n0, _DCNGRe,
+  0,
+  [],
+  []
+];
+export var DeleteQueueRequest$: StaticStructureSchema = [3, n0, _DQR,
+  0,
+  [_cIl, _qI, _cT],
+  [0, 0, [0, 4]], 2
+];
+export var DeleteQueueResponse$: StaticStructureSchema = [3, n0, _DQRe,
+  0,
+  [],
+  []
+];
+export var Endpoint$: StaticStructureSchema = [3, n0, _E,
+  0,
+  [_ty, _pIA, _p, _pIAu, _iA],
+  [0, 0, 0, 0, 0], 3
+];
+export var ErrorInfo$: StaticStructureSchema = [3, n0, _EI,
+  0,
+  [_co, _m],
+  [0, 0]
+];
+export var GetClusterRequest$: StaticStructureSchema = [3, n0, _GCR,
+  0,
+  [_cIl],
+  [0], 1
+];
+export var GetClusterResponse$: StaticStructureSchema = [3, n0, _GCRe,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var GetComputeNodeGroupRequest$: StaticStructureSchema = [3, n0, _GCNGR,
+  0,
+  [_cIl, _cNGIo],
+  [0, 0], 2
+];
+export var GetComputeNodeGroupResponse$: StaticStructureSchema = [3, n0, _GCNGRe,
+  0,
+  [_cNG],
+  [() => ComputeNodeGroup$]
+];
+export var GetQueueRequest$: StaticStructureSchema = [3, n0, _GQR,
+  0,
+  [_cIl, _qI],
+  [0, 0], 2
+];
+export var GetQueueResponse$: StaticStructureSchema = [3, n0, _GQRe,
+  0,
+  [_q],
+  [() => Queue$]
+];
+export var InstanceConfig$: StaticStructureSchema = [3, n0, _IC,
+  0,
+  [_iT],
+  [0]
+];
+export var JwtAuth$: StaticStructureSchema = [3, n0, _JA,
+  0,
+  [_jK],
+  [() => JwtKey$]
+];
+export var JwtKey$: StaticStructureSchema = [3, n0, _JK,
+  0,
+  [_sA, _sV],
+  [0, 0], 2
+];
+export var ListClustersRequest$: StaticStructureSchema = [3, n0, _LCR,
+  0,
+  [_nT, _mR],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]]
+];
+export var ListClustersResponse$: StaticStructureSchema = [3, n0, _LCRi,
+  0,
+  [_clu, _nT],
+  [() => ClusterList, 0], 1
+];
+export var ListComputeNodeGroupsRequest$: StaticStructureSchema = [3, n0, _LCNGR,
+  0,
+  [_cIl, _nT, _mR],
+  [0, 0, 1], 1
+];
+export var ListComputeNodeGroupsResponse$: StaticStructureSchema = [3, n0, _LCNGRi,
+  0,
+  [_cNGo, _nT],
+  [() => ComputeNodeGroupList, 0], 1
+];
+export var ListQueuesRequest$: StaticStructureSchema = [3, n0, _LQR,
+  0,
+  [_cIl, _nT, _mR],
+  [0, 0, 1], 1
+];
+export var ListQueuesResponse$: StaticStructureSchema = [3, n0, _LQRi,
+  0,
+  [_qu, _nT],
+  [() => QueueList, 0], 1
+];
+export var ListTagsForResourceRequest$: StaticStructureSchema = [3, n0, _LTFRR,
+  0,
+  [_rA],
+  [0], 1
+];
+export var ListTagsForResourceResponse$: StaticStructureSchema = [3, n0, _LTFRRi,
+  0,
+  [_t],
+  [128 | 0]
+];
+export var Networking$: StaticStructureSchema = [3, n0, _N,
+  0,
+  [_sI, _sGI, _nTe],
+  [64 | 0, 64 | 0, 0]
+];
+export var NetworkingRequest$: StaticStructureSchema = [3, n0, _NR,
+  0,
+  [_sI, _sGI, _nTe],
+  [64 | 0, 64 | 0, 0]
+];
+export var NodeLifecycleActions$: StaticStructureSchema = [3, n0, _NLA,
+  0,
+  [_sta, _sCP],
+  [() => NodeLifecycleStages$, 0], 1
+];
+export var NodeLifecycleActionsRequest$: StaticStructureSchema = [3, n0, _NLAR,
+  0,
+  [_sta, _sCP],
+  [() => NodeLifecycleStages$, 0], 1
+];
+export var NodeLifecycleScript$: StaticStructureSchema = [3, n0, _NLS,
+  0,
+  [_n, _sS, _ar, _oE, _eP],
+  [0, () => ScriptSource$, 64 | 0, 0, 0], 2
+];
+export var NodeLifecycleStages$: StaticStructureSchema = [3, n0, _NLSo,
+  0,
+  [_nB, _nR],
+  [() => NodeLifecycleScriptList, () => NodeLifecycleScriptList]
+];
+export var Queue$: StaticStructureSchema = [3, n0, _Q,
+  0,
+  [_n, _i, _a, _cI, _cA, _mA, _st, _cNGC, _sCl, _eI],
+  [0, 0, 0, 0, 5, 5, 0, () => ComputeNodeGroupConfigurationList, () => QueueSlurmConfiguration$, () => ErrorInfoList], 8
+];
+export var QueueSlurmConfiguration$: StaticStructureSchema = [3, n0, _QSC,
+  0,
+  [_sCS],
+  [() => SlurmCustomSettings]
+];
+export var QueueSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _QSCR,
+  0,
+  [_sCS],
+  [() => SlurmCustomSettings]
+];
+export var QueueSummary$: StaticStructureSchema = [3, n0, _QS,
+  0,
+  [_n, _i, _a, _cI, _cA, _mA, _st],
+  [0, 0, 0, 0, 5, 5, 0], 7
+];
+export var RegisterComputeNodeGroupInstanceRequest$: StaticStructureSchema = [3, n0, _RCNGIR,
+  0,
+  [_cIl, _bI],
+  [0, 0], 2
+];
+export var RegisterComputeNodeGroupInstanceResponse$: StaticStructureSchema = [3, n0, _RCNGIRe,
+  0,
+  [_nID, _sSh, _en, _cN, _cNGI, _cNGN, _nLA, _sVc],
+  [0, [() => SharedSecret, 0], () => Endpoints, 0, 0, 0, () => NodeLifecycleActions$, 0], 3
+];
+export var ScalingConfiguration$: StaticStructureSchema = [3, n0, _SC,
+  0,
+  [_mIC, _mICa],
+  [1, 1], 2
+];
+export var ScalingConfigurationRequest$: StaticStructureSchema = [3, n0, _SCR,
+  0,
+  [_mIC, _mICa],
+  [1, 1], 2
+];
+export var Scheduler$: StaticStructureSchema = [3, n0, _S,
+  0,
+  [_ty, _v],
+  [0, 0], 2
+];
+export var SchedulerRequest$: StaticStructureSchema = [3, n0, _SR,
+  0,
+  [_ty, _v],
+  [0, 0], 2
+];
+export var ScriptSource$: StaticStructureSchema = [3, n0, _SSc,
+  0,
+  [_sL, _sVI, _ch],
+  [0, 0, 0], 1
+];
+export var SlurmAuthKey$: StaticStructureSchema = [3, n0, _SAK,
+  0,
+  [_sA, _sV],
+  [0, 0], 2
+];
+export var SlurmCustomSetting$: StaticStructureSchema = [3, n0, _SCS,
+  0,
+  [_pN, _pV],
+  [0, 0], 2
+];
+export var SlurmdbdCustomSetting$: StaticStructureSchema = [3, n0, _SCSl,
+  0,
+  [_pN, _pV],
+  [0, 0], 2
+];
+export var SlurmRest$: StaticStructureSchema = [3, n0, _SRl,
+  0,
+  [_mo],
+  [0], 1
+];
+export var SlurmRestRequest$: StaticStructureSchema = [3, n0, _SRR,
+  0,
+  [_mo],
+  [0], 1
+];
+export var SpotOptions$: StaticStructureSchema = [3, n0, _SO,
+  0,
+  [_aS],
+  [0]
+];
+export var TagResourceRequest$: StaticStructureSchema = [3, n0, _TRR,
+  0,
+  [_rA, _t],
+  [0, 128 | 0], 2
+];
+export var TagResourceResponse$: StaticStructureSchema = [3, n0, _TRRa,
+  0,
+  [],
+  []
+];
+export var UntagResourceRequest$: StaticStructureSchema = [3, n0, _URR,
+  0,
+  [_rA, _tK],
+  [[0, 1], 64 | 0], 2
+];
+export var UntagResourceResponse$: StaticStructureSchema = [3, n0, _URRn,
+  0,
+  [],
+  []
+];
+export var UpdateAccountingRequest$: StaticStructureSchema = [3, n0, _UAR,
+  0,
+  [_dPTID, _mo],
+  [1, 0]
+];
+export var UpdateClusterRequest$: StaticStructureSchema = [3, n0, _UCR,
+  0,
+  [_cIl, _cT, _sCl, _sc],
+  [0, [0, 4], () => UpdateClusterSlurmConfigurationRequest$, () => UpdateSchedulerRequest$], 1
+];
+export var UpdateClusterResponse$: StaticStructureSchema = [3, n0, _UCRp,
+  0,
+  [_cl],
+  [() => Cluster$]
+];
+export var UpdateClusterSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _UCSCR,
+  0,
+  [_sDITIS, _sCS, _sCSl, _cCS, _ac, _sR],
+  [1, () => SlurmCustomSettings, () => SlurmdbdCustomSettings, () => CgroupCustomSettings, () => UpdateAccountingRequest$, () => UpdateSlurmRestRequest$]
+];
+export var UpdateComputeNodeGroupRequest$: StaticStructureSchema = [3, n0, _UCNGR,
+  0,
+  [_cIl, _cNGIo, _aI, _sGI, _sKN, _sI, _lTM, _cLT, _pO, _sO, _sCc, _iIPA, _sCl, _nLA, _cT],
+  [0, 0, 0, 64 | 0, 0, 64 | 0, 0, () => CustomLaunchTemplate$, 0, () => SpotOptions$, () => ScalingConfigurationRequest$, 0, () => UpdateComputeNodeGroupSlurmConfigurationRequest$, () => UpdateNodeLifecycleActionsRequest$, [0, 4]], 2
+];
+export var UpdateComputeNodeGroupResponse$: StaticStructureSchema = [3, n0, _UCNGRp,
+  0,
+  [_cNG],
+  [() => ComputeNodeGroup$]
+];
+export var UpdateComputeNodeGroupSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _UCNGSCR,
+  0,
+  [_sDITIS, _sCS, _gCS],
+  [1, () => SlurmCustomSettings, [1, n0, _GCS, 0, 128 | 0]]
+];
+export var UpdateNodeLifecycleActionsRequest$: StaticStructureSchema = [3, n0, _UNLAR,
+  0,
+  [_sta, _sCP],
+  [() => NodeLifecycleStages$, 0], 1
+];
+export var UpdateQueueRequest$: StaticStructureSchema = [3, n0, _UQR,
+  0,
+  [_cIl, _qI, _cNGC, _sCl, _cT],
+  [0, 0, () => ComputeNodeGroupConfigurationList, () => UpdateQueueSlurmConfigurationRequest$, [0, 4]], 2
+];
+export var UpdateQueueResponse$: StaticStructureSchema = [3, n0, _UQRp,
+  0,
+  [_q],
+  [() => Queue$]
+];
+export var UpdateQueueSlurmConfigurationRequest$: StaticStructureSchema = [3, n0, _UQSCR,
+  0,
+  [_sCS],
+  [() => SlurmCustomSettings]
+];
+export var UpdateSchedulerRequest$: StaticStructureSchema = [3, n0, _USR,
+  0,
+  [_v],
+  [0], 1
+];
+export var UpdateSlurmRestRequest$: StaticStructureSchema = [3, n0, _USRR,
+  0,
+  [_mo],
+  [0]
+];
+export var ValidationExceptionField$: StaticStructureSchema = [3, n0, _VEF,
+  0,
+  [_n, _m],
+  [0, 0], 2
+];
+var CgroupCustomSettings: StaticListSchema = [1, n0, _CCSg,
+  0, () => CgroupCustomSetting$
+];
+var ClusterList: StaticListSchema = [1, n0, _CL,
+  0, () => ClusterSummary$
+];
+var ComputeNodeGroupConfigurationList: StaticListSchema = [1, n0, _CNGCL,
+  0, () => ComputeNodeGroupConfiguration$
+];
+var ComputeNodeGroupList: StaticListSchema = [1, n0, _CNGL,
+  0, () => ComputeNodeGroupSummary$
+];
+var Endpoints: StaticListSchema = [1, n0, _En,
+  0, () => Endpoint$
+];
+var ErrorInfoList: StaticListSchema = [1, n0, _EIL,
+  0, () => ErrorInfo$
+];
+var GresCustomSettings: StaticListSchema = [1, n0, _GCS,
+  0, 128 | 0
+];
+var InstanceList: StaticListSchema = [1, n0, _IL,
+  0, () => InstanceConfig$
+];
+var NodeLifecycleScriptArguments = 64 | 0;
+var NodeLifecycleScriptList: StaticListSchema = [1, n0, _NLSL,
+  0, () => NodeLifecycleScript$
+];
+var QueueList: StaticListSchema = [1, n0, _QL,
+  0, () => QueueSummary$
+];
+var SecurityGroupIdList = 64 | 0;
+var SecurityGroupIdListOrEmpty = 64 | 0;
+var SlurmCustomSettings: StaticListSchema = [1, n0, _SCSlu,
+  0, () => SlurmCustomSetting$
+];
+var SlurmdbdCustomSettings: StaticListSchema = [1, n0, _SCSlur,
+  0, () => SlurmdbdCustomSetting$
+];
+var StringList = 64 | 0;
+var SubnetIdList = 64 | 0;
+var TagKeys = 64 | 0;
+var ValidationExceptionFieldList: StaticListSchema = [1, n0, _VEFL,
+  0, () => ValidationExceptionField$
+];
+var GresCustomSettingMap = 128 | 0;
+var RequestTagMap = 128 | 0;
+var ResponseTagMap = 128 | 0;
+export var CreateCluster$: StaticOperationSchema = [9, n0, _CC,
+  2, () => CreateClusterRequest$, () => CreateClusterResponse$
+];
+export var CreateComputeNodeGroup$: StaticOperationSchema = [9, n0, _CCNG,
+  2, () => CreateComputeNodeGroupRequest$, () => CreateComputeNodeGroupResponse$
+];
+export var CreateQueue$: StaticOperationSchema = [9, n0, _CQ,
+  2, () => CreateQueueRequest$, () => CreateQueueResponse$
+];
+export var DeleteCluster$: StaticOperationSchema = [9, n0, _DC,
+  2, () => DeleteClusterRequest$, () => DeleteClusterResponse$
+];
+export var DeleteComputeNodeGroup$: StaticOperationSchema = [9, n0, _DCNG,
+  2, () => DeleteComputeNodeGroupRequest$, () => DeleteComputeNodeGroupResponse$
+];
+export var DeleteQueue$: StaticOperationSchema = [9, n0, _DQ,
+  2, () => DeleteQueueRequest$, () => DeleteQueueResponse$
+];
+export var GetCluster$: StaticOperationSchema = [9, n0, _GC,
+  0, () => GetClusterRequest$, () => GetClusterResponse$
+];
+export var GetComputeNodeGroup$: StaticOperationSchema = [9, n0, _GCNG,
+  0, () => GetComputeNodeGroupRequest$, () => GetComputeNodeGroupResponse$
+];
+export var GetQueue$: StaticOperationSchema = [9, n0, _GQ,
+  0, () => GetQueueRequest$, () => GetQueueResponse$
+];
+export var ListClusters$: StaticOperationSchema = [9, n0, _LC,
+  0, () => ListClustersRequest$, () => ListClustersResponse$
+];
+export var ListComputeNodeGroups$: StaticOperationSchema = [9, n0, _LCNG,
+  0, () => ListComputeNodeGroupsRequest$, () => ListComputeNodeGroupsResponse$
+];
+export var ListQueues$: StaticOperationSchema = [9, n0, _LQ,
+  0, () => ListQueuesRequest$, () => ListQueuesResponse$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  0, () => ListTagsForResourceRequest$, () => ListTagsForResourceResponse$
+];
+export var RegisterComputeNodeGroupInstance$: StaticOperationSchema = [9, n0, _RCNGI,
+  0, () => RegisterComputeNodeGroupInstanceRequest$, () => RegisterComputeNodeGroupInstanceResponse$
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TR,
+  2, () => TagResourceRequest$, () => TagResourceResponse$
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  2, () => UntagResourceRequest$, () => UntagResourceResponse$
+];
+export var UpdateCluster$: StaticOperationSchema = [9, n0, _UC,
+  2, () => UpdateClusterRequest$, () => UpdateClusterResponse$
+];
+export var UpdateComputeNodeGroup$: StaticOperationSchema = [9, n0, _UCNG,
+  2, () => UpdateComputeNodeGroupRequest$, () => UpdateComputeNodeGroupResponse$
+];
+export var UpdateQueue$: StaticOperationSchema = [9, n0, _UQ,
+  2, () => UpdateQueueRequest$, () => UpdateQueueResponse$
+];

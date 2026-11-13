@@ -1,95 +1,138 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListPermissionsRequest, ListPermissionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListPermissionsCommand,
-  serializeAws_restJson1ListPermissionsCommand,
-} from "../protocols/Aws_restJson1";
-import { RAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RAMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPermissionsRequest, ListPermissionsResponse } from "../models/models_0";
+import { ListPermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPermissionsCommand}.
+ */
 export interface ListPermissionsCommandInput extends ListPermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPermissionsCommand}.
+ */
 export interface ListPermissionsCommandOutput extends ListPermissionsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the RAM permissions.</p>
+ * <p>Retrieves a list of available RAM permissions that you can use for the supported
+ *             resource types. </p>
+ *          <note>
+ *             <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value
+ * when calling a paginated operation. These operations can occasionally return an empty set of results even when there are more
+ * results available. The <code>NextToken</code> response parameter value is <code>null</code>
+ *                <i>only</i>
+ * when there are no more results to display.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RAMClient, ListPermissionsCommand } from "@aws-sdk/client-ram"; // ES Modules import
  * // const { RAMClient, ListPermissionsCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
  * const client = new RAMClient(config);
+ * const input = { // ListPermissionsRequest
+ *   resourceType: "STRING_VALUE",
+ *   resourceOwner: "SELF" || "OTHER-ACCOUNTS",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   permissionType: "ALL" || "AWS_MANAGED" || "CUSTOMER_MANAGED",
+ *   permissionStatus: "ATTACHABLE" || "UNATTACHABLE" || "DELETING" || "DELETED" || "DEPRECATED",
+ * };
  * const command = new ListPermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPermissionsResponse
+ * //   permissions: [ // ResourceSharePermissionList
+ * //     { // ResourceSharePermissionSummary
+ * //       arn: "STRING_VALUE",
+ * //       version: "STRING_VALUE",
+ * //       defaultVersion: true || false,
+ * //       name: "STRING_VALUE",
+ * //       resourceType: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       creationTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedTime: new Date("TIMESTAMP"),
+ * //       isResourceTypeDefault: true || false,
+ * //       permissionType: "CUSTOMER_MANAGED" || "AWS_MANAGED",
+ * //       featureSet: "CREATED_FROM_POLICY" || "PROMOTING_TO_STANDARD" || "STANDARD",
+ * //       permissionTemplateParameters: [ // PermissionTemplateParameterList
+ * //         { // PermissionTemplateParameter
+ * //           name: "STRING_VALUE",
+ * //           type: "STRING" || "STRING_LIST",
+ * //           description: "STRING_VALUE",
+ * //           values: [ // PermissionTemplateParameterValueList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //       tags: [ // TagList
+ * //         { // Tag
+ * //           key: "STRING_VALUE",
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       resourceOwner: "SELF" || "OTHER-ACCOUNTS",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPermissionsCommandInput - {@link ListPermissionsCommandInput}
+ * @returns {@link ListPermissionsCommandOutput}
  * @see {@link ListPermissionsCommandInput} for command's `input` shape.
  * @see {@link ListPermissionsCommandOutput} for command's `response` shape.
- * @see {@link RAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The operation failed because the specified value for <code>NextToken</code> isn't
+ *             valid. You must specify a value you received in the <code>NextToken</code> response of a
+ *             previous call to this operation.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The operation failed because a parameter you specified isn't valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The operation failed because the requested operation isn't permitted.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
  */
-export class ListPermissionsCommand extends $Command<
-  ListPermissionsCommandInput,
-  ListPermissionsCommandOutput,
-  RAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPermissionsCommandInput, ListPermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RAMClient";
-    const commandName = "ListPermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPermissionsResponse.filterSensitiveLog,
+export class ListPermissionsCommand extends command<ListPermissionsCommandInput, ListPermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPermissions",
+  ListPermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPermissionsRequest;
+      output: ListPermissionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListPermissionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPermissionsCommandOutput> {
-    return deserializeAws_restJson1ListPermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPermissionsCommandInput;
+      output: ListPermissionsCommandOutput;
+    };
+  };
 }

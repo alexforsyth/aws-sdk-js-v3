@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DeleteTrafficMirrorFilterRequest, DeleteTrafficMirrorFilterResult } from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTrafficMirrorFilterCommand,
-  serializeAws_ec2DeleteTrafficMirrorFilterCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTrafficMirrorFilterRequest, DeleteTrafficMirrorFilterResult } from "../models/models_3";
+import { DeleteTrafficMirrorFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTrafficMirrorFilterCommand}.
+ */
 export interface DeleteTrafficMirrorFilterCommandInput extends DeleteTrafficMirrorFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTrafficMirrorFilterCommand}.
+ */
 export interface DeleteTrafficMirrorFilterCommandOutput extends DeleteTrafficMirrorFilterResult, __MetadataBearer {}
 
 /**
@@ -29,71 +30,48 @@ export interface DeleteTrafficMirrorFilterCommandOutput extends DeleteTrafficMir
  * ```javascript
  * import { EC2Client, DeleteTrafficMirrorFilterCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTrafficMirrorFilterCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTrafficMirrorFilterRequest
+ *   TrafficMirrorFilterId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTrafficMirrorFilterCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTrafficMirrorFilterResult
+ * //   TrafficMirrorFilterId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteTrafficMirrorFilterCommandInput - {@link DeleteTrafficMirrorFilterCommandInput}
+ * @returns {@link DeleteTrafficMirrorFilterCommandOutput}
  * @see {@link DeleteTrafficMirrorFilterCommandInput} for command's `input` shape.
  * @see {@link DeleteTrafficMirrorFilterCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTrafficMirrorFilterCommand extends $Command<
-  DeleteTrafficMirrorFilterCommandInput,
-  DeleteTrafficMirrorFilterCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTrafficMirrorFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTrafficMirrorFilterCommandInput, DeleteTrafficMirrorFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTrafficMirrorFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTrafficMirrorFilterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTrafficMirrorFilterResult.filterSensitiveLog,
+export class DeleteTrafficMirrorFilterCommand extends command<DeleteTrafficMirrorFilterCommandInput, DeleteTrafficMirrorFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTrafficMirrorFilter",
+  DeleteTrafficMirrorFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTrafficMirrorFilterRequest;
+      output: DeleteTrafficMirrorFilterResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteTrafficMirrorFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTrafficMirrorFilterCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTrafficMirrorFilterCommandOutput> {
-    return deserializeAws_ec2DeleteTrafficMirrorFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTrafficMirrorFilterCommandInput;
+      output: DeleteTrafficMirrorFilterCommandOutput;
+    };
+  };
 }

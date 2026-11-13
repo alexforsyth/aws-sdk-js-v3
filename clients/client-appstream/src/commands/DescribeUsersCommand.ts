@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DescribeUsersRequest, DescribeUsersResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUsersCommand,
-  serializeAws_json1_1DescribeUsersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUsersRequest, DescribeUsersResult } from "../models/models_0";
+import { DescribeUsers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUsersCommand}.
+ */
 export interface DescribeUsersCommandInput extends DescribeUsersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUsersCommand}.
+ */
 export interface DescribeUsersCommandOutput extends DescribeUsersResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,70 @@ export interface DescribeUsersCommandOutput extends DescribeUsersResult, __Metad
  * ```javascript
  * import { AppStreamClient, DescribeUsersCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeUsersCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeUsersRequest
+ *   AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeUsersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUsersResult
+ * //   Users: [ // UserList
+ * //     { // User
+ * //       Arn: "STRING_VALUE",
+ * //       UserName: "STRING_VALUE",
+ * //       Enabled: true || false,
+ * //       Status: "STRING_VALUE",
+ * //       FirstName: "STRING_VALUE",
+ * //       LastName: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUsersCommandInput - {@link DescribeUsersCommandInput}
+ * @returns {@link DescribeUsersCommandOutput}
  * @see {@link DescribeUsersCommandInput} for command's `input` shape.
  * @see {@link DescribeUsersCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUsersCommand extends $Command<
-  DescribeUsersCommandInput,
-  DescribeUsersCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUsersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUsersCommandInput, DescribeUsersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeUsersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUsersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUsersResult.filterSensitiveLog,
+export class DescribeUsersCommand extends command<DescribeUsersCommandInput, DescribeUsersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUsers",
+  DescribeUsers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUsersRequest;
+      output: DescribeUsersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUsersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUsersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeUsersCommandOutput> {
-    return deserializeAws_json1_1DescribeUsersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUsersCommandInput;
+      output: DescribeUsersCommandOutput;
+    };
+  };
 }

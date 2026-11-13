@@ -1,30 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListLocalDisksInput, ListLocalDisksOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListLocalDisksCommand,
-  serializeAws_json1_1ListLocalDisksCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, StorageGatewayClientResolvedConfig } from "../StorageGatewayClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLocalDisksInput, ListLocalDisksOutput } from "../models/models_0";
+import { ListLocalDisks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLocalDisksCommand}.
+ */
 export interface ListLocalDisksCommandInput extends ListLocalDisksInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListLocalDisksCommand}.
+ */
 export interface ListLocalDisksCommandOutput extends ListLocalDisksOutput, __MetadataBearer {}
 
 /**
  * <p>Returns a list of the gateway's local disks. To specify which gateway to describe,
  *          you use the Amazon Resource Name (ARN) of the gateway in the body of the request.</p>
- *
  *          <p>The request returns a list of all disks, specifying which are configured as working
  *          storage, cache storage, or stored volume or not configured at all. The response includes a
  *             <code>DiskStatus</code> field. This field can have a value of present (the disk is
@@ -36,68 +36,103 @@ export interface ListLocalDisksCommandOutput extends ListLocalDisksOutput, __Met
  * ```javascript
  * import { StorageGatewayClient, ListLocalDisksCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
  * // const { StorageGatewayClient, ListLocalDisksCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * // import type { StorageGatewayClientConfig } from "@aws-sdk/client-storage-gateway";
+ * const config = {}; // type is StorageGatewayClientConfig
  * const client = new StorageGatewayClient(config);
+ * const input = { // ListLocalDisksInput
+ *   GatewayARN: "STRING_VALUE", // required
+ * };
  * const command = new ListLocalDisksCommand(input);
  * const response = await client.send(command);
+ * // { // ListLocalDisksOutput
+ * //   GatewayARN: "STRING_VALUE",
+ * //   Disks: [ // Disks
+ * //     { // Disk
+ * //       DiskId: "STRING_VALUE",
+ * //       DiskPath: "STRING_VALUE",
+ * //       DiskNode: "STRING_VALUE",
+ * //       DiskStatus: "STRING_VALUE",
+ * //       DiskSizeInBytes: Number("long"),
+ * //       DiskAllocationType: "STRING_VALUE",
+ * //       DiskAllocationResource: "STRING_VALUE",
+ * //       DiskAttributeList: [ // DiskAttributeList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListLocalDisksCommandInput - {@link ListLocalDisksCommandInput}
+ * @returns {@link ListLocalDisksCommandOutput}
  * @see {@link ListLocalDisksCommandInput} for command's `input` shape.
  * @see {@link ListLocalDisksCommandOutput} for command's `response` shape.
- * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for StorageGatewayClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An internal server error has occurred during the request. For more information, see the
+ *          error and message fields.</p>
+ *
+ * @throws {@link InvalidGatewayRequestException} (client fault)
+ *  <p>An exception occurred because an invalid gateway request was issued to the service. For
+ *          more information, see the error and message fields.</p>
+ *
+ * @throws {@link StorageGatewayServiceException}
+ * <p>Base exception class for all service exceptions from StorageGateway service.</p>
+ *
+ *
+ * @example To list the gateway's local disks
+ * ```javascript
+ * // The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all.
+ * const input = {
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+ * };
+ * const command = new ListLocalDisksCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Disks: [
+ *     {
+ *       DiskAllocationType: "CACHE_STORAGE",
+ *       DiskId: "pci-0000:03:00.0-scsi-0:0:0:0",
+ *       DiskNode: "SCSI(0:0)",
+ *       DiskPath: "/dev/sda",
+ *       DiskSizeInBytes: 1099511627776,
+ *       DiskStatus: "missing"
+ *     },
+ *     {
+ *       DiskAllocationResource: "",
+ *       DiskAllocationType: "UPLOAD_BUFFER",
+ *       DiskId: "pci-0000:03:00.0-scsi-0:0:1:0",
+ *       DiskNode: "SCSI(0:1)",
+ *       DiskPath: "/dev/sdb",
+ *       DiskSizeInBytes: 1099511627776,
+ *       DiskStatus: "present"
+ *     }
+ *   ],
+ *   GatewayARN: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListLocalDisksCommand extends $Command<
-  ListLocalDisksCommandInput,
-  ListLocalDisksCommandOutput,
-  StorageGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLocalDisksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: StorageGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLocalDisksCommandInput, ListLocalDisksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "StorageGatewayClient";
-    const commandName = "ListLocalDisksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLocalDisksInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLocalDisksOutput.filterSensitiveLog,
+export class ListLocalDisksCommand extends command<ListLocalDisksCommandInput, ListLocalDisksCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLocalDisks",
+  ListLocalDisks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLocalDisksInput;
+      output: ListLocalDisksOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLocalDisksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListLocalDisksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLocalDisksCommandOutput> {
-    return deserializeAws_json1_1ListLocalDisksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLocalDisksCommandInput;
+      output: ListLocalDisksCommandOutput;
+    };
+  };
 }

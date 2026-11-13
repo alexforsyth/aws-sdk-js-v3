@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  ListActionConnectorsCommand,
+  ListActionConnectorsCommandInput,
+  ListActionConnectorsCommandOutput,
+} from "../commands/ListActionConnectorsCommand";
+import { QuickSightClient } from "../QuickSightClient";
+import type { QuickSightPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateListActionConnectors: (
+  config: QuickSightPaginationConfiguration,
+  input: ListActionConnectorsCommandInput,
+  ...rest: any[]
+) => Paginator<ListActionConnectorsCommandOutput> = createPaginator<
+  QuickSightPaginationConfiguration,
+  ListActionConnectorsCommandInput,
+  ListActionConnectorsCommandOutput
+>(QuickSightClient, ListActionConnectorsCommand, "NextToken", "NextToken", "MaxResults");

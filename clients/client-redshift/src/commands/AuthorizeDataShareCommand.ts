@@ -1,97 +1,97 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuthorizeDataShareMessage, DataShare } from "../models/models_0";
-import {
-  deserializeAws_queryAuthorizeDataShareCommand,
-  serializeAws_queryAuthorizeDataShareCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AuthorizeDataShareMessage, DataShare } from "../models/models_0";
+import { AuthorizeDataShare$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AuthorizeDataShareCommand}.
+ */
 export interface AuthorizeDataShareCommandInput extends AuthorizeDataShareMessage {}
+/**
+ * @public
+ *
+ * The output of {@link AuthorizeDataShareCommand}.
+ */
 export interface AuthorizeDataShareCommandOutput extends DataShare, __MetadataBearer {}
 
 /**
  * <p>From a data producer account, authorizes the sharing of a datashare with one or more
- *             consumer accounts. To authorize a datashare for a data consumer, the producer account
- *             must have the correct access privileges.</p>
+ *             consumer accounts or managing entities. To authorize a datashare for a data consumer,
+ *             the producer account must have the correct access permissions.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftClient, AuthorizeDataShareCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, AuthorizeDataShareCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // AuthorizeDataShareMessage
+ *   DataShareArn: "STRING_VALUE", // required
+ *   ConsumerIdentifier: "STRING_VALUE", // required
+ *   AllowWrites: true || false,
+ * };
  * const command = new AuthorizeDataShareCommand(input);
  * const response = await client.send(command);
+ * // { // DataShare
+ * //   DataShareArn: "STRING_VALUE",
+ * //   ProducerArn: "STRING_VALUE",
+ * //   AllowPubliclyAccessibleConsumers: true || false,
+ * //   DataShareAssociations: [ // DataShareAssociationList
+ * //     { // DataShareAssociation
+ * //       ConsumerIdentifier: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "PENDING_AUTHORIZATION" || "AUTHORIZED" || "DEAUTHORIZED" || "REJECTED" || "AVAILABLE",
+ * //       ConsumerRegion: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       StatusChangeDate: new Date("TIMESTAMP"),
+ * //       ProducerAllowedWrites: true || false,
+ * //       ConsumerAcceptedWrites: true || false,
+ * //     },
+ * //   ],
+ * //   ManagedBy: "STRING_VALUE",
+ * //   DataShareType: "INTERNAL",
+ * // };
+ *
  * ```
  *
+ * @param AuthorizeDataShareCommandInput - {@link AuthorizeDataShareCommandInput}
+ * @returns {@link AuthorizeDataShareCommandOutput}
  * @see {@link AuthorizeDataShareCommandInput} for command's `input` shape.
  * @see {@link AuthorizeDataShareCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidDataShareFault} (client fault)
+ *  <p>There is an error with the datashare.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class AuthorizeDataShareCommand extends $Command<
-  AuthorizeDataShareCommandInput,
-  AuthorizeDataShareCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AuthorizeDataShareCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AuthorizeDataShareCommandInput, AuthorizeDataShareCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "AuthorizeDataShareCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AuthorizeDataShareMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DataShare.filterSensitiveLog,
+export class AuthorizeDataShareCommand extends command<AuthorizeDataShareCommandInput, AuthorizeDataShareCommandOutput>(
+  _ep0,
+  _mw0,
+  "AuthorizeDataShare",
+  AuthorizeDataShare$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AuthorizeDataShareMessage;
+      output: DataShare;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AuthorizeDataShareCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryAuthorizeDataShareCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AuthorizeDataShareCommandOutput> {
-    return deserializeAws_queryAuthorizeDataShareCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AuthorizeDataShareCommandInput;
+      output: AuthorizeDataShareCommandOutput;
+    };
+  };
 }

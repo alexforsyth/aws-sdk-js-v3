@@ -1,17 +1,50 @@
-import { Logger as __Logger } from "@aws-sdk/types";
-import { parseUrl } from "@aws-sdk/url-parser";
+// smithy-typescript generated code
+import { AwsSdkSigV4Signer } from "@aws-sdk/core/httpAuthSchemes";
+import { AwsJson1_1Protocol } from "@aws-sdk/core/protocols";
+import { Sha256 } from "@smithy/core/checksum";
+import { NoOpLogger } from "@smithy/core/client";
+import { parseUrl } from "@smithy/core/protocols";
+import { fromBase64, fromUtf8, toBase64, toUtf8 } from "@smithy/core/serde";
+import type { IdentityProviderConfig } from "@smithy/types";
 
-import { defaultRegionInfoProvider } from "./endpoints";
-import { WorkSpacesClientConfig } from "./WorkSpacesClient";
+import { defaultWorkSpacesHttpAuthSchemeProvider } from "./auth/httpAuthSchemeProvider";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
+import { errorTypeRegistries } from "./schemas/schemas_0";
+import type { WorkSpacesClientConfig } from "./WorkSpacesClient";
 
 /**
  * @internal
  */
-export const getRuntimeConfig = (config: WorkSpacesClientConfig) => ({
-  apiVersion: "2015-04-08",
-  disableHostPrefix: config?.disableHostPrefix ?? false,
-  logger: config?.logger ?? ({} as __Logger),
-  regionInfoProvider: config?.regionInfoProvider ?? defaultRegionInfoProvider,
-  serviceId: config?.serviceId ?? "WorkSpaces",
-  urlParser: config?.urlParser ?? parseUrl,
-});
+export const getRuntimeConfig = (config: WorkSpacesClientConfig) => {
+  return {
+    apiVersion: "2015-04-08",
+    base64Decoder: config?.base64Decoder ?? fromBase64,
+    base64Encoder: config?.base64Encoder ?? toBase64,
+    disableHostPrefix: config?.disableHostPrefix ?? false,
+    endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
+    extensions: config?.extensions ?? [],
+    httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultWorkSpacesHttpAuthSchemeProvider,
+    httpAuthSchemes: config?.httpAuthSchemes ?? [
+      {
+        schemeId: "aws.auth#sigv4",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4"),
+        signer: new AwsSdkSigV4Signer(),
+      },
+    ],
+    logger: config?.logger ?? new NoOpLogger(),
+    protocol: config?.protocol ?? AwsJson1_1Protocol,
+    protocolSettings: config?.protocolSettings ?? {
+      defaultNamespace: "com.amazonaws.workspaces",
+      errorTypeRegistries,
+      xmlNamespace: "http://workspaces.amazonaws.com/api/v1",
+      version: "2015-04-08",
+      serviceTarget: "WorkspacesService",
+    },
+    serviceId: config?.serviceId ?? "WorkSpaces",
+    sha256: config?.sha256 ?? Sha256,
+    urlParser: config?.urlParser ?? parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+  };
+};

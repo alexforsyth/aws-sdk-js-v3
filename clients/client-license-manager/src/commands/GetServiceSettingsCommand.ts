@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { GetServiceSettingsRequest, GetServiceSettingsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetServiceSettingsCommand,
-  serializeAws_json1_1GetServiceSettingsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetServiceSettingsRequest, GetServiceSettingsResponse } from "../models/models_0";
+import { GetServiceSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetServiceSettingsCommand}.
+ */
 export interface GetServiceSettingsCommandInput extends GetServiceSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetServiceSettingsCommand}.
+ */
 export interface GetServiceSettingsCommandOutput extends GetServiceSettingsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,80 @@ export interface GetServiceSettingsCommandOutput extends GetServiceSettingsRespo
  * ```javascript
  * import { LicenseManagerClient, GetServiceSettingsCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, GetServiceSettingsCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = {};
  * const command = new GetServiceSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // GetServiceSettingsResponse
+ * //   S3BucketArn: "STRING_VALUE",
+ * //   SnsTopicArn: "STRING_VALUE",
+ * //   OrganizationConfiguration: { // OrganizationConfiguration
+ * //     EnableIntegration: true || false, // required
+ * //   },
+ * //   EnableCrossAccountsDiscovery: true || false,
+ * //   LicenseManagerResourceShareArn: "STRING_VALUE",
+ * //   CrossRegionDiscoveryHomeRegion: "STRING_VALUE",
+ * //   CrossRegionDiscoverySourceRegions: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ServiceStatus: { // ServiceStatus
+ * //     CrossAccountDiscovery: { // CrossAccountDiscoveryServiceStatus
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     CrossRegionDiscovery: { // CrossRegionDiscoveryStatus
+ * //       Message: { // RegionStatusMap
+ * //         "<keys>": { // RegionStatus
+ * //           Status: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetServiceSettingsCommandInput - {@link GetServiceSettingsCommandInput}
+ * @returns {@link GetServiceSettingsCommandOutput}
  * @see {@link GetServiceSettingsCommandInput} for command's `input` shape.
  * @see {@link GetServiceSettingsCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetServiceSettingsCommand extends $Command<
-  GetServiceSettingsCommandInput,
-  GetServiceSettingsCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetServiceSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetServiceSettingsCommandInput, GetServiceSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "GetServiceSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetServiceSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetServiceSettingsResponse.filterSensitiveLog,
+export class GetServiceSettingsCommand extends command<GetServiceSettingsCommandInput, GetServiceSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetServiceSettings",
+  GetServiceSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetServiceSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetServiceSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetServiceSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetServiceSettingsCommandOutput> {
-    return deserializeAws_json1_1GetServiceSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetServiceSettingsCommandInput;
+      output: GetServiceSettingsCommandOutput;
+    };
+  };
 }

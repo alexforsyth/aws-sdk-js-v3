@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { ApplicationInsights } from "../ApplicationInsights";
 import { ApplicationInsightsClient } from "../ApplicationInsightsClient";
 import {
   ListComponentsCommand,
   ListComponentsCommandInput,
   ListComponentsCommandOutput,
 } from "../commands/ListComponentsCommand";
-import { ApplicationInsightsPaginationConfiguration } from "./Interfaces";
+import type { ApplicationInsightsPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: ApplicationInsightsClient,
-  input: ListComponentsCommandInput,
-  ...args: any
-): Promise<ListComponentsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListComponentsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: ApplicationInsights,
-  input: ListComponentsCommandInput,
-  ...args: any
-): Promise<ListComponentsCommandOutput> => {
-  // @ts-ignore
-  return await client.listComponents(input, ...args);
-};
-export async function* paginateListComponents(
+export const paginateListComponents: (
   config: ApplicationInsightsPaginationConfiguration,
   input: ListComponentsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListComponentsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListComponentsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof ApplicationInsights) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof ApplicationInsightsClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected ApplicationInsights | ApplicationInsightsClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListComponentsCommandOutput> = createPaginator<
+  ApplicationInsightsPaginationConfiguration,
+  ListComponentsCommandInput,
+  ListComponentsCommandOutput
+>(ApplicationInsightsClient, ListComponentsCommand, "NextToken", "NextToken", "MaxResults");

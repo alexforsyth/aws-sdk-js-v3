@@ -1,32 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDefaultClusterParametersMessage, DescribeDefaultClusterParametersResult } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeDefaultClusterParametersCommand,
-  serializeAws_queryDescribeDefaultClusterParametersCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeDefaultClusterParametersMessage,
+  DescribeDefaultClusterParametersResult,
+} from "../models/models_0";
+import { DescribeDefaultClusterParameters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDefaultClusterParametersCommand}.
+ */
 export interface DescribeDefaultClusterParametersCommandInput extends DescribeDefaultClusterParametersMessage {}
-export interface DescribeDefaultClusterParametersCommandOutput
-  extends DescribeDefaultClusterParametersResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDefaultClusterParametersCommand}.
+ */
+export interface DescribeDefaultClusterParametersCommandOutput extends DescribeDefaultClusterParametersResult, __MetadataBearer {}
 
 /**
  * <p>Returns a list of parameter settings for the specified parameter group
  *             family.</p>
- *         <p>
+ *          <p>
  * For more information about parameters and parameter groups, go to
  * <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
  * in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
@@ -35,74 +37,65 @@ export interface DescribeDefaultClusterParametersCommandOutput
  * ```javascript
  * import { RedshiftClient, DescribeDefaultClusterParametersCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeDefaultClusterParametersCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeDefaultClusterParametersMessage
+ *   ParameterGroupFamily: "STRING_VALUE", // required
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeDefaultClusterParametersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDefaultClusterParametersResult
+ * //   DefaultClusterParameters: { // DefaultClusterParameters
+ * //     ParameterGroupFamily: "STRING_VALUE",
+ * //     Marker: "STRING_VALUE",
+ * //     Parameters: [ // ParametersList
+ * //       { // Parameter
+ * //         ParameterName: "STRING_VALUE",
+ * //         ParameterValue: "STRING_VALUE",
+ * //         Description: "STRING_VALUE",
+ * //         Source: "STRING_VALUE",
+ * //         DataType: "STRING_VALUE",
+ * //         AllowedValues: "STRING_VALUE",
+ * //         ApplyType: "static" || "dynamic",
+ * //         IsModifiable: true || false,
+ * //         MinimumEngineVersion: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeDefaultClusterParametersCommandInput - {@link DescribeDefaultClusterParametersCommandInput}
+ * @returns {@link DescribeDefaultClusterParametersCommandOutput}
  * @see {@link DescribeDefaultClusterParametersCommandInput} for command's `input` shape.
  * @see {@link DescribeDefaultClusterParametersCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDefaultClusterParametersCommand extends $Command<
-  DescribeDefaultClusterParametersCommandInput,
-  DescribeDefaultClusterParametersCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDefaultClusterParametersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDefaultClusterParametersCommandInput, DescribeDefaultClusterParametersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeDefaultClusterParametersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDefaultClusterParametersMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDefaultClusterParametersResult.filterSensitiveLog,
+export class DescribeDefaultClusterParametersCommand extends command<DescribeDefaultClusterParametersCommandInput, DescribeDefaultClusterParametersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDefaultClusterParameters",
+  DescribeDefaultClusterParameters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDefaultClusterParametersMessage;
+      output: DescribeDefaultClusterParametersResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeDefaultClusterParametersCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeDefaultClusterParametersCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeDefaultClusterParametersCommandOutput> {
-    return deserializeAws_queryDescribeDefaultClusterParametersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDefaultClusterParametersCommandInput;
+      output: DescribeDefaultClusterParametersCommandOutput;
+    };
+  };
 }

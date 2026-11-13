@@ -1,78 +1,99 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { QueryPrecedenceInput } from "../models/models_0";
-import {
-  deserializeAws_restXmlQueryPrecedenceCommand,
-  serializeAws_restXmlQueryPrecedenceCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { QueryPrecedenceInput } from "../models/models_0";
+import { de_QueryPrecedenceCommand, se_QueryPrecedenceCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link QueryPrecedenceCommand}.
+ */
 export interface QueryPrecedenceCommandInput extends QueryPrecedenceInput {}
+/**
+ * @public
+ *
+ * The output of {@link QueryPrecedenceCommand}.
+ */
 export interface QueryPrecedenceCommandOutput extends __MetadataBearer {}
 
-export class QueryPrecedenceCommand extends $Command<
-  QueryPrecedenceCommandInput,
-  QueryPrecedenceCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: QueryPrecedenceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<QueryPrecedenceCommandInput, QueryPrecedenceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "QueryPrecedenceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: QueryPrecedenceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestXmlProtocolClient, QueryPrecedenceCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
+ * // const { RestXmlProtocolClient, QueryPrecedenceCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
+ * const client = new RestXmlProtocolClient(config);
+ * const input = { // QueryPrecedenceInput
+ *   foo: "STRING_VALUE",
+ *   baz: { // StringMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
+ * const command = new QueryPrecedenceCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param QueryPrecedenceCommandInput - {@link QueryPrecedenceCommandInput}
+ * @returns {@link QueryPrecedenceCommandOutput}
+ * @see {@link QueryPrecedenceCommandInput} for command's `input` shape.
+ * @see {@link QueryPrecedenceCommandOutput} for command's `response` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
+ *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ */
+export class QueryPrecedenceCommand extends $Command
+  .classBuilder<
+    QueryPrecedenceCommandInput,
+    QueryPrecedenceCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "QueryPrecedence", {})
+  .n("RestXmlProtocolClient", "QueryPrecedenceCommand")
+  .f(void 0, void 0)
+  .ser(se_QueryPrecedenceCommand)
+  .de(de_QueryPrecedenceCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: QueryPrecedenceInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: QueryPrecedenceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlQueryPrecedenceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<QueryPrecedenceCommandOutput> {
-    return deserializeAws_restXmlQueryPrecedenceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: QueryPrecedenceCommandInput;
+      output: QueryPrecedenceCommandOutput;
+    };
+  };
 }

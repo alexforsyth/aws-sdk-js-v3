@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { StartProjectSessionRequest, StartProjectSessionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartProjectSessionCommand,
-  serializeAws_restJson1StartProjectSessionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartProjectSessionRequest, StartProjectSessionResponse } from "../models/models_0";
+import { StartProjectSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartProjectSessionCommand}.
+ */
 export interface StartProjectSessionCommandInput extends StartProjectSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartProjectSessionCommand}.
+ */
 export interface StartProjectSessionCommandOutput extends StartProjectSessionResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface StartProjectSessionCommandOutput extends StartProjectSessionRes
  * ```javascript
  * import { DataBrewClient, StartProjectSessionCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, StartProjectSessionCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // StartProjectSessionRequest
+ *   Name: "STRING_VALUE", // required
+ *   AssumeControl: true || false,
+ * };
  * const command = new StartProjectSessionCommand(input);
  * const response = await client.send(command);
+ * // { // StartProjectSessionResponse
+ * //   Name: "STRING_VALUE", // required
+ * //   ClientSessionId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartProjectSessionCommandInput - {@link StartProjectSessionCommandInput}
+ * @returns {@link StartProjectSessionCommandOutput}
  * @see {@link StartProjectSessionCommandInput} for command's `input` shape.
  * @see {@link StartProjectSessionCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>A service quota is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class StartProjectSessionCommand extends $Command<
-  StartProjectSessionCommandInput,
-  StartProjectSessionCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartProjectSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartProjectSessionCommandInput, StartProjectSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "StartProjectSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartProjectSessionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartProjectSessionResponse.filterSensitiveLog,
+export class StartProjectSessionCommand extends command<StartProjectSessionCommandInput, StartProjectSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartProjectSession",
+  StartProjectSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartProjectSessionRequest;
+      output: StartProjectSessionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartProjectSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartProjectSessionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartProjectSessionCommandOutput> {
-    return deserializeAws_restJson1StartProjectSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartProjectSessionCommandInput;
+      output: StartProjectSessionCommandOutput;
+    };
+  };
 }

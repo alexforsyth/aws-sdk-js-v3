@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApiGatewayV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ApiGatewayV2Client";
-import { GetVpcLinksRequest, GetVpcLinksResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetVpcLinksCommand,
-  serializeAws_restJson1GetVpcLinksCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetVpcLinksRequest, GetVpcLinksResponse } from "../models/models_0";
+import { GetVpcLinks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetVpcLinksCommand}.
+ */
 export interface GetVpcLinksCommandInput extends GetVpcLinksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetVpcLinksCommand}.
+ */
 export interface GetVpcLinksCommandOutput extends GetVpcLinksResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,73 @@ export interface GetVpcLinksCommandOutput extends GetVpcLinksResponse, __Metadat
  * ```javascript
  * import { ApiGatewayV2Client, GetVpcLinksCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
  * // const { ApiGatewayV2Client, GetVpcLinksCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
  * const client = new ApiGatewayV2Client(config);
+ * const input = { // GetVpcLinksRequest
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetVpcLinksCommand(input);
  * const response = await client.send(command);
+ * // { // GetVpcLinksResponse
+ * //   Items: [ // __listOfVpcLink
+ * //     { // VpcLink
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       Name: "STRING_VALUE", // required
+ * //       SecurityGroupIds: [ // SecurityGroupIdList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SubnetIds: [ // SubnetIdList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       VpcLinkId: "STRING_VALUE", // required
+ * //       VpcLinkStatus: "PENDING" || "AVAILABLE" || "DELETING" || "FAILED" || "INACTIVE",
+ * //       VpcLinkStatusMessage: "STRING_VALUE",
+ * //       VpcLinkVersion: "V2",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetVpcLinksCommandInput - {@link GetVpcLinksCommandInput}
+ * @returns {@link GetVpcLinksCommandOutput}
  * @see {@link GetVpcLinksCommandInput} for command's `input` shape.
  * @see {@link GetVpcLinksCommandOutput} for command's `response` shape.
- * @see {@link ApiGatewayV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetVpcLinksCommand extends $Command<
-  GetVpcLinksCommandInput,
-  GetVpcLinksCommandOutput,
-  ApiGatewayV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetVpcLinksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApiGatewayV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetVpcLinksCommandInput, GetVpcLinksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApiGatewayV2Client";
-    const commandName = "GetVpcLinksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetVpcLinksRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetVpcLinksResponse.filterSensitiveLog,
+export class GetVpcLinksCommand extends command<GetVpcLinksCommandInput, GetVpcLinksCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetVpcLinks",
+  GetVpcLinks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVpcLinksRequest;
+      output: GetVpcLinksResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetVpcLinksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetVpcLinksCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetVpcLinksCommandOutput> {
-    return deserializeAws_restJson1GetVpcLinksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetVpcLinksCommandInput;
+      output: GetVpcLinksCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { StartImportLabelsTaskRunRequest, StartImportLabelsTaskRunResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1StartImportLabelsTaskRunCommand,
-  serializeAws_json1_1StartImportLabelsTaskRunCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartImportLabelsTaskRunRequest, StartImportLabelsTaskRunResponse } from "../models/models_3";
+import { StartImportLabelsTaskRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartImportLabelsTaskRunCommand}.
+ */
 export interface StartImportLabelsTaskRunCommandInput extends StartImportLabelsTaskRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartImportLabelsTaskRunCommand}.
+ */
 export interface StartImportLabelsTaskRunCommandOutput extends StartImportLabelsTaskRunResponse, __MetadataBearer {}
 
 /**
@@ -27,7 +28,6 @@ export interface StartImportLabelsTaskRunCommandOutput extends StartImportLabels
  *       part of the active learning workflow that starts with the
  *         <code>StartMLLabelingSetGenerationTaskRun</code> call and that ultimately results in
  *       improving the quality of your machine learning transform. </p>
- *
  *          <p>After the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, Glue machine learning
  *       will have generated a series of questions for humans to answer. (Answering these questions is
  *       often called 'labeling' in the machine learning workflows). In the case of the
@@ -37,14 +37,12 @@ export interface StartImportLabelsTaskRunCommandOutput extends StartImportLabels
  *         <code>StartImportLabelsTaskRun</code>. After <code>StartImportLabelsTaskRun</code> finishes,
  *       all future runs of the machine learning transform use the new and improved labels and perform
  *       a higher-quality transformation.</p>
- *
  *          <p>By default, <code>StartMLLabelingSetGenerationTaskRun</code> continually learns from and
  *       combines all labels that you upload unless you set <code>Replace</code> to true. If you set
  *         <code>Replace</code> to true, <code>StartImportLabelsTaskRun</code> deletes and forgets all
  *       previously uploaded labels and learns only from the exact set that you upload. Replacing
  *       labels can be helpful if you realize that you previously uploaded incorrect labels, and you
  *       believe that they are having a negative effect on your transform quality.</p>
- *
  *          <p>You can check on the status of your task run by calling the <code>GetMLTaskRun</code>
  *       operation. </p>
  * @example
@@ -52,68 +50,64 @@ export interface StartImportLabelsTaskRunCommandOutput extends StartImportLabels
  * ```javascript
  * import { GlueClient, StartImportLabelsTaskRunCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, StartImportLabelsTaskRunCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // StartImportLabelsTaskRunRequest
+ *   TransformId: "STRING_VALUE", // required
+ *   InputS3Path: "STRING_VALUE", // required
+ *   ReplaceAllLabels: true || false,
+ * };
  * const command = new StartImportLabelsTaskRunCommand(input);
  * const response = await client.send(command);
+ * // { // StartImportLabelsTaskRunResponse
+ * //   TaskRunId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartImportLabelsTaskRunCommandInput - {@link StartImportLabelsTaskRunCommandInput}
+ * @returns {@link StartImportLabelsTaskRunCommandOutput}
  * @see {@link StartImportLabelsTaskRunCommandInput} for command's `input` shape.
  * @see {@link StartImportLabelsTaskRunCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class StartImportLabelsTaskRunCommand extends $Command<
-  StartImportLabelsTaskRunCommandInput,
-  StartImportLabelsTaskRunCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartImportLabelsTaskRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartImportLabelsTaskRunCommandInput, StartImportLabelsTaskRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "StartImportLabelsTaskRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartImportLabelsTaskRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartImportLabelsTaskRunResponse.filterSensitiveLog,
+export class StartImportLabelsTaskRunCommand extends command<StartImportLabelsTaskRunCommandInput, StartImportLabelsTaskRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartImportLabelsTaskRun",
+  StartImportLabelsTaskRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartImportLabelsTaskRunRequest;
+      output: StartImportLabelsTaskRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartImportLabelsTaskRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1StartImportLabelsTaskRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartImportLabelsTaskRunCommandOutput> {
-    return deserializeAws_json1_1StartImportLabelsTaskRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartImportLabelsTaskRunCommandInput;
+      output: StartImportLabelsTaskRunCommandOutput;
+    };
+  };
 }

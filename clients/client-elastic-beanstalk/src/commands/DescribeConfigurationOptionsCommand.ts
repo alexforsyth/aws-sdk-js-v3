@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ElasticBeanstalkClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticBeanstalkClient";
-import { ConfigurationOptionsDescription, DescribeConfigurationOptionsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeConfigurationOptionsCommand,
-  serializeAws_queryDescribeConfigurationOptionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigurationOptionsDescription, DescribeConfigurationOptionsMessage } from "../models/models_0";
+import { DescribeConfigurationOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConfigurationOptionsCommand}.
+ */
 export interface DescribeConfigurationOptionsCommandInput extends DescribeConfigurationOptionsMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConfigurationOptionsCommand}.
+ */
 export interface DescribeConfigurationOptionsCommandOutput extends ConfigurationOptionsDescription, __MetadataBearer {}
 
 /**
@@ -26,76 +27,135 @@ export interface DescribeConfigurationOptionsCommandOutput extends Configuration
  *       template or environment, or that a specified solution stack defines. The description includes
  *       the values the options, their default values, and an indication of the required action on a
  *       running environment if an option value is changed.</p>
+ *          <p>This action only returns information about resources that the calling principle has IAM permissions to
+ *       access. For example, consider a case where a user only has permission to access one of three
+ *       resources. When the user calls the this action, the
+ *       response will only include the one resource that the user has permission to access instead
+ *       of all three resources. If the user doesn’t have access to any of the resources an empty
+ *       result is returned.</p>
+ *          <note>
+ *             <p>The <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html">AWSElasticBeanstalkReadOnly</a>
+ *         managed policy allows operators to view information about resources related to Elastic Beanstalk. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html"> Managing Elastic Beanstalk user policies</a> in the <i>Elastic Beanstalk Developer
+ *             Guide</i>. For detailed instructions to attach a policy to a user or group, see the section <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed"> Controlling access with managed policies</a> in the
+ *         same topic.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ElasticBeanstalkClient, DescribeConfigurationOptionsCommand } from "@aws-sdk/client-elastic-beanstalk"; // ES Modules import
  * // const { ElasticBeanstalkClient, DescribeConfigurationOptionsCommand } = require("@aws-sdk/client-elastic-beanstalk"); // CommonJS import
+ * // import type { ElasticBeanstalkClientConfig } from "@aws-sdk/client-elastic-beanstalk";
+ * const config = {}; // type is ElasticBeanstalkClientConfig
  * const client = new ElasticBeanstalkClient(config);
+ * const input = { // DescribeConfigurationOptionsMessage
+ *   ApplicationName: "STRING_VALUE",
+ *   TemplateName: "STRING_VALUE",
+ *   EnvironmentName: "STRING_VALUE",
+ *   SolutionStackName: "STRING_VALUE",
+ *   PlatformArn: "STRING_VALUE",
+ *   Options: [ // OptionsSpecifierList
+ *     { // OptionSpecification
+ *       ResourceName: "STRING_VALUE",
+ *       Namespace: "STRING_VALUE",
+ *       OptionName: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new DescribeConfigurationOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigurationOptionsDescription
+ * //   SolutionStackName: "STRING_VALUE",
+ * //   PlatformArn: "STRING_VALUE",
+ * //   Options: [ // ConfigurationOptionDescriptionsList
+ * //     { // ConfigurationOptionDescription
+ * //       Namespace: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       DefaultValue: "STRING_VALUE",
+ * //       ChangeSeverity: "STRING_VALUE",
+ * //       UserDefined: true || false,
+ * //       ValueType: "Scalar" || "List",
+ * //       ValueOptions: [ // ConfigurationOptionPossibleValues
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MinValue: Number("int"),
+ * //       MaxValue: Number("int"),
+ * //       MaxLength: Number("int"),
+ * //       Regex: { // OptionRestrictionRegex
+ * //         Pattern: "STRING_VALUE",
+ * //         Label: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeConfigurationOptionsCommandInput - {@link DescribeConfigurationOptionsCommandInput}
+ * @returns {@link DescribeConfigurationOptionsCommandOutput}
  * @see {@link DescribeConfigurationOptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeConfigurationOptionsCommandOutput} for command's `response` shape.
- * @see {@link ElasticBeanstalkClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticBeanstalkClientResolvedConfig | config} for ElasticBeanstalkClient's `config` shape.
  *
+ * @throws {@link TooManyBucketsException} (client fault)
+ *  <p>The specified account has reached its limit of Amazon S3 buckets.</p>
+ *
+ * @throws {@link ElasticBeanstalkSyntheticServiceException}
+ * <p>Base exception class for all service exceptions from ElasticBeanstalk service.</p>
+ *
+ *
+ * @example To view configuration options for an environment
+ * ```javascript
+ * // The following operation retrieves descriptions of all available configuration options for an environment named my-env:
+ * const input = {
+ *   ApplicationName: "my-app",
+ *   EnvironmentName: "my-env"
+ * };
+ * const command = new DescribeConfigurationOptionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Options: [
+ *     {
+ *       ChangeSeverity: "NoInterruption",
+ *       DefaultValue: "30",
+ *       MaxValue: 300,
+ *       MinValue: 5,
+ *       Name: "Interval",
+ *       Namespace: "aws:elb:healthcheck",
+ *       UserDefined: false,
+ *       ValueType: "Scalar"
+ *     },
+ *     {
+ *       ChangeSeverity: "NoInterruption",
+ *       DefaultValue: "2000000",
+ *       MinValue: 0,
+ *       Name: "LowerThreshold",
+ *       Namespace: "aws:autoscaling:trigger",
+ *       UserDefined: false,
+ *       ValueType: "Scalar"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeConfigurationOptionsCommand extends $Command<
-  DescribeConfigurationOptionsCommandInput,
-  DescribeConfigurationOptionsCommandOutput,
-  ElasticBeanstalkClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConfigurationOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticBeanstalkClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConfigurationOptionsCommandInput, DescribeConfigurationOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticBeanstalkClient";
-    const commandName = "DescribeConfigurationOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConfigurationOptionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigurationOptionsDescription.filterSensitiveLog,
+export class DescribeConfigurationOptionsCommand extends command<DescribeConfigurationOptionsCommandInput, DescribeConfigurationOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConfigurationOptions",
+  DescribeConfigurationOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConfigurationOptionsMessage;
+      output: ConfigurationOptionsDescription;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConfigurationOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeConfigurationOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeConfigurationOptionsCommandOutput> {
-    return deserializeAws_queryDescribeConfigurationOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConfigurationOptionsCommandInput;
+      output: DescribeConfigurationOptionsCommandOutput;
+    };
+  };
 }

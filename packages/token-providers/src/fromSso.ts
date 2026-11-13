@@ -1,0 +1,170 @@
+import type { CredentialProviderOptions, RuntimeConfigIdentityProvider, TokenIdentity } from "@aws-sdk/types";
+import type { SourceProfileInit, SSOToken } from "@smithy/core/config";
+import {
+  getProfileName,
+  getSSOTokenFromFile,
+  loadSsoSessionData,
+  parseKnownFiles,
+  TokenProviderError,
+} from "@smithy/core/config";
+
+import { EXPIRE_WINDOW_MS, REFRESH_MESSAGE } from "./constants";
+import { getNewSsoOidcToken } from "./getNewSsoOidcToken";
+import { validateTokenExpiry } from "./validateTokenExpiry";
+import { validateTokenKey } from "./validateTokenKey";
+import { writeSSOTokenToFile } from "./writeSSOTokenToFile";
+
+/**
+ * Last refresh attempt time per SSO session to ensure refresh is not attempted more than once
+ * every 30 seconds per session rather than globally across sessions.
+ */
+const lastRefreshAttemptTimes = new Map<string, number>();
+
+/**
+ * Token refresh currently in flight per SSO session. Concurrent callers for the same session
+ * await the same refresh instead of each attempting one.
+ */
+const inFlightRefreshes = new Map<string, Promise<TokenIdentity>>();
+
+export interface FromSsoInit extends SourceProfileInit, CredentialProviderOptions {
+  /**
+   * @see SSOOIDCClientConfig in \@aws-sdk/client-sso-oidc.
+   */
+  clientConfig?: any;
+}
+
+/**
+ * Creates a token provider that will read from SSO token cache or ssoOidc.createToken() call.
+ */
+export const fromSso =
+  (init: FromSsoInit = {}): RuntimeConfigIdentityProvider<TokenIdentity> =>
+  async ({ callerClientConfig } = {}) => {
+    init.logger?.debug("@aws-sdk/token-providers - fromSso");
+
+    const profiles = await parseKnownFiles(init);
+    const profileName = getProfileName({
+      profile: init.profile ?? callerClientConfig?.profile,
+    });
+    const profile = profiles[profileName];
+
+    if (!profile) {
+      // Profile not found. This is a terminal error.
+      throw new TokenProviderError(`Profile '${profileName}' could not be found in shared credentials file.`, false);
+    } else if (!profile["sso_session"]) {
+      // Profile found but it does not contain sso_session. Not a terminal error.
+      throw new TokenProviderError(`Profile '${profileName}' is missing required property 'sso_session'.`);
+    }
+
+    // read sso-session from config file.
+    const ssoSessionName = profile["sso_session"];
+
+    // Await an in-flight refresh to avoid reading a partially rewritten SSO token cache file.
+    const inFlightRefresh = inFlightRefreshes.get(ssoSessionName);
+    if (inFlightRefresh) {
+      return await inFlightRefresh;
+    }
+
+    const ssoSessions = await loadSsoSessionData(init);
+    const ssoSession = ssoSessions[ssoSessionName];
+
+    if (!ssoSession) {
+      // Sso Session not found. This is a terminal error.
+      throw new TokenProviderError(
+        `Sso session '${ssoSessionName}' could not be found in shared credentials file.`,
+        false
+      );
+    }
+
+    for (const ssoSessionRequiredKey of ["sso_start_url", "sso_region"]) {
+      if (!ssoSession[ssoSessionRequiredKey]) {
+        // Sso session found but it does not contain ssoSessionRequiredKey. This is a terminal error.
+        throw new TokenProviderError(
+          `Sso session '${ssoSessionName}' is missing required property '${ssoSessionRequiredKey}'.`,
+          false
+        );
+      }
+    }
+
+    const ssoStartUrl = ssoSession["sso_start_url"] as string;
+    const ssoRegion = ssoSession["sso_region"] as string;
+
+    let ssoToken: SSOToken;
+    try {
+      ssoToken = await getSSOTokenFromFile(ssoSessionName);
+    } catch (e) {
+      throw new TokenProviderError(
+        `The SSO session token associated with profile=${profileName} was not found or is invalid. ${REFRESH_MESSAGE}`,
+        false
+      );
+    }
+
+    validateTokenKey("accessToken", ssoToken.accessToken);
+    validateTokenKey("expiresAt", ssoToken.expiresAt);
+
+    const { accessToken, expiresAt } = ssoToken;
+    const existingToken: TokenIdentity = {
+      token: accessToken,
+      expiration: new Date(expiresAt),
+    };
+
+    if (existingToken.expiration!.getTime() - Date.now() > EXPIRE_WINDOW_MS) {
+      // Token is valid and not expired.
+      return existingToken;
+    }
+
+    // The refresh may have started while this caller read the token file.
+    const inFlightRefreshAfterReadingToken = inFlightRefreshes.get(ssoSessionName);
+    if (inFlightRefreshAfterReadingToken) {
+      return await inFlightRefreshAfterReadingToken;
+    }
+
+    // Skip new refresh, if last refresh for this SSO session was done within 30 seconds.
+    const lastRefreshAttemptTime = lastRefreshAttemptTimes.get(ssoSessionName) ?? 0;
+    if (Date.now() - lastRefreshAttemptTime < 30 * 1000) {
+      /// return existing token if it's still valid.
+      validateTokenExpiry(existingToken);
+      return existingToken;
+    }
+
+    validateTokenKey("clientId", ssoToken.clientId, true);
+    validateTokenKey("clientSecret", ssoToken.clientSecret, true);
+    validateTokenKey("refreshToken", ssoToken.refreshToken, true);
+
+    const refresh = (async (): Promise<TokenIdentity> => {
+      try {
+        lastRefreshAttemptTimes.set(ssoSessionName, Date.now());
+        const newSsoOidcToken = await getNewSsoOidcToken(ssoToken, ssoRegion, init, callerClientConfig);
+        validateTokenKey("accessToken", newSsoOidcToken.accessToken);
+        validateTokenKey("expiresIn", newSsoOidcToken.expiresIn);
+        const newTokenExpiration = new Date(Date.now() + newSsoOidcToken.expiresIn! * 1000);
+
+        try {
+          await writeSSOTokenToFile(ssoSessionName, {
+            ...ssoToken,
+            accessToken: newSsoOidcToken.accessToken!,
+            expiresAt: newTokenExpiration.toISOString(),
+            refreshToken: newSsoOidcToken.refreshToken,
+          });
+        } catch (error) {
+          // Swallow error if unable to write token to file.
+        }
+
+        return {
+          token: newSsoOidcToken.accessToken!,
+          expiration: newTokenExpiration,
+        };
+      } catch (error) {
+        // Return the existing token if it is still valid.
+        validateTokenExpiry(existingToken);
+        return existingToken;
+      }
+    })();
+
+    inFlightRefreshes.set(ssoSessionName, refresh);
+
+    try {
+      return await refresh;
+    } finally {
+      inFlightRefreshes.delete(ssoSessionName);
+    }
+  };

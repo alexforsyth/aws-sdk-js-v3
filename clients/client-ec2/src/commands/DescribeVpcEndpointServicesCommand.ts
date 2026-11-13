@@ -1,29 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeVpcEndpointServicesRequest, DescribeVpcEndpointServicesResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeVpcEndpointServicesCommand,
-  serializeAws_ec2DescribeVpcEndpointServicesCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeVpcEndpointServicesRequest, DescribeVpcEndpointServicesResult } from "../models/models_5";
+import { DescribeVpcEndpointServices$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeVpcEndpointServicesCommand}.
+ */
 export interface DescribeVpcEndpointServicesCommandInput extends DescribeVpcEndpointServicesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeVpcEndpointServicesCommand}.
+ */
 export interface DescribeVpcEndpointServicesCommandOutput extends DescribeVpcEndpointServicesResult, __MetadataBearer {}
 
 /**
  * <p>Describes available services to which you can create a VPC endpoint.</p>
- *         <p>When the service provider and the consumer have different accounts in multiple
+ *          <p>When the service provider and the consumer have different accounts in multiple
  *             Availability Zones, and the consumer views the VPC endpoint service information, the
  *             response only includes the common Availability Zones. For example, when the service
  *             provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the
@@ -35,71 +36,108 @@ export interface DescribeVpcEndpointServicesCommandOutput extends DescribeVpcEnd
  * ```javascript
  * import { EC2Client, DescribeVpcEndpointServicesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeVpcEndpointServicesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeVpcEndpointServicesRequest
+ *   DryRun: true || false,
+ *   ServiceNames: [ // ValueStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   ServiceRegions: [
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeVpcEndpointServicesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeVpcEndpointServicesResult
+ * //   ServiceNames: [ // ValueStringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ServiceDetails: [ // ServiceDetailSet
+ * //     { // ServiceDetail
+ * //       ServiceName: "STRING_VALUE",
+ * //       ServiceId: "STRING_VALUE",
+ * //       ServiceType: [ // ServiceTypeDetailSet
+ * //         { // ServiceTypeDetail
+ * //           ServiceType: "Interface" || "Gateway" || "GatewayLoadBalancer",
+ * //         },
+ * //       ],
+ * //       ServiceRegion: "STRING_VALUE",
+ * //       AvailabilityZoneIds: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AvailabilityZones: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Owner: "STRING_VALUE",
+ * //       BaseEndpointDnsNames: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       PrivateDnsName: "STRING_VALUE",
+ * //       PrivateDnsNames: [ // PrivateDnsDetailsSet
+ * //         { // PrivateDnsDetails
+ * //           PrivateDnsName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       VpcEndpointPolicySupported: true || false,
+ * //       AcceptanceRequired: true || false,
+ * //       ManagesVpcEndpoints: true || false,
+ * //       PayerResponsibility: "ServiceOwner",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       PrivateDnsNameVerificationState: "pendingVerification" || "verified" || "failed",
+ * //       SupportedIpAddressTypes: [ // SupportedIpAddressTypes
+ * //         "ipv4" || "ipv6",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeVpcEndpointServicesCommandInput - {@link DescribeVpcEndpointServicesCommandInput}
+ * @returns {@link DescribeVpcEndpointServicesCommandOutput}
  * @see {@link DescribeVpcEndpointServicesCommandInput} for command's `input` shape.
  * @see {@link DescribeVpcEndpointServicesCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeVpcEndpointServicesCommand extends $Command<
-  DescribeVpcEndpointServicesCommandInput,
-  DescribeVpcEndpointServicesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeVpcEndpointServicesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeVpcEndpointServicesCommandInput, DescribeVpcEndpointServicesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeVpcEndpointServicesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeVpcEndpointServicesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeVpcEndpointServicesResult.filterSensitiveLog,
+export class DescribeVpcEndpointServicesCommand extends command<DescribeVpcEndpointServicesCommandInput, DescribeVpcEndpointServicesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeVpcEndpointServices",
+  DescribeVpcEndpointServices$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcEndpointServicesRequest;
+      output: DescribeVpcEndpointServicesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeVpcEndpointServicesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeVpcEndpointServicesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeVpcEndpointServicesCommandOutput> {
-    return deserializeAws_ec2DescribeVpcEndpointServicesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeVpcEndpointServicesCommandInput;
+      output: DescribeVpcEndpointServicesCommandOutput;
+    };
+  };
 }

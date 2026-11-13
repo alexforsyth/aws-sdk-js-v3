@@ -1,0 +1,89 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { JsonTimestampsInputOutput } from "../models/models_0";
+import { JsonTimestamps$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link JsonTimestampsCommand}.
+ */
+export interface JsonTimestampsCommandInput extends JsonTimestampsInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link JsonTimestampsCommand}.
+ */
+export interface JsonTimestampsCommandOutput extends JsonTimestampsInputOutput, __MetadataBearer {}
+
+/**
+ * This tests how timestamps are serialized, including using the
+ * default format of date-time and various @timestampFormat trait
+ * values.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RestJsonProtocolClient, JsonTimestampsCommand } from "@aws-sdk/aws-protocoltests-restjson-schema"; // ES Modules import
+ * // const { RestJsonProtocolClient, JsonTimestampsCommand } = require("@aws-sdk/aws-protocoltests-restjson-schema"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson-schema";
+ * const config = {}; // type is RestJsonProtocolClientConfig
+ * const client = new RestJsonProtocolClient(config);
+ * const input = { // JsonTimestampsInputOutput
+ *   normal: new Date("TIMESTAMP"),
+ *   dateTime: new Date("TIMESTAMP"),
+ *   dateTimeOnTarget: new Date("TIMESTAMP"),
+ *   epochSeconds: new Date("TIMESTAMP"),
+ *   epochSecondsOnTarget: new Date("TIMESTAMP"),
+ *   httpDate: new Date("TIMESTAMP"),
+ *   httpDateOnTarget: new Date("TIMESTAMP"),
+ * };
+ * const command = new JsonTimestampsCommand(input);
+ * const response = await client.send(command);
+ * // { // JsonTimestampsInputOutput
+ * //   normal: new Date("TIMESTAMP"),
+ * //   dateTime: new Date("TIMESTAMP"),
+ * //   dateTimeOnTarget: new Date("TIMESTAMP"),
+ * //   epochSeconds: new Date("TIMESTAMP"),
+ * //   epochSecondsOnTarget: new Date("TIMESTAMP"),
+ * //   httpDate: new Date("TIMESTAMP"),
+ * //   httpDateOnTarget: new Date("TIMESTAMP"),
+ * // };
+ *
+ * ```
+ *
+ * @param JsonTimestampsCommandInput - {@link JsonTimestampsCommandInput}
+ * @returns {@link JsonTimestampsCommandOutput}
+ * @see {@link JsonTimestampsCommandInput} for command's `input` shape.
+ * @see {@link JsonTimestampsCommandOutput} for command's `response` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
+ *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
+ */
+export class JsonTimestampsCommand extends command<JsonTimestampsCommandInput, JsonTimestampsCommandOutput>(
+  _ep0,
+  _mw0,
+  "JsonTimestamps",
+  JsonTimestamps$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: JsonTimestampsInputOutput;
+      output: JsonTimestampsInputOutput;
+    };
+    sdk: {
+      input: JsonTimestampsCommandInput;
+      output: JsonTimestampsCommandOutput;
+    };
+  };
+}

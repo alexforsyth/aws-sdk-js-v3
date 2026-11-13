@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { CreateStudioInput, CreateStudioOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateStudioCommand,
-  serializeAws_json1_1CreateStudioCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateStudioInput, CreateStudioOutput } from "../models/models_0";
+import { CreateStudio$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateStudioCommand}.
+ */
 export interface CreateStudioCommandInput extends CreateStudioInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateStudioCommand}.
+ */
 export interface CreateStudioCommandOutput extends CreateStudioOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface CreateStudioCommandOutput extends CreateStudioOutput, __Metadat
  * ```javascript
  * import { EMRClient, CreateStudioCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, CreateStudioCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = { // CreateStudioInput
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   AuthMode: "SSO" || "IAM", // required
+ *   VpcId: "STRING_VALUE", // required
+ *   SubnetIds: [ // SubnetIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   ServiceRole: "STRING_VALUE", // required
+ *   UserRole: "STRING_VALUE",
+ *   WorkspaceSecurityGroupId: "STRING_VALUE", // required
+ *   EngineSecurityGroupId: "STRING_VALUE", // required
+ *   DefaultS3Location: "STRING_VALUE", // required
+ *   IdpAuthUrl: "STRING_VALUE",
+ *   IdpRelayStateParameterName: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   TrustedIdentityPropagationEnabled: true || false,
+ *   IdcUserAssignment: "REQUIRED" || "OPTIONAL",
+ *   IdcInstanceArn: "STRING_VALUE",
+ *   EncryptionKeyArn: "STRING_VALUE",
+ * };
  * const command = new CreateStudioCommand(input);
  * const response = await client.send(command);
+ * // { // CreateStudioOutput
+ * //   StudioId: "STRING_VALUE",
+ * //   Url: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateStudioCommandInput - {@link CreateStudioCommandInput}
+ * @returns {@link CreateStudioCommandOutput}
  * @see {@link CreateStudioCommandInput} for command's `input` shape.
  * @see {@link CreateStudioCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Amazon EMR
+ *          service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception occurs when there is something wrong with user input.</p>
+ *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class CreateStudioCommand extends $Command<
-  CreateStudioCommandInput,
-  CreateStudioCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateStudioCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateStudioCommandInput, CreateStudioCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "CreateStudioCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateStudioInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateStudioOutput.filterSensitiveLog,
+export class CreateStudioCommand extends command<CreateStudioCommandInput, CreateStudioCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateStudio",
+  CreateStudio$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStudioInput;
+      output: CreateStudioOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateStudioCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateStudioCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateStudioCommandOutput> {
-    return deserializeAws_json1_1CreateStudioCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateStudioCommandInput;
+      output: CreateStudioCommandOutput;
+    };
+  };
 }

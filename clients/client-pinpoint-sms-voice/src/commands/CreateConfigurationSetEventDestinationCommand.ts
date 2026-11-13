@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   CreateConfigurationSetEventDestinationRequest,
   CreateConfigurationSetEventDestinationResponse,
 } from "../models/models_0";
-import { PinpointSMSVoiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointSMSVoiceClient";
-import {
-  deserializeAws_restJson1CreateConfigurationSetEventDestinationCommand,
-  serializeAws_restJson1CreateConfigurationSetEventDestinationCommand,
-} from "../protocols/Aws_restJson1";
+import { CreateConfigurationSetEventDestination$ } from "../schemas/schemas_0";
 
-export interface CreateConfigurationSetEventDestinationCommandInput
-  extends CreateConfigurationSetEventDestinationRequest {}
-export interface CreateConfigurationSetEventDestinationCommandOutput
-  extends CreateConfigurationSetEventDestinationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConfigurationSetEventDestinationCommand}.
+ */
+export interface CreateConfigurationSetEventDestinationCommandInput extends CreateConfigurationSetEventDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConfigurationSetEventDestinationCommand}.
+ */
+export interface CreateConfigurationSetEventDestinationCommandOutput extends CreateConfigurationSetEventDestinationResponse, __MetadataBearer {}
 
 /**
  * Create a new event destination in a configuration set.
@@ -34,74 +32,81 @@ export interface CreateConfigurationSetEventDestinationCommandOutput
  * ```javascript
  * import { PinpointSMSVoiceClient, CreateConfigurationSetEventDestinationCommand } from "@aws-sdk/client-pinpoint-sms-voice"; // ES Modules import
  * // const { PinpointSMSVoiceClient, CreateConfigurationSetEventDestinationCommand } = require("@aws-sdk/client-pinpoint-sms-voice"); // CommonJS import
+ * // import type { PinpointSMSVoiceClientConfig } from "@aws-sdk/client-pinpoint-sms-voice";
+ * const config = {}; // type is PinpointSMSVoiceClientConfig
  * const client = new PinpointSMSVoiceClient(config);
+ * const input = { // CreateConfigurationSetEventDestinationRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   EventDestination: { // EventDestinationDefinition
+ *     CloudWatchLogsDestination: { // CloudWatchLogsDestination
+ *       IamRoleArn: "STRING_VALUE",
+ *       LogGroupArn: "STRING_VALUE",
+ *     },
+ *     Enabled: true || false,
+ *     KinesisFirehoseDestination: { // KinesisFirehoseDestination
+ *       DeliveryStreamArn: "STRING_VALUE",
+ *       IamRoleArn: "STRING_VALUE",
+ *     },
+ *     MatchingEventTypes: [ // EventTypes
+ *       "INITIATED_CALL" || "RINGING" || "ANSWERED" || "COMPLETED_CALL" || "BUSY" || "FAILED" || "NO_ANSWER",
+ *     ],
+ *     SnsDestination: { // SnsDestination
+ *       TopicArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   EventDestinationName: "STRING_VALUE",
+ * };
  * const command = new CreateConfigurationSetEventDestinationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateConfigurationSetEventDestinationCommandInput - {@link CreateConfigurationSetEventDestinationCommandInput}
+ * @returns {@link CreateConfigurationSetEventDestinationCommandOutput}
  * @see {@link CreateConfigurationSetEventDestinationCommandInput} for command's `input` shape.
  * @see {@link CreateConfigurationSetEventDestinationCommandOutput} for command's `response` shape.
- * @see {@link PinpointSMSVoiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointSMSVoiceClientResolvedConfig | config} for PinpointSMSVoiceClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  The resource specified in your request already exists.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  The input you provided is invalid.
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  There are too many instances of the specified resource type.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The resource you attempted to access doesn't exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  You've issued too many requests to the resource. Wait a few minutes, and then try again.
+ *
+ * @throws {@link PinpointSMSVoiceServiceException}
+ * <p>Base exception class for all service exceptions from PinpointSMSVoice service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConfigurationSetEventDestinationCommand extends $Command<
-  CreateConfigurationSetEventDestinationCommandInput,
-  CreateConfigurationSetEventDestinationCommandOutput,
-  PinpointSMSVoiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConfigurationSetEventDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointSMSVoiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConfigurationSetEventDestinationCommandInput, CreateConfigurationSetEventDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointSMSVoiceClient";
-    const commandName = "CreateConfigurationSetEventDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConfigurationSetEventDestinationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConfigurationSetEventDestinationResponse.filterSensitiveLog,
+export class CreateConfigurationSetEventDestinationCommand extends command<CreateConfigurationSetEventDestinationCommandInput, CreateConfigurationSetEventDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConfigurationSetEventDestination",
+  CreateConfigurationSetEventDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConfigurationSetEventDestinationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateConfigurationSetEventDestinationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateConfigurationSetEventDestinationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateConfigurationSetEventDestinationCommandOutput> {
-    return deserializeAws_restJson1CreateConfigurationSetEventDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConfigurationSetEventDestinationCommandInput;
+      output: CreateConfigurationSetEventDestinationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AssociateDataShareConsumerMessage, DataShare } from "../models/models_0";
-import {
-  deserializeAws_queryAssociateDataShareConsumerCommand,
-  serializeAws_queryAssociateDataShareConsumerCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateDataShareConsumerMessage, DataShare } from "../models/models_0";
+import { AssociateDataShareConsumer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateDataShareConsumerCommand}.
+ */
 export interface AssociateDataShareConsumerCommandInput extends AssociateDataShareConsumerMessage {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateDataShareConsumerCommand}.
+ */
 export interface AssociateDataShareConsumerCommandOutput extends DataShare, __MetadataBearer {}
 
 /**
@@ -30,71 +31,72 @@ export interface AssociateDataShareConsumerCommandOutput extends DataShare, __Me
  * ```javascript
  * import { RedshiftClient, AssociateDataShareConsumerCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, AssociateDataShareConsumerCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // AssociateDataShareConsumerMessage
+ *   DataShareArn: "STRING_VALUE", // required
+ *   AssociateEntireAccount: true || false,
+ *   ConsumerArn: "STRING_VALUE",
+ *   ConsumerRegion: "STRING_VALUE",
+ *   AllowWrites: true || false,
+ * };
  * const command = new AssociateDataShareConsumerCommand(input);
  * const response = await client.send(command);
+ * // { // DataShare
+ * //   DataShareArn: "STRING_VALUE",
+ * //   ProducerArn: "STRING_VALUE",
+ * //   AllowPubliclyAccessibleConsumers: true || false,
+ * //   DataShareAssociations: [ // DataShareAssociationList
+ * //     { // DataShareAssociation
+ * //       ConsumerIdentifier: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "PENDING_AUTHORIZATION" || "AUTHORIZED" || "DEAUTHORIZED" || "REJECTED" || "AVAILABLE",
+ * //       ConsumerRegion: "STRING_VALUE",
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       StatusChangeDate: new Date("TIMESTAMP"),
+ * //       ProducerAllowedWrites: true || false,
+ * //       ConsumerAcceptedWrites: true || false,
+ * //     },
+ * //   ],
+ * //   ManagedBy: "STRING_VALUE",
+ * //   DataShareType: "INTERNAL",
+ * // };
+ *
  * ```
  *
+ * @param AssociateDataShareConsumerCommandInput - {@link AssociateDataShareConsumerCommandInput}
+ * @returns {@link AssociateDataShareConsumerCommandOutput}
  * @see {@link AssociateDataShareConsumerCommandInput} for command's `input` shape.
  * @see {@link AssociateDataShareConsumerCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidDataShareFault} (client fault)
+ *  <p>There is an error with the datashare.</p>
+ *
+ * @throws {@link InvalidNamespaceFault} (client fault)
+ *  <p>The namespace isn't valid because the namespace doesn't exist. Provide a valid namespace.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateDataShareConsumerCommand extends $Command<
-  AssociateDataShareConsumerCommandInput,
-  AssociateDataShareConsumerCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateDataShareConsumerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateDataShareConsumerCommandInput, AssociateDataShareConsumerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "AssociateDataShareConsumerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateDataShareConsumerMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DataShare.filterSensitiveLog,
+export class AssociateDataShareConsumerCommand extends command<AssociateDataShareConsumerCommandInput, AssociateDataShareConsumerCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateDataShareConsumer",
+  AssociateDataShareConsumer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateDataShareConsumerMessage;
+      output: DataShare;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateDataShareConsumerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryAssociateDataShareConsumerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateDataShareConsumerCommandOutput> {
-    return deserializeAws_queryAssociateDataShareConsumerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateDataShareConsumerCommandInput;
+      output: AssociateDataShareConsumerCommandOutput;
+    };
+  };
 }

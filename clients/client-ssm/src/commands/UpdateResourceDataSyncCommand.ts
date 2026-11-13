@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateResourceDataSyncRequest, UpdateResourceDataSyncResult } from "../models/models_2";
-import {
-  deserializeAws_json1_1UpdateResourceDataSyncCommand,
-  serializeAws_json1_1UpdateResourceDataSyncCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateResourceDataSyncRequest, UpdateResourceDataSyncResult } from "../models/models_1";
+import { UpdateResourceDataSync$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateResourceDataSyncCommand}.
+ */
 export interface UpdateResourceDataSyncCommandInput extends UpdateResourceDataSyncRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateResourceDataSyncCommand}.
+ */
 export interface UpdateResourceDataSyncCommandOutput extends UpdateResourceDataSyncResult, __MetadataBearer {}
 
 /**
@@ -37,68 +38,75 @@ export interface UpdateResourceDataSyncCommandOutput extends UpdateResourceDataS
  * ```javascript
  * import { SSMClient, UpdateResourceDataSyncCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, UpdateResourceDataSyncCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // UpdateResourceDataSyncRequest
+ *   SyncName: "STRING_VALUE", // required
+ *   SyncType: "STRING_VALUE", // required
+ *   SyncSource: { // ResourceDataSyncSource
+ *     SourceType: "STRING_VALUE", // required
+ *     AwsOrganizationsSource: { // ResourceDataSyncAwsOrganizationsSource
+ *       OrganizationSourceType: "STRING_VALUE", // required
+ *       OrganizationalUnits: [ // ResourceDataSyncOrganizationalUnitList
+ *         { // ResourceDataSyncOrganizationalUnit
+ *           OrganizationalUnitId: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *     SourceRegions: [ // ResourceDataSyncSourceRegionList // required
+ *       "STRING_VALUE",
+ *     ],
+ *     IncludeFutureRegions: true || false,
+ *     EnableAllOpsDataSources: true || false,
+ *   },
+ * };
  * const command = new UpdateResourceDataSyncCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateResourceDataSyncCommandInput - {@link UpdateResourceDataSyncCommandInput}
+ * @returns {@link UpdateResourceDataSyncCommandOutput}
  * @see {@link UpdateResourceDataSyncCommandInput} for command's `input` shape.
  * @see {@link UpdateResourceDataSyncCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link ResourceDataSyncConflictException} (client fault)
+ *  <p>Another <code>UpdateResourceDataSync</code> request is being processed. Wait a few minutes
+ *    and try again.</p>
+ *
+ * @throws {@link ResourceDataSyncInvalidConfigurationException} (client fault)
+ *  <p>The specified sync configuration is invalid.</p>
+ *
+ * @throws {@link ResourceDataSyncNotFoundException} (client fault)
+ *  <p>The specified sync name wasn't found.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateResourceDataSyncCommand extends $Command<
-  UpdateResourceDataSyncCommandInput,
-  UpdateResourceDataSyncCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateResourceDataSyncCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateResourceDataSyncCommandInput, UpdateResourceDataSyncCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "UpdateResourceDataSyncCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateResourceDataSyncRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateResourceDataSyncResult.filterSensitiveLog,
+export class UpdateResourceDataSyncCommand extends command<UpdateResourceDataSyncCommandInput, UpdateResourceDataSyncCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateResourceDataSync",
+  UpdateResourceDataSync$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateResourceDataSyncRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateResourceDataSyncCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateResourceDataSyncCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateResourceDataSyncCommandOutput> {
-    return deserializeAws_json1_1UpdateResourceDataSyncCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateResourceDataSyncCommandInput;
+      output: UpdateResourceDataSyncCommandOutput;
+    };
+  };
 }

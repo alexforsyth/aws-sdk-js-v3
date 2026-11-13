@@ -1,0 +1,366 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRouterInputRequest, GetRouterInputResponse } from "../models/models_1";
+import { GetRouterInput$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRouterInputCommand}.
+ */
+export interface GetRouterInputCommandInput extends GetRouterInputRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRouterInputCommand}.
+ */
+export interface GetRouterInputCommandOutput extends GetRouterInputResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves information about a specific router input in AWS Elemental MediaConnect.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaConnectClient, GetRouterInputCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
+ * // const { MediaConnectClient, GetRouterInputCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
+ * const client = new MediaConnectClient(config);
+ * const input = { // GetRouterInputRequest
+ *   Arn: "STRING_VALUE", // required
+ * };
+ * const command = new GetRouterInputCommand(input);
+ * const response = await client.send(command);
+ * // { // GetRouterInputResponse
+ * //   RouterInput: { // RouterInput
+ * //     Name: "STRING_VALUE", // required
+ * //     Arn: "STRING_VALUE", // required
+ * //     Id: "STRING_VALUE", // required
+ * //     State: "CREATING" || "STANDBY" || "STARTING" || "ACTIVE" || "STOPPING" || "DELETING" || "UPDATING" || "ERROR" || "RECOVERING" || "MIGRATING", // required
+ * //     InputType: "STANDARD" || "FAILOVER" || "MERGE" || "MEDIACONNECT_FLOW" || "MEDIALIVE_CHANNEL" || "DESTINATION_ENDPOINT", // required
+ * //     Configuration: { // RouterInputConfiguration Union: only one key present
+ * //       DestinationEndpoint: { // DestinationEndpointRouterInputConfiguration
+ * //         EndpointLifecycleManagement: "MANAGED" || "UNMANAGED", // required
+ * //         SourceTransitDecryptionType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //         SourceTransitDecryption: { // EndpointEncryptionConfiguration Union: only one key present
+ * //           SecretsManager: { // SecretsManagerEndpointEncryptionConfiguration
+ * //             EncryptionSecretType: "AES_128_KEY" || "AES_192_KEY" || "AES_256_KEY" || "SRT_PASSPHRASE",
+ * //             EncryptionSecret: { // EndpointEncryptionSecretConfiguration
+ * //               SecretArn: "STRING_VALUE", // required
+ * //             },
+ * //           },
+ * //           Automatic: {},
+ * //         },
+ * //       },
+ * //       Standard: { // StandardRouterInputConfiguration
+ * //         NetworkInterfaceArn: "STRING_VALUE", // required
+ * //         ProtocolConfiguration: { // RouterInputProtocolConfiguration Union: only one key present
+ * //           Rist: { // RistRouterInputConfiguration
+ * //             Port: Number("int"), // required
+ * //             RecoveryLatencyMilliseconds: Number("long"), // required
+ * //           },
+ * //           SrtListener: { // SrtListenerRouterInputConfiguration
+ * //             Port: Number("int"), // required
+ * //             MinimumLatencyMilliseconds: Number("long"), // required
+ * //             DecryptionConfiguration: { // SrtDecryptionConfiguration
+ * //               EncryptionKey: { // SecretsManagerEncryptionKeyConfiguration
+ * //                 SecretArn: "STRING_VALUE", // required
+ * //                 RoleArn: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //           },
+ * //           RtmpPush: { // RtmpPushRouterInputConfiguration
+ * //             Port: Number("int"), // required
+ * //             NamingType: "MANUAL" || "AUTOMATIC",
+ * //             NamingConfiguration: { // RtmpPushNamingConfiguration Union: only one key present
+ * //               Manual: { // ManualRtmpPushNamingConfiguration
+ * //                 ApplicationName: "STRING_VALUE", // required
+ * //                 StreamName: "STRING_VALUE", // required
+ * //               },
+ * //               Automatic: {},
+ * //             },
+ * //           },
+ * //           SrtCaller: { // SrtCallerRouterInputConfiguration
+ * //             SourceAddress: "STRING_VALUE", // required
+ * //             SourcePort: Number("int"), // required
+ * //             MinimumLatencyMilliseconds: Number("long"), // required
+ * //             StreamId: "STRING_VALUE",
+ * //             DecryptionConfiguration: {
+ * //               EncryptionKey: {
+ * //                 SecretArn: "STRING_VALUE", // required
+ * //                 RoleArn: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //           },
+ * //           Rtp: { // RtpRouterInputConfiguration
+ * //             Port: Number("int"), // required
+ * //             ForwardErrorCorrection: "ENABLED" || "DISABLED",
+ * //           },
+ * //         },
+ * //         Protocol: "RTP" || "RIST" || "SRT_CALLER" || "SRT_LISTENER" || "RTMP_PUSH",
+ * //       },
+ * //       MediaLiveChannel: { // MediaLiveChannelRouterInputConfiguration
+ * //         MediaLiveChannelArn: "STRING_VALUE",
+ * //         MediaLivePipelineId: "PIPELINE_0" || "PIPELINE_1",
+ * //         MediaLiveChannelOutputName: "STRING_VALUE",
+ * //         SourceTransitDecryption: { // MediaLiveTransitEncryption
+ * //           EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //           EncryptionKeyConfiguration: { // MediaLiveTransitEncryptionKeyConfiguration Union: only one key present
+ * //             SecretsManager: {
+ * //               SecretArn: "STRING_VALUE", // required
+ * //               RoleArn: "STRING_VALUE", // required
+ * //             },
+ * //             Automatic: {},
+ * //           },
+ * //         },
+ * //       },
+ * //       Failover: { // FailoverRouterInputConfiguration
+ * //         NetworkInterfaceArn: "STRING_VALUE", // required
+ * //         ProtocolConfigurations: [ // FailoverRouterInputProtocolConfigurationList // required
+ * //           { // FailoverRouterInputProtocolConfiguration Union: only one key present
+ * //             Rist: {
+ * //               Port: Number("int"), // required
+ * //               RecoveryLatencyMilliseconds: Number("long"), // required
+ * //             },
+ * //             SrtListener: {
+ * //               Port: Number("int"), // required
+ * //               MinimumLatencyMilliseconds: Number("long"), // required
+ * //               DecryptionConfiguration: {
+ * //                 EncryptionKey: "<SecretsManagerEncryptionKeyConfiguration>", // required
+ * //               },
+ * //             },
+ * //             RtmpPush: {
+ * //               Port: Number("int"), // required
+ * //               NamingType: "MANUAL" || "AUTOMATIC",
+ * //               NamingConfiguration: {//  Union: only one key present
+ * //                 Manual: {
+ * //                   ApplicationName: "STRING_VALUE", // required
+ * //                   StreamName: "STRING_VALUE", // required
+ * //                 },
+ * //                 Automatic: {},
+ * //               },
+ * //             },
+ * //             SrtCaller: {
+ * //               SourceAddress: "STRING_VALUE", // required
+ * //               SourcePort: Number("int"), // required
+ * //               MinimumLatencyMilliseconds: Number("long"), // required
+ * //               StreamId: "STRING_VALUE",
+ * //               DecryptionConfiguration: {
+ * //                 EncryptionKey: "<SecretsManagerEncryptionKeyConfiguration>", // required
+ * //               },
+ * //             },
+ * //             Rtp: {
+ * //               Port: Number("int"), // required
+ * //               ForwardErrorCorrection: "ENABLED" || "DISABLED",
+ * //             },
+ * //           },
+ * //         ],
+ * //         SourcePriorityMode: "NO_PRIORITY" || "PRIMARY_SECONDARY", // required
+ * //         PrimarySourceIndex: Number("int"),
+ * //       },
+ * //       MediaConnectFlow: { // MediaConnectFlowRouterInputConfiguration
+ * //         FlowArn: "STRING_VALUE",
+ * //         FlowOutputArn: "STRING_VALUE",
+ * //         SourceTransitDecryption: { // FlowTransitEncryption
+ * //           EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //           EncryptionKeyConfiguration: { // FlowTransitEncryptionKeyConfiguration Union: only one key present
+ * //             SecretsManager: "<SecretsManagerEncryptionKeyConfiguration>",
+ * //             Automatic: {},
+ * //           },
+ * //         },
+ * //       },
+ * //       Merge: { // MergeRouterInputConfiguration
+ * //         NetworkInterfaceArn: "STRING_VALUE", // required
+ * //         ProtocolConfigurations: [ // MergeRouterInputProtocolConfigurationList // required
+ * //           { // MergeRouterInputProtocolConfiguration Union: only one key present
+ * //             Rtp: {
+ * //               Port: Number("int"), // required
+ * //               ForwardErrorCorrection: "ENABLED" || "DISABLED",
+ * //             },
+ * //             Rist: {
+ * //               Port: Number("int"), // required
+ * //               RecoveryLatencyMilliseconds: Number("long"), // required
+ * //             },
+ * //             SrtListener: {
+ * //               Port: Number("int"), // required
+ * //               MinimumLatencyMilliseconds: Number("long"), // required
+ * //               DecryptionConfiguration: {
+ * //                 EncryptionKey: "<SecretsManagerEncryptionKeyConfiguration>", // required
+ * //               },
+ * //             },
+ * //             SrtCaller: {
+ * //               SourceAddress: "STRING_VALUE", // required
+ * //               SourcePort: Number("int"), // required
+ * //               MinimumLatencyMilliseconds: Number("long"), // required
+ * //               StreamId: "STRING_VALUE",
+ * //               DecryptionConfiguration: "<SrtDecryptionConfiguration>",
+ * //             },
+ * //           },
+ * //         ],
+ * //         MergeRecoveryWindowMilliseconds: Number("long"), // required
+ * //       },
+ * //     },
+ * //     RoutedOutputs: Number("int"), // required
+ * //     MaximumRoutedOutputs: Number("int"),
+ * //     RegionName: "STRING_VALUE", // required
+ * //     AvailabilityZone: "STRING_VALUE", // required
+ * //     MaximumBitrate: Number("long"), // required
+ * //     Tier: "INPUT_100" || "INPUT_50" || "INPUT_20" || "INPUT_500" || "INPUT_250", // required
+ * //     RoutingScope: "REGIONAL" || "GLOBAL", // required
+ * //     CreatedAt: new Date("TIMESTAMP"), // required
+ * //     UpdatedAt: new Date("TIMESTAMP"), // required
+ * //     Messages: [ // RouterInputMessages // required
+ * //       { // RouterInputMessage
+ * //         Code: "STRING_VALUE", // required
+ * //         Message: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     TransitEncryption: { // RouterInputTransitEncryption
+ * //       EncryptionKeyType: "SECRETS_MANAGER" || "AUTOMATIC",
+ * //       EncryptionKeyConfiguration: { // RouterInputTransitEncryptionKeyConfiguration Union: only one key present
+ * //         SecretsManager: "<SecretsManagerEncryptionKeyConfiguration>",
+ * //         Automatic: {},
+ * //       },
+ * //     },
+ * //     Tags: { // __mapOfString // required
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     StreamDetails: { // RouterInputStreamDetails Union: only one key present
+ * //       DestinationEndpoint: {},
+ * //       Standard: { // StandardRouterInputStreamDetails
+ * //         SourceIpAddress: "STRING_VALUE",
+ * //         RtmpPush: { // RtmpPushStreamDetails
+ * //           ApplicationName: "STRING_VALUE", // required
+ * //           StreamName: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //       MediaLiveChannel: {},
+ * //       Failover: { // FailoverRouterInputStreamDetails
+ * //         SourceIndexZeroStreamDetails: { // FailoverRouterInputIndexedStreamDetails
+ * //           SourceIndex: Number("int"), // required
+ * //           SourceIpAddress: "STRING_VALUE",
+ * //           RtmpPush: {
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         SourceIndexOneStreamDetails: {
+ * //           SourceIndex: Number("int"), // required
+ * //           SourceIpAddress: "STRING_VALUE",
+ * //           RtmpPush: {
+ * //             ApplicationName: "STRING_VALUE", // required
+ * //             StreamName: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //       },
+ * //       MediaConnectFlow: {},
+ * //       Merge: { // MergeRouterInputStreamDetails
+ * //         SourceIndexZeroStreamDetails: { // MergeRouterInputIndexedStreamDetails
+ * //           SourceIndex: Number("int"), // required
+ * //           SourceIpAddress: "STRING_VALUE",
+ * //         },
+ * //         SourceIndexOneStreamDetails: {
+ * //           SourceIndex: Number("int"), // required
+ * //           SourceIpAddress: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     IpAddress: "STRING_VALUE",
+ * //     MaintenanceType: "PREFERRED_DAY_TIME" || "DEFAULT", // required
+ * //     MaintenanceConfiguration: { // MaintenanceConfiguration Union: only one key present
+ * //       PreferredDayTime: { // PreferredDayTimeMaintenanceConfiguration
+ * //         Day: "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY" || "SUNDAY", // required
+ * //         Time: "STRING_VALUE", // required
+ * //       },
+ * //       Default: {},
+ * //     },
+ * //     MaintenanceScheduleType: "WINDOW",
+ * //     MaintenanceSchedule: { // MaintenanceSchedule Union: only one key present
+ * //       Window: { // WindowMaintenanceSchedule
+ * //         Start: new Date("TIMESTAMP"), // required
+ * //         End: new Date("TIMESTAMP"), // required
+ * //         ScheduledTime: new Date("TIMESTAMP"), // required
+ * //       },
+ * //     },
+ * //     ContentQualityAnalysisType: "CONTENT_LEVEL", // required
+ * //     ContentQualityAnalysisConfiguration: { // RouterContentQualityAnalysisConfiguration Union: only one key present
+ * //       ContentLevel: { // ContentQualityAnalysisFeatureConfiguration
+ * //         BlackFrames: { // BlackFramesConfiguration
+ * //           State: "ENABLED" || "DISABLED", // required
+ * //           ThresholdSeconds: Number("int"), // required
+ * //         },
+ * //         FrozenFrames: { // FrozenFramesConfiguration
+ * //           State: "ENABLED" || "DISABLED", // required
+ * //           ThresholdSeconds: Number("int"), // required
+ * //         },
+ * //         SilentAudio: { // SilentAudioConfiguration
+ * //           State: "ENABLED" || "DISABLED", // required
+ * //           ThresholdSeconds: Number("int"), // required
+ * //         },
+ * //       },
+ * //     },
+ * //     AssociatedDestinationEndpointArns: [ // DestinationEndpointArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetRouterInputCommandInput - {@link GetRouterInputCommandInput}
+ * @returns {@link GetRouterInputCommandOutput}
+ * @see {@link GetRouterInputCommandInput} for command's `input` shape.
+ * @see {@link GetRouterInputCommandOutput} for command's `response` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
+ */
+export class GetRouterInputCommand extends command<GetRouterInputCommandInput, GetRouterInputCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRouterInput",
+  GetRouterInput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRouterInputRequest;
+      output: GetRouterInputResponse;
+    };
+    sdk: {
+      input: GetRouterInputCommandInput;
+      output: GetRouterInputCommandOutput;
+    };
+  };
+}

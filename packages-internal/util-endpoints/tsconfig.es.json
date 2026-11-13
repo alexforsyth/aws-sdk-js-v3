@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": [],
+    "outDir": "dist-es",
+    "rootDir": "src",
+    "stripInternal": true,
+    "resolveJsonModule": true,
+    "noCheck": true
+  },
+  "extends": "../../tsconfig.es.json",
+  "include": ["src/"]
+}

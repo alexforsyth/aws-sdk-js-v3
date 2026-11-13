@@ -1,25 +1,35 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeEndpointsCommand, DescribeEndpointsCommandInput } from "../commands/DescribeEndpointsCommand";
-import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import {
+  type DescribeEndpointsCommandInput,
+  type DescribeEndpointsCommandOutput,
+  DescribeEndpointsCommand,
+} from "../commands/DescribeEndpointsCommand";
+import type { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
+import type { DatabaseMigrationServiceServiceException } from "../models/DatabaseMigrationServiceServiceException";
+import type { ResourceNotFoundFault } from "../models/errors";
 
-const checkState = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeEndpointsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: DatabaseMigrationServiceClient, input: DescribeEndpointsCommandInput): Promise<WaiterResult<DescribeEndpointsCommandOutput | DatabaseMigrationServiceServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeEndpointsCommand(input));
+    let result: DescribeEndpointsCommandOutput & any = await client.send(new DescribeEndpointsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Endpoints);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Endpoints);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "active") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -27,13 +37,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Endpoints);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Endpoints);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "creating") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -41,7 +51,7 @@ const checkState = async (
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundFault") {
+    if (exception.name === "ResourceNotFoundFault") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -54,7 +64,7 @@ const checkState = async (
 export const waitForEndpointDeleted = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeEndpointsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeEndpointsCommandOutput | DatabaseMigrationServiceServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -66,8 +76,8 @@ export const waitForEndpointDeleted = async (
 export const waitUntilEndpointDeleted = async (
   params: WaiterConfiguration<DatabaseMigrationServiceClient>,
   input: DescribeEndpointsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<ResourceNotFoundFault>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<ResourceNotFoundFault>;
 };

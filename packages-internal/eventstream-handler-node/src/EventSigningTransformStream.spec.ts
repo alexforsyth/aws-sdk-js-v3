@@ -1,0 +1,210 @@
+import { EventStreamCodec } from "@smithy/core/event-streams";
+import { fromUtf8, toUtf8 } from "@smithy/core/serde";
+import type { Message, MessageHeaders, SignedMessage } from "@smithy/types";
+import { afterEach, describe, expect, test as it, vi } from "vitest";
+
+import { EventSigningTransformStream } from "./EventSigningTransformStream";
+
+describe("EventSigningStream", () => {
+  const originalDate = Date;
+
+  afterEach(() => {
+    Date = originalDate;
+  });
+
+  it("should pass eventStreamCredentials to messageSigner.sign when credentials are provided", async () => {
+    const eventStreamCodec = new EventStreamCodec(toUtf8, fromUtf8);
+    const message: Message = { headers: {}, body: fromUtf8("foo") };
+    const inputChunk = eventStreamCodec.encode(message);
+
+    const mockCredentials = { accessKeyId: "AKID", secretAccessKey: "SECRET", sessionToken: "TOKEN" };
+    const credentialsProvider = vi.fn().mockResolvedValue(mockCredentials);
+
+    const mockMessageSigner = vi.fn().mockReturnValue({ message, signature: "7369676e617475726531" } as SignedMessage);
+
+    const now = new Date(1546045446000);
+    function MockDate(input?: any): Date {
+      return input ? new originalDate(input) : now;
+    }
+    MockDate.now = () => now.getTime();
+    global.Date = MockDate as any;
+
+    const signingStream = new EventSigningTransformStream({
+      priorSignature: "initial",
+      messageSigner: { sign: mockMessageSigner, signMessage: mockMessageSigner },
+      eventStreamCodec,
+      systemClockOffsetProvider: async () => 0,
+      credentials: credentialsProvider,
+    });
+
+    let resolve: (value?: unknown) => void;
+    const done = new Promise((r) => (resolve = r));
+    signingStream.on("data", () => {});
+    signingStream.on("end", () => {
+      expect(credentialsProvider).toHaveBeenCalledOnce();
+      expect(mockMessageSigner.mock.calls[0][1]).toEqual(
+        expect.objectContaining({ eventStreamCredentials: mockCredentials })
+      );
+      resolve();
+    });
+    signingStream.write(inputChunk);
+    signingStream.end();
+    await done;
+  });
+
+  it("should not pass eventStreamCredentials when credentials are not provided", async () => {
+    const eventStreamCodec = new EventStreamCodec(toUtf8, fromUtf8);
+    const message: Message = { headers: {}, body: fromUtf8("foo") };
+    const inputChunk = eventStreamCodec.encode(message);
+
+    const mockMessageSigner = vi.fn().mockReturnValue({ message, signature: "7369676e617475726531" } as SignedMessage);
+
+    const now = new Date(1546045446000);
+    function MockDate(input?: any): Date {
+      return input ? new originalDate(input) : now;
+    }
+    MockDate.now = () => now.getTime();
+    global.Date = MockDate as any;
+
+    const signingStream = new EventSigningTransformStream({
+      priorSignature: "initial",
+      messageSigner: { sign: mockMessageSigner, signMessage: mockMessageSigner },
+      eventStreamCodec,
+      systemClockOffsetProvider: async () => 0,
+    });
+
+    let resolve: (value?: unknown) => void;
+    const done = new Promise((r) => (resolve = r));
+    signingStream.on("data", () => {});
+    signingStream.on("end", () => {
+      expect(mockMessageSigner.mock.calls[0][1].eventStreamCredentials).toBeUndefined();
+      resolve();
+    });
+    signingStream.write(inputChunk);
+    signingStream.end();
+    await done;
+  });
+
+  it("should resolve credentials only once for multiple chunks", async () => {
+    const eventStreamCodec = new EventStreamCodec(toUtf8, fromUtf8);
+    const message: Message = { headers: {}, body: fromUtf8("foo") };
+    const inputChunk = eventStreamCodec.encode(message);
+
+    const mockCredentials = { accessKeyId: "AKID", secretAccessKey: "SECRET" };
+    const credentialsProvider = vi.fn().mockResolvedValue(mockCredentials);
+
+    let callCount = 0;
+    const mockMessageSigner = vi.fn().mockImplementation(() => ({
+      message,
+      signature: "7369676e617475726" + callCount++,
+    }));
+
+    const now = new Date(1546045446000);
+    function MockDate(input?: any): Date {
+      return input ? new originalDate(input) : now;
+    }
+    MockDate.now = () => now.getTime();
+    global.Date = MockDate as any;
+
+    const signingStream = new EventSigningTransformStream({
+      priorSignature: "initial",
+      messageSigner: { sign: mockMessageSigner, signMessage: mockMessageSigner },
+      eventStreamCodec,
+      systemClockOffsetProvider: async () => 0,
+      credentials: credentialsProvider,
+    });
+
+    let resolve: (value?: unknown) => void;
+    const done = new Promise((r) => (resolve = r));
+    signingStream.on("data", () => {});
+    signingStream.on("end", () => {
+      expect(credentialsProvider).toHaveBeenCalledOnce();
+      resolve();
+    });
+    signingStream.write(inputChunk);
+    signingStream.write(inputChunk);
+    signingStream.end();
+    await done;
+  });
+
+  it("should sign an eventstream payload properly", async () => {
+    const eventStreamCodec = new EventStreamCodec(toUtf8, fromUtf8);
+    const message1: Message = {
+      headers: {},
+      body: fromUtf8("foo"),
+    };
+    const message2: Message = {
+      headers: {},
+      body: fromUtf8("bar"),
+    };
+    const inputChunks: Array<Uint8Array> = ([message1, message2] as Array<Message>).map((event) =>
+      eventStreamCodec.encode(event)
+    );
+    const expected: Array<MessageHeaders> = [
+      {
+        ":date": { type: "timestamp", value: new Date(1546045446000) },
+        ":chunk-signature": {
+          type: "binary",
+          value: Uint8Array.from([115, 105, 103, 110, 97, 116, 117, 114, 101, 49]),
+        },
+      },
+      {
+        ":date": { type: "timestamp", value: new Date(1546045447000) },
+        ":chunk-signature": {
+          type: "binary",
+          value: Uint8Array.from([115, 105, 103, 110, 97, 116, 117, 114, 101, 50]),
+        },
+      },
+    ];
+    const mockMessageSigner = vi
+      .fn()
+      .mockReturnValueOnce({ message: message1, signature: "7369676e617475726531" } as SignedMessage) //'signature1'
+      .mockReturnValueOnce({ message: message2, signature: "7369676e617475726532" } as SignedMessage); //'signature2'
+
+    let mockDateCount = 0;
+    function MockDate(input?: any): Date {
+      return input ? new originalDate(input) : (expected[mockDateCount++][":date"].value as Date);
+    }
+    MockDate.now = () => MockDate().getTime();
+    global.Date = MockDate as any;
+
+    const signingStream = new EventSigningTransformStream({
+      priorSignature: "initial",
+      messageSigner: {
+        sign: mockMessageSigner,
+        signMessage: mockMessageSigner,
+      },
+      eventStreamCodec,
+      systemClockOffsetProvider: async () => 0,
+    });
+    const output: Array<MessageHeaders> = [];
+    signingStream.on("data", (chunk) => {
+      output.push(eventStreamCodec.decode(chunk).headers);
+    });
+
+    let resolve: (value?: unknown) => void;
+    const done = new Promise((r) => (resolve = r));
+
+    signingStream.on("end", () => {
+      expect(output).toEqual(expected);
+      expect(mockMessageSigner.mock.calls[0][0].priorSignature).toBe("initial");
+      expect(mockMessageSigner.mock.calls[0][1].signingDate.getTime()).toBe(
+        (expected[0][":date"].value as Date).getTime()
+      );
+      expect(mockMessageSigner.mock.calls[1][0].priorSignature).toBe("7369676e617475726531");
+      expect(mockMessageSigner.mock.calls[1][1].signingDate.getTime()).toBe(
+        (expected[1][":date"].value as Date).getTime()
+      );
+      resolve();
+    });
+    signingStream.on("error", (err) => {
+      throw err;
+    });
+    for (const input of inputChunks) {
+      signingStream.write(input);
+    }
+    signingStream.end();
+
+    await done;
+  });
+});

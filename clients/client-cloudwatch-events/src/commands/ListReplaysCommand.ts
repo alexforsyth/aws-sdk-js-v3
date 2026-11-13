@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { ListReplaysRequest, ListReplaysResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListReplaysCommand,
-  serializeAws_json1_1ListReplaysCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListReplaysRequest, ListReplaysResponse } from "../models/models_0";
+import { ListReplays$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListReplaysCommand}.
+ */
 export interface ListReplaysCommandInput extends ListReplaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListReplaysCommand}.
+ */
 export interface ListReplaysCommandOutput extends ListReplaysResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,67 @@ export interface ListReplaysCommandOutput extends ListReplaysResponse, __Metadat
  * ```javascript
  * import { CloudWatchEventsClient, ListReplaysCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, ListReplaysCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // ListReplaysRequest
+ *   NamePrefix: "STRING_VALUE",
+ *   State: "STARTING" || "RUNNING" || "CANCELLING" || "COMPLETED" || "CANCELLED" || "FAILED",
+ *   EventSourceArn: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListReplaysCommand(input);
  * const response = await client.send(command);
+ * // { // ListReplaysResponse
+ * //   Replays: [ // ReplayList
+ * //     { // Replay
+ * //       ReplayName: "STRING_VALUE",
+ * //       EventSourceArn: "STRING_VALUE",
+ * //       State: "STARTING" || "RUNNING" || "CANCELLING" || "COMPLETED" || "CANCELLED" || "FAILED",
+ * //       StateReason: "STRING_VALUE",
+ * //       EventStartTime: new Date("TIMESTAMP"),
+ * //       EventEndTime: new Date("TIMESTAMP"),
+ * //       EventLastReplayedTime: new Date("TIMESTAMP"),
+ * //       ReplayStartTime: new Date("TIMESTAMP"),
+ * //       ReplayEndTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListReplaysCommandInput - {@link ListReplaysCommandInput}
+ * @returns {@link ListReplaysCommandOutput}
  * @see {@link ListReplaysCommandInput} for command's `input` shape.
  * @see {@link ListReplaysCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class ListReplaysCommand extends $Command<
-  ListReplaysCommandInput,
-  ListReplaysCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListReplaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListReplaysCommandInput, ListReplaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "ListReplaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListReplaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListReplaysResponse.filterSensitiveLog,
+export class ListReplaysCommand extends command<ListReplaysCommandInput, ListReplaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListReplays",
+  ListReplays$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListReplaysRequest;
+      output: ListReplaysResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListReplaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListReplaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListReplaysCommandOutput> {
-    return deserializeAws_json1_1ListReplaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListReplaysCommandInput;
+      output: ListReplaysCommandOutput;
+    };
+  };
 }

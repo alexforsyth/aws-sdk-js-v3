@@ -1,0 +1,401 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateLinkCommandInput,
+  type CreateLinkCommandOutput,
+  CreateLinkCommand,
+} from "./commands/CreateLinkCommand";
+import {
+  type CreateSinkCommandInput,
+  type CreateSinkCommandOutput,
+  CreateSinkCommand,
+} from "./commands/CreateSinkCommand";
+import {
+  type DeleteLinkCommandInput,
+  type DeleteLinkCommandOutput,
+  DeleteLinkCommand,
+} from "./commands/DeleteLinkCommand";
+import {
+  type DeleteSinkCommandInput,
+  type DeleteSinkCommandOutput,
+  DeleteSinkCommand,
+} from "./commands/DeleteSinkCommand";
+import { type GetLinkCommandInput, type GetLinkCommandOutput, GetLinkCommand } from "./commands/GetLinkCommand";
+import { type GetSinkCommandInput, type GetSinkCommandOutput, GetSinkCommand } from "./commands/GetSinkCommand";
+import {
+  type GetSinkPolicyCommandInput,
+  type GetSinkPolicyCommandOutput,
+  GetSinkPolicyCommand,
+} from "./commands/GetSinkPolicyCommand";
+import {
+  type ListAttachedLinksCommandInput,
+  type ListAttachedLinksCommandOutput,
+  ListAttachedLinksCommand,
+} from "./commands/ListAttachedLinksCommand";
+import { type ListLinksCommandInput, type ListLinksCommandOutput, ListLinksCommand } from "./commands/ListLinksCommand";
+import { type ListSinksCommandInput, type ListSinksCommandOutput, ListSinksCommand } from "./commands/ListSinksCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type PutSinkPolicyCommandInput,
+  type PutSinkPolicyCommandOutput,
+  PutSinkPolicyCommand,
+} from "./commands/PutSinkPolicyCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateLinkCommandInput,
+  type UpdateLinkCommandOutput,
+  UpdateLinkCommand,
+} from "./commands/UpdateLinkCommand";
+import { OAMClient } from "./OAMClient";
+import { paginateListAttachedLinks } from "./pagination/ListAttachedLinksPaginator";
+import { paginateListLinks } from "./pagination/ListLinksPaginator";
+import { paginateListSinks } from "./pagination/ListSinksPaginator";
+
+const commands = {
+  CreateLinkCommand,
+  CreateSinkCommand,
+  DeleteLinkCommand,
+  DeleteSinkCommand,
+  GetLinkCommand,
+  GetSinkCommand,
+  GetSinkPolicyCommand,
+  ListAttachedLinksCommand,
+  ListLinksCommand,
+  ListSinksCommand,
+  ListTagsForResourceCommand,
+  PutSinkPolicyCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateLinkCommand,
+};
+const paginators = {
+  paginateListAttachedLinks,
+  paginateListLinks,
+  paginateListSinks,
+};
+
+/**
+ * @public
+ */
+export interface OAMRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface OAM {
+  /**
+   * @see {@link CreateLinkCommand}
+   */
+  createLink(
+    args: CreateLinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<CreateLinkCommandOutput>;
+  createLink(
+    args: CreateLinkCommandInput,
+    cb: (err: any, data?: CreateLinkCommandOutput) => void
+  ): void;
+  createLink(
+    args: CreateLinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: CreateLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSinkCommand}
+   */
+  createSink(
+    args: CreateSinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<CreateSinkCommandOutput>;
+  createSink(
+    args: CreateSinkCommandInput,
+    cb: (err: any, data?: CreateSinkCommandOutput) => void
+  ): void;
+  createSink(
+    args: CreateSinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: CreateSinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLinkCommand}
+   */
+  deleteLink(
+    args: DeleteLinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<DeleteLinkCommandOutput>;
+  deleteLink(
+    args: DeleteLinkCommandInput,
+    cb: (err: any, data?: DeleteLinkCommandOutput) => void
+  ): void;
+  deleteLink(
+    args: DeleteLinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: DeleteLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSinkCommand}
+   */
+  deleteSink(
+    args: DeleteSinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<DeleteSinkCommandOutput>;
+  deleteSink(
+    args: DeleteSinkCommandInput,
+    cb: (err: any, data?: DeleteSinkCommandOutput) => void
+  ): void;
+  deleteSink(
+    args: DeleteSinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: DeleteSinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLinkCommand}
+   */
+  getLink(
+    args: GetLinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<GetLinkCommandOutput>;
+  getLink(
+    args: GetLinkCommandInput,
+    cb: (err: any, data?: GetLinkCommandOutput) => void
+  ): void;
+  getLink(
+    args: GetLinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: GetLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSinkCommand}
+   */
+  getSink(
+    args: GetSinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<GetSinkCommandOutput>;
+  getSink(
+    args: GetSinkCommandInput,
+    cb: (err: any, data?: GetSinkCommandOutput) => void
+  ): void;
+  getSink(
+    args: GetSinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: GetSinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSinkPolicyCommand}
+   */
+  getSinkPolicy(
+    args: GetSinkPolicyCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<GetSinkPolicyCommandOutput>;
+  getSinkPolicy(
+    args: GetSinkPolicyCommandInput,
+    cb: (err: any, data?: GetSinkPolicyCommandOutput) => void
+  ): void;
+  getSinkPolicy(
+    args: GetSinkPolicyCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: GetSinkPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachedLinksCommand}
+   */
+  listAttachedLinks(
+    args: ListAttachedLinksCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<ListAttachedLinksCommandOutput>;
+  listAttachedLinks(
+    args: ListAttachedLinksCommandInput,
+    cb: (err: any, data?: ListAttachedLinksCommandOutput) => void
+  ): void;
+  listAttachedLinks(
+    args: ListAttachedLinksCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: ListAttachedLinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLinksCommand}
+   */
+  listLinks(): Promise<ListLinksCommandOutput>;
+  listLinks(
+    args: ListLinksCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<ListLinksCommandOutput>;
+  listLinks(
+    args: ListLinksCommandInput,
+    cb: (err: any, data?: ListLinksCommandOutput) => void
+  ): void;
+  listLinks(
+    args: ListLinksCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: ListLinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSinksCommand}
+   */
+  listSinks(): Promise<ListSinksCommandOutput>;
+  listSinks(
+    args: ListSinksCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<ListSinksCommandOutput>;
+  listSinks(
+    args: ListSinksCommandInput,
+    cb: (err: any, data?: ListSinksCommandOutput) => void
+  ): void;
+  listSinks(
+    args: ListSinksCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: ListSinksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutSinkPolicyCommand}
+   */
+  putSinkPolicy(
+    args: PutSinkPolicyCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<PutSinkPolicyCommandOutput>;
+  putSinkPolicy(
+    args: PutSinkPolicyCommandInput,
+    cb: (err: any, data?: PutSinkPolicyCommandOutput) => void
+  ): void;
+  putSinkPolicy(
+    args: PutSinkPolicyCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: PutSinkPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLinkCommand}
+   */
+  updateLink(
+    args: UpdateLinkCommandInput,
+    options?: OAMRequestOptions
+  ): Promise<UpdateLinkCommandOutput>;
+  updateLink(
+    args: UpdateLinkCommandInput,
+    cb: (err: any, data?: UpdateLinkCommandOutput) => void
+  ): void;
+  updateLink(
+    args: UpdateLinkCommandInput,
+    options: OAMRequestOptions,
+    cb: (err: any, data?: UpdateLinkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAttachedLinksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAttachedLinksCommandOutput}.
+   */
+  paginateListAttachedLinks(
+    args: ListAttachedLinksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAttachedLinksCommandOutput>;
+
+  /**
+   * @see {@link ListLinksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLinksCommandOutput}.
+   */
+  paginateListLinks(
+    args?: ListLinksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLinksCommandOutput>;
+
+  /**
+   * @see {@link ListSinksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSinksCommandOutput}.
+   */
+  paginateListSinks(
+    args?: ListSinksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSinksCommandOutput>;
+}
+
+/**
+ * <p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and monitoring accounts by using <i>CloudWatch cross-account observability</i>. With CloudWatch cross-account observability, you can monitor and troubleshoot applications that span multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics, logs, traces, Application Signals services and service level objectives (SLOs), Application Insights applications, and internet monitors in any of the linked accounts without account boundaries.</p> <p>Set up one or more Amazon Web Services accounts as <i>monitoring accounts</i> and link them with multiple <i>source accounts</i>. A monitoring account is a central Amazon Web Services account that can view and interact with observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it. Source accounts share their observability data with the monitoring account. The shared observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, traces in X-Ray, Application Signals services and service level objectives (SLOs), applications in Amazon CloudWatch Application Insights, and internet monitors in CloudWatch Internet Monitor.</p> <p>When you set up a link, you can choose to share the metrics from all namespaces with the monitoring account, or filter to a subset of namespaces. And for CloudWatch Logs, you can choose to share all log groups with the monitoring account, or filter to a subset of log groups. </p>
+ * @public
+ */
+export class OAM extends OAMClient implements OAM {}
+createAggregatedClient(commands, OAM, { paginators });

@@ -1,25 +1,28 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadOutputTypes } from "@smithy/types";
 
-import { GlacierClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlacierClient";
-import { GetJobOutputInput, GetJobOutputOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetJobOutputCommand,
-  serializeAws_restJson1GetJobOutputCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetJobOutputInput, GetJobOutputOutput } from "../models/models_0";
+import { GetJobOutput$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJobOutputCommand}.
+ */
 export interface GetJobOutputCommandInput extends GetJobOutputInput {}
-export interface GetJobOutputCommandOutput extends GetJobOutputOutput, __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetJobOutputCommand}.
+ */
+export interface GetJobOutputCommandOutput extends Omit<GetJobOutputOutput, "body">, __MetadataBearer {
+  body?: StreamingBlobPayloadOutputTypes;
+}
 
 /**
  * <p>This operation downloads the output of the job you initiated using <a>InitiateJob</a>. Depending on the job type you specified when you initiated the
@@ -27,7 +30,7 @@ export interface GetJobOutputCommandOutput extends GetJobOutputOutput, __Metadat
  *
  *          <p>You can download all the job output or download a portion of the output by specifying
  *          a byte range. In the case of an archive retrieval job, depending on the byte range you
- *          specify, Amazon S3 Glacier (Glacier) returns the checksum for the portion of the data. You can compute the
+ *          specify, Amazon Glacier (Glacier) returns the checksum for the portion of the data. You can compute the
  *          checksum on the client and verify that the values match to ensure the portion you downloaded
  *          is the correct data.</p>
  *          <p>A job ID will not expire for at least 24 hours after Glacier completes the job. That
@@ -38,7 +41,7 @@ export interface GetJobOutputCommandOutput extends GetJobOutputOutput, __Metadat
  *          you download a portion of the output, the expected size is based on the range of bytes
  *          you specified. For example, if you specify a range of <code>bytes=0-1048575</code>, you should
  *          verify your download size is 1,048,576 bytes. If you download an entire archive, the
- *          expected size is the size of the archive when you uploaded it to Amazon S3 Glacier
+ *          expected size is the size of the archive when you uploaded it to Amazon Glacier
  *          The expected size is also returned in the headers from the
  *          <b>Get Job Output</b> response.</p>
  *          <p>In the case of an archive retrieval job, depending on the byte range you
@@ -64,68 +67,103 @@ export interface GetJobOutputCommandOutput extends GetJobOutputOutput, __Metadat
  * ```javascript
  * import { GlacierClient, GetJobOutputCommand } from "@aws-sdk/client-glacier"; // ES Modules import
  * // const { GlacierClient, GetJobOutputCommand } = require("@aws-sdk/client-glacier"); // CommonJS import
+ * // import type { GlacierClientConfig } from "@aws-sdk/client-glacier";
+ * const config = {}; // type is GlacierClientConfig
  * const client = new GlacierClient(config);
+ * const input = { // GetJobOutputInput
+ *   accountId: "STRING_VALUE", // required
+ *   vaultName: "STRING_VALUE", // required
+ *   jobId: "STRING_VALUE", // required
+ *   range: "STRING_VALUE",
+ * };
  * const command = new GetJobOutputCommand(input);
  * const response = await client.send(command);
+ * // consume or destroy the stream to free the socket.
+ * const bytes = await response.body.transformToByteArray();
+ * // const str = await response.body.transformToString();
+ * // response.body.destroy(); // only applicable to Node.js Readable streams.
+ *
+ * // { // GetJobOutputOutput
+ * //   body: "<SdkStream>", // see \@smithy/types -> StreamingBlobPayloadOutputTypes
+ * //   checksum: "STRING_VALUE",
+ * //   status: Number("int"),
+ * //   contentRange: "STRING_VALUE",
+ * //   acceptRanges: "STRING_VALUE",
+ * //   contentType: "STRING_VALUE",
+ * //   archiveDescription: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetJobOutputCommandInput - {@link GetJobOutputCommandInput}
+ * @returns {@link GetJobOutputCommandOutput}
  * @see {@link GetJobOutputCommandInput} for command's `input` shape.
  * @see {@link GetJobOutputCommandOutput} for command's `response` shape.
- * @see {@link GlacierClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlacierClientResolvedConfig | config} for GlacierClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>Returned if a parameter of the request is incorrectly specified.</p>
+ *
+ * @throws {@link MissingParameterValueException} (client fault)
+ *  <p>Returned if a required header or parameter is missing from the request.</p>
+ *
+ * @throws {@link NoLongerSupportedException} (client fault)
+ *  <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
+ *          exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returned if the service cannot complete the request.</p>
+ *
+ * @throws {@link GlacierServiceException}
+ * <p>Base exception class for all service exceptions from Glacier service.</p>
+ *
+ *
+ * @example To get the output of a previously initiated job
+ * ```javascript
+ * // The example downloads the output of a previously initiated inventory retrieval job that is identified by the job ID.
+ * const input = {
+ *   accountId: "-",
+ *   jobId: "zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW",
+ *   range: "",
+ *   vaultName: "my-vaul"
+ * };
+ * const command = new GetJobOutputCommand(input);
+ * const response = await client.send(command);
+ * // consume or destroy the stream to free the socket.
+ * const bytes = await response.body.transformToByteArray();
+ * // const str = await response.body.transformToString();
+ * // response.body.destroy(); // only applicable to Node.js Readable streams.
+ *
+ * /* response is
+ * {
+ *   acceptRanges: "bytes",
+ *   body: "inventory-data",
+ *   contentType: "application/json",
+ *   status: 200
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetJobOutputCommand extends $Command<
-  GetJobOutputCommandInput,
-  GetJobOutputCommandOutput,
-  GlacierClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetJobOutputCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlacierClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetJobOutputCommandInput, GetJobOutputCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlacierClient";
-    const commandName = "GetJobOutputCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetJobOutputInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetJobOutputOutput.filterSensitiveLog,
+export class GetJobOutputCommand extends command<GetJobOutputCommandInput, GetJobOutputCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJobOutput",
+  GetJobOutput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobOutputInput;
+      output: GetJobOutputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetJobOutputCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetJobOutputCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetJobOutputCommandOutput> {
-    return deserializeAws_restJson1GetJobOutputCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetJobOutputCommandInput;
+      output: GetJobOutputCommandOutput;
+    };
+  };
 }

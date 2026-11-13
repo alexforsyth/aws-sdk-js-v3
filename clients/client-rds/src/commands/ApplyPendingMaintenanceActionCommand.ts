@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ApplyPendingMaintenanceActionMessage, ApplyPendingMaintenanceActionResult } from "../models/models_0";
-import {
-  deserializeAws_queryApplyPendingMaintenanceActionCommand,
-  serializeAws_queryApplyPendingMaintenanceActionCommand,
-} from "../protocols/Aws_query";
-import { RDSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RDSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ApplyPendingMaintenanceActionMessage, ApplyPendingMaintenanceActionResult } from "../models/models_0";
+import { ApplyPendingMaintenanceAction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ApplyPendingMaintenanceActionCommand}.
+ */
 export interface ApplyPendingMaintenanceActionCommandInput extends ApplyPendingMaintenanceActionMessage {}
-export interface ApplyPendingMaintenanceActionCommandOutput
-  extends ApplyPendingMaintenanceActionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ApplyPendingMaintenanceActionCommand}.
+ */
+export interface ApplyPendingMaintenanceActionCommandOutput extends ApplyPendingMaintenanceActionResult, __MetadataBearer {}
 
 /**
  * <p>Applies a pending maintenance action to a resource (for example, to a DB instance).</p>
@@ -30,71 +29,97 @@ export interface ApplyPendingMaintenanceActionCommandOutput
  * ```javascript
  * import { RDSClient, ApplyPendingMaintenanceActionCommand } from "@aws-sdk/client-rds"; // ES Modules import
  * // const { RDSClient, ApplyPendingMaintenanceActionCommand } = require("@aws-sdk/client-rds"); // CommonJS import
+ * // import type { RDSClientConfig } from "@aws-sdk/client-rds";
+ * const config = {}; // type is RDSClientConfig
  * const client = new RDSClient(config);
+ * const input = { // ApplyPendingMaintenanceActionMessage
+ *   ResourceIdentifier: "STRING_VALUE", // required
+ *   ApplyAction: "STRING_VALUE", // required
+ *   OptInType: "STRING_VALUE", // required
+ * };
  * const command = new ApplyPendingMaintenanceActionCommand(input);
  * const response = await client.send(command);
+ * // { // ApplyPendingMaintenanceActionResult
+ * //   ResourcePendingMaintenanceActions: { // ResourcePendingMaintenanceActions
+ * //     ResourceIdentifier: "STRING_VALUE",
+ * //     PendingMaintenanceActionDetails: [ // PendingMaintenanceActionDetails
+ * //       { // PendingMaintenanceAction
+ * //         Action: "STRING_VALUE",
+ * //         AutoAppliedAfterDate: new Date("TIMESTAMP"),
+ * //         ForcedApplyDate: new Date("TIMESTAMP"),
+ * //         OptInStatus: "STRING_VALUE",
+ * //         CurrentApplyDate: new Date("TIMESTAMP"),
+ * //         Description: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ApplyPendingMaintenanceActionCommandInput - {@link ApplyPendingMaintenanceActionCommandInput}
+ * @returns {@link ApplyPendingMaintenanceActionCommandOutput}
  * @see {@link ApplyPendingMaintenanceActionCommandInput} for command's `input` shape.
  * @see {@link ApplyPendingMaintenanceActionCommandOutput} for command's `response` shape.
- * @see {@link RDSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RDSClientResolvedConfig | config} for RDSClient's `config` shape.
  *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The requested operation can't be performed while the cluster is in this state.</p>
+ *
+ * @throws {@link InvalidDBInstanceStateFault} (client fault)
+ *  <p>The DB instance isn't in a valid state.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The specified resource ID was not found.</p>
+ *
+ * @throws {@link RDSServiceException}
+ * <p>Base exception class for all service exceptions from RDS service.</p>
+ *
+ *
+ * @example To apply pending maintenance actions
+ * ```javascript
+ * // The following example applies the pending maintenance actions for a DB cluster.
+ * const input = {
+ *   ApplyAction: "system-update",
+ *   OptInType: "immediate",
+ *   ResourceIdentifier: "arn:aws:rds:us-east-1:123456789012:cluster:my-db-cluster"
+ * };
+ * const command = new ApplyPendingMaintenanceActionCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ResourcePendingMaintenanceActions: {
+ *     PendingMaintenanceActionDetails: [
+ *       {
+ *         Action: "system-update",
+ *         CurrentApplyDate: "2021-01-23T01:07:36.100Z",
+ *         Description: "Upgrade to Aurora PostgreSQL 3.3.2",
+ *         OptInStatus: "immediate"
+ *       }
+ *     ],
+ *     ResourceIdentifier: "arn:aws:rds:us-east-1:123456789012:cluster:my-db-cluster"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ApplyPendingMaintenanceActionCommand extends $Command<
-  ApplyPendingMaintenanceActionCommandInput,
-  ApplyPendingMaintenanceActionCommandOutput,
-  RDSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ApplyPendingMaintenanceActionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RDSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ApplyPendingMaintenanceActionCommandInput, ApplyPendingMaintenanceActionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RDSClient";
-    const commandName = "ApplyPendingMaintenanceActionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ApplyPendingMaintenanceActionMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ApplyPendingMaintenanceActionResult.filterSensitiveLog,
+export class ApplyPendingMaintenanceActionCommand extends command<ApplyPendingMaintenanceActionCommandInput, ApplyPendingMaintenanceActionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ApplyPendingMaintenanceAction",
+  ApplyPendingMaintenanceAction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ApplyPendingMaintenanceActionMessage;
+      output: ApplyPendingMaintenanceActionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ApplyPendingMaintenanceActionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryApplyPendingMaintenanceActionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ApplyPendingMaintenanceActionCommandOutput> {
-    return deserializeAws_queryApplyPendingMaintenanceActionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ApplyPendingMaintenanceActionCommandInput;
+      output: ApplyPendingMaintenanceActionCommandOutput;
+    };
+  };
 }

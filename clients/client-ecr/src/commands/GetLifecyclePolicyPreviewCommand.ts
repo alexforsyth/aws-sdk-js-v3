@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import { GetLifecyclePolicyPreviewRequest, GetLifecyclePolicyPreviewResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetLifecyclePolicyPreviewCommand,
-  serializeAws_json1_1GetLifecyclePolicyPreviewCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLifecyclePolicyPreviewRequest, GetLifecyclePolicyPreviewResponse } from "../models/models_0";
+import { GetLifecyclePolicyPreview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLifecyclePolicyPreviewCommand}.
+ */
 export interface GetLifecyclePolicyPreviewCommandInput extends GetLifecyclePolicyPreviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLifecyclePolicyPreviewCommand}.
+ */
 export interface GetLifecyclePolicyPreviewCommandOutput extends GetLifecyclePolicyPreviewResponse, __MetadataBearer {}
 
 /**
@@ -29,71 +30,104 @@ export interface GetLifecyclePolicyPreviewCommandOutput extends GetLifecyclePoli
  * ```javascript
  * import { ECRClient, GetLifecyclePolicyPreviewCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, GetLifecyclePolicyPreviewCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // GetLifecyclePolicyPreviewRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   imageIds: [ // ImageIdentifierList
+ *     { // ImageIdentifier
+ *       imageDigest: "STRING_VALUE",
+ *       imageTag: "STRING_VALUE",
+ *     },
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   filter: { // LifecyclePolicyPreviewFilter
+ *     tagStatus: "TAGGED" || "UNTAGGED" || "ANY",
+ *   },
+ * };
  * const command = new GetLifecyclePolicyPreviewCommand(input);
  * const response = await client.send(command);
+ * // { // GetLifecyclePolicyPreviewResponse
+ * //   registryId: "STRING_VALUE",
+ * //   repositoryName: "STRING_VALUE",
+ * //   lifecyclePolicyText: "STRING_VALUE",
+ * //   status: "IN_PROGRESS" || "COMPLETE" || "EXPIRED" || "FAILED",
+ * //   nextToken: "STRING_VALUE",
+ * //   previewResults: [ // LifecyclePolicyPreviewResultList
+ * //     { // LifecyclePolicyPreviewResult
+ * //       imageTags: [ // ImageTagList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       imageDigest: "STRING_VALUE",
+ * //       imagePushedAt: new Date("TIMESTAMP"),
+ * //       action: { // LifecyclePolicyRuleAction
+ * //         type: "EXPIRE" || "TRANSITION",
+ * //         targetStorageClass: "ARCHIVE",
+ * //       },
+ * //       appliedRulePriority: Number("int"),
+ * //       storageClass: "ARCHIVE" || "STANDARD",
+ * //     },
+ * //   ],
+ * //   summary: { // LifecyclePolicyPreviewSummary
+ * //     expiringImageTotalCount: Number("int"),
+ * //     transitioningImageTotalCounts: [ // TransitioningImageTotalCounts
+ * //       { // TransitioningImageTotalCount
+ * //         targetStorageClass: "ARCHIVE",
+ * //         imageTotalCount: Number("int"),
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetLifecyclePolicyPreviewCommandInput - {@link GetLifecyclePolicyPreviewCommandInput}
+ * @returns {@link GetLifecyclePolicyPreviewCommandOutput}
  * @see {@link GetLifecyclePolicyPreviewCommandInput} for command's `input` shape.
  * @see {@link GetLifecyclePolicyPreviewCommandOutput} for command's `response` shape.
- * @see {@link ECRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link LifecyclePolicyPreviewNotFoundException} (client fault)
+ *  <p>There is no dry run for this repository.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository could not be found. Check the spelling of the specified
+ *             repository and ensure that you are performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There was an exception validating this request.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class GetLifecyclePolicyPreviewCommand extends $Command<
-  GetLifecyclePolicyPreviewCommandInput,
-  GetLifecyclePolicyPreviewCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLifecyclePolicyPreviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLifecyclePolicyPreviewCommandInput, GetLifecyclePolicyPreviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "GetLifecyclePolicyPreviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLifecyclePolicyPreviewRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLifecyclePolicyPreviewResponse.filterSensitiveLog,
+export class GetLifecyclePolicyPreviewCommand extends command<GetLifecyclePolicyPreviewCommandInput, GetLifecyclePolicyPreviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLifecyclePolicyPreview",
+  GetLifecyclePolicyPreview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLifecyclePolicyPreviewRequest;
+      output: GetLifecyclePolicyPreviewResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLifecyclePolicyPreviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetLifecyclePolicyPreviewCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetLifecyclePolicyPreviewCommandOutput> {
-    return deserializeAws_json1_1GetLifecyclePolicyPreviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLifecyclePolicyPreviewCommandInput;
+      output: GetLifecyclePolicyPreviewCommandOutput;
+    };
+  };
 }

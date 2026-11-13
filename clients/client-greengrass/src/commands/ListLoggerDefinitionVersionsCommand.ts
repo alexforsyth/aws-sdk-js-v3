@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { ListLoggerDefinitionVersionsRequest, ListLoggerDefinitionVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListLoggerDefinitionVersionsCommand,
-  serializeAws_restJson1ListLoggerDefinitionVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLoggerDefinitionVersionsRequest, ListLoggerDefinitionVersionsResponse } from "../models/models_0";
+import { ListLoggerDefinitionVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLoggerDefinitionVersionsCommand}.
+ */
 export interface ListLoggerDefinitionVersionsCommandInput extends ListLoggerDefinitionVersionsRequest {}
-export interface ListLoggerDefinitionVersionsCommandOutput
-  extends ListLoggerDefinitionVersionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListLoggerDefinitionVersionsCommand}.
+ */
+export interface ListLoggerDefinitionVersionsCommandOutput extends ListLoggerDefinitionVersionsResponse, __MetadataBearer {}
 
 /**
  * Lists the versions of a logger definition.
@@ -30,71 +29,60 @@ export interface ListLoggerDefinitionVersionsCommandOutput
  * ```javascript
  * import { GreengrassClient, ListLoggerDefinitionVersionsCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, ListLoggerDefinitionVersionsCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // ListLoggerDefinitionVersionsRequest
+ *   LoggerDefinitionId: "STRING_VALUE", // required
+ *   MaxResults: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListLoggerDefinitionVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListLoggerDefinitionVersionsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Versions: [ // __listOfVersionInformation
+ * //     { // VersionInformation
+ * //       Arn: "STRING_VALUE",
+ * //       CreationTimestamp: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Version: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListLoggerDefinitionVersionsCommandInput - {@link ListLoggerDefinitionVersionsCommandInput}
+ * @returns {@link ListLoggerDefinitionVersionsCommandOutput}
  * @see {@link ListLoggerDefinitionVersionsCommandInput} for command's `input` shape.
  * @see {@link ListLoggerDefinitionVersionsCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class ListLoggerDefinitionVersionsCommand extends $Command<
-  ListLoggerDefinitionVersionsCommandInput,
-  ListLoggerDefinitionVersionsCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLoggerDefinitionVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLoggerDefinitionVersionsCommandInput, ListLoggerDefinitionVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "ListLoggerDefinitionVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLoggerDefinitionVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListLoggerDefinitionVersionsResponse.filterSensitiveLog,
+export class ListLoggerDefinitionVersionsCommand extends command<ListLoggerDefinitionVersionsCommandInput, ListLoggerDefinitionVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLoggerDefinitionVersions",
+  ListLoggerDefinitionVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLoggerDefinitionVersionsRequest;
+      output: ListLoggerDefinitionVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLoggerDefinitionVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListLoggerDefinitionVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListLoggerDefinitionVersionsCommandOutput> {
-    return deserializeAws_restJson1ListLoggerDefinitionVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLoggerDefinitionVersionsCommandInput;
+      output: ListLoggerDefinitionVersionsCommandOutput;
+    };
+  };
 }

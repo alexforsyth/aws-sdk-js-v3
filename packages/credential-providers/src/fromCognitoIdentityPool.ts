@@ -1,13 +1,13 @@
-import { CognitoIdentityClient, CognitoIdentityClientConfig } from "@aws-sdk/client-cognito-identity";
-import {
+import type {
   CognitoIdentityCredentialProvider,
-  fromCognitoIdentityPool as _fromCognitoIdentityPool,
   FromCognitoIdentityPoolParameters as _FromCognitoIdentityPoolParameters,
 } from "@aws-sdk/credential-provider-cognito-identity";
+import type { AwsIdentityProperties } from "@aws-sdk/types";
 
-export interface FromCognitoIdentityPoolParameters extends Omit<_FromCognitoIdentityPoolParameters, "client"> {
-  clientConfig?: CognitoIdentityClientConfig;
-}
+/**
+ * @public
+ */
+export interface FromCognitoIdentityPoolParameters extends Omit<_FromCognitoIdentityPoolParameters, "client"> {}
 
 /**
  * Creates a credential provider function that retrieves or generates a unique identifier using Amazon Cognito's `GetId`
@@ -48,11 +48,15 @@ export interface FromCognitoIdentityPoolParameters extends Omit<_FromCognitoIden
  *   }),
  * });
  * ```
+ *
+ * @public
  */
 export const fromCognitoIdentityPool = (
   options: FromCognitoIdentityPoolParameters
-): CognitoIdentityCredentialProvider =>
-  _fromCognitoIdentityPool({
-    ...options,
-    client: new CognitoIdentityClient(options.clientConfig ?? {}),
-  });
+): CognitoIdentityCredentialProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromCognitoIdentityPool: _fromCognitoIdentityPool } =
+      await import("@aws-sdk/credential-provider-cognito-identity");
+    return _fromCognitoIdentityPool(options)(args);
+  };
+};

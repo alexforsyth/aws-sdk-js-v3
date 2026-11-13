@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GrafanaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GrafanaClient";
-import { UpdatePermissionsRequest, UpdatePermissionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdatePermissionsCommand,
-  serializeAws_restJson1UpdatePermissionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdatePermissionsRequest, UpdatePermissionsResponse } from "../models/models_0";
+import { UpdatePermissions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdatePermissionsCommand}.
+ */
 export interface UpdatePermissionsCommandInput extends UpdatePermissionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdatePermissionsCommand}.
+ */
 export interface UpdatePermissionsCommandOutput extends UpdatePermissionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface UpdatePermissionsCommandOutput extends UpdatePermissionsRespons
  * ```javascript
  * import { GrafanaClient, UpdatePermissionsCommand } from "@aws-sdk/client-grafana"; // ES Modules import
  * // const { GrafanaClient, UpdatePermissionsCommand } = require("@aws-sdk/client-grafana"); // CommonJS import
+ * // import type { GrafanaClientConfig } from "@aws-sdk/client-grafana";
+ * const config = {}; // type is GrafanaClientConfig
  * const client = new GrafanaClient(config);
+ * const input = { // UpdatePermissionsRequest
+ *   updateInstructionBatch: [ // UpdateInstructionBatch // required
+ *     { // UpdateInstruction
+ *       action: "STRING_VALUE", // required
+ *       role: "STRING_VALUE", // required
+ *       users: [ // UserList // required
+ *         { // User
+ *           id: "STRING_VALUE", // required
+ *           type: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   workspaceId: "STRING_VALUE", // required
+ * };
  * const command = new UpdatePermissionsCommand(input);
  * const response = await client.send(command);
+ * // { // UpdatePermissionsResponse
+ * //   errors: [ // UpdateErrorList // required
+ * //     { // UpdateError
+ * //       code: Number("int"), // required
+ * //       message: "STRING_VALUE", // required
+ * //       causedBy: { // UpdateInstruction
+ * //         action: "STRING_VALUE", // required
+ * //         role: "STRING_VALUE", // required
+ * //         users: [ // UserList // required
+ * //           { // User
+ * //             id: "STRING_VALUE", // required
+ * //             type: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdatePermissionsCommandInput - {@link UpdatePermissionsCommandInput}
+ * @returns {@link UpdatePermissionsCommandOutput}
  * @see {@link UpdatePermissionsCommandInput} for command's `input` shape.
  * @see {@link UpdatePermissionsCommandOutput} for command's `response` shape.
- * @see {@link GrafanaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GrafanaClientResolvedConfig | config} for GrafanaClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error while processing the request. Retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling. Retry the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The value of a parameter in the request caused an error.</p>
+ *
+ * @throws {@link GrafanaServiceException}
+ * <p>Base exception class for all service exceptions from Grafana service.</p>
+ *
+ *
+ * @public
  */
-export class UpdatePermissionsCommand extends $Command<
-  UpdatePermissionsCommandInput,
-  UpdatePermissionsCommandOutput,
-  GrafanaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdatePermissionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GrafanaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdatePermissionsCommandInput, UpdatePermissionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GrafanaClient";
-    const commandName = "UpdatePermissionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdatePermissionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdatePermissionsResponse.filterSensitiveLog,
+export class UpdatePermissionsCommand extends command<UpdatePermissionsCommandInput, UpdatePermissionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdatePermissions",
+  UpdatePermissions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdatePermissionsRequest;
+      output: UpdatePermissionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdatePermissionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdatePermissionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdatePermissionsCommandOutput> {
-    return deserializeAws_restJson1UpdatePermissionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdatePermissionsCommandInput;
+      output: UpdatePermissionsCommandOutput;
+    };
+  };
 }

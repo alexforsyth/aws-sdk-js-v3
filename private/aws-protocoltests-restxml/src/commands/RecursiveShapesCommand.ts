@@ -1,25 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RecursiveShapesInputOutput } from "../models/models_0";
-import {
-  deserializeAws_restXmlRecursiveShapesCommand,
-  serializeAws_restXmlRecursiveShapesCommand,
-} from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { RecursiveShapesRequest, RecursiveShapesResponse } from "../models/models_0";
+import { de_RecursiveShapesCommand, se_RecursiveShapesCommand } from "../protocols/Aws_restXml";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
-export interface RecursiveShapesCommandInput extends RecursiveShapesInputOutput {}
-export interface RecursiveShapesCommandOutput extends RecursiveShapesInputOutput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RecursiveShapesCommand}.
+ */
+export interface RecursiveShapesCommandInput extends RecursiveShapesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RecursiveShapesCommand}.
+ */
+export interface RecursiveShapesCommandOutput extends RecursiveShapesResponse, __MetadataBearer {}
 
 /**
  * Recursive shapes
@@ -28,68 +37,86 @@ export interface RecursiveShapesCommandOutput extends RecursiveShapesInputOutput
  * ```javascript
  * import { RestXmlProtocolClient, RecursiveShapesCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, RecursiveShapesCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = { // RecursiveShapesRequest
+ *   nested: { // RecursiveShapesInputOutputNested1
+ *     foo: "STRING_VALUE",
+ *     nested: { // RecursiveShapesInputOutputNested2
+ *       bar: "STRING_VALUE",
+ *       recursiveMember: {
+ *         foo: "STRING_VALUE",
+ *         nested: {
+ *           bar: "STRING_VALUE",
+ *           recursiveMember: "<RecursiveShapesInputOutputNested1>",
+ *         },
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new RecursiveShapesCommand(input);
  * const response = await client.send(command);
+ * // { // RecursiveShapesResponse
+ * //   nested: { // RecursiveShapesInputOutputNested1
+ * //     foo: "STRING_VALUE",
+ * //     nested: { // RecursiveShapesInputOutputNested2
+ * //       bar: "STRING_VALUE",
+ * //       recursiveMember: {
+ * //         foo: "STRING_VALUE",
+ * //         nested: {
+ * //           bar: "STRING_VALUE",
+ * //           recursiveMember: "<RecursiveShapesInputOutputNested1>",
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RecursiveShapesCommandInput - {@link RecursiveShapesCommandInput}
+ * @returns {@link RecursiveShapesCommandOutput}
  * @see {@link RecursiveShapesCommandInput} for command's `input` shape.
  * @see {@link RecursiveShapesCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class RecursiveShapesCommand extends $Command<
-  RecursiveShapesCommandInput,
-  RecursiveShapesCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RecursiveShapesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RecursiveShapesCommandInput, RecursiveShapesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "RecursiveShapesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RecursiveShapesInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: RecursiveShapesInputOutput.filterSensitiveLog,
+export class RecursiveShapesCommand extends $Command
+  .classBuilder<
+    RecursiveShapesCommandInput,
+    RecursiveShapesCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "RecursiveShapes", {})
+  .n("RestXmlProtocolClient", "RecursiveShapesCommand")
+  .f(void 0, void 0)
+  .ser(se_RecursiveShapesCommand)
+  .de(de_RecursiveShapesCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RecursiveShapesRequest;
+      output: RecursiveShapesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RecursiveShapesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlRecursiveShapesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RecursiveShapesCommandOutput> {
-    return deserializeAws_restXmlRecursiveShapesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RecursiveShapesCommandInput;
+      output: RecursiveShapesCommandOutput;
+    };
+  };
 }

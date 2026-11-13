@@ -1,116 +1,158 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { StartOutboundVoiceContactRequest, StartOutboundVoiceContactResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartOutboundVoiceContactCommand,
-  serializeAws_restJson1StartOutboundVoiceContactCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartOutboundVoiceContactRequest, StartOutboundVoiceContactResponse } from "../models/models_3";
+import { StartOutboundVoiceContact$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartOutboundVoiceContactCommand}.
+ */
 export interface StartOutboundVoiceContactCommandInput extends StartOutboundVoiceContactRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartOutboundVoiceContactCommand}.
+ */
 export interface StartOutboundVoiceContactCommandOutput extends StartOutboundVoiceContactResponse, __MetadataBearer {}
 
 /**
- * <p>Places an outbound call to a contact, and then initiates the contact flow. It performs the
- *    actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p>
- *
- *          <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If
- *    the contact flow places an outbound call to a contact, and then puts the contact in queue, the
- *    call is then routed to the agent, like any other inbound case.</p>
- *
- *          <p>There is a 60-second dialing timeout for this operation. If the call is not connected after
- *    60 seconds, it fails.</p>
+ * <p>Places an outbound call to a contact, and then initiates the flow. It performs the actions in the flow that's
+ *    specified (in <code>ContactFlowId</code>).</p>
+ *          <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If the flow places an
+ *    outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other
+ *    inbound case.</p>
+ *          <p>Dialing timeout for this operation can be configured with the “RingTimeoutInSeconds” parameter. If not
+ *    specified, the default dialing timeout will be 60 seconds which means if the call is not connected within 60 seconds,
+ *    it fails.</p>
  *          <note>
- *             <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK
- *     mobile numbers, you must submit a service quota increase request. For more information, see
- *      <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
+ *             <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must
+ *     submit a service quota increase request. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Connect Customer Service Quotas</a> in the
+ *       <i>Connect Customer Administrator Guide</i>. </p>
  *          </note>
  *          <note>
- *             <p>Campaign calls are not allowed by default. Before you can make a call with
- *     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase request. For more information, see
- *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
+ *             <p>Campaign calls are not allowed by default. Before you can make a call with <code>TrafficType</code> =
+ *      <code>CAMPAIGN</code>, you must submit a service quota increase request to the quota <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas">Connect Customer campaigns</a>. </p>
+ *          </note>
+ *          <note>
+ *             <p>For Preview dialing mode, only the Amazon Connect outbound campaigns service principal is allowed to assume a
+ *     role in your account and call this API with OutboundStrategy. </p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, StartOutboundVoiceContactCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, StartOutboundVoiceContactCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // StartOutboundVoiceContactRequest
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   References: { // ContactReferences
+ *     "<keys>": { // Reference
+ *       Value: "STRING_VALUE",
+ *       Type: "URL" || "ATTACHMENT" || "CONTACT_ANALYSIS" || "NUMBER" || "STRING" || "DATE" || "EMAIL" || "EMAIL_MESSAGE" || "EMAIL_MESSAGE_PLAIN_TEXT" || "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" || "EMAIL_MESSAGE_REDACTED", // required
+ *       Status: "AVAILABLE" || "DELETED" || "APPROVED" || "REJECTED" || "PROCESSING" || "FAILED" || "DRAFTING",
+ *       Arn: "STRING_VALUE",
+ *       StatusReason: "STRING_VALUE",
+ *     },
+ *   },
+ *   RelatedContactId: "STRING_VALUE",
+ *   DestinationPhoneNumber: "STRING_VALUE", // required
+ *   ContactFlowId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ *   ClientToken: "STRING_VALUE",
+ *   SourcePhoneNumber: "STRING_VALUE",
+ *   QueueId: "STRING_VALUE",
+ *   Attributes: { // Attributes
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   AnswerMachineDetectionConfig: { // AnswerMachineDetectionConfig
+ *     EnableAnswerMachineDetection: true || false,
+ *     AwaitAnswerMachinePrompt: true || false,
+ *   },
+ *   CampaignId: "STRING_VALUE",
+ *   TrafficType: "GENERAL" || "CAMPAIGN",
+ *   OutboundStrategy: { // OutboundStrategy
+ *     Type: "AGENT_FIRST", // required
+ *     Config: { // OutboundStrategyConfig
+ *       AgentFirst: { // AgentFirst
+ *         Preview: { // Preview
+ *           PostAcceptTimeoutConfig: { // PostAcceptTimeoutConfig
+ *             DurationInSeconds: Number("int"), // required
+ *           },
+ *           AllowedUserActions: [ // AllowedUserActions // required
+ *             "CALL" || "DISCARD",
+ *           ],
+ *         },
+ *       },
+ *     },
+ *   },
+ *   RingTimeoutInSeconds: Number("int"),
+ * };
  * const command = new StartOutboundVoiceContactCommand(input);
  * const response = await client.send(command);
+ * // { // StartOutboundVoiceContactResponse
+ * //   ContactId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartOutboundVoiceContactCommandInput - {@link StartOutboundVoiceContactCommandInput}
+ * @returns {@link StartOutboundVoiceContactCommandOutput}
  * @see {@link StartOutboundVoiceContactCommandInput} for command's `input` shape.
  * @see {@link StartOutboundVoiceContactCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link DestinationNotAllowedException} (client fault)
+ *  <p>Outbound calls to the destination number are not allowed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The allowed limit for the resource has been exceeded.</p>
+ *
+ * @throws {@link OutboundContactNotPermittedException} (client fault)
+ *  <p>The contact is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class StartOutboundVoiceContactCommand extends $Command<
-  StartOutboundVoiceContactCommandInput,
-  StartOutboundVoiceContactCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartOutboundVoiceContactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartOutboundVoiceContactCommandInput, StartOutboundVoiceContactCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "StartOutboundVoiceContactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartOutboundVoiceContactRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartOutboundVoiceContactResponse.filterSensitiveLog,
+export class StartOutboundVoiceContactCommand extends command<StartOutboundVoiceContactCommandInput, StartOutboundVoiceContactCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartOutboundVoiceContact",
+  StartOutboundVoiceContact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartOutboundVoiceContactRequest;
+      output: StartOutboundVoiceContactResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartOutboundVoiceContactCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartOutboundVoiceContactCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartOutboundVoiceContactCommandOutput> {
-    return deserializeAws_restJson1StartOutboundVoiceContactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartOutboundVoiceContactCommandInput;
+      output: StartOutboundVoiceContactCommandOutput;
+    };
+  };
 }

@@ -1,106 +1,140 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteMessageBatchRequest, DeleteMessageBatchResult } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteMessageBatchCommand,
-  serializeAws_queryDeleteMessageBatchCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SQSClientResolvedConfig } from "../SQSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMessageBatchRequest, DeleteMessageBatchResult } from "../models/models_0";
+import { DeleteMessageBatch$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMessageBatchCommand}.
+ */
 export interface DeleteMessageBatchCommandInput extends DeleteMessageBatchRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMessageBatchCommand}.
+ */
 export interface DeleteMessageBatchCommandOutput extends DeleteMessageBatchResult, __MetadataBearer {}
 
 /**
- * <p>Deletes up to ten messages from the specified queue. This is a batch version of <code>
- *                <a>DeleteMessage</a>.</code> The result of the action on each message is reported individually in the response.</p>
+ * <p>Deletes up to ten messages from the specified queue. This is a batch version of
+ *                     <code>
+ *                <a>DeleteMessage</a>.</code> The result of the action on each
+ *             message is reported individually in the response.</p>
  *          <important>
  *             <p>Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p>
  *          </important>
- *          <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this:</p>
- *          <p>
- *             <code>&AttributeName.1=first</code>
- *          </p>
- *          <p>
- *             <code>&AttributeName.2=second</code>
- *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SQSClient, DeleteMessageBatchCommand } from "@aws-sdk/client-sqs"; // ES Modules import
  * // const { SQSClient, DeleteMessageBatchCommand } = require("@aws-sdk/client-sqs"); // CommonJS import
+ * // import type { SQSClientConfig } from "@aws-sdk/client-sqs";
+ * const config = {}; // type is SQSClientConfig
  * const client = new SQSClient(config);
+ * const input = { // DeleteMessageBatchRequest
+ *   QueueUrl: "STRING_VALUE", // required
+ *   Entries: [ // DeleteMessageBatchRequestEntryList // required
+ *     { // DeleteMessageBatchRequestEntry
+ *       Id: "STRING_VALUE", // required
+ *       ReceiptHandle: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new DeleteMessageBatchCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteMessageBatchResult
+ * //   Successful: [ // DeleteMessageBatchResultEntryList // required
+ * //     { // DeleteMessageBatchResultEntry
+ * //       Id: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   Failed: [ // BatchResultErrorEntryList // required
+ * //     { // BatchResultErrorEntry
+ * //       Id: "STRING_VALUE", // required
+ * //       SenderFault: true || false, // required
+ * //       Code: "STRING_VALUE", // required
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteMessageBatchCommandInput - {@link DeleteMessageBatchCommandInput}
+ * @returns {@link DeleteMessageBatchCommandOutput}
  * @see {@link DeleteMessageBatchCommandInput} for command's `input` shape.
  * @see {@link DeleteMessageBatchCommandOutput} for command's `response` shape.
- * @see {@link SQSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SQSClientResolvedConfig | config} for SQSClient's `config` shape.
  *
+ * @throws {@link BatchEntryIdsNotDistinct} (client fault)
+ *  <p>Two or more batch entries in the request have the same <code>Id</code>.</p>
+ *
+ * @throws {@link EmptyBatchRequest} (client fault)
+ *  <p>The batch request doesn't contain any entries.</p>
+ *
+ * @throws {@link InvalidAddress} (client fault)
+ *  <p>The specified ID is invalid.</p>
+ *
+ * @throws {@link InvalidBatchEntryId} (client fault)
+ *  <p>The <code>Id</code> of a batch entry in a batch request doesn't abide by the
+ *             specification.</p>
+ *
+ * @throws {@link InvalidSecurity} (client fault)
+ *  <p>The request was not made over HTTPS or did not use SigV4 for signing.</p>
+ *
+ * @throws {@link QueueDoesNotExist} (client fault)
+ *  <p>Ensure that the <code>QueueUrl</code> is correct and that the queue has not been
+ *             deleted.</p>
+ *
+ * @throws {@link RequestThrottled} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Exceeds the permitted request rate for the queue or for the recipient of the
+ *                     request.</p>
+ *             </li>
+ *             <li>
+ *                <p>Ensure that the request rate is within the Amazon SQS limits for
+ *                     sending messages. For more information, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-quotas.html#quotas-requests">Amazon SQS quotas</a> in the <i>Amazon SQS
+ *                         Developer Guide</i>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link TooManyEntriesInBatchRequest} (client fault)
+ *  <p>The batch request contains more entries than permissible. For Amazon SQS, the
+ *             maximum number of entries you can include in a single <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html">SendMessageBatch</a>, <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessageBatch.html">DeleteMessageBatch</a>, or <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ChangeMessageVisibilityBatch.html">ChangeMessageVisibilityBatch</a> request is 10.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>Error code 400. Unsupported operation.</p>
+ *
+ * @throws {@link SQSServiceException}
+ * <p>Base exception class for all service exceptions from SQS service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMessageBatchCommand extends $Command<
-  DeleteMessageBatchCommandInput,
-  DeleteMessageBatchCommandOutput,
-  SQSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMessageBatchCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SQSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMessageBatchCommandInput, DeleteMessageBatchCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SQSClient";
-    const commandName = "DeleteMessageBatchCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMessageBatchRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMessageBatchResult.filterSensitiveLog,
+export class DeleteMessageBatchCommand extends command<DeleteMessageBatchCommandInput, DeleteMessageBatchCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMessageBatch",
+  DeleteMessageBatch$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMessageBatchRequest;
+      output: DeleteMessageBatchResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMessageBatchCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteMessageBatchCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMessageBatchCommandOutput> {
-    return deserializeAws_queryDeleteMessageBatchCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMessageBatchCommandInput;
+      output: DeleteMessageBatchCommandOutput;
+    };
+  };
 }

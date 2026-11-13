@@ -1,706 +1,495 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { UsageRecordResultStatus } from "./enums";
 
 /**
- * <p>Metadata assigned to an allocation. Each tag is made up of a key and a value.</p>
+ * <p>Metadata assigned to an allocation. Each tag is made up of a <code>key</code> and a
+ *                 <code>value</code>.</p>
+ * @public
  */
 export interface Tag {
   /**
-   * <p>One part of a key-value pair that makes up a tag. A key is a label that acts like a
-   *             category for the specific tag values.</p>
+   * <p>One part of a key-value pair that makes up a <code>tag</code>. A <code>key</code> is a
+   *             label that acts like a category for the specific tag values.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
-   * <p>One part of a key-value pair that makes up a tag. A value acts as a descriptor within
-   *             a tag category (key). The value can be empty or null.</p>
+   * <p>One part of a key-value pair that makes up a <code>tag</code>. A <code>value</code>
+   *             acts as a descriptor within a tag category (key). The value can be empty or null.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Usage allocations allow you to split usage into buckets by tags.</p>
- *         <p>Each UsageAllocation indicates the usage quantity for a specific set of tags.</p>
+ *          <p>Each <code>UsageAllocation</code> indicates the usage quantity for a specific set of
+ *             tags.</p>
+ * @public
  */
 export interface UsageAllocation {
   /**
-   * <p>The total quantity allocated to this bucket of usage.</p>
+   * <p>The total quantity allocated to this bucket of usage, as a whole number.</p>
+   *          <p>Use <code>AllocatedUsageQuantityAsDecimal</code> instead. Each allocation must specify
+   *             exactly one of <code>AllocatedUsageQuantity</code> or
+   *                 <code>AllocatedUsageQuantityAsDecimal</code>.</p>
+   *
+   * @deprecated (since 2026-10-20) Use AllocatedUsageQuantityAsDecimal instead.
+   * @public
    */
-  AllocatedUsageQuantity: number | undefined;
+  AllocatedUsageQuantity?: number | undefined;
 
   /**
-   * <p>The set of tags that define the bucket of usage. For the bucket of items with no
-   *             tags, this parameter can be left out.</p>
+   * <p>The total quantity allocated to this bucket of usage, as a decimal string. Use this
+   *             when the usage quantity of the request or usage record is specified as a decimal
+   *                 (<code>UsageQuantityAsDecimal</code> or <code>QuantityAsDecimal</code>).</p>
+   *          <p>A non-negative decimal number, for example <code>17.42</code>.</p>
+   *          <p>Each allocation must specify exactly one of <code>AllocatedUsageQuantity</code> or
+   *                 <code>AllocatedUsageQuantityAsDecimal</code>.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  AllocatedUsageQuantityAsDecimal?: string | undefined;
 
-export namespace UsageAllocation {
   /**
-   * @internal
+   * <p>The set of tags that define the bucket of usage. For the bucket of items with no tags,
+   *             this parameter can be left out.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UsageAllocation): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>A UsageRecord indicates a quantity of usage for a given product, customer,
- *             dimension and time.</p>
- *         <p>Multiple requests with the same UsageRecords as input will be deduplicated to
- *             prevent double charges.</p>
+ * <p>A <code>UsageRecord</code> indicates a quantity of usage for a given product,
+ *             customer, dimension and time.</p>
+ *          <p>Multiple requests with the same <code>UsageRecords</code> as input will be
+ *             de-duplicated to prevent double charges.</p>
+ * @public
  */
 export interface UsageRecord {
   /**
    * <p>Timestamp, in UTC, for which the usage is being reported.</p>
-   *         <p>Your application can meter usage for up to one hour in the past. Make sure the
-   *             timestamp value is not before the start of the software usage.</p>
+   *          <p>Your application can meter usage for up to 24 hours in the past. Make sure the
+   *                 <code>timestamp</code> value is not before the start of the software usage.</p>
+   *          <p>At the end of each billing cycle, you have a 6-hour grace period to submit usage
+   *                 records for the previous billing month before 06:00 UTC on the first day of the next month.</p>
+   * @public
    */
   Timestamp: Date | undefined;
 
   /**
-   * <p>The CustomerIdentifier is obtained through the ResolveCustomer operation and
-   *             represents an individual buyer in your application.</p>
+   * <p>The <code>CustomerIdentifier</code> is obtained through the
+   *                 <code>ResolveCustomer</code> operation and represents an individual buyer in your
+   *             application.</p>
+   *          <important>
+   *             <p>
+   *                <code>CustomerIdentifier</code> is not supported for new SaaS product integrations. Use <code>CustomerAWSAccountId</code> to identify the buyer.</p>
+   *          </important>
+   * @public
    */
-  CustomerIdentifier: string | undefined;
+  CustomerIdentifier?: string | undefined;
 
   /**
-   * <p>During the process of registering a product on AWS Marketplace, up to eight
-   *             dimensions are specified. These represent different units of value in your
-   *             application.</p>
+   * <p>During the process of registering a product on Amazon Web Services Marketplace, dimensions are specified.
+   *             These represent different units of value in your application.</p>
+   * @public
    */
   Dimension: string | undefined;
 
   /**
-   * <p>The quantity of usage consumed by the customer for the given dimension and time.
-   *             Defaults to <code>0</code> if not specified.</p>
+   * <p>The quantity of usage consumed by the customer for the given dimension and time, as a
+   *             whole number. Defaults to <code>0</code> if neither <code>Quantity</code> nor
+   *                 <code>QuantityAsDecimal</code> is specified.</p>
+   *          <p>Use <code>QuantityAsDecimal</code> instead. You can't specify both
+   *                 <code>Quantity</code> and <code>QuantityAsDecimal</code> in a usage record.</p>
+   *
+   * @deprecated (since 2026-10-20) Use QuantityAsDecimal instead.
+   * @public
    */
-  Quantity?: number;
+  Quantity?: number | undefined;
 
   /**
-   * <p>The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
-   *             must equal the Quantity of the UsageRecord.</p>
+   * <p>The quantity of usage consumed by the customer for the given dimension and time, as a
+   *             decimal string. Use this instead of <code>Quantity</code> to report fractional
+   *             usage.</p>
+   *          <p>A non-negative decimal number, for example <code>17.42</code>.</p>
+   *          <p>You can't specify both <code>Quantity</code> and <code>QuantityAsDecimal</code> in a
+   *             usage record. If you provide <code>UsageAllocations</code>, each allocation must use
+   *                 <code>AllocatedUsageQuantityAsDecimal</code>. If any usage record fails these checks,
+   *             the entire <code>BatchMeterUsage</code> request fails and no records are
+   *             processed.</p>
+   *          <p>Quantities are compared by value when checking for duplicate records, so
+   *                 <code>17</code>, <code>17.0</code>, and <code>17.00</code> are the same quantity,
+   *             whether you send it in <code>Quantity</code> or <code>QuantityAsDecimal</code>.</p>
+   * @public
    */
-  UsageAllocations?: UsageAllocation[];
-}
+  QuantityAsDecimal?: string | undefined;
 
-export namespace UsageRecord {
   /**
-   * @internal
+   * <p>The set of <code>UsageAllocations</code> to submit. The sum of all
+   *                 <code>UsageAllocation</code> quantities must equal the quantity of the
+   *                 <code>UsageRecord</code> (<code>Quantity</code> or <code>QuantityAsDecimal</code>).
+   *             Allocations must use the same type of quantity as the usage record:
+   *                 <code>AllocatedUsageQuantity</code> with <code>Quantity</code>, or
+   *                 <code>AllocatedUsageQuantityAsDecimal</code> with
+   *             <code>QuantityAsDecimal</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UsageRecord): any => ({
-    ...obj,
-  });
+  UsageAllocations?: UsageAllocation[] | undefined;
+
+  /**
+   * <p>The <code>CustomerAWSAccountId</code> parameter specifies the AWS account ID of the buyer.</p>
+   *          <important>
+   *             <p>If you have an existing integration and need the <code>CustomerAWSAccountId</code> that corresponds to a <code>CustomerIdentifier</code>, contact <a href="https://aws.amazon.com/marketplace/management/contact-us/">AWS Marketplace Seller Operations</a> to obtain the mapping. Do not request the <code>CustomerAWSAccountId</code> directly from buyers. We cannot verify that a buyer-provided account ID is authentic, which can result in incorrect metering or billing.</p>
+   *          </important>
+   * @public
+   */
+  CustomerAWSAccountId?: string | undefined;
+
+  /**
+   * <p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are used for software purchased through Amazon Web Services Marketplace.</p>
+   *          <note>
+   *             <p>To access your <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> mapping, visit <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html">Agreements Feeds</a>.</p>
+   *          </note>
+   * @public
+   */
+  LicenseArn?: string | undefined;
 }
 
 /**
- * <p>A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage
- *             within your application.</p>
+ * <p>A <code>BatchMeterUsageRequest</code> contains <code>UsageRecords</code>, which
+ *             indicate quantities of usage within your application.</p>
+ * @public
  */
 export interface BatchMeterUsageRequest {
   /**
-   * <p>The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at
-   *             a time.</p>
+   * <p>The set of <code>UsageRecords</code> to submit. <code>BatchMeterUsage</code> accepts
+   *             up to 25 <code>UsageRecords</code> at a time.</p>
+   * @public
    */
   UsageRecords: UsageRecord[] | undefined;
 
   /**
-   * <p>Product code is used to uniquely identify a product in AWS Marketplace. The product
-   *             code should be the same as the one used during the publishing of a new
-   *             product.</p>
+   * <p>Product code is used to uniquely identify a product in Amazon Web Services Marketplace. The product code should
+   *             be the same as the one used during the publishing of a new product.</p>
+   *          <important>
+   *             <p>
+   *                <code>ProductCode</code> is required only for legacy integrations that use <code>CustomerIdentifier</code>. For new integrations using <code>LicenseArn</code> (Concurrent Agreements), do NOT include <code>ProductCode</code> at the request level. The <code>LicenseArn</code> in each <code>UsageRecord</code> identifies both the product and the specific agreement.</p>
+   *             <p>Sending metering records with both <code>ProductCode</code> and <code>LicenseArn</code> for the same customer within the same hour will result in duplicate billing. If you are migrating from product-based metering to license-based metering, stop sending <code>ProductCode</code> before you start sending <code>LicenseArn</code>.</p>
+   *          </important>
+   * @public
    */
-  ProductCode: string | undefined;
-}
-
-export namespace BatchMeterUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchMeterUsageRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum UsageRecordResultStatus {
-  CUSTOMER_NOT_SUBSCRIBED = "CustomerNotSubscribed",
-  DUPLICATE_RECORD = "DuplicateRecord",
-  SUCCESS = "Success",
+  ProductCode?: string | undefined;
 }
 
 /**
- * <p>A UsageRecordResult indicates the status of a given UsageRecord processed by
- *             BatchMeterUsage.</p>
+ * <p>A <code>UsageRecordResult</code> indicates the status of a given
+ *                 <code>UsageRecord</code> processed by <code>BatchMeterUsage</code>.</p>
+ * @public
  */
 export interface UsageRecordResult {
   /**
-   * <p>The UsageRecord that was part of the BatchMeterUsage request.</p>
+   * <p>The <code>UsageRecord</code> that was part of the <code>BatchMeterUsage</code>
+   *             request.</p>
+   * @public
    */
-  UsageRecord?: UsageRecord;
+  UsageRecord?: UsageRecord | undefined;
 
   /**
-   * <p>The MeteringRecordId is a unique identifier for this metering event.</p>
+   * <p>The <code>MeteringRecordId</code> is a unique identifier for this metering
+   *             event.</p>
+   * @public
    */
-  MeteringRecordId?: string;
+  MeteringRecordId?: string | undefined;
 
   /**
-   * <p>The UsageRecordResult Status indicates the status of an individual UsageRecord
-   *             processed by BatchMeterUsage.</p>
-   *         <ul>
+   * <p>The <code>UsageRecordResult</code>
+   *             <code>Status</code> indicates the status of an individual <code>UsageRecord</code>
+   *             processed by <code>BatchMeterUsage</code>.</p>
+   *          <ul>
    *             <li>
-   *                 <p>
-   *                     <i>Success</i>- The UsageRecord was accepted and honored by
-   *                     BatchMeterUsage.</p>
+   *                <p>
+   *                   <i>Success</i>- The <code>UsageRecord</code> was accepted and
+   *                     honored by <code>BatchMeterUsage</code>.</p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is
-   *                     not subscribed to your product. The UsageRecord was not honored. Future
-   *                     UsageRecords for this customer will fail until the customer subscribes to your
-   *                     product.</p>
+   *                <p>
+   *                   <i>CustomerNotSubscribed</i>- The <code>CustomerIdentifier</code>
+   *                     specified is not able to use your product. The <code>UsageRecord</code> was not
+   *                     honored. There are three causes for this result:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>The customer identifier is invalid.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>The customer identifier provided in the metering record does not have
+   *                             an active agreement or subscription with this product. Future
+   *                                 <code>UsageRecords</code> for this customer will fail until the
+   *                             customer subscribes to your product.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>The customer's Amazon Web Services account was suspended.</p>
+   *                   </li>
+   *                </ul>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid
-   *                     and not honored. A previously metered UsageRecord had the same customer,
-   *                     dimension, and time, but a different quantity.</p>
+   *                <p>
+   *                   <i>DuplicateRecord</i>- Indicates that the
+   *                         <code>UsageRecord</code> was invalid and not honored. A previously metered
+   *                         <code>UsageRecord</code> had the same customer, dimension, and time, but a
+   *                     different quantity.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Status?: UsageRecordResultStatus | string;
-}
-
-export namespace UsageRecordResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UsageRecordResult): any => ({
-    ...obj,
-  });
+  Status?: UsageRecordResultStatus | undefined;
 }
 
 /**
- * <p>Contains the UsageRecords processed by BatchMeterUsage and any records that have
- *             failed due to transient error.</p>
+ * <p>Contains the <code>UsageRecords</code> processed by <code>BatchMeterUsage</code> and
+ *             any records that have failed due to transient error.</p>
+ * @public
  */
 export interface BatchMeterUsageResult {
   /**
-   * <p>Contains all UsageRecords processed by BatchMeterUsage. These records were either
-   *             honored by AWS Marketplace Metering Service or were invalid.</p>
+   * <p>Contains all <code>UsageRecords</code> processed by <code>BatchMeterUsage</code>.
+   *             These records were either honored by Amazon Web Services Marketplace Metering Service or were invalid. Invalid
+   *             records should be fixed before being resubmitted.</p>
+   * @public
    */
-  Results?: UsageRecordResult[];
+  Results?: UsageRecordResult[] | undefined;
 
   /**
-   * <p>Contains all UsageRecords that were not processed by BatchMeterUsage. This is a
-   *             list of UsageRecords. You can retry the failed request by making another BatchMeterUsage
-   *             call with this list as input in the BatchMeterUsageRequest.</p>
+   * <p>Contains all <code>UsageRecords</code> that were not processed by
+   *                 <code>BatchMeterUsage</code>. This is a list of <code>UsageRecords</code>. You can
+   *             retry the failed request by making another <code>BatchMeterUsage</code> call with this
+   *             list as input in the <code>BatchMeterUsageRequest</code>.</p>
+   * @public
    */
-  UnprocessedRecords?: UsageRecord[];
-}
-
-export namespace BatchMeterUsageResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchMeterUsageResult): any => ({
-    ...obj,
-  });
+  UnprocessedRecords?: UsageRecord[] | undefined;
 }
 
 /**
- * <p>The API is disabled in the Region.</p>
+ * @public
  */
-export interface DisabledApiException extends __SmithyException, $MetadataBearer {
-  name: "DisabledApiException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DisabledApiException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisabledApiException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An internal error has occurred. Retry your request. If the problem persists, post a
- *             message with details on the AWS forums.</p>
- */
-export interface InternalServiceErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServiceErrorException";
-  $fault: "server";
-  message?: string;
-}
-
-export namespace InternalServiceErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServiceErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have metered usage for a CustomerIdentifier that does not exist.</p>
- */
-export interface InvalidCustomerIdentifierException extends __SmithyException, $MetadataBearer {
-  name: "InvalidCustomerIdentifierException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidCustomerIdentifierException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidCustomerIdentifierException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The product code passed does not match the product code used for publishing the
- *             product.</p>
- */
-export interface InvalidProductCodeException extends __SmithyException, $MetadataBearer {
-  name: "InvalidProductCodeException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidProductCodeException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidProductCodeException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The tag is invalid, or the number of tags is greater than 5.</p>
- */
-export interface InvalidTagException extends __SmithyException, $MetadataBearer {
-  name: "InvalidTagException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidTagException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidTagException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The usage allocation objects are invalid, or the number of allocations is greater
- *             than 500 for a single usage record.</p>
- */
-export interface InvalidUsageAllocationsException extends __SmithyException, $MetadataBearer {
-  name: "InvalidUsageAllocationsException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidUsageAllocationsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidUsageAllocationsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The usage dimension does not match one of the UsageDimensions associated with
- *             products.</p>
- */
-export interface InvalidUsageDimensionException extends __SmithyException, $MetadataBearer {
-  name: "InvalidUsageDimensionException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidUsageDimensionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidUsageDimensionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The calls to the API are throttled.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The timestamp value passed in the meterUsage() is out of allowed range.</p>
- */
-export interface TimestampOutOfBoundsException extends __SmithyException, $MetadataBearer {
-  name: "TimestampOutOfBoundsException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TimestampOutOfBoundsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TimestampOutOfBoundsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Exception thrown when the customer does not have a valid subscription for the
- *             product.</p>
- */
-export interface CustomerNotEntitledException extends __SmithyException, $MetadataBearer {
-  name: "CustomerNotEntitledException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace CustomerNotEntitledException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CustomerNotEntitledException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A metering record has already been emitted by the same EC2 instance, ECS task, or
- *             EKS pod for the given {usageDimension, timestamp} with a different
- *             usageQuantity.</p>
- */
-export interface DuplicateRequestException extends __SmithyException, $MetadataBearer {
-  name: "DuplicateRequestException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace DuplicateRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DuplicateRequestException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The endpoint being called is in a AWS Region different from your EC2 instance, ECS
- *             task, or EKS pod. The Region of the Metering Service endpoint and the AWS Region of the
- *             resource must match.</p>
- */
-export interface InvalidEndpointRegionException extends __SmithyException, $MetadataBearer {
-  name: "InvalidEndpointRegionException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidEndpointRegionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidEndpointRegionException): any => ({
-    ...obj,
-  });
-}
-
 export interface MeterUsageRequest {
   /**
-   * <p>Product code is used to uniquely identify a product in AWS Marketplace. The product
-   *             code should be the same as the one used during the publishing of a new
-   *             product.</p>
+   * <p>Product code is used to uniquely identify a product in Amazon Web Services Marketplace. The product code
+   *             should be the same as the one used during the publishing of a new product.</p>
+   * @public
    */
   ProductCode: string | undefined;
 
   /**
-   * <p>Timestamp, in UTC, for which the usage is being reported. Your application can
-   *             meter usage for up to one hour in the past. Make sure the timestamp value is not before
-   *             the start of the software usage.</p>
+   * <p>Timestamp, in UTC, for which the usage is being reported. Your application can meter
+   *             usage for up to six hours in the past. Make sure the <code>timestamp</code> value is not
+   *             before the start of the software usage.</p>
+   * @public
    */
   Timestamp: Date | undefined;
 
   /**
    * <p>It will be one of the fcp dimension name provided during the publishing of the
    *             product.</p>
+   * @public
    */
   UsageDimension: string | undefined;
 
   /**
-   * <p>Consumption value for the hour. Defaults to <code>0</code> if not
-   *             specified.</p>
+   * <p>The consumption value for the hour, as a whole number. Defaults to <code>0</code> if neither
+   *                 <code>UsageQuantity</code> nor <code>UsageQuantityAsDecimal</code> is specified.</p>
+   *          <p>Use <code>UsageQuantityAsDecimal</code> instead. You can't specify both
+   *                 <code>UsageQuantity</code> and <code>UsageQuantityAsDecimal</code>.</p>
+   *
+   * @deprecated (since 2026-10-20) Use UsageQuantityAsDecimal instead.
+   * @public
    */
-  UsageQuantity?: number;
+  UsageQuantity?: number | undefined;
 
   /**
-   * <p>Checks whether you have the permissions required for the action, but does not make
-   *             the request. If you have the permissions, the request returns DryRunOperation;
-   *             otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not
-   *             specified.</p>
+   * <p>The consumption value for the hour, as a decimal string. Use this instead of
+   *                 <code>UsageQuantity</code> to report fractional usage.</p>
+   *          <p>A non-negative decimal number, for example <code>17.42</code>.</p>
+   *          <p>You can't specify both <code>UsageQuantity</code> and
+   *                 <code>UsageQuantityAsDecimal</code>. If you provide <code>UsageAllocations</code>,
+   *             each allocation must use <code>AllocatedUsageQuantityAsDecimal</code>.</p>
+   *          <p>Quantities are compared by value when checking for duplicate or retried requests, so
+   *                 <code>17</code>, <code>17.0</code>, and <code>17.00</code> are the same quantity,
+   *             whether you send it in <code>UsageQuantity</code> or
+   *             <code>UsageQuantityAsDecimal</code>.</p>
+   * @public
    */
-  DryRun?: boolean;
+  UsageQuantityAsDecimal?: string | undefined;
 
   /**
-   * <p>The set of UsageAllocations to submit.</p>
-   *         <p>The sum of all UsageAllocation quantities must equal the
-   *             UsageQuantity of the MeterUsage request, and each UsageAllocation must have a
-   *             unique set of tags (include no tags).</p>
+   * <p>Checks whether you have the permissions required for the action, but does not make the
+   *             request. If you have the permissions, the request returns <code>DryRunOperation</code>;
+   *             otherwise, it returns <code>UnauthorizedException</code>. Defaults to <code>false</code>
+   *             if not specified.</p>
+   * @public
    */
-  UsageAllocations?: UsageAllocation[];
+  DryRun?: boolean | undefined;
+
+  /**
+   * <p>The set of <code>UsageAllocations</code> to submit.</p>
+   *          <p>The sum of all <code>UsageAllocation</code> quantities must equal the usage quantity
+   *             of the <code>MeterUsage</code> request (<code>UsageQuantity</code> or
+   *                 <code>UsageQuantityAsDecimal</code>), and each <code>UsageAllocation</code> must have a
+   *             unique set of tags (include no tags). Allocations must use the same type of quantity as
+   *             the request: <code>AllocatedUsageQuantity</code> with <code>UsageQuantity</code>, or
+   *                 <code>AllocatedUsageQuantityAsDecimal</code> with
+   *             <code>UsageQuantityAsDecimal</code>.</p>
+   * @public
+   */
+  UsageAllocations?: UsageAllocation[] | undefined;
+
+  /**
+   * <p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency
+   *          of the request. This lets you safely retry the request without accidentally performing the
+   *          same operation a second time. Passing the same value to a later call to an operation
+   *          requires that you also pass the same value for all other parameters. We recommend that you
+   *          use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+   *             value</a>.</p>
+   *          <p>If you don't provide this value, then Amazon Web Services generates a random one for
+   *          you.</p>
+   *          <p>If you retry the operation with the same <code>ClientToken</code>, but with different
+   *          parameters, the retry fails with an <code>IdempotencyConflictException</code> error.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
-export namespace MeterUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MeterUsageRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface MeterUsageResult {
   /**
    * <p>Metering record id.</p>
+   * @public
    */
-  MeteringRecordId?: string;
-}
-
-export namespace MeterUsageResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MeterUsageResult): any => ({
-    ...obj,
-  });
+  MeteringRecordId?: string | undefined;
 }
 
 /**
- * <p>Public Key version is invalid.</p>
+ * @public
  */
-export interface InvalidPublicKeyVersionException extends __SmithyException, $MetadataBearer {
-  name: "InvalidPublicKeyVersionException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidPublicKeyVersionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidPublicKeyVersionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>RegisterUsage must be called in the same AWS Region the ECS task was launched in.
- *             This prevents a container from hardcoding a Region (e.g. withRegion(“us-east-1”) when
- *             calling RegisterUsage.</p>
- */
-export interface InvalidRegionException extends __SmithyException, $MetadataBearer {
-  name: "InvalidRegionException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidRegionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidRegionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>AWS Marketplace does not support metering usage from the underlying platform.
- *             Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.</p>
- */
-export interface PlatformNotSupportedException extends __SmithyException, $MetadataBearer {
-  name: "PlatformNotSupportedException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace PlatformNotSupportedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformNotSupportedException): any => ({
-    ...obj,
-  });
-}
-
 export interface RegisterUsageRequest {
   /**
-   * <p>Product code is used to uniquely identify a product in AWS Marketplace. The product
-   *             code should be the same as the one used during the publishing of a new
-   *             product.</p>
+   * <p>Product code is used to uniquely identify a product in Amazon Web Services Marketplace. The product code should
+   *             be the same as the one used during the publishing of a new product.</p>
+   * @public
    */
   ProductCode: string | undefined;
 
   /**
-   * <p>Public Key Version provided by AWS Marketplace</p>
+   * <p>Public Key Version provided by Amazon Web Services Marketplace</p>
+   * @public
    */
   PublicKeyVersion: number | undefined;
 
   /**
-   * <p>(Optional) To scope down the registration to a specific running software instance
-   *             and guard against replay attacks.</p>
+   * <p>(Optional) To scope down the registration to a specific running software instance and
+   *             guard against replay attacks.</p>
+   * @public
    */
-  Nonce?: string;
+  Nonce?: string | undefined;
 }
 
-export namespace RegisterUsageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterUsageRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterUsageResult {
   /**
    * <p>(Optional) Only included when public key version has expired</p>
+   * @public
    */
-  PublicKeyRotationTimestamp?: Date;
+  PublicKeyRotationTimestamp?: Date | undefined;
 
   /**
    * <p>JWT Token</p>
+   * @public
    */
-  Signature?: string;
-}
-
-export namespace RegisterUsageResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterUsageResult): any => ({
-    ...obj,
-  });
+  Signature?: string | undefined;
 }
 
 /**
- * <p>The submitted registration token has expired. This can happen if the buyer's
- *             browser takes too long to redirect to your page, the buyer has resubmitted the
- *             registration token, or your application has held on to the registration token for too
- *             long. Your SaaS registration website should redeem this token as soon as it is submitted
- *             by the buyer's browser.</p>
- */
-export interface ExpiredTokenException extends __SmithyException, $MetadataBearer {
-  name: "ExpiredTokenException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ExpiredTokenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExpiredTokenException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Registration token is invalid.</p>
- */
-export interface InvalidTokenException extends __SmithyException, $MetadataBearer {
-  name: "InvalidTokenException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidTokenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidTokenException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Contains input to the ResolveCustomer operation.</p>
+ * <p>Contains input to the <code>ResolveCustomer</code> operation.</p>
+ * @public
  */
 export interface ResolveCustomerRequest {
   /**
-   * <p>When a buyer visits your website during the registration process, the buyer submits
-   *             a registration token through the browser. The registration token is resolved to obtain a
-   *             CustomerIdentifier and product code.</p>
+   * <p>When a buyer visits your website during the registration process, the buyer submits a
+   *             registration token through the browser. The registration token is resolved to obtain a
+   *                 <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,
+   *                 <code>ProductCode</code>, and <code>LicenseArn</code>.</p>
+   *          <note>
+   *             <p>For new SaaS product integrations, the <code>CustomerIdentifier</code> field is not populated. Use <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> for customer identification.</p>
+   *          </note>
+   * @public
    */
   RegistrationToken: string | undefined;
 }
 
-export namespace ResolveCustomerRequest {
+/**
+ * <p>Metadata associated with a resolved customer. Includes the <code>AgreementId</code> of
+ *             the Amazon Web Services Marketplace agreement the customer accepted.</p>
+ * @public
+ */
+export interface Metadata {
   /**
-   * @internal
+   * <p>The unique identifier of the Amazon Web Services Marketplace agreement the customer accepted. Use it to
+   *             call Amazon Web Services Marketplace Agreement APIs.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResolveCustomerRequest): any => ({
-    ...obj,
-  });
+  AgreementId?: string | undefined;
 }
 
 /**
- * <p>The result of the ResolveCustomer operation. Contains the CustomerIdentifier and
- *             product code.</p>
+ * <p>The result of the <code>ResolveCustomer</code> operation. Contains the
+ *                 <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,
+ *                 <code>ProductCode</code>, <code>LicenseArn</code>, and <code>Metadata</code>.</p>
+ * @public
  */
 export interface ResolveCustomerResult {
   /**
-   * <p>The CustomerIdentifier is used to identify an individual customer in your
-   *             application. Calls to BatchMeterUsage require CustomerIdentifiers for each
-   *             UsageRecord.</p>
+   * <p>The <code>CustomerIdentifier</code> is used to identify an individual customer in your
+   *             application.</p>
+   *          <important>
+   *             <p>For new SaaS product integrations, this field is not populated. Use <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> to identify customers instead.</p>
+   *          </important>
+   * @public
    */
-  CustomerIdentifier?: string;
+  CustomerIdentifier?: string | undefined;
 
   /**
    * <p>The product code is returned to confirm that the buyer is registering for your
-   *             product. Subsequent BatchMeterUsage calls should be made using this product
+   *             product. Subsequent <code>BatchMeterUsage</code> calls should be made using this product
    *             code.</p>
+   * @public
    */
-  ProductCode?: string;
-}
+  ProductCode?: string | undefined;
 
-export namespace ResolveCustomerResult {
   /**
-   * @internal
+   * <p>The <code>CustomerAWSAccountId</code> provides the Amazon Web Services account ID associated with
+   *             the <code>CustomerIdentifier</code> for the individual customer. Calls to <code>BatchMeterUsage</code> require
+   *             <code>CustomerAWSAccountId</code> for each <code>UsageRecord</code>.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResolveCustomerResult): any => ({
-    ...obj,
-  });
+  CustomerAWSAccountId?: string | undefined;
+
+  /**
+   * <p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are typically used for software purchased through Amazon Web Services Marketplace. Calls to <code>BatchMeterUsage</code> require <code>LicenseArn</code> for each <code>UsageRecord</code>.</p>
+   *          <note>
+   *             <p>Once you receive the <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> in the response, store that for future purposes/API calls/integrations.</p>
+   *          </note>
+   * @public
+   */
+  LicenseArn?: string | undefined;
+
+  /**
+   * <p>The metadata associated with the resolved customer, including the
+   *             <code>AgreementId</code> of the Amazon Web Services Marketplace agreement the customer accepted.</p>
+   * @public
+   */
+  Metadata?: Metadata | undefined;
 }

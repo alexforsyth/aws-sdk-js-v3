@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { AssociateTransitGatewayRouteTableRequest, AssociateTransitGatewayRouteTableResult } from "../models/models_0";
-import {
-  deserializeAws_ec2AssociateTransitGatewayRouteTableCommand,
-  serializeAws_ec2AssociateTransitGatewayRouteTableCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  AssociateTransitGatewayRouteTableRequest,
+  AssociateTransitGatewayRouteTableResult,
+} from "../models/models_0";
+import { AssociateTransitGatewayRouteTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateTransitGatewayRouteTableCommand}.
+ */
 export interface AssociateTransitGatewayRouteTableCommandInput extends AssociateTransitGatewayRouteTableRequest {}
-export interface AssociateTransitGatewayRouteTableCommandOutput
-  extends AssociateTransitGatewayRouteTableResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateTransitGatewayRouteTableCommand}.
+ */
+export interface AssociateTransitGatewayRouteTableCommandOutput extends AssociateTransitGatewayRouteTableResult, __MetadataBearer {}
 
 /**
  * <p>Associates the specified attachment with the specified transit gateway route table. You can
@@ -31,74 +33,55 @@ export interface AssociateTransitGatewayRouteTableCommandOutput
  * ```javascript
  * import { EC2Client, AssociateTransitGatewayRouteTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, AssociateTransitGatewayRouteTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // AssociateTransitGatewayRouteTableRequest
+ *   TransitGatewayRouteTableId: "STRING_VALUE", // required
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new AssociateTransitGatewayRouteTableCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateTransitGatewayRouteTableResult
+ * //   Association: { // TransitGatewayAssociation
+ * //     TransitGatewayRouteTableId: "STRING_VALUE",
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     ResourceId: "STRING_VALUE",
+ * //     ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //     State: "associating" || "associated" || "disassociating" || "disassociated",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociateTransitGatewayRouteTableCommandInput - {@link AssociateTransitGatewayRouteTableCommandInput}
+ * @returns {@link AssociateTransitGatewayRouteTableCommandOutput}
  * @see {@link AssociateTransitGatewayRouteTableCommandInput} for command's `input` shape.
  * @see {@link AssociateTransitGatewayRouteTableCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateTransitGatewayRouteTableCommand extends $Command<
-  AssociateTransitGatewayRouteTableCommandInput,
-  AssociateTransitGatewayRouteTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateTransitGatewayRouteTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateTransitGatewayRouteTableCommandInput, AssociateTransitGatewayRouteTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "AssociateTransitGatewayRouteTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateTransitGatewayRouteTableRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AssociateTransitGatewayRouteTableResult.filterSensitiveLog,
+export class AssociateTransitGatewayRouteTableCommand extends command<AssociateTransitGatewayRouteTableCommandInput, AssociateTransitGatewayRouteTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateTransitGatewayRouteTable",
+  AssociateTransitGatewayRouteTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateTransitGatewayRouteTableRequest;
+      output: AssociateTransitGatewayRouteTableResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateTransitGatewayRouteTableCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2AssociateTransitGatewayRouteTableCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateTransitGatewayRouteTableCommandOutput> {
-    return deserializeAws_ec2AssociateTransitGatewayRouteTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateTransitGatewayRouteTableCommandInput;
+      output: AssociateTransitGatewayRouteTableCommandOutput;
+    };
+  };
 }

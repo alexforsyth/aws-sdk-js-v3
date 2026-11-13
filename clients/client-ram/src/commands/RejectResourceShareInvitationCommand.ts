@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RejectResourceShareInvitationRequest, RejectResourceShareInvitationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1RejectResourceShareInvitationCommand,
-  serializeAws_restJson1RejectResourceShareInvitationCommand,
-} from "../protocols/Aws_restJson1";
-import { RAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RAMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RejectResourceShareInvitationRequest, RejectResourceShareInvitationResponse } from "../models/models_0";
+import { RejectResourceShareInvitation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RejectResourceShareInvitationCommand}.
+ */
 export interface RejectResourceShareInvitationCommandInput extends RejectResourceShareInvitationRequest {}
-export interface RejectResourceShareInvitationCommandOutput
-  extends RejectResourceShareInvitationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link RejectResourceShareInvitationCommand}.
+ */
+export interface RejectResourceShareInvitationCommandOutput extends RejectResourceShareInvitationResponse, __MetadataBearer {}
 
 /**
  * <p>Rejects an invitation to a resource share from another Amazon Web Services account.</p>
@@ -30,71 +29,107 @@ export interface RejectResourceShareInvitationCommandOutput
  * ```javascript
  * import { RAMClient, RejectResourceShareInvitationCommand } from "@aws-sdk/client-ram"; // ES Modules import
  * // const { RAMClient, RejectResourceShareInvitationCommand } = require("@aws-sdk/client-ram"); // CommonJS import
+ * // import type { RAMClientConfig } from "@aws-sdk/client-ram";
+ * const config = {}; // type is RAMClientConfig
  * const client = new RAMClient(config);
+ * const input = { // RejectResourceShareInvitationRequest
+ *   resourceShareInvitationArn: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new RejectResourceShareInvitationCommand(input);
  * const response = await client.send(command);
+ * // { // RejectResourceShareInvitationResponse
+ * //   resourceShareInvitation: { // ResourceShareInvitation
+ * //     resourceShareInvitationArn: "STRING_VALUE",
+ * //     resourceShareName: "STRING_VALUE",
+ * //     resourceShareArn: "STRING_VALUE",
+ * //     senderAccountId: "STRING_VALUE",
+ * //     receiverAccountId: "STRING_VALUE",
+ * //     invitationTimestamp: new Date("TIMESTAMP"),
+ * //     status: "PENDING" || "ACCEPTED" || "REJECTED" || "EXPIRED",
+ * //     resourceShareAssociations: [ // ResourceShareAssociationList
+ * //       { // ResourceShareAssociation
+ * //         resourceShareArn: "STRING_VALUE",
+ * //         resourceShareName: "STRING_VALUE",
+ * //         associatedEntity: "STRING_VALUE",
+ * //         associationType: "PRINCIPAL" || "RESOURCE" || "SOURCE",
+ * //         status: "ASSOCIATING" || "ASSOCIATED" || "FAILED" || "DISASSOCIATING" || "DISASSOCIATED" || "SUSPENDED" || "SUSPENDING" || "RESTORING",
+ * //         statusMessage: "STRING_VALUE",
+ * //         creationTime: new Date("TIMESTAMP"),
+ * //         lastUpdatedTime: new Date("TIMESTAMP"),
+ * //         external: true || false,
+ * //       },
+ * //     ],
+ * //     receiverArn: "STRING_VALUE",
+ * //   },
+ * //   clientToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RejectResourceShareInvitationCommandInput - {@link RejectResourceShareInvitationCommandInput}
+ * @returns {@link RejectResourceShareInvitationCommandOutput}
  * @see {@link RejectResourceShareInvitationCommandInput} for command's `input` shape.
  * @see {@link RejectResourceShareInvitationCommandOutput} for command's `response` shape.
- * @see {@link RAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RAMClientResolvedConfig | config} for RAMClient's `config` shape.
  *
+ * @throws {@link IdempotentParameterMismatchException} (client fault)
+ *  <p>The operation failed because the client token input parameter matched one that was
+ *             used with a previous call to the operation, but at least one of the other input
+ *             parameters is different from the previous call.</p>
+ *
+ * @throws {@link InvalidClientTokenException} (client fault)
+ *  <p>The operation failed because the specified client token isn't valid.</p>
+ *
+ * @throws {@link MalformedArnException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> has a format that isn't
+ *             valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The operation failed because the requested operation isn't permitted.</p>
+ *
+ * @throws {@link ResourceShareInvitationAlreadyAcceptedException} (client fault)
+ *  <p>The operation failed because the specified invitation was already accepted.</p>
+ *
+ * @throws {@link ResourceShareInvitationAlreadyRejectedException} (client fault)
+ *  <p>The operation failed because the specified invitation was already rejected.</p>
+ *
+ * @throws {@link ResourceShareInvitationArnNotFoundException} (client fault)
+ *  <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> for an invitation was not
+ *             found.</p>
+ *
+ * @throws {@link ResourceShareInvitationExpiredException} (client fault)
+ *  <p>The operation failed because the specified invitation is past its expiration date and
+ *             time.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The operation failed because the service could not respond to the request due to an
+ *             internal problem. Try again later.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The operation failed because the service isn't available. Try again later.</p>
+ *
+ * @throws {@link RAMServiceException}
+ * <p>Base exception class for all service exceptions from RAM service.</p>
+ *
+ *
+ * @public
  */
-export class RejectResourceShareInvitationCommand extends $Command<
-  RejectResourceShareInvitationCommandInput,
-  RejectResourceShareInvitationCommandOutput,
-  RAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RejectResourceShareInvitationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RejectResourceShareInvitationCommandInput, RejectResourceShareInvitationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RAMClient";
-    const commandName = "RejectResourceShareInvitationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RejectResourceShareInvitationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RejectResourceShareInvitationResponse.filterSensitiveLog,
+export class RejectResourceShareInvitationCommand extends command<RejectResourceShareInvitationCommandInput, RejectResourceShareInvitationCommandOutput>(
+  _ep0,
+  _mw0,
+  "RejectResourceShareInvitation",
+  RejectResourceShareInvitation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RejectResourceShareInvitationRequest;
+      output: RejectResourceShareInvitationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RejectResourceShareInvitationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RejectResourceShareInvitationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RejectResourceShareInvitationCommandOutput> {
-    return deserializeAws_restJson1RejectResourceShareInvitationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RejectResourceShareInvitationCommandInput;
+      output: RejectResourceShareInvitationCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,57 @@
+// smithy-typescript generated code
+import { AwsSdkSigV4ASigner, AwsSdkSigV4Signer } from "@aws-sdk/core/httpAuthSchemes";
+import { AwsJson1_0Protocol } from "@aws-sdk/core/protocols";
+import { SignatureV4MultiRegion } from "@aws-sdk/signature-v4-multi-region";
+import { Sha256 } from "@smithy/core/checksum";
+import { NoOpLogger } from "@smithy/core/client";
+import { parseUrl } from "@smithy/core/protocols";
+import { fromBase64, fromUtf8, toBase64, toUtf8 } from "@smithy/core/serde";
+import type { IdentityProviderConfig } from "@smithy/types";
+
+import { defaultPartnerCentralChannelHttpAuthSchemeProvider } from "./auth/httpAuthSchemeProvider";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
+import type { PartnerCentralChannelClientConfig } from "./PartnerCentralChannelClient";
+import { errorTypeRegistries } from "./schemas/schemas_0";
+
+/**
+ * @internal
+ */
+export const getRuntimeConfig = (config: PartnerCentralChannelClientConfig) => {
+  return {
+    apiVersion: "2024-03-18",
+    base64Decoder: config?.base64Decoder ?? fromBase64,
+    base64Encoder: config?.base64Encoder ?? toBase64,
+    disableHostPrefix: config?.disableHostPrefix ?? false,
+    endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
+    extensions: config?.extensions ?? [],
+    httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultPartnerCentralChannelHttpAuthSchemeProvider,
+    httpAuthSchemes: config?.httpAuthSchemes ?? [
+      {
+        schemeId: "aws.auth#sigv4",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4"),
+        signer: new AwsSdkSigV4Signer(),
+      },
+      {
+        schemeId: "aws.auth#sigv4a",
+        identityProvider: (ipc: IdentityProviderConfig) =>
+          ipc.getIdentityProvider("aws.auth#sigv4a"),
+        signer: new AwsSdkSigV4ASigner(),
+      },
+    ],
+    logger: config?.logger ?? new NoOpLogger(),
+    protocol: config?.protocol ?? AwsJson1_0Protocol,
+    protocolSettings: config?.protocolSettings ?? {
+      defaultNamespace: "com.amazonaws.partnercentralchannel",
+      errorTypeRegistries,
+      version: "2024-03-18",
+      serviceTarget: "PartnerCentralChannel",
+    },
+    serviceId: config?.serviceId ?? "PartnerCentral Channel",
+    sha256: config?.sha256 ?? Sha256,
+    signerConstructor: config?.signerConstructor ?? SignatureV4MultiRegion,
+    urlParser: config?.urlParser ?? parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+  };
+};

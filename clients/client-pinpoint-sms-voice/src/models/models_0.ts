@@ -1,697 +1,436 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * The resource specified in your request already exists.
- */
-export interface AlreadyExistsException extends __SmithyException, $MetadataBearer {
-  name: "AlreadyExistsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace AlreadyExistsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AlreadyExistsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The input you provided is invalid.
- */
-export interface BadRequestException extends __SmithyException, $MetadataBearer {
-  name: "BadRequestException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace BadRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BadRequestException): any => ({
-    ...obj,
-  });
-}
+// smithy-typescript generated code
+import type { EventType } from "./enums";
 
 /**
  * An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
+ * @public
  */
 export interface CallInstructionsMessageType {
   /**
    * The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.
+   * @public
    */
-  Text?: string;
-}
-
-export namespace CallInstructionsMessageType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CallInstructionsMessageType): any => ({
-    ...obj,
-  });
+  Text?: string | undefined;
 }
 
 /**
  * An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
+ * @public
  */
 export interface CloudWatchLogsDestination {
   /**
    * The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM) role that is able to write event data to an Amazon CloudWatch destination.
+   * @public
    */
-  IamRoleArn?: string;
+  IamRoleArn?: string | undefined;
 
   /**
    * The name of the Amazon CloudWatch Log Group that you want to record events in.
+   * @public
    */
-  LogGroupArn?: string;
-}
-
-export namespace CloudWatchLogsDestination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CloudWatchLogsDestination): any => ({
-    ...obj,
-  });
+  LogGroupArn?: string | undefined;
 }
 
 /**
  * A request to create a new configuration set.
+ * @public
  */
 export interface CreateConfigurationSetRequest {
   /**
    * The name that you want to give the configuration set.
+   * @public
    */
-  ConfigurationSetName?: string;
-}
-
-export namespace CreateConfigurationSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigurationSetRequest): any => ({
-    ...obj,
-  });
+  ConfigurationSetName?: string | undefined;
 }
 
 /**
  * An empty object that indicates that the configuration set was successfully created.
+ * @public
  */
 export interface CreateConfigurationSetResponse {}
 
-export namespace CreateConfigurationSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigurationSetResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.
- */
-export interface InternalServiceErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServiceErrorException";
-  $fault: "server";
-  Message?: string;
-}
-
-export namespace InternalServiceErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServiceErrorException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * There are too many instances of the specified resource type.
- */
-export interface LimitExceededException extends __SmithyException, $MetadataBearer {
-  name: "LimitExceededException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace LimitExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LimitExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * You've issued too many requests to the resource. Wait a few minutes, and then try again.
- */
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
+ * @public
  */
 export interface KinesisFirehoseDestination {
   /**
    * The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
+   * @public
    */
-  DeliveryStreamArn?: string;
+  DeliveryStreamArn?: string | undefined;
 
   /**
    * The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
+   * @public
    */
-  IamRoleArn?: string;
-}
-
-export namespace KinesisFirehoseDestination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KinesisFirehoseDestination): any => ({
-    ...obj,
-  });
-}
-
-export enum EventType {
-  ANSWERED = "ANSWERED",
-  BUSY = "BUSY",
-  COMPLETED_CALL = "COMPLETED_CALL",
-  FAILED = "FAILED",
-  INITIATED_CALL = "INITIATED_CALL",
-  NO_ANSWER = "NO_ANSWER",
-  RINGING = "RINGING",
+  IamRoleArn?: string | undefined;
 }
 
 /**
  * An object that contains information about an event destination that sends data to Amazon SNS.
+ * @public
  */
 export interface SnsDestination {
   /**
    * The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
+   * @public
    */
-  TopicArn?: string;
-}
-
-export namespace SnsDestination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SnsDestination): any => ({
-    ...obj,
-  });
+  TopicArn?: string | undefined;
 }
 
 /**
  * An object that defines a single event destination.
+ * @public
  */
 export interface EventDestinationDefinition {
   /**
    * An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
+   * @public
    */
-  CloudWatchLogsDestination?: CloudWatchLogsDestination;
+  CloudWatchLogsDestination?: CloudWatchLogsDestination | undefined;
 
   /**
    * Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
+   * @public
    */
-  KinesisFirehoseDestination?: KinesisFirehoseDestination;
+  KinesisFirehoseDestination?: KinesisFirehoseDestination | undefined;
 
   /**
    * An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
+   * @public
    */
-  MatchingEventTypes?: (EventType | string)[];
+  MatchingEventTypes?: EventType[] | undefined;
 
   /**
    * An object that contains information about an event destination that sends data to Amazon SNS.
+   * @public
    */
-  SnsDestination?: SnsDestination;
-}
-
-export namespace EventDestinationDefinition {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventDestinationDefinition): any => ({
-    ...obj,
-  });
+  SnsDestination?: SnsDestination | undefined;
 }
 
 /**
  * Create a new event destination in a configuration set.
+ * @public
  */
 export interface CreateConfigurationSetEventDestinationRequest {
   /**
    * ConfigurationSetName
+   * @public
    */
   ConfigurationSetName: string | undefined;
 
   /**
    * An object that defines a single event destination.
+   * @public
    */
-  EventDestination?: EventDestinationDefinition;
+  EventDestination?: EventDestinationDefinition | undefined;
 
   /**
    * A name that identifies the event destination.
+   * @public
    */
-  EventDestinationName?: string;
-}
-
-export namespace CreateConfigurationSetEventDestinationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigurationSetEventDestinationRequest): any => ({
-    ...obj,
-  });
+  EventDestinationName?: string | undefined;
 }
 
 /**
  * An empty object that indicates that the event destination was created successfully.
+ * @public
  */
 export interface CreateConfigurationSetEventDestinationResponse {}
 
-export namespace CreateConfigurationSetEventDestinationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigurationSetEventDestinationResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
- * The resource you attempted to access doesn't exist.
+ * @public
  */
-export interface NotFoundException extends __SmithyException, $MetadataBearer {
-  name: "NotFoundException";
-  $fault: "client";
-  Message?: string;
-}
-
-export namespace NotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface DeleteConfigurationSetRequest {
   /**
    * ConfigurationSetName
+   * @public
    */
   ConfigurationSetName: string | undefined;
 }
 
-export namespace DeleteConfigurationSetRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigurationSetRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An empty object that indicates that the configuration set was deleted successfully.
+ * @public
  */
 export interface DeleteConfigurationSetResponse {}
 
-export namespace DeleteConfigurationSetResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigurationSetResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteConfigurationSetEventDestinationRequest {
   /**
    * ConfigurationSetName
+   * @public
    */
   ConfigurationSetName: string | undefined;
 
   /**
    * EventDestinationName
+   * @public
    */
   EventDestinationName: string | undefined;
 }
 
-export namespace DeleteConfigurationSetEventDestinationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigurationSetEventDestinationRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An empty object that indicates that the event destination was deleted successfully.
+ * @public
  */
 export interface DeleteConfigurationSetEventDestinationResponse {}
 
-export namespace DeleteConfigurationSetEventDestinationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigurationSetEventDestinationResponse): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An object that defines an event destination.
+ * @public
  */
 export interface EventDestination {
   /**
    * An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
+   * @public
    */
-  CloudWatchLogsDestination?: CloudWatchLogsDestination;
+  CloudWatchLogsDestination?: CloudWatchLogsDestination | undefined;
 
   /**
    * Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
+   * @public
    */
-  KinesisFirehoseDestination?: KinesisFirehoseDestination;
+  KinesisFirehoseDestination?: KinesisFirehoseDestination | undefined;
 
   /**
    * An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
+   * @public
    */
-  MatchingEventTypes?: (EventType | string)[];
+  MatchingEventTypes?: EventType[] | undefined;
 
   /**
    * A name that identifies the event destination configuration.
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * An object that contains information about an event destination that sends data to Amazon SNS.
+   * @public
    */
-  SnsDestination?: SnsDestination;
+  SnsDestination?: SnsDestination | undefined;
 }
 
-export namespace EventDestination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventDestination): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetConfigurationSetEventDestinationsRequest {
   /**
    * ConfigurationSetName
+   * @public
    */
   ConfigurationSetName: string | undefined;
 }
 
-export namespace GetConfigurationSetEventDestinationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConfigurationSetEventDestinationsRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An object that contains information about an event destination.
+ * @public
  */
 export interface GetConfigurationSetEventDestinationsResponse {
   /**
    * An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
+   * @public
    */
-  EventDestinations?: EventDestination[];
+  EventDestinations?: EventDestination[] | undefined;
 }
 
-export namespace GetConfigurationSetEventDestinationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetConfigurationSetEventDestinationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListConfigurationSetsRequest {
   /**
    * A token returned from a previous call to the API that indicates the position in the list of results.
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * Used to specify the number of items that should be returned in the response.
+   * @public
    */
-  PageSize?: string;
-}
-
-export namespace ListConfigurationSetsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConfigurationSetsRequest): any => ({
-    ...obj,
-  });
+  PageSize?: string | undefined;
 }
 
 /**
  * An object that contains information about the configuration sets for your account in the current region.
+ * @public
  */
 export interface ListConfigurationSetsResponse {
   /**
    * An object that contains a list of configuration sets for your account in the current region.
+   * @public
    */
-  ConfigurationSets?: string[];
+  ConfigurationSets?: string[] | undefined;
 
   /**
    * A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListConfigurationSetsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListConfigurationSetsResponse): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * An object that defines a message that contains unformatted text.
+ * @public
  */
 export interface PlainTextMessageType {
   /**
    * The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.
+   * @public
    */
-  LanguageCode?: string;
+  LanguageCode?: string | undefined;
 
   /**
    * The plain (not SSML-formatted) text to deliver to the recipient.
+   * @public
    */
-  Text?: string;
+  Text?: string | undefined;
 
   /**
    * The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.
+   * @public
    */
-  VoiceId?: string;
-}
-
-export namespace PlainTextMessageType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlainTextMessageType): any => ({
-    ...obj,
-  });
+  VoiceId?: string | undefined;
 }
 
 /**
  * An object that defines a message that contains SSML-formatted text.
+ * @public
  */
 export interface SSMLMessageType {
   /**
    * The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.
+   * @public
    */
-  LanguageCode?: string;
+  LanguageCode?: string | undefined;
 
   /**
    * The SSML-formatted text to deliver to the recipient.
+   * @public
    */
-  Text?: string;
+  Text?: string | undefined;
 
   /**
    * The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.
+   * @public
    */
-  VoiceId?: string;
-}
-
-export namespace SSMLMessageType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SSMLMessageType): any => ({
-    ...obj,
-  });
+  VoiceId?: string | undefined;
 }
 
 /**
  * An object that contains a voice message and information about the recipient that you want to send it to.
+ * @public
  */
 export interface VoiceMessageContent {
   /**
    * An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
+   * @public
    */
-  CallInstructionsMessage?: CallInstructionsMessageType;
+  CallInstructionsMessage?: CallInstructionsMessageType | undefined;
 
   /**
    * An object that defines a message that contains unformatted text.
+   * @public
    */
-  PlainTextMessage?: PlainTextMessageType;
+  PlainTextMessage?: PlainTextMessageType | undefined;
 
   /**
    * An object that defines a message that contains SSML-formatted text.
+   * @public
    */
-  SSMLMessage?: SSMLMessageType;
-}
-
-export namespace VoiceMessageContent {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VoiceMessageContent): any => ({
-    ...obj,
-  });
+  SSMLMessage?: SSMLMessageType | undefined;
 }
 
 /**
  * SendVoiceMessageRequest
+ * @public
  */
 export interface SendVoiceMessageRequest {
   /**
    * The phone number that appears on recipients' devices when they receive the message.
+   * @public
    */
-  CallerId?: string;
+  CallerId?: string | undefined;
 
   /**
    * The name of the configuration set that you want to use to send the message.
+   * @public
    */
-  ConfigurationSetName?: string;
+  ConfigurationSetName?: string | undefined;
 
   /**
    * An object that contains a voice message and information about the recipient that you want to send it to.
+   * @public
    */
-  Content?: VoiceMessageContent;
+  Content?: VoiceMessageContent | undefined;
 
   /**
    * The phone number that you want to send the voice message to.
+   * @public
    */
-  DestinationPhoneNumber?: string;
+  DestinationPhoneNumber?: string | undefined;
 
   /**
    * The phone number that Amazon Pinpoint should use to send the voice message. This isn't necessarily the phone number that appears on recipients' devices when they receive the message, because you can specify a CallerId parameter in the request.
+   * @public
    */
-  OriginationPhoneNumber?: string;
-}
-
-export namespace SendVoiceMessageRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendVoiceMessageRequest): any => ({
-    ...obj,
-  });
+  OriginationPhoneNumber?: string | undefined;
 }
 
 /**
  * An object that that contains the Message ID of a Voice message that was sent successfully.
+ * @public
  */
 export interface SendVoiceMessageResponse {
   /**
    * A unique identifier for the voice message.
+   * @public
    */
-  MessageId?: string;
-}
-
-export namespace SendVoiceMessageResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendVoiceMessageResponse): any => ({
-    ...obj,
-  });
+  MessageId?: string | undefined;
 }
 
 /**
  * UpdateConfigurationSetEventDestinationRequest
+ * @public
  */
 export interface UpdateConfigurationSetEventDestinationRequest {
   /**
    * ConfigurationSetName
+   * @public
    */
   ConfigurationSetName: string | undefined;
 
   /**
    * An object that defines a single event destination.
+   * @public
    */
-  EventDestination?: EventDestinationDefinition;
+  EventDestination?: EventDestinationDefinition | undefined;
 
   /**
    * EventDestinationName
+   * @public
    */
   EventDestinationName: string | undefined;
 }
 
-export namespace UpdateConfigurationSetEventDestinationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConfigurationSetEventDestinationRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * An empty object that indicates that the event destination was updated successfully.
+ * @public
  */
 export interface UpdateConfigurationSetEventDestinationResponse {}
-
-export namespace UpdateConfigurationSetEventDestinationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConfigurationSetEventDestinationResponse): any => ({
-    ...obj,
-  });
-}

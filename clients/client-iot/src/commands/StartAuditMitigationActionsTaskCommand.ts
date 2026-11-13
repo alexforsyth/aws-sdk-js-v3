@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { StartAuditMitigationActionsTaskRequest, StartAuditMitigationActionsTaskResponse } from "../models/models_2";
-import {
-  deserializeAws_restJson1StartAuditMitigationActionsTaskCommand,
-  serializeAws_restJson1StartAuditMitigationActionsTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  StartAuditMitigationActionsTaskRequest,
+  StartAuditMitigationActionsTaskResponse,
+} from "../models/models_2";
+import { StartAuditMitigationActionsTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartAuditMitigationActionsTaskCommand}.
+ */
 export interface StartAuditMitigationActionsTaskCommandInput extends StartAuditMitigationActionsTaskRequest {}
-export interface StartAuditMitigationActionsTaskCommandOutput
-  extends StartAuditMitigationActionsTaskResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link StartAuditMitigationActionsTaskCommand}.
+ */
+export interface StartAuditMitigationActionsTaskCommandOutput extends StartAuditMitigationActionsTaskResponse, __MetadataBearer {}
 
 /**
  * <p>Starts a task that applies a set of mitigation actions to the specified target.</p>
@@ -31,74 +33,81 @@ export interface StartAuditMitigationActionsTaskCommandOutput
  * ```javascript
  * import { IoTClient, StartAuditMitigationActionsTaskCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, StartAuditMitigationActionsTaskCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // StartAuditMitigationActionsTaskRequest
+ *   taskId: "STRING_VALUE", // required
+ *   target: { // AuditMitigationActionsTaskTarget
+ *     auditTaskId: "STRING_VALUE",
+ *     findingIds: [ // FindingIds
+ *       "STRING_VALUE",
+ *     ],
+ *     auditCheckToReasonCodeFilter: { // AuditCheckToReasonCodeFilter
+ *       "<keys>": [ // ReasonForNonComplianceCodes
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   },
+ *   auditCheckToActionsMapping: { // AuditCheckToActionsMapping // required
+ *     "<keys>": [ // MitigationActionNameList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   clientRequestToken: "STRING_VALUE", // required
+ * };
  * const command = new StartAuditMitigationActionsTaskCommand(input);
  * const response = await client.send(command);
+ * // { // StartAuditMitigationActionsTaskResponse
+ * //   taskId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartAuditMitigationActionsTaskCommandInput - {@link StartAuditMitigationActionsTaskCommandInput}
+ * @returns {@link StartAuditMitigationActionsTaskCommandOutput}
  * @see {@link StartAuditMitigationActionsTaskCommandInput} for command's `input` shape.
  * @see {@link StartAuditMitigationActionsTaskCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>A limit has been exceeded.</p>
+ *
+ * @throws {@link TaskAlreadyExistsException} (client fault)
+ *  <p>
+ *             This exception occurs if you attempt to start a task with the same task-id as an existing task but with a different clientRequestToken.
+ *         </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class StartAuditMitigationActionsTaskCommand extends $Command<
-  StartAuditMitigationActionsTaskCommandInput,
-  StartAuditMitigationActionsTaskCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartAuditMitigationActionsTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartAuditMitigationActionsTaskCommandInput, StartAuditMitigationActionsTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "StartAuditMitigationActionsTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartAuditMitigationActionsTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartAuditMitigationActionsTaskResponse.filterSensitiveLog,
+export class StartAuditMitigationActionsTaskCommand extends command<StartAuditMitigationActionsTaskCommandInput, StartAuditMitigationActionsTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartAuditMitigationActionsTask",
+  StartAuditMitigationActionsTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartAuditMitigationActionsTaskRequest;
+      output: StartAuditMitigationActionsTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StartAuditMitigationActionsTaskCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartAuditMitigationActionsTaskCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartAuditMitigationActionsTaskCommandOutput> {
-    return deserializeAws_restJson1StartAuditMitigationActionsTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartAuditMitigationActionsTaskCommandInput;
+      output: StartAuditMitigationActionsTaskCommandOutput;
+    };
+  };
 }

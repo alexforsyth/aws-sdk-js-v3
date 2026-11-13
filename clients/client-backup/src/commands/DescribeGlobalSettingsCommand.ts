@@ -1,98 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupClient";
-import { DescribeGlobalSettingsInput, DescribeGlobalSettingsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeGlobalSettingsCommand,
-  serializeAws_restJson1DescribeGlobalSettingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeGlobalSettingsInput, DescribeGlobalSettingsOutput } from "../models/models_0";
+import { DescribeGlobalSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeGlobalSettingsCommand}.
+ */
 export interface DescribeGlobalSettingsCommandInput extends DescribeGlobalSettingsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeGlobalSettingsCommand}.
+ */
 export interface DescribeGlobalSettingsCommandOutput extends DescribeGlobalSettingsOutput, __MetadataBearer {}
 
 /**
- * <p>Describes whether the Amazon Web Services account is opted in to cross-account backup.
- *          Returns an error if the account is not a member of an Organizations organization.
- *          Example: <code>describe-global-settings --region us-west-2</code>
+ * <p>Describes whether the Amazon Web Services account has enabled different cross-account management options, including cross-account backup, multi-party approval, and delegated administrator. Returns an error if the account is not a member of an Organizations organization. Example: <code>describe-global-settings --region us-west-2</code>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BackupClient, DescribeGlobalSettingsCommand } from "@aws-sdk/client-backup"; // ES Modules import
  * // const { BackupClient, DescribeGlobalSettingsCommand } = require("@aws-sdk/client-backup"); // CommonJS import
+ * // import type { BackupClientConfig } from "@aws-sdk/client-backup";
+ * const config = {}; // type is BackupClientConfig
  * const client = new BackupClient(config);
+ * const input = {};
  * const command = new DescribeGlobalSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeGlobalSettingsOutput
+ * //   GlobalSettings: { // GlobalSettings
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   LastUpdateTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeGlobalSettingsCommandInput - {@link DescribeGlobalSettingsCommandInput}
+ * @returns {@link DescribeGlobalSettingsCommandOutput}
  * @see {@link DescribeGlobalSettingsCommandInput} for command's `input` shape.
  * @see {@link DescribeGlobalSettingsCommandOutput} for command's `response` shape.
- * @see {@link BackupClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BackupClientResolvedConfig | config} for BackupClient's `config` shape.
  *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *          parameter is of the wrong type.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link BackupServiceException}
+ * <p>Base exception class for all service exceptions from Backup service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeGlobalSettingsCommand extends $Command<
-  DescribeGlobalSettingsCommandInput,
-  DescribeGlobalSettingsCommandOutput,
-  BackupClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeGlobalSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeGlobalSettingsCommandInput, DescribeGlobalSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupClient";
-    const commandName = "DescribeGlobalSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeGlobalSettingsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeGlobalSettingsOutput.filterSensitiveLog,
+export class DescribeGlobalSettingsCommand extends command<DescribeGlobalSettingsCommandInput, DescribeGlobalSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeGlobalSettings",
+  DescribeGlobalSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeGlobalSettingsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeGlobalSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeGlobalSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeGlobalSettingsCommandOutput> {
-    return deserializeAws_restJson1DescribeGlobalSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeGlobalSettingsCommandInput;
+      output: DescribeGlobalSettingsCommandOutput;
+    };
+  };
 }

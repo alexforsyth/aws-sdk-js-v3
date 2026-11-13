@@ -1,105 +1,126 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { GetReservedInstancesExchangeQuoteRequest, GetReservedInstancesExchangeQuoteResult } from "../models/models_4";
-import {
-  deserializeAws_ec2GetReservedInstancesExchangeQuoteCommand,
-  serializeAws_ec2GetReservedInstancesExchangeQuoteCommand,
-} from "../protocols/Aws_ec2";
-
-export interface GetReservedInstancesExchangeQuoteCommandInput extends GetReservedInstancesExchangeQuoteRequest {}
-export interface GetReservedInstancesExchangeQuoteCommandOutput
-  extends GetReservedInstancesExchangeQuoteResult,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetReservedInstancesExchangeQuoteRequest,
+  GetReservedInstancesExchangeQuoteResult,
+} from "../models/models_6";
+import { GetReservedInstancesExchangeQuote$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns a quote and exchange information for exchanging one or more specified
- *             Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange
- *             cannot be performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetReservedInstancesExchangeQuoteCommand}.
+ */
+export interface GetReservedInstancesExchangeQuoteCommandInput extends GetReservedInstancesExchangeQuoteRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetReservedInstancesExchangeQuoteCommand}.
+ */
+export interface GetReservedInstancesExchangeQuoteCommandOutput extends GetReservedInstancesExchangeQuoteResult, __MetadataBearer {}
+
+/**
+ * <p>Returns a quote and exchange information for exchanging one or more specified Convertible
+ *       Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be
+ *       performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, GetReservedInstancesExchangeQuoteCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetReservedInstancesExchangeQuoteCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetReservedInstancesExchangeQuoteRequest
+ *   DryRun: true || false,
+ *   ReservedInstanceIds: [ // ReservedInstanceIdSet // required
+ *     "STRING_VALUE",
+ *   ],
+ *   TargetConfigurations: [ // TargetConfigurationRequestSet
+ *     { // TargetConfigurationRequest
+ *       InstanceCount: Number("int"),
+ *       OfferingId: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new GetReservedInstancesExchangeQuoteCommand(input);
  * const response = await client.send(command);
+ * // { // GetReservedInstancesExchangeQuoteResult
+ * //   CurrencyCode: "STRING_VALUE",
+ * //   IsValidExchange: true || false,
+ * //   OutputReservedInstancesWillExpireAt: new Date("TIMESTAMP"),
+ * //   PaymentDue: "STRING_VALUE",
+ * //   ReservedInstanceValueRollup: { // ReservationValue
+ * //     HourlyPrice: "STRING_VALUE",
+ * //     RemainingTotalValue: "STRING_VALUE",
+ * //     RemainingUpfrontValue: "STRING_VALUE",
+ * //   },
+ * //   ReservedInstanceValueSet: [ // ReservedInstanceReservationValueSet
+ * //     { // ReservedInstanceReservationValue
+ * //       ReservationValue: {
+ * //         HourlyPrice: "STRING_VALUE",
+ * //         RemainingTotalValue: "STRING_VALUE",
+ * //         RemainingUpfrontValue: "STRING_VALUE",
+ * //       },
+ * //       ReservedInstanceId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   TargetConfigurationValueRollup: {
+ * //     HourlyPrice: "STRING_VALUE",
+ * //     RemainingTotalValue: "STRING_VALUE",
+ * //     RemainingUpfrontValue: "STRING_VALUE",
+ * //   },
+ * //   TargetConfigurationValueSet: [ // TargetReservationValueSet
+ * //     { // TargetReservationValue
+ * //       ReservationValue: {
+ * //         HourlyPrice: "STRING_VALUE",
+ * //         RemainingTotalValue: "STRING_VALUE",
+ * //         RemainingUpfrontValue: "STRING_VALUE",
+ * //       },
+ * //       TargetConfiguration: { // TargetConfiguration
+ * //         InstanceCount: Number("int"),
+ * //         OfferingId: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   ValidationFailureReason: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetReservedInstancesExchangeQuoteCommandInput - {@link GetReservedInstancesExchangeQuoteCommandInput}
+ * @returns {@link GetReservedInstancesExchangeQuoteCommandOutput}
  * @see {@link GetReservedInstancesExchangeQuoteCommandInput} for command's `input` shape.
  * @see {@link GetReservedInstancesExchangeQuoteCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetReservedInstancesExchangeQuoteCommand extends $Command<
-  GetReservedInstancesExchangeQuoteCommandInput,
-  GetReservedInstancesExchangeQuoteCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetReservedInstancesExchangeQuoteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetReservedInstancesExchangeQuoteCommandInput, GetReservedInstancesExchangeQuoteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetReservedInstancesExchangeQuoteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetReservedInstancesExchangeQuoteRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetReservedInstancesExchangeQuoteResult.filterSensitiveLog,
+export class GetReservedInstancesExchangeQuoteCommand extends command<GetReservedInstancesExchangeQuoteCommandInput, GetReservedInstancesExchangeQuoteCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetReservedInstancesExchangeQuote",
+  GetReservedInstancesExchangeQuote$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReservedInstancesExchangeQuoteRequest;
+      output: GetReservedInstancesExchangeQuoteResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetReservedInstancesExchangeQuoteCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2GetReservedInstancesExchangeQuoteCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetReservedInstancesExchangeQuoteCommandOutput> {
-    return deserializeAws_ec2GetReservedInstancesExchangeQuoteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetReservedInstancesExchangeQuoteCommandInput;
+      output: GetReservedInstancesExchangeQuoteCommandOutput;
+    };
+  };
 }

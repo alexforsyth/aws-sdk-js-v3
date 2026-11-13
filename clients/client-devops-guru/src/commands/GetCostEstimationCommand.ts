@@ -1,28 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DevOpsGuruClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DevOpsGuruClient";
-import { GetCostEstimationRequest, GetCostEstimationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetCostEstimationCommand,
-  serializeAws_restJson1GetCostEstimationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCostEstimationRequest, GetCostEstimationResponse } from "../models/models_0";
+import { GetCostEstimation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCostEstimationCommand}.
+ */
 export interface GetCostEstimationCommandInput extends GetCostEstimationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCostEstimationCommand}.
+ */
 export interface GetCostEstimationCommandOutput extends GetCostEstimationResponse, __MetadataBearer {}
 
 /**
- * <p>Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources.
+ * <p>Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon Web Services resources.
  * 			For more information,
  * 			see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html">Estimate your
  * 			Amazon DevOps Guru costs</a> and
@@ -32,68 +33,96 @@ export interface GetCostEstimationCommandOutput extends GetCostEstimationRespons
  * ```javascript
  * import { DevOpsGuruClient, GetCostEstimationCommand } from "@aws-sdk/client-devops-guru"; // ES Modules import
  * // const { DevOpsGuruClient, GetCostEstimationCommand } = require("@aws-sdk/client-devops-guru"); // CommonJS import
+ * // import type { DevOpsGuruClientConfig } from "@aws-sdk/client-devops-guru";
+ * const config = {}; // type is DevOpsGuruClientConfig
  * const client = new DevOpsGuruClient(config);
+ * const input = { // GetCostEstimationRequest
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetCostEstimationCommand(input);
  * const response = await client.send(command);
+ * // { // GetCostEstimationResponse
+ * //   ResourceCollection: { // CostEstimationResourceCollectionFilter
+ * //     CloudFormation: { // CloudFormationCostEstimationResourceCollectionFilter
+ * //       StackNames: [ // CostEstimationStackNames
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     Tags: [ // TagCostEstimationResourceCollectionFilters
+ * //       { // TagCostEstimationResourceCollectionFilter
+ * //         AppBoundaryKey: "STRING_VALUE", // required
+ * //         TagValues: [ // CostEstimationTagValues // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * //   Status: "ONGOING" || "COMPLETED",
+ * //   Costs: [ // ServiceResourceCosts
+ * //     { // ServiceResourceCost
+ * //       Type: "STRING_VALUE",
+ * //       State: "ACTIVE" || "INACTIVE",
+ * //       Count: Number("int"),
+ * //       UnitCost: Number("double"),
+ * //       Cost: Number("double"),
+ * //     },
+ * //   ],
+ * //   TimeRange: { // CostEstimationTimeRange
+ * //     StartTime: new Date("TIMESTAMP"),
+ * //     EndTime: new Date("TIMESTAMP"),
+ * //   },
+ * //   TotalCost: Number("double"),
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCostEstimationCommandInput - {@link GetCostEstimationCommandInput}
+ * @returns {@link GetCostEstimationCommandOutput}
  * @see {@link GetCostEstimationCommandInput} for command's `input` shape.
  * @see {@link GetCostEstimationCommandOutput} for command's `response` shape.
- * @see {@link DevOpsGuruClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DevOpsGuruClientResolvedConfig | config} for DevOpsGuruClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> You don't have permissions to perform the requested operation. The user or role that
+ * 			is making the request must have at least one IAM permissions policy attached that grants
+ * 			the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access Management</a> in the
+ * 				<i>IAM User Guide</i>. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal failure in an Amazon service occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource could not be found</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to a request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Contains information about data passed in to a field during a request that is not
+ * 			valid. </p>
+ *
+ * @throws {@link DevOpsGuruServiceException}
+ * <p>Base exception class for all service exceptions from DevOpsGuru service.</p>
+ *
+ *
+ * @public
  */
-export class GetCostEstimationCommand extends $Command<
-  GetCostEstimationCommandInput,
-  GetCostEstimationCommandOutput,
-  DevOpsGuruClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCostEstimationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DevOpsGuruClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCostEstimationCommandInput, GetCostEstimationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DevOpsGuruClient";
-    const commandName = "GetCostEstimationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCostEstimationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCostEstimationResponse.filterSensitiveLog,
+export class GetCostEstimationCommand extends command<GetCostEstimationCommandInput, GetCostEstimationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCostEstimation",
+  GetCostEstimation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCostEstimationRequest;
+      output: GetCostEstimationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCostEstimationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCostEstimationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCostEstimationCommandOutput> {
-    return deserializeAws_restJson1GetCostEstimationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCostEstimationCommandInput;
+      output: GetCostEstimationCommandOutput;
+    };
+  };
 }

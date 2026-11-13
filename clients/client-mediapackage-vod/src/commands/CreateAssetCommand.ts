@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaPackageVodClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaPackageVodClient";
-import { CreateAssetRequest, CreateAssetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateAssetCommand,
-  serializeAws_restJson1CreateAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAssetRequest, CreateAssetResponse } from "../models/models_0";
+import { CreateAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAssetCommand}.
+ */
 export interface CreateAssetCommandInput extends CreateAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAssetCommand}.
+ */
 export interface CreateAssetCommandOutput extends CreateAssetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,88 @@ export interface CreateAssetCommandOutput extends CreateAssetResponse, __Metadat
  * ```javascript
  * import { MediaPackageVodClient, CreateAssetCommand } from "@aws-sdk/client-mediapackage-vod"; // ES Modules import
  * // const { MediaPackageVodClient, CreateAssetCommand } = require("@aws-sdk/client-mediapackage-vod"); // CommonJS import
+ * // import type { MediaPackageVodClientConfig } from "@aws-sdk/client-mediapackage-vod";
+ * const config = {}; // type is MediaPackageVodClientConfig
  * const client = new MediaPackageVodClient(config);
+ * const input = { // CreateAssetRequest
+ *   Id: "STRING_VALUE", // required
+ *   PackagingGroupId: "STRING_VALUE", // required
+ *   ResourceId: "STRING_VALUE",
+ *   SourceArn: "STRING_VALUE", // required
+ *   SourceRoleArn: "STRING_VALUE", // required
+ *   Tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateAssetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAssetResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreatedAt: "STRING_VALUE",
+ * //   EgressEndpoints: [ // __listOfEgressEndpoint
+ * //     { // EgressEndpoint
+ * //       PackagingConfigurationId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Url: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Id: "STRING_VALUE",
+ * //   PackagingGroupId: "STRING_VALUE",
+ * //   ResourceId: "STRING_VALUE",
+ * //   SourceArn: "STRING_VALUE",
+ * //   SourceRoleArn: "STRING_VALUE",
+ * //   Tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateAssetCommandInput - {@link CreateAssetCommandInput}
+ * @returns {@link CreateAssetCommandOutput}
  * @see {@link CreateAssetCommandInput} for command's `input` shape.
  * @see {@link CreateAssetCommandOutput} for command's `response` shape.
- * @see {@link MediaPackageVodClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaPackageVodClientResolvedConfig | config} for MediaPackageVodClient's `config` shape.
  *
+ * @throws {@link ForbiddenException} (client fault)
+ *  The client is not authorized to access the requested resource.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The requested resource does not exist.
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  An unexpected error occurred.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  The client has exceeded their resource or throttling limits.
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  The parameters sent in the request are not valid.
+ *
+ * @throws {@link MediaPackageVodServiceException}
+ * <p>Base exception class for all service exceptions from MediaPackageVod service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAssetCommand extends $Command<
-  CreateAssetCommandInput,
-  CreateAssetCommandOutput,
-  MediaPackageVodClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaPackageVodClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAssetCommandInput, CreateAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaPackageVodClient";
-    const commandName = "CreateAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAssetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAssetResponse.filterSensitiveLog,
+export class CreateAssetCommand extends command<CreateAssetCommandInput, CreateAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAsset",
+  CreateAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAssetRequest;
+      output: CreateAssetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAssetCommandOutput> {
-    return deserializeAws_restJson1CreateAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAssetCommandInput;
+      output: CreateAssetCommandOutput;
+    };
+  };
 }

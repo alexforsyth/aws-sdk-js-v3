@@ -1,188 +1,228 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultTranscribeHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   CreateCallAnalyticsCategoryCommandInput,
   CreateCallAnalyticsCategoryCommandOutput,
 } from "./commands/CreateCallAnalyticsCategoryCommand";
-import {
+import type {
   CreateLanguageModelCommandInput,
   CreateLanguageModelCommandOutput,
 } from "./commands/CreateLanguageModelCommand";
-import {
+import type {
   CreateMedicalVocabularyCommandInput,
   CreateMedicalVocabularyCommandOutput,
 } from "./commands/CreateMedicalVocabularyCommand";
-import { CreateVocabularyCommandInput, CreateVocabularyCommandOutput } from "./commands/CreateVocabularyCommand";
-import {
+import type { CreateVocabularyCommandInput, CreateVocabularyCommandOutput } from "./commands/CreateVocabularyCommand";
+import type {
   CreateVocabularyFilterCommandInput,
   CreateVocabularyFilterCommandOutput,
 } from "./commands/CreateVocabularyFilterCommand";
-import {
+import type {
   DeleteCallAnalyticsCategoryCommandInput,
   DeleteCallAnalyticsCategoryCommandOutput,
 } from "./commands/DeleteCallAnalyticsCategoryCommand";
-import {
+import type {
   DeleteCallAnalyticsJobCommandInput,
   DeleteCallAnalyticsJobCommandOutput,
 } from "./commands/DeleteCallAnalyticsJobCommand";
-import {
+import type {
   DeleteLanguageModelCommandInput,
   DeleteLanguageModelCommandOutput,
 } from "./commands/DeleteLanguageModelCommand";
-import {
+import type {
+  DeleteMedicalScribeJobCommandInput,
+  DeleteMedicalScribeJobCommandOutput,
+} from "./commands/DeleteMedicalScribeJobCommand";
+import type {
   DeleteMedicalTranscriptionJobCommandInput,
   DeleteMedicalTranscriptionJobCommandOutput,
 } from "./commands/DeleteMedicalTranscriptionJobCommand";
-import {
+import type {
   DeleteMedicalVocabularyCommandInput,
   DeleteMedicalVocabularyCommandOutput,
 } from "./commands/DeleteMedicalVocabularyCommand";
-import {
+import type {
   DeleteTranscriptionJobCommandInput,
   DeleteTranscriptionJobCommandOutput,
 } from "./commands/DeleteTranscriptionJobCommand";
-import { DeleteVocabularyCommandInput, DeleteVocabularyCommandOutput } from "./commands/DeleteVocabularyCommand";
-import {
+import type { DeleteVocabularyCommandInput, DeleteVocabularyCommandOutput } from "./commands/DeleteVocabularyCommand";
+import type {
   DeleteVocabularyFilterCommandInput,
   DeleteVocabularyFilterCommandOutput,
 } from "./commands/DeleteVocabularyFilterCommand";
-import {
+import type {
   DescribeLanguageModelCommandInput,
   DescribeLanguageModelCommandOutput,
 } from "./commands/DescribeLanguageModelCommand";
-import {
+import type {
   GetCallAnalyticsCategoryCommandInput,
   GetCallAnalyticsCategoryCommandOutput,
 } from "./commands/GetCallAnalyticsCategoryCommand";
-import {
+import type {
   GetCallAnalyticsJobCommandInput,
   GetCallAnalyticsJobCommandOutput,
 } from "./commands/GetCallAnalyticsJobCommand";
-import {
+import type {
+  GetMedicalScribeJobCommandInput,
+  GetMedicalScribeJobCommandOutput,
+} from "./commands/GetMedicalScribeJobCommand";
+import type {
   GetMedicalTranscriptionJobCommandInput,
   GetMedicalTranscriptionJobCommandOutput,
 } from "./commands/GetMedicalTranscriptionJobCommand";
-import {
+import type {
   GetMedicalVocabularyCommandInput,
   GetMedicalVocabularyCommandOutput,
 } from "./commands/GetMedicalVocabularyCommand";
-import {
+import type {
   GetTranscriptionJobCommandInput,
   GetTranscriptionJobCommandOutput,
 } from "./commands/GetTranscriptionJobCommand";
-import { GetVocabularyCommandInput, GetVocabularyCommandOutput } from "./commands/GetVocabularyCommand";
-import {
+import type { GetVocabularyCommandInput, GetVocabularyCommandOutput } from "./commands/GetVocabularyCommand";
+import type {
   GetVocabularyFilterCommandInput,
   GetVocabularyFilterCommandOutput,
 } from "./commands/GetVocabularyFilterCommand";
-import {
+import type {
   ListCallAnalyticsCategoriesCommandInput,
   ListCallAnalyticsCategoriesCommandOutput,
 } from "./commands/ListCallAnalyticsCategoriesCommand";
-import {
+import type {
   ListCallAnalyticsJobsCommandInput,
   ListCallAnalyticsJobsCommandOutput,
 } from "./commands/ListCallAnalyticsJobsCommand";
-import { ListLanguageModelsCommandInput, ListLanguageModelsCommandOutput } from "./commands/ListLanguageModelsCommand";
-import {
+import type {
+  ListLanguageModelsCommandInput,
+  ListLanguageModelsCommandOutput,
+} from "./commands/ListLanguageModelsCommand";
+import type {
+  ListMedicalScribeJobsCommandInput,
+  ListMedicalScribeJobsCommandOutput,
+} from "./commands/ListMedicalScribeJobsCommand";
+import type {
   ListMedicalTranscriptionJobsCommandInput,
   ListMedicalTranscriptionJobsCommandOutput,
 } from "./commands/ListMedicalTranscriptionJobsCommand";
-import {
+import type {
   ListMedicalVocabulariesCommandInput,
   ListMedicalVocabulariesCommandOutput,
 } from "./commands/ListMedicalVocabulariesCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListTranscriptionJobsCommandInput,
   ListTranscriptionJobsCommandOutput,
 } from "./commands/ListTranscriptionJobsCommand";
-import { ListVocabulariesCommandInput, ListVocabulariesCommandOutput } from "./commands/ListVocabulariesCommand";
-import {
+import type { ListVocabulariesCommandInput, ListVocabulariesCommandOutput } from "./commands/ListVocabulariesCommand";
+import type {
   ListVocabularyFiltersCommandInput,
   ListVocabularyFiltersCommandOutput,
 } from "./commands/ListVocabularyFiltersCommand";
-import {
+import type {
   StartCallAnalyticsJobCommandInput,
   StartCallAnalyticsJobCommandOutput,
 } from "./commands/StartCallAnalyticsJobCommand";
-import {
+import type {
+  StartMedicalScribeJobCommandInput,
+  StartMedicalScribeJobCommandOutput,
+} from "./commands/StartMedicalScribeJobCommand";
+import type {
   StartMedicalTranscriptionJobCommandInput,
   StartMedicalTranscriptionJobCommandOutput,
 } from "./commands/StartMedicalTranscriptionJobCommand";
-import {
+import type {
   StartTranscriptionJobCommandInput,
   StartTranscriptionJobCommandOutput,
 } from "./commands/StartTranscriptionJobCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateCallAnalyticsCategoryCommandInput,
   UpdateCallAnalyticsCategoryCommandOutput,
 } from "./commands/UpdateCallAnalyticsCategoryCommand";
-import {
+import type {
+  UpdateLanguageModelCommandInput,
+  UpdateLanguageModelCommandOutput,
+} from "./commands/UpdateLanguageModelCommand";
+import type {
   UpdateMedicalVocabularyCommandInput,
   UpdateMedicalVocabularyCommandOutput,
 } from "./commands/UpdateMedicalVocabularyCommand";
-import { UpdateVocabularyCommandInput, UpdateVocabularyCommandOutput } from "./commands/UpdateVocabularyCommand";
-import {
+import type { UpdateVocabularyCommandInput, UpdateVocabularyCommandOutput } from "./commands/UpdateVocabularyCommand";
+import type {
   UpdateVocabularyFilterCommandInput,
   UpdateVocabularyFilterCommandOutput,
 } from "./commands/UpdateVocabularyFilterCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CreateCallAnalyticsCategoryCommandInput
   | CreateLanguageModelCommandInput
@@ -192,6 +232,7 @@ export type ServiceInputTypes =
   | DeleteCallAnalyticsCategoryCommandInput
   | DeleteCallAnalyticsJobCommandInput
   | DeleteLanguageModelCommandInput
+  | DeleteMedicalScribeJobCommandInput
   | DeleteMedicalTranscriptionJobCommandInput
   | DeleteMedicalVocabularyCommandInput
   | DeleteTranscriptionJobCommandInput
@@ -200,6 +241,7 @@ export type ServiceInputTypes =
   | DescribeLanguageModelCommandInput
   | GetCallAnalyticsCategoryCommandInput
   | GetCallAnalyticsJobCommandInput
+  | GetMedicalScribeJobCommandInput
   | GetMedicalTranscriptionJobCommandInput
   | GetMedicalVocabularyCommandInput
   | GetTranscriptionJobCommandInput
@@ -208,6 +250,7 @@ export type ServiceInputTypes =
   | ListCallAnalyticsCategoriesCommandInput
   | ListCallAnalyticsJobsCommandInput
   | ListLanguageModelsCommandInput
+  | ListMedicalScribeJobsCommandInput
   | ListMedicalTranscriptionJobsCommandInput
   | ListMedicalVocabulariesCommandInput
   | ListTagsForResourceCommandInput
@@ -215,15 +258,20 @@ export type ServiceInputTypes =
   | ListVocabulariesCommandInput
   | ListVocabularyFiltersCommandInput
   | StartCallAnalyticsJobCommandInput
+  | StartMedicalScribeJobCommandInput
   | StartMedicalTranscriptionJobCommandInput
   | StartTranscriptionJobCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
   | UpdateCallAnalyticsCategoryCommandInput
+  | UpdateLanguageModelCommandInput
   | UpdateMedicalVocabularyCommandInput
   | UpdateVocabularyCommandInput
   | UpdateVocabularyFilterCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CreateCallAnalyticsCategoryCommandOutput
   | CreateLanguageModelCommandOutput
@@ -233,6 +281,7 @@ export type ServiceOutputTypes =
   | DeleteCallAnalyticsCategoryCommandOutput
   | DeleteCallAnalyticsJobCommandOutput
   | DeleteLanguageModelCommandOutput
+  | DeleteMedicalScribeJobCommandOutput
   | DeleteMedicalTranscriptionJobCommandOutput
   | DeleteMedicalVocabularyCommandOutput
   | DeleteTranscriptionJobCommandOutput
@@ -241,6 +290,7 @@ export type ServiceOutputTypes =
   | DescribeLanguageModelCommandOutput
   | GetCallAnalyticsCategoryCommandOutput
   | GetCallAnalyticsJobCommandOutput
+  | GetMedicalScribeJobCommandOutput
   | GetMedicalTranscriptionJobCommandOutput
   | GetMedicalVocabularyCommandOutput
   | GetTranscriptionJobCommandOutput
@@ -249,6 +299,7 @@ export type ServiceOutputTypes =
   | ListCallAnalyticsCategoriesCommandOutput
   | ListCallAnalyticsJobsCommandOutput
   | ListLanguageModelsCommandOutput
+  | ListMedicalScribeJobsCommandOutput
   | ListMedicalTranscriptionJobsCommandOutput
   | ListMedicalVocabulariesCommandOutput
   | ListTagsForResourceCommandOutput
@@ -256,27 +307,32 @@ export type ServiceOutputTypes =
   | ListVocabulariesCommandOutput
   | ListVocabularyFiltersCommandOutput
   | StartCallAnalyticsJobCommandOutput
+  | StartMedicalScribeJobCommandOutput
   | StartMedicalTranscriptionJobCommandOutput
   | StartTranscriptionJobCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
   | UpdateCallAnalyticsCategoryCommandOutput
+  | UpdateLanguageModelCommandOutput
   | UpdateMedicalVocabularyCommandOutput
   | UpdateVocabularyCommandOutput
   | UpdateVocabularyFilterCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -288,7 +344,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -327,25 +383,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -358,63 +405,134 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type TranscribeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of TranscribeClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type TranscribeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of TranscribeClient class constructor that set the region, credentials and other options.
  */
 export interface TranscribeClientConfig extends TranscribeClientConfigType {}
 
-type TranscribeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of TranscribeClient class. This is resolved and normalized from the {@link TranscribeClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type TranscribeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of TranscribeClient class. This is resolved and normalized from the {@link TranscribeClientConfig | constructor configuration interface}.
  */
 export interface TranscribeClientResolvedConfig extends TranscribeClientResolvedConfigType {}
 
 /**
- * <p>Operations and objects for transcribing speech to text.</p>
+ * <p>Amazon Transcribe offers three main types of batch transcription: <b>Standard</b>, <b>Medical</b>, and
+ *                 <b>Call Analytics</b>.</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <b>Standard transcriptions</b> are the most common
+ *                     option. Refer to  for details.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <b>Medical transcriptions</b> are tailored to
+ *                     medical professionals and incorporate medical terms. A common use case for this
+ *                     service is transcribing doctor-patient dialogue into after-visit notes. Refer to
+ *                          for details.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <b>Call Analytics transcriptions</b> are designed
+ *                     for use with call center audio on two different channels; if you're looking for
+ *                     insight into customer service calls, use this option. Refer to  for details.</p>
+ *             </li>
+ *          </ul>
+ * @public
  */
 export class TranscribeClient extends __Client<
   __HttpHandlerOptions,
@@ -427,22 +545,36 @@ export class TranscribeClient extends __Client<
    */
   readonly config: TranscribeClientResolvedConfig;
 
-  constructor(configuration: TranscribeClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<TranscribeClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultTranscribeHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: TranscribeClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

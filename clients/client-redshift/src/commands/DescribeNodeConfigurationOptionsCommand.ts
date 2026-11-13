@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeNodeConfigurationOptionsMessage, NodeConfigurationOptionsMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeNodeConfigurationOptionsCommand,
-  serializeAws_queryDescribeNodeConfigurationOptionsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeNodeConfigurationOptionsMessage, NodeConfigurationOptionsMessage } from "../models/models_0";
+import { DescribeNodeConfigurationOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNodeConfigurationOptionsCommand}.
+ */
 export interface DescribeNodeConfigurationOptionsCommandInput extends DescribeNodeConfigurationOptionsMessage {}
-export interface DescribeNodeConfigurationOptionsCommandOutput
-  extends NodeConfigurationOptionsMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNodeConfigurationOptionsCommand}.
+ */
+export interface DescribeNodeConfigurationOptionsCommandOutput extends NodeConfigurationOptionsMessage, __MetadataBearer {}
 
 /**
  * <p>Returns properties of possible node configurations such as node type, number of nodes, and
@@ -31,74 +30,88 @@ export interface DescribeNodeConfigurationOptionsCommandOutput
  * ```javascript
  * import { RedshiftClient, DescribeNodeConfigurationOptionsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeNodeConfigurationOptionsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeNodeConfigurationOptionsMessage
+ *   ActionType: "restore-cluster" || "recommend-node-config" || "resize-cluster", // required
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   SnapshotIdentifier: "STRING_VALUE",
+ *   SnapshotArn: "STRING_VALUE",
+ *   OwnerAccount: "STRING_VALUE",
+ *   Filters: [ // NodeConfigurationOptionsFilterList
+ *     { // NodeConfigurationOptionsFilter
+ *       Name: "NodeType" || "NumberOfNodes" || "EstimatedDiskUtilizationPercent" || "Mode",
+ *       Operator: "eq" || "lt" || "gt" || "le" || "ge" || "in" || "between",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribeNodeConfigurationOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // NodeConfigurationOptionsMessage
+ * //   NodeConfigurationOptionList: [ // NodeConfigurationOptionList
+ * //     { // NodeConfigurationOption
+ * //       NodeType: "STRING_VALUE",
+ * //       NumberOfNodes: Number("int"),
+ * //       EstimatedDiskUtilizationPercent: Number("double"),
+ * //       Mode: "standard" || "high-performance",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeNodeConfigurationOptionsCommandInput - {@link DescribeNodeConfigurationOptionsCommandInput}
+ * @returns {@link DescribeNodeConfigurationOptionsCommandOutput}
  * @see {@link DescribeNodeConfigurationOptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeNodeConfigurationOptionsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link AccessToSnapshotDeniedFault} (client fault)
+ *  <p>The owner of the specified snapshot has not authorized your account to access the
+ *             snapshot.</p>
+ *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link ClusterSnapshotNotFoundFault} (client fault)
+ *  <p>The snapshot identifier does not refer to an existing cluster snapshot.</p>
+ *
+ * @throws {@link InvalidClusterSnapshotStateFault} (client fault)
+ *  <p>The specified cluster snapshot is not in the <code>available</code> state, or other
+ *             accounts are authorized to access the snapshot. </p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeNodeConfigurationOptionsCommand extends $Command<
-  DescribeNodeConfigurationOptionsCommandInput,
-  DescribeNodeConfigurationOptionsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNodeConfigurationOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNodeConfigurationOptionsCommandInput, DescribeNodeConfigurationOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeNodeConfigurationOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNodeConfigurationOptionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: NodeConfigurationOptionsMessage.filterSensitiveLog,
+export class DescribeNodeConfigurationOptionsCommand extends command<DescribeNodeConfigurationOptionsCommandInput, DescribeNodeConfigurationOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNodeConfigurationOptions",
+  DescribeNodeConfigurationOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNodeConfigurationOptionsMessage;
+      output: NodeConfigurationOptionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeNodeConfigurationOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeNodeConfigurationOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeNodeConfigurationOptionsCommandOutput> {
-    return deserializeAws_queryDescribeNodeConfigurationOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNodeConfigurationOptionsCommandInput;
+      output: DescribeNodeConfigurationOptionsCommandOutput;
+    };
+  };
 }

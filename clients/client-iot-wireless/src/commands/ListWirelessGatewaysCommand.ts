@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import { ListWirelessGatewaysRequest, ListWirelessGatewaysResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListWirelessGatewaysCommand,
-  serializeAws_restJson1ListWirelessGatewaysCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWirelessGatewaysRequest, ListWirelessGatewaysResponse } from "../models/models_0";
+import { ListWirelessGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWirelessGatewaysCommand}.
+ */
 export interface ListWirelessGatewaysCommandInput extends ListWirelessGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWirelessGatewaysCommand}.
+ */
 export interface ListWirelessGatewaysCommandOutput extends ListWirelessGatewaysResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,91 @@ export interface ListWirelessGatewaysCommandOutput extends ListWirelessGatewaysR
  * ```javascript
  * import { IoTWirelessClient, ListWirelessGatewaysCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, ListWirelessGatewaysCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // ListWirelessGatewaysRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListWirelessGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // ListWirelessGatewaysResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   WirelessGatewayList: [ // WirelessGatewayStatisticsList
+ * //     { // WirelessGatewayStatistics
+ * //       Arn: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       LoRaWAN: { // LoRaWANGateway
+ * //         GatewayEui: "STRING_VALUE",
+ * //         RfRegion: "STRING_VALUE",
+ * //         JoinEuiFilters: [ // JoinEuiFilters
+ * //           [ // JoinEuiRange
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         ],
+ * //         NetIdFilters: [ // NetIdFilters
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SubBands: [ // SubBands
+ * //           Number("int"),
+ * //         ],
+ * //         Beaconing: { // Beaconing
+ * //           DataRate: Number("int"),
+ * //           Frequencies: [ // BeaconingFrequencies
+ * //             Number("int"),
+ * //           ],
+ * //         },
+ * //         MaxEirp: Number("float"),
+ * //       },
+ * //       LastUplinkReceivedAt: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListWirelessGatewaysCommandInput - {@link ListWirelessGatewaysCommandInput}
+ * @returns {@link ListWirelessGatewaysCommandOutput}
  * @see {@link ListWirelessGatewaysCommandInput} for command's `input` shape.
  * @see {@link ListWirelessGatewaysCommandOutput} for command's `response` shape.
- * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class ListWirelessGatewaysCommand extends $Command<
-  ListWirelessGatewaysCommandInput,
-  ListWirelessGatewaysCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListWirelessGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListWirelessGatewaysCommandInput, ListWirelessGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "ListWirelessGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListWirelessGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListWirelessGatewaysResponse.filterSensitiveLog,
+export class ListWirelessGatewaysCommand extends command<ListWirelessGatewaysCommandInput, ListWirelessGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWirelessGateways",
+  ListWirelessGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWirelessGatewaysRequest;
+      output: ListWirelessGatewaysResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListWirelessGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListWirelessGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListWirelessGatewaysCommandOutput> {
-    return deserializeAws_restJson1ListWirelessGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListWirelessGatewaysCommandInput;
+      output: ListWirelessGatewaysCommandOutput;
+    };
+  };
 }

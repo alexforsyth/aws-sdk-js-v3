@@ -1,25 +1,25 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAccessPointPolicyRequest, GetAccessPointPolicyResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetAccessPointPolicyCommand,
-  serializeAws_restXmlGetAccessPointPolicyCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep3, _mw1, command } from "../commandBuilder";
+import type { GetAccessPointPolicyRequest, GetAccessPointPolicyResult } from "../models/models_0";
+import { GetAccessPointPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccessPointPolicyCommand}.
+ */
 export interface GetAccessPointPolicyCommandInput extends GetAccessPointPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccessPointPolicyCommand}.
+ */
 export interface GetAccessPointPolicyCommandOutput extends GetAccessPointPolicyResult, __MetadataBearer {}
 
 /**
@@ -42,69 +42,48 @@ export interface GetAccessPointPolicyCommandOutput extends GetAccessPointPolicyR
  * ```javascript
  * import { S3ControlClient, GetAccessPointPolicyCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetAccessPointPolicyCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetAccessPointPolicyRequest
+ *   AccountId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetAccessPointPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetAccessPointPolicyResult
+ * //   Policy: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetAccessPointPolicyCommandInput - {@link GetAccessPointPolicyCommandInput}
+ * @returns {@link GetAccessPointPolicyCommandOutput}
  * @see {@link GetAccessPointPolicyCommandInput} for command's `input` shape.
  * @see {@link GetAccessPointPolicyCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetAccessPointPolicyCommand extends $Command<
-  GetAccessPointPolicyCommandInput,
-  GetAccessPointPolicyCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAccessPointPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAccessPointPolicyCommandInput, GetAccessPointPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetAccessPointPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAccessPointPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAccessPointPolicyResult.filterSensitiveLog,
+export class GetAccessPointPolicyCommand extends command<GetAccessPointPolicyCommandInput, GetAccessPointPolicyCommandOutput>(
+  _ep3,
+  _mw1,
+  "GetAccessPointPolicy",
+  GetAccessPointPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAccessPointPolicyRequest;
+      output: GetAccessPointPolicyResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAccessPointPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetAccessPointPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAccessPointPolicyCommandOutput> {
-    return deserializeAws_restXmlGetAccessPointPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAccessPointPolicyCommandInput;
+      output: GetAccessPointPolicyCommandOutput;
+    };
+  };
 }

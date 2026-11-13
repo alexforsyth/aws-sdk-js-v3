@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassClient";
-import { CreateGroupVersionRequest, CreateGroupVersionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateGroupVersionCommand,
-  serializeAws_restJson1CreateGroupVersionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGroupVersionRequest, CreateGroupVersionResponse } from "../models/models_0";
+import { CreateGroupVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGroupVersionCommand}.
+ */
 export interface CreateGroupVersionCommandInput extends CreateGroupVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGroupVersionCommand}.
+ */
 export interface CreateGroupVersionCommandOutput extends CreateGroupVersionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,61 @@ export interface CreateGroupVersionCommandOutput extends CreateGroupVersionRespo
  * ```javascript
  * import { GreengrassClient, CreateGroupVersionCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
  * // const { GreengrassClient, CreateGroupVersionCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * // import type { GreengrassClientConfig } from "@aws-sdk/client-greengrass";
+ * const config = {}; // type is GreengrassClientConfig
  * const client = new GreengrassClient(config);
+ * const input = { // CreateGroupVersionRequest
+ *   AmznClientToken: "STRING_VALUE",
+ *   ConnectorDefinitionVersionArn: "STRING_VALUE",
+ *   CoreDefinitionVersionArn: "STRING_VALUE",
+ *   DeviceDefinitionVersionArn: "STRING_VALUE",
+ *   FunctionDefinitionVersionArn: "STRING_VALUE",
+ *   GroupId: "STRING_VALUE", // required
+ *   LoggerDefinitionVersionArn: "STRING_VALUE",
+ *   ResourceDefinitionVersionArn: "STRING_VALUE",
+ *   SubscriptionDefinitionVersionArn: "STRING_VALUE",
+ * };
  * const command = new CreateGroupVersionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGroupVersionResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreationTimestamp: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   Version: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateGroupVersionCommandInput - {@link CreateGroupVersionCommandInput}
+ * @returns {@link CreateGroupVersionCommandOutput}
  * @see {@link CreateGroupVersionCommandInput} for command's `input` shape.
  * @see {@link CreateGroupVersionCommandOutput} for command's `response` shape.
- * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for GreengrassClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  General error information.
+ *
+ * @throws {@link GreengrassServiceException}
+ * <p>Base exception class for all service exceptions from Greengrass service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGroupVersionCommand extends $Command<
-  CreateGroupVersionCommandInput,
-  CreateGroupVersionCommandOutput,
-  GreengrassClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGroupVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGroupVersionCommandInput, CreateGroupVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassClient";
-    const commandName = "CreateGroupVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGroupVersionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateGroupVersionResponse.filterSensitiveLog,
+export class CreateGroupVersionCommand extends command<CreateGroupVersionCommandInput, CreateGroupVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGroupVersion",
+  CreateGroupVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGroupVersionRequest;
+      output: CreateGroupVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGroupVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateGroupVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGroupVersionCommandOutput> {
-    return deserializeAws_restJson1CreateGroupVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGroupVersionCommandInput;
+      output: CreateGroupVersionCommandOutput;
+    };
+  };
 }

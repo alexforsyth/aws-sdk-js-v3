@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BudgetsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BudgetsClient";
-import { DescribeBudgetPerformanceHistoryRequest, DescribeBudgetPerformanceHistoryResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeBudgetPerformanceHistoryCommand,
-  serializeAws_json1_1DescribeBudgetPerformanceHistoryCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  DescribeBudgetPerformanceHistoryRequest,
+  DescribeBudgetPerformanceHistoryResponse,
+} from "../models/models_0";
+import { DescribeBudgetPerformanceHistory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBudgetPerformanceHistoryCommand}.
+ */
 export interface DescribeBudgetPerformanceHistoryCommandInput extends DescribeBudgetPerformanceHistoryRequest {}
-export interface DescribeBudgetPerformanceHistoryCommandOutput
-  extends DescribeBudgetPerformanceHistoryResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBudgetPerformanceHistoryCommand}.
+ */
+export interface DescribeBudgetPerformanceHistoryCommandOutput extends DescribeBudgetPerformanceHistoryResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the history for <code>DAILY</code>, <code>MONTHLY</code>, and <code>QUARTERLY</code> budgets. Budget history isn't available for <code>ANNUAL</code> budgets.</p>
@@ -30,74 +32,201 @@ export interface DescribeBudgetPerformanceHistoryCommandOutput
  * ```javascript
  * import { BudgetsClient, DescribeBudgetPerformanceHistoryCommand } from "@aws-sdk/client-budgets"; // ES Modules import
  * // const { BudgetsClient, DescribeBudgetPerformanceHistoryCommand } = require("@aws-sdk/client-budgets"); // CommonJS import
+ * // import type { BudgetsClientConfig } from "@aws-sdk/client-budgets";
+ * const config = {}; // type is BudgetsClientConfig
  * const client = new BudgetsClient(config);
+ * const input = { // DescribeBudgetPerformanceHistoryRequest
+ *   AccountId: "STRING_VALUE", // required
+ *   BudgetName: "STRING_VALUE", // required
+ *   TimePeriod: { // TimePeriod
+ *     Start: new Date("TIMESTAMP"),
+ *     End: new Date("TIMESTAMP"),
+ *   },
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeBudgetPerformanceHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBudgetPerformanceHistoryResponse
+ * //   BudgetPerformanceHistory: { // BudgetPerformanceHistory
+ * //     BudgetName: "STRING_VALUE",
+ * //     BudgetType: "USAGE" || "COST" || "RI_UTILIZATION" || "RI_COVERAGE" || "SAVINGS_PLANS_UTILIZATION" || "SAVINGS_PLANS_COVERAGE",
+ * //     CostFilters: { // CostFilters
+ * //       "<keys>": [ // DimensionValues
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     CostTypes: { // CostTypes
+ * //       IncludeTax: true || false,
+ * //       IncludeSubscription: true || false,
+ * //       UseBlended: true || false,
+ * //       IncludeRefund: true || false,
+ * //       IncludeCredit: true || false,
+ * //       IncludeUpfront: true || false,
+ * //       IncludeRecurring: true || false,
+ * //       IncludeOtherSubscription: true || false,
+ * //       IncludeSupport: true || false,
+ * //       IncludeDiscount: true || false,
+ * //       UseAmortized: true || false,
+ * //     },
+ * //     TimeUnit: "DAILY" || "MONTHLY" || "QUARTERLY" || "ANNUALLY" || "CUSTOM",
+ * //     BillingViewArn: "STRING_VALUE",
+ * //     BudgetedAndActualAmountsList: [ // BudgetedAndActualAmountsList
+ * //       { // BudgetedAndActualAmounts
+ * //         BudgetedAmount: { // Spend
+ * //           Amount: "STRING_VALUE", // required
+ * //           Unit: "STRING_VALUE", // required
+ * //         },
+ * //         ActualAmount: {
+ * //           Amount: "STRING_VALUE", // required
+ * //           Unit: "STRING_VALUE", // required
+ * //         },
+ * //         TimePeriod: { // TimePeriod
+ * //           Start: new Date("TIMESTAMP"),
+ * //           End: new Date("TIMESTAMP"),
+ * //         },
+ * //       },
+ * //     ],
+ * //     FilterExpression: { // Expression
+ * //       Or: [ // Expressions
+ * //         {
+ * //           Or: [
+ * //             "<Expression>",
+ * //           ],
+ * //           And: [
+ * //             "<Expression>",
+ * //           ],
+ * //           Not: "<Expression>",
+ * //           Dimensions: { // ExpressionDimensionValues
+ * //             Key: "AZ" || "INSTANCE_TYPE" || "LINKED_ACCOUNT" || "LINKED_ACCOUNT_NAME" || "OPERATION" || "PURCHASE_TYPE" || "REGION" || "SERVICE" || "SERVICE_CODE" || "USAGE_TYPE" || "USAGE_TYPE_GROUP" || "RECORD_TYPE" || "OPERATING_SYSTEM" || "TENANCY" || "SCOPE" || "PLATFORM" || "SUBSCRIPTION_ID" || "LEGAL_ENTITY_NAME" || "INVOICING_ENTITY" || "DEPLOYMENT_OPTION" || "DATABASE_ENGINE" || "CACHE_ENGINE" || "INSTANCE_TYPE_FAMILY" || "BILLING_ENTITY" || "RESERVATION_ID" || "RESOURCE_ID" || "RIGHTSIZING_TYPE" || "SAVINGS_PLANS_TYPE" || "SAVINGS_PLAN_ARN" || "PAYMENT_OPTION" || "RESERVATION_MODIFIED" || "TAG_KEY" || "COST_CATEGORY_NAME", // required
+ * //             Values: [ // Values // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             MatchOptions: [ // MatchOptions
+ * //               "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "GREATER_THAN_OR_EQUAL" || "CASE_SENSITIVE" || "CASE_INSENSITIVE",
+ * //             ],
+ * //           },
+ * //           Tags: { // TagValues
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             MatchOptions: [
+ * //               "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "GREATER_THAN_OR_EQUAL" || "CASE_SENSITIVE" || "CASE_INSENSITIVE",
+ * //             ],
+ * //           },
+ * //           CostCategories: { // CostCategoryValues
+ * //             Key: "STRING_VALUE",
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             MatchOptions: [
+ * //               "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "GREATER_THAN_OR_EQUAL" || "CASE_SENSITIVE" || "CASE_INSENSITIVE",
+ * //             ],
+ * //           },
+ * //           ProductAttributes: { // ProductAttributeValues
+ * //             Key: "STRING_VALUE", // required
+ * //             Values: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             MatchOptions: [
+ * //               "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "GREATER_THAN_OR_EQUAL" || "CASE_SENSITIVE" || "CASE_INSENSITIVE",
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //       And: [
+ * //         "<Expression>",
+ * //       ],
+ * //       Not: "<Expression>",
+ * //       Dimensions: {
+ * //         Key: "AZ" || "INSTANCE_TYPE" || "LINKED_ACCOUNT" || "LINKED_ACCOUNT_NAME" || "OPERATION" || "PURCHASE_TYPE" || "REGION" || "SERVICE" || "SERVICE_CODE" || "USAGE_TYPE" || "USAGE_TYPE_GROUP" || "RECORD_TYPE" || "OPERATING_SYSTEM" || "TENANCY" || "SCOPE" || "PLATFORM" || "SUBSCRIPTION_ID" || "LEGAL_ENTITY_NAME" || "INVOICING_ENTITY" || "DEPLOYMENT_OPTION" || "DATABASE_ENGINE" || "CACHE_ENGINE" || "INSTANCE_TYPE_FAMILY" || "BILLING_ENTITY" || "RESERVATION_ID" || "RESOURCE_ID" || "RIGHTSIZING_TYPE" || "SAVINGS_PLANS_TYPE" || "SAVINGS_PLAN_ARN" || "PAYMENT_OPTION" || "RESERVATION_MODIFIED" || "TAG_KEY" || "COST_CATEGORY_NAME", // required
+ * //         Values: [ // required
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         MatchOptions: [
+ * //           "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "GREATER_THAN_OR_EQUAL" || "CASE_SENSITIVE" || "CASE_INSENSITIVE",
+ * //         ],
+ * //       },
+ * //       Tags: {
+ * //         Key: "STRING_VALUE",
+ * //         Values: "<Values>",
+ * //         MatchOptions: "<MatchOptions>",
+ * //       },
+ * //       CostCategories: {
+ * //         Key: "STRING_VALUE",
+ * //         Values: "<Values>",
+ * //         MatchOptions: "<MatchOptions>",
+ * //       },
+ * //       ProductAttributes: {
+ * //         Key: "STRING_VALUE", // required
+ * //         Values: "<Values>",
+ * //         MatchOptions: "<MatchOptions>",
+ * //       },
+ * //     },
+ * //     Metrics: [ // Metrics
+ * //       "BlendedCost" || "UnblendedCost" || "AmortizedCost" || "NetUnblendedCost" || "NetAmortizedCost" || "UsageQuantity" || "NormalizedUsageAmount" || "Hours",
+ * //     ],
+ * //   },
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBudgetPerformanceHistoryCommandInput - {@link DescribeBudgetPerformanceHistoryCommandInput}
+ * @returns {@link DescribeBudgetPerformanceHistoryCommandOutput}
  * @see {@link DescribeBudgetPerformanceHistoryCommandInput} for command's `input` shape.
  * @see {@link DescribeBudgetPerformanceHistoryCommandOutput} for command's `response` shape.
- * @see {@link BudgetsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link BudgetsClientResolvedConfig | config} for BudgetsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to use this operation with the given parameters.</p>
+ *
+ * @throws {@link BillingViewHealthStatusException} (client fault)
+ *  <p>
+ *       The billing view status must be HEALTHY to perform this action. Try again when the status is HEALTHY.
+ *     </p>
+ *
+ * @throws {@link ExpiredNextTokenException} (client fault)
+ *  <p>The pagination token expired.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>An error on the server occurred during the processing of your request. Try again later.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The pagination token is invalid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>We can’t locate the resource that you specified.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of API requests has exceeded the maximum allowed API request throttling limit
+ *       for the account.</p>
+ *
+ * @throws {@link BudgetsServiceException}
+ * <p>Base exception class for all service exceptions from Budgets service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBudgetPerformanceHistoryCommand extends $Command<
-  DescribeBudgetPerformanceHistoryCommandInput,
-  DescribeBudgetPerformanceHistoryCommandOutput,
-  BudgetsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBudgetPerformanceHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BudgetsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBudgetPerformanceHistoryCommandInput, DescribeBudgetPerformanceHistoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BudgetsClient";
-    const commandName = "DescribeBudgetPerformanceHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBudgetPerformanceHistoryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBudgetPerformanceHistoryResponse.filterSensitiveLog,
+export class DescribeBudgetPerformanceHistoryCommand extends command<DescribeBudgetPerformanceHistoryCommandInput, DescribeBudgetPerformanceHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBudgetPerformanceHistory",
+  DescribeBudgetPerformanceHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBudgetPerformanceHistoryRequest;
+      output: DescribeBudgetPerformanceHistoryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeBudgetPerformanceHistoryCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeBudgetPerformanceHistoryCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBudgetPerformanceHistoryCommandOutput> {
-    return deserializeAws_json1_1DescribeBudgetPerformanceHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBudgetPerformanceHistoryCommandInput;
+      output: DescribeBudgetPerformanceHistoryCommandOutput;
+    };
+  };
 }

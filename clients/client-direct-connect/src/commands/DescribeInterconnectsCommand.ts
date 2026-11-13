@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectConnectClient";
-import { DescribeInterconnectsRequest, Interconnects } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeInterconnectsCommand,
-  serializeAws_json1_1DescribeInterconnectsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeInterconnectsRequest, Interconnects } from "../models/models_0";
+import { DescribeInterconnects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeInterconnectsCommand}.
+ */
 export interface DescribeInterconnectsCommandInput extends DescribeInterconnectsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeInterconnectsCommand}.
+ */
 export interface DescribeInterconnectsCommandOutput extends Interconnects, __MetadataBearer {}
 
 /**
@@ -28,68 +29,90 @@ export interface DescribeInterconnectsCommandOutput extends Interconnects, __Met
  * ```javascript
  * import { DirectConnectClient, DescribeInterconnectsCommand } from "@aws-sdk/client-direct-connect"; // ES Modules import
  * // const { DirectConnectClient, DescribeInterconnectsCommand } = require("@aws-sdk/client-direct-connect"); // CommonJS import
+ * // import type { DirectConnectClientConfig } from "@aws-sdk/client-direct-connect";
+ * const config = {}; // type is DirectConnectClientConfig
  * const client = new DirectConnectClient(config);
+ * const input = { // DescribeInterconnectsRequest
+ *   interconnectId: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeInterconnectsCommand(input);
  * const response = await client.send(command);
+ * // { // Interconnects
+ * //   interconnects: [ // InterconnectList
+ * //     { // Interconnect
+ * //       interconnectId: "STRING_VALUE",
+ * //       interconnectName: "STRING_VALUE",
+ * //       interconnectState: "requested" || "pending" || "available" || "down" || "deleting" || "deleted" || "unknown",
+ * //       region: "STRING_VALUE",
+ * //       location: "STRING_VALUE",
+ * //       bandwidth: "STRING_VALUE",
+ * //       loaIssueTime: new Date("TIMESTAMP"),
+ * //       lagId: "STRING_VALUE",
+ * //       awsDevice: "STRING_VALUE",
+ * //       jumboFrameCapable: true || false,
+ * //       awsDeviceV2: "STRING_VALUE",
+ * //       awsLogicalDeviceId: "STRING_VALUE",
+ * //       hasLogicalRedundancy: "unknown" || "yes" || "no",
+ * //       tags: [ // TagList
+ * //         { // Tag
+ * //           key: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       providerName: "STRING_VALUE",
+ * //       macSecCapable: true || false,
+ * //       portEncryptionStatus: "STRING_VALUE",
+ * //       encryptionMode: "STRING_VALUE",
+ * //       macSecKeys: [ // MacSecKeyList
+ * //         { // MacSecKey
+ * //           secretARN: "STRING_VALUE",
+ * //           ckn: "STRING_VALUE",
+ * //           state: "STRING_VALUE",
+ * //           startOn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeInterconnectsCommandInput - {@link DescribeInterconnectsCommandInput}
+ * @returns {@link DescribeInterconnectsCommandOutput}
  * @see {@link DescribeInterconnectsCommandInput} for command's `input` shape.
  * @see {@link DescribeInterconnectsCommandOutput} for command's `response` shape.
- * @see {@link DirectConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectConnectClientResolvedConfig | config} for DirectConnectClient's `config` shape.
  *
+ * @throws {@link DirectConnectClientException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link DirectConnectServerException} (server fault)
+ *  <p>A server-side error occurred.</p>
+ *
+ * @throws {@link DirectConnectServiceException}
+ * <p>Base exception class for all service exceptions from DirectConnect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeInterconnectsCommand extends $Command<
-  DescribeInterconnectsCommandInput,
-  DescribeInterconnectsCommandOutput,
-  DirectConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeInterconnectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeInterconnectsCommandInput, DescribeInterconnectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectConnectClient";
-    const commandName = "DescribeInterconnectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeInterconnectsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Interconnects.filterSensitiveLog,
+export class DescribeInterconnectsCommand extends command<DescribeInterconnectsCommandInput, DescribeInterconnectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeInterconnects",
+  DescribeInterconnects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeInterconnectsRequest;
+      output: Interconnects;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeInterconnectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeInterconnectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeInterconnectsCommandOutput> {
-    return deserializeAws_json1_1DescribeInterconnectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeInterconnectsCommandInput;
+      output: DescribeInterconnectsCommandOutput;
+    };
+  };
 }

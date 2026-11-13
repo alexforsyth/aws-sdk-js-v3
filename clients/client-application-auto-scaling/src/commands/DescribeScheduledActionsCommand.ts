@@ -1,103 +1,159 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationAutoScalingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationAutoScalingClient";
-import { DescribeScheduledActionsRequest, DescribeScheduledActionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeScheduledActionsCommand,
-  serializeAws_json1_1DescribeScheduledActionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeScheduledActionsRequest, DescribeScheduledActionsResponse } from "../models/models_0";
+import { DescribeScheduledActions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeScheduledActionsCommand}.
+ */
 export interface DescribeScheduledActionsCommandInput extends DescribeScheduledActionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeScheduledActionsCommand}.
+ */
 export interface DescribeScheduledActionsCommandOutput extends DescribeScheduledActionsResponse, __MetadataBearer {}
 
 /**
  * <p>Describes the Application Auto Scaling scheduled actions for the specified service namespace.</p>
  *          <p>You can filter the results using the <code>ResourceId</code>,
  *             <code>ScalableDimension</code>, and <code>ScheduledActionNames</code> parameters.</p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html">Scheduled scaling</a> and <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html">Managing scheduled scaling</a> in the
- *          <i>Application Auto Scaling User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html">Scheduled scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ApplicationAutoScalingClient, DescribeScheduledActionsCommand } from "@aws-sdk/client-application-auto-scaling"; // ES Modules import
  * // const { ApplicationAutoScalingClient, DescribeScheduledActionsCommand } = require("@aws-sdk/client-application-auto-scaling"); // CommonJS import
+ * // import type { ApplicationAutoScalingClientConfig } from "@aws-sdk/client-application-auto-scaling";
+ * const config = {}; // type is ApplicationAutoScalingClientConfig
  * const client = new ApplicationAutoScalingClient(config);
+ * const input = { // DescribeScheduledActionsRequest
+ *   ScheduledActionNames: [ // ResourceIdsMaxLen1600
+ *     "STRING_VALUE",
+ *   ],
+ *   ServiceNamespace: "ecs" || "elasticmapreduce" || "ec2" || "appstream" || "dynamodb" || "rds" || "sagemaker" || "custom-resource" || "comprehend" || "lambda" || "cassandra" || "kafka" || "elasticache" || "neptune" || "workspaces", // required
+ *   ResourceId: "STRING_VALUE",
+ *   ScalableDimension: "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "elasticmapreduce:instancegroup:InstanceCount" || "appstream:fleet:DesiredCapacity" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits" || "rds:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredInstanceCount" || "custom-resource:ResourceType:Property" || "comprehend:document-classifier-endpoint:DesiredInferenceUnits" || "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" || "lambda:function:ProvisionedConcurrency" || "cassandra:table:ReadCapacityUnits" || "cassandra:table:WriteCapacityUnits" || "kafka:broker-storage:VolumeSize" || "elasticache:cache-cluster:Nodes" || "elasticache:replication-group:NodeGroups" || "elasticache:replication-group:Replicas" || "neptune:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredProvisionedConcurrency" || "sagemaker:inference-component:DesiredCopyCount" || "workspaces:workspacespool:DesiredUserSessions",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeScheduledActionsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeScheduledActionsResponse
+ * //   ScheduledActions: [ // ScheduledActions
+ * //     { // ScheduledAction
+ * //       ScheduledActionName: "STRING_VALUE", // required
+ * //       ScheduledActionARN: "STRING_VALUE", // required
+ * //       ServiceNamespace: "ecs" || "elasticmapreduce" || "ec2" || "appstream" || "dynamodb" || "rds" || "sagemaker" || "custom-resource" || "comprehend" || "lambda" || "cassandra" || "kafka" || "elasticache" || "neptune" || "workspaces", // required
+ * //       Schedule: "STRING_VALUE", // required
+ * //       Timezone: "STRING_VALUE",
+ * //       ResourceId: "STRING_VALUE", // required
+ * //       ScalableDimension: "ecs:service:DesiredCount" || "ec2:spot-fleet-request:TargetCapacity" || "elasticmapreduce:instancegroup:InstanceCount" || "appstream:fleet:DesiredCapacity" || "dynamodb:table:ReadCapacityUnits" || "dynamodb:table:WriteCapacityUnits" || "dynamodb:index:ReadCapacityUnits" || "dynamodb:index:WriteCapacityUnits" || "rds:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredInstanceCount" || "custom-resource:ResourceType:Property" || "comprehend:document-classifier-endpoint:DesiredInferenceUnits" || "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" || "lambda:function:ProvisionedConcurrency" || "cassandra:table:ReadCapacityUnits" || "cassandra:table:WriteCapacityUnits" || "kafka:broker-storage:VolumeSize" || "elasticache:cache-cluster:Nodes" || "elasticache:replication-group:NodeGroups" || "elasticache:replication-group:Replicas" || "neptune:cluster:ReadReplicaCount" || "sagemaker:variant:DesiredProvisionedConcurrency" || "sagemaker:inference-component:DesiredCopyCount" || "workspaces:workspacespool:DesiredUserSessions",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       ScalableTargetAction: { // ScalableTargetAction
+ * //         MinCapacity: Number("int"),
+ * //         MaxCapacity: Number("int"),
+ * //       },
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeScheduledActionsCommandInput - {@link DescribeScheduledActionsCommandInput}
+ * @returns {@link DescribeScheduledActionsCommandOutput}
  * @see {@link DescribeScheduledActionsCommandInput} for command's `input` shape.
  * @see {@link DescribeScheduledActionsCommandOutput} for command's `response` shape.
- * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for ApplicationAutoScalingClient's `config` shape.
  *
+ * @throws {@link ConcurrentUpdateException} (server fault)
+ *  <p>Concurrent updates caused an exception, for example, if you request an update to an
+ *          Application Auto Scaling resource that already has a pending update.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an internal error.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The next token supplied was invalid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception was thrown for a validation issue. Review the available parameters for the
+ *          API request.</p>
+ *
+ * @throws {@link ApplicationAutoScalingServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationAutoScaling service.</p>
+ *
+ *
+ * @example To describe scheduled actions
+ * ```javascript
+ * // This example describes the scheduled actions for the dynamodb service namespace.
+ * const input = {
+ *   ServiceNamespace: "dynamodb"
+ * };
+ * const command = new DescribeScheduledActionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ScheduledActions: [
+ *     {
+ *       CreationTime: 1.561571888361E9,
+ *       ResourceId: "table/my-table",
+ *       ScalableDimension: "dynamodb:table:WriteCapacityUnits",
+ *       ScalableTargetAction: {
+ *         MaxCapacity: 20,
+ *         MinCapacity: 15
+ *       },
+ *       Schedule: "at(2019-05-20T18:35:00)",
+ *       ScheduledActionARN: "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-first-scheduled-action",
+ *       ScheduledActionName: "my-first-scheduled-action",
+ *       ServiceNamespace: "dynamodb"
+ *     },
+ *     {
+ *       CreationTime: 1.561571946021E9,
+ *       ResourceId: "table/my-table",
+ *       ScalableDimension: "dynamodb:table:WriteCapacityUnits",
+ *       ScalableTargetAction: {
+ *         MaxCapacity: 10,
+ *         MinCapacity: 5
+ *       },
+ *       Schedule: "at(2019-05-20T18:40:00)",
+ *       ScheduledActionARN: "arn:aws:autoscaling:us-west-2:123456789012:scheduledAction:2d36aa3b-cdf9-4565-b290-81db519b227d:resource/dynamodb/table/my-table:scheduledActionName/my-second-scheduled-action",
+ *       ScheduledActionName: "my-second-scheduled-action",
+ *       ServiceNamespace: "dynamodb"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeScheduledActionsCommand extends $Command<
-  DescribeScheduledActionsCommandInput,
-  DescribeScheduledActionsCommandOutput,
-  ApplicationAutoScalingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeScheduledActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationAutoScalingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeScheduledActionsCommandInput, DescribeScheduledActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationAutoScalingClient";
-    const commandName = "DescribeScheduledActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeScheduledActionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeScheduledActionsResponse.filterSensitiveLog,
+export class DescribeScheduledActionsCommand extends command<DescribeScheduledActionsCommandInput, DescribeScheduledActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeScheduledActions",
+  DescribeScheduledActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScheduledActionsRequest;
+      output: DescribeScheduledActionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeScheduledActionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeScheduledActionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeScheduledActionsCommandOutput> {
-    return deserializeAws_json1_1DescribeScheduledActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeScheduledActionsCommandInput;
+      output: DescribeScheduledActionsCommandOutput;
+    };
+  };
 }

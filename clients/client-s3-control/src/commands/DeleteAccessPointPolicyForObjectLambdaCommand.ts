@@ -1,31 +1,34 @@
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteAccessPointPolicyForObjectLambdaRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteAccessPointPolicyForObjectLambdaCommand,
-  serializeAws_restXmlDeleteAccessPointPolicyForObjectLambdaCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { DeleteAccessPointPolicyForObjectLambdaRequest } from "../models/models_0";
+import { DeleteAccessPointPolicyForObjectLambda$ } from "../schemas/schemas_0";
 
-export interface DeleteAccessPointPolicyForObjectLambdaCommandInput
-  extends DeleteAccessPointPolicyForObjectLambdaRequest {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAccessPointPolicyForObjectLambdaCommand}.
+ */
+export interface DeleteAccessPointPolicyForObjectLambdaCommandInput extends DeleteAccessPointPolicyForObjectLambdaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAccessPointPolicyForObjectLambdaCommand}.
+ */
 export interface DeleteAccessPointPolicyForObjectLambdaCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Removes the resource policy for an Object Lambda Access Point.</p>
- *          <p>The following actions are related to <code>DeleteAccessPointPolicyForObjectLambda</code>:</p>
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Removes the resource policy for an Object Lambda Access Point.</p>
+ *          <p>The following actions are related to
+ *          <code>DeleteAccessPointPolicyForObjectLambda</code>:</p>
  *          <ul>
  *             <li>
  *                <p>
@@ -43,75 +46,46 @@ export interface DeleteAccessPointPolicyForObjectLambdaCommandOutput extends __M
  * ```javascript
  * import { S3ControlClient, DeleteAccessPointPolicyForObjectLambdaCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, DeleteAccessPointPolicyForObjectLambdaCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // DeleteAccessPointPolicyForObjectLambdaRequest
+ *   AccountId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DeleteAccessPointPolicyForObjectLambdaCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAccessPointPolicyForObjectLambdaCommandInput - {@link DeleteAccessPointPolicyForObjectLambdaCommandInput}
+ * @returns {@link DeleteAccessPointPolicyForObjectLambdaCommandOutput}
  * @see {@link DeleteAccessPointPolicyForObjectLambdaCommandInput} for command's `input` shape.
  * @see {@link DeleteAccessPointPolicyForObjectLambdaCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAccessPointPolicyForObjectLambdaCommand extends $Command<
-  DeleteAccessPointPolicyForObjectLambdaCommandInput,
-  DeleteAccessPointPolicyForObjectLambdaCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAccessPointPolicyForObjectLambdaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAccessPointPolicyForObjectLambdaCommandInput, DeleteAccessPointPolicyForObjectLambdaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "DeleteAccessPointPolicyForObjectLambdaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAccessPointPolicyForObjectLambdaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteAccessPointPolicyForObjectLambdaCommand extends command<DeleteAccessPointPolicyForObjectLambdaCommandInput, DeleteAccessPointPolicyForObjectLambdaCommandOutput>(
+  _ep0,
+  _mw1,
+  "DeleteAccessPointPolicyForObjectLambda",
+  DeleteAccessPointPolicyForObjectLambda$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAccessPointPolicyForObjectLambdaRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteAccessPointPolicyForObjectLambdaCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteAccessPointPolicyForObjectLambdaCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteAccessPointPolicyForObjectLambdaCommandOutput> {
-    return deserializeAws_restXmlDeleteAccessPointPolicyForObjectLambdaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAccessPointPolicyForObjectLambdaCommandInput;
+      output: DeleteAccessPointPolicyForObjectLambdaCommandOutput;
+    };
+  };
 }

@@ -1,102 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ModifyWorkspacePropertiesRequest, ModifyWorkspacePropertiesResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifyWorkspacePropertiesCommand,
-  serializeAws_json1_1ModifyWorkspacePropertiesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyWorkspacePropertiesRequest, ModifyWorkspacePropertiesResult } from "../models/models_0";
+import { ModifyWorkspaceProperties$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyWorkspacePropertiesCommand}.
+ */
 export interface ModifyWorkspacePropertiesCommandInput extends ModifyWorkspacePropertiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyWorkspacePropertiesCommand}.
+ */
 export interface ModifyWorkspacePropertiesCommandOutput extends ModifyWorkspacePropertiesResult, __MetadataBearer {}
 
 /**
- * <p>Modifies the specified WorkSpace properties. For important information about how
- *          to modify the size of the root and user volumes, see
- *          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">
- *             Modify a WorkSpace</a>.
+ * <p>Modifies the specified WorkSpace properties. For important information about how to
+ *          modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>.
  *       </p>
+ *          <note>
+ *             <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces
+ *             Core. Contact your account team to be allow-listed to use this value. For more
+ *             information, see <a href="http://aws.amazon.com/workspaces/core/">Amazon WorkSpaces
+ *                Core</a>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkSpacesClient, ModifyWorkspacePropertiesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, ModifyWorkspacePropertiesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // ModifyWorkspacePropertiesRequest
+ *   WorkspaceId: "STRING_VALUE", // required
+ *   WorkspaceProperties: { // WorkspaceProperties
+ *     RunningMode: "AUTO_STOP" || "ALWAYS_ON" || "MANUAL",
+ *     RunningModeAutoStopTimeoutInMinutes: Number("int"),
+ *     RootVolumeSizeGib: Number("int"),
+ *     UserVolumeSizeGib: Number("int"),
+ *     ComputeTypeName: "VALUE" || "STANDARD" || "PERFORMANCE" || "POWER" || "GRAPHICS" || "POWERPRO" || "GENERALPURPOSE_4XLARGE" || "GENERALPURPOSE_8XLARGE" || "GRAPHICSPRO" || "GRAPHICS_G4DN" || "GRAPHICSPRO_G4DN" || "GRAPHICS_G6_XLARGE" || "GRAPHICS_G6_2XLARGE" || "GRAPHICS_G6_4XLARGE" || "GRAPHICS_G6_8XLARGE" || "GRAPHICS_G6_16XLARGE" || "GRAPHICS_GR6_4XLARGE" || "GRAPHICS_GR6_8XLARGE" || "GRAPHICS_G6F_LARGE" || "GRAPHICS_G6F_XLARGE" || "GRAPHICS_G6F_2XLARGE" || "GRAPHICS_G6F_4XLARGE" || "GRAPHICS_GR6F_4XLARGE" || "GRAPHICS_G7_2XLARGE" || "GRAPHICS_G7_4XLARGE" || "GRAPHICS_G7_8XLARGE" || "GRAPHICS_G7_12XLARGE",
+ *     Protocols: [ // ProtocolList
+ *       "PCOIP" || "WSP",
+ *     ],
+ *     OperatingSystemName: "AMAZON_LINUX_2" || "UBUNTU_18_04" || "UBUNTU_20_04" || "UBUNTU_22_04" || "UNKNOWN" || "WINDOWS_10" || "WINDOWS_11" || "WINDOWS_7" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "WINDOWS_SERVER_2022" || "WINDOWS_SERVER_2025" || "RHEL_8" || "ROCKY_8" || "UBUNTU_24_04" || "RHEL_9" || "ROCKY_9" || "UBUNTU_26_04" || "RHEL_10" || "ROCKY_10",
+ *     GlobalAccelerator: { // GlobalAcceleratorForWorkSpace
+ *       Mode: "ENABLED_AUTO" || "DISABLED" || "INHERITED", // required
+ *       PreferredProtocol: "TCP" || "NONE" || "INHERITED",
+ *     },
+ *     NestedVirtualizationEnabled: true || false,
+ *   },
+ *   DataReplication: "NO_REPLICATION" || "PRIMARY_AS_SOURCE",
+ * };
  * const command = new ModifyWorkspacePropertiesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifyWorkspacePropertiesCommandInput - {@link ModifyWorkspacePropertiesCommandInput}
+ * @returns {@link ModifyWorkspacePropertiesCommandOutput}
  * @see {@link ModifyWorkspacePropertiesCommandInput} for command's `input` shape.
  * @see {@link ModifyWorkspacePropertiesCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link InvalidResourceStateException} (client fault)
+ *  <p>The state of the resource is not valid for this operation.</p>
+ *
+ * @throws {@link OperationInProgressException} (client fault)
+ *  <p>The properties of this WorkSpace are currently being modified. Try again in a moment.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ResourceUnavailableException} (client fault)
+ *  <p>The specified resource is not available.</p>
+ *
+ * @throws {@link UnsupportedWorkspaceConfigurationException} (client fault)
+ *  <p>The configuration of this WorkSpace is not supported for this operation. For more information, see
+ *          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html">Required
+ *             Configuration and Service Components for WorkSpaces </a>.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyWorkspacePropertiesCommand extends $Command<
-  ModifyWorkspacePropertiesCommandInput,
-  ModifyWorkspacePropertiesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyWorkspacePropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyWorkspacePropertiesCommandInput, ModifyWorkspacePropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "ModifyWorkspacePropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyWorkspacePropertiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyWorkspacePropertiesResult.filterSensitiveLog,
+export class ModifyWorkspacePropertiesCommand extends command<ModifyWorkspacePropertiesCommandInput, ModifyWorkspacePropertiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyWorkspaceProperties",
+  ModifyWorkspaceProperties$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyWorkspacePropertiesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyWorkspacePropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifyWorkspacePropertiesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ModifyWorkspacePropertiesCommandOutput> {
-    return deserializeAws_json1_1ModifyWorkspacePropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyWorkspacePropertiesCommandInput;
+      output: ModifyWorkspacePropertiesCommandOutput;
+    };
+  };
 }

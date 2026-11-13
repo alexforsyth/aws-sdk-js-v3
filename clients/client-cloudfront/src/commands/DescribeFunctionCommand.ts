@@ -1,99 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { DescribeFunctionRequest, DescribeFunctionResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlDescribeFunctionCommand,
-  serializeAws_restXmlDescribeFunctionCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFunctionRequest, DescribeFunctionResult } from "../models/models_0";
+import { DescribeFunction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFunctionCommand}.
+ */
 export interface DescribeFunctionCommandInput extends DescribeFunctionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFunctionCommand}.
+ */
 export interface DescribeFunctionCommandOutput extends DescribeFunctionResult, __MetadataBearer {}
 
 /**
- * <p>Gets configuration information and metadata about a CloudFront function, but not the function’s
- * 			code. To get a function’s code, use <code>GetFunction</code>.</p>
- * 		       <p>To get configuration information and metadata about a function, you must provide the
- * 			function’s name and stage. To get these values, you can use
- * 			<code>ListFunctions</code>.</p>
+ * <p>Gets configuration information and metadata about a CloudFront function, but not the function's code. To get a function's code, use <code>GetFunction</code>.</p> <p>To get configuration information and metadata about a function, you must provide the function's name and stage. To get these values, you can use <code>ListFunctions</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, DescribeFunctionCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, DescribeFunctionCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // DescribeFunctionRequest
+ *   Name: "STRING_VALUE", // required
+ *   Stage: "DEVELOPMENT" || "LIVE",
+ * };
  * const command = new DescribeFunctionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFunctionResult
+ * //   FunctionSummary: { // FunctionSummary
+ * //     Name: "STRING_VALUE", // required
+ * //     Status: "STRING_VALUE",
+ * //     FunctionConfig: { // FunctionConfig
+ * //       Comment: "STRING_VALUE", // required
+ * //       Runtime: "cloudfront-js-1.0" || "cloudfront-js-2.0", // required
+ * //       KeyValueStoreAssociations: { // KeyValueStoreAssociations
+ * //         Quantity: Number("int"), // required
+ * //         Items: [ // KeyValueStoreAssociationList
+ * //           { // KeyValueStoreAssociation
+ * //             KeyValueStoreARN: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //     FunctionMetadata: { // FunctionMetadata
+ * //       FunctionARN: "STRING_VALUE", // required
+ * //       Stage: "DEVELOPMENT" || "LIVE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   },
+ * //   ETag: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeFunctionCommandInput - {@link DescribeFunctionCommandInput}
+ * @returns {@link DescribeFunctionCommandOutput}
  * @see {@link DescribeFunctionCommandInput} for command's `input` shape.
  * @see {@link DescribeFunctionCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link NoSuchFunctionExists} (client fault)
+ *  <p>The function does not exist.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>This operation is not supported in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFunctionCommand extends $Command<
-  DescribeFunctionCommandInput,
-  DescribeFunctionCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFunctionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFunctionCommandInput, DescribeFunctionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "DescribeFunctionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFunctionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFunctionResult.filterSensitiveLog,
+export class DescribeFunctionCommand extends command<DescribeFunctionCommandInput, DescribeFunctionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFunction",
+  DescribeFunction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFunctionRequest;
+      output: DescribeFunctionResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFunctionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDescribeFunctionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFunctionCommandOutput> {
-    return deserializeAws_restXmlDescribeFunctionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFunctionCommandInput;
+      output: DescribeFunctionCommandOutput;
+    };
+  };
 }

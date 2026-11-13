@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import { GetProfileObjectTypeTemplateRequest, GetProfileObjectTypeTemplateResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetProfileObjectTypeTemplateCommand,
-  serializeAws_restJson1GetProfileObjectTypeTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetProfileObjectTypeTemplateRequest, GetProfileObjectTypeTemplateResponse } from "../models/models_0";
+import { GetProfileObjectTypeTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetProfileObjectTypeTemplateCommand}.
+ */
 export interface GetProfileObjectTypeTemplateCommandInput extends GetProfileObjectTypeTemplateRequest {}
-export interface GetProfileObjectTypeTemplateCommandOutput
-  extends GetProfileObjectTypeTemplateResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetProfileObjectTypeTemplateCommand}.
+ */
+export interface GetProfileObjectTypeTemplateCommandOutput extends GetProfileObjectTypeTemplateResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the template information for a specific object type.</p>
@@ -34,71 +33,88 @@ export interface GetProfileObjectTypeTemplateCommandOutput
  * ```javascript
  * import { CustomerProfilesClient, GetProfileObjectTypeTemplateCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, GetProfileObjectTypeTemplateCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // GetProfileObjectTypeTemplateRequest
+ *   TemplateId: "STRING_VALUE", // required
+ * };
  * const command = new GetProfileObjectTypeTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // GetProfileObjectTypeTemplateResponse
+ * //   TemplateId: "STRING_VALUE",
+ * //   SourceName: "STRING_VALUE",
+ * //   SourceObject: "STRING_VALUE",
+ * //   DefaultMaxProfileObjectCount: Number("int"),
+ * //   DefaultMaxProfileObjectCountEffectiveAfter: new Date("TIMESTAMP"),
+ * //   StoreOnly: true || false,
+ * //   AllowProfileCreation: true || false,
+ * //   SourceLastUpdatedTimestampFormat: "STRING_VALUE",
+ * //   Fields: { // FieldMap
+ * //     "<keys>": { // ObjectTypeField
+ * //       Source: "STRING_VALUE",
+ * //       Target: "STRING_VALUE",
+ * //       ContentType: "STRING" || "NUMBER" || "PHONE_NUMBER" || "EMAIL_ADDRESS" || "NAME",
+ * //     },
+ * //   },
+ * //   Keys: { // KeyMap
+ * //     "<keys>": [ // ObjectTypeKeyList
+ * //       { // ObjectTypeKey
+ * //         StandardIdentifiers: [ // StandardIdentifierList
+ * //           "PROFILE" || "ASSET" || "CASE" || "DEVICE" || "WEB_ANALYTICS" || "ORDER" || "COMMUNICATION_RECORD" || "AIR_PREFERENCE" || "HOTEL_PREFERENCE" || "AIR_BOOKING" || "AIR_SEGMENT" || "HOTEL_RESERVATION" || "HOTEL_STAY_REVENUE" || "LOYALTY" || "LOYALTY_TRANSACTION" || "LOYALTY_PROMOTION" || "UNIQUE" || "SECONDARY" || "LOOKUP_ONLY" || "NEW_ONLY",
+ * //         ],
+ * //         FieldNames: [ // FieldNameList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetProfileObjectTypeTemplateCommandInput - {@link GetProfileObjectTypeTemplateCommandInput}
+ * @returns {@link GetProfileObjectTypeTemplateCommandOutput}
  * @see {@link GetProfileObjectTypeTemplateCommandInput} for command's `input` shape.
  * @see {@link GetProfileObjectTypeTemplateCommandOutput} for command's `response` shape.
- * @see {@link CustomerProfilesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class GetProfileObjectTypeTemplateCommand extends $Command<
-  GetProfileObjectTypeTemplateCommandInput,
-  GetProfileObjectTypeTemplateCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetProfileObjectTypeTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetProfileObjectTypeTemplateCommandInput, GetProfileObjectTypeTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "GetProfileObjectTypeTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetProfileObjectTypeTemplateRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetProfileObjectTypeTemplateResponse.filterSensitiveLog,
+export class GetProfileObjectTypeTemplateCommand extends command<GetProfileObjectTypeTemplateCommandInput, GetProfileObjectTypeTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetProfileObjectTypeTemplate",
+  GetProfileObjectTypeTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetProfileObjectTypeTemplateRequest;
+      output: GetProfileObjectTypeTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetProfileObjectTypeTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetProfileObjectTypeTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetProfileObjectTypeTemplateCommandOutput> {
-    return deserializeAws_restJson1GetProfileObjectTypeTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetProfileObjectTypeTemplateCommandInput;
+      output: GetProfileObjectTypeTemplateCommandOutput;
+    };
+  };
 }

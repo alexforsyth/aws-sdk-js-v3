@@ -1,0 +1,71 @@
+import type { SigninClientConfig } from "@aws-sdk/nested-clients/signin";
+import type { CredentialProviderOptions } from "@aws-sdk/types";
+import type { SharedConfigInit } from "@smithy/core/config";
+
+/**
+ * Configuration options for the Login credential provider
+ * @public
+ */
+export interface FromLoginCredentialsInit extends CredentialProviderOptions, SharedConfigInit {
+  /**
+   * Profile name to use for Login credentials
+   */
+  profile?: string;
+
+  /**
+   * Login client configuration for token refresh operations.
+   * The `signInRegion` recorded in the cached token overrides a `region` set here.
+   * A `region` set here applies when the token has no `signInRegion`.
+   */
+  clientConfig?: SigninClientConfig;
+
+  // Note: loginCacheDirectory ((code level equivalent to AWS_LOGIN_CACHE_DIRECTORY) is not currently supported.
+  // If added in the future, also add equivalent support for SSO.
+  // loginCacheDirectory?: string;
+}
+
+/**
+ * Login token structure stored on disk
+ * @internal
+ */
+export interface LoginToken {
+  accessToken: {
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+    accountId?: string;
+    expiresAt: string;
+  };
+  tokenType: string;
+  clientId: string;
+  refreshToken: string;
+  idToken: string;
+  dpopKey: string; // DPoP private key PEM
+  signInRegion?: string; // region the token was issued in
+}
+
+/**
+ * DPoP header structure for OAuth 2.0 Demonstrating Proof of Possession
+ * @internal
+ */
+export interface DpopHeader {
+  typ: "dpop+jwt";
+  alg: "ES256";
+  jwk: {
+    kty: "EC";
+    crv: "P-256";
+    x: string;
+    y: string;
+  };
+}
+
+/**
+ * DPoP payload structure
+ * @internal
+ */
+export interface DpopPayload {
+  jti: string;
+  htm: string;
+  htu: string;
+  iat: number;
+}

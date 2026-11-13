@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeAccountAuditConfigurationRequest,
   DescribeAccountAuditConfigurationResponse,
 } from "../models/models_1";
-import {
-  deserializeAws_restJson1DescribeAccountAuditConfigurationCommand,
-  serializeAws_restJson1DescribeAccountAuditConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { DescribeAccountAuditConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountAuditConfigurationCommand}.
+ */
 export interface DescribeAccountAuditConfigurationCommandInput extends DescribeAccountAuditConfigurationRequest {}
-export interface DescribeAccountAuditConfigurationCommandOutput
-  extends DescribeAccountAuditConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountAuditConfigurationCommand}.
+ */
+export interface DescribeAccountAuditConfigurationCommandOutput extends DescribeAccountAuditConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Gets information about the Device Defender audit settings for this account.
@@ -36,74 +35,66 @@ export interface DescribeAccountAuditConfigurationCommandOutput
  * ```javascript
  * import { IoTClient, DescribeAccountAuditConfigurationCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DescribeAccountAuditConfigurationCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = {};
  * const command = new DescribeAccountAuditConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountAuditConfigurationResponse
+ * //   roleArn: "STRING_VALUE",
+ * //   auditNotificationTargetConfigurations: { // AuditNotificationTargetConfigurations
+ * //     "<keys>": { // AuditNotificationTarget
+ * //       targetArn: "STRING_VALUE",
+ * //       roleArn: "STRING_VALUE",
+ * //       enabled: true || false,
+ * //     },
+ * //   },
+ * //   auditCheckConfigurations: { // AuditCheckConfigurations
+ * //     "<keys>": { // AuditCheckConfiguration
+ * //       enabled: true || false,
+ * //       configuration: { // CheckCustomConfiguration
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountAuditConfigurationCommandInput - {@link DescribeAccountAuditConfigurationCommandInput}
+ * @returns {@link DescribeAccountAuditConfigurationCommandOutput}
  * @see {@link DescribeAccountAuditConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountAuditConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccountAuditConfigurationCommand extends $Command<
-  DescribeAccountAuditConfigurationCommandInput,
-  DescribeAccountAuditConfigurationCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountAuditConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountAuditConfigurationCommandInput, DescribeAccountAuditConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DescribeAccountAuditConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountAuditConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountAuditConfigurationResponse.filterSensitiveLog,
+export class DescribeAccountAuditConfigurationCommand extends command<DescribeAccountAuditConfigurationCommandInput, DescribeAccountAuditConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountAuditConfiguration",
+  DescribeAccountAuditConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DescribeAccountAuditConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeAccountAuditConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAccountAuditConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAccountAuditConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeAccountAuditConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountAuditConfigurationCommandInput;
+      output: DescribeAccountAuditConfigurationCommandOutput;
+    };
+  };
 }

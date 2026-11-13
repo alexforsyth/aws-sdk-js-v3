@@ -1,25 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SnapshotSchedule } from "../models/models_0";
-import { ModifySnapshotScheduleMessage } from "../models/models_1";
-import {
-  deserializeAws_queryModifySnapshotScheduleCommand,
-  serializeAws_queryModifySnapshotScheduleCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SnapshotSchedule } from "../models/models_0";
+import type { ModifySnapshotScheduleMessage } from "../models/models_1";
+import { ModifySnapshotSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifySnapshotScheduleCommand}.
+ */
 export interface ModifySnapshotScheduleCommandInput extends ModifySnapshotScheduleMessage {}
+/**
+ * @public
+ *
+ * The output of {@link ModifySnapshotScheduleCommand}.
+ */
 export interface ModifySnapshotScheduleCommandOutput extends SnapshotSchedule, __MetadataBearer {}
 
 /**
@@ -30,68 +31,79 @@ export interface ModifySnapshotScheduleCommandOutput extends SnapshotSchedule, _
  * ```javascript
  * import { RedshiftClient, ModifySnapshotScheduleCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, ModifySnapshotScheduleCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // ModifySnapshotScheduleMessage
+ *   ScheduleIdentifier: "STRING_VALUE", // required
+ *   ScheduleDefinitions: [ // ScheduleDefinitionList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new ModifySnapshotScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // SnapshotSchedule
+ * //   ScheduleDefinitions: [ // ScheduleDefinitionList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ScheduleIdentifier: "STRING_VALUE",
+ * //   ScheduleDescription: "STRING_VALUE",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextInvocations: [ // ScheduledSnapshotTimeList
+ * //     new Date("TIMESTAMP"),
+ * //   ],
+ * //   AssociatedClusterCount: Number("int"),
+ * //   AssociatedClusters: [ // AssociatedClusterList
+ * //     { // ClusterAssociatedToSchedule
+ * //       ClusterIdentifier: "STRING_VALUE",
+ * //       ScheduleAssociationState: "MODIFYING" || "ACTIVE" || "FAILED",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ModifySnapshotScheduleCommandInput - {@link ModifySnapshotScheduleCommandInput}
+ * @returns {@link ModifySnapshotScheduleCommandOutput}
  * @see {@link ModifySnapshotScheduleCommandInput} for command's `input` shape.
  * @see {@link ModifySnapshotScheduleCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link InvalidScheduleFault} (client fault)
+ *  <p>The schedule you submitted isn't valid.</p>
+ *
+ * @throws {@link SnapshotScheduleNotFoundFault} (client fault)
+ *  <p>We could not find the specified snapshot schedule. </p>
+ *
+ * @throws {@link SnapshotScheduleUpdateInProgressFault} (client fault)
+ *  <p>The specified snapshot schedule is already being updated.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class ModifySnapshotScheduleCommand extends $Command<
-  ModifySnapshotScheduleCommandInput,
-  ModifySnapshotScheduleCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifySnapshotScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifySnapshotScheduleCommandInput, ModifySnapshotScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "ModifySnapshotScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifySnapshotScheduleMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: SnapshotSchedule.filterSensitiveLog,
+export class ModifySnapshotScheduleCommand extends command<ModifySnapshotScheduleCommandInput, ModifySnapshotScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifySnapshotSchedule",
+  ModifySnapshotSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySnapshotScheduleMessage;
+      output: SnapshotSchedule;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifySnapshotScheduleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryModifySnapshotScheduleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifySnapshotScheduleCommandOutput> {
-    return deserializeAws_queryModifySnapshotScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifySnapshotScheduleCommandInput;
+      output: ModifySnapshotScheduleCommandOutput;
+    };
+  };
 }

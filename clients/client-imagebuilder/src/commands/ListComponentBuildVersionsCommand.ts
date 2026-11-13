@@ -1,107 +1,190 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ImagebuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ImagebuilderClient";
-import { ListComponentBuildVersionsRequest, ListComponentBuildVersionsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListComponentBuildVersionsCommand,
-  serializeAws_restJson1ListComponentBuildVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListComponentBuildVersionsRequest, ListComponentBuildVersionsResponse } from "../models/models_0";
+import { ListComponentBuildVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListComponentBuildVersionsCommand}.
+ */
 export interface ListComponentBuildVersionsCommandInput extends ListComponentBuildVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListComponentBuildVersionsCommand}.
+ */
 export interface ListComponentBuildVersionsCommandOutput extends ListComponentBuildVersionsResponse, __MetadataBearer {}
 
 /**
- * <p> Returns the list of component build versions for the specified semantic version.</p>
- * 		       <note>
- * 			         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
- * 	You can assign values for the first three, and can filter on all of them.</p>
- * 			         <p>
- *                <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x)
- * 	to specify the most recent versions or nodes when selecting the base image or components for your
- * 	recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be
- * 	wildcards.</p>
- * 		       </note>
+ * <p>Returns a list of component build versions for the specified component
+ * 			version ARN. You can only list build versions for components that your
+ * 			account owns. Deprecated build versions aren't included in the
+ * 			results.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ImagebuilderClient, ListComponentBuildVersionsCommand } from "@aws-sdk/client-imagebuilder"; // ES Modules import
  * // const { ImagebuilderClient, ListComponentBuildVersionsCommand } = require("@aws-sdk/client-imagebuilder"); // CommonJS import
+ * // import type { ImagebuilderClientConfig } from "@aws-sdk/client-imagebuilder";
+ * const config = {}; // type is ImagebuilderClientConfig
  * const client = new ImagebuilderClient(config);
+ * const input = { // ListComponentBuildVersionsRequest
+ *   componentVersionArn: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListComponentBuildVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListComponentBuildVersionsResponse
+ * //   requestId: "STRING_VALUE",
+ * //   componentSummaryList: [ // ComponentSummaryList
+ * //     { // ComponentSummary
+ * //       arn: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       version: "STRING_VALUE",
+ * //       platform: "Windows" || "Linux" || "macOS",
+ * //       supportedOsVersions: [ // OsVersionList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       state: { // ComponentState
+ * //         status: "DEPRECATED" || "DISABLED" || "ACTIVE",
+ * //         reason: "STRING_VALUE",
+ * //       },
+ * //       type: "BUILD" || "TEST",
+ * //       owner: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       changeDescription: "STRING_VALUE",
+ * //       dateCreated: "STRING_VALUE",
+ * //       tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       publisher: "STRING_VALUE",
+ * //       obfuscate: true || false,
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListComponentBuildVersionsCommandInput - {@link ListComponentBuildVersionsCommandInput}
+ * @returns {@link ListComponentBuildVersionsCommandOutput}
  * @see {@link ListComponentBuildVersionsCommandInput} for command's `input` shape.
  * @see {@link ListComponentBuildVersionsCommandOutput} for command's `response` shape.
- * @see {@link ImagebuilderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ImagebuilderClientResolvedConfig | config} for ImagebuilderClient's `config` shape.
  *
+ * @throws {@link CallRateLimitExceededException} (client fault)
+ *  <p>You have exceeded the permitted request rate for the Amazon EC2 APIs that Image Builder
+ * 			calls on your behalf. Retry with an increasing or variable delay between
+ * 			requests.</p>
+ *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A generic client error. This error usually indicates that the request
+ * 			failed a validation check, such as when a downstream service rejects a
+ * 			configured value.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You are not authorized to perform the requested operation.</p>
+ *
+ * @throws {@link InvalidPaginationTokenException} (client fault)
+ *  <p>You have provided an invalid pagination token in your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is malformed or otherwise invalid. Verify the request and try
+ * 			again.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An internal server error occurred while Image Builder processed the request.
+ * 			Retrying the request may succeed.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is unable to process your request at this time.</p>
+ *
+ * @throws {@link ImagebuilderServiceException}
+ * <p>Base exception class for all service exceptions from Imagebuilder service.</p>
+ *
+ *
+ * @example List the build versions of a component
+ * ```javascript
+ * // The following example lists the build versions that exist for version 1.0.0 of the specified component. The list returns the most recent build version first.
+ * const input = {
+ *   componentVersionArn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0"
+ * };
+ * const command = new ListComponentBuildVersionsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   componentSummaryList: [
+ *     {
+ *       arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/2",
+ *       changeDescription: "Updated the install command to use dnf",
+ *       dateCreated: "2026-09-09T18:35:23.098Z",
+ *       description: "Installs the latest version of my application",
+ *       name: "my-example-component",
+ *       owner: "111122223333",
+ *       platform: "Linux",
+ *       state: {
+ *         status: "ACTIVE"
+ *       },
+ *       supportedOsVersions: [
+ *         "Amazon Linux 2023"
+ *       ],
+ *       tags: {
+ *         Environment: "Production"
+ *       },
+ *       type: "BUILD",
+ *       version: "1.0.0"
+ *     },
+ *     {
+ *       arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1",
+ *       changeDescription: "Initial version",
+ *       dateCreated: "2026-09-09T18:35:20.731Z",
+ *       description: "Installs the latest version of my application",
+ *       name: "my-example-component",
+ *       owner: "111122223333",
+ *       platform: "Linux",
+ *       state: {
+ *         status: "ACTIVE"
+ *       },
+ *       supportedOsVersions: [
+ *         "Amazon Linux 2023"
+ *       ],
+ *       tags: {
+ *         Environment: "Production"
+ *       },
+ *       type: "BUILD",
+ *       version: "1.0.0"
+ *     }
+ *   ],
+ *   requestId: "1d8693f0-26e1-42d7-ba35-d95ace1ce7e0"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListComponentBuildVersionsCommand extends $Command<
-  ListComponentBuildVersionsCommandInput,
-  ListComponentBuildVersionsCommandOutput,
-  ImagebuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListComponentBuildVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ImagebuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListComponentBuildVersionsCommandInput, ListComponentBuildVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ImagebuilderClient";
-    const commandName = "ListComponentBuildVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListComponentBuildVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListComponentBuildVersionsResponse.filterSensitiveLog,
+export class ListComponentBuildVersionsCommand extends command<ListComponentBuildVersionsCommandInput, ListComponentBuildVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListComponentBuildVersions",
+  ListComponentBuildVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListComponentBuildVersionsRequest;
+      output: ListComponentBuildVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListComponentBuildVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListComponentBuildVersionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListComponentBuildVersionsCommandOutput> {
-    return deserializeAws_restJson1ListComponentBuildVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListComponentBuildVersionsCommandInput;
+      output: ListComponentBuildVersionsCommandOutput;
+    };
+  };
 }

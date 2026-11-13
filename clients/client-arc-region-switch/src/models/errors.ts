@@ -1,0 +1,180 @@
+// smithy-typescript generated code
+import type { ExceptionOptionType as __ExceptionOptionType } from "@smithy/core/client";
+
+import { ARCRegionSwitchServiceException as __BaseException } from "./ARCRegionSwitchServiceException";
+
+/**
+ * <p>You do not have sufficient access to perform this action.</p> <p>HTTP Status Code: 403</p>
+ * @public
+ */
+export class AccessDeniedException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#AccessDeniedException";
+  readonly name = "AccessDeniedException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
+    super({
+      name: "AccessDeniedException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, AccessDeniedException.prototype);
+  }
+}
+
+/**
+ * <p>The specified resource was not found.</p> <p>HTTP Status Code: 404</p>
+ * @public
+ */
+export class ResourceNotFoundException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#ResourceNotFoundException";
+  readonly name = "ResourceNotFoundException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
+    super({
+      name: "ResourceNotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
+  }
+}
+
+/**
+ * <p>The request processing has an invalid argument.</p>
+ * @public
+ */
+export class IllegalArgumentException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#IllegalArgumentException";
+  readonly name = "IllegalArgumentException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<IllegalArgumentException, __BaseException>) {
+    super({
+      name: "IllegalArgumentException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, IllegalArgumentException.prototype);
+  }
+}
+
+/**
+ * <p>The request processing has failed because of an unknown error, exception, or failure.</p> <p>HTTP Status Code: 500</p>
+ * @public
+ */
+export class InternalServerException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#InternalServerException";
+  readonly name = "InternalServerException" as const;
+  readonly $fault = "server" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InternalServerException, __BaseException>) {
+    super({
+      name: "InternalServerException",
+      $fault: "server",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InternalServerException.prototype);
+  }
+}
+
+/**
+ * <p>The operation failed because the current state of the resource doesn't allow the operation to proceed.</p> <p>HTTP Status Code: 400</p>
+ * @public
+ */
+export class IllegalStateException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#IllegalStateException";
+  readonly name = "IllegalStateException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<IllegalStateException, __BaseException>) {
+    super({
+      name: "IllegalStateException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, IllegalStateException.prototype);
+  }
+}
+
+/**
+ * <p>The request conflicted with a concurrent modification of the same resource and did not take effect.</p>
+ * @public
+ */
+export class RetryableConflictException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#RetryableConflictException";
+  readonly name = "RetryableConflictException" as const;
+  readonly $fault = "client" as const;
+  $retryable = {};
+  /**
+   * <p>The identifier of the resource involved in the concurrent modification.</p>
+   * @public
+   */
+  resourceId?: string | undefined;
+
+  /**
+   * <p>The type of the resource involved in the concurrent modification.</p>
+   * @public
+   */
+  resourceType?: string | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<RetryableConflictException, __BaseException>) {
+    super({
+      name: "RetryableConflictException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, RetryableConflictException.prototype);
+    this.resourceId = opts.resourceId;
+    this.resourceType = opts.resourceType;
+  }
+}
+
+/**
+ * <p>The client token was already used with different request parameters. A client token must map to the same parameters for every request. To retry this operation, provide a new client token.</p>
+ * @public
+ */
+export class ConflictException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.arcregionswitch#ConflictException";
+  readonly name = "ConflictException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * <p>The identifier of the resource involved in the client token conflict.</p>
+   * @public
+   */
+  resourceId?: string | undefined;
+
+  /**
+   * <p>The type of the resource involved in the client token conflict.</p>
+   * @public
+   */
+  resourceType?: string | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
+    super({
+      name: "ConflictException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ConflictException.prototype);
+    this.resourceId = opts.resourceId;
+    this.resourceType = opts.resourceType;
+  }
+}

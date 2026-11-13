@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import { SetV2LoggingOptionsRequest } from "../models/models_2";
-import {
-  deserializeAws_restJson1SetV2LoggingOptionsCommand,
-  serializeAws_restJson1SetV2LoggingOptionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetV2LoggingOptionsRequest } from "../models/models_2";
+import { SetV2LoggingOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetV2LoggingOptionsCommand}.
+ */
 export interface SetV2LoggingOptionsCommandInput extends SetV2LoggingOptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SetV2LoggingOptionsCommand}.
+ */
 export interface SetV2LoggingOptionsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +30,63 @@ export interface SetV2LoggingOptionsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IoTClient, SetV2LoggingOptionsCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, SetV2LoggingOptionsCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // SetV2LoggingOptionsRequest
+ *   roleArn: "STRING_VALUE",
+ *   defaultLogLevel: "DEBUG" || "INFO" || "ERROR" || "WARN" || "DISABLED",
+ *   disableAllLogs: true || false,
+ *   eventConfigurations: [ // LogEventConfigurations
+ *     { // LogEventConfiguration
+ *       eventType: "STRING_VALUE", // required
+ *       logLevel: "DEBUG" || "INFO" || "ERROR" || "WARN" || "DISABLED",
+ *       logDestination: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new SetV2LoggingOptionsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param SetV2LoggingOptionsCommandInput - {@link SetV2LoggingOptionsCommandInput}
+ * @returns {@link SetV2LoggingOptionsCommandOutput}
  * @see {@link SetV2LoggingOptionsCommandInput} for command's `input` shape.
  * @see {@link SetV2LoggingOptionsCommandOutput} for command's `response` shape.
- * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class SetV2LoggingOptionsCommand extends $Command<
-  SetV2LoggingOptionsCommandInput,
-  SetV2LoggingOptionsCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetV2LoggingOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetV2LoggingOptionsCommandInput, SetV2LoggingOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "SetV2LoggingOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetV2LoggingOptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class SetV2LoggingOptionsCommand extends command<SetV2LoggingOptionsCommandInput, SetV2LoggingOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetV2LoggingOptions",
+  SetV2LoggingOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetV2LoggingOptionsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetV2LoggingOptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SetV2LoggingOptionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SetV2LoggingOptionsCommandOutput> {
-    return deserializeAws_restJson1SetV2LoggingOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetV2LoggingOptionsCommandInput;
+      output: SetV2LoggingOptionsCommandOutput;
+    };
+  };
 }

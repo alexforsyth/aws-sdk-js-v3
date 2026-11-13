@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetLensReviewReportInput, GetLensReviewReportOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetLensReviewReportCommand,
-  serializeAws_restJson1GetLensReviewReportCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WellArchitectedClientResolvedConfig } from "../WellArchitectedClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLensReviewReportInput, GetLensReviewReportOutput } from "../models/models_0";
+import { GetLensReviewReport$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLensReviewReportCommand}.
+ */
 export interface GetLensReviewReportCommandInput extends GetLensReviewReportInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetLensReviewReportCommand}.
+ */
 export interface GetLensReviewReportCommandOutput extends GetLensReviewReportOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,70 @@ export interface GetLensReviewReportCommandOutput extends GetLensReviewReportOut
  * ```javascript
  * import { WellArchitectedClient, GetLensReviewReportCommand } from "@aws-sdk/client-wellarchitected"; // ES Modules import
  * // const { WellArchitectedClient, GetLensReviewReportCommand } = require("@aws-sdk/client-wellarchitected"); // CommonJS import
+ * // import type { WellArchitectedClientConfig } from "@aws-sdk/client-wellarchitected";
+ * const config = {}; // type is WellArchitectedClientConfig
  * const client = new WellArchitectedClient(config);
+ * const input = { // GetLensReviewReportInput
+ *   WorkloadId: "STRING_VALUE", // required
+ *   LensAlias: "STRING_VALUE", // required
+ *   MilestoneNumber: Number("int"),
+ * };
  * const command = new GetLensReviewReportCommand(input);
  * const response = await client.send(command);
+ * // { // GetLensReviewReportOutput
+ * //   WorkloadId: "STRING_VALUE",
+ * //   MilestoneNumber: Number("int"),
+ * //   LensReviewReport: { // LensReviewReport
+ * //     LensAlias: "STRING_VALUE",
+ * //     LensArn: "STRING_VALUE",
+ * //     Base64String: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetLensReviewReportCommandInput - {@link GetLensReviewReportCommandInput}
+ * @returns {@link GetLensReviewReportCommandOutput}
  * @see {@link GetLensReviewReportCommandInput} for command's `input` shape.
  * @see {@link GetLensReviewReportCommandOutput} for command's `response` shape.
- * @see {@link WellArchitectedClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WellArchitectedClientResolvedConfig | config} for WellArchitectedClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is a problem with the Well-Architected Tool API service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input is not valid.</p>
+ *
+ * @throws {@link WellArchitectedServiceException}
+ * <p>Base exception class for all service exceptions from WellArchitected service.</p>
+ *
+ *
+ * @public
  */
-export class GetLensReviewReportCommand extends $Command<
-  GetLensReviewReportCommandInput,
-  GetLensReviewReportCommandOutput,
-  WellArchitectedClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLensReviewReportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WellArchitectedClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLensReviewReportCommandInput, GetLensReviewReportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WellArchitectedClient";
-    const commandName = "GetLensReviewReportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLensReviewReportInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetLensReviewReportOutput.filterSensitiveLog,
+export class GetLensReviewReportCommand extends command<GetLensReviewReportCommandInput, GetLensReviewReportCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLensReviewReport",
+  GetLensReviewReport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLensReviewReportInput;
+      output: GetLensReviewReportOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLensReviewReportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLensReviewReportCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLensReviewReportCommandOutput> {
-    return deserializeAws_restJson1GetLensReviewReportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLensReviewReportCommandInput;
+      output: GetLensReviewReportCommandOutput;
+    };
+  };
 }

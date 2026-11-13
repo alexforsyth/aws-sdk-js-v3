@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeDeviceRequest, DescribeDeviceResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeDeviceCommand,
-  serializeAws_json1_1DescribeDeviceCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDeviceRequest, DescribeDeviceResponse } from "../models/models_2";
+import { DescribeDevice$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDeviceCommand}.
+ */
 export interface DescribeDeviceCommandInput extends DescribeDeviceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDeviceCommand}.
+ */
 export interface DescribeDeviceCommandOutput extends DescribeDeviceResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface DescribeDeviceCommandOutput extends DescribeDeviceResponse, __M
  * ```javascript
  * import { SageMakerClient, DescribeDeviceCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeDeviceCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeDeviceRequest
+ *   NextToken: "STRING_VALUE",
+ *   DeviceName: "STRING_VALUE", // required
+ *   DeviceFleetName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDeviceCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDeviceResponse
+ * //   DeviceArn: "STRING_VALUE",
+ * //   DeviceName: "STRING_VALUE", // required
+ * //   Description: "STRING_VALUE",
+ * //   DeviceFleetName: "STRING_VALUE", // required
+ * //   IotThingName: "STRING_VALUE",
+ * //   RegistrationTime: new Date("TIMESTAMP"), // required
+ * //   LatestHeartbeat: new Date("TIMESTAMP"),
+ * //   Models: [ // EdgeModels
+ * //     { // EdgeModel
+ * //       ModelName: "STRING_VALUE", // required
+ * //       ModelVersion: "STRING_VALUE", // required
+ * //       LatestSampleTime: new Date("TIMESTAMP"),
+ * //       LatestInference: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   MaxModels: Number("int"),
+ * //   NextToken: "STRING_VALUE",
+ * //   AgentVersion: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeDeviceCommandInput - {@link DescribeDeviceCommandInput}
+ * @returns {@link DescribeDeviceCommandOutput}
  * @see {@link DescribeDeviceCommandInput} for command's `input` shape.
  * @see {@link DescribeDeviceCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDeviceCommand extends $Command<
-  DescribeDeviceCommandInput,
-  DescribeDeviceCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDeviceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDeviceCommandInput, DescribeDeviceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeDeviceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDeviceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDeviceResponse.filterSensitiveLog,
+export class DescribeDeviceCommand extends command<DescribeDeviceCommandInput, DescribeDeviceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDevice",
+  DescribeDevice$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDeviceRequest;
+      output: DescribeDeviceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDeviceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDeviceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDeviceCommandOutput> {
-    return deserializeAws_json1_1DescribeDeviceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDeviceCommandInput;
+      output: DescribeDeviceCommandOutput;
+    };
+  };
 }

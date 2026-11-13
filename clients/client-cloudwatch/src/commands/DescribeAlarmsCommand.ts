@@ -1,96 +1,288 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
-import { DescribeAlarmsInput, DescribeAlarmsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeAlarmsCommand,
-  serializeAws_queryDescribeAlarmsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAlarmsInput, DescribeAlarmsOutput } from "../models/models_0";
+import { DescribeAlarms$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAlarmsCommand}.
+ */
 export interface DescribeAlarmsCommandInput extends DescribeAlarmsInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAlarmsCommand}.
+ */
 export interface DescribeAlarmsCommandOutput extends DescribeAlarmsOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm
- * 			name, the alarm state, or a prefix for any action.</p>
+ * <p>Retrieves the specified alarms. You can filter the results by specifying a prefix
+ *             for the alarm name, the alarm state, or a prefix for any action.</p>
+ *          <p>To use this operation and return information about composite alarms, you must be
+ *             signed on with the <code>cloudwatch:DescribeAlarms</code> permission that is scoped to
+ *                 <code>*</code>. You can't return information about composite alarms if your
+ *                 <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudWatchClient, DescribeAlarmsCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
  * // const { CloudWatchClient, DescribeAlarmsCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * // import type { CloudWatchClientConfig } from "@aws-sdk/client-cloudwatch";
+ * const config = {}; // type is CloudWatchClientConfig
  * const client = new CloudWatchClient(config);
+ * const input = { // DescribeAlarmsInput
+ *   AlarmNames: [ // AlarmNames
+ *     "STRING_VALUE",
+ *   ],
+ *   AlarmNamePrefix: "STRING_VALUE",
+ *   AlarmTypes: [ // AlarmTypes
+ *     "CompositeAlarm" || "MetricAlarm" || "LogAlarm",
+ *   ],
+ *   ChildrenOfAlarmName: "STRING_VALUE",
+ *   ParentsOfAlarmName: "STRING_VALUE",
+ *   StateValue: "OK" || "ALARM" || "INSUFFICIENT_DATA",
+ *   ActionPrefix: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAlarmsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAlarmsOutput
+ * //   CompositeAlarms: [ // CompositeAlarms
+ * //     { // CompositeAlarm
+ * //       ActionsEnabled: true || false,
+ * //       AlarmActions: [ // ResourceList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AlarmArn: "STRING_VALUE",
+ * //       AlarmConfigurationUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       AlarmDescription: "STRING_VALUE",
+ * //       AlarmName: "STRING_VALUE",
+ * //       AlarmRule: "STRING_VALUE",
+ * //       InsufficientDataActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       OKActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       StateReason: "STRING_VALUE",
+ * //       StateReasonData: "STRING_VALUE",
+ * //       StateUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       StateValue: "OK" || "ALARM" || "INSUFFICIENT_DATA",
+ * //       StateTransitionedTimestamp: new Date("TIMESTAMP"),
+ * //       ActionsSuppressedBy: "WaitPeriod" || "ExtensionPeriod" || "Alarm",
+ * //       ActionsSuppressedReason: "STRING_VALUE",
+ * //       ActionsSuppressor: "STRING_VALUE",
+ * //       ActionsSuppressorWaitPeriod: Number("int"),
+ * //       ActionsSuppressorExtensionPeriod: Number("int"),
+ * //       ActionConfiguration: { // ActionConfiguration
+ * //         AlarmTagsPropagation: { // AlarmTagsPropagation
+ * //           Enabled: true || false, // required
+ * //           IncludedTagKeys: [ // AlarmTagsPropagationTagKeys
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ExcludedTagKeys: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   MetricAlarms: [ // MetricAlarms
+ * //     { // MetricAlarm
+ * //       AlarmName: "STRING_VALUE",
+ * //       AlarmArn: "STRING_VALUE",
+ * //       AlarmDescription: "STRING_VALUE",
+ * //       AlarmConfigurationUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       ActionsEnabled: true || false,
+ * //       OKActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AlarmActions: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       InsufficientDataActions: "<ResourceList>",
+ * //       StateValue: "OK" || "ALARM" || "INSUFFICIENT_DATA",
+ * //       StateReason: "STRING_VALUE",
+ * //       StateReasonData: "STRING_VALUE",
+ * //       StateUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       MetricName: "STRING_VALUE",
+ * //       Namespace: "STRING_VALUE",
+ * //       Statistic: "SampleCount" || "Average" || "Sum" || "Minimum" || "Maximum",
+ * //       ExtendedStatistic: "STRING_VALUE",
+ * //       Dimensions: [ // Dimensions
+ * //         { // Dimension
+ * //           Name: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       Period: Number("int"),
+ * //       Unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * //       EvaluationPeriods: Number("int"),
+ * //       DatapointsToAlarm: Number("int"),
+ * //       Threshold: Number("double"),
+ * //       ComparisonOperator: "GreaterThanOrEqualToThreshold" || "GreaterThanThreshold" || "LessThanThreshold" || "LessThanOrEqualToThreshold" || "LessThanLowerOrGreaterThanUpperThreshold" || "LessThanLowerThreshold" || "GreaterThanUpperThreshold",
+ * //       TreatMissingData: "STRING_VALUE",
+ * //       EvaluateLowSampleCountPercentile: "STRING_VALUE",
+ * //       Metrics: [ // MetricDataQueries
+ * //         { // MetricDataQuery
+ * //           Id: "STRING_VALUE", // required
+ * //           MetricStat: { // MetricStat
+ * //             Metric: { // Metric
+ * //               Namespace: "STRING_VALUE",
+ * //               MetricName: "STRING_VALUE",
+ * //               Dimensions: [
+ * //                 {
+ * //                   Name: "STRING_VALUE", // required
+ * //                   Value: "STRING_VALUE", // required
+ * //                 },
+ * //               ],
+ * //             },
+ * //             Period: Number("int"), // required
+ * //             Stat: "STRING_VALUE", // required
+ * //             Unit: "Seconds" || "Microseconds" || "Milliseconds" || "Bytes" || "Kilobytes" || "Megabytes" || "Gigabytes" || "Terabytes" || "Bits" || "Kilobits" || "Megabits" || "Gigabits" || "Terabits" || "Percent" || "Count" || "Bytes/Second" || "Kilobytes/Second" || "Megabytes/Second" || "Gigabytes/Second" || "Terabytes/Second" || "Bits/Second" || "Kilobits/Second" || "Megabits/Second" || "Gigabits/Second" || "Terabits/Second" || "Count/Second" || "None",
+ * //           },
+ * //           Expression: "STRING_VALUE",
+ * //           Label: "STRING_VALUE",
+ * //           ReturnData: true || false,
+ * //           Period: Number("int"),
+ * //           AccountId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ThresholdMetricId: "STRING_VALUE",
+ * //       EvaluationState: "PARTIAL_DATA" || "EVALUATION_FAILURE" || "EVALUATION_ERROR",
+ * //       StateTransitionedTimestamp: new Date("TIMESTAMP"),
+ * //       EvaluationWindow: { // EvaluationWindow Union: only one key present
+ * //         WallClockWindow: { // WallClockWindow
+ * //           Timezone: "STRING_VALUE",
+ * //         },
+ * //         SlidingWindow: {},
+ * //       },
+ * //       WarmUpConfiguration: { // WarmUpConfiguration
+ * //         WarmUpPeriodDurationInMinutes: Number("int"), // required
+ * //         OnlyStartEvaluatingAfterWarmUpPeriodEnds: true || false,
+ * //       },
+ * //       EvaluationCriteria: { // EvaluationCriteria Union: only one key present
+ * //         PromQLCriteria: { // AlarmPromQLCriteria
+ * //           Query: "STRING_VALUE", // required
+ * //           PendingPeriod: Number("int"),
+ * //           RecoveryPeriod: Number("int"),
+ * //         },
+ * //       },
+ * //       EvaluationInterval: Number("int"),
+ * //       ActionConfiguration: {
+ * //         AlarmTagsPropagation: {
+ * //           Enabled: true || false, // required
+ * //           IncludedTagKeys: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ExcludedTagKeys: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   LogAlarms: [ // LogAlarms
+ * //     { // LogAlarm
+ * //       AlarmName: "STRING_VALUE",
+ * //       AlarmArn: "STRING_VALUE",
+ * //       AlarmDescription: "STRING_VALUE",
+ * //       AlarmConfigurationUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       ActionsEnabled: true || false,
+ * //       OKActions: "<ResourceList>",
+ * //       AlarmActions: "<ResourceList>",
+ * //       InsufficientDataActions: "<ResourceList>",
+ * //       StateValue: "OK" || "ALARM" || "INSUFFICIENT_DATA",
+ * //       StateReason: "STRING_VALUE",
+ * //       StateReasonData: "STRING_VALUE",
+ * //       StateUpdatedTimestamp: new Date("TIMESTAMP"),
+ * //       ScheduledQueryConfiguration: { // ScheduledQueryConfiguration
+ * //         QueryString: "STRING_VALUE", // required
+ * //         LogGroupIdentifiers: [ // LogGroupIdentifiers
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         QueryARN: "STRING_VALUE",
+ * //         ScheduledQueryRoleARN: "STRING_VALUE", // required
+ * //         ScheduleConfiguration: { // ScheduleConfiguration
+ * //           ScheduleExpression: "STRING_VALUE", // required
+ * //           StartTimeOffset: Number("long"), // required
+ * //           EndTimeOffset: Number("long"),
+ * //         },
+ * //         AggregationExpression: "STRING_VALUE", // required
+ * //         Tags: [ // TagList
+ * //           { // Tag
+ * //             Key: "STRING_VALUE", // required
+ * //             Value: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //       QueryResultsToEvaluate: Number("int"),
+ * //       QueryResultsToAlarm: Number("int"),
+ * //       Threshold: Number("double"),
+ * //       ComparisonOperator: "GreaterThanOrEqualToThreshold" || "GreaterThanThreshold" || "LessThanThreshold" || "LessThanOrEqualToThreshold" || "LessThanLowerOrGreaterThanUpperThreshold" || "LessThanLowerThreshold" || "GreaterThanUpperThreshold",
+ * //       TreatMissingData: "STRING_VALUE",
+ * //       StateTransitionedTimestamp: new Date("TIMESTAMP"),
+ * //       EvaluationState: "PARTIAL_DATA" || "EVALUATION_FAILURE" || "EVALUATION_ERROR",
+ * //       ActionLogLineCount: Number("int"),
+ * //       ActionLogLineRoleArn: "STRING_VALUE",
+ * //       WarmUpConfiguration: {
+ * //         WarmUpPeriodDurationInMinutes: Number("int"), // required
+ * //         OnlyStartEvaluatingAfterWarmUpPeriodEnds: true || false,
+ * //       },
+ * //       ActionConfiguration: {
+ * //         AlarmTagsPropagation: {
+ * //           Enabled: true || false, // required
+ * //           IncludedTagKeys: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ExcludedTagKeys: "<AlarmTagsPropagationTagKeys>",
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAlarmsCommandInput - {@link DescribeAlarmsCommandInput}
+ * @returns {@link DescribeAlarmsCommandOutput}
  * @see {@link DescribeAlarmsCommandInput} for command's `input` shape.
  * @see {@link DescribeAlarmsCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for CloudWatchClient's `config` shape.
  *
+ * @throws {@link InvalidNextToken} (client fault)
+ *  <p>The next token specified is invalid.</p>
+ *
+ * @throws {@link CloudWatchServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAlarmsCommand extends $Command<
-  DescribeAlarmsCommandInput,
-  DescribeAlarmsCommandOutput,
-  CloudWatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAlarmsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAlarmsCommandInput, DescribeAlarmsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchClient";
-    const commandName = "DescribeAlarmsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAlarmsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAlarmsOutput.filterSensitiveLog,
+export class DescribeAlarmsCommand extends command<DescribeAlarmsCommandInput, DescribeAlarmsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAlarms",
+  DescribeAlarms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAlarmsInput;
+      output: DescribeAlarmsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAlarmsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeAlarmsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAlarmsCommandOutput> {
-    return deserializeAws_queryDescribeAlarmsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAlarmsCommandInput;
+      output: DescribeAlarmsCommandOutput;
+    };
+  };
 }

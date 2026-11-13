@@ -1,34 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeReplicationInstanceTaskLogsMessage,
   DescribeReplicationInstanceTaskLogsResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeReplicationInstanceTaskLogsCommand,
-  serializeAws_json1_1DescribeReplicationInstanceTaskLogsCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeReplicationInstanceTaskLogs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeReplicationInstanceTaskLogsCommand}.
+ */
 export interface DescribeReplicationInstanceTaskLogsCommandInput extends DescribeReplicationInstanceTaskLogsMessage {}
-export interface DescribeReplicationInstanceTaskLogsCommandOutput
-  extends DescribeReplicationInstanceTaskLogsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeReplicationInstanceTaskLogsCommand}.
+ */
+export interface DescribeReplicationInstanceTaskLogsCommandOutput extends DescribeReplicationInstanceTaskLogsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns information about the task logs for the specified task.</p>
@@ -37,74 +32,63 @@ export interface DescribeReplicationInstanceTaskLogsCommandOutput
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeReplicationInstanceTaskLogsCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeReplicationInstanceTaskLogsCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DescribeReplicationInstanceTaskLogsMessage
+ *   ReplicationInstanceArn: "STRING_VALUE", // required
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeReplicationInstanceTaskLogsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeReplicationInstanceTaskLogsResponse
+ * //   ReplicationInstanceArn: "STRING_VALUE",
+ * //   ReplicationInstanceTaskLogs: [ // ReplicationInstanceTaskLogsList
+ * //     { // ReplicationInstanceTaskLog
+ * //       ReplicationTaskName: "STRING_VALUE",
+ * //       ReplicationTaskArn: "STRING_VALUE",
+ * //       ReplicationInstanceTaskLogSize: Number("long"),
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeReplicationInstanceTaskLogsCommandInput - {@link DescribeReplicationInstanceTaskLogsCommandInput}
+ * @returns {@link DescribeReplicationInstanceTaskLogsCommandOutput}
  * @see {@link DescribeReplicationInstanceTaskLogsCommandInput} for command's `input` shape.
  * @see {@link DescribeReplicationInstanceTaskLogsCommandOutput} for command's `response` shape.
- * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeReplicationInstanceTaskLogsCommand extends $Command<
-  DescribeReplicationInstanceTaskLogsCommandInput,
-  DescribeReplicationInstanceTaskLogsCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeReplicationInstanceTaskLogsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeReplicationInstanceTaskLogsCommandInput, DescribeReplicationInstanceTaskLogsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeReplicationInstanceTaskLogsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeReplicationInstanceTaskLogsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeReplicationInstanceTaskLogsResponse.filterSensitiveLog,
+export class DescribeReplicationInstanceTaskLogsCommand extends command<DescribeReplicationInstanceTaskLogsCommandInput, DescribeReplicationInstanceTaskLogsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeReplicationInstanceTaskLogs",
+  DescribeReplicationInstanceTaskLogs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplicationInstanceTaskLogsMessage;
+      output: DescribeReplicationInstanceTaskLogsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeReplicationInstanceTaskLogsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeReplicationInstanceTaskLogsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeReplicationInstanceTaskLogsCommandOutput> {
-    return deserializeAws_json1_1DescribeReplicationInstanceTaskLogsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeReplicationInstanceTaskLogsCommandInput;
+      output: DescribeReplicationInstanceTaskLogsCommandOutput;
+    };
+  };
 }

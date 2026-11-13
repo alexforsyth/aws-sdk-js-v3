@@ -1,119 +1,93 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import { ApiGatewayManagementApiClient } from "./ApiGatewayManagementApiClient";
 import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
   DeleteConnectionCommand,
-  DeleteConnectionCommandInput,
-  DeleteConnectionCommandOutput,
 } from "./commands/DeleteConnectionCommand";
 import {
+  type GetConnectionCommandInput,
+  type GetConnectionCommandOutput,
   GetConnectionCommand,
-  GetConnectionCommandInput,
-  GetConnectionCommandOutput,
 } from "./commands/GetConnectionCommand";
 import {
+  type PostToConnectionCommandInput,
+  type PostToConnectionCommandOutput,
   PostToConnectionCommand,
-  PostToConnectionCommandInput,
-  PostToConnectionCommandOutput,
 } from "./commands/PostToConnectionCommand";
 
+const commands = {
+  DeleteConnectionCommand,
+  GetConnectionCommand,
+  PostToConnectionCommand,
+};
+
 /**
- * <p>The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK's endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or will be the endpoint corresponding to your API's custom domain and base path, if applicable.</p>
+ * @public
  */
-export class ApiGatewayManagementApi extends ApiGatewayManagementApiClient {
-  /**
-   * <p>Delete the connection with the provided id.</p>
-   */
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteConnectionCommandOutput>;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): void;
-  public deleteConnection(
-    args: DeleteConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteConnectionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteConnectionCommandOutput) => void
-  ): Promise<DeleteConnectionCommandOutput> | void {
-    const command = new DeleteConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Get information about the connection with the provided id.</p>
-   */
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetConnectionCommandOutput>;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetConnectionCommandOutput) => void
-  ): void;
-  public getConnection(
-    args: GetConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConnectionCommandOutput) => void),
-    cb?: (err: any, data?: GetConnectionCommandOutput) => void
-  ): Promise<GetConnectionCommandOutput> | void {
-    const command = new GetConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sends the provided data to the specified connection.</p>
-   */
-  public postToConnection(
-    args: PostToConnectionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PostToConnectionCommandOutput>;
-  public postToConnection(
-    args: PostToConnectionCommandInput,
-    cb: (err: any, data?: PostToConnectionCommandOutput) => void
-  ): void;
-  public postToConnection(
-    args: PostToConnectionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PostToConnectionCommandOutput) => void
-  ): void;
-  public postToConnection(
-    args: PostToConnectionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PostToConnectionCommandOutput) => void),
-    cb?: (err: any, data?: PostToConnectionCommandOutput) => void
-  ): Promise<PostToConnectionCommandOutput> | void {
-    const command = new PostToConnectionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+export interface ApiGatewayManagementApiRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
 }
+
+export interface ApiGatewayManagementApi {
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options?: ApiGatewayManagementApiRequestOptions
+  ): Promise<DeleteConnectionCommandOutput>;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options: ApiGatewayManagementApiRequestOptions,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionCommand}
+   */
+  getConnection(
+    args: GetConnectionCommandInput,
+    options?: ApiGatewayManagementApiRequestOptions
+  ): Promise<GetConnectionCommandOutput>;
+  getConnection(
+    args: GetConnectionCommandInput,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+  getConnection(
+    args: GetConnectionCommandInput,
+    options: ApiGatewayManagementApiRequestOptions,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PostToConnectionCommand}
+   */
+  postToConnection(
+    args: PostToConnectionCommandInput,
+    options?: ApiGatewayManagementApiRequestOptions
+  ): Promise<PostToConnectionCommandOutput>;
+  postToConnection(
+    args: PostToConnectionCommandInput,
+    cb: (err: any, data?: PostToConnectionCommandOutput) => void
+  ): void;
+  postToConnection(
+    args: PostToConnectionCommandInput,
+    options: ApiGatewayManagementApiRequestOptions,
+    cb: (err: any, data?: PostToConnectionCommandOutput) => void
+  ): void;
+}
+
+/**
+ * <p>The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK's endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://\{api-id\}.execute-api.\{region\}.amazonaws.com/\{stage\}, or will be the endpoint corresponding to your API's custom domain and base path, if applicable.</p>
+ * @public
+ */
+export class ApiGatewayManagementApi extends ApiGatewayManagementApiClient implements ApiGatewayManagementApi {}
+createAggregatedClient(commands, ApiGatewayManagementApi);

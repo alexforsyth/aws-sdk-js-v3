@@ -1,29 +1,32 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRPUBLICClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRPUBLICClient";
-import { PutImageRequest, PutImageResponse } from "../models/models_0";
-import { deserializeAws_json1_1PutImageCommand, serializeAws_json1_1PutImageCommand } from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutImageRequest, PutImageResponse } from "../models/models_0";
+import { PutImage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutImageCommand}.
+ */
 export interface PutImageCommandInput extends PutImageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutImageCommand}.
+ */
 export interface PutImageCommandOutput extends PutImageResponse, __MetadataBearer {}
 
 /**
- * <p>Creates or updates the image manifest and tags associated with an image.</p>
+ * <p>Creates or updates the image manifest and tags that are associated with an image.</p>
  *          <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is
- *          called once to create or update the image manifest and the tags associated with the
- *          image.</p>
- *
+ *          called once to create or update the image manifest and the tags that are associated with
+ *          the image.</p>
  *          <note>
  *             <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>
  *          </note>
@@ -32,68 +35,102 @@ export interface PutImageCommandOutput extends PutImageResponse, __MetadataBeare
  * ```javascript
  * import { ECRPUBLICClient, PutImageCommand } from "@aws-sdk/client-ecr-public"; // ES Modules import
  * // const { ECRPUBLICClient, PutImageCommand } = require("@aws-sdk/client-ecr-public"); // CommonJS import
+ * // import type { ECRPUBLICClientConfig } from "@aws-sdk/client-ecr-public";
+ * const config = {}; // type is ECRPUBLICClientConfig
  * const client = new ECRPUBLICClient(config);
+ * const input = { // PutImageRequest
+ *   registryId: "STRING_VALUE",
+ *   repositoryName: "STRING_VALUE", // required
+ *   imageManifest: "STRING_VALUE", // required
+ *   imageManifestMediaType: "STRING_VALUE",
+ *   imageTag: "STRING_VALUE",
+ *   imageDigest: "STRING_VALUE",
+ * };
  * const command = new PutImageCommand(input);
  * const response = await client.send(command);
+ * // { // PutImageResponse
+ * //   image: { // Image
+ * //     registryId: "STRING_VALUE",
+ * //     repositoryName: "STRING_VALUE",
+ * //     imageId: { // ImageIdentifier
+ * //       imageDigest: "STRING_VALUE",
+ * //       imageTag: "STRING_VALUE",
+ * //     },
+ * //     imageManifest: "STRING_VALUE",
+ * //     imageManifestMediaType: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutImageCommandInput - {@link PutImageCommandInput}
+ * @returns {@link PutImageCommandOutput}
  * @see {@link PutImageCommandInput} for command's `input` shape.
  * @see {@link PutImageCommandOutput} for command's `response` shape.
- * @see {@link ECRPUBLICClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ECRPUBLICClientResolvedConfig | config} for ECRPUBLICClient's `config` shape.
  *
+ * @throws {@link ImageAlreadyExistsException} (client fault)
+ *  <p>The specified image has already been pushed, and there were no changes to the manifest
+ *          or image tag after the last push.</p>
+ *
+ * @throws {@link ImageDigestDoesNotMatchException} (client fault)
+ *  <p>The specified image digest doesn't match the digest that Amazon ECR calculated for the
+ *          image.</p>
+ *
+ * @throws {@link ImageTagAlreadyExistsException} (client fault)
+ *  <p>The specified image is tagged with a tag that already exists. The repository is
+ *          configured for tag immutability.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *          request.</p>
+ *
+ * @throws {@link LayersNotFoundException} (client fault)
+ *  <p>The specified layers can't be found, or the specified layer isn't valid for this
+ *          repository.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The operation didn't succeed because it would have exceeded a service limit for your
+ *          account. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html">Amazon ECR Service Quotas</a> in the
+ *          Amazon Elastic Container Registry User Guide.</p>
+ *
+ * @throws {@link ReferencedImagesNotFoundException} (client fault)
+ *  <p>The manifest list is referencing an image that doesn't exist.</p>
+ *
+ * @throws {@link RegistryNotFoundException} (client fault)
+ *  <p>The registry doesn't exist.</p>
+ *
+ * @throws {@link RepositoryNotFoundException} (client fault)
+ *  <p>The specified repository can't be found. Check the spelling of the specified repository
+ *          and ensure that you're performing operations on the correct registry.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link UnsupportedCommandException} (client fault)
+ *  <p>The action isn't supported in this Region.</p>
+ *
+ * @throws {@link ECRPUBLICServiceException}
+ * <p>Base exception class for all service exceptions from ECRPUBLIC service.</p>
+ *
+ *
+ * @public
  */
-export class PutImageCommand extends $Command<
-  PutImageCommandInput,
-  PutImageCommandOutput,
-  ECRPUBLICClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutImageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRPUBLICClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutImageCommandInput, PutImageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRPUBLICClient";
-    const commandName = "PutImageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutImageRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutImageResponse.filterSensitiveLog,
+export class PutImageCommand extends command<PutImageCommandInput, PutImageCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutImage",
+  PutImage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutImageRequest;
+      output: PutImageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutImageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutImageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutImageCommandOutput> {
-    return deserializeAws_json1_1PutImageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutImageCommandInput;
+      output: PutImageCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,95 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBaselinesInput, ListBaselinesOutput } from "../models/models_0";
+import { ListBaselines$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBaselinesCommand}.
+ */
+export interface ListBaselinesCommandInput extends ListBaselinesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBaselinesCommand}.
+ */
+export interface ListBaselinesCommandOutput extends ListBaselinesOutput, __MetadataBearer {}
+
+/**
+ * <p>Returns a summary list of all available baselines. For usage examples, see <a href="https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html"> <i>the Amazon Web Services Control Tower User Guide</i> </a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ControlTowerClient, ListBaselinesCommand } from "@aws-sdk/client-controltower"; // ES Modules import
+ * // const { ControlTowerClient, ListBaselinesCommand } = require("@aws-sdk/client-controltower"); // CommonJS import
+ * // import type { ControlTowerClientConfig } from "@aws-sdk/client-controltower";
+ * const config = {}; // type is ControlTowerClientConfig
+ * const client = new ControlTowerClient(config);
+ * const input = { // ListBaselinesInput
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
+ * const command = new ListBaselinesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListBaselinesOutput
+ * //   baselines: [ // Baselines // required
+ * //     { // BaselineSummary
+ * //       arn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListBaselinesCommandInput - {@link ListBaselinesCommandInput}
+ * @returns {@link ListBaselinesCommandOutput}
+ * @see {@link ListBaselinesCommandInput} for command's `input` shape.
+ * @see {@link ListBaselinesCommandOutput} for command's `response` shape.
+ * @see {@link ControlTowerClientResolvedConfig | config} for ControlTowerClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during processing of a request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link ControlTowerServiceException}
+ * <p>Base exception class for all service exceptions from ControlTower service.</p>
+ *
+ *
+ * @public
+ */
+export class ListBaselinesCommand extends command<ListBaselinesCommandInput, ListBaselinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBaselines",
+  ListBaselines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBaselinesInput;
+      output: ListBaselinesOutput;
+    };
+    sdk: {
+      input: ListBaselinesCommandInput;
+      output: ListBaselinesCommandOutput;
+    };
+  };
+}

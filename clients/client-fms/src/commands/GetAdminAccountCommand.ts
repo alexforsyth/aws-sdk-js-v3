@@ -1,96 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import { GetAdminAccountRequest, GetAdminAccountResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetAdminAccountCommand,
-  serializeAws_json1_1GetAdminAccountCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAdminAccountRequest, GetAdminAccountResponse } from "../models/models_0";
+import { GetAdminAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAdminAccountCommand}.
+ */
 export interface GetAdminAccountCommandInput extends GetAdminAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAdminAccountCommand}.
+ */
 export interface GetAdminAccountCommandOutput extends GetAdminAccountResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the Organizations account that is associated with Firewall Manager
- *       as the Firewall Manager administrator.</p>
+ *       as the Firewall Manager default administrator.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FMSClient, GetAdminAccountCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, GetAdminAccountCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = {};
  * const command = new GetAdminAccountCommand(input);
  * const response = await client.send(command);
+ * // { // GetAdminAccountResponse
+ * //   AdminAccount: "STRING_VALUE",
+ * //   RoleStatus: "READY" || "CREATING" || "PENDING_DELETION" || "DELETING" || "DELETED",
+ * // };
+ *
  * ```
  *
+ * @param GetAdminAccountCommandInput - {@link GetAdminAccountCommandInput}
+ * @returns {@link GetAdminAccountCommandOutput}
  * @see {@link GetAdminAccountCommandInput} for command's `input` shape.
  * @see {@link GetAdminAccountCommandOutput} for command's `response` shape.
- * @see {@link FMSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do or the operation wasn't possible. For example, you might have
+ *         submitted an <code>AssociateAdminAccount</code> request for an account ID that
+ *             was already set as the Firewall Manager administrator. Or you might have tried to access a Region
+ *   that's disabled by default, and that you need to enable for the Firewall Manager
+ *   administrator account and for Organizations before you can access it.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class GetAdminAccountCommand extends $Command<
-  GetAdminAccountCommandInput,
-  GetAdminAccountCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAdminAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAdminAccountCommandInput, GetAdminAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "GetAdminAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAdminAccountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAdminAccountResponse.filterSensitiveLog,
+export class GetAdminAccountCommand extends command<GetAdminAccountCommandInput, GetAdminAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAdminAccount",
+  GetAdminAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAdminAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAdminAccountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetAdminAccountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAdminAccountCommandOutput> {
-    return deserializeAws_json1_1GetAdminAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAdminAccountCommandInput;
+      output: GetAdminAccountCommandOutput;
+    };
+  };
 }

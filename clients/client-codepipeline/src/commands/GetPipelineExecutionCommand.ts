@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodePipelineClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodePipelineClient";
-import { GetPipelineExecutionInput, GetPipelineExecutionOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetPipelineExecutionCommand,
-  serializeAws_json1_1GetPipelineExecutionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPipelineExecutionInput, GetPipelineExecutionOutput } from "../models/models_0";
+import { GetPipelineExecution$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPipelineExecutionCommand}.
+ */
 export interface GetPipelineExecutionCommandInput extends GetPipelineExecutionInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetPipelineExecutionCommand}.
+ */
 export interface GetPipelineExecutionCommandOutput extends GetPipelineExecutionOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,89 @@ export interface GetPipelineExecutionCommandOutput extends GetPipelineExecutionO
  * ```javascript
  * import { CodePipelineClient, GetPipelineExecutionCommand } from "@aws-sdk/client-codepipeline"; // ES Modules import
  * // const { CodePipelineClient, GetPipelineExecutionCommand } = require("@aws-sdk/client-codepipeline"); // CommonJS import
+ * // import type { CodePipelineClientConfig } from "@aws-sdk/client-codepipeline";
+ * const config = {}; // type is CodePipelineClientConfig
  * const client = new CodePipelineClient(config);
+ * const input = { // GetPipelineExecutionInput
+ *   pipelineName: "STRING_VALUE", // required
+ *   pipelineExecutionId: "STRING_VALUE", // required
+ * };
  * const command = new GetPipelineExecutionCommand(input);
  * const response = await client.send(command);
+ * // { // GetPipelineExecutionOutput
+ * //   pipelineExecution: { // PipelineExecution
+ * //     pipelineName: "STRING_VALUE",
+ * //     pipelineVersion: Number("int"),
+ * //     pipelineExecutionId: "STRING_VALUE",
+ * //     status: "Cancelled" || "InProgress" || "Stopped" || "Stopping" || "Succeeded" || "Superseded" || "Failed",
+ * //     statusSummary: "STRING_VALUE",
+ * //     artifactRevisions: [ // ArtifactRevisionList
+ * //       { // ArtifactRevision
+ * //         name: "STRING_VALUE",
+ * //         revisionId: "STRING_VALUE",
+ * //         revisionChangeIdentifier: "STRING_VALUE",
+ * //         revisionSummary: "STRING_VALUE",
+ * //         created: new Date("TIMESTAMP"),
+ * //         revisionUrl: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     variables: [ // ResolvedPipelineVariableList
+ * //       { // ResolvedPipelineVariable
+ * //         name: "STRING_VALUE",
+ * //         resolvedValue: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     trigger: { // ExecutionTrigger
+ * //       triggerType: "CreatePipeline" || "StartPipelineExecution" || "PollForSourceChanges" || "Webhook" || "CloudWatchEvent" || "PutActionRevision" || "WebhookV2" || "ManualRollback" || "AutomatedRollback",
+ * //       triggerDetail: "STRING_VALUE",
+ * //     },
+ * //     executionMode: "QUEUED" || "SUPERSEDED" || "PARALLEL",
+ * //     executionType: "STANDARD" || "ROLLBACK",
+ * //     rollbackMetadata: { // PipelineRollbackMetadata
+ * //       rollbackTargetPipelineExecutionId: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetPipelineExecutionCommandInput - {@link GetPipelineExecutionCommandInput}
+ * @returns {@link GetPipelineExecutionCommandOutput}
  * @see {@link GetPipelineExecutionCommandInput} for command's `input` shape.
  * @see {@link GetPipelineExecutionCommandOutput} for command's `response` shape.
- * @see {@link CodePipelineClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodePipelineClientResolvedConfig | config} for CodePipelineClient's `config` shape.
  *
+ * @throws {@link PipelineExecutionNotFoundException} (client fault)
+ *  <p>The pipeline execution was specified in an invalid format or cannot be found, or an
+ *             execution ID does not belong to the specified pipeline. </p>
+ *
+ * @throws {@link PipelineNotFoundException} (client fault)
+ *  <p>The pipeline was specified in an invalid format or cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The validation was specified in an invalid format.</p>
+ *
+ * @throws {@link CodePipelineServiceException}
+ * <p>Base exception class for all service exceptions from CodePipeline service.</p>
+ *
+ *
+ * @public
  */
-export class GetPipelineExecutionCommand extends $Command<
-  GetPipelineExecutionCommandInput,
-  GetPipelineExecutionCommandOutput,
-  CodePipelineClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPipelineExecutionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodePipelineClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPipelineExecutionCommandInput, GetPipelineExecutionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodePipelineClient";
-    const commandName = "GetPipelineExecutionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPipelineExecutionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPipelineExecutionOutput.filterSensitiveLog,
+export class GetPipelineExecutionCommand extends command<GetPipelineExecutionCommandInput, GetPipelineExecutionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPipelineExecution",
+  GetPipelineExecution$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPipelineExecutionInput;
+      output: GetPipelineExecutionOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPipelineExecutionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetPipelineExecutionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPipelineExecutionCommandOutput> {
-    return deserializeAws_json1_1GetPipelineExecutionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPipelineExecutionCommandInput;
+      output: GetPipelineExecutionCommandOutput;
+    };
+  };
 }

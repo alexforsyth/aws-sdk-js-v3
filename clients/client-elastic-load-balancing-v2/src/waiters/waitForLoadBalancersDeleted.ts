@@ -1,30 +1,37 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeLoadBalancersCommandInput,
+  type DescribeLoadBalancersCommandOutput,
   DescribeLoadBalancersCommand,
-  DescribeLoadBalancersCommandInput,
 } from "../commands/DescribeLoadBalancersCommand";
-import { ElasticLoadBalancingV2Client } from "../ElasticLoadBalancingV2Client";
+import type { ElasticLoadBalancingV2Client } from "../ElasticLoadBalancingV2Client";
+import type { ElasticLoadBalancingV2ServiceException } from "../models/ElasticLoadBalancingV2ServiceException";
+import type { LoadBalancerNotFoundException } from "../models/errors";
 
-const checkState = async (
-  client: ElasticLoadBalancingV2Client,
-  input: DescribeLoadBalancersCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: ElasticLoadBalancingV2Client, input: DescribeLoadBalancersCommandInput): Promise<WaiterResult<DescribeLoadBalancersCommandOutput | ElasticLoadBalancingV2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeLoadBalancersCommand(input));
+    let result: DescribeLoadBalancersCommandOutput & any = await client.send(new DescribeLoadBalancersCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.LoadBalancers);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.LoadBalancers);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State.Code;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "active";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "active")
       }
       if (allStringEq_5) {
         return { state: WaiterState.RETRY, reason };
@@ -32,7 +39,7 @@ const checkState = async (
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "LoadBalancerNotFound") {
+    if (exception.name === "LoadBalancerNotFoundException") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -45,7 +52,7 @@ const checkState = async (
 export const waitForLoadBalancersDeleted = async (
   params: WaiterConfiguration<ElasticLoadBalancingV2Client>,
   input: DescribeLoadBalancersCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeLoadBalancersCommandOutput | ElasticLoadBalancingV2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -57,8 +64,8 @@ export const waitForLoadBalancersDeleted = async (
 export const waitUntilLoadBalancersDeleted = async (
   params: WaiterConfiguration<ElasticLoadBalancingV2Client>,
   input: DescribeLoadBalancersCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<LoadBalancerNotFoundException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<LoadBalancerNotFoundException>;
 };

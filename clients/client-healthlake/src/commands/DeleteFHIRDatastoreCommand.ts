@@ -1,95 +1,96 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthLakeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthLakeClient";
-import { DeleteFHIRDatastoreRequest, DeleteFHIRDatastoreResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0DeleteFHIRDatastoreCommand,
-  serializeAws_json1_0DeleteFHIRDatastoreCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFHIRDatastoreRequest, DeleteFHIRDatastoreResponse } from "../models/models_0";
+import { DeleteFHIRDatastore$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFHIRDatastoreCommand}.
+ */
 export interface DeleteFHIRDatastoreCommandInput extends DeleteFHIRDatastoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFHIRDatastoreCommand}.
+ */
 export interface DeleteFHIRDatastoreCommandOutput extends DeleteFHIRDatastoreResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a Data Store. </p>
+ * <p>Delete a FHIR-enabled data store.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { HealthLakeClient, DeleteFHIRDatastoreCommand } from "@aws-sdk/client-healthlake"; // ES Modules import
  * // const { HealthLakeClient, DeleteFHIRDatastoreCommand } = require("@aws-sdk/client-healthlake"); // CommonJS import
+ * // import type { HealthLakeClientConfig } from "@aws-sdk/client-healthlake";
+ * const config = {}; // type is HealthLakeClientConfig
  * const client = new HealthLakeClient(config);
+ * const input = { // DeleteFHIRDatastoreRequest
+ *   DatastoreId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFHIRDatastoreCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFHIRDatastoreResponse
+ * //   DatastoreId: "STRING_VALUE", // required
+ * //   DatastoreArn: "STRING_VALUE", // required
+ * //   DatastoreStatus: "CREATING" || "ACTIVE" || "DELETING" || "DELETED" || "CREATE_FAILED" || "UPDATING" || "UPDATE_FAILED", // required
+ * //   DatastoreEndpoint: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteFHIRDatastoreCommandInput - {@link DeleteFHIRDatastoreCommandInput}
+ * @returns {@link DeleteFHIRDatastoreCommandOutput}
  * @see {@link DeleteFHIRDatastoreCommandInput} for command's `input` shape.
  * @see {@link DeleteFHIRDatastoreCommandOutput} for command's `response` shape.
- * @see {@link HealthLakeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link HealthLakeClientResolvedConfig | config} for HealthLakeClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied. Your account is not authorized to perform this operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The data store is in a transition state and the user requested action cannot be performed.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unknown internal error occurred in the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested data store was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The user has exceeded their maximum number of allowed calls to the given API. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The user input parameter was invalid.</p>
+ *
+ * @throws {@link HealthLakeServiceException}
+ * <p>Base exception class for all service exceptions from HealthLake service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFHIRDatastoreCommand extends $Command<
-  DeleteFHIRDatastoreCommandInput,
-  DeleteFHIRDatastoreCommandOutput,
-  HealthLakeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFHIRDatastoreCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthLakeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFHIRDatastoreCommandInput, DeleteFHIRDatastoreCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthLakeClient";
-    const commandName = "DeleteFHIRDatastoreCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFHIRDatastoreRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFHIRDatastoreResponse.filterSensitiveLog,
+export class DeleteFHIRDatastoreCommand extends command<DeleteFHIRDatastoreCommandInput, DeleteFHIRDatastoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFHIRDatastore",
+  DeleteFHIRDatastore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFHIRDatastoreRequest;
+      output: DeleteFHIRDatastoreResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFHIRDatastoreCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeleteFHIRDatastoreCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFHIRDatastoreCommandOutput> {
-    return deserializeAws_json1_0DeleteFHIRDatastoreCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFHIRDatastoreCommandInput;
+      output: DeleteFHIRDatastoreCommandOutput;
+    };
+  };
 }

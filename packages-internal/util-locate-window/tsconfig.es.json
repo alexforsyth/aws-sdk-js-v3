@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["dom"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "outDir": "dist-es",
+    "rootDir": "src",
+    "strict": false,
+    "strictNullChecks": true,
+    "noCheck": true
+  },
+  "extends": "../../tsconfig.es.json",
+  "include": ["src/"]
+}

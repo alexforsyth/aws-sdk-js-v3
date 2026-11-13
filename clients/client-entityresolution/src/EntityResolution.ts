@@ -1,0 +1,993 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AddPolicyStatementCommandInput,
+  type AddPolicyStatementCommandOutput,
+  AddPolicyStatementCommand,
+} from "./commands/AddPolicyStatementCommand";
+import {
+  type BatchDeleteUniqueIdCommandInput,
+  type BatchDeleteUniqueIdCommandOutput,
+  BatchDeleteUniqueIdCommand,
+} from "./commands/BatchDeleteUniqueIdCommand";
+import {
+  type CreateIdMappingWorkflowCommandInput,
+  type CreateIdMappingWorkflowCommandOutput,
+  CreateIdMappingWorkflowCommand,
+} from "./commands/CreateIdMappingWorkflowCommand";
+import {
+  type CreateIdNamespaceCommandInput,
+  type CreateIdNamespaceCommandOutput,
+  CreateIdNamespaceCommand,
+} from "./commands/CreateIdNamespaceCommand";
+import {
+  type CreateMatchingWorkflowCommandInput,
+  type CreateMatchingWorkflowCommandOutput,
+  CreateMatchingWorkflowCommand,
+} from "./commands/CreateMatchingWorkflowCommand";
+import {
+  type CreateSchemaMappingCommandInput,
+  type CreateSchemaMappingCommandOutput,
+  CreateSchemaMappingCommand,
+} from "./commands/CreateSchemaMappingCommand";
+import {
+  type DeleteIdMappingWorkflowCommandInput,
+  type DeleteIdMappingWorkflowCommandOutput,
+  DeleteIdMappingWorkflowCommand,
+} from "./commands/DeleteIdMappingWorkflowCommand";
+import {
+  type DeleteIdNamespaceCommandInput,
+  type DeleteIdNamespaceCommandOutput,
+  DeleteIdNamespaceCommand,
+} from "./commands/DeleteIdNamespaceCommand";
+import {
+  type DeleteMatchingWorkflowCommandInput,
+  type DeleteMatchingWorkflowCommandOutput,
+  DeleteMatchingWorkflowCommand,
+} from "./commands/DeleteMatchingWorkflowCommand";
+import {
+  type DeletePolicyStatementCommandInput,
+  type DeletePolicyStatementCommandOutput,
+  DeletePolicyStatementCommand,
+} from "./commands/DeletePolicyStatementCommand";
+import {
+  type DeleteSchemaMappingCommandInput,
+  type DeleteSchemaMappingCommandOutput,
+  DeleteSchemaMappingCommand,
+} from "./commands/DeleteSchemaMappingCommand";
+import {
+  type GenerateMatchIdCommandInput,
+  type GenerateMatchIdCommandOutput,
+  GenerateMatchIdCommand,
+} from "./commands/GenerateMatchIdCommand";
+import {
+  type GetIdMappingJobCommandInput,
+  type GetIdMappingJobCommandOutput,
+  GetIdMappingJobCommand,
+} from "./commands/GetIdMappingJobCommand";
+import {
+  type GetIdMappingWorkflowCommandInput,
+  type GetIdMappingWorkflowCommandOutput,
+  GetIdMappingWorkflowCommand,
+} from "./commands/GetIdMappingWorkflowCommand";
+import {
+  type GetIdNamespaceCommandInput,
+  type GetIdNamespaceCommandOutput,
+  GetIdNamespaceCommand,
+} from "./commands/GetIdNamespaceCommand";
+import {
+  type GetMatchIdCommandInput,
+  type GetMatchIdCommandOutput,
+  GetMatchIdCommand,
+} from "./commands/GetMatchIdCommand";
+import {
+  type GetMatchingJobCommandInput,
+  type GetMatchingJobCommandOutput,
+  GetMatchingJobCommand,
+} from "./commands/GetMatchingJobCommand";
+import {
+  type GetMatchingWorkflowCommandInput,
+  type GetMatchingWorkflowCommandOutput,
+  GetMatchingWorkflowCommand,
+} from "./commands/GetMatchingWorkflowCommand";
+import { type GetPolicyCommandInput, type GetPolicyCommandOutput, GetPolicyCommand } from "./commands/GetPolicyCommand";
+import {
+  type GetProviderServiceCommandInput,
+  type GetProviderServiceCommandOutput,
+  GetProviderServiceCommand,
+} from "./commands/GetProviderServiceCommand";
+import {
+  type GetSchemaMappingCommandInput,
+  type GetSchemaMappingCommandOutput,
+  GetSchemaMappingCommand,
+} from "./commands/GetSchemaMappingCommand";
+import {
+  type ListIdMappingJobsCommandInput,
+  type ListIdMappingJobsCommandOutput,
+  ListIdMappingJobsCommand,
+} from "./commands/ListIdMappingJobsCommand";
+import {
+  type ListIdMappingWorkflowsCommandInput,
+  type ListIdMappingWorkflowsCommandOutput,
+  ListIdMappingWorkflowsCommand,
+} from "./commands/ListIdMappingWorkflowsCommand";
+import {
+  type ListIdNamespacesCommandInput,
+  type ListIdNamespacesCommandOutput,
+  ListIdNamespacesCommand,
+} from "./commands/ListIdNamespacesCommand";
+import {
+  type ListMatchingJobsCommandInput,
+  type ListMatchingJobsCommandOutput,
+  ListMatchingJobsCommand,
+} from "./commands/ListMatchingJobsCommand";
+import {
+  type ListMatchingWorkflowsCommandInput,
+  type ListMatchingWorkflowsCommandOutput,
+  ListMatchingWorkflowsCommand,
+} from "./commands/ListMatchingWorkflowsCommand";
+import {
+  type ListProviderServicesCommandInput,
+  type ListProviderServicesCommandOutput,
+  ListProviderServicesCommand,
+} from "./commands/ListProviderServicesCommand";
+import {
+  type ListSchemaMappingsCommandInput,
+  type ListSchemaMappingsCommandOutput,
+  ListSchemaMappingsCommand,
+} from "./commands/ListSchemaMappingsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import { type PutPolicyCommandInput, type PutPolicyCommandOutput, PutPolicyCommand } from "./commands/PutPolicyCommand";
+import {
+  type StartIdMappingJobCommandInput,
+  type StartIdMappingJobCommandOutput,
+  StartIdMappingJobCommand,
+} from "./commands/StartIdMappingJobCommand";
+import {
+  type StartMatchingJobCommandInput,
+  type StartMatchingJobCommandOutput,
+  StartMatchingJobCommand,
+} from "./commands/StartMatchingJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateIdMappingWorkflowCommandInput,
+  type UpdateIdMappingWorkflowCommandOutput,
+  UpdateIdMappingWorkflowCommand,
+} from "./commands/UpdateIdMappingWorkflowCommand";
+import {
+  type UpdateIdNamespaceCommandInput,
+  type UpdateIdNamespaceCommandOutput,
+  UpdateIdNamespaceCommand,
+} from "./commands/UpdateIdNamespaceCommand";
+import {
+  type UpdateMatchingWorkflowCommandInput,
+  type UpdateMatchingWorkflowCommandOutput,
+  UpdateMatchingWorkflowCommand,
+} from "./commands/UpdateMatchingWorkflowCommand";
+import {
+  type UpdateSchemaMappingCommandInput,
+  type UpdateSchemaMappingCommandOutput,
+  UpdateSchemaMappingCommand,
+} from "./commands/UpdateSchemaMappingCommand";
+import { EntityResolutionClient } from "./EntityResolutionClient";
+import { paginateListIdMappingJobs } from "./pagination/ListIdMappingJobsPaginator";
+import { paginateListIdMappingWorkflows } from "./pagination/ListIdMappingWorkflowsPaginator";
+import { paginateListIdNamespaces } from "./pagination/ListIdNamespacesPaginator";
+import { paginateListMatchingJobs } from "./pagination/ListMatchingJobsPaginator";
+import { paginateListMatchingWorkflows } from "./pagination/ListMatchingWorkflowsPaginator";
+import { paginateListProviderServices } from "./pagination/ListProviderServicesPaginator";
+import { paginateListSchemaMappings } from "./pagination/ListSchemaMappingsPaginator";
+
+const commands = {
+  AddPolicyStatementCommand,
+  BatchDeleteUniqueIdCommand,
+  CreateIdMappingWorkflowCommand,
+  CreateIdNamespaceCommand,
+  CreateMatchingWorkflowCommand,
+  CreateSchemaMappingCommand,
+  DeleteIdMappingWorkflowCommand,
+  DeleteIdNamespaceCommand,
+  DeleteMatchingWorkflowCommand,
+  DeletePolicyStatementCommand,
+  DeleteSchemaMappingCommand,
+  GenerateMatchIdCommand,
+  GetIdMappingJobCommand,
+  GetIdMappingWorkflowCommand,
+  GetIdNamespaceCommand,
+  GetMatchIdCommand,
+  GetMatchingJobCommand,
+  GetMatchingWorkflowCommand,
+  GetPolicyCommand,
+  GetProviderServiceCommand,
+  GetSchemaMappingCommand,
+  ListIdMappingJobsCommand,
+  ListIdMappingWorkflowsCommand,
+  ListIdNamespacesCommand,
+  ListMatchingJobsCommand,
+  ListMatchingWorkflowsCommand,
+  ListProviderServicesCommand,
+  ListSchemaMappingsCommand,
+  ListTagsForResourceCommand,
+  PutPolicyCommand,
+  StartIdMappingJobCommand,
+  StartMatchingJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateIdMappingWorkflowCommand,
+  UpdateIdNamespaceCommand,
+  UpdateMatchingWorkflowCommand,
+  UpdateSchemaMappingCommand,
+};
+const paginators = {
+  paginateListIdMappingJobs,
+  paginateListIdMappingWorkflows,
+  paginateListIdNamespaces,
+  paginateListMatchingJobs,
+  paginateListMatchingWorkflows,
+  paginateListProviderServices,
+  paginateListSchemaMappings,
+};
+
+/**
+ * @public
+ */
+export interface EntityResolutionRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface EntityResolution {
+  /**
+   * @see {@link AddPolicyStatementCommand}
+   */
+  addPolicyStatement(
+    args: AddPolicyStatementCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<AddPolicyStatementCommandOutput>;
+  addPolicyStatement(
+    args: AddPolicyStatementCommandInput,
+    cb: (err: any, data?: AddPolicyStatementCommandOutput) => void
+  ): void;
+  addPolicyStatement(
+    args: AddPolicyStatementCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: AddPolicyStatementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteUniqueIdCommand}
+   */
+  batchDeleteUniqueId(
+    args: BatchDeleteUniqueIdCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<BatchDeleteUniqueIdCommandOutput>;
+  batchDeleteUniqueId(
+    args: BatchDeleteUniqueIdCommandInput,
+    cb: (err: any, data?: BatchDeleteUniqueIdCommandOutput) => void
+  ): void;
+  batchDeleteUniqueId(
+    args: BatchDeleteUniqueIdCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: BatchDeleteUniqueIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIdMappingWorkflowCommand}
+   */
+  createIdMappingWorkflow(
+    args: CreateIdMappingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<CreateIdMappingWorkflowCommandOutput>;
+  createIdMappingWorkflow(
+    args: CreateIdMappingWorkflowCommandInput,
+    cb: (err: any, data?: CreateIdMappingWorkflowCommandOutput) => void
+  ): void;
+  createIdMappingWorkflow(
+    args: CreateIdMappingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: CreateIdMappingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIdNamespaceCommand}
+   */
+  createIdNamespace(
+    args: CreateIdNamespaceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<CreateIdNamespaceCommandOutput>;
+  createIdNamespace(
+    args: CreateIdNamespaceCommandInput,
+    cb: (err: any, data?: CreateIdNamespaceCommandOutput) => void
+  ): void;
+  createIdNamespace(
+    args: CreateIdNamespaceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: CreateIdNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMatchingWorkflowCommand}
+   */
+  createMatchingWorkflow(
+    args: CreateMatchingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<CreateMatchingWorkflowCommandOutput>;
+  createMatchingWorkflow(
+    args: CreateMatchingWorkflowCommandInput,
+    cb: (err: any, data?: CreateMatchingWorkflowCommandOutput) => void
+  ): void;
+  createMatchingWorkflow(
+    args: CreateMatchingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: CreateMatchingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSchemaMappingCommand}
+   */
+  createSchemaMapping(
+    args: CreateSchemaMappingCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<CreateSchemaMappingCommandOutput>;
+  createSchemaMapping(
+    args: CreateSchemaMappingCommandInput,
+    cb: (err: any, data?: CreateSchemaMappingCommandOutput) => void
+  ): void;
+  createSchemaMapping(
+    args: CreateSchemaMappingCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: CreateSchemaMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIdMappingWorkflowCommand}
+   */
+  deleteIdMappingWorkflow(
+    args: DeleteIdMappingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<DeleteIdMappingWorkflowCommandOutput>;
+  deleteIdMappingWorkflow(
+    args: DeleteIdMappingWorkflowCommandInput,
+    cb: (err: any, data?: DeleteIdMappingWorkflowCommandOutput) => void
+  ): void;
+  deleteIdMappingWorkflow(
+    args: DeleteIdMappingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: DeleteIdMappingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIdNamespaceCommand}
+   */
+  deleteIdNamespace(
+    args: DeleteIdNamespaceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<DeleteIdNamespaceCommandOutput>;
+  deleteIdNamespace(
+    args: DeleteIdNamespaceCommandInput,
+    cb: (err: any, data?: DeleteIdNamespaceCommandOutput) => void
+  ): void;
+  deleteIdNamespace(
+    args: DeleteIdNamespaceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: DeleteIdNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMatchingWorkflowCommand}
+   */
+  deleteMatchingWorkflow(
+    args: DeleteMatchingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<DeleteMatchingWorkflowCommandOutput>;
+  deleteMatchingWorkflow(
+    args: DeleteMatchingWorkflowCommandInput,
+    cb: (err: any, data?: DeleteMatchingWorkflowCommandOutput) => void
+  ): void;
+  deleteMatchingWorkflow(
+    args: DeleteMatchingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: DeleteMatchingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePolicyStatementCommand}
+   */
+  deletePolicyStatement(
+    args: DeletePolicyStatementCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<DeletePolicyStatementCommandOutput>;
+  deletePolicyStatement(
+    args: DeletePolicyStatementCommandInput,
+    cb: (err: any, data?: DeletePolicyStatementCommandOutput) => void
+  ): void;
+  deletePolicyStatement(
+    args: DeletePolicyStatementCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: DeletePolicyStatementCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSchemaMappingCommand}
+   */
+  deleteSchemaMapping(
+    args: DeleteSchemaMappingCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<DeleteSchemaMappingCommandOutput>;
+  deleteSchemaMapping(
+    args: DeleteSchemaMappingCommandInput,
+    cb: (err: any, data?: DeleteSchemaMappingCommandOutput) => void
+  ): void;
+  deleteSchemaMapping(
+    args: DeleteSchemaMappingCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: DeleteSchemaMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GenerateMatchIdCommand}
+   */
+  generateMatchId(
+    args: GenerateMatchIdCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GenerateMatchIdCommandOutput>;
+  generateMatchId(
+    args: GenerateMatchIdCommandInput,
+    cb: (err: any, data?: GenerateMatchIdCommandOutput) => void
+  ): void;
+  generateMatchId(
+    args: GenerateMatchIdCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GenerateMatchIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdMappingJobCommand}
+   */
+  getIdMappingJob(
+    args: GetIdMappingJobCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetIdMappingJobCommandOutput>;
+  getIdMappingJob(
+    args: GetIdMappingJobCommandInput,
+    cb: (err: any, data?: GetIdMappingJobCommandOutput) => void
+  ): void;
+  getIdMappingJob(
+    args: GetIdMappingJobCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetIdMappingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdMappingWorkflowCommand}
+   */
+  getIdMappingWorkflow(
+    args: GetIdMappingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetIdMappingWorkflowCommandOutput>;
+  getIdMappingWorkflow(
+    args: GetIdMappingWorkflowCommandInput,
+    cb: (err: any, data?: GetIdMappingWorkflowCommandOutput) => void
+  ): void;
+  getIdMappingWorkflow(
+    args: GetIdMappingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetIdMappingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdNamespaceCommand}
+   */
+  getIdNamespace(
+    args: GetIdNamespaceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetIdNamespaceCommandOutput>;
+  getIdNamespace(
+    args: GetIdNamespaceCommandInput,
+    cb: (err: any, data?: GetIdNamespaceCommandOutput) => void
+  ): void;
+  getIdNamespace(
+    args: GetIdNamespaceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetIdNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMatchIdCommand}
+   */
+  getMatchId(
+    args: GetMatchIdCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetMatchIdCommandOutput>;
+  getMatchId(
+    args: GetMatchIdCommandInput,
+    cb: (err: any, data?: GetMatchIdCommandOutput) => void
+  ): void;
+  getMatchId(
+    args: GetMatchIdCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetMatchIdCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMatchingJobCommand}
+   */
+  getMatchingJob(
+    args: GetMatchingJobCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetMatchingJobCommandOutput>;
+  getMatchingJob(
+    args: GetMatchingJobCommandInput,
+    cb: (err: any, data?: GetMatchingJobCommandOutput) => void
+  ): void;
+  getMatchingJob(
+    args: GetMatchingJobCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetMatchingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMatchingWorkflowCommand}
+   */
+  getMatchingWorkflow(
+    args: GetMatchingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetMatchingWorkflowCommandOutput>;
+  getMatchingWorkflow(
+    args: GetMatchingWorkflowCommandInput,
+    cb: (err: any, data?: GetMatchingWorkflowCommandOutput) => void
+  ): void;
+  getMatchingWorkflow(
+    args: GetMatchingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetMatchingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPolicyCommand}
+   */
+  getPolicy(
+    args: GetPolicyCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetPolicyCommandOutput>;
+  getPolicy(
+    args: GetPolicyCommandInput,
+    cb: (err: any, data?: GetPolicyCommandOutput) => void
+  ): void;
+  getPolicy(
+    args: GetPolicyCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProviderServiceCommand}
+   */
+  getProviderService(
+    args: GetProviderServiceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetProviderServiceCommandOutput>;
+  getProviderService(
+    args: GetProviderServiceCommandInput,
+    cb: (err: any, data?: GetProviderServiceCommandOutput) => void
+  ): void;
+  getProviderService(
+    args: GetProviderServiceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetProviderServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSchemaMappingCommand}
+   */
+  getSchemaMapping(
+    args: GetSchemaMappingCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<GetSchemaMappingCommandOutput>;
+  getSchemaMapping(
+    args: GetSchemaMappingCommandInput,
+    cb: (err: any, data?: GetSchemaMappingCommandOutput) => void
+  ): void;
+  getSchemaMapping(
+    args: GetSchemaMappingCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: GetSchemaMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdMappingJobsCommand}
+   */
+  listIdMappingJobs(
+    args: ListIdMappingJobsCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListIdMappingJobsCommandOutput>;
+  listIdMappingJobs(
+    args: ListIdMappingJobsCommandInput,
+    cb: (err: any, data?: ListIdMappingJobsCommandOutput) => void
+  ): void;
+  listIdMappingJobs(
+    args: ListIdMappingJobsCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListIdMappingJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdMappingWorkflowsCommand}
+   */
+  listIdMappingWorkflows(): Promise<ListIdMappingWorkflowsCommandOutput>;
+  listIdMappingWorkflows(
+    args: ListIdMappingWorkflowsCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListIdMappingWorkflowsCommandOutput>;
+  listIdMappingWorkflows(
+    args: ListIdMappingWorkflowsCommandInput,
+    cb: (err: any, data?: ListIdMappingWorkflowsCommandOutput) => void
+  ): void;
+  listIdMappingWorkflows(
+    args: ListIdMappingWorkflowsCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListIdMappingWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdNamespacesCommand}
+   */
+  listIdNamespaces(): Promise<ListIdNamespacesCommandOutput>;
+  listIdNamespaces(
+    args: ListIdNamespacesCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListIdNamespacesCommandOutput>;
+  listIdNamespaces(
+    args: ListIdNamespacesCommandInput,
+    cb: (err: any, data?: ListIdNamespacesCommandOutput) => void
+  ): void;
+  listIdNamespaces(
+    args: ListIdNamespacesCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListIdNamespacesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMatchingJobsCommand}
+   */
+  listMatchingJobs(
+    args: ListMatchingJobsCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListMatchingJobsCommandOutput>;
+  listMatchingJobs(
+    args: ListMatchingJobsCommandInput,
+    cb: (err: any, data?: ListMatchingJobsCommandOutput) => void
+  ): void;
+  listMatchingJobs(
+    args: ListMatchingJobsCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListMatchingJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMatchingWorkflowsCommand}
+   */
+  listMatchingWorkflows(): Promise<ListMatchingWorkflowsCommandOutput>;
+  listMatchingWorkflows(
+    args: ListMatchingWorkflowsCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListMatchingWorkflowsCommandOutput>;
+  listMatchingWorkflows(
+    args: ListMatchingWorkflowsCommandInput,
+    cb: (err: any, data?: ListMatchingWorkflowsCommandOutput) => void
+  ): void;
+  listMatchingWorkflows(
+    args: ListMatchingWorkflowsCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListMatchingWorkflowsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListProviderServicesCommand}
+   */
+  listProviderServices(): Promise<ListProviderServicesCommandOutput>;
+  listProviderServices(
+    args: ListProviderServicesCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListProviderServicesCommandOutput>;
+  listProviderServices(
+    args: ListProviderServicesCommandInput,
+    cb: (err: any, data?: ListProviderServicesCommandOutput) => void
+  ): void;
+  listProviderServices(
+    args: ListProviderServicesCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListProviderServicesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSchemaMappingsCommand}
+   */
+  listSchemaMappings(): Promise<ListSchemaMappingsCommandOutput>;
+  listSchemaMappings(
+    args: ListSchemaMappingsCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListSchemaMappingsCommandOutput>;
+  listSchemaMappings(
+    args: ListSchemaMappingsCommandInput,
+    cb: (err: any, data?: ListSchemaMappingsCommandOutput) => void
+  ): void;
+  listSchemaMappings(
+    args: ListSchemaMappingsCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListSchemaMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutPolicyCommand}
+   */
+  putPolicy(
+    args: PutPolicyCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<PutPolicyCommandOutput>;
+  putPolicy(
+    args: PutPolicyCommandInput,
+    cb: (err: any, data?: PutPolicyCommandOutput) => void
+  ): void;
+  putPolicy(
+    args: PutPolicyCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: PutPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartIdMappingJobCommand}
+   */
+  startIdMappingJob(
+    args: StartIdMappingJobCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<StartIdMappingJobCommandOutput>;
+  startIdMappingJob(
+    args: StartIdMappingJobCommandInput,
+    cb: (err: any, data?: StartIdMappingJobCommandOutput) => void
+  ): void;
+  startIdMappingJob(
+    args: StartIdMappingJobCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: StartIdMappingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMatchingJobCommand}
+   */
+  startMatchingJob(
+    args: StartMatchingJobCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<StartMatchingJobCommandOutput>;
+  startMatchingJob(
+    args: StartMatchingJobCommandInput,
+    cb: (err: any, data?: StartMatchingJobCommandOutput) => void
+  ): void;
+  startMatchingJob(
+    args: StartMatchingJobCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: StartMatchingJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIdMappingWorkflowCommand}
+   */
+  updateIdMappingWorkflow(
+    args: UpdateIdMappingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<UpdateIdMappingWorkflowCommandOutput>;
+  updateIdMappingWorkflow(
+    args: UpdateIdMappingWorkflowCommandInput,
+    cb: (err: any, data?: UpdateIdMappingWorkflowCommandOutput) => void
+  ): void;
+  updateIdMappingWorkflow(
+    args: UpdateIdMappingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: UpdateIdMappingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIdNamespaceCommand}
+   */
+  updateIdNamespace(
+    args: UpdateIdNamespaceCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<UpdateIdNamespaceCommandOutput>;
+  updateIdNamespace(
+    args: UpdateIdNamespaceCommandInput,
+    cb: (err: any, data?: UpdateIdNamespaceCommandOutput) => void
+  ): void;
+  updateIdNamespace(
+    args: UpdateIdNamespaceCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: UpdateIdNamespaceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMatchingWorkflowCommand}
+   */
+  updateMatchingWorkflow(
+    args: UpdateMatchingWorkflowCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<UpdateMatchingWorkflowCommandOutput>;
+  updateMatchingWorkflow(
+    args: UpdateMatchingWorkflowCommandInput,
+    cb: (err: any, data?: UpdateMatchingWorkflowCommandOutput) => void
+  ): void;
+  updateMatchingWorkflow(
+    args: UpdateMatchingWorkflowCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: UpdateMatchingWorkflowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSchemaMappingCommand}
+   */
+  updateSchemaMapping(
+    args: UpdateSchemaMappingCommandInput,
+    options?: EntityResolutionRequestOptions
+  ): Promise<UpdateSchemaMappingCommandOutput>;
+  updateSchemaMapping(
+    args: UpdateSchemaMappingCommandInput,
+    cb: (err: any, data?: UpdateSchemaMappingCommandOutput) => void
+  ): void;
+  updateSchemaMapping(
+    args: UpdateSchemaMappingCommandInput,
+    options: EntityResolutionRequestOptions,
+    cb: (err: any, data?: UpdateSchemaMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdMappingJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdMappingJobsCommandOutput}.
+   */
+  paginateListIdMappingJobs(
+    args: ListIdMappingJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdMappingJobsCommandOutput>;
+
+  /**
+   * @see {@link ListIdMappingWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdMappingWorkflowsCommandOutput}.
+   */
+  paginateListIdMappingWorkflows(
+    args?: ListIdMappingWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdMappingWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link ListIdNamespacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdNamespacesCommandOutput}.
+   */
+  paginateListIdNamespaces(
+    args?: ListIdNamespacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdNamespacesCommandOutput>;
+
+  /**
+   * @see {@link ListMatchingJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMatchingJobsCommandOutput}.
+   */
+  paginateListMatchingJobs(
+    args: ListMatchingJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMatchingJobsCommandOutput>;
+
+  /**
+   * @see {@link ListMatchingWorkflowsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMatchingWorkflowsCommandOutput}.
+   */
+  paginateListMatchingWorkflows(
+    args?: ListMatchingWorkflowsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMatchingWorkflowsCommandOutput>;
+
+  /**
+   * @see {@link ListProviderServicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProviderServicesCommandOutput}.
+   */
+  paginateListProviderServices(
+    args?: ListProviderServicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProviderServicesCommandOutput>;
+
+  /**
+   * @see {@link ListSchemaMappingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSchemaMappingsCommandOutput}.
+   */
+  paginateListSchemaMappings(
+    args?: ListSchemaMappingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSchemaMappingsCommandOutput>;
+}
+
+/**
+ * <p>Welcome to the <i>Entity Resolution API Reference</i>.</p> <p>Entity Resolution is an Amazon Web Services service that provides pre-configured entity resolution capabilities that enable developers and analysts at advertising and marketing companies to build an accurate and complete view of their consumers.</p> <p> With Entity Resolution, you can match source records containing consumer identifiers, such as name, email address, and phone number. This is true even when these records have incomplete or conflicting identifiers. For example, Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information.</p> <p>To learn more about Entity Resolution concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/entityresolution/latest/userguide/what-is-service.html">Entity Resolution User Guide</a>.</p>
+ * @public
+ */
+export class EntityResolution extends EntityResolutionClient implements EntityResolution {}
+createAggregatedClient(commands, EntityResolution, { paginators });

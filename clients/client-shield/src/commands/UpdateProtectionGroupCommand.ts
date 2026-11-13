@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateProtectionGroupRequest, UpdateProtectionGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateProtectionGroupCommand,
-  serializeAws_json1_1UpdateProtectionGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateProtectionGroupRequest, UpdateProtectionGroupResponse } from "../models/models_0";
+import { UpdateProtectionGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateProtectionGroupCommand}.
+ */
 export interface UpdateProtectionGroupCommandInput extends UpdateProtectionGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateProtectionGroupCommand}.
+ */
 export interface UpdateProtectionGroupCommandOutput extends UpdateProtectionGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,64 @@ export interface UpdateProtectionGroupCommandOutput extends UpdateProtectionGrou
  * ```javascript
  * import { ShieldClient, UpdateProtectionGroupCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, UpdateProtectionGroupCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // UpdateProtectionGroupRequest
+ *   ProtectionGroupId: "STRING_VALUE", // required
+ *   Aggregation: "SUM" || "MEAN" || "MAX", // required
+ *   Pattern: "ALL" || "ARBITRARY" || "BY_RESOURCE_TYPE", // required
+ *   ResourceType: "CLOUDFRONT_DISTRIBUTION" || "ROUTE_53_HOSTED_ZONE" || "ELASTIC_IP_ALLOCATION" || "CLASSIC_LOAD_BALANCER" || "APPLICATION_LOAD_BALANCER" || "GLOBAL_ACCELERATOR",
+ *   Members: [ // ProtectionGroupMembers
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdateProtectionGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateProtectionGroupCommandInput - {@link UpdateProtectionGroupCommandInput}
+ * @returns {@link UpdateProtectionGroupCommandOutput}
  * @see {@link UpdateProtectionGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateProtectionGroupCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link OptimisticLockException} (client fault)
+ *  <p>Exception that indicates that the resource state has been modified by another
+ *          client. Retrieve the resource and then retry your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateProtectionGroupCommand extends $Command<
-  UpdateProtectionGroupCommandInput,
-  UpdateProtectionGroupCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateProtectionGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateProtectionGroupCommandInput, UpdateProtectionGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "UpdateProtectionGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateProtectionGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateProtectionGroupResponse.filterSensitiveLog,
+export class UpdateProtectionGroupCommand extends command<UpdateProtectionGroupCommandInput, UpdateProtectionGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateProtectionGroup",
+  UpdateProtectionGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateProtectionGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateProtectionGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateProtectionGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateProtectionGroupCommandOutput> {
-    return deserializeAws_json1_1UpdateProtectionGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateProtectionGroupCommandInput;
+      output: UpdateProtectionGroupCommandOutput;
+    };
+  };
 }

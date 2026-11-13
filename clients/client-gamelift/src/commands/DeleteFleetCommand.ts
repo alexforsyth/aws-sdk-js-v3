@@ -1,129 +1,116 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DeleteFleetInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteFleetCommand,
-  serializeAws_json1_1DeleteFleetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFleetInput } from "../models/models_0";
+import { DeleteFleet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFleetCommand}.
+ */
 export interface DeleteFleetCommandInput extends DeleteFleetInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFleetCommand}.
+ */
 export interface DeleteFleetCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes all resources and information related a fleet. Any current fleet instances,
- *             including those in remote locations, are shut down. You don't need to call
- *                 <code>DeleteFleetLocations</code> separately.</p>
- *         <note>
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere</p>
+ *          <p>Deletes all resources and information related to a fleet and shuts down any currently
+ *             running fleet instances, including those in remote locations.</p>
+ *          <note>
  *             <p>If the fleet being deleted has a VPC peering connection, you first need to get a
- *                 valid authorization (good for 24 hours) by calling <a>CreateVpcPeeringAuthorization</a>. You do not need to explicitly delete
- *                 the VPC peering connection--this is done as part of the delete fleet process.</p>
- *         </note>
- *         <p>To delete a fleet, specify the fleet ID to be terminated. During the deletion process
+ *                 valid authorization (good for 24 hours) by calling <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html">CreateVpcPeeringAuthorization</a>. You don't need to explicitly delete the
+ *                 VPC peering connection.</p>
+ *          </note>
+ *          <p>To delete a fleet, specify the fleet ID to be terminated. During the deletion process,
  *             the fleet status is changed to <code>DELETING</code>. When completed, the status
  *             switches to <code>TERMINATED</code> and the fleet event <code>FLEET_DELETED</code> is
- *             sent.</p>
- *         <p>
+ *             emitted.</p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up GameLift Fleets</a>
- *          </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>CreateFleetLocations</a> |
- *                     <a>UpdateFleetAttributes</a> |
- *                     <a>UpdateFleetCapacity</a> |
- *                     <a>UpdateFleetPortSettings</a> |
- *                     <a>UpdateRuntimeConfiguration</a> |
- *                     <a>StopFleetActions</a> |
- *                     <a>StartFleetActions</a> |
- *                     <a>PutScalingPolicy</a> |
- *                     <a>DeleteFleet</a> |
- *                     <a>DeleteFleetLocations</a> |
- *                     <a>DeleteScalingPolicy</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting up Amazon GameLift Servers
+ *                 Fleets</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DeleteFleetCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DeleteFleetCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DeleteFleetInput
+ *   FleetId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFleetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteFleetCommandInput - {@link DeleteFleetCommandInput}
+ * @returns {@link DeleteFleetCommandOutput}
  * @see {@link DeleteFleetCommandInput} for command's `input` shape.
  * @see {@link DeleteFleetCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidFleetStatusException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state of a resource
+ *             associated with the request and/or the fleet. Resolve the conflict before
+ *             retrying.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link TaggingFailedException} (client fault)
+ *  <p>The requested tagging operation did not succeed. This may be due to invalid tag format
+ *             or the maximum tag limit may have been exceeded. Resolve the issue before
+ *             retrying.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFleetCommand extends $Command<
-  DeleteFleetCommandInput,
-  DeleteFleetCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFleetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFleetCommandInput, DeleteFleetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DeleteFleetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFleetInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteFleetCommand extends command<DeleteFleetCommandInput, DeleteFleetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFleet",
+  DeleteFleet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFleetInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFleetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteFleetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFleetCommandOutput> {
-    return deserializeAws_json1_1DeleteFleetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFleetCommandInput;
+      output: DeleteFleetCommandOutput;
+    };
+  };
 }

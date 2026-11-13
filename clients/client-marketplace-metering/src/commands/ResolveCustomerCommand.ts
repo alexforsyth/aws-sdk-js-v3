@@ -1,102 +1,120 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MarketplaceMeteringClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MarketplaceMeteringClient";
-import { ResolveCustomerRequest, ResolveCustomerResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1ResolveCustomerCommand,
-  serializeAws_json1_1ResolveCustomerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ResolveCustomerRequest, ResolveCustomerResult } from "../models/models_0";
+import { ResolveCustomer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ResolveCustomerCommand}.
+ */
 export interface ResolveCustomerCommandInput extends ResolveCustomerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ResolveCustomerCommand}.
+ */
 export interface ResolveCustomerCommandOutput extends ResolveCustomerResult, __MetadataBearer {}
 
 /**
- * <p>ResolveCustomer is called by a SaaS application during the registration process.
- *             When a buyer visits your website during the registration process, the buyer submits a
- *             registration token through their browser. The registration token is resolved through
- *             this API to obtain a CustomerIdentifier and product code.</p>
+ * <p>
+ *             <code>ResolveCustomer</code> is called by a SaaS application during the registration
+ *             process. When a buyer visits your website during the registration process, the buyer
+ *             submits a registration token through their browser. The registration token is resolved
+ *             through this API to obtain a <code>CustomerIdentifier</code> along with the
+ *                 <code>CustomerAWSAccountId</code>, <code>ProductCode</code>, and <code>LicenseArn</code>.</p>
+ *          <important>
+ *             <p>For new SaaS product integrations, the <code>CustomerIdentifier</code> field is not populated in the <code>ResolveCustomer</code> API response. New integrations must use <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> to identify customers. Existing integrations continue to work unchanged.</p>
+ *          </important>
+ *          <note>
+ *             <p>To successfully resolve the token, the API must be called from the account that was used to publish the SaaS
+ *                 application. For an example of using <code>ResolveCustomer</code>, see <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example"> ResolveCustomer code example</a> in the <i>Amazon Web Services Marketplace Seller
+ *                     Guide</i>.</p>
+ *          </note>
+ *          <p>Permission is required for this operation. Your IAM role or user performing this
+ *             operation requires a policy to allow the <code>aws-marketplace:ResolveCustomer</code>
+ *             action. For more information, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsmarketplacemeteringservice.html">Actions, resources, and condition keys for Amazon Web Services Marketplace Metering Service</a> in
+ *             the <i>Service Authorization Reference</i>.</p>
+ *          <p>For Amazon Web Services Regions that support <code>ResolveCustomer</code>, see <a href="https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#resolvecustomer-region-support">ResolveCustomer Region support</a>.
+ *       </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MarketplaceMeteringClient, ResolveCustomerCommand } from "@aws-sdk/client-marketplace-metering"; // ES Modules import
  * // const { MarketplaceMeteringClient, ResolveCustomerCommand } = require("@aws-sdk/client-marketplace-metering"); // CommonJS import
+ * // import type { MarketplaceMeteringClientConfig } from "@aws-sdk/client-marketplace-metering";
+ * const config = {}; // type is MarketplaceMeteringClientConfig
  * const client = new MarketplaceMeteringClient(config);
+ * const input = { // ResolveCustomerRequest
+ *   RegistrationToken: "STRING_VALUE", // required
+ * };
  * const command = new ResolveCustomerCommand(input);
  * const response = await client.send(command);
+ * // { // ResolveCustomerResult
+ * //   CustomerIdentifier: "STRING_VALUE",
+ * //   ProductCode: "STRING_VALUE",
+ * //   CustomerAWSAccountId: "STRING_VALUE",
+ * //   LicenseArn: "STRING_VALUE",
+ * //   Metadata: { // Metadata
+ * //     AgreementId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ResolveCustomerCommandInput - {@link ResolveCustomerCommandInput}
+ * @returns {@link ResolveCustomerCommandOutput}
  * @see {@link ResolveCustomerCommandInput} for command's `input` shape.
  * @see {@link ResolveCustomerCommandOutput} for command's `response` shape.
- * @see {@link MarketplaceMeteringClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MarketplaceMeteringClientResolvedConfig | config} for MarketplaceMeteringClient's `config` shape.
  *
+ * @throws {@link DisabledApiException} (client fault)
+ *  <p>The API is disabled in the Region.</p>
+ *
+ * @throws {@link ExpiredTokenException} (client fault)
+ *  <p>The submitted registration token has expired. This can happen if the buyer's browser
+ *             takes too long to redirect to your page, the buyer has resubmitted the registration
+ *             token, or your application has held on to the registration token for too long. Your SaaS
+ *             registration website should redeem this token as soon as it is submitted by the buyer's
+ *             browser.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error has occurred. Retry your request. If the problem persists, post a
+ *             message with details on the Amazon Web Services forums.</p>
+ *
+ * @throws {@link InvalidTokenException} (client fault)
+ *  <p>Registration token is invalid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The calls to the API are throttled.</p>
+ *
+ * @throws {@link MarketplaceMeteringServiceException}
+ * <p>Base exception class for all service exceptions from MarketplaceMetering service.</p>
+ *
+ *
+ * @public
  */
-export class ResolveCustomerCommand extends $Command<
-  ResolveCustomerCommandInput,
-  ResolveCustomerCommandOutput,
-  MarketplaceMeteringClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ResolveCustomerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MarketplaceMeteringClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ResolveCustomerCommandInput, ResolveCustomerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MarketplaceMeteringClient";
-    const commandName = "ResolveCustomerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ResolveCustomerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ResolveCustomerResult.filterSensitiveLog,
+export class ResolveCustomerCommand extends command<ResolveCustomerCommandInput, ResolveCustomerCommandOutput>(
+  _ep0,
+  _mw0,
+  "ResolveCustomer",
+  ResolveCustomer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResolveCustomerRequest;
+      output: ResolveCustomerResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ResolveCustomerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ResolveCustomerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ResolveCustomerCommandOutput> {
-    return deserializeAws_json1_1ResolveCustomerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ResolveCustomerCommandInput;
+      output: ResolveCustomerCommandOutput;
+    };
+  };
 }

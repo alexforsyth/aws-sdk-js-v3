@@ -1,97 +1,111 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeWorkteamRequest, DescribeWorkteamResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1DescribeWorkteamCommand,
-  serializeAws_json1_1DescribeWorkteamCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeWorkteamRequest, DescribeWorkteamResponse } from "../models/models_3";
+import { DescribeWorkteam$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeWorkteamCommand}.
+ */
 export interface DescribeWorkteamCommandInput extends DescribeWorkteamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeWorkteamCommand}.
+ */
 export interface DescribeWorkteamCommandOutput extends DescribeWorkteamResponse, __MetadataBearer {}
 
 /**
- * <p>Gets information about a specific work team. You can see information such as the
- *             create date, the last updated date, membership information, and the work team's Amazon
- *             Resource Name (ARN).</p>
+ * <p>Gets information about a specific work team. You can see information such as the creation date, the last updated date, membership information, and the work team's Amazon Resource Name (ARN).</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, DescribeWorkteamCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeWorkteamCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeWorkteamRequest
+ *   WorkteamName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeWorkteamCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeWorkteamResponse
+ * //   Workteam: { // Workteam
+ * //     WorkteamName: "STRING_VALUE", // required
+ * //     MemberDefinitions: [ // MemberDefinitions // required
+ * //       { // MemberDefinition
+ * //         CognitoMemberDefinition: { // CognitoMemberDefinition
+ * //           UserPool: "STRING_VALUE", // required
+ * //           UserGroup: "STRING_VALUE", // required
+ * //           ClientId: "STRING_VALUE", // required
+ * //         },
+ * //         OidcMemberDefinition: { // OidcMemberDefinition
+ * //           Groups: [ // Groups
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     WorkteamArn: "STRING_VALUE", // required
+ * //     WorkforceArn: "STRING_VALUE",
+ * //     ProductListingIds: [ // ProductListings
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Description: "STRING_VALUE", // required
+ * //     SubDomain: "STRING_VALUE",
+ * //     CreateDate: new Date("TIMESTAMP"),
+ * //     LastUpdatedDate: new Date("TIMESTAMP"),
+ * //     NotificationConfiguration: { // NotificationConfiguration
+ * //       NotificationTopicArn: "STRING_VALUE",
+ * //     },
+ * //     WorkerAccessConfiguration: { // WorkerAccessConfiguration
+ * //       S3Presign: { // S3Presign
+ * //         IamPolicyConstraints: { // IamPolicyConstraints
+ * //           SourceIp: "Enabled" || "Disabled",
+ * //           VpcSourceIp: "Enabled" || "Disabled",
+ * //         },
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeWorkteamCommandInput - {@link DescribeWorkteamCommandInput}
+ * @returns {@link DescribeWorkteamCommandOutput}
  * @see {@link DescribeWorkteamCommandInput} for command's `input` shape.
  * @see {@link DescribeWorkteamCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeWorkteamCommand extends $Command<
-  DescribeWorkteamCommandInput,
-  DescribeWorkteamCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeWorkteamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeWorkteamCommandInput, DescribeWorkteamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeWorkteamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeWorkteamRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeWorkteamResponse.filterSensitiveLog,
+export class DescribeWorkteamCommand extends command<DescribeWorkteamCommandInput, DescribeWorkteamCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeWorkteam",
+  DescribeWorkteam$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeWorkteamRequest;
+      output: DescribeWorkteamResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeWorkteamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeWorkteamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeWorkteamCommandOutput> {
-    return deserializeAws_json1_1DescribeWorkteamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeWorkteamCommandInput;
+      output: DescribeWorkteamCommandOutput;
+    };
+  };
 }

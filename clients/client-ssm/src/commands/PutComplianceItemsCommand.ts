@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { PutComplianceItemsRequest, PutComplianceItemsResult } from "../models/models_1";
-import {
-  deserializeAws_json1_1PutComplianceItemsCommand,
-  serializeAws_json1_1PutComplianceItemsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMClientResolvedConfig } from "../SSMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutComplianceItemsRequest, PutComplianceItemsResult } from "../models/models_1";
+import { PutComplianceItems$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutComplianceItemsCommand}.
+ */
 export interface PutComplianceItemsCommandInput extends PutComplianceItemsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutComplianceItemsCommand}.
+ */
 export interface PutComplianceItemsCommandOutput extends PutComplianceItemsResult, __MetadataBearer {}
 
 /**
@@ -37,7 +38,14 @@ export interface PutComplianceItemsCommandOutput extends PutComplianceItemsResul
  *             </li>
  *             <li>
  *                <p>ExecutionTime. The time the patch, association, or custom compliance item was applied to
- *      the instance.</p>
+ *      the managed node.</p>
+ *                <important>
+ *                   <p>For State Manager associations, this represents the time when compliance status was
+ *       captured by the Systems Manager service during its internal compliance aggregation workflow, not
+ *       necessarily when the association was executed on the managed node. State Manager updates
+ *       compliance information for all associations on an instance whenever any association executes,
+ *       which may result in multiple associations showing the same execution time.</p>
+ *                </important>
  *             </li>
  *             <li>
  *                <p>Id: The patch, association, or custom compliance ID.</p>
@@ -50,7 +58,7 @@ export interface PutComplianceItemsCommandOutput extends PutComplianceItemsResul
  *      or <code>Failed</code> for associations.</p>
  *             </li>
  *             <li>
- *                <p>Severity: A patch severity. For example, <code>critical</code>.</p>
+ *                <p>Severity: A patch severity. For example, <code>Critical</code>.</p>
  *             </li>
  *             <li>
  *                <p>DocumentName: An SSM document name. For example, <code>AWS-RunPatchBaseline</code>.</p>
@@ -75,7 +83,9 @@ export interface PutComplianceItemsCommandOutput extends PutComplianceItemsResul
  *             </li>
  *             <li>
  *                <p>InstalledTime: The time the association, patch, or custom compliance item was applied to
- *      the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'</p>
+ *      the resource. Specify the time by using the following format:
+ *       <code>yyyy-MM-dd'T'HH:mm:ss'Z'</code>
+ *                </p>
  *             </li>
  *          </ul>
  * @example
@@ -83,68 +93,88 @@ export interface PutComplianceItemsCommandOutput extends PutComplianceItemsResul
  * ```javascript
  * import { SSMClient, PutComplianceItemsCommand } from "@aws-sdk/client-ssm"; // ES Modules import
  * // const { SSMClient, PutComplianceItemsCommand } = require("@aws-sdk/client-ssm"); // CommonJS import
+ * // import type { SSMClientConfig } from "@aws-sdk/client-ssm";
+ * const config = {}; // type is SSMClientConfig
  * const client = new SSMClient(config);
+ * const input = { // PutComplianceItemsRequest
+ *   ResourceId: "STRING_VALUE", // required
+ *   ResourceType: "STRING_VALUE", // required
+ *   ComplianceType: "STRING_VALUE", // required
+ *   ExecutionSummary: { // ComplianceExecutionSummary
+ *     ExecutionTime: new Date("TIMESTAMP"), // required
+ *     ExecutionId: "STRING_VALUE",
+ *     ExecutionType: "STRING_VALUE",
+ *   },
+ *   Items: [ // ComplianceItemEntryList // required
+ *     { // ComplianceItemEntry
+ *       Id: "STRING_VALUE",
+ *       Title: "STRING_VALUE",
+ *       Severity: "CRITICAL" || "HIGH" || "MEDIUM" || "LOW" || "INFORMATIONAL" || "UNSPECIFIED", // required
+ *       Status: "COMPLIANT" || "NON_COMPLIANT", // required
+ *       Details: { // ComplianceItemDetails
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ *   ItemContentHash: "STRING_VALUE",
+ *   UploadType: "COMPLETE" || "PARTIAL",
+ * };
  * const command = new PutComplianceItemsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutComplianceItemsCommandInput - {@link PutComplianceItemsCommandInput}
+ * @returns {@link PutComplianceItemsCommandOutput}
  * @see {@link PutComplianceItemsCommandInput} for command's `input` shape.
  * @see {@link PutComplianceItemsCommandOutput} for command's `response` shape.
- * @see {@link SSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMClientResolvedConfig | config} for SSMClient's `config` shape.
  *
+ * @throws {@link ComplianceTypeCountLimitExceededException} (client fault)
+ *  <p>You specified too many custom compliance types. You can specify a maximum of 10 different
+ *    types. </p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidItemContentException} (client fault)
+ *  <p>One or more content items isn't valid.</p>
+ *
+ * @throws {@link InvalidResourceId} (client fault)
+ *  <p>The resource ID isn't valid. Verify that you entered the correct ID and try again.</p>
+ *
+ * @throws {@link InvalidResourceType} (client fault)
+ *  <p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance,
+ *    the instance must be a registered managed node.</p>
+ *
+ * @throws {@link ItemSizeLimitExceededException} (client fault)
+ *  <p>The inventory item size has exceeded the size limit.</p>
+ *
+ * @throws {@link TotalSizeLimitExceededException} (client fault)
+ *  <p>The size of inventory data has exceeded the total size limit for the resource.</p>
+ *
+ * @throws {@link SSMServiceException}
+ * <p>Base exception class for all service exceptions from SSM service.</p>
+ *
+ *
+ * @public
  */
-export class PutComplianceItemsCommand extends $Command<
-  PutComplianceItemsCommandInput,
-  PutComplianceItemsCommandOutput,
-  SSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutComplianceItemsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutComplianceItemsCommandInput, PutComplianceItemsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMClient";
-    const commandName = "PutComplianceItemsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutComplianceItemsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutComplianceItemsResult.filterSensitiveLog,
+export class PutComplianceItemsCommand extends command<PutComplianceItemsCommandInput, PutComplianceItemsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutComplianceItems",
+  PutComplianceItems$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutComplianceItemsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutComplianceItemsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutComplianceItemsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutComplianceItemsCommandOutput> {
-    return deserializeAws_json1_1PutComplianceItemsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutComplianceItemsCommandInput;
+      output: PutComplianceItemsCommandOutput;
+    };
+  };
 }

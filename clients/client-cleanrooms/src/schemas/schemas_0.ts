@@ -1,0 +1,3820 @@
+const _AB = "AccessBudget";
+const _ABD = "AccessBudgetDetails";
+const _ABDL = "AccessBudgetDetailsList";
+const _ABPTPI = "AccessBudgetsPrivacyTemplateParametersInput";
+const _ABPTPO = "AccessBudgetsPrivacyTemplateParametersOutput";
+const _ABPTUP = "AccessBudgetsPrivacyTemplateUpdateParameters";
+const _AC = "AggregateColumn";
+const _ACL = "AggregateColumnList";
+const _ACg = "AggregationConstraint";
+const _ACgg = "AggregationConstraints";
+const _ADE = "AccessDeniedException";
+const _ALE = "AnalysisLogExport";
+const _ALEE = "AnalysisLogExportError";
+const _ALEOC = "AnalysisLogExportOutputConfiguration";
+const _ALERC = "AnalysisLogExportResultConfiguration";
+const _ALES = "AnalysisLogExportSummary";
+const _ALESL = "AnalysisLogExportSummaryList";
+const _ALESOC = "AnalysisLogExportS3OutputConfiguration";
+const _AP = "AnalysisParameter";
+const _APL = "AnalysisParameterList";
+const _AR = "AnalysisRule";
+const _ARA = "AnalysisRuleAggregation";
+const _ARC = "AnalysisRuleCustom";
+const _ARIMT = "AnalysisRuleIdMappingTable";
+const _ARL = "AnalysisRuleList";
+const _ARP = "AnalysisRulePolicy";
+const _ARPV = "AnalysisRulePolicyV1";
+const _AS = "AnalysisSchema";
+const _ASD = "ApprovalStatusDetails";
+const _ASM = "AnalysisSourceMetadata";
+const _ASn = "AnalysisSource";
+const _ASp = "ApprovalStatuses";
+const _AT = "AggregationThreshold";
+const _ATA = "AnalysisTemplateArtifact";
+const _ATAL = "AnalysisTemplateArtifactList";
+const _ATAM = "AnalysisTemplateArtifactMetadata";
+const _ATAn = "AnalysisTemplateArtifacts";
+const _ATL = "AggregationThresholdList";
+const _ATR = "AthenaTableReference";
+const _ATS = "AnalysisTemplateSummary";
+const _ATSL = "AnalysisTemplateSummaryList";
+const _ATT = "AnalysisTemplateText";
+const _ATVSD = "AnalysisTemplateValidationStatusDetail";
+const _ATVSDL = "AnalysisTemplateValidationStatusDetailList";
+const _ATVSR = "AnalysisTemplateValidationStatusReason";
+const _ATVSRL = "AnalysisTemplateValidationStatusReasonList";
+const _ATn = "AnalysisTemplate";
+const _BGCAT = "BatchGetCollaborationAnalysisTemplate";
+const _BGCATE = "BatchGetCollaborationAnalysisTemplateError";
+const _BGCATEL = "BatchGetCollaborationAnalysisTemplateErrorList";
+const _BGCATI = "BatchGetCollaborationAnalysisTemplateInput";
+const _BGCATO = "BatchGetCollaborationAnalysisTemplateOutput";
+const _BGS = "BatchGetSchema";
+const _BGSAR = "BatchGetSchemaAnalysisRule";
+const _BGSARE = "BatchGetSchemaAnalysisRuleError";
+const _BGSAREL = "BatchGetSchemaAnalysisRuleErrorList";
+const _BGSARI = "BatchGetSchemaAnalysisRuleInput";
+const _BGSARO = "BatchGetSchemaAnalysisRuleOutput";
+const _BGSE = "BatchGetSchemaError";
+const _BGSEL = "BatchGetSchemaErrorList";
+const _BGSI = "BatchGetSchemaInput";
+const _BGSO = "BatchGetSchemaOutput";
+const _BJRU = "BilledJobResourceUtilization";
+const _BP = "BudgetParameter";
+const _BPu = "BudgetParameters";
+const _BRU = "BilledResourceUtilization";
+const _C = "Change";
+const _CAMA = "ConfiguredAudienceModelAssociation";
+const _CAMAS = "ConfiguredAudienceModelAssociationSummary";
+const _CAMASL = "ConfiguredAudienceModelAssociationSummaryList";
+const _CAT = "CollaborationAnalysisTemplate";
+const _CATI = "CreateAnalysisTemplateInput";
+const _CATL = "CollaborationAnalysisTemplateList";
+const _CATO = "CreateAnalysisTemplateOutput";
+const _CATS = "CollaborationAnalysisTemplateSummary";
+const _CATSL = "CollaborationAnalysisTemplateSummaryList";
+const _CATr = "CreateAnalysisTemplate";
+const _CC = "ComparisonControls";
+const _CCAMA = "CollaborationConfiguredAudienceModelAssociation";
+const _CCAMAI = "CreateConfiguredAudienceModelAssociationInput";
+const _CCAMAO = "CreateConfiguredAudienceModelAssociationOutput";
+const _CCAMAS = "CollaborationConfiguredAudienceModelAssociationSummary";
+const _CCAMASL = "CollaborationConfiguredAudienceModelAssociationSummaryList";
+const _CCAMAr = "CreateConfiguredAudienceModelAssociation";
+const _CCCR = "CreateCollaborationChangeRequest";
+const _CCCRI = "CreateCollaborationChangeRequestInput";
+const _CCCRO = "CreateCollaborationChangeRequestOutput";
+const _CCD = "ColumnClassificationDetails";
+const _CCI = "CreateCollaborationInput";
+const _CCO = "CreateCollaborationOutput";
+const _CCR = "CollaborationChangeRequest";
+const _CCRS = "CollaborationChangeRequestSummary";
+const _CCRSL = "CollaborationChangeRequestSummaryList";
+const _CCS = "CollaborationChangeSpecification";
+const _CCT = "CreateConfiguredTable";
+const _CCTA = "CreateConfiguredTableAssociation";
+const _CCTAAR = "CreateConfiguredTableAssociationAnalysisRule";
+const _CCTAARI = "CreateConfiguredTableAssociationAnalysisRuleInput";
+const _CCTAARO = "CreateConfiguredTableAssociationAnalysisRuleOutput";
+const _CCTAI = "CreateConfiguredTableAssociationInput";
+const _CCTAO = "CreateConfiguredTableAssociationOutput";
+const _CCTAR = "CreateConfiguredTableAnalysisRule";
+const _CCTARI = "CreateConfiguredTableAnalysisRuleInput";
+const _CCTARO = "CreateConfiguredTableAnalysisRuleOutput";
+const _CCTI = "CreateConfiguredTableInput";
+const _CCTO = "CreateConfiguredTableOutput";
+const _CCo = "ComputeConfiguration";
+const _CCr = "CreateCollaboration";
+const _CD = "ConfigurationDetails";
+const _CE = "ConflictException";
+const _CI = "ChangeInput";
+const _CIL = "ChangeInputList";
+const _CIMT = "CreateIdMappingTable";
+const _CIMTI = "CreateIdMappingTableInput";
+const _CIMTO = "CreateIdMappingTableOutput";
+const _CINA = "CollaborationIdNamespaceAssociation";
+const _CINAI = "CreateIdNamespaceAssociationInput";
+const _CINAO = "CreateIdNamespaceAssociationOutput";
+const _CINAS = "CollaborationIdNamespaceAssociationSummary";
+const _CINASL = "CollaborationIdNamespaceAssociationSummaryList";
+const _CINAr = "CreateIdNamespaceAssociation";
+const _CIT = "CreateIntermediateTable";
+const _CITAR = "CreateIntermediateTableAnalysisRule";
+const _CITARI = "CreateIntermediateTableAnalysisRuleInput";
+const _CITARO = "CreateIntermediateTableAnalysisRuleOutput";
+const _CITI = "CreateIntermediateTableInput";
+const _CITO = "CreateIntermediateTableOutput";
+const _CL = "ChangeList";
+const _CLE = "ColumnLineageEntry";
+const _CLL = "ColumnLineageList";
+const _CLo = "ColumnList";
+const _CM = "CreateMembership";
+const _CMI = "CreateMembershipInput";
+const _CML = "ColumnMappingList";
+const _CMO = "CreateMembershipOutput";
+const _CP = "ConsolidatedPolicy";
+const _CPA = "ConsolidatedPolicyAggregation";
+const _CPBS = "CollaborationPrivacyBudgetSummary";
+const _CPBSL = "CollaborationPrivacyBudgetSummaryList";
+const _CPBT = "CollaborationPrivacyBudgetTemplate";
+const _CPBTI = "CreatePrivacyBudgetTemplateInput";
+const _CPBTO = "CreatePrivacyBudgetTemplateOutput";
+const _CPBTS = "CollaborationPrivacyBudgetTemplateSummary";
+const _CPBTSL = "CollaborationPrivacyBudgetTemplateSummaryList";
+const _CPBTr = "CreatePrivacyBudgetTemplate";
+const _CPC = "ConsolidatedPolicyCustom";
+const _CPL = "ConsolidatedPolicyList";
+const _CPV = "ConsolidatedPolicyV1";
+const _CR = "ChildResource";
+const _CRL = "ChildResourceList";
+const _CS = "CollaborationSummary";
+const _CSL = "CollaborationSummaryList";
+const _CSh = "ChangeSpecification";
+const _CT = "ConfiguredTable";
+const _CTA = "ConfiguredTableAssociation";
+const _CTAAR = "ConfiguredTableAssociationAnalysisRule";
+const _CTAARA = "ConfiguredTableAssociationAnalysisRuleAggregation";
+const _CTAARC = "ConfiguredTableAssociationAnalysisRuleCustom";
+const _CTAARL = "ConfiguredTableAssociationAnalysisRuleList";
+const _CTAARP = "ConfiguredTableAssociationAnalysisRulePolicy";
+const _CTAARPV = "ConfiguredTableAssociationAnalysisRulePolicyV1";
+const _CTAR = "ConfiguredTableAnalysisRule";
+const _CTARP = "ConfiguredTableAnalysisRulePolicy";
+const _CTARPV = "ConfiguredTableAnalysisRulePolicyV1";
+const _CTAS = "ConfiguredTableAssociationSummary";
+const _CTASL = "ConfiguredTableAssociationSummaryList";
+const _CTASTP = "ConfiguredTableAssociationSchemaTypeProperties";
+const _CTS = "ConfiguredTableSummary";
+const _CTSL = "ConfiguredTableSummaryList";
+const _Co = "Collaboration";
+const _Col = "Column";
+const _DACD = "DirectAnalysisConfigurationDetails";
+const _DAT = "DeleteAnalysisTemplate";
+const _DATI = "DeleteAnalysisTemplateInput";
+const _DATO = "DeleteAnalysisTemplateOutput";
+const _DC = "DeleteCollaboration";
+const _DCAMA = "DeleteConfiguredAudienceModelAssociation";
+const _DCAMAI = "DeleteConfiguredAudienceModelAssociationInput";
+const _DCAMAO = "DeleteConfiguredAudienceModelAssociationOutput";
+const _DCI = "DeleteCollaborationInput";
+const _DCO = "DeleteCollaborationOutput";
+const _DCT = "DatabricksConnectionType";
+const _DCTA = "DeleteConfiguredTableAssociation";
+const _DCTAAR = "DeleteConfiguredTableAssociationAnalysisRule";
+const _DCTAARI = "DeleteConfiguredTableAssociationAnalysisRuleInput";
+const _DCTAARO = "DeleteConfiguredTableAssociationAnalysisRuleOutput";
+const _DCTAI = "DeleteConfiguredTableAssociationInput";
+const _DCTAO = "DeleteConfiguredTableAssociationOutput";
+const _DCTAR = "DeleteConfiguredTableAnalysisRule";
+const _DCTARI = "DeleteConfiguredTableAnalysisRuleInput";
+const _DCTARO = "DeleteConfiguredTableAnalysisRuleOutput";
+const _DCTI = "DeleteConfiguredTableInput";
+const _DCTO = "DeleteConfiguredTableOutput";
+const _DCTe = "DeleteConfiguredTable";
+const _DDSC = "DatabricksDeltaSharingConnection";
+const _DEM = "DataEncryptionMetadata";
+const _DIMT = "DeleteIdMappingTable";
+const _DIMTI = "DeleteIdMappingTableInput";
+const _DIMTO = "DeleteIdMappingTableOutput";
+const _DINA = "DeleteIdNamespaceAssociation";
+const _DINAI = "DeleteIdNamespaceAssociationInput";
+const _DINAO = "DeleteIdNamespaceAssociationOutput";
+const _DIT = "DeleteIntermediateTable";
+const _DITAR = "DeleteIntermediateTableAnalysisRule";
+const _DITARI = "DeleteIntermediateTableAnalysisRuleInput";
+const _DITARO = "DeleteIntermediateTableAnalysisRuleOutput";
+const _DITI = "DeleteIntermediateTableInput";
+const _DITIi = "DisallowIntermediateTableInput";
+const _DITO = "DeleteIntermediateTableOutput";
+const _DITOi = "DisallowIntermediateTableOutput";
+const _DITi = "DisallowIntermediateTable";
+const _DL = "DependencyList";
+const _DM = "DeleteMember";
+const _DMI = "DeleteMemberInput";
+const _DMIe = "DeleteMembershipInput";
+const _DMO = "DeleteMemberOutput";
+const _DMOe = "DeleteMembershipOutput";
+const _DMe = "DeleteMembership";
+const _DPBT = "DeletePrivacyBudgetTemplate";
+const _DPBTI = "DeletePrivacyBudgetTemplateInput";
+const _DPBTO = "DeletePrivacyBudgetTemplateOutput";
+const _DPC = "DifferentialPrivacyColumn";
+const _DPCL = "DifferentialPrivacyColumnList";
+const _DPCi = "DifferentialPrivacyConfiguration";
+const _DPP = "DifferentialPrivacyParameters";
+const _DPPA = "DifferentialPrivacyPreviewAggregation";
+const _DPPAL = "DifferentialPrivacyPreviewAggregationList";
+const _DPPB = "DifferentialPrivacyPrivacyBudget";
+const _DPPBA = "DifferentialPrivacyPrivacyBudgetAggregation";
+const _DPPBAL = "DifferentialPrivacyPrivacyBudgetAggregationList";
+const _DPPI = "DifferentialPrivacyPrivacyImpact";
+const _DPPPI = "DifferentialPrivacyPreviewParametersInput";
+const _DPSP = "DifferentialPrivacySensitivityParameters";
+const _DPSPL = "DifferentialPrivacySensitivityParametersList";
+const _DPTPI = "DifferentialPrivacyTemplateParametersInput";
+const _DPTPO = "DifferentialPrivacyTemplateParametersOutput";
+const _DPTUP = "DifferentialPrivacyTemplateUpdateParameters";
+const _DTR = "DatabricksTableReference";
+const _EMC = "ErrorMessageConfiguration";
+const _GALE = "GetAnalysisLogExport";
+const _GALEI = "GetAnalysisLogExportInput";
+const _GALEO = "GetAnalysisLogExportOutput";
+const _GAT = "GetAnalysisTemplate";
+const _GATI = "GetAnalysisTemplateInput";
+const _GATO = "GetAnalysisTemplateOutput";
+const _GC = "GetCollaboration";
+const _GCAMA = "GetConfiguredAudienceModelAssociation";
+const _GCAMAI = "GetConfiguredAudienceModelAssociationInput";
+const _GCAMAO = "GetConfiguredAudienceModelAssociationOutput";
+const _GCAT = "GetCollaborationAnalysisTemplate";
+const _GCATI = "GetCollaborationAnalysisTemplateInput";
+const _GCATO = "GetCollaborationAnalysisTemplateOutput";
+const _GCCAMA = "GetCollaborationConfiguredAudienceModelAssociation";
+const _GCCAMAI = "GetCollaborationConfiguredAudienceModelAssociationInput";
+const _GCCAMAO = "GetCollaborationConfiguredAudienceModelAssociationOutput";
+const _GCCR = "GetCollaborationChangeRequest";
+const _GCCRI = "GetCollaborationChangeRequestInput";
+const _GCCRO = "GetCollaborationChangeRequestOutput";
+const _GCI = "GetCollaborationInput";
+const _GCINA = "GetCollaborationIdNamespaceAssociation";
+const _GCINAI = "GetCollaborationIdNamespaceAssociationInput";
+const _GCINAO = "GetCollaborationIdNamespaceAssociationOutput";
+const _GCO = "GetCollaborationOutput";
+const _GCPBT = "GetCollaborationPrivacyBudgetTemplate";
+const _GCPBTI = "GetCollaborationPrivacyBudgetTemplateInput";
+const _GCPBTO = "GetCollaborationPrivacyBudgetTemplateOutput";
+const _GCT = "GetConfiguredTable";
+const _GCTA = "GetConfiguredTableAssociation";
+const _GCTAAR = "GetConfiguredTableAssociationAnalysisRule";
+const _GCTAARI = "GetConfiguredTableAssociationAnalysisRuleInput";
+const _GCTAARO = "GetConfiguredTableAssociationAnalysisRuleOutput";
+const _GCTAI = "GetConfiguredTableAssociationInput";
+const _GCTAO = "GetConfiguredTableAssociationOutput";
+const _GCTAR = "GetConfiguredTableAnalysisRule";
+const _GCTARI = "GetConfiguredTableAnalysisRuleInput";
+const _GCTARO = "GetConfiguredTableAnalysisRuleOutput";
+const _GCTI = "GetConfiguredTableInput";
+const _GCTO = "GetConfiguredTableOutput";
+const _GIMT = "GetIdMappingTable";
+const _GIMTI = "GetIdMappingTableInput";
+const _GIMTO = "GetIdMappingTableOutput";
+const _GINA = "GetIdNamespaceAssociation";
+const _GINAI = "GetIdNamespaceAssociationInput";
+const _GINAO = "GetIdNamespaceAssociationOutput";
+const _GIT = "GetIntermediateTable";
+const _GITAR = "GetIntermediateTableAnalysisRule";
+const _GITARI = "GetIntermediateTableAnalysisRuleInput";
+const _GITARO = "GetIntermediateTableAnalysisRuleOutput";
+const _GITI = "GetIntermediateTableInput";
+const _GITO = "GetIntermediateTableOutput";
+const _GM = "GetMembership";
+const _GMI = "GetMembershipInput";
+const _GMO = "GetMembershipOutput";
+const _GPBT = "GetPrivacyBudgetTemplate";
+const _GPBTI = "GetPrivacyBudgetTemplateInput";
+const _GPBTO = "GetPrivacyBudgetTemplateOutput";
+const _GPJ = "GetProtectedJob";
+const _GPJI = "GetProtectedJobInput";
+const _GPJO = "GetProtectedJobOutput";
+const _GPQ = "GetProtectedQuery";
+const _GPQI = "GetProtectedQueryInput";
+const _GPQO = "GetProtectedQueryOutput";
+const _GS = "GetSchema";
+const _GSAR = "GetSchemaAnalysisRule";
+const _GSARI = "GetSchemaAnalysisRuleInput";
+const _GSARO = "GetSchemaAnalysisRuleOutput";
+const _GSI = "GetSchemaInput";
+const _GSO = "GetSchemaOutput";
+const _GTR = "GlueTableReference";
+const _H = "Hash";
+const _HL = "HashList";
+const _IAA = "InheritedAdditionalAnalyses";
+const _IAAA = "InheritedAllowedAdditionalAnalyses";
+const _IAAAS = "InheritedAllowedAdditionalAnalysesSource";
+const _IAAASL = "InheritedAllowedAdditionalAnalysesSourceList";
+const _IAAS = "InheritedAdditionalAnalysesSource";
+const _IAASL = "InheritedAdditionalAnalysesSourceList";
+const _IARR = "InheritedAllowedResultReceivers";
+const _IARRS = "InheritedAllowedResultReceiversSource";
+const _IARRSL = "InheritedAllowedResultReceiversSourceList";
+const _IDOC = "InheritedDisallowedOutputColumns";
+const _IMC = "IdMappingConfig";
+const _IMT = "IdMappingTable";
+const _IMTIRC = "IdMappingTableInputReferenceConfig";
+const _IMTIRP = "IdMappingTableInputReferenceProperties";
+const _IMTIS = "IdMappingTableInputSource";
+const _IMTISL = "IdMappingTableInputSourceList";
+const _IMTS = "IdMappingTableSummary";
+const _IMTSL = "IdMappingTableSummaryList";
+const _IMTSTP = "IdMappingTableSchemaTypeProperties";
+const _INA = "IdNamespaceAssociation";
+const _INAIRC = "IdNamespaceAssociationInputReferenceConfig";
+const _INAIRP = "IdNamespaceAssociationInputReferenceProperties";
+const _INAIRPS = "IdNamespaceAssociationInputReferencePropertiesSummary";
+const _INAS = "IdNamespaceAssociationSummary";
+const _INASL = "IdNamespaceAssociationSummaryList";
+const _ISE = "InternalServerException";
+const _IT = "IntermediateTable";
+const _ITAR = "IntermediateTableAnalysisRule";
+const _ITARC = "IntermediateTableAnalysisRuleCustom";
+const _ITARP = "IntermediateTableAnalysisRulePolicy";
+const _ITARPV = "IntermediateTableAnalysisRulePolicyV1";
+const _ITAV = "IntermediateTableActiveVersion";
+const _ITC = "IntermediateTableColumn";
+const _ITCC = "IntermediateTableComputeConfiguration";
+const _ITCL = "IntermediateTableColumnList";
+const _ITD = "IntermediateTableDependency";
+const _ITIC = "IntermediateTableInheritedConstraints";
+const _ITOC = "IntermediateTableOutputConfiguration";
+const _ITS = "IntermediateTableSchema";
+const _ITSL = "IntermediateTableSummaryList";
+const _ITSTP = "IntermediateTableSchemaTypeProperties";
+const _ITSn = "IntermediateTableSummary";
+const _ITVS = "IntermediateTableVersionSummary";
+const _ITVSL = "IntermediateTableVersionSummaryList";
+const _JCPC = "JobComputePaymentConfig";
+const _JPM = "JobParameterMap";
+const _LALE = "ListAnalysisLogExports";
+const _LALEI = "ListAnalysisLogExportsInput";
+const _LALEO = "ListAnalysisLogExportsOutput";
+const _LAT = "ListAnalysisTemplates";
+const _LATI = "ListAnalysisTemplatesInput";
+const _LATO = "ListAnalysisTemplatesOutput";
+const _LC = "ListCollaborations";
+const _LCAMA = "ListConfiguredAudienceModelAssociations";
+const _LCAMAI = "ListConfiguredAudienceModelAssociationsInput";
+const _LCAMAO = "ListConfiguredAudienceModelAssociationsOutput";
+const _LCAT = "ListCollaborationAnalysisTemplates";
+const _LCATI = "ListCollaborationAnalysisTemplatesInput";
+const _LCATO = "ListCollaborationAnalysisTemplatesOutput";
+const _LCCAMA = "ListCollaborationConfiguredAudienceModelAssociations";
+const _LCCAMAI = "ListCollaborationConfiguredAudienceModelAssociationsInput";
+const _LCCAMAO = "ListCollaborationConfiguredAudienceModelAssociationsOutput";
+const _LCCR = "ListCollaborationChangeRequests";
+const _LCCRI = "ListCollaborationChangeRequestsInput";
+const _LCCRO = "ListCollaborationChangeRequestsOutput";
+const _LCI = "ListCollaborationsInput";
+const _LCINA = "ListCollaborationIdNamespaceAssociations";
+const _LCINAI = "ListCollaborationIdNamespaceAssociationsInput";
+const _LCINAO = "ListCollaborationIdNamespaceAssociationsOutput";
+const _LCO = "ListCollaborationsOutput";
+const _LCPB = "ListCollaborationPrivacyBudgets";
+const _LCPBI = "ListCollaborationPrivacyBudgetsInput";
+const _LCPBO = "ListCollaborationPrivacyBudgetsOutput";
+const _LCPBT = "ListCollaborationPrivacyBudgetTemplates";
+const _LCPBTI = "ListCollaborationPrivacyBudgetTemplatesInput";
+const _LCPBTO = "ListCollaborationPrivacyBudgetTemplatesOutput";
+const _LCT = "ListConfiguredTables";
+const _LCTA = "ListConfiguredTableAssociations";
+const _LCTAI = "ListConfiguredTableAssociationsInput";
+const _LCTAO = "ListConfiguredTableAssociationsOutput";
+const _LCTI = "ListConfiguredTablesInput";
+const _LCTO = "ListConfiguredTablesOutput";
+const _LIMT = "ListIdMappingTables";
+const _LIMTI = "ListIdMappingTablesInput";
+const _LIMTO = "ListIdMappingTablesOutput";
+const _LINA = "ListIdNamespaceAssociations";
+const _LINAI = "ListIdNamespaceAssociationsInput";
+const _LINAO = "ListIdNamespaceAssociationsOutput";
+const _LIT = "ListIntermediateTables";
+const _LITI = "ListIntermediateTablesInput";
+const _LITO = "ListIntermediateTablesOutput";
+const _LITV = "ListIntermediateTableVersions";
+const _LITVI = "ListIntermediateTableVersionsInput";
+const _LITVO = "ListIntermediateTableVersionsOutput";
+const _LM = "ListMembers";
+const _LMI = "ListMembershipsInput";
+const _LMIi = "ListMembersInput";
+const _LMO = "ListMembershipsOutput";
+const _LMOi = "ListMembersOutput";
+const _LMi = "ListMemberships";
+const _LPB = "ListPrivacyBudgets";
+const _LPBI = "ListPrivacyBudgetsInput";
+const _LPBO = "ListPrivacyBudgetsOutput";
+const _LPBT = "ListPrivacyBudgetTemplates";
+const _LPBTI = "ListPrivacyBudgetTemplatesInput";
+const _LPBTO = "ListPrivacyBudgetTemplatesOutput";
+const _LPJ = "ListProtectedJobs";
+const _LPJI = "ListProtectedJobsInput";
+const _LPJO = "ListProtectedJobsOutput";
+const _LPQ = "ListProtectedQueries";
+const _LPQI = "ListProtectedQueriesInput";
+const _LPQO = "ListProtectedQueriesOutput";
+const _LS = "ListSchemas";
+const _LSI = "ListSchemasInput";
+const _LSO = "ListSchemasOutput";
+const _LTFR = "ListTagsForResource";
+const _LTFRI = "ListTagsForResourceInput";
+const _LTFRO = "ListTagsForResourceOutput";
+const _M = "Membership";
+const _MCS = "MemberChangeSpecification";
+const _MIPC = "ModelInferencePaymentConfig";
+const _MJCPC = "MembershipJobComputePaymentConfig";
+const _ML = "MemberList";
+const _MLMA = "MLMemberAbilities";
+const _MLPC = "MLPaymentConfig";
+const _MLSDP = "MLSyntheticDataParameters";
+const _MMIPC = "MembershipModelInferencePaymentConfig";
+const _MMLPC = "MembershipMLPaymentConfig";
+const _MMTPC = "MembershipModelTrainingPaymentConfig";
+const _MPC = "MembershipPaymentConfiguration";
+const _MPJOC = "MembershipProtectedJobOutputConfiguration";
+const _MPJRC = "MembershipProtectedJobResultConfiguration";
+const _MPQOC = "MembershipProtectedQueryOutputConfiguration";
+const _MPQRC = "MembershipProtectedQueryResultConfiguration";
+const _MQCPC = "MembershipQueryComputePaymentConfig";
+const _MS = "MembershipSummary";
+const _MSDGPC = "MembershipSyntheticDataGenerationPaymentConfig";
+const _MSL = "MembershipSummaryList";
+const _MSLe = "MemberSummaryList";
+const _MSe = "MemberSpecification";
+const _MSem = "MemberSummary";
+const _MTPC = "ModelTrainingPaymentConfig";
+const _OCT = "OutputColumnThreshold";
+const _OCTL = "OutputColumnThresholdList";
+const _PAC = "PopulationAnalysisConfiguration";
+const _PASP = "PopulationAnalysisSqlParameters";
+const _PB = "PrivacyBudget";
+const _PBS = "PrivacyBudgetSummary";
+const _PBSL = "PrivacyBudgetSummaryList";
+const _PBT = "PrivacyBudgetTemplate";
+const _PBTPI = "PrivacyBudgetTemplateParametersInput";
+const _PBTPO = "PrivacyBudgetTemplateParametersOutput";
+const _PBTS = "PrivacyBudgetTemplateSummary";
+const _PBTSL = "PrivacyBudgetTemplateSummaryList";
+const _PBTUP = "PrivacyBudgetTemplateUpdateParameters";
+const _PC = "PaymentConfiguration";
+const _PI = "PrivacyImpact";
+const _PIMT = "PopulateIdMappingTable";
+const _PIMTI = "PopulateIdMappingTableInput";
+const _PIMTO = "PopulateIdMappingTableOutput";
+const _PIT = "PopulateIntermediateTable";
+const _PITI = "PopulateIntermediateTableInput";
+const _PITO = "PopulateIntermediateTableOutput";
+const _PJ = "ProtectedJob";
+const _PJCC = "ProtectedJobComputeConfiguration";
+const _PJCD = "ProtectedJobConfigurationDetails";
+const _PJDACD = "ProtectedJobDirectAnalysisConfigurationDetails";
+const _PJE = "ProtectedJobError";
+const _PJMOCI = "ProtectedJobMemberOutputConfigurationInput";
+const _PJMOCO = "ProtectedJobMemberOutputConfigurationOutput";
+const _PJMOL = "ProtectedJobMemberOutputList";
+const _PJO = "ProtectedJobOutput";
+const _PJOCI = "ProtectedJobOutputConfigurationInput";
+const _PJOCO = "ProtectedJobOutputConfigurationOutput";
+const _PJP = "ProtectedJobParameters";
+const _PJR = "ProtectedJobResult";
+const _PJRC = "ProtectedJobReceiverConfiguration";
+const _PJRCI = "ProtectedJobResultConfigurationInput";
+const _PJRCO = "ProtectedJobResultConfigurationOutput";
+const _PJRCr = "ProtectedJobReceiverConfigurations";
+const _PJS = "ProtectedJobStatistics";
+const _PJSL = "ProtectedJobSummaryList";
+const _PJSMO = "ProtectedJobSingleMemberOutput";
+const _PJSO = "ProtectedJobS3Output";
+const _PJSOCI = "ProtectedJobS3OutputConfigurationInput";
+const _PJSOCO = "ProtectedJobS3OutputConfigurationOutput";
+const _PJSr = "ProtectedJobSummary";
+const _PJWCC = "ProtectedJobWorkerComputeConfiguration";
+const _PM = "ParameterMap";
+const _PPI = "PreviewPrivacyImpact";
+const _PPII = "PreviewPrivacyImpactInput";
+const _PPIO = "PreviewPrivacyImpactOutput";
+const _PPIPI = "PreviewPrivacyImpactParametersInput";
+const _PQ = "ProtectedQuery";
+const _PQDO = "ProtectedQueryDistributeOutput";
+const _PQDOC = "ProtectedQueryDistributeOutputConfiguration";
+const _PQDOCL = "ProtectedQueryDistributeOutputConfigurationLocations";
+const _PQDOCLr = "ProtectedQueryDistributeOutputConfigurationLocation";
+const _PQE = "ProtectedQueryError";
+const _PQMOC = "ProtectedQueryMemberOutputConfiguration";
+const _PQMOL = "ProtectedQueryMemberOutputList";
+const _PQO = "ProtectedQueryOutput";
+const _PQOC = "ProtectedQueryOutputConfiguration";
+const _PQR = "ProtectedQueryResult";
+const _PQRC = "ProtectedQueryResultConfiguration";
+const _PQS = "ProtectedQueryStatistics";
+const _PQSL = "ProtectedQuerySummaryList";
+const _PQSMO = "ProtectedQuerySingleMemberOutput";
+const _PQSO = "ProtectedQueryS3Output";
+const _PQSOC = "ProtectedQueryS3OutputConfiguration";
+const _PQSQLP = "ProtectedQuerySQLParameters";
+const _PQSr = "ProtectedQuerySummary";
+const _QC = "QueryConstraint";
+const _QCL = "QueryConstraintList";
+const _QCPC = "QueryComputePaymentConfig";
+const _QCRO = "QueryConstraintRequireOverlap";
+const _RC = "ReceiverConfiguration";
+const _RCL = "ReceiverConfigurationsList";
+const _RI = "RetryInfo";
+const _RNFE = "ResourceNotFoundException";
+const _S = "Schema";
+const _SALE = "StartAnalysisLogExport";
+const _SALEI = "StartAnalysisLogExportInput";
+const _SALEO = "StartAnalysisLogExportOutput";
+const _SARL = "SchemaAnalysisRuleList";
+const _SARR = "SchemaAnalysisRuleRequest";
+const _SARRL = "SchemaAnalysisRuleRequestList";
+const _SDCP = "SyntheticDataColumnProperties";
+const _SDGPC = "SyntheticDataGenerationPaymentConfig";
+const _SDP = "SyntheticDataParameters";
+const _SL = "S3Location";
+const _SLc = "SchemaList";
+const _SPJ = "StartProtectedJob";
+const _SPJI = "StartProtectedJobInput";
+const _SPJO = "StartProtectedJobOutput";
+const _SPQ = "StartProtectedQuery";
+const _SPQI = "StartProtectedQueryInput";
+const _SPQO = "StartProtectedQueryOutput";
+const _SQEE = "ServiceQuotaExceededException";
+const _SS = "SchemaSummary";
+const _SSD = "SchemaStatusDetail";
+const _SSDL = "SchemaStatusDetailList";
+const _SSL = "SchemaSummaryList";
+const _SSR = "SchemaStatusReason";
+const _SSRL = "SchemaStatusReasonList";
+const _STP = "SchemaTypeProperties";
+const _STR = "SnowflakeTableReference";
+const _STS = "SnowflakeTableSchema";
+const _STSL = "SnowflakeTableSchemaList";
+const _STSV = "SnowflakeTableSchemaV1";
+const _TE = "ThrottlingException";
+const _TR = "TableReference";
+const _TRI = "TagResourceInput";
+const _TRO = "TagResourceOutput";
+const _TRa = "TagResource";
+const _UAT = "UpdateAnalysisTemplate";
+const _UATI = "UpdateAnalysisTemplateInput";
+const _UATO = "UpdateAnalysisTemplateOutput";
+const _UC = "UpdateCollaboration";
+const _UCAMA = "UpdateConfiguredAudienceModelAssociation";
+const _UCAMAI = "UpdateConfiguredAudienceModelAssociationInput";
+const _UCAMAO = "UpdateConfiguredAudienceModelAssociationOutput";
+const _UCCR = "UpdateCollaborationChangeRequest";
+const _UCCRI = "UpdateCollaborationChangeRequestInput";
+const _UCCRO = "UpdateCollaborationChangeRequestOutput";
+const _UCI = "UpdateCollaborationInput";
+const _UCO = "UpdateCollaborationOutput";
+const _UCT = "UpdateConfiguredTable";
+const _UCTA = "UpdateConfiguredTableAssociation";
+const _UCTAAR = "UpdateConfiguredTableAssociationAnalysisRule";
+const _UCTAARI = "UpdateConfiguredTableAssociationAnalysisRuleInput";
+const _UCTAARO = "UpdateConfiguredTableAssociationAnalysisRuleOutput";
+const _UCTAI = "UpdateConfiguredTableAssociationInput";
+const _UCTAO = "UpdateConfiguredTableAssociationOutput";
+const _UCTAR = "UpdateConfiguredTableAnalysisRule";
+const _UCTARI = "UpdateConfiguredTableAnalysisRuleInput";
+const _UCTARO = "UpdateConfiguredTableAnalysisRuleOutput";
+const _UCTI = "UpdateConfiguredTableInput";
+const _UCTO = "UpdateConfiguredTableOutput";
+const _UIMT = "UpdateIdMappingTable";
+const _UIMTI = "UpdateIdMappingTableInput";
+const _UIMTO = "UpdateIdMappingTableOutput";
+const _UINA = "UpdateIdNamespaceAssociation";
+const _UINAI = "UpdateIdNamespaceAssociationInput";
+const _UINAO = "UpdateIdNamespaceAssociationOutput";
+const _UIT = "UpdateIntermediateTable";
+const _UITAR = "UpdateIntermediateTableAnalysisRule";
+const _UITARI = "UpdateIntermediateTableAnalysisRuleInput";
+const _UITARO = "UpdateIntermediateTableAnalysisRuleOutput";
+const _UITI = "UpdateIntermediateTableInput";
+const _UITO = "UpdateIntermediateTableOutput";
+const _UM = "UpdateMembership";
+const _UMI = "UpdateMembershipInput";
+const _UMO = "UpdateMembershipOutput";
+const _UMPC = "UpdateMembershipPaymentConfiguration";
+const _UPBT = "UpdatePrivacyBudgetTemplate";
+const _UPBTI = "UpdatePrivacyBudgetTemplateInput";
+const _UPBTO = "UpdatePrivacyBudgetTemplateOutput";
+const _UPJ = "UpdateProtectedJob";
+const _UPJI = "UpdateProtectedJobInput";
+const _UPJO = "UpdateProtectedJobOutput";
+const _UPQ = "UpdateProtectedQuery";
+const _UPQI = "UpdateProtectedQueryInput";
+const _UPQO = "UpdateProtectedQueryOutput";
+const _UR = "UntagResource";
+const _URI = "UntagResourceInput";
+const _URO = "UntagResourceOutput";
+const _VE = "ValidationException";
+const _VEF = "ValidationExceptionField";
+const _VEFL = "ValidationExceptionFieldList";
+const _WCC = "WorkerComputeConfiguration";
+const _WCCP = "WorkerComputeConfigurationProperties";
+const _a = "arn";
+const _aA = "additionalAnalyses";
+const _aAA = "allowedAdditionalAnalyses";
+const _aACRT = "autoApprovedChangeRequestTypes";
+const _aACT = "autoApprovedChangeTypes";
+const _aAET = "allowedAggregateExpressionType";
+const _aAH = "additionalArtifactHashes";
+const _aAP = "allowedAnalysisProviders";
+const _aAd = "additionalArtifacts";
+const _aAl = "allowedAnalyses";
+const _aB = "accessBudget";
+const _aBRA = "accessBudgetResourceArn";
+const _aC = "aggregateColumns";
+const _aCCC = "allowedColumnComparisonColumns";
+const _aCl = "allowedColumns";
+const _aCll = "allowCleartext";
+const _aD = "allowDuplicates";
+const _aE = "analyticsEngine";
+const _aEg = "aggregationExpression";
+const _aI = "analysisId";
+const _aIc = "accountId";
+const _aIcc = "accountIdentifier";
+const _aIn = "analysisIdentifier";
+const _aJO = "allowedJoinOperators";
+const _aJOCWDN = "allowJoinsOnColumnsWithDifferentNames";
+const _aLCC = "allowedLiteralComparisonColumns";
+const _aLE = "analysisLogExport";
+const _aLEI = "analysisLogExportId";
+const _aLEIn = "analysisLogExportIdentifier";
+const _aLEn = "analysisLogExports";
+const _aM = "analysisMethod";
+const _aP = "analysisParameters";
+const _aPAI = "analysisPayerAccountId";
+const _aR = "autoRefresh";
+const _aRB = "aggregateRemainingBudget";
+const _aRP = "analysisRulePolicy";
+const _aRR = "allowedResultReceivers";
+const _aRRl = "allowedResultRegions";
+const _aRT = "analysisRuleTypes";
+const _aRTn = "analysisRuleType";
+const _aRn = "analysisRules";
+const _aRna = "analysisRule";
+const _aT = "analysisType";
+const _aTA = "analysisTemplateArns";
+const _aTAn = "analysisTemplateArn";
+const _aTI = "analysisTemplateIdentifier";
+const _aTS = "analysisTemplateSummaries";
+const _aTg = "aggregationThresholds";
+const _aTgg = "aggregationType";
+const _aTn = "analysisTemplate";
+const _aUADC = "allowUseAsDimensionColumn";
+const _ab = "abilities";
+const _ac = "action";
+const _ag = "aggregations";
+const _agg = "aggregation";
+const _ap = "approvals";
+const _ar = "artifacts";
+const _at = "athena";
+const _b = "budget";
+const _bP = "budgetParameters";
+const _bRU = "billedResourceUtilization";
+const _bT = "budgetType";
+const _bu = "bucket";
+const _c = "client";
+const _cA = "collaborationArn";
+const _cAI = "creatorAccountId";
+const _cAMA = "configuredAudienceModelArn";
+const _cAMAI = "configuredAudienceModelAssociationIdentifier";
+const _cAMAN = "configuredAudienceModelAssociationName";
+const _cAMAS = "configuredAudienceModelAssociationSummaries";
+const _cAMAo = "configuredAudienceModelAssociation";
+const _cAT = "collaborationAnalysisTemplates";
+const _cATS = "collaborationAnalysisTemplateSummaries";
+const _cATo = "collaborationAnalysisTemplate";
+const _cC = "comparisonControls";
+const _cCAI = "collaborationCreatorAccountId";
+const _cCAMA = "collaborationConfiguredAudienceModelAssociation";
+const _cCAMAS = "collaborationConfiguredAudienceModelAssociationSummaries";
+const _cCDN = "collaborationCreatorDisplayName";
+const _cCR = "collaborationChangeRequest";
+const _cCRS = "collaborationChangeRequestSummaries";
+const _cCo = "columnClassification";
+const _cCom = "computeConfiguration";
+const _cD = "configurationDetails";
+const _cDN = "creatorDisplayName";
+const _cI = "collaborationId";
+const _cINA = "collaborationIdNamespaceAssociation";
+const _cINAS = "collaborationIdNamespaceAssociationSummaries";
+const _cIo = "collaborationIdentifier";
+const _cL = "columnLineage";
+const _cLo = "collaborationList";
+const _cM = "columnMapping";
+const _cMA = "creatorMemberAbilities";
+const _cMLMA = "creatorMLMemberAbilities";
+const _cMLMAu = "customMLMemberAbilities";
+const _cN = "columnNames";
+const _cNa = "catalogName";
+const _cNo = "columnName";
+const _cNol = "collaborationName";
+const _cP = "collaborationPolicy";
+const _cPBS = "collaborationPrivacyBudgetSummaries";
+const _cPBT = "collaborationPrivacyBudgetTemplate";
+const _cPBTS = "collaborationPrivacyBudgetTemplateSummaries";
+const _cPC = "creatorPaymentConfiguration";
+const _cPo = "consolidatedPolicy";
+const _cR = "childResources";
+const _cRI = "changeRequestIdentifier";
+const _cT = "createTime";
+const _cTA = "configuredTableArn";
+const _cTAA = "configuredTableAssociationArn";
+const _cTAI = "configuredTableAssociationId";
+const _cTAIo = "configuredTableAssociationIdentifier";
+const _cTAS = "configuredTableAssociationSummaries";
+const _cTAo = "configuredTableAssociation";
+const _cTI = "configuredTableId";
+const _cTIo = "configuredTableIdentifier";
+const _cTS = "configuredTableSummaries";
+const _cTo = "configuredTable";
+const _cTol = "columnType";
+const _cTon = "connectionType";
+const _ch = "changes";
+const _co = "code";
+const _col = "column";
+const _coll = "collaboration";
+const _colu = "columns";
+const _con = "configurations";
+const _cu = "custom";
+const _d = "details";
+const _dACD = "directAnalysisConfigurationDetails";
+const _dC = "dimensionColumns";
+const _dEM = "dataEncryptionMetadata";
+const _dJRC = "defaultJobResultConfiguration";
+const _dN = "databaseName";
+const _dNi = "displayName";
+const _dOC = "disallowedOutputColumns";
+const _dP = "differentialPrivacy";
+const _dRC = "defaultResultConfiguration";
+const _dS = "deltaSharing";
+const _dSE = "deltaShareEndpoint";
+const _dV = "defaultValue";
+const _da = "databricks";
+const _de = "description";
+const _di = "distribute";
+const _e = "error";
+const _eMC = "errorMessageConfiguration";
+const _eP = "entryPoint";
+const _ePH = "entryPointHash";
+const _eT = "endTime";
+const _eTx = "expirationTime";
+const _ep = "epsilon";
+const _er = "errors";
+const _f = "function";
+const _fL = "fieldList";
+const _fo = "format";
+const _g = "glue";
+const _h = "http";
+const _hE = "httpError";
+const _hQ = "httpQuery";
+const _i = "id";
+const _iAA = "isAutoApproved";
+const _iC = "identityColumns";
+const _iCn = "inheritedConstraints";
+const _iD = "includeDescendants";
+const _iMC = "idMappingConfig";
+const _iME = "isMetricsEnabled";
+const _iMJI = "idMappingJobId";
+const _iMT = "idMappingTable";
+const _iMTI = "idMappingTableIdentifier";
+const _iMTIS = "idMappingTableInputSource";
+const _iMTId = "idMappingTableId";
+const _iMTS = "idMappingTableSummaries";
+const _iMWS = "idMappingWorkflowsSupported";
+const _iNA = "idNamespaceAssociation";
+const _iNAI = "idNamespaceAssociationIdentifier";
+const _iNAId = "idNamespaceAssociationId";
+const _iNAS = "idNamespaceAssociationSummaries";
+const _iNT = "idNamespaceType";
+const _iPV = "isPredictiveValue";
+const _iR = "isResponsible";
+const _iRA = "inputReferenceArn";
+const _iRC = "inputReferenceConfig";
+const _iRP = "inputReferenceProperties";
+const _iSD = "isSyntheticData";
+const _iT = "intermediateTable";
+const _iTA = "intermediateTableArn";
+const _iTC = "intermediateTableConfiguration";
+const _iTI = "intermediateTableIdentifier";
+const _iTIn = "intermediateTableId";
+const _iTN = "intermediateTableName";
+const _iTS = "intermediateTableSummaries";
+const _iTV = "intermediateTableVersion";
+const _iTVS = "intermediateTableVersionSummaries";
+const _jC = "joinColumns";
+const _jCPAI = "jobComputePayerAccountId";
+const _jCo = "jobCompute";
+const _jLS = "jobLogStatus";
+const _jP = "jobParameters";
+const _jR = "joinRequired";
+const _jT = "jobType";
+const _k = "key";
+const _kKA = "kmsKeyArn";
+const _kP = "keyPrefix";
+const _l = "location";
+const _lC = "listColumns";
+const _li = "list";
+const _lo = "locations";
+const _m = "message";
+const _mA = "membershipArn";
+const _mAe = "memberAbilities";
+const _mAl = "mlAbilities";
+const _mC = "maxCount";
+const _mCV = "minColumnValue";
+const _mCVa = "maxColumnValue";
+const _mI = "membershipId";
+const _mIC = "minimumIdentityCount";
+const _mIe = "membershipIdentifier";
+const _mIo = "modelInference";
+const _mL = "machineLearning";
+const _mLe = "memberList";
+const _mMA = "mlMemberAbilities";
+const _mMIAS = "maxMembershipInferenceAttackScore";
+const _mPC = "membershipPaymentConfiguration";
+const _mR = "maxResults";
+const _mRP = "manageResourcePolicies";
+const _mS = "memberStatus";
+const _mSDP = "mlSyntheticDataParameters";
+const _mSe = "membershipSummaries";
+const _mSem = "memberSummaries";
+const _mT = "modelTraining";
+const _me = "members";
+const _mem = "membership";
+const _memb = "member";
+const _mi = "minimum";
+const _n = "name";
+const _nT = "nextToken";
+const _na = "names";
+const _nu = "number";
+const _o = "output";
+const _oAI = "ownerAccountId";
+const _oC = "outputConfiguration";
+const _oCN = "outputColumnName";
+const _oCT = "outputColumnThresholds";
+const _oCu = "outputConstraints";
+const _oL = "outputLocation";
+const _p = "policy";
+const _pAC = "populationAnalysisConfiguration";
+const _pBS = "privacyBudgetSummaries";
+const _pBT = "privacyBudgetType";
+const _pBTA = "privacyBudgetTemplateArn";
+const _pBTI = "privacyBudgetTemplateId";
+const _pBTIr = "privacyBudgetTemplateIdentifier";
+const _pBTS = "privacyBudgetTemplateSummaries";
+const _pBTr = "privacyBudgetTemplate";
+const _pC = "paymentConfiguration";
+const _pI = "privacyImpact";
+const _pJ = "protectedJob";
+const _pJI = "protectedJobIdentifier";
+const _pJr = "protectedJobs";
+const _pK = "partitionKeys";
+const _pN = "preserveNulls";
+const _pQ = "protectedQuery";
+const _pQI = "protectedQueryIdentifier";
+const _pQr = "protectedQueries";
+const _pT = "parentType";
+const _pa = "parameters";
+const _pr = "properties";
+const _qC = "queryConstraints";
+const _qCC = "queryComputeConfiguration";
+const _qCPAI = "queryComputePayerAccountId";
+const _qCu = "queryCompute";
+const _qLS = "queryLogStatus";
+const _qN = "quotaName";
+const _qS = "queryString";
+const _qV = "quotaValue";
+const _r = "reason";
+const _rA = "resourceArn";
+const _rAI = "receiverAccountIds";
+const _rAo = "roleArn";
+const _rB = "remainingBudget";
+const _rC = "resultConfiguration";
+const _rCe = "remainingCount";
+const _rCec = "receiverConfigurations";
+const _rF = "resultFormat";
+const _rI = "resourceId";
+const _rID = "retentionInDays";
+const _rN = "resourceName";
+const _rO = "requireOverlap";
+const _rS = "resourceStatus";
+const _rT = "resourceType";
+const _rTe = "referencedTables";
+const _re = "reasons";
+const _reg = "region";
+const _res = "result";
+const _ret = "retry";
+const _retr = "retryable";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.cleanrooms";
+const _sA = "secretArn";
+const _sAI = "sourceAccountId";
+const _sAM = "selectedAnalysisMethods";
+const _sARR = "schemaAnalysisRuleRequests";
+const _sC = "sourceColumn";
+const _sDG = "syntheticDataGeneration";
+const _sDP = "syntheticDataParameters";
+const _sF = "scalarFunctions";
+const _sFO = "singleFileOutput";
+const _sI = "sourceId";
+const _sM = "sourceMetadata";
+const _sN = "sourceName";
+const _sNc = "schemaName";
+const _sNh = "shareName";
+const _sP = "sensitivityParameters";
+const _sPq = "sqlParameters";
+const _sR = "statusReason";
+const _sS = "schemaSummaries";
+const _sSD = "schemaStatusDetails";
+const _sT = "startTime";
+const _sTP = "schemaTypeProperties";
+const _sTc = "schemaType";
+const _sTo = "sourceType";
+const _sTp = "specificationType";
+const _s_ = "s3";
+const _sc = "schema";
+const _sch = "schemas";
+const _se = "server";
+const _sh = "sha256";
+const _sn = "snowflake";
+const _so = "source";
+const _sou = "sources";
+const _sp = "specification";
+const _spa = "spark";
+const _st = "status";
+const _sta = "statistics";
+const _t = "type";
+const _tD = "tableDependencies";
+const _tDIM = "totalDurationInMillis";
+const _tI = "tableId";
+const _tK = "tagKeys";
+const _tN = "tableName";
+const _tR = "tableReference";
+const _tS = "tableSchema";
+const _tSa = "targetStatus";
+const _tT = "tableType";
+const _ta = "tags";
+const _te = "text";
+const _ty = "types";
+const _u = "units";
+const _uCL = "userContributionLimit";
+const _uNPQ = "usersNoisePerQuery";
+const _uT = "updateTime";
+const _v = "validations";
+const _vI = "versionId";
+const _v_ = "v1";
+const _va = "value";
+const _w = "worker";
+const _wG = "workGroup";
+const _wU = "workspaceUrl";
+const n0 = "com.amazonaws.cleanrooms";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import { CleanRoomsServiceException } from "../models/CleanRoomsServiceException";
+import {
+  AccessDeniedException,
+  ConflictException,
+  InternalServerException,
+  ResourceNotFoundException,
+  ServiceQuotaExceededException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var CleanRoomsServiceException$: StaticErrorSchema = [-3, _s, "CleanRoomsServiceException", 0, [], []];
+_s_registry.registerError(CleanRoomsServiceException$, CleanRoomsServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_m, _r],
+  [0, 0]
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_m, _rI, _rT, _r],
+  [0, 0, 0, 0]
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_m, _rI, _rT],
+  [0, 0, 0], 3
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 402 },
+  [_m, _qN, _qV],
+  [0, 0, 1], 3
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_m],
+  [0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_m, _r, _fL],
+  [0, 0, () => ValidationExceptionFieldList]
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var AnalysisTemplateText: StaticSimpleSchema = [0, n0, _ATT, 8, 0];
+export var AccessBudget$: StaticStructureSchema = [3, n0, _AB,
+  0,
+  [_rA, _d, _aRB],
+  [0, () => AccessBudgetDetailsList, 1], 3
+];
+export var AccessBudgetDetails$: StaticStructureSchema = [3, n0, _ABD,
+  0,
+  [_sT, _rB, _b, _bT, _eT, _aR],
+  [4, 1, 1, 0, 4, 0], 4
+];
+export var AccessBudgetsPrivacyTemplateParametersInput$: StaticStructureSchema = [3, n0, _ABPTPI,
+  0,
+  [_bP, _rA],
+  [() => BudgetParameters, 0], 2
+];
+export var AccessBudgetsPrivacyTemplateParametersOutput$: StaticStructureSchema = [3, n0, _ABPTPO,
+  0,
+  [_bP, _rA],
+  [() => BudgetParameters, 0], 2
+];
+export var AccessBudgetsPrivacyTemplateUpdateParameters$: StaticStructureSchema = [3, n0, _ABPTUP,
+  0,
+  [_bP],
+  [() => BudgetParameters], 1
+];
+export var AggregateColumn$: StaticStructureSchema = [3, n0, _AC,
+  0,
+  [_cN, _f],
+  [64 | 0, 0], 2
+];
+export var AggregationConstraint$: StaticStructureSchema = [3, n0, _ACg,
+  0,
+  [_cNo, _mi, _t],
+  [0, 1, 0], 3
+];
+export var AggregationThreshold$: StaticStructureSchema = [3, n0, _AT,
+  0,
+  [_iC, _mIC, _t, _aAET, _oCT],
+  [64 | 0, 1, 0, 0, () => OutputColumnThresholdList], 4
+];
+export var AnalysisLogExport$: StaticStructureSchema = [3, n0, _ALE,
+  0,
+  [_aLEI, _aI, _aT, _mI, _st, _rC, _cT, _uT, _e],
+  [0, 0, 0, 0, 0, () => AnalysisLogExportResultConfiguration$, 4, 4, () => AnalysisLogExportError$], 8
+];
+export var AnalysisLogExportError$: StaticStructureSchema = [3, n0, _ALEE,
+  0,
+  [_co, _m],
+  [0, 0], 2
+];
+export var AnalysisLogExportOutputConfiguration$: StaticStructureSchema = [3, n0, _ALEOC,
+  0,
+  [_s_],
+  [() => AnalysisLogExportS3OutputConfiguration$], 1
+];
+export var AnalysisLogExportResultConfiguration$: StaticStructureSchema = [3, n0, _ALERC,
+  0,
+  [_oC],
+  [() => AnalysisLogExportOutputConfiguration$], 1
+];
+export var AnalysisLogExportS3OutputConfiguration$: StaticStructureSchema = [3, n0, _ALESOC,
+  0,
+  [_bu, _kP],
+  [0, 0], 1
+];
+export var AnalysisLogExportSummary$: StaticStructureSchema = [3, n0, _ALES,
+  0,
+  [_aLEI, _aI, _aT, _st, _cT],
+  [0, 0, 0, 0, 4], 5
+];
+export var AnalysisParameter$: StaticStructureSchema = [3, n0, _AP,
+  8,
+  [_n, _t, _dV],
+  [0, 0, 0], 2
+];
+export var AnalysisRule$: StaticStructureSchema = [3, n0, _AR,
+  0,
+  [_cI, _t, _n, _cT, _uT, _p, _cP, _cPo],
+  [0, 0, 0, 4, 4, () => AnalysisRulePolicy$, () => ConfiguredTableAssociationAnalysisRulePolicy$, () => ConsolidatedPolicy$], 6
+];
+export var AnalysisRuleAggregation$: StaticStructureSchema = [3, n0, _ARA,
+  0,
+  [_aC, _jC, _dC, _sF, _oCu, _jR, _aJO, _aA],
+  [() => AggregateColumnList, 64 | 0, 64 | 0, 64 | 0, () => AggregationConstraints, 0, 64 | 0, 0], 5
+];
+export var AnalysisRuleCustom$: StaticStructureSchema = [3, n0, _ARC,
+  0,
+  [_aAl, _aAP, _aA, _dOC, _dP, _aTg, _cC, _aRR, _aAA],
+  [64 | 0, 64 | 0, 0, 64 | 0, () => DifferentialPrivacyConfiguration$, () => AggregationThresholdList, () => ComparisonControls$, 64 | 0, 64 | 0], 1
+];
+export var AnalysisRuleIdMappingTable$: StaticStructureSchema = [3, n0, _ARIMT,
+  0,
+  [_jC, _qC, _dC],
+  [64 | 0, () => QueryConstraintList, 64 | 0], 2
+];
+export var AnalysisRuleList$: StaticStructureSchema = [3, n0, _ARL,
+  0,
+  [_jC, _lC, _aJO, _aA],
+  [64 | 0, 64 | 0, 64 | 0, 0], 2
+];
+export var AnalysisSchema$: StaticStructureSchema = [3, n0, _AS,
+  0,
+  [_rTe],
+  [64 | 0]
+];
+export var AnalysisTemplate$: StaticStructureSchema = [3, n0, _ATn,
+  0,
+  [_i, _a, _cI, _cA, _mI, _mA, _n, _cT, _uT, _sc, _fo, _so, _de, _sM, _aP, _v, _eMC, _sDP],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, () => AnalysisSchema$, 0, [() => AnalysisSource$, 0], 0, () => AnalysisSourceMetadata$, [() => AnalysisParameterList, 0], () => AnalysisTemplateValidationStatusDetailList, () => ErrorMessageConfiguration$, () => SyntheticDataParameters$], 12
+];
+export var AnalysisTemplateArtifact$: StaticStructureSchema = [3, n0, _ATA,
+  0,
+  [_l],
+  [() => S3Location$], 1
+];
+export var AnalysisTemplateArtifactMetadata$: StaticStructureSchema = [3, n0, _ATAM,
+  0,
+  [_ePH, _aAH],
+  [() => Hash$, () => HashList], 1
+];
+export var AnalysisTemplateArtifacts$: StaticStructureSchema = [3, n0, _ATAn,
+  0,
+  [_eP, _rAo, _aAd],
+  [() => AnalysisTemplateArtifact$, 0, () => AnalysisTemplateArtifactList], 2
+];
+export var AnalysisTemplateSummary$: StaticStructureSchema = [3, n0, _ATS,
+  0,
+  [_a, _cT, _i, _n, _uT, _mA, _mI, _cA, _cI, _de, _iSD],
+  [0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 2], 9
+];
+export var AnalysisTemplateValidationStatusDetail$: StaticStructureSchema = [3, n0, _ATVSD,
+  0,
+  [_t, _st, _re],
+  [0, 0, () => AnalysisTemplateValidationStatusReasonList], 2
+];
+export var AnalysisTemplateValidationStatusReason$: StaticStructureSchema = [3, n0, _ATVSR,
+  0,
+  [_m],
+  [0], 1
+];
+export var ApprovalStatusDetails$: StaticStructureSchema = [3, n0, _ASD,
+  0,
+  [_st],
+  [0], 1
+];
+export var AthenaTableReference$: StaticStructureSchema = [3, n0, _ATR,
+  0,
+  [_wG, _dN, _tN, _reg, _oL, _cNa],
+  [0, 0, 0, 0, 0, 0], 3
+];
+export var BatchGetCollaborationAnalysisTemplateError$: StaticStructureSchema = [3, n0, _BGCATE,
+  0,
+  [_a, _co, _m],
+  [0, 0, 0], 3
+];
+export var BatchGetCollaborationAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _BGCATI,
+  0,
+  [_cIo, _aTA],
+  [[0, 1], 64 | 0], 2
+];
+export var BatchGetCollaborationAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _BGCATO,
+  0,
+  [_cAT, _er],
+  [[() => CollaborationAnalysisTemplateList, 0], () => BatchGetCollaborationAnalysisTemplateErrorList], 2
+];
+export var BatchGetSchemaAnalysisRuleError$: StaticStructureSchema = [3, n0, _BGSARE,
+  0,
+  [_n, _t, _co, _m],
+  [0, 0, 0, 0], 4
+];
+export var BatchGetSchemaAnalysisRuleInput$: StaticStructureSchema = [3, n0, _BGSARI,
+  0,
+  [_cIo, _sARR],
+  [[0, 1], () => SchemaAnalysisRuleRequestList], 2
+];
+export var BatchGetSchemaAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _BGSARO,
+  0,
+  [_aRn, _er],
+  [() => SchemaAnalysisRuleList, () => BatchGetSchemaAnalysisRuleErrorList], 2
+];
+export var BatchGetSchemaError$: StaticStructureSchema = [3, n0, _BGSE,
+  0,
+  [_n, _co, _m],
+  [0, 0, 0], 3
+];
+export var BatchGetSchemaInput$: StaticStructureSchema = [3, n0, _BGSI,
+  0,
+  [_cIo, _na],
+  [[0, 1], 64 | 0], 2
+];
+export var BatchGetSchemaOutput$: StaticStructureSchema = [3, n0, _BGSO,
+  0,
+  [_sch, _er],
+  [() => SchemaList, () => BatchGetSchemaErrorList], 2
+];
+export var BilledJobResourceUtilization$: StaticStructureSchema = [3, n0, _BJRU,
+  0,
+  [_u],
+  [1], 1
+];
+export var BilledResourceUtilization$: StaticStructureSchema = [3, n0, _BRU,
+  0,
+  [_u],
+  [1], 1
+];
+export var BudgetParameter$: StaticStructureSchema = [3, n0, _BP,
+  0,
+  [_t, _b, _aR],
+  [0, 1, 0], 2
+];
+export var Change$: StaticStructureSchema = [3, n0, _C,
+  0,
+  [_sTp, _sp, _ty],
+  [0, () => ChangeSpecification$, 64 | 0], 3
+];
+export var ChangeInput$: StaticStructureSchema = [3, n0, _CI,
+  0,
+  [_sTp, _sp],
+  [0, () => ChangeSpecification$], 2
+];
+export var ChildResource$: StaticStructureSchema = [3, n0, _CR,
+  0,
+  [_rT, _rN, _oAI, _rI, _rS],
+  [0, 0, 0, 0, 0], 3
+];
+export var Collaboration$: StaticStructureSchema = [3, n0, _Co,
+  0,
+  [_i, _a, _n, _cAI, _cDN, _cT, _uT, _mS, _qLS, _de, _mI, _mA, _dEM, _jLS, _aE, _aACT, _aRRl, _iME],
+  [0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, () => DataEncryptionMetadata$, 0, 0, 64 | 0, 64 | 0, 2], 9
+];
+export var CollaborationAnalysisTemplate$: StaticStructureSchema = [3, n0, _CAT,
+  0,
+  [_i, _a, _cI, _cA, _cAI, _n, _cT, _uT, _sc, _fo, _de, _so, _sM, _aP, _v, _eMC, _sDP],
+  [0, 0, 0, 0, 0, 0, 4, 4, () => AnalysisSchema$, 0, 0, [() => AnalysisSource$, 0], () => AnalysisSourceMetadata$, [() => AnalysisParameterList, 0], () => AnalysisTemplateValidationStatusDetailList, () => ErrorMessageConfiguration$, () => SyntheticDataParameters$], 10
+];
+export var CollaborationAnalysisTemplateSummary$: StaticStructureSchema = [3, n0, _CATS,
+  0,
+  [_a, _cT, _i, _n, _uT, _cA, _cI, _cAI, _de, _iSD],
+  [0, 4, 0, 0, 4, 0, 0, 0, 0, 2], 8
+];
+export var CollaborationChangeRequest$: StaticStructureSchema = [3, n0, _CCR,
+  0,
+  [_i, _cI, _cT, _uT, _st, _iAA, _ch, _ap],
+  [0, 0, 4, 4, 0, 2, () => ChangeList, () => ApprovalStatuses], 7
+];
+export var CollaborationChangeRequestSummary$: StaticStructureSchema = [3, n0, _CCRS,
+  0,
+  [_i, _cI, _cT, _uT, _st, _iAA, _ch, _ap],
+  [0, 0, 4, 4, 0, 2, () => ChangeList, () => ApprovalStatuses], 7
+];
+export var CollaborationChangeSpecification$: StaticStructureSchema = [3, n0, _CCS,
+  0,
+  [_aACT],
+  [64 | 0]
+];
+export var CollaborationConfiguredAudienceModelAssociation$: StaticStructureSchema = [3, n0, _CCAMA,
+  0,
+  [_i, _a, _cI, _cA, _cAMA, _n, _cAI, _cT, _uT, _de],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, 0], 9
+];
+export var CollaborationConfiguredAudienceModelAssociationSummary$: StaticStructureSchema = [3, n0, _CCAMAS,
+  0,
+  [_a, _cT, _i, _n, _uT, _cA, _cI, _cAI, _de],
+  [0, 4, 0, 0, 4, 0, 0, 0, 0], 8
+];
+export var CollaborationIdNamespaceAssociation$: StaticStructureSchema = [3, n0, _CINA,
+  0,
+  [_i, _a, _cI, _cA, _n, _cAI, _cT, _uT, _iRC, _iRP, _de, _iMC],
+  [0, 0, 0, 0, 0, 0, 4, 4, () => IdNamespaceAssociationInputReferenceConfig$, () => IdNamespaceAssociationInputReferenceProperties$, 0, () => IdMappingConfig$], 10
+];
+export var CollaborationIdNamespaceAssociationSummary$: StaticStructureSchema = [3, n0, _CINAS,
+  0,
+  [_a, _cT, _i, _uT, _cA, _cI, _cAI, _iRC, _n, _iRP, _de],
+  [0, 4, 0, 4, 0, 0, 0, () => IdNamespaceAssociationInputReferenceConfig$, 0, () => IdNamespaceAssociationInputReferencePropertiesSummary$, 0], 10
+];
+export var CollaborationPrivacyBudgetSummary$: StaticStructureSchema = [3, n0, _CPBS,
+  0,
+  [_i, _pBTI, _pBTA, _cI, _cA, _cAI, _t, _cT, _uT, _b],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, () => PrivacyBudget$], 10
+];
+export var CollaborationPrivacyBudgetTemplate$: StaticStructureSchema = [3, n0, _CPBT,
+  0,
+  [_i, _a, _cI, _cA, _cAI, _cT, _uT, _pBT, _aR, _pa],
+  [0, 0, 0, 0, 0, 4, 4, 0, 0, () => PrivacyBudgetTemplateParametersOutput$], 10
+];
+export var CollaborationPrivacyBudgetTemplateSummary$: StaticStructureSchema = [3, n0, _CPBTS,
+  0,
+  [_i, _a, _cI, _cA, _cAI, _pBT, _cT, _uT],
+  [0, 0, 0, 0, 0, 0, 4, 4], 8
+];
+export var CollaborationSummary$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_i, _a, _n, _cAI, _cDN, _cT, _uT, _mS, _mI, _mA, _aE],
+  [0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0], 8
+];
+export var Column$: StaticStructureSchema = [3, n0, _Col,
+  0,
+  [_n, _t],
+  [0, 0], 2
+];
+export var ColumnClassificationDetails$: StaticStructureSchema = [3, n0, _CCD,
+  0,
+  [_cM],
+  [() => ColumnMappingList], 1
+];
+export var ColumnLineageEntry$: StaticStructureSchema = [3, n0, _CLE,
+  0,
+  [_col, _sC, _sN, _sI, _sTo, _sAI],
+  [0, 0, 0, 0, 0, 0], 6
+];
+export var ComparisonControls$: StaticStructureSchema = [3, n0, _CC,
+  0,
+  [_aLCC, _aCCC],
+  [64 | 0, 64 | 0], 2
+];
+export var ConfiguredAudienceModelAssociation$: StaticStructureSchema = [3, n0, _CAMA,
+  0,
+  [_i, _a, _cAMA, _mI, _mA, _cI, _cA, _n, _mRP, _cT, _uT, _de],
+  [0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 4, 0], 11
+];
+export var ConfiguredAudienceModelAssociationSummary$: StaticStructureSchema = [3, n0, _CAMAS,
+  0,
+  [_mI, _mA, _cA, _cI, _cT, _uT, _i, _a, _n, _cAMA, _de],
+  [0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0], 10
+];
+export var ConfiguredTable$: StaticStructureSchema = [3, n0, _CT,
+  0,
+  [_i, _a, _n, _tR, _cT, _uT, _aRT, _aM, _aCl, _de, _tT, _sAM],
+  [0, 0, 0, () => TableReference$, 4, 4, 64 | 0, 0, 64 | 0, 0, 0, 64 | 0], 9
+];
+export var ConfiguredTableAnalysisRule$: StaticStructureSchema = [3, n0, _CTAR,
+  0,
+  [_cTI, _cTA, _p, _t, _cT, _uT],
+  [0, 0, () => ConfiguredTableAnalysisRulePolicy$, 0, 4, 4], 6
+];
+export var ConfiguredTableAssociation$: StaticStructureSchema = [3, n0, _CTA,
+  0,
+  [_a, _i, _cTI, _cTA, _mI, _mA, _rAo, _n, _cT, _uT, _de, _aRT, _cR],
+  [0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 64 | 0, () => ChildResourceList], 10
+];
+export var ConfiguredTableAssociationAnalysisRule$: StaticStructureSchema = [3, n0, _CTAAR,
+  0,
+  [_mIe, _cTAI, _cTAA, _p, _t, _cT, _uT],
+  [0, 0, 0, () => ConfiguredTableAssociationAnalysisRulePolicy$, 0, 4, 4], 7
+];
+export var ConfiguredTableAssociationAnalysisRuleAggregation$: StaticStructureSchema = [3, n0, _CTAARA,
+  0,
+  [_aRR, _aAA],
+  [64 | 0, 64 | 0]
+];
+export var ConfiguredTableAssociationAnalysisRuleCustom$: StaticStructureSchema = [3, n0, _CTAARC,
+  0,
+  [_aRR, _aAA],
+  [64 | 0, 64 | 0]
+];
+export var ConfiguredTableAssociationAnalysisRuleList$: StaticStructureSchema = [3, n0, _CTAARL,
+  0,
+  [_aRR, _aAA],
+  [64 | 0, 64 | 0]
+];
+export var ConfiguredTableAssociationSchemaTypeProperties$: StaticStructureSchema = [3, n0, _CTASTP,
+  0,
+  [_cTAI],
+  [0], 1
+];
+export var ConfiguredTableAssociationSummary$: StaticStructureSchema = [3, n0, _CTAS,
+  0,
+  [_cTI, _mI, _mA, _n, _cT, _uT, _i, _a, _aRT],
+  [0, 0, 0, 0, 4, 4, 0, 0, 64 | 0], 8
+];
+export var ConfiguredTableSummary$: StaticStructureSchema = [3, n0, _CTS,
+  0,
+  [_i, _a, _n, _cT, _uT, _aRT, _aM, _tT, _sAM],
+  [0, 0, 0, 4, 4, 64 | 0, 0, 0, 64 | 0], 7
+];
+export var ConsolidatedPolicyAggregation$: StaticStructureSchema = [3, n0, _CPA,
+  0,
+  [_aC, _jC, _dC, _sF, _oCu, _jR, _aJO, _aA, _aRR, _aAA],
+  [() => AggregateColumnList, 64 | 0, 64 | 0, 64 | 0, () => AggregationConstraints, 0, 64 | 0, 0, 64 | 0, 64 | 0], 5
+];
+export var ConsolidatedPolicyCustom$: StaticStructureSchema = [3, n0, _CPC,
+  0,
+  [_aAl, _aAP, _aA, _dOC, _dP, _aTg, _cC, _aRR, _aAA],
+  [64 | 0, 64 | 0, 0, 64 | 0, () => DifferentialPrivacyConfiguration$, () => AggregationThresholdList, () => ComparisonControls$, 64 | 0, 64 | 0], 1
+];
+export var ConsolidatedPolicyList$: StaticStructureSchema = [3, n0, _CPL,
+  0,
+  [_jC, _lC, _aJO, _aA, _aRR, _aAA],
+  [64 | 0, 64 | 0, 64 | 0, 0, 64 | 0, 64 | 0], 2
+];
+export var CreateAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _CATI,
+  0,
+  [_mIe, _n, _fo, _so, _de, _ta, _aP, _sc, _eMC, _sDP],
+  [[0, 1], 0, 0, [() => AnalysisSource$, 0], 0, 128 | 0, [() => AnalysisParameterList, 0], () => AnalysisSchema$, () => ErrorMessageConfiguration$, () => SyntheticDataParameters$], 4
+];
+export var CreateAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _CATO,
+  0,
+  [_aTn],
+  [[() => AnalysisTemplate$, 0]], 1
+];
+export var CreateCollaborationChangeRequestInput$: StaticStructureSchema = [3, n0, _CCCRI,
+  0,
+  [_cIo, _ch],
+  [[0, 1], () => ChangeInputList], 2
+];
+export var CreateCollaborationChangeRequestOutput$: StaticStructureSchema = [3, n0, _CCCRO,
+  0,
+  [_cCR],
+  [() => CollaborationChangeRequest$], 1
+];
+export var CreateCollaborationInput$: StaticStructureSchema = [3, n0, _CCI,
+  0,
+  [_me, _n, _cMA, _cDN, _qLS, _de, _cMLMA, _dEM, _jLS, _ta, _cPC, _aE, _aACRT, _aRRl, _iME],
+  [() => MemberList, 0, 64 | 0, 0, 0, 0, () => MLMemberAbilities$, () => DataEncryptionMetadata$, 0, 128 | 0, () => PaymentConfiguration$, 0, 64 | 0, 64 | 0, 2], 5
+];
+export var CreateCollaborationOutput$: StaticStructureSchema = [3, n0, _CCO,
+  0,
+  [_coll],
+  [() => Collaboration$], 1
+];
+export var CreateConfiguredAudienceModelAssociationInput$: StaticStructureSchema = [3, n0, _CCAMAI,
+  0,
+  [_mIe, _cAMA, _cAMAN, _mRP, _ta, _de],
+  [[0, 1], 0, 0, 2, 128 | 0, 0], 4
+];
+export var CreateConfiguredAudienceModelAssociationOutput$: StaticStructureSchema = [3, n0, _CCAMAO,
+  0,
+  [_cAMAo],
+  [() => ConfiguredAudienceModelAssociation$], 1
+];
+export var CreateConfiguredTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _CCTARI,
+  0,
+  [_cTIo, _aRTn, _aRP],
+  [[0, 1], 0, () => ConfiguredTableAnalysisRulePolicy$], 3
+];
+export var CreateConfiguredTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _CCTARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAnalysisRule$], 1
+];
+export var CreateConfiguredTableAssociationAnalysisRuleInput$: StaticStructureSchema = [3, n0, _CCTAARI,
+  0,
+  [_mIe, _cTAIo, _aRTn, _aRP],
+  [[0, 1], [0, 1], 0, () => ConfiguredTableAssociationAnalysisRulePolicy$], 4
+];
+export var CreateConfiguredTableAssociationAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _CCTAARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAssociationAnalysisRule$], 1
+];
+export var CreateConfiguredTableAssociationInput$: StaticStructureSchema = [3, n0, _CCTAI,
+  0,
+  [_n, _mIe, _cTIo, _rAo, _de, _ta],
+  [0, [0, 1], 0, 0, 0, 128 | 0], 4
+];
+export var CreateConfiguredTableAssociationOutput$: StaticStructureSchema = [3, n0, _CCTAO,
+  0,
+  [_cTAo],
+  [() => ConfiguredTableAssociation$], 1
+];
+export var CreateConfiguredTableInput$: StaticStructureSchema = [3, n0, _CCTI,
+  0,
+  [_n, _tR, _aCl, _aM, _de, _sAM, _ta],
+  [0, () => TableReference$, 64 | 0, 0, 0, 64 | 0, 128 | 0], 4
+];
+export var CreateConfiguredTableOutput$: StaticStructureSchema = [3, n0, _CCTO,
+  0,
+  [_cTo],
+  [() => ConfiguredTable$], 1
+];
+export var CreateIdMappingTableInput$: StaticStructureSchema = [3, n0, _CIMTI,
+  0,
+  [_mIe, _n, _iRC, _de, _ta, _kKA],
+  [[0, 1], 0, () => IdMappingTableInputReferenceConfig$, 0, 128 | 0, 0], 3
+];
+export var CreateIdMappingTableOutput$: StaticStructureSchema = [3, n0, _CIMTO,
+  0,
+  [_iMT],
+  [() => IdMappingTable$], 1
+];
+export var CreateIdNamespaceAssociationInput$: StaticStructureSchema = [3, n0, _CINAI,
+  0,
+  [_mIe, _iRC, _n, _ta, _de, _iMC],
+  [[0, 1], () => IdNamespaceAssociationInputReferenceConfig$, 0, 128 | 0, 0, () => IdMappingConfig$], 3
+];
+export var CreateIdNamespaceAssociationOutput$: StaticStructureSchema = [3, n0, _CINAO,
+  0,
+  [_iNA],
+  [() => IdNamespaceAssociation$], 1
+];
+export var CreateIntermediateTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _CITARI,
+  0,
+  [_mIe, _iTI, _aRTn, _aRP],
+  [[0, 1], [0, 1], 0, () => IntermediateTableAnalysisRulePolicy$], 4
+];
+export var CreateIntermediateTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _CITARO,
+  0,
+  [_aRna],
+  [() => IntermediateTableAnalysisRule$], 1
+];
+export var CreateIntermediateTableInput$: StaticStructureSchema = [3, n0, _CITI,
+  0,
+  [_mIe, _n, _pAC, _de, _kKA, _rID, _ta],
+  [[0, 1], 0, [() => PopulationAnalysisConfiguration$, 0], 0, 0, 1, 128 | 0], 3
+];
+export var CreateIntermediateTableOutput$: StaticStructureSchema = [3, n0, _CITO,
+  0,
+  [_iT],
+  [[() => IntermediateTable$, 0]], 1
+];
+export var CreateMembershipInput$: StaticStructureSchema = [3, n0, _CMI,
+  0,
+  [_cIo, _qLS, _jLS, _ta, _dRC, _dJRC, _pC, _iME],
+  [0, 0, 0, 128 | 0, () => MembershipProtectedQueryResultConfiguration$, () => MembershipProtectedJobResultConfiguration$, () => MembershipPaymentConfiguration$, 2], 2
+];
+export var CreateMembershipOutput$: StaticStructureSchema = [3, n0, _CMO,
+  0,
+  [_mem],
+  [() => Membership$], 1
+];
+export var CreatePrivacyBudgetTemplateInput$: StaticStructureSchema = [3, n0, _CPBTI,
+  0,
+  [_mIe, _pBT, _pa, _aR, _ta],
+  [[0, 1], 0, () => PrivacyBudgetTemplateParametersInput$, 0, 128 | 0], 3
+];
+export var CreatePrivacyBudgetTemplateOutput$: StaticStructureSchema = [3, n0, _CPBTO,
+  0,
+  [_pBTr],
+  [() => PrivacyBudgetTemplate$], 1
+];
+export var DatabricksDeltaSharingConnection$: StaticStructureSchema = [3, n0, _DDSC,
+  0,
+  [_dSE, _sNh],
+  [0, 0], 2
+];
+export var DatabricksTableReference$: StaticStructureSchema = [3, n0, _DTR,
+  0,
+  [_sNc, _tN, _wU, _cTon],
+  [0, 0, 0, () => DatabricksConnectionType$], 4
+];
+export var DataEncryptionMetadata$: StaticStructureSchema = [3, n0, _DEM,
+  0,
+  [_aCll, _aD, _aJOCWDN, _pN],
+  [2, 2, 2, 2], 4
+];
+export var DeleteAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _DATI,
+  0,
+  [_mIe, _aTI],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _DATO,
+  0,
+  [],
+  []
+];
+export var DeleteCollaborationInput$: StaticStructureSchema = [3, n0, _DCI,
+  0,
+  [_cIo],
+  [[0, 1]], 1
+];
+export var DeleteCollaborationOutput$: StaticStructureSchema = [3, n0, _DCO,
+  0,
+  [],
+  []
+];
+export var DeleteConfiguredAudienceModelAssociationInput$: StaticStructureSchema = [3, n0, _DCAMAI,
+  0,
+  [_cAMAI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteConfiguredAudienceModelAssociationOutput$: StaticStructureSchema = [3, n0, _DCAMAO,
+  0,
+  [],
+  []
+];
+export var DeleteConfiguredTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _DCTARI,
+  0,
+  [_cTIo, _aRTn],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteConfiguredTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _DCTARO,
+  0,
+  [],
+  []
+];
+export var DeleteConfiguredTableAssociationAnalysisRuleInput$: StaticStructureSchema = [3, n0, _DCTAARI,
+  0,
+  [_mIe, _cTAIo, _aRTn],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var DeleteConfiguredTableAssociationAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _DCTAARO,
+  0,
+  [],
+  []
+];
+export var DeleteConfiguredTableAssociationInput$: StaticStructureSchema = [3, n0, _DCTAI,
+  0,
+  [_cTAIo, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteConfiguredTableAssociationOutput$: StaticStructureSchema = [3, n0, _DCTAO,
+  0,
+  [],
+  []
+];
+export var DeleteConfiguredTableInput$: StaticStructureSchema = [3, n0, _DCTI,
+  0,
+  [_cTIo],
+  [[0, 1]], 1
+];
+export var DeleteConfiguredTableOutput$: StaticStructureSchema = [3, n0, _DCTO,
+  0,
+  [],
+  []
+];
+export var DeleteIdMappingTableInput$: StaticStructureSchema = [3, n0, _DIMTI,
+  0,
+  [_iMTI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteIdMappingTableOutput$: StaticStructureSchema = [3, n0, _DIMTO,
+  0,
+  [],
+  []
+];
+export var DeleteIdNamespaceAssociationInput$: StaticStructureSchema = [3, n0, _DINAI,
+  0,
+  [_iNAI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteIdNamespaceAssociationOutput$: StaticStructureSchema = [3, n0, _DINAO,
+  0,
+  [],
+  []
+];
+export var DeleteIntermediateTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _DITARI,
+  0,
+  [_mIe, _iTI, _aRTn],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var DeleteIntermediateTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _DITARO,
+  0,
+  [],
+  []
+];
+export var DeleteIntermediateTableInput$: StaticStructureSchema = [3, n0, _DITI,
+  0,
+  [_mIe, _iTI],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteIntermediateTableOutput$: StaticStructureSchema = [3, n0, _DITO,
+  0,
+  [],
+  []
+];
+export var DeleteMemberInput$: StaticStructureSchema = [3, n0, _DMI,
+  0,
+  [_cIo, _aIc],
+  [[0, 1], [0, 1]], 2
+];
+export var DeleteMemberOutput$: StaticStructureSchema = [3, n0, _DMO,
+  0,
+  [],
+  []
+];
+export var DeleteMembershipInput$: StaticStructureSchema = [3, n0, _DMIe,
+  0,
+  [_mIe],
+  [[0, 1]], 1
+];
+export var DeleteMembershipOutput$: StaticStructureSchema = [3, n0, _DMOe,
+  0,
+  [],
+  []
+];
+export var DeletePrivacyBudgetTemplateInput$: StaticStructureSchema = [3, n0, _DPBTI,
+  0,
+  [_mIe, _pBTIr],
+  [[0, 1], [0, 1]], 2
+];
+export var DeletePrivacyBudgetTemplateOutput$: StaticStructureSchema = [3, n0, _DPBTO,
+  0,
+  [],
+  []
+];
+export var DifferentialPrivacyColumn$: StaticStructureSchema = [3, n0, _DPC,
+  0,
+  [_n],
+  [0], 1
+];
+export var DifferentialPrivacyConfiguration$: StaticStructureSchema = [3, n0, _DPCi,
+  0,
+  [_colu],
+  [() => DifferentialPrivacyColumnList], 1
+];
+export var DifferentialPrivacyParameters$: StaticStructureSchema = [3, n0, _DPP,
+  0,
+  [_sP],
+  [() => DifferentialPrivacySensitivityParametersList], 1
+];
+export var DifferentialPrivacyPreviewAggregation$: StaticStructureSchema = [3, n0, _DPPA,
+  0,
+  [_t, _mC],
+  [0, 1], 2
+];
+export var DifferentialPrivacyPreviewParametersInput$: StaticStructureSchema = [3, n0, _DPPPI,
+  0,
+  [_ep, _uNPQ],
+  [1, 1], 2
+];
+export var DifferentialPrivacyPrivacyBudget$: StaticStructureSchema = [3, n0, _DPPB,
+  0,
+  [_ag, _ep],
+  [() => DifferentialPrivacyPrivacyBudgetAggregationList, 1], 2
+];
+export var DifferentialPrivacyPrivacyBudgetAggregation$: StaticStructureSchema = [3, n0, _DPPBA,
+  0,
+  [_t, _mC, _rCe],
+  [0, 1, 1], 3
+];
+export var DifferentialPrivacyPrivacyImpact$: StaticStructureSchema = [3, n0, _DPPI,
+  0,
+  [_ag],
+  [() => DifferentialPrivacyPreviewAggregationList], 1
+];
+export var DifferentialPrivacySensitivityParameters$: StaticStructureSchema = [3, n0, _DPSP,
+  0,
+  [_aTgg, _aEg, _uCL, _mCV, _mCVa],
+  [0, 0, 1, 1, 1], 3
+];
+export var DifferentialPrivacyTemplateParametersInput$: StaticStructureSchema = [3, n0, _DPTPI,
+  0,
+  [_ep, _uNPQ],
+  [1, 1], 2
+];
+export var DifferentialPrivacyTemplateParametersOutput$: StaticStructureSchema = [3, n0, _DPTPO,
+  0,
+  [_ep, _uNPQ],
+  [1, 1], 2
+];
+export var DifferentialPrivacyTemplateUpdateParameters$: StaticStructureSchema = [3, n0, _DPTUP,
+  0,
+  [_ep, _uNPQ],
+  [1, 1]
+];
+export var DirectAnalysisConfigurationDetails$: StaticStructureSchema = [3, n0, _DACD,
+  0,
+  [_rAI],
+  [64 | 0]
+];
+export var DisallowIntermediateTableInput$: StaticStructureSchema = [3, n0, _DITIi,
+  0,
+  [_mIe, _iTN, _iD],
+  [[0, 1], 0, 2], 2
+];
+export var DisallowIntermediateTableOutput$: StaticStructureSchema = [3, n0, _DITOi,
+  0,
+  [],
+  []
+];
+export var ErrorMessageConfiguration$: StaticStructureSchema = [3, n0, _EMC,
+  0,
+  [_t],
+  [0], 1
+];
+export var GetAnalysisLogExportInput$: StaticStructureSchema = [3, n0, _GALEI,
+  0,
+  [_mIe, _aLEIn],
+  [[0, 1], [0, 1]], 2
+];
+export var GetAnalysisLogExportOutput$: StaticStructureSchema = [3, n0, _GALEO,
+  0,
+  [_aLE],
+  [() => AnalysisLogExport$], 1
+];
+export var GetAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _GATI,
+  0,
+  [_mIe, _aTI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _GATO,
+  0,
+  [_aTn],
+  [[() => AnalysisTemplate$, 0]], 1
+];
+export var GetCollaborationAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _GCATI,
+  0,
+  [_cIo, _aTAn],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCollaborationAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _GCATO,
+  0,
+  [_cATo],
+  [[() => CollaborationAnalysisTemplate$, 0]], 1
+];
+export var GetCollaborationChangeRequestInput$: StaticStructureSchema = [3, n0, _GCCRI,
+  0,
+  [_cIo, _cRI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCollaborationChangeRequestOutput$: StaticStructureSchema = [3, n0, _GCCRO,
+  0,
+  [_cCR],
+  [() => CollaborationChangeRequest$], 1
+];
+export var GetCollaborationConfiguredAudienceModelAssociationInput$: StaticStructureSchema = [3, n0, _GCCAMAI,
+  0,
+  [_cIo, _cAMAI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCollaborationConfiguredAudienceModelAssociationOutput$: StaticStructureSchema = [3, n0, _GCCAMAO,
+  0,
+  [_cCAMA],
+  [() => CollaborationConfiguredAudienceModelAssociation$], 1
+];
+export var GetCollaborationIdNamespaceAssociationInput$: StaticStructureSchema = [3, n0, _GCINAI,
+  0,
+  [_cIo, _iNAI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCollaborationIdNamespaceAssociationOutput$: StaticStructureSchema = [3, n0, _GCINAO,
+  0,
+  [_cINA],
+  [() => CollaborationIdNamespaceAssociation$], 1
+];
+export var GetCollaborationInput$: StaticStructureSchema = [3, n0, _GCI,
+  0,
+  [_cIo],
+  [[0, 1]], 1
+];
+export var GetCollaborationOutput$: StaticStructureSchema = [3, n0, _GCO,
+  0,
+  [_coll],
+  [() => Collaboration$], 1
+];
+export var GetCollaborationPrivacyBudgetTemplateInput$: StaticStructureSchema = [3, n0, _GCPBTI,
+  0,
+  [_cIo, _pBTIr],
+  [[0, 1], [0, 1]], 2
+];
+export var GetCollaborationPrivacyBudgetTemplateOutput$: StaticStructureSchema = [3, n0, _GCPBTO,
+  0,
+  [_cPBT],
+  [() => CollaborationPrivacyBudgetTemplate$], 1
+];
+export var GetConfiguredAudienceModelAssociationInput$: StaticStructureSchema = [3, n0, _GCAMAI,
+  0,
+  [_cAMAI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var GetConfiguredAudienceModelAssociationOutput$: StaticStructureSchema = [3, n0, _GCAMAO,
+  0,
+  [_cAMAo],
+  [() => ConfiguredAudienceModelAssociation$], 1
+];
+export var GetConfiguredTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _GCTARI,
+  0,
+  [_cTIo, _aRTn],
+  [[0, 1], [0, 1]], 2
+];
+export var GetConfiguredTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _GCTARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAnalysisRule$], 1
+];
+export var GetConfiguredTableAssociationAnalysisRuleInput$: StaticStructureSchema = [3, n0, _GCTAARI,
+  0,
+  [_mIe, _cTAIo, _aRTn],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var GetConfiguredTableAssociationAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _GCTAARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAssociationAnalysisRule$], 1
+];
+export var GetConfiguredTableAssociationInput$: StaticStructureSchema = [3, n0, _GCTAI,
+  0,
+  [_cTAIo, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var GetConfiguredTableAssociationOutput$: StaticStructureSchema = [3, n0, _GCTAO,
+  0,
+  [_cTAo],
+  [() => ConfiguredTableAssociation$], 1
+];
+export var GetConfiguredTableInput$: StaticStructureSchema = [3, n0, _GCTI,
+  0,
+  [_cTIo],
+  [[0, 1]], 1
+];
+export var GetConfiguredTableOutput$: StaticStructureSchema = [3, n0, _GCTO,
+  0,
+  [_cTo],
+  [() => ConfiguredTable$], 1
+];
+export var GetIdMappingTableInput$: StaticStructureSchema = [3, n0, _GIMTI,
+  0,
+  [_iMTI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var GetIdMappingTableOutput$: StaticStructureSchema = [3, n0, _GIMTO,
+  0,
+  [_iMT],
+  [() => IdMappingTable$], 1
+];
+export var GetIdNamespaceAssociationInput$: StaticStructureSchema = [3, n0, _GINAI,
+  0,
+  [_iNAI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var GetIdNamespaceAssociationOutput$: StaticStructureSchema = [3, n0, _GINAO,
+  0,
+  [_iNA],
+  [() => IdNamespaceAssociation$], 1
+];
+export var GetIntermediateTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _GITARI,
+  0,
+  [_mIe, _iTI, _aRTn],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var GetIntermediateTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _GITARO,
+  0,
+  [_aRna],
+  [() => IntermediateTableAnalysisRule$], 1
+];
+export var GetIntermediateTableInput$: StaticStructureSchema = [3, n0, _GITI,
+  0,
+  [_iTI, _mIe],
+  [[0, 1], [0, 1]], 2
+];
+export var GetIntermediateTableOutput$: StaticStructureSchema = [3, n0, _GITO,
+  0,
+  [_iT],
+  [[() => IntermediateTable$, 0]], 1
+];
+export var GetMembershipInput$: StaticStructureSchema = [3, n0, _GMI,
+  0,
+  [_mIe],
+  [[0, 1]], 1
+];
+export var GetMembershipOutput$: StaticStructureSchema = [3, n0, _GMO,
+  0,
+  [_mem],
+  [() => Membership$], 1
+];
+export var GetPrivacyBudgetTemplateInput$: StaticStructureSchema = [3, n0, _GPBTI,
+  0,
+  [_mIe, _pBTIr],
+  [[0, 1], [0, 1]], 2
+];
+export var GetPrivacyBudgetTemplateOutput$: StaticStructureSchema = [3, n0, _GPBTO,
+  0,
+  [_pBTr],
+  [() => PrivacyBudgetTemplate$], 1
+];
+export var GetProtectedJobInput$: StaticStructureSchema = [3, n0, _GPJI,
+  0,
+  [_mIe, _pJI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetProtectedJobOutput$: StaticStructureSchema = [3, n0, _GPJO,
+  0,
+  [_pJ],
+  [[() => ProtectedJob$, 0]], 1
+];
+export var GetProtectedQueryInput$: StaticStructureSchema = [3, n0, _GPQI,
+  0,
+  [_mIe, _pQI],
+  [[0, 1], [0, 1]], 2
+];
+export var GetProtectedQueryOutput$: StaticStructureSchema = [3, n0, _GPQO,
+  0,
+  [_pQ],
+  [[() => ProtectedQuery$, 0]], 1
+];
+export var GetSchemaAnalysisRuleInput$: StaticStructureSchema = [3, n0, _GSARI,
+  0,
+  [_cIo, _n, _t],
+  [[0, 1], [0, 1], [0, 1]], 3
+];
+export var GetSchemaAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _GSARO,
+  0,
+  [_aRna],
+  [() => AnalysisRule$], 1
+];
+export var GetSchemaInput$: StaticStructureSchema = [3, n0, _GSI,
+  0,
+  [_cIo, _n],
+  [[0, 1], [0, 1]], 2
+];
+export var GetSchemaOutput$: StaticStructureSchema = [3, n0, _GSO,
+  0,
+  [_sc],
+  [() => Schema$], 1
+];
+export var GlueTableReference$: StaticStructureSchema = [3, n0, _GTR,
+  0,
+  [_tN, _dN, _reg],
+  [0, 0, 0], 2
+];
+export var Hash$: StaticStructureSchema = [3, n0, _H,
+  0,
+  [_sh],
+  [0]
+];
+export var IdMappingConfig$: StaticStructureSchema = [3, n0, _IMC,
+  0,
+  [_aUADC],
+  [2], 1
+];
+export var IdMappingTable$: StaticStructureSchema = [3, n0, _IMT,
+  0,
+  [_i, _a, _iRC, _mI, _mA, _cI, _cA, _n, _cT, _uT, _iRP, _de, _kKA, _cR],
+  [0, 0, () => IdMappingTableInputReferenceConfig$, 0, 0, 0, 0, 0, 4, 4, () => IdMappingTableInputReferenceProperties$, 0, 0, () => ChildResourceList], 11
+];
+export var IdMappingTableInputReferenceConfig$: StaticStructureSchema = [3, n0, _IMTIRC,
+  0,
+  [_iRA, _mRP],
+  [0, 2], 2
+];
+export var IdMappingTableInputReferenceProperties$: StaticStructureSchema = [3, n0, _IMTIRP,
+  0,
+  [_iMTIS],
+  [() => IdMappingTableInputSourceList], 1
+];
+export var IdMappingTableInputSource$: StaticStructureSchema = [3, n0, _IMTIS,
+  0,
+  [_iNAId, _t],
+  [0, 0], 2
+];
+export var IdMappingTableSchemaTypeProperties$: StaticStructureSchema = [3, n0, _IMTSTP,
+  0,
+  [_iMTIS, _iMTId],
+  [() => IdMappingTableInputSourceList, 0], 1
+];
+export var IdMappingTableSummary$: StaticStructureSchema = [3, n0, _IMTS,
+  0,
+  [_cA, _cI, _mI, _mA, _cT, _uT, _i, _a, _iRC, _n, _de],
+  [0, 0, 0, 0, 4, 4, 0, 0, () => IdMappingTableInputReferenceConfig$, 0, 0], 10
+];
+export var IdNamespaceAssociation$: StaticStructureSchema = [3, n0, _INA,
+  0,
+  [_i, _a, _mI, _mA, _cI, _cA, _n, _cT, _uT, _iRC, _iRP, _de, _iMC],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, () => IdNamespaceAssociationInputReferenceConfig$, () => IdNamespaceAssociationInputReferenceProperties$, 0, () => IdMappingConfig$], 11
+];
+export var IdNamespaceAssociationInputReferenceConfig$: StaticStructureSchema = [3, n0, _INAIRC,
+  0,
+  [_iRA, _mRP],
+  [0, 2], 2
+];
+export var IdNamespaceAssociationInputReferenceProperties$: StaticStructureSchema = [3, n0, _INAIRP,
+  0,
+  [_iNT, _iMWS],
+  [0, 64 | 15], 2
+];
+export var IdNamespaceAssociationInputReferencePropertiesSummary$: StaticStructureSchema = [3, n0, _INAIRPS,
+  0,
+  [_iNT],
+  [0], 1
+];
+export var IdNamespaceAssociationSummary$: StaticStructureSchema = [3, n0, _INAS,
+  0,
+  [_mI, _mA, _cA, _cI, _cT, _uT, _i, _a, _iRC, _n, _iRP, _de],
+  [0, 0, 0, 0, 4, 4, 0, 0, () => IdNamespaceAssociationInputReferenceConfig$, 0, () => IdNamespaceAssociationInputReferencePropertiesSummary$, 0], 11
+];
+export var InheritedAdditionalAnalyses$: StaticStructureSchema = [3, n0, _IAA,
+  0,
+  [_va, _sou],
+  [0, () => InheritedAdditionalAnalysesSourceList], 2
+];
+export var InheritedAdditionalAnalysesSource$: StaticStructureSchema = [3, n0, _IAAS,
+  0,
+  [_n, _i, _t, _va, _sAI],
+  [0, 0, 0, 0, 0], 5
+];
+export var InheritedAllowedAdditionalAnalyses$: StaticStructureSchema = [3, n0, _IAAA,
+  0,
+  [_va, _sou],
+  [64 | 0, () => InheritedAllowedAdditionalAnalysesSourceList], 2
+];
+export var InheritedAllowedAdditionalAnalysesSource$: StaticStructureSchema = [3, n0, _IAAAS,
+  0,
+  [_n, _i, _t, _va, _sAI],
+  [0, 0, 0, 64 | 0, 0], 5
+];
+export var InheritedAllowedResultReceivers$: StaticStructureSchema = [3, n0, _IARR,
+  0,
+  [_va, _sou],
+  [64 | 0, () => InheritedAllowedResultReceiversSourceList], 2
+];
+export var InheritedAllowedResultReceiversSource$: StaticStructureSchema = [3, n0, _IARRS,
+  0,
+  [_n, _i, _t, _va, _sAI],
+  [0, 0, 0, 64 | 0, 0], 5
+];
+export var InheritedDisallowedOutputColumns$: StaticStructureSchema = [3, n0, _IDOC,
+  0,
+  [_va, _cL],
+  [64 | 0, () => ColumnLineageList], 2
+];
+export var IntermediateTable$: StaticStructureSchema = [3, n0, _IT,
+  0,
+  [_i, _a, _n, _mA, _mI, _cA, _cI, _cT, _uT, _st, _pAC, _de, _cR, _sR, _kKA, _rID, _tD, _iTV, _aRT, _sc],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, 0, [() => PopulationAnalysisConfiguration$, 0], 0, () => ChildResourceList, 0, 0, 1, () => DependencyList, [() => IntermediateTableActiveVersion$, 0], 64 | 0, () => IntermediateTableSchema$], 11
+];
+export var IntermediateTableActiveVersion$: StaticStructureSchema = [3, n0, _ITAV,
+  0,
+  [_vI, _aI, _aT, _iCn, _kKA, _pa, _eTx],
+  [0, 0, 0, () => IntermediateTableInheritedConstraints$, 0, [() => ParameterMap, 0], 4], 4
+];
+export var IntermediateTableAnalysisRule$: StaticStructureSchema = [3, n0, _ITAR,
+  0,
+  [_iTI, _iTA, _aRP, _aRTn, _cT, _uT],
+  [0, 0, () => IntermediateTableAnalysisRulePolicy$, 0, 4, 4], 6
+];
+export var IntermediateTableAnalysisRuleCustom$: StaticStructureSchema = [3, n0, _ITARC,
+  0,
+  [_aAl, _aA, _aAA, _aAP, _aRR, _dP, _dOC, _aTg, _cC],
+  [64 | 0, 0, 64 | 0, 64 | 0, 64 | 0, () => DifferentialPrivacyConfiguration$, 64 | 0, () => AggregationThresholdList, () => ComparisonControls$]
+];
+export var IntermediateTableColumn$: StaticStructureSchema = [3, n0, _ITC,
+  0,
+  [_n, _t],
+  [0, 0], 2
+];
+export var IntermediateTableDependency$: StaticStructureSchema = [3, n0, _ITD,
+  0,
+  [_i, _n, _t, _pT, _cAI],
+  [0, 0, 0, 0, 0], 5
+];
+export var IntermediateTableInheritedConstraints$: StaticStructureSchema = [3, n0, _ITIC,
+  0,
+  [_aA, _aAA, _aRR, _dOC],
+  [() => InheritedAdditionalAnalyses$, () => InheritedAllowedAdditionalAnalyses$, () => InheritedAllowedResultReceivers$, () => InheritedDisallowedOutputColumns$]
+];
+export var IntermediateTableOutputConfiguration$: StaticStructureSchema = [3, n0, _ITOC,
+  0,
+  [_i, _a, _n],
+  [0, 0, 0], 3
+];
+export var IntermediateTableSchema$: StaticStructureSchema = [3, n0, _ITS,
+  0,
+  [_colu],
+  [() => ColumnList], 1
+];
+export var IntermediateTableSchemaTypeProperties$: StaticStructureSchema = [3, n0, _ITSTP,
+  0,
+  [_iTIn],
+  [0], 1
+];
+export var IntermediateTableSummary$: StaticStructureSchema = [3, n0, _ITSn,
+  0,
+  [_i, _a, _n, _mA, _mI, _cA, _cI, _cT, _uT, _st, _de, _rID, _aRT],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 1, 64 | 0], 10
+];
+export var IntermediateTableVersionSummary$: StaticStructureSchema = [3, n0, _ITVS,
+  0,
+  [_vI, _tI, _cT, _aI, _st, _aT, _kKA, _eTx],
+  [0, 0, 4, 0, 0, 0, 0, 4], 6
+];
+export var JobComputePaymentConfig$: StaticStructureSchema = [3, n0, _JCPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var ListAnalysisLogExportsInput$: StaticStructureSchema = [3, n0, _LALEI,
+  0,
+  [_mIe, _aIn, _st, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _aIn }], [0, { [_hQ]: _st }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListAnalysisLogExportsOutput$: StaticStructureSchema = [3, n0, _LALEO,
+  0,
+  [_aLEn, _nT],
+  [() => AnalysisLogExportSummaryList, 0], 1
+];
+export var ListAnalysisTemplatesInput$: StaticStructureSchema = [3, n0, _LATI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListAnalysisTemplatesOutput$: StaticStructureSchema = [3, n0, _LATO,
+  0,
+  [_aTS, _nT],
+  [() => AnalysisTemplateSummaryList, 0], 1
+];
+export var ListCollaborationAnalysisTemplatesInput$: StaticStructureSchema = [3, n0, _LCATI,
+  0,
+  [_cIo, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCollaborationAnalysisTemplatesOutput$: StaticStructureSchema = [3, n0, _LCATO,
+  0,
+  [_cATS, _nT],
+  [() => CollaborationAnalysisTemplateSummaryList, 0], 1
+];
+export var ListCollaborationChangeRequestsInput$: StaticStructureSchema = [3, n0, _LCCRI,
+  0,
+  [_cIo, _st, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _st }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCollaborationChangeRequestsOutput$: StaticStructureSchema = [3, n0, _LCCRO,
+  0,
+  [_cCRS, _nT],
+  [() => CollaborationChangeRequestSummaryList, 0], 1
+];
+export var ListCollaborationConfiguredAudienceModelAssociationsInput$: StaticStructureSchema = [3, n0, _LCCAMAI,
+  0,
+  [_cIo, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCollaborationConfiguredAudienceModelAssociationsOutput$: StaticStructureSchema = [3, n0, _LCCAMAO,
+  0,
+  [_cCAMAS, _nT],
+  [() => CollaborationConfiguredAudienceModelAssociationSummaryList, 0], 1
+];
+export var ListCollaborationIdNamespaceAssociationsInput$: StaticStructureSchema = [3, n0, _LCINAI,
+  0,
+  [_cIo, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCollaborationIdNamespaceAssociationsOutput$: StaticStructureSchema = [3, n0, _LCINAO,
+  0,
+  [_cINAS, _nT],
+  [() => CollaborationIdNamespaceAssociationSummaryList, 0], 1
+];
+export var ListCollaborationPrivacyBudgetsInput$: StaticStructureSchema = [3, n0, _LCPBI,
+  0,
+  [_cIo, _pBT, _mR, _nT, _aBRA],
+  [[0, 1], [0, { [_hQ]: _pBT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _nT }], [0, { [_hQ]: _aBRA }]], 2
+];
+export var ListCollaborationPrivacyBudgetsOutput$: StaticStructureSchema = [3, n0, _LCPBO,
+  0,
+  [_cPBS, _nT],
+  [() => CollaborationPrivacyBudgetSummaryList, 0], 1
+];
+export var ListCollaborationPrivacyBudgetTemplatesInput$: StaticStructureSchema = [3, n0, _LCPBTI,
+  0,
+  [_cIo, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListCollaborationPrivacyBudgetTemplatesOutput$: StaticStructureSchema = [3, n0, _LCPBTO,
+  0,
+  [_cPBTS, _nT],
+  [() => CollaborationPrivacyBudgetTemplateSummaryList, 0], 1
+];
+export var ListCollaborationsInput$: StaticStructureSchema = [3, n0, _LCI,
+  0,
+  [_nT, _mR, _mS],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _mS }]]
+];
+export var ListCollaborationsOutput$: StaticStructureSchema = [3, n0, _LCO,
+  0,
+  [_cLo, _nT],
+  [() => CollaborationSummaryList, 0], 1
+];
+export var ListConfiguredAudienceModelAssociationsInput$: StaticStructureSchema = [3, n0, _LCAMAI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListConfiguredAudienceModelAssociationsOutput$: StaticStructureSchema = [3, n0, _LCAMAO,
+  0,
+  [_cAMAS, _nT],
+  [() => ConfiguredAudienceModelAssociationSummaryList, 0], 1
+];
+export var ListConfiguredTableAssociationsInput$: StaticStructureSchema = [3, n0, _LCTAI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListConfiguredTableAssociationsOutput$: StaticStructureSchema = [3, n0, _LCTAO,
+  0,
+  [_cTAS, _nT],
+  [() => ConfiguredTableAssociationSummaryList, 0], 1
+];
+export var ListConfiguredTablesInput$: StaticStructureSchema = [3, n0, _LCTI,
+  0,
+  [_nT, _mR],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]]
+];
+export var ListConfiguredTablesOutput$: StaticStructureSchema = [3, n0, _LCTO,
+  0,
+  [_cTS, _nT],
+  [() => ConfiguredTableSummaryList, 0], 1
+];
+export var ListIdMappingTablesInput$: StaticStructureSchema = [3, n0, _LIMTI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListIdMappingTablesOutput$: StaticStructureSchema = [3, n0, _LIMTO,
+  0,
+  [_iMTS, _nT],
+  [() => IdMappingTableSummaryList, 0], 1
+];
+export var ListIdNamespaceAssociationsInput$: StaticStructureSchema = [3, n0, _LINAI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListIdNamespaceAssociationsOutput$: StaticStructureSchema = [3, n0, _LINAO,
+  0,
+  [_iNAS, _nT],
+  [() => IdNamespaceAssociationSummaryList, 0], 1
+];
+export var ListIntermediateTablesInput$: StaticStructureSchema = [3, n0, _LITI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListIntermediateTablesOutput$: StaticStructureSchema = [3, n0, _LITO,
+  0,
+  [_iTS, _nT],
+  [() => IntermediateTableSummaryList, 0], 1
+];
+export var ListIntermediateTableVersionsInput$: StaticStructureSchema = [3, n0, _LITVI,
+  0,
+  [_mIe, _iTI, _nT, _mR],
+  [[0, 1], [0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 2
+];
+export var ListIntermediateTableVersionsOutput$: StaticStructureSchema = [3, n0, _LITVO,
+  0,
+  [_iTVS, _nT],
+  [() => IntermediateTableVersionSummaryList, 0], 1
+];
+export var ListMembershipsInput$: StaticStructureSchema = [3, n0, _LMI,
+  0,
+  [_nT, _mR, _st],
+  [[0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _st }]]
+];
+export var ListMembershipsOutput$: StaticStructureSchema = [3, n0, _LMO,
+  0,
+  [_mSe, _nT],
+  [() => MembershipSummaryList, 0], 1
+];
+export var ListMembersInput$: StaticStructureSchema = [3, n0, _LMIi,
+  0,
+  [_cIo, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListMembersOutput$: StaticStructureSchema = [3, n0, _LMOi,
+  0,
+  [_mSem, _nT],
+  [() => MemberSummaryList, 0], 1
+];
+export var ListPrivacyBudgetsInput$: StaticStructureSchema = [3, n0, _LPBI,
+  0,
+  [_mIe, _pBT, _nT, _mR, _aBRA],
+  [[0, 1], [0, { [_hQ]: _pBT }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }], [0, { [_hQ]: _aBRA }]], 2
+];
+export var ListPrivacyBudgetsOutput$: StaticStructureSchema = [3, n0, _LPBO,
+  0,
+  [_pBS, _nT],
+  [() => PrivacyBudgetSummaryList, 0], 1
+];
+export var ListPrivacyBudgetTemplatesInput$: StaticStructureSchema = [3, n0, _LPBTI,
+  0,
+  [_mIe, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListPrivacyBudgetTemplatesOutput$: StaticStructureSchema = [3, n0, _LPBTO,
+  0,
+  [_pBTS, _nT],
+  [() => PrivacyBudgetTemplateSummaryList, 0], 1
+];
+export var ListProtectedJobsInput$: StaticStructureSchema = [3, n0, _LPJI,
+  0,
+  [_mIe, _st, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _st }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListProtectedJobsOutput$: StaticStructureSchema = [3, n0, _LPJO,
+  0,
+  [_pJr, _nT],
+  [() => ProtectedJobSummaryList, 0], 1
+];
+export var ListProtectedQueriesInput$: StaticStructureSchema = [3, n0, _LPQI,
+  0,
+  [_mIe, _st, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _st }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListProtectedQueriesOutput$: StaticStructureSchema = [3, n0, _LPQO,
+  0,
+  [_pQr, _nT],
+  [() => ProtectedQuerySummaryList, 0], 1
+];
+export var ListSchemasInput$: StaticStructureSchema = [3, n0, _LSI,
+  0,
+  [_cIo, _sTc, _nT, _mR],
+  [[0, 1], [0, { [_hQ]: _sTc }], [0, { [_hQ]: _nT }], [1, { [_hQ]: _mR }]], 1
+];
+export var ListSchemasOutput$: StaticStructureSchema = [3, n0, _LSO,
+  0,
+  [_sS, _nT],
+  [() => SchemaSummaryList, 0], 1
+];
+export var ListTagsForResourceInput$: StaticStructureSchema = [3, n0, _LTFRI,
+  0,
+  [_rA],
+  [[0, 1]], 1
+];
+export var ListTagsForResourceOutput$: StaticStructureSchema = [3, n0, _LTFRO,
+  0,
+  [_ta],
+  [128 | 0], 1
+];
+export var MemberChangeSpecification$: StaticStructureSchema = [3, n0, _MCS,
+  0,
+  [_aIc, _mAe, _mMA, _pC, _dNi],
+  [0, 64 | 0, () => MLMemberAbilities$, () => PaymentConfiguration$, 0], 2
+];
+export var Membership$: StaticStructureSchema = [3, n0, _M,
+  0,
+  [_i, _a, _cA, _cI, _cCAI, _cCDN, _cNol, _cT, _uT, _st, _mAe, _qLS, _pC, _mMA, _jLS, _dRC, _dJRC, _iME],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 64 | 0, 0, () => MembershipPaymentConfiguration$, () => MLMemberAbilities$, 0, () => MembershipProtectedQueryResultConfiguration$, () => MembershipProtectedJobResultConfiguration$, 2], 13
+];
+export var MembershipJobComputePaymentConfig$: StaticStructureSchema = [3, n0, _MJCPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var MembershipMLPaymentConfig$: StaticStructureSchema = [3, n0, _MMLPC,
+  0,
+  [_mT, _mIo, _sDG],
+  [() => MembershipModelTrainingPaymentConfig$, () => MembershipModelInferencePaymentConfig$, () => MembershipSyntheticDataGenerationPaymentConfig$]
+];
+export var MembershipModelInferencePaymentConfig$: StaticStructureSchema = [3, n0, _MMIPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var MembershipModelTrainingPaymentConfig$: StaticStructureSchema = [3, n0, _MMTPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var MembershipPaymentConfiguration$: StaticStructureSchema = [3, n0, _MPC,
+  0,
+  [_qCu, _mL, _jCo],
+  [() => MembershipQueryComputePaymentConfig$, () => MembershipMLPaymentConfig$, () => MembershipJobComputePaymentConfig$], 1
+];
+export var MembershipProtectedJobResultConfiguration$: StaticStructureSchema = [3, n0, _MPJRC,
+  0,
+  [_oC, _rAo],
+  [() => MembershipProtectedJobOutputConfiguration$, 0], 2
+];
+export var MembershipProtectedQueryResultConfiguration$: StaticStructureSchema = [3, n0, _MPQRC,
+  0,
+  [_oC, _rAo],
+  [() => MembershipProtectedQueryOutputConfiguration$, 0], 1
+];
+export var MembershipQueryComputePaymentConfig$: StaticStructureSchema = [3, n0, _MQCPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var MembershipSummary$: StaticStructureSchema = [3, n0, _MS,
+  0,
+  [_i, _a, _cA, _cI, _cCAI, _cCDN, _cNol, _cT, _uT, _st, _mAe, _pC, _mMA],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 64 | 0, () => MembershipPaymentConfiguration$, () => MLMemberAbilities$], 12
+];
+export var MembershipSyntheticDataGenerationPaymentConfig$: StaticStructureSchema = [3, n0, _MSDGPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var MemberSpecification$: StaticStructureSchema = [3, n0, _MSe,
+  0,
+  [_aIc, _mAe, _dNi, _mMA, _pC],
+  [0, 64 | 0, 0, () => MLMemberAbilities$, () => PaymentConfiguration$], 3
+];
+export var MemberSummary$: StaticStructureSchema = [3, n0, _MSem,
+  0,
+  [_aIc, _st, _dNi, _ab, _cT, _uT, _pC, _mAl, _mI, _mA],
+  [0, 0, 0, 64 | 0, 4, 4, () => PaymentConfiguration$, () => MLMemberAbilities$, 0, 0], 7
+];
+export var MLMemberAbilities$: StaticStructureSchema = [3, n0, _MLMA,
+  0,
+  [_cMLMAu],
+  [64 | 0], 1
+];
+export var MLPaymentConfig$: StaticStructureSchema = [3, n0, _MLPC,
+  0,
+  [_mT, _mIo, _sDG],
+  [() => ModelTrainingPaymentConfig$, () => ModelInferencePaymentConfig$, () => SyntheticDataGenerationPaymentConfig$]
+];
+export var MLSyntheticDataParameters$: StaticStructureSchema = [3, n0, _MLSDP,
+  0,
+  [_ep, _mMIAS, _cCo],
+  [1, 1, () => ColumnClassificationDetails$], 3
+];
+export var ModelInferencePaymentConfig$: StaticStructureSchema = [3, n0, _MIPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var ModelTrainingPaymentConfig$: StaticStructureSchema = [3, n0, _MTPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var OutputColumnThreshold$: StaticStructureSchema = [3, n0, _OCT,
+  0,
+  [_oCN, _mIC],
+  [0, 1], 2
+];
+export var PaymentConfiguration$: StaticStructureSchema = [3, n0, _PC,
+  0,
+  [_qCu, _mL, _jCo],
+  [() => QueryComputePaymentConfig$, () => MLPaymentConfig$, () => JobComputePaymentConfig$], 1
+];
+export var PopulateIdMappingTableInput$: StaticStructureSchema = [3, n0, _PIMTI,
+  0,
+  [_iMTI, _mIe, _jT],
+  [[0, 1], [0, 1], 0], 2
+];
+export var PopulateIdMappingTableOutput$: StaticStructureSchema = [3, n0, _PIMTO,
+  0,
+  [_iMJI],
+  [0], 1
+];
+export var PopulateIntermediateTableInput$: StaticStructureSchema = [3, n0, _PITI,
+  0,
+  [_iTI, _mIe, _pa, _cCom, _aPAI],
+  [[0, 1], [0, 1], [() => ParameterMap, 0], () => IntermediateTableComputeConfiguration$, 0], 2
+];
+export var PopulateIntermediateTableOutput$: StaticStructureSchema = [3, n0, _PITO,
+  0,
+  [_aI, _aT, _vI],
+  [0, 0, 0], 3
+];
+export var PopulationAnalysisSqlParameters$: StaticStructureSchema = [3, n0, _PASP,
+  8,
+  [_qS, _aTAn],
+  [0, 0]
+];
+export var PreviewPrivacyImpactInput$: StaticStructureSchema = [3, n0, _PPII,
+  0,
+  [_mIe, _pa],
+  [[0, 1], () => PreviewPrivacyImpactParametersInput$], 2
+];
+export var PreviewPrivacyImpactOutput$: StaticStructureSchema = [3, n0, _PPIO,
+  0,
+  [_pI],
+  [() => PrivacyImpact$], 1
+];
+export var PrivacyBudgetSummary$: StaticStructureSchema = [3, n0, _PBS,
+  0,
+  [_i, _pBTI, _pBTA, _mI, _mA, _cI, _cA, _t, _cT, _uT, _b],
+  [0, 0, 0, 0, 0, 0, 0, 0, 4, 4, () => PrivacyBudget$], 11
+];
+export var PrivacyBudgetTemplate$: StaticStructureSchema = [3, n0, _PBT,
+  0,
+  [_i, _a, _mI, _mA, _cI, _cA, _cT, _uT, _pBT, _aR, _pa],
+  [0, 0, 0, 0, 0, 0, 4, 4, 0, 0, () => PrivacyBudgetTemplateParametersOutput$], 11
+];
+export var PrivacyBudgetTemplateSummary$: StaticStructureSchema = [3, n0, _PBTS,
+  0,
+  [_i, _a, _mI, _mA, _cI, _cA, _pBT, _cT, _uT],
+  [0, 0, 0, 0, 0, 0, 0, 4, 4], 9
+];
+export var ProtectedJob$: StaticStructureSchema = [3, n0, _PJ,
+  0,
+  [_i, _mI, _mA, _cT, _st, _jP, _rC, _sta, _res, _e, _cCom, _jCPAI],
+  [0, 0, 0, 4, 0, [() => ProtectedJobParameters$, 0], () => ProtectedJobResultConfigurationOutput$, () => ProtectedJobStatistics$, () => ProtectedJobResult$, () => ProtectedJobError$, () => ProtectedJobComputeConfiguration$, 0], 5
+];
+export var ProtectedJobDirectAnalysisConfigurationDetails$: StaticStructureSchema = [3, n0, _PJDACD,
+  0,
+  [_rAI],
+  [64 | 0]
+];
+export var ProtectedJobError$: StaticStructureSchema = [3, n0, _PJE,
+  0,
+  [_m, _co, _ret],
+  [0, 0, () => RetryInfo$], 2
+];
+export var ProtectedJobMemberOutputConfigurationInput$: StaticStructureSchema = [3, n0, _PJMOCI,
+  0,
+  [_aIc],
+  [0], 1
+];
+export var ProtectedJobMemberOutputConfigurationOutput$: StaticStructureSchema = [3, n0, _PJMOCO,
+  0,
+  [_aIc],
+  [0], 1
+];
+export var ProtectedJobParameters$: StaticStructureSchema = [3, n0, _PJP,
+  0,
+  [_aTAn, _pa],
+  [0, [() => JobParameterMap, 0]], 1
+];
+export var ProtectedJobReceiverConfiguration$: StaticStructureSchema = [3, n0, _PJRC,
+  0,
+  [_aT, _cD],
+  [0, () => ProtectedJobConfigurationDetails$], 1
+];
+export var ProtectedJobResult$: StaticStructureSchema = [3, n0, _PJR,
+  0,
+  [_o],
+  [() => ProtectedJobOutput$], 1
+];
+export var ProtectedJobResultConfigurationInput$: StaticStructureSchema = [3, n0, _PJRCI,
+  0,
+  [_oC],
+  [() => ProtectedJobOutputConfigurationInput$], 1
+];
+export var ProtectedJobResultConfigurationOutput$: StaticStructureSchema = [3, n0, _PJRCO,
+  0,
+  [_oC],
+  [() => ProtectedJobOutputConfigurationOutput$], 1
+];
+export var ProtectedJobS3Output$: StaticStructureSchema = [3, n0, _PJSO,
+  0,
+  [_l],
+  [0], 1
+];
+export var ProtectedJobS3OutputConfigurationInput$: StaticStructureSchema = [3, n0, _PJSOCI,
+  0,
+  [_bu, _rF, _kP],
+  [0, 0, 0], 1
+];
+export var ProtectedJobS3OutputConfigurationOutput$: StaticStructureSchema = [3, n0, _PJSOCO,
+  0,
+  [_bu, _kP],
+  [0, 0], 1
+];
+export var ProtectedJobSingleMemberOutput$: StaticStructureSchema = [3, n0, _PJSMO,
+  0,
+  [_aIc],
+  [0], 1
+];
+export var ProtectedJobStatistics$: StaticStructureSchema = [3, n0, _PJS,
+  0,
+  [_tDIM, _bRU],
+  [1, () => BilledJobResourceUtilization$]
+];
+export var ProtectedJobSummary$: StaticStructureSchema = [3, n0, _PJSr,
+  0,
+  [_i, _mI, _mA, _cT, _st, _rCec, _jCPAI],
+  [0, 0, 0, 4, 0, () => ProtectedJobReceiverConfigurations, 0], 6
+];
+export var ProtectedJobWorkerComputeConfiguration$: StaticStructureSchema = [3, n0, _PJWCC,
+  0,
+  [_t, _nu, _pr],
+  [0, 1, () => WorkerComputeConfigurationProperties$], 2
+];
+export var ProtectedQuery$: StaticStructureSchema = [3, n0, _PQ,
+  0,
+  [_i, _mI, _mA, _cT, _st, _sPq, _rC, _sta, _res, _e, _dP, _cCom, _qCPAI],
+  [0, 0, 0, 4, 0, [() => ProtectedQuerySQLParameters$, 0], () => ProtectedQueryResultConfiguration$, () => ProtectedQueryStatistics$, () => ProtectedQueryResult$, () => ProtectedQueryError$, () => DifferentialPrivacyParameters$, () => ComputeConfiguration$, 0], 5
+];
+export var ProtectedQueryDistributeOutput$: StaticStructureSchema = [3, n0, _PQDO,
+  0,
+  [_s_, _mLe],
+  [() => ProtectedQueryS3Output$, () => ProtectedQueryMemberOutputList]
+];
+export var ProtectedQueryDistributeOutputConfiguration$: StaticStructureSchema = [3, n0, _PQDOC,
+  0,
+  [_lo],
+  [() => ProtectedQueryDistributeOutputConfigurationLocations], 1
+];
+export var ProtectedQueryError$: StaticStructureSchema = [3, n0, _PQE,
+  0,
+  [_m, _co, _ret],
+  [0, 0, () => RetryInfo$], 2
+];
+export var ProtectedQueryMemberOutputConfiguration$: StaticStructureSchema = [3, n0, _PQMOC,
+  0,
+  [_aIc],
+  [0], 1
+];
+export var ProtectedQueryResult$: StaticStructureSchema = [3, n0, _PQR,
+  0,
+  [_o],
+  [() => ProtectedQueryOutput$], 1
+];
+export var ProtectedQueryResultConfiguration$: StaticStructureSchema = [3, n0, _PQRC,
+  0,
+  [_oC],
+  [() => ProtectedQueryOutputConfiguration$], 1
+];
+export var ProtectedQueryS3Output$: StaticStructureSchema = [3, n0, _PQSO,
+  0,
+  [_l],
+  [0], 1
+];
+export var ProtectedQueryS3OutputConfiguration$: StaticStructureSchema = [3, n0, _PQSOC,
+  0,
+  [_rF, _bu, _kP, _sFO],
+  [0, 0, 0, 2], 2
+];
+export var ProtectedQuerySingleMemberOutput$: StaticStructureSchema = [3, n0, _PQSMO,
+  0,
+  [_aIc],
+  [0], 1
+];
+export var ProtectedQuerySQLParameters$: StaticStructureSchema = [3, n0, _PQSQLP,
+  8,
+  [_qS, _aTAn, _pa],
+  [0, 0, [() => ParameterMap, 0]]
+];
+export var ProtectedQueryStatistics$: StaticStructureSchema = [3, n0, _PQS,
+  0,
+  [_tDIM, _bRU],
+  [1, () => BilledResourceUtilization$]
+];
+export var ProtectedQuerySummary$: StaticStructureSchema = [3, n0, _PQSr,
+  0,
+  [_i, _mI, _mA, _cT, _st, _rCec, _qCPAI, _iTC],
+  [0, 0, 0, 4, 0, () => ReceiverConfigurationsList, 0, () => IntermediateTableOutputConfiguration$], 6
+];
+export var QueryComputePaymentConfig$: StaticStructureSchema = [3, n0, _QCPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var QueryConstraintRequireOverlap$: StaticStructureSchema = [3, n0, _QCRO,
+  0,
+  [_colu],
+  [64 | 0]
+];
+export var ReceiverConfiguration$: StaticStructureSchema = [3, n0, _RC,
+  0,
+  [_aT, _cD],
+  [0, () => ConfigurationDetails$], 1
+];
+export var RetryInfo$: StaticStructureSchema = [3, n0, _RI,
+  0,
+  [_retr],
+  [2]
+];
+export var S3Location$: StaticStructureSchema = [3, n0, _SL,
+  0,
+  [_bu, _k],
+  [0, 0], 2
+];
+export var Schema$: StaticStructureSchema = [3, n0, _S,
+  0,
+  [_colu, _pK, _aRT, _cAI, _n, _cI, _cA, _de, _cT, _uT, _t, _sSD, _aM, _sAM, _rA, _sTP],
+  [() => ColumnList, () => ColumnList, 64 | 0, 0, 0, 0, 0, 0, 4, 4, 0, () => SchemaStatusDetailList, 0, 64 | 0, 0, () => SchemaTypeProperties$], 12
+];
+export var SchemaAnalysisRuleRequest$: StaticStructureSchema = [3, n0, _SARR,
+  0,
+  [_n, _t],
+  [0, 0], 2
+];
+export var SchemaStatusDetail$: StaticStructureSchema = [3, n0, _SSD,
+  0,
+  [_st, _aT, _re, _aRTn, _con],
+  [0, 0, () => SchemaStatusReasonList, 0, 64 | 0], 2
+];
+export var SchemaStatusReason$: StaticStructureSchema = [3, n0, _SSR,
+  0,
+  [_co, _m],
+  [0, 0], 2
+];
+export var SchemaSummary$: StaticStructureSchema = [3, n0, _SS,
+  0,
+  [_n, _t, _cAI, _cT, _uT, _cI, _cA, _aRT, _aM, _rA, _sAM],
+  [0, 0, 0, 4, 4, 0, 0, 64 | 0, 0, 0, 64 | 0], 8
+];
+export var SnowflakeTableReference$: StaticStructureSchema = [3, n0, _STR,
+  0,
+  [_sA, _aIcc, _dN, _tN, _sNc, _tS],
+  [0, 0, 0, 0, 0, () => SnowflakeTableSchema$], 6
+];
+export var SnowflakeTableSchemaV1$: StaticStructureSchema = [3, n0, _STSV,
+  0,
+  [_cNo, _cTol],
+  [0, 0], 2
+];
+export var StartAnalysisLogExportInput$: StaticStructureSchema = [3, n0, _SALEI,
+  0,
+  [_mIe, _aI, _aT, _rC],
+  [[0, 1], 0, 0, () => AnalysisLogExportResultConfiguration$], 4
+];
+export var StartAnalysisLogExportOutput$: StaticStructureSchema = [3, n0, _SALEO,
+  0,
+  [_aLE],
+  [() => AnalysisLogExport$], 1
+];
+export var StartProtectedJobInput$: StaticStructureSchema = [3, n0, _SPJI,
+  0,
+  [_t, _mIe, _jP, _rC, _cCom, _jCPAI],
+  [0, [0, 1], [() => ProtectedJobParameters$, 0], () => ProtectedJobResultConfigurationInput$, () => ProtectedJobComputeConfiguration$, 0], 3
+];
+export var StartProtectedJobOutput$: StaticStructureSchema = [3, n0, _SPJO,
+  0,
+  [_pJ],
+  [[() => ProtectedJob$, 0]], 1
+];
+export var StartProtectedQueryInput$: StaticStructureSchema = [3, n0, _SPQI,
+  0,
+  [_t, _mIe, _sPq, _rC, _cCom, _qCPAI],
+  [0, [0, 1], [() => ProtectedQuerySQLParameters$, 0], () => ProtectedQueryResultConfiguration$, () => ComputeConfiguration$, 0], 3
+];
+export var StartProtectedQueryOutput$: StaticStructureSchema = [3, n0, _SPQO,
+  0,
+  [_pQ],
+  [[() => ProtectedQuery$, 0]], 1
+];
+export var SyntheticDataColumnProperties$: StaticStructureSchema = [3, n0, _SDCP,
+  0,
+  [_cNo, _cTol, _iPV],
+  [0, 0, 2], 3
+];
+export var SyntheticDataGenerationPaymentConfig$: StaticStructureSchema = [3, n0, _SDGPC,
+  0,
+  [_iR],
+  [2], 1
+];
+export var TagResourceInput$: StaticStructureSchema = [3, n0, _TRI,
+  0,
+  [_rA, _ta],
+  [[0, 1], 128 | 0], 2
+];
+export var TagResourceOutput$: StaticStructureSchema = [3, n0, _TRO,
+  0,
+  [],
+  []
+];
+export var UntagResourceInput$: StaticStructureSchema = [3, n0, _URI,
+  0,
+  [_rA, _tK],
+  [[0, 1], [64 | 0, { [_hQ]: _tK }]], 2
+];
+export var UntagResourceOutput$: StaticStructureSchema = [3, n0, _URO,
+  0,
+  [],
+  []
+];
+export var UpdateAnalysisTemplateInput$: StaticStructureSchema = [3, n0, _UATI,
+  0,
+  [_mIe, _aTI, _de],
+  [[0, 1], [0, 1], 0], 2
+];
+export var UpdateAnalysisTemplateOutput$: StaticStructureSchema = [3, n0, _UATO,
+  0,
+  [_aTn],
+  [[() => AnalysisTemplate$, 0]], 1
+];
+export var UpdateCollaborationChangeRequestInput$: StaticStructureSchema = [3, n0, _UCCRI,
+  0,
+  [_cIo, _cRI, _ac],
+  [[0, 1], [0, 1], 0], 3
+];
+export var UpdateCollaborationChangeRequestOutput$: StaticStructureSchema = [3, n0, _UCCRO,
+  0,
+  [_cCR],
+  [() => CollaborationChangeRequest$], 1
+];
+export var UpdateCollaborationInput$: StaticStructureSchema = [3, n0, _UCI,
+  0,
+  [_cIo, _n, _de, _aE],
+  [[0, 1], 0, 0, 0], 1
+];
+export var UpdateCollaborationOutput$: StaticStructureSchema = [3, n0, _UCO,
+  0,
+  [_coll],
+  [() => Collaboration$], 1
+];
+export var UpdateConfiguredAudienceModelAssociationInput$: StaticStructureSchema = [3, n0, _UCAMAI,
+  0,
+  [_cAMAI, _mIe, _de, _n],
+  [[0, 1], [0, 1], 0, 0], 2
+];
+export var UpdateConfiguredAudienceModelAssociationOutput$: StaticStructureSchema = [3, n0, _UCAMAO,
+  0,
+  [_cAMAo],
+  [() => ConfiguredAudienceModelAssociation$], 1
+];
+export var UpdateConfiguredTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _UCTARI,
+  0,
+  [_cTIo, _aRTn, _aRP],
+  [[0, 1], [0, 1], () => ConfiguredTableAnalysisRulePolicy$], 3
+];
+export var UpdateConfiguredTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _UCTARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAnalysisRule$], 1
+];
+export var UpdateConfiguredTableAssociationAnalysisRuleInput$: StaticStructureSchema = [3, n0, _UCTAARI,
+  0,
+  [_mIe, _cTAIo, _aRTn, _aRP],
+  [[0, 1], [0, 1], [0, 1], () => ConfiguredTableAssociationAnalysisRulePolicy$], 4
+];
+export var UpdateConfiguredTableAssociationAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _UCTAARO,
+  0,
+  [_aRna],
+  [() => ConfiguredTableAssociationAnalysisRule$], 1
+];
+export var UpdateConfiguredTableAssociationInput$: StaticStructureSchema = [3, n0, _UCTAI,
+  0,
+  [_cTAIo, _mIe, _de, _rAo],
+  [[0, 1], [0, 1], 0, 0], 2
+];
+export var UpdateConfiguredTableAssociationOutput$: StaticStructureSchema = [3, n0, _UCTAO,
+  0,
+  [_cTAo],
+  [() => ConfiguredTableAssociation$], 1
+];
+export var UpdateConfiguredTableInput$: StaticStructureSchema = [3, n0, _UCTI,
+  0,
+  [_cTIo, _n, _de, _tR, _aCl, _aM, _sAM],
+  [[0, 1], 0, 0, () => TableReference$, 64 | 0, 0, 64 | 0], 1
+];
+export var UpdateConfiguredTableOutput$: StaticStructureSchema = [3, n0, _UCTO,
+  0,
+  [_cTo],
+  [() => ConfiguredTable$], 1
+];
+export var UpdateIdMappingTableInput$: StaticStructureSchema = [3, n0, _UIMTI,
+  0,
+  [_iMTI, _mIe, _de, _kKA],
+  [[0, 1], [0, 1], 0, 0], 2
+];
+export var UpdateIdMappingTableOutput$: StaticStructureSchema = [3, n0, _UIMTO,
+  0,
+  [_iMT],
+  [() => IdMappingTable$], 1
+];
+export var UpdateIdNamespaceAssociationInput$: StaticStructureSchema = [3, n0, _UINAI,
+  0,
+  [_iNAI, _mIe, _n, _de, _iMC],
+  [[0, 1], [0, 1], 0, 0, () => IdMappingConfig$], 2
+];
+export var UpdateIdNamespaceAssociationOutput$: StaticStructureSchema = [3, n0, _UINAO,
+  0,
+  [_iNA],
+  [() => IdNamespaceAssociation$], 1
+];
+export var UpdateIntermediateTableAnalysisRuleInput$: StaticStructureSchema = [3, n0, _UITARI,
+  0,
+  [_mIe, _iTI, _aRTn, _aRP],
+  [[0, 1], [0, 1], [0, 1], () => IntermediateTableAnalysisRulePolicy$], 4
+];
+export var UpdateIntermediateTableAnalysisRuleOutput$: StaticStructureSchema = [3, n0, _UITARO,
+  0,
+  [_aRna],
+  [() => IntermediateTableAnalysisRule$], 1
+];
+export var UpdateIntermediateTableInput$: StaticStructureSchema = [3, n0, _UITI,
+  0,
+  [_iTI, _mIe, _de, _kKA, _colu],
+  [[0, 1], [0, 1], 0, 0, () => IntermediateTableColumnList], 2
+];
+export var UpdateIntermediateTableOutput$: StaticStructureSchema = [3, n0, _UITO,
+  0,
+  [_iT],
+  [[() => IntermediateTable$, 0]], 1
+];
+export var UpdateMembershipInput$: StaticStructureSchema = [3, n0, _UMI,
+  0,
+  [_mIe, _qLS, _jLS, _dRC, _dJRC, _mPC],
+  [[0, 1], 0, 0, () => MembershipProtectedQueryResultConfiguration$, () => MembershipProtectedJobResultConfiguration$, () => UpdateMembershipPaymentConfiguration$], 1
+];
+export var UpdateMembershipOutput$: StaticStructureSchema = [3, n0, _UMO,
+  0,
+  [_mem],
+  [() => Membership$], 1
+];
+export var UpdateMembershipPaymentConfiguration$: StaticStructureSchema = [3, n0, _UMPC,
+  0,
+  [_qCu, _mL, _jCo],
+  [() => MembershipQueryComputePaymentConfig$, () => MembershipMLPaymentConfig$, () => MembershipJobComputePaymentConfig$]
+];
+export var UpdatePrivacyBudgetTemplateInput$: StaticStructureSchema = [3, n0, _UPBTI,
+  0,
+  [_mIe, _pBTIr, _pBT, _pa],
+  [[0, 1], [0, 1], 0, () => PrivacyBudgetTemplateUpdateParameters$], 3
+];
+export var UpdatePrivacyBudgetTemplateOutput$: StaticStructureSchema = [3, n0, _UPBTO,
+  0,
+  [_pBTr],
+  [() => PrivacyBudgetTemplate$], 1
+];
+export var UpdateProtectedJobInput$: StaticStructureSchema = [3, n0, _UPJI,
+  0,
+  [_mIe, _pJI, _tSa],
+  [[0, 1], [0, 1], 0], 3
+];
+export var UpdateProtectedJobOutput$: StaticStructureSchema = [3, n0, _UPJO,
+  0,
+  [_pJ],
+  [[() => ProtectedJob$, 0]], 1
+];
+export var UpdateProtectedQueryInput$: StaticStructureSchema = [3, n0, _UPQI,
+  0,
+  [_mIe, _pQI, _tSa],
+  [[0, 1], [0, 1], 0], 3
+];
+export var UpdateProtectedQueryOutput$: StaticStructureSchema = [3, n0, _UPQO,
+  0,
+  [_pQ],
+  [[() => ProtectedQuery$, 0]], 1
+];
+export var ValidationExceptionField$: StaticStructureSchema = [3, n0, _VEF,
+  0,
+  [_n, _m],
+  [0, 0], 2
+];
+export var WorkerComputeConfiguration$: StaticStructureSchema = [3, n0, _WCC,
+  0,
+  [_t, _nu, _pr],
+  [0, 1, () => WorkerComputeConfigurationProperties$]
+];
+var AccessBudgetDetailsList: StaticListSchema = [1, n0, _ABDL,
+  0, () => AccessBudgetDetails$
+];
+var AccountIdList = 64 | 0;
+var AggregateColumnList: StaticListSchema = [1, n0, _ACL,
+  0, () => AggregateColumn$
+];
+var AggregationConstraints: StaticListSchema = [1, n0, _ACgg,
+  0, () => AggregationConstraint$
+];
+var AggregationThresholdList: StaticListSchema = [1, n0, _ATL,
+  0, () => AggregationThreshold$
+];
+var AllowedAdditionalAnalyses = 64 | 0;
+var AllowedAnalysesList = 64 | 0;
+var AllowedAnalysisProviderList = 64 | 0;
+var AllowedColumnList = 64 | 0;
+var AllowedResultReceivers = 64 | 0;
+var AllowedResultRegions = 64 | 0;
+var AnalysisLogExportSummaryList: StaticListSchema = [1, n0, _ALESL,
+  0, () => AnalysisLogExportSummary$
+];
+var AnalysisParameterList: StaticListSchema = [1, n0, _APL,
+  0, [() => AnalysisParameter$,
+    0]
+];
+var AnalysisRuleColumnList = 64 | 0;
+var AnalysisRuleColumnNameList = 64 | 0;
+var AnalysisRuleTypeList = 64 | 0;
+var AnalysisTemplateArnList = 64 | 0;
+var AnalysisTemplateArtifactList: StaticListSchema = [1, n0, _ATAL,
+  0, () => AnalysisTemplateArtifact$
+];
+var AnalysisTemplateSummaryList: StaticListSchema = [1, n0, _ATSL,
+  0, () => AnalysisTemplateSummary$
+];
+var AnalysisTemplateValidationStatusDetailList: StaticListSchema = [1, n0, _ATVSDL,
+  0, () => AnalysisTemplateValidationStatusDetail$
+];
+var AnalysisTemplateValidationStatusReasonList: StaticListSchema = [1, n0, _ATVSRL,
+  0, () => AnalysisTemplateValidationStatusReason$
+];
+var AutoApprovedChangeTypeList = 64 | 0;
+var BatchGetCollaborationAnalysisTemplateErrorList: StaticListSchema = [1, n0, _BGCATEL,
+  0, () => BatchGetCollaborationAnalysisTemplateError$
+];
+var BatchGetSchemaAnalysisRuleErrorList: StaticListSchema = [1, n0, _BGSAREL,
+  0, () => BatchGetSchemaAnalysisRuleError$
+];
+var BatchGetSchemaErrorList: StaticListSchema = [1, n0, _BGSEL,
+  0, () => BatchGetSchemaError$
+];
+var BudgetParameters: StaticListSchema = [1, n0, _BPu,
+  0, () => BudgetParameter$
+];
+var ChangeInputList: StaticListSchema = [1, n0, _CIL,
+  0, () => ChangeInput$
+];
+var ChangeList: StaticListSchema = [1, n0, _CL,
+  0, () => Change$
+];
+var ChangeTypeList = 64 | 0;
+var ChildResourceList: StaticListSchema = [1, n0, _CRL,
+  0, () => ChildResource$
+];
+var CollaborationAnalysisTemplateList: StaticListSchema = [1, n0, _CATL,
+  0, [() => CollaborationAnalysisTemplate$,
+    0]
+];
+var CollaborationAnalysisTemplateSummaryList: StaticListSchema = [1, n0, _CATSL,
+  0, () => CollaborationAnalysisTemplateSummary$
+];
+var CollaborationChangeRequestSummaryList: StaticListSchema = [1, n0, _CCRSL,
+  0, () => CollaborationChangeRequestSummary$
+];
+var CollaborationConfiguredAudienceModelAssociationSummaryList: StaticListSchema = [1, n0, _CCAMASL,
+  0, () => CollaborationConfiguredAudienceModelAssociationSummary$
+];
+var CollaborationIdNamespaceAssociationSummaryList: StaticListSchema = [1, n0, _CINASL,
+  0, () => CollaborationIdNamespaceAssociationSummary$
+];
+var CollaborationPrivacyBudgetSummaryList: StaticListSchema = [1, n0, _CPBSL,
+  0, () => CollaborationPrivacyBudgetSummary$
+];
+var CollaborationPrivacyBudgetTemplateSummaryList: StaticListSchema = [1, n0, _CPBTSL,
+  0, () => CollaborationPrivacyBudgetTemplateSummary$
+];
+var CollaborationSummaryList: StaticListSchema = [1, n0, _CSL,
+  0, () => CollaborationSummary$
+];
+var ColumnLineageList: StaticListSchema = [1, n0, _CLL,
+  0, () => ColumnLineageEntry$
+];
+var ColumnList: StaticListSchema = [1, n0, _CLo,
+  0, () => Column$
+];
+var ColumnMappingList: StaticListSchema = [1, n0, _CML,
+  0, () => SyntheticDataColumnProperties$
+];
+var ConfiguredAudienceModelAssociationSummaryList: StaticListSchema = [1, n0, _CAMASL,
+  0, () => ConfiguredAudienceModelAssociationSummary$
+];
+var ConfiguredTableAnalysisRuleTypeList = 64 | 0;
+var ConfiguredTableAssociationAnalysisRuleTypeList = 64 | 0;
+var ConfiguredTableAssociationSummaryList: StaticListSchema = [1, n0, _CTASL,
+  0, () => ConfiguredTableAssociationSummary$
+];
+var ConfiguredTableSummaryList: StaticListSchema = [1, n0, _CTSL,
+  0, () => ConfiguredTableSummary$
+];
+var CustomMLMemberAbilities = 64 | 0;
+var DependencyList: StaticListSchema = [1, n0, _DL,
+  0, () => IntermediateTableDependency$
+];
+var DifferentialPrivacyColumnList: StaticListSchema = [1, n0, _DPCL,
+  0, () => DifferentialPrivacyColumn$
+];
+var DifferentialPrivacyPreviewAggregationList: StaticListSchema = [1, n0, _DPPAL,
+  0, () => DifferentialPrivacyPreviewAggregation$
+];
+var DifferentialPrivacyPrivacyBudgetAggregationList: StaticListSchema = [1, n0, _DPPBAL,
+  0, () => DifferentialPrivacyPrivacyBudgetAggregation$
+];
+var DifferentialPrivacySensitivityParametersList: StaticListSchema = [1, n0, _DPSPL,
+  0, () => DifferentialPrivacySensitivityParameters$
+];
+var HashList: StaticListSchema = [1, n0, _HL,
+  0, () => Hash$
+];
+var IdMappingTableInputSourceList: StaticListSchema = [1, n0, _IMTISL,
+  0, () => IdMappingTableInputSource$
+];
+var IdMappingTableSummaryList: StaticListSchema = [1, n0, _IMTSL,
+  0, () => IdMappingTableSummary$
+];
+var IdMappingWorkflowsSupported = 64 | 15;
+var IdNamespaceAssociationSummaryList: StaticListSchema = [1, n0, _INASL,
+  0, () => IdNamespaceAssociationSummary$
+];
+var InheritedAdditionalAnalysesSourceList: StaticListSchema = [1, n0, _IAASL,
+  0, () => InheritedAdditionalAnalysesSource$
+];
+var InheritedAllowedAdditionalAnalysesSourceList: StaticListSchema = [1, n0, _IAAASL,
+  0, () => InheritedAllowedAdditionalAnalysesSource$
+];
+var InheritedAllowedResultReceiversSourceList: StaticListSchema = [1, n0, _IARRSL,
+  0, () => InheritedAllowedResultReceiversSource$
+];
+var IntermediateTableAnalysisRuleTypeList = 64 | 0;
+var IntermediateTableColumnList: StaticListSchema = [1, n0, _ITCL,
+  0, () => IntermediateTableColumn$
+];
+var IntermediateTableSummaryList: StaticListSchema = [1, n0, _ITSL,
+  0, () => IntermediateTableSummary$
+];
+var IntermediateTableVersionSummaryList: StaticListSchema = [1, n0, _ITVSL,
+  0, () => IntermediateTableVersionSummary$
+];
+var JoinOperatorsList = 64 | 0;
+var MemberAbilities = 64 | 0;
+var MemberList: StaticListSchema = [1, n0, _ML,
+  0, () => MemberSpecification$
+];
+var MembershipSummaryList: StaticListSchema = [1, n0, _MSL,
+  0, () => MembershipSummary$
+];
+var MemberSummaryList: StaticListSchema = [1, n0, _MSLe,
+  0, () => MemberSummary$
+];
+var OutputColumnThresholdList: StaticListSchema = [1, n0, _OCTL,
+  0, () => OutputColumnThreshold$
+];
+var PrivacyBudgetSummaryList: StaticListSchema = [1, n0, _PBSL,
+  0, () => PrivacyBudgetSummary$
+];
+var PrivacyBudgetTemplateSummaryList: StaticListSchema = [1, n0, _PBTSL,
+  0, () => PrivacyBudgetTemplateSummary$
+];
+var ProtectedJobMemberOutputList: StaticListSchema = [1, n0, _PJMOL,
+  0, () => ProtectedJobSingleMemberOutput$
+];
+var ProtectedJobReceiverAccountIds = 64 | 0;
+var ProtectedJobReceiverConfigurations: StaticListSchema = [1, n0, _PJRCr,
+  0, () => ProtectedJobReceiverConfiguration$
+];
+var ProtectedJobSummaryList: StaticListSchema = [1, n0, _PJSL,
+  0, () => ProtectedJobSummary$
+];
+var ProtectedQueryDistributeOutputConfigurationLocations: StaticListSchema = [1, n0, _PQDOCL,
+  0, () => ProtectedQueryDistributeOutputConfigurationLocation$
+];
+var ProtectedQueryMemberOutputList: StaticListSchema = [1, n0, _PQMOL,
+  0, () => ProtectedQuerySingleMemberOutput$
+];
+var ProtectedQuerySummaryList: StaticListSchema = [1, n0, _PQSL,
+  0, () => ProtectedQuerySummary$
+];
+var QueryConstraintList: StaticListSchema = [1, n0, _QCL,
+  0, () => QueryConstraint$
+];
+var QueryTables = 64 | 0;
+var ReceiverAccountIds = 64 | 0;
+var ReceiverConfigurationsList: StaticListSchema = [1, n0, _RCL,
+  0, () => ReceiverConfiguration$
+];
+var ScalarFunctionsList = 64 | 0;
+var SchemaAnalysisRuleList: StaticListSchema = [1, n0, _SARL,
+  0, () => AnalysisRule$
+];
+var SchemaAnalysisRuleRequestList: StaticListSchema = [1, n0, _SARRL,
+  0, () => SchemaAnalysisRuleRequest$
+];
+var SchemaConfigurationList = 64 | 0;
+var SchemaList: StaticListSchema = [1, n0, _SLc,
+  0, () => Schema$
+];
+var SchemaStatusDetailList: StaticListSchema = [1, n0, _SSDL,
+  0, () => SchemaStatusDetail$
+];
+var SchemaStatusReasonList: StaticListSchema = [1, n0, _SSRL,
+  0, () => SchemaStatusReason$
+];
+var SchemaSummaryList: StaticListSchema = [1, n0, _SSL,
+  0, () => SchemaSummary$
+];
+var SelectedAnalysisMethods = 64 | 0;
+var SnowflakeTableSchemaList: StaticListSchema = [1, n0, _STSL,
+  0, () => SnowflakeTableSchemaV1$
+];
+var TableAliasList = 64 | 0;
+var TagKeys = 64 | 0;
+var ValidationExceptionFieldList: StaticListSchema = [1, n0, _VEFL,
+  0, () => ValidationExceptionField$
+];
+var ApprovalStatuses: StaticMapSchema = [2, n0, _ASp,
+  0, 0, () => ApprovalStatusDetails$
+];
+var JobParameterMap: StaticMapSchema = [2, n0, _JPM,
+  8, 0, 0
+];
+var ParameterMap: StaticMapSchema = [2, n0, _PM,
+  8, 0, 0
+];
+var SparkProperties = 128 | 0;
+var TagMap = 128 | 0;
+export var AnalysisRulePolicy$: StaticUnionSchema = [4, n0, _ARP,
+  0,
+  [_v_],
+  [() => AnalysisRulePolicyV1$]
+];
+export var AnalysisRulePolicyV1$: StaticUnionSchema = [4, n0, _ARPV,
+  0,
+  [_li, _agg, _cu, _iMT],
+  [() => AnalysisRuleList$, () => AnalysisRuleAggregation$, () => AnalysisRuleCustom$, () => AnalysisRuleIdMappingTable$]
+];
+export var AnalysisSource$: StaticUnionSchema = [4, n0, _ASn,
+  0,
+  [_te, _ar],
+  [[() => AnalysisTemplateText, 0], () => AnalysisTemplateArtifacts$]
+];
+export var AnalysisSourceMetadata$: StaticUnionSchema = [4, n0, _ASM,
+  0,
+  [_ar],
+  [() => AnalysisTemplateArtifactMetadata$]
+];
+export var ChangeSpecification$: StaticUnionSchema = [4, n0, _CSh,
+  0,
+  [_memb, _coll],
+  [() => MemberChangeSpecification$, () => CollaborationChangeSpecification$]
+];
+export var ComputeConfiguration$: StaticUnionSchema = [4, n0, _CCo,
+  0,
+  [_w],
+  [() => WorkerComputeConfiguration$]
+];
+export var ConfigurationDetails$: StaticUnionSchema = [4, n0, _CD,
+  0,
+  [_dACD],
+  [() => DirectAnalysisConfigurationDetails$]
+];
+export var ConfiguredTableAnalysisRulePolicy$: StaticUnionSchema = [4, n0, _CTARP,
+  0,
+  [_v_],
+  [() => ConfiguredTableAnalysisRulePolicyV1$]
+];
+export var ConfiguredTableAnalysisRulePolicyV1$: StaticUnionSchema = [4, n0, _CTARPV,
+  0,
+  [_li, _agg, _cu],
+  [() => AnalysisRuleList$, () => AnalysisRuleAggregation$, () => AnalysisRuleCustom$]
+];
+export var ConfiguredTableAssociationAnalysisRulePolicy$: StaticUnionSchema = [4, n0, _CTAARP,
+  0,
+  [_v_],
+  [() => ConfiguredTableAssociationAnalysisRulePolicyV1$]
+];
+export var ConfiguredTableAssociationAnalysisRulePolicyV1$: StaticUnionSchema = [4, n0, _CTAARPV,
+  0,
+  [_li, _agg, _cu],
+  [() => ConfiguredTableAssociationAnalysisRuleList$, () => ConfiguredTableAssociationAnalysisRuleAggregation$, () => ConfiguredTableAssociationAnalysisRuleCustom$]
+];
+export var ConsolidatedPolicy$: StaticUnionSchema = [4, n0, _CP,
+  0,
+  [_v_],
+  [() => ConsolidatedPolicyV1$]
+];
+export var ConsolidatedPolicyV1$: StaticUnionSchema = [4, n0, _CPV,
+  0,
+  [_li, _agg, _cu],
+  [() => ConsolidatedPolicyList$, () => ConsolidatedPolicyAggregation$, () => ConsolidatedPolicyCustom$]
+];
+export var DatabricksConnectionType$: StaticUnionSchema = [4, n0, _DCT,
+  0,
+  [_dS],
+  [() => DatabricksDeltaSharingConnection$]
+];
+export var IntermediateTableAnalysisRulePolicy$: StaticUnionSchema = [4, n0, _ITARP,
+  0,
+  [_v_],
+  [() => IntermediateTableAnalysisRulePolicyV1$]
+];
+export var IntermediateTableAnalysisRulePolicyV1$: StaticUnionSchema = [4, n0, _ITARPV,
+  0,
+  [_cu],
+  [() => IntermediateTableAnalysisRuleCustom$]
+];
+export var IntermediateTableComputeConfiguration$: StaticUnionSchema = [4, n0, _ITCC,
+  0,
+  [_qCC],
+  [() => WorkerComputeConfiguration$]
+];
+export var MembershipProtectedJobOutputConfiguration$: StaticUnionSchema = [4, n0, _MPJOC,
+  0,
+  [_s_],
+  [() => ProtectedJobS3OutputConfigurationInput$]
+];
+export var MembershipProtectedQueryOutputConfiguration$: StaticUnionSchema = [4, n0, _MPQOC,
+  0,
+  [_s_],
+  [() => ProtectedQueryS3OutputConfiguration$]
+];
+export var PopulationAnalysisConfiguration$: StaticUnionSchema = [4, n0, _PAC,
+  0,
+  [_sPq],
+  [[() => PopulationAnalysisSqlParameters$, 0]]
+];
+export var PreviewPrivacyImpactParametersInput$: StaticUnionSchema = [4, n0, _PPIPI,
+  0,
+  [_dP],
+  [() => DifferentialPrivacyPreviewParametersInput$]
+];
+export var PrivacyBudget$: StaticUnionSchema = [4, n0, _PB,
+  0,
+  [_dP, _aB],
+  [() => DifferentialPrivacyPrivacyBudget$, () => AccessBudget$]
+];
+export var PrivacyBudgetTemplateParametersInput$: StaticUnionSchema = [4, n0, _PBTPI,
+  0,
+  [_dP, _aB],
+  [() => DifferentialPrivacyTemplateParametersInput$, () => AccessBudgetsPrivacyTemplateParametersInput$]
+];
+export var PrivacyBudgetTemplateParametersOutput$: StaticUnionSchema = [4, n0, _PBTPO,
+  0,
+  [_dP, _aB],
+  [() => DifferentialPrivacyTemplateParametersOutput$, () => AccessBudgetsPrivacyTemplateParametersOutput$]
+];
+export var PrivacyBudgetTemplateUpdateParameters$: StaticUnionSchema = [4, n0, _PBTUP,
+  0,
+  [_dP, _aB],
+  [() => DifferentialPrivacyTemplateUpdateParameters$, () => AccessBudgetsPrivacyTemplateUpdateParameters$]
+];
+export var PrivacyImpact$: StaticUnionSchema = [4, n0, _PI,
+  0,
+  [_dP],
+  [() => DifferentialPrivacyPrivacyImpact$]
+];
+export var ProtectedJobComputeConfiguration$: StaticUnionSchema = [4, n0, _PJCC,
+  0,
+  [_w],
+  [() => ProtectedJobWorkerComputeConfiguration$]
+];
+export var ProtectedJobConfigurationDetails$: StaticUnionSchema = [4, n0, _PJCD,
+  0,
+  [_dACD],
+  [() => ProtectedJobDirectAnalysisConfigurationDetails$]
+];
+export var ProtectedJobOutput$: StaticUnionSchema = [4, n0, _PJO,
+  0,
+  [_s_, _mLe],
+  [() => ProtectedJobS3Output$, () => ProtectedJobMemberOutputList]
+];
+export var ProtectedJobOutputConfigurationInput$: StaticUnionSchema = [4, n0, _PJOCI,
+  0,
+  [_memb],
+  [() => ProtectedJobMemberOutputConfigurationInput$]
+];
+export var ProtectedJobOutputConfigurationOutput$: StaticUnionSchema = [4, n0, _PJOCO,
+  0,
+  [_s_, _memb],
+  [() => ProtectedJobS3OutputConfigurationOutput$, () => ProtectedJobMemberOutputConfigurationOutput$]
+];
+export var ProtectedQueryDistributeOutputConfigurationLocation$: StaticUnionSchema = [4, n0, _PQDOCLr,
+  0,
+  [_s_, _memb],
+  [() => ProtectedQueryS3OutputConfiguration$, () => ProtectedQueryMemberOutputConfiguration$]
+];
+export var ProtectedQueryOutput$: StaticUnionSchema = [4, n0, _PQO,
+  0,
+  [_s_, _mLe, _di],
+  [() => ProtectedQueryS3Output$, () => ProtectedQueryMemberOutputList, () => ProtectedQueryDistributeOutput$]
+];
+export var ProtectedQueryOutputConfiguration$: StaticUnionSchema = [4, n0, _PQOC,
+  0,
+  [_s_, _memb, _di, _iT],
+  [() => ProtectedQueryS3OutputConfiguration$, () => ProtectedQueryMemberOutputConfiguration$, () => ProtectedQueryDistributeOutputConfiguration$, () => IntermediateTableOutputConfiguration$]
+];
+export var QueryConstraint$: StaticUnionSchema = [4, n0, _QC,
+  0,
+  [_rO],
+  [() => QueryConstraintRequireOverlap$]
+];
+export var SchemaTypeProperties$: StaticUnionSchema = [4, n0, _STP,
+  0,
+  [_iMT, _iT, _cTAo],
+  [() => IdMappingTableSchemaTypeProperties$, () => IntermediateTableSchemaTypeProperties$, () => ConfiguredTableAssociationSchemaTypeProperties$]
+];
+export var SnowflakeTableSchema$: StaticUnionSchema = [4, n0, _STS,
+  0,
+  [_v_],
+  [() => SnowflakeTableSchemaList]
+];
+export var SyntheticDataParameters$: StaticUnionSchema = [4, n0, _SDP,
+  0,
+  [_mSDP],
+  [() => MLSyntheticDataParameters$]
+];
+export var TableReference$: StaticUnionSchema = [4, n0, _TR,
+  0,
+  [_g, _sn, _at, _da],
+  [() => GlueTableReference$, () => SnowflakeTableReference$, () => AthenaTableReference$, () => DatabricksTableReference$]
+];
+export var WorkerComputeConfigurationProperties$: StaticUnionSchema = [4, n0, _WCCP,
+  0,
+  [_spa],
+  [128 | 0]
+];
+export var BatchGetCollaborationAnalysisTemplate$: StaticOperationSchema = [9, n0, _BGCAT,
+  { [_h]: ["POST", "/collaborations/{collaborationIdentifier}/batch-analysistemplates", 200] }, () => BatchGetCollaborationAnalysisTemplateInput$, () => BatchGetCollaborationAnalysisTemplateOutput$
+];
+export var BatchGetSchema$: StaticOperationSchema = [9, n0, _BGS,
+  { [_h]: ["POST", "/collaborations/{collaborationIdentifier}/batch-schema", 200] }, () => BatchGetSchemaInput$, () => BatchGetSchemaOutput$
+];
+export var BatchGetSchemaAnalysisRule$: StaticOperationSchema = [9, n0, _BGSAR,
+  { [_h]: ["POST", "/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule", 200] }, () => BatchGetSchemaAnalysisRuleInput$, () => BatchGetSchemaAnalysisRuleOutput$
+];
+export var CreateAnalysisTemplate$: StaticOperationSchema = [9, n0, _CATr,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/analysistemplates", 200] }, () => CreateAnalysisTemplateInput$, () => CreateAnalysisTemplateOutput$
+];
+export var CreateCollaboration$: StaticOperationSchema = [9, n0, _CCr,
+  { [_h]: ["POST", "/collaborations", 200] }, () => CreateCollaborationInput$, () => CreateCollaborationOutput$
+];
+export var CreateCollaborationChangeRequest$: StaticOperationSchema = [9, n0, _CCCR,
+  { [_h]: ["POST", "/collaborations/{collaborationIdentifier}/changeRequests", 200] }, () => CreateCollaborationChangeRequestInput$, () => CreateCollaborationChangeRequestOutput$
+];
+export var CreateConfiguredAudienceModelAssociation$: StaticOperationSchema = [9, n0, _CCAMAr,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations", 200] }, () => CreateConfiguredAudienceModelAssociationInput$, () => CreateConfiguredAudienceModelAssociationOutput$
+];
+export var CreateConfiguredTable$: StaticOperationSchema = [9, n0, _CCT,
+  { [_h]: ["POST", "/configuredTables", 200] }, () => CreateConfiguredTableInput$, () => CreateConfiguredTableOutput$
+];
+export var CreateConfiguredTableAnalysisRule$: StaticOperationSchema = [9, n0, _CCTAR,
+  { [_h]: ["POST", "/configuredTables/{configuredTableIdentifier}/analysisRule", 200] }, () => CreateConfiguredTableAnalysisRuleInput$, () => CreateConfiguredTableAnalysisRuleOutput$
+];
+export var CreateConfiguredTableAssociation$: StaticOperationSchema = [9, n0, _CCTA,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/configuredTableAssociations", 200] }, () => CreateConfiguredTableAssociationInput$, () => CreateConfiguredTableAssociationOutput$
+];
+export var CreateConfiguredTableAssociationAnalysisRule$: StaticOperationSchema = [9, n0, _CCTAAR,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule", 200] }, () => CreateConfiguredTableAssociationAnalysisRuleInput$, () => CreateConfiguredTableAssociationAnalysisRuleOutput$
+];
+export var CreateIdMappingTable$: StaticOperationSchema = [9, n0, _CIMT,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/idmappingtables", 200] }, () => CreateIdMappingTableInput$, () => CreateIdMappingTableOutput$
+];
+export var CreateIdNamespaceAssociation$: StaticOperationSchema = [9, n0, _CINAr,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/idnamespaceassociations", 200] }, () => CreateIdNamespaceAssociationInput$, () => CreateIdNamespaceAssociationOutput$
+];
+export var CreateIntermediateTable$: StaticOperationSchema = [9, n0, _CIT,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/intermediateTables", 200] }, () => CreateIntermediateTableInput$, () => CreateIntermediateTableOutput$
+];
+export var CreateIntermediateTableAnalysisRule$: StaticOperationSchema = [9, n0, _CITAR,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule", 200] }, () => CreateIntermediateTableAnalysisRuleInput$, () => CreateIntermediateTableAnalysisRuleOutput$
+];
+export var CreateMembership$: StaticOperationSchema = [9, n0, _CM,
+  { [_h]: ["POST", "/memberships", 200] }, () => CreateMembershipInput$, () => CreateMembershipOutput$
+];
+export var CreatePrivacyBudgetTemplate$: StaticOperationSchema = [9, n0, _CPBTr,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/privacybudgettemplates", 200] }, () => CreatePrivacyBudgetTemplateInput$, () => CreatePrivacyBudgetTemplateOutput$
+];
+export var DeleteAnalysisTemplate$: StaticOperationSchema = [9, n0, _DAT,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}", 204] }, () => DeleteAnalysisTemplateInput$, () => DeleteAnalysisTemplateOutput$
+];
+export var DeleteCollaboration$: StaticOperationSchema = [9, n0, _DC,
+  { [_h]: ["DELETE", "/collaborations/{collaborationIdentifier}", 204] }, () => DeleteCollaborationInput$, () => DeleteCollaborationOutput$
+];
+export var DeleteConfiguredAudienceModelAssociation$: StaticOperationSchema = [9, n0, _DCAMA,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", 204] }, () => DeleteConfiguredAudienceModelAssociationInput$, () => DeleteConfiguredAudienceModelAssociationOutput$
+];
+export var DeleteConfiguredTable$: StaticOperationSchema = [9, n0, _DCTe,
+  { [_h]: ["DELETE", "/configuredTables/{configuredTableIdentifier}", 204] }, () => DeleteConfiguredTableInput$, () => DeleteConfiguredTableOutput$
+];
+export var DeleteConfiguredTableAnalysisRule$: StaticOperationSchema = [9, n0, _DCTAR,
+  { [_h]: ["DELETE", "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}", 204] }, () => DeleteConfiguredTableAnalysisRuleInput$, () => DeleteConfiguredTableAnalysisRuleOutput$
+];
+export var DeleteConfiguredTableAssociation$: StaticOperationSchema = [9, n0, _DCTA,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}", 204] }, () => DeleteConfiguredTableAssociationInput$, () => DeleteConfiguredTableAssociationOutput$
+];
+export var DeleteConfiguredTableAssociationAnalysisRule$: StaticOperationSchema = [9, n0, _DCTAAR,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}", 204] }, () => DeleteConfiguredTableAssociationAnalysisRuleInput$, () => DeleteConfiguredTableAssociationAnalysisRuleOutput$
+];
+export var DeleteIdMappingTable$: StaticOperationSchema = [9, n0, _DIMT,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}", 204] }, () => DeleteIdMappingTableInput$, () => DeleteIdMappingTableOutput$
+];
+export var DeleteIdNamespaceAssociation$: StaticOperationSchema = [9, n0, _DINA,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}", 204] }, () => DeleteIdNamespaceAssociationInput$, () => DeleteIdNamespaceAssociationOutput$
+];
+export var DeleteIntermediateTable$: StaticOperationSchema = [9, n0, _DIT,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}", 204] }, () => DeleteIntermediateTableInput$, () => DeleteIntermediateTableOutput$
+];
+export var DeleteIntermediateTableAnalysisRule$: StaticOperationSchema = [9, n0, _DITAR,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}", 204] }, () => DeleteIntermediateTableAnalysisRuleInput$, () => DeleteIntermediateTableAnalysisRuleOutput$
+];
+export var DeleteMember$: StaticOperationSchema = [9, n0, _DM,
+  { [_h]: ["DELETE", "/collaborations/{collaborationIdentifier}/member/{accountId}", 204] }, () => DeleteMemberInput$, () => DeleteMemberOutput$
+];
+export var DeleteMembership$: StaticOperationSchema = [9, n0, _DMe,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}", 204] }, () => DeleteMembershipInput$, () => DeleteMembershipOutput$
+];
+export var DeletePrivacyBudgetTemplate$: StaticOperationSchema = [9, n0, _DPBT,
+  { [_h]: ["DELETE", "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", 204] }, () => DeletePrivacyBudgetTemplateInput$, () => DeletePrivacyBudgetTemplateOutput$
+];
+export var DisallowIntermediateTable$: StaticOperationSchema = [9, n0, _DITi,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/disallowIntermediateTable", 200] }, () => DisallowIntermediateTableInput$, () => DisallowIntermediateTableOutput$
+];
+export var GetAnalysisLogExport$: StaticOperationSchema = [9, n0, _GALE,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/analysislogexports/{analysisLogExportIdentifier}", 200] }, () => GetAnalysisLogExportInput$, () => GetAnalysisLogExportOutput$
+];
+export var GetAnalysisTemplate$: StaticOperationSchema = [9, n0, _GAT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}", 200] }, () => GetAnalysisTemplateInput$, () => GetAnalysisTemplateOutput$
+];
+export var GetCollaboration$: StaticOperationSchema = [9, n0, _GC,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}", 200] }, () => GetCollaborationInput$, () => GetCollaborationOutput$
+];
+export var GetCollaborationAnalysisTemplate$: StaticOperationSchema = [9, n0, _GCAT,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}", 200] }, () => GetCollaborationAnalysisTemplateInput$, () => GetCollaborationAnalysisTemplateOutput$
+];
+export var GetCollaborationChangeRequest$: StaticOperationSchema = [9, n0, _GCCR,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}", 200] }, () => GetCollaborationChangeRequestInput$, () => GetCollaborationChangeRequestOutput$
+];
+export var GetCollaborationConfiguredAudienceModelAssociation$: StaticOperationSchema = [9, n0, _GCCAMA,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", 200] }, () => GetCollaborationConfiguredAudienceModelAssociationInput$, () => GetCollaborationConfiguredAudienceModelAssociationOutput$
+];
+export var GetCollaborationIdNamespaceAssociation$: StaticOperationSchema = [9, n0, _GCINA,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}", 200] }, () => GetCollaborationIdNamespaceAssociationInput$, () => GetCollaborationIdNamespaceAssociationOutput$
+];
+export var GetCollaborationPrivacyBudgetTemplate$: StaticOperationSchema = [9, n0, _GCPBT,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", 200] }, () => GetCollaborationPrivacyBudgetTemplateInput$, () => GetCollaborationPrivacyBudgetTemplateOutput$
+];
+export var GetConfiguredAudienceModelAssociation$: StaticOperationSchema = [9, n0, _GCAMA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", 200] }, () => GetConfiguredAudienceModelAssociationInput$, () => GetConfiguredAudienceModelAssociationOutput$
+];
+export var GetConfiguredTable$: StaticOperationSchema = [9, n0, _GCT,
+  { [_h]: ["GET", "/configuredTables/{configuredTableIdentifier}", 200] }, () => GetConfiguredTableInput$, () => GetConfiguredTableOutput$
+];
+export var GetConfiguredTableAnalysisRule$: StaticOperationSchema = [9, n0, _GCTAR,
+  { [_h]: ["GET", "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => GetConfiguredTableAnalysisRuleInput$, () => GetConfiguredTableAnalysisRuleOutput$
+];
+export var GetConfiguredTableAssociation$: StaticOperationSchema = [9, n0, _GCTA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}", 200] }, () => GetConfiguredTableAssociationInput$, () => GetConfiguredTableAssociationOutput$
+];
+export var GetConfiguredTableAssociationAnalysisRule$: StaticOperationSchema = [9, n0, _GCTAAR,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => GetConfiguredTableAssociationAnalysisRuleInput$, () => GetConfiguredTableAssociationAnalysisRuleOutput$
+];
+export var GetIdMappingTable$: StaticOperationSchema = [9, n0, _GIMT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}", 200] }, () => GetIdMappingTableInput$, () => GetIdMappingTableOutput$
+];
+export var GetIdNamespaceAssociation$: StaticOperationSchema = [9, n0, _GINA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}", 200] }, () => GetIdNamespaceAssociationInput$, () => GetIdNamespaceAssociationOutput$
+];
+export var GetIntermediateTable$: StaticOperationSchema = [9, n0, _GIT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}", 200] }, () => GetIntermediateTableInput$, () => GetIntermediateTableOutput$
+];
+export var GetIntermediateTableAnalysisRule$: StaticOperationSchema = [9, n0, _GITAR,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => GetIntermediateTableAnalysisRuleInput$, () => GetIntermediateTableAnalysisRuleOutput$
+];
+export var GetMembership$: StaticOperationSchema = [9, n0, _GM,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}", 200] }, () => GetMembershipInput$, () => GetMembershipOutput$
+];
+export var GetPrivacyBudgetTemplate$: StaticOperationSchema = [9, n0, _GPBT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", 200] }, () => GetPrivacyBudgetTemplateInput$, () => GetPrivacyBudgetTemplateOutput$
+];
+export var GetProtectedJob$: StaticOperationSchema = [9, n0, _GPJ,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/protectedJobs/{protectedJobIdentifier}", 200] }, () => GetProtectedJobInput$, () => GetProtectedJobOutput$
+];
+export var GetProtectedQuery$: StaticOperationSchema = [9, n0, _GPQ,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}", 200] }, () => GetProtectedQueryInput$, () => GetProtectedQueryOutput$
+];
+export var GetSchema$: StaticOperationSchema = [9, n0, _GS,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/schemas/{name}", 200] }, () => GetSchemaInput$, () => GetSchemaOutput$
+];
+export var GetSchemaAnalysisRule$: StaticOperationSchema = [9, n0, _GSAR,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/schemas/{name}/analysisRule/{type}", 200] }, () => GetSchemaAnalysisRuleInput$, () => GetSchemaAnalysisRuleOutput$
+];
+export var ListAnalysisLogExports$: StaticOperationSchema = [9, n0, _LALE,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/analysislogexports", 200] }, () => ListAnalysisLogExportsInput$, () => ListAnalysisLogExportsOutput$
+];
+export var ListAnalysisTemplates$: StaticOperationSchema = [9, n0, _LAT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/analysistemplates", 200] }, () => ListAnalysisTemplatesInput$, () => ListAnalysisTemplatesOutput$
+];
+export var ListCollaborationAnalysisTemplates$: StaticOperationSchema = [9, n0, _LCAT,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/analysistemplates", 200] }, () => ListCollaborationAnalysisTemplatesInput$, () => ListCollaborationAnalysisTemplatesOutput$
+];
+export var ListCollaborationChangeRequests$: StaticOperationSchema = [9, n0, _LCCR,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/changeRequests", 200] }, () => ListCollaborationChangeRequestsInput$, () => ListCollaborationChangeRequestsOutput$
+];
+export var ListCollaborationConfiguredAudienceModelAssociations$: StaticOperationSchema = [9, n0, _LCCAMA,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations", 200] }, () => ListCollaborationConfiguredAudienceModelAssociationsInput$, () => ListCollaborationConfiguredAudienceModelAssociationsOutput$
+];
+export var ListCollaborationIdNamespaceAssociations$: StaticOperationSchema = [9, n0, _LCINA,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/idnamespaceassociations", 200] }, () => ListCollaborationIdNamespaceAssociationsInput$, () => ListCollaborationIdNamespaceAssociationsOutput$
+];
+export var ListCollaborationPrivacyBudgets$: StaticOperationSchema = [9, n0, _LCPB,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/privacybudgets", 200] }, () => ListCollaborationPrivacyBudgetsInput$, () => ListCollaborationPrivacyBudgetsOutput$
+];
+export var ListCollaborationPrivacyBudgetTemplates$: StaticOperationSchema = [9, n0, _LCPBT,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/privacybudgettemplates", 200] }, () => ListCollaborationPrivacyBudgetTemplatesInput$, () => ListCollaborationPrivacyBudgetTemplatesOutput$
+];
+export var ListCollaborations$: StaticOperationSchema = [9, n0, _LC,
+  { [_h]: ["GET", "/collaborations", 200] }, () => ListCollaborationsInput$, () => ListCollaborationsOutput$
+];
+export var ListConfiguredAudienceModelAssociations$: StaticOperationSchema = [9, n0, _LCAMA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations", 200] }, () => ListConfiguredAudienceModelAssociationsInput$, () => ListConfiguredAudienceModelAssociationsOutput$
+];
+export var ListConfiguredTableAssociations$: StaticOperationSchema = [9, n0, _LCTA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/configuredTableAssociations", 200] }, () => ListConfiguredTableAssociationsInput$, () => ListConfiguredTableAssociationsOutput$
+];
+export var ListConfiguredTables$: StaticOperationSchema = [9, n0, _LCT,
+  { [_h]: ["GET", "/configuredTables", 200] }, () => ListConfiguredTablesInput$, () => ListConfiguredTablesOutput$
+];
+export var ListIdMappingTables$: StaticOperationSchema = [9, n0, _LIMT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/idmappingtables", 200] }, () => ListIdMappingTablesInput$, () => ListIdMappingTablesOutput$
+];
+export var ListIdNamespaceAssociations$: StaticOperationSchema = [9, n0, _LINA,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/idnamespaceassociations", 200] }, () => ListIdNamespaceAssociationsInput$, () => ListIdNamespaceAssociationsOutput$
+];
+export var ListIntermediateTables$: StaticOperationSchema = [9, n0, _LIT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/intermediateTables", 200] }, () => ListIntermediateTablesInput$, () => ListIntermediateTablesOutput$
+];
+export var ListIntermediateTableVersions$: StaticOperationSchema = [9, n0, _LITV,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/versions", 200] }, () => ListIntermediateTableVersionsInput$, () => ListIntermediateTableVersionsOutput$
+];
+export var ListMembers$: StaticOperationSchema = [9, n0, _LM,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/members", 200] }, () => ListMembersInput$, () => ListMembersOutput$
+];
+export var ListMemberships$: StaticOperationSchema = [9, n0, _LMi,
+  { [_h]: ["GET", "/memberships", 200] }, () => ListMembershipsInput$, () => ListMembershipsOutput$
+];
+export var ListPrivacyBudgets$: StaticOperationSchema = [9, n0, _LPB,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/privacybudgets", 200] }, () => ListPrivacyBudgetsInput$, () => ListPrivacyBudgetsOutput$
+];
+export var ListPrivacyBudgetTemplates$: StaticOperationSchema = [9, n0, _LPBT,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/privacybudgettemplates", 200] }, () => ListPrivacyBudgetTemplatesInput$, () => ListPrivacyBudgetTemplatesOutput$
+];
+export var ListProtectedJobs$: StaticOperationSchema = [9, n0, _LPJ,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/protectedJobs", 200] }, () => ListProtectedJobsInput$, () => ListProtectedJobsOutput$
+];
+export var ListProtectedQueries$: StaticOperationSchema = [9, n0, _LPQ,
+  { [_h]: ["GET", "/memberships/{membershipIdentifier}/protectedQueries", 200] }, () => ListProtectedQueriesInput$, () => ListProtectedQueriesOutput$
+];
+export var ListSchemas$: StaticOperationSchema = [9, n0, _LS,
+  { [_h]: ["GET", "/collaborations/{collaborationIdentifier}/schemas", 200] }, () => ListSchemasInput$, () => ListSchemasOutput$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  { [_h]: ["GET", "/tags/{resourceArn}", 200] }, () => ListTagsForResourceInput$, () => ListTagsForResourceOutput$
+];
+export var PopulateIdMappingTable$: StaticOperationSchema = [9, n0, _PIMT,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}/populate", 200] }, () => PopulateIdMappingTableInput$, () => PopulateIdMappingTableOutput$
+];
+export var PopulateIntermediateTable$: StaticOperationSchema = [9, n0, _PIT,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/populate", 200] }, () => PopulateIntermediateTableInput$, () => PopulateIntermediateTableOutput$
+];
+export var PreviewPrivacyImpact$: StaticOperationSchema = [9, n0, _PPI,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/previewprivacyimpact", 200] }, () => PreviewPrivacyImpactInput$, () => PreviewPrivacyImpactOutput$
+];
+export var StartAnalysisLogExport$: StaticOperationSchema = [9, n0, _SALE,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/analysislogexports", 200] }, () => StartAnalysisLogExportInput$, () => StartAnalysisLogExportOutput$
+];
+export var StartProtectedJob$: StaticOperationSchema = [9, n0, _SPJ,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/protectedJobs", 200] }, () => StartProtectedJobInput$, () => StartProtectedJobOutput$
+];
+export var StartProtectedQuery$: StaticOperationSchema = [9, n0, _SPQ,
+  { [_h]: ["POST", "/memberships/{membershipIdentifier}/protectedQueries", 200] }, () => StartProtectedQueryInput$, () => StartProtectedQueryOutput$
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TRa,
+  { [_h]: ["POST", "/tags/{resourceArn}", 200] }, () => TagResourceInput$, () => TagResourceOutput$
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  { [_h]: ["DELETE", "/tags/{resourceArn}", 200] }, () => UntagResourceInput$, () => UntagResourceOutput$
+];
+export var UpdateAnalysisTemplate$: StaticOperationSchema = [9, n0, _UAT,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}", 200] }, () => UpdateAnalysisTemplateInput$, () => UpdateAnalysisTemplateOutput$
+];
+export var UpdateCollaboration$: StaticOperationSchema = [9, n0, _UC,
+  { [_h]: ["PATCH", "/collaborations/{collaborationIdentifier}", 200] }, () => UpdateCollaborationInput$, () => UpdateCollaborationOutput$
+];
+export var UpdateCollaborationChangeRequest$: StaticOperationSchema = [9, n0, _UCCR,
+  { [_h]: ["PATCH", "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}", 200] }, () => UpdateCollaborationChangeRequestInput$, () => UpdateCollaborationChangeRequestOutput$
+];
+export var UpdateConfiguredAudienceModelAssociation$: StaticOperationSchema = [9, n0, _UCAMA,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", 200] }, () => UpdateConfiguredAudienceModelAssociationInput$, () => UpdateConfiguredAudienceModelAssociationOutput$
+];
+export var UpdateConfiguredTable$: StaticOperationSchema = [9, n0, _UCT,
+  { [_h]: ["PATCH", "/configuredTables/{configuredTableIdentifier}", 200] }, () => UpdateConfiguredTableInput$, () => UpdateConfiguredTableOutput$
+];
+export var UpdateConfiguredTableAnalysisRule$: StaticOperationSchema = [9, n0, _UCTAR,
+  { [_h]: ["PATCH", "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => UpdateConfiguredTableAnalysisRuleInput$, () => UpdateConfiguredTableAnalysisRuleOutput$
+];
+export var UpdateConfiguredTableAssociation$: StaticOperationSchema = [9, n0, _UCTA,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}", 200] }, () => UpdateConfiguredTableAssociationInput$, () => UpdateConfiguredTableAssociationOutput$
+];
+export var UpdateConfiguredTableAssociationAnalysisRule$: StaticOperationSchema = [9, n0, _UCTAAR,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => UpdateConfiguredTableAssociationAnalysisRuleInput$, () => UpdateConfiguredTableAssociationAnalysisRuleOutput$
+];
+export var UpdateIdMappingTable$: StaticOperationSchema = [9, n0, _UIMT,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}", 200] }, () => UpdateIdMappingTableInput$, () => UpdateIdMappingTableOutput$
+];
+export var UpdateIdNamespaceAssociation$: StaticOperationSchema = [9, n0, _UINA,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}", 200] }, () => UpdateIdNamespaceAssociationInput$, () => UpdateIdNamespaceAssociationOutput$
+];
+export var UpdateIntermediateTable$: StaticOperationSchema = [9, n0, _UIT,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}", 200] }, () => UpdateIntermediateTableInput$, () => UpdateIntermediateTableOutput$
+];
+export var UpdateIntermediateTableAnalysisRule$: StaticOperationSchema = [9, n0, _UITAR,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}", 200] }, () => UpdateIntermediateTableAnalysisRuleInput$, () => UpdateIntermediateTableAnalysisRuleOutput$
+];
+export var UpdateMembership$: StaticOperationSchema = [9, n0, _UM,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}", 200] }, () => UpdateMembershipInput$, () => UpdateMembershipOutput$
+];
+export var UpdatePrivacyBudgetTemplate$: StaticOperationSchema = [9, n0, _UPBT,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", 200] }, () => UpdatePrivacyBudgetTemplateInput$, () => UpdatePrivacyBudgetTemplateOutput$
+];
+export var UpdateProtectedJob$: StaticOperationSchema = [9, n0, _UPJ,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/protectedJobs/{protectedJobIdentifier}", 200] }, () => UpdateProtectedJobInput$, () => UpdateProtectedJobOutput$
+];
+export var UpdateProtectedQuery$: StaticOperationSchema = [9, n0, _UPQ,
+  { [_h]: ["PATCH", "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}", 200] }, () => UpdateProtectedQueryInput$, () => UpdateProtectedQueryOutput$
+];

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListFlowDefinitionsRequest, ListFlowDefinitionsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1ListFlowDefinitionsCommand,
-  serializeAws_json1_1ListFlowDefinitionsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFlowDefinitionsRequest, ListFlowDefinitionsResponse } from "../models/models_4";
+import { ListFlowDefinitions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFlowDefinitionsCommand}.
+ */
 export interface ListFlowDefinitionsCommandInput extends ListFlowDefinitionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFlowDefinitionsCommand}.
+ */
 export interface ListFlowDefinitionsCommandOutput extends ListFlowDefinitionsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface ListFlowDefinitionsCommandOutput extends ListFlowDefinitionsRes
  * ```javascript
  * import { SageMakerClient, ListFlowDefinitionsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, ListFlowDefinitionsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // ListFlowDefinitionsRequest
+ *   CreationTimeAfter: new Date("TIMESTAMP"),
+ *   CreationTimeBefore: new Date("TIMESTAMP"),
+ *   SortOrder: "Ascending" || "Descending",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListFlowDefinitionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFlowDefinitionsResponse
+ * //   FlowDefinitionSummaries: [ // FlowDefinitionSummaries // required
+ * //     { // FlowDefinitionSummary
+ * //       FlowDefinitionName: "STRING_VALUE", // required
+ * //       FlowDefinitionArn: "STRING_VALUE", // required
+ * //       FlowDefinitionStatus: "Initializing" || "Active" || "Failed" || "Deleting", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       FailureReason: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFlowDefinitionsCommandInput - {@link ListFlowDefinitionsCommandInput}
+ * @returns {@link ListFlowDefinitionsCommandOutput}
  * @see {@link ListFlowDefinitionsCommandInput} for command's `input` shape.
  * @see {@link ListFlowDefinitionsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class ListFlowDefinitionsCommand extends $Command<
-  ListFlowDefinitionsCommandInput,
-  ListFlowDefinitionsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFlowDefinitionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFlowDefinitionsCommandInput, ListFlowDefinitionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "ListFlowDefinitionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFlowDefinitionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFlowDefinitionsResponse.filterSensitiveLog,
+export class ListFlowDefinitionsCommand extends command<ListFlowDefinitionsCommandInput, ListFlowDefinitionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFlowDefinitions",
+  ListFlowDefinitions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFlowDefinitionsRequest;
+      output: ListFlowDefinitionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListFlowDefinitionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListFlowDefinitionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListFlowDefinitionsCommandOutput> {
-    return deserializeAws_json1_1ListFlowDefinitionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFlowDefinitionsCommandInput;
+      output: ListFlowDefinitionsCommandOutput;
+    };
+  };
 }

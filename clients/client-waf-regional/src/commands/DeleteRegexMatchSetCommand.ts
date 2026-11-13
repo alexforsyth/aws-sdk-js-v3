@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteRegexMatchSetRequest, DeleteRegexMatchSetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteRegexMatchSetCommand,
-  serializeAws_json1_1DeleteRegexMatchSetCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFRegionalClientResolvedConfig } from "../WAFRegionalClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRegexMatchSetRequest, DeleteRegexMatchSetResponse } from "../models/models_0";
+import { DeleteRegexMatchSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRegexMatchSetCommand}.
+ */
 export interface DeleteRegexMatchSetCommandInput extends DeleteRegexMatchSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRegexMatchSetCommand}.
+ */
 export interface DeleteRegexMatchSetCommandOutput extends DeleteRegexMatchSetResponse, __MetadataBearer {}
 
 /**
@@ -31,8 +32,8 @@ export interface DeleteRegexMatchSetCommandOutput extends DeleteRegexMatchSetRes
  *       WAF</b>, use the AWS WAFV2 API and see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. With the latest version, AWS WAF has a single set of endpoints for regional and global use. </p>
  *          </note>
  *          <p>Permanently deletes a <a>RegexMatchSet</a>. You can't delete a <code>RegexMatchSet</code> if it's still used in any <code>Rules</code>
- *         or if it still includes any <code>RegexMatchTuples</code> objects (any filters).</p>
- * 		       <p>If you just want to remove a <code>RegexMatchSet</code> from a <code>Rule</code>, use <a>UpdateRule</a>.</p>
+ *         or if it still includes any <code>RegexMatchTuples</code> objects (any filters).</p>		
+ * 		       <p>If you just want to remove a <code>RegexMatchSet</code> from a <code>Rule</code>, use <a>UpdateRule</a>.</p>		
  * 		       <p>To permanently delete a <code>RegexMatchSet</code>, perform the following steps:</p>
  * 		       <ol>
  *             <li>
@@ -51,68 +52,89 @@ export interface DeleteRegexMatchSetCommandOutput extends DeleteRegexMatchSetRes
  * ```javascript
  * import { WAFRegionalClient, DeleteRegexMatchSetCommand } from "@aws-sdk/client-waf-regional"; // ES Modules import
  * // const { WAFRegionalClient, DeleteRegexMatchSetCommand } = require("@aws-sdk/client-waf-regional"); // CommonJS import
+ * // import type { WAFRegionalClientConfig } from "@aws-sdk/client-waf-regional";
+ * const config = {}; // type is WAFRegionalClientConfig
  * const client = new WAFRegionalClient(config);
+ * const input = { // DeleteRegexMatchSetRequest
+ *   RegexMatchSetId: "STRING_VALUE", // required
+ *   ChangeToken: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRegexMatchSetCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteRegexMatchSetResponse
+ * //   ChangeToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteRegexMatchSetCommandInput - {@link DeleteRegexMatchSetCommandInput}
+ * @returns {@link DeleteRegexMatchSetCommandOutput}
  * @see {@link DeleteRegexMatchSetCommandInput} for command's `input` shape.
  * @see {@link DeleteRegexMatchSetCommandOutput} for command's `response` shape.
- * @see {@link WAFRegionalClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WAFRegionalClientResolvedConfig | config} for WAFRegionalClient's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
+ *
+ * @throws {@link WAFInvalidAccountException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
+ *
+ * @throws {@link WAFNonEmptyEntityException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that isn't empty. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>WebACL</code> that still contains one or more <code>Rule</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that still contains one or more <code>ByteMatchSet</code> objects
+ * 				or other predicates.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that contains one or more <code>ByteMatchTuple</code> objects.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete an <code>IPSet</code> that references one or more IP addresses.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFNonexistentItemException} (client fault)
+ *  <p>The operation failed because the referenced object doesn't exist.</p>
+ *
+ * @throws {@link WAFReferencedItemException} (client fault)
+ *  <p>The operation failed because you tried to delete an object that is still in use. For example:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>You tried to delete a <code>ByteMatchSet</code> that is still referenced by a <code>Rule</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to delete a <code>Rule</code> that is still referenced by a <code>WebACL</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFStaleDataException} (client fault)
+ *  <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
+ *
+ * @throws {@link WAFRegionalServiceException}
+ * <p>Base exception class for all service exceptions from WAFRegional service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRegexMatchSetCommand extends $Command<
-  DeleteRegexMatchSetCommandInput,
-  DeleteRegexMatchSetCommandOutput,
-  WAFRegionalClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRegexMatchSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFRegionalClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRegexMatchSetCommandInput, DeleteRegexMatchSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFRegionalClient";
-    const commandName = "DeleteRegexMatchSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRegexMatchSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRegexMatchSetResponse.filterSensitiveLog,
+export class DeleteRegexMatchSetCommand extends command<DeleteRegexMatchSetCommandInput, DeleteRegexMatchSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRegexMatchSet",
+  DeleteRegexMatchSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRegexMatchSetRequest;
+      output: DeleteRegexMatchSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRegexMatchSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteRegexMatchSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRegexMatchSetCommandOutput> {
-    return deserializeAws_json1_1DeleteRegexMatchSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRegexMatchSetCommandInput;
+      output: DeleteRegexMatchSetCommandOutput;
+    };
+  };
 }

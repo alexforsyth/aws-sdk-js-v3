@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { CreateProjectRequest, CreateProjectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateProjectCommand,
-  serializeAws_restJson1CreateProjectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateProjectRequest, CreateProjectResponse } from "../models/models_0";
+import { CreateProject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateProjectCommand}.
+ */
 export interface CreateProjectCommandInput extends CreateProjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateProjectCommand}.
+ */
 export interface CreateProjectCommandOutput extends CreateProjectResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface CreateProjectCommandOutput extends CreateProjectResponse, __Met
  * ```javascript
  * import { DataBrewClient, CreateProjectCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, CreateProjectCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // CreateProjectRequest
+ *   DatasetName: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   RecipeName: "STRING_VALUE", // required
+ *   Sample: { // Sample
+ *     Size: Number("int"),
+ *     Type: "FIRST_N" || "LAST_N" || "RANDOM", // required
+ *   },
+ *   RoleArn: "STRING_VALUE", // required
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateProjectCommand(input);
  * const response = await client.send(command);
+ * // { // CreateProjectResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateProjectCommandInput - {@link CreateProjectCommandInput}
+ * @returns {@link CreateProjectCommandOutput}
  * @see {@link CreateProjectCommandInput} for command's `input` shape.
  * @see {@link CreateProjectCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service failure occurred.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>A service quota is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class CreateProjectCommand extends $Command<
-  CreateProjectCommandInput,
-  CreateProjectCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateProjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateProjectCommandInput, CreateProjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "CreateProjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateProjectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateProjectResponse.filterSensitiveLog,
+export class CreateProjectCommand extends command<CreateProjectCommandInput, CreateProjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateProject",
+  CreateProject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProjectRequest;
+      output: CreateProjectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateProjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateProjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateProjectCommandOutput> {
-    return deserializeAws_restJson1CreateProjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateProjectCommandInput;
+      output: CreateProjectCommandOutput;
+    };
+  };
 }

@@ -1,97 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateFindingAggregatorRequest, UpdateFindingAggregatorResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateFindingAggregatorCommand,
-  serializeAws_restJson1UpdateFindingAggregatorCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFindingAggregatorRequest, UpdateFindingAggregatorResponse } from "../models/models_3";
+import { UpdateFindingAggregator$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFindingAggregatorCommand}.
+ */
 export interface UpdateFindingAggregatorCommandInput extends UpdateFindingAggregatorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFindingAggregatorCommand}.
+ */
 export interface UpdateFindingAggregatorCommandOutput extends UpdateFindingAggregatorResponse, __MetadataBearer {}
 
 /**
- * <p>Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use <code>UpdateFindingAggregator</code> to change the aggregation Region.</p>
- *          <p>You must run <code>UpdateFindingAggregator</code> from the current aggregation Region.
+ * <note>
+ *             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
+ *          </note>
+ *          <p>Updates cross-Region aggregation settings. You can use this operation to update the Region linking mode and the list
+ *         of included or excluded Amazon Web Services Regions. However, you can't use this operation to change the home Region.</p>
+ *          <p>You can invoke this operation from the current home Region only.
  *       </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, UpdateFindingAggregatorCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, UpdateFindingAggregatorCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // UpdateFindingAggregatorRequest
+ *   FindingAggregatorArn: "STRING_VALUE", // required
+ *   RegionLinkingMode: "STRING_VALUE", // required
+ *   Regions: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new UpdateFindingAggregatorCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateFindingAggregatorResponse
+ * //   FindingAggregatorArn: "STRING_VALUE",
+ * //   FindingAggregationRegion: "STRING_VALUE",
+ * //   RegionLinkingMode: "STRING_VALUE",
+ * //   Regions: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateFindingAggregatorCommandInput - {@link UpdateFindingAggregatorCommandInput}
+ * @returns {@link UpdateFindingAggregatorCommandOutput}
  * @see {@link UpdateFindingAggregatorCommandInput} for command's `input` shape.
  * @see {@link UpdateFindingAggregatorCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permission to perform the action specified in the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because we can't find the specified resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To update cross-Region aggregation settings
+ * ```javascript
+ * // The following example updates the cross-Region aggregation configuration. You use this operation to change the list of linked Regions and the treatment of new Regions. However, you cannot use this operation to change the aggregation Region.
+ * const input = {
+ *   FindingAggregatorArn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+ *   RegionLinkingMode: "SPECIFIED_REGIONS",
+ *   Regions: [
+ *     "us-west-1",
+ *     "us-west-2"
+ *   ]
+ * };
+ * const command = new UpdateFindingAggregatorCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   FindingAggregationRegion: "us-east-1",
+ *   FindingAggregatorArn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+ *   RegionLinkingMode: "SPECIFIED_REGIONS",
+ *   Regions: [
+ *     "us-west-1",
+ *     "us-west-2"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateFindingAggregatorCommand extends $Command<
-  UpdateFindingAggregatorCommandInput,
-  UpdateFindingAggregatorCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFindingAggregatorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFindingAggregatorCommandInput, UpdateFindingAggregatorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "UpdateFindingAggregatorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFindingAggregatorRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateFindingAggregatorResponse.filterSensitiveLog,
+export class UpdateFindingAggregatorCommand extends command<UpdateFindingAggregatorCommandInput, UpdateFindingAggregatorCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFindingAggregator",
+  UpdateFindingAggregator$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFindingAggregatorRequest;
+      output: UpdateFindingAggregatorResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateFindingAggregatorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateFindingAggregatorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateFindingAggregatorCommandOutput> {
-    return deserializeAws_restJson1UpdateFindingAggregatorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFindingAggregatorCommandInput;
+      output: UpdateFindingAggregatorCommandOutput;
+    };
+  };
 }

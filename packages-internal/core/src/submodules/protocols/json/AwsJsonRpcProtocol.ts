@@ -1,0 +1,149 @@
+import { JsonCodec2, loadJsonRpcErrorCode, RpcProtocol } from "@smithy/core/protocols";
+import type { JsonCodec, JsonShapeDeserializer2 } from "@smithy/core/protocols";
+import type { TypeRegistry } from "@smithy/core/schema";
+import { deref, NormalizedSchema } from "@smithy/core/schema";
+import type {
+  EndpointBearer,
+  HandlerExecutionContext,
+  HttpRequest,
+  HttpResponse,
+  OperationSchema,
+  ResponseMetadata,
+  SerdeFunctions,
+  ShapeDeserializer,
+  ShapeSerializer,
+  TimestampEpochSecondsSchema,
+} from "@smithy/types";
+
+import { ProtocolLib } from "../ProtocolLib";
+
+/**
+ * @public
+ */
+export abstract class AwsJsonRpcProtocol extends RpcProtocol {
+  protected serializer: ShapeSerializer<string | Uint8Array>;
+  protected deserializer: ShapeDeserializer<string | Uint8Array>;
+  protected serviceTarget: string;
+  private readonly codec: JsonCodec | JsonCodec2;
+  private readonly mixin: ProtocolLib;
+  private readonly awsQueryCompatible: boolean;
+
+  protected constructor({
+    defaultNamespace,
+    errorTypeRegistries,
+    serviceTarget,
+    awsQueryCompatible,
+    jsonCodec,
+  }: {
+    defaultNamespace: string;
+    errorTypeRegistries?: TypeRegistry[];
+    serviceTarget: string;
+    awsQueryCompatible?: boolean;
+    jsonCodec?: JsonCodec | JsonCodec2;
+  }) {
+    super({
+      defaultNamespace,
+      errorTypeRegistries,
+    });
+    this.serviceTarget = serviceTarget;
+    this.codec =
+      jsonCodec ??
+      new JsonCodec2({
+        timestampFormat: {
+          useTrait: true,
+          default: 7 as const satisfies TimestampEpochSecondsSchema,
+        },
+        jsonName: false,
+      });
+    this.serializer = this.codec.createSerializer();
+    this.deserializer = this.codec.createDeserializer();
+    this.awsQueryCompatible = !!awsQueryCompatible;
+    this.mixin = new ProtocolLib(this.awsQueryCompatible);
+  }
+
+  public async serializeRequest<Input extends object>(
+    operationSchema: OperationSchema,
+    input: Input,
+    context: HandlerExecutionContext & SerdeFunctions & EndpointBearer
+  ): Promise<HttpRequest> {
+    const request = await super.serializeRequest(operationSchema, input, context);
+    if (!request.path.endsWith("/")) {
+      request.path += "/";
+    }
+    request.headers["content-type"] = `application/x-amz-json-${this.getJsonRpcVersion()}`;
+    request.headers["x-amz-target"] = `${this.serviceTarget}.${operationSchema.name}`;
+    if (this.awsQueryCompatible) {
+      request.headers["x-amzn-query-mode"] = "true";
+    }
+    if (deref(operationSchema.input) === "unit" || !request.body) {
+      request.body = "{}";
+    }
+
+    // content-length header is set by the contentLengthMiddleware.
+
+    return request;
+  }
+
+  public getPayloadCodec() {
+    return this.codec;
+  }
+
+  protected abstract getJsonRpcVersion(): "1.1" | "1.0";
+
+  /**
+   * @override
+   */
+  protected async handleError(
+    operationSchema: OperationSchema,
+    context: HandlerExecutionContext & SerdeFunctions,
+    response: HttpResponse,
+    dataObject: any,
+    metadata: ResponseMetadata
+  ): Promise<never> {
+    const { awsQueryCompatible } = this;
+    if (awsQueryCompatible) {
+      this.mixin.setQueryCompatError(dataObject, response);
+    }
+    const errorIdentifier = loadJsonRpcErrorCode(response, dataObject, awsQueryCompatible) ?? "Unknown";
+    this.mixin.compose(this.compositeErrorRegistry, errorIdentifier, this.options.defaultNamespace);
+
+    const { errorSchema, errorMetadata } = await this.mixin.getErrorSchemaOrThrowBaseException(
+      errorIdentifier,
+      this.options.defaultNamespace,
+      response,
+      dataObject,
+      metadata,
+      awsQueryCompatible ? this.mixin.findQueryCompatibleError : undefined
+    );
+
+    const ns = NormalizedSchema.of(errorSchema);
+    const message = dataObject.message ?? dataObject.Message ?? "UnknownError";
+    const ErrorCtor = this.compositeErrorRegistry.getErrorCtor(errorSchema) ?? Error;
+    const exception = new ErrorCtor({});
+
+    const output = {} as any;
+    const errorDeserializer = this.codec.createDeserializer() as JsonShapeDeserializer2;
+    for (const [name, member] of ns.structIterator()) {
+      if (dataObject[name] != null) {
+        output[name] = errorDeserializer.readObject(member, dataObject[name]);
+      }
+    }
+
+    if (awsQueryCompatible) {
+      this.mixin.queryCompatOutput(dataObject, output);
+    }
+
+    throw this.mixin.decorateServiceException(
+      Object.assign(
+        exception,
+        errorMetadata,
+        {
+          $fault: ns.getMergedTraits().error,
+          message,
+        },
+        output
+      ),
+      dataObject
+    );
+  }
+}

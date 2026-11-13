@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CognitoSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CognitoSyncClient";
-import { SetIdentityPoolConfigurationRequest, SetIdentityPoolConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SetIdentityPoolConfigurationCommand,
-  serializeAws_restJson1SetIdentityPoolConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SetIdentityPoolConfigurationRequest, SetIdentityPoolConfigurationResponse } from "../models/models_0";
+import { SetIdentityPoolConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SetIdentityPoolConfigurationCommand}.
+ */
 export interface SetIdentityPoolConfigurationCommandInput extends SetIdentityPoolConfigurationRequest {}
-export interface SetIdentityPoolConfigurationCommandOutput
-  extends SetIdentityPoolConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link SetIdentityPoolConfigurationCommand}.
+ */
+export interface SetIdentityPoolConfigurationCommandOutput extends SetIdentityPoolConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Sets the necessary configuration for push sync.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
@@ -38,19 +37,19 @@ export interface SetIdentityPoolConfigurationCommandOutput
  * X-AMZ-DATE: 20141004T200006Z
  * AUTHORIZATION: AWS4-HMAC-SHA256 Credential=<credential>, SignedHeaders=content-type;content-length;host;x-amz-date;x-amz-target, Signature=<signature>
  *
- * {
+ * \{
  *     "Operation": "com.amazonaws.cognito.sync.model#SetIdentityPoolConfiguration",
  *     "Service": "com.amazonaws.cognito.sync.model#AWSCognitoSyncService",
  *     "Input":
- *     {
+ *     \{
  *         "IdentityPoolId": "ID_POOL_ID",
  *         "PushSync":
- *         {
+ *         \{
  *             "ApplicationArns": ["PLATFORMARN1", "PLATFORMARN2"],
  *             "RoleArn": "ROLEARN"
- *         }
- *     }
- * }
+ *         \}
+ *     \}
+ * \}
  *             </request>
  *             <response>
  * 1.1 200 OK
@@ -59,19 +58,19 @@ export interface SetIdentityPoolConfigurationCommandOutput
  * content-type: application/json
  * content-length: 332
  *
- * {
+ * \{
  *     "Output":
- *     {
+ *     \{
  *         "__type": "com.amazonaws.cognito.sync.model#SetIdentityPoolConfigurationResponse",
  *         "IdentityPoolId": "ID_POOL_ID",
  *         "PushSync":
- *         {
+ *         \{
  *             "ApplicationArns": ["PLATFORMARN1", "PLATFORMARN2"],
  *             "RoleArn": "ROLEARN"
- *         }
- *     },
+ *         \}
+ *     \},
  *     "Version": "1.0"
- * }
+ * \}
  *             </response>
  *          </example>
  *       </examples>
@@ -80,71 +79,92 @@ export interface SetIdentityPoolConfigurationCommandOutput
  * ```javascript
  * import { CognitoSyncClient, SetIdentityPoolConfigurationCommand } from "@aws-sdk/client-cognito-sync"; // ES Modules import
  * // const { CognitoSyncClient, SetIdentityPoolConfigurationCommand } = require("@aws-sdk/client-cognito-sync"); // CommonJS import
+ * // import type { CognitoSyncClientConfig } from "@aws-sdk/client-cognito-sync";
+ * const config = {}; // type is CognitoSyncClientConfig
  * const client = new CognitoSyncClient(config);
+ * const input = { // SetIdentityPoolConfigurationRequest
+ *   IdentityPoolId: "STRING_VALUE", // required
+ *   PushSync: { // PushSync
+ *     ApplicationArns: [ // ApplicationArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     RoleArn: "STRING_VALUE",
+ *   },
+ *   CognitoStreams: { // CognitoStreams
+ *     StreamName: "STRING_VALUE",
+ *     RoleArn: "STRING_VALUE",
+ *     StreamingStatus: "ENABLED" || "DISABLED",
+ *   },
+ * };
  * const command = new SetIdentityPoolConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // SetIdentityPoolConfigurationResponse
+ * //   IdentityPoolId: "STRING_VALUE",
+ * //   PushSync: { // PushSync
+ * //     ApplicationArns: [ // ApplicationArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     RoleArn: "STRING_VALUE",
+ * //   },
+ * //   CognitoStreams: { // CognitoStreams
+ * //     StreamName: "STRING_VALUE",
+ * //     RoleArn: "STRING_VALUE",
+ * //     StreamingStatus: "ENABLED" || "DISABLED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param SetIdentityPoolConfigurationCommandInput - {@link SetIdentityPoolConfigurationCommandInput}
+ * @returns {@link SetIdentityPoolConfigurationCommandOutput}
  * @see {@link SetIdentityPoolConfigurationCommandInput} for command's `input` shape.
  * @see {@link SetIdentityPoolConfigurationCommandOutput} for command's `response` shape.
- * @see {@link CognitoSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoSyncClientResolvedConfig | config} for CognitoSyncClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Thrown if there are parallel requests to modify a resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  Indicates an internal service
+ *       error.
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  Thrown when a request parameter does not comply
+ *       with the associated constraints.
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  Thrown when a user is not authorized to access the
+ *       requested resource.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  Thrown if the resource doesn't
+ *       exist.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Thrown if the request is
+ *       throttled.
+ *
+ * @throws {@link CognitoSyncServiceException}
+ * <p>Base exception class for all service exceptions from CognitoSync service.</p>
+ *
+ *
+ * @public
  */
-export class SetIdentityPoolConfigurationCommand extends $Command<
-  SetIdentityPoolConfigurationCommandInput,
-  SetIdentityPoolConfigurationCommandOutput,
-  CognitoSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SetIdentityPoolConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SetIdentityPoolConfigurationCommandInput, SetIdentityPoolConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoSyncClient";
-    const commandName = "SetIdentityPoolConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SetIdentityPoolConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SetIdentityPoolConfigurationResponse.filterSensitiveLog,
+export class SetIdentityPoolConfigurationCommand extends command<SetIdentityPoolConfigurationCommandInput, SetIdentityPoolConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "SetIdentityPoolConfiguration",
+  SetIdentityPoolConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SetIdentityPoolConfigurationRequest;
+      output: SetIdentityPoolConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SetIdentityPoolConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SetIdentityPoolConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SetIdentityPoolConfigurationCommandOutput> {
-    return deserializeAws_restJson1SetIdentityPoolConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SetIdentityPoolConfigurationCommandInput;
+      output: SetIdentityPoolConfigurationCommandOutput;
+    };
+  };
 }

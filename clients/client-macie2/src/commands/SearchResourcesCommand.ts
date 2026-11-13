@@ -1,95 +1,188 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import { SearchResourcesRequest, SearchResourcesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SearchResourcesCommand,
-  serializeAws_restJson1SearchResourcesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchResourcesRequest, SearchResourcesResponse } from "../models/models_0";
+import { SearchResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchResourcesCommand}.
+ */
 export interface SearchResourcesCommandInput extends SearchResourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchResourcesCommand}.
+ */
 export interface SearchResourcesCommandOutput extends SearchResourcesResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes.</p>
+ * <p>Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes for an account.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Macie2Client, SearchResourcesCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, SearchResourcesCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // SearchResourcesRequest
+ *   bucketCriteria: { // SearchResourcesBucketCriteria
+ *     excludes: { // SearchResourcesCriteriaBlock
+ *       and: [ // __listOfSearchResourcesCriteria
+ *         { // SearchResourcesCriteria
+ *           simpleCriterion: { // SearchResourcesSimpleCriterion
+ *             comparator: "EQ" || "NE",
+ *             key: "ACCOUNT_ID" || "S3_BUCKET_NAME" || "S3_BUCKET_EFFECTIVE_PERMISSION" || "S3_BUCKET_SHARED_ACCESS" || "AUTOMATED_DISCOVERY_MONITORING_STATUS",
+ *             values: [ // __listOf__string
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *           tagCriterion: { // SearchResourcesTagCriterion
+ *             comparator: "EQ" || "NE",
+ *             tagValues: [ // __listOfSearchResourcesTagCriterionPair
+ *               { // SearchResourcesTagCriterionPair
+ *                 key: "STRING_VALUE",
+ *                 value: "STRING_VALUE",
+ *               },
+ *             ],
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     includes: {
+ *       and: [
+ *         {
+ *           simpleCriterion: {
+ *             comparator: "EQ" || "NE",
+ *             key: "ACCOUNT_ID" || "S3_BUCKET_NAME" || "S3_BUCKET_EFFECTIVE_PERMISSION" || "S3_BUCKET_SHARED_ACCESS" || "AUTOMATED_DISCOVERY_MONITORING_STATUS",
+ *             values: [
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *           tagCriterion: {
+ *             comparator: "EQ" || "NE",
+ *             tagValues: [
+ *               {
+ *                 key: "STRING_VALUE",
+ *                 value: "STRING_VALUE",
+ *               },
+ *             ],
+ *           },
+ *         },
+ *       ],
+ *     },
+ *   },
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   sortCriteria: { // SearchResourcesSortCriteria
+ *     attributeName: "ACCOUNT_ID" || "RESOURCE_NAME" || "S3_CLASSIFIABLE_OBJECT_COUNT" || "S3_CLASSIFIABLE_SIZE_IN_BYTES",
+ *     orderBy: "ASC" || "DESC",
+ *   },
+ * };
  * const command = new SearchResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // SearchResourcesResponse
+ * //   matchingResources: [ // __listOfMatchingResource
+ * //     { // MatchingResource
+ * //       matchingBucket: { // MatchingBucket
+ * //         accountId: "STRING_VALUE",
+ * //         automatedDiscoveryMonitoringStatus: "MONITORED" || "NOT_MONITORED",
+ * //         bucketName: "STRING_VALUE",
+ * //         classifiableObjectCount: Number("long"),
+ * //         classifiableSizeInBytes: Number("long"),
+ * //         errorCode: "ACCESS_DENIED" || "BUCKET_COUNT_EXCEEDS_QUOTA",
+ * //         errorMessage: "STRING_VALUE",
+ * //         jobDetails: { // JobDetails
+ * //           isDefinedInJob: "TRUE" || "FALSE" || "UNKNOWN",
+ * //           isMonitoredByJob: "TRUE" || "FALSE" || "UNKNOWN",
+ * //           lastJobId: "STRING_VALUE",
+ * //           lastJobRunTime: new Date("TIMESTAMP"),
+ * //         },
+ * //         lastAutomatedDiscoveryTime: new Date("TIMESTAMP"),
+ * //         objectCount: Number("long"),
+ * //         objectCountByEncryptionType: { // ObjectCountByEncryptionType
+ * //           customerManaged: Number("long"),
+ * //           kmsManaged: Number("long"),
+ * //           s3Managed: Number("long"),
+ * //           unencrypted: Number("long"),
+ * //           unknown: Number("long"),
+ * //         },
+ * //         sensitivityScore: Number("int"),
+ * //         sizeInBytes: Number("long"),
+ * //         sizeInBytesCompressed: Number("long"),
+ * //         unclassifiableObjectCount: { // ObjectLevelStatistics
+ * //           fileType: Number("long"),
+ * //           storageClass: Number("long"),
+ * //           total: Number("long"),
+ * //         },
+ * //         unclassifiableObjectSizeInBytes: {
+ * //           fileType: Number("long"),
+ * //           storageClass: Number("long"),
+ * //           total: Number("long"),
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchResourcesCommandInput - {@link SearchResourcesCommandInput}
+ * @returns {@link SearchResourcesCommandOutput}
  * @see {@link SearchResourcesCommandInput} for command's `input` shape.
  * @see {@link SearchResourcesCommandOutput} for command's `response` shape.
- * @see {@link Macie2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class SearchResourcesCommand extends $Command<
-  SearchResourcesCommandInput,
-  SearchResourcesCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchResourcesCommandInput, SearchResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "SearchResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchResourcesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchResourcesResponse.filterSensitiveLog,
+export class SearchResourcesCommand extends command<SearchResourcesCommandInput, SearchResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchResources",
+  SearchResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchResourcesRequest;
+      output: SearchResourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchResourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchResourcesCommandOutput> {
-    return deserializeAws_restJson1SearchResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchResourcesCommandInput;
+      output: SearchResourcesCommandOutput;
+    };
+  };
 }

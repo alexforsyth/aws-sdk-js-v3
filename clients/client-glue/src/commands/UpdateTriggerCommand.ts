@@ -1,95 +1,164 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { UpdateTriggerRequest, UpdateTriggerResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1UpdateTriggerCommand,
-  serializeAws_json1_1UpdateTriggerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTriggerRequest, UpdateTriggerResponse } from "../models/models_3";
+import { UpdateTrigger$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTriggerCommand}.
+ */
 export interface UpdateTriggerCommandInput extends UpdateTriggerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTriggerCommand}.
+ */
 export interface UpdateTriggerCommandOutput extends UpdateTriggerResponse, __MetadataBearer {}
 
 /**
  * <p>Updates a trigger definition.</p>
+ *          <p>Job arguments may be logged. Do not pass plaintext secrets as arguments. Retrieve secrets from a Glue Connection, Amazon Web Services Secrets Manager or other secret management mechanism if you intend to keep them within the Job.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlueClient, UpdateTriggerCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, UpdateTriggerCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // UpdateTriggerRequest
+ *   Name: "STRING_VALUE", // required
+ *   TriggerUpdate: { // TriggerUpdate
+ *     Name: "STRING_VALUE",
+ *     Description: "STRING_VALUE",
+ *     Schedule: "STRING_VALUE",
+ *     Actions: [ // ActionList
+ *       { // Action
+ *         JobName: "STRING_VALUE",
+ *         Arguments: { // GenericMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         Timeout: Number("int"),
+ *         SecurityConfiguration: "STRING_VALUE",
+ *         NotificationProperty: { // NotificationProperty
+ *           NotifyDelayAfter: Number("int"),
+ *         },
+ *         CrawlerName: "STRING_VALUE",
+ *       },
+ *     ],
+ *     Predicate: { // Predicate
+ *       Logical: "AND" || "ANY",
+ *       Conditions: [ // ConditionList
+ *         { // Condition
+ *           LogicalOperator: "EQUALS",
+ *           JobName: "STRING_VALUE",
+ *           State: "STARTING" || "RUNNING" || "STOPPING" || "STOPPED" || "SUCCEEDED" || "FAILED" || "TIMEOUT" || "ERROR" || "WAITING" || "EXPIRED",
+ *           CrawlerName: "STRING_VALUE",
+ *           CrawlState: "RUNNING" || "CANCELLING" || "CANCELLED" || "SUCCEEDED" || "FAILED" || "ERROR",
+ *         },
+ *       ],
+ *     },
+ *     EventBatchingCondition: { // EventBatchingCondition
+ *       BatchSize: Number("int"), // required
+ *       BatchWindow: Number("int"),
+ *     },
+ *   },
+ * };
  * const command = new UpdateTriggerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateTriggerResponse
+ * //   Trigger: { // Trigger
+ * //     Name: "STRING_VALUE",
+ * //     WorkflowName: "STRING_VALUE",
+ * //     Id: "STRING_VALUE",
+ * //     Type: "SCHEDULED" || "CONDITIONAL" || "ON_DEMAND" || "EVENT",
+ * //     State: "CREATING" || "CREATED" || "ACTIVATING" || "ACTIVATED" || "DEACTIVATING" || "DEACTIVATED" || "DELETING" || "UPDATING",
+ * //     Description: "STRING_VALUE",
+ * //     Schedule: "STRING_VALUE",
+ * //     Actions: [ // ActionList
+ * //       { // Action
+ * //         JobName: "STRING_VALUE",
+ * //         Arguments: { // GenericMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         Timeout: Number("int"),
+ * //         SecurityConfiguration: "STRING_VALUE",
+ * //         NotificationProperty: { // NotificationProperty
+ * //           NotifyDelayAfter: Number("int"),
+ * //         },
+ * //         CrawlerName: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Predicate: { // Predicate
+ * //       Logical: "AND" || "ANY",
+ * //       Conditions: [ // ConditionList
+ * //         { // Condition
+ * //           LogicalOperator: "EQUALS",
+ * //           JobName: "STRING_VALUE",
+ * //           State: "STARTING" || "RUNNING" || "STOPPING" || "STOPPED" || "SUCCEEDED" || "FAILED" || "TIMEOUT" || "ERROR" || "WAITING" || "EXPIRED",
+ * //           CrawlerName: "STRING_VALUE",
+ * //           CrawlState: "RUNNING" || "CANCELLING" || "CANCELLED" || "SUCCEEDED" || "FAILED" || "ERROR",
+ * //         },
+ * //       ],
+ * //     },
+ * //     EventBatchingCondition: { // EventBatchingCondition
+ * //       BatchSize: Number("int"), // required
+ * //       BatchWindow: Number("int"),
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateTriggerCommandInput - {@link UpdateTriggerCommandInput}
+ * @returns {@link UpdateTriggerCommandOutput}
  * @see {@link UpdateTriggerCommandInput} for command's `input` shape.
  * @see {@link UpdateTriggerCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTriggerCommand extends $Command<
-  UpdateTriggerCommandInput,
-  UpdateTriggerCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTriggerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTriggerCommandInput, UpdateTriggerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "UpdateTriggerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTriggerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTriggerResponse.filterSensitiveLog,
+export class UpdateTriggerCommand extends command<UpdateTriggerCommandInput, UpdateTriggerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTrigger",
+  UpdateTrigger$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTriggerRequest;
+      output: UpdateTriggerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTriggerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateTriggerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateTriggerCommandOutput> {
-    return deserializeAws_json1_1UpdateTriggerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTriggerCommandInput;
+      output: UpdateTriggerCommandOutput;
+    };
+  };
 }

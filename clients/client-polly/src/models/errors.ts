@@ -1,0 +1,663 @@
+// smithy-typescript generated code
+import type { ExceptionOptionType as __ExceptionOptionType } from "@smithy/core/client";
+
+import type { QuotaCode, ResourceType, ServiceCode, ValidationExceptionReason } from "./enums";
+import type { ThrottlingReason, ValidationExceptionField } from "./models_0";
+import { PollyServiceException as __BaseException } from "./PollyServiceException";
+
+/**
+ * <p>Amazon Polly can't find the specified lexicon. This could be caused by a
+ *       lexicon that is missing, its name is misspelled or specifying a lexicon
+ *       that is in a different region.</p>
+ *          <p>Verify that the lexicon exists, is in the region (see <a>ListLexicons</a>) and that you spelled its name is spelled
+ *       correctly. Then try again.</p>
+ * @public
+ */
+export class LexiconNotFoundException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#LexiconNotFoundException";
+  readonly name = "LexiconNotFoundException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<LexiconNotFoundException, __BaseException>) {
+    super({
+      name: "LexiconNotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, LexiconNotFoundException.prototype);
+  }
+}
+
+/**
+ * <p>An unknown condition has caused a service failure.</p>
+ * @public
+ */
+export class ServiceFailureException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#ServiceFailureException";
+  readonly name = "ServiceFailureException" as const;
+  readonly $fault = "server" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ServiceFailureException, __BaseException>) {
+    super({
+      name: "ServiceFailureException",
+      $fault: "server",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ServiceFailureException.prototype);
+  }
+}
+
+/**
+ * <p>The NextToken is invalid. Verify that it's spelled correctly, and
+ *       then try again.</p>
+ * @public
+ */
+export class InvalidNextTokenException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidNextTokenException";
+  readonly name = "InvalidNextTokenException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidNextTokenException, __BaseException>) {
+    super({
+      name: "InvalidNextTokenException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidNextTokenException.prototype);
+  }
+}
+
+/**
+ * <p>This engine is not compatible with the voice that you have designated.
+ *       Choose a new voice that is compatible with the engine or change the engine
+ *       and restart the operation.</p>
+ * @public
+ */
+export class EngineNotSupportedException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#EngineNotSupportedException";
+  readonly name = "EngineNotSupportedException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<EngineNotSupportedException, __BaseException>) {
+    super({
+      name: "EngineNotSupportedException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, EngineNotSupportedException.prototype);
+  }
+}
+
+/**
+ * <p>The provided Task ID is not valid. Please provide a valid Task ID and
+ *       try again.</p>
+ * @public
+ */
+export class InvalidTaskIdException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidTaskIdException";
+  readonly name = "InvalidTaskIdException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidTaskIdException, __BaseException>) {
+    super({
+      name: "InvalidTaskIdException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidTaskIdException.prototype);
+  }
+}
+
+/**
+ * <p>The Speech Synthesis task with requested Task ID cannot be
+ *       found.</p>
+ * @public
+ */
+export class SynthesisTaskNotFoundException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#SynthesisTaskNotFoundException";
+  readonly name = "SynthesisTaskNotFoundException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<SynthesisTaskNotFoundException, __BaseException>) {
+    super({
+      name: "SynthesisTaskNotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, SynthesisTaskNotFoundException.prototype);
+  }
+}
+
+/**
+ * <p>Amazon Polly can't find the specified lexicon. Verify that the lexicon's
+ *       name is spelled correctly, and then try again.</p>
+ * @public
+ */
+export class InvalidLexiconException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidLexiconException";
+  readonly name = "InvalidLexiconException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidLexiconException, __BaseException>) {
+    super({
+      name: "InvalidLexiconException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidLexiconException.prototype);
+  }
+}
+
+/**
+ * <p>The provided Amazon S3 bucket name is invalid. Please check your input
+ *       with S3 bucket naming requirements and try again.</p>
+ * @public
+ */
+export class InvalidS3BucketException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidS3BucketException";
+  readonly name = "InvalidS3BucketException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidS3BucketException, __BaseException>) {
+    super({
+      name: "InvalidS3BucketException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidS3BucketException.prototype);
+  }
+}
+
+/**
+ * <p>The provided Amazon S3 key prefix is invalid. Please provide a valid
+ *       S3 object key name.</p>
+ * @public
+ */
+export class InvalidS3KeyException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidS3KeyException";
+  readonly name = "InvalidS3KeyException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidS3KeyException, __BaseException>) {
+    super({
+      name: "InvalidS3KeyException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidS3KeyException.prototype);
+  }
+}
+
+/**
+ * <p>The specified sample rate is not valid.</p>
+ * @public
+ */
+export class InvalidSampleRateException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidSampleRateException";
+  readonly name = "InvalidSampleRateException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidSampleRateException, __BaseException>) {
+    super({
+      name: "InvalidSampleRateException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidSampleRateException.prototype);
+  }
+}
+
+/**
+ * <p>The provided SNS topic ARN is invalid. Please provide a valid SNS
+ *       topic ARN and try again.</p>
+ * @public
+ */
+export class InvalidSnsTopicArnException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidSnsTopicArnException";
+  readonly name = "InvalidSnsTopicArnException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidSnsTopicArnException, __BaseException>) {
+    super({
+      name: "InvalidSnsTopicArnException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidSnsTopicArnException.prototype);
+  }
+}
+
+/**
+ * <p>The SSML you provided is invalid. Verify the SSML syntax, spelling
+ *       of tags and values, and then try again.</p>
+ * @public
+ */
+export class InvalidSsmlException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidSsmlException";
+  readonly name = "InvalidSsmlException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidSsmlException, __BaseException>) {
+    super({
+      name: "InvalidSsmlException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidSsmlException.prototype);
+  }
+}
+
+/**
+ * <p>The resource ARN or a tag in the request isn't valid. Specify the ARN
+ *       of a supported resource in the Amazon Web Services account and Region of the request.
+ *       Tag keys can have a maximum length of 128 characters, and tag values can
+ *       have a maximum length of 256 characters. Correct the ARN or the tags, and
+ *       then try again.</p>
+ * @public
+ */
+export class InvalidTagParameterException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#InvalidTagParameterException";
+  readonly name = "InvalidTagParameterException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<InvalidTagParameterException, __BaseException>) {
+    super({
+      name: "InvalidTagParameterException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, InvalidTagParameterException.prototype);
+  }
+}
+
+/**
+ * <p>The language specified is not currently supported by Amazon Polly in this
+ *       capacity.</p>
+ * @public
+ */
+export class LanguageNotSupportedException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#LanguageNotSupportedException";
+  readonly name = "LanguageNotSupportedException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<LanguageNotSupportedException, __BaseException>) {
+    super({
+      name: "LanguageNotSupportedException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, LanguageNotSupportedException.prototype);
+  }
+}
+
+/**
+ * <p>The maximum size of the specified lexicon would be exceeded by this
+ *       operation.</p>
+ * @public
+ */
+export class LexiconSizeExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#LexiconSizeExceededException";
+  readonly name = "LexiconSizeExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<LexiconSizeExceededException, __BaseException>) {
+    super({
+      name: "LexiconSizeExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, LexiconSizeExceededException.prototype);
+  }
+}
+
+/**
+ * <p>Amazon Polly can't find the specified resource. Verify that the resource
+ *       exists in the Amazon Web Services account and Region of the request and that its ARN is
+ *       spelled correctly, and then try again.</p>
+ * @public
+ */
+export class ResourceNotFoundException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#ResourceNotFoundException";
+  readonly name = "ResourceNotFoundException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * <p>The identifier of the resource that wasn't found.</p>
+   * @public
+   */
+  resourceId: string | undefined;
+
+  /**
+   * <p>The type of the resource that wasn't found.</p>
+   * @public
+   */
+  resourceType: ResourceType | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
+    super({
+      name: "ResourceNotFoundException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
+    this.resourceId = opts.resourceId;
+    this.resourceType = opts.resourceType;
+  }
+}
+
+/**
+ * <p>The request was denied because of request throttling.</p>
+ * @public
+ */
+export class ThrottlingException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#ThrottlingException";
+  readonly name = "ThrottlingException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * <p>A list of reasons explaining why the request was throttled.</p>
+   * @public
+   */
+  throttlingReasons?: ThrottlingReason[] | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ThrottlingException, __BaseException>) {
+    super({
+      name: "ThrottlingException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ThrottlingException.prototype);
+    this.throttlingReasons = opts.throttlingReasons;
+  }
+}
+
+/**
+ * <p>The input fails to satisfy the constraints specified by the service.</p>
+ * @public
+ */
+export class ValidationException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#ValidationException";
+  readonly name = "ValidationException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * <p>The reason the request failed validation.</p>
+   * @public
+   */
+  reason: ValidationExceptionReason | undefined;
+
+  /**
+   * <p>The fields that caused the validation error.</p>
+   * @public
+   */
+  fields?: ValidationExceptionField[] | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ValidationException, __BaseException>) {
+    super({
+      name: "ValidationException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ValidationException.prototype);
+    this.reason = opts.reason;
+    this.fields = opts.fields;
+  }
+}
+
+/**
+ * <p>Speech marks are not supported for the <code>OutputFormat</code>
+ *       selected. Speech marks are only available for content in <code>json</code>
+ *       format.</p>
+ * @public
+ */
+export class MarksNotSupportedForFormatException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#MarksNotSupportedForFormatException";
+  readonly name = "MarksNotSupportedForFormatException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<MarksNotSupportedForFormatException, __BaseException>) {
+    super({
+      name: "MarksNotSupportedForFormatException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, MarksNotSupportedForFormatException.prototype);
+  }
+}
+
+/**
+ * <p>The maximum size of the lexeme would be exceeded by this
+ *       operation.</p>
+ * @public
+ */
+export class MaxLexemeLengthExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#MaxLexemeLengthExceededException";
+  readonly name = "MaxLexemeLengthExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<MaxLexemeLengthExceededException, __BaseException>) {
+    super({
+      name: "MaxLexemeLengthExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, MaxLexemeLengthExceededException.prototype);
+  }
+}
+
+/**
+ * <p>The maximum number of lexicons would be exceeded by this
+ *       operation.</p>
+ * @public
+ */
+export class MaxLexiconsNumberExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#MaxLexiconsNumberExceededException";
+  readonly name = "MaxLexiconsNumberExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<MaxLexiconsNumberExceededException, __BaseException>) {
+    super({
+      name: "MaxLexiconsNumberExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, MaxLexiconsNumberExceededException.prototype);
+  }
+}
+
+/**
+ * <p>The list of tags on the resource is over the limit. The maximum number
+ *       of tags that can be applied to a resource is 50. Remove unused tags or
+ *       reduce the number of tags in the request, and then try again.</p>
+ * @public
+ */
+export class TooManyTagsException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#TooManyTagsException";
+  readonly name = "TooManyTagsException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<TooManyTagsException, __BaseException>) {
+    super({
+      name: "TooManyTagsException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, TooManyTagsException.prototype);
+  }
+}
+
+/**
+ * <p>The alphabet specified by the lexicon is not a supported alphabet.
+ *       Valid values are <code>ipa</code>, <code>x-sampa</code>,
+ *       <code>x-amazon-pinyin</code>, <code>x-amazon-jyutping</code>,
+ *       <code>x-amazon-pron-kana</code>, and
+ *       <code>x-amazon-yomigana</code>. Replace the unsupported alphabet
+ *       with one of the valid values and resubmit your request.</p>
+ * @public
+ */
+export class UnsupportedPlsAlphabetException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#UnsupportedPlsAlphabetException";
+  readonly name = "UnsupportedPlsAlphabetException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<UnsupportedPlsAlphabetException, __BaseException>) {
+    super({
+      name: "UnsupportedPlsAlphabetException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, UnsupportedPlsAlphabetException.prototype);
+  }
+}
+
+/**
+ * <p>The language specified in the lexicon is unsupported. For a list of
+ *       supported languages, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html">Lexicon Attributes</a>.</p>
+ * @public
+ */
+export class UnsupportedPlsLanguageException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#UnsupportedPlsLanguageException";
+  readonly name = "UnsupportedPlsLanguageException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<UnsupportedPlsLanguageException, __BaseException>) {
+    super({
+      name: "UnsupportedPlsLanguageException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, UnsupportedPlsLanguageException.prototype);
+  }
+}
+
+/**
+ * <p>The request would cause a service quota to be exceeded.</p>
+ * @public
+ */
+export class ServiceQuotaExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#ServiceQuotaExceededException";
+  readonly name = "ServiceQuotaExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * <p>The quota code identifying the specific quota.</p>
+   * @public
+   */
+  quotaCode: QuotaCode | undefined;
+
+  /**
+   * <p>The service code identifying the originating service.</p>
+   * @public
+   */
+  serviceCode: ServiceCode | undefined;
+
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<ServiceQuotaExceededException, __BaseException>) {
+    super({
+      name: "ServiceQuotaExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, ServiceQuotaExceededException.prototype);
+    this.quotaCode = opts.quotaCode;
+    this.serviceCode = opts.serviceCode;
+  }
+}
+
+/**
+ * <p>SSML speech marks are not supported for plain text-type
+ *       input.</p>
+ * @public
+ */
+export class SsmlMarksNotSupportedForTextTypeException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#SsmlMarksNotSupportedForTextTypeException";
+  readonly name = "SsmlMarksNotSupportedForTextTypeException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<SsmlMarksNotSupportedForTextTypeException, __BaseException>) {
+    super({
+      name: "SsmlMarksNotSupportedForTextTypeException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, SsmlMarksNotSupportedForTextTypeException.prototype);
+  }
+}
+
+/**
+ * <p>The value of the "Text" parameter is longer than the accepted
+ *       limits. For the <code>SynthesizeSpeech</code> API, the limit for input
+ *       text is a maximum of 6000 characters total, of which no more than 3000 can
+ *       be billed characters. For the <code>StartSpeechSynthesisTask</code> API,
+ *       the maximum is 200,000 characters, of which no more than 100,000 can be
+ *       billed characters. SSML tags are not counted as billed
+ *       characters.</p>
+ * @public
+ */
+export class TextLengthExceededException extends __BaseException {
+  public static readonly shapeId: string = "com.amazonaws.polly#TextLengthExceededException";
+  readonly name = "TextLengthExceededException" as const;
+  readonly $fault = "client" as const;
+  /**
+   * @internal
+   */
+  constructor(opts: __ExceptionOptionType<TextLengthExceededException, __BaseException>) {
+    super({
+      name: "TextLengthExceededException",
+      $fault: "client",
+      ...opts,
+    });
+    Object.setPrototypeOf(this, TextLengthExceededException.prototype);
+  }
+}

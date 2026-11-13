@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataExchangeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataExchangeClient";
-import { UpdateDataSetRequest, UpdateDataSetResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateDataSetCommand,
-  serializeAws_restJson1UpdateDataSetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDataSetRequest, UpdateDataSetResponse } from "../models/models_0";
+import { UpdateDataSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDataSetCommand}.
+ */
 export interface UpdateDataSetCommandInput extends UpdateDataSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDataSetCommand}.
+ */
 export interface UpdateDataSetCommandOutput extends UpdateDataSetResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,76 @@ export interface UpdateDataSetCommandOutput extends UpdateDataSetResponse, __Met
  * ```javascript
  * import { DataExchangeClient, UpdateDataSetCommand } from "@aws-sdk/client-dataexchange"; // ES Modules import
  * // const { DataExchangeClient, UpdateDataSetCommand } = require("@aws-sdk/client-dataexchange"); // CommonJS import
+ * // import type { DataExchangeClientConfig } from "@aws-sdk/client-dataexchange";
+ * const config = {}; // type is DataExchangeClientConfig
  * const client = new DataExchangeClient(config);
+ * const input = { // UpdateDataSetRequest
+ *   DataSetId: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Name: "STRING_VALUE",
+ * };
  * const command = new UpdateDataSetCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDataSetResponse
+ * //   Arn: "STRING_VALUE",
+ * //   AssetType: "STRING_VALUE",
+ * //   CreatedAt: new Date("TIMESTAMP"),
+ * //   Description: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Origin: "STRING_VALUE",
+ * //   OriginDetails: { // OriginDetails
+ * //     ProductId: "STRING_VALUE",
+ * //     DataGrantId: "STRING_VALUE",
+ * //   },
+ * //   SourceId: "STRING_VALUE",
+ * //   UpdatedAt: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateDataSetCommandInput - {@link UpdateDataSetCommandInput}
+ * @returns {@link UpdateDataSetCommandOutput}
  * @see {@link UpdateDataSetCommandInput} for command's `input` shape.
  * @see {@link UpdateDataSetCommandOutput} for command's `response` shape.
- * @see {@link DataExchangeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataExchangeClientResolvedConfig | config} for DataExchangeClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to the resource is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was invalid.</p>
+ *
+ * @throws {@link DataExchangeServiceException}
+ * <p>Base exception class for all service exceptions from DataExchange service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDataSetCommand extends $Command<
-  UpdateDataSetCommandInput,
-  UpdateDataSetCommandOutput,
-  DataExchangeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDataSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataExchangeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDataSetCommandInput, UpdateDataSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataExchangeClient";
-    const commandName = "UpdateDataSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDataSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDataSetResponse.filterSensitiveLog,
+export class UpdateDataSetCommand extends command<UpdateDataSetCommandInput, UpdateDataSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDataSet",
+  UpdateDataSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDataSetRequest;
+      output: UpdateDataSetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDataSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDataSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDataSetCommandOutput> {
-    return deserializeAws_restJson1UpdateDataSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDataSetCommandInput;
+      output: UpdateDataSetCommandOutput;
+    };
+  };
 }

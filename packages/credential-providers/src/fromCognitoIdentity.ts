@@ -1,16 +1,13 @@
-import { CognitoIdentityClient, CognitoIdentityClientConfig } from "@aws-sdk/client-cognito-identity";
-import {
+import type {
   CognitoIdentityCredentialProvider as _CognitoIdentityCredentialProvider,
-  fromCognitoIdentity as _fromCognitoIdentity,
   FromCognitoIdentityParameters as _FromCognitoIdentityParameters,
 } from "@aws-sdk/credential-provider-cognito-identity";
+import type { AwsIdentityProperties } from "@aws-sdk/types";
 
-export interface FromCognitoIdentityParameters extends Omit<_FromCognitoIdentityParameters, "client"> {
-  /**
-   * Custom client configuration if you need overwrite default Cognito Identity client configuration.
-   */
-  clientConfig?: CognitoIdentityClientConfig;
-}
+/**
+ * @public
+ */
+export interface FromCognitoIdentityParameters extends Omit<_FromCognitoIdentityParameters, "client"> {}
 
 export type CognitoIdentityCredentialProvider = _CognitoIdentityCredentialProvider;
 
@@ -48,9 +45,12 @@ export type CognitoIdentityCredentialProvider = _CognitoIdentityCredentialProvid
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromCognitoIdentity = (options: FromCognitoIdentityParameters): CognitoIdentityCredentialProvider =>
-  _fromCognitoIdentity({
-    ...options,
-    client: new CognitoIdentityClient(options.clientConfig ?? {}),
-  });
+export const fromCognitoIdentity = (options: FromCognitoIdentityParameters): CognitoIdentityCredentialProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromCognitoIdentity: _fromCognitoIdentity } = await import("@aws-sdk/credential-provider-cognito-identity");
+    return _fromCognitoIdentity(options)(args);
+  };
+};

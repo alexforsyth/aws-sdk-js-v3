@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DAXClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DAXClient";
-import { CreateParameterGroupRequest, CreateParameterGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateParameterGroupCommand,
-  serializeAws_json1_1CreateParameterGroupCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateParameterGroupRequest, CreateParameterGroupResponse } from "../models/models_0";
+import { CreateParameterGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateParameterGroupCommand}.
+ */
 export interface CreateParameterGroupCommandInput extends CreateParameterGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateParameterGroupCommand}.
+ */
 export interface CreateParameterGroupCommandOutput extends CreateParameterGroupResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,69 @@ export interface CreateParameterGroupCommandOutput extends CreateParameterGroupR
  * ```javascript
  * import { DAXClient, CreateParameterGroupCommand } from "@aws-sdk/client-dax"; // ES Modules import
  * // const { DAXClient, CreateParameterGroupCommand } = require("@aws-sdk/client-dax"); // CommonJS import
+ * // import type { DAXClientConfig } from "@aws-sdk/client-dax";
+ * const config = {}; // type is DAXClientConfig
  * const client = new DAXClient(config);
+ * const input = { // CreateParameterGroupRequest
+ *   ParameterGroupName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new CreateParameterGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateParameterGroupResponse
+ * //   ParameterGroup: { // ParameterGroup
+ * //     ParameterGroupName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateParameterGroupCommandInput - {@link CreateParameterGroupCommandInput}
+ * @returns {@link CreateParameterGroupCommandOutput}
  * @see {@link CreateParameterGroupCommandInput} for command's `input` shape.
  * @see {@link CreateParameterGroupCommandOutput} for command's `response` shape.
- * @see {@link DAXClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DAXClientResolvedConfig | config} for DAXClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Two or more incompatible parameters were specified.</p>
+ *
+ * @throws {@link InvalidParameterGroupStateFault} (client fault)
+ *  <p>One or more parameters in a parameter group are in an invalid state.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value for a parameter is invalid.</p>
+ *
+ * @throws {@link ParameterGroupAlreadyExistsFault} (client fault)
+ *  <p>The specified parameter group already exists.</p>
+ *
+ * @throws {@link ParameterGroupQuotaExceededFault} (client fault)
+ *  <p>You have attempted to exceed the maximum number of parameter groups.</p>
+ *
+ * @throws {@link ServiceLinkedRoleNotFoundFault} (client fault)
+ *  <p>The specified service linked role (SLR) was not found.</p>
+ *
+ * @throws {@link DAXServiceException}
+ * <p>Base exception class for all service exceptions from DAX service.</p>
+ *
+ *
+ * @public
  */
-export class CreateParameterGroupCommand extends $Command<
-  CreateParameterGroupCommandInput,
-  CreateParameterGroupCommandOutput,
-  DAXClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateParameterGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DAXClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateParameterGroupCommandInput, CreateParameterGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DAXClient";
-    const commandName = "CreateParameterGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateParameterGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateParameterGroupResponse.filterSensitiveLog,
+export class CreateParameterGroupCommand extends command<CreateParameterGroupCommandInput, CreateParameterGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateParameterGroup",
+  CreateParameterGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateParameterGroupRequest;
+      output: CreateParameterGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateParameterGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateParameterGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateParameterGroupCommandOutput> {
-    return deserializeAws_json1_1CreateParameterGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateParameterGroupCommandInput;
+      output: CreateParameterGroupCommandOutput;
+    };
+  };
 }

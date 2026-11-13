@@ -1,95 +1,158 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { CreateConnectionRequest, CreateConnectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateConnectionCommand,
-  serializeAws_json1_1CreateConnectionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateConnectionRequest, CreateConnectionResponse } from "../models/models_1";
+import { CreateConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConnectionCommand}.
+ */
 export interface CreateConnectionCommandInput extends CreateConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConnectionCommand}.
+ */
 export interface CreateConnectionCommandOutput extends CreateConnectionResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a connection definition in the Data Catalog.</p>
+ *          <p>Connections used for creating federated resources require the IAM <code>glue:PassConnection</code> permission.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlueClient, CreateConnectionCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, CreateConnectionCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // CreateConnectionRequest
+ *   CatalogId: "STRING_VALUE",
+ *   ConnectionInput: { // ConnectionInput
+ *     Name: "STRING_VALUE", // required
+ *     Description: "STRING_VALUE",
+ *     ConnectionType: "JDBC" || "SFTP" || "MONGODB" || "KAFKA" || "NETWORK" || "MARKETPLACE" || "CUSTOM" || "SALESFORCE" || "VIEW_VALIDATION_REDSHIFT" || "VIEW_VALIDATION_ATHENA" || "GOOGLEADS" || "GOOGLESHEETS" || "GOOGLEANALYTICS4" || "SERVICENOW" || "MARKETO" || "SAPODATA" || "ZENDESK" || "JIRACLOUD" || "NETSUITEERP" || "HUBSPOT" || "FACEBOOKADS" || "INSTAGRAMADS" || "ZOHOCRM" || "SALESFORCEPARDOT" || "SALESFORCEMARKETINGCLOUD" || "ADOBEANALYTICS" || "SLACK" || "LINKEDIN" || "MIXPANEL" || "ASANA" || "STRIPE" || "SMARTSHEET" || "DATADOG" || "WOOCOMMERCE" || "INTERCOM" || "SNAPCHATADS" || "PAYPAL" || "QUICKBOOKS" || "FACEBOOKPAGEINSIGHTS" || "FRESHDESK" || "TWILIO" || "DOCUSIGNMONITOR" || "FRESHSALES" || "ZOOM" || "GOOGLESEARCHCONSOLE" || "SALESFORCECOMMERCECLOUD" || "SAPCONCUR" || "DYNATRACE" || "MICROSOFTDYNAMIC365FINANCEANDOPS" || "MICROSOFTTEAMS" || "BLACKBAUDRAISEREDGENXT" || "MAILCHIMP" || "GITLAB" || "PENDO" || "PRODUCTBOARD" || "CIRCLECI" || "PIPEDIVE" || "SENDGRID" || "AZURECOSMOS" || "AZURESQL" || "BIGQUERY" || "BLACKBAUD" || "CLOUDERAHIVE" || "CLOUDERAIMPALA" || "CLOUDWATCH" || "CLOUDWATCHMETRICS" || "CMDB" || "DATALAKEGEN2" || "DB2" || "DB2AS400" || "DOCUMENTDB" || "DOMO" || "DYNAMODB" || "GOOGLECLOUDSTORAGE" || "HBASE" || "KUSTOMER" || "MICROSOFTDYNAMICS365CRM" || "MONDAY" || "MYSQL" || "OKTA" || "OPENSEARCH" || "ORACLE" || "PIPEDRIVE" || "POSTGRESQL" || "SAPHANA" || "SQLSERVER" || "SYNAPSE" || "TERADATA" || "TERADATANOS" || "TIMESTREAM" || "TPCDS" || "VERTICA", // required
+ *     MatchCriteria: [ // MatchCriteria
+ *       "STRING_VALUE",
+ *     ],
+ *     ConnectionProperties: { // ConnectionProperties // required
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     SparkProperties: { // PropertyMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     AthenaProperties: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     PythonProperties: {
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     PhysicalConnectionRequirements: { // PhysicalConnectionRequirements
+ *       SubnetId: "STRING_VALUE",
+ *       SecurityGroupIdList: [ // SecurityGroupIdList
+ *         "STRING_VALUE",
+ *       ],
+ *       AvailabilityZone: "STRING_VALUE",
+ *     },
+ *     AuthenticationConfiguration: { // AuthenticationConfigurationInput
+ *       AuthenticationType: "BASIC" || "OAUTH2" || "CUSTOM" || "IAM",
+ *       OAuth2Properties: { // OAuth2PropertiesInput
+ *         OAuth2GrantType: "AUTHORIZATION_CODE" || "CLIENT_CREDENTIALS" || "JWT_BEARER" || "REFRESH_TOKEN",
+ *         OAuth2ClientApplication: { // OAuth2ClientApplication
+ *           UserManagedClientApplicationClientId: "STRING_VALUE",
+ *           AWSManagedClientApplicationReference: "STRING_VALUE",
+ *         },
+ *         TokenUrl: "STRING_VALUE",
+ *         TokenUrlParametersMap: { // TokenUrlParametersMap
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         AuthorizationCodeProperties: { // AuthorizationCodeProperties
+ *           AuthorizationCode: "STRING_VALUE",
+ *           RedirectUri: "STRING_VALUE",
+ *         },
+ *         OAuth2Credentials: { // OAuth2Credentials
+ *           UserManagedClientApplicationClientSecret: "STRING_VALUE",
+ *           AccessToken: "STRING_VALUE",
+ *           RefreshToken: "STRING_VALUE",
+ *           JwtToken: "STRING_VALUE",
+ *         },
+ *       },
+ *       SecretArn: "STRING_VALUE",
+ *       KmsKeyArn: "STRING_VALUE",
+ *       BasicAuthenticationCredentials: { // BasicAuthenticationCredentials
+ *         Username: "STRING_VALUE",
+ *         Password: "STRING_VALUE",
+ *       },
+ *       CustomAuthenticationCredentials: { // CredentialMap
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *     ValidateCredentials: true || false,
+ *     ValidateForComputeEnvironments: [ // ComputeEnvironmentList
+ *       "SPARK" || "ATHENA" || "PYTHON",
+ *     ],
+ *   },
+ *   Tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateConnectionResponse
+ * //   CreateConnectionStatus: "READY" || "IN_PROGRESS" || "FAILED",
+ * // };
+ *
  * ```
  *
+ * @param CreateConnectionCommandInput - {@link CreateConnectionCommandInput}
+ * @returns {@link CreateConnectionCommandOutput}
  * @see {@link CreateConnectionCommandInput} for command's `input` shape.
  * @see {@link CreateConnectionCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>A resource to be created or added already exists.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConnectionCommand extends $Command<
-  CreateConnectionCommandInput,
-  CreateConnectionCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConnectionCommandInput, CreateConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "CreateConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConnectionResponse.filterSensitiveLog,
+export class CreateConnectionCommand extends command<CreateConnectionCommandInput, CreateConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConnection",
+  CreateConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConnectionRequest;
+      output: CreateConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateConnectionCommandOutput> {
-    return deserializeAws_json1_1CreateConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConnectionCommandInput;
+      output: CreateConnectionCommandOutput;
+    };
+  };
 }

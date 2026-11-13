@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { Backup } from "../Backup";
 import { BackupClient } from "../BackupClient";
 import {
   ListProtectedResourcesCommand,
   ListProtectedResourcesCommandInput,
   ListProtectedResourcesCommandOutput,
 } from "../commands/ListProtectedResourcesCommand";
-import { BackupPaginationConfiguration } from "./Interfaces";
+import type { BackupPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: BackupClient,
-  input: ListProtectedResourcesCommandInput,
-  ...args: any
-): Promise<ListProtectedResourcesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListProtectedResourcesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Backup,
-  input: ListProtectedResourcesCommandInput,
-  ...args: any
-): Promise<ListProtectedResourcesCommandOutput> => {
-  // @ts-ignore
-  return await client.listProtectedResources(input, ...args);
-};
-export async function* paginateListProtectedResources(
+export const paginateListProtectedResources: (
   config: BackupPaginationConfiguration,
   input: ListProtectedResourcesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListProtectedResourcesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListProtectedResourcesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof Backup) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof BackupClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Backup | BackupClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListProtectedResourcesCommandOutput> = createPaginator<
+  BackupPaginationConfiguration,
+  ListProtectedResourcesCommandInput,
+  ListProtectedResourcesCommandOutput
+>(BackupClient, ListProtectedResourcesCommand, "NextToken", "NextToken", "MaxResults");

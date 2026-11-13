@@ -1,100 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListStackSetOperationResultsInput, ListStackSetOperationResultsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryListStackSetOperationResultsCommand,
-  serializeAws_queryListStackSetOperationResultsCommand,
-} from "../protocols/Aws_query";
-
-export interface ListStackSetOperationResultsCommandInput extends ListStackSetOperationResultsInput {}
-export interface ListStackSetOperationResultsCommandOutput
-  extends ListStackSetOperationResultsOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStackSetOperationResultsInput, ListStackSetOperationResultsOutput } from "../models/models_0";
+import { ListStackSetOperationResults$ } from "../schemas/schemas_0";
 
 /**
- * <p>Returns summary information about the results of a stack set operation. </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStackSetOperationResultsCommand}.
+ */
+export interface ListStackSetOperationResultsCommandInput extends ListStackSetOperationResultsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStackSetOperationResultsCommand}.
+ */
+export interface ListStackSetOperationResultsCommandOutput extends ListStackSetOperationResultsOutput, __MetadataBearer {}
+
+/**
+ * <p>Returns summary information about the results of a StackSet operation.</p>
+ *          <note>
+ *             <p>This API provides <i>eventually consistent</i> reads meaning it may take
+ *         some time but will eventually return the most up-to-date data.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, ListStackSetOperationResultsCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListStackSetOperationResultsCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListStackSetOperationResultsInput
+ *   StackSetName: "STRING_VALUE", // required
+ *   OperationId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   CallAs: "SELF" || "DELEGATED_ADMIN",
+ *   Filters: [ // OperationResultFilters
+ *     { // OperationResultFilter
+ *       Name: "OPERATION_RESULT_STATUS",
+ *       Values: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new ListStackSetOperationResultsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStackSetOperationResultsOutput
+ * //   Summaries: [ // StackSetOperationResultSummaries
+ * //     { // StackSetOperationResultSummary
+ * //       Account: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //       Status: "PENDING" || "RUNNING" || "SUCCEEDED" || "FAILED" || "CANCELLED",
+ * //       StatusReason: "STRING_VALUE",
+ * //       AccountGateResult: { // AccountGateResult
+ * //         Status: "SUCCEEDED" || "FAILED" || "SKIPPED",
+ * //         StatusReason: "STRING_VALUE",
+ * //       },
+ * //       OrganizationalUnitId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStackSetOperationResultsCommandInput - {@link ListStackSetOperationResultsCommandInput}
+ * @returns {@link ListStackSetOperationResultsCommandOutput}
  * @see {@link ListStackSetOperationResultsCommandInput} for command's `input` shape.
  * @see {@link ListStackSetOperationResultsCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link OperationNotFoundException} (client fault)
+ *  <p>The specified ID refers to an operation that doesn't exist.</p>
+ *
+ * @throws {@link StackSetNotFoundException} (client fault)
+ *  <p>The specified StackSet doesn't exist.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListStackSetOperationResultsCommand extends $Command<
-  ListStackSetOperationResultsCommandInput,
-  ListStackSetOperationResultsCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStackSetOperationResultsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStackSetOperationResultsCommandInput, ListStackSetOperationResultsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListStackSetOperationResultsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStackSetOperationResultsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStackSetOperationResultsOutput.filterSensitiveLog,
+export class ListStackSetOperationResultsCommand extends command<ListStackSetOperationResultsCommandInput, ListStackSetOperationResultsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStackSetOperationResults",
+  ListStackSetOperationResults$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStackSetOperationResultsInput;
+      output: ListStackSetOperationResultsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStackSetOperationResultsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListStackSetOperationResultsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListStackSetOperationResultsCommandOutput> {
-    return deserializeAws_queryListStackSetOperationResultsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStackSetOperationResultsCommandInput;
+      output: ListStackSetOperationResultsCommandOutput;
+    };
+  };
 }

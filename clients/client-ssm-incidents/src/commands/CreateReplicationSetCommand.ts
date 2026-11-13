@@ -1,96 +1,104 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateReplicationSetInput, CreateReplicationSetOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateReplicationSetCommand,
-  serializeAws_restJson1CreateReplicationSetCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMIncidentsClientResolvedConfig } from "../SSMIncidentsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateReplicationSetInput, CreateReplicationSetOutput } from "../models/models_0";
+import { CreateReplicationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateReplicationSetCommand}.
+ */
 export interface CreateReplicationSetCommandInput extends CreateReplicationSetInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateReplicationSetCommand}.
+ */
 export interface CreateReplicationSetCommandOutput extends CreateReplicationSetOutput, __MetadataBearer {}
 
 /**
  * <p>A replication set replicates and encrypts your data to the provided Regions with the
- *             provided KMS key. </p>
+ *       provided KMS key. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SSMIncidentsClient, CreateReplicationSetCommand } from "@aws-sdk/client-ssm-incidents"; // ES Modules import
  * // const { SSMIncidentsClient, CreateReplicationSetCommand } = require("@aws-sdk/client-ssm-incidents"); // CommonJS import
+ * // import type { SSMIncidentsClientConfig } from "@aws-sdk/client-ssm-incidents";
+ * const config = {}; // type is SSMIncidentsClientConfig
  * const client = new SSMIncidentsClient(config);
+ * const input = { // CreateReplicationSetInput
+ *   regions: { // RegionMapInput // required
+ *     "<keys>": { // RegionMapInputValue
+ *       sseKmsKeyId: "STRING_VALUE",
+ *     },
+ *   },
+ *   clientToken: "STRING_VALUE",
+ *   tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateReplicationSetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateReplicationSetOutput
+ * //   arn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateReplicationSetCommandInput - {@link CreateReplicationSetCommandInput}
+ * @returns {@link CreateReplicationSetCommandOutput}
  * @see {@link CreateReplicationSetCommandInput} for command's `input` shape.
  * @see {@link CreateReplicationSetCommandOutput} for command's `response` shape.
- * @see {@link SSMIncidentsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMIncidentsClientResolvedConfig | config} for SSMIncidentsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource causes an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *       service.</p>
+ *
+ * @throws {@link SSMIncidentsServiceException}
+ * <p>Base exception class for all service exceptions from SSMIncidents service.</p>
+ *
+ *
+ * @public
  */
-export class CreateReplicationSetCommand extends $Command<
-  CreateReplicationSetCommandInput,
-  CreateReplicationSetCommandOutput,
-  SSMIncidentsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateReplicationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMIncidentsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateReplicationSetCommandInput, CreateReplicationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMIncidentsClient";
-    const commandName = "CreateReplicationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateReplicationSetInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateReplicationSetOutput.filterSensitiveLog,
+export class CreateReplicationSetCommand extends command<CreateReplicationSetCommandInput, CreateReplicationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateReplicationSet",
+  CreateReplicationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateReplicationSetInput;
+      output: CreateReplicationSetOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateReplicationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateReplicationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateReplicationSetCommandOutput> {
-    return deserializeAws_restJson1CreateReplicationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateReplicationSetCommandInput;
+      output: CreateReplicationSetCommandOutput;
+    };
+  };
 }

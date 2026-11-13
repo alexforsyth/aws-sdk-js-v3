@@ -1,0 +1,120 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRoutingRulesRequest, ListRoutingRulesResponse } from "../models/models_0";
+import { ListRoutingRules$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRoutingRulesCommand}.
+ */
+export interface ListRoutingRulesCommandInput extends ListRoutingRulesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRoutingRulesCommand}.
+ */
+export interface ListRoutingRulesCommandOutput extends ListRoutingRulesResponse, __MetadataBearer {}
+
+/**
+ * <p>Lists routing rules.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ApiGatewayV2Client, ListRoutingRulesCommand } from "@aws-sdk/client-apigatewayv2"; // ES Modules import
+ * // const { ApiGatewayV2Client, ListRoutingRulesCommand } = require("@aws-sdk/client-apigatewayv2"); // CommonJS import
+ * // import type { ApiGatewayV2ClientConfig } from "@aws-sdk/client-apigatewayv2";
+ * const config = {}; // type is ApiGatewayV2ClientConfig
+ * const client = new ApiGatewayV2Client(config);
+ * const input = { // ListRoutingRulesRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   DomainNameId: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListRoutingRulesCommand(input);
+ * const response = await client.send(command);
+ * // { // ListRoutingRulesResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   RoutingRules: [ // __listOfRoutingRule
+ * //     { // RoutingRule
+ * //       Actions: [ // __listOfRoutingRuleAction
+ * //         { // RoutingRuleAction
+ * //           InvokeApi: { // RoutingRuleActionInvokeApi
+ * //             ApiId: "STRING_VALUE", // required
+ * //             Stage: "STRING_VALUE", // required
+ * //             StripBasePath: true || false,
+ * //           },
+ * //         },
+ * //       ],
+ * //       Conditions: [ // __listOfRoutingRuleCondition
+ * //         { // RoutingRuleCondition
+ * //           MatchBasePaths: { // RoutingRuleMatchBasePaths
+ * //             AnyOf: [ // __listOfSelectionKey // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           MatchHeaders: { // RoutingRuleMatchHeaders
+ * //             AnyOf: [ // __listOfRoutingRuleMatchHeaderValue // required
+ * //               { // RoutingRuleMatchHeaderValue
+ * //                 Header: "STRING_VALUE", // required
+ * //                 ValueGlob: "STRING_VALUE", // required
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //       ],
+ * //       Priority: Number("int"),
+ * //       RoutingRuleArn: "STRING_VALUE",
+ * //       RoutingRuleId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param ListRoutingRulesCommandInput - {@link ListRoutingRulesCommandInput}
+ * @returns {@link ListRoutingRulesCommandOutput}
+ * @see {@link ListRoutingRulesCommandInput} for command's `input` shape.
+ * @see {@link ListRoutingRulesCommandOutput} for command's `response` shape.
+ * @see {@link ApiGatewayV2ClientResolvedConfig | config} for ApiGatewayV2Client's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. See the message field for more information.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>A limit has been exceeded. See the accompanying error message for details.</p>
+ *
+ * @throws {@link ApiGatewayV2ServiceException}
+ * <p>Base exception class for all service exceptions from ApiGatewayV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class ListRoutingRulesCommand extends command<ListRoutingRulesCommandInput, ListRoutingRulesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRoutingRules",
+  ListRoutingRules$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRoutingRulesRequest;
+      output: ListRoutingRulesResponse;
+    };
+    sdk: {
+      input: ListRoutingRulesCommandInput;
+      output: ListRoutingRulesCommandOutput;
+    };
+  };
+}

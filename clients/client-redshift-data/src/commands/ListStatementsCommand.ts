@@ -1,96 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListStatementsRequest, ListStatementsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListStatementsCommand,
-  serializeAws_json1_1ListStatementsCommand,
-} from "../protocols/Aws_json1_1";
-import { RedshiftDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftDataClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStatementsRequest, ListStatementsResponse } from "../models/models_0";
+import { ListStatements$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStatementsCommand}.
+ */
 export interface ListStatementsCommandInput extends ListStatementsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListStatementsCommand}.
+ */
 export interface ListStatementsCommandOutput extends ListStatementsResponse, __MetadataBearer {}
 
 /**
- * <p>List of SQL statements. By default, only finished statements are shown.
- *         A token is returned to page through the statement list. </p>
+ * <p>List of SQL statements. By default, only finished statements are shown. A token is returned to page through the statement list. </p> <p>When you use identity-enhanced role sessions to list statements, you must provide either the <code>cluster-identifier</code> or <code>workgroup-name</code> parameter. This ensures that the IdC user can only access the Amazon Redshift IdC applications they are assigned. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html"> Trusted identity propagation overview</a>.</p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RedshiftDataClient, ListStatementsCommand } from "@aws-sdk/client-redshift-data"; // ES Modules import
  * // const { RedshiftDataClient, ListStatementsCommand } = require("@aws-sdk/client-redshift-data"); // CommonJS import
+ * // import type { RedshiftDataClientConfig } from "@aws-sdk/client-redshift-data";
+ * const config = {}; // type is RedshiftDataClientConfig
  * const client = new RedshiftDataClient(config);
+ * const input = { // ListStatementsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   StatementName: "STRING_VALUE",
+ *   Status: "STRING_VALUE",
+ *   RoleLevel: true || false,
+ *   Database: "STRING_VALUE",
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   WorkgroupName: "STRING_VALUE",
+ * };
  * const command = new ListStatementsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStatementsResponse
+ * //   Statements: [ // StatementList // required
+ * //     { // StatementData
+ * //       Id: "STRING_VALUE", // required
+ * //       QueryString: "STRING_VALUE",
+ * //       QueryStrings: [ // StatementStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SecretArn: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       StatementName: "STRING_VALUE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //       QueryParameters: [ // SqlParametersList
+ * //         { // SqlParameter
+ * //           name: "STRING_VALUE", // required
+ * //           value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       IsBatchStatement: true || false,
+ * //       ResultFormat: "STRING_VALUE",
+ * //       SessionId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStatementsCommandInput - {@link ListStatementsCommandInput}
+ * @returns {@link ListStatementsCommandOutput}
  * @see {@link ListStatementsCommandInput} for command's `input` shape.
  * @see {@link ListStatementsCommandOutput} for command's `response` shape.
- * @see {@link RedshiftDataClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftDataClientResolvedConfig | config} for RedshiftDataClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The Amazon Redshift Data API operation failed due to invalid input. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The Amazon Redshift Data API operation failed due to a missing resource. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The Amazon Redshift Data API operation failed due to invalid input. </p>
+ *
+ * @throws {@link RedshiftDataServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftData service.</p>
+ *
+ *
+ * @public
  */
-export class ListStatementsCommand extends $Command<
-  ListStatementsCommandInput,
-  ListStatementsCommandOutput,
-  RedshiftDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStatementsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStatementsCommandInput, ListStatementsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftDataClient";
-    const commandName = "ListStatementsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStatementsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStatementsResponse.filterSensitiveLog,
+export class ListStatementsCommand extends command<ListStatementsCommandInput, ListStatementsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStatements",
+  ListStatements$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStatementsRequest;
+      output: ListStatementsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStatementsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListStatementsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStatementsCommandOutput> {
-    return deserializeAws_json1_1ListStatementsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStatementsCommandInput;
+      output: ListStatementsCommandOutput;
+    };
+  };
 }

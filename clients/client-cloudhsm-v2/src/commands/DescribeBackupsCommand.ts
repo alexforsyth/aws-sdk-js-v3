@@ -1,100 +1,134 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMV2Client";
-import { DescribeBackupsRequest, DescribeBackupsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeBackupsCommand,
-  serializeAws_json1_1DescribeBackupsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBackupsRequest, DescribeBackupsResponse } from "../models/models_0";
+import { DescribeBackups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBackupsCommand}.
+ */
 export interface DescribeBackupsCommandInput extends DescribeBackupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBackupsCommand}.
+ */
 export interface DescribeBackupsCommandOutput extends DescribeBackupsResponse, __MetadataBearer {}
 
 /**
- * <p>Gets information about backups of AWS CloudHSM clusters.</p>
+ * <p>Gets information about backups of CloudHSM clusters. Lists either the backups you own or the backups shared with you when the Shared parameter is true.</p>
  *          <p>This is a paginated operation, which means that each response might contain only a
  *       subset of all the backups. When the response contains only a subset of backups, it includes a
  *         <code>NextToken</code> value. Use this value in a subsequent <code>DescribeBackups</code>
  *       request to get more backups. When you receive a response with no <code>NextToken</code> (or an
  *       empty or null value), that means there are no more backups to get.</p>
+ *          <p>
+ *             <b>Cross-account use:</b> Yes. Customers can describe backups in other Amazon Web Services accounts that are shared with them.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMV2Client, DescribeBackupsCommand } from "@aws-sdk/client-cloudhsm-v2"; // ES Modules import
  * // const { CloudHSMV2Client, DescribeBackupsCommand } = require("@aws-sdk/client-cloudhsm-v2"); // CommonJS import
+ * // import type { CloudHSMV2ClientConfig } from "@aws-sdk/client-cloudhsm-v2";
+ * const config = {}; // type is CloudHSMV2ClientConfig
  * const client = new CloudHSMV2Client(config);
+ * const input = { // DescribeBackupsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: { // Filters
+ *     "<keys>": [ // Strings
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   Shared: true || false,
+ *   SortAscending: true || false,
+ * };
  * const command = new DescribeBackupsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBackupsResponse
+ * //   Backups: [ // Backups
+ * //     { // Backup
+ * //       BackupId: "STRING_VALUE", // required
+ * //       BackupArn: "STRING_VALUE",
+ * //       BackupState: "CREATE_IN_PROGRESS" || "READY" || "DELETED" || "PENDING_DELETION",
+ * //       ClusterId: "STRING_VALUE",
+ * //       CreateTimestamp: new Date("TIMESTAMP"),
+ * //       CopyTimestamp: new Date("TIMESTAMP"),
+ * //       NeverExpires: true || false,
+ * //       SourceRegion: "STRING_VALUE",
+ * //       SourceBackup: "STRING_VALUE",
+ * //       SourceCluster: "STRING_VALUE",
+ * //       DeleteTimestamp: new Date("TIMESTAMP"),
+ * //       TagList: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       HsmType: "STRING_VALUE",
+ * //       Mode: "FIPS" || "NON_FIPS",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBackupsCommandInput - {@link DescribeBackupsCommandInput}
+ * @returns {@link DescribeBackupsCommandOutput}
  * @see {@link DescribeBackupsCommandInput} for command's `input` shape.
  * @see {@link DescribeBackupsCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMV2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMV2ClientResolvedConfig | config} for CloudHSMV2Client's `config` shape.
  *
+ * @throws {@link CloudHsmAccessDeniedException} (client fault)
+ *  <p>The request was rejected because the requester does not have permission to perform the
+ *       requested operation.</p>
+ *
+ * @throws {@link CloudHsmInternalFailureException} (server fault)
+ *  <p>The request was rejected because of an CloudHSM internal failure. The request can
+ *       be retried.</p>
+ *
+ * @throws {@link CloudHsmInvalidRequestException} (client fault)
+ *  <p>The request was rejected because it is not a valid request.</p>
+ *
+ * @throws {@link CloudHsmResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it refers to a resource that cannot be
+ *       found.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>The request was rejected because an error occurred.</p>
+ *
+ * @throws {@link CloudHsmTagException} (client fault)
+ *  <p>The request was rejected because of a tagging failure. Verify the tag conditions in all applicable policies, and then retry the request.</p>
+ *
+ * @throws {@link CloudHSMV2ServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSMV2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBackupsCommand extends $Command<
-  DescribeBackupsCommandInput,
-  DescribeBackupsCommandOutput,
-  CloudHSMV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBackupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBackupsCommandInput, DescribeBackupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMV2Client";
-    const commandName = "DescribeBackupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBackupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBackupsResponse.filterSensitiveLog,
+export class DescribeBackupsCommand extends command<DescribeBackupsCommandInput, DescribeBackupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBackups",
+  DescribeBackups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBackupsRequest;
+      output: DescribeBackupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBackupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeBackupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeBackupsCommandOutput> {
-    return deserializeAws_json1_1DescribeBackupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBackupsCommandInput;
+      output: DescribeBackupsCommandOutput;
+    };
+  };
 }

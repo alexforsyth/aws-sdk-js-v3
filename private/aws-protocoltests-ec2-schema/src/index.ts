@@ -1,0 +1,21 @@
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * An EC2 query service that sends query requests and XML responses.
+ *
+ * @packageDocumentation
+ */
+export * from "./EC2ProtocolClient";
+export * from "./EC2Protocol";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { EC2ProtocolExtensionConfiguration } from "./extensionConfiguration";
+export * from "./commands";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { EC2ProtocolServiceException } from "./models/EC2ProtocolServiceException";

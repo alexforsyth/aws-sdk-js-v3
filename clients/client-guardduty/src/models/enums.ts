@@ -1,0 +1,1814 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationResourceType = {
+  EBS_VOLUME: "EBS_VOLUME",
+  EC2_INSTANCE: "EC2_INSTANCE",
+  EC2_SECURITY_GROUP: "EC2_SECURITY_GROUP",
+  ECS_CLUSTER: "ECS_CLUSTER",
+  EKS_CLUSTER: "EKS_CLUSTER",
+  IAM_ACCESS_KEY: "IAM_ACCESS_KEY",
+  IAM_ROLE: "IAM_ROLE",
+  IAM_USER: "IAM_USER",
+  KUBERNETES_WORKLOAD: "KUBERNETES_WORKLOAD",
+  LAMBDA_FUNCTION: "LAMBDA_FUNCTION",
+  RDS_DB_USER: "RDS_DB_USER",
+  RDS_INSTANCE: "RDS_INSTANCE",
+  S3_BUCKET: "S3_BUCKET",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationResourceType = (typeof InvestigationResourceType)[keyof typeof InvestigationResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const AttackPhaseName = {
+  COLLECTION: "Collection",
+  COMMAND_AND_CONTROL: "Command and Control",
+  CREDENTIAL_ACCESS: "Credential Access",
+  DEFENSE_EVASION: "Defense Evasion",
+  DISCOVERY: "Discovery",
+  EXECUTION: "Execution",
+  EXFILTRATION: "Exfiltration",
+  IMPACT: "Impact",
+  INITIAL_ACCESS: "Initial Access",
+  LATERAL_MOVEMENT: "Lateral Movement",
+  PERSISTENCE: "Persistence",
+  PRIVILEGE_ESCALATION: "Privilege Escalation",
+  RECONNAISSANCE: "Reconnaissance",
+  RESOURCE_DEVELOPMENT: "Resource Development",
+} as const;
+/**
+ * @public
+ */
+export type AttackPhaseName = (typeof AttackPhaseName)[keyof typeof AttackPhaseName];
+
+/**
+ * @public
+ * @enum
+ */
+export const FreeTrialFeatureResult = {
+  AI_PROTECTION: "AI_PROTECTION",
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EC2_RUNTIME_MONITORING: "EC2_RUNTIME_MONITORING",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  FARGATE_RUNTIME_MONITORING: "FARGATE_RUNTIME_MONITORING",
+  FLOW_LOGS: "FLOW_LOGS",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type FreeTrialFeatureResult = (typeof FreeTrialFeatureResult)[keyof typeof FreeTrialFeatureResult];
+
+/**
+ * @public
+ * @enum
+ */
+export const RiskLevel = {
+  CRITICAL: "Critical",
+  HIGH: "High",
+  INFO: "Info",
+  LOW: "Low",
+  MEDIUM: "Medium",
+} as const;
+/**
+ * @public
+ */
+export type RiskLevel = (typeof RiskLevel)[keyof typeof RiskLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const ActionPriority = {
+  IMMEDIATE: "IMMEDIATE",
+  SHORT_TERM: "SHORT_TERM",
+  STRATEGIC: "STRATEGIC",
+} as const;
+/**
+ * @public
+ */
+export type ActionPriority = (typeof ActionPriority)[keyof typeof ActionPriority];
+
+/**
+ * @public
+ * @enum
+ */
+export const ActivityType = {
+  /**
+   * <p>The observed activity is an API call.</p>
+   */
+  API_CALL: "API_CALL",
+} as const;
+/**
+ * @public
+ */
+export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MfaStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type MfaStatus = (typeof MfaStatus)[keyof typeof MfaStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AdminStatus = {
+  DISABLE_IN_PROGRESS: "DISABLE_IN_PROGRESS",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type AdminStatus = (typeof AdminStatus)[keyof typeof AdminStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const TimeGranularity = {
+  DAY: "DAY",
+  MONTH: "MONTH",
+  WEEK: "WEEK",
+} as const;
+/**
+ * @public
+ */
+export type TimeGranularity = (typeof TimeGranularity)[keyof typeof TimeGranularity];
+
+/**
+ * @public
+ * @enum
+ */
+export const AnalysisType = {
+  BASELINE: "BASELINE",
+  KUBERNETES_POLICY_VIOLATION: "KUBERNETES_POLICY_VIOLATION",
+  PROCESS_LINEAGE: "PROCESS_LINEAGE",
+  RDS_THREAT_ASSESSMENT: "RDS_THREAT_ASSESSMENT",
+  REPUTATION: "REPUTATION",
+  S3_ACTOR_CONTEXT: "S3_ACTOR_CONTEXT",
+  S3_EXPOSURE: "S3_EXPOSURE",
+  S3_PEN_TEST: "S3_PEN_TEST",
+  THREAT_ASSESSMENT: "THREAT_ASSESSMENT",
+  TREND: "TREND",
+} as const;
+/**
+ * @public
+ */
+export type AnalysisType = (typeof AnalysisType)[keyof typeof AnalysisType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationIndicatorType = {
+  DOMAIN: "DOMAIN",
+  FILE: "FILE",
+  IP: "IP",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationIndicatorType = (typeof InvestigationIndicatorType)[keyof typeof InvestigationIndicatorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ThreatConfidence = {
+  HIGH: "HIGH",
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+  VERY_HIGH: "VERY_HIGH",
+} as const;
+/**
+ * @public
+ */
+export type ThreatConfidence = (typeof ThreatConfidence)[keyof typeof ThreatConfidence];
+
+/**
+ * @public
+ * @enum
+ */
+export const ProfileSubtype = {
+  AVERAGE: "AVERAGE",
+  COUNT: "COUNT",
+  FREQUENT: "FREQUENT",
+  INFREQUENT: "INFREQUENT",
+  RARE: "RARE",
+  UNSEEN: "UNSEEN",
+} as const;
+/**
+ * @public
+ */
+export type ProfileSubtype = (typeof ProfileSubtype)[keyof typeof ProfileSubtype];
+
+/**
+ * @public
+ * @enum
+ */
+export const ProfileType = {
+  FREQUENCY: "FREQUENCY",
+  VOLUME: "VOLUME",
+} as const;
+/**
+ * @public
+ */
+export type ProfileType = (typeof ProfileType)[keyof typeof ProfileType];
+
+/**
+ * @public
+ * @enum
+ */
+export const AssociationMode = {
+  DRY_RUN: "DRY_RUN",
+  LIVE: "LIVE",
+} as const;
+/**
+ * @public
+ */
+export type AssociationMode = (typeof AssociationMode)[keyof typeof AssociationMode];
+
+/**
+ * @public
+ * @enum
+ */
+export const AutoEnableMembers = {
+  ALL: "ALL",
+  NEW: "NEW",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type AutoEnableMembers = (typeof AutoEnableMembers)[keyof typeof AutoEnableMembers];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContentPolicyFilterAction = {
+  BLOCKED: "BLOCKED",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type ContentPolicyFilterAction = (typeof ContentPolicyFilterAction)[keyof typeof ContentPolicyFilterAction];
+
+/**
+ * @public
+ * @enum
+ */
+export const ConfidenceLevel = {
+  HIGH: "HIGH",
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type ConfidenceLevel = (typeof ConfidenceLevel)[keyof typeof ConfidenceLevel];
+
+/**
+ * @public
+ * @enum
+ */
+export const ContentPolicyFilterType = {
+  HATE: "HATE",
+  INSULTS: "INSULTS",
+  JAILBREAK: "JAILBREAK",
+  MISCONDUCT: "MISCONDUCT",
+  PROMPT_ATTACK: "PROMPT_ATTACK",
+  SEXUAL: "SEXUAL",
+  VIOLENCE: "VIOLENCE",
+} as const;
+/**
+ * @public
+ */
+export type ContentPolicyFilterType = (typeof ContentPolicyFilterType)[keyof typeof ContentPolicyFilterType];
+
+/**
+ * @public
+ * @enum
+ */
+export const GuardrailAction = {
+  GUARDRAIL_INTERVENED: "GUARDRAIL_INTERVENED",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type GuardrailAction = (typeof GuardrailAction)[keyof typeof GuardrailAction];
+
+/**
+ * @public
+ * @enum
+ */
+export const GuardrailSource = {
+  INPUT: "INPUT",
+  OUTPUT: "OUTPUT",
+} as const;
+/**
+ * @public
+ */
+export type GuardrailSource = (typeof GuardrailSource)[keyof typeof GuardrailSource];
+
+/**
+ * @public
+ * @enum
+ */
+export const CloudProvider = {
+  AWS: "AWS",
+} as const;
+/**
+ * @public
+ */
+export type CloudProvider = (typeof CloudProvider)[keyof typeof CloudProvider];
+
+/**
+ * @public
+ * @enum
+ */
+export const DataSourceStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type DataSourceStatus = (typeof DataSourceStatus)[keyof typeof DataSourceStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ClusterStatus = {
+  ACTIVE: "ACTIVE",
+  CREATING: "CREATING",
+  DELETING: "DELETING",
+  FAILED: "FAILED",
+  PENDING: "PENDING",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type ClusterStatus = (typeof ClusterStatus)[keyof typeof ClusterStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const Confidence = {
+  HIGH: "High",
+  LOW: "Low",
+  MEDIUM: "Medium",
+  UNKNOWN: "Unknown",
+} as const;
+/**
+ * @public
+ */
+export type Confidence = (typeof Confidence)[keyof typeof Confidence];
+
+/**
+ * @public
+ * @enum
+ */
+export const CorrelationReason = {
+  HIGH_SEVERITY: "HIGH_SEVERITY",
+  SAME_BEHAVIOR: "SAME_BEHAVIOR",
+  SAME_RESOURCE: "SAME_RESOURCE",
+} as const;
+/**
+ * @public
+ */
+export type CorrelationReason = (typeof CorrelationReason)[keyof typeof CorrelationReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const CoverageStatus = {
+  HEALTHY: "HEALTHY",
+  UNHEALTHY: "UNHEALTHY",
+} as const;
+/**
+ * @public
+ */
+export type CoverageStatus = (typeof CoverageStatus)[keyof typeof CoverageStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ResourceType = {
+  EC2: "EC2",
+  ECS: "ECS",
+  EKS: "EKS",
+} as const;
+/**
+ * @public
+ */
+export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const Disposition = {
+  ACCESS_REVOKED: "Access Revoked",
+  BLOCKED: "Blocked",
+  DELETED: "Deleted",
+  ISOLATED: "Isolated",
+  LOGGED: "Logged",
+} as const;
+/**
+ * @public
+ */
+export type Disposition = (typeof Disposition)[keyof typeof Disposition];
+
+/**
+ * @public
+ * @enum
+ */
+export const DefenseTactic = {
+  DETECT: "Detect",
+  EVICT: "Evict",
+  HARDEN: "Harden",
+  ISOLATE: "Isolate",
+  RESTORE: "Restore",
+} as const;
+/**
+ * @public
+ */
+export type DefenseTactic = (typeof DefenseTactic)[keyof typeof DefenseTactic];
+
+/**
+ * @public
+ * @enum
+ */
+export const ManagementType = {
+  AUTO_MANAGED: "AUTO_MANAGED",
+  DISABLED: "DISABLED",
+  MANUAL: "MANUAL",
+} as const;
+/**
+ * @public
+ */
+export type ManagementType = (typeof ManagementType)[keyof typeof ManagementType];
+
+/**
+ * @public
+ * @enum
+ */
+export const CoverageFilterCriterionKey = {
+  ACCOUNT_ID: "ACCOUNT_ID",
+  ADDON_VERSION: "ADDON_VERSION",
+  AGENT_VERSION: "AGENT_VERSION",
+  CLUSTER_ARN: "CLUSTER_ARN",
+  CLUSTER_NAME: "CLUSTER_NAME",
+  COVERAGE_STATUS: "COVERAGE_STATUS",
+  ECS_CLUSTER_NAME: "ECS_CLUSTER_NAME",
+  EKS_CLUSTER_NAME: "EKS_CLUSTER_NAME",
+  INSTANCE_ID: "INSTANCE_ID",
+  MANAGEMENT_TYPE: "MANAGEMENT_TYPE",
+  RESOURCE_TYPE: "RESOURCE_TYPE",
+} as const;
+/**
+ * @public
+ */
+export type CoverageFilterCriterionKey = (typeof CoverageFilterCriterionKey)[keyof typeof CoverageFilterCriterionKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const CoverageSortKey = {
+  ACCOUNT_ID: "ACCOUNT_ID",
+  ADDON_VERSION: "ADDON_VERSION",
+  CLUSTER_NAME: "CLUSTER_NAME",
+  COVERAGE_STATUS: "COVERAGE_STATUS",
+  ECS_CLUSTER_NAME: "ECS_CLUSTER_NAME",
+  EKS_CLUSTER_NAME: "EKS_CLUSTER_NAME",
+  INSTANCE_ID: "INSTANCE_ID",
+  ISSUE: "ISSUE",
+  UPDATED_AT: "UPDATED_AT",
+} as const;
+/**
+ * @public
+ */
+export type CoverageSortKey = (typeof CoverageSortKey)[keyof typeof CoverageSortKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const OrderBy = {
+  ASC: "ASC",
+  DESC: "DESC",
+} as const;
+/**
+ * @public
+ */
+export type OrderBy = (typeof OrderBy)[keyof typeof OrderBy];
+
+/**
+ * @public
+ * @enum
+ */
+export const CoverageStatisticsType = {
+  COUNT_BY_COVERAGE_STATUS: "COUNT_BY_COVERAGE_STATUS",
+  COUNT_BY_RESOURCE_TYPE: "COUNT_BY_RESOURCE_TYPE",
+} as const;
+/**
+ * @public
+ */
+export type CoverageStatisticsType = (typeof CoverageStatisticsType)[keyof typeof CoverageStatisticsType];
+
+/**
+ * @public
+ * @enum
+ */
+export const FeatureAdditionalConfiguration = {
+  EC2_AGENT_MANAGEMENT: "EC2_AGENT_MANAGEMENT",
+  ECS_FARGATE_AGENT_MANAGEMENT: "ECS_FARGATE_AGENT_MANAGEMENT",
+  EKS_ADDON_MANAGEMENT: "EKS_ADDON_MANAGEMENT",
+  /**
+   * <p>RDS Data Activity Monitoring, which monitors data activity on supported Amazon RDS database engines to detect potentially unauthorized access to your data.</p>
+   */
+  RDS_DATA_RISK: "RDS_DATA_RISK",
+} as const;
+/**
+ * @public
+ */
+export type FeatureAdditionalConfiguration =
+  (typeof FeatureAdditionalConfiguration)[keyof typeof FeatureAdditionalConfiguration];
+
+/**
+ * @public
+ * @enum
+ */
+export const FeatureStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type FeatureStatus = (typeof FeatureStatus)[keyof typeof FeatureStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectorFeature = {
+  AI_ANALYST: "AI_ANALYST",
+  AI_PROTECTION: "AI_PROTECTION",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  RUNTIME_MONITORING: "RUNTIME_MONITORING",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type DetectorFeature = (typeof DetectorFeature)[keyof typeof DetectorFeature];
+
+/**
+ * @public
+ * @enum
+ */
+export const FindingPublishingFrequency = {
+  FIFTEEN_MINUTES: "FIFTEEN_MINUTES",
+  ONE_HOUR: "ONE_HOUR",
+  SIX_HOURS: "SIX_HOURS",
+} as const;
+/**
+ * @public
+ */
+export type FindingPublishingFrequency = (typeof FindingPublishingFrequency)[keyof typeof FindingPublishingFrequency];
+
+/**
+ * @public
+ * @enum
+ */
+export const FilterAction = {
+  ARCHIVE: "ARCHIVE",
+  NOOP: "NOOP",
+} as const;
+/**
+ * @public
+ */
+export type FilterAction = (typeof FilterAction)[keyof typeof FilterAction];
+
+/**
+ * @public
+ * @enum
+ */
+export const IpSetFormat = {
+  ALIEN_VAULT: "ALIEN_VAULT",
+  FIRE_EYE: "FIRE_EYE",
+  OTX_CSV: "OTX_CSV",
+  PROOF_POINT: "PROOF_POINT",
+  STIX: "STIX",
+  TXT: "TXT",
+} as const;
+/**
+ * @public
+ */
+export type IpSetFormat = (typeof IpSetFormat)[keyof typeof IpSetFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const MalwareProtectionPlanTaggingActionStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type MalwareProtectionPlanTaggingActionStatus =
+  (typeof MalwareProtectionPlanTaggingActionStatus)[keyof typeof MalwareProtectionPlanTaggingActionStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DestinationType = {
+  S3: "S3",
+} as const;
+/**
+ * @public
+ */
+export type DestinationType = (typeof DestinationType)[keyof typeof DestinationType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ThreatEntitySetFormat = {
+  ALIEN_VAULT: "ALIEN_VAULT",
+  FIRE_EYE: "FIRE_EYE",
+  OTX_CSV: "OTX_CSV",
+  PROOF_POINT: "PROOF_POINT",
+  STIX: "STIX",
+  TXT: "TXT",
+} as const;
+/**
+ * @public
+ */
+export type ThreatEntitySetFormat = (typeof ThreatEntitySetFormat)[keyof typeof ThreatEntitySetFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const ThreatIntelSetFormat = {
+  ALIEN_VAULT: "ALIEN_VAULT",
+  FIRE_EYE: "FIRE_EYE",
+  OTX_CSV: "OTX_CSV",
+  PROOF_POINT: "PROOF_POINT",
+  STIX: "STIX",
+  TXT: "TXT",
+} as const;
+/**
+ * @public
+ */
+export type ThreatIntelSetFormat = (typeof ThreatIntelSetFormat)[keyof typeof ThreatIntelSetFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const TrustedEntitySetFormat = {
+  ALIEN_VAULT: "ALIEN_VAULT",
+  FIRE_EYE: "FIRE_EYE",
+  OTX_CSV: "OTX_CSV",
+  PROOF_POINT: "PROOF_POINT",
+  STIX: "STIX",
+  TXT: "TXT",
+} as const;
+/**
+ * @public
+ */
+export type TrustedEntitySetFormat = (typeof TrustedEntitySetFormat)[keyof typeof TrustedEntitySetFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const CriterionKey = {
+  ACCOUNT_ID: "ACCOUNT_ID",
+  EC2_INSTANCE_ARN: "EC2_INSTANCE_ARN",
+  GUARDDUTY_FINDING_ID: "GUARDDUTY_FINDING_ID",
+  SCAN_ID: "SCAN_ID",
+  SCAN_START_TIME: "SCAN_START_TIME",
+  SCAN_STATUS: "SCAN_STATUS",
+  SCAN_TYPE: "SCAN_TYPE",
+} as const;
+/**
+ * @public
+ */
+export type CriterionKey = (typeof CriterionKey)[keyof typeof CriterionKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const DataSource = {
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EC2_MALWARE_SCAN: "EC2_MALWARE_SCAN",
+  FLOW_LOGS: "FLOW_LOGS",
+  KUBERNETES_AUDIT_LOGS: "KUBERNETES_AUDIT_LOGS",
+  S3_LOGS: "S3_LOGS",
+} as const;
+/**
+ * @public
+ */
+export type DataSource = (typeof DataSource)[keyof typeof DataSource];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanResult = {
+  CLEAN: "CLEAN",
+  INFECTED: "INFECTED",
+} as const;
+/**
+ * @public
+ */
+export type ScanResult = (typeof ScanResult)[keyof typeof ScanResult];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanStatus = {
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  RUNNING: "RUNNING",
+  SKIPPED: "SKIPPED",
+} as const;
+/**
+ * @public
+ */
+export type ScanStatus = (typeof ScanStatus)[keyof typeof ScanStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanType = {
+  GUARDDUTY_INITIATED: "GUARDDUTY_INITIATED",
+  ON_DEMAND: "ON_DEMAND",
+} as const;
+/**
+ * @public
+ */
+export type ScanType = (typeof ScanType)[keyof typeof ScanType];
+
+/**
+ * @public
+ * @enum
+ */
+export const TriggerType = {
+  BACKUP: "BACKUP",
+  GUARDDUTY: "GUARDDUTY",
+} as const;
+/**
+ * @public
+ */
+export type TriggerType = (typeof TriggerType)[keyof typeof TriggerType];
+
+/**
+ * @public
+ * @enum
+ */
+export const OrgFeatureStatus = {
+  ALL: "ALL",
+  NEW: "NEW",
+  NONE: "NONE",
+} as const;
+/**
+ * @public
+ */
+export type OrgFeatureStatus = (typeof OrgFeatureStatus)[keyof typeof OrgFeatureStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const OrgFeatureAdditionalConfiguration = {
+  EC2_AGENT_MANAGEMENT: "EC2_AGENT_MANAGEMENT",
+  ECS_FARGATE_AGENT_MANAGEMENT: "ECS_FARGATE_AGENT_MANAGEMENT",
+  EKS_ADDON_MANAGEMENT: "EKS_ADDON_MANAGEMENT",
+  /**
+   * <p>RDS Data Activity Monitoring, which monitors data activity on supported Amazon RDS database engines to detect potentially unauthorized access to your data.</p>
+   */
+  RDS_DATA_RISK: "RDS_DATA_RISK",
+} as const;
+/**
+ * @public
+ */
+export type OrgFeatureAdditionalConfiguration =
+  (typeof OrgFeatureAdditionalConfiguration)[keyof typeof OrgFeatureAdditionalConfiguration];
+
+/**
+ * @public
+ * @enum
+ */
+export const OrgFeature = {
+  AI_PROTECTION: "AI_PROTECTION",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  RUNTIME_MONITORING: "RUNTIME_MONITORING",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type OrgFeature = (typeof OrgFeature)[keyof typeof OrgFeature];
+
+/**
+ * @public
+ * @enum
+ */
+export const PublishingStatus = {
+  PENDING_VERIFICATION: "PENDING_VERIFICATION",
+  PUBLISHING: "PUBLISHING",
+  STOPPED: "STOPPED",
+  UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY: "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
+} as const;
+/**
+ * @public
+ */
+export type PublishingStatus = (typeof PublishingStatus)[keyof typeof PublishingStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const NetworkDirection = {
+  INBOUND: "INBOUND",
+  OUTBOUND: "OUTBOUND",
+} as const;
+/**
+ * @public
+ */
+export type NetworkDirection = (typeof NetworkDirection)[keyof typeof NetworkDirection];
+
+/**
+ * @public
+ * @enum
+ */
+export const EcsClusterStatus = {
+  ACTIVE: "ACTIVE",
+  DEPROVISIONING: "DEPROVISIONING",
+  FAILED: "FAILED",
+  INACTIVE: "INACTIVE",
+  PROVISIONING: "PROVISIONING",
+} as const;
+/**
+ * @public
+ */
+export type EcsClusterStatus = (typeof EcsClusterStatus)[keyof typeof EcsClusterStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const EcsLaunchType = {
+  EC2: "EC2",
+  FARGATE: "FARGATE",
+} as const;
+/**
+ * @public
+ */
+export type EcsLaunchType = (typeof EcsLaunchType)[keyof typeof EcsLaunchType];
+
+/**
+ * @public
+ * @enum
+ */
+export const KubernetesResourcesTypes = {
+  CRONJOBS: "CRONJOBS",
+  DAEMONSETS: "DAEMONSETS",
+  DEPLOYMENTS: "DEPLOYMENTS",
+  JOBS: "JOBS",
+  PODS: "PODS",
+  REPLICASETS: "REPLICASETS",
+  REPLICATIONCONTROLLERS: "REPLICATIONCONTROLLERS",
+  STATEFULSETS: "STATEFULSETS",
+} as const;
+/**
+ * @public
+ */
+export type KubernetesResourcesTypes = (typeof KubernetesResourcesTypes)[keyof typeof KubernetesResourcesTypes];
+
+/**
+ * @public
+ * @enum
+ */
+export const PublicAccessStatus = {
+  ALLOWED: "ALLOWED",
+  BLOCKED: "BLOCKED",
+} as const;
+/**
+ * @public
+ */
+export type PublicAccessStatus = (typeof PublicAccessStatus)[keyof typeof PublicAccessStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PublicAclIgnoreBehavior = {
+  IGNORED: "IGNORED",
+  NOT_IGNORED: "NOT_IGNORED",
+} as const;
+/**
+ * @public
+ */
+export type PublicAclIgnoreBehavior = (typeof PublicAclIgnoreBehavior)[keyof typeof PublicAclIgnoreBehavior];
+
+/**
+ * @public
+ * @enum
+ */
+export const PublicBucketRestrictBehavior = {
+  NOT_RESTRICTED: "NOT_RESTRICTED",
+  RESTRICTED: "RESTRICTED",
+} as const;
+/**
+ * @public
+ */
+export type PublicBucketRestrictBehavior =
+  (typeof PublicBucketRestrictBehavior)[keyof typeof PublicBucketRestrictBehavior];
+
+/**
+ * @public
+ * @enum
+ */
+export const FindingResourceType = {
+  ACCESS_KEY: "ACCESS_KEY",
+  AUTOSCALING_AUTO_SCALING_GROUP: "AUTOSCALING_AUTO_SCALING_GROUP",
+  /**
+   * <p>An application-scoped Amazon Bedrock inference profile used to track invocation usage.</p>
+   */
+  BEDROCK_APPLICATION_INFERENCE_PROFILE: "BEDROCK_APPLICATION_INFERENCE_PROFILE",
+  /**
+   * <p>An Amazon Bedrock custom model fine-tuned by the customer.</p>
+   */
+  BEDROCK_CUSTOM_MODEL: "BEDROCK_CUSTOM_MODEL",
+  /**
+   * <p>A deployment of an Amazon Bedrock custom model.</p>
+   */
+  BEDROCK_CUSTOM_MODEL_DEPLOYMENT: "BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+  /**
+   * <p>An Amazon Bedrock guardrail evaluated during a model invocation.</p>
+   */
+  BEDROCK_GUARDRAIL: "BEDROCK_GUARDRAIL",
+  /**
+   * <p>An Amazon Bedrock imported model brought in from an external source.</p>
+   */
+  BEDROCK_IMPORTED_MODEL: "BEDROCK_IMPORTED_MODEL",
+  /**
+   * <p>An Amazon Bedrock inference profile that routes model invocations across Regions.</p>
+   */
+  BEDROCK_INFERENCE_PROFILE: "BEDROCK_INFERENCE_PROFILE",
+  /**
+   * <p>A managed prompt stored in Amazon Bedrock Prompt Management.</p>
+   */
+  BEDROCK_PROMPT: "BEDROCK_PROMPT",
+  /**
+   * <p>An Amazon Bedrock prompt router that selects a model per request.</p>
+   */
+  BEDROCK_PROMPT_ROUTER: "BEDROCK_PROMPT_ROUTER",
+  /**
+   * <p>An Amazon Bedrock model with provisioned throughput.</p>
+   */
+  BEDROCK_PROVISIONED_MODEL: "BEDROCK_PROVISIONED_MODEL",
+  CLOUDFORMATION_STACK: "CLOUDFORMATION_STACK",
+  CONTAINER: "CONTAINER",
+  EC2_IMAGE: "EC2_IMAGE",
+  EC2_INSTANCE: "EC2_INSTANCE",
+  EC2_LAUNCH_TEMPLATE: "EC2_LAUNCH_TEMPLATE",
+  EC2_NETWORK_INTERFACE: "EC2_NETWORK_INTERFACE",
+  EC2_VPC: "EC2_VPC",
+  ECS_CLUSTER: "ECS_CLUSTER",
+  ECS_TASK: "ECS_TASK",
+  EKS_CLUSTER: "EKS_CLUSTER",
+  IAM_INSTANCE_PROFILE: "IAM_INSTANCE_PROFILE",
+  KUBERNETES_WORKLOAD: "KUBERNETES_WORKLOAD",
+  S3_BUCKET: "S3_BUCKET",
+  S3_OBJECT: "S3_OBJECT",
+  /**
+   * <p>An Amazon SageMaker inference endpoint.</p>
+   */
+  SAGEMAKER_ENDPOINT: "SAGEMAKER_ENDPOINT",
+} as const;
+/**
+ * @public
+ */
+export type FindingResourceType = (typeof FindingResourceType)[keyof typeof FindingResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const IndicatorType = {
+  ATTACK_TACTIC: "ATTACK_TACTIC",
+  ATTACK_TECHNIQUE: "ATTACK_TECHNIQUE",
+  CRYPTOMINING_DOMAIN: "CRYPTOMINING_DOMAIN",
+  CRYPTOMINING_IP: "CRYPTOMINING_IP",
+  CRYPTOMINING_PROCESS: "CRYPTOMINING_PROCESS",
+  HIGH_RISK_API: "HIGH_RISK_API",
+  MALICIOUS_DOMAIN: "MALICIOUS_DOMAIN",
+  MALICIOUS_FILE: "MALICIOUS_FILE",
+  MALICIOUS_IP: "MALICIOUS_IP",
+  MALICIOUS_PACKAGE: "MALICIOUS_PACKAGE",
+  MALICIOUS_PROCESS: "MALICIOUS_PROCESS",
+  MISCONFIGURATION: "MISCONFIGURATION",
+  REACHABILITY: "REACHABILITY",
+  SENSITIVE_DATA: "SENSITIVE_DATA",
+  SUSPICIOUS_NETWORK: "SUSPICIOUS_NETWORK",
+  SUSPICIOUS_PROCESS: "SUSPICIOUS_PROCESS",
+  SUSPICIOUS_USER_AGENT: "SUSPICIOUS_USER_AGENT",
+  TOR_IP: "TOR_IP",
+  UNUSUAL_API_FOR_ACCOUNT: "UNUSUAL_API_FOR_ACCOUNT",
+  UNUSUAL_ASN_FOR_ACCOUNT: "UNUSUAL_ASN_FOR_ACCOUNT",
+  UNUSUAL_ASN_FOR_USER: "UNUSUAL_ASN_FOR_USER",
+  VULNERABILITY: "VULNERABILITY",
+} as const;
+/**
+ * @public
+ */
+export type IndicatorType = (typeof IndicatorType)[keyof typeof IndicatorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const SignalType = {
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  FINDING: "FINDING",
+  FLOW_LOGS: "FLOW_LOGS",
+  RUNTIME_MONITORING: "RUNTIME_MONITORING",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type SignalType = (typeof SignalType)[keyof typeof SignalType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationDetectorFeature = {
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EC2_AGENT_MANAGEMENT: "EC2_AGENT_MANAGEMENT",
+  ECS_FARGATE_AGENT_MANAGEMENT: "ECS_FARGATE_AGENT_MANAGEMENT",
+  EKS_ADDON_MANAGEMENT: "EKS_ADDON_MANAGEMENT",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  FLOW_LOGS: "FLOW_LOGS",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  RUNTIME_MONITORING: "RUNTIME_MONITORING",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationDetectorFeature =
+  (typeof InvestigationDetectorFeature)[keyof typeof InvestigationDetectorFeature];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectionRuleConfigurationStatus = {
+  ACTIVE: "ACTIVE",
+  FAILED: "FAILED",
+  PROCESSING: "PROCESSING",
+} as const;
+/**
+ * @public
+ */
+export type DetectionRuleConfigurationStatus =
+  (typeof DetectionRuleConfigurationStatus)[keyof typeof DetectionRuleConfigurationStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectionRuleDataSource = {
+  CLOUDTRAIL_MANAGEMENT_EVENT: "CloudTrailManagementEvent",
+  RUNTIME_MONITORING: "RuntimeMonitoring",
+} as const;
+/**
+ * @public
+ */
+export type DetectionRuleDataSource = (typeof DetectionRuleDataSource)[keyof typeof DetectionRuleDataSource];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectionRuleFilterCondition = {
+  CONTAINS: "CONTAINS",
+  EQUALS: "EQUALS",
+} as const;
+/**
+ * @public
+ */
+export type DetectionRuleFilterCondition =
+  (typeof DetectionRuleFilterCondition)[keyof typeof DetectionRuleFilterCondition];
+
+/**
+ * @public
+ * @enum
+ */
+export const FilterFieldName = {
+  DATA_SOURCE: "dataSource",
+  DESCRIPTION: "description",
+  NAME: "name",
+  SERVICE: "service",
+  SEVERITY: "severity",
+  TACTIC: "tactic",
+  TECHNIQUE: "technique",
+} as const;
+/**
+ * @public
+ */
+export type FilterFieldName = (typeof FilterFieldName)[keyof typeof FilterFieldName];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectionRuleSeverity = {
+  CRITICAL: "CRITICAL",
+  HIGH: "HIGH",
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+} as const;
+/**
+ * @public
+ */
+export type DetectionRuleSeverity = (typeof DetectionRuleSeverity)[keyof typeof DetectionRuleSeverity];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectionSource = {
+  AMAZON: "AMAZON",
+  BITDEFENDER: "BITDEFENDER",
+} as const;
+/**
+ * @public
+ */
+export type DetectionSource = (typeof DetectionSource)[keyof typeof DetectionSource];
+
+/**
+ * @public
+ * @enum
+ */
+export const ManagedBy = {
+  GUARDDUTY_POLICY: "GUARDDUTY_POLICY",
+} as const;
+/**
+ * @public
+ */
+export type ManagedBy = (typeof ManagedBy)[keyof typeof ManagedBy];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectorFeatureResult = {
+  AI_ANALYST: "AI_ANALYST",
+  AI_PROTECTION: "AI_PROTECTION",
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  FLOW_LOGS: "FLOW_LOGS",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  RUNTIME_MONITORING: "RUNTIME_MONITORING",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type DetectorFeatureResult = (typeof DetectorFeatureResult)[keyof typeof DetectorFeatureResult];
+
+/**
+ * @public
+ * @enum
+ */
+export const DetectorStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type DetectorStatus = (typeof DetectorStatus)[keyof typeof DetectorStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const DistributionDimension = {
+  ARCHIVE: "ARCHIVE",
+  ATTACK_VECTOR: "ATTACK_VECTOR",
+  RESOURCE: "RESOURCE",
+  SEVERITY: "SEVERITY",
+  TYPE: "TYPE",
+} as const;
+/**
+ * @public
+ */
+export type DistributionDimension = (typeof DistributionDimension)[keyof typeof DistributionDimension];
+
+/**
+ * @public
+ * @enum
+ */
+export const EbsSnapshotPreservation = {
+  NO_RETENTION: "NO_RETENTION",
+  RETENTION_WITH_FINDING: "RETENTION_WITH_FINDING",
+} as const;
+/**
+ * @public
+ */
+export type EbsSnapshotPreservation = (typeof EbsSnapshotPreservation)[keyof typeof EbsSnapshotPreservation];
+
+/**
+ * @public
+ * @enum
+ */
+export const Feedback = {
+  NOT_USEFUL: "NOT_USEFUL",
+  USEFUL: "USEFUL",
+} as const;
+/**
+ * @public
+ */
+export type Feedback = (typeof Feedback)[keyof typeof Feedback];
+
+/**
+ * @public
+ * @enum
+ */
+export const FetchCriterionCondition = {
+  EQUALS: "EQUALS",
+  GREATER_THAN: "GREATER_THAN",
+  GREATER_THAN_OR_EQUAL: "GREATER_THAN_OR_EQUAL",
+  LESS_THAN: "LESS_THAN",
+  LESS_THAN_OR_EQUAL: "LESS_THAN_OR_EQUAL",
+  NOT_EQUALS: "NOT_EQUALS",
+} as const;
+/**
+ * @public
+ */
+export type FetchCriterionCondition = (typeof FetchCriterionCondition)[keyof typeof FetchCriterionCondition];
+
+/**
+ * @public
+ * @enum
+ */
+export const FetchType = {
+  CLOUD_TRAIL_RAW_EVENTS: "CLOUD_TRAIL_RAW_EVENTS",
+  DETECTOR: "DETECTOR",
+  FINDINGS: "FINDINGS",
+  FINDING_TYPE_DOCUMENTATION: "FINDING_TYPE_DOCUMENTATION",
+  MEMBER_ACCOUNTS: "MEMBER_ACCOUNTS",
+  REPUTATION: "REPUTATION",
+  RUNTIME_SIGNALS: "RUNTIME_SIGNALS",
+} as const;
+/**
+ * @public
+ */
+export type FetchType = (typeof FetchType)[keyof typeof FetchType];
+
+/**
+ * @public
+ * @enum
+ */
+export const FetchVerdict = {
+  BENIGN: "BENIGN",
+  NEUTRAL: "NEUTRAL",
+  THREAT: "THREAT",
+} as const;
+/**
+ * @public
+ */
+export type FetchVerdict = (typeof FetchVerdict)[keyof typeof FetchVerdict];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanCategory = {
+  FULL_SCAN: "FULL_SCAN",
+  INCREMENTAL_SCAN: "INCREMENTAL_SCAN",
+} as const;
+/**
+ * @public
+ */
+export type ScanCategory = (typeof ScanCategory)[keyof typeof ScanCategory];
+
+/**
+ * @public
+ * @enum
+ */
+export const MalwareProtectionScanType = {
+  BACKUP_INITIATED: "BACKUP_INITIATED",
+  GUARDDUTY_INITIATED: "GUARDDUTY_INITIATED",
+  ON_DEMAND: "ON_DEMAND",
+} as const;
+/**
+ * @public
+ */
+export type MalwareProtectionScanType = (typeof MalwareProtectionScanType)[keyof typeof MalwareProtectionScanType];
+
+/**
+ * @public
+ * @enum
+ */
+export const FindingStatisticType = {
+  COUNT_BY_SEVERITY: "COUNT_BY_SEVERITY",
+} as const;
+/**
+ * @public
+ */
+export type FindingStatisticType = (typeof FindingStatisticType)[keyof typeof FindingStatisticType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RuleLanguage = {
+  SQL: "SQL",
+} as const;
+/**
+ * @public
+ */
+export type RuleLanguage = (typeof RuleLanguage)[keyof typeof RuleLanguage];
+
+/**
+ * @public
+ * @enum
+ */
+export const RuleSchema = {
+  CLOUD_TRAIL: "CloudTrail",
+} as const;
+/**
+ * @public
+ */
+export type RuleSchema = (typeof RuleSchema)[keyof typeof RuleSchema];
+
+/**
+ * @public
+ * @enum
+ */
+export const GroupByType = {
+  ACCOUNT: "ACCOUNT",
+  DATE: "DATE",
+  FINDING_TYPE: "FINDING_TYPE",
+  RESOURCE: "RESOURCE",
+  SEVERITY: "SEVERITY",
+} as const;
+/**
+ * @public
+ */
+export type GroupByType = (typeof GroupByType)[keyof typeof GroupByType];
+
+/**
+ * @public
+ * @enum
+ */
+export const SummaryFormat = {
+  STRING: "STRING",
+  STRUCTURED: "STRUCTURED",
+} as const;
+/**
+ * @public
+ */
+export type SummaryFormat = (typeof SummaryFormat)[keyof typeof SummaryFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationType = {
+  ACCOUNT: "ACCOUNT",
+  FINDING: "FINDING",
+  ORGANIZATION: "ORGANIZATION",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationType = (typeof InvestigationType)[keyof typeof InvestigationType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationStatus = {
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  RUNNING: "RUNNING",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationStatus = (typeof InvestigationStatus)[keyof typeof InvestigationStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const RecommendationCategory = {
+  ENABLE_PROTECTION: "ENABLE_PROTECTION",
+  FURTHER_INVESTIGATION: "FURTHER_INVESTIGATION",
+  HARDENING: "HARDENING",
+  MONITORING: "MONITORING",
+  SUPPRESSION_RULE: "SUPPRESSION_RULE",
+} as const;
+/**
+ * @public
+ */
+export type RecommendationCategory = (typeof RecommendationCategory)[keyof typeof RecommendationCategory];
+
+/**
+ * @public
+ * @enum
+ */
+export const IpSetStatus = {
+  ACTIVATING: "ACTIVATING",
+  ACTIVE: "ACTIVE",
+  DEACTIVATING: "DEACTIVATING",
+  DELETED: "DELETED",
+  DELETE_PENDING: "DELETE_PENDING",
+  ERROR: "ERROR",
+  INACTIVE: "INACTIVE",
+} as const;
+/**
+ * @public
+ */
+export type IpSetStatus = (typeof IpSetStatus)[keyof typeof IpSetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const MalwareProtectionPlanStatus = {
+  ACTIVE: "ACTIVE",
+  ERROR: "ERROR",
+  WARNING: "WARNING",
+} as const;
+/**
+ * @public
+ */
+export type MalwareProtectionPlanStatus =
+  (typeof MalwareProtectionPlanStatus)[keyof typeof MalwareProtectionPlanStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const MalwareProtectionResourceType = {
+  EBS_RECOVERY_POINT: "EBS_RECOVERY_POINT",
+  EBS_SNAPSHOT: "EBS_SNAPSHOT",
+  EBS_VOLUME: "EBS_VOLUME",
+  EC2_AMI: "EC2_AMI",
+  EC2_INSTANCE: "EC2_INSTANCE",
+  EC2_RECOVERY_POINT: "EC2_RECOVERY_POINT",
+  S3_BUCKET: "S3_BUCKET",
+  S3_POINT_IN_TIME_RECOVERY: "S3_POINT_IN_TIME_RECOVERY",
+  S3_RECOVERY_POINT: "S3_RECOVERY_POINT",
+} as const;
+/**
+ * @public
+ */
+export type MalwareProtectionResourceType =
+  (typeof MalwareProtectionResourceType)[keyof typeof MalwareProtectionResourceType];
+
+/**
+ * @public
+ * @enum
+ */
+export const MalwareProtectionScanStatus = {
+  COMPLETED: "COMPLETED",
+  COMPLETED_WITH_ISSUES: "COMPLETED_WITH_ISSUES",
+  FAILED: "FAILED",
+  RUNNING: "RUNNING",
+  SKIPPED: "SKIPPED",
+} as const;
+/**
+ * @public
+ */
+export type MalwareProtectionScanStatus =
+  (typeof MalwareProtectionScanStatus)[keyof typeof MalwareProtectionScanStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanStatusReason = {
+  ACCESS_DENIED: "ACCESS_DENIED",
+  ALL_FILES_SKIPPED_OR_FAILED: "ALL_FILES_SKIPPED_OR_FAILED",
+  AMI_SNAPSHOT_LIMIT_EXCEEDED: "AMI_SNAPSHOT_LIMIT_EXCEEDED",
+  BASE_CREATED_AFTER_TARGET: "BASE_CREATED_AFTER_TARGET",
+  BASE_RESOURCE_NOT_SCANNED: "BASE_RESOURCE_NOT_SCANNED",
+  INCONSISTENT_SOURCE: "INCONSISTENT_SOURCE",
+  INCREMENTAL_NO_DIFFERENCE: "INCREMENTAL_NO_DIFFERENCE",
+  NO_EBS_VOLUMES_FOUND: "NO_EBS_VOLUMES_FOUND",
+  RESOURCE_NOT_FOUND: "RESOURCE_NOT_FOUND",
+  RESOURCE_UNAVAILABLE: "RESOURCE_UNAVAILABLE",
+  SNAPSHOT_SIZE_LIMIT_EXCEEDED: "SNAPSHOT_SIZE_LIMIT_EXCEEDED",
+  UNRELATED_RESOURCES: "UNRELATED_RESOURCES",
+  UNSUPPORTED_AMI: "UNSUPPORTED_AMI",
+  UNSUPPORTED_COMPOSITE_RECOVERY_POINT: "UNSUPPORTED_COMPOSITE_RECOVERY_POINT",
+  UNSUPPORTED_FOR_INCREMENTAL: "UNSUPPORTED_FOR_INCREMENTAL",
+  UNSUPPORTED_PRODUCT_CODE_TYPE: "UNSUPPORTED_PRODUCT_CODE_TYPE",
+  UNSUPPORTED_SNAPSHOT: "UNSUPPORTED_SNAPSHOT",
+} as const;
+/**
+ * @public
+ */
+export type ScanStatusReason = (typeof ScanStatusReason)[keyof typeof ScanStatusReason];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanResultStatus = {
+  NO_THREATS_FOUND: "NO_THREATS_FOUND",
+  THREATS_FOUND: "THREATS_FOUND",
+} as const;
+/**
+ * @public
+ */
+export type ScanResultStatus = (typeof ScanResultStatus)[keyof typeof ScanResultStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ScanCriterionKey = {
+  EC2_INSTANCE_TAG: "EC2_INSTANCE_TAG",
+} as const;
+/**
+ * @public
+ */
+export type ScanCriterionKey = (typeof ScanCriterionKey)[keyof typeof ScanCriterionKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const ThreatEntitySetStatus = {
+  ACTIVATING: "ACTIVATING",
+  ACTIVE: "ACTIVE",
+  DEACTIVATING: "DEACTIVATING",
+  DELETED: "DELETED",
+  DELETE_PENDING: "DELETE_PENDING",
+  ERROR: "ERROR",
+  INACTIVE: "INACTIVE",
+} as const;
+/**
+ * @public
+ */
+export type ThreatEntitySetStatus = (typeof ThreatEntitySetStatus)[keyof typeof ThreatEntitySetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ThreatIntelSetStatus = {
+  ACTIVATING: "ACTIVATING",
+  ACTIVE: "ACTIVE",
+  DEACTIVATING: "DEACTIVATING",
+  DELETED: "DELETED",
+  DELETE_PENDING: "DELETE_PENDING",
+  ERROR: "ERROR",
+  INACTIVE: "INACTIVE",
+} as const;
+/**
+ * @public
+ */
+export type ThreatIntelSetStatus = (typeof ThreatIntelSetStatus)[keyof typeof ThreatIntelSetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const TrustedEntitySetStatus = {
+  ACTIVATING: "ACTIVATING",
+  ACTIVE: "ACTIVE",
+  DEACTIVATING: "DEACTIVATING",
+  DELETED: "DELETED",
+  DELETE_PENDING: "DELETE_PENDING",
+  ERROR: "ERROR",
+  INACTIVE: "INACTIVE",
+} as const;
+/**
+ * @public
+ */
+export type TrustedEntitySetStatus = (typeof TrustedEntitySetStatus)[keyof typeof TrustedEntitySetStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const UsageFeature = {
+  AI_PROTECTION: "AI_PROTECTION",
+  CLOUD_TRAIL: "CLOUD_TRAIL",
+  DNS_LOGS: "DNS_LOGS",
+  EBS_MALWARE_PROTECTION: "EBS_MALWARE_PROTECTION",
+  EC2_RUNTIME_MONITORING: "EC2_RUNTIME_MONITORING",
+  EKS_AUDIT_LOGS: "EKS_AUDIT_LOGS",
+  EKS_RUNTIME_MONITORING: "EKS_RUNTIME_MONITORING",
+  FARGATE_RUNTIME_MONITORING: "FARGATE_RUNTIME_MONITORING",
+  FLOW_LOGS: "FLOW_LOGS",
+  LAMBDA_NETWORK_LOGS: "LAMBDA_NETWORK_LOGS",
+  /**
+   * <p>Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL Limitless databases.</p>
+   */
+  RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS: "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS",
+  /**
+   * <p>Usage attributed to RDS Data Activity Monitoring for provisioned Amazon RDS databases.</p>
+   */
+  RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED: "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED",
+  /**
+   * <p>Usage attributed to RDS Data Activity Monitoring for Amazon Aurora Serverless databases.</p>
+   */
+  RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS: "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS",
+  /**
+   * <p>Usage attributed to RDS Protection database infrastructure monitoring for Amazon Aurora DSQL Limitless databases.</p>
+   */
+  RDS_DBI_PROTECTION_LIMITLESS: "RDS_DBI_PROTECTION_LIMITLESS",
+  RDS_DBI_PROTECTION_PROVISIONED: "RDS_DBI_PROTECTION_PROVISIONED",
+  RDS_DBI_PROTECTION_SERVERLESS: "RDS_DBI_PROTECTION_SERVERLESS",
+  RDS_LOGIN_EVENTS: "RDS_LOGIN_EVENTS",
+  S3_DATA_EVENTS: "S3_DATA_EVENTS",
+} as const;
+/**
+ * @public
+ */
+export type UsageFeature = (typeof UsageFeature)[keyof typeof UsageFeature];
+
+/**
+ * @public
+ * @enum
+ */
+export const UsageStatisticType = {
+  SUM_BY_ACCOUNT: "SUM_BY_ACCOUNT",
+  SUM_BY_DATA_SOURCE: "SUM_BY_DATA_SOURCE",
+  SUM_BY_FEATURES: "SUM_BY_FEATURES",
+  SUM_BY_RESOURCE: "SUM_BY_RESOURCE",
+  TOP_ACCOUNTS_BY_FEATURE: "TOP_ACCOUNTS_BY_FEATURE",
+  TOP_RESOURCES: "TOP_RESOURCES",
+} as const;
+/**
+ * @public
+ */
+export type UsageStatisticType = (typeof UsageStatisticType)[keyof typeof UsageStatisticType];
+
+/**
+ * @public
+ * @enum
+ */
+export const RecordType = {
+  ANALYSIS: "ANALYSIS",
+  FETCH: "FETCH",
+  METADATA: "METADATA",
+  OBSERVATION: "OBSERVATION",
+  UPDATE: "UPDATE",
+} as const;
+/**
+ * @public
+ */
+export type RecordType = (typeof RecordType)[keyof typeof RecordType];
+
+/**
+ * @public
+ * @enum
+ */
+export const ObservationType = {
+  ACCOUNT_OVERVIEW: "ACCOUNT_OVERVIEW",
+  DETECTION_COVERAGE: "DETECTION_COVERAGE",
+  DISTRIBUTION: "DISTRIBUTION",
+  FINDING_DETAIL: "FINDING_DETAIL",
+  KUBERNETES_ACTIVITY: "KUBERNETES_ACTIVITY",
+  MALWARE_SCAN: "MALWARE_SCAN",
+  NETWORK_ACTIVITY: "NETWORK_ACTIVITY",
+  RDS_LOGIN_ACTIVITY: "RDS_LOGIN_ACTIVITY",
+  RECOMMENDATION: "RECOMMENDATION",
+  RELATED_FINDINGS: "RELATED_FINDINGS",
+  REPRESENTATIVE_RESOURCE: "REPRESENTATIVE_RESOURCE",
+  RESOURCE: "RESOURCE",
+  RUNTIME_SIGNALS: "RUNTIME_SIGNALS",
+  S3_ACTIVITY: "S3_ACTIVITY",
+} as const;
+/**
+ * @public
+ */
+export type ObservationType = (typeof ObservationType)[keyof typeof ObservationType];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationFilterCriterionKey = {
+  CONFIDENCE: "CONFIDENCE",
+  FINDING_ID: "FINDING_ID",
+  INVESTIGATION_TYPE: "INVESTIGATION_TYPE",
+  RISK_LEVEL: "RISK_LEVEL",
+  STATUS: "STATUS",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationFilterCriterionKey =
+  (typeof InvestigationFilterCriterionKey)[keyof typeof InvestigationFilterCriterionKey];
+
+/**
+ * @public
+ * @enum
+ */
+export const InvestigationSortField = {
+  CONFIDENCE: "CONFIDENCE",
+  END_TIME: "END_TIME",
+  RISK_LEVEL: "RISK_LEVEL",
+  START_TIME: "START_TIME",
+  STATUS: "STATUS",
+} as const;
+/**
+ * @public
+ */
+export type InvestigationSortField = (typeof InvestigationSortField)[keyof typeof InvestigationSortField];
+
+/**
+ * @public
+ * @enum
+ */
+export const ListMalwareScansCriterionKey = {
+  ACCOUNT_ID: "ACCOUNT_ID",
+  GUARDDUTY_FINDING_ID: "GUARDDUTY_FINDING_ID",
+  RESOURCE_ARN: "RESOURCE_ARN",
+  RESOURCE_TYPE: "RESOURCE_TYPE",
+  SCAN_ID: "SCAN_ID",
+  SCAN_START_TIME: "SCAN_START_TIME",
+  SCAN_STATUS: "SCAN_STATUS",
+  SCAN_TYPE: "SCAN_TYPE",
+} as const;
+/**
+ * @public
+ */
+export type ListMalwareScansCriterionKey =
+  (typeof ListMalwareScansCriterionKey)[keyof typeof ListMalwareScansCriterionKey];

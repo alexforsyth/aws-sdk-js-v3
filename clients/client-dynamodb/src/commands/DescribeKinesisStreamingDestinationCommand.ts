@@ -1,30 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
-import {
+import { _ep3, _mw0, command } from "../commandBuilder";
+import type {
   DescribeKinesisStreamingDestinationInput,
   DescribeKinesisStreamingDestinationOutput,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeKinesisStreamingDestinationCommand,
-  serializeAws_json1_0DescribeKinesisStreamingDestinationCommand,
-} from "../protocols/Aws_json1_0";
+import { DescribeKinesisStreamingDestination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeKinesisStreamingDestinationCommand}.
+ */
 export interface DescribeKinesisStreamingDestinationCommandInput extends DescribeKinesisStreamingDestinationInput {}
-export interface DescribeKinesisStreamingDestinationCommandOutput
-  extends DescribeKinesisStreamingDestinationOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeKinesisStreamingDestinationCommand}.
+ */
+export interface DescribeKinesisStreamingDestinationCommandOutput extends DescribeKinesisStreamingDestinationOutput, __MetadataBearer {}
 
 /**
  * <p>Returns information about the status of Kinesis streaming.</p>
@@ -33,74 +32,64 @@ export interface DescribeKinesisStreamingDestinationCommandOutput
  * ```javascript
  * import { DynamoDBClient, DescribeKinesisStreamingDestinationCommand } from "@aws-sdk/client-dynamodb"; // ES Modules import
  * // const { DynamoDBClient, DescribeKinesisStreamingDestinationCommand } = require("@aws-sdk/client-dynamodb"); // CommonJS import
+ * // import type { DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
+ * const config = {}; // type is DynamoDBClientConfig
  * const client = new DynamoDBClient(config);
+ * const input = { // DescribeKinesisStreamingDestinationInput
+ *   TableName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeKinesisStreamingDestinationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeKinesisStreamingDestinationOutput
+ * //   TableName: "STRING_VALUE",
+ * //   KinesisDataStreamDestinations: [ // KinesisDataStreamDestinations
+ * //     { // KinesisDataStreamDestination
+ * //       StreamArn: "STRING_VALUE",
+ * //       DestinationStatus: "ENABLING" || "ACTIVE" || "DISABLING" || "DISABLED" || "ENABLE_FAILED" || "UPDATING",
+ * //       DestinationStatusDescription: "STRING_VALUE",
+ * //       ApproximateCreationDateTimePrecision: "MILLISECOND" || "MICROSECOND",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeKinesisStreamingDestinationCommandInput - {@link DescribeKinesisStreamingDestinationCommandInput}
+ * @returns {@link DescribeKinesisStreamingDestinationCommandOutput}
  * @see {@link DescribeKinesisStreamingDestinationCommandInput} for command's `input` shape.
  * @see {@link DescribeKinesisStreamingDestinationCommandOutput} for command's `response` shape.
- * @see {@link DynamoDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DynamoDBClientResolvedConfig | config} for DynamoDBClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access a nonexistent table or index. The resource might not
+ *             be specified correctly, or its status might not be <code>ACTIVE</code>.</p>
+ *
+ * @throws {@link DynamoDBServiceException}
+ * <p>Base exception class for all service exceptions from DynamoDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeKinesisStreamingDestinationCommand extends $Command<
-  DescribeKinesisStreamingDestinationCommandInput,
-  DescribeKinesisStreamingDestinationCommandOutput,
-  DynamoDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeKinesisStreamingDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DynamoDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeKinesisStreamingDestinationCommandInput, DescribeKinesisStreamingDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DynamoDBClient";
-    const commandName = "DescribeKinesisStreamingDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeKinesisStreamingDestinationInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeKinesisStreamingDestinationOutput.filterSensitiveLog,
+export class DescribeKinesisStreamingDestinationCommand extends command<DescribeKinesisStreamingDestinationCommandInput, DescribeKinesisStreamingDestinationCommandOutput>(
+  _ep3,
+  _mw0,
+  "DescribeKinesisStreamingDestination",
+  DescribeKinesisStreamingDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeKinesisStreamingDestinationInput;
+      output: DescribeKinesisStreamingDestinationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeKinesisStreamingDestinationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeKinesisStreamingDestinationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeKinesisStreamingDestinationCommandOutput> {
-    return deserializeAws_json1_0DescribeKinesisStreamingDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeKinesisStreamingDestinationCommandInput;
+      output: DescribeKinesisStreamingDestinationCommandOutput;
+    };
+  };
 }

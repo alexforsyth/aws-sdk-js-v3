@@ -1,95 +1,91 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { APIGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../APIGatewayClient";
-import { GetTagsRequest, Tags } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetTagsCommand,
-  serializeAws_restJson1GetTagsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTagsRequest, Tags } from "../models/models_0";
+import { GetTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTagsCommand}.
+ */
 export interface GetTagsCommandInput extends GetTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTagsCommand}.
+ */
 export interface GetTagsCommandOutput extends Tags, __MetadataBearer {}
 
 /**
- * <p>Gets the <a>Tags</a> collection for a given resource.</p>
+ * <p>Gets the Tags collection for a given resource.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { APIGatewayClient, GetTagsCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
  * // const { APIGatewayClient, GetTagsCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * // import type { APIGatewayClientConfig } from "@aws-sdk/client-api-gateway";
+ * const config = {}; // type is APIGatewayClientConfig
  * const client = new APIGatewayClient(config);
+ * const input = { // GetTagsRequest
+ *   resourceArn: "STRING_VALUE", // required
+ *   position: "STRING_VALUE",
+ *   limit: Number("int"),
+ * };
  * const command = new GetTagsCommand(input);
  * const response = await client.send(command);
+ * // { // Tags
+ * //   tags: { // MapOfStringToString
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetTagsCommandInput - {@link GetTagsCommandInput}
+ * @returns {@link GetTagsCommandOutput}
  * @see {@link GetTagsCommandInput} for command's `input` shape.
  * @see {@link GetTagsCommandOutput} for command's `response` shape.
- * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for APIGatewayClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource is not found. Make sure that the request URI is correct.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request has reached its throttling limit. Retry after the specified time period.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The request is denied because the caller has insufficient permissions.</p>
+ *
+ * @throws {@link APIGatewayServiceException}
+ * <p>Base exception class for all service exceptions from APIGateway service.</p>
+ *
+ *
+ * @public
  */
-export class GetTagsCommand extends $Command<
-  GetTagsCommandInput,
-  GetTagsCommandOutput,
-  APIGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: APIGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTagsCommandInput, GetTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "APIGatewayClient";
-    const commandName = "GetTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Tags.filterSensitiveLog,
+export class GetTagsCommand extends command<GetTagsCommandInput, GetTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTags",
+  GetTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTagsRequest;
+      output: Tags;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTagsCommandOutput> {
-    return deserializeAws_restJson1GetTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTagsCommandInput;
+      output: GetTagsCommandOutput;
+    };
+  };
 }

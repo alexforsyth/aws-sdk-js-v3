@@ -1,0 +1,245 @@
+// smithy-typescript generated code
+/**
+ * @public
+ * @enum
+ */
+export const SourceFormat = {
+  CCDA: "CCDA",
+  CSV: "CSV",
+} as const;
+/**
+ * @public
+ */
+export type SourceFormat = (typeof SourceFormat)[keyof typeof SourceFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const TargetFormat = {
+  FHIR_R4: "FHIR_R4",
+} as const;
+/**
+ * @public
+ */
+export type TargetFormat = (typeof TargetFormat)[keyof typeof TargetFormat];
+
+/**
+ * @public
+ * @enum
+ */
+export const TransformationJobStatus = {
+  COMPLETED: "COMPLETED",
+  COMPLETED_WITH_ERRORS: "COMPLETED_WITH_ERRORS",
+  FAILED: "FAILED",
+  IN_PROGRESS: "IN_PROGRESS",
+  QUEUED: "QUEUED",
+  SUBMITTED: "SUBMITTED",
+} as const;
+/**
+ * @public
+ */
+export type TransformationJobStatus = (typeof TransformationJobStatus)[keyof typeof TransformationJobStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgentInputMessageType = {
+  NORMAL: "normal",
+  USER_CONFIRMATION_RESPONSE: "confirmation_response",
+} as const;
+/**
+ * @public
+ */
+export type AgentInputMessageType = (typeof AgentInputMessageType)[keyof typeof AgentInputMessageType];
+
+/**
+ * @public
+ * @enum
+ */
+export const AgentErrorType = {
+  AccessDeniedException: "AccessDeniedException",
+  InternalServerException: "InternalServerException",
+  ResourceNotFoundException: "ResourceNotFoundException",
+  ThrottlingException: "ThrottlingException",
+  ValidationException: "ValidationException",
+} as const;
+/**
+ * @public
+ */
+export type AgentErrorType = (typeof AgentErrorType)[keyof typeof AgentErrorType];
+
+/**
+ * @public
+ * @enum
+ */
+export const AnalyticsStatus = {
+  DISABLED: "DISABLED",
+  DISABLING: "DISABLING",
+  ENABLED: "ENABLED",
+  ENABLING: "ENABLING",
+  PAUSED: "PAUSED",
+  PAUSING: "PAUSING",
+} as const;
+/**
+ * @public
+ */
+export type AnalyticsStatus = (typeof AnalyticsStatus)[keyof typeof AnalyticsStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const AuthorizationStrategy = {
+  AWS_AUTH: "AWS_AUTH",
+  SMARTV1: "SMART_ON_FHIR_V1",
+  SMART_ON_FHIR: "SMART_ON_FHIR",
+} as const;
+/**
+ * @public
+ */
+export type AuthorizationStrategy = (typeof AuthorizationStrategy)[keyof typeof AuthorizationStrategy];
+
+/**
+ * @public
+ * @enum
+ */
+export const BackupType = {
+  CONTINUOUS: "CONTINUOUS",
+} as const;
+/**
+ * @public
+ */
+export type BackupType = (typeof BackupType)[keyof typeof BackupType];
+
+/**
+ * @public
+ * @enum
+ */
+export const BackupStatus = {
+  DISABLED: "DISABLED",
+  ENABLED: "ENABLED",
+} as const;
+/**
+ * @public
+ */
+export type BackupStatus = (typeof BackupStatus)[keyof typeof BackupStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const CmkType = {
+  AO_CMK: "AWS_OWNED_KMS_KEY",
+  CM_CMK: "CUSTOMER_MANAGED_KMS_KEY",
+} as const;
+/**
+ * @public
+ */
+export type CmkType = (typeof CmkType)[keyof typeof CmkType];
+
+/**
+ * @public
+ * @enum
+ */
+export const FHIRVersion = {
+  R4: "R4",
+} as const;
+/**
+ * @public
+ */
+export type FHIRVersion = (typeof FHIRVersion)[keyof typeof FHIRVersion];
+
+/**
+ * @public
+ * @enum
+ */
+export const NlpStatus = {
+  DISABLED: "DISABLED",
+  DISABLING: "DISABLING",
+  ENABLED: "ENABLED",
+  ENABLING: "ENABLING",
+} as const;
+/**
+ * @public
+ */
+export type NlpStatus = (typeof NlpStatus)[keyof typeof NlpStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const PreloadDataType = {
+  SYNTHEA: "SYNTHEA",
+} as const;
+/**
+ * @public
+ */
+export type PreloadDataType = (typeof PreloadDataType)[keyof typeof PreloadDataType];
+
+/**
+ * @public
+ * @enum
+ */
+export const DatastoreStatus = {
+  ACTIVE: "ACTIVE",
+  CREATE_FAILED: "CREATE_FAILED",
+  CREATING: "CREATING",
+  DELETED: "DELETED",
+  DELETING: "DELETING",
+  UPDATE_FAILED: "UPDATE_FAILED",
+  UPDATING: "UPDATING",
+} as const;
+/**
+ * @public
+ */
+export type DatastoreStatus = (typeof DatastoreStatus)[keyof typeof DatastoreStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ErrorCategory = {
+  NON_RETRYABLE_ERROR: "NON_RETRYABLE_ERROR",
+  RETRYABLE_ERROR: "RETRYABLE_ERROR",
+} as const;
+/**
+ * @public
+ */
+export type ErrorCategory = (typeof ErrorCategory)[keyof typeof ErrorCategory];
+
+/**
+ * @public
+ * @enum
+ */
+export const JobStatus = {
+  CANCEL_COMPLETED: "CANCEL_COMPLETED",
+  CANCEL_FAILED: "CANCEL_FAILED",
+  CANCEL_IN_PROGRESS: "CANCEL_IN_PROGRESS",
+  CANCEL_SUBMITTED: "CANCEL_SUBMITTED",
+  COMPLETED: "COMPLETED",
+  COMPLETED_WITH_ERRORS: "COMPLETED_WITH_ERRORS",
+  FAILED: "FAILED",
+  IN_PROGRESS: "IN_PROGRESS",
+  QUEUED: "QUEUED",
+  SUBMITTED: "SUBMITTED",
+} as const;
+/**
+ * @public
+ */
+export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus];
+
+/**
+ * @public
+ * @enum
+ */
+export const ValidationLevel = {
+  MINIMAL: "minimal",
+  STRICT: "strict",
+  STRUCTURE_ONLY: "structure-only",
+} as const;
+/**
+ * @public
+ */
+export type ValidationLevel = (typeof ValidationLevel)[keyof typeof ValidationLevel];

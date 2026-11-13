@@ -1,0 +1,67 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type DescribeServerCommandInput,
+  type DescribeServerCommandOutput,
+  DescribeServerCommand,
+} from "../commands/DescribeServerCommand";
+import type { TransferServiceException } from "../models/TransferServiceException";
+import type { TransferClient } from "../TransferClient";
+
+const checkState = async (client: TransferClient, input: DescribeServerCommandInput): Promise<WaiterResult<DescribeServerCommandOutput | TransferServiceException>> => {
+  let reason;
+  try {
+    let result: DescribeServerCommandOutput & any = await client.send(new DescribeServerCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.Server.State;
+      }
+      if (returnComparator() === "OFFLINE") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.Server.State;
+      }
+      if (returnComparator() === "STOP_FAILED") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ *
+ *  @deprecated Use waitUntilServerOffline instead. waitForServerOffline does not throw error in non-success cases.
+ */
+export const waitForServerOffline = async (
+  params: WaiterConfiguration<TransferClient>,
+  input: DescribeServerCommandInput
+): Promise<WaiterResult<DescribeServerCommandOutput | TransferServiceException>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 3600 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to DescribeServerCommand for polling.
+ */
+export const waitUntilServerOffline = async (
+  params: WaiterConfiguration<TransferClient>,
+  input: DescribeServerCommandInput
+): Promise<WaiterResult<DescribeServerCommandOutput>> => {
+  const serviceDefaults = { minDelay: 30, maxDelay: 3600 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<DescribeServerCommandOutput>;
+};

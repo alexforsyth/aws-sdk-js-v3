@@ -1,34 +1,35 @@
-import { getApplyMd5BodyChecksumPlugin } from "@aws-sdk/middleware-apply-body-checksum";
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetMultiRegionAccessPointRequest, GetMultiRegionAccessPointResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetMultiRegionAccessPointCommand,
-  serializeAws_restXmlGetMultiRegionAccessPointCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMultiRegionAccessPointRequest, GetMultiRegionAccessPointResult } from "../models/models_0";
+import { GetMultiRegionAccessPoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMultiRegionAccessPointCommand}.
+ */
 export interface GetMultiRegionAccessPointCommandInput extends GetMultiRegionAccessPointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMultiRegionAccessPointCommand}.
+ */
 export interface GetMultiRegionAccessPointCommandOutput extends GetMultiRegionAccessPointResult, __MetadataBearer {}
 
 /**
- * <p>Returns configuration information about the specified Multi-Region Access Point.</p>
- *          <p>This action will always be routed to the US West (Oregon) Region. For more
- *             information about the restrictions around managing Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html">Managing
- *                 Multi-Region Access Points</a> in the
- *             <i>Amazon S3 User Guide</i>.</p>
+ * <note>
+ *             <p>This operation is not supported by directory buckets.</p>
+ *          </note>
+ *          <p>Returns configuration information about the specified Multi-Region Access Point.</p>
+ *          <p>This action will always be routed to the US West (Oregon) Region. For more information
+ *          about the restrictions around working with Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html">Multi-Region Access Point
+ *             restrictions and limitations</a> in the <i>Amazon S3 User Guide</i>.</p>
  *          <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p>
  *          <ul>
  *             <li>
@@ -57,73 +58,66 @@ export interface GetMultiRegionAccessPointCommandOutput extends GetMultiRegionAc
  * ```javascript
  * import { S3ControlClient, GetMultiRegionAccessPointCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, GetMultiRegionAccessPointCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // GetMultiRegionAccessPointRequest
+ *   AccountId: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new GetMultiRegionAccessPointCommand(input);
  * const response = await client.send(command);
+ * // { // GetMultiRegionAccessPointResult
+ * //   AccessPoint: { // MultiRegionAccessPointReport
+ * //     Name: "STRING_VALUE",
+ * //     Alias: "STRING_VALUE",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     PublicAccessBlock: { // PublicAccessBlockConfiguration
+ * //       BlockPublicAcls: true || false,
+ * //       IgnorePublicAcls: true || false,
+ * //       BlockPublicPolicy: true || false,
+ * //       RestrictPublicBuckets: true || false,
+ * //     },
+ * //     Status: "READY" || "INCONSISTENT_ACROSS_REGIONS" || "CREATING" || "PARTIALLY_CREATED" || "PARTIALLY_DELETED" || "DELETING",
+ * //     Regions: [ // RegionReportList
+ * //       { // RegionReport
+ * //         Bucket: "STRING_VALUE",
+ * //         Region: "STRING_VALUE",
+ * //         BucketAccountId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetMultiRegionAccessPointCommandInput - {@link GetMultiRegionAccessPointCommandInput}
+ * @returns {@link GetMultiRegionAccessPointCommandOutput}
  * @see {@link GetMultiRegionAccessPointCommandInput} for command's `input` shape.
  * @see {@link GetMultiRegionAccessPointCommandOutput} for command's `response` shape.
- * @see {@link S3ControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class GetMultiRegionAccessPointCommand extends $Command<
-  GetMultiRegionAccessPointCommandInput,
-  GetMultiRegionAccessPointCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMultiRegionAccessPointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMultiRegionAccessPointCommandInput, GetMultiRegionAccessPointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-    this.middlewareStack.use(getApplyMd5BodyChecksumPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "GetMultiRegionAccessPointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMultiRegionAccessPointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetMultiRegionAccessPointResult.filterSensitiveLog,
+export class GetMultiRegionAccessPointCommand extends command<GetMultiRegionAccessPointCommandInput, GetMultiRegionAccessPointCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMultiRegionAccessPoint",
+  GetMultiRegionAccessPoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMultiRegionAccessPointRequest;
+      output: GetMultiRegionAccessPointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMultiRegionAccessPointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetMultiRegionAccessPointCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetMultiRegionAccessPointCommandOutput> {
-    return deserializeAws_restXmlGetMultiRegionAccessPointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMultiRegionAccessPointCommandInput;
+      output: GetMultiRegionAccessPointCommandOutput;
+    };
+  };
 }

@@ -1,6 +1,25 @@
-export * from "./EMR";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * <p>Amazon EMR is a web service that makes it easier to process large amounts of
+ *          data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis,
+ *          machine learning, scientific simulation, and data warehouse management.</p>
+ *
+ * @packageDocumentation
+ */
 export * from "./EMRClient";
+export * from "./EMR";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { EMRExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
 export * from "./pagination";
 export * from "./waiters";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { EMRServiceException } from "./models/EMRServiceException";

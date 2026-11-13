@@ -1,98 +1,183 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CostExplorerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CostExplorerClient";
-import { UpdateAnomalySubscriptionRequest, UpdateAnomalySubscriptionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateAnomalySubscriptionCommand,
-  serializeAws_json1_1UpdateAnomalySubscriptionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAnomalySubscriptionRequest, UpdateAnomalySubscriptionResponse } from "../models/models_0";
+import { UpdateAnomalySubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAnomalySubscriptionCommand}.
+ */
 export interface UpdateAnomalySubscriptionCommandInput extends UpdateAnomalySubscriptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAnomalySubscriptionCommand}.
+ */
 export interface UpdateAnomalySubscriptionCommandOutput extends UpdateAnomalySubscriptionResponse, __MetadataBearer {}
 
 /**
- * <p>Updates an existing cost anomaly monitor subscription. </p>
+ * <p>Updates an existing cost anomaly subscription. Specify the fields that you want to update.
+ *       Omitted fields are unchanged.</p>
+ *          <note>
+ *             <p>The JSON below describes the generic construct for each type. See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters">Request Parameters</a> for possible values as they apply to
+ *           <code>AnomalySubscription</code>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CostExplorerClient, UpdateAnomalySubscriptionCommand } from "@aws-sdk/client-cost-explorer"; // ES Modules import
  * // const { CostExplorerClient, UpdateAnomalySubscriptionCommand } = require("@aws-sdk/client-cost-explorer"); // CommonJS import
+ * // import type { CostExplorerClientConfig } from "@aws-sdk/client-cost-explorer";
+ * const config = {}; // type is CostExplorerClientConfig
  * const client = new CostExplorerClient(config);
+ * const input = { // UpdateAnomalySubscriptionRequest
+ *   SubscriptionArn: "STRING_VALUE", // required
+ *   Threshold: Number("double"),
+ *   Frequency: "DAILY" || "IMMEDIATE" || "WEEKLY",
+ *   MonitorArnList: [ // MonitorArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   Subscribers: [ // Subscribers
+ *     { // Subscriber
+ *       Address: "STRING_VALUE",
+ *       Type: "EMAIL" || "SNS",
+ *       Status: "CONFIRMED" || "DECLINED",
+ *     },
+ *   ],
+ *   SubscriptionName: "STRING_VALUE",
+ *   ThresholdExpression: { // Expression
+ *     Or: [ // Expressions
+ *       {
+ *         Or: [
+ *           "<Expression>",
+ *         ],
+ *         And: [
+ *           "<Expression>",
+ *         ],
+ *         Not: "<Expression>",
+ *         Dimensions: { // DimensionValues
+ *           Key: "AZ" || "INSTANCE_TYPE" || "LINKED_ACCOUNT" || "PAYER_ACCOUNT" || "LINKED_ACCOUNT_NAME" || "OPERATION" || "PURCHASE_TYPE" || "REGION" || "SERVICE" || "SERVICE_CODE" || "USAGE_TYPE" || "USAGE_TYPE_GROUP" || "RECORD_TYPE" || "OPERATING_SYSTEM" || "TENANCY" || "SCOPE" || "PLATFORM" || "SUBSCRIPTION_ID" || "LEGAL_ENTITY_NAME" || "DEPLOYMENT_OPTION" || "DATABASE_ENGINE" || "CACHE_ENGINE" || "INSTANCE_TYPE_FAMILY" || "BILLING_ENTITY" || "RESERVATION_ID" || "RESOURCE_ID" || "RIGHTSIZING_TYPE" || "SAVINGS_PLANS_TYPE" || "SAVINGS_PLAN_ARN" || "PAYMENT_OPTION" || "AGREEMENT_END_DATE_TIME_AFTER" || "AGREEMENT_END_DATE_TIME_BEFORE" || "INVOICING_ENTITY" || "ANOMALY_TOTAL_IMPACT_ABSOLUTE" || "ANOMALY_TOTAL_IMPACT_PERCENTAGE" || "PRODUCT_ATTRIBUTE",
+ *           Values: [ // Values
+ *             "STRING_VALUE",
+ *           ],
+ *           MatchOptions: [ // MatchOptions
+ *             "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "CASE_SENSITIVE" || "CASE_INSENSITIVE" || "GREATER_THAN_OR_EQUAL",
+ *           ],
+ *         },
+ *         Tags: { // TagValues
+ *           Key: "STRING_VALUE",
+ *           Values: [
+ *             "STRING_VALUE",
+ *           ],
+ *           MatchOptions: [
+ *             "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "CASE_SENSITIVE" || "CASE_INSENSITIVE" || "GREATER_THAN_OR_EQUAL",
+ *           ],
+ *         },
+ *         CostCategories: { // CostCategoryValues
+ *           Key: "STRING_VALUE",
+ *           Values: [
+ *             "STRING_VALUE",
+ *           ],
+ *           MatchOptions: [
+ *             "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "CASE_SENSITIVE" || "CASE_INSENSITIVE" || "GREATER_THAN_OR_EQUAL",
+ *           ],
+ *         },
+ *         ProductAttributes: { // ProductAttributeValues
+ *           Key: "STRING_VALUE", // required
+ *           Values: [ // ProductAttributeValueList
+ *             "STRING_VALUE",
+ *           ],
+ *           MatchOptions: [
+ *             "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "CASE_SENSITIVE" || "CASE_INSENSITIVE" || "GREATER_THAN_OR_EQUAL",
+ *           ],
+ *         },
+ *       },
+ *     ],
+ *     And: [
+ *       "<Expression>",
+ *     ],
+ *     Not: "<Expression>",
+ *     Dimensions: {
+ *       Key: "AZ" || "INSTANCE_TYPE" || "LINKED_ACCOUNT" || "PAYER_ACCOUNT" || "LINKED_ACCOUNT_NAME" || "OPERATION" || "PURCHASE_TYPE" || "REGION" || "SERVICE" || "SERVICE_CODE" || "USAGE_TYPE" || "USAGE_TYPE_GROUP" || "RECORD_TYPE" || "OPERATING_SYSTEM" || "TENANCY" || "SCOPE" || "PLATFORM" || "SUBSCRIPTION_ID" || "LEGAL_ENTITY_NAME" || "DEPLOYMENT_OPTION" || "DATABASE_ENGINE" || "CACHE_ENGINE" || "INSTANCE_TYPE_FAMILY" || "BILLING_ENTITY" || "RESERVATION_ID" || "RESOURCE_ID" || "RIGHTSIZING_TYPE" || "SAVINGS_PLANS_TYPE" || "SAVINGS_PLAN_ARN" || "PAYMENT_OPTION" || "AGREEMENT_END_DATE_TIME_AFTER" || "AGREEMENT_END_DATE_TIME_BEFORE" || "INVOICING_ENTITY" || "ANOMALY_TOTAL_IMPACT_ABSOLUTE" || "ANOMALY_TOTAL_IMPACT_PERCENTAGE" || "PRODUCT_ATTRIBUTE",
+ *       Values: [
+ *         "STRING_VALUE",
+ *       ],
+ *       MatchOptions: [
+ *         "EQUALS" || "ABSENT" || "STARTS_WITH" || "ENDS_WITH" || "CONTAINS" || "CASE_SENSITIVE" || "CASE_INSENSITIVE" || "GREATER_THAN_OR_EQUAL",
+ *       ],
+ *     },
+ *     Tags: {
+ *       Key: "STRING_VALUE",
+ *       Values: [
+ *         "STRING_VALUE",
+ *       ],
+ *       MatchOptions: "<MatchOptions>",
+ *     },
+ *     CostCategories: {
+ *       Key: "STRING_VALUE",
+ *       Values: "<Values>",
+ *       MatchOptions: "<MatchOptions>",
+ *     },
+ *     ProductAttributes: {
+ *       Key: "STRING_VALUE", // required
+ *       Values: [
+ *         "STRING_VALUE",
+ *       ],
+ *       MatchOptions: "<MatchOptions>",
+ *     },
+ *   },
+ * };
  * const command = new UpdateAnomalySubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAnomalySubscriptionResponse
+ * //   SubscriptionArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateAnomalySubscriptionCommandInput - {@link UpdateAnomalySubscriptionCommandInput}
+ * @returns {@link UpdateAnomalySubscriptionCommandOutput}
  * @see {@link UpdateAnomalySubscriptionCommandInput} for command's `input` shape.
  * @see {@link UpdateAnomalySubscriptionCommandOutput} for command's `response` shape.
- * @see {@link CostExplorerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CostExplorerClientResolvedConfig | config} for CostExplorerClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You made too many calls in a short period of time. Try again later.</p>
+ *
+ * @throws {@link UnknownMonitorException} (client fault)
+ *  <p>The cost anomaly monitor does not exist for the account. </p>
+ *
+ * @throws {@link UnknownSubscriptionException} (client fault)
+ *  <p>The cost anomaly subscription does not exist for the account. </p>
+ *
+ * @throws {@link CostExplorerServiceException}
+ * <p>Base exception class for all service exceptions from CostExplorer service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAnomalySubscriptionCommand extends $Command<
-  UpdateAnomalySubscriptionCommandInput,
-  UpdateAnomalySubscriptionCommandOutput,
-  CostExplorerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAnomalySubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CostExplorerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAnomalySubscriptionCommandInput, UpdateAnomalySubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CostExplorerClient";
-    const commandName = "UpdateAnomalySubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAnomalySubscriptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAnomalySubscriptionResponse.filterSensitiveLog,
+export class UpdateAnomalySubscriptionCommand extends command<UpdateAnomalySubscriptionCommandInput, UpdateAnomalySubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAnomalySubscription",
+  UpdateAnomalySubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAnomalySubscriptionRequest;
+      output: UpdateAnomalySubscriptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAnomalySubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateAnomalySubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateAnomalySubscriptionCommandOutput> {
-    return deserializeAws_json1_1UpdateAnomalySubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAnomalySubscriptionCommandInput;
+      output: UpdateAnomalySubscriptionCommandOutput;
+    };
+  };
 }

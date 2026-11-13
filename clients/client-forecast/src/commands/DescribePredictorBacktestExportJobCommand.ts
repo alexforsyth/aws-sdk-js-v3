@@ -1,54 +1,53 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribePredictorBacktestExportJobRequest,
   DescribePredictorBacktestExportJobResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribePredictorBacktestExportJobCommand,
-  serializeAws_json1_1DescribePredictorBacktestExportJobCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribePredictorBacktestExportJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePredictorBacktestExportJobCommand}.
+ */
 export interface DescribePredictorBacktestExportJobCommandInput extends DescribePredictorBacktestExportJobRequest {}
-export interface DescribePredictorBacktestExportJobCommandOutput
-  extends DescribePredictorBacktestExportJobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePredictorBacktestExportJobCommand}.
+ */
+export interface DescribePredictorBacktestExportJobCommandOutput extends DescribePredictorBacktestExportJobResponse, __MetadataBearer {}
 
 /**
  * <p>Describes a predictor backtest export job created using the <a>CreatePredictorBacktestExportJob</a> operation.</p>
- *         <p>In addition to listing the properties provided by the user in the
- *             <code>CreatePredictorBacktestExportJob</code> request, this operation lists the
+ *          <p>In addition to listing the properties provided by the user in the
+ *                 <code>CreatePredictorBacktestExportJob</code> request, this operation lists the
  *             following properties:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
- *                     <code>CreationTime</code>
- *                 </p>
+ *                <p>
+ *                   <code>CreationTime</code>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <code>LastModificationTime</code>
- *                 </p>
+ *                <p>
+ *                   <code>LastModificationTime</code>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <code>Status</code>
- *                 </p>
+ *                <p>
+ *                   <code>Status</code>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <code>Message</code> (if an error occurred)</p>
  *             </li>
  *          </ul>
@@ -57,74 +56,69 @@ export interface DescribePredictorBacktestExportJobCommandOutput
  * ```javascript
  * import { ForecastClient, DescribePredictorBacktestExportJobCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DescribePredictorBacktestExportJobCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DescribePredictorBacktestExportJobRequest
+ *   PredictorBacktestExportJobArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribePredictorBacktestExportJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePredictorBacktestExportJobResponse
+ * //   PredictorBacktestExportJobArn: "STRING_VALUE",
+ * //   PredictorBacktestExportJobName: "STRING_VALUE",
+ * //   PredictorArn: "STRING_VALUE",
+ * //   Destination: { // DataDestination
+ * //     S3Config: { // S3Config
+ * //       Path: "STRING_VALUE", // required
+ * //       RoleArn: "STRING_VALUE", // required
+ * //       KMSKeyArn: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   Message: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModificationTime: new Date("TIMESTAMP"),
+ * //   Format: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePredictorBacktestExportJobCommandInput - {@link DescribePredictorBacktestExportJobCommandInput}
+ * @returns {@link DescribePredictorBacktestExportJobCommandOutput}
  * @see {@link DescribePredictorBacktestExportJobCommandInput} for command's `input` shape.
  * @see {@link DescribePredictorBacktestExportJobCommandOutput} for command's `response` shape.
- * @see {@link ForecastClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePredictorBacktestExportJobCommand extends $Command<
-  DescribePredictorBacktestExportJobCommandInput,
-  DescribePredictorBacktestExportJobCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePredictorBacktestExportJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePredictorBacktestExportJobCommandInput, DescribePredictorBacktestExportJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DescribePredictorBacktestExportJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePredictorBacktestExportJobRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePredictorBacktestExportJobResponse.filterSensitiveLog,
+export class DescribePredictorBacktestExportJobCommand extends command<DescribePredictorBacktestExportJobCommandInput, DescribePredictorBacktestExportJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePredictorBacktestExportJob",
+  DescribePredictorBacktestExportJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePredictorBacktestExportJobRequest;
+      output: DescribePredictorBacktestExportJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribePredictorBacktestExportJobCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePredictorBacktestExportJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribePredictorBacktestExportJobCommandOutput> {
-    return deserializeAws_json1_1DescribePredictorBacktestExportJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePredictorBacktestExportJobCommandInput;
+      output: DescribePredictorBacktestExportJobCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ApplicationInsightsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ApplicationInsightsClient";
-import { UpdateApplicationRequest, UpdateApplicationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateApplicationCommand,
-  serializeAws_json1_1UpdateApplicationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateApplicationRequest, UpdateApplicationResponse } from "../models/models_0";
+import { UpdateApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandInput extends UpdateApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApplicationCommand}.
+ */
 export interface UpdateApplicationCommandOutput extends UpdateApplicationResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,75 @@ export interface UpdateApplicationCommandOutput extends UpdateApplicationRespons
  * ```javascript
  * import { ApplicationInsightsClient, UpdateApplicationCommand } from "@aws-sdk/client-application-insights"; // ES Modules import
  * // const { ApplicationInsightsClient, UpdateApplicationCommand } = require("@aws-sdk/client-application-insights"); // CommonJS import
+ * // import type { ApplicationInsightsClientConfig } from "@aws-sdk/client-application-insights";
+ * const config = {}; // type is ApplicationInsightsClientConfig
  * const client = new ApplicationInsightsClient(config);
+ * const input = { // UpdateApplicationRequest
+ *   ResourceGroupName: "STRING_VALUE", // required
+ *   OpsCenterEnabled: true || false,
+ *   CWEMonitorEnabled: true || false,
+ *   OpsItemSNSTopicArn: "STRING_VALUE",
+ *   SNSNotificationArn: "STRING_VALUE",
+ *   RemoveSNSTopic: true || false,
+ *   AutoConfigEnabled: true || false,
+ *   AttachMissingPermission: true || false,
+ * };
  * const command = new UpdateApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateApplicationResponse
+ * //   ApplicationInfo: { // ApplicationInfo
+ * //     AccountId: "STRING_VALUE",
+ * //     ResourceGroupName: "STRING_VALUE",
+ * //     LifeCycle: "STRING_VALUE",
+ * //     OpsItemSNSTopicArn: "STRING_VALUE",
+ * //     SNSNotificationArn: "STRING_VALUE",
+ * //     OpsCenterEnabled: true || false,
+ * //     CWEMonitorEnabled: true || false,
+ * //     Remarks: "STRING_VALUE",
+ * //     AutoConfigEnabled: true || false,
+ * //     DiscoveryType: "RESOURCE_GROUP_BASED" || "ACCOUNT_BASED",
+ * //     AttachMissingPermission: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateApplicationCommandInput - {@link UpdateApplicationCommandInput}
+ * @returns {@link UpdateApplicationCommandOutput}
  * @see {@link UpdateApplicationCommandInput} for command's `input` shape.
  * @see {@link UpdateApplicationCommandOutput} for command's `response` shape.
- * @see {@link ApplicationInsightsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ApplicationInsightsClientResolvedConfig | config} for ApplicationInsightsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource does not exist in the customer account.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The parameter is not valid.</p>
+ *
+ * @throws {@link ApplicationInsightsServiceException}
+ * <p>Base exception class for all service exceptions from ApplicationInsights service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateApplicationCommand extends $Command<
-  UpdateApplicationCommandInput,
-  UpdateApplicationCommandOutput,
-  ApplicationInsightsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ApplicationInsightsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApplicationCommandInput, UpdateApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ApplicationInsightsClient";
-    const commandName = "UpdateApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApplicationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateApplicationResponse.filterSensitiveLog,
+export class UpdateApplicationCommand extends command<UpdateApplicationCommandInput, UpdateApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApplication",
+  UpdateApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApplicationRequest;
+      output: UpdateApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApplicationCommandOutput> {
-    return deserializeAws_json1_1UpdateApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApplicationCommandInput;
+      output: UpdateApplicationCommandOutput;
+    };
+  };
 }

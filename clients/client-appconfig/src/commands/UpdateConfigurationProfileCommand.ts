@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { ConfigurationProfile, UpdateConfigurationProfileRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateConfigurationProfileCommand,
-  serializeAws_restJson1UpdateConfigurationProfileCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfigurationProfile, UpdateConfigurationProfileRequest } from "../models/models_0";
+import { UpdateConfigurationProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConfigurationProfileCommand}.
+ */
 export interface UpdateConfigurationProfileCommandInput extends UpdateConfigurationProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConfigurationProfileCommand}.
+ */
 export interface UpdateConfigurationProfileCommandOutput extends ConfigurationProfile, __MetadataBearer {}
 
 /**
@@ -28,71 +29,103 @@ export interface UpdateConfigurationProfileCommandOutput extends ConfigurationPr
  * ```javascript
  * import { AppConfigClient, UpdateConfigurationProfileCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, UpdateConfigurationProfileCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // UpdateConfigurationProfileRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   ConfigurationProfileId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   RetrievalRoleArn: "STRING_VALUE",
+ *   Validators: [ // ValidatorList
+ *     { // Validator
+ *       Type: "JSON_SCHEMA" || "LAMBDA", // required
+ *       Content: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   KmsKeyIdentifier: "STRING_VALUE",
+ * };
  * const command = new UpdateConfigurationProfileCommand(input);
  * const response = await client.send(command);
+ * // { // ConfigurationProfile
+ * //   ApplicationId: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   LocationUri: "STRING_VALUE",
+ * //   RetrievalRoleArn: "STRING_VALUE",
+ * //   Validators: [ // ValidatorList
+ * //     { // Validator
+ * //       Type: "JSON_SCHEMA" || "LAMBDA", // required
+ * //       Content: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   Type: "STRING_VALUE",
+ * //   KmsKeyArn: "STRING_VALUE",
+ * //   KmsKeyIdentifier: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateConfigurationProfileCommandInput - {@link UpdateConfigurationProfileCommandInput}
+ * @returns {@link UpdateConfigurationProfileCommandOutput}
  * @see {@link UpdateConfigurationProfileCommandInput} for command's `input` shape.
  * @see {@link UpdateConfigurationProfileCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To update a configuration profile
+ * ```javascript
+ * // The following update-configuration-profile example updates the description of the specified configuration profile.
+ * const input = {
+ *   ApplicationId: "339ohji",
+ *   ConfigurationProfileId: "ur8hx2f",
+ *   Description: "Configuration profile used for examples."
+ * };
+ * const command = new UpdateConfigurationProfileCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ApplicationId: "339ohji",
+ *   Description: "Configuration profile used for examples.",
+ *   Id: "ur8hx2f",
+ *   LocationUri: "ssm-parameter://Example-Parameter",
+ *   Name: "Example-Configuration-Profile",
+ *   RetrievalRoleArn: "arn:aws:iam::111122223333:role/Example-App-Config-Role"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateConfigurationProfileCommand extends $Command<
-  UpdateConfigurationProfileCommandInput,
-  UpdateConfigurationProfileCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConfigurationProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConfigurationProfileCommandInput, UpdateConfigurationProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "UpdateConfigurationProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConfigurationProfileRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfigurationProfile.filterSensitiveLog,
+export class UpdateConfigurationProfileCommand extends command<UpdateConfigurationProfileCommandInput, UpdateConfigurationProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConfigurationProfile",
+  UpdateConfigurationProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConfigurationProfileRequest;
+      output: ConfigurationProfile;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateConfigurationProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateConfigurationProfileCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateConfigurationProfileCommandOutput> {
-    return deserializeAws_restJson1UpdateConfigurationProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConfigurationProfileCommandInput;
+      output: UpdateConfigurationProfileCommandOutput;
+    };
+  };
 }

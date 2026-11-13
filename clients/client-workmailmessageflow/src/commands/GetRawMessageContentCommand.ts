@@ -1,29 +1,28 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer, StreamingBlobPayloadOutputTypes } from "@smithy/types";
 
-import { GetRawMessageContentRequest, GetRawMessageContentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRawMessageContentCommand,
-  serializeAws_restJson1GetRawMessageContentCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceInputTypes,
-  ServiceOutputTypes,
-  WorkMailMessageFlowClientResolvedConfig,
-} from "../WorkMailMessageFlowClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRawMessageContentRequest, GetRawMessageContentResponse } from "../models/models_0";
+import { GetRawMessageContent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRawMessageContentCommand}.
+ */
 export interface GetRawMessageContentCommandInput extends GetRawMessageContentRequest {}
-export interface GetRawMessageContentCommandOutput extends GetRawMessageContentResponse, __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetRawMessageContentCommand}.
+ */
+export interface GetRawMessageContentCommandOutput extends Omit<GetRawMessageContentResponse, "messageContent">, __MetadataBearer {
+  messageContent: StreamingBlobPayloadOutputTypes;
+}
 
 /**
  * <p>Retrieves the raw content of an in-transit email message, in MIME format.</p>
@@ -32,68 +31,55 @@ export interface GetRawMessageContentCommandOutput extends GetRawMessageContentR
  * ```javascript
  * import { WorkMailMessageFlowClient, GetRawMessageContentCommand } from "@aws-sdk/client-workmailmessageflow"; // ES Modules import
  * // const { WorkMailMessageFlowClient, GetRawMessageContentCommand } = require("@aws-sdk/client-workmailmessageflow"); // CommonJS import
+ * // import type { WorkMailMessageFlowClientConfig } from "@aws-sdk/client-workmailmessageflow";
+ * const config = {}; // type is WorkMailMessageFlowClientConfig
  * const client = new WorkMailMessageFlowClient(config);
+ * const input = { // GetRawMessageContentRequest
+ *   messageId: "STRING_VALUE", // required
+ * };
  * const command = new GetRawMessageContentCommand(input);
  * const response = await client.send(command);
+ * // consume or destroy the stream to free the socket.
+ * const bytes = await response.messageContent.transformToByteArray();
+ * // const str = await response.messageContent.transformToString();
+ * // response.messageContent.destroy(); // only applicable to Node.js Readable streams.
+ *
+ * // { // GetRawMessageContentResponse
+ * //   messageContent: "<SdkStream>", // see \@smithy/types -> StreamingBlobPayloadOutputTypes // required
+ * // };
+ *
  * ```
  *
+ * @param GetRawMessageContentCommandInput - {@link GetRawMessageContentCommandInput}
+ * @returns {@link GetRawMessageContentCommandOutput}
  * @see {@link GetRawMessageContentCommandInput} for command's `input` shape.
  * @see {@link GetRawMessageContentCommandOutput} for command's `response` shape.
- * @see {@link WorkMailMessageFlowClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkMailMessageFlowClientResolvedConfig | config} for WorkMailMessageFlowClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested email message is not found.</p>
+ *
+ * @throws {@link WorkMailMessageFlowServiceException}
+ * <p>Base exception class for all service exceptions from WorkMailMessageFlow service.</p>
+ *
+ *
+ * @public
  */
-export class GetRawMessageContentCommand extends $Command<
-  GetRawMessageContentCommandInput,
-  GetRawMessageContentCommandOutput,
-  WorkMailMessageFlowClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRawMessageContentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkMailMessageFlowClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRawMessageContentCommandInput, GetRawMessageContentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkMailMessageFlowClient";
-    const commandName = "GetRawMessageContentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRawMessageContentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRawMessageContentResponse.filterSensitiveLog,
+export class GetRawMessageContentCommand extends command<GetRawMessageContentCommandInput, GetRawMessageContentCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRawMessageContent",
+  GetRawMessageContent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRawMessageContentRequest;
+      output: GetRawMessageContentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRawMessageContentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRawMessageContentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRawMessageContentCommandOutput> {
-    return deserializeAws_restJson1GetRawMessageContentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRawMessageContentCommandInput;
+      output: GetRawMessageContentCommandOutput;
+    };
+  };
 }

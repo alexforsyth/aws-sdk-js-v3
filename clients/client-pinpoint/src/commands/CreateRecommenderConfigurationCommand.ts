@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateRecommenderConfigurationRequest, CreateRecommenderConfigurationResponse } from "../models/models_0";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1CreateRecommenderConfigurationCommand,
-  serializeAws_restJson1CreateRecommenderConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRecommenderConfigurationRequest, CreateRecommenderConfigurationResponse } from "../models/models_0";
+import { CreateRecommenderConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRecommenderConfigurationCommand}.
+ */
 export interface CreateRecommenderConfigurationCommandInput extends CreateRecommenderConfigurationRequest {}
-export interface CreateRecommenderConfigurationCommandOutput
-  extends CreateRecommenderConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRecommenderConfigurationCommand}.
+ */
+export interface CreateRecommenderConfigurationCommandOutput extends CreateRecommenderConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Creates an Amazon Pinpoint configuration for a recommender model.</p>
@@ -30,74 +29,95 @@ export interface CreateRecommenderConfigurationCommandOutput
  * ```javascript
  * import { PinpointClient, CreateRecommenderConfigurationCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, CreateRecommenderConfigurationCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // CreateRecommenderConfigurationRequest
+ *   CreateRecommenderConfiguration: { // CreateRecommenderConfigurationShape
+ *     Attributes: { // MapOf__string
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     Description: "STRING_VALUE",
+ *     Name: "STRING_VALUE",
+ *     RecommendationProviderIdType: "STRING_VALUE",
+ *     RecommendationProviderRoleArn: "STRING_VALUE", // required
+ *     RecommendationProviderUri: "STRING_VALUE", // required
+ *     RecommendationTransformerUri: "STRING_VALUE",
+ *     RecommendationsDisplayName: "STRING_VALUE",
+ *     RecommendationsPerMessage: Number("int"),
+ *   },
+ * };
  * const command = new CreateRecommenderConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRecommenderConfigurationResponse
+ * //   RecommenderConfigurationResponse: { // RecommenderConfigurationResponse
+ * //     Attributes: { // MapOf__string
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     CreationDate: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     Id: "STRING_VALUE", // required
+ * //     LastModifiedDate: "STRING_VALUE", // required
+ * //     Name: "STRING_VALUE",
+ * //     RecommendationProviderIdType: "STRING_VALUE",
+ * //     RecommendationProviderRoleArn: "STRING_VALUE", // required
+ * //     RecommendationProviderUri: "STRING_VALUE", // required
+ * //     RecommendationTransformerUri: "STRING_VALUE",
+ * //     RecommendationsDisplayName: "STRING_VALUE",
+ * //     RecommendationsPerMessage: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateRecommenderConfigurationCommandInput - {@link CreateRecommenderConfigurationCommandInput}
+ * @returns {@link CreateRecommenderConfigurationCommandOutput}
  * @see {@link CreateRecommenderConfigurationCommandInput} for command's `input` shape.
  * @see {@link CreateRecommenderConfigurationCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRecommenderConfigurationCommand extends $Command<
-  CreateRecommenderConfigurationCommandInput,
-  CreateRecommenderConfigurationCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRecommenderConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRecommenderConfigurationCommandInput, CreateRecommenderConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "CreateRecommenderConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRecommenderConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRecommenderConfigurationResponse.filterSensitiveLog,
+export class CreateRecommenderConfigurationCommand extends command<CreateRecommenderConfigurationCommandInput, CreateRecommenderConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRecommenderConfiguration",
+  CreateRecommenderConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRecommenderConfigurationRequest;
+      output: CreateRecommenderConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateRecommenderConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRecommenderConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateRecommenderConfigurationCommandOutput> {
-    return deserializeAws_restJson1CreateRecommenderConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRecommenderConfigurationCommandInput;
+      output: CreateRecommenderConfigurationCommandOutput;
+    };
+  };
 }

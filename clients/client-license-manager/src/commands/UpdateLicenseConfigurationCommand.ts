@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
-import { UpdateLicenseConfigurationRequest, UpdateLicenseConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateLicenseConfigurationCommand,
-  serializeAws_json1_1UpdateLicenseConfigurationCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateLicenseConfigurationRequest, UpdateLicenseConfigurationResponse } from "../models/models_0";
+import { UpdateLicenseConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateLicenseConfigurationCommand}.
+ */
 export interface UpdateLicenseConfigurationCommandInput extends UpdateLicenseConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateLicenseConfigurationCommand}.
+ */
 export interface UpdateLicenseConfigurationCommandOutput extends UpdateLicenseConfigurationResponse, __MetadataBearer {}
 
 /**
@@ -28,71 +29,91 @@ export interface UpdateLicenseConfigurationCommandOutput extends UpdateLicenseCo
  * ```javascript
  * import { LicenseManagerClient, UpdateLicenseConfigurationCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
  * // const { LicenseManagerClient, UpdateLicenseConfigurationCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * // import type { LicenseManagerClientConfig } from "@aws-sdk/client-license-manager";
+ * const config = {}; // type is LicenseManagerClientConfig
  * const client = new LicenseManagerClient(config);
+ * const input = { // UpdateLicenseConfigurationRequest
+ *   LicenseConfigurationArn: "STRING_VALUE", // required
+ *   LicenseConfigurationStatus: "AVAILABLE" || "DISABLED",
+ *   LicenseRules: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   LicenseCount: Number("long"),
+ *   LicenseCountHardLimit: true || false,
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   ProductInformationList: [ // ProductInformationList
+ *     { // ProductInformation
+ *       ResourceType: "STRING_VALUE", // required
+ *       ProductInformationFilterList: [ // ProductInformationFilterList // required
+ *         { // ProductInformationFilter
+ *           ProductInformationFilterName: "STRING_VALUE", // required
+ *           ProductInformationFilterValue: [
+ *             "STRING_VALUE",
+ *           ],
+ *           ProductInformationFilterComparator: "STRING_VALUE", // required
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   DisassociateWhenNotFound: true || false,
+ *   LicenseExpiry: Number("long"),
+ * };
  * const command = new UpdateLicenseConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateLicenseConfigurationCommandInput - {@link UpdateLicenseConfigurationCommandInput}
+ * @returns {@link UpdateLicenseConfigurationCommandOutput}
  * @see {@link UpdateLicenseConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateLicenseConfigurationCommandOutput} for command's `response` shape.
- * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for LicenseManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to resource denied.</p>
+ *
+ * @throws {@link AuthorizationException} (client fault)
+ *  <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
+ *          policy associated with this account.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict processing the request. Try your request again.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link RateLimitExceededException} (client fault)
+ *  <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link ServerInternalException} (server fault)
+ *  <p>The server experienced an internal error. Try again.</p>
+ *
+ * @throws {@link LicenseManagerServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManager service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateLicenseConfigurationCommand extends $Command<
-  UpdateLicenseConfigurationCommandInput,
-  UpdateLicenseConfigurationCommandOutput,
-  LicenseManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateLicenseConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateLicenseConfigurationCommandInput, UpdateLicenseConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerClient";
-    const commandName = "UpdateLicenseConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateLicenseConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateLicenseConfigurationResponse.filterSensitiveLog,
+export class UpdateLicenseConfigurationCommand extends command<UpdateLicenseConfigurationCommandInput, UpdateLicenseConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateLicenseConfiguration",
+  UpdateLicenseConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateLicenseConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateLicenseConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateLicenseConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateLicenseConfigurationCommandOutput> {
-    return deserializeAws_json1_1UpdateLicenseConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateLicenseConfigurationCommandInput;
+      output: UpdateLicenseConfigurationCommandOutput;
+    };
+  };
 }

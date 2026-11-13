@@ -1,0 +1,92 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGatewayInput, CreateGatewayOutput } from "../models/models_0";
+import { CreateGateway$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGatewayCommand}.
+ */
+export interface CreateGatewayCommandInput extends CreateGatewayInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGatewayCommand}.
+ */
+export interface CreateGatewayCommandOutput extends CreateGatewayOutput, __MetadataBearer {}
+
+/**
+ * <p>Creates a backup gateway. After you create a gateway, you can associate it with a server using the <code>AssociateGatewayToServer</code> operation.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BackupGatewayClient, CreateGatewayCommand } from "@aws-sdk/client-backup-gateway"; // ES Modules import
+ * // const { BackupGatewayClient, CreateGatewayCommand } = require("@aws-sdk/client-backup-gateway"); // CommonJS import
+ * // import type { BackupGatewayClientConfig } from "@aws-sdk/client-backup-gateway";
+ * const config = {}; // type is BackupGatewayClientConfig
+ * const client = new BackupGatewayClient(config);
+ * const input = { // CreateGatewayInput
+ *   ActivationKey: "STRING_VALUE", // required
+ *   GatewayDisplayName: "STRING_VALUE", // required
+ *   GatewayType: "STRING_VALUE", // required
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
+ * const command = new CreateGatewayCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateGatewayOutput
+ * //   GatewayArn: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param CreateGatewayCommandInput - {@link CreateGatewayCommandInput}
+ * @returns {@link CreateGatewayCommandOutput}
+ * @see {@link CreateGatewayCommandInput} for command's `input` shape.
+ * @see {@link CreateGatewayCommandOutput} for command's `response` shape.
+ * @see {@link BackupGatewayClientResolvedConfig | config} for BackupGatewayClient's `config` shape.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation did not succeed because an internal error occurred. Try again later.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation did not succeed because a validation error occurred.</p>
+ *
+ * @throws {@link BackupGatewayServiceException}
+ * <p>Base exception class for all service exceptions from BackupGateway service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateGatewayCommand extends command<CreateGatewayCommandInput, CreateGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGateway",
+  CreateGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGatewayInput;
+      output: CreateGatewayOutput;
+    };
+    sdk: {
+      input: CreateGatewayCommandInput;
+      output: CreateGatewayCommandOutput;
+    };
+  };
+}

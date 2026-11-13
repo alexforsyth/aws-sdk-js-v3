@@ -1,96 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RevokeSignatureRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1RevokeSignatureCommand,
-  serializeAws_restJson1RevokeSignatureCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SignerClientResolvedConfig } from "../SignerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RevokeSignatureRequest } from "../models/models_0";
+import { RevokeSignature$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RevokeSignatureCommand}.
+ */
 export interface RevokeSignatureCommandInput extends RevokeSignatureRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RevokeSignatureCommand}.
+ */
 export interface RevokeSignatureCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Changes the state of a signing job to REVOKED. This indicates that the signature is no
+ * <p>Changes the state of a signing job to <code>REVOKED</code>. This indicates that the signature is no
  * 			longer valid.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SignerClient, RevokeSignatureCommand } from "@aws-sdk/client-signer"; // ES Modules import
  * // const { SignerClient, RevokeSignatureCommand } = require("@aws-sdk/client-signer"); // CommonJS import
+ * // import type { SignerClientConfig } from "@aws-sdk/client-signer";
+ * const config = {}; // type is SignerClientConfig
  * const client = new SignerClient(config);
+ * const input = { // RevokeSignatureRequest
+ *   jobId: "STRING_VALUE", // required
+ *   jobOwner: "STRING_VALUE",
+ *   reason: "STRING_VALUE", // required
+ * };
  * const command = new RevokeSignatureCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RevokeSignatureCommandInput - {@link RevokeSignatureCommandInput}
+ * @returns {@link RevokeSignatureCommandOutput}
  * @see {@link RevokeSignatureCommandInput} for command's `input` shape.
  * @see {@link RevokeSignatureCommandOutput} for command's `response` shape.
- * @see {@link SignerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SignerClientResolvedConfig | config} for SignerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An internal error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A specified resource could not be found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The allowed number of job-signing requests has been exceeded.</p>
+ *          <p>This error supersedes the error <code>ThrottlingException</code>.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>You signing certificate could not be validated.</p>
+ *
+ * @throws {@link SignerServiceException}
+ * <p>Base exception class for all service exceptions from Signer service.</p>
+ *
+ *
+ * @public
  */
-export class RevokeSignatureCommand extends $Command<
-  RevokeSignatureCommandInput,
-  RevokeSignatureCommandOutput,
-  SignerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RevokeSignatureCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SignerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RevokeSignatureCommandInput, RevokeSignatureCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SignerClient";
-    const commandName = "RevokeSignatureCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RevokeSignatureRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RevokeSignatureCommand extends command<RevokeSignatureCommandInput, RevokeSignatureCommandOutput>(
+  _ep0,
+  _mw0,
+  "RevokeSignature",
+  RevokeSignature$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeSignatureRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RevokeSignatureCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RevokeSignatureCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RevokeSignatureCommandOutput> {
-    return deserializeAws_restJson1RevokeSignatureCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RevokeSignatureCommandInput;
+      output: RevokeSignatureCommandOutput;
+    };
+  };
 }

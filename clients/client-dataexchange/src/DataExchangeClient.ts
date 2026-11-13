@@ -1,110 +1,168 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CancelJobCommandInput, CancelJobCommandOutput } from "./commands/CancelJobCommand";
-import { CreateDataSetCommandInput, CreateDataSetCommandOutput } from "./commands/CreateDataSetCommand";
-import { CreateEventActionCommandInput, CreateEventActionCommandOutput } from "./commands/CreateEventActionCommand";
-import { CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
-import { CreateRevisionCommandInput, CreateRevisionCommandOutput } from "./commands/CreateRevisionCommand";
-import { DeleteAssetCommandInput, DeleteAssetCommandOutput } from "./commands/DeleteAssetCommand";
-import { DeleteDataSetCommandInput, DeleteDataSetCommandOutput } from "./commands/DeleteDataSetCommand";
-import { DeleteEventActionCommandInput, DeleteEventActionCommandOutput } from "./commands/DeleteEventActionCommand";
-import { DeleteRevisionCommandInput, DeleteRevisionCommandOutput } from "./commands/DeleteRevisionCommand";
-import { GetAssetCommandInput, GetAssetCommandOutput } from "./commands/GetAssetCommand";
-import { GetDataSetCommandInput, GetDataSetCommandOutput } from "./commands/GetDataSetCommand";
-import { GetEventActionCommandInput, GetEventActionCommandOutput } from "./commands/GetEventActionCommand";
-import { GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
-import { GetRevisionCommandInput, GetRevisionCommandOutput } from "./commands/GetRevisionCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultDataExchangeHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AcceptDataGrantCommandInput, AcceptDataGrantCommandOutput } from "./commands/AcceptDataGrantCommand";
+import type { CancelJobCommandInput, CancelJobCommandOutput } from "./commands/CancelJobCommand";
+import type { CreateDataGrantCommandInput, CreateDataGrantCommandOutput } from "./commands/CreateDataGrantCommand";
+import type { CreateDataSetCommandInput, CreateDataSetCommandOutput } from "./commands/CreateDataSetCommand";
+import type {
+  CreateEventActionCommandInput,
+  CreateEventActionCommandOutput,
+} from "./commands/CreateEventActionCommand";
+import type { CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
+import type { CreateRevisionCommandInput, CreateRevisionCommandOutput } from "./commands/CreateRevisionCommand";
+import type { DeleteAssetCommandInput, DeleteAssetCommandOutput } from "./commands/DeleteAssetCommand";
+import type { DeleteDataGrantCommandInput, DeleteDataGrantCommandOutput } from "./commands/DeleteDataGrantCommand";
+import type { DeleteDataSetCommandInput, DeleteDataSetCommandOutput } from "./commands/DeleteDataSetCommand";
+import type {
+  DeleteEventActionCommandInput,
+  DeleteEventActionCommandOutput,
+} from "./commands/DeleteEventActionCommand";
+import type { DeleteRevisionCommandInput, DeleteRevisionCommandOutput } from "./commands/DeleteRevisionCommand";
+import type { GetAssetCommandInput, GetAssetCommandOutput } from "./commands/GetAssetCommand";
+import type { GetDataGrantCommandInput, GetDataGrantCommandOutput } from "./commands/GetDataGrantCommand";
+import type { GetDataSetCommandInput, GetDataSetCommandOutput } from "./commands/GetDataSetCommand";
+import type { GetEventActionCommandInput, GetEventActionCommandOutput } from "./commands/GetEventActionCommand";
+import type { GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
+import type {
+  GetReceivedDataGrantCommandInput,
+  GetReceivedDataGrantCommandOutput,
+} from "./commands/GetReceivedDataGrantCommand";
+import type { GetRevisionCommandInput, GetRevisionCommandOutput } from "./commands/GetRevisionCommand";
+import type { ListDataGrantsCommandInput, ListDataGrantsCommandOutput } from "./commands/ListDataGrantsCommand";
+import type {
   ListDataSetRevisionsCommandInput,
   ListDataSetRevisionsCommandOutput,
 } from "./commands/ListDataSetRevisionsCommand";
-import { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
-import { ListEventActionsCommandInput, ListEventActionsCommandOutput } from "./commands/ListEventActionsCommand";
-import { ListJobsCommandInput, ListJobsCommandOutput } from "./commands/ListJobsCommand";
-import { ListRevisionAssetsCommandInput, ListRevisionAssetsCommandOutput } from "./commands/ListRevisionAssetsCommand";
-import {
+import type { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
+import type { ListEventActionsCommandInput, ListEventActionsCommandOutput } from "./commands/ListEventActionsCommand";
+import type { ListJobsCommandInput, ListJobsCommandOutput } from "./commands/ListJobsCommand";
+import type {
+  ListReceivedDataGrantsCommandInput,
+  ListReceivedDataGrantsCommandOutput,
+} from "./commands/ListReceivedDataGrantsCommand";
+import type {
+  ListRevisionAssetsCommandInput,
+  ListRevisionAssetsCommandOutput,
+} from "./commands/ListRevisionAssetsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { StartJobCommandInput, StartJobCommandOutput } from "./commands/StartJobCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateAssetCommandInput, UpdateAssetCommandOutput } from "./commands/UpdateAssetCommand";
-import { UpdateDataSetCommandInput, UpdateDataSetCommandOutput } from "./commands/UpdateDataSetCommand";
-import { UpdateEventActionCommandInput, UpdateEventActionCommandOutput } from "./commands/UpdateEventActionCommand";
-import { UpdateRevisionCommandInput, UpdateRevisionCommandOutput } from "./commands/UpdateRevisionCommand";
+import type { RevokeRevisionCommandInput, RevokeRevisionCommandOutput } from "./commands/RevokeRevisionCommand";
+import type { SendApiAssetCommandInput, SendApiAssetCommandOutput } from "./commands/SendApiAssetCommand";
+import type {
+  SendDataSetNotificationCommandInput,
+  SendDataSetNotificationCommandOutput,
+} from "./commands/SendDataSetNotificationCommand";
+import type { StartJobCommandInput, StartJobCommandOutput } from "./commands/StartJobCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type { UpdateAssetCommandInput, UpdateAssetCommandOutput } from "./commands/UpdateAssetCommand";
+import type { UpdateDataSetCommandInput, UpdateDataSetCommandOutput } from "./commands/UpdateDataSetCommand";
+import type {
+  UpdateEventActionCommandInput,
+  UpdateEventActionCommandOutput,
+} from "./commands/UpdateEventActionCommand";
+import type { UpdateRevisionCommandInput, UpdateRevisionCommandOutput } from "./commands/UpdateRevisionCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AcceptDataGrantCommandInput
   | CancelJobCommandInput
+  | CreateDataGrantCommandInput
   | CreateDataSetCommandInput
   | CreateEventActionCommandInput
   | CreateJobCommandInput
   | CreateRevisionCommandInput
   | DeleteAssetCommandInput
+  | DeleteDataGrantCommandInput
   | DeleteDataSetCommandInput
   | DeleteEventActionCommandInput
   | DeleteRevisionCommandInput
   | GetAssetCommandInput
+  | GetDataGrantCommandInput
   | GetDataSetCommandInput
   | GetEventActionCommandInput
   | GetJobCommandInput
+  | GetReceivedDataGrantCommandInput
   | GetRevisionCommandInput
+  | ListDataGrantsCommandInput
   | ListDataSetRevisionsCommandInput
   | ListDataSetsCommandInput
   | ListEventActionsCommandInput
   | ListJobsCommandInput
+  | ListReceivedDataGrantsCommandInput
   | ListRevisionAssetsCommandInput
   | ListTagsForResourceCommandInput
+  | RevokeRevisionCommandInput
+  | SendApiAssetCommandInput
+  | SendDataSetNotificationCommandInput
   | StartJobCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
@@ -113,27 +171,40 @@ export type ServiceInputTypes =
   | UpdateEventActionCommandInput
   | UpdateRevisionCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AcceptDataGrantCommandOutput
   | CancelJobCommandOutput
+  | CreateDataGrantCommandOutput
   | CreateDataSetCommandOutput
   | CreateEventActionCommandOutput
   | CreateJobCommandOutput
   | CreateRevisionCommandOutput
   | DeleteAssetCommandOutput
+  | DeleteDataGrantCommandOutput
   | DeleteDataSetCommandOutput
   | DeleteEventActionCommandOutput
   | DeleteRevisionCommandOutput
   | GetAssetCommandOutput
+  | GetDataGrantCommandOutput
   | GetDataSetCommandOutput
   | GetEventActionCommandOutput
   | GetJobCommandOutput
+  | GetReceivedDataGrantCommandOutput
   | GetRevisionCommandOutput
+  | ListDataGrantsCommandOutput
   | ListDataSetRevisionsCommandOutput
   | ListDataSetsCommandOutput
   | ListEventActionsCommandOutput
   | ListJobsCommandOutput
+  | ListReceivedDataGrantsCommandOutput
   | ListRevisionAssetsCommandOutput
   | ListTagsForResourceCommandOutput
+  | RevokeRevisionCommandOutput
+  | SendApiAssetCommandOutput
+  | SendDataSetNotificationCommandOutput
   | StartJobCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
@@ -142,18 +213,21 @@ export type ServiceOutputTypes =
   | UpdateEventActionCommandOutput
   | UpdateRevisionCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -165,7 +239,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -204,25 +278,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -235,63 +300,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type DataExchangeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of DataExchangeClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type DataExchangeClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of DataExchangeClient class constructor that set the region, credentials and other options.
  */
 export interface DataExchangeClientConfig extends DataExchangeClientConfigType {}
 
-type DataExchangeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of DataExchangeClient class. This is resolved and normalized from the {@link DataExchangeClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type DataExchangeClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of DataExchangeClient class. This is resolved and normalized from the {@link DataExchangeClientConfig | constructor configuration interface}.
  */
 export interface DataExchangeClientResolvedConfig extends DataExchangeClientResolvedConfigType {}
 
 /**
- * <p>AWS Data Exchange is a service that makes it easy for AWS customers to exchange data in the cloud. You can use the AWS Data Exchange APIs to create, update, manage, and access file-based data set in the AWS Cloud.</p><p>As a subscriber, you can view and access the data sets that you have an entitlement to through a subscription. You can use the APIS to download or copy your entitled data sets to Amazon S3 for use across a variety of AWS analytics and machine learning services.</p><p>As a provider, you can create and manage your data sets that you would like to publish to a product. Being able to package and provide your data sets into products requires a few steps to determine eligibility. For more information, visit the AWS Data Exchange User Guide.</p><p>A data set is a collection of data that can be changed or updated over time. Data sets can be updated using revisions, which represent a new version or incremental change to a data set.  A revision contains one or more assets. An asset in AWS Data Exchange is a piece of data that can be stored as an Amazon S3 object. The asset can be a structured data file, an image file, or some other data file. Jobs are asynchronous import or export operations used to create or copy assets.</p>
+ * <p>AWS Data Exchange is a service that makes it easy for AWS customers to exchange data in the cloud. You can use the AWS Data Exchange APIs to create, update, manage, and access file-based data set in the AWS Cloud.</p> <p>As a subscriber, you can view and access the data sets that you have an entitlement to through a subscription. You can use the APIs to download or copy your entitled data sets to Amazon Simple Storage Service (Amazon S3) for use across a variety of AWS analytics and machine learning services.</p> <p>As a provider, you can create and manage your data sets that you would like to publish to a product. Being able to package and provide your data sets into products requires a few steps to determine eligibility. For more information, visit the <i>AWS Data Exchange User Guide</i>.</p> <p>A data set is a collection of data that can be changed or updated over time. Data sets can be updated using revisions, which represent a new version or incremental change to a data set. A revision contains one or more assets. An asset in AWS Data Exchange is a piece of data that can be stored as an Amazon S3 object, Redshift datashare, API Gateway API, AWS Lake Formation data permission, or Amazon S3 data access. The asset can be a structured data file, an image file, or some other data file. Jobs are asynchronous import or export operations used to create or copy assets.</p>
+ * @public
  */
 export class DataExchangeClient extends __Client<
   __HttpHandlerOptions,
@@ -304,22 +419,36 @@ export class DataExchangeClient extends __Client<
    */
   readonly config: DataExchangeClientResolvedConfig;
 
-  constructor(configuration: DataExchangeClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<DataExchangeClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultDataExchangeHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: DataExchangeClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

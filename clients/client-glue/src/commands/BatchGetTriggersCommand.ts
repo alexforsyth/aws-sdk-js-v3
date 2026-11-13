@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { BatchGetTriggersRequest, BatchGetTriggersResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetTriggersCommand,
-  serializeAws_json1_1BatchGetTriggersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetTriggersRequest, BatchGetTriggersResponse } from "../models/models_0";
+import { BatchGetTriggers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetTriggersCommand}.
+ */
 export interface BatchGetTriggersCommandInput extends BatchGetTriggersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetTriggersCommand}.
+ */
 export interface BatchGetTriggersCommandOutput extends BatchGetTriggersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,101 @@ export interface BatchGetTriggersCommandOutput extends BatchGetTriggersResponse,
  * ```javascript
  * import { GlueClient, BatchGetTriggersCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchGetTriggersCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchGetTriggersRequest
+ *   TriggerNames: [ // TriggerNameList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetTriggersCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetTriggersResponse
+ * //   Triggers: [ // TriggerList
+ * //     { // Trigger
+ * //       Name: "STRING_VALUE",
+ * //       WorkflowName: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Type: "SCHEDULED" || "CONDITIONAL" || "ON_DEMAND" || "EVENT",
+ * //       State: "CREATING" || "CREATED" || "ACTIVATING" || "ACTIVATED" || "DEACTIVATING" || "DEACTIVATED" || "DELETING" || "UPDATING",
+ * //       Description: "STRING_VALUE",
+ * //       Schedule: "STRING_VALUE",
+ * //       Actions: [ // ActionList
+ * //         { // Action
+ * //           JobName: "STRING_VALUE",
+ * //           Arguments: { // GenericMap
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //           Timeout: Number("int"),
+ * //           SecurityConfiguration: "STRING_VALUE",
+ * //           NotificationProperty: { // NotificationProperty
+ * //             NotifyDelayAfter: Number("int"),
+ * //           },
+ * //           CrawlerName: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Predicate: { // Predicate
+ * //         Logical: "AND" || "ANY",
+ * //         Conditions: [ // ConditionList
+ * //           { // Condition
+ * //             LogicalOperator: "EQUALS",
+ * //             JobName: "STRING_VALUE",
+ * //             State: "STARTING" || "RUNNING" || "STOPPING" || "STOPPED" || "SUCCEEDED" || "FAILED" || "TIMEOUT" || "ERROR" || "WAITING" || "EXPIRED",
+ * //             CrawlerName: "STRING_VALUE",
+ * //             CrawlState: "RUNNING" || "CANCELLING" || "CANCELLED" || "SUCCEEDED" || "FAILED" || "ERROR",
+ * //           },
+ * //         ],
+ * //       },
+ * //       EventBatchingCondition: { // EventBatchingCondition
+ * //         BatchSize: Number("int"), // required
+ * //         BatchWindow: Number("int"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   TriggersNotFound: [ // TriggerNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetTriggersCommandInput - {@link BatchGetTriggersCommandInput}
+ * @returns {@link BatchGetTriggersCommandOutput}
  * @see {@link BatchGetTriggersCommandInput} for command's `input` shape.
  * @see {@link BatchGetTriggersCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetTriggersCommand extends $Command<
-  BatchGetTriggersCommandInput,
-  BatchGetTriggersCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetTriggersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetTriggersCommandInput, BatchGetTriggersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchGetTriggersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetTriggersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetTriggersResponse.filterSensitiveLog,
+export class BatchGetTriggersCommand extends command<BatchGetTriggersCommandInput, BatchGetTriggersCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetTriggers",
+  BatchGetTriggers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetTriggersRequest;
+      output: BatchGetTriggersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetTriggersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetTriggersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetTriggersCommandOutput> {
-    return deserializeAws_json1_1BatchGetTriggersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetTriggersCommandInput;
+      output: BatchGetTriggersCommandOutput;
+    };
+  };
 }

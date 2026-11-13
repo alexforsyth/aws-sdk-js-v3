@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssumeFleetRoleForReadRequest, AssumeFleetRoleForReadResponse } from "../models/models_0";
+import { AssumeFleetRoleForRead$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssumeFleetRoleForReadCommand}.
+ */
+export interface AssumeFleetRoleForReadCommandInput extends AssumeFleetRoleForReadRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssumeFleetRoleForReadCommand}.
+ */
+export interface AssumeFleetRoleForReadCommandOutput extends AssumeFleetRoleForReadResponse, __MetadataBearer {}
+
+/**
+ * Get Amazon Web Services credentials from the fleet role. The IAM permissions of the credentials are scoped down to have read-only access.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, AssumeFleetRoleForReadCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, AssumeFleetRoleForReadCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // AssumeFleetRoleForReadRequest
+ *   farmId: "STRING_VALUE", // required
+ *   fleetId: "STRING_VALUE", // required
+ * };
+ * const command = new AssumeFleetRoleForReadCommand(input);
+ * const response = await client.send(command);
+ * // { // AssumeFleetRoleForReadResponse
+ * //   credentials: { // AwsCredentials
+ * //     accessKeyId: "STRING_VALUE", // required
+ * //     secretAccessKey: "STRING_VALUE", // required
+ * //     sessionToken: "STRING_VALUE", // required
+ * //     expiration: new Date("TIMESTAMP"), // required
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param AssumeFleetRoleForReadCommandInput - {@link AssumeFleetRoleForReadCommandInput}
+ * @returns {@link AssumeFleetRoleForReadCommandOutput}
+ * @see {@link AssumeFleetRoleForReadCommandInput} for command's `input` shape.
+ * @see {@link AssumeFleetRoleForReadCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class AssumeFleetRoleForReadCommand extends command<AssumeFleetRoleForReadCommandInput, AssumeFleetRoleForReadCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssumeFleetRoleForRead",
+  AssumeFleetRoleForRead$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssumeFleetRoleForReadRequest;
+      output: AssumeFleetRoleForReadResponse;
+    };
+    sdk: {
+      input: AssumeFleetRoleForReadCommandInput;
+      output: AssumeFleetRoleForReadCommandOutput;
+    };
+  };
+}

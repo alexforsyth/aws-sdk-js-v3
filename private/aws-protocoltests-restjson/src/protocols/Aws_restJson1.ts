@@ -1,8 +1,31 @@
+// smithy-typescript generated code
 import {
+  awsExpectUnion as __expectUnion,
+  loadRestJsonErrorCode,
+  parseJsonBody as parseBody,
+  parseJsonErrorBody as parseErrorBody,
+} from "@aws-sdk/core/protocols";
+import { requestBuilder as rb } from "@smithy/core";
+import {
+  _json,
+  convertMap,
+  decorateServiceException as __decorateServiceException,
+  isSerializableHeaderValue,
+  map,
+  serializeDateTime as __serializeDateTime,
+  serializeFloat as __serializeFloat,
+  take,
+  withBaseException,
+} from "@smithy/core/client";
+import { Int64 as __Int64 } from "@smithy/core/event-streams";
+import {
+  collectBody,
+  extendedEncodeURIComponent as __extendedEncodeURIComponent,
   HttpRequest as __HttpRequest,
   HttpResponse as __HttpResponse,
   isValidHostname as __isValidHostname,
-} from "@aws-sdk/protocol-http";
+  resolvedPath as __resolvedPath,
+} from "@smithy/core/protocols";
 import {
   dateToUtcString as __dateToUtcString,
   expectBoolean as __expectBoolean,
@@ -14,428 +37,603 @@ import {
   expectObject as __expectObject,
   expectShort as __expectShort,
   expectString as __expectString,
-  expectUnion as __expectUnion,
-  extendedEncodeURIComponent as __extendedEncodeURIComponent,
   LazyJsonString as __LazyJsonString,
   limitedParseDouble as __limitedParseDouble,
   limitedParseFloat32 as __limitedParseFloat32,
   parseBoolean as __parseBoolean,
   parseEpochTimestamp as __parseEpochTimestamp,
-  parseRfc3339DateTime as __parseRfc3339DateTime,
+  parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
   parseRfc7231DateTime as __parseRfc7231DateTime,
-  serializeFloat as __serializeFloat,
+  quoteHeader as __quoteHeader,
   splitEvery as __splitEvery,
+  splitHeader as __splitHeader,
   strictParseByte as __strictParseByte,
   strictParseDouble as __strictParseDouble,
   strictParseFloat as __strictParseFloat,
   strictParseInt32 as __strictParseInt32,
   strictParseLong as __strictParseLong,
   strictParseShort as __strictParseShort,
-} from "@aws-sdk/smithy-client";
-import {
+  v4 as generateIdempotencyToken,
+} from "@smithy/core/serde";
+import type {
   DocumentType as __DocumentType,
   Endpoint as __Endpoint,
-  MetadataBearer as __MetadataBearer,
+  EventStreamSerdeContext as __EventStreamSerdeContext,
+  Message as __Message,
+  MessageHeaders as __MessageHeaders,
   ResponseMetadata as __ResponseMetadata,
+  SdkStreamSerdeContext as __SdkStreamSerdeContext,
   SerdeContext as __SerdeContext,
-  SmithyException as __SmithyException,
-} from "@aws-sdk/types";
-import { v4 as generateIdempotencyToken } from "uuid";
+} from "@smithy/types";
 
-import {
+import type {
   AllQueryStringTypesCommandInput,
   AllQueryStringTypesCommandOutput,
 } from "../commands/AllQueryStringTypesCommand";
-import {
+import type {
   ConstantAndVariableQueryStringCommandInput,
   ConstantAndVariableQueryStringCommandOutput,
 } from "../commands/ConstantAndVariableQueryStringCommand";
-import {
+import type {
   ConstantQueryStringCommandInput,
   ConstantQueryStringCommandOutput,
 } from "../commands/ConstantQueryStringCommand";
-import {
+import type {
+  ContentTypeParametersCommandInput,
+  ContentTypeParametersCommandOutput,
+} from "../commands/ContentTypeParametersCommand";
+import type { DatetimeOffsetsCommandInput, DatetimeOffsetsCommandOutput } from "../commands/DatetimeOffsetsCommand";
+import type {
+  DocumentTypeAsMapValueCommandInput,
+  DocumentTypeAsMapValueCommandOutput,
+} from "../commands/DocumentTypeAsMapValueCommand";
+import type {
   DocumentTypeAsPayloadCommandInput,
   DocumentTypeAsPayloadCommandOutput,
 } from "../commands/DocumentTypeAsPayloadCommand";
-import { DocumentTypeCommandInput, DocumentTypeCommandOutput } from "../commands/DocumentTypeCommand";
-import {
+import type { DocumentTypeCommandInput, DocumentTypeCommandOutput } from "../commands/DocumentTypeCommand";
+import type { DuplexStreamCommandInput, DuplexStreamCommandOutput } from "../commands/DuplexStreamCommand";
+import type {
+  DuplexStreamWithDistinctStreamsCommandInput,
+  DuplexStreamWithDistinctStreamsCommandOutput,
+} from "../commands/DuplexStreamWithDistinctStreamsCommand";
+import type {
+  DuplexStreamWithInitialMessagesCommandInput,
+  DuplexStreamWithInitialMessagesCommandOutput,
+} from "../commands/DuplexStreamWithInitialMessagesCommand";
+import type {
   EmptyInputAndEmptyOutputCommandInput,
   EmptyInputAndEmptyOutputCommandOutput,
 } from "../commands/EmptyInputAndEmptyOutputCommand";
-import { EndpointOperationCommandInput, EndpointOperationCommandOutput } from "../commands/EndpointOperationCommand";
-import {
+import type {
+  EndpointOperationCommandInput,
+  EndpointOperationCommandOutput,
+} from "../commands/EndpointOperationCommand";
+import type {
   EndpointWithHostLabelOperationCommandInput,
   EndpointWithHostLabelOperationCommandOutput,
 } from "../commands/EndpointWithHostLabelOperationCommand";
-import { GreetingWithErrorsCommandInput, GreetingWithErrorsCommandOutput } from "../commands/GreetingWithErrorsCommand";
-import {
+import type {
+  FractionalSecondsCommandInput,
+  FractionalSecondsCommandOutput,
+} from "../commands/FractionalSecondsCommand";
+import type {
+  GreetingWithErrorsCommandInput,
+  GreetingWithErrorsCommandOutput,
+} from "../commands/GreetingWithErrorsCommand";
+import type {
   HostWithPathOperationCommandInput,
   HostWithPathOperationCommandOutput,
 } from "../commands/HostWithPathOperationCommand";
-import {
+import type {
   HttpChecksumRequiredCommandInput,
   HttpChecksumRequiredCommandOutput,
 } from "../commands/HttpChecksumRequiredCommand";
-import { HttpEnumPayloadCommandInput, HttpEnumPayloadCommandOutput } from "../commands/HttpEnumPayloadCommand";
-import { HttpPayloadTraitsCommandInput, HttpPayloadTraitsCommandOutput } from "../commands/HttpPayloadTraitsCommand";
-import {
+import type {
+  HttpEmptyPrefixHeadersCommandInput,
+  HttpEmptyPrefixHeadersCommandOutput,
+} from "../commands/HttpEmptyPrefixHeadersCommand";
+import type { HttpEnumPayloadCommandInput, HttpEnumPayloadCommandOutput } from "../commands/HttpEnumPayloadCommand";
+import type {
+  HttpPayloadTraitsCommandInput,
+  HttpPayloadTraitsCommandOutput,
+} from "../commands/HttpPayloadTraitsCommand";
+import type {
   HttpPayloadTraitsWithMediaTypeCommandInput,
   HttpPayloadTraitsWithMediaTypeCommandOutput,
 } from "../commands/HttpPayloadTraitsWithMediaTypeCommand";
-import {
+import type {
   HttpPayloadWithStructureCommandInput,
   HttpPayloadWithStructureCommandOutput,
 } from "../commands/HttpPayloadWithStructureCommand";
-import { HttpPrefixHeadersCommandInput, HttpPrefixHeadersCommandOutput } from "../commands/HttpPrefixHeadersCommand";
-import {
-  HttpPrefixHeadersResponseCommandInput,
-  HttpPrefixHeadersResponseCommandOutput,
-} from "../commands/HttpPrefixHeadersResponseCommand";
-import {
+import type {
+  HttpPayloadWithUnionCommandInput,
+  HttpPayloadWithUnionCommandOutput,
+} from "../commands/HttpPayloadWithUnionCommand";
+import type {
+  HttpPrefixHeadersCommandInput,
+  HttpPrefixHeadersCommandOutput,
+} from "../commands/HttpPrefixHeadersCommand";
+import type {
+  HttpPrefixHeadersInResponseCommandInput,
+  HttpPrefixHeadersInResponseCommandOutput,
+} from "../commands/HttpPrefixHeadersInResponseCommand";
+import type {
+  HttpQueryParamsOnlyOperationCommandInput,
+  HttpQueryParamsOnlyOperationCommandOutput,
+} from "../commands/HttpQueryParamsOnlyOperationCommand";
+import type {
   HttpRequestWithFloatLabelsCommandInput,
   HttpRequestWithFloatLabelsCommandOutput,
 } from "../commands/HttpRequestWithFloatLabelsCommand";
-import {
+import type {
   HttpRequestWithGreedyLabelInPathCommandInput,
   HttpRequestWithGreedyLabelInPathCommandOutput,
 } from "../commands/HttpRequestWithGreedyLabelInPathCommand";
-import {
+import type {
   HttpRequestWithLabelsAndTimestampFormatCommandInput,
   HttpRequestWithLabelsAndTimestampFormatCommandOutput,
 } from "../commands/HttpRequestWithLabelsAndTimestampFormatCommand";
-import {
+import type {
   HttpRequestWithLabelsCommandInput,
   HttpRequestWithLabelsCommandOutput,
 } from "../commands/HttpRequestWithLabelsCommand";
-import { HttpResponseCodeCommandInput, HttpResponseCodeCommandOutput } from "../commands/HttpResponseCodeCommand";
-import { HttpStringPayloadCommandInput, HttpStringPayloadCommandOutput } from "../commands/HttpStringPayloadCommand";
-import {
+import type {
+  HttpRequestWithRegexLiteralCommandInput,
+  HttpRequestWithRegexLiteralCommandOutput,
+} from "../commands/HttpRequestWithRegexLiteralCommand";
+import type { HttpResponseCodeCommandInput, HttpResponseCodeCommandOutput } from "../commands/HttpResponseCodeCommand";
+import type {
+  HttpStringPayloadCommandInput,
+  HttpStringPayloadCommandOutput,
+} from "../commands/HttpStringPayloadCommand";
+import type {
   IgnoreQueryParamsInResponseCommandInput,
   IgnoreQueryParamsInResponseCommandOutput,
 } from "../commands/IgnoreQueryParamsInResponseCommand";
-import {
+import type {
   InputAndOutputWithHeadersCommandInput,
   InputAndOutputWithHeadersCommandOutput,
 } from "../commands/InputAndOutputWithHeadersCommand";
-import { JsonBlobsCommandInput, JsonBlobsCommandOutput } from "../commands/JsonBlobsCommand";
-import { JsonEnumsCommandInput, JsonEnumsCommandOutput } from "../commands/JsonEnumsCommand";
-import { JsonListsCommandInput, JsonListsCommandOutput } from "../commands/JsonListsCommand";
-import { JsonMapsCommandInput, JsonMapsCommandOutput } from "../commands/JsonMapsCommand";
-import { JsonTimestampsCommandInput, JsonTimestampsCommandOutput } from "../commands/JsonTimestampsCommand";
-import { JsonUnionsCommandInput, JsonUnionsCommandOutput } from "../commands/JsonUnionsCommand";
-import {
+import type { InputStreamCommandInput, InputStreamCommandOutput } from "../commands/InputStreamCommand";
+import type {
+  InputStreamWithInitialRequestCommandInput,
+  InputStreamWithInitialRequestCommandOutput,
+} from "../commands/InputStreamWithInitialRequestCommand";
+import type { JsonBlobsCommandInput, JsonBlobsCommandOutput } from "../commands/JsonBlobsCommand";
+import type { JsonEnumsCommandInput, JsonEnumsCommandOutput } from "../commands/JsonEnumsCommand";
+import type { JsonIntEnumsCommandInput, JsonIntEnumsCommandOutput } from "../commands/JsonIntEnumsCommand";
+import type { JsonListsCommandInput, JsonListsCommandOutput } from "../commands/JsonListsCommand";
+import type { JsonMapsCommandInput, JsonMapsCommandOutput } from "../commands/JsonMapsCommand";
+import type { JsonTimestampsCommandInput, JsonTimestampsCommandOutput } from "../commands/JsonTimestampsCommand";
+import type { JsonUnionsCommandInput, JsonUnionsCommandOutput } from "../commands/JsonUnionsCommand";
+import type {
   MalformedAcceptWithBodyCommandInput,
   MalformedAcceptWithBodyCommandOutput,
 } from "../commands/MalformedAcceptWithBodyCommand";
-import {
+import type {
   MalformedAcceptWithGenericStringCommandInput,
   MalformedAcceptWithGenericStringCommandOutput,
 } from "../commands/MalformedAcceptWithGenericStringCommand";
-import {
+import type {
   MalformedAcceptWithPayloadCommandInput,
   MalformedAcceptWithPayloadCommandOutput,
 } from "../commands/MalformedAcceptWithPayloadCommand";
-import { MalformedBlobCommandInput, MalformedBlobCommandOutput } from "../commands/MalformedBlobCommand";
-import { MalformedBooleanCommandInput, MalformedBooleanCommandOutput } from "../commands/MalformedBooleanCommand";
-import { MalformedByteCommandInput, MalformedByteCommandOutput } from "../commands/MalformedByteCommand";
-import {
+import type { MalformedBlobCommandInput, MalformedBlobCommandOutput } from "../commands/MalformedBlobCommand";
+import type { MalformedBooleanCommandInput, MalformedBooleanCommandOutput } from "../commands/MalformedBooleanCommand";
+import type { MalformedByteCommandInput, MalformedByteCommandOutput } from "../commands/MalformedByteCommand";
+import type {
   MalformedContentTypeWithBodyCommandInput,
   MalformedContentTypeWithBodyCommandOutput,
 } from "../commands/MalformedContentTypeWithBodyCommand";
-import {
+import type {
   MalformedContentTypeWithGenericStringCommandInput,
   MalformedContentTypeWithGenericStringCommandOutput,
 } from "../commands/MalformedContentTypeWithGenericStringCommand";
-import {
+import type {
   MalformedContentTypeWithoutBodyCommandInput,
   MalformedContentTypeWithoutBodyCommandOutput,
 } from "../commands/MalformedContentTypeWithoutBodyCommand";
-import {
+import type {
+  MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+  MalformedContentTypeWithoutBodyEmptyInputCommandOutput,
+} from "../commands/MalformedContentTypeWithoutBodyEmptyInputCommand";
+import type {
   MalformedContentTypeWithPayloadCommandInput,
   MalformedContentTypeWithPayloadCommandOutput,
 } from "../commands/MalformedContentTypeWithPayloadCommand";
-import { MalformedDoubleCommandInput, MalformedDoubleCommandOutput } from "../commands/MalformedDoubleCommand";
-import { MalformedFloatCommandInput, MalformedFloatCommandOutput } from "../commands/MalformedFloatCommand";
-import { MalformedIntegerCommandInput, MalformedIntegerCommandOutput } from "../commands/MalformedIntegerCommand";
-import { MalformedListCommandInput, MalformedListCommandOutput } from "../commands/MalformedListCommand";
-import { MalformedLongCommandInput, MalformedLongCommandOutput } from "../commands/MalformedLongCommand";
-import { MalformedMapCommandInput, MalformedMapCommandOutput } from "../commands/MalformedMapCommand";
-import {
+import type { MalformedDoubleCommandInput, MalformedDoubleCommandOutput } from "../commands/MalformedDoubleCommand";
+import type { MalformedFloatCommandInput, MalformedFloatCommandOutput } from "../commands/MalformedFloatCommand";
+import type { MalformedIntegerCommandInput, MalformedIntegerCommandOutput } from "../commands/MalformedIntegerCommand";
+import type { MalformedListCommandInput, MalformedListCommandOutput } from "../commands/MalformedListCommand";
+import type { MalformedLongCommandInput, MalformedLongCommandOutput } from "../commands/MalformedLongCommand";
+import type { MalformedMapCommandInput, MalformedMapCommandOutput } from "../commands/MalformedMapCommand";
+import type {
   MalformedRequestBodyCommandInput,
   MalformedRequestBodyCommandOutput,
 } from "../commands/MalformedRequestBodyCommand";
-import { MalformedSetCommandInput, MalformedSetCommandOutput } from "../commands/MalformedSetCommand";
-import { MalformedShortCommandInput, MalformedShortCommandOutput } from "../commands/MalformedShortCommand";
-import { MalformedStringCommandInput, MalformedStringCommandOutput } from "../commands/MalformedStringCommand";
-import {
+import type { MalformedShortCommandInput, MalformedShortCommandOutput } from "../commands/MalformedShortCommand";
+import type { MalformedStringCommandInput, MalformedStringCommandOutput } from "../commands/MalformedStringCommand";
+import type {
   MalformedTimestampBodyDateTimeCommandInput,
   MalformedTimestampBodyDateTimeCommandOutput,
 } from "../commands/MalformedTimestampBodyDateTimeCommand";
-import {
+import type {
   MalformedTimestampBodyDefaultCommandInput,
   MalformedTimestampBodyDefaultCommandOutput,
 } from "../commands/MalformedTimestampBodyDefaultCommand";
-import {
+import type {
   MalformedTimestampBodyHttpDateCommandInput,
   MalformedTimestampBodyHttpDateCommandOutput,
 } from "../commands/MalformedTimestampBodyHttpDateCommand";
-import {
+import type {
   MalformedTimestampHeaderDateTimeCommandInput,
   MalformedTimestampHeaderDateTimeCommandOutput,
 } from "../commands/MalformedTimestampHeaderDateTimeCommand";
-import {
+import type {
   MalformedTimestampHeaderDefaultCommandInput,
   MalformedTimestampHeaderDefaultCommandOutput,
 } from "../commands/MalformedTimestampHeaderDefaultCommand";
-import {
+import type {
   MalformedTimestampHeaderEpochCommandInput,
   MalformedTimestampHeaderEpochCommandOutput,
 } from "../commands/MalformedTimestampHeaderEpochCommand";
-import {
+import type {
   MalformedTimestampPathDefaultCommandInput,
   MalformedTimestampPathDefaultCommandOutput,
 } from "../commands/MalformedTimestampPathDefaultCommand";
-import {
+import type {
   MalformedTimestampPathEpochCommandInput,
   MalformedTimestampPathEpochCommandOutput,
 } from "../commands/MalformedTimestampPathEpochCommand";
-import {
+import type {
   MalformedTimestampPathHttpDateCommandInput,
   MalformedTimestampPathHttpDateCommandOutput,
 } from "../commands/MalformedTimestampPathHttpDateCommand";
-import {
+import type {
   MalformedTimestampQueryDefaultCommandInput,
   MalformedTimestampQueryDefaultCommandOutput,
 } from "../commands/MalformedTimestampQueryDefaultCommand";
-import {
+import type {
   MalformedTimestampQueryEpochCommandInput,
   MalformedTimestampQueryEpochCommandOutput,
 } from "../commands/MalformedTimestampQueryEpochCommand";
-import {
+import type {
   MalformedTimestampQueryHttpDateCommandInput,
   MalformedTimestampQueryHttpDateCommandOutput,
 } from "../commands/MalformedTimestampQueryHttpDateCommand";
-import { MalformedUnionCommandInput, MalformedUnionCommandOutput } from "../commands/MalformedUnionCommand";
-import { MediaTypeHeaderCommandInput, MediaTypeHeaderCommandOutput } from "../commands/MediaTypeHeaderCommand";
-import { NoInputAndNoOutputCommandInput, NoInputAndNoOutputCommandOutput } from "../commands/NoInputAndNoOutputCommand";
-import { NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput } from "../commands/NoInputAndOutputCommand";
-import {
+import type { MalformedUnionCommandInput, MalformedUnionCommandOutput } from "../commands/MalformedUnionCommand";
+import type { MediaTypeHeaderCommandInput, MediaTypeHeaderCommandOutput } from "../commands/MediaTypeHeaderCommand";
+import type {
+  NoInputAndNoOutputCommandInput,
+  NoInputAndNoOutputCommandOutput,
+} from "../commands/NoInputAndNoOutputCommand";
+import type { NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput } from "../commands/NoInputAndOutputCommand";
+import type {
   NullAndEmptyHeadersClientCommandInput,
   NullAndEmptyHeadersClientCommandOutput,
 } from "../commands/NullAndEmptyHeadersClientCommand";
-import {
+import type {
   NullAndEmptyHeadersServerCommandInput,
   NullAndEmptyHeadersServerCommandOutput,
 } from "../commands/NullAndEmptyHeadersServerCommand";
-import {
+import type {
   OmitsNullSerializesEmptyStringCommandInput,
   OmitsNullSerializesEmptyStringCommandOutput,
 } from "../commands/OmitsNullSerializesEmptyStringCommand";
-import {
+import type {
+  OmitsSerializingEmptyListsCommandInput,
+  OmitsSerializingEmptyListsCommandOutput,
+} from "../commands/OmitsSerializingEmptyListsCommand";
+import type {
+  OperationWithDefaultsCommandInput,
+  OperationWithDefaultsCommandOutput,
+} from "../commands/OperationWithDefaultsCommand";
+import type {
+  OperationWithNestedStructureCommandInput,
+  OperationWithNestedStructureCommandOutput,
+} from "../commands/OperationWithNestedStructureCommand";
+import type { OutputStreamCommandInput, OutputStreamCommandOutput } from "../commands/OutputStreamCommand";
+import type {
+  OutputStreamWithInitialResponseCommandInput,
+  OutputStreamWithInitialResponseCommandOutput,
+} from "../commands/OutputStreamWithInitialResponseCommand";
+import type { PostPlayerActionCommandInput, PostPlayerActionCommandOutput } from "../commands/PostPlayerActionCommand";
+import type {
+  PostUnionWithJsonNameCommandInput,
+  PostUnionWithJsonNameCommandOutput,
+} from "../commands/PostUnionWithJsonNameCommand";
+import type {
+  PutWithContentEncodingCommandInput,
+  PutWithContentEncodingCommandOutput,
+} from "../commands/PutWithContentEncodingCommand";
+import type {
   QueryIdempotencyTokenAutoFillCommandInput,
   QueryIdempotencyTokenAutoFillCommandOutput,
 } from "../commands/QueryIdempotencyTokenAutoFillCommand";
-import {
+import type {
   QueryParamsAsStringListMapCommandInput,
   QueryParamsAsStringListMapCommandOutput,
 } from "../commands/QueryParamsAsStringListMapCommand";
-import { QueryPrecedenceCommandInput, QueryPrecedenceCommandOutput } from "../commands/QueryPrecedenceCommand";
-import { RecursiveShapesCommandInput, RecursiveShapesCommandOutput } from "../commands/RecursiveShapesCommand";
-import {
+import type { QueryPrecedenceCommandInput, QueryPrecedenceCommandOutput } from "../commands/QueryPrecedenceCommand";
+import type { RecursiveShapesCommandInput, RecursiveShapesCommandOutput } from "../commands/RecursiveShapesCommand";
+import type {
+  ResponseCodeHttpFallbackCommandInput,
+  ResponseCodeHttpFallbackCommandOutput,
+} from "../commands/ResponseCodeHttpFallbackCommand";
+import type {
+  ResponseCodeRequiredCommandInput,
+  ResponseCodeRequiredCommandOutput,
+} from "../commands/ResponseCodeRequiredCommand";
+import type {
   SimpleScalarPropertiesCommandInput,
   SimpleScalarPropertiesCommandOutput,
 } from "../commands/SimpleScalarPropertiesCommand";
-import { StreamingTraitsCommandInput, StreamingTraitsCommandOutput } from "../commands/StreamingTraitsCommand";
-import {
+import type { SparseJsonListsCommandInput, SparseJsonListsCommandOutput } from "../commands/SparseJsonListsCommand";
+import type { SparseJsonMapsCommandInput, SparseJsonMapsCommandOutput } from "../commands/SparseJsonMapsCommand";
+import type { StreamingTraitsCommandInput, StreamingTraitsCommandOutput } from "../commands/StreamingTraitsCommand";
+import type {
   StreamingTraitsRequireLengthCommandInput,
   StreamingTraitsRequireLengthCommandOutput,
 } from "../commands/StreamingTraitsRequireLengthCommand";
-import {
+import type {
   StreamingTraitsWithMediaTypeCommandInput,
   StreamingTraitsWithMediaTypeCommandOutput,
 } from "../commands/StreamingTraitsWithMediaTypeCommand";
-import {
+import type {
+  TestBodyStructureCommandInput,
+  TestBodyStructureCommandOutput,
+} from "../commands/TestBodyStructureCommand";
+import type {
+  TestGetNoInputNoPayloadCommandInput,
+  TestGetNoInputNoPayloadCommandOutput,
+} from "../commands/TestGetNoInputNoPayloadCommand";
+import type { TestGetNoPayloadCommandInput, TestGetNoPayloadCommandOutput } from "../commands/TestGetNoPayloadCommand";
+import type { TestPayloadBlobCommandInput, TestPayloadBlobCommandOutput } from "../commands/TestPayloadBlobCommand";
+import type {
+  TestPayloadStructureCommandInput,
+  TestPayloadStructureCommandOutput,
+} from "../commands/TestPayloadStructureCommand";
+import type {
+  TestPostNoInputNoPayloadCommandInput,
+  TestPostNoInputNoPayloadCommandOutput,
+} from "../commands/TestPostNoInputNoPayloadCommand";
+import type {
+  TestPostNoPayloadCommandInput,
+  TestPostNoPayloadCommandOutput,
+} from "../commands/TestPostNoPayloadCommand";
+import type {
   TimestampFormatHeadersCommandInput,
   TimestampFormatHeadersCommandOutput,
 } from "../commands/TimestampFormatHeadersCommand";
+import type {
+  UnitInputAndOutputCommandInput,
+  UnitInputAndOutputCommandOutput,
+} from "../commands/UnitInputAndOutputCommand";
+import type { FooEnum, IntegerEnum } from "../models/enums";
+import { ComplexError, ErrorEvent, FooError, InvalidGreeting, ServiceUnavailableError } from "../models/errors";
 import {
-  ComplexError,
-  ComplexNestedErrorData,
-  FooEnum,
-  FooError,
-  GreetingStruct,
-  InvalidGreeting,
+  type BlobPayloadEvent,
+  type ClientOptionalDefaults,
+  type ComplexNestedErrorData,
+  type Defaults,
+  type Dialog,
+  type Farewell,
+  type GreetingStruct,
+  type HeadersAndExplicitPayloadEvent,
+  type HeadersAndImplicitPayloadEvent,
+  type HeadersEvent,
+  type NestedPayload,
+  type NestedUnion,
+  type PayloadConfig,
+  type PayloadStructure,
+  type PayloadUnion,
+  type PlayerAction,
+  type RecursiveShapesInputOutputNested1,
+  type RecursiveShapesInputOutputNested2,
+  type RenamedGreeting,
+  type SimpleUnion,
+  type StringPayloadEvent,
+  type StructureListMember,
+  type StructurePayloadEvent,
+  type TestConfig,
+  type TopLevel,
+  type UnionPayload,
+  type UnionPayloadEvent,
+  type Unit,
+  EventStream,
   MyUnion,
-  NestedPayload,
-  RecursiveShapesInputOutputNested1,
-  RecursiveShapesInputOutputNested2,
-  RenamedGreeting,
-  SimpleUnion,
-  StructureListMember,
+  UnionWithJsonName,
 } from "../models/models_0";
+import { RestJsonProtocolServiceException as __BaseException } from "../models/RestJsonProtocolServiceException";
 
-export const serializeAws_restJson1AllQueryStringTypesCommand = async (
+/**
+ * serializeAws_restJson1AllQueryStringTypesCommand
+ */
+export const se_AllQueryStringTypesCommand = async (
   input: AllQueryStringTypesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/AllQueryStringTypesInput";
-  const query: any = {
-    ...(input.queryParamsMapOfStringList !== undefined && input.queryParamsMapOfStringList),
-    ...(input.queryString !== undefined && { String: input.queryString }),
-    ...(input.queryStringList !== undefined && {
-      StringList: (input.queryStringList || []).map((_entry) => _entry as any),
-    }),
-    ...(input.queryStringSet !== undefined && {
-      StringSet: (Array.from(input.queryStringSet.values()) || []).map((_entry) => _entry as any),
-    }),
-    ...(input.queryByte !== undefined && { Byte: input.queryByte.toString() }),
-    ...(input.queryShort !== undefined && { Short: input.queryShort.toString() }),
-    ...(input.queryInteger !== undefined && { Integer: input.queryInteger.toString() }),
-    ...(input.queryIntegerList !== undefined && {
-      IntegerList: (input.queryIntegerList || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryIntegerSet !== undefined && {
-      IntegerSet: (Array.from(input.queryIntegerSet.values()) || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryLong !== undefined && { Long: input.queryLong.toString() }),
-    ...(input.queryFloat !== undefined && {
-      Float: input.queryFloat % 1 == 0 ? input.queryFloat + ".0" : input.queryFloat.toString(),
-    }),
-    ...(input.queryDouble !== undefined && {
-      Double: input.queryDouble % 1 == 0 ? input.queryDouble + ".0" : input.queryDouble.toString(),
-    }),
-    ...(input.queryDoubleList !== undefined && {
-      DoubleList: (input.queryDoubleList || []).map(
-        (_entry) => (_entry % 1 == 0 ? _entry + ".0" : _entry.toString()) as any
-      ),
-    }),
-    ...(input.queryBoolean !== undefined && { Boolean: input.queryBoolean.toString() }),
-    ...(input.queryBooleanList !== undefined && {
-      BooleanList: (input.queryBooleanList || []).map((_entry) => _entry.toString() as any),
-    }),
-    ...(input.queryTimestamp !== undefined && {
-      Timestamp: (input.queryTimestamp.toISOString().split(".")[0] + "Z").toString(),
-    }),
-    ...(input.queryTimestampList !== undefined && {
-      TimestampList: (input.queryTimestampList || []).map(
-        (_entry) => (_entry.toISOString().split(".")[0] + "Z").toString() as any
-      ),
-    }),
-    ...(input.queryEnum !== undefined && { Enum: input.queryEnum }),
-    ...(input.queryEnumList !== undefined && { EnumList: (input.queryEnumList || []).map((_entry) => _entry as any) }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/AllQueryStringTypesInput");
+  const query: any = map({
+    ...convertMap(input.queryParamsMapOfStringList),
+    [_S]: [,input[_qS]!],
+    [_SL]: [() => input.queryStringList !== void 0, () => ((input[_qSL]! || []))],
+    [_SS]: [() => input.queryStringSet !== void 0, () => ((input[_qSS]! || []))],
+    [_B]: [() => input.queryByte !== void 0, () => (input[_qB]!.toString())],
+    [_Sh]: [() => input.queryShort !== void 0, () => (input[_qSu]!.toString())],
+    [_I]: [() => input.queryInteger !== void 0, () => (input[_qI]!.toString())],
+    [_IL]: [() => input.queryIntegerList !== void 0, () => ((input[_qIL]! || []).map(_entry => _entry.toString() as any))],
+    [_IS]: [() => input.queryIntegerSet !== void 0, () => ((input[_qIS]! || []).map(_entry => _entry.toString() as any))],
+    [_L]: [() => input.queryLong !== void 0, () => (input[_qL]!.toString())],
+    [_F]: [() => input.queryFloat !== void 0, () => (((input[_qF]! % 1 == 0) ? input[_qF]! + ".0" : input[_qF]!.toString()))],
+    [_D]: [() => input.queryDouble !== void 0, () => (((input[_qD]! % 1 == 0) ? input[_qD]! + ".0" : input[_qD]!.toString()))],
+    [_DL]: [() => input.queryDoubleList !== void 0, () => ((input[_qDL]! || []).map(_entry => ((_entry % 1 == 0) ? _entry + ".0" : _entry.toString()) as any))],
+    [_Bo]: [() => input.queryBoolean !== void 0, () => (input[_qBu]!.toString())],
+    [_BL]: [() => input.queryBooleanList !== void 0, () => ((input[_qBL]! || []).map(_entry => _entry.toString() as any))],
+    [_T]: [() => input.queryTimestamp !== void 0, () => (__serializeDateTime(input[_qT]!).toString())],
+    [_TL]: [() => input.queryTimestampList !== void 0, () => ((input[_qTL]! || []).map(_entry => __serializeDateTime(_entry).toString() as any))],
+    [_E]: [,input[_qE]!],
+    [_EL]: [() => input.queryEnumList !== void 0, () => ((input[_qEL]! || []))],
+    [_IE]: [() => input.queryIntegerEnum !== void 0, () => (input[_qIE]!.toString())],
+    [_IEL]: [() => input.queryIntegerEnumList !== void 0, () => ((input[_qIEL]! || []).map(_entry => _entry.toString() as any))],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1ConstantAndVariableQueryStringCommand = async (
+/**
+ * serializeAws_restJson1ConstantAndVariableQueryStringCommand
+ */
+export const se_ConstantAndVariableQueryStringCommand = async (
   input: ConstantAndVariableQueryStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/ConstantAndVariableQueryString";
-  const query: any = {
-    foo: "bar",
-    ...(input.baz !== undefined && { baz: input.baz }),
-    ...(input.maybeSet !== undefined && { maybeSet: input.maybeSet }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/ConstantAndVariableQueryString");
+  const query: any = map({
+    [_f]: [, "bar"],
+    [_b]: [,input[_b]!],
+    [_mS]: [,input[_mS]!],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1ConstantQueryStringCommand = async (
+/**
+ * serializeAws_restJson1ConstantQueryStringCommand
+ */
+export const se_ConstantQueryStringCommand = async (
   input: ConstantQueryStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/ConstantQueryString/{hello}";
-  if (input.hello !== undefined) {
-    const labelValue: string = input.hello;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: hello.");
-    }
-    resolvedPath = resolvedPath.replace("{hello}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: hello.");
-  }
-  const query: any = {
-    foo: "bar",
-    hello: "",
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/ConstantQueryString/{hello}");
+  b.p('hello', () => input.hello!, '{hello}', false)
+  const query: any = map({
+    [_f]: [, "bar"],
+    [_h]: [, ""],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1DocumentTypeCommand = async (
+/**
+ * serializeAws_restJson1ContentTypeParametersCommand
+ */
+export const se_ContentTypeParametersCommand = async (
+  input: ContentTypeParametersCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/ContentTypeParameters");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'value': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1DatetimeOffsetsCommand
+ */
+export const se_DatetimeOffsetsCommand = async (
+  input: DatetimeOffsetsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/DatetimeOffsets");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1DocumentTypeCommand
+ */
+export const se_DocumentTypeCommand = async (
   input: DocumentTypeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/DocumentType";
+  b.bp("/DocumentType");
   let body: any;
-  body = JSON.stringify({
-    ...(input.documentValue !== undefined &&
-      input.documentValue !== null && { documentValue: serializeAws_restJson1Document(input.documentValue, context) }),
-    ...(input.stringValue !== undefined && input.stringValue !== null && { stringValue: input.stringValue }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'documentValue': _ => se_Document(_, context),
+    'stringValue': [],
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1DocumentTypeAsPayloadCommand = async (
+/**
+ * serializeAws_restJson1DocumentTypeAsMapValueCommand
+ */
+export const se_DocumentTypeAsMapValueCommand = async (
+  input: DocumentTypeAsMapValueCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/DocumentTypeAsMapValue");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'docValuedMap': _ => se_DocumentValuedMap(_, context),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1DocumentTypeAsPayloadCommand
+ */
+export const se_DocumentTypeAsPayloadCommand = async (
   input: DocumentTypeAsPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/DocumentTypeAsPayload";
+  b.bp("/DocumentTypeAsPayload");
   let body: any;
   if (input.documentValue !== undefined) {
     if (input.documentValue === null) {
@@ -445,51 +643,109 @@ export const serializeAws_restJson1DocumentTypeAsPayloadCommand = async (
     }
   }
   body = JSON.stringify(body);
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1EmptyInputAndEmptyOutputCommand = async (
+/**
+ * serializeAws_restJson1DuplexStreamCommand
+ */
+export const se_DuplexStreamCommand = async (
+  input: DuplexStreamCommandInput,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/DuplexStream");
+  let body: any;
+  if (input.stream !== undefined) {
+    body = se_EventStream(input.stream, context);
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1DuplexStreamWithDistinctStreamsCommand
+ */
+export const se_DuplexStreamWithDistinctStreamsCommand = async (
+  input: DuplexStreamWithDistinctStreamsCommandInput,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/DuplexStreamWithDistinctStreams");
+  let body: any;
+  if (input.stream !== undefined) {
+    body = se_EventStream(input.stream, context);
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1DuplexStreamWithInitialMessagesCommand
+ */
+export const se_DuplexStreamWithInitialMessagesCommand = async (
+  input: DuplexStreamWithInitialMessagesCommandInput,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_irm]: input[_iRM]!,
+  });
+  b.bp("/DuplexStreamWithInitialMessages");
+  let body: any;
+  if (input.stream !== undefined) {
+    body = se_EventStream(input.stream, context);
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1EmptyInputAndEmptyOutputCommand
+ */
+export const se_EmptyInputAndEmptyOutputCommand = async (
   input: EmptyInputAndEmptyOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EmptyInputAndEmptyOutput";
+  b.bp("/EmptyInputAndEmptyOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1EndpointOperationCommand = async (
+/**
+ * serializeAws_restJson1EndpointOperationCommand
+ */
+export const se_EndpointOperationCommand = async (
   input: EndpointOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EndpointOperation";
+  b.bp("/EndpointOperation");
   let body: any;
-  body = "";
   let { hostname: resolvedHostname } = await context.endpoint();
   if (context.disableHostPrefix !== true) {
     resolvedHostname = "foo." + resolvedHostname;
@@ -497,6891 +753,5853 @@ export const serializeAws_restJson1EndpointOperationCommand = async (
       throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
     }
   }
-  return new __HttpRequest({
-    protocol,
-    hostname: resolvedHostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.hn(resolvedHostname);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1EndpointWithHostLabelOperationCommand = async (
+/**
+ * serializeAws_restJson1EndpointWithHostLabelOperationCommand
+ */
+export const se_EndpointWithHostLabelOperationCommand = async (
   input: EndpointWithHostLabelOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EndpointWithHostLabelOperation";
+  b.bp("/EndpointWithHostLabelOperation");
   let body: any;
-  body = JSON.stringify({
-    ...(input.label !== undefined && input.label !== null && { label: input.label }),
-  });
+  body = JSON.stringify(take(input, {
+    'label': [],
+  }));
   let { hostname: resolvedHostname } = await context.endpoint();
   if (context.disableHostPrefix !== true) {
     resolvedHostname = "foo.{label}." + resolvedHostname;
     if (input.label === undefined) {
-      throw new Error("Empty value provided for input host prefix: label.");
+      throw new Error('Empty value provided for input host prefix: label.');
     }
-    resolvedHostname = resolvedHostname.replace("{label}", input.label!);
+    resolvedHostname = resolvedHostname.replace("{label}", input.label!)
     if (!__isValidHostname(resolvedHostname)) {
       throw new Error("ValidationError: prefixed hostname must be hostname compatible.");
     }
   }
-  return new __HttpRequest({
-    protocol,
-    hostname: resolvedHostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.hn(resolvedHostname);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1GreetingWithErrorsCommand = async (
+/**
+ * serializeAws_restJson1FractionalSecondsCommand
+ */
+export const se_FractionalSecondsCommand = async (
+  input: FractionalSecondsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/FractionalSeconds");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1GreetingWithErrorsCommand
+ */
+export const se_GreetingWithErrorsCommand = async (
   input: GreetingWithErrorsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/GreetingWithErrors";
+  b.bp("/GreetingWithErrors");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HostWithPathOperationCommand = async (
+/**
+ * serializeAws_restJson1HostWithPathOperationCommand
+ */
+export const se_HostWithPathOperationCommand = async (
   input: HostWithPathOperationCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HostWithPathOperation";
+  b.bp("/HostWithPathOperation");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpChecksumRequiredCommand = async (
+/**
+ * serializeAws_restJson1HttpChecksumRequiredCommand
+ */
+export const se_HttpChecksumRequiredCommand = async (
   input: HttpChecksumRequiredCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpChecksumRequired";
+  b.bp("/HttpChecksumRequired");
   let body: any;
-  body = JSON.stringify({
-    ...(input.foo !== undefined && input.foo !== null && { foo: input.foo }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'foo': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpEnumPayloadCommand = async (
+/**
+ * serializeAws_restJson1HttpEmptyPrefixHeadersCommand
+ */
+export const se_HttpEmptyPrefixHeadersCommand = async (
+  input: HttpEmptyPrefixHeadersCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    ...(input.prefixHeaders !== undefined) && Object.keys(input.prefixHeaders).reduce(
+      (acc: any, suffix: string) => {
+        acc[`${suffix.toLowerCase()}`] = input.prefixHeaders![suffix];
+        return acc;
+      }, {}
+    ),
+    [_h]: input[_sH]!,
+  });
+  b.bp("/HttpEmptyPrefixHeaders");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1HttpEnumPayloadCommand
+ */
+export const se_HttpEnumPayloadCommand = async (
   input: HttpEnumPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "text/plain",
+    'content-type': 'text/plain',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/EnumPayload";
+  b.bp("/EnumPayload");
   let body: any;
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpPayloadTraitsCommand = async (
+/**
+ * serializeAws_restJson1HttpPayloadTraitsCommand
+ */
+export const se_HttpPayloadTraitsCommand = async (
   input: HttpPayloadTraitsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/octet-stream",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadTraits";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/octet-stream',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/HttpPayloadTraits");
   let body: any;
   if (input.blob !== undefined) {
     body = input.blob;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommand = async (
+/**
+ * serializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommand
+ */
+export const se_HttpPayloadTraitsWithMediaTypeCommand = async (
   input: HttpPayloadTraitsWithMediaTypeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "text/plain",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadTraitsWithMediaType";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'text/plain',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/HttpPayloadTraitsWithMediaType");
   let body: any;
   if (input.blob !== undefined) {
     body = input.blob;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpPayloadWithStructureCommand = async (
+/**
+ * serializeAws_restJson1HttpPayloadWithStructureCommand
+ */
+export const se_HttpPayloadWithStructureCommand = async (
   input: HttpPayloadWithStructureCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPayloadWithStructure";
+  b.bp("/HttpPayloadWithStructure");
   let body: any;
   if (input.nested !== undefined) {
-    body = serializeAws_restJson1NestedPayload(input.nested, context);
+    body = _json(input.nested);
   }
   if (body === undefined) {
     body = {};
   }
   body = JSON.stringify(body);
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpPrefixHeadersCommand = async (
+/**
+ * serializeAws_restJson1HttpPayloadWithUnionCommand
+ */
+export const se_HttpPayloadWithUnionCommand = async (
+  input: HttpPayloadWithUnionCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/HttpPayloadWithUnion");
+  let body: any;
+  if (input.nested !== undefined) {
+    body = _json(input.nested);
+  }
+  if (body === undefined) {
+    body = {};
+  }
+  body = JSON.stringify(body);
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1HttpPrefixHeadersCommand
+ */
+export const se_HttpPrefixHeadersCommand = async (
   input: HttpPrefixHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-    ...(input.fooMap !== undefined &&
-      Object.keys(input.fooMap).reduce(
-        (acc: any, suffix: string) => ({
-          ...acc,
-          [`x-foo-${suffix.toLowerCase()}`]: input.fooMap![suffix],
-        }),
-        {}
-      )),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPrefixHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    ...(input.fooMap !== undefined) && Object.keys(input.fooMap).reduce(
+      (acc: any, suffix: string) => {
+        acc[`x-foo-${suffix.toLowerCase()}`] = input.fooMap![suffix];
+        return acc;
+      }, {}
+    ),
+    [_xf]: input[_f]!,
   });
+  b.bp("/HttpPrefixHeaders");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpPrefixHeadersResponseCommand = async (
-  input: HttpPrefixHeadersResponseCommandInput,
+/**
+ * serializeAws_restJson1HttpPrefixHeadersInResponseCommand
+ */
+export const se_HttpPrefixHeadersInResponseCommand = async (
+  input: HttpPrefixHeadersInResponseCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpPrefixHeadersResponse";
+  b.bp("/HttpPrefixHeadersResponse");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpRequestWithFloatLabelsCommand = async (
+/**
+ * serializeAws_restJson1HttpQueryParamsOnlyOperationCommand
+ */
+export const se_HttpQueryParamsOnlyOperationCommand = async (
+  input: HttpQueryParamsOnlyOperationCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/http-query-params-only");
+  const query: any = map({
+    ...convertMap(input.queryMap),
+  });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1HttpRequestWithFloatLabelsCommand
+ */
+export const se_HttpRequestWithFloatLabelsCommand = async (
   input: HttpRequestWithFloatLabelsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/FloatHttpLabels/{float}/{double}";
-  if (input.float !== undefined) {
-    const labelValue: string = input.float % 1 == 0 ? input.float + ".0" : input.float.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: float.");
-    }
-    resolvedPath = resolvedPath.replace("{float}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: float.");
-  }
-  if (input.double !== undefined) {
-    const labelValue: string = input.double % 1 == 0 ? input.double + ".0" : input.double.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: double.");
-    }
-    resolvedPath = resolvedPath.replace("{double}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: double.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/FloatHttpLabels/{float}/{double}");
+  b.p('float', () => ((input.float! % 1 == 0) ? input.float! + ".0" : input.float!.toString()), '{float}', false)
+  b.p('double', () => ((input.double! % 1 == 0) ? input.double! + ".0" : input.double!.toString()), '{double}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpRequestWithGreedyLabelInPathCommand = async (
+/**
+ * serializeAws_restJson1HttpRequestWithGreedyLabelInPathCommand
+ */
+export const se_HttpRequestWithGreedyLabelInPathCommand = async (
   input: HttpRequestWithGreedyLabelInPathCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithGreedyLabelInPath/foo/{foo}/baz/{baz+}";
-  if (input.foo !== undefined) {
-    const labelValue: string = input.foo;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: foo.");
-    }
-    resolvedPath = resolvedPath.replace("{foo}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: foo.");
-  }
-  if (input.baz !== undefined) {
-    const labelValue: string = input.baz;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: baz.");
-    }
-    resolvedPath = resolvedPath.replace(
-      "{baz+}",
-      labelValue
-        .split("/")
-        .map((segment) => __extendedEncodeURIComponent(segment))
-        .join("/")
-    );
-  } else {
-    throw new Error("No value provided for input HTTP label: baz.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithGreedyLabelInPath/foo/{foo}/baz/{baz+}");
+  b.p('foo', () => input.foo!, '{foo}', false)
+  b.p('baz', () => input.baz!, '{baz+}', true)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpRequestWithLabelsCommand = async (
+/**
+ * serializeAws_restJson1HttpRequestWithLabelsCommand
+ */
+export const se_HttpRequestWithLabelsCommand = async (
   input: HttpRequestWithLabelsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}";
-  if (input.string !== undefined) {
-    const labelValue: string = input.string;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: string.");
-    }
-    resolvedPath = resolvedPath.replace("{string}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: string.");
-  }
-  if (input.short !== undefined) {
-    const labelValue: string = input.short.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: short.");
-    }
-    resolvedPath = resolvedPath.replace("{short}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: short.");
-  }
-  if (input.integer !== undefined) {
-    const labelValue: string = input.integer.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: integer.");
-    }
-    resolvedPath = resolvedPath.replace("{integer}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: integer.");
-  }
-  if (input.long !== undefined) {
-    const labelValue: string = input.long.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: long.");
-    }
-    resolvedPath = resolvedPath.replace("{long}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: long.");
-  }
-  if (input.float !== undefined) {
-    const labelValue: string = input.float % 1 == 0 ? input.float + ".0" : input.float.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: float.");
-    }
-    resolvedPath = resolvedPath.replace("{float}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: float.");
-  }
-  if (input.double !== undefined) {
-    const labelValue: string = input.double % 1 == 0 ? input.double + ".0" : input.double.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: double.");
-    }
-    resolvedPath = resolvedPath.replace("{double}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: double.");
-  }
-  if (input.boolean !== undefined) {
-    const labelValue: string = input.boolean.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: boolean.");
-    }
-    resolvedPath = resolvedPath.replace("{boolean}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: boolean.");
-  }
-  if (input.timestamp !== undefined) {
-    const labelValue: string = (input.timestamp.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: timestamp.");
-    }
-    resolvedPath = resolvedPath.replace("{timestamp}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: timestamp.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}");
+  b.p('string', () => input.string!, '{string}', false)
+  b.p('short', () => input.short!.toString(), '{short}', false)
+  b.p('integer', () => input.integer!.toString(), '{integer}', false)
+  b.p('long', () => input.long!.toString(), '{long}', false)
+  b.p('float', () => ((input.float! % 1 == 0) ? input.float! + ".0" : input.float!.toString()), '{float}', false)
+  b.p('double', () => ((input.double! % 1 == 0) ? input.double! + ".0" : input.double!.toString()), '{double}', false)
+  b.p('boolean', () => input.boolean!.toString(), '{boolean}', false)
+  b.p('timestamp', () => __serializeDateTime(input.timestamp!).toString(), '{timestamp}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand = async (
+/**
+ * serializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand
+ */
+export const se_HttpRequestWithLabelsAndTimestampFormatCommand = async (
   input: HttpRequestWithLabelsAndTimestampFormatCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/HttpRequestWithLabelsAndTimestampFormat/{memberEpochSeconds}/{memberHttpDate}/{memberDateTime}/{defaultFormat}/{targetEpochSeconds}/{targetHttpDate}/{targetDateTime}";
-  if (input.memberEpochSeconds !== undefined) {
-    const labelValue: string = Math.round(input.memberEpochSeconds.getTime() / 1000).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberEpochSeconds.");
-    }
-    resolvedPath = resolvedPath.replace("{memberEpochSeconds}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberEpochSeconds.");
-  }
-  if (input.memberHttpDate !== undefined) {
-    const labelValue: string = __dateToUtcString(input.memberHttpDate).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberHttpDate.");
-    }
-    resolvedPath = resolvedPath.replace("{memberHttpDate}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberHttpDate.");
-  }
-  if (input.memberDateTime !== undefined) {
-    const labelValue: string = (input.memberDateTime.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: memberDateTime.");
-    }
-    resolvedPath = resolvedPath.replace("{memberDateTime}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: memberDateTime.");
-  }
-  if (input.defaultFormat !== undefined) {
-    const labelValue: string = (input.defaultFormat.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: defaultFormat.");
-    }
-    resolvedPath = resolvedPath.replace("{defaultFormat}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: defaultFormat.");
-  }
-  if (input.targetEpochSeconds !== undefined) {
-    const labelValue: string = Math.round(input.targetEpochSeconds.getTime() / 1000).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetEpochSeconds.");
-    }
-    resolvedPath = resolvedPath.replace("{targetEpochSeconds}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetEpochSeconds.");
-  }
-  if (input.targetHttpDate !== undefined) {
-    const labelValue: string = __dateToUtcString(input.targetHttpDate).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetHttpDate.");
-    }
-    resolvedPath = resolvedPath.replace("{targetHttpDate}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetHttpDate.");
-  }
-  if (input.targetDateTime !== undefined) {
-    const labelValue: string = (input.targetDateTime.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: targetDateTime.");
-    }
-    resolvedPath = resolvedPath.replace("{targetDateTime}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: targetDateTime.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/HttpRequestWithLabelsAndTimestampFormat/{memberEpochSeconds}/{memberHttpDate}/{memberDateTime}/{defaultFormat}/{targetEpochSeconds}/{targetHttpDate}/{targetDateTime}");
+  b.p('memberEpochSeconds', () => (input.memberEpochSeconds!.getTime() / 1_000).toString(), '{memberEpochSeconds}', false)
+  b.p('memberHttpDate', () => __dateToUtcString(input.memberHttpDate!).toString(), '{memberHttpDate}', false)
+  b.p('memberDateTime', () => __serializeDateTime(input.memberDateTime!).toString(), '{memberDateTime}', false)
+  b.p('defaultFormat', () => __serializeDateTime(input.defaultFormat!).toString(), '{defaultFormat}', false)
+  b.p('targetEpochSeconds', () => (input.targetEpochSeconds!.getTime() / 1_000).toString(), '{targetEpochSeconds}', false)
+  b.p('targetHttpDate', () => __dateToUtcString(input.targetHttpDate!).toString(), '{targetHttpDate}', false)
+  b.p('targetDateTime', () => __serializeDateTime(input.targetDateTime!).toString(), '{targetDateTime}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpResponseCodeCommand = async (
+/**
+ * serializeAws_restJson1HttpRequestWithRegexLiteralCommand
+ */
+export const se_HttpRequestWithRegexLiteralCommand = async (
+  input: HttpRequestWithRegexLiteralCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/ReDosLiteral/{str}/(a+)+");
+  b.p('str', () => input.str!, '{str}', false)
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1HttpResponseCodeCommand
+ */
+export const se_HttpResponseCodeCommand = async (
   input: HttpResponseCodeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/HttpResponseCode";
+  b.bp("/HttpResponseCode");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1HttpStringPayloadCommand = async (
+/**
+ * serializeAws_restJson1HttpStringPayloadCommand
+ */
+export const se_HttpStringPayloadCommand = async (
   input: HttpStringPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "text/plain",
+    'content-type': 'text/plain',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StringPayload";
+  b.bp("/StringPayload");
   let body: any;
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1IgnoreQueryParamsInResponseCommand = async (
+/**
+ * serializeAws_restJson1IgnoreQueryParamsInResponseCommand
+ */
+export const se_IgnoreQueryParamsInResponseCommand = async (
   input: IgnoreQueryParamsInResponseCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/IgnoreQueryParamsInResponse";
+  b.bp("/IgnoreQueryParamsInResponse");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1InputAndOutputWithHeadersCommand = async (
+/**
+ * serializeAws_restJson1InputAndOutputWithHeadersCommand
+ */
+export const se_InputAndOutputWithHeadersCommand = async (
   input: InputAndOutputWithHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.headerString) && { "x-string": input.headerString! }),
-    ...(isSerializableHeaderValue(input.headerByte) && { "x-byte": input.headerByte!.toString() }),
-    ...(isSerializableHeaderValue(input.headerShort) && { "x-short": input.headerShort!.toString() }),
-    ...(isSerializableHeaderValue(input.headerInteger) && { "x-integer": input.headerInteger!.toString() }),
-    ...(isSerializableHeaderValue(input.headerLong) && { "x-long": input.headerLong!.toString() }),
-    ...(isSerializableHeaderValue(input.headerFloat) && {
-      "x-float": input.headerFloat! % 1 == 0 ? input.headerFloat! + ".0" : input.headerFloat!.toString(),
-    }),
-    ...(isSerializableHeaderValue(input.headerDouble) && {
-      "x-double": input.headerDouble! % 1 == 0 ? input.headerDouble! + ".0" : input.headerDouble!.toString(),
-    }),
-    ...(isSerializableHeaderValue(input.headerTrueBool) && { "x-boolean1": input.headerTrueBool!.toString() }),
-    ...(isSerializableHeaderValue(input.headerFalseBool) && { "x-boolean2": input.headerFalseBool!.toString() }),
-    ...(isSerializableHeaderValue(input.headerStringList) && {
-      "x-stringlist": (input.headerStringList! || []).map((_entry) => _entry as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerStringSet) && {
-      "x-stringset": (Array.from(input.headerStringSet!.values()) || []).map((_entry) => _entry as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerIntegerList) && {
-      "x-integerlist": (input.headerIntegerList! || []).map((_entry) => _entry.toString() as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerBooleanList) && {
-      "x-booleanlist": (input.headerBooleanList! || []).map((_entry) => _entry.toString() as any).join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerTimestampList) && {
-      "x-timestamplist": (input.headerTimestampList! || [])
-        .map((_entry) => __dateToUtcString(_entry).toString() as any)
-        .join(", "),
-    }),
-    ...(isSerializableHeaderValue(input.headerEnum) && { "x-enum": input.headerEnum! }),
-    ...(isSerializableHeaderValue(input.headerEnumList) && {
-      "x-enumlist": (input.headerEnumList! || []).map((_entry) => _entry as any).join(", "),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/InputAndOutputWithHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xs]: input[_hS]!,
+    [_xb]: [() => isSerializableHeaderValue(input[_hB]), () => input[_hB]!.toString()],
+    [_xs_]: [() => isSerializableHeaderValue(input[_hSe]), () => input[_hSe]!.toString()],
+    [_xi]: [() => isSerializableHeaderValue(input[_hI]), () => input[_hI]!.toString()],
+    [_xl]: [() => isSerializableHeaderValue(input[_hL]), () => input[_hL]!.toString()],
+    [_xf_]: [() => isSerializableHeaderValue(input[_hF]), () => ((input[_hF]! % 1 == 0) ? input[_hF]! + ".0" : input[_hF]!.toString())],
+    [_xd]: [() => isSerializableHeaderValue(input[_hD]), () => ((input[_hD]! % 1 == 0) ? input[_hD]! + ".0" : input[_hD]!.toString())],
+    [_xb_]: [() => isSerializableHeaderValue(input[_hTB]), () => input[_hTB]!.toString()],
+    [_xb__]: [() => isSerializableHeaderValue(input[_hFB]), () => input[_hFB]!.toString()],
+    [_xs__]: [() => isSerializableHeaderValue(input[_hSL]), () => (input[_hSL]! || []).map(__quoteHeader).join(', ')],
+    [_xs___]: [() => isSerializableHeaderValue(input[_hSS]), () => (input[_hSS]! || []).map(__quoteHeader).join(', ')],
+    [_xi_]: [() => isSerializableHeaderValue(input[_hIL]), () => (input[_hIL]! || []).map(_entry => _entry.toString() as any).join(', ')],
+    [_xb___]: [() => isSerializableHeaderValue(input[_hBL]), () => (input[_hBL]! || []).map(_entry => _entry.toString() as any).join(', ')],
+    [_xt]: [() => isSerializableHeaderValue(input[_hTL]), () => (input[_hTL]! || []).map(_entry => __dateToUtcString(_entry).toString() as any).join(', ')],
+    [_xe]: input[_hE]!,
+    [_xe_]: [() => isSerializableHeaderValue(input[_hEL]), () => (input[_hEL]! || []).map(__quoteHeader).join(', ')],
+    [_xi__]: [() => isSerializableHeaderValue(input[_hIE]), () => input[_hIE]!.toString()],
+    [_xi___]: [() => isSerializableHeaderValue(input[_hIEL]), () => (input[_hIEL]! || []).map(_entry => _entry.toString() as any).join(', ')],
   });
+  b.bp("/InputAndOutputWithHeaders");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonBlobsCommand = async (
+/**
+ * serializeAws_restJson1InputStreamCommand
+ */
+export const se_InputStreamCommand = async (
+  input: InputStreamCommandInput,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/InputStream");
+  let body: any;
+  if (input.stream !== undefined) {
+    body = se_EventStream(input.stream, context);
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1InputStreamWithInitialRequestCommand
+ */
+export const se_InputStreamWithInitialRequestCommand = async (
+  input: InputStreamWithInitialRequestCommandInput,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_irm]: input[_iRM]!,
+  });
+  b.bp("/InputStreamWithInitialRequest");
+  let body: any;
+  if (input.stream !== undefined) {
+    body = se_EventStream(input.stream, context);
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1JsonBlobsCommand
+ */
+export const se_JsonBlobsCommand = async (
   input: JsonBlobsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonBlobs";
+  b.bp("/JsonBlobs");
   let body: any;
-  body = JSON.stringify({
-    ...(input.data !== undefined && input.data !== null && { data: context.base64Encoder(input.data) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'data': _ => context.base64Encoder(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonEnumsCommand = async (
+/**
+ * serializeAws_restJson1JsonEnumsCommand
+ */
+export const se_JsonEnumsCommand = async (
   input: JsonEnumsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonEnums";
+  b.bp("/JsonEnums");
   let body: any;
-  body = JSON.stringify({
-    ...(input.fooEnum1 !== undefined && input.fooEnum1 !== null && { fooEnum1: input.fooEnum1 }),
-    ...(input.fooEnum2 !== undefined && input.fooEnum2 !== null && { fooEnum2: input.fooEnum2 }),
-    ...(input.fooEnum3 !== undefined && input.fooEnum3 !== null && { fooEnum3: input.fooEnum3 }),
-    ...(input.fooEnumList !== undefined &&
-      input.fooEnumList !== null && { fooEnumList: serializeAws_restJson1FooEnumList(input.fooEnumList, context) }),
-    ...(input.fooEnumMap !== undefined &&
-      input.fooEnumMap !== null && { fooEnumMap: serializeAws_restJson1FooEnumMap(input.fooEnumMap, context) }),
-    ...(input.fooEnumSet !== undefined &&
-      input.fooEnumSet !== null && { fooEnumSet: serializeAws_restJson1FooEnumSet(input.fooEnumSet, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'fooEnum1': [],
+    'fooEnum2': [],
+    'fooEnum3': [],
+    'fooEnumList': _ => _json(_),
+    'fooEnumMap': _ => _json(_),
+    'fooEnumSet': _ => _json(_),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonListsCommand = async (
+/**
+ * serializeAws_restJson1JsonIntEnumsCommand
+ */
+export const se_JsonIntEnumsCommand = async (
+  input: JsonIntEnumsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/JsonIntEnums");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'integerEnum1': [],
+    'integerEnum2': [],
+    'integerEnum3': [],
+    'integerEnumList': _ => _json(_),
+    'integerEnumMap': _ => _json(_),
+    'integerEnumSet': _ => _json(_),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1JsonListsCommand
+ */
+export const se_JsonListsCommand = async (
   input: JsonListsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonLists";
+  b.bp("/JsonLists");
   let body: any;
-  body = JSON.stringify({
-    ...(input.booleanList !== undefined &&
-      input.booleanList !== null && { booleanList: serializeAws_restJson1BooleanList(input.booleanList, context) }),
-    ...(input.enumList !== undefined &&
-      input.enumList !== null && { enumList: serializeAws_restJson1FooEnumList(input.enumList, context) }),
-    ...(input.integerList !== undefined &&
-      input.integerList !== null && { integerList: serializeAws_restJson1IntegerList(input.integerList, context) }),
-    ...(input.nestedStringList !== undefined &&
-      input.nestedStringList !== null && {
-        nestedStringList: serializeAws_restJson1NestedStringList(input.nestedStringList, context),
-      }),
-    ...(input.sparseStringList !== undefined &&
-      input.sparseStringList !== null && {
-        sparseStringList: serializeAws_restJson1SparseStringList(input.sparseStringList, context),
-      }),
-    ...(input.stringList !== undefined &&
-      input.stringList !== null && { stringList: serializeAws_restJson1StringList(input.stringList, context) }),
-    ...(input.stringSet !== undefined &&
-      input.stringSet !== null && { stringSet: serializeAws_restJson1StringSet(input.stringSet, context) }),
-    ...(input.structureList !== undefined &&
-      input.structureList !== null && {
-        myStructureList: serializeAws_restJson1StructureList(input.structureList, context),
-      }),
-    ...(input.timestampList !== undefined &&
-      input.timestampList !== null && {
-        timestampList: serializeAws_restJson1TimestampList(input.timestampList, context),
-      }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'booleanList': _ => _json(_),
+    'enumList': _ => _json(_),
+    'intEnumList': _ => _json(_),
+    'integerList': _ => _json(_),
+    'nestedStringList': _ => _json(_),
+    'stringList': _ => _json(_),
+    'stringSet': _ => _json(_),
+    'myStructureList': [, _ => se_StructureList(_, context), `structureList`],
+    'timestampList': _ => se_TimestampList(_, context),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonMapsCommand = async (
+/**
+ * serializeAws_restJson1JsonMapsCommand
+ */
+export const se_JsonMapsCommand = async (
   input: JsonMapsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonMaps";
+  b.bp("/JsonMaps");
   let body: any;
-  body = JSON.stringify({
-    ...(input.denseBooleanMap !== undefined &&
-      input.denseBooleanMap !== null && {
-        denseBooleanMap: serializeAws_restJson1DenseBooleanMap(input.denseBooleanMap, context),
-      }),
-    ...(input.denseNumberMap !== undefined &&
-      input.denseNumberMap !== null && {
-        denseNumberMap: serializeAws_restJson1DenseNumberMap(input.denseNumberMap, context),
-      }),
-    ...(input.denseSetMap !== undefined &&
-      input.denseSetMap !== null && { denseSetMap: serializeAws_restJson1DenseSetMap(input.denseSetMap, context) }),
-    ...(input.denseStringMap !== undefined &&
-      input.denseStringMap !== null && {
-        denseStringMap: serializeAws_restJson1DenseStringMap(input.denseStringMap, context),
-      }),
-    ...(input.denseStructMap !== undefined &&
-      input.denseStructMap !== null && {
-        denseStructMap: serializeAws_restJson1DenseStructMap(input.denseStructMap, context),
-      }),
-    ...(input.sparseBooleanMap !== undefined &&
-      input.sparseBooleanMap !== null && {
-        sparseBooleanMap: serializeAws_restJson1SparseBooleanMap(input.sparseBooleanMap, context),
-      }),
-    ...(input.sparseNumberMap !== undefined &&
-      input.sparseNumberMap !== null && {
-        sparseNumberMap: serializeAws_restJson1SparseNumberMap(input.sparseNumberMap, context),
-      }),
-    ...(input.sparseSetMap !== undefined &&
-      input.sparseSetMap !== null && { sparseSetMap: serializeAws_restJson1SparseSetMap(input.sparseSetMap, context) }),
-    ...(input.sparseStringMap !== undefined &&
-      input.sparseStringMap !== null && {
-        sparseStringMap: serializeAws_restJson1SparseStringMap(input.sparseStringMap, context),
-      }),
-    ...(input.sparseStructMap !== undefined &&
-      input.sparseStructMap !== null && {
-        sparseStructMap: serializeAws_restJson1SparseStructMap(input.sparseStructMap, context),
-      }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'denseBooleanMap': _ => _json(_),
+    'denseNumberMap': _ => _json(_),
+    'denseSetMap': _ => _json(_),
+    'denseStringMap': _ => _json(_),
+    'denseStructMap': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonTimestampsCommand = async (
+/**
+ * serializeAws_restJson1JsonTimestampsCommand
+ */
+export const se_JsonTimestampsCommand = async (
   input: JsonTimestampsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonTimestamps";
+  b.bp("/JsonTimestamps");
   let body: any;
-  body = JSON.stringify({
-    ...(input.dateTime !== undefined &&
-      input.dateTime !== null && { dateTime: input.dateTime.toISOString().split(".")[0] + "Z" }),
-    ...(input.epochSeconds !== undefined &&
-      input.epochSeconds !== null && { epochSeconds: Math.round(input.epochSeconds.getTime() / 1000) }),
-    ...(input.httpDate !== undefined && input.httpDate !== null && { httpDate: __dateToUtcString(input.httpDate) }),
-    ...(input.normal !== undefined && input.normal !== null && { normal: Math.round(input.normal.getTime() / 1000) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'dateTime': _ => __serializeDateTime(_),
+    'dateTimeOnTarget': _ => __serializeDateTime(_),
+    'epochSeconds': _ => (_.getTime() / 1_000),
+    'epochSecondsOnTarget': _ => (_.getTime() / 1_000),
+    'httpDate': _ => __dateToUtcString(_),
+    'httpDateOnTarget': _ => __dateToUtcString(_),
+    'normal': _ => (_.getTime() / 1_000),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1JsonUnionsCommand = async (
+/**
+ * serializeAws_restJson1JsonUnionsCommand
+ */
+export const se_JsonUnionsCommand = async (
   input: JsonUnionsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/JsonUnions";
+  b.bp("/JsonUnions");
   let body: any;
-  body = JSON.stringify({
-    ...(input.contents !== undefined &&
-      input.contents !== null && { contents: serializeAws_restJson1MyUnion(input.contents, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'contents': _ => se_MyUnion(_, context),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedAcceptWithBodyCommand = async (
+/**
+ * serializeAws_restJson1MalformedAcceptWithBodyCommand
+ */
+export const se_MalformedAcceptWithBodyCommand = async (
   input: MalformedAcceptWithBodyCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedAcceptWithBody";
+  b.bp("/MalformedAcceptWithBody");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedAcceptWithGenericStringCommand = async (
+/**
+ * serializeAws_restJson1MalformedAcceptWithGenericStringCommand
+ */
+export const se_MalformedAcceptWithGenericStringCommand = async (
   input: MalformedAcceptWithGenericStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/octet-stream",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedAcceptWithGenericString";
+  b.bp("/MalformedAcceptWithGenericString");
   let body: any;
-  if (input.payload !== undefined) {
-    body = input.payload;
-  }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedAcceptWithPayloadCommand = async (
+/**
+ * serializeAws_restJson1MalformedAcceptWithPayloadCommand
+ */
+export const se_MalformedAcceptWithPayloadCommand = async (
   input: MalformedAcceptWithPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedAcceptWithPayload";
+  b.bp("/MalformedAcceptWithPayload");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedBlobCommand = async (
+/**
+ * serializeAws_restJson1MalformedBlobCommand
+ */
+export const se_MalformedBlobCommand = async (
   input: MalformedBlobCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedBlob";
+  b.bp("/MalformedBlob");
   let body: any;
-  body = JSON.stringify({
-    ...(input.blob !== undefined && input.blob !== null && { blob: context.base64Encoder(input.blob) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'blob': _ => context.base64Encoder(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedBooleanCommand = async (
+/**
+ * serializeAws_restJson1MalformedBooleanCommand
+ */
+export const se_MalformedBooleanCommand = async (
   input: MalformedBooleanCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.booleanInHeader) && { booleaninheader: input.booleanInHeader!.toString() }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedBoolean/{booleanInPath}";
-  if (input.booleanInPath !== undefined) {
-    const labelValue: string = input.booleanInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: booleanInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{booleanInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: booleanInPath.");
-  }
-  const query: any = {
-    ...(input.booleanInQuery !== undefined && { booleanInQuery: input.booleanInQuery.toString() }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_bo]: [() => isSerializableHeaderValue(input[_bIH]), () => input[_bIH]!.toString()],
+  });
+  b.bp("/MalformedBoolean/{booleanInPath}");
+  b.p('booleanInPath', () => input.booleanInPath!.toString(), '{booleanInPath}', false)
+  const query: any = map({
+    [_bIQ]: [() => input.booleanInQuery !== void 0, () => (input[_bIQ]!.toString())],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.booleanInBody !== undefined && input.booleanInBody !== null && { booleanInBody: input.booleanInBody }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'booleanInBody': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedByteCommand = async (
+/**
+ * serializeAws_restJson1MalformedByteCommand
+ */
+export const se_MalformedByteCommand = async (
   input: MalformedByteCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.byteInHeader) && { byteinheader: input.byteInHeader!.toString() }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedByte/{byteInPath}";
-  if (input.byteInPath !== undefined) {
-    const labelValue: string = input.byteInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: byteInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{byteInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: byteInPath.");
-  }
-  const query: any = {
-    ...(input.byteInQuery !== undefined && { byteInQuery: input.byteInQuery.toString() }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_by]: [() => isSerializableHeaderValue(input[_bIHy]), () => input[_bIHy]!.toString()],
+  });
+  b.bp("/MalformedByte/{byteInPath}");
+  b.p('byteInPath', () => input.byteInPath!.toString(), '{byteInPath}', false)
+  const query: any = map({
+    [_bIQy]: [() => input.byteInQuery !== void 0, () => (input[_bIQy]!.toString())],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.byteInBody !== undefined && input.byteInBody !== null && { byteInBody: input.byteInBody }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'byteInBody': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedContentTypeWithBodyCommand = async (
+/**
+ * serializeAws_restJson1MalformedContentTypeWithBodyCommand
+ */
+export const se_MalformedContentTypeWithBodyCommand = async (
   input: MalformedContentTypeWithBodyCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedContentTypeWithBody";
+  b.bp("/MalformedContentTypeWithBody");
   let body: any;
-  body = JSON.stringify({
-    ...(input.hi !== undefined && input.hi !== null && { hi: input.hi }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'hi': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedContentTypeWithGenericStringCommand = async (
+/**
+ * serializeAws_restJson1MalformedContentTypeWithGenericStringCommand
+ */
+export const se_MalformedContentTypeWithGenericStringCommand = async (
   input: MalformedContentTypeWithGenericStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "text/plain",
+    'content-type': 'text/plain',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedContentTypeWithGenericString";
+  b.bp("/MalformedContentTypeWithGenericString");
   let body: any;
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedContentTypeWithoutBodyCommand = async (
+/**
+ * serializeAws_restJson1MalformedContentTypeWithoutBodyCommand
+ */
+export const se_MalformedContentTypeWithoutBodyCommand = async (
   input: MalformedContentTypeWithoutBodyCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedContentTypeWithoutBody";
+  b.bp("/MalformedContentTypeWithoutBody");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedContentTypeWithPayloadCommand = async (
+/**
+ * serializeAws_restJson1MalformedContentTypeWithoutBodyEmptyInputCommand
+ */
+export const se_MalformedContentTypeWithoutBodyEmptyInputCommand = async (
+  input: MalformedContentTypeWithoutBodyEmptyInputCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_he]: input[_he]!,
+  });
+  b.bp("/MalformedContentTypeWithoutBodyEmptyInput");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1MalformedContentTypeWithPayloadCommand
+ */
+export const se_MalformedContentTypeWithPayloadCommand = async (
   input: MalformedContentTypeWithPayloadCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "image/jpeg",
+    'content-type': 'image/jpeg',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedContentTypeWithPayload";
+  b.bp("/MalformedContentTypeWithPayload");
   let body: any;
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedDoubleCommand = async (
+/**
+ * serializeAws_restJson1MalformedDoubleCommand
+ */
+export const se_MalformedDoubleCommand = async (
   input: MalformedDoubleCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.doubleInHeader) && {
-      doubleinheader: input.doubleInHeader! % 1 == 0 ? input.doubleInHeader! + ".0" : input.doubleInHeader!.toString(),
-    }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedDouble/{doubleInPath}";
-  if (input.doubleInPath !== undefined) {
-    const labelValue: string = input.doubleInPath % 1 == 0 ? input.doubleInPath + ".0" : input.doubleInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: doubleInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{doubleInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: doubleInPath.");
-  }
-  const query: any = {
-    ...(input.doubleInQuery !== undefined && {
-      doubleInQuery: input.doubleInQuery % 1 == 0 ? input.doubleInQuery + ".0" : input.doubleInQuery.toString(),
-    }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_d]: [() => isSerializableHeaderValue(input[_dIH]), () => ((input[_dIH]! % 1 == 0) ? input[_dIH]! + ".0" : input[_dIH]!.toString())],
+  });
+  b.bp("/MalformedDouble/{doubleInPath}");
+  b.p('doubleInPath', () => ((input.doubleInPath! % 1 == 0) ? input.doubleInPath! + ".0" : input.doubleInPath!.toString()), '{doubleInPath}', false)
+  const query: any = map({
+    [_dIQ]: [() => input.doubleInQuery !== void 0, () => (((input[_dIQ]! % 1 == 0) ? input[_dIQ]! + ".0" : input[_dIQ]!.toString()))],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.doubleInBody !== undefined &&
-      input.doubleInBody !== null && { doubleInBody: __serializeFloat(input.doubleInBody) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'doubleInBody': _ => __serializeFloat(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedFloatCommand = async (
+/**
+ * serializeAws_restJson1MalformedFloatCommand
+ */
+export const se_MalformedFloatCommand = async (
   input: MalformedFloatCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.floatInHeader) && {
-      floatinheader: input.floatInHeader! % 1 == 0 ? input.floatInHeader! + ".0" : input.floatInHeader!.toString(),
-    }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedFloat/{floatInPath}";
-  if (input.floatInPath !== undefined) {
-    const labelValue: string = input.floatInPath % 1 == 0 ? input.floatInPath + ".0" : input.floatInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: floatInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{floatInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: floatInPath.");
-  }
-  const query: any = {
-    ...(input.floatInQuery !== undefined && {
-      floatInQuery: input.floatInQuery % 1 == 0 ? input.floatInQuery + ".0" : input.floatInQuery.toString(),
-    }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_fl]: [() => isSerializableHeaderValue(input[_fIH]), () => ((input[_fIH]! % 1 == 0) ? input[_fIH]! + ".0" : input[_fIH]!.toString())],
+  });
+  b.bp("/MalformedFloat/{floatInPath}");
+  b.p('floatInPath', () => ((input.floatInPath! % 1 == 0) ? input.floatInPath! + ".0" : input.floatInPath!.toString()), '{floatInPath}', false)
+  const query: any = map({
+    [_fIQ]: [() => input.floatInQuery !== void 0, () => (((input[_fIQ]! % 1 == 0) ? input[_fIQ]! + ".0" : input[_fIQ]!.toString()))],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.floatInBody !== undefined &&
-      input.floatInBody !== null && { floatInBody: __serializeFloat(input.floatInBody) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'floatInBody': _ => __serializeFloat(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedIntegerCommand = async (
+/**
+ * serializeAws_restJson1MalformedIntegerCommand
+ */
+export const se_MalformedIntegerCommand = async (
   input: MalformedIntegerCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.integerInHeader) && { integerinheader: input.integerInHeader!.toString() }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedInteger/{integerInPath}";
-  if (input.integerInPath !== undefined) {
-    const labelValue: string = input.integerInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: integerInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{integerInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: integerInPath.");
-  }
-  const query: any = {
-    ...(input.integerInQuery !== undefined && { integerInQuery: input.integerInQuery.toString() }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_i]: [() => isSerializableHeaderValue(input[_iIH]), () => input[_iIH]!.toString()],
+  });
+  b.bp("/MalformedInteger/{integerInPath}");
+  b.p('integerInPath', () => input.integerInPath!.toString(), '{integerInPath}', false)
+  const query: any = map({
+    [_iIQ]: [() => input.integerInQuery !== void 0, () => (input[_iIQ]!.toString())],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.integerInBody !== undefined && input.integerInBody !== null && { integerInBody: input.integerInBody }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'integerInBody': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedListCommand = async (
+/**
+ * serializeAws_restJson1MalformedListCommand
+ */
+export const se_MalformedListCommand = async (
   input: MalformedListCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedList";
+  b.bp("/MalformedList");
   let body: any;
-  body = JSON.stringify({
-    ...(input.bodyList !== undefined &&
-      input.bodyList !== null && { bodyList: serializeAws_restJson1SimpleList(input.bodyList, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'bodyList': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedLongCommand = async (
+/**
+ * serializeAws_restJson1MalformedLongCommand
+ */
+export const se_MalformedLongCommand = async (
   input: MalformedLongCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.longInHeader) && { longinheader: input.longInHeader!.toString() }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedLong/{longInPath}";
-  if (input.longInPath !== undefined) {
-    const labelValue: string = input.longInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: longInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{longInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: longInPath.");
-  }
-  const query: any = {
-    ...(input.longInQuery !== undefined && { longInQuery: input.longInQuery.toString() }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_l]: [() => isSerializableHeaderValue(input[_lIH]), () => input[_lIH]!.toString()],
+  });
+  b.bp("/MalformedLong/{longInPath}");
+  b.p('longInPath', () => input.longInPath!.toString(), '{longInPath}', false)
+  const query: any = map({
+    [_lIQ]: [() => input.longInQuery !== void 0, () => (input[_lIQ]!.toString())],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.longInBody !== undefined && input.longInBody !== null && { longInBody: input.longInBody }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'longInBody': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedMapCommand = async (
+/**
+ * serializeAws_restJson1MalformedMapCommand
+ */
+export const se_MalformedMapCommand = async (
   input: MalformedMapCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedMap";
+  b.bp("/MalformedMap");
   let body: any;
-  body = JSON.stringify({
-    ...(input.bodyMap !== undefined &&
-      input.bodyMap !== null && { bodyMap: serializeAws_restJson1SimpleMap(input.bodyMap, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'bodyMap': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedRequestBodyCommand = async (
+/**
+ * serializeAws_restJson1MalformedRequestBodyCommand
+ */
+export const se_MalformedRequestBodyCommand = async (
   input: MalformedRequestBodyCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedRequestBody";
+  b.bp("/MalformedRequestBody");
   let body: any;
-  body = JSON.stringify({
-    ...(input.float !== undefined && input.float !== null && { float: __serializeFloat(input.float) }),
-    ...(input.int !== undefined && input.int !== null && { int: input.int }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'float': _ => __serializeFloat(_),
+    'int': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedSetCommand = async (
-  input: MalformedSetCommandInput,
-  context: __SerdeContext
-): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedSet";
-  let body: any;
-  body = JSON.stringify({
-    ...(input.set !== undefined && input.set !== null && { set: serializeAws_restJson1SimpleSet(input.set, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
-};
-
-export const serializeAws_restJson1MalformedShortCommand = async (
+/**
+ * serializeAws_restJson1MalformedShortCommand
+ */
+export const se_MalformedShortCommand = async (
   input: MalformedShortCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.shortInHeader) && { shortinheader: input.shortInHeader!.toString() }),
-  };
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedShort/{shortInPath}";
-  if (input.shortInPath !== undefined) {
-    const labelValue: string = input.shortInPath.toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: shortInPath.");
-    }
-    resolvedPath = resolvedPath.replace("{shortInPath}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: shortInPath.");
-  }
-  const query: any = {
-    ...(input.shortInQuery !== undefined && { shortInQuery: input.shortInQuery.toString() }),
-  };
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_s]: [() => isSerializableHeaderValue(input[_sIH]), () => input[_sIH]!.toString()],
+  });
+  b.bp("/MalformedShort/{shortInPath}");
+  b.p('shortInPath', () => input.shortInPath!.toString(), '{shortInPath}', false)
+  const query: any = map({
+    [_sIQ]: [() => input.shortInQuery !== void 0, () => (input[_sIQ]!.toString())],
+  });
   let body: any;
-  body = JSON.stringify({
-    ...(input.shortInBody !== undefined && input.shortInBody !== null && { shortInBody: input.shortInBody }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'shortInBody': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedStringCommand = async (
+/**
+ * serializeAws_restJson1MalformedStringCommand
+ */
+export const se_MalformedStringCommand = async (
   input: MalformedStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.blob) && {
-      "amz-media-typed-header": context.base64Encoder(Buffer.from(__LazyJsonString.fromObject(input.blob!))),
-    }),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedString";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_amth]: [() => isSerializableHeaderValue(input[_bl]), () => context.base64Encoder(Buffer.from(__LazyJsonString.from(input[_bl]!)))],
   });
+  b.bp("/MalformedString");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampBodyDateTimeCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampBodyDateTimeCommand
+ */
+export const se_MalformedTimestampBodyDateTimeCommand = async (
   input: MalformedTimestampBodyDateTimeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampBodyDateTime";
+  b.bp("/MalformedTimestampBodyDateTime");
   let body: any;
-  body = JSON.stringify({
-    ...(input.timestamp !== undefined &&
-      input.timestamp !== null && { timestamp: input.timestamp.toISOString().split(".")[0] + "Z" }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'timestamp': _ => __serializeDateTime(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampBodyDefaultCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampBodyDefaultCommand
+ */
+export const se_MalformedTimestampBodyDefaultCommand = async (
   input: MalformedTimestampBodyDefaultCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampBodyDefault";
+  b.bp("/MalformedTimestampBodyDefault");
   let body: any;
-  body = JSON.stringify({
-    ...(input.timestamp !== undefined &&
-      input.timestamp !== null && { timestamp: Math.round(input.timestamp.getTime() / 1000) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'timestamp': _ => (_.getTime() / 1_000),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampBodyHttpDateCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampBodyHttpDateCommand
+ */
+export const se_MalformedTimestampBodyHttpDateCommand = async (
   input: MalformedTimestampBodyHttpDateCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampBodyHttpDate";
+  b.bp("/MalformedTimestampBodyHttpDate");
   let body: any;
-  body = JSON.stringify({
-    ...(input.timestamp !== undefined && input.timestamp !== null && { timestamp: __dateToUtcString(input.timestamp) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'timestamp': _ => __dateToUtcString(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampHeaderDateTimeCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampHeaderDateTimeCommand
+ */
+export const se_MalformedTimestampHeaderDateTimeCommand = async (
   input: MalformedTimestampHeaderDateTimeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.timestamp) && {
-      timestamp: (input.timestamp!.toISOString().split(".")[0] + "Z").toString(),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampHeaderDateTime";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_t]: [() => isSerializableHeaderValue(input[_t]), () => __serializeDateTime(input[_t]!).toString()],
   });
+  b.bp("/MalformedTimestampHeaderDateTime");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampHeaderDefaultCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampHeaderDefaultCommand
+ */
+export const se_MalformedTimestampHeaderDefaultCommand = async (
   input: MalformedTimestampHeaderDefaultCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.timestamp) && { timestamp: __dateToUtcString(input.timestamp!).toString() }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampHeaderDefault";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_t]: [() => isSerializableHeaderValue(input[_t]), () => __dateToUtcString(input[_t]!).toString()],
   });
+  b.bp("/MalformedTimestampHeaderDefault");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampHeaderEpochCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampHeaderEpochCommand
+ */
+export const se_MalformedTimestampHeaderEpochCommand = async (
   input: MalformedTimestampHeaderEpochCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.timestamp) && {
-      timestamp: Math.round(input.timestamp!.getTime() / 1000).toString(),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampHeaderEpoch";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_t]: [() => isSerializableHeaderValue(input[_t]), () => (input[_t]!.getTime() / 1_000).toString()],
   });
+  b.bp("/MalformedTimestampHeaderEpoch");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampPathDefaultCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampPathDefaultCommand
+ */
+export const se_MalformedTimestampPathDefaultCommand = async (
   input: MalformedTimestampPathDefaultCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/MalformedTimestampPathDefault/{timestamp}";
-  if (input.timestamp !== undefined) {
-    const labelValue: string = (input.timestamp.toISOString().split(".")[0] + "Z").toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: timestamp.");
-    }
-    resolvedPath = resolvedPath.replace("{timestamp}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: timestamp.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/MalformedTimestampPathDefault/{timestamp}");
+  b.p('timestamp', () => __serializeDateTime(input.timestamp!).toString(), '{timestamp}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampPathEpochCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampPathEpochCommand
+ */
+export const se_MalformedTimestampPathEpochCommand = async (
   input: MalformedTimestampPathEpochCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampPathEpoch/{timestamp}";
-  if (input.timestamp !== undefined) {
-    const labelValue: string = Math.round(input.timestamp.getTime() / 1000).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: timestamp.");
-    }
-    resolvedPath = resolvedPath.replace("{timestamp}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: timestamp.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/MalformedTimestampPathEpoch/{timestamp}");
+  b.p('timestamp', () => (input.timestamp!.getTime() / 1_000).toString(), '{timestamp}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampPathHttpDateCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampPathHttpDateCommand
+ */
+export const se_MalformedTimestampPathHttpDateCommand = async (
   input: MalformedTimestampPathHttpDateCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  let resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
-    "/MalformedTimestampPathHttpDate/{timestamp}";
-  if (input.timestamp !== undefined) {
-    const labelValue: string = __dateToUtcString(input.timestamp).toString();
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: timestamp.");
-    }
-    resolvedPath = resolvedPath.replace("{timestamp}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: timestamp.");
-  }
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/MalformedTimestampPathHttpDate/{timestamp}");
+  b.p('timestamp', () => __dateToUtcString(input.timestamp!).toString(), '{timestamp}', false)
   let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampQueryDefaultCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampQueryDefaultCommand
+ */
+export const se_MalformedTimestampQueryDefaultCommand = async (
   input: MalformedTimestampQueryDefaultCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampQueryDefault";
-  const query: any = {
-    ...(input.timestamp !== undefined && { timestamp: (input.timestamp.toISOString().split(".")[0] + "Z").toString() }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/MalformedTimestampQueryDefault");
+  const query: any = map({
+    [_t]: [__expectNonNull(input.timestamp, `timestamp`) != null, () => __serializeDateTime(input[_t]!).toString()],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampQueryEpochCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampQueryEpochCommand
+ */
+export const se_MalformedTimestampQueryEpochCommand = async (
   input: MalformedTimestampQueryEpochCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampQueryEpoch";
-  const query: any = {
-    ...(input.timestamp !== undefined && { timestamp: Math.round(input.timestamp.getTime() / 1000).toString() }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/MalformedTimestampQueryEpoch");
+  const query: any = map({
+    [_t]: [__expectNonNull(input.timestamp, `timestamp`) != null, () => (input[_t]!.getTime() / 1_000).toString()],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedTimestampQueryHttpDateCommand = async (
+/**
+ * serializeAws_restJson1MalformedTimestampQueryHttpDateCommand
+ */
+export const se_MalformedTimestampQueryHttpDateCommand = async (
   input: MalformedTimestampQueryHttpDateCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedTimestampQueryHttpDate";
-  const query: any = {
-    ...(input.timestamp !== undefined && { timestamp: __dateToUtcString(input.timestamp).toString() }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/MalformedTimestampQueryHttpDate");
+  const query: any = map({
+    [_t]: [__expectNonNull(input.timestamp, `timestamp`) != null, () => __dateToUtcString(input[_t]!).toString()],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MalformedUnionCommand = async (
+/**
+ * serializeAws_restJson1MalformedUnionCommand
+ */
+export const se_MalformedUnionCommand = async (
   input: MalformedUnionCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MalformedUnion";
+  b.bp("/MalformedUnion");
   let body: any;
-  body = JSON.stringify({
-    ...(input.union !== undefined &&
-      input.union !== null && { union: serializeAws_restJson1SimpleUnion(input.union, context) }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'union': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1MediaTypeHeaderCommand = async (
+/**
+ * serializeAws_restJson1MediaTypeHeaderCommand
+ */
+export const se_MediaTypeHeaderCommand = async (
   input: MediaTypeHeaderCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.json) && {
-      "x-json": context.base64Encoder(Buffer.from(__LazyJsonString.fromObject(input.json!))),
-    }),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/MediaTypeHeader";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xj]: [() => isSerializableHeaderValue(input[_j]), () => context.base64Encoder(Buffer.from(__LazyJsonString.from(input[_j]!)))],
   });
+  b.bp("/MediaTypeHeader");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1NoInputAndNoOutputCommand = async (
+/**
+ * serializeAws_restJson1NoInputAndNoOutputCommand
+ */
+export const se_NoInputAndNoOutputCommand = async (
   input: NoInputAndNoOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NoInputAndNoOutput";
+  b.bp("/NoInputAndNoOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1NoInputAndOutputCommand = async (
+/**
+ * serializeAws_restJson1NoInputAndOutputCommand
+ */
+export const se_NoInputAndOutputCommand = async (
   input: NoInputAndOutputCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
   };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NoInputAndOutputOutput";
+  b.bp("/NoInputAndOutputOutput");
   let body: any;
-  body = "";
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1NullAndEmptyHeadersClientCommand = async (
+/**
+ * serializeAws_restJson1NullAndEmptyHeadersClientCommand
+ */
+export const se_NullAndEmptyHeadersClientCommand = async (
   input: NullAndEmptyHeadersClientCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.a) && { "x-a": input.a! }),
-    ...(isSerializableHeaderValue(input.b) && { "x-b": input.b! }),
-    ...(isSerializableHeaderValue(input.c) && { "x-c": (input.c! || []).map((_entry) => _entry as any).join(", ") }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NullAndEmptyHeadersClient";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xa]: input[_a]!,
+    [_xb____]: input[_b_]!,
+    [_xc]: [() => isSerializableHeaderValue(input[_c]), () => (input[_c]! || []).map(__quoteHeader).join(', ')],
   });
+  b.bp("/NullAndEmptyHeadersClient");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1NullAndEmptyHeadersServerCommand = async (
+/**
+ * serializeAws_restJson1NullAndEmptyHeadersServerCommand
+ */
+export const se_NullAndEmptyHeadersServerCommand = async (
   input: NullAndEmptyHeadersServerCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.a) && { "x-a": input.a! }),
-    ...(isSerializableHeaderValue(input.b) && { "x-b": input.b! }),
-    ...(isSerializableHeaderValue(input.c) && { "x-c": (input.c! || []).map((_entry) => _entry as any).join(", ") }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/NullAndEmptyHeadersServer";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xa]: input[_a]!,
+    [_xb____]: input[_b_]!,
+    [_xc]: [() => isSerializableHeaderValue(input[_c]), () => (input[_c]! || []).map(__quoteHeader).join(', ')],
   });
+  b.bp("/NullAndEmptyHeadersServer");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1OmitsNullSerializesEmptyStringCommand = async (
+/**
+ * serializeAws_restJson1OmitsNullSerializesEmptyStringCommand
+ */
+export const se_OmitsNullSerializesEmptyStringCommand = async (
   input: OmitsNullSerializesEmptyStringCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/OmitsNullSerializesEmptyString";
-  const query: any = {
-    ...(input.nullValue !== undefined && { Null: input.nullValue }),
-    ...(input.emptyString !== undefined && { Empty: input.emptyString }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "GET",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/OmitsNullSerializesEmptyString");
+  const query: any = map({
+    [_N]: [,input[_nV]!],
+    [_Em]: [,input[_eS]!],
   });
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1QueryIdempotencyTokenAutoFillCommand = async (
+/**
+ * serializeAws_restJson1OmitsSerializingEmptyListsCommand
+ */
+export const se_OmitsSerializingEmptyListsCommand = async (
+  input: OmitsSerializingEmptyListsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/OmitsSerializingEmptyLists");
+  const query: any = map({
+    [_SL]: [() => input.queryStringList !== void 0, () => ((input[_qSL]! || []))],
+    [_IL]: [() => input.queryIntegerList !== void 0, () => ((input[_qIL]! || []).map(_entry => _entry.toString() as any))],
+    [_DL]: [() => input.queryDoubleList !== void 0, () => ((input[_qDL]! || []).map(_entry => ((_entry % 1 == 0) ? _entry + ".0" : _entry.toString()) as any))],
+    [_BL]: [() => input.queryBooleanList !== void 0, () => ((input[_qBL]! || []).map(_entry => _entry.toString() as any))],
+    [_TL]: [() => input.queryTimestampList !== void 0, () => ((input[_qTL]! || []).map(_entry => __serializeDateTime(_entry).toString() as any))],
+    [_EL]: [() => input.queryEnumList !== void 0, () => ((input[_qEL]! || []))],
+    [_IEL]: [() => input.queryIntegerEnumList !== void 0, () => ((input[_qIEL]! || []).map(_entry => _entry.toString() as any))],
+  });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1OperationWithDefaultsCommand
+ */
+export const se_OperationWithDefaultsCommand = async (
+  input: OperationWithDefaultsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/OperationWithDefaults");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'clientOptionalDefaults': _ => _json(_),
+    'defaults': _ => se_Defaults(_, context),
+    'otherTopLevelDefault': [],
+    'topLevelDefault': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1OperationWithNestedStructureCommand
+ */
+export const se_OperationWithNestedStructureCommand = async (
+  input: OperationWithNestedStructureCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/OperationWithNestedStructure");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'topLevel': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1OutputStreamCommand
+ */
+export const se_OutputStreamCommand = async (
+  input: OutputStreamCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/OutputStream");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1OutputStreamWithInitialResponseCommand
+ */
+export const se_OutputStreamWithInitialResponseCommand = async (
+  input: OutputStreamWithInitialResponseCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/OutputStreamWithInitialResponse");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1PostPlayerActionCommand
+ */
+export const se_PostPlayerActionCommand = async (
+  input: PostPlayerActionCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/PostPlayerAction");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'action': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1PostUnionWithJsonNameCommand
+ */
+export const se_PostUnionWithJsonNameCommand = async (
+  input: PostUnionWithJsonNameCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/PostUnionWithJsonName");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'value': _ => se_UnionWithJsonName(_, context),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1PutWithContentEncodingCommand
+ */
+export const se_PutWithContentEncodingCommand = async (
+  input: PutWithContentEncodingCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_ce]: input[_e]!,
+  });
+  b.bp("/requestcompression/putcontentwithencoding");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'data': [],
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1QueryIdempotencyTokenAutoFillCommand
+ */
+export const se_QueryIdempotencyTokenAutoFillCommand = async (
   input: QueryIdempotencyTokenAutoFillCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/QueryIdempotencyTokenAutoFill";
-  const query: any = {
-    ...(input.token !== undefined && { token: input.token }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/QueryIdempotencyTokenAutoFill");
+  const query: any = map({
+    [_to]: [,input[_to] ?? generateIdempotencyToken()],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1QueryParamsAsStringListMapCommand = async (
+/**
+ * serializeAws_restJson1QueryParamsAsStringListMapCommand
+ */
+export const se_QueryParamsAsStringListMapCommand = async (
   input: QueryParamsAsStringListMapCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StringListMap";
-  const query: any = {
-    ...(input.foo !== undefined && input.foo),
-    ...(input.qux !== undefined && { corge: input.qux }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/StringListMap");
+  const query: any = map({
+    ...convertMap(input.foo),
+    [_co]: [,input[_q]!],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1QueryPrecedenceCommand = async (
+/**
+ * serializeAws_restJson1QueryPrecedenceCommand
+ */
+export const se_QueryPrecedenceCommand = async (
   input: QueryPrecedenceCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {};
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/Precedence";
-  const query: any = {
-    ...(input.baz !== undefined && input.baz),
-    ...(input.foo !== undefined && { bar: input.foo }),
+  const b = rb(input, context);
+  const headers: any = {
   };
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    query,
-    body,
+  b.bp("/Precedence");
+  const query: any = map({
+    ...convertMap(input.baz),
+    [_ba]: [,input[_f]!],
   });
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .q(query)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1RecursiveShapesCommand = async (
+/**
+ * serializeAws_restJson1RecursiveShapesCommand
+ */
+export const se_RecursiveShapesCommand = async (
   input: RecursiveShapesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+  const b = rb(input, context);
   const headers: any = {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/RecursiveShapes";
+  b.bp("/RecursiveShapes");
   let body: any;
-  body = JSON.stringify({
-    ...(input.nested !== undefined &&
-      input.nested !== null && {
-        nested: serializeAws_restJson1RecursiveShapesInputOutputNested1(input.nested, context),
-      }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'nested': _ => se_RecursiveShapesInputOutputNested1(_, context),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1SimpleScalarPropertiesCommand = async (
+/**
+ * serializeAws_restJson1ResponseCodeHttpFallbackCommand
+ */
+export const se_ResponseCodeHttpFallbackCommand = async (
+  input: ResponseCodeHttpFallbackCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/responseCodeHttpFallback");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1ResponseCodeRequiredCommand
+ */
+export const se_ResponseCodeRequiredCommand = async (
+  input: ResponseCodeRequiredCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/responseCodeRequired");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1SimpleScalarPropertiesCommand
+ */
+export const se_SimpleScalarPropertiesCommand = async (
   input: SimpleScalarPropertiesCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/json",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/SimpleScalarProperties";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/SimpleScalarProperties");
   let body: any;
-  body = JSON.stringify({
-    ...(input.byteValue !== undefined && input.byteValue !== null && { byteValue: input.byteValue }),
-    ...(input.doubleValue !== undefined &&
-      input.doubleValue !== null && { DoubleDribble: __serializeFloat(input.doubleValue) }),
-    ...(input.falseBooleanValue !== undefined &&
-      input.falseBooleanValue !== null && { falseBooleanValue: input.falseBooleanValue }),
-    ...(input.floatValue !== undefined &&
-      input.floatValue !== null && { floatValue: __serializeFloat(input.floatValue) }),
-    ...(input.integerValue !== undefined && input.integerValue !== null && { integerValue: input.integerValue }),
-    ...(input.longValue !== undefined && input.longValue !== null && { longValue: input.longValue }),
-    ...(input.shortValue !== undefined && input.shortValue !== null && { shortValue: input.shortValue }),
-    ...(input.stringValue !== undefined && input.stringValue !== null && { stringValue: input.stringValue }),
-    ...(input.trueBooleanValue !== undefined &&
-      input.trueBooleanValue !== null && { trueBooleanValue: input.trueBooleanValue }),
-  });
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "PUT",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  body = JSON.stringify(take(input, {
+    'byteValue': [],
+    'DoubleDribble': [, _ => __serializeFloat(_), `doubleValue`],
+    'falseBooleanValue': [],
+    'floatValue': _ => __serializeFloat(_),
+    'integerValue': [],
+    'longValue': [],
+    'shortValue': [],
+    'stringValue': [],
+    'trueBooleanValue': [],
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1StreamingTraitsCommand = async (
+/**
+ * serializeAws_restJson1SparseJsonListsCommand
+ */
+export const se_SparseJsonListsCommand = async (
+  input: SparseJsonListsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/SparseJsonLists");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'sparseShortList': _ => se_SparseShortList(_, context),
+    'sparseStringList': _ => se_SparseStringList(_, context),
+  }));
+  b.m("PUT")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1SparseJsonMapsCommand
+ */
+export const se_SparseJsonMapsCommand = async (
+  input: SparseJsonMapsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+    'content-type': 'application/json',
+  };
+  b.bp("/SparseJsonMaps");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'sparseBooleanMap': _ => se_SparseBooleanMap(_, context),
+    'sparseNumberMap': _ => se_SparseNumberMap(_, context),
+    'sparseSetMap': _ => se_SparseSetMap(_, context),
+    'sparseStringMap': _ => se_SparseStringMap(_, context),
+    'sparseStructMap': _ => se_SparseStructMap(_, context),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1StreamingTraitsCommand
+ */
+export const se_StreamingTraitsCommand = async (
   input: StreamingTraitsCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/octet-stream",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StreamingTraits";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/octet-stream',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/StreamingTraits");
   let body: any;
   if (input.blob !== undefined) {
     body = input.blob;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1StreamingTraitsRequireLengthCommand = async (
+/**
+ * serializeAws_restJson1StreamingTraitsRequireLengthCommand
+ */
+export const se_StreamingTraitsRequireLengthCommand = async (
   input: StreamingTraitsRequireLengthCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "application/octet-stream",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StreamingTraitsRequireLength";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/octet-stream',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/StreamingTraitsRequireLength");
   let body: any;
   if (input.blob !== undefined) {
     body = input.blob;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1StreamingTraitsWithMediaTypeCommand = async (
+/**
+ * serializeAws_restJson1StreamingTraitsWithMediaTypeCommand
+ */
+export const se_StreamingTraitsWithMediaTypeCommand = async (
   input: StreamingTraitsWithMediaTypeCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    "content-type": "text/plain",
-    ...(isSerializableHeaderValue(input.foo) && { "x-foo": input.foo! }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/StreamingTraitsWithMediaType";
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'text/plain',
+    [_xf]: input[_f]!,
+  });
+  b.bp("/StreamingTraitsWithMediaType");
   let body: any;
   if (input.blob !== undefined) {
     body = input.blob;
   }
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
-  });
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const serializeAws_restJson1TimestampFormatHeadersCommand = async (
+/**
+ * serializeAws_restJson1TestBodyStructureCommand
+ */
+export const se_TestBodyStructureCommand = async (
+  input: TestBodyStructureCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_xati]: input[_tI]!,
+  });
+  b.bp("/body");
+  let body: any;
+  body = JSON.stringify(take(input, {
+    'testConfig': _ => _json(_),
+  }));
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestGetNoInputNoPayloadCommand
+ */
+export const se_TestGetNoInputNoPayloadCommand = async (
+  input: TestGetNoInputNoPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/no_input_no_payload");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestGetNoPayloadCommand
+ */
+export const se_TestGetNoPayloadCommand = async (
+  input: TestGetNoPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xati]: input[_tI]!,
+  });
+  b.bp("/no_payload");
+  let body: any;
+  b.m("GET")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestPayloadBlobCommand
+ */
+export const se_TestPayloadBlobCommand = async (
+  input: TestPayloadBlobCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_ct]: input[_cT] || 'application/octet-stream',
+  });
+  b.bp("/blob_payload");
+  let body: any;
+  if (input.data !== undefined) {
+    body = input.data;
+  }
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestPayloadStructureCommand
+ */
+export const se_TestPayloadStructureCommand = async (
+  input: TestPayloadStructureCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    'content-type': 'application/json',
+    [_xati]: input[_tI]!,
+  });
+  b.bp("/payload");
+  let body: any;
+  if (input.payloadConfig !== undefined) {
+    body = _json(input.payloadConfig);
+  }
+  if (body === undefined) {
+    body = {};
+  }
+  body = JSON.stringify(body);
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestPostNoInputNoPayloadCommand
+ */
+export const se_TestPostNoInputNoPayloadCommand = async (
+  input: TestPostNoInputNoPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/no_input_no_payload");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TestPostNoPayloadCommand
+ */
+export const se_TestPostNoPayloadCommand = async (
+  input: TestPostNoPayloadCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xati]: input[_tI]!,
+  });
+  b.bp("/no_payload");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * serializeAws_restJson1TimestampFormatHeadersCommand
+ */
+export const se_TimestampFormatHeadersCommand = async (
   input: TimestampFormatHeadersCommandInput,
   context: __SerdeContext
 ): Promise<__HttpRequest> => {
-  const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-  const headers: any = {
-    ...(isSerializableHeaderValue(input.memberEpochSeconds) && {
-      "x-memberepochseconds": Math.round(input.memberEpochSeconds!.getTime() / 1000).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.memberHttpDate) && {
-      "x-memberhttpdate": __dateToUtcString(input.memberHttpDate!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.memberDateTime) && {
-      "x-memberdatetime": (input.memberDateTime!.toISOString().split(".")[0] + "Z").toString(),
-    }),
-    ...(isSerializableHeaderValue(input.defaultFormat) && {
-      "x-defaultformat": __dateToUtcString(input.defaultFormat!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetEpochSeconds) && {
-      "x-targetepochseconds": Math.round(input.targetEpochSeconds!.getTime() / 1000).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetHttpDate) && {
-      "x-targethttpdate": __dateToUtcString(input.targetHttpDate!).toString(),
-    }),
-    ...(isSerializableHeaderValue(input.targetDateTime) && {
-      "x-targetdatetime": (input.targetDateTime!.toISOString().split(".")[0] + "Z").toString(),
-    }),
-  };
-  const resolvedPath =
-    `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/TimestampFormatHeaders";
-  let body: any;
-  return new __HttpRequest({
-    protocol,
-    hostname,
-    port,
-    method: "POST",
-    headers,
-    path: resolvedPath,
-    body,
+  const b = rb(input, context);
+  const headers: any = map({}, isSerializableHeaderValue, {
+    [_xm]: [() => isSerializableHeaderValue(input[_mES]), () => (input[_mES]!.getTime() / 1_000).toString()],
+    [_xm_]: [() => isSerializableHeaderValue(input[_mHD]), () => __dateToUtcString(input[_mHD]!).toString()],
+    [_xm__]: [() => isSerializableHeaderValue(input[_mDT]), () => __serializeDateTime(input[_mDT]!).toString()],
+    [_xd_]: [() => isSerializableHeaderValue(input[_dF]), () => __dateToUtcString(input[_dF]!).toString()],
+    [_xt_]: [() => isSerializableHeaderValue(input[_tES]), () => (input[_tES]!.getTime() / 1_000).toString()],
+    [_xt__]: [() => isSerializableHeaderValue(input[_tHD]), () => __dateToUtcString(input[_tHD]!).toString()],
+    [_xt___]: [() => isSerializableHeaderValue(input[_tDT]), () => __serializeDateTime(input[_tDT]!).toString()],
   });
+  b.bp("/TimestampFormatHeaders");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
 };
 
-export const deserializeAws_restJson1AllQueryStringTypesCommand = async (
+/**
+ * serializeAws_restJson1UnitInputAndOutputCommand
+ */
+export const se_UnitInputAndOutputCommand = async (
+  input: UnitInputAndOutputCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const b = rb(input, context);
+  const headers: any = {
+  };
+  b.bp("/UnitInputAndOutput");
+  let body: any;
+  b.m("POST")
+  .h(headers)
+  .b(body);
+  return b.build();
+};
+
+/**
+ * deserializeAws_restJson1AllQueryStringTypesCommand
+ */
+export const de_AllQueryStringTypesCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<AllQueryStringTypesCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1AllQueryStringTypesCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: AllQueryStringTypesCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restJson1AllQueryStringTypesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<AllQueryStringTypesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1ConstantAndVariableQueryStringCommand = async (
+/**
+ * deserializeAws_restJson1ConstantAndVariableQueryStringCommand
+ */
+export const de_ConstantAndVariableQueryStringCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<ConstantAndVariableQueryStringCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1ConstantAndVariableQueryStringCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: ConstantAndVariableQueryStringCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restJson1ConstantAndVariableQueryStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<ConstantAndVariableQueryStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1ConstantQueryStringCommand = async (
+/**
+ * deserializeAws_restJson1ConstantQueryStringCommand
+ */
+export const de_ConstantQueryStringCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<ConstantQueryStringCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1ConstantQueryStringCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: ConstantQueryStringCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-  };
+  });
   await collectBody(output.body, context);
-  return Promise.resolve(contents);
+  return contents;
 };
 
-const deserializeAws_restJson1ConstantQueryStringCommandError = async (
+/**
+ * deserializeAws_restJson1ContentTypeParametersCommand
+ */
+export const de_ContentTypeParametersCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
-): Promise<ConstantQueryStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
+): Promise<ContentTypeParametersCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
   }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
 };
 
-export const deserializeAws_restJson1DocumentTypeCommand = async (
+/**
+ * deserializeAws_restJson1DatetimeOffsetsCommand
+ */
+export const de_DatetimeOffsetsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DatetimeOffsetsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  const doc = take(data, {
+    'datetime': _ => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1DocumentTypeCommand
+ */
+export const de_DocumentTypeCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DocumentTypeCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1DocumentTypeCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: DocumentTypeCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    documentValue: undefined,
-    stringValue: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.documentValue !== undefined && data.documentValue !== null) {
-    contents.documentValue = deserializeAws_restJson1Document(data.documentValue, context);
-  }
-  if (data.stringValue !== undefined && data.stringValue !== null) {
-    contents.stringValue = __expectString(data.stringValue);
-  }
-  return Promise.resolve(contents);
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  const doc = take(data, {
+    'documentValue': _ => de_Document(_, context),
+    'stringValue': __expectString,
+  });
+  Object.assign(contents, doc);
+  return contents;
 };
 
-const deserializeAws_restJson1DocumentTypeCommandError = async (
+/**
+ * deserializeAws_restJson1DocumentTypeAsMapValueCommand
+ */
+export const de_DocumentTypeAsMapValueCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
-): Promise<DocumentTypeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
+): Promise<DocumentTypeAsMapValueCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
   }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  const doc = take(data, {
+    'docValuedMap': _ => de_DocumentValuedMap(_, context),
+  });
+  Object.assign(contents, doc);
+  return contents;
 };
 
-export const deserializeAws_restJson1DocumentTypeAsPayloadCommand = async (
+/**
+ * deserializeAws_restJson1DocumentTypeAsPayloadCommand
+ */
+export const de_DocumentTypeAsPayloadCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DocumentTypeAsPayloadCommandOutput> => {
   if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1DocumentTypeAsPayloadCommandError(output, context);
+    return de_CommandError(output, context);
   }
-  const contents: DocumentTypeAsPayloadCommandOutput = {
+  const contents: any = map({
     $metadata: deserializeMetadata(output),
-    documentValue: undefined,
-  };
+  });
   const data: any = await collectBodyString(output.body, context);
   contents.documentValue = data;
   contents.documentValue = JSON.parse(data);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1DocumentTypeAsPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<DocumentTypeAsPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1EmptyInputAndEmptyOutputCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EmptyInputAndEmptyOutputCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1EmptyInputAndEmptyOutputCommandError(output, context);
-  }
-  const contents: EmptyInputAndEmptyOutputCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1EmptyInputAndEmptyOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EmptyInputAndEmptyOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1EndpointOperationCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointOperationCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1EndpointOperationCommandError(output, context);
-  }
-  const contents: EndpointOperationCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1EndpointOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1EndpointWithHostLabelOperationCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointWithHostLabelOperationCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1EndpointWithHostLabelOperationCommandError(output, context);
-  }
-  const contents: EndpointWithHostLabelOperationCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1EndpointWithHostLabelOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<EndpointWithHostLabelOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1GreetingWithErrorsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<GreetingWithErrorsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1GreetingWithErrorsCommandError(output, context);
-  }
-  const contents: GreetingWithErrorsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    greeting: undefined,
-  };
-  if (output.headers["x-greeting"] !== undefined) {
-    contents.greeting = output.headers["x-greeting"];
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1GreetingWithErrorsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<GreetingWithErrorsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    case "ComplexError":
-    case "aws.protocoltests.restjson#ComplexError":
-      response = {
-        ...(await deserializeAws_restJson1ComplexErrorResponse(parsedOutput, context)),
-        name: errorCode,
-        $metadata: deserializeMetadata(output),
-      };
-      break;
-    case "FooError":
-    case "aws.protocoltests.restjson#FooError":
-      response = {
-        ...(await deserializeAws_restJson1FooErrorResponse(parsedOutput, context)),
-        name: errorCode,
-        $metadata: deserializeMetadata(output),
-      };
-      break;
-    case "InvalidGreeting":
-    case "aws.protocoltests.restjson#InvalidGreeting":
-      response = {
-        ...(await deserializeAws_restJson1InvalidGreetingResponse(parsedOutput, context)),
-        name: errorCode,
-        $metadata: deserializeMetadata(output),
-      };
-      break;
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HostWithPathOperationCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HostWithPathOperationCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HostWithPathOperationCommandError(output, context);
-  }
-  const contents: HostWithPathOperationCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HostWithPathOperationCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HostWithPathOperationCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpChecksumRequiredCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpChecksumRequiredCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpChecksumRequiredCommandError(output, context);
-  }
-  const contents: HttpChecksumRequiredCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    foo: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.foo !== undefined && data.foo !== null) {
-    contents.foo = __expectString(data.foo);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpChecksumRequiredCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpChecksumRequiredCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpEnumPayloadCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpEnumPayloadCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpEnumPayloadCommandError(output, context);
-  }
-  const contents: HttpEnumPayloadCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    payload: undefined,
-  };
-  const data: any = await collectBodyString(output.body, context);
-  contents.payload = __expectString(data);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpEnumPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpEnumPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpPayloadTraitsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpPayloadTraitsCommandError(output, context);
-  }
-  const contents: HttpPayloadTraitsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = await collectBody(output.body, context);
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpPayloadTraitsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommandError(output, context);
-  }
-  const contents: HttpPayloadTraitsWithMediaTypeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = await collectBody(output.body, context);
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpPayloadWithStructureCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithStructureCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpPayloadWithStructureCommandError(output, context);
-  }
-  const contents: HttpPayloadWithStructureCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } | undefined = __expectObject(await parseBody(output.body, context));
-  contents.nested = deserializeAws_restJson1NestedPayload(data, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpPayloadWithStructureCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPayloadWithStructureCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpPrefixHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpPrefixHeadersCommandError(output, context);
-  }
-  const contents: HttpPrefixHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    foo: undefined,
-    fooMap: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  Object.keys(output.headers).forEach((header) => {
-    if (contents.fooMap === undefined) {
-      contents.fooMap = {};
-    }
-    if (header.startsWith("x-foo-")) {
-      contents.fooMap[header.substring(6)] = output.headers[header];
-    }
-  });
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpPrefixHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpPrefixHeadersResponseCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersResponseCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpPrefixHeadersResponseCommandError(output, context);
-  }
-  const contents: HttpPrefixHeadersResponseCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    prefixHeaders: undefined,
-  };
-  Object.keys(output.headers).forEach((header) => {
-    if (contents.prefixHeaders === undefined) {
-      contents.prefixHeaders = {};
-    }
-    if (header.startsWith("")) {
-      contents.prefixHeaders[header.substring(0)] = output.headers[header];
-    }
-  });
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpPrefixHeadersResponseCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpPrefixHeadersResponseCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpRequestWithFloatLabelsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpRequestWithFloatLabelsCommandError(output, context);
-  }
-  const contents: HttpRequestWithFloatLabelsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpRequestWithFloatLabelsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpRequestWithGreedyLabelInPathCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpRequestWithGreedyLabelInPathCommandError(output, context);
-  }
-  const contents: HttpRequestWithGreedyLabelInPathCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpRequestWithGreedyLabelInPathCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpRequestWithLabelsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpRequestWithLabelsCommandError(output, context);
-  }
-  const contents: HttpRequestWithLabelsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpRequestWithLabelsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommandError(output, context);
-  }
-  const contents: HttpRequestWithLabelsAndTimestampFormatCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpResponseCodeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpResponseCodeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpResponseCodeCommandError(output, context);
-  }
-  const contents: HttpResponseCodeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    Status: undefined,
-  };
-  if (contents.Status === undefined) {
-    contents.Status = output.statusCode;
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpResponseCodeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpResponseCodeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1HttpStringPayloadCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpStringPayloadCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1HttpStringPayloadCommandError(output, context);
-  }
-  const contents: HttpStringPayloadCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    payload: undefined,
-  };
-  const data: any = await collectBodyString(output.body, context);
-  contents.payload = __expectString(data);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1HttpStringPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<HttpStringPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1IgnoreQueryParamsInResponseCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1IgnoreQueryParamsInResponseCommandError(output, context);
-  }
-  const contents: IgnoreQueryParamsInResponseCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    baz: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.baz !== undefined && data.baz !== null) {
-    contents.baz = __expectString(data.baz);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1IgnoreQueryParamsInResponseCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1InputAndOutputWithHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<InputAndOutputWithHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1InputAndOutputWithHeadersCommandError(output, context);
-  }
-  const contents: InputAndOutputWithHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    headerBooleanList: undefined,
-    headerByte: undefined,
-    headerDouble: undefined,
-    headerEnum: undefined,
-    headerEnumList: undefined,
-    headerFalseBool: undefined,
-    headerFloat: undefined,
-    headerInteger: undefined,
-    headerIntegerList: undefined,
-    headerLong: undefined,
-    headerShort: undefined,
-    headerString: undefined,
-    headerStringList: undefined,
-    headerStringSet: undefined,
-    headerTimestampList: undefined,
-    headerTrueBool: undefined,
-  };
-  if (output.headers["x-string"] !== undefined) {
-    contents.headerString = output.headers["x-string"];
-  }
-  if (output.headers["x-byte"] !== undefined) {
-    contents.headerByte = __strictParseByte(output.headers["x-byte"]);
-  }
-  if (output.headers["x-short"] !== undefined) {
-    contents.headerShort = __strictParseShort(output.headers["x-short"]);
-  }
-  if (output.headers["x-integer"] !== undefined) {
-    contents.headerInteger = __strictParseInt32(output.headers["x-integer"]);
-  }
-  if (output.headers["x-long"] !== undefined) {
-    contents.headerLong = __strictParseLong(output.headers["x-long"]);
-  }
-  if (output.headers["x-float"] !== undefined) {
-    contents.headerFloat = __strictParseFloat(output.headers["x-float"]);
-  }
-  if (output.headers["x-double"] !== undefined) {
-    contents.headerDouble = __strictParseDouble(output.headers["x-double"]);
-  }
-  if (output.headers["x-boolean1"] !== undefined) {
-    contents.headerTrueBool = __parseBoolean(output.headers["x-boolean1"]);
-  }
-  if (output.headers["x-boolean2"] !== undefined) {
-    contents.headerFalseBool = __parseBoolean(output.headers["x-boolean2"]);
-  }
-  if (output.headers["x-stringlist"] !== undefined) {
-    contents.headerStringList = (output.headers["x-stringlist"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  if (output.headers["x-stringset"] !== undefined) {
-    contents.headerStringSet = (output.headers["x-stringset"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  if (output.headers["x-integerlist"] !== undefined) {
-    contents.headerIntegerList = (output.headers["x-integerlist"] || "")
-      .split(",")
-      .map((_entry) => __strictParseInt32(_entry.trim()) as any);
-  }
-  if (output.headers["x-booleanlist"] !== undefined) {
-    contents.headerBooleanList = (output.headers["x-booleanlist"] || "")
-      .split(",")
-      .map((_entry) => __parseBoolean(_entry.trim()) as any);
-  }
-  if (output.headers["x-timestamplist"] !== undefined) {
-    contents.headerTimestampList = __splitEvery(output.headers["x-timestamplist"] || "", ",", 2).map(
-      (_entry) => __expectNonNull(__parseRfc7231DateTime(_entry.trim())) as any
-    );
-  }
-  if (output.headers["x-enum"] !== undefined) {
-    contents.headerEnum = output.headers["x-enum"];
-  }
-  if (output.headers["x-enumlist"] !== undefined) {
-    contents.headerEnumList = (output.headers["x-enumlist"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1InputAndOutputWithHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<InputAndOutputWithHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonBlobsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonBlobsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonBlobsCommandError(output, context);
-  }
-  const contents: JsonBlobsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    data: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.data !== undefined && data.data !== null) {
-    contents.data = context.base64Decoder(data.data);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonBlobsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonBlobsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonEnumsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonEnumsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonEnumsCommandError(output, context);
-  }
-  const contents: JsonEnumsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    fooEnum1: undefined,
-    fooEnum2: undefined,
-    fooEnum3: undefined,
-    fooEnumList: undefined,
-    fooEnumMap: undefined,
-    fooEnumSet: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.fooEnum1 !== undefined && data.fooEnum1 !== null) {
-    contents.fooEnum1 = __expectString(data.fooEnum1);
-  }
-  if (data.fooEnum2 !== undefined && data.fooEnum2 !== null) {
-    contents.fooEnum2 = __expectString(data.fooEnum2);
-  }
-  if (data.fooEnum3 !== undefined && data.fooEnum3 !== null) {
-    contents.fooEnum3 = __expectString(data.fooEnum3);
-  }
-  if (data.fooEnumList !== undefined && data.fooEnumList !== null) {
-    contents.fooEnumList = deserializeAws_restJson1FooEnumList(data.fooEnumList, context);
-  }
-  if (data.fooEnumMap !== undefined && data.fooEnumMap !== null) {
-    contents.fooEnumMap = deserializeAws_restJson1FooEnumMap(data.fooEnumMap, context);
-  }
-  if (data.fooEnumSet !== undefined && data.fooEnumSet !== null) {
-    contents.fooEnumSet = deserializeAws_restJson1FooEnumSet(data.fooEnumSet, context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonEnumsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonEnumsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonListsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonListsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonListsCommandError(output, context);
-  }
-  const contents: JsonListsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    booleanList: undefined,
-    enumList: undefined,
-    integerList: undefined,
-    nestedStringList: undefined,
-    sparseStringList: undefined,
-    stringList: undefined,
-    stringSet: undefined,
-    structureList: undefined,
-    timestampList: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.booleanList !== undefined && data.booleanList !== null) {
-    contents.booleanList = deserializeAws_restJson1BooleanList(data.booleanList, context);
-  }
-  if (data.enumList !== undefined && data.enumList !== null) {
-    contents.enumList = deserializeAws_restJson1FooEnumList(data.enumList, context);
-  }
-  if (data.integerList !== undefined && data.integerList !== null) {
-    contents.integerList = deserializeAws_restJson1IntegerList(data.integerList, context);
-  }
-  if (data.nestedStringList !== undefined && data.nestedStringList !== null) {
-    contents.nestedStringList = deserializeAws_restJson1NestedStringList(data.nestedStringList, context);
-  }
-  if (data.sparseStringList !== undefined && data.sparseStringList !== null) {
-    contents.sparseStringList = deserializeAws_restJson1SparseStringList(data.sparseStringList, context);
-  }
-  if (data.stringList !== undefined && data.stringList !== null) {
-    contents.stringList = deserializeAws_restJson1StringList(data.stringList, context);
-  }
-  if (data.stringSet !== undefined && data.stringSet !== null) {
-    contents.stringSet = deserializeAws_restJson1StringSet(data.stringSet, context);
-  }
-  if (data.myStructureList !== undefined && data.myStructureList !== null) {
-    contents.structureList = deserializeAws_restJson1StructureList(data.myStructureList, context);
-  }
-  if (data.timestampList !== undefined && data.timestampList !== null) {
-    contents.timestampList = deserializeAws_restJson1TimestampList(data.timestampList, context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonListsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonListsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonMapsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonMapsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonMapsCommandError(output, context);
-  }
-  const contents: JsonMapsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    denseBooleanMap: undefined,
-    denseNumberMap: undefined,
-    denseSetMap: undefined,
-    denseStringMap: undefined,
-    denseStructMap: undefined,
-    sparseBooleanMap: undefined,
-    sparseNumberMap: undefined,
-    sparseSetMap: undefined,
-    sparseStringMap: undefined,
-    sparseStructMap: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.denseBooleanMap !== undefined && data.denseBooleanMap !== null) {
-    contents.denseBooleanMap = deserializeAws_restJson1DenseBooleanMap(data.denseBooleanMap, context);
-  }
-  if (data.denseNumberMap !== undefined && data.denseNumberMap !== null) {
-    contents.denseNumberMap = deserializeAws_restJson1DenseNumberMap(data.denseNumberMap, context);
-  }
-  if (data.denseSetMap !== undefined && data.denseSetMap !== null) {
-    contents.denseSetMap = deserializeAws_restJson1DenseSetMap(data.denseSetMap, context);
-  }
-  if (data.denseStringMap !== undefined && data.denseStringMap !== null) {
-    contents.denseStringMap = deserializeAws_restJson1DenseStringMap(data.denseStringMap, context);
-  }
-  if (data.denseStructMap !== undefined && data.denseStructMap !== null) {
-    contents.denseStructMap = deserializeAws_restJson1DenseStructMap(data.denseStructMap, context);
-  }
-  if (data.sparseBooleanMap !== undefined && data.sparseBooleanMap !== null) {
-    contents.sparseBooleanMap = deserializeAws_restJson1SparseBooleanMap(data.sparseBooleanMap, context);
-  }
-  if (data.sparseNumberMap !== undefined && data.sparseNumberMap !== null) {
-    contents.sparseNumberMap = deserializeAws_restJson1SparseNumberMap(data.sparseNumberMap, context);
-  }
-  if (data.sparseSetMap !== undefined && data.sparseSetMap !== null) {
-    contents.sparseSetMap = deserializeAws_restJson1SparseSetMap(data.sparseSetMap, context);
-  }
-  if (data.sparseStringMap !== undefined && data.sparseStringMap !== null) {
-    contents.sparseStringMap = deserializeAws_restJson1SparseStringMap(data.sparseStringMap, context);
-  }
-  if (data.sparseStructMap !== undefined && data.sparseStructMap !== null) {
-    contents.sparseStructMap = deserializeAws_restJson1SparseStructMap(data.sparseStructMap, context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonMapsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonMapsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonTimestampsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonTimestampsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonTimestampsCommandError(output, context);
-  }
-  const contents: JsonTimestampsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    dateTime: undefined,
-    epochSeconds: undefined,
-    httpDate: undefined,
-    normal: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.dateTime !== undefined && data.dateTime !== null) {
-    contents.dateTime = __expectNonNull(__parseRfc3339DateTime(data.dateTime));
-  }
-  if (data.epochSeconds !== undefined && data.epochSeconds !== null) {
-    contents.epochSeconds = __expectNonNull(__parseEpochTimestamp(__expectNumber(data.epochSeconds)));
-  }
-  if (data.httpDate !== undefined && data.httpDate !== null) {
-    contents.httpDate = __expectNonNull(__parseRfc7231DateTime(data.httpDate));
-  }
-  if (data.normal !== undefined && data.normal !== null) {
-    contents.normal = __expectNonNull(__parseEpochTimestamp(__expectNumber(data.normal)));
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonTimestampsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonTimestampsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1JsonUnionsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonUnionsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1JsonUnionsCommandError(output, context);
-  }
-  const contents: JsonUnionsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    contents: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.contents !== undefined && data.contents !== null) {
-    contents.contents = deserializeAws_restJson1MyUnion(__expectUnion(data.contents), context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1JsonUnionsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<JsonUnionsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedAcceptWithBodyCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithBodyCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedAcceptWithBodyCommandError(output, context);
-  }
-  const contents: MalformedAcceptWithBodyCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    hi: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.hi !== undefined && data.hi !== null) {
-    contents.hi = __expectString(data.hi);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedAcceptWithBodyCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithBodyCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedAcceptWithGenericStringCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithGenericStringCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedAcceptWithGenericStringCommandError(output, context);
-  }
-  const contents: MalformedAcceptWithGenericStringCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedAcceptWithGenericStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithGenericStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedAcceptWithPayloadCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithPayloadCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedAcceptWithPayloadCommandError(output, context);
-  }
-  const contents: MalformedAcceptWithPayloadCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    payload: undefined,
-  };
-  const data: any = await collectBody(output.body, context);
-  contents.payload = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedAcceptWithPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedAcceptWithPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedBlobCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedBlobCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedBlobCommandError(output, context);
-  }
-  const contents: MalformedBlobCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedBlobCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedBlobCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedBooleanCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedBooleanCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedBooleanCommandError(output, context);
-  }
-  const contents: MalformedBooleanCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedBooleanCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedBooleanCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedByteCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedByteCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedByteCommandError(output, context);
-  }
-  const contents: MalformedByteCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedByteCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedByteCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedContentTypeWithBodyCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithBodyCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedContentTypeWithBodyCommandError(output, context);
-  }
-  const contents: MalformedContentTypeWithBodyCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedContentTypeWithBodyCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithBodyCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedContentTypeWithGenericStringCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithGenericStringCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedContentTypeWithGenericStringCommandError(output, context);
-  }
-  const contents: MalformedContentTypeWithGenericStringCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedContentTypeWithGenericStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithGenericStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedContentTypeWithoutBodyCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithoutBodyCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedContentTypeWithoutBodyCommandError(output, context);
-  }
-  const contents: MalformedContentTypeWithoutBodyCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedContentTypeWithoutBodyCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithoutBodyCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedContentTypeWithPayloadCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithPayloadCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedContentTypeWithPayloadCommandError(output, context);
-  }
-  const contents: MalformedContentTypeWithPayloadCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedContentTypeWithPayloadCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedContentTypeWithPayloadCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedDoubleCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedDoubleCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedDoubleCommandError(output, context);
-  }
-  const contents: MalformedDoubleCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedDoubleCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedDoubleCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedFloatCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedFloatCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedFloatCommandError(output, context);
-  }
-  const contents: MalformedFloatCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedFloatCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedFloatCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedIntegerCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedIntegerCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedIntegerCommandError(output, context);
-  }
-  const contents: MalformedIntegerCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedIntegerCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedIntegerCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedListCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedListCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedListCommandError(output, context);
-  }
-  const contents: MalformedListCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedListCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedListCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedLongCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedLongCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedLongCommandError(output, context);
-  }
-  const contents: MalformedLongCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedLongCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedLongCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedMapCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedMapCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedMapCommandError(output, context);
-  }
-  const contents: MalformedMapCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedMapCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedMapCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedRequestBodyCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedRequestBodyCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedRequestBodyCommandError(output, context);
-  }
-  const contents: MalformedRequestBodyCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedRequestBodyCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedRequestBodyCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedSetCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedSetCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedSetCommandError(output, context);
-  }
-  const contents: MalformedSetCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedSetCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedSetCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedShortCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedShortCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedShortCommandError(output, context);
-  }
-  const contents: MalformedShortCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedShortCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedShortCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedStringCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedStringCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedStringCommandError(output, context);
-  }
-  const contents: MalformedStringCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampBodyDateTimeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyDateTimeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampBodyDateTimeCommandError(output, context);
-  }
-  const contents: MalformedTimestampBodyDateTimeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampBodyDateTimeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyDateTimeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampBodyDefaultCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyDefaultCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampBodyDefaultCommandError(output, context);
-  }
-  const contents: MalformedTimestampBodyDefaultCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampBodyDefaultCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyDefaultCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampBodyHttpDateCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyHttpDateCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampBodyHttpDateCommandError(output, context);
-  }
-  const contents: MalformedTimestampBodyHttpDateCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampBodyHttpDateCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampBodyHttpDateCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampHeaderDateTimeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderDateTimeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampHeaderDateTimeCommandError(output, context);
-  }
-  const contents: MalformedTimestampHeaderDateTimeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampHeaderDateTimeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderDateTimeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampHeaderDefaultCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderDefaultCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampHeaderDefaultCommandError(output, context);
-  }
-  const contents: MalformedTimestampHeaderDefaultCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampHeaderDefaultCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderDefaultCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampHeaderEpochCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderEpochCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampHeaderEpochCommandError(output, context);
-  }
-  const contents: MalformedTimestampHeaderEpochCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampHeaderEpochCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampHeaderEpochCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampPathDefaultCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathDefaultCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampPathDefaultCommandError(output, context);
-  }
-  const contents: MalformedTimestampPathDefaultCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampPathDefaultCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathDefaultCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampPathEpochCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathEpochCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampPathEpochCommandError(output, context);
-  }
-  const contents: MalformedTimestampPathEpochCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampPathEpochCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathEpochCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampPathHttpDateCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathHttpDateCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampPathHttpDateCommandError(output, context);
-  }
-  const contents: MalformedTimestampPathHttpDateCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampPathHttpDateCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampPathHttpDateCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampQueryDefaultCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryDefaultCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampQueryDefaultCommandError(output, context);
-  }
-  const contents: MalformedTimestampQueryDefaultCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampQueryDefaultCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryDefaultCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampQueryEpochCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryEpochCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampQueryEpochCommandError(output, context);
-  }
-  const contents: MalformedTimestampQueryEpochCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampQueryEpochCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryEpochCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedTimestampQueryHttpDateCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryHttpDateCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedTimestampQueryHttpDateCommandError(output, context);
-  }
-  const contents: MalformedTimestampQueryHttpDateCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedTimestampQueryHttpDateCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedTimestampQueryHttpDateCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MalformedUnionCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedUnionCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MalformedUnionCommandError(output, context);
-  }
-  const contents: MalformedUnionCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MalformedUnionCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MalformedUnionCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1MediaTypeHeaderCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MediaTypeHeaderCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1MediaTypeHeaderCommandError(output, context);
-  }
-  const contents: MediaTypeHeaderCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    json: undefined,
-  };
-  if (output.headers["x-json"] !== undefined) {
-    contents.json = new __LazyJsonString(Buffer.from(context.base64Decoder(output.headers["x-json"])).toString("utf8"));
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1MediaTypeHeaderCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<MediaTypeHeaderCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1NoInputAndNoOutputCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndNoOutputCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1NoInputAndNoOutputCommandError(output, context);
-  }
-  const contents: NoInputAndNoOutputCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1NoInputAndNoOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndNoOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1NoInputAndOutputCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndOutputCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1NoInputAndOutputCommandError(output, context);
-  }
-  const contents: NoInputAndOutputCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1NoInputAndOutputCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NoInputAndOutputCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1NullAndEmptyHeadersClientCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersClientCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1NullAndEmptyHeadersClientCommandError(output, context);
-  }
-  const contents: NullAndEmptyHeadersClientCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    a: undefined,
-    b: undefined,
-    c: undefined,
-  };
-  if (output.headers["x-a"] !== undefined) {
-    contents.a = output.headers["x-a"];
-  }
-  if (output.headers["x-b"] !== undefined) {
-    contents.b = output.headers["x-b"];
-  }
-  if (output.headers["x-c"] !== undefined) {
-    contents.c = (output.headers["x-c"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1NullAndEmptyHeadersClientCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersClientCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1NullAndEmptyHeadersServerCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersServerCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1NullAndEmptyHeadersServerCommandError(output, context);
-  }
-  const contents: NullAndEmptyHeadersServerCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    a: undefined,
-    b: undefined,
-    c: undefined,
-  };
-  if (output.headers["x-a"] !== undefined) {
-    contents.a = output.headers["x-a"];
-  }
-  if (output.headers["x-b"] !== undefined) {
-    contents.b = output.headers["x-b"];
-  }
-  if (output.headers["x-c"] !== undefined) {
-    contents.c = (output.headers["x-c"] || "").split(",").map((_entry) => _entry.trim() as any);
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1NullAndEmptyHeadersServerCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<NullAndEmptyHeadersServerCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1OmitsNullSerializesEmptyStringCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1OmitsNullSerializesEmptyStringCommandError(output, context);
-  }
-  const contents: OmitsNullSerializesEmptyStringCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1OmitsNullSerializesEmptyStringCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1QueryIdempotencyTokenAutoFillCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1QueryIdempotencyTokenAutoFillCommandError(output, context);
-  }
-  const contents: QueryIdempotencyTokenAutoFillCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1QueryIdempotencyTokenAutoFillCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1QueryParamsAsStringListMapCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryParamsAsStringListMapCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1QueryParamsAsStringListMapCommandError(output, context);
-  }
-  const contents: QueryParamsAsStringListMapCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1QueryParamsAsStringListMapCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryParamsAsStringListMapCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1QueryPrecedenceCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryPrecedenceCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1QueryPrecedenceCommandError(output, context);
-  }
-  const contents: QueryPrecedenceCommandOutput = {
-    $metadata: deserializeMetadata(output),
-  };
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1QueryPrecedenceCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<QueryPrecedenceCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1RecursiveShapesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<RecursiveShapesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1RecursiveShapesCommandError(output, context);
-  }
-  const contents: RecursiveShapesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    nested: undefined,
-  };
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.nested !== undefined && data.nested !== null) {
-    contents.nested = deserializeAws_restJson1RecursiveShapesInputOutputNested1(data.nested, context);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1RecursiveShapesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<RecursiveShapesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1SimpleScalarPropertiesCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<SimpleScalarPropertiesCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1SimpleScalarPropertiesCommandError(output, context);
-  }
-  const contents: SimpleScalarPropertiesCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    byteValue: undefined,
-    doubleValue: undefined,
-    falseBooleanValue: undefined,
-    floatValue: undefined,
-    foo: undefined,
-    integerValue: undefined,
-    longValue: undefined,
-    shortValue: undefined,
-    stringValue: undefined,
-    trueBooleanValue: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: { [key: string]: any } = __expectNonNull(__expectObject(await parseBody(output.body, context)), "body");
-  if (data.byteValue !== undefined && data.byteValue !== null) {
-    contents.byteValue = __expectByte(data.byteValue);
-  }
-  if (data.DoubleDribble !== undefined && data.DoubleDribble !== null) {
-    contents.doubleValue = __limitedParseDouble(data.DoubleDribble);
-  }
-  if (data.falseBooleanValue !== undefined && data.falseBooleanValue !== null) {
-    contents.falseBooleanValue = __expectBoolean(data.falseBooleanValue);
-  }
-  if (data.floatValue !== undefined && data.floatValue !== null) {
-    contents.floatValue = __limitedParseFloat32(data.floatValue);
-  }
-  if (data.integerValue !== undefined && data.integerValue !== null) {
-    contents.integerValue = __expectInt32(data.integerValue);
-  }
-  if (data.longValue !== undefined && data.longValue !== null) {
-    contents.longValue = __expectLong(data.longValue);
-  }
-  if (data.shortValue !== undefined && data.shortValue !== null) {
-    contents.shortValue = __expectShort(data.shortValue);
-  }
-  if (data.stringValue !== undefined && data.stringValue !== null) {
-    contents.stringValue = __expectString(data.stringValue);
-  }
-  if (data.trueBooleanValue !== undefined && data.trueBooleanValue !== null) {
-    contents.trueBooleanValue = __expectBoolean(data.trueBooleanValue);
-  }
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1SimpleScalarPropertiesCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<SimpleScalarPropertiesCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1StreamingTraitsCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1StreamingTraitsCommandError(output, context);
-  }
-  const contents: StreamingTraitsCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = output.body;
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1StreamingTraitsCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1StreamingTraitsRequireLengthCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsRequireLengthCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1StreamingTraitsRequireLengthCommandError(output, context);
-  }
-  const contents: StreamingTraitsRequireLengthCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = output.body;
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1StreamingTraitsRequireLengthCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsRequireLengthCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1StreamingTraitsWithMediaTypeCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsWithMediaTypeCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1StreamingTraitsWithMediaTypeCommandError(output, context);
-  }
-  const contents: StreamingTraitsWithMediaTypeCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    blob: undefined,
-    foo: undefined,
-  };
-  if (output.headers["x-foo"] !== undefined) {
-    contents.foo = output.headers["x-foo"];
-  }
-  const data: any = output.body;
-  contents.blob = data;
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1StreamingTraitsWithMediaTypeCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<StreamingTraitsWithMediaTypeCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-export const deserializeAws_restJson1TimestampFormatHeadersCommand = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<TimestampFormatHeadersCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
-    return deserializeAws_restJson1TimestampFormatHeadersCommandError(output, context);
-  }
-  const contents: TimestampFormatHeadersCommandOutput = {
-    $metadata: deserializeMetadata(output),
-    defaultFormat: undefined,
-    memberDateTime: undefined,
-    memberEpochSeconds: undefined,
-    memberHttpDate: undefined,
-    targetDateTime: undefined,
-    targetEpochSeconds: undefined,
-    targetHttpDate: undefined,
-  };
-  if (output.headers["x-memberepochseconds"] !== undefined) {
-    contents.memberEpochSeconds = __expectNonNull(__parseEpochTimestamp(output.headers["x-memberepochseconds"]));
-  }
-  if (output.headers["x-memberhttpdate"] !== undefined) {
-    contents.memberHttpDate = __expectNonNull(__parseRfc7231DateTime(output.headers["x-memberhttpdate"]));
-  }
-  if (output.headers["x-memberdatetime"] !== undefined) {
-    contents.memberDateTime = __expectNonNull(__parseRfc3339DateTime(output.headers["x-memberdatetime"]));
-  }
-  if (output.headers["x-defaultformat"] !== undefined) {
-    contents.defaultFormat = __expectNonNull(__parseRfc7231DateTime(output.headers["x-defaultformat"]));
-  }
-  if (output.headers["x-targetepochseconds"] !== undefined) {
-    contents.targetEpochSeconds = __expectNonNull(__parseEpochTimestamp(output.headers["x-targetepochseconds"]));
-  }
-  if (output.headers["x-targethttpdate"] !== undefined) {
-    contents.targetHttpDate = __expectNonNull(__parseRfc7231DateTime(output.headers["x-targethttpdate"]));
-  }
-  if (output.headers["x-targetdatetime"] !== undefined) {
-    contents.targetDateTime = __expectNonNull(__parseRfc3339DateTime(output.headers["x-targetdatetime"]));
-  }
-  await collectBody(output.body, context);
-  return Promise.resolve(contents);
-};
-
-const deserializeAws_restJson1TimestampFormatHeadersCommandError = async (
-  output: __HttpResponse,
-  context: __SerdeContext
-): Promise<TimestampFormatHeadersCommandOutput> => {
-  const parsedOutput: any = {
-    ...output,
-    body: await parseBody(output.body, context),
-  };
-  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
-  let errorCode = "UnknownError";
-  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-  switch (errorCode) {
-    default:
-      const parsedBody = parsedOutput.body;
-      errorCode = parsedBody.code || parsedBody.Code || errorCode;
-      response = {
-        ...parsedBody,
-        name: `${errorCode}`,
-        message: parsedBody.message || parsedBody.Message || errorCode,
-        $fault: "client",
-        $metadata: deserializeMetadata(output),
-      } as any;
-  }
-  const message = response.message || response.Message || errorCode;
-  response.message = message;
-  delete response.Message;
-  return Promise.reject(Object.assign(new Error(message), response));
-};
-
-const deserializeAws_restJson1ComplexErrorResponse = async (
-  parsedOutput: any,
-  context: __SerdeContext
-): Promise<ComplexError> => {
-  const contents: ComplexError = {
-    name: "ComplexError",
-    $fault: "client",
-    $metadata: deserializeMetadata(parsedOutput),
-    Header: undefined,
-    Nested: undefined,
-    TopLevel: undefined,
-  };
-  if (parsedOutput.headers["x-header"] !== undefined) {
-    contents.Header = parsedOutput.headers["x-header"];
-  }
-  const data: any = parsedOutput.body;
-  if (data.Nested !== undefined && data.Nested !== null) {
-    contents.Nested = deserializeAws_restJson1ComplexNestedErrorData(data.Nested, context);
-  }
-  if (data.TopLevel !== undefined && data.TopLevel !== null) {
-    contents.TopLevel = __expectString(data.TopLevel);
-  }
   return contents;
 };
-
-const deserializeAws_restJson1FooErrorResponse = async (
-  parsedOutput: any,
-  context: __SerdeContext
-): Promise<FooError> => {
-  const contents: FooError = {
-    name: "FooError",
-    $fault: "server",
-    $metadata: deserializeMetadata(parsedOutput),
-  };
-  const data: any = parsedOutput.body;
-  return contents;
-};
-
-const deserializeAws_restJson1InvalidGreetingResponse = async (
-  parsedOutput: any,
-  context: __SerdeContext
-): Promise<InvalidGreeting> => {
-  const contents: InvalidGreeting = {
-    name: "InvalidGreeting",
-    $fault: "client",
-    $metadata: deserializeMetadata(parsedOutput),
-    Message: undefined,
-  };
-  const data: any = parsedOutput.body;
-  if (data.Message !== undefined && data.Message !== null) {
-    contents.Message = __expectString(data.Message);
-  }
-  return contents;
-};
-
-const serializeAws_restJson1DenseBooleanMap = (input: { [key: string]: boolean }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1DenseNumberMap = (input: { [key: string]: number }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1DenseSetMap = (input: { [key: string]: string[] }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: serializeAws_restJson1StringSet(value, context),
-    };
-  }, {});
-};
-
-const serializeAws_restJson1DenseStringMap = (input: { [key: string]: string }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1DenseStructMap = (
-  input: { [key: string]: GreetingStruct },
-  context: __SerdeContext
-): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: serializeAws_restJson1GreetingStruct(value, context),
-    };
-  }, {});
-};
-
-const serializeAws_restJson1Document = (input: __DocumentType, context: __SerdeContext): any => {
-  return input;
-};
-
-const serializeAws_restJson1MyUnion = (input: MyUnion, context: __SerdeContext): any => {
-  return MyUnion.visit(input, {
-    blobValue: (value) => ({ blobValue: context.base64Encoder(value) }),
-    booleanValue: (value) => ({ booleanValue: value }),
-    enumValue: (value) => ({ enumValue: value }),
-    listValue: (value) => ({ listValue: serializeAws_restJson1StringList(value, context) }),
-    mapValue: (value) => ({ mapValue: serializeAws_restJson1StringMap(value, context) }),
-    numberValue: (value) => ({ numberValue: value }),
-    renamedStructureValue: (value) => ({
-      renamedStructureValue: serializeAws_restJson1RenamedGreeting(value, context),
-    }),
-    stringValue: (value) => ({ stringValue: value }),
-    structureValue: (value) => ({ structureValue: serializeAws_restJson1GreetingStruct(value, context) }),
-    timestampValue: (value) => ({ timestampValue: Math.round(value.getTime() / 1000) }),
-    _: (name, value) => ({ name: value } as any),
-  });
-};
-
-const serializeAws_restJson1NestedPayload = (input: NestedPayload, context: __SerdeContext): any => {
-  return {
-    ...(input.greeting !== undefined && input.greeting !== null && { greeting: input.greeting }),
-    ...(input.name !== undefined && input.name !== null && { name: input.name }),
-  };
-};
-
-const serializeAws_restJson1RecursiveShapesInputOutputNested1 = (
-  input: RecursiveShapesInputOutputNested1,
-  context: __SerdeContext
-): any => {
-  return {
-    ...(input.foo !== undefined && input.foo !== null && { foo: input.foo }),
-    ...(input.nested !== undefined &&
-      input.nested !== null && {
-        nested: serializeAws_restJson1RecursiveShapesInputOutputNested2(input.nested, context),
-      }),
-  };
-};
-
-const serializeAws_restJson1RecursiveShapesInputOutputNested2 = (
-  input: RecursiveShapesInputOutputNested2,
-  context: __SerdeContext
-): any => {
-  return {
-    ...(input.bar !== undefined && input.bar !== null && { bar: input.bar }),
-    ...(input.recursiveMember !== undefined &&
-      input.recursiveMember !== null && {
-        recursiveMember: serializeAws_restJson1RecursiveShapesInputOutputNested1(input.recursiveMember, context),
-      }),
-  };
-};
-
-const serializeAws_restJson1SimpleList = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1SimpleMap = (input: { [key: string]: string }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1SimpleSet = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1SimpleUnion = (input: SimpleUnion, context: __SerdeContext): any => {
-  return SimpleUnion.visit(input, {
-    int: (value) => ({ int: value }),
-    string: (value) => ({ string: value }),
-    _: (name, value) => ({ name: value } as any),
-  });
-};
-
-const serializeAws_restJson1SparseBooleanMap = (input: { [key: string]: boolean }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1SparseNumberMap = (input: { [key: string]: number }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1SparseSetMap = (input: { [key: string]: string[] }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: serializeAws_restJson1StringSet(value, context),
-    };
-  }, {});
-};
-
-const serializeAws_restJson1SparseStructMap = (
-  input: { [key: string]: GreetingStruct },
-  context: __SerdeContext
-): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: serializeAws_restJson1GreetingStruct(value, context),
-    };
-  }, {});
-};
-
-const serializeAws_restJson1StructureList = (input: StructureListMember[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return serializeAws_restJson1StructureListMember(entry, context);
-    });
-};
-
-const serializeAws_restJson1StructureListMember = (input: StructureListMember, context: __SerdeContext): any => {
-  return {
-    ...(input.a !== undefined && input.a !== null && { value: input.a }),
-    ...(input.b !== undefined && input.b !== null && { other: input.b }),
-  };
-};
-
-const serializeAws_restJson1RenamedGreeting = (input: RenamedGreeting, context: __SerdeContext): any => {
-  return {
-    ...(input.salutation !== undefined && input.salutation !== null && { salutation: input.salutation }),
-  };
-};
-
-const serializeAws_restJson1BooleanList = (input: boolean[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1FooEnumList = (input: (FooEnum | string)[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1FooEnumMap = (input: { [key: string]: FooEnum | string }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1FooEnumSet = (input: (FooEnum | string)[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1GreetingStruct = (input: GreetingStruct, context: __SerdeContext): any => {
-  return {
-    ...(input.hi !== undefined && input.hi !== null && { hi: input.hi }),
-  };
-};
-
-const serializeAws_restJson1IntegerList = (input: number[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1NestedStringList = (input: string[][], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return serializeAws_restJson1StringList(entry, context);
-    });
-};
-
-const serializeAws_restJson1SparseStringList = (input: string[], context: __SerdeContext): any => {
-  return input.map((entry) => {
-    if (entry === null) {
-      return null as any;
-    }
-    return entry;
-  });
-};
-
-const serializeAws_restJson1SparseStringMap = (input: { [key: string]: string }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1StringList = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1StringMap = (input: { [key: string]: string }, context: __SerdeContext): any => {
-  return Object.entries(input).reduce((acc: { [key: string]: any }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-};
-
-const serializeAws_restJson1StringSet = (input: string[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return entry;
-    });
-};
-
-const serializeAws_restJson1TimestampList = (input: Date[], context: __SerdeContext): any => {
-  return input
-    .filter((e: any) => e != null)
-    .map((entry) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return Math.round(entry.getTime() / 1000);
-    });
-};
-
-const deserializeAws_restJson1ComplexNestedErrorData = (
-  output: any,
-  context: __SerdeContext
-): ComplexNestedErrorData => {
-  return {
-    Foo: __expectString(output.Fooooo),
-  } as any;
-};
-
-const deserializeAws_restJson1DenseBooleanMap = (output: any, context: __SerdeContext): { [key: string]: boolean } => {
-  return Object.entries(output).reduce((acc: { [key: string]: boolean }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: __expectBoolean(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1DenseNumberMap = (output: any, context: __SerdeContext): { [key: string]: number } => {
-  return Object.entries(output).reduce((acc: { [key: string]: number }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: __expectInt32(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1DenseSetMap = (output: any, context: __SerdeContext): { [key: string]: string[] } => {
-  return Object.entries(output).reduce((acc: { [key: string]: string[] }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: deserializeAws_restJson1StringSet(value, context),
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1DenseStringMap = (output: any, context: __SerdeContext): { [key: string]: string } => {
-  return Object.entries(output).reduce((acc: { [key: string]: string }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: __expectString(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1DenseStructMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: GreetingStruct } => {
-  return Object.entries(output).reduce((acc: { [key: string]: GreetingStruct }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: deserializeAws_restJson1GreetingStruct(value, context),
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1Document = (output: any, context: __SerdeContext): __DocumentType => {
-  return output;
-};
-
-const deserializeAws_restJson1MyUnion = (output: any, context: __SerdeContext): MyUnion => {
-  if (output.blobValue !== undefined && output.blobValue !== null) {
-    return {
-      blobValue: context.base64Decoder(output.blobValue),
-    };
-  }
-  if (__expectBoolean(output.booleanValue) !== undefined) {
-    return { booleanValue: __expectBoolean(output.booleanValue) as any };
-  }
-  if (__expectString(output.enumValue) !== undefined) {
-    return { enumValue: __expectString(output.enumValue) as any };
-  }
-  if (output.listValue !== undefined && output.listValue !== null) {
-    return {
-      listValue: deserializeAws_restJson1StringList(output.listValue, context),
-    };
-  }
-  if (output.mapValue !== undefined && output.mapValue !== null) {
-    return {
-      mapValue: deserializeAws_restJson1StringMap(output.mapValue, context),
-    };
-  }
-  if (__expectInt32(output.numberValue) !== undefined) {
-    return { numberValue: __expectInt32(output.numberValue) as any };
-  }
-  if (output.renamedStructureValue !== undefined && output.renamedStructureValue !== null) {
-    return {
-      renamedStructureValue: deserializeAws_restJson1RenamedGreeting(output.renamedStructureValue, context),
-    };
-  }
-  if (__expectString(output.stringValue) !== undefined) {
-    return { stringValue: __expectString(output.stringValue) as any };
-  }
-  if (output.structureValue !== undefined && output.structureValue !== null) {
-    return {
-      structureValue: deserializeAws_restJson1GreetingStruct(output.structureValue, context),
-    };
-  }
-  if (output.timestampValue !== undefined && output.timestampValue !== null) {
-    return {
-      timestampValue: __expectNonNull(__parseEpochTimestamp(__expectNumber(output.timestampValue))),
-    };
-  }
-  return { $unknown: Object.entries(output)[0] };
-};
-
-const deserializeAws_restJson1NestedPayload = (output: any, context: __SerdeContext): NestedPayload => {
-  return {
-    greeting: __expectString(output.greeting),
-    name: __expectString(output.name),
-  } as any;
-};
-
-const deserializeAws_restJson1RecursiveShapesInputOutputNested1 = (
-  output: any,
-  context: __SerdeContext
-): RecursiveShapesInputOutputNested1 => {
-  return {
-    foo: __expectString(output.foo),
-    nested:
-      output.nested !== undefined && output.nested !== null
-        ? deserializeAws_restJson1RecursiveShapesInputOutputNested2(output.nested, context)
-        : undefined,
-  } as any;
-};
-
-const deserializeAws_restJson1RecursiveShapesInputOutputNested2 = (
-  output: any,
-  context: __SerdeContext
-): RecursiveShapesInputOutputNested2 => {
-  return {
-    bar: __expectString(output.bar),
-    recursiveMember:
-      output.recursiveMember !== undefined && output.recursiveMember !== null
-        ? deserializeAws_restJson1RecursiveShapesInputOutputNested1(output.recursiveMember, context)
-        : undefined,
-  } as any;
-};
-
-const deserializeAws_restJson1SparseBooleanMap = (output: any, context: __SerdeContext): { [key: string]: boolean } => {
-  return Object.entries(output).reduce((acc: { [key: string]: boolean }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: __expectBoolean(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1SparseNumberMap = (output: any, context: __SerdeContext): { [key: string]: number } => {
-  return Object.entries(output).reduce((acc: { [key: string]: number }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: __expectInt32(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1SparseSetMap = (output: any, context: __SerdeContext): { [key: string]: string[] } => {
-  return Object.entries(output).reduce((acc: { [key: string]: string[] }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: deserializeAws_restJson1StringSet(value, context),
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1SparseStructMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: GreetingStruct } => {
-  return Object.entries(output).reduce((acc: { [key: string]: GreetingStruct }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: deserializeAws_restJson1GreetingStruct(value, context),
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1StructureList = (output: any, context: __SerdeContext): StructureListMember[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return deserializeAws_restJson1StructureListMember(entry, context);
-    });
-};
-
-const deserializeAws_restJson1StructureListMember = (output: any, context: __SerdeContext): StructureListMember => {
-  return {
-    a: __expectString(output.value),
-    b: __expectString(output.other),
-  } as any;
-};
-
-const deserializeAws_restJson1RenamedGreeting = (output: any, context: __SerdeContext): RenamedGreeting => {
-  return {
-    salutation: __expectString(output.salutation),
-  } as any;
-};
-
-const deserializeAws_restJson1BooleanList = (output: any, context: __SerdeContext): boolean[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectBoolean(entry) as any;
-    });
-};
-
-const deserializeAws_restJson1FooEnumList = (output: any, context: __SerdeContext): (FooEnum | string)[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
-    });
-};
-
-const deserializeAws_restJson1FooEnumMap = (
-  output: any,
-  context: __SerdeContext
-): { [key: string]: FooEnum | string } => {
-  return Object.entries(output).reduce((acc: { [key: string]: FooEnum | string }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: __expectString(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1FooEnumSet = (output: any, context: __SerdeContext): (FooEnum | string)[] => {
-  const uniqueValues = new Set<any>();
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const parsedEntry = __expectString(entry) as any;
-      if (uniqueValues.has(parsedEntry)) {
-        throw new TypeError('All elements of the set "aws.protocoltests.shared#FooEnumSet" must be unique.');
-      } else {
-        uniqueValues.add(parsedEntry);
-        return parsedEntry;
-      }
-    });
-};
-
-const deserializeAws_restJson1GreetingStruct = (output: any, context: __SerdeContext): GreetingStruct => {
-  return {
-    hi: __expectString(output.hi),
-  } as any;
-};
-
-const deserializeAws_restJson1IntegerList = (output: any, context: __SerdeContext): number[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectInt32(entry) as any;
-    });
-};
-
-const deserializeAws_restJson1NestedStringList = (output: any, context: __SerdeContext): string[][] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return deserializeAws_restJson1StringList(entry, context);
-    });
-};
-
-const deserializeAws_restJson1SparseStringList = (output: any, context: __SerdeContext): string[] => {
-  return (output || []).map((entry: any) => {
-    if (entry === null) {
-      return null as any;
-    }
-    return __expectString(entry) as any;
-  });
-};
-
-const deserializeAws_restJson1SparseStringMap = (output: any, context: __SerdeContext): { [key: string]: string } => {
-  return Object.entries(output).reduce((acc: { [key: string]: string }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return { ...acc, [key]: null as any };
-    }
-    return {
-      ...acc,
-      [key]: __expectString(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1StringList = (output: any, context: __SerdeContext): string[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectString(entry) as any;
-    });
-};
-
-const deserializeAws_restJson1StringMap = (output: any, context: __SerdeContext): { [key: string]: string } => {
-  return Object.entries(output).reduce((acc: { [key: string]: string }, [key, value]: [string, any]) => {
-    if (value === null) {
-      return acc;
-    }
-    return {
-      ...acc,
-      [key]: __expectString(value) as any,
-    };
-  }, {});
-};
-
-const deserializeAws_restJson1StringSet = (output: any, context: __SerdeContext): string[] => {
-  const uniqueValues = new Set<any>();
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      const parsedEntry = __expectString(entry) as any;
-      if (uniqueValues.has(parsedEntry)) {
-        throw new TypeError('All elements of the set "aws.protocoltests.shared#StringSet" must be unique.');
-      } else {
-        uniqueValues.add(parsedEntry);
-        return parsedEntry;
-      }
-    });
-};
-
-const deserializeAws_restJson1TimestampList = (output: any, context: __SerdeContext): Date[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return __expectNonNull(__parseEpochTimestamp(__expectNumber(entry)));
-    });
-};
-
-const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
-  httpStatusCode: output.statusCode,
-  requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"],
-  extendedRequestId: output.headers["x-amz-id-2"],
-  cfId: output.headers["x-amz-cf-id"],
-});
-
-// Collect low-level response body stream to Uint8Array.
-const collectBody = (streamBody: any = new Uint8Array(), context: __SerdeContext): Promise<Uint8Array> => {
-  if (streamBody instanceof Uint8Array) {
-    return Promise.resolve(streamBody);
-  }
-  return context.streamCollector(streamBody) || Promise.resolve(new Uint8Array());
-};
-
-// Encode Uint8Array data into string with utf-8.
-const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> =>
-  collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-
-const isSerializableHeaderValue = (value: any): boolean =>
-  value !== undefined &&
-  value !== null &&
-  value !== "" &&
-  (!Object.getOwnPropertyNames(value).includes("length") || value.length != 0) &&
-  (!Object.getOwnPropertyNames(value).includes("size") || value.size != 0);
-
-const parseBody = (streamBody: any, context: __SerdeContext): any =>
-  collectBodyString(streamBody, context).then((encoded) => {
-    if (encoded.length) {
-      return JSON.parse(encoded);
-    }
-    return {};
-  });
 
 /**
- * Load an error code for the aws.rest-json-1.1 protocol.
+ * deserializeAws_restJson1DuplexStreamCommand
  */
-const loadRestJsonErrorCode = (output: __HttpResponse, data: any): string => {
-  const findKey = (object: any, key: string) => Object.keys(object).find((k) => k.toLowerCase() === key.toLowerCase());
+export const de_DuplexStreamCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<DuplexStreamCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: any = output.body;
+  contents.stream = de_EventStream(data, context);
+  return contents;
+};
 
-  const sanitizeErrorCode = (rawValue: string): string => {
-    let cleanValue = rawValue;
-    if (cleanValue.indexOf(":") >= 0) {
-      cleanValue = cleanValue.split(":")[0];
-    }
-    if (cleanValue.indexOf("#") >= 0) {
-      cleanValue = cleanValue.split("#")[1];
-    }
-    return cleanValue;
+/**
+ * deserializeAws_restJson1DuplexStreamWithDistinctStreamsCommand
+ */
+export const de_DuplexStreamWithDistinctStreamsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DuplexStreamWithDistinctStreamsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> | undefined = await parseBody(output.body, context);
+  if (Object.keys(data ?? {}).length) {
+    contents.stream = __expectUnion(_json(data));
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1DuplexStreamWithInitialMessagesCommand
+ */
+export const de_DuplexStreamWithInitialMessagesCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext & __EventStreamSerdeContext
+): Promise<DuplexStreamWithInitialMessagesCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+    [_iRMn]: [, output.headers[_irm_]],
+  });
+  const data: any = output.body;
+  contents.stream = de_EventStream(data, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1EmptyInputAndEmptyOutputCommand
+ */
+export const de_EmptyInputAndEmptyOutputCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<EmptyInputAndEmptyOutputCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1EndpointOperationCommand
+ */
+export const de_EndpointOperationCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<EndpointOperationCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1EndpointWithHostLabelOperationCommand
+ */
+export const de_EndpointWithHostLabelOperationCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<EndpointWithHostLabelOperationCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1FractionalSecondsCommand
+ */
+export const de_FractionalSecondsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<FractionalSecondsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  const doc = take(data, {
+    'datetime': _ => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1GreetingWithErrorsCommand
+ */
+export const de_GreetingWithErrorsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<GreetingWithErrorsCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+    [_g]: [, output.headers[_xg]],
+  });
+  await collectBody(output.body, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1HostWithPathOperationCommand
+ */
+export const de_HostWithPathOperationCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<HostWithPathOperationCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  await collectBody(output.body, context);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1HttpChecksumRequiredCommand
+ */
+export const de_HttpChecksumRequiredCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<HttpChecksumRequiredCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+  });
+  const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+  const doc = take(data, {
+    'foo': __expectString,
+  });
+  Object.assign(contents, doc);
+  return contents;
+};
+
+/**
+ * deserializeAws_restJson1HttpEmptyPrefixHeadersCommand
+ */
+export const de_HttpEmptyPrefixHeadersCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<HttpEmptyPrefixHeadersCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return de_CommandError(output, context);
+  }
+  const contents: any = map({
+    $metadata: deserializeMetadata(output),
+    [_sH]: [, output.headers[_h]],
+    prefixHeaders: [,
+      Object.keys(output.headers).filter(header => header.startsWith(''))
+        .reduce((acc, header) => {
+          acc[header.substring(0)] = output.headers[header];
+          return acc;
+        }, {} as any)
+      ],
+    });
+    await collectBody(output.body, context);
+    return contents;
   };
 
-  const headerKey = findKey(output.headers, "x-amzn-errortype");
-  if (headerKey !== undefined) {
-    return sanitizeErrorCode(output.headers[headerKey]);
-  }
+  /**
+   * deserializeAws_restJson1HttpEnumPayloadCommand
+   */
+  export const de_HttpEnumPayloadCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpEnumPayloadCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+    });
+    const data: any = await collectBodyString(output.body, context);
+    contents.payload = __expectString(data);
+    return contents;
+  };
 
-  if (data.code !== undefined) {
-    return sanitizeErrorCode(data.code);
-  }
+  /**
+   * deserializeAws_restJson1HttpPayloadTraitsCommand
+   */
+  export const de_HttpPayloadTraitsCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadTraitsCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
+    });
+    const data: any = await collectBody(output.body, context);
+    contents.blob = data;
+    return contents;
+  };
 
-  if (data["__type"] !== undefined) {
-    return sanitizeErrorCode(data["__type"]);
-  }
+  /**
+   * deserializeAws_restJson1HttpPayloadTraitsWithMediaTypeCommand
+   */
+  export const de_HttpPayloadTraitsWithMediaTypeCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadTraitsWithMediaTypeCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
+    });
+    const data: any = await collectBody(output.body, context);
+    contents.blob = data;
+    return contents;
+  };
 
-  return "";
-};
+  /**
+   * deserializeAws_restJson1HttpPayloadWithStructureCommand
+   */
+  export const de_HttpPayloadWithStructureCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithStructureCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+    });
+    const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+    contents.nested = _json(data);
+    return contents;
+  };
+
+  /**
+   * deserializeAws_restJson1HttpPayloadWithUnionCommand
+   */
+  export const de_HttpPayloadWithUnionCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPayloadWithUnionCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+    });
+    const data: Record<string, any> | undefined = await parseBody(output.body, context);
+    if (Object.keys(data ?? {}).length) {
+      contents.nested = __expectUnion(_json(data));
+    }
+    return contents;
+  };
+
+  /**
+   * deserializeAws_restJson1HttpPrefixHeadersCommand
+   */
+  export const de_HttpPrefixHeadersCommand = async (
+    output: __HttpResponse,
+    context: __SerdeContext
+  ): Promise<HttpPrefixHeadersCommandOutput> => {
+    if (output.statusCode !== 200 && output.statusCode >= 300) {
+      return de_CommandError(output, context);
+    }
+    const contents: any = map({
+      $metadata: deserializeMetadata(output),
+      [_f]: [, output.headers[_xf]],
+      fooMap: [,
+        Object.keys(output.headers).filter(header => header.startsWith('x-foo-'))
+          .reduce((acc, header) => {
+            acc[header.substring(6)] = output.headers[header];
+            return acc;
+          }, {} as any)
+        ],
+      });
+      await collectBody(output.body, context);
+      return contents;
+    };
+
+    /**
+     * deserializeAws_restJson1HttpPrefixHeadersInResponseCommand
+     */
+    export const de_HttpPrefixHeadersInResponseCommand = async (
+      output: __HttpResponse,
+      context: __SerdeContext
+    ): Promise<HttpPrefixHeadersInResponseCommandOutput> => {
+      if (output.statusCode !== 200 && output.statusCode >= 300) {
+        return de_CommandError(output, context);
+      }
+      const contents: any = map({
+        $metadata: deserializeMetadata(output),
+        prefixHeaders: [,
+          Object.keys(output.headers).filter(header => header.startsWith(''))
+            .reduce((acc, header) => {
+              acc[header.substring(0)] = output.headers[header];
+              return acc;
+            }, {} as any)
+          ],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpQueryParamsOnlyOperationCommand
+       */
+      export const de_HttpQueryParamsOnlyOperationCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpQueryParamsOnlyOperationCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpRequestWithFloatLabelsCommand
+       */
+      export const de_HttpRequestWithFloatLabelsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpRequestWithFloatLabelsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpRequestWithGreedyLabelInPathCommand
+       */
+      export const de_HttpRequestWithGreedyLabelInPathCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpRequestWithGreedyLabelInPathCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpRequestWithLabelsCommand
+       */
+      export const de_HttpRequestWithLabelsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpRequestWithLabelsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpRequestWithLabelsAndTimestampFormatCommand
+       */
+      export const de_HttpRequestWithLabelsAndTimestampFormatCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpRequestWithLabelsAndTimestampFormatCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpRequestWithRegexLiteralCommand
+       */
+      export const de_HttpRequestWithRegexLiteralCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpRequestWithRegexLiteralCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpResponseCodeCommand
+       */
+      export const de_HttpResponseCodeCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpResponseCodeCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        map(contents, {
+          Status: [, output.statusCode]
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1HttpStringPayloadCommand
+       */
+      export const de_HttpStringPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<HttpStringPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: any = await collectBodyString(output.body, context);
+        contents.payload = __expectString(data);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1IgnoreQueryParamsInResponseCommand
+       */
+      export const de_IgnoreQueryParamsInResponseCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<IgnoreQueryParamsInResponseCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'baz': __expectString,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1InputAndOutputWithHeadersCommand
+       */
+      export const de_InputAndOutputWithHeadersCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<InputAndOutputWithHeadersCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_hS]: [, output.headers[_xs]],
+          [_hB]: [() => void 0 !== output.headers[_xb], () => __strictParseByte(output.headers[_xb])],
+          [_hSe]: [() => void 0 !== output.headers[_xs_], () => __strictParseShort(output.headers[_xs_])],
+          [_hI]: [() => void 0 !== output.headers[_xi], () => __strictParseInt32(output.headers[_xi])],
+          [_hL]: [() => void 0 !== output.headers[_xl], () => __strictParseLong(output.headers[_xl])],
+          [_hF]: [() => void 0 !== output.headers[_xf_], () => __strictParseFloat(output.headers[_xf_])],
+          [_hD]: [() => void 0 !== output.headers[_xd], () => __strictParseDouble(output.headers[_xd])],
+          [_hTB]: [() => void 0 !== output.headers[_xb_], () => __parseBoolean(output.headers[_xb_])],
+          [_hFB]: [() => void 0 !== output.headers[_xb__], () => __parseBoolean(output.headers[_xb__])],
+          [_hSL]: [() => void 0 !== output.headers[_xs__], () => __splitHeader((output.headers[_xs__] || "")).map(_entry => _entry.trim() as any)],
+          [_hSS]: [() => void 0 !== output.headers[_xs___], () => __splitHeader((output.headers[_xs___] || "")).map(_entry => _entry.trim() as any)],
+          [_hIL]: [() => void 0 !== output.headers[_xi_], () => __splitHeader((output.headers[_xi_] || "")).map(_entry => __strictParseInt32(_entry.trim()) as any)],
+          [_hBL]: [() => void 0 !== output.headers[_xb___], () => __splitHeader((output.headers[_xb___] || "")).map(_entry => __parseBoolean(_entry.trim()) as any)],
+          [_hTL]: [() => void 0 !== output.headers[_xt], () => __splitEvery((output.headers[_xt] || ""), ',', 2).map(_entry => __expectNonNull(__parseRfc7231DateTime(_entry.trim())) as any)],
+          [_hE]: [, output.headers[_xe]],
+          [_hEL]: [() => void 0 !== output.headers[_xe_], () => __splitHeader((output.headers[_xe_] || "")).map(_entry => _entry.trim() as any)],
+          [_hIE]: [() => void 0 !== output.headers[_xi__], () => __strictParseInt32(output.headers[_xi__])],
+          [_hIEL]: [() => void 0 !== output.headers[_xi___], () => __splitHeader((output.headers[_xi___] || "")).map(_entry => __strictParseInt32(_entry.trim()) as any)],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1InputStreamCommand
+       */
+      export const de_InputStreamCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<InputStreamCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1InputStreamWithInitialRequestCommand
+       */
+      export const de_InputStreamWithInitialRequestCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<InputStreamWithInitialRequestCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonBlobsCommand
+       */
+      export const de_JsonBlobsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonBlobsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'data': context.base64Decoder,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonEnumsCommand
+       */
+      export const de_JsonEnumsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonEnumsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'fooEnum1': __expectString,
+          'fooEnum2': __expectString,
+          'fooEnum3': __expectString,
+          'fooEnumList': _json,
+          'fooEnumMap': _json,
+          'fooEnumSet': _json,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonIntEnumsCommand
+       */
+      export const de_JsonIntEnumsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonIntEnumsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'integerEnum1': __expectInt32,
+          'integerEnum2': __expectInt32,
+          'integerEnum3': __expectInt32,
+          'integerEnumList': _json,
+          'integerEnumMap': _json,
+          'integerEnumSet': _json,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonListsCommand
+       */
+      export const de_JsonListsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonListsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'booleanList': _json,
+          'enumList': _json,
+          'intEnumList': _json,
+          'integerList': _json,
+          'nestedStringList': _json,
+          'stringList': _json,
+          'stringSet': _json,
+          'structureList': [, _ => de_StructureList(_, context), `myStructureList`],
+          'timestampList': _ => de_TimestampList(_, context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonMapsCommand
+       */
+      export const de_JsonMapsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonMapsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'denseBooleanMap': _json,
+          'denseNumberMap': _json,
+          'denseSetMap': _json,
+          'denseStringMap': _json,
+          'denseStructMap': _json,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonTimestampsCommand
+       */
+      export const de_JsonTimestampsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonTimestampsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'dateTime': _ => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+          'dateTimeOnTarget': _ => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+          'epochSeconds': _ => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
+          'epochSecondsOnTarget': _ => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
+          'httpDate': _ => __expectNonNull(__parseRfc7231DateTime(_)),
+          'httpDateOnTarget': _ => __expectNonNull(__parseRfc7231DateTime(_)),
+          'normal': _ => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1JsonUnionsCommand
+       */
+      export const de_JsonUnionsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<JsonUnionsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'contents': _ => de_MyUnion(__expectUnion(_), context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedAcceptWithBodyCommand
+       */
+      export const de_MalformedAcceptWithBodyCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedAcceptWithBodyCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'hi': __expectString,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedAcceptWithGenericStringCommand
+       */
+      export const de_MalformedAcceptWithGenericStringCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedAcceptWithGenericStringCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: any = await collectBodyString(output.body, context);
+        contents.payload = __expectString(data);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedAcceptWithPayloadCommand
+       */
+      export const de_MalformedAcceptWithPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedAcceptWithPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: any = await collectBody(output.body, context);
+        contents.payload = data;
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedBlobCommand
+       */
+      export const de_MalformedBlobCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedBlobCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedBooleanCommand
+       */
+      export const de_MalformedBooleanCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedBooleanCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedByteCommand
+       */
+      export const de_MalformedByteCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedByteCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedContentTypeWithBodyCommand
+       */
+      export const de_MalformedContentTypeWithBodyCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedContentTypeWithBodyCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedContentTypeWithGenericStringCommand
+       */
+      export const de_MalformedContentTypeWithGenericStringCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedContentTypeWithGenericStringCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedContentTypeWithoutBodyCommand
+       */
+      export const de_MalformedContentTypeWithoutBodyCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedContentTypeWithoutBodyCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedContentTypeWithoutBodyEmptyInputCommand
+       */
+      export const de_MalformedContentTypeWithoutBodyEmptyInputCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedContentTypeWithoutBodyEmptyInputCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedContentTypeWithPayloadCommand
+       */
+      export const de_MalformedContentTypeWithPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedContentTypeWithPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedDoubleCommand
+       */
+      export const de_MalformedDoubleCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedDoubleCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedFloatCommand
+       */
+      export const de_MalformedFloatCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedFloatCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedIntegerCommand
+       */
+      export const de_MalformedIntegerCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedIntegerCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedListCommand
+       */
+      export const de_MalformedListCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedListCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedLongCommand
+       */
+      export const de_MalformedLongCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedLongCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedMapCommand
+       */
+      export const de_MalformedMapCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedMapCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedRequestBodyCommand
+       */
+      export const de_MalformedRequestBodyCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedRequestBodyCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedShortCommand
+       */
+      export const de_MalformedShortCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedShortCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedStringCommand
+       */
+      export const de_MalformedStringCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedStringCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampBodyDateTimeCommand
+       */
+      export const de_MalformedTimestampBodyDateTimeCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampBodyDateTimeCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampBodyDefaultCommand
+       */
+      export const de_MalformedTimestampBodyDefaultCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampBodyDefaultCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampBodyHttpDateCommand
+       */
+      export const de_MalformedTimestampBodyHttpDateCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampBodyHttpDateCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampHeaderDateTimeCommand
+       */
+      export const de_MalformedTimestampHeaderDateTimeCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampHeaderDateTimeCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampHeaderDefaultCommand
+       */
+      export const de_MalformedTimestampHeaderDefaultCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampHeaderDefaultCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampHeaderEpochCommand
+       */
+      export const de_MalformedTimestampHeaderEpochCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampHeaderEpochCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampPathDefaultCommand
+       */
+      export const de_MalformedTimestampPathDefaultCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampPathDefaultCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampPathEpochCommand
+       */
+      export const de_MalformedTimestampPathEpochCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampPathEpochCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampPathHttpDateCommand
+       */
+      export const de_MalformedTimestampPathHttpDateCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampPathHttpDateCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampQueryDefaultCommand
+       */
+      export const de_MalformedTimestampQueryDefaultCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampQueryDefaultCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampQueryEpochCommand
+       */
+      export const de_MalformedTimestampQueryEpochCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampQueryEpochCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedTimestampQueryHttpDateCommand
+       */
+      export const de_MalformedTimestampQueryHttpDateCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedTimestampQueryHttpDateCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MalformedUnionCommand
+       */
+      export const de_MalformedUnionCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MalformedUnionCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1MediaTypeHeaderCommand
+       */
+      export const de_MediaTypeHeaderCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<MediaTypeHeaderCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_j]: [() => void 0 !== output.headers[_xj], () => __LazyJsonString.from(Buffer.from(context.base64Decoder(output.headers[_xj])).toString('utf8'))],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1NoInputAndNoOutputCommand
+       */
+      export const de_NoInputAndNoOutputCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<NoInputAndNoOutputCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1NoInputAndOutputCommand
+       */
+      export const de_NoInputAndOutputCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<NoInputAndOutputCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1NullAndEmptyHeadersClientCommand
+       */
+      export const de_NullAndEmptyHeadersClientCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<NullAndEmptyHeadersClientCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_a]: [, output.headers[_xa]],
+          [_b_]: [, output.headers[_xb____]],
+          [_c]: [() => void 0 !== output.headers[_xc], () => __splitHeader((output.headers[_xc] || "")).map(_entry => _entry.trim() as any)],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1NullAndEmptyHeadersServerCommand
+       */
+      export const de_NullAndEmptyHeadersServerCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<NullAndEmptyHeadersServerCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_a]: [, output.headers[_xa]],
+          [_b_]: [, output.headers[_xb____]],
+          [_c]: [() => void 0 !== output.headers[_xc], () => __splitHeader((output.headers[_xc] || "")).map(_entry => _entry.trim() as any)],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OmitsNullSerializesEmptyStringCommand
+       */
+      export const de_OmitsNullSerializesEmptyStringCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<OmitsNullSerializesEmptyStringCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OmitsSerializingEmptyListsCommand
+       */
+      export const de_OmitsSerializingEmptyListsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<OmitsSerializingEmptyListsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OperationWithDefaultsCommand
+       */
+      export const de_OperationWithDefaultsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<OperationWithDefaultsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'defaultBlob': context.base64Decoder,
+          'defaultBoolean': __expectBoolean,
+          'defaultByte': __expectByte,
+          'defaultDocumentBoolean': _ => de_Document(_, context),
+          'defaultDocumentList': _ => de_Document(_, context),
+          'defaultDocumentMap': _ => de_Document(_, context),
+          'defaultDocumentString': _ => de_Document(_, context),
+          'defaultDouble': __limitedParseDouble,
+          'defaultEnum': __expectString,
+          'defaultFloat': __limitedParseFloat32,
+          'defaultIntEnum': __expectInt32,
+          'defaultInteger': __expectInt32,
+          'defaultList': _json,
+          'defaultLong': __expectLong,
+          'defaultMap': _json,
+          'defaultNullDocument': _ => de_Document(_, context),
+          'defaultShort': __expectShort,
+          'defaultString': __expectString,
+          'defaultTimestamp': _ => __expectNonNull(__parseEpochTimestamp(__expectNumber(_))),
+          'emptyBlob': context.base64Decoder,
+          'emptyString': __expectString,
+          'falseBoolean': __expectBoolean,
+          'zeroByte': __expectByte,
+          'zeroDouble': __limitedParseDouble,
+          'zeroFloat': __limitedParseFloat32,
+          'zeroInteger': __expectInt32,
+          'zeroLong': __expectLong,
+          'zeroShort': __expectShort,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OperationWithNestedStructureCommand
+       */
+      export const de_OperationWithNestedStructureCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<OperationWithNestedStructureCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'dialog': _json,
+          'dialogList': _json,
+          'dialogMap': _json,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OutputStreamCommand
+       */
+      export const de_OutputStreamCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext & __EventStreamSerdeContext
+      ): Promise<OutputStreamCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: any = output.body;
+        contents.stream = de_EventStream(data, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1OutputStreamWithInitialResponseCommand
+       */
+      export const de_OutputStreamWithInitialResponseCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext & __EventStreamSerdeContext
+      ): Promise<OutputStreamWithInitialResponseCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_iRMn]: [, output.headers[_irm_]],
+        });
+        const data: any = output.body;
+        contents.stream = de_EventStream(data, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1PostPlayerActionCommand
+       */
+      export const de_PostPlayerActionCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<PostPlayerActionCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'action': _ => _json(__expectUnion(_)),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1PostUnionWithJsonNameCommand
+       */
+      export const de_PostUnionWithJsonNameCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<PostUnionWithJsonNameCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'value': _ => de_UnionWithJsonName(__expectUnion(_), context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1PutWithContentEncodingCommand
+       */
+      export const de_PutWithContentEncodingCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<PutWithContentEncodingCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1QueryIdempotencyTokenAutoFillCommand
+       */
+      export const de_QueryIdempotencyTokenAutoFillCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<QueryIdempotencyTokenAutoFillCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1QueryParamsAsStringListMapCommand
+       */
+      export const de_QueryParamsAsStringListMapCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<QueryParamsAsStringListMapCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1QueryPrecedenceCommand
+       */
+      export const de_QueryPrecedenceCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<QueryPrecedenceCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1RecursiveShapesCommand
+       */
+      export const de_RecursiveShapesCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<RecursiveShapesCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'nested': _ => de_RecursiveShapesInputOutputNested1(_, context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1ResponseCodeHttpFallbackCommand
+       */
+      export const de_ResponseCodeHttpFallbackCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<ResponseCodeHttpFallbackCommandOutput> => {
+        if (output.statusCode !== 201 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1ResponseCodeRequiredCommand
+       */
+      export const de_ResponseCodeRequiredCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<ResponseCodeRequiredCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        map(contents, {
+          responseCode: [, output.statusCode]
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1SimpleScalarPropertiesCommand
+       */
+      export const de_SimpleScalarPropertiesCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<SimpleScalarPropertiesCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_f]: [, output.headers[_xf]],
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'byteValue': __expectByte,
+          'doubleValue': [, __limitedParseDouble, `DoubleDribble`],
+          'falseBooleanValue': __expectBoolean,
+          'floatValue': __limitedParseFloat32,
+          'integerValue': __expectInt32,
+          'longValue': __expectLong,
+          'shortValue': __expectShort,
+          'stringValue': __expectString,
+          'trueBooleanValue': __expectBoolean,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1SparseJsonListsCommand
+       */
+      export const de_SparseJsonListsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<SparseJsonListsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'sparseShortList': _ => de_SparseShortList(_, context),
+          'sparseStringList': _ => de_SparseStringList(_, context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1SparseJsonMapsCommand
+       */
+      export const de_SparseJsonMapsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<SparseJsonMapsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'sparseBooleanMap': _ => de_SparseBooleanMap(_, context),
+          'sparseNumberMap': _ => de_SparseNumberMap(_, context),
+          'sparseSetMap': _ => de_SparseSetMap(_, context),
+          'sparseStringMap': _ => de_SparseStringMap(_, context),
+          'sparseStructMap': _ => de_SparseStructMap(_, context),
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1StreamingTraitsCommand
+       */
+      export const de_StreamingTraitsCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext & __SdkStreamSerdeContext
+      ): Promise<StreamingTraitsCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_f]: [, output.headers[_xf]],
+        });
+        const data: any = output.body;
+        context.sdkStreamMixin(data);
+        contents.blob = data;
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1StreamingTraitsRequireLengthCommand
+       */
+      export const de_StreamingTraitsRequireLengthCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<StreamingTraitsRequireLengthCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1StreamingTraitsWithMediaTypeCommand
+       */
+      export const de_StreamingTraitsWithMediaTypeCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext & __SdkStreamSerdeContext
+      ): Promise<StreamingTraitsWithMediaTypeCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_f]: [, output.headers[_xf]],
+        });
+        const data: any = output.body;
+        context.sdkStreamMixin(data);
+        contents.blob = data;
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestBodyStructureCommand
+       */
+      export const de_TestBodyStructureCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestBodyStructureCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        const data: Record<string, any> = __expectNonNull((__expectObject(await parseBody(output.body, context))), "body");
+        const doc = take(data, {
+          'testConfig': _json,
+        });
+        Object.assign(contents, doc);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestGetNoInputNoPayloadCommand
+       */
+      export const de_TestGetNoInputNoPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestGetNoInputNoPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestGetNoPayloadCommand
+       */
+      export const de_TestGetNoPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestGetNoPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestPayloadBlobCommand
+       */
+      export const de_TestPayloadBlobCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestPayloadBlobCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_cT]: [, output.headers[_ct]],
+        });
+        const data: any = await collectBody(output.body, context);
+        contents.data = data;
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestPayloadStructureCommand
+       */
+      export const de_TestPayloadStructureCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestPayloadStructureCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        const data: Record<string, any> | undefined = __expectObject(await parseBody(output.body, context));
+        contents.payloadConfig = _json(data);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestPostNoInputNoPayloadCommand
+       */
+      export const de_TestPostNoInputNoPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestPostNoInputNoPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TestPostNoPayloadCommand
+       */
+      export const de_TestPostNoPayloadCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TestPostNoPayloadCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_tI]: [, output.headers[_xati]],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1TimestampFormatHeadersCommand
+       */
+      export const de_TimestampFormatHeadersCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<TimestampFormatHeadersCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+          [_mES]: [() => void 0 !== output.headers[_xm], () => __expectNonNull(__parseEpochTimestamp(output.headers[_xm]))],
+          [_mHD]: [() => void 0 !== output.headers[_xm_], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xm_]))],
+          [_mDT]: [() => void 0 !== output.headers[_xm__], () => __expectNonNull(__parseRfc3339DateTimeWithOffset(output.headers[_xm__]))],
+          [_dF]: [() => void 0 !== output.headers[_xd_], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xd_]))],
+          [_tES]: [() => void 0 !== output.headers[_xt_], () => __expectNonNull(__parseEpochTimestamp(output.headers[_xt_]))],
+          [_tHD]: [() => void 0 !== output.headers[_xt__], () => __expectNonNull(__parseRfc7231DateTime(output.headers[_xt__]))],
+          [_tDT]: [() => void 0 !== output.headers[_xt___], () => __expectNonNull(__parseRfc3339DateTimeWithOffset(output.headers[_xt___]))],
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserializeAws_restJson1UnitInputAndOutputCommand
+       */
+      export const de_UnitInputAndOutputCommand = async (
+        output: __HttpResponse,
+        context: __SerdeContext
+      ): Promise<UnitInputAndOutputCommandOutput> => {
+        if (output.statusCode !== 200 && output.statusCode >= 300) {
+          return de_CommandError(output, context);
+        }
+        const contents: any = map({
+          $metadata: deserializeMetadata(output),
+        });
+        await collectBody(output.body, context);
+        return contents;
+      };
+
+      /**
+       * deserialize_Aws_restJson1CommandError
+       */
+      const de_CommandError = async (
+        output: __HttpResponse,
+        context: __SerdeContext,
+      ): Promise<never> => {
+        const parsedOutput: any = {
+          ...output,
+          body: await parseErrorBody(output.body, context)
+        };
+        const errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+        switch (errorCode) {
+          case "ServiceUnavailableError":
+          case "aws.protocoltests.restjson#ServiceUnavailableError":
+            throw await de_ServiceUnavailableErrorRes(parsedOutput, context);
+          case "ComplexError":
+          case "aws.protocoltests.restjson#ComplexError":
+            throw await de_ComplexErrorRes(parsedOutput, context);
+          case "FooError":
+          case "aws.protocoltests.restjson#FooError":
+            throw await de_FooErrorRes(parsedOutput, context);
+          case "InvalidGreeting":
+          case "aws.protocoltests.restjson#InvalidGreeting":
+            throw await de_InvalidGreetingRes(parsedOutput, context);
+          default:
+            const parsedBody = parsedOutput.body;
+            return throwDefaultError({
+              output,
+              parsedBody,
+              errorCode
+            }) as never;
+        }
+      }
+
+      const throwDefaultError = withBaseException(__BaseException);
+      /**
+       * deserializeAws_restJson1ComplexErrorRes
+       */
+      const de_ComplexErrorRes = async (
+        parsedOutput: any,
+        context: __SerdeContext
+      ): Promise<ComplexError> => {
+        const contents: any = map({
+          [_H]: [, parsedOutput.headers[_xh]],
+        });
+        const data: any = parsedOutput.body;
+        const doc = take(data, {
+          'Nested': _ => de_ComplexNestedErrorData(_, context),
+          'TopLevel': __expectString,
+        });
+        Object.assign(contents, doc);
+        const exception = new ComplexError({
+          $metadata: deserializeMetadata(parsedOutput),
+          ...contents
+        });
+        return __decorateServiceException(exception, parsedOutput.body);
+      };
+
+      /**
+       * deserializeAws_restJson1FooErrorRes
+       */
+      const de_FooErrorRes = async (
+        parsedOutput: any,
+        context: __SerdeContext
+      ): Promise<FooError> => {
+        const contents: any = map({
+        });
+        const data: any = parsedOutput.body;
+        const doc = take(data, {
+        });
+        Object.assign(contents, doc);
+        const exception = new FooError({
+          $metadata: deserializeMetadata(parsedOutput),
+          ...contents
+        });
+        return __decorateServiceException(exception, parsedOutput.body);
+      };
+
+      /**
+       * deserializeAws_restJson1InvalidGreetingRes
+       */
+      const de_InvalidGreetingRes = async (
+        parsedOutput: any,
+        context: __SerdeContext
+      ): Promise<InvalidGreeting> => {
+        const contents: any = map({
+        });
+        const data: any = parsedOutput.body;
+        const doc = take(data, {
+          'Message': __expectString,
+        });
+        Object.assign(contents, doc);
+        const exception = new InvalidGreeting({
+          $metadata: deserializeMetadata(parsedOutput),
+          ...contents
+        });
+        return __decorateServiceException(exception, parsedOutput.body);
+      };
+
+      /**
+       * deserializeAws_restJson1ServiceUnavailableErrorRes
+       */
+      const de_ServiceUnavailableErrorRes = async (
+        parsedOutput: any,
+        context: __SerdeContext
+      ): Promise<ServiceUnavailableError> => {
+        const contents: any = map({
+        });
+        const data: any = parsedOutput.body;
+        const doc = take(data, {
+          'message': __expectString,
+        });
+        Object.assign(contents, doc);
+        const exception = new ServiceUnavailableError({
+          $metadata: deserializeMetadata(parsedOutput),
+          ...contents
+        });
+        return __decorateServiceException(exception, parsedOutput.body);
+      };
+
+      /**
+       * serializeAws_restJson1EventStream
+       */
+      const se_EventStream = (
+        input: any,
+        context: __SerdeContext & __EventStreamSerdeContext
+      ): any => {
+        const eventMarshallingVisitor = (event: any): __Message => EventStream.visit(event, {
+          headers: value => se_HeadersEvent_event(value, context),
+          blobPayload: value => se_BlobPayloadEvent_event(value, context),
+          stringPayload: value => se_StringPayloadEvent_event(value, context),
+          structurePayload: value => se_StructurePayloadEvent_event(value, context),
+          unionPayload: value => se_UnionPayloadEvent_event(value, context),
+          headersAndExplicitPayload: value => se_HeadersAndExplicitPayloadEvent_event(value, context),
+          headersAndImplicitPayload: value => se_HeadersAndImplicitPayloadEvent_event(value, context),
+          error: value => se_ErrorEvent_event(value, context),
+          _: value => value as any
+        });
+        return context.eventStreamMarshaller.serialize(input, eventMarshallingVisitor);
+      }
+      const se_BlobPayloadEvent_event = (
+        input: BlobPayloadEvent,
+        context: __SerdeContext
+      ): __Message => {
+        const headers: __MessageHeaders = {
+          ":event-type": { type: "string", value: "blobPayload" },
+          ":message-type": { type: "string", value: "event" },
+          ":content-type": { type: "string", value: "application/octet-stream" },
+        }
+        let body: Uint8Array = new Uint8Array();
+        if (input.payload != null) {
+          body = input.payload;
+        }
+        return { headers, body };
+        }
+        const se_ErrorEvent_event = (
+          input: ErrorEvent,
+          context: __SerdeContext
+        ): __Message => {
+          const headers: __MessageHeaders = {
+            ":event-type": { type: "string", value: "error" },
+            ":message-type": { type: "string", value: "event" },
+            ":content-type": { type: "string", value: "application/json" },
+          }
+          let body: Uint8Array = new Uint8Array();
+          body = _json(input);
+          body = context.utf8Decoder(JSON.stringify(body));
+          return { headers, body };
+          }
+          const se_HeadersAndExplicitPayloadEvent_event = (
+            input: HeadersAndExplicitPayloadEvent,
+            context: __SerdeContext
+          ): __Message => {
+            const headers: __MessageHeaders = {
+              ":event-type": { type: "string", value: "headersAndExplicitPayload" },
+              ":message-type": { type: "string", value: "event" },
+              ":content-type": { type: "string", value: "application/json" },
+            }
+            if (input.header != null) {
+              headers["header"] = { type: "string", value: input.header }
+            }
+            let body: Uint8Array = new Uint8Array();
+            if (input.payload != null) {
+              body = _json(input.payload);
+              body = context.utf8Decoder(JSON.stringify(body));
+            }
+            return { headers, body };
+            }
+            const se_HeadersAndImplicitPayloadEvent_event = (
+              input: HeadersAndImplicitPayloadEvent,
+              context: __SerdeContext
+            ): __Message => {
+              const headers: __MessageHeaders = {
+                ":event-type": { type: "string", value: "headersAndImplicitPayload" },
+                ":message-type": { type: "string", value: "event" },
+                ":content-type": { type: "string", value: "application/json" },
+              }
+              if (input.header != null) {
+                headers["header"] = { type: "string", value: input.header }
+              }
+              let body: Uint8Array = new Uint8Array();
+              delete input["header"]
+              body = _json(input);
+              body = context.utf8Decoder(JSON.stringify(body));
+              return { headers, body };
+              }
+              const se_HeadersEvent_event = (
+                input: HeadersEvent,
+                context: __SerdeContext
+              ): __Message => {
+                const headers: __MessageHeaders = {
+                  ":event-type": { type: "string", value: "headers" },
+                  ":message-type": { type: "string", value: "event" },
+                  ":content-type": { type: "string", value: "application/json" },
+                }
+                if (input.booleanHeader != null) {
+                  headers["booleanHeader"] = { type: "boolean", value: input.booleanHeader }
+                }
+                if (input.byteHeader != null) {
+                  headers["byteHeader"] = { type: "byte", value: input.byteHeader }
+                }
+                if (input.shortHeader != null) {
+                  headers["shortHeader"] = { type: "short", value: input.shortHeader }
+                }
+                if (input.intHeader != null) {
+                  headers["intHeader"] = { type: "integer", value: input.intHeader }
+                }
+                if (input.longHeader != null) {
+                  headers["longHeader"] = { type: "long", value: __Int64.fromNumber(input.longHeader) }
+                }
+                if (input.blobHeader != null) {
+                  headers["blobHeader"] = { type: "binary", value: input.blobHeader }
+                }
+                if (input.stringHeader != null) {
+                  headers["stringHeader"] = { type: "string", value: input.stringHeader }
+                }
+                if (input.timestampHeader != null) {
+                  headers["timestampHeader"] = { type: "timestamp", value: input.timestampHeader }
+                }
+                let body: Uint8Array = new Uint8Array();
+                delete input["booleanHeader"]
+                delete input["byteHeader"]
+                delete input["shortHeader"]
+                delete input["intHeader"]
+                delete input["longHeader"]
+                delete input["blobHeader"]
+                delete input["stringHeader"]
+                delete input["timestampHeader"]
+                body = se_HeadersEvent(input, context);
+                body = context.utf8Decoder(JSON.stringify(body));
+                return { headers, body };
+                }
+                const se_StringPayloadEvent_event = (
+                  input: StringPayloadEvent,
+                  context: __SerdeContext
+                ): __Message => {
+                  const headers: __MessageHeaders = {
+                    ":event-type": { type: "string", value: "stringPayload" },
+                    ":message-type": { type: "string", value: "event" },
+                    ":content-type": { type: "string", value: "text/plain" },
+                  }
+                  let body: Uint8Array = new Uint8Array();
+                  if (input.payload != null) {
+                    body = context.utf8Decoder(input.payload);
+                  }
+                  return { headers, body };
+                  }
+                  const se_StructurePayloadEvent_event = (
+                    input: StructurePayloadEvent,
+                    context: __SerdeContext
+                  ): __Message => {
+                    const headers: __MessageHeaders = {
+                      ":event-type": { type: "string", value: "structurePayload" },
+                      ":message-type": { type: "string", value: "event" },
+                      ":content-type": { type: "string", value: "application/json" },
+                    }
+                    let body: Uint8Array = new Uint8Array();
+                    if (input.payload != null) {
+                      body = _json(input.payload);
+                      body = context.utf8Decoder(JSON.stringify(body));
+                    }
+                    return { headers, body };
+                    }
+                    const se_UnionPayloadEvent_event = (
+                      input: UnionPayloadEvent,
+                      context: __SerdeContext
+                    ): __Message => {
+                      const headers: __MessageHeaders = {
+                        ":event-type": { type: "string", value: "unionPayload" },
+                        ":message-type": { type: "string", value: "event" },
+                        ":content-type": { type: "string", value: "application/json" },
+                      }
+                      let body: Uint8Array = new Uint8Array();
+                      if (input.payload != null) {
+                        body = _json(input.payload);
+                        body = context.utf8Decoder(JSON.stringify(body));
+                      }
+                      return { headers, body };
+                      }
+                      /**
+                       * deserializeAws_restJson1EventStream
+                       */
+                      const de_EventStream = (
+                        output: any,
+                        context: __SerdeContext & __EventStreamSerdeContext
+                      ): AsyncIterable<EventStream> => {
+                        return context.eventStreamMarshaller.deserialize(
+                          output,
+                          async event => {
+                            if (event["headers"] != null) {
+                              return {
+                                headers: await de_HeadersEvent_event(event["headers"], context),
+                              };
+                            }
+                            if (event["blobPayload"] != null) {
+                              return {
+                                blobPayload: await de_BlobPayloadEvent_event(event["blobPayload"], context),
+                              };
+                            }
+                            if (event["stringPayload"] != null) {
+                              return {
+                                stringPayload: await de_StringPayloadEvent_event(event["stringPayload"], context),
+                              };
+                            }
+                            if (event["structurePayload"] != null) {
+                              return {
+                                structurePayload: await de_StructurePayloadEvent_event(event["structurePayload"], context),
+                              };
+                            }
+                            if (event["unionPayload"] != null) {
+                              return {
+                                unionPayload: await de_UnionPayloadEvent_event(event["unionPayload"], context),
+                              };
+                            }
+                            if (event["headersAndExplicitPayload"] != null) {
+                              return {
+                                headersAndExplicitPayload: await de_HeadersAndExplicitPayloadEvent_event(event["headersAndExplicitPayload"], context),
+                              };
+                            }
+                            if (event["headersAndImplicitPayload"] != null) {
+                              return {
+                                headersAndImplicitPayload: await de_HeadersAndImplicitPayloadEvent_event(event["headersAndImplicitPayload"], context),
+                              };
+                            }
+                            if (event["error"] != null) {
+                              return {
+                                error: await de_ErrorEvent_event(event["error"], context),
+                              };
+                            }
+                            return {$unknown: event as any};
+                          }
+                        );
+                      }
+                      const de_BlobPayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<BlobPayloadEvent> => {
+                        const contents: BlobPayloadEvent = {} as any;
+                        contents.payload = output.body;
+                        return contents;
+                      }
+                      const de_ErrorEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<ErrorEvent> => {
+                        const parsedOutput: any = {
+                          ...output,
+                          body: await parseBody(output.body, context)
+                        };
+                        return de_ErrorEventRes(parsedOutput, context);
+                      }
+                      const de_HeadersAndExplicitPayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<HeadersAndExplicitPayloadEvent> => {
+                        const contents: HeadersAndExplicitPayloadEvent = {} as any;
+                        if (output.headers[_he] !== undefined) {
+                            contents[_he] = output.headers[_he].value;
+                        }
+
+                        const data: any = await parseBody(output.body, context);
+                        contents.payload = _json(data);
+                        return contents;
+                      }
+                      const de_HeadersAndImplicitPayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<HeadersAndImplicitPayloadEvent> => {
+                        const contents: HeadersAndImplicitPayloadEvent = {} as any;
+                        if (output.headers[_he] !== undefined) {
+                            contents[_he] = output.headers[_he].value;
+                        }
+
+                        const data: any = await parseBody(output.body, context);
+                        Object.assign(contents, _json(data));
+                        return contents;
+                      }
+                      const de_HeadersEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<HeadersEvent> => {
+                        const contents: HeadersEvent = {} as any;
+                        if (output.headers[_bH] !== undefined) {
+                            contents[_bH] = output.headers[_bH].value;
+                        }
+
+                        if (output.headers[_bHy] !== undefined) {
+                            contents[_bHy] = output.headers[_bHy].value;
+                        }
+
+                        if (output.headers[_sHh] !== undefined) {
+                            contents[_sHh] = output.headers[_sHh].value;
+                        }
+
+                        if (output.headers[_iH] !== undefined) {
+                            contents[_iH] = output.headers[_iH].value;
+                        }
+
+                        if (output.headers[_lH] !== undefined) {
+                            contents[_lH] = output.headers[_lH].value;
+                        }
+
+                        if (output.headers[_bHl] !== undefined) {
+                            contents[_bHl] = output.headers[_bHl].value;
+                        }
+
+                        if (output.headers[_sHt] !== undefined) {
+                            contents[_sHt] = output.headers[_sHt].value;
+                        }
+
+                        if (output.headers[_tH] !== undefined) {
+                            contents[_tH] = output.headers[_tH].value;
+                        }
+
+                        const data: any = await parseBody(output.body, context);
+                        Object.assign(contents, de_HeadersEvent(data, context));
+                        return contents;
+                      }
+                      const de_StringPayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<StringPayloadEvent> => {
+                        const contents: StringPayloadEvent = {} as any;
+                        contents.payload = await collectBodyString(output.body, context);
+                        return contents;
+                      }
+                      const de_StructurePayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<StructurePayloadEvent> => {
+                        const contents: StructurePayloadEvent = {} as any;
+                        const data: any = await parseBody(output.body, context);
+                        contents.payload = _json(data);
+                        return contents;
+                      }
+                      const de_UnionPayloadEvent_event = async (
+                        output: any,
+                        context: __SerdeContext
+                      ): Promise<UnionPayloadEvent> => {
+                        const contents: UnionPayloadEvent = {} as any;
+                        const data: any = await parseBody(output.body, context);
+                        contents.payload = _json(data);
+                        return contents;
+                      }
+                      /**
+                       * deserializeAws_restJson1ErrorEventRes
+                       */
+                      const de_ErrorEventRes = async (
+                        parsedOutput: any,
+                        context: __SerdeContext
+                      ): Promise<ErrorEvent> => {
+                        const contents: any = map({
+                        });
+                        const data: any = parsedOutput.body;
+                        const doc = take(data, {
+                          'message': __expectString,
+                        });
+                        Object.assign(contents, doc);
+                        const exception = new ErrorEvent({
+                          $metadata: deserializeMetadata(parsedOutput),
+                          ...contents
+                        });
+                        return __decorateServiceException(exception, parsedOutput.body);
+                      };
+
+                      // se_ClientOptionalDefaults omitted.
+
+                      /**
+                       * serializeAws_restJson1Defaults
+                       */
+                      const se_Defaults = (
+                        input: Defaults,
+                        context: __SerdeContext
+                      ): any => {
+                        return take(input, {
+                          'defaultBlob': context.base64Encoder,
+                          'defaultBoolean': [],
+                          'defaultByte': [],
+                          'defaultDocumentBoolean': _ => se_Document(_, context),
+                          'defaultDocumentList': _ => se_Document(_, context),
+                          'defaultDocumentMap': _ => se_Document(_, context),
+                          'defaultDocumentString': _ => se_Document(_, context),
+                          'defaultDouble': __serializeFloat,
+                          'defaultEnum': [],
+                          'defaultFloat': __serializeFloat,
+                          'defaultIntEnum': [],
+                          'defaultInteger': [],
+                          'defaultList': _json,
+                          'defaultLong': [],
+                          'defaultMap': _json,
+                          'defaultNullDocument': _ => se_Document(_, context),
+                          'defaultShort': [],
+                          'defaultString': [],
+                          'defaultTimestamp': _ => (_.getTime() / 1_000),
+                          'emptyBlob': context.base64Encoder,
+                          'emptyString': [],
+                          'falseBoolean': [],
+                          'zeroByte': [],
+                          'zeroDouble': __serializeFloat,
+                          'zeroFloat': __serializeFloat,
+                          'zeroInteger': [],
+                          'zeroLong': [],
+                          'zeroShort': [],
+                        });
+                      }
+
+                      // se_DenseBooleanMap omitted.
+
+                      // se_DenseNumberMap omitted.
+
+                      // se_DenseSetMap omitted.
+
+                      // se_DenseStringMap omitted.
+
+                      // se_DenseStructMap omitted.
+
+                      // se_Dialog omitted.
+
+                      // se_DialogList omitted.
+
+                      // se_DialogMap omitted.
+
+                      /**
+                       * serializeAws_restJson1Document
+                       */
+                      const se_Document = (
+                        input: __DocumentType,
+                        context: __SerdeContext
+                      ): any => {
+                        return input;
+                      }
+
+                      /**
+                       * serializeAws_restJson1DocumentValuedMap
+                       */
+                      const se_DocumentValuedMap = (
+                        input: Record<string, __DocumentType>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            return acc;
+                          }
+                          acc[key] = se_Document(value, context);
+                          return acc;
+                        }, {});
+                      }
+
+                      // se_ErrorEvent omitted.
+
+                      // se_Farewell omitted.
+
+                      // se_HeadersAndImplicitPayloadEvent omitted.
+
+                      /**
+                       * serializeAws_restJson1HeadersEvent
+                       */
+                      const se_HeadersEvent = (
+                        input: HeadersEvent,
+                        context: __SerdeContext
+                      ): any => {
+                        return take(input, {
+                          'blobHeader': context.base64Encoder,
+                          'booleanHeader': [],
+                          'byteHeader': [],
+                          'intHeader': [],
+                          'longHeader': [],
+                          'shortHeader': [],
+                          'stringHeader': [],
+                          'timestampHeader': __serializeDateTime,
+                        });
+                      }
+
+                      /**
+                       * serializeAws_restJson1MyUnion
+                       */
+                      const se_MyUnion = (
+                        input: MyUnion,
+                        context: __SerdeContext
+                      ): any => {
+                        return MyUnion.visit(input, {
+                          blobValue: value => ({ "blobValue": context.base64Encoder(value) }),
+                          booleanValue: value => ({ "booleanValue": value }),
+                          enumValue: value => ({ "enumValue": value }),
+                          listValue: value => ({ "listValue": _json(value) }),
+                          mapValue: value => ({ "mapValue": _json(value) }),
+                          numberValue: value => ({ "numberValue": value }),
+                          renamedStructureValue: value => ({ "renamedStructureValue": _json(value) }),
+                          stringValue: value => ({ "stringValue": value }),
+                          structureValue: value => ({ "structureValue": _json(value) }),
+                          timestampValue: value => ({ "timestampValue": (value.getTime() / 1_000) }),
+                          unionValue: value => ({ "unionValue": _json(value) }),
+                          _: (name, value) => ({ [name]: value } as any)
+                        });
+                      }
+
+                      // se_NestedPayload omitted.
+
+                      // se_NestedUnion omitted.
+
+                      // se_PayloadConfig omitted.
+
+                      // se_PayloadStructure omitted.
+
+                      // se_PayloadUnion omitted.
+
+                      // se_PlayerAction omitted.
+
+                      /**
+                       * serializeAws_restJson1RecursiveShapesInputOutputNested1
+                       */
+                      const se_RecursiveShapesInputOutputNested1 = (
+                        input: RecursiveShapesInputOutputNested1,
+                        context: __SerdeContext
+                      ): any => {
+                        return take(input, {
+                          'foo': [],
+                          'nested': _ => se_RecursiveShapesInputOutputNested2(_, context),
+                        });
+                      }
+
+                      /**
+                       * serializeAws_restJson1RecursiveShapesInputOutputNested2
+                       */
+                      const se_RecursiveShapesInputOutputNested2 = (
+                        input: RecursiveShapesInputOutputNested2,
+                        context: __SerdeContext
+                      ): any => {
+                        return take(input, {
+                          'bar': [],
+                          'recursiveMember': _ => se_RecursiveShapesInputOutputNested1(_, context),
+                        });
+                      }
+
+                      // se_SimpleList omitted.
+
+                      // se_SimpleMap omitted.
+
+                      // se_SimpleUnion omitted.
+
+                      /**
+                       * serializeAws_restJson1SparseBooleanMap
+                       */
+                      const se_SparseBooleanMap = (
+                        input: Record<string, boolean | null>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key] = null as any;
+                            return acc;
+                          }
+                          acc[key] = value;
+                          return acc;
+                        }, {});
+                      }
+
+                      /**
+                       * serializeAws_restJson1SparseNumberMap
+                       */
+                      const se_SparseNumberMap = (
+                        input: Record<string, number | null>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key] = null as any;
+                            return acc;
+                          }
+                          acc[key] = value;
+                          return acc;
+                        }, {});
+                      }
+
+                      /**
+                       * serializeAws_restJson1SparseSetMap
+                       */
+                      const se_SparseSetMap = (
+                        input: Record<string, string[] | null>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key] = null as any;
+                            return acc;
+                          }
+                          acc[key] = _json(value);
+                          return acc;
+                        }, {});
+                      }
+
+                      /**
+                       * serializeAws_restJson1SparseStructMap
+                       */
+                      const se_SparseStructMap = (
+                        input: Record<string, GreetingStruct | null>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key] = null as any;
+                            return acc;
+                          }
+                          acc[key] = _json(value);
+                          return acc;
+                        }, {});
+                      }
+
+                      /**
+                       * serializeAws_restJson1StructureList
+                       */
+                      const se_StructureList = (
+                        input: StructureListMember[],
+                        context: __SerdeContext
+                      ): any => {
+                        return input.filter((e: any) => e != null).map(entry => {
+                          return se_StructureListMember(entry, context);
+                        });
+                      }
+
+                      /**
+                       * serializeAws_restJson1StructureListMember
+                       */
+                      const se_StructureListMember = (
+                        input: StructureListMember,
+                        context: __SerdeContext
+                      ): any => {
+                        return take(input, {
+                          'value': [,,`a`],
+                          'other': [,,`b`],
+                        });
+                      }
+
+                      // se_TestConfig omitted.
+
+                      // se_TestStringList omitted.
+
+                      // se_TestStringMap omitted.
+
+                      // se_TopLevel omitted.
+
+                      // se_UnionPayload omitted.
+
+                      /**
+                       * serializeAws_restJson1UnionWithJsonName
+                       */
+                      const se_UnionWithJsonName = (
+                        input: UnionWithJsonName,
+                        context: __SerdeContext
+                      ): any => {
+                        return UnionWithJsonName.visit(input, {
+                          bar: value => ({ "bar": value }),
+                          baz: value => ({ "_baz": value }),
+                          foo: value => ({ "FOO": value }),
+                          _: (name, value) => ({ [name]: value } as any)
+                        });
+                      }
+
+                      // se_RenamedGreeting omitted.
+
+                      // se_BooleanList omitted.
+
+                      // se_FooEnumList omitted.
+
+                      // se_FooEnumMap omitted.
+
+                      // se_FooEnumSet omitted.
+
+                      // se_GreetingStruct omitted.
+
+                      // se_IntegerEnumList omitted.
+
+                      // se_IntegerEnumMap omitted.
+
+                      // se_IntegerEnumSet omitted.
+
+                      // se_IntegerList omitted.
+
+                      // se_NestedStringList omitted.
+
+                      /**
+                       * serializeAws_restJson1SparseShortList
+                       */
+                      const se_SparseShortList = (
+                        input: (number | null)[],
+                        context: __SerdeContext
+                      ): any => {
+                        return input;
+                      }
+
+                      /**
+                       * serializeAws_restJson1SparseStringList
+                       */
+                      const se_SparseStringList = (
+                        input: (string | null)[],
+                        context: __SerdeContext
+                      ): any => {
+                        return input;
+                      }
+
+                      /**
+                       * serializeAws_restJson1SparseStringMap
+                       */
+                      const se_SparseStringMap = (
+                        input: Record<string, string | null>,
+                        context: __SerdeContext
+                      ): any => {
+                        return Object.entries(input).reduce((acc: Record<string, any>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key] = null as any;
+                            return acc;
+                          }
+                          acc[key] = value;
+                          return acc;
+                        }, {});
+                      }
+
+                      // se_StringList omitted.
+
+                      // se_StringMap omitted.
+
+                      // se_StringSet omitted.
+
+                      /**
+                       * serializeAws_restJson1TimestampList
+                       */
+                      const se_TimestampList = (
+                        input: Date[],
+                        context: __SerdeContext
+                      ): any => {
+                        return input.filter((e: any) => e != null).map(entry => {
+                          return (entry.getTime() / 1_000);
+                        });
+                      }
+
+                      // se_Unit omitted.
+
+                      /**
+                       * deserializeAws_restJson1ComplexNestedErrorData
+                       */
+                      const de_ComplexNestedErrorData = (
+                        output: any,
+                        context: __SerdeContext
+                      ): ComplexNestedErrorData => {
+                        return take(output, {
+                          'Foo': [,__expectString,`Fooooo`],
+                        }) as any;
+                      }
+
+                      // de_DenseBooleanMap omitted.
+
+                      // de_DenseNumberMap omitted.
+
+                      // de_DenseSetMap omitted.
+
+                      // de_DenseStringMap omitted.
+
+                      // de_DenseStructMap omitted.
+
+                      // de_Dialog omitted.
+
+                      // de_DialogList omitted.
+
+                      // de_DialogMap omitted.
+
+                      /**
+                       * deserializeAws_restJson1Document
+                       */
+                      const de_Document = (
+                        output: any,
+                        context: __SerdeContext
+                      ): __DocumentType => {
+                        return output;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1DocumentValuedMap
+                       */
+                      const de_DocumentValuedMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, __DocumentType> => {
+                        return Object.entries(output).reduce((acc: Record<string, __DocumentType>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            return acc;
+                          }
+                          acc[key as string] = de_Document(value, context);
+                          return acc;
+
+                        }, {} as Record<string, __DocumentType>);}
+
+                      // de_Farewell omitted.
+
+                      // de_HeadersAndImplicitPayloadEvent omitted.
+
+                      /**
+                       * deserializeAws_restJson1HeadersEvent
+                       */
+                      const de_HeadersEvent = (
+                        output: any,
+                        context: __SerdeContext
+                      ): HeadersEvent => {
+                        return take(output, {
+                          'blobHeader': context.base64Decoder,
+                          'booleanHeader': __expectBoolean,
+                          'byteHeader': __expectByte,
+                          'intHeader': __expectInt32,
+                          'longHeader': __expectLong,
+                          'shortHeader': __expectShort,
+                          'stringHeader': __expectString,
+                          'timestampHeader': (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+                        }) as any;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1MyUnion
+                       */
+                      const de_MyUnion = (
+                        output: any,
+                        context: __SerdeContext
+                      ): MyUnion => {
+                        if (output.blobValue != null) {
+                          return {
+                            blobValue: context.base64Decoder(output.blobValue)
+                          };
+                        }
+                        if (__expectBoolean(output.booleanValue) !== undefined) {
+                          return { booleanValue: __expectBoolean(output.booleanValue) as any }
+                        }
+                        if (__expectString(output.enumValue) !== undefined) {
+                          return { enumValue: __expectString(output.enumValue) as any }
+                        }
+                        if (output.listValue != null) {
+                          return {
+                            listValue: _json(output.listValue)
+                          };
+                        }
+                        if (output.mapValue != null) {
+                          return {
+                            mapValue: _json(output.mapValue)
+                          };
+                        }
+                        if (__expectInt32(output.numberValue) !== undefined) {
+                          return { numberValue: __expectInt32(output.numberValue) as any }
+                        }
+                        if (output.renamedStructureValue != null) {
+                          return {
+                            renamedStructureValue: _json(output.renamedStructureValue)
+                          };
+                        }
+                        if (__expectString(output.stringValue) !== undefined) {
+                          return { stringValue: __expectString(output.stringValue) as any }
+                        }
+                        if (output.structureValue != null) {
+                          return {
+                            structureValue: _json(output.structureValue)
+                          };
+                        }
+                        if (output.timestampValue != null) {
+                          return {
+                            timestampValue: __expectNonNull(__parseEpochTimestamp(__expectNumber(output.timestampValue)))
+                          };
+                        }
+                        if (output.unionValue != null) {
+                          return {
+                            unionValue: _json(__expectUnion(output.unionValue))
+                          };
+                        }
+                        return { $unknown: Object.entries(output)[0] };
+                      }
+
+                      // de_NestedPayload omitted.
+
+                      // de_NestedUnion omitted.
+
+                      // de_PayloadConfig omitted.
+
+                      // de_PayloadStructure omitted.
+
+                      // de_PayloadUnion omitted.
+
+                      // de_PlayerAction omitted.
+
+                      /**
+                       * deserializeAws_restJson1RecursiveShapesInputOutputNested1
+                       */
+                      const de_RecursiveShapesInputOutputNested1 = (
+                        output: any,
+                        context: __SerdeContext
+                      ): RecursiveShapesInputOutputNested1 => {
+                        return take(output, {
+                          'foo': __expectString,
+                          'nested': (_: any) => de_RecursiveShapesInputOutputNested2(_, context),
+                        }) as any;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1RecursiveShapesInputOutputNested2
+                       */
+                      const de_RecursiveShapesInputOutputNested2 = (
+                        output: any,
+                        context: __SerdeContext
+                      ): RecursiveShapesInputOutputNested2 => {
+                        return take(output, {
+                          'bar': __expectString,
+                          'recursiveMember': (_: any) => de_RecursiveShapesInputOutputNested1(_, context),
+                        }) as any;
+                      }
+
+                      // de_SingletonEvent omitted.
+
+                      // de_SingletonEventStream omitted.
+
+                      /**
+                       * deserializeAws_restJson1SparseBooleanMap
+                       */
+                      const de_SparseBooleanMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, boolean | null> => {
+                        return Object.entries(output).reduce((acc: Record<string, boolean | null>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key as string] = null as any;
+                            return acc;
+                          }
+                          acc[key as string] = __expectBoolean(value) as any;
+                          return acc;
+
+                        }, {} as Record<string, boolean | null>);}
+
+                      /**
+                       * deserializeAws_restJson1SparseNumberMap
+                       */
+                      const de_SparseNumberMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, number | null> => {
+                        return Object.entries(output).reduce((acc: Record<string, number | null>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key as string] = null as any;
+                            return acc;
+                          }
+                          acc[key as string] = __expectInt32(value) as any;
+                          return acc;
+
+                        }, {} as Record<string, number | null>);}
+
+                      /**
+                       * deserializeAws_restJson1SparseSetMap
+                       */
+                      const de_SparseSetMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, string[] | null> => {
+                        return Object.entries(output).reduce((acc: Record<string, string[] | null>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key as string] = null as any;
+                            return acc;
+                          }
+                          acc[key as string] = _json(value);
+                          return acc;
+
+                        }, {} as Record<string, string[] | null>);}
+
+                      /**
+                       * deserializeAws_restJson1SparseStructMap
+                       */
+                      const de_SparseStructMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, GreetingStruct | null> => {
+                        return Object.entries(output).reduce((acc: Record<string, GreetingStruct | null>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key as string] = null as any;
+                            return acc;
+                          }
+                          acc[key as string] = _json(value);
+                          return acc;
+
+                        }, {} as Record<string, GreetingStruct | null>);}
+
+                      /**
+                       * deserializeAws_restJson1StructureList
+                       */
+                      const de_StructureList = (
+                        output: any,
+                        context: __SerdeContext
+                      ): StructureListMember[] => {
+                        const retVal = (output || []).filter((e: any) => e != null).map((entry: any) => {
+                          return de_StructureListMember(entry, context);
+                        });
+                        return retVal;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1StructureListMember
+                       */
+                      const de_StructureListMember = (
+                        output: any,
+                        context: __SerdeContext
+                      ): StructureListMember => {
+                        return take(output, {
+                          'a': [,__expectString,`value`],
+                          'b': [,__expectString,`other`],
+                        }) as any;
+                      }
+
+                      // de_TestConfig omitted.
+
+                      // de_TestStringList omitted.
+
+                      // de_TestStringMap omitted.
+
+                      // de_UnionPayload omitted.
+
+                      /**
+                       * deserializeAws_restJson1UnionWithJsonName
+                       */
+                      const de_UnionWithJsonName = (
+                        output: any,
+                        context: __SerdeContext
+                      ): UnionWithJsonName => {
+                        if (__expectString(output.bar) !== undefined) {
+                          return { bar: __expectString(output.bar) as any }
+                        }
+                        if (__expectString(output._baz) !== undefined) {
+                          return { baz: __expectString(output._baz) as any }
+                        }
+                        if (__expectString(output.FOO) !== undefined) {
+                          return { foo: __expectString(output.FOO) as any }
+                        }
+                        return { $unknown: Object.entries(output)[0] };
+                      }
+
+                      // de_RenamedGreeting omitted.
+
+                      // de_BooleanList omitted.
+
+                      // de_FooEnumList omitted.
+
+                      // de_FooEnumMap omitted.
+
+                      // de_FooEnumSet omitted.
+
+                      // de_GreetingStruct omitted.
+
+                      // de_IntegerEnumList omitted.
+
+                      // de_IntegerEnumMap omitted.
+
+                      // de_IntegerEnumSet omitted.
+
+                      // de_IntegerList omitted.
+
+                      // de_NestedStringList omitted.
+
+                      /**
+                       * deserializeAws_restJson1SparseShortList
+                       */
+                      const de_SparseShortList = (
+                        output: any,
+                        context: __SerdeContext
+                      ): (number | null)[] => {
+                        const retVal = (output || []).map((entry: any) => {
+                          if (entry === null) {
+                            return null as any;
+                          }
+                          return __expectShort(entry) as any;
+                        });
+                        return retVal;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1SparseStringList
+                       */
+                      const de_SparseStringList = (
+                        output: any,
+                        context: __SerdeContext
+                      ): (string | null)[] => {
+                        const retVal = (output || []).map((entry: any) => {
+                          if (entry === null) {
+                            return null as any;
+                          }
+                          return __expectString(entry) as any;
+                        });
+                        return retVal;
+                      }
+
+                      /**
+                       * deserializeAws_restJson1SparseStringMap
+                       */
+                      const de_SparseStringMap = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Record<string, string | null> => {
+                        return Object.entries(output).reduce((acc: Record<string, string | null>, [key, value]: [string, any]) => {
+                          if (value === null) {
+                            acc[key as string] = null as any;
+                            return acc;
+                          }
+                          acc[key as string] = __expectString(value) as any;
+                          return acc;
+
+                        }, {} as Record<string, string | null>);}
+
+                      // de_StringList omitted.
+
+                      // de_StringMap omitted.
+
+                      // de_StringSet omitted.
+
+                      /**
+                       * deserializeAws_restJson1TimestampList
+                       */
+                      const de_TimestampList = (
+                        output: any,
+                        context: __SerdeContext
+                      ): Date[] => {
+                        const retVal = (output || []).filter((e: any) => e != null).map((entry: any) => {
+                          return __expectNonNull(__parseEpochTimestamp(__expectNumber(entry)));
+                        });
+                        return retVal;
+                      }
+
+                      // de_Unit omitted.
+
+                      const deserializeMetadata = (output: __HttpResponse): __ResponseMetadata => ({
+                        httpStatusCode: output.statusCode,
+                        requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"] ?? output.headers["x-amz-request-id"],
+                        extendedRequestId: output.headers["x-amz-id-2"],
+                        cfId: output.headers["x-amz-cf-id"],
+                      });
+
+                      // Encode Uint8Array data into string with utf-8.
+                      const collectBodyString = (streamBody: any, context: __SerdeContext): Promise<string> => collectBody(streamBody, context).then(body => context.utf8Encoder(body))
+
+                      const _B = "Byte";
+                      const _BL = "BooleanList";
+                      const _Bo = "Boolean";
+                      const _D = "Double";
+                      const _DL = "DoubleList";
+                      const _E = "Enum";
+                      const _EL = "EnumList";
+                      const _Em = "Empty";
+                      const _F = "Float";
+                      const _H = "Header";
+                      const _I = "Integer";
+                      const _IE = "IntegerEnum";
+                      const _IEL = "IntegerEnumList";
+                      const _IL = "IntegerList";
+                      const _IS = "IntegerSet";
+                      const _L = "Long";
+                      const _N = "Null";
+                      const _S = "String";
+                      const _SL = "StringList";
+                      const _SS = "StringSet";
+                      const _Sh = "Short";
+                      const _T = "Timestamp";
+                      const _TL = "TimestampList";
+                      const _a = "a";
+                      const _amth = "amz-media-typed-header";
+                      const _b = "baz";
+                      const _bH = "booleanHeader";
+                      const _bHl = "blobHeader";
+                      const _bHy = "byteHeader";
+                      const _bIH = "booleanInHeader";
+                      const _bIHy = "byteInHeader";
+                      const _bIQ = "booleanInQuery";
+                      const _bIQy = "byteInQuery";
+                      const _b_ = "b";
+                      const _ba = "bar";
+                      const _bl = "blob";
+                      const _bo = "booleaninheader";
+                      const _by = "byteinheader";
+                      const _c = "c";
+                      const _cT = "contentType";
+                      const _ce = "content-encoding";
+                      const _co = "corge";
+                      const _ct = "content-type";
+                      const _d = "doubleinheader";
+                      const _dF = "defaultFormat";
+                      const _dIH = "doubleInHeader";
+                      const _dIQ = "doubleInQuery";
+                      const _e = "encoding";
+                      const _eS = "emptyString";
+                      const _f = "foo";
+                      const _fIH = "floatInHeader";
+                      const _fIQ = "floatInQuery";
+                      const _fl = "floatinheader";
+                      const _g = "greeting";
+                      const _h = "hello";
+                      const _hB = "headerByte";
+                      const _hBL = "headerBooleanList";
+                      const _hD = "headerDouble";
+                      const _hE = "headerEnum";
+                      const _hEL = "headerEnumList";
+                      const _hF = "headerFloat";
+                      const _hFB = "headerFalseBool";
+                      const _hI = "headerInteger";
+                      const _hIE = "headerIntegerEnum";
+                      const _hIEL = "headerIntegerEnumList";
+                      const _hIL = "headerIntegerList";
+                      const _hL = "headerLong";
+                      const _hS = "headerString";
+                      const _hSL = "headerStringList";
+                      const _hSS = "headerStringSet";
+                      const _hSe = "headerShort";
+                      const _hTB = "headerTrueBool";
+                      const _hTL = "headerTimestampList";
+                      const _he = "header";
+                      const _i = "integerinheader";
+                      const _iH = "intHeader";
+                      const _iIH = "integerInHeader";
+                      const _iIQ = "integerInQuery";
+                      const _iRM = "initialRequestMember";
+                      const _iRMn = "initialResponseMember";
+                      const _irm = "initial-request-member";
+                      const _irm_ = "initial-response-member";
+                      const _j = "json";
+                      const _l = "longinheader";
+                      const _lH = "longHeader";
+                      const _lIH = "longInHeader";
+                      const _lIQ = "longInQuery";
+                      const _mDT = "memberDateTime";
+                      const _mES = "memberEpochSeconds";
+                      const _mHD = "memberHttpDate";
+                      const _mS = "maybeSet";
+                      const _nV = "nullValue";
+                      const _q = "qux";
+                      const _qB = "queryByte";
+                      const _qBL = "queryBooleanList";
+                      const _qBu = "queryBoolean";
+                      const _qD = "queryDouble";
+                      const _qDL = "queryDoubleList";
+                      const _qE = "queryEnum";
+                      const _qEL = "queryEnumList";
+                      const _qF = "queryFloat";
+                      const _qI = "queryInteger";
+                      const _qIE = "queryIntegerEnum";
+                      const _qIEL = "queryIntegerEnumList";
+                      const _qIL = "queryIntegerList";
+                      const _qIS = "queryIntegerSet";
+                      const _qL = "queryLong";
+                      const _qS = "queryString";
+                      const _qSL = "queryStringList";
+                      const _qSS = "queryStringSet";
+                      const _qSu = "queryShort";
+                      const _qT = "queryTimestamp";
+                      const _qTL = "queryTimestampList";
+                      const _s = "shortinheader";
+                      const _sH = "specificHeader";
+                      const _sHh = "shortHeader";
+                      const _sHt = "stringHeader";
+                      const _sIH = "shortInHeader";
+                      const _sIQ = "shortInQuery";
+                      const _t = "timestamp";
+                      const _tDT = "targetDateTime";
+                      const _tES = "targetEpochSeconds";
+                      const _tH = "timestampHeader";
+                      const _tHD = "targetHttpDate";
+                      const _tI = "testId";
+                      const _to = "token";
+                      const _xa = "x-a";
+                      const _xati = "x-amz-test-id";
+                      const _xb = "x-byte";
+                      const _xb_ = "x-boolean1";
+                      const _xb__ = "x-boolean2";
+                      const _xb___ = "x-booleanlist";
+                      const _xb____ = "x-b";
+                      const _xc = "x-c";
+                      const _xd = "x-double";
+                      const _xd_ = "x-defaultformat";
+                      const _xe = "x-enum";
+                      const _xe_ = "x-enumlist";
+                      const _xf = "x-foo";
+                      const _xf_ = "x-float";
+                      const _xg = "x-greeting";
+                      const _xh = "x-header";
+                      const _xi = "x-integer";
+                      const _xi_ = "x-integerlist";
+                      const _xi__ = "x-integerenum";
+                      const _xi___ = "x-integerenumlist";
+                      const _xj = "x-json";
+                      const _xl = "x-long";
+                      const _xm = "x-memberepochseconds";
+                      const _xm_ = "x-memberhttpdate";
+                      const _xm__ = "x-memberdatetime";
+                      const _xs = "x-string";
+                      const _xs_ = "x-short";
+                      const _xs__ = "x-stringlist";
+                      const _xs___ = "x-stringset";
+                      const _xt = "x-timestamplist";
+                      const _xt_ = "x-targetepochseconds";
+                      const _xt__ = "x-targethttpdate";
+                      const _xt___ = "x-targetdatetime";

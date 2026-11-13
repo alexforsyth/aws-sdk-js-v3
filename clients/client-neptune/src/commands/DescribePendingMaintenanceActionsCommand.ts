@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePendingMaintenanceActionsMessage, PendingMaintenanceActionsMessage } from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryDescribePendingMaintenanceActionsCommand,
-  serializeAws_queryDescribePendingMaintenanceActionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePendingMaintenanceActionsMessage, PendingMaintenanceActionsMessage } from "../models/models_0";
+import { DescribePendingMaintenanceActions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePendingMaintenanceActionsCommand}.
+ */
 export interface DescribePendingMaintenanceActionsCommandInput extends DescribePendingMaintenanceActionsMessage {}
-export interface DescribePendingMaintenanceActionsCommandOutput
-  extends PendingMaintenanceActionsMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePendingMaintenanceActionsCommand}.
+ */
+export interface DescribePendingMaintenanceActionsCommandOutput extends PendingMaintenanceActionsMessage, __MetadataBearer {}
 
 /**
  * <p>Returns a list of resources (for example, DB instances) that have at least one pending
@@ -31,74 +30,75 @@ export interface DescribePendingMaintenanceActionsCommandOutput
  * ```javascript
  * import { NeptuneClient, DescribePendingMaintenanceActionsCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, DescribePendingMaintenanceActionsCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // DescribePendingMaintenanceActionsMessage
+ *   ResourceIdentifier: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   Marker: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ * };
  * const command = new DescribePendingMaintenanceActionsCommand(input);
  * const response = await client.send(command);
+ * // { // PendingMaintenanceActionsMessage
+ * //   PendingMaintenanceActions: [ // PendingMaintenanceActions
+ * //     { // ResourcePendingMaintenanceActions
+ * //       ResourceIdentifier: "STRING_VALUE",
+ * //       PendingMaintenanceActionDetails: [ // PendingMaintenanceActionDetails
+ * //         { // PendingMaintenanceAction
+ * //           Action: "STRING_VALUE",
+ * //           AutoAppliedAfterDate: new Date("TIMESTAMP"),
+ * //           ForcedApplyDate: new Date("TIMESTAMP"),
+ * //           OptInStatus: "STRING_VALUE",
+ * //           CurrentApplyDate: new Date("TIMESTAMP"),
+ * //           Description: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribePendingMaintenanceActionsCommandInput - {@link DescribePendingMaintenanceActionsCommandInput}
+ * @returns {@link DescribePendingMaintenanceActionsCommandOutput}
  * @see {@link DescribePendingMaintenanceActionsCommandInput} for command's `input` shape.
  * @see {@link DescribePendingMaintenanceActionsCommandOutput} for command's `response` shape.
- * @see {@link NeptuneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The specified resource ID was not found.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePendingMaintenanceActionsCommand extends $Command<
-  DescribePendingMaintenanceActionsCommandInput,
-  DescribePendingMaintenanceActionsCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePendingMaintenanceActionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePendingMaintenanceActionsCommandInput, DescribePendingMaintenanceActionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "DescribePendingMaintenanceActionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePendingMaintenanceActionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: PendingMaintenanceActionsMessage.filterSensitiveLog,
+export class DescribePendingMaintenanceActionsCommand extends command<DescribePendingMaintenanceActionsCommandInput, DescribePendingMaintenanceActionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePendingMaintenanceActions",
+  DescribePendingMaintenanceActions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePendingMaintenanceActionsMessage;
+      output: PendingMaintenanceActionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribePendingMaintenanceActionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribePendingMaintenanceActionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribePendingMaintenanceActionsCommandOutput> {
-    return deserializeAws_queryDescribePendingMaintenanceActionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePendingMaintenanceActionsCommandInput;
+      output: DescribePendingMaintenanceActionsCommandOutput;
+    };
+  };
 }

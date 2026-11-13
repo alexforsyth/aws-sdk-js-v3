@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { CloudFormation } from "../CloudFormation";
 import { CloudFormationClient } from "../CloudFormationClient";
 import {
   ListStackInstancesCommand,
   ListStackInstancesCommandInput,
   ListStackInstancesCommandOutput,
 } from "../commands/ListStackInstancesCommand";
-import { CloudFormationPaginationConfiguration } from "./Interfaces";
+import type { CloudFormationPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: CloudFormationClient,
-  input: ListStackInstancesCommandInput,
-  ...args: any
-): Promise<ListStackInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListStackInstancesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: CloudFormation,
-  input: ListStackInstancesCommandInput,
-  ...args: any
-): Promise<ListStackInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.listStackInstances(input, ...args);
-};
-export async function* paginateListStackInstances(
+export const paginateListStackInstances: (
   config: CloudFormationPaginationConfiguration,
   input: ListStackInstancesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListStackInstancesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListStackInstancesCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof CloudFormation) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof CloudFormationClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected CloudFormation | CloudFormationClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListStackInstancesCommandOutput> = createPaginator<
+  CloudFormationPaginationConfiguration,
+  ListStackInstancesCommandInput,
+  ListStackInstancesCommandOutput
+>(CloudFormationClient, ListStackInstancesCommand, "NextToken", "NextToken", "MaxResults");

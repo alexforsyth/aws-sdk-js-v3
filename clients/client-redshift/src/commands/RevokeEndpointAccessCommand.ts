@@ -1,25 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EndpointAuthorization } from "../models/models_0";
-import { RevokeEndpointAccessMessage } from "../models/models_1";
-import {
-  deserializeAws_queryRevokeEndpointAccessCommand,
-  serializeAws_queryRevokeEndpointAccessCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EndpointAuthorization } from "../models/models_0";
+import type { RevokeEndpointAccessMessage } from "../models/models_1";
+import { RevokeEndpointAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RevokeEndpointAccessCommand}.
+ */
 export interface RevokeEndpointAccessCommandInput extends RevokeEndpointAccessMessage {}
+/**
+ * @public
+ *
+ * The output of {@link RevokeEndpointAccessCommand}.
+ */
 export interface RevokeEndpointAccessCommandOutput extends EndpointAuthorization, __MetadataBearer {}
 
 /**
@@ -29,68 +30,84 @@ export interface RevokeEndpointAccessCommandOutput extends EndpointAuthorization
  * ```javascript
  * import { RedshiftClient, RevokeEndpointAccessCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, RevokeEndpointAccessCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // RevokeEndpointAccessMessage
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   Account: "STRING_VALUE",
+ *   VpcIds: [ // VpcIdentifierList
+ *     "STRING_VALUE",
+ *   ],
+ *   Force: true || false,
+ * };
  * const command = new RevokeEndpointAccessCommand(input);
  * const response = await client.send(command);
+ * // { // EndpointAuthorization
+ * //   Grantor: "STRING_VALUE",
+ * //   Grantee: "STRING_VALUE",
+ * //   ClusterIdentifier: "STRING_VALUE",
+ * //   AuthorizeTime: new Date("TIMESTAMP"),
+ * //   ClusterStatus: "STRING_VALUE",
+ * //   Status: "Authorized" || "Revoking",
+ * //   AllowedAllVPCs: true || false,
+ * //   AllowedVPCs: [ // VpcIdentifierList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   EndpointCount: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param RevokeEndpointAccessCommandInput - {@link RevokeEndpointAccessCommandInput}
+ * @returns {@link RevokeEndpointAccessCommandOutput}
  * @see {@link RevokeEndpointAccessCommandInput} for command's `input` shape.
  * @see {@link RevokeEndpointAccessCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link EndpointAuthorizationNotFoundFault} (client fault)
+ *  <p>The authorization for this endpoint can't be found.</p>
+ *
+ * @throws {@link EndpointNotFoundFault} (client fault)
+ *  <p>The endpoint name doesn't refer to an existing endpoint.</p>
+ *
+ * @throws {@link InvalidAuthorizationStateFault} (client fault)
+ *  <p>The status of the authorization is not valid.</p>
+ *
+ * @throws {@link InvalidClusterSecurityGroupStateFault} (client fault)
+ *  <p>The state of the cluster security group is not <code>available</code>. </p>
+ *
+ * @throws {@link InvalidClusterStateFault} (client fault)
+ *  <p>The specified cluster is not in the <code>available</code> state. </p>
+ *
+ * @throws {@link InvalidEndpointStateFault} (client fault)
+ *  <p>The status of the endpoint is not valid.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class RevokeEndpointAccessCommand extends $Command<
-  RevokeEndpointAccessCommandInput,
-  RevokeEndpointAccessCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RevokeEndpointAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RevokeEndpointAccessCommandInput, RevokeEndpointAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "RevokeEndpointAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RevokeEndpointAccessMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EndpointAuthorization.filterSensitiveLog,
+export class RevokeEndpointAccessCommand extends command<RevokeEndpointAccessCommandInput, RevokeEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "RevokeEndpointAccess",
+  RevokeEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RevokeEndpointAccessMessage;
+      output: EndpointAuthorization;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RevokeEndpointAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRevokeEndpointAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RevokeEndpointAccessCommandOutput> {
-    return deserializeAws_queryRevokeEndpointAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RevokeEndpointAccessCommandInput;
+      output: RevokeEndpointAccessCommandOutput;
+    };
+  };
 }

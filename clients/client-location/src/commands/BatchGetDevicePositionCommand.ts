@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { BatchGetDevicePositionRequest, BatchGetDevicePositionResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchGetDevicePositionCommand,
-  serializeAws_restJson1BatchGetDevicePositionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetDevicePositionRequest, BatchGetDevicePositionResponse } from "../models/models_0";
+import { BatchGetDevicePosition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetDevicePositionCommand}.
+ */
 export interface BatchGetDevicePositionCommandInput extends BatchGetDevicePositionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetDevicePositionCommand}.
+ */
 export interface BatchGetDevicePositionCommandOutput extends BatchGetDevicePositionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface BatchGetDevicePositionCommandOutput extends BatchGetDevicePosit
  * ```javascript
  * import { LocationClient, BatchGetDevicePositionCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, BatchGetDevicePositionCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // BatchGetDevicePositionRequest
+ *   TrackerName: "STRING_VALUE", // required
+ *   DeviceIds: [ // IdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetDevicePositionCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetDevicePositionResponse
+ * //   Errors: [ // BatchGetDevicePositionErrorList // required
+ * //     { // BatchGetDevicePositionError
+ * //       DeviceId: "STRING_VALUE", // required
+ * //       Error: { // BatchItemError
+ * //         Code: "STRING_VALUE",
+ * //         Message: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   DevicePositions: [ // DevicePositionList // required
+ * //     { // DevicePosition
+ * //       DeviceId: "STRING_VALUE",
+ * //       SampleTime: new Date("TIMESTAMP"), // required
+ * //       ReceivedTime: new Date("TIMESTAMP"), // required
+ * //       Position: [ // Position // required
+ * //         Number("double"),
+ * //       ],
+ * //       Accuracy: { // PositionalAccuracy
+ * //         Horizontal: Number("double"), // required
+ * //       },
+ * //       PositionProperties: { // PositionPropertyMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetDevicePositionCommandInput - {@link BatchGetDevicePositionCommandInput}
+ * @returns {@link BatchGetDevicePositionCommandOutput}
  * @see {@link BatchGetDevicePositionCommandInput} for command's `input` shape.
  * @see {@link BatchGetDevicePositionCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetDevicePositionCommand extends $Command<
-  BatchGetDevicePositionCommandInput,
-  BatchGetDevicePositionCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetDevicePositionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetDevicePositionCommandInput, BatchGetDevicePositionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "BatchGetDevicePositionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetDevicePositionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetDevicePositionResponse.filterSensitiveLog,
+export class BatchGetDevicePositionCommand extends command<BatchGetDevicePositionCommandInput, BatchGetDevicePositionCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetDevicePosition",
+  BatchGetDevicePosition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetDevicePositionRequest;
+      output: BatchGetDevicePositionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetDevicePositionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchGetDevicePositionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchGetDevicePositionCommandOutput> {
-    return deserializeAws_restJson1BatchGetDevicePositionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetDevicePositionCommandInput;
+      output: BatchGetDevicePositionCommandOutput;
+    };
+  };
 }

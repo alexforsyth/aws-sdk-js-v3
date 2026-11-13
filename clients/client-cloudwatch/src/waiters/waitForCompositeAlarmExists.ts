@@ -1,18 +1,30 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CloudWatchClient } from "../CloudWatchClient";
-import { DescribeAlarmsCommand, DescribeAlarmsCommandInput } from "../commands/DescribeAlarmsCommand";
+import type { CloudWatchClient } from "../CloudWatchClient";
+import {
+  type DescribeAlarmsCommandInput,
+  type DescribeAlarmsCommandOutput,
+  DescribeAlarmsCommand,
+} from "../commands/DescribeAlarmsCommand";
+import type { CloudWatchServiceException } from "../models/CloudWatchServiceException";
 
-const checkState = async (client: CloudWatchClient, input: DescribeAlarmsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: CloudWatchClient, input: DescribeAlarmsCommandInput): Promise<WaiterResult<DescribeAlarmsCommandOutput | CloudWatchServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeAlarmsCommand(input));
+    let result: DescribeAlarmsCommandOutput & any = await client.send(new DescribeAlarmsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.CompositeAlarms);
-        return flat_1.length > 0.0;
-      };
+        let flat_1: any[] = [].concat(...result.CompositeAlarms);
+        return (flat_1.length > 0);
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -29,7 +41,7 @@ const checkState = async (client: CloudWatchClient, input: DescribeAlarmsCommand
 export const waitForCompositeAlarmExists = async (
   params: WaiterConfiguration<CloudWatchClient>,
   input: DescribeAlarmsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAlarmsCommandOutput | CloudWatchServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -41,8 +53,8 @@ export const waitForCompositeAlarmExists = async (
 export const waitUntilCompositeAlarmExists = async (
   params: WaiterConfiguration<CloudWatchClient>,
   input: DescribeAlarmsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeAlarmsCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeAlarmsCommandOutput>;
 };

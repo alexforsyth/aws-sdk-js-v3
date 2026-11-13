@@ -1,0 +1,522 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDataSourceRequest, CreateDataSourceResponse } from "../models/models_0";
+import { CreateDataSource$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDataSourceCommand}.
+ */
+export interface CreateDataSourceCommandInput extends CreateDataSourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDataSourceCommand}.
+ */
+export interface CreateDataSourceCommandOutput extends CreateDataSourceResponse, __MetadataBearer {}
+
+/**
+ * <p>Connects a knowledge base to a data source. You specify the configuration for the specific data source service in the <code>dataSourceConfiguration</code> field.</p> <important> <p>You can't change the <code>chunkingConfiguration</code> after you create the data source connector.</p> </important>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BedrockAgentClient, CreateDataSourceCommand } from "@aws-sdk/client-bedrock-agent"; // ES Modules import
+ * // const { BedrockAgentClient, CreateDataSourceCommand } = require("@aws-sdk/client-bedrock-agent"); // CommonJS import
+ * // import type { BedrockAgentClientConfig } from "@aws-sdk/client-bedrock-agent";
+ * const config = {}; // type is BedrockAgentClientConfig
+ * const client = new BedrockAgentClient(config);
+ * const input = { // CreateDataSourceRequest
+ *   knowledgeBaseId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   dataSourceConfiguration: { // DataSourceConfiguration
+ *     type: "S3" || "WEB" || "CONFLUENCE" || "SALESFORCE" || "SHAREPOINT" || "CUSTOM" || "REDSHIFT_METADATA" || "MANAGED_KNOWLEDGE_BASE_CONNECTOR", // required
+ *     managedKnowledgeBaseConnectorConfiguration: { // ManagedKnowledgeBaseConnectorConfiguration
+ *       deletionProtectionConfiguration: { // DeletionProtectionConfiguration
+ *         deletionProtectionStatus: "ENABLED" || "DISABLED", // required
+ *         deletionProtectionThreshold: Number("int"),
+ *       },
+ *       mediaExtractionConfiguration: { // MediaExtractionConfiguration
+ *         imageExtractionConfiguration: { // ImageExtractionConfiguration
+ *           imageExtractionStatus: "ENABLED" || "DISABLED", // required
+ *         },
+ *         audioExtractionConfiguration: { // AudioExtractionConfiguration
+ *           audioExtractionStatus: "ENABLED" || "DISABLED", // required
+ *         },
+ *         videoExtractionConfiguration: { // VideoExtractionConfiguration
+ *           videoExtractionStatus: "ENABLED" || "DISABLED", // required
+ *         },
+ *       },
+ *       connectorParameters: "DOCUMENT_VALUE",
+ *       syncSchedule: { // SyncSchedule Union: only one key present
+ *         daily: {},
+ *         weekly: { // WeeklySchedule
+ *           dayOfWeek: "SUNDAY" || "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY", // required
+ *         },
+ *         monthly: { // MonthlySchedule
+ *           dayOfMonth: { // DayOfMonth Union: only one key present
+ *             dayNumber: Number("int"),
+ *             lastDayOfMonth: {},
+ *           },
+ *         },
+ *       },
+ *     },
+ *     s3Configuration: { // S3DataSourceConfiguration
+ *       bucketArn: "STRING_VALUE", // required
+ *       inclusionPrefixes: [ // S3Prefixes
+ *         "STRING_VALUE",
+ *       ],
+ *       bucketOwnerAccountId: "STRING_VALUE",
+ *     },
+ *     webConfiguration: { // WebDataSourceConfiguration
+ *       sourceConfiguration: { // WebSourceConfiguration
+ *         urlConfiguration: { // UrlConfiguration
+ *           seedUrls: [ // SeedUrls
+ *             { // SeedUrl
+ *               url: "STRING_VALUE",
+ *             },
+ *           ],
+ *         },
+ *       },
+ *       crawlerConfiguration: { // WebCrawlerConfiguration
+ *         crawlerLimits: { // WebCrawlerLimits
+ *           rateLimit: Number("int"),
+ *           maxPages: Number("int"),
+ *         },
+ *         inclusionFilters: [ // FilterList
+ *           "STRING_VALUE",
+ *         ],
+ *         exclusionFilters: [
+ *           "STRING_VALUE",
+ *         ],
+ *         scope: "HOST_ONLY" || "SUBDOMAINS",
+ *         userAgent: "STRING_VALUE",
+ *         userAgentHeader: "STRING_VALUE",
+ *       },
+ *     },
+ *     confluenceConfiguration: { // ConfluenceDataSourceConfiguration
+ *       sourceConfiguration: { // ConfluenceSourceConfiguration
+ *         hostUrl: "STRING_VALUE", // required
+ *         hostType: "SAAS", // required
+ *         authType: "BASIC" || "OAUTH2_CLIENT_CREDENTIALS", // required
+ *         credentialsSecretArn: "STRING_VALUE", // required
+ *       },
+ *       crawlerConfiguration: { // ConfluenceCrawlerConfiguration
+ *         filterConfiguration: { // CrawlFilterConfiguration
+ *           type: "PATTERN", // required
+ *           patternObjectFilter: { // PatternObjectFilterConfiguration
+ *             filters: [ // PatternObjectFilterList // required
+ *               { // PatternObjectFilter
+ *                 objectType: "STRING_VALUE", // required
+ *                 inclusionFilters: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 exclusionFilters: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *               },
+ *             ],
+ *           },
+ *         },
+ *       },
+ *     },
+ *     salesforceConfiguration: { // SalesforceDataSourceConfiguration
+ *       sourceConfiguration: { // SalesforceSourceConfiguration
+ *         hostUrl: "STRING_VALUE", // required
+ *         authType: "OAUTH2_CLIENT_CREDENTIALS", // required
+ *         credentialsSecretArn: "STRING_VALUE", // required
+ *       },
+ *       crawlerConfiguration: { // SalesforceCrawlerConfiguration
+ *         filterConfiguration: {
+ *           type: "PATTERN", // required
+ *           patternObjectFilter: {
+ *             filters: [ // required
+ *               {
+ *                 objectType: "STRING_VALUE", // required
+ *                 inclusionFilters: [
+ *                   "STRING_VALUE",
+ *                 ],
+ *                 exclusionFilters: "<FilterList>",
+ *               },
+ *             ],
+ *           },
+ *         },
+ *       },
+ *     },
+ *     sharePointConfiguration: { // SharePointDataSourceConfiguration
+ *       sourceConfiguration: { // SharePointSourceConfiguration
+ *         tenantId: "STRING_VALUE",
+ *         domain: "STRING_VALUE", // required
+ *         siteUrls: [ // SharePointSiteUrls // required
+ *           "STRING_VALUE",
+ *         ],
+ *         hostType: "ONLINE", // required
+ *         authType: "OAUTH2_CLIENT_CREDENTIALS" || "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS", // required
+ *         credentialsSecretArn: "STRING_VALUE", // required
+ *       },
+ *       crawlerConfiguration: { // SharePointCrawlerConfiguration
+ *         filterConfiguration: {
+ *           type: "PATTERN", // required
+ *           patternObjectFilter: {
+ *             filters: [ // required
+ *               {
+ *                 objectType: "STRING_VALUE", // required
+ *                 inclusionFilters: "<FilterList>",
+ *                 exclusionFilters: "<FilterList>",
+ *               },
+ *             ],
+ *           },
+ *         },
+ *       },
+ *     },
+ *   },
+ *   dataDeletionPolicy: "RETAIN" || "DELETE",
+ *   serverSideEncryptionConfiguration: { // ServerSideEncryptionConfiguration
+ *     kmsKeyArn: "STRING_VALUE",
+ *   },
+ *   vectorIngestionConfiguration: { // VectorIngestionConfiguration
+ *     chunkingConfiguration: { // ChunkingConfiguration
+ *       chunkingStrategy: "FIXED_SIZE" || "NONE" || "HIERARCHICAL" || "SEMANTIC", // required
+ *       fixedSizeChunkingConfiguration: { // FixedSizeChunkingConfiguration
+ *         maxTokens: Number("int"), // required
+ *         overlapPercentage: Number("int"), // required
+ *       },
+ *       hierarchicalChunkingConfiguration: { // HierarchicalChunkingConfiguration
+ *         levelConfigurations: [ // HierarchicalChunkingLevelConfigurations // required
+ *           { // HierarchicalChunkingLevelConfiguration
+ *             maxTokens: Number("int"), // required
+ *           },
+ *         ],
+ *         overlapTokens: Number("int"), // required
+ *       },
+ *       semanticChunkingConfiguration: { // SemanticChunkingConfiguration
+ *         maxTokens: Number("int"), // required
+ *         bufferSize: Number("int"), // required
+ *         breakpointPercentileThreshold: Number("int"), // required
+ *       },
+ *     },
+ *     customTransformationConfiguration: { // CustomTransformationConfiguration
+ *       intermediateStorage: { // IntermediateStorage
+ *         s3Location: { // S3Location
+ *           uri: "STRING_VALUE", // required
+ *         },
+ *       },
+ *       transformations: [ // Transformations // required
+ *         { // Transformation
+ *           transformationFunction: { // TransformationFunction
+ *             transformationLambdaConfiguration: { // TransformationLambdaConfiguration
+ *               lambdaArn: "STRING_VALUE", // required
+ *             },
+ *           },
+ *           stepToApply: "POST_CHUNKING", // required
+ *         },
+ *       ],
+ *     },
+ *     parsingConfiguration: { // ParsingConfiguration
+ *       parsingStrategy: "BEDROCK_FOUNDATION_MODEL" || "BEDROCK_DATA_AUTOMATION" || "SMART_PARSING" || "MULTI_MODAL_EMBEDDINGS", // required
+ *       bedrockFoundationModelConfiguration: { // BedrockFoundationModelConfiguration
+ *         modelArn: "STRING_VALUE", // required
+ *         parsingPrompt: { // ParsingPrompt
+ *           parsingPromptText: "STRING_VALUE", // required
+ *         },
+ *         parsingModality: "MULTIMODAL",
+ *       },
+ *       bedrockDataAutomationConfiguration: { // BedrockDataAutomationConfiguration
+ *         parsingModality: "MULTIMODAL",
+ *       },
+ *     },
+ *     contextEnrichmentConfiguration: { // ContextEnrichmentConfiguration
+ *       type: "BEDROCK_FOUNDATION_MODEL", // required
+ *       bedrockFoundationModelConfiguration: { // BedrockFoundationModelContextEnrichmentConfiguration
+ *         enrichmentStrategyConfiguration: { // EnrichmentStrategyConfiguration
+ *           method: "CHUNK_ENTITY_EXTRACTION", // required
+ *         },
+ *         modelArn: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   },
+ * };
+ * const command = new CreateDataSourceCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateDataSourceResponse
+ * //   dataSource: { // DataSource
+ * //     knowledgeBaseId: "STRING_VALUE", // required
+ * //     dataSourceId: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE", // required
+ * //     status: "AVAILABLE" || "DELETING" || "DELETE_UNSUCCESSFUL" || "CREATING" || "UPDATING" || "FAILED", // required
+ * //     description: "STRING_VALUE",
+ * //     dataSourceConfiguration: { // DataSourceConfiguration
+ * //       type: "S3" || "WEB" || "CONFLUENCE" || "SALESFORCE" || "SHAREPOINT" || "CUSTOM" || "REDSHIFT_METADATA" || "MANAGED_KNOWLEDGE_BASE_CONNECTOR", // required
+ * //       managedKnowledgeBaseConnectorConfiguration: { // ManagedKnowledgeBaseConnectorConfiguration
+ * //         deletionProtectionConfiguration: { // DeletionProtectionConfiguration
+ * //           deletionProtectionStatus: "ENABLED" || "DISABLED", // required
+ * //           deletionProtectionThreshold: Number("int"),
+ * //         },
+ * //         mediaExtractionConfiguration: { // MediaExtractionConfiguration
+ * //           imageExtractionConfiguration: { // ImageExtractionConfiguration
+ * //             imageExtractionStatus: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //           audioExtractionConfiguration: { // AudioExtractionConfiguration
+ * //             audioExtractionStatus: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //           videoExtractionConfiguration: { // VideoExtractionConfiguration
+ * //             videoExtractionStatus: "ENABLED" || "DISABLED", // required
+ * //           },
+ * //         },
+ * //         connectorParameters: "DOCUMENT_VALUE",
+ * //         syncSchedule: { // SyncSchedule Union: only one key present
+ * //           daily: {},
+ * //           weekly: { // WeeklySchedule
+ * //             dayOfWeek: "SUNDAY" || "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY", // required
+ * //           },
+ * //           monthly: { // MonthlySchedule
+ * //             dayOfMonth: { // DayOfMonth Union: only one key present
+ * //               dayNumber: Number("int"),
+ * //               lastDayOfMonth: {},
+ * //             },
+ * //           },
+ * //         },
+ * //       },
+ * //       s3Configuration: { // S3DataSourceConfiguration
+ * //         bucketArn: "STRING_VALUE", // required
+ * //         inclusionPrefixes: [ // S3Prefixes
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         bucketOwnerAccountId: "STRING_VALUE",
+ * //       },
+ * //       webConfiguration: { // WebDataSourceConfiguration
+ * //         sourceConfiguration: { // WebSourceConfiguration
+ * //           urlConfiguration: { // UrlConfiguration
+ * //             seedUrls: [ // SeedUrls
+ * //               { // SeedUrl
+ * //                 url: "STRING_VALUE",
+ * //               },
+ * //             ],
+ * //           },
+ * //         },
+ * //         crawlerConfiguration: { // WebCrawlerConfiguration
+ * //           crawlerLimits: { // WebCrawlerLimits
+ * //             rateLimit: Number("int"),
+ * //             maxPages: Number("int"),
+ * //           },
+ * //           inclusionFilters: [ // FilterList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           exclusionFilters: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           scope: "HOST_ONLY" || "SUBDOMAINS",
+ * //           userAgent: "STRING_VALUE",
+ * //           userAgentHeader: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       confluenceConfiguration: { // ConfluenceDataSourceConfiguration
+ * //         sourceConfiguration: { // ConfluenceSourceConfiguration
+ * //           hostUrl: "STRING_VALUE", // required
+ * //           hostType: "SAAS", // required
+ * //           authType: "BASIC" || "OAUTH2_CLIENT_CREDENTIALS", // required
+ * //           credentialsSecretArn: "STRING_VALUE", // required
+ * //         },
+ * //         crawlerConfiguration: { // ConfluenceCrawlerConfiguration
+ * //           filterConfiguration: { // CrawlFilterConfiguration
+ * //             type: "PATTERN", // required
+ * //             patternObjectFilter: { // PatternObjectFilterConfiguration
+ * //               filters: [ // PatternObjectFilterList // required
+ * //                 { // PatternObjectFilter
+ * //                   objectType: "STRING_VALUE", // required
+ * //                   inclusionFilters: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                   exclusionFilters: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //         },
+ * //       },
+ * //       salesforceConfiguration: { // SalesforceDataSourceConfiguration
+ * //         sourceConfiguration: { // SalesforceSourceConfiguration
+ * //           hostUrl: "STRING_VALUE", // required
+ * //           authType: "OAUTH2_CLIENT_CREDENTIALS", // required
+ * //           credentialsSecretArn: "STRING_VALUE", // required
+ * //         },
+ * //         crawlerConfiguration: { // SalesforceCrawlerConfiguration
+ * //           filterConfiguration: {
+ * //             type: "PATTERN", // required
+ * //             patternObjectFilter: {
+ * //               filters: [ // required
+ * //                 {
+ * //                   objectType: "STRING_VALUE", // required
+ * //                   inclusionFilters: [
+ * //                     "STRING_VALUE",
+ * //                   ],
+ * //                   exclusionFilters: "<FilterList>",
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //         },
+ * //       },
+ * //       sharePointConfiguration: { // SharePointDataSourceConfiguration
+ * //         sourceConfiguration: { // SharePointSourceConfiguration
+ * //           tenantId: "STRING_VALUE",
+ * //           domain: "STRING_VALUE", // required
+ * //           siteUrls: [ // SharePointSiteUrls // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           hostType: "ONLINE", // required
+ * //           authType: "OAUTH2_CLIENT_CREDENTIALS" || "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS", // required
+ * //           credentialsSecretArn: "STRING_VALUE", // required
+ * //         },
+ * //         crawlerConfiguration: { // SharePointCrawlerConfiguration
+ * //           filterConfiguration: {
+ * //             type: "PATTERN", // required
+ * //             patternObjectFilter: {
+ * //               filters: [ // required
+ * //                 {
+ * //                   objectType: "STRING_VALUE", // required
+ * //                   inclusionFilters: "<FilterList>",
+ * //                   exclusionFilters: "<FilterList>",
+ * //                 },
+ * //               ],
+ * //             },
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     serverSideEncryptionConfiguration: { // ServerSideEncryptionConfiguration
+ * //       kmsKeyArn: "STRING_VALUE",
+ * //     },
+ * //     vectorIngestionConfiguration: { // VectorIngestionConfiguration
+ * //       chunkingConfiguration: { // ChunkingConfiguration
+ * //         chunkingStrategy: "FIXED_SIZE" || "NONE" || "HIERARCHICAL" || "SEMANTIC", // required
+ * //         fixedSizeChunkingConfiguration: { // FixedSizeChunkingConfiguration
+ * //           maxTokens: Number("int"), // required
+ * //           overlapPercentage: Number("int"), // required
+ * //         },
+ * //         hierarchicalChunkingConfiguration: { // HierarchicalChunkingConfiguration
+ * //           levelConfigurations: [ // HierarchicalChunkingLevelConfigurations // required
+ * //             { // HierarchicalChunkingLevelConfiguration
+ * //               maxTokens: Number("int"), // required
+ * //             },
+ * //           ],
+ * //           overlapTokens: Number("int"), // required
+ * //         },
+ * //         semanticChunkingConfiguration: { // SemanticChunkingConfiguration
+ * //           maxTokens: Number("int"), // required
+ * //           bufferSize: Number("int"), // required
+ * //           breakpointPercentileThreshold: Number("int"), // required
+ * //         },
+ * //       },
+ * //       customTransformationConfiguration: { // CustomTransformationConfiguration
+ * //         intermediateStorage: { // IntermediateStorage
+ * //           s3Location: { // S3Location
+ * //             uri: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         transformations: [ // Transformations // required
+ * //           { // Transformation
+ * //             transformationFunction: { // TransformationFunction
+ * //               transformationLambdaConfiguration: { // TransformationLambdaConfiguration
+ * //                 lambdaArn: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //             stepToApply: "POST_CHUNKING", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //       parsingConfiguration: { // ParsingConfiguration
+ * //         parsingStrategy: "BEDROCK_FOUNDATION_MODEL" || "BEDROCK_DATA_AUTOMATION" || "SMART_PARSING" || "MULTI_MODAL_EMBEDDINGS", // required
+ * //         bedrockFoundationModelConfiguration: { // BedrockFoundationModelConfiguration
+ * //           modelArn: "STRING_VALUE", // required
+ * //           parsingPrompt: { // ParsingPrompt
+ * //             parsingPromptText: "STRING_VALUE", // required
+ * //           },
+ * //           parsingModality: "MULTIMODAL",
+ * //         },
+ * //         bedrockDataAutomationConfiguration: { // BedrockDataAutomationConfiguration
+ * //           parsingModality: "MULTIMODAL",
+ * //         },
+ * //       },
+ * //       contextEnrichmentConfiguration: { // ContextEnrichmentConfiguration
+ * //         type: "BEDROCK_FOUNDATION_MODEL", // required
+ * //         bedrockFoundationModelConfiguration: { // BedrockFoundationModelContextEnrichmentConfiguration
+ * //           enrichmentStrategyConfiguration: { // EnrichmentStrategyConfiguration
+ * //             method: "CHUNK_ENTITY_EXTRACTION", // required
+ * //           },
+ * //           modelArn: "STRING_VALUE", // required
+ * //         },
+ * //       },
+ * //     },
+ * //     dataDeletionPolicy: "RETAIN" || "DELETE",
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     updatedAt: new Date("TIMESTAMP"), // required
+ * //     failureReasons: [ // FailureReasons
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param CreateDataSourceCommandInput - {@link CreateDataSourceCommandInput}
+ * @returns {@link CreateDataSourceCommandOutput}
+ * @see {@link CreateDataSourceCommandInput} for command's `input` shape.
+ * @see {@link CreateDataSourceCommandOutput} for command's `response` shape.
+ * @see {@link BedrockAgentClientResolvedConfig | config} for BedrockAgentClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request is denied because of missing access permissions.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict performing an operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The number of requests exceeds the service quota. Resubmit your request later.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of requests exceeds the limit. Resubmit your request later.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Input validation failed. Check your request parameters and retry the request.</p>
+ *
+ * @throws {@link BedrockAgentServiceException}
+ * <p>Base exception class for all service exceptions from BedrockAgent service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateDataSourceCommand extends command<CreateDataSourceCommandInput, CreateDataSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDataSource",
+  CreateDataSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDataSourceRequest;
+      output: CreateDataSourceResponse;
+    };
+    sdk: {
+      input: CreateDataSourceCommandInput;
+      output: CreateDataSourceCommandOutput;
+    };
+  };
+}

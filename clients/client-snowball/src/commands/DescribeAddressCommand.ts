@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeAddressRequest, DescribeAddressResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAddressCommand,
-  serializeAws_json1_1DescribeAddressCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SnowballClientResolvedConfig } from "../SnowballClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAddressRequest, DescribeAddressResult } from "../models/models_0";
+import { DescribeAddress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAddressCommand}.
+ */
 export interface DescribeAddressCommandInput extends DescribeAddressRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAddressCommand}.
+ */
 export interface DescribeAddressCommandOutput extends DescribeAddressResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,92 @@ export interface DescribeAddressCommandOutput extends DescribeAddressResult, __M
  * ```javascript
  * import { SnowballClient, DescribeAddressCommand } from "@aws-sdk/client-snowball"; // ES Modules import
  * // const { SnowballClient, DescribeAddressCommand } = require("@aws-sdk/client-snowball"); // CommonJS import
+ * // import type { SnowballClientConfig } from "@aws-sdk/client-snowball";
+ * const config = {}; // type is SnowballClientConfig
  * const client = new SnowballClient(config);
+ * const input = { // DescribeAddressRequest
+ *   AddressId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAddressCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAddressResult
+ * //   Address: { // Address
+ * //     AddressId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Company: "STRING_VALUE",
+ * //     Street1: "STRING_VALUE",
+ * //     Street2: "STRING_VALUE",
+ * //     Street3: "STRING_VALUE",
+ * //     City: "STRING_VALUE",
+ * //     StateOrProvince: "STRING_VALUE",
+ * //     PrefectureOrDistrict: "STRING_VALUE",
+ * //     Landmark: "STRING_VALUE",
+ * //     Country: "STRING_VALUE",
+ * //     PostalCode: "STRING_VALUE",
+ * //     PhoneNumber: "STRING_VALUE",
+ * //     IsRestricted: true || false,
+ * //     Type: "CUST_PICKUP" || "AWS_SHIP",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAddressCommandInput - {@link DescribeAddressCommandInput}
+ * @returns {@link DescribeAddressCommandOutput}
  * @see {@link DescribeAddressCommandInput} for command's `input` shape.
  * @see {@link DescribeAddressCommandOutput} for command's `response` shape.
- * @see {@link SnowballClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SnowballClientResolvedConfig | config} for SnowballClient's `config` shape.
  *
+ * @throws {@link InvalidResourceException} (client fault)
+ *  <p>The specified resource can't be found. Check the information you provided in your last
+ *       request, and try again.</p>
+ *
+ * @throws {@link SnowballServiceException}
+ * <p>Base exception class for all service exceptions from Snowball service.</p>
+ *
+ *
+ * @example To describe an address for a job
+ * ```javascript
+ * // This operation describes an address for a job.
+ * const input = {
+ *   AddressId: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"
+ * };
+ * const command = new DescribeAddressCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Address: {
+ *     AddressId: "ADID5643ec50-3eec-4eb3-9be6-9374c10eb51b",
+ *     City: "Seattle",
+ *     Company: "My Company",
+ *     Country: "US",
+ *     Name: "My Name",
+ *     PhoneNumber: "425-555-5555",
+ *     PostalCode: "98101",
+ *     StateOrProvince: "WA",
+ *     Street1: "123 Main Street"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeAddressCommand extends $Command<
-  DescribeAddressCommandInput,
-  DescribeAddressCommandOutput,
-  SnowballClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAddressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SnowballClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAddressCommandInput, DescribeAddressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SnowballClient";
-    const commandName = "DescribeAddressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAddressRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAddressResult.filterSensitiveLog,
+export class DescribeAddressCommand extends command<DescribeAddressCommandInput, DescribeAddressCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAddress",
+  DescribeAddress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAddressRequest;
+      output: DescribeAddressResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAddressCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAddressCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAddressCommandOutput> {
-    return deserializeAws_json1_1DescribeAddressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAddressCommandInput;
+      output: DescribeAddressCommandOutput;
+    };
+  };
 }

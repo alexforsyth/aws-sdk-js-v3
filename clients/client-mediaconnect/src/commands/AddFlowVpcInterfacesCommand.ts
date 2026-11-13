@@ -1,95 +1,121 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConnectClient";
-import { AddFlowVpcInterfacesRequest, AddFlowVpcInterfacesResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1AddFlowVpcInterfacesCommand,
-  serializeAws_restJson1AddFlowVpcInterfacesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddFlowVpcInterfacesRequest, AddFlowVpcInterfacesResponse } from "../models/models_0";
+import { AddFlowVpcInterfaces$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AddFlowVpcInterfacesCommand}.
+ */
 export interface AddFlowVpcInterfacesCommandInput extends AddFlowVpcInterfacesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AddFlowVpcInterfacesCommand}.
+ */
 export interface AddFlowVpcInterfacesCommandOutput extends AddFlowVpcInterfacesResponse, __MetadataBearer {}
 
 /**
- * Adds VPC interfaces to flow
+ * <p> Adds VPC interfaces to a flow.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaConnectClient, AddFlowVpcInterfacesCommand } from "@aws-sdk/client-mediaconnect"; // ES Modules import
  * // const { MediaConnectClient, AddFlowVpcInterfacesCommand } = require("@aws-sdk/client-mediaconnect"); // CommonJS import
+ * // import type { MediaConnectClientConfig } from "@aws-sdk/client-mediaconnect";
+ * const config = {}; // type is MediaConnectClientConfig
  * const client = new MediaConnectClient(config);
+ * const input = { // AddFlowVpcInterfacesRequest
+ *   FlowArn: "STRING_VALUE", // required
+ *   VpcInterfaces: [ // __listOfVpcInterfaceRequest // required
+ *     { // VpcInterfaceRequest
+ *       Name: "STRING_VALUE", // required
+ *       NetworkInterfaceType: "ena" || "efa",
+ *       RoleArn: "STRING_VALUE", // required
+ *       SecurityGroupIds: [ // __listOfString // required
+ *         "STRING_VALUE",
+ *       ],
+ *       SubnetId: "STRING_VALUE", // required
+ *       VpcInterfaceTags: { // __mapOfString
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new AddFlowVpcInterfacesCommand(input);
  * const response = await client.send(command);
+ * // { // AddFlowVpcInterfacesResponse
+ * //   FlowArn: "STRING_VALUE",
+ * //   VpcInterfaces: [ // __listOfVpcInterface
+ * //     { // VpcInterface
+ * //       Name: "STRING_VALUE", // required
+ * //       NetworkInterfaceIds: [ // __listOfString // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       NetworkInterfaceType: "ena" || "efa", // required
+ * //       RoleArn: "STRING_VALUE", // required
+ * //       SecurityGroupIds: [ // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SubnetId: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param AddFlowVpcInterfacesCommandInput - {@link AddFlowVpcInterfacesCommandInput}
+ * @returns {@link AddFlowVpcInterfacesCommandOutput}
  * @see {@link AddFlowVpcInterfacesCommandInput} for command's `input` shape.
  * @see {@link AddFlowVpcInterfacesCommandOutput} for command's `response` shape.
- * @see {@link MediaConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConnectClientResolvedConfig | config} for MediaConnectClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request. </p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system. </p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable or busy. </p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link MediaConnectServiceException}
+ * <p>Base exception class for all service exceptions from MediaConnect service.</p>
+ *
+ *
+ * @public
  */
-export class AddFlowVpcInterfacesCommand extends $Command<
-  AddFlowVpcInterfacesCommandInput,
-  AddFlowVpcInterfacesCommandOutput,
-  MediaConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AddFlowVpcInterfacesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AddFlowVpcInterfacesCommandInput, AddFlowVpcInterfacesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConnectClient";
-    const commandName = "AddFlowVpcInterfacesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddFlowVpcInterfacesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: AddFlowVpcInterfacesResponse.filterSensitiveLog,
+export class AddFlowVpcInterfacesCommand extends command<AddFlowVpcInterfacesCommandInput, AddFlowVpcInterfacesCommandOutput>(
+  _ep0,
+  _mw0,
+  "AddFlowVpcInterfaces",
+  AddFlowVpcInterfaces$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddFlowVpcInterfacesRequest;
+      output: AddFlowVpcInterfacesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AddFlowVpcInterfacesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1AddFlowVpcInterfacesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<AddFlowVpcInterfacesCommandOutput> {
-    return deserializeAws_restJson1AddFlowVpcInterfacesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AddFlowVpcInterfacesCommandInput;
+      output: AddFlowVpcInterfacesCommandOutput;
+    };
+  };
 }

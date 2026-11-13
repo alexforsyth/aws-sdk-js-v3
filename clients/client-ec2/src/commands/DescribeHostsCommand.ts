@@ -1,27 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeHostsRequest } from "../models/models_2";
-import { DescribeHostsResult } from "../models/models_3";
-import { deserializeAws_ec2DescribeHostsCommand, serializeAws_ec2DescribeHostsCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeHostsRequest, DescribeHostsResult } from "../models/models_4";
+import { DescribeHosts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeHostsCommand}.
+ */
 export interface DescribeHostsCommandInput extends DescribeHostsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeHostsCommand}.
+ */
 export interface DescribeHostsCommandOutput extends DescribeHostsResult, __MetadataBearer {}
 
 /**
  * <p>Describes the specified Dedicated Hosts or all your Dedicated Hosts.</p>
- *         <p>The results describe only the Dedicated Hosts in the Region you're currently using.
+ *          <p>The results describe only the Dedicated Hosts in the Region you're currently using.
  *             All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have
  *             recently been released are listed with the state <code>released</code>.</p>
  * @example
@@ -29,68 +32,112 @@ export interface DescribeHostsCommandOutput extends DescribeHostsResult, __Metad
  * ```javascript
  * import { EC2Client, DescribeHostsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeHostsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeHostsRequest
+ *   HostIds: [ // RequestHostIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filter: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new DescribeHostsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeHostsResult
+ * //   Hosts: [ // HostList
+ * //     { // Host
+ * //       AutoPlacement: "on" || "off",
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       AvailableCapacity: { // AvailableCapacity
+ * //         AvailableInstanceCapacity: [ // AvailableInstanceCapacityList
+ * //           { // InstanceCapacity
+ * //             AvailableCapacity: Number("int"),
+ * //             InstanceType: "STRING_VALUE",
+ * //             TotalCapacity: Number("int"),
+ * //           },
+ * //         ],
+ * //         AvailableVCpus: Number("int"),
+ * //       },
+ * //       ClientToken: "STRING_VALUE",
+ * //       HostId: "STRING_VALUE",
+ * //       HostProperties: { // HostProperties
+ * //         Cores: Number("int"),
+ * //         InstanceType: "STRING_VALUE",
+ * //         InstanceFamily: "STRING_VALUE",
+ * //         Sockets: Number("int"),
+ * //         TotalVCpus: Number("int"),
+ * //       },
+ * //       HostReservationId: "STRING_VALUE",
+ * //       Instances: [ // HostInstanceList
+ * //         { // HostInstance
+ * //           InstanceId: "STRING_VALUE",
+ * //           InstanceType: "STRING_VALUE",
+ * //           OwnerId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       State: "available" || "under-assessment" || "permanent-failure" || "released" || "released-permanent-failure" || "pending" || "configuring",
+ * //       AllocationTime: new Date("TIMESTAMP"),
+ * //       ReleaseTime: new Date("TIMESTAMP"),
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       HostRecovery: "on" || "off",
+ * //       AllowsMultipleInstanceTypes: "on" || "off",
+ * //       OwnerId: "STRING_VALUE",
+ * //       AvailabilityZoneId: "STRING_VALUE",
+ * //       MemberOfServiceLinkedResourceGroup: true || false,
+ * //       OutpostArn: "STRING_VALUE",
+ * //       HostMaintenance: "on" || "off",
+ * //       AssetId: "STRING_VALUE",
+ * //       CpuOptions: { // HostCpuOptions
+ * //         AmdSevSnp: "enabled" || "disabled",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeHostsCommandInput - {@link DescribeHostsCommandInput}
+ * @returns {@link DescribeHostsCommandOutput}
  * @see {@link DescribeHostsCommandInput} for command's `input` shape.
  * @see {@link DescribeHostsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeHostsCommand extends $Command<
-  DescribeHostsCommandInput,
-  DescribeHostsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeHostsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeHostsCommandInput, DescribeHostsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeHostsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeHostsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeHostsResult.filterSensitiveLog,
+export class DescribeHostsCommand extends command<DescribeHostsCommandInput, DescribeHostsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeHosts",
+  DescribeHosts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeHostsRequest;
+      output: DescribeHostsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeHostsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeHostsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeHostsCommandOutput> {
-    return deserializeAws_ec2DescribeHostsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeHostsCommandInput;
+      output: DescribeHostsCommandOutput;
+    };
+  };
 }

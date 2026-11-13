@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { ListAssessmentRunsRequest, ListAssessmentRunsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAssessmentRunsCommand,
-  serializeAws_json1_1ListAssessmentRunsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssessmentRunsRequest, ListAssessmentRunsResponse } from "../models/models_0";
+import { ListAssessmentRuns$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssessmentRunsCommand}.
+ */
 export interface ListAssessmentRunsCommandInput extends ListAssessmentRunsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssessmentRunsCommand}.
+ */
 export interface ListAssessmentRunsCommandOutput extends ListAssessmentRunsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,115 @@ export interface ListAssessmentRunsCommandOutput extends ListAssessmentRunsRespo
  * ```javascript
  * import { InspectorClient, ListAssessmentRunsCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, ListAssessmentRunsCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // ListAssessmentRunsRequest
+ *   assessmentTemplateArns: [ // ListParentArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   filter: { // AssessmentRunFilter
+ *     namePattern: "STRING_VALUE",
+ *     states: [ // AssessmentRunStateList
+ *       "CREATED" || "START_DATA_COLLECTION_PENDING" || "START_DATA_COLLECTION_IN_PROGRESS" || "COLLECTING_DATA" || "STOP_DATA_COLLECTION_PENDING" || "DATA_COLLECTED" || "START_EVALUATING_RULES_PENDING" || "EVALUATING_RULES" || "FAILED" || "ERROR" || "COMPLETED" || "COMPLETED_WITH_ERRORS" || "CANCELED",
+ *     ],
+ *     durationRange: { // DurationRange
+ *       minSeconds: Number("int"),
+ *       maxSeconds: Number("int"),
+ *     },
+ *     rulesPackageArns: [ // FilterRulesPackageArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     startTimeRange: { // TimestampRange
+ *       beginDate: new Date("TIMESTAMP"),
+ *       endDate: new Date("TIMESTAMP"),
+ *     },
+ *     completionTimeRange: {
+ *       beginDate: new Date("TIMESTAMP"),
+ *       endDate: new Date("TIMESTAMP"),
+ *     },
+ *     stateChangeTimeRange: {
+ *       beginDate: new Date("TIMESTAMP"),
+ *       endDate: new Date("TIMESTAMP"),
+ *     },
+ *   },
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAssessmentRunsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssessmentRunsResponse
+ * //   assessmentRunArns: [ // ListReturnedArnList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssessmentRunsCommandInput - {@link ListAssessmentRunsCommandInput}
+ * @returns {@link ListAssessmentRunsCommandOutput}
  * @see {@link ListAssessmentRunsCommandInput} for command's `input` shape.
  * @see {@link ListAssessmentRunsCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to access the requested resource.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced an entity that does not exist. The
+ *          error code describes the entity.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @example List assessment runs
+ * ```javascript
+ * // Lists the assessment runs that correspond to the assessment templates that are specified by the ARNs of the assessment templates.
+ * const input = {
+ *   assessmentTemplateArns: [
+ *     "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw"
+ *   ],
+ *   maxResults: 123
+ * };
+ * const command = new ListAssessmentRunsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   assessmentRunArns: [
+ *     "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
+ *     "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-v5D6fI3v"
+ *   ],
+ *   nextToken: "1"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListAssessmentRunsCommand extends $Command<
-  ListAssessmentRunsCommandInput,
-  ListAssessmentRunsCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssessmentRunsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssessmentRunsCommandInput, ListAssessmentRunsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "ListAssessmentRunsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssessmentRunsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAssessmentRunsResponse.filterSensitiveLog,
+export class ListAssessmentRunsCommand extends command<ListAssessmentRunsCommandInput, ListAssessmentRunsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssessmentRuns",
+  ListAssessmentRuns$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssessmentRunsRequest;
+      output: ListAssessmentRunsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssessmentRunsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAssessmentRunsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssessmentRunsCommandOutput> {
-    return deserializeAws_json1_1ListAssessmentRunsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssessmentRunsCommandInput;
+      output: ListAssessmentRunsCommandOutput;
+    };
+  };
 }

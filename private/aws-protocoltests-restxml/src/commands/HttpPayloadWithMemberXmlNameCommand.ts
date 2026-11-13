@@ -1,27 +1,37 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HttpPayloadWithMemberXmlNameInputOutput } from "../models/models_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { HttpPayloadWithMemberXmlNameInputOutput } from "../models/models_0";
 import {
-  deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommand,
-  serializeAws_restXmlHttpPayloadWithMemberXmlNameCommand,
+  de_HttpPayloadWithMemberXmlNameCommand,
+  se_HttpPayloadWithMemberXmlNameCommand,
 } from "../protocols/Aws_restXml";
-import { RestXmlProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestXmlProtocolClient";
+import type {
+  RestXmlProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestXmlProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HttpPayloadWithMemberXmlNameCommand}.
+ */
 export interface HttpPayloadWithMemberXmlNameCommandInput extends HttpPayloadWithMemberXmlNameInputOutput {}
-export interface HttpPayloadWithMemberXmlNameCommandOutput
-  extends HttpPayloadWithMemberXmlNameInputOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link HttpPayloadWithMemberXmlNameCommand}.
+ */
+export interface HttpPayloadWithMemberXmlNameCommandOutput extends HttpPayloadWithMemberXmlNameInputOutput, __MetadataBearer {}
 
 /**
  * The following example serializes a payload that uses an XML name
@@ -31,71 +41,66 @@ export interface HttpPayloadWithMemberXmlNameCommandOutput
  * ```javascript
  * import { RestXmlProtocolClient, HttpPayloadWithMemberXmlNameCommand } from "@aws-sdk/aws-protocoltests-restxml"; // ES Modules import
  * // const { RestXmlProtocolClient, HttpPayloadWithMemberXmlNameCommand } = require("@aws-sdk/aws-protocoltests-restxml"); // CommonJS import
+ * // import type { RestXmlProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restxml";
+ * const config = {}; // type is RestXmlProtocolClientConfig
  * const client = new RestXmlProtocolClient(config);
+ * const input = { // HttpPayloadWithMemberXmlNameInputOutput
+ *   nested: { // PayloadWithXmlName
+ *     name: "STRING_VALUE",
+ *   },
+ * };
  * const command = new HttpPayloadWithMemberXmlNameCommand(input);
  * const response = await client.send(command);
+ * // { // HttpPayloadWithMemberXmlNameInputOutput
+ * //   nested: { // PayloadWithXmlName
+ * //     name: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param HttpPayloadWithMemberXmlNameCommandInput - {@link HttpPayloadWithMemberXmlNameCommandInput}
+ * @returns {@link HttpPayloadWithMemberXmlNameCommandOutput}
  * @see {@link HttpPayloadWithMemberXmlNameCommandInput} for command's `input` shape.
  * @see {@link HttpPayloadWithMemberXmlNameCommandOutput} for command's `response` shape.
- * @see {@link RestXmlProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestXmlProtocolClientResolvedConfig | config} for RestXmlProtocolClient's `config` shape.
  *
+ * @throws {@link RestXmlProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestXmlProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class HttpPayloadWithMemberXmlNameCommand extends $Command<
-  HttpPayloadWithMemberXmlNameCommandInput,
-  HttpPayloadWithMemberXmlNameCommandOutput,
-  RestXmlProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HttpPayloadWithMemberXmlNameCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestXmlProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HttpPayloadWithMemberXmlNameCommandInput, HttpPayloadWithMemberXmlNameCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestXmlProtocolClient";
-    const commandName = "HttpPayloadWithMemberXmlNameCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: HttpPayloadWithMemberXmlNameInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: HttpPayloadWithMemberXmlNameInputOutput.filterSensitiveLog,
+export class HttpPayloadWithMemberXmlNameCommand extends $Command
+  .classBuilder<
+    HttpPayloadWithMemberXmlNameCommandInput,
+    HttpPayloadWithMemberXmlNameCommandOutput,
+    RestXmlProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestXmlProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestXml", "HttpPayloadWithMemberXmlName", {})
+  .n("RestXmlProtocolClient", "HttpPayloadWithMemberXmlNameCommand")
+  .f(void 0, void 0)
+  .ser(se_HttpPayloadWithMemberXmlNameCommand)
+  .de(de_HttpPayloadWithMemberXmlNameCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HttpPayloadWithMemberXmlNameInputOutput;
+      output: HttpPayloadWithMemberXmlNameInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: HttpPayloadWithMemberXmlNameCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlHttpPayloadWithMemberXmlNameCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<HttpPayloadWithMemberXmlNameCommandOutput> {
-    return deserializeAws_restXmlHttpPayloadWithMemberXmlNameCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HttpPayloadWithMemberXmlNameCommandInput;
+      output: HttpPayloadWithMemberXmlNameCommandOutput;
+    };
+  };
 }

@@ -1,0 +1,203 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEnvironmentRequest, CreateEnvironmentResponse } from "../models/models_0";
+import { CreateEnvironment$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEnvironmentCommand}.
+ */
+export interface CreateEnvironmentCommandInput extends CreateEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEnvironmentCommand}.
+ */
+export interface CreateEnvironmentCommandOutput extends CreateEnvironmentResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager, NSX Manager, and vCenter Server.</p> <note> <p>When you specify <code>SELF_DEPLOYED</code> for <code>vcfVersion</code>, Amazon EVS provisions only the VLAN subnets; no hosts are added and no VCF installation is performed. After the environment is created, you can add hosts with <code>CreateEnvironmentHost</code> and install VCF yourself. The <code>licenseInfo</code>, <code>hosts</code>, <code>vcfHostnames</code>, <code>siteId</code>, and <code>connectivityInfo</code> parameters are not supported in this mode.</p> </note> <p>When you specify any other VCF version, Amazon EVS installs and configures VCF for you. For more information, see <a href="https://docs.aws.amazon.com/evs/latest/userguide/getting-started-self-deployed.html">Self-deployed mode</a> in the <i>Amazon EVS User Guide</i>.</p> <important> <p>When Amazon EVS installs VCF, the default ESX version for the selected VCF version will be used. After a host is added with a specific ESX version, it can only be upgraded using vCenter Lifecycle Manager.</p> </important> <note> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironment</code> action. This results in a <code>ValidationException</code> response.</p> </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EvsClient, CreateEnvironmentCommand } from "@aws-sdk/client-evs"; // ES Modules import
+ * // const { EvsClient, CreateEnvironmentCommand } = require("@aws-sdk/client-evs"); // CommonJS import
+ * // import type { EvsClientConfig } from "@aws-sdk/client-evs";
+ * const config = {}; // type is EvsClientConfig
+ * const client = new EvsClient(config);
+ * const input = { // CreateEnvironmentRequest
+ *   clientToken: "STRING_VALUE",
+ *   environmentName: "STRING_VALUE",
+ *   kmsKeyId: "STRING_VALUE",
+ *   tags: { // RequestTagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   serviceAccessSecurityGroups: { // ServiceAccessSecurityGroups
+ *     securityGroups: [ // SecurityGroups
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   vpcId: "STRING_VALUE", // required
+ *   serviceAccessSubnetId: "STRING_VALUE", // required
+ *   vcfVersion: "VCF-5.2.1" || "VCF-5.2.2" || "SELF_DEPLOYED", // required
+ *   termsAccepted: true || false, // required
+ *   initialVlans: { // InitialVlans
+ *     vmkManagement: { // InitialVlanInfo
+ *       cidr: "STRING_VALUE", // required
+ *     },
+ *     vmManagement: {
+ *       cidr: "STRING_VALUE", // required
+ *     },
+ *     vMotion: {
+ *       cidr: "STRING_VALUE", // required
+ *     },
+ *     vSan: {
+ *       cidr: "STRING_VALUE", // required
+ *     },
+ *     vTep: {
+ *       cidr: "STRING_VALUE", // required
+ *     },
+ *     edgeVTep: "<InitialVlanInfo>", // required
+ *     nsxUplink: "<InitialVlanInfo>", // required
+ *     hcx: "<InitialVlanInfo>", // required
+ *     expansionVlan1: "<InitialVlanInfo>", // required
+ *     expansionVlan2: "<InitialVlanInfo>", // required
+ *     isHcxPublic: true || false,
+ *     hcxNetworkAclId: "STRING_VALUE",
+ *   },
+ *   connectivityInfo: { // ConnectivityInfo
+ *     privateRouteServerPeerings: [ // RouteServerPeeringList // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   licenseInfo: [ // LicenseInfoList
+ *     { // LicenseInfo
+ *       solutionKey: "STRING_VALUE", // required
+ *       vsanKey: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   hosts: [ // HostInfoForCreateList
+ *     { // HostInfoForCreate
+ *       hostName: "STRING_VALUE", // required
+ *       keyName: "STRING_VALUE", // required
+ *       instanceType: "i4i.metal" || "i7i.metal-24xl" || "i7i.metal-48xl" || "r7i.metal-24xl" || "r7i.metal-48xl", // required
+ *       placementGroupId: "STRING_VALUE",
+ *       dedicatedHostId: "STRING_VALUE",
+ *     },
+ *   ],
+ *   vcfHostnames: { // VcfHostnames
+ *     vCenter: "STRING_VALUE", // required
+ *     nsx: "STRING_VALUE", // required
+ *     nsxManager1: "STRING_VALUE", // required
+ *     nsxManager2: "STRING_VALUE", // required
+ *     nsxManager3: "STRING_VALUE", // required
+ *     nsxEdge1: "STRING_VALUE", // required
+ *     nsxEdge2: "STRING_VALUE", // required
+ *     sddcManager: "STRING_VALUE", // required
+ *     cloudBuilder: "STRING_VALUE", // required
+ *   },
+ *   siteId: "STRING_VALUE",
+ * };
+ * const command = new CreateEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * // { // CreateEnvironmentResponse
+ * //   environment: { // Environment
+ * //     environmentId: "STRING_VALUE",
+ * //     environmentState: "CREATING" || "CREATED" || "DELETING" || "DELETED" || "CREATE_FAILED",
+ * //     stateDetails: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     modifiedAt: new Date("TIMESTAMP"),
+ * //     environmentArn: "STRING_VALUE",
+ * //     environmentName: "STRING_VALUE",
+ * //     vpcId: "STRING_VALUE",
+ * //     serviceAccessSubnetId: "STRING_VALUE",
+ * //     vcfVersion: "VCF-5.2.1" || "VCF-5.2.2" || "SELF_DEPLOYED",
+ * //     termsAccepted: true || false,
+ * //     licenseInfo: [ // LicenseInfoList
+ * //       { // LicenseInfo
+ * //         solutionKey: "STRING_VALUE", // required
+ * //         vsanKey: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     siteId: "STRING_VALUE",
+ * //     environmentStatus: "PASSED" || "FAILED" || "UNKNOWN",
+ * //     checks: [ // ChecksList
+ * //       { // Check
+ * //         type: "KEY_REUSE" || "KEY_COVERAGE" || "REACHABILITY" || "HOST_COUNT" || "VCENTER_REACHABILITY" || "VCENTER_VM_SYNC" || "VCENTER_VM_EVENT" || "OPERATIONS_MANAGER_REACHABILITY" || "SDDC_MANAGER_REACHABILITY" || "SDDC_MANAGER_HOST_COUNT" || "SDDC_MANAGER_KEY_COVERAGE" || "SDDC_MANAGER_KEY_REUSE" || "CONNECTOR_HEALTH",
+ * //         id: "STRING_VALUE",
+ * //         result: "PASSED" || "FAILED" || "UNKNOWN",
+ * //         impairedSince: new Date("TIMESTAMP"),
+ * //       },
+ * //     ],
+ * //     connectivityInfo: { // ConnectivityInfo
+ * //       privateRouteServerPeerings: [ // RouteServerPeeringList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     vcfHostnames: { // VcfHostnames
+ * //       vCenter: "STRING_VALUE", // required
+ * //       nsx: "STRING_VALUE", // required
+ * //       nsxManager1: "STRING_VALUE", // required
+ * //       nsxManager2: "STRING_VALUE", // required
+ * //       nsxManager3: "STRING_VALUE", // required
+ * //       nsxEdge1: "STRING_VALUE", // required
+ * //       nsxEdge2: "STRING_VALUE", // required
+ * //       sddcManager: "STRING_VALUE", // required
+ * //       cloudBuilder: "STRING_VALUE", // required
+ * //     },
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     serviceAccessSecurityGroups: { // ServiceAccessSecurityGroups
+ * //       securityGroups: [ // SecurityGroups
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     credentials: [ // SecretList
+ * //       { // Secret
+ * //         secretArn: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param CreateEnvironmentCommandInput - {@link CreateEnvironmentCommandInput}
+ * @returns {@link CreateEnvironmentCommandOutput}
+ * @see {@link CreateEnvironmentCommandInput} for command's `input` shape.
+ * @see {@link CreateEnvironmentCommandOutput} for command's `response` shape.
+ * @see {@link EvsClientResolvedConfig | config} for EvsClient's `config` shape.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the specified constraints. You will see this exception if invalid inputs are provided for any of the Amazon EVS environment operations, or if a list operation is performed on an environment resource that is still initializing.</p>
+ *
+ * @throws {@link EvsServiceException}
+ * <p>Base exception class for all service exceptions from Evs service.</p>
+ *
+ *
+ * @public
+ */
+export class CreateEnvironmentCommand extends command<CreateEnvironmentCommandInput, CreateEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEnvironment",
+  CreateEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEnvironmentRequest;
+      output: CreateEnvironmentResponse;
+    };
+    sdk: {
+      input: CreateEnvironmentCommandInput;
+      output: CreateEnvironmentCommandOutput;
+    };
+  };
+}

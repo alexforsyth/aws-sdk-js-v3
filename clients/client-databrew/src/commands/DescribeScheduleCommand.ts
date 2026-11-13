@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import { DescribeScheduleRequest, DescribeScheduleResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeScheduleCommand,
-  serializeAws_restJson1DescribeScheduleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeScheduleRequest, DescribeScheduleResponse } from "../models/models_0";
+import { DescribeSchedule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeScheduleCommand}.
+ */
 export interface DescribeScheduleCommandInput extends DescribeScheduleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeScheduleCommand}.
+ */
 export interface DescribeScheduleCommandOutput extends DescribeScheduleResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface DescribeScheduleCommandOutput extends DescribeScheduleResponse,
  * ```javascript
  * import { DataBrewClient, DescribeScheduleCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, DescribeScheduleCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // DescribeScheduleRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DescribeScheduleCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeScheduleResponse
+ * //   CreateDate: new Date("TIMESTAMP"),
+ * //   CreatedBy: "STRING_VALUE",
+ * //   JobNames: [ // JobNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   LastModifiedBy: "STRING_VALUE",
+ * //   LastModifiedDate: new Date("TIMESTAMP"),
+ * //   ResourceArn: "STRING_VALUE",
+ * //   CronExpression: "STRING_VALUE",
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DescribeScheduleCommandInput - {@link DescribeScheduleCommandInput}
+ * @returns {@link DescribeScheduleCommandOutput}
  * @see {@link DescribeScheduleCommandInput} for command's `input` shape.
  * @see {@link DescribeScheduleCommandOutput} for command's `response` shape.
- * @see {@link DataBrewClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeScheduleCommand extends $Command<
-  DescribeScheduleCommandInput,
-  DescribeScheduleCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeScheduleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeScheduleCommandInput, DescribeScheduleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "DescribeScheduleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeScheduleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeScheduleResponse.filterSensitiveLog,
+export class DescribeScheduleCommand extends command<DescribeScheduleCommandInput, DescribeScheduleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSchedule",
+  DescribeSchedule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeScheduleRequest;
+      output: DescribeScheduleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeScheduleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeScheduleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeScheduleCommandOutput> {
-    return deserializeAws_restJson1DescribeScheduleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeScheduleCommandInput;
+      output: DescribeScheduleCommandOutput;
+    };
+  };
 }

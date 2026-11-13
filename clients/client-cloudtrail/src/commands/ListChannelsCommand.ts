@@ -1,0 +1,96 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListChannelsRequest, ListChannelsResponse } from "../models/models_0";
+import { ListChannels$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListChannelsCommand}.
+ */
+export interface ListChannelsCommandInput extends ListChannelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListChannelsCommand}.
+ */
+export interface ListChannelsCommandOutput extends ListChannelsResponse, __MetadataBearer {}
+
+/**
+ * <important>
+ *             <p>CloudTrail Lake will no longer be open to new customers starting May 31, 2026. If you would like to use CloudTrail Lake, sign up prior to that date. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html">CloudTrail Lake availability change</a>.</p>
+ *          </important>
+ *          <p> Lists the channels in the current account, and their source names.
+ *       </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudTrailClient, ListChannelsCommand } from "@aws-sdk/client-cloudtrail"; // ES Modules import
+ * // const { CloudTrailClient, ListChannelsCommand } = require("@aws-sdk/client-cloudtrail"); // CommonJS import
+ * // import type { CloudTrailClientConfig } from "@aws-sdk/client-cloudtrail";
+ * const config = {}; // type is CloudTrailClientConfig
+ * const client = new CloudTrailClient(config);
+ * const input = { // ListChannelsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
+ * const command = new ListChannelsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListChannelsResponse
+ * //   Channels: [ // Channels
+ * //     { // Channel
+ * //       ChannelArn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListChannelsCommandInput - {@link ListChannelsCommandInput}
+ * @returns {@link ListChannelsCommandOutput}
+ * @see {@link ListChannelsCommandInput} for command's `input` shape.
+ * @see {@link ListChannelsCommandOutput} for command's `response` shape.
+ * @see {@link CloudTrailClientResolvedConfig | config} for CloudTrailClient's `config` shape.
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>A token that is not valid, or a token that was previously used in a request with
+ *          different parameters. This exception is thrown if the token is not valid.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>This exception is thrown when the requested operation is not permitted.</p>
+ *
+ * @throws {@link UnsupportedOperationException} (client fault)
+ *  <p>This exception is thrown when the requested operation is not supported.</p>
+ *
+ * @throws {@link CloudTrailServiceException}
+ * <p>Base exception class for all service exceptions from CloudTrail service.</p>
+ *
+ *
+ * @public
+ */
+export class ListChannelsCommand extends command<ListChannelsCommandInput, ListChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListChannels",
+  ListChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListChannelsRequest;
+      output: ListChannelsResponse;
+    };
+    sdk: {
+      input: ListChannelsCommandInput;
+      output: ListChannelsCommandOutput;
+    };
+  };
+}

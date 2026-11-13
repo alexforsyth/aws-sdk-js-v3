@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateOrderInput, CreateOrderOutput } from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1CreateOrderCommand,
-  serializeAws_restJson1CreateOrderCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateOrderInput, CreateOrderOutput } from "../models/models_0";
+import { CreateOrder$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateOrderCommand}.
+ */
 export interface CreateOrderCommandInput extends CreateOrderInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreateOrderCommand}.
+ */
 export interface CreateOrderCommandOutput extends CreateOrderOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,108 @@ export interface CreateOrderCommandOutput extends CreateOrderOutput, __MetadataB
  * ```javascript
  * import { OutpostsClient, CreateOrderCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, CreateOrderCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // CreateOrderInput
+ *   OutpostIdentifier: "STRING_VALUE", // required
+ *   QuoteIdentifier: "STRING_VALUE",
+ *   QuoteOptionIdentifier: "STRING_VALUE",
+ *   LineItems: [ // LineItemRequestListDefinition
+ *     { // LineItemRequest
+ *       CatalogItemId: "STRING_VALUE",
+ *       Quantity: Number("int"),
+ *     },
+ *   ],
+ *   PaymentOption: "ALL_UPFRONT" || "NO_UPFRONT" || "PARTIAL_UPFRONT", // required
+ *   PaymentTerm: "THREE_YEARS" || "ONE_YEAR" || "FIVE_YEARS",
+ * };
  * const command = new CreateOrderCommand(input);
  * const response = await client.send(command);
+ * // { // CreateOrderOutput
+ * //   Order: { // Order
+ * //     OutpostId: "STRING_VALUE",
+ * //     QuoteIdentifier: "STRING_VALUE",
+ * //     QuoteOptionIdentifier: "STRING_VALUE",
+ * //     OrderId: "STRING_VALUE",
+ * //     Status: "RECEIVED" || "PENDING" || "PROCESSING" || "INSTALLING" || "FULFILLED" || "CANCELLED" || "PREPARING" || "IN_PROGRESS" || "DELIVERED" || "COMPLETED" || "ERROR",
+ * //     LineItems: [ // LineItemListDefinition
+ * //       { // LineItem
+ * //         CatalogItemId: "STRING_VALUE",
+ * //         LineItemId: "STRING_VALUE",
+ * //         Quantity: Number("int"),
+ * //         Status: "PREPARING" || "BUILDING" || "SHIPPED" || "DELIVERED" || "INSTALLING" || "INSTALLED" || "ERROR" || "CANCELLED" || "REPLACED",
+ * //         ShipmentInformation: { // ShipmentInformation
+ * //           ShipmentTrackingNumber: "STRING_VALUE",
+ * //           ShipmentCarrier: "DHL" || "DBS" || "FEDEX" || "UPS" || "EXPEDITORS",
+ * //         },
+ * //         AssetInformationList: [ // LineItemAssetInformationList
+ * //           { // LineItemAssetInformation
+ * //             AssetId: "STRING_VALUE",
+ * //             MacAddressList: [ // MacAddressList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         PreviousLineItemId: "STRING_VALUE",
+ * //         PreviousOrderId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     PaymentOption: "ALL_UPFRONT" || "NO_UPFRONT" || "PARTIAL_UPFRONT",
+ * //     OrderSubmissionDate: new Date("TIMESTAMP"),
+ * //     OrderFulfilledDate: new Date("TIMESTAMP"),
+ * //     PaymentTerm: "THREE_YEARS" || "ONE_YEAR" || "FIVE_YEARS",
+ * //     OrderType: "OUTPOST" || "REPLACEMENT",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateOrderCommandInput - {@link CreateOrderCommandInput}
+ * @returns {@link CreateOrderCommandOutput}
  * @see {@link CreateOrderCommandInput} for command's `input` shape.
  * @see {@link CreateOrderCommandOutput} for command's `response` shape.
- * @see {@link OutpostsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this operation.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting this resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have exceeded a service quota.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class CreateOrderCommand extends $Command<
-  CreateOrderCommandInput,
-  CreateOrderCommandOutput,
-  OutpostsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateOrderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateOrderCommandInput, CreateOrderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "CreateOrderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateOrderInput.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateOrderOutput.filterSensitiveLog,
+export class CreateOrderCommand extends command<CreateOrderCommandInput, CreateOrderCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateOrder",
+  CreateOrder$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateOrderInput;
+      output: CreateOrderOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateOrderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateOrderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateOrderCommandOutput> {
-    return deserializeAws_restJson1CreateOrderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateOrderCommandInput;
+      output: CreateOrderCommandOutput;
+    };
+  };
 }

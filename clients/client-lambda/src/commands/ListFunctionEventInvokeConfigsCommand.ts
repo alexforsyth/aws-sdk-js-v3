@@ -1,104 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import { ListFunctionEventInvokeConfigsRequest, ListFunctionEventInvokeConfigsResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListFunctionEventInvokeConfigsCommand,
-  serializeAws_restJson1ListFunctionEventInvokeConfigsCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface ListFunctionEventInvokeConfigsCommandInput extends ListFunctionEventInvokeConfigsRequest {}
-export interface ListFunctionEventInvokeConfigsCommandOutput
-  extends ListFunctionEventInvokeConfigsResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListFunctionEventInvokeConfigsRequest, ListFunctionEventInvokeConfigsResponse } from "../models/models_0";
+import { ListFunctionEventInvokeConfigs$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves a list of configurations for asynchronous invocation for a function.</p>
- *          <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListFunctionEventInvokeConfigsCommand}.
+ */
+export interface ListFunctionEventInvokeConfigsCommandInput extends ListFunctionEventInvokeConfigsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListFunctionEventInvokeConfigsCommand}.
+ */
+export interface ListFunctionEventInvokeConfigsCommandOutput extends ListFunctionEventInvokeConfigsResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves a list of configurations for asynchronous invocation for a Lambda Event Function. To retrieve more configurations, use the <code>Marker</code> parameter.</p> <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LambdaClient, ListFunctionEventInvokeConfigsCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, ListFunctionEventInvokeConfigsCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // ListFunctionEventInvokeConfigsRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListFunctionEventInvokeConfigsCommand(input);
  * const response = await client.send(command);
+ * // { // ListFunctionEventInvokeConfigsResponse
+ * //   FunctionEventInvokeConfigs: [ // FunctionEventInvokeConfigList
+ * //     { // FunctionEventInvokeConfig
+ * //       LastModified: new Date("TIMESTAMP"),
+ * //       FunctionArn: "STRING_VALUE",
+ * //       MaximumRetryAttempts: Number("int"),
+ * //       MaximumEventAgeInSeconds: Number("int"),
+ * //       DestinationConfig: { // DestinationConfig
+ * //         OnSuccess: { // OnSuccess
+ * //           Destination: "STRING_VALUE",
+ * //         },
+ * //         OnFailure: { // OnFailure
+ * //           Destination: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListFunctionEventInvokeConfigsCommandInput - {@link ListFunctionEventInvokeConfigsCommandInput}
+ * @returns {@link ListFunctionEventInvokeConfigsCommandOutput}
  * @see {@link ListFunctionEventInvokeConfigsCommandInput} for command's `input` shape.
  * @see {@link ListFunctionEventInvokeConfigsCommandOutput} for command's `response` shape.
- * @see {@link LambdaClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @example To view a list of asynchronous invocation configurations
+ * ```javascript
+ * // The following example returns a list of asynchronous invocation configurations for a function named my-function.
+ * const input = {
+ *   FunctionName: "my-function"
+ * };
+ * const command = new ListFunctionEventInvokeConfigsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   FunctionEventInvokeConfigs: [
+ *     {
+ *       FunctionArn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN",
+ *       LastModified: 1.577824406719E9,
+ *       MaximumEventAgeInSeconds: 1800,
+ *       MaximumRetryAttempts: 2
+ *     },
+ *     {
+ *       FunctionArn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE",
+ *       LastModified: 1.577824396653E9,
+ *       MaximumEventAgeInSeconds: 3600,
+ *       MaximumRetryAttempts: 0
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListFunctionEventInvokeConfigsCommand extends $Command<
-  ListFunctionEventInvokeConfigsCommandInput,
-  ListFunctionEventInvokeConfigsCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListFunctionEventInvokeConfigsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListFunctionEventInvokeConfigsCommandInput, ListFunctionEventInvokeConfigsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "ListFunctionEventInvokeConfigsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListFunctionEventInvokeConfigsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListFunctionEventInvokeConfigsResponse.filterSensitiveLog,
+export class ListFunctionEventInvokeConfigsCommand extends command<ListFunctionEventInvokeConfigsCommandInput, ListFunctionEventInvokeConfigsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListFunctionEventInvokeConfigs",
+  ListFunctionEventInvokeConfigs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListFunctionEventInvokeConfigsRequest;
+      output: ListFunctionEventInvokeConfigsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListFunctionEventInvokeConfigsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListFunctionEventInvokeConfigsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListFunctionEventInvokeConfigsCommandOutput> {
-    return deserializeAws_restJson1ListFunctionEventInvokeConfigsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListFunctionEventInvokeConfigsCommandInput;
+      output: ListFunctionEventInvokeConfigsCommandOutput;
+    };
+  };
 }

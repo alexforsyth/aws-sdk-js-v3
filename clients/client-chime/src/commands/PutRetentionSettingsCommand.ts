@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ChimeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeClient";
-import { PutRetentionSettingsRequest, PutRetentionSettingsResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1PutRetentionSettingsCommand,
-  serializeAws_restJson1PutRetentionSettingsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutRetentionSettingsRequest, PutRetentionSettingsResponse } from "../models/models_0";
+import { PutRetentionSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutRetentionSettingsCommand}.
+ */
 export interface PutRetentionSettingsCommandInput extends PutRetentionSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutRetentionSettingsCommand}.
+ */
 export interface PutRetentionSettingsCommandOutput extends PutRetentionSettingsResponse, __MetadataBearer {}
 
 /**
@@ -26,7 +27,6 @@ export interface PutRetentionSettingsCommandOutput extends PutRetentionSettingsR
  * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see
  * <a href="https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html">Logging Amazon Chime API Calls with AWS CloudTrail</a>
  * in the <i>Amazon Chime Administration Guide</i>.</p>
- *
  *          <p>
  * To turn off existing retention settings, remove the number of days from the corresponding
  * <b>RetentionDays</b>
@@ -40,68 +40,88 @@ export interface PutRetentionSettingsCommandOutput extends PutRetentionSettingsR
  * ```javascript
  * import { ChimeClient, PutRetentionSettingsCommand } from "@aws-sdk/client-chime"; // ES Modules import
  * // const { ChimeClient, PutRetentionSettingsCommand } = require("@aws-sdk/client-chime"); // CommonJS import
+ * // import type { ChimeClientConfig } from "@aws-sdk/client-chime";
+ * const config = {}; // type is ChimeClientConfig
  * const client = new ChimeClient(config);
+ * const input = { // PutRetentionSettingsRequest
+ *   AccountId: "STRING_VALUE", // required
+ *   RetentionSettings: { // RetentionSettings
+ *     RoomRetentionSettings: { // RoomRetentionSettings
+ *       RetentionDays: Number("int"),
+ *     },
+ *     ConversationRetentionSettings: { // ConversationRetentionSettings
+ *       RetentionDays: Number("int"),
+ *     },
+ *   },
+ * };
  * const command = new PutRetentionSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // PutRetentionSettingsResponse
+ * //   RetentionSettings: { // RetentionSettings
+ * //     RoomRetentionSettings: { // RoomRetentionSettings
+ * //       RetentionDays: Number("int"),
+ * //     },
+ * //     ConversationRetentionSettings: { // ConversationRetentionSettings
+ * //       RetentionDays: Number("int"),
+ * //     },
+ * //   },
+ * //   InitiateDeletionTimestamp: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param PutRetentionSettingsCommandInput - {@link PutRetentionSettingsCommandInput}
+ * @returns {@link PutRetentionSettingsCommandOutput}
  * @see {@link PutRetentionSettingsCommandInput} for command's `input` shape.
  * @see {@link PutRetentionSettingsCommandOutput} for command's `response` shape.
- * @see {@link ChimeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ChimeClientResolvedConfig | config} for ChimeClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be processed because of conflict in the current state of the
+ *          resource.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeServiceException}
+ * <p>Base exception class for all service exceptions from Chime service.</p>
+ *
+ *
+ * @public
  */
-export class PutRetentionSettingsCommand extends $Command<
-  PutRetentionSettingsCommandInput,
-  PutRetentionSettingsCommandOutput,
-  ChimeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutRetentionSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutRetentionSettingsCommandInput, PutRetentionSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeClient";
-    const commandName = "PutRetentionSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutRetentionSettingsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutRetentionSettingsResponse.filterSensitiveLog,
+export class PutRetentionSettingsCommand extends command<PutRetentionSettingsCommandInput, PutRetentionSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutRetentionSettings",
+  PutRetentionSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutRetentionSettingsRequest;
+      output: PutRetentionSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutRetentionSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutRetentionSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutRetentionSettingsCommandOutput> {
-    return deserializeAws_restJson1PutRetentionSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutRetentionSettingsCommandInput;
+      output: PutRetentionSettingsCommandOutput;
+    };
+  };
 }

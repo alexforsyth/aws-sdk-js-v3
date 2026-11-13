@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetServiceLastAccessedDetailsWithEntitiesRequest,
   GetServiceLastAccessedDetailsWithEntitiesResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_queryGetServiceLastAccessedDetailsWithEntitiesCommand,
-  serializeAws_queryGetServiceLastAccessedDetailsWithEntitiesCommand,
-} from "../protocols/Aws_query";
+import { GetServiceLastAccessedDetailsWithEntities$ } from "../schemas/schemas_0";
 
-export interface GetServiceLastAccessedDetailsWithEntitiesCommandInput
-  extends GetServiceLastAccessedDetailsWithEntitiesRequest {}
-export interface GetServiceLastAccessedDetailsWithEntitiesCommandOutput
-  extends GetServiceLastAccessedDetailsWithEntitiesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetServiceLastAccessedDetailsWithEntitiesCommand}.
+ */
+export interface GetServiceLastAccessedDetailsWithEntitiesCommandInput extends GetServiceLastAccessedDetailsWithEntitiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetServiceLastAccessedDetailsWithEntitiesCommand}.
+ */
+export interface GetServiceLastAccessedDetailsWithEntitiesCommandOutput extends GetServiceLastAccessedDetailsWithEntitiesResponse, __MetadataBearer {}
 
 /**
  * <p>After you generate a group or policy report using the
@@ -34,102 +32,143 @@ export interface GetServiceLastAccessedDetailsWithEntitiesCommandOutput
  *                 <code>GetServiceLastAccessedDetailsWithEntities</code>. This operation retrieves the
  *             status of your report job and a list of entities that could have used group or policy
  *             permissions to access the specified service.</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Group</b> – For a group report, this
  *                     operation returns a list of users in the group that could have used the group’s
  *                     policies in an attempt to access the service.</p>
  *             </li>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Policy</b> – For a policy report, this
  *                     operation returns a list of entities (users or roles) that could have used the
  *                     policy in an attempt to access the service.</p>
  *             </li>
  *          </ul>
- *         <p>You can also use this operation for user or role reports to retrieve details about
+ *          <p>You can also use this operation for user or role reports to retrieve details about
  *             those entities.</p>
- *         <p>If the operation fails, the <code>GetServiceLastAccessedDetailsWithEntities</code>
+ *          <p>If the operation fails, the <code>GetServiceLastAccessedDetailsWithEntities</code>
  *             operation returns the reason that it failed.</p>
- *         <p>By default, the list of associated entities is sorted by date, with the most recent
+ *          <p>By default, the list of associated entities is sorted by date, with the most recent
  *             access listed first.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, GetServiceLastAccessedDetailsWithEntitiesCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, GetServiceLastAccessedDetailsWithEntitiesCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // GetServiceLastAccessedDetailsWithEntitiesRequest
+ *   JobId: "STRING_VALUE", // required
+ *   ServiceNamespace: "STRING_VALUE", // required
+ *   MaxItems: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new GetServiceLastAccessedDetailsWithEntitiesCommand(input);
  * const response = await client.send(command);
+ * // { // GetServiceLastAccessedDetailsWithEntitiesResponse
+ * //   JobStatus: "IN_PROGRESS" || "COMPLETED" || "FAILED", // required
+ * //   JobCreationDate: new Date("TIMESTAMP"), // required
+ * //   JobCompletionDate: new Date("TIMESTAMP"), // required
+ * //   EntityDetailsList: [ // entityDetailsListType // required
+ * //     { // EntityDetails
+ * //       EntityInfo: { // EntityInfo
+ * //         Arn: "STRING_VALUE", // required
+ * //         Name: "STRING_VALUE", // required
+ * //         Type: "USER" || "ROLE" || "GROUP", // required
+ * //         Id: "STRING_VALUE", // required
+ * //         Path: "STRING_VALUE",
+ * //       },
+ * //       LastAuthenticated: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   IsTruncated: true || false,
+ * //   Marker: "STRING_VALUE",
+ * //   Error: { // ErrorDetails
+ * //     Message: "STRING_VALUE", // required
+ * //     Code: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetServiceLastAccessedDetailsWithEntitiesCommandInput - {@link GetServiceLastAccessedDetailsWithEntitiesCommandInput}
+ * @returns {@link GetServiceLastAccessedDetailsWithEntitiesCommandOutput}
  * @see {@link GetServiceLastAccessedDetailsWithEntitiesCommandInput} for command's `input` shape.
  * @see {@link GetServiceLastAccessedDetailsWithEntitiesCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *       input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @example To get sntity details from a previously-generated report
+ * ```javascript
+ * // The following operation returns details about the entities that attempted to access the IAM service.
+ * const input = {
+ *   JobId: "examplef-1305-c245-eba4-71fe298bcda7",
+ *   ServiceNamespace: "iam"
+ * };
+ * const command = new GetServiceLastAccessedDetailsWithEntitiesCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   EntityDetailsList: [
+ *     {
+ *       EntityInfo: {
+ *         Arn: "arn:aws:iam::123456789012:user/AWSExampleUser01",
+ *         Id: "AIDAEX2EXAMPLEB6IGCDC",
+ *         Name: "AWSExampleUser01",
+ *         Path: "/",
+ *         Type: "USER"
+ *       },
+ *       LastAuthenticated: "2018-10-24T19:10:00Z"
+ *     },
+ *     {
+ *       EntityInfo: {
+ *         Arn: "arn:aws:iam::123456789012:role/AWSExampleRole01",
+ *         Id: "AROAEAEXAMPLEIANXSIU4",
+ *         Name: "AWSExampleRole01",
+ *         Path: "/",
+ *         Type: "ROLE"
+ *       }
+ *     }
+ *   ],
+ *   IsTruncated: false,
+ *   JobCompletionDate: "2018-10-24T19:47:35.241Z",
+ *   JobCreationDate: "2018-10-24T19:47:31.466Z",
+ *   JobStatus: "COMPLETED"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetServiceLastAccessedDetailsWithEntitiesCommand extends $Command<
-  GetServiceLastAccessedDetailsWithEntitiesCommandInput,
-  GetServiceLastAccessedDetailsWithEntitiesCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetServiceLastAccessedDetailsWithEntitiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetServiceLastAccessedDetailsWithEntitiesCommandInput,
-    GetServiceLastAccessedDetailsWithEntitiesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "GetServiceLastAccessedDetailsWithEntitiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetServiceLastAccessedDetailsWithEntitiesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetServiceLastAccessedDetailsWithEntitiesResponse.filterSensitiveLog,
+export class GetServiceLastAccessedDetailsWithEntitiesCommand extends command<GetServiceLastAccessedDetailsWithEntitiesCommandInput, GetServiceLastAccessedDetailsWithEntitiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetServiceLastAccessedDetailsWithEntities",
+  GetServiceLastAccessedDetailsWithEntities$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetServiceLastAccessedDetailsWithEntitiesRequest;
+      output: GetServiceLastAccessedDetailsWithEntitiesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetServiceLastAccessedDetailsWithEntitiesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryGetServiceLastAccessedDetailsWithEntitiesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetServiceLastAccessedDetailsWithEntitiesCommandOutput> {
-    return deserializeAws_queryGetServiceLastAccessedDetailsWithEntitiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetServiceLastAccessedDetailsWithEntitiesCommandInput;
+      output: GetServiceLastAccessedDetailsWithEntitiesCommandOutput;
+    };
+  };
 }

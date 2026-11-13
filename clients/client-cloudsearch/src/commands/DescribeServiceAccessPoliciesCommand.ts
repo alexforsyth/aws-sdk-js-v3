@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DescribeServiceAccessPoliciesRequest, DescribeServiceAccessPoliciesResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeServiceAccessPoliciesCommand,
-  serializeAws_queryDescribeServiceAccessPoliciesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeServiceAccessPoliciesRequest, DescribeServiceAccessPoliciesResponse } from "../models/models_0";
+import { DescribeServiceAccessPolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeServiceAccessPoliciesCommand}.
+ */
 export interface DescribeServiceAccessPoliciesCommandInput extends DescribeServiceAccessPoliciesRequest {}
-export interface DescribeServiceAccessPoliciesCommandOutput
-  extends DescribeServiceAccessPoliciesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeServiceAccessPoliciesCommand}.
+ */
+export interface DescribeServiceAccessPoliciesCommandOutput extends DescribeServiceAccessPoliciesResponse, __MetadataBearer {}
 
 /**
  * <p>Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information,
@@ -31,71 +30,67 @@ export interface DescribeServiceAccessPoliciesCommandOutput
  * ```javascript
  * import { CloudSearchClient, DescribeServiceAccessPoliciesCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DescribeServiceAccessPoliciesCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DescribeServiceAccessPoliciesRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   Deployed: true || false,
+ * };
  * const command = new DescribeServiceAccessPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeServiceAccessPoliciesResponse
+ * //   AccessPolicies: { // AccessPoliciesStatus
+ * //     Options: "STRING_VALUE", // required
+ * //     Status: { // OptionStatus
+ * //       CreationDate: new Date("TIMESTAMP"), // required
+ * //       UpdateDate: new Date("TIMESTAMP"), // required
+ * //       UpdateVersion: Number("int"),
+ * //       State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //       PendingDeletion: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeServiceAccessPoliciesCommandInput - {@link DescribeServiceAccessPoliciesCommandInput}
+ * @returns {@link DescribeServiceAccessPoliciesCommandOutput}
  * @see {@link DescribeServiceAccessPoliciesCommandInput} for command's `input` shape.
  * @see {@link DescribeServiceAccessPoliciesCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeServiceAccessPoliciesCommand extends $Command<
-  DescribeServiceAccessPoliciesCommandInput,
-  DescribeServiceAccessPoliciesCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeServiceAccessPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeServiceAccessPoliciesCommandInput, DescribeServiceAccessPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DescribeServiceAccessPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeServiceAccessPoliciesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeServiceAccessPoliciesResponse.filterSensitiveLog,
+export class DescribeServiceAccessPoliciesCommand extends command<DescribeServiceAccessPoliciesCommandInput, DescribeServiceAccessPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeServiceAccessPolicies",
+  DescribeServiceAccessPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeServiceAccessPoliciesRequest;
+      output: DescribeServiceAccessPoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeServiceAccessPoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeServiceAccessPoliciesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeServiceAccessPoliciesCommandOutput> {
-    return deserializeAws_queryDescribeServiceAccessPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeServiceAccessPoliciesCommandInput;
+      output: DescribeServiceAccessPoliciesCommandOutput;
+    };
+  };
 }

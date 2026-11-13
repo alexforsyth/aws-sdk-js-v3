@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DirectoryServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DirectoryServiceClient";
-import { CreateAliasRequest, CreateAliasResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateAliasCommand,
-  serializeAws_json1_1CreateAliasCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAliasRequest, CreateAliasResult } from "../models/models_0";
+import { CreateAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAliasCommand}.
+ */
 export interface CreateAliasCommandInput extends CreateAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAliasCommand}.
+ */
 export interface CreateAliasCommandOutput extends CreateAliasResult, __MetadataBearer {}
 
 /**
@@ -33,68 +34,81 @@ export interface CreateAliasCommandOutput extends CreateAliasResult, __MetadataB
  * ```javascript
  * import { DirectoryServiceClient, CreateAliasCommand } from "@aws-sdk/client-directory-service"; // ES Modules import
  * // const { DirectoryServiceClient, CreateAliasCommand } = require("@aws-sdk/client-directory-service"); // CommonJS import
+ * // import type { DirectoryServiceClientConfig } from "@aws-sdk/client-directory-service";
+ * const config = {}; // type is DirectoryServiceClientConfig
  * const client = new DirectoryServiceClient(config);
+ * const input = { // CreateAliasRequest
+ *   DirectoryId: "STRING_VALUE", // required
+ *   Alias: "STRING_VALUE", // required
+ * };
  * const command = new CreateAliasCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAliasResult
+ * //   DirectoryId: "STRING_VALUE",
+ * //   Alias: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateAliasCommandInput - {@link CreateAliasCommandInput}
+ * @returns {@link CreateAliasCommandOutput}
  * @see {@link CreateAliasCommandInput} for command's `input` shape.
  * @see {@link CreateAliasCommandOutput} for command's `response` shape.
- * @see {@link DirectoryServiceClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DirectoryServiceClientResolvedConfig | config} for DirectoryServiceClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>A client exception has occurred.</p>
+ *
+ * @throws {@link EntityAlreadyExistsException} (client fault)
+ *  <p>The specified entity already exists.</p>
+ *
+ * @throws {@link EntityDoesNotExistException} (client fault)
+ *  <p>The specified entity could not be found.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more parameters are not valid.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>An exception has occurred in Directory Service.</p>
+ *
+ * @throws {@link DirectoryServiceServiceException}
+ * <p>Base exception class for all service exceptions from DirectoryService service.</p>
+ *
+ *
+ * @example To create an alias for a directory
+ * ```javascript
+ * // The following example creates an alias for a directory.
+ * const input = {
+ *   Alias: "salesorg",
+ *   DirectoryId: "d-92654abfed"
+ * };
+ * const command = new CreateAliasCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Alias: "salesorg",
+ *   DirectoryId: "d-92654abfed"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateAliasCommand extends $Command<
-  CreateAliasCommandInput,
-  CreateAliasCommandOutput,
-  DirectoryServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DirectoryServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAliasCommandInput, CreateAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DirectoryServiceClient";
-    const commandName = "CreateAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAliasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAliasResult.filterSensitiveLog,
+export class CreateAliasCommand extends command<CreateAliasCommandInput, CreateAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAlias",
+  CreateAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAliasRequest;
+      output: CreateAliasResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAliasCommandOutput> {
-    return deserializeAws_json1_1CreateAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAliasCommandInput;
+      output: CreateAliasCommandOutput;
+    };
+  };
 }

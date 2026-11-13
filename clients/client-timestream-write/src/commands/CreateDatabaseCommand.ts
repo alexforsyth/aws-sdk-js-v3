@@ -1,102 +1,117 @@
-import { getEndpointDiscoveryPlugin } from "@aws-sdk/middleware-endpoint-discovery";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateDatabaseRequest, CreateDatabaseResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0CreateDatabaseCommand,
-  serializeAws_json1_0CreateDatabaseCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, TimestreamWriteClientResolvedConfig } from "../TimestreamWriteClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDatabaseRequest, CreateDatabaseResponse } from "../models/models_0";
+import { CreateDatabase$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDatabaseCommand}.
+ */
 export interface CreateDatabaseCommandInput extends CreateDatabaseRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDatabaseCommand}.
+ */
 export interface CreateDatabaseCommandOutput extends CreateDatabaseResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.
- *          Refer to <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">AWS managed KMS keys</a> for more info.
- *          Service quotas apply. For more information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Access Management</a> in the Timestream Developer Guide.
+ * <p>Creates a new Timestream database. If the KMS key is not
+ *          specified, the database will be encrypted with a Timestream managed KMS key located in your account. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. For
+ *          details, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html">code sample</a>.
  *       </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TimestreamWriteClient, CreateDatabaseCommand } from "@aws-sdk/client-timestream-write"; // ES Modules import
  * // const { TimestreamWriteClient, CreateDatabaseCommand } = require("@aws-sdk/client-timestream-write"); // CommonJS import
+ * // import type { TimestreamWriteClientConfig } from "@aws-sdk/client-timestream-write";
+ * const config = {}; // type is TimestreamWriteClientConfig
  * const client = new TimestreamWriteClient(config);
+ * const input = { // CreateDatabaseRequest
+ *   DatabaseName: "STRING_VALUE", // required
+ *   KmsKeyId: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateDatabaseCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDatabaseResponse
+ * //   Database: { // Database
+ * //     Arn: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     TableCount: Number("long"),
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     LastUpdatedTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDatabaseCommandInput - {@link CreateDatabaseCommandInput}
+ * @returns {@link CreateDatabaseCommandOutput}
  * @see {@link CreateDatabaseCommandInput} for command's `input` shape.
  * @see {@link CreateDatabaseCommandOutput} for command's `response` shape.
- * @see {@link TimestreamWriteClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TimestreamWriteClientResolvedConfig | config} for TimestreamWriteClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You are not authorized to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Timestream was unable to process this request because it contains resource that
+ *          already exists.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>
+ *          Timestream was unable to fully process this request because of an internal server
+ *          error.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *  <p>The requested endpoint was not valid.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p> The instance quota of resource exceeded for this account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p> Too many requests were made by a user and they exceeded the service quotas. The request
+ *          was throttled.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> An invalid or malformed request.</p>
+ *
+ * @throws {@link TimestreamWriteServiceException}
+ * <p>Base exception class for all service exceptions from TimestreamWrite service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDatabaseCommand extends $Command<
-  CreateDatabaseCommandInput,
-  CreateDatabaseCommandOutput,
-  TimestreamWriteClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDatabaseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TimestreamWriteClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDatabaseCommandInput, CreateDatabaseCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(
-      getEndpointDiscoveryPlugin(configuration, { clientStack, options, isDiscoveredEndpointRequired: true })
-    );
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TimestreamWriteClient";
-    const commandName = "CreateDatabaseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDatabaseRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDatabaseResponse.filterSensitiveLog,
+export class CreateDatabaseCommand extends command<CreateDatabaseCommandInput, CreateDatabaseCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDatabase",
+  CreateDatabase$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDatabaseRequest;
+      output: CreateDatabaseResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDatabaseCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateDatabaseCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDatabaseCommandOutput> {
-    return deserializeAws_json1_0CreateDatabaseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDatabaseCommandInput;
+      output: CreateDatabaseCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type DescribeClusterSnapshotsCommandInput,
+  type DescribeClusterSnapshotsCommandOutput,
   DescribeClusterSnapshotsCommand,
-  DescribeClusterSnapshotsCommandInput,
 } from "../commands/DescribeClusterSnapshotsCommand";
-import { RedshiftClient } from "../RedshiftClient";
+import type { RedshiftServiceException } from "../models/RedshiftServiceException";
+import type { RedshiftClient } from "../RedshiftClient";
 
-const checkState = async (
-  client: RedshiftClient,
-  input: DescribeClusterSnapshotsCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: RedshiftClient, input: DescribeClusterSnapshotsCommandInput): Promise<WaiterResult<DescribeClusterSnapshotsCommandOutput | RedshiftServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeClusterSnapshotsCommand(input));
+    let result: DescribeClusterSnapshotsCommandOutput & any = await client.send(new DescribeClusterSnapshotsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Snapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Snapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "available";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "available")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -32,13 +38,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Snapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Snapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "failed") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -46,13 +52,13 @@ const checkState = async (
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Snapshots);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Snapshots);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.Status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "deleted") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -70,7 +76,7 @@ const checkState = async (
 export const waitForSnapshotAvailable = async (
   params: WaiterConfiguration<RedshiftClient>,
   input: DescribeClusterSnapshotsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterSnapshotsCommandOutput | RedshiftServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -82,8 +88,8 @@ export const waitForSnapshotAvailable = async (
 export const waitUntilSnapshotAvailable = async (
   params: WaiterConfiguration<RedshiftClient>,
   input: DescribeClusterSnapshotsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterSnapshotsCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeClusterSnapshotsCommandOutput>;
 };

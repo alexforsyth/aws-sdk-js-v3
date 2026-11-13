@@ -1,103 +1,115 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { UpdateQueueOutboundCallerConfigRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateQueueOutboundCallerConfigCommand,
-  serializeAws_restJson1UpdateQueueOutboundCallerConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateQueueOutboundCallerConfigRequest } from "../models/models_4";
+import { UpdateQueueOutboundCallerConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateQueueOutboundCallerConfigCommand}.
+ */
 export interface UpdateQueueOutboundCallerConfigCommandInput extends UpdateQueueOutboundCallerConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateQueueOutboundCallerConfigCommand}.
+ */
 export interface UpdateQueueOutboundCallerConfigCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>This API is in preview release for Amazon Connect and is subject to change.</p>
- *          <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified
- *    queue.</p>
+ * <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.</p>
+ *          <important>
+ *             <ul>
+ *                <li>
+ *                   <p>If the phone number is claimed to a traffic distribution group that was created in the
+ *       same Region as the Connect Customer instance where you are calling this API, then you can use a
+ *       full phone number ARN or a UUID for <code>OutboundCallerIdNumberId</code>. However, if the phone number is claimed
+ *       to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a
+ *       UUID is provided in this scenario, you will receive a
+ *       <code>ResourceNotFoundException</code>.</p>
+ *                </li>
+ *                <li>
+ *                   <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the path, for example,
+ *        <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This is the same ARN format that is returned
+ *       when you call the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html">ListPhoneNumbersV2</a> API.</p>
+ *                </li>
+ *                <li>
+ *                   <p>If you plan to use IAM policies to allow/deny access to this API for phone number resources
+ *       claimed to a traffic distribution group, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region">Allow or Deny queue API actions for phone numbers in a replica Region</a>.</p>
+ *                </li>
+ *             </ul>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, UpdateQueueOutboundCallerConfigCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, UpdateQueueOutboundCallerConfigCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // UpdateQueueOutboundCallerConfigRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   QueueId: "STRING_VALUE", // required
+ *   OutboundCallerConfig: { // OutboundCallerConfig
+ *     OutboundCallerIdName: "STRING_VALUE",
+ *     OutboundCallerIdNumberId: "STRING_VALUE",
+ *     OutboundFlowId: "STRING_VALUE",
+ *   },
+ * };
  * const command = new UpdateQueueOutboundCallerConfigCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateQueueOutboundCallerConfigCommandInput - {@link UpdateQueueOutboundCallerConfigCommandInput}
+ * @returns {@link UpdateQueueOutboundCallerConfigCommandOutput}
  * @see {@link UpdateQueueOutboundCallerConfigCommandInput} for command's `input` shape.
  * @see {@link UpdateQueueOutboundCallerConfigCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateQueueOutboundCallerConfigCommand extends $Command<
-  UpdateQueueOutboundCallerConfigCommandInput,
-  UpdateQueueOutboundCallerConfigCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateQueueOutboundCallerConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateQueueOutboundCallerConfigCommandInput, UpdateQueueOutboundCallerConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "UpdateQueueOutboundCallerConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateQueueOutboundCallerConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateQueueOutboundCallerConfigCommand extends command<UpdateQueueOutboundCallerConfigCommandInput, UpdateQueueOutboundCallerConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateQueueOutboundCallerConfig",
+  UpdateQueueOutboundCallerConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateQueueOutboundCallerConfigRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateQueueOutboundCallerConfigCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateQueueOutboundCallerConfigCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateQueueOutboundCallerConfigCommandOutput> {
-    return deserializeAws_restJson1UpdateQueueOutboundCallerConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateQueueOutboundCallerConfigCommandInput;
+      output: UpdateQueueOutboundCallerConfigCommandOutput;
+    };
+  };
 }

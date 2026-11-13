@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CountPendingDecisionTasksInput, PendingTaskCount } from "../models/models_0";
-import {
-  deserializeAws_json1_0CountPendingDecisionTasksCommand,
-  serializeAws_json1_0CountPendingDecisionTasksCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SWFClientResolvedConfig } from "../SWFClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CountPendingDecisionTasksInput, PendingTaskCount } from "../models/models_0";
+import { CountPendingDecisionTasks$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CountPendingDecisionTasksCommand}.
+ */
 export interface CountPendingDecisionTasksCommandInput extends CountPendingDecisionTasksInput {}
+/**
+ * @public
+ *
+ * The output of {@link CountPendingDecisionTasksCommand}.
+ */
 export interface CountPendingDecisionTasksCommandOutput extends PendingTaskCount, __MetadataBearer {}
 
 /**
@@ -55,71 +56,57 @@ export interface CountPendingDecisionTasksCommandOutput extends PendingTaskCount
  * ```javascript
  * import { SWFClient, CountPendingDecisionTasksCommand } from "@aws-sdk/client-swf"; // ES Modules import
  * // const { SWFClient, CountPendingDecisionTasksCommand } = require("@aws-sdk/client-swf"); // CommonJS import
+ * // import type { SWFClientConfig } from "@aws-sdk/client-swf";
+ * const config = {}; // type is SWFClientConfig
  * const client = new SWFClient(config);
+ * const input = { // CountPendingDecisionTasksInput
+ *   domain: "STRING_VALUE", // required
+ *   taskList: { // TaskList
+ *     name: "STRING_VALUE", // required
+ *   },
+ * };
  * const command = new CountPendingDecisionTasksCommand(input);
  * const response = await client.send(command);
+ * // { // PendingTaskCount
+ * //   count: Number("int"), // required
+ * //   truncated: true || false,
+ * // };
+ *
  * ```
  *
+ * @param CountPendingDecisionTasksCommandInput - {@link CountPendingDecisionTasksCommandInput}
+ * @returns {@link CountPendingDecisionTasksCommandOutput}
  * @see {@link CountPendingDecisionTasksCommandInput} for command's `input` shape.
  * @see {@link CountPendingDecisionTasksCommandOutput} for command's `response` shape.
- * @see {@link SWFClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SWFClientResolvedConfig | config} for SWFClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedFault} (client fault)
+ *  <p>Returned when the caller doesn't have sufficient permissions to invoke the action.</p>
+ *
+ * @throws {@link UnknownResourceFault} (client fault)
+ *  <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
+ *
+ * @throws {@link SWFServiceException}
+ * <p>Base exception class for all service exceptions from SWF service.</p>
+ *
+ *
+ * @public
  */
-export class CountPendingDecisionTasksCommand extends $Command<
-  CountPendingDecisionTasksCommandInput,
-  CountPendingDecisionTasksCommandOutput,
-  SWFClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CountPendingDecisionTasksCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SWFClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CountPendingDecisionTasksCommandInput, CountPendingDecisionTasksCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SWFClient";
-    const commandName = "CountPendingDecisionTasksCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CountPendingDecisionTasksInput.filterSensitiveLog,
-      outputFilterSensitiveLog: PendingTaskCount.filterSensitiveLog,
+export class CountPendingDecisionTasksCommand extends command<CountPendingDecisionTasksCommandInput, CountPendingDecisionTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "CountPendingDecisionTasks",
+  CountPendingDecisionTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CountPendingDecisionTasksInput;
+      output: PendingTaskCount;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CountPendingDecisionTasksCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CountPendingDecisionTasksCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CountPendingDecisionTasksCommandOutput> {
-    return deserializeAws_json1_0CountPendingDecisionTasksCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CountPendingDecisionTasksCommandInput;
+      output: CountPendingDecisionTasksCommandOutput;
+    };
+  };
 }

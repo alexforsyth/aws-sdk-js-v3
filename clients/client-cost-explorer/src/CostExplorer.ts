@@ -1,1236 +1,1335 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateAnomalyMonitorCommandInput,
+  type CreateAnomalyMonitorCommandOutput,
   CreateAnomalyMonitorCommand,
-  CreateAnomalyMonitorCommandInput,
-  CreateAnomalyMonitorCommandOutput,
 } from "./commands/CreateAnomalyMonitorCommand";
 import {
+  type CreateAnomalySubscriptionCommandInput,
+  type CreateAnomalySubscriptionCommandOutput,
   CreateAnomalySubscriptionCommand,
-  CreateAnomalySubscriptionCommandInput,
-  CreateAnomalySubscriptionCommandOutput,
 } from "./commands/CreateAnomalySubscriptionCommand";
 import {
+  type CreateCostCategoryDefinitionCommandInput,
+  type CreateCostCategoryDefinitionCommandOutput,
   CreateCostCategoryDefinitionCommand,
-  CreateCostCategoryDefinitionCommandInput,
-  CreateCostCategoryDefinitionCommandOutput,
 } from "./commands/CreateCostCategoryDefinitionCommand";
 import {
+  type DeleteAnomalyMonitorCommandInput,
+  type DeleteAnomalyMonitorCommandOutput,
   DeleteAnomalyMonitorCommand,
-  DeleteAnomalyMonitorCommandInput,
-  DeleteAnomalyMonitorCommandOutput,
 } from "./commands/DeleteAnomalyMonitorCommand";
 import {
+  type DeleteAnomalySubscriptionCommandInput,
+  type DeleteAnomalySubscriptionCommandOutput,
   DeleteAnomalySubscriptionCommand,
-  DeleteAnomalySubscriptionCommandInput,
-  DeleteAnomalySubscriptionCommandOutput,
 } from "./commands/DeleteAnomalySubscriptionCommand";
 import {
+  type DeleteCostCategoryDefinitionCommandInput,
+  type DeleteCostCategoryDefinitionCommandOutput,
   DeleteCostCategoryDefinitionCommand,
-  DeleteCostCategoryDefinitionCommandInput,
-  DeleteCostCategoryDefinitionCommandOutput,
 } from "./commands/DeleteCostCategoryDefinitionCommand";
 import {
+  type DescribeCostCategoryDefinitionCommandInput,
+  type DescribeCostCategoryDefinitionCommandOutput,
   DescribeCostCategoryDefinitionCommand,
-  DescribeCostCategoryDefinitionCommandInput,
-  DescribeCostCategoryDefinitionCommandOutput,
 } from "./commands/DescribeCostCategoryDefinitionCommand";
 import {
+  type GetAnomaliesCommandInput,
+  type GetAnomaliesCommandOutput,
   GetAnomaliesCommand,
-  GetAnomaliesCommandInput,
-  GetAnomaliesCommandOutput,
 } from "./commands/GetAnomaliesCommand";
 import {
+  type GetAnomalyMonitorsCommandInput,
+  type GetAnomalyMonitorsCommandOutput,
   GetAnomalyMonitorsCommand,
-  GetAnomalyMonitorsCommandInput,
-  GetAnomalyMonitorsCommandOutput,
 } from "./commands/GetAnomalyMonitorsCommand";
 import {
+  type GetAnomalySubscriptionsCommandInput,
+  type GetAnomalySubscriptionsCommandOutput,
   GetAnomalySubscriptionsCommand,
-  GetAnomalySubscriptionsCommandInput,
-  GetAnomalySubscriptionsCommandOutput,
 } from "./commands/GetAnomalySubscriptionsCommand";
 import {
+  type GetApproximateUsageRecordsCommandInput,
+  type GetApproximateUsageRecordsCommandOutput,
+  GetApproximateUsageRecordsCommand,
+} from "./commands/GetApproximateUsageRecordsCommand";
+import {
+  type GetCommitmentPurchaseAnalysisCommandInput,
+  type GetCommitmentPurchaseAnalysisCommandOutput,
+  GetCommitmentPurchaseAnalysisCommand,
+} from "./commands/GetCommitmentPurchaseAnalysisCommand";
+import {
+  type GetCostAndUsageCommandInput,
+  type GetCostAndUsageCommandOutput,
   GetCostAndUsageCommand,
-  GetCostAndUsageCommandInput,
-  GetCostAndUsageCommandOutput,
 } from "./commands/GetCostAndUsageCommand";
 import {
+  type GetCostAndUsageComparisonsCommandInput,
+  type GetCostAndUsageComparisonsCommandOutput,
+  GetCostAndUsageComparisonsCommand,
+} from "./commands/GetCostAndUsageComparisonsCommand";
+import {
+  type GetCostAndUsageWithResourcesCommandInput,
+  type GetCostAndUsageWithResourcesCommandOutput,
   GetCostAndUsageWithResourcesCommand,
-  GetCostAndUsageWithResourcesCommandInput,
-  GetCostAndUsageWithResourcesCommandOutput,
 } from "./commands/GetCostAndUsageWithResourcesCommand";
 import {
+  type GetCostCategoriesCommandInput,
+  type GetCostCategoriesCommandOutput,
   GetCostCategoriesCommand,
-  GetCostCategoriesCommandInput,
-  GetCostCategoriesCommandOutput,
 } from "./commands/GetCostCategoriesCommand";
 import {
+  type GetCostComparisonDriversCommandInput,
+  type GetCostComparisonDriversCommandOutput,
+  GetCostComparisonDriversCommand,
+} from "./commands/GetCostComparisonDriversCommand";
+import {
+  type GetCostForecastCommandInput,
+  type GetCostForecastCommandOutput,
   GetCostForecastCommand,
-  GetCostForecastCommandInput,
-  GetCostForecastCommandOutput,
 } from "./commands/GetCostForecastCommand";
 import {
+  type GetDimensionValuesCommandInput,
+  type GetDimensionValuesCommandOutput,
   GetDimensionValuesCommand,
-  GetDimensionValuesCommandInput,
-  GetDimensionValuesCommandOutput,
 } from "./commands/GetDimensionValuesCommand";
 import {
+  type GetReservationCoverageCommandInput,
+  type GetReservationCoverageCommandOutput,
   GetReservationCoverageCommand,
-  GetReservationCoverageCommandInput,
-  GetReservationCoverageCommandOutput,
 } from "./commands/GetReservationCoverageCommand";
 import {
+  type GetReservationPurchaseRecommendationCommandInput,
+  type GetReservationPurchaseRecommendationCommandOutput,
   GetReservationPurchaseRecommendationCommand,
-  GetReservationPurchaseRecommendationCommandInput,
-  GetReservationPurchaseRecommendationCommandOutput,
 } from "./commands/GetReservationPurchaseRecommendationCommand";
 import {
+  type GetReservationUtilizationCommandInput,
+  type GetReservationUtilizationCommandOutput,
   GetReservationUtilizationCommand,
-  GetReservationUtilizationCommandInput,
-  GetReservationUtilizationCommandOutput,
 } from "./commands/GetReservationUtilizationCommand";
 import {
+  type GetRightsizingRecommendationCommandInput,
+  type GetRightsizingRecommendationCommandOutput,
   GetRightsizingRecommendationCommand,
-  GetRightsizingRecommendationCommandInput,
-  GetRightsizingRecommendationCommandOutput,
 } from "./commands/GetRightsizingRecommendationCommand";
 import {
+  type GetSavingsPlanPurchaseRecommendationDetailsCommandInput,
+  type GetSavingsPlanPurchaseRecommendationDetailsCommandOutput,
+  GetSavingsPlanPurchaseRecommendationDetailsCommand,
+} from "./commands/GetSavingsPlanPurchaseRecommendationDetailsCommand";
+import {
+  type GetSavingsPlansCoverageCommandInput,
+  type GetSavingsPlansCoverageCommandOutput,
   GetSavingsPlansCoverageCommand,
-  GetSavingsPlansCoverageCommandInput,
-  GetSavingsPlansCoverageCommandOutput,
 } from "./commands/GetSavingsPlansCoverageCommand";
 import {
+  type GetSavingsPlansPurchaseRecommendationCommandInput,
+  type GetSavingsPlansPurchaseRecommendationCommandOutput,
   GetSavingsPlansPurchaseRecommendationCommand,
-  GetSavingsPlansPurchaseRecommendationCommandInput,
-  GetSavingsPlansPurchaseRecommendationCommandOutput,
 } from "./commands/GetSavingsPlansPurchaseRecommendationCommand";
 import {
+  type GetSavingsPlansUtilizationCommandInput,
+  type GetSavingsPlansUtilizationCommandOutput,
   GetSavingsPlansUtilizationCommand,
-  GetSavingsPlansUtilizationCommandInput,
-  GetSavingsPlansUtilizationCommandOutput,
 } from "./commands/GetSavingsPlansUtilizationCommand";
 import {
+  type GetSavingsPlansUtilizationDetailsCommandInput,
+  type GetSavingsPlansUtilizationDetailsCommandOutput,
   GetSavingsPlansUtilizationDetailsCommand,
-  GetSavingsPlansUtilizationDetailsCommandInput,
-  GetSavingsPlansUtilizationDetailsCommandOutput,
 } from "./commands/GetSavingsPlansUtilizationDetailsCommand";
-import { GetTagsCommand, GetTagsCommandInput, GetTagsCommandOutput } from "./commands/GetTagsCommand";
+import { type GetTagsCommandInput, type GetTagsCommandOutput, GetTagsCommand } from "./commands/GetTagsCommand";
 import {
+  type GetUsageForecastCommandInput,
+  type GetUsageForecastCommandOutput,
   GetUsageForecastCommand,
-  GetUsageForecastCommandInput,
-  GetUsageForecastCommandOutput,
 } from "./commands/GetUsageForecastCommand";
 import {
+  type ListCommitmentPurchaseAnalysesCommandInput,
+  type ListCommitmentPurchaseAnalysesCommandOutput,
+  ListCommitmentPurchaseAnalysesCommand,
+} from "./commands/ListCommitmentPurchaseAnalysesCommand";
+import {
+  type ListCostAllocationTagBackfillHistoryCommandInput,
+  type ListCostAllocationTagBackfillHistoryCommandOutput,
+  ListCostAllocationTagBackfillHistoryCommand,
+} from "./commands/ListCostAllocationTagBackfillHistoryCommand";
+import {
+  type ListCostAllocationTagsCommandInput,
+  type ListCostAllocationTagsCommandOutput,
+  ListCostAllocationTagsCommand,
+} from "./commands/ListCostAllocationTagsCommand";
+import {
+  type ListCostCategoryDefinitionsCommandInput,
+  type ListCostCategoryDefinitionsCommandOutput,
   ListCostCategoryDefinitionsCommand,
-  ListCostCategoryDefinitionsCommandInput,
-  ListCostCategoryDefinitionsCommandOutput,
 } from "./commands/ListCostCategoryDefinitionsCommand";
 import {
+  type ListCostCategoryResourceAssociationsCommandInput,
+  type ListCostCategoryResourceAssociationsCommandOutput,
+  ListCostCategoryResourceAssociationsCommand,
+} from "./commands/ListCostCategoryResourceAssociationsCommand";
+import {
+  type ListSavingsPlansPurchaseRecommendationGenerationCommandInput,
+  type ListSavingsPlansPurchaseRecommendationGenerationCommandOutput,
+  ListSavingsPlansPurchaseRecommendationGenerationCommand,
+} from "./commands/ListSavingsPlansPurchaseRecommendationGenerationCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ProvideAnomalyFeedbackCommandInput,
+  type ProvideAnomalyFeedbackCommandOutput,
   ProvideAnomalyFeedbackCommand,
-  ProvideAnomalyFeedbackCommandInput,
-  ProvideAnomalyFeedbackCommandOutput,
 } from "./commands/ProvideAnomalyFeedbackCommand";
 import {
+  type StartCommitmentPurchaseAnalysisCommandInput,
+  type StartCommitmentPurchaseAnalysisCommandOutput,
+  StartCommitmentPurchaseAnalysisCommand,
+} from "./commands/StartCommitmentPurchaseAnalysisCommand";
+import {
+  type StartCostAllocationTagBackfillCommandInput,
+  type StartCostAllocationTagBackfillCommandOutput,
+  StartCostAllocationTagBackfillCommand,
+} from "./commands/StartCostAllocationTagBackfillCommand";
+import {
+  type StartSavingsPlansPurchaseRecommendationGenerationCommandInput,
+  type StartSavingsPlansPurchaseRecommendationGenerationCommandOutput,
+  StartSavingsPlansPurchaseRecommendationGenerationCommand,
+} from "./commands/StartSavingsPlansPurchaseRecommendationGenerationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAnomalyMonitorCommandInput,
+  type UpdateAnomalyMonitorCommandOutput,
   UpdateAnomalyMonitorCommand,
-  UpdateAnomalyMonitorCommandInput,
-  UpdateAnomalyMonitorCommandOutput,
 } from "./commands/UpdateAnomalyMonitorCommand";
 import {
+  type UpdateAnomalySubscriptionCommandInput,
+  type UpdateAnomalySubscriptionCommandOutput,
   UpdateAnomalySubscriptionCommand,
-  UpdateAnomalySubscriptionCommandInput,
-  UpdateAnomalySubscriptionCommandOutput,
 } from "./commands/UpdateAnomalySubscriptionCommand";
 import {
+  type UpdateCostAllocationTagsStatusCommandInput,
+  type UpdateCostAllocationTagsStatusCommandOutput,
+  UpdateCostAllocationTagsStatusCommand,
+} from "./commands/UpdateCostAllocationTagsStatusCommand";
+import {
+  type UpdateCostCategoryDefinitionCommandInput,
+  type UpdateCostCategoryDefinitionCommandOutput,
   UpdateCostCategoryDefinitionCommand,
-  UpdateCostCategoryDefinitionCommandInput,
-  UpdateCostCategoryDefinitionCommandOutput,
 } from "./commands/UpdateCostCategoryDefinitionCommand";
 import { CostExplorerClient } from "./CostExplorerClient";
+import { paginateGetAnomalies } from "./pagination/GetAnomaliesPaginator";
+import { paginateGetAnomalyMonitors } from "./pagination/GetAnomalyMonitorsPaginator";
+import { paginateGetAnomalySubscriptions } from "./pagination/GetAnomalySubscriptionsPaginator";
+import { paginateGetCostAndUsageComparisons } from "./pagination/GetCostAndUsageComparisonsPaginator";
+import { paginateGetCostComparisonDrivers } from "./pagination/GetCostComparisonDriversPaginator";
+import {
+  paginateGetReservationPurchaseRecommendation,
+} from "./pagination/GetReservationPurchaseRecommendationPaginator";
+import { paginateGetRightsizingRecommendation } from "./pagination/GetRightsizingRecommendationPaginator";
+import { paginateGetSavingsPlansCoverage } from "./pagination/GetSavingsPlansCoveragePaginator";
+import { paginateGetSavingsPlansUtilizationDetails } from "./pagination/GetSavingsPlansUtilizationDetailsPaginator";
+import { paginateListCommitmentPurchaseAnalyses } from "./pagination/ListCommitmentPurchaseAnalysesPaginator";
+import {
+  paginateListCostAllocationTagBackfillHistory,
+} from "./pagination/ListCostAllocationTagBackfillHistoryPaginator";
+import { paginateListCostAllocationTags } from "./pagination/ListCostAllocationTagsPaginator";
+import { paginateListCostCategoryDefinitions } from "./pagination/ListCostCategoryDefinitionsPaginator";
+import {
+  paginateListCostCategoryResourceAssociations,
+} from "./pagination/ListCostCategoryResourceAssociationsPaginator";
+import {
+  paginateListSavingsPlansPurchaseRecommendationGeneration,
+} from "./pagination/ListSavingsPlansPurchaseRecommendationGenerationPaginator";
+
+const commands = {
+  CreateAnomalyMonitorCommand,
+  CreateAnomalySubscriptionCommand,
+  CreateCostCategoryDefinitionCommand,
+  DeleteAnomalyMonitorCommand,
+  DeleteAnomalySubscriptionCommand,
+  DeleteCostCategoryDefinitionCommand,
+  DescribeCostCategoryDefinitionCommand,
+  GetAnomaliesCommand,
+  GetAnomalyMonitorsCommand,
+  GetAnomalySubscriptionsCommand,
+  GetApproximateUsageRecordsCommand,
+  GetCommitmentPurchaseAnalysisCommand,
+  GetCostAndUsageCommand,
+  GetCostAndUsageComparisonsCommand,
+  GetCostAndUsageWithResourcesCommand,
+  GetCostCategoriesCommand,
+  GetCostComparisonDriversCommand,
+  GetCostForecastCommand,
+  GetDimensionValuesCommand,
+  GetReservationCoverageCommand,
+  GetReservationPurchaseRecommendationCommand,
+  GetReservationUtilizationCommand,
+  GetRightsizingRecommendationCommand,
+  GetSavingsPlanPurchaseRecommendationDetailsCommand,
+  GetSavingsPlansCoverageCommand,
+  GetSavingsPlansPurchaseRecommendationCommand,
+  GetSavingsPlansUtilizationCommand,
+  GetSavingsPlansUtilizationDetailsCommand,
+  GetTagsCommand,
+  GetUsageForecastCommand,
+  ListCommitmentPurchaseAnalysesCommand,
+  ListCostAllocationTagBackfillHistoryCommand,
+  ListCostAllocationTagsCommand,
+  ListCostCategoryDefinitionsCommand,
+  ListCostCategoryResourceAssociationsCommand,
+  ListSavingsPlansPurchaseRecommendationGenerationCommand,
+  ListTagsForResourceCommand,
+  ProvideAnomalyFeedbackCommand,
+  StartCommitmentPurchaseAnalysisCommand,
+  StartCostAllocationTagBackfillCommand,
+  StartSavingsPlansPurchaseRecommendationGenerationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAnomalyMonitorCommand,
+  UpdateAnomalySubscriptionCommand,
+  UpdateCostAllocationTagsStatusCommand,
+  UpdateCostCategoryDefinitionCommand,
+};
+const paginators = {
+  paginateGetAnomalies,
+  paginateGetAnomalyMonitors,
+  paginateGetAnomalySubscriptions,
+  paginateGetCostAndUsageComparisons,
+  paginateGetCostComparisonDrivers,
+  paginateGetReservationPurchaseRecommendation,
+  paginateGetRightsizingRecommendation,
+  paginateGetSavingsPlansCoverage,
+  paginateGetSavingsPlansUtilizationDetails,
+  paginateListCommitmentPurchaseAnalyses,
+  paginateListCostAllocationTagBackfillHistory,
+  paginateListCostAllocationTags,
+  paginateListCostCategoryDefinitions,
+  paginateListCostCategoryResourceAssociations,
+  paginateListSavingsPlansPurchaseRecommendationGeneration,
+};
 
 /**
- * <p>You can use the Cost Explorer API to programmatically query your cost and usage data. You
- *       can query for aggregated data such as total monthly costs or total daily usage. You can also
- *       query for granular data. This might include the number of daily write operations for Amazon
- *       DynamoDB database tables in your production environment. </p>
- * 		       <p>Service Endpoint</p>
- * 		       <p>The Cost Explorer API provides the following endpoint:</p>
- * 		       <ul>
- *             <li>
- * 				           <p>
- *                   <code>https://ce.us-east-1.amazonaws.com</code>
- *                </p>
- * 			         </li>
- *          </ul>
- * 		       <p>For information about the costs that are associated with the Cost Explorer API, see
- *         <a href="http://aws.amazon.com/aws-cost-management/pricing/">Amazon Web Services Cost
- *         Management Pricing</a>.</p>
+ * @public
  */
-export class CostExplorer extends CostExplorerClient {
+export interface CostExplorerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CostExplorer {
   /**
-   * <p>Creates a new cost anomaly detection monitor with the requested type and monitor
-   *       specification. </p>
+   * @see {@link CreateAnomalyMonitorCommand}
    */
-  public createAnomalyMonitor(
+  createAnomalyMonitor(
     args: CreateAnomalyMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<CreateAnomalyMonitorCommandOutput>;
-  public createAnomalyMonitor(
+  createAnomalyMonitor(
     args: CreateAnomalyMonitorCommandInput,
     cb: (err: any, data?: CreateAnomalyMonitorCommandOutput) => void
   ): void;
-  public createAnomalyMonitor(
+  createAnomalyMonitor(
     args: CreateAnomalyMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: CreateAnomalyMonitorCommandOutput) => void
   ): void;
-  public createAnomalyMonitor(
-    args: CreateAnomalyMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAnomalyMonitorCommandOutput) => void),
-    cb?: (err: any, data?: CreateAnomalyMonitorCommandOutput) => void
-  ): Promise<CreateAnomalyMonitorCommandOutput> | void {
-    const command = new CreateAnomalyMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds a subscription to a cost anomaly detection monitor. You can use each subscription to
-   *       define subscribers with email or SNS notifications. Email subscribers can set a dollar
-   *       threshold and a time frequency for receiving notifications. </p>
+   * @see {@link CreateAnomalySubscriptionCommand}
    */
-  public createAnomalySubscription(
+  createAnomalySubscription(
     args: CreateAnomalySubscriptionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<CreateAnomalySubscriptionCommandOutput>;
-  public createAnomalySubscription(
+  createAnomalySubscription(
     args: CreateAnomalySubscriptionCommandInput,
     cb: (err: any, data?: CreateAnomalySubscriptionCommandOutput) => void
   ): void;
-  public createAnomalySubscription(
+  createAnomalySubscription(
     args: CreateAnomalySubscriptionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: CreateAnomalySubscriptionCommandOutput) => void
   ): void;
-  public createAnomalySubscription(
-    args: CreateAnomalySubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAnomalySubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: CreateAnomalySubscriptionCommandOutput) => void
-  ): Promise<CreateAnomalySubscriptionCommandOutput> | void {
-    const command = new CreateAnomalySubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new Cost Category with the requested name and rules.</p>
+   * @see {@link CreateCostCategoryDefinitionCommand}
    */
-  public createCostCategoryDefinition(
+  createCostCategoryDefinition(
     args: CreateCostCategoryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<CreateCostCategoryDefinitionCommandOutput>;
-  public createCostCategoryDefinition(
+  createCostCategoryDefinition(
     args: CreateCostCategoryDefinitionCommandInput,
     cb: (err: any, data?: CreateCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public createCostCategoryDefinition(
+  createCostCategoryDefinition(
     args: CreateCostCategoryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: CreateCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public createCostCategoryDefinition(
-    args: CreateCostCategoryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCostCategoryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: CreateCostCategoryDefinitionCommandOutput) => void
-  ): Promise<CreateCostCategoryDefinitionCommandOutput> | void {
-    const command = new CreateCostCategoryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a cost anomaly monitor. </p>
+   * @see {@link DeleteAnomalyMonitorCommand}
    */
-  public deleteAnomalyMonitor(
+  deleteAnomalyMonitor(
     args: DeleteAnomalyMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<DeleteAnomalyMonitorCommandOutput>;
-  public deleteAnomalyMonitor(
+  deleteAnomalyMonitor(
     args: DeleteAnomalyMonitorCommandInput,
     cb: (err: any, data?: DeleteAnomalyMonitorCommandOutput) => void
   ): void;
-  public deleteAnomalyMonitor(
+  deleteAnomalyMonitor(
     args: DeleteAnomalyMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: DeleteAnomalyMonitorCommandOutput) => void
   ): void;
-  public deleteAnomalyMonitor(
-    args: DeleteAnomalyMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAnomalyMonitorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAnomalyMonitorCommandOutput) => void
-  ): Promise<DeleteAnomalyMonitorCommandOutput> | void {
-    const command = new DeleteAnomalyMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a cost anomaly subscription. </p>
+   * @see {@link DeleteAnomalySubscriptionCommand}
    */
-  public deleteAnomalySubscription(
+  deleteAnomalySubscription(
     args: DeleteAnomalySubscriptionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<DeleteAnomalySubscriptionCommandOutput>;
-  public deleteAnomalySubscription(
+  deleteAnomalySubscription(
     args: DeleteAnomalySubscriptionCommandInput,
     cb: (err: any, data?: DeleteAnomalySubscriptionCommandOutput) => void
   ): void;
-  public deleteAnomalySubscription(
+  deleteAnomalySubscription(
     args: DeleteAnomalySubscriptionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: DeleteAnomalySubscriptionCommandOutput) => void
   ): void;
-  public deleteAnomalySubscription(
-    args: DeleteAnomalySubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAnomalySubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAnomalySubscriptionCommandOutput) => void
-  ): Promise<DeleteAnomalySubscriptionCommandOutput> | void {
-    const command = new DeleteAnomalySubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.</p>
+   * @see {@link DeleteCostCategoryDefinitionCommand}
    */
-  public deleteCostCategoryDefinition(
+  deleteCostCategoryDefinition(
     args: DeleteCostCategoryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<DeleteCostCategoryDefinitionCommandOutput>;
-  public deleteCostCategoryDefinition(
+  deleteCostCategoryDefinition(
     args: DeleteCostCategoryDefinitionCommandInput,
     cb: (err: any, data?: DeleteCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public deleteCostCategoryDefinition(
+  deleteCostCategoryDefinition(
     args: DeleteCostCategoryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: DeleteCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public deleteCostCategoryDefinition(
-    args: DeleteCostCategoryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCostCategoryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCostCategoryDefinitionCommandOutput) => void
-  ): Promise<DeleteCostCategoryDefinitionCommandOutput> | void {
-    const command = new DeleteCostCategoryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the name, ARN, rules, definition, and effective dates of a Cost Category that's defined in the account.</p>
-   *          <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that is active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>
+   * @see {@link DescribeCostCategoryDefinitionCommand}
    */
-  public describeCostCategoryDefinition(
+  describeCostCategoryDefinition(
     args: DescribeCostCategoryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<DescribeCostCategoryDefinitionCommandOutput>;
-  public describeCostCategoryDefinition(
+  describeCostCategoryDefinition(
     args: DescribeCostCategoryDefinitionCommandInput,
     cb: (err: any, data?: DescribeCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public describeCostCategoryDefinition(
+  describeCostCategoryDefinition(
     args: DescribeCostCategoryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: DescribeCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public describeCostCategoryDefinition(
-    args: DescribeCostCategoryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeCostCategoryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeCostCategoryDefinitionCommandOutput) => void
-  ): Promise<DescribeCostCategoryDefinitionCommandOutput> | void {
-    const command = new DescribeCostCategoryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves all of the cost anomalies detected on your account during the time period that's
-   *       specified by the <code>DateInterval</code> object. </p>
+   * @see {@link GetAnomaliesCommand}
    */
-  public getAnomalies(
+  getAnomalies(
     args: GetAnomaliesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetAnomaliesCommandOutput>;
-  public getAnomalies(args: GetAnomaliesCommandInput, cb: (err: any, data?: GetAnomaliesCommandOutput) => void): void;
-  public getAnomalies(
+  getAnomalies(
     args: GetAnomaliesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetAnomaliesCommandOutput) => void
   ): void;
-  public getAnomalies(
+  getAnomalies(
     args: GetAnomaliesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAnomaliesCommandOutput) => void),
-    cb?: (err: any, data?: GetAnomaliesCommandOutput) => void
-  ): Promise<GetAnomaliesCommandOutput> | void {
-    const command = new GetAnomaliesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetAnomaliesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves the cost anomaly monitor definitions for your account. You can filter using a
-   *       list of cost anomaly monitor Amazon Resource Names (ARNs). </p>
+   * @see {@link GetAnomalyMonitorsCommand}
    */
-  public getAnomalyMonitors(
+  getAnomalyMonitors(): Promise<GetAnomalyMonitorsCommandOutput>;
+  getAnomalyMonitors(
     args: GetAnomalyMonitorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetAnomalyMonitorsCommandOutput>;
-  public getAnomalyMonitors(
+  getAnomalyMonitors(
     args: GetAnomalyMonitorsCommandInput,
     cb: (err: any, data?: GetAnomalyMonitorsCommandOutput) => void
   ): void;
-  public getAnomalyMonitors(
+  getAnomalyMonitors(
     args: GetAnomalyMonitorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetAnomalyMonitorsCommandOutput) => void
   ): void;
-  public getAnomalyMonitors(
-    args: GetAnomalyMonitorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAnomalyMonitorsCommandOutput) => void),
-    cb?: (err: any, data?: GetAnomalyMonitorsCommandOutput) => void
-  ): Promise<GetAnomalyMonitorsCommandOutput> | void {
-    const command = new GetAnomalyMonitorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the cost anomaly subscription objects for your account. You can filter using a
-   *       list of cost anomaly monitor Amazon Resource Names (ARNs). </p>
+   * @see {@link GetAnomalySubscriptionsCommand}
    */
-  public getAnomalySubscriptions(
+  getAnomalySubscriptions(): Promise<GetAnomalySubscriptionsCommandOutput>;
+  getAnomalySubscriptions(
     args: GetAnomalySubscriptionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetAnomalySubscriptionsCommandOutput>;
-  public getAnomalySubscriptions(
+  getAnomalySubscriptions(
     args: GetAnomalySubscriptionsCommandInput,
     cb: (err: any, data?: GetAnomalySubscriptionsCommandOutput) => void
   ): void;
-  public getAnomalySubscriptions(
+  getAnomalySubscriptions(
     args: GetAnomalySubscriptionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetAnomalySubscriptionsCommandOutput) => void
   ): void;
-  public getAnomalySubscriptions(
-    args: GetAnomalySubscriptionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAnomalySubscriptionsCommandOutput) => void),
-    cb?: (err: any, data?: GetAnomalySubscriptionsCommandOutput) => void
-  ): Promise<GetAnomalySubscriptionsCommandOutput> | void {
-    const command = new GetAnomalySubscriptionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves cost and usage metrics for your account. You can specify which cost and
-   *       usage-related metric that you want the request to return. For example, you can specify
-   *         <code>BlendedCosts</code> or <code>UsageQuantity</code>. You can also filter and group your
-   *       data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific
-   *       time range. For a complete list of valid dimensions, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts.</p>
-   * 	        <p>For information about filter limitations, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html">Quotas and restrictions</a> in the <i>Billing and Cost Management User Guide</i>.</p>
+   * @see {@link GetApproximateUsageRecordsCommand}
    */
-  public getCostAndUsage(
+  getApproximateUsageRecords(
+    args: GetApproximateUsageRecordsCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetApproximateUsageRecordsCommandOutput>;
+  getApproximateUsageRecords(
+    args: GetApproximateUsageRecordsCommandInput,
+    cb: (err: any, data?: GetApproximateUsageRecordsCommandOutput) => void
+  ): void;
+  getApproximateUsageRecords(
+    args: GetApproximateUsageRecordsCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetApproximateUsageRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCommitmentPurchaseAnalysisCommand}
+   */
+  getCommitmentPurchaseAnalysis(
+    args: GetCommitmentPurchaseAnalysisCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetCommitmentPurchaseAnalysisCommandOutput>;
+  getCommitmentPurchaseAnalysis(
+    args: GetCommitmentPurchaseAnalysisCommandInput,
+    cb: (err: any, data?: GetCommitmentPurchaseAnalysisCommandOutput) => void
+  ): void;
+  getCommitmentPurchaseAnalysis(
+    args: GetCommitmentPurchaseAnalysisCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetCommitmentPurchaseAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCostAndUsageCommand}
+   */
+  getCostAndUsage(
     args: GetCostAndUsageCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetCostAndUsageCommandOutput>;
-  public getCostAndUsage(
+  getCostAndUsage(
     args: GetCostAndUsageCommandInput,
     cb: (err: any, data?: GetCostAndUsageCommandOutput) => void
   ): void;
-  public getCostAndUsage(
+  getCostAndUsage(
     args: GetCostAndUsageCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetCostAndUsageCommandOutput) => void
   ): void;
-  public getCostAndUsage(
-    args: GetCostAndUsageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCostAndUsageCommandOutput) => void),
-    cb?: (err: any, data?: GetCostAndUsageCommandOutput) => void
-  ): Promise<GetCostAndUsageCommandOutput> | void {
-    const command = new GetCostAndUsageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and
-   * 	    usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that
-   * 	    you want the request to return. You can also filter and group your data by various dimensions,
-   * 	    such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list
-   * 	    of valid dimensions, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p>
-   * 	        <note>
-   *             <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html">Controlling Access for Cost Explorer</a> in the <i>Billing and Cost Management User Guide</i>.</p>
-   *          </note>
+   * @see {@link GetCostAndUsageComparisonsCommand}
    */
-  public getCostAndUsageWithResources(
+  getCostAndUsageComparisons(
+    args: GetCostAndUsageComparisonsCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetCostAndUsageComparisonsCommandOutput>;
+  getCostAndUsageComparisons(
+    args: GetCostAndUsageComparisonsCommandInput,
+    cb: (err: any, data?: GetCostAndUsageComparisonsCommandOutput) => void
+  ): void;
+  getCostAndUsageComparisons(
+    args: GetCostAndUsageComparisonsCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetCostAndUsageComparisonsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCostAndUsageWithResourcesCommand}
+   */
+  getCostAndUsageWithResources(
     args: GetCostAndUsageWithResourcesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetCostAndUsageWithResourcesCommandOutput>;
-  public getCostAndUsageWithResources(
+  getCostAndUsageWithResources(
     args: GetCostAndUsageWithResourcesCommandInput,
     cb: (err: any, data?: GetCostAndUsageWithResourcesCommandOutput) => void
   ): void;
-  public getCostAndUsageWithResources(
+  getCostAndUsageWithResources(
     args: GetCostAndUsageWithResourcesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetCostAndUsageWithResourcesCommandOutput) => void
   ): void;
-  public getCostAndUsageWithResources(
-    args: GetCostAndUsageWithResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCostAndUsageWithResourcesCommandOutput) => void),
-    cb?: (err: any, data?: GetCostAndUsageWithResourcesCommandOutput) => void
-  ): Promise<GetCostAndUsageWithResourcesCommandOutput> | void {
-    const command = new GetCostAndUsageWithResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves an array of Cost Category names and values incurred cost.</p>
-   *          <note>
-   *             <p>If some Cost Category names and values are not associated with any cost, they will not be returned by this API.</p>
-   *          </note>
+   * @see {@link GetCostCategoriesCommand}
    */
-  public getCostCategories(
+  getCostCategories(
     args: GetCostCategoriesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetCostCategoriesCommandOutput>;
-  public getCostCategories(
+  getCostCategories(
     args: GetCostCategoriesCommandInput,
     cb: (err: any, data?: GetCostCategoriesCommandOutput) => void
   ): void;
-  public getCostCategories(
+  getCostCategories(
     args: GetCostCategoriesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetCostCategoriesCommandOutput) => void
   ): void;
-  public getCostCategories(
-    args: GetCostCategoriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCostCategoriesCommandOutput) => void),
-    cb?: (err: any, data?: GetCostCategoriesCommandOutput) => void
-  ): Promise<GetCostCategoriesCommandOutput> | void {
-    const command = new GetCostCategoriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. </p>
+   * @see {@link GetCostComparisonDriversCommand}
    */
-  public getCostForecast(
+  getCostComparisonDrivers(
+    args: GetCostComparisonDriversCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetCostComparisonDriversCommandOutput>;
+  getCostComparisonDrivers(
+    args: GetCostComparisonDriversCommandInput,
+    cb: (err: any, data?: GetCostComparisonDriversCommandOutput) => void
+  ): void;
+  getCostComparisonDrivers(
+    args: GetCostComparisonDriversCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetCostComparisonDriversCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCostForecastCommand}
+   */
+  getCostForecast(
     args: GetCostForecastCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetCostForecastCommandOutput>;
-  public getCostForecast(
+  getCostForecast(
     args: GetCostForecastCommandInput,
     cb: (err: any, data?: GetCostForecastCommandOutput) => void
   ): void;
-  public getCostForecast(
+  getCostForecast(
     args: GetCostForecastCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetCostForecastCommandOutput) => void
   ): void;
-  public getCostForecast(
-    args: GetCostForecastCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCostForecastCommandOutput) => void),
-    cb?: (err: any, data?: GetCostForecastCommandOutput) => void
-  ): Promise<GetCostForecastCommandOutput> | void {
-    const command = new GetCostForecastCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves all available filter values for a specified filter over a period of time. You can search the dimension values for an arbitrary string. </p>
+   * @see {@link GetDimensionValuesCommand}
    */
-  public getDimensionValues(
+  getDimensionValues(
     args: GetDimensionValuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetDimensionValuesCommandOutput>;
-  public getDimensionValues(
+  getDimensionValues(
     args: GetDimensionValuesCommandInput,
     cb: (err: any, data?: GetDimensionValuesCommandOutput) => void
   ): void;
-  public getDimensionValues(
+  getDimensionValues(
     args: GetDimensionValuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetDimensionValuesCommandOutput) => void
   ): void;
-  public getDimensionValues(
-    args: GetDimensionValuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDimensionValuesCommandOutput) => void),
-    cb?: (err: any, data?: GetDimensionValuesCommandOutput) => void
-  ): Promise<GetDimensionValuesCommandOutput> | void {
-    const command = new GetDimensionValuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or
-   * 		  Amazon Redshift usage is covered by a reservation. An organization's management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions.
-   * 			For any time period, you can filter data about reservation usage by the following dimensions:</p>
-   * 		       <ul>
-   *             <li>
-   *                <p>AZ</p>
-   *             </li>
-   *             <li>
-   *                <p>CACHE_ENGINE</p>
-   *             </li>
-   *             <li>
-   *                <p>DATABASE_ENGINE</p>
-   *             </li>
-   *             <li>
-   *                <p>DEPLOYMENT_OPTION</p>
-   *             </li>
-   *             <li>
-   *                <p>INSTANCE_TYPE</p>
-   *             </li>
-   *             <li>
-   *                <p>LINKED_ACCOUNT</p>
-   *             </li>
-   *             <li>
-   *                <p>OPERATING_SYSTEM</p>
-   *             </li>
-   *             <li>
-   *                <p>PLATFORM</p>
-   *             </li>
-   *             <li>
-   *                <p>REGION</p>
-   *             </li>
-   *             <li>
-   *                <p>SERVICE</p>
-   *             </li>
-   *             <li>
-   *                <p>TAG</p>
-   *             </li>
-   *             <li>
-   *                <p>TENANCY</p>
-   *             </li>
-   *          </ul>
-   * 		       <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>
+   * @see {@link GetReservationCoverageCommand}
    */
-  public getReservationCoverage(
+  getReservationCoverage(
     args: GetReservationCoverageCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetReservationCoverageCommandOutput>;
-  public getReservationCoverage(
+  getReservationCoverage(
     args: GetReservationCoverageCommandInput,
     cb: (err: any, data?: GetReservationCoverageCommandOutput) => void
   ): void;
-  public getReservationCoverage(
+  getReservationCoverage(
     args: GetReservationCoverageCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetReservationCoverageCommandOutput) => void
   ): void;
-  public getReservationCoverage(
-    args: GetReservationCoverageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReservationCoverageCommandOutput) => void),
-    cb?: (err: any, data?: GetReservationCoverageCommandOutput) => void
-  ): Promise<GetReservationCoverageCommandOutput> | void {
-    const command = new GetReservationCoverageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs.
-   * 			Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing.</p>
-   * 		       <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage
-   * 			into categories that are eligible for a reservation. After Amazon Web Services has these categories, it simulates every combination of reservations
-   * 			in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings. </p>
-   * 		       <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region
-   * 			and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services recommends the smallest size instance
-   * 			in an instance family. This makes it easier to purchase a size-flexible RI. Amazon Web Services also shows the equal number of normalized units
-   * 			so that you can purchase any instance size that you want. For this example, your RI recommendation would be for <code>c4.large</code>
-   * 			because that is the smallest size instance in the c4 instance family.</p>
+   * @see {@link GetReservationPurchaseRecommendationCommand}
    */
-  public getReservationPurchaseRecommendation(
+  getReservationPurchaseRecommendation(
     args: GetReservationPurchaseRecommendationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetReservationPurchaseRecommendationCommandOutput>;
-  public getReservationPurchaseRecommendation(
+  getReservationPurchaseRecommendation(
     args: GetReservationPurchaseRecommendationCommandInput,
     cb: (err: any, data?: GetReservationPurchaseRecommendationCommandOutput) => void
   ): void;
-  public getReservationPurchaseRecommendation(
+  getReservationPurchaseRecommendation(
     args: GetReservationPurchaseRecommendationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetReservationPurchaseRecommendationCommandOutput) => void
   ): void;
-  public getReservationPurchaseRecommendation(
-    args: GetReservationPurchaseRecommendationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReservationPurchaseRecommendationCommandOutput) => void),
-    cb?: (err: any, data?: GetReservationPurchaseRecommendationCommandOutput) => void
-  ): Promise<GetReservationPurchaseRecommendationCommandOutput> | void {
-    const command = new GetReservationPurchaseRecommendationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the reservation utilization for your account. Management account in an organization have access to member accounts.
-   * 			You can filter data by dimensions in a time period. You can use <code>GetDimensionValues</code> to determine the possible
-   * 			dimension values. Currently, you can group only by <code>SUBSCRIPTION_ID</code>. </p>
+   * @see {@link GetReservationUtilizationCommand}
    */
-  public getReservationUtilization(
+  getReservationUtilization(
     args: GetReservationUtilizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetReservationUtilizationCommandOutput>;
-  public getReservationUtilization(
+  getReservationUtilization(
     args: GetReservationUtilizationCommandInput,
     cb: (err: any, data?: GetReservationUtilizationCommandOutput) => void
   ): void;
-  public getReservationUtilization(
+  getReservationUtilization(
     args: GetReservationUtilizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetReservationUtilizationCommandOutput) => void
   ): void;
-  public getReservationUtilization(
-    args: GetReservationUtilizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReservationUtilizationCommandOutput) => void),
-    cb?: (err: any, data?: GetReservationUtilizationCommandOutput) => void
-  ): Promise<GetReservationUtilizationCommandOutput> | void {
-    const command = new GetReservationUtilizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates recommendations that
-   *       help you save cost
-   *       by identifying idle and underutilized Amazon EC2 instances.</p>
-   *          <p>Recommendations are generated to either downsize or terminate instances, along with
-   *       providing savings detail and metrics. For details on calculation and function, see
-   *         <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html">Optimizing
-   *         Your Cost with Rightsizing
-   *       Recommendations</a>
-   *       in the <i>Billing and Cost Management User
-   *       Guide</i>.</p>
+   * @see {@link GetRightsizingRecommendationCommand}
    */
-  public getRightsizingRecommendation(
+  getRightsizingRecommendation(
     args: GetRightsizingRecommendationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetRightsizingRecommendationCommandOutput>;
-  public getRightsizingRecommendation(
+  getRightsizingRecommendation(
     args: GetRightsizingRecommendationCommandInput,
     cb: (err: any, data?: GetRightsizingRecommendationCommandOutput) => void
   ): void;
-  public getRightsizingRecommendation(
+  getRightsizingRecommendation(
     args: GetRightsizingRecommendationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetRightsizingRecommendationCommandOutput) => void
   ): void;
-  public getRightsizingRecommendation(
-    args: GetRightsizingRecommendationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRightsizingRecommendationCommandOutput) => void),
-    cb?: (err: any, data?: GetRightsizingRecommendationCommandOutput) => void
-  ): Promise<GetRightsizingRecommendationCommandOutput> | void {
-    const command = new GetRightsizingRecommendationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:</p>
-   * 	        <ul>
-   *             <li>
-   *                <p>
-   *                   <code>LINKED_ACCOUNT</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>REGION</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>SERVICE</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>INSTANCE_FAMILY</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   * 	        <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation.</p>
+   * @see {@link GetSavingsPlanPurchaseRecommendationDetailsCommand}
    */
-  public getSavingsPlansCoverage(
+  getSavingsPlanPurchaseRecommendationDetails(
+    args: GetSavingsPlanPurchaseRecommendationDetailsCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetSavingsPlanPurchaseRecommendationDetailsCommandOutput>;
+  getSavingsPlanPurchaseRecommendationDetails(
+    args: GetSavingsPlanPurchaseRecommendationDetailsCommandInput,
+    cb: (err: any, data?: GetSavingsPlanPurchaseRecommendationDetailsCommandOutput) => void
+  ): void;
+  getSavingsPlanPurchaseRecommendationDetails(
+    args: GetSavingsPlanPurchaseRecommendationDetailsCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetSavingsPlanPurchaseRecommendationDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSavingsPlansCoverageCommand}
+   */
+  getSavingsPlansCoverage(
     args: GetSavingsPlansCoverageCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetSavingsPlansCoverageCommandOutput>;
-  public getSavingsPlansCoverage(
+  getSavingsPlansCoverage(
     args: GetSavingsPlansCoverageCommandInput,
     cb: (err: any, data?: GetSavingsPlansCoverageCommandOutput) => void
   ): void;
-  public getSavingsPlansCoverage(
+  getSavingsPlansCoverage(
     args: GetSavingsPlansCoverageCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetSavingsPlansCoverageCommandOutput) => void
   ): void;
-  public getSavingsPlansCoverage(
-    args: GetSavingsPlansCoverageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSavingsPlansCoverageCommandOutput) => void),
-    cb?: (err: any, data?: GetSavingsPlansCoverageCommandOutput) => void
-  ): Promise<GetSavingsPlansCoverageCommandOutput> | void {
-    const command = new GetSavingsPlansCoverageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves your request parameters, Savings Plan Recommendations Summary and Details. </p>
+   * @see {@link GetSavingsPlansPurchaseRecommendationCommand}
    */
-  public getSavingsPlansPurchaseRecommendation(
+  getSavingsPlansPurchaseRecommendation(
     args: GetSavingsPlansPurchaseRecommendationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetSavingsPlansPurchaseRecommendationCommandOutput>;
-  public getSavingsPlansPurchaseRecommendation(
+  getSavingsPlansPurchaseRecommendation(
     args: GetSavingsPlansPurchaseRecommendationCommandInput,
     cb: (err: any, data?: GetSavingsPlansPurchaseRecommendationCommandOutput) => void
   ): void;
-  public getSavingsPlansPurchaseRecommendation(
+  getSavingsPlansPurchaseRecommendation(
     args: GetSavingsPlansPurchaseRecommendationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetSavingsPlansPurchaseRecommendationCommandOutput) => void
   ): void;
-  public getSavingsPlansPurchaseRecommendation(
-    args: GetSavingsPlansPurchaseRecommendationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: GetSavingsPlansPurchaseRecommendationCommandOutput) => void),
-    cb?: (err: any, data?: GetSavingsPlansPurchaseRecommendationCommandOutput) => void
-  ): Promise<GetSavingsPlansPurchaseRecommendationCommandOutput> | void {
-    const command = new GetSavingsPlansPurchaseRecommendationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> in <code>SAVINGS_PLANS</code> to determine the possible dimension values.</p>
-   * 	        <note>
-   *             <p>You cannot group by any dimension values for <code>GetSavingsPlansUtilization</code>.</p>
-   *          </note>
+   * @see {@link GetSavingsPlansUtilizationCommand}
    */
-  public getSavingsPlansUtilization(
+  getSavingsPlansUtilization(
     args: GetSavingsPlansUtilizationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetSavingsPlansUtilizationCommandOutput>;
-  public getSavingsPlansUtilization(
+  getSavingsPlansUtilization(
     args: GetSavingsPlansUtilizationCommandInput,
     cb: (err: any, data?: GetSavingsPlansUtilizationCommandOutput) => void
   ): void;
-  public getSavingsPlansUtilization(
+  getSavingsPlansUtilization(
     args: GetSavingsPlansUtilizationCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetSavingsPlansUtilizationCommandOutput) => void
   ): void;
-  public getSavingsPlansUtilization(
-    args: GetSavingsPlansUtilizationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSavingsPlansUtilizationCommandOutput) => void),
-    cb?: (err: any, data?: GetSavingsPlansUtilizationCommandOutput) => void
-  ): Promise<GetSavingsPlansUtilizationCommandOutput> | void {
-    const command = new GetSavingsPlansUtilizationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves attribute data along with aggregate utilization and savings data for a given time period. This doesn't support granular or grouped data (daily/monthly) in response. You can't retrieve data by dates in a single response similar to <code>GetSavingsPlanUtilization</code>, but you have the option to make multiple calls to <code>GetSavingsPlanUtilizationDetails</code> by providing individual dates. You can use <code>GetDimensionValues</code> in <code>SAVINGS_PLANS</code> to determine the possible dimension values.</p>
-   * 	        <note>
-   *             <p>
-   *                <code>GetSavingsPlanUtilizationDetails</code> internally groups data by <code>SavingsPlansArn</code>.</p>
-   *          </note>
+   * @see {@link GetSavingsPlansUtilizationDetailsCommand}
    */
-  public getSavingsPlansUtilizationDetails(
+  getSavingsPlansUtilizationDetails(
     args: GetSavingsPlansUtilizationDetailsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetSavingsPlansUtilizationDetailsCommandOutput>;
-  public getSavingsPlansUtilizationDetails(
+  getSavingsPlansUtilizationDetails(
     args: GetSavingsPlansUtilizationDetailsCommandInput,
     cb: (err: any, data?: GetSavingsPlansUtilizationDetailsCommandOutput) => void
   ): void;
-  public getSavingsPlansUtilizationDetails(
+  getSavingsPlansUtilizationDetails(
     args: GetSavingsPlansUtilizationDetailsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetSavingsPlansUtilizationDetailsCommandOutput) => void
   ): void;
-  public getSavingsPlansUtilizationDetails(
-    args: GetSavingsPlansUtilizationDetailsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSavingsPlansUtilizationDetailsCommandOutput) => void),
-    cb?: (err: any, data?: GetSavingsPlansUtilizationDetailsCommandOutput) => void
-  ): Promise<GetSavingsPlansUtilizationDetailsCommandOutput> | void {
-    const command = new GetSavingsPlansUtilizationDetailsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Queries for available tag keys and tag values for a specified period. You can search the tag values for an arbitrary string. </p>
+   * @see {@link GetTagsCommand}
    */
-  public getTags(args: GetTagsCommandInput, options?: __HttpHandlerOptions): Promise<GetTagsCommandOutput>;
-  public getTags(args: GetTagsCommandInput, cb: (err: any, data?: GetTagsCommandOutput) => void): void;
-  public getTags(
+  getTags(
     args: GetTagsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: CostExplorerRequestOptions
+  ): Promise<GetTagsCommandOutput>;
+  getTags(
+    args: GetTagsCommandInput,
     cb: (err: any, data?: GetTagsCommandOutput) => void
   ): void;
-  public getTags(
+  getTags(
     args: GetTagsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTagsCommandOutput) => void),
-    cb?: (err: any, data?: GetTagsCommandOutput) => void
-  ): Promise<GetTagsCommandOutput> | void {
-    const command = new GetTagsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: GetTagsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage. </p>
+   * @see {@link GetUsageForecastCommand}
    */
-  public getUsageForecast(
+  getUsageForecast(
     args: GetUsageForecastCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<GetUsageForecastCommandOutput>;
-  public getUsageForecast(
+  getUsageForecast(
     args: GetUsageForecastCommandInput,
     cb: (err: any, data?: GetUsageForecastCommandOutput) => void
   ): void;
-  public getUsageForecast(
+  getUsageForecast(
     args: GetUsageForecastCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: GetUsageForecastCommandOutput) => void
   ): void;
-  public getUsageForecast(
-    args: GetUsageForecastCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUsageForecastCommandOutput) => void),
-    cb?: (err: any, data?: GetUsageForecastCommandOutput) => void
-  ): Promise<GetUsageForecastCommandOutput> | void {
-    const command = new GetUsageForecastCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns the name, ARN, <code>NumberOfRules</code> and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.</p>
+   * @see {@link ListCommitmentPurchaseAnalysesCommand}
    */
-  public listCostCategoryDefinitions(
+  listCommitmentPurchaseAnalyses(): Promise<ListCommitmentPurchaseAnalysesCommandOutput>;
+  listCommitmentPurchaseAnalyses(
+    args: ListCommitmentPurchaseAnalysesCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListCommitmentPurchaseAnalysesCommandOutput>;
+  listCommitmentPurchaseAnalyses(
+    args: ListCommitmentPurchaseAnalysesCommandInput,
+    cb: (err: any, data?: ListCommitmentPurchaseAnalysesCommandOutput) => void
+  ): void;
+  listCommitmentPurchaseAnalyses(
+    args: ListCommitmentPurchaseAnalysesCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListCommitmentPurchaseAnalysesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCostAllocationTagBackfillHistoryCommand}
+   */
+  listCostAllocationTagBackfillHistory(): Promise<ListCostAllocationTagBackfillHistoryCommandOutput>;
+  listCostAllocationTagBackfillHistory(
+    args: ListCostAllocationTagBackfillHistoryCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListCostAllocationTagBackfillHistoryCommandOutput>;
+  listCostAllocationTagBackfillHistory(
+    args: ListCostAllocationTagBackfillHistoryCommandInput,
+    cb: (err: any, data?: ListCostAllocationTagBackfillHistoryCommandOutput) => void
+  ): void;
+  listCostAllocationTagBackfillHistory(
+    args: ListCostAllocationTagBackfillHistoryCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListCostAllocationTagBackfillHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCostAllocationTagsCommand}
+   */
+  listCostAllocationTags(): Promise<ListCostAllocationTagsCommandOutput>;
+  listCostAllocationTags(
+    args: ListCostAllocationTagsCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListCostAllocationTagsCommandOutput>;
+  listCostAllocationTags(
+    args: ListCostAllocationTagsCommandInput,
+    cb: (err: any, data?: ListCostAllocationTagsCommandOutput) => void
+  ): void;
+  listCostAllocationTags(
+    args: ListCostAllocationTagsCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListCostAllocationTagsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCostCategoryDefinitionsCommand}
+   */
+  listCostCategoryDefinitions(): Promise<ListCostCategoryDefinitionsCommandOutput>;
+  listCostCategoryDefinitions(
     args: ListCostCategoryDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<ListCostCategoryDefinitionsCommandOutput>;
-  public listCostCategoryDefinitions(
+  listCostCategoryDefinitions(
     args: ListCostCategoryDefinitionsCommandInput,
     cb: (err: any, data?: ListCostCategoryDefinitionsCommandOutput) => void
   ): void;
-  public listCostCategoryDefinitions(
+  listCostCategoryDefinitions(
     args: ListCostCategoryDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: ListCostCategoryDefinitionsCommandOutput) => void
   ): void;
-  public listCostCategoryDefinitions(
-    args: ListCostCategoryDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCostCategoryDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: ListCostCategoryDefinitionsCommandOutput) => void
-  ): Promise<ListCostCategoryDefinitionsCommandOutput> | void {
-    const command = new ListCostCategoryDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies the feedback property of a given cost anomaly. </p>
+   * @see {@link ListCostCategoryResourceAssociationsCommand}
    */
-  public provideAnomalyFeedback(
+  listCostCategoryResourceAssociations(): Promise<ListCostCategoryResourceAssociationsCommandOutput>;
+  listCostCategoryResourceAssociations(
+    args: ListCostCategoryResourceAssociationsCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListCostCategoryResourceAssociationsCommandOutput>;
+  listCostCategoryResourceAssociations(
+    args: ListCostCategoryResourceAssociationsCommandInput,
+    cb: (err: any, data?: ListCostCategoryResourceAssociationsCommandOutput) => void
+  ): void;
+  listCostCategoryResourceAssociations(
+    args: ListCostCategoryResourceAssociationsCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListCostCategoryResourceAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSavingsPlansPurchaseRecommendationGenerationCommand}
+   */
+  listSavingsPlansPurchaseRecommendationGeneration(): Promise<ListSavingsPlansPurchaseRecommendationGenerationCommandOutput>;
+  listSavingsPlansPurchaseRecommendationGeneration(
+    args: ListSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListSavingsPlansPurchaseRecommendationGenerationCommandOutput>;
+  listSavingsPlansPurchaseRecommendationGeneration(
+    args: ListSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    cb: (err: any, data?: ListSavingsPlansPurchaseRecommendationGenerationCommandOutput) => void
+  ): void;
+  listSavingsPlansPurchaseRecommendationGeneration(
+    args: ListSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListSavingsPlansPurchaseRecommendationGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ProvideAnomalyFeedbackCommand}
+   */
+  provideAnomalyFeedback(
     args: ProvideAnomalyFeedbackCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<ProvideAnomalyFeedbackCommandOutput>;
-  public provideAnomalyFeedback(
+  provideAnomalyFeedback(
     args: ProvideAnomalyFeedbackCommandInput,
     cb: (err: any, data?: ProvideAnomalyFeedbackCommandOutput) => void
   ): void;
-  public provideAnomalyFeedback(
+  provideAnomalyFeedback(
     args: ProvideAnomalyFeedbackCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: ProvideAnomalyFeedbackCommandOutput) => void
   ): void;
-  public provideAnomalyFeedback(
-    args: ProvideAnomalyFeedbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ProvideAnomalyFeedbackCommandOutput) => void),
-    cb?: (err: any, data?: ProvideAnomalyFeedbackCommandOutput) => void
-  ): Promise<ProvideAnomalyFeedbackCommandOutput> | void {
-    const command = new ProvideAnomalyFeedbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an existing cost anomaly monitor. The changes made are applied going forward, and
-   *       doesn'tt change anomalies detected in the past. </p>
+   * @see {@link StartCommitmentPurchaseAnalysisCommand}
    */
-  public updateAnomalyMonitor(
+  startCommitmentPurchaseAnalysis(
+    args: StartCommitmentPurchaseAnalysisCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<StartCommitmentPurchaseAnalysisCommandOutput>;
+  startCommitmentPurchaseAnalysis(
+    args: StartCommitmentPurchaseAnalysisCommandInput,
+    cb: (err: any, data?: StartCommitmentPurchaseAnalysisCommandOutput) => void
+  ): void;
+  startCommitmentPurchaseAnalysis(
+    args: StartCommitmentPurchaseAnalysisCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: StartCommitmentPurchaseAnalysisCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCostAllocationTagBackfillCommand}
+   */
+  startCostAllocationTagBackfill(
+    args: StartCostAllocationTagBackfillCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<StartCostAllocationTagBackfillCommandOutput>;
+  startCostAllocationTagBackfill(
+    args: StartCostAllocationTagBackfillCommandInput,
+    cb: (err: any, data?: StartCostAllocationTagBackfillCommandOutput) => void
+  ): void;
+  startCostAllocationTagBackfill(
+    args: StartCostAllocationTagBackfillCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: StartCostAllocationTagBackfillCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSavingsPlansPurchaseRecommendationGenerationCommand}
+   */
+  startSavingsPlansPurchaseRecommendationGeneration(): Promise<StartSavingsPlansPurchaseRecommendationGenerationCommandOutput>;
+  startSavingsPlansPurchaseRecommendationGeneration(
+    args: StartSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<StartSavingsPlansPurchaseRecommendationGenerationCommandOutput>;
+  startSavingsPlansPurchaseRecommendationGeneration(
+    args: StartSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    cb: (err: any, data?: StartSavingsPlansPurchaseRecommendationGenerationCommandOutput) => void
+  ): void;
+  startSavingsPlansPurchaseRecommendationGeneration(
+    args: StartSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: StartSavingsPlansPurchaseRecommendationGenerationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAnomalyMonitorCommand}
+   */
+  updateAnomalyMonitor(
     args: UpdateAnomalyMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<UpdateAnomalyMonitorCommandOutput>;
-  public updateAnomalyMonitor(
+  updateAnomalyMonitor(
     args: UpdateAnomalyMonitorCommandInput,
     cb: (err: any, data?: UpdateAnomalyMonitorCommandOutput) => void
   ): void;
-  public updateAnomalyMonitor(
+  updateAnomalyMonitor(
     args: UpdateAnomalyMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: UpdateAnomalyMonitorCommandOutput) => void
   ): void;
-  public updateAnomalyMonitor(
-    args: UpdateAnomalyMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAnomalyMonitorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAnomalyMonitorCommandOutput) => void
-  ): Promise<UpdateAnomalyMonitorCommandOutput> | void {
-    const command = new UpdateAnomalyMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an existing cost anomaly monitor subscription. </p>
+   * @see {@link UpdateAnomalySubscriptionCommand}
    */
-  public updateAnomalySubscription(
+  updateAnomalySubscription(
     args: UpdateAnomalySubscriptionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<UpdateAnomalySubscriptionCommandOutput>;
-  public updateAnomalySubscription(
+  updateAnomalySubscription(
     args: UpdateAnomalySubscriptionCommandInput,
     cb: (err: any, data?: UpdateAnomalySubscriptionCommandOutput) => void
   ): void;
-  public updateAnomalySubscription(
+  updateAnomalySubscription(
     args: UpdateAnomalySubscriptionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: UpdateAnomalySubscriptionCommandOutput) => void
   ): void;
-  public updateAnomalySubscription(
-    args: UpdateAnomalySubscriptionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAnomalySubscriptionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAnomalySubscriptionCommandOutput) => void
-  ): Promise<UpdateAnomalySubscriptionCommandOutput> | void {
-    const command = new UpdateAnomalySubscriptionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.</p>
+   * @see {@link UpdateCostAllocationTagsStatusCommand}
    */
-  public updateCostCategoryDefinition(
+  updateCostAllocationTagsStatus(
+    args: UpdateCostAllocationTagsStatusCommandInput,
+    options?: CostExplorerRequestOptions
+  ): Promise<UpdateCostAllocationTagsStatusCommandOutput>;
+  updateCostAllocationTagsStatus(
+    args: UpdateCostAllocationTagsStatusCommandInput,
+    cb: (err: any, data?: UpdateCostAllocationTagsStatusCommandOutput) => void
+  ): void;
+  updateCostAllocationTagsStatus(
+    args: UpdateCostAllocationTagsStatusCommandInput,
+    options: CostExplorerRequestOptions,
+    cb: (err: any, data?: UpdateCostAllocationTagsStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCostCategoryDefinitionCommand}
+   */
+  updateCostCategoryDefinition(
     args: UpdateCostCategoryDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: CostExplorerRequestOptions
   ): Promise<UpdateCostCategoryDefinitionCommandOutput>;
-  public updateCostCategoryDefinition(
+  updateCostCategoryDefinition(
     args: UpdateCostCategoryDefinitionCommandInput,
     cb: (err: any, data?: UpdateCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public updateCostCategoryDefinition(
+  updateCostCategoryDefinition(
     args: UpdateCostCategoryDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: CostExplorerRequestOptions,
     cb: (err: any, data?: UpdateCostCategoryDefinitionCommandOutput) => void
   ): void;
-  public updateCostCategoryDefinition(
-    args: UpdateCostCategoryDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCostCategoryDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCostCategoryDefinitionCommandOutput) => void
-  ): Promise<UpdateCostCategoryDefinitionCommandOutput> | void {
-    const command = new UpdateCostCategoryDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link GetAnomaliesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAnomaliesCommandOutput}.
+   */
+  paginateGetAnomalies(
+    args: GetAnomaliesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAnomaliesCommandOutput>;
+
+  /**
+   * @see {@link GetAnomalyMonitorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAnomalyMonitorsCommandOutput}.
+   */
+  paginateGetAnomalyMonitors(
+    args?: GetAnomalyMonitorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAnomalyMonitorsCommandOutput>;
+
+  /**
+   * @see {@link GetAnomalySubscriptionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAnomalySubscriptionsCommandOutput}.
+   */
+  paginateGetAnomalySubscriptions(
+    args?: GetAnomalySubscriptionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAnomalySubscriptionsCommandOutput>;
+
+  /**
+   * @see {@link GetCostAndUsageComparisonsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCostAndUsageComparisonsCommandOutput}.
+   */
+  paginateGetCostAndUsageComparisons(
+    args: GetCostAndUsageComparisonsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCostAndUsageComparisonsCommandOutput>;
+
+  /**
+   * @see {@link GetCostComparisonDriversCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCostComparisonDriversCommandOutput}.
+   */
+  paginateGetCostComparisonDrivers(
+    args: GetCostComparisonDriversCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCostComparisonDriversCommandOutput>;
+
+  /**
+   * @see {@link GetReservationPurchaseRecommendationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetReservationPurchaseRecommendationCommandOutput}.
+   */
+  paginateGetReservationPurchaseRecommendation(
+    args: GetReservationPurchaseRecommendationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetReservationPurchaseRecommendationCommandOutput>;
+
+  /**
+   * @see {@link GetRightsizingRecommendationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetRightsizingRecommendationCommandOutput}.
+   */
+  paginateGetRightsizingRecommendation(
+    args: GetRightsizingRecommendationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetRightsizingRecommendationCommandOutput>;
+
+  /**
+   * @see {@link GetSavingsPlansCoverageCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSavingsPlansCoverageCommandOutput}.
+   */
+  paginateGetSavingsPlansCoverage(
+    args: GetSavingsPlansCoverageCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSavingsPlansCoverageCommandOutput>;
+
+  /**
+   * @see {@link GetSavingsPlansUtilizationDetailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetSavingsPlansUtilizationDetailsCommandOutput}.
+   */
+  paginateGetSavingsPlansUtilizationDetails(
+    args: GetSavingsPlansUtilizationDetailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetSavingsPlansUtilizationDetailsCommandOutput>;
+
+  /**
+   * @see {@link ListCommitmentPurchaseAnalysesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCommitmentPurchaseAnalysesCommandOutput}.
+   */
+  paginateListCommitmentPurchaseAnalyses(
+    args?: ListCommitmentPurchaseAnalysesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCommitmentPurchaseAnalysesCommandOutput>;
+
+  /**
+   * @see {@link ListCostAllocationTagBackfillHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCostAllocationTagBackfillHistoryCommandOutput}.
+   */
+  paginateListCostAllocationTagBackfillHistory(
+    args?: ListCostAllocationTagBackfillHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCostAllocationTagBackfillHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListCostAllocationTagsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCostAllocationTagsCommandOutput}.
+   */
+  paginateListCostAllocationTags(
+    args?: ListCostAllocationTagsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCostAllocationTagsCommandOutput>;
+
+  /**
+   * @see {@link ListCostCategoryDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCostCategoryDefinitionsCommandOutput}.
+   */
+  paginateListCostCategoryDefinitions(
+    args?: ListCostCategoryDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCostCategoryDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListCostCategoryResourceAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCostCategoryResourceAssociationsCommandOutput}.
+   */
+  paginateListCostCategoryResourceAssociations(
+    args?: ListCostCategoryResourceAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCostCategoryResourceAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListSavingsPlansPurchaseRecommendationGenerationCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSavingsPlansPurchaseRecommendationGenerationCommandOutput}.
+   */
+  paginateListSavingsPlansPurchaseRecommendationGeneration(
+    args?: ListSavingsPlansPurchaseRecommendationGenerationCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSavingsPlansPurchaseRecommendationGenerationCommandOutput>;
 }
+
+/**
+ * <p>You can use the Cost Explorer API to programmatically query your cost and usage data.
+ *       You can query for aggregated data such as total monthly costs or total daily usage. You can
+ *       also query for granular data. This might include the number of daily write operations for
+ *       Amazon DynamoDB database tables in your production environment. </p>
+ *          <p>Service Endpoint</p>
+ *          <p>The Cost Explorer API provides the following endpoint:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <code>https://ce.us-east-1.amazonaws.com</code>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>For information about the costs that are associated with the Cost Explorer API, see
+ *         <a href="http://aws.amazon.com/aws-cost-management/pricing/">Amazon Web Services Cost
+ *         Management Pricing</a>.</p>
+ * @public
+ */
+export class CostExplorer extends CostExplorerClient implements CostExplorer {}
+createAggregatedClient(commands, CostExplorer, { paginators });

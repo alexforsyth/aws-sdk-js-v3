@@ -1,37 +1,303 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type DeleteConnectionCommandInput,
+  type DeleteConnectionCommandOutput,
+  DeleteConnectionCommand,
+} from "./commands/DeleteConnectionCommand";
+import {
+  type DeleteThingShadowCommandInput,
+  type DeleteThingShadowCommandOutput,
   DeleteThingShadowCommand,
-  DeleteThingShadowCommandInput,
-  DeleteThingShadowCommandOutput,
 } from "./commands/DeleteThingShadowCommand";
 import {
+  type GetConnectionCommandInput,
+  type GetConnectionCommandOutput,
+  GetConnectionCommand,
+} from "./commands/GetConnectionCommand";
+import {
+  type GetRetainedMessageCommandInput,
+  type GetRetainedMessageCommandOutput,
   GetRetainedMessageCommand,
-  GetRetainedMessageCommandInput,
-  GetRetainedMessageCommandOutput,
 } from "./commands/GetRetainedMessageCommand";
 import {
+  type GetThingShadowCommandInput,
+  type GetThingShadowCommandOutput,
   GetThingShadowCommand,
-  GetThingShadowCommandInput,
-  GetThingShadowCommandOutput,
 } from "./commands/GetThingShadowCommand";
 import {
+  type ListNamedShadowsForThingCommandInput,
+  type ListNamedShadowsForThingCommandOutput,
   ListNamedShadowsForThingCommand,
-  ListNamedShadowsForThingCommandInput,
-  ListNamedShadowsForThingCommandOutput,
 } from "./commands/ListNamedShadowsForThingCommand";
 import {
+  type ListRetainedMessagesCommandInput,
+  type ListRetainedMessagesCommandOutput,
   ListRetainedMessagesCommand,
-  ListRetainedMessagesCommandInput,
-  ListRetainedMessagesCommandOutput,
 } from "./commands/ListRetainedMessagesCommand";
-import { PublishCommand, PublishCommandInput, PublishCommandOutput } from "./commands/PublishCommand";
 import {
+  type ListSubscriptionsCommandInput,
+  type ListSubscriptionsCommandOutput,
+  ListSubscriptionsCommand,
+} from "./commands/ListSubscriptionsCommand";
+import { type PublishCommandInput, type PublishCommandOutput, PublishCommand } from "./commands/PublishCommand";
+import {
+  type SendDirectMessageCommandInput,
+  type SendDirectMessageCommandOutput,
+  SendDirectMessageCommand,
+} from "./commands/SendDirectMessageCommand";
+import {
+  type UpdateThingShadowCommandInput,
+  type UpdateThingShadowCommandOutput,
   UpdateThingShadowCommand,
-  UpdateThingShadowCommandInput,
-  UpdateThingShadowCommandOutput,
 } from "./commands/UpdateThingShadowCommand";
 import { IoTDataPlaneClient } from "./IoTDataPlaneClient";
+import { paginateListRetainedMessages } from "./pagination/ListRetainedMessagesPaginator";
+import { paginateListSubscriptions } from "./pagination/ListSubscriptionsPaginator";
+
+const commands = {
+  DeleteConnectionCommand,
+  DeleteThingShadowCommand,
+  GetConnectionCommand,
+  GetRetainedMessageCommand,
+  GetThingShadowCommand,
+  ListNamedShadowsForThingCommand,
+  ListRetainedMessagesCommand,
+  ListSubscriptionsCommand,
+  PublishCommand,
+  SendDirectMessageCommand,
+  UpdateThingShadowCommand,
+};
+const paginators = {
+  paginateListRetainedMessages,
+  paginateListSubscriptions,
+};
+
+/**
+ * @public
+ */
+export interface IoTDataPlaneRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IoTDataPlane {
+  /**
+   * @see {@link DeleteConnectionCommand}
+   */
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<DeleteConnectionCommandOutput>;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+  deleteConnection(
+    args: DeleteConnectionCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: DeleteConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteThingShadowCommand}
+   */
+  deleteThingShadow(
+    args: DeleteThingShadowCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<DeleteThingShadowCommandOutput>;
+  deleteThingShadow(
+    args: DeleteThingShadowCommandInput,
+    cb: (err: any, data?: DeleteThingShadowCommandOutput) => void
+  ): void;
+  deleteThingShadow(
+    args: DeleteThingShadowCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: DeleteThingShadowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConnectionCommand}
+   */
+  getConnection(
+    args: GetConnectionCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<GetConnectionCommandOutput>;
+  getConnection(
+    args: GetConnectionCommandInput,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+  getConnection(
+    args: GetConnectionCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: GetConnectionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRetainedMessageCommand}
+   */
+  getRetainedMessage(
+    args: GetRetainedMessageCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<GetRetainedMessageCommandOutput>;
+  getRetainedMessage(
+    args: GetRetainedMessageCommandInput,
+    cb: (err: any, data?: GetRetainedMessageCommandOutput) => void
+  ): void;
+  getRetainedMessage(
+    args: GetRetainedMessageCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: GetRetainedMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetThingShadowCommand}
+   */
+  getThingShadow(
+    args: GetThingShadowCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<GetThingShadowCommandOutput>;
+  getThingShadow(
+    args: GetThingShadowCommandInput,
+    cb: (err: any, data?: GetThingShadowCommandOutput) => void
+  ): void;
+  getThingShadow(
+    args: GetThingShadowCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: GetThingShadowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNamedShadowsForThingCommand}
+   */
+  listNamedShadowsForThing(
+    args: ListNamedShadowsForThingCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<ListNamedShadowsForThingCommandOutput>;
+  listNamedShadowsForThing(
+    args: ListNamedShadowsForThingCommandInput,
+    cb: (err: any, data?: ListNamedShadowsForThingCommandOutput) => void
+  ): void;
+  listNamedShadowsForThing(
+    args: ListNamedShadowsForThingCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: ListNamedShadowsForThingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRetainedMessagesCommand}
+   */
+  listRetainedMessages(): Promise<ListRetainedMessagesCommandOutput>;
+  listRetainedMessages(
+    args: ListRetainedMessagesCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<ListRetainedMessagesCommandOutput>;
+  listRetainedMessages(
+    args: ListRetainedMessagesCommandInput,
+    cb: (err: any, data?: ListRetainedMessagesCommandOutput) => void
+  ): void;
+  listRetainedMessages(
+    args: ListRetainedMessagesCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: ListRetainedMessagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSubscriptionsCommand}
+   */
+  listSubscriptions(
+    args: ListSubscriptionsCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<ListSubscriptionsCommandOutput>;
+  listSubscriptions(
+    args: ListSubscriptionsCommandInput,
+    cb: (err: any, data?: ListSubscriptionsCommandOutput) => void
+  ): void;
+  listSubscriptions(
+    args: ListSubscriptionsCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: ListSubscriptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PublishCommand}
+   */
+  publish(
+    args: PublishCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<PublishCommandOutput>;
+  publish(
+    args: PublishCommandInput,
+    cb: (err: any, data?: PublishCommandOutput) => void
+  ): void;
+  publish(
+    args: PublishCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: PublishCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendDirectMessageCommand}
+   */
+  sendDirectMessage(
+    args: SendDirectMessageCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<SendDirectMessageCommandOutput>;
+  sendDirectMessage(
+    args: SendDirectMessageCommandInput,
+    cb: (err: any, data?: SendDirectMessageCommandOutput) => void
+  ): void;
+  sendDirectMessage(
+    args: SendDirectMessageCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: SendDirectMessageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateThingShadowCommand}
+   */
+  updateThingShadow(
+    args: UpdateThingShadowCommandInput,
+    options?: IoTDataPlaneRequestOptions
+  ): Promise<UpdateThingShadowCommandOutput>;
+  updateThingShadow(
+    args: UpdateThingShadowCommandInput,
+    cb: (err: any, data?: UpdateThingShadowCommandOutput) => void
+  ): void;
+  updateThingShadow(
+    args: UpdateThingShadowCommandInput,
+    options: IoTDataPlaneRequestOptions,
+    cb: (err: any, data?: UpdateThingShadowCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRetainedMessagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRetainedMessagesCommandOutput}.
+   */
+  paginateListRetainedMessages(
+    args?: ListRetainedMessagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRetainedMessagesCommandOutput>;
+
+  /**
+   * @see {@link ListSubscriptionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSubscriptionsCommandOutput}.
+   */
+  paginateListSubscriptions(
+    args: ListSubscriptionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSubscriptionsCommandOutput>;
+}
 
 /**
  * <fullname>IoT data</fullname>
@@ -45,253 +311,7 @@ import { IoTDataPlaneClient } from "./IoTDataPlaneClient";
  *          </p>
  *          <p>The service name used by <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Amazon Web ServicesSignature Version 4</a>
  *       to sign requests is: <i>iotdevicegateway</i>.</p>
+ * @public
  */
-export class IoTDataPlane extends IoTDataPlaneClient {
-  /**
-   * <p>Deletes the shadow for the specified thing.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteThingShadow</a> action.</p>
-   *          <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the IoT Developer Guide.</p>
-   */
-  public deleteThingShadow(
-    args: DeleteThingShadowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteThingShadowCommandOutput>;
-  public deleteThingShadow(
-    args: DeleteThingShadowCommandInput,
-    cb: (err: any, data?: DeleteThingShadowCommandOutput) => void
-  ): void;
-  public deleteThingShadow(
-    args: DeleteThingShadowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteThingShadowCommandOutput) => void
-  ): void;
-  public deleteThingShadow(
-    args: DeleteThingShadowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteThingShadowCommandOutput) => void),
-    cb?: (err: any, data?: DeleteThingShadowCommandOutput) => void
-  ): Promise<DeleteThingShadowCommandOutput> | void {
-    const command = new DeleteThingShadowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the details of a single retained message for the specified topic.</p>
-   *          <p>This action returns the message payload of the retained message, which can
-   *       incur messaging costs. To list only the topic names of the retained messages, call
-   *       <a href="/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html">ListRetainedMessages</a>.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">GetRetainedMessage</a> action.</p>
-   *          <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core
-   *       pricing - Messaging</a>.</p>
-   */
-  public getRetainedMessage(
-    args: GetRetainedMessageCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRetainedMessageCommandOutput>;
-  public getRetainedMessage(
-    args: GetRetainedMessageCommandInput,
-    cb: (err: any, data?: GetRetainedMessageCommandOutput) => void
-  ): void;
-  public getRetainedMessage(
-    args: GetRetainedMessageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRetainedMessageCommandOutput) => void
-  ): void;
-  public getRetainedMessage(
-    args: GetRetainedMessageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRetainedMessageCommandOutput) => void),
-    cb?: (err: any, data?: GetRetainedMessageCommandOutput) => void
-  ): Promise<GetRetainedMessageCommandOutput> | void {
-    const command = new GetRetainedMessageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the shadow for the specified thing.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetThingShadow</a> action.</p>
-   *          <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the
-   *         IoT Developer Guide.</p>
-   */
-  public getThingShadow(
-    args: GetThingShadowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetThingShadowCommandOutput>;
-  public getThingShadow(
-    args: GetThingShadowCommandInput,
-    cb: (err: any, data?: GetThingShadowCommandOutput) => void
-  ): void;
-  public getThingShadow(
-    args: GetThingShadowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetThingShadowCommandOutput) => void
-  ): void;
-  public getThingShadow(
-    args: GetThingShadowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetThingShadowCommandOutput) => void),
-    cb?: (err: any, data?: GetThingShadowCommandOutput) => void
-  ): Promise<GetThingShadowCommandOutput> | void {
-    const command = new GetThingShadowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the shadows for the specified thing.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListNamedShadowsForThing</a> action.</p>
-   */
-  public listNamedShadowsForThing(
-    args: ListNamedShadowsForThingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListNamedShadowsForThingCommandOutput>;
-  public listNamedShadowsForThing(
-    args: ListNamedShadowsForThingCommandInput,
-    cb: (err: any, data?: ListNamedShadowsForThingCommandOutput) => void
-  ): void;
-  public listNamedShadowsForThing(
-    args: ListNamedShadowsForThingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListNamedShadowsForThingCommandOutput) => void
-  ): void;
-  public listNamedShadowsForThing(
-    args: ListNamedShadowsForThingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNamedShadowsForThingCommandOutput) => void),
-    cb?: (err: any, data?: ListNamedShadowsForThingCommandOutput) => void
-  ): Promise<ListNamedShadowsForThingCommandOutput> | void {
-    const command = new ListNamedShadowsForThingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists summary information about the retained messages stored for the account.</p>
-   *          <p>This action returns only the topic names of the retained messages. It doesn't
-   *       return any message payloads. Although this action doesn't return a message payload,
-   *       it can still incur messaging costs.</p>
-   *          <p>To get the message payload of a retained message, call
-   *       <a href="https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html">GetRetainedMessage</a>
-   *       with the topic name of the retained message.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">ListRetainedMessages</a> action.</p>
-   *          <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core
-   *       pricing - Messaging</a>.</p>
-   */
-  public listRetainedMessages(
-    args: ListRetainedMessagesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRetainedMessagesCommandOutput>;
-  public listRetainedMessages(
-    args: ListRetainedMessagesCommandInput,
-    cb: (err: any, data?: ListRetainedMessagesCommandOutput) => void
-  ): void;
-  public listRetainedMessages(
-    args: ListRetainedMessagesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRetainedMessagesCommandOutput) => void
-  ): void;
-  public listRetainedMessages(
-    args: ListRetainedMessagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRetainedMessagesCommandOutput) => void),
-    cb?: (err: any, data?: ListRetainedMessagesCommandOutput) => void
-  ): Promise<ListRetainedMessagesCommandOutput> | void {
-    const command = new ListRetainedMessagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Publishes an MQTT message.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">Publish</a> action.</p>
-   *          <p>For more information about MQTT messages, see
-   *       <a href="http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html">MQTT Protocol</a> in the
-   *        IoT Developer Guide.</p>
-   *          <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core
-   *       pricing - Messaging</a>.</p>
-   */
-  public publish(args: PublishCommandInput, options?: __HttpHandlerOptions): Promise<PublishCommandOutput>;
-  public publish(args: PublishCommandInput, cb: (err: any, data?: PublishCommandOutput) => void): void;
-  public publish(
-    args: PublishCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PublishCommandOutput) => void
-  ): void;
-  public publish(
-    args: PublishCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishCommandOutput) => void),
-    cb?: (err: any, data?: PublishCommandOutput) => void
-  ): Promise<PublishCommandOutput> | void {
-    const command = new PublishCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the shadow for the specified thing.</p>
-   *          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateThingShadow</a> action.</p>
-   *          <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the
-   *         IoT Developer Guide.</p>
-   */
-  public updateThingShadow(
-    args: UpdateThingShadowCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateThingShadowCommandOutput>;
-  public updateThingShadow(
-    args: UpdateThingShadowCommandInput,
-    cb: (err: any, data?: UpdateThingShadowCommandOutput) => void
-  ): void;
-  public updateThingShadow(
-    args: UpdateThingShadowCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateThingShadowCommandOutput) => void
-  ): void;
-  public updateThingShadow(
-    args: UpdateThingShadowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateThingShadowCommandOutput) => void),
-    cb?: (err: any, data?: UpdateThingShadowCommandOutput) => void
-  ): Promise<UpdateThingShadowCommandOutput> | void {
-    const command = new UpdateThingShadowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class IoTDataPlane extends IoTDataPlaneClient implements IoTDataPlane {}
+createAggregatedClient(commands, IoTDataPlane, { paginators });

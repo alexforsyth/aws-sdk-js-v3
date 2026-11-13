@@ -1,0 +1,67 @@
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
+
+import {
+  type GetStreamSessionCommandInput,
+  type GetStreamSessionCommandOutput,
+  GetStreamSessionCommand,
+} from "../commands/GetStreamSessionCommand";
+import type { GameLiftStreamsClient } from "../GameLiftStreamsClient";
+import type { GameLiftStreamsServiceException } from "../models/GameLiftStreamsServiceException";
+
+const checkState = async (client: GameLiftStreamsClient, input: GetStreamSessionCommandInput): Promise<WaiterResult<GetStreamSessionCommandOutput | GameLiftStreamsServiceException>> => {
+  let reason;
+  try {
+    let result: GetStreamSessionCommandOutput & any = await client.send(new GetStreamSessionCommand(input));
+    reason = result;
+    try {
+      const returnComparator = () => {
+        return result.Status;
+      }
+      if (returnComparator() === "ACTIVE") {
+        return { state: WaiterState.SUCCESS, reason };
+      }
+    } catch (e) {}
+    try {
+      const returnComparator = () => {
+        return result.Status;
+      }
+      if (returnComparator() === "ERROR") {
+        return { state: WaiterState.FAILURE, reason };
+      }
+    } catch (e) {}
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
+};
+/**
+ * Waits until a stream session is active
+ *  @deprecated Use waitUntilStreamSessionActive instead. waitForStreamSessionActive does not throw error in non-success cases.
+ */
+export const waitForStreamSessionActive = async (
+  params: WaiterConfiguration<GameLiftStreamsClient>,
+  input: GetStreamSessionCommandInput
+): Promise<WaiterResult<GetStreamSessionCommandOutput | GameLiftStreamsServiceException>> => {
+  const serviceDefaults = { minDelay: 2, maxDelay: 120 };
+  return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ * Waits until a stream session is active
+ *  @param params - Waiter configuration options.
+ *  @param input - The input to GetStreamSessionCommand for polling.
+ */
+export const waitUntilStreamSessionActive = async (
+  params: WaiterConfiguration<GameLiftStreamsClient>,
+  input: GetStreamSessionCommandInput
+): Promise<WaiterResult<GetStreamSessionCommandOutput>> => {
+  const serviceDefaults = { minDelay: 2, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  return checkExceptions(result) as WaiterResult<GetStreamSessionCommandOutput>;
+};

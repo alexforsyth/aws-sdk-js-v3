@@ -1,98 +1,84 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetSearchSuggestionsRequest, GetSearchSuggestionsResponse } from "../models/models_2";
-import {
-  deserializeAws_json1_1GetSearchSuggestionsCommand,
-  serializeAws_json1_1GetSearchSuggestionsCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSearchSuggestionsRequest, GetSearchSuggestionsResponse } from "../models/models_3";
+import { GetSearchSuggestions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSearchSuggestionsCommand}.
+ */
 export interface GetSearchSuggestionsCommandInput extends GetSearchSuggestionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSearchSuggestionsCommand}.
+ */
 export interface GetSearchSuggestionsCommandOutput extends GetSearchSuggestionsResponse, __MetadataBearer {}
 
 /**
- * <p>An auto-complete API for the search functionality in the Amazon SageMaker console. It returns
- *       suggestions of possible matches for the property name to use in <code>Search</code>
- *       queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and
- *       <code>Metrics</code>.</p>
+ * <p>An auto-complete API for the search functionality in the SageMaker console. It returns suggestions of possible matches for the property name to use in <code>Search</code> queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and <code>Metrics</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, GetSearchSuggestionsCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, GetSearchSuggestionsCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // GetSearchSuggestionsRequest
+ *   Resource: "TrainingJob" || "Experiment" || "ExperimentTrial" || "ExperimentTrialComponent" || "Endpoint" || "Model" || "ModelPackage" || "ModelPackageGroup" || "Pipeline" || "PipelineExecution" || "FeatureGroup" || "FeatureMetadata" || "Image" || "ImageVersion" || "Project" || "HyperParameterTuningJob" || "ModelCard" || "PipelineVersion" || "Job" || "HubContent", // required
+ *   SuggestionQuery: { // SuggestionQuery
+ *     PropertyNameQuery: { // PropertyNameQuery
+ *       PropertyNameHint: "STRING_VALUE", // required
+ *     },
+ *   },
+ * };
  * const command = new GetSearchSuggestionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetSearchSuggestionsResponse
+ * //   PropertyNameSuggestions: [ // PropertyNameSuggestionList
+ * //     { // PropertyNameSuggestion
+ * //       PropertyName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetSearchSuggestionsCommandInput - {@link GetSearchSuggestionsCommandInput}
+ * @returns {@link GetSearchSuggestionsCommandOutput}
  * @see {@link GetSearchSuggestionsCommandInput} for command's `input` shape.
  * @see {@link GetSearchSuggestionsCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class GetSearchSuggestionsCommand extends $Command<
-  GetSearchSuggestionsCommandInput,
-  GetSearchSuggestionsCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSearchSuggestionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSearchSuggestionsCommandInput, GetSearchSuggestionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "GetSearchSuggestionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSearchSuggestionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSearchSuggestionsResponse.filterSensitiveLog,
+export class GetSearchSuggestionsCommand extends command<GetSearchSuggestionsCommandInput, GetSearchSuggestionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSearchSuggestions",
+  GetSearchSuggestions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSearchSuggestionsRequest;
+      output: GetSearchSuggestionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSearchSuggestionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSearchSuggestionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSearchSuggestionsCommandOutput> {
-    return deserializeAws_json1_1GetSearchSuggestionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSearchSuggestionsCommandInput;
+      output: GetSearchSuggestionsCommandOutput;
+    };
+  };
 }

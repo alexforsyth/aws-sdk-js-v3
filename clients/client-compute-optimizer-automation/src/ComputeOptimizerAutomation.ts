@@ -1,0 +1,684 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type AssociateAccountsCommandInput,
+  type AssociateAccountsCommandOutput,
+  AssociateAccountsCommand,
+} from "./commands/AssociateAccountsCommand";
+import {
+  type CreateAutomationRuleCommandInput,
+  type CreateAutomationRuleCommandOutput,
+  CreateAutomationRuleCommand,
+} from "./commands/CreateAutomationRuleCommand";
+import {
+  type DeleteAutomationRuleCommandInput,
+  type DeleteAutomationRuleCommandOutput,
+  DeleteAutomationRuleCommand,
+} from "./commands/DeleteAutomationRuleCommand";
+import {
+  type DisassociateAccountsCommandInput,
+  type DisassociateAccountsCommandOutput,
+  DisassociateAccountsCommand,
+} from "./commands/DisassociateAccountsCommand";
+import {
+  type GetAutomationEventCommandInput,
+  type GetAutomationEventCommandOutput,
+  GetAutomationEventCommand,
+} from "./commands/GetAutomationEventCommand";
+import {
+  type GetAutomationRuleCommandInput,
+  type GetAutomationRuleCommandOutput,
+  GetAutomationRuleCommand,
+} from "./commands/GetAutomationRuleCommand";
+import {
+  type GetEnrollmentConfigurationCommandInput,
+  type GetEnrollmentConfigurationCommandOutput,
+  GetEnrollmentConfigurationCommand,
+} from "./commands/GetEnrollmentConfigurationCommand";
+import {
+  type ListAccountsCommandInput,
+  type ListAccountsCommandOutput,
+  ListAccountsCommand,
+} from "./commands/ListAccountsCommand";
+import {
+  type ListAutomationEventsCommandInput,
+  type ListAutomationEventsCommandOutput,
+  ListAutomationEventsCommand,
+} from "./commands/ListAutomationEventsCommand";
+import {
+  type ListAutomationEventStepsCommandInput,
+  type ListAutomationEventStepsCommandOutput,
+  ListAutomationEventStepsCommand,
+} from "./commands/ListAutomationEventStepsCommand";
+import {
+  type ListAutomationEventSummariesCommandInput,
+  type ListAutomationEventSummariesCommandOutput,
+  ListAutomationEventSummariesCommand,
+} from "./commands/ListAutomationEventSummariesCommand";
+import {
+  type ListAutomationRulePreviewCommandInput,
+  type ListAutomationRulePreviewCommandOutput,
+  ListAutomationRulePreviewCommand,
+} from "./commands/ListAutomationRulePreviewCommand";
+import {
+  type ListAutomationRulePreviewSummariesCommandInput,
+  type ListAutomationRulePreviewSummariesCommandOutput,
+  ListAutomationRulePreviewSummariesCommand,
+} from "./commands/ListAutomationRulePreviewSummariesCommand";
+import {
+  type ListAutomationRulesCommandInput,
+  type ListAutomationRulesCommandOutput,
+  ListAutomationRulesCommand,
+} from "./commands/ListAutomationRulesCommand";
+import {
+  type ListRecommendedActionsCommandInput,
+  type ListRecommendedActionsCommandOutput,
+  ListRecommendedActionsCommand,
+} from "./commands/ListRecommendedActionsCommand";
+import {
+  type ListRecommendedActionSummariesCommandInput,
+  type ListRecommendedActionSummariesCommandOutput,
+  ListRecommendedActionSummariesCommand,
+} from "./commands/ListRecommendedActionSummariesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RollbackAutomationEventCommandInput,
+  type RollbackAutomationEventCommandOutput,
+  RollbackAutomationEventCommand,
+} from "./commands/RollbackAutomationEventCommand";
+import {
+  type StartAutomationEventCommandInput,
+  type StartAutomationEventCommandOutput,
+  StartAutomationEventCommand,
+} from "./commands/StartAutomationEventCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateAutomationRuleCommandInput,
+  type UpdateAutomationRuleCommandOutput,
+  UpdateAutomationRuleCommand,
+} from "./commands/UpdateAutomationRuleCommand";
+import {
+  type UpdateEnrollmentConfigurationCommandInput,
+  type UpdateEnrollmentConfigurationCommandOutput,
+  UpdateEnrollmentConfigurationCommand,
+} from "./commands/UpdateEnrollmentConfigurationCommand";
+import { ComputeOptimizerAutomationClient } from "./ComputeOptimizerAutomationClient";
+import { paginateListAccounts } from "./pagination/ListAccountsPaginator";
+import { paginateListAutomationEvents } from "./pagination/ListAutomationEventsPaginator";
+import { paginateListAutomationEventSteps } from "./pagination/ListAutomationEventStepsPaginator";
+import { paginateListAutomationEventSummaries } from "./pagination/ListAutomationEventSummariesPaginator";
+import { paginateListAutomationRulePreview } from "./pagination/ListAutomationRulePreviewPaginator";
+import { paginateListAutomationRulePreviewSummaries } from "./pagination/ListAutomationRulePreviewSummariesPaginator";
+import { paginateListAutomationRules } from "./pagination/ListAutomationRulesPaginator";
+import { paginateListRecommendedActions } from "./pagination/ListRecommendedActionsPaginator";
+import { paginateListRecommendedActionSummaries } from "./pagination/ListRecommendedActionSummariesPaginator";
+
+const commands = {
+  AssociateAccountsCommand,
+  CreateAutomationRuleCommand,
+  DeleteAutomationRuleCommand,
+  DisassociateAccountsCommand,
+  GetAutomationEventCommand,
+  GetAutomationRuleCommand,
+  GetEnrollmentConfigurationCommand,
+  ListAccountsCommand,
+  ListAutomationEventsCommand,
+  ListAutomationEventStepsCommand,
+  ListAutomationEventSummariesCommand,
+  ListAutomationRulePreviewCommand,
+  ListAutomationRulePreviewSummariesCommand,
+  ListAutomationRulesCommand,
+  ListRecommendedActionsCommand,
+  ListRecommendedActionSummariesCommand,
+  ListTagsForResourceCommand,
+  RollbackAutomationEventCommand,
+  StartAutomationEventCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAutomationRuleCommand,
+  UpdateEnrollmentConfigurationCommand,
+};
+const paginators = {
+  paginateListAccounts,
+  paginateListAutomationEvents,
+  paginateListAutomationEventSteps,
+  paginateListAutomationEventSummaries,
+  paginateListAutomationRulePreview,
+  paginateListAutomationRulePreviewSummaries,
+  paginateListAutomationRules,
+  paginateListRecommendedActions,
+  paginateListRecommendedActionSummaries,
+};
+
+/**
+ * @public
+ */
+export interface ComputeOptimizerAutomationRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface ComputeOptimizerAutomation {
+  /**
+   * @see {@link AssociateAccountsCommand}
+   */
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<AssociateAccountsCommandOutput>;
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    cb: (err: any, data?: AssociateAccountsCommandOutput) => void
+  ): void;
+  associateAccounts(
+    args: AssociateAccountsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: AssociateAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAutomationRuleCommand}
+   */
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<CreateAutomationRuleCommandOutput>;
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    cb: (err: any, data?: CreateAutomationRuleCommandOutput) => void
+  ): void;
+  createAutomationRule(
+    args: CreateAutomationRuleCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: CreateAutomationRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutomationRuleCommand}
+   */
+  deleteAutomationRule(
+    args: DeleteAutomationRuleCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<DeleteAutomationRuleCommandOutput>;
+  deleteAutomationRule(
+    args: DeleteAutomationRuleCommandInput,
+    cb: (err: any, data?: DeleteAutomationRuleCommandOutput) => void
+  ): void;
+  deleteAutomationRule(
+    args: DeleteAutomationRuleCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: DeleteAutomationRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAccountsCommand}
+   */
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<DisassociateAccountsCommandOutput>;
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
+  ): void;
+  disassociateAccounts(
+    args: DisassociateAccountsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomationEventCommand}
+   */
+  getAutomationEvent(
+    args: GetAutomationEventCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<GetAutomationEventCommandOutput>;
+  getAutomationEvent(
+    args: GetAutomationEventCommandInput,
+    cb: (err: any, data?: GetAutomationEventCommandOutput) => void
+  ): void;
+  getAutomationEvent(
+    args: GetAutomationEventCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: GetAutomationEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutomationRuleCommand}
+   */
+  getAutomationRule(
+    args: GetAutomationRuleCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<GetAutomationRuleCommandOutput>;
+  getAutomationRule(
+    args: GetAutomationRuleCommandInput,
+    cb: (err: any, data?: GetAutomationRuleCommandOutput) => void
+  ): void;
+  getAutomationRule(
+    args: GetAutomationRuleCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: GetAutomationRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEnrollmentConfigurationCommand}
+   */
+  getEnrollmentConfiguration(): Promise<GetEnrollmentConfigurationCommandOutput>;
+  getEnrollmentConfiguration(
+    args: GetEnrollmentConfigurationCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<GetEnrollmentConfigurationCommandOutput>;
+  getEnrollmentConfiguration(
+    args: GetEnrollmentConfigurationCommandInput,
+    cb: (err: any, data?: GetEnrollmentConfigurationCommandOutput) => void
+  ): void;
+  getEnrollmentConfiguration(
+    args: GetEnrollmentConfigurationCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: GetEnrollmentConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountsCommand}
+   */
+  listAccounts(): Promise<ListAccountsCommandOutput>;
+  listAccounts(
+    args: ListAccountsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAccountsCommandOutput>;
+  listAccounts(
+    args: ListAccountsCommandInput,
+    cb: (err: any, data?: ListAccountsCommandOutput) => void
+  ): void;
+  listAccounts(
+    args: ListAccountsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationEventsCommand}
+   */
+  listAutomationEvents(): Promise<ListAutomationEventsCommandOutput>;
+  listAutomationEvents(
+    args: ListAutomationEventsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationEventsCommandOutput>;
+  listAutomationEvents(
+    args: ListAutomationEventsCommandInput,
+    cb: (err: any, data?: ListAutomationEventsCommandOutput) => void
+  ): void;
+  listAutomationEvents(
+    args: ListAutomationEventsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationEventStepsCommand}
+   */
+  listAutomationEventSteps(
+    args: ListAutomationEventStepsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationEventStepsCommandOutput>;
+  listAutomationEventSteps(
+    args: ListAutomationEventStepsCommandInput,
+    cb: (err: any, data?: ListAutomationEventStepsCommandOutput) => void
+  ): void;
+  listAutomationEventSteps(
+    args: ListAutomationEventStepsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationEventStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationEventSummariesCommand}
+   */
+  listAutomationEventSummaries(): Promise<ListAutomationEventSummariesCommandOutput>;
+  listAutomationEventSummaries(
+    args: ListAutomationEventSummariesCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationEventSummariesCommandOutput>;
+  listAutomationEventSummaries(
+    args: ListAutomationEventSummariesCommandInput,
+    cb: (err: any, data?: ListAutomationEventSummariesCommandOutput) => void
+  ): void;
+  listAutomationEventSummaries(
+    args: ListAutomationEventSummariesCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationEventSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationRulePreviewCommand}
+   */
+  listAutomationRulePreview(
+    args: ListAutomationRulePreviewCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationRulePreviewCommandOutput>;
+  listAutomationRulePreview(
+    args: ListAutomationRulePreviewCommandInput,
+    cb: (err: any, data?: ListAutomationRulePreviewCommandOutput) => void
+  ): void;
+  listAutomationRulePreview(
+    args: ListAutomationRulePreviewCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationRulePreviewCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationRulePreviewSummariesCommand}
+   */
+  listAutomationRulePreviewSummaries(
+    args: ListAutomationRulePreviewSummariesCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationRulePreviewSummariesCommandOutput>;
+  listAutomationRulePreviewSummaries(
+    args: ListAutomationRulePreviewSummariesCommandInput,
+    cb: (err: any, data?: ListAutomationRulePreviewSummariesCommandOutput) => void
+  ): void;
+  listAutomationRulePreviewSummaries(
+    args: ListAutomationRulePreviewSummariesCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationRulePreviewSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAutomationRulesCommand}
+   */
+  listAutomationRules(): Promise<ListAutomationRulesCommandOutput>;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListAutomationRulesCommandOutput>;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    cb: (err: any, data?: ListAutomationRulesCommandOutput) => void
+  ): void;
+  listAutomationRules(
+    args: ListAutomationRulesCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListAutomationRulesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendedActionsCommand}
+   */
+  listRecommendedActions(): Promise<ListRecommendedActionsCommandOutput>;
+  listRecommendedActions(
+    args: ListRecommendedActionsCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListRecommendedActionsCommandOutput>;
+  listRecommendedActions(
+    args: ListRecommendedActionsCommandInput,
+    cb: (err: any, data?: ListRecommendedActionsCommandOutput) => void
+  ): void;
+  listRecommendedActions(
+    args: ListRecommendedActionsCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListRecommendedActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendedActionSummariesCommand}
+   */
+  listRecommendedActionSummaries(): Promise<ListRecommendedActionSummariesCommandOutput>;
+  listRecommendedActionSummaries(
+    args: ListRecommendedActionSummariesCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListRecommendedActionSummariesCommandOutput>;
+  listRecommendedActionSummaries(
+    args: ListRecommendedActionSummariesCommandInput,
+    cb: (err: any, data?: ListRecommendedActionSummariesCommandOutput) => void
+  ): void;
+  listRecommendedActionSummaries(
+    args: ListRecommendedActionSummariesCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListRecommendedActionSummariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RollbackAutomationEventCommand}
+   */
+  rollbackAutomationEvent(
+    args: RollbackAutomationEventCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<RollbackAutomationEventCommandOutput>;
+  rollbackAutomationEvent(
+    args: RollbackAutomationEventCommandInput,
+    cb: (err: any, data?: RollbackAutomationEventCommandOutput) => void
+  ): void;
+  rollbackAutomationEvent(
+    args: RollbackAutomationEventCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: RollbackAutomationEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAutomationEventCommand}
+   */
+  startAutomationEvent(
+    args: StartAutomationEventCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<StartAutomationEventCommandOutput>;
+  startAutomationEvent(
+    args: StartAutomationEventCommandInput,
+    cb: (err: any, data?: StartAutomationEventCommandOutput) => void
+  ): void;
+  startAutomationEvent(
+    args: StartAutomationEventCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: StartAutomationEventCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAutomationRuleCommand}
+   */
+  updateAutomationRule(
+    args: UpdateAutomationRuleCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<UpdateAutomationRuleCommandOutput>;
+  updateAutomationRule(
+    args: UpdateAutomationRuleCommandInput,
+    cb: (err: any, data?: UpdateAutomationRuleCommandOutput) => void
+  ): void;
+  updateAutomationRule(
+    args: UpdateAutomationRuleCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: UpdateAutomationRuleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEnrollmentConfigurationCommand}
+   */
+  updateEnrollmentConfiguration(
+    args: UpdateEnrollmentConfigurationCommandInput,
+    options?: ComputeOptimizerAutomationRequestOptions
+  ): Promise<UpdateEnrollmentConfigurationCommandOutput>;
+  updateEnrollmentConfiguration(
+    args: UpdateEnrollmentConfigurationCommandInput,
+    cb: (err: any, data?: UpdateEnrollmentConfigurationCommandOutput) => void
+  ): void;
+  updateEnrollmentConfiguration(
+    args: UpdateEnrollmentConfigurationCommandInput,
+    options: ComputeOptimizerAutomationRequestOptions,
+    cb: (err: any, data?: UpdateEnrollmentConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountsCommandOutput}.
+   */
+  paginateListAccounts(
+    args?: ListAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountsCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationEventsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationEventsCommandOutput}.
+   */
+  paginateListAutomationEvents(
+    args?: ListAutomationEventsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationEventsCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationEventStepsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationEventStepsCommandOutput}.
+   */
+  paginateListAutomationEventSteps(
+    args: ListAutomationEventStepsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationEventStepsCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationEventSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationEventSummariesCommandOutput}.
+   */
+  paginateListAutomationEventSummaries(
+    args?: ListAutomationEventSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationEventSummariesCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationRulePreviewCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationRulePreviewCommandOutput}.
+   */
+  paginateListAutomationRulePreview(
+    args: ListAutomationRulePreviewCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationRulePreviewCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationRulePreviewSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationRulePreviewSummariesCommandOutput}.
+   */
+  paginateListAutomationRulePreviewSummaries(
+    args: ListAutomationRulePreviewSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationRulePreviewSummariesCommandOutput>;
+
+  /**
+   * @see {@link ListAutomationRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAutomationRulesCommandOutput}.
+   */
+  paginateListAutomationRules(
+    args?: ListAutomationRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAutomationRulesCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendedActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendedActionsCommandOutput}.
+   */
+  paginateListRecommendedActions(
+    args?: ListRecommendedActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendedActionsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendedActionSummariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendedActionSummariesCommandOutput}.
+   */
+  paginateListRecommendedActionSummaries(
+    args?: ListRecommendedActionSummariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendedActionSummariesCommandOutput>;
+}
+
+/**
+ * <p> Automation is a feature within Amazon Web Services Compute Optimizer that enables you to apply optimization recommendations to your Amazon Web Services resources, reducing costs and improving performance. You can apply recommended actions directly or create automation rules that implement recommendations on a recurring schedule when they match your specified criteria. With automation rules, set criteria such as Amazon Web Services Region and Resource Tags to target specific geographies and workloads. Configure rules to run daily, weekly, or monthly, and Compute Optimizer continuously evaluates new recommendations against your criteria. Track automation events over time, examine detailed step history, estimate savings achieved, and reverse actions directly from Compute Optimizer when needed. </p>
+ * @public
+ */
+export class ComputeOptimizerAutomation extends ComputeOptimizerAutomationClient implements ComputeOptimizerAutomation {}
+createAggregatedClient(commands, ComputeOptimizerAutomation, { paginators });

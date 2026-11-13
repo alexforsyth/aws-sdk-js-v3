@@ -1,894 +1,954 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
-import { CancelJobCommand, CancelJobCommandInput, CancelJobCommandOutput } from "./commands/CancelJobCommand";
 import {
+  type AcceptDataGrantCommandInput,
+  type AcceptDataGrantCommandOutput,
+  AcceptDataGrantCommand,
+} from "./commands/AcceptDataGrantCommand";
+import { type CancelJobCommandInput, type CancelJobCommandOutput, CancelJobCommand } from "./commands/CancelJobCommand";
+import {
+  type CreateDataGrantCommandInput,
+  type CreateDataGrantCommandOutput,
+  CreateDataGrantCommand,
+} from "./commands/CreateDataGrantCommand";
+import {
+  type CreateDataSetCommandInput,
+  type CreateDataSetCommandOutput,
   CreateDataSetCommand,
-  CreateDataSetCommandInput,
-  CreateDataSetCommandOutput,
 } from "./commands/CreateDataSetCommand";
 import {
+  type CreateEventActionCommandInput,
+  type CreateEventActionCommandOutput,
   CreateEventActionCommand,
-  CreateEventActionCommandInput,
-  CreateEventActionCommandOutput,
 } from "./commands/CreateEventActionCommand";
-import { CreateJobCommand, CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
+import { type CreateJobCommandInput, type CreateJobCommandOutput, CreateJobCommand } from "./commands/CreateJobCommand";
 import {
+  type CreateRevisionCommandInput,
+  type CreateRevisionCommandOutput,
   CreateRevisionCommand,
-  CreateRevisionCommandInput,
-  CreateRevisionCommandOutput,
 } from "./commands/CreateRevisionCommand";
-import { DeleteAssetCommand, DeleteAssetCommandInput, DeleteAssetCommandOutput } from "./commands/DeleteAssetCommand";
 import {
+  type DeleteAssetCommandInput,
+  type DeleteAssetCommandOutput,
+  DeleteAssetCommand,
+} from "./commands/DeleteAssetCommand";
+import {
+  type DeleteDataGrantCommandInput,
+  type DeleteDataGrantCommandOutput,
+  DeleteDataGrantCommand,
+} from "./commands/DeleteDataGrantCommand";
+import {
+  type DeleteDataSetCommandInput,
+  type DeleteDataSetCommandOutput,
   DeleteDataSetCommand,
-  DeleteDataSetCommandInput,
-  DeleteDataSetCommandOutput,
 } from "./commands/DeleteDataSetCommand";
 import {
+  type DeleteEventActionCommandInput,
+  type DeleteEventActionCommandOutput,
   DeleteEventActionCommand,
-  DeleteEventActionCommandInput,
-  DeleteEventActionCommandOutput,
 } from "./commands/DeleteEventActionCommand";
 import {
+  type DeleteRevisionCommandInput,
+  type DeleteRevisionCommandOutput,
   DeleteRevisionCommand,
-  DeleteRevisionCommandInput,
-  DeleteRevisionCommandOutput,
 } from "./commands/DeleteRevisionCommand";
-import { GetAssetCommand, GetAssetCommandInput, GetAssetCommandOutput } from "./commands/GetAssetCommand";
-import { GetDataSetCommand, GetDataSetCommandInput, GetDataSetCommandOutput } from "./commands/GetDataSetCommand";
+import { type GetAssetCommandInput, type GetAssetCommandOutput, GetAssetCommand } from "./commands/GetAssetCommand";
 import {
+  type GetDataGrantCommandInput,
+  type GetDataGrantCommandOutput,
+  GetDataGrantCommand,
+} from "./commands/GetDataGrantCommand";
+import {
+  type GetDataSetCommandInput,
+  type GetDataSetCommandOutput,
+  GetDataSetCommand,
+} from "./commands/GetDataSetCommand";
+import {
+  type GetEventActionCommandInput,
+  type GetEventActionCommandOutput,
   GetEventActionCommand,
-  GetEventActionCommandInput,
-  GetEventActionCommandOutput,
 } from "./commands/GetEventActionCommand";
-import { GetJobCommand, GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
-import { GetRevisionCommand, GetRevisionCommandInput, GetRevisionCommandOutput } from "./commands/GetRevisionCommand";
+import { type GetJobCommandInput, type GetJobCommandOutput, GetJobCommand } from "./commands/GetJobCommand";
 import {
+  type GetReceivedDataGrantCommandInput,
+  type GetReceivedDataGrantCommandOutput,
+  GetReceivedDataGrantCommand,
+} from "./commands/GetReceivedDataGrantCommand";
+import {
+  type GetRevisionCommandInput,
+  type GetRevisionCommandOutput,
+  GetRevisionCommand,
+} from "./commands/GetRevisionCommand";
+import {
+  type ListDataGrantsCommandInput,
+  type ListDataGrantsCommandOutput,
+  ListDataGrantsCommand,
+} from "./commands/ListDataGrantsCommand";
+import {
+  type ListDataSetRevisionsCommandInput,
+  type ListDataSetRevisionsCommandOutput,
   ListDataSetRevisionsCommand,
-  ListDataSetRevisionsCommandInput,
-  ListDataSetRevisionsCommandOutput,
 } from "./commands/ListDataSetRevisionsCommand";
 import {
+  type ListDataSetsCommandInput,
+  type ListDataSetsCommandOutput,
   ListDataSetsCommand,
-  ListDataSetsCommandInput,
-  ListDataSetsCommandOutput,
 } from "./commands/ListDataSetsCommand";
 import {
+  type ListEventActionsCommandInput,
+  type ListEventActionsCommandOutput,
   ListEventActionsCommand,
-  ListEventActionsCommandInput,
-  ListEventActionsCommandOutput,
 } from "./commands/ListEventActionsCommand";
-import { ListJobsCommand, ListJobsCommandInput, ListJobsCommandOutput } from "./commands/ListJobsCommand";
+import { type ListJobsCommandInput, type ListJobsCommandOutput, ListJobsCommand } from "./commands/ListJobsCommand";
 import {
+  type ListReceivedDataGrantsCommandInput,
+  type ListReceivedDataGrantsCommandOutput,
+  ListReceivedDataGrantsCommand,
+} from "./commands/ListReceivedDataGrantsCommand";
+import {
+  type ListRevisionAssetsCommandInput,
+  type ListRevisionAssetsCommandOutput,
   ListRevisionAssetsCommand,
-  ListRevisionAssetsCommandInput,
-  ListRevisionAssetsCommandOutput,
 } from "./commands/ListRevisionAssetsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { StartJobCommand, StartJobCommandInput, StartJobCommandOutput } from "./commands/StartJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type RevokeRevisionCommandInput,
+  type RevokeRevisionCommandOutput,
+  RevokeRevisionCommand,
+} from "./commands/RevokeRevisionCommand";
+import {
+  type SendApiAssetCommandInput,
+  type SendApiAssetCommandOutput,
+  SendApiAssetCommand,
+} from "./commands/SendApiAssetCommand";
+import {
+  type SendDataSetNotificationCommandInput,
+  type SendDataSetNotificationCommandOutput,
+  SendDataSetNotificationCommand,
+} from "./commands/SendDataSetNotificationCommand";
+import { type StartJobCommandInput, type StartJobCommandOutput, StartJobCommand } from "./commands/StartJobCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateAssetCommand, UpdateAssetCommandInput, UpdateAssetCommandOutput } from "./commands/UpdateAssetCommand";
 import {
+  type UpdateAssetCommandInput,
+  type UpdateAssetCommandOutput,
+  UpdateAssetCommand,
+} from "./commands/UpdateAssetCommand";
+import {
+  type UpdateDataSetCommandInput,
+  type UpdateDataSetCommandOutput,
   UpdateDataSetCommand,
-  UpdateDataSetCommandInput,
-  UpdateDataSetCommandOutput,
 } from "./commands/UpdateDataSetCommand";
 import {
+  type UpdateEventActionCommandInput,
+  type UpdateEventActionCommandOutput,
   UpdateEventActionCommand,
-  UpdateEventActionCommandInput,
-  UpdateEventActionCommandOutput,
 } from "./commands/UpdateEventActionCommand";
 import {
+  type UpdateRevisionCommandInput,
+  type UpdateRevisionCommandOutput,
   UpdateRevisionCommand,
-  UpdateRevisionCommandInput,
-  UpdateRevisionCommandOutput,
 } from "./commands/UpdateRevisionCommand";
 import { DataExchangeClient } from "./DataExchangeClient";
+import { paginateListDataGrants } from "./pagination/ListDataGrantsPaginator";
+import { paginateListDataSetRevisions } from "./pagination/ListDataSetRevisionsPaginator";
+import { paginateListDataSets } from "./pagination/ListDataSetsPaginator";
+import { paginateListEventActions } from "./pagination/ListEventActionsPaginator";
+import { paginateListJobs } from "./pagination/ListJobsPaginator";
+import { paginateListReceivedDataGrants } from "./pagination/ListReceivedDataGrantsPaginator";
+import { paginateListRevisionAssets } from "./pagination/ListRevisionAssetsPaginator";
+
+const commands = {
+  AcceptDataGrantCommand,
+  CancelJobCommand,
+  CreateDataGrantCommand,
+  CreateDataSetCommand,
+  CreateEventActionCommand,
+  CreateJobCommand,
+  CreateRevisionCommand,
+  DeleteAssetCommand,
+  DeleteDataGrantCommand,
+  DeleteDataSetCommand,
+  DeleteEventActionCommand,
+  DeleteRevisionCommand,
+  GetAssetCommand,
+  GetDataGrantCommand,
+  GetDataSetCommand,
+  GetEventActionCommand,
+  GetJobCommand,
+  GetReceivedDataGrantCommand,
+  GetRevisionCommand,
+  ListDataGrantsCommand,
+  ListDataSetRevisionsCommand,
+  ListDataSetsCommand,
+  ListEventActionsCommand,
+  ListJobsCommand,
+  ListReceivedDataGrantsCommand,
+  ListRevisionAssetsCommand,
+  ListTagsForResourceCommand,
+  RevokeRevisionCommand,
+  SendApiAssetCommand,
+  SendDataSetNotificationCommand,
+  StartJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAssetCommand,
+  UpdateDataSetCommand,
+  UpdateEventActionCommand,
+  UpdateRevisionCommand,
+};
+const paginators = {
+  paginateListDataGrants,
+  paginateListDataSetRevisions,
+  paginateListDataSets,
+  paginateListEventActions,
+  paginateListJobs,
+  paginateListReceivedDataGrants,
+  paginateListRevisionAssets,
+};
 
 /**
- * <p>AWS Data Exchange is a service that makes it easy for AWS customers to exchange data in the cloud. You can use the AWS Data Exchange APIs to create, update, manage, and access file-based data set in the AWS Cloud.</p><p>As a subscriber, you can view and access the data sets that you have an entitlement to through a subscription. You can use the APIS to download or copy your entitled data sets to Amazon S3 for use across a variety of AWS analytics and machine learning services.</p><p>As a provider, you can create and manage your data sets that you would like to publish to a product. Being able to package and provide your data sets into products requires a few steps to determine eligibility. For more information, visit the AWS Data Exchange User Guide.</p><p>A data set is a collection of data that can be changed or updated over time. Data sets can be updated using revisions, which represent a new version or incremental change to a data set.  A revision contains one or more assets. An asset in AWS Data Exchange is a piece of data that can be stored as an Amazon S3 object. The asset can be a structured data file, an image file, or some other data file. Jobs are asynchronous import or export operations used to create or copy assets.</p>
+ * @public
  */
-export class DataExchange extends DataExchangeClient {
+export interface DataExchangeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface DataExchange {
   /**
-   * <p>This operation cancels a job. Jobs can be cancelled only when they are in the WAITING state.</p>
+   * @see {@link AcceptDataGrantCommand}
    */
-  public cancelJob(args: CancelJobCommandInput, options?: __HttpHandlerOptions): Promise<CancelJobCommandOutput>;
-  public cancelJob(args: CancelJobCommandInput, cb: (err: any, data?: CancelJobCommandOutput) => void): void;
-  public cancelJob(
+  acceptDataGrant(
+    args: AcceptDataGrantCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<AcceptDataGrantCommandOutput>;
+  acceptDataGrant(
+    args: AcceptDataGrantCommandInput,
+    cb: (err: any, data?: AcceptDataGrantCommandOutput) => void
+  ): void;
+  acceptDataGrant(
+    args: AcceptDataGrantCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: AcceptDataGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelJobCommand}
+   */
+  cancelJob(
     args: CancelJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<CancelJobCommandOutput>;
+  cancelJob(
+    args: CancelJobCommandInput,
     cb: (err: any, data?: CancelJobCommandOutput) => void
   ): void;
-  public cancelJob(
+  cancelJob(
     args: CancelJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelJobCommandOutput) => void),
-    cb?: (err: any, data?: CancelJobCommandOutput) => void
-  ): Promise<CancelJobCommandOutput> | void {
-    const command = new CancelJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: CancelJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation creates a data set.</p>
+   * @see {@link CreateDataGrantCommand}
    */
-  public createDataSet(
+  createDataGrant(
+    args: CreateDataGrantCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<CreateDataGrantCommandOutput>;
+  createDataGrant(
+    args: CreateDataGrantCommandInput,
+    cb: (err: any, data?: CreateDataGrantCommandOutput) => void
+  ): void;
+  createDataGrant(
+    args: CreateDataGrantCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: CreateDataGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataSetCommand}
+   */
+  createDataSet(
     args: CreateDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<CreateDataSetCommandOutput>;
-  public createDataSet(
+  createDataSet(
     args: CreateDataSetCommandInput,
     cb: (err: any, data?: CreateDataSetCommandOutput) => void
   ): void;
-  public createDataSet(
+  createDataSet(
     args: CreateDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: CreateDataSetCommandOutput) => void
   ): void;
-  public createDataSet(
-    args: CreateDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDataSetCommandOutput) => void),
-    cb?: (err: any, data?: CreateDataSetCommandOutput) => void
-  ): Promise<CreateDataSetCommandOutput> | void {
-    const command = new CreateDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation creates an event action.</p>
+   * @see {@link CreateEventActionCommand}
    */
-  public createEventAction(
+  createEventAction(
     args: CreateEventActionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<CreateEventActionCommandOutput>;
-  public createEventAction(
+  createEventAction(
     args: CreateEventActionCommandInput,
     cb: (err: any, data?: CreateEventActionCommandOutput) => void
   ): void;
-  public createEventAction(
+  createEventAction(
     args: CreateEventActionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: CreateEventActionCommandOutput) => void
   ): void;
-  public createEventAction(
-    args: CreateEventActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEventActionCommandOutput) => void),
-    cb?: (err: any, data?: CreateEventActionCommandOutput) => void
-  ): Promise<CreateEventActionCommandOutput> | void {
-    const command = new CreateEventActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation creates a job.</p>
+   * @see {@link CreateJobCommand}
    */
-  public createJob(args: CreateJobCommandInput, options?: __HttpHandlerOptions): Promise<CreateJobCommandOutput>;
-  public createJob(args: CreateJobCommandInput, cb: (err: any, data?: CreateJobCommandOutput) => void): void;
-  public createJob(
+  createJob(
     args: CreateJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<CreateJobCommandOutput>;
+  createJob(
+    args: CreateJobCommandInput,
     cb: (err: any, data?: CreateJobCommandOutput) => void
   ): void;
-  public createJob(
+  createJob(
     args: CreateJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateJobCommandOutput) => void
-  ): Promise<CreateJobCommandOutput> | void {
-    const command = new CreateJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: CreateJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation creates a revision for a data set.</p>
+   * @see {@link CreateRevisionCommand}
    */
-  public createRevision(
+  createRevision(
     args: CreateRevisionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<CreateRevisionCommandOutput>;
-  public createRevision(
+  createRevision(
     args: CreateRevisionCommandInput,
     cb: (err: any, data?: CreateRevisionCommandOutput) => void
   ): void;
-  public createRevision(
+  createRevision(
     args: CreateRevisionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: CreateRevisionCommandOutput) => void
   ): void;
-  public createRevision(
-    args: CreateRevisionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRevisionCommandOutput) => void),
-    cb?: (err: any, data?: CreateRevisionCommandOutput) => void
-  ): Promise<CreateRevisionCommandOutput> | void {
-    const command = new CreateRevisionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation deletes an asset.</p>
+   * @see {@link DeleteAssetCommand}
    */
-  public deleteAsset(args: DeleteAssetCommandInput, options?: __HttpHandlerOptions): Promise<DeleteAssetCommandOutput>;
-  public deleteAsset(args: DeleteAssetCommandInput, cb: (err: any, data?: DeleteAssetCommandOutput) => void): void;
-  public deleteAsset(
+  deleteAsset(
     args: DeleteAssetCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<DeleteAssetCommandOutput>;
+  deleteAsset(
+    args: DeleteAssetCommandInput,
     cb: (err: any, data?: DeleteAssetCommandOutput) => void
   ): void;
-  public deleteAsset(
+  deleteAsset(
     args: DeleteAssetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAssetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAssetCommandOutput) => void
-  ): Promise<DeleteAssetCommandOutput> | void {
-    const command = new DeleteAssetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: DeleteAssetCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation deletes a data set.</p>
+   * @see {@link DeleteDataGrantCommand}
    */
-  public deleteDataSet(
+  deleteDataGrant(
+    args: DeleteDataGrantCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<DeleteDataGrantCommandOutput>;
+  deleteDataGrant(
+    args: DeleteDataGrantCommandInput,
+    cb: (err: any, data?: DeleteDataGrantCommandOutput) => void
+  ): void;
+  deleteDataGrant(
+    args: DeleteDataGrantCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: DeleteDataGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataSetCommand}
+   */
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<DeleteDataSetCommandOutput>;
-  public deleteDataSet(
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
     cb: (err: any, data?: DeleteDataSetCommandOutput) => void
   ): void;
-  public deleteDataSet(
+  deleteDataSet(
     args: DeleteDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: DeleteDataSetCommandOutput) => void
   ): void;
-  public deleteDataSet(
-    args: DeleteDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDataSetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDataSetCommandOutput) => void
-  ): Promise<DeleteDataSetCommandOutput> | void {
-    const command = new DeleteDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation deletes the event action.</p>
+   * @see {@link DeleteEventActionCommand}
    */
-  public deleteEventAction(
+  deleteEventAction(
     args: DeleteEventActionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<DeleteEventActionCommandOutput>;
-  public deleteEventAction(
+  deleteEventAction(
     args: DeleteEventActionCommandInput,
     cb: (err: any, data?: DeleteEventActionCommandOutput) => void
   ): void;
-  public deleteEventAction(
+  deleteEventAction(
     args: DeleteEventActionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: DeleteEventActionCommandOutput) => void
   ): void;
-  public deleteEventAction(
-    args: DeleteEventActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEventActionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEventActionCommandOutput) => void
-  ): Promise<DeleteEventActionCommandOutput> | void {
-    const command = new DeleteEventActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation deletes a revision.</p>
+   * @see {@link DeleteRevisionCommand}
    */
-  public deleteRevision(
+  deleteRevision(
     args: DeleteRevisionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<DeleteRevisionCommandOutput>;
-  public deleteRevision(
+  deleteRevision(
     args: DeleteRevisionCommandInput,
     cb: (err: any, data?: DeleteRevisionCommandOutput) => void
   ): void;
-  public deleteRevision(
+  deleteRevision(
     args: DeleteRevisionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: DeleteRevisionCommandOutput) => void
   ): void;
-  public deleteRevision(
-    args: DeleteRevisionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRevisionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRevisionCommandOutput) => void
-  ): Promise<DeleteRevisionCommandOutput> | void {
-    const command = new DeleteRevisionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation returns information about an asset.</p>
+   * @see {@link GetAssetCommand}
    */
-  public getAsset(args: GetAssetCommandInput, options?: __HttpHandlerOptions): Promise<GetAssetCommandOutput>;
-  public getAsset(args: GetAssetCommandInput, cb: (err: any, data?: GetAssetCommandOutput) => void): void;
-  public getAsset(
+  getAsset(
     args: GetAssetCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetAssetCommandOutput>;
+  getAsset(
+    args: GetAssetCommandInput,
     cb: (err: any, data?: GetAssetCommandOutput) => void
   ): void;
-  public getAsset(
+  getAsset(
     args: GetAssetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAssetCommandOutput) => void),
-    cb?: (err: any, data?: GetAssetCommandOutput) => void
-  ): Promise<GetAssetCommandOutput> | void {
-    const command = new GetAssetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetAssetCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation returns information about a data set.</p>
+   * @see {@link GetDataGrantCommand}
    */
-  public getDataSet(args: GetDataSetCommandInput, options?: __HttpHandlerOptions): Promise<GetDataSetCommandOutput>;
-  public getDataSet(args: GetDataSetCommandInput, cb: (err: any, data?: GetDataSetCommandOutput) => void): void;
-  public getDataSet(
+  getDataGrant(
+    args: GetDataGrantCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetDataGrantCommandOutput>;
+  getDataGrant(
+    args: GetDataGrantCommandInput,
+    cb: (err: any, data?: GetDataGrantCommandOutput) => void
+  ): void;
+  getDataGrant(
+    args: GetDataGrantCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetDataGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataSetCommand}
+   */
+  getDataSet(
     args: GetDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetDataSetCommandOutput>;
+  getDataSet(
+    args: GetDataSetCommandInput,
     cb: (err: any, data?: GetDataSetCommandOutput) => void
   ): void;
-  public getDataSet(
+  getDataSet(
     args: GetDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataSetCommandOutput) => void),
-    cb?: (err: any, data?: GetDataSetCommandOutput) => void
-  ): Promise<GetDataSetCommandOutput> | void {
-    const command = new GetDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetDataSetCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation retrieves information about an event action.</p>
+   * @see {@link GetEventActionCommand}
    */
-  public getEventAction(
+  getEventAction(
     args: GetEventActionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<GetEventActionCommandOutput>;
-  public getEventAction(
+  getEventAction(
     args: GetEventActionCommandInput,
     cb: (err: any, data?: GetEventActionCommandOutput) => void
   ): void;
-  public getEventAction(
+  getEventAction(
     args: GetEventActionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: GetEventActionCommandOutput) => void
   ): void;
-  public getEventAction(
-    args: GetEventActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEventActionCommandOutput) => void),
-    cb?: (err: any, data?: GetEventActionCommandOutput) => void
-  ): Promise<GetEventActionCommandOutput> | void {
-    const command = new GetEventActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation returns information about a job.</p>
+   * @see {@link GetJobCommand}
    */
-  public getJob(args: GetJobCommandInput, options?: __HttpHandlerOptions): Promise<GetJobCommandOutput>;
-  public getJob(args: GetJobCommandInput, cb: (err: any, data?: GetJobCommandOutput) => void): void;
-  public getJob(
+  getJob(
     args: GetJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetJobCommandOutput>;
+  getJob(
+    args: GetJobCommandInput,
     cb: (err: any, data?: GetJobCommandOutput) => void
   ): void;
-  public getJob(
+  getJob(
     args: GetJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobCommandOutput) => void),
-    cb?: (err: any, data?: GetJobCommandOutput) => void
-  ): Promise<GetJobCommandOutput> | void {
-    const command = new GetJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation returns information about a revision.</p>
+   * @see {@link GetReceivedDataGrantCommand}
    */
-  public getRevision(args: GetRevisionCommandInput, options?: __HttpHandlerOptions): Promise<GetRevisionCommandOutput>;
-  public getRevision(args: GetRevisionCommandInput, cb: (err: any, data?: GetRevisionCommandOutput) => void): void;
-  public getRevision(
+  getReceivedDataGrant(
+    args: GetReceivedDataGrantCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetReceivedDataGrantCommandOutput>;
+  getReceivedDataGrant(
+    args: GetReceivedDataGrantCommandInput,
+    cb: (err: any, data?: GetReceivedDataGrantCommandOutput) => void
+  ): void;
+  getReceivedDataGrant(
+    args: GetReceivedDataGrantCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetReceivedDataGrantCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRevisionCommand}
+   */
+  getRevision(
     args: GetRevisionCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<GetRevisionCommandOutput>;
+  getRevision(
+    args: GetRevisionCommandInput,
     cb: (err: any, data?: GetRevisionCommandOutput) => void
   ): void;
-  public getRevision(
+  getRevision(
     args: GetRevisionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRevisionCommandOutput) => void),
-    cb?: (err: any, data?: GetRevisionCommandOutput) => void
-  ): Promise<GetRevisionCommandOutput> | void {
-    const command = new GetRevisionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: GetRevisionCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation lists a data set's revisions sorted by CreatedAt in descending order.</p>
+   * @see {@link ListDataGrantsCommand}
    */
-  public listDataSetRevisions(
+  listDataGrants(): Promise<ListDataGrantsCommandOutput>;
+  listDataGrants(
+    args: ListDataGrantsCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<ListDataGrantsCommandOutput>;
+  listDataGrants(
+    args: ListDataGrantsCommandInput,
+    cb: (err: any, data?: ListDataGrantsCommandOutput) => void
+  ): void;
+  listDataGrants(
+    args: ListDataGrantsCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: ListDataGrantsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataSetRevisionsCommand}
+   */
+  listDataSetRevisions(
     args: ListDataSetRevisionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<ListDataSetRevisionsCommandOutput>;
-  public listDataSetRevisions(
+  listDataSetRevisions(
     args: ListDataSetRevisionsCommandInput,
     cb: (err: any, data?: ListDataSetRevisionsCommandOutput) => void
   ): void;
-  public listDataSetRevisions(
+  listDataSetRevisions(
     args: ListDataSetRevisionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: ListDataSetRevisionsCommandOutput) => void
   ): void;
-  public listDataSetRevisions(
-    args: ListDataSetRevisionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataSetRevisionsCommandOutput) => void),
-    cb?: (err: any, data?: ListDataSetRevisionsCommandOutput) => void
-  ): Promise<ListDataSetRevisionsCommandOutput> | void {
-    const command = new ListDataSetRevisionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation lists your data sets. When listing by origin OWNED, results are sorted by CreatedAt in descending order. When listing by origin ENTITLED, there is no order and the maxResults parameter is ignored.</p>
+   * @see {@link ListDataSetsCommand}
    */
-  public listDataSets(
+  listDataSets(): Promise<ListDataSetsCommandOutput>;
+  listDataSets(
     args: ListDataSetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<ListDataSetsCommandOutput>;
-  public listDataSets(args: ListDataSetsCommandInput, cb: (err: any, data?: ListDataSetsCommandOutput) => void): void;
-  public listDataSets(
+  listDataSets(
     args: ListDataSetsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListDataSetsCommandOutput) => void
   ): void;
-  public listDataSets(
+  listDataSets(
     args: ListDataSetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataSetsCommandOutput) => void),
-    cb?: (err: any, data?: ListDataSetsCommandOutput) => void
-  ): Promise<ListDataSetsCommandOutput> | void {
-    const command = new ListDataSetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: ListDataSetsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation lists your event actions.</p>
+   * @see {@link ListEventActionsCommand}
    */
-  public listEventActions(
+  listEventActions(): Promise<ListEventActionsCommandOutput>;
+  listEventActions(
     args: ListEventActionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<ListEventActionsCommandOutput>;
-  public listEventActions(
+  listEventActions(
     args: ListEventActionsCommandInput,
     cb: (err: any, data?: ListEventActionsCommandOutput) => void
   ): void;
-  public listEventActions(
+  listEventActions(
     args: ListEventActionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: ListEventActionsCommandOutput) => void
   ): void;
-  public listEventActions(
-    args: ListEventActionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventActionsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventActionsCommandOutput) => void
-  ): Promise<ListEventActionsCommandOutput> | void {
-    const command = new ListEventActionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation lists your jobs sorted by CreatedAt in descending order.</p>
+   * @see {@link ListJobsCommand}
    */
-  public listJobs(args: ListJobsCommandInput, options?: __HttpHandlerOptions): Promise<ListJobsCommandOutput>;
-  public listJobs(args: ListJobsCommandInput, cb: (err: any, data?: ListJobsCommandOutput) => void): void;
-  public listJobs(
+  listJobs(): Promise<ListJobsCommandOutput>;
+  listJobs(
     args: ListJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<ListJobsCommandOutput>;
+  listJobs(
+    args: ListJobsCommandInput,
     cb: (err: any, data?: ListJobsCommandOutput) => void
   ): void;
-  public listJobs(
+  listJobs(
     args: ListJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListJobsCommandOutput) => void
-  ): Promise<ListJobsCommandOutput> | void {
-    const command = new ListJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: ListJobsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation lists a revision's assets sorted alphabetically in descending order.</p>
+   * @see {@link ListReceivedDataGrantsCommand}
    */
-  public listRevisionAssets(
+  listReceivedDataGrants(): Promise<ListReceivedDataGrantsCommandOutput>;
+  listReceivedDataGrants(
+    args: ListReceivedDataGrantsCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<ListReceivedDataGrantsCommandOutput>;
+  listReceivedDataGrants(
+    args: ListReceivedDataGrantsCommandInput,
+    cb: (err: any, data?: ListReceivedDataGrantsCommandOutput) => void
+  ): void;
+  listReceivedDataGrants(
+    args: ListReceivedDataGrantsCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: ListReceivedDataGrantsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRevisionAssetsCommand}
+   */
+  listRevisionAssets(
     args: ListRevisionAssetsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<ListRevisionAssetsCommandOutput>;
-  public listRevisionAssets(
+  listRevisionAssets(
     args: ListRevisionAssetsCommandInput,
     cb: (err: any, data?: ListRevisionAssetsCommandOutput) => void
   ): void;
-  public listRevisionAssets(
+  listRevisionAssets(
     args: ListRevisionAssetsCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: ListRevisionAssetsCommandOutput) => void
   ): void;
-  public listRevisionAssets(
-    args: ListRevisionAssetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRevisionAssetsCommandOutput) => void),
-    cb?: (err: any, data?: ListRevisionAssetsCommandOutput) => void
-  ): Promise<ListRevisionAssetsCommandOutput> | void {
-    const command = new ListRevisionAssetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation lists the tags on the resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation starts a job.</p>
+   * @see {@link RevokeRevisionCommand}
    */
-  public startJob(args: StartJobCommandInput, options?: __HttpHandlerOptions): Promise<StartJobCommandOutput>;
-  public startJob(args: StartJobCommandInput, cb: (err: any, data?: StartJobCommandOutput) => void): void;
-  public startJob(
+  revokeRevision(
+    args: RevokeRevisionCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<RevokeRevisionCommandOutput>;
+  revokeRevision(
+    args: RevokeRevisionCommandInput,
+    cb: (err: any, data?: RevokeRevisionCommandOutput) => void
+  ): void;
+  revokeRevision(
+    args: RevokeRevisionCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: RevokeRevisionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendApiAssetCommand}
+   */
+  sendApiAsset(
+    args: SendApiAssetCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<SendApiAssetCommandOutput>;
+  sendApiAsset(
+    args: SendApiAssetCommandInput,
+    cb: (err: any, data?: SendApiAssetCommandOutput) => void
+  ): void;
+  sendApiAsset(
+    args: SendApiAssetCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: SendApiAssetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendDataSetNotificationCommand}
+   */
+  sendDataSetNotification(
+    args: SendDataSetNotificationCommandInput,
+    options?: DataExchangeRequestOptions
+  ): Promise<SendDataSetNotificationCommandOutput>;
+  sendDataSetNotification(
+    args: SendDataSetNotificationCommandInput,
+    cb: (err: any, data?: SendDataSetNotificationCommandOutput) => void
+  ): void;
+  sendDataSetNotification(
+    args: SendDataSetNotificationCommandInput,
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: SendDataSetNotificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartJobCommand}
+   */
+  startJob(
     args: StartJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<StartJobCommandOutput>;
+  startJob(
+    args: StartJobCommandInput,
     cb: (err: any, data?: StartJobCommandOutput) => void
   ): void;
-  public startJob(
+  startJob(
     args: StartJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartJobCommandOutput) => void),
-    cb?: (err: any, data?: StartJobCommandOutput) => void
-  ): Promise<StartJobCommandOutput> | void {
-    const command = new StartJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: StartJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation tags a resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation removes one or more tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation updates an asset.</p>
+   * @see {@link UpdateAssetCommand}
    */
-  public updateAsset(args: UpdateAssetCommandInput, options?: __HttpHandlerOptions): Promise<UpdateAssetCommandOutput>;
-  public updateAsset(args: UpdateAssetCommandInput, cb: (err: any, data?: UpdateAssetCommandOutput) => void): void;
-  public updateAsset(
+  updateAsset(
     args: UpdateAssetCommandInput,
-    options: __HttpHandlerOptions,
+    options?: DataExchangeRequestOptions
+  ): Promise<UpdateAssetCommandOutput>;
+  updateAsset(
+    args: UpdateAssetCommandInput,
     cb: (err: any, data?: UpdateAssetCommandOutput) => void
   ): void;
-  public updateAsset(
+  updateAsset(
     args: UpdateAssetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAssetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAssetCommandOutput) => void
-  ): Promise<UpdateAssetCommandOutput> | void {
-    const command = new UpdateAssetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: DataExchangeRequestOptions,
+    cb: (err: any, data?: UpdateAssetCommandOutput) => void
+  ): void;
 
   /**
-   * <p>This operation updates a data set.</p>
+   * @see {@link UpdateDataSetCommand}
    */
-  public updateDataSet(
+  updateDataSet(
     args: UpdateDataSetCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<UpdateDataSetCommandOutput>;
-  public updateDataSet(
+  updateDataSet(
     args: UpdateDataSetCommandInput,
     cb: (err: any, data?: UpdateDataSetCommandOutput) => void
   ): void;
-  public updateDataSet(
+  updateDataSet(
     args: UpdateDataSetCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: UpdateDataSetCommandOutput) => void
   ): void;
-  public updateDataSet(
-    args: UpdateDataSetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataSetCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataSetCommandOutput) => void
-  ): Promise<UpdateDataSetCommandOutput> | void {
-    const command = new UpdateDataSetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation updates the event action.</p>
+   * @see {@link UpdateEventActionCommand}
    */
-  public updateEventAction(
+  updateEventAction(
     args: UpdateEventActionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<UpdateEventActionCommandOutput>;
-  public updateEventAction(
+  updateEventAction(
     args: UpdateEventActionCommandInput,
     cb: (err: any, data?: UpdateEventActionCommandOutput) => void
   ): void;
-  public updateEventAction(
+  updateEventAction(
     args: UpdateEventActionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: UpdateEventActionCommandOutput) => void
   ): void;
-  public updateEventAction(
-    args: UpdateEventActionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEventActionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEventActionCommandOutput) => void
-  ): Promise<UpdateEventActionCommandOutput> | void {
-    const command = new UpdateEventActionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This operation updates a revision.</p>
+   * @see {@link UpdateRevisionCommand}
    */
-  public updateRevision(
+  updateRevision(
     args: UpdateRevisionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: DataExchangeRequestOptions
   ): Promise<UpdateRevisionCommandOutput>;
-  public updateRevision(
+  updateRevision(
     args: UpdateRevisionCommandInput,
     cb: (err: any, data?: UpdateRevisionCommandOutput) => void
   ): void;
-  public updateRevision(
+  updateRevision(
     args: UpdateRevisionCommandInput,
-    options: __HttpHandlerOptions,
+    options: DataExchangeRequestOptions,
     cb: (err: any, data?: UpdateRevisionCommandOutput) => void
   ): void;
-  public updateRevision(
-    args: UpdateRevisionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRevisionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRevisionCommandOutput) => void
-  ): Promise<UpdateRevisionCommandOutput> | void {
-    const command = new UpdateRevisionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListDataGrantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataGrantsCommandOutput}.
+   */
+  paginateListDataGrants(
+    args?: ListDataGrantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataGrantsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetRevisionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetRevisionsCommandOutput}.
+   */
+  paginateListDataSetRevisions(
+    args: ListDataSetRevisionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetRevisionsCommandOutput>;
+
+  /**
+   * @see {@link ListDataSetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataSetsCommandOutput}.
+   */
+  paginateListDataSets(
+    args?: ListDataSetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataSetsCommandOutput>;
+
+  /**
+   * @see {@link ListEventActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventActionsCommandOutput}.
+   */
+  paginateListEventActions(
+    args?: ListEventActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventActionsCommandOutput>;
+
+  /**
+   * @see {@link ListJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListJobsCommandOutput}.
+   */
+  paginateListJobs(
+    args?: ListJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListJobsCommandOutput>;
+
+  /**
+   * @see {@link ListReceivedDataGrantsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReceivedDataGrantsCommandOutput}.
+   */
+  paginateListReceivedDataGrants(
+    args?: ListReceivedDataGrantsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReceivedDataGrantsCommandOutput>;
+
+  /**
+   * @see {@link ListRevisionAssetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRevisionAssetsCommandOutput}.
+   */
+  paginateListRevisionAssets(
+    args: ListRevisionAssetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRevisionAssetsCommandOutput>;
 }
+
+/**
+ * <p>AWS Data Exchange is a service that makes it easy for AWS customers to exchange data in the cloud. You can use the AWS Data Exchange APIs to create, update, manage, and access file-based data set in the AWS Cloud.</p> <p>As a subscriber, you can view and access the data sets that you have an entitlement to through a subscription. You can use the APIs to download or copy your entitled data sets to Amazon Simple Storage Service (Amazon S3) for use across a variety of AWS analytics and machine learning services.</p> <p>As a provider, you can create and manage your data sets that you would like to publish to a product. Being able to package and provide your data sets into products requires a few steps to determine eligibility. For more information, visit the <i>AWS Data Exchange User Guide</i>.</p> <p>A data set is a collection of data that can be changed or updated over time. Data sets can be updated using revisions, which represent a new version or incremental change to a data set. A revision contains one or more assets. An asset in AWS Data Exchange is a piece of data that can be stored as an Amazon S3 object, Redshift datashare, API Gateway API, AWS Lake Formation data permission, or Amazon S3 data access. The asset can be a structured data file, an image file, or some other data file. Jobs are asynchronous import or export operations used to create or copy assets.</p>
+ * @public
+ */
+export class DataExchange extends DataExchangeClient implements DataExchange {}
+createAggregatedClient(commands, DataExchange, { paginators });

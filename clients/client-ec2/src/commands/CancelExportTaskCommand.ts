@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CancelExportTaskRequest } from "../models/models_0";
-import {
-  deserializeAws_ec2CancelExportTaskCommand,
-  serializeAws_ec2CancelExportTaskCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelExportTaskRequest } from "../models/models_0";
+import { CancelExportTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelExportTaskCommand}.
+ */
 export interface CancelExportTaskCommandInput extends CancelExportTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelExportTaskCommand}.
+ */
 export interface CancelExportTaskCommandOutput extends __MetadataBearer {}
 
 /**
@@ -30,68 +31,45 @@ export interface CancelExportTaskCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { EC2Client, CancelExportTaskCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CancelExportTaskCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CancelExportTaskRequest
+ *   ExportTaskId: "STRING_VALUE", // required
+ * };
  * const command = new CancelExportTaskCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CancelExportTaskCommandInput - {@link CancelExportTaskCommandInput}
+ * @returns {@link CancelExportTaskCommandOutput}
  * @see {@link CancelExportTaskCommandInput} for command's `input` shape.
  * @see {@link CancelExportTaskCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CancelExportTaskCommand extends $Command<
-  CancelExportTaskCommandInput,
-  CancelExportTaskCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelExportTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelExportTaskCommandInput, CancelExportTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CancelExportTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelExportTaskRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class CancelExportTaskCommand extends command<CancelExportTaskCommandInput, CancelExportTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelExportTask",
+  CancelExportTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelExportTaskRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelExportTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CancelExportTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelExportTaskCommandOutput> {
-    return deserializeAws_ec2CancelExportTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelExportTaskCommandInput;
+      output: CancelExportTaskCommandOutput;
+    };
+  };
 }

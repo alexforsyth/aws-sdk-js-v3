@@ -1,593 +1,674 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { AppIntegrationsClient } from "./AppIntegrationsClient";
 import {
+  type CreateApplicationCommandInput,
+  type CreateApplicationCommandOutput,
+  CreateApplicationCommand,
+} from "./commands/CreateApplicationCommand";
+import {
+  type CreateDataIntegrationAssociationCommandInput,
+  type CreateDataIntegrationAssociationCommandOutput,
+  CreateDataIntegrationAssociationCommand,
+} from "./commands/CreateDataIntegrationAssociationCommand";
+import {
+  type CreateDataIntegrationCommandInput,
+  type CreateDataIntegrationCommandOutput,
   CreateDataIntegrationCommand,
-  CreateDataIntegrationCommandInput,
-  CreateDataIntegrationCommandOutput,
 } from "./commands/CreateDataIntegrationCommand";
 import {
+  type CreateEventIntegrationCommandInput,
+  type CreateEventIntegrationCommandOutput,
   CreateEventIntegrationCommand,
-  CreateEventIntegrationCommandInput,
-  CreateEventIntegrationCommandOutput,
 } from "./commands/CreateEventIntegrationCommand";
 import {
+  type DeleteApplicationCommandInput,
+  type DeleteApplicationCommandOutput,
+  DeleteApplicationCommand,
+} from "./commands/DeleteApplicationCommand";
+import {
+  type DeleteDataIntegrationCommandInput,
+  type DeleteDataIntegrationCommandOutput,
   DeleteDataIntegrationCommand,
-  DeleteDataIntegrationCommandInput,
-  DeleteDataIntegrationCommandOutput,
 } from "./commands/DeleteDataIntegrationCommand";
 import {
+  type DeleteEventIntegrationCommandInput,
+  type DeleteEventIntegrationCommandOutput,
   DeleteEventIntegrationCommand,
-  DeleteEventIntegrationCommandInput,
-  DeleteEventIntegrationCommandOutput,
 } from "./commands/DeleteEventIntegrationCommand";
 import {
+  type GetApplicationCommandInput,
+  type GetApplicationCommandOutput,
+  GetApplicationCommand,
+} from "./commands/GetApplicationCommand";
+import {
+  type GetDataIntegrationCommandInput,
+  type GetDataIntegrationCommandOutput,
   GetDataIntegrationCommand,
-  GetDataIntegrationCommandInput,
-  GetDataIntegrationCommandOutput,
 } from "./commands/GetDataIntegrationCommand";
 import {
+  type GetEventIntegrationCommandInput,
+  type GetEventIntegrationCommandOutput,
   GetEventIntegrationCommand,
-  GetEventIntegrationCommandInput,
-  GetEventIntegrationCommandOutput,
 } from "./commands/GetEventIntegrationCommand";
 import {
+  type ListApplicationAssociationsCommandInput,
+  type ListApplicationAssociationsCommandOutput,
+  ListApplicationAssociationsCommand,
+} from "./commands/ListApplicationAssociationsCommand";
+import {
+  type ListApplicationsCommandInput,
+  type ListApplicationsCommandOutput,
+  ListApplicationsCommand,
+} from "./commands/ListApplicationsCommand";
+import {
+  type ListDataIntegrationAssociationsCommandInput,
+  type ListDataIntegrationAssociationsCommandOutput,
   ListDataIntegrationAssociationsCommand,
-  ListDataIntegrationAssociationsCommandInput,
-  ListDataIntegrationAssociationsCommandOutput,
 } from "./commands/ListDataIntegrationAssociationsCommand";
 import {
+  type ListDataIntegrationsCommandInput,
+  type ListDataIntegrationsCommandOutput,
   ListDataIntegrationsCommand,
-  ListDataIntegrationsCommandInput,
-  ListDataIntegrationsCommandOutput,
 } from "./commands/ListDataIntegrationsCommand";
 import {
+  type ListEventIntegrationAssociationsCommandInput,
+  type ListEventIntegrationAssociationsCommandOutput,
   ListEventIntegrationAssociationsCommand,
-  ListEventIntegrationAssociationsCommandInput,
-  ListEventIntegrationAssociationsCommandOutput,
 } from "./commands/ListEventIntegrationAssociationsCommand";
 import {
+  type ListEventIntegrationsCommandInput,
+  type ListEventIntegrationsCommandOutput,
   ListEventIntegrationsCommand,
-  ListEventIntegrationsCommandInput,
-  ListEventIntegrationsCommandOutput,
 } from "./commands/ListEventIntegrationsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateApplicationCommandInput,
+  type UpdateApplicationCommandOutput,
+  UpdateApplicationCommand,
+} from "./commands/UpdateApplicationCommand";
+import {
+  type UpdateDataIntegrationAssociationCommandInput,
+  type UpdateDataIntegrationAssociationCommandOutput,
+  UpdateDataIntegrationAssociationCommand,
+} from "./commands/UpdateDataIntegrationAssociationCommand";
+import {
+  type UpdateDataIntegrationCommandInput,
+  type UpdateDataIntegrationCommandOutput,
   UpdateDataIntegrationCommand,
-  UpdateDataIntegrationCommandInput,
-  UpdateDataIntegrationCommandOutput,
 } from "./commands/UpdateDataIntegrationCommand";
 import {
+  type UpdateEventIntegrationCommandInput,
+  type UpdateEventIntegrationCommandOutput,
   UpdateEventIntegrationCommand,
-  UpdateEventIntegrationCommandInput,
-  UpdateEventIntegrationCommandOutput,
 } from "./commands/UpdateEventIntegrationCommand";
+import { paginateListApplicationAssociations } from "./pagination/ListApplicationAssociationsPaginator";
+import { paginateListApplications } from "./pagination/ListApplicationsPaginator";
+import { paginateListDataIntegrationAssociations } from "./pagination/ListDataIntegrationAssociationsPaginator";
+import { paginateListDataIntegrations } from "./pagination/ListDataIntegrationsPaginator";
+import { paginateListEventIntegrationAssociations } from "./pagination/ListEventIntegrationAssociationsPaginator";
+import { paginateListEventIntegrations } from "./pagination/ListEventIntegrationsPaginator";
+
+const commands = {
+  CreateApplicationCommand,
+  CreateDataIntegrationCommand,
+  CreateDataIntegrationAssociationCommand,
+  CreateEventIntegrationCommand,
+  DeleteApplicationCommand,
+  DeleteDataIntegrationCommand,
+  DeleteEventIntegrationCommand,
+  GetApplicationCommand,
+  GetDataIntegrationCommand,
+  GetEventIntegrationCommand,
+  ListApplicationAssociationsCommand,
+  ListApplicationsCommand,
+  ListDataIntegrationAssociationsCommand,
+  ListDataIntegrationsCommand,
+  ListEventIntegrationAssociationsCommand,
+  ListEventIntegrationsCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateApplicationCommand,
+  UpdateDataIntegrationCommand,
+  UpdateDataIntegrationAssociationCommand,
+  UpdateEventIntegrationCommand,
+};
+const paginators = {
+  paginateListApplicationAssociations,
+  paginateListApplications,
+  paginateListDataIntegrationAssociations,
+  paginateListDataIntegrations,
+  paginateListEventIntegrationAssociations,
+  paginateListEventIntegrations,
+};
 
 /**
- * <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external
- *       applications.</p>
- *          <p>For information about how you can use external applications with Amazon Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/crm.html">Set up pre-built
- *       integrations</a> and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html">Deliver information to agents using Amazon Connect Wisdom</a>
- *        in the <i>Amazon Connect Administrator Guide</i>.</p>
+ * @public
  */
-export class AppIntegrations extends AppIntegrationsClient {
+export interface AppIntegrationsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface AppIntegrations {
   /**
-   * <p>Creates and persists a DataIntegration resource.</p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   *       Use a different DataIntegration, or recreate the DataIntegration using the
-   *       <code>CreateDataIntegration</code> API.</p>
-   *          </note>
+   * @see {@link CreateApplicationCommand}
    */
-  public createDataIntegration(
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<CreateApplicationCommandOutput>;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+  createApplication(
+    args: CreateApplicationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: CreateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataIntegrationCommand}
+   */
+  createDataIntegration(
     args: CreateDataIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<CreateDataIntegrationCommandOutput>;
-  public createDataIntegration(
+  createDataIntegration(
     args: CreateDataIntegrationCommandInput,
     cb: (err: any, data?: CreateDataIntegrationCommandOutput) => void
   ): void;
-  public createDataIntegration(
+  createDataIntegration(
     args: CreateDataIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: CreateDataIntegrationCommandOutput) => void
   ): void;
-  public createDataIntegration(
-    args: CreateDataIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDataIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: CreateDataIntegrationCommandOutput) => void
-  ): Promise<CreateDataIntegrationCommandOutput> | void {
-    const command = new CreateDataIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an EventIntegration, given a specified name, description, and a reference to an
-   *       Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No
-   *       objects are created in the your account, only metadata that is persisted on the
-   *       EventIntegration control plane.</p>
+   * @see {@link CreateDataIntegrationAssociationCommand}
    */
-  public createEventIntegration(
+  createDataIntegrationAssociation(
+    args: CreateDataIntegrationAssociationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<CreateDataIntegrationAssociationCommandOutput>;
+  createDataIntegrationAssociation(
+    args: CreateDataIntegrationAssociationCommandInput,
+    cb: (err: any, data?: CreateDataIntegrationAssociationCommandOutput) => void
+  ): void;
+  createDataIntegrationAssociation(
+    args: CreateDataIntegrationAssociationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: CreateDataIntegrationAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventIntegrationCommand}
+   */
+  createEventIntegration(
     args: CreateEventIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<CreateEventIntegrationCommandOutput>;
-  public createEventIntegration(
+  createEventIntegration(
     args: CreateEventIntegrationCommandInput,
     cb: (err: any, data?: CreateEventIntegrationCommandOutput) => void
   ): void;
-  public createEventIntegration(
+  createEventIntegration(
     args: CreateEventIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: CreateEventIntegrationCommandOutput) => void
   ): void;
-  public createEventIntegration(
-    args: CreateEventIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEventIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: CreateEventIntegrationCommandOutput) => void
-  ): Promise<CreateEventIntegrationCommandOutput> | void {
-    const command = new CreateEventIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the DataIntegration. Only DataIntegrations that don't have any
-   *       DataIntegrationAssociations can be deleted. Deleting a DataIntegration also deletes the
-   *       underlying Amazon AppFlow flow and service linked role. </p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   * Use a different DataIntegration, or recreate the DataIntegration using the
-   * <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
-   *          </note>
+   * @see {@link DeleteApplicationCommand}
    */
-  public deleteDataIntegration(
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<DeleteApplicationCommandOutput>;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+  deleteApplication(
+    args: DeleteApplicationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: DeleteApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDataIntegrationCommand}
+   */
+  deleteDataIntegration(
     args: DeleteDataIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<DeleteDataIntegrationCommandOutput>;
-  public deleteDataIntegration(
+  deleteDataIntegration(
     args: DeleteDataIntegrationCommandInput,
     cb: (err: any, data?: DeleteDataIntegrationCommandOutput) => void
   ): void;
-  public deleteDataIntegration(
+  deleteDataIntegration(
     args: DeleteDataIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: DeleteDataIntegrationCommandOutput) => void
   ): void;
-  public deleteDataIntegration(
-    args: DeleteDataIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDataIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDataIntegrationCommandOutput) => void
-  ): Promise<DeleteDataIntegrationCommandOutput> | void {
-    const command = new DeleteDataIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified existing event integration. If the event integration is associated
-   *       with clients, the request is rejected.</p>
+   * @see {@link DeleteEventIntegrationCommand}
    */
-  public deleteEventIntegration(
+  deleteEventIntegration(
     args: DeleteEventIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<DeleteEventIntegrationCommandOutput>;
-  public deleteEventIntegration(
+  deleteEventIntegration(
     args: DeleteEventIntegrationCommandInput,
     cb: (err: any, data?: DeleteEventIntegrationCommandOutput) => void
   ): void;
-  public deleteEventIntegration(
+  deleteEventIntegration(
     args: DeleteEventIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: DeleteEventIntegrationCommandOutput) => void
   ): void;
-  public deleteEventIntegration(
-    args: DeleteEventIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEventIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEventIntegrationCommandOutput) => void
-  ): Promise<DeleteEventIntegrationCommandOutput> | void {
-    const command = new DeleteEventIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about the DataIntegration.</p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   * Use a different DataIntegration, or recreate the DataIntegration using the
-   * <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
-   *          </note>
+   * @see {@link GetApplicationCommand}
    */
-  public getDataIntegration(
+  getApplication(
+    args: GetApplicationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<GetApplicationCommandOutput>;
+  getApplication(
+    args: GetApplicationCommandInput,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+  getApplication(
+    args: GetApplicationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: GetApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDataIntegrationCommand}
+   */
+  getDataIntegration(
     args: GetDataIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<GetDataIntegrationCommandOutput>;
-  public getDataIntegration(
+  getDataIntegration(
     args: GetDataIntegrationCommandInput,
     cb: (err: any, data?: GetDataIntegrationCommandOutput) => void
   ): void;
-  public getDataIntegration(
+  getDataIntegration(
     args: GetDataIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: GetDataIntegrationCommandOutput) => void
   ): void;
-  public getDataIntegration(
-    args: GetDataIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDataIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: GetDataIntegrationCommandOutput) => void
-  ): Promise<GetDataIntegrationCommandOutput> | void {
-    const command = new GetDataIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about the event integration.</p>
+   * @see {@link GetEventIntegrationCommand}
    */
-  public getEventIntegration(
+  getEventIntegration(
     args: GetEventIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<GetEventIntegrationCommandOutput>;
-  public getEventIntegration(
+  getEventIntegration(
     args: GetEventIntegrationCommandInput,
     cb: (err: any, data?: GetEventIntegrationCommandOutput) => void
   ): void;
-  public getEventIntegration(
+  getEventIntegration(
     args: GetEventIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: GetEventIntegrationCommandOutput) => void
   ): void;
-  public getEventIntegration(
-    args: GetEventIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEventIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: GetEventIntegrationCommandOutput) => void
-  ): Promise<GetEventIntegrationCommandOutput> | void {
-    const command = new GetEventIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a paginated list of DataIntegration associations in the account.</p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   * Use a different DataIntegration, or recreate the DataIntegration using the
-   * <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
-   *          </note>
+   * @see {@link ListApplicationAssociationsCommand}
    */
-  public listDataIntegrationAssociations(
+  listApplicationAssociations(
+    args: ListApplicationAssociationsCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<ListApplicationAssociationsCommandOutput>;
+  listApplicationAssociations(
+    args: ListApplicationAssociationsCommandInput,
+    cb: (err: any, data?: ListApplicationAssociationsCommandOutput) => void
+  ): void;
+  listApplicationAssociations(
+    args: ListApplicationAssociationsCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: ListApplicationAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   */
+  listApplications(): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<ListApplicationsCommandOutput>;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+  listApplications(
+    args: ListApplicationsCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: ListApplicationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataIntegrationAssociationsCommand}
+   */
+  listDataIntegrationAssociations(
     args: ListDataIntegrationAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<ListDataIntegrationAssociationsCommandOutput>;
-  public listDataIntegrationAssociations(
+  listDataIntegrationAssociations(
     args: ListDataIntegrationAssociationsCommandInput,
     cb: (err: any, data?: ListDataIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listDataIntegrationAssociations(
+  listDataIntegrationAssociations(
     args: ListDataIntegrationAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: ListDataIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listDataIntegrationAssociations(
-    args: ListDataIntegrationAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataIntegrationAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: ListDataIntegrationAssociationsCommandOutput) => void
-  ): Promise<ListDataIntegrationAssociationsCommandOutput> | void {
-    const command = new ListDataIntegrationAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a paginated list of DataIntegrations in the account.</p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   * Use a different DataIntegration, or recreate the DataIntegration using the
-   * <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
-   *          </note>
+   * @see {@link ListDataIntegrationsCommand}
    */
-  public listDataIntegrations(
+  listDataIntegrations(): Promise<ListDataIntegrationsCommandOutput>;
+  listDataIntegrations(
     args: ListDataIntegrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<ListDataIntegrationsCommandOutput>;
-  public listDataIntegrations(
+  listDataIntegrations(
     args: ListDataIntegrationsCommandInput,
     cb: (err: any, data?: ListDataIntegrationsCommandOutput) => void
   ): void;
-  public listDataIntegrations(
+  listDataIntegrations(
     args: ListDataIntegrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: ListDataIntegrationsCommandOutput) => void
   ): void;
-  public listDataIntegrations(
-    args: ListDataIntegrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDataIntegrationsCommandOutput) => void),
-    cb?: (err: any, data?: ListDataIntegrationsCommandOutput) => void
-  ): Promise<ListDataIntegrationsCommandOutput> | void {
-    const command = new ListDataIntegrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a paginated list of event integration associations in the account. </p>
+   * @see {@link ListEventIntegrationAssociationsCommand}
    */
-  public listEventIntegrationAssociations(
+  listEventIntegrationAssociations(
     args: ListEventIntegrationAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<ListEventIntegrationAssociationsCommandOutput>;
-  public listEventIntegrationAssociations(
+  listEventIntegrationAssociations(
     args: ListEventIntegrationAssociationsCommandInput,
     cb: (err: any, data?: ListEventIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listEventIntegrationAssociations(
+  listEventIntegrationAssociations(
     args: ListEventIntegrationAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: ListEventIntegrationAssociationsCommandOutput) => void
   ): void;
-  public listEventIntegrationAssociations(
-    args: ListEventIntegrationAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventIntegrationAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventIntegrationAssociationsCommandOutput) => void
-  ): Promise<ListEventIntegrationAssociationsCommandOutput> | void {
-    const command = new ListEventIntegrationAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a paginated list of event integrations in the account.</p>
+   * @see {@link ListEventIntegrationsCommand}
    */
-  public listEventIntegrations(
+  listEventIntegrations(): Promise<ListEventIntegrationsCommandOutput>;
+  listEventIntegrations(
     args: ListEventIntegrationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<ListEventIntegrationsCommandOutput>;
-  public listEventIntegrations(
+  listEventIntegrations(
     args: ListEventIntegrationsCommandInput,
     cb: (err: any, data?: ListEventIntegrationsCommandOutput) => void
   ): void;
-  public listEventIntegrations(
+  listEventIntegrations(
     args: ListEventIntegrationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: ListEventIntegrationsCommandOutput) => void
   ): void;
-  public listEventIntegrations(
-    args: ListEventIntegrationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventIntegrationsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventIntegrationsCommandOutput) => void
-  ): Promise<ListEventIntegrationsCommandOutput> | void {
-    const command = new ListEventIntegrationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags for the specified resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds the specified tags to the specified resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes the specified tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the description of a DataIntegration.</p>
-   *          <note>
-   *             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-   * Use a different DataIntegration, or recreate the DataIntegration using the
-   * <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
-   *          </note>
+   * @see {@link UpdateApplicationCommand}
    */
-  public updateDataIntegration(
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<UpdateApplicationCommandOutput>;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+  updateApplication(
+    args: UpdateApplicationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: UpdateApplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDataIntegrationCommand}
+   */
+  updateDataIntegration(
     args: UpdateDataIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<UpdateDataIntegrationCommandOutput>;
-  public updateDataIntegration(
+  updateDataIntegration(
     args: UpdateDataIntegrationCommandInput,
     cb: (err: any, data?: UpdateDataIntegrationCommandOutput) => void
   ): void;
-  public updateDataIntegration(
+  updateDataIntegration(
     args: UpdateDataIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: UpdateDataIntegrationCommandOutput) => void
   ): void;
-  public updateDataIntegration(
-    args: UpdateDataIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDataIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDataIntegrationCommandOutput) => void
-  ): Promise<UpdateDataIntegrationCommandOutput> | void {
-    const command = new UpdateDataIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the description of an event integration.</p>
+   * @see {@link UpdateDataIntegrationAssociationCommand}
    */
-  public updateEventIntegration(
+  updateDataIntegrationAssociation(
+    args: UpdateDataIntegrationAssociationCommandInput,
+    options?: AppIntegrationsRequestOptions
+  ): Promise<UpdateDataIntegrationAssociationCommandOutput>;
+  updateDataIntegrationAssociation(
+    args: UpdateDataIntegrationAssociationCommandInput,
+    cb: (err: any, data?: UpdateDataIntegrationAssociationCommandOutput) => void
+  ): void;
+  updateDataIntegrationAssociation(
+    args: UpdateDataIntegrationAssociationCommandInput,
+    options: AppIntegrationsRequestOptions,
+    cb: (err: any, data?: UpdateDataIntegrationAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEventIntegrationCommand}
+   */
+  updateEventIntegration(
     args: UpdateEventIntegrationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AppIntegrationsRequestOptions
   ): Promise<UpdateEventIntegrationCommandOutput>;
-  public updateEventIntegration(
+  updateEventIntegration(
     args: UpdateEventIntegrationCommandInput,
     cb: (err: any, data?: UpdateEventIntegrationCommandOutput) => void
   ): void;
-  public updateEventIntegration(
+  updateEventIntegration(
     args: UpdateEventIntegrationCommandInput,
-    options: __HttpHandlerOptions,
+    options: AppIntegrationsRequestOptions,
     cb: (err: any, data?: UpdateEventIntegrationCommandOutput) => void
   ): void;
-  public updateEventIntegration(
-    args: UpdateEventIntegrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEventIntegrationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEventIntegrationCommandOutput) => void
-  ): Promise<UpdateEventIntegrationCommandOutput> | void {
-    const command = new UpdateEventIntegrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListApplicationAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationAssociationsCommandOutput}.
+   */
+  paginateListApplicationAssociations(
+    args: ListApplicationAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListApplicationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListApplicationsCommandOutput}.
+   */
+  paginateListApplications(
+    args?: ListApplicationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListApplicationsCommandOutput>;
+
+  /**
+   * @see {@link ListDataIntegrationAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataIntegrationAssociationsCommandOutput}.
+   */
+  paginateListDataIntegrationAssociations(
+    args: ListDataIntegrationAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataIntegrationAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListDataIntegrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataIntegrationsCommandOutput}.
+   */
+  paginateListDataIntegrations(
+    args?: ListDataIntegrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataIntegrationsCommandOutput>;
+
+  /**
+   * @see {@link ListEventIntegrationAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventIntegrationAssociationsCommandOutput}.
+   */
+  paginateListEventIntegrationAssociations(
+    args: ListEventIntegrationAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventIntegrationAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListEventIntegrationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventIntegrationsCommandOutput}.
+   */
+  paginateListEventIntegrations(
+    args?: ListEventIntegrationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventIntegrationsCommandOutput>;
 }
+
+/**
+ * <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_AppIntegrations_Service.html">Amazon AppIntegrations
+ *             actions</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_AppIntegrations_Service.html">Amazon AppIntegrations
+ *             data types</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external
+ *       applications.</p>
+ *          <p>For information about how you can use external applications with Connect Customer, see
+ *       the following topics in the <i>Connect Customer Administrator
+ *       Guide</i>:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/3p-apps.html">Third-party
+ *             applications (3p apps) in the agent workspace</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html">Use
+ *             Amazon Q in Connect for generative AI–powered agent assistance in
+ *           real-time</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export class AppIntegrations extends AppIntegrationsClient implements AppIntegrations {}
+createAggregatedClient(commands, AppIntegrations, { paginators });

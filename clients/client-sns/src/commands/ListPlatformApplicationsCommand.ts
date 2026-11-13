@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListPlatformApplicationsInput, ListPlatformApplicationsResponse } from "../models/models_0";
-import {
-  deserializeAws_queryListPlatformApplicationsCommand,
-  serializeAws_queryListPlatformApplicationsCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPlatformApplicationsInput, ListPlatformApplicationsResponse } from "../models/models_0";
+import { ListPlatformApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPlatformApplicationsCommand}.
+ */
 export interface ListPlatformApplicationsCommandInput extends ListPlatformApplicationsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListPlatformApplicationsCommand}.
+ */
 export interface ListPlatformApplicationsCommandOutput extends ListPlatformApplicationsResponse, __MetadataBearer {}
 
 /**
@@ -31,74 +32,71 @@ export interface ListPlatformApplicationsCommandOutput extends ListPlatformAppli
  *             previous call. When there are no more records to return, <code>NextToken</code> will be
  *             null. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html">Using Amazon SNS Mobile Push
  *             Notifications</a>. </p>
- *         <p>This action is throttled at 15 transactions per second (TPS).</p>
+ *          <p>This action is throttled at 15 transactions per second (TPS).</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SNSClient, ListPlatformApplicationsCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, ListPlatformApplicationsCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // ListPlatformApplicationsInput
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListPlatformApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPlatformApplicationsResponse
+ * //   PlatformApplications: [ // ListOfPlatformApplications
+ * //     { // PlatformApplication
+ * //       PlatformApplicationArn: "STRING_VALUE",
+ * //       Attributes: { // MapStringToString
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPlatformApplicationsCommandInput - {@link ListPlatformApplicationsCommandInput}
+ * @returns {@link ListPlatformApplicationsCommandOutput}
  * @see {@link ListPlatformApplicationsCommandInput} for command's `input` shape.
  * @see {@link ListPlatformApplicationsCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class ListPlatformApplicationsCommand extends $Command<
-  ListPlatformApplicationsCommandInput,
-  ListPlatformApplicationsCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPlatformApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPlatformApplicationsCommandInput, ListPlatformApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "ListPlatformApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPlatformApplicationsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListPlatformApplicationsResponse.filterSensitiveLog,
+export class ListPlatformApplicationsCommand extends command<ListPlatformApplicationsCommandInput, ListPlatformApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPlatformApplications",
+  ListPlatformApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPlatformApplicationsInput;
+      output: ListPlatformApplicationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPlatformApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListPlatformApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPlatformApplicationsCommandOutput> {
-    return deserializeAws_queryListPlatformApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPlatformApplicationsCommandInput;
+      output: ListPlatformApplicationsCommandOutput;
+    };
+  };
 }

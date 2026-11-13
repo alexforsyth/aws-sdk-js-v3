@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetDiscoveredSchemaRequest, GetDiscoveredSchemaResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDiscoveredSchemaCommand,
-  serializeAws_restJson1GetDiscoveredSchemaCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDiscoveredSchemaRequest, GetDiscoveredSchemaResponse } from "../models/models_0";
+import { GetDiscoveredSchema$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDiscoveredSchemaCommand}.
+ */
 export interface GetDiscoveredSchemaCommandInput extends GetDiscoveredSchemaRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDiscoveredSchemaCommand}.
+ */
 export interface GetDiscoveredSchemaCommandOutput extends GetDiscoveredSchemaResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,60 @@ export interface GetDiscoveredSchemaCommandOutput extends GetDiscoveredSchemaRes
  * ```javascript
  * import { SchemasClient, GetDiscoveredSchemaCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, GetDiscoveredSchemaCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // GetDiscoveredSchemaRequest
+ *   Events: [ // __listOfGetDiscoveredSchemaVersionItemInput // required
+ *     "STRING_VALUE",
+ *   ],
+ *   Type: "OpenApi3" || "JSONSchemaDraft4", // required
+ * };
  * const command = new GetDiscoveredSchemaCommand(input);
  * const response = await client.send(command);
+ * // { // GetDiscoveredSchemaResponse
+ * //   Content: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetDiscoveredSchemaCommandInput - {@link GetDiscoveredSchemaCommandInput}
+ * @returns {@link GetDiscoveredSchemaCommandOutput}
  * @see {@link GetDiscoveredSchemaCommandInput} for command's `input` shape.
  * @see {@link GetDiscoveredSchemaCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class GetDiscoveredSchemaCommand extends $Command<
-  GetDiscoveredSchemaCommandInput,
-  GetDiscoveredSchemaCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDiscoveredSchemaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDiscoveredSchemaCommandInput, GetDiscoveredSchemaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "GetDiscoveredSchemaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDiscoveredSchemaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetDiscoveredSchemaResponse.filterSensitiveLog,
+export class GetDiscoveredSchemaCommand extends command<GetDiscoveredSchemaCommandInput, GetDiscoveredSchemaCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDiscoveredSchema",
+  GetDiscoveredSchema$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDiscoveredSchemaRequest;
+      output: GetDiscoveredSchemaResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDiscoveredSchemaCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDiscoveredSchemaCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDiscoveredSchemaCommandOutput> {
-    return deserializeAws_restJson1GetDiscoveredSchemaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDiscoveredSchemaCommandInput;
+      output: GetDiscoveredSchemaCommandOutput;
+    };
+  };
 }

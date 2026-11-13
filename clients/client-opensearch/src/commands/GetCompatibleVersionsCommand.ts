@@ -1,102 +1,98 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetCompatibleVersionsRequest, GetCompatibleVersionsResponse } from "../models/models_0";
-import { OpenSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OpenSearchClient";
-import {
-  deserializeAws_restJson1GetCompatibleVersionsCommand,
-  serializeAws_restJson1GetCompatibleVersionsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCompatibleVersionsRequest, GetCompatibleVersionsResponse } from "../models/models_0";
+import { GetCompatibleVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCompatibleVersionsCommand}.
+ */
 export interface GetCompatibleVersionsCommandInput extends GetCompatibleVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCompatibleVersionsCommand}.
+ */
 export interface GetCompatibleVersionsCommandOutput extends GetCompatibleVersionsResponse, __MetadataBearer {}
 
 /**
- * <p>
- *       Returns a list of upgrade-compatible versions of OpenSearch/Elasticsearch.
- *       You can optionally pass a
- *       <code>
- *         <a>DomainName</a>
- *       </code>
- *       to get all upgrade-compatible versions of OpenSearch/Elasticsearch for that specific domain.
- *     </p>
+ * <p>Returns a map of OpenSearch or Elasticsearch versions and the versions you can upgrade
+ *             them to.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OpenSearchClient, GetCompatibleVersionsCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
  * // const { OpenSearchClient, GetCompatibleVersionsCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
  * const client = new OpenSearchClient(config);
+ * const input = { // GetCompatibleVersionsRequest
+ *   DomainName: "STRING_VALUE",
+ * };
  * const command = new GetCompatibleVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetCompatibleVersionsResponse
+ * //   CompatibleVersions: [ // CompatibleVersionsList
+ * //     { // CompatibleVersionsMap
+ * //       SourceVersion: "STRING_VALUE",
+ * //       TargetVersions: [ // VersionList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetCompatibleVersionsCommandInput - {@link GetCompatibleVersionsCommandInput}
+ * @returns {@link GetCompatibleVersionsCommandOutput}
  * @see {@link GetCompatibleVersionsCommandInput} for command's `input` shape.
  * @see {@link GetCompatibleVersionsCommandOutput} for command's `response` shape.
- * @see {@link OpenSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access an unsupported operation.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
  */
-export class GetCompatibleVersionsCommand extends $Command<
-  GetCompatibleVersionsCommandInput,
-  GetCompatibleVersionsCommandOutput,
-  OpenSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCompatibleVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OpenSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCompatibleVersionsCommandInput, GetCompatibleVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OpenSearchClient";
-    const commandName = "GetCompatibleVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCompatibleVersionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetCompatibleVersionsResponse.filterSensitiveLog,
+export class GetCompatibleVersionsCommand extends command<GetCompatibleVersionsCommandInput, GetCompatibleVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCompatibleVersions",
+  GetCompatibleVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCompatibleVersionsRequest;
+      output: GetCompatibleVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCompatibleVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCompatibleVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCompatibleVersionsCommandOutput> {
-    return deserializeAws_restJson1GetCompatibleVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCompatibleVersionsCommandInput;
+      output: GetCompatibleVersionsCommandOutput;
+    };
+  };
 }

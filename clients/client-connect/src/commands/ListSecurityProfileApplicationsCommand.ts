@@ -1,0 +1,107 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListSecurityProfileApplicationsRequest,
+  ListSecurityProfileApplicationsResponse,
+} from "../models/models_2";
+import { ListSecurityProfileApplications$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSecurityProfileApplicationsCommand}.
+ */
+export interface ListSecurityProfileApplicationsCommandInput extends ListSecurityProfileApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSecurityProfileApplicationsCommand}.
+ */
+export interface ListSecurityProfileApplicationsCommandOutput extends ListSecurityProfileApplicationsResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of third-party applications or MCP Servers in a specific security profile.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConnectClient, ListSecurityProfileApplicationsCommand } from "@aws-sdk/client-connect"; // ES Modules import
+ * // const { ConnectClient, ListSecurityProfileApplicationsCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
+ * const client = new ConnectClient(config);
+ * const input = { // ListSecurityProfileApplicationsRequest
+ *   SecurityProfileId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
+ * const command = new ListSecurityProfileApplicationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListSecurityProfileApplicationsResponse
+ * //   Applications: [ // Applications
+ * //     { // Application
+ * //       Namespace: "STRING_VALUE",
+ * //       ApplicationPermissions: [ // ApplicationPermissions
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Type: "MCP" || "THIRD_PARTY_APPLICATION",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastModifiedRegion: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListSecurityProfileApplicationsCommandInput - {@link ListSecurityProfileApplicationsCommandInput}
+ * @returns {@link ListSecurityProfileApplicationsCommandOutput}
+ * @see {@link ListSecurityProfileApplicationsCommandInput} for command's `input` shape.
+ * @see {@link ListSecurityProfileApplicationsCommandOutput} for command's `response` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
+ */
+export class ListSecurityProfileApplicationsCommand extends command<ListSecurityProfileApplicationsCommandInput, ListSecurityProfileApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSecurityProfileApplications",
+  ListSecurityProfileApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSecurityProfileApplicationsRequest;
+      output: ListSecurityProfileApplicationsResponse;
+    };
+    sdk: {
+      input: ListSecurityProfileApplicationsCommandInput;
+      output: ListSecurityProfileApplicationsCommandOutput;
+    };
+  };
+}

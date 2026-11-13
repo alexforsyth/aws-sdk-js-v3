@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DisableFastSnapshotRestoresRequest, DisableFastSnapshotRestoresResult } from "../models/models_4";
-import {
-  deserializeAws_ec2DisableFastSnapshotRestoresCommand,
-  serializeAws_ec2DisableFastSnapshotRestoresCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisableFastSnapshotRestoresRequest, DisableFastSnapshotRestoresResult } from "../models/models_5";
+import { DisableFastSnapshotRestores$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableFastSnapshotRestoresCommand}.
+ */
 export interface DisableFastSnapshotRestoresCommandInput extends DisableFastSnapshotRestoresRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableFastSnapshotRestoresCommand}.
+ */
 export interface DisableFastSnapshotRestoresCommandOutput extends DisableFastSnapshotRestoresResult, __MetadataBearer {}
 
 /**
@@ -28,71 +29,86 @@ export interface DisableFastSnapshotRestoresCommandOutput extends DisableFastSna
  * ```javascript
  * import { EC2Client, DisableFastSnapshotRestoresCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisableFastSnapshotRestoresCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisableFastSnapshotRestoresRequest
+ *   AvailabilityZones: [ // AvailabilityZoneStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   AvailabilityZoneIds: [ // AvailabilityZoneIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   SourceSnapshotIds: [ // SnapshotIdStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   DryRun: true || false,
+ * };
  * const command = new DisableFastSnapshotRestoresCommand(input);
  * const response = await client.send(command);
+ * // { // DisableFastSnapshotRestoresResult
+ * //   Successful: [ // DisableFastSnapshotRestoreSuccessSet
+ * //     { // DisableFastSnapshotRestoreSuccessItem
+ * //       SnapshotId: "STRING_VALUE",
+ * //       AvailabilityZone: "STRING_VALUE",
+ * //       AvailabilityZoneId: "STRING_VALUE",
+ * //       State: "enabling" || "optimizing" || "enabled" || "disabling" || "disabled",
+ * //       StateTransitionReason: "STRING_VALUE",
+ * //       OwnerId: "STRING_VALUE",
+ * //       OwnerAlias: "STRING_VALUE",
+ * //       EnablingTime: new Date("TIMESTAMP"),
+ * //       OptimizingTime: new Date("TIMESTAMP"),
+ * //       EnabledTime: new Date("TIMESTAMP"),
+ * //       DisablingTime: new Date("TIMESTAMP"),
+ * //       DisabledTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   Unsuccessful: [ // DisableFastSnapshotRestoreErrorSet
+ * //     { // DisableFastSnapshotRestoreErrorItem
+ * //       SnapshotId: "STRING_VALUE",
+ * //       FastSnapshotRestoreStateErrors: [ // DisableFastSnapshotRestoreStateErrorSet
+ * //         { // DisableFastSnapshotRestoreStateErrorItem
+ * //           AvailabilityZone: "STRING_VALUE",
+ * //           AvailabilityZoneId: "STRING_VALUE",
+ * //           Error: { // DisableFastSnapshotRestoreStateError
+ * //             Code: "STRING_VALUE",
+ * //             Message: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DisableFastSnapshotRestoresCommandInput - {@link DisableFastSnapshotRestoresCommandInput}
+ * @returns {@link DisableFastSnapshotRestoresCommandOutput}
  * @see {@link DisableFastSnapshotRestoresCommandInput} for command's `input` shape.
  * @see {@link DisableFastSnapshotRestoresCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisableFastSnapshotRestoresCommand extends $Command<
-  DisableFastSnapshotRestoresCommandInput,
-  DisableFastSnapshotRestoresCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableFastSnapshotRestoresCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableFastSnapshotRestoresCommandInput, DisableFastSnapshotRestoresCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisableFastSnapshotRestoresCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableFastSnapshotRestoresRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DisableFastSnapshotRestoresResult.filterSensitiveLog,
+export class DisableFastSnapshotRestoresCommand extends command<DisableFastSnapshotRestoresCommandInput, DisableFastSnapshotRestoresCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableFastSnapshotRestores",
+  DisableFastSnapshotRestores$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableFastSnapshotRestoresRequest;
+      output: DisableFastSnapshotRestoresResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableFastSnapshotRestoresCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DisableFastSnapshotRestoresCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisableFastSnapshotRestoresCommandOutput> {
-    return deserializeAws_ec2DisableFastSnapshotRestoresCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableFastSnapshotRestoresCommandInput;
+      output: DisableFastSnapshotRestoresCommandOutput;
+    };
+  };
 }

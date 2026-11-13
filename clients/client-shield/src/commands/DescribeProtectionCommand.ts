@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeProtectionRequest, DescribeProtectionResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeProtectionCommand,
-  serializeAws_json1_1DescribeProtectionCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeProtectionRequest, DescribeProtectionResponse } from "../models/models_0";
+import { DescribeProtection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeProtectionCommand}.
+ */
 export interface DescribeProtectionCommandInput extends DescribeProtectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeProtectionCommand}.
+ */
 export interface DescribeProtectionCommandOutput extends DescribeProtectionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,72 @@ export interface DescribeProtectionCommandOutput extends DescribeProtectionRespo
  * ```javascript
  * import { ShieldClient, DescribeProtectionCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, DescribeProtectionCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // DescribeProtectionRequest
+ *   ProtectionId: "STRING_VALUE",
+ *   ResourceArn: "STRING_VALUE",
+ * };
  * const command = new DescribeProtectionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeProtectionResponse
+ * //   Protection: { // Protection
+ * //     Id: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     ResourceArn: "STRING_VALUE",
+ * //     HealthCheckIds: [ // HealthCheckIds
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ProtectionArn: "STRING_VALUE",
+ * //     ApplicationLayerAutomaticResponseConfiguration: { // ApplicationLayerAutomaticResponseConfiguration
+ * //       Status: "ENABLED" || "DISABLED", // required
+ * //       Action: { // ResponseAction
+ * //         Block: {},
+ * //         Count: {},
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeProtectionCommandInput - {@link DescribeProtectionCommandInput}
+ * @returns {@link DescribeProtectionCommandOutput}
  * @see {@link DescribeProtectionCommandInput} for command's `input` shape.
  * @see {@link DescribeProtectionCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeProtectionCommand extends $Command<
-  DescribeProtectionCommandInput,
-  DescribeProtectionCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeProtectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeProtectionCommandInput, DescribeProtectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "DescribeProtectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeProtectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeProtectionResponse.filterSensitiveLog,
+export class DescribeProtectionCommand extends command<DescribeProtectionCommandInput, DescribeProtectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeProtection",
+  DescribeProtection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeProtectionRequest;
+      output: DescribeProtectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeProtectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeProtectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeProtectionCommandOutput> {
-    return deserializeAws_json1_1DescribeProtectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeProtectionCommandInput;
+      output: DescribeProtectionCommandOutput;
+    };
+  };
 }

@@ -1,110 +1,201 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateVpcEndpointRequest, CreateVpcEndpointResult } from "../models/models_1";
-import {
-  deserializeAws_ec2CreateVpcEndpointCommand,
-  serializeAws_ec2CreateVpcEndpointCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateVpcEndpointRequest, CreateVpcEndpointResult } from "../models/models_2";
+import { CreateVpcEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateVpcEndpointCommand}.
+ */
 export interface CreateVpcEndpointCommandInput extends CreateVpcEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateVpcEndpointCommand}.
+ */
 export interface CreateVpcEndpointCommandOutput extends CreateVpcEndpointResult, __MetadataBearer {}
 
 /**
- * <p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a
- *             private connection between your VPC and the service. The service may be provided by Amazon Web Services,
- *             an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information,
- *             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the
- *             <i>Amazon Virtual Private Cloud User Guide</i>.</p>
- *         <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for
- *             traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach
- *             to the endpoint, which will control access to the service from your VPC. You can also
- *             specify the VPC route tables that use the endpoint.</p>
- *         <p>An <code>interface</code> endpoint is a network interface in your subnet that
- *             serves as an endpoint for communicating with the specified service. You can specify the
- *             subnets in which to create an endpoint, and the security groups to associate with the
- *             endpoint network interface.</p>
- *         <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p>
- *         <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported
- *             services.</p>
+ * <p>Creates a VPC endpoint. A VPC endpoint provides a private connection between the
+ *             specified VPC and the specified endpoint service. You can use an endpoint service
+ *             provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another
+ *             Amazon Web Services account. For more information, see the <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/">Amazon Web Services PrivateLink User Guide</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateVpcEndpointCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateVpcEndpointCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateVpcEndpointRequest
+ *   DryRun: true || false,
+ *   VpcEndpointType: "Interface" || "Gateway" || "GatewayLoadBalancer" || "Resource" || "ServiceNetwork" || "Tunnel",
+ *   VpcId: "STRING_VALUE", // required
+ *   ServiceName: "STRING_VALUE",
+ *   PolicyDocument: "STRING_VALUE",
+ *   RouteTableIds: [ // VpcEndpointRouteTableIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   SubnetIds: [ // VpcEndpointSubnetIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   SecurityGroupIds: [ // VpcEndpointSecurityGroupIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   IpAddressType: "ipv4" || "dualstack" || "ipv6",
+ *   DnsOptions: { // DnsOptionsSpecification
+ *     DnsRecordIpType: "ipv4" || "dualstack" || "ipv6" || "service-defined",
+ *     PrivateDnsOnlyForInboundResolverEndpoint: true || false,
+ *     PrivateDnsPreference: "STRING_VALUE",
+ *     PrivateDnsSpecifiedDomains: [ // PrivateDnsSpecifiedDomainSet
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   ClientToken: "STRING_VALUE",
+ *   PrivateDnsEnabled: true || false,
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   SubnetConfigurations: [ // SubnetConfigurationsList
+ *     { // SubnetConfiguration
+ *       SubnetId: "STRING_VALUE",
+ *       Ipv4: "STRING_VALUE",
+ *       Ipv6: "STRING_VALUE",
+ *     },
+ *   ],
+ *   ServiceNetworkArn: "STRING_VALUE",
+ *   ResourceConfigurationArn: "STRING_VALUE",
+ *   ServiceRegion: "STRING_VALUE",
+ * };
  * const command = new CreateVpcEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // CreateVpcEndpointResult
+ * //   VpcEndpoint: { // VpcEndpoint
+ * //     VpcEndpointId: "STRING_VALUE",
+ * //     VpcEndpointType: "Interface" || "Gateway" || "GatewayLoadBalancer" || "Resource" || "ServiceNetwork" || "Tunnel",
+ * //     VpcId: "STRING_VALUE",
+ * //     ServiceName: "STRING_VALUE",
+ * //     State: "PendingAcceptance" || "Pending" || "Available" || "Deleting" || "Deleted" || "Rejected" || "Failed" || "Expired" || "Partial",
+ * //     PolicyDocument: "STRING_VALUE",
+ * //     RouteTableIds: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SubnetIds: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Groups: [ // GroupIdentifierSet
+ * //       { // SecurityGroupIdentifier
+ * //         GroupId: "STRING_VALUE",
+ * //         GroupName: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     IpAddressType: "ipv4" || "dualstack" || "ipv6",
+ * //     DnsOptions: { // DnsOptions
+ * //       DnsRecordIpType: "ipv4" || "dualstack" || "ipv6" || "service-defined",
+ * //       PrivateDnsOnlyForInboundResolverEndpoint: true || false,
+ * //       PrivateDnsPreference: "STRING_VALUE",
+ * //       PrivateDnsSpecifiedDomains: [ // PrivateDnsSpecifiedDomainSet
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     PrivateDnsEnabled: true || false,
+ * //     RequesterManaged: true || false,
+ * //     NetworkInterfaceIds: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     DnsEntries: [ // DnsEntrySet
+ * //       { // DnsEntry
+ * //         DnsName: "STRING_VALUE",
+ * //         HostedZoneId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     CreationTimestamp: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     OwnerId: "STRING_VALUE",
+ * //     LastError: { // LastError
+ * //       Message: "STRING_VALUE",
+ * //       Code: "STRING_VALUE",
+ * //     },
+ * //     Ipv4Prefixes: [ // SubnetIpPrefixesList
+ * //       { // SubnetIpPrefixes
+ * //         SubnetId: "STRING_VALUE",
+ * //         IpPrefixes: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     Ipv6Prefixes: [
+ * //       {
+ * //         SubnetId: "STRING_VALUE",
+ * //         IpPrefixes: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     ],
+ * //     FailureReason: "STRING_VALUE",
+ * //     ServiceNetworkArn: "STRING_VALUE",
+ * //     ResourceConfigurationArn: "STRING_VALUE",
+ * //     ServiceRegion: "STRING_VALUE",
+ * //     PayerResponsibilities: [ // PayerResponsibilitySet
+ * //       { // PayerResponsibilityEntry
+ * //         Scope: "vpc-endpoint-charges" || "resource-gateway-charges",
+ * //         PayerResponsibilityType: "vpc-endpoint-account" || "resource-gateway-account" || "vpc-endpoint-service-account",
+ * //       },
+ * //     ],
+ * //   },
+ * //   ClientToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateVpcEndpointCommandInput - {@link CreateVpcEndpointCommandInput}
+ * @returns {@link CreateVpcEndpointCommandOutput}
  * @see {@link CreateVpcEndpointCommandInput} for command's `input` shape.
  * @see {@link CreateVpcEndpointCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateVpcEndpointCommand extends $Command<
-  CreateVpcEndpointCommandInput,
-  CreateVpcEndpointCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateVpcEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateVpcEndpointCommandInput, CreateVpcEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateVpcEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateVpcEndpointRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateVpcEndpointResult.filterSensitiveLog,
+export class CreateVpcEndpointCommand extends command<CreateVpcEndpointCommandInput, CreateVpcEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateVpcEndpoint",
+  CreateVpcEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateVpcEndpointRequest;
+      output: CreateVpcEndpointResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateVpcEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateVpcEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateVpcEndpointCommandOutput> {
-    return deserializeAws_ec2CreateVpcEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateVpcEndpointCommandInput;
+      output: CreateVpcEndpointCommandOutput;
+    };
+  };
 }

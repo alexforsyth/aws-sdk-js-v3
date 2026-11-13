@@ -1,129 +1,157 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DescribeMatchmakingInput, DescribeMatchmakingOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeMatchmakingCommand,
-  serializeAws_json1_1DescribeMatchmakingCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeMatchmakingInput, DescribeMatchmakingOutput } from "../models/models_0";
+import { DescribeMatchmaking$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeMatchmakingCommand}.
+ */
 export interface DescribeMatchmakingCommandInput extends DescribeMatchmakingInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeMatchmakingCommand}.
+ */
 export interface DescribeMatchmakingCommandOutput extends DescribeMatchmakingOutput, __MetadataBearer {}
 
 /**
- * <p>Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket
+ * <p>
+ *             <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>
+ *          <p>Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket
  *             information, including--after a successful match is made--connection information for the
  *             resulting new game session. </p>
- *         <p>To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the
- *             request is successful, a ticket object is returned for each requested ID that currently
+ *          <p>To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request
+ *             is successful, a ticket object is returned for each requested ID that currently
  *             exists.</p>
- *         <p>This operation is not designed to be continually called to track matchmaking ticket
+ *          <p>This operation is not designed to be continually called to track matchmaking ticket
  *             status. This practice can cause you to exceed your API limit, which results in errors.
- *             Instead, as a best practice, set up an Amazon Simple Notification Service (SNS) to receive notifications, and provide
- *             the topic ARN in the matchmaking configuration. Continuously poling ticket status with
- *                 <a>DescribeMatchmaking</a> should only be used for games in development
- *             with low matchmaking usage.</p>
- *         <p></p>
- *         <p>
+ *             Instead, as a best practice, set up an Amazon Simple Notification Service to receive notifications, and provide
+ *             the topic ARN in the matchmaking configuration.</p>
+ *          <p></p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
+ *          <p>
  *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html">
- *             Add FlexMatch to a game client</a>
+ *                 Add FlexMatch to a game client</a>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html">
- *             Set Up FlexMatch event notification</a>
- *          </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>StartMatchmaking</a> |
- *                     <a>DescribeMatchmaking</a> |
- *                     <a>StopMatchmaking</a> |
- *                     <a>AcceptMatch</a> |
- *                     <a>StartMatchBackfill</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html"> Set Up FlexMatch event
+ *                 notification</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DescribeMatchmakingCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DescribeMatchmakingCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DescribeMatchmakingInput
+ *   TicketIds: [ // MatchmakingIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeMatchmakingCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeMatchmakingOutput
+ * //   TicketList: [ // MatchmakingTicketList
+ * //     { // MatchmakingTicket
+ * //       TicketId: "STRING_VALUE",
+ * //       ConfigurationName: "STRING_VALUE",
+ * //       ConfigurationArn: "STRING_VALUE",
+ * //       Status: "CANCELLED" || "COMPLETED" || "FAILED" || "PLACING" || "QUEUED" || "REQUIRES_ACCEPTANCE" || "SEARCHING" || "TIMED_OUT",
+ * //       StatusReason: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       EndTime: new Date("TIMESTAMP"),
+ * //       Players: [ // PlayerList
+ * //         { // Player
+ * //           PlayerId: "STRING_VALUE",
+ * //           PlayerAttributes: { // PlayerAttributeMap
+ * //             "<keys>": { // AttributeValue
+ * //               S: "STRING_VALUE",
+ * //               N: Number("double"),
+ * //               SL: [ // PlayerAttributeStringList
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //               SDM: { // PlayerAttributeStringDoubleMap
+ * //                 "<keys>": Number("double"),
+ * //               },
+ * //             },
+ * //           },
+ * //           Team: "STRING_VALUE",
+ * //           LatencyInMs: { // LatencyMap
+ * //             "<keys>": Number("int"),
+ * //           },
+ * //         },
+ * //       ],
+ * //       GameSessionConnectionInfo: { // GameSessionConnectionInfo
+ * //         GameSessionArn: "STRING_VALUE",
+ * //         IpAddress: "STRING_VALUE",
+ * //         DnsName: "STRING_VALUE",
+ * //         Port: Number("int"),
+ * //         MatchedPlayerSessions: [ // MatchedPlayerSessionList
+ * //           { // MatchedPlayerSession
+ * //             PlayerId: "STRING_VALUE",
+ * //             PlayerSessionId: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         PlayerGatewayStatus: "DISABLED" || "ENABLED",
+ * //       },
+ * //       EstimatedWaitTime: Number("int"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeMatchmakingCommandInput - {@link DescribeMatchmakingCommandInput}
+ * @returns {@link DescribeMatchmakingCommandOutput}
  * @see {@link DescribeMatchmakingCommandInput} for command's `input` shape.
  * @see {@link DescribeMatchmakingCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link UnsupportedRegionException} (client fault)
+ *  <p>The requested operation is not supported in the Region specified.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeMatchmakingCommand extends $Command<
-  DescribeMatchmakingCommandInput,
-  DescribeMatchmakingCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeMatchmakingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeMatchmakingCommandInput, DescribeMatchmakingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DescribeMatchmakingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeMatchmakingInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeMatchmakingOutput.filterSensitiveLog,
+export class DescribeMatchmakingCommand extends command<DescribeMatchmakingCommandInput, DescribeMatchmakingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeMatchmaking",
+  DescribeMatchmaking$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeMatchmakingInput;
+      output: DescribeMatchmakingOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeMatchmakingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeMatchmakingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeMatchmakingCommandOutput> {
-    return deserializeAws_json1_1DescribeMatchmakingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeMatchmakingCommandInput;
+      output: DescribeMatchmakingCommandOutput;
+    };
+  };
 }

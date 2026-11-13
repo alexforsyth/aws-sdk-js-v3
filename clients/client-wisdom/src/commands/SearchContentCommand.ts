@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SearchContentRequest, SearchContentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SearchContentCommand,
-  serializeAws_restJson1SearchContentCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WisdomClientResolvedConfig } from "../WisdomClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchContentRequest, SearchContentResponse } from "../models/models_0";
+import { SearchContent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchContentCommand}.
+ */
 export interface SearchContentCommandInput extends SearchContentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchContentCommand}.
+ */
 export interface SearchContentCommandOutput extends SearchContentResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,86 @@ export interface SearchContentCommandOutput extends SearchContentResponse, __Met
  * ```javascript
  * import { WisdomClient, SearchContentCommand } from "@aws-sdk/client-wisdom"; // ES Modules import
  * // const { WisdomClient, SearchContentCommand } = require("@aws-sdk/client-wisdom"); // CommonJS import
+ * // import type { WisdomClientConfig } from "@aws-sdk/client-wisdom";
+ * const config = {}; // type is WisdomClientConfig
  * const client = new WisdomClient(config);
+ * const input = { // SearchContentRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   knowledgeBaseId: "STRING_VALUE", // required
+ *   searchExpression: { // SearchExpression
+ *     filters: [ // FilterList // required
+ *       { // Filter
+ *         field: "STRING_VALUE", // required
+ *         operator: "STRING_VALUE", // required
+ *         value: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new SearchContentCommand(input);
  * const response = await client.send(command);
+ * // { // SearchContentResponse
+ * //   contentSummaries: [ // ContentSummaryList // required
+ * //     { // ContentSummary
+ * //       contentArn: "STRING_VALUE", // required
+ * //       contentId: "STRING_VALUE", // required
+ * //       knowledgeBaseArn: "STRING_VALUE", // required
+ * //       knowledgeBaseId: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       revisionId: "STRING_VALUE", // required
+ * //       title: "STRING_VALUE", // required
+ * //       contentType: "STRING_VALUE", // required
+ * //       status: "STRING_VALUE", // required
+ * //       metadata: { // ContentMetadata // required
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchContentCommandInput - {@link SearchContentCommandInput}
+ * @returns {@link SearchContentCommandOutput}
  * @see {@link SearchContentCommandInput} for command's `input` shape.
  * @see {@link SearchContentCommandOutput} for command's `response` shape.
- * @see {@link WisdomClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WisdomClientResolvedConfig | config} for WisdomClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by a service.</p>
+ *
+ * @throws {@link WisdomServiceException}
+ * <p>Base exception class for all service exceptions from Wisdom service.</p>
+ *
+ *
+ * @public
  */
-export class SearchContentCommand extends $Command<
-  SearchContentCommandInput,
-  SearchContentCommandOutput,
-  WisdomClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchContentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WisdomClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchContentCommandInput, SearchContentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WisdomClient";
-    const commandName = "SearchContentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchContentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchContentResponse.filterSensitiveLog,
+export class SearchContentCommand extends command<SearchContentCommandInput, SearchContentCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchContent",
+  SearchContent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchContentRequest;
+      output: SearchContentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchContentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchContentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchContentCommandOutput> {
-    return deserializeAws_restJson1SearchContentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchContentCommandInput;
+      output: SearchContentCommandOutput;
+    };
+  };
 }

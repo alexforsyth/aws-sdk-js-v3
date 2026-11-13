@@ -12,14 +12,23 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+
+import org.jreleaser.model.Active
+import com.github.spotbugs.snom.Effort
+import java.io.Serializable
+import java.util.regex.Pattern
+import com.diffplug.spotless.FormatterFunc
+
 plugins {
     `java-library`
     `maven-publish`
     signing
     checkstyle
     jacoco
-    id("com.github.spotbugs") version "4.7.1"
-    id("io.codearte.nexus-staging") version "0.30.0"
+    id("com.github.spotbugs") version "6.3.0"
+    id("org.jreleaser") version "1.21.0"
+    // spotless 8.x is incompatible with jreleaser 1.x (see https://github.com/jreleaser/jreleaser/issues/1989)
+    id("com.diffplug.spotless") version "7.2.1"
 }
 
 allprojects {
@@ -28,7 +37,7 @@ allprojects {
         mavenCentral()
     }
     group = "software.amazon.smithy.typescript"
-    version = "0.7.0"
+    version = "0.55.0"
 }
 
 // The root project doesn't produce a JAR.
@@ -37,27 +46,6 @@ tasks["jar"].enabled = false
 // Load the Sonatype user/password for use in publishing tasks.
 val sonatypeUser: String? by project
 val sonatypePassword: String? by project
-
-/*
- * Sonatype Staging Finalization
- * ====================================================
- *
- * When publishing to Maven Central, we need to close the staging
- * repository and release the artifacts after they have been
- * validated. This configuration is for the root project because
- * it operates at the "group" level.
- */
-if (sonatypeUser != null && sonatypePassword != null) {
-    apply(plugin = "io.codearte.nexus-staging")
-
-    nexusStaging {
-        packageGroup = "software.amazon"
-        stagingProfileId = "e789115b6c941"
-
-        username = sonatypeUser
-        password = sonatypePassword
-    }
-}
 
 repositories {
     mavenLocal()
@@ -75,8 +63,8 @@ subprojects {
         apply(plugin = "java-library")
 
         java {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
 
         tasks.withType<JavaCompile> {
@@ -90,10 +78,11 @@ subprojects {
 
         // Apply junit 5 and hamcrest test dependencies to all java projects.
         dependencies {
-            testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.0")
-            testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")
-            testImplementation("org.junit.jupiter:junit-jupiter-params:5.4.0")
-            testImplementation("org.hamcrest:hamcrest:2.1")
+            testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
+            testImplementation("org.junit.jupiter:junit-jupiter-engine:5.13.4")
+            testImplementation("org.junit.jupiter:junit-jupiter-params:5.13.4")
+            testImplementation("org.hamcrest:hamcrest:3.0")
+            testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         }
 
         // Reusable license copySpec
@@ -105,8 +94,11 @@ subprojects {
         // Set up tasks that build source and javadoc jars.
         tasks.register<Jar>("sourcesJar") {
             metaInf.with(licenseSpec)
-            from(sourceSets.main.get().allJava)
+            from(sourceSets.main.get().allSource)
             archiveClassifier.set("sources")
+            // Add explicit dependency on the task that generates resources
+            dependsOn("set-aws-sdk-versions")
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
 
         tasks.register<Jar>("javadocJar") {
@@ -141,12 +133,9 @@ subprojects {
 
         publishing {
             repositories {
-                mavenCentral {
-                    url = uri("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/")
-                    credentials {
-                        username = sonatypeUser
-                        password = sonatypePassword
-                    }
+                maven {
+                    name = "stagingRepository"
+                    url = rootProject.layout.buildDirectory.dir("staging").get().asFile.toURI()
                 }
             }
 
@@ -205,6 +194,10 @@ subprojects {
          */
         apply(plugin = "checkstyle")
 
+        checkstyle {
+            configDirectory.set(rootProject.file("gradleConfig/checkstyle"))
+        }
+
         tasks["checkstyleTest"].enabled = false
 
         /*
@@ -232,9 +225,11 @@ subprojects {
         // Configure jacoco to generate an HTML report.
         tasks.jacocoTestReport {
             reports {
-                xml.isEnabled = false
-                csv.isEnabled = false
-                html.destination = file("$buildDir/reports/jacoco")
+                xml.required.set(false)
+                csv.required.set(false)
+                html.outputLocation.set(
+                    layout.buildDirectory.dir("reports/jacoco").get().asFile
+                )
             }
         }
 
@@ -257,10 +252,119 @@ subprojects {
 
         // Configure the bug filter for spotbugs.
         spotbugs {
-            setEffort("max")
-            val excludeFile = File("${project.rootDir}/config/spotbugs/filter.xml")
+            effort.set(Effort.MAX)
+            val excludeFile = rootProject.file("gradleConfig/spotbugs/filter.xml")
             if (excludeFile.exists()) {
                 excludeFilter.set(excludeFile)
+            }
+        }
+
+        apply(plugin = "com.diffplug.spotless")
+
+        spotless {
+            java {
+                // Enforce a common license header on all files
+                licenseHeaderFile("${project.rootDir}/gradleConfig/spotless/license-header.txt")
+                    .onlyIfContentMatches("^((?!SKIPLICENSECHECK)[\\s\\S])*\$")
+                leadingTabsToSpaces()
+                endWithNewline()
+                // CAUTION: eclipse() provisions its formatter from the P2 update site
+                // download.eclipse.org, which is offline (eclipsestatus.io/incident/1097520),
+                // so a cache-cold build fails to load the formatter. Disabled to unblock the
+                // release; restore once the Eclipse download site is back.
+                // eclipse().configFile("${project.rootDir}/gradleConfig/spotless/formatting.xml")
+
+                // Fixes for some strange formatting applied by eclipse:
+                // see: https://github.com/kamkie/demo-spring-jsf/blob/bcacb9dc90273a5f8d2569470c5bf67b171c7d62/build.gradle.kts#L159
+                // These have to be implemented with anonymous classes this way instead of lambdas because of:
+                // https://github.com/diffplug/spotless/issues/2387
+                custom(
+                    "Lambda fix",
+                    object : Serializable, FormatterFunc {
+                        override fun apply(input: String): String = input.replace("} )", "})").replace("} ,", "},")
+                    },
+                )
+                custom(
+                    "Long literal fix",
+                    object : Serializable, FormatterFunc {
+                        override fun apply(input: String): String =
+                            Pattern.compile("([0-9_]+) [Ll]").matcher(input).replaceAll("\$1L")
+                    },
+                )
+
+                // Static first, then everything else alphabetically
+                removeUnusedImports()
+                importOrder("\\#", "")
+                // Ignore generated code for formatter check
+                targetExclude("*/build/**/*.*")
+            }
+
+            // Formatting for build.gradle.kts files
+            kotlinGradle {
+                ktlint()
+                leadingTabsToSpaces()
+                trimTrailingWhitespace()
+                endWithNewline()
+                licenseHeaderFile(
+                    "${project.rootDir}/gradleConfig/spotless/license-header.txt",
+                    "import|tasks|apply|plugins|rootProject",
+                )
+            }
+            tasks {
+                // If the property "noFormat" is set, don't auto-format source file (like in CI)
+                if (!project.hasProperty("noFormat")) {
+                    build {
+                        dependsOn(spotlessApply)
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+ * Jreleaser (https://jreleaser.org) config.
+ */
+jreleaser {
+    dryrun = false
+    gitRootSearch = true
+
+    // Used for creating a tagged release, uploading files and generating changelog.
+    // In the future we can set this up to push release tags to GitHub, but for now it's
+    // set up to do nothing.
+    // https://jreleaser.org/guide/latest/reference/release/index.html
+    release {
+        generic {
+            enabled = true
+            skipRelease = true
+        }
+    }
+
+    // Used to announce a release to configured announcers.
+    // https://jreleaser.org/guide/latest/reference/announce/index.html
+    announce {
+        active = Active.NEVER
+    }
+
+    // Signing configuration.
+    // https://jreleaser.org/guide/latest/reference/signing.html
+    signing {
+        active = Active.ALWAYS
+        armored = true
+    }
+
+    // Configuration for deploying to Maven Central.
+    // https://jreleaser.org/guide/latest/examples/maven/maven-central.html#_gradle
+    deploy {
+        maven {
+            mavenCentral {
+                create("maven-central") {
+                    active = Active.ALWAYS
+                    url = "https://central.sonatype.com/api/v1/publisher"
+                    stagingRepositories.add(
+                        rootProject.layout.buildDirectory.dir("staging").get().asFile.absolutePath
+                    )
+                }
             }
         }
     }

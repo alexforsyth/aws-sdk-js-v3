@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateConfigurationSetRequest, CreateConfigurationSetResponse } from "../models/models_0";
-import { PinpointEmailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointEmailClient";
-import {
-  deserializeAws_restJson1CreateConfigurationSetCommand,
-  serializeAws_restJson1CreateConfigurationSetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateConfigurationSetRequest, CreateConfigurationSetResponse } from "../models/models_0";
+import { CreateConfigurationSet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateConfigurationSetCommand}.
+ */
 export interface CreateConfigurationSetCommandInput extends CreateConfigurationSetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateConfigurationSetCommand}.
+ */
 export interface CreateConfigurationSetCommandOutput extends CreateConfigurationSetResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +33,83 @@ export interface CreateConfigurationSetCommandOutput extends CreateConfiguration
  * ```javascript
  * import { PinpointEmailClient, CreateConfigurationSetCommand } from "@aws-sdk/client-pinpoint-email"; // ES Modules import
  * // const { PinpointEmailClient, CreateConfigurationSetCommand } = require("@aws-sdk/client-pinpoint-email"); // CommonJS import
+ * // import type { PinpointEmailClientConfig } from "@aws-sdk/client-pinpoint-email";
+ * const config = {}; // type is PinpointEmailClientConfig
  * const client = new PinpointEmailClient(config);
+ * const input = { // CreateConfigurationSetRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   TrackingOptions: { // TrackingOptions
+ *     CustomRedirectDomain: "STRING_VALUE", // required
+ *   },
+ *   DeliveryOptions: { // DeliveryOptions
+ *     TlsPolicy: "REQUIRE" || "OPTIONAL",
+ *     SendingPoolName: "STRING_VALUE",
+ *   },
+ *   ReputationOptions: { // ReputationOptions
+ *     ReputationMetricsEnabled: true || false,
+ *     LastFreshStart: new Date("TIMESTAMP"),
+ *   },
+ *   SendingOptions: { // SendingOptions
+ *     SendingEnabled: true || false,
+ *   },
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateConfigurationSetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateConfigurationSetCommandInput - {@link CreateConfigurationSetCommandInput}
+ * @returns {@link CreateConfigurationSetCommandOutput}
  * @see {@link CreateConfigurationSetCommandInput} for command's `input` shape.
  * @see {@link CreateConfigurationSetCommandOutput} for command's `response` shape.
- * @see {@link PinpointEmailClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointEmailClientResolvedConfig | config} for PinpointEmailClient's `config` shape.
  *
+ * @throws {@link AlreadyExistsException} (client fault)
+ *  <p>The resource specified in your request already exists.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (server fault)
+ *  <p>The resource is being modified by another operation or thread.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>There are too many instances of the specified resource type.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource you attempted to access doesn't exist.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Too many requests have been made to the operation.</p>
+ *
+ * @throws {@link PinpointEmailServiceException}
+ * <p>Base exception class for all service exceptions from PinpointEmail service.</p>
+ *
+ *
+ * @public
  */
-export class CreateConfigurationSetCommand extends $Command<
-  CreateConfigurationSetCommandInput,
-  CreateConfigurationSetCommandOutput,
-  PinpointEmailClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateConfigurationSetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointEmailClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateConfigurationSetCommandInput, CreateConfigurationSetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointEmailClient";
-    const commandName = "CreateConfigurationSetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateConfigurationSetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateConfigurationSetResponse.filterSensitiveLog,
+export class CreateConfigurationSetCommand extends command<CreateConfigurationSetCommandInput, CreateConfigurationSetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateConfigurationSet",
+  CreateConfigurationSet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateConfigurationSetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateConfigurationSetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateConfigurationSetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateConfigurationSetCommandOutput> {
-    return deserializeAws_restJson1CreateConfigurationSetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateConfigurationSetCommandInput;
+      output: CreateConfigurationSetCommandOutput;
+    };
+  };
 }

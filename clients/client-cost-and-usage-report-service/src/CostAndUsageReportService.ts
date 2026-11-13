@@ -1,173 +1,222 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type DeleteReportDefinitionCommandInput,
+  type DeleteReportDefinitionCommandOutput,
   DeleteReportDefinitionCommand,
-  DeleteReportDefinitionCommandInput,
-  DeleteReportDefinitionCommandOutput,
 } from "./commands/DeleteReportDefinitionCommand";
 import {
+  type DescribeReportDefinitionsCommandInput,
+  type DescribeReportDefinitionsCommandOutput,
   DescribeReportDefinitionsCommand,
-  DescribeReportDefinitionsCommandInput,
-  DescribeReportDefinitionsCommandOutput,
 } from "./commands/DescribeReportDefinitionsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type ModifyReportDefinitionCommandInput,
+  type ModifyReportDefinitionCommandOutput,
   ModifyReportDefinitionCommand,
-  ModifyReportDefinitionCommandInput,
-  ModifyReportDefinitionCommandOutput,
 } from "./commands/ModifyReportDefinitionCommand";
 import {
+  type PutReportDefinitionCommandInput,
+  type PutReportDefinitionCommandOutput,
   PutReportDefinitionCommand,
-  PutReportDefinitionCommandInput,
-  PutReportDefinitionCommandOutput,
 } from "./commands/PutReportDefinitionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
 import { CostAndUsageReportServiceClient } from "./CostAndUsageReportServiceClient";
+import { paginateDescribeReportDefinitions } from "./pagination/DescribeReportDefinitionsPaginator";
+
+const commands = {
+  DeleteReportDefinitionCommand,
+  DescribeReportDefinitionsCommand,
+  ListTagsForResourceCommand,
+  ModifyReportDefinitionCommand,
+  PutReportDefinitionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+};
+const paginators = {
+  paginateDescribeReportDefinitions,
+};
 
 /**
- * <p>The AWS Cost and Usage Report API enables you to programmatically create, query, and delete
- *         AWS Cost and Usage report definitions.</p>
- *          <p>AWS Cost and Usage reports track the monthly AWS costs and usage
- *    associated with your AWS account.
+ * @public
+ */
+export interface CostAndUsageReportServiceRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface CostAndUsageReportService {
+  /**
+   * @see {@link DeleteReportDefinitionCommand}
+   */
+  deleteReportDefinition(
+    args: DeleteReportDefinitionCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<DeleteReportDefinitionCommandOutput>;
+  deleteReportDefinition(
+    args: DeleteReportDefinitionCommandInput,
+    cb: (err: any, data?: DeleteReportDefinitionCommandOutput) => void
+  ): void;
+  deleteReportDefinition(
+    args: DeleteReportDefinitionCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: DeleteReportDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReportDefinitionsCommand}
+   */
+  describeReportDefinitions(): Promise<DescribeReportDefinitionsCommandOutput>;
+  describeReportDefinitions(
+    args: DescribeReportDefinitionsCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<DescribeReportDefinitionsCommandOutput>;
+  describeReportDefinitions(
+    args: DescribeReportDefinitionsCommandInput,
+    cb: (err: any, data?: DescribeReportDefinitionsCommandOutput) => void
+  ): void;
+  describeReportDefinitions(
+    args: DescribeReportDefinitionsCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: DescribeReportDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ModifyReportDefinitionCommand}
+   */
+  modifyReportDefinition(
+    args: ModifyReportDefinitionCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<ModifyReportDefinitionCommandOutput>;
+  modifyReportDefinition(
+    args: ModifyReportDefinitionCommandInput,
+    cb: (err: any, data?: ModifyReportDefinitionCommandOutput) => void
+  ): void;
+  modifyReportDefinition(
+    args: ModifyReportDefinitionCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: ModifyReportDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutReportDefinitionCommand}
+   */
+  putReportDefinition(
+    args: PutReportDefinitionCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<PutReportDefinitionCommandOutput>;
+  putReportDefinition(
+    args: PutReportDefinitionCommandInput,
+    cb: (err: any, data?: PutReportDefinitionCommandOutput) => void
+  ): void;
+  putReportDefinition(
+    args: PutReportDefinitionCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: PutReportDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: CostAndUsageReportServiceRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: CostAndUsageReportServiceRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReportDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReportDefinitionsCommandOutput}.
+   */
+  paginateDescribeReportDefinitions(
+    args?: DescribeReportDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReportDefinitionsCommandOutput>;
+}
+
+/**
+ * <p>You can use the Amazon Web Services Cost and Usage Report API to programmatically create, query, and delete
+ *       Amazon Web Services Cost and Usage Report definitions.</p>
+ *          <p>Amazon Web Services Cost and Usage Report track the monthly Amazon Web Services costs and usage
+ *       associated with your Amazon Web Services account.
  *
- *         The report contains line items for each unique combination of AWS product,
- *         usage type, and operation that your AWS account uses.
+ *         The report contains line items for each unique combination of Amazon Web Services product,
+ *         usage type, and operation that your Amazon Web Services account uses.
  *
- *         You can configure the AWS Cost and Usage report to show only the data that you want, using the
- *         AWS Cost and Usage API.</p>
- *
+ *         You can configure the Amazon Web Services Cost and Usage Report to show only the data that you want, using the
+ *       Amazon Web Services Cost and Usage Report API.</p>
  *          <p>Service Endpoint</p>
- *          <p>The AWS Cost and Usage Report API provides the following endpoint:</p>
+ *          <p>The Amazon Web Services Cost and Usage Report API provides the following endpoint:</p>
  *          <ul>
  *             <li>
  *                <p>cur.us-east-1.amazonaws.com</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class CostAndUsageReportService extends CostAndUsageReportServiceClient {
-  /**
-   * <p>Deletes the specified report.</p>
-   */
-  public deleteReportDefinition(
-    args: DeleteReportDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReportDefinitionCommandOutput>;
-  public deleteReportDefinition(
-    args: DeleteReportDefinitionCommandInput,
-    cb: (err: any, data?: DeleteReportDefinitionCommandOutput) => void
-  ): void;
-  public deleteReportDefinition(
-    args: DeleteReportDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReportDefinitionCommandOutput) => void
-  ): void;
-  public deleteReportDefinition(
-    args: DeleteReportDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteReportDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReportDefinitionCommandOutput) => void
-  ): Promise<DeleteReportDefinitionCommandOutput> | void {
-    const command = new DeleteReportDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the AWS Cost and Usage reports available to this account.</p>
-   */
-  public describeReportDefinitions(
-    args: DescribeReportDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReportDefinitionsCommandOutput>;
-  public describeReportDefinitions(
-    args: DescribeReportDefinitionsCommandInput,
-    cb: (err: any, data?: DescribeReportDefinitionsCommandOutput) => void
-  ): void;
-  public describeReportDefinitions(
-    args: DescribeReportDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReportDefinitionsCommandOutput) => void
-  ): void;
-  public describeReportDefinitions(
-    args: DescribeReportDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeReportDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReportDefinitionsCommandOutput) => void
-  ): Promise<DescribeReportDefinitionsCommandOutput> | void {
-    const command = new DescribeReportDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Allows you to programatically update your report preferences.</p>
-   */
-  public modifyReportDefinition(
-    args: ModifyReportDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ModifyReportDefinitionCommandOutput>;
-  public modifyReportDefinition(
-    args: ModifyReportDefinitionCommandInput,
-    cb: (err: any, data?: ModifyReportDefinitionCommandOutput) => void
-  ): void;
-  public modifyReportDefinition(
-    args: ModifyReportDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ModifyReportDefinitionCommandOutput) => void
-  ): void;
-  public modifyReportDefinition(
-    args: ModifyReportDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyReportDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: ModifyReportDefinitionCommandOutput) => void
-  ): Promise<ModifyReportDefinitionCommandOutput> | void {
-    const command = new ModifyReportDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new report using the description that you provide.</p>
-   */
-  public putReportDefinition(
-    args: PutReportDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutReportDefinitionCommandOutput>;
-  public putReportDefinition(
-    args: PutReportDefinitionCommandInput,
-    cb: (err: any, data?: PutReportDefinitionCommandOutput) => void
-  ): void;
-  public putReportDefinition(
-    args: PutReportDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutReportDefinitionCommandOutput) => void
-  ): void;
-  public putReportDefinition(
-    args: PutReportDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutReportDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: PutReportDefinitionCommandOutput) => void
-  ): Promise<PutReportDefinitionCommandOutput> | void {
-    const command = new PutReportDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class CostAndUsageReportService extends CostAndUsageReportServiceClient implements CostAndUsageReportService {}
+createAggregatedClient(commands, CostAndUsageReportService, { paginators });

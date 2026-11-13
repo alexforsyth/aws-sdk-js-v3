@@ -1,97 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateAppImageConfigRequest, CreateAppImageConfigResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateAppImageConfigCommand,
-  serializeAws_json1_1CreateAppImageConfigCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAppImageConfigRequest, CreateAppImageConfigResponse } from "../models/models_1";
+import { CreateAppImageConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAppImageConfigCommand}.
+ */
 export interface CreateAppImageConfigCommandInput extends CreateAppImageConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAppImageConfigCommand}.
+ */
 export interface CreateAppImageConfigCommandOutput extends CreateAppImageConfigResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a configuration for running a SageMaker image as a KernelGateway app. The
- *         configuration specifies the Amazon Elastic File System (EFS) storage volume on the image, and a list of the
- *         kernels in the image.</p>
+ * <p>Creates a configuration for running a SageMaker AI image as a KernelGateway app. The configuration specifies the Amazon Elastic File System storage volume on the image, and a list of the kernels in the image.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, CreateAppImageConfigCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateAppImageConfigCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateAppImageConfigRequest
+ *   AppImageConfigName: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   KernelGatewayImageConfig: { // KernelGatewayImageConfig
+ *     KernelSpecs: [ // KernelSpecs // required
+ *       { // KernelSpec
+ *         Name: "STRING_VALUE", // required
+ *         DisplayName: "STRING_VALUE",
+ *       },
+ *     ],
+ *     FileSystemConfig: { // FileSystemConfig
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *   },
+ *   JupyterLabAppImageConfig: { // JupyterLabAppImageConfig
+ *     FileSystemConfig: {
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *     ContainerConfig: { // ContainerConfig
+ *       ContainerArguments: [ // CustomImageContainerArguments
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEntrypoint: [ // CustomImageContainerEntrypoint
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEnvironmentVariables: { // CustomImageContainerEnvironmentVariables
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   CodeEditorAppImageConfig: { // CodeEditorAppImageConfig
+ *     FileSystemConfig: {
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *     ContainerConfig: {
+ *       ContainerArguments: [
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEntrypoint: [
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEnvironmentVariables: {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new CreateAppImageConfigCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAppImageConfigResponse
+ * //   AppImageConfigArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateAppImageConfigCommandInput - {@link CreateAppImageConfigCommandInput}
+ * @returns {@link CreateAppImageConfigCommandOutput}
  * @see {@link CreateAppImageConfigCommandInput} for command's `input` shape.
  * @see {@link CreateAppImageConfigCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceInUse} (client fault)
+ *  <p>Resource being accessed is in use.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAppImageConfigCommand extends $Command<
-  CreateAppImageConfigCommandInput,
-  CreateAppImageConfigCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAppImageConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAppImageConfigCommandInput, CreateAppImageConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateAppImageConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAppImageConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAppImageConfigResponse.filterSensitiveLog,
+export class CreateAppImageConfigCommand extends command<CreateAppImageConfigCommandInput, CreateAppImageConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAppImageConfig",
+  CreateAppImageConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAppImageConfigRequest;
+      output: CreateAppImageConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAppImageConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateAppImageConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAppImageConfigCommandOutput> {
-    return deserializeAws_json1_1CreateAppImageConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAppImageConfigCommandInput;
+      output: CreateAppImageConfigCommandOutput;
+    };
+  };
 }

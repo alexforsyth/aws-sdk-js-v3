@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetPartitionRequest, GetPartitionResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetPartitionCommand,
-  serializeAws_json1_1GetPartitionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPartitionRequest, GetPartitionResponse } from "../models/models_2";
+import { GetPartition$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPartitionCommand}.
+ */
 export interface GetPartitionCommandInput extends GetPartitionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPartitionCommand}.
+ */
 export interface GetPartitionCommandOutput extends GetPartitionResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,149 @@ export interface GetPartitionCommandOutput extends GetPartitionResponse, __Metad
  * ```javascript
  * import { GlueClient, GetPartitionCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetPartitionCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetPartitionRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TableName: "STRING_VALUE", // required
+ *   PartitionValues: [ // ValueStringList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   AuditContext: { // AuditContext
+ *     AdditionalAuditContext: "STRING_VALUE",
+ *     RequestedColumns: [ // AuditColumnNamesList
+ *       "STRING_VALUE",
+ *     ],
+ *     AllColumnsRequested: true || false,
+ *   },
+ * };
  * const command = new GetPartitionCommand(input);
  * const response = await client.send(command);
+ * // { // GetPartitionResponse
+ * //   Partition: { // Partition
+ * //     Values: [ // ValueStringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     DatabaseName: "STRING_VALUE",
+ * //     TableName: "STRING_VALUE",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     LastAccessTime: new Date("TIMESTAMP"),
+ * //     StorageDescriptor: { // StorageDescriptor
+ * //       Columns: [ // ColumnList
+ * //         { // Column
+ * //           Name: "STRING_VALUE", // required
+ * //           Type: "STRING_VALUE",
+ * //           Comment: "STRING_VALUE",
+ * //           Parameters: { // ParametersMap
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       ],
+ * //       Location: "STRING_VALUE",
+ * //       AdditionalLocations: [ // LocationStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       InputFormat: "STRING_VALUE",
+ * //       OutputFormat: "STRING_VALUE",
+ * //       Compressed: true || false,
+ * //       NumberOfBuckets: Number("int"),
+ * //       SerdeInfo: { // SerDeInfo
+ * //         Name: "STRING_VALUE",
+ * //         SerializationLibrary: "STRING_VALUE",
+ * //         Parameters: {
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       BucketColumns: [ // NameStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SortColumns: [ // OrderList
+ * //         { // Order
+ * //           Column: "STRING_VALUE", // required
+ * //           SortOrder: Number("int"), // required
+ * //         },
+ * //       ],
+ * //       Parameters: "<ParametersMap>",
+ * //       SkewedInfo: { // SkewedInfo
+ * //         SkewedColumnNames: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SkewedColumnValues: [ // ColumnValueStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         SkewedColumnValueLocationMaps: { // LocationMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       StoredAsSubDirectories: true || false,
+ * //       SchemaReference: { // SchemaReference
+ * //         SchemaId: { // SchemaId
+ * //           SchemaArn: "STRING_VALUE",
+ * //           SchemaName: "STRING_VALUE",
+ * //           RegistryName: "STRING_VALUE",
+ * //         },
+ * //         SchemaVersionId: "STRING_VALUE",
+ * //         SchemaVersionNumber: Number("long"),
+ * //       },
+ * //     },
+ * //     Parameters: "<ParametersMap>",
+ * //     LastAnalyzedTime: new Date("TIMESTAMP"),
+ * //     CatalogId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetPartitionCommandInput - {@link GetPartitionCommandInput}
+ * @returns {@link GetPartitionCommandOutput}
  * @see {@link GetPartitionCommandInput} for command's `input` shape.
  * @see {@link GetPartitionCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link FederationSourceException} (client fault)
+ *  <p>A federation source failed.</p>
+ *
+ * @throws {@link FederationSourceRetryableException} (client fault)
+ *  <p>A federation source failed, but the operation may be retried.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetPartitionCommand extends $Command<
-  GetPartitionCommandInput,
-  GetPartitionCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPartitionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPartitionCommandInput, GetPartitionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetPartitionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPartitionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetPartitionResponse.filterSensitiveLog,
+export class GetPartitionCommand extends command<GetPartitionCommandInput, GetPartitionCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPartition",
+  GetPartition$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPartitionRequest;
+      output: GetPartitionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPartitionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetPartitionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPartitionCommandOutput> {
-    return deserializeAws_json1_1GetPartitionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPartitionCommandInput;
+      output: GetPartitionCommandOutput;
+    };
+  };
 }

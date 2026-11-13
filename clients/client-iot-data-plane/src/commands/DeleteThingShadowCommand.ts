@@ -1,25 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTDataPlaneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTDataPlaneClient";
-import { DeleteThingShadowRequest, DeleteThingShadowResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteThingShadowCommand,
-  serializeAws_restJson1DeleteThingShadowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteThingShadowRequest, DeleteThingShadowResponse } from "../models/models_0";
+import { DeleteThingShadow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteThingShadowCommand}.
+ */
 export interface DeleteThingShadowCommandInput extends DeleteThingShadowRequest {}
-export interface DeleteThingShadowCommandOutput extends DeleteThingShadowResponse, __MetadataBearer {}
+/**
+ * @public
+ */
+export type DeleteThingShadowCommandOutputType = Omit<DeleteThingShadowResponse, "payload"> & {
+  payload: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link DeleteThingShadowCommand}.
+ */
+export interface DeleteThingShadowCommandOutput extends DeleteThingShadowCommandOutputType, __MetadataBearer {}
 
 /**
  * <p>Deletes the shadow for the specified thing.</p>
@@ -30,68 +39,72 @@ export interface DeleteThingShadowCommandOutput extends DeleteThingShadowRespons
  * ```javascript
  * import { IoTDataPlaneClient, DeleteThingShadowCommand } from "@aws-sdk/client-iot-data-plane"; // ES Modules import
  * // const { IoTDataPlaneClient, DeleteThingShadowCommand } = require("@aws-sdk/client-iot-data-plane"); // CommonJS import
+ * // import type { IoTDataPlaneClientConfig } from "@aws-sdk/client-iot-data-plane";
+ * const config = {}; // type is IoTDataPlaneClientConfig
  * const client = new IoTDataPlaneClient(config);
+ * const input = { // DeleteThingShadowRequest
+ *   thingName: "STRING_VALUE", // required
+ *   shadowName: "STRING_VALUE",
+ * };
  * const command = new DeleteThingShadowCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteThingShadowResponse
+ * //   payload: new Uint8Array(), // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteThingShadowCommandInput - {@link DeleteThingShadowCommandInput}
+ * @returns {@link DeleteThingShadowCommandOutput}
  * @see {@link DeleteThingShadowCommandInput} for command's `input` shape.
  * @see {@link DeleteThingShadowCommandOutput} for command's `response` shape.
- * @see {@link IoTDataPlaneClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTDataPlaneClientResolvedConfig | config} for IoTDataPlaneClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>The specified combination of HTTP verb and URI is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is temporarily unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You are not authorized to perform this operation.</p>
+ *
+ * @throws {@link UnsupportedDocumentEncodingException} (client fault)
+ *  <p>The document encoding is not supported.</p>
+ *
+ * @throws {@link IoTDataPlaneServiceException}
+ * <p>Base exception class for all service exceptions from IoTDataPlane service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteThingShadowCommand extends $Command<
-  DeleteThingShadowCommandInput,
-  DeleteThingShadowCommandOutput,
-  IoTDataPlaneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteThingShadowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTDataPlaneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteThingShadowCommandInput, DeleteThingShadowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTDataPlaneClient";
-    const commandName = "DeleteThingShadowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteThingShadowRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteThingShadowResponse.filterSensitiveLog,
+export class DeleteThingShadowCommand extends command<DeleteThingShadowCommandInput, DeleteThingShadowCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteThingShadow",
+  DeleteThingShadow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteThingShadowRequest;
+      output: DeleteThingShadowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteThingShadowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteThingShadowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteThingShadowCommandOutput> {
-    return deserializeAws_restJson1DeleteThingShadowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteThingShadowCommandInput;
+      output: DeleteThingShadowCommandOutput;
+    };
+  };
 }

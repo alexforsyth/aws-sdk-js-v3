@@ -1,0 +1,102 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListQueueLimitAssociationsRequest, ListQueueLimitAssociationsResponse } from "../models/models_1";
+import { ListQueueLimitAssociations$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListQueueLimitAssociationsCommand}.
+ */
+export interface ListQueueLimitAssociationsCommandInput extends ListQueueLimitAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListQueueLimitAssociationsCommand}.
+ */
+export interface ListQueueLimitAssociationsCommandOutput extends ListQueueLimitAssociationsResponse, __MetadataBearer {}
+
+/**
+ * Gets a list of the associations between queues and limits defined in a farm.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, ListQueueLimitAssociationsCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, ListQueueLimitAssociationsCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // ListQueueLimitAssociationsRequest
+ *   farmId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   queueId: "STRING_VALUE",
+ *   limitId: "STRING_VALUE",
+ * };
+ * const command = new ListQueueLimitAssociationsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListQueueLimitAssociationsResponse
+ * //   queueLimitAssociations: [ // QueueLimitAssociationSummaries // required
+ * //     { // QueueLimitAssociationSummary
+ * //       queueId: "STRING_VALUE", // required
+ * //       limitId: "STRING_VALUE", // required
+ * //       status: "ACTIVE" || "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" || "STOP_LIMIT_USAGE_AND_CANCEL_TASKS" || "STOPPED", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListQueueLimitAssociationsCommandInput - {@link ListQueueLimitAssociationsCommandInput}
+ * @returns {@link ListQueueLimitAssociationsCommandOutput}
+ * @see {@link ListQueueLimitAssociationsCommandInput} for command's `input` shape.
+ * @see {@link ListQueueLimitAssociationsCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class ListQueueLimitAssociationsCommand extends command<ListQueueLimitAssociationsCommandInput, ListQueueLimitAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListQueueLimitAssociations",
+  ListQueueLimitAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListQueueLimitAssociationsRequest;
+      output: ListQueueLimitAssociationsResponse;
+    };
+    sdk: {
+      input: ListQueueLimitAssociationsCommandInput;
+      output: ListQueueLimitAssociationsCommandOutput;
+    };
+  };
+}

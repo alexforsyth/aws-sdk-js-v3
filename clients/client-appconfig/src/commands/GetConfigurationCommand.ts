@@ -1,107 +1,133 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { Configuration, GetConfigurationRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetConfigurationCommand,
-  serializeAws_restJson1GetConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetConfigurationCommandInput extends GetConfigurationRequest {}
-export interface GetConfigurationCommandOutput extends Configuration, __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Configuration, GetConfigurationRequest } from "../models/models_0";
+import { GetConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Receive information about a configuration.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetConfigurationCommand}.
+ */
+export interface GetConfigurationCommandInput extends GetConfigurationRequest {}
+/**
+ * @public
+ */
+export type GetConfigurationCommandOutputType = Omit<Configuration, "Content"> & {
+  Content?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetConfigurationCommand}.
+ */
+export interface GetConfigurationCommandOutput extends GetConfigurationCommandOutputType, __MetadataBearer {}
+
+/**
+ * <p>(Deprecated) Retrieves the latest deployed configuration.</p>
  *          <important>
- *             <p>AWS AppConfig uses the value of the <code>ClientConfigurationVersion</code> parameter
- *             to identify the configuration version on your clients. If you don’t send
- *                <code>ClientConfigurationVersion</code> with each call to
- *                <code>GetConfiguration</code>, your clients receive the current configuration. You
- *             are charged each time your clients receive a configuration.</p>
- *             <p>To avoid excess charges, we recommend that you include the
- *                <code>ClientConfigurationVersion</code> value with every call to
- *                <code>GetConfiguration</code>. This value must be saved on your client. Subsequent
- *             calls to <code>GetConfiguration</code> must pass this value by using the
- *                <code>ClientConfigurationVersion</code> parameter. </p>
+ *             <p>Note the following important information.</p>
+ *             <ul>
+ *                <li>
+ *                   <p>This API action is deprecated. Calls to receive configuration data should use
+ *                   the <a href="https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html">StartConfigurationSession</a> and <a href="https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html">GetLatestConfiguration</a> APIs instead. </p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <a>GetConfiguration</a> is a priced call. For more information, see
+ *                      <a href="https://aws.amazon.com/systems-manager/pricing/">Pricing</a>.</p>
+ *                </li>
+ *             </ul>
  *          </important>
+ *
+ * @deprecated This API has been deprecated in favor of the GetLatestConfiguration API used in conjunction with StartConfigurationSession.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AppConfigClient, GetConfigurationCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, GetConfigurationCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // GetConfigurationRequest
+ *   Application: "STRING_VALUE", // required
+ *   Environment: "STRING_VALUE", // required
+ *   Configuration: "STRING_VALUE", // required
+ *   ClientId: "STRING_VALUE", // required
+ *   ClientConfigurationVersion: "STRING_VALUE",
+ * };
  * const command = new GetConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // Configuration
+ * //   Content: new Uint8Array(),
+ * //   ConfigurationVersion: "STRING_VALUE",
+ * //   ContentType: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetConfigurationCommandInput - {@link GetConfigurationCommandInput}
+ * @returns {@link GetConfigurationCommandOutput}
  * @see {@link GetConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetConfigurationCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To retrieve configuration details
+ * ```javascript
+ * // The following get-configuration example returns the configuration details of the example application. On subsequent calls to get-configuration, use the client-configuration-version parameter to only update the configuration of your application if the version has changed. Only updating the configuration when the version has changed avoids excess charges incurred by calling get-configuration.
+ * const input = {
+ *   Application: "example-application",
+ *   ClientId: "example-id",
+ *   Configuration: "Example-Configuration-Profile",
+ *   Environment: "Example-Environment"
+ * };
+ * const command = new GetConfigurationCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ConfigurationVersion: "1",
+ *   ContentType: "application/octet-stream"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetConfigurationCommand extends $Command<
-  GetConfigurationCommandInput,
-  GetConfigurationCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetConfigurationCommandInput, GetConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "GetConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Configuration.filterSensitiveLog,
+export class GetConfigurationCommand extends command<GetConfigurationCommandInput, GetConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetConfiguration",
+  GetConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetConfigurationRequest;
+      output: Configuration;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetConfigurationCommandInput;
+      output: GetConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { ListResourcesRequest, ListResourcesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListResourcesCommand,
-  serializeAws_json1_1ListResourcesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListResourcesRequest, ListResourcesResponse } from "../models/models_0";
+import { ListResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListResourcesCommand}.
+ */
 export interface ListResourcesCommandInput extends ListResourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListResourcesCommand}.
+ */
 export interface ListResourcesCommandOutput extends ListResourcesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface ListResourcesCommandOutput extends ListResourcesResponse, __Met
  * ```javascript
  * import { LakeFormationClient, ListResourcesCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, ListResourcesCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // ListResourcesRequest
+ *   FilterConditionList: [ // FilterConditionList
+ *     { // FilterCondition
+ *       Field: "RESOURCE_ARN" || "ROLE_ARN" || "LAST_MODIFIED",
+ *       ComparisonOperator: "EQ" || "NE" || "LE" || "LT" || "GE" || "GT" || "CONTAINS" || "NOT_CONTAINS" || "BEGINS_WITH" || "IN" || "BETWEEN",
+ *       StringValueList: [ // StringValueList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListResourcesResponse
+ * //   ResourceInfoList: [ // ResourceInfoList
+ * //     { // ResourceInfo
+ * //       ResourceArn: "STRING_VALUE",
+ * //       RoleArn: "STRING_VALUE",
+ * //       LastModified: new Date("TIMESTAMP"),
+ * //       WithFederation: true || false,
+ * //       HybridAccessEnabled: true || false,
+ * //       WithPrivilegedAccess: true || false,
+ * //       VerificationStatus: "VERIFIED" || "VERIFICATION_FAILED" || "NOT_VERIFIED",
+ * //       ExpectedResourceOwnerAccount: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListResourcesCommandInput - {@link ListResourcesCommandInput}
+ * @returns {@link ListResourcesCommandOutput}
  * @see {@link ListResourcesCommandInput} for command's `input` shape.
  * @see {@link ListResourcesCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListResourcesCommand extends $Command<
-  ListResourcesCommandInput,
-  ListResourcesCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListResourcesCommandInput, ListResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "ListResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListResourcesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListResourcesResponse.filterSensitiveLog,
+export class ListResourcesCommand extends command<ListResourcesCommandInput, ListResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListResources",
+  ListResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResourcesRequest;
+      output: ListResourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListResourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListResourcesCommandOutput> {
-    return deserializeAws_json1_1ListResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListResourcesCommandInput;
+      output: ListResourcesCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteSafetyRuleRequest, DeleteSafetyRuleResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteSafetyRuleCommand,
-  serializeAws_restJson1DeleteSafetyRuleCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  Route53RecoveryControlConfigClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../Route53RecoveryControlConfigClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteSafetyRuleRequest, DeleteSafetyRuleResponse } from "../models/models_0";
+import { DeleteSafetyRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSafetyRuleCommand}.
+ */
 export interface DeleteSafetyRuleCommandInput extends DeleteSafetyRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSafetyRuleCommand}.
+ */
 export interface DeleteSafetyRuleCommandOutput extends DeleteSafetyRuleResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,54 @@ export interface DeleteSafetyRuleCommandOutput extends DeleteSafetyRuleResponse,
  * ```javascript
  * import { Route53RecoveryControlConfigClient, DeleteSafetyRuleCommand } from "@aws-sdk/client-route53-recovery-control-config"; // ES Modules import
  * // const { Route53RecoveryControlConfigClient, DeleteSafetyRuleCommand } = require("@aws-sdk/client-route53-recovery-control-config"); // CommonJS import
+ * // import type { Route53RecoveryControlConfigClientConfig } from "@aws-sdk/client-route53-recovery-control-config";
+ * const config = {}; // type is Route53RecoveryControlConfigClientConfig
  * const client = new Route53RecoveryControlConfigClient(config);
+ * const input = { // DeleteSafetyRuleRequest
+ *   SafetyRuleArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteSafetyRuleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteSafetyRuleCommandInput - {@link DeleteSafetyRuleCommandInput}
+ * @returns {@link DeleteSafetyRuleCommandOutput}
  * @see {@link DeleteSafetyRuleCommandInput} for command's `input` shape.
  * @see {@link DeleteSafetyRuleCommandOutput} for command's `response` shape.
- * @see {@link Route53RecoveryControlConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53RecoveryControlConfigClientResolvedConfig | config} for Route53RecoveryControlConfigClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>500 response - InternalServiceError. Temporary service error. Retry the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>404 response - MalformedQueryString. The query string contains a syntax error or resource not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>400 response - Multiple causes. For example, you might have a malformed query string and input parameter might be out of range, or you might have used parameters together incorrectly.</p>
+ *
+ * @throws {@link Route53RecoveryControlConfigServiceException}
+ * <p>Base exception class for all service exceptions from Route53RecoveryControlConfig service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteSafetyRuleCommand extends $Command<
-  DeleteSafetyRuleCommandInput,
-  DeleteSafetyRuleCommandOutput,
-  Route53RecoveryControlConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteSafetyRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53RecoveryControlConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteSafetyRuleCommandInput, DeleteSafetyRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53RecoveryControlConfigClient";
-    const commandName = "DeleteSafetyRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteSafetyRuleRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteSafetyRuleResponse.filterSensitiveLog,
+export class DeleteSafetyRuleCommand extends command<DeleteSafetyRuleCommandInput, DeleteSafetyRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteSafetyRule",
+  DeleteSafetyRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteSafetyRuleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteSafetyRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteSafetyRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteSafetyRuleCommandOutput> {
-    return deserializeAws_restJson1DeleteSafetyRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteSafetyRuleCommandInput;
+      output: DeleteSafetyRuleCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetHealthCheckCountRequest, GetHealthCheckCountResponse } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetHealthCheckCountCommand,
-  serializeAws_restXmlGetHealthCheckCountCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw2, command } from "../commandBuilder";
+import type { GetHealthCheckCountRequest, GetHealthCheckCountResponse } from "../models/models_0";
+import { GetHealthCheckCount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetHealthCheckCountCommand}.
+ */
 export interface GetHealthCheckCountCommandInput extends GetHealthCheckCountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetHealthCheckCountCommand}.
+ */
 export interface GetHealthCheckCountCommandOutput extends GetHealthCheckCountResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,45 @@ export interface GetHealthCheckCountCommandOutput extends GetHealthCheckCountRes
  * ```javascript
  * import { Route53Client, GetHealthCheckCountCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, GetHealthCheckCountCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = {};
  * const command = new GetHealthCheckCountCommand(input);
  * const response = await client.send(command);
+ * // { // GetHealthCheckCountResponse
+ * //   HealthCheckCount: Number("long"), // required
+ * // };
+ *
  * ```
  *
+ * @param GetHealthCheckCountCommandInput - {@link GetHealthCheckCountCommandInput}
+ * @returns {@link GetHealthCheckCountCommandOutput}
  * @see {@link GetHealthCheckCountCommandInput} for command's `input` shape.
  * @see {@link GetHealthCheckCountCommandOutput} for command's `response` shape.
- * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class GetHealthCheckCountCommand extends $Command<
-  GetHealthCheckCountCommandInput,
-  GetHealthCheckCountCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetHealthCheckCountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetHealthCheckCountCommandInput, GetHealthCheckCountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "GetHealthCheckCountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetHealthCheckCountRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetHealthCheckCountResponse.filterSensitiveLog,
+export class GetHealthCheckCountCommand extends command<GetHealthCheckCountCommandInput, GetHealthCheckCountCommandOutput>(
+  _ep0,
+  _mw2,
+  "GetHealthCheckCount",
+  GetHealthCheckCount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetHealthCheckCountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetHealthCheckCountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetHealthCheckCountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetHealthCheckCountCommandOutput> {
-    return deserializeAws_restXmlGetHealthCheckCountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetHealthCheckCountCommandInput;
+      output: GetHealthCheckCountCommandOutput;
+    };
+  };
 }

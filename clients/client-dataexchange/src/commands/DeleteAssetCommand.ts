@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataExchangeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataExchangeClient";
-import { DeleteAssetRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAssetCommand,
-  serializeAws_restJson1DeleteAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAssetRequest } from "../models/models_0";
+import { DeleteAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAssetCommand}.
+ */
 export interface DeleteAssetCommandInput extends DeleteAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAssetCommand}.
+ */
 export interface DeleteAssetCommandOutput extends __MetadataBearer {}
 
 /**
@@ -28,68 +29,65 @@ export interface DeleteAssetCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DataExchangeClient, DeleteAssetCommand } from "@aws-sdk/client-dataexchange"; // ES Modules import
  * // const { DataExchangeClient, DeleteAssetCommand } = require("@aws-sdk/client-dataexchange"); // CommonJS import
+ * // import type { DataExchangeClientConfig } from "@aws-sdk/client-dataexchange";
+ * const config = {}; // type is DataExchangeClientConfig
  * const client = new DataExchangeClient(config);
+ * const input = { // DeleteAssetRequest
+ *   AssetId: "STRING_VALUE", // required
+ *   DataSetId: "STRING_VALUE", // required
+ *   RevisionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteAssetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAssetCommandInput - {@link DeleteAssetCommandInput}
+ * @returns {@link DeleteAssetCommandOutput}
  * @see {@link DeleteAssetCommandInput} for command's `input` shape.
  * @see {@link DeleteAssetCommandOutput} for command's `response` shape.
- * @see {@link DataExchangeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DataExchangeClientResolvedConfig | config} for DataExchangeClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to the resource is denied.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was invalid.</p>
+ *
+ * @throws {@link DataExchangeServiceException}
+ * <p>Base exception class for all service exceptions from DataExchange service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAssetCommand extends $Command<
-  DeleteAssetCommandInput,
-  DeleteAssetCommandOutput,
-  DataExchangeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataExchangeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAssetCommandInput, DeleteAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataExchangeClient";
-    const commandName = "DeleteAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAssetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteAssetCommand extends command<DeleteAssetCommandInput, DeleteAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAsset",
+  DeleteAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteAssetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAssetCommandOutput> {
-    return deserializeAws_restJson1DeleteAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAssetCommandInput;
+      output: DeleteAssetCommandOutput;
+    };
+  };
 }

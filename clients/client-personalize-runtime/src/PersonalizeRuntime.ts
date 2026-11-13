@@ -1,101 +1,95 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type GetActionRecommendationsCommandInput,
+  type GetActionRecommendationsCommandOutput,
+  GetActionRecommendationsCommand,
+} from "./commands/GetActionRecommendationsCommand";
+import {
+  type GetPersonalizedRankingCommandInput,
+  type GetPersonalizedRankingCommandOutput,
   GetPersonalizedRankingCommand,
-  GetPersonalizedRankingCommandInput,
-  GetPersonalizedRankingCommandOutput,
 } from "./commands/GetPersonalizedRankingCommand";
 import {
+  type GetRecommendationsCommandInput,
+  type GetRecommendationsCommandOutput,
   GetRecommendationsCommand,
-  GetRecommendationsCommandInput,
-  GetRecommendationsCommandOutput,
 } from "./commands/GetRecommendationsCommand";
 import { PersonalizeRuntimeClient } from "./PersonalizeRuntimeClient";
 
+const commands = {
+  GetActionRecommendationsCommand,
+  GetPersonalizedRankingCommand,
+  GetRecommendationsCommand,
+};
+
 /**
- * <p></p>
+ * @public
  */
-export class PersonalizeRuntime extends PersonalizeRuntimeClient {
+export interface PersonalizeRuntimeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PersonalizeRuntime {
   /**
-   * <p>Re-ranks a list of recommended items for the given user. The first item in the list is
-   *       deemed the most likely item to be of interest to the user.</p>
-   *          <note>
-   *             <p>The solution backing the campaign must have been created using a recipe of type
-   *         PERSONALIZED_RANKING.</p>
-   *          </note>
+   * @see {@link GetActionRecommendationsCommand}
    */
-  public getPersonalizedRanking(
-    args: GetPersonalizedRankingCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetPersonalizedRankingCommandOutput>;
-  public getPersonalizedRanking(
-    args: GetPersonalizedRankingCommandInput,
-    cb: (err: any, data?: GetPersonalizedRankingCommandOutput) => void
+  getActionRecommendations(): Promise<GetActionRecommendationsCommandOutput>;
+  getActionRecommendations(
+    args: GetActionRecommendationsCommandInput,
+    options?: PersonalizeRuntimeRequestOptions
+  ): Promise<GetActionRecommendationsCommandOutput>;
+  getActionRecommendations(
+    args: GetActionRecommendationsCommandInput,
+    cb: (err: any, data?: GetActionRecommendationsCommandOutput) => void
   ): void;
-  public getPersonalizedRanking(
-    args: GetPersonalizedRankingCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetPersonalizedRankingCommandOutput) => void
+  getActionRecommendations(
+    args: GetActionRecommendationsCommandInput,
+    options: PersonalizeRuntimeRequestOptions,
+    cb: (err: any, data?: GetActionRecommendationsCommandOutput) => void
   ): void;
-  public getPersonalizedRanking(
-    args: GetPersonalizedRankingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPersonalizedRankingCommandOutput) => void),
-    cb?: (err: any, data?: GetPersonalizedRankingCommandOutput) => void
-  ): Promise<GetPersonalizedRankingCommandOutput> | void {
-    const command = new GetPersonalizedRankingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of recommended items. The required input depends on the recipe type used to
-   *       create the solution backing the campaign, as follows:</p>
-   *          <ul>
-   *             <li>
-   *                <p>RELATED_ITEMS - <code>itemId</code> required, <code>userId</code> not used</p>
-   *             </li>
-   *             <li>
-   *                <p>USER_PERSONALIZATION - <code>itemId</code> optional, <code>userId</code>
-   *           required</p>
-   *             </li>
-   *          </ul>
-   *          <note>
-   *             <p>Campaigns that are backed by a solution created using a recipe of type
-   *         PERSONALIZED_RANKING use the  API.</p>
-   *          </note>
+   * @see {@link GetPersonalizedRankingCommand}
    */
-  public getRecommendations(
+  getPersonalizedRanking(
+    args: GetPersonalizedRankingCommandInput,
+    options?: PersonalizeRuntimeRequestOptions
+  ): Promise<GetPersonalizedRankingCommandOutput>;
+  getPersonalizedRanking(
+    args: GetPersonalizedRankingCommandInput,
+    cb: (err: any, data?: GetPersonalizedRankingCommandOutput) => void
+  ): void;
+  getPersonalizedRanking(
+    args: GetPersonalizedRankingCommandInput,
+    options: PersonalizeRuntimeRequestOptions,
+    cb: (err: any, data?: GetPersonalizedRankingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecommendationsCommand}
+   */
+  getRecommendations(): Promise<GetRecommendationsCommandOutput>;
+  getRecommendations(
     args: GetRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: PersonalizeRuntimeRequestOptions
   ): Promise<GetRecommendationsCommandOutput>;
-  public getRecommendations(
+  getRecommendations(
     args: GetRecommendationsCommandInput,
     cb: (err: any, data?: GetRecommendationsCommandOutput) => void
   ): void;
-  public getRecommendations(
+  getRecommendations(
     args: GetRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: PersonalizeRuntimeRequestOptions,
     cb: (err: any, data?: GetRecommendationsCommandOutput) => void
   ): void;
-  public getRecommendations(
-    args: GetRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: GetRecommendationsCommandOutput) => void
-  ): Promise<GetRecommendationsCommandOutput> | void {
-    const command = new GetRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 }
+
+/**
+ * <p></p>
+ * @public
+ */
+export class PersonalizeRuntime extends PersonalizeRuntimeClient implements PersonalizeRuntime {}
+createAggregatedClient(commands, PersonalizeRuntime);

@@ -1,31 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import { DescribeUserStackAssociationsRequest, DescribeUserStackAssociationsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeUserStackAssociationsCommand,
-  serializeAws_json1_1DescribeUserStackAssociationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeUserStackAssociationsRequest, DescribeUserStackAssociationsResult } from "../models/models_0";
+import { DescribeUserStackAssociations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeUserStackAssociationsCommand}.
+ */
 export interface DescribeUserStackAssociationsCommandInput extends DescribeUserStackAssociationsRequest {}
-export interface DescribeUserStackAssociationsCommandOutput
-  extends DescribeUserStackAssociationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeUserStackAssociationsCommand}.
+ */
+export interface DescribeUserStackAssociationsCommandOutput extends DescribeUserStackAssociationsResult, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:</p>
- *         <ul>
+ *          <ul>
  *             <li>
  *                <p>The stack name</p>
  *             </li>
@@ -38,71 +37,65 @@ export interface DescribeUserStackAssociationsCommandOutput
  * ```javascript
  * import { AppStreamClient, DescribeUserStackAssociationsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeUserStackAssociationsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeUserStackAssociationsRequest
+ *   StackName: "STRING_VALUE",
+ *   UserName: "STRING_VALUE",
+ *   AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeUserStackAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeUserStackAssociationsResult
+ * //   UserStackAssociations: [ // UserStackAssociationList
+ * //     { // UserStackAssociation
+ * //       StackName: "STRING_VALUE", // required
+ * //       UserName: "STRING_VALUE", // required
+ * //       AuthenticationType: "API" || "SAML" || "USERPOOL" || "AWS_AD", // required
+ * //       SendEmailNotification: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeUserStackAssociationsCommandInput - {@link DescribeUserStackAssociationsCommandInput}
+ * @returns {@link DescribeUserStackAssociationsCommandOutput}
  * @see {@link DescribeUserStackAssociationsCommandInput} for command's `input` shape.
  * @see {@link DescribeUserStackAssociationsCommandOutput} for command's `response` shape.
- * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeUserStackAssociationsCommand extends $Command<
-  DescribeUserStackAssociationsCommandInput,
-  DescribeUserStackAssociationsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeUserStackAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeUserStackAssociationsCommandInput, DescribeUserStackAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeUserStackAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeUserStackAssociationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeUserStackAssociationsResult.filterSensitiveLog,
+export class DescribeUserStackAssociationsCommand extends command<DescribeUserStackAssociationsCommandInput, DescribeUserStackAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeUserStackAssociations",
+  DescribeUserStackAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeUserStackAssociationsRequest;
+      output: DescribeUserStackAssociationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeUserStackAssociationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeUserStackAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeUserStackAssociationsCommandOutput> {
-    return deserializeAws_json1_1DescribeUserStackAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeUserStackAssociationsCommandInput;
+      output: DescribeUserStackAssociationsCommandOutput;
+    };
+  };
 }

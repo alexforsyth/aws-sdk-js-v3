@@ -1,99 +1,107 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { GetSAMLProviderRequest, GetSAMLProviderResponse } from "../models/models_0";
-import {
-  deserializeAws_queryGetSAMLProviderCommand,
-  serializeAws_queryGetSAMLProviderCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSAMLProviderRequest, GetSAMLProviderResponse } from "../models/models_0";
+import { GetSAMLProvider$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSAMLProviderCommand}.
+ */
 export interface GetSAMLProviderCommandInput extends GetSAMLProviderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSAMLProviderCommand}.
+ */
 export interface GetSAMLProviderCommandOutput extends GetSAMLProviderResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the SAML provider metadocument that was uploaded when the IAM SAML provider
  *             resource object was created or updated.</p>
- *         <note>
+ *          <note>
  *             <p>This operation requires <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
- *         </note>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IAMClient, GetSAMLProviderCommand } from "@aws-sdk/client-iam"; // ES Modules import
  * // const { IAMClient, GetSAMLProviderCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * // import type { IAMClientConfig } from "@aws-sdk/client-iam";
+ * const config = {}; // type is IAMClientConfig
  * const client = new IAMClient(config);
+ * const input = { // GetSAMLProviderRequest
+ *   SAMLProviderArn: "STRING_VALUE", // required
+ * };
  * const command = new GetSAMLProviderCommand(input);
  * const response = await client.send(command);
+ * // { // GetSAMLProviderResponse
+ * //   SAMLProviderUUID: "STRING_VALUE",
+ * //   SAMLMetadataDocument: "STRING_VALUE",
+ * //   CreateDate: new Date("TIMESTAMP"),
+ * //   ValidUntil: new Date("TIMESTAMP"),
+ * //   Tags: [ // tagListType
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   AssertionEncryptionMode: "Required" || "Allowed",
+ * //   PrivateKeyList: [ // privateKeyList
+ * //     { // SAMLPrivateKey
+ * //       KeyId: "STRING_VALUE",
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetSAMLProviderCommandInput - {@link GetSAMLProviderCommandInput}
+ * @returns {@link GetSAMLProviderCommandOutput}
  * @see {@link GetSAMLProviderCommandInput} for command's `input` shape.
  * @see {@link GetSAMLProviderCommandOutput} for command's `response` shape.
- * @see {@link IAMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *       input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or
+ *       failure.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ *
+ * @public
  */
-export class GetSAMLProviderCommand extends $Command<
-  GetSAMLProviderCommandInput,
-  GetSAMLProviderCommandOutput,
-  IAMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSAMLProviderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IAMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSAMLProviderCommandInput, GetSAMLProviderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IAMClient";
-    const commandName = "GetSAMLProviderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSAMLProviderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetSAMLProviderResponse.filterSensitiveLog,
+export class GetSAMLProviderCommand extends command<GetSAMLProviderCommandInput, GetSAMLProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSAMLProvider",
+  GetSAMLProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSAMLProviderRequest;
+      output: GetSAMLProviderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSAMLProviderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryGetSAMLProviderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSAMLProviderCommandOutput> {
-    return deserializeAws_queryGetSAMLProviderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSAMLProviderCommandInput;
+      output: GetSAMLProviderCommandOutput;
+    };
+  };
 }

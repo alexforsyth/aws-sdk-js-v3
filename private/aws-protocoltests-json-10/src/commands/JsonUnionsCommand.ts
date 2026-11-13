@@ -1,25 +1,30 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JSONRPC10ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JSONRPC10Client";
-import { UnionInputOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0JsonUnionsCommand,
-  serializeAws_json1_0JsonUnionsCommand,
-} from "../protocols/Aws_json1_0";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JSONRPC10ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JSONRPC10Client";
+import type { JsonUnionsInput, JsonUnionsOutput } from "../models/models_0";
+import { de_JsonUnionsCommand, se_JsonUnionsCommand } from "../protocols/Aws_json1_0";
 
-export interface JsonUnionsCommandInput extends UnionInputOutput {}
-export interface JsonUnionsCommandOutput extends UnionInputOutput, __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link JsonUnionsCommand}.
+ */
+export interface JsonUnionsCommandInput extends JsonUnionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link JsonUnionsCommand}.
+ */
+export interface JsonUnionsCommandOutput extends JsonUnionsOutput, __MetadataBearer {}
 
 /**
  * This operation uses unions for inputs and outputs.
@@ -28,68 +33,96 @@ export interface JsonUnionsCommandOutput extends UnionInputOutput, __MetadataBea
  * ```javascript
  * import { JSONRPC10Client, JsonUnionsCommand } from "@aws-sdk/aws-protocoltests-json-10"; // ES Modules import
  * // const { JSONRPC10Client, JsonUnionsCommand } = require("@aws-sdk/aws-protocoltests-json-10"); // CommonJS import
+ * // import type { JSONRPC10ClientConfig } from "@aws-sdk/aws-protocoltests-json-10";
+ * const config = {}; // type is JSONRPC10ClientConfig
  * const client = new JSONRPC10Client(config);
+ * const input = { // JsonUnionsInput
+ *   contents: { // MyUnion Union: only one key present
+ *     stringValue: "STRING_VALUE",
+ *     booleanValue: true || false,
+ *     numberValue: Number("int"),
+ *     blobValue: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *     timestampValue: new Date("TIMESTAMP"),
+ *     enumValue: "Foo" || "Baz" || "Bar" || "1" || "0",
+ *     intEnumValue: 1 || 2 || 3,
+ *     listValue: [ // StringList
+ *       "STRING_VALUE",
+ *     ],
+ *     mapValue: { // StringMap
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     structureValue: { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new JsonUnionsCommand(input);
  * const response = await client.send(command);
+ * // { // JsonUnionsOutput
+ * //   contents: { // MyUnion Union: only one key present
+ * //     stringValue: "STRING_VALUE",
+ * //     booleanValue: true || false,
+ * //     numberValue: Number("int"),
+ * //     blobValue: new Uint8Array(),
+ * //     timestampValue: new Date("TIMESTAMP"),
+ * //     enumValue: "Foo" || "Baz" || "Bar" || "1" || "0",
+ * //     intEnumValue: 1 || 2 || 3,
+ * //     listValue: [ // StringList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     mapValue: { // StringMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     structureValue: { // GreetingStruct
+ * //       hi: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param JsonUnionsCommandInput - {@link JsonUnionsCommandInput}
+ * @returns {@link JsonUnionsCommandOutput}
  * @see {@link JsonUnionsCommandInput} for command's `input` shape.
  * @see {@link JsonUnionsCommandOutput} for command's `response` shape.
- * @see {@link JSONRPC10ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link JSONRPC10ClientResolvedConfig | config} for JSONRPC10Client's `config` shape.
  *
+ * @throws {@link JSONRPC10ServiceException}
+ * <p>Base exception class for all service exceptions from JSONRPC10 service.</p>
+ *
+ *
+ * @public
  */
-export class JsonUnionsCommand extends $Command<
-  JsonUnionsCommandInput,
-  JsonUnionsCommandOutput,
-  JSONRPC10ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: JsonUnionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: JSONRPC10ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<JsonUnionsCommandInput, JsonUnionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "JSONRPC10Client";
-    const commandName = "JsonUnionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UnionInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: UnionInputOutput.filterSensitiveLog,
+export class JsonUnionsCommand extends $Command
+  .classBuilder<
+    JsonUnionsCommandInput,
+    JsonUnionsCommandOutput,
+    JSONRPC10ClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: JSONRPC10ClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("JsonRpc10", "JsonUnions", {})
+  .n("JSONRPC10Client", "JsonUnionsCommand")
+  .f(void 0, void 0)
+  .ser(se_JsonUnionsCommand)
+  .de(de_JsonUnionsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: JsonUnionsInput;
+      output: JsonUnionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: JsonUnionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0JsonUnionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<JsonUnionsCommandOutput> {
-    return deserializeAws_json1_0JsonUnionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: JsonUnionsCommandInput;
+      output: JsonUnionsCommandOutput;
+    };
+  };
 }

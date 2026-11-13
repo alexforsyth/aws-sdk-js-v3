@@ -1,102 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeDeployClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeDeployClient";
-import { RegisterOnPremisesInstanceInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1RegisterOnPremisesInstanceCommand,
-  serializeAws_json1_1RegisterOnPremisesInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterOnPremisesInstanceInput } from "../models/models_0";
+import { RegisterOnPremisesInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterOnPremisesInstanceCommand}.
+ */
 export interface RegisterOnPremisesInstanceCommandInput extends RegisterOnPremisesInstanceInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterOnPremisesInstanceCommand}.
+ */
 export interface RegisterOnPremisesInstanceCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>Registers an on-premises instance.</p>
- *         <note>
- *             <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request.
- *                 You cannot use both.</p>
- *         </note>
+ *          <note>
+ *             <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CodeDeployClient, RegisterOnPremisesInstanceCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
  * // const { CodeDeployClient, RegisterOnPremisesInstanceCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * // import type { CodeDeployClientConfig } from "@aws-sdk/client-codedeploy";
+ * const config = {}; // type is CodeDeployClientConfig
  * const client = new CodeDeployClient(config);
+ * const input = { // RegisterOnPremisesInstanceInput
+ *   instanceName: "STRING_VALUE", // required
+ *   iamSessionArn: "STRING_VALUE",
+ *   iamUserArn: "STRING_VALUE",
+ * };
  * const command = new RegisterOnPremisesInstanceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param RegisterOnPremisesInstanceCommandInput - {@link RegisterOnPremisesInstanceCommandInput}
+ * @returns {@link RegisterOnPremisesInstanceCommandOutput}
  * @see {@link RegisterOnPremisesInstanceCommandInput} for command's `input` shape.
  * @see {@link RegisterOnPremisesInstanceCommandOutput} for command's `response` shape.
- * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for CodeDeployClient's `config` shape.
  *
+ * @throws {@link IamArnRequiredException} (client fault)
+ *  <p>No IAM ARN was included in the request. You must use an IAM session ARN or user ARN in the request.</p>
+ *
+ * @throws {@link IamSessionArnAlreadyRegisteredException} (client fault)
+ *  <p>The request included an IAM session ARN that has already been used to
+ *             register a different instance.</p>
+ *
+ * @throws {@link IamUserArnAlreadyRegisteredException} (client fault)
+ *  <p>The specified user ARN is already registered with an on-premises instance.</p>
+ *
+ * @throws {@link IamUserArnRequiredException} (client fault)
+ *  <p>An user ARN was not specified.</p>
+ *
+ * @throws {@link InstanceNameAlreadyRegisteredException} (client fault)
+ *  <p>The specified on-premises instance name is already registered.</p>
+ *
+ * @throws {@link InstanceNameRequiredException} (client fault)
+ *  <p>An on-premises instance name was not specified.</p>
+ *
+ * @throws {@link InvalidIamSessionArnException} (client fault)
+ *  <p>The IAM session ARN was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidIamUserArnException} (client fault)
+ *  <p>The user ARN was specified in an invalid format.</p>
+ *
+ * @throws {@link InvalidInstanceNameException} (client fault)
+ *  <p>The on-premises instance name was specified in an invalid format.</p>
+ *
+ * @throws {@link MultipleIamArnsProvidedException} (client fault)
+ *  <p>Both an user ARN and an IAM session ARN were included in the request.
+ *             Use only one ARN type.</p>
+ *
+ * @throws {@link CodeDeployServiceException}
+ * <p>Base exception class for all service exceptions from CodeDeploy service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterOnPremisesInstanceCommand extends $Command<
-  RegisterOnPremisesInstanceCommandInput,
-  RegisterOnPremisesInstanceCommandOutput,
-  CodeDeployClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterOnPremisesInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeDeployClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterOnPremisesInstanceCommandInput, RegisterOnPremisesInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeDeployClient";
-    const commandName = "RegisterOnPremisesInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterOnPremisesInstanceInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class RegisterOnPremisesInstanceCommand extends command<RegisterOnPremisesInstanceCommandInput, RegisterOnPremisesInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterOnPremisesInstance",
+  RegisterOnPremisesInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterOnPremisesInstanceInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterOnPremisesInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RegisterOnPremisesInstanceCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<RegisterOnPremisesInstanceCommandOutput> {
-    return deserializeAws_json1_1RegisterOnPremisesInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterOnPremisesInstanceCommandInput;
+      output: RegisterOnPremisesInstanceCommandOutput;
+    };
+  };
 }

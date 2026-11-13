@@ -1,0 +1,189 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFeedRequest, UpdateFeedResponse } from "../models/models_0";
+import { UpdateFeed$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFeedCommand}.
+ */
+export interface UpdateFeedCommandInput extends UpdateFeedRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFeedCommand}.
+ */
+export interface UpdateFeedCommandOutput extends UpdateFeedResponse, __MetadataBearer {}
+
+/**
+ * <p>Updates the name and/or outputs in a feed. </p> <p>UpdateFeed is a PUT operation, which means that the payload that you specify completely overwrites the existing payload. </p> <p>This means that if you want to touch the array of outputs, you must pass in the full new list. So you must omit outputs you want to delete, and include outputs you want to add or modify. </p> <p>If you want to patch the array of outputs to make selective additions, use AssociateFeed. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ElementalInferenceClient, UpdateFeedCommand } from "@aws-sdk/client-elementalinference"; // ES Modules import
+ * // const { ElementalInferenceClient, UpdateFeedCommand } = require("@aws-sdk/client-elementalinference"); // CommonJS import
+ * // import type { ElementalInferenceClientConfig } from "@aws-sdk/client-elementalinference";
+ * const config = {}; // type is ElementalInferenceClientConfig
+ * const client = new ElementalInferenceClient(config);
+ * const input = { // UpdateFeedRequest
+ *   name: "STRING_VALUE", // required
+ *   accessRoleArn: "STRING_VALUE",
+ *   id: "STRING_VALUE", // required
+ *   outputs: [ // UpdateOutputList // required
+ *     { // UpdateOutput
+ *       name: "STRING_VALUE", // required
+ *       outputConfig: { // OutputConfig Union: only one key present
+ *         cropping: { // CroppingConfig
+ *           templateGroups: [ // TemplateGroupList
+ *             { // TemplateGroup
+ *               name: "STRING_VALUE", // required
+ *               templateUris: [ // TemplateUriList // required
+ *                 "STRING_VALUE",
+ *               ],
+ *             },
+ *           ],
+ *         },
+ *         clipping: { // ClippingConfig
+ *           callbackMetadata: "STRING_VALUE",
+ *           dataSourceConfiguration: { // DataSourceConfiguration
+ *             fixtureId: "STRING_VALUE", // required
+ *           },
+ *         },
+ *         subtitling: { // SubtitlingConfig
+ *           language: "eng" || "eng-au" || "eng-gb" || "eng-us" || "fra" || "ita" || "deu" || "spa" || "por", // required
+ *           aspectRatio: { // AspectRatio
+ *             width: Number("int"), // required
+ *             height: Number("int"), // required
+ *           },
+ *           dictionary: "STRING_VALUE",
+ *           profanityFilter: "DISABLED" || "CENSOR" || "DROP",
+ *         },
+ *         contextualMetadata: { // ContextualMetadataConfig
+ *           summaryGeneration: "ENABLED" || "DISABLED",
+ *           extendedAnalysis: "ENABLED" || "DISABLED",
+ *         },
+ *       },
+ *       status: "ENABLED" || "DISABLED", // required
+ *       description: "STRING_VALUE",
+ *       fromAssociation: true || false,
+ *     },
+ *   ],
+ * };
+ * const command = new UpdateFeedCommand(input);
+ * const response = await client.send(command);
+ * // { // UpdateFeedResponse
+ * //   arn: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   id: "STRING_VALUE", // required
+ * //   dataEndpoints: [ // StringList // required
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   outputs: [ // GetOutputList // required
+ * //     { // GetOutput
+ * //       name: "STRING_VALUE", // required
+ * //       outputConfig: { // OutputConfig Union: only one key present
+ * //         cropping: { // CroppingConfig
+ * //           templateGroups: [ // TemplateGroupList
+ * //             { // TemplateGroup
+ * //               name: "STRING_VALUE", // required
+ * //               templateUris: [ // TemplateUriList // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           ],
+ * //         },
+ * //         clipping: { // ClippingConfig
+ * //           callbackMetadata: "STRING_VALUE",
+ * //           dataSourceConfiguration: { // DataSourceConfiguration
+ * //             fixtureId: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         subtitling: { // SubtitlingConfig
+ * //           language: "eng" || "eng-au" || "eng-gb" || "eng-us" || "fra" || "ita" || "deu" || "spa" || "por", // required
+ * //           aspectRatio: { // AspectRatio
+ * //             width: Number("int"), // required
+ * //             height: Number("int"), // required
+ * //           },
+ * //           dictionary: "STRING_VALUE",
+ * //           profanityFilter: "DISABLED" || "CENSOR" || "DROP",
+ * //         },
+ * //         contextualMetadata: { // ContextualMetadataConfig
+ * //           summaryGeneration: "ENABLED" || "DISABLED",
+ * //           extendedAnalysis: "ENABLED" || "DISABLED",
+ * //         },
+ * //       },
+ * //       status: "ENABLED" || "DISABLED", // required
+ * //       description: "STRING_VALUE",
+ * //       fromAssociation: true || false,
+ * //     },
+ * //   ],
+ * //   accessRoleArn: "STRING_VALUE",
+ * //   status: "CREATING" || "AVAILABLE" || "ACTIVE" || "UPDATING" || "DELETING" || "DELETED" || "ARCHIVED", // required
+ * //   association: { // FeedAssociation
+ * //     associatedResourceName: "STRING_VALUE", // required
+ * //   },
+ * //   tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param UpdateFeedCommandInput - {@link UpdateFeedCommandInput}
+ * @returns {@link UpdateFeedCommandOutput}
+ * @see {@link UpdateFeedCommandInput} for command's `input` shape.
+ * @see {@link UpdateFeedCommandOutput} for command's `response` shape.
+ * @see {@link ElementalInferenceClientResolvedConfig | config} for ElementalInferenceClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be completed due to a conflict.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>An internal server error occurred. This is a temporary condition and the request can be retried. If the problem persists, contact AWS Support. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request was rejected because it would exceed one or more service quotas for your account. Review your service quotas and either delete unused resources or request a quota increase. </p>
+ *
+ * @throws {@link TooManyRequestException} (client fault)
+ *  <p>The request was denied due to request throttling. Too many requests have been made within a given time period. Reduce the frequency of requests and use exponential backoff when retrying. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the service. Check the error message for details about which parameter or field is invalid and correct the request before retrying. </p>
+ *
+ * @throws {@link ElementalInferenceServiceException}
+ * <p>Base exception class for all service exceptions from ElementalInference service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateFeedCommand extends command<UpdateFeedCommandInput, UpdateFeedCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFeed",
+  UpdateFeed$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFeedRequest;
+      output: UpdateFeedResponse;
+    };
+    sdk: {
+      input: UpdateFeedCommandInput;
+      output: UpdateFeedCommandOutput;
+    };
+  };
+}

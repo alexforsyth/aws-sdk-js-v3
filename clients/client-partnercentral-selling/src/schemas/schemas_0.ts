@@ -1,0 +1,1780 @@
+const _A = "Alias";
+const _AA = "AwsAccount";
+const _AAI = "AwsAccountId";
+const _AAIOAL = "AwsAccountIdOrAliasList";
+const _AAL = "AwsAccountList";
+const _AC = "AssigneeContact";
+const _ACD = "AfterCreatedDate";
+const _ACd = "AdditionalComments";
+const _ADE = "AccessDeniedException";
+const _AEI = "AcceptEngagementInvitation";
+const _AEIR = "AcceptEngagementInvitationRequest";
+const _AFU = "AwsFundingUsed";
+const _AI = "AccountId";
+const _ALMD = "AfterLastModifiedDate";
+const _AM = "AwsMaturity";
+const _AMO = "AwsMarketplaceOffers";
+const _AMOS = "AwsMarketplaceOfferSets";
+const _AMP = "AwsMarketplaceProducts";
+const _AMS = "AwsMarketplaceSolutions";
+const _AMSA = "AwsMarketplaceSolutionArn";
+const _AMm = "AmountMap";
+const _AN = "AccountName";
+const _AO = "AssignOpportunity";
+const _AOC = "AwsOpportunityCustomer";
+const _AOI = "AwsOpportunityInsights";
+const _AOLC = "AwsOpportunityLifeCycle";
+const _AOP = "AwsOpportunityProject";
+const _AOR = "AssignOpportunityRequest";
+const _AORE = "AwsOpportunityRelatedEntities";
+const _AORs = "AssociateOpportunityRequest";
+const _AOSFV = "AwsOpportunitySummaryFullView";
+const _AOTML = "AwsOpportunityTeamMembersList";
+const _AOs = "AssociateOpportunity";
+const _AP = "AddressPart";
+const _APD = "AwsProductDetails";
+const _API = "AwsProductInsights";
+const _APL = "AwsProductsList";
+const _APO = "AwsProductOptimization";
+const _APOL = "AwsProductOptimizationsList";
+const _APSIBS = "AwsProductsSpendInsightsBySource";
+const _APp = "ApnPrograms";
+const _APw = "AwsPartition";
+const _APws = "AwsProducts";
+const _AR = "AccountReceiver";
+const _AS = "AccountSummary";
+const _ASR = "AwsSoftwareRevenue";
+const _ASd = "AddressSummary";
+const _ASw = "AwsSubmission";
+const _ATCD = "AfterTargetCloseDate";
+const _ATM = "AwsTeamMember";
+const _AWS = "AWS";
+const _Ac = "Account";
+const _Ad = "Address";
+const _Am = "Amount";
+const _Ar = "Arn";
+const _As = "Assignee";
+const _At = "Attributes";
+const _Aw = "Aws";
+const _BCD = "BeforeCreatedDate";
+const _BLMD = "BeforeLastModifiedDate";
+const _BP = "BusinessProblem";
+const _BT = "BusinessTitle";
+const _BTCD = "BeforeTargetCloseDate";
+const _C = "Catalog";
+const _CA = "CreatedAt";
+const _CAu = "CustomerAction";
+const _CB = "CreatedBy";
+const _CBP = "CustomerBusinessProblem";
+const _CBT = "ContactBusinessTitle";
+const _CC = "CountryCode";
+const _CCL = "CustomerContactsList";
+const _CCN = "CustomerCompanyName";
+const _CCu = "CurrencyCode";
+const _CD = "CreatedDate";
+const _CDF = "CreatedDateFilter";
+const _CE = "ConflictException";
+const _CEC = "CompletedEngagementCount";
+const _CECR = "CreateEngagementContextRequest";
+const _CECRr = "CreateEngagementContextResponse";
+const _CECr = "CreateEngagementContext";
+const _CEI = "CreateEngagementInvitation";
+const _CEIR = "CreateEngagementInvitationRequest";
+const _CEIRr = "CreateEngagementInvitationResponse";
+const _CER = "CreateEngagementRequest";
+const _CERr = "CreateEngagementResponse";
+const _CEr = "CreateEngagement";
+const _CI = "ContextId";
+const _CIo = "ContextIdentifier";
+const _CLR = "ClosedLostReason";
+const _CM = "CosellMotion";
+const _CN = "CompanyName";
+const _CNa = "CampaignName";
+const _CNo = "CompetitorName";
+const _CO = "CreateOpportunity";
+const _COR = "CreateOpportunityRequest";
+const _CORr = "CreateOpportunityResponse";
+const _CP = "CustomerProject";
+const _CPC = "CustomerProjectsContext";
+const _CRS = "CreateResourceSnapshot";
+const _CRSJ = "CreateResourceSnapshotJob";
+const _CRSJR = "CreateResourceSnapshotJobRequest";
+const _CRSJRr = "CreateResourceSnapshotJobResponse";
+const _CRSR = "CreateResourceSnapshotRequest";
+const _CRSRr = "CreateResourceSnapshotResponse";
+const _CS = "CustomerSummary";
+const _CSo = "CompanySize";
+const _CT = "ClientToken";
+const _CTo = "ContextTypes";
+const _CUC = "CustomerUseCase";
+const _CWU = "CompanyWebsiteUrl";
+const _Ca = "Categories";
+const _Cat = "Category";
+const _Ch = "Channels";
+const _Ci = "City";
+const _Co = "Contacts";
+const _Cod = "Code";
+const _Con = "Contact";
+const _Cont = "Contexts";
+const _Cou = "Country";
+const _Cu = "Customer";
+const _D = "Duns";
+const _DM = "DeliveryModels";
+const _DMe = "DeliveryModel";
+const _DN = "DunsNumber";
+const _DO = "DisassociateOpportunity";
+const _DOR = "DisassociateOpportunityRequest";
+const _DRSJ = "DeleteResourceSnapshotJob";
+const _DRSJR = "DeleteResourceSnapshotJobRequest";
+const _De = "Description";
+const _Det = "Details";
+const _Di = "Discount";
+const _E = "Email";
+const _EA = "EngagementArn";
+const _EC = "EngagementCustomer";
+const _ECB = "ExcludeCreatedBy";
+const _ECBP = "EngagementCustomerBusinessProblem";
+const _ECD = "EngagementContextDetails";
+const _ECDx = "ExpectedContractDuration";
+const _ECI = "EngagementContextId";
+const _ECP = "EngagementContextPayload";
+const _ECPD = "EngagementCustomerProjectDetails";
+const _ECS = "ExpectedCustomerSpend";
+const _ECSL = "ExpectedCustomerSpendList";
+const _ECT = "ExcludeContextTypes";
+const _ECn = "EnrichmentContext";
+const _ECng = "EngagementContexts";
+const _ED = "EffectiveDate";
+const _EDn = "EngagementDescription";
+const _EDx = "ExpirationDate";
+const _EI = "EngagementIdentifier";
+const _EII = "EngagementInvitationIdentifier";
+const _EIIn = "EngagementInvitationId";
+const _EIS = "EngagementInvitationSummary";
+const _EISn = "EngagementInvitationSummaries";
+const _EIn = "EngagementId";
+const _EL = "ErrorList";
+const _ELMA = "EngagementLastModifiedAt";
+const _EM = "EngagementMember";
+const _EML = "EngagementMemberList";
+const _EMS = "EngagementMemberSummary";
+const _EMSn = "EngagementMemberSummaries";
+const _EMn = "EngagementMembers";
+const _EMx = "ExistingMembers";
+const _EP = "EligiblePrograms";
+const _EPR = "EngagementProspectingResult";
+const _EPRL = "EngagementProspectingResultList";
+const _ERAS = "EngagementResourceAssociationSummary";
+const _ERASL = "EngagementResourceAssociationSummaryList";
+const _ERASn = "EngagementResourceAssociationSummaries";
+const _ES = "EngagementScore";
+const _ESL = "EngagementSummaryList";
+const _ESn = "EngagementSort";
+const _ESng = "EngagementSummary";
+const _ET = "EngagementTitle";
+const _ETn = "EndTime";
+const _EU = "EstimationUrl";
+const _En = "Engagements";
+const _F = "Frequency";
+const _FEC = "FailedEngagementCount";
+const _FN = "FirstName";
+const _FNi = "FieldName";
+const _G = "Geo";
+const _GAOS = "GetAwsOpportunitySummary";
+const _GAOSR = "GetAwsOpportunitySummaryRequest";
+const _GAOSRe = "GetAwsOpportunitySummaryResponse";
+const _GE = "GetEngagement";
+const _GEI = "GetEngagementInvitation";
+const _GEIR = "GetEngagementInvitationRequest";
+const _GEIRe = "GetEngagementInvitationResponse";
+const _GER = "GetEngagementRequest";
+const _GERe = "GetEngagementResponse";
+const _GO = "GetOpportunity";
+const _GOR = "GetOpportunityRequest";
+const _GORe = "GetOpportunityResponse";
+const _GPFET = "GetProspectingFromEngagementTask";
+const _GPFETR = "GetProspectingFromEngagementTaskRequest";
+const _GPFETRe = "GetProspectingFromEngagementTaskResponse";
+const _GRS = "GetResourceSnapshot";
+const _GRSJ = "GetResourceSnapshotJob";
+const _GRSJR = "GetResourceSnapshotJobRequest";
+const _GRSJRe = "GetResourceSnapshotJobResponse";
+const _GRSR = "GetResourceSnapshotRequest";
+const _GRSRe = "GetResourceSnapshotResponse";
+const _GSSS = "GetSellingSystemSettings";
+const _GSSSR = "GetSellingSystemSettingsRequest";
+const _GSSSRe = "GetSellingSystemSettingsResponse";
+const _I = "Identifier";
+const _ID = "InvitationDate";
+const _IDn = "InteractionDate";
+const _IM = "InvitationMessage";
+const _IPRA = "InvitationProspectingResultAws";
+const _ISE = "InternalServerException";
+const _IT = "InvolvementType";
+const _ITCR = "InvolvementTypeChangeReason";
+const _Id = "Id";
+const _Ide = "Identifiers";
+const _In = "Industry";
+const _Ins = "Insights";
+const _Int = "Interactions";
+const _Inte = "Interaction";
+const _Inv = "Invitation";
+const _JT = "JobTitle";
+const _K = "Key";
+const _L = "Lifecycle";
+const _LA = "LeadAddress";
+const _LBP = "LeadBusinessProblem";
+const _LC = "LifeCycle";
+const _LCC = "LeadCountryCode";
+const _LCFV = "LifeCycleForView";
+const _LCRS = "LifeCycleReviewStatus";
+const _LCS = "LifeCycleSummary";
+const _LCSi = "LifeCycleStage";
+const _LCe = "LeadContact";
+const _LCea = "LeadContext";
+const _LCead = "LeadCustomer";
+const _LE = "LeadEmail";
+const _LEBAIT = "ListEngagementByAcceptingInvitationTasks";
+const _LEBAITR = "ListEngagementByAcceptingInvitationTasksRequest";
+const _LEBAITRi = "ListEngagementByAcceptingInvitationTasksResponse";
+const _LEBAITS = "ListEngagementByAcceptingInvitationTaskSummary";
+const _LEBAITSi = "ListEngagementByAcceptingInvitationTaskSummaries";
+const _LEFOT = "ListEngagementFromOpportunityTasks";
+const _LEFOTR = "ListEngagementFromOpportunityTasksRequest";
+const _LEFOTRi = "ListEngagementFromOpportunityTasksResponse";
+const _LEFOTS = "ListEngagementFromOpportunityTaskSummary";
+const _LEFOTSi = "ListEngagementFromOpportunityTaskSummaries";
+const _LEI = "ListEngagementInvitations";
+const _LEIR = "ListEngagementInvitationsRequest";
+const _LEIRi = "ListEngagementInvitationsResponse";
+const _LEM = "ListEngagementMembers";
+const _LEMR = "ListEngagementMembersRequest";
+const _LEMRi = "ListEngagementMembersResponse";
+const _LER = "ListEngagementsRequest";
+const _LERA = "ListEngagementResourceAssociations";
+const _LERAR = "ListEngagementResourceAssociationsRequest";
+const _LERARi = "ListEngagementResourceAssociationsResponse";
+const _LERi = "ListEngagementsResponse";
+const _LEi = "ListEngagements";
+const _LF = "LastFailure";
+const _LI = "LeadInsights";
+const _LIC = "LeadInvitationCustomer";
+const _LII = "LeadInvitationInteraction";
+const _LIL = "LeadInteractionList";
+const _LIP = "LeadInvitationPayload";
+const _LIe = "LeadInteraction";
+const _LIea = "LeadInvitation";
+const _LJT = "LeadJobTitle";
+const _LMD = "LastModifiedDate";
+const _LN = "LastName";
+const _LO = "ListOpportunities";
+const _LOFET = "ListOpportunityFromEngagementTasks";
+const _LOFETR = "ListOpportunityFromEngagementTasksRequest";
+const _LOFETRi = "ListOpportunityFromEngagementTasksResponse";
+const _LOFETS = "ListOpportunityFromEngagementTaskSummary";
+const _LOFETSi = "ListOpportunityFromEngagementTaskSummaries";
+const _LOR = "ListOpportunitiesRequest";
+const _LORi = "ListOpportunitiesResponse";
+const _LPFET = "ListProspectingFromEngagementTasks";
+const _LPFETR = "ListProspectingFromEngagementTasksRequest";
+const _LPFETRi = "ListProspectingFromEngagementTasksResponse";
+const _LPN = "LeadPhoneNumber";
+const _LRS = "LeadReadinessScore";
+const _LRSJ = "ListResourceSnapshotJobs";
+const _LRSJR = "ListResourceSnapshotJobsRequest";
+const _LRSJRi = "ListResourceSnapshotJobsResponse";
+const _LRSR = "ListResourceSnapshotsRequest";
+const _LRSRi = "ListResourceSnapshotsResponse";
+const _LRSi = "ListResourceSnapshots";
+const _LS = "ListSolutions";
+const _LSED = "LastSuccessfulExecutionDate";
+const _LSR = "ListSolutionsRequest";
+const _LSRi = "ListSolutionsResponse";
+const _LTFR = "ListTagsForResource";
+const _LTFRR = "ListTagsForResourceRequest";
+const _LTFRRi = "ListTagsForResourceResponse";
+const _LTSB = "ListTasksSortBase";
+const _LWU = "LeadWebsiteUrl";
+const _Le = "Lead";
+const _M = "Message";
+const _MA = "MonetaryAmount";
+const _MAo = "ModifiedAt";
+const _MB = "ModifiedBy";
+const _MC = "MemberCount";
+const _MCN = "MemberCompanyName";
+const _MES = "MarketplaceEngagementScore";
+const _MR = "MaxResults";
+const _MS = "MarketSegment";
+const _MV = "MonetaryValue";
+const _Ma = "Marketing";
+const _N = "Name";
+const _NBA = "NextBestActions";
+const _NS = "NextSteps";
+const _NSH = "NextStepsHistory";
+const _NSHe = "NextStepsHistories";
+const _NSa = "NationalSecurity";
+const _NT = "NextToken";
+const _O = "Origin";
+const _OA = "OptimizedAmount";
+const _OCN = "OtherCompetitorNames";
+const _OEIS = "OpportunityEngagementInvitationSort";
+const _OI = "OtherIndustry";
+const _OIP = "OpportunityInvitationPayload";
+const _OIp = "OpportunityIdentifier";
+const _OIpp = "OpportunityId";
+const _OIppo = "OpportunityInvitation";
+const _OQ = "OpportunityQuality";
+const _OS = "OpportunitySummaries";
+const _OSD = "OtherSolutionDescription";
+const _OSV = "OpportunitySummaryView";
+const _OSp = "OpportunitySort";
+const _OSpp = "OpportunitySummary";
+const _OT = "OpportunityTeam";
+const _OTp = "OpportunityType";
+const _Op = "Optimizations";
+const _P = "Phone";
+const _PC = "PostalCode";
+const _PCr = "ProductCode";
+const _PD = "ProjectDetails";
+const _PFETS = "ProspectingFromEngagementTaskSort";
+const _PI = "ProspectingInsights";
+const _PN = "PhoneNumber";
+const _PNFA = "PrimaryNeedsFromAws";
+const _PNSH = "ProfileNextStepsHistory";
+const _PNSHr = "ProfileNextStepsHistories";
+const _POI = "PartnerOpportunityIdentifier";
+const _POTML = "PartnerOpportunityTeamMembersList";
+const _PPS = "PublicProfileSummary";
+const _PR = "ProspectingResult";
+const _PRA = "ProspectingResultAws";
+const _PRC = "ProspectingResultCustomer";
+const _PS = "PiiString";
+const _PSA = "PotentialSavingsAmount";
+const _PSSS = "PutSellingSystemSettings";
+const _PSSSR = "PutSellingSystemSettingsRequest";
+const _PSSSRu = "PutSellingSystemSettingsResponse";
+const _PSr = "ProjectSummary";
+const _PT = "PayloadType";
+const _PTS = "ProspectingTaskSummary";
+const _PTSL = "ProspectingTaskSummaryList";
+const _PTa = "ParticipantType";
+const _PV = "ProjectView";
+const _Pa = "Partner";
+const _Pay = "Payload";
+const _Pr = "Project";
+const _QS = "QualificationStatus";
+const _R = "Reason";
+const _RA = "ResourceArn";
+const _RC = "ReasonCode";
+const _RCe = "ReviewComments";
+const _REI = "RelatedEntityIdentifier";
+const _REIR = "RejectEngagementInvitationRequest";
+const _REIe = "RelatedEntityIds";
+const _REIej = "RejectEngagementInvitation";
+const _REIel = "RelatedEntityIdentifiers";
+const _RET = "RelatedEntityType";
+const _RI = "ResourceIdentifier";
+const _RIe = "ResourceId";
+const _RL = "RecommendationList";
+const _RNFE = "ResourceNotFoundException";
+const _ROI = "RelatedOpportunityId";
+const _ROIe = "RelatedOpportunityIdentifier";
+const _RR = "RejectionReason";
+const _RRe = "ReceiverResponsibilities";
+const _RS = "ReviewStatus";
+const _RSJI = "ResourceSnapshotJobIdentifier";
+const _RSJIe = "ResourceSnapshotJobId";
+const _RSJRA = "ResourceSnapshotJobRoleArn";
+const _RSJRI = "ResourceSnapshotJobRoleIdentifier";
+const _RSJS = "ResourceSnapshotJobSummaries";
+const _RSJSL = "ResourceSnapshotJobSummaryList";
+const _RSJSe = "ResourceSnapshotJobSummary";
+const _RSP = "ResourceSnapshotPayload";
+const _RSR = "ReviewStatusReason";
+const _RSS = "ResourceSnapshotSummaries";
+const _RSSL = "ResourceSnapshotSummaryList";
+const _RSSe = "ResourceSnapshotSummary";
+const _RSTI = "ResourceSnapshotTemplateIdentifier";
+const _RSTN = "ResourceSnapshotTemplateName";
+const _RT = "ResourceType";
+const _Re = "Recommendations";
+const _Rec = "Receiver";
+const _Reco = "Recommendation";
+const _Reg = "Region";
+const _Rev = "Revision";
+const _S = "Stage";
+const _SA = "StreetAddress";
+const _SAAI = "SenderAwsAccountId";
+const _SAa = "SavingsAmount";
+const _SAal = "SalesActivities";
+const _SAt = "StartAfter";
+const _SB = "SortBy";
+const _SBo = "SolutionBase";
+const _SBt = "StartBefore";
+const _SC = "ServiceCode";
+const _SCE = "SenderContactEmail";
+const _SCL = "SenderContactList";
+const _SCN = "SenderCompanyName";
+const _SCe = "SenderContacts";
+const _SCen = "SenderContact";
+const _SCo = "SolutionCategory";
+const _SEBAIT = "StartEngagementByAcceptingInvitationTask";
+const _SEBAITR = "StartEngagementByAcceptingInvitationTaskRequest";
+const _SEBAITRt = "StartEngagementByAcceptingInvitationTaskResponse";
+const _SEFOT = "StartEngagementFromOpportunityTask";
+const _SEFOTR = "StartEngagementFromOpportunityTaskRequest";
+const _SEFOTRt = "StartEngagementFromOpportunityTaskResponse";
+const _SI = "SourceId";
+const _SIu = "SubIndustry";
+const _SL = "SolutionList";
+const _SN = "SourceName";
+const _SO = "SortOrder";
+const _SOFET = "StartOpportunityFromEngagementTask";
+const _SOFETR = "StartOpportunityFromEngagementTaskRequest";
+const _SOFETRt = "StartOpportunityFromEngagementTaskResponse";
+const _SOR = "StateOrRegion";
+const _SORu = "SubmitOpportunityRequest";
+const _SOo = "SortObject";
+const _SOu = "SubmitOpportunity";
+const _SPFET = "StartProspectingFromEngagementTask";
+const _SPFETR = "StartProspectingFromEngagementTaskRequest";
+const _SPFETRt = "StartProspectingFromEngagementTaskResponse";
+const _SQEE = "ServiceQuotaExceededException";
+const _SR = "SoftwareRevenue";
+const _SRSJ = "StartResourceSnapshotJob";
+const _SRSJR = "StartResourceSnapshotJobRequest";
+const _SRSJRt = "StopResourceSnapshotJobRequest";
+const _SRSJt = "StopResourceSnapshotJob";
+const _SRu = "SubRegion";
+const _SS = "SolutionSummaries";
+const _SSC = "SolutionSubCategory";
+const _SSo = "SolutionScore";
+const _SSol = "SolutionSort";
+const _ST = "StartTime";
+const _STo = "SourceType";
+const _Sc = "Score";
+const _Se = "Segment";
+const _So = "Solutions";
+const _Sor = "Sort";
+const _Sou = "Source";
+const _St = "Status";
+const _T = "Type";
+const _TA = "TotalAmount";
+const _TABC = "TotalAmountByCategory";
+const _TAa = "TaskArn";
+const _TC = "TargetCompany";
+const _TCD = "TargetCloseDate";
+const _TCDF = "TargetCloseDateFilter";
+const _TCDa = "TargetCompletionDate";
+const _TE = "ThrottlingException";
+const _TEC = "TotalEngagementCount";
+const _TI = "TaskIdentifier";
+const _TIa = "TaskId";
+const _TK = "TagKeys";
+const _TL = "TagList";
+const _TMA = "TargetMemberAccounts";
+const _TN = "TaskName";
+const _TOA = "TotalOptimizedAmount";
+const _TPSA = "TotalPotentialSavingsAmount";
+const _TR = "TagResource";
+const _TRR = "TagResourceRequest";
+const _TRRa = "TagResourceResponse";
+const _TS = "TaskStatus";
+const _TSa = "TaskSummaries";
+const _Ta = "Tags";
+const _Tag = "Tag";
+const _Te = "Term";
+const _Ti = "Title";
+const _Tim = "Time";
+const _Tr = "Trend";
+const _U = "Usecase";
+const _UC = "UseCases";
+const _UEC = "UpdateEngagementContext";
+const _UECP = "UpdateEngagementContextPayload";
+const _UECR = "UpdateEngagementContextRequest";
+const _UECRp = "UpdateEngagementContextResponse";
+const _ULC = "UpdateLeadContext";
+const _UO = "UpdateOpportunity";
+const _UOR = "UpdateOpportunityRequest";
+const _UORp = "UpdateOpportunityResponse";
+const _UR = "UntagResource";
+const _URR = "UntagResourceRequest";
+const _URRn = "UntagResourceResponse";
+const _V = "Visibility";
+const _VE = "ValidationException";
+const _VEE = "ValidationExceptionError";
+const _VEEL = "ValidationExceptionErrorList";
+const _Va = "Value";
+const _WU = "WebsiteUrl";
+const _c = "client";
+const _e = "error";
+const _h = "http";
+const _hE = "httpError";
+const _s = "smithy.ts.sdk.synthetic.com.amazonaws.partnercentralselling";
+const _se = "server";
+const n0 = "com.amazonaws.partnercentralselling";
+
+// smithy-typescript generated code
+import { TypeRegistry } from "@smithy/core/schema";
+import type {
+  StaticErrorSchema,
+  StaticListSchema,
+  StaticMapSchema,
+  StaticOperationSchema,
+  StaticSimpleSchema,
+  StaticStructureSchema,
+  StaticUnionSchema,
+} from "@smithy/types";
+
+import {
+  AccessDeniedException,
+  ConflictException,
+  InternalServerException,
+  ResourceNotFoundException,
+  ServiceQuotaExceededException,
+  ThrottlingException,
+  ValidationException,
+} from "../models/errors";
+import { PartnerCentralSellingServiceException } from "../models/PartnerCentralSellingServiceException";
+
+/* eslint no-var: 0 */
+const _s_registry = new TypeRegistry(_s);
+export var PartnerCentralSellingServiceException$: StaticErrorSchema = [-3, _s, "PartnerCentralSellingServiceException", 0, [], []];
+_s_registry.registerError(PartnerCentralSellingServiceException$, PartnerCentralSellingServiceException);
+const n0_registry = new TypeRegistry(n0);
+export var AccessDeniedException$: StaticErrorSchema = [-3, n0, _ADE,
+  { [_e]: _c, [_hE]: 403 },
+  [_M, _R],
+  [0, 0]
+];
+n0_registry.registerError(AccessDeniedException$, AccessDeniedException);
+export var ConflictException$: StaticErrorSchema = [-3, n0, _CE,
+  { [_e]: _c, [_hE]: 409 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ConflictException$, ConflictException);
+export var InternalServerException$: StaticErrorSchema = [-3, n0, _ISE,
+  { [_e]: _se, [_hE]: 500 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(InternalServerException$, InternalServerException);
+export var ResourceNotFoundException$: StaticErrorSchema = [-3, n0, _RNFE,
+  { [_e]: _c, [_hE]: 404 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ResourceNotFoundException$, ResourceNotFoundException);
+export var ServiceQuotaExceededException$: StaticErrorSchema = [-3, n0, _SQEE,
+  { [_e]: _c, [_hE]: 402 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ServiceQuotaExceededException$, ServiceQuotaExceededException);
+export var ThrottlingException$: StaticErrorSchema = [-3, n0, _TE,
+  { [_e]: _c, [_hE]: 429 },
+  [_M],
+  [0]
+];
+n0_registry.registerError(ThrottlingException$, ThrottlingException);
+export var ValidationException$: StaticErrorSchema = [-3, n0, _VE,
+  { [_e]: _c, [_hE]: 400 },
+  [_M, _R, _EL],
+  [0, 0, () => ValidationExceptionErrorList], 2
+];
+n0_registry.registerError(ValidationException$, ValidationException);
+/**
+ * TypeRegistry instances containing modeled errors.
+ * @internal
+ *
+ */
+export const errorTypeRegistries = [
+  _s_registry,
+  n0_registry,
+]
+var AddressPart: StaticSimpleSchema = [0, n0, _AP, 8, 0];
+var Alias: StaticSimpleSchema = [0, n0, _A, 8, 0];
+var Amount: StaticSimpleSchema = [0, n0, _Am, 8, 0];
+var AwsAccount: StaticSimpleSchema = [0, n0, _AA, 8, 0];
+var CompanyName: StaticSimpleSchema = [0, n0, _CN, 8, 0];
+var CompanyWebsiteUrl: StaticSimpleSchema = [0, n0, _CWU, 8, 0];
+var CountryCode: StaticSimpleSchema = [0, n0, _CC, 8, 0];
+var CurrencyCode: StaticSimpleSchema = [0, n0, _CCu, 8, 0];
+var DunsNumber: StaticSimpleSchema = [0, n0, _DN, 8, 0];
+var Email: StaticSimpleSchema = [0, n0, _E, 8, 0];
+var EngagementCustomerBusinessProblem: StaticSimpleSchema = [0, n0, _ECBP, 8, 0];
+var InvitationMessage: StaticSimpleSchema = [0, n0, _IM, 8, 0];
+var JobTitle: StaticSimpleSchema = [0, n0, _JT, 8, 0];
+var LeadBusinessProblem: StaticSimpleSchema = [0, n0, _LBP, 8, 0];
+var LeadCountryCode: StaticSimpleSchema = [0, n0, _LCC, 8, 0];
+var LeadEmail: StaticSimpleSchema = [0, n0, _LE, 8, 0];
+var LeadJobTitle: StaticSimpleSchema = [0, n0, _LJT, 8, 0];
+var LeadPhoneNumber: StaticSimpleSchema = [0, n0, _LPN, 8, 0];
+var LeadWebsiteUrl: StaticSimpleSchema = [0, n0, _LWU, 8, 0];
+var MemberCompanyName: StaticSimpleSchema = [0, n0, _MCN, 8, 0];
+var MonetaryAmount: StaticSimpleSchema = [0, n0, _MA, 8, 0];
+var Name: StaticSimpleSchema = [0, n0, _N, 8, 0];
+var PhoneNumber: StaticSimpleSchema = [0, n0, _PN, 8, 0];
+var PiiString: StaticSimpleSchema = [0, n0, _PS, 8, 0];
+var SenderContactEmail: StaticSimpleSchema = [0, n0, _SCE, 8, 0];
+var WebsiteUrl: StaticSimpleSchema = [0, n0, _WU, 8, 0];
+export var AcceptEngagementInvitationRequest$: StaticStructureSchema = [3, n0, _AEIR,
+  0,
+  [_C, _I],
+  [0, 0], 2
+];
+export var Account$: StaticStructureSchema = [3, n0, _Ac,
+  0,
+  [_CN, _In, _OI, _WU, _AAI, _Ad, _D],
+  [[() => Name, 0], 0, 0, [() => WebsiteUrl, 0], [() => AwsAccount, 0], [() => Address$, 0], [() => DunsNumber, 0]], 1
+];
+export var AccountReceiver$: StaticStructureSchema = [3, n0, _AR,
+  0,
+  [_AAI, _A],
+  [[() => AwsAccount, 0], [() => Alias, 0]], 1
+];
+export var AccountSummary$: StaticStructureSchema = [3, n0, _AS,
+  0,
+  [_CN, _In, _OI, _WU, _Ad],
+  [[() => Name, 0], 0, 0, [() => WebsiteUrl, 0], [() => AddressSummary$, 0]], 1
+];
+export var Address$: StaticStructureSchema = [3, n0, _Ad,
+  0,
+  [_Ci, _PC, _SOR, _CC, _SA],
+  [[() => AddressPart, 0], [() => AddressPart, 0], [() => AddressPart, 0], [() => CountryCode, 0], [() => AddressPart, 0]]
+];
+export var AddressSummary$: StaticStructureSchema = [3, n0, _ASd,
+  0,
+  [_Ci, _PC, _SOR, _CC],
+  [[() => AddressPart, 0], [() => AddressPart, 0], [() => AddressPart, 0], [() => CountryCode, 0]]
+];
+export var AssigneeContact$: StaticStructureSchema = [3, n0, _AC,
+  0,
+  [_E, _FN, _LN, _BT, _P],
+  [[() => Email, 0], [() => Name, 0], [() => Name, 0], [() => JobTitle, 0], [() => PhoneNumber, 0]], 4
+];
+export var AssignOpportunityRequest$: StaticStructureSchema = [3, n0, _AOR,
+  0,
+  [_C, _I, _As],
+  [0, 0, [() => AssigneeContact$, 0]], 3
+];
+export var AssociateOpportunityRequest$: StaticStructureSchema = [3, n0, _AORs,
+  0,
+  [_C, _OIp, _RET, _REI],
+  [0, 0, 0, 0], 4
+];
+export var AwsOpportunityCustomer$: StaticStructureSchema = [3, n0, _AOC,
+  0,
+  [_Co],
+  [[() => CustomerContactsList, 0]]
+];
+export var AwsOpportunityInsights$: StaticStructureSchema = [3, n0, _AOI,
+  0,
+  [_NBA, _ES, _APSIBS, _OQ, _Re],
+  [0, 0, [() => AwsProductsSpendInsightsBySource$, 0], () => OpportunityQuality$, () => RecommendationList]
+];
+export var AwsOpportunityLifeCycle$: StaticStructureSchema = [3, n0, _AOLC,
+  0,
+  [_TCD, _CLR, _S, _NS, _NSH],
+  [0, 0, 0, [() => PiiString, 0], () => ProfileNextStepsHistories]
+];
+export var AwsOpportunityProject$: StaticStructureSchema = [3, n0, _AOP,
+  0,
+  [_ECS, _APw],
+  [[() => ExpectedCustomerSpendList, 0], 0]
+];
+export var AwsOpportunityRelatedEntities$: StaticStructureSchema = [3, n0, _AORE,
+  0,
+  [_APws, _So, _AMS, _AMP],
+  [64 | 0, 64 | 0, 64 | 0, 64 | 0]
+];
+export var AwsOpportunitySummaryFullView$: StaticStructureSchema = [3, n0, _AOSFV,
+  0,
+  [_ROI, _O, _IT, _V, _LC, _OT, _Ins, _ITCR, _REIe, _Cu, _Pr, _CM, _SR],
+  [0, 0, 0, 0, [() => AwsOpportunityLifeCycle$, 0], [() => AwsOpportunityTeamMembersList, 0], [() => AwsOpportunityInsights$, 0], 0, () => AwsOpportunityRelatedEntities$, [() => AwsOpportunityCustomer$, 0], [() => AwsOpportunityProject$, 0], 0, [() => AwsSoftwareRevenue$, 0]]
+];
+export var AwsProductDetails$: StaticStructureSchema = [3, n0, _APD,
+  0,
+  [_PCr, _Ca, _Op, _SC, _Am, _OA, _PSA],
+  [0, 64 | 0, [() => AwsProductOptimizationsList, 0], 0, [() => MonetaryAmount, 0], [() => MonetaryAmount, 0], [() => MonetaryAmount, 0]], 3
+];
+export var AwsProductInsights$: StaticStructureSchema = [3, n0, _API,
+  0,
+  [_CCu, _F, _TABC, _APws, _TA, _TOA, _TPSA],
+  [[() => CurrencyCode, 0], 0, [() => AmountMap, 0], [() => AwsProductsList, 0], [() => MonetaryAmount, 0], [() => MonetaryAmount, 0], [() => MonetaryAmount, 0]], 4
+];
+export var AwsProductOptimization$: StaticStructureSchema = [3, n0, _APO,
+  0,
+  [_De, _SAa],
+  [0, [() => MonetaryAmount, 0]], 2
+];
+export var AwsProductsSpendInsightsBySource$: StaticStructureSchema = [3, n0, _APSIBS,
+  0,
+  [_Pa, _AWS],
+  [[() => AwsProductInsights$, 0], [() => AwsProductInsights$, 0]]
+];
+export var AwsSoftwareRevenue$: StaticStructureSchema = [3, n0, _ASR,
+  0,
+  [_Va, _Di, _ED, _EDx],
+  [[() => MonetaryValue$, 0], 0, 0, 0]
+];
+export var AwsSubmission$: StaticStructureSchema = [3, n0, _ASw,
+  0,
+  [_IT, _V],
+  [0, 0], 1
+];
+export var AwsTeamMember$: StaticStructureSchema = [3, n0, _ATM,
+  0,
+  [_E, _FN, _LN, _BT],
+  [[() => Email, 0], [() => Name, 0], [() => Name, 0], 0]
+];
+export var Contact$: StaticStructureSchema = [3, n0, _Con,
+  0,
+  [_E, _FN, _LN, _BT, _P],
+  [[() => Email, 0], [() => Name, 0], [() => Name, 0], [() => JobTitle, 0], [() => PhoneNumber, 0]]
+];
+export var CreatedDateFilter$: StaticStructureSchema = [3, n0, _CDF,
+  0,
+  [_ACD, _BCD],
+  [5, 5]
+];
+export var CreateEngagementContextRequest$: StaticStructureSchema = [3, n0, _CECR,
+  0,
+  [_C, _EI, _T, _Pay, _CT],
+  [0, 0, 0, [() => EngagementContextPayload$, 0], [0, 4]], 4
+];
+export var CreateEngagementContextResponse$: StaticStructureSchema = [3, n0, _CECRr,
+  0,
+  [_EIn, _EA, _ELMA, _CI],
+  [0, 0, 5, 0]
+];
+export var CreateEngagementInvitationRequest$: StaticStructureSchema = [3, n0, _CEIR,
+  0,
+  [_C, _EI, _Inv, _CT],
+  [0, 0, [() => Invitation$, 0], [0, 4]], 3
+];
+export var CreateEngagementInvitationResponse$: StaticStructureSchema = [3, n0, _CEIRr,
+  0,
+  [_Id, _Ar],
+  [0, 0], 2
+];
+export var CreateEngagementRequest$: StaticStructureSchema = [3, n0, _CER,
+  0,
+  [_C, _CT, _Ti, _De, _Cont],
+  [0, [0, 4], 0, 0, [() => EngagementContexts, 0]], 1
+];
+export var CreateEngagementResponse$: StaticStructureSchema = [3, n0, _CERr,
+  0,
+  [_Id, _Ar, _MAo],
+  [0, 0, 5]
+];
+export var CreateOpportunityRequest$: StaticStructureSchema = [3, n0, _COR,
+  0,
+  [_C, _PNFA, _NSa, _POI, _Cu, _Pr, _OTp, _Ma, _SR, _CT, _LC, _O, _OT, _Ta],
+  [0, 64 | 0, 0, 0, [() => Customer$, 0], [() => Project$, 0], 0, () => Marketing$, [() => SoftwareRevenue$, 0], [0, 4], [() => LifeCycle$, 0], 0, [() => PartnerOpportunityTeamMembersList, 0], () => TagList], 1
+];
+export var CreateOpportunityResponse$: StaticStructureSchema = [3, n0, _CORr,
+  0,
+  [_Id, _POI, _LMD],
+  [0, 0, 5], 1
+];
+export var CreateResourceSnapshotJobRequest$: StaticStructureSchema = [3, n0, _CRSJR,
+  0,
+  [_C, _EI, _RT, _RI, _RSTI, _CT, _Ta],
+  [0, 0, 0, 0, 0, [0, 4], () => TagList], 5
+];
+export var CreateResourceSnapshotJobResponse$: StaticStructureSchema = [3, n0, _CRSJRr,
+  0,
+  [_Id, _Ar],
+  [0, 0]
+];
+export var CreateResourceSnapshotRequest$: StaticStructureSchema = [3, n0, _CRSR,
+  0,
+  [_C, _EI, _RT, _RI, _RSTI, _CT],
+  [0, 0, 0, 0, 0, [0, 4]], 5
+];
+export var CreateResourceSnapshotResponse$: StaticStructureSchema = [3, n0, _CRSRr,
+  0,
+  [_Ar, _Rev],
+  [0, 1]
+];
+export var Customer$: StaticStructureSchema = [3, n0, _Cu,
+  0,
+  [_Ac, _Co],
+  [[() => Account$, 0], [() => CustomerContactsList, 0]]
+];
+export var CustomerProjectsContext$: StaticStructureSchema = [3, n0, _CPC,
+  0,
+  [_Cu, _Pr],
+  [[() => EngagementCustomer$, 0], [() => EngagementCustomerProjectDetails$, 0]]
+];
+export var CustomerSummary$: StaticStructureSchema = [3, n0, _CS,
+  0,
+  [_Ac],
+  [[() => AccountSummary$, 0]]
+];
+export var DeleteResourceSnapshotJobRequest$: StaticStructureSchema = [3, n0, _DRSJR,
+  0,
+  [_C, _RSJI],
+  [0, 0], 2
+];
+export var DisassociateOpportunityRequest$: StaticStructureSchema = [3, n0, _DOR,
+  0,
+  [_C, _OIp, _RET, _REI],
+  [0, 0, 0, 0], 4
+];
+export var EngagementContextDetails$: StaticStructureSchema = [3, n0, _ECD,
+  0,
+  [_T, _Id, _Pay],
+  [0, 0, [() => EngagementContextPayload$, 0]], 1
+];
+export var EngagementCustomer$: StaticStructureSchema = [3, n0, _EC,
+  0,
+  [_In, _CN, _WU, _CC],
+  [0, [() => CompanyName, 0], [() => CompanyWebsiteUrl, 0], [() => CountryCode, 0]], 4
+];
+export var EngagementCustomerProjectDetails$: StaticStructureSchema = [3, n0, _ECPD,
+  0,
+  [_Ti, _BP, _TCDa],
+  [0, [() => EngagementCustomerBusinessProblem, 0], 0], 3
+];
+export var EngagementInvitationSummary$: StaticStructureSchema = [3, n0, _EIS,
+  0,
+  [_Id, _C, _Ar, _PT, _EIn, _ET, _St, _ID, _EDx, _SAAI, _SCN, _Rec, _PTa],
+  [0, 0, 0, 0, 0, 0, 0, 5, 5, [() => AwsAccount, 0], 0, [() => Receiver$, 0], 0], 2
+];
+export var EngagementMember$: StaticStructureSchema = [3, n0, _EM,
+  0,
+  [_CN, _WU, _AI],
+  [[() => MemberCompanyName, 0], 0, [() => AwsAccount, 0]]
+];
+export var EngagementMemberSummary$: StaticStructureSchema = [3, n0, _EMS,
+  0,
+  [_CN, _WU],
+  [[() => MemberCompanyName, 0], 0]
+];
+export var EngagementProspectingResult$: StaticStructureSchema = [3, n0, _EPR,
+  0,
+  [_EI, _St, _ECI, _RC, _M],
+  [0, 0, 0, 0, 0], 2
+];
+export var EngagementResourceAssociationSummary$: StaticStructureSchema = [3, n0, _ERAS,
+  0,
+  [_C, _EIn, _RT, _RIe, _CB],
+  [0, 0, 0, 0, [() => AwsAccount, 0]], 1
+];
+export var EngagementSort$: StaticStructureSchema = [3, n0, _ESn,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var EngagementSummary$: StaticStructureSchema = [3, n0, _ESng,
+  0,
+  [_Ar, _Id, _Ti, _CA, _CB, _MC, _MAo, _MB, _CTo],
+  [0, 0, 0, 5, [() => AwsAccount, 0], 1, 5, [() => AwsAccount, 0], 64 | 0]
+];
+export var EnrichmentContext$: StaticStructureSchema = [3, n0, _ECn,
+  0,
+  [_PRA, _LI],
+  [[() => InvitationProspectingResultAws$, 0], () => LeadInsights$]
+];
+export var ExpectedContractDuration$: StaticStructureSchema = [3, n0, _ECDx,
+  0,
+  [_Te, _Va],
+  [0, 0], 2
+];
+export var ExpectedCustomerSpend$: StaticStructureSchema = [3, n0, _ECS,
+  0,
+  [_CCu, _F, _TC, _Am, _EU],
+  [[() => CurrencyCode, 0], 0, 0, [() => Amount, 0], 0], 3
+];
+export var GetAwsOpportunitySummaryRequest$: StaticStructureSchema = [3, n0, _GAOSR,
+  0,
+  [_C, _ROIe],
+  [0, 0], 2
+];
+export var GetAwsOpportunitySummaryResponse$: StaticStructureSchema = [3, n0, _GAOSRe,
+  0,
+  [_C, _ROI, _O, _IT, _V, _LC, _OT, _Ins, _ITCR, _REIe, _Cu, _Pr, _CM, _SR],
+  [0, 0, 0, 0, 0, [() => AwsOpportunityLifeCycle$, 0], [() => AwsOpportunityTeamMembersList, 0], [() => AwsOpportunityInsights$, 0], 0, () => AwsOpportunityRelatedEntities$, [() => AwsOpportunityCustomer$, 0], [() => AwsOpportunityProject$, 0], 0, [() => AwsSoftwareRevenue$, 0]], 1
+];
+export var GetEngagementInvitationRequest$: StaticStructureSchema = [3, n0, _GEIR,
+  0,
+  [_C, _I],
+  [0, 0], 2
+];
+export var GetEngagementInvitationResponse$: StaticStructureSchema = [3, n0, _GEIRe,
+  0,
+  [_Id, _C, _Ar, _PT, _EIn, _ET, _St, _ID, _EDx, _SAAI, _SCN, _Rec, _RR, _Pay, _IM, _EDn, _EMx, _ECn],
+  [0, 0, 0, 0, 0, 0, 0, 5, 5, [() => AwsAccount, 0], 0, [() => Receiver$, 0], 0, [() => Payload$, 0], [() => InvitationMessage, 0], 0, [() => EngagementMemberSummaries, 0], [() => EnrichmentContext$, 0]], 2
+];
+export var GetEngagementRequest$: StaticStructureSchema = [3, n0, _GER,
+  0,
+  [_C, _I],
+  [0, 0], 2
+];
+export var GetEngagementResponse$: StaticStructureSchema = [3, n0, _GERe,
+  0,
+  [_Id, _Ar, _Ti, _De, _CA, _CB, _MC, _MAo, _MB, _Cont],
+  [0, 0, 0, 0, 5, [() => AwsAccount, 0], 1, 5, [() => AwsAccount, 0], [() => EngagementContexts, 0]]
+];
+export var GetOpportunityRequest$: StaticStructureSchema = [3, n0, _GOR,
+  0,
+  [_C, _I],
+  [0, 0], 2
+];
+export var GetOpportunityResponse$: StaticStructureSchema = [3, n0, _GORe,
+  0,
+  [_C, _Id, _LMD, _CD, _REIel, _PNFA, _NSa, _POI, _Cu, _Pr, _OTp, _Ma, _SR, _Ar, _LC, _OT],
+  [0, 0, 5, 5, () => RelatedEntityIdentifiers$, 64 | 0, 0, 0, [() => Customer$, 0], [() => Project$, 0], 0, () => Marketing$, [() => SoftwareRevenue$, 0], 0, [() => LifeCycle$, 0], [() => PartnerOpportunityTeamMembersList, 0]], 5
+];
+export var GetProspectingFromEngagementTaskRequest$: StaticStructureSchema = [3, n0, _GPFETR,
+  0,
+  [_C, _TI],
+  [0, 0], 2
+];
+export var GetProspectingFromEngagementTaskResponse$: StaticStructureSchema = [3, n0, _GPFETRe,
+  0,
+  [_TIa, _TAa, _TN, _ST, _En, _ETn],
+  [0, 0, 0, 5, () => EngagementProspectingResultList, 5], 5
+];
+export var GetResourceSnapshotJobRequest$: StaticStructureSchema = [3, n0, _GRSJR,
+  0,
+  [_C, _RSJI],
+  [0, 0], 2
+];
+export var GetResourceSnapshotJobResponse$: StaticStructureSchema = [3, n0, _GRSJRe,
+  0,
+  [_C, _Id, _Ar, _EIn, _RT, _RIe, _RA, _RSTN, _CA, _St, _LSED, _LF],
+  [0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0], 1
+];
+export var GetResourceSnapshotRequest$: StaticStructureSchema = [3, n0, _GRSR,
+  0,
+  [_C, _EI, _RT, _RI, _RSTI, _Rev],
+  [0, 0, 0, 0, 0, 1], 5
+];
+export var GetResourceSnapshotResponse$: StaticStructureSchema = [3, n0, _GRSRe,
+  0,
+  [_C, _Ar, _CB, _CA, _EIn, _RT, _RIe, _RSTN, _Rev, _Pay, _TMA],
+  [0, 0, [() => AwsAccount, 0], 5, 0, 0, 0, 0, 1, [() => ResourceSnapshotPayload$, 0], [() => AwsAccountIdOrAliasList, 0]], 1
+];
+export var GetSellingSystemSettingsRequest$: StaticStructureSchema = [3, n0, _GSSSR,
+  0,
+  [_C],
+  [0], 1
+];
+export var GetSellingSystemSettingsResponse$: StaticStructureSchema = [3, n0, _GSSSRe,
+  0,
+  [_C, _RSJRA],
+  [0, 0], 1
+];
+export var Invitation$: StaticStructureSchema = [3, n0, _Inv,
+  0,
+  [_M, _Rec, _Pay],
+  [[() => InvitationMessage, 0], [() => Receiver$, 0], [() => Payload$, 0]], 3
+];
+export var InvitationProspectingResultAws$: StaticStructureSchema = [3, n0, _IPRA,
+  0,
+  [_Cu, _Ins],
+  [[() => ProspectingResultCustomer$, 0], () => ProspectingInsights$]
+];
+export var LastModifiedDate$: StaticStructureSchema = [3, n0, _LMD,
+  0,
+  [_ALMD, _BLMD],
+  [5, 5]
+];
+export var LeadAddress$: StaticStructureSchema = [3, n0, _LA,
+  0,
+  [_Ci, _PC, _SOR, _CC],
+  [0, 0, 0, [() => LeadCountryCode, 0]]
+];
+export var LeadContact$: StaticStructureSchema = [3, n0, _LCe,
+  0,
+  [_BT, _E, _FN, _LN, _P],
+  [[() => LeadJobTitle, 0], [() => LeadEmail, 0], [() => Name, 0], [() => Name, 0], [() => LeadPhoneNumber, 0]], 4
+];
+export var LeadContext$: StaticStructureSchema = [3, n0, _LCea,
+  0,
+  [_Cu, _Int, _Ins, _QS],
+  [[() => LeadCustomer$, 0], [() => LeadInteractionList, 0], () => LeadInsights$, 0], 2
+];
+export var LeadCustomer$: StaticStructureSchema = [3, n0, _LCead,
+  0,
+  [_CN, _In, _WU, _Ad, _AM, _MS],
+  [[() => CompanyName, 0], 0, [() => LeadWebsiteUrl, 0], [() => LeadAddress$, 0], 0, 0], 1
+];
+export var LeadInsights$: StaticStructureSchema = [3, n0, _LI,
+  0,
+  [_LRS],
+  [0]
+];
+export var LeadInteraction$: StaticStructureSchema = [3, n0, _LIe,
+  0,
+  [_Con, _STo, _SI, _SN, _U, _IDn, _CAu, _BP],
+  [[() => LeadContact$, 0], 0, 0, 0, 0, 5, 0, [() => LeadBusinessProblem, 0]], 1
+];
+export var LeadInvitationCustomer$: StaticStructureSchema = [3, n0, _LIC,
+  0,
+  [_CN, _In, _WU, _CC, _AM, _MS],
+  [[() => CompanyName, 0], 0, [() => LeadWebsiteUrl, 0], [() => LeadCountryCode, 0], 0, 0], 1
+];
+export var LeadInvitationInteraction$: StaticStructureSchema = [3, n0, _LII,
+  0,
+  [_CBT, _STo, _SI, _SN, _U],
+  [[() => JobTitle, 0], 0, 0, 0, 0], 1
+];
+export var LeadInvitationPayload$: StaticStructureSchema = [3, n0, _LIP,
+  0,
+  [_Cu, _Inte],
+  [[() => LeadInvitationCustomer$, 0], [() => LeadInvitationInteraction$, 0]], 2
+];
+export var LifeCycle$: StaticStructureSchema = [3, n0, _LC,
+  0,
+  [_S, _CLR, _NS, _TCD, _RS, _RCe, _RSR, _NSH],
+  [0, 0, [() => PiiString, 0], 0, 0, 0, 0, () => NextStepsHistories]
+];
+export var LifeCycleForView$: StaticStructureSchema = [3, n0, _LCFV,
+  0,
+  [_TCD, _RS, _S, _NS],
+  [0, 0, 0, [() => PiiString, 0]]
+];
+export var LifeCycleSummary$: StaticStructureSchema = [3, n0, _LCS,
+  0,
+  [_S, _CLR, _NS, _TCD, _RS, _RCe, _RSR],
+  [0, 0, [() => PiiString, 0], 0, 0, 0, 0]
+];
+export var ListEngagementByAcceptingInvitationTasksRequest$: StaticStructureSchema = [3, n0, _LEBAITR,
+  0,
+  [_C, _MR, _NT, _Sor, _TS, _OIp, _EII, _TI],
+  [0, 1, 0, () => ListTasksSortBase$, 64 | 0, 64 | 0, 64 | 0, 64 | 0], 1
+];
+export var ListEngagementByAcceptingInvitationTasksResponse$: StaticStructureSchema = [3, n0, _LEBAITRi,
+  0,
+  [_TSa, _NT],
+  [() => ListEngagementByAcceptingInvitationTaskSummaries, 0]
+];
+export var ListEngagementByAcceptingInvitationTaskSummary$: StaticStructureSchema = [3, n0, _LEBAITS,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIIn],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0]
+];
+export var ListEngagementFromOpportunityTasksRequest$: StaticStructureSchema = [3, n0, _LEFOTR,
+  0,
+  [_C, _MR, _NT, _Sor, _TS, _TI, _OIp, _EI],
+  [0, 1, 0, () => ListTasksSortBase$, 64 | 0, 64 | 0, 64 | 0, 64 | 0], 1
+];
+export var ListEngagementFromOpportunityTasksResponse$: StaticStructureSchema = [3, n0, _LEFOTRi,
+  0,
+  [_TSa, _NT],
+  [() => ListEngagementFromOpportunityTaskSummaries, 0]
+];
+export var ListEngagementFromOpportunityTaskSummary$: StaticStructureSchema = [3, n0, _LEFOTS,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIn, _EIIn],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
+];
+export var ListEngagementInvitationsRequest$: StaticStructureSchema = [3, n0, _LEIR,
+  0,
+  [_C, _PTa, _MR, _NT, _Sor, _PT, _St, _EI, _SAAI],
+  [0, 0, 1, 0, () => OpportunityEngagementInvitationSort$, 64 | 0, 64 | 0, 64 | 0, [() => AwsAccountIdOrAliasList, 0]], 2
+];
+export var ListEngagementInvitationsResponse$: StaticStructureSchema = [3, n0, _LEIRi,
+  0,
+  [_EISn, _NT],
+  [[() => EngagementInvitationSummaries, 0], 0]
+];
+export var ListEngagementMembersRequest$: StaticStructureSchema = [3, n0, _LEMR,
+  0,
+  [_C, _I, _MR, _NT],
+  [0, 0, 1, 0], 2
+];
+export var ListEngagementMembersResponse$: StaticStructureSchema = [3, n0, _LEMRi,
+  0,
+  [_EML, _NT],
+  [[() => EngagementMembers, 0], 0], 1
+];
+export var ListEngagementResourceAssociationsRequest$: StaticStructureSchema = [3, n0, _LERAR,
+  0,
+  [_C, _MR, _NT, _EI, _RT, _RI, _CB],
+  [0, 1, 0, 0, 0, 0, [() => AwsAccount, 0]], 1
+];
+export var ListEngagementResourceAssociationsResponse$: StaticStructureSchema = [3, n0, _LERARi,
+  0,
+  [_ERASn, _NT],
+  [[() => EngagementResourceAssociationSummaryList, 0], 0], 1
+];
+export var ListEngagementsRequest$: StaticStructureSchema = [3, n0, _LER,
+  0,
+  [_C, _CB, _ECB, _CTo, _ECT, _Sor, _MR, _NT, _EI],
+  [0, [() => AwsAccountList, 0], [() => AwsAccountList, 0], 64 | 0, 64 | 0, () => EngagementSort$, 1, 0, 64 | 0], 1
+];
+export var ListEngagementsResponse$: StaticStructureSchema = [3, n0, _LERi,
+  0,
+  [_ESL, _NT],
+  [[() => EngagementSummaryList, 0], 0], 1
+];
+export var ListOpportunitiesRequest$: StaticStructureSchema = [3, n0, _LOR,
+  0,
+  [_C, _MR, _NT, _Sor, _LMD, _I, _LCSi, _LCRS, _CCN, _CD, _TCD],
+  [0, 1, 0, () => OpportunitySort$, () => LastModifiedDate$, 64 | 0, 64 | 0, 64 | 0, 64 | 0, () => CreatedDateFilter$, () => TargetCloseDateFilter$], 1
+];
+export var ListOpportunitiesResponse$: StaticStructureSchema = [3, n0, _LORi,
+  0,
+  [_OS, _NT],
+  [[() => OpportunitySummaries, 0], 0], 1
+];
+export var ListOpportunityFromEngagementTasksRequest$: StaticStructureSchema = [3, n0, _LOFETR,
+  0,
+  [_C, _MR, _NT, _Sor, _TS, _TI, _OIp, _EI, _CIo],
+  [0, 1, 0, () => ListTasksSortBase$, 64 | 0, 64 | 0, 64 | 0, 64 | 0, 64 | 0], 1
+];
+export var ListOpportunityFromEngagementTasksResponse$: StaticStructureSchema = [3, n0, _LOFETRi,
+  0,
+  [_TSa, _NT],
+  [() => ListOpportunityFromEngagementTaskSummaries, 0]
+];
+export var ListOpportunityFromEngagementTaskSummary$: StaticStructureSchema = [3, n0, _LOFETS,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIn, _CI],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
+];
+export var ListProspectingFromEngagementTasksRequest$: StaticStructureSchema = [3, n0, _LPFETR,
+  0,
+  [_C, _MR, _NT, _TI, _TN, _SAt, _SBt, _Sor],
+  [0, 1, 0, 64 | 0, 64 | 0, 5, 5, () => ProspectingFromEngagementTaskSort$], 1
+];
+export var ListProspectingFromEngagementTasksResponse$: StaticStructureSchema = [3, n0, _LPFETRi,
+  0,
+  [_TSa, _NT],
+  [() => ProspectingTaskSummaryList, 0], 1
+];
+export var ListResourceSnapshotJobsRequest$: StaticStructureSchema = [3, n0, _LRSJR,
+  0,
+  [_C, _MR, _NT, _EI, _St, _Sor],
+  [0, 1, 0, 0, 0, () => SortObject$], 1
+];
+export var ListResourceSnapshotJobsResponse$: StaticStructureSchema = [3, n0, _LRSJRi,
+  0,
+  [_RSJS, _NT],
+  [() => ResourceSnapshotJobSummaryList, 0], 1
+];
+export var ListResourceSnapshotsRequest$: StaticStructureSchema = [3, n0, _LRSR,
+  0,
+  [_C, _EI, _MR, _NT, _RT, _RI, _RSTI, _CB],
+  [0, 0, 1, 0, 0, 0, 0, [() => AwsAccount, 0]], 2
+];
+export var ListResourceSnapshotsResponse$: StaticStructureSchema = [3, n0, _LRSRi,
+  0,
+  [_RSS, _NT],
+  [[() => ResourceSnapshotSummaryList, 0], 0], 1
+];
+export var ListSolutionsRequest$: StaticStructureSchema = [3, n0, _LSR,
+  0,
+  [_C, _MR, _NT, _Sor, _St, _I, _Cat, _AMSA],
+  [0, 1, 0, () => SolutionSort$, 64 | 0, 64 | 0, 64 | 0, 64 | 0], 1
+];
+export var ListSolutionsResponse$: StaticStructureSchema = [3, n0, _LSRi,
+  0,
+  [_SS, _NT],
+  [() => SolutionList, 0], 1
+];
+export var ListTagsForResourceRequest$: StaticStructureSchema = [3, n0, _LTFRR,
+  0,
+  [_RA],
+  [0], 1
+];
+export var ListTagsForResourceResponse$: StaticStructureSchema = [3, n0, _LTFRRi,
+  0,
+  [_Ta],
+  [() => TagList], 1
+];
+export var ListTasksSortBase$: StaticStructureSchema = [3, n0, _LTSB,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var Marketing$: StaticStructureSchema = [3, n0, _Ma,
+  0,
+  [_CNa, _Sou, _UC, _Ch, _AFU],
+  [0, 0, 64 | 0, 64 | 0, 0]
+];
+export var MonetaryValue$: StaticStructureSchema = [3, n0, _MV,
+  0,
+  [_Am, _CCu],
+  [0, [() => CurrencyCode, 0]], 2
+];
+export var NextStepsHistory$: StaticStructureSchema = [3, n0, _NSH,
+  0,
+  [_Va, _Tim],
+  [0, 5], 2
+];
+export var OpportunityEngagementInvitationSort$: StaticStructureSchema = [3, n0, _OEIS,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var OpportunityInvitationPayload$: StaticStructureSchema = [3, n0, _OIP,
+  0,
+  [_RRe, _Cu, _Pr, _SCe],
+  [64 | 0, [() => EngagementCustomer$, 0], [() => ProjectDetails$, 0], [() => SenderContactList, 0]], 3
+];
+export var OpportunityQuality$: StaticStructureSchema = [3, n0, _OQ,
+  0,
+  [_Sc, _Tr],
+  [1, 0]
+];
+export var OpportunitySort$: StaticStructureSchema = [3, n0, _OSp,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var OpportunitySummary$: StaticStructureSchema = [3, n0, _OSpp,
+  0,
+  [_C, _Id, _Ar, _POI, _OTp, _LMD, _CD, _LC, _Cu, _Pr],
+  [0, 0, 0, 0, 0, 5, 5, [() => LifeCycleSummary$, 0], [() => CustomerSummary$, 0], [() => ProjectSummary$, 0]], 1
+];
+export var OpportunitySummaryView$: StaticStructureSchema = [3, n0, _OSV,
+  0,
+  [_OTp, _L, _OT, _PNFA, _Cu, _Pr, _REIel],
+  [0, [() => LifeCycleForView$, 0], [() => PartnerOpportunityTeamMembersList, 0], 64 | 0, [() => Customer$, 0], [() => ProjectView$, 0], () => RelatedEntityIdentifiers$]
+];
+export var ProfileNextStepsHistory$: StaticStructureSchema = [3, n0, _PNSH,
+  0,
+  [_Va, _Tim],
+  [0, 5], 2
+];
+export var Project$: StaticStructureSchema = [3, n0, _Pr,
+  0,
+  [_DM, _ECS, _ECDx, _Ti, _APp, _CBP, _CUC, _ROIe, _SAal, _CNo, _OCN, _OSD, _ACd, _APw],
+  [64 | 0, [() => ExpectedCustomerSpendList, 0], () => ExpectedContractDuration$, [() => PiiString, 0], 64 | 0, [() => PiiString, 0], 0, 0, 64 | 0, 0, 0, [() => PiiString, 0], 0, 0]
+];
+export var ProjectDetails$: StaticStructureSchema = [3, n0, _PD,
+  0,
+  [_BP, _Ti, _TCDa, _ECS],
+  [[() => EngagementCustomerBusinessProblem, 0], 0, 0, [() => ExpectedCustomerSpendList, 0]], 4
+];
+export var ProjectSummary$: StaticStructureSchema = [3, n0, _PSr,
+  0,
+  [_DM, _ECS, _ECDx],
+  [64 | 0, [() => ExpectedCustomerSpendList, 0], () => ExpectedContractDuration$]
+];
+export var ProjectView$: StaticStructureSchema = [3, n0, _PV,
+  0,
+  [_DM, _ECS, _ECDx, _CUC, _SAal, _OSD],
+  [64 | 0, [() => ExpectedCustomerSpendList, 0], () => ExpectedContractDuration$, 0, 64 | 0, [() => PiiString, 0]]
+];
+export var ProspectingFromEngagementTaskSort$: StaticStructureSchema = [3, n0, _PFETS,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var ProspectingInsights$: StaticStructureSchema = [3, n0, _PI,
+  0,
+  [_MES, _SSo, _SCo, _SSC],
+  [0, 0, 0, 0]
+];
+export var ProspectingResult$: StaticStructureSchema = [3, n0, _PR,
+  0,
+  [_Aw],
+  [[() => ProspectingResultAws$, 0]]
+];
+export var ProspectingResultAws$: StaticStructureSchema = [3, n0, _PRA,
+  0,
+  [_Cu, _Ins, _ST, _ETn, _TIa, _TAa, _TN],
+  [[() => ProspectingResultCustomer$, 0], () => ProspectingInsights$, 5, 5, 0, 0, 0]
+];
+export var ProspectingResultCustomer$: StaticStructureSchema = [3, n0, _PRC,
+  0,
+  [_AN, _G, _Reg, _SRu, _Cou, _In, _SIu, _Se, _CSo, _EP, _PPS],
+  [0, 0, 0, 0, [() => CountryCode, 0], 0, 0, 0, 0, 64 | 0, 0]
+];
+export var ProspectingTaskSummary$: StaticStructureSchema = [3, n0, _PTS,
+  0,
+  [_TIa, _TAa, _TN, _ST, _TEC, _CEC, _FEC, _ETn],
+  [0, 0, 0, 5, 1, 1, 1, 5], 7
+];
+export var PutSellingSystemSettingsRequest$: StaticStructureSchema = [3, n0, _PSSSR,
+  0,
+  [_C, _RSJRI],
+  [0, 0], 1
+];
+export var PutSellingSystemSettingsResponse$: StaticStructureSchema = [3, n0, _PSSSRu,
+  0,
+  [_C, _RSJRA],
+  [0, 0], 1
+];
+export var Recommendation$: StaticStructureSchema = [3, n0, _Reco,
+  0,
+  [_T, _Det, _At],
+  [0, 0, 128 | 0], 2
+];
+export var RejectEngagementInvitationRequest$: StaticStructureSchema = [3, n0, _REIR,
+  0,
+  [_C, _I, _RR],
+  [0, 0, 0], 2
+];
+export var RelatedEntityIdentifiers$: StaticStructureSchema = [3, n0, _REIel,
+  0,
+  [_AMO, _AMOS, _So, _APws, _AMS, _AMP],
+  [64 | 0, 64 | 0, 64 | 0, 64 | 0, 64 | 0, 64 | 0]
+];
+export var ResourceSnapshotJobSummary$: StaticStructureSchema = [3, n0, _RSJSe,
+  0,
+  [_Id, _Ar, _EIn, _St],
+  [0, 0, 0, 0]
+];
+export var ResourceSnapshotSummary$: StaticStructureSchema = [3, n0, _RSSe,
+  0,
+  [_Ar, _Rev, _RT, _RIe, _RSTN, _CB],
+  [0, 1, 0, 0, 0, [() => AwsAccount, 0]]
+];
+export var SenderContact$: StaticStructureSchema = [3, n0, _SCen,
+  0,
+  [_E, _FN, _LN, _BT, _P],
+  [[() => SenderContactEmail, 0], [() => Name, 0], [() => Name, 0], [() => JobTitle, 0], [() => PhoneNumber, 0]], 1
+];
+export var SoftwareRevenue$: StaticStructureSchema = [3, n0, _SR,
+  0,
+  [_DMe, _Va, _ED, _EDx],
+  [0, [() => MonetaryValue$, 0], 0, 0]
+];
+export var SolutionBase$: StaticStructureSchema = [3, n0, _SBo,
+  0,
+  [_C, _Id, _N, _St, _Cat, _CD, _Ar, _AMSA],
+  [0, 0, 0, 0, 0, 5, 0, 0], 6
+];
+export var SolutionSort$: StaticStructureSchema = [3, n0, _SSol,
+  0,
+  [_SO, _SB],
+  [0, 0], 2
+];
+export var SortObject$: StaticStructureSchema = [3, n0, _SOo,
+  0,
+  [_SB, _SO],
+  [0, 0]
+];
+export var StartEngagementByAcceptingInvitationTaskRequest$: StaticStructureSchema = [3, n0, _SEBAITR,
+  0,
+  [_C, _I, _CT, _Ta],
+  [0, 0, [0, 4], () => TagList], 2
+];
+export var StartEngagementByAcceptingInvitationTaskResponse$: StaticStructureSchema = [3, n0, _SEBAITRt,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIIn],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0]
+];
+export var StartEngagementFromOpportunityTaskRequest$: StaticStructureSchema = [3, n0, _SEFOTR,
+  0,
+  [_C, _I, _ASw, _CT, _Ta],
+  [0, 0, () => AwsSubmission$, [0, 4], () => TagList], 3
+];
+export var StartEngagementFromOpportunityTaskResponse$: StaticStructureSchema = [3, n0, _SEFOTRt,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIn, _EIIn],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
+];
+export var StartOpportunityFromEngagementTaskRequest$: StaticStructureSchema = [3, n0, _SOFETR,
+  0,
+  [_C, _I, _CIo, _CT, _Ta],
+  [0, 0, 0, [0, 4], () => TagList], 3
+];
+export var StartOpportunityFromEngagementTaskResponse$: StaticStructureSchema = [3, n0, _SOFETRt,
+  0,
+  [_TIa, _TAa, _ST, _TS, _M, _RC, _OIpp, _RSJIe, _EIn, _CI],
+  [0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
+];
+export var StartProspectingFromEngagementTaskRequest$: StaticStructureSchema = [3, n0, _SPFETR,
+  0,
+  [_C, _Ide, _TN, _CT],
+  [0, 64 | 0, 0, [0, 4]], 3
+];
+export var StartProspectingFromEngagementTaskResponse$: StaticStructureSchema = [3, n0, _SPFETRt,
+  0,
+  [_Ide, _TN, _ST, _TS, _M, _RC, _TIa, _TAa],
+  [64 | 0, 0, 5, 0, 0, 0, 0, 0], 4
+];
+export var StartResourceSnapshotJobRequest$: StaticStructureSchema = [3, n0, _SRSJR,
+  0,
+  [_C, _RSJI],
+  [0, 0], 2
+];
+export var StopResourceSnapshotJobRequest$: StaticStructureSchema = [3, n0, _SRSJRt,
+  0,
+  [_C, _RSJI],
+  [0, 0], 2
+];
+export var SubmitOpportunityRequest$: StaticStructureSchema = [3, n0, _SORu,
+  0,
+  [_C, _I, _IT, _V],
+  [0, 0, 0, 0], 3
+];
+export var Tag$: StaticStructureSchema = [3, n0, _Tag,
+  0,
+  [_K, _Va],
+  [0, 0], 2
+];
+export var TagResourceRequest$: StaticStructureSchema = [3, n0, _TRR,
+  0,
+  [_RA, _Ta],
+  [0, () => TagList], 2
+];
+export var TagResourceResponse$: StaticStructureSchema = [3, n0, _TRRa,
+  0,
+  [],
+  []
+];
+export var TargetCloseDateFilter$: StaticStructureSchema = [3, n0, _TCDF,
+  0,
+  [_ATCD, _BTCD],
+  [0, 0]
+];
+export var UntagResourceRequest$: StaticStructureSchema = [3, n0, _URR,
+  0,
+  [_RA, _TK],
+  [0, 64 | 0], 2
+];
+export var UntagResourceResponse$: StaticStructureSchema = [3, n0, _URRn,
+  0,
+  [],
+  []
+];
+export var UpdateEngagementContextRequest$: StaticStructureSchema = [3, n0, _UECR,
+  0,
+  [_C, _EI, _CIo, _ELMA, _T, _Pay],
+  [0, 0, 0, 5, 0, [() => UpdateEngagementContextPayload$, 0]], 6
+];
+export var UpdateEngagementContextResponse$: StaticStructureSchema = [3, n0, _UECRp,
+  0,
+  [_EIn, _EA, _ELMA, _CI],
+  [0, 0, 5, 0], 4
+];
+export var UpdateLeadContext$: StaticStructureSchema = [3, n0, _ULC,
+  0,
+  [_Cu, _QS, _Inte, _Ins],
+  [[() => LeadCustomer$, 0], 0, [() => LeadInteraction$, 0], () => LeadInsights$], 1
+];
+export var UpdateOpportunityRequest$: StaticStructureSchema = [3, n0, _UOR,
+  0,
+  [_C, _LMD, _I, _PNFA, _NSa, _POI, _Cu, _Pr, _OTp, _Ma, _SR, _LC],
+  [0, 5, 0, 64 | 0, 0, 0, [() => Customer$, 0], [() => Project$, 0], 0, () => Marketing$, [() => SoftwareRevenue$, 0], [() => LifeCycle$, 0]], 3
+];
+export var UpdateOpportunityResponse$: StaticStructureSchema = [3, n0, _UORp,
+  0,
+  [_Id, _LMD],
+  [0, 5], 2
+];
+export var ValidationExceptionError$: StaticStructureSchema = [3, n0, _VEE,
+  0,
+  [_M, _Cod, _FNi],
+  [0, 0, 0], 2
+];
+var __Unit = "unit" as const;
+var ApnPrograms = 64 | 0;
+var AwsAccountIdOrAliasList: StaticListSchema = [1, n0, _AAIOAL,
+  0, [() => AwsAccount,
+    0]
+];
+var AwsAccountList: StaticListSchema = [1, n0, _AAL,
+  0, [() => AwsAccount,
+    0]
+];
+var AwsMarketplaceOfferIdentifiers = 64 | 0;
+var AwsMarketplaceOfferSetIdentifiers = 64 | 0;
+var AwsMarketplaceProductIdentifiers = 64 | 0;
+var AwsMarketplaceSolutionArnList = 64 | 0;
+var AwsMarketplaceSolutionIdentifiers = 64 | 0;
+var AwsOpportunityTeamMembersList: StaticListSchema = [1, n0, _AOTML,
+  0, [() => AwsTeamMember$,
+    0]
+];
+var AwsProductIdentifiers = 64 | 0;
+var AwsProductOptimizationsList: StaticListSchema = [1, n0, _APOL,
+  0, [() => AwsProductOptimization$,
+    0]
+];
+var AwsProductsList: StaticListSchema = [1, n0, _APL,
+  0, [() => AwsProductDetails$,
+    0]
+];
+var Channels = 64 | 0;
+var ContextIdentifiers = 64 | 0;
+var CustomerContactsList: StaticListSchema = [1, n0, _CCL,
+  0, [() => Contact$,
+    0]
+];
+var DeliveryModels = 64 | 0;
+var EligibleProgramsList = 64 | 0;
+var EngagementContexts: StaticListSchema = [1, n0, _ECng,
+  0, [() => EngagementContextDetails$,
+    0]
+];
+var EngagementContextTypeList = 64 | 0;
+var EngagementIdentifierList = 64 | 0;
+var EngagementIdentifiers = 64 | 0;
+var EngagementInvitationIdentifiers = 64 | 0;
+var EngagementInvitationsPayloadType = 64 | 0;
+var EngagementInvitationSummaries: StaticListSchema = [1, n0, _EISn,
+  0, [() => EngagementInvitationSummary$,
+    0]
+];
+var EngagementMembers: StaticListSchema = [1, n0, _EMn,
+  0, [() => EngagementMember$,
+    0]
+];
+var EngagementMemberSummaries: StaticListSchema = [1, n0, _EMSn,
+  0, [() => EngagementMemberSummary$,
+    0]
+];
+var EngagementProspectingResultList: StaticListSchema = [1, n0, _EPRL,
+  0, () => EngagementProspectingResult$
+];
+var EngagementResourceAssociationSummaryList: StaticListSchema = [1, n0, _ERASL,
+  0, [() => EngagementResourceAssociationSummary$,
+    0]
+];
+var EngagementSummaryList: StaticListSchema = [1, n0, _ESL,
+  0, [() => EngagementSummary$,
+    0]
+];
+var ExpectedCustomerSpendList: StaticListSchema = [1, n0, _ECSL,
+  0, [() => ExpectedCustomerSpend$,
+    0]
+];
+var FilterIdentifier = 64 | 0;
+var FilterLifeCycleReviewStatus = 64 | 0;
+var FilterLifeCycleStage = 64 | 0;
+var FilterStatus = 64 | 0;
+var InvitationStatusList = 64 | 0;
+var LeadInteractionList: StaticListSchema = [1, n0, _LIL,
+  0, [() => LeadInteraction$,
+    0]
+];
+var ListEngagementByAcceptingInvitationTaskSummaries: StaticListSchema = [1, n0, _LEBAITSi,
+  0, () => ListEngagementByAcceptingInvitationTaskSummary$
+];
+var ListEngagementFromOpportunityTaskSummaries: StaticListSchema = [1, n0, _LEFOTSi,
+  0, () => ListEngagementFromOpportunityTaskSummary$
+];
+var ListOpportunityFromEngagementTaskSummaries: StaticListSchema = [1, n0, _LOFETSi,
+  0, () => ListOpportunityFromEngagementTaskSummary$
+];
+var NextStepsHistories: StaticListSchema = [1, n0, _NSHe,
+  0, () => NextStepsHistory$
+];
+var OpportunityIdentifiers = 64 | 0;
+var OpportunitySummaries: StaticListSchema = [1, n0, _OS,
+  0, [() => OpportunitySummary$,
+    0]
+];
+var PartnerOpportunityTeamMembersList: StaticListSchema = [1, n0, _POTML,
+  0, [() => Contact$,
+    0]
+];
+var PrimaryNeedsFromAws = 64 | 0;
+var ProfileNextStepsHistories: StaticListSchema = [1, n0, _PNSHr,
+  0, () => ProfileNextStepsHistory$
+];
+var ProspectingTaskSummaryList: StaticListSchema = [1, n0, _PTSL,
+  0, () => ProspectingTaskSummary$
+];
+var ReceiverResponsibilityList = 64 | 0;
+var RecommendationList: StaticListSchema = [1, n0, _RL,
+  0, () => Recommendation$
+];
+var ResourceSnapshotJobSummaryList: StaticListSchema = [1, n0, _RSJSL,
+  0, () => ResourceSnapshotJobSummary$
+];
+var ResourceSnapshotSummaryList: StaticListSchema = [1, n0, _RSSL,
+  0, [() => ResourceSnapshotSummary$,
+    0]
+];
+var SalesActivities = 64 | 0;
+var SenderContactList: StaticListSchema = [1, n0, _SCL,
+  0, [() => SenderContact$,
+    0]
+];
+var SolutionIdentifiers = 64 | 0;
+var SolutionList: StaticListSchema = [1, n0, _SL,
+  0, () => SolutionBase$
+];
+var StringList = 64 | 0;
+var TagKeyList = 64 | 0;
+var TagList: StaticListSchema = [1, n0, _TL,
+  0, () => Tag$
+];
+var TaskIdentifierList = 64 | 0;
+var TaskIdentifiers = 64 | 0;
+var TaskNameList = 64 | 0;
+var TaskStatuses = 64 | 0;
+var UseCases = 64 | 0;
+var ValidationExceptionErrorList: StaticListSchema = [1, n0, _VEEL,
+  0, () => ValidationExceptionError$
+];
+var AmountMap: StaticMapSchema = [2, n0, _AMm,
+  0, [0,
+    0]
+  , [() => MonetaryAmount,
+    0]
+];
+var RecommendationAttributeMap = 128 | 0;
+export var EngagementContextPayload$: StaticUnionSchema = [4, n0, _ECP,
+  0,
+  [_CP, _Le, _PR],
+  [[() => CustomerProjectsContext$, 0], [() => LeadContext$, 0], [() => ProspectingResult$, 0]]
+];
+export var Payload$: StaticUnionSchema = [4, n0, _Pay,
+  0,
+  [_OIppo, _LIea],
+  [[() => OpportunityInvitationPayload$, 0], [() => LeadInvitationPayload$, 0]]
+];
+export var Receiver$: StaticUnionSchema = [4, n0, _Rec,
+  0,
+  [_Ac],
+  [[() => AccountReceiver$, 0]]
+];
+export var ResourceSnapshotPayload$: StaticUnionSchema = [4, n0, _RSP,
+  0,
+  [_OSpp, _AOSFV],
+  [[() => OpportunitySummaryView$, 0], [() => AwsOpportunitySummaryFullView$, 0]]
+];
+export var UpdateEngagementContextPayload$: StaticUnionSchema = [4, n0, _UECP,
+  0,
+  [_Le, _CP, _PR],
+  [[() => UpdateLeadContext$, 0], [() => CustomerProjectsContext$, 0], [() => ProspectingResult$, 0]]
+];
+export var AcceptEngagementInvitation$: StaticOperationSchema = [9, n0, _AEI,
+  { [_h]: ["POST", "/AcceptEngagementInvitation", 200] }, () => AcceptEngagementInvitationRequest$, () => __Unit
+];
+export var AssignOpportunity$: StaticOperationSchema = [9, n0, _AO,
+  { [_h]: ["POST", "/AssignOpportunity", 200] }, () => AssignOpportunityRequest$, () => __Unit
+];
+export var AssociateOpportunity$: StaticOperationSchema = [9, n0, _AOs,
+  { [_h]: ["POST", "/AssociateOpportunity", 200] }, () => AssociateOpportunityRequest$, () => __Unit
+];
+export var CreateEngagement$: StaticOperationSchema = [9, n0, _CEr,
+  { [_h]: ["POST", "/CreateEngagement", 200] }, () => CreateEngagementRequest$, () => CreateEngagementResponse$
+];
+export var CreateEngagementContext$: StaticOperationSchema = [9, n0, _CECr,
+  { [_h]: ["POST", "/CreateEngagementContext", 200] }, () => CreateEngagementContextRequest$, () => CreateEngagementContextResponse$
+];
+export var CreateEngagementInvitation$: StaticOperationSchema = [9, n0, _CEI,
+  { [_h]: ["POST", "/CreateEngagementInvitation", 200] }, () => CreateEngagementInvitationRequest$, () => CreateEngagementInvitationResponse$
+];
+export var CreateOpportunity$: StaticOperationSchema = [9, n0, _CO,
+  { [_h]: ["POST", "/CreateOpportunity", 200] }, () => CreateOpportunityRequest$, () => CreateOpportunityResponse$
+];
+export var CreateResourceSnapshot$: StaticOperationSchema = [9, n0, _CRS,
+  { [_h]: ["POST", "/CreateResourceSnapshot", 200] }, () => CreateResourceSnapshotRequest$, () => CreateResourceSnapshotResponse$
+];
+export var CreateResourceSnapshotJob$: StaticOperationSchema = [9, n0, _CRSJ,
+  { [_h]: ["POST", "/CreateResourceSnapshotJob", 200] }, () => CreateResourceSnapshotJobRequest$, () => CreateResourceSnapshotJobResponse$
+];
+export var DeleteResourceSnapshotJob$: StaticOperationSchema = [9, n0, _DRSJ,
+  { [_h]: ["POST", "/DeleteResourceSnapshotJob", 204] }, () => DeleteResourceSnapshotJobRequest$, () => __Unit
+];
+export var DisassociateOpportunity$: StaticOperationSchema = [9, n0, _DO,
+  { [_h]: ["POST", "/DisassociateOpportunity", 200] }, () => DisassociateOpportunityRequest$, () => __Unit
+];
+export var GetAwsOpportunitySummary$: StaticOperationSchema = [9, n0, _GAOS,
+  { [_h]: ["POST", "/GetAwsOpportunitySummary", 200] }, () => GetAwsOpportunitySummaryRequest$, () => GetAwsOpportunitySummaryResponse$
+];
+export var GetEngagement$: StaticOperationSchema = [9, n0, _GE,
+  { [_h]: ["POST", "/GetEngagement", 200] }, () => GetEngagementRequest$, () => GetEngagementResponse$
+];
+export var GetEngagementInvitation$: StaticOperationSchema = [9, n0, _GEI,
+  { [_h]: ["POST", "/GetEngagementInvitation", 200] }, () => GetEngagementInvitationRequest$, () => GetEngagementInvitationResponse$
+];
+export var GetOpportunity$: StaticOperationSchema = [9, n0, _GO,
+  { [_h]: ["POST", "/GetOpportunity", 200] }, () => GetOpportunityRequest$, () => GetOpportunityResponse$
+];
+export var GetProspectingFromEngagementTask$: StaticOperationSchema = [9, n0, _GPFET,
+  { [_h]: ["POST", "/GetProspectingFromEngagementTask", 200] }, () => GetProspectingFromEngagementTaskRequest$, () => GetProspectingFromEngagementTaskResponse$
+];
+export var GetResourceSnapshot$: StaticOperationSchema = [9, n0, _GRS,
+  { [_h]: ["POST", "/GetResourceSnapshot", 200] }, () => GetResourceSnapshotRequest$, () => GetResourceSnapshotResponse$
+];
+export var GetResourceSnapshotJob$: StaticOperationSchema = [9, n0, _GRSJ,
+  { [_h]: ["POST", "/GetResourceSnapshotJob", 200] }, () => GetResourceSnapshotJobRequest$, () => GetResourceSnapshotJobResponse$
+];
+export var GetSellingSystemSettings$: StaticOperationSchema = [9, n0, _GSSS,
+  { [_h]: ["POST", "/GetSellingSystemSettings", 200] }, () => GetSellingSystemSettingsRequest$, () => GetSellingSystemSettingsResponse$
+];
+export var ListEngagementByAcceptingInvitationTasks$: StaticOperationSchema = [9, n0, _LEBAIT,
+  { [_h]: ["POST", "/ListEngagementByAcceptingInvitationTasks", 200] }, () => ListEngagementByAcceptingInvitationTasksRequest$, () => ListEngagementByAcceptingInvitationTasksResponse$
+];
+export var ListEngagementFromOpportunityTasks$: StaticOperationSchema = [9, n0, _LEFOT,
+  { [_h]: ["POST", "/ListEngagementFromOpportunityTasks", 200] }, () => ListEngagementFromOpportunityTasksRequest$, () => ListEngagementFromOpportunityTasksResponse$
+];
+export var ListEngagementInvitations$: StaticOperationSchema = [9, n0, _LEI,
+  { [_h]: ["POST", "/ListEngagementInvitations", 200] }, () => ListEngagementInvitationsRequest$, () => ListEngagementInvitationsResponse$
+];
+export var ListEngagementMembers$: StaticOperationSchema = [9, n0, _LEM,
+  { [_h]: ["POST", "/ListEngagementMembers", 200] }, () => ListEngagementMembersRequest$, () => ListEngagementMembersResponse$
+];
+export var ListEngagementResourceAssociations$: StaticOperationSchema = [9, n0, _LERA,
+  { [_h]: ["POST", "/ListEngagementResourceAssociations", 200] }, () => ListEngagementResourceAssociationsRequest$, () => ListEngagementResourceAssociationsResponse$
+];
+export var ListEngagements$: StaticOperationSchema = [9, n0, _LEi,
+  { [_h]: ["POST", "/ListEngagements", 200] }, () => ListEngagementsRequest$, () => ListEngagementsResponse$
+];
+export var ListOpportunities$: StaticOperationSchema = [9, n0, _LO,
+  { [_h]: ["POST", "/ListOpportunities", 200] }, () => ListOpportunitiesRequest$, () => ListOpportunitiesResponse$
+];
+export var ListOpportunityFromEngagementTasks$: StaticOperationSchema = [9, n0, _LOFET,
+  { [_h]: ["POST", "/ListOpportunityFromEngagementTasks", 200] }, () => ListOpportunityFromEngagementTasksRequest$, () => ListOpportunityFromEngagementTasksResponse$
+];
+export var ListProspectingFromEngagementTasks$: StaticOperationSchema = [9, n0, _LPFET,
+  { [_h]: ["POST", "/ListProspectingFromEngagementTasks", 200] }, () => ListProspectingFromEngagementTasksRequest$, () => ListProspectingFromEngagementTasksResponse$
+];
+export var ListResourceSnapshotJobs$: StaticOperationSchema = [9, n0, _LRSJ,
+  { [_h]: ["POST", "/ListResourceSnapshotJobs", 200] }, () => ListResourceSnapshotJobsRequest$, () => ListResourceSnapshotJobsResponse$
+];
+export var ListResourceSnapshots$: StaticOperationSchema = [9, n0, _LRSi,
+  { [_h]: ["POST", "/ListResourceSnapshots", 200] }, () => ListResourceSnapshotsRequest$, () => ListResourceSnapshotsResponse$
+];
+export var ListSolutions$: StaticOperationSchema = [9, n0, _LS,
+  { [_h]: ["POST", "/ListSolutions", 200] }, () => ListSolutionsRequest$, () => ListSolutionsResponse$
+];
+export var ListTagsForResource$: StaticOperationSchema = [9, n0, _LTFR,
+  { [_h]: ["POST", "/ListTagsForResource", 200] }, () => ListTagsForResourceRequest$, () => ListTagsForResourceResponse$
+];
+export var PutSellingSystemSettings$: StaticOperationSchema = [9, n0, _PSSS,
+  { [_h]: ["POST", "/PutSellingSystemSettings", 200] }, () => PutSellingSystemSettingsRequest$, () => PutSellingSystemSettingsResponse$
+];
+export var RejectEngagementInvitation$: StaticOperationSchema = [9, n0, _REIej,
+  { [_h]: ["POST", "/RejectEngagementInvitation", 200] }, () => RejectEngagementInvitationRequest$, () => __Unit
+];
+export var StartEngagementByAcceptingInvitationTask$: StaticOperationSchema = [9, n0, _SEBAIT,
+  { [_h]: ["POST", "/StartEngagementByAcceptingInvitationTask", 200] }, () => StartEngagementByAcceptingInvitationTaskRequest$, () => StartEngagementByAcceptingInvitationTaskResponse$
+];
+export var StartEngagementFromOpportunityTask$: StaticOperationSchema = [9, n0, _SEFOT,
+  { [_h]: ["POST", "/StartEngagementFromOpportunityTask", 200] }, () => StartEngagementFromOpportunityTaskRequest$, () => StartEngagementFromOpportunityTaskResponse$
+];
+export var StartOpportunityFromEngagementTask$: StaticOperationSchema = [9, n0, _SOFET,
+  { [_h]: ["POST", "/StartOpportunityFromEngagementTask", 200] }, () => StartOpportunityFromEngagementTaskRequest$, () => StartOpportunityFromEngagementTaskResponse$
+];
+export var StartProspectingFromEngagementTask$: StaticOperationSchema = [9, n0, _SPFET,
+  { [_h]: ["POST", "/StartProspectingFromEngagementTask", 200] }, () => StartProspectingFromEngagementTaskRequest$, () => StartProspectingFromEngagementTaskResponse$
+];
+export var StartResourceSnapshotJob$: StaticOperationSchema = [9, n0, _SRSJ,
+  { [_h]: ["POST", "/StartResourceSnapshotJob", 204] }, () => StartResourceSnapshotJobRequest$, () => __Unit
+];
+export var StopResourceSnapshotJob$: StaticOperationSchema = [9, n0, _SRSJt,
+  { [_h]: ["POST", "/StopResourceSnapshotJob", 204] }, () => StopResourceSnapshotJobRequest$, () => __Unit
+];
+export var SubmitOpportunity$: StaticOperationSchema = [9, n0, _SOu,
+  { [_h]: ["POST", "/SubmitOpportunity", 200] }, () => SubmitOpportunityRequest$, () => __Unit
+];
+export var TagResource$: StaticOperationSchema = [9, n0, _TR,
+  { [_h]: ["POST", "/TagResource", 200] }, () => TagResourceRequest$, () => TagResourceResponse$
+];
+export var UntagResource$: StaticOperationSchema = [9, n0, _UR,
+  { [_h]: ["POST", "/UntagResource", 200] }, () => UntagResourceRequest$, () => UntagResourceResponse$
+];
+export var UpdateEngagementContext$: StaticOperationSchema = [9, n0, _UEC,
+  { [_h]: ["POST", "/UpdateEngagementContext", 200] }, () => UpdateEngagementContextRequest$, () => UpdateEngagementContextResponse$
+];
+export var UpdateOpportunity$: StaticOperationSchema = [9, n0, _UO,
+  { [_h]: ["POST", "/UpdateOpportunity", 200] }, () => UpdateOpportunityRequest$, () => UpdateOpportunityResponse$
+];

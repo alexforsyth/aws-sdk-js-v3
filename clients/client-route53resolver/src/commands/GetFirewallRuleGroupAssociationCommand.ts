@@ -1,27 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetFirewallRuleGroupAssociationRequest, GetFirewallRuleGroupAssociationResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetFirewallRuleGroupAssociationCommand,
-  serializeAws_json1_1GetFirewallRuleGroupAssociationCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53ResolverClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53ResolverClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetFirewallRuleGroupAssociationRequest,
+  GetFirewallRuleGroupAssociationResponse,
+} from "../models/models_0";
+import { GetFirewallRuleGroupAssociation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFirewallRuleGroupAssociationCommand}.
+ */
 export interface GetFirewallRuleGroupAssociationCommandInput extends GetFirewallRuleGroupAssociationRequest {}
-export interface GetFirewallRuleGroupAssociationCommandOutput
-  extends GetFirewallRuleGroupAssociationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetFirewallRuleGroupAssociationCommand}.
+ */
+export interface GetFirewallRuleGroupAssociationCommandOutput extends GetFirewallRuleGroupAssociationResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group. A VPC can have more than one firewall rule group association, and a rule group can be associated with more than one VPC.</p>
@@ -30,74 +32,75 @@ export interface GetFirewallRuleGroupAssociationCommandOutput
  * ```javascript
  * import { Route53ResolverClient, GetFirewallRuleGroupAssociationCommand } from "@aws-sdk/client-route53resolver"; // ES Modules import
  * // const { Route53ResolverClient, GetFirewallRuleGroupAssociationCommand } = require("@aws-sdk/client-route53resolver"); // CommonJS import
+ * // import type { Route53ResolverClientConfig } from "@aws-sdk/client-route53resolver";
+ * const config = {}; // type is Route53ResolverClientConfig
  * const client = new Route53ResolverClient(config);
+ * const input = { // GetFirewallRuleGroupAssociationRequest
+ *   FirewallRuleGroupAssociationId: "STRING_VALUE", // required
+ * };
  * const command = new GetFirewallRuleGroupAssociationCommand(input);
  * const response = await client.send(command);
+ * // { // GetFirewallRuleGroupAssociationResponse
+ * //   FirewallRuleGroupAssociation: { // FirewallRuleGroupAssociation
+ * //     Id: "STRING_VALUE",
+ * //     Arn: "STRING_VALUE",
+ * //     FirewallRuleGroupId: "STRING_VALUE",
+ * //     VpcId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Priority: Number("int"),
+ * //     MutationProtection: "ENABLED" || "DISABLED",
+ * //     ManagedOwnerName: "STRING_VALUE",
+ * //     Status: "COMPLETE" || "DELETING" || "UPDATING",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     CreatorRequestId: "STRING_VALUE",
+ * //     CreationTime: "STRING_VALUE",
+ * //     ModificationTime: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetFirewallRuleGroupAssociationCommandInput - {@link GetFirewallRuleGroupAssociationCommandInput}
+ * @returns {@link GetFirewallRuleGroupAssociationCommandOutput}
  * @see {@link GetFirewallRuleGroupAssociationCommandInput} for command's `input` shape.
  * @see {@link GetFirewallRuleGroupAssociationCommandOutput} for command's `response` shape.
- * @see {@link Route53ResolverClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link Route53ResolverClientResolvedConfig | config} for Route53ResolverClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The current account doesn't have the IAM permissions required to perform the specified Resolver operation.</p>
+ *          <p>This error can also be thrown when a customer has reached the 5120 character limit for a
+ * 			resource policy for CloudWatch Logs.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (client fault)
+ *  <p>We encountered an unknown error. Try again in a few minutes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled. Try again in a few minutes.</p>
+ *
+ * @throws {@link Route53ResolverServiceException}
+ * <p>Base exception class for all service exceptions from Route53Resolver service.</p>
+ *
+ *
+ * @public
  */
-export class GetFirewallRuleGroupAssociationCommand extends $Command<
-  GetFirewallRuleGroupAssociationCommandInput,
-  GetFirewallRuleGroupAssociationCommandOutput,
-  Route53ResolverClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFirewallRuleGroupAssociationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ResolverClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFirewallRuleGroupAssociationCommandInput, GetFirewallRuleGroupAssociationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53ResolverClient";
-    const commandName = "GetFirewallRuleGroupAssociationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFirewallRuleGroupAssociationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFirewallRuleGroupAssociationResponse.filterSensitiveLog,
+export class GetFirewallRuleGroupAssociationCommand extends command<GetFirewallRuleGroupAssociationCommandInput, GetFirewallRuleGroupAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFirewallRuleGroupAssociation",
+  GetFirewallRuleGroupAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFirewallRuleGroupAssociationRequest;
+      output: GetFirewallRuleGroupAssociationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetFirewallRuleGroupAssociationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetFirewallRuleGroupAssociationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetFirewallRuleGroupAssociationCommandOutput> {
-    return deserializeAws_json1_1GetFirewallRuleGroupAssociationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFirewallRuleGroupAssociationCommandInput;
+      output: GetFirewallRuleGroupAssociationCommandOutput;
+    };
+  };
 }

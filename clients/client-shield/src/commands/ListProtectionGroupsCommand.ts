@@ -1,95 +1,112 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListProtectionGroupsRequest, ListProtectionGroupsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListProtectionGroupsCommand,
-  serializeAws_json1_1ListProtectionGroupsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListProtectionGroupsRequest, ListProtectionGroupsResponse } from "../models/models_0";
+import { ListProtectionGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListProtectionGroupsCommand}.
+ */
 export interface ListProtectionGroupsCommandInput extends ListProtectionGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListProtectionGroupsCommand}.
+ */
 export interface ListProtectionGroupsCommandOutput extends ListProtectionGroupsResponse, __MetadataBearer {}
 
 /**
- * <p>Retrieves the <a>ProtectionGroup</a> objects for the account.</p>
+ * <p>Retrieves <a>ProtectionGroup</a> objects for the account. You can retrieve all protection groups or you can provide
+ *        filtering criteria and retrieve just the subset of protection groups that match the criteria. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ShieldClient, ListProtectionGroupsCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, ListProtectionGroupsCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // ListProtectionGroupsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   InclusionFilters: { // InclusionProtectionGroupFilters
+ *     ProtectionGroupIds: [ // ProtectionGroupIdFilters
+ *       "STRING_VALUE",
+ *     ],
+ *     Patterns: [ // ProtectionGroupPatternFilters
+ *       "ALL" || "ARBITRARY" || "BY_RESOURCE_TYPE",
+ *     ],
+ *     ResourceTypes: [ // ProtectedResourceTypeFilters
+ *       "CLOUDFRONT_DISTRIBUTION" || "ROUTE_53_HOSTED_ZONE" || "ELASTIC_IP_ALLOCATION" || "CLASSIC_LOAD_BALANCER" || "APPLICATION_LOAD_BALANCER" || "GLOBAL_ACCELERATOR",
+ *     ],
+ *     Aggregations: [ // ProtectionGroupAggregationFilters
+ *       "SUM" || "MEAN" || "MAX",
+ *     ],
+ *   },
+ * };
  * const command = new ListProtectionGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListProtectionGroupsResponse
+ * //   ProtectionGroups: [ // ProtectionGroups // required
+ * //     { // ProtectionGroup
+ * //       ProtectionGroupId: "STRING_VALUE", // required
+ * //       Aggregation: "SUM" || "MEAN" || "MAX", // required
+ * //       Pattern: "ALL" || "ARBITRARY" || "BY_RESOURCE_TYPE", // required
+ * //       ResourceType: "CLOUDFRONT_DISTRIBUTION" || "ROUTE_53_HOSTED_ZONE" || "ELASTIC_IP_ALLOCATION" || "CLASSIC_LOAD_BALANCER" || "APPLICATION_LOAD_BALANCER" || "GLOBAL_ACCELERATOR",
+ * //       Members: [ // ProtectionGroupMembers // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ProtectionGroupArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListProtectionGroupsCommandInput - {@link ListProtectionGroupsCommandInput}
+ * @returns {@link ListProtectionGroupsCommandOutput}
  * @see {@link ListProtectionGroupsCommandInput} for command's `input` shape.
  * @see {@link ListProtectionGroupsCommandOutput} for command's `response` shape.
- * @see {@link ShieldClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidPaginationTokenException} (client fault)
+ *  <p>Exception that indicates that the <code>NextToken</code> specified in the request is invalid. Submit the request using the <code>NextToken</code> value that was returned in the prior response.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class ListProtectionGroupsCommand extends $Command<
-  ListProtectionGroupsCommandInput,
-  ListProtectionGroupsCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListProtectionGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListProtectionGroupsCommandInput, ListProtectionGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "ListProtectionGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListProtectionGroupsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListProtectionGroupsResponse.filterSensitiveLog,
+export class ListProtectionGroupsCommand extends command<ListProtectionGroupsCommandInput, ListProtectionGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListProtectionGroups",
+  ListProtectionGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListProtectionGroupsRequest;
+      output: ListProtectionGroupsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListProtectionGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListProtectionGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListProtectionGroupsCommandOutput> {
-    return deserializeAws_json1_1ListProtectionGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListProtectionGroupsCommandInput;
+      output: ListProtectionGroupsCommandOutput;
+    };
+  };
 }

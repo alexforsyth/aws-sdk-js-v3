@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { DescribeOrderableDBInstanceOptionsMessage, OrderableDBInstanceOptionsMessage } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeOrderableDBInstanceOptionsCommand,
-  serializeAws_queryDescribeOrderableDBInstanceOptionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeOrderableDBInstanceOptionsMessage, OrderableDBInstanceOptionsMessage } from "../models/models_0";
+import { DescribeOrderableDBInstanceOptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeOrderableDBInstanceOptionsCommand}.
+ */
 export interface DescribeOrderableDBInstanceOptionsCommandInput extends DescribeOrderableDBInstanceOptionsMessage {}
-export interface DescribeOrderableDBInstanceOptionsCommandOutput
-  extends OrderableDBInstanceOptionsMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeOrderableDBInstanceOptionsCommand}.
+ */
+export interface DescribeOrderableDBInstanceOptionsCommandOutput extends OrderableDBInstanceOptionsMessage, __MetadataBearer {}
 
 /**
  * <p>Returns a list of orderable instance options for the specified engine.</p>
@@ -30,74 +29,76 @@ export interface DescribeOrderableDBInstanceOptionsCommandOutput
  * ```javascript
  * import { DocDBClient, DescribeOrderableDBInstanceOptionsCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, DescribeOrderableDBInstanceOptionsCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // DescribeOrderableDBInstanceOptionsMessage
+ *   Engine: "STRING_VALUE", // required
+ *   EngineVersion: "STRING_VALUE",
+ *   DBInstanceClass: "STRING_VALUE",
+ *   LicenseModel: "STRING_VALUE",
+ *   Vpc: true || false,
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE", // required
+ *       Values: [ // FilterValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeOrderableDBInstanceOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // OrderableDBInstanceOptionsMessage
+ * //   OrderableDBInstanceOptions: [ // OrderableDBInstanceOptionsList
+ * //     { // OrderableDBInstanceOption
+ * //       Engine: "STRING_VALUE",
+ * //       EngineVersion: "STRING_VALUE",
+ * //       DBInstanceClass: "STRING_VALUE",
+ * //       LicenseModel: "STRING_VALUE",
+ * //       AvailabilityZones: [ // AvailabilityZoneList
+ * //         { // AvailabilityZone
+ * //           Name: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       Vpc: true || false,
+ * //       StorageType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeOrderableDBInstanceOptionsCommandInput - {@link DescribeOrderableDBInstanceOptionsCommandInput}
+ * @returns {@link DescribeOrderableDBInstanceOptionsCommandOutput}
  * @see {@link DescribeOrderableDBInstanceOptionsCommandInput} for command's `input` shape.
  * @see {@link DescribeOrderableDBInstanceOptionsCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeOrderableDBInstanceOptionsCommand extends $Command<
-  DescribeOrderableDBInstanceOptionsCommandInput,
-  DescribeOrderableDBInstanceOptionsCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeOrderableDBInstanceOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeOrderableDBInstanceOptionsCommandInput, DescribeOrderableDBInstanceOptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "DescribeOrderableDBInstanceOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeOrderableDBInstanceOptionsMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: OrderableDBInstanceOptionsMessage.filterSensitiveLog,
+export class DescribeOrderableDBInstanceOptionsCommand extends command<DescribeOrderableDBInstanceOptionsCommandInput, DescribeOrderableDBInstanceOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeOrderableDBInstanceOptions",
+  DescribeOrderableDBInstanceOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOrderableDBInstanceOptionsMessage;
+      output: OrderableDBInstanceOptionsMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeOrderableDBInstanceOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeOrderableDBInstanceOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeOrderableDBInstanceOptionsCommandOutput> {
-    return deserializeAws_queryDescribeOrderableDBInstanceOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeOrderableDBInstanceOptionsCommandInput;
+      output: DescribeOrderableDBInstanceOptionsCommandOutput;
+    };
+  };
 }

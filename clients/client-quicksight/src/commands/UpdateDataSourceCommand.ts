@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateDataSourceRequest, UpdateDataSourceResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateDataSourceCommand,
-  serializeAws_restJson1UpdateDataSourceCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDataSourceRequest, UpdateDataSourceResponse } from "../models/models_5";
+import { UpdateDataSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDataSourceCommand}.
+ */
 export interface UpdateDataSourceCommandInput extends UpdateDataSourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDataSourceCommand}.
+ */
 export interface UpdateDataSourceCommandOutput extends UpdateDataSourceResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,552 @@ export interface UpdateDataSourceCommandOutput extends UpdateDataSourceResponse,
  * ```javascript
  * import { QuickSightClient, UpdateDataSourceCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, UpdateDataSourceCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // UpdateDataSourceRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   DataSourceId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   DataSourceParameters: { // DataSourceParameters Union: only one key present
+ *     AmazonElasticsearchParameters: { // AmazonElasticsearchParameters
+ *       Domain: "STRING_VALUE", // required
+ *     },
+ *     AthenaParameters: { // AthenaParameters
+ *       WorkGroup: "STRING_VALUE",
+ *       RoleArn: "STRING_VALUE",
+ *       ConsumerAccountRoleArn: "STRING_VALUE",
+ *       IdentityCenterConfiguration: { // IdentityCenterConfiguration
+ *         EnableIdentityPropagation: true || false,
+ *       },
+ *     },
+ *     AuroraParameters: { // AuroraParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     AuroraPostgreSqlParameters: { // AuroraPostgreSqlParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     AwsIotAnalyticsParameters: { // AwsIotAnalyticsParameters
+ *       DataSetName: "STRING_VALUE", // required
+ *     },
+ *     JiraParameters: { // JiraParameters
+ *       SiteBaseUrl: "STRING_VALUE", // required
+ *     },
+ *     MariaDbParameters: { // MariaDbParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     MySqlParameters: { // MySqlParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     OracleParameters: { // OracleParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *       UseServiceName: true || false,
+ *     },
+ *     PostgreSqlParameters: { // PostgreSqlParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     PrestoParameters: { // PrestoParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Catalog: "STRING_VALUE", // required
+ *     },
+ *     RdsParameters: { // RdsParameters
+ *       InstanceId: "STRING_VALUE", // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     RedshiftParameters: { // RedshiftParameters
+ *       Host: "STRING_VALUE",
+ *       Port: Number("int"),
+ *       Database: "STRING_VALUE", // required
+ *       ClusterId: "STRING_VALUE",
+ *       IAMParameters: { // RedshiftIAMParameters
+ *         RoleArn: "STRING_VALUE", // required
+ *         DatabaseUser: "STRING_VALUE",
+ *         DatabaseGroups: [ // DatabaseGroupList
+ *           "STRING_VALUE",
+ *         ],
+ *         AutoCreateDatabaseUser: true || false,
+ *       },
+ *       IdentityCenterConfiguration: {
+ *         EnableIdentityPropagation: true || false,
+ *       },
+ *     },
+ *     S3Parameters: { // S3Parameters
+ *       ManifestFileLocation: { // ManifestFileLocation
+ *         Bucket: "STRING_VALUE", // required
+ *         Key: "STRING_VALUE", // required
+ *       },
+ *       RoleArn: "STRING_VALUE",
+ *     },
+ *     S3TablesParameters: { // S3TablesParameters
+ *       TableBucketArn: "STRING_VALUE",
+ *     },
+ *     S3KnowledgeBaseParameters: { // S3KnowledgeBaseParameters
+ *       RoleArn: "STRING_VALUE",
+ *       BucketUrl: "STRING_VALUE", // required
+ *       MetadataFilesLocation: "STRING_VALUE",
+ *     },
+ *     ServiceNowParameters: { // ServiceNowParameters
+ *       SiteBaseUrl: "STRING_VALUE", // required
+ *     },
+ *     SnowflakeParameters: { // SnowflakeParameters
+ *       Host: "STRING_VALUE", // required
+ *       Database: "STRING_VALUE", // required
+ *       Warehouse: "STRING_VALUE", // required
+ *       AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *       DatabaseAccessControlRole: "STRING_VALUE",
+ *       OAuthParameters: { // OAuthParameters
+ *         TokenProviderUrl: "STRING_VALUE", // required
+ *         OAuthScope: "STRING_VALUE",
+ *         IdentityProviderVpcConnectionProperties: { // VpcConnectionProperties
+ *           VpcConnectionArn: "STRING_VALUE", // required
+ *         },
+ *         IdentityProviderResourceUri: "STRING_VALUE",
+ *         IdentityProviderCACertificatesBundleS3Uri: "STRING_VALUE",
+ *       },
+ *     },
+ *     SparkParameters: { // SparkParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *     },
+ *     SqlServerParameters: { // SqlServerParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     TeradataParameters: { // TeradataParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE", // required
+ *     },
+ *     TwitterParameters: { // TwitterParameters
+ *       Query: "STRING_VALUE", // required
+ *       MaxRows: Number("int"), // required
+ *     },
+ *     AmazonOpenSearchParameters: { // AmazonOpenSearchParameters
+ *       Domain: "STRING_VALUE", // required
+ *     },
+ *     ExasolParameters: { // ExasolParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *     },
+ *     DatabricksParameters: { // DatabricksParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       SqlEndpointPath: "STRING_VALUE", // required
+ *       AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *       OAuthParameters: {
+ *         TokenProviderUrl: "STRING_VALUE", // required
+ *         OAuthScope: "STRING_VALUE",
+ *         IdentityProviderVpcConnectionProperties: {
+ *           VpcConnectionArn: "STRING_VALUE", // required
+ *         },
+ *         IdentityProviderResourceUri: "STRING_VALUE",
+ *         IdentityProviderCACertificatesBundleS3Uri: "STRING_VALUE",
+ *       },
+ *     },
+ *     StarburstParameters: { // StarburstParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Catalog: "STRING_VALUE", // required
+ *       ProductType: "GALAXY" || "ENTERPRISE",
+ *       DatabaseAccessControlRole: "STRING_VALUE",
+ *       AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *       OAuthParameters: {
+ *         TokenProviderUrl: "STRING_VALUE", // required
+ *         OAuthScope: "STRING_VALUE",
+ *         IdentityProviderVpcConnectionProperties: {
+ *           VpcConnectionArn: "STRING_VALUE", // required
+ *         },
+ *         IdentityProviderResourceUri: "STRING_VALUE",
+ *         IdentityProviderCACertificatesBundleS3Uri: "STRING_VALUE",
+ *       },
+ *     },
+ *     TrinoParameters: { // TrinoParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Catalog: "STRING_VALUE", // required
+ *     },
+ *     BigQueryParameters: { // BigQueryParameters
+ *       ProjectId: "STRING_VALUE", // required
+ *       DataSetRegion: "STRING_VALUE",
+ *     },
+ *     ImpalaParameters: { // ImpalaParameters
+ *       Host: "STRING_VALUE", // required
+ *       Port: Number("int"), // required
+ *       Database: "STRING_VALUE",
+ *       SqlEndpointPath: "STRING_VALUE", // required
+ *     },
+ *     CustomConnectionParameters: { // CustomConnectionParameters
+ *       ConnectionType: "STRING_VALUE",
+ *     },
+ *     WebCrawlerParameters: { // WebCrawlerParameters
+ *       WebCrawlerAuthType: "NO_AUTH" || "BASIC_AUTH" || "FORM" || "SAML", // required
+ *       UsernameFieldXpath: "STRING_VALUE",
+ *       PasswordFieldXpath: "STRING_VALUE",
+ *       UsernameButtonXpath: "STRING_VALUE",
+ *       PasswordButtonXpath: "STRING_VALUE",
+ *       LoginPageUrl: "STRING_VALUE",
+ *       WebProxyHostName: "STRING_VALUE",
+ *       WebProxyPortNumber: Number("int"),
+ *     },
+ *     ConfluenceParameters: { // ConfluenceParameters
+ *       ConfluenceUrl: "STRING_VALUE", // required
+ *     },
+ *     QBusinessParameters: { // QBusinessParameters
+ *       ApplicationArn: "STRING_VALUE", // required
+ *     },
+ *     SharePointParameters: { // SharePointParameters
+ *       SharePointDomain: "STRING_VALUE", // required
+ *       TenantId: "STRING_VALUE",
+ *       ClientId: "STRING_VALUE",
+ *       AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *     },
+ *     GoogleDriveParameters: { // GoogleDriveParameters
+ *       AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *     },
+ *     OneDriveParameters: { // OneDriveParameters
+ *       TenantId: "STRING_VALUE",
+ *       ClientId: "STRING_VALUE",
+ *       AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *     },
+ *     FMKBParameters: { // FMKBParameters
+ *       KnowledgeBaseArn: "STRING_VALUE", // required
+ *       LinkedDataSourceIds: [ // LinkedDataSourceIds
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   },
+ *   Credentials: { // DataSourceCredentials
+ *     CredentialPair: { // CredentialPair
+ *       Username: "STRING_VALUE", // required
+ *       Password: "STRING_VALUE", // required
+ *       AlternateDataSourceParameters: [ // DataSourceParametersList
+ *         {//  Union: only one key present
+ *           AmazonElasticsearchParameters: {
+ *             Domain: "STRING_VALUE", // required
+ *           },
+ *           AthenaParameters: {
+ *             WorkGroup: "STRING_VALUE",
+ *             RoleArn: "STRING_VALUE",
+ *             ConsumerAccountRoleArn: "STRING_VALUE",
+ *             IdentityCenterConfiguration: {
+ *               EnableIdentityPropagation: true || false,
+ *             },
+ *           },
+ *           AuroraParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           AuroraPostgreSqlParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           AwsIotAnalyticsParameters: {
+ *             DataSetName: "STRING_VALUE", // required
+ *           },
+ *           JiraParameters: {
+ *             SiteBaseUrl: "STRING_VALUE", // required
+ *           },
+ *           MariaDbParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           MySqlParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           OracleParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *             UseServiceName: true || false,
+ *           },
+ *           PostgreSqlParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           PrestoParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Catalog: "STRING_VALUE", // required
+ *           },
+ *           RdsParameters: {
+ *             InstanceId: "STRING_VALUE", // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           RedshiftParameters: {
+ *             Host: "STRING_VALUE",
+ *             Port: Number("int"),
+ *             Database: "STRING_VALUE", // required
+ *             ClusterId: "STRING_VALUE",
+ *             IAMParameters: {
+ *               RoleArn: "STRING_VALUE", // required
+ *               DatabaseUser: "STRING_VALUE",
+ *               DatabaseGroups: [
+ *                 "STRING_VALUE",
+ *               ],
+ *               AutoCreateDatabaseUser: true || false,
+ *             },
+ *             IdentityCenterConfiguration: {
+ *               EnableIdentityPropagation: true || false,
+ *             },
+ *           },
+ *           S3Parameters: {
+ *             ManifestFileLocation: {
+ *               Bucket: "STRING_VALUE", // required
+ *               Key: "STRING_VALUE", // required
+ *             },
+ *             RoleArn: "STRING_VALUE",
+ *           },
+ *           S3TablesParameters: {
+ *             TableBucketArn: "STRING_VALUE",
+ *           },
+ *           S3KnowledgeBaseParameters: {
+ *             RoleArn: "STRING_VALUE",
+ *             BucketUrl: "STRING_VALUE", // required
+ *             MetadataFilesLocation: "STRING_VALUE",
+ *           },
+ *           ServiceNowParameters: {
+ *             SiteBaseUrl: "STRING_VALUE", // required
+ *           },
+ *           SnowflakeParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Database: "STRING_VALUE", // required
+ *             Warehouse: "STRING_VALUE", // required
+ *             AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *             DatabaseAccessControlRole: "STRING_VALUE",
+ *             OAuthParameters: {
+ *               TokenProviderUrl: "STRING_VALUE", // required
+ *               OAuthScope: "STRING_VALUE",
+ *               IdentityProviderVpcConnectionProperties: {
+ *                 VpcConnectionArn: "STRING_VALUE", // required
+ *               },
+ *               IdentityProviderResourceUri: "STRING_VALUE",
+ *               IdentityProviderCACertificatesBundleS3Uri: "STRING_VALUE",
+ *             },
+ *           },
+ *           SparkParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *           },
+ *           SqlServerParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           TeradataParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE", // required
+ *           },
+ *           TwitterParameters: {
+ *             Query: "STRING_VALUE", // required
+ *             MaxRows: Number("int"), // required
+ *           },
+ *           AmazonOpenSearchParameters: {
+ *             Domain: "STRING_VALUE", // required
+ *           },
+ *           ExasolParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *           },
+ *           DatabricksParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             SqlEndpointPath: "STRING_VALUE", // required
+ *             AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *             OAuthParameters: {
+ *               TokenProviderUrl: "STRING_VALUE", // required
+ *               OAuthScope: "STRING_VALUE",
+ *               IdentityProviderVpcConnectionProperties: {
+ *                 VpcConnectionArn: "STRING_VALUE", // required
+ *               },
+ *               IdentityProviderResourceUri: "STRING_VALUE",
+ *               IdentityProviderCACertificatesBundleS3Uri: "STRING_VALUE",
+ *             },
+ *           },
+ *           StarburstParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Catalog: "STRING_VALUE", // required
+ *             ProductType: "GALAXY" || "ENTERPRISE",
+ *             DatabaseAccessControlRole: "STRING_VALUE",
+ *             AuthenticationType: "PASSWORD" || "KEYPAIR" || "TOKEN" || "X509",
+ *             OAuthParameters: "<OAuthParameters>",
+ *           },
+ *           TrinoParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Catalog: "STRING_VALUE", // required
+ *           },
+ *           BigQueryParameters: {
+ *             ProjectId: "STRING_VALUE", // required
+ *             DataSetRegion: "STRING_VALUE",
+ *           },
+ *           ImpalaParameters: {
+ *             Host: "STRING_VALUE", // required
+ *             Port: Number("int"), // required
+ *             Database: "STRING_VALUE",
+ *             SqlEndpointPath: "STRING_VALUE", // required
+ *           },
+ *           CustomConnectionParameters: {
+ *             ConnectionType: "STRING_VALUE",
+ *           },
+ *           WebCrawlerParameters: {
+ *             WebCrawlerAuthType: "NO_AUTH" || "BASIC_AUTH" || "FORM" || "SAML", // required
+ *             UsernameFieldXpath: "STRING_VALUE",
+ *             PasswordFieldXpath: "STRING_VALUE",
+ *             UsernameButtonXpath: "STRING_VALUE",
+ *             PasswordButtonXpath: "STRING_VALUE",
+ *             LoginPageUrl: "STRING_VALUE",
+ *             WebProxyHostName: "STRING_VALUE",
+ *             WebProxyPortNumber: Number("int"),
+ *           },
+ *           ConfluenceParameters: {
+ *             ConfluenceUrl: "STRING_VALUE", // required
+ *           },
+ *           QBusinessParameters: {
+ *             ApplicationArn: "STRING_VALUE", // required
+ *           },
+ *           SharePointParameters: {
+ *             SharePointDomain: "STRING_VALUE", // required
+ *             TenantId: "STRING_VALUE",
+ *             ClientId: "STRING_VALUE",
+ *             AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *           },
+ *           GoogleDriveParameters: {
+ *             AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *           },
+ *           OneDriveParameters: {
+ *             TenantId: "STRING_VALUE",
+ *             ClientId: "STRING_VALUE",
+ *             AuthType: "THREE_LEGGED_OAUTH" || "TWO_LEGGED_OAUTH" || "SERVICE_ACCOUNT",
+ *           },
+ *           FMKBParameters: {
+ *             KnowledgeBaseArn: "STRING_VALUE", // required
+ *             LinkedDataSourceIds: [
+ *               "STRING_VALUE",
+ *             ],
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     CopySourceArn: "STRING_VALUE",
+ *     SecretArn: "STRING_VALUE",
+ *     KeyPairCredentials: { // KeyPairCredentials
+ *       KeyPairUsername: "STRING_VALUE", // required
+ *       PrivateKey: "STRING_VALUE", // required
+ *       PrivateKeyPassphrase: "STRING_VALUE",
+ *     },
+ *     WebProxyCredentials: { // WebProxyCredentials
+ *       WebProxyUsername: "STRING_VALUE", // required
+ *       WebProxyPassword: "STRING_VALUE", // required
+ *     },
+ *     OAuthClientCredentials: { // OAuthClientCredentials
+ *       ClientId: "STRING_VALUE",
+ *       ClientSecret: "STRING_VALUE",
+ *       Username: "STRING_VALUE",
+ *     },
+ *     ServiceAccountCredentials: { // ServiceAccountCredentials
+ *       AdminAccountEmail: "STRING_VALUE", // required
+ *       ServiceAccountPrivateKey: "STRING_VALUE", // required
+ *       ClientEmail: "STRING_VALUE", // required
+ *     },
+ *     SharePointClientCredentials: { // SharePointClientCredentials
+ *       KmsKeyArn: "STRING_VALUE", // required
+ *       CertThumbprint: "STRING_VALUE", // required
+ *     },
+ *     OneDriveClientCredentials: { // OneDriveClientCredentials
+ *       KmsKeyArn: "STRING_VALUE", // required
+ *       CertThumbprint: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   VpcConnectionProperties: "<VpcConnectionProperties>",
+ *   SslProperties: { // SslProperties
+ *     DisableSsl: true || false,
+ *   },
+ * };
  * const command = new UpdateDataSourceCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDataSourceResponse
+ * //   Arn: "STRING_VALUE",
+ * //   DataSourceId: "STRING_VALUE",
+ * //   UpdateStatus: "CREATION_IN_PROGRESS" || "CREATION_SUCCESSFUL" || "CREATION_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_SUCCESSFUL" || "UPDATE_FAILED" || "DELETED",
+ * //   RequestId: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateDataSourceCommandInput - {@link UpdateDataSourceCommandInput}
+ * @returns {@link UpdateDataSourceCommandOutput}
  * @see {@link UpdateDataSourceCommandInput} for command's `input` shape.
  * @see {@link UpdateDataSourceCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link CustomerManagedKeyUnavailableException} (client fault)
+ *  <p>The customer managed key that is registered to your Amazon Quick Sight account is unavailable.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDataSourceCommand extends $Command<
-  UpdateDataSourceCommandInput,
-  UpdateDataSourceCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDataSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDataSourceCommandInput, UpdateDataSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "UpdateDataSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDataSourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDataSourceResponse.filterSensitiveLog,
+export class UpdateDataSourceCommand extends command<UpdateDataSourceCommandInput, UpdateDataSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDataSource",
+  UpdateDataSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDataSourceRequest;
+      output: UpdateDataSourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDataSourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDataSourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDataSourceCommandOutput> {
-    return deserializeAws_restJson1UpdateDataSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDataSourceCommandInput;
+      output: UpdateDataSourceCommandOutput;
+    };
+  };
 }

@@ -1,164 +1,134 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  ActionHistoryStatus,
+  ActionStatus,
+  ActionType,
+  AmiArchitecture,
+  ApplicationVersionStatus,
+  ArchitectureType,
+  ComputeType,
+  ConfigurationDeploymentStatus,
+  ConfigurationOptionValueType,
+  EnvironmentHealth,
+  EnvironmentHealthAttribute,
+  EnvironmentHealthStatus,
+  EnvironmentInfoType,
+  EnvironmentStatus,
+  EventSeverity,
+  FailureType,
+  ImageBuildType,
+  InstancesHealthAttribute,
+  PlatformStatus,
+  SourceRepository,
+  SourceType,
+  ValidationSeverity,
+} from "./enums";
 
 /**
  * <p></p>
+ * @public
  */
 export interface AbortEnvironmentUpdateMessage {
   /**
-   * <p>This specifies the ID of the environment with the in-progress update that you want to
-   *       cancel.</p>
+   * <p>This specifies the ID of the environment with the in-progress update that you want to cancel.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>This specifies the name of the environment with the in-progress update that you want to
-   *       cancel.</p>
+   * <p>This specifies the name of the environment with the in-progress update that you want to cancel.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 }
-
-export namespace AbortEnvironmentUpdateMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AbortEnvironmentUpdateMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account does not have sufficient privileges for one or more AWS
- *       services.</p>
- */
-export interface InsufficientPrivilegesException extends __SmithyException, $MetadataBearer {
-  name: "InsufficientPrivilegesException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace InsufficientPrivilegesException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsufficientPrivilegesException): any => ({
-    ...obj,
-  });
-}
-
-export type ActionHistoryStatus = "Completed" | "Failed" | "Unknown";
-
-export type ActionStatus = "Pending" | "Running" | "Scheduled" | "Unknown";
-
-export type ActionType = "InstanceRefresh" | "PlatformUpdate" | "Unknown";
 
 /**
  * <p>A lifecycle rule that deletes application versions after the specified number of
  *       days.</p>
+ * @public
  */
 export interface MaxAgeRule {
   /**
    * <p>Specify <code>true</code> to apply the rule, or <code>false</code> to disable
    *       it.</p>
+   * @public
    */
   Enabled: boolean | undefined;
 
   /**
    * <p>Specify the number of days to retain an application versions.</p>
+   * @public
    */
-  MaxAgeInDays?: number;
+  MaxAgeInDays?: number | undefined;
 
   /**
    * <p>Set to <code>true</code> to delete a version's source bundle from Amazon S3 when
    *       Elastic Beanstalk deletes the application version.</p>
+   * @public
    */
-  DeleteSourceFromS3?: boolean;
-}
-
-export namespace MaxAgeRule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MaxAgeRule): any => ({
-    ...obj,
-  });
+  DeleteSourceFromS3?: boolean | undefined;
 }
 
 /**
  * <p>A lifecycle rule that deletes the oldest application version when the maximum count is
  *       exceeded.</p>
+ * @public
  */
 export interface MaxCountRule {
   /**
    * <p>Specify <code>true</code> to apply the rule, or <code>false</code> to disable
    *       it.</p>
+   * @public
    */
   Enabled: boolean | undefined;
 
   /**
    * <p>Specify the maximum number of application versions to retain.</p>
+   * @public
    */
-  MaxCount?: number;
+  MaxCount?: number | undefined;
 
   /**
    * <p>Set to <code>true</code> to delete a version's source bundle from Amazon S3 when
    *       Elastic Beanstalk deletes the application version.</p>
+   * @public
    */
-  DeleteSourceFromS3?: boolean;
-}
-
-export namespace MaxCountRule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MaxCountRule): any => ({
-    ...obj,
-  });
+  DeleteSourceFromS3?: boolean | undefined;
 }
 
 /**
- * <p>The application version lifecycle settings for an application. Defines the rules that
- *       Elastic Beanstalk applies to an application's versions in order to avoid hitting the
- *       per-region limit for application versions.</p>
- *          <p>When Elastic Beanstalk deletes an application version from its database, you can no
- *       longer deploy that version to an environment. The source bundle remains in S3 unless you
- *       configure the rule to delete it.</p>
+ * <p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an
+ *    application's versions in order to avoid hitting the per-region limit for application versions.</p>
+ *          <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an
+ *    environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>
+ * @public
  */
 export interface ApplicationVersionLifecycleConfig {
   /**
    * <p>Specify a max count rule to restrict the number of application versions that are
    *       retained for an application.</p>
+   * @public
    */
-  MaxCountRule?: MaxCountRule;
+  MaxCountRule?: MaxCountRule | undefined;
 
   /**
    * <p>Specify a max age rule to restrict the length of time that application versions are
    *       retained for an application.</p>
+   * @public
    */
-  MaxAgeRule?: MaxAgeRule;
-}
-
-export namespace ApplicationVersionLifecycleConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationVersionLifecycleConfig): any => ({
-    ...obj,
-  });
+  MaxAgeRule?: MaxAgeRule | undefined;
 }
 
 /**
  * <p>The resource lifecycle configuration for an application. Defines lifecycle settings for
- *       resources that belong to the application, and the service role that AWS Elastic Beanstalk assumes
+ *       resources that belong to the application, and the service role that Elastic Beanstalk assumes
  *       in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle
  *       settings for application versions.</p>
+ * @public
  */
 export interface ApplicationResourceLifecycleConfig {
   /**
-   * <p>The ARN of an IAM service role that Elastic Beanstalk has permission to
-   *       assume.</p>
+   * <p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p>
    *          <p>The <code>ServiceRole</code> property is required the first time that you provide a
    *         <code>VersionLifecycleConfig</code> for the application in one of the supporting calls
    *         (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After
@@ -166,426 +136,529 @@ export interface ApplicationResourceLifecycleConfig {
    *       application, and you don't need to specify it again in subsequent
    *         <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in
    *       subsequent calls to change the Service Role to another value.</p>
+   * @public
    */
-  ServiceRole?: string;
+  ServiceRole?: string | undefined;
 
   /**
    * <p>Defines lifecycle settings for application versions.</p>
+   * @public
    */
-  VersionLifecycleConfig?: ApplicationVersionLifecycleConfig;
-}
-
-export namespace ApplicationResourceLifecycleConfig {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationResourceLifecycleConfig): any => ({
-    ...obj,
-  });
+  VersionLifecycleConfig?: ApplicationVersionLifecycleConfig | undefined;
 }
 
 /**
  * <p>Describes the properties of an application.</p>
+ * @public
  */
 export interface ApplicationDescription {
   /**
    * <p>The Amazon Resource Name (ARN) of the application.</p>
+   * @public
    */
-  ApplicationArn?: string;
+  ApplicationArn?: string | undefined;
 
   /**
    * <p>The name of the application.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>User-defined description of the application.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date when the application was created.</p>
+   * @public
    */
-  DateCreated?: Date;
+  DateCreated?: Date | undefined;
 
   /**
    * <p>The date when the application was last modified.</p>
+   * @public
    */
-  DateUpdated?: Date;
+  DateUpdated?: Date | undefined;
 
   /**
    * <p>The names of the versions for this application.</p>
+   * @public
    */
-  Versions?: string[];
+  Versions?: string[] | undefined;
 
   /**
    * <p>The names of the configuration templates associated with this application.</p>
+   * @public
    */
-  ConfigurationTemplates?: string[];
+  ConfigurationTemplates?: string[] | undefined;
 
   /**
    * <p>The lifecycle settings for the application.</p>
+   * @public
    */
-  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
-}
-
-export namespace ApplicationDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationDescription): any => ({
-    ...obj,
-  });
+  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig | undefined;
 }
 
 /**
  * <p>Result message containing a single description of an application.</p>
+ * @public
  */
 export interface ApplicationDescriptionMessage {
   /**
    * <p> The <a>ApplicationDescription</a> of the application. </p>
+   * @public
    */
-  Application?: ApplicationDescription;
-}
-
-export namespace ApplicationDescriptionMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationDescriptionMessage): any => ({
-    ...obj,
-  });
+  Application?: ApplicationDescription | undefined;
 }
 
 /**
  * <p>Result message containing a list of application descriptions.</p>
+ * @public
  */
 export interface ApplicationDescriptionsMessage {
   /**
    * <p>This parameter contains a list of <a>ApplicationDescription</a>.</p>
+   * @public
    */
-  Applications?: ApplicationDescription[];
-}
-
-export namespace ApplicationDescriptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationDescriptionsMessage): any => ({
-    ...obj,
-  });
+  Applications?: ApplicationDescription[] | undefined;
 }
 
 /**
  * <p>Represents the average latency for the slowest X percent of requests over the last 10
  *       seconds.</p>
+ * @public
  */
 export interface Latency {
   /**
    * <p>The average latency for the slowest 0.1 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P999?: number;
+  P999?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 1 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P99?: number;
+  P99?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 5 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P95?: number;
+  P95?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 10 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P90?: number;
+  P90?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 15 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P85?: number;
+  P85?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 25 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P75?: number;
+  P75?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 50 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P50?: number;
+  P50?: number | undefined;
 
   /**
    * <p>The average latency for the slowest 90 percent of requests over the last 10
    *       seconds.</p>
+   * @public
    */
-  P10?: number;
-}
-
-export namespace Latency {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Latency): any => ({
-    ...obj,
-  });
+  P10?: number | undefined;
 }
 
 /**
  * <p>Represents the percentage of requests over the last 10 seconds that resulted in each
  *       type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code
  *       Definitions</a>.</p>
+ * @public
  */
 export interface StatusCodes {
   /**
    * <p>The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201,
    *       etc.) status code.</p>
+   * @public
    */
-  Status2xx?: number;
+  Status2xx?: number | undefined;
 
   /**
    * <p>The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301,
    *       etc.) status code.</p>
+   * @public
    */
-  Status3xx?: number;
+  Status3xx?: number | undefined;
 
   /**
    * <p>The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401,
    *       etc.) status code.</p>
+   * @public
    */
-  Status4xx?: number;
+  Status4xx?: number | undefined;
 
   /**
    * <p>The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501,
    *       etc.) status code.</p>
+   * @public
    */
-  Status5xx?: number;
-}
-
-export namespace StatusCodes {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StatusCodes): any => ({
-    ...obj,
-  });
+  Status5xx?: number | undefined;
 }
 
 /**
- * <p>Application request metrics for an AWS Elastic Beanstalk environment.</p>
+ * <p>Application request metrics for an Elastic Beanstalk environment.</p>
+ * @public
  */
 export interface ApplicationMetrics {
   /**
    * <p>The amount of time that the metrics cover (usually 10 seconds). For example, you might
    *       have 5 requests (<code>request_count</code>) within the most recent time slice of 10 seconds
    *         (<code>duration</code>).</p>
+   * @public
    */
-  Duration?: number;
+  Duration?: number | undefined;
 
   /**
    * <p>Average number of requests handled by the web server per second over the last 10
    *       seconds.</p>
+   * @public
    */
-  RequestCount?: number;
+  RequestCount?: number | undefined;
 
   /**
    * <p>Represents the percentage of requests over the last 10 seconds that resulted in each
    *       type of status code response.</p>
+   * @public
    */
-  StatusCodes?: StatusCodes;
+  StatusCodes?: StatusCodes | undefined;
 
   /**
    * <p>Represents the average latency for the slowest X percent of requests over the last 10
    *       seconds. Latencies are in seconds with one millisecond resolution.</p>
+   * @public
    */
-  Latency?: Latency;
+  Latency?: Latency | undefined;
 }
 
-export namespace ApplicationMetrics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationMetrics): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ApplicationResourceLifecycleDescriptionMessage {
   /**
    * <p>The name of the application.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The lifecycle configuration.</p>
+   * @public
    */
-  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
+  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig | undefined;
 }
 
-export namespace ApplicationResourceLifecycleDescriptionMessage {
+/**
+ * <p>Settings that Elastic Beanstalk uses to build a container image from the source bundle of an
+ *       application version.</p>
+ * @public
+ */
+export interface ImageBuildConfiguration {
   /**
-   * @internal
+   * <p>How Elastic Beanstalk builds the container image. Elastic Beanstalk rejects a <code>Build</code> that doesn't
+   *       specify it.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>docker</code> – Elastic Beanstalk builds the image from a Dockerfile in your source
+   *           bundle. Specify the Dockerfile with <code>DockerfileLocation</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>buildpack</code> – Elastic Beanstalk builds the image with a Cloud Native Buildpacks
+   *           builder. Specify the builder with <code>Buildpack</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ApplicationResourceLifecycleDescriptionMessage): any => ({
-    ...obj,
-  });
+  Type?: ImageBuildType | undefined;
+
+  /**
+   * <p>The path to the Dockerfile within the source bundle, relative to the root of the source
+   *       bundle. For example, <code>backend/Dockerfile</code>.</p>
+   *          <p>Elastic Beanstalk uses this member only when <code>Type</code> is <code>docker</code>. If you don't
+   *       specify it, Elastic Beanstalk uses the Dockerfile at the root of the source bundle.</p>
+   * @public
+   */
+  DockerfileLocation?: string | undefined;
+
+  /**
+   * <p>The Cloud Native Buildpacks builder image that Elastic Beanstalk uses to build the container image. For
+   *       example, <code>paketobuildpacks/builder-jammy-base</code>.</p>
+   *          <p>This member is required when <code>Type</code> is <code>buildpack</code>. Elastic Beanstalk doesn't
+   *       provide a default builder.</p>
+   * @public
+   */
+  Buildpack?: string | undefined;
+
+  /**
+   * <p>The processor architecture that Elastic Beanstalk builds the container image for. The architecture must
+   *       match the architecture of the instances in the environment that you deploy the application
+   *       version to.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>amd64</code> – x86-64 instances. This is the default.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arm64</code> – Amazon Web Services Graviton instances.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Architecture?: ArchitectureType | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that CodeBuild assumes to run
+   *       the build in your Amazon Web Services account. Elastic Beanstalk rejects a <code>Build</code> that doesn't specify this
+   *       role.</p>
+   * @public
+   */
+  CodeBuildServiceRole?: string | undefined;
+
+  /**
+   * <p>The size of the compute resources that run the build. If you don't specify it, Elastic Beanstalk uses
+   *         <code>BUILD_GENERAL1_MEDIUM</code>.</p>
+   *          <p>Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BUILD_GENERAL1_SMALL</code> – Use up to 3 GB memory and 2 vCPUs for
+   *           builds.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BUILD_GENERAL1_MEDIUM</code> – Use up to 7 GB memory and 4 vCPUs for
+   *           builds.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>BUILD_GENERAL1_LARGE</code> – Use up to 15 GB memory and 8 vCPUs for
+   *           builds.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ComputeType?: ComputeType | undefined;
+
+  /**
+   * <p>How long, in minutes from 5 to 480 (8 hours), Elastic Beanstalk waits before stopping a build that
+   *       hasn't completed. The default is 60 minutes.</p>
+   * @public
+   */
+  TimeoutInMinutes?: number | undefined;
 }
 
-export type SourceRepository = "CodeCommit" | "S3";
-
-export type SourceType = "Git" | "Zip";
+/**
+ * <p>The location of a container image.</p>
+ * @public
+ */
+export interface ImageSource {
+  /**
+   * <p>The URI of the container image, including the registry, the repository, and the image tag
+   *       or digest. For example,
+   *         <code>111122223333.dkr.ecr.us-east-1.amazonaws.com/my-repository:latest</code>.</p>
+   * @public
+   */
+  Uri?: string | undefined;
+}
 
 /**
  * <p>Location of the source code for an application version.</p>
+ * @public
  */
 export interface SourceBuildInformation {
   /**
    * <p>The type of repository.</p>
    *          <ul>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>Git</code>
    *                </p>
    *             </li>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>Zip</code>
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  SourceType: SourceType | string | undefined;
+  SourceType: SourceType | undefined;
 
   /**
    * <p>Location where the repository is stored.</p>
    *          <ul>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>CodeCommit</code>
    *                </p>
    *             </li>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>S3</code>
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  SourceRepository: SourceRepository | string | undefined;
+  SourceRepository: SourceRepository | undefined;
 
   /**
    * <p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code>
    *          </p>
-   *         <ul>
+   *          <ul>
    *             <li>
-   * 	              <p>For <code>CodeCommit</code>,
+   *                <p>For <code>CodeCommit</code>,
    * 	the format is the repository name and commit ID, separated by a forward slash.
    * 	For example,
    * 	<code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p>
    *             </li>
    *             <li>
-   * 	              <p>For <code>S3</code>,
+   *                <p>For <code>S3</code>,
    * 	the format is the S3 bucket name and object key, separated by a forward slash.
    * 	For example,
    * 	<code>my-s3-bucket/Folders/my-source-file</code>.</p>
    *             </li>
    *          </ul>
+   * @public
    */
   SourceLocation: string | undefined;
 }
 
-export namespace SourceBuildInformation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SourceBuildInformation): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The bucket and key of an item stored in Amazon S3.</p>
+ * @public
  */
 export interface S3Location {
   /**
    * <p>The Amazon S3 bucket where the data is located.</p>
+   * @public
    */
-  S3Bucket?: string;
+  S3Bucket?: string | undefined;
 
   /**
    * <p>The Amazon S3 key where the data is located.</p>
+   * @public
    */
-  S3Key?: string;
+  S3Key?: string | undefined;
 }
-
-export namespace S3Location {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3Location): any => ({
-    ...obj,
-  });
-}
-
-export type ApplicationVersionStatus = "Building" | "Failed" | "Processed" | "Processing" | "Unprocessed";
 
 /**
  * <p>Describes the properties of an application version.</p>
+ * @public
  */
 export interface ApplicationVersionDescription {
   /**
    * <p>The Amazon Resource Name (ARN) of the application version.</p>
+   * @public
    */
-  ApplicationVersionArn?: string;
+  ApplicationVersionArn?: string | undefined;
 
   /**
    * <p>The name of the application to which the application version belongs.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The description of the application version.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A unique identifier for the application version.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
-   * <p>If the version's source code was retrieved from AWS CodeCommit, the location of the
+   * <p>If the version's source code was retrieved from CodeCommit, the location of the
    *       source code for the application version.</p>
+   * @public
    */
-  SourceBuildInformation?: SourceBuildInformation;
+  SourceBuildInformation?: SourceBuildInformation | undefined;
 
   /**
-   * <p>Reference to the artifact from the AWS CodeBuild build.</p>
+   * <p>Reference to the artifact from the CodeBuild build.</p>
+   * @public
    */
-  BuildArn?: string;
+  BuildArn?: string | undefined;
 
   /**
    * <p>The storage location of the application version's source bundle in Amazon S3.</p>
+   * @public
    */
-  SourceBundle?: S3Location;
+  SourceBundle?: S3Location | undefined;
+
+  /**
+   * <p>The location of the container image for the application version.</p>
+   *          <p>For an application version created from an image you provide, this is that image. For one
+   *       that Elastic Beanstalk builds from your source bundle, Elastic Beanstalk fills this in with the image it pushed after
+   *       the build succeeds.</p>
+   * @public
+   */
+  ImageSource?: ImageSource | undefined;
+
+  /**
+   * <p>The settings that Elastic Beanstalk uses to build a container image from the source bundle of the
+   *       application version. Not present for an application version created from an image you
+   *       provide.</p>
+   * @public
+   */
+  ImageBuildConfiguration?: ImageBuildConfiguration | undefined;
+
+  /**
+   * <p>Indicates whether Elastic Beanstalk pre-processed and validated the environment manifest
+   *         (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the
+   *         <code>.ebextensions</code> folder) in the source bundle of the application version.</p>
+   * @public
+   */
+  Process?: boolean | undefined;
 
   /**
    * <p>The creation date of the application version.</p>
+   * @public
    */
-  DateCreated?: Date;
+  DateCreated?: Date | undefined;
 
   /**
    * <p>The last modified date of the application version.</p>
+   * @public
    */
-  DateUpdated?: Date;
+  DateUpdated?: Date | undefined;
 
   /**
    * <p>The processing status of the application version. Reflects the state of the application
@@ -606,7 +679,7 @@ export interface ApplicationVersionDescription {
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>Building</code> – Application version is currently undergoing an AWS CodeBuild build.</p>
+   *                   <code>Building</code> – Application version is currently undergoing an CodeBuild build.</p>
    *             </li>
    *             <li>
    *                <p>
@@ -614,263 +687,162 @@ export interface ApplicationVersionDescription {
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>Failed</code> – Either the AWS CodeBuild build failed or configuration files didn't
+   *                   <code>Failed</code> – Either the CodeBuild build failed or configuration files didn't
    *           pass validation. This application version isn't usable.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Status?: ApplicationVersionStatus | string;
-}
-
-export namespace ApplicationVersionDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationVersionDescription): any => ({
-    ...obj,
-  });
+  Status?: ApplicationVersionStatus | undefined;
 }
 
 /**
  * <p>Result message wrapping a single description of an application version.</p>
+ * @public
  */
 export interface ApplicationVersionDescriptionMessage {
   /**
-   * <p> The <a>ApplicationVersionDescription</a> of the application version.
-   *     </p>
+   * <p> The <a>ApplicationVersionDescription</a> of the application version. </p>
+   * @public
    */
-  ApplicationVersion?: ApplicationVersionDescription;
-}
-
-export namespace ApplicationVersionDescriptionMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationVersionDescriptionMessage): any => ({
-    ...obj,
-  });
+  ApplicationVersion?: ApplicationVersionDescription | undefined;
 }
 
 /**
  * <p>Result message wrapping a list of application version descriptions.</p>
+ * @public
  */
 export interface ApplicationVersionDescriptionsMessage {
   /**
-   * <p>List of <code>ApplicationVersionDescription</code> objects sorted in order of
-   *       creation.</p>
+   * <p>List of <code>ApplicationVersionDescription</code> objects sorted in order of creation.</p>
+   * @public
    */
-  ApplicationVersions?: ApplicationVersionDescription[];
+  ApplicationVersions?: ApplicationVersionDescription[] | undefined;
 
   /**
-   * <p>In a paginated request, the token that you can pass in a subsequent request to get the
-   *       next response page.</p>
+   * <p>In a paginated request, the token that you can pass in a subsequent request to get the next response page.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ApplicationVersionDescriptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplicationVersionDescriptionsMessage): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Request to execute a scheduled managed action immediately.</p>
+ * @public
  */
 export interface ApplyEnvironmentManagedActionRequest {
   /**
    * <p>The name of the target environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The environment ID of the target environment.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The action ID of the scheduled managed action to execute.</p>
+   * @public
    */
   ActionId: string | undefined;
 }
 
-export namespace ApplyEnvironmentManagedActionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplyEnvironmentManagedActionRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The result message containing information about the managed action.</p>
+ * @public
  */
 export interface ApplyEnvironmentManagedActionResult {
   /**
    * <p>The action ID of the managed action.</p>
+   * @public
    */
-  ActionId?: string;
+  ActionId?: string | undefined;
 
   /**
    * <p>A description of the managed action.</p>
+   * @public
    */
-  ActionDescription?: string;
+  ActionDescription?: string | undefined;
 
   /**
    * <p>The type of managed action.</p>
+   * @public
    */
-  ActionType?: ActionType | string;
+  ActionType?: ActionType | undefined;
 
   /**
    * <p>The status of the managed action.</p>
+   * @public
    */
-  Status?: string;
-}
-
-export namespace ApplyEnvironmentManagedActionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ApplyEnvironmentManagedActionResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>A generic service exception has occurred.</p>
- */
-export interface ElasticBeanstalkServiceException extends __SmithyException, $MetadataBearer {
-  name: "ElasticBeanstalkServiceException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace ElasticBeanstalkServiceException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ElasticBeanstalkServiceException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Cannot modify the managed action in its current state.</p>
- */
-export interface ManagedActionInvalidStateException extends __SmithyException, $MetadataBearer {
-  name: "ManagedActionInvalidStateException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace ManagedActionInvalidStateException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ManagedActionInvalidStateException): any => ({
-    ...obj,
-  });
+  Status?: string | undefined;
 }
 
 /**
  * <p>Request to add or change the operations role used by an environment.</p>
+ * @public
  */
 export interface AssociateEnvironmentOperationsRoleMessage {
   /**
    * <p>The name of the environment to which to set the operations role.</p>
+   * @public
    */
   EnvironmentName: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's
-   *       operations role.</p>
+   * <p>The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.</p>
+   * @public
    */
   OperationsRole: string | undefined;
 }
 
-export namespace AssociateEnvironmentOperationsRoleMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateEnvironmentOperationsRoleMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Describes an Auto Scaling launch configuration.</p>
+ * @public
  */
 export interface AutoScalingGroup {
   /**
    * <p>The name of the <code>AutoScalingGroup</code> . </p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace AutoScalingGroup {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AutoScalingGroup): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes the solution stack.</p>
+ * @public
  */
 export interface SolutionStackDescription {
   /**
    * <p>The name of the solution stack.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The permitted file types allowed for a solution stack.</p>
+   * @public
    */
-  PermittedFileTypes?: string[];
-}
-
-export namespace SolutionStackDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SolutionStackDescription): any => ({
-    ...obj,
-  });
+  PermittedFileTypes?: string[] | undefined;
 }
 
 /**
  * <p>Results message indicating whether a CNAME is available.</p>
+ * @public
  */
 export interface CheckDNSAvailabilityMessage {
   /**
    * <p>The prefix used when this CNAME is reserved.</p>
+   * @public
    */
   CNAMEPrefix: string | undefined;
 }
 
-export namespace CheckDNSAvailabilityMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CheckDNSAvailabilityMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Indicates if the specified CNAME is available.</p>
+ * @public
  */
 export interface CheckDNSAvailabilityResultMessage {
   /**
@@ -885,58 +857,43 @@ export interface CheckDNSAvailabilityResultMessage {
    *                   <code>false</code> : The CNAME is not available.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Available?: boolean;
+  Available?: boolean | undefined;
 
   /**
-   * <p>The fully qualified CNAME to reserve when <a>CreateEnvironment</a> is called
-   *       with the provided prefix.</p>
+   * <p>The fully qualified CNAME to reserve when <a>CreateEnvironment</a> is called with the provided prefix.</p>
+   * @public
    */
-  FullyQualifiedCNAME?: string;
-}
-
-export namespace CheckDNSAvailabilityResultMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CheckDNSAvailabilityResultMessage): any => ({
-    ...obj,
-  });
+  FullyQualifiedCNAME?: string | undefined;
 }
 
 /**
  * <p>Request to create or update a group of environments.</p>
+ * @public
  */
 export interface ComposeEnvironmentsMessage {
   /**
    * <p>The name of the application to which the specified source bundles belong.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
-   * <p>The name of the group to which the target environments belong. Specify a group name
-   *       only if the environment name defined in each target environment's manifest ends with a +
-   *       (plus) character. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest
-   *         (env.yaml)</a> for details.</p>
+   * <p>The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment's
+   *       manifest ends with a + (plus) character. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment
+   *         Manifest (env.yaml)</a> for details.</p>
+   * @public
    */
-  GroupName?: string;
+  GroupName?: string | undefined;
 
   /**
-   * <p>A list of version labels, specifying one or more application source bundles that belong
-   *       to the target application. Each source bundle must include an environment manifest that
-   *       specifies the name of the environment and the name of the solution stack to use, and
-   *       optionally can specify environment links to create.</p>
+   * <p>A list of version labels, specifying one or more application source bundles that belong to the target application. Each source bundle must include an
+   *       environment manifest that specifies the name of the environment and the name of the solution stack to use, and optionally can specify environment links to
+   *       create.</p>
+   * @public
    */
-  VersionLabels?: string[];
-}
-
-export namespace ComposeEnvironmentsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ComposeEnvironmentsMessage): any => ({
-    ...obj,
-  });
+  VersionLabels?: string[] | undefined;
 }
 
 /**
@@ -944,126 +901,80 @@ export namespace ComposeEnvironmentsMessage {
  *       connection information in system properties that can be used to connect to another environment
  *       in the same group. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest
  *         (env.yaml)</a> for details.</p>
+ * @public
  */
 export interface EnvironmentLink {
   /**
    * <p>The name of the link.</p>
+   * @public
    */
-  LinkName?: string;
+  LinkName?: string | undefined;
 
   /**
    * <p>The name of the linked environment (the dependency).</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 }
-
-export namespace EnvironmentLink {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentLink): any => ({
-    ...obj,
-  });
-}
-
-export type EnvironmentHealth = "Green" | "Grey" | "Red" | "Yellow";
-
-export type EnvironmentHealthStatus =
-  | "Degraded"
-  | "Info"
-  | "NoData"
-  | "Ok"
-  | "Pending"
-  | "Severe"
-  | "Suspended"
-  | "Unknown"
-  | "Warning";
 
 /**
  * <p>Describes the properties of a Listener for the LoadBalancer.</p>
+ * @public
  */
 export interface Listener {
   /**
    * <p>The protocol that is used by the Listener.</p>
+   * @public
    */
-  Protocol?: string;
+  Protocol?: string | undefined;
 
   /**
    * <p>The port that is used by the Listener.</p>
+   * @public
    */
-  Port?: number;
-}
-
-export namespace Listener {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Listener): any => ({
-    ...obj,
-  });
+  Port?: number | undefined;
 }
 
 /**
  * <p>Describes the details of a LoadBalancer.</p>
+ * @public
  */
 export interface LoadBalancerDescription {
   /**
    * <p>The name of the LoadBalancer.</p>
+   * @public
    */
-  LoadBalancerName?: string;
+  LoadBalancerName?: string | undefined;
 
   /**
    * <p>The domain name of the LoadBalancer.</p>
+   * @public
    */
-  Domain?: string;
+  Domain?: string | undefined;
 
   /**
    * <p>A list of Listeners used by the LoadBalancer.</p>
+   * @public
    */
-  Listeners?: Listener[];
-}
-
-export namespace LoadBalancerDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LoadBalancerDescription): any => ({
-    ...obj,
-  });
+  Listeners?: Listener[] | undefined;
 }
 
 /**
- * <p>Describes the AWS resources in use by this environment. This data is not live
+ * <p>Describes the Amazon Web Services resources in use by this environment. This data is not live
  *       data.</p>
+ * @public
  */
 export interface EnvironmentResourcesDescription {
   /**
    * <p>Describes the LoadBalancer.</p>
+   * @public
    */
-  LoadBalancer?: LoadBalancerDescription;
+  LoadBalancer?: LoadBalancerDescription | undefined;
 }
-
-export namespace EnvironmentResourcesDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentResourcesDescription): any => ({
-    ...obj,
-  });
-}
-
-export type EnvironmentStatus =
-  | "Aborting"
-  | "Launching"
-  | "LinkingFrom"
-  | "LinkingTo"
-  | "Ready"
-  | "Terminated"
-  | "Terminating"
-  | "Updating";
 
 /**
  * <p>Describes the properties of an environment tier</p>
+ * @public
  */
 export interface EnvironmentTier {
   /**
@@ -1071,16 +982,21 @@ export interface EnvironmentTier {
    *          <p>Valid values:</p>
    *          <ul>
    *             <li>
-   *                <p>For <i>Web server tier</i> – <code>WebServer</code>
+   *                <p>For <i>Standard-mode EC2-based web server</i> – <code>WebServer</code>
    *                </p>
    *             </li>
    *             <li>
-   *                <p>For <i>Worker tier</i> – <code>Worker</code>
+   *                <p>For <i>Standard-mode EC2-based backend application with Amazon SQS</i> – <code>Worker</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>For <i>Cluster-mode Amazon EKS-based applications</i> – <code>Cluster</code>
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The type of this environment tier.</p>
@@ -1094,9 +1010,14 @@ export interface EnvironmentTier {
    *                <p>For <i>Worker tier</i> – <code>SQS/HTTP</code>
    *                </p>
    *             </li>
+   *             <li>
+   *                <p>For <i>Cluster tier</i> – <code>EKS</code>
+   *                </p>
+   *             </li>
    *          </ul>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the
@@ -1105,92 +1026,112 @@ export interface EnvironmentTier {
    *             <p>This member is deprecated. Any specific version that you set may become out of date.
    *         We recommend leaving it unspecified.</p>
    *          </note>
+   * @public
    */
-  Version?: string;
-}
-
-export namespace EnvironmentTier {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentTier): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * <p>Describes the properties of an environment.</p>
+ * @public
  */
 export interface EnvironmentDescription {
   /**
    * <p>The name of this environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The ID of this environment.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the application associated with this environment.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The application version deployed in this environment.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
    * <p> The name of the <code>SolutionStack</code> deployed with this environment. </p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p>The name of the configuration template used to originally launch this
    *       environment.</p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>Describes this environment.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>For load-balanced, autoscaling environments, the URL to the LoadBalancer. For
    *       single-instance environments, the IP address of the instance.</p>
+   * @public
    */
-  EndpointURL?: string;
+  EndpointURL?: string | undefined;
 
   /**
    * <p>The URL to the CNAME for this environment.</p>
+   * @public
    */
-  CNAME?: string;
+  CNAME?: string | undefined;
 
   /**
    * <p>The creation date for this environment.</p>
+   * @public
    */
-  DateCreated?: Date;
+  DateCreated?: Date | undefined;
 
   /**
    * <p>The last modified date for this environment.</p>
+   * @public
    */
-  DateUpdated?: Date;
+  DateUpdated?: Date | undefined;
 
   /**
    * <p>The current operational status of the environment:</p>
-   *
    *          <ul>
    *             <li>
    *                <p>
+   *                   <code>Aborting</code>: Environment is in the process of aborting a deployment.</p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>Launching</code>: Environment is in the process of initial deployment.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LinkingFrom</code>: Environment is in the process of being linked to by another
+   *           environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+   *         for details.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LinkingTo</code>: Environment is in the process of linking to another environment.
+   *           See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+   *           for details.</p>
    *             </li>
    *             <li>
    *                <p>
@@ -1211,8 +1152,9 @@ export interface EnvironmentDescription {
    *                   <code>Terminated</code>: Environment is not running.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Status?: EnvironmentStatus | string;
+  Status?: EnvironmentStatus | undefined;
 
   /**
    * <p>Indicates if there is an in-progress environment configuration update or application
@@ -1221,11 +1163,12 @@ export interface EnvironmentDescription {
    *             <code>true:</code> There is an update in progress. </p>
    *          <p>
    *             <code>false:</code> There are no updates currently in progress. </p>
+   * @public
    */
-  AbortableOperationInProgress?: boolean;
+  AbortableOperationInProgress?: boolean | undefined;
 
   /**
-   * <p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the
+   * <p>Describes the health status of the environment. Elastic Beanstalk indicates the
    *       failure levels for a running environment:</p>
    *          <ul>
    *             <li>
@@ -1251,223 +1194,139 @@ export interface EnvironmentDescription {
    *          </ul>
    *          <p> Default: <code>Grey</code>
    *          </p>
+   * @public
    */
-  Health?: EnvironmentHealth | string;
+  Health?: EnvironmentHealth | undefined;
 
   /**
    * <p>Returns the health status of the application running in your environment. For more
    *       information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and
    *         Statuses</a>.</p>
+   * @public
    */
-  HealthStatus?: EnvironmentHealthStatus | string;
+  HealthStatus?: EnvironmentHealthStatus | undefined;
 
   /**
-   * <p>The description of the AWS resources used by this environment.</p>
+   * <p>The description of the Amazon Web Services resources used by this environment.</p>
+   * @public
    */
-  Resources?: EnvironmentResourcesDescription;
+  Resources?: EnvironmentResourcesDescription | undefined;
 
   /**
    * <p>Describes the current tier of this environment.</p>
+   * @public
    */
-  Tier?: EnvironmentTier;
+  Tier?: EnvironmentTier | undefined;
 
   /**
    * <p>A list of links to other environments in the same group.</p>
+   * @public
    */
-  EnvironmentLinks?: EnvironmentLink[];
+  EnvironmentLinks?: EnvironmentLink[] | undefined;
 
   /**
    * <p>The environment's Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.</p>
+   * @public
    */
-  EnvironmentArn?: string;
+  EnvironmentArn?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the environment's operations role. For more information,
-   *       see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   * <important>
+   *             <p>The operations role feature of Elastic Beanstalk is in beta release and is subject to change.</p>
+   *          </important>
+   *          <p>The Amazon Resource Name (ARN) of the environment's operations role.</p>
+   * @public
    */
-  OperationsRole?: string;
-}
-
-export namespace EnvironmentDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentDescription): any => ({
-    ...obj,
-  });
+  OperationsRole?: string | undefined;
 }
 
 /**
  * <p>Result message containing a list of environment descriptions.</p>
+ * @public
  */
 export interface EnvironmentDescriptionsMessage {
   /**
    * <p> Returns an <a>EnvironmentDescription</a> list. </p>
+   * @public
    */
-  Environments?: EnvironmentDescription[];
+  Environments?: EnvironmentDescription[] | undefined;
 
   /**
-   * <p>In a paginated request, the token that you can pass in a subsequent request to get the
-   *       next response page.</p>
+   * <p>In a paginated request, the token that you can pass in a subsequent request to get the next response page.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace EnvironmentDescriptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentDescriptionsMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account has reached its limit of environments.</p>
- */
-export interface TooManyEnvironmentsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyEnvironmentsException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyEnvironmentsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyEnvironmentsException): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes a tag applied to a resource in an environment.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>The key of the tag.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The value of the tag.</p>
+   * @public
    */
-  Value?: string;
-}
-
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
  * <p>Request to create an application.</p>
+ * @public
  */
 export interface CreateApplicationMessage {
   /**
    * <p>The name of the application. Must be unique within your account.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>Your description of the application.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>Specifies an application resource lifecycle configuration to prevent your application
-   *       from accumulating too many versions.</p>
+   * <p>Specifies an application resource lifecycle configuration to prevent your application from
+   *       accumulating too many versions.</p>
+   * @public
    */
-  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
+  ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig | undefined;
 
   /**
    * <p>Specifies the tags applied to the application.</p>
    *          <p>Elastic Beanstalk applies these tags only to the application. Environments that you create in the
    *       application don't inherit the tags.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateApplicationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateApplicationMessage): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>The specified account has reached its limit of applications.</p>
- */
-export interface TooManyApplicationsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyApplicationsException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyApplicationsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyApplicationsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>AWS CodeBuild is not available in the specified region.</p>
- */
-export interface CodeBuildNotInServiceRegionException extends __SmithyException, $MetadataBearer {
-  name: "CodeBuildNotInServiceRegionException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace CodeBuildNotInServiceRegionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CodeBuildNotInServiceRegionException): any => ({
-    ...obj,
-  });
-}
-
-export enum ComputeType {
-  BUILD_GENERAL1_LARGE = "BUILD_GENERAL1_LARGE",
-  BUILD_GENERAL1_MEDIUM = "BUILD_GENERAL1_MEDIUM",
-  BUILD_GENERAL1_SMALL = "BUILD_GENERAL1_SMALL",
-}
-
-/**
- * <p>Settings for an AWS CodeBuild build.</p>
+ * <p>Settings for an CodeBuild build.</p>
+ * @public
  */
 export interface BuildConfiguration {
   /**
-   * <p>The name of the artifact of the CodeBuild build.
-   *     If provided, Elastic Beanstalk stores the build artifact in the S3 location
+   * <p>The name of the artifact of the CodeBuild build. If provided, Elastic Beanstalk stores the build artifact in the S3 location
    *     <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>-<i>artifact-name</i>.zip.
-   *     If not provided, Elastic Beanstalk stores the build artifact in the S3 location
-   *     <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>.zip.
-   *     </p>
+   *    If not provided, Elastic Beanstalk stores the build artifact in the S3 location
+   *     <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>.zip. </p>
+   * @public
    */
-  ArtifactName?: string;
+  ArtifactName?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.</p>
+   * <p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that enables CodeBuild to interact with dependent
+   *       Amazon Web Services service on behalf of the Amazon Web Services account.</p>
+   * @public
    */
   CodeBuildServiceRole: string | undefined;
 
@@ -1480,254 +1339,232 @@ export interface BuildConfiguration {
    *                </p>
    *             </li>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds</code>
    *                </p>
    *             </li>
    *             <li>
-   * 	              <p>
+   *                <p>
    *                   <code>BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds</code>
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ComputeType?: ComputeType | string;
+  ComputeType?: ComputeType | undefined;
 
   /**
    * <p>The ID of the Docker image to use for this build project.</p>
+   * @public
    */
   Image: string | undefined;
 
   /**
-   * <p>How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.</p>
+   * <p>How long in minutes, from 5 to 480 (8 hours), for CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.</p>
+   * @public
    */
-  TimeoutInMinutes?: number;
+  TimeoutInMinutes?: number | undefined;
 }
 
-export namespace BuildConfiguration {
+/**
+ * <p>The source of the container image for an application version: an image that you built and
+ *       pushed to a container registry yourself, or settings for Elastic Beanstalk to build one from your source
+ *       bundle.</p>
+ * @public
+ */
+export interface ImageConfiguration {
   /**
-   * @internal
+   * <p>The location of a container image that you built and pushed to a container registry
+   *       yourself. Elastic Beanstalk deploys the image without a build step.</p>
+   *          <p>If you specify <code>Source</code>, don't specify <code>Build</code> or the request's
+   *         <code>SourceBundle</code> parameter.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: BuildConfiguration): any => ({
-    ...obj,
-  });
+  Source?: ImageSource | undefined;
+
+  /**
+   * <p>Settings that Elastic Beanstalk uses to build a container image from the source bundle of the
+   *       application version.</p>
+   *          <p>If you specify <code>Build</code>, also specify the request's <code>SourceBundle</code>
+   *       parameter, and don't specify <code>Source</code>.</p>
+   *          <p>To build the image when you create the application version instead of on first deployment,
+   *       also set <code>Process</code> to <code>true</code>.</p>
+   * @public
+   */
+  Build?: ImageBuildConfiguration | undefined;
 }
 
 /**
  * <p></p>
+ * @public
  */
 export interface CreateApplicationVersionMessage {
   /**
-   * <p> The name of the application. If no application is found with this name, and
-   *         <code>AutoCreateApplication</code> is <code>false</code>, returns an
+   * <p> The name of the application. If no application is found with this name, and <code>AutoCreateApplication</code> is <code>false</code>, returns an
    *         <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>A label identifying this version.</p>
-   *          <p>Constraint: Must be unique per application. If an application version already exists
-   *       with this label for the specified application, AWS Elastic Beanstalk returns an
-   *         <code>InvalidParameterValue</code> error. </p>
+   *          <p>Constraint: Must be unique per application. If an application version already exists with this label for the specified application, Elastic Beanstalk returns
+   *       an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
   VersionLabel: string | undefined;
 
   /**
    * <p>A description of this application version.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>Specify a commit in an AWS CodeCommit Git repository to use as the source code for the
-   *       application version.</p>
+   * <p>Specify a commit in an CodeCommit Git repository to use as the source code for the application version.</p>
+   * @public
    */
-  SourceBuildInformation?: SourceBuildInformation;
+  SourceBuildInformation?: SourceBuildInformation | undefined;
 
   /**
-   * <p>The Amazon S3 bucket and key that identify the location of the source bundle for this
-   *       version.</p>
+   * <p>The Amazon S3 bucket and key that identify the location of the source bundle for this version.</p>
    *          <note>
-   *             <p>The Amazon S3 bucket must be in the same region as the
-   *       environment.</p>
+   *             <p>The Amazon S3 bucket must be in the same region as the environment.</p>
+   *             <p>Unless you're specifying a source bundle in the bucket that Elastic Beanstalk manages in your account, you must assign a custom policy to your user, and grant
+   *           <code>Allow</code> permission to the <code>s3:Get*</code> actions on your S3 object resource, for example,
+   *           <code>arn:aws:s3:::your-bucket/your-source-bundle-object</code>.</p>
    *          </note>
-   *          <p>Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with
-   *         <code>SourceBuildInformation</code>), but not both. If neither <code>SourceBundle</code> nor
-   *         <code>SourceBuildInformation</code> are provided, Elastic Beanstalk uses a sample
-   *       application.</p>
+   *          <p>Specify a source bundle in Amazon S3 or a commit in an CodeCommit repository (with <code>SourceBuildInformation</code>), but not both. If neither
+   *         <code>SourceBundle</code> nor <code>SourceBuildInformation</code> are provided, Elastic Beanstalk uses a sample application.</p>
+   * @public
    */
-  SourceBundle?: S3Location;
+  SourceBundle?: S3Location | undefined;
 
   /**
-   * <p>Settings for an AWS CodeBuild build.</p>
+   * <p>Settings for an CodeBuild build.</p>
+   *          <p>Don't specify <code>BuildConfiguration</code> together with
+   *         <code>ImageConfiguration</code>, which configures a container image build instead.</p>
+   * @public
    */
-  BuildConfiguration?: BuildConfiguration;
+  BuildConfiguration?: BuildConfiguration | undefined;
 
   /**
-   * <p>Set to <code>true</code> to create an application with the specified name if it doesn't
-   *       already exist.</p>
+   * <p>Set to <code>true</code> to create an application with the specified name if it doesn't already exist.</p>
+   * @public
    */
-  AutoCreateApplication?: boolean;
+  AutoCreateApplication?: boolean | undefined;
 
   /**
-   * <p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and
-   *       configuration files (<code>*.config</code> files in the <code>.ebextensions</code> folder) in
-   *       the source bundle. Validating configuration files can identify issues prior to deploying the
-   *       application version to an environment.</p>
-   *          <p>You must turn processing on for application versions that you create using AWS
-   *       CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3,
-   *       processing is optional.</p>
+   * <p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the
+   *         <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version
+   *       to an environment.</p>
+   *          <p>You must turn processing on for application versions that you create using CodeBuild or CodeCommit. For application versions built from a source bundle
+   *       in Amazon S3, processing is optional.</p>
+   *          <p>For application versions with <code>ImageConfiguration.Build</code>, <code>Process</code>
+   *       determines when Elastic Beanstalk builds the container image. Set it to <code>true</code> to build the
+   *       image when you create the application version. If you don't, Elastic Beanstalk builds the image when you
+   *       first deploy the application version to an environment.</p>
    *          <note>
-   *             <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It
-   *       doesn't validate your application's configuration files, like proxy server or Docker
-   *       configuration.</p>
+   *             <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server
+   *         or Docker configuration.</p>
    *          </note>
+   * @public
    */
-  Process?: boolean;
+  Process?: boolean | undefined;
 
   /**
    * <p>Specifies the tags applied to the application version.</p>
-   *          <p>Elastic Beanstalk applies these tags only to the application version. Environments that use the
-   *       application version don't inherit the tags.</p>
+   *          <p>Elastic Beanstalk applies these tags only to the application version. Environments that use the application version don't inherit the tags.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
+  Tags?: Tag[] | undefined;
 
-export namespace CreateApplicationVersionMessage {
   /**
-   * @internal
+   * <p>The source of the container image for this application version. You can specify an image
+   *       that you built and pushed to a container registry yourself, or settings for Elastic Beanstalk to build
+   *       one from your source bundle. Specify exactly one of the <code>Source</code> and
+   *         <code>Build</code> members.</p>
+   *          <p>Don't specify <code>ImageConfiguration</code> together with
+   *         <code>BuildConfiguration</code>, which configures an CodeBuild build instead.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateApplicationVersionMessage): any => ({
-    ...obj,
-  });
+  ImageConfiguration?: ImageConfiguration | undefined;
 }
-
-/**
- * <p>The specified S3 bucket does not belong to the S3 region in which the service is
- *       running. The following regions are supported:</p>
- *          <ul>
- *             <li>
- * 	              <p>IAD/us-east-1</p>
- * 	           </li>
- *             <li>
- * 	              <p>PDX/us-west-2</p>
- * 	           </li>
- *             <li>
- * 	              <p>DUB/eu-west-1</p>
- * 	           </li>
- *          </ul>
- */
-export interface S3LocationNotInServiceRegionException extends __SmithyException, $MetadataBearer {
-  name: "S3LocationNotInServiceRegionException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace S3LocationNotInServiceRegionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3LocationNotInServiceRegionException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account has reached its limit of application versions.</p>
- */
-export interface TooManyApplicationVersionsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyApplicationVersionsException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyApplicationVersionsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyApplicationVersionsException): any => ({
-    ...obj,
-  });
-}
-
-export type ConfigurationDeploymentStatus = "deployed" | "failed" | "pending";
 
 /**
  * <p>A specification identifying an individual configuration option along with its current
  *       value. For a list of possible namespaces and option values, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html">Option Values</a> in the
- *       <i>AWS Elastic Beanstalk Developer Guide</i>. </p>
+ *       <i>Elastic Beanstalk Developer Guide</i>. </p>
+ * @public
  */
 export interface ConfigurationOptionSetting {
   /**
    * <p>A unique resource name for the option setting. Use it for a time–based scaling configuration option.</p>
+   * @public
    */
-  ResourceName?: string;
+  ResourceName?: string | undefined;
 
   /**
-   * <p>A unique namespace that identifies the option's associated AWS resource.</p>
+   * <p>A unique namespace that identifies the option's associated Amazon Web Services resource.</p>
+   * @public
    */
-  Namespace?: string;
+  Namespace?: string | undefined;
 
   /**
    * <p>The name of the configuration option.</p>
+   * @public
    */
-  OptionName?: string;
+  OptionName?: string | undefined;
 
   /**
    * <p>The current value for the configuration option.</p>
+   * @public
    */
-  Value?: string;
-}
-
-export namespace ConfigurationOptionSetting {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationOptionSetting): any => ({
-    ...obj,
-  });
+  Value?: string | undefined;
 }
 
 /**
  * <p>Describes the settings for a configuration set.</p>
+ * @public
  */
 export interface ConfigurationSettingsDescription {
   /**
    * <p>The name of the solution stack this configuration set uses.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p>The name of the application associated with this configuration set.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p> If not <code>null</code>, the name of the configuration template for this
    *       configuration set. </p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>Describes this configuration set.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p> If not <code>null</code>, the name of the environment for this configuration set.
    *     </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p> If this configuration set is associated with an environment, the
@@ -1755,72 +1592,64 @@ export interface ConfigurationSettingsDescription {
    *           deploy.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  DeploymentStatus?: ConfigurationDeploymentStatus | string;
+  DeploymentStatus?: ConfigurationDeploymentStatus | undefined;
 
   /**
    * <p>The date (in UTC time) when this configuration set was created.</p>
+   * @public
    */
-  DateCreated?: Date;
+  DateCreated?: Date | undefined;
 
   /**
    * <p>The date (in UTC time) when this configuration set was last modified.</p>
+   * @public
    */
-  DateUpdated?: Date;
+  DateUpdated?: Date | undefined;
 
   /**
    * <p>A list of the configuration options and their values in this configuration
    *       set.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
-}
-
-export namespace ConfigurationSettingsDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationSettingsDescription): any => ({
-    ...obj,
-  });
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 }
 
 /**
  * <p>A specification for an environment configuration.</p>
+ * @public
  */
 export interface SourceConfiguration {
   /**
    * <p>The name of the application associated with the configuration.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The name of the configuration template.</p>
+   * @public
    */
-  TemplateName?: string;
-}
-
-export namespace SourceConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SourceConfiguration): any => ({
-    ...obj,
-  });
+  TemplateName?: string | undefined;
 }
 
 /**
  * <p>Request to create a configuration template.</p>
+ * @public
  */
 export interface CreateConfigurationTemplateMessage {
   /**
    * <p>The name of the Elastic Beanstalk application to associate with this configuration
    *       template.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the configuration template.</p>
    *          <p>Constraint: This name must be unique per application.</p>
+   * @public
    */
   TemplateName: string | undefined;
 
@@ -1830,7 +1659,7 @@ export interface CreateConfigurationTemplateMessage {
    *       specifies the operating system, runtime, and application server for a configuration template.
    *       It also determines the set of configuration options as well as the possible and default
    *       values. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html">Supported Platforms</a> in the
-   *         <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   *         <i>Elastic Beanstalk Developer Guide</i>.</p>
    *          <p>You must specify <code>SolutionStackName</code> if you don't specify
    *         <code>PlatformArn</code>, <code>EnvironmentId</code>, or
    *       <code>SourceConfiguration</code>.</p>
@@ -1838,19 +1667,18 @@ export interface CreateConfigurationTemplateMessage {
    *                <code>ListAvailableSolutionStacks</code>
    *             </a> API to obtain a list of available
    *       solution stacks.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the custom platform. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html"> Custom
-   *         Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   * <p>The Amazon Resource Name (ARN) of the custom platform. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html"> Custom Platforms</a> in the <i>Elastic Beanstalk Developer Guide</i>.</p>
    *          <note>
-   *
-   *             <p>If you specify <code>PlatformArn</code>, then don't specify
-   *           <code>SolutionStackName</code>.</p>
+   *             <p>If you specify <code>PlatformArn</code>, then don't specify <code>SolutionStackName</code>.</p>
    *          </note>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p>An Elastic Beanstalk configuration template to base this one on. If specified, Elastic Beanstalk uses the configuration values from the specified
@@ -1863,854 +1691,604 @@ export interface CreateConfigurationTemplateMessage {
    *          <p>Constraint: If both solution stack name and source configuration are specified, the
    *       solution stack of the source configuration template must match the specified solution stack
    *       name.</p>
+   * @public
    */
-  SourceConfiguration?: SourceConfiguration;
+  SourceConfiguration?: SourceConfiguration | undefined;
 
   /**
    * <p>The ID of an environment whose settings you want to use to create the configuration
    *       template. You must specify <code>EnvironmentId</code> if you don't specify
    *         <code>PlatformArn</code>, <code>SolutionStackName</code>, or
    *         <code>SourceConfiguration</code>.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>An optional description for this configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these
    *       values override the values obtained from the solution stack or the source configuration
    *       template. For a complete list of Elastic Beanstalk configuration options, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html">Option Values</a> in the
-   *         <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   *         <i>Elastic Beanstalk Developer Guide</i>.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 
   /**
    * <p>Specifies the tags applied to the configuration template.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreateConfigurationTemplateMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateConfigurationTemplateMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account has reached its limit of Amazon S3 buckets.</p>
- */
-export interface TooManyBucketsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyBucketsException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyBucketsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyBucketsException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account has reached its limit of configuration templates.</p>
- */
-export interface TooManyConfigurationTemplatesException extends __SmithyException, $MetadataBearer {
-  name: "TooManyConfigurationTemplatesException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyConfigurationTemplatesException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyConfigurationTemplatesException): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>A specification identifying an individual configuration option.</p>
+ * @public
  */
 export interface OptionSpecification {
   /**
    * <p>A unique resource name for a time-based scaling configuration option.</p>
+   * @public
    */
-  ResourceName?: string;
+  ResourceName?: string | undefined;
 
   /**
-   * <p>A unique namespace identifying the option's associated AWS resource.</p>
+   * <p>A unique namespace identifying the option's associated Amazon Web Services resource.</p>
+   * @public
    */
-  Namespace?: string;
+  Namespace?: string | undefined;
 
   /**
    * <p>The name of the configuration option.</p>
+   * @public
    */
-  OptionName?: string;
-}
-
-export namespace OptionSpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OptionSpecification): any => ({
-    ...obj,
-  });
+  OptionName?: string | undefined;
 }
 
 /**
  * <p></p>
+ * @public
  */
 export interface CreateEnvironmentMessage {
   /**
    * <p>The name of the application that is associated with this environment.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>A unique name for the environment.</p>
-   *          <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only
-   *       letters, numbers, and hyphens. It can't start or end with a hyphen. This name must be unique
-   *       within a region in your account. If the specified name already exists in the region, Elastic Beanstalk returns an
+   *          <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It can't start or end with a hyphen.
+   *       This name must be unique within a region in your account. If the specified name already exists in the region, Elastic Beanstalk returns an
    *         <code>InvalidParameterValue</code> error. </p>
-   *          <p>If you don't specify the <code>CNAMEPrefix</code> parameter, the environment name becomes part of
-   *       the CNAME, and therefore part of the visible URL for your application.</p>
+   *          <p>If you don't specify the <code>CNAMEPrefix</code> parameter, the environment name becomes part of the CNAME, and therefore part of the visible URL for
+   *       your application.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>The name of the group to which the target environment belongs. Specify a group name
-   *       only if the environment's name is specified in an environment manifest and not with the
-   *       environment name parameter. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest
-   *         (env.yaml)</a> for details.</p>
+   * <p>The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment
+   *       manifest and not with the environment name parameter. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.</p>
+   * @public
    */
-  GroupName?: string;
+  GroupName?: string | undefined;
 
   /**
    * <p>Your description for this environment.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>If specified, the environment attempts to use this value as the prefix for the CNAME in
-   *       your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by
-   *       appending a random alphanumeric string to the environment name.</p>
+   * <p>If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is
+   *       generated automatically by appending a random alphanumeric string to the environment name.</p>
+   * @public
    */
-  CNAMEPrefix?: string;
+  CNAMEPrefix?: string | undefined;
 
   /**
-   * <p>Specifies the tier to use in creating this environment. The environment tier that you
-   *       choose determines whether Elastic Beanstalk provisions resources to support a web application that handles
-   *       HTTP(S) requests or a web application that handles background-processing tasks.</p>
+   * <p>Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources on
+   *       Amazon EC2 instances or on an Amazon EKS cluster, and, for Amazon EC2, whether the environment serves HTTP(S) requests or processes background tasks
+   *       from a queue.</p>
+   * @public
    */
-  Tier?: EnvironmentTier;
+  Tier?: EnvironmentTier | undefined;
 
   /**
    * <p>Specifies the tags applied to resources in the environment.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>The name of the application version to deploy.</p>
    *          <p>Default: If not specified, Elastic Beanstalk attempts to deploy the sample application.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
    * <p>The name of the Elastic Beanstalk configuration template to use with the environment.</p>
    *          <note>
-   *             <p>If you specify <code>TemplateName</code>, then don't specify
-   *           <code>SolutionStackName</code>.</p>
+   *             <p>If you specify <code>TemplateName</code>, then don't specify <code>SolutionStackName</code>.</p>
    *          </note>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
-   * <p>The name of an Elastic Beanstalk solution stack (platform version) to use with the environment. If
-   *       specified, Elastic Beanstalk sets the configuration values to the default values associated with the
-   *       specified solution stack. For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html">Elastic Beanstalk Supported Platforms</a> in the <i>AWS Elastic Beanstalk
+   * <p>The name of an Elastic Beanstalk solution stack (platform version) to use with the environment. If specified, Elastic Beanstalk sets the configuration values to the default
+   *       values associated with the specified solution stack. For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html">Elastic Beanstalk Supported Platforms</a> in the <i>Elastic Beanstalk
    *         Platforms</i> guide.</p>
    *          <note>
-   *             <p>If you specify <code>SolutionStackName</code>, don't specify <code>PlatformArn</code> or
-   *           <code>TemplateName</code>.</p>
+   *             <p>If you specify <code>SolutionStackName</code>, don't specify <code>PlatformArn</code> or <code>TemplateName</code>.</p>
    *          </note>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For
-   *       more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html">Custom Platforms</a> in the
-   *         <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   * <p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html">Custom Platforms</a> in the <i>Elastic Beanstalk Developer Guide</i>.</p>
    *          <note>
-   *
-   *             <p>If you specify <code>PlatformArn</code>, don't specify
-   *         <code>SolutionStackName</code>.</p>
+   *             <p>If you specify <code>PlatformArn</code>, don't specify <code>SolutionStackName</code>.</p>
    *          </note>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk sets the specified configuration options to the
-   *       requested value in the configuration set for the new environment. These override the values
-   *       obtained from the solution stack or the configuration template.</p>
+   * <p>If specified, Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These
+   *       override the values obtained from the solution stack or the configuration template.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 
   /**
-   * <p>A list of custom user-defined configuration options to remove from the configuration
-   *       set for this new environment.</p>
+   * <p>A list of custom user-defined configuration options to remove from the configuration set for this new environment.</p>
+   * @public
    */
-  OptionsToRemove?: OptionSpecification[];
+  OptionsToRemove?: OptionSpecification[] | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's
-   *       operations role. If specified, Elastic Beanstalk uses the operations role for permissions to downstream
-   *       services during this call and during subsequent calls acting on this environment. To specify
-   *       an operations role, you must have the <code>iam:PassRole</code> permission for the role. For
-   *       more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the
-   *         <i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+   * <important>
+   *             <p>The operations role feature of Elastic Beanstalk is in beta release and is subject to change.</p>
+   *          </important>
+   *          <p>The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role. If specified, Elastic Beanstalk uses the operations role
+   *       for permissions to downstream services during this call and during subsequent calls acting on this environment. To specify an operations role, you must
+   *       have the <code>iam:PassRole</code> permission for the role.</p>
+   * @public
    */
-  OperationsRole?: string;
-}
-
-export namespace CreateEnvironmentMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateEnvironmentMessage): any => ({
-    ...obj,
-  });
+  OperationsRole?: string | undefined;
 }
 
 /**
  * <p>Request to create a new platform version.</p>
+ * @public
  */
 export interface CreatePlatformVersionRequest {
   /**
    * <p>The name of your custom platform.</p>
+   * @public
    */
   PlatformName: string | undefined;
 
   /**
    * <p>The number, such as 1.0.2, for the new platform version.</p>
+   * @public
    */
   PlatformVersion: string | undefined;
 
   /**
    * <p>The location of the platform definition archive in Amazon S3.</p>
+   * @public
    */
   PlatformDefinitionBundle: S3Location | undefined;
 
   /**
    * <p>The name of the builder environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The configuration option settings to apply to the builder environment.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 
   /**
    * <p>Specifies the tags applied to the new platform version.</p>
    *          <p>Elastic Beanstalk applies these tags only to the platform version. Environments that you create using
    *       the platform version don't inherit the tags.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace CreatePlatformVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePlatformVersionRequest): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
  * <p>The builder used to build the custom platform.</p>
+ * @public
  */
 export interface Builder {
   /**
    * <p>The ARN of the builder.</p>
+   * @public
    */
-  ARN?: string;
+  ARN?: string | undefined;
 }
-
-export namespace Builder {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Builder): any => ({
-    ...obj,
-  });
-}
-
-export type PlatformStatus = "Creating" | "Deleted" | "Deleting" | "Failed" | "Ready";
 
 /**
  * <p>Summary information about a platform version.</p>
+ * @public
  */
 export interface PlatformSummary {
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
-   * <p>The AWS account ID of the person who created the platform version.</p>
+   * <p>The Amazon Web Services account ID of the person who created the platform version.</p>
+   * @public
    */
-  PlatformOwner?: string;
+  PlatformOwner?: string | undefined;
 
   /**
    * <p>The status of the platform version. You can create an environment from the platform
    *       version once it is ready.</p>
+   * @public
    */
-  PlatformStatus?: PlatformStatus | string;
+  PlatformStatus?: PlatformStatus | undefined;
 
   /**
    * <p>The category of platform version.</p>
+   * @public
    */
-  PlatformCategory?: string;
+  PlatformCategory?: string | undefined;
 
   /**
    * <p>The operating system used by the platform version.</p>
+   * @public
    */
-  OperatingSystemName?: string;
+  OperatingSystemName?: string | undefined;
 
   /**
    * <p>The version of the operating system used by the platform version.</p>
+   * @public
    */
-  OperatingSystemVersion?: string;
+  OperatingSystemVersion?: string | undefined;
 
   /**
    * <p>The tiers in which the platform version runs.</p>
+   * @public
    */
-  SupportedTierList?: string[];
+  SupportedTierList?: string[] | undefined;
 
   /**
    * <p>The additions associated with the platform version.</p>
+   * @public
    */
-  SupportedAddonList?: string[];
+  SupportedAddonList?: string[] | undefined;
 
   /**
    * <p>The state of the platform version in its lifecycle.</p>
    *          <p>Possible values: <code>recommended</code> | empty</p>
    *          <p>If an empty value is returned, the platform version is supported but isn't the recommended
    *     one for its branch.</p>
+   * @public
    */
-  PlatformLifecycleState?: string;
+  PlatformLifecycleState?: string | undefined;
 
   /**
    * <p>The version string of the platform version.</p>
+   * @public
    */
-  PlatformVersion?: string;
+  PlatformVersion?: string | undefined;
 
   /**
    * <p>The platform branch to which the platform version belongs.</p>
+   * @public
    */
-  PlatformBranchName?: string;
+  PlatformBranchName?: string | undefined;
 
   /**
    * <p>The state of the platform version's branch in its lifecycle.</p>
    *          <p>Possible values: <code>beta</code> | <code>supported</code> | <code>deprecated</code> |
    *         <code>retired</code>
    *          </p>
+   * @public
    */
-  PlatformBranchLifecycleState?: string;
-}
-
-export namespace PlatformSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformSummary): any => ({
-    ...obj,
-  });
-}
-
-export interface CreatePlatformVersionResult {
-  /**
-   * <p>Detailed information about the new version of the custom platform.</p>
-   */
-  PlatformSummary?: PlatformSummary;
-
-  /**
-   * <p>The builder used to create the custom platform.</p>
-   */
-  Builder?: Builder;
-}
-
-export namespace CreatePlatformVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreatePlatformVersionResult): any => ({
-    ...obj,
-  });
+  PlatformBranchLifecycleState?: string | undefined;
 }
 
 /**
- * <p>You have exceeded the maximum number of allowed platforms associated with the account.</p>
+ * @public
  */
-export interface TooManyPlatformsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyPlatformsException";
-  $fault: "client";
+export interface CreatePlatformVersionResult {
   /**
-   * <p>The exception error message.</p>
+   * <p>Detailed information about the new version of the custom platform.</p>
+   * @public
    */
-  message?: string;
-}
+  PlatformSummary?: PlatformSummary | undefined;
 
-export namespace TooManyPlatformsException {
   /**
-   * @internal
+   * <p>The builder used to create the custom platform.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TooManyPlatformsException): any => ({
-    ...obj,
-  });
+  Builder?: Builder | undefined;
 }
 
 /**
  * <p>Results of a <a>CreateStorageLocationResult</a> call.</p>
+ * @public
  */
 export interface CreateStorageLocationResultMessage {
   /**
    * <p>The name of the Amazon S3 bucket created.</p>
+   * @public
    */
-  S3Bucket?: string;
-}
-
-export namespace CreateStorageLocationResultMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateStorageLocationResultMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified account does not have a subscription to Amazon S3.</p>
- */
-export interface S3SubscriptionRequiredException extends __SmithyException, $MetadataBearer {
-  name: "S3SubscriptionRequiredException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace S3SubscriptionRequiredException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: S3SubscriptionRequiredException): any => ({
-    ...obj,
-  });
+  S3Bucket?: string | undefined;
 }
 
 /**
  * <p>Request to delete an application.</p>
+ * @public
  */
 export interface DeleteApplicationMessage {
   /**
    * <p>The name of the application to delete.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>When set to true, running environments will be terminated before deleting the
    *       application.</p>
+   * @public
    */
-  TerminateEnvByForce?: boolean;
-}
-
-export namespace DeleteApplicationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteApplicationMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Unable to perform the specified operation because another operation that effects an
- *       element in this activity is already in progress.</p>
- */
-export interface OperationInProgressException extends __SmithyException, $MetadataBearer {
-  name: "OperationInProgressException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace OperationInProgressException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OperationInProgressException): any => ({
-    ...obj,
-  });
+  TerminateEnvByForce?: boolean | undefined;
 }
 
 /**
  * <p>Request to delete an application version.</p>
+ * @public
  */
 export interface DeleteApplicationVersionMessage {
   /**
    * <p>The name of the application to which the version belongs.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The label of the version to delete.</p>
+   * @public
    */
   VersionLabel: string | undefined;
 
   /**
-   * <p>Set to <code>true</code> to delete the source bundle from your storage bucket.
-   *       Otherwise, the application version is deleted only from Elastic Beanstalk and the source
-   *       bundle remains in Amazon S3.</p>
+   * <p>Set to <code>true</code> to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic
+   *       Beanstalk and the source bundle remains in Amazon S3.</p>
+   * @public
    */
-  DeleteSourceBundle?: boolean;
-}
-
-export namespace DeleteApplicationVersionMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteApplicationVersionMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Unable to delete the Amazon S3 source bundle associated with the application version.
- *       The application version was deleted successfully.</p>
- */
-export interface SourceBundleDeletionException extends __SmithyException, $MetadataBearer {
-  name: "SourceBundleDeletionException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace SourceBundleDeletionException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SourceBundleDeletionException): any => ({
-    ...obj,
-  });
+  DeleteSourceBundle?: boolean | undefined;
 }
 
 /**
  * <p>Request to delete a configuration template.</p>
+ * @public
  */
 export interface DeleteConfigurationTemplateMessage {
   /**
    * <p>The name of the application to delete the configuration template from.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the configuration template to delete.</p>
+   * @public
    */
   TemplateName: string | undefined;
 }
 
-export namespace DeleteConfigurationTemplateMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteConfigurationTemplateMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Request to delete a draft environment configuration.</p>
+ * @public
  */
 export interface DeleteEnvironmentConfigurationMessage {
   /**
    * <p>The name of the application the environment is associated with.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the environment to delete the draft configuration from.</p>
+   * @public
    */
   EnvironmentName: string | undefined;
 }
 
-export namespace DeleteEnvironmentConfigurationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEnvironmentConfigurationMessage): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeletePlatformVersionRequest {
   /**
    * <p>The ARN of the version of the custom platform.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 }
 
-export namespace DeletePlatformVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeletePlatformVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeletePlatformVersionResult {
   /**
    * <p>Detailed information about the version of the custom platform.</p>
+   * @public
    */
-  PlatformSummary?: PlatformSummary;
-}
-
-export namespace DeletePlatformVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeletePlatformVersionResult): any => ({
-    ...obj,
-  });
+  PlatformSummary?: PlatformSummary | undefined;
 }
 
 /**
- * <p>You cannot delete the platform version because there are still environments running on it.</p>
- */
-export interface PlatformVersionStillReferencedException extends __SmithyException, $MetadataBearer {
-  name: "PlatformVersionStillReferencedException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace PlatformVersionStillReferencedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformVersionStillReferencedException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It
+ * <p>The Elastic Beanstalk quota information for a single resource type in an Amazon Web Services account. It
  *       reflects the resource's limits for this account.</p>
+ * @public
  */
 export interface ResourceQuota {
   /**
-   * <p>The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can
+   * <p>The maximum number of instances of this Elastic Beanstalk resource type that an Amazon Web Services account can
    *       use.</p>
+   * @public
    */
-  Maximum?: number;
-}
-
-export namespace ResourceQuota {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceQuota): any => ({
-    ...obj,
-  });
+  Maximum?: number | undefined;
 }
 
 /**
- * <p>A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect
+ * <p>A set of per-resource Elastic Beanstalk quotas associated with an Amazon Web Services account. They reflect
  *       Elastic Beanstalk resource limits for this account.</p>
+ * @public
  */
 export interface ResourceQuotas {
   /**
-   * <p>The quota for applications in the AWS account.</p>
+   * <p>The quota for applications in the Amazon Web Services account.</p>
+   * @public
    */
-  ApplicationQuota?: ResourceQuota;
+  ApplicationQuota?: ResourceQuota | undefined;
 
   /**
-   * <p>The quota for application versions in the AWS account.</p>
+   * <p>The quota for application versions in the Amazon Web Services account.</p>
+   * @public
    */
-  ApplicationVersionQuota?: ResourceQuota;
+  ApplicationVersionQuota?: ResourceQuota | undefined;
 
   /**
-   * <p>The quota for environments in the AWS account.</p>
+   * <p>The quota for environments in the Amazon Web Services account.</p>
+   * @public
    */
-  EnvironmentQuota?: ResourceQuota;
+  EnvironmentQuota?: ResourceQuota | undefined;
 
   /**
-   * <p>The quota for configuration templates in the AWS account.</p>
+   * <p>The quota for configuration templates in the Amazon Web Services account.</p>
+   * @public
    */
-  ConfigurationTemplateQuota?: ResourceQuota;
+  ConfigurationTemplateQuota?: ResourceQuota | undefined;
 
   /**
-   * <p>The quota for custom platforms in the AWS account.</p>
+   * <p>The quota for custom platforms in the Amazon Web Services account.</p>
+   * @public
    */
-  CustomPlatformQuota?: ResourceQuota;
+  CustomPlatformQuota?: ResourceQuota | undefined;
 }
 
-export namespace ResourceQuotas {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceQuotas): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeAccountAttributesResult {
   /**
-   * <p>The Elastic Beanstalk resource quotas associated with the calling AWS account.</p>
+   * <p>The Elastic Beanstalk resource quotas associated with the calling Amazon Web Services account.</p>
+   * @public
    */
-  ResourceQuotas?: ResourceQuotas;
-}
-
-export namespace DescribeAccountAttributesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeAccountAttributesResult): any => ({
-    ...obj,
-  });
+  ResourceQuotas?: ResourceQuotas | undefined;
 }
 
 /**
  * <p>Request to describe one or more applications.</p>
+ * @public
  */
 export interface DescribeApplicationsMessage {
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include
-   *       those with the specified names.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to only include those with the
+   *       specified names.</p>
+   * @public
    */
-  ApplicationNames?: string[];
-}
-
-export namespace DescribeApplicationsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeApplicationsMessage): any => ({
-    ...obj,
-  });
+  ApplicationNames?: string[] | undefined;
 }
 
 /**
  * <p>Request to describe application versions.</p>
+ * @public
  */
 export interface DescribeApplicationVersionsMessage {
   /**
-   * <p>Specify an application name to show only application versions for that
-   *       application.</p>
+   * <p>Specify an application name to show only application versions for that application.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>Specify a version label to show a specific application version.</p>
+   * @public
    */
-  VersionLabels?: string[];
+  VersionLabels?: string[] | undefined;
 
   /**
-   * <p>For a paginated request. Specify a maximum number of application versions to include in
-   *       each response.</p>
-   *          <p>If no <code>MaxRecords</code> is specified, all available application versions are
-   *       retrieved in a single response.</p>
+   * <p>For a paginated request. Specify a maximum number of application versions to include in each response.</p>
+   *          <p>If no <code>MaxRecords</code> is specified, all available application versions are retrieved in a single response.</p>
+   * @public
    */
-  MaxRecords?: number;
+  MaxRecords?: number | undefined;
 
   /**
-   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other
-   *       parameter values must be identical to the ones specified in the initial request.</p>
+   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be
+   *       identical to the ones specified in the initial request.</p>
    *          <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeApplicationVersionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeApplicationVersionsMessage): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>A regular expression representing a restriction on a string configuration option
  *       value.</p>
+ * @public
  */
 export interface OptionRestrictionRegex {
   /**
    * <p>The regular expression pattern that a string configuration option value with this
    *       restriction must match.</p>
+   * @public
    */
-  Pattern?: string;
+  Pattern?: string | undefined;
 
   /**
    * <p>A unique name representing this regular expression.</p>
+   * @public
    */
-  Label?: string;
+  Label?: string | undefined;
 }
-
-export namespace OptionRestrictionRegex {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: OptionRestrictionRegex): any => ({
-    ...obj,
-  });
-}
-
-export type ConfigurationOptionValueType = "List" | "Scalar";
 
 /**
  * <p>Describes the possible values for a configuration option.</p>
+ * @public
  */
 export interface ConfigurationOptionDescription {
   /**
-   * <p>A unique namespace identifying the option's associated AWS resource.</p>
+   * <p>A unique namespace identifying the option's associated Amazon Web Services resource.</p>
+   * @public
    */
-  Namespace?: string;
+  Namespace?: string | undefined;
 
   /**
    * <p>The name of the configuration option.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The default value for this configuration option.</p>
+   * @public
    */
-  DefaultValue?: string;
+  DefaultValue?: string | undefined;
 
   /**
    * <p>An indication of which action is required if the value for this configuration option
@@ -2723,19 +2301,18 @@ export interface ConfigurationOptionDescription {
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>RestartEnvironment</code> : The environment is entirely restarted, all AWS resources
-   *           are deleted and recreated, and the environment is unavailable during the
-   *           process.</p>
+   *                   <code>RestartEnvironment</code> : The environment is entirely restarted, all A resources are deleted and recreated,
+   *      and the environment is unavailable during the process.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>RestartApplicationServer</code> : The environment is available the entire time.
-   *           However, a short application outage occurs when the application servers on the running
-   *           Amazon EC2 instances are restarted.</p>
+   *                   <code>RestartApplicationServer</code> : The environment is available the entire time. However, a short application
+   *      outage occurs when the application servers on the running Amazon EC2 instances are restarted.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ChangeSeverity?: string;
+  ChangeSeverity?: string | undefined;
 
   /**
    * <p>An indication of whether the user defined this configuration option:</p>
@@ -2754,8 +2331,9 @@ export interface ConfigurationOptionDescription {
    *          <p> Constraint: You can remove only <code>UserDefined</code> options from a configuration. </p>
    *          <p> Valid Values: <code>true</code> | <code>false</code>
    *          </p>
+   * @public
    */
-  UserDefined?: boolean;
+  UserDefined?: boolean | undefined;
 
   /**
    * <p>An indication of which type of values this option has and whether it is allowable to
@@ -2783,1115 +2361,943 @@ export interface ConfigurationOptionDescription {
    *           <code>ConfigDocument</code>.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ValueType?: ConfigurationOptionValueType | string;
+  ValueType?: ConfigurationOptionValueType | undefined;
 
   /**
    * <p>If specified, values for the configuration option are selected from this
    *       list.</p>
+   * @public
    */
-  ValueOptions?: string[];
+  ValueOptions?: string[] | undefined;
 
   /**
    * <p>If specified, the configuration option must be a numeric value greater than this
    *       value.</p>
+   * @public
    */
-  MinValue?: number;
+  MinValue?: number | undefined;
 
   /**
    * <p>If specified, the configuration option must be a numeric value less than this
    *       value.</p>
+   * @public
    */
-  MaxValue?: number;
+  MaxValue?: number | undefined;
 
   /**
    * <p>If specified, the configuration option must be a string value no longer than this
    *       value.</p>
+   * @public
    */
-  MaxLength?: number;
+  MaxLength?: number | undefined;
 
   /**
    * <p>If specified, the configuration option must be a string value that satisfies this
    *       regular expression.</p>
+   * @public
    */
-  Regex?: OptionRestrictionRegex;
-}
-
-export namespace ConfigurationOptionDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationOptionDescription): any => ({
-    ...obj,
-  });
+  Regex?: OptionRestrictionRegex | undefined;
 }
 
 /**
  * <p>Describes the settings for a specified configuration set.</p>
+ * @public
  */
 export interface ConfigurationOptionsDescription {
   /**
    * <p>The name of the solution stack these configuration options belong to.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p> A list of <a>ConfigurationOptionDescription</a>. </p>
+   * @public
    */
-  Options?: ConfigurationOptionDescription[];
-}
-
-export namespace ConfigurationOptionsDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationOptionsDescription): any => ({
-    ...obj,
-  });
+  Options?: ConfigurationOptionDescription[] | undefined;
 }
 
 /**
  * <p>Result message containing a list of application version descriptions.</p>
+ * @public
  */
 export interface DescribeConfigurationOptionsMessage {
   /**
    * <p>The name of the application associated with the configuration template or environment.
    *       Only needed if you want to describe the configuration options associated with either the
    *       configuration template or environment.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The name of the configuration template whose configuration options you want to
    *       describe.</p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>The name of the environment whose configuration options you want to describe.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The name of the solution stack whose configuration options you want to
    *       describe.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The ARN of the custom platform.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p>If specified, restricts the descriptions to only the specified options.</p>
+   * @public
    */
-  Options?: OptionSpecification[];
-}
-
-export namespace DescribeConfigurationOptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConfigurationOptionsMessage): any => ({
-    ...obj,
-  });
+  Options?: OptionSpecification[] | undefined;
 }
 
 /**
  * <p>The results from a request to change the configuration settings of an
  *       environment.</p>
+ * @public
  */
 export interface ConfigurationSettingsDescriptions {
   /**
    * <p> A list of <a>ConfigurationSettingsDescription</a>. </p>
+   * @public
    */
-  ConfigurationSettings?: ConfigurationSettingsDescription[];
-}
-
-export namespace ConfigurationSettingsDescriptions {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationSettingsDescriptions): any => ({
-    ...obj,
-  });
+  ConfigurationSettings?: ConfigurationSettingsDescription[] | undefined;
 }
 
 /**
  * <p>Result message containing all of the configuration settings for a specified solution
  *       stack or configuration template.</p>
+ * @public
  */
 export interface DescribeConfigurationSettingsMessage {
   /**
    * <p>The application for the environment or configuration template.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the configuration template to describe.</p>
    *          <p> Conditional: You must specify either this parameter or an EnvironmentName, but not
-   *       both. If you specify both, AWS Elastic Beanstalk returns an
-   *         <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic
-   *       Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>
+   *       both. If you specify both, Elastic Beanstalk returns an
+   *       <code>InvalidParameterCombination</code> error. If you do not specify either, Elastic Beanstalk
+   *       returns a <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>The name of the environment to describe.</p>
    *          <p> Condition: You must specify either this or a TemplateName, but not both. If you
-   *       specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error.
-   *       If you do not specify either, AWS Elastic Beanstalk returns
+   *       specify both, Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error.
+   *       If you do not specify either, Elastic Beanstalk returns
    *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
-}
-
-export namespace DescribeConfigurationSettingsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeConfigurationSettingsMessage): any => ({
-    ...obj,
-  });
-}
-
-export enum EnvironmentHealthAttribute {
-  All = "All",
-  ApplicationMetrics = "ApplicationMetrics",
-  Causes = "Causes",
-  Color = "Color",
-  HealthStatus = "HealthStatus",
-  InstancesHealth = "InstancesHealth",
-  RefreshedAt = "RefreshedAt",
-  Status = "Status",
+  EnvironmentName?: string | undefined;
 }
 
 /**
  * <p>See the example below to learn how to create a request body.</p>
+ * @public
  */
 export interface DescribeEnvironmentHealthRequest {
   /**
    * <p>Specify the environment by name.</p>
    *          <p>You must specify either this or an EnvironmentName, or both.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>Specify the environment by ID.</p>
    *          <p>You must specify either this or an EnvironmentName, or both.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>Specify the response elements to return. To retrieve all attributes, set to
-   *         <code>All</code>. If no attribute names are specified, returns the name of the
-   *       environment.</p>
+   * <p>Specify the response elements to return. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns the name of
+   *       the environment.</p>
+   * @public
    */
-  AttributeNames?: (EnvironmentHealthAttribute | string)[];
-}
-
-export namespace DescribeEnvironmentHealthRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentHealthRequest): any => ({
-    ...obj,
-  });
+  AttributeNames?: EnvironmentHealthAttribute[] | undefined;
 }
 
 /**
  * <p>Represents summary information about the health of an instance. For more information,
  *       see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.</p>
+ * @public
  */
 export interface InstanceHealthSummary {
   /**
    * <p>
-   *             <b>Grey.</b> AWS Elastic Beanstalk and the health agent are
+   *             <b>Grey.</b> Elastic Beanstalk and the health agent are
    *       reporting no data on an instance.</p>
+   * @public
    */
-  NoData?: number;
+  NoData?: number | undefined;
 
   /**
    * <p>
-   *             <b>Grey.</b> AWS Elastic Beanstalk and the health agent are
+   *             <b>Grey.</b> Elastic Beanstalk and the health agent are
    *       reporting an insufficient amount of data on an instance.</p>
+   * @public
    */
-  Unknown?: number;
+  Unknown?: number | undefined;
 
   /**
    * <p>
    *             <b>Grey.</b> An operation is in progress on an instance within the
    *       command timeout.</p>
+   * @public
    */
-  Pending?: number;
+  Pending?: number | undefined;
 
   /**
    * <p>
    *             <b>Green.</b> An instance is passing health checks and the health
    *       agent is not reporting any problems.</p>
+   * @public
    */
-  Ok?: number;
+  Ok?: number | undefined;
 
   /**
    * <p>
    *             <b>Green.</b> An operation is in progress on an instance.</p>
+   * @public
    */
-  Info?: number;
+  Info?: number | undefined;
 
   /**
    * <p>
    *             <b>Yellow.</b> The health agent is reporting a moderate number of
    *       request failures or other issues for an instance or environment.</p>
+   * @public
    */
-  Warning?: number;
+  Warning?: number | undefined;
 
   /**
    * <p>
    *             <b>Red.</b> The health agent is reporting a high number of request
    *       failures or other issues for an instance or environment.</p>
+   * @public
    */
-  Degraded?: number;
+  Degraded?: number | undefined;
 
   /**
    * <p>
    *             <b>Red.</b> The health agent is reporting a very high number of
    *       request failures or other issues for an instance or environment.</p>
+   * @public
    */
-  Severe?: number;
-}
-
-export namespace InstanceHealthSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InstanceHealthSummary): any => ({
-    ...obj,
-  });
+  Severe?: number | undefined;
 }
 
 /**
- * <p>Health details for an AWS Elastic Beanstalk environment.</p>
+ * <p>Health details for an Elastic Beanstalk environment.</p>
+ * @public
  */
 export interface DescribeEnvironmentHealthResult {
   /**
    * <p>The environment's name.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>The <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health status</a> of the
-   *       environment. For example, <code>Ok</code>.</p>
+   * <p>The <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health status</a> of the environment. For example,
+   *         <code>Ok</code>.</p>
+   * @public
    */
-  HealthStatus?: string;
+  HealthStatus?: string | undefined;
 
   /**
-   * <p>The environment's operational status. <code>Ready</code>, <code>Launching</code>,
-   *         <code>Updating</code>, <code>Terminating</code>, or <code>Terminated</code>.</p>
+   * <p>The environment's operational status. <code>Ready</code>, <code>Launching</code>, <code>Updating</code>, <code>Terminating</code>, or
+   *         <code>Terminated</code>.</p>
+   * @public
    */
-  Status?: EnvironmentHealth | string;
+  Status?: EnvironmentHealth | undefined;
 
   /**
-   * <p>The <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health color</a> of the
-   *       environment.</p>
+   * <p>The <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health color</a> of the environment.</p>
+   * @public
    */
-  Color?: string;
+  Color?: string | undefined;
 
   /**
-   * <p>Descriptions of the data that contributed to the environment's current health
-   *       status.</p>
+   * <p>Descriptions of the data that contributed to the environment's current health status.</p>
+   * @public
    */
-  Causes?: string[];
+  Causes?: string[] | undefined;
 
   /**
    * <p>Application request metrics for the environment.</p>
+   * @public
    */
-  ApplicationMetrics?: ApplicationMetrics;
+  ApplicationMetrics?: ApplicationMetrics | undefined;
 
   /**
    * <p>Summary health information for the instances in the environment.</p>
+   * @public
    */
-  InstancesHealth?: InstanceHealthSummary;
+  InstancesHealth?: InstanceHealthSummary | undefined;
 
   /**
    * <p>The date and time that the health information was retrieved.</p>
+   * @public
    */
-  RefreshedAt?: Date;
-}
-
-export namespace DescribeEnvironmentHealthResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentHealthResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more input parameters is not valid. Please correct the input parameters and try
- *       the operation again.</p>
- */
-export interface InvalidRequestException extends __SmithyException, $MetadataBearer {
-  name: "InvalidRequestException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace InvalidRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidRequestException): any => ({
-    ...obj,
-  });
+  RefreshedAt?: Date | undefined;
 }
 
 /**
  * <p>Request to list completed and failed managed actions.</p>
+ * @public
  */
 export interface DescribeEnvironmentManagedActionHistoryRequest {
   /**
    * <p>The environment ID of the target environment.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the target environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The pagination token returned by a previous request.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of items to return for a single request.</p>
+   * @public
    */
-  MaxItems?: number;
+  MaxItems?: number | undefined;
 }
-
-export namespace DescribeEnvironmentManagedActionHistoryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentManagedActionHistoryRequest): any => ({
-    ...obj,
-  });
-}
-
-export type FailureType =
-  | "CancellationFailed"
-  | "InternalFailure"
-  | "InvalidEnvironmentState"
-  | "PermissionsError"
-  | "RollbackFailed"
-  | "RollbackSuccessful"
-  | "UpdateCancelled";
 
 /**
  * <p>The record of a completed or failed managed action.</p>
+ * @public
  */
 export interface ManagedActionHistoryItem {
   /**
    * <p>A unique identifier for the managed action.</p>
+   * @public
    */
-  ActionId?: string;
+  ActionId?: string | undefined;
 
   /**
    * <p>The type of the managed action.</p>
+   * @public
    */
-  ActionType?: ActionType | string;
+  ActionType?: ActionType | undefined;
 
   /**
    * <p>A description of the managed action.</p>
+   * @public
    */
-  ActionDescription?: string;
+  ActionDescription?: string | undefined;
 
   /**
    * <p>If the action failed, the type of failure.</p>
+   * @public
    */
-  FailureType?: FailureType | string;
+  FailureType?: FailureType | undefined;
 
   /**
    * <p>The status of the action.</p>
+   * @public
    */
-  Status?: ActionHistoryStatus | string;
+  Status?: ActionHistoryStatus | undefined;
 
   /**
    * <p>If the action failed, a description of the failure.</p>
+   * @public
    */
-  FailureDescription?: string;
+  FailureDescription?: string | undefined;
 
   /**
    * <p>The date and time that the action started executing.</p>
+   * @public
    */
-  ExecutedTime?: Date;
+  ExecutedTime?: Date | undefined;
 
   /**
    * <p>The date and time that the action finished executing.</p>
+   * @public
    */
-  FinishedTime?: Date;
-}
-
-export namespace ManagedActionHistoryItem {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ManagedActionHistoryItem): any => ({
-    ...obj,
-  });
+  FinishedTime?: Date | undefined;
 }
 
 /**
  * <p>A result message containing a list of completed and failed managed actions.</p>
+ * @public
  */
 export interface DescribeEnvironmentManagedActionHistoryResult {
   /**
    * <p>A list of completed and failed managed actions.</p>
+   * @public
    */
-  ManagedActionHistoryItems?: ManagedActionHistoryItem[];
+  ManagedActionHistoryItems?: ManagedActionHistoryItem[] | undefined;
 
   /**
-   * <p>A pagination token that you pass to <a>DescribeEnvironmentManagedActionHistory</a> to get the next page of
-   *       results.</p>
+   * <p>A pagination token that you pass to <a>DescribeEnvironmentManagedActionHistory</a> to get the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeEnvironmentManagedActionHistoryResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentManagedActionHistoryResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Request to list an environment's upcoming and in-progress managed actions.</p>
+ * @public
  */
 export interface DescribeEnvironmentManagedActionsRequest {
   /**
    * <p>The name of the target environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The environment ID of the target environment.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>To show only actions with a particular status, specify a status.</p>
+   * @public
    */
-  Status?: ActionStatus | string;
-}
-
-export namespace DescribeEnvironmentManagedActionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentManagedActionsRequest): any => ({
-    ...obj,
-  });
+  Status?: ActionStatus | undefined;
 }
 
 /**
  * <p>The record of an upcoming or in-progress managed action.</p>
+ * @public
  */
 export interface ManagedAction {
   /**
    * <p>A unique identifier for the managed action.</p>
+   * @public
    */
-  ActionId?: string;
+  ActionId?: string | undefined;
 
   /**
    * <p>A description of the managed action.</p>
+   * @public
    */
-  ActionDescription?: string;
+  ActionDescription?: string | undefined;
 
   /**
    * <p>The type of managed action.</p>
+   * @public
    */
-  ActionType?: ActionType | string;
+  ActionType?: ActionType | undefined;
 
   /**
    * <p>The status of the managed action. If the action is <code>Scheduled</code>, you can
    *       apply it immediately with <a>ApplyEnvironmentManagedAction</a>.</p>
+   * @public
    */
-  Status?: ActionStatus | string;
+  Status?: ActionStatus | undefined;
 
   /**
    * <p>The start time of the maintenance window in which the managed action will
    *       execute.</p>
+   * @public
    */
-  WindowStartTime?: Date;
-}
-
-export namespace ManagedAction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ManagedAction): any => ({
-    ...obj,
-  });
+  WindowStartTime?: Date | undefined;
 }
 
 /**
  * <p>The result message containing a list of managed actions.</p>
+ * @public
  */
 export interface DescribeEnvironmentManagedActionsResult {
   /**
    * <p>A list of upcoming and in-progress managed actions.</p>
+   * @public
    */
-  ManagedActions?: ManagedAction[];
-}
-
-export namespace DescribeEnvironmentManagedActionsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentManagedActionsResult): any => ({
-    ...obj,
-  });
+  ManagedActions?: ManagedAction[] | undefined;
 }
 
 /**
  * <p>Request to describe the resources in an environment.</p>
+ * @public
  */
 export interface DescribeEnvironmentResourcesMessage {
   /**
-   * <p>The ID of the environment to retrieve AWS resource usage data.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   * <p>The ID of the environment to retrieve Amazon Web Services resource usage data.</p>
+   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>The name of the environment to retrieve AWS resource usage data.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   * <p>The name of the environment to retrieve Amazon Web Services resource usage data.</p>
+   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 }
 
-export namespace DescribeEnvironmentResourcesMessage {
+/**
+ * <p>Describes the Amazon EKS cluster that an environment runs on.</p>
+ * @public
+ */
+export interface Cluster {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the Amazon EKS cluster.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentResourcesMessage): any => ({
-    ...obj,
-  });
+  ClusterArn?: string | undefined;
 }
 
 /**
  * <p>The description of an Amazon EC2 instance.</p>
+ * @public
  */
 export interface Instance {
   /**
    * <p>The ID of the Amazon EC2 instance.</p>
+   * @public
    */
-  Id?: string;
-}
-
-export namespace Instance {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Instance): any => ({
-    ...obj,
-  });
+  Id?: string | undefined;
 }
 
 /**
  * <p>Describes an Auto Scaling launch configuration.</p>
+ * @public
  */
 export interface LaunchConfiguration {
   /**
    * <p>The name of the launch configuration.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace LaunchConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LaunchConfiguration): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes an Amazon EC2 launch template.</p>
+ * @public
  */
 export interface LaunchTemplate {
   /**
    * <p>The ID of the launch template.</p>
+   * @public
    */
-  Id?: string;
-}
-
-export namespace LaunchTemplate {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LaunchTemplate): any => ({
-    ...obj,
-  });
+  Id?: string | undefined;
 }
 
 /**
  * <p>Describes a LoadBalancer.</p>
+ * @public
  */
 export interface LoadBalancer {
   /**
    * <p>The name of the LoadBalancer.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace LoadBalancer {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LoadBalancer): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes a queue.</p>
+ * @public
  */
 export interface Queue {
   /**
    * <p>The name of the queue.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The URL of the queue.</p>
+   * @public
    */
-  URL?: string;
-}
-
-export namespace Queue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Queue): any => ({
-    ...obj,
-  });
+  URL?: string | undefined;
 }
 
 /**
  * <p>Describes a trigger.</p>
+ * @public
  */
 export interface Trigger {
   /**
    * <p>The name of the trigger.</p>
+   * @public
    */
-  Name?: string;
-}
-
-export namespace Trigger {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Trigger): any => ({
-    ...obj,
-  });
+  Name?: string | undefined;
 }
 
 /**
- * <p>Describes the AWS resources in use by this environment. This data is live.</p>
+ * <p>Describes the Amazon Web Services resources in use by this environment. This data is live.</p>
+ * @public
  */
 export interface EnvironmentResourceDescription {
   /**
    * <p>The name of the environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p> The <code>AutoScalingGroups</code> used by this environment. </p>
+   * @public
    */
-  AutoScalingGroups?: AutoScalingGroup[];
+  AutoScalingGroups?: AutoScalingGroup[] | undefined;
+
+  /**
+   * <p>The Amazon EKS cluster that this environment runs on. This member is present only for
+   *       environments in the <i>Cluster</i> tier.</p>
+   * @public
+   */
+  Cluster?: Cluster | undefined;
 
   /**
    * <p>The Amazon EC2 instances used by this environment.</p>
+   * @public
    */
-  Instances?: Instance[];
+  Instances?: Instance[] | undefined;
 
   /**
    * <p>The Auto Scaling launch configurations in use by this environment.</p>
+   * @public
    */
-  LaunchConfigurations?: LaunchConfiguration[];
+  LaunchConfigurations?: LaunchConfiguration[] | undefined;
 
   /**
    * <p>The Amazon EC2 launch templates in use by this environment.</p>
+   * @public
    */
-  LaunchTemplates?: LaunchTemplate[];
+  LaunchTemplates?: LaunchTemplate[] | undefined;
 
   /**
    * <p>The LoadBalancers in use by this environment.</p>
+   * @public
    */
-  LoadBalancers?: LoadBalancer[];
+  LoadBalancers?: LoadBalancer[] | undefined;
 
   /**
    * <p>The <code>AutoScaling</code> triggers in use by this environment. </p>
+   * @public
    */
-  Triggers?: Trigger[];
+  Triggers?: Trigger[] | undefined;
 
   /**
    * <p>The queues used by this environment.</p>
+   * @public
    */
-  Queues?: Queue[];
-}
-
-export namespace EnvironmentResourceDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentResourceDescription): any => ({
-    ...obj,
-  });
+  Queues?: Queue[] | undefined;
 }
 
 /**
  * <p>Result message containing a list of environment resource descriptions.</p>
+ * @public
  */
 export interface EnvironmentResourceDescriptionsMessage {
   /**
    * <p> A list of <a>EnvironmentResourceDescription</a>. </p>
+   * @public
    */
-  EnvironmentResources?: EnvironmentResourceDescription;
-}
-
-export namespace EnvironmentResourceDescriptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentResourceDescriptionsMessage): any => ({
-    ...obj,
-  });
+  EnvironmentResources?: EnvironmentResourceDescription | undefined;
 }
 
 /**
  * <p>Request to describe one or more environments.</p>
+ * @public
  */
 export interface DescribeEnvironmentsMessage {
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only
-   *       those that are associated with this application.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only
-   *       those that are associated with this application version.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only
-   *       those that have the specified IDs.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.</p>
+   * @public
    */
-  EnvironmentIds?: string[];
+  EnvironmentIds?: string[] | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only
-   *       those that have the specified names.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.</p>
+   * @public
    */
-  EnvironmentNames?: string[];
+  EnvironmentNames?: string[] | undefined;
 
   /**
    * <p>Indicates whether to include deleted environments:</p>
    *          <p>
-   *             <code>true</code>: Environments that have been deleted after
-   *       <code>IncludedDeletedBackTo</code> are displayed.</p>
+   *             <code>true</code>: Environments that have been deleted after <code>IncludedDeletedBackTo</code> are displayed.</p>
    *          <p>
    *             <code>false</code>: Do not include deleted environments.</p>
+   * @public
    */
-  IncludeDeleted?: boolean;
+  IncludeDeleted?: boolean | undefined;
 
   /**
-   * <p> If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then
-   *       environments deleted after this date are displayed. </p>
+   * <p> If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. </p>
+   * @public
    */
-  IncludedDeletedBackTo?: Date;
+  IncludedDeletedBackTo?: Date | undefined;
 
   /**
-   * <p>For a paginated request. Specify a maximum number of environments to include in
-   *       each response.</p>
-   *          <p>If no <code>MaxRecords</code> is specified, all available environments are
-   *       retrieved in a single response.</p>
+   * <p>For a paginated request. Specify a maximum number of environments to include in each response.</p>
+   *          <p>If no <code>MaxRecords</code> is specified, all available environments are retrieved in a single response.</p>
+   * @public
    */
-  MaxRecords?: number;
+  MaxRecords?: number | undefined;
 
   /**
-   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other
-   *       parameter values must be identical to the ones specified in the initial request.</p>
+   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be
+   *       identical to the ones specified in the initial request.</p>
    *          <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-export namespace DescribeEnvironmentsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEnvironmentsMessage): any => ({
-    ...obj,
-  });
-}
-
-export type EventSeverity = "DEBUG" | "ERROR" | "FATAL" | "INFO" | "TRACE" | "WARN";
 
 /**
  * <p>Request to retrieve a list of events for an environment.</p>
+ * @public
  */
 export interface DescribeEventsMessage {
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only
-   *       those associated with this application.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to include only those associated with this application.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-   *       associated with this application version.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to those associated with this application version.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that
-   *       are associated with this environment configuration.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to those that are associated with this environment configuration.</p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-   *       associated with this environment.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to those associated with this environment.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
-   *       associated with this environment.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to those associated with this environment.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>The ARN of a custom platform version. If specified, AWS Elastic Beanstalk restricts the
-   *       returned descriptions to those associated with this custom platform version.</p>
+   * <p>The ARN of a custom platform version. If specified, Elastic Beanstalk restricts the returned descriptions to those associated with this custom platform
+   *       version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the described events to include only
-   *       those associated with this request ID.</p>
+   * <p>If specified, Elastic Beanstalk restricts the described events to include only those associated with this request ID.</p>
+   * @public
    */
-  RequestId?: string;
+  RequestId?: string | undefined;
 
   /**
-   * <p>If specified, limits the events returned from this call to include only those with the
-   *       specified severity or higher.</p>
+   * <p>If specified, limits the events returned from this call to include only those with the specified severity or higher.</p>
+   * @public
    */
-  Severity?: EventSeverity | string;
+  Severity?: EventSeverity | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that
-   *       occur on or after this time.</p>
+   * <p>If specified, Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
-   * <p> If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that
-   *       occur up to, but not including, the <code>EndTime</code>. </p>
+   * <p> If specified, Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the <code>EndTime</code>. </p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 
   /**
-   * <p>Specifies the maximum number of events that can be returned, beginning with the most
-   *       recent event.</p>
+   * <p>Specifies the maximum number of events that can be returned, beginning with the most recent event.</p>
+   * @public
    */
-  MaxRecords?: number;
+  MaxRecords?: number | undefined;
 
   /**
    * <p>Pagination token. If specified, the events return the next batch of results.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeEventsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEventsMessage): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes an event.</p>
+ * @public
  */
 export interface EventDescription {
   /**
    * <p>The date when the event occurred.</p>
+   * @public
    */
-  EventDate?: Date;
+  EventDate?: Date | undefined;
 
   /**
    * <p>The event message.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 
   /**
    * <p>The application associated with the event.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The release label for the application version associated with this event.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
    * <p>The name of the configuration associated with this event.</p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>The name of the environment associated with this event.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
    * <p>The web service request ID for the activity of this event.</p>
+   * @public
    */
-  RequestId?: string;
+  RequestId?: string | undefined;
 
   /**
    * <p>The severity level of this event.</p>
+   * @public
    */
-  Severity?: EventSeverity | string;
-}
-
-export namespace EventDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventDescription): any => ({
-    ...obj,
-  });
+  Severity?: EventSeverity | undefined;
 }
 
 /**
  * <p>Result message wrapping a list of event descriptions.</p>
+ * @public
  */
 export interface EventDescriptionsMessage {
   /**
    * <p> A list of <a>EventDescription</a>. </p>
+   * @public
    */
-  Events?: EventDescription[];
+  Events?: EventDescription[] | undefined;
 
   /**
-   * <p> If returned, this indicates that there are more results to obtain. Use this token in
-   *       the next <a>DescribeEvents</a> call to get the next batch of events. </p>
+   * <p> If returned, this indicates that there are more results to obtain. Use this token in the next <a>DescribeEvents</a> call to get the next
+   *       batch of events. </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace EventDescriptionsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EventDescriptionsMessage): any => ({
-    ...obj,
-  });
-}
-
-export enum InstancesHealthAttribute {
-  All = "All",
-  ApplicationMetrics = "ApplicationMetrics",
-  AvailabilityZone = "AvailabilityZone",
-  Causes = "Causes",
-  Color = "Color",
-  Deployment = "Deployment",
-  HealthStatus = "HealthStatus",
-  InstanceType = "InstanceType",
-  LaunchedAt = "LaunchedAt",
-  RefreshedAt = "RefreshedAt",
-  System = "System",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>
+ * @public
  */
 export interface DescribeInstancesHealthRequest {
   /**
-   * <p>Specify the AWS Elastic Beanstalk environment by name.</p>
+   * <p>Specify the Elastic Beanstalk environment by name.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>Specify the AWS Elastic Beanstalk environment by ID.</p>
+   * <p>Specify the Elastic Beanstalk environment by ID.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>Specifies the response elements you wish to receive. To retrieve all attributes, set to
-   *         <code>All</code>. If no attribute names are specified, returns a list of
-   *       instances.</p>
+   * <p>Specifies the response elements you wish to receive. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns
+   *       a list of instances.</p>
+   * @public
    */
-  AttributeNames?: (InstancesHealthAttribute | string)[];
+  AttributeNames?: InstancesHealthAttribute[] | undefined;
 
   /**
    * <p>Specify the pagination token returned by a previous call.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeInstancesHealthRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeInstancesHealthRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Information about an application version deployment.</p>
+ * @public
  */
 export interface Deployment {
   /**
    * <p>The version label of the application version in the deployment.</p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
    * <p>The ID of the deployment. This number increases by one each time that you deploy source
    *       code or change instance configuration settings.</p>
+   * @public
    */
-  DeploymentId?: number;
+  DeploymentId?: number | undefined;
 
   /**
    * <p>The status of the deployment:</p>
@@ -3909,401 +3315,411 @@ export interface Deployment {
    *                   <code>Failed</code> : The deployment failed.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>For in-progress deployments, the time that the deployment started.</p>
    *          <p>For completed deployments, the time that the deployment ended.</p>
+   * @public
    */
-  DeploymentTime?: Date;
-}
-
-export namespace Deployment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Deployment): any => ({
-    ...obj,
-  });
+  DeploymentTime?: Date | undefined;
 }
 
 /**
  * <p>CPU utilization metrics for an instance.</p>
+ * @public
  */
 export interface CPUUtilization {
   /**
    * <p>Percentage of time that the CPU has spent in the <code>User</code> state over the last
    *       10 seconds.</p>
+   * @public
    */
-  User?: number;
+  User?: number | undefined;
 
   /**
    * <p>Available on Linux environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>Nice</code> state over the last
    *       10 seconds.</p>
+   * @public
    */
-  Nice?: number;
+  Nice?: number | undefined;
 
   /**
    * <p>Available on Linux environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>System</code> state over the
    *       last 10 seconds.</p>
+   * @public
    */
-  System?: number;
+  System?: number | undefined;
 
   /**
    * <p>Percentage of time that the CPU has spent in the <code>Idle</code> state over the last
    *       10 seconds.</p>
+   * @public
    */
-  Idle?: number;
+  Idle?: number | undefined;
 
   /**
    * <p>Available on Linux environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>I/O Wait</code> state over the
    *       last 10 seconds.</p>
+   * @public
    */
-  IOWait?: number;
+  IOWait?: number | undefined;
 
   /**
    * <p>Available on Linux environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>IRQ</code> state over the last
    *       10 seconds.</p>
+   * @public
    */
-  IRQ?: number;
+  IRQ?: number | undefined;
 
   /**
    * <p>Available on Linux environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>SoftIRQ</code> state over the
    *       last 10 seconds.</p>
+   * @public
    */
-  SoftIRQ?: number;
+  SoftIRQ?: number | undefined;
 
   /**
    * <p>Available on Windows environments only.</p>
    *          <p>Percentage of time that the CPU has spent in the <code>Privileged</code> state over the
    *       last 10 seconds.</p>
+   * @public
    */
-  Privileged?: number;
-}
-
-export namespace CPUUtilization {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CPUUtilization): any => ({
-    ...obj,
-  });
+  Privileged?: number | undefined;
 }
 
 /**
  * <p>CPU utilization and load average metrics for an Amazon EC2 instance.</p>
+ * @public
  */
 export interface SystemStatus {
   /**
    * <p>CPU utilization metrics for the instance.</p>
+   * @public
    */
-  CPUUtilization?: CPUUtilization;
+  CPUUtilization?: CPUUtilization | undefined;
 
   /**
    * <p>Load average in the last 1-minute, 5-minute, and 15-minute periods.
    *       For more information, see
    *         <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.</p>
+   * @public
    */
-  LoadAverage?: number[];
-}
-
-export namespace SystemStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SystemStatus): any => ({
-    ...obj,
-  });
+  LoadAverage?: number[] | undefined;
 }
 
 /**
  * <p>Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk
  *       environment.</p>
+ * @public
  */
 export interface SingleInstanceHealth {
   /**
    * <p>The ID of the Amazon EC2 instance.</p>
+   * @public
    */
-  InstanceId?: string;
+  InstanceId?: string | undefined;
 
   /**
    * <p>Returns the health status of the specified instance. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health
    *         Colors and Statuses</a>.</p>
+   * @public
    */
-  HealthStatus?: string;
+  HealthStatus?: string | undefined;
 
   /**
    * <p>Represents the color indicator that gives you information about the health of the EC2
    *       instance. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and
    *         Statuses</a>.</p>
+   * @public
    */
-  Color?: string;
+  Color?: string | undefined;
 
   /**
    * <p>Represents the causes, which provide more information about the current health
    *       status.</p>
+   * @public
    */
-  Causes?: string[];
+  Causes?: string[] | undefined;
 
   /**
    * <p>The time at which the EC2 instance was launched.</p>
+   * @public
    */
-  LaunchedAt?: Date;
+  LaunchedAt?: Date | undefined;
 
   /**
    * <p>Request metrics from your application.</p>
+   * @public
    */
-  ApplicationMetrics?: ApplicationMetrics;
+  ApplicationMetrics?: ApplicationMetrics | undefined;
 
   /**
    * <p>Operating system metrics from the instance.</p>
+   * @public
    */
-  System?: SystemStatus;
+  System?: SystemStatus | undefined;
 
   /**
    * <p>Information about the most recent deployment to an instance.</p>
+   * @public
    */
-  Deployment?: Deployment;
+  Deployment?: Deployment | undefined;
 
   /**
    * <p>The availability zone in which the instance runs.</p>
+   * @public
    */
-  AvailabilityZone?: string;
+  AvailabilityZone?: string | undefined;
 
   /**
    * <p>The instance's type.</p>
+   * @public
    */
-  InstanceType?: string;
-}
-
-export namespace SingleInstanceHealth {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SingleInstanceHealth): any => ({
-    ...obj,
-  });
+  InstanceType?: string | undefined;
 }
 
 /**
- * <p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk
- *       environment.</p>
+ * <p>Detailed health information about the Amazon EC2 instances in an Elastic Beanstalk environment.</p>
+ * @public
  */
 export interface DescribeInstancesHealthResult {
   /**
    * <p>Detailed health information about each instance.</p>
-   *          <p>The output differs slightly between Linux and Windows environments. There is a difference
-   *       in the members that are supported under the <code><CPUUtilization></code> type.</p>
+   *          <p>The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the
+   *         <code><CPUUtilization></code> type.</p>
+   * @public
    */
-  InstanceHealthList?: SingleInstanceHealth[];
+  InstanceHealthList?: SingleInstanceHealth[] | undefined;
 
   /**
    * <p>The date and time that the health information was retrieved.</p>
+   * @public
    */
-  RefreshedAt?: Date;
+  RefreshedAt?: Date | undefined;
 
   /**
    * <p>Pagination token for the next page of results, if available.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeInstancesHealthResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeInstancesHealthResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribePlatformVersionRequest {
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
-}
-
-export namespace DescribePlatformVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribePlatformVersionRequest): any => ({
-    ...obj,
-  });
+  PlatformArn?: string | undefined;
 }
 
 /**
  * <p>A custom AMI available to platforms.</p>
+ * @public
  */
 export interface CustomAmi {
   /**
    * <p>The type of virtualization used to create the custom AMI.</p>
+   * @public
    */
-  VirtualizationType?: string;
+  VirtualizationType?: string | undefined;
 
   /**
    * <p>THe ID of the image used to create the custom AMI.</p>
+   * @public
    */
-  ImageId?: string;
+  ImageId?: string | undefined;
 }
 
-export namespace CustomAmi {
+/**
+ * <p>An AMI that Elastic Beanstalk uses by default for a platform version and processor
+ *       architecture.</p>
+ * @public
+ */
+export interface DefaultAmi {
   /**
-   * @internal
+   * <p>The processor architecture of the AMI.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CustomAmi): any => ({
-    ...obj,
-  });
+  Architecture?: AmiArchitecture | undefined;
+
+  /**
+   * <p>The ID of the AMI.</p>
+   * @public
+   */
+  ImageId?: string | undefined;
 }
 
 /**
  * <p>A framework supported by the platform.</p>
+ * @public
  */
 export interface PlatformFramework {
   /**
    * <p>The name of the framework.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The version of the framework.</p>
+   * @public
    */
-  Version?: string;
-}
-
-export namespace PlatformFramework {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformFramework): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * <p>A programming language supported by the platform.</p>
+ * @public
  */
 export interface PlatformProgrammingLanguage {
   /**
    * <p>The name of the programming language.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The version of the programming language.</p>
+   * @public
    */
-  Version?: string;
-}
-
-export namespace PlatformProgrammingLanguage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformProgrammingLanguage): any => ({
-    ...obj,
-  });
+  Version?: string | undefined;
 }
 
 /**
  * <p>Detailed information about a platform version.</p>
+ * @public
  */
 export interface PlatformDescription {
   /**
    * <p>The ARN of the platform version.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
-   * <p>The AWS account ID of the person who created the platform version.</p>
+   * <p>The Amazon Web Services account ID of the person who created the platform version.</p>
+   * @public
    */
-  PlatformOwner?: string;
+  PlatformOwner?: string | undefined;
 
   /**
    * <p>The name of the platform version.</p>
+   * @public
    */
-  PlatformName?: string;
+  PlatformName?: string | undefined;
 
   /**
    * <p>The version of the platform version.</p>
+   * @public
    */
-  PlatformVersion?: string;
+  PlatformVersion?: string | undefined;
 
   /**
    * <p>The name of the solution stack used by the platform version.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The status of the platform version.</p>
+   * @public
    */
-  PlatformStatus?: PlatformStatus | string;
+  PlatformStatus?: PlatformStatus | undefined;
 
   /**
    * <p>The date when the platform version was created.</p>
+   * @public
    */
-  DateCreated?: Date;
+  DateCreated?: Date | undefined;
 
   /**
    * <p>The date when the platform version was last updated.</p>
+   * @public
    */
-  DateUpdated?: Date;
+  DateUpdated?: Date | undefined;
 
   /**
    * <p>The category of the platform version.</p>
+   * @public
    */
-  PlatformCategory?: string;
+  PlatformCategory?: string | undefined;
 
   /**
    * <p>The description of the platform version.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Information about the maintainer of the platform version.</p>
+   * @public
    */
-  Maintainer?: string;
+  Maintainer?: string | undefined;
 
   /**
    * <p>The operating system used by the platform version.</p>
+   * @public
    */
-  OperatingSystemName?: string;
+  OperatingSystemName?: string | undefined;
 
   /**
    * <p>The version of the operating system used by the platform version.</p>
+   * @public
    */
-  OperatingSystemVersion?: string;
+  OperatingSystemVersion?: string | undefined;
 
   /**
    * <p>The programming languages supported by the platform version.</p>
+   * @public
    */
-  ProgrammingLanguages?: PlatformProgrammingLanguage[];
+  ProgrammingLanguages?: PlatformProgrammingLanguage[] | undefined;
 
   /**
    * <p>The frameworks supported by the platform version.</p>
+   * @public
    */
-  Frameworks?: PlatformFramework[];
+  Frameworks?: PlatformFramework[] | undefined;
 
   /**
-   * <p>The custom AMIs supported by the platform version.</p>
+   * <p>The AMIs of the platform version, by virtualization type. For Elastic Beanstalk managed platforms,
+   *       these are the default <code>x86_64</code> AMIs; for custom platforms, the <code>hvm</code>
+   *       entry is the AMI built for the platform version. To find a managed platform's default AMIs
+   *       for every supported processor architecture, including <code>arm64</code>, use <code>DefaultAmiList</code>.</p>
+   * @public
    */
-  CustomAmiList?: CustomAmi[];
+  CustomAmiList?: CustomAmi[] | undefined;
+
+  /**
+   * <p>The AMIs that Elastic Beanstalk uses by default for the platform version, one for each supported
+   *       processor architecture. When an environment doesn't specify a custom AMI, Elastic Beanstalk chooses the
+   *       default AMI that matches the environment's architecture.</p>
+   *          <p>This list isn't returned for custom platforms.</p>
+   * @public
+   */
+  DefaultAmiList?: DefaultAmi[] | undefined;
 
   /**
    * <p>The tiers supported by the platform version.</p>
+   * @public
    */
-  SupportedTierList?: string[];
+  SupportedTierList?: string[] | undefined;
 
   /**
    * <p>The additions supported by the platform version.</p>
+   * @public
    */
-  SupportedAddonList?: string[];
+  SupportedAddonList?: string[] | undefined;
 
   /**
    * <p>The state of the platform version in its lifecycle.</p>
@@ -4312,89 +3728,65 @@ export interface PlatformDescription {
    *          <p>If a null value is returned, the platform version isn't the recommended one for its
    *       branch. Each platform branch has a single recommended platform version, typically the most
    *       recent one.</p>
+   * @public
    */
-  PlatformLifecycleState?: string;
+  PlatformLifecycleState?: string | undefined;
 
   /**
    * <p>The platform branch to which the platform version belongs.</p>
+   * @public
    */
-  PlatformBranchName?: string;
+  PlatformBranchName?: string | undefined;
 
   /**
    * <p>The state of the platform version's branch in its lifecycle.</p>
    *          <p>Possible values: <code>Beta</code> | <code>Supported</code> | <code>Deprecated</code> |
    *       <code>Retired</code>
    *          </p>
+   * @public
    */
-  PlatformBranchLifecycleState?: string;
+  PlatformBranchLifecycleState?: string | undefined;
 }
 
-export namespace PlatformDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformDescription): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribePlatformVersionResult {
   /**
    * <p>Detailed information about the platform version.</p>
+   * @public
    */
-  PlatformDescription?: PlatformDescription;
-}
-
-export namespace DescribePlatformVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribePlatformVersionResult): any => ({
-    ...obj,
-  });
+  PlatformDescription?: PlatformDescription | undefined;
 }
 
 /**
  * <p>Request to disassociate the operations role from an environment.</p>
+ * @public
  */
 export interface DisassociateEnvironmentOperationsRoleMessage {
   /**
    * <p>The name of the environment from which to disassociate the operations role.</p>
+   * @public
    */
   EnvironmentName: string | undefined;
 }
 
-export namespace DisassociateEnvironmentOperationsRoleMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateEnvironmentOperationsRoleMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A list of available AWS Elastic Beanstalk solution stacks.</p>
+ * <p>A list of available Elastic Beanstalk solution stacks.</p>
+ * @public
  */
 export interface ListAvailableSolutionStacksResultMessage {
   /**
    * <p>A list of available solution stacks.</p>
+   * @public
    */
-  SolutionStacks?: string[];
+  SolutionStacks?: string[] | undefined;
 
   /**
    * <p> A list of available solution stacks and their <a>SolutionStackDescription</a>. </p>
+   * @public
    */
-  SolutionStackDetails?: SolutionStackDescription[];
-}
-
-export namespace ListAvailableSolutionStacksResultMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAvailableSolutionStacksResultMessage): any => ({
-    ...obj,
-  });
+  SolutionStackDetails?: SolutionStackDescription[] | undefined;
 }
 
 /**
@@ -4410,43 +3802,40 @@ export namespace ListAvailableSolutionStacksResultMessage {
  *          <p>The valid values for attributes of <code>SearchFilter</code> depend on the API action. For
  *       valid values, see the reference page for the API action you're calling that takes a
  *         <code>SearchFilter</code> parameter.</p>
+ * @public
  */
 export interface SearchFilter {
   /**
    * <p>The result attribute to which the filter values are applied. Valid values vary by API
    *       action.</p>
+   * @public
    */
-  Attribute?: string;
+  Attribute?: string | undefined;
 
   /**
    * <p>The operator to apply to the <code>Attribute</code> with each of the <code>Values</code>.
    *       Valid values vary by <code>Attribute</code>.</p>
+   * @public
    */
-  Operator?: string;
+  Operator?: string | undefined;
 
   /**
    * <p>The list of values applied to the <code>Attribute</code> and <code>Operator</code>
    *       attributes. Number of values and valid values vary by <code>Attribute</code>.</p>
+   * @public
    */
-  Values?: string[];
+  Values?: string[] | undefined;
 }
 
-export namespace SearchFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SearchFilter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListPlatformBranchesRequest {
   /**
-   * <p>Criteria for restricting the resulting list of platform branches. The filter is evaluated
-   *       as a logical conjunction (AND) of the separate <code>SearchFilter</code> terms.</p>
-   *          <p>The following list shows valid attribute values for each of the <code>SearchFilter</code>
-   *       terms. Most operators take a single value. The <code>in</code> and <code>not_in</code>
-   *       operators can take multiple values.</p>
+   * <p>Criteria for restricting the resulting list of platform branches. The filter is evaluated as a logical conjunction (AND) of the separate
+   *         <code>SearchFilter</code> terms.</p>
+   *          <p>The following list shows valid attribute values for each of the <code>SearchFilter</code> terms. Most operators take a single value. The
+   *         <code>in</code> and <code>not_in</code> operators can take multiple values.</p>
    *          <ul>
    *             <li>
    *                <p>
@@ -4454,9 +3843,8 @@ export interface ListPlatformBranchesRequest {
    *                <ul>
    *                   <li>
    *                      <p>
-   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>begins_with</code>
-   *               | <code>ends_with</code> | <code>contains</code> | <code>in</code> |
-   *                 <code>not_in</code>
+   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>begins_with</code> | <code>ends_with</code> | <code>contains</code> |
+   *                 <code>in</code> | <code>not_in</code>
    *                      </p>
    *                   </li>
    *                </ul>
@@ -4467,14 +3855,12 @@ export interface ListPlatformBranchesRequest {
    *                <ul>
    *                   <li>
    *                      <p>
-   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>in</code> |
-   *                 <code>not_in</code>
+   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>in</code> | <code>not_in</code>
    *                      </p>
    *                   </li>
    *                   <li>
    *                      <p>
-   *                         <code>Values</code>: <code>beta</code> | <code>supported</code> |
-   *                 <code>deprecated</code> | <code>retired</code>
+   *                         <code>Values</code>: <code>beta</code> | <code>supported</code> | <code>deprecated</code> | <code>retired</code>
    *                      </p>
    *                   </li>
    *                </ul>
@@ -4485,9 +3871,8 @@ export interface ListPlatformBranchesRequest {
    *                <ul>
    *                   <li>
    *                      <p>
-   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>begins_with</code>
-   *               | <code>ends_with</code> | <code>contains</code> | <code>in</code> |
-   *               <code>not_in</code>
+   *                         <code>Operator</code>: <code>=</code> | <code>!=</code> | <code>begins_with</code> | <code>ends_with</code> | <code>contains</code> |
+   *                 <code>in</code> | <code>not_in</code>
    *                      </p>
    *                   </li>
    *                </ul>
@@ -4510,55 +3895,51 @@ export interface ListPlatformBranchesRequest {
    *             </li>
    *          </ul>
    *          <p>Array size: limited to 10 <code>SearchFilter</code> objects.</p>
-   *          <p>Within each <code>SearchFilter</code> item, the <code>Values</code> array is limited to 10
-   *       items.</p>
+   *          <p>Within each <code>SearchFilter</code> item, the <code>Values</code> array is limited to 10 items.</p>
+   * @public
    */
-  Filters?: SearchFilter[];
+  Filters?: SearchFilter[] | undefined;
 
   /**
    * <p>The maximum number of platform branch values returned in one call.</p>
+   * @public
    */
-  MaxRecords?: number;
+  MaxRecords?: number | undefined;
 
   /**
-   * <p>For a paginated request. Specify a token from a previous response page to retrieve the
-   *       next response page. All other parameter values must be identical to the ones specified in the
-   *       initial request.</p>
+   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be
+   *       identical to the ones specified in the initial request.</p>
    *          <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListPlatformBranchesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPlatformBranchesRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Summary information about a platform branch.</p>
+ * @public
  */
 export interface PlatformBranchSummary {
   /**
    * <p>The name of the platform to which this platform branch belongs.</p>
+   * @public
    */
-  PlatformName?: string;
+  PlatformName?: string | undefined;
 
   /**
    * <p>The name of the platform branch.</p>
+   * @public
    */
-  BranchName?: string;
+  BranchName?: string | undefined;
 
   /**
    * <p>The support life cycle state of the platform branch.</p>
    *          <p>Possible values: <code>beta</code> | <code>supported</code> | <code>deprecated</code> |
    *       <code>retired</code>
    *          </p>
+   * @public
    */
-  LifecycleState?: string;
+  LifecycleState?: string | undefined;
 
   /**
    * <p>An ordinal number that designates the order in which platform branches have been added to
@@ -4567,52 +3948,42 @@ export interface PlatformBranchSummary {
    *       branches.</p>
    *          <p>A larger <code>BranchOrder</code> value designates a newer platform branch within the
    *       platform.</p>
+   * @public
    */
-  BranchOrder?: number;
+  BranchOrder?: number | undefined;
 
   /**
    * <p>The environment tiers that platform versions in this branch support.</p>
    *          <p>Possible values: <code>WebServer/Standard</code> | <code>Worker/SQS/HTTP</code>
    *          </p>
+   * @public
    */
-  SupportedTierList?: string[];
+  SupportedTierList?: string[] | undefined;
 }
 
-export namespace PlatformBranchSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformBranchSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListPlatformBranchesResult {
   /**
    * <p>Summary information about the platform branches.</p>
+   * @public
    */
-  PlatformBranchSummaryList?: PlatformBranchSummary[];
+  PlatformBranchSummaryList?: PlatformBranchSummary[] | undefined;
 
   /**
-   * <p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can
-   *       pass in a subsequent request to get the next response page.</p>
+   * <p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can pass in a subsequent request to get the next response
+   *       page.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace ListPlatformBranchesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPlatformBranchesResult): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes criteria to restrict the results when listing platform versions.</p>
  *          <p>The filter is evaluated as follows: <code>Type Operator Values[1]</code>
  *          </p>
+ * @public
  */
 export interface PlatformFilter {
   /**
@@ -4623,8 +3994,9 @@ export interface PlatformFilter {
    *         <code>SupportedTier</code> | <code>SupportedAddon</code> |
    *         <code>ProgrammingLanguageName</code> | <code>OperatingSystemName</code>
    *          </p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The operator to apply to the <code>Type</code> with each of the
@@ -4634,8 +4006,9 @@ export interface PlatformFilter {
    *         <code>></code> | <code>>=</code> |
    *         <code>contains</code> | <code>begins_with</code> | <code>ends_with</code>
    *          </p>
+   * @public
    */
-  Operator?: string;
+  Operator?: string | undefined;
 
   /**
    * <p>The list of values applied to the filtering platform version attribute. Only one value is supported
@@ -4666,541 +4039,388 @@ export interface PlatformFilter {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Values?: string[];
+  Values?: string[] | undefined;
 }
 
-export namespace PlatformFilter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PlatformFilter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListPlatformVersionsRequest {
   /**
-   * <p>Criteria for restricting the resulting list of platform versions. The filter is
-   *       interpreted as a logical conjunction (AND) of the separate <code>PlatformFilter</code>
-   *       terms.</p>
+   * <p>Criteria for restricting the resulting list of platform versions. The filter is interpreted as a logical conjunction (AND) of the separate
+   *         <code>PlatformFilter</code> terms.</p>
+   * @public
    */
-  Filters?: PlatformFilter[];
+  Filters?: PlatformFilter[] | undefined;
 
   /**
    * <p>The maximum number of platform version values returned in one call.</p>
+   * @public
    */
-  MaxRecords?: number;
+  MaxRecords?: number | undefined;
 
   /**
-   * <p>For a paginated request. Specify a token from a previous response page to retrieve the
-   *       next response page. All other parameter values must be identical to the ones specified in the
-   *       initial request.</p>
+   * <p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be
+   *       identical to the ones specified in the initial request.</p>
    *          <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListPlatformVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPlatformVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListPlatformVersionsResult {
   /**
    * <p>Summary information about the platform versions.</p>
+   * @public
    */
-  PlatformSummaryList?: PlatformSummary[];
+  PlatformSummaryList?: PlatformSummary[] | undefined;
 
   /**
-   * <p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can
-   *       pass in a subsequent request to get the next response page.</p>
+   * <p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can pass in a subsequent request to get the next response
+   *       page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListPlatformVersionsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListPlatformVersionsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceMessage {
   /**
    * <p>The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.</p>
    *          <p>Must be the ARN of an Elastic Beanstalk resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A resource doesn't exist for the specified Amazon Resource Name (ARN).</p>
+ * @public
  */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
 export interface ResourceTagsDescriptionMessage {
   /**
    * <p>The Amazon Resource Name (ARN) of the resource for which a tag list was requested.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>A list of tag key-value pairs.</p>
+   * @public
    */
-  ResourceTags?: Tag[];
-}
-
-export namespace ResourceTagsDescriptionMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceTagsDescriptionMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The type of the specified Amazon Resource Name (ARN) isn't supported for this operation.</p>
- */
-export interface ResourceTypeNotSupportedException extends __SmithyException, $MetadataBearer {
-  name: "ResourceTypeNotSupportedException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace ResourceTypeNotSupportedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceTypeNotSupportedException): any => ({
-    ...obj,
-  });
+  ResourceTags?: Tag[] | undefined;
 }
 
 /**
  * <p></p>
+ * @public
  */
 export interface RebuildEnvironmentMessage {
   /**
    * <p>The ID of the environment to rebuild.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the environment to rebuild.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 }
-
-export namespace RebuildEnvironmentMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RebuildEnvironmentMessage): any => ({
-    ...obj,
-  });
-}
-
-export type EnvironmentInfoType = "bundle" | "tail";
 
 /**
- * <p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk
- *       storage bucket.</p>
+ * <p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk storage bucket.</p>
+ * @public
  */
 export interface RequestEnvironmentInfoMessage {
   /**
    * <p>The ID of the environment of the requested data.</p>
-   *          <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an
-   *       <code>InvalidParameterValue</code> error. </p>
-   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p>
+   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the environment of the requested data.</p>
-   *          <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an
-   *       <code>InvalidParameterValue</code> error. </p>
-   *          <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p>
+   *          <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The type of information to request.</p>
+   * @public
    */
-  InfoType: EnvironmentInfoType | string | undefined;
-}
-
-export namespace RequestEnvironmentInfoMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RequestEnvironmentInfoMessage): any => ({
-    ...obj,
-  });
+  InfoType: EnvironmentInfoType | undefined;
 }
 
 /**
  * <p></p>
+ * @public
  */
 export interface RestartAppServerMessage {
   /**
    * <p>The ID of the environment to restart the server for.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the environment to restart the server for.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
-}
-
-export namespace RestartAppServerMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RestartAppServerMessage): any => ({
-    ...obj,
-  });
+  EnvironmentName?: string | undefined;
 }
 
 /**
  * <p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>
+ * @public
  */
 export interface RetrieveEnvironmentInfoMessage {
   /**
    * <p>The ID of the data's environment.</p>
-   *          <p>If no such environment is found, returns an <code>InvalidParameterValue</code>
-   *       error.</p>
-   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code>
-   *       error.</p>
+   *          <p>If no such environment is found, returns an <code>InvalidParameterValue</code> error.</p>
+   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error.</p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the data's environment.</p>
    *          <p> If no such environment is found, returns an <code>InvalidParameterValue</code> error. </p>
-   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>The type of information to retrieve.</p>
+   * @public
    */
-  InfoType: EnvironmentInfoType | string | undefined;
-}
-
-export namespace RetrieveEnvironmentInfoMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RetrieveEnvironmentInfoMessage): any => ({
-    ...obj,
-  });
+  InfoType: EnvironmentInfoType | undefined;
 }
 
 /**
  * <p>The information retrieved from the Amazon EC2 instances.</p>
+ * @public
  */
 export interface EnvironmentInfoDescription {
   /**
    * <p>The type of information retrieved.</p>
+   * @public
    */
-  InfoType?: EnvironmentInfoType | string;
+  InfoType?: EnvironmentInfoType | undefined;
 
   /**
    * <p>The Amazon EC2 Instance ID for this information.</p>
+   * @public
    */
-  Ec2InstanceId?: string;
+  Ec2InstanceId?: string | undefined;
 
   /**
    * <p>The time stamp when this information was retrieved.</p>
+   * @public
    */
-  SampleTimestamp?: Date;
+  SampleTimestamp?: Date | undefined;
 
   /**
    * <p>The retrieved information. Currently contains a presigned Amazon S3 URL. The files are
    *       deleted after 15 minutes.</p>
    *          <p>Anyone in possession of this URL can access the files before they are deleted. Make the
    *       URL available only to trusted parties.</p>
+   * @public
    */
-  Message?: string;
-}
-
-export namespace EnvironmentInfoDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EnvironmentInfoDescription): any => ({
-    ...obj,
-  });
+  Message?: string | undefined;
 }
 
 /**
  * <p>Result message containing a description of the requested environment info.</p>
+ * @public
  */
 export interface RetrieveEnvironmentInfoResultMessage {
   /**
    * <p> The <a>EnvironmentInfoDescription</a> of the environment. </p>
+   * @public
    */
-  EnvironmentInfo?: EnvironmentInfoDescription[];
-}
-
-export namespace RetrieveEnvironmentInfoResultMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RetrieveEnvironmentInfoResultMessage): any => ({
-    ...obj,
-  });
+  EnvironmentInfo?: EnvironmentInfoDescription[] | undefined;
 }
 
 /**
  * <p>Swaps the CNAMEs of two environments.</p>
+ * @public
  */
 export interface SwapEnvironmentCNAMEsMessage {
   /**
    * <p>The ID of the source environment.</p>
-   *          <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the
-   *       <code>SourceEnvironmentName</code>. You may also specify both. If you specify the
-   *       <code>SourceEnvironmentId</code>, you must specify the
-   *       <code>DestinationEnvironmentId</code>. </p>
+   *          <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If
+   *       you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>
+   * @public
    */
-  SourceEnvironmentId?: string;
+  SourceEnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the source environment.</p>
-   *          <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the
-   *       <code>SourceEnvironmentName</code>. You may also specify both. If you specify the
-   *       <code>SourceEnvironmentName</code>, you must specify the
-   *       <code>DestinationEnvironmentName</code>. </p>
+   *          <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If
+   *       you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>
+   * @public
    */
-  SourceEnvironmentName?: string;
+  SourceEnvironmentName?: string | undefined;
 
   /**
    * <p>The ID of the destination environment.</p>
-   *          <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the
-   *       <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the
-   *       <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>
+   *          <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify
+   *       both. You must specify the <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>
+   * @public
    */
-  DestinationEnvironmentId?: string;
+  DestinationEnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the destination environment.</p>
-   *          <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the
-   *       <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the
-   *       <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>.
-   *     </p>
+   *          <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify
+   *       both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>
+   * @public
    */
-  DestinationEnvironmentName?: string;
-}
-
-export namespace SwapEnvironmentCNAMEsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SwapEnvironmentCNAMEsMessage): any => ({
-    ...obj,
-  });
+  DestinationEnvironmentName?: string | undefined;
 }
 
 /**
  * <p>Request to terminate an environment.</p>
+ * @public
  */
 export interface TerminateEnvironmentMessage {
   /**
    * <p>The ID of the environment to terminate.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
    * <p>The name of the environment to terminate.</p>
-   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>Indicates whether the associated AWS resources should shut down when the environment is
-   *       terminated:</p>
+   * <p>Indicates whether the associated Amazon Web Services resources should shut down when the environment is terminated:</p>
    *          <ul>
    *             <li>
    *                <p>
-   *                   <code>true</code>: The specified environment as well as the associated AWS resources, such
-   *           as Auto Scaling group and LoadBalancer, are terminated.</p>
+   *                   <code>true</code>: The specified environment as well as the associated Amazon Web Services resources, such as Auto Scaling group and LoadBalancer, are
+   *           terminated.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>false</code>: AWS Elastic Beanstalk resource management is removed from the
-   *           environment, but the AWS resources continue to operate.</p>
+   *                   <code>false</code>: Elastic Beanstalk resource management is removed from the environment, but the Amazon Web Services resources continue to operate.</p>
    *             </li>
    *          </ul>
-   *          <p> For more information, see the <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/"> AWS Elastic Beanstalk User Guide. </a>
+   *          <p> For more information, see the <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/"> Elastic Beanstalk User Guide. </a>
    *          </p>
    *          <p> Default: <code>true</code>
    *          </p>
    *          <p> Valid Values: <code>true</code> | <code>false</code>
    *          </p>
+   * @public
    */
-  TerminateResources?: boolean;
+  TerminateResources?: boolean | undefined;
 
   /**
-   * <p>Terminates the target environment even if another environment in the same group is
-   *       dependent on it.</p>
+   * <p>Terminates the target environment even if another environment in the same group is dependent on it.</p>
+   * @public
    */
-  ForceTerminate?: boolean;
-}
-
-export namespace TerminateEnvironmentMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TerminateEnvironmentMessage): any => ({
-    ...obj,
-  });
+  ForceTerminate?: boolean | undefined;
 }
 
 /**
  * <p>Request to update an application.</p>
+ * @public
  */
 export interface UpdateApplicationMessage {
   /**
    * <p>The name of the application to update. If no such application is found,
-   *         <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error.
-   *     </p>
+   *         <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>A new description for the application.</p>
-   *          <p>Default: If not specified, AWS Elastic Beanstalk does not update the
-   *       description.</p>
+   *          <p>Default: If not specified, Elastic Beanstalk does not update the description.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace UpdateApplicationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateApplicationMessage): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateApplicationResourceLifecycleMessage {
   /**
    * <p>The name of the application.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The lifecycle configuration.</p>
+   * @public
    */
   ResourceLifecycleConfig: ApplicationResourceLifecycleConfig | undefined;
 }
 
-export namespace UpdateApplicationResourceLifecycleMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateApplicationResourceLifecycleMessage): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p></p>
+ * @public
  */
 export interface UpdateApplicationVersionMessage {
   /**
    * <p>The name of the application associated with this version.</p>
-   *          <p> If no application is found with this name, <code>UpdateApplication</code> returns an
-   *         <code>InvalidParameterValue</code> error.</p>
+   *          <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the version to update.</p>
-   *          <p>If no application version is found with this label, <code>UpdateApplication</code>
-   *       returns an <code>InvalidParameterValue</code> error. </p>
+   *          <p>If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
   VersionLabel: string | undefined;
 
   /**
    * <p>A new description for this version.</p>
+   * @public
    */
-  Description?: string;
-}
-
-export namespace UpdateApplicationVersionMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateApplicationVersionMessage): any => ({
-    ...obj,
-  });
+  Description?: string | undefined;
 }
 
 /**
  * <p>The result message containing the options for the specified solution stack.</p>
+ * @public
  */
 export interface UpdateConfigurationTemplateMessage {
   /**
@@ -5208,6 +4428,7 @@ export interface UpdateConfigurationTemplateMessage {
    *       update.</p>
    *          <p> If no application is found with this name, <code>UpdateConfigurationTemplate</code>
    *       returns an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
   ApplicationName: string | undefined;
 
@@ -5216,200 +4437,156 @@ export interface UpdateConfigurationTemplateMessage {
    *          <p> If no configuration template is found with this name,
    *         <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code>
    *       error. </p>
+   * @public
    */
   TemplateName: string | undefined;
 
   /**
    * <p>A new description for the configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A list of configuration option settings to update with the new specified option
    *       value.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 
   /**
    * <p>A list of configuration options to remove from the configuration set.</p>
    *          <p> Constraint: You can remove only <code>UserDefined</code> configuration options.
    *     </p>
+   * @public
    */
-  OptionsToRemove?: OptionSpecification[];
-}
-
-export namespace UpdateConfigurationTemplateMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateConfigurationTemplateMessage): any => ({
-    ...obj,
-  });
+  OptionsToRemove?: OptionSpecification[] | undefined;
 }
 
 /**
  * <p>Request to update an environment.</p>
+ * @public
  */
 export interface UpdateEnvironmentMessage {
   /**
    * <p>The name of the application with which the environment is associated.</p>
+   * @public
    */
-  ApplicationName?: string;
+  ApplicationName?: string | undefined;
 
   /**
    * <p>The ID of the environment to update.</p>
-   *          <p>If no environment with this ID exists, AWS Elastic Beanstalk returns an
-   *         <code>InvalidParameterValue</code> error.</p>
-   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   *          <p>If no environment with this ID exists, Elastic Beanstalk returns an <code>InvalidParameterValue</code> error.</p>
+   *          <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentId?: string;
+  EnvironmentId?: string | undefined;
 
   /**
-   * <p>The name of the environment to update. If no environment with this name exists, AWS
-   *       Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>
-   *          <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not
-   *       specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.
-   *     </p>
+   * <p>The name of the environment to update. If no environment with this name exists, Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>
+   *          <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, Elastic Beanstalk returns
+   *         <code>MissingRequiredParameter</code> error. </p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
-   * <p>The name of the group to which the target environment belongs. Specify a group name
-   *       only if the environment's name is specified in an environment manifest and not with the
-   *       environment name or environment ID parameters. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest
-   *         (env.yaml)</a> for details.</p>
+   * <p>The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment
+   *       manifest and not with the environment name or environment ID parameters. See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.</p>
+   * @public
    */
-  GroupName?: string;
+  GroupName?: string | undefined;
 
   /**
-   * <p>If this parameter is specified, AWS Elastic Beanstalk updates the description of this
-   *       environment.</p>
+   * <p>If this parameter is specified, Elastic Beanstalk updates the description of this environment.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>This specifies the tier to use to update the environment.</p>
-   *          <p>Condition: At this time, if you change the tier version, name, or type, AWS Elastic
-   *       Beanstalk returns <code>InvalidParameterValue</code> error. </p>
+   *          <p>Condition: At this time, if you change the tier version, name, or type, Elastic Beanstalk returns <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
-  Tier?: EnvironmentTier;
+  Tier?: EnvironmentTier | undefined;
 
   /**
-   * <p>If this parameter is specified, AWS Elastic Beanstalk deploys the named application
-   *       version to the environment. If no such application version is found, returns an
-   *         <code>InvalidParameterValue</code> error. </p>
+   * <p>If this parameter is specified, Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns
+   *       an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
-  VersionLabel?: string;
+  VersionLabel?: string | undefined;
 
   /**
-   * <p>If this parameter is specified, AWS Elastic Beanstalk deploys this configuration
-   *       template to the environment. If no such configuration template is found, AWS Elastic Beanstalk
-   *       returns an <code>InvalidParameterValue</code> error. </p>
+   * <p>If this parameter is specified, Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found,
+   *       Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
-   * <p>This specifies the platform version that the environment will run after the environment
-   *       is updated.</p>
+   * <p>This specifies the platform version that the environment will run after the environment is updated.</p>
+   * @public
    */
-  SolutionStackName?: string;
+  SolutionStackName?: string | undefined;
 
   /**
    * <p>The ARN of the platform, if used.</p>
+   * @public
    */
-  PlatformArn?: string;
+  PlatformArn?: string | undefined;
 
   /**
-   * <p>If specified, AWS Elastic Beanstalk updates the configuration set associated with the
-   *       running environment and sets the specified configuration options to the requested
-   *       value.</p>
+   * <p>If specified, Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the
+   *       requested value.</p>
+   * @public
    */
-  OptionSettings?: ConfigurationOptionSetting[];
+  OptionSettings?: ConfigurationOptionSetting[] | undefined;
 
   /**
-   * <p>A list of custom user-defined configuration options to remove from the configuration
-   *       set for this environment.</p>
+   * <p>A list of custom user-defined configuration options to remove from the configuration set for this environment.</p>
+   * @public
    */
-  OptionsToRemove?: OptionSpecification[];
-}
-
-export namespace UpdateEnvironmentMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateEnvironmentMessage): any => ({
-    ...obj,
-  });
+  OptionsToRemove?: OptionSpecification[] | undefined;
 }
 
 /**
- * <p>The number of tags in the resource would exceed the number of tags that each resource
- *       can have.</p>
- *          <p>To calculate this, the operation considers both the number of tags the resource already has
- *       and the tags this operation would add if it succeeded.</p>
+ * @public
  */
-export interface TooManyTagsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyTagsException";
-  $fault: "client";
-  /**
-   * <p>The exception error message.</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyTagsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyTagsException): any => ({
-    ...obj,
-  });
-}
-
 export interface UpdateTagsForResourceMessage {
   /**
    * <p>The Amazon Resource Name (ARN) of the resouce to be updated.</p>
    *          <p>Must be the ARN of an Elastic Beanstalk resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
-   * <p>A list of tags to add or update. If a key of an existing tag is added, the tag's value is
-   *       updated.</p>
-   *          <p>Specify at least one of these parameters: <code>TagsToAdd</code>,
-   *         <code>TagsToRemove</code>.</p>
+   * <p>A list of tags to add or update. If a key of an existing tag is added, the tag's value is updated.</p>
+   *          <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>
+   * @public
    */
-  TagsToAdd?: Tag[];
+  TagsToAdd?: Tag[] | undefined;
 
   /**
    * <p>A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored.</p>
-   *          <p>Specify at least one of these parameters: <code>TagsToAdd</code>,
-   *       <code>TagsToRemove</code>.</p>
+   *          <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>
+   * @public
    */
-  TagsToRemove?: string[];
+  TagsToRemove?: string[] | undefined;
 }
-
-export namespace UpdateTagsForResourceMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateTagsForResourceMessage): any => ({
-    ...obj,
-  });
-}
-
-export type ValidationSeverity = "error" | "warning";
 
 /**
  * <p>An error or warning for a desired configuration option value.</p>
+ * @public
  */
 export interface ValidationMessage {
   /**
    * <p>A message describing the error or warning.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 
   /**
    * <p>An indication of the severity of this message:</p>
@@ -5425,81 +4602,64 @@ export interface ValidationMessage {
    *           account.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Severity?: ValidationSeverity | string;
+  Severity?: ValidationSeverity | undefined;
 
   /**
    * <p>The namespace to which the option belongs.</p>
+   * @public
    */
-  Namespace?: string;
+  Namespace?: string | undefined;
 
   /**
    * <p>The name of the option.</p>
+   * @public
    */
-  OptionName?: string;
-}
-
-export namespace ValidationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationMessage): any => ({
-    ...obj,
-  });
+  OptionName?: string | undefined;
 }
 
 /**
  * <p>Provides a list of validation messages.</p>
+ * @public
  */
 export interface ConfigurationSettingsValidationMessages {
   /**
    * <p> A list of <a>ValidationMessage</a>. </p>
+   * @public
    */
-  Messages?: ValidationMessage[];
-}
-
-export namespace ConfigurationSettingsValidationMessages {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConfigurationSettingsValidationMessages): any => ({
-    ...obj,
-  });
+  Messages?: ValidationMessage[] | undefined;
 }
 
 /**
  * <p>A list of validation messages for a specified configuration template.</p>
+ * @public
  */
 export interface ValidateConfigurationSettingsMessage {
   /**
    * <p>The name of the application that the configuration template or environment belongs
    *       to.</p>
+   * @public
    */
   ApplicationName: string | undefined;
 
   /**
    * <p>The name of the configuration template to validate the settings against.</p>
    *          <p>Condition: You cannot specify both this and an environment name.</p>
+   * @public
    */
-  TemplateName?: string;
+  TemplateName?: string | undefined;
 
   /**
    * <p>The name of the environment to validate the settings against.</p>
    *          <p>Condition: You cannot specify both this and a configuration template name.</p>
+   * @public
    */
-  EnvironmentName?: string;
+  EnvironmentName?: string | undefined;
 
   /**
    * <p>A list of the options and desired values to evaluate.</p>
+   * @public
    */
   OptionSettings: ConfigurationOptionSetting[] | undefined;
-}
-
-export namespace ValidateConfigurationSettingsMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidateConfigurationSettingsMessage): any => ({
-    ...obj,
-  });
 }

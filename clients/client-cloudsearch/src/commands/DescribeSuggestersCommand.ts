@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudSearchClient";
-import { DescribeSuggestersRequest, DescribeSuggestersResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeSuggestersCommand,
-  serializeAws_queryDescribeSuggestersCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSuggestersRequest, DescribeSuggestersResponse } from "../models/models_0";
+import { DescribeSuggesters$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSuggestersCommand}.
+ */
 export interface DescribeSuggestersCommandInput extends DescribeSuggestersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSuggestersCommand}.
+ */
 export interface DescribeSuggestersCommandOutput extends DescribeSuggestersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,79 @@ export interface DescribeSuggestersCommandOutput extends DescribeSuggestersRespo
  * ```javascript
  * import { CloudSearchClient, DescribeSuggestersCommand } from "@aws-sdk/client-cloudsearch"; // ES Modules import
  * // const { CloudSearchClient, DescribeSuggestersCommand } = require("@aws-sdk/client-cloudsearch"); // CommonJS import
+ * // import type { CloudSearchClientConfig } from "@aws-sdk/client-cloudsearch";
+ * const config = {}; // type is CloudSearchClientConfig
  * const client = new CloudSearchClient(config);
+ * const input = { // DescribeSuggestersRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   SuggesterNames: [ // StandardNameList
+ *     "STRING_VALUE",
+ *   ],
+ *   Deployed: true || false,
+ * };
  * const command = new DescribeSuggestersCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSuggestersResponse
+ * //   Suggesters: [ // SuggesterStatusList // required
+ * //     { // SuggesterStatus
+ * //       Options: { // Suggester
+ * //         SuggesterName: "STRING_VALUE", // required
+ * //         DocumentSuggesterOptions: { // DocumentSuggesterOptions
+ * //           SourceField: "STRING_VALUE", // required
+ * //           FuzzyMatching: "none" || "low" || "high",
+ * //           SortExpression: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Status: { // OptionStatus
+ * //         CreationDate: new Date("TIMESTAMP"), // required
+ * //         UpdateDate: new Date("TIMESTAMP"), // required
+ * //         UpdateVersion: Number("int"),
+ * //         State: "RequiresIndexDocuments" || "Processing" || "Active" || "FailedToValidate", // required
+ * //         PendingDeletion: true || false,
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSuggestersCommandInput - {@link DescribeSuggestersCommandInput}
+ * @returns {@link DescribeSuggestersCommandOutput}
  * @see {@link DescribeSuggestersCommandInput} for command's `input` shape.
  * @see {@link DescribeSuggestersCommandOutput} for command's `response` shape.
- * @see {@link CloudSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudSearchClientResolvedConfig | config} for CloudSearchClient's `config` shape.
  *
+ * @throws {@link BaseException} (client fault)
+ *  <p>An error occurred while processing the request.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>An internal error occurred while processing the request. If this problem persists,
+ *       report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
+ *
+ * @throws {@link CloudSearchServiceException}
+ * <p>Base exception class for all service exceptions from CloudSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSuggestersCommand extends $Command<
-  DescribeSuggestersCommandInput,
-  DescribeSuggestersCommandOutput,
-  CloudSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSuggestersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSuggestersCommandInput, DescribeSuggestersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudSearchClient";
-    const commandName = "DescribeSuggestersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSuggestersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSuggestersResponse.filterSensitiveLog,
+export class DescribeSuggestersCommand extends command<DescribeSuggestersCommandInput, DescribeSuggestersCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSuggesters",
+  DescribeSuggesters$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSuggestersRequest;
+      output: DescribeSuggestersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSuggestersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeSuggestersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeSuggestersCommandOutput> {
-    return deserializeAws_queryDescribeSuggestersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSuggestersCommandInput;
+      output: DescribeSuggestersCommandOutput;
+    };
+  };
 }

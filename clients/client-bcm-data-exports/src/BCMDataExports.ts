@@ -1,0 +1,340 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import { BCMDataExportsClient } from "./BCMDataExportsClient";
+import {
+  type CreateExportCommandInput,
+  type CreateExportCommandOutput,
+  CreateExportCommand,
+} from "./commands/CreateExportCommand";
+import {
+  type DeleteExportCommandInput,
+  type DeleteExportCommandOutput,
+  DeleteExportCommand,
+} from "./commands/DeleteExportCommand";
+import {
+  type GetExecutionCommandInput,
+  type GetExecutionCommandOutput,
+  GetExecutionCommand,
+} from "./commands/GetExecutionCommand";
+import { type GetExportCommandInput, type GetExportCommandOutput, GetExportCommand } from "./commands/GetExportCommand";
+import { type GetTableCommandInput, type GetTableCommandOutput, GetTableCommand } from "./commands/GetTableCommand";
+import {
+  type ListExecutionsCommandInput,
+  type ListExecutionsCommandOutput,
+  ListExecutionsCommand,
+} from "./commands/ListExecutionsCommand";
+import {
+  type ListExportsCommandInput,
+  type ListExportsCommandOutput,
+  ListExportsCommand,
+} from "./commands/ListExportsCommand";
+import {
+  type ListTablesCommandInput,
+  type ListTablesCommandOutput,
+  ListTablesCommand,
+} from "./commands/ListTablesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateExportCommandInput,
+  type UpdateExportCommandOutput,
+  UpdateExportCommand,
+} from "./commands/UpdateExportCommand";
+import { paginateListExecutions } from "./pagination/ListExecutionsPaginator";
+import { paginateListExports } from "./pagination/ListExportsPaginator";
+import { paginateListTables } from "./pagination/ListTablesPaginator";
+
+const commands = {
+  CreateExportCommand,
+  DeleteExportCommand,
+  GetExecutionCommand,
+  GetExportCommand,
+  GetTableCommand,
+  ListExecutionsCommand,
+  ListExportsCommand,
+  ListTablesCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateExportCommand,
+};
+const paginators = {
+  paginateListExecutions,
+  paginateListExports,
+  paginateListTables,
+};
+
+/**
+ * @public
+ */
+export interface BCMDataExportsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface BCMDataExports {
+  /**
+   * @see {@link CreateExportCommand}
+   */
+  createExport(
+    args: CreateExportCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<CreateExportCommandOutput>;
+  createExport(
+    args: CreateExportCommandInput,
+    cb: (err: any, data?: CreateExportCommandOutput) => void
+  ): void;
+  createExport(
+    args: CreateExportCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: CreateExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteExportCommand}
+   */
+  deleteExport(
+    args: DeleteExportCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<DeleteExportCommandOutput>;
+  deleteExport(
+    args: DeleteExportCommandInput,
+    cb: (err: any, data?: DeleteExportCommandOutput) => void
+  ): void;
+  deleteExport(
+    args: DeleteExportCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: DeleteExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExecutionCommand}
+   */
+  getExecution(
+    args: GetExecutionCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<GetExecutionCommandOutput>;
+  getExecution(
+    args: GetExecutionCommandInput,
+    cb: (err: any, data?: GetExecutionCommandOutput) => void
+  ): void;
+  getExecution(
+    args: GetExecutionCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: GetExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExportCommand}
+   */
+  getExport(
+    args: GetExportCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<GetExportCommandOutput>;
+  getExport(
+    args: GetExportCommandInput,
+    cb: (err: any, data?: GetExportCommandOutput) => void
+  ): void;
+  getExport(
+    args: GetExportCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: GetExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTableCommand}
+   */
+  getTable(
+    args: GetTableCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<GetTableCommandOutput>;
+  getTable(
+    args: GetTableCommandInput,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+  getTable(
+    args: GetTableCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: GetTableCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExecutionsCommand}
+   */
+  listExecutions(
+    args: ListExecutionsCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<ListExecutionsCommandOutput>;
+  listExecutions(
+    args: ListExecutionsCommandInput,
+    cb: (err: any, data?: ListExecutionsCommandOutput) => void
+  ): void;
+  listExecutions(
+    args: ListExecutionsCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: ListExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExportsCommand}
+   */
+  listExports(): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<ListExportsCommandOutput>;
+  listExports(
+    args: ListExportsCommandInput,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
+  listExports(
+    args: ListExportsCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: ListExportsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTablesCommand}
+   */
+  listTables(): Promise<ListTablesCommandOutput>;
+  listTables(
+    args: ListTablesCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<ListTablesCommandOutput>;
+  listTables(
+    args: ListTablesCommandInput,
+    cb: (err: any, data?: ListTablesCommandOutput) => void
+  ): void;
+  listTables(
+    args: ListTablesCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: ListTablesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateExportCommand}
+   */
+  updateExport(
+    args: UpdateExportCommandInput,
+    options?: BCMDataExportsRequestOptions
+  ): Promise<UpdateExportCommandOutput>;
+  updateExport(
+    args: UpdateExportCommandInput,
+    cb: (err: any, data?: UpdateExportCommandOutput) => void
+  ): void;
+  updateExport(
+    args: UpdateExportCommandInput,
+    options: BCMDataExportsRequestOptions,
+    cb: (err: any, data?: UpdateExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExecutionsCommandOutput}.
+   */
+  paginateListExecutions(
+    args: ListExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListExportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExportsCommandOutput}.
+   */
+  paginateListExports(
+    args?: ListExportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExportsCommandOutput>;
+
+  /**
+   * @see {@link ListTablesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTablesCommandOutput}.
+   */
+  paginateListTables(
+    args?: ListTablesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTablesCommandOutput>;
+}
+
+/**
+ * <p>You can use the Data Exports API to create customized exports from multiple Amazon Web Services cost management and billing datasets, such as cost and usage data and cost optimization recommendations.</p> <p>The Data Exports API provides the following endpoint:</p> <ul> <li> <p>https://bcm-data-exports.us-east-1.api.aws</p> </li> </ul>
+ * @public
+ */
+export class BCMDataExports extends BCMDataExportsClient implements BCMDataExports {}
+createAggregatedClient(commands, BCMDataExports, { paginators });

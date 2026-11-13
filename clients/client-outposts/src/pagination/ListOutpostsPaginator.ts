@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListOutpostsCommand,
   ListOutpostsCommandInput,
   ListOutpostsCommandOutput,
 } from "../commands/ListOutpostsCommand";
-import { Outposts } from "../Outposts";
 import { OutpostsClient } from "../OutpostsClient";
-import { OutpostsPaginationConfiguration } from "./Interfaces";
+import type { OutpostsPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: OutpostsClient,
-  input: ListOutpostsCommandInput,
-  ...args: any
-): Promise<ListOutpostsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListOutpostsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Outposts,
-  input: ListOutpostsCommandInput,
-  ...args: any
-): Promise<ListOutpostsCommandOutput> => {
-  // @ts-ignore
-  return await client.listOutposts(input, ...args);
-};
-export async function* paginateListOutposts(
+export const paginateListOutposts: (
   config: OutpostsPaginationConfiguration,
   input: ListOutpostsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListOutpostsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListOutpostsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof Outposts) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof OutpostsClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Outposts | OutpostsClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListOutpostsCommandOutput> = createPaginator<
+  OutpostsPaginationConfiguration,
+  ListOutpostsCommandInput,
+  ListOutpostsCommandOutput
+>(OutpostsClient, ListOutpostsCommand, "NextToken", "NextToken", "MaxResults");

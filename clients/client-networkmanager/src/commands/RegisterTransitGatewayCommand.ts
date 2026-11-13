@@ -1,97 +1,106 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { RegisterTransitGatewayRequest, RegisterTransitGatewayResponse } from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1RegisterTransitGatewayCommand,
-  serializeAws_restJson1RegisterTransitGatewayCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterTransitGatewayRequest, RegisterTransitGatewayResponse } from "../models/models_0";
+import { RegisterTransitGateway$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterTransitGatewayCommand}.
+ */
 export interface RegisterTransitGatewayCommandInput extends RegisterTransitGatewayRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterTransitGatewayCommand}.
+ */
 export interface RegisterTransitGatewayCommandOutput extends RegisterTransitGatewayResponse, __MetadataBearer {}
 
 /**
- * <p>Registers a transit gateway in your global network. The transit gateway can be in any
- *             AWS Region, but it must be owned by the same AWS account that owns the global network.
- *             You cannot register a transit gateway in more than one global network.</p>
+ * <p>Registers a transit gateway in your global network. Not all Regions support transit
+ *             gateways for global networks. For a list of the supported Regions, see <a href="https://docs.aws.amazon.com/network-manager/latest/tgwnm/what-are-global-networks.html#nm-available-regions">Region Availability</a> in the <i>Amazon Web Services Transit Gateways for Global
+ *                 Networks User Guide</i>. The transit gateway can be in any of the supported
+ *             Amazon Web Services Regions, but it must be owned by the same Amazon Web Services account that owns the global
+ *             network. You cannot register a transit gateway in more than one global network.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { NetworkManagerClient, RegisterTransitGatewayCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, RegisterTransitGatewayCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // RegisterTransitGatewayRequest
+ *   GlobalNetworkId: "STRING_VALUE", // required
+ *   TransitGatewayArn: "STRING_VALUE", // required
+ * };
  * const command = new RegisterTransitGatewayCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterTransitGatewayResponse
+ * //   TransitGatewayRegistration: { // TransitGatewayRegistration
+ * //     GlobalNetworkId: "STRING_VALUE",
+ * //     TransitGatewayArn: "STRING_VALUE",
+ * //     State: { // TransitGatewayRegistrationStateReason
+ * //       Code: "PENDING" || "AVAILABLE" || "DELETING" || "DELETED" || "FAILED",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RegisterTransitGatewayCommandInput - {@link RegisterTransitGatewayCommandInput}
+ * @returns {@link RegisterTransitGatewayCommandOutput}
  * @see {@link RegisterTransitGatewayCommandInput} for command's `input` shape.
  * @see {@link RegisterTransitGatewayCommandOutput} for command's `response` shape.
- * @see {@link NetworkManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict processing the request. Updating or deleting the resource can
+ *             cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterTransitGatewayCommand extends $Command<
-  RegisterTransitGatewayCommandInput,
-  RegisterTransitGatewayCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterTransitGatewayCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterTransitGatewayCommandInput, RegisterTransitGatewayCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "RegisterTransitGatewayCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterTransitGatewayRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterTransitGatewayResponse.filterSensitiveLog,
+export class RegisterTransitGatewayCommand extends command<RegisterTransitGatewayCommandInput, RegisterTransitGatewayCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterTransitGateway",
+  RegisterTransitGateway$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterTransitGatewayRequest;
+      output: RegisterTransitGatewayResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterTransitGatewayCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1RegisterTransitGatewayCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterTransitGatewayCommandOutput> {
-    return deserializeAws_restJson1RegisterTransitGatewayCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterTransitGatewayCommandInput;
+      output: RegisterTransitGatewayCommandOutput;
+    };
+  };
 }

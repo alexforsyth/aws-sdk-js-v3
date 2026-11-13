@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppIntegrationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppIntegrationsClient";
-import { UpdateEventIntegrationRequest, UpdateEventIntegrationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateEventIntegrationCommand,
-  serializeAws_restJson1UpdateEventIntegrationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateEventIntegrationRequest, UpdateEventIntegrationResponse } from "../models/models_0";
+import { UpdateEventIntegration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateEventIntegrationCommand}.
+ */
 export interface UpdateEventIntegrationCommandInput extends UpdateEventIntegrationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateEventIntegrationCommand}.
+ */
 export interface UpdateEventIntegrationCommandOutput extends UpdateEventIntegrationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,61 @@ export interface UpdateEventIntegrationCommandOutput extends UpdateEventIntegrat
  * ```javascript
  * import { AppIntegrationsClient, UpdateEventIntegrationCommand } from "@aws-sdk/client-appintegrations"; // ES Modules import
  * // const { AppIntegrationsClient, UpdateEventIntegrationCommand } = require("@aws-sdk/client-appintegrations"); // CommonJS import
+ * // import type { AppIntegrationsClientConfig } from "@aws-sdk/client-appintegrations";
+ * const config = {}; // type is AppIntegrationsClientConfig
  * const client = new AppIntegrationsClient(config);
+ * const input = { // UpdateEventIntegrationRequest
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateEventIntegrationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateEventIntegrationCommandInput - {@link UpdateEventIntegrationCommandInput}
+ * @returns {@link UpdateEventIntegrationCommandOutput}
  * @see {@link UpdateEventIntegrationCommandInput} for command's `input` shape.
  * @see {@link UpdateEventIntegrationCommandOutput} for command's `response` shape.
- * @see {@link AppIntegrationsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppIntegrationsClientResolvedConfig | config} for AppIntegrationsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>Request processing failed due to an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link AppIntegrationsServiceException}
+ * <p>Base exception class for all service exceptions from AppIntegrations service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateEventIntegrationCommand extends $Command<
-  UpdateEventIntegrationCommandInput,
-  UpdateEventIntegrationCommandOutput,
-  AppIntegrationsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateEventIntegrationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppIntegrationsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateEventIntegrationCommandInput, UpdateEventIntegrationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppIntegrationsClient";
-    const commandName = "UpdateEventIntegrationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateEventIntegrationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateEventIntegrationResponse.filterSensitiveLog,
+export class UpdateEventIntegrationCommand extends command<UpdateEventIntegrationCommandInput, UpdateEventIntegrationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateEventIntegration",
+  UpdateEventIntegration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEventIntegrationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateEventIntegrationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateEventIntegrationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateEventIntegrationCommandOutput> {
-    return deserializeAws_restJson1UpdateEventIntegrationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateEventIntegrationCommandInput;
+      output: UpdateEventIntegrationCommandOutput;
+    };
+  };
 }

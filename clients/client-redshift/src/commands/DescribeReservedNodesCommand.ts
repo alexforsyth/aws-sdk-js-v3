@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeReservedNodesMessage, ReservedNodesMessage } from "../models/models_1";
-import {
-  deserializeAws_queryDescribeReservedNodesCommand,
-  serializeAws_queryDescribeReservedNodesCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeReservedNodesMessage, ReservedNodesMessage } from "../models/models_0";
+import { DescribeReservedNodes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeReservedNodesCommand}.
+ */
 export interface DescribeReservedNodesCommandInput extends DescribeReservedNodesMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeReservedNodesCommand}.
+ */
 export interface DescribeReservedNodesCommandOutput extends ReservedNodesMessage, __MetadataBearer {}
 
 /**
@@ -28,68 +29,78 @@ export interface DescribeReservedNodesCommandOutput extends ReservedNodesMessage
  * ```javascript
  * import { RedshiftClient, DescribeReservedNodesCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeReservedNodesCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeReservedNodesMessage
+ *   ReservedNodeId: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeReservedNodesCommand(input);
  * const response = await client.send(command);
+ * // { // ReservedNodesMessage
+ * //   Marker: "STRING_VALUE",
+ * //   ReservedNodes: [ // ReservedNodeList
+ * //     { // ReservedNode
+ * //       ReservedNodeId: "STRING_VALUE",
+ * //       ReservedNodeOfferingId: "STRING_VALUE",
+ * //       NodeType: "STRING_VALUE",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       Duration: Number("int"),
+ * //       FixedPrice: Number("double"),
+ * //       UsagePrice: Number("double"),
+ * //       CurrencyCode: "STRING_VALUE",
+ * //       NodeCount: Number("int"),
+ * //       State: "STRING_VALUE",
+ * //       OfferingType: "STRING_VALUE",
+ * //       RecurringCharges: [ // RecurringChargeList
+ * //         { // RecurringCharge
+ * //           RecurringChargeAmount: Number("double"),
+ * //           RecurringChargeFrequency: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ReservedNodeOfferingType: "Regular" || "Upgradable",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeReservedNodesCommandInput - {@link DescribeReservedNodesCommandInput}
+ * @returns {@link DescribeReservedNodesCommandOutput}
  * @see {@link DescribeReservedNodesCommandInput} for command's `input` shape.
  * @see {@link DescribeReservedNodesCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link DependentServiceUnavailableFault} (client fault)
+ *  <p>Your request cannot be completed because a dependent internal service is
+ *             temporarily unavailable. Wait 30 to 60 seconds and try again.</p>
+ *
+ * @throws {@link ReservedNodeNotFoundFault} (client fault)
+ *  <p>The specified reserved compute node not found.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeReservedNodesCommand extends $Command<
-  DescribeReservedNodesCommandInput,
-  DescribeReservedNodesCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeReservedNodesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeReservedNodesCommandInput, DescribeReservedNodesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeReservedNodesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeReservedNodesMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: ReservedNodesMessage.filterSensitiveLog,
+export class DescribeReservedNodesCommand extends command<DescribeReservedNodesCommandInput, DescribeReservedNodesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeReservedNodes",
+  DescribeReservedNodes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReservedNodesMessage;
+      output: ReservedNodesMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeReservedNodesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeReservedNodesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeReservedNodesCommandOutput> {
-    return deserializeAws_queryDescribeReservedNodesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeReservedNodesCommandInput;
+      output: DescribeReservedNodesCommandOutput;
+    };
+  };
 }

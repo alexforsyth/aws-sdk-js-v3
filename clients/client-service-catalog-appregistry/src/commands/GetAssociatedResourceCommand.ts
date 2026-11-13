@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetAssociatedResourceRequest, GetAssociatedResourceResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAssociatedResourceCommand,
-  serializeAws_restJson1GetAssociatedResourceCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceCatalogAppRegistryClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ServiceCatalogAppRegistryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAssociatedResourceRequest, GetAssociatedResourceResponse } from "../models/models_0";
+import { GetAssociatedResource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAssociatedResourceCommand}.
+ */
 export interface GetAssociatedResourceCommandInput extends GetAssociatedResourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAssociatedResourceCommand}.
+ */
 export interface GetAssociatedResourceCommandOutput extends GetAssociatedResourceResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +29,90 @@ export interface GetAssociatedResourceCommandOutput extends GetAssociatedResourc
  * ```javascript
  * import { ServiceCatalogAppRegistryClient, GetAssociatedResourceCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
  * // const { ServiceCatalogAppRegistryClient, GetAssociatedResourceCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * // import type { ServiceCatalogAppRegistryClientConfig } from "@aws-sdk/client-service-catalog-appregistry";
+ * const config = {}; // type is ServiceCatalogAppRegistryClientConfig
  * const client = new ServiceCatalogAppRegistryClient(config);
+ * const input = { // GetAssociatedResourceRequest
+ *   application: "STRING_VALUE", // required
+ *   resourceType: "CFN_STACK" || "RESOURCE_TAG_VALUE", // required
+ *   resource: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   resourceTagStatus: [ // GetAssociatedResourceFilter
+ *     "SUCCESS" || "FAILED" || "IN_PROGRESS" || "SKIPPED",
+ *   ],
+ *   maxResults: Number("int"),
+ * };
  * const command = new GetAssociatedResourceCommand(input);
  * const response = await client.send(command);
+ * // { // GetAssociatedResourceResponse
+ * //   resource: { // Resource
+ * //     name: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     associationTime: new Date("TIMESTAMP"),
+ * //     integrations: { // ResourceIntegrations
+ * //       resourceGroup: { // ResourceGroup
+ * //         state: "CREATING" || "CREATE_COMPLETE" || "CREATE_FAILED" || "UPDATING" || "UPDATE_COMPLETE" || "UPDATE_FAILED",
+ * //         arn: "STRING_VALUE",
+ * //         errorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * //   options: [ // Options
+ * //     "APPLY_APPLICATION_TAG" || "SKIP_APPLICATION_TAG",
+ * //   ],
+ * //   applicationTagResult: { // ApplicationTagResult
+ * //     applicationTagStatus: "IN_PROGRESS" || "SUCCESS" || "FAILURE",
+ * //     errorMessage: "STRING_VALUE",
+ * //     resources: [ // ResourcesList
+ * //       { // ResourcesListItem
+ * //         resourceArn: "STRING_VALUE",
+ * //         errorMessage: "STRING_VALUE",
+ * //         status: "STRING_VALUE",
+ * //         resourceType: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     nextToken: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetAssociatedResourceCommandInput - {@link GetAssociatedResourceCommandInput}
+ * @returns {@link GetAssociatedResourceCommandOutput}
  * @see {@link GetAssociatedResourceCommandInput} for command's `input` shape.
  * @see {@link GetAssociatedResourceCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for ServiceCatalogAppRegistryClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service is experiencing internal problems.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has invalid or missing parameters.</p>
+ *
+ * @throws {@link ServiceCatalogAppRegistryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalogAppRegistry service.</p>
+ *
+ *
+ * @public
  */
-export class GetAssociatedResourceCommand extends $Command<
-  GetAssociatedResourceCommandInput,
-  GetAssociatedResourceCommandOutput,
-  ServiceCatalogAppRegistryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAssociatedResourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogAppRegistryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAssociatedResourceCommandInput, GetAssociatedResourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogAppRegistryClient";
-    const commandName = "GetAssociatedResourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAssociatedResourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetAssociatedResourceResponse.filterSensitiveLog,
+export class GetAssociatedResourceCommand extends command<GetAssociatedResourceCommandInput, GetAssociatedResourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAssociatedResource",
+  GetAssociatedResource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAssociatedResourceRequest;
+      output: GetAssociatedResourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAssociatedResourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAssociatedResourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAssociatedResourceCommandOutput> {
-    return deserializeAws_restJson1GetAssociatedResourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAssociatedResourceCommandInput;
+      output: GetAssociatedResourceCommandOutput;
+    };
+  };
 }

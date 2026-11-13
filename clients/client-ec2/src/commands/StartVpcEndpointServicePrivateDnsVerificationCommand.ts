@@ -1,113 +1,82 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   StartVpcEndpointServicePrivateDnsVerificationRequest,
   StartVpcEndpointServicePrivateDnsVerificationResult,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand,
-  serializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_8";
+import { StartVpcEndpointServicePrivateDnsVerification$ } from "../schemas/schemas_0";
 
-export interface StartVpcEndpointServicePrivateDnsVerificationCommandInput
-  extends StartVpcEndpointServicePrivateDnsVerificationRequest {}
-export interface StartVpcEndpointServicePrivateDnsVerificationCommandOutput
-  extends StartVpcEndpointServicePrivateDnsVerificationResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartVpcEndpointServicePrivateDnsVerificationCommand}.
+ */
+export interface StartVpcEndpointServicePrivateDnsVerificationCommandInput extends StartVpcEndpointServicePrivateDnsVerificationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartVpcEndpointServicePrivateDnsVerificationCommand}.
+ */
+export interface StartVpcEndpointServicePrivateDnsVerificationCommandOutput extends StartVpcEndpointServicePrivateDnsVerificationResult, __MetadataBearer {}
 
 /**
  * <p>Initiates the verification process to prove that the service provider owns the private
  *             DNS name domain for the endpoint service.</p>
- *         <p>The service provider must successfully perform the verification before the consumer can use the name to access the service.</p>
- *         <p>Before the service provider runs this command, they must add a record to the DNS server. For more information, see  <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record">Adding a TXT Record to Your Domain's DNS Server </a> in the <i>Amazon VPC User Guide</i>.</p>
+ *          <p>The service provider must successfully perform the verification before the consumer can use the name to access the service.</p>
+ *          <p>Before the service provider runs this command, they must add a record to the DNS server.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, StartVpcEndpointServicePrivateDnsVerificationCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, StartVpcEndpointServicePrivateDnsVerificationCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // StartVpcEndpointServicePrivateDnsVerificationRequest
+ *   DryRun: true || false,
+ *   ServiceId: "STRING_VALUE", // required
+ * };
  * const command = new StartVpcEndpointServicePrivateDnsVerificationCommand(input);
  * const response = await client.send(command);
+ * // { // StartVpcEndpointServicePrivateDnsVerificationResult
+ * //   ReturnValue: true || false,
+ * // };
+ *
  * ```
  *
+ * @param StartVpcEndpointServicePrivateDnsVerificationCommandInput - {@link StartVpcEndpointServicePrivateDnsVerificationCommandInput}
+ * @returns {@link StartVpcEndpointServicePrivateDnsVerificationCommandOutput}
  * @see {@link StartVpcEndpointServicePrivateDnsVerificationCommandInput} for command's `input` shape.
  * @see {@link StartVpcEndpointServicePrivateDnsVerificationCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class StartVpcEndpointServicePrivateDnsVerificationCommand extends $Command<
-  StartVpcEndpointServicePrivateDnsVerificationCommandInput,
-  StartVpcEndpointServicePrivateDnsVerificationCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartVpcEndpointServicePrivateDnsVerificationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    StartVpcEndpointServicePrivateDnsVerificationCommandInput,
-    StartVpcEndpointServicePrivateDnsVerificationCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "StartVpcEndpointServicePrivateDnsVerificationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartVpcEndpointServicePrivateDnsVerificationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartVpcEndpointServicePrivateDnsVerificationResult.filterSensitiveLog,
+export class StartVpcEndpointServicePrivateDnsVerificationCommand extends command<StartVpcEndpointServicePrivateDnsVerificationCommandInput, StartVpcEndpointServicePrivateDnsVerificationCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartVpcEndpointServicePrivateDnsVerification",
+  StartVpcEndpointServicePrivateDnsVerification$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartVpcEndpointServicePrivateDnsVerificationRequest;
+      output: StartVpcEndpointServicePrivateDnsVerificationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StartVpcEndpointServicePrivateDnsVerificationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartVpcEndpointServicePrivateDnsVerificationCommandOutput> {
-    return deserializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartVpcEndpointServicePrivateDnsVerificationCommandInput;
+      output: StartVpcEndpointServicePrivateDnsVerificationCommandOutput;
+    };
+  };
 }

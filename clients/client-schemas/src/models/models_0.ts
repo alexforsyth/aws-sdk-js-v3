@@ -1,1901 +1,1474 @@
-import { LazyJsonString as __LazyJsonString } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { AutomaticJsonStringConversion as __AutomaticJsonStringConversion } from "@smithy/core/serde";
 
-export enum DiscovererState {
-  STARTED = "STARTED",
-  STOPPED = "STOPPED",
-}
+import type { CodeGenerationStatus, DiscovererState, Type } from "./enums";
 
+/**
+ * @public
+ */
 export interface DiscovererSummary {
   /**
    * <p>The ARN of the discoverer.</p>
+   * @public
    */
-  DiscovererArn?: string;
+  DiscovererArn?: string | undefined;
 
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
-  SourceArn?: string;
+  SourceArn?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
+  State?: DiscovererState | undefined;
 
   /**
    * <p>The Status if the discoverer will discover schemas from events sent from another account.</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace DiscovererSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DiscovererSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegistrySummary {
   /**
    * <p>The ARN of the registry.</p>
+   * @public
    */
-  RegistryArn?: string;
+  RegistryArn?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>Tags associated with the registry.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace RegistrySummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegistrySummary): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * <p>A summary of schema details.</p>
+ * @public
  */
 export interface SchemaSummary {
   /**
    * <p>The date and time that schema was modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The ARN of the schema.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>Tags associated with the schema.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The number of versions available for the schema.</p>
+   * @public
    */
-  VersionCount?: number;
+  VersionCount?: number | undefined;
 }
 
-export namespace SchemaSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SchemaSummary): any => ({
-    ...obj,
-  });
-}
-
-export enum Type {
-  JSONSchemaDraft4 = "JSONSchemaDraft4",
-  OpenApi3 = "OpenApi3",
-}
-
+/**
+ * @public
+ */
 export interface SchemaVersionSummary {
   /**
    * <p>The ARN of the schema version.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>The version number of the schema.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>The type of schema.</p>
+   * @public
    */
-  Type?: Type | string;
+  Type?: Type | undefined;
 }
 
-export namespace SchemaVersionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SchemaVersionSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SearchSchemaVersionSummary {
   /**
    * <p>The date the schema version was created.</p>
+   * @public
    */
-  CreatedDate?: Date;
+  CreatedDate?: Date | undefined;
 
   /**
    * <p>The version number of the schema</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>The type of schema.</p>
+   * @public
    */
-  Type?: Type | string;
+  Type?: Type | undefined;
 }
 
-export namespace SearchSchemaVersionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SearchSchemaVersionSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SearchSchemaSummary {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>The ARN of the schema.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>An array of schema version summaries.</p>
+   * @public
    */
-  SchemaVersions?: SearchSchemaVersionSummary[];
+  SchemaVersions?: SearchSchemaVersionSummary[] | undefined;
 }
 
-export namespace SearchSchemaSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SearchSchemaSummary): any => ({
-    ...obj,
-  });
-}
-
-export interface BadRequestException extends __SmithyException, $MetadataBearer {
-  name: "BadRequestException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace BadRequestException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BadRequestException): any => ({
-    ...obj,
-  });
-}
-
-export enum CodeGenerationStatus {
-  CREATE_COMPLETE = "CREATE_COMPLETE",
-  CREATE_FAILED = "CREATE_FAILED",
-  CREATE_IN_PROGRESS = "CREATE_IN_PROGRESS",
-}
-
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace ConflictException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDiscovererRequest {
   /**
    * <p>A description for the discoverer.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
   SourceArn: string | undefined;
 
   /**
    * <p>Support discovery of schemas in events sent to the bus from another account. (default: true).</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDiscovererResponse {
   /**
    * <p>The description of the discoverer.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the discoverer.</p>
+   * @public
    */
-  DiscovererArn?: string;
+  DiscovererArn?: string | undefined;
 
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
-  SourceArn?: string;
+  SourceArn?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
+  State?: DiscovererState | undefined;
 
   /**
    * <p>The Status if the discoverer will discover schemas from events sent from another account.</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateDiscovererResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDiscovererResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface ForbiddenException extends __SmithyException, $MetadataBearer {
-  name: "ForbiddenException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace ForbiddenException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ForbiddenException): any => ({
-    ...obj,
-  });
-}
-
-export interface InternalServerErrorException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerErrorException";
-  $fault: "server";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace InternalServerErrorException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerErrorException): any => ({
-    ...obj,
-  });
-}
-
-export interface ServiceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ServiceUnavailableException";
-  $fault: "server";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace ServiceUnavailableException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceUnavailableException): any => ({
-    ...obj,
-  });
-}
-
-export interface UnauthorizedException extends __SmithyException, $MetadataBearer {
-  name: "UnauthorizedException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace UnauthorizedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UnauthorizedException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRegistryRequest {
   /**
    * <p>A description of the registry to be created.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>Tags to associate with the registry.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateRegistryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRegistryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRegistryResponse {
   /**
    * <p>The description of the registry.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the registry.</p>
+   * @public
    */
-  RegistryArn?: string;
+  RegistryArn?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>Tags associated with the registry.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateRegistryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRegistryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSchemaRequest {
   /**
    * <p>The source of the schema definition.</p>
+   * @public
    */
   Content: string | undefined;
 
   /**
    * <p>A description of the schema.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Tags associated with the schema.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The type of schema.</p>
+   * @public
    */
-  Type: Type | string | undefined;
+  Type: Type | undefined;
 }
 
-export namespace CreateSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateSchemaResponse {
   /**
    * <p>The description of the schema.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date and time that schema was modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The ARN of the schema.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>The version number of the schema</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>Key-value pairs associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The type of the schema.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The date the schema version was created.</p>
+   * @public
    */
-  VersionCreatedDate?: Date;
+  VersionCreatedDate?: Date | undefined;
 }
 
-export namespace CreateSchemaResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSchemaResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDiscovererRequest {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
   DiscovererId: string | undefined;
 }
 
-export namespace DeleteDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface NotFoundException extends __SmithyException, $MetadataBearer {
-  name: "NotFoundException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace NotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotFoundException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRegistryRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 }
 
-export namespace DeleteRegistryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRegistryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteResourcePolicyRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 }
 
-export namespace DeleteResourcePolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteResourcePolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSchemaRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 }
 
-export namespace DeleteSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSchemaVersionRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * The version number of the schema
+   * @public
    */
   SchemaVersion: string | undefined;
 }
 
-export namespace DeleteSchemaVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSchemaVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeCodeBindingRequest {
   /**
    * <p>The language of the code binding.</p>
+   * @public
    */
   Language: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only this schema version.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 }
 
-export namespace DescribeCodeBindingRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCodeBindingRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeCodeBindingResponse {
   /**
    * <p>The time and date that the code binding was created.</p>
+   * @public
    */
-  CreationDate?: Date;
+  CreationDate?: Date | undefined;
 
   /**
    * <p>The date and time that code bindings were modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The version number of the schema.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>The current status of code binding generation.</p>
+   * @public
    */
-  Status?: CodeGenerationStatus | string;
+  Status?: CodeGenerationStatus | undefined;
 }
 
-export namespace DescribeCodeBindingResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeCodeBindingResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface TooManyRequestsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyRequestsException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace TooManyRequestsException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TooManyRequestsException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDiscovererRequest {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
   DiscovererId: string | undefined;
 }
 
-export namespace DescribeDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDiscovererResponse {
   /**
    * <p>The description of the discoverer.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the discoverer.</p>
+   * @public
    */
-  DiscovererArn?: string;
+  DiscovererArn?: string | undefined;
 
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
-  SourceArn?: string;
+  SourceArn?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
+  State?: DiscovererState | undefined;
 
   /**
    * <p>The Status if the discoverer will discover schemas from events sent from another account.</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace DescribeDiscovererResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDiscovererResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRegistryRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 }
 
-export namespace DescribeRegistryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeRegistryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeRegistryResponse {
   /**
    * <p>The description of the registry.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the registry.</p>
+   * @public
    */
-  RegistryArn?: string;
+  RegistryArn?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>Tags associated with the registry.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace DescribeRegistryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeRegistryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSchemaRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only this schema version.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 }
 
-export namespace DescribeSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSchemaResponse {
   /**
    * <p>The source of the schema definition.</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 
   /**
    * <p>The description of the schema.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date and time that schema was modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The ARN of the schema.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>The version number of the schema</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The type of the schema.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The date the schema version was created.</p>
+   * @public
    */
-  VersionCreatedDate?: Date;
+  VersionCreatedDate?: Date | undefined;
 }
 
-export namespace DescribeSchemaResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSchemaResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ExportSchemaRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only this schema version.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   Type: string | undefined;
 }
 
-export namespace ExportSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ExportSchemaResponse {
-  Content?: string;
-  SchemaArn?: string;
-  SchemaName?: string;
-  SchemaVersion?: string;
-  Type?: string;
+  Content?: string | undefined;
+  SchemaArn?: string | undefined;
+  SchemaName?: string | undefined;
+  SchemaVersion?: string | undefined;
+  Type?: string | undefined;
 }
 
-export namespace ExportSchemaResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExportSchemaResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCodeBindingSourceRequest {
   /**
    * <p>The language of the code binding.</p>
+   * @public
    */
   Language: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only this schema version.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 }
 
-export namespace GetCodeBindingSourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCodeBindingSourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetCodeBindingSourceResponse {
-  Body?: Uint8Array;
+  Body?: Uint8Array | undefined;
 }
 
-export namespace GetCodeBindingSourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetCodeBindingSourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDiscoveredSchemaRequest {
   /**
    * <p>An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.</p>
+   * @public
    */
   Events: string[] | undefined;
 
   /**
    * <p>The type of event.</p>
+   * @public
    */
-  Type: Type | string | undefined;
+  Type: Type | undefined;
 }
 
-export namespace GetDiscoveredSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDiscoveredSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDiscoveredSchemaResponse {
   /**
    * <p>The source of the schema definition.</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 }
 
-export namespace GetDiscoveredSchemaResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDiscoveredSchemaResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourcePolicyRequest {
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 }
 
-export namespace GetResourcePolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourcePolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetResourcePolicyResponse {
   /**
    * <p>The resource-based policy.</p>
+   * @public
    */
-  Policy?: __LazyJsonString | string;
+  Policy?: __AutomaticJsonStringConversion | string | undefined;
 
   /**
    * <p>The revision ID.</p>
+   * @public
    */
-  RevisionId?: string;
+  RevisionId?: string | undefined;
 }
 
-export namespace GetResourcePolicyResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetResourcePolicyResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface GoneException extends __SmithyException, $MetadataBearer {
-  name: "GoneException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace GoneException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GoneException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDiscoverersRequest {
   /**
    * <p>Specifying this limits the results to only those discoverer IDs that start with the specified prefix.</p>
+   * @public
    */
-  DiscovererIdPrefix?: string;
+  DiscovererIdPrefix?: string | undefined;
 
-  Limit?: number;
+  Limit?: number | undefined;
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only those ARNs that start with the specified prefix.</p>
+   * @public
    */
-  SourceArnPrefix?: string;
+  SourceArnPrefix?: string | undefined;
 }
 
-export namespace ListDiscoverersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDiscoverersRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListDiscoverersResponse {
   /**
    * <p>An array of DiscovererSummary information.</p>
+   * @public
    */
-  Discoverers?: DiscovererSummary[];
+  Discoverers?: DiscovererSummary[] | undefined;
 
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListDiscoverersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListDiscoverersResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRegistriesRequest {
-  Limit?: number;
+  Limit?: number | undefined;
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only those registry names that start with the specified prefix.</p>
+   * @public
    */
-  RegistryNamePrefix?: string;
+  RegistryNamePrefix?: string | undefined;
 
   /**
    * <p>Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.</p>
+   * @public
    */
-  Scope?: string;
+  Scope?: string | undefined;
 }
 
-export namespace ListRegistriesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRegistriesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListRegistriesResponse {
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>An array of registry summaries.</p>
+   * @public
    */
-  Registries?: RegistrySummary[];
+  Registries?: RegistrySummary[] | undefined;
 }
 
-export namespace ListRegistriesResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListRegistriesResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemasRequest {
-  Limit?: number;
+  Limit?: number | undefined;
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only those schema names that start with the specified prefix.</p>
+   * @public
    */
-  SchemaNamePrefix?: string;
+  SchemaNamePrefix?: string | undefined;
 }
 
-export namespace ListSchemasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemasRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemasResponse {
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>An array of schema summaries.</p>
+   * @public
    */
-  Schemas?: SchemaSummary[];
+  Schemas?: SchemaSummary[] | undefined;
 }
 
-export namespace ListSchemasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemasResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemaVersionsRequest {
-  Limit?: number;
+  Limit?: number | undefined;
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 }
 
-export namespace ListSchemaVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemaVersionsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListSchemaVersionsResponse {
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>An array of schema version summaries.</p>
+   * @public
    */
-  SchemaVersions?: SchemaVersionSummary[];
+  SchemaVersions?: SchemaVersionSummary[] | undefined;
 }
 
-export namespace ListSchemaVersionsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListSchemaVersionsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The ARN of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>Key-value pairs associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface PreconditionFailedException extends __SmithyException, $MetadataBearer {
-  name: "PreconditionFailedException";
-  $fault: "client";
-  /**
-   * <p>The error code.</p>
-   */
-  Code: string | undefined;
-
-  /**
-   * <p>The message string of the error output.</p>
-   */
-  Message: string | undefined;
-}
-
-export namespace PreconditionFailedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PreconditionFailedException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutCodeBindingRequest {
   /**
    * <p>The language of the code binding.</p>
+   * @public
    */
   Language: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>Specifying this limits the results to only this schema version.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 }
 
-export namespace PutCodeBindingRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutCodeBindingRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutCodeBindingResponse {
   /**
    * <p>The time and date that the code binding was created.</p>
+   * @public
    */
-  CreationDate?: Date;
+  CreationDate?: Date | undefined;
 
   /**
    * <p>The date and time that code bindings were modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The version number of the schema.</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>The current status of code binding generation.</p>
+   * @public
    */
-  Status?: CodeGenerationStatus | string;
-}
-
-export namespace PutCodeBindingResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutCodeBindingResponse): any => ({
-    ...obj,
-  });
+  Status?: CodeGenerationStatus | undefined;
 }
 
 /**
  * <p>The name of the policy.</p>
+ * @public
  */
 export interface PutResourcePolicyRequest {
   /**
    * <p>The resource-based policy.</p>
+   * @public
    */
-  Policy: __LazyJsonString | string | undefined;
+  Policy: __AutomaticJsonStringConversion | string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>The revision ID of the policy.</p>
+   * @public
    */
-  RevisionId?: string;
+  RevisionId?: string | undefined;
 }
 
-export namespace PutResourcePolicyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutResourcePolicyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutResourcePolicyResponse {
   /**
    * <p>The resource-based policy.</p>
+   * @public
    */
-  Policy?: __LazyJsonString | string;
+  Policy?: __AutomaticJsonStringConversion | string | undefined;
 
   /**
    * <p>The revision ID of the policy.</p>
+   * @public
    */
-  RevisionId?: string;
+  RevisionId?: string | undefined;
 }
 
-export namespace PutResourcePolicyResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutResourcePolicyResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SearchSchemasRequest {
   /**
    * <p>Specifying this limits the results to only schemas that include the provided keywords.</p>
+   * @public
    */
   Keywords: string | undefined;
 
-  Limit?: number;
+  Limit?: number | undefined;
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 }
 
-export namespace SearchSchemasRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SearchSchemasRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SearchSchemasResponse {
   /**
    * <p>The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>An array of SearchSchemaSummary information.</p>
+   * @public
    */
-  Schemas?: SearchSchemaSummary[];
+  Schemas?: SearchSchemaSummary[] | undefined;
 }
 
-export namespace SearchSchemasResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SearchSchemasResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartDiscovererRequest {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
   DiscovererId: string | undefined;
 }
 
-export namespace StartDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartDiscovererResponse {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
+  State?: DiscovererState | undefined;
 }
 
-export namespace StartDiscovererResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartDiscovererResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopDiscovererRequest {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
   DiscovererId: string | undefined;
 }
 
-export namespace StopDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StopDiscovererResponse {
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
-}
-
-export namespace StopDiscovererResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StopDiscovererResponse): any => ({
-    ...obj,
-  });
+  State?: DiscovererState | undefined;
 }
 
 /**
  * <p></p>
+ * @public
  */
 export interface TagResourceRequest {
   /**
    * <p>The ARN of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags: { [key: string]: string } | undefined;
+  Tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The ARN of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>Keys of key-value pairs.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDiscovererRequest {
   /**
    * <p>The description of the discoverer to update.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
   DiscovererId: string | undefined;
 
   /**
    * <p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 }
 
-export namespace UpdateDiscovererRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDiscovererRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDiscovererResponse {
   /**
    * <p>The description of the discoverer.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the discoverer.</p>
+   * @public
    */
-  DiscovererArn?: string;
+  DiscovererArn?: string | undefined;
 
   /**
    * <p>The ID of the discoverer.</p>
+   * @public
    */
-  DiscovererId?: string;
+  DiscovererId?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
-  SourceArn?: string;
+  SourceArn?: string | undefined;
 
   /**
    * <p>The state of the discoverer.</p>
+   * @public
    */
-  State?: DiscovererState | string;
+  State?: DiscovererState | undefined;
 
   /**
    * <p>The Status if the discoverer will discover schemas from events sent from another account.</p>
+   * @public
    */
-  CrossAccount?: boolean;
+  CrossAccount?: boolean | undefined;
 
   /**
    * <p>Tags associated with the resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
-}
-
-export namespace UpdateDiscovererResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDiscovererResponse): any => ({
-    ...obj,
-  });
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
  * <p>Updates the registry.</p>
+ * @public
  */
 export interface UpdateRegistryRequest {
   /**
    * <p>The description of the registry to update.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 }
 
-export namespace UpdateRegistryRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRegistryRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRegistryResponse {
   /**
    * <p>The description of the registry.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the registry.</p>
+   * @public
    */
-  RegistryArn?: string;
+  RegistryArn?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
-  RegistryName?: string;
+  RegistryName?: string | undefined;
 
   /**
    * <p>Tags associated with the registry.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 }
 
-export namespace UpdateRegistryResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRegistryResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSchemaRequest {
   /**
    * <p>The ID of the client token.</p>
+   * @public
    */
-  ClientTokenId?: string;
+  ClientTokenId?: string | undefined;
 
   /**
    * <p>The source of the schema definition.</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 
   /**
    * <p>The description of the schema.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The name of the registry.</p>
+   * @public
    */
   RegistryName: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
   SchemaName: string | undefined;
 
   /**
    * <p>The schema type for the events schema.</p>
+   * @public
    */
-  Type?: Type | string;
+  Type?: Type | undefined;
 }
 
-export namespace UpdateSchemaRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSchemaRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSchemaResponse {
   /**
    * <p>The description of the schema.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The date and time that schema was modified.</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>The ARN of the schema.</p>
+   * @public
    */
-  SchemaArn?: string;
+  SchemaArn?: string | undefined;
 
   /**
    * <p>The name of the schema.</p>
+   * @public
    */
-  SchemaName?: string;
+  SchemaName?: string | undefined;
 
   /**
    * <p>The version number of the schema</p>
+   * @public
    */
-  SchemaVersion?: string;
+  SchemaVersion?: string | undefined;
 
   /**
    * <p>Key-value pairs associated with a resource.</p>
+   * @public
    */
-  Tags?: { [key: string]: string };
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>The type of the schema.</p>
+   * @public
    */
-  Type?: string;
+  Type?: string | undefined;
 
   /**
    * <p>The date the schema version was created.</p>
+   * @public
    */
-  VersionCreatedDate?: Date;
-}
-
-export namespace UpdateSchemaResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSchemaResponse): any => ({
-    ...obj,
-  });
+  VersionCreatedDate?: Date | undefined;
 }

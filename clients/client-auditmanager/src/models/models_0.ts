@@ -1,212 +1,180 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * <p> Your account isn't registered with Audit Manager. Check the delegated
- *          administrator setup on the Audit Manager settings page, and try again. </p>
- */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace AccessDeniedException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
-}
-
-export enum AccountStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-  PENDING_ACTIVATION = "PENDING_ACTIVATION",
-}
-
-export enum ActionEnum {
-  ACTIVE = "ACTIVE",
-  CREATE = "CREATE",
-  DELETE = "DELETE",
-  IMPORT_EVIDENCE = "IMPORT_EVIDENCE",
-  INACTIVE = "INACTIVE",
-  REVIEWED = "REVIEWED",
-  UNDER_REVIEW = "UNDER_REVIEW",
-  UPDATE_METADATA = "UPDATE_METADATA",
-}
+// smithy-typescript generated code
+import type {
+  AccountStatus,
+  ActionEnum,
+  AssessmentReportDestinationType,
+  AssessmentReportStatus,
+  AssessmentStatus,
+  ControlResponse,
+  ControlSetStatus,
+  ControlState,
+  ControlStatus,
+  ControlType,
+  DataSourceType,
+  DelegationStatus,
+  DeleteResources,
+  EvidenceFinderBackfillStatus,
+  EvidenceFinderEnablementStatus,
+  ExportDestinationType,
+  FrameworkType,
+  KeywordInputType,
+  ObjectTypeEnum,
+  RoleType,
+  SettingAttribute,
+  ShareRequestAction,
+  ShareRequestStatus,
+  ShareRequestType,
+  SourceFrequency,
+  SourceSetUpOption,
+  SourceType,
+} from "./enums";
 
 /**
  * <p> The wrapper of Amazon Web Services account details, such as account ID or email address.
  *       </p>
+ * @public
  */
 export interface AWSAccount {
   /**
    * <p> The identifier for the Amazon Web Services account. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The email address that's associated with the Amazon Web Services account. </p>
+   * @public
    */
-  emailAddress?: string;
+  emailAddress?: string | undefined;
 
   /**
    * <p> The name of the Amazon Web Services account. </p>
+   * @public
    */
-  name?: string;
-}
-
-export namespace AWSAccount {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AWSAccount): any => ({
-    ...obj,
-  });
+  name?: string | undefined;
 }
 
 /**
  * <p> A comment that's posted by a user on a control. This includes the author's name, the
  *          comment text, and a timestamp. </p>
+ * @public
  */
 export interface ControlComment {
   /**
    * <p> The name of the user who authored the comment. </p>
+   * @public
    */
-  authorName?: string;
+  authorName?: string | undefined;
 
   /**
    * <p> The body text of a control comment. </p>
+   * @public
    */
-  commentBody?: string;
+  commentBody?: string | undefined;
 
   /**
    * <p> The time when the comment was posted. </p>
+   * @public
    */
-  postedDate?: Date;
-}
-
-export namespace ControlComment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ControlComment): any => ({
-    ...obj,
-  });
-}
-
-export enum ControlResponse {
-  AUTOMATE = "AUTOMATE",
-  DEFER = "DEFER",
-  IGNORE = "IGNORE",
-  MANUAL = "MANUAL",
-}
-
-export enum ControlStatus {
-  INACTIVE = "INACTIVE",
-  REVIEWED = "REVIEWED",
-  UNDER_REVIEW = "UNDER_REVIEW",
+  postedDate?: Date | undefined;
 }
 
 /**
  * <p> The control entity that represents a standard control or a custom control in an Audit Manager assessment. </p>
+ * @public
  */
 export interface AssessmentControl {
   /**
    * <p> The identifier for the control. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the control. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the control. </p>
+   *
+   * @deprecated (since 2025-05-19) This data type will be deprecated on May 19, 2025. To view the assessment control description, use GetControl.
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The status of the control. </p>
+   * @public
    */
-  status?: ControlStatus | string;
+  status?: ControlStatus | undefined;
 
   /**
    * <p> The response of the control. </p>
+   * @public
    */
-  response?: ControlResponse | string;
+  response?: ControlResponse | undefined;
 
   /**
    * <p> The list of comments that's attached to the control. </p>
+   * @public
    */
-  comments?: ControlComment[];
+  comments?: ControlComment[] | undefined;
 
   /**
    * <p> The list of data sources for the evidence. </p>
+   * @public
    */
-  evidenceSources?: string[];
+  evidenceSources?: string[] | undefined;
 
   /**
-   * <p> The amount of evidence that's generated for the control. </p>
+   * <p> The amount of evidence that's collected for the control. </p>
+   * @public
    */
-  evidenceCount?: number;
+  evidenceCount?: number | undefined;
 
   /**
    * <p> The amount of evidence in the assessment report. </p>
+   * @public
    */
-  assessmentReportEvidenceCount?: number;
-}
-
-export namespace AssessmentControl {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentControl): any => ({
-    ...obj,
-  });
-}
-
-export enum RoleType {
-  PROCESS_OWNER = "PROCESS_OWNER",
-  RESOURCE_OWNER = "RESOURCE_OWNER",
-}
-
-export enum DelegationStatus {
-  COMPLETE = "COMPLETE",
-  IN_PROGRESS = "IN_PROGRESS",
-  UNDER_REVIEW = "UNDER_REVIEW",
+  assessmentReportEvidenceCount?: number | undefined;
 }
 
 /**
  * <p> The assignment of a control set to a delegate for review. </p>
+ * @public
  */
 export interface Delegation {
   /**
    * <p> The unique identifier for the delegation. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the assessment that's associated with the delegation. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The identifier for the assessment that's associated with the delegation. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p> The status of the delegation. </p>
+   * @public
    */
-  status?: DelegationStatus | string;
+  status?: DelegationStatus | undefined;
 
   /**
    * <p> The Amazon Resource Name (ARN) of the IAM role. </p>
+   * @public
    */
-  roleArn?: string;
+  roleArn?: string | undefined;
 
   /**
    * <p> The type of customer persona. </p>
@@ -218,48 +186,45 @@ export interface Delegation {
    *             <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be
    *                <code>RESOURCE_OWNER</code>.</p>
    *          </note>
+   * @public
    */
-  roleType?: RoleType | string;
+  roleType?: RoleType | undefined;
 
   /**
    * <p> Specifies when the delegation was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p> Specifies when the delegation was last updated. </p>
+   * @public
    */
-  lastUpdated?: Date;
+  lastUpdated?: Date | undefined;
 
   /**
    * <p> The identifier for the control set that's associated with the delegation. </p>
+   * @public
    */
-  controlSetId?: string;
+  controlSetId?: string | undefined;
 
   /**
    * <p> The comment that's related to the delegation. </p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 
   /**
-   * <p> The IAM user or role that created the delegation. </p>
+   * <p> The user or role that created the delegation. </p>
+   * @public
    */
-  createdBy?: string;
-}
-
-export namespace Delegation {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Delegation): any => ({
-    ...obj,
-  });
+  createdBy?: string | undefined;
 }
 
 /**
- * <p> The wrapper that contains the Audit Manager role information of the current
- *          user. This includes the role type and IAM Amazon Resource Name (ARN).
- *       </p>
+ * <p> The wrapper that contains the Audit Manager role information of the current user.
+ *          This includes the role type and IAM Amazon Resource Name (ARN). </p>
+ * @public
  */
 export interface Role {
   /**
@@ -272,695 +237,676 @@ export interface Role {
    *             <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be
    *                <code>RESOURCE_OWNER</code>.</p>
    *          </note>
+   * @public
    */
-  roleType?: RoleType | string;
+  roleType: RoleType | undefined;
 
   /**
    * <p> The Amazon Resource Name (ARN) of the IAM role. </p>
+   * @public
    */
-  roleArn?: string;
-}
-
-export namespace Role {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Role): any => ({
-    ...obj,
-  });
-}
-
-export enum ControlSetStatus {
-  ACTIVE = "ACTIVE",
-  REVIEWED = "REVIEWED",
-  UNDER_REVIEW = "UNDER_REVIEW",
+  roleArn: string | undefined;
 }
 
 /**
  * <p> Represents a set of controls in an Audit Manager assessment. </p>
+ * @public
  */
 export interface AssessmentControlSet {
   /**
    * <p> The identifier of the control set in the assessment. This is the control set name in a
    *          plain string format. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The description for the control set. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p> Specifies the current status of the control set. </p>
+   * <p> The current status of the control set. </p>
+   * @public
    */
-  status?: ControlSetStatus | string;
+  status?: ControlSetStatus | undefined;
 
   /**
    * <p> The roles that are associated with the control set. </p>
+   * @public
    */
-  roles?: Role[];
+  roles?: Role[] | undefined;
 
   /**
    * <p> The list of controls that's contained with the control set. </p>
+   * @public
    */
-  controls?: AssessmentControl[];
+  controls?: AssessmentControl[] | undefined;
 
   /**
    * <p> The delegations that are associated with the control set. </p>
+   * @public
    */
-  delegations?: Delegation[];
+  delegations?: Delegation[] | undefined;
 
   /**
    * <p> The total number of evidence objects that are retrieved automatically for the control
    *          set. </p>
+   * @public
    */
-  systemEvidenceCount?: number;
+  systemEvidenceCount?: number | undefined;
 
   /**
    * <p> The total number of evidence objects that are uploaded manually to the control set.
    *       </p>
+   * @public
    */
-  manualEvidenceCount?: number;
-}
-
-export namespace AssessmentControlSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentControlSet): any => ({
-    ...obj,
-  });
+  manualEvidenceCount?: number | undefined;
 }
 
 /**
  * <p> The metadata of a framework, such as the name, ID, or description. </p>
+ * @public
  */
 export interface FrameworkMetadata {
   /**
    * <p> The name of the framework. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the framework. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The logo that's associated with the framework. </p>
+   * @public
    */
-  logo?: string;
+  logo?: string | undefined;
 
   /**
    * <p> The compliance standard that's associated with the framework. For example, this could
    *          be PCI DSS or HIPAA. </p>
+   * @public
    */
-  complianceType?: string;
-}
-
-export namespace FrameworkMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FrameworkMetadata): any => ({
-    ...obj,
-  });
+  complianceType?: string | undefined;
 }
 
 /**
  * <p> The file used to structure and automate Audit Manager assessments for a given
  *          compliance standard. </p>
+ * @public
  */
 export interface AssessmentFramework {
   /**
    * <p> The unique identifier for the framework. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The Amazon Resource Name (ARN) of the framework. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The metadata of a framework, such as the name, ID, or description. </p>
+   * @public
    */
-  metadata?: FrameworkMetadata;
+  metadata?: FrameworkMetadata | undefined;
 
   /**
    * <p> The control sets that are associated with the framework. </p>
+   * @public
    */
-  controlSets?: AssessmentControlSet[];
-}
-
-export namespace AssessmentFramework {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentFramework): any => ({
-    ...obj,
-  });
-}
-
-export enum AssessmentReportDestinationType {
-  S3 = "S3",
+  controlSets?: AssessmentControlSet[] | undefined;
 }
 
 /**
  * <p> The location where Audit Manager saves assessment reports for the given
  *          assessment. </p>
+ * @public
  */
 export interface AssessmentReportsDestination {
   /**
    * <p> The destination type, such as Amazon S3. </p>
+   * @public
    */
-  destinationType?: AssessmentReportDestinationType | string;
+  destinationType?: AssessmentReportDestinationType | undefined;
 
   /**
-   * <p> The destination of the assessment report. </p>
+   * <p> The destination bucket where Audit Manager stores assessment reports. </p>
+   * @public
    */
-  destination?: string;
-}
-
-export namespace AssessmentReportsDestination {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentReportsDestination): any => ({
-    ...obj,
-  });
+  destination?: string | undefined;
 }
 
 /**
- * <p> An Amazon Web Service such as Amazon S3 or CloudTrail.
+ * <p> An Amazon Web Services service such as Amazon S3 or CloudTrail.
  *       </p>
+ *          <p>For an example of how to find an Amazon Web Services service name and how to define it in
+ *          your assessment scope, see the following:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2">Finding an Amazon Web Services service name to use in your assessment scope</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3">Defining an Amazon Web Services service name in your assessment scope</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @public
  */
 export interface AWSService {
   /**
-   * <p> The name of the Amazon Web Service. </p>
+   * <p> The name of the Amazon Web Services service. </p>
+   * @public
    */
-  serviceName?: string;
-}
-
-export namespace AWSService {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AWSService): any => ({
-    ...obj,
-  });
+  serviceName?: string | undefined;
 }
 
 /**
- * <p> The wrapper that contains the Amazon Web Services accounts and services that are in
+ * <p> The wrapper that contains the Amazon Web Services accounts that are in
  *          scope for the assessment. </p>
+ *          <note>
+ *             <p>You no longer need to specify which Amazon Web Services services are in scope when you
+ *             create or update an assessment. Audit Manager infers the services in scope by
+ *             examining your assessment controls and their data sources, and then mapping this
+ *             information to the relevant Amazon Web Services services. </p>
+ *             <p>If an underlying data source changes for your assessment, we automatically update the
+ *             services scope as needed to reflect the correct Amazon Web Services services. This
+ *             ensures that your assessment collects accurate and comprehensive evidence about all of
+ *             the relevant services in your AWS environment.</p>
+ *          </note>
+ * @public
  */
 export interface Scope {
   /**
    * <p> The Amazon Web Services accounts that are included in the scope of the assessment.
    *       </p>
+   * @public
    */
-  awsAccounts?: AWSAccount[];
+  awsAccounts?: AWSAccount[] | undefined;
 
   /**
    * <p> The Amazon Web Services services that are included in the scope of the assessment.
    *       </p>
+   *          <important>
+   *             <p>This API parameter is no longer supported. If you use this parameter to specify one
+   *             or more Amazon Web Services services, Audit Manager ignores this input. Instead, the
+   *             value for <code>awsServices</code> will show as empty.</p>
+   *          </important>
+   *
+   * @deprecated You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager.
+   * @public
    */
-  awsServices?: AWSService[];
-}
-
-export namespace Scope {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Scope): any => ({
-    ...obj,
-  });
-}
-
-export enum AssessmentStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
+  awsServices?: AWSService[] | undefined;
 }
 
 /**
  * <p> The metadata that's associated with the specified assessment. </p>
+ * @public
  */
 export interface AssessmentMetadata {
   /**
    * <p> The name of the assessment. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The unique identifier for the assessment. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The description of the assessment. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The name of the compliance standard that's related to the assessment, such as PCI-DSS.
    *       </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The overall status of the assessment. </p>
+   * @public
    */
-  status?: AssessmentStatus | string;
+  status?: AssessmentStatus | undefined;
 
   /**
    * <p> The destination that evidence reports are stored in for the assessment. </p>
+   * @public
    */
-  assessmentReportsDestination?: AssessmentReportsDestination;
+  assessmentReportsDestination?: AssessmentReportsDestination | undefined;
 
   /**
    * <p> The wrapper of Amazon Web Services accounts and services that are in scope for the
    *          assessment. </p>
+   * @public
    */
-  scope?: Scope;
+  scope?: Scope | undefined;
 
   /**
    * <p> The roles that are associated with the assessment. </p>
+   * @public
    */
-  roles?: Role[];
+  roles?: Role[] | undefined;
 
   /**
    * <p> The delegations that are associated with the assessment. </p>
+   * @public
    */
-  delegations?: Delegation[];
+  delegations?: Delegation[] | undefined;
 
   /**
    * <p> Specifies when the assessment was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p> The time of the most recent update. </p>
+   * @public
    */
-  lastUpdated?: Date;
-}
-
-export namespace AssessmentMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentMetadata): any => ({
-    ...obj,
-  });
+  lastUpdated?: Date | undefined;
 }
 
 /**
  * <p> An entity that defines the scope of audit evidence collected by Audit Manager.
- *          An Audit Manager assessment is an implementation of an Audit Manager
- *          framework. </p>
+ *          An Audit Manager assessment is an implementation of an Audit Manager framework. </p>
+ * @public
  */
 export interface Assessment {
   /**
    * <p> The Amazon Resource Name (ARN) of the assessment. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The Amazon Web Services account that's associated with the assessment. </p>
+   * @public
    */
-  awsAccount?: AWSAccount;
+  awsAccount?: AWSAccount | undefined;
 
   /**
    * <p> The metadata for the assessment. </p>
+   * @public
    */
-  metadata?: AssessmentMetadata;
+  metadata?: AssessmentMetadata | undefined;
 
   /**
    * <p> The framework that the assessment was created from. </p>
+   * @public
    */
-  framework?: AssessmentFramework;
+  framework?: AssessmentFramework | undefined;
 
   /**
    * <p> The tags that are associated with the assessment. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace Assessment {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Assessment): any => ({
-    ...obj,
-  });
+  tags?: Record<string, string> | undefined;
 }
 
 /**
  * <p> The folder where Audit Manager stores evidence for an assessment. </p>
+ * @public
  */
 export interface AssessmentEvidenceFolder {
   /**
    * <p> The name of the evidence folder. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The date when the first evidence was added to the evidence folder. </p>
+   * @public
    */
-  date?: Date;
+  date?: Date | undefined;
 
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p> The identifier for the control set. </p>
+   * @public
    */
-  controlSetId?: string;
+  controlSetId?: string | undefined;
 
   /**
    * <p> The unique identifier for the control. </p>
+   * @public
    */
-  controlId?: string;
+  controlId?: string | undefined;
 
   /**
    * <p> The identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
-   * <p> The Amazon Web Service that the evidence was collected from. </p>
+   * <p> The Amazon Web Services service that the evidence was collected from. </p>
+   * @public
    */
-  dataSource?: string;
+  dataSource?: string | undefined;
 
   /**
    * <p> The name of the user who created the evidence folder. </p>
+   * @public
    */
-  author?: string;
+  author?: string | undefined;
 
   /**
    * <p> The total amount of evidence in the evidence folder. </p>
+   * @public
    */
-  totalEvidence?: number;
+  totalEvidence?: number | undefined;
 
   /**
    * <p> The total count of evidence that's included in the assessment report. </p>
+   * @public
    */
-  assessmentReportSelectionCount?: number;
+  assessmentReportSelectionCount?: number | undefined;
 
   /**
    * <p> The name of the control. </p>
+   * @public
    */
-  controlName?: string;
+  controlName?: string | undefined;
 
   /**
    * <p> The amount of evidence that's included in the evidence folder. </p>
+   * @public
    */
-  evidenceResourcesIncludedCount?: number;
+  evidenceResourcesIncludedCount?: number | undefined;
 
   /**
-   * <p> The number of evidence that falls under the configuration data category. This
-   *             evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. </p>
+   * <p> The number of evidence that falls under the configuration data category. This evidence
+   *          is collected from configuration snapshots of other Amazon Web Services services such as
+   *             Amazon EC2, Amazon S3, or IAM. </p>
+   * @public
    */
-  evidenceByTypeConfigurationDataCount?: number;
+  evidenceByTypeConfigurationDataCount?: number | undefined;
 
   /**
    * <p> The number of evidence that falls under the manual category. This evidence is imported
    *          manually. </p>
+   * @public
    */
-  evidenceByTypeManualCount?: number;
+  evidenceByTypeManualCount?: number | undefined;
 
   /**
    * <p> The number of evidence that falls under the compliance check category. This evidence is
-   *          collected from Config or Security Hub. </p>
+   *          collected from Config or Security Hub CSPM. </p>
+   * @public
    */
-  evidenceByTypeComplianceCheckCount?: number;
+  evidenceByTypeComplianceCheckCount?: number | undefined;
 
   /**
-   * <p> The total number of issues that were reported directly from Security Hub,
+   * <p> The total number of issues that were reported directly from Security Hub CSPM,
    *             Config, or both. </p>
+   * @public
    */
-  evidenceByTypeComplianceCheckIssuesCount?: number;
+  evidenceByTypeComplianceCheckIssuesCount?: number | undefined;
 
   /**
    * <p> The number of evidence that falls under the user activity category. This evidence is
    *          collected from CloudTrail logs. </p>
+   * @public
    */
-  evidenceByTypeUserActivityCount?: number;
+  evidenceByTypeUserActivityCount?: number | undefined;
 
   /**
    * <p> The total number of Amazon Web Services resources that were assessed to generate the
    *          evidence. </p>
+   * @public
    */
-  evidenceAwsServiceSourceCount?: number;
-}
-
-export namespace AssessmentEvidenceFolder {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentEvidenceFolder): any => ({
-    ...obj,
-  });
-}
-
-export enum FrameworkType {
-  CUSTOM = "Custom",
-  STANDARD = "Standard",
+  evidenceAwsServiceSourceCount?: number | undefined;
 }
 
 /**
  * <p> The metadata that's associated with a standard framework or a custom framework. </p>
+ * @public
  */
 export interface AssessmentFrameworkMetadata {
   /**
    * <p> The Amazon Resource Name (ARN) of the framework. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The unique identifier for the framework. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The framework type, such as a standard framework or a custom framework. </p>
+   * @public
    */
-  type?: FrameworkType | string;
+  type?: FrameworkType | undefined;
 
   /**
    * <p> The name of the framework. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the framework. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The logo that's associated with the framework. </p>
+   * @public
    */
-  logo?: string;
+  logo?: string | undefined;
 
   /**
    * <p> The compliance type that the new custom framework supports, such as CIS or HIPAA.
    *       </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The number of controls that are associated with the framework. </p>
+   * @public
    */
-  controlsCount?: number;
+  controlsCount?: number | undefined;
 
   /**
    * <p> The number of control sets that are associated with the framework. </p>
+   * @public
    */
-  controlSetsCount?: number;
+  controlSetsCount?: number | undefined;
 
   /**
-   * <p> Specifies when the framework was created. </p>
+   * <p> The time when the framework was created. </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
-   * <p> Specifies when the framework was most recently updated. </p>
+   * <p> The time when the framework was most recently updated. </p>
+   * @public
    */
-  lastUpdatedAt?: Date;
-}
-
-export namespace AssessmentFrameworkMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentFrameworkMetadata): any => ({
-    ...obj,
-  });
-}
-
-export enum ShareRequestStatus {
-  ACTIVE = "ACTIVE",
-  DECLINED = "DECLINED",
-  EXPIRED = "EXPIRED",
-  EXPIRING = "EXPIRING",
-  FAILED = "FAILED",
-  REPLICATING = "REPLICATING",
-  REVOKED = "REVOKED",
-  SHARED = "SHARED",
+  lastUpdatedAt?: Date | undefined;
 }
 
 /**
  * <p> Represents a share request for a custom framework in Audit Manager. </p>
+ * @public
  */
 export interface AssessmentFrameworkShareRequest {
   /**
    * <p> The unique identifier for the share request. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p>The unique identifier for the shared custom framework. </p>
+   * @public
    */
-  frameworkId?: string;
+  frameworkId?: string | undefined;
 
   /**
    * <p> The name of the custom framework that the share request is for. </p>
+   * @public
    */
-  frameworkName?: string;
+  frameworkName?: string | undefined;
 
   /**
    * <p>The description of the shared custom framework.</p>
+   * @public
    */
-  frameworkDescription?: string;
+  frameworkDescription?: string | undefined;
 
   /**
    * <p> The status of the share request. </p>
+   * @public
    */
-  status?: ShareRequestStatus | string;
+  status?: ShareRequestStatus | undefined;
 
   /**
    * <p> The Amazon Web Services account of the sender. </p>
+   * @public
    */
-  sourceAccount?: string;
+  sourceAccount?: string | undefined;
 
   /**
    * <p> The Amazon Web Services account of the recipient. </p>
+   * @public
    */
-  destinationAccount?: string;
+  destinationAccount?: string | undefined;
 
   /**
    * <p> The Amazon Web Services Region of the recipient. </p>
+   * @public
    */
-  destinationRegion?: string;
+  destinationRegion?: string | undefined;
 
   /**
    * <p> The time when the share request expires. </p>
+   * @public
    */
-  expirationTime?: Date;
+  expirationTime?: Date | undefined;
 
   /**
    * <p> The time when the share request was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p> Specifies when the share request was last updated. </p>
+   * @public
    */
-  lastUpdated?: Date;
+  lastUpdated?: Date | undefined;
 
   /**
    * <p> An optional comment from the sender about the share request. </p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 
   /**
    * <p>The number of standard controls that are part of the shared custom framework. </p>
+   * @public
    */
-  standardControlsCount?: number;
+  standardControlsCount?: number | undefined;
 
   /**
    * <p>The number of custom controls that are part of the shared custom framework.</p>
+   * @public
    */
-  customControlsCount?: number;
+  customControlsCount?: number | undefined;
 
   /**
-   * <p>The compliance type that the shared custom framework supports, such as CIS or HIPAA.</p>
+   * <p>The compliance type that the shared custom framework supports, such as CIS or
+   *          HIPAA.</p>
+   * @public
    */
-  complianceType?: string;
-}
-
-export namespace AssessmentFrameworkShareRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentFrameworkShareRequest): any => ({
-    ...obj,
-  });
+  complianceType?: string | undefined;
 }
 
 /**
  * <p> A metadata object that's associated with an assessment in Audit Manager.
  *       </p>
+ * @public
  */
 export interface AssessmentMetadataItem {
   /**
    * <p> The name of the assessment. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The unique identifier for the assessment. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the compliance standard that's related to the assessment, such as PCI-DSS.
    *       </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The current status of the assessment. </p>
+   * @public
    */
-  status?: AssessmentStatus | string;
+  status?: AssessmentStatus | undefined;
 
   /**
    * <p> The roles that are associated with the assessment. </p>
+   * @public
    */
-  roles?: Role[];
+  roles?: Role[] | undefined;
 
   /**
    * <p> The delegations that are associated with the assessment. </p>
+   * @public
    */
-  delegations?: Delegation[];
+  delegations?: Delegation[] | undefined;
 
   /**
    * <p> Specifies when the assessment was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p> The time of the most recent update. </p>
+   * @public
    */
-  lastUpdated?: Date;
-}
-
-export namespace AssessmentMetadataItem {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentMetadataItem): any => ({
-    ...obj,
-  });
-}
-
-export enum AssessmentReportStatus {
-  COMPLETE = "COMPLETE",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
+  lastUpdated?: Date | undefined;
 }
 
 /**
@@ -968,3608 +914,4117 @@ export enum AssessmentReportStatus {
  *          reports summarize the relevant evidence that was collected for your audit, and link to the
  *          relevant evidence folders. These evidence folders are named and organized according to the
  *          controls that are specified in your assessment. </p>
+ * @public
  */
 export interface AssessmentReport {
   /**
    * <p> The unique identifier for the assessment report. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name that's given to the assessment report. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the specified assessment report. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The identifier for the specified Amazon Web Services account. </p>
+   * @public
    */
-  awsAccountId?: string;
+  awsAccountId?: string | undefined;
 
   /**
    * <p> The identifier for the specified assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p> The name of the associated assessment. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The name of the user who created the assessment report. </p>
+   * @public
    */
-  author?: string;
+  author?: string | undefined;
 
   /**
    * <p> The current status of the specified assessment report. </p>
+   * @public
    */
-  status?: AssessmentReportStatus | string;
+  status?: AssessmentReportStatus | undefined;
 
   /**
    * <p> Specifies when the assessment report was created. </p>
+   * @public
    */
-  creationTime?: Date;
-}
-
-export namespace AssessmentReport {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentReport): any => ({
-    ...obj,
-  });
+  creationTime?: Date | undefined;
 }
 
 /**
- * <p> An error entity for the <code>AssessmentReportEvidence</code> API. This is used to
- *          provide more meaningful errors than a simple string message. </p>
+ * <p> An error entity for assessment report evidence errors. This is used to provide more
+ *          meaningful errors than a simple string message. </p>
+ * @public
  */
 export interface AssessmentReportEvidenceError {
   /**
    * <p> The identifier for the evidence. </p>
+   * @public
    */
-  evidenceId?: string;
+  evidenceId?: string | undefined;
 
   /**
-   * <p> The error code that the <code>AssessmentReportEvidence</code> API returned. </p>
+   * <p> The error code that was returned. </p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
-   * <p> The error message that the <code>AssessmentReportEvidence</code> API returned. </p>
+   * <p> The error message that was returned. </p>
+   * @public
    */
-  errorMessage?: string;
-}
-
-export namespace AssessmentReportEvidenceError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentReportEvidenceError): any => ({
-    ...obj,
-  });
+  errorMessage?: string | undefined;
 }
 
 /**
  * <p> The metadata objects that are associated with the specified assessment report. </p>
+ * @public
  */
 export interface AssessmentReportMetadata {
   /**
    * <p> The unique identifier for the assessment report. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the assessment report. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the assessment report. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The unique identifier for the associated assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p>The name of the associated assessment. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The name of the user who created the assessment report. </p>
+   * @public
    */
-  author?: string;
+  author?: string | undefined;
 
   /**
    * <p> The current status of the assessment report. </p>
+   * @public
    */
-  status?: AssessmentReportStatus | string;
+  status?: AssessmentReportStatus | undefined;
 
   /**
    * <p> Specifies when the assessment report was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 }
 
-export namespace AssessmentReportMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssessmentReportMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateAssessmentReportEvidenceFolderRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 }
 
-export namespace AssociateAssessmentReportEvidenceFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateAssessmentReportEvidenceFolderRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface AssociateAssessmentReportEvidenceFolderResponse {}
-
-export namespace AssociateAssessmentReportEvidenceFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: AssociateAssessmentReportEvidenceFolderResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p> An internal service error occurred during the processing of your request. Try again
- *          later. </p>
- */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p> The resource that's specified in the request can't be found. </p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message: string | undefined;
-  /**
-   * <p> The unique identifier for the resource. </p>
-   */
-  resourceId: string | undefined;
-
-  /**
-   * <p> The type of resource that's affected by the error. </p>
-   */
-  resourceType: string | undefined;
-}
-
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
 
 /**
  * <p> Indicates that the request has invalid or missing parameters for the field. </p>
+ * @public
  */
 export interface ValidationExceptionField {
   /**
    * <p> The name of the validation error. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The body of the error message. </p>
+   * @public
    */
   message: string | undefined;
-}
-
-export namespace ValidationExceptionField {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationExceptionField): any => ({
-    ...obj,
-  });
-}
-
-export enum ValidationExceptionReason {
-  CANNOT_PARSE = "cannotParse",
-  FIELD_VALIDATION_FAILED = "fieldValidationFailed",
-  OTHER = "other",
-  UNKNOWN_OPERATION = "unknownOperation",
 }
 
 /**
- * <p> The request has invalid or missing parameters. </p>
+ * @public
  */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message: string | undefined;
-  /**
-   * <p> The reason the request failed validation. </p>
-   */
-  reason?: ValidationExceptionReason | string;
-
-  /**
-   * <p> The fields that caused the error, if applicable. </p>
-   */
-  fields?: ValidationExceptionField[];
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
 export interface BatchAssociateAssessmentReportEvidenceRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 
   /**
    * <p> The list of evidence identifiers. </p>
+   * @public
    */
   evidenceIds: string[] | undefined;
 }
 
-export namespace BatchAssociateAssessmentReportEvidenceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchAssociateAssessmentReportEvidenceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchAssociateAssessmentReportEvidenceResponse {
   /**
    * <p> The list of evidence identifiers. </p>
+   * @public
    */
-  evidenceIds?: string[];
+  evidenceIds?: string[] | undefined;
 
   /**
    * <p> A list of errors that the <code>BatchAssociateAssessmentReportEvidence</code> API
    *          returned. </p>
+   * @public
    */
-  errors?: AssessmentReportEvidenceError[];
-}
-
-export namespace BatchAssociateAssessmentReportEvidenceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchAssociateAssessmentReportEvidenceResponse): any => ({
-    ...obj,
-  });
+  errors?: AssessmentReportEvidenceError[] | undefined;
 }
 
 /**
  * <p> A collection of attributes that's used to create a delegation for an assessment in
- *          Audit Manager. </p>
+ *             Audit Manager. </p>
+ * @public
  */
 export interface CreateDelegationRequest {
   /**
    * <p> A comment that's related to the delegation request. </p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 
   /**
    * <p> The unique identifier for the control set. </p>
+   * @public
    */
-  controlSetId?: string;
+  controlSetId?: string | undefined;
 
   /**
    * <p> The Amazon Resource Name (ARN) of the IAM role. </p>
+   * @public
    */
-  roleArn?: string;
+  roleArn?: string | undefined;
 
   /**
    * <p> The type of customer persona. </p>
    *          <note>
    *             <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be
-   *             <code>PROCESS_OWNER</code>. </p>
+   *                <code>PROCESS_OWNER</code>. </p>
    *             <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be
-   *             <code>PROCESS_OWNER</code>.</p>
+   *                <code>PROCESS_OWNER</code>.</p>
    *             <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be
-   *             <code>RESOURCE_OWNER</code>.</p>
+   *                <code>RESOURCE_OWNER</code>.</p>
    *          </note>
+   * @public
    */
-  roleType?: RoleType | string;
+  roleType?: RoleType | undefined;
 }
 
-export namespace CreateDelegationRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDelegationRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchCreateDelegationByAssessmentRequest {
   /**
    * <p> The API request to batch create delegations in Audit Manager. </p>
+   * @public
    */
   createDelegationRequests: CreateDelegationRequest[] | undefined;
 
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
-}
-
-export namespace BatchCreateDelegationByAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateDelegationByAssessmentRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p> An error entity for the <code>BatchCreateDelegationByAssessment</code> API. This is
  *          used to provide more meaningful errors than a simple string message. </p>
+ * @public
  */
 export interface BatchCreateDelegationByAssessmentError {
   /**
    * <p> The API request to batch create delegations in Audit Manager. </p>
+   * @public
    */
-  createDelegationRequest?: CreateDelegationRequest;
+  createDelegationRequest?: CreateDelegationRequest | undefined;
 
   /**
    * <p> The error code that the <code>BatchCreateDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
    * <p> The error message that the <code>BatchCreateDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 }
 
-export namespace BatchCreateDelegationByAssessmentError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateDelegationByAssessmentError): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchCreateDelegationByAssessmentResponse {
   /**
    * <p> The delegations that are associated with the assessment. </p>
+   * @public
    */
-  delegations?: Delegation[];
+  delegations?: Delegation[] | undefined;
 
   /**
    * <p> A list of errors that the <code>BatchCreateDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errors?: BatchCreateDelegationByAssessmentError[];
+  errors?: BatchCreateDelegationByAssessmentError[] | undefined;
 }
 
-export namespace BatchCreateDelegationByAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateDelegationByAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchDeleteDelegationByAssessmentRequest {
   /**
    * <p> The identifiers for the delegations. </p>
+   * @public
    */
   delegationIds: string[] | undefined;
 
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
-}
-
-export namespace BatchDeleteDelegationByAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchDeleteDelegationByAssessmentRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p> An error entity for the <code>BatchDeleteDelegationByAssessment</code> API. This is
  *          used to provide more meaningful errors than a simple string message. </p>
+ * @public
  */
 export interface BatchDeleteDelegationByAssessmentError {
   /**
    * <p> The identifier for the delegation. </p>
+   * @public
    */
-  delegationId?: string;
+  delegationId?: string | undefined;
 
   /**
    * <p> The error code that the <code>BatchDeleteDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
    * <p> The error message that the <code>BatchDeleteDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 }
 
-export namespace BatchDeleteDelegationByAssessmentError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchDeleteDelegationByAssessmentError): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchDeleteDelegationByAssessmentResponse {
   /**
    * <p> A list of errors that the <code>BatchDeleteDelegationByAssessment</code> API returned.
    *       </p>
+   * @public
    */
-  errors?: BatchDeleteDelegationByAssessmentError[];
+  errors?: BatchDeleteDelegationByAssessmentError[] | undefined;
 }
 
-export namespace BatchDeleteDelegationByAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchDeleteDelegationByAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchDisassociateAssessmentReportEvidenceRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 
   /**
    * <p> The list of evidence identifiers. </p>
+   * @public
    */
   evidenceIds: string[] | undefined;
 }
 
-export namespace BatchDisassociateAssessmentReportEvidenceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchDisassociateAssessmentReportEvidenceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchDisassociateAssessmentReportEvidenceResponse {
   /**
    * <p> The identifier for the evidence. </p>
+   * @public
    */
-  evidenceIds?: string[];
+  evidenceIds?: string[] | undefined;
 
   /**
    * <p> A list of errors that the <code>BatchDisassociateAssessmentReportEvidence</code> API
    *          returned. </p>
+   * @public
    */
-  errors?: AssessmentReportEvidenceError[];
-}
-
-export namespace BatchDisassociateAssessmentReportEvidenceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchDisassociateAssessmentReportEvidenceResponse): any => ({
-    ...obj,
-  });
+  errors?: AssessmentReportEvidenceError[] | undefined;
 }
 
 /**
- * <p> Evidence that's uploaded to Audit Manager manually. </p>
+ * <p> Evidence that's manually added to a control in Audit Manager.
+ *             <code>manualEvidence</code> can be one of the following: <code>evidenceFileName</code>,
+ *             <code>s3ResourcePath</code>, or <code>textResponse</code>.</p>
+ * @public
  */
 export interface ManualEvidence {
   /**
-   * <p> The Amazon S3 URL that points to a manual evidence object. </p>
+   * <p>The S3 URL of the object that's imported as manual evidence. </p>
+   * @public
    */
-  s3ResourcePath?: string;
-}
+  s3ResourcePath?: string | undefined;
 
-export namespace ManualEvidence {
   /**
-   * @internal
+   * <p>The plain text response that's entered and saved as manual evidence.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ManualEvidence): any => ({
-    ...obj,
-  });
+  textResponse?: string | undefined;
+
+  /**
+   * <p>The name of the file that's uploaded as manual evidence. This name is populated using
+   *          the <code>evidenceFileName</code> value from the <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetEvidenceFileUploadUrl.html">
+   *                <code>GetEvidenceFileUploadUrl</code>
+   *             </a> API response.</p>
+   * @public
+   */
+  evidenceFileName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface BatchImportEvidenceToAssessmentControlRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
    * <p> The identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 
   /**
    * <p> The list of manual evidence objects. </p>
+   * @public
    */
   manualEvidence: ManualEvidence[] | undefined;
-}
-
-export namespace BatchImportEvidenceToAssessmentControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchImportEvidenceToAssessmentControlRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p> An error entity for the <code>BatchImportEvidenceToAssessmentControl</code> API. This
  *          is used to provide more meaningful errors than a simple string message. </p>
+ * @public
  */
 export interface BatchImportEvidenceToAssessmentControlError {
   /**
    * <p> Manual evidence that can't be collected automatically by Audit Manager. </p>
+   * @public
    */
-  manualEvidence?: ManualEvidence;
+  manualEvidence?: ManualEvidence | undefined;
 
   /**
    * <p> The error code that the <code>BatchImportEvidenceToAssessmentControl</code> API
    *          returned. </p>
+   * @public
    */
-  errorCode?: string;
+  errorCode?: string | undefined;
 
   /**
    * <p> The error message that the <code>BatchImportEvidenceToAssessmentControl</code> API
    *          returned. </p>
+   * @public
    */
-  errorMessage?: string;
+  errorMessage?: string | undefined;
 }
 
-export namespace BatchImportEvidenceToAssessmentControlError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchImportEvidenceToAssessmentControlError): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchImportEvidenceToAssessmentControlResponse {
   /**
    * <p> A list of errors that the <code>BatchImportEvidenceToAssessmentControl</code> API
    *          returned. </p>
+   * @public
    */
-  errors?: BatchImportEvidenceToAssessmentControlError[];
+  errors?: BatchImportEvidenceToAssessmentControlError[] | undefined;
 }
 
-export namespace BatchImportEvidenceToAssessmentControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchImportEvidenceToAssessmentControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAssessmentRequest {
   /**
    * <p> The name of the assessment to be created. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The optional description of the assessment to be created. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p> The assessment report storage destination for the assessment that's being created. </p>
+   * <p> The assessment report storage destination for the assessment that's being created.
+   *       </p>
+   * @public
    */
   assessmentReportsDestination: AssessmentReportsDestination | undefined;
 
   /**
-   * <p> The wrapper that contains the Amazon Web Services accounts and services that are in
+   * <p> The wrapper that contains the Amazon Web Services accounts that are in
    *          scope for the assessment. </p>
+   *          <note>
+   *             <p>You no longer need to specify which Amazon Web Services services are in scope when you
+   *             create or update an assessment. Audit Manager infers the services in scope by
+   *             examining your assessment controls and their data sources, and then mapping this
+   *             information to the relevant Amazon Web Services services. </p>
+   *             <p>If an underlying data source changes for your assessment, we automatically update the
+   *             services scope as needed to reflect the correct Amazon Web Services services. This
+   *             ensures that your assessment collects accurate and comprehensive evidence about all of
+   *             the relevant services in your AWS environment.</p>
+   *          </note>
+   * @public
    */
   scope: Scope | undefined;
 
   /**
    * <p> The list of roles for the assessment. </p>
+   * @public
    */
   roles: Role[] | undefined;
 
   /**
    * <p> The identifier for the framework that the assessment will be created from. </p>
+   * @public
    */
   frameworkId: string | undefined;
 
   /**
    * <p> The tags that are associated with the assessment. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAssessmentResponse {
   /**
    * <p> An entity that defines the scope of audit evidence collected by Audit Manager.
-   *          An Audit Manager assessment is an implementation of an Audit Manager
-   *          framework. </p>
+   *          An Audit Manager assessment is an implementation of an Audit Manager framework. </p>
+   * @public
    */
-  assessment?: Assessment;
-}
-
-export namespace CreateAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentResponse): any => ({
-    ...obj,
-  });
+  assessment?: Assessment | undefined;
 }
 
 /**
  * <p> The control entity attributes that uniquely identify an existing control to be added to
  *          a framework in Audit Manager. </p>
+ * @public
  */
 export interface CreateAssessmentFrameworkControl {
   /**
    * <p> The unique identifier of the control. </p>
+   * @public
    */
-  id?: string;
-}
-
-export namespace CreateAssessmentFrameworkControl {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentFrameworkControl): any => ({
-    ...obj,
-  });
+  id: string | undefined;
 }
 
 /**
  * <p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This doesn't contain the control set ID. </p>
+ * @public
  */
 export interface CreateAssessmentFrameworkControlSet {
   /**
    * <p> The name of the control set. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The list of controls within the control set. This doesn't contain the control set ID.
    *       </p>
+   * @public
    */
-  controls?: CreateAssessmentFrameworkControl[];
+  controls?: CreateAssessmentFrameworkControl[] | undefined;
 }
 
-export namespace CreateAssessmentFrameworkControlSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentFrameworkControlSet): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAssessmentFrameworkRequest {
   /**
    * <p> The name of the new custom framework. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> An optional description for the new custom framework. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The compliance type that the new custom framework supports, such as CIS or HIPAA.
    *       </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The control sets that are associated with the framework. </p>
+   *          <note>
+   *             <p>The <code>Controls</code> object returns a partial response when called through Framework
+   *             APIs. For a complete <code>Controls</code> object, use <code>GetControl</code>.</p>
+   *          </note>
+   * @public
    */
   controlSets: CreateAssessmentFrameworkControlSet[] | undefined;
 
   /**
    * <p> The tags that are associated with the framework. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
-
-export namespace CreateAssessmentFrameworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentFrameworkRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum SourceFrequency {
-  DAILY = "DAILY",
-  MONTHLY = "MONTHLY",
-  WEEKLY = "WEEKLY",
-}
-
-export enum KeywordInputType {
-  SELECT_FROM_LIST = "SELECT_FROM_LIST",
+  tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p> The keyword to search for in CloudTrail logs, Config rules,
- *          Security Hub checks, and Amazon Web Services API names. </p>
+ * <p>A keyword that relates to the control data source.</p>
+ *          <p>For manual evidence, this keyword indicates if the manual evidence is a file or
+ *          text.</p>
+ *          <p>For automated evidence, this keyword identifies a specific CloudTrail event,
+ *             Config rule, Security Hub CSPM control, or Amazon Web Services API name. </p>
+ *          <p> To learn more about the supported keywords that you can use when mapping a control data
+ *          source, see the following pages in the <i>Audit Manager User
+ *             Guide</i>:</p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html">Config rules supported by Audit Manager</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html">Security Hub CSPM controls supported by Audit Manager</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html">API calls
+ *                   supported by Audit Manager</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html">CloudTrail event names supported by Audit Manager</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @public
  */
 export interface SourceKeyword {
   /**
-   * <p> The method of input for the keyword. </p>
+   * <p> The input method for the keyword. </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SELECT_FROM_LIST</code> is used when mapping a data source for automated
+   *                evidence.</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>When <code>keywordInputType</code> is <code>SELECT_FROM_LIST</code>, a
+   *                      keyword must be selected to collect automated evidence. For example, this
+   *                      keyword can be a CloudTrail event name, a rule name for Config, a Security Hub CSPM control, or the name of an Amazon Web Services API call.</p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>UPLOAD_FILE</code> and <code>INPUT_TEXT</code> are only used when mapping a
+   *                data source for manual evidence.</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>When <code>keywordInputType</code> is <code>UPLOAD_FILE</code>, a file must
+   *                      be uploaded as manual evidence.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>When <code>keywordInputType</code> is <code>INPUT_TEXT</code>, text must be
+   *                      entered as manual evidence.</p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  keywordInputType?: KeywordInputType | string;
+  keywordInputType?: KeywordInputType | undefined;
 
   /**
-   * <p> The value of the keyword that's used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names
-   *          when mapping a control data source. </p>
+   * <p> The value of the keyword that's used when mapping a control data source. For example,
+   *          this can be a CloudTrail event name, a rule name for Config, a
+   *             Security Hub CSPM control, or the name of an Amazon Web Services API call. </p>
+   *          <p>If you’re mapping a data source to a rule in Config, the
+   *             <code>keywordValue</code> that you specify depends on the type of rule:</p>
+   *          <ul>
+   *             <li>
+   *                <p>For <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">managed rules</a>, you can use the rule identifier as the
+   *                   <code>keywordValue</code>. You can find the rule identifier from the <a href="https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html">list of Config managed rules</a>. For some
+   *                rules, the rule identifier is different from the rule name. For example, the rule
+   *                name <code>restricted-ssh</code> has the following rule identifier:
+   *                   <code>INCOMING_SSH_DISABLED</code>. Make sure to use the rule identifier, not the
+   *                rule name. </p>
+   *                <p>Keyword example for managed rules:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>Managed rule name: <a href="https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html">s3-bucket-acl-prohibited</a>
+   *                      </p>
+   *                      <p>
+   *                         <code>keywordValue</code>: <code>S3_BUCKET_ACL_PROHIBITED</code>
+   *                      </p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p>For <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html">custom rules</a>, you form the <code>keywordValue</code>
+   *                by adding the <code>Custom_</code> prefix to the rule name. This prefix distinguishes
+   *                the custom rule from a managed rule. </p>
+   *                <p>Keyword example for custom rules:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>Custom rule name: my-custom-config-rule</p>
+   *                      <p>
+   *                         <code>keywordValue</code>: <code>Custom_my-custom-config-rule</code>
+   *                      </p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p>For <a href="https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html">service-linked rules</a>, you form the
+   *                   <code>keywordValue</code> by adding the <code>Custom_</code> prefix to the rule
+   *                name. In addition, you remove the suffix ID that appears at the end of the rule name. </p>
+   *                <p>Keyword examples for service-linked rules:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>Service-linked rule name:
+   *                      CustomRuleForAccount-conformance-pack-szsm1uv0w</p>
+   *                      <p>
+   *                         <code>keywordValue</code>:
+   *                         <code>Custom_CustomRuleForAccount-conformance-pack</code>
+   *                      </p>
+   *                   </li>
+   *                   <li>
+   *                      <p>Service-linked rule name:
+   *                      OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba</p>
+   *                      <p>
+   *                         <code>keywordValue</code>:
+   *                         <code>Custom_OrgConfigRule-s3-bucket-versioning-enabled</code>
+   *                      </p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *          </ul>
+   *          <important>
+   *             <p>The <code>keywordValue</code> is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not
+   *          successfully collect evidence from that data source as intended. </p>
+   *             <p>Keep in mind the following requirements, depending on the data source type that
+   *             you're using. </p>
+   *             <ol>
+   *                <li>
+   *                   <p>For Config: </p>
+   *                   <ul>
+   *                      <li>
+   *                         <p>For managed rules, make sure that the <code>keywordValue</code> is the rule identifier in
+   *                      <code>ALL_CAPS_WITH_UNDERSCORES</code>. For example,
+   *                      <code>CLOUDWATCH_LOG_GROUP_ENCRYPTED</code>. For accuracy, we recommend
+   *                      that you reference the list of <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html">supported Config managed rules</a>.</p>
+   *                      </li>
+   *                      <li>
+   *                         <p>For custom rules, make sure that the <code>keywordValue</code> has the <code>Custom_</code>
+   *                      prefix followed by the custom rule name. The format of the custom rule name
+   *                      itself may vary. For accuracy, we recommend that you visit the <a href="https://console.aws.amazon.com/config/">Config console</a> to
+   *                      verify your custom rule name.</p>
+   *                      </li>
+   *                   </ul>
+   *                </li>
+   *                <li>
+   *                   <p>For Security Hub CSPM: The format varies for Security Hub CSPM control names.
+   *                   For accuracy, we recommend that you reference the list of <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html">supported
+   *                      Security Hub CSPM controls</a>.</p>
+   *                </li>
+   *                <li>
+   *                   <p>For Amazon Web Services API calls: Make sure that the <code>keywordValue</code>
+   *                   is written as <code>serviceprefix_ActionName</code>. For example,
+   *                   <code>iam_ListGroups</code>. For accuracy, we recommend that you reference the
+   *                   list of <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html">supported
+   *                      API calls</a>.</p>
+   *                </li>
+   *                <li>
+   *                   <p>For CloudTrail: Make sure that the <code>keywordValue</code> is written
+   *                   as <code>serviceprefix_ActionName</code>. For example,
+   *                   <code>cloudtrail_StartLogging</code>. For accuracy, we recommend that you
+   *                   review the Amazon Web Services service prefix and action names in the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html">Service Authorization Reference</a>.</p>
+   *                </li>
+   *             </ol>
+   *          </important>
+   * @public
    */
-  keywordValue?: string;
-}
-
-export namespace SourceKeyword {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SourceKeyword): any => ({
-    ...obj,
-  });
-}
-
-export enum SourceSetUpOption {
-  PROCEDURAL_CONTROLS_MAPPING = "Procedural_Controls_Mapping",
-  SYSTEM_CONTROLS_MAPPING = "System_Controls_Mapping",
-}
-
-export enum SourceType {
-  AWS_API_CALL = "AWS_API_Call",
-  AWS_CLOUDTRAIL = "AWS_Cloudtrail",
-  AWS_CONFIG = "AWS_Config",
-  AWS_SECURITY_HUB = "AWS_Security_Hub",
-  MANUAL = "MANUAL",
+  keywordValue?: string | undefined;
 }
 
 /**
  * <p> The data source that determines where Audit Manager collects evidence from for
  *          the control. </p>
+ * @public
  */
 export interface ControlMappingSource {
   /**
    * <p> The unique identifier for the source. </p>
+   * @public
    */
-  sourceId?: string;
+  sourceId?: string | undefined;
 
   /**
    * <p> The name of the source. </p>
+   * @public
    */
-  sourceName?: string;
+  sourceName?: string | undefined;
 
   /**
    * <p> The description of the source. </p>
+   * @public
    */
-  sourceDescription?: string;
+  sourceDescription?: string | undefined;
 
   /**
-   * <p> The setup option for the data source. This option reflects if the evidence collection
-   *          is automated or manual. </p>
+   * <p>The setup option for the data source. This option reflects if the evidence collection
+   *          method is automated or manual. If you don’t provide a value for
+   *             <code>sourceSetUpOption</code>, Audit Manager automatically infers and populates
+   *          the correct value based on the <code>sourceType</code> that you specify.</p>
+   * @public
    */
-  sourceSetUpOption?: SourceSetUpOption | string;
+  sourceSetUpOption?: SourceSetUpOption | undefined;
 
   /**
-   * <p> Specifies one of the five types of data sources for evidence collection. </p>
+   * <p> Specifies which type of data source is used to collect evidence. </p>
+   *          <ul>
+   *             <li>
+   *                <p>The source can be an individual data source type, such as
+   *                   <code>AWS_Cloudtrail</code>, <code>AWS_Config</code>,
+   *                   <code>AWS_Security_Hub</code>, <code>AWS_API_Call</code>, or <code>MANUAL</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>The source can also be a managed grouping of data sources, such as a
+   *                   <code>Core_Control</code> or a <code>Common_Control</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  sourceType?: SourceType | string;
+  sourceType?: SourceType | undefined;
 
   /**
-   * <p> The keyword to search for in CloudTrail logs, Config rules,
-   *          Security Hub checks, and Amazon Web Services API names. </p>
+   * <p>A keyword that relates to the control data source.</p>
+   *          <p>For manual evidence, this keyword indicates if the manual evidence is a file or
+   *          text.</p>
+   *          <p>For automated evidence, this keyword identifies a specific CloudTrail event,
+   *             Config rule, Security Hub CSPM control, or Amazon Web Services API name. </p>
+   *          <p> To learn more about the supported keywords that you can use when mapping a control data
+   *          source, see the following pages in the <i>Audit Manager User
+   *             Guide</i>:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html">Config rules supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html">Security Hub CSPM controls supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html">API calls
+   *                   supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html">CloudTrail event names supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  sourceKeyword?: SourceKeyword;
+  sourceKeyword?: SourceKeyword | undefined;
 
   /**
-   * <p> The frequency of evidence collection for the control mapping source. </p>
+   * <p>Specifies how often evidence is collected from the control mapping source. </p>
+   * @public
    */
-  sourceFrequency?: SourceFrequency | string;
+  sourceFrequency?: SourceFrequency | undefined;
 
   /**
    * <p> The instructions for troubleshooting the control. </p>
+   * @public
    */
-  troubleshootingText?: string;
-}
-
-export namespace ControlMappingSource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ControlMappingSource): any => ({
-    ...obj,
-  });
-}
-
-export enum ControlType {
-  CUSTOM = "Custom",
-  STANDARD = "Standard",
+  troubleshootingText?: string | undefined;
 }
 
 /**
  * <p> A control in Audit Manager. </p>
+ * @public
  */
 export interface Control {
   /**
    * <p> The Amazon Resource Name (ARN) of the control. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The unique identifier for the control. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
-   * <p> The type of control, such as a custom control or a standard control. </p>
+   * <p> Specifies whether the control is a standard control or a custom control.</p>
+   * @public
    */
-  type?: ControlType | string;
+  type?: ControlType | undefined;
 
   /**
    * <p> The name of the control. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The description of the control. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The steps that you should follow to determine if the control has been satisfied.
    *       </p>
+   * @public
    */
-  testingInformation?: string;
+  testingInformation?: string | undefined;
 
   /**
    * <p> The title of the action plan for remediating the control. </p>
+   * @public
    */
-  actionPlanTitle?: string;
+  actionPlanTitle?: string | undefined;
 
   /**
    * <p> The recommended actions to carry out if the control isn't fulfilled. </p>
+   * @public
    */
-  actionPlanInstructions?: string;
+  actionPlanInstructions?: string | undefined;
 
   /**
-   * <p> The data source that determines where Audit Manager collects evidence from for
+   * <p> The data source types that determine where Audit Manager collects evidence from for
    *          the control. </p>
+   * @public
    */
-  controlSources?: string;
+  controlSources?: string | undefined;
 
   /**
    * <p> The data mapping sources for the control. </p>
+   * @public
    */
-  controlMappingSources?: ControlMappingSource[];
+  controlMappingSources?: ControlMappingSource[] | undefined;
 
   /**
-   * <p> Specifies when the control was created. </p>
+   * <p> The time when the control was created. </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
-   * <p> Specifies when the control was most recently updated. </p>
+   * <p> The time when the control was most recently updated. </p>
+   * @public
    */
-  lastUpdatedAt?: Date;
+  lastUpdatedAt?: Date | undefined;
 
   /**
-   * <p> The IAM user or role that created the control. </p>
+   * <p> The user or role that created the control. </p>
+   * @public
    */
-  createdBy?: string;
+  createdBy?: string | undefined;
 
   /**
-   * <p> The IAM user or role that most recently updated the control. </p>
+   * <p> The user or role that most recently updated the control. </p>
+   * @public
    */
-  lastUpdatedBy?: string;
+  lastUpdatedBy?: string | undefined;
 
   /**
    * <p> The tags associated with the control. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
-}
+  tags?: Record<string, string> | undefined;
 
-export namespace Control {
   /**
-   * @internal
+   * <p>The state of the control. The <code>END_OF_SUPPORT</code> state is applicable to
+   *          standard controls only. This state indicates that the standard control can still be used to
+   *          collect evidence, but Audit Manager is no longer updating or maintaining that
+   *          control.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Control): any => ({
-    ...obj,
-  });
+  state?: ControlState | undefined;
 }
 
 /**
  * <p> A set of controls in Audit Manager. </p>
+ * @public
  */
 export interface ControlSet {
   /**
    * <p> The identifier of the control set in the assessment. This is the control set name in a
    *          plain string format. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the control set. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The list of controls within the control set. </p>
+   * @public
    */
-  controls?: Control[];
-}
-
-export namespace ControlSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ControlSet): any => ({
-    ...obj,
-  });
+  controls?: Control[] | undefined;
 }
 
 /**
  * <p> The file that's used to structure and automate Audit Manager assessments for a
  *          given compliance standard. </p>
+ * @public
  */
 export interface Framework {
   /**
    * <p> The Amazon Resource Name (ARN) of the framework. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The unique identifier for the framework. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the framework. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p> The framework type, such as a custom framework or a standard framework. </p>
+   * <p> Specifies whether the framework is a standard framework or a custom framework.</p>
+   * @public
    */
-  type?: FrameworkType | string;
+  type?: FrameworkType | undefined;
 
   /**
-   * <p> The compliance type that the new custom framework supports, such as CIS or HIPAA.
-   *       </p>
+   * <p> The compliance type that the framework supports, such as CIS or HIPAA. </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The description of the framework. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The logo that's associated with the framework. </p>
+   * @public
    */
-  logo?: string;
+  logo?: string | undefined;
 
   /**
-   * <p> The sources that Audit Manager collects evidence from for the control. </p>
+   * <p> The control data sources where Audit Manager collects evidence from.</p>
+   *          <important>
+   *             <p>This API parameter is no longer supported.</p>
+   *          </important>
+   *
+   * @deprecated (since 2025-07-24) Use controlSources from the Control.
+   * @public
    */
-  controlSources?: string;
+  controlSources?: string | undefined;
 
   /**
    * <p> The control sets that are associated with the framework. </p>
+   *          <note>
+   *             <p>The <code>Controls</code> object returns a partial response when called through
+   *             Framework APIs. For a complete <code>Controls</code> object, use
+   *             <code>GetControl</code>.</p>
+   *          </note>
+   * @public
    */
-  controlSets?: ControlSet[];
+  controlSets?: ControlSet[] | undefined;
 
   /**
-   * <p> Specifies when the framework was created. </p>
+   * <p> The time when the framework was created. </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
-   * <p> Specifies when the framework was most recently updated. </p>
+   * <p> The time when the framework was most recently updated. </p>
+   * @public
    */
-  lastUpdatedAt?: Date;
+  lastUpdatedAt?: Date | undefined;
 
   /**
-   * <p> The IAM user or role that created the framework. </p>
+   * <p> The user or role that created the framework. </p>
+   * @public
    */
-  createdBy?: string;
+  createdBy?: string | undefined;
 
   /**
-   * <p> The IAM user or role that most recently updated the framework. </p>
+   * <p> The user or role that most recently updated the framework. </p>
+   * @public
    */
-  lastUpdatedBy?: string;
+  lastUpdatedBy?: string | undefined;
 
   /**
    * <p> The tags that are associated with the framework. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace Framework {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Framework): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAssessmentFrameworkResponse {
   /**
-   * <p> The name of the new framework that the <code>CreateAssessmentFramework</code> API
-   *          returned. </p>
+   * <p> The new framework object that the <code>CreateAssessmentFramework</code> API returned. </p>
+   * @public
    */
-  framework?: Framework;
+  framework?: Framework | undefined;
 }
 
-export namespace CreateAssessmentFrameworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentFrameworkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateAssessmentReportRequest {
   /**
    * <p> The name of the new assessment report. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The description of the assessment report. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
-}
 
-export namespace CreateAssessmentReportRequest {
   /**
-   * @internal
+   * <p>A SQL statement that represents an evidence finder query.</p>
+   *          <p>Provide this parameter when you want to generate an assessment report from the results
+   *          of an evidence finder search query. When you use this parameter, Audit Manager
+   *          generates a one-time report using only the evidence from the query output. This report does
+   *          not include any assessment evidence that was manually <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence">added to a report using the console</a>, or <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_BatchAssociateAssessmentReportEvidence.html">associated with a report using the API</a>. </p>
+   *          <p>To use this parameter, the <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_EvidenceFinderEnablement.html#auditmanager-Type-EvidenceFinderEnablement-enablementStatus">enablementStatus</a> of evidence finder must be <code>ENABLED</code>. </p>
+   *          <p> For examples and help resolving <code>queryStatement</code> validation exceptions, see
+   *             <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions">Troubleshooting evidence finder issues</a> in the
+   *                <i>Audit Manager User Guide.</i>
+   *          </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateAssessmentReportRequest): any => ({
-    ...obj,
-  });
+  queryStatement?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateAssessmentReportResponse {
   /**
    * <p> The new assessment report that the <code>CreateAssessmentReport</code> API returned.
    *       </p>
+   * @public
    */
-  assessmentReport?: AssessmentReport;
-}
-
-export namespace CreateAssessmentReportResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateAssessmentReportResponse): any => ({
-    ...obj,
-  });
+  assessmentReport?: AssessmentReport | undefined;
 }
 
 /**
- * <p> The control mapping fields that represent the source for evidence collection, along
+ * <p>The mapping attributes that determine the evidence source for a given control, along
  *          with related parameters and metadata. This doesn't contain <code>mappingID</code>. </p>
+ * @public
  */
 export interface CreateControlMappingSource {
   /**
    * <p> The name of the control mapping data source. </p>
+   * @public
    */
-  sourceName?: string;
+  sourceName?: string | undefined;
 
   /**
    * <p> The description of the data source that determines where Audit Manager collects
    *          evidence from for the control. </p>
+   * @public
    */
-  sourceDescription?: string;
+  sourceDescription?: string | undefined;
 
   /**
-   * <p> The setup option for the data source, which reflects if the evidence collection is
-   *          automated or manual. </p>
+   * <p>The setup option for the data source. This option reflects if the evidence collection
+   *          method is automated or manual. If you don’t provide a value for
+   *             <code>sourceSetUpOption</code>, Audit Manager automatically infers and populates
+   *          the correct value based on the <code>sourceType</code> that you specify.</p>
+   * @public
    */
-  sourceSetUpOption?: SourceSetUpOption | string;
+  sourceSetUpOption?: SourceSetUpOption | undefined;
 
   /**
-   * <p> Specifies one of the five types of data sources for evidence collection. </p>
+   * <p> Specifies which type of data source is used to collect evidence. </p>
+   *          <ul>
+   *             <li>
+   *                <p>The source can be an individual data source type, such as
+   *                   <code>AWS_Cloudtrail</code>, <code>AWS_Config</code>,
+   *                   <code>AWS_Security_Hub</code>, <code>AWS_API_Call</code>, or <code>MANUAL</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>The source can also be a managed grouping of data sources, such as a
+   *                   <code>Core_Control</code> or a <code>Common_Control</code>.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  sourceType?: SourceType | string;
+  sourceType?: SourceType | undefined;
 
   /**
-   * <p> The keyword to search for in CloudTrail logs, Config rules,
-   *          Security Hub checks, and Amazon Web Services API names. </p>
+   * <p>A keyword that relates to the control data source.</p>
+   *          <p>For manual evidence, this keyword indicates if the manual evidence is a file or
+   *          text.</p>
+   *          <p>For automated evidence, this keyword identifies a specific CloudTrail event,
+   *             Config rule, Security Hub CSPM control, or Amazon Web Services API name. </p>
+   *          <p> To learn more about the supported keywords that you can use when mapping a control data
+   *          source, see the following pages in the <i>Audit Manager User
+   *             Guide</i>:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html">Config rules supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html">Security Hub CSPM controls supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html">API calls
+   *                   supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html">CloudTrail event names supported by Audit Manager</a>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  sourceKeyword?: SourceKeyword;
+  sourceKeyword?: SourceKeyword | undefined;
 
   /**
-   * <p> The frequency of evidence collection for the control mapping source. </p>
+   * <p>Specifies how often evidence is collected from the control mapping source. </p>
+   * @public
    */
-  sourceFrequency?: SourceFrequency | string;
+  sourceFrequency?: SourceFrequency | undefined;
 
   /**
    * <p> The instructions for troubleshooting the control. </p>
+   * @public
    */
-  troubleshootingText?: string;
+  troubleshootingText?: string | undefined;
 }
 
-export namespace CreateControlMappingSource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateControlMappingSource): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateControlRequest {
   /**
    * <p> The name of the control. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The description of the control. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The steps to follow to determine if the control is satisfied. </p>
+   * @public
    */
-  testingInformation?: string;
+  testingInformation?: string | undefined;
 
   /**
    * <p> The title of the action plan for remediating the control. </p>
+   * @public
    */
-  actionPlanTitle?: string;
+  actionPlanTitle?: string | undefined;
 
   /**
    * <p> The recommended actions to carry out if the control isn't fulfilled. </p>
+   * @public
    */
-  actionPlanInstructions?: string;
+  actionPlanInstructions?: string | undefined;
 
   /**
    * <p> The data mapping sources for the control. </p>
+   * @public
    */
   controlMappingSources: CreateControlMappingSource[] | undefined;
 
   /**
    * <p> The tags that are associated with the control. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace CreateControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateControlRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateControlResponse {
   /**
    * <p> The new control that the <code>CreateControl</code> API returned. </p>
+   * @public
    */
-  control?: Control;
+  control?: Control | undefined;
 }
 
-export namespace CreateControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 }
 
-export namespace DeleteAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentResponse {}
 
-export namespace DeleteAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentFrameworkRequest {
   /**
-   * <p> The identifier for the framework. </p>
+   * <p> The identifier for the custom framework. </p>
+   * @public
    */
   frameworkId: string | undefined;
 }
 
-export namespace DeleteAssessmentFrameworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentFrameworkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentFrameworkResponse {}
 
-export namespace DeleteAssessmentFrameworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentFrameworkResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ShareRequestType {
-  RECEIVED = "RECEIVED",
-  SENT = "SENT",
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentFrameworkShareRequest {
   /**
    * <p>The unique identifier for the share request to be deleted.</p>
+   * @public
    */
   requestId: string | undefined;
 
   /**
    * <p>Specifies whether the share request is a sent request or a received request.</p>
+   * @public
    */
-  requestType: ShareRequestType | string | undefined;
+  requestType: ShareRequestType | undefined;
 }
 
-export namespace DeleteAssessmentFrameworkShareRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentFrameworkShareRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentFrameworkShareResponse {}
 
-export namespace DeleteAssessmentFrameworkShareResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentFrameworkShareResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentReportRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The unique identifier for the assessment report. </p>
+   * @public
    */
   assessmentReportId: string | undefined;
 }
 
-export namespace DeleteAssessmentReportRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentReportRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteAssessmentReportResponse {}
 
-export namespace DeleteAssessmentReportResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteAssessmentReportResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteControlRequest {
   /**
-   * <p> The identifier for the control. </p>
+   * <p> The unique identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 }
 
-export namespace DeleteControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteControlRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteControlResponse {}
 
-export namespace DeleteControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterAccountRequest {}
 
-export namespace DeregisterAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterAccountResponse {
   /**
    * <p> The registration status of the account. </p>
+   * @public
    */
-  status?: AccountStatus | string;
+  status?: AccountStatus | undefined;
 }
 
-export namespace DeregisterAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterOrganizationAdminAccountRequest {
   /**
    * <p> The identifier for the administrator account. </p>
+   * @public
    */
-  adminAccountId?: string;
+  adminAccountId?: string | undefined;
 }
 
-export namespace DeregisterOrganizationAdminAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterOrganizationAdminAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeregisterOrganizationAdminAccountResponse {}
 
-export namespace DeregisterOrganizationAdminAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeregisterOrganizationAdminAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateAssessmentReportEvidenceFolderRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
-   * <p> The identifier for the folder in which evidence is stored. </p>
+   * <p> The unique identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 }
 
-export namespace DisassociateAssessmentReportEvidenceFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateAssessmentReportEvidenceFolderRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DisassociateAssessmentReportEvidenceFolderResponse {}
 
-export namespace DisassociateAssessmentReportEvidenceFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DisassociateAssessmentReportEvidenceFolderResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAccountStatusRequest {}
 
-export namespace GetAccountStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAccountStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAccountStatusResponse {
   /**
    * <p> The status of the Amazon Web Services account. </p>
+   * @public
    */
-  status?: AccountStatus | string;
+  status?: AccountStatus | undefined;
 }
 
-export namespace GetAccountStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAccountStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p>The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 }
 
-export namespace GetAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentResponse {
   /**
    * <p> An entity that defines the scope of audit evidence collected by Audit Manager.
-   *          An Audit Manager assessment is an implementation of an Audit Manager
-   *          framework. </p>
+   *          An Audit Manager assessment is an implementation of an Audit Manager framework. </p>
+   * @public
    */
-  assessment?: Assessment;
+  assessment?: Assessment | undefined;
 
   /**
-   * <p> The wrapper that contains the Audit Manager role information of the current
-   *          user. This includes the role type and IAM Amazon Resource Name (ARN).
-   *       </p>
+   * <p> The wrapper that contains the Audit Manager role information of the current user.
+   *          This includes the role type and IAM Amazon Resource Name (ARN). </p>
+   * @public
    */
-  userRole?: Role;
+  userRole?: Role | undefined;
 }
 
-export namespace GetAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentFrameworkRequest {
   /**
    * <p> The identifier for the framework. </p>
+   * @public
    */
   frameworkId: string | undefined;
 }
 
-export namespace GetAssessmentFrameworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentFrameworkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentFrameworkResponse {
   /**
    * <p> The framework that the <code>GetAssessmentFramework</code> API returned. </p>
+   *          <note>
+   *             <p>The <code>Controls</code> object returns a partial response when called through
+   *             Framework APIs. For a complete <code>Controls</code> object, use
+   *             <code>GetControl</code>.</p>
+   *          </note>
+   * @public
    */
-  framework?: Framework;
+  framework?: Framework | undefined;
 }
 
-export namespace GetAssessmentFrameworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentFrameworkResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentReportUrlRequest {
   /**
-   * <p> The identifier for the assessment report. </p>
+   * <p> The unique identifier for the assessment report. </p>
+   * @public
    */
   assessmentReportId: string | undefined;
 
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
-}
-
-export namespace GetAssessmentReportUrlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentReportUrlRequest): any => ({
-    ...obj,
-  });
 }
 
 /**
  * <p> Short for uniform resource locator. A URL is used as a unique identifier to locate a
  *          resource on the internet. </p>
+ * @public
  */
 export interface URL {
   /**
    * <p> The name or word that's used as a hyperlink to the URL. </p>
+   * @public
    */
-  hyperlinkName?: string;
+  hyperlinkName?: string | undefined;
 
   /**
    * <p> The unique identifier for the internet resource. </p>
+   * @public
    */
-  link?: string;
+  link?: string | undefined;
 }
 
-export namespace URL {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: URL): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetAssessmentReportUrlResponse {
   /**
    * <p> Short for uniform resource locator. A URL is used as a unique identifier to locate a
    *          resource on the internet. </p>
+   * @public
    */
-  preSignedUrl?: URL;
+  preSignedUrl?: URL | undefined;
 }
 
-export namespace GetAssessmentReportUrlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetAssessmentReportUrlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetChangeLogsRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p>The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
-   * <p> The identifier for the control set. </p>
+   * <p> The unique identifier for the control set. </p>
+   * @public
    */
-  controlSetId?: string;
+  controlSetId?: string | undefined;
 
   /**
-   * <p> The identifier for the control. </p>
+   * <p> The unique identifier for the control. </p>
+   * @public
    */
-  controlId?: string;
+  controlId?: string | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * <p>Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetChangeLogsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetChangeLogsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ObjectTypeEnum {
-  ASSESSMENT = "ASSESSMENT",
-  ASSESSMENT_REPORT = "ASSESSMENT_REPORT",
-  CONTROL = "CONTROL",
-  CONTROL_SET = "CONTROL_SET",
-  DELEGATION = "DELEGATION",
+  maxResults?: number | undefined;
 }
 
 /**
  * <p> The record of a change within Audit Manager. For example, this could be the
  *          status change of an assessment or the delegation of a control set. </p>
+ * @public
  */
 export interface ChangeLog {
   /**
    * <p> The object that was changed, such as an assessment, control, or control set. </p>
+   * @public
    */
-  objectType?: ObjectTypeEnum | string;
+  objectType?: ObjectTypeEnum | undefined;
 
   /**
    * <p> The name of the object that changed. This could be the name of an assessment, control,
    *          or control set.</p>
+   * @public
    */
-  objectName?: string;
+  objectName?: string | undefined;
 
   /**
    * <p> The action that was performed. </p>
+   * @public
    */
-  action?: ActionEnum | string;
+  action?: ActionEnum | undefined;
 
   /**
    * <p> The time when the action was performed and the changelog record was created. </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
-   * <p> The IAM user or role that performed the action. </p>
+   * <p> The user or role that performed the action. </p>
+   * @public
    */
-  createdBy?: string;
+  createdBy?: string | undefined;
 }
 
-export namespace ChangeLog {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ChangeLog): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetChangeLogsResponse {
   /**
-   * <p> The list of user activity for the control. </p>
+   * <p>The list of user activity for the control. </p>
+   * @public
    */
-  changeLogs?: ChangeLog[];
+  changeLogs?: ChangeLog[] | undefined;
 
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetChangeLogsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetChangeLogsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetControlRequest {
   /**
    * <p> The identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 }
 
-export namespace GetControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetControlRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetControlResponse {
   /**
-   * <p> The name of the control that the <code>GetControl</code> API returned. </p>
+   * <p> The details of the control that the <code>GetControl</code> API returned. </p>
+   * @public
    */
-  control?: Control;
+  control?: Control | undefined;
 }
 
-export namespace GetControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDelegationsRequest {
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetDelegationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDelegationsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p> The metadata that's associated with the delegation. </p>
+ * @public
  */
 export interface DelegationMetadata {
   /**
    * <p> The unique identifier for the delegation. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the associated assessment. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The unique identifier for the assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p> The current status of the delegation. </p>
+   * @public
    */
-  status?: DelegationStatus | string;
+  status?: DelegationStatus | undefined;
 
   /**
    * <p> The Amazon Resource Name (ARN) of the IAM role. </p>
+   * @public
    */
-  roleArn?: string;
+  roleArn?: string | undefined;
 
   /**
    * <p> Specifies when the delegation was created. </p>
+   * @public
    */
-  creationTime?: Date;
+  creationTime?: Date | undefined;
 
   /**
    * <p> Specifies the name of the control set that was delegated for review. </p>
+   * @public
    */
-  controlSetName?: string;
+  controlSetName?: string | undefined;
 }
 
-export namespace DelegationMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DelegationMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDelegationsResponse {
   /**
    * <p> The list of delegations that the <code>GetDelegations</code> API returned. </p>
+   * @public
    */
-  delegations?: DelegationMetadata[];
+  delegations?: DelegationMetadata[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetDelegationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDelegationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEvidenceRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
-   * <p> The identifier for the control set. </p>
-   */
-  controlSetId: string | undefined;
-
-  /**
-   * <p> The identifier for the folder that the evidence is stored in. </p>
-   */
-  evidenceFolderId: string | undefined;
-
-  /**
-   * <p> The identifier for the evidence. </p>
-   */
-  evidenceId: string | undefined;
-}
-
-export namespace GetEvidenceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p> A system asset that's evaluated in an Audit Manager assessment. </p>
- */
-export interface Resource {
-  /**
-   * <p> The Amazon Resource Name (ARN) for the resource. </p>
-   */
-  arn?: string;
-
-  /**
-   * <p> The value of the resource. </p>
-   */
-  value?: string;
-}
-
-export namespace Resource {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Resource): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p> A record that contains the information needed to demonstrate compliance with the
- *          requirements specified by a control. Examples of evidence include change activity triggered
- *          by a user, or a system configuration snapshot. </p>
- */
-export interface Evidence {
-  /**
-   * <p> The data source where the evidence was collected from. </p>
-   */
-  dataSource?: string;
-
-  /**
-   * <p> The identifier for the Amazon Web Services account. </p>
-   */
-  evidenceAwsAccountId?: string;
-
-  /**
-   * <p> The timestamp that represents when the evidence was collected. </p>
-   */
-  time?: Date;
-
-  /**
-   * <p> The Amazon Web Service that the evidence is collected from. </p>
-   */
-  eventSource?: string;
-
-  /**
-   * <p> The name of the evidence event. </p>
-   */
-  eventName?: string;
-
-  /**
-   * <p> The type of automated evidence. </p>
-   */
-  evidenceByType?: string;
-
-  /**
-   * <p> The list of resources that are assessed to generate the evidence. </p>
-   */
-  resourcesIncluded?: Resource[];
-
-  /**
-   * <p> The names and values that are used by the evidence event. This includes an attribute
-   *          name (such as <code>allowUsersToChangePassword</code>) and value (such as <code>true</code>
-   *          or <code>false</code>). </p>
-   */
-  attributes?: { [key: string]: string };
-
-  /**
-   * <p> The unique identifier for the IAM user or role that's associated with
-   *          the evidence. </p>
-   */
-  iamId?: string;
-
-  /**
-   * <p> The evaluation status for evidence that falls under the compliance check category. For
-   *          evidence collected from Security Hub, a <i>Pass</i> or
-   *          <i>Fail</i> result is shown. For evidence collected from Config, a <i>Compliant</i> or <i>Noncompliant</i>
-   *          result is shown. </p>
-   */
-  complianceCheck?: string;
-
-  /**
-   * <p> The Amazon Web Services account that the evidence is collected from, and its
-   *          organization path. </p>
-   */
-  awsOrganization?: string;
-
-  /**
-   * <p> The identifier for the Amazon Web Services account. </p>
-   */
-  awsAccountId?: string;
-
-  /**
-   * <p> The identifier for the folder that the evidence is stored in. </p>
-   */
-  evidenceFolderId?: string;
-
-  /**
-   * <p> The identifier for the evidence. </p>
-   */
-  id?: string;
-
-  /**
-   * <p> Specifies whether the evidence is included in the assessment report. </p>
-   */
-  assessmentReportSelection?: string;
-}
-
-export namespace Evidence {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Evidence): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEvidenceResponse {
-  /**
-   * <p> The evidence that the <code>GetEvidenceResponse</code> API returned. </p>
-   */
-  evidence?: Evidence;
-}
-
-export namespace GetEvidenceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEvidenceByEvidenceFolderRequest {
-  /**
-   * <p> The identifier for the assessment. </p>
-   */
-  assessmentId: string | undefined;
-
-  /**
-   * <p> The identifier for the control set. </p>
+   * <p> The unique identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
    * <p> The unique identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p> The unique identifier for the evidence. </p>
+   * @public
    */
-  nextToken?: string;
-
-  /**
-   * <p> Represents the maximum number of results on a page or for an API request call. </p>
-   */
-  maxResults?: number;
+  evidenceId: string | undefined;
 }
 
-export namespace GetEvidenceByEvidenceFolderRequest {
+/**
+ * <p> A system asset that's evaluated in an Audit Manager assessment. </p>
+ * @public
+ */
+export interface Resource {
   /**
-   * @internal
+   * <p> The Amazon Resource Name (ARN) for the resource. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetEvidenceByEvidenceFolderRequest): any => ({
-    ...obj,
-  });
+  arn?: string | undefined;
+
+  /**
+   * <p> The value of the resource. </p>
+   * @public
+   */
+  value?: string | undefined;
+
+  /**
+   * <p> The evaluation status for a resource that was assessed when collecting compliance check
+   *          evidence. </p>
+   *          <ul>
+   *             <li>
+   *                <p>Audit Manager classes the resource as non-compliant if Security Hub CSPM reports a
+   *                   <i>Fail</i> result, or if Config reports a
+   *                   <i>Non-compliant</i> result.</p>
+   *             </li>
+   *             <li>
+   *                <p>Audit Manager classes the resource as compliant if Security Hub CSPM reports a
+   *                   <i>Pass</i> result, or if Config reports a
+   *                   <i>Compliant</i> result.</p>
+   *             </li>
+   *             <li>
+   *                <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made
+   *                for that resource. This is the case if a resource assessment uses Config or Security Hub CSPM as the underlying data source type, but those services
+   *                aren't enabled. This is also the case if the resource assessment uses an underlying
+   *                data source type that doesn't support compliance checks (such as manual evidence,
+   *                   Amazon Web Services API calls, or CloudTrail). </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  complianceCheck?: string | undefined;
 }
 
-export interface GetEvidenceByEvidenceFolderResponse {
+/**
+ * <p> A record that contains the information needed to demonstrate compliance with the
+ *          requirements specified by a control. Examples of evidence include change activity invoked
+ *          by a user, or a system configuration snapshot. </p>
+ * @public
+ */
+export interface Evidence {
   /**
-   * <p> The list of evidence that the <code>GetEvidenceByEvidenceFolder</code> API returned.
-   *       </p>
+   * <p> The data source where the evidence was collected from. </p>
+   * @public
    */
-  evidence?: Evidence[];
+  dataSource?: string | undefined;
 
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p> The identifier for the Amazon Web Services account. </p>
+   * @public
    */
-  nextToken?: string;
+  evidenceAwsAccountId?: string | undefined;
+
+  /**
+   * <p> The timestamp that represents when the evidence was collected. </p>
+   * @public
+   */
+  time?: Date | undefined;
+
+  /**
+   * <p> The Amazon Web Services service that the evidence is collected from. </p>
+   * @public
+   */
+  eventSource?: string | undefined;
+
+  /**
+   * <p> The name of the evidence event. </p>
+   * @public
+   */
+  eventName?: string | undefined;
+
+  /**
+   * <p> The type of automated evidence. </p>
+   * @public
+   */
+  evidenceByType?: string | undefined;
+
+  /**
+   * <p> The list of resources that are assessed to generate the evidence. </p>
+   * @public
+   */
+  resourcesIncluded?: Resource[] | undefined;
+
+  /**
+   * <p> The names and values that are used by the evidence event. This includes an attribute
+   *          name (such as <code>allowUsersToChangePassword</code>) and value (such as <code>true</code>
+   *          or <code>false</code>). </p>
+   * @public
+   */
+  attributes?: Record<string, string> | undefined;
+
+  /**
+   * <p> The unique identifier for the user or role that's associated with
+   *          the evidence. </p>
+   * @public
+   */
+  iamId?: string | undefined;
+
+  /**
+   * <p>The evaluation status for automated evidence that falls under the compliance check
+   *          category.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Audit Manager classes evidence as non-compliant if Security Hub CSPM reports a
+   *                   <i>Fail</i> result, or if Config reports a
+   *                   <i>Non-compliant</i> result.</p>
+   *             </li>
+   *             <li>
+   *                <p>Audit Manager classes evidence as compliant if Security Hub CSPM reports a
+   *                   <i>Pass</i> result, or if Config reports a
+   *                   <i>Compliant</i> result.</p>
+   *             </li>
+   *             <li>
+   *                <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made
+   *                for that evidence. This is the case if the evidence uses Config or
+   *                   Security Hub CSPM as the underlying data source type, but those services aren't
+   *                enabled. This is also the case if the evidence uses an underlying data source type
+   *                that doesn't support compliance checks (such as manual evidence, Amazon Web Services
+   *                API calls, or CloudTrail). </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  complianceCheck?: string | undefined;
+
+  /**
+   * <p> The Amazon Web Services account that the evidence is collected from, and its
+   *          organization path. </p>
+   * @public
+   */
+  awsOrganization?: string | undefined;
+
+  /**
+   * <p> The identifier for the Amazon Web Services account. </p>
+   * @public
+   */
+  awsAccountId?: string | undefined;
+
+  /**
+   * <p> The identifier for the folder that the evidence is stored in. </p>
+   * @public
+   */
+  evidenceFolderId?: string | undefined;
+
+  /**
+   * <p> The identifier for the evidence. </p>
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * <p> Specifies whether the evidence is included in the assessment report. </p>
+   * @public
+   */
+  assessmentReportSelection?: string | undefined;
 }
 
-export namespace GetEvidenceByEvidenceFolderResponse {
+/**
+ * @public
+ */
+export interface GetEvidenceResponse {
   /**
-   * @internal
+   * <p> The evidence that the <code>GetEvidence</code> API returned. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetEvidenceByEvidenceFolderResponse): any => ({
-    ...obj,
-  });
+  evidence?: Evidence | undefined;
 }
 
-export interface GetEvidenceFolderRequest {
+/**
+ * @public
+ */
+export interface GetEvidenceByEvidenceFolderRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
-   * <p> The identifier for the folder that the evidence is stored in. </p>
+   * <p> The unique identifier for the folder that the evidence is stored in. </p>
+   * @public
+   */
+  evidenceFolderId: string | undefined;
+
+  /**
+   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetEvidenceByEvidenceFolderResponse {
+  /**
+   * <p> The list of evidence that the <code>GetEvidenceByEvidenceFolder</code> API returned.
+   *       </p>
+   * @public
+   */
+  evidence?: Evidence[] | undefined;
+
+  /**
+   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetEvidenceFileUploadUrlRequest {
+  /**
+   * <p>The file that you want to upload. For a list of supported file formats, see <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files">Supported file types for manual evidence</a> in the <i>Audit Manager
+   *             User Guide</i>.</p>
+   * @public
+   */
+  fileName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetEvidenceFileUploadUrlResponse {
+  /**
+   * <p>The name of the uploaded manual evidence file that the presigned URL was generated
+   *          for.</p>
+   * @public
+   */
+  evidenceFileName?: string | undefined;
+
+  /**
+   * <p>The presigned URL that was generated.</p>
+   * @public
+   */
+  uploadUrl?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetEvidenceFolderRequest {
+  /**
+   * <p> The unique identifier for the assessment. </p>
+   * @public
+   */
+  assessmentId: string | undefined;
+
+  /**
+   * <p> The unique identifier for the control set. </p>
+   * @public
+   */
+  controlSetId: string | undefined;
+
+  /**
+   * <p> The unique identifier for the folder that the evidence is stored in. </p>
+   * @public
    */
   evidenceFolderId: string | undefined;
 }
 
-export namespace GetEvidenceFolderRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFolderRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEvidenceFolderResponse {
   /**
    * <p> The folder that the evidence is stored in. </p>
+   * @public
    */
-  evidenceFolder?: AssessmentEvidenceFolder;
+  evidenceFolder?: AssessmentEvidenceFolder | undefined;
 }
 
-export namespace GetEvidenceFolderResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFolderResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEvidenceFoldersByAssessmentRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace GetEvidenceFoldersByAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFoldersByAssessmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEvidenceFoldersByAssessmentResponse {
   /**
    * <p> The list of evidence folders that the <code>GetEvidenceFoldersByAssessment</code> API
    *          returned. </p>
+   * @public
    */
-  evidenceFolders?: AssessmentEvidenceFolder[];
+  evidenceFolders?: AssessmentEvidenceFolder[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetEvidenceFoldersByAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFoldersByAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEvidenceFoldersByAssessmentControlRequest {
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
    * <p> The identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetEvidenceFoldersByAssessmentControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFoldersByAssessmentControlRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEvidenceFoldersByAssessmentControlResponse {
-  /**
-   * <p> The list of evidence folders that the
-   *          <code>GetEvidenceFoldersByAssessmentControl</code> API returned. </p>
-   */
-  evidenceFolders?: AssessmentEvidenceFolder[];
-
-  /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
-   */
-  nextToken?: string;
-}
-
-export namespace GetEvidenceFoldersByAssessmentControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEvidenceFoldersByAssessmentControlResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface GetOrganizationAdminAccountRequest {}
-
-export namespace GetOrganizationAdminAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetOrganizationAdminAccountRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface GetOrganizationAdminAccountResponse {
-  /**
-   * <p> The identifier for the administrator account. </p>
-   */
-  adminAccountId?: string;
-
-  /**
-   * <p> The identifier for the organization. </p>
-   */
-  organizationId?: string;
-}
-
-export namespace GetOrganizationAdminAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetOrganizationAdminAccountResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface GetServicesInScopeRequest {}
-
-export namespace GetServicesInScopeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetServicesInScopeRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
- * <p> The metadata that's associated with the Amazon Web Service. </p>
+ * @public
+ */
+export interface GetEvidenceFoldersByAssessmentControlResponse {
+  /**
+   * <p> The list of evidence folders that the
+   *             <code>GetEvidenceFoldersByAssessmentControl</code> API returned. </p>
+   * @public
+   */
+  evidenceFolders?: AssessmentEvidenceFolder[] | undefined;
+
+  /**
+   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightsRequest {}
+
+/**
+ * <p>A summary of the latest analytics data for all your active assessments. </p>
+ *          <p>This summary is a snapshot of the data that your active assessments collected on the
+ *             <code>lastUpdated</code> date. It’s important to understand that the following totals
+ *          are daily counts based on this date — they aren’t a total sum to date. </p>
+ *          <p>The <code>Insights</code> data is eventually consistent. This means that, when you read
+ *          data from <code>Insights</code>, the response might not instantly reflect the results of a
+ *          recently completed write or update operation. If you repeat your read request after a few
+ *          hours, the response should return the latest data.</p>
+ *          <note>
+ *             <p>If you delete an assessment or change its status to inactive,
+ *                <code>InsightsByAssessment</code> includes data for that assessment as
+ *             follows.</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <b>Inactive assessments</b> - If Audit Manager
+ *                   collected evidence for your assessment before you changed it inactive, that
+ *                   evidence is included in the <code>InsightsByAssessment</code> counts for that
+ *                   day.</p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <b>Deleted assessments</b> - If Audit Manager
+ *                   collected evidence for your assessment before you deleted it, that evidence isn't
+ *                   included in the <code>InsightsByAssessment</code> counts for that day.</p>
+ *                </li>
+ *             </ul>
+ *          </note>
+ * @public
+ */
+export interface Insights {
+  /**
+   * <p>The number of active assessments in Audit Manager. </p>
+   * @public
+   */
+  activeAssessmentsCount?: number | undefined;
+
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as
+   *          non-compliant on the <code>lastUpdated</code> date. This includes evidence that was
+   *          collected from Security Hub CSPM with a <i>Fail</i> ruling, or collected
+   *          from Config with a <i>Non-compliant</i> ruling. </p>
+   * @public
+   */
+  noncompliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as compliant
+   *          on the <code>lastUpdated</code> date. This includes evidence that was collected from
+   *             Security Hub CSPM with a <i>Pass</i> ruling, or collected from
+   *             Config with a <i>Compliant</i> ruling. </p>
+   * @public
+   */
+  compliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of evidence without a compliance check ruling. Evidence is inconclusive when
+   *          the associated control uses Security Hub CSPM or Config as a data
+   *          source but you didn't enable those services. This is also the case when a control uses a
+   *          data source that doesn’t support compliance checks (for example: manual evidence, API
+   *          calls, or CloudTrail). </p>
+   *          <note>
+   *             <p>If evidence has a compliance check status of <i>not applicable</i>,
+   *             it's classed as <i>inconclusive</i> in <code>Insights</code> data.</p>
+   *          </note>
+   * @public
+   */
+  inconclusiveEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of assessment controls that collected non-compliant evidence on the
+   *             <code>lastUpdated</code> date. </p>
+   * @public
+   */
+  assessmentControlsCountByNoncompliantEvidence?: number | undefined;
+
+  /**
+   * <p>The total number of controls across all active assessments. </p>
+   * @public
+   */
+  totalAssessmentControlsCount?: number | undefined;
+
+  /**
+   * <p>The time when the cross-assessment insights were last updated. </p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightsResponse {
+  /**
+   * <p>The analytics data that the <code>GetInsights</code> API returned. </p>
+   * @public
+   */
+  insights?: Insights | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightsByAssessmentRequest {
+  /**
+   * <p>The unique identifier for the assessment. </p>
+   * @public
+   */
+  assessmentId: string | undefined;
+}
+
+/**
+ * <p>A summary of the latest analytics data for a specific active assessment.</p>
+ *          <p>This summary is a snapshot of the data that was collected on the
+ *             <code>lastUpdated</code> date. It’s important to understand that the totals in
+ *             <code>InsightsByAssessment</code> are daily counts based on this date — they aren’t a
+ *          total sum to date. </p>
+ *          <p>The <code>InsightsByAssessment</code> data is eventually consistent. This means that
+ *          when you read data from <code>InsightsByAssessment</code>, the response might not instantly
+ *          reflect the results of a recently completed write or update operation. If you repeat your
+ *          read request after a few hours, the response returns the latest data.</p>
+ *          <note>
+ *             <p>If you delete an assessment or change its status to inactive,
+ *                <code>InsightsByAssessment</code> includes data for that assessment as
+ *             follows.</p>
+ *             <ul>
+ *                <li>
+ *                   <p>
+ *                      <b>Inactive assessments</b> - If Audit Manager
+ *                   collected evidence for your assessment before you changed it inactive, that
+ *                   evidence is included in the <code>InsightsByAssessment</code> counts for that
+ *                   day.</p>
+ *                </li>
+ *                <li>
+ *                   <p>
+ *                      <b>Deleted assessments</b> - If Audit Manager
+ *                   collected evidence for your assessment before you deleted it, that evidence isn't
+ *                   included in the <code>InsightsByAssessment</code> counts for that day.</p>
+ *                </li>
+ *             </ul>
+ *          </note>
+ * @public
+ */
+export interface InsightsByAssessment {
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as
+   *          non-compliant. This includes evidence that was collected from Security Hub CSPM with a
+   *             <i>Fail</i> ruling, or collected from Config with a
+   *             <i>Non-compliant</i> ruling. </p>
+   * @public
+   */
+  noncompliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as compliant.
+   *          This includes evidence that was collected from Security Hub CSPM with a
+   *             <i>Pass</i> ruling, or collected from Config with a
+   *             <i>Compliant</i> ruling. </p>
+   * @public
+   */
+  compliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The amount of evidence without a compliance check ruling. Evidence is inconclusive if
+   *          the associated control uses Security Hub CSPM or Config as a data
+   *          source and you didn't enable those services. This is also the case if a control uses a data
+   *          source that doesn’t support compliance checks (for example, manual evidence, API calls, or
+   *             CloudTrail). </p>
+   *          <note>
+   *             <p>If evidence has a compliance check status of <i>not applicable</i>,
+   *             it's classified as <i>inconclusive</i> in
+   *                <code>InsightsByAssessment</code> data.</p>
+   *          </note>
+   * @public
+   */
+  inconclusiveEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of assessment controls that collected non-compliant evidence on the
+   *             <code>lastUpdated</code> date. </p>
+   * @public
+   */
+  assessmentControlsCountByNoncompliantEvidence?: number | undefined;
+
+  /**
+   * <p>The total number of controls in the assessment. </p>
+   * @public
+   */
+  totalAssessmentControlsCount?: number | undefined;
+
+  /**
+   * <p>The time when the assessment insights were last updated.</p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetInsightsByAssessmentResponse {
+  /**
+   * <p> The assessment analytics data that the <code>GetInsightsByAssessment</code> API
+   *          returned. </p>
+   * @public
+   */
+  insights?: InsightsByAssessment | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetOrganizationAdminAccountRequest {}
+
+/**
+ * @public
+ */
+export interface GetOrganizationAdminAccountResponse {
+  /**
+   * <p> The identifier for the administrator account. </p>
+   * @public
+   */
+  adminAccountId?: string | undefined;
+
+  /**
+   * <p> The identifier for the organization. </p>
+   * @public
+   */
+  organizationId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetServicesInScopeRequest {}
+
+/**
+ * <p> The metadata that's associated with the Amazon Web Services service. </p>
+ * @public
  */
 export interface ServiceMetadata {
   /**
-   * <p> The name of the Amazon Web Service. </p>
+   * <p> The name of the Amazon Web Services service. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p> The display name of the Amazon Web Service. </p>
+   * <p> The display name of the Amazon Web Services service. </p>
+   * @public
    */
-  displayName?: string;
+  displayName?: string | undefined;
 
   /**
-   * <p> The description of the Amazon Web Service. </p>
+   * <p> The description of the Amazon Web Services service. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p> The category that the Amazon Web Service belongs to, such as compute, storage,
+   * <p> The category that the Amazon Web Services service belongs to, such as compute, storage,
    *          or database. </p>
+   * @public
    */
-  category?: string;
+  category?: string | undefined;
 }
 
-export namespace ServiceMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetServicesInScopeResponse {
   /**
-   * <p> The metadata that's associated with the Amazon Web Service. </p>
+   * <p> The metadata that's associated with the Amazon Web Services service. </p>
+   * @public
    */
-  serviceMetadata?: ServiceMetadata[];
+  serviceMetadata?: ServiceMetadata[] | undefined;
 }
 
-export namespace GetServicesInScopeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetServicesInScopeResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SettingAttribute {
-  ALL = "ALL",
-  DEFAULT_ASSESSMENT_REPORTS_DESTINATION = "DEFAULT_ASSESSMENT_REPORTS_DESTINATION",
-  DEFAULT_PROCESS_OWNERS = "DEFAULT_PROCESS_OWNERS",
-  IS_AWS_ORG_ENABLED = "IS_AWS_ORG_ENABLED",
-  SNS_TOPIC = "SNS_TOPIC",
-}
-
+/**
+ * @public
+ */
 export interface GetSettingsRequest {
   /**
-   * <p> The list of <code>SettingAttribute</code> enum values. </p>
+   * <p> The list of setting attribute enum values. </p>
+   * @public
    */
-  attribute: SettingAttribute | string | undefined;
+  attribute: SettingAttribute | undefined;
 }
 
-export namespace GetSettingsRequest {
+/**
+ * <p>The default s3 bucket where Audit Manager saves the files that you export from evidence finder.</p>
+ * @public
+ */
+export interface DefaultExportDestination {
   /**
-   * @internal
+   * <p>The destination type, such as Amazon S3.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetSettingsRequest): any => ({
-    ...obj,
-  });
+  destinationType?: ExportDestinationType | undefined;
+
+  /**
+   * <p>The destination bucket where Audit Manager stores exported files.</p>
+   * @public
+   */
+  destination?: string | undefined;
+}
+
+/**
+ * <p>The deregistration policy for the data that's stored in Audit Manager. You can
+ *          use this attribute to determine how your data is handled when you <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html">deregister Audit Manager</a>.</p>
+ *          <p>By default, Audit Manager retains evidence data for two years from the time of its
+ *          creation. Other Audit Manager resources (including assessments, custom controls, and
+ *          custom frameworks) remain in Audit Manager indefinitely, and are available if you
+ *             <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html">re-register Audit Manager</a> in the future. For more
+ *          information about data retention, see <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html">Data
+ *             Protection</a> in the <i>Audit Manager User Guide</i>.</p>
+ *          <important>
+ *             <p>If you choose to delete all data, this action permanently deletes all evidence data
+ *             in your account within seven days. It also deletes all of the Audit Manager
+ *             resources that you created, including assessments, custom controls, and custom
+ *             frameworks. Your data will not be available if you re-register Audit Manager in the
+ *             future.</p>
+ *          </important>
+ * @public
+ */
+export interface DeregistrationPolicy {
+  /**
+   * <p>Specifies which Audit Manager data will be deleted when you deregister Audit Manager.</p>
+   *          <ul>
+   *             <li>
+   *                <p>If you set the value to <code>ALL</code>, all of your data is deleted within seven
+   *                days of deregistration.</p>
+   *             </li>
+   *             <li>
+   *                <p>If you set the value to <code>DEFAULT</code>, none of your data is deleted at the
+   *                time of deregistration. However, keep in mind that the Audit Manager data
+   *                retention policy still applies. As a result, any evidence data will be deleted two
+   *                years after its creation date. Your other Audit Manager resources will continue
+   *                to exist indefinitely.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  deleteResources?: DeleteResources | undefined;
+}
+
+/**
+ * <p>The settings object that specifies whether evidence finder is enabled. This object also
+ *          describes the related event data store, and the backfill status for populating the event
+ *          data store with evidence data.</p>
+ * @public
+ */
+export interface EvidenceFinderEnablement {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the CloudTrail Lake event data store that’s
+   *          used by evidence finder. The event data store is the lake of evidence data that evidence
+   *          finder runs queries against.</p>
+   * @public
+   */
+  eventDataStoreArn?: string | undefined;
+
+  /**
+   * <p>The current status of the evidence finder feature and the related event data store. </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ENABLE_IN_PROGRESS</code> means that you requested to enable evidence
+   *                finder. An event data store is currently being created to support evidence finder
+   *                queries.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ENABLED</code> means that an event data store was successfully created and
+   *                evidence finder is enabled. We recommend that you wait 7 days until the event data
+   *                store is backfilled with your past two years’ worth of evidence data. You can use
+   *                evidence finder in the meantime, but not all data might be available until the
+   *                backfill is complete.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLE_IN_PROGRESS</code> means that you requested to disable evidence finder, and your
+   *                request is pending the deletion of the event data store.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DISABLED</code> means that you have permanently disabled evidence finder and the event
+   *                data store has been deleted. You can't re-enable evidence finder after this
+   *                point.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  enablementStatus?: EvidenceFinderEnablementStatus | undefined;
+
+  /**
+   * <p>The current status of the evidence data backfill process. </p>
+   *          <p>The backfill starts after you enable evidence finder. During this task, Audit Manager populates an event data store with your past two years’ worth of evidence data so that
+   *          your evidence can be queried.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NOT_STARTED</code> means that the backfill hasn’t started yet. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>IN_PROGRESS</code> means that the backfill is in progress. This can take up
+   *                to 7 days to complete, depending on the amount of evidence data. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>COMPLETED</code> means that the backfill is complete. All of your past
+   *                evidence is now queryable. </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  backfillStatus?: EvidenceFinderBackfillStatus | undefined;
+
+  /**
+   * <p>Represents any errors that occurred when enabling or disabling evidence finder. </p>
+   * @public
+   */
+  error?: string | undefined;
 }
 
 /**
  * <p> The settings object that holds all supported Audit Manager settings. </p>
+ * @public
  */
 export interface Settings {
   /**
    * <p> Specifies whether Organizations is enabled. </p>
+   * @public
    */
-  isAwsOrgEnabled?: boolean;
+  isAwsOrgEnabled?: boolean | undefined;
 
   /**
    * <p> The designated Amazon Simple Notification Service (Amazon SNS) topic. </p>
+   * @public
    */
-  snsTopic?: string;
+  snsTopic?: string | undefined;
 
   /**
-   * <p> The default storage destination for assessment reports. </p>
+   * <p>The default S3 destination bucket for storing assessment reports.</p>
+   * @public
    */
-  defaultAssessmentReportsDestination?: AssessmentReportsDestination;
+  defaultAssessmentReportsDestination?: AssessmentReportsDestination | undefined;
 
   /**
    * <p> The designated default audit owners. </p>
+   * @public
    */
-  defaultProcessOwners?: Role[];
+  defaultProcessOwners?: Role[] | undefined;
 
   /**
    * <p> The KMS key details. </p>
+   * @public
    */
-  kmsKey?: string;
-}
+  kmsKey?: string | undefined;
 
-export namespace Settings {
   /**
-   * @internal
+   * <p>The current evidence finder status and event data store details.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Settings): any => ({
-    ...obj,
-  });
+  evidenceFinderEnablement?: EvidenceFinderEnablement | undefined;
+
+  /**
+   * <p>The deregistration policy for your Audit Manager data. You can
+   *       use this attribute to determine how your data is handled when you deregister Audit Manager.</p>
+   * @public
+   */
+  deregistrationPolicy?: DeregistrationPolicy | undefined;
+
+  /**
+   * <p>The default S3 destination bucket for storing evidence finder exports.</p>
+   * @public
+   */
+  defaultExportDestination?: DefaultExportDestination | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetSettingsResponse {
   /**
    * <p> The settings object that holds all supported Audit Manager settings. </p>
+   * @public
    */
-  settings?: Settings;
+  settings?: Settings | undefined;
 }
 
-export namespace GetSettingsResponse {
+/**
+ * @public
+ */
+export interface ListAssessmentControlInsightsByControlDomainRequest {
   /**
-   * @internal
+   * <p>The unique identifier for the control domain. </p>
+   *          <p>Audit Manager supports the control domains that are provided by Amazon Web Services
+   *          Control Catalog. For information about how to find a list of available control domains, see
+   *             <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html">
+   *                <code>ListDomains</code>
+   *             </a> in the Amazon Web Services Control
+   *          Catalog API Reference.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetSettingsResponse): any => ({
-    ...obj,
-  });
+  controlDomainId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the active assessment. </p>
+   * @public
+   */
+  assessmentId: string | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
+   */
+  maxResults?: number | undefined;
 }
 
+/**
+ * <p>A breakdown of the latest compliance check status for the evidence in your Audit Manager assessments. </p>
+ * @public
+ */
+export interface EvidenceInsights {
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as
+   *          non-compliant. This includes evidence that was collected from Security Hub CSPM with a
+   *             <i>Fail</i> ruling, or collected from Config with a
+   *             <i>Non-compliant</i> ruling. </p>
+   * @public
+   */
+  noncompliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of compliance check evidence that Audit Manager classified as compliant.
+   *          This includes evidence that was collected from Security Hub CSPM with a
+   *             <i>Pass</i> ruling, or collected from Config with a
+   *             <i>Compliant</i> ruling. </p>
+   * @public
+   */
+  compliantEvidenceCount?: number | undefined;
+
+  /**
+   * <p>The number of evidence that a compliance check ruling isn't available for. Evidence is
+   *          inconclusive when the associated control uses Security Hub CSPM or Config as a data source but you didn't enable those services. This is also the case when a
+   *          control uses a data source that doesn’t support compliance checks (for example, manual
+   *          evidence, API calls, or CloudTrail). </p>
+   *          <note>
+   *             <p>If evidence has a compliance check status of <i>not applicable</i> in
+   *             the console, it's classified as <i>inconclusive</i> in
+   *                <code>EvidenceInsights</code> data.</p>
+   *          </note>
+   * @public
+   */
+  inconclusiveEvidenceCount?: number | undefined;
+}
+
+/**
+ * <p>A summary of the latest analytics data for a specific control in a specific active
+ *          assessment.</p>
+ *          <p>Control insights are grouped by control domain, and ranked by the highest total count of
+ *          non-compliant evidence. </p>
+ * @public
+ */
+export interface ControlInsightsMetadataByAssessmentItem {
+  /**
+   * <p>The name of the assessment control. </p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The unique identifier for the assessment control. </p>
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * <p>A breakdown of the compliance check status for the evidence that’s associated with the
+   *          assessment control. </p>
+   * @public
+   */
+  evidenceInsights?: EvidenceInsights | undefined;
+
+  /**
+   * <p>The name of the control set that the assessment control belongs to. </p>
+   * @public
+   */
+  controlSetName?: string | undefined;
+
+  /**
+   * <p>The time when the assessment control insights were last updated. </p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListAssessmentControlInsightsByControlDomainResponse {
+  /**
+   * <p>The assessment control analytics data that the
+   *             <code>ListAssessmentControlInsightsByControlDomain</code> API returned. </p>
+   * @public
+   */
+  controlInsightsByAssessment?: ControlInsightsMetadataByAssessmentItem[] | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListAssessmentFrameworksRequest {
   /**
    * <p> The type of framework, such as a standard framework or a custom framework. </p>
+   * @public
    */
-  frameworkType: FrameworkType | string | undefined;
+  frameworkType: FrameworkType | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListAssessmentFrameworksRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentFrameworksRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentFrameworksResponse {
   /**
-   * <p> The list of metadata objects for the framework. </p>
+   * <p> A list of metadata that the <code>ListAssessmentFrameworks</code> API returns for each
+   *          framework.</p>
+   * @public
    */
-  frameworkMetadataList?: AssessmentFrameworkMetadata[];
+  frameworkMetadataList?: AssessmentFrameworkMetadata[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListAssessmentFrameworksResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentFrameworksResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentFrameworkShareRequestsRequest {
   /**
    * <p> Specifies whether the share request is a sent request or a received request.</p>
+   * @public
    */
-  requestType: ShareRequestType | string | undefined;
+  requestType: ShareRequestType | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListAssessmentFrameworkShareRequestsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentFrameworkShareRequestsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentFrameworkShareRequestsResponse {
   /**
    * <p> The list of share requests that the <code>ListAssessmentFrameworkShareRequests</code>
    *          API returned. </p>
+   * @public
    */
-  assessmentFrameworkShareRequests?: AssessmentFrameworkShareRequest[];
+  assessmentFrameworkShareRequests?: AssessmentFrameworkShareRequest[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListAssessmentFrameworkShareRequestsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentFrameworkShareRequestsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentReportsRequest {
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListAssessmentReportsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentReportsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentReportsResponse {
   /**
    * <p> The list of assessment reports that the <code>ListAssessmentReports</code> API
    *          returned. </p>
+   * @public
    */
-  assessmentReports?: AssessmentReportMetadata[];
+  assessmentReports?: AssessmentReportMetadata[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListAssessmentReportsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentReportsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentsRequest {
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p> The current status of the assessment.</p>
+   * @public
    */
-  nextToken?: string;
+  status?: AssessmentStatus | undefined;
+
+  /**
+   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListAssessmentsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListAssessmentsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListAssessmentsResponse {
   /**
-   * <p> The metadata that's associated with the assessment. </p>
+   * <p>The metadata that the <code>ListAssessments</code> API returns for each
+   *          assessment.</p>
+   * @public
    */
-  assessmentMetadata?: AssessmentMetadataItem[];
+  assessmentMetadata?: AssessmentMetadataItem[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListAssessmentsResponse {
+/**
+ * @public
+ */
+export interface ListControlDomainInsightsRequest {
   /**
-   * @internal
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListAssessmentsResponse): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
+
+  /**
+   * <p>Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
+   */
+  maxResults?: number | undefined;
 }
 
+/**
+ * <p>A summary of the latest analytics data for a specific control domain.</p>
+ *          <p>Control domain insights are grouped by control domain, and ranked by the highest total
+ *          count of non-compliant evidence.</p>
+ * @public
+ */
+export interface ControlDomainInsights {
+  /**
+   * <p>The name of the control domain. </p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The unique identifier for the control domain. Audit Manager supports the control
+   *          domains that are provided by Amazon Web Services Control Catalog. For information about how
+   *          to find a list of available control domains, see <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html">
+   *                <code>ListDomains</code>
+   *             </a> in the Amazon Web Services Control Catalog API
+   *          Reference.</p>
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * <p>The number of controls in the control domain that collected non-compliant evidence on
+   *          the <code>lastUpdated</code> date. </p>
+   * @public
+   */
+  controlsCountByNoncompliantEvidence?: number | undefined;
+
+  /**
+   * <p>The total number of controls in the control domain. </p>
+   * @public
+   */
+  totalControlsCount?: number | undefined;
+
+  /**
+   * <p>A breakdown of the compliance check status for the evidence that’s associated with the
+   *          control domain. </p>
+   * @public
+   */
+  evidenceInsights?: EvidenceInsights | undefined;
+
+  /**
+   * <p>The time when the control domain insights were last updated. </p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListControlDomainInsightsResponse {
+  /**
+   * <p>The control domain analytics data that the <code>ListControlDomainInsights</code> API
+   *          returned. </p>
+   * @public
+   */
+  controlDomainInsights?: ControlDomainInsights[] | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListControlDomainInsightsByAssessmentRequest {
+  /**
+   * <p>The unique identifier for the active assessment. </p>
+   * @public
+   */
+  assessmentId: string | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListControlDomainInsightsByAssessmentResponse {
+  /**
+   * <p>The control domain analytics data that the
+   *             <code>ListControlDomainInsightsByAssessment</code> API returned. </p>
+   * @public
+   */
+  controlDomainInsights?: ControlDomainInsights[] | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListControlInsightsByControlDomainRequest {
+  /**
+   * <p>The unique identifier for the control domain. </p>
+   *          <p>Audit Manager supports the control domains that are provided by Amazon Web Services
+   *          Control Catalog. For information about how to find a list of available control domains, see
+   *             <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html">
+   *                <code>ListDomains</code>
+   *             </a> in the Amazon Web Services Control
+   *          Catalog API Reference.</p>
+   * @public
+   */
+  controlDomainId: string | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * <p>A summary of the latest analytics data for a specific control. </p>
+ *          <p>This data reflects the total counts for the specified control across all active
+ *          assessments. Control insights are grouped by control domain, and ranked by the highest
+ *          total count of non-compliant evidence.</p>
+ * @public
+ */
+export interface ControlInsightsMetadataItem {
+  /**
+   * <p>The name of the control. </p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>The unique identifier for the control. </p>
+   * @public
+   */
+  id?: string | undefined;
+
+  /**
+   * <p>A breakdown of the compliance check status for the evidence that’s associated with the
+   *          control. </p>
+   * @public
+   */
+  evidenceInsights?: EvidenceInsights | undefined;
+
+  /**
+   * <p>The time when the control insights were last updated. </p>
+   * @public
+   */
+  lastUpdated?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListControlInsightsByControlDomainResponse {
+  /**
+   * <p>The control analytics data that the <code>ListControlInsightsByControlDomain</code> API
+   *          returned. </p>
+   * @public
+   */
+  controlInsightsMetadata?: ControlInsightsMetadataItem[] | undefined;
+
+  /**
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListControlsRequest {
   /**
-   * <p> The type of control, such as a standard control or a custom control. </p>
+   * <p>A filter that narrows the list of controls to a specific type. </p>
+   * @public
    */
-  controlType: ControlType | string | undefined;
+  controlType: ControlType | undefined;
 
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
-   * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * <p>The maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
-}
+  maxResults?: number | undefined;
 
-export namespace ListControlsRequest {
   /**
-   * @internal
+   * <p>A filter that narrows the list of controls to a specific resource from the Amazon Web Services
+   *          Control Catalog. </p>
+   *          <p>To use this parameter, specify the ARN of the Control Catalog resource. You can specify either
+   *          a control domain, a control objective, or a common control. For information about how to find the ARNs
+   *          for these resources, see <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html">
+   *                <code>ListDomains</code>
+   *             </a>, <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListObjectives.html">
+   *                <code>ListObjectives</code>
+   *             </a>, and <a href="https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListCommonControls.html">
+   *                <code>ListCommonControls</code>
+   *             </a>.</p>
+   *          <note>
+   *             <p>You can only filter by one Control Catalog resource at a time.
+   *             Specifying multiple resource ARNs isn’t currently supported. If you want to filter by more
+   *             than one ARN, we recommend that you run the <code>ListControls</code> operation separately
+   *             for each ARN. </p>
+   *          </note>
+   *          <p>Alternatively, specify <code>UNCATEGORIZED</code> to list controls that aren't
+   *          mapped to a Control Catalog resource. For example, this operation might return a list of
+   *          custom controls that don't belong to any control domain or control objective.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ListControlsRequest): any => ({
-    ...obj,
-  });
+  controlCatalogId?: string | undefined;
 }
 
 /**
  * <p> The metadata that's associated with the standard control or custom control. </p>
+ * @public
  */
 export interface ControlMetadata {
   /**
    * <p> The Amazon Resource Name (ARN) of the control. </p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p> The unique identifier for the control. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the control. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p> The data source that determines where Audit Manager collects evidence from for
-   *          the control. </p>
+   * <p> The data source that determines where Audit Manager collects evidence from for the
+   *          control. </p>
+   * @public
    */
-  controlSources?: string;
+  controlSources?: string | undefined;
 
   /**
-   * <p> Specifies when the control was created. </p>
+   * <p> The time when the control was created. </p>
+   * @public
    */
-  createdAt?: Date;
+  createdAt?: Date | undefined;
 
   /**
-   * <p> Specifies when the control was most recently updated. </p>
+   * <p> The time when the control was most recently updated. </p>
+   * @public
    */
-  lastUpdatedAt?: Date;
+  lastUpdatedAt?: Date | undefined;
 }
 
-export namespace ControlMetadata {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ControlMetadata): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListControlsResponse {
   /**
-   * <p> The list of control metadata objects that the <code>ListControls</code> API returned.
-   *       </p>
+   * <p> A list of metadata that the <code>ListControls</code> API returns for each
+   *          control.</p>
+   * @public
    */
-  controlMetadataList?: ControlMetadata[];
+  controlMetadataList?: ControlMetadata[] | undefined;
 
   /**
-   * <p> The pagination token that's used to fetch the next set of results. </p>
+   * <p>The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListControlsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListControlsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListKeywordsForDataSourceRequest {
   /**
-   * <p> The control mapping data source that the keywords apply to. </p>
+   * <p>The control mapping data source that the keywords apply to. </p>
+   * @public
    */
-  source: SourceType | string | undefined;
+  source: DataSourceType | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListKeywordsForDataSourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListKeywordsForDataSourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListKeywordsForDataSourceResponse {
   /**
-   * <p> The list of keywords for the event mapping source. </p>
+   * <p>The list of keywords for the control mapping source.</p>
+   * @public
    */
-  keywords?: string[];
+  keywords?: string[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListKeywordsForDataSourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListKeywordsForDataSourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListNotificationsRequest {
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Represents the maximum number of results on a page or for an API request call. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace ListNotificationsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListNotificationsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p> The notification that informs a user of an update in Audit Manager. For
  *          example, this includes the notification that's sent when a control set is delegated for
  *          review. </p>
+ * @public
  */
 export interface Notification {
   /**
    * <p> The unique identifier for the notification. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The identifier for the assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 
   /**
    * <p> The name of the related assessment. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The identifier for the control set. </p>
+   * @public
    */
-  controlSetId?: string;
+  controlSetId?: string | undefined;
 
   /**
    * <p> Specifies the name of the control set that the notification is about. </p>
+   * @public
    */
-  controlSetName?: string;
+  controlSetName?: string | undefined;
 
   /**
    * <p> The description of the notification. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The time when the notification was sent. </p>
+   * @public
    */
-  eventTime?: Date;
+  eventTime?: Date | undefined;
 
   /**
    * <p> The sender of the notification. </p>
+   * @public
    */
-  source?: string;
+  source?: string | undefined;
 }
 
-export namespace Notification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Notification): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListNotificationsResponse {
   /**
    * <p> The returned list of notifications. </p>
+   * @public
    */
-  notifications?: Notification[];
+  notifications?: Notification[] | undefined;
 
   /**
    * <p> The pagination token that's used to fetch the next set of results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListNotificationsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListNotificationsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p> The Amazon Resource Name (ARN) of the resource. </p>
+   * @public
    */
   resourceArn: string | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p> The list of tags that the <code>ListTagsForResource</code> API returned. </p>
+   * @public
    */
-  tags?: { [key: string]: string };
+  tags?: Record<string, string> | undefined;
 }
 
-export namespace ListTagsForResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterAccountRequest {
   /**
    * <p> The KMS key details. </p>
+   * @public
    */
-  kmsKey?: string;
+  kmsKey?: string | undefined;
 
   /**
    * <p> The delegated administrator account for Audit Manager. </p>
+   * @public
    */
-  delegatedAdminAccount?: string;
+  delegatedAdminAccount?: string | undefined;
 }
 
-export namespace RegisterAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterAccountResponse {
   /**
    * <p> The status of the account registration request. </p>
+   * @public
    */
-  status?: AccountStatus | string;
+  status?: AccountStatus | undefined;
 }
 
-export namespace RegisterAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterOrganizationAdminAccountRequest {
   /**
    * <p> The identifier for the delegated administrator account. </p>
+   * @public
    */
   adminAccountId: string | undefined;
 }
 
-export namespace RegisterOrganizationAdminAccountRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterOrganizationAdminAccountRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RegisterOrganizationAdminAccountResponse {
   /**
    * <p> The identifier for the delegated administrator account. </p>
+   * @public
    */
-  adminAccountId?: string;
+  adminAccountId?: string | undefined;
 
   /**
    * <p> The identifier for the organization. </p>
+   * @public
    */
-  organizationId?: string;
+  organizationId?: string | undefined;
 }
 
-export namespace RegisterOrganizationAdminAccountResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RegisterOrganizationAdminAccountResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartAssessmentFrameworkShareRequest {
   /**
    * <p> The unique identifier for the custom framework to be shared. </p>
+   * @public
    */
   frameworkId: string | undefined;
 
   /**
    * <p> The Amazon Web Services account of the recipient. </p>
+   * @public
    */
   destinationAccount: string | undefined;
 
   /**
    * <p> The Amazon Web Services Region of the recipient. </p>
+   * @public
    */
   destinationRegion: string | undefined;
 
   /**
    * <p> An optional comment from the sender about the share request. </p>
+   * @public
    */
-  comment?: string;
+  comment?: string | undefined;
 }
 
-export namespace StartAssessmentFrameworkShareRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartAssessmentFrameworkShareRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface StartAssessmentFrameworkShareResponse {
   /**
    * <p> The share request that's created by the <code>StartAssessmentFrameworkShare</code> API.
    *       </p>
+   * @public
    */
-  assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest;
+  assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest | undefined;
 }
 
-export namespace StartAssessmentFrameworkShareResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: StartAssessmentFrameworkShareResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p> The Amazon Resource Name (ARN) of the resource. </p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p> The tags that are associated with the resource. </p>
+   * @public
    */
-  tags: { [key: string]: string } | undefined;
+  tags: Record<string, string> | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p> The Amazon Resource Name (ARN) of the specified resource. </p>
+   * @public
    */
   resourceArn: string | undefined;
 
   /**
    * <p> The name or key of the tag. </p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The name of the assessment to be updated. </p>
+   * @public
    */
-  assessmentName?: string;
+  assessmentName?: string | undefined;
 
   /**
    * <p> The description of the assessment. </p>
+   * @public
    */
-  assessmentDescription?: string;
+  assessmentDescription?: string | undefined;
 
   /**
    * <p> The scope of the assessment. </p>
+   * @public
    */
   scope: Scope | undefined;
 
   /**
    * <p> The assessment report storage destination for the assessment that's being updated.
    *       </p>
+   * @public
    */
-  assessmentReportsDestination?: AssessmentReportsDestination;
+  assessmentReportsDestination?: AssessmentReportsDestination | undefined;
 
   /**
    * <p> The list of roles for the assessment. </p>
+   * @public
    */
-  roles?: Role[];
+  roles?: Role[] | undefined;
 }
 
-export namespace UpdateAssessmentRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentResponse {
   /**
-   * <p> The response object for the <code>UpdateAssessmentRequest</code> API. This is the name
-   *          of the updated assessment.</p>
+   * <p> The response object for the <code>UpdateAssessment</code> API. This is the name of the
+   *          updated assessment.</p>
+   * @public
    */
-  assessment?: Assessment;
+  assessment?: Assessment | undefined;
 }
 
-export namespace UpdateAssessmentResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentControlRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
-   * <p> The identifier for the control set. </p>
+   * <p> The unique identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
-   * <p> The identifier for the control. </p>
+   * <p> The unique identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 
   /**
    * <p> The status of the control. </p>
+   * @public
    */
-  controlStatus?: ControlStatus | string;
+  controlStatus?: ControlStatus | undefined;
 
   /**
    * <p> The comment body text for the control. </p>
+   * @public
    */
-  commentBody?: string;
+  commentBody?: string | undefined;
 }
 
-export namespace UpdateAssessmentControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentControlRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentControlResponse {
   /**
    * <p> The name of the updated control set that the <code>UpdateAssessmentControl</code> API
    *          returned. </p>
+   * @public
    */
-  control?: AssessmentControl;
+  control?: AssessmentControl | undefined;
 }
 
-export namespace UpdateAssessmentControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentControlSetStatusRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
-   * <p> The identifier for the control set. </p>
+   * <p> The unique identifier for the control set. </p>
+   * @public
    */
   controlSetId: string | undefined;
 
   /**
    * <p> The status of the control set that's being updated. </p>
+   * @public
    */
-  status: ControlSetStatus | string | undefined;
+  status: ControlSetStatus | undefined;
 
   /**
    * <p> The comment that's related to the status update. </p>
+   * @public
    */
   comment: string | undefined;
 }
 
-export namespace UpdateAssessmentControlSetStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentControlSetStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentControlSetStatusResponse {
   /**
    * <p> The name of the updated control set that the
-   *          <code>UpdateAssessmentControlSetStatus</code> API returned. </p>
+   *             <code>UpdateAssessmentControlSetStatus</code> API returned. </p>
+   * @public
    */
-  controlSet?: AssessmentControlSet;
-}
-
-export namespace UpdateAssessmentControlSetStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentControlSetStatusResponse): any => ({
-    ...obj,
-  });
+  controlSet?: AssessmentControlSet | undefined;
 }
 
 /**
  * <p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This doesn't contain the control set ID. </p>
+ * @public
  */
 export interface UpdateAssessmentFrameworkControlSet {
   /**
    * <p> The unique identifier for the control set. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the control set. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The list of controls that are contained within the control set. </p>
+   * @public
    */
-  controls?: CreateAssessmentFrameworkControl[];
+  controls: CreateAssessmentFrameworkControl[] | undefined;
 }
 
-export namespace UpdateAssessmentFrameworkControlSet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentFrameworkControlSet): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentFrameworkRequest {
   /**
-   * <p> The identifier for the framework. </p>
+   * <p> The unique identifier for the framework. </p>
+   * @public
    */
   frameworkId: string | undefined;
 
   /**
    * <p> The name of the framework to be updated. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The description of the updated framework. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The compliance type that the new custom framework supports, such as CIS or HIPAA.
    *       </p>
+   * @public
    */
-  complianceType?: string;
+  complianceType?: string | undefined;
 
   /**
    * <p> The control sets that are associated with the framework. </p>
+   *          <note>
+   *             <p>The <code>Controls</code> object returns a partial response when called through Framework
+   *             APIs. For a complete <code>Controls</code> object, use <code>GetControl</code>.</p>
+   *          </note>
+   * @public
    */
   controlSets: UpdateAssessmentFrameworkControlSet[] | undefined;
 }
 
-export namespace UpdateAssessmentFrameworkRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentFrameworkRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentFrameworkResponse {
   /**
-   * <p> The name of the framework. </p>
+   * <p> The framework object. </p>
+   * @public
    */
-  framework?: Framework;
+  framework?: Framework | undefined;
 }
 
-export namespace UpdateAssessmentFrameworkResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentFrameworkResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum ShareRequestAction {
-  ACCEPT = "ACCEPT",
-  DECLINE = "DECLINE",
-  REVOKE = "REVOKE",
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentFrameworkShareRequest {
   /**
    * <p> The unique identifier for the share request. </p>
+   * @public
    */
   requestId: string | undefined;
 
   /**
    * <p>Specifies whether the share request is a sent request or a received request.</p>
+   * @public
    */
-  requestType: ShareRequestType | string | undefined;
+  requestType: ShareRequestType | undefined;
 
   /**
    * <p>Specifies the update action for the share request.</p>
+   * @public
    */
-  action: ShareRequestAction | string | undefined;
+  action: ShareRequestAction | undefined;
 }
 
-export namespace UpdateAssessmentFrameworkShareRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentFrameworkShareRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentFrameworkShareResponse {
   /**
    * <p> The updated share request that's returned by the
-   *          <code>UpdateAssessmentFrameworkShare</code> operation. </p>
+   *             <code>UpdateAssessmentFrameworkShare</code> operation. </p>
+   * @public
    */
-  assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest;
+  assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest | undefined;
 }
 
-export namespace UpdateAssessmentFrameworkShareResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentFrameworkShareResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentStatusRequest {
   /**
-   * <p> The identifier for the assessment. </p>
+   * <p> The unique identifier for the assessment. </p>
+   * @public
    */
   assessmentId: string | undefined;
 
   /**
    * <p> The current status of the assessment. </p>
+   * @public
    */
-  status: AssessmentStatus | string | undefined;
+  status: AssessmentStatus | undefined;
 }
 
-export namespace UpdateAssessmentStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateAssessmentStatusResponse {
   /**
    * <p> The name of the updated assessment that the <code>UpdateAssessmentStatus</code> API
    *          returned. </p>
+   * @public
    */
-  assessment?: Assessment;
+  assessment?: Assessment | undefined;
 }
 
-export namespace UpdateAssessmentStatusResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateAssessmentStatusResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateControlRequest {
   /**
    * <p> The identifier for the control. </p>
+   * @public
    */
   controlId: string | undefined;
 
   /**
    * <p> The name of the updated control. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The optional description of the control. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p> The steps that you should follow to determine if the control is met. </p>
+   * @public
    */
-  testingInformation?: string;
+  testingInformation?: string | undefined;
 
   /**
    * <p> The title of the action plan for remediating the control. </p>
+   * @public
    */
-  actionPlanTitle?: string;
+  actionPlanTitle?: string | undefined;
 
   /**
    * <p> The recommended actions to carry out if the control isn't fulfilled. </p>
+   * @public
    */
-  actionPlanInstructions?: string;
+  actionPlanInstructions?: string | undefined;
 
   /**
    * <p> The data mapping sources for the control. </p>
+   * @public
    */
   controlMappingSources: ControlMappingSource[] | undefined;
 }
 
-export namespace UpdateControlRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateControlRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateControlResponse {
   /**
    * <p> The name of the updated control set that the <code>UpdateControl</code> API returned.
    *       </p>
+   * @public
    */
-  control?: Control;
+  control?: Control | undefined;
 }
 
-export namespace UpdateControlResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateControlResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSettingsRequest {
   /**
    * <p> The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager sends
    *          notifications to. </p>
+   * @public
    */
-  snsTopic?: string;
+  snsTopic?: string | undefined;
 
   /**
-   * <p> The default storage destination for assessment reports. </p>
+   * <p> The default S3 destination bucket for storing assessment reports. </p>
+   * @public
    */
-  defaultAssessmentReportsDestination?: AssessmentReportsDestination;
+  defaultAssessmentReportsDestination?: AssessmentReportsDestination | undefined;
 
   /**
    * <p> A list of the default audit owners. </p>
+   * @public
    */
-  defaultProcessOwners?: Role[];
+  defaultProcessOwners?: Role[] | undefined;
 
   /**
    * <p> The KMS key details. </p>
+   * @public
    */
-  kmsKey?: string;
-}
+  kmsKey?: string | undefined;
 
-export namespace UpdateSettingsRequest {
   /**
-   * @internal
+   * <p>Specifies whether the evidence finder feature is enabled. Change this attribute to
+   *          enable or disable evidence finder.</p>
+   *          <important>
+   *             <p>When you use this attribute to disable evidence finder, Audit Manager deletes the
+   *             event data store that’s used to query your evidence data. As a result, you can’t
+   *             re-enable evidence finder and use the feature again. Your only alternative is to <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html">deregister</a> and then <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html">re-register</a>
+   *             Audit Manager. </p>
+   *          </important>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateSettingsRequest): any => ({
-    ...obj,
-  });
+  evidenceFinderEnabled?: boolean | undefined;
+
+  /**
+   * <p>The deregistration policy for your Audit Manager data. You can
+   *          use this attribute to determine how your data is handled when you deregister Audit Manager.</p>
+   * @public
+   */
+  deregistrationPolicy?: DeregistrationPolicy | undefined;
+
+  /**
+   * <p> The default S3 destination bucket for storing evidence finder exports. </p>
+   * @public
+   */
+  defaultExportDestination?: DefaultExportDestination | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateSettingsResponse {
   /**
    * <p> The current list of settings. </p>
+   * @public
    */
-  settings?: Settings;
+  settings?: Settings | undefined;
 }
 
-export namespace UpdateSettingsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSettingsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ValidateAssessmentReportIntegrityRequest {
   /**
    * <p> The relative path of the Amazon S3 bucket that the assessment report is stored
    *          in. </p>
+   * @public
    */
   s3RelativePath: string | undefined;
 }
 
-export namespace ValidateAssessmentReportIntegrityRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidateAssessmentReportIntegrityRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ValidateAssessmentReportIntegrityResponse {
   /**
    * <p> Specifies whether the signature key is valid. </p>
+   * @public
    */
-  signatureValid?: boolean;
+  signatureValid?: boolean | undefined;
 
   /**
    * <p> The signature algorithm that's used to code sign the assessment report file. </p>
+   * @public
    */
-  signatureAlgorithm?: string;
+  signatureAlgorithm?: string | undefined;
 
   /**
    * <p> The date and time signature that specifies when the assessment report was created.
    *       </p>
+   * @public
    */
-  signatureDateTime?: string;
+  signatureDateTime?: string | undefined;
 
   /**
    * <p> The unique identifier for the validation signature key. </p>
+   * @public
    */
-  signatureKeyId?: string;
+  signatureKeyId?: string | undefined;
 
   /**
    * <p> Represents any errors that occurred when validating the assessment report. </p>
+   * @public
    */
-  validationErrors?: string[];
-}
-
-export namespace ValidateAssessmentReportIntegrityResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidateAssessmentReportIntegrityResponse): any => ({
-    ...obj,
-  });
+  validationErrors?: string[] | undefined;
 }

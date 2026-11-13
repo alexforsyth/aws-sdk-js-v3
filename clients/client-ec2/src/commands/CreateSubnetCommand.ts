@@ -1,109 +1,182 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { CreateSubnetRequest, CreateSubnetResult } from "../models/models_1";
-import { deserializeAws_ec2CreateSubnetCommand, serializeAws_ec2CreateSubnetCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSubnetRequest, CreateSubnetResult } from "../models/models_2";
+import { CreateSubnet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSubnetCommand}.
+ */
 export interface CreateSubnetCommandInput extends CreateSubnetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSubnetCommand}.
+ */
 export interface CreateSubnetCommandOutput extends CreateSubnetResult, __MetadataBearer {}
 
 /**
- * <p>Creates a subnet in a specified VPC.</p>
- *         <p>You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you
- *             can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP
- *             addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the
- *             CIDR block of an existing subnet in the VPC.</p>
- *         <p>If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an
- *             IPv6 CIDR block that uses a /64 prefix length. </p>
- *         <important>
- *             <p>Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR
- *                 block. They're not available for use.</p>
- *         </important>
- *         <p>If you add more than one subnet to a VPC, they're set up in a star topology with a
+ * <p>Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block.
+ *             If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead.
+ *             For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both
+ *             an IPv4 CIDR block and an IPv6 CIDR block.</p>
+ *          <p>A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC.
+ *             After you create a subnet, you can't change its CIDR block.</p>
+ *          <p>The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and
+ *             a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and
+ *             the last IPv4 address in each subnet's CIDR block. They're not available for your use.</p>
+ *          <p>If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR
+ *             block with a subnet when you create it. </p>
+ *          <p>If you add more than one subnet to a VPC, they're set up in a star topology with a
  *             logical router in the middle.</p>
- *         <p>When you stop an instance in a subnet, it retains its private IPv4 address. It's
+ *          <p>When you stop an instance in a subnet, it retains its private IPv4 address. It's
  *             therefore possible to have a subnet with no running instances (they're all stopped), but
  *             no remaining IP addresses available.</p>
- *         <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and subnets</a> in the
- *                 <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html">Subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, CreateSubnetCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateSubnetCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateSubnetRequest
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   AvailabilityZone: "STRING_VALUE",
+ *   AvailabilityZoneId: "STRING_VALUE",
+ *   CidrBlock: "STRING_VALUE",
+ *   Ipv6CidrBlock: "STRING_VALUE",
+ *   OutpostArn: "STRING_VALUE",
+ *   VpcId: "STRING_VALUE", // required
+ *   Ipv6Native: true || false,
+ *   Ipv4IpamPoolId: "STRING_VALUE",
+ *   Ipv4NetmaskLength: Number("int"),
+ *   Ipv6IpamPoolId: "STRING_VALUE",
+ *   Ipv6NetmaskLength: Number("int"),
+ *   DryRun: true || false,
+ * };
  * const command = new CreateSubnetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSubnetResult
+ * //   Subnet: { // Subnet
+ * //     AvailabilityZoneId: "STRING_VALUE",
+ * //     EnableLniAtDeviceIndex: Number("int"),
+ * //     MapCustomerOwnedIpOnLaunch: true || false,
+ * //     CustomerOwnedIpv4Pool: "STRING_VALUE",
+ * //     OwnerId: "STRING_VALUE",
+ * //     AssignIpv6AddressOnCreation: true || false,
+ * //     Ipv6CidrBlockAssociationSet: [ // SubnetIpv6CidrBlockAssociationSet
+ * //       { // SubnetIpv6CidrBlockAssociation
+ * //         AssociationId: "STRING_VALUE",
+ * //         Ipv6CidrBlock: "STRING_VALUE",
+ * //         Ipv6CidrBlockState: { // SubnetCidrBlockState
+ * //           State: "associating" || "associated" || "disassociating" || "disassociated" || "failing" || "failed",
+ * //           StatusMessage: "STRING_VALUE",
+ * //         },
+ * //         Ipv6AddressAttribute: "public" || "private",
+ * //         IpSource: "amazon" || "byoip" || "none",
+ * //       },
+ * //     ],
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SubnetArn: "STRING_VALUE",
+ * //     OutpostArn: "STRING_VALUE",
+ * //     EnableDns64: true || false,
+ * //     Ipv6Native: true || false,
+ * //     PrivateDnsNameOptionsOnLaunch: { // PrivateDnsNameOptionsOnLaunch
+ * //       HostnameType: "ip-name" || "resource-name",
+ * //       EnableResourceNameDnsARecord: true || false,
+ * //       EnableResourceNameDnsAAAARecord: true || false,
+ * //     },
+ * //     BlockPublicAccessStates: { // BlockPublicAccessStates
+ * //       InternetGatewayBlockMode: "off" || "block-bidirectional" || "block-ingress",
+ * //     },
+ * //     Type: "STRING_VALUE",
+ * //     SubnetId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "unavailable" || "failed" || "failed-insufficient-capacity",
+ * //     VpcId: "STRING_VALUE",
+ * //     CidrBlock: "STRING_VALUE",
+ * //     AvailableIpAddressCount: Number("int"),
+ * //     AvailabilityZone: "STRING_VALUE",
+ * //     DefaultForAz: true || false,
+ * //     MapPublicIpOnLaunch: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateSubnetCommandInput - {@link CreateSubnetCommandInput}
+ * @returns {@link CreateSubnetCommandOutput}
  * @see {@link CreateSubnetCommandInput} for command's `input` shape.
  * @see {@link CreateSubnetCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To create a subnet
+ * ```javascript
+ * // This example creates a subnet in the specified VPC with the specified CIDR block. We recommend that you let us select an Availability Zone for you.
+ * const input = {
+ *   CidrBlock: "10.0.1.0/24",
+ *   VpcId: "vpc-a01106c2"
+ * };
+ * const command = new CreateSubnetCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   Subnet: {
+ *     AvailabilityZone: "us-west-2c",
+ *     AvailableIpAddressCount: 251,
+ *     CidrBlock: "10.0.1.0/24",
+ *     State: "pending",
+ *     SubnetId: "subnet-9d4a7b6c",
+ *     VpcId: "vpc-a01106c2"
+ *   }
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class CreateSubnetCommand extends $Command<
-  CreateSubnetCommandInput,
-  CreateSubnetCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSubnetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSubnetCommandInput, CreateSubnetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateSubnetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSubnetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateSubnetResult.filterSensitiveLog,
+export class CreateSubnetCommand extends command<CreateSubnetCommandInput, CreateSubnetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSubnet",
+  CreateSubnet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSubnetRequest;
+      output: CreateSubnetResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSubnetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateSubnetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSubnetCommandOutput> {
-    return deserializeAws_ec2CreateSubnetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSubnetCommandInput;
+      output: CreateSubnetCommandOutput;
+    };
+  };
 }

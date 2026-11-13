@@ -1,12 +1,17 @@
-import { lstatSync } from "fs";
+import { ReadStream, statSync } from "node:fs";
 
-import { ClientSharedValues } from "./runtimeConfig.shared";
+import { runtimeConfigShared as shared } from "./runtimeConfig.shared";
 
 /**
  * @internal
  */
-export const ClientDefaultValues = {
-  ...ClientSharedValues,
+export const runtimeConfig = {
+  ...shared,
   runtime: "node",
-  lstatSync,
+  // Use statSync (follows symlinks) rather than lstatSync so that the size of an
+  // fs.ReadStream opened on a symlink matches the target file the stream reads.
+  statSync,
+  isFileReadStream(f: unknown): f is ReadStream {
+    return f instanceof ReadStream;
+  },
 };

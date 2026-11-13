@@ -1,0 +1,20 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import { SearchJobsCommand, SearchJobsCommandInput, SearchJobsCommandOutput } from "../commands/SearchJobsCommand";
+import { MediaConvertClient } from "../MediaConvertClient";
+import type { MediaConvertPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateSearchJobs: (
+  config: MediaConvertPaginationConfiguration,
+  input: SearchJobsCommandInput,
+  ...rest: any[]
+) => Paginator<SearchJobsCommandOutput> = createPaginator<
+  MediaConvertPaginationConfiguration,
+  SearchJobsCommandInput,
+  SearchJobsCommandOutput
+>(MediaConvertClient, SearchJobsCommand, "NextToken", "NextToken", "MaxResults");

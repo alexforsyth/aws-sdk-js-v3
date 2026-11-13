@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudWatchEventsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchEventsClient";
-import { DescribeEventSourceRequest, DescribeEventSourceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEventSourceCommand,
-  serializeAws_json1_1DescribeEventSourceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventSourceRequest, DescribeEventSourceResponse } from "../models/models_0";
+import { DescribeEventSource$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventSourceCommand}.
+ */
 export interface DescribeEventSourceCommandInput extends DescribeEventSourceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventSourceCommand}.
+ */
 export interface DescribeEventSourceCommandOutput extends DescribeEventSourceResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,61 @@ export interface DescribeEventSourceCommandOutput extends DescribeEventSourceRes
  * ```javascript
  * import { CloudWatchEventsClient, DescribeEventSourceCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
  * // const { CloudWatchEventsClient, DescribeEventSourceCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * // import type { CloudWatchEventsClientConfig } from "@aws-sdk/client-cloudwatch-events";
+ * const config = {}; // type is CloudWatchEventsClientConfig
  * const client = new CloudWatchEventsClient(config);
+ * const input = { // DescribeEventSourceRequest
+ *   Name: "STRING_VALUE", // required
+ * };
  * const command = new DescribeEventSourceCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEventSourceResponse
+ * //   Arn: "STRING_VALUE",
+ * //   CreatedBy: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   ExpirationTime: new Date("TIMESTAMP"),
+ * //   Name: "STRING_VALUE",
+ * //   State: "PENDING" || "ACTIVE" || "DELETED",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventSourceCommandInput - {@link DescribeEventSourceCommandInput}
+ * @returns {@link DescribeEventSourceCommandOutput}
  * @see {@link DescribeEventSourceCommandInput} for command's `input` shape.
  * @see {@link DescribeEventSourceCommandOutput} for command's `response` shape.
- * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for CloudWatchEventsClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link CloudWatchEventsServiceException}
+ * <p>Base exception class for all service exceptions from CloudWatchEvents service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEventSourceCommand extends $Command<
-  DescribeEventSourceCommandInput,
-  DescribeEventSourceCommandOutput,
-  CloudWatchEventsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventSourceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudWatchEventsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventSourceCommandInput, DescribeEventSourceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudWatchEventsClient";
-    const commandName = "DescribeEventSourceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventSourceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEventSourceResponse.filterSensitiveLog,
+export class DescribeEventSourceCommand extends command<DescribeEventSourceCommandInput, DescribeEventSourceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEventSource",
+  DescribeEventSource$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventSourceRequest;
+      output: DescribeEventSourceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventSourceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEventSourceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventSourceCommandOutput> {
-    return deserializeAws_json1_1DescribeEventSourceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventSourceCommandInput;
+      output: DescribeEventSourceCommandOutput;
+    };
+  };
 }

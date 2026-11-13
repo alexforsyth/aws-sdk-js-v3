@@ -1,0 +1,1830 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 3.972.86 (2026-11-10)
+### Chores
+* **codegen:** sync for 2026 retry defaults ([#8415](https://github.com/aws/aws-sdk-js-v3/issues/8415)) ([4fd26c2](https://github.com/aws/aws-sdk-js-v3/commit/4fd26c205f8b01b7755b426c7149e4038690563f))
+
+
+
+# 3.972.85 (2026-11-08)
+### Chores
+* **codegen:** Upgrade to Smithy 1.74.1 ([#8407](https://github.com/aws/aws-sdk-js-v3/issues/8407)) ([bb818ca](https://github.com/aws/aws-sdk-js-v3/commit/bb818ca944e735d449b6f061141b91d92290f161))
+
+
+
+# 3.972.84 (2026-11-06)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.83 (2026-11-04)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.82 (2026-10-29)
+### Chores
+* **codegen:** sync to new smithy handler changes ([#8390](https://github.com/aws/aws-sdk-js-v3/issues/8390)) ([f393101](https://github.com/aws/aws-sdk-js-v3/commit/f393101c0e651bd0c9fda6ff24b7ede3b5e96869))
+
+
+
+# 3.972.81 (2026-10-29)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.80 (2026-10-28)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.79 (2026-10-26)
+### Chores
+* **codegen:** sync for service default socket timeout and RPC v2 JSON ([#8378](https://github.com/aws/aws-sdk-js-v3/issues/8378)) ([f9d9119](https://github.com/aws/aws-sdk-js-v3/commit/f9d9119f02ea9ed0e0c2ab486b308cac15139651))
+
+
+
+# 3.972.78 (2026-10-21)
+### Chores
+* **codegen:** sync for JSON string serializer buffer fix and retryMode docs link ([#8373](https://github.com/aws/aws-sdk-js-v3/issues/8373)) ([5f53137](https://github.com/aws/aws-sdk-js-v3/commit/5f53137d303161693250579a6a6dd3c501655276))
+
+
+
+# 3.972.77 (2026-10-15)
+### Chores
+* **codegen:** sync for JSON codec and schema server plugin ([#8353](https://github.com/aws/aws-sdk-js-v3/issues/8353)) ([3e350b5](https://github.com/aws/aws-sdk-js-v3/commit/3e350b59848e2bffcfe4d34a628e7adc136a6a55))
+
+
+
+# 3.972.76 (2026-10-12)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.75 (2026-10-08)
+### Chores
+* **codegen:** sync for endpoint cache fix and pre-schema error fallback ([#8341](https://github.com/aws/aws-sdk-js-v3/issues/8341)) ([5773a75](https://github.com/aws/aws-sdk-js-v3/commit/5773a7515472dbdf2760c61e4a462b71800c50e7))
+
+
+
+# 3.972.74 (2026-09-22)
+### Chores
+* **codegen:** sync for MetricsRecorder support and core error/retry fixes ([#8312](https://github.com/aws/aws-sdk-js-v3/issues/8312)) ([9a10476](https://github.com/aws/aws-sdk-js-v3/commit/9a104768684e8f22d4373fcc5d910711e62676d6))
+
+
+
+# 3.972.73 (2026-09-09)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.72 (2026-08-20)
+### Chores
+* **codegen:** update to sync with the latest smithy-ts ([#8272](https://github.com/aws/aws-sdk-js-v3/issues/8272)) ([8369ada](https://github.com/aws/aws-sdk-js-v3/commit/8369ada75d60056e24e1ee8bca20f16ce2faea93))
+
+
+
+# 3.972.71 (2026-08-14)
+### Chores
+* upgrade to typescript 7 ([#8264](https://github.com/aws/aws-sdk-js-v3/issues/8264)) ([ca81fbb](https://github.com/aws/aws-sdk-js-v3/commit/ca81fbb7398345aa31482dd7aa1971bccf278989))
+
+
+
+# 3.972.70 (2026-08-11)
+### Chores
+* upgrade to typescript 6 ([#8257](https://github.com/aws/aws-sdk-js-v3/issues/8257)) ([edabd4a](https://github.com/aws/aws-sdk-js-v3/commit/edabd4a5228e259e9f3352cd47414069db755188))
+
+
+
+# 3.972.69 (2026-08-04)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.68 (2026-08-03)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.67 (2026-07-31)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.66 (2026-07-29)
+### Chores
+* **codegen:** sync for CBOR v2 codec ([#8233](https://github.com/aws/aws-sdk-js-v3/issues/8233)) ([e40ebac](https://github.com/aws/aws-sdk-js-v3/commit/e40ebac154aa3b00115df867d7b59f0841ffc24f))
+
+
+
+# 3.972.65 (2026-07-28)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.64 (2026-07-27)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.63 (2026-07-23)
+### Chores
+* **codegen:** sync for CBOR large map deser, event-streams exceptions, endpoints features, ChecksumStream fix ([#8218](https://github.com/aws/aws-sdk-js-v3/issues/8218)) ([bb564e5](https://github.com/aws/aws-sdk-js-v3/commit/bb564e5734205dc1ba99d5c33ce49918a538cb23))
+
+
+
+# 3.972.62 (2026-07-21)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.61 (2026-07-15)
+### Chores
+* **codegen:** sync to use typesVersions entries for submodules ([#8195](https://github.com/aws/aws-sdk-js-v3/issues/8195)) ([d43e5bf](https://github.com/aws/aws-sdk-js-v3/commit/d43e5bfc231fee6cbcf6024b6ed6b69e3864068c))
+* migrate eslint/prettier to oxlint/oxfmt ([#8192](https://github.com/aws/aws-sdk-js-v3/issues/8192)) ([7d14409](https://github.com/aws/aws-sdk-js-v3/commit/7d144094844d078a2ec15c6ecbd054f9e127fa11))
+
+
+
+# 3.972.60 (2026-07-14)
+### Chores
+* **codegen:** sync for codegen and include OAuthIAM operation for signin list ([#8190](https://github.com/aws/aws-sdk-js-v3/issues/8190)) ([a20c28d](https://github.com/aws/aws-sdk-js-v3/commit/a20c28def4c915546f0579dbfa50a736bd9fae57))
+
+
+
+# 3.972.59 (2026-07-08)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.58 (2026-07-08)
+### Chores
+* **codegen:** sync for isolatedModules tsconfig and server metrics recorder ([#8174](https://github.com/aws/aws-sdk-js-v3/issues/8174)) ([f8b4987](https://github.com/aws/aws-sdk-js-v3/commit/f8b4987c1d5b52966d536b36200496ea490327b1))
+* **deps:** bump '@smithy/core' to ^3.29.1 ([#8167](https://github.com/aws/aws-sdk-js-v3/issues/8167)) ([8f43c79](https://github.com/aws/aws-sdk-js-v3/commit/8f43c790d2d05f793e719773f74ee10e0f49f00d))
+
+
+
+# 3.972.57 (2026-07-07)
+### Bug Fixes
+* **credential-provider-http:** fix token and URI path priority resolution ([#8159](https://github.com/aws/aws-sdk-js-v3/issues/8159)) ([e9e857d](https://github.com/aws/aws-sdk-js-v3/commit/e9e857d324d216f705e5b2fe0e8f8c535e55d7fb))
+
+
+
+# 3.972.56 (2026-07-06)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.55 (2026-07-02)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.54 (2026-07-01)
+### Chores
+* **codegen:** sync for thinner command classes, endpoint parameter type fix ([#8136](https://github.com/aws/aws-sdk-js-v3/issues/8136)) ([c39b676](https://github.com/aws/aws-sdk-js-v3/commit/c39b6765a3b49a48a9e2f4000cc6e97e82f4ae2e))
+
+
+
+# 3.972.53 (2026-06-30)
+### Chores
+* **codegen:** sync for internal checksum impls and IMDSv2 region fallback ([#8134](https://github.com/aws/aws-sdk-js-v3/issues/8134)) ([c4b42a4](https://github.com/aws/aws-sdk-js-v3/commit/c4b42a44f7f9b7eaa329fcd2c4961bec6334f111))
+
+
+
+# 3.972.52 (2026-06-29)
+### Chores
+* **codegen:** sync for checksum impls, hostLabel validation ([#8127](https://github.com/aws/aws-sdk-js-v3/issues/8127)) ([aa94fa0](https://github.com/aws/aws-sdk-js-v3/commit/aa94fa0469fa7e0933a4b36b4e6329fa88ee33ab))
+* **scripts:** drop bundler support in dist-cjs (use dist-es instead) ([#8124](https://github.com/aws/aws-sdk-js-v3/issues/8124)) ([775bc03](https://github.com/aws/aws-sdk-js-v3/commit/775bc034fad8cb5587434718133ce592da4e1b3e))
+* **codegen:** sync for CBOR serde performance and retry fixes ([#8125](https://github.com/aws/aws-sdk-js-v3/issues/8125)) ([b6d6a75](https://github.com/aws/aws-sdk-js-v3/commit/b6d6a759f15f2c36745fb85905a90533998cae0e))
+
+
+
+# 3.972.51 (2026-06-22)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.50 (2026-06-17)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.49 (2026-06-13)
+### Chores
+* **scripts:** tuning the build graph ([#8095](https://github.com/aws/aws-sdk-js-v3/issues/8095)) ([67981c5](https://github.com/aws/aws-sdk-js-v3/commit/67981c5a65d6dd797a065df034a8d0fcdaa9b7bd))
+
+
+
+# 3.972.48 (2026-06-09)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.47 (2026-06-08)
+### Chores
+* **scripts:** update pkg json linting ([#8082](https://github.com/aws/aws-sdk-js-v3/issues/8082)) ([86792c5](https://github.com/aws/aws-sdk-js-v3/commit/86792c5e3b9c0b697161a5a14ef119153d1c17f5))
+
+
+
+# 3.972.46 (2026-06-05)
+### Chores
+* update author URL in package.json ([#8080](https://github.com/aws/aws-sdk-js-v3/issues/8080)) ([9bd1a86](https://github.com/aws/aws-sdk-js-v3/commit/9bd1a86b9bec0f69c58dcfdda481c9e1797dd73f))
+
+
+
+# 3.972.45 (2026-06-03)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.44 (2026-06-01)
+### Chores
+* **codegen:** sync for adaptive retry fix, EAI_AGAIN transient error ([#8067](https://github.com/aws/aws-sdk-js-v3/issues/8067)) ([6b082a6](https://github.com/aws/aws-sdk-js-v3/commit/6b082a6526a0bb0ba213bb16b4c97a0b1134bc45))
+
+
+
+# 3.972.43 (2026-05-27)
+### Chores
+* **codegen:** sync for cyclic file dependency fixes ([#8051](https://github.com/aws/aws-sdk-js-v3/issues/8051)) ([7ae617c](https://github.com/aws/aws-sdk-js-v3/commit/7ae617c43c11caf24ee171cb5f6eede64d5eeba7))
+
+
+
+# 3.972.42 (2026-05-26)
+### Bug Fixes
+* **credential-provider-http:** close sockets after connection attempts ([#7995](https://github.com/aws/aws-sdk-js-v3/issues/7995)) ([a0b25e1](https://github.com/aws/aws-sdk-js-v3/commit/a0b25e152e01a0a1186987f8abb3240142fa5427))
+
+
+
+# 3.972.41 (2026-05-20)
+### Chores
+* **codegen:** update @smithy dependencies ([#8038](https://github.com/aws/aws-sdk-js-v3/issues/8038)) ([0d6242d](https://github.com/aws/aws-sdk-js-v3/commit/0d6242dc938f36ac77e337d39f577e8727f87926))
+
+
+
+# 3.972.40 (2026-05-18)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.39 (2026-05-14)
+### Chores
+* **codegen:** sync for browser bundle fixes ([#8022](https://github.com/aws/aws-sdk-js-v3/issues/8022)) ([eabae7d](https://github.com/aws/aws-sdk-js-v3/commit/eabae7d848238fedb6336c2f2d13b81c6cd9d146))
+
+
+
+# 3.972.38 (2026-05-14)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.37 (2026-05-12)
+### Chores
+* **codegen:** dependency version bump ([#8008](https://github.com/aws/aws-sdk-js-v3/issues/8008)) ([9ce20f6](https://github.com/aws/aws-sdk-js-v3/commit/9ce20f6d16352cd5747d9555e2b75e9462ea8ae9))
+* **scripts:** add submodule variant api surface parity linting ([#8006](https://github.com/aws/aws-sdk-js-v3/issues/8006)) ([3361fb2](https://github.com/aws/aws-sdk-js-v3/commit/3361fb26a1fbe97fcad0e8be0c272ccf24470a64))
+* update smithy/core imports ([#7979](https://github.com/aws/aws-sdk-js-v3/issues/7979)) ([acffbf9](https://github.com/aws/aws-sdk-js-v3/commit/acffbf906165501879a9e57b4f1b63deecbe63ea))
+
+
+
+# 3.972.36 (2026-05-01)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.35 (2026-04-29)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.34 (2026-04-27)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.33 (2026-04-23)
+### Chores
+* **codegen:** sync for http2 session closure, retry longpoll backoff, and fast-xml-parser version bump ([#7958](https://github.com/aws/aws-sdk-js-v3/issues/7958)) ([107aefc](https://github.com/aws/aws-sdk-js-v3/commit/107aefc4d41379a56836ade376f27eef23db8d43))
+
+
+
+# 3.972.32 (2026-04-22)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.31 (2026-04-20)
+### Chores
+* **codegen:** sync for http2 session concurrency fixes ([#7942](https://github.com/aws/aws-sdk-js-v3/issues/7942)) ([273ad5b](https://github.com/aws/aws-sdk-js-v3/commit/273ad5be3adc5288e480655de1c5887a38540fe4))
+
+
+
+# 3.972.30 (2026-04-20)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.29 (2026-04-17)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.28 (2026-04-16)
+### Chores
+* upgrade smithy to 1.69.0 ([#7932](https://github.com/aws/aws-sdk-js-v3/issues/7932)) ([560d987](https://github.com/aws/aws-sdk-js-v3/commit/560d9878471409e943a80ac2979e7fc8c2fff834))
+
+
+
+# 3.972.27 (2026-04-07)
+### Chores
+* **codegen:** update for sparse types and retry 2.1 updates ([#7916](https://github.com/aws/aws-sdk-js-v3/issues/7916)) ([b19357a](https://github.com/aws/aws-sdk-js-v3/commit/b19357a7a6cac4cbe040a6ac429102cfbc378b1e))
+
+
+
+# 3.972.26 (2026-03-30)
+### Chores
+* **codegen:** update smithy package versions ([#7903](https://github.com/aws/aws-sdk-js-v3/issues/7903)) ([c702a75](https://github.com/aws/aws-sdk-js-v3/commit/c702a7595037829166db776cffdfea785588d78a))
+
+
+
+# 3.972.25 (2026-03-26)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.24 (2026-03-23)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.23 (2026-03-20)
+### Chores
+* bump smithy versions ([414aa0d](https://github.com/aws/aws-sdk-js-v3/commit/414aa0d1c8ded23c68c6652e494078eae6a3a1d9))
+
+
+
+# 3.972.22 (2026-03-19)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.21 (2026-03-18)
+### Chores
+* **codegen:** smithy-aws-typescript-codegen 0.47.0 ([#7854](https://github.com/aws/aws-sdk-js-v3/issues/7854)) ([950b0c2](https://github.com/aws/aws-sdk-js-v3/commit/950b0c289001862971810817e57c2adab6313140))
+
+
+
+# 3.972.20 (2026-03-13)
+### Chores
+* **codegen:** sync for retry strategy lifecycle fix ([#7842](https://github.com/aws/aws-sdk-js-v3/issues/7842)) ([7bf8888](https://github.com/aws/aws-sdk-js-v3/commit/7bf8888b2423d2342ea2b689532e526715ec1d50))
+
+
+
+# 3.972.19 (2026-03-09)
+### Tests
+* **snapshot-testing:** implement response snapshots ([#7803](https://github.com/aws/aws-sdk-js-v3/issues/7803)) ([2b96330](https://github.com/aws/aws-sdk-js-v3/commit/2b96330d9048ca3df807a4775da859f76d041554))
+
+
+
+# 3.972.18 (2026-03-05)
+### Chores
+* bump '@smithy/*' dependencies ([#7822](https://github.com/aws/aws-sdk-js-v3/issues/7822)) ([8ddd544](https://github.com/aws/aws-sdk-js-v3/commit/8ddd54420b62212cf3d797050e924efba1fada28))
+* set downlevel types to be used in typescript@'<4.5' ([#7817](https://github.com/aws/aws-sdk-js-v3/issues/7817)) ([03dad66](https://github.com/aws/aws-sdk-js-v3/commit/03dad66b98363f09d1f0984b670be110caea8f62))
+
+
+
+# 3.972.17 (2026-03-04)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.16 (2026-03-03)
+### Chores
+* **codegen:** upgrade smithy 1.68.0 ([#7806](https://github.com/aws/aws-sdk-js-v3/issues/7806)) ([ab9e775](https://github.com/aws/aws-sdk-js-v3/commit/ab9e775920c7900a2759c22385091aa88eb6ee15))
+
+
+
+# 3.972.15 (2026-02-25)
+### Chores
+* **packages:** reapply eslint rules ([#7789](https://github.com/aws/aws-sdk-js-v3/issues/7789)) ([ab81c73](https://github.com/aws/aws-sdk-js-v3/commit/ab81c738436db219e5163ccaab953805776b33d6))
+
+
+
+# 3.972.14 (2026-02-24)
+### Chores
+* **codegen:** sync for checksum algorithm extensions ([#7781](https://github.com/aws/aws-sdk-js-v3/issues/7781)) ([ae4f994](https://github.com/aws/aws-sdk-js-v3/commit/ae4f994f679b8814d2ce6ba121fd1ffa38df9a99))
+
+
+
+# 3.972.13 (2026-02-23)
+### Chores
+* **codegen:** sync for checksum stream backpressure ([#7776](https://github.com/aws/aws-sdk-js-v3/issues/7776)) ([14fc571](https://github.com/aws/aws-sdk-js-v3/commit/14fc57173714be0bca229b541db383219620afd8))
+
+
+
+# 3.972.12 (2026-02-23)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.11 (2026-02-17)
+### Chores
+* **codegen:** fix undefined http binding top level members ([#7741](https://github.com/aws/aws-sdk-js-v3/issues/7741)) ([4b02642](https://github.com/aws/aws-sdk-js-v3/commit/4b0264205571fb92738e0304838377aa8d98394c))
+
+
+
+# 3.972.10 (2026-02-13)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.9 (2026-02-12)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.8 (2026-02-10)
+### Chores
+* **codegen:** update for compositeErrorRegistries ([#7728](https://github.com/aws/aws-sdk-js-v3/issues/7728)) ([d20ea16](https://github.com/aws/aws-sdk-js-v3/commit/d20ea16f8069517b7dc02c62f39afea11423f061))
+
+
+
+# 3.972.7 (2026-02-05)
+### Chores
+* **codegen:** generate caret versions for aws-sdk dependencies ([#7714](https://github.com/aws/aws-sdk-js-v3/issues/7714)) ([5682d09](https://github.com/aws/aws-sdk-js-v3/commit/5682d095dd5d38f16b40296da0497a93f1ffbec3))
+
+
+
+# 3.972.6 (2026-02-03)
+### Chores
+* **credential-provider-http:** update dependencies.
+
+
+
+# 3.972.5 (2026-01-30)
+### Chores
+* use yarn workspace versioning for monorepo packages ([#7693](https://github.com/aws/aws-sdk-js-v3/issues/7693)) ([b951130](https://github.com/aws/aws-sdk-js-v3/commit/b951130e92a694d06656632ec6ccc940cbd8fb3f))
+
+
+
+# 3.972.4 (2026-01-27)
+### Chores
+* **codegen:** update for aggregated paginators and waiters ([#7685](https://github.com/aws/aws-sdk-js-v3/issues/7685)) ([024c073](https://github.com/aws/aws-sdk-js-v3/commit/024c073179273a46703ed5bf371006fc48e6ebee))
+
+
+
+# 3.972.3 (2026-01-25)
+### Chores
+* **packages-internal:** update metadata url paths ([#7679](https://github.com/aws/aws-sdk-js-v3/issues/7679)) ([c3a351c](https://github.com/aws/aws-sdk-js-v3/commit/c3a351c1fdbb8e8124ddadfd07a2d29f88ec47f1))
+
+
+
+# 3.972.2 (2026-01-23)
+### Chores
+* **codegen:** upgrade smithy to 1.66.0 ([#7678](https://github.com/aws/aws-sdk-js-v3/issues/7678)) ([784b9f3](https://github.com/aws/aws-sdk-js-v3/commit/784b9f3d2907de5396cd42621028ef9c7f37402d))
+
+
+
+# 3.972.1 (2026-01-21)
+### Chores
+* **packages:** move package folders for internal pkgs ([#7670](https://github.com/aws/aws-sdk-js-v3/issues/7670)) ([ce66606](https://github.com/aws/aws-sdk-js-v3/commit/ce66606d7028a9a2841fc27acdd4bab3a0917546))
+
+
+
+# [3.972.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.971.0...v3.972.0) (2026-01-20)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.970.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.969.0...v3.970.0) (2026-01-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.969.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.968.0...v3.969.0) (2026-01-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.968.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.967.0...v3.968.0) (2026-01-13)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.967.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.966.0...v3.967.0) (2026-01-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.966.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.965.0...v3.966.0) (2026-01-09)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.965.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.964.0...v3.965.0) (2026-01-07)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.964.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.963.0...v3.964.0) (2026-01-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.957.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.956.0...v3.957.0) (2025-12-22)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.956.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.955.0...v3.956.0) (2025-12-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.954.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.953.0...v3.954.0) (2025-12-17)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.953.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.952.0...v3.953.0) (2025-12-16)
+
+
+### Features
+
+* **clients:** allow protocol selection by class constructor ([#7568](https://github.com/aws/aws-sdk-js-v3/issues/7568)) ([5c5fd2e](https://github.com/aws/aws-sdk-js-v3/commit/5c5fd2e627109cbcdb40ecf0947a5b638d517101))
+
+
+
+
+
+# [3.947.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.946.0...v3.947.0) (2025-12-08)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.946.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.945.0...v3.946.0) (2025-12-05)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.943.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.942.0...v3.943.0) (2025-12-02)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.940.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.939.0...v3.940.0) (2025-11-25)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.936.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.935.0...v3.936.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.935.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.934.0...v3.935.0) (2025-11-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.934.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.933.0...v3.934.0) (2025-11-18)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.932.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.931.0...v3.932.0) (2025-11-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.931.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.930.0...v3.931.0) (2025-11-13)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.930.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.929.0...v3.930.0) (2025-11-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.928.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.927.0...v3.928.0) (2025-11-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.927.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.926.0...v3.927.0) (2025-11-07)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.926.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.925.0...v3.926.0) (2025-11-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.922.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.921.0...v3.922.0) (2025-10-31)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.921.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.920.0...v3.921.0) (2025-10-30)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.920.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.919.0...v3.920.0) (2025-10-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.916.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.915.0...v3.916.0) (2025-10-23)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.914.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.913.0...v3.914.0) (2025-10-21)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.911.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.910.0...v3.911.0) (2025-10-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.910.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.909.0...v3.910.0) (2025-10-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.908.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.907.0...v3.908.0) (2025-10-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.907.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.906.0...v3.907.0) (2025-10-09)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.906.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.905.0...v3.906.0) (2025-10-08)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.901.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.900.0...v3.901.0) (2025-10-01)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.899.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.898.0...v3.899.0) (2025-09-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.896.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.895.0...v3.896.0) (2025-09-24)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.894.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.893.0...v3.894.0) (2025-09-22)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.893.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.892.0...v3.893.0) (2025-09-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.890.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.889.0...v3.890.0) (2025-09-16)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.888.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.887.0...v3.888.0) (2025-09-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.887.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.886.0...v3.887.0) (2025-09-11)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.883.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.882.0...v3.883.0) (2025-09-05)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.882.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.881.0...v3.882.0) (2025-09-04)
+
+
+### Bug Fixes
+
+* **credential-provider-node:** fix logger binding issue ([#7302](https://github.com/aws/aws-sdk-js-v3/issues/7302)) ([b5ca7c4](https://github.com/aws/aws-sdk-js-v3/commit/b5ca7c4690201dc1182a2e29ee89f087ba4728fd))
+
+
+
+
+
+# [3.879.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.878.0...v3.879.0) (2025-08-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.876.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.875.0...v3.876.0) (2025-08-26)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.873.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.872.0...v3.873.0) (2025-08-21)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.864.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.863.0...v3.864.0) (2025-08-08)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.863.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.862.0...v3.863.0) (2025-08-07)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.862.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.861.0...v3.862.0) (2025-08-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.858.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.857.0...v3.858.0) (2025-07-31)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.857.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.856.0...v3.857.0) (2025-07-30)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.856.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.855.0...v3.856.0) (2025-07-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.855.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.854.0...v3.855.0) (2025-07-28)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.846.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.845.0...v3.846.0) (2025-07-16)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.845.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.844.0...v3.845.0) (2025-07-15)
+
+
+### Bug Fixes
+
+* **clients:** upgrade @smithy/middleware-endpoint to fix file/env endpoint resolution ([#7206](https://github.com/aws/aws-sdk-js-v3/issues/7206)) ([37a6275](https://github.com/aws/aws-sdk-js-v3/commit/37a627510bc53ad0ce8d3ef10a2a5ec8ad195ee2))
+
+
+
+
+
+# [3.844.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.843.0...v3.844.0) (2025-07-09)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.840.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.839.0...v3.840.0) (2025-06-30)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.839.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.838.0...v3.839.0) (2025-06-27)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.835.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.834.0...v3.835.0) (2025-06-23)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.826.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.825.0...v3.826.0) (2025-06-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.825.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.824.0...v3.825.0) (2025-06-05)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.823.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.822.0...v3.823.0) (2025-06-03)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.821.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.820.0...v3.821.0) (2025-05-30)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.816.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.815.0...v3.816.0) (2025-05-22)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.812.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.811.0...v3.812.0) (2025-05-16)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.810.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.809.0...v3.810.0) (2025-05-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.808.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.807.0...v3.808.0) (2025-05-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.806.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.805.0...v3.806.0) (2025-05-08)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.804.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.803.0...v3.804.0) (2025-05-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.799.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.798.0...v3.799.0) (2025-04-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.798.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.797.0...v3.798.0) (2025-04-28)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.796.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.795.0...v3.796.0) (2025-04-24)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.775.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.774.0...v3.775.0) (2025-03-25)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.774.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.773.0...v3.774.0) (2025-03-24)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.758.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.757.0...v3.758.0) (2025-02-27)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.750.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.749.0...v3.750.0) (2025-02-17)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.749.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.748.0...v3.749.0) (2025-02-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.744.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.743.0...v3.744.0) (2025-02-07)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.734.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.733.0...v3.734.0) (2025-01-23)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.731.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.730.0...v3.731.0) (2025-01-17)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.730.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.729.0...v3.730.0) (2025-01-16)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.723.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.722.0...v3.723.0) (2025-01-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.716.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.715.0...v3.716.0) (2024-12-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.714.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.713.0...v3.714.0) (2024-12-17)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.713.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.712.0...v3.713.0) (2024-12-16)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.709.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.708.0...v3.709.0) (2024-12-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.696.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.695.0...v3.696.0) (2024-11-19)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.693.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.692.0...v3.693.0) (2024-11-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.692.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.691.0...v3.692.0) (2024-11-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.691.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.690.0...v3.691.0) (2024-11-13)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.686.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.685.0...v3.686.0) (2024-11-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.679.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.678.0...v3.679.0) (2024-10-24)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.678.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.677.0...v3.678.0) (2024-10-23)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.677.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.676.0...v3.677.0) (2024-10-22)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.667.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.666.0...v3.667.0) (2024-10-08)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.666.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.665.0...v3.666.0) (2024-10-07)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.664.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.663.0...v3.664.0) (2024-10-03)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.662.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.661.0...v3.662.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* **s3-request-presigner:** enable overriding hoistable headers ([#6535](https://github.com/aws/aws-sdk-js-v3/issues/6535)) ([3c2e59c](https://github.com/aws/aws-sdk-js-v3/commit/3c2e59cfddd753d1c9739332b9195ae5eadde4df))
+
+
+
+
+
+## [3.658.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.658.0...v3.658.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **clients:** allow empty string field values for headers ([#6511](https://github.com/aws/aws-sdk-js-v3/issues/6511)) ([1273ff3](https://github.com/aws/aws-sdk-js-v3/commit/1273ff317071749cfeb88caad9df7492256c03e2))
+
+
+
+
+
+# [3.654.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.653.0...v3.654.0) (2024-09-18)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.649.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.648.0...v3.649.0) (2024-09-10)
+
+
+### Features
+
+* **endpoints:** codegen sync for request creation performance improvements ([#6449](https://github.com/aws/aws-sdk-js-v3/issues/6449)) ([c8e8f28](https://github.com/aws/aws-sdk-js-v3/commit/c8e8f28d0714c8165162e1411b5f740ba729a93a))
+
+
+
+
+
+# [3.635.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.634.0...v3.635.0) (2024-08-20)
+
+
+### Features
+
+* **codegen:** add Smithy RPCv2 CBOR to list of protocols ([#6096](https://github.com/aws/aws-sdk-js-v3/issues/6096)) ([5154d4f](https://github.com/aws/aws-sdk-js-v3/commit/5154d4f19bc77a7bad075b35ce135d3b5f60ad1d))
+
+
+
+
+
+# [3.622.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.621.0...v3.622.0) (2024-08-01)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.621.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.620.1...v3.621.0) (2024-07-30)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.620.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.619.0...v3.620.0) (2024-07-25)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.616.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.615.0...v3.616.0) (2024-07-18)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.614.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.613.0...v3.614.0) (2024-07-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.613.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.612.0...v3.613.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* **middleware-eventstream:** lowercase headers more consistently ([#6259](https://github.com/aws/aws-sdk-js-v3/issues/6259)) ([1965eb0](https://github.com/aws/aws-sdk-js-v3/commit/1965eb04406c5811173745f7493d1f653e8e3488))
+
+
+
+
+
+# [3.609.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.608.0...v3.609.0) (2024-07-02)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.598.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.597.0...v3.598.0) (2024-06-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.596.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.595.0...v3.596.0) (2024-06-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.587.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.586.0...v3.587.0) (2024-05-30)
+
+
+### Bug Fixes
+
+* **credentials-provider-ini:** include general http provider when sourcing EcsContainer credentials ([#6132](https://github.com/aws/aws-sdk-js-v3/issues/6132)) ([8cdaf0a](https://github.com/aws/aws-sdk-js-v3/commit/8cdaf0a12a0352687e50f299939d2c9ed76c1f10))
+
+
+
+
+
+# [3.582.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.581.0...v3.582.0) (2024-05-22)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.577.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.576.0...v3.577.0) (2024-05-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.575.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.574.0...v3.575.0) (2024-05-13)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.568.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.567.0...v3.568.0) (2024-05-02)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.567.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.566.0...v3.567.0) (2024-05-01)
+
+
+### Features
+
+* end support for Node.js 14.x ([#6034](https://github.com/aws/aws-sdk-js-v3/issues/6034)) ([d196411](https://github.com/aws/aws-sdk-js-v3/commit/d19641119f07d62c29f12348f448cd834d841533))
+
+
+
+
+
+# [3.552.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.551.0...v3.552.0) (2024-04-09)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.535.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.534.0...v3.535.0) (2024-03-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.533.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.532.0...v3.533.0) (2024-03-13)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.525.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.524.0...v3.525.0) (2024-02-29)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.523.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.522.0...v3.523.0) (2024-02-27)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.521.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.520.0...v3.521.0) (2024-02-23)
+
+
+### Features
+
+* requestHandler ctor param pass-through ([#5820](https://github.com/aws/aws-sdk-js-v3/issues/5820)) ([9fec71d](https://github.com/aws/aws-sdk-js-v3/commit/9fec71d1933cd8e3db118c164bca16edc2305532))
+
+
+
+
+
+# [3.515.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.514.0...v3.515.0) (2024-02-15)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.511.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.510.0...v3.511.0) (2024-02-09)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+## [3.503.1](https://github.com/aws/aws-sdk-js-v3/compare/v3.503.0...v3.503.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* **credential-provider-node:** add fromHttp credential provider to default chain ([#5739](https://github.com/aws/aws-sdk-js-v3/issues/5739)) ([6b99b0b](https://github.com/aws/aws-sdk-js-v3/commit/6b99b0b83a6c57072ceff169aabe96ee34e1cf05))
+
+
+
+
+
+# [3.502.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.501.0...v3.502.0) (2024-01-29)
+
+
+### Features
+
+* **credential-providers:** lazy load STS & SSO clients in credential providers ([#5681](https://github.com/aws/aws-sdk-js-v3/issues/5681)) ([d27301d](https://github.com/aws/aws-sdk-js-v3/commit/d27301d48f3e75fdaccabf58f779f0b33a70664e))
+
+
+
+
+
+# [3.496.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.495.0...v3.496.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* get full list of exports for esm compat in dist-cjs ([#5694](https://github.com/aws/aws-sdk-js-v3/issues/5694)) ([5d26da6](https://github.com/aws/aws-sdk-js-v3/commit/5d26da6d07b593ae286ca674fb3cbff7c833cbb0))
+
+
+
+
+
+# [3.495.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.494.0...v3.495.0) (2024-01-18)
+
+
+### Features
+
+* use bundled dist-cjs build ([#5687](https://github.com/aws/aws-sdk-js-v3/issues/5687)) ([5f79e22](https://github.com/aws/aws-sdk-js-v3/commit/5f79e225e32f0b2ed5b432ae4e4108663eb0acfb))
+
+
+
+
+
+# [3.489.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.488.0...v3.489.0) (2024-01-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.485.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.484.0...v3.485.0) (2024-01-03)
+
+
+### Features
+
+* **credential-providers:** add credentialScope field ([#5606](https://github.com/aws/aws-sdk-js-v3/issues/5606)) ([04c1459](https://github.com/aws/aws-sdk-js-v3/commit/04c14592898ac63ed87d47f2a53320ccaa991083))
+
+
+
+
+
+# [3.481.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.480.0...v3.481.0) (2023-12-26)
+
+
+### Features
+
+* codegen for command class builder ([#5604](https://github.com/aws/aws-sdk-js-v3/issues/5604)) ([4835de4](https://github.com/aws/aws-sdk-js-v3/commit/4835de4ebb8f302ae1e838ac1efaf5f12384910d))
+
+
+
+
+
+# [3.468.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.467.0...v3.468.0) (2023-12-06)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.465.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.464.0...v3.465.0) (2023-12-01)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.460.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.459.0...v3.460.0) (2023-11-28)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.451.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.450.0...v3.451.0) (2023-11-14)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.449.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.448.0...v3.449.0) (2023-11-10)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.435.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.434.0...v3.435.0) (2023-10-24)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.433.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.432.0...v3.433.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* **codegen:** use partial record for enum keyed types ([#5391](https://github.com/aws/aws-sdk-js-v3/issues/5391)) ([70c2107](https://github.com/aws/aws-sdk-js-v3/commit/70c2107b970d035bfedb211278c88fdbfc2e5334))
+* **credential-provider-http:** add undeclared dependency ([#5395](https://github.com/aws/aws-sdk-js-v3/issues/5395)) ([b926b5b](https://github.com/aws/aws-sdk-js-v3/commit/b926b5b32a6d7febc9f051c0b4b5eede090a2b64))
+
+
+
+
+
+# [3.428.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.427.0...v3.428.0) (2023-10-12)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.425.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.424.0...v3.425.0) (2023-10-04)
+
+**Note:** Version bump only for package @aws-sdk/credential-provider-http
+
+
+
+
+
+# [3.423.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.422.0...v3.423.0) (2023-10-02)
+
+
+### Bug Fixes
+
+* **credential-provider-http:** use alternate browser entry point ([#5277](https://github.com/aws/aws-sdk-js-v3/issues/5277)) ([a3f0754](https://github.com/aws/aws-sdk-js-v3/commit/a3f07541d8e560c3dce38a621ae2670410054053))
+
+
+
+
+
+# [3.422.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.421.0...v3.422.0) (2023-09-28)
+
+
+### Features
+
+* **credential-providers:** add fromHttp credential provider ([#5256](https://github.com/aws/aws-sdk-js-v3/issues/5256)) ([c720c1c](https://github.com/aws/aws-sdk-js-v3/commit/c720c1ca02d6cdb73139ce63cf21878ae4bfb90c))

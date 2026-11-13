@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeTapeRecoveryPointsCommand,
   DescribeTapeRecoveryPointsCommandInput,
   DescribeTapeRecoveryPointsCommandOutput,
 } from "../commands/DescribeTapeRecoveryPointsCommand";
-import { StorageGateway } from "../StorageGateway";
 import { StorageGatewayClient } from "../StorageGatewayClient";
-import { StorageGatewayPaginationConfiguration } from "./Interfaces";
+import type { StorageGatewayPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: StorageGatewayClient,
-  input: DescribeTapeRecoveryPointsCommandInput,
-  ...args: any
-): Promise<DescribeTapeRecoveryPointsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeTapeRecoveryPointsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: StorageGateway,
-  input: DescribeTapeRecoveryPointsCommandInput,
-  ...args: any
-): Promise<DescribeTapeRecoveryPointsCommandOutput> => {
-  // @ts-ignore
-  return await client.describeTapeRecoveryPoints(input, ...args);
-};
-export async function* paginateDescribeTapeRecoveryPoints(
+export const paginateDescribeTapeRecoveryPoints: (
   config: StorageGatewayPaginationConfiguration,
   input: DescribeTapeRecoveryPointsCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeTapeRecoveryPointsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeTapeRecoveryPointsCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["Limit"] = config.pageSize;
-    if (config.client instanceof StorageGateway) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof StorageGatewayClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected StorageGateway | StorageGatewayClient");
-    }
-    yield page;
-    token = page.Marker;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeTapeRecoveryPointsCommandOutput> = createPaginator<
+  StorageGatewayPaginationConfiguration,
+  DescribeTapeRecoveryPointsCommandInput,
+  DescribeTapeRecoveryPointsCommandOutput
+>(StorageGatewayClient, DescribeTapeRecoveryPointsCommand, "Marker", "Marker", "Limit");

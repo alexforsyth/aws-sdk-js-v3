@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListTypeVersionsInput, ListTypeVersionsOutput } from "../models/models_0";
-import {
-  deserializeAws_queryListTypeVersionsCommand,
-  serializeAws_queryListTypeVersionsCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTypeVersionsInput, ListTypeVersionsOutput } from "../models/models_0";
+import { ListTypeVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTypeVersionsCommand}.
+ */
 export interface ListTypeVersionsCommandInput extends ListTypeVersionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListTypeVersionsCommand}.
+ */
 export interface ListTypeVersionsCommandOutput extends ListTypeVersionsOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +29,68 @@ export interface ListTypeVersionsCommandOutput extends ListTypeVersionsOutput, _
  * ```javascript
  * import { CloudFormationClient, ListTypeVersionsCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListTypeVersionsCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListTypeVersionsInput
+ *   Type: "RESOURCE" || "MODULE" || "HOOK",
+ *   TypeName: "STRING_VALUE",
+ *   Arn: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DeprecatedStatus: "LIVE" || "DEPRECATED",
+ *   PublisherId: "STRING_VALUE",
+ * };
  * const command = new ListTypeVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListTypeVersionsOutput
+ * //   TypeVersionSummaries: [ // TypeVersionSummaries
+ * //     { // TypeVersionSummary
+ * //       Type: "RESOURCE" || "MODULE" || "HOOK",
+ * //       TypeName: "STRING_VALUE",
+ * //       VersionId: "STRING_VALUE",
+ * //       IsDefaultVersion: true || false,
+ * //       Arn: "STRING_VALUE",
+ * //       TimeCreated: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //       PublicVersionNumber: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTypeVersionsCommandInput - {@link ListTypeVersionsCommandInput}
+ * @returns {@link ListTypeVersionsCommandOutput}
  * @see {@link ListTypeVersionsCommandInput} for command's `input` shape.
  * @see {@link ListTypeVersionsCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListTypeVersionsCommand extends $Command<
-  ListTypeVersionsCommandInput,
-  ListTypeVersionsCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTypeVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTypeVersionsCommandInput, ListTypeVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListTypeVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTypeVersionsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListTypeVersionsOutput.filterSensitiveLog,
+export class ListTypeVersionsCommand extends command<ListTypeVersionsCommandInput, ListTypeVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTypeVersions",
+  ListTypeVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTypeVersionsInput;
+      output: ListTypeVersionsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTypeVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListTypeVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTypeVersionsCommandOutput> {
-    return deserializeAws_queryListTypeVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTypeVersionsCommandInput;
+      output: ListTypeVersionsCommandOutput;
+    };
+  };
 }

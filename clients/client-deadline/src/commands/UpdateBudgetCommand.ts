@@ -1,0 +1,113 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateBudgetRequest, UpdateBudgetResponse } from "../models/models_0";
+import { UpdateBudget$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateBudgetCommand}.
+ */
+export interface UpdateBudgetCommandInput extends UpdateBudgetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateBudgetCommand}.
+ */
+export interface UpdateBudgetCommandOutput extends UpdateBudgetResponse, __MetadataBearer {}
+
+/**
+ * Updates a budget that sets spending thresholds for rendering activity.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, UpdateBudgetCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, UpdateBudgetCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // UpdateBudgetRequest
+ *   farmId: "STRING_VALUE", // required
+ *   budgetId: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   displayName: "STRING_VALUE",
+ *   description: "STRING_VALUE",
+ *   status: "ACTIVE" || "INACTIVE",
+ *   approximateDollarLimit: Number("float"),
+ *   actionsToAdd: [ // BudgetActionsToAdd
+ *     { // BudgetActionToAdd
+ *       type: "STOP_SCHEDULING_AND_COMPLETE_TASKS" || "STOP_SCHEDULING_AND_CANCEL_TASKS", // required
+ *       thresholdPercentage: Number("float"), // required
+ *       description: "STRING_VALUE",
+ *     },
+ *   ],
+ *   actionsToRemove: [ // BudgetActionsToRemove
+ *     { // BudgetActionToRemove
+ *       type: "STOP_SCHEDULING_AND_COMPLETE_TASKS" || "STOP_SCHEDULING_AND_CANCEL_TASKS", // required
+ *       thresholdPercentage: Number("float"), // required
+ *     },
+ *   ],
+ *   schedule: { // BudgetSchedule Union: only one key present
+ *     fixed: { // FixedBudgetSchedule
+ *       startTime: new Date("TIMESTAMP"), // required
+ *       endTime: new Date("TIMESTAMP"), // required
+ *     },
+ *   },
+ * };
+ * const command = new UpdateBudgetCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param UpdateBudgetCommandInput - {@link UpdateBudgetCommandInput}
+ * @returns {@link UpdateBudgetCommandOutput}
+ * @see {@link UpdateBudgetCommandInput} for command's `input` shape.
+ * @see {@link UpdateBudgetCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class UpdateBudgetCommand extends command<UpdateBudgetCommandInput, UpdateBudgetCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateBudget",
+  UpdateBudget$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBudgetRequest;
+      output: {};
+    };
+    sdk: {
+      input: UpdateBudgetCommandInput;
+      output: UpdateBudgetCommandOutput;
+    };
+  };
+}

@@ -1,16 +1,11 @@
-import { SSOClient, SSOClientConfig } from "@aws-sdk/client-sso";
-import { fromSSO as _fromSSO, FromSSOInit as _FromSSOInit } from "@aws-sdk/credential-provider-sso";
-import { CredentialProvider } from "@aws-sdk/types";
-
-export interface FromSSOInit extends Omit<_FromSSOInit, "client"> {
-  clientConfig?: SSOClientConfig;
-}
+import type { FromSSOInit, SsoCredentialsParameters } from "@aws-sdk/credential-provider-sso";
+import type { AwsIdentityProperties, RuntimeConfigAwsCredentialIdentityProvider } from "@aws-sdk/types";
 
 /**
  * Creates a credential provider function that reads from the _resolved_ access token from local disk then requests
  * temporary AWS credentials.
  *
- * You can create the `CredentialProvider` functions using the inline SSO parameters(`ssoStartUrl`, `ssoAccountId`,
+ * You can create the `AwsCredentialIdentityProvider` functions using the inline SSO parameters(`ssoStartUrl`, `ssoAccountId`,
  * `ssoRegion`, `ssoRoleName`) or load them from [AWS SDKs and Tools shared configuration and credentials files](https://docs.aws.amazon.com/credref/latest/refdocs/creds-config-files.html).
  * Profiles in the `credentials` file are given precedence over profiles in the `config` file.
  *
@@ -46,6 +41,14 @@ export interface FromSSOInit extends Omit<_FromSSOInit, "client"> {
  *   }),
  * });
  * ```
+ *
+ * @public
  */
-export const fromSSO = (init: FromSSOInit = {}): CredentialProvider =>
-  _fromSSO({ ...{ ssoClient: init.clientConfig ? new SSOClient(init.clientConfig) : undefined }, ...init });
+export const fromSSO = (
+  init: FromSSOInit & Partial<SsoCredentialsParameters> = {}
+): RuntimeConfigAwsCredentialIdentityProvider => {
+  return async (args?: AwsIdentityProperties) => {
+    const { fromSSO: _fromSSO } = await import("@aws-sdk/credential-provider-sso");
+    return _fromSSO({ ...init })(args);
+  };
+};

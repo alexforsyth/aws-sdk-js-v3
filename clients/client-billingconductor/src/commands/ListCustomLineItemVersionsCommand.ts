@@ -1,0 +1,137 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCustomLineItemVersionsInput, ListCustomLineItemVersionsOutput } from "../models/models_0";
+import { ListCustomLineItemVersions$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCustomLineItemVersionsCommand}.
+ */
+export interface ListCustomLineItemVersionsCommandInput extends ListCustomLineItemVersionsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListCustomLineItemVersionsCommand}.
+ */
+export interface ListCustomLineItemVersionsCommandOutput extends ListCustomLineItemVersionsOutput, __MetadataBearer {}
+
+/**
+ * <p>A paginated call to get a list of all custom line item versions.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BillingconductorClient, ListCustomLineItemVersionsCommand } from "@aws-sdk/client-billingconductor"; // ES Modules import
+ * // const { BillingconductorClient, ListCustomLineItemVersionsCommand } = require("@aws-sdk/client-billingconductor"); // CommonJS import
+ * // import type { BillingconductorClientConfig } from "@aws-sdk/client-billingconductor";
+ * const config = {}; // type is BillingconductorClientConfig
+ * const client = new BillingconductorClient(config);
+ * const input = { // ListCustomLineItemVersionsInput
+ *   Arn: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: { // ListCustomLineItemVersionsFilter
+ *     BillingPeriodRange: { // ListCustomLineItemVersionsBillingPeriodRangeFilter
+ *       StartBillingPeriod: "STRING_VALUE",
+ *       EndBillingPeriod: "STRING_VALUE",
+ *     },
+ *   },
+ * };
+ * const command = new ListCustomLineItemVersionsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListCustomLineItemVersionsOutput
+ * //   CustomLineItemVersions: [ // CustomLineItemVersionList
+ * //     { // CustomLineItemVersionListElement
+ * //       Name: "STRING_VALUE",
+ * //       ChargeDetails: { // ListCustomLineItemChargeDetails
+ * //         Flat: { // ListCustomLineItemFlatChargeDetails
+ * //           ChargeValue: Number("double"), // required
+ * //         },
+ * //         Percentage: { // ListCustomLineItemPercentageChargeDetails
+ * //           PercentageValue: Number("double"), // required
+ * //         },
+ * //         Type: "CREDIT" || "FEE", // required
+ * //         LineItemFilters: [ // LineItemFiltersList
+ * //           { // LineItemFilter
+ * //             Attribute: "LINE_ITEM_TYPE" || "SERVICE", // required
+ * //             MatchOption: "NOT_EQUAL" || "EQUAL", // required
+ * //             Values: [ // LineItemFilterValuesList
+ * //               "SAVINGS_PLAN_NEGATION",
+ * //             ],
+ * //             AttributeValues: [ // AttributeValueList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //       CurrencyCode: "USD" || "CNY",
+ * //       Description: "STRING_VALUE",
+ * //       ProductCode: "STRING_VALUE",
+ * //       BillingGroupArn: "STRING_VALUE",
+ * //       CreationTime: Number("long"),
+ * //       LastModifiedTime: Number("long"),
+ * //       AssociationSize: Number("long"),
+ * //       StartBillingPeriod: "STRING_VALUE",
+ * //       EndBillingPeriod: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       StartTime: Number("long"),
+ * //       AccountId: "STRING_VALUE",
+ * //       ComputationRule: "ITEMIZED" || "CONSOLIDATED",
+ * //       PresentationDetails: { // PresentationObject
+ * //         Service: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListCustomLineItemVersionsCommandInput - {@link ListCustomLineItemVersionsCommandInput}
+ * @returns {@link ListCustomLineItemVersionsCommandOutput}
+ * @see {@link ListCustomLineItemVersionsCommandInput} for command's `input` shape.
+ * @see {@link ListCustomLineItemVersionsCommandOutput} for command's `response` shape.
+ * @see {@link BillingconductorClientResolvedConfig | config} for BillingconductorClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input doesn't match with the constraints specified by Amazon Web Services services.</p>
+ *
+ * @throws {@link BillingconductorServiceException}
+ * <p>Base exception class for all service exceptions from Billingconductor service.</p>
+ *
+ *
+ * @public
+ */
+export class ListCustomLineItemVersionsCommand extends command<ListCustomLineItemVersionsCommandInput, ListCustomLineItemVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCustomLineItemVersions",
+  ListCustomLineItemVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomLineItemVersionsInput;
+      output: ListCustomLineItemVersionsOutput;
+    };
+    sdk: {
+      input: ListCustomLineItemVersionsCommandInput;
+      output: ListCustomLineItemVersionsCommandOutput;
+    };
+  };
+}

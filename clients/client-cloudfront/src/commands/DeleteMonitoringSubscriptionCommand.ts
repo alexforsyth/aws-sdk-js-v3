@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import { DeleteMonitoringSubscriptionRequest, DeleteMonitoringSubscriptionResult } from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteMonitoringSubscriptionCommand,
-  serializeAws_restXmlDeleteMonitoringSubscriptionCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMonitoringSubscriptionRequest, DeleteMonitoringSubscriptionResult } from "../models/models_0";
+import { DeleteMonitoringSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMonitoringSubscriptionCommand}.
+ */
 export interface DeleteMonitoringSubscriptionCommandInput extends DeleteMonitoringSubscriptionRequest {}
-export interface DeleteMonitoringSubscriptionCommandOutput
-  extends DeleteMonitoringSubscriptionResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMonitoringSubscriptionCommand}.
+ */
+export interface DeleteMonitoringSubscriptionCommandOutput extends DeleteMonitoringSubscriptionResult, __MetadataBearer {}
 
 /**
  * <p>Disables additional CloudWatch metrics for the specified CloudFront distribution.</p>
@@ -30,71 +29,57 @@ export interface DeleteMonitoringSubscriptionCommandOutput
  * ```javascript
  * import { CloudFrontClient, DeleteMonitoringSubscriptionCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, DeleteMonitoringSubscriptionCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // DeleteMonitoringSubscriptionRequest
+ *   DistributionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteMonitoringSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteMonitoringSubscriptionCommandInput - {@link DeleteMonitoringSubscriptionCommandInput}
+ * @returns {@link DeleteMonitoringSubscriptionCommandOutput}
  * @see {@link DeleteMonitoringSubscriptionCommandInput} for command's `input` shape.
  * @see {@link DeleteMonitoringSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link CloudFrontClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link NoSuchDistribution} (client fault)
+ *  <p>The specified distribution does not exist.</p>
+ *
+ * @throws {@link NoSuchMonitoringSubscription} (client fault)
+ *  <p>A monitoring subscription does not exist for the specified distribution.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>This operation is not supported in this Amazon Web Services Region.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMonitoringSubscriptionCommand extends $Command<
-  DeleteMonitoringSubscriptionCommandInput,
-  DeleteMonitoringSubscriptionCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMonitoringSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMonitoringSubscriptionCommandInput, DeleteMonitoringSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "DeleteMonitoringSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMonitoringSubscriptionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMonitoringSubscriptionResult.filterSensitiveLog,
+export class DeleteMonitoringSubscriptionCommand extends command<DeleteMonitoringSubscriptionCommandInput, DeleteMonitoringSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMonitoringSubscription",
+  DeleteMonitoringSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMonitoringSubscriptionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMonitoringSubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteMonitoringSubscriptionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteMonitoringSubscriptionCommandOutput> {
-    return deserializeAws_restXmlDeleteMonitoringSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMonitoringSubscriptionCommandInput;
+      output: DeleteMonitoringSubscriptionCommandOutput;
+    };
+  };
 }

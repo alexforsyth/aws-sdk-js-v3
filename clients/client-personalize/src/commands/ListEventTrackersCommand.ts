@@ -1,98 +1,95 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListEventTrackersRequest, ListEventTrackersResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1ListEventTrackersCommand,
-  serializeAws_json1_1ListEventTrackersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEventTrackersRequest, ListEventTrackersResponse } from "../models/models_0";
+import { ListEventTrackers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEventTrackersCommand}.
+ */
 export interface ListEventTrackersCommandInput extends ListEventTrackersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEventTrackersCommand}.
+ */
 export interface ListEventTrackersCommandOutput extends ListEventTrackersResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the list of event trackers associated with the account.
  *       The response provides the properties for each event tracker, including the Amazon Resource
  *       Name (ARN) and tracking ID. For more
- *       information on event trackers, see <a>CreateEventTracker</a>.</p>
+ *       information on event trackers, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeClient, ListEventTrackersCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, ListEventTrackersCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // ListEventTrackersRequest
+ *   datasetGroupArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListEventTrackersCommand(input);
  * const response = await client.send(command);
+ * // { // ListEventTrackersResponse
+ * //   eventTrackers: [ // EventTrackers
+ * //     { // EventTrackerSummary
+ * //       name: "STRING_VALUE",
+ * //       eventTrackerArn: "STRING_VALUE",
+ * //       status: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEventTrackersCommandInput - {@link ListEventTrackersCommandInput}
+ * @returns {@link ListEventTrackersCommandOutput}
  * @see {@link ListEventTrackersCommandInput} for command's `input` shape.
  * @see {@link ListEventTrackersCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class ListEventTrackersCommand extends $Command<
-  ListEventTrackersCommandInput,
-  ListEventTrackersCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEventTrackersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEventTrackersCommandInput, ListEventTrackersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "ListEventTrackersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEventTrackersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEventTrackersResponse.filterSensitiveLog,
+export class ListEventTrackersCommand extends command<ListEventTrackersCommandInput, ListEventTrackersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEventTrackers",
+  ListEventTrackers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventTrackersRequest;
+      output: ListEventTrackersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEventTrackersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEventTrackersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEventTrackersCommandOutput> {
-    return deserializeAws_json1_1ListEventTrackersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEventTrackersCommandInput;
+      output: ListEventTrackersCommandOutput;
+    };
+  };
 }

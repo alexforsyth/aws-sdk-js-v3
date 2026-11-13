@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribePipelineRequest, DescribePipelineResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribePipelineCommand,
-  serializeAws_json1_1DescribePipelineCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribePipelineRequest, DescribePipelineResponse } from "../models/models_3";
+import { DescribePipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribePipelineCommand}.
+ */
 export interface DescribePipelineCommandInput extends DescribePipelineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribePipelineCommand}.
+ */
 export interface DescribePipelineCommandOutput extends DescribePipelineResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface DescribePipelineCommandOutput extends DescribePipelineResponse,
  * ```javascript
  * import { SageMakerClient, DescribePipelineCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribePipelineCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribePipelineRequest
+ *   PipelineName: "STRING_VALUE", // required
+ *   PipelineVersionId: Number("long"),
+ *   PipelineVersionAlias: "STRING_VALUE",
+ * };
  * const command = new DescribePipelineCommand(input);
  * const response = await client.send(command);
+ * // { // DescribePipelineResponse
+ * //   PipelineArn: "STRING_VALUE",
+ * //   PipelineName: "STRING_VALUE",
+ * //   PipelineDisplayName: "STRING_VALUE",
+ * //   PipelineDefinition: "STRING_VALUE",
+ * //   PipelineDescription: "STRING_VALUE",
+ * //   RoleArn: "STRING_VALUE",
+ * //   PipelineStatus: "Active" || "Deleting",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * //   LastRunTime: new Date("TIMESTAMP"),
+ * //   CreatedBy: { // UserContext
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: { // IamIdentity
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastModifiedBy: {
+ * //     UserProfileArn: "STRING_VALUE",
+ * //     UserProfileName: "STRING_VALUE",
+ * //     DomainId: "STRING_VALUE",
+ * //     IamIdentity: {
+ * //       Arn: "STRING_VALUE",
+ * //       PrincipalId: "STRING_VALUE",
+ * //       SourceIdentity: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   ParallelismConfiguration: { // ParallelismConfiguration
+ * //     MaxParallelExecutionSteps: Number("int"), // required
+ * //   },
+ * //   PipelineVersionDisplayName: "STRING_VALUE",
+ * //   PipelineVersionDescription: "STRING_VALUE",
+ * //   PipelineVersionAliases: [ // PipelineVersionAliasList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribePipelineCommandInput - {@link DescribePipelineCommandInput}
+ * @returns {@link DescribePipelineCommandOutput}
  * @see {@link DescribePipelineCommandInput} for command's `input` shape.
  * @see {@link DescribePipelineCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribePipelineCommand extends $Command<
-  DescribePipelineCommandInput,
-  DescribePipelineCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribePipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribePipelineCommandInput, DescribePipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribePipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribePipelineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribePipelineResponse.filterSensitiveLog,
+export class DescribePipelineCommand extends command<DescribePipelineCommandInput, DescribePipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribePipeline",
+  DescribePipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribePipelineRequest;
+      output: DescribePipelineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribePipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribePipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribePipelineCommandOutput> {
-    return deserializeAws_json1_1DescribePipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribePipelineCommandInput;
+      output: DescribePipelineCommandOutput;
+    };
+  };
 }

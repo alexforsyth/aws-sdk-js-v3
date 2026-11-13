@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import { SearchDatabasesByLFTagsRequest, SearchDatabasesByLFTagsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchDatabasesByLFTagsCommand,
-  serializeAws_json1_1SearchDatabasesByLFTagsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchDatabasesByLFTagsRequest, SearchDatabasesByLFTagsResponse } from "../models/models_0";
+import { SearchDatabasesByLFTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchDatabasesByLFTagsCommand}.
+ */
 export interface SearchDatabasesByLFTagsCommandInput extends SearchDatabasesByLFTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchDatabasesByLFTagsCommand}.
+ */
 export interface SearchDatabasesByLFTagsCommandOutput extends SearchDatabasesByLFTagsResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,92 @@ export interface SearchDatabasesByLFTagsCommandOutput extends SearchDatabasesByL
  * ```javascript
  * import { LakeFormationClient, SearchDatabasesByLFTagsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, SearchDatabasesByLFTagsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // SearchDatabasesByLFTagsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   CatalogId: "STRING_VALUE",
+ *   Expression: [ // Expression // required
+ *     { // LFTag
+ *       TagKey: "STRING_VALUE", // required
+ *       TagValues: [ // TagValueList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ * };
  * const command = new SearchDatabasesByLFTagsCommand(input);
  * const response = await client.send(command);
+ * // { // SearchDatabasesByLFTagsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   DatabaseList: [ // DatabaseLFTagsList
+ * //     { // TaggedDatabase
+ * //       Database: { // DatabaseResource
+ * //         CatalogId: "STRING_VALUE",
+ * //         Name: "STRING_VALUE", // required
+ * //       },
+ * //       LFTags: [ // LFTagsList
+ * //         { // LFTagPair
+ * //           CatalogId: "STRING_VALUE",
+ * //           TagKey: "STRING_VALUE", // required
+ * //           TagValues: [ // TagValueList // required
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param SearchDatabasesByLFTagsCommandInput - {@link SearchDatabasesByLFTagsCommandInput}
+ * @returns {@link SearchDatabasesByLFTagsCommandOutput}
  * @see {@link SearchDatabasesByLFTagsCommandInput} for command's `input` shape.
  * @see {@link SearchDatabasesByLFTagsCommandOutput} for command's `response` shape.
- * @see {@link LakeFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class SearchDatabasesByLFTagsCommand extends $Command<
-  SearchDatabasesByLFTagsCommandInput,
-  SearchDatabasesByLFTagsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchDatabasesByLFTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchDatabasesByLFTagsCommandInput, SearchDatabasesByLFTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "SearchDatabasesByLFTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchDatabasesByLFTagsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchDatabasesByLFTagsResponse.filterSensitiveLog,
+export class SearchDatabasesByLFTagsCommand extends command<SearchDatabasesByLFTagsCommandInput, SearchDatabasesByLFTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchDatabasesByLFTags",
+  SearchDatabasesByLFTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchDatabasesByLFTagsRequest;
+      output: SearchDatabasesByLFTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchDatabasesByLFTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchDatabasesByLFTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchDatabasesByLFTagsCommandOutput> {
-    return deserializeAws_json1_1SearchDatabasesByLFTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchDatabasesByLFTagsCommandInput;
+      output: SearchDatabasesByLFTagsCommandOutput;
+    };
+  };
 }

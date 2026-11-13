@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudControlClient";
-import { ListResourceRequestsInput, ListResourceRequestsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListResourceRequestsCommand,
-  serializeAws_json1_0ListResourceRequestsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListResourceRequestsInput, ListResourceRequestsOutput } from "../models/models_0";
+import { ListResourceRequests$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListResourceRequestsCommand}.
+ */
 export interface ListResourceRequestsCommandInput extends ListResourceRequestsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListResourceRequestsCommand}.
+ */
 export interface ListResourceRequestsCommandOutput extends ListResourceRequestsOutput, __MetadataBearer {}
 
 /**
@@ -26,75 +27,78 @@ export interface ListResourceRequestsCommandOutput extends ListResourceRequestsO
  *       For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list">Listing active resource operation requests</a> in the
  *         <i>Amazon Web Services Cloud Control API User Guide</i>.</p>
  *          <note>
- *             <p>Resource operation requests expire after seven days.</p>
+ *             <p>Resource operation requests expire after 7 days.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudControlClient, ListResourceRequestsCommand } from "@aws-sdk/client-cloudcontrol"; // ES Modules import
  * // const { CloudControlClient, ListResourceRequestsCommand } = require("@aws-sdk/client-cloudcontrol"); // CommonJS import
+ * // import type { CloudControlClientConfig } from "@aws-sdk/client-cloudcontrol";
+ * const config = {}; // type is CloudControlClientConfig
  * const client = new CloudControlClient(config);
+ * const input = { // ListResourceRequestsInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   ResourceRequestStatusFilter: { // ResourceRequestStatusFilter
+ *     Operations: [ // Operations
+ *       "STRING_VALUE",
+ *     ],
+ *     OperationStatuses: [ // OperationStatuses
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new ListResourceRequestsCommand(input);
  * const response = await client.send(command);
+ * // { // ListResourceRequestsOutput
+ * //   ResourceRequestStatusSummaries: [ // ResourceRequestStatusSummaries
+ * //     { // ProgressEvent
+ * //       TypeName: "STRING_VALUE",
+ * //       Identifier: "STRING_VALUE",
+ * //       RequestToken: "STRING_VALUE",
+ * //       HooksRequestToken: "STRING_VALUE",
+ * //       Operation: "STRING_VALUE",
+ * //       OperationStatus: "STRING_VALUE",
+ * //       EventTime: new Date("TIMESTAMP"),
+ * //       ResourceModel: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       RetryAfter: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListResourceRequestsCommandInput - {@link ListResourceRequestsCommandInput}
+ * @returns {@link ListResourceRequestsCommandOutput}
  * @see {@link ListResourceRequestsCommandInput} for command's `input` shape.
  * @see {@link ListResourceRequestsCommandOutput} for command's `response` shape.
- * @see {@link CloudControlClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudControlClientResolvedConfig | config} for CloudControlClient's `config` shape.
  *
+ * @throws {@link CloudControlServiceException}
+ * <p>Base exception class for all service exceptions from CloudControl service.</p>
+ *
+ *
+ * @public
  */
-export class ListResourceRequestsCommand extends $Command<
-  ListResourceRequestsCommandInput,
-  ListResourceRequestsCommandOutput,
-  CloudControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListResourceRequestsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListResourceRequestsCommandInput, ListResourceRequestsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudControlClient";
-    const commandName = "ListResourceRequestsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListResourceRequestsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListResourceRequestsOutput.filterSensitiveLog,
+export class ListResourceRequestsCommand extends command<ListResourceRequestsCommandInput, ListResourceRequestsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListResourceRequests",
+  ListResourceRequests$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListResourceRequestsInput;
+      output: ListResourceRequestsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListResourceRequestsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListResourceRequestsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListResourceRequestsCommandOutput> {
-    return deserializeAws_json1_0ListResourceRequestsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListResourceRequestsCommandInput;
+      output: ListResourceRequestsCommandOutput;
+    };
+  };
 }

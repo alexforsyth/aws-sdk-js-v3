@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListStreamsCommand,
-  serializeAws_restJson1ListStreamsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStreamsInput, ListStreamsOutput } from "../models/models_0";
+import { ListStreams$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandInput extends ListStreamsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStreamsCommand}.
+ */
 export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataBearer {}
 
 /**
@@ -30,68 +31,72 @@ export interface ListStreamsCommandOutput extends ListStreamsOutput, __MetadataB
  * ```javascript
  * import { KinesisVideoClient, ListStreamsCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, ListStreamsCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // ListStreamsInput
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   StreamNameCondition: { // StreamNameCondition
+ *     ComparisonOperator: "BEGINS_WITH",
+ *     ComparisonValue: "STRING_VALUE",
+ *   },
+ * };
  * const command = new ListStreamsCommand(input);
  * const response = await client.send(command);
+ * // { // ListStreamsOutput
+ * //   StreamInfoList: [ // StreamInfoList
+ * //     { // StreamInfo
+ * //       DeviceName: "STRING_VALUE",
+ * //       StreamName: "STRING_VALUE",
+ * //       StreamARN: "STRING_VALUE",
+ * //       MediaType: "STRING_VALUE",
+ * //       KmsKeyId: "STRING_VALUE",
+ * //       Version: "STRING_VALUE",
+ * //       Status: "CREATING" || "ACTIVE" || "UPDATING" || "DELETING",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       DataRetentionInHours: Number("int"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStreamsCommandInput - {@link ListStreamsCommandInput}
+ * @returns {@link ListStreamsCommandOutput}
  * @see {@link ListStreamsCommandInput} for command's `input` shape.
  * @see {@link ListStreamsCommandOutput} for command's `response` shape.
- * @see {@link KinesisVideoClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class ListStreamsCommand extends $Command<
-  ListStreamsCommandInput,
-  ListStreamsCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStreamsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStreamsCommandInput, ListStreamsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "ListStreamsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStreamsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStreamsOutput.filterSensitiveLog,
+export class ListStreamsCommand extends command<ListStreamsCommandInput, ListStreamsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStreams",
+  ListStreams$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStreamsInput;
+      output: ListStreamsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStreamsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListStreamsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStreamsCommandOutput> {
-    return deserializeAws_restJson1ListStreamsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStreamsCommandInput;
+      output: ListStreamsCommandOutput;
+    };
+  };
 }

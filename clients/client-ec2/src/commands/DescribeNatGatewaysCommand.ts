@@ -1,95 +1,183 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import { DescribeNatGatewaysRequest, DescribeNatGatewaysResult } from "../models/models_3";
-import {
-  deserializeAws_ec2DescribeNatGatewaysCommand,
-  serializeAws_ec2DescribeNatGatewaysCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeNatGatewaysRequest, DescribeNatGatewaysResult } from "../models/models_4";
+import { DescribeNatGateways$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNatGatewaysCommand}.
+ */
 export interface DescribeNatGatewaysCommandInput extends DescribeNatGatewaysRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNatGatewaysCommand}.
+ */
 export interface DescribeNatGatewaysCommandOutput extends DescribeNatGatewaysResult, __MetadataBearer {}
 
 /**
- * <p>Describes one or more of your NAT gateways.</p>
+ * <p>Describes your NAT gateways. The default is to describe all your NAT gateways.
+ *           Alternatively, you can specify specific NAT gateway IDs or filter the results to
+ *           include only the NAT gateways that match specific criteria.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, DescribeNatGatewaysCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeNatGatewaysCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeNatGatewaysRequest
+ *   DryRun: true || false,
+ *   Filter: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NatGatewayIds: [ // NatGatewayIdStringList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeNatGatewaysCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeNatGatewaysResult
+ * //   NatGateways: [ // NatGatewayList
+ * //     { // NatGateway
+ * //       CreateTime: new Date("TIMESTAMP"),
+ * //       DeleteTime: new Date("TIMESTAMP"),
+ * //       FailureCode: "STRING_VALUE",
+ * //       FailureMessage: "STRING_VALUE",
+ * //       NatGatewayAddresses: [ // NatGatewayAddressList
+ * //         { // NatGatewayAddress
+ * //           AllocationId: "STRING_VALUE",
+ * //           NetworkInterfaceId: "STRING_VALUE",
+ * //           PrivateIp: "STRING_VALUE",
+ * //           PublicIp: "STRING_VALUE",
+ * //           AssociationId: "STRING_VALUE",
+ * //           IsPrimary: true || false,
+ * //           FailureMessage: "STRING_VALUE",
+ * //           Status: "assigning" || "unassigning" || "associating" || "disassociating" || "succeeded" || "failed",
+ * //           AvailabilityZone: "STRING_VALUE",
+ * //           AvailabilityZoneId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       NatGatewayId: "STRING_VALUE",
+ * //       ProvisionedBandwidth: { // ProvisionedBandwidth
+ * //         ProvisionTime: new Date("TIMESTAMP"),
+ * //         Provisioned: "STRING_VALUE",
+ * //         RequestTime: new Date("TIMESTAMP"),
+ * //         Requested: "STRING_VALUE",
+ * //         Status: "STRING_VALUE",
+ * //       },
+ * //       State: "pending" || "failed" || "available" || "deleting" || "deleted",
+ * //       SubnetId: "STRING_VALUE",
+ * //       VpcId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ConnectivityType: "private" || "public",
+ * //       AvailabilityMode: "zonal" || "regional",
+ * //       AutoScalingIps: "enabled" || "disabled",
+ * //       AutoProvisionZones: "enabled" || "disabled",
+ * //       AttachedAppliances: [ // NatGatewayAttachedApplianceList
+ * //         { // NatGatewayAttachedAppliance
+ * //           Type: "network-firewall-proxy",
+ * //           ApplianceArn: "STRING_VALUE",
+ * //           VpcEndpointId: "STRING_VALUE",
+ * //           AttachmentState: "attaching" || "attached" || "detaching" || "detached" || "attach-failed" || "detach-failed",
+ * //           ModificationState: "modifying" || "completed" || "failed",
+ * //           FailureCode: "STRING_VALUE",
+ * //           FailureMessage: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       RouteTableId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeNatGatewaysCommandInput - {@link DescribeNatGatewaysCommandInput}
+ * @returns {@link DescribeNatGatewaysCommandOutput}
  * @see {@link DescribeNatGatewaysCommandInput} for command's `input` shape.
  * @see {@link DescribeNatGatewaysCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @example To describe a NAT gateway
+ * ```javascript
+ * // This example describes the NAT gateway for the specified VPC.
+ * const input = {
+ *   Filter: [
+ *     {
+ *       Name: "vpc-id",
+ *       Values: [
+ *         "vpc-1a2b3c4d"
+ *       ]
+ *     }
+ *   ]
+ * };
+ * const command = new DescribeNatGatewaysCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   NatGateways: [
+ *     {
+ *       CreateTime: "2015-12-01T12:26:55.983Z",
+ *       NatGatewayAddresses: [
+ *         {
+ *           AllocationId: "eipalloc-89c620ec",
+ *           NetworkInterfaceId: "eni-9dec76cd",
+ *           PrivateIp: "10.0.0.149",
+ *           PublicIp: "198.11.222.333"
+ *         }
+ *       ],
+ *       NatGatewayId: "nat-05dba92075d71c408",
+ *       State: "available",
+ *       SubnetId: "subnet-847e4dc2",
+ *       VpcId: "vpc-1a2b3c4d"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DescribeNatGatewaysCommand extends $Command<
-  DescribeNatGatewaysCommandInput,
-  DescribeNatGatewaysCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNatGatewaysCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNatGatewaysCommandInput, DescribeNatGatewaysCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeNatGatewaysCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNatGatewaysRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeNatGatewaysResult.filterSensitiveLog,
+export class DescribeNatGatewaysCommand extends command<DescribeNatGatewaysCommandInput, DescribeNatGatewaysCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNatGateways",
+  DescribeNatGateways$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNatGatewaysRequest;
+      output: DescribeNatGatewaysResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeNatGatewaysCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeNatGatewaysCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeNatGatewaysCommandOutput> {
-    return deserializeAws_ec2DescribeNatGatewaysCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNatGatewaysCommandInput;
+      output: DescribeNatGatewaysCommandOutput;
+    };
+  };
 }

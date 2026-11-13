@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CodeGuruProfilerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CodeGuruProfilerClient";
-import { CreateProfilingGroupRequest, CreateProfilingGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateProfilingGroupCommand,
-  serializeAws_restJson1CreateProfilingGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateProfilingGroupRequest, CreateProfilingGroupResponse } from "../models/models_0";
+import { CreateProfilingGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateProfilingGroupCommand}.
+ */
 export interface CreateProfilingGroupCommandInput extends CreateProfilingGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateProfilingGroupCommand}.
+ */
 export interface CreateProfilingGroupCommandOutput extends CreateProfilingGroupResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface CreateProfilingGroupCommandOutput extends CreateProfilingGroupR
  * ```javascript
  * import { CodeGuruProfilerClient, CreateProfilingGroupCommand } from "@aws-sdk/client-codeguruprofiler"; // ES Modules import
  * // const { CodeGuruProfilerClient, CreateProfilingGroupCommand } = require("@aws-sdk/client-codeguruprofiler"); // CommonJS import
+ * // import type { CodeGuruProfilerClientConfig } from "@aws-sdk/client-codeguruprofiler";
+ * const config = {}; // type is CodeGuruProfilerClientConfig
  * const client = new CodeGuruProfilerClient(config);
+ * const input = { // CreateProfilingGroupRequest
+ *   profilingGroupName: "STRING_VALUE", // required
+ *   computePlatform: "STRING_VALUE",
+ *   clientToken: "STRING_VALUE", // required
+ *   agentOrchestrationConfig: { // AgentOrchestrationConfig
+ *     profilingEnabled: true || false, // required
+ *   },
+ *   tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateProfilingGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateProfilingGroupResponse
+ * //   profilingGroup: { // ProfilingGroupDescription
+ * //     name: "STRING_VALUE",
+ * //     agentOrchestrationConfig: { // AgentOrchestrationConfig
+ * //       profilingEnabled: true || false, // required
+ * //     },
+ * //     arn: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     profilingStatus: { // ProfilingStatus
+ * //       latestAgentProfileReportedAt: new Date("TIMESTAMP"),
+ * //       latestAggregatedProfile: { // AggregatedProfileTime
+ * //         start: new Date("TIMESTAMP"),
+ * //         period: "STRING_VALUE",
+ * //       },
+ * //       latestAgentOrchestratedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //     computePlatform: "STRING_VALUE",
+ * //     tags: { // TagsMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateProfilingGroupCommandInput - {@link CreateProfilingGroupCommandInput}
+ * @returns {@link CreateProfilingGroupCommandOutput}
  * @see {@link CreateProfilingGroupCommandInput} for command's `input` shape.
  * @see {@link CreateProfilingGroupCommandOutput} for command's `response` shape.
- * @see {@link CodeGuruProfilerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CodeGuruProfilerClientResolvedConfig | config} for CodeGuruProfilerClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The requested operation would cause a conflict with the current state
+ *         of a service resource associated with the request. Resolve the conflict
+ *         before retrying this request.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The server encountered an internal error and is unable to complete the request.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have exceeded your service quota. To perform the requested action,
+ *         remove some of the relevant resources, or use <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html">Service Quotas</a> to request a
+ *         service quota increase.
+ *       </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The parameter is not valid.</p>
+ *
+ * @throws {@link CodeGuruProfilerServiceException}
+ * <p>Base exception class for all service exceptions from CodeGuruProfiler service.</p>
+ *
+ *
+ * @public
  */
-export class CreateProfilingGroupCommand extends $Command<
-  CreateProfilingGroupCommandInput,
-  CreateProfilingGroupCommandOutput,
-  CodeGuruProfilerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateProfilingGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CodeGuruProfilerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateProfilingGroupCommandInput, CreateProfilingGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CodeGuruProfilerClient";
-    const commandName = "CreateProfilingGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateProfilingGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateProfilingGroupResponse.filterSensitiveLog,
+export class CreateProfilingGroupCommand extends command<CreateProfilingGroupCommandInput, CreateProfilingGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateProfilingGroup",
+  CreateProfilingGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateProfilingGroupRequest;
+      output: CreateProfilingGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateProfilingGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateProfilingGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateProfilingGroupCommandOutput> {
-    return deserializeAws_restJson1CreateProfilingGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateProfilingGroupCommandInput;
+      output: CreateProfilingGroupCommandOutput;
+    };
+  };
 }

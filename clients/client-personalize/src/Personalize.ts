@@ -1,2286 +1,1891 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateBatchInferenceJobCommandInput,
+  type CreateBatchInferenceJobCommandOutput,
   CreateBatchInferenceJobCommand,
-  CreateBatchInferenceJobCommandInput,
-  CreateBatchInferenceJobCommandOutput,
 } from "./commands/CreateBatchInferenceJobCommand";
 import {
+  type CreateBatchSegmentJobCommandInput,
+  type CreateBatchSegmentJobCommandOutput,
+  CreateBatchSegmentJobCommand,
+} from "./commands/CreateBatchSegmentJobCommand";
+import {
+  type CreateCampaignCommandInput,
+  type CreateCampaignCommandOutput,
   CreateCampaignCommand,
-  CreateCampaignCommandInput,
-  CreateCampaignCommandOutput,
 } from "./commands/CreateCampaignCommand";
 import {
+  type CreateDataDeletionJobCommandInput,
+  type CreateDataDeletionJobCommandOutput,
+  CreateDataDeletionJobCommand,
+} from "./commands/CreateDataDeletionJobCommand";
+import {
+  type CreateDatasetCommandInput,
+  type CreateDatasetCommandOutput,
   CreateDatasetCommand,
-  CreateDatasetCommandInput,
-  CreateDatasetCommandOutput,
 } from "./commands/CreateDatasetCommand";
 import {
+  type CreateDatasetExportJobCommandInput,
+  type CreateDatasetExportJobCommandOutput,
   CreateDatasetExportJobCommand,
-  CreateDatasetExportJobCommandInput,
-  CreateDatasetExportJobCommandOutput,
 } from "./commands/CreateDatasetExportJobCommand";
 import {
+  type CreateDatasetGroupCommandInput,
+  type CreateDatasetGroupCommandOutput,
   CreateDatasetGroupCommand,
-  CreateDatasetGroupCommandInput,
-  CreateDatasetGroupCommandOutput,
 } from "./commands/CreateDatasetGroupCommand";
 import {
+  type CreateDatasetImportJobCommandInput,
+  type CreateDatasetImportJobCommandOutput,
   CreateDatasetImportJobCommand,
-  CreateDatasetImportJobCommandInput,
-  CreateDatasetImportJobCommandOutput,
 } from "./commands/CreateDatasetImportJobCommand";
 import {
+  type CreateEventTrackerCommandInput,
+  type CreateEventTrackerCommandOutput,
   CreateEventTrackerCommand,
-  CreateEventTrackerCommandInput,
-  CreateEventTrackerCommandOutput,
 } from "./commands/CreateEventTrackerCommand";
 import {
+  type CreateFilterCommandInput,
+  type CreateFilterCommandOutput,
   CreateFilterCommand,
-  CreateFilterCommandInput,
-  CreateFilterCommandOutput,
 } from "./commands/CreateFilterCommand";
 import {
+  type CreateMetricAttributionCommandInput,
+  type CreateMetricAttributionCommandOutput,
+  CreateMetricAttributionCommand,
+} from "./commands/CreateMetricAttributionCommand";
+import {
+  type CreateRecommenderCommandInput,
+  type CreateRecommenderCommandOutput,
+  CreateRecommenderCommand,
+} from "./commands/CreateRecommenderCommand";
+import {
+  type CreateSchemaCommandInput,
+  type CreateSchemaCommandOutput,
   CreateSchemaCommand,
-  CreateSchemaCommandInput,
-  CreateSchemaCommandOutput,
 } from "./commands/CreateSchemaCommand";
 import {
+  type CreateSolutionCommandInput,
+  type CreateSolutionCommandOutput,
   CreateSolutionCommand,
-  CreateSolutionCommandInput,
-  CreateSolutionCommandOutput,
 } from "./commands/CreateSolutionCommand";
 import {
+  type CreateSolutionVersionCommandInput,
+  type CreateSolutionVersionCommandOutput,
   CreateSolutionVersionCommand,
-  CreateSolutionVersionCommandInput,
-  CreateSolutionVersionCommandOutput,
 } from "./commands/CreateSolutionVersionCommand";
 import {
+  type DeleteCampaignCommandInput,
+  type DeleteCampaignCommandOutput,
   DeleteCampaignCommand,
-  DeleteCampaignCommandInput,
-  DeleteCampaignCommandOutput,
 } from "./commands/DeleteCampaignCommand";
 import {
+  type DeleteDatasetCommandInput,
+  type DeleteDatasetCommandOutput,
   DeleteDatasetCommand,
-  DeleteDatasetCommandInput,
-  DeleteDatasetCommandOutput,
 } from "./commands/DeleteDatasetCommand";
 import {
+  type DeleteDatasetGroupCommandInput,
+  type DeleteDatasetGroupCommandOutput,
   DeleteDatasetGroupCommand,
-  DeleteDatasetGroupCommandInput,
-  DeleteDatasetGroupCommandOutput,
 } from "./commands/DeleteDatasetGroupCommand";
 import {
+  type DeleteEventTrackerCommandInput,
+  type DeleteEventTrackerCommandOutput,
   DeleteEventTrackerCommand,
-  DeleteEventTrackerCommandInput,
-  DeleteEventTrackerCommandOutput,
 } from "./commands/DeleteEventTrackerCommand";
 import {
+  type DeleteFilterCommandInput,
+  type DeleteFilterCommandOutput,
   DeleteFilterCommand,
-  DeleteFilterCommandInput,
-  DeleteFilterCommandOutput,
 } from "./commands/DeleteFilterCommand";
 import {
+  type DeleteMetricAttributionCommandInput,
+  type DeleteMetricAttributionCommandOutput,
+  DeleteMetricAttributionCommand,
+} from "./commands/DeleteMetricAttributionCommand";
+import {
+  type DeleteRecommenderCommandInput,
+  type DeleteRecommenderCommandOutput,
+  DeleteRecommenderCommand,
+} from "./commands/DeleteRecommenderCommand";
+import {
+  type DeleteSchemaCommandInput,
+  type DeleteSchemaCommandOutput,
   DeleteSchemaCommand,
-  DeleteSchemaCommandInput,
-  DeleteSchemaCommandOutput,
 } from "./commands/DeleteSchemaCommand";
 import {
+  type DeleteSolutionCommandInput,
+  type DeleteSolutionCommandOutput,
   DeleteSolutionCommand,
-  DeleteSolutionCommandInput,
-  DeleteSolutionCommandOutput,
 } from "./commands/DeleteSolutionCommand";
 import {
+  type DescribeAlgorithmCommandInput,
+  type DescribeAlgorithmCommandOutput,
   DescribeAlgorithmCommand,
-  DescribeAlgorithmCommandInput,
-  DescribeAlgorithmCommandOutput,
 } from "./commands/DescribeAlgorithmCommand";
 import {
+  type DescribeBatchInferenceJobCommandInput,
+  type DescribeBatchInferenceJobCommandOutput,
   DescribeBatchInferenceJobCommand,
-  DescribeBatchInferenceJobCommandInput,
-  DescribeBatchInferenceJobCommandOutput,
 } from "./commands/DescribeBatchInferenceJobCommand";
 import {
+  type DescribeBatchSegmentJobCommandInput,
+  type DescribeBatchSegmentJobCommandOutput,
+  DescribeBatchSegmentJobCommand,
+} from "./commands/DescribeBatchSegmentJobCommand";
+import {
+  type DescribeCampaignCommandInput,
+  type DescribeCampaignCommandOutput,
   DescribeCampaignCommand,
-  DescribeCampaignCommandInput,
-  DescribeCampaignCommandOutput,
 } from "./commands/DescribeCampaignCommand";
 import {
+  type DescribeDataDeletionJobCommandInput,
+  type DescribeDataDeletionJobCommandOutput,
+  DescribeDataDeletionJobCommand,
+} from "./commands/DescribeDataDeletionJobCommand";
+import {
+  type DescribeDatasetCommandInput,
+  type DescribeDatasetCommandOutput,
   DescribeDatasetCommand,
-  DescribeDatasetCommandInput,
-  DescribeDatasetCommandOutput,
 } from "./commands/DescribeDatasetCommand";
 import {
+  type DescribeDatasetExportJobCommandInput,
+  type DescribeDatasetExportJobCommandOutput,
   DescribeDatasetExportJobCommand,
-  DescribeDatasetExportJobCommandInput,
-  DescribeDatasetExportJobCommandOutput,
 } from "./commands/DescribeDatasetExportJobCommand";
 import {
+  type DescribeDatasetGroupCommandInput,
+  type DescribeDatasetGroupCommandOutput,
   DescribeDatasetGroupCommand,
-  DescribeDatasetGroupCommandInput,
-  DescribeDatasetGroupCommandOutput,
 } from "./commands/DescribeDatasetGroupCommand";
 import {
+  type DescribeDatasetImportJobCommandInput,
+  type DescribeDatasetImportJobCommandOutput,
   DescribeDatasetImportJobCommand,
-  DescribeDatasetImportJobCommandInput,
-  DescribeDatasetImportJobCommandOutput,
 } from "./commands/DescribeDatasetImportJobCommand";
 import {
+  type DescribeEventTrackerCommandInput,
+  type DescribeEventTrackerCommandOutput,
   DescribeEventTrackerCommand,
-  DescribeEventTrackerCommandInput,
-  DescribeEventTrackerCommandOutput,
 } from "./commands/DescribeEventTrackerCommand";
 import {
+  type DescribeFeatureTransformationCommandInput,
+  type DescribeFeatureTransformationCommandOutput,
   DescribeFeatureTransformationCommand,
-  DescribeFeatureTransformationCommandInput,
-  DescribeFeatureTransformationCommandOutput,
 } from "./commands/DescribeFeatureTransformationCommand";
 import {
+  type DescribeFilterCommandInput,
+  type DescribeFilterCommandOutput,
   DescribeFilterCommand,
-  DescribeFilterCommandInput,
-  DescribeFilterCommandOutput,
 } from "./commands/DescribeFilterCommand";
 import {
+  type DescribeMetricAttributionCommandInput,
+  type DescribeMetricAttributionCommandOutput,
+  DescribeMetricAttributionCommand,
+} from "./commands/DescribeMetricAttributionCommand";
+import {
+  type DescribeRecipeCommandInput,
+  type DescribeRecipeCommandOutput,
   DescribeRecipeCommand,
-  DescribeRecipeCommandInput,
-  DescribeRecipeCommandOutput,
 } from "./commands/DescribeRecipeCommand";
 import {
+  type DescribeRecommenderCommandInput,
+  type DescribeRecommenderCommandOutput,
+  DescribeRecommenderCommand,
+} from "./commands/DescribeRecommenderCommand";
+import {
+  type DescribeSchemaCommandInput,
+  type DescribeSchemaCommandOutput,
   DescribeSchemaCommand,
-  DescribeSchemaCommandInput,
-  DescribeSchemaCommandOutput,
 } from "./commands/DescribeSchemaCommand";
 import {
+  type DescribeSolutionCommandInput,
+  type DescribeSolutionCommandOutput,
   DescribeSolutionCommand,
-  DescribeSolutionCommandInput,
-  DescribeSolutionCommandOutput,
 } from "./commands/DescribeSolutionCommand";
 import {
+  type DescribeSolutionVersionCommandInput,
+  type DescribeSolutionVersionCommandOutput,
   DescribeSolutionVersionCommand,
-  DescribeSolutionVersionCommandInput,
-  DescribeSolutionVersionCommandOutput,
 } from "./commands/DescribeSolutionVersionCommand";
 import {
+  type GetSolutionMetricsCommandInput,
+  type GetSolutionMetricsCommandOutput,
   GetSolutionMetricsCommand,
-  GetSolutionMetricsCommandInput,
-  GetSolutionMetricsCommandOutput,
 } from "./commands/GetSolutionMetricsCommand";
 import {
+  type ListBatchInferenceJobsCommandInput,
+  type ListBatchInferenceJobsCommandOutput,
   ListBatchInferenceJobsCommand,
-  ListBatchInferenceJobsCommandInput,
-  ListBatchInferenceJobsCommandOutput,
 } from "./commands/ListBatchInferenceJobsCommand";
 import {
+  type ListBatchSegmentJobsCommandInput,
+  type ListBatchSegmentJobsCommandOutput,
+  ListBatchSegmentJobsCommand,
+} from "./commands/ListBatchSegmentJobsCommand";
+import {
+  type ListCampaignsCommandInput,
+  type ListCampaignsCommandOutput,
   ListCampaignsCommand,
-  ListCampaignsCommandInput,
-  ListCampaignsCommandOutput,
 } from "./commands/ListCampaignsCommand";
 import {
+  type ListDataDeletionJobsCommandInput,
+  type ListDataDeletionJobsCommandOutput,
+  ListDataDeletionJobsCommand,
+} from "./commands/ListDataDeletionJobsCommand";
+import {
+  type ListDatasetExportJobsCommandInput,
+  type ListDatasetExportJobsCommandOutput,
   ListDatasetExportJobsCommand,
-  ListDatasetExportJobsCommandInput,
-  ListDatasetExportJobsCommandOutput,
 } from "./commands/ListDatasetExportJobsCommand";
 import {
+  type ListDatasetGroupsCommandInput,
+  type ListDatasetGroupsCommandOutput,
   ListDatasetGroupsCommand,
-  ListDatasetGroupsCommandInput,
-  ListDatasetGroupsCommandOutput,
 } from "./commands/ListDatasetGroupsCommand";
 import {
+  type ListDatasetImportJobsCommandInput,
+  type ListDatasetImportJobsCommandOutput,
   ListDatasetImportJobsCommand,
-  ListDatasetImportJobsCommandInput,
-  ListDatasetImportJobsCommandOutput,
 } from "./commands/ListDatasetImportJobsCommand";
 import {
+  type ListDatasetsCommandInput,
+  type ListDatasetsCommandOutput,
   ListDatasetsCommand,
-  ListDatasetsCommandInput,
-  ListDatasetsCommandOutput,
 } from "./commands/ListDatasetsCommand";
 import {
+  type ListEventTrackersCommandInput,
+  type ListEventTrackersCommandOutput,
   ListEventTrackersCommand,
-  ListEventTrackersCommandInput,
-  ListEventTrackersCommandOutput,
 } from "./commands/ListEventTrackersCommand";
-import { ListFiltersCommand, ListFiltersCommandInput, ListFiltersCommandOutput } from "./commands/ListFiltersCommand";
-import { ListRecipesCommand, ListRecipesCommandInput, ListRecipesCommandOutput } from "./commands/ListRecipesCommand";
-import { ListSchemasCommand, ListSchemasCommandInput, ListSchemasCommandOutput } from "./commands/ListSchemasCommand";
 import {
+  type ListFiltersCommandInput,
+  type ListFiltersCommandOutput,
+  ListFiltersCommand,
+} from "./commands/ListFiltersCommand";
+import {
+  type ListMetricAttributionMetricsCommandInput,
+  type ListMetricAttributionMetricsCommandOutput,
+  ListMetricAttributionMetricsCommand,
+} from "./commands/ListMetricAttributionMetricsCommand";
+import {
+  type ListMetricAttributionsCommandInput,
+  type ListMetricAttributionsCommandOutput,
+  ListMetricAttributionsCommand,
+} from "./commands/ListMetricAttributionsCommand";
+import {
+  type ListRecipesCommandInput,
+  type ListRecipesCommandOutput,
+  ListRecipesCommand,
+} from "./commands/ListRecipesCommand";
+import {
+  type ListRecommendersCommandInput,
+  type ListRecommendersCommandOutput,
+  ListRecommendersCommand,
+} from "./commands/ListRecommendersCommand";
+import {
+  type ListSchemasCommandInput,
+  type ListSchemasCommandOutput,
+  ListSchemasCommand,
+} from "./commands/ListSchemasCommand";
+import {
+  type ListSolutionsCommandInput,
+  type ListSolutionsCommandOutput,
   ListSolutionsCommand,
-  ListSolutionsCommandInput,
-  ListSolutionsCommandOutput,
 } from "./commands/ListSolutionsCommand";
 import {
+  type ListSolutionVersionsCommandInput,
+  type ListSolutionVersionsCommandOutput,
   ListSolutionVersionsCommand,
-  ListSolutionVersionsCommandInput,
-  ListSolutionVersionsCommandOutput,
 } from "./commands/ListSolutionVersionsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type StartRecommenderCommandInput,
+  type StartRecommenderCommandOutput,
+  StartRecommenderCommand,
+} from "./commands/StartRecommenderCommand";
+import {
+  type StopRecommenderCommandInput,
+  type StopRecommenderCommandOutput,
+  StopRecommenderCommand,
+} from "./commands/StopRecommenderCommand";
+import {
+  type StopSolutionVersionCreationCommandInput,
+  type StopSolutionVersionCreationCommandOutput,
   StopSolutionVersionCreationCommand,
-  StopSolutionVersionCreationCommandInput,
-  StopSolutionVersionCreationCommandOutput,
 } from "./commands/StopSolutionVersionCreationCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateCampaignCommandInput,
+  type UpdateCampaignCommandOutput,
   UpdateCampaignCommand,
-  UpdateCampaignCommandInput,
-  UpdateCampaignCommandOutput,
 } from "./commands/UpdateCampaignCommand";
+import {
+  type UpdateDatasetCommandInput,
+  type UpdateDatasetCommandOutput,
+  UpdateDatasetCommand,
+} from "./commands/UpdateDatasetCommand";
+import {
+  type UpdateMetricAttributionCommandInput,
+  type UpdateMetricAttributionCommandOutput,
+  UpdateMetricAttributionCommand,
+} from "./commands/UpdateMetricAttributionCommand";
+import {
+  type UpdateRecommenderCommandInput,
+  type UpdateRecommenderCommandOutput,
+  UpdateRecommenderCommand,
+} from "./commands/UpdateRecommenderCommand";
+import {
+  type UpdateSolutionCommandInput,
+  type UpdateSolutionCommandOutput,
+  UpdateSolutionCommand,
+} from "./commands/UpdateSolutionCommand";
+import { paginateListBatchInferenceJobs } from "./pagination/ListBatchInferenceJobsPaginator";
+import { paginateListBatchSegmentJobs } from "./pagination/ListBatchSegmentJobsPaginator";
+import { paginateListCampaigns } from "./pagination/ListCampaignsPaginator";
+import { paginateListDatasetExportJobs } from "./pagination/ListDatasetExportJobsPaginator";
+import { paginateListDatasetGroups } from "./pagination/ListDatasetGroupsPaginator";
+import { paginateListDatasetImportJobs } from "./pagination/ListDatasetImportJobsPaginator";
+import { paginateListDatasets } from "./pagination/ListDatasetsPaginator";
+import { paginateListEventTrackers } from "./pagination/ListEventTrackersPaginator";
+import { paginateListFilters } from "./pagination/ListFiltersPaginator";
+import { paginateListMetricAttributionMetrics } from "./pagination/ListMetricAttributionMetricsPaginator";
+import { paginateListMetricAttributions } from "./pagination/ListMetricAttributionsPaginator";
+import { paginateListRecipes } from "./pagination/ListRecipesPaginator";
+import { paginateListRecommenders } from "./pagination/ListRecommendersPaginator";
+import { paginateListSchemas } from "./pagination/ListSchemasPaginator";
+import { paginateListSolutions } from "./pagination/ListSolutionsPaginator";
+import { paginateListSolutionVersions } from "./pagination/ListSolutionVersionsPaginator";
 import { PersonalizeClient } from "./PersonalizeClient";
+
+const commands = {
+  CreateBatchInferenceJobCommand,
+  CreateBatchSegmentJobCommand,
+  CreateCampaignCommand,
+  CreateDataDeletionJobCommand,
+  CreateDatasetCommand,
+  CreateDatasetExportJobCommand,
+  CreateDatasetGroupCommand,
+  CreateDatasetImportJobCommand,
+  CreateEventTrackerCommand,
+  CreateFilterCommand,
+  CreateMetricAttributionCommand,
+  CreateRecommenderCommand,
+  CreateSchemaCommand,
+  CreateSolutionCommand,
+  CreateSolutionVersionCommand,
+  DeleteCampaignCommand,
+  DeleteDatasetCommand,
+  DeleteDatasetGroupCommand,
+  DeleteEventTrackerCommand,
+  DeleteFilterCommand,
+  DeleteMetricAttributionCommand,
+  DeleteRecommenderCommand,
+  DeleteSchemaCommand,
+  DeleteSolutionCommand,
+  DescribeAlgorithmCommand,
+  DescribeBatchInferenceJobCommand,
+  DescribeBatchSegmentJobCommand,
+  DescribeCampaignCommand,
+  DescribeDataDeletionJobCommand,
+  DescribeDatasetCommand,
+  DescribeDatasetExportJobCommand,
+  DescribeDatasetGroupCommand,
+  DescribeDatasetImportJobCommand,
+  DescribeEventTrackerCommand,
+  DescribeFeatureTransformationCommand,
+  DescribeFilterCommand,
+  DescribeMetricAttributionCommand,
+  DescribeRecipeCommand,
+  DescribeRecommenderCommand,
+  DescribeSchemaCommand,
+  DescribeSolutionCommand,
+  DescribeSolutionVersionCommand,
+  GetSolutionMetricsCommand,
+  ListBatchInferenceJobsCommand,
+  ListBatchSegmentJobsCommand,
+  ListCampaignsCommand,
+  ListDataDeletionJobsCommand,
+  ListDatasetExportJobsCommand,
+  ListDatasetGroupsCommand,
+  ListDatasetImportJobsCommand,
+  ListDatasetsCommand,
+  ListEventTrackersCommand,
+  ListFiltersCommand,
+  ListMetricAttributionMetricsCommand,
+  ListMetricAttributionsCommand,
+  ListRecipesCommand,
+  ListRecommendersCommand,
+  ListSchemasCommand,
+  ListSolutionsCommand,
+  ListSolutionVersionsCommand,
+  ListTagsForResourceCommand,
+  StartRecommenderCommand,
+  StopRecommenderCommand,
+  StopSolutionVersionCreationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCampaignCommand,
+  UpdateDatasetCommand,
+  UpdateMetricAttributionCommand,
+  UpdateRecommenderCommand,
+  UpdateSolutionCommand,
+};
+const paginators = {
+  paginateListBatchInferenceJobs,
+  paginateListBatchSegmentJobs,
+  paginateListCampaigns,
+  paginateListDatasetExportJobs,
+  paginateListDatasetGroups,
+  paginateListDatasetImportJobs,
+  paginateListDatasets,
+  paginateListEventTrackers,
+  paginateListFilters,
+  paginateListMetricAttributionMetrics,
+  paginateListMetricAttributions,
+  paginateListRecipes,
+  paginateListRecommenders,
+  paginateListSchemas,
+  paginateListSolutions,
+  paginateListSolutionVersions,
+};
+
+/**
+ * @public
+ */
+export interface PersonalizeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Personalize {
+  /**
+   * @see {@link CreateBatchInferenceJobCommand}
+   */
+  createBatchInferenceJob(
+    args: CreateBatchInferenceJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateBatchInferenceJobCommandOutput>;
+  createBatchInferenceJob(
+    args: CreateBatchInferenceJobCommandInput,
+    cb: (err: any, data?: CreateBatchInferenceJobCommandOutput) => void
+  ): void;
+  createBatchInferenceJob(
+    args: CreateBatchInferenceJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateBatchInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBatchSegmentJobCommand}
+   */
+  createBatchSegmentJob(
+    args: CreateBatchSegmentJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateBatchSegmentJobCommandOutput>;
+  createBatchSegmentJob(
+    args: CreateBatchSegmentJobCommandInput,
+    cb: (err: any, data?: CreateBatchSegmentJobCommandOutput) => void
+  ): void;
+  createBatchSegmentJob(
+    args: CreateBatchSegmentJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateBatchSegmentJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCampaignCommand}
+   */
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateCampaignCommandOutput>;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+  createCampaign(
+    args: CreateCampaignCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDataDeletionJobCommand}
+   */
+  createDataDeletionJob(
+    args: CreateDataDeletionJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateDataDeletionJobCommandOutput>;
+  createDataDeletionJob(
+    args: CreateDataDeletionJobCommandInput,
+    cb: (err: any, data?: CreateDataDeletionJobCommandOutput) => void
+  ): void;
+  createDataDeletionJob(
+    args: CreateDataDeletionJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateDataDeletionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatasetCommand}
+   */
+  createDataset(
+    args: CreateDatasetCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateDatasetCommandOutput>;
+  createDataset(
+    args: CreateDatasetCommandInput,
+    cb: (err: any, data?: CreateDatasetCommandOutput) => void
+  ): void;
+  createDataset(
+    args: CreateDatasetCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatasetExportJobCommand}
+   */
+  createDatasetExportJob(
+    args: CreateDatasetExportJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateDatasetExportJobCommandOutput>;
+  createDatasetExportJob(
+    args: CreateDatasetExportJobCommandInput,
+    cb: (err: any, data?: CreateDatasetExportJobCommandOutput) => void
+  ): void;
+  createDatasetExportJob(
+    args: CreateDatasetExportJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateDatasetExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatasetGroupCommand}
+   */
+  createDatasetGroup(
+    args: CreateDatasetGroupCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateDatasetGroupCommandOutput>;
+  createDatasetGroup(
+    args: CreateDatasetGroupCommandInput,
+    cb: (err: any, data?: CreateDatasetGroupCommandOutput) => void
+  ): void;
+  createDatasetGroup(
+    args: CreateDatasetGroupCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateDatasetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDatasetImportJobCommand}
+   */
+  createDatasetImportJob(
+    args: CreateDatasetImportJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateDatasetImportJobCommandOutput>;
+  createDatasetImportJob(
+    args: CreateDatasetImportJobCommandInput,
+    cb: (err: any, data?: CreateDatasetImportJobCommandOutput) => void
+  ): void;
+  createDatasetImportJob(
+    args: CreateDatasetImportJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateDatasetImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEventTrackerCommand}
+   */
+  createEventTracker(
+    args: CreateEventTrackerCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateEventTrackerCommandOutput>;
+  createEventTracker(
+    args: CreateEventTrackerCommandInput,
+    cb: (err: any, data?: CreateEventTrackerCommandOutput) => void
+  ): void;
+  createEventTracker(
+    args: CreateEventTrackerCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateEventTrackerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFilterCommand}
+   */
+  createFilter(
+    args: CreateFilterCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateFilterCommandOutput>;
+  createFilter(
+    args: CreateFilterCommandInput,
+    cb: (err: any, data?: CreateFilterCommandOutput) => void
+  ): void;
+  createFilter(
+    args: CreateFilterCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMetricAttributionCommand}
+   */
+  createMetricAttribution(
+    args: CreateMetricAttributionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateMetricAttributionCommandOutput>;
+  createMetricAttribution(
+    args: CreateMetricAttributionCommandInput,
+    cb: (err: any, data?: CreateMetricAttributionCommandOutput) => void
+  ): void;
+  createMetricAttribution(
+    args: CreateMetricAttributionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateMetricAttributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecommenderCommand}
+   */
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateRecommenderCommandOutput>;
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    cb: (err: any, data?: CreateRecommenderCommandOutput) => void
+  ): void;
+  createRecommender(
+    args: CreateRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSchemaCommand}
+   */
+  createSchema(
+    args: CreateSchemaCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateSchemaCommandOutput>;
+  createSchema(
+    args: CreateSchemaCommandInput,
+    cb: (err: any, data?: CreateSchemaCommandOutput) => void
+  ): void;
+  createSchema(
+    args: CreateSchemaCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSolutionCommand}
+   */
+  createSolution(
+    args: CreateSolutionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateSolutionCommandOutput>;
+  createSolution(
+    args: CreateSolutionCommandInput,
+    cb: (err: any, data?: CreateSolutionCommandOutput) => void
+  ): void;
+  createSolution(
+    args: CreateSolutionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateSolutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSolutionVersionCommand}
+   */
+  createSolutionVersion(
+    args: CreateSolutionVersionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<CreateSolutionVersionCommandOutput>;
+  createSolutionVersion(
+    args: CreateSolutionVersionCommandInput,
+    cb: (err: any, data?: CreateSolutionVersionCommandOutput) => void
+  ): void;
+  createSolutionVersion(
+    args: CreateSolutionVersionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: CreateSolutionVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCampaignCommand}
+   */
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteCampaignCommandOutput>;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+  deleteCampaign(
+    args: DeleteCampaignCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDatasetCommand}
+   */
+  deleteDataset(
+    args: DeleteDatasetCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteDatasetCommandOutput>;
+  deleteDataset(
+    args: DeleteDatasetCommandInput,
+    cb: (err: any, data?: DeleteDatasetCommandOutput) => void
+  ): void;
+  deleteDataset(
+    args: DeleteDatasetCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDatasetGroupCommand}
+   */
+  deleteDatasetGroup(
+    args: DeleteDatasetGroupCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteDatasetGroupCommandOutput>;
+  deleteDatasetGroup(
+    args: DeleteDatasetGroupCommandInput,
+    cb: (err: any, data?: DeleteDatasetGroupCommandOutput) => void
+  ): void;
+  deleteDatasetGroup(
+    args: DeleteDatasetGroupCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteDatasetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEventTrackerCommand}
+   */
+  deleteEventTracker(
+    args: DeleteEventTrackerCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteEventTrackerCommandOutput>;
+  deleteEventTracker(
+    args: DeleteEventTrackerCommandInput,
+    cb: (err: any, data?: DeleteEventTrackerCommandOutput) => void
+  ): void;
+  deleteEventTracker(
+    args: DeleteEventTrackerCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteEventTrackerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFilterCommand}
+   */
+  deleteFilter(
+    args: DeleteFilterCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteFilterCommandOutput>;
+  deleteFilter(
+    args: DeleteFilterCommandInput,
+    cb: (err: any, data?: DeleteFilterCommandOutput) => void
+  ): void;
+  deleteFilter(
+    args: DeleteFilterCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMetricAttributionCommand}
+   */
+  deleteMetricAttribution(
+    args: DeleteMetricAttributionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteMetricAttributionCommandOutput>;
+  deleteMetricAttribution(
+    args: DeleteMetricAttributionCommandInput,
+    cb: (err: any, data?: DeleteMetricAttributionCommandOutput) => void
+  ): void;
+  deleteMetricAttribution(
+    args: DeleteMetricAttributionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteMetricAttributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecommenderCommand}
+   */
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteRecommenderCommandOutput>;
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    cb: (err: any, data?: DeleteRecommenderCommandOutput) => void
+  ): void;
+  deleteRecommender(
+    args: DeleteRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSchemaCommand}
+   */
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteSchemaCommandOutput>;
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
+  ): void;
+  deleteSchema(
+    args: DeleteSchemaCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSolutionCommand}
+   */
+  deleteSolution(
+    args: DeleteSolutionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DeleteSolutionCommandOutput>;
+  deleteSolution(
+    args: DeleteSolutionCommandInput,
+    cb: (err: any, data?: DeleteSolutionCommandOutput) => void
+  ): void;
+  deleteSolution(
+    args: DeleteSolutionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DeleteSolutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAlgorithmCommand}
+   */
+  describeAlgorithm(
+    args: DescribeAlgorithmCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeAlgorithmCommandOutput>;
+  describeAlgorithm(
+    args: DescribeAlgorithmCommandInput,
+    cb: (err: any, data?: DescribeAlgorithmCommandOutput) => void
+  ): void;
+  describeAlgorithm(
+    args: DescribeAlgorithmCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeAlgorithmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBatchInferenceJobCommand}
+   */
+  describeBatchInferenceJob(
+    args: DescribeBatchInferenceJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeBatchInferenceJobCommandOutput>;
+  describeBatchInferenceJob(
+    args: DescribeBatchInferenceJobCommandInput,
+    cb: (err: any, data?: DescribeBatchInferenceJobCommandOutput) => void
+  ): void;
+  describeBatchInferenceJob(
+    args: DescribeBatchInferenceJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeBatchInferenceJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeBatchSegmentJobCommand}
+   */
+  describeBatchSegmentJob(
+    args: DescribeBatchSegmentJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeBatchSegmentJobCommandOutput>;
+  describeBatchSegmentJob(
+    args: DescribeBatchSegmentJobCommandInput,
+    cb: (err: any, data?: DescribeBatchSegmentJobCommandOutput) => void
+  ): void;
+  describeBatchSegmentJob(
+    args: DescribeBatchSegmentJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeBatchSegmentJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeCampaignCommand}
+   */
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeCampaignCommandOutput>;
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
+  ): void;
+  describeCampaign(
+    args: DescribeCampaignCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDataDeletionJobCommand}
+   */
+  describeDataDeletionJob(
+    args: DescribeDataDeletionJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeDataDeletionJobCommandOutput>;
+  describeDataDeletionJob(
+    args: DescribeDataDeletionJobCommandInput,
+    cb: (err: any, data?: DescribeDataDeletionJobCommandOutput) => void
+  ): void;
+  describeDataDeletionJob(
+    args: DescribeDataDeletionJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeDataDeletionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDatasetCommand}
+   */
+  describeDataset(
+    args: DescribeDatasetCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeDatasetCommandOutput>;
+  describeDataset(
+    args: DescribeDatasetCommandInput,
+    cb: (err: any, data?: DescribeDatasetCommandOutput) => void
+  ): void;
+  describeDataset(
+    args: DescribeDatasetCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDatasetExportJobCommand}
+   */
+  describeDatasetExportJob(
+    args: DescribeDatasetExportJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeDatasetExportJobCommandOutput>;
+  describeDatasetExportJob(
+    args: DescribeDatasetExportJobCommandInput,
+    cb: (err: any, data?: DescribeDatasetExportJobCommandOutput) => void
+  ): void;
+  describeDatasetExportJob(
+    args: DescribeDatasetExportJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeDatasetExportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDatasetGroupCommand}
+   */
+  describeDatasetGroup(
+    args: DescribeDatasetGroupCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeDatasetGroupCommandOutput>;
+  describeDatasetGroup(
+    args: DescribeDatasetGroupCommandInput,
+    cb: (err: any, data?: DescribeDatasetGroupCommandOutput) => void
+  ): void;
+  describeDatasetGroup(
+    args: DescribeDatasetGroupCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeDatasetGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDatasetImportJobCommand}
+   */
+  describeDatasetImportJob(
+    args: DescribeDatasetImportJobCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeDatasetImportJobCommandOutput>;
+  describeDatasetImportJob(
+    args: DescribeDatasetImportJobCommandInput,
+    cb: (err: any, data?: DescribeDatasetImportJobCommandOutput) => void
+  ): void;
+  describeDatasetImportJob(
+    args: DescribeDatasetImportJobCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeDatasetImportJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeEventTrackerCommand}
+   */
+  describeEventTracker(
+    args: DescribeEventTrackerCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeEventTrackerCommandOutput>;
+  describeEventTracker(
+    args: DescribeEventTrackerCommandInput,
+    cb: (err: any, data?: DescribeEventTrackerCommandOutput) => void
+  ): void;
+  describeEventTracker(
+    args: DescribeEventTrackerCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeEventTrackerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFeatureTransformationCommand}
+   */
+  describeFeatureTransformation(
+    args: DescribeFeatureTransformationCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeFeatureTransformationCommandOutput>;
+  describeFeatureTransformation(
+    args: DescribeFeatureTransformationCommandInput,
+    cb: (err: any, data?: DescribeFeatureTransformationCommandOutput) => void
+  ): void;
+  describeFeatureTransformation(
+    args: DescribeFeatureTransformationCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeFeatureTransformationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeFilterCommand}
+   */
+  describeFilter(
+    args: DescribeFilterCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeFilterCommandOutput>;
+  describeFilter(
+    args: DescribeFilterCommandInput,
+    cb: (err: any, data?: DescribeFilterCommandOutput) => void
+  ): void;
+  describeFilter(
+    args: DescribeFilterCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetricAttributionCommand}
+   */
+  describeMetricAttribution(
+    args: DescribeMetricAttributionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeMetricAttributionCommandOutput>;
+  describeMetricAttribution(
+    args: DescribeMetricAttributionCommandInput,
+    cb: (err: any, data?: DescribeMetricAttributionCommandOutput) => void
+  ): void;
+  describeMetricAttribution(
+    args: DescribeMetricAttributionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeMetricAttributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecipeCommand}
+   */
+  describeRecipe(
+    args: DescribeRecipeCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeRecipeCommandOutput>;
+  describeRecipe(
+    args: DescribeRecipeCommandInput,
+    cb: (err: any, data?: DescribeRecipeCommandOutput) => void
+  ): void;
+  describeRecipe(
+    args: DescribeRecipeCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeRecipeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecommenderCommand}
+   */
+  describeRecommender(
+    args: DescribeRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeRecommenderCommandOutput>;
+  describeRecommender(
+    args: DescribeRecommenderCommandInput,
+    cb: (err: any, data?: DescribeRecommenderCommandOutput) => void
+  ): void;
+  describeRecommender(
+    args: DescribeRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSchemaCommand}
+   */
+  describeSchema(
+    args: DescribeSchemaCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeSchemaCommandOutput>;
+  describeSchema(
+    args: DescribeSchemaCommandInput,
+    cb: (err: any, data?: DescribeSchemaCommandOutput) => void
+  ): void;
+  describeSchema(
+    args: DescribeSchemaCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeSchemaCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSolutionCommand}
+   */
+  describeSolution(
+    args: DescribeSolutionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeSolutionCommandOutput>;
+  describeSolution(
+    args: DescribeSolutionCommandInput,
+    cb: (err: any, data?: DescribeSolutionCommandOutput) => void
+  ): void;
+  describeSolution(
+    args: DescribeSolutionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeSolutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSolutionVersionCommand}
+   */
+  describeSolutionVersion(
+    args: DescribeSolutionVersionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<DescribeSolutionVersionCommandOutput>;
+  describeSolutionVersion(
+    args: DescribeSolutionVersionCommandInput,
+    cb: (err: any, data?: DescribeSolutionVersionCommandOutput) => void
+  ): void;
+  describeSolutionVersion(
+    args: DescribeSolutionVersionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: DescribeSolutionVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSolutionMetricsCommand}
+   */
+  getSolutionMetrics(
+    args: GetSolutionMetricsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<GetSolutionMetricsCommandOutput>;
+  getSolutionMetrics(
+    args: GetSolutionMetricsCommandInput,
+    cb: (err: any, data?: GetSolutionMetricsCommandOutput) => void
+  ): void;
+  getSolutionMetrics(
+    args: GetSolutionMetricsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: GetSolutionMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchInferenceJobsCommand}
+   */
+  listBatchInferenceJobs(): Promise<ListBatchInferenceJobsCommandOutput>;
+  listBatchInferenceJobs(
+    args: ListBatchInferenceJobsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListBatchInferenceJobsCommandOutput>;
+  listBatchInferenceJobs(
+    args: ListBatchInferenceJobsCommandInput,
+    cb: (err: any, data?: ListBatchInferenceJobsCommandOutput) => void
+  ): void;
+  listBatchInferenceJobs(
+    args: ListBatchInferenceJobsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListBatchInferenceJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchSegmentJobsCommand}
+   */
+  listBatchSegmentJobs(): Promise<ListBatchSegmentJobsCommandOutput>;
+  listBatchSegmentJobs(
+    args: ListBatchSegmentJobsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListBatchSegmentJobsCommandOutput>;
+  listBatchSegmentJobs(
+    args: ListBatchSegmentJobsCommandInput,
+    cb: (err: any, data?: ListBatchSegmentJobsCommandOutput) => void
+  ): void;
+  listBatchSegmentJobs(
+    args: ListBatchSegmentJobsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListBatchSegmentJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   */
+  listCampaigns(): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListCampaignsCommandOutput>;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+  listCampaigns(
+    args: ListCampaignsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListCampaignsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDataDeletionJobsCommand}
+   */
+  listDataDeletionJobs(): Promise<ListDataDeletionJobsCommandOutput>;
+  listDataDeletionJobs(
+    args: ListDataDeletionJobsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListDataDeletionJobsCommandOutput>;
+  listDataDeletionJobs(
+    args: ListDataDeletionJobsCommandInput,
+    cb: (err: any, data?: ListDataDeletionJobsCommandOutput) => void
+  ): void;
+  listDataDeletionJobs(
+    args: ListDataDeletionJobsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListDataDeletionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatasetExportJobsCommand}
+   */
+  listDatasetExportJobs(): Promise<ListDatasetExportJobsCommandOutput>;
+  listDatasetExportJobs(
+    args: ListDatasetExportJobsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListDatasetExportJobsCommandOutput>;
+  listDatasetExportJobs(
+    args: ListDatasetExportJobsCommandInput,
+    cb: (err: any, data?: ListDatasetExportJobsCommandOutput) => void
+  ): void;
+  listDatasetExportJobs(
+    args: ListDatasetExportJobsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListDatasetExportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatasetGroupsCommand}
+   */
+  listDatasetGroups(): Promise<ListDatasetGroupsCommandOutput>;
+  listDatasetGroups(
+    args: ListDatasetGroupsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListDatasetGroupsCommandOutput>;
+  listDatasetGroups(
+    args: ListDatasetGroupsCommandInput,
+    cb: (err: any, data?: ListDatasetGroupsCommandOutput) => void
+  ): void;
+  listDatasetGroups(
+    args: ListDatasetGroupsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListDatasetGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatasetImportJobsCommand}
+   */
+  listDatasetImportJobs(): Promise<ListDatasetImportJobsCommandOutput>;
+  listDatasetImportJobs(
+    args: ListDatasetImportJobsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListDatasetImportJobsCommandOutput>;
+  listDatasetImportJobs(
+    args: ListDatasetImportJobsCommandInput,
+    cb: (err: any, data?: ListDatasetImportJobsCommandOutput) => void
+  ): void;
+  listDatasetImportJobs(
+    args: ListDatasetImportJobsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListDatasetImportJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListDatasetsCommand}
+   */
+  listDatasets(): Promise<ListDatasetsCommandOutput>;
+  listDatasets(
+    args: ListDatasetsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListDatasetsCommandOutput>;
+  listDatasets(
+    args: ListDatasetsCommandInput,
+    cb: (err: any, data?: ListDatasetsCommandOutput) => void
+  ): void;
+  listDatasets(
+    args: ListDatasetsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListDatasetsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventTrackersCommand}
+   */
+  listEventTrackers(): Promise<ListEventTrackersCommandOutput>;
+  listEventTrackers(
+    args: ListEventTrackersCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListEventTrackersCommandOutput>;
+  listEventTrackers(
+    args: ListEventTrackersCommandInput,
+    cb: (err: any, data?: ListEventTrackersCommandOutput) => void
+  ): void;
+  listEventTrackers(
+    args: ListEventTrackersCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListEventTrackersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListFiltersCommand}
+   */
+  listFilters(): Promise<ListFiltersCommandOutput>;
+  listFilters(
+    args: ListFiltersCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListFiltersCommandOutput>;
+  listFilters(
+    args: ListFiltersCommandInput,
+    cb: (err: any, data?: ListFiltersCommandOutput) => void
+  ): void;
+  listFilters(
+    args: ListFiltersCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListFiltersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMetricAttributionMetricsCommand}
+   */
+  listMetricAttributionMetrics(): Promise<ListMetricAttributionMetricsCommandOutput>;
+  listMetricAttributionMetrics(
+    args: ListMetricAttributionMetricsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListMetricAttributionMetricsCommandOutput>;
+  listMetricAttributionMetrics(
+    args: ListMetricAttributionMetricsCommandInput,
+    cb: (err: any, data?: ListMetricAttributionMetricsCommandOutput) => void
+  ): void;
+  listMetricAttributionMetrics(
+    args: ListMetricAttributionMetricsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListMetricAttributionMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMetricAttributionsCommand}
+   */
+  listMetricAttributions(): Promise<ListMetricAttributionsCommandOutput>;
+  listMetricAttributions(
+    args: ListMetricAttributionsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListMetricAttributionsCommandOutput>;
+  listMetricAttributions(
+    args: ListMetricAttributionsCommandInput,
+    cb: (err: any, data?: ListMetricAttributionsCommandOutput) => void
+  ): void;
+  listMetricAttributions(
+    args: ListMetricAttributionsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListMetricAttributionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecipesCommand}
+   */
+  listRecipes(): Promise<ListRecipesCommandOutput>;
+  listRecipes(
+    args: ListRecipesCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListRecipesCommandOutput>;
+  listRecipes(
+    args: ListRecipesCommandInput,
+    cb: (err: any, data?: ListRecipesCommandOutput) => void
+  ): void;
+  listRecipes(
+    args: ListRecipesCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListRecipesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendersCommand}
+   */
+  listRecommenders(): Promise<ListRecommendersCommandOutput>;
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListRecommendersCommandOutput>;
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    cb: (err: any, data?: ListRecommendersCommandOutput) => void
+  ): void;
+  listRecommenders(
+    args: ListRecommendersCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListRecommendersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSchemasCommand}
+   */
+  listSchemas(): Promise<ListSchemasCommandOutput>;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListSchemasCommandOutput>;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    cb: (err: any, data?: ListSchemasCommandOutput) => void
+  ): void;
+  listSchemas(
+    args: ListSchemasCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListSchemasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSolutionsCommand}
+   */
+  listSolutions(): Promise<ListSolutionsCommandOutput>;
+  listSolutions(
+    args: ListSolutionsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListSolutionsCommandOutput>;
+  listSolutions(
+    args: ListSolutionsCommandInput,
+    cb: (err: any, data?: ListSolutionsCommandOutput) => void
+  ): void;
+  listSolutions(
+    args: ListSolutionsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListSolutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSolutionVersionsCommand}
+   */
+  listSolutionVersions(): Promise<ListSolutionVersionsCommandOutput>;
+  listSolutionVersions(
+    args: ListSolutionVersionsCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListSolutionVersionsCommandOutput>;
+  listSolutionVersions(
+    args: ListSolutionVersionsCommandInput,
+    cb: (err: any, data?: ListSolutionVersionsCommandOutput) => void
+  ): void;
+  listSolutionVersions(
+    args: ListSolutionVersionsCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListSolutionVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecommenderCommand}
+   */
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<StartRecommenderCommandOutput>;
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    cb: (err: any, data?: StartRecommenderCommandOutput) => void
+  ): void;
+  startRecommender(
+    args: StartRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: StartRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopRecommenderCommand}
+   */
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<StopRecommenderCommandOutput>;
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    cb: (err: any, data?: StopRecommenderCommandOutput) => void
+  ): void;
+  stopRecommender(
+    args: StopRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: StopRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopSolutionVersionCreationCommand}
+   */
+  stopSolutionVersionCreation(
+    args: StopSolutionVersionCreationCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<StopSolutionVersionCreationCommandOutput>;
+  stopSolutionVersionCreation(
+    args: StopSolutionVersionCreationCommandInput,
+    cb: (err: any, data?: StopSolutionVersionCreationCommandOutput) => void
+  ): void;
+  stopSolutionVersionCreation(
+    args: StopSolutionVersionCreationCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: StopSolutionVersionCreationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCampaignCommand}
+   */
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UpdateCampaignCommandOutput>;
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
+  ): void;
+  updateCampaign(
+    args: UpdateCampaignCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDatasetCommand}
+   */
+  updateDataset(
+    args: UpdateDatasetCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UpdateDatasetCommandOutput>;
+  updateDataset(
+    args: UpdateDatasetCommandInput,
+    cb: (err: any, data?: UpdateDatasetCommandOutput) => void
+  ): void;
+  updateDataset(
+    args: UpdateDatasetCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UpdateDatasetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMetricAttributionCommand}
+   */
+  updateMetricAttribution(): Promise<UpdateMetricAttributionCommandOutput>;
+  updateMetricAttribution(
+    args: UpdateMetricAttributionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UpdateMetricAttributionCommandOutput>;
+  updateMetricAttribution(
+    args: UpdateMetricAttributionCommandInput,
+    cb: (err: any, data?: UpdateMetricAttributionCommandOutput) => void
+  ): void;
+  updateMetricAttribution(
+    args: UpdateMetricAttributionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UpdateMetricAttributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRecommenderCommand}
+   */
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UpdateRecommenderCommandOutput>;
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    cb: (err: any, data?: UpdateRecommenderCommandOutput) => void
+  ): void;
+  updateRecommender(
+    args: UpdateRecommenderCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UpdateRecommenderCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSolutionCommand}
+   */
+  updateSolution(
+    args: UpdateSolutionCommandInput,
+    options?: PersonalizeRequestOptions
+  ): Promise<UpdateSolutionCommandOutput>;
+  updateSolution(
+    args: UpdateSolutionCommandInput,
+    cb: (err: any, data?: UpdateSolutionCommandOutput) => void
+  ): void;
+  updateSolution(
+    args: UpdateSolutionCommandInput,
+    options: PersonalizeRequestOptions,
+    cb: (err: any, data?: UpdateSolutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListBatchInferenceJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBatchInferenceJobsCommandOutput}.
+   */
+  paginateListBatchInferenceJobs(
+    args?: ListBatchInferenceJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBatchInferenceJobsCommandOutput>;
+
+  /**
+   * @see {@link ListBatchSegmentJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBatchSegmentJobsCommandOutput}.
+   */
+  paginateListBatchSegmentJobs(
+    args?: ListBatchSegmentJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBatchSegmentJobsCommandOutput>;
+
+  /**
+   * @see {@link ListCampaignsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCampaignsCommandOutput}.
+   */
+  paginateListCampaigns(
+    args?: ListCampaignsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCampaignsCommandOutput>;
+
+  /**
+   * @see {@link ListDatasetExportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatasetExportJobsCommandOutput}.
+   */
+  paginateListDatasetExportJobs(
+    args?: ListDatasetExportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatasetExportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListDatasetGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatasetGroupsCommandOutput}.
+   */
+  paginateListDatasetGroups(
+    args?: ListDatasetGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatasetGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListDatasetImportJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatasetImportJobsCommandOutput}.
+   */
+  paginateListDatasetImportJobs(
+    args?: ListDatasetImportJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatasetImportJobsCommandOutput>;
+
+  /**
+   * @see {@link ListDatasetsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDatasetsCommandOutput}.
+   */
+  paginateListDatasets(
+    args?: ListDatasetsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDatasetsCommandOutput>;
+
+  /**
+   * @see {@link ListEventTrackersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEventTrackersCommandOutput}.
+   */
+  paginateListEventTrackers(
+    args?: ListEventTrackersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEventTrackersCommandOutput>;
+
+  /**
+   * @see {@link ListFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFiltersCommandOutput}.
+   */
+  paginateListFilters(
+    args?: ListFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFiltersCommandOutput>;
+
+  /**
+   * @see {@link ListMetricAttributionMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMetricAttributionMetricsCommandOutput}.
+   */
+  paginateListMetricAttributionMetrics(
+    args?: ListMetricAttributionMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMetricAttributionMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListMetricAttributionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMetricAttributionsCommandOutput}.
+   */
+  paginateListMetricAttributions(
+    args?: ListMetricAttributionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMetricAttributionsCommandOutput>;
+
+  /**
+   * @see {@link ListRecipesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecipesCommandOutput}.
+   */
+  paginateListRecipes(
+    args?: ListRecipesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecipesCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendersCommandOutput}.
+   */
+  paginateListRecommenders(
+    args?: ListRecommendersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendersCommandOutput>;
+
+  /**
+   * @see {@link ListSchemasCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSchemasCommandOutput}.
+   */
+  paginateListSchemas(
+    args?: ListSchemasCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSchemasCommandOutput>;
+
+  /**
+   * @see {@link ListSolutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSolutionsCommandOutput}.
+   */
+  paginateListSolutions(
+    args?: ListSolutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSolutionsCommandOutput>;
+
+  /**
+   * @see {@link ListSolutionVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSolutionVersionsCommandOutput}.
+   */
+  paginateListSolutionVersions(
+    args?: ListSolutionVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSolutionVersionsCommandOutput>;
+}
 
 /**
  * <p>Amazon Personalize is a machine learning service that makes it easy to add individualized
  *       recommendations to customers.</p>
+ * @public
  */
-export class Personalize extends PersonalizeClient {
-  /**
-   * <p>Creates a batch inference job. The operation can handle up to 50 million records and the
-   *       input file must be in JSON format. For more information, see <a>recommendations-batch</a>.</p>
-   */
-  public createBatchInferenceJob(
-    args: CreateBatchInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBatchInferenceJobCommandOutput>;
-  public createBatchInferenceJob(
-    args: CreateBatchInferenceJobCommandInput,
-    cb: (err: any, data?: CreateBatchInferenceJobCommandOutput) => void
-  ): void;
-  public createBatchInferenceJob(
-    args: CreateBatchInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBatchInferenceJobCommandOutput) => void
-  ): void;
-  public createBatchInferenceJob(
-    args: CreateBatchInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBatchInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateBatchInferenceJobCommandOutput) => void
-  ): Promise<CreateBatchInferenceJobCommandOutput> | void {
-    const command = new CreateBatchInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a campaign by deploying a solution version. When a client calls the
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a>
-   *       and
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html">GetPersonalizedRanking</a>
-   *       APIs, a campaign is specified in the request.</p>
-   *
-   *          <p>
-   *             <b>Minimum Provisioned TPS and Auto-Scaling</b>
-   *          </p>
-   *
-   *          <p>A transaction is a single <code>GetRecommendations</code> or
-   *        <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput
-   *        and unit of billing for Amazon Personalize. The minimum provisioned TPS
-   *        (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by
-   *        Amazon Personalize, and thus, the minimum billing charge.
-   *     </p>
-   *          <p>
-   *        If your TPS increases beyond
-   *        <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,
-   *        but never below <code>minProvisionedTPS</code>.
-   *        There's a short time delay while the capacity is increased that might cause loss of
-   *        transactions.</p>
-   *          <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.
-   *       You pay for maximum of either the minimum provisioned TPS or the actual TPS.
-   *       We recommend starting with a low <code>minProvisionedTPS</code>, track
-   *        your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>
-   *        as necessary.</p>
-   *
-   *          <p>
-   *             <b>Status</b>
-   *          </p>
-   *          <p>A campaign can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the campaign status, call <a>DescribeCampaign</a>.</p>
-   *          <note>
-   *             <p>Wait until the <code>status</code> of the campaign
-   *         is <code>ACTIVE</code> before asking the campaign for recommendations.</p>
-   *          </note>
-   *
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListCampaigns</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeCampaign</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>UpdateCampaign</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteCampaign</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createCampaign(
-    args: CreateCampaignCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCampaignCommandOutput>;
-  public createCampaign(
-    args: CreateCampaignCommandInput,
-    cb: (err: any, data?: CreateCampaignCommandOutput) => void
-  ): void;
-  public createCampaign(
-    args: CreateCampaignCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCampaignCommandOutput) => void
-  ): void;
-  public createCampaign(
-    args: CreateCampaignCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCampaignCommandOutput) => void),
-    cb?: (err: any, data?: CreateCampaignCommandOutput) => void
-  ): Promise<CreateCampaignCommandOutput> | void {
-    const command = new CreateCampaignCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an empty dataset and adds it to the specified dataset group. Use <a>CreateDatasetImportJob</a> to import your training data to a dataset.</p>
-   *          <p>There are three types of datasets:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Interactions</p>
-   *             </li>
-   *             <li>
-   *                <p>Items</p>
-   *             </li>
-   *             <li>
-   *                <p>Users</p>
-   *             </li>
-   *          </ul>
-   *          <p>Each dataset type has an associated schema with required field types. Only the
-   *         <code>Interactions</code> dataset is required in order to train a model (also referred to as
-   *       creating a solution).</p>
-   *          <p>A dataset can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the dataset, call <a>DescribeDataset</a>.</p>
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>CreateDatasetGroup</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>ListDatasets</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeDataset</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteDataset</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createDataset(
-    args: CreateDatasetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDatasetCommandOutput>;
-  public createDataset(
-    args: CreateDatasetCommandInput,
-    cb: (err: any, data?: CreateDatasetCommandOutput) => void
-  ): void;
-  public createDataset(
-    args: CreateDatasetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDatasetCommandOutput) => void
-  ): void;
-  public createDataset(
-    args: CreateDatasetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDatasetCommandOutput) => void),
-    cb?: (err: any, data?: CreateDatasetCommandOutput) => void
-  ): Promise<CreateDatasetCommandOutput> | void {
-    const command = new CreateDatasetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>
-   *       Creates a job that exports data from your dataset to an Amazon S3 bucket.
-   *       To allow Amazon Personalize to export the training data, you must specify an
-   *       service-linked IAM role that gives Amazon Personalize <code>PutObject</code> permissions for your Amazon S3 bucket.
-   *       For information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/export-data.html">Exporting a dataset</a>
-   *       in the Amazon Personalize developer guide.
-   *     </p>
-   *          <p>
-   *             <b>Status</b>
-   *          </p>
-   *          <p>A dataset export job can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *          </ul>
-   *          <p>
-   *       To get the status of the export job, call <a>DescribeDatasetExportJob</a>,
-   *       and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is
-   *       complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response
-   *       includes a <code>failureReason</code> key, which describes why the job failed.
-   *     </p>
-   */
-  public createDatasetExportJob(
-    args: CreateDatasetExportJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDatasetExportJobCommandOutput>;
-  public createDatasetExportJob(
-    args: CreateDatasetExportJobCommandInput,
-    cb: (err: any, data?: CreateDatasetExportJobCommandOutput) => void
-  ): void;
-  public createDatasetExportJob(
-    args: CreateDatasetExportJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDatasetExportJobCommandOutput) => void
-  ): void;
-  public createDatasetExportJob(
-    args: CreateDatasetExportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDatasetExportJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateDatasetExportJobCommandOutput) => void
-  ): Promise<CreateDatasetExportJobCommandOutput> | void {
-    const command = new CreateDatasetExportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an empty dataset group. A dataset group contains related datasets that supply data
-   *       for training a model. A dataset group can contain at most three datasets, one for each type of
-   *       dataset:</p>
-   *          <ul>
-   *             <li>
-   *                <p>Interactions</p>
-   *             </li>
-   *             <li>
-   *                <p>Items</p>
-   *             </li>
-   *             <li>
-   *                <p>Users</p>
-   *             </li>
-   *          </ul>
-   *          <p>To train a model (create a solution), a dataset group that contains an
-   *         <code>Interactions</code> dataset is required. Call <a>CreateDataset</a> to add a
-   *       dataset to the group.</p>
-   *          <p>A dataset group can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the dataset group, call <a>DescribeDatasetGroup</a>. If
-   *       the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key,
-   *       which describes why the creation failed.</p>
-   *          <note>
-   *             <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code>
-   *         before adding a dataset to the group.</p>
-   *          </note>
-   *          <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you
-   *       specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to
-   *       access the key.</p>
-   *          <p class="title">
-   *             <b>APIs that require a dataset group ARN in the request</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>CreateDataset</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>CreateEventTracker</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>CreateSolution</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListDatasetGroups</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeDatasetGroup</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteDatasetGroup</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createDatasetGroup(
-    args: CreateDatasetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDatasetGroupCommandOutput>;
-  public createDatasetGroup(
-    args: CreateDatasetGroupCommandInput,
-    cb: (err: any, data?: CreateDatasetGroupCommandOutput) => void
-  ): void;
-  public createDatasetGroup(
-    args: CreateDatasetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDatasetGroupCommandOutput) => void
-  ): void;
-  public createDatasetGroup(
-    args: CreateDatasetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDatasetGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateDatasetGroupCommandOutput) => void
-  ): Promise<CreateDatasetGroupCommandOutput> | void {
-    const command = new CreateDatasetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an
-   *       Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an
-   *       IAM service role that has permission to read from the data source, as Amazon Personalize makes a
-   *       copy of your data and processes it internally. For information on granting access
-   *       to your Amazon S3 bucket, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html">Giving Amazon Personalize
-   *       Access to Amazon S3 Resources</a>. </p>
-   *          <important>
-   *             <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p>
-   *          </important>
-   *          <p>
-   *             <b>Status</b>
-   *          </p>
-   *          <p>A dataset import job can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>,
-   *       providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is
-   *       complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response
-   *       includes a <code>failureReason</code> key, which describes why the job failed.</p>
-   *          <note>
-   *             <p>Importing takes time. You must wait until the status shows as ACTIVE before training a
-   *         model using the dataset.</p>
-   *          </note>
-   *
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListDatasetImportJobs</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeDatasetImportJob</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createDatasetImportJob(
-    args: CreateDatasetImportJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDatasetImportJobCommandOutput>;
-  public createDatasetImportJob(
-    args: CreateDatasetImportJobCommandInput,
-    cb: (err: any, data?: CreateDatasetImportJobCommandOutput) => void
-  ): void;
-  public createDatasetImportJob(
-    args: CreateDatasetImportJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDatasetImportJobCommandOutput) => void
-  ): void;
-  public createDatasetImportJob(
-    args: CreateDatasetImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDatasetImportJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateDatasetImportJobCommandOutput) => void
-  ): Promise<CreateDatasetImportJobCommandOutput> | void {
-    const command = new CreateDatasetImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an event tracker that you use when adding event data to a specified dataset
-   *       group using the
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> API.</p>
-   *          <note>
-   *             <p>Only one event tracker can be associated with a dataset group. You will get
-   *         an error if you call <code>CreateEventTracker</code> using the same dataset group as an
-   *         existing event tracker.</p>
-   *          </note>
-   *          <p>When you create an event tracker, the response includes a tracking ID, which you pass as a parameter when you use the
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html">PutEvents</a> operation.
-   *       Amazon Personalize then appends the event data to the Interactions dataset of the dataset group you specify
-   *       in your event tracker.
-   *     </p>
-   *          <p>The event tracker can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the event tracker, call <a>DescribeEventTracker</a>.</p>
-   *          <note>
-   *             <p>The event tracker must be in the ACTIVE state before using the tracking ID.</p>
-   *          </note>
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListEventTrackers</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeEventTracker</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteEventTracker</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createEventTracker(
-    args: CreateEventTrackerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateEventTrackerCommandOutput>;
-  public createEventTracker(
-    args: CreateEventTrackerCommandInput,
-    cb: (err: any, data?: CreateEventTrackerCommandOutput) => void
-  ): void;
-  public createEventTracker(
-    args: CreateEventTrackerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateEventTrackerCommandOutput) => void
-  ): void;
-  public createEventTracker(
-    args: CreateEventTrackerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEventTrackerCommandOutput) => void),
-    cb?: (err: any, data?: CreateEventTrackerCommandOutput) => void
-  ): Promise<CreateEventTrackerCommandOutput> | void {
-    const command = new CreateEventTrackerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a recommendation filter. For more information, see <a>filter</a>.</p>
-   */
-  public createFilter(
-    args: CreateFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateFilterCommandOutput>;
-  public createFilter(args: CreateFilterCommandInput, cb: (err: any, data?: CreateFilterCommandOutput) => void): void;
-  public createFilter(
-    args: CreateFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateFilterCommandOutput) => void
-  ): void;
-  public createFilter(
-    args: CreateFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFilterCommandOutput) => void),
-    cb?: (err: any, data?: CreateFilterCommandOutput) => void
-  ): Promise<CreateFilterCommandOutput> | void {
-    const command = new CreateFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon Personalize schema from the specified schema string. The schema you create
-   *       must be in Avro JSON format.</p>
-   *          <p>Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset
-   *       type and has a set of required field and keywords.
-   *       You specify a schema when you call <a>CreateDataset</a>.</p>
-   *
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListSchemas</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeSchema</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteSchema</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSchemaCommandOutput>;
-  public createSchema(args: CreateSchemaCommandInput, cb: (err: any, data?: CreateSchemaCommandOutput) => void): void;
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSchemaCommandOutput) => void
-  ): void;
-  public createSchema(
-    args: CreateSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSchemaCommandOutput) => void),
-    cb?: (err: any, data?: CreateSchemaCommandOutput) => void
-  ): Promise<CreateSchemaCommandOutput> | void {
-    const command = new CreateSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates the configuration for training a model. A trained model is known as
-   *       a solution. After the configuration is created, you train the model (create a solution)
-   *       by calling the <a>CreateSolutionVersion</a> operation. Every time you call
-   *       <code>CreateSolutionVersion</code>, a new version of the solution is created.</p>
-   *          <p>After creating a solution version, you check its accuracy by calling
-   *       <a>GetSolutionMetrics</a>. When you are satisfied with the version, you
-   *       deploy it using <a>CreateCampaign</a>. The campaign provides recommendations
-   *       to a client through the
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a> API.</p>
-   *          <p>To train a model, Amazon Personalize requires training data and a recipe. The training data
-   *       comes from the dataset group that you provide in the request. A recipe specifies
-   *       the training algorithm and a feature transformation. You can specify one of the predefined
-   *       recipes provided by Amazon Personalize. Alternatively, you can specify
-   *       <code>performAutoML</code> and Amazon Personalize will analyze your data and select the
-   *       optimum USER_PERSONALIZATION recipe for you.</p>
-   *          <note>
-   *             <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code>
-   *         for solution hyperparameter optimization at this time.</p>
-   *          </note>
-   *          <p>
-   *             <b>Status</b>
-   *          </p>
-   *          <p>A solution can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the solution, call <a>DescribeSolution</a>. Wait
-   *       until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p>
-   *
-   *
-   *
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListSolutions</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>CreateSolutionVersion</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeSolution</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteSolution</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListSolutionVersions</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeSolutionVersion</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createSolution(
-    args: CreateSolutionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSolutionCommandOutput>;
-  public createSolution(
-    args: CreateSolutionCommandInput,
-    cb: (err: any, data?: CreateSolutionCommandOutput) => void
-  ): void;
-  public createSolution(
-    args: CreateSolutionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSolutionCommandOutput) => void
-  ): void;
-  public createSolution(
-    args: CreateSolutionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSolutionCommandOutput) => void),
-    cb?: (err: any, data?: CreateSolutionCommandOutput) => void
-  ): Promise<CreateSolutionCommandOutput> | void {
-    const command = new CreateSolutionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling
-   *         <code>CreateSolutionVersion</code>. A new version of the solution is created every time you
-   *       call this operation.</p>
-   *          <p>
-   *             <b>Status</b>
-   *          </p>
-   *          <p>A solution version can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING</p>
-   *             </li>
-   *             <li>
-   *                <p>CREATE IN_PROGRESS</p>
-   *             </li>
-   *             <li>
-   *                <p>ACTIVE</p>
-   *             </li>
-   *             <li>
-   *                <p>CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>CREATE STOPPING</p>
-   *             </li>
-   *             <li>
-   *                <p>CREATE STOPPED</p>
-   *             </li>
-   *          </ul>
-   *          <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait
-   *       until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p>
-   *          <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code>
-   *       key, which describes why the job failed.</p>
-   *          <p class="title">
-   *             <b>Related APIs</b>
-   *          </p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListSolutionVersions</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeSolutionVersion</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <a>ListSolutions</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>CreateSolution</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DescribeSolution</a>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <a>DeleteSolution</a>
-   *                </p>
-   *             </li>
-   *          </ul>
-   */
-  public createSolutionVersion(
-    args: CreateSolutionVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSolutionVersionCommandOutput>;
-  public createSolutionVersion(
-    args: CreateSolutionVersionCommandInput,
-    cb: (err: any, data?: CreateSolutionVersionCommandOutput) => void
-  ): void;
-  public createSolutionVersion(
-    args: CreateSolutionVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSolutionVersionCommandOutput) => void
-  ): void;
-  public createSolutionVersion(
-    args: CreateSolutionVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSolutionVersionCommandOutput) => void),
-    cb?: (err: any, data?: CreateSolutionVersionCommandOutput) => void
-  ): Promise<CreateSolutionVersionCommandOutput> | void {
-    const command = new CreateSolutionVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes a campaign by deleting the solution deployment. The solution that
-   *       the campaign is based on is not deleted and can be redeployed when needed. A deleted campaign can no
-   *       longer be specified in a
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a>
-   *       request.
-   *       For more information on campaigns, see <a>CreateCampaign</a>.</p>
-   */
-  public deleteCampaign(
-    args: DeleteCampaignCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCampaignCommandOutput>;
-  public deleteCampaign(
-    args: DeleteCampaignCommandInput,
-    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
-  ): void;
-  public deleteCampaign(
-    args: DeleteCampaignCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCampaignCommandOutput) => void
-  ): void;
-  public deleteCampaign(
-    args: DeleteCampaignCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCampaignCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCampaignCommandOutput) => void
-  ): Promise<DeleteCampaignCommandOutput> | void {
-    const command = new DeleteCampaignCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a dataset. You can't delete a dataset if an associated
-   *         <code>DatasetImportJob</code> or <code>SolutionVersion</code> is in the CREATE PENDING or IN
-   *       PROGRESS state. For more information on datasets, see <a>CreateDataset</a>.</p>
-   */
-  public deleteDataset(
-    args: DeleteDatasetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDatasetCommandOutput>;
-  public deleteDataset(
-    args: DeleteDatasetCommandInput,
-    cb: (err: any, data?: DeleteDatasetCommandOutput) => void
-  ): void;
-  public deleteDataset(
-    args: DeleteDatasetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDatasetCommandOutput) => void
-  ): void;
-  public deleteDataset(
-    args: DeleteDatasetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDatasetCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDatasetCommandOutput) => void
-  ): Promise<DeleteDatasetCommandOutput> | void {
-    const command = new DeleteDatasetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a dataset group. Before you delete a dataset group, you must delete the
-   *       following:</p>
-   *          <ul>
-   *             <li>
-   *                <p>All associated event trackers.</p>
-   *             </li>
-   *             <li>
-   *                <p>All associated solutions.</p>
-   *             </li>
-   *             <li>
-   *                <p>All datasets in the dataset group.</p>
-   *             </li>
-   *          </ul>
-   */
-  public deleteDatasetGroup(
-    args: DeleteDatasetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDatasetGroupCommandOutput>;
-  public deleteDatasetGroup(
-    args: DeleteDatasetGroupCommandInput,
-    cb: (err: any, data?: DeleteDatasetGroupCommandOutput) => void
-  ): void;
-  public deleteDatasetGroup(
-    args: DeleteDatasetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDatasetGroupCommandOutput) => void
-  ): void;
-  public deleteDatasetGroup(
-    args: DeleteDatasetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDatasetGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDatasetGroupCommandOutput) => void
-  ): Promise<DeleteDatasetGroupCommandOutput> | void {
-    const command = new DeleteDatasetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the event tracker. Does not delete the event-interactions dataset from
-   *         the associated dataset group. For more
-   *         information on event trackers, see <a>CreateEventTracker</a>.</p>
-   */
-  public deleteEventTracker(
-    args: DeleteEventTrackerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteEventTrackerCommandOutput>;
-  public deleteEventTracker(
-    args: DeleteEventTrackerCommandInput,
-    cb: (err: any, data?: DeleteEventTrackerCommandOutput) => void
-  ): void;
-  public deleteEventTracker(
-    args: DeleteEventTrackerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteEventTrackerCommandOutput) => void
-  ): void;
-  public deleteEventTracker(
-    args: DeleteEventTrackerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEventTrackerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEventTrackerCommandOutput) => void
-  ): Promise<DeleteEventTrackerCommandOutput> | void {
-    const command = new DeleteEventTrackerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a filter.</p>
-   */
-  public deleteFilter(
-    args: DeleteFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteFilterCommandOutput>;
-  public deleteFilter(args: DeleteFilterCommandInput, cb: (err: any, data?: DeleteFilterCommandOutput) => void): void;
-  public deleteFilter(
-    args: DeleteFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteFilterCommandOutput) => void
-  ): void;
-  public deleteFilter(
-    args: DeleteFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFilterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFilterCommandOutput) => void
-  ): Promise<DeleteFilterCommandOutput> | void {
-    const command = new DeleteFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a schema. Before deleting a schema, you must delete all
-   *       datasets referencing the schema. For more information on schemas, see
-   *       <a>CreateSchema</a>.</p>
-   */
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSchemaCommandOutput>;
-  public deleteSchema(args: DeleteSchemaCommandInput, cb: (err: any, data?: DeleteSchemaCommandOutput) => void): void;
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSchemaCommandOutput) => void
-  ): void;
-  public deleteSchema(
-    args: DeleteSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSchemaCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSchemaCommandOutput) => void
-  ): Promise<DeleteSchemaCommandOutput> | void {
-    const command = new DeleteSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes all versions of a solution and the <code>Solution</code> object itself.
-   *       Before deleting a solution, you must delete all campaigns based on
-   *       the solution. To determine what campaigns are using the solution, call
-   *       <a>ListCampaigns</a> and supply the Amazon Resource Name (ARN) of the solution.
-   *       You can't delete a solution if an associated <code>SolutionVersion</code> is in the
-   *       CREATE PENDING or IN PROGRESS state.
-   *       For more information on solutions, see <a>CreateSolution</a>.</p>
-   */
-  public deleteSolution(
-    args: DeleteSolutionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSolutionCommandOutput>;
-  public deleteSolution(
-    args: DeleteSolutionCommandInput,
-    cb: (err: any, data?: DeleteSolutionCommandOutput) => void
-  ): void;
-  public deleteSolution(
-    args: DeleteSolutionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSolutionCommandOutput) => void
-  ): void;
-  public deleteSolution(
-    args: DeleteSolutionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSolutionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSolutionCommandOutput) => void
-  ): Promise<DeleteSolutionCommandOutput> | void {
-    const command = new DeleteSolutionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the given algorithm.</p>
-   */
-  public describeAlgorithm(
-    args: DescribeAlgorithmCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAlgorithmCommandOutput>;
-  public describeAlgorithm(
-    args: DescribeAlgorithmCommandInput,
-    cb: (err: any, data?: DescribeAlgorithmCommandOutput) => void
-  ): void;
-  public describeAlgorithm(
-    args: DescribeAlgorithmCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAlgorithmCommandOutput) => void
-  ): void;
-  public describeAlgorithm(
-    args: DescribeAlgorithmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAlgorithmCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAlgorithmCommandOutput) => void
-  ): Promise<DescribeAlgorithmCommandOutput> | void {
-    const command = new DescribeAlgorithmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the properties of a batch inference job including name, Amazon Resource Name (ARN),
-   *       status, input and output configurations, and the ARN of the solution version used to generate
-   *       the recommendations.</p>
-   */
-  public describeBatchInferenceJob(
-    args: DescribeBatchInferenceJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeBatchInferenceJobCommandOutput>;
-  public describeBatchInferenceJob(
-    args: DescribeBatchInferenceJobCommandInput,
-    cb: (err: any, data?: DescribeBatchInferenceJobCommandOutput) => void
-  ): void;
-  public describeBatchInferenceJob(
-    args: DescribeBatchInferenceJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeBatchInferenceJobCommandOutput) => void
-  ): void;
-  public describeBatchInferenceJob(
-    args: DescribeBatchInferenceJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeBatchInferenceJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeBatchInferenceJobCommandOutput) => void
-  ): Promise<DescribeBatchInferenceJobCommandOutput> | void {
-    const command = new DescribeBatchInferenceJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the given campaign, including its status.</p>
-   *          <p>A campaign can be in one of the following states:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
-   *             </li>
-   *             <li>
-   *                <p>DELETE PENDING > DELETE IN_PROGRESS</p>
-   *             </li>
-   *          </ul>
-   *          <p>When the <code>status</code> is <code>CREATE FAILED</code>, the response includes the
-   *       <code>failureReason</code> key, which describes why.</p>
-   *          <p>For more information on campaigns, see <a>CreateCampaign</a>.</p>
-   */
-  public describeCampaign(
-    args: DescribeCampaignCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeCampaignCommandOutput>;
-  public describeCampaign(
-    args: DescribeCampaignCommandInput,
-    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
-  ): void;
-  public describeCampaign(
-    args: DescribeCampaignCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeCampaignCommandOutput) => void
-  ): void;
-  public describeCampaign(
-    args: DescribeCampaignCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeCampaignCommandOutput) => void),
-    cb?: (err: any, data?: DescribeCampaignCommandOutput) => void
-  ): Promise<DescribeCampaignCommandOutput> | void {
-    const command = new DescribeCampaignCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the given dataset. For more information on datasets, see <a>CreateDataset</a>.</p>
-   */
-  public describeDataset(
-    args: DescribeDatasetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDatasetCommandOutput>;
-  public describeDataset(
-    args: DescribeDatasetCommandInput,
-    cb: (err: any, data?: DescribeDatasetCommandOutput) => void
-  ): void;
-  public describeDataset(
-    args: DescribeDatasetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDatasetCommandOutput) => void
-  ): void;
-  public describeDataset(
-    args: DescribeDatasetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDatasetCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDatasetCommandOutput) => void
-  ): Promise<DescribeDatasetCommandOutput> | void {
-    const command = new DescribeDatasetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the dataset export job created by <a>CreateDatasetExportJob</a>,
-   *       including the export job status.</p>
-   */
-  public describeDatasetExportJob(
-    args: DescribeDatasetExportJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDatasetExportJobCommandOutput>;
-  public describeDatasetExportJob(
-    args: DescribeDatasetExportJobCommandInput,
-    cb: (err: any, data?: DescribeDatasetExportJobCommandOutput) => void
-  ): void;
-  public describeDatasetExportJob(
-    args: DescribeDatasetExportJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDatasetExportJobCommandOutput) => void
-  ): void;
-  public describeDatasetExportJob(
-    args: DescribeDatasetExportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDatasetExportJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDatasetExportJobCommandOutput) => void
-  ): Promise<DescribeDatasetExportJobCommandOutput> | void {
-    const command = new DescribeDatasetExportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the given dataset group. For more information on dataset groups, see <a>CreateDatasetGroup</a>.</p>
-   */
-  public describeDatasetGroup(
-    args: DescribeDatasetGroupCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDatasetGroupCommandOutput>;
-  public describeDatasetGroup(
-    args: DescribeDatasetGroupCommandInput,
-    cb: (err: any, data?: DescribeDatasetGroupCommandOutput) => void
-  ): void;
-  public describeDatasetGroup(
-    args: DescribeDatasetGroupCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDatasetGroupCommandOutput) => void
-  ): void;
-  public describeDatasetGroup(
-    args: DescribeDatasetGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDatasetGroupCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDatasetGroupCommandOutput) => void
-  ): Promise<DescribeDatasetGroupCommandOutput> | void {
-    const command = new DescribeDatasetGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the dataset import job created by <a>CreateDatasetImportJob</a>,
-   *       including the import job status.</p>
-   */
-  public describeDatasetImportJob(
-    args: DescribeDatasetImportJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDatasetImportJobCommandOutput>;
-  public describeDatasetImportJob(
-    args: DescribeDatasetImportJobCommandInput,
-    cb: (err: any, data?: DescribeDatasetImportJobCommandOutput) => void
-  ): void;
-  public describeDatasetImportJob(
-    args: DescribeDatasetImportJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDatasetImportJobCommandOutput) => void
-  ): void;
-  public describeDatasetImportJob(
-    args: DescribeDatasetImportJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeDatasetImportJobCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDatasetImportJobCommandOutput) => void
-  ): Promise<DescribeDatasetImportJobCommandOutput> | void {
-    const command = new DescribeDatasetImportJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes an event tracker. The response includes the <code>trackingId</code> and
-   *       <code>status</code> of the event tracker.
-   *       For more information on event trackers, see <a>CreateEventTracker</a>.</p>
-   */
-  public describeEventTracker(
-    args: DescribeEventTrackerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeEventTrackerCommandOutput>;
-  public describeEventTracker(
-    args: DescribeEventTrackerCommandInput,
-    cb: (err: any, data?: DescribeEventTrackerCommandOutput) => void
-  ): void;
-  public describeEventTracker(
-    args: DescribeEventTrackerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeEventTrackerCommandOutput) => void
-  ): void;
-  public describeEventTracker(
-    args: DescribeEventTrackerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeEventTrackerCommandOutput) => void),
-    cb?: (err: any, data?: DescribeEventTrackerCommandOutput) => void
-  ): Promise<DescribeEventTrackerCommandOutput> | void {
-    const command = new DescribeEventTrackerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the given feature transformation.</p>
-   */
-  public describeFeatureTransformation(
-    args: DescribeFeatureTransformationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeFeatureTransformationCommandOutput>;
-  public describeFeatureTransformation(
-    args: DescribeFeatureTransformationCommandInput,
-    cb: (err: any, data?: DescribeFeatureTransformationCommandOutput) => void
-  ): void;
-  public describeFeatureTransformation(
-    args: DescribeFeatureTransformationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeFeatureTransformationCommandOutput) => void
-  ): void;
-  public describeFeatureTransformation(
-    args: DescribeFeatureTransformationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFeatureTransformationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFeatureTransformationCommandOutput) => void
-  ): Promise<DescribeFeatureTransformationCommandOutput> | void {
-    const command = new DescribeFeatureTransformationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a filter's properties.</p>
-   */
-  public describeFilter(
-    args: DescribeFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeFilterCommandOutput>;
-  public describeFilter(
-    args: DescribeFilterCommandInput,
-    cb: (err: any, data?: DescribeFilterCommandOutput) => void
-  ): void;
-  public describeFilter(
-    args: DescribeFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeFilterCommandOutput) => void
-  ): void;
-  public describeFilter(
-    args: DescribeFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeFilterCommandOutput) => void),
-    cb?: (err: any, data?: DescribeFilterCommandOutput) => void
-  ): Promise<DescribeFilterCommandOutput> | void {
-    const command = new DescribeFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a recipe.</p>
-   *          <p>A recipe contains three items:</p>
-   *          <ul>
-   *             <li>
-   *                <p>An algorithm that trains a model.</p>
-   *             </li>
-   *             <li>
-   *                <p>Hyperparameters that govern the training.</p>
-   *             </li>
-   *             <li>
-   *                <p>Feature transformation information for modifying the input data before training.</p>
-   *             </li>
-   *          </ul>
-   *          <p>Amazon Personalize provides a set of predefined recipes. You specify a recipe when you create a
-   *       solution with the <a>CreateSolution</a> API.
-   *       <code>CreateSolution</code> trains a model by using the algorithm
-   *       in the specified recipe and a training dataset. The solution, when deployed as a campaign,
-   *       can provide recommendations using the
-   *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a> API.</p>
-   */
-  public describeRecipe(
-    args: DescribeRecipeCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRecipeCommandOutput>;
-  public describeRecipe(
-    args: DescribeRecipeCommandInput,
-    cb: (err: any, data?: DescribeRecipeCommandOutput) => void
-  ): void;
-  public describeRecipe(
-    args: DescribeRecipeCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRecipeCommandOutput) => void
-  ): void;
-  public describeRecipe(
-    args: DescribeRecipeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRecipeCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRecipeCommandOutput) => void
-  ): Promise<DescribeRecipeCommandOutput> | void {
-    const command = new DescribeRecipeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a schema. For more information on schemas, see
-   *       <a>CreateSchema</a>.</p>
-   */
-  public describeSchema(
-    args: DescribeSchemaCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSchemaCommandOutput>;
-  public describeSchema(
-    args: DescribeSchemaCommandInput,
-    cb: (err: any, data?: DescribeSchemaCommandOutput) => void
-  ): void;
-  public describeSchema(
-    args: DescribeSchemaCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSchemaCommandOutput) => void
-  ): void;
-  public describeSchema(
-    args: DescribeSchemaCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSchemaCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSchemaCommandOutput) => void
-  ): Promise<DescribeSchemaCommandOutput> | void {
-    const command = new DescribeSchemaCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a solution.
-   *       For more information on solutions, see <a>CreateSolution</a>.</p>
-   */
-  public describeSolution(
-    args: DescribeSolutionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSolutionCommandOutput>;
-  public describeSolution(
-    args: DescribeSolutionCommandInput,
-    cb: (err: any, data?: DescribeSolutionCommandOutput) => void
-  ): void;
-  public describeSolution(
-    args: DescribeSolutionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSolutionCommandOutput) => void
-  ): void;
-  public describeSolution(
-    args: DescribeSolutionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSolutionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSolutionCommandOutput) => void
-  ): Promise<DescribeSolutionCommandOutput> | void {
-    const command = new DescribeSolutionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a specific version of a solution. For more information on solutions, see <a>CreateSolution</a>.</p>
-   */
-  public describeSolutionVersion(
-    args: DescribeSolutionVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSolutionVersionCommandOutput>;
-  public describeSolutionVersion(
-    args: DescribeSolutionVersionCommandInput,
-    cb: (err: any, data?: DescribeSolutionVersionCommandOutput) => void
-  ): void;
-  public describeSolutionVersion(
-    args: DescribeSolutionVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSolutionVersionCommandOutput) => void
-  ): void;
-  public describeSolutionVersion(
-    args: DescribeSolutionVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSolutionVersionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSolutionVersionCommandOutput) => void
-  ): Promise<DescribeSolutionVersionCommandOutput> | void {
-    const command = new DescribeSolutionVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets the metrics for the specified solution version.</p>
-   */
-  public getSolutionMetrics(
-    args: GetSolutionMetricsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSolutionMetricsCommandOutput>;
-  public getSolutionMetrics(
-    args: GetSolutionMetricsCommandInput,
-    cb: (err: any, data?: GetSolutionMetricsCommandOutput) => void
-  ): void;
-  public getSolutionMetrics(
-    args: GetSolutionMetricsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSolutionMetricsCommandOutput) => void
-  ): void;
-  public getSolutionMetrics(
-    args: GetSolutionMetricsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSolutionMetricsCommandOutput) => void),
-    cb?: (err: any, data?: GetSolutionMetricsCommandOutput) => void
-  ): Promise<GetSolutionMetricsCommandOutput> | void {
-    const command = new GetSolutionMetricsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a list of the batch inference jobs that have been performed off of a solution
-   *       version.</p>
-   */
-  public listBatchInferenceJobs(
-    args: ListBatchInferenceJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListBatchInferenceJobsCommandOutput>;
-  public listBatchInferenceJobs(
-    args: ListBatchInferenceJobsCommandInput,
-    cb: (err: any, data?: ListBatchInferenceJobsCommandOutput) => void
-  ): void;
-  public listBatchInferenceJobs(
-    args: ListBatchInferenceJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListBatchInferenceJobsCommandOutput) => void
-  ): void;
-  public listBatchInferenceJobs(
-    args: ListBatchInferenceJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBatchInferenceJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListBatchInferenceJobsCommandOutput) => void
-  ): Promise<ListBatchInferenceJobsCommandOutput> | void {
-    const command = new ListBatchInferenceJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of campaigns that use the given solution.
-   *       When a solution is not specified, all the campaigns associated with the account are listed.
-   *       The response provides the properties for each campaign, including the Amazon Resource Name (ARN).
-   *       For more information on campaigns, see <a>CreateCampaign</a>.</p>
-   */
-  public listCampaigns(
-    args: ListCampaignsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListCampaignsCommandOutput>;
-  public listCampaigns(
-    args: ListCampaignsCommandInput,
-    cb: (err: any, data?: ListCampaignsCommandOutput) => void
-  ): void;
-  public listCampaigns(
-    args: ListCampaignsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListCampaignsCommandOutput) => void
-  ): void;
-  public listCampaigns(
-    args: ListCampaignsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCampaignsCommandOutput) => void),
-    cb?: (err: any, data?: ListCampaignsCommandOutput) => void
-  ): Promise<ListCampaignsCommandOutput> | void {
-    const command = new ListCampaignsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of dataset export jobs that use the given dataset. When a dataset is not
-   *       specified, all the dataset export jobs associated with the account are listed. The response
-   *       provides the properties for each dataset export job, including the Amazon Resource Name (ARN).
-   *       For more information on dataset export jobs, see <a>CreateDatasetExportJob</a>. For
-   *       more information on datasets, see <a>CreateDataset</a>.</p>
-   */
-  public listDatasetExportJobs(
-    args: ListDatasetExportJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListDatasetExportJobsCommandOutput>;
-  public listDatasetExportJobs(
-    args: ListDatasetExportJobsCommandInput,
-    cb: (err: any, data?: ListDatasetExportJobsCommandOutput) => void
-  ): void;
-  public listDatasetExportJobs(
-    args: ListDatasetExportJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDatasetExportJobsCommandOutput) => void
-  ): void;
-  public listDatasetExportJobs(
-    args: ListDatasetExportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDatasetExportJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListDatasetExportJobsCommandOutput) => void
-  ): Promise<ListDatasetExportJobsCommandOutput> | void {
-    const command = new ListDatasetExportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of dataset groups. The response provides the properties for each dataset
-   *       group, including the Amazon Resource Name (ARN). For more information on dataset groups, see
-   *         <a>CreateDatasetGroup</a>.</p>
-   */
-  public listDatasetGroups(
-    args: ListDatasetGroupsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListDatasetGroupsCommandOutput>;
-  public listDatasetGroups(
-    args: ListDatasetGroupsCommandInput,
-    cb: (err: any, data?: ListDatasetGroupsCommandOutput) => void
-  ): void;
-  public listDatasetGroups(
-    args: ListDatasetGroupsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDatasetGroupsCommandOutput) => void
-  ): void;
-  public listDatasetGroups(
-    args: ListDatasetGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDatasetGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListDatasetGroupsCommandOutput) => void
-  ): Promise<ListDatasetGroupsCommandOutput> | void {
-    const command = new ListDatasetGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of dataset import jobs that use the given dataset. When a dataset is not
-   *       specified, all the dataset import jobs associated with the account are listed. The response
-   *       provides the properties for each dataset import job, including the Amazon Resource Name (ARN).
-   *       For more information on dataset import jobs, see <a>CreateDatasetImportJob</a>. For
-   *       more information on datasets, see <a>CreateDataset</a>.</p>
-   */
-  public listDatasetImportJobs(
-    args: ListDatasetImportJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListDatasetImportJobsCommandOutput>;
-  public listDatasetImportJobs(
-    args: ListDatasetImportJobsCommandInput,
-    cb: (err: any, data?: ListDatasetImportJobsCommandOutput) => void
-  ): void;
-  public listDatasetImportJobs(
-    args: ListDatasetImportJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDatasetImportJobsCommandOutput) => void
-  ): void;
-  public listDatasetImportJobs(
-    args: ListDatasetImportJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDatasetImportJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListDatasetImportJobsCommandOutput) => void
-  ): Promise<ListDatasetImportJobsCommandOutput> | void {
-    const command = new ListDatasetImportJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of datasets contained in the given dataset group. The response provides
-   *       the properties for each dataset, including the Amazon Resource Name (ARN). For more
-   *       information on datasets, see <a>CreateDataset</a>.</p>
-   */
-  public listDatasets(
-    args: ListDatasetsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListDatasetsCommandOutput>;
-  public listDatasets(args: ListDatasetsCommandInput, cb: (err: any, data?: ListDatasetsCommandOutput) => void): void;
-  public listDatasets(
-    args: ListDatasetsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListDatasetsCommandOutput) => void
-  ): void;
-  public listDatasets(
-    args: ListDatasetsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDatasetsCommandOutput) => void),
-    cb?: (err: any, data?: ListDatasetsCommandOutput) => void
-  ): Promise<ListDatasetsCommandOutput> | void {
-    const command = new ListDatasetsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of event trackers associated with the account.
-   *       The response provides the properties for each event tracker, including the Amazon Resource
-   *       Name (ARN) and tracking ID. For more
-   *       information on event trackers, see <a>CreateEventTracker</a>.</p>
-   */
-  public listEventTrackers(
-    args: ListEventTrackersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListEventTrackersCommandOutput>;
-  public listEventTrackers(
-    args: ListEventTrackersCommandInput,
-    cb: (err: any, data?: ListEventTrackersCommandOutput) => void
-  ): void;
-  public listEventTrackers(
-    args: ListEventTrackersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListEventTrackersCommandOutput) => void
-  ): void;
-  public listEventTrackers(
-    args: ListEventTrackersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventTrackersCommandOutput) => void),
-    cb?: (err: any, data?: ListEventTrackersCommandOutput) => void
-  ): Promise<ListEventTrackersCommandOutput> | void {
-    const command = new ListEventTrackersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all filters that belong to a given dataset group.</p>
-   */
-  public listFilters(args: ListFiltersCommandInput, options?: __HttpHandlerOptions): Promise<ListFiltersCommandOutput>;
-  public listFilters(args: ListFiltersCommandInput, cb: (err: any, data?: ListFiltersCommandOutput) => void): void;
-  public listFilters(
-    args: ListFiltersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListFiltersCommandOutput) => void
-  ): void;
-  public listFilters(
-    args: ListFiltersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFiltersCommandOutput) => void),
-    cb?: (err: any, data?: ListFiltersCommandOutput) => void
-  ): Promise<ListFiltersCommandOutput> | void {
-    const command = new ListFiltersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of available recipes. The response provides the properties
-   *        for each recipe, including the recipe's Amazon Resource Name (ARN).</p>
-   */
-  public listRecipes(args: ListRecipesCommandInput, options?: __HttpHandlerOptions): Promise<ListRecipesCommandOutput>;
-  public listRecipes(args: ListRecipesCommandInput, cb: (err: any, data?: ListRecipesCommandOutput) => void): void;
-  public listRecipes(
-    args: ListRecipesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRecipesCommandOutput) => void
-  ): void;
-  public listRecipes(
-    args: ListRecipesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecipesCommandOutput) => void),
-    cb?: (err: any, data?: ListRecipesCommandOutput) => void
-  ): Promise<ListRecipesCommandOutput> | void {
-    const command = new ListRecipesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of schemas associated with the account. The response provides the
-   *       properties for each schema, including the Amazon Resource Name (ARN).
-   *       For more information on schemas, see <a>CreateSchema</a>.</p>
-   */
-  public listSchemas(args: ListSchemasCommandInput, options?: __HttpHandlerOptions): Promise<ListSchemasCommandOutput>;
-  public listSchemas(args: ListSchemasCommandInput, cb: (err: any, data?: ListSchemasCommandOutput) => void): void;
-  public listSchemas(
-    args: ListSchemasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSchemasCommandOutput) => void
-  ): void;
-  public listSchemas(
-    args: ListSchemasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSchemasCommandOutput) => void),
-    cb?: (err: any, data?: ListSchemasCommandOutput) => void
-  ): Promise<ListSchemasCommandOutput> | void {
-    const command = new ListSchemasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of solutions that use the given dataset group.
-   *       When a dataset group is not specified, all the solutions associated with the account are listed.
-   *       The response provides the properties for each solution, including the Amazon Resource Name (ARN).
-   *       For more information on solutions, see <a>CreateSolution</a>.</p>
-   */
-  public listSolutions(
-    args: ListSolutionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSolutionsCommandOutput>;
-  public listSolutions(
-    args: ListSolutionsCommandInput,
-    cb: (err: any, data?: ListSolutionsCommandOutput) => void
-  ): void;
-  public listSolutions(
-    args: ListSolutionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSolutionsCommandOutput) => void
-  ): void;
-  public listSolutions(
-    args: ListSolutionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSolutionsCommandOutput) => void),
-    cb?: (err: any, data?: ListSolutionsCommandOutput) => void
-  ): Promise<ListSolutionsCommandOutput> | void {
-    const command = new ListSolutionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of solution versions for the given solution. When a solution is not
-   *       specified, all the solution versions associated with the account are listed. The response
-   *       provides the properties for each solution version, including the Amazon Resource Name (ARN).
-   *       For more information on solutions, see <a>CreateSolution</a>.</p>
-   */
-  public listSolutionVersions(
-    args: ListSolutionVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSolutionVersionsCommandOutput>;
-  public listSolutionVersions(
-    args: ListSolutionVersionsCommandInput,
-    cb: (err: any, data?: ListSolutionVersionsCommandOutput) => void
-  ): void;
-  public listSolutionVersions(
-    args: ListSolutionVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSolutionVersionsCommandOutput) => void
-  ): void;
-  public listSolutionVersions(
-    args: ListSolutionVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSolutionVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListSolutionVersionsCommandOutput) => void
-  ): Promise<ListSolutionVersionsCommandOutput> | void {
-    const command = new ListSolutionVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.
-   *       </p>
-   *          <p>Depending on the current state of the solution version, the solution version state changes as follows:</p>
-   *          <ul>
-   *             <li>
-   *                <p>CREATE_PENDING > CREATE_STOPPED</p>
-   *                <p>or</p>
-   *             </li>
-   *             <li>
-   *                <p>CREATE_IN_PROGRESS > CREATE_STOPPING > CREATE_STOPPED</p>
-   *             </li>
-   *          </ul>
-   *          <p>You are billed for all of the training completed up
-   *       until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.</p>
-   */
-  public stopSolutionVersionCreation(
-    args: StopSolutionVersionCreationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopSolutionVersionCreationCommandOutput>;
-  public stopSolutionVersionCreation(
-    args: StopSolutionVersionCreationCommandInput,
-    cb: (err: any, data?: StopSolutionVersionCreationCommandOutput) => void
-  ): void;
-  public stopSolutionVersionCreation(
-    args: StopSolutionVersionCreationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopSolutionVersionCreationCommandOutput) => void
-  ): void;
-  public stopSolutionVersionCreation(
-    args: StopSolutionVersionCreationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopSolutionVersionCreationCommandOutput) => void),
-    cb?: (err: any, data?: StopSolutionVersionCreationCommandOutput) => void
-  ): Promise<StopSolutionVersionCreationCommandOutput> | void {
-    const command = new StopSolutionVersionCreationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a campaign by either deploying a new solution or changing the value of the
-   *       campaign's <code>minProvisionedTPS</code> parameter.</p>
-   *          <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.
-   *       Check the campaign status using the <a>DescribeCampaign</a> API.</p>
-   *          <note>
-   *             <p>You must wait until the <code>status</code> of the
-   *         updated campaign is <code>ACTIVE</code> before asking the campaign for recommendations.</p>
-   *          </note>
-   *          <p>For more information on campaigns, see <a>CreateCampaign</a>.</p>
-   */
-  public updateCampaign(
-    args: UpdateCampaignCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateCampaignCommandOutput>;
-  public updateCampaign(
-    args: UpdateCampaignCommandInput,
-    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
-  ): void;
-  public updateCampaign(
-    args: UpdateCampaignCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateCampaignCommandOutput) => void
-  ): void;
-  public updateCampaign(
-    args: UpdateCampaignCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCampaignCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCampaignCommandOutput) => void
-  ): Promise<UpdateCampaignCommandOutput> | void {
-    const command = new UpdateCampaignCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Personalize extends PersonalizeClient implements Personalize {}
+createAggregatedClient(commands, Personalize, { paginators });

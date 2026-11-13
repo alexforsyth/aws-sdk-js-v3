@@ -1,0 +1,504 @@
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
+
+import {
+  type CreateClusterCommandInput,
+  type CreateClusterCommandOutput,
+  CreateClusterCommand,
+} from "./commands/CreateClusterCommand";
+import {
+  type CreateComputeNodeGroupCommandInput,
+  type CreateComputeNodeGroupCommandOutput,
+  CreateComputeNodeGroupCommand,
+} from "./commands/CreateComputeNodeGroupCommand";
+import {
+  type CreateQueueCommandInput,
+  type CreateQueueCommandOutput,
+  CreateQueueCommand,
+} from "./commands/CreateQueueCommand";
+import {
+  type DeleteClusterCommandInput,
+  type DeleteClusterCommandOutput,
+  DeleteClusterCommand,
+} from "./commands/DeleteClusterCommand";
+import {
+  type DeleteComputeNodeGroupCommandInput,
+  type DeleteComputeNodeGroupCommandOutput,
+  DeleteComputeNodeGroupCommand,
+} from "./commands/DeleteComputeNodeGroupCommand";
+import {
+  type DeleteQueueCommandInput,
+  type DeleteQueueCommandOutput,
+  DeleteQueueCommand,
+} from "./commands/DeleteQueueCommand";
+import {
+  type GetClusterCommandInput,
+  type GetClusterCommandOutput,
+  GetClusterCommand,
+} from "./commands/GetClusterCommand";
+import {
+  type GetComputeNodeGroupCommandInput,
+  type GetComputeNodeGroupCommandOutput,
+  GetComputeNodeGroupCommand,
+} from "./commands/GetComputeNodeGroupCommand";
+import { type GetQueueCommandInput, type GetQueueCommandOutput, GetQueueCommand } from "./commands/GetQueueCommand";
+import {
+  type ListClustersCommandInput,
+  type ListClustersCommandOutput,
+  ListClustersCommand,
+} from "./commands/ListClustersCommand";
+import {
+  type ListComputeNodeGroupsCommandInput,
+  type ListComputeNodeGroupsCommandOutput,
+  ListComputeNodeGroupsCommand,
+} from "./commands/ListComputeNodeGroupsCommand";
+import {
+  type ListQueuesCommandInput,
+  type ListQueuesCommandOutput,
+  ListQueuesCommand,
+} from "./commands/ListQueuesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
+  ListTagsForResourceCommand,
+} from "./commands/ListTagsForResourceCommand";
+import {
+  type RegisterComputeNodeGroupInstanceCommandInput,
+  type RegisterComputeNodeGroupInstanceCommandOutput,
+  RegisterComputeNodeGroupInstanceCommand,
+} from "./commands/RegisterComputeNodeGroupInstanceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
+  UntagResourceCommand,
+} from "./commands/UntagResourceCommand";
+import {
+  type UpdateClusterCommandInput,
+  type UpdateClusterCommandOutput,
+  UpdateClusterCommand,
+} from "./commands/UpdateClusterCommand";
+import {
+  type UpdateComputeNodeGroupCommandInput,
+  type UpdateComputeNodeGroupCommandOutput,
+  UpdateComputeNodeGroupCommand,
+} from "./commands/UpdateComputeNodeGroupCommand";
+import {
+  type UpdateQueueCommandInput,
+  type UpdateQueueCommandOutput,
+  UpdateQueueCommand,
+} from "./commands/UpdateQueueCommand";
+import { paginateListClusters } from "./pagination/ListClustersPaginator";
+import { paginateListComputeNodeGroups } from "./pagination/ListComputeNodeGroupsPaginator";
+import { paginateListQueues } from "./pagination/ListQueuesPaginator";
+import { PCSClient } from "./PCSClient";
+
+const commands = {
+  CreateClusterCommand,
+  CreateComputeNodeGroupCommand,
+  CreateQueueCommand,
+  DeleteClusterCommand,
+  DeleteComputeNodeGroupCommand,
+  DeleteQueueCommand,
+  GetClusterCommand,
+  GetComputeNodeGroupCommand,
+  GetQueueCommand,
+  ListClustersCommand,
+  ListComputeNodeGroupsCommand,
+  ListQueuesCommand,
+  ListTagsForResourceCommand,
+  RegisterComputeNodeGroupInstanceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateClusterCommand,
+  UpdateComputeNodeGroupCommand,
+  UpdateQueueCommand,
+};
+const paginators = {
+  paginateListClusters,
+  paginateListComputeNodeGroups,
+  paginateListQueues,
+};
+
+/**
+ * @public
+ */
+export interface PCSRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface PCS {
+  /**
+   * @see {@link CreateClusterCommand}
+   */
+  createCluster(
+    args: CreateClusterCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<CreateClusterCommandOutput>;
+  createCluster(
+    args: CreateClusterCommandInput,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+  createCluster(
+    args: CreateClusterCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: CreateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateComputeNodeGroupCommand}
+   */
+  createComputeNodeGroup(
+    args: CreateComputeNodeGroupCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<CreateComputeNodeGroupCommandOutput>;
+  createComputeNodeGroup(
+    args: CreateComputeNodeGroupCommandInput,
+    cb: (err: any, data?: CreateComputeNodeGroupCommandOutput) => void
+  ): void;
+  createComputeNodeGroup(
+    args: CreateComputeNodeGroupCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: CreateComputeNodeGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateQueueCommand}
+   */
+  createQueue(
+    args: CreateQueueCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<CreateQueueCommandOutput>;
+  createQueue(
+    args: CreateQueueCommandInput,
+    cb: (err: any, data?: CreateQueueCommandOutput) => void
+  ): void;
+  createQueue(
+    args: CreateQueueCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: CreateQueueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteClusterCommand}
+   */
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<DeleteClusterCommandOutput>;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+  deleteCluster(
+    args: DeleteClusterCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: DeleteClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteComputeNodeGroupCommand}
+   */
+  deleteComputeNodeGroup(
+    args: DeleteComputeNodeGroupCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<DeleteComputeNodeGroupCommandOutput>;
+  deleteComputeNodeGroup(
+    args: DeleteComputeNodeGroupCommandInput,
+    cb: (err: any, data?: DeleteComputeNodeGroupCommandOutput) => void
+  ): void;
+  deleteComputeNodeGroup(
+    args: DeleteComputeNodeGroupCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: DeleteComputeNodeGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQueueCommand}
+   */
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<DeleteQueueCommandOutput>;
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    cb: (err: any, data?: DeleteQueueCommandOutput) => void
+  ): void;
+  deleteQueue(
+    args: DeleteQueueCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: DeleteQueueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClusterCommand}
+   */
+  getCluster(
+    args: GetClusterCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<GetClusterCommandOutput>;
+  getCluster(
+    args: GetClusterCommandInput,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+  getCluster(
+    args: GetClusterCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: GetClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetComputeNodeGroupCommand}
+   */
+  getComputeNodeGroup(
+    args: GetComputeNodeGroupCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<GetComputeNodeGroupCommandOutput>;
+  getComputeNodeGroup(
+    args: GetComputeNodeGroupCommandInput,
+    cb: (err: any, data?: GetComputeNodeGroupCommandOutput) => void
+  ): void;
+  getComputeNodeGroup(
+    args: GetComputeNodeGroupCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: GetComputeNodeGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetQueueCommand}
+   */
+  getQueue(
+    args: GetQueueCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<GetQueueCommandOutput>;
+  getQueue(
+    args: GetQueueCommandInput,
+    cb: (err: any, data?: GetQueueCommandOutput) => void
+  ): void;
+  getQueue(
+    args: GetQueueCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: GetQueueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   */
+  listClusters(): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<ListClustersCommandOutput>;
+  listClusters(
+    args: ListClustersCommandInput,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+  listClusters(
+    args: ListClustersCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: ListClustersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListComputeNodeGroupsCommand}
+   */
+  listComputeNodeGroups(
+    args: ListComputeNodeGroupsCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<ListComputeNodeGroupsCommandOutput>;
+  listComputeNodeGroups(
+    args: ListComputeNodeGroupsCommandInput,
+    cb: (err: any, data?: ListComputeNodeGroupsCommandOutput) => void
+  ): void;
+  listComputeNodeGroups(
+    args: ListComputeNodeGroupsCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: ListComputeNodeGroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListQueuesCommand}
+   */
+  listQueues(
+    args: ListQueuesCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<ListQueuesCommandOutput>;
+  listQueues(
+    args: ListQueuesCommandInput,
+    cb: (err: any, data?: ListQueuesCommandOutput) => void
+  ): void;
+  listQueues(
+    args: ListQueuesCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: ListQueuesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterComputeNodeGroupInstanceCommand}
+   */
+  registerComputeNodeGroupInstance(
+    args: RegisterComputeNodeGroupInstanceCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<RegisterComputeNodeGroupInstanceCommandOutput>;
+  registerComputeNodeGroupInstance(
+    args: RegisterComputeNodeGroupInstanceCommandInput,
+    cb: (err: any, data?: RegisterComputeNodeGroupInstanceCommandOutput) => void
+  ): void;
+  registerComputeNodeGroupInstance(
+    args: RegisterComputeNodeGroupInstanceCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: RegisterComputeNodeGroupInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateClusterCommand}
+   */
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<UpdateClusterCommandOutput>;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+  updateCluster(
+    args: UpdateClusterCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: UpdateClusterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateComputeNodeGroupCommand}
+   */
+  updateComputeNodeGroup(
+    args: UpdateComputeNodeGroupCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<UpdateComputeNodeGroupCommandOutput>;
+  updateComputeNodeGroup(
+    args: UpdateComputeNodeGroupCommandInput,
+    cb: (err: any, data?: UpdateComputeNodeGroupCommandOutput) => void
+  ): void;
+  updateComputeNodeGroup(
+    args: UpdateComputeNodeGroupCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: UpdateComputeNodeGroupCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQueueCommand}
+   */
+  updateQueue(
+    args: UpdateQueueCommandInput,
+    options?: PCSRequestOptions
+  ): Promise<UpdateQueueCommandOutput>;
+  updateQueue(
+    args: UpdateQueueCommandInput,
+    cb: (err: any, data?: UpdateQueueCommandOutput) => void
+  ): void;
+  updateQueue(
+    args: UpdateQueueCommandInput,
+    options: PCSRequestOptions,
+    cb: (err: any, data?: UpdateQueueCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListClustersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListClustersCommandOutput}.
+   */
+  paginateListClusters(
+    args?: ListClustersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListClustersCommandOutput>;
+
+  /**
+   * @see {@link ListComputeNodeGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListComputeNodeGroupsCommandOutput}.
+   */
+  paginateListComputeNodeGroups(
+    args: ListComputeNodeGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListComputeNodeGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListQueuesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQueuesCommandOutput}.
+   */
+  paginateListQueues(
+    args: ListQueuesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQueuesCommandOutput>;
+}
+
+/**
+ * <p>Parallel Computing Service (PCS) is a managed service that makes it easier for you to run and scale your high performance computing (HPC) workloads, and build scientific and engineering models on Amazon Web Services using Slurm. For more information, see the <a href="https://docs.aws.amazon.com/pcs/latest/userguide">Parallel Computing Service User Guide</a>.</p> <p>This reference describes the actions and data types of the service management API. You can use the Amazon Web Services SDKs to call the API actions in software, or use the Command Line Interface (CLI) to call the API actions manually. These API actions manage the service through an Amazon Web Services account.</p> <p>The API actions operate on PCS resources. A <i>resource</i> is an entity in Amazon Web Services that you can work with. Amazon Web Services services create resources when you use the features of the service. Examples of PCS resources include clusters, compute node groups, and queues. For more information about resources in Amazon Web Services, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-resource">Resource</a> in the <i>Resource Explorer User Guide</i>. </p> <p>An PCS <i>compute node</i> is an Amazon EC2 instance. You don't launch compute nodes directly. PCS uses configuration information that you provide to launch compute nodes in your Amazon Web Services account. You receive billing charges for your running compute nodes. PCS automatically terminates your compute nodes when you delete the PCS resources related to those compute nodes.</p>
+ * @public
+ */
+export class PCS extends PCSClient implements PCS {}
+createAggregatedClient(commands, PCS, { paginators });

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import { UpdateMultiplexRequest, UpdateMultiplexResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateMultiplexCommand,
-  serializeAws_restJson1UpdateMultiplexCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMultiplexRequest, UpdateMultiplexResponse } from "../models/models_1";
+import { UpdateMultiplex$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMultiplexCommand}.
+ */
 export interface UpdateMultiplexCommandInput extends UpdateMultiplexRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMultiplexCommand}.
+ */
 export interface UpdateMultiplexCommandOutput extends UpdateMultiplexResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,135 @@ export interface UpdateMultiplexCommandOutput extends UpdateMultiplexResponse, _
  * ```javascript
  * import { MediaLiveClient, UpdateMultiplexCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, UpdateMultiplexCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // UpdateMultiplexRequest
+ *   MultiplexId: "STRING_VALUE", // required
+ *   MultiplexSettings: { // MultiplexSettings
+ *     MaximumVideoBufferDelayMilliseconds: Number("int"),
+ *     TransportStreamBitrate: Number("int"), // required
+ *     TransportStreamId: Number("int"), // required
+ *     TransportStreamReservedBitrate: Number("int"),
+ *   },
+ *   Name: "STRING_VALUE",
+ *   PacketIdentifiersMapping: { // MultiplexPacketIdentifiersMapping
+ *     "<keys>": { // MultiplexProgramPacketIdentifiersMap
+ *       AudioPids: [ // __listOf__integer
+ *         Number("int"),
+ *       ],
+ *       DvbSubPids: [
+ *         Number("int"),
+ *       ],
+ *       DvbTeletextPid: Number("int"),
+ *       EtvPlatformPid: Number("int"),
+ *       EtvSignalPid: Number("int"),
+ *       KlvDataPids: [
+ *         Number("int"),
+ *       ],
+ *       PcrPid: Number("int"),
+ *       PmtPid: Number("int"),
+ *       PrivateMetadataPid: Number("int"),
+ *       Scte27Pids: [
+ *         Number("int"),
+ *       ],
+ *       Scte35Pid: Number("int"),
+ *       TimedMetadataPid: Number("int"),
+ *       VideoPid: Number("int"),
+ *       AribCaptionsPid: Number("int"),
+ *       DvbTeletextPids: [
+ *         Number("int"),
+ *       ],
+ *       EcmPid: Number("int"),
+ *       Smpte2038Pid: Number("int"),
+ *     },
+ *   },
+ * };
  * const command = new UpdateMultiplexCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateMultiplexResponse
+ * //   Multiplex: { // Multiplex
+ * //     Arn: "STRING_VALUE",
+ * //     AvailabilityZones: [ // __listOf__string
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Destinations: [ // __listOfMultiplexOutputDestination
+ * //       { // MultiplexOutputDestination
+ * //         MediaConnectSettings: { // MultiplexMediaConnectOutputDestinationSettings
+ * //           EntitlementArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     Id: "STRING_VALUE",
+ * //     MultiplexSettings: { // MultiplexSettings
+ * //       MaximumVideoBufferDelayMilliseconds: Number("int"),
+ * //       TransportStreamBitrate: Number("int"), // required
+ * //       TransportStreamId: Number("int"), // required
+ * //       TransportStreamReservedBitrate: Number("int"),
+ * //     },
+ * //     Name: "STRING_VALUE",
+ * //     PipelinesRunningCount: Number("int"),
+ * //     ProgramCount: Number("int"),
+ * //     State: "CREATING" || "CREATE_FAILED" || "IDLE" || "STARTING" || "RUNNING" || "RECOVERING" || "STOPPING" || "DELETING" || "DELETED",
+ * //     Tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateMultiplexCommandInput - {@link UpdateMultiplexCommandInput}
+ * @returns {@link UpdateMultiplexCommandOutput}
  * @see {@link UpdateMultiplexCommandInput} for command's `input` shape.
  * @see {@link UpdateMultiplexCommandOutput} for command's `response` shape.
- * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  Placeholder documentation for ConflictException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  Placeholder documentation for UnprocessableEntityException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMultiplexCommand extends $Command<
-  UpdateMultiplexCommandInput,
-  UpdateMultiplexCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMultiplexCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMultiplexCommandInput, UpdateMultiplexCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "UpdateMultiplexCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMultiplexRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMultiplexResponse.filterSensitiveLog,
+export class UpdateMultiplexCommand extends command<UpdateMultiplexCommandInput, UpdateMultiplexCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMultiplex",
+  UpdateMultiplex$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMultiplexRequest;
+      output: UpdateMultiplexResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMultiplexCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateMultiplexCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateMultiplexCommandOutput> {
-    return deserializeAws_restJson1UpdateMultiplexCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMultiplexCommandInput;
+      output: UpdateMultiplexCommandOutput;
+    };
+  };
 }

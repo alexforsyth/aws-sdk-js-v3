@@ -1,28 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateAttributeGroupRequest, CreateAttributeGroupResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateAttributeGroupCommand,
-  serializeAws_restJson1CreateAttributeGroupCommand,
-} from "../protocols/Aws_restJson1";
-import {
-  ServiceCatalogAppRegistryClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ServiceCatalogAppRegistryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateAttributeGroupRequest, CreateAttributeGroupResponse } from "../models/models_0";
+import { CreateAttributeGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateAttributeGroupCommand}.
+ */
 export interface CreateAttributeGroupCommandInput extends CreateAttributeGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateAttributeGroupCommand}.
+ */
 export interface CreateAttributeGroupCommandOutput extends CreateAttributeGroupResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +32,79 @@ export interface CreateAttributeGroupCommandOutput extends CreateAttributeGroupR
  * ```javascript
  * import { ServiceCatalogAppRegistryClient, CreateAttributeGroupCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
  * // const { ServiceCatalogAppRegistryClient, CreateAttributeGroupCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * // import type { ServiceCatalogAppRegistryClientConfig } from "@aws-sdk/client-service-catalog-appregistry";
+ * const config = {}; // type is ServiceCatalogAppRegistryClientConfig
  * const client = new ServiceCatalogAppRegistryClient(config);
+ * const input = { // CreateAttributeGroupRequest
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   attributes: "STRING_VALUE", // required
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   clientToken: "STRING_VALUE", // required
+ * };
  * const command = new CreateAttributeGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateAttributeGroupResponse
+ * //   attributeGroup: { // AttributeGroup
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     lastUpdateTime: new Date("TIMESTAMP"),
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateAttributeGroupCommandInput - {@link CreateAttributeGroupCommandInput}
+ * @returns {@link CreateAttributeGroupCommandOutput}
  * @see {@link CreateAttributeGroupCommandInput} for command's `input` shape.
  * @see {@link CreateAttributeGroupCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for ServiceCatalogAppRegistryClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict when processing the request (for example, a resource with the given
+ *       name already exists within the account).</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service is experiencing internal problems.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>
+ *       The maximum number
+ *       of resources per account
+ *       has been reached.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has invalid or missing parameters.</p>
+ *
+ * @throws {@link ServiceCatalogAppRegistryServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalogAppRegistry service.</p>
+ *
+ *
+ * @public
  */
-export class CreateAttributeGroupCommand extends $Command<
-  CreateAttributeGroupCommandInput,
-  CreateAttributeGroupCommandOutput,
-  ServiceCatalogAppRegistryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateAttributeGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogAppRegistryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateAttributeGroupCommandInput, CreateAttributeGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogAppRegistryClient";
-    const commandName = "CreateAttributeGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateAttributeGroupRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateAttributeGroupResponse.filterSensitiveLog,
+export class CreateAttributeGroupCommand extends command<CreateAttributeGroupCommandInput, CreateAttributeGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateAttributeGroup",
+  CreateAttributeGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateAttributeGroupRequest;
+      output: CreateAttributeGroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateAttributeGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateAttributeGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateAttributeGroupCommandOutput> {
-    return deserializeAws_restJson1CreateAttributeGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateAttributeGroupCommandInput;
+      output: CreateAttributeGroupCommandOutput;
+    };
+  };
 }

@@ -1,21 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { QueryListsInput } from "../models/models_0";
-import { deserializeAws_queryQueryListsCommand, serializeAws_queryQueryListsCommand } from "../protocols/Aws_query";
-import { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { QueryListsInput } from "../models/models_0";
+import { de_QueryListsCommand, se_QueryListsCommand } from "../protocols/Aws_query";
+import type { QueryProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QueryProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link QueryListsCommand}.
+ */
 export interface QueryListsCommandInput extends QueryListsInput {}
+/**
+ * @public
+ *
+ * The output of {@link QueryListsCommand}.
+ */
 export interface QueryListsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -25,68 +33,81 @@ export interface QueryListsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { QueryProtocolClient, QueryListsCommand } from "@aws-sdk/aws-protocoltests-query"; // ES Modules import
  * // const { QueryProtocolClient, QueryListsCommand } = require("@aws-sdk/aws-protocoltests-query"); // CommonJS import
+ * // import type { QueryProtocolClientConfig } from "@aws-sdk/aws-protocoltests-query";
+ * const config = {}; // type is QueryProtocolClientConfig
  * const client = new QueryProtocolClient(config);
+ * const input = { // QueryListsInput
+ *   ListArg: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
+ *   ComplexListArg: [ // GreetingList
+ *     { // GreetingStruct
+ *       hi: "STRING_VALUE",
+ *     },
+ *   ],
+ *   FlattenedListArg: [
+ *     "STRING_VALUE",
+ *   ],
+ *   ListArgWithXmlNameMember: [ // ListWithXmlName
+ *     "STRING_VALUE",
+ *   ],
+ *   FlattenedListArgWithXmlName: [
+ *     "STRING_VALUE",
+ *   ],
+ *   NestedWithList: { // NestedStructWithList
+ *     ListArg: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new QueryListsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param QueryListsCommandInput - {@link QueryListsCommandInput}
+ * @returns {@link QueryListsCommandOutput}
  * @see {@link QueryListsCommandInput} for command's `input` shape.
  * @see {@link QueryListsCommandOutput} for command's `response` shape.
- * @see {@link QueryProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QueryProtocolClientResolvedConfig | config} for QueryProtocolClient's `config` shape.
  *
+ * @throws {@link QueryProtocolServiceException}
+ * <p>Base exception class for all service exceptions from QueryProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class QueryListsCommand extends $Command<
-  QueryListsCommandInput,
-  QueryListsCommandOutput,
-  QueryProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: QueryListsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QueryProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<QueryListsCommandInput, QueryListsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QueryProtocolClient";
-    const commandName = "QueryListsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: QueryListsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class QueryListsCommand extends $Command
+  .classBuilder<
+    QueryListsCommandInput,
+    QueryListsCommandOutput,
+    QueryProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: QueryProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("AwsQuery", "QueryLists", {})
+  .n("QueryProtocolClient", "QueryListsCommand")
+  .f(void 0, void 0)
+  .ser(se_QueryListsCommand)
+  .de(de_QueryListsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: QueryListsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: QueryListsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryQueryListsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<QueryListsCommandOutput> {
-    return deserializeAws_queryQueryListsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: QueryListsCommandInput;
+      output: QueryListsCommandOutput;
+    };
+  };
 }

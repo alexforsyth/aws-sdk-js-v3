@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FSxClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FSxClient";
-import { DeleteStorageVirtualMachineRequest, DeleteStorageVirtualMachineResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteStorageVirtualMachineCommand,
-  serializeAws_json1_1DeleteStorageVirtualMachineCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteStorageVirtualMachineRequest, DeleteStorageVirtualMachineResponse } from "../models/models_0";
+import { DeleteStorageVirtualMachine$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteStorageVirtualMachineCommand}.
+ */
 export interface DeleteStorageVirtualMachineCommandInput extends DeleteStorageVirtualMachineRequest {}
-export interface DeleteStorageVirtualMachineCommandOutput
-  extends DeleteStorageVirtualMachineResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteStorageVirtualMachineCommand}.
+ */
+export interface DeleteStorageVirtualMachineCommandOutput extends DeleteStorageVirtualMachineResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM). Prior
@@ -31,71 +30,63 @@ export interface DeleteStorageVirtualMachineCommandOutput
  * ```javascript
  * import { FSxClient, DeleteStorageVirtualMachineCommand } from "@aws-sdk/client-fsx"; // ES Modules import
  * // const { FSxClient, DeleteStorageVirtualMachineCommand } = require("@aws-sdk/client-fsx"); // CommonJS import
+ * // import type { FSxClientConfig } from "@aws-sdk/client-fsx";
+ * const config = {}; // type is FSxClientConfig
  * const client = new FSxClient(config);
+ * const input = { // DeleteStorageVirtualMachineRequest
+ *   ClientRequestToken: "STRING_VALUE",
+ *   StorageVirtualMachineId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteStorageVirtualMachineCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteStorageVirtualMachineResponse
+ * //   StorageVirtualMachineId: "STRING_VALUE",
+ * //   Lifecycle: "CREATED" || "CREATING" || "DELETING" || "FAILED" || "MISCONFIGURED" || "PENDING",
+ * // };
+ *
  * ```
  *
+ * @param DeleteStorageVirtualMachineCommandInput - {@link DeleteStorageVirtualMachineCommandInput}
+ * @returns {@link DeleteStorageVirtualMachineCommandOutput}
  * @see {@link DeleteStorageVirtualMachineCommandInput} for command's `input` shape.
  * @see {@link DeleteStorageVirtualMachineCommandOutput} for command's `response` shape.
- * @see {@link FSxClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FSxClientResolvedConfig | config} for FSxClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>A generic error indicating a failure with a client request.</p>
+ *
+ * @throws {@link IncompatibleParameterError} (client fault)
+ *  <p>The error returned when a second request is received with the same client request
+ *             token but different parameters settings. A client request token should always uniquely
+ *             identify a single request.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>A generic error indicating a server-side failure.</p>
+ *
+ * @throws {@link StorageVirtualMachineNotFound} (client fault)
+ *  <p>No FSx for ONTAP SVMs were found based upon the supplied parameters.</p>
+ *
+ * @throws {@link FSxServiceException}
+ * <p>Base exception class for all service exceptions from FSx service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteStorageVirtualMachineCommand extends $Command<
-  DeleteStorageVirtualMachineCommandInput,
-  DeleteStorageVirtualMachineCommandOutput,
-  FSxClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteStorageVirtualMachineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FSxClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteStorageVirtualMachineCommandInput, DeleteStorageVirtualMachineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FSxClient";
-    const commandName = "DeleteStorageVirtualMachineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteStorageVirtualMachineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteStorageVirtualMachineResponse.filterSensitiveLog,
+export class DeleteStorageVirtualMachineCommand extends command<DeleteStorageVirtualMachineCommandInput, DeleteStorageVirtualMachineCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteStorageVirtualMachine",
+  DeleteStorageVirtualMachine$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteStorageVirtualMachineRequest;
+      output: DeleteStorageVirtualMachineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteStorageVirtualMachineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteStorageVirtualMachineCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteStorageVirtualMachineCommandOutput> {
-    return deserializeAws_json1_1DeleteStorageVirtualMachineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteStorageVirtualMachineCommandInput;
+      output: DeleteStorageVirtualMachineCommandOutput;
+    };
+  };
 }

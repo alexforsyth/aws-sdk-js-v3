@@ -1,51 +1,54 @@
 {
   "name": "@aws-sdk/signature-v4-crt",
-  "version": "3.39.0",
+  "version": "3.1169.0",
   "description": "A revision of AWS Signature V4 request signer based on AWS Common Runtime https://github.com/awslabs/aws-crt-nodejs",
-  "main": "./dist-cjs/index.js",
-  "module": "./dist-es/index.js",
-  "types": "./dist-types/index.d.ts",
-  "scripts": {
-    "build": "yarn build:cjs && yarn build:es && yarn build:types",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es": "tsc -p tsconfig.es.json",
-    "build:types": "tsc -p tsconfig.types.json",
-    "downlevel-dts": "downlevel-dts dist-types dist-types/ts3.4",
-    "test": "jest --coverage"
-  },
+  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/signature-v4-crt",
+  "license": "Apache-2.0",
   "author": {
     "name": "AWS SDK for JavaScript Team",
-    "url": "https://aws.amazon.com/javascript/"
+    "url": "https://aws.amazon.com/sdk-for-javascript/"
   },
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@aws-sdk/is-array-buffer": "3.37.0",
-    "@aws-sdk/querystring-parser": "3.38.0",
-    "@aws-sdk/signature-v4": "3.39.0",
-    "@aws-sdk/util-hex-encoding": "3.37.0",
-    "@aws-sdk/util-uri-escape": "3.37.0",
-    "aws-crt": "^1.9.7",
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "@aws-crypto/sha256-js": "2.0.0",
-    "@aws-sdk/protocol-http": "3.38.0",
-    "@aws-sdk/types": "3.38.0",
-    "@aws-sdk/util-buffer-from": "3.37.0",
-    "@types/jest": "^26.0.4",
-    "jest": "^26.1.0",
-    "typescript": "~4.3.5"
-  },
-  "engines": {
-    "node": ">= 10.0.0"
-  },
-  "files": [
-    "dist-*"
-  ],
-  "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/master/packages/signature-v4-crt",
   "repository": {
     "type": "git",
     "url": "https://github.com/aws/aws-sdk-js-v3.git",
     "directory": "packages/signature-v4-crt"
+  },
+  "files": [
+    "dist-*/**"
+  ],
+  "sideEffects": true,
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "types": "./dist-types/index.d.ts",
+  "scripts": {
+    "build": "concurrently 'yarn:build:types' 'yarn:build:es' && yarn build:cjs",
+    "build:cjs": "node ../../scripts/compilation/inline",
+    "build:es": "premove dist-es && tsc -p tsconfig.es.json",
+    "build:include:deps": "yarn g:turbo run build -F=\"$npm_package_name\"",
+    "build:types": "premove dist-types && tsc -p tsconfig.types.json",
+    "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+    "clean": "premove dist-cjs dist-es dist-types",
+    "extract:docs": "api-extractor run --local",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@aws-sdk/crt-loader": "workspace:^3.972.88",
+    "@aws-sdk/signature-v4-multi-region": "workspace:^3.996.52",
+    "@aws-sdk/types": "workspace:^3.975.1",
+    "@smithy/core": "^3.40.0",
+    "@smithy/signature-v4": "^5.7.5",
+    "@smithy/types": "^4.20.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "1.0.1",
+    "concurrently": "7.0.0",
+    "downlevel-dts": "0.10.1",
+    "premove": "4.0.0",
+    "typescript": "~7.0.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

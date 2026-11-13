@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetJourneyDateRangeKpiRequest, GetJourneyDateRangeKpiResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1GetJourneyDateRangeKpiCommand,
-  serializeAws_restJson1GetJourneyDateRangeKpiCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetJourneyDateRangeKpiRequest, GetJourneyDateRangeKpiResponse } from "../models/models_1";
+import { GetJourneyDateRangeKpi$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJourneyDateRangeKpiCommand}.
+ */
 export interface GetJourneyDateRangeKpiCommandInput extends GetJourneyDateRangeKpiRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetJourneyDateRangeKpiCommand}.
+ */
 export interface GetJourneyDateRangeKpiCommandOutput extends GetJourneyDateRangeKpiResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,101 @@ export interface GetJourneyDateRangeKpiCommandOutput extends GetJourneyDateRange
  * ```javascript
  * import { PinpointClient, GetJourneyDateRangeKpiCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, GetJourneyDateRangeKpiCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // GetJourneyDateRangeKpiRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   EndTime: new Date("TIMESTAMP"),
+ *   JourneyId: "STRING_VALUE", // required
+ *   KpiName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   PageSize: "STRING_VALUE",
+ *   StartTime: new Date("TIMESTAMP"),
+ * };
  * const command = new GetJourneyDateRangeKpiCommand(input);
  * const response = await client.send(command);
+ * // { // GetJourneyDateRangeKpiResponse
+ * //   JourneyDateRangeKpiResponse: { // JourneyDateRangeKpiResponse
+ * //     ApplicationId: "STRING_VALUE", // required
+ * //     EndTime: new Date("TIMESTAMP"), // required
+ * //     JourneyId: "STRING_VALUE", // required
+ * //     KpiName: "STRING_VALUE", // required
+ * //     KpiResult: { // BaseKpiResult
+ * //       Rows: [ // ListOfResultRow // required
+ * //         { // ResultRow
+ * //           GroupedBys: [ // ListOfResultRowValue // required
+ * //             { // ResultRowValue
+ * //               Key: "STRING_VALUE", // required
+ * //               Type: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //           Values: [ // required
+ * //             {
+ * //               Key: "STRING_VALUE", // required
+ * //               Type: "STRING_VALUE", // required
+ * //               Value: "STRING_VALUE", // required
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     NextToken: "STRING_VALUE",
+ * //     StartTime: new Date("TIMESTAMP"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetJourneyDateRangeKpiCommandInput - {@link GetJourneyDateRangeKpiCommandInput}
+ * @returns {@link GetJourneyDateRangeKpiCommandOutput}
  * @see {@link GetJourneyDateRangeKpiCommandInput} for command's `input` shape.
  * @see {@link GetJourneyDateRangeKpiCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class GetJourneyDateRangeKpiCommand extends $Command<
-  GetJourneyDateRangeKpiCommandInput,
-  GetJourneyDateRangeKpiCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetJourneyDateRangeKpiCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetJourneyDateRangeKpiCommandInput, GetJourneyDateRangeKpiCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "GetJourneyDateRangeKpiCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetJourneyDateRangeKpiRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetJourneyDateRangeKpiResponse.filterSensitiveLog,
+export class GetJourneyDateRangeKpiCommand extends command<GetJourneyDateRangeKpiCommandInput, GetJourneyDateRangeKpiCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJourneyDateRangeKpi",
+  GetJourneyDateRangeKpi$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJourneyDateRangeKpiRequest;
+      output: GetJourneyDateRangeKpiResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetJourneyDateRangeKpiCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetJourneyDateRangeKpiCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetJourneyDateRangeKpiCommandOutput> {
-    return deserializeAws_restJson1GetJourneyDateRangeKpiCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetJourneyDateRangeKpiCommandInput;
+      output: GetJourneyDateRangeKpiCommandOutput;
+    };
+  };
 }

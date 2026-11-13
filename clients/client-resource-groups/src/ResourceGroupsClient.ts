@@ -1,126 +1,185 @@
+// smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
-  Credentials as __Credentials,
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
+  BodyLengthCalculator as __BodyLengthCalculator,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
-import { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
-import { GetGroupCommandInput, GetGroupCommandOutput } from "./commands/GetGroupCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultResourceGroupsHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
+  CancelTagSyncTaskCommandInput,
+  CancelTagSyncTaskCommandOutput,
+} from "./commands/CancelTagSyncTaskCommand";
+import type { CreateGroupCommandInput, CreateGroupCommandOutput } from "./commands/CreateGroupCommand";
+import type { DeleteGroupCommandInput, DeleteGroupCommandOutput } from "./commands/DeleteGroupCommand";
+import type {
+  GetAccountSettingsCommandInput,
+  GetAccountSettingsCommandOutput,
+} from "./commands/GetAccountSettingsCommand";
+import type { GetGroupCommandInput, GetGroupCommandOutput } from "./commands/GetGroupCommand";
+import type {
   GetGroupConfigurationCommandInput,
   GetGroupConfigurationCommandOutput,
 } from "./commands/GetGroupConfigurationCommand";
-import { GetGroupQueryCommandInput, GetGroupQueryCommandOutput } from "./commands/GetGroupQueryCommand";
-import { GetTagsCommandInput, GetTagsCommandOutput } from "./commands/GetTagsCommand";
-import { GroupResourcesCommandInput, GroupResourcesCommandOutput } from "./commands/GroupResourcesCommand";
-import { ListGroupResourcesCommandInput, ListGroupResourcesCommandOutput } from "./commands/ListGroupResourcesCommand";
-import { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
-import {
+import type { GetGroupQueryCommandInput, GetGroupQueryCommandOutput } from "./commands/GetGroupQueryCommand";
+import type { GetTagsCommandInput, GetTagsCommandOutput } from "./commands/GetTagsCommand";
+import type { GetTagSyncTaskCommandInput, GetTagSyncTaskCommandOutput } from "./commands/GetTagSyncTaskCommand";
+import type { GroupResourcesCommandInput, GroupResourcesCommandOutput } from "./commands/GroupResourcesCommand";
+import type {
+  ListGroupingStatusesCommandInput,
+  ListGroupingStatusesCommandOutput,
+} from "./commands/ListGroupingStatusesCommand";
+import type {
+  ListGroupResourcesCommandInput,
+  ListGroupResourcesCommandOutput,
+} from "./commands/ListGroupResourcesCommand";
+import type { ListGroupsCommandInput, ListGroupsCommandOutput } from "./commands/ListGroupsCommand";
+import type { ListTagSyncTasksCommandInput, ListTagSyncTasksCommandOutput } from "./commands/ListTagSyncTasksCommand";
+import type {
   PutGroupConfigurationCommandInput,
   PutGroupConfigurationCommandOutput,
 } from "./commands/PutGroupConfigurationCommand";
-import { SearchResourcesCommandInput, SearchResourcesCommandOutput } from "./commands/SearchResourcesCommand";
-import { TagCommandInput, TagCommandOutput } from "./commands/TagCommand";
-import { UngroupResourcesCommandInput, UngroupResourcesCommandOutput } from "./commands/UngroupResourcesCommand";
-import { UntagCommandInput, UntagCommandOutput } from "./commands/UntagCommand";
-import { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
-import { UpdateGroupQueryCommandInput, UpdateGroupQueryCommandOutput } from "./commands/UpdateGroupQueryCommand";
+import type { SearchResourcesCommandInput, SearchResourcesCommandOutput } from "./commands/SearchResourcesCommand";
+import type { StartTagSyncTaskCommandInput, StartTagSyncTaskCommandOutput } from "./commands/StartTagSyncTaskCommand";
+import type { TagCommandInput, TagCommandOutput } from "./commands/TagCommand";
+import type { UngroupResourcesCommandInput, UngroupResourcesCommandOutput } from "./commands/UngroupResourcesCommand";
+import type { UntagCommandInput, UntagCommandOutput } from "./commands/UntagCommand";
+import type {
+  UpdateAccountSettingsCommandInput,
+  UpdateAccountSettingsCommandOutput,
+} from "./commands/UpdateAccountSettingsCommand";
+import type { UpdateGroupCommandInput, UpdateGroupCommandOutput } from "./commands/UpdateGroupCommand";
+import type { UpdateGroupQueryCommandInput, UpdateGroupQueryCommandOutput } from "./commands/UpdateGroupQueryCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | CancelTagSyncTaskCommandInput
   | CreateGroupCommandInput
   | DeleteGroupCommandInput
+  | GetAccountSettingsCommandInput
   | GetGroupCommandInput
   | GetGroupConfigurationCommandInput
   | GetGroupQueryCommandInput
+  | GetTagSyncTaskCommandInput
   | GetTagsCommandInput
   | GroupResourcesCommandInput
   | ListGroupResourcesCommandInput
+  | ListGroupingStatusesCommandInput
   | ListGroupsCommandInput
+  | ListTagSyncTasksCommandInput
   | PutGroupConfigurationCommandInput
   | SearchResourcesCommandInput
+  | StartTagSyncTaskCommandInput
   | TagCommandInput
   | UngroupResourcesCommandInput
   | UntagCommandInput
+  | UpdateAccountSettingsCommandInput
   | UpdateGroupCommandInput
   | UpdateGroupQueryCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | CancelTagSyncTaskCommandOutput
   | CreateGroupCommandOutput
   | DeleteGroupCommandOutput
+  | GetAccountSettingsCommandOutput
   | GetGroupCommandOutput
   | GetGroupConfigurationCommandOutput
   | GetGroupQueryCommandOutput
+  | GetTagSyncTaskCommandOutput
   | GetTagsCommandOutput
   | GroupResourcesCommandOutput
   | ListGroupResourcesCommandOutput
+  | ListGroupingStatusesCommandOutput
   | ListGroupsCommandOutput
+  | ListTagSyncTasksCommandOutput
   | PutGroupConfigurationCommandOutput
   | SearchResourcesCommandOutput
+  | StartTagSyncTaskCommandOutput
   | TagCommandOutput
   | UngroupResourcesCommandOutput
   | UntagCommandOutput
+  | UpdateAccountSettingsCommandOutput
   | UpdateGroupCommandOutput
   | UpdateGroupQueryCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -132,7 +191,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * A function that can calculate the length of a request body.
    * @internal
    */
-  bodyLengthChecker?: (body: any) => number | undefined;
+  bodyLengthChecker?: __BodyLengthCalculator;
 
   /**
    * A function that converts a stream into an array of bytes.
@@ -171,25 +230,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -202,98 +252,146 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
+
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type ResourceGroupsClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of ResourceGroupsClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type ResourceGroupsClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of ResourceGroupsClient class constructor that set the region, credentials and other options.
  */
 export interface ResourceGroupsClientConfig extends ResourceGroupsClientConfigType {}
 
-type ResourceGroupsClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of ResourceGroupsClient class. This is resolved and normalized from the {@link ResourceGroupsClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type ResourceGroupsClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of ResourceGroupsClient class. This is resolved and normalized from the {@link ResourceGroupsClientConfig | constructor configuration interface}.
  */
 export interface ResourceGroupsClientResolvedConfig extends ResourceGroupsClientResolvedConfigType {}
 
 /**
- * <fullname>AWS Resource Groups</fullname>
- *
- *         <p>AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service
- *             databases, and Amazon S3 buckets into groups using criteria that you define as tags. A
+ * <p>Resource Groups lets you organize Amazon Web Services resources such as Amazon Elastic Compute Cloud instances, Amazon Relational Database Service
+ *             databases, and Amazon Simple Storage Service buckets into groups using criteria that you define as tags. A
  *             resource group is a collection of resources that match the resource types specified in a
  *             query, and share one or more tags or portions of tags. You can create a group of
  *             resources based on their roles in your cloud infrastructure, lifecycle stages, regions,
  *             application layers, or virtually any criteria. Resource Groups enable you to automate management
- *             tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in
- *             AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in
- *             AWS Systems Manager that shows AWS Config compliance and other monitoring data about member
+ *             tasks, such as those in Amazon Web Services Systems Manager Automation documents, on tag-related resources in
+ *             Amazon Web Services Systems Manager. Groups of tagged resources also let you quickly view a custom console in
+ *             Amazon Web Services Systems Manager that shows Config compliance and other monitoring data about member
  *             resources.</p>
- *         <p>To create a resource group, build a resource query, and specify tags that identify the
+ *          <p>To create a resource group, build a resource query, and specify tags that identify the
  *             criteria that members of the group have in common. Tags are key-value pairs.</p>
- *         <p>For more information about Resource Groups, see the <a href="https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html">AWS Resource Groups User Guide</a>.</p>
- *         <p>AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of
+ *          <p>For more information about Resource Groups, see the <a href="https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html">Resource Groups User Guide</a>.</p>
+ *          <p>Resource Groups uses a REST-compliant API that you can use to perform the following types of
  *             operations.</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and
+ *                <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and
  *                     resource query entities</p>
  *             </li>
  *             <li>
- *                 <p>Applying, editing, and removing tags from resource groups</p>
+ *                <p>Applying, editing, and removing tags from resource groups</p>
  *             </li>
  *             <li>
- *                 <p>Resolving resource group member ARNs so they can be returned as search
+ *                <p>Resolving resource group member Amazon resource names (ARN)s so they can be returned as search
  *                     results</p>
  *             </li>
  *             <li>
- *                 <p>Getting data about resources that are members of a group</p>
+ *                <p>Getting data about resources that are members of a group</p>
  *             </li>
  *             <li>
- *                 <p>Searching AWS resources based on a resource query</p>
+ *                <p>Searching Amazon Web Services resources based on a resource query</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export class ResourceGroupsClient extends __Client<
   __HttpHandlerOptions,
@@ -306,22 +404,36 @@ export class ResourceGroupsClient extends __Client<
    */
   readonly config: ResourceGroupsClientResolvedConfig;
 
-  constructor(configuration: ResourceGroupsClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<ResourceGroupsClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultResourceGroupsHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: ResourceGroupsClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

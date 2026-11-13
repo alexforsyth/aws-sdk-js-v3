@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateFolderRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateFolderCommand,
-  serializeAws_restJson1UpdateFolderCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFolderRequest } from "../models/models_0";
+import { UpdateFolder$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFolderCommand}.
+ */
 export interface UpdateFolderCommandInput extends UpdateFolderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFolderCommand}.
+ */
 export interface UpdateFolderCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +30,81 @@ export interface UpdateFolderCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { WorkDocsClient, UpdateFolderCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, UpdateFolderCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // UpdateFolderRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   FolderId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   ParentFolderId: "STRING_VALUE",
+ *   ResourceState: "ACTIVE" || "RESTORING" || "RECYCLING" || "RECYCLED",
+ * };
  * const command = new UpdateFolderCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateFolderCommandInput - {@link UpdateFolderCommandInput}
+ * @returns {@link UpdateFolderCommandOutput}
  * @see {@link UpdateFolderCommandInput} for command's `input` shape.
  * @see {@link UpdateFolderCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>The resource hierarchy is changing.</p>
+ *
+ * @throws {@link ConflictingOperationException} (client fault)
+ *  <p>Another operation is in progress on the resource that conflicts with the current operation.</p>
+ *
+ * @throws {@link EntityAlreadyExistsException} (client fault)
+ *  <p>The resource already exists.</p>
+ *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The maximum of 100,000 files and folders under the parent folder has been exceeded.</p>
+ *
+ * @throws {@link ProhibitedStateException} (client fault)
+ *  <p>The specified document version is not in the INITIALIZED state.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateFolderCommand extends $Command<
-  UpdateFolderCommandInput,
-  UpdateFolderCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFolderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFolderCommandInput, UpdateFolderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "UpdateFolderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFolderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateFolderCommand extends command<UpdateFolderCommandInput, UpdateFolderCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFolder",
+  UpdateFolder$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFolderRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateFolderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateFolderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateFolderCommandOutput> {
-    return deserializeAws_restJson1UpdateFolderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFolderCommandInput;
+      output: UpdateFolderCommandOutput;
+    };
+  };
 }

@@ -1,97 +1,108 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { ListStackInstancesInput, ListStackInstancesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryListStackInstancesCommand,
-  serializeAws_queryListStackInstancesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListStackInstancesInput, ListStackInstancesOutput } from "../models/models_0";
+import { ListStackInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListStackInstancesCommand}.
+ */
 export interface ListStackInstancesCommandInput extends ListStackInstancesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListStackInstancesCommand}.
+ */
 export interface ListStackInstancesCommandOutput extends ListStackInstancesOutput, __MetadataBearer {}
 
 /**
- * <p>Returns summary information about stack instances that are associated with the
- *          specified stack set. You can filter for stack instances that are associated with a specific
- *          Amazon Web Services account name or Region, or that have a specific status.</p>
+ * <p>Returns summary information about stack instances that are associated with the specified
+ *       StackSet. You can filter for stack instances that are associated with a specific Amazon Web Services account
+ *       name or Region, or that have a specific status.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, ListStackInstancesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, ListStackInstancesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // ListStackInstancesInput
+ *   StackSetName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // StackInstanceFilters
+ *     { // StackInstanceFilter
+ *       Name: "DETAILED_STATUS" || "LAST_OPERATION_ID" || "DRIFT_STATUS",
+ *       Values: "STRING_VALUE",
+ *     },
+ *   ],
+ *   StackInstanceAccount: "STRING_VALUE",
+ *   StackInstanceRegion: "STRING_VALUE",
+ *   CallAs: "SELF" || "DELEGATED_ADMIN",
+ * };
  * const command = new ListStackInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // ListStackInstancesOutput
+ * //   Summaries: [ // StackInstanceSummaries
+ * //     { // StackInstanceSummary
+ * //       StackSetId: "STRING_VALUE",
+ * //       Region: "STRING_VALUE",
+ * //       Account: "STRING_VALUE",
+ * //       StackId: "STRING_VALUE",
+ * //       Status: "CURRENT" || "OUTDATED" || "INOPERABLE",
+ * //       StatusReason: "STRING_VALUE",
+ * //       StackInstanceStatus: { // StackInstanceComprehensiveStatus
+ * //         DetailedStatus: "PENDING" || "RUNNING" || "SUCCEEDED" || "FAILED" || "CANCELLED" || "INOPERABLE" || "SKIPPED_SUSPENDED_ACCOUNT" || "FAILED_IMPORT",
+ * //       },
+ * //       OrganizationalUnitId: "STRING_VALUE",
+ * //       DriftStatus: "DRIFTED" || "IN_SYNC" || "UNKNOWN" || "NOT_CHECKED",
+ * //       LastDriftCheckTimestamp: new Date("TIMESTAMP"),
+ * //       LastOperationId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListStackInstancesCommandInput - {@link ListStackInstancesCommandInput}
+ * @returns {@link ListStackInstancesCommandOutput}
  * @see {@link ListStackInstancesCommandInput} for command's `input` shape.
  * @see {@link ListStackInstancesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link StackSetNotFoundException} (client fault)
+ *  <p>The specified StackSet doesn't exist.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListStackInstancesCommand extends $Command<
-  ListStackInstancesCommandInput,
-  ListStackInstancesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListStackInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListStackInstancesCommandInput, ListStackInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "ListStackInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListStackInstancesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListStackInstancesOutput.filterSensitiveLog,
+export class ListStackInstancesCommand extends command<ListStackInstancesCommandInput, ListStackInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListStackInstances",
+  ListStackInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListStackInstancesInput;
+      output: ListStackInstancesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListStackInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryListStackInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListStackInstancesCommandOutput> {
-    return deserializeAws_queryListStackInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListStackInstancesCommandInput;
+      output: ListStackInstancesCommandOutput;
+    };
+  };
 }

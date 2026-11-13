@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateAppImageConfigRequest, UpdateAppImageConfigResponse } from "../models/models_3";
-import {
-  deserializeAws_json1_1UpdateAppImageConfigCommand,
-  serializeAws_json1_1UpdateAppImageConfigCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateAppImageConfigRequest, UpdateAppImageConfigResponse } from "../models/models_5";
+import { UpdateAppImageConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateAppImageConfigCommand}.
+ */
 export interface UpdateAppImageConfigCommandInput extends UpdateAppImageConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateAppImageConfigCommand}.
+ */
 export interface UpdateAppImageConfigCommandOutput extends UpdateAppImageConfigResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,99 @@ export interface UpdateAppImageConfigCommandOutput extends UpdateAppImageConfigR
  * ```javascript
  * import { SageMakerClient, UpdateAppImageConfigCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, UpdateAppImageConfigCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // UpdateAppImageConfigRequest
+ *   AppImageConfigName: "STRING_VALUE", // required
+ *   KernelGatewayImageConfig: { // KernelGatewayImageConfig
+ *     KernelSpecs: [ // KernelSpecs // required
+ *       { // KernelSpec
+ *         Name: "STRING_VALUE", // required
+ *         DisplayName: "STRING_VALUE",
+ *       },
+ *     ],
+ *     FileSystemConfig: { // FileSystemConfig
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *   },
+ *   JupyterLabAppImageConfig: { // JupyterLabAppImageConfig
+ *     FileSystemConfig: {
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *     ContainerConfig: { // ContainerConfig
+ *       ContainerArguments: [ // CustomImageContainerArguments
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEntrypoint: [ // CustomImageContainerEntrypoint
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEnvironmentVariables: { // CustomImageContainerEnvironmentVariables
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   CodeEditorAppImageConfig: { // CodeEditorAppImageConfig
+ *     FileSystemConfig: {
+ *       MountPath: "STRING_VALUE",
+ *       DefaultUid: Number("int"),
+ *       DefaultGid: Number("int"),
+ *     },
+ *     ContainerConfig: {
+ *       ContainerArguments: [
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEntrypoint: [
+ *         "STRING_VALUE",
+ *       ],
+ *       ContainerEnvironmentVariables: {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ * };
  * const command = new UpdateAppImageConfigCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateAppImageConfigResponse
+ * //   AppImageConfigArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateAppImageConfigCommandInput - {@link UpdateAppImageConfigCommandInput}
+ * @returns {@link UpdateAppImageConfigCommandOutput}
  * @see {@link UpdateAppImageConfigCommandInput} for command's `input` shape.
  * @see {@link UpdateAppImageConfigCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateAppImageConfigCommand extends $Command<
-  UpdateAppImageConfigCommandInput,
-  UpdateAppImageConfigCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateAppImageConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateAppImageConfigCommandInput, UpdateAppImageConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "UpdateAppImageConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateAppImageConfigRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateAppImageConfigResponse.filterSensitiveLog,
+export class UpdateAppImageConfigCommand extends command<UpdateAppImageConfigCommandInput, UpdateAppImageConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateAppImageConfig",
+  UpdateAppImageConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateAppImageConfigRequest;
+      output: UpdateAppImageConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateAppImageConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateAppImageConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateAppImageConfigCommandOutput> {
-    return deserializeAws_json1_1UpdateAppImageConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateAppImageConfigCommandInput;
+      output: UpdateAppImageConfigCommandOutput;
+    };
+  };
 }

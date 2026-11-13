@@ -1,103 +1,95 @@
-import { getEndpointDiscoveryPlugin } from "@aws-sdk/middleware-endpoint-discovery";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CancelQueryRequest, CancelQueryResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_0CancelQueryCommand,
-  serializeAws_json1_0CancelQueryCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, TimestreamQueryClientResolvedConfig } from "../TimestreamQueryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CancelQueryRequest, CancelQueryResponse } from "../models/models_0";
+import { CancelQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CancelQueryCommand}.
+ */
 export interface CancelQueryCommandInput extends CancelQueryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CancelQueryCommand}.
+ */
 export interface CancelQueryCommandOutput extends CancelQueryResponse, __MetadataBearer {}
 
 /**
- * <p>
- *         Cancels a query that has been issued. Cancellation is guaranteed only if the query has not
- *         completed execution before the cancellation request was issued. Because cancellation is an idempotent operation,
- *         subsequent cancellation requests will return a <code>CancellationMessage</code>, indicating that the query has already been canceled.
- *     </p>
+ * <p> Cancels a query that has been issued. Cancellation is provided only if the query has
+ *             not completed running before the cancellation request was issued. Because cancellation
+ *             is an idempotent operation, subsequent cancellation requests will return a
+ *                 <code>CancellationMessage</code>, indicating that the query has already been
+ *             canceled. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html">code
+ *                 sample</a> for details. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TimestreamQueryClient, CancelQueryCommand } from "@aws-sdk/client-timestream-query"; // ES Modules import
  * // const { TimestreamQueryClient, CancelQueryCommand } = require("@aws-sdk/client-timestream-query"); // CommonJS import
+ * // import type { TimestreamQueryClientConfig } from "@aws-sdk/client-timestream-query";
+ * const config = {}; // type is TimestreamQueryClientConfig
  * const client = new TimestreamQueryClient(config);
+ * const input = { // CancelQueryRequest
+ *   QueryId: "STRING_VALUE", // required
+ * };
  * const command = new CancelQueryCommand(input);
  * const response = await client.send(command);
+ * // { // CancelQueryResponse
+ * //   CancellationMessage: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CancelQueryCommandInput - {@link CancelQueryCommandInput}
+ * @returns {@link CancelQueryCommandOutput}
  * @see {@link CancelQueryCommandInput} for command's `input` shape.
  * @see {@link CancelQueryCommandOutput} for command's `response` shape.
- * @see {@link TimestreamQueryClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link TimestreamQueryClientResolvedConfig | config} for TimestreamQueryClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have the necessary permissions to access the account settings.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred while processing the request.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *  <p>The requested endpoint is invalid.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled due to excessive requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Invalid or malformed request. </p>
+ *
+ * @throws {@link TimestreamQueryServiceException}
+ * <p>Base exception class for all service exceptions from TimestreamQuery service.</p>
+ *
+ *
+ * @public
  */
-export class CancelQueryCommand extends $Command<
-  CancelQueryCommandInput,
-  CancelQueryCommandOutput,
-  TimestreamQueryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CancelQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TimestreamQueryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CancelQueryCommandInput, CancelQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(
-      getEndpointDiscoveryPlugin(configuration, { clientStack, options, isDiscoveredEndpointRequired: true })
-    );
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TimestreamQueryClient";
-    const commandName = "CancelQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CancelQueryRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CancelQueryResponse.filterSensitiveLog,
+export class CancelQueryCommand extends command<CancelQueryCommandInput, CancelQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "CancelQuery",
+  CancelQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CancelQueryRequest;
+      output: CancelQueryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CancelQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CancelQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CancelQueryCommandOutput> {
-    return deserializeAws_json1_0CancelQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CancelQueryCommandInput;
+      output: CancelQueryCommandOutput;
+    };
+  };
 }

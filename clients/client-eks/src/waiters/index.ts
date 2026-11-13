@@ -1,3 +1,4 @@
+// smithy-typescript generated code
 export * from "./waitForAddonActive";
 export * from "./waitForAddonDeleted";
 export * from "./waitForClusterActive";
@@ -6,3 +7,4 @@ export * from "./waitForFargateProfileActive";
 export * from "./waitForFargateProfileDeleted";
 export * from "./waitForNodegroupActive";
 export * from "./waitForNodegroupDeleted";
+export * from "./waitForCertificateAuthorityUpdateComplete";

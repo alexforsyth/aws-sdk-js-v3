@@ -1,1258 +1,1212 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchGetChannelCommandInput,
+  type BatchGetChannelCommandOutput,
   BatchGetChannelCommand,
-  BatchGetChannelCommandInput,
-  BatchGetChannelCommandOutput,
 } from "./commands/BatchGetChannelCommand";
 import {
+  type BatchGetStreamKeyCommandInput,
+  type BatchGetStreamKeyCommandOutput,
   BatchGetStreamKeyCommand,
-  BatchGetStreamKeyCommandInput,
-  BatchGetStreamKeyCommandOutput,
 } from "./commands/BatchGetStreamKeyCommand";
 import {
+  type BatchStartViewerSessionRevocationCommandInput,
+  type BatchStartViewerSessionRevocationCommandOutput,
+  BatchStartViewerSessionRevocationCommand,
+} from "./commands/BatchStartViewerSessionRevocationCommand";
+import {
+  type CreateAdConfigurationCommandInput,
+  type CreateAdConfigurationCommandOutput,
+  CreateAdConfigurationCommand,
+} from "./commands/CreateAdConfigurationCommand";
+import {
+  type CreateChannelCommandInput,
+  type CreateChannelCommandOutput,
   CreateChannelCommand,
-  CreateChannelCommandInput,
-  CreateChannelCommandOutput,
 } from "./commands/CreateChannelCommand";
 import {
+  type CreateFailoverSlateConfigurationCommandInput,
+  type CreateFailoverSlateConfigurationCommandOutput,
+  CreateFailoverSlateConfigurationCommand,
+} from "./commands/CreateFailoverSlateConfigurationCommand";
+import {
+  type CreatePlaybackRestrictionPolicyCommandInput,
+  type CreatePlaybackRestrictionPolicyCommandOutput,
+  CreatePlaybackRestrictionPolicyCommand,
+} from "./commands/CreatePlaybackRestrictionPolicyCommand";
+import {
+  type CreateRecordingConfigurationCommandInput,
+  type CreateRecordingConfigurationCommandOutput,
   CreateRecordingConfigurationCommand,
-  CreateRecordingConfigurationCommandInput,
-  CreateRecordingConfigurationCommandOutput,
 } from "./commands/CreateRecordingConfigurationCommand";
 import {
+  type CreateStreamKeyCommandInput,
+  type CreateStreamKeyCommandOutput,
   CreateStreamKeyCommand,
-  CreateStreamKeyCommandInput,
-  CreateStreamKeyCommandOutput,
 } from "./commands/CreateStreamKeyCommand";
 import {
+  type DeleteAdConfigurationCommandInput,
+  type DeleteAdConfigurationCommandOutput,
+  DeleteAdConfigurationCommand,
+} from "./commands/DeleteAdConfigurationCommand";
+import {
+  type DeleteChannelCommandInput,
+  type DeleteChannelCommandOutput,
   DeleteChannelCommand,
-  DeleteChannelCommandInput,
-  DeleteChannelCommandOutput,
 } from "./commands/DeleteChannelCommand";
 import {
+  type DeleteFailoverSlateConfigurationCommandInput,
+  type DeleteFailoverSlateConfigurationCommandOutput,
+  DeleteFailoverSlateConfigurationCommand,
+} from "./commands/DeleteFailoverSlateConfigurationCommand";
+import {
+  type DeletePlaybackKeyPairCommandInput,
+  type DeletePlaybackKeyPairCommandOutput,
   DeletePlaybackKeyPairCommand,
-  DeletePlaybackKeyPairCommandInput,
-  DeletePlaybackKeyPairCommandOutput,
 } from "./commands/DeletePlaybackKeyPairCommand";
 import {
+  type DeletePlaybackRestrictionPolicyCommandInput,
+  type DeletePlaybackRestrictionPolicyCommandOutput,
+  DeletePlaybackRestrictionPolicyCommand,
+} from "./commands/DeletePlaybackRestrictionPolicyCommand";
+import {
+  type DeleteRecordingConfigurationCommandInput,
+  type DeleteRecordingConfigurationCommandOutput,
   DeleteRecordingConfigurationCommand,
-  DeleteRecordingConfigurationCommandInput,
-  DeleteRecordingConfigurationCommandOutput,
 } from "./commands/DeleteRecordingConfigurationCommand";
 import {
+  type DeleteStreamKeyCommandInput,
+  type DeleteStreamKeyCommandOutput,
   DeleteStreamKeyCommand,
-  DeleteStreamKeyCommandInput,
-  DeleteStreamKeyCommandOutput,
 } from "./commands/DeleteStreamKeyCommand";
-import { GetChannelCommand, GetChannelCommandInput, GetChannelCommandOutput } from "./commands/GetChannelCommand";
 import {
+  type GetAdConfigurationCommandInput,
+  type GetAdConfigurationCommandOutput,
+  GetAdConfigurationCommand,
+} from "./commands/GetAdConfigurationCommand";
+import {
+  type GetChannelCommandInput,
+  type GetChannelCommandOutput,
+  GetChannelCommand,
+} from "./commands/GetChannelCommand";
+import {
+  type GetFailoverSlateConfigurationCommandInput,
+  type GetFailoverSlateConfigurationCommandOutput,
+  GetFailoverSlateConfigurationCommand,
+} from "./commands/GetFailoverSlateConfigurationCommand";
+import {
+  type GetPlaybackKeyPairCommandInput,
+  type GetPlaybackKeyPairCommandOutput,
   GetPlaybackKeyPairCommand,
-  GetPlaybackKeyPairCommandInput,
-  GetPlaybackKeyPairCommandOutput,
 } from "./commands/GetPlaybackKeyPairCommand";
 import {
-  GetRecordingConfigurationCommand,
-  GetRecordingConfigurationCommandInput,
-  GetRecordingConfigurationCommandOutput,
-} from "./commands/GetRecordingConfigurationCommand";
-import { GetStreamCommand, GetStreamCommandInput, GetStreamCommandOutput } from "./commands/GetStreamCommand";
+  type GetPlaybackRestrictionPolicyCommandInput,
+  type GetPlaybackRestrictionPolicyCommandOutput,
+  GetPlaybackRestrictionPolicyCommand,
+} from "./commands/GetPlaybackRestrictionPolicyCommand";
 import {
+  type GetRecordingConfigurationCommandInput,
+  type GetRecordingConfigurationCommandOutput,
+  GetRecordingConfigurationCommand,
+} from "./commands/GetRecordingConfigurationCommand";
+import { type GetStreamCommandInput, type GetStreamCommandOutput, GetStreamCommand } from "./commands/GetStreamCommand";
+import {
+  type GetStreamKeyCommandInput,
+  type GetStreamKeyCommandOutput,
   GetStreamKeyCommand,
-  GetStreamKeyCommandInput,
-  GetStreamKeyCommandOutput,
 } from "./commands/GetStreamKeyCommand";
 import {
+  type GetStreamSessionCommandInput,
+  type GetStreamSessionCommandOutput,
+  GetStreamSessionCommand,
+} from "./commands/GetStreamSessionCommand";
+import {
+  type ImportPlaybackKeyPairCommandInput,
+  type ImportPlaybackKeyPairCommandOutput,
   ImportPlaybackKeyPairCommand,
-  ImportPlaybackKeyPairCommandInput,
-  ImportPlaybackKeyPairCommandOutput,
 } from "./commands/ImportPlaybackKeyPairCommand";
 import {
+  type InsertAdBreakCommandInput,
+  type InsertAdBreakCommandOutput,
+  InsertAdBreakCommand,
+} from "./commands/InsertAdBreakCommand";
+import {
+  type ListAdConfigurationsCommandInput,
+  type ListAdConfigurationsCommandOutput,
+  ListAdConfigurationsCommand,
+} from "./commands/ListAdConfigurationsCommand";
+import {
+  type ListChannelsCommandInput,
+  type ListChannelsCommandOutput,
   ListChannelsCommand,
-  ListChannelsCommandInput,
-  ListChannelsCommandOutput,
 } from "./commands/ListChannelsCommand";
 import {
+  type ListFailoverSlateConfigurationsCommandInput,
+  type ListFailoverSlateConfigurationsCommandOutput,
+  ListFailoverSlateConfigurationsCommand,
+} from "./commands/ListFailoverSlateConfigurationsCommand";
+import {
+  type ListPlaybackKeyPairsCommandInput,
+  type ListPlaybackKeyPairsCommandOutput,
   ListPlaybackKeyPairsCommand,
-  ListPlaybackKeyPairsCommandInput,
-  ListPlaybackKeyPairsCommandOutput,
 } from "./commands/ListPlaybackKeyPairsCommand";
 import {
+  type ListPlaybackRestrictionPoliciesCommandInput,
+  type ListPlaybackRestrictionPoliciesCommandOutput,
+  ListPlaybackRestrictionPoliciesCommand,
+} from "./commands/ListPlaybackRestrictionPoliciesCommand";
+import {
+  type ListRecordingConfigurationsCommandInput,
+  type ListRecordingConfigurationsCommandOutput,
   ListRecordingConfigurationsCommand,
-  ListRecordingConfigurationsCommandInput,
-  ListRecordingConfigurationsCommandOutput,
 } from "./commands/ListRecordingConfigurationsCommand";
 import {
+  type ListStreamKeysCommandInput,
+  type ListStreamKeysCommandOutput,
   ListStreamKeysCommand,
-  ListStreamKeysCommandInput,
-  ListStreamKeysCommandOutput,
 } from "./commands/ListStreamKeysCommand";
-import { ListStreamsCommand, ListStreamsCommandInput, ListStreamsCommandOutput } from "./commands/ListStreamsCommand";
 import {
+  type ListStreamsCommandInput,
+  type ListStreamsCommandOutput,
+  ListStreamsCommand,
+} from "./commands/ListStreamsCommand";
+import {
+  type ListStreamSessionsCommandInput,
+  type ListStreamSessionsCommandOutput,
+  ListStreamSessionsCommand,
+} from "./commands/ListStreamSessionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { PutMetadataCommand, PutMetadataCommandInput, PutMetadataCommandOutput } from "./commands/PutMetadataCommand";
-import { StopStreamCommand, StopStreamCommandInput, StopStreamCommandOutput } from "./commands/StopStreamCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type PutMetadataCommandInput,
+  type PutMetadataCommandOutput,
+  PutMetadataCommand,
+} from "./commands/PutMetadataCommand";
+import {
+  type StartViewerSessionRevocationCommandInput,
+  type StartViewerSessionRevocationCommandOutput,
+  StartViewerSessionRevocationCommand,
+} from "./commands/StartViewerSessionRevocationCommand";
+import {
+  type StopStreamCommandInput,
+  type StopStreamCommandOutput,
+  StopStreamCommand,
+} from "./commands/StopStreamCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAdConfigurationCommandInput,
+  type UpdateAdConfigurationCommandOutput,
+  UpdateAdConfigurationCommand,
+} from "./commands/UpdateAdConfigurationCommand";
+import {
+  type UpdateChannelCommandInput,
+  type UpdateChannelCommandOutput,
   UpdateChannelCommand,
-  UpdateChannelCommandInput,
-  UpdateChannelCommandOutput,
 } from "./commands/UpdateChannelCommand";
+import {
+  type UpdateFailoverSlateConfigurationCommandInput,
+  type UpdateFailoverSlateConfigurationCommandOutput,
+  UpdateFailoverSlateConfigurationCommand,
+} from "./commands/UpdateFailoverSlateConfigurationCommand";
+import {
+  type UpdatePlaybackRestrictionPolicyCommandInput,
+  type UpdatePlaybackRestrictionPolicyCommandOutput,
+  UpdatePlaybackRestrictionPolicyCommand,
+} from "./commands/UpdatePlaybackRestrictionPolicyCommand";
 import { IvsClient } from "./IvsClient";
+import { paginateListAdConfigurations } from "./pagination/ListAdConfigurationsPaginator";
+import { paginateListChannels } from "./pagination/ListChannelsPaginator";
+import { paginateListFailoverSlateConfigurations } from "./pagination/ListFailoverSlateConfigurationsPaginator";
+import { paginateListPlaybackKeyPairs } from "./pagination/ListPlaybackKeyPairsPaginator";
+import { paginateListPlaybackRestrictionPolicies } from "./pagination/ListPlaybackRestrictionPoliciesPaginator";
+import { paginateListRecordingConfigurations } from "./pagination/ListRecordingConfigurationsPaginator";
+import { paginateListStreamKeys } from "./pagination/ListStreamKeysPaginator";
+import { paginateListStreamSessions } from "./pagination/ListStreamSessionsPaginator";
+import { paginateListStreams } from "./pagination/ListStreamsPaginator";
+
+const commands = {
+  BatchGetChannelCommand,
+  BatchGetStreamKeyCommand,
+  BatchStartViewerSessionRevocationCommand,
+  CreateAdConfigurationCommand,
+  CreateChannelCommand,
+  CreateFailoverSlateConfigurationCommand,
+  CreatePlaybackRestrictionPolicyCommand,
+  CreateRecordingConfigurationCommand,
+  CreateStreamKeyCommand,
+  DeleteAdConfigurationCommand,
+  DeleteChannelCommand,
+  DeleteFailoverSlateConfigurationCommand,
+  DeletePlaybackKeyPairCommand,
+  DeletePlaybackRestrictionPolicyCommand,
+  DeleteRecordingConfigurationCommand,
+  DeleteStreamKeyCommand,
+  GetAdConfigurationCommand,
+  GetChannelCommand,
+  GetFailoverSlateConfigurationCommand,
+  GetPlaybackKeyPairCommand,
+  GetPlaybackRestrictionPolicyCommand,
+  GetRecordingConfigurationCommand,
+  GetStreamCommand,
+  GetStreamKeyCommand,
+  GetStreamSessionCommand,
+  ImportPlaybackKeyPairCommand,
+  InsertAdBreakCommand,
+  ListAdConfigurationsCommand,
+  ListChannelsCommand,
+  ListFailoverSlateConfigurationsCommand,
+  ListPlaybackKeyPairsCommand,
+  ListPlaybackRestrictionPoliciesCommand,
+  ListRecordingConfigurationsCommand,
+  ListStreamKeysCommand,
+  ListStreamsCommand,
+  ListStreamSessionsCommand,
+  ListTagsForResourceCommand,
+  PutMetadataCommand,
+  StartViewerSessionRevocationCommand,
+  StopStreamCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAdConfigurationCommand,
+  UpdateChannelCommand,
+  UpdateFailoverSlateConfigurationCommand,
+  UpdatePlaybackRestrictionPolicyCommand,
+};
+const paginators = {
+  paginateListAdConfigurations,
+  paginateListChannels,
+  paginateListFailoverSlateConfigurations,
+  paginateListPlaybackKeyPairs,
+  paginateListPlaybackRestrictionPolicies,
+  paginateListRecordingConfigurations,
+  paginateListStreamKeys,
+  paginateListStreams,
+  paginateListStreamSessions,
+};
 
 /**
- * <p>
- *             <b>Introduction</b>
- *          </p>
- *          <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP
- *       API and an Amazon Web Services EventBridge event stream for responses. JSON is used for both
- *       requests and responses, including errors.</p>
- *          <p>The API is an Amazon Web Services regional service. For a list of supported regions and
- *       Amazon IVS HTTPS service endpoints, see the <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">Amazon IVS page</a> in the
- *           <i>Amazon Web Services General Reference</i>.</p>
- *          <p>
- *             <i>
- *                <b>All API request parameters and URLs are case sensitive.
- *         </b>
- *             </i>
- *          </p>
- *          <p>For a summary of notable documentation changes in each release, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html"> Document
- *       History</a>.</p>
- *
- *          <p>
- *             <b>Allowed Header Values</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <code>
- *                      <b>Accept:</b>
- *                   </code> application/json</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <code>
- *                      <b>Accept-Encoding:</b>
- *                   </code> gzip, deflate</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <code>
- *                      <b>Content-Type:</b>
- *                   </code>application/json</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Resources</b>
- *          </p>
- *          <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html"> Getting Started with
- *         Amazon IVS</a>):</p>
- *          <ul>
- *             <li>
- *                <p>Channel — Stores configuration data related to your live stream. You first create a
- *           channel and then use the channel’s stream key to start your live stream. See the Channel
- *           endpoints for more information. </p>
- *             </li>
- *             <li>
- *                <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is
- *           then used to authorize streaming. See the StreamKey endpoints for more information.
- *               <i>
- *                      <b>Treat the stream key like a secret, since it allows
- *               anyone to stream to the channel.</b>
- *                   </i>
- *                </p>
- *             </li>
- *             <li>
- *                <p>Playback key pair — Video playback may be restricted using playback-authorization
- *           tokens, which use public-key encryption. A playback key pair is the public-private pair of
- *           keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair
- *           endpoints for more information.</p>
- *             </li>
- *             <li>
- *                <p>Recording configuration — Stores configuration related to recording a live stream and
- *           where to store the recorded content. Multiple channels can reference the same recording
- *           configuration. See the Recording Configuration endpoints for more information.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Tagging</b>
- *          </p>
- *          <p>A <i>tag</i> is a metadata label that you assign to an Amazon Web Services
- *       resource. A tag comprises a <i>key</i> and a <i>value</i>, both
- *       set by you. For example, you might set a tag as <code>topic:nature</code> to label a
- *       particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for
- *       more information, including restrictions that apply to tags.</p>
- *          <p>Tags can help you identify and organize your Amazon Web Services resources. For example,
- *       you can use the same tag for different resources to indicate that they are related. You can
- *       also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html"> Access Tags</a>). </p>
- *          <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following
- *       resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording
- *       Configurations.</p>
- *          <p>At most 50 tags can be applied to a resource. </p>
- *          <p>
- *             <b>Authentication versus Authorization</b>
- *          </p>
- *          <p>Note the differences between these concepts:</p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <i>Authentication</i> is about verifying identity. You need to be
- *           authenticated to sign Amazon IVS API requests.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <i>Authorization</i> is about granting permissions. You need to be
- *           authorized to view <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Amazon IVS private channels</a>.
- *           (Private channels are channels that are enabled for "playback authorization.")</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Authentication</b>
- *          </p>
- *          <p>All Amazon IVS API requests must be authenticated with a signature. The Amazon Web Services
- *       Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying
- *       API calls for you. However, if your application calls the Amazon IVS API directly, it’s your
- *       responsibility to sign the requests.</p>
- *          <p>You generate a signature using valid Amazon Web Services credentials that have permission
- *       to perform the requested action. For example, you must sign PutMetadata requests with a
- *       signature generated from an IAM user account that has the <code>ivs:PutMetadata</code>
- *       permission.</p>
- *          <p>For more information:</p>
- *          <ul>
- *             <li>
- *                <p>Authentication and generating signatures — See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests
- *               (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services
- *             General Reference</i>.</p>
- *             </li>
- *             <li>
- *                <p>Managing Amazon IVS permissions — See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html">Identity and Access Management</a> on
- *           the Security page of the <i>Amazon IVS User Guide</i>.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Channel Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>CreateChannel</a> — Creates a new channel and an associated stream
- *           key to start streaming.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>GetChannel</a> — Gets the channel configuration for the specified
- *           channel ARN (Amazon Resource Name).</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on
- *           multiple ARNs simultaneously.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListChannels</a> — Gets summary information about all channels in
- *           your account, in the Amazon Web Services region where the API request is processed. This
- *           list can be filtered to match a specified name or recording-configuration ARN. Filters are
- *           mutually exclusive and cannot be used together. If you try to use both filters, you will
- *           get an error (409 Conflict Exception).</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>UpdateChannel</a> — Updates a channel's configuration. This does
- *           not affect an ongoing stream of this channel. You must stop and restart the stream for the
- *           changes to take effect.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DeleteChannel</a> — Deletes the specified channel.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>StreamKey Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>CreateStreamKey</a> — Creates a stream key, used to initiate a
- *           stream, for the specified channel ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>GetStreamKey</a> — Gets stream key information for the specified
- *           ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on
- *           multiple ARNs simultaneously.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListStreamKeys</a> — Gets summary information about stream keys
- *           for the specified channel.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DeleteStreamKey</a> — Deletes the stream key for the specified
- *           ARN, so it can no longer be used to stream.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Stream Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>GetStream</a> — Gets information about the active (live) stream on
- *           a specified channel.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListStreams</a> — Gets summary information about live streams in
- *           your account, in the Amazon Web Services region where the API request is processed.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>StopStream</a> — Disconnects the incoming RTMPS stream for the
- *           specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to
- *           prevent further streaming to a channel.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>PutMetadata</a> — Inserts metadata into the active stream of the
- *           specified channel. At most 5 requests per second per channel are allowed, each with a
- *           maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching
- *           your data into a single PutMetadata call.) At most 155 requests per second per account are
- *           allowed.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>PlaybackKeyPair Endpoints</b>
- *          </p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the
- *         <i>Amazon IVS User Guide</i>.</p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new
- *           key pair and returns its <code>arn</code> and <code>fingerprint</code>. The
- *             <code>privateKey</code> can then be used to generate viewer authorization tokens, to
- *           grant viewers access to private channels (channels enabled for playback
- *           authorization).</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>GetPlaybackKeyPair</a> — Gets a specified playback authorization
- *           key pair and returns the <code>arn</code> and <code>fingerprint</code>. The
- *             <code>privateKey</code> held by the caller can be used to generate viewer authorization
- *           tokens, to grant viewers access to private channels.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListPlaybackKeyPairs</a> — Gets summary information about playback
- *           key pairs.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization key
- *           pair. This invalidates future viewer tokens generated using the key pair’s
- *             <code>privateKey</code>.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>RecordingConfiguration Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>CreateRecordingConfiguration</a> — Creates a new recording
- *           configuration, used to enable recording to Amazon S3.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>GetRecordingConfiguration</a> — Gets the recording-configuration
- *           metadata for the specified ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListRecordingConfigurations</a> — Gets summary information about
- *           all recording configurations in your account, in the Amazon Web Services region where the
- *           API request is processed.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DeleteRecordingConfiguration</a> — Deletes the recording
- *           configuration for the specified ARN.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Amazon Web Services Tags Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>TagResource</a> — Adds or updates tags for the Amazon Web Services
- *           resource with the specified ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>UntagResource</a> — Removes tags from the resource with the
- *           specified ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListTagsForResource</a> — Gets information about Amazon Web Services tags for the specified ARN.</p>
- *             </li>
- *          </ul>
+ * @public
  */
-export class Ivs extends IvsClient {
+export interface IvsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Ivs {
   /**
-   * <p>Performs <a>GetChannel</a> on multiple ARNs simultaneously.</p>
+   * @see {@link BatchGetChannelCommand}
    */
-  public batchGetChannel(
+  batchGetChannel(
     args: BatchGetChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<BatchGetChannelCommandOutput>;
-  public batchGetChannel(
+  batchGetChannel(
     args: BatchGetChannelCommandInput,
     cb: (err: any, data?: BatchGetChannelCommandOutput) => void
   ): void;
-  public batchGetChannel(
+  batchGetChannel(
     args: BatchGetChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: BatchGetChannelCommandOutput) => void
   ): void;
-  public batchGetChannel(
-    args: BatchGetChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetChannelCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetChannelCommandOutput) => void
-  ): Promise<BatchGetChannelCommandOutput> | void {
-    const command = new BatchGetChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Performs <a>GetStreamKey</a> on multiple ARNs simultaneously.</p>
+   * @see {@link BatchGetStreamKeyCommand}
    */
-  public batchGetStreamKey(
+  batchGetStreamKey(
     args: BatchGetStreamKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<BatchGetStreamKeyCommandOutput>;
-  public batchGetStreamKey(
+  batchGetStreamKey(
     args: BatchGetStreamKeyCommandInput,
     cb: (err: any, data?: BatchGetStreamKeyCommandOutput) => void
   ): void;
-  public batchGetStreamKey(
+  batchGetStreamKey(
     args: BatchGetStreamKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: BatchGetStreamKeyCommandOutput) => void
   ): void;
-  public batchGetStreamKey(
-    args: BatchGetStreamKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetStreamKeyCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetStreamKeyCommandOutput) => void
-  ): Promise<BatchGetStreamKeyCommandOutput> | void {
-    const command = new BatchGetStreamKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new channel and an associated stream key to start streaming.</p>
+   * @see {@link BatchStartViewerSessionRevocationCommand}
    */
-  public createChannel(
+  batchStartViewerSessionRevocation(
+    args: BatchStartViewerSessionRevocationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<BatchStartViewerSessionRevocationCommandOutput>;
+  batchStartViewerSessionRevocation(
+    args: BatchStartViewerSessionRevocationCommandInput,
+    cb: (err: any, data?: BatchStartViewerSessionRevocationCommandOutput) => void
+  ): void;
+  batchStartViewerSessionRevocation(
+    args: BatchStartViewerSessionRevocationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: BatchStartViewerSessionRevocationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAdConfigurationCommand}
+   */
+  createAdConfiguration(
+    args: CreateAdConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<CreateAdConfigurationCommandOutput>;
+  createAdConfiguration(
+    args: CreateAdConfigurationCommandInput,
+    cb: (err: any, data?: CreateAdConfigurationCommandOutput) => void
+  ): void;
+  createAdConfiguration(
+    args: CreateAdConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: CreateAdConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateChannelCommand}
+   */
+  createChannel(): Promise<CreateChannelCommandOutput>;
+  createChannel(
     args: CreateChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<CreateChannelCommandOutput>;
-  public createChannel(
+  createChannel(
     args: CreateChannelCommandInput,
     cb: (err: any, data?: CreateChannelCommandOutput) => void
   ): void;
-  public createChannel(
+  createChannel(
     args: CreateChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: CreateChannelCommandOutput) => void
   ): void;
-  public createChannel(
-    args: CreateChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateChannelCommandOutput) => void),
-    cb?: (err: any, data?: CreateChannelCommandOutput) => void
-  ): Promise<CreateChannelCommandOutput> | void {
-    const command = new CreateChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new recording configuration, used to enable recording to Amazon S3.</p>
-   *          <p>
-   *             <b>Known issue:</b> In the us-east-1 region, if you use the Amazon Web Services
-   *       CLI to create a recording configuration, it returns success even if the S3 bucket is in a
-   *       different region. In this case, the <code>state</code> of the recording configuration is
-   *         <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI
-   *       correctly returns failure if the bucket is in a different region.)</p>
-   *          <p>
-   *             <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording
-   *       configuration. If you create a recording configuration in a different region as your S3
-   *       bucket, delete that recording configuration and create a new one with an S3 bucket from the
-   *       correct region.</p>
+   * @see {@link CreateFailoverSlateConfigurationCommand}
    */
-  public createRecordingConfiguration(
+  createFailoverSlateConfiguration(): Promise<CreateFailoverSlateConfigurationCommandOutput>;
+  createFailoverSlateConfiguration(
+    args: CreateFailoverSlateConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<CreateFailoverSlateConfigurationCommandOutput>;
+  createFailoverSlateConfiguration(
+    args: CreateFailoverSlateConfigurationCommandInput,
+    cb: (err: any, data?: CreateFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+  createFailoverSlateConfiguration(
+    args: CreateFailoverSlateConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: CreateFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreatePlaybackRestrictionPolicyCommand}
+   */
+  createPlaybackRestrictionPolicy(): Promise<CreatePlaybackRestrictionPolicyCommandOutput>;
+  createPlaybackRestrictionPolicy(
+    args: CreatePlaybackRestrictionPolicyCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<CreatePlaybackRestrictionPolicyCommandOutput>;
+  createPlaybackRestrictionPolicy(
+    args: CreatePlaybackRestrictionPolicyCommandInput,
+    cb: (err: any, data?: CreatePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+  createPlaybackRestrictionPolicy(
+    args: CreatePlaybackRestrictionPolicyCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: CreatePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecordingConfigurationCommand}
+   */
+  createRecordingConfiguration(
     args: CreateRecordingConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<CreateRecordingConfigurationCommandOutput>;
-  public createRecordingConfiguration(
+  createRecordingConfiguration(
     args: CreateRecordingConfigurationCommandInput,
     cb: (err: any, data?: CreateRecordingConfigurationCommandOutput) => void
   ): void;
-  public createRecordingConfiguration(
+  createRecordingConfiguration(
     args: CreateRecordingConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: CreateRecordingConfigurationCommandOutput) => void
   ): void;
-  public createRecordingConfiguration(
-    args: CreateRecordingConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRecordingConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateRecordingConfigurationCommandOutput) => void
-  ): Promise<CreateRecordingConfigurationCommandOutput> | void {
-    const command = new CreateRecordingConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a stream key, used to initiate a stream, for the specified channel ARN.</p>
-   *          <p>Note that <a>CreateChannel</a> creates a stream key. If you subsequently use
-   *       CreateStreamKey on the same channel, it will fail because a stream key already exists and
-   *       there is a limit of 1 stream key per channel. To reset the stream key on a channel, use <a>DeleteStreamKey</a> and then CreateStreamKey.</p>
+   * @see {@link CreateStreamKeyCommand}
    */
-  public createStreamKey(
+  createStreamKey(
     args: CreateStreamKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<CreateStreamKeyCommandOutput>;
-  public createStreamKey(
+  createStreamKey(
     args: CreateStreamKeyCommandInput,
     cb: (err: any, data?: CreateStreamKeyCommandOutput) => void
   ): void;
-  public createStreamKey(
+  createStreamKey(
     args: CreateStreamKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: CreateStreamKeyCommandOutput) => void
   ): void;
-  public createStreamKey(
-    args: CreateStreamKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateStreamKeyCommandOutput) => void),
-    cb?: (err: any, data?: CreateStreamKeyCommandOutput) => void
-  ): Promise<CreateStreamKeyCommandOutput> | void {
-    const command = new CreateStreamKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified channel and its associated stream keys.</p>
-   *          <p>If you try to delete a live channel, you will get an error (409 ConflictException). To
-   *       delete a channel that is live, call <a>StopStream</a>, wait for the Amazon
-   *       EventBridge "Stream End" event (to verify that the stream's state was changed from Live to
-   *       Offline), then call DeleteChannel. (See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html"> Using EventBridge with Amazon IVS</a>.) </p>
+   * @see {@link DeleteAdConfigurationCommand}
    */
-  public deleteChannel(
+  deleteAdConfiguration(
+    args: DeleteAdConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<DeleteAdConfigurationCommandOutput>;
+  deleteAdConfiguration(
+    args: DeleteAdConfigurationCommandInput,
+    cb: (err: any, data?: DeleteAdConfigurationCommandOutput) => void
+  ): void;
+  deleteAdConfiguration(
+    args: DeleteAdConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: DeleteAdConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteChannelCommand}
+   */
+  deleteChannel(
     args: DeleteChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<DeleteChannelCommandOutput>;
-  public deleteChannel(
+  deleteChannel(
     args: DeleteChannelCommandInput,
     cb: (err: any, data?: DeleteChannelCommandOutput) => void
   ): void;
-  public deleteChannel(
+  deleteChannel(
     args: DeleteChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: DeleteChannelCommandOutput) => void
   ): void;
-  public deleteChannel(
-    args: DeleteChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteChannelCommandOutput) => void),
-    cb?: (err: any, data?: DeleteChannelCommandOutput) => void
-  ): Promise<DeleteChannelCommandOutput> | void {
-    const command = new DeleteChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a specified authorization key pair. This invalidates future viewer tokens
-   *       generated using the key pair’s <code>privateKey</code>. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private
-   *         Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+   * @see {@link DeleteFailoverSlateConfigurationCommand}
    */
-  public deletePlaybackKeyPair(
+  deleteFailoverSlateConfiguration(
+    args: DeleteFailoverSlateConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<DeleteFailoverSlateConfigurationCommandOutput>;
+  deleteFailoverSlateConfiguration(
+    args: DeleteFailoverSlateConfigurationCommandInput,
+    cb: (err: any, data?: DeleteFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+  deleteFailoverSlateConfiguration(
+    args: DeleteFailoverSlateConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: DeleteFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeletePlaybackKeyPairCommand}
+   */
+  deletePlaybackKeyPair(
     args: DeletePlaybackKeyPairCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<DeletePlaybackKeyPairCommandOutput>;
-  public deletePlaybackKeyPair(
+  deletePlaybackKeyPair(
     args: DeletePlaybackKeyPairCommandInput,
     cb: (err: any, data?: DeletePlaybackKeyPairCommandOutput) => void
   ): void;
-  public deletePlaybackKeyPair(
+  deletePlaybackKeyPair(
     args: DeletePlaybackKeyPairCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: DeletePlaybackKeyPairCommandOutput) => void
   ): void;
-  public deletePlaybackKeyPair(
-    args: DeletePlaybackKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePlaybackKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: DeletePlaybackKeyPairCommandOutput) => void
-  ): Promise<DeletePlaybackKeyPairCommandOutput> | void {
-    const command = new DeletePlaybackKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the recording configuration for the specified ARN.</p>
-   *          <p>If you try to delete a recording configuration that is associated with a channel, you will
-   *       get an error (409 ConflictException). To avoid this, for all channels that reference the
-   *       recording configuration, first use <a>UpdateChannel</a> to set the
-   *         <code>recordingConfigurationArn</code> field to an empty string, then use
-   *       DeleteRecordingConfiguration.</p>
+   * @see {@link DeletePlaybackRestrictionPolicyCommand}
    */
-  public deleteRecordingConfiguration(
+  deletePlaybackRestrictionPolicy(
+    args: DeletePlaybackRestrictionPolicyCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<DeletePlaybackRestrictionPolicyCommandOutput>;
+  deletePlaybackRestrictionPolicy(
+    args: DeletePlaybackRestrictionPolicyCommandInput,
+    cb: (err: any, data?: DeletePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+  deletePlaybackRestrictionPolicy(
+    args: DeletePlaybackRestrictionPolicyCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: DeletePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecordingConfigurationCommand}
+   */
+  deleteRecordingConfiguration(
     args: DeleteRecordingConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<DeleteRecordingConfigurationCommandOutput>;
-  public deleteRecordingConfiguration(
+  deleteRecordingConfiguration(
     args: DeleteRecordingConfigurationCommandInput,
     cb: (err: any, data?: DeleteRecordingConfigurationCommandOutput) => void
   ): void;
-  public deleteRecordingConfiguration(
+  deleteRecordingConfiguration(
     args: DeleteRecordingConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: DeleteRecordingConfigurationCommandOutput) => void
   ): void;
-  public deleteRecordingConfiguration(
-    args: DeleteRecordingConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRecordingConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRecordingConfigurationCommandOutput) => void
-  ): Promise<DeleteRecordingConfigurationCommandOutput> | void {
-    const command = new DeleteRecordingConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the stream key for the specified ARN, so it can no longer be used to
-   *       stream.</p>
+   * @see {@link DeleteStreamKeyCommand}
    */
-  public deleteStreamKey(
+  deleteStreamKey(
     args: DeleteStreamKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<DeleteStreamKeyCommandOutput>;
-  public deleteStreamKey(
+  deleteStreamKey(
     args: DeleteStreamKeyCommandInput,
     cb: (err: any, data?: DeleteStreamKeyCommandOutput) => void
   ): void;
-  public deleteStreamKey(
+  deleteStreamKey(
     args: DeleteStreamKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: DeleteStreamKeyCommandOutput) => void
   ): void;
-  public deleteStreamKey(
-    args: DeleteStreamKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteStreamKeyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteStreamKeyCommandOutput) => void
-  ): Promise<DeleteStreamKeyCommandOutput> | void {
-    const command = new DeleteStreamKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the channel configuration for the specified channel ARN. See also <a>BatchGetChannel</a>.</p>
+   * @see {@link GetAdConfigurationCommand}
    */
-  public getChannel(args: GetChannelCommandInput, options?: __HttpHandlerOptions): Promise<GetChannelCommandOutput>;
-  public getChannel(args: GetChannelCommandInput, cb: (err: any, data?: GetChannelCommandOutput) => void): void;
-  public getChannel(
+  getAdConfiguration(
+    args: GetAdConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<GetAdConfigurationCommandOutput>;
+  getAdConfiguration(
+    args: GetAdConfigurationCommandInput,
+    cb: (err: any, data?: GetAdConfigurationCommandOutput) => void
+  ): void;
+  getAdConfiguration(
+    args: GetAdConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetAdConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetChannelCommand}
+   */
+  getChannel(
     args: GetChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<GetChannelCommandOutput>;
+  getChannel(
+    args: GetChannelCommandInput,
     cb: (err: any, data?: GetChannelCommandOutput) => void
   ): void;
-  public getChannel(
+  getChannel(
     args: GetChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetChannelCommandOutput) => void),
-    cb?: (err: any, data?: GetChannelCommandOutput) => void
-  ): Promise<GetChannelCommandOutput> | void {
-    const command = new GetChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetChannelCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a specified playback authorization key pair and returns the <code>arn</code> and
-   *         <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to
-   *       generate viewer authorization tokens, to grant viewers access to private channels. For more
-   *       information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User
-   *       Guide</i>.</p>
+   * @see {@link GetFailoverSlateConfigurationCommand}
    */
-  public getPlaybackKeyPair(
+  getFailoverSlateConfiguration(
+    args: GetFailoverSlateConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<GetFailoverSlateConfigurationCommandOutput>;
+  getFailoverSlateConfiguration(
+    args: GetFailoverSlateConfigurationCommandInput,
+    cb: (err: any, data?: GetFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+  getFailoverSlateConfiguration(
+    args: GetFailoverSlateConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPlaybackKeyPairCommand}
+   */
+  getPlaybackKeyPair(
     args: GetPlaybackKeyPairCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<GetPlaybackKeyPairCommandOutput>;
-  public getPlaybackKeyPair(
+  getPlaybackKeyPair(
     args: GetPlaybackKeyPairCommandInput,
     cb: (err: any, data?: GetPlaybackKeyPairCommandOutput) => void
   ): void;
-  public getPlaybackKeyPair(
+  getPlaybackKeyPair(
     args: GetPlaybackKeyPairCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: GetPlaybackKeyPairCommandOutput) => void
   ): void;
-  public getPlaybackKeyPair(
-    args: GetPlaybackKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPlaybackKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: GetPlaybackKeyPairCommandOutput) => void
-  ): Promise<GetPlaybackKeyPairCommandOutput> | void {
-    const command = new GetPlaybackKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the recording configuration for the specified ARN.</p>
+   * @see {@link GetPlaybackRestrictionPolicyCommand}
    */
-  public getRecordingConfiguration(
+  getPlaybackRestrictionPolicy(
+    args: GetPlaybackRestrictionPolicyCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<GetPlaybackRestrictionPolicyCommandOutput>;
+  getPlaybackRestrictionPolicy(
+    args: GetPlaybackRestrictionPolicyCommandInput,
+    cb: (err: any, data?: GetPlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+  getPlaybackRestrictionPolicy(
+    args: GetPlaybackRestrictionPolicyCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetPlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecordingConfigurationCommand}
+   */
+  getRecordingConfiguration(
     args: GetRecordingConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<GetRecordingConfigurationCommandOutput>;
-  public getRecordingConfiguration(
+  getRecordingConfiguration(
     args: GetRecordingConfigurationCommandInput,
     cb: (err: any, data?: GetRecordingConfigurationCommandOutput) => void
   ): void;
-  public getRecordingConfiguration(
+  getRecordingConfiguration(
     args: GetRecordingConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: GetRecordingConfigurationCommandOutput) => void
   ): void;
-  public getRecordingConfiguration(
-    args: GetRecordingConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecordingConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetRecordingConfigurationCommandOutput) => void
-  ): Promise<GetRecordingConfigurationCommandOutput> | void {
-    const command = new GetRecordingConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about the active (live) stream on a specified channel.</p>
+   * @see {@link GetStreamCommand}
    */
-  public getStream(args: GetStreamCommandInput, options?: __HttpHandlerOptions): Promise<GetStreamCommandOutput>;
-  public getStream(args: GetStreamCommandInput, cb: (err: any, data?: GetStreamCommandOutput) => void): void;
-  public getStream(
+  getStream(
     args: GetStreamCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<GetStreamCommandOutput>;
+  getStream(
+    args: GetStreamCommandInput,
     cb: (err: any, data?: GetStreamCommandOutput) => void
   ): void;
-  public getStream(
+  getStream(
     args: GetStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStreamCommandOutput) => void),
-    cb?: (err: any, data?: GetStreamCommandOutput) => void
-  ): Promise<GetStreamCommandOutput> | void {
-    const command = new GetStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetStreamCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets stream-key information for a specified ARN.</p>
+   * @see {@link GetStreamKeyCommand}
    */
-  public getStreamKey(
+  getStreamKey(
     args: GetStreamKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<GetStreamKeyCommandOutput>;
-  public getStreamKey(args: GetStreamKeyCommandInput, cb: (err: any, data?: GetStreamKeyCommandOutput) => void): void;
-  public getStreamKey(
+  getStreamKey(
     args: GetStreamKeyCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetStreamKeyCommandOutput) => void
   ): void;
-  public getStreamKey(
+  getStreamKey(
     args: GetStreamKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStreamKeyCommandOutput) => void),
-    cb?: (err: any, data?: GetStreamKeyCommandOutput) => void
-  ): Promise<GetStreamKeyCommandOutput> | void {
-    const command = new GetStreamKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetStreamKeyCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Imports the public portion of a new key pair and returns its <code>arn</code> and
-   *         <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer
-   *       authorization tokens, to grant viewers access to private channels. For more information, see
-   *         <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up
-   *         Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+   * @see {@link GetStreamSessionCommand}
    */
-  public importPlaybackKeyPair(
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<GetStreamSessionCommandOutput>;
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    cb: (err: any, data?: GetStreamSessionCommandOutput) => void
+  ): void;
+  getStreamSession(
+    args: GetStreamSessionCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: GetStreamSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportPlaybackKeyPairCommand}
+   */
+  importPlaybackKeyPair(
     args: ImportPlaybackKeyPairCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ImportPlaybackKeyPairCommandOutput>;
-  public importPlaybackKeyPair(
+  importPlaybackKeyPair(
     args: ImportPlaybackKeyPairCommandInput,
     cb: (err: any, data?: ImportPlaybackKeyPairCommandOutput) => void
   ): void;
-  public importPlaybackKeyPair(
+  importPlaybackKeyPair(
     args: ImportPlaybackKeyPairCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: ImportPlaybackKeyPairCommandOutput) => void
   ): void;
-  public importPlaybackKeyPair(
-    args: ImportPlaybackKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportPlaybackKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: ImportPlaybackKeyPairCommandOutput) => void
-  ): Promise<ImportPlaybackKeyPairCommandOutput> | void {
-    const command = new ImportPlaybackKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets summary information about all channels in your account, in the Amazon Web Services region where the
-   *       API request is processed. This list can be filtered to match a specified name or
-   *       recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If
-   *       you try to use both filters, you will get an error (409 ConflictException).</p>
+   * @see {@link InsertAdBreakCommand}
    */
-  public listChannels(
+  insertAdBreak(
+    args: InsertAdBreakCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<InsertAdBreakCommandOutput>;
+  insertAdBreak(
+    args: InsertAdBreakCommandInput,
+    cb: (err: any, data?: InsertAdBreakCommandOutput) => void
+  ): void;
+  insertAdBreak(
+    args: InsertAdBreakCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: InsertAdBreakCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAdConfigurationsCommand}
+   */
+  listAdConfigurations(): Promise<ListAdConfigurationsCommandOutput>;
+  listAdConfigurations(
+    args: ListAdConfigurationsCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<ListAdConfigurationsCommandOutput>;
+  listAdConfigurations(
+    args: ListAdConfigurationsCommandInput,
+    cb: (err: any, data?: ListAdConfigurationsCommandOutput) => void
+  ): void;
+  listAdConfigurations(
+    args: ListAdConfigurationsCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListAdConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListChannelsCommand}
+   */
+  listChannels(): Promise<ListChannelsCommandOutput>;
+  listChannels(
     args: ListChannelsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ListChannelsCommandOutput>;
-  public listChannels(args: ListChannelsCommandInput, cb: (err: any, data?: ListChannelsCommandOutput) => void): void;
-  public listChannels(
+  listChannels(
     args: ListChannelsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListChannelsCommandOutput) => void
   ): void;
-  public listChannels(
+  listChannels(
     args: ListChannelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListChannelsCommandOutput) => void),
-    cb?: (err: any, data?: ListChannelsCommandOutput) => void
-  ): Promise<ListChannelsCommandOutput> | void {
-    const command = new ListChannelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListChannelsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets summary information about playback key pairs. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private
-   *         Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+   * @see {@link ListFailoverSlateConfigurationsCommand}
    */
-  public listPlaybackKeyPairs(
+  listFailoverSlateConfigurations(): Promise<ListFailoverSlateConfigurationsCommandOutput>;
+  listFailoverSlateConfigurations(
+    args: ListFailoverSlateConfigurationsCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<ListFailoverSlateConfigurationsCommandOutput>;
+  listFailoverSlateConfigurations(
+    args: ListFailoverSlateConfigurationsCommandInput,
+    cb: (err: any, data?: ListFailoverSlateConfigurationsCommandOutput) => void
+  ): void;
+  listFailoverSlateConfigurations(
+    args: ListFailoverSlateConfigurationsCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListFailoverSlateConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPlaybackKeyPairsCommand}
+   */
+  listPlaybackKeyPairs(): Promise<ListPlaybackKeyPairsCommandOutput>;
+  listPlaybackKeyPairs(
     args: ListPlaybackKeyPairsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ListPlaybackKeyPairsCommandOutput>;
-  public listPlaybackKeyPairs(
+  listPlaybackKeyPairs(
     args: ListPlaybackKeyPairsCommandInput,
     cb: (err: any, data?: ListPlaybackKeyPairsCommandOutput) => void
   ): void;
-  public listPlaybackKeyPairs(
+  listPlaybackKeyPairs(
     args: ListPlaybackKeyPairsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: ListPlaybackKeyPairsCommandOutput) => void
   ): void;
-  public listPlaybackKeyPairs(
-    args: ListPlaybackKeyPairsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPlaybackKeyPairsCommandOutput) => void),
-    cb?: (err: any, data?: ListPlaybackKeyPairsCommandOutput) => void
-  ): Promise<ListPlaybackKeyPairsCommandOutput> | void {
-    const command = new ListPlaybackKeyPairsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets summary information about all recording configurations in your account, in the Amazon Web Services
-   *       region where the API request is processed.</p>
+   * @see {@link ListPlaybackRestrictionPoliciesCommand}
    */
-  public listRecordingConfigurations(
+  listPlaybackRestrictionPolicies(): Promise<ListPlaybackRestrictionPoliciesCommandOutput>;
+  listPlaybackRestrictionPolicies(
+    args: ListPlaybackRestrictionPoliciesCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<ListPlaybackRestrictionPoliciesCommandOutput>;
+  listPlaybackRestrictionPolicies(
+    args: ListPlaybackRestrictionPoliciesCommandInput,
+    cb: (err: any, data?: ListPlaybackRestrictionPoliciesCommandOutput) => void
+  ): void;
+  listPlaybackRestrictionPolicies(
+    args: ListPlaybackRestrictionPoliciesCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListPlaybackRestrictionPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecordingConfigurationsCommand}
+   */
+  listRecordingConfigurations(): Promise<ListRecordingConfigurationsCommandOutput>;
+  listRecordingConfigurations(
     args: ListRecordingConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ListRecordingConfigurationsCommandOutput>;
-  public listRecordingConfigurations(
+  listRecordingConfigurations(
     args: ListRecordingConfigurationsCommandInput,
     cb: (err: any, data?: ListRecordingConfigurationsCommandOutput) => void
   ): void;
-  public listRecordingConfigurations(
+  listRecordingConfigurations(
     args: ListRecordingConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: ListRecordingConfigurationsCommandOutput) => void
   ): void;
-  public listRecordingConfigurations(
-    args: ListRecordingConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecordingConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListRecordingConfigurationsCommandOutput) => void
-  ): Promise<ListRecordingConfigurationsCommandOutput> | void {
-    const command = new ListRecordingConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets summary information about stream keys for the specified channel.</p>
+   * @see {@link ListStreamKeysCommand}
    */
-  public listStreamKeys(
+  listStreamKeys(
     args: ListStreamKeysCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ListStreamKeysCommandOutput>;
-  public listStreamKeys(
+  listStreamKeys(
     args: ListStreamKeysCommandInput,
     cb: (err: any, data?: ListStreamKeysCommandOutput) => void
   ): void;
-  public listStreamKeys(
+  listStreamKeys(
     args: ListStreamKeysCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: ListStreamKeysCommandOutput) => void
   ): void;
-  public listStreamKeys(
-    args: ListStreamKeysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStreamKeysCommandOutput) => void),
-    cb?: (err: any, data?: ListStreamKeysCommandOutput) => void
-  ): Promise<ListStreamKeysCommandOutput> | void {
-    const command = new ListStreamKeysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets summary information about live streams in your account, in the Amazon Web Services region where the
-   *       API request is processed.</p>
+   * @see {@link ListStreamsCommand}
    */
-  public listStreams(args: ListStreamsCommandInput, options?: __HttpHandlerOptions): Promise<ListStreamsCommandOutput>;
-  public listStreams(args: ListStreamsCommandInput, cb: (err: any, data?: ListStreamsCommandOutput) => void): void;
-  public listStreams(
+  listStreams(): Promise<ListStreamsCommandOutput>;
+  listStreams(
     args: ListStreamsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<ListStreamsCommandOutput>;
+  listStreams(
+    args: ListStreamsCommandInput,
     cb: (err: any, data?: ListStreamsCommandOutput) => void
   ): void;
-  public listStreams(
+  listStreams(
     args: ListStreamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStreamsCommandOutput) => void),
-    cb?: (err: any, data?: ListStreamsCommandOutput) => void
-  ): Promise<ListStreamsCommandOutput> | void {
-    const command = new ListStreamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListStreamsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets information about Amazon Web Services tags for the specified ARN.</p>
+   * @see {@link ListStreamSessionsCommand}
    */
-  public listTagsForResource(
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<ListStreamSessionsCommandOutput>;
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    cb: (err: any, data?: ListStreamSessionsCommandOutput) => void
+  ): void;
+  listStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: ListStreamSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Inserts metadata into the active stream of the specified channel.  At most 5 requests per
-   *       second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient
-   *       for your needs, we recommend batching your data into a single PutMetadata call.) At most 155
-   *       requests per second per account are allowed. Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in
-   *       the <i>Amazon IVS User Guide</i>.</p>
+   * @see {@link PutMetadataCommand}
    */
-  public putMetadata(args: PutMetadataCommandInput, options?: __HttpHandlerOptions): Promise<PutMetadataCommandOutput>;
-  public putMetadata(args: PutMetadataCommandInput, cb: (err: any, data?: PutMetadataCommandOutput) => void): void;
-  public putMetadata(
+  putMetadata(
     args: PutMetadataCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<PutMetadataCommandOutput>;
+  putMetadata(
+    args: PutMetadataCommandInput,
     cb: (err: any, data?: PutMetadataCommandOutput) => void
   ): void;
-  public putMetadata(
+  putMetadata(
     args: PutMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutMetadataCommandOutput) => void),
-    cb?: (err: any, data?: PutMetadataCommandOutput) => void
-  ): Promise<PutMetadataCommandOutput> | void {
-    const command = new PutMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: PutMetadataCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in
-   *       conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a
-   *       channel.</p>
-   *          <note>
-   *             <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS
-   *         session, so to stop the stream permanently, you may want to first revoke the
-   *           <code>streamKey</code> attached to the channel.</p>
-   *          </note>
+   * @see {@link StartViewerSessionRevocationCommand}
    */
-  public stopStream(args: StopStreamCommandInput, options?: __HttpHandlerOptions): Promise<StopStreamCommandOutput>;
-  public stopStream(args: StopStreamCommandInput, cb: (err: any, data?: StopStreamCommandOutput) => void): void;
-  public stopStream(
+  startViewerSessionRevocation(
+    args: StartViewerSessionRevocationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<StartViewerSessionRevocationCommandOutput>;
+  startViewerSessionRevocation(
+    args: StartViewerSessionRevocationCommandInput,
+    cb: (err: any, data?: StartViewerSessionRevocationCommandOutput) => void
+  ): void;
+  startViewerSessionRevocation(
+    args: StartViewerSessionRevocationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: StartViewerSessionRevocationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopStreamCommand}
+   */
+  stopStream(
     args: StopStreamCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<StopStreamCommandOutput>;
+  stopStream(
+    args: StopStreamCommandInput,
     cb: (err: any, data?: StopStreamCommandOutput) => void
   ): void;
-  public stopStream(
+  stopStream(
     args: StopStreamCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopStreamCommandOutput) => void),
-    cb?: (err: any, data?: StopStreamCommandOutput) => void
-  ): Promise<StopStreamCommandOutput> | void {
-    const command = new StopStreamCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: StopStreamCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Adds or updates tags for the Amazon Web Services resource with the specified ARN.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IvsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IvsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from the resource with the specified ARN.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a channel's configuration. This does not affect an ongoing stream of this channel.
-   *       You must stop and restart the stream for the changes to take effect.</p>
+   * @see {@link UpdateAdConfigurationCommand}
    */
-  public updateChannel(
+  updateAdConfiguration(
+    args: UpdateAdConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<UpdateAdConfigurationCommandOutput>;
+  updateAdConfiguration(
+    args: UpdateAdConfigurationCommandInput,
+    cb: (err: any, data?: UpdateAdConfigurationCommandOutput) => void
+  ): void;
+  updateAdConfiguration(
+    args: UpdateAdConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: UpdateAdConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateChannelCommand}
+   */
+  updateChannel(
     args: UpdateChannelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IvsRequestOptions
   ): Promise<UpdateChannelCommandOutput>;
-  public updateChannel(
+  updateChannel(
     args: UpdateChannelCommandInput,
     cb: (err: any, data?: UpdateChannelCommandOutput) => void
   ): void;
-  public updateChannel(
+  updateChannel(
     args: UpdateChannelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IvsRequestOptions,
     cb: (err: any, data?: UpdateChannelCommandOutput) => void
   ): void;
-  public updateChannel(
-    args: UpdateChannelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateChannelCommandOutput) => void),
-    cb?: (err: any, data?: UpdateChannelCommandOutput) => void
-  ): Promise<UpdateChannelCommandOutput> | void {
-    const command = new UpdateChannelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateFailoverSlateConfigurationCommand}
+   */
+  updateFailoverSlateConfiguration(
+    args: UpdateFailoverSlateConfigurationCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<UpdateFailoverSlateConfigurationCommandOutput>;
+  updateFailoverSlateConfiguration(
+    args: UpdateFailoverSlateConfigurationCommandInput,
+    cb: (err: any, data?: UpdateFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+  updateFailoverSlateConfiguration(
+    args: UpdateFailoverSlateConfigurationCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: UpdateFailoverSlateConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdatePlaybackRestrictionPolicyCommand}
+   */
+  updatePlaybackRestrictionPolicy(
+    args: UpdatePlaybackRestrictionPolicyCommandInput,
+    options?: IvsRequestOptions
+  ): Promise<UpdatePlaybackRestrictionPolicyCommandOutput>;
+  updatePlaybackRestrictionPolicy(
+    args: UpdatePlaybackRestrictionPolicyCommandInput,
+    cb: (err: any, data?: UpdatePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+  updatePlaybackRestrictionPolicy(
+    args: UpdatePlaybackRestrictionPolicyCommandInput,
+    options: IvsRequestOptions,
+    cb: (err: any, data?: UpdatePlaybackRestrictionPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAdConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAdConfigurationsCommandOutput}.
+   */
+  paginateListAdConfigurations(
+    args?: ListAdConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAdConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListChannelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListChannelsCommandOutput}.
+   */
+  paginateListChannels(
+    args?: ListChannelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListChannelsCommandOutput>;
+
+  /**
+   * @see {@link ListFailoverSlateConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFailoverSlateConfigurationsCommandOutput}.
+   */
+  paginateListFailoverSlateConfigurations(
+    args?: ListFailoverSlateConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFailoverSlateConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListPlaybackKeyPairsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlaybackKeyPairsCommandOutput}.
+   */
+  paginateListPlaybackKeyPairs(
+    args?: ListPlaybackKeyPairsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlaybackKeyPairsCommandOutput>;
+
+  /**
+   * @see {@link ListPlaybackRestrictionPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPlaybackRestrictionPoliciesCommandOutput}.
+   */
+  paginateListPlaybackRestrictionPolicies(
+    args?: ListPlaybackRestrictionPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPlaybackRestrictionPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListRecordingConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecordingConfigurationsCommandOutput}.
+   */
+  paginateListRecordingConfigurations(
+    args?: ListRecordingConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecordingConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamKeysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamKeysCommandOutput}.
+   */
+  paginateListStreamKeys(
+    args: ListStreamKeysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamKeysCommandOutput>;
+
+  /**
+   * @see {@link ListStreamsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamsCommandOutput}.
+   */
+  paginateListStreams(
+    args?: ListStreamsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamsCommandOutput>;
+
+  /**
+   * @see {@link ListStreamSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStreamSessionsCommandOutput}.
+   */
+  paginateListStreamSessions(
+    args: ListStreamSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStreamSessionsCommandOutput>;
 }
+
+/**
+ * <p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP API and an Amazon Web Services EventBridge event stream for responses. JSON is used for both requests and responses, including errors.</p> <p>The API is an Amazon Web Services regional service. For a list of supported regions and Amazon IVS HTTPS service endpoints, see the <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">Amazon IVS page</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <i> <b>All API request parameters and URLs are case sensitive. </b> </i> </p> <p>For a summary of notable documentation changes in each release, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html"> Document History</a>.</p> <p> <b>Allowed Header Values</b> </p> <ul> <li> <p> <code> <b>Accept:</b> </code> application/json</p> </li> <li> <p> <code> <b>Accept-Encoding:</b> </code> gzip, deflate</p> </li> <li> <p> <code> <b>Content-Type:</b> </code>application/json</p> </li> </ul> <p> <b>Key Concepts</b> </p> <ul> <li> <p> <b>Channel</b> — Stores configuration data related to your live stream. You first create a channel and then use the channel’s stream key to start your live stream.</p> </li> <li> <p> <b>Stream key</b> — An identifier assigned by Amazon IVS when you create a channel, which is then used to authorize streaming. <i> <b>Treat the stream key like a secret, since it allows anyone to stream to the channel.</b> </i> </p> </li> <li> <p> <b>Playback key pair</b> — Video playback may be restricted using playback-authorization tokens, which use public-key encryption. A playback key pair is the public-private pair of keys used to sign and validate the playback-authorization token.</p> </li> <li> <p> <b>Recording configuration</b> — Stores configuration related to recording a live stream and where to store the recorded content. Multiple channels can reference the same recording configuration.</p> </li> <li> <p> <b>Playback restriction policy</b> — Restricts playback by countries and/or origin sites.</p> </li> </ul> <p>For more information about your IVS live stream, also see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/getting-started.html">Getting Started with IVS Low-Latency Streaming</a>.</p> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an Amazon Web Services resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your Amazon Web Services resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html"> Access Tags</a>). </p> <p>The Amazon IVS API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording Configurations.</p> <p>At most 50 tags can be applied to a resource. </p> <p> <b>Authentication versus Authorization</b> </p> <p>Note the differences between these concepts:</p> <ul> <li> <p> <i>Authentication</i> is about verifying identity. You need to be authenticated to sign Amazon IVS API requests.</p> </li> <li> <p> <i>Authorization</i> is about granting permissions. Your IAM roles need to have permissions for Amazon IVS API requests. In addition, authorization is needed to view <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Amazon IVS private channels</a>. (Private channels are channels that are enabled for "playback authorization.")</p> </li> </ul> <p> <b>Authentication</b> </p> <p>All Amazon IVS API requests must be authenticated with a signature. The Amazon Web Services Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying API calls for you. However, if your application calls the Amazon IVS API directly, it’s your responsibility to sign the requests.</p> <p>You generate a signature using valid Amazon Web Services credentials that have permission to perform the requested action. For example, you must sign PutMetadata requests with a signature generated from a user account that has the <code>ivs:PutMetadata</code> permission.</p> <p>For more information:</p> <ul> <li> <p>Authentication and generating signatures — See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services General Reference</i>.</p> </li> <li> <p>Managing Amazon IVS permissions — See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html">Identity and Access Management</a> on the Security page of the <i>Amazon IVS User Guide</i>.</p> </li> </ul> <p> <b>Amazon Resource Names (ARNs)</b> </p> <p>ARNs uniquely identify AWS resources. An ARN is required when you need to specify a resource unambiguously across all of AWS, such as in IAM policies and API calls. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names</a> in the <i>AWS General Reference</i>.</p>
+ * @public
+ */
+export class Ivs extends IvsClient implements Ivs {}
+createAggregatedClient(commands, Ivs, { paginators });

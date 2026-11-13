@@ -1,24 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
-import { PutAndGetInlineDocumentsInputOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1PutAndGetInlineDocumentsCommand,
-  serializeAws_json1_1PutAndGetInlineDocumentsCommand,
-} from "../protocols/Aws_json1_1";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { JsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../JsonProtocolClient";
+import type { PutAndGetInlineDocumentsInputOutput } from "../models/models_0";
+import { de_PutAndGetInlineDocumentsCommand, se_PutAndGetInlineDocumentsCommand } from "../protocols/Aws_json1_1";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAndGetInlineDocumentsCommand}.
+ */
 export interface PutAndGetInlineDocumentsCommandInput extends PutAndGetInlineDocumentsInputOutput {}
+/**
+ * @public
+ *
+ * The output of {@link PutAndGetInlineDocumentsCommand}.
+ */
 export interface PutAndGetInlineDocumentsCommandOutput extends PutAndGetInlineDocumentsInputOutput, __MetadataBearer {}
 
 /**
@@ -28,68 +33,62 @@ export interface PutAndGetInlineDocumentsCommandOutput extends PutAndGetInlineDo
  * ```javascript
  * import { JsonProtocolClient, PutAndGetInlineDocumentsCommand } from "@aws-sdk/aws-protocoltests-json"; // ES Modules import
  * // const { JsonProtocolClient, PutAndGetInlineDocumentsCommand } = require("@aws-sdk/aws-protocoltests-json"); // CommonJS import
+ * // import type { JsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-json";
+ * const config = {}; // type is JsonProtocolClientConfig
  * const client = new JsonProtocolClient(config);
+ * const input = { // PutAndGetInlineDocumentsInputOutput
+ *   inlineDocument: "DOCUMENT_VALUE",
+ * };
  * const command = new PutAndGetInlineDocumentsCommand(input);
  * const response = await client.send(command);
+ * // { // PutAndGetInlineDocumentsInputOutput
+ * //   inlineDocument: "DOCUMENT_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param PutAndGetInlineDocumentsCommandInput - {@link PutAndGetInlineDocumentsCommandInput}
+ * @returns {@link PutAndGetInlineDocumentsCommandOutput}
  * @see {@link PutAndGetInlineDocumentsCommandInput} for command's `input` shape.
  * @see {@link PutAndGetInlineDocumentsCommandOutput} for command's `response` shape.
- * @see {@link JsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link JsonProtocolClientResolvedConfig | config} for JsonProtocolClient's `config` shape.
  *
+ * @throws {@link JsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from JsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class PutAndGetInlineDocumentsCommand extends $Command<
-  PutAndGetInlineDocumentsCommandInput,
-  PutAndGetInlineDocumentsCommandOutput,
-  JsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAndGetInlineDocumentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: JsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAndGetInlineDocumentsCommandInput, PutAndGetInlineDocumentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "JsonProtocolClient";
-    const commandName = "PutAndGetInlineDocumentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAndGetInlineDocumentsInputOutput.filterSensitiveLog,
-      outputFilterSensitiveLog: PutAndGetInlineDocumentsInputOutput.filterSensitiveLog,
+export class PutAndGetInlineDocumentsCommand extends $Command
+  .classBuilder<
+    PutAndGetInlineDocumentsCommandInput,
+    PutAndGetInlineDocumentsCommandOutput,
+    JsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: JsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("JsonProtocol", "PutAndGetInlineDocuments", {})
+  .n("JsonProtocolClient", "PutAndGetInlineDocumentsCommand")
+  .f(void 0, void 0)
+  .ser(se_PutAndGetInlineDocumentsCommand)
+  .de(de_PutAndGetInlineDocumentsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAndGetInlineDocumentsInputOutput;
+      output: PutAndGetInlineDocumentsInputOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAndGetInlineDocumentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1PutAndGetInlineDocumentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutAndGetInlineDocumentsCommandOutput> {
-    return deserializeAws_json1_1PutAndGetInlineDocumentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAndGetInlineDocumentsCommandInput;
+      output: PutAndGetInlineDocumentsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DocDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DocDBClient";
-import { CreateDBClusterSnapshotMessage, CreateDBClusterSnapshotResult } from "../models/models_0";
-import {
-  deserializeAws_queryCreateDBClusterSnapshotCommand,
-  serializeAws_queryCreateDBClusterSnapshotCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateDBClusterSnapshotMessage, CreateDBClusterSnapshotResult } from "../models/models_0";
+import { CreateDBClusterSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateDBClusterSnapshotCommand}.
+ */
 export interface CreateDBClusterSnapshotCommandInput extends CreateDBClusterSnapshotMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateDBClusterSnapshotCommand}.
+ */
 export interface CreateDBClusterSnapshotCommandOutput extends CreateDBClusterSnapshotResult, __MetadataBearer {}
 
 /**
@@ -28,68 +29,91 @@ export interface CreateDBClusterSnapshotCommandOutput extends CreateDBClusterSna
  * ```javascript
  * import { DocDBClient, CreateDBClusterSnapshotCommand } from "@aws-sdk/client-docdb"; // ES Modules import
  * // const { DocDBClient, CreateDBClusterSnapshotCommand } = require("@aws-sdk/client-docdb"); // CommonJS import
+ * // import type { DocDBClientConfig } from "@aws-sdk/client-docdb";
+ * const config = {}; // type is DocDBClientConfig
  * const client = new DocDBClient(config);
+ * const input = { // CreateDBClusterSnapshotMessage
+ *   DBClusterSnapshotIdentifier: "STRING_VALUE", // required
+ *   DBClusterIdentifier: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateDBClusterSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // CreateDBClusterSnapshotResult
+ * //   DBClusterSnapshot: { // DBClusterSnapshot
+ * //     AvailabilityZones: [ // AvailabilityZones
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     DBClusterSnapshotIdentifier: "STRING_VALUE",
+ * //     DBClusterIdentifier: "STRING_VALUE",
+ * //     SnapshotCreateTime: new Date("TIMESTAMP"),
+ * //     Engine: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Port: Number("int"),
+ * //     VpcId: "STRING_VALUE",
+ * //     ClusterCreateTime: new Date("TIMESTAMP"),
+ * //     MasterUsername: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     SnapshotType: "STRING_VALUE",
+ * //     PercentProgress: Number("int"),
+ * //     StorageEncrypted: true || false,
+ * //     KmsKeyId: "STRING_VALUE",
+ * //     DBClusterSnapshotArn: "STRING_VALUE",
+ * //     SourceDBClusterSnapshotArn: "STRING_VALUE",
+ * //     StorageType: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateDBClusterSnapshotCommandInput - {@link CreateDBClusterSnapshotCommandInput}
+ * @returns {@link CreateDBClusterSnapshotCommandOutput}
  * @see {@link CreateDBClusterSnapshotCommandInput} for command's `input` shape.
  * @see {@link CreateDBClusterSnapshotCommandOutput} for command's `response` shape.
- * @see {@link DocDBClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link DocDBClientResolvedConfig | config} for DocDBClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <code>DBClusterIdentifier</code> doesn't refer to an existing cluster. </p>
+ *
+ * @throws {@link DBClusterSnapshotAlreadyExistsFault} (client fault)
+ *  <p>You already have a cluster snapshot with the given identifier.</p>
+ *
+ * @throws {@link InvalidDBClusterSnapshotStateFault} (client fault)
+ *  <p>The provided value isn't a valid cluster snapshot state.</p>
+ *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The cluster isn't in a valid state.</p>
+ *
+ * @throws {@link SnapshotQuotaExceededFault} (client fault)
+ *  <p>The request would cause you to exceed the allowed number of snapshots.</p>
+ *
+ * @throws {@link DocDBServiceException}
+ * <p>Base exception class for all service exceptions from DocDB service.</p>
+ *
+ *
+ * @public
  */
-export class CreateDBClusterSnapshotCommand extends $Command<
-  CreateDBClusterSnapshotCommandInput,
-  CreateDBClusterSnapshotCommandOutput,
-  DocDBClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateDBClusterSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DocDBClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateDBClusterSnapshotCommandInput, CreateDBClusterSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DocDBClient";
-    const commandName = "CreateDBClusterSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateDBClusterSnapshotMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateDBClusterSnapshotResult.filterSensitiveLog,
+export class CreateDBClusterSnapshotCommand extends command<CreateDBClusterSnapshotCommandInput, CreateDBClusterSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateDBClusterSnapshot",
+  CreateDBClusterSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateDBClusterSnapshotMessage;
+      output: CreateDBClusterSnapshotResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateDBClusterSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateDBClusterSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateDBClusterSnapshotCommandOutput> {
-    return deserializeAws_queryCreateDBClusterSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateDBClusterSnapshotCommandInput;
+      output: CreateDBClusterSnapshotCommandOutput;
+    };
+  };
 }

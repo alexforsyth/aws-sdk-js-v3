@@ -1,102 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { StopStreamRequest, StopStreamResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopStreamCommand,
-  serializeAws_restJson1StopStreamCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopStreamRequest, StopStreamResponse } from "../models/models_0";
+import { StopStream$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopStreamCommand}.
+ */
 export interface StopStreamCommandInput extends StopStreamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopStreamCommand}.
+ */
 export interface StopStreamCommandOutput extends StopStreamResponse, __MetadataBearer {}
 
 /**
- * <p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in
- *       conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a
- *       channel.</p>
- *          <note>
- *             <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS
- *         session, so to stop the stream permanently, you may want to first revoke the
- *           <code>streamKey</code> attached to the channel.</p>
- *          </note>
+ * <p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p> <note> <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the <code>streamKey</code> attached to the channel.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IvsClient, StopStreamCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, StopStreamCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // StopStreamRequest
+ *   channelArn: "STRING_VALUE", // required
+ * };
  * const command = new StopStreamCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopStreamCommandInput - {@link StopStreamCommandInput}
+ * @returns {@link StopStreamCommandOutput}
  * @see {@link StopStreamCommandInput} for command's `input` shape.
  * @see {@link StopStreamCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ChannelNotBroadcasting} (client fault)
+ *  <p>The stream is offline for the given channel ARN.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource which does not exist.</p>
+ *
+ * @throws {@link StreamUnavailable} (server fault)
+ *  <p>The stream is temporarily unavailable.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class StopStreamCommand extends $Command<
-  StopStreamCommandInput,
-  StopStreamCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopStreamCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopStreamCommandInput, StopStreamCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "StopStreamCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopStreamRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StopStreamResponse.filterSensitiveLog,
+export class StopStreamCommand extends command<StopStreamCommandInput, StopStreamCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopStream",
+  StopStream$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopStreamRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopStreamCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopStreamCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopStreamCommandOutput> {
-    return deserializeAws_restJson1StopStreamCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopStreamCommandInput;
+      output: StopStreamCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { DescribeQuickConnectRequest, DescribeQuickConnectResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeQuickConnectCommand,
-  serializeAws_restJson1DescribeQuickConnectCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeQuickConnectRequest, DescribeQuickConnectResponse } from "../models/models_1";
+import { DescribeQuickConnect$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeQuickConnectCommand}.
+ */
 export interface DescribeQuickConnectCommandInput extends DescribeQuickConnectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeQuickConnectCommand}.
+ */
 export interface DescribeQuickConnectCommandOutput extends DescribeQuickConnectResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,90 @@ export interface DescribeQuickConnectCommandOutput extends DescribeQuickConnectR
  * ```javascript
  * import { ConnectClient, DescribeQuickConnectCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DescribeQuickConnectCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DescribeQuickConnectRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   QuickConnectId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeQuickConnectCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeQuickConnectResponse
+ * //   QuickConnect: { // QuickConnect
+ * //     QuickConnectARN: "STRING_VALUE",
+ * //     QuickConnectId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     QuickConnectConfig: { // QuickConnectConfig
+ * //       QuickConnectType: "USER" || "QUEUE" || "PHONE_NUMBER" || "FLOW", // required
+ * //       UserConfig: { // UserQuickConnectConfig
+ * //         UserId: "STRING_VALUE", // required
+ * //         ContactFlowId: "STRING_VALUE", // required
+ * //       },
+ * //       QueueConfig: { // QueueQuickConnectConfig
+ * //         QueueId: "STRING_VALUE", // required
+ * //         ContactFlowId: "STRING_VALUE", // required
+ * //       },
+ * //       PhoneConfig: { // PhoneNumberQuickConnectConfig
+ * //         PhoneNumber: "STRING_VALUE", // required
+ * //       },
+ * //       FlowConfig: { // FlowQuickConnectConfig
+ * //         ContactFlowId: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //     Tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedRegion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeQuickConnectCommandInput - {@link DescribeQuickConnectCommandInput}
+ * @returns {@link DescribeQuickConnectCommandOutput}
  * @see {@link DescribeQuickConnectCommandInput} for command's `input` shape.
  * @see {@link DescribeQuickConnectCommandOutput} for command's `response` shape.
- * @see {@link ConnectClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeQuickConnectCommand extends $Command<
-  DescribeQuickConnectCommandInput,
-  DescribeQuickConnectCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeQuickConnectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeQuickConnectCommandInput, DescribeQuickConnectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DescribeQuickConnectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeQuickConnectRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeQuickConnectResponse.filterSensitiveLog,
+export class DescribeQuickConnectCommand extends command<DescribeQuickConnectCommandInput, DescribeQuickConnectCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeQuickConnect",
+  DescribeQuickConnect$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeQuickConnectRequest;
+      output: DescribeQuickConnectResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeQuickConnectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeQuickConnectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeQuickConnectCommandOutput> {
-    return deserializeAws_restJson1DescribeQuickConnectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeQuickConnectCommandInput;
+      output: DescribeQuickConnectCommandOutput;
+    };
+  };
 }

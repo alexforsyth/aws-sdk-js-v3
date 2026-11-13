@@ -1,24 +1,36 @@
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+// smithy-typescript generated code
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { AppStreamClient } from "../AppStreamClient";
-import { DescribeFleetsCommand, DescribeFleetsCommandInput } from "../commands/DescribeFleetsCommand";
+import type { AppStreamClient } from "../AppStreamClient";
+import {
+  type DescribeFleetsCommandInput,
+  type DescribeFleetsCommandOutput,
+  DescribeFleetsCommand,
+} from "../commands/DescribeFleetsCommand";
+import type { AppStreamServiceException } from "../models/AppStreamServiceException";
 
-const checkState = async (client: AppStreamClient, input: DescribeFleetsCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: AppStreamClient, input: DescribeFleetsCommandInput): Promise<WaiterResult<DescribeFleetsCommandOutput | AppStreamServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeFleetsCommand(input));
+    let result: DescribeFleetsCommandOutput & any = await client.send(new DescribeFleetsCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Fleets);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Fleets);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "INACTIVE";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "STOPPED")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -26,28 +38,28 @@ const checkState = async (client: AppStreamClient, input: DescribeFleetsCommandI
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Fleets);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Fleets);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
-        if (anyStringEq_4 == "PENDING_ACTIVATE") {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
+        if (anyStringEq_4 == "STARTING") {
           return { state: WaiterState.FAILURE, reason };
         }
       }
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.Fleets);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.Fleets);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
-        if (anyStringEq_4 == "ACTIVE") {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
+        if (anyStringEq_4 == "RUNNING") {
           return { state: WaiterState.FAILURE, reason };
         }
       }
@@ -64,7 +76,7 @@ const checkState = async (client: AppStreamClient, input: DescribeFleetsCommandI
 export const waitForFleetStopped = async (
   params: WaiterConfiguration<AppStreamClient>,
   input: DescribeFleetsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeFleetsCommandOutput | AppStreamServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -76,8 +88,8 @@ export const waitForFleetStopped = async (
 export const waitUntilFleetStopped = async (
   params: WaiterConfiguration<AppStreamClient>,
   input: DescribeFleetsCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeFleetsCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeFleetsCommandOutput>;
 };

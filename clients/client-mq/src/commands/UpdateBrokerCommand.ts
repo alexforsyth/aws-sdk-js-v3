@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateBrokerRequest, UpdateBrokerResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1UpdateBrokerCommand,
-  serializeAws_restJson1UpdateBrokerCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateBrokerRequest, UpdateBrokerResponse } from "../models/models_0";
+import { UpdateBroker$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateBrokerCommand}.
+ */
 export interface UpdateBrokerCommandInput extends UpdateBrokerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateBrokerCommand}.
+ */
 export interface UpdateBrokerCommandOutput extends UpdateBrokerResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,156 @@ export interface UpdateBrokerCommandOutput extends UpdateBrokerResponse, __Metad
  * ```javascript
  * import { MqClient, UpdateBrokerCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, UpdateBrokerCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // UpdateBrokerRequest
+ *   AuthenticationStrategy: "SIMPLE" || "LDAP" || "CONFIG_MANAGED",
+ *   AutoMinorVersionUpgrade: true || false,
+ *   BrokerId: "STRING_VALUE", // required
+ *   Configuration: { // ConfigurationId
+ *     Id: "STRING_VALUE", // required
+ *     Revision: Number("int"),
+ *   },
+ *   EngineVersion: "STRING_VALUE",
+ *   HostInstanceType: "STRING_VALUE",
+ *   LdapServerMetadata: { // LdapServerMetadataInput
+ *     Hosts: [ // __listOf__string // required
+ *       "STRING_VALUE",
+ *     ],
+ *     RoleBase: "STRING_VALUE", // required
+ *     RoleName: "STRING_VALUE",
+ *     RoleSearchMatching: "STRING_VALUE", // required
+ *     RoleSearchSubtree: true || false,
+ *     ServiceAccountPassword: "STRING_VALUE", // required
+ *     ServiceAccountUsername: "STRING_VALUE", // required
+ *     UserBase: "STRING_VALUE", // required
+ *     UserRoleName: "STRING_VALUE",
+ *     UserSearchMatching: "STRING_VALUE", // required
+ *     UserSearchSubtree: true || false,
+ *   },
+ *   Logs: { // Logs
+ *     Audit: true || false,
+ *     General: true || false,
+ *   },
+ *   MaintenanceWindowStartTime: { // WeeklyStartTime
+ *     DayOfWeek: "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY" || "SUNDAY", // required
+ *     TimeOfDay: "STRING_VALUE", // required
+ *     TimeZone: "STRING_VALUE",
+ *   },
+ *   ResourceShareArns: [
+ *     "STRING_VALUE",
+ *   ],
+ *   SecurityGroups: [
+ *     "STRING_VALUE",
+ *   ],
+ *   StorageSize: Number("int"),
+ *   DataReplicationMode: "NONE" || "CRDR",
+ * };
  * const command = new UpdateBrokerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateBrokerResponse
+ * //   AuthenticationStrategy: "SIMPLE" || "LDAP" || "CONFIG_MANAGED",
+ * //   AutoMinorVersionUpgrade: true || false,
+ * //   BrokerId: "STRING_VALUE",
+ * //   Configuration: { // ConfigurationId
+ * //     Id: "STRING_VALUE", // required
+ * //     Revision: Number("int"),
+ * //   },
+ * //   EngineVersion: "STRING_VALUE",
+ * //   HostInstanceType: "STRING_VALUE",
+ * //   LdapServerMetadata: { // LdapServerMetadataOutput
+ * //     Hosts: [ // __listOf__string // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     RoleBase: "STRING_VALUE", // required
+ * //     RoleName: "STRING_VALUE",
+ * //     RoleSearchMatching: "STRING_VALUE", // required
+ * //     RoleSearchSubtree: true || false,
+ * //     ServiceAccountUsername: "STRING_VALUE", // required
+ * //     UserBase: "STRING_VALUE", // required
+ * //     UserRoleName: "STRING_VALUE",
+ * //     UserSearchMatching: "STRING_VALUE", // required
+ * //     UserSearchSubtree: true || false,
+ * //   },
+ * //   Logs: { // Logs
+ * //     Audit: true || false,
+ * //     General: true || false,
+ * //   },
+ * //   MaintenanceWindowStartTime: { // WeeklyStartTime
+ * //     DayOfWeek: "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY" || "SUNDAY", // required
+ * //     TimeOfDay: "STRING_VALUE", // required
+ * //     TimeZone: "STRING_VALUE",
+ * //   },
+ * //   ResourceShareArns: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   SecurityGroups: [
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   DataReplicationMetadata: { // DataReplicationMetadataOutput
+ * //     DataReplicationCounterpart: { // DataReplicationCounterpart
+ * //       BrokerId: "STRING_VALUE", // required
+ * //       Region: "STRING_VALUE", // required
+ * //     },
+ * //     DataReplicationRole: "STRING_VALUE", // required
+ * //   },
+ * //   DataReplicationMode: "NONE" || "CRDR",
+ * //   PendingDataReplicationMetadata: {
+ * //     DataReplicationCounterpart: {
+ * //       BrokerId: "STRING_VALUE", // required
+ * //       Region: "STRING_VALUE", // required
+ * //     },
+ * //     DataReplicationRole: "STRING_VALUE", // required
+ * //   },
+ * //   PendingDataReplicationMode: "NONE" || "CRDR",
+ * //   StorageSize: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param UpdateBrokerCommandInput - {@link UpdateBrokerCommandInput}
+ * @returns {@link UpdateBrokerCommandOutput}
  * @see {@link UpdateBrokerCommandInput} for command's `input` shape.
  * @see {@link UpdateBrokerCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateBrokerCommand extends $Command<
-  UpdateBrokerCommandInput,
-  UpdateBrokerCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateBrokerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateBrokerCommandInput, UpdateBrokerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "UpdateBrokerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateBrokerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateBrokerResponse.filterSensitiveLog,
+export class UpdateBrokerCommand extends command<UpdateBrokerCommandInput, UpdateBrokerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateBroker",
+  UpdateBroker$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateBrokerRequest;
+      output: UpdateBrokerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateBrokerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateBrokerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateBrokerCommandOutput> {
-    return deserializeAws_restJson1UpdateBrokerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateBrokerCommandInput;
+      output: UpdateBrokerCommandOutput;
+    };
+  };
 }

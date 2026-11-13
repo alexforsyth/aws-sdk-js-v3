@@ -1,4 +1,21 @@
-export * from "./MarketplaceCommerceAnalytics";
+// smithy-typescript generated code
+/* eslint-disable */
+/**
+ * Provides AWS Marketplace business intelligence data on-demand.
+ *
+ * @packageDocumentation
+ */
 export * from "./MarketplaceCommerceAnalyticsClient";
+export * from "./MarketplaceCommerceAnalytics";
+export type { ClientInputEndpointParameters } from "./endpoint/EndpointParameters";
+export type { RuntimeExtension } from "./runtimeExtensions";
+export type { MarketplaceCommerceAnalyticsExtensionConfiguration } from "./extensionConfiguration";
 export * from "./commands";
-export * from "./models";
+export { Command as $Command } from "@smithy/core/client";
+export * from "./schemas/schemas_0";
+
+export * from "./models/enums";
+export * from "./models/errors";
+export * from "./models/models_0";
+
+export { MarketplaceCommerceAnalyticsServiceException } from "./models/MarketplaceCommerceAnalyticsServiceException";

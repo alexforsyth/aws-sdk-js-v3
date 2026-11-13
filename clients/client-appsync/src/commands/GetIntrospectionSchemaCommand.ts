@@ -1,25 +1,34 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import { GetIntrospectionSchemaRequest, GetIntrospectionSchemaResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetIntrospectionSchemaCommand,
-  serializeAws_restJson1GetIntrospectionSchemaCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIntrospectionSchemaRequest, GetIntrospectionSchemaResponse } from "../models/models_0";
+import { GetIntrospectionSchema$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIntrospectionSchemaCommand}.
+ */
 export interface GetIntrospectionSchemaCommandInput extends GetIntrospectionSchemaRequest {}
-export interface GetIntrospectionSchemaCommandOutput extends GetIntrospectionSchemaResponse, __MetadataBearer {}
+/**
+ * @public
+ */
+export type GetIntrospectionSchemaCommandOutputType = Omit<GetIntrospectionSchemaResponse, "schema"> & {
+  schema?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetIntrospectionSchemaCommand}.
+ */
+export interface GetIntrospectionSchemaCommandOutput extends GetIntrospectionSchemaCommandOutputType, __MetadataBearer {}
 
 /**
  * <p>Retrieves the introspection schema for a GraphQL API.</p>
@@ -28,68 +37,62 @@ export interface GetIntrospectionSchemaCommandOutput extends GetIntrospectionSch
  * ```javascript
  * import { AppSyncClient, GetIntrospectionSchemaCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetIntrospectionSchemaCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetIntrospectionSchemaRequest
+ *   apiId: "STRING_VALUE", // required
+ *   format: "SDL" || "JSON", // required
+ *   includeDirectives: true || false,
+ * };
  * const command = new GetIntrospectionSchemaCommand(input);
  * const response = await client.send(command);
+ * // { // GetIntrospectionSchemaResponse
+ * //   schema: new Uint8Array(),
+ * // };
+ *
  * ```
  *
+ * @param GetIntrospectionSchemaCommandInput - {@link GetIntrospectionSchemaCommandInput}
+ * @returns {@link GetIntrospectionSchemaCommandOutput}
  * @see {@link GetIntrospectionSchemaCommandInput} for command's `input` shape.
  * @see {@link GetIntrospectionSchemaCommandOutput} for command's `response` shape.
- * @see {@link AppSyncClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link GraphQLSchemaException} (client fault)
+ *  <p>The GraphQL schema is not valid.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>You aren't authorized to perform this operation.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetIntrospectionSchemaCommand extends $Command<
-  GetIntrospectionSchemaCommandInput,
-  GetIntrospectionSchemaCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIntrospectionSchemaCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIntrospectionSchemaCommandInput, GetIntrospectionSchemaCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetIntrospectionSchemaCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIntrospectionSchemaRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIntrospectionSchemaResponse.filterSensitiveLog,
+export class GetIntrospectionSchemaCommand extends command<GetIntrospectionSchemaCommandInput, GetIntrospectionSchemaCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIntrospectionSchema",
+  GetIntrospectionSchema$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIntrospectionSchemaRequest;
+      output: GetIntrospectionSchemaResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIntrospectionSchemaCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIntrospectionSchemaCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIntrospectionSchemaCommandOutput> {
-    return deserializeAws_restJson1GetIntrospectionSchemaCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIntrospectionSchemaCommandInput;
+      output: GetIntrospectionSchemaCommandOutput;
+    };
+  };
 }

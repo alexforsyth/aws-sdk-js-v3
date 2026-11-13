@@ -1,124 +1,166 @@
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetObjectTaggingOutput, GetObjectTaggingRequest } from "../models/models_0";
-import {
-  deserializeAws_restXmlGetObjectTaggingCommand,
-  serializeAws_restXmlGetObjectTaggingCommand,
-} from "../protocols/Aws_restXml";
-import { S3ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3Client";
+import { _ep5, _mw0, command } from "../commandBuilder";
+import type { GetObjectTaggingOutput, GetObjectTaggingRequest } from "../models/models_0";
+import { GetObjectTagging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetObjectTaggingCommand}.
+ */
 export interface GetObjectTaggingCommandInput extends GetObjectTaggingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetObjectTaggingCommand}.
+ */
 export interface GetObjectTaggingCommandOutput extends GetObjectTaggingOutput, __MetadataBearer {}
 
 /**
- * <p>Returns the tag-set of an object. You send the GET request against the tagging
- *          subresource associated with the object.</p>
- *
- *          <p>To use this operation, you must have permission to perform the
- *             <code>s3:GetObjectTagging</code> action. By default, the GET action returns
- *          information about current version of an object. For a versioned bucket, you can have
- *          multiple versions of an object in your bucket. To retrieve tags of any other version, use
- *          the versionId query parameter. You also need permission for the
- *             <code>s3:GetObjectVersionTagging</code> action.</p>
- *
- *          <p> By default, the bucket owner has this permission and can grant this permission to
- *          others.</p>
- *
+ * <note>
+ *             <p>This operation is not supported for directory buckets.</p>
+ *          </note>
+ *          <p>Returns the tag-set of an object. You send the GET request against the tagging subresource
+ *       associated with the object.</p>
+ *          <p>To use this operation, you must have permission to perform the <code>s3:GetObjectTagging</code>
+ *       action. By default, the GET action returns information about current version of an object. For a
+ *       versioned bucket, you can have multiple versions of an object in your bucket. To retrieve tags of any
+ *       other version, use the versionId query parameter. You also need permission for the
+ *         <code>s3:GetObjectVersionTagging</code> action.</p>
+ *          <p> By default, the bucket owner has this permission and can grant this permission to others.</p>
  *          <p> For information about the Amazon S3 object tagging feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object Tagging</a>.</p>
- *
- *          <p>The following action is related to <code>GetObjectTagging</code>:</p>
+ *          <p>The following actions are related to <code>GetObjectTagging</code>:</p>
  *          <ul>
- *             <li>
- *                <p>
- *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a>
- *                </p>
- *             </li>
  *             <li>
  *                <p>
  *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a>
  *                </p>
  *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html">GetObjectAttributes</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a>
+ *                </p>
+ *             </li>
  *          </ul>
+ *          <important>
+ *             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { S3Client, GetObjectTaggingCommand } from "@aws-sdk/client-s3"; // ES Modules import
  * // const { S3Client, GetObjectTaggingCommand } = require("@aws-sdk/client-s3"); // CommonJS import
+ * // import type { S3ClientConfig } from "@aws-sdk/client-s3";
+ * const config = {}; // type is S3ClientConfig
  * const client = new S3Client(config);
+ * const input = { // GetObjectTaggingRequest
+ *   Bucket: "STRING_VALUE", // required
+ *   Key: "STRING_VALUE", // required
+ *   VersionId: "STRING_VALUE",
+ *   ExpectedBucketOwner: "STRING_VALUE",
+ *   RequestPayer: "requester",
+ * };
  * const command = new GetObjectTaggingCommand(input);
  * const response = await client.send(command);
+ * // { // GetObjectTaggingOutput
+ * //   VersionId: "STRING_VALUE",
+ * //   TagSet: [ // TagSet // required
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetObjectTaggingCommandInput - {@link GetObjectTaggingCommandInput}
+ * @returns {@link GetObjectTaggingCommandOutput}
  * @see {@link GetObjectTaggingCommandInput} for command's `input` shape.
  * @see {@link GetObjectTaggingCommandOutput} for command's `response` shape.
- * @see {@link S3ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link S3ClientResolvedConfig | config} for S3Client's `config` shape.
  *
+ * @throws {@link S3ServiceException}
+ * <p>Base exception class for all service exceptions from S3 service.</p>
+ *
+ *
+ * @example To retrieve tag set of a specific object version
+ * ```javascript
+ * // The following example retrieves tag set of an object. The request specifies object version.
+ * const input = {
+ *   Bucket: "examplebucket",
+ *   Key: "exampleobject",
+ *   VersionId: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
+ * };
+ * const command = new GetObjectTaggingCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TagSet: [
+ *     {
+ *       Key: "Key1",
+ *       Value: "Value1"
+ *     }
+ *   ],
+ *   VersionId: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
+ * }
+ * *\/
+ * ```
+ *
+ * @example To retrieve tag set of an object
+ * ```javascript
+ * // The following example retrieves tag set of an object.
+ * const input = {
+ *   Bucket: "examplebucket",
+ *   Key: "HappyFace.jpg"
+ * };
+ * const command = new GetObjectTaggingCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   TagSet: [
+ *     {
+ *       Key: "Key4",
+ *       Value: "Value4"
+ *     },
+ *     {
+ *       Key: "Key3",
+ *       Value: "Value3"
+ *     }
+ *   ],
+ *   VersionId: "null"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetObjectTaggingCommand extends $Command<
-  GetObjectTaggingCommandInput,
-  GetObjectTaggingCommandOutput,
-  S3ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetObjectTaggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetObjectTaggingCommandInput, GetObjectTaggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3Client";
-    const commandName = "GetObjectTaggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetObjectTaggingRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetObjectTaggingOutput.filterSensitiveLog,
+export class GetObjectTaggingCommand extends command<GetObjectTaggingCommandInput, GetObjectTaggingCommandOutput>(
+  _ep5,
+  _mw0,
+  "GetObjectTagging",
+  GetObjectTagging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetObjectTaggingRequest;
+      output: GetObjectTaggingOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetObjectTaggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlGetObjectTaggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetObjectTaggingCommandOutput> {
-    return deserializeAws_restXmlGetObjectTaggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetObjectTaggingCommandInput;
+      output: GetObjectTaggingCommandOutput;
+    };
+  };
 }

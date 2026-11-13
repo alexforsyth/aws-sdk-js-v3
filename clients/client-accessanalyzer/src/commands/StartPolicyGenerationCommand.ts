@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AccessAnalyzerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AccessAnalyzerClient";
-import { StartPolicyGenerationRequest, StartPolicyGenerationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1StartPolicyGenerationCommand,
-  serializeAws_restJson1StartPolicyGenerationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartPolicyGenerationRequest, StartPolicyGenerationResponse } from "../models/models_0";
+import { StartPolicyGeneration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartPolicyGenerationCommand}.
+ */
 export interface StartPolicyGenerationCommandInput extends StartPolicyGenerationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartPolicyGenerationCommand}.
+ */
 export interface StartPolicyGenerationCommandOutput extends StartPolicyGenerationResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,82 @@ export interface StartPolicyGenerationCommandOutput extends StartPolicyGeneratio
  * ```javascript
  * import { AccessAnalyzerClient, StartPolicyGenerationCommand } from "@aws-sdk/client-accessanalyzer"; // ES Modules import
  * // const { AccessAnalyzerClient, StartPolicyGenerationCommand } = require("@aws-sdk/client-accessanalyzer"); // CommonJS import
+ * // import type { AccessAnalyzerClientConfig } from "@aws-sdk/client-accessanalyzer";
+ * const config = {}; // type is AccessAnalyzerClientConfig
  * const client = new AccessAnalyzerClient(config);
+ * const input = { // StartPolicyGenerationRequest
+ *   policyGenerationDetails: { // PolicyGenerationDetails
+ *     principalArn: "STRING_VALUE", // required
+ *   },
+ *   cloudTrailDetails: { // CloudTrailDetails
+ *     trails: [ // TrailList // required
+ *       { // Trail
+ *         cloudTrailArn: "STRING_VALUE", // required
+ *         regions: [ // RegionList
+ *           "STRING_VALUE",
+ *         ],
+ *         allRegions: true || false,
+ *       },
+ *     ],
+ *     accessRole: "STRING_VALUE", // required
+ *     startTime: new Date("TIMESTAMP"), // required
+ *     endTime: new Date("TIMESTAMP"),
+ *   },
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new StartPolicyGenerationCommand(input);
  * const response = await client.send(command);
+ * // { // StartPolicyGenerationResponse
+ * //   jobId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param StartPolicyGenerationCommandInput - {@link StartPolicyGenerationCommandInput}
+ * @returns {@link StartPolicyGenerationCommandOutput}
  * @see {@link StartPolicyGenerationCommandInput} for command's `input` shape.
  * @see {@link StartPolicyGenerationCommandOutput} for command's `response` shape.
- * @see {@link AccessAnalyzerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AccessAnalyzerClientResolvedConfig | config} for AccessAnalyzerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>A conflict exception error.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Service quote met error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Throttling limit exceeded error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link AccessAnalyzerServiceException}
+ * <p>Base exception class for all service exceptions from AccessAnalyzer service.</p>
+ *
+ *
+ * @public
  */
-export class StartPolicyGenerationCommand extends $Command<
-  StartPolicyGenerationCommandInput,
-  StartPolicyGenerationCommandOutput,
-  AccessAnalyzerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartPolicyGenerationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AccessAnalyzerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartPolicyGenerationCommandInput, StartPolicyGenerationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AccessAnalyzerClient";
-    const commandName = "StartPolicyGenerationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartPolicyGenerationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: StartPolicyGenerationResponse.filterSensitiveLog,
+export class StartPolicyGenerationCommand extends command<StartPolicyGenerationCommandInput, StartPolicyGenerationCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartPolicyGeneration",
+  StartPolicyGeneration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartPolicyGenerationRequest;
+      output: StartPolicyGenerationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartPolicyGenerationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartPolicyGenerationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartPolicyGenerationCommandOutput> {
-    return deserializeAws_restJson1StartPolicyGenerationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartPolicyGenerationCommandInput;
+      output: StartPolicyGenerationCommandOutput;
+    };
+  };
 }

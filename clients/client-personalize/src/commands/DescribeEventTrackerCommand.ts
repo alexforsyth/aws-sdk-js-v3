@@ -1,97 +1,92 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEventTrackerRequest, DescribeEventTrackerResponse } from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1DescribeEventTrackerCommand,
-  serializeAws_json1_1DescribeEventTrackerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEventTrackerRequest, DescribeEventTrackerResponse } from "../models/models_0";
+import { DescribeEventTracker$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventTrackerCommand}.
+ */
 export interface DescribeEventTrackerCommandInput extends DescribeEventTrackerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventTrackerCommand}.
+ */
 export interface DescribeEventTrackerCommandOutput extends DescribeEventTrackerResponse, __MetadataBearer {}
 
 /**
  * <p>Describes an event tracker. The response includes the <code>trackingId</code> and
  *       <code>status</code> of the event tracker.
- *       For more information on event trackers, see <a>CreateEventTracker</a>.</p>
+ *       For more information on event trackers, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PersonalizeClient, DescribeEventTrackerCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, DescribeEventTrackerCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // DescribeEventTrackerRequest
+ *   eventTrackerArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeEventTrackerCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEventTrackerResponse
+ * //   eventTracker: { // EventTracker
+ * //     name: "STRING_VALUE",
+ * //     eventTrackerArn: "STRING_VALUE",
+ * //     accountId: "STRING_VALUE",
+ * //     trackingId: "STRING_VALUE",
+ * //     datasetGroupArn: "STRING_VALUE",
+ * //     status: "STRING_VALUE",
+ * //     creationDateTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventTrackerCommandInput - {@link DescribeEventTrackerCommandInput}
+ * @returns {@link DescribeEventTrackerCommandOutput}
  * @see {@link DescribeEventTrackerCommandInput} for command's `input` shape.
  * @see {@link DescribeEventTrackerCommandOutput} for command's `response` shape.
- * @see {@link PersonalizeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEventTrackerCommand extends $Command<
-  DescribeEventTrackerCommandInput,
-  DescribeEventTrackerCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventTrackerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventTrackerCommandInput, DescribeEventTrackerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "DescribeEventTrackerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventTrackerRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEventTrackerResponse.filterSensitiveLog,
+export class DescribeEventTrackerCommand extends command<DescribeEventTrackerCommandInput, DescribeEventTrackerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEventTracker",
+  DescribeEventTracker$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventTrackerRequest;
+      output: DescribeEventTrackerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEventTrackerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEventTrackerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEventTrackerCommandOutput> {
-    return deserializeAws_json1_1DescribeEventTrackerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventTrackerCommandInput;
+      output: DescribeEventTrackerCommandOutput;
+    };
+  };
 }

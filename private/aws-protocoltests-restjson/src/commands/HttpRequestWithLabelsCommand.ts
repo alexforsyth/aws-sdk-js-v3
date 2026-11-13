@@ -1,24 +1,33 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import { Command as $Command } from "@smithy/core/client";
+import { getEndpointPlugin } from "@smithy/core/endpoints";
+import { getSerdePlugin } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HttpRequestWithLabelsInput } from "../models/models_0";
-import {
-  deserializeAws_restJson1HttpRequestWithLabelsCommand,
-  serializeAws_restJson1HttpRequestWithLabelsCommand,
-} from "../protocols/Aws_restJson1";
-import { RestJsonProtocolClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RestJsonProtocolClient";
+import { commonParams } from "../endpoint/EndpointParameters";
+import type { HttpRequestWithLabelsInput } from "../models/models_0";
+import { de_HttpRequestWithLabelsCommand, se_HttpRequestWithLabelsCommand } from "../protocols/Aws_restJson1";
+import type {
+  RestJsonProtocolClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../RestJsonProtocolClient";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link HttpRequestWithLabelsCommand}.
+ */
 export interface HttpRequestWithLabelsCommandInput extends HttpRequestWithLabelsInput {}
+/**
+ * @public
+ *
+ * The output of {@link HttpRequestWithLabelsCommand}.
+ */
 export interface HttpRequestWithLabelsCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +38,67 @@ export interface HttpRequestWithLabelsCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { RestJsonProtocolClient, HttpRequestWithLabelsCommand } from "@aws-sdk/aws-protocoltests-restjson"; // ES Modules import
  * // const { RestJsonProtocolClient, HttpRequestWithLabelsCommand } = require("@aws-sdk/aws-protocoltests-restjson"); // CommonJS import
+ * // import type { RestJsonProtocolClientConfig } from "@aws-sdk/aws-protocoltests-restjson";
+ * const config = {}; // type is RestJsonProtocolClientConfig
  * const client = new RestJsonProtocolClient(config);
+ * const input = { // HttpRequestWithLabelsInput
+ *   string: "STRING_VALUE", // required
+ *   short: Number("short"), // required
+ *   integer: Number("int"), // required
+ *   long: Number("long"), // required
+ *   float: Number("float"), // required
+ *   double: Number("double"), // required
+ *   boolean: true || false, // required
+ *   timestamp: new Date("TIMESTAMP"), // required
+ * };
  * const command = new HttpRequestWithLabelsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param HttpRequestWithLabelsCommandInput - {@link HttpRequestWithLabelsCommandInput}
+ * @returns {@link HttpRequestWithLabelsCommandOutput}
  * @see {@link HttpRequestWithLabelsCommandInput} for command's `input` shape.
  * @see {@link HttpRequestWithLabelsCommandOutput} for command's `response` shape.
- * @see {@link RestJsonProtocolClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RestJsonProtocolClientResolvedConfig | config} for RestJsonProtocolClient's `config` shape.
  *
+ * @throws {@link RestJsonProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RestJsonProtocol service.</p>
+ *
+ *
+ * @public
  */
-export class HttpRequestWithLabelsCommand extends $Command<
-  HttpRequestWithLabelsCommandInput,
-  HttpRequestWithLabelsCommandOutput,
-  RestJsonProtocolClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: HttpRequestWithLabelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RestJsonProtocolClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<HttpRequestWithLabelsCommandInput, HttpRequestWithLabelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RestJsonProtocolClient";
-    const commandName = "HttpRequestWithLabelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: HttpRequestWithLabelsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class HttpRequestWithLabelsCommand extends $Command
+  .classBuilder<
+    HttpRequestWithLabelsCommandInput,
+    HttpRequestWithLabelsCommandOutput,
+    RestJsonProtocolClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >()
+  .ep(commonParams)
+  .m(function (this: any, Command: any, cs: any, config: RestJsonProtocolClientResolvedConfig, o: any) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command.getEndpointParameterInstructions()),
+    ];
+  })
+  .s("RestJson", "HttpRequestWithLabels", {})
+  .n("RestJsonProtocolClient", "HttpRequestWithLabelsCommand")
+  .f(void 0, void 0)
+  .ser(se_HttpRequestWithLabelsCommand)
+  .de(de_HttpRequestWithLabelsCommand)
+  .build() {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: HttpRequestWithLabelsInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: HttpRequestWithLabelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1HttpRequestWithLabelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<HttpRequestWithLabelsCommandOutput> {
-    return deserializeAws_restJson1HttpRequestWithLabelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: HttpRequestWithLabelsCommandInput;
+      output: HttpRequestWithLabelsCommandOutput;
+    };
+  };
 }

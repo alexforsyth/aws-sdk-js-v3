@@ -1,0 +1,160 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListManagedNotificationEventsRequest, ListManagedNotificationEventsResponse } from "../models/models_0";
+import { ListManagedNotificationEvents$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListManagedNotificationEventsCommand}.
+ */
+export interface ListManagedNotificationEventsCommandInput extends ListManagedNotificationEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListManagedNotificationEventsCommand}.
+ */
+export interface ListManagedNotificationEventsCommandOutput extends ListManagedNotificationEventsResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns a list of Managed Notification Events according to specified filters, ordered by creation time in reverse chronological order (newest first).</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NotificationsClient, ListManagedNotificationEventsCommand } from "@aws-sdk/client-notifications"; // ES Modules import
+ * // const { NotificationsClient, ListManagedNotificationEventsCommand } = require("@aws-sdk/client-notifications"); // CommonJS import
+ * // import type { NotificationsClientConfig } from "@aws-sdk/client-notifications";
+ * const config = {}; // type is NotificationsClientConfig
+ * const client = new NotificationsClient(config);
+ * const input = { // ListManagedNotificationEventsRequest
+ *   startTime: new Date("TIMESTAMP"),
+ *   endTime: new Date("TIMESTAMP"),
+ *   locale: "STRING_VALUE",
+ *   source: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   organizationalUnitId: "STRING_VALUE",
+ *   relatedAccount: "STRING_VALUE",
+ *   includeSensitiveEvents: true || false,
+ * };
+ * const command = new ListManagedNotificationEventsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListManagedNotificationEventsResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   managedNotificationEvents: [ // ManagedNotificationEvents // required
+ * //     { // ManagedNotificationEventOverview
+ * //       arn: "STRING_VALUE", // required
+ * //       managedNotificationConfigurationArn: "STRING_VALUE", // required
+ * //       relatedAccount: "STRING_VALUE", // required
+ * //       creationTime: new Date("TIMESTAMP"), // required
+ * //       notificationEvent: { // ManagedNotificationEventSummary
+ * //         schemaVersion: "STRING_VALUE", // required
+ * //         sourceEventMetadata: { // ManagedSourceEventMetadataSummary
+ * //           eventOriginRegion: "STRING_VALUE",
+ * //           source: "STRING_VALUE", // required
+ * //           eventType: "STRING_VALUE", // required
+ * //         },
+ * //         messageComponents: { // MessageComponentsSummary
+ * //           headline: "STRING_VALUE", // required
+ * //         },
+ * //         eventStatus: "STRING_VALUE", // required
+ * //         notificationType: "STRING_VALUE", // required
+ * //       },
+ * //       aggregationEventType: "STRING_VALUE",
+ * //       organizationalUnitId: "STRING_VALUE",
+ * //       aggregationSummary: { // AggregationSummary
+ * //         eventCount: Number("int"), // required
+ * //         aggregatedBy: [ // AggregationKeys // required
+ * //           { // AggregationKey
+ * //             name: "STRING_VALUE", // required
+ * //             value: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //         aggregatedAccounts: { // SummarizationDimensionOverview
+ * //           name: "STRING_VALUE", // required
+ * //           count: Number("int"), // required
+ * //           sampleValues: [ // SampleAggregationDimensionValues
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         aggregatedRegions: {
+ * //           name: "STRING_VALUE", // required
+ * //           count: Number("int"), // required
+ * //           sampleValues: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         aggregatedOrganizationalUnits: {
+ * //           name: "STRING_VALUE", // required
+ * //           count: Number("int"), // required
+ * //           sampleValues: [
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //         additionalSummarizationDimensions: [ // SummarizationDimensionOverviews
+ * //           {
+ * //             name: "STRING_VALUE", // required
+ * //             count: Number("int"), // required
+ * //             sampleValues: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //       aggregatedNotificationRegions: [ // AggregatedNotificationRegions
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param ListManagedNotificationEventsCommandInput - {@link ListManagedNotificationEventsCommandInput}
+ * @returns {@link ListManagedNotificationEventsCommandOutput}
+ * @see {@link ListManagedNotificationEventsCommandInput} for command's `input` shape.
+ * @see {@link ListManagedNotificationEventsCommandOutput} for command's `response` shape.
+ * @see {@link NotificationsClientResolvedConfig | config} for NotificationsClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error during processing of request.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception is thrown when the notification event fails validation.</p>
+ *
+ * @throws {@link NotificationsServiceException}
+ * <p>Base exception class for all service exceptions from Notifications service.</p>
+ *
+ *
+ * @public
+ */
+export class ListManagedNotificationEventsCommand extends command<ListManagedNotificationEventsCommandInput, ListManagedNotificationEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListManagedNotificationEvents",
+  ListManagedNotificationEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListManagedNotificationEventsRequest;
+      output: ListManagedNotificationEventsResponse;
+    };
+    sdk: {
+      input: ListManagedNotificationEventsCommandInput;
+      output: ListManagedNotificationEventsCommandOutput;
+    };
+  };
+}

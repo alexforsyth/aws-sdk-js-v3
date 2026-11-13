@@ -1,0 +1,71 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EmptyStructure } from "../models/models_0";
+import { EmptyInputOutput$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EmptyInputOutputCommand}.
+ */
+export interface EmptyInputOutputCommandInput extends EmptyStructure {}
+/**
+ * @public
+ *
+ * The output of {@link EmptyInputOutputCommand}.
+ */
+export interface EmptyInputOutputCommandOutput extends EmptyStructure, __MetadataBearer {}
+
+/**
+ * @public
+ *
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { RpcV2ProtocolClient, EmptyInputOutputCommand } from "@aws-sdk/aws-protocoltests-smithy-rpcv2-cbor-schema"; // ES Modules import
+ * // const { RpcV2ProtocolClient, EmptyInputOutputCommand } = require("@aws-sdk/aws-protocoltests-smithy-rpcv2-cbor-schema"); // CommonJS import
+ * // import type { RpcV2ProtocolClientConfig } from "@aws-sdk/aws-protocoltests-smithy-rpcv2-cbor-schema";
+ * const config = {}; // type is RpcV2ProtocolClientConfig
+ * const client = new RpcV2ProtocolClient(config);
+ * const input = {};
+ * const command = new EmptyInputOutputCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param EmptyInputOutputCommandInput - {@link EmptyInputOutputCommandInput}
+ * @returns {@link EmptyInputOutputCommandOutput}
+ * @see {@link EmptyInputOutputCommandInput} for command's `input` shape.
+ * @see {@link EmptyInputOutputCommandOutput} for command's `response` shape.
+ * @see {@link RpcV2ProtocolClientResolvedConfig | config} for RpcV2ProtocolClient's `config` shape.
+ *
+ * @throws {@link RpcV2ProtocolServiceException}
+ * <p>Base exception class for all service exceptions from RpcV2Protocol service.</p>
+ *
+ *
+ */
+export class EmptyInputOutputCommand extends command<EmptyInputOutputCommandInput, EmptyInputOutputCommandOutput>(
+  _ep0,
+  _mw0,
+  "EmptyInputOutput",
+  EmptyInputOutput$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: EmptyInputOutputCommandInput;
+      output: EmptyInputOutputCommandOutput;
+    };
+  };
+}

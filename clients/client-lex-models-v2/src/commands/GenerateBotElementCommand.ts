@@ -1,0 +1,115 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GenerateBotElementRequest, GenerateBotElementResponse } from "../models/models_0";
+import { GenerateBotElement$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GenerateBotElementCommand}.
+ */
+export interface GenerateBotElementCommandInput extends GenerateBotElementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GenerateBotElementCommand}.
+ */
+export interface GenerateBotElementCommandOutput extends GenerateBotElementResponse, __MetadataBearer {}
+
+/**
+ * <p>Generates sample utterances for an intent.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LexModelsV2Client, GenerateBotElementCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
+ * // const { LexModelsV2Client, GenerateBotElementCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
+ * const client = new LexModelsV2Client(config);
+ * const input = { // GenerateBotElementRequest
+ *   intentId: "STRING_VALUE", // required
+ *   botId: "STRING_VALUE", // required
+ *   botVersion: "STRING_VALUE", // required
+ *   localeId: "STRING_VALUE", // required
+ * };
+ * const command = new GenerateBotElementCommand(input);
+ * const response = await client.send(command);
+ * // { // GenerateBotElementResponse
+ * //   botId: "STRING_VALUE",
+ * //   botVersion: "STRING_VALUE",
+ * //   localeId: "STRING_VALUE",
+ * //   intentId: "STRING_VALUE",
+ * //   sampleUtterances: [ // SampleUtterancesList
+ * //     { // SampleUtterance
+ * //       utterance: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
+ * ```
+ *
+ * @param GenerateBotElementCommandInput - {@link GenerateBotElementCommandInput}
+ * @returns {@link GenerateBotElementCommandOutput}
+ * @see {@link GenerateBotElementCommandInput} for command's `input` shape.
+ * @see {@link GenerateBotElementCommandOutput} for command's `response` shape.
+ * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The action that you tried to perform couldn't be completed because
+ *          the resource is in a conflicting state. For example, deleting a bot
+ *          that is in the CREATING state. Try your request again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link PreconditionFailedException} (client fault)
+ *  <p>Your request couldn't be completed because one or more request
+ *          fields aren't valid. Check the fields in your request and try
+ *          again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>You asked to describe a resource that doesn't exist. Check the
+ *          resource that you are requesting and try again.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have reached a quota for your bot. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
+ */
+export class GenerateBotElementCommand extends command<GenerateBotElementCommandInput, GenerateBotElementCommandOutput>(
+  _ep0,
+  _mw0,
+  "GenerateBotElement",
+  GenerateBotElement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GenerateBotElementRequest;
+      output: GenerateBotElementResponse;
+    };
+    sdk: {
+      input: GenerateBotElementCommandInput;
+      output: GenerateBotElementCommandOutput;
+    };
+  };
+}

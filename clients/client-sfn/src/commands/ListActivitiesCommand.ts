@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListActivitiesInput, ListActivitiesOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListActivitiesCommand,
-  serializeAws_json1_0ListActivitiesCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, SFNClientResolvedConfig } from "../SFNClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListActivitiesInput, ListActivitiesOutput } from "../models/models_0";
+import { ListActivities$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListActivitiesCommand}.
+ */
 export interface ListActivitiesCommandInput extends ListActivitiesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListActivitiesCommand}.
+ */
 export interface ListActivitiesCommandOutput extends ListActivitiesOutput, __MetadataBearer {}
 
 /**
@@ -33,68 +34,58 @@ export interface ListActivitiesCommandOutput extends ListActivitiesOutput, __Met
  * ```javascript
  * import { SFNClient, ListActivitiesCommand } from "@aws-sdk/client-sfn"; // ES Modules import
  * // const { SFNClient, ListActivitiesCommand } = require("@aws-sdk/client-sfn"); // CommonJS import
+ * // import type { SFNClientConfig } from "@aws-sdk/client-sfn";
+ * const config = {}; // type is SFNClientConfig
  * const client = new SFNClient(config);
+ * const input = { // ListActivitiesInput
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListActivitiesCommand(input);
  * const response = await client.send(command);
+ * // { // ListActivitiesOutput
+ * //   activities: [ // ActivityList // required
+ * //     { // ActivityListItem
+ * //       activityArn: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       creationDate: new Date("TIMESTAMP"), // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListActivitiesCommandInput - {@link ListActivitiesCommandInput}
+ * @returns {@link ListActivitiesCommandOutput}
  * @see {@link ListActivitiesCommandInput} for command's `input` shape.
  * @see {@link ListActivitiesCommandOutput} for command's `response` shape.
- * @see {@link SFNClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SFNClientResolvedConfig | config} for SFNClient's `config` shape.
  *
+ * @throws {@link InvalidToken} (client fault)
+ *  <p>The provided token is not valid.</p>
+ *
+ * @throws {@link SFNServiceException}
+ * <p>Base exception class for all service exceptions from SFN service.</p>
+ *
+ *
+ * @public
  */
-export class ListActivitiesCommand extends $Command<
-  ListActivitiesCommandInput,
-  ListActivitiesCommandOutput,
-  SFNClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListActivitiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SFNClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListActivitiesCommandInput, ListActivitiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SFNClient";
-    const commandName = "ListActivitiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListActivitiesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ListActivitiesOutput.filterSensitiveLog,
+export class ListActivitiesCommand extends command<ListActivitiesCommandInput, ListActivitiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListActivities",
+  ListActivities$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListActivitiesInput;
+      output: ListActivitiesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListActivitiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListActivitiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListActivitiesCommandOutput> {
-    return deserializeAws_json1_0ListActivitiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListActivitiesCommandInput;
+      output: ListActivitiesCommandOutput;
+    };
+  };
 }

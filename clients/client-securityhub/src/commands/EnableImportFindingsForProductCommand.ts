@@ -1,106 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EnableImportFindingsForProductRequest, EnableImportFindingsForProductResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1EnableImportFindingsForProductCommand,
-  serializeAws_restJson1EnableImportFindingsForProductCommand,
-} from "../protocols/Aws_restJson1";
-import { SecurityHubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecurityHubClient";
-
-export interface EnableImportFindingsForProductCommandInput extends EnableImportFindingsForProductRequest {}
-export interface EnableImportFindingsForProductCommandOutput
-  extends EnableImportFindingsForProductResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableImportFindingsForProductRequest, EnableImportFindingsForProductResponse } from "../models/models_2";
+import { EnableImportFindingsForProduct$ } from "../schemas/schemas_0";
 
 /**
- * <p>Enables the integration of a partner product with Security Hub. Integrated products send
- *          findings to Security Hub.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableImportFindingsForProductCommand}.
+ */
+export interface EnableImportFindingsForProductCommandInput extends EnableImportFindingsForProductRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableImportFindingsForProductCommand}.
+ */
+export interface EnableImportFindingsForProductCommandOutput extends EnableImportFindingsForProductResponse, __MetadataBearer {}
+
+/**
+ * <p>Enables the integration of a partner product with Security Hub CSPM. Integrated products send
+ *          findings to Security Hub CSPM.</p>
  *          <p>When you enable a product integration, a permissions policy that grants permission for
- *          the product to send findings to Security Hub is applied.</p>
+ *          the product to send findings to Security Hub CSPM is applied.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecurityHubClient, EnableImportFindingsForProductCommand } from "@aws-sdk/client-securityhub"; // ES Modules import
  * // const { SecurityHubClient, EnableImportFindingsForProductCommand } = require("@aws-sdk/client-securityhub"); // CommonJS import
+ * // import type { SecurityHubClientConfig } from "@aws-sdk/client-securityhub";
+ * const config = {}; // type is SecurityHubClientConfig
  * const client = new SecurityHubClient(config);
+ * const input = { // EnableImportFindingsForProductRequest
+ *   ProductArn: "STRING_VALUE", // required
+ * };
  * const command = new EnableImportFindingsForProductCommand(input);
  * const response = await client.send(command);
+ * // { // EnableImportFindingsForProductResponse
+ * //   ProductSubscriptionArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param EnableImportFindingsForProductCommandInput - {@link EnableImportFindingsForProductCommandInput}
+ * @returns {@link EnableImportFindingsForProductCommandOutput}
  * @see {@link EnableImportFindingsForProductCommandInput} for command's `input` shape.
  * @see {@link EnableImportFindingsForProductCommandOutput} for command's `response` shape.
- * @see {@link SecurityHubClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecurityHubClientResolvedConfig | config} for SecurityHubClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidAccessException} (client fault)
+ *  <p>The account doesn't have permission to perform this action.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because you supplied an invalid or out-of-range value for an
+ *          input parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
+ *          account or throttling limits. The error code describes the limit exceeded.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource specified in the request conflicts with an existing resource.</p>
+ *
+ * @throws {@link SecurityHubServiceException}
+ * <p>Base exception class for all service exceptions from SecurityHub service.</p>
+ *
+ *
+ * @example To activate an integration
+ * ```javascript
+ * // The following example activates an integration between Security Hub and a third party partner product that sends findings to Security Hub.
+ * const input = {
+ *   ProductArn: "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon"
+ * };
+ * const command = new EnableImportFindingsForProductCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ProductSubscriptionArn: "arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class EnableImportFindingsForProductCommand extends $Command<
-  EnableImportFindingsForProductCommandInput,
-  EnableImportFindingsForProductCommandOutput,
-  SecurityHubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableImportFindingsForProductCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecurityHubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableImportFindingsForProductCommandInput, EnableImportFindingsForProductCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecurityHubClient";
-    const commandName = "EnableImportFindingsForProductCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableImportFindingsForProductRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: EnableImportFindingsForProductResponse.filterSensitiveLog,
+export class EnableImportFindingsForProductCommand extends command<EnableImportFindingsForProductCommandInput, EnableImportFindingsForProductCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableImportFindingsForProduct",
+  EnableImportFindingsForProduct$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableImportFindingsForProductRequest;
+      output: EnableImportFindingsForProductResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: EnableImportFindingsForProductCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1EnableImportFindingsForProductCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<EnableImportFindingsForProductCommandOutput> {
-    return deserializeAws_restJson1EnableImportFindingsForProductCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableImportFindingsForProductCommandInput;
+      output: EnableImportFindingsForProductCommandOutput;
+    };
+  };
 }

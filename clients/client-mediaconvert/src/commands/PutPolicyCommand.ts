@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaConvertClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaConvertClient";
-import { PutPolicyRequest, PutPolicyResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1PutPolicyCommand,
-  serializeAws_restJson1PutPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutPolicyRequest, PutPolicyResponse } from "../models/models_0";
+import { PutPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutPolicyCommand}.
+ */
 export interface PutPolicyCommandInput extends PutPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutPolicyCommand}.
+ */
 export interface PutPolicyCommandOutput extends PutPolicyResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,76 @@ export interface PutPolicyCommandOutput extends PutPolicyResponse, __MetadataBea
  * ```javascript
  * import { MediaConvertClient, PutPolicyCommand } from "@aws-sdk/client-mediaconvert"; // ES Modules import
  * // const { MediaConvertClient, PutPolicyCommand } = require("@aws-sdk/client-mediaconvert"); // CommonJS import
+ * // import type { MediaConvertClientConfig } from "@aws-sdk/client-mediaconvert";
+ * const config = {}; // type is MediaConvertClientConfig
  * const client = new MediaConvertClient(config);
+ * const input = { // PutPolicyRequest
+ *   Policy: { // Policy
+ *     HttpInputs: "ALLOWED" || "DISALLOWED",
+ *     HttpsInputs: "ALLOWED" || "DISALLOWED",
+ *     S3Inputs: "ALLOWED" || "DISALLOWED",
+ *   },
+ * };
  * const command = new PutPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // PutPolicyResponse
+ * //   Policy: { // Policy
+ * //     HttpInputs: "ALLOWED" || "DISALLOWED",
+ * //     HttpsInputs: "ALLOWED" || "DISALLOWED",
+ * //     S3Inputs: "ALLOWED" || "DISALLOWED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param PutPolicyCommandInput - {@link PutPolicyCommandInput}
+ * @returns {@link PutPolicyCommandOutput}
  * @see {@link PutPolicyCommandInput} for command's `input` shape.
  * @see {@link PutPolicyCommandOutput} for command's `response` shape.
- * @see {@link MediaConvertClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MediaConvertClientResolvedConfig | config} for MediaConvertClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  The service can't process your request because of a problem in the request. Please check your request form and syntax.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The service couldn't complete your request because there is a conflict with the current state of the resource.
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  You don't have permissions for this action with the credentials you sent.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  The service encountered an unexpected condition and can't fulfill your request.
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  The resource you requested doesn't exist.
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  You attempted to create more resources than the service allows based on service quotas.
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
+ *
+ * @throws {@link MediaConvertServiceException}
+ * <p>Base exception class for all service exceptions from MediaConvert service.</p>
+ *
+ *
+ * @public
  */
-export class PutPolicyCommand extends $Command<
-  PutPolicyCommandInput,
-  PutPolicyCommandOutput,
-  MediaConvertClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaConvertClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutPolicyCommandInput, PutPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaConvertClient";
-    const commandName = "PutPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutPolicyRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: PutPolicyResponse.filterSensitiveLog,
+export class PutPolicyCommand extends command<PutPolicyCommandInput, PutPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutPolicy",
+  PutPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutPolicyRequest;
+      output: PutPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutPolicyCommandOutput> {
-    return deserializeAws_restJson1PutPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutPolicyCommandInput;
+      output: PutPolicyCommandOutput;
+    };
+  };
 }

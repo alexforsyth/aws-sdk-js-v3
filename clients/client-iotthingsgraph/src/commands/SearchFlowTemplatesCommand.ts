@@ -1,95 +1,103 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { SearchFlowTemplatesRequest, SearchFlowTemplatesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchFlowTemplatesCommand,
-  serializeAws_json1_1SearchFlowTemplatesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchFlowTemplatesRequest, SearchFlowTemplatesResponse } from "../models/models_0";
+import { SearchFlowTemplates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchFlowTemplatesCommand}.
+ */
 export interface SearchFlowTemplatesCommandInput extends SearchFlowTemplatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchFlowTemplatesCommand}.
+ */
 export interface SearchFlowTemplatesCommandOutput extends SearchFlowTemplatesResponse, __MetadataBearer {}
 
 /**
  * <p>Searches for summary information about workflows.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, SearchFlowTemplatesCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, SearchFlowTemplatesCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // SearchFlowTemplatesRequest
+ *   filters: [ // FlowTemplateFilters
+ *     { // FlowTemplateFilter
+ *       name: "DEVICE_MODEL_ID", // required
+ *       value: [ // FlowTemplateFilterValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new SearchFlowTemplatesCommand(input);
  * const response = await client.send(command);
+ * // { // SearchFlowTemplatesResponse
+ * //   summaries: [ // FlowTemplateSummaries
+ * //     { // FlowTemplateSummary
+ * //       id: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //       revisionNumber: Number("long"),
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchFlowTemplatesCommandInput - {@link SearchFlowTemplatesCommandInput}
+ * @returns {@link SearchFlowTemplatesCommandOutput}
  * @see {@link SearchFlowTemplatesCommandInput} for command's `input` shape.
  * @see {@link SearchFlowTemplatesCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class SearchFlowTemplatesCommand extends $Command<
-  SearchFlowTemplatesCommandInput,
-  SearchFlowTemplatesCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchFlowTemplatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchFlowTemplatesCommandInput, SearchFlowTemplatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "SearchFlowTemplatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchFlowTemplatesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchFlowTemplatesResponse.filterSensitiveLog,
+export class SearchFlowTemplatesCommand extends command<SearchFlowTemplatesCommandInput, SearchFlowTemplatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchFlowTemplates",
+  SearchFlowTemplates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchFlowTemplatesRequest;
+      output: SearchFlowTemplatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchFlowTemplatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchFlowTemplatesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchFlowTemplatesCommandOutput> {
-    return deserializeAws_json1_1SearchFlowTemplatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchFlowTemplatesCommandInput;
+      output: SearchFlowTemplatesCommandOutput;
+    };
+  };
 }

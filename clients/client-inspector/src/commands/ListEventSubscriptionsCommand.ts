@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { InspectorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../InspectorClient";
-import { ListEventSubscriptionsRequest, ListEventSubscriptionsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListEventSubscriptionsCommand,
-  serializeAws_json1_1ListEventSubscriptionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEventSubscriptionsRequest, ListEventSubscriptionsResponse } from "../models/models_0";
+import { ListEventSubscriptions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEventSubscriptionsCommand}.
+ */
 export interface ListEventSubscriptionsCommandInput extends ListEventSubscriptionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEventSubscriptionsCommand}.
+ */
 export interface ListEventSubscriptionsCommandOutput extends ListEventSubscriptionsResponse, __MetadataBearer {}
 
 /**
@@ -29,68 +30,75 @@ export interface ListEventSubscriptionsCommandOutput extends ListEventSubscripti
  * ```javascript
  * import { InspectorClient, ListEventSubscriptionsCommand } from "@aws-sdk/client-inspector"; // ES Modules import
  * // const { InspectorClient, ListEventSubscriptionsCommand } = require("@aws-sdk/client-inspector"); // CommonJS import
+ * // import type { InspectorClientConfig } from "@aws-sdk/client-inspector";
+ * const config = {}; // type is InspectorClientConfig
  * const client = new InspectorClient(config);
+ * const input = { // ListEventSubscriptionsRequest
+ *   resourceArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListEventSubscriptionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListEventSubscriptionsResponse
+ * //   subscriptions: [ // SubscriptionList // required
+ * //     { // Subscription
+ * //       resourceArn: "STRING_VALUE", // required
+ * //       topicArn: "STRING_VALUE", // required
+ * //       eventSubscriptions: [ // EventSubscriptionList // required
+ * //         { // EventSubscription
+ * //           event: "ASSESSMENT_RUN_STARTED" || "ASSESSMENT_RUN_COMPLETED" || "ASSESSMENT_RUN_STATE_CHANGED" || "FINDING_REPORTED" || "OTHER", // required
+ * //           subscribedAt: new Date("TIMESTAMP"), // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEventSubscriptionsCommandInput - {@link ListEventSubscriptionsCommandInput}
+ * @returns {@link ListEventSubscriptionsCommandOutput}
  * @see {@link ListEventSubscriptionsCommandInput} for command's `input` shape.
  * @see {@link ListEventSubscriptionsCommandOutput} for command's `response` shape.
- * @see {@link InspectorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link InspectorClientResolvedConfig | config} for InspectorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to access the requested resource.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>Internal server error.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The request was rejected because an invalid or out-of-range value was supplied for an
+ *          input parameter.</p>
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced an entity that does not exist. The
+ *          error code describes the entity.</p>
+ *
+ * @throws {@link InspectorServiceException}
+ * <p>Base exception class for all service exceptions from Inspector service.</p>
+ *
+ *
+ * @public
  */
-export class ListEventSubscriptionsCommand extends $Command<
-  ListEventSubscriptionsCommandInput,
-  ListEventSubscriptionsCommandOutput,
-  InspectorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEventSubscriptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: InspectorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEventSubscriptionsCommandInput, ListEventSubscriptionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "InspectorClient";
-    const commandName = "ListEventSubscriptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEventSubscriptionsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListEventSubscriptionsResponse.filterSensitiveLog,
+export class ListEventSubscriptionsCommand extends command<ListEventSubscriptionsCommandInput, ListEventSubscriptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEventSubscriptions",
+  ListEventSubscriptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEventSubscriptionsRequest;
+      output: ListEventSubscriptionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEventSubscriptionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEventSubscriptionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEventSubscriptionsCommandOutput> {
-    return deserializeAws_json1_1ListEventSubscriptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEventSubscriptionsCommandInput;
+      output: ListEventSubscriptionsCommandOutput;
+    };
+  };
 }

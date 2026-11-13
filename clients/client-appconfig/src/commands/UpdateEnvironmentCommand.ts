@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
-import { Environment, UpdateEnvironmentRequest } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateEnvironmentCommand,
-  serializeAws_restJson1UpdateEnvironmentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { Environment, UpdateEnvironmentRequest } from "../models/models_0";
+import { UpdateEnvironment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateEnvironmentCommand}.
+ */
 export interface UpdateEnvironmentCommandInput extends UpdateEnvironmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateEnvironmentCommand}.
+ */
 export interface UpdateEnvironmentCommandOutput extends Environment, __MetadataBearer {}
 
 /**
@@ -28,68 +29,96 @@ export interface UpdateEnvironmentCommandOutput extends Environment, __MetadataB
  * ```javascript
  * import { AppConfigClient, UpdateEnvironmentCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
  * // const { AppConfigClient, UpdateEnvironmentCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * // import type { AppConfigClientConfig } from "@aws-sdk/client-appconfig";
+ * const config = {}; // type is AppConfigClientConfig
  * const client = new AppConfigClient(config);
+ * const input = { // UpdateEnvironmentRequest
+ *   ApplicationId: "STRING_VALUE", // required
+ *   EnvironmentId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   Monitors: [ // MonitorList
+ *     { // Monitor
+ *       AlarmArn: "STRING_VALUE", // required
+ *       AlarmRoleArn: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new UpdateEnvironmentCommand(input);
  * const response = await client.send(command);
+ * // { // Environment
+ * //   ApplicationId: "STRING_VALUE",
+ * //   Id: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   State: "READY_FOR_DEPLOYMENT" || "DEPLOYING" || "ROLLING_BACK" || "ROLLED_BACK" || "REVERTED",
+ * //   Monitors: [ // MonitorList
+ * //     { // Monitor
+ * //       AlarmArn: "STRING_VALUE", // required
+ * //       AlarmRoleArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateEnvironmentCommandInput - {@link UpdateEnvironmentCommandInput}
+ * @returns {@link UpdateEnvironmentCommandOutput}
  * @see {@link UpdateEnvironmentCommandInput} for command's `input` shape.
  * @see {@link UpdateEnvironmentCommandOutput} for command's `response` shape.
- * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for AppConfigClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the AppConfig service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link AppConfigServiceException}
+ * <p>Base exception class for all service exceptions from AppConfig service.</p>
+ *
+ *
+ * @example To update an environment
+ * ```javascript
+ * // The following update-environment example updates an environment's description.
+ * const input = {
+ *   ApplicationId: "339ohji",
+ *   Description: "An environment for examples.",
+ *   EnvironmentId: "54j1r29"
+ * };
+ * const command = new UpdateEnvironmentCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ApplicationId: "339ohji",
+ *   Description: "An environment for examples.",
+ *   Id: "54j1r29",
+ *   Name: "Example-Environment",
+ *   State: "ROLLED_BACK"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class UpdateEnvironmentCommand extends $Command<
-  UpdateEnvironmentCommandInput,
-  UpdateEnvironmentCommandOutput,
-  AppConfigClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateEnvironmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateEnvironmentCommandInput, UpdateEnvironmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigClient";
-    const commandName = "UpdateEnvironmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateEnvironmentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: Environment.filterSensitiveLog,
+export class UpdateEnvironmentCommand extends command<UpdateEnvironmentCommandInput, UpdateEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateEnvironment",
+  UpdateEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEnvironmentRequest;
+      output: Environment;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateEnvironmentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateEnvironmentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateEnvironmentCommandOutput> {
-    return deserializeAws_restJson1UpdateEnvironmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateEnvironmentCommandInput;
+      output: UpdateEnvironmentCommandOutput;
+    };
+  };
 }

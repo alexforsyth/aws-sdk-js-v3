@@ -1,107 +1,136 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetRandomPasswordRequest, GetRandomPasswordResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetRandomPasswordCommand,
-  serializeAws_json1_1GetRandomPasswordCommand,
-} from "../protocols/Aws_json1_1";
-import { SecretsManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecretsManagerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRandomPasswordRequest, GetRandomPasswordResponse } from "../models/models_0";
+import { GetRandomPassword$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRandomPasswordCommand}.
+ */
 export interface GetRandomPasswordCommandInput extends GetRandomPasswordRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRandomPasswordCommand}.
+ */
 export interface GetRandomPasswordCommandOutput extends GetRandomPasswordResponse, __MetadataBearer {}
 
 /**
- * <p>Generates a random password of the specified complexity. This operation is intended for
- *       use in the Lambda rotation function. Per best practice, we recommend that you specify the
- *       maximum length and include every character type that the system you are generating a password
- *       for can support.</p>
- *          <p>
- *             <b>Minimum permissions</b>
+ * <p>Generates a random password. We recommend that you specify the maximum length and
+ *             include every character type that the system you are generating a password for can
+ *             support. By default, Secrets Manager uses uppercase and lowercase letters, numbers, and the
+ *             following characters in passwords:
+ *                 <code>!\"#$%&'()*+,-./:;<=>?@[\\]^_`\{|\}~</code>
  *          </p>
- *          <p>To run this command, you must have the following permissions:</p>
- *          <ul>
- *             <li>
- *                <p>secretsmanager:GetRandomPassword</p>
- *             </li>
- *          </ul>
+ *          <p>Secrets Manager generates a CloudTrail log entry when you call this
+ *             action.</p>
+ *          <p>
+ *             <b>Required permissions:
+ *                 </b>
+ *             <code>secretsmanager:GetRandomPassword</code>. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions">
+ *       IAM policy actions for Secrets Manager</a> and <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html">Authentication
+ *       and access control in Secrets Manager</a>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SecretsManagerClient, GetRandomPasswordCommand } from "@aws-sdk/client-secrets-manager"; // ES Modules import
  * // const { SecretsManagerClient, GetRandomPasswordCommand } = require("@aws-sdk/client-secrets-manager"); // CommonJS import
+ * // import type { SecretsManagerClientConfig } from "@aws-sdk/client-secrets-manager";
+ * const config = {}; // type is SecretsManagerClientConfig
  * const client = new SecretsManagerClient(config);
+ * const input = { // GetRandomPasswordRequest
+ *   PasswordLength: Number("long"),
+ *   ExcludeCharacters: "STRING_VALUE",
+ *   ExcludeNumbers: true || false,
+ *   ExcludePunctuation: true || false,
+ *   ExcludeUppercase: true || false,
+ *   ExcludeLowercase: true || false,
+ *   IncludeSpace: true || false,
+ *   RequireEachIncludedType: true || false,
+ * };
  * const command = new GetRandomPasswordCommand(input);
  * const response = await client.send(command);
+ * // { // GetRandomPasswordResponse
+ * //   RandomPassword: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetRandomPasswordCommandInput - {@link GetRandomPasswordCommandInput}
+ * @returns {@link GetRandomPasswordCommandOutput}
  * @see {@link GetRandomPasswordCommandInput} for command's `input` shape.
  * @see {@link GetRandomPasswordCommandOutput} for command's `response` shape.
- * @see {@link SecretsManagerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SecretsManagerClientResolvedConfig | config} for SecretsManagerClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The parameter name or value is invalid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>A parameter value is not valid for the current state of the
+ *       resource.</p>
+ *          <p>Possible causes:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The secret is scheduled for deletion.</p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to enable rotation on a secret that doesn't already have a Lambda function
+ *           ARN configured and you didn't include such an ARN as a parameter in this call. </p>
+ *             </li>
+ *             <li>
+ *                <p>The secret is managed by another service, and you must use that service to update it.
+ *           For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html">Secrets managed by other Amazon Web Services services</a>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link SecretsManagerServiceException}
+ * <p>Base exception class for all service exceptions from SecretsManager service.</p>
+ *
+ *
+ * @example To generate a random password
+ * ```javascript
+ * // The following example shows how to request a randomly generated password. This example includes the optional flags to require spaces and at least one character of each included type. It specifies a length of 20 characters.
+ * const input = {
+ *   IncludeSpace: true,
+ *   PasswordLength: 20,
+ *   RequireEachIncludedType: true
+ * };
+ * const command = new GetRandomPasswordCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   RandomPassword: "EXAMPLE-PASSWORD"
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class GetRandomPasswordCommand extends $Command<
-  GetRandomPasswordCommandInput,
-  GetRandomPasswordCommandOutput,
-  SecretsManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRandomPasswordCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecretsManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRandomPasswordCommandInput, GetRandomPasswordCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecretsManagerClient";
-    const commandName = "GetRandomPasswordCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRandomPasswordRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetRandomPasswordResponse.filterSensitiveLog,
+export class GetRandomPasswordCommand extends command<GetRandomPasswordCommandInput, GetRandomPasswordCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRandomPassword",
+  GetRandomPassword$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRandomPasswordRequest;
+      output: GetRandomPasswordResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRandomPasswordCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetRandomPasswordCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRandomPasswordCommandOutput> {
-    return deserializeAws_json1_1GetRandomPasswordCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRandomPasswordCommandInput;
+      output: GetRandomPasswordCommandOutput;
+    };
+  };
 }

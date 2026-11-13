@@ -1,31 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ElasticLoadBalancingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ElasticLoadBalancingClient";
-import { AddAvailabilityZonesInput, AddAvailabilityZonesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryEnableAvailabilityZonesForLoadBalancerCommand,
-  serializeAws_queryEnableAvailabilityZonesForLoadBalancerCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AddAvailabilityZonesInput, AddAvailabilityZonesOutput } from "../models/models_0";
+import { EnableAvailabilityZonesForLoadBalancer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableAvailabilityZonesForLoadBalancerCommand}.
+ */
 export interface EnableAvailabilityZonesForLoadBalancerCommandInput extends AddAvailabilityZonesInput {}
-export interface EnableAvailabilityZonesForLoadBalancerCommandOutput
-  extends AddAvailabilityZonesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link EnableAvailabilityZonesForLoadBalancerCommand}.
+ */
+export interface EnableAvailabilityZonesForLoadBalancerCommandOutput extends AddAvailabilityZonesOutput, __MetadataBearer {}
 
 /**
  * <p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer
@@ -39,74 +34,76 @@ export interface EnableAvailabilityZonesForLoadBalancerCommandOutput
  * ```javascript
  * import { ElasticLoadBalancingClient, EnableAvailabilityZonesForLoadBalancerCommand } from "@aws-sdk/client-elastic-load-balancing"; // ES Modules import
  * // const { ElasticLoadBalancingClient, EnableAvailabilityZonesForLoadBalancerCommand } = require("@aws-sdk/client-elastic-load-balancing"); // CommonJS import
+ * // import type { ElasticLoadBalancingClientConfig } from "@aws-sdk/client-elastic-load-balancing";
+ * const config = {}; // type is ElasticLoadBalancingClientConfig
  * const client = new ElasticLoadBalancingClient(config);
+ * const input = { // AddAvailabilityZonesInput
+ *   LoadBalancerName: "STRING_VALUE", // required
+ *   AvailabilityZones: [ // AvailabilityZones // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new EnableAvailabilityZonesForLoadBalancerCommand(input);
  * const response = await client.send(command);
+ * // { // AddAvailabilityZonesOutput
+ * //   AvailabilityZones: [ // AvailabilityZones
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param EnableAvailabilityZonesForLoadBalancerCommandInput - {@link EnableAvailabilityZonesForLoadBalancerCommandInput}
+ * @returns {@link EnableAvailabilityZonesForLoadBalancerCommandOutput}
  * @see {@link EnableAvailabilityZonesForLoadBalancerCommandInput} for command's `input` shape.
  * @see {@link EnableAvailabilityZonesForLoadBalancerCommandOutput} for command's `response` shape.
- * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ElasticLoadBalancingClientResolvedConfig | config} for ElasticLoadBalancingClient's `config` shape.
  *
+ * @throws {@link AccessPointNotFoundException} (client fault)
+ *  <p>The specified load balancer does not exist.</p>
+ *
+ * @throws {@link ElasticLoadBalancingServiceException}
+ * <p>Base exception class for all service exceptions from ElasticLoadBalancing service.</p>
+ *
+ *
+ * @example To enable an Availability Zone for a load balancer
+ * ```javascript
+ * // This example adds the specified Availability Zone to the specified load balancer.
+ * const input = {
+ *   AvailabilityZones: [
+ *     "us-west-2b"
+ *   ],
+ *   LoadBalancerName: "my-load-balancer"
+ * };
+ * const command = new EnableAvailabilityZonesForLoadBalancerCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   AvailabilityZones: [
+ *     "us-west-2a",
+ *     "us-west-2b"
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class EnableAvailabilityZonesForLoadBalancerCommand extends $Command<
-  EnableAvailabilityZonesForLoadBalancerCommandInput,
-  EnableAvailabilityZonesForLoadBalancerCommandOutput,
-  ElasticLoadBalancingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableAvailabilityZonesForLoadBalancerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ElasticLoadBalancingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableAvailabilityZonesForLoadBalancerCommandInput, EnableAvailabilityZonesForLoadBalancerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ElasticLoadBalancingClient";
-    const commandName = "EnableAvailabilityZonesForLoadBalancerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AddAvailabilityZonesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: AddAvailabilityZonesOutput.filterSensitiveLog,
+export class EnableAvailabilityZonesForLoadBalancerCommand extends command<EnableAvailabilityZonesForLoadBalancerCommandInput, EnableAvailabilityZonesForLoadBalancerCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableAvailabilityZonesForLoadBalancer",
+  EnableAvailabilityZonesForLoadBalancer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AddAvailabilityZonesInput;
+      output: AddAvailabilityZonesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: EnableAvailabilityZonesForLoadBalancerCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryEnableAvailabilityZonesForLoadBalancerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<EnableAvailabilityZonesForLoadBalancerCommandOutput> {
-    return deserializeAws_queryEnableAvailabilityZonesForLoadBalancerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableAvailabilityZonesForLoadBalancerCommandInput;
+      output: EnableAvailabilityZonesForLoadBalancerCommandOutput;
+    };
+  };
 }

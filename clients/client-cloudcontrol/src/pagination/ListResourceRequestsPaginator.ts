@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
-import { CloudControl } from "../CloudControl";
 import { CloudControlClient } from "../CloudControlClient";
 import {
   ListResourceRequestsCommand,
   ListResourceRequestsCommandInput,
   ListResourceRequestsCommandOutput,
 } from "../commands/ListResourceRequestsCommand";
-import { CloudControlPaginationConfiguration } from "./Interfaces";
+import type { CloudControlPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: CloudControlClient,
-  input: ListResourceRequestsCommandInput,
-  ...args: any
-): Promise<ListResourceRequestsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListResourceRequestsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: CloudControl,
-  input: ListResourceRequestsCommandInput,
-  ...args: any
-): Promise<ListResourceRequestsCommandOutput> => {
-  // @ts-ignore
-  return await client.listResourceRequests(input, ...args);
-};
-export async function* paginateListResourceRequests(
+export const paginateListResourceRequests: (
   config: CloudControlPaginationConfiguration,
   input: ListResourceRequestsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListResourceRequestsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListResourceRequestsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof CloudControl) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof CloudControlClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected CloudControl | CloudControlClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListResourceRequestsCommandOutput> = createPaginator<
+  CloudControlPaginationConfiguration,
+  ListResourceRequestsCommandInput,
+  ListResourceRequestsCommandOutput
+>(CloudControlClient, ListResourceRequestsCommand, "NextToken", "NextToken", "MaxResults");

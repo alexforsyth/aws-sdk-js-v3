@@ -1,0 +1,159 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetJobRequest, GetJobResponse } from "../models/models_0";
+import { GetJob$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetJobCommand}.
+ */
+export interface GetJobCommandInput extends GetJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetJobCommand}.
+ */
+export interface GetJobCommandOutput extends GetJobResponse, __MetadataBearer {}
+
+/**
+ * Gets a Deadline Cloud job.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, GetJobCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, GetJobCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // GetJobRequest
+ *   farmId: "STRING_VALUE", // required
+ *   queueId: "STRING_VALUE", // required
+ *   jobId: "STRING_VALUE", // required
+ * };
+ * const command = new GetJobCommand(input);
+ * const response = await client.send(command);
+ * // { // GetJobResponse
+ * //   jobId: "STRING_VALUE", // required
+ * //   name: "STRING_VALUE", // required
+ * //   lifecycleStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "UPLOAD_IN_PROGRESS" || "UPLOAD_FAILED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED" || "UPDATE_SUCCEEDED" || "ARCHIVED", // required
+ * //   lifecycleStatusMessage: "STRING_VALUE", // required
+ * //   priority: Number("int"), // required
+ * //   createdAt: new Date("TIMESTAMP"), // required
+ * //   createdBy: "STRING_VALUE", // required
+ * //   updatedAt: new Date("TIMESTAMP"),
+ * //   updatedBy: "STRING_VALUE",
+ * //   startedAt: new Date("TIMESTAMP"),
+ * //   endedAt: new Date("TIMESTAMP"),
+ * //   taskRunStatus: "PENDING" || "READY" || "ASSIGNED" || "STARTING" || "SCHEDULED" || "INTERRUPTING" || "RUNNING" || "SUSPENDED" || "CANCELED" || "FAILED" || "SUCCEEDED" || "NOT_COMPATIBLE",
+ * //   targetTaskRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ * //   taskRunStatusCounts: { // TaskRunStatusCounts
+ * //     "<keys>": Number("int"),
+ * //   },
+ * //   taskFailureRetryCount: Number("int"),
+ * //   storageProfileId: "STRING_VALUE",
+ * //   maxFailedTasksCount: Number("int"),
+ * //   maxRetriesPerTask: Number("int"),
+ * //   parameters: { // JobParameters
+ * //     "<keys>": { // JobParameter Union: only one key present
+ * //       int: "STRING_VALUE",
+ * //       float: "STRING_VALUE",
+ * //       string: "STRING_VALUE",
+ * //       path: "STRING_VALUE",
+ * //       bool: "STRING_VALUE",
+ * //       rangeExpr: "STRING_VALUE",
+ * //       stringList: [ // ParameterStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       pathList: [ // PathStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       intList: [ // IntStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       floatList: [ // FloatStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       boolList: [ // BooleanStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       intListList: [ // IntStringListList
+ * //         [ // NestedIntStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       ],
+ * //     },
+ * //   },
+ * //   attachments: { // Attachments
+ * //     manifests: [ // ManifestPropertiesList // required
+ * //       { // ManifestProperties
+ * //         fileSystemLocationName: "STRING_VALUE",
+ * //         rootPath: "STRING_VALUE", // required
+ * //         rootPathFormat: "windows" || "posix", // required
+ * //         outputRelativeDirectories: [ // OutputRelativeDirectoriesList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         inputManifestPath: "STRING_VALUE",
+ * //         inputManifestHash: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     fileSystem: "COPIED" || "VIRTUAL",
+ * //   },
+ * //   description: "STRING_VALUE",
+ * //   maxWorkerCount: Number("int"),
+ * //   sourceJobId: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param GetJobCommandInput - {@link GetJobCommandInput}
+ * @returns {@link GetJobCommandOutput}
+ * @see {@link GetJobCommandInput} for command's `input` shape.
+ * @see {@link GetJobCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class GetJobCommand extends command<GetJobCommandInput, GetJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetJob",
+  GetJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetJobRequest;
+      output: GetJobResponse;
+    };
+    sdk: {
+      input: GetJobCommandInput;
+      output: GetJobCommandOutput;
+    };
+  };
+}

@@ -1,95 +1,110 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteOutboundConnectionRequest, DeleteOutboundConnectionResponse } from "../models/models_0";
-import { OpenSearchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OpenSearchClient";
-import {
-  deserializeAws_restJson1DeleteOutboundConnectionCommand,
-  serializeAws_restJson1DeleteOutboundConnectionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteOutboundConnectionRequest, DeleteOutboundConnectionResponse } from "../models/models_0";
+import { DeleteOutboundConnection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteOutboundConnectionCommand}.
+ */
 export interface DeleteOutboundConnectionCommandInput extends DeleteOutboundConnectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteOutboundConnectionCommand}.
+ */
 export interface DeleteOutboundConnectionCommandOutput extends DeleteOutboundConnectionResponse, __MetadataBearer {}
 
 /**
- * <p>Allows the local domain owner to delete an existing outbound cross-cluster connection.</p>
+ * <p>Allows the source Amazon OpenSearch Service domain owner to delete an existing
+ *             outbound cross-cluster search connection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html">Cross-cluster search for Amazon OpenSearch Service</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OpenSearchClient, DeleteOutboundConnectionCommand } from "@aws-sdk/client-opensearch"; // ES Modules import
  * // const { OpenSearchClient, DeleteOutboundConnectionCommand } = require("@aws-sdk/client-opensearch"); // CommonJS import
+ * // import type { OpenSearchClientConfig } from "@aws-sdk/client-opensearch";
+ * const config = {}; // type is OpenSearchClientConfig
  * const client = new OpenSearchClient(config);
+ * const input = { // DeleteOutboundConnectionRequest
+ *   ConnectionId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteOutboundConnectionCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteOutboundConnectionResponse
+ * //   Connection: { // OutboundConnection
+ * //     LocalDomainInfo: { // DomainInformationContainer
+ * //       AWSDomainInformation: { // AWSDomainInformation
+ * //         OwnerId: "STRING_VALUE",
+ * //         DomainName: "STRING_VALUE", // required
+ * //         Region: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     RemoteDomainInfo: {
+ * //       AWSDomainInformation: {
+ * //         OwnerId: "STRING_VALUE",
+ * //         DomainName: "STRING_VALUE", // required
+ * //         Region: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     ConnectionId: "STRING_VALUE",
+ * //     ConnectionAlias: "STRING_VALUE",
+ * //     ConnectionStatus: { // OutboundConnectionStatus
+ * //       StatusCode: "VALIDATING" || "VALIDATION_FAILED" || "PENDING_ACCEPTANCE" || "APPROVED" || "PROVISIONING" || "ACTIVE" || "REJECTING" || "REJECTED" || "DELETING" || "DELETED",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     ConnectionMode: "DIRECT" || "VPC_ENDPOINT",
+ * //     ConnectionProperties: { // ConnectionProperties
+ * //       Endpoint: "STRING_VALUE",
+ * //       CrossClusterSearch: { // CrossClusterSearchConnectionProperties
+ * //         SkipUnavailable: "ENABLED" || "DISABLED",
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteOutboundConnectionCommandInput - {@link DeleteOutboundConnectionCommandInput}
+ * @returns {@link DeleteOutboundConnectionCommandOutput}
  * @see {@link DeleteOutboundConnectionCommandInput} for command's `input` shape.
  * @see {@link DeleteOutboundConnectionCommandOutput} for command's `response` shape.
- * @see {@link OpenSearchClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link OpenSearchClientResolvedConfig | config} for OpenSearchClient's `config` shape.
  *
+ * @throws {@link DisabledOperationException} (client fault)
+ *  <p>An error occured because the client wanted to access an unsupported operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An exception for accessing or deleting a resource that doesn't exist.</p>
+ *
+ * @throws {@link OpenSearchServiceException}
+ * <p>Base exception class for all service exceptions from OpenSearch service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteOutboundConnectionCommand extends $Command<
-  DeleteOutboundConnectionCommandInput,
-  DeleteOutboundConnectionCommandOutput,
-  OpenSearchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteOutboundConnectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OpenSearchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteOutboundConnectionCommandInput, DeleteOutboundConnectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OpenSearchClient";
-    const commandName = "DeleteOutboundConnectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteOutboundConnectionRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteOutboundConnectionResponse.filterSensitiveLog,
+export class DeleteOutboundConnectionCommand extends command<DeleteOutboundConnectionCommandInput, DeleteOutboundConnectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteOutboundConnection",
+  DeleteOutboundConnection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteOutboundConnectionRequest;
+      output: DeleteOutboundConnectionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteOutboundConnectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteOutboundConnectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteOutboundConnectionCommandOutput> {
-    return deserializeAws_restJson1DeleteOutboundConnectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteOutboundConnectionCommandInput;
+      output: DeleteOutboundConnectionCommandOutput;
+    };
+  };
 }

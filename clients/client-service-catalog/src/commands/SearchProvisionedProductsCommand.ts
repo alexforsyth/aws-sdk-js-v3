@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SearchProvisionedProductsInput, SearchProvisionedProductsOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1SearchProvisionedProductsCommand,
-  serializeAws_json1_1SearchProvisionedProductsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchProvisionedProductsInput, SearchProvisionedProductsOutput } from "../models/models_0";
+import { SearchProvisionedProducts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchProvisionedProductsCommand}.
+ */
 export interface SearchProvisionedProductsCommandInput extends SearchProvisionedProductsInput {}
+/**
+ * @public
+ *
+ * The output of {@link SearchProvisionedProductsCommand}.
+ */
 export interface SearchProvisionedProductsCommandOutput extends SearchProvisionedProductsOutput, __MetadataBearer {}
 
 /**
@@ -28,71 +29,92 @@ export interface SearchProvisionedProductsCommandOutput extends SearchProvisione
  * ```javascript
  * import { ServiceCatalogClient, SearchProvisionedProductsCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, SearchProvisionedProductsCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // SearchProvisionedProductsInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   AccessLevelFilter: { // AccessLevelFilter
+ *     Key: "Account" || "Role" || "User",
+ *     Value: "STRING_VALUE",
+ *   },
+ *   Filters: { // ProvisionedProductFilters
+ *     "<keys>": [ // ProvisionedProductViewFilterValues
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   SortBy: "STRING_VALUE",
+ *   SortOrder: "ASCENDING" || "DESCENDING",
+ *   PageSize: Number("int"),
+ *   PageToken: "STRING_VALUE",
+ * };
  * const command = new SearchProvisionedProductsCommand(input);
  * const response = await client.send(command);
+ * // { // SearchProvisionedProductsOutput
+ * //   ProvisionedProducts: [ // ProvisionedProductAttributes
+ * //     { // ProvisionedProductAttribute
+ * //       Name: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Type: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Status: "AVAILABLE" || "UNDER_CHANGE" || "TAINTED" || "ERROR" || "PLAN_IN_PROGRESS",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       IdempotencyToken: "STRING_VALUE",
+ * //       LastRecordId: "STRING_VALUE",
+ * //       LastProvisioningRecordId: "STRING_VALUE",
+ * //       LastSuccessfulProvisioningRecordId: "STRING_VALUE",
+ * //       Tags: [ // Tags
+ * //         { // Tag
+ * //           Key: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       PhysicalId: "STRING_VALUE",
+ * //       ProductId: "STRING_VALUE",
+ * //       ProductName: "STRING_VALUE",
+ * //       ProvisioningArtifactId: "STRING_VALUE",
+ * //       ProvisioningArtifactName: "STRING_VALUE",
+ * //       UserArn: "STRING_VALUE",
+ * //       UserArnSession: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   TotalResultsCount: Number("int"),
+ * //   NextPageToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchProvisionedProductsCommandInput - {@link SearchProvisionedProductsCommandInput}
+ * @returns {@link SearchProvisionedProductsCommandOutput}
  * @see {@link SearchProvisionedProductsCommandInput} for command's `input` shape.
  * @see {@link SearchProvisionedProductsCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class SearchProvisionedProductsCommand extends $Command<
-  SearchProvisionedProductsCommandInput,
-  SearchProvisionedProductsCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchProvisionedProductsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchProvisionedProductsCommandInput, SearchProvisionedProductsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "SearchProvisionedProductsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchProvisionedProductsInput.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchProvisionedProductsOutput.filterSensitiveLog,
+export class SearchProvisionedProductsCommand extends command<SearchProvisionedProductsCommandInput, SearchProvisionedProductsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchProvisionedProducts",
+  SearchProvisionedProducts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchProvisionedProductsInput;
+      output: SearchProvisionedProductsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchProvisionedProductsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1SearchProvisionedProductsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<SearchProvisionedProductsCommandOutput> {
-    return deserializeAws_json1_1SearchProvisionedProductsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchProvisionedProductsCommandInput;
+      output: SearchProvisionedProductsCommandOutput;
+    };
+  };
 }

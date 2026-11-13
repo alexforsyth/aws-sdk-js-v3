@@ -1,98 +1,88 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { DeletePlaceIndexRequest, DeletePlaceIndexResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeletePlaceIndexCommand,
-  serializeAws_restJson1DeletePlaceIndexCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeletePlaceIndexRequest, DeletePlaceIndexResponse } from "../models/models_0";
+import { DeletePlaceIndex$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeletePlaceIndexCommand}.
+ */
 export interface DeletePlaceIndexCommandInput extends DeletePlaceIndexRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeletePlaceIndexCommand}.
+ */
 export interface DeletePlaceIndexCommandOutput extends DeletePlaceIndexResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a place index resource from your AWS account.</p>
- *          <note>
- *             <p>This operation deletes the resource permanently.</p>
- *          </note>
+ * <important> <p>This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.</p> <ul> <li> <p> <code>DeletePlaceIndex</code> is part of a previous Amazon Location Service Places API (version 1) which has been superseded by a more intuitive, powerful, and complete API (version 2).</p> </li> <li> <p>The Places API version 2 has a simplified interface that can be used without creating or managing place index resources.</p> </li> <li> <p>If you are using an Amazon Web Services SDK or the Amazon Web Services CLI, note that the Places API version 2 is found under <code>geo-places</code> or <code>geo_places</code>, not under <code>location</code>.</p> </li> <li> <p>Since Grab is not yet fully supported in Places API version 2, we recommend you continue using API version 1 when using Grab.</p> </li> <li> <p>Start your version 2 API journey with the Places V2 <a href="/location/latest/APIReference/API_Operations_Amazon_Location_Service_Places_V2.html">API Reference</a> or the <a href="/location/latest/developerguide/places.html">Developer Guide</a>.</p> </li> </ul> </important> <p>Deletes a place index resource from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LocationClient, DeletePlaceIndexCommand } from "@aws-sdk/client-location"; // ES Modules import
  * // const { LocationClient, DeletePlaceIndexCommand } = require("@aws-sdk/client-location"); // CommonJS import
+ * // import type { LocationClientConfig } from "@aws-sdk/client-location";
+ * const config = {}; // type is LocationClientConfig
  * const client = new LocationClient(config);
+ * const input = { // DeletePlaceIndexRequest
+ *   IndexName: "STRING_VALUE", // required
+ * };
  * const command = new DeletePlaceIndexCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeletePlaceIndexCommandInput - {@link DeletePlaceIndexCommandInput}
+ * @returns {@link DeletePlaceIndexCommandOutput}
  * @see {@link DeletePlaceIndexCommandInput} for command's `input` shape.
  * @see {@link DeletePlaceIndexCommandOutput} for command's `response` shape.
- * @see {@link LocationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link LocationClientResolvedConfig | config} for LocationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource that you've entered was not found in your AWS account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to meet the constraints specified by the AWS service. </p>
+ *
+ * @throws {@link LocationServiceException}
+ * <p>Base exception class for all service exceptions from Location service.</p>
+ *
+ *
+ * @public
  */
-export class DeletePlaceIndexCommand extends $Command<
-  DeletePlaceIndexCommandInput,
-  DeletePlaceIndexCommandOutput,
-  LocationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeletePlaceIndexCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LocationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeletePlaceIndexCommandInput, DeletePlaceIndexCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LocationClient";
-    const commandName = "DeletePlaceIndexCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeletePlaceIndexRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeletePlaceIndexResponse.filterSensitiveLog,
+export class DeletePlaceIndexCommand extends command<DeletePlaceIndexCommandInput, DeletePlaceIndexCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeletePlaceIndex",
+  DeletePlaceIndex$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeletePlaceIndexRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeletePlaceIndexCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeletePlaceIndexCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeletePlaceIndexCommandOutput> {
-    return deserializeAws_restJson1DeletePlaceIndexCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeletePlaceIndexCommandInput;
+      output: DeletePlaceIndexCommandOutput;
+    };
+  };
 }

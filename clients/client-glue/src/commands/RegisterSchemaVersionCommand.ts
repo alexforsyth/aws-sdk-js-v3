@@ -1,97 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { RegisterSchemaVersionInput, RegisterSchemaVersionResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1RegisterSchemaVersionCommand,
-  serializeAws_json1_1RegisterSchemaVersionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterSchemaVersionInput, RegisterSchemaVersionResponse } from "../models/models_3";
+import { RegisterSchemaVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterSchemaVersionCommand}.
+ */
 export interface RegisterSchemaVersionCommandInput extends RegisterSchemaVersionInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterSchemaVersionCommand}.
+ */
 export interface RegisterSchemaVersionCommandOutput extends RegisterSchemaVersionResponse, __MetadataBearer {}
 
 /**
  * <p>Adds a new version to the existing schema. Returns an error if new version of schema does not meet the compatibility requirements of the schema set. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry.</p>
  *          <p>If this is the first schema definition to be registered in the Schema Registry, this API will store the schema version and return immediately. Otherwise, this call has the potential to run longer than other operations due to compatibility modes. You can call the <code>GetSchemaVersion</code> API with the <code>SchemaVersionId</code> to check compatibility modes.</p>
- * 	        <p>If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.</p>
+ *          <p>If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlueClient, RegisterSchemaVersionCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, RegisterSchemaVersionCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // RegisterSchemaVersionInput
+ *   SchemaId: { // SchemaId
+ *     SchemaArn: "STRING_VALUE",
+ *     SchemaName: "STRING_VALUE",
+ *     RegistryName: "STRING_VALUE",
+ *   },
+ *   SchemaDefinition: "STRING_VALUE", // required
+ * };
  * const command = new RegisterSchemaVersionCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterSchemaVersionResponse
+ * //   SchemaVersionId: "STRING_VALUE",
+ * //   VersionNumber: Number("long"),
+ * //   Status: "AVAILABLE" || "PENDING" || "FAILURE" || "DELETING",
+ * // };
+ *
  * ```
  *
+ * @param RegisterSchemaVersionCommandInput - {@link RegisterSchemaVersionCommandInput}
+ * @returns {@link RegisterSchemaVersionCommandOutput}
  * @see {@link RegisterSchemaVersionCommandInput} for command's `input` shape.
  * @see {@link RegisterSchemaVersionCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>Two processes are trying to modify a resource simultaneously.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterSchemaVersionCommand extends $Command<
-  RegisterSchemaVersionCommandInput,
-  RegisterSchemaVersionCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterSchemaVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterSchemaVersionCommandInput, RegisterSchemaVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "RegisterSchemaVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterSchemaVersionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterSchemaVersionResponse.filterSensitiveLog,
+export class RegisterSchemaVersionCommand extends command<RegisterSchemaVersionCommandInput, RegisterSchemaVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterSchemaVersion",
+  RegisterSchemaVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterSchemaVersionInput;
+      output: RegisterSchemaVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterSchemaVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RegisterSchemaVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterSchemaVersionCommandOutput> {
-    return deserializeAws_json1_1RegisterSchemaVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterSchemaVersionCommandInput;
+      output: RegisterSchemaVersionCommandOutput;
+    };
+  };
 }

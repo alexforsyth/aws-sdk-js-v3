@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { GetResourcePoliciesRequest, GetResourcePoliciesResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1GetResourcePoliciesCommand,
-  serializeAws_json1_1GetResourcePoliciesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourcePoliciesRequest, GetResourcePoliciesResponse } from "../models/models_2";
+import { GetResourcePolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourcePoliciesCommand}.
+ */
 export interface GetResourcePoliciesCommandInput extends GetResourcePoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourcePoliciesCommand}.
+ */
 export interface GetResourcePoliciesCommandOutput extends GetResourcePoliciesResponse, __MetadataBearer {}
 
 /**
@@ -33,68 +34,68 @@ export interface GetResourcePoliciesCommandOutput extends GetResourcePoliciesRes
  * ```javascript
  * import { GlueClient, GetResourcePoliciesCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, GetResourcePoliciesCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // GetResourcePoliciesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new GetResourcePoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // GetResourcePoliciesResponse
+ * //   GetResourcePoliciesResponseList: [ // GetResourcePoliciesResponseList
+ * //     { // GluePolicy
+ * //       PolicyInJson: "STRING_VALUE",
+ * //       PolicyHash: "STRING_VALUE",
+ * //       CreateTime: new Date("TIMESTAMP"),
+ * //       UpdateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetResourcePoliciesCommandInput - {@link GetResourcePoliciesCommandInput}
+ * @returns {@link GetResourcePoliciesCommandOutput}
  * @see {@link GetResourcePoliciesCommandInput} for command's `input` shape.
  * @see {@link GetResourcePoliciesCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link GlueEncryptionException} (client fault)
+ *  <p>An encryption operation failed.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class GetResourcePoliciesCommand extends $Command<
-  GetResourcePoliciesCommandInput,
-  GetResourcePoliciesCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResourcePoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResourcePoliciesCommandInput, GetResourcePoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "GetResourcePoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResourcePoliciesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetResourcePoliciesResponse.filterSensitiveLog,
+export class GetResourcePoliciesCommand extends command<GetResourcePoliciesCommandInput, GetResourcePoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourcePolicies",
+  GetResourcePolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourcePoliciesRequest;
+      output: GetResourcePoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResourcePoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetResourcePoliciesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetResourcePoliciesCommandOutput> {
-    return deserializeAws_json1_1GetResourcePoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResourcePoliciesCommandInput;
+      output: GetResourcePoliciesCommandOutput;
+    };
+  };
 }

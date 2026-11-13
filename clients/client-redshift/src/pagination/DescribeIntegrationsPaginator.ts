@@ -1,0 +1,24 @@
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
+
+import {
+  DescribeIntegrationsCommand,
+  DescribeIntegrationsCommandInput,
+  DescribeIntegrationsCommandOutput,
+} from "../commands/DescribeIntegrationsCommand";
+import { RedshiftClient } from "../RedshiftClient";
+import type { RedshiftPaginationConfiguration } from "./Interfaces";
+
+/**
+ * @public
+ */
+export const paginateDescribeIntegrations: (
+  config: RedshiftPaginationConfiguration,
+  input: DescribeIntegrationsCommandInput,
+  ...rest: any[]
+) => Paginator<DescribeIntegrationsCommandOutput> = createPaginator<
+  RedshiftPaginationConfiguration,
+  DescribeIntegrationsCommandInput,
+  DescribeIntegrationsCommandOutput
+>(RedshiftClient, DescribeIntegrationsCommand, "Marker", "Marker", "MaxRecords");

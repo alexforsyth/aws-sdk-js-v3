@@ -1,101 +1,85 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { RegisterPublisherInput, RegisterPublisherOutput } from "../models/models_0";
-import {
-  deserializeAws_queryRegisterPublisherCommand,
-  serializeAws_queryRegisterPublisherCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RegisterPublisherInput, RegisterPublisherOutput } from "../models/models_0";
+import { RegisterPublisher$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RegisterPublisherCommand}.
+ */
 export interface RegisterPublisherCommandInput extends RegisterPublisherInput {}
+/**
+ * @public
+ *
+ * The output of {@link RegisterPublisherCommand}.
+ */
 export interface RegisterPublisherCommandOutput extends RegisterPublisherOutput, __MetadataBearer {}
 
 /**
- * <p>Registers your account as a publisher of public extensions in the CloudFormation
- *          registry. Public extensions are available for use by all CloudFormation users. This
- *          publisher ID applies to your account in all Amazon Web Services Regions.</p>
- *          <p>For information on requirements for registering as a public extension publisher, see
- *             <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs">Registering your account to publish CloudFormation
- *             extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p>
+ * <p>Registers your account as a publisher of public extensions in the CloudFormation registry.
+ *       Public extensions are available for use by all CloudFormation users. This publisher ID applies to
+ *       your account in all Amazon Web Services Regions.</p>
+ *          <p>For information about requirements for registering as a public extension publisher, see
+ *         <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs">Prerequisite: Registering your account to publish CloudFormation extensions</a> in the
+ *         <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
  *          <p></p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, RegisterPublisherCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, RegisterPublisherCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // RegisterPublisherInput
+ *   AcceptTermsAndConditions: true || false,
+ *   ConnectionArn: "STRING_VALUE",
+ * };
  * const command = new RegisterPublisherCommand(input);
  * const response = await client.send(command);
+ * // { // RegisterPublisherOutput
+ * //   PublisherId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param RegisterPublisherCommandInput - {@link RegisterPublisherCommandInput}
+ * @returns {@link RegisterPublisherCommandOutput}
  * @see {@link RegisterPublisherCommandInput} for command's `input` shape.
  * @see {@link RegisterPublisherCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CFNRegistryException} (client fault)
+ *  <p>An error occurred during a CloudFormation registry operation.</p>
+ *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class RegisterPublisherCommand extends $Command<
-  RegisterPublisherCommandInput,
-  RegisterPublisherCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RegisterPublisherCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RegisterPublisherCommandInput, RegisterPublisherCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "RegisterPublisherCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RegisterPublisherInput.filterSensitiveLog,
-      outputFilterSensitiveLog: RegisterPublisherOutput.filterSensitiveLog,
+export class RegisterPublisherCommand extends command<RegisterPublisherCommandInput, RegisterPublisherCommandOutput>(
+  _ep0,
+  _mw0,
+  "RegisterPublisher",
+  RegisterPublisher$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RegisterPublisherInput;
+      output: RegisterPublisherOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RegisterPublisherCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryRegisterPublisherCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RegisterPublisherCommandOutput> {
-    return deserializeAws_queryRegisterPublisherCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RegisterPublisherCommandInput;
+      output: RegisterPublisherCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import { BatchStopJobRunRequest, BatchStopJobRunResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchStopJobRunCommand,
-  serializeAws_json1_1BatchStopJobRunCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchStopJobRunRequest, BatchStopJobRunResponse } from "../models/models_0";
+import { BatchStopJobRun$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchStopJobRunCommand}.
+ */
 export interface BatchStopJobRunCommandInput extends BatchStopJobRunRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchStopJobRunCommand}.
+ */
 export interface BatchStopJobRunCommandOutput extends BatchStopJobRunResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface BatchStopJobRunCommandOutput extends BatchStopJobRunResponse, _
  * ```javascript
  * import { GlueClient, BatchStopJobRunCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchStopJobRunCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchStopJobRunRequest
+ *   JobName: "STRING_VALUE", // required
+ *   JobRunIds: [ // BatchStopJobRunJobRunIdList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchStopJobRunCommand(input);
  * const response = await client.send(command);
+ * // { // BatchStopJobRunResponse
+ * //   SuccessfulSubmissions: [ // BatchStopJobRunSuccessfulSubmissionList
+ * //     { // BatchStopJobRunSuccessfulSubmission
+ * //       JobName: "STRING_VALUE",
+ * //       JobRunId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Errors: [ // BatchStopJobRunErrorList
+ * //     { // BatchStopJobRunError
+ * //       JobName: "STRING_VALUE",
+ * //       JobRunId: "STRING_VALUE",
+ * //       ErrorDetail: { // ErrorDetail
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchStopJobRunCommandInput - {@link BatchStopJobRunCommandInput}
+ * @returns {@link BatchStopJobRunCommandOutput}
  * @see {@link BatchStopJobRunCommandInput} for command's `input` shape.
  * @see {@link BatchStopJobRunCommandOutput} for command's `response` shape.
- * @see {@link GlueClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchStopJobRunCommand extends $Command<
-  BatchStopJobRunCommandInput,
-  BatchStopJobRunCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchStopJobRunCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchStopJobRunCommandInput, BatchStopJobRunCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchStopJobRunCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchStopJobRunRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: BatchStopJobRunResponse.filterSensitiveLog,
+export class BatchStopJobRunCommand extends command<BatchStopJobRunCommandInput, BatchStopJobRunCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchStopJobRun",
+  BatchStopJobRun$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchStopJobRunRequest;
+      output: BatchStopJobRunResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchStopJobRunCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchStopJobRunCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<BatchStopJobRunCommandOutput> {
-    return deserializeAws_json1_1BatchStopJobRunCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchStopJobRunCommandInput;
+      output: BatchStopJobRunCommandOutput;
+    };
+  };
 }

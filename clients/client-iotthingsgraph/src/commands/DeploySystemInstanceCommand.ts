@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTThingsGraphClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTThingsGraphClient";
-import { DeploySystemInstanceRequest, DeploySystemInstanceResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeploySystemInstanceCommand,
-  serializeAws_json1_1DeploySystemInstanceCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeploySystemInstanceRequest, DeploySystemInstanceResponse } from "../models/models_0";
+import { DeploySystemInstance$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeploySystemInstanceCommand}.
+ */
 export interface DeploySystemInstanceCommandInput extends DeploySystemInstanceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeploySystemInstanceCommand}.
+ */
 export interface DeploySystemInstanceCommandOutput extends DeploySystemInstanceResponse, __MetadataBearer {}
 
 /**
@@ -34,73 +35,80 @@ export interface DeploySystemInstanceCommandOutput extends DeploySystemInstanceR
  *          <p>Since this action creates a Greengrass deployment on the caller's behalf, the calling identity must have write permissions
  *          to the specified Greengrass group. Otherwise, the call will fail with an authorization error.</p>
  *          <p>For information about the artifacts that get added to your Greengrass core device when you use this API, see <a href="https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html">AWS IoT Things Graph and AWS IoT Greengrass</a>.</p>
+ *
+ * @deprecated since: 2022-08-30.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTThingsGraphClient, DeploySystemInstanceCommand } from "@aws-sdk/client-iotthingsgraph"; // ES Modules import
  * // const { IoTThingsGraphClient, DeploySystemInstanceCommand } = require("@aws-sdk/client-iotthingsgraph"); // CommonJS import
+ * // import type { IoTThingsGraphClientConfig } from "@aws-sdk/client-iotthingsgraph";
+ * const config = {}; // type is IoTThingsGraphClientConfig
  * const client = new IoTThingsGraphClient(config);
+ * const input = { // DeploySystemInstanceRequest
+ *   id: "STRING_VALUE",
+ * };
  * const command = new DeploySystemInstanceCommand(input);
  * const response = await client.send(command);
+ * // { // DeploySystemInstanceResponse
+ * //   summary: { // SystemInstanceSummary
+ * //     id: "STRING_VALUE",
+ * //     arn: "STRING_VALUE",
+ * //     status: "NOT_DEPLOYED" || "BOOTSTRAP" || "DEPLOY_IN_PROGRESS" || "DEPLOYED_IN_TARGET" || "UNDEPLOY_IN_PROGRESS" || "FAILED" || "PENDING_DELETE" || "DELETED_IN_TARGET",
+ * //     target: "GREENGRASS" || "CLOUD",
+ * //     greengrassGroupName: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     greengrassGroupId: "STRING_VALUE",
+ * //     greengrassGroupVersionId: "STRING_VALUE",
+ * //   },
+ * //   greengrassDeploymentId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeploySystemInstanceCommandInput - {@link DeploySystemInstanceCommandInput}
+ * @returns {@link DeploySystemInstanceCommandOutput}
  * @see {@link DeploySystemInstanceCommandInput} for command's `input` shape.
  * @see {@link DeploySystemInstanceCommandOutput} for command's `response` shape.
- * @see {@link IoTThingsGraphClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IoTThingsGraphClientResolvedConfig | config} for IoTThingsGraphClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link IoTThingsGraphServiceException}
+ * <p>Base exception class for all service exceptions from IoTThingsGraph service.</p>
+ *
+ *
+ * @public
  */
-export class DeploySystemInstanceCommand extends $Command<
-  DeploySystemInstanceCommandInput,
-  DeploySystemInstanceCommandOutput,
-  IoTThingsGraphClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeploySystemInstanceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTThingsGraphClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeploySystemInstanceCommandInput, DeploySystemInstanceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTThingsGraphClient";
-    const commandName = "DeploySystemInstanceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeploySystemInstanceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeploySystemInstanceResponse.filterSensitiveLog,
+export class DeploySystemInstanceCommand extends command<DeploySystemInstanceCommandInput, DeploySystemInstanceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeploySystemInstance",
+  DeploySystemInstance$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeploySystemInstanceRequest;
+      output: DeploySystemInstanceResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeploySystemInstanceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeploySystemInstanceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeploySystemInstanceCommandOutput> {
-    return deserializeAws_json1_1DeploySystemInstanceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeploySystemInstanceCommandInput;
+      output: DeploySystemInstanceCommandOutput;
+    };
+  };
 }

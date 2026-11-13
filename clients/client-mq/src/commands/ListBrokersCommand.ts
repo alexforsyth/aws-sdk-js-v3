@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListBrokersRequest, ListBrokersResponse } from "../models/models_0";
-import { MqClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MqClient";
-import {
-  deserializeAws_restJson1ListBrokersCommand,
-  serializeAws_restJson1ListBrokersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBrokersRequest, ListBrokersResponse } from "../models/models_0";
+import { ListBrokers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBrokersCommand}.
+ */
 export interface ListBrokersCommandInput extends ListBrokersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListBrokersCommand}.
+ */
 export interface ListBrokersCommandOutput extends ListBrokersResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,69 @@ export interface ListBrokersCommandOutput extends ListBrokersResponse, __Metadat
  * ```javascript
  * import { MqClient, ListBrokersCommand } from "@aws-sdk/client-mq"; // ES Modules import
  * // const { MqClient, ListBrokersCommand } = require("@aws-sdk/client-mq"); // CommonJS import
+ * // import type { MqClientConfig } from "@aws-sdk/client-mq";
+ * const config = {}; // type is MqClientConfig
  * const client = new MqClient(config);
+ * const input = { // ListBrokersRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListBrokersCommand(input);
  * const response = await client.send(command);
+ * // { // ListBrokersResponse
+ * //   BrokerSummaries: [ // __listOfBrokerSummary
+ * //     { // BrokerSummary
+ * //       BrokerArn: "STRING_VALUE",
+ * //       BrokerId: "STRING_VALUE",
+ * //       BrokerName: "STRING_VALUE",
+ * //       BrokerState: "CREATION_IN_PROGRESS" || "CREATION_FAILED" || "DELETION_IN_PROGRESS" || "RUNNING" || "REBOOT_IN_PROGRESS" || "CRITICAL_ACTION_REQUIRED" || "REPLICA",
+ * //       Created: new Date("TIMESTAMP"),
+ * //       DeploymentMode: "SINGLE_INSTANCE" || "ACTIVE_STANDBY_MULTI_AZ" || "CLUSTER_MULTI_AZ", // required
+ * //       EngineType: "ACTIVEMQ" || "RABBITMQ", // required
+ * //       HostInstanceType: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBrokersCommandInput - {@link ListBrokersCommandInput}
+ * @returns {@link ListBrokersCommandOutput}
  * @see {@link ListBrokersCommandInput} for command's `input` shape.
  * @see {@link ListBrokersCommandOutput} for command's `response` shape.
- * @see {@link MqClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link MqClientResolvedConfig | config} for MqClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link MqServiceException}
+ * <p>Base exception class for all service exceptions from Mq service.</p>
+ *
+ *
+ * @public
  */
-export class ListBrokersCommand extends $Command<
-  ListBrokersCommandInput,
-  ListBrokersCommandOutput,
-  MqClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBrokersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MqClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBrokersCommandInput, ListBrokersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MqClient";
-    const commandName = "ListBrokersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBrokersRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListBrokersResponse.filterSensitiveLog,
+export class ListBrokersCommand extends command<ListBrokersCommandInput, ListBrokersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBrokers",
+  ListBrokers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBrokersRequest;
+      output: ListBrokersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBrokersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBrokersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBrokersCommandOutput> {
-    return deserializeAws_restJson1ListBrokersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBrokersCommandInput;
+      output: ListBrokersCommandOutput;
+    };
+  };
 }

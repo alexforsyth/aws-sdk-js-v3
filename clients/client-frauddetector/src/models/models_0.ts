@@ -1,2729 +1,2801 @@
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
+// smithy-typescript generated code
+import type {
+  AsyncJobStatus,
+  DataSource,
+  DataType,
+  DetectorVersionStatus,
+  EventIngestion,
+  Language,
+  ListUpdateMode,
+  ModelEndpointStatus,
+  ModelInputDataFormat,
+  ModelOutputDataFormat,
+  ModelSource,
+  ModelTypeEnum,
+  ModelVersionStatus,
+  RuleExecutionMode,
+  TrainingDataSourceEnum,
+  UnlabeledEventsTreatment,
+} from "./enums";
 
 /**
- * <p>An exception indicating Amazon Fraud Detector does not have the needed permissions. This can occur if you submit a request, such as <code>PutExternalModel</code>, that specifies a role that is not in your account.</p>
+ * <p>The log odds metric details.</p>
+ *          <p>Account Takeover Insights (ATI) model uses event variables from the login data you
+ *             provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address.
+ *             In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
+ * @public
  */
-export interface AccessDeniedException extends __SmithyException, $MetadataBearer {
-  name: "AccessDeniedException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace AccessDeniedException {
+export interface AggregatedLogOddsMetric {
   /**
-   * @internal
+   * <p>
+   *             The names of all the variables.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
-    ...obj,
-  });
+  variableNames: string[] | undefined;
+
+  /**
+   * <p>
+   *             The relative importance of the variables in the list to the other event variable.
+   *         </p>
+   * @public
+   */
+  aggregatedVariablesImportance: number | undefined;
 }
 
-export enum AsyncJobStatus {
-  CANCELED = "CANCELED",
-  CANCEL_IN_PROGRESS = "CANCEL_IN_PROGRESS",
-  COMPLETE = "COMPLETE",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  IN_PROGRESS_INITIALIZING = "IN_PROGRESS_INITIALIZING",
+/**
+ * <p>
+ *             The details of the impact of aggregated variables on the prediction score. </p>
+ *          <p>Account Takeover Insights (ATI) model  uses the login data you
+ *             provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, the model might calculate the number of times an user has logged in using the same IP address.
+ *             In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
+ * @public
+ */
+export interface AggregatedVariablesImpactExplanation {
+  /**
+   * <p>
+   *             The names of all the event variables that were used to derive the aggregated variables.
+   *         </p>
+   * @public
+   */
+  eventVariableNames?: string[] | undefined;
+
+  /**
+   * <p>
+   *             The relative impact of the aggregated variables in terms of magnitude on the prediction scores.
+   *         </p>
+   * @public
+   */
+  relativeImpact?: string | undefined;
+
+  /**
+   * <p>
+   *             The raw, uninterpreted value represented as log-odds of the fraud.  These values are usually between -10 to +10, but range from -infinity to +infinity.</p>
+   *          <ul>
+   *             <li>
+   *                <p>A positive value indicates that the variables drove the risk score up.</p>
+   *             </li>
+   *             <li>
+   *                <p>A negative value indicates that the variables drove the risk score down.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  logOddsImpact?: number | undefined;
+}
+
+/**
+ * <p>The details of the relative importance of the aggregated variables.</p>
+ *          <p>Account Takeover Insights (ATI) model uses event variables from the login data you
+ *             provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address.
+ *             In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
+ * @public
+ */
+export interface AggregatedVariablesImportanceMetrics {
+  /**
+   * <p>
+   *             List of variables' metrics.
+   *         </p>
+   * @public
+   */
+  logOddsMetrics?: AggregatedLogOddsMetric[] | undefined;
+}
+
+/**
+ * <p>
+ *             The metadata of a list.
+ *         </p>
+ * @public
+ */
+export interface AllowDenyList {
+  /**
+   * <p>
+   *             The name of the list.
+   *         </p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>
+   *             The description of the list.
+   *         </p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>
+   *             The variable type of the list.
+   *         </p>
+   * @public
+   */
+  variableType?: string | undefined;
+
+  /**
+   * <p>
+   *             The time the list was created.
+   *         </p>
+   * @public
+   */
+  createdTime?: string | undefined;
+
+  /**
+   * <p>
+   *             The time the list was last updated.
+   *         </p>
+   * @public
+   */
+  updatedTime?: string | undefined;
+
+  /**
+   * <p>
+   *             The ARN of the list.
+   *         </p>
+   * @public
+   */
+  arn?: string | undefined;
+}
+
+/**
+ * <p>
+ *             The Account Takeover Insights (ATI) model performance metrics data points.
+ *         </p>
+ * @public
+ */
+export interface ATIMetricDataPoint {
+  /**
+   * <p>
+   *           The challenge rate. This indicates the percentage of login events that the model recommends to challenge such as
+   *           one-time password, multi-factor authentication, and investigations.
+   *         </p>
+   * @public
+   */
+  cr?: number | undefined;
+
+  /**
+   * <p>
+   *             The anomaly discovery rate. This metric quantifies the percentage of anomalies that can be detected by the model at the selected score threshold.
+   *             A lower score threshold increases the percentage of anomalies captured by the model, but would also require challenging a larger percentage of
+   *             login events, leading to a higher customer friction.
+   *         </p>
+   * @public
+   */
+  adr?: number | undefined;
+
+  /**
+   * <p>
+   *             The model's threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is
+   *             labeled as fraud.
+   *         </p>
+   * @public
+   */
+  threshold?: number | undefined;
+
+  /**
+   * <p>
+   *             The account takeover discovery rate. This metric quantifies the percentage of account compromise events that can be detected by the model at the selected score threshold.
+   *             This metric is only available if 50 or more entities with at-least one labeled account takeover event is present in the ingested dataset.
+   *         </p>
+   * @public
+   */
+  atodr?: number | undefined;
+}
+
+/**
+ * <p>
+ *             The Account Takeover Insights (ATI) model performance score.
+ *         </p>
+ * @public
+ */
+export interface ATIModelPerformance {
+  /**
+   * <p>
+   *             The anomaly separation index (ASI) score. This metric summarizes the overall ability of the model to separate anomalous activities from the normal behavior. Depending on the business, a
+   *             large fraction of these anomalous activities can be malicious and correspond to the account takeover attacks. A model with no separability power will have the lowest possible
+   *             ASI score of 0.5, whereas the a model with a high separability power will have the highest possible ASI score of 1.0
+   *         </p>
+   * @public
+   */
+  asi?: number | undefined;
+}
+
+/**
+ * <p>
+ *             The Account Takeover Insights (ATI) model training metric details.
+ *         </p>
+ * @public
+ */
+export interface ATITrainingMetricsValue {
+  /**
+   * <p>
+   *             The model's performance metrics data points.
+   *         </p>
+   * @public
+   */
+  metricDataPoints?: ATIMetricDataPoint[] | undefined;
+
+  /**
+   * <p>
+   *             The model's overall performance scores.
+   *         </p>
+   * @public
+   */
+  modelPerformance?: ATIModelPerformance | undefined;
 }
 
 /**
  * <p>A key and value pair. </p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>A tag key.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>A value assigned to a tag key.</p>
+   * @public
    */
   value: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>A variable in the list of variables for the batch create variable request.</p>
+ * @public
  */
 export interface VariableEntry {
   /**
    * <p>The name of the variable.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The data type of the variable.</p>
+   * @public
    */
-  dataType?: string;
+  dataType?: string | undefined;
 
   /**
    * <p>The data source of the variable.</p>
+   * @public
    */
-  dataSource?: string;
+  dataSource?: string | undefined;
 
   /**
    * <p>The default value of the variable.</p>
+   * @public
    */
-  defaultValue?: string;
+  defaultValue?: string | undefined;
 
   /**
    * <p>The description of the variable.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p>
    *          <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code>
    *          </p>
+   * @public
    */
-  variableType?: string;
+  variableType?: string | undefined;
 }
 
-export namespace VariableEntry {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VariableEntry): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchCreateVariableRequest {
   /**
    * <p>The list of variables for the batch create variable request.</p>
+   * @public
    */
   variableEntries: VariableEntry[] | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace BatchCreateVariableRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateVariableRequest): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
  * <p>Provides the error of the batch create variable API.</p>
+ * @public
  */
 export interface BatchCreateVariableError {
   /**
    * <p>The name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The error code. </p>
+   * @public
    */
-  code?: number;
+  code?: number | undefined;
 
   /**
    * <p>The error message.</p>
+   * @public
    */
-  message?: string;
+  message?: string | undefined;
 }
 
-export namespace BatchCreateVariableError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateVariableError): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchCreateVariableResult {
   /**
    * <p>Provides the errors for the <code>BatchCreateVariable</code> request.</p>
+   * @public
    */
-  errors?: BatchCreateVariableError[];
-}
-
-export namespace BatchCreateVariableResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchCreateVariableResult): any => ({
-    ...obj,
-  });
+  errors?: BatchCreateVariableError[] | undefined;
 }
 
 /**
- * <p>An exception indicating an internal server error.</p>
+ * @public
  */
-export interface InternalServerException extends __SmithyException, $MetadataBearer {
-  name: "InternalServerException";
-  $fault: "server";
-  message: string | undefined;
-}
-
-export namespace InternalServerException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InternalServerException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An exception indicating a throttling error.</p>
- */
-export interface ThrottlingException extends __SmithyException, $MetadataBearer {
-  name: "ThrottlingException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ThrottlingException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ThrottlingException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>An exception indicating a specified value is not allowed.</p>
- */
-export interface ValidationException extends __SmithyException, $MetadataBearer {
-  name: "ValidationException";
-  $fault: "client";
-  message: string | undefined;
-}
-
-export namespace ValidationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ValidationException): any => ({
-    ...obj,
-  });
-}
-
 export interface BatchGetVariableRequest {
   /**
    * <p>The list of variable names to get.</p>
+   * @public
    */
   names: string[] | undefined;
 }
 
-export namespace BatchGetVariableRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchGetVariableRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>Provides the error of the batch get variable API.</p>
+ * @public
  */
 export interface BatchGetVariableError {
   /**
    * <p>The error name. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The error code. </p>
+   * @public
    */
-  code?: number;
+  code?: number | undefined;
 
   /**
    * <p>The error message.</p>
+   * @public
    */
-  message?: string;
-}
-
-export namespace BatchGetVariableError {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchGetVariableError): any => ({
-    ...obj,
-  });
-}
-
-export enum DataSource {
-  EVENT = "EVENT",
-  EXTERNAL_MODEL_SCORE = "EXTERNAL_MODEL_SCORE",
-  MODEL_SCORE = "MODEL_SCORE",
-}
-
-export enum DataType {
-  BOOLEAN = "BOOLEAN",
-  FLOAT = "FLOAT",
-  INTEGER = "INTEGER",
-  STRING = "STRING",
+  message?: string | undefined;
 }
 
 /**
  * <p>The variable.</p>
+ * @public
  */
 export interface Variable {
   /**
    * <p>The name of the variable.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The data type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p>
+   * @public
    */
-  dataType?: DataType | string;
+  dataType?: DataType | undefined;
 
   /**
    * <p>The data source of the variable.</p>
+   * @public
    */
-  dataSource?: DataSource | string;
+  dataSource?: DataSource | undefined;
 
   /**
    * <p>The default value of the variable.</p>
+   * @public
    */
-  defaultValue?: string;
+  defaultValue?: string | undefined;
 
   /**
    * <p>The description of the variable. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The variable type of the variable.</p>
    *          <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code>
    *          </p>
+   * @public
    */
-  variableType?: string;
+  variableType?: string | undefined;
 
   /**
    * <p>The time when variable was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The time when the variable was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The ARN of the variable.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace Variable {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Variable): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface BatchGetVariableResult {
   /**
    * <p>The returned variables.</p>
+   * @public
    */
-  variables?: Variable[];
+  variables?: Variable[] | undefined;
 
   /**
    * <p>The errors from the request.</p>
+   * @public
    */
-  errors?: BatchGetVariableError[];
+  errors?: BatchGetVariableError[] | undefined;
 }
 
-export namespace BatchGetVariableResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchGetVariableResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelBatchImportJobRequest {
   /**
    * <p> The ID of an in-progress batch import job to cancel. </p>
    *          <p>Amazon Fraud Detector will throw an error if the batch import job is in <code>FAILED</code>, <code>CANCELED</code>, or  <code>COMPLETED</code> state.</p>
+   * @public
    */
   jobId: string | undefined;
-}
-
-export namespace CancelBatchImportJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelBatchImportJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CancelBatchImportJobResult {}
-
-export namespace CancelBatchImportJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelBatchImportJobResult): any => ({
-    ...obj,
-  });
 }
 
 /**
- * <p>An exception indicating the specified resource was not found.</p>
+ * @public
  */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  message: string | undefined;
-}
+export interface CancelBatchImportJobResult {}
 
-export namespace ResourceNotFoundException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelBatchPredictionJobRequest {
   /**
    * <p>The ID of the batch prediction job to cancel.</p>
+   * @public
    */
   jobId: string | undefined;
 }
 
-export namespace CancelBatchPredictionJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelBatchPredictionJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CancelBatchPredictionJobResult {}
 
-export namespace CancelBatchPredictionJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CancelBatchPredictionJobResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateBatchImportJobRequest {
   /**
    * <p>The ID of the batch import job. The ID cannot be of a past job, unless the job exists in <code>CREATE_FAILED</code> state.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>The URI that points to the Amazon S3 location of your data file.</p>
+   * @public
    */
   inputPath: string | undefined;
 
   /**
    * <p>The URI that points to the Amazon S3 location for storing your results. </p>
+   * @public
    */
   outputPath: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
-   * <p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file.
-   *          The IAM role must have read and write permissions to both input and output S3 buckets.</p>
+   * <p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file.</p>
+   *          <p>The IAM role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket.
+   *          For more information about bucket permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html">User policy examples</a> in the
+   *          <i>Amazon S3 User Guide</i>.</p>
+   * @public
    */
   iamRoleArn: string | undefined;
 
   /**
    * <p>A collection of key-value pairs associated with this request.  </p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateBatchImportJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBatchImportJobRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateBatchImportJobResult {}
 
-export namespace CreateBatchImportJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBatchImportJobResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateBatchPredictionJobRequest {
   /**
    * <p>The ID of the batch prediction job.</p>
+   * @public
    */
   jobId: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your training file.</p>
+   * @public
    */
   inputPath: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your output file.</p>
+   * @public
    */
   outputPath: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>The name of the detector.</p>
+   * @public
    */
   detectorName: string | undefined;
 
   /**
    * <p>The detector version.</p>
+   * @public
    */
-  detectorVersion?: string;
+  detectorVersion?: string | undefined;
 
   /**
    * <p>The ARN of the IAM role to use for this job request.</p>
+   *          <p>The IAM Role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket.
+   *          For more information about bucket permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html">User policy examples</a> in the
+   *          <i>Amazon S3 User Guide</i>.</p>
+   * @public
    */
   iamRoleArn: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreateBatchPredictionJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBatchPredictionJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateBatchPredictionJobResult {}
-
-export namespace CreateBatchPredictionJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateBatchPredictionJobResult): any => ({
-    ...obj,
-  });
-}
-
-export enum ModelTypeEnum {
-  ONLINE_FRAUD_INSIGHTS = "ONLINE_FRAUD_INSIGHTS",
-  TRANSACTION_FRAUD_INSIGHTS = "TRANSACTION_FRAUD_INSIGHTS",
+  tags?: Tag[] | undefined;
 }
 
 /**
+ * @public
+ */
+export interface CreateBatchPredictionJobResult {}
+
+/**
  * <p>The model version.</p>
+ * @public
  */
 export interface ModelVersion {
   /**
    * <p>The model ID.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
   modelVersionNumber: string | undefined;
 
   /**
    * <p>The model version ARN.</p>
+   * @public
    */
-  arn?: string;
-}
-
-export namespace ModelVersion {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ModelVersion): any => ({
-    ...obj,
-  });
-}
-
-export enum RuleExecutionMode {
-  ALL_MATCHED = "ALL_MATCHED",
-  FIRST_MATCHED = "FIRST_MATCHED",
+  arn?: string | undefined;
 }
 
 /**
  * <p>A rule.</p>
+ * @public
  */
 export interface Rule {
   /**
    * <p>The detector for which the rule is associated.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The rule ID.</p>
+   * @public
    */
   ruleId: string | undefined;
 
   /**
    * <p>The rule version.</p>
+   * @public
    */
   ruleVersion: string | undefined;
 }
 
-export namespace Rule {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Rule): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateDetectorVersionRequest {
   /**
    * <p>The ID of the detector under which you want to create a new version.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The description of the detector version.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The Amazon Sagemaker model endpoints to include in the detector version.</p>
+   * @public
    */
-  externalModelEndpoints?: string[];
+  externalModelEndpoints?: string[] | undefined;
 
   /**
    * <p>The rules to include in the detector version.</p>
+   * @public
    */
   rules: Rule[] | undefined;
 
   /**
    * <p>The model versions to include in the detector version.</p>
+   * @public
    */
-  modelVersions?: ModelVersion[];
+  modelVersions?: ModelVersion[] | undefined;
 
   /**
    * <p>The rule execution mode for the rules included in the detector version.</p>
-   * 	        <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p>
-   * 	        <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p>
-   * 	        <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p>
+   *          <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p>
+   *          <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p>
+   *          <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p>
    *          <p>The default behavior is <code>FIRST_MATCHED</code>.</p>
+   * @public
    */
-  ruleExecutionMode?: RuleExecutionMode | string;
+  ruleExecutionMode?: RuleExecutionMode | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateDetectorVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateDetectorVersionRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum DetectorVersionStatus {
-  ACTIVE = "ACTIVE",
-  DRAFT = "DRAFT",
-  INACTIVE = "INACTIVE",
-}
-
+/**
+ * @public
+ */
 export interface CreateDetectorVersionResult {
   /**
    * <p>The ID for the created version's parent detector.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The ID for the created detector. </p>
+   * @public
    */
-  detectorVersionId?: string;
+  detectorVersionId?: string | undefined;
 
   /**
    * <p>The status of the detector version.</p>
+   * @public
    */
-  status?: DetectorVersionStatus | string;
+  status?: DetectorVersionStatus | undefined;
 }
 
-export namespace CreateDetectorVersionResult {
+/**
+ * @public
+ */
+export interface CreateListRequest {
   /**
-   * @internal
+   * <p>
+   *             The name of the list.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateDetectorVersionResult): any => ({
-    ...obj,
-  });
+  name: string | undefined;
+
+  /**
+   * <p>
+   *             The names of the elements, if providing.  You can also create an empty list and add elements later using the <a href="https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html">UpdateList</a> API.
+   *         </p>
+   * @public
+   */
+  elements?: string[] | undefined;
+
+  /**
+   * <p>
+   *             The variable type of the list. You can only assign the variable type with String data type.  For more information, see
+   *             <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.
+   *         </p>
+   * @public
+   */
+  variableType?: string | undefined;
+
+  /**
+   * <p>
+   *             The description of the list.
+   *         </p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>
+   *             A collection of the key and value pairs.
+   *         </p>
+   * @public
+   */
+  tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface CreateListResult {}
+
+/**
+ * @public
+ */
 export interface CreateModelRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type. </p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The model description. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreateModelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateModelRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateModelResult {}
-
-export namespace CreateModelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateModelResult): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
+ * @public
+ */
+export interface CreateModelResult {}
+
+/**
  * <p>Details for the external events data used for model version training.</p>
+ * @public
  */
 export interface ExternalEventsDetail {
   /**
    * <p>The Amazon S3 bucket location for the data.</p>
+   * @public
    */
   dataLocation: string | undefined;
 
   /**
    * <p>The ARN of the role that provides Amazon Fraud Detector access to the data location.</p>
+   * @public
    */
   dataAccessRoleArn: string | undefined;
 }
 
-export namespace ExternalEventsDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExternalEventsDetail): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The start and stop time of the ingested events.</p>
+ * @public
  */
 export interface IngestedEventsTimeWindow {
   /**
    * <p>Timestamp of the first ingensted event.</p>
+   * @public
    */
   startTime: string | undefined;
 
   /**
    * <p>Timestamp of the final ingested event.</p>
+   * @public
    */
   endTime: string | undefined;
 }
 
-export namespace IngestedEventsTimeWindow {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IngestedEventsTimeWindow): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The details of the ingested event.</p>
+ * @public
  */
 export interface IngestedEventsDetail {
   /**
    * <p>The start and stop time of the ingested events.</p>
+   * @public
    */
   ingestedEventsTimeWindow: IngestedEventsTimeWindow | undefined;
 }
 
-export namespace IngestedEventsDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IngestedEventsDetail): any => ({
-    ...obj,
-  });
-}
-
-export enum UnlabeledEventsTreatment {
-  FRAUD = "FRAUD",
-  IGNORE = "IGNORE",
-  LEGIT = "LEGIT",
-}
-
 /**
  * <p>The label schema.</p>
+ * @public
  */
 export interface LabelSchema {
   /**
-   * <p>The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" => ["0"]</code>, <code>"LEGIT" => ["1"]}</code> or <code>{"FRAUD" => ["false"]</code>, <code>"LEGIT" => ["true"]}</code> or <code>{"FRAUD" => ["fraud", "abuse"]</code>, <code>"LEGIT" => ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label.
+   * <p>The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>\{"FRAUD" => ["0"]</code>, <code>"LEGIT" => ["1"]\}</code> or <code>\{"FRAUD" => ["false"]</code>, <code>"LEGIT" => ["true"]\}</code> or <code>\{"FRAUD" => ["fraud", "abuse"]</code>, <code>"LEGIT" => ["legit", "safe"]\}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label.
    *         </p>
+   * @public
    */
-  labelMapper: { [key: string]: string[] } | undefined;
+  labelMapper?: Record<string, string[]> | undefined;
 
   /**
    * <p>The action to take for unlabeled events.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Use <code>IGNORE</code> if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.</p>
+   *             </li>
+   *             <li>
+   *                <p>Use <code>FRAUD</code>  if you want to categorize all unlabeled events as “Fraud”.  This is recommended when most of the events in your dataset are fraudulent.</p>
+   *             </li>
+   *             <li>
+   *                <p>Use <code>LEGIT</code> if you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.</p>
+   *             </li>
+   *             <li>
+   *                <p>Use <code>AUTO</code> if you want Amazon Fraud Detector to decide how to use the unlabeled data.  This is recommended when there is significant unlabeled events in the dataset.</p>
+   *             </li>
+   *          </ul>
+   *          <p>By default, Amazon Fraud Detector ignores the unlabeled data.</p>
+   * @public
    */
-  unlabeledEventsTreatment?: UnlabeledEventsTreatment | string;
-}
-
-export namespace LabelSchema {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LabelSchema): any => ({
-    ...obj,
-  });
+  unlabeledEventsTreatment?: UnlabeledEventsTreatment | undefined;
 }
 
 /**
  * <p>The training data schema.</p>
+ * @public
  */
 export interface TrainingDataSchema {
   /**
    * <p>The training data schema variables.</p>
+   * @public
    */
   modelVariables: string[] | undefined;
 
   /**
    * <p>The label schema.</p>
+   * @public
    */
-  labelSchema: LabelSchema | undefined;
+  labelSchema?: LabelSchema | undefined;
 }
 
-export namespace TrainingDataSchema {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TrainingDataSchema): any => ({
-    ...obj,
-  });
-}
-
-export enum TrainingDataSourceEnum {
-  EXTERNAL_EVENTS = "EXTERNAL_EVENTS",
-  INGESTED_EVENTS = "INGESTED_EVENTS",
-}
-
+/**
+ * @public
+ */
 export interface CreateModelVersionRequest {
   /**
    * <p>The model ID. </p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The training data source location in Amazon S3. </p>
+   * @public
    */
-  trainingDataSource: TrainingDataSourceEnum | string | undefined;
+  trainingDataSource: TrainingDataSourceEnum | undefined;
 
   /**
    * <p>The training data schema.</p>
+   * @public
    */
   trainingDataSchema: TrainingDataSchema | undefined;
 
   /**
    * <p>Details of the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>
+   * @public
    */
-  externalEventsDetail?: ExternalEventsDetail;
+  externalEventsDetail?: ExternalEventsDetail | undefined;
 
   /**
    * <p>Details of the ingested events data used for model version training. Required if <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>
+   * @public
    */
-  ingestedEventsDetail?: IngestedEventsDetail;
+  ingestedEventsDetail?: IngestedEventsDetail | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateModelVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateModelVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateModelVersionResult {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number of the model version created.</p>
+   * @public
    */
-  modelVersionNumber?: string;
+  modelVersionNumber?: string | undefined;
 
   /**
    * <p>The model version status. </p>
+   * @public
    */
-  status?: string;
+  status?: string | undefined;
 }
 
-export namespace CreateModelVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateModelVersionResult): any => ({
-    ...obj,
-  });
-}
-
-export enum Language {
-  DETECTORPL = "DETECTORPL",
-}
-
+/**
+ * @public
+ */
 export interface CreateRuleRequest {
   /**
    * <p>The rule ID.</p>
+   * @public
    */
   ruleId: string | undefined;
 
   /**
    * <p>The detector ID for the rule's parent detector.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The rule description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The rule expression.</p>
+   * @public
    */
   expression: string | undefined;
 
   /**
    * <p>The language of the rule.</p>
+   * @public
    */
-  language: Language | string | undefined;
+  language: Language | undefined;
 
   /**
    * <p>The outcome or outcomes returned when the rule expression matches.</p>
+   * @public
    */
   outcomes: string[] | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace CreateRuleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRuleRequest): any => ({
-    ...obj,
-    ...(obj.expression && { expression: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateRuleResult {
   /**
    * <p>The created rule.</p>
+   * @public
    */
-  rule?: Rule;
+  rule?: Rule | undefined;
 }
 
-export namespace CreateRuleResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateRuleResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateVariableRequest {
   /**
    * <p>The name of the variable.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
-   * <p>The data type.</p>
+   * <p>The data type of the variable.</p>
+   * @public
    */
-  dataType: DataType | string | undefined;
+  dataType: DataType | undefined;
 
   /**
    * <p>The source of the data.</p>
+   * @public
    */
-  dataSource: DataSource | string | undefined;
+  dataSource: DataSource | undefined;
 
   /**
    * <p>The default value for the variable when no value is received.</p>
+   * @public
    */
   defaultValue: string | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.
    * 				</p>
    *          <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT</code>
    *          </p>
+   * @public
    */
-  variableType?: string;
+  variableType?: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
-}
-
-export namespace CreateVariableRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateVariableRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateVariableResult {}
-
-export namespace CreateVariableResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateVariableResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteBatchImportJobRequest {
-  /**
-   * <p>The ID of the batch import job to delete. </p>
-   */
-  jobId: string | undefined;
-}
-
-export namespace DeleteBatchImportJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBatchImportJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteBatchImportJobResult {}
-
-export namespace DeleteBatchImportJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBatchImportJobResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteBatchPredictionJobRequest {
-  /**
-   * <p>The ID of the batch prediction job to delete.</p>
-   */
-  jobId: string | undefined;
-}
-
-export namespace DeleteBatchPredictionJobRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBatchPredictionJobRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteBatchPredictionJobResult {}
-
-export namespace DeleteBatchPredictionJobResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteBatchPredictionJobResult): any => ({
-    ...obj,
-  });
+  tags?: Tag[] | undefined;
 }
 
 /**
- * <p>An exception indicating there was a conflict during a delete operation.</p>
+ * @public
  */
-export interface ConflictException extends __SmithyException, $MetadataBearer {
-  name: "ConflictException";
-  $fault: "client";
-  message: string | undefined;
-}
+export interface CreateVariableResult {}
 
-export namespace ConflictException {
+/**
+ * @public
+ */
+export interface DeleteBatchImportJobRequest {
   /**
-   * @internal
+   * <p>The ID of the batch import job to delete. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ConflictException): any => ({
-    ...obj,
-  });
+  jobId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteBatchImportJobResult {}
+
+/**
+ * @public
+ */
+export interface DeleteBatchPredictionJobRequest {
+  /**
+   * <p>The ID of the batch prediction job to delete.</p>
+   * @public
+   */
+  jobId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteBatchPredictionJobResult {}
+
+/**
+ * @public
+ */
 export interface DeleteDetectorRequest {
   /**
    * <p>The ID of the detector to delete.</p>
+   * @public
    */
   detectorId: string | undefined;
 }
 
-export namespace DeleteDetectorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDetectorRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDetectorResult {}
 
-export namespace DeleteDetectorResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDetectorResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDetectorVersionRequest {
   /**
    * <p>The ID of the parent detector for the detector version to delete.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The ID of the detector version to delete.</p>
+   * @public
    */
   detectorVersionId: string | undefined;
 }
 
-export namespace DeleteDetectorVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDetectorVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteDetectorVersionResult {}
 
-export namespace DeleteDetectorVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteDetectorVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEntityTypeRequest {
   /**
    * <p>The name of the entity type to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteEntityTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEntityTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEntityTypeResult {}
 
-export namespace DeleteEntityTypeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEntityTypeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventRequest {
   /**
    * <p>The ID of the event to delete.</p>
+   * @public
    */
   eventId: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
-   * <p>Specifies whether or not to delete any predictions associated with the event.</p>
+   * <p>Specifies whether or not to delete any predictions associated with the event. If set to <code>True</code>, </p>
+   * @public
    */
-  deleteAuditHistory?: boolean;
+  deleteAuditHistory?: boolean | undefined;
 }
 
-export namespace DeleteEventRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventResult {}
 
-export namespace DeleteEventResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventsByEventTypeRequest {
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 }
 
-export namespace DeleteEventsByEventTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventsByEventTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventsByEventTypeResult {
   /**
    * <p>Name of event type for which to delete the events.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>The status of the delete request.</p>
+   * @public
    */
-  eventsDeletionStatus?: string;
+  eventsDeletionStatus?: string | undefined;
 }
 
-export namespace DeleteEventsByEventTypeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventsByEventTypeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventTypeRequest {
   /**
    * <p>The name of the event type to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteEventTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteEventTypeResult {}
 
-export namespace DeleteEventTypeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteEventTypeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteExternalModelRequest {
   /**
    * <p>The endpoint of the Amazon Sagemaker model to delete.</p>
+   * @public
    */
   modelEndpoint: string | undefined;
 }
 
-export namespace DeleteExternalModelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteExternalModelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteExternalModelResult {}
 
-export namespace DeleteExternalModelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteExternalModelResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLabelRequest {
   /**
    * <p>The name of the label to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteLabelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteLabelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteLabelResult {}
 
-export namespace DeleteLabelResult {
+/**
+ * @public
+ */
+export interface DeleteListRequest {
   /**
-   * @internal
+   * <p>
+   *             The name of the list to delete.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: DeleteLabelResult): any => ({
-    ...obj,
-  });
+  name: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteListResult {}
+
+/**
+ * @public
+ */
 export interface DeleteModelRequest {
   /**
    * <p>The model ID of the model to delete.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type of the model to delete.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 }
 
-export namespace DeleteModelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteModelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteModelResult {}
 
-export namespace DeleteModelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteModelResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteModelVersionRequest {
   /**
    * <p>The model ID of the model version to delete.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type of the model version to delete.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number of the model version to delete.</p>
+   * @public
    */
   modelVersionNumber: string | undefined;
 }
 
-export namespace DeleteModelVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteModelVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteModelVersionResult {}
 
-export namespace DeleteModelVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteModelVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteOutcomeRequest {
   /**
    * <p>The name of the outcome to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteOutcomeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOutcomeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteOutcomeResult {}
 
-export namespace DeleteOutcomeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteOutcomeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRuleRequest {
   /**
    * <p>A rule.</p>
+   * @public
    */
   rule: Rule | undefined;
 }
 
-export namespace DeleteRuleRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRuleRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteRuleResult {}
 
-export namespace DeleteRuleResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteRuleResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteVariableRequest {
   /**
    * <p>The name of the variable to delete.</p>
+   * @public
    */
   name: string | undefined;
 }
 
-export namespace DeleteVariableRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteVariableRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteVariableResult {}
 
-export namespace DeleteVariableResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteVariableResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDetectorRequest {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The next token from the previous response.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace DescribeDetectorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDetectorRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The summary of the detector version.</p>
+ * @public
  */
 export interface DetectorVersionSummary {
   /**
    * <p>The detector version ID. </p>
+   * @public
    */
-  detectorVersionId?: string;
+  detectorVersionId?: string | undefined;
 
   /**
    * <p>The detector version status. </p>
+   * @public
    */
-  status?: DetectorVersionStatus | string;
+  status?: DetectorVersionStatus | undefined;
 
   /**
    * <p>The detector version description. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Timestamp of when the detector version was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 }
 
-export namespace DetectorVersionSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DetectorVersionSummary): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDetectorResult {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The status and description for each detector version.</p>
+   * @public
    */
-  detectorVersionSummaries?: DetectorVersionSummary[];
+  detectorVersionSummaries?: DetectorVersionSummary[] | undefined;
 
   /**
    * <p>The next token to be used for subsequent requests.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The detector ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace DescribeDetectorResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDetectorResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeModelVersionsRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
-  modelVersionNumber?: string;
+  modelVersionNumber?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The next token from the previous results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace DescribeModelVersionsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeModelVersionsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The message details.</p>
+ * @public
  */
 export interface FieldValidationMessage {
   /**
    * <p>The field name.</p>
+   * @public
    */
-  fieldName?: string;
+  fieldName?: string | undefined;
 
   /**
    * <p>The message ID.</p>
+   * @public
    */
-  identifier?: string;
+  identifier?: string | undefined;
 
   /**
    * <p>The message title.</p>
+   * @public
    */
-  title?: string;
+  title?: string | undefined;
 
   /**
    * <p>The message content.</p>
+   * @public
    */
-  content?: string;
+  content?: string | undefined;
 
   /**
    * <p>The message type.</p>
+   * @public
    */
-  type?: string;
-}
-
-export namespace FieldValidationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FieldValidationMessage): any => ({
-    ...obj,
-  });
+  type?: string | undefined;
 }
 
 /**
  * <p>The message details.</p>
+ * @public
  */
 export interface FileValidationMessage {
   /**
    * <p>The message title.</p>
+   * @public
    */
-  title?: string;
+  title?: string | undefined;
 
   /**
    * <p>The message content.</p>
+   * @public
    */
-  content?: string;
+  content?: string | undefined;
 
   /**
    * <p>The message type.</p>
+   * @public
    */
-  type?: string;
-}
-
-export namespace FileValidationMessage {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: FileValidationMessage): any => ({
-    ...obj,
-  });
+  type?: string | undefined;
 }
 
 /**
- * <p>The model training validation messages.</p>
+ * <p>The model training data validation metrics.</p>
+ * @public
  */
 export interface DataValidationMetrics {
   /**
-   * <p>The file-specific model training validation messages.</p>
+   * <p>The file-specific model training data validation messages.</p>
+   * @public
    */
-  fileLevelMessages?: FileValidationMessage[];
+  fileLevelMessages?: FileValidationMessage[] | undefined;
 
   /**
    * <p>The field-specific model training validation messages.</p>
+   * @public
    */
-  fieldLevelMessages?: FieldValidationMessage[];
-}
-
-export namespace DataValidationMetrics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DataValidationMetrics): any => ({
-    ...obj,
-  });
+  fieldLevelMessages?: FieldValidationMessage[] | undefined;
 }
 
 /**
  * <p>Model performance metrics data points.</p>
+ * @public
  */
 export interface MetricDataPoint {
   /**
    * <p>The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.</p>
+   * @public
    */
-  fpr?: number;
+  fpr?: number | undefined;
 
   /**
    * <p>The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.</p>
+   * @public
    */
-  precision?: number;
+  precision?: number | undefined;
 
   /**
    * <p>The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.</p>
+   * @public
    */
-  tpr?: number;
+  tpr?: number | undefined;
 
   /**
    * <p>The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.</p>
+   * @public
    */
-  threshold?: number;
-}
-
-export namespace MetricDataPoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: MetricDataPoint): any => ({
-    ...obj,
-  });
+  threshold?: number | undefined;
 }
 
 /**
  * <p>The training metric details.</p>
+ * @public
  */
 export interface TrainingMetrics {
   /**
    * <p>The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.</p>
+   * @public
    */
-  auc?: number;
+  auc?: number | undefined;
 
   /**
    * <p>The data points details.</p>
+   * @public
    */
-  metricDataPoints?: MetricDataPoint[];
-}
-
-export namespace TrainingMetrics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TrainingMetrics): any => ({
-    ...obj,
-  });
+  metricDataPoints?: MetricDataPoint[] | undefined;
 }
 
 /**
  * <p>The log odds metric details.</p>
+ * @public
  */
 export interface LogOddsMetric {
   /**
    * <p>The name of the variable.</p>
+   * @public
    */
   variableName: string | undefined;
 
   /**
    * <p>The type of variable.</p>
+   * @public
    */
   variableType: string | undefined;
 
   /**
    * <p>The relative importance of the variable. For more information, see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html">Model variable importance</a>.</p>
+   * @public
    */
   variableImportance: number | undefined;
 }
 
-export namespace LogOddsMetric {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: LogOddsMetric): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The variable importance metrics details.</p>
+ * @public
  */
 export interface VariableImportanceMetrics {
   /**
    * <p>List of variable metrics.</p>
+   * @public
    */
-  logOddsMetrics?: LogOddsMetric[];
-}
-
-export namespace VariableImportanceMetrics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: VariableImportanceMetrics): any => ({
-    ...obj,
-  });
+  logOddsMetrics?: LogOddsMetric[] | undefined;
 }
 
 /**
  * <p>The training result details.</p>
+ * @public
  */
 export interface TrainingResult {
   /**
    * <p>The validation metrics.</p>
+   * @public
    */
-  dataValidationMetrics?: DataValidationMetrics;
+  dataValidationMetrics?: DataValidationMetrics | undefined;
 
   /**
    * <p>The training metric details.</p>
+   * @public
    */
-  trainingMetrics?: TrainingMetrics;
+  trainingMetrics?: TrainingMetrics | undefined;
 
   /**
    * <p>The variable importance metrics.</p>
+   * @public
    */
-  variableImportanceMetrics?: VariableImportanceMetrics;
+  variableImportanceMetrics?: VariableImportanceMetrics | undefined;
 }
 
-export namespace TrainingResult {
+/**
+ * <p>
+ *             The Online Fraud Insights (OFI) model performance metrics data points.
+ *         </p>
+ * @public
+ */
+export interface OFIMetricDataPoint {
   /**
-   * @internal
+   * <p>
+   *             The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: TrainingResult): any => ({
-    ...obj,
-  });
+  fpr?: number | undefined;
+
+  /**
+   * <p>
+   *             The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.
+   *         </p>
+   * @public
+   */
+  precision?: number | undefined;
+
+  /**
+   * <p>
+   *             The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.
+   *         </p>
+   * @public
+   */
+  tpr?: number | undefined;
+
+  /**
+   * <p>
+   *             The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.
+   *         </p>
+   * @public
+   */
+  threshold?: number | undefined;
+}
+
+/**
+ * <p>
+ *             Range of area under curve (auc) expected from the model. A range greater than 0.1 indicates higher model uncertainity.
+ *             A range is the difference between upper and lower bound of auc.
+ *         </p>
+ * @public
+ */
+export interface UncertaintyRange {
+  /**
+   * <p>
+   *             The lower bound value of the area under curve (auc).
+   *         </p>
+   * @public
+   */
+  lowerBoundValue: number | undefined;
+
+  /**
+   * <p>
+   *             The upper bound value of the area under curve (auc).
+   *         </p>
+   * @public
+   */
+  upperBoundValue: number | undefined;
+}
+
+/**
+ * <p>
+ *             The Online Fraud Insights (OFI) model performance score.
+ *         </p>
+ * @public
+ */
+export interface OFIModelPerformance {
+  /**
+   * <p>
+   *             The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds.
+   *         </p>
+   * @public
+   */
+  auc?: number | undefined;
+
+  /**
+   * <p>
+   *             Indicates the range of area under curve (auc) expected from the OFI model. A range greater than 0.1 indicates higher model uncertainity.
+   *         </p>
+   * @public
+   */
+  uncertaintyRange?: UncertaintyRange | undefined;
+}
+
+/**
+ * <p>
+ *             The Online Fraud Insights (OFI) model training metric details.
+ *         </p>
+ * @public
+ */
+export interface OFITrainingMetricsValue {
+  /**
+   * <p>
+   *             The model's performance metrics data points.
+   *         </p>
+   * @public
+   */
+  metricDataPoints?: OFIMetricDataPoint[] | undefined;
+
+  /**
+   * <p>
+   *             The model's overall performance score.
+   *         </p>
+   * @public
+   */
+  modelPerformance?: OFIModelPerformance | undefined;
+}
+
+/**
+ * <p>
+ *             The performance metrics data points for Transaction Fraud Insights (TFI) model.
+ *         </p>
+ * @public
+ */
+export interface TFIMetricDataPoint {
+  /**
+   * <p>
+   *             The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
+   *         </p>
+   * @public
+   */
+  fpr?: number | undefined;
+
+  /**
+   * <p>
+   *             The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.
+   *         </p>
+   * @public
+   */
+  precision?: number | undefined;
+
+  /**
+   * <p>
+   *             The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.
+   *         </p>
+   * @public
+   */
+  tpr?: number | undefined;
+
+  /**
+   * <p>
+   *             The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any
+   *             model score 500 or above is labeled as fraud.
+   *         </p>
+   * @public
+   */
+  threshold?: number | undefined;
+}
+
+/**
+ * <p>
+ *             The Transaction Fraud Insights (TFI) model performance score.
+ *         </p>
+ * @public
+ */
+export interface TFIModelPerformance {
+  /**
+   * <p>
+   *             The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds.
+   *         </p>
+   * @public
+   */
+  auc?: number | undefined;
+
+  /**
+   * <p>
+   *             Indicates the range of area under curve (auc) expected from the TFI model. A range greater than 0.1 indicates higher model uncertainity.
+   *         </p>
+   * @public
+   */
+  uncertaintyRange?: UncertaintyRange | undefined;
+}
+
+/**
+ * <p>
+ *             The Transaction Fraud Insights (TFI) model training metric details.
+ *         </p>
+ * @public
+ */
+export interface TFITrainingMetricsValue {
+  /**
+   * <p>
+   *             The model's performance metrics data points.
+   *         </p>
+   * @public
+   */
+  metricDataPoints?: TFIMetricDataPoint[] | undefined;
+
+  /**
+   * <p>
+   *             The model performance score.
+   *         </p>
+   * @public
+   */
+  modelPerformance?: TFIModelPerformance | undefined;
+}
+
+/**
+ * <p>
+ *             The training metrics details.
+ *         </p>
+ * @public
+ */
+export interface TrainingMetricsV2 {
+  /**
+   * <p>
+   *             The Online Fraud Insights (OFI) model training metric details.
+   *         </p>
+   * @public
+   */
+  ofi?: OFITrainingMetricsValue | undefined;
+
+  /**
+   * <p>
+   *             The Transaction Fraud Insights (TFI) model training metric details.
+   *         </p>
+   * @public
+   */
+  tfi?: TFITrainingMetricsValue | undefined;
+
+  /**
+   * <p>
+   *             The Account Takeover Insights (ATI) model training metric details.
+   *         </p>
+   * @public
+   */
+  ati?: ATITrainingMetricsValue | undefined;
+}
+
+/**
+ * <p>
+ *             The training result details.
+ *         </p>
+ * @public
+ */
+export interface TrainingResultV2 {
+  /**
+   * <p>The model training data validation metrics.</p>
+   * @public
+   */
+  dataValidationMetrics?: DataValidationMetrics | undefined;
+
+  /**
+   * <p>
+   *             The training metric details.
+   *         </p>
+   * @public
+   */
+  trainingMetricsV2?: TrainingMetricsV2 | undefined;
+
+  /**
+   * <p>The variable importance metrics details.</p>
+   * @public
+   */
+  variableImportanceMetrics?: VariableImportanceMetrics | undefined;
+
+  /**
+   * <p>
+   *             The variable importance metrics of the aggregated variables.
+   *         </p>
+   *          <p>Account Takeover Insights (ATI) model uses event variables from the login data you
+   *             provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address.
+   *             In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
+   * @public
+   */
+  aggregatedVariablesImportanceMetrics?: AggregatedVariablesImportanceMetrics | undefined;
 }
 
 /**
  * <p>The details of the model version.</p>
+ * @public
  */
 export interface ModelVersionDetail {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
-  modelVersionNumber?: string;
+  modelVersionNumber?: string | undefined;
 
   /**
    * <p>The status of the model version.</p>
+   * @public
    */
-  status?: string;
+  status?: string | undefined;
 
   /**
    * <p>The model version training data source.</p>
+   * @public
    */
-  trainingDataSource?: TrainingDataSourceEnum | string;
+  trainingDataSource?: TrainingDataSourceEnum | undefined;
 
   /**
    * <p>The training data schema.</p>
+   * @public
    */
-  trainingDataSchema?: TrainingDataSchema;
+  trainingDataSchema?: TrainingDataSchema | undefined;
 
   /**
    * <p>The external events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as  <code>EXTERNAL_EVENTS</code>.</p>
+   * @public
    */
-  externalEventsDetail?: ExternalEventsDetail;
+  externalEventsDetail?: ExternalEventsDetail | undefined;
 
   /**
    * <p>The ingested events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as  <code>INGESTED_EVENTS</code>.</p>
+   * @public
    */
-  ingestedEventsDetail?: IngestedEventsDetail;
+  ingestedEventsDetail?: IngestedEventsDetail | undefined;
 
   /**
    * <p>The training results.</p>
+   * @public
    */
-  trainingResult?: TrainingResult;
+  trainingResult?: TrainingResult | undefined;
 
   /**
    * <p>The timestamp when the model was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The timestamp when the model was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The model version ARN.</p>
+   * @public
    */
-  arn?: string;
-}
+  arn?: string | undefined;
 
-export namespace ModelVersionDetail {
   /**
-   * @internal
+   * <p>
+   *             The training result details. The details include the relative importance of the variables.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ModelVersionDetail): any => ({
-    ...obj,
-  });
+  trainingResultV2?: TrainingResultV2 | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeModelVersionsResult {
   /**
    * <p>The model version details.</p>
+   * @public
    */
-  modelVersionDetails?: ModelVersionDetail[];
+  modelVersionDetails?: ModelVersionDetail[] | undefined;
 
   /**
    * <p>The next token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace DescribeModelVersionsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeModelVersionsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBatchImportJobsRequest {
   /**
    * <p>The ID of the batch import job to get.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for request.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>The next token from the previous request.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace GetBatchImportJobsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBatchImportJobsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The batch import job details.</p>
+ * @public
  */
 export interface BatchImport {
   /**
    * <p>The ID of the batch import job. </p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>The status of the batch import job.</p>
+   * @public
    */
-  status?: AsyncJobStatus | string;
+  status?: AsyncJobStatus | undefined;
 
   /**
    * <p>The reason batch import job failed.</p>
+   * @public
    */
-  failureReason?: string;
+  failureReason?: string | undefined;
 
   /**
    * <p>Timestamp of when the batch import job started.</p>
+   * @public
    */
-  startTime?: string;
+  startTime?: string | undefined;
 
   /**
    * <p>Timestamp of when batch import job completed.</p>
+   * @public
    */
-  completionTime?: string;
+  completionTime?: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your data file for batch import.</p>
+   * @public
    */
-  inputPath?: string;
+  inputPath?: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your output file.</p>
+   * @public
    */
-  outputPath?: string;
+  outputPath?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>The ARN of the IAM role to use for this job request.</p>
+   * @public
    */
-  iamRoleArn?: string;
+  iamRoleArn?: string | undefined;
 
   /**
    * <p>The ARN of the batch import job.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>The number of records processed by batch import job.</p>
+   * @public
    */
-  processedRecordsCount?: number;
+  processedRecordsCount?: number | undefined;
 
   /**
    * <p>The number of records that failed to import. </p>
+   * @public
    */
-  failedRecordsCount?: number;
+  failedRecordsCount?: number | undefined;
 
   /**
    * <p>The total number of records in the batch import job.</p>
+   * @public
    */
-  totalRecordsCount?: number;
+  totalRecordsCount?: number | undefined;
 }
 
-export namespace BatchImport {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchImport): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBatchImportJobsResult {
   /**
    * <p>An array containing the details of each batch import job.</p>
+   * @public
    */
-  batchImports?: BatchImport[];
+  batchImports?: BatchImport[] | undefined;
 
   /**
    * <p>The next token for the subsequent resquest.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetBatchImportJobsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBatchImportJobsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBatchPredictionJobsRequest {
   /**
    * <p>The batch prediction job for which to get the details.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 
   /**
    * <p>The next token from the previous request.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace GetBatchPredictionJobsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBatchPredictionJobsRequest): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The batch prediction details.</p>
+ * @public
  */
 export interface BatchPrediction {
   /**
    * <p>The job ID for the batch prediction.</p>
+   * @public
    */
-  jobId?: string;
+  jobId?: string | undefined;
 
   /**
    * <p>The batch prediction status.</p>
+   * @public
    */
-  status?: AsyncJobStatus | string;
+  status?: AsyncJobStatus | undefined;
 
   /**
    * <p>The reason a batch prediction job failed.</p>
+   * @public
    */
-  failureReason?: string;
+  failureReason?: string | undefined;
 
   /**
    * <p>Timestamp of when the batch prediction job started.</p>
+   * @public
    */
-  startTime?: string;
+  startTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the batch prediction job completed.</p>
+   * @public
    */
-  completionTime?: string;
+  completionTime?: string | undefined;
 
   /**
    * <p>Timestamp of most recent heartbeat indicating the batch prediction job was making progress.</p>
+   * @public
    */
-  lastHeartbeatTime?: string;
+  lastHeartbeatTime?: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your training file.</p>
+   * @public
    */
-  inputPath?: string;
+  inputPath?: string | undefined;
 
   /**
    * <p>The Amazon S3 location of your output file.</p>
+   * @public
    */
-  outputPath?: string;
+  outputPath?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>The name of the detector.</p>
+   * @public
    */
-  detectorName?: string;
+  detectorName?: string | undefined;
 
   /**
    * <p>The detector version. </p>
+   * @public
    */
-  detectorVersion?: string;
+  detectorVersion?: string | undefined;
 
   /**
    * <p>The ARN of the IAM role to use for this job request.</p>
+   * @public
    */
-  iamRoleArn?: string;
+  iamRoleArn?: string | undefined;
 
   /**
    * <p>The ARN of batch prediction job.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 
   /**
    * <p>The number of records processed by the batch prediction job.</p>
+   * @public
    */
-  processedRecordsCount?: number;
+  processedRecordsCount?: number | undefined;
 
   /**
    * <p>The total number of records in the batch prediction job.</p>
+   * @public
    */
-  totalRecordsCount?: number;
+  totalRecordsCount?: number | undefined;
 }
 
-export namespace BatchPrediction {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: BatchPrediction): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetBatchPredictionJobsResult {
   /**
    * <p>An array containing the details of each batch prediction job.</p>
+   * @public
    */
-  batchPredictions?: BatchPrediction[];
+  batchPredictions?: BatchPrediction[] | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetBatchPredictionJobsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetBatchPredictionJobsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeleteEventsByEventTypeStatusRequest {
   /**
    * <p>Name of event type for which to get the deletion status.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 }
 
-export namespace GetDeleteEventsByEventTypeStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeleteEventsByEventTypeStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDeleteEventsByEventTypeStatusResult {
   /**
    * <p>The event type name.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>The deletion status.</p>
+   * @public
    */
-  eventsDeletionStatus?: AsyncJobStatus | string;
+  eventsDeletionStatus?: AsyncJobStatus | undefined;
 }
 
-export namespace GetDeleteEventsByEventTypeStatusResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDeleteEventsByEventTypeStatusResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDetectorsRequest {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetDetectorsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDetectorsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The detector.</p>
+ * @public
  */
 export interface Detector {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The detector description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>Timestamp of when the detector was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the detector was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The detector ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace Detector {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Detector): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDetectorsResult {
   /**
    * <p>The detectors.</p>
+   * @public
    */
-  detectors?: Detector[];
+  detectors?: Detector[] | undefined;
 
   /**
    * <p>The next page token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetDetectorsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDetectorsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDetectorVersionRequest {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The detector version ID.</p>
+   * @public
    */
   detectorVersionId: string | undefined;
 }
 
-export namespace GetDetectorVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDetectorVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetDetectorVersionResult {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The detector version ID.</p>
+   * @public
    */
-  detectorVersionId?: string;
+  detectorVersionId?: string | undefined;
 
   /**
    * <p>The detector version description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The Amazon SageMaker model endpoints included in the detector version.</p>
+   * @public
    */
-  externalModelEndpoints?: string[];
+  externalModelEndpoints?: string[] | undefined;
 
   /**
    * <p>The model versions included in the detector version. </p>
+   * @public
    */
-  modelVersions?: ModelVersion[];
+  modelVersions?: ModelVersion[] | undefined;
 
   /**
    * <p>The rules included in the detector version.</p>
+   * @public
    */
-  rules?: Rule[];
+  rules?: Rule[] | undefined;
 
   /**
    * <p>The status of the detector version.</p>
+   * @public
    */
-  status?: DetectorVersionStatus | string;
+  status?: DetectorVersionStatus | undefined;
 
   /**
    * <p>The timestamp when the detector version was last updated.
    *         </p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The timestamp when the detector version was created. </p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The execution mode of the rule in the dectector</p>
-   * 	        <p>
+   *          <p>
    *             <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p>
-   * 	        <p>
+   *          <p>
    *             <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>
+   * @public
    */
-  ruleExecutionMode?: RuleExecutionMode | string;
+  ruleExecutionMode?: RuleExecutionMode | undefined;
 
   /**
    * <p>The detector version ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace GetDetectorVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetDetectorVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEntityTypesRequest {
   /**
    * <p>The name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetEntityTypesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEntityTypesRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The entity type details.</p>
+ * @public
  */
 export interface EntityType {
   /**
    * <p>The entity type name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The entity type description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Timestamp of when the entity type was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the entity type was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The entity type ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace EntityType {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: EntityType): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEntityTypesResult {
   /**
    * <p>An array of entity types.</p>
+   * @public
    */
-  entityTypes?: EntityType[];
+  entityTypes?: EntityType[] | undefined;
 
   /**
    * <p>The next page token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetEntityTypesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEntityTypesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEventRequest {
   /**
    * <p>The ID of the event to retrieve.</p>
+   * @public
    */
   eventId: string | undefined;
 
   /**
    * <p>The event type of the event to retrieve.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 }
 
-export namespace GetEventRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The entity details. </p>
+ * @public
  */
 export interface Entity {
   /**
    * <p>The entity type.</p>
+   * @public
    */
   entityType: string | undefined;
 
   /**
    * <p>The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.</p>
+   * @public
    */
   entityId: string | undefined;
 }
 
-export namespace Entity {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Entity): any => ({
-    ...obj,
-  });
-}
-
 /**
  * <p>The event details.</p>
+ * @public
  */
 export interface Event {
   /**
    * <p>The event ID.</p>
+   * @public
    */
-  eventId?: string;
+  eventId?: string | undefined;
 
   /**
    * <p>The event type.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>
+   * @public
    */
-  eventTimestamp?: string;
+  eventTimestamp?: string | undefined;
 
   /**
    * <p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>
+   * @public
    */
-  eventVariables?: { [key: string]: string };
+  eventVariables?: Record<string, string> | undefined;
 
   /**
    * <p>The label associated with the event.</p>
+   * @public
    */
-  currentLabel?: string;
+  currentLabel?: string | undefined;
 
   /**
    * <p>The timestamp associated with the label to update. The timestamp must be specified using ISO 8601 standard in UTC.</p>
+   * @public
    */
-  labelTimestamp?: string;
+  labelTimestamp?: string | undefined;
 
   /**
    * <p>The event entities.</p>
+   * @public
    */
-  entities?: Entity[];
+  entities?: Entity[] | undefined;
 }
 
-export namespace Event {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Event): any => ({
-    ...obj,
-    ...(obj.eventVariables && { eventVariables: SENSITIVE_STRING }),
-    ...(obj.entities && { entities: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEventResult {
   /**
    * <p>The details of the event.</p>
+   * @public
    */
-  event?: Event;
-}
-
-export namespace GetEventResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventResult): any => ({
-    ...obj,
-    ...(obj.event && { event: Event.filterSensitiveLog(obj.event) }),
-  });
+  event?: Event | undefined;
 }
 
 /**
  * <p>A pre-formed Amazon SageMaker model input you can include if your detector version includes an imported Amazon SageMaker model endpoint with pass-through input configuration.</p>
+ * @public
  */
 export interface ModelEndpointDataBlob {
   /**
    * <p>The byte buffer of the Amazon SageMaker model endpoint input data blob.</p>
+   * @public
    */
-  byteBuffer?: Uint8Array;
+  byteBuffer?: Uint8Array | undefined;
 
   /**
    * <p>The content type of the Amazon SageMaker model endpoint input data blob. </p>
+   * @public
    */
-  contentType?: string;
+  contentType?: string | undefined;
 }
 
-export namespace ModelEndpointDataBlob {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ModelEndpointDataBlob): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetEventPredictionRequest {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The detector version ID.</p>
+   * @public
    */
-  detectorVersionId?: string;
+  detectorVersionId?: string | undefined;
 
   /**
    * <p>The unique ID used to identify the event.</p>
+   * @public
    */
   eventId: string | undefined;
 
   /**
    * <p>The event type associated with the detector specified for the prediction.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>The entity type (associated with the detector's event type) and specific entity ID representing who performed the event. If an entity id is not available, use "UNKNOWN."</p>
+   * @public
    */
   entities: Entity[] | undefined;
 
   /**
    * <p>Timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>
+   * @public
    */
   eventTimestamp: string | undefined;
 
@@ -2733,390 +2805,774 @@ export interface GetEventPredictionRequest {
    *          <important>
    *             <p>You must provide at least one eventVariable</p>
    *          </important>
-   *
    *          <p>To ensure most accurate fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p>
-   *
    *          <p>
    *             <b>For Amazon Fraud Detector trained models:</b>
    *          </p>
    *          <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map)
    *          with calculated default mean/medians for numeric variables and with special values for categorical variables.</p>
-   *
    *          <p>
    *             <b>For imported SageMaker models:</b>
    *          </p>
    *          <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules
    *          will use the default value that is provided for the variable. </p>
+   * @public
    */
-  eventVariables: { [key: string]: string } | undefined;
+  eventVariables: Record<string, string> | undefined;
 
   /**
    * <p>The Amazon SageMaker model endpoint input data blobs.</p>
+   * @public
    */
-  externalModelEndpointDataBlobs?: { [key: string]: ModelEndpointDataBlob };
-}
-
-export namespace GetEventPredictionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventPredictionRequest): any => ({
-    ...obj,
-    ...(obj.entities && { entities: SENSITIVE_STRING }),
-    ...(obj.eventVariables && { eventVariables: SENSITIVE_STRING }),
-    ...(obj.externalModelEndpointDataBlobs && { externalModelEndpointDataBlobs: SENSITIVE_STRING }),
-  });
-}
-
-export enum ModelSource {
-  SAGEMAKER = "SAGEMAKER",
+  externalModelEndpointDataBlobs?: Record<string, ModelEndpointDataBlob> | undefined;
 }
 
 /**
  * <p>The Amazon SageMaker model.</p>
+ * @public
  */
 export interface ExternalModelSummary {
   /**
    * <p>The endpoint of the Amazon SageMaker model.</p>
+   * @public
    */
-  modelEndpoint?: string;
+  modelEndpoint?: string | undefined;
 
   /**
    * <p>The source of the model.</p>
+   * @public
    */
-  modelSource?: ModelSource | string;
-}
-
-export namespace ExternalModelSummary {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExternalModelSummary): any => ({
-    ...obj,
-  });
+  modelSource?: ModelSource | undefined;
 }
 
 /**
  * <p>The fraud prediction scores from Amazon SageMaker model.</p>
+ * @public
  */
 export interface ExternalModelOutputs {
   /**
    * <p>The Amazon SageMaker model.</p>
+   * @public
    */
-  externalModel?: ExternalModelSummary;
+  externalModel?: ExternalModelSummary | undefined;
 
   /**
    * <p>The fraud prediction scores from Amazon SageMaker model.</p>
+   * @public
    */
-  outputs?: { [key: string]: string };
-}
-
-export namespace ExternalModelOutputs {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExternalModelOutputs): any => ({
-    ...obj,
-  });
+  outputs?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The fraud prediction scores.</p>
+ * @public
  */
 export interface ModelScores {
   /**
    * <p>The model version.</p>
+   * @public
    */
-  modelVersion?: ModelVersion;
+  modelVersion?: ModelVersion | undefined;
 
   /**
    * <p>The model's fraud prediction scores.</p>
+   * @public
    */
-  scores?: { [key: string]: number };
-}
-
-export namespace ModelScores {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ModelScores): any => ({
-    ...obj,
-  });
+  scores?: Record<string, number> | undefined;
 }
 
 /**
  * <p>The rule results.</p>
+ * @public
  */
 export interface RuleResult {
   /**
    * <p>The rule ID that was matched, based on the rule execution mode.</p>
+   * @public
    */
-  ruleId?: string;
+  ruleId?: string | undefined;
 
   /**
    * <p>The outcomes of the matched rule, based on the rule execution mode.</p>
+   * @public
    */
-  outcomes?: string[];
-}
-
-export namespace RuleResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RuleResult): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEventPredictionResult {
-  /**
-   * <p>The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.</p>
-   */
-  modelScores?: ModelScores[];
-
-  /**
-   * <p>The results from the rules.</p>
-   */
-  ruleResults?: RuleResult[];
-
-  /**
-   * <p>The model scores for Amazon SageMaker models.</p>
-   */
-  externalModelOutputs?: ExternalModelOutputs[];
-}
-
-export namespace GetEventPredictionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventPredictionResult): any => ({
-    ...obj,
-  });
+  outcomes?: string[] | undefined;
 }
 
 /**
- * <p>An exception indicating that the attached customer-owned (external) model threw an exception when Amazon Fraud Detector invoked the model.</p>
+ * @public
  */
-export interface ResourceUnavailableException extends __SmithyException, $MetadataBearer {
-  name: "ResourceUnavailableException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ResourceUnavailableException {
+export interface GetEventPredictionResult {
   /**
-   * @internal
+   * <p>The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: ResourceUnavailableException): any => ({
-    ...obj,
-  });
+  modelScores?: ModelScores[] | undefined;
+
+  /**
+   * <p>The results from the rules.</p>
+   * @public
+   */
+  ruleResults?: RuleResult[] | undefined;
+
+  /**
+   * <p>The model scores for Amazon SageMaker models.</p>
+   * @public
+   */
+  externalModelOutputs?: ExternalModelOutputs[] | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetEventPredictionMetadataRequest {
+  /**
+   * <p>
+   * The event ID.
+   * </p>
+   * @public
+   */
+  eventId: string | undefined;
+
+  /**
+   * <p>
+   * The event type associated with the detector specified for the prediction.
+   * </p>
+   * @public
+   */
+  eventTypeName: string | undefined;
+
+  /**
+   * <p>
+   * The detector ID.
+   * </p>
+   * @public
+   */
+  detectorId: string | undefined;
+
+  /**
+   * <p>
+   * The detector version ID.
+   * </p>
+   * @public
+   */
+  detectorVersionId: string | undefined;
+
+  /**
+   * <p>
+   *     The timestamp that defines when the prediction was generated. The timestamp must be specified using ISO 8601 standard in UTC.</p>
+   *          <p>We recommend calling <a href="https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html">ListEventPredictions</a>
+   *         first, and using the <code>predictionTimestamp</code> value in the response to provide an accurate prediction timestamp value.</p>
+   * @public
+   */
+  predictionTimestamp: string | undefined;
+}
+
+/**
+ * <p>
+ * The details of the external (Amazon Sagemaker) model evaluated for generating predictions.
+ * </p>
+ * @public
+ */
+export interface EvaluatedExternalModel {
+  /**
+   * <p>
+   * The endpoint of the external (Amazon Sagemaker) model.
+   * </p>
+   * @public
+   */
+  modelEndpoint?: string | undefined;
+
+  /**
+   * <p>
+   * Indicates whether event variables were used to generate predictions.
+   * </p>
+   * @public
+   */
+  useEventVariables?: boolean | undefined;
+
+  /**
+   * <p>
+   * Input variables use for generating predictions.
+   * </p>
+   * @public
+   */
+  inputVariables?: Record<string, string> | undefined;
+
+  /**
+   * <p>
+   * Output variables.
+   * </p>
+   * @public
+   */
+  outputVariables?: Record<string, string> | undefined;
+}
+
+/**
+ * <p>
+ * The details of the event variable's impact on the prediction score.
+ * </p>
+ * @public
+ */
+export interface VariableImpactExplanation {
+  /**
+   * <p>
+   * The event variable name.
+   * </p>
+   * @public
+   */
+  eventVariableName?: string | undefined;
+
+  /**
+   * <p>
+   *     The event variable's relative impact in terms of magnitude on the prediction scores.
+   *     The relative impact values consist of a numerical rating (0-5, 5 being the highest) and direction (increased/decreased) impact of the fraud risk.
+   * </p>
+   * @public
+   */
+  relativeImpact?: string | undefined;
+
+  /**
+   * <p>
+   *     The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from - infinity to + infinity.</p>
+   *          <ul>
+   *             <li>
+   *                <p>A positive value indicates that the variable drove the risk score up.</p>
+   *             </li>
+   *             <li>
+   *                <p>A negative value indicates that the variable drove the risk score down.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  logOddsImpact?: number | undefined;
+}
+
+/**
+ * <p>
+ * The prediction explanations that provide insight into how each event variable impacted the model version's fraud prediction score.
+ * </p>
+ * @public
+ */
+export interface PredictionExplanations {
+  /**
+   * <p>
+   * The details of the event variable's impact on the prediction score.
+   * </p>
+   * @public
+   */
+  variableImpactExplanations?: VariableImpactExplanation[] | undefined;
+
+  /**
+   * <p>
+   *             The details of the aggregated variables impact on the prediction score.
+   *         </p>
+   *          <p>Account Takeover Insights (ATI) model uses event variables from the login data you
+   *             provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address.
+   *             In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>
+   * @public
+   */
+  aggregatedVariablesImpactExplanations?: AggregatedVariablesImpactExplanation[] | undefined;
+}
+
+/**
+ * <p>
+ * The model version evalutions.
+ * </p>
+ * @public
+ */
+export interface ModelVersionEvaluation {
+  /**
+   * <p>
+   * The output variable name.
+   * </p>
+   * @public
+   */
+  outputVariableName?: string | undefined;
+
+  /**
+   * <p>
+   * The evaluation score generated for the model version.
+   * </p>
+   * @public
+   */
+  evaluationScore?: string | undefined;
+
+  /**
+   * <p>
+   * The prediction explanations generated for the model version.
+   * </p>
+   * @public
+   */
+  predictionExplanations?: PredictionExplanations | undefined;
+}
+
+/**
+ * <p>
+ * The model version evaluated for generating prediction.
+ * </p>
+ * @public
+ */
+export interface EvaluatedModelVersion {
+  /**
+   * <p>
+   * The model ID.
+   * </p>
+   * @public
+   */
+  modelId?: string | undefined;
+
+  /**
+   * <p>
+   * The model version.
+   * </p>
+   * @public
+   */
+  modelVersion?: string | undefined;
+
+  /**
+   * <p>The model type. </p>
+   *          <p>Valid values: <code>ONLINE_FRAUD_INSIGHTS</code> | <code>TRANSACTION_FRAUD_INSIGHTS</code>
+   *          </p>
+   * @public
+   */
+  modelType?: string | undefined;
+
+  /**
+   * <p>
+   * Evaluations generated for the model version.
+   * </p>
+   * @public
+   */
+  evaluations?: ModelVersionEvaluation[] | undefined;
+}
+
+/**
+ * <p>
+ * Information about the summary of an event variable that was evaluated for generating prediction.
+ * </p>
+ * @public
+ */
+export interface EventVariableSummary {
+  /**
+   * <p>
+   * The event variable name.
+   * </p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>
+   * The value of the event variable.
+   * </p>
+   * @public
+   */
+  value?: string | undefined;
+
+  /**
+   * <p>
+   * The event variable source.
+   * </p>
+   * @public
+   */
+  source?: string | undefined;
+}
+
+/**
+ * <p>
+ * The details of the rule used for evaluating variable values.
+ * </p>
+ * @public
+ */
+export interface EvaluatedRule {
+  /**
+   * <p>
+   * The rule ID.
+   * </p>
+   * @public
+   */
+  ruleId?: string | undefined;
+
+  /**
+   * <p>
+   * The rule version.
+   * </p>
+   * @public
+   */
+  ruleVersion?: string | undefined;
+
+  /**
+   * <p>
+   * The rule expression.
+   * </p>
+   * @public
+   */
+  expression?: string | undefined;
+
+  /**
+   * <p>
+   * The rule expression value.
+   * </p>
+   * @public
+   */
+  expressionWithValues?: string | undefined;
+
+  /**
+   * <p>
+   * The rule outcome.
+   * </p>
+   * @public
+   */
+  outcomes?: string[] | undefined;
+
+  /**
+   * <p>
+   * Indicates whether the rule was evaluated.
+   * </p>
+   * @public
+   */
+  evaluated?: boolean | undefined;
+
+  /**
+   * <p>
+   * Indicates whether the rule matched.
+   * </p>
+   * @public
+   */
+  matched?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetEventPredictionMetadataResult {
+  /**
+   * <p>
+   * The event ID.
+   * </p>
+   * @public
+   */
+  eventId?: string | undefined;
+
+  /**
+   * <p>
+   * The event type associated with the detector specified for this prediction.
+   * </p>
+   * @public
+   */
+  eventTypeName?: string | undefined;
+
+  /**
+   * <p>
+   * The entity ID.
+   * </p>
+   * @public
+   */
+  entityId?: string | undefined;
+
+  /**
+   * <p>
+   * The entity type.
+   * </p>
+   * @public
+   */
+  entityType?: string | undefined;
+
+  /**
+   * <p>
+   * The timestamp for when the prediction was generated for the associated event ID.
+   * </p>
+   * @public
+   */
+  eventTimestamp?: string | undefined;
+
+  /**
+   * <p>
+   * The detector ID.
+   * </p>
+   * @public
+   */
+  detectorId?: string | undefined;
+
+  /**
+   * <p>
+   * The detector version ID.
+   * </p>
+   * @public
+   */
+  detectorVersionId?: string | undefined;
+
+  /**
+   * <p>
+   * The status of the detector version.
+   * </p>
+   * @public
+   */
+  detectorVersionStatus?: string | undefined;
+
+  /**
+   * <p>
+   * A list of event variables that influenced the prediction scores.
+   * </p>
+   * @public
+   */
+  eventVariables?: EventVariableSummary[] | undefined;
+
+  /**
+   * <p>
+   * List of rules associated with the detector version that were used for evaluating variable values.
+   * </p>
+   * @public
+   */
+  rules?: EvaluatedRule[] | undefined;
+
+  /**
+   * <p>
+   * The execution mode of the rule used for evaluating variable values.
+   * </p>
+   * @public
+   */
+  ruleExecutionMode?: RuleExecutionMode | undefined;
+
+  /**
+   * <p>
+   * The outcomes of the matched rule, based on the rule execution mode.
+   * </p>
+   * @public
+   */
+  outcomes?: string[] | undefined;
+
+  /**
+   * <p>
+   * Model versions that were evaluated for generating predictions.
+   * </p>
+   * @public
+   */
+  evaluatedModelVersions?: EvaluatedModelVersion[] | undefined;
+
+  /**
+   * <p>
+   * External (Amazon SageMaker) models that were evaluated for generating predictions.
+   * </p>
+   * @public
+   */
+  evaluatedExternalModels?: EvaluatedExternalModel[] | undefined;
+
+  /**
+   * <p>The timestamp that defines when the prediction was generated. </p>
+   * @public
+   */
+  predictionTimestamp?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetEventTypesRequest {
   /**
    * <p>The name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace GetEventTypesRequest {
+/**
+ * <p>
+ *          The event orchestration status.
+ *       </p>
+ * @public
+ */
+export interface EventOrchestration {
   /**
-   * @internal
+   * <p>Specifies if event orchestration is enabled through Amazon EventBridge.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetEventTypesRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum EventIngestion {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
+  eventBridgeEnabled: boolean | undefined;
 }
 
 /**
  * <p>Data about the stored events.</p>
+ * @public
  */
 export interface IngestedEventStatistics {
   /**
    * <p>The number of stored events.</p>
+   * @public
    */
-  numberOfEvents?: number;
+  numberOfEvents?: number | undefined;
 
   /**
    * <p>The total size of the stored events.</p>
+   * @public
    */
-  eventDataSizeInBytes?: number;
+  eventDataSizeInBytes?: number | undefined;
 
   /**
    * <p>The oldest stored event.</p>
+   * @public
    */
-  leastRecentEvent?: string;
+  leastRecentEvent?: string | undefined;
 
   /**
    * <p>The newest stored event.</p>
+   * @public
    */
-  mostRecentEvent?: string;
+  mostRecentEvent?: string | undefined;
 
   /**
    * <p>Timestamp of when the stored event was last updated.
    *       </p>
+   * @public
    */
-  lastUpdatedTime?: string;
-}
-
-export namespace IngestedEventStatistics {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IngestedEventStatistics): any => ({
-    ...obj,
-  });
+  lastUpdatedTime?: string | undefined;
 }
 
 /**
  * <p>The event type details.</p>
+ * @public
  */
 export interface EventType {
   /**
    * <p>The event type name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The event type description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The event type event variables.</p>
+   * @public
    */
-  eventVariables?: string[];
+  eventVariables?: string[] | undefined;
 
   /**
    * <p>The event type labels.</p>
+   * @public
    */
-  labels?: string[];
+  labels?: string[] | undefined;
 
   /**
    * <p>The event type entity types.</p>
+   * @public
    */
-  entityTypes?: string[];
+  entityTypes?: string[] | undefined;
 
   /**
    * <p>If <code>Enabled</code>, Amazon Fraud Detector stores event data when you generate a prediction and uses that data to update calculated variables in near real-time. Amazon Fraud Detector uses this data, known as <code>INGESTED_EVENTS</code>, to train your model and  improve fraud predictions.</p>
+   * @public
    */
-  eventIngestion?: EventIngestion | string;
+  eventIngestion?: EventIngestion | undefined;
 
   /**
    * <p>Data about the stored events.</p>
+   * @public
    */
-  ingestedEventStatistics?: IngestedEventStatistics;
+  ingestedEventStatistics?: IngestedEventStatistics | undefined;
 
   /**
    * <p>Timestamp of when the event type was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the event type was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The entity type ARN.</p>
+   * @public
    */
-  arn?: string;
-}
+  arn?: string | undefined;
 
-export namespace EventType {
   /**
-   * @internal
+   * <p>The event orchestration status. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: EventType): any => ({
-    ...obj,
-  });
+  eventOrchestration?: EventOrchestration | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetEventTypesResult {
   /**
    * <p>An array of event types.</p>
+   * @public
    */
-  eventTypes?: EventType[];
+  eventTypes?: EventType[] | undefined;
 
   /**
    * <p>The next page token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetEventTypesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetEventTypesResult): any => ({
-    ...obj,
-    ...(obj.eventTypes && { eventTypes: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetExternalModelsRequest {
   /**
    * <p>The Amazon SageMaker model endpoint.</p>
+   * @public
    */
-  modelEndpoint?: string;
+  modelEndpoint?: string | undefined;
 
   /**
    * <p>The next page token for the request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetExternalModelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetExternalModelsRequest): any => ({
-    ...obj,
-  });
-}
-
-export enum ModelInputDataFormat {
-  CSV = "TEXT_CSV",
-  JSON = "APPLICATION_JSON",
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The Amazon SageMaker model input configuration.</p>
+ * @public
  */
 export interface ModelInputConfiguration {
   /**
    * <p>The event type name.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p> The format of the model input configuration. The format differs depending on if it is
    *             passed through to SageMaker or constructed by Amazon Fraud Detector.</p>
+   * @public
    */
-  format?: ModelInputDataFormat | string;
+  format?: ModelInputDataFormat | undefined;
 
   /**
    * <p>The event variables.</p>
+   * @public
    */
   useEventVariables: boolean | undefined;
 
@@ -3124,436 +3580,489 @@ export interface ModelInputConfiguration {
    * <p> Template for constructing the JSON input-data sent to SageMaker. At event-evaluation,
    *             the placeholders for variable names in the template will be replaced with the variable
    *             values before being sent to SageMaker. </p>
+   * @public
    */
-  jsonInputTemplate?: string;
+  jsonInputTemplate?: string | undefined;
 
   /**
    * <p> Template for constructing the CSV input-data sent to SageMaker. At event-evaluation,
    *             the placeholders for variable-names in the template will be replaced with the variable
    *             values before being sent to SageMaker. </p>
+   * @public
    */
-  csvInputTemplate?: string;
-}
-
-export namespace ModelInputConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ModelInputConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export enum ModelEndpointStatus {
-  ASSOCIATED = "ASSOCIATED",
-  DISSOCIATED = "DISSOCIATED",
-}
-
-export enum ModelOutputDataFormat {
-  CSV = "TEXT_CSV",
-  JSONLINES = "APPLICATION_JSONLINES",
+  csvInputTemplate?: string | undefined;
 }
 
 /**
  * <p>Provides the Amazon Sagemaker model output configuration.</p>
+ * @public
  */
 export interface ModelOutputConfiguration {
   /**
    * <p>The format of the model output configuration.</p>
+   * @public
    */
-  format: ModelOutputDataFormat | string | undefined;
+  format: ModelOutputDataFormat | undefined;
 
   /**
    * <p>A map of JSON keys in response from SageMaker to the Amazon Fraud Detector variables. </p>
+   * @public
    */
-  jsonKeyToVariableMap?: { [key: string]: string };
+  jsonKeyToVariableMap?: Record<string, string> | undefined;
 
   /**
    * <p>A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. </p>
+   * @public
    */
-  csvIndexToVariableMap?: { [key: string]: string };
-}
-
-export namespace ModelOutputConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ModelOutputConfiguration): any => ({
-    ...obj,
-  });
+  csvIndexToVariableMap?: Record<string, string> | undefined;
 }
 
 /**
  * <p>The Amazon SageMaker model.</p>
+ * @public
  */
 export interface ExternalModel {
   /**
    * <p>The Amazon SageMaker model endpoints.</p>
+   * @public
    */
-  modelEndpoint?: string;
+  modelEndpoint?: string | undefined;
 
   /**
    * <p>The source of the model.</p>
+   * @public
    */
-  modelSource?: ModelSource | string;
+  modelSource?: ModelSource | undefined;
 
   /**
    * <p>The role used to invoke the model. </p>
+   * @public
    */
-  invokeModelEndpointRoleArn?: string;
+  invokeModelEndpointRoleArn?: string | undefined;
 
   /**
    * <p>The input configuration.</p>
+   * @public
    */
-  inputConfiguration?: ModelInputConfiguration;
+  inputConfiguration?: ModelInputConfiguration | undefined;
 
   /**
    * <p>The output configuration.</p>
+   * @public
    */
-  outputConfiguration?: ModelOutputConfiguration;
+  outputConfiguration?: ModelOutputConfiguration | undefined;
 
   /**
    * <p>The Amazon Fraud Detector status for the external model endpoint</p>
+   * @public
    */
-  modelEndpointStatus?: ModelEndpointStatus | string;
+  modelEndpointStatus?: ModelEndpointStatus | undefined;
 
   /**
    * <p>Timestamp of when the model was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the model was last created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The model ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace ExternalModel {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ExternalModel): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetExternalModelsResult {
   /**
    * <p>Gets the Amazon SageMaker models.</p>
+   * @public
    */
-  externalModels?: ExternalModel[];
+  externalModels?: ExternalModel[] | undefined;
 
   /**
    * <p>The next page token to be used in subsequent requests.</p>
+   * @public
    */
-  nextToken?: string;
-}
-
-export namespace GetExternalModelsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetExternalModelsResult): any => ({
-    ...obj,
-  });
+  nextToken?: string | undefined;
 }
 
 /**
  * <p>The KMS key details.</p>
+ * @public
  */
 export interface KMSKey {
   /**
    * <p>The encryption key ARN.</p>
+   * @public
    */
-  kmsEncryptionKeyArn?: string;
+  kmsEncryptionKeyArn?: string | undefined;
 }
 
-export namespace KMSKey {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: KMSKey): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetKMSEncryptionKeyResult {
   /**
    * <p>The KMS encryption key.</p>
+   * @public
    */
-  kmsKey?: KMSKey;
+  kmsKey?: KMSKey | undefined;
 }
 
-export namespace GetKMSEncryptionKeyResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetKMSEncryptionKeyResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLabelsRequest {
   /**
    * <p>The name of the label or labels to get.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetLabelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetLabelsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The label details.</p>
+ * @public
  */
 export interface Label {
   /**
    * <p>The label name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The label description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>Timestamp of when the label was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>Timestamp of when the event type was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The label ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace Label {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Label): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetLabelsResult {
   /**
    * <p>An array of labels.</p>
+   * @public
    */
-  labels?: Label[];
+  labels?: Label[] | undefined;
 
   /**
    * <p>The next page token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetLabelsResult {
+/**
+ * @public
+ */
+export interface GetListElementsRequest {
   /**
-   * @internal
+   * <p>
+   *             The name of the list.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetLabelsResult): any => ({
-    ...obj,
-  });
+  name: string | undefined;
+
+  /**
+   * <p>
+   *             The next token for the subsequent request.
+   *         </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>
+   *             The maximum number of objects to return for the request.
+   *         </p>
+   * @public
+   */
+  maxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetListElementsResult {
+  /**
+   * <p>
+   *             The list elements.
+   *         </p>
+   * @public
+   */
+  elements?: string[] | undefined;
+
+  /**
+   * <p>
+   *             The next page token.
+   *         </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetListsMetadataRequest {
+  /**
+   * <p>
+   *             The name of the list.
+   *         </p>
+   * @public
+   */
+  name?: string | undefined;
+
+  /**
+   * <p>
+   *             The next token for the subsequent request.
+   *         </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>
+   *             The maximum number of objects to return for the request.
+   *         </p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetListsMetadataResult {
+  /**
+   * <p>
+   *             The metadata of the specified list or all lists under the account.
+   *         </p>
+   * @public
+   */
+  lists?: AllowDenyList[] | undefined;
+
+  /**
+   * <p>
+   *             The next page token.
+   *         </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetModelsRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The next token for the subsequent request.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetModelsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetModelsRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The model.</p>
+ * @public
  */
 export interface Model {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The model description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
-  eventTypeName?: string;
+  eventTypeName?: string | undefined;
 
   /**
    * <p>Timestamp of when the model was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>Timestamp of last time the model was updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The ARN of the model.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace Model {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Model): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetModelsResult {
   /**
    * <p>The next page token to be used in subsequent requests.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The array of models.</p>
+   * @public
    */
-  models?: Model[];
+  models?: Model[] | undefined;
 }
 
-export namespace GetModelsResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetModelsResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetModelVersionRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
   modelVersionNumber: string | undefined;
 }
 
-export namespace GetModelVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetModelVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetModelVersionResult {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
-  modelVersionNumber?: string;
+  modelVersionNumber?: string | undefined;
 
   /**
    * <p>The training data source.</p>
+   * @public
    */
-  trainingDataSource?: TrainingDataSourceEnum | string;
+  trainingDataSource?: TrainingDataSourceEnum | undefined;
 
   /**
    * <p>The training data schema.</p>
+   * @public
    */
-  trainingDataSchema?: TrainingDataSchema;
+  trainingDataSchema?: TrainingDataSchema | undefined;
 
   /**
    * <p>The details of the external events data used for training the model version.
    *          This will be populated if the <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>
    *          </p>
+   * @public
    */
-  externalEventsDetail?: ExternalEventsDetail;
+  externalEventsDetail?: ExternalEventsDetail | undefined;
 
   /**
    * <p>The details of the ingested events data used for training the model version.
    *          This will be populated if the <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>
+   * @public
    */
-  ingestedEventsDetail?: IngestedEventsDetail;
+  ingestedEventsDetail?: IngestedEventsDetail | undefined;
 
   /**
    * <p>The model version status.</p>
-   * 	        <p>Possible values are:</p>
-   * 	        <ul>
+   *          <p>Possible values are:</p>
+   *          <ul>
    *             <li>
    *                <p>
    *                   <code>TRAINING_IN_PROGRESS</code>
@@ -3600,1205 +4109,1258 @@ export interface GetModelVersionResult {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  status?: string;
+  status?: string | undefined;
 
   /**
    * <p>The model version ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace GetModelVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetModelVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetOutcomesRequest {
   /**
    * <p>The name of the outcome or outcomes to get.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The next page token for the request. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetOutcomesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetOutcomesRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The outcome.</p>
+ * @public
  */
 export interface Outcome {
   /**
    * <p>The outcome name.</p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The outcome description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The timestamp when the outcome was last updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The timestamp when the outcome was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The outcome ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace Outcome {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Outcome): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetOutcomesResult {
   /**
    * <p>The outcomes. </p>
+   * @public
    */
-  outcomes?: Outcome[];
+  outcomes?: Outcome[] | undefined;
 
   /**
    * <p>The next page token for subsequent requests.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetOutcomesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetOutcomesResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRulesRequest {
   /**
    * <p>The rule ID.</p>
+   * @public
    */
-  ruleId?: string;
+  ruleId?: string | undefined;
 
   /**
    * <p>The detector ID.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The rule version.</p>
+   * @public
    */
-  ruleVersion?: string;
+  ruleVersion?: string | undefined;
 
   /**
    * <p>The next page token.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of rules to return for the request.</p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export namespace GetRulesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRulesRequest): any => ({
-    ...obj,
-  });
+  maxResults?: number | undefined;
 }
 
 /**
  * <p>The details of the rule.</p>
+ * @public
  */
 export interface RuleDetail {
   /**
    * <p>The rule ID.</p>
+   * @public
    */
-  ruleId?: string;
+  ruleId?: string | undefined;
 
   /**
    * <p>The rule description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The detector for which the rule is associated.</p>
+   * @public
    */
-  detectorId?: string;
+  detectorId?: string | undefined;
 
   /**
    * <p>The rule version.</p>
+   * @public
    */
-  ruleVersion?: string;
+  ruleVersion?: string | undefined;
 
   /**
    * <p>The rule expression.</p>
+   * @public
    */
-  expression?: string;
+  expression?: string | undefined;
 
   /**
    * <p>The rule language.</p>
+   * @public
    */
-  language?: Language | string;
+  language?: Language | undefined;
 
   /**
    * <p>The rule outcomes.</p>
+   * @public
    */
-  outcomes?: string[];
+  outcomes?: string[] | undefined;
 
   /**
    * <p>Timestamp of the last time the rule was updated.</p>
+   * @public
    */
-  lastUpdatedTime?: string;
+  lastUpdatedTime?: string | undefined;
 
   /**
    * <p>The timestamp of when the rule was created.</p>
+   * @public
    */
-  createdTime?: string;
+  createdTime?: string | undefined;
 
   /**
    * <p>The rule ARN.</p>
+   * @public
    */
-  arn?: string;
+  arn?: string | undefined;
 }
 
-export namespace RuleDetail {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RuleDetail): any => ({
-    ...obj,
-    ...(obj.expression && { expression: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetRulesResult {
   /**
    * <p>The details of the requested rule.</p>
+   * @public
    */
-  ruleDetails?: RuleDetail[];
+  ruleDetails?: RuleDetail[] | undefined;
 
   /**
    * <p>The next page token to be used in subsequent requests.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetRulesResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetRulesResult): any => ({
-    ...obj,
-    ...(obj.ruleDetails && { ruleDetails: obj.ruleDetails.map((item) => RuleDetail.filterSensitiveLog(item)) }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetVariablesRequest {
   /**
    * <p>The name of the variable. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p>The next page token of the get variable request. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The max size per page determined for the get variable request. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace GetVariablesRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetVariablesRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface GetVariablesResult {
   /**
    * <p>The names of the variables returned. </p>
+   * @public
    */
-  variables?: Variable[];
+  variables?: Variable[] | undefined;
 
   /**
    * <p>The next page token to be used in subsequent requests. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace GetVariablesResult {
+/**
+ * <p>
+ * A conditional statement for filtering a list of past predictions.
+ * </p>
+ * @public
+ */
+export interface FilterCondition {
   /**
-   * @internal
+   * <p>
+   * A statement containing a resource property and a value to specify filter condition.
+   * </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: GetVariablesResult): any => ({
-    ...obj,
-  });
+  value?: string | undefined;
 }
 
+/**
+ * <p>
+ * The time period for when the predictions were generated.
+ * </p>
+ * @public
+ */
+export interface PredictionTimeRange {
+  /**
+   * <p>
+   * The start time of the time period for when the predictions were generated.
+   * </p>
+   * @public
+   */
+  startTime: string | undefined;
+
+  /**
+   * <p>
+   * The end time of the time period for when the predictions were generated.
+   * </p>
+   * @public
+   */
+  endTime: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListEventPredictionsRequest {
+  /**
+   * <p>
+   * The event ID.
+   * </p>
+   * @public
+   */
+  eventId?: FilterCondition | undefined;
+
+  /**
+   * <p>
+   * The event type associated with the detector.
+   * </p>
+   * @public
+   */
+  eventType?: FilterCondition | undefined;
+
+  /**
+   * <p>
+   * The detector ID.
+   * </p>
+   * @public
+   */
+  detectorId?: FilterCondition | undefined;
+
+  /**
+   * <p>
+   * The detector version ID.
+   * </p>
+   * @public
+   */
+  detectorVersionId?: FilterCondition | undefined;
+
+  /**
+   * <p>
+   * The time period for when the predictions were generated.
+   * </p>
+   * @public
+   */
+  predictionTimeRange?: PredictionTimeRange | undefined;
+
+  /**
+   * <p>
+   * Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
+   * </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * <p>
+   * The maximum number of predictions to return for the request.
+   * </p>
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * <p>
+ * Information about the summary of an event prediction.
+ * </p>
+ * @public
+ */
+export interface EventPredictionSummary {
+  /**
+   * <p>
+   * The event ID.
+   * </p>
+   * @public
+   */
+  eventId?: string | undefined;
+
+  /**
+   * <p>
+   * The event type.
+   * </p>
+   * @public
+   */
+  eventTypeName?: string | undefined;
+
+  /**
+   * <p>
+   * The timestamp of the event.
+   * </p>
+   * @public
+   */
+  eventTimestamp?: string | undefined;
+
+  /**
+   * <p>
+   * The timestamp when the prediction was generated.
+   * </p>
+   * @public
+   */
+  predictionTimestamp?: string | undefined;
+
+  /**
+   * <p>
+   * The detector ID.
+   * </p>
+   * @public
+   */
+  detectorId?: string | undefined;
+
+  /**
+   * <p>
+   * The detector version ID.
+   * </p>
+   * @public
+   */
+  detectorVersionId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListEventPredictionsResult {
+  /**
+   * <p>
+   * The summary of the past predictions.
+   * </p>
+   * @public
+   */
+  eventPredictionSummaries?: EventPredictionSummary[] | undefined;
+
+  /**
+   * <p>
+   * Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
+   * </p>
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The ARN that specifies the resource whose tags you want to list.</p>
+   * @public
    */
   resourceARN: string | undefined;
 
   /**
    * <p>The next token from the previous results.</p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p>The maximum number of objects to return for the request. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
-export namespace ListTagsForResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsForResourceResult {
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 
   /**
    * <p>The next token for subsequent requests. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export namespace ListTagsForResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsForResourceResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutDetectorRequest {
   /**
    * <p>The detector ID. </p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The description of the detector.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The name of the event type.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace PutDetectorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutDetectorRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutDetectorResult {}
 
-export namespace PutDetectorResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutDetectorResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutEntityTypeRequest {
   /**
    * <p>The name of the entity type.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace PutEntityTypeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutEntityTypeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutEntityTypeResult {}
 
-export namespace PutEntityTypeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutEntityTypeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutEventTypeRequest {
   /**
    * <p>The name.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The description of the event type.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The event type variables.</p>
+   * @public
    */
   eventVariables: string[] | undefined;
 
   /**
    * <p>The event type labels.</p>
+   * @public
    */
-  labels?: string[];
+  labels?: string[] | undefined;
 
   /**
    * <p>The entity type for the event type. Example entity types: customer, merchant, account.</p>
+   * @public
    */
   entityTypes: string[] | undefined;
 
   /**
-   * <p>Specifies if ingenstion is enabled or disabled.</p>
+   * <p>Specifies if ingestion is enabled or disabled.</p>
+   * @public
    */
-  eventIngestion?: EventIngestion | string;
+  eventIngestion?: EventIngestion | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
-}
+  tags?: Tag[] | undefined;
 
-export namespace PutEventTypeRequest {
   /**
-   * @internal
+   * <p>Enables or disables event orchestration. If enabled, you can send event predictions to select AWS services for downstream processing of the events.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: PutEventTypeRequest): any => ({
-    ...obj,
-  });
+  eventOrchestration?: EventOrchestration | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutEventTypeResult {}
 
-export namespace PutEventTypeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutEventTypeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutExternalModelRequest {
   /**
    * <p>The model endpoints name.</p>
+   * @public
    */
   modelEndpoint: string | undefined;
 
   /**
    * <p>The source of the model.</p>
+   * @public
    */
-  modelSource: ModelSource | string | undefined;
+  modelSource: ModelSource | undefined;
 
   /**
    * <p>The IAM role used to invoke the model endpoint.</p>
+   * @public
    */
   invokeModelEndpointRoleArn: string | undefined;
 
   /**
    * <p>The model endpoint input configuration.</p>
+   * @public
    */
   inputConfiguration: ModelInputConfiguration | undefined;
 
   /**
    * <p>The model endpoint output configuration.</p>
+   * @public
    */
   outputConfiguration: ModelOutputConfiguration | undefined;
 
   /**
    * <p>The model endpoint’s status in Amazon Fraud Detector.</p>
+   * @public
    */
-  modelEndpointStatus: ModelEndpointStatus | string | undefined;
+  modelEndpointStatus: ModelEndpointStatus | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace PutExternalModelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutExternalModelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutExternalModelResult {}
 
-export namespace PutExternalModelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutExternalModelResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutKMSEncryptionKeyRequest {
   /**
    * <p>The KMS encryption key ARN.</p>
+   *          <p>The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.</p>
+   * @public
    */
   kmsEncryptionKeyArn: string | undefined;
 }
 
-export namespace PutKMSEncryptionKeyRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutKMSEncryptionKeyRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutKMSEncryptionKeyResult {}
 
-export namespace PutKMSEncryptionKeyResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutKMSEncryptionKeyResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutLabelRequest {
   /**
    * <p>The label name.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The label description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p></p>
+   * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace PutLabelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutLabelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutLabelResult {}
 
-export namespace PutLabelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutLabelResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutOutcomeRequest {
   /**
    * <p>The name of the outcome.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The outcome description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace PutOutcomeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutOutcomeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface PutOutcomeResult {}
 
-export namespace PutOutcomeResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: PutOutcomeResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendEventRequest {
   /**
    * <p>The event ID to upload.</p>
+   * @public
    */
   eventId: string | undefined;
 
   /**
    * <p>The event type name of the event.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>
+   * @public
    */
   eventTimestamp: string | undefined;
 
   /**
    * <p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>
+   * @public
    */
-  eventVariables: { [key: string]: string } | undefined;
+  eventVariables: Record<string, string> | undefined;
 
   /**
    * <p>The label to associate with the event. Required if specifying <code>labelTimestamp</code>.</p>
+   * @public
    */
-  assignedLabel?: string;
+  assignedLabel?: string | undefined;
 
   /**
    * <p>The timestamp associated with the label. Required if specifying <code>assignedLabel</code>.</p>
+   * @public
    */
-  labelTimestamp?: string;
+  labelTimestamp?: string | undefined;
 
   /**
    * <p>An array of entities.</p>
+   * @public
    */
   entities: Entity[] | undefined;
 }
 
-export namespace SendEventRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendEventRequest): any => ({
-    ...obj,
-    ...(obj.eventVariables && { eventVariables: SENSITIVE_STRING }),
-    ...(obj.entities && { entities: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface SendEventResult {}
 
-export namespace SendEventResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SendEventResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The resource ARN.</p>
+   * @public
    */
   resourceARN: string | undefined;
 
   /**
    * <p>The tags to assign to the resource.</p>
+   * @public
    */
   tags: Tag[] | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResult {}
 
-export namespace TagResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The ARN of the resource from which to remove the tag.</p>
+   * @public
    */
   resourceARN: string | undefined;
 
   /**
    * <p>The resource ARN.</p>
+   * @public
    */
   tagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResult {}
 
-export namespace UntagResourceResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionRequest {
   /**
    * <p>The parent detector ID for the detector version you want to update.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The detector version ID. </p>
+   * @public
    */
   detectorVersionId: string | undefined;
 
   /**
    * <p>The Amazon SageMaker model endpoints to include in the detector version.</p>
+   * @public
    */
   externalModelEndpoints: string[] | undefined;
 
   /**
    * <p>The rules to include in the detector version.</p>
+   * @public
    */
   rules: Rule[] | undefined;
 
   /**
    * <p>The detector version description. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The model versions to include in the detector version.</p>
+   * @public
    */
-  modelVersions?: ModelVersion[];
+  modelVersions?: ModelVersion[] | undefined;
 
   /**
    * <p>The rule execution mode to add to the detector.</p>
-   * 	        <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p>
-   * 	        <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>
+   *          <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p>
+   *          <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>
    *          <p>The default behavior is <code>FIRST_MATCHED</code>.</p>
+   * @public
    */
-  ruleExecutionMode?: RuleExecutionMode | string;
+  ruleExecutionMode?: RuleExecutionMode | undefined;
 }
 
-export namespace UpdateDetectorVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionResult {}
 
-export namespace UpdateDetectorVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionMetadataRequest {
   /**
    * <p>The detector ID.</p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The detector version ID. </p>
+   * @public
    */
   detectorVersionId: string | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
   description: string | undefined;
 }
 
-export namespace UpdateDetectorVersionMetadataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionMetadataRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionMetadataResult {}
 
-export namespace UpdateDetectorVersionMetadataResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionMetadataResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionStatusRequest {
   /**
    * <p>The detector ID. </p>
+   * @public
    */
   detectorId: string | undefined;
 
   /**
    * <p>The detector version ID. </p>
+   * @public
    */
   detectorVersionId: string | undefined;
 
   /**
    * <p>The new status.</p>
+   *          <p>The only supported values are <code>ACTIVE</code> and <code>INACTIVE</code>
+   *          </p>
+   * @public
    */
-  status: DetectorVersionStatus | string | undefined;
+  status: DetectorVersionStatus | undefined;
 }
 
-export namespace UpdateDetectorVersionStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateDetectorVersionStatusResult {}
 
-export namespace UpdateDetectorVersionStatusResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateDetectorVersionStatusResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateEventLabelRequest {
   /**
    * <p>The ID of the event associated with the label to update.</p>
+   * @public
    */
   eventId: string | undefined;
 
   /**
    * <p>The event type of the event associated with the label to update.</p>
+   * @public
    */
   eventTypeName: string | undefined;
 
   /**
    * <p>The new label to assign to the event.</p>
+   * @public
    */
   assignedLabel: string | undefined;
 
   /**
    * <p>The timestamp associated with the label. The timestamp must be specified using ISO 8601 standard in UTC. </p>
+   * @public
    */
   labelTimestamp: string | undefined;
 }
 
-export namespace UpdateEventLabelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateEventLabelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateEventLabelResult {}
 
-export namespace UpdateEventLabelResult {
+/**
+ * @public
+ */
+export interface UpdateListRequest {
   /**
-   * @internal
+   * <p>
+   *             The name of the list to update.
+   *         </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: UpdateEventLabelResult): any => ({
-    ...obj,
-  });
+  name: string | undefined;
+
+  /**
+   * <p>
+   *             One or more list elements to add or replace. If you are providing the elements, make sure to specify the <code>updateMode</code> to use.
+   *         </p>
+   *          <p>If you are deleting all elements from the list, use <code>REPLACE</code> for the <code>updateMode</code> and provide an empty list (0 elements).</p>
+   * @public
+   */
+  elements?: string[] | undefined;
+
+  /**
+   * <p>
+   *             The new description.
+   *         </p>
+   * @public
+   */
+  description?: string | undefined;
+
+  /**
+   * <p>
+   *             The update mode (type).
+   *         </p>
+   *          <ul>
+   *             <li>
+   *                <p>Use <code>APPEND</code> if you are adding elements to the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>Use <code>REPLACE</code> if you replacing existing elements in the list.</p>
+   *             </li>
+   *             <li>
+   *                <p>Use <code>REMOVE</code> if you are removing elements from the list.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  updateMode?: ListUpdateMode | undefined;
+
+  /**
+   * <p>
+   *             The variable type you want to assign to the list.
+   *         </p>
+   *          <note>
+   *             <p>You cannot update a variable type of a list that already has a variable type assigned to it. You can assign a variable type to a list only if the list does not already have a variable type.</p>
+   *          </note>
+   * @public
+   */
+  variableType?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateListResult {}
+
+/**
+ * @public
+ */
 export interface UpdateModelRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The new model description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 }
 
-export namespace UpdateModelRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateModelResult {}
 
-export namespace UpdateModelResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateModelVersionRequest {
   /**
    * <p>The model ID.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The major version number.</p>
+   * @public
    */
   majorVersionNumber: string | undefined;
 
   /**
    * <p>The details of the external events data used for training the model version. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>
+   * @public
    */
-  externalEventsDetail?: ExternalEventsDetail;
+  externalEventsDetail?: ExternalEventsDetail | undefined;
 
   /**
    * <p>The details of the ingested event used for training the model version. Required if your <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>
+   * @public
    */
-  ingestedEventsDetail?: IngestedEventsDetail;
+  ingestedEventsDetail?: IngestedEventsDetail | undefined;
 
   /**
    * <p>A collection of key and value pairs.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace UpdateModelVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelVersionRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateModelVersionResult {
   /**
    * <p>The model ID.</p>
+   * @public
    */
-  modelId?: string;
+  modelId?: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType?: ModelTypeEnum | string;
+  modelType?: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number of the model version updated.</p>
+   * @public
    */
-  modelVersionNumber?: string;
+  modelVersionNumber?: string | undefined;
 
   /**
    * <p>The status of the updated model version.</p>
+   * @public
    */
-  status?: string;
+  status?: string | undefined;
 }
 
-export namespace UpdateModelVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelVersionResult): any => ({
-    ...obj,
-  });
-}
-
-export enum ModelVersionStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-  TRAINING_CANCELLED = "TRAINING_CANCELLED",
-}
-
+/**
+ * @public
+ */
 export interface UpdateModelVersionStatusRequest {
   /**
    * <p>The model ID of the model version to update.</p>
+   * @public
    */
   modelId: string | undefined;
 
   /**
    * <p>The model type.</p>
+   * @public
    */
-  modelType: ModelTypeEnum | string | undefined;
+  modelType: ModelTypeEnum | undefined;
 
   /**
    * <p>The model version number.</p>
+   * @public
    */
   modelVersionNumber: string | undefined;
 
   /**
    * <p>The model version status.</p>
+   * @public
    */
-  status: ModelVersionStatus | string | undefined;
+  status: ModelVersionStatus | undefined;
 }
 
-export namespace UpdateModelVersionStatusRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelVersionStatusRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateModelVersionStatusResult {}
 
-export namespace UpdateModelVersionStatusResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateModelVersionStatusResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRuleMetadataRequest {
   /**
    * <p>The rule to update.</p>
+   * @public
    */
   rule: Rule | undefined;
 
   /**
    * <p>The rule description.</p>
+   * @public
    */
   description: string | undefined;
 }
 
-export namespace UpdateRuleMetadataRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRuleMetadataRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRuleMetadataResult {}
 
-export namespace UpdateRuleMetadataResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRuleMetadataResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRuleVersionRequest {
   /**
    * <p>The rule to update.</p>
+   * @public
    */
   rule: Rule | undefined;
 
   /**
    * <p>The description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The rule expression.</p>
+   * @public
    */
   expression: string | undefined;
 
   /**
    * <p>The language.</p>
+   * @public
    */
-  language: Language | string | undefined;
+  language: Language | undefined;
 
   /**
    * <p>The outcomes.</p>
+   * @public
    */
   outcomes: string[] | undefined;
 
   /**
    * <p>The tags to assign to the rule version.</p>
+   * @public
    */
-  tags?: Tag[];
+  tags?: Tag[] | undefined;
 }
 
-export namespace UpdateRuleVersionRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRuleVersionRequest): any => ({
-    ...obj,
-    ...(obj.expression && { expression: SENSITIVE_STRING }),
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateRuleVersionResult {
   /**
    * <p>The new rule version that was created.</p>
+   * @public
    */
-  rule?: Rule;
+  rule?: Rule | undefined;
 }
 
-export namespace UpdateRuleVersionResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateRuleVersionResult): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateVariableRequest {
   /**
    * <p>The name of the variable.</p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p>The new default value of the variable.</p>
+   * @public
    */
-  defaultValue?: string;
+  defaultValue?: string | undefined;
 
   /**
    * <p>The new description.</p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * <p>The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p>
+   * @public
    */
-  variableType?: string;
+  variableType?: string | undefined;
 }
 
-export namespace UpdateVariableRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateVariableRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateVariableResult {}
-
-export namespace UpdateVariableResult {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateVariableResult): any => ({
-    ...obj,
-  });
-}

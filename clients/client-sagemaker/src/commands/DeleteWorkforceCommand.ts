@@ -1,107 +1,73 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteWorkforceRequest, DeleteWorkforceResponse } from "../models/models_1";
-import {
-  deserializeAws_json1_1DeleteWorkforceCommand,
-  serializeAws_json1_1DeleteWorkforceCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWorkforceRequest, DeleteWorkforceResponse } from "../models/models_2";
+import { DeleteWorkforce$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWorkforceCommand}.
+ */
 export interface DeleteWorkforceCommandInput extends DeleteWorkforceRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWorkforceCommand}.
+ */
 export interface DeleteWorkforceCommandOutput extends DeleteWorkforceResponse, __MetadataBearer {}
 
 /**
- * <p>Use this operation to delete a workforce.</p>
- *
- *          <p>If you want to create a new workforce in an Amazon Web Services Region where
- *       a workforce already exists, use this operation to delete the
- *       existing workforce and then use
- *       to create a new workforce.</p>
- *          <important>
- *             <p>If a private workforce contains one or more work teams, you must use
- *             the
- *             operation to delete all work teams before you delete the workforce.
- *             If you try to delete a workforce that contains one or more work teams,
- *             you will recieve a <code>ResourceInUse</code> error.</p>
- *         </important>
+ * <p>Use this operation to delete a workforce.</p> <p>If you want to create a new workforce in an Amazon Web Services Region where a workforce already exists, use this operation to delete the existing workforce and then use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html">CreateWorkforce</a> to create a new workforce.</p> <important> <p>If a private workforce contains one or more work teams, you must use the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html">DeleteWorkteam</a> operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will receive a <code>ResourceInUse</code> error.</p> </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, DeleteWorkforceCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DeleteWorkforceCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DeleteWorkforceRequest
+ *   WorkforceName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteWorkforceCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteWorkforceCommandInput - {@link DeleteWorkforceCommandInput}
+ * @returns {@link DeleteWorkforceCommandOutput}
  * @see {@link DeleteWorkforceCommandInput} for command's `input` shape.
  * @see {@link DeleteWorkforceCommandOutput} for command's `response` shape.
- * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWorkforceCommand extends $Command<
-  DeleteWorkforceCommandInput,
-  DeleteWorkforceCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWorkforceCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWorkforceCommandInput, DeleteWorkforceCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DeleteWorkforceCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWorkforceRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteWorkforceResponse.filterSensitiveLog,
+export class DeleteWorkforceCommand extends command<DeleteWorkforceCommandInput, DeleteWorkforceCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWorkforce",
+  DeleteWorkforce$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWorkforceRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWorkforceCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteWorkforceCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWorkforceCommandOutput> {
-    return deserializeAws_json1_1DeleteWorkforceCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWorkforceCommandInput;
+      output: DeleteWorkforceCommandOutput;
+    };
+  };
 }

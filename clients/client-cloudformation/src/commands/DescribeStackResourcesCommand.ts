@@ -1,114 +1,114 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFormationClient";
-import { DescribeStackResourcesInput, DescribeStackResourcesOutput } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeStackResourcesCommand,
-  serializeAws_queryDescribeStackResourcesCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeStackResourcesInput, DescribeStackResourcesOutput } from "../models/models_0";
+import { DescribeStackResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeStackResourcesCommand}.
+ */
 export interface DescribeStackResourcesCommandInput extends DescribeStackResourcesInput {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeStackResourcesCommand}.
+ */
 export interface DescribeStackResourcesCommandOutput extends DescribeStackResourcesOutput, __MetadataBearer {}
 
 /**
  * <p>Returns Amazon Web Services resource descriptions for running and deleted stacks. If
- *             <code>StackName</code> is specified, all the associated resources that are part of the
- *          stack are returned. If <code>PhysicalResourceId</code> is specified, the associated
- *          resources of the stack that the resource belongs to are returned.</p>
+ *         <code>StackName</code> is specified, all the associated resources that are part of the stack
+ *       are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the
+ *       stack that the resource belongs to are returned.</p>
  *          <note>
- *             <p>Only the first 100 resources will be returned. If your stack has more resources
- *             than this, you should use <code>ListStackResources</code> instead.</p>
+ *             <p>Only the first 100 resources will be returned. If your stack has more resources than
+ *         this, you should use <code>ListStackResources</code> instead.</p>
  *          </note>
- *          <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information
- *          for up to 90 days after the stack has been deleted.</p>
- *          <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>,
- *          but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the
- *          returned result. For more information about resources, the <code>LogicalResourceId</code>
- *          and <code>PhysicalResourceId</code>, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">CloudFormation User
- *          Guide</a>.</p>
+ *          <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for
+ *       up to 90 days after the stack has been deleted.</p>
+ *          <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not
+ *       both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned
+ *       result. For more information about resources, the <code>LogicalResourceId</code> and
+ *         <code>PhysicalResourceId</code>, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">CloudFormation User Guide</a>.</p>
  *          <note>
- *             <p>A <code>ValidationError</code> is returned if you specify both
- *                <code>StackName</code> and <code>PhysicalResourceId</code> in the same
- *             request.</p>
+ *             <p>A <code>ValidationError</code> is returned if you specify both <code>StackName</code>
+ *         and <code>PhysicalResourceId</code> in the same request.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFormationClient, DescribeStackResourcesCommand } from "@aws-sdk/client-cloudformation"; // ES Modules import
  * // const { CloudFormationClient, DescribeStackResourcesCommand } = require("@aws-sdk/client-cloudformation"); // CommonJS import
+ * // import type { CloudFormationClientConfig } from "@aws-sdk/client-cloudformation";
+ * const config = {}; // type is CloudFormationClientConfig
  * const client = new CloudFormationClient(config);
+ * const input = { // DescribeStackResourcesInput
+ *   StackName: "STRING_VALUE",
+ *   LogicalResourceId: "STRING_VALUE",
+ *   PhysicalResourceId: "STRING_VALUE",
+ * };
  * const command = new DescribeStackResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeStackResourcesOutput
+ * //   StackResources: [ // StackResources
+ * //     { // StackResource
+ * //       StackName: "STRING_VALUE",
+ * //       StackId: "STRING_VALUE",
+ * //       LogicalResourceId: "STRING_VALUE", // required
+ * //       PhysicalResourceId: "STRING_VALUE",
+ * //       ResourceType: "STRING_VALUE", // required
+ * //       Timestamp: new Date("TIMESTAMP"), // required
+ * //       ResourceStatus: "CREATE_IN_PROGRESS" || "CREATE_FAILED" || "CREATE_COMPLETE" || "DELETE_IN_PROGRESS" || "DELETE_FAILED" || "DELETE_COMPLETE" || "DELETE_SKIPPED" || "UPDATE_IN_PROGRESS" || "UPDATE_FAILED" || "UPDATE_COMPLETE" || "IMPORT_FAILED" || "IMPORT_COMPLETE" || "IMPORT_IN_PROGRESS" || "IMPORT_ROLLBACK_IN_PROGRESS" || "IMPORT_ROLLBACK_FAILED" || "IMPORT_ROLLBACK_COMPLETE" || "EXPORT_FAILED" || "EXPORT_COMPLETE" || "EXPORT_IN_PROGRESS" || "EXPORT_ROLLBACK_IN_PROGRESS" || "EXPORT_ROLLBACK_FAILED" || "EXPORT_ROLLBACK_COMPLETE" || "UPDATE_ROLLBACK_IN_PROGRESS" || "UPDATE_ROLLBACK_COMPLETE" || "UPDATE_ROLLBACK_FAILED" || "ROLLBACK_IN_PROGRESS" || "ROLLBACK_COMPLETE" || "ROLLBACK_FAILED", // required
+ * //       ResourceStatusReason: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       DriftInformation: { // StackResourceDriftInformation
+ * //         StackResourceDriftStatus: "IN_SYNC" || "MODIFIED" || "DELETED" || "NOT_CHECKED" || "UNKNOWN" || "UNSUPPORTED", // required
+ * //         LastCheckTimestamp: new Date("TIMESTAMP"),
+ * //       },
+ * //       ModuleInfo: { // ModuleInfo
+ * //         TypeHierarchy: "STRING_VALUE",
+ * //         LogicalIdHierarchy: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeStackResourcesCommandInput - {@link DescribeStackResourcesCommandInput}
+ * @returns {@link DescribeStackResourcesCommandOutput}
  * @see {@link DescribeStackResourcesCommandInput} for command's `input` shape.
  * @see {@link DescribeStackResourcesCommandOutput} for command's `response` shape.
- * @see {@link CloudFormationClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudFormationClientResolvedConfig | config} for CloudFormationClient's `config` shape.
  *
+ * @throws {@link CloudFormationServiceException}
+ * <p>Base exception class for all service exceptions from CloudFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeStackResourcesCommand extends $Command<
-  DescribeStackResourcesCommandInput,
-  DescribeStackResourcesCommandOutput,
-  CloudFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeStackResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeStackResourcesCommandInput, DescribeStackResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFormationClient";
-    const commandName = "DescribeStackResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeStackResourcesInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeStackResourcesOutput.filterSensitiveLog,
+export class DescribeStackResourcesCommand extends command<DescribeStackResourcesCommandInput, DescribeStackResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeStackResources",
+  DescribeStackResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeStackResourcesInput;
+      output: DescribeStackResourcesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeStackResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeStackResourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeStackResourcesCommandOutput> {
-    return deserializeAws_queryDescribeStackResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeStackResourcesCommandInput;
+      output: DescribeStackResourcesCommandOutput;
+    };
+  };
 }

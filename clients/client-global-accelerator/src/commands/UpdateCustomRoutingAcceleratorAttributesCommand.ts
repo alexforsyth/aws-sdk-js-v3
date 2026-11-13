@@ -1,35 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   UpdateCustomRoutingAcceleratorAttributesRequest,
   UpdateCustomRoutingAcceleratorAttributesResponse,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateCustomRoutingAcceleratorAttributesCommand,
-  serializeAws_json1_1UpdateCustomRoutingAcceleratorAttributesCommand,
-} from "../protocols/Aws_json1_1";
+import { UpdateCustomRoutingAcceleratorAttributes$ } from "../schemas/schemas_0";
 
-export interface UpdateCustomRoutingAcceleratorAttributesCommandInput
-  extends UpdateCustomRoutingAcceleratorAttributesRequest {}
-export interface UpdateCustomRoutingAcceleratorAttributesCommandOutput
-  extends UpdateCustomRoutingAcceleratorAttributesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCustomRoutingAcceleratorAttributesCommand}.
+ */
+export interface UpdateCustomRoutingAcceleratorAttributesCommandInput extends UpdateCustomRoutingAcceleratorAttributesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCustomRoutingAcceleratorAttributesCommand}.
+ */
+export interface UpdateCustomRoutingAcceleratorAttributesCommandOutput extends UpdateCustomRoutingAcceleratorAttributesResponse, __MetadataBearer {}
 
 /**
  * <p>Update the attributes for a custom routing accelerator. </p>
@@ -38,77 +32,69 @@ export interface UpdateCustomRoutingAcceleratorAttributesCommandOutput
  * ```javascript
  * import { GlobalAcceleratorClient, UpdateCustomRoutingAcceleratorAttributesCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, UpdateCustomRoutingAcceleratorAttributesCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // UpdateCustomRoutingAcceleratorAttributesRequest
+ *   AcceleratorArn: "STRING_VALUE", // required
+ *   FlowLogsEnabled: true || false,
+ *   FlowLogsS3Bucket: "STRING_VALUE",
+ *   FlowLogsS3Prefix: "STRING_VALUE",
+ * };
  * const command = new UpdateCustomRoutingAcceleratorAttributesCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateCustomRoutingAcceleratorAttributesResponse
+ * //   AcceleratorAttributes: { // CustomRoutingAcceleratorAttributes
+ * //     FlowLogsEnabled: true || false,
+ * //     FlowLogsS3Bucket: "STRING_VALUE",
+ * //     FlowLogsS3Prefix: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateCustomRoutingAcceleratorAttributesCommandInput - {@link UpdateCustomRoutingAcceleratorAttributesCommandInput}
+ * @returns {@link UpdateCustomRoutingAcceleratorAttributesCommandOutput}
  * @see {@link UpdateCustomRoutingAcceleratorAttributesCommandInput} for command's `input` shape.
  * @see {@link UpdateCustomRoutingAcceleratorAttributesCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link AcceleratorNotFoundException} (client fault)
+ *  <p>The accelerator that you specified doesn't exist.</p>
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access permission.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link TransactionInProgressException} (client fault)
+ *  <p>There's already a transaction in progress. Another transaction can't be processed.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCustomRoutingAcceleratorAttributesCommand extends $Command<
-  UpdateCustomRoutingAcceleratorAttributesCommandInput,
-  UpdateCustomRoutingAcceleratorAttributesCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCustomRoutingAcceleratorAttributesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    UpdateCustomRoutingAcceleratorAttributesCommandInput,
-    UpdateCustomRoutingAcceleratorAttributesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "UpdateCustomRoutingAcceleratorAttributesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCustomRoutingAcceleratorAttributesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateCustomRoutingAcceleratorAttributesResponse.filterSensitiveLog,
+export class UpdateCustomRoutingAcceleratorAttributesCommand extends command<UpdateCustomRoutingAcceleratorAttributesCommandInput, UpdateCustomRoutingAcceleratorAttributesCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCustomRoutingAcceleratorAttributes",
+  UpdateCustomRoutingAcceleratorAttributes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCustomRoutingAcceleratorAttributesRequest;
+      output: UpdateCustomRoutingAcceleratorAttributesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateCustomRoutingAcceleratorAttributesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCustomRoutingAcceleratorAttributesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateCustomRoutingAcceleratorAttributesCommandOutput> {
-    return deserializeAws_json1_1UpdateCustomRoutingAcceleratorAttributesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCustomRoutingAcceleratorAttributesCommandInput;
+      output: UpdateCustomRoutingAcceleratorAttributesCommandOutput;
+    };
+  };
 }

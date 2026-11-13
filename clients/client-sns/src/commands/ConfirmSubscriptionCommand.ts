@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConfirmSubscriptionInput, ConfirmSubscriptionResponse } from "../models/models_0";
-import {
-  deserializeAws_queryConfirmSubscriptionCommand,
-  serializeAws_queryConfirmSubscriptionCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SNSClientResolvedConfig } from "../SNSClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ConfirmSubscriptionInput, ConfirmSubscriptionResponse } from "../models/models_0";
+import { ConfirmSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ConfirmSubscriptionCommand}.
+ */
 export interface ConfirmSubscriptionCommandInput extends ConfirmSubscriptionInput {}
+/**
+ * @public
+ *
+ * The output of {@link ConfirmSubscriptionCommand}.
+ */
 export interface ConfirmSubscriptionCommandOutput extends ConfirmSubscriptionResponse, __MetadataBearer {}
 
 /**
@@ -32,68 +33,74 @@ export interface ConfirmSubscriptionCommandOutput extends ConfirmSubscriptionRes
  * ```javascript
  * import { SNSClient, ConfirmSubscriptionCommand } from "@aws-sdk/client-sns"; // ES Modules import
  * // const { SNSClient, ConfirmSubscriptionCommand } = require("@aws-sdk/client-sns"); // CommonJS import
+ * // import type { SNSClientConfig } from "@aws-sdk/client-sns";
+ * const config = {}; // type is SNSClientConfig
  * const client = new SNSClient(config);
+ * const input = { // ConfirmSubscriptionInput
+ *   TopicArn: "STRING_VALUE", // required
+ *   Token: "STRING_VALUE", // required
+ *   AuthenticateOnUnsubscribe: "STRING_VALUE",
+ * };
  * const command = new ConfirmSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // ConfirmSubscriptionResponse
+ * //   SubscriptionArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ConfirmSubscriptionCommandInput - {@link ConfirmSubscriptionCommandInput}
+ * @returns {@link ConfirmSubscriptionCommandOutput}
  * @see {@link ConfirmSubscriptionCommandInput} for command's `input` shape.
  * @see {@link ConfirmSubscriptionCommandOutput} for command's `response` shape.
- * @see {@link SNSClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SNSClientResolvedConfig | config} for SNSClient's `config` shape.
  *
+ * @throws {@link AuthorizationErrorException} (client fault)
+ *  <p>Indicates that the user has been denied access to the requested resource.</p>
+ *
+ * @throws {@link FilterPolicyLimitExceededException} (client fault)
+ *  <p>Indicates that the number of filter polices in your Amazon Web Services account exceeds the limit. To
+ *             add more filter polices, submit an Amazon SNS Limit Increase case in the Amazon Web Services Support
+ *             Center.</p>
+ *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Indicates an internal service error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Indicates that a request parameter does not comply with the associated
+ *             constraints.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Indicates that the requested resource does not exist.</p>
+ *
+ * @throws {@link ReplayLimitExceededException} (client fault)
+ *  <p>Indicates that the request parameter has exceeded the maximum number of concurrent message replays.</p>
+ *
+ * @throws {@link SubscriptionLimitExceededException} (client fault)
+ *  <p>Indicates that the customer already owns the maximum allowed number of
+ *             subscriptions.</p>
+ *
+ * @throws {@link SNSServiceException}
+ * <p>Base exception class for all service exceptions from SNS service.</p>
+ *
+ *
+ * @public
  */
-export class ConfirmSubscriptionCommand extends $Command<
-  ConfirmSubscriptionCommandInput,
-  ConfirmSubscriptionCommandOutput,
-  SNSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ConfirmSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SNSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ConfirmSubscriptionCommandInput, ConfirmSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SNSClient";
-    const commandName = "ConfirmSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ConfirmSubscriptionInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ConfirmSubscriptionResponse.filterSensitiveLog,
+export class ConfirmSubscriptionCommand extends command<ConfirmSubscriptionCommandInput, ConfirmSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "ConfirmSubscription",
+  ConfirmSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ConfirmSubscriptionInput;
+      output: ConfirmSubscriptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ConfirmSubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryConfirmSubscriptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ConfirmSubscriptionCommandOutput> {
-    return deserializeAws_queryConfirmSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ConfirmSubscriptionCommandInput;
+      output: ConfirmSubscriptionCommandOutput;
+    };
+  };
 }

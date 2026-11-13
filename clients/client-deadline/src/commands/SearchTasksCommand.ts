@@ -1,0 +1,204 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchTasksRequest, SearchTasksResponse } from "../models/models_1";
+import { SearchTasks$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchTasksCommand}.
+ */
+export interface SearchTasksCommandInput extends SearchTasksRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchTasksCommand}.
+ */
+export interface SearchTasksCommandOutput extends SearchTasksResponse, __MetadataBearer {}
+
+/**
+ * Searches for tasks.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DeadlineClient, SearchTasksCommand } from "@aws-sdk/client-deadline"; // ES Modules import
+ * // const { DeadlineClient, SearchTasksCommand } = require("@aws-sdk/client-deadline"); // CommonJS import
+ * // import type { DeadlineClientConfig } from "@aws-sdk/client-deadline";
+ * const config = {}; // type is DeadlineClientConfig
+ * const client = new DeadlineClient(config);
+ * const input = { // SearchTasksRequest
+ *   farmId: "STRING_VALUE", // required
+ *   filterExpressions: { // SearchGroupedFilterExpressions
+ *     filters: [ // SearchFilterExpressions // required
+ *       { // SearchFilterExpression Union: only one key present
+ *         dateTimeFilter: { // DateTimeFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           dateTime: new Date("TIMESTAMP"), // required
+ *         },
+ *         parameterFilter: { // ParameterFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *         searchTermFilter: { // SearchTermFilterExpression
+ *           searchTerm: "STRING_VALUE", // required
+ *           matchType: "FUZZY_MATCH" || "CONTAINS",
+ *         },
+ *         stringFilter: { // StringFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           value: "STRING_VALUE", // required
+ *         },
+ *         stringListFilter: { // StringListFilterExpression
+ *           name: "STRING_VALUE", // required
+ *           operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *           values: [ // StringFilterList // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *         groupFilter: {
+ *           filters: [ // required
+ *             {//  Union: only one key present
+ *               dateTimeFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 dateTime: new Date("TIMESTAMP"), // required
+ *               },
+ *               parameterFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 value: "STRING_VALUE", // required
+ *               },
+ *               searchTermFilter: {
+ *                 searchTerm: "STRING_VALUE", // required
+ *                 matchType: "FUZZY_MATCH" || "CONTAINS",
+ *               },
+ *               stringFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 value: "STRING_VALUE", // required
+ *               },
+ *               stringListFilter: {
+ *                 name: "STRING_VALUE", // required
+ *                 operator: "EQUAL" || "NOT_EQUAL" || "GREATER_THAN_EQUAL_TO" || "GREATER_THAN" || "LESS_THAN_EQUAL_TO" || "LESS_THAN" || "ANY_EQUALS" || "ALL_NOT_EQUALS", // required
+ *                 values: [ // required
+ *                   "STRING_VALUE",
+ *                 ],
+ *               },
+ *               groupFilter: "<SearchGroupedFilterExpressions>",
+ *             },
+ *           ],
+ *           operator: "AND" || "OR", // required
+ *         },
+ *       },
+ *     ],
+ *     operator: "AND" || "OR", // required
+ *   },
+ *   sortExpressions: [ // SearchSortExpressions
+ *     { // SearchSortExpression Union: only one key present
+ *       userJobsFirst: { // UserJobsFirst
+ *         userIdentityId: "STRING_VALUE", // required
+ *       },
+ *       fieldSort: { // FieldSortExpression
+ *         sortOrder: "ASCENDING" || "DESCENDING", // required
+ *         name: "STRING_VALUE", // required
+ *       },
+ *       parameterSort: { // ParameterSortExpression
+ *         sortOrder: "ASCENDING" || "DESCENDING", // required
+ *         name: "STRING_VALUE", // required
+ *       },
+ *     },
+ *   ],
+ *   itemOffset: Number("int"), // required
+ *   pageSize: Number("int"),
+ *   queueIds: [ // QueueIds // required
+ *     "STRING_VALUE",
+ *   ],
+ *   jobId: "STRING_VALUE",
+ * };
+ * const command = new SearchTasksCommand(input);
+ * const response = await client.send(command);
+ * // { // SearchTasksResponse
+ * //   tasks: [ // TaskSearchSummaries // required
+ * //     { // TaskSearchSummary
+ * //       taskId: "STRING_VALUE",
+ * //       stepId: "STRING_VALUE",
+ * //       jobId: "STRING_VALUE",
+ * //       queueId: "STRING_VALUE",
+ * //       runStatus: "PENDING" || "READY" || "ASSIGNED" || "STARTING" || "SCHEDULED" || "INTERRUPTING" || "RUNNING" || "SUSPENDED" || "CANCELED" || "FAILED" || "SUCCEEDED" || "NOT_COMPATIBLE",
+ * //       targetRunStatus: "READY" || "FAILED" || "SUCCEEDED" || "CANCELED" || "SUSPENDED" || "PENDING",
+ * //       parameters: { // TaskParameters
+ * //         "<keys>": { // TaskParameterValue Union: only one key present
+ * //           int: "STRING_VALUE",
+ * //           float: "STRING_VALUE",
+ * //           string: "STRING_VALUE",
+ * //           path: "STRING_VALUE",
+ * //           chunkInt: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       failureRetryCount: Number("int"),
+ * //       startedAt: new Date("TIMESTAMP"),
+ * //       endedAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //       updatedBy: "STRING_VALUE",
+ * //       latestSessionActionId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextItemOffset: Number("int"),
+ * //   totalResults: Number("int"), // required
+ * // };
+ *
+ * ```
+ *
+ * @param SearchTasksCommandInput - {@link SearchTasksCommandInput}
+ * @returns {@link SearchTasksCommandOutput}
+ * @see {@link SearchTasksCommandInput} for command's `input` shape.
+ * @see {@link SearchTasksCommandOutput} for command's `response` shape.
+ * @see {@link DeadlineClientResolvedConfig | config} for DeadlineClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You don't have permission to perform the action.
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Deadline Cloud can't process your request right now. Try again later.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The requested resource can't be found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  Your request exceeded a request rate quota.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The request isn't valid. This can occur if your request contains malformed JSON or unsupported characters.
+ *
+ * @throws {@link DeadlineServiceException}
+ * <p>Base exception class for all service exceptions from Deadline service.</p>
+ *
+ *
+ * @public
+ */
+export class SearchTasksCommand extends command<SearchTasksCommandInput, SearchTasksCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchTasks",
+  SearchTasks$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchTasksRequest;
+      output: SearchTasksResponse;
+    };
+    sdk: {
+      input: SearchTasksCommandInput;
+      output: SearchTasksCommandOutput;
+    };
+  };
+}

@@ -1,30 +1,31 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateClusterSecurityGroupMessage, CreateClusterSecurityGroupResult } from "../models/models_0";
-import {
-  deserializeAws_queryCreateClusterSecurityGroupCommand,
-  serializeAws_queryCreateClusterSecurityGroupCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateClusterSecurityGroupMessage, CreateClusterSecurityGroupResult } from "../models/models_0";
+import { CreateClusterSecurityGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateClusterSecurityGroupCommand}.
+ */
 export interface CreateClusterSecurityGroupCommandInput extends CreateClusterSecurityGroupMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateClusterSecurityGroupCommand}.
+ */
 export interface CreateClusterSecurityGroupCommandOutput extends CreateClusterSecurityGroupResult, __MetadataBearer {}
 
 /**
  * <p>Creates a new Amazon Redshift security group. You use security groups to control access
  *             to non-VPC clusters.</p>
- *         <p>
+ *          <p>
  * For information about managing security groups, go to
  * <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the
  * <i>Amazon Redshift Cluster Management Guide</i>.</p>
@@ -33,71 +34,104 @@ export interface CreateClusterSecurityGroupCommandOutput extends CreateClusterSe
  * ```javascript
  * import { RedshiftClient, CreateClusterSecurityGroupCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, CreateClusterSecurityGroupCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // CreateClusterSecurityGroupMessage
+ *   ClusterSecurityGroupName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateClusterSecurityGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateClusterSecurityGroupResult
+ * //   ClusterSecurityGroup: { // ClusterSecurityGroup
+ * //     ClusterSecurityGroupName: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     EC2SecurityGroups: [ // EC2SecurityGroupList
+ * //       { // EC2SecurityGroup
+ * //         Status: "STRING_VALUE",
+ * //         EC2SecurityGroupName: "STRING_VALUE",
+ * //         EC2SecurityGroupOwnerId: "STRING_VALUE",
+ * //         Tags: [ // TagList
+ * //           { // Tag
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     IPRanges: [ // IPRangeList
+ * //       { // IPRange
+ * //         Status: "STRING_VALUE",
+ * //         CIDRIP: "STRING_VALUE",
+ * //         Tags: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     Tags: [
+ * //       {
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateClusterSecurityGroupCommandInput - {@link CreateClusterSecurityGroupCommandInput}
+ * @returns {@link CreateClusterSecurityGroupCommandOutput}
  * @see {@link CreateClusterSecurityGroupCommandInput} for command's `input` shape.
  * @see {@link CreateClusterSecurityGroupCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterSecurityGroupAlreadyExistsFault} (client fault)
+ *  <p>A cluster security group with the same name already exists.</p>
+ *
+ * @throws {@link ClusterSecurityGroupQuotaExceededFault} (client fault)
+ *  <p>The request would result in the user exceeding the allowed number of cluster
+ *             security groups.
+ * For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
+ * in the <i>Amazon Redshift Cluster Management Guide</i>.
+ * </p>
+ *
+ * @throws {@link InvalidTagFault} (client fault)
+ *  <p>The tag is invalid.</p>
+ *
+ * @throws {@link TagLimitExceededFault} (client fault)
+ *  <p>You have exceeded the number of tags allowed.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class CreateClusterSecurityGroupCommand extends $Command<
-  CreateClusterSecurityGroupCommandInput,
-  CreateClusterSecurityGroupCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateClusterSecurityGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateClusterSecurityGroupCommandInput, CreateClusterSecurityGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "CreateClusterSecurityGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateClusterSecurityGroupMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateClusterSecurityGroupResult.filterSensitiveLog,
+export class CreateClusterSecurityGroupCommand extends command<CreateClusterSecurityGroupCommandInput, CreateClusterSecurityGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateClusterSecurityGroup",
+  CreateClusterSecurityGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateClusterSecurityGroupMessage;
+      output: CreateClusterSecurityGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateClusterSecurityGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateClusterSecurityGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateClusterSecurityGroupCommandOutput> {
-    return deserializeAws_queryCreateClusterSecurityGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateClusterSecurityGroupCommandInput;
+      output: CreateClusterSecurityGroupCommandOutput;
+    };
+  };
 }

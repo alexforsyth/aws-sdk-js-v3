@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { UpdateApnsVoipChannelRequest, UpdateApnsVoipChannelResponse } from "../models/models_1";
-import { PinpointClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PinpointClient";
-import {
-  deserializeAws_restJson1UpdateApnsVoipChannelCommand,
-  serializeAws_restJson1UpdateApnsVoipChannelCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateApnsVoipChannelRequest, UpdateApnsVoipChannelResponse } from "../models/models_1";
+import { UpdateApnsVoipChannel$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateApnsVoipChannelCommand}.
+ */
 export interface UpdateApnsVoipChannelCommandInput extends UpdateApnsVoipChannelRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateApnsVoipChannelCommand}.
+ */
 export interface UpdateApnsVoipChannelCommandOutput extends UpdateApnsVoipChannelResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,91 @@ export interface UpdateApnsVoipChannelCommandOutput extends UpdateApnsVoipChanne
  * ```javascript
  * import { PinpointClient, UpdateApnsVoipChannelCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
  * // const { PinpointClient, UpdateApnsVoipChannelCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * // import type { PinpointClientConfig } from "@aws-sdk/client-pinpoint";
+ * const config = {}; // type is PinpointClientConfig
  * const client = new PinpointClient(config);
+ * const input = { // UpdateApnsVoipChannelRequest
+ *   APNSVoipChannelRequest: { // APNSVoipChannelRequest
+ *     BundleId: "STRING_VALUE",
+ *     Certificate: "STRING_VALUE",
+ *     DefaultAuthenticationMethod: "STRING_VALUE",
+ *     Enabled: true || false,
+ *     PrivateKey: "STRING_VALUE",
+ *     TeamId: "STRING_VALUE",
+ *     TokenKey: "STRING_VALUE",
+ *     TokenKeyId: "STRING_VALUE",
+ *   },
+ *   ApplicationId: "STRING_VALUE", // required
+ * };
  * const command = new UpdateApnsVoipChannelCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateApnsVoipChannelResponse
+ * //   APNSVoipChannelResponse: { // APNSVoipChannelResponse
+ * //     ApplicationId: "STRING_VALUE",
+ * //     CreationDate: "STRING_VALUE",
+ * //     DefaultAuthenticationMethod: "STRING_VALUE",
+ * //     Enabled: true || false,
+ * //     HasCredential: true || false,
+ * //     HasTokenKey: true || false,
+ * //     Id: "STRING_VALUE",
+ * //     IsArchived: true || false,
+ * //     LastModifiedBy: "STRING_VALUE",
+ * //     LastModifiedDate: "STRING_VALUE",
+ * //     Platform: "STRING_VALUE", // required
+ * //     Version: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateApnsVoipChannelCommandInput - {@link UpdateApnsVoipChannelCommandInput}
+ * @returns {@link UpdateApnsVoipChannelCommandOutput}
  * @see {@link UpdateApnsVoipChannelCommandInput} for command's `input` shape.
  * @see {@link UpdateApnsVoipChannelCommandOutput} for command's `response` shape.
- * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for PinpointClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link MethodNotAllowedException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PayloadTooLargeException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>Provides information about an API request or response.</p>
+ *
+ * @throws {@link PinpointServiceException}
+ * <p>Base exception class for all service exceptions from Pinpoint service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateApnsVoipChannelCommand extends $Command<
-  UpdateApnsVoipChannelCommandInput,
-  UpdateApnsVoipChannelCommandOutput,
-  PinpointClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateApnsVoipChannelCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateApnsVoipChannelCommandInput, UpdateApnsVoipChannelCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointClient";
-    const commandName = "UpdateApnsVoipChannelCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateApnsVoipChannelRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: UpdateApnsVoipChannelResponse.filterSensitiveLog,
+export class UpdateApnsVoipChannelCommand extends command<UpdateApnsVoipChannelCommandInput, UpdateApnsVoipChannelCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateApnsVoipChannel",
+  UpdateApnsVoipChannel$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateApnsVoipChannelRequest;
+      output: UpdateApnsVoipChannelResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateApnsVoipChannelCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateApnsVoipChannelCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateApnsVoipChannelCommandOutput> {
-    return deserializeAws_restJson1UpdateApnsVoipChannelCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateApnsVoipChannelCommandInput;
+      output: UpdateApnsVoipChannelCommandOutput;
+    };
+  };
 }

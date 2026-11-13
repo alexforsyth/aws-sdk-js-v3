@@ -1,111 +1,143 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvsClient";
-import { CreateRecordingConfigurationRequest, CreateRecordingConfigurationResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateRecordingConfigurationCommand,
-  serializeAws_restJson1CreateRecordingConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface CreateRecordingConfigurationCommandInput extends CreateRecordingConfigurationRequest {}
-export interface CreateRecordingConfigurationCommandOutput
-  extends CreateRecordingConfigurationResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRecordingConfigurationRequest, CreateRecordingConfigurationResponse } from "../models/models_0";
+import { CreateRecordingConfiguration$ } from "../schemas/schemas_0";
 
 /**
- * <p>Creates a new recording configuration, used to enable recording to Amazon S3.</p>
- *          <p>
- *             <b>Known issue:</b> In the us-east-1 region, if you use the Amazon Web Services
- *       CLI to create a recording configuration, it returns success even if the S3 bucket is in a
- *       different region. In this case, the <code>state</code> of the recording configuration is
- *         <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI
- *       correctly returns failure if the bucket is in a different region.)</p>
- *          <p>
- *             <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording
- *       configuration. If you create a recording configuration in a different region as your S3
- *       bucket, delete that recording configuration and create a new one with an S3 bucket from the
- *       correct region.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRecordingConfigurationCommand}.
+ */
+export interface CreateRecordingConfigurationCommandInput extends CreateRecordingConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRecordingConfigurationCommand}.
+ */
+export interface CreateRecordingConfigurationCommandOutput extends CreateRecordingConfigurationResponse, __MetadataBearer {}
+
+/**
+ * <p>Creates a new recording configuration, used to enable recording to Amazon S3.</p> <p> <b>Known issue:</b> In the us-east-1 region, if you use the Amazon Web Services CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the <code>state</code> of the recording configuration is <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)</p> <p> <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IvsClient, CreateRecordingConfigurationCommand } from "@aws-sdk/client-ivs"; // ES Modules import
  * // const { IvsClient, CreateRecordingConfigurationCommand } = require("@aws-sdk/client-ivs"); // CommonJS import
+ * // import type { IvsClientConfig } from "@aws-sdk/client-ivs";
+ * const config = {}; // type is IvsClientConfig
  * const client = new IvsClient(config);
+ * const input = { // CreateRecordingConfigurationRequest
+ *   name: "STRING_VALUE",
+ *   destinationConfiguration: { // DestinationConfiguration
+ *     s3: { // S3DestinationConfiguration
+ *       bucketName: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   thumbnailConfiguration: { // ThumbnailConfiguration
+ *     recordingMode: "STRING_VALUE",
+ *     targetIntervalSeconds: Number("long"),
+ *     resolution: "SD" || "HD" || "FULL_HD" || "LOWEST_RESOLUTION",
+ *     storage: [ // ThumbnailConfigurationStorageList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   recordingReconnectWindowSeconds: Number("int"),
+ *   renditionConfiguration: { // RenditionConfiguration
+ *     renditionSelection: "STRING_VALUE",
+ *     renditions: [ // RenditionConfigurationRenditionList
+ *       "SD" || "HD" || "FULL_HD" || "LOWEST_RESOLUTION",
+ *     ],
+ *   },
+ * };
  * const command = new CreateRecordingConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRecordingConfigurationResponse
+ * //   recordingConfiguration: { // RecordingConfiguration
+ * //     arn: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE",
+ * //     destinationConfiguration: { // DestinationConfiguration
+ * //       s3: { // S3DestinationConfiguration
+ * //         bucketName: "STRING_VALUE", // required
+ * //       },
+ * //     },
+ * //     state: "STRING_VALUE", // required
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     thumbnailConfiguration: { // ThumbnailConfiguration
+ * //       recordingMode: "STRING_VALUE",
+ * //       targetIntervalSeconds: Number("long"),
+ * //       resolution: "SD" || "HD" || "FULL_HD" || "LOWEST_RESOLUTION",
+ * //       storage: [ // ThumbnailConfigurationStorageList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     recordingReconnectWindowSeconds: Number("int"),
+ * //     renditionConfiguration: { // RenditionConfiguration
+ * //       renditionSelection: "STRING_VALUE",
+ * //       renditions: [ // RenditionConfigurationRenditionList
+ * //         "SD" || "HD" || "FULL_HD" || "LOWEST_RESOLUTION",
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateRecordingConfigurationCommandInput - {@link CreateRecordingConfigurationCommandInput}
+ * @returns {@link CreateRecordingConfigurationCommandOutput}
  * @see {@link CreateRecordingConfigurationCommandInput} for command's `input` shape.
  * @see {@link CreateRecordingConfigurationCommandOutput} for command's `response` shape.
- * @see {@link IvsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link IvsClientResolvedConfig | config} for IvsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error during processing of request.</p>
+ *
+ * @throws {@link PendingVerification} (client fault)
+ *  <p>Your account is pending verification.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link IvsServiceException}
+ * <p>Base exception class for all service exceptions from Ivs service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRecordingConfigurationCommand extends $Command<
-  CreateRecordingConfigurationCommandInput,
-  CreateRecordingConfigurationCommandOutput,
-  IvsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRecordingConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRecordingConfigurationCommandInput, CreateRecordingConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvsClient";
-    const commandName = "CreateRecordingConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRecordingConfigurationRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateRecordingConfigurationResponse.filterSensitiveLog,
+export class CreateRecordingConfigurationCommand extends command<CreateRecordingConfigurationCommandInput, CreateRecordingConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRecordingConfiguration",
+  CreateRecordingConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRecordingConfigurationRequest;
+      output: CreateRecordingConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRecordingConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRecordingConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateRecordingConfigurationCommandOutput> {
-    return deserializeAws_restJson1CreateRecordingConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRecordingConfigurationCommandInput;
+      output: CreateRecordingConfigurationCommandOutput;
+    };
+  };
 }

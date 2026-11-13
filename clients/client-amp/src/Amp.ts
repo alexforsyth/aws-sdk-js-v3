@@ -1,627 +1,1176 @@
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import { AmpClient } from "./AmpClient";
 import {
+  type CreateAlertManagerDefinitionCommandInput,
+  type CreateAlertManagerDefinitionCommandOutput,
   CreateAlertManagerDefinitionCommand,
-  CreateAlertManagerDefinitionCommandInput,
-  CreateAlertManagerDefinitionCommandOutput,
 } from "./commands/CreateAlertManagerDefinitionCommand";
 import {
+  type CreateAnomalyDetectorCommandInput,
+  type CreateAnomalyDetectorCommandOutput,
+  CreateAnomalyDetectorCommand,
+} from "./commands/CreateAnomalyDetectorCommand";
+import {
+  type CreateLoggingConfigurationCommandInput,
+  type CreateLoggingConfigurationCommandOutput,
+  CreateLoggingConfigurationCommand,
+} from "./commands/CreateLoggingConfigurationCommand";
+import {
+  type CreateQueryLoggingConfigurationCommandInput,
+  type CreateQueryLoggingConfigurationCommandOutput,
+  CreateQueryLoggingConfigurationCommand,
+} from "./commands/CreateQueryLoggingConfigurationCommand";
+import {
+  type CreateRuleGroupsNamespaceCommandInput,
+  type CreateRuleGroupsNamespaceCommandOutput,
   CreateRuleGroupsNamespaceCommand,
-  CreateRuleGroupsNamespaceCommandInput,
-  CreateRuleGroupsNamespaceCommandOutput,
 } from "./commands/CreateRuleGroupsNamespaceCommand";
 import {
+  type CreateScraperCommandInput,
+  type CreateScraperCommandOutput,
+  CreateScraperCommand,
+} from "./commands/CreateScraperCommand";
+import {
+  type CreateWorkspaceCommandInput,
+  type CreateWorkspaceCommandOutput,
   CreateWorkspaceCommand,
-  CreateWorkspaceCommandInput,
-  CreateWorkspaceCommandOutput,
 } from "./commands/CreateWorkspaceCommand";
 import {
+  type DeleteAlertManagerDefinitionCommandInput,
+  type DeleteAlertManagerDefinitionCommandOutput,
   DeleteAlertManagerDefinitionCommand,
-  DeleteAlertManagerDefinitionCommandInput,
-  DeleteAlertManagerDefinitionCommandOutput,
 } from "./commands/DeleteAlertManagerDefinitionCommand";
 import {
+  type DeleteAnomalyDetectorCommandInput,
+  type DeleteAnomalyDetectorCommandOutput,
+  DeleteAnomalyDetectorCommand,
+} from "./commands/DeleteAnomalyDetectorCommand";
+import {
+  type DeleteLoggingConfigurationCommandInput,
+  type DeleteLoggingConfigurationCommandOutput,
+  DeleteLoggingConfigurationCommand,
+} from "./commands/DeleteLoggingConfigurationCommand";
+import {
+  type DeleteQueryLoggingConfigurationCommandInput,
+  type DeleteQueryLoggingConfigurationCommandOutput,
+  DeleteQueryLoggingConfigurationCommand,
+} from "./commands/DeleteQueryLoggingConfigurationCommand";
+import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteRuleGroupsNamespaceCommandInput,
+  type DeleteRuleGroupsNamespaceCommandOutput,
   DeleteRuleGroupsNamespaceCommand,
-  DeleteRuleGroupsNamespaceCommandInput,
-  DeleteRuleGroupsNamespaceCommandOutput,
 } from "./commands/DeleteRuleGroupsNamespaceCommand";
 import {
+  type DeleteScraperCommandInput,
+  type DeleteScraperCommandOutput,
+  DeleteScraperCommand,
+} from "./commands/DeleteScraperCommand";
+import {
+  type DeleteScraperLoggingConfigurationCommandInput,
+  type DeleteScraperLoggingConfigurationCommandOutput,
+  DeleteScraperLoggingConfigurationCommand,
+} from "./commands/DeleteScraperLoggingConfigurationCommand";
+import {
+  type DeleteWorkspaceCommandInput,
+  type DeleteWorkspaceCommandOutput,
   DeleteWorkspaceCommand,
-  DeleteWorkspaceCommandInput,
-  DeleteWorkspaceCommandOutput,
 } from "./commands/DeleteWorkspaceCommand";
 import {
+  type DescribeAlertManagerDefinitionCommandInput,
+  type DescribeAlertManagerDefinitionCommandOutput,
   DescribeAlertManagerDefinitionCommand,
-  DescribeAlertManagerDefinitionCommandInput,
-  DescribeAlertManagerDefinitionCommandOutput,
 } from "./commands/DescribeAlertManagerDefinitionCommand";
 import {
+  type DescribeAnomalyDetectorCommandInput,
+  type DescribeAnomalyDetectorCommandOutput,
+  DescribeAnomalyDetectorCommand,
+} from "./commands/DescribeAnomalyDetectorCommand";
+import {
+  type DescribeLoggingConfigurationCommandInput,
+  type DescribeLoggingConfigurationCommandOutput,
+  DescribeLoggingConfigurationCommand,
+} from "./commands/DescribeLoggingConfigurationCommand";
+import {
+  type DescribeQueryLoggingConfigurationCommandInput,
+  type DescribeQueryLoggingConfigurationCommandOutput,
+  DescribeQueryLoggingConfigurationCommand,
+} from "./commands/DescribeQueryLoggingConfigurationCommand";
+import {
+  type DescribeResourcePolicyCommandInput,
+  type DescribeResourcePolicyCommandOutput,
+  DescribeResourcePolicyCommand,
+} from "./commands/DescribeResourcePolicyCommand";
+import {
+  type DescribeRuleGroupsNamespaceCommandInput,
+  type DescribeRuleGroupsNamespaceCommandOutput,
   DescribeRuleGroupsNamespaceCommand,
-  DescribeRuleGroupsNamespaceCommandInput,
-  DescribeRuleGroupsNamespaceCommandOutput,
 } from "./commands/DescribeRuleGroupsNamespaceCommand";
 import {
+  type DescribeScraperCommandInput,
+  type DescribeScraperCommandOutput,
+  DescribeScraperCommand,
+} from "./commands/DescribeScraperCommand";
+import {
+  type DescribeScraperLoggingConfigurationCommandInput,
+  type DescribeScraperLoggingConfigurationCommandOutput,
+  DescribeScraperLoggingConfigurationCommand,
+} from "./commands/DescribeScraperLoggingConfigurationCommand";
+import {
+  type DescribeWorkspaceCommandInput,
+  type DescribeWorkspaceCommandOutput,
   DescribeWorkspaceCommand,
-  DescribeWorkspaceCommandInput,
-  DescribeWorkspaceCommandOutput,
 } from "./commands/DescribeWorkspaceCommand";
 import {
+  type DescribeWorkspaceConfigurationCommandInput,
+  type DescribeWorkspaceConfigurationCommandOutput,
+  DescribeWorkspaceConfigurationCommand,
+} from "./commands/DescribeWorkspaceConfigurationCommand";
+import {
+  type GetDefaultScraperConfigurationCommandInput,
+  type GetDefaultScraperConfigurationCommandOutput,
+  GetDefaultScraperConfigurationCommand,
+} from "./commands/GetDefaultScraperConfigurationCommand";
+import {
+  type ListAnomalyDetectorsCommandInput,
+  type ListAnomalyDetectorsCommandOutput,
+  ListAnomalyDetectorsCommand,
+} from "./commands/ListAnomalyDetectorsCommand";
+import {
+  type ListRuleGroupsNamespacesCommandInput,
+  type ListRuleGroupsNamespacesCommandOutput,
   ListRuleGroupsNamespacesCommand,
-  ListRuleGroupsNamespacesCommandInput,
-  ListRuleGroupsNamespacesCommandOutput,
 } from "./commands/ListRuleGroupsNamespacesCommand";
 import {
+  type ListScrapersCommandInput,
+  type ListScrapersCommandOutput,
+  ListScrapersCommand,
+} from "./commands/ListScrapersCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListWorkspacesCommandInput,
+  type ListWorkspacesCommandOutput,
   ListWorkspacesCommand,
-  ListWorkspacesCommandInput,
-  ListWorkspacesCommandOutput,
 } from "./commands/ListWorkspacesCommand";
 import {
+  type PutAlertManagerDefinitionCommandInput,
+  type PutAlertManagerDefinitionCommandOutput,
   PutAlertManagerDefinitionCommand,
-  PutAlertManagerDefinitionCommandInput,
-  PutAlertManagerDefinitionCommandOutput,
 } from "./commands/PutAlertManagerDefinitionCommand";
 import {
-  PutRuleGroupsNamespaceCommand,
-  PutRuleGroupsNamespaceCommandInput,
-  PutRuleGroupsNamespaceCommandOutput,
-} from "./commands/PutRuleGroupsNamespaceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutAnomalyDetectorCommandInput,
+  type PutAnomalyDetectorCommandOutput,
+  PutAnomalyDetectorCommand,
+} from "./commands/PutAnomalyDetectorCommand";
 import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
+import {
+  type PutRuleGroupsNamespaceCommandInput,
+  type PutRuleGroupsNamespaceCommandOutput,
+  PutRuleGroupsNamespaceCommand,
+} from "./commands/PutRuleGroupsNamespaceCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateLoggingConfigurationCommandInput,
+  type UpdateLoggingConfigurationCommandOutput,
+  UpdateLoggingConfigurationCommand,
+} from "./commands/UpdateLoggingConfigurationCommand";
+import {
+  type UpdateQueryLoggingConfigurationCommandInput,
+  type UpdateQueryLoggingConfigurationCommandOutput,
+  UpdateQueryLoggingConfigurationCommand,
+} from "./commands/UpdateQueryLoggingConfigurationCommand";
+import {
+  type UpdateScraperCommandInput,
+  type UpdateScraperCommandOutput,
+  UpdateScraperCommand,
+} from "./commands/UpdateScraperCommand";
+import {
+  type UpdateScraperLoggingConfigurationCommandInput,
+  type UpdateScraperLoggingConfigurationCommandOutput,
+  UpdateScraperLoggingConfigurationCommand,
+} from "./commands/UpdateScraperLoggingConfigurationCommand";
+import {
+  type UpdateWorkspaceAliasCommandInput,
+  type UpdateWorkspaceAliasCommandOutput,
   UpdateWorkspaceAliasCommand,
-  UpdateWorkspaceAliasCommandInput,
-  UpdateWorkspaceAliasCommandOutput,
 } from "./commands/UpdateWorkspaceAliasCommand";
+import {
+  type UpdateWorkspaceConfigurationCommandInput,
+  type UpdateWorkspaceConfigurationCommandOutput,
+  UpdateWorkspaceConfigurationCommand,
+} from "./commands/UpdateWorkspaceConfigurationCommand";
+import type { AmpServiceException } from "./models/AmpServiceException";
+import type { ResourceNotFoundException } from "./models/errors";
+import { paginateListAnomalyDetectors } from "./pagination/ListAnomalyDetectorsPaginator";
+import { paginateListRuleGroupsNamespaces } from "./pagination/ListRuleGroupsNamespacesPaginator";
+import { paginateListScrapers } from "./pagination/ListScrapersPaginator";
+import { paginateListWorkspaces } from "./pagination/ListWorkspacesPaginator";
+import { waitUntilAnomalyDetectorActive } from "./waiters/waitForAnomalyDetectorActive";
+import { waitUntilAnomalyDetectorDeleted } from "./waiters/waitForAnomalyDetectorDeleted";
+import { waitUntilScraperActive } from "./waiters/waitForScraperActive";
+import { waitUntilScraperDeleted } from "./waiters/waitForScraperDeleted";
+import { waitUntilWorkspaceActive } from "./waiters/waitForWorkspaceActive";
+import { waitUntilWorkspaceDeleted } from "./waiters/waitForWorkspaceDeleted";
+
+const commands = {
+  CreateAlertManagerDefinitionCommand,
+  CreateAnomalyDetectorCommand,
+  CreateLoggingConfigurationCommand,
+  CreateQueryLoggingConfigurationCommand,
+  CreateRuleGroupsNamespaceCommand,
+  CreateScraperCommand,
+  CreateWorkspaceCommand,
+  DeleteAlertManagerDefinitionCommand,
+  DeleteAnomalyDetectorCommand,
+  DeleteLoggingConfigurationCommand,
+  DeleteQueryLoggingConfigurationCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRuleGroupsNamespaceCommand,
+  DeleteScraperCommand,
+  DeleteScraperLoggingConfigurationCommand,
+  DeleteWorkspaceCommand,
+  DescribeAlertManagerDefinitionCommand,
+  DescribeAnomalyDetectorCommand,
+  DescribeLoggingConfigurationCommand,
+  DescribeQueryLoggingConfigurationCommand,
+  DescribeResourcePolicyCommand,
+  DescribeRuleGroupsNamespaceCommand,
+  DescribeScraperCommand,
+  DescribeScraperLoggingConfigurationCommand,
+  DescribeWorkspaceCommand,
+  DescribeWorkspaceConfigurationCommand,
+  GetDefaultScraperConfigurationCommand,
+  ListAnomalyDetectorsCommand,
+  ListRuleGroupsNamespacesCommand,
+  ListScrapersCommand,
+  ListTagsForResourceCommand,
+  ListWorkspacesCommand,
+  PutAlertManagerDefinitionCommand,
+  PutAnomalyDetectorCommand,
+  PutResourcePolicyCommand,
+  PutRuleGroupsNamespaceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateLoggingConfigurationCommand,
+  UpdateQueryLoggingConfigurationCommand,
+  UpdateScraperCommand,
+  UpdateScraperLoggingConfigurationCommand,
+  UpdateWorkspaceAliasCommand,
+  UpdateWorkspaceConfigurationCommand,
+};
+const paginators = {
+  paginateListAnomalyDetectors,
+  paginateListRuleGroupsNamespaces,
+  paginateListScrapers,
+  paginateListWorkspaces,
+};
+const waiters = {
+  waitUntilAnomalyDetectorActive,
+  waitUntilAnomalyDetectorDeleted,
+  waitUntilScraperActive,
+  waitUntilScraperDeleted,
+  waitUntilWorkspaceActive,
+  waitUntilWorkspaceDeleted,
+};
 
 /**
- * Amazon Managed Service for Prometheus
+ * @public
  */
-export class Amp extends AmpClient {
+export interface AmpRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Amp {
   /**
-   * Create an alert manager definition.
+   * @see {@link CreateAlertManagerDefinitionCommand}
    */
-  public createAlertManagerDefinition(
+  createAlertManagerDefinition(
     args: CreateAlertManagerDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<CreateAlertManagerDefinitionCommandOutput>;
-  public createAlertManagerDefinition(
+  createAlertManagerDefinition(
     args: CreateAlertManagerDefinitionCommandInput,
     cb: (err: any, data?: CreateAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public createAlertManagerDefinition(
+  createAlertManagerDefinition(
     args: CreateAlertManagerDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: CreateAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public createAlertManagerDefinition(
-    args: CreateAlertManagerDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAlertManagerDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: CreateAlertManagerDefinitionCommandOutput) => void
-  ): Promise<CreateAlertManagerDefinitionCommandOutput> | void {
-    const command = new CreateAlertManagerDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Create a rule group namespace.
+   * @see {@link CreateAnomalyDetectorCommand}
    */
-  public createRuleGroupsNamespace(
+  createAnomalyDetector(
+    args: CreateAnomalyDetectorCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<CreateAnomalyDetectorCommandOutput>;
+  createAnomalyDetector(
+    args: CreateAnomalyDetectorCommandInput,
+    cb: (err: any, data?: CreateAnomalyDetectorCommandOutput) => void
+  ): void;
+  createAnomalyDetector(
+    args: CreateAnomalyDetectorCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: CreateAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLoggingConfigurationCommand}
+   */
+  createLoggingConfiguration(
+    args: CreateLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<CreateLoggingConfigurationCommandOutput>;
+  createLoggingConfiguration(
+    args: CreateLoggingConfigurationCommandInput,
+    cb: (err: any, data?: CreateLoggingConfigurationCommandOutput) => void
+  ): void;
+  createLoggingConfiguration(
+    args: CreateLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: CreateLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateQueryLoggingConfigurationCommand}
+   */
+  createQueryLoggingConfiguration(
+    args: CreateQueryLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<CreateQueryLoggingConfigurationCommandOutput>;
+  createQueryLoggingConfiguration(
+    args: CreateQueryLoggingConfigurationCommandInput,
+    cb: (err: any, data?: CreateQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+  createQueryLoggingConfiguration(
+    args: CreateQueryLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: CreateQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRuleGroupsNamespaceCommand}
+   */
+  createRuleGroupsNamespace(
     args: CreateRuleGroupsNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<CreateRuleGroupsNamespaceCommandOutput>;
-  public createRuleGroupsNamespace(
+  createRuleGroupsNamespace(
     args: CreateRuleGroupsNamespaceCommandInput,
     cb: (err: any, data?: CreateRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public createRuleGroupsNamespace(
+  createRuleGroupsNamespace(
     args: CreateRuleGroupsNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: CreateRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public createRuleGroupsNamespace(
-    args: CreateRuleGroupsNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRuleGroupsNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateRuleGroupsNamespaceCommandOutput) => void
-  ): Promise<CreateRuleGroupsNamespaceCommandOutput> | void {
-    const command = new CreateRuleGroupsNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates a new AMP workspace.
+   * @see {@link CreateScraperCommand}
    */
-  public createWorkspace(
+  createScraper(
+    args: CreateScraperCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<CreateScraperCommandOutput>;
+  createScraper(
+    args: CreateScraperCommandInput,
+    cb: (err: any, data?: CreateScraperCommandOutput) => void
+  ): void;
+  createScraper(
+    args: CreateScraperCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: CreateScraperCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkspaceCommand}
+   */
+  createWorkspace(): Promise<CreateWorkspaceCommandOutput>;
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<CreateWorkspaceCommandOutput>;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
-    args: CreateWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkspaceCommandOutput) => void
-  ): Promise<CreateWorkspaceCommandOutput> | void {
-    const command = new CreateWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an alert manager definition.
+   * @see {@link DeleteAlertManagerDefinitionCommand}
    */
-  public deleteAlertManagerDefinition(
+  deleteAlertManagerDefinition(
     args: DeleteAlertManagerDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DeleteAlertManagerDefinitionCommandOutput>;
-  public deleteAlertManagerDefinition(
+  deleteAlertManagerDefinition(
     args: DeleteAlertManagerDefinitionCommandInput,
     cb: (err: any, data?: DeleteAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public deleteAlertManagerDefinition(
+  deleteAlertManagerDefinition(
     args: DeleteAlertManagerDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DeleteAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public deleteAlertManagerDefinition(
-    args: DeleteAlertManagerDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAlertManagerDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAlertManagerDefinitionCommandOutput) => void
-  ): Promise<DeleteAlertManagerDefinitionCommandOutput> | void {
-    const command = new DeleteAlertManagerDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Delete a rule groups namespace.
+   * @see {@link DeleteAnomalyDetectorCommand}
    */
-  public deleteRuleGroupsNamespace(
+  deleteAnomalyDetector(
+    args: DeleteAnomalyDetectorCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteAnomalyDetectorCommandOutput>;
+  deleteAnomalyDetector(
+    args: DeleteAnomalyDetectorCommandInput,
+    cb: (err: any, data?: DeleteAnomalyDetectorCommandOutput) => void
+  ): void;
+  deleteAnomalyDetector(
+    args: DeleteAnomalyDetectorCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLoggingConfigurationCommand}
+   */
+  deleteLoggingConfiguration(
+    args: DeleteLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteLoggingConfigurationCommandOutput>;
+  deleteLoggingConfiguration(
+    args: DeleteLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DeleteLoggingConfigurationCommandOutput) => void
+  ): void;
+  deleteLoggingConfiguration(
+    args: DeleteLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteQueryLoggingConfigurationCommand}
+   */
+  deleteQueryLoggingConfiguration(
+    args: DeleteQueryLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteQueryLoggingConfigurationCommandOutput>;
+  deleteQueryLoggingConfiguration(
+    args: DeleteQueryLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DeleteQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+  deleteQueryLoggingConfiguration(
+    args: DeleteQueryLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResourcePolicyCommand}
+   */
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRuleGroupsNamespaceCommand}
+   */
+  deleteRuleGroupsNamespace(
     args: DeleteRuleGroupsNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DeleteRuleGroupsNamespaceCommandOutput>;
-  public deleteRuleGroupsNamespace(
+  deleteRuleGroupsNamespace(
     args: DeleteRuleGroupsNamespaceCommandInput,
     cb: (err: any, data?: DeleteRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public deleteRuleGroupsNamespace(
+  deleteRuleGroupsNamespace(
     args: DeleteRuleGroupsNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DeleteRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public deleteRuleGroupsNamespace(
-    args: DeleteRuleGroupsNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRuleGroupsNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRuleGroupsNamespaceCommandOutput) => void
-  ): Promise<DeleteRuleGroupsNamespaceCommandOutput> | void {
-    const command = new DeleteRuleGroupsNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Deletes an AMP workspace.
+   * @see {@link DeleteScraperCommand}
    */
-  public deleteWorkspace(
+  deleteScraper(
+    args: DeleteScraperCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteScraperCommandOutput>;
+  deleteScraper(
+    args: DeleteScraperCommandInput,
+    cb: (err: any, data?: DeleteScraperCommandOutput) => void
+  ): void;
+  deleteScraper(
+    args: DeleteScraperCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteScraperCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteScraperLoggingConfigurationCommand}
+   */
+  deleteScraperLoggingConfiguration(
+    args: DeleteScraperLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DeleteScraperLoggingConfigurationCommandOutput>;
+  deleteScraperLoggingConfiguration(
+    args: DeleteScraperLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DeleteScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+  deleteScraperLoggingConfiguration(
+    args: DeleteScraperLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DeleteScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceCommand}
+   */
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DeleteWorkspaceCommandOutput>;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
-    args: DeleteWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkspaceCommandOutput) => void
-  ): Promise<DeleteWorkspaceCommandOutput> | void {
-    const command = new DeleteWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Describes an alert manager definition.
+   * @see {@link DescribeAlertManagerDefinitionCommand}
    */
-  public describeAlertManagerDefinition(
+  describeAlertManagerDefinition(
     args: DescribeAlertManagerDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DescribeAlertManagerDefinitionCommandOutput>;
-  public describeAlertManagerDefinition(
+  describeAlertManagerDefinition(
     args: DescribeAlertManagerDefinitionCommandInput,
     cb: (err: any, data?: DescribeAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public describeAlertManagerDefinition(
+  describeAlertManagerDefinition(
     args: DescribeAlertManagerDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DescribeAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public describeAlertManagerDefinition(
-    args: DescribeAlertManagerDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAlertManagerDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAlertManagerDefinitionCommandOutput) => void
-  ): Promise<DescribeAlertManagerDefinitionCommandOutput> | void {
-    const command = new DescribeAlertManagerDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Describe a rule groups namespace.
+   * @see {@link DescribeAnomalyDetectorCommand}
    */
-  public describeRuleGroupsNamespace(
+  describeAnomalyDetector(
+    args: DescribeAnomalyDetectorCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeAnomalyDetectorCommandOutput>;
+  describeAnomalyDetector(
+    args: DescribeAnomalyDetectorCommandInput,
+    cb: (err: any, data?: DescribeAnomalyDetectorCommandOutput) => void
+  ): void;
+  describeAnomalyDetector(
+    args: DescribeAnomalyDetectorCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLoggingConfigurationCommand}
+   */
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeLoggingConfigurationCommandOutput>;
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
+  ): void;
+  describeLoggingConfiguration(
+    args: DescribeLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeQueryLoggingConfigurationCommand}
+   */
+  describeQueryLoggingConfiguration(
+    args: DescribeQueryLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeQueryLoggingConfigurationCommandOutput>;
+  describeQueryLoggingConfiguration(
+    args: DescribeQueryLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DescribeQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+  describeQueryLoggingConfiguration(
+    args: DescribeQueryLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourcePolicyCommand}
+   */
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeResourcePolicyCommandOutput>;
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
+  ): void;
+  describeResourcePolicy(
+    args: DescribeResourcePolicyCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRuleGroupsNamespaceCommand}
+   */
+  describeRuleGroupsNamespace(
     args: DescribeRuleGroupsNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DescribeRuleGroupsNamespaceCommandOutput>;
-  public describeRuleGroupsNamespace(
+  describeRuleGroupsNamespace(
     args: DescribeRuleGroupsNamespaceCommandInput,
     cb: (err: any, data?: DescribeRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public describeRuleGroupsNamespace(
+  describeRuleGroupsNamespace(
     args: DescribeRuleGroupsNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DescribeRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public describeRuleGroupsNamespace(
-    args: DescribeRuleGroupsNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRuleGroupsNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRuleGroupsNamespaceCommandOutput) => void
-  ): Promise<DescribeRuleGroupsNamespaceCommandOutput> | void {
-    const command = new DescribeRuleGroupsNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Describes an existing AMP workspace.
+   * @see {@link DescribeScraperCommand}
    */
-  public describeWorkspace(
+  describeScraper(
+    args: DescribeScraperCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeScraperCommandOutput>;
+  describeScraper(
+    args: DescribeScraperCommandInput,
+    cb: (err: any, data?: DescribeScraperCommandOutput) => void
+  ): void;
+  describeScraper(
+    args: DescribeScraperCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeScraperCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeScraperLoggingConfigurationCommand}
+   */
+  describeScraperLoggingConfiguration(
+    args: DescribeScraperLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeScraperLoggingConfigurationCommandOutput>;
+  describeScraperLoggingConfiguration(
+    args: DescribeScraperLoggingConfigurationCommandInput,
+    cb: (err: any, data?: DescribeScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+  describeScraperLoggingConfiguration(
+    args: DescribeScraperLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWorkspaceCommand}
+   */
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<DescribeWorkspaceCommandOutput>;
-  public describeWorkspace(
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
     cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
   ): void;
-  public describeWorkspace(
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
   ): void;
-  public describeWorkspace(
-    args: DescribeWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeWorkspaceCommandOutput) => void
-  ): Promise<DescribeWorkspaceCommandOutput> | void {
-    const command = new DescribeWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Lists rule groups namespaces.
+   * @see {@link DescribeWorkspaceConfigurationCommand}
    */
-  public listRuleGroupsNamespaces(
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<DescribeWorkspaceConfigurationCommandOutput>;
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    cb: (err: any, data?: DescribeWorkspaceConfigurationCommandOutput) => void
+  ): void;
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: DescribeWorkspaceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDefaultScraperConfigurationCommand}
+   */
+  getDefaultScraperConfiguration(): Promise<GetDefaultScraperConfigurationCommandOutput>;
+  getDefaultScraperConfiguration(
+    args: GetDefaultScraperConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<GetDefaultScraperConfigurationCommandOutput>;
+  getDefaultScraperConfiguration(
+    args: GetDefaultScraperConfigurationCommandInput,
+    cb: (err: any, data?: GetDefaultScraperConfigurationCommandOutput) => void
+  ): void;
+  getDefaultScraperConfiguration(
+    args: GetDefaultScraperConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: GetDefaultScraperConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnomalyDetectorsCommand}
+   */
+  listAnomalyDetectors(
+    args: ListAnomalyDetectorsCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<ListAnomalyDetectorsCommandOutput>;
+  listAnomalyDetectors(
+    args: ListAnomalyDetectorsCommandInput,
+    cb: (err: any, data?: ListAnomalyDetectorsCommandOutput) => void
+  ): void;
+  listAnomalyDetectors(
+    args: ListAnomalyDetectorsCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: ListAnomalyDetectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRuleGroupsNamespacesCommand}
+   */
+  listRuleGroupsNamespaces(
     args: ListRuleGroupsNamespacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<ListRuleGroupsNamespacesCommandOutput>;
-  public listRuleGroupsNamespaces(
+  listRuleGroupsNamespaces(
     args: ListRuleGroupsNamespacesCommandInput,
     cb: (err: any, data?: ListRuleGroupsNamespacesCommandOutput) => void
   ): void;
-  public listRuleGroupsNamespaces(
+  listRuleGroupsNamespaces(
     args: ListRuleGroupsNamespacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: ListRuleGroupsNamespacesCommandOutput) => void
   ): void;
-  public listRuleGroupsNamespaces(
-    args: ListRuleGroupsNamespacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRuleGroupsNamespacesCommandOutput) => void),
-    cb?: (err: any, data?: ListRuleGroupsNamespacesCommandOutput) => void
-  ): Promise<ListRuleGroupsNamespacesCommandOutput> | void {
-    const command = new ListRuleGroupsNamespacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Lists the tags you have assigned to the resource.
+   * @see {@link ListScrapersCommand}
    */
-  public listTagsForResource(
+  listScrapers(): Promise<ListScrapersCommandOutput>;
+  listScrapers(
+    args: ListScrapersCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<ListScrapersCommandOutput>;
+  listScrapers(
+    args: ListScrapersCommandInput,
+    cb: (err: any, data?: ListScrapersCommandOutput) => void
+  ): void;
+  listScrapers(
+    args: ListScrapersCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: ListScrapersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Lists all AMP workspaces, including workspaces being created or deleted.
+   * @see {@link ListWorkspacesCommand}
    */
-  public listWorkspaces(
+  listWorkspaces(): Promise<ListWorkspacesCommandOutput>;
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<ListWorkspacesCommandOutput>;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
-    args: ListWorkspacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkspacesCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkspacesCommandOutput) => void
-  ): Promise<ListWorkspacesCommandOutput> | void {
-    const command = new ListWorkspacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Update an alert manager definition.
+   * @see {@link PutAlertManagerDefinitionCommand}
    */
-  public putAlertManagerDefinition(
+  putAlertManagerDefinition(
     args: PutAlertManagerDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<PutAlertManagerDefinitionCommandOutput>;
-  public putAlertManagerDefinition(
+  putAlertManagerDefinition(
     args: PutAlertManagerDefinitionCommandInput,
     cb: (err: any, data?: PutAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public putAlertManagerDefinition(
+  putAlertManagerDefinition(
     args: PutAlertManagerDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: PutAlertManagerDefinitionCommandOutput) => void
   ): void;
-  public putAlertManagerDefinition(
-    args: PutAlertManagerDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutAlertManagerDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: PutAlertManagerDefinitionCommandOutput) => void
-  ): Promise<PutAlertManagerDefinitionCommandOutput> | void {
-    const command = new PutAlertManagerDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Update a rule groups namespace.
+   * @see {@link PutAnomalyDetectorCommand}
    */
-  public putRuleGroupsNamespace(
+  putAnomalyDetector(
+    args: PutAnomalyDetectorCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<PutAnomalyDetectorCommandOutput>;
+  putAnomalyDetector(
+    args: PutAnomalyDetectorCommandInput,
+    cb: (err: any, data?: PutAnomalyDetectorCommandOutput) => void
+  ): void;
+  putAnomalyDetector(
+    args: PutAnomalyDetectorCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: PutAnomalyDetectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutResourcePolicyCommand}
+   */
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRuleGroupsNamespaceCommand}
+   */
+  putRuleGroupsNamespace(
     args: PutRuleGroupsNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<PutRuleGroupsNamespaceCommandOutput>;
-  public putRuleGroupsNamespace(
+  putRuleGroupsNamespace(
     args: PutRuleGroupsNamespaceCommandInput,
     cb: (err: any, data?: PutRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public putRuleGroupsNamespace(
+  putRuleGroupsNamespace(
     args: PutRuleGroupsNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: PutRuleGroupsNamespaceCommandOutput) => void
   ): void;
-  public putRuleGroupsNamespace(
-    args: PutRuleGroupsNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutRuleGroupsNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: PutRuleGroupsNamespaceCommandOutput) => void
-  ): Promise<PutRuleGroupsNamespaceCommandOutput> | void {
-    const command = new PutRuleGroupsNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Creates tags for the specified resource.
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: AmpRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: AmpRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * Deletes tags from the specified resource.
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * Updates an AMP workspace alias.
+   * @see {@link UpdateLoggingConfigurationCommand}
    */
-  public updateWorkspaceAlias(
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<UpdateLoggingConfigurationCommandOutput>;
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
+  ): void;
+  updateLoggingConfiguration(
+    args: UpdateLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: UpdateLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateQueryLoggingConfigurationCommand}
+   */
+  updateQueryLoggingConfiguration(
+    args: UpdateQueryLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<UpdateQueryLoggingConfigurationCommandOutput>;
+  updateQueryLoggingConfiguration(
+    args: UpdateQueryLoggingConfigurationCommandInput,
+    cb: (err: any, data?: UpdateQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+  updateQueryLoggingConfiguration(
+    args: UpdateQueryLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: UpdateQueryLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateScraperCommand}
+   */
+  updateScraper(
+    args: UpdateScraperCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<UpdateScraperCommandOutput>;
+  updateScraper(
+    args: UpdateScraperCommandInput,
+    cb: (err: any, data?: UpdateScraperCommandOutput) => void
+  ): void;
+  updateScraper(
+    args: UpdateScraperCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: UpdateScraperCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateScraperLoggingConfigurationCommand}
+   */
+  updateScraperLoggingConfiguration(
+    args: UpdateScraperLoggingConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<UpdateScraperLoggingConfigurationCommandOutput>;
+  updateScraperLoggingConfiguration(
+    args: UpdateScraperLoggingConfigurationCommandInput,
+    cb: (err: any, data?: UpdateScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+  updateScraperLoggingConfiguration(
+    args: UpdateScraperLoggingConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: UpdateScraperLoggingConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWorkspaceAliasCommand}
+   */
+  updateWorkspaceAlias(
     args: UpdateWorkspaceAliasCommandInput,
-    options?: __HttpHandlerOptions
+    options?: AmpRequestOptions
   ): Promise<UpdateWorkspaceAliasCommandOutput>;
-  public updateWorkspaceAlias(
+  updateWorkspaceAlias(
     args: UpdateWorkspaceAliasCommandInput,
     cb: (err: any, data?: UpdateWorkspaceAliasCommandOutput) => void
   ): void;
-  public updateWorkspaceAlias(
+  updateWorkspaceAlias(
     args: UpdateWorkspaceAliasCommandInput,
-    options: __HttpHandlerOptions,
+    options: AmpRequestOptions,
     cb: (err: any, data?: UpdateWorkspaceAliasCommandOutput) => void
   ): void;
-  public updateWorkspaceAlias(
-    args: UpdateWorkspaceAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkspaceAliasCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkspaceAliasCommandOutput) => void
-  ): Promise<UpdateWorkspaceAliasCommandOutput> | void {
-    const command = new UpdateWorkspaceAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateWorkspaceConfigurationCommand}
+   */
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    options?: AmpRequestOptions
+  ): Promise<UpdateWorkspaceConfigurationCommandOutput>;
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    cb: (err: any, data?: UpdateWorkspaceConfigurationCommandOutput) => void
+  ): void;
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    options: AmpRequestOptions,
+    cb: (err: any, data?: UpdateWorkspaceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAnomalyDetectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAnomalyDetectorsCommandOutput}.
+   */
+  paginateListAnomalyDetectors(
+    args: ListAnomalyDetectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAnomalyDetectorsCommandOutput>;
+
+  /**
+   * @see {@link ListRuleGroupsNamespacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRuleGroupsNamespacesCommandOutput}.
+   */
+  paginateListRuleGroupsNamespaces(
+    args: ListRuleGroupsNamespacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRuleGroupsNamespacesCommandOutput>;
+
+  /**
+   * @see {@link ListScrapersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScrapersCommandOutput}.
+   */
+  paginateListScrapers(
+    args?: ListScrapersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScrapersCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspacesCommandOutput}.
+   */
+  paginateListWorkspaces(
+    args?: ListWorkspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspacesCommandOutput>;
+
+  /**
+   * @see {@link DescribeAnomalyDetectorCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilAnomalyDetectorActive(
+    args: DescribeAnomalyDetectorCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<DescribeAnomalyDetectorCommandOutput>>;
+
+  /**
+   * @see {@link DescribeAnomalyDetectorCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilAnomalyDetectorDeleted(
+    args: DescribeAnomalyDetectorCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeScraperCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilScraperActive(
+    args: DescribeScraperCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<DescribeScraperCommandOutput>>;
+
+  /**
+   * @see {@link DescribeScraperCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilScraperDeleted(
+    args: DescribeScraperCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
+
+  /**
+   * @see {@link DescribeWorkspaceCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilWorkspaceActive(
+    args: DescribeWorkspaceCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<DescribeWorkspaceCommandOutput>>;
+
+  /**
+   * @see {@link DescribeWorkspaceCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilWorkspaceDeleted(
+    args: DescribeWorkspaceCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Amp>, "client">
+  ): Promise<WaiterResult<ResourceNotFoundException>>;
 }
+
+/**
+ * <p>Amazon Managed Service for Prometheus is a serverless, Prometheus-compatible monitoring service for container metrics that makes it easier to securely monitor container environments at scale. With Amazon Managed Service for Prometheus, you can use the same open-source Prometheus data model and query language that you use today to monitor the performance of your containerized workloads, and also enjoy improved scalability, availability, and security without having to manage the underlying infrastructure.</p> <p>For more information about Amazon Managed Service for Prometheus, see the <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html">Amazon Managed Service for Prometheus</a> User Guide.</p> <p>Amazon Managed Service for Prometheus includes two APIs.</p> <ul> <li> <p>Use the Amazon Web Services API described in this guide to manage Amazon Managed Service for Prometheus resources, such as workspaces, rule groups, and alert managers.</p> </li> <li> <p>Use the <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-APIReference.html#AMP-APIReference-Prometheus-Compatible-Apis">Prometheus-compatible API</a> to work within your Prometheus workspace.</p> </li> </ul>
+ * @public
+ */
+export class Amp extends AmpClient implements Amp {}
+createAggregatedClient(commands, Amp, { paginators, waiters });

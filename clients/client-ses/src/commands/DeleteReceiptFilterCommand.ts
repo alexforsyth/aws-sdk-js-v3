@@ -1,98 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteReceiptFilterRequest, DeleteReceiptFilterResponse } from "../models/models_0";
-import {
-  deserializeAws_queryDeleteReceiptFilterCommand,
-  serializeAws_queryDeleteReceiptFilterCommand,
-} from "../protocols/Aws_query";
-import { ServiceInputTypes, ServiceOutputTypes, SESClientResolvedConfig } from "../SESClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteReceiptFilterRequest, DeleteReceiptFilterResponse } from "../models/models_0";
+import { DeleteReceiptFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteReceiptFilterCommand}.
+ */
 export interface DeleteReceiptFilterCommandInput extends DeleteReceiptFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteReceiptFilterCommand}.
+ */
 export interface DeleteReceiptFilterCommandOutput extends DeleteReceiptFilterResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified IP address filter.</p>
- *         <p>For information about managing IP address filters, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html">Amazon SES
+ *          <p>For information about managing IP address filters, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html">Amazon SES
  *                 Developer Guide</a>.</p>
- *         <p>You can execute this operation no more than once per second.</p>
+ *          <p>You can execute this operation no more than once per second.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SESClient, DeleteReceiptFilterCommand } from "@aws-sdk/client-ses"; // ES Modules import
  * // const { SESClient, DeleteReceiptFilterCommand } = require("@aws-sdk/client-ses"); // CommonJS import
+ * // import type { SESClientConfig } from "@aws-sdk/client-ses";
+ * const config = {}; // type is SESClientConfig
  * const client = new SESClient(config);
+ * const input = { // DeleteReceiptFilterRequest
+ *   FilterName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteReceiptFilterCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteReceiptFilterCommandInput - {@link DeleteReceiptFilterCommandInput}
+ * @returns {@link DeleteReceiptFilterCommandOutput}
  * @see {@link DeleteReceiptFilterCommandInput} for command's `input` shape.
  * @see {@link DeleteReceiptFilterCommandOutput} for command's `response` shape.
- * @see {@link SESClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SESClientResolvedConfig | config} for SESClient's `config` shape.
  *
+ * @throws {@link SESServiceException}
+ * <p>Base exception class for all service exceptions from SES service.</p>
+ *
+ *
+ * @example DeleteReceiptFilter
+ * ```javascript
+ * // The following example deletes an IP address filter:
+ * const input = {
+ *   FilterName: "MyFilter"
+ * };
+ * const command = new DeleteReceiptFilterCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * { /* metadata only *\/ }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class DeleteReceiptFilterCommand extends $Command<
-  DeleteReceiptFilterCommandInput,
-  DeleteReceiptFilterCommandOutput,
-  SESClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteReceiptFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SESClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteReceiptFilterCommandInput, DeleteReceiptFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SESClient";
-    const commandName = "DeleteReceiptFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteReceiptFilterRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteReceiptFilterResponse.filterSensitiveLog,
+export class DeleteReceiptFilterCommand extends command<DeleteReceiptFilterCommandInput, DeleteReceiptFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteReceiptFilter",
+  DeleteReceiptFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteReceiptFilterRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteReceiptFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDeleteReceiptFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteReceiptFilterCommandOutput> {
-    return deserializeAws_queryDeleteReceiptFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteReceiptFilterCommandInput;
+      output: DeleteReceiptFilterCommandOutput;
+    };
+  };
 }

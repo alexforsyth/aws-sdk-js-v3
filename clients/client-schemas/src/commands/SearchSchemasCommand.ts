@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { SearchSchemasRequest, SearchSchemasResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1SearchSchemasCommand,
-  serializeAws_restJson1SearchSchemasCommand,
-} from "../protocols/Aws_restJson1";
-import { SchemasClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SchemasClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchSchemasRequest, SearchSchemasResponse } from "../models/models_0";
+import { SearchSchemas$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchSchemasCommand}.
+ */
 export interface SearchSchemasCommandInput extends SearchSchemasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchSchemasCommand}.
+ */
 export interface SearchSchemasCommandOutput extends SearchSchemasResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,74 @@ export interface SearchSchemasCommandOutput extends SearchSchemasResponse, __Met
  * ```javascript
  * import { SchemasClient, SearchSchemasCommand } from "@aws-sdk/client-schemas"; // ES Modules import
  * // const { SchemasClient, SearchSchemasCommand } = require("@aws-sdk/client-schemas"); // CommonJS import
+ * // import type { SchemasClientConfig } from "@aws-sdk/client-schemas";
+ * const config = {}; // type is SchemasClientConfig
  * const client = new SchemasClient(config);
+ * const input = { // SearchSchemasRequest
+ *   Keywords: "STRING_VALUE", // required
+ *   Limit: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   RegistryName: "STRING_VALUE", // required
+ * };
  * const command = new SearchSchemasCommand(input);
  * const response = await client.send(command);
+ * // { // SearchSchemasResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Schemas: [ // __listOfSearchSchemaSummary
+ * //     { // SearchSchemaSummary
+ * //       RegistryName: "STRING_VALUE",
+ * //       SchemaArn: "STRING_VALUE",
+ * //       SchemaName: "STRING_VALUE",
+ * //       SchemaVersions: [ // __listOfSearchSchemaVersionSummary
+ * //         { // SearchSchemaVersionSummary
+ * //           CreatedDate: new Date("TIMESTAMP"),
+ * //           SchemaVersion: "STRING_VALUE",
+ * //           Type: "OpenApi3" || "JSONSchemaDraft4",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param SearchSchemasCommandInput - {@link SearchSchemasCommandInput}
+ * @returns {@link SearchSchemasCommandOutput}
  * @see {@link SearchSchemasCommandInput} for command's `input` shape.
  * @see {@link SearchSchemasCommandOutput} for command's `response` shape.
- * @see {@link SchemasClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SchemasClientResolvedConfig | config} for SchemasClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *
+ * @throws {@link SchemasServiceException}
+ * <p>Base exception class for all service exceptions from Schemas service.</p>
+ *
+ *
+ * @public
  */
-export class SearchSchemasCommand extends $Command<
-  SearchSchemasCommandInput,
-  SearchSchemasCommandOutput,
-  SchemasClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchSchemasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SchemasClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchSchemasCommandInput, SearchSchemasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SchemasClient";
-    const commandName = "SearchSchemasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchSchemasRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: SearchSchemasResponse.filterSensitiveLog,
+export class SearchSchemasCommand extends command<SearchSchemasCommandInput, SearchSchemasCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchSchemas",
+  SearchSchemas$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchSchemasRequest;
+      output: SearchSchemasResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchSchemasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchSchemasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchSchemasCommandOutput> {
-    return deserializeAws_restJson1SearchSchemasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchSchemasCommandInput;
+      output: SearchSchemasCommandOutput;
+    };
+  };
 }

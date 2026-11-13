@@ -1,0 +1,160 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApprovalTeamRequest, GetApprovalTeamResponse } from "../models/models_0";
+import { GetApprovalTeam$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApprovalTeamCommand}.
+ */
+export interface GetApprovalTeamCommandInput extends GetApprovalTeamRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApprovalTeamCommand}.
+ */
+export interface GetApprovalTeamCommandOutput extends GetApprovalTeamResponse, __MetadataBearer {}
+
+/**
+ * <p>Returns details for an approval team.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MPAClient, GetApprovalTeamCommand } from "@aws-sdk/client-mpa"; // ES Modules import
+ * // const { MPAClient, GetApprovalTeamCommand } = require("@aws-sdk/client-mpa"); // CommonJS import
+ * // import type { MPAClientConfig } from "@aws-sdk/client-mpa";
+ * const config = {}; // type is MPAClientConfig
+ * const client = new MPAClient(config);
+ * const input = { // GetApprovalTeamRequest
+ *   Arn: "STRING_VALUE", // required
+ * };
+ * const command = new GetApprovalTeamCommand(input);
+ * const response = await client.send(command);
+ * // { // GetApprovalTeamResponse
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   ApprovalStrategy: { // ApprovalStrategyResponse Union: only one key present
+ * //     MofN: { // MofNApprovalStrategy
+ * //       MinApprovalsRequired: Number("int"), // required
+ * //     },
+ * //   },
+ * //   NumberOfApprovers: Number("int"),
+ * //   Approvers: [ // GetApprovalTeamResponseApprovers
+ * //     { // GetApprovalTeamResponseApprover
+ * //       ApproverId: "STRING_VALUE",
+ * //       ResponseTime: new Date("TIMESTAMP"),
+ * //       PrimaryIdentityId: "STRING_VALUE",
+ * //       PrimaryIdentitySourceArn: "STRING_VALUE",
+ * //       PrimaryIdentityStatus: "PENDING" || "ACCEPTED" || "REJECTED" || "INVALID",
+ * //       LastActivity: "VOTED" || "BASELINED" || "RESPONDED_TO_INVITATION",
+ * //       LastActivityTime: new Date("TIMESTAMP"),
+ * //       PendingBaselineSessionArn: "STRING_VALUE",
+ * //       MfaMethods: [ // MfaMethods
+ * //         { // MfaMethod
+ * //           Type: "EMAIL_OTP", // required
+ * //           SyncStatus: "IN_SYNC" || "OUT_OF_SYNC", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   Arn: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   Status: "ACTIVE" || "INACTIVE" || "DELETING" || "PENDING",
+ * //   StatusCode: "VALIDATING" || "PENDING_ACTIVATION" || "FAILED_VALIDATION" || "FAILED_ACTIVATION" || "UPDATE_PENDING_APPROVAL" || "UPDATE_PENDING_ACTIVATION" || "UPDATE_FAILED_APPROVAL" || "UPDATE_FAILED_ACTIVATION" || "UPDATE_FAILED_VALIDATION" || "DELETE_PENDING_APPROVAL" || "DELETE_FAILED_APPROVAL" || "DELETE_FAILED_VALIDATION",
+ * //   StatusMessage: "STRING_VALUE",
+ * //   UpdateSessionArn: "STRING_VALUE",
+ * //   VersionId: "STRING_VALUE",
+ * //   Policies: [ // PoliciesReferences
+ * //     { // PolicyReference
+ * //       PolicyArn: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   LastUpdateTime: new Date("TIMESTAMP"),
+ * //   PendingUpdate: { // PendingUpdate
+ * //     VersionId: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     ApprovalStrategy: {//  Union: only one key present
+ * //       MofN: {
+ * //         MinApprovalsRequired: Number("int"), // required
+ * //       },
+ * //     },
+ * //     NumberOfApprovers: Number("int"),
+ * //     Status: "ACTIVE" || "INACTIVE" || "DELETING" || "PENDING",
+ * //     StatusCode: "VALIDATING" || "PENDING_ACTIVATION" || "FAILED_VALIDATION" || "FAILED_ACTIVATION" || "UPDATE_PENDING_APPROVAL" || "UPDATE_PENDING_ACTIVATION" || "UPDATE_FAILED_APPROVAL" || "UPDATE_FAILED_ACTIVATION" || "UPDATE_FAILED_VALIDATION" || "DELETE_PENDING_APPROVAL" || "DELETE_FAILED_APPROVAL" || "DELETE_FAILED_VALIDATION",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     Approvers: [
+ * //       {
+ * //         ApproverId: "STRING_VALUE",
+ * //         ResponseTime: new Date("TIMESTAMP"),
+ * //         PrimaryIdentityId: "STRING_VALUE",
+ * //         PrimaryIdentitySourceArn: "STRING_VALUE",
+ * //         PrimaryIdentityStatus: "PENDING" || "ACCEPTED" || "REJECTED" || "INVALID",
+ * //         LastActivity: "VOTED" || "BASELINED" || "RESPONDED_TO_INVITATION",
+ * //         LastActivityTime: new Date("TIMESTAMP"),
+ * //         PendingBaselineSessionArn: "STRING_VALUE",
+ * //         MfaMethods: [
+ * //           {
+ * //             Type: "EMAIL_OTP", // required
+ * //             SyncStatus: "IN_SYNC" || "OUT_OF_SYNC", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     UpdateInitiationTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
+ * ```
+ *
+ * @param GetApprovalTeamCommandInput - {@link GetApprovalTeamCommandInput}
+ * @returns {@link GetApprovalTeamCommandOutput}
+ * @see {@link GetApprovalTeamCommandInput} for command's `input` shape.
+ * @see {@link GetApprovalTeamCommandOutput} for command's `response` shape.
+ * @see {@link MPAClientResolvedConfig | config} for MPAClient's `config` shape.
+ *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. Check your permissions, and try again.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an internal error. Try your request again. If the problem persists, contact Amazon Web Services Support.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource doesn't exist. Check the resource ID, and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link MPAServiceException}
+ * <p>Base exception class for all service exceptions from MPA service.</p>
+ *
+ *
+ * @public
+ */
+export class GetApprovalTeamCommand extends command<GetApprovalTeamCommandInput, GetApprovalTeamCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApprovalTeam",
+  GetApprovalTeam$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApprovalTeamRequest;
+      output: GetApprovalTeamResponse;
+    };
+    sdk: {
+      input: GetApprovalTeamCommandInput;
+      output: GetApprovalTeamCommandOutput;
+    };
+  };
+}

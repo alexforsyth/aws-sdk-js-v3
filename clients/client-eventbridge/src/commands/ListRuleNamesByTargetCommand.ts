@@ -1,96 +1,89 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
-import { ListRuleNamesByTargetRequest, ListRuleNamesByTargetResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListRuleNamesByTargetCommand,
-  serializeAws_json1_1ListRuleNamesByTargetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRuleNamesByTargetRequest, ListRuleNamesByTargetResponse } from "../models/models_0";
+import { ListRuleNamesByTarget$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRuleNamesByTargetCommand}.
+ */
 export interface ListRuleNamesByTargetCommandInput extends ListRuleNamesByTargetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRuleNamesByTargetCommand}.
+ */
 export interface ListRuleNamesByTargetCommandOutput extends ListRuleNamesByTargetResponse, __MetadataBearer {}
 
 /**
  * <p>Lists the rules for the specified target. You can see which of the rules in Amazon
  *       EventBridge can invoke a specific target in your account.</p>
+ *          <p>The maximum number of results per page for requests is 100.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EventBridgeClient, ListRuleNamesByTargetCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
  * // const { EventBridgeClient, ListRuleNamesByTargetCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * // import type { EventBridgeClientConfig } from "@aws-sdk/client-eventbridge";
+ * const config = {}; // type is EventBridgeClientConfig
  * const client = new EventBridgeClient(config);
+ * const input = { // ListRuleNamesByTargetRequest
+ *   TargetArn: "STRING_VALUE", // required
+ *   EventBusName: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListRuleNamesByTargetCommand(input);
  * const response = await client.send(command);
+ * // { // ListRuleNamesByTargetResponse
+ * //   RuleNames: [ // RuleNameList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRuleNamesByTargetCommandInput - {@link ListRuleNamesByTargetCommandInput}
+ * @returns {@link ListRuleNamesByTargetCommandOutput}
  * @see {@link ListRuleNamesByTargetCommandInput} for command's `input` shape.
  * @see {@link ListRuleNamesByTargetCommandOutput} for command's `response` shape.
- * @see {@link EventBridgeClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ *
+ * @public
  */
-export class ListRuleNamesByTargetCommand extends $Command<
-  ListRuleNamesByTargetCommandInput,
-  ListRuleNamesByTargetCommandOutput,
-  EventBridgeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRuleNamesByTargetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EventBridgeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRuleNamesByTargetCommandInput, ListRuleNamesByTargetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EventBridgeClient";
-    const commandName = "ListRuleNamesByTargetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRuleNamesByTargetRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListRuleNamesByTargetResponse.filterSensitiveLog,
+export class ListRuleNamesByTargetCommand extends command<ListRuleNamesByTargetCommandInput, ListRuleNamesByTargetCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRuleNamesByTarget",
+  ListRuleNamesByTarget$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRuleNamesByTargetRequest;
+      output: ListRuleNamesByTargetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRuleNamesByTargetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRuleNamesByTargetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRuleNamesByTargetCommandOutput> {
-    return deserializeAws_json1_1ListRuleNamesByTargetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRuleNamesByTargetCommandInput;
+      output: ListRuleNamesByTargetCommandOutput;
+    };
+  };
 }

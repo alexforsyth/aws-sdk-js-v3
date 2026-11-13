@@ -1,99 +1,119 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import { ListAcceleratorsRequest, ListAcceleratorsResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAcceleratorsCommand,
-  serializeAws_json1_1ListAcceleratorsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAcceleratorsRequest, ListAcceleratorsResponse } from "../models/models_0";
+import { ListAccelerators$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAcceleratorsCommand}.
+ */
 export interface ListAcceleratorsCommandInput extends ListAcceleratorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAcceleratorsCommand}.
+ */
 export interface ListAcceleratorsCommandOutput extends ListAcceleratorsResponse, __MetadataBearer {}
 
 /**
- * <p>List the accelerators for an AWS account. </p>
+ * <p>List the accelerators for an Amazon Web Services account. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GlobalAcceleratorClient, ListAcceleratorsCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, ListAcceleratorsCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // ListAcceleratorsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAcceleratorsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAcceleratorsResponse
+ * //   Accelerators: [ // Accelerators
+ * //     { // Accelerator
+ * //       AcceleratorArn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       IpAddressType: "IPV4" || "DUAL_STACK",
+ * //       Enabled: true || false,
+ * //       IpSets: [ // IpSets
+ * //         { // IpSet
+ * //           IpFamily: "STRING_VALUE",
+ * //           IpAddresses: [ // IpAddresses
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           IpAddressFamily: "IPv4" || "IPv6",
+ * //           IpAddressDetails: [ // IpAddressDetails
+ * //             { // IpAddressDetail
+ * //               IpAddress: "STRING_VALUE",
+ * //               NetworkZone: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       DnsName: "STRING_VALUE",
+ * //       Status: "DEPLOYED" || "IN_PROGRESS",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       DualStackDnsName: "STRING_VALUE",
+ * //       Events: [ // AcceleratorEvents
+ * //         { // AcceleratorEvent
+ * //           Message: "STRING_VALUE",
+ * //           Timestamp: new Date("TIMESTAMP"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAcceleratorsCommandInput - {@link ListAcceleratorsCommandInput}
+ * @returns {@link ListAcceleratorsCommandOutput}
  * @see {@link ListAcceleratorsCommandInput} for command's `input` shape.
  * @see {@link ListAcceleratorsCommandOutput} for command's `response` shape.
- * @see {@link GlobalAcceleratorClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>There isn't another item to return.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class ListAcceleratorsCommand extends $Command<
-  ListAcceleratorsCommandInput,
-  ListAcceleratorsCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAcceleratorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAcceleratorsCommandInput, ListAcceleratorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "ListAcceleratorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAcceleratorsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAcceleratorsResponse.filterSensitiveLog,
+export class ListAcceleratorsCommand extends command<ListAcceleratorsCommandInput, ListAcceleratorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAccelerators",
+  ListAccelerators$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAcceleratorsRequest;
+      output: ListAcceleratorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAcceleratorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAcceleratorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAcceleratorsCommandOutput> {
-    return deserializeAws_json1_1ListAcceleratorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAcceleratorsCommandInput;
+      output: ListAcceleratorsCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEngagementRequest, DescribeEngagementResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEngagementCommand,
-  serializeAws_json1_1DescribeEngagementCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, SSMContactsClientResolvedConfig } from "../SSMContactsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEngagementRequest, DescribeEngagementResult } from "../models/models_0";
+import { DescribeEngagement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEngagementCommand}.
+ */
 export interface DescribeEngagementCommandInput extends DescribeEngagementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEngagementCommand}.
+ */
 export interface DescribeEngagementCommandOutput extends DescribeEngagementResult, __MetadataBearer {}
 
 /**
@@ -29,68 +30,75 @@ export interface DescribeEngagementCommandOutput extends DescribeEngagementResul
  * ```javascript
  * import { SSMContactsClient, DescribeEngagementCommand } from "@aws-sdk/client-ssm-contacts"; // ES Modules import
  * // const { SSMContactsClient, DescribeEngagementCommand } = require("@aws-sdk/client-ssm-contacts"); // CommonJS import
+ * // import type { SSMContactsClientConfig } from "@aws-sdk/client-ssm-contacts";
+ * const config = {}; // type is SSMContactsClientConfig
  * const client = new SSMContactsClient(config);
+ * const input = { // DescribeEngagementRequest
+ *   EngagementId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeEngagementCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEngagementResult
+ * //   ContactArn: "STRING_VALUE", // required
+ * //   EngagementArn: "STRING_VALUE", // required
+ * //   Sender: "STRING_VALUE", // required
+ * //   Subject: "STRING_VALUE", // required
+ * //   Content: "STRING_VALUE", // required
+ * //   PublicSubject: "STRING_VALUE",
+ * //   PublicContent: "STRING_VALUE",
+ * //   IncidentId: "STRING_VALUE",
+ * //   StartTime: new Date("TIMESTAMP"),
+ * //   StopTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeEngagementCommandInput - {@link DescribeEngagementCommandInput}
+ * @returns {@link DescribeEngagementCommandOutput}
  * @see {@link DescribeEngagementCommandInput} for command's `input` shape.
  * @see {@link DescribeEngagementCommandOutput} for command's `response` shape.
- * @see {@link SSMContactsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link SSMContactsClientResolvedConfig | config} for SSMContactsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this operation.</p>
+ *
+ * @throws {@link DataEncryptionException} (client fault)
+ *  <p>The operation failed to due an encryption key error.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Request references a resource that doesn't exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services
+ *          service.</p>
+ *
+ * @throws {@link SSMContactsServiceException}
+ * <p>Base exception class for all service exceptions from SSMContacts service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEngagementCommand extends $Command<
-  DescribeEngagementCommandInput,
-  DescribeEngagementCommandOutput,
-  SSMContactsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEngagementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SSMContactsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEngagementCommandInput, DescribeEngagementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SSMContactsClient";
-    const commandName = "DescribeEngagementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEngagementRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEngagementResult.filterSensitiveLog,
+export class DescribeEngagementCommand extends command<DescribeEngagementCommandInput, DescribeEngagementCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEngagement",
+  DescribeEngagement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEngagementRequest;
+      output: DescribeEngagementResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEngagementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEngagementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEngagementCommandOutput> {
-    return deserializeAws_json1_1DescribeEngagementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEngagementCommandInput;
+      output: DescribeEngagementCommandOutput;
+    };
+  };
 }

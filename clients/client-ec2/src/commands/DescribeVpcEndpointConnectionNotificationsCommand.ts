@@ -1,31 +1,29 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeVpcEndpointConnectionNotificationsRequest,
   DescribeVpcEndpointConnectionNotificationsResult,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeVpcEndpointConnectionNotificationsCommand,
-  serializeAws_ec2DescribeVpcEndpointConnectionNotificationsCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_5";
+import { DescribeVpcEndpointConnectionNotifications$ } from "../schemas/schemas_0";
 
-export interface DescribeVpcEndpointConnectionNotificationsCommandInput
-  extends DescribeVpcEndpointConnectionNotificationsRequest {}
-export interface DescribeVpcEndpointConnectionNotificationsCommandOutput
-  extends DescribeVpcEndpointConnectionNotificationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeVpcEndpointConnectionNotificationsCommand}.
+ */
+export interface DescribeVpcEndpointConnectionNotificationsCommandInput extends DescribeVpcEndpointConnectionNotificationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeVpcEndpointConnectionNotificationsCommand}.
+ */
+export interface DescribeVpcEndpointConnectionNotificationsCommandOutput extends DescribeVpcEndpointConnectionNotificationsResult, __MetadataBearer {}
 
 /**
  * <p>Describes the connection notifications for VPC endpoints and VPC endpoint
@@ -35,77 +33,72 @@ export interface DescribeVpcEndpointConnectionNotificationsCommandOutput
  * ```javascript
  * import { EC2Client, DescribeVpcEndpointConnectionNotificationsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeVpcEndpointConnectionNotificationsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeVpcEndpointConnectionNotificationsRequest
+ *   DryRun: true || false,
+ *   ConnectionNotificationId: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeVpcEndpointConnectionNotificationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeVpcEndpointConnectionNotificationsResult
+ * //   ConnectionNotificationSet: [ // ConnectionNotificationSet
+ * //     { // ConnectionNotification
+ * //       ConnectionNotificationId: "STRING_VALUE",
+ * //       ServiceId: "STRING_VALUE",
+ * //       VpcEndpointId: "STRING_VALUE",
+ * //       ConnectionNotificationType: "Topic",
+ * //       ConnectionNotificationArn: "STRING_VALUE",
+ * //       ConnectionEvents: [ // ValueStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ConnectionNotificationState: "Enabled" || "Disabled",
+ * //       ServiceRegion: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeVpcEndpointConnectionNotificationsCommandInput - {@link DescribeVpcEndpointConnectionNotificationsCommandInput}
+ * @returns {@link DescribeVpcEndpointConnectionNotificationsCommandOutput}
  * @see {@link DescribeVpcEndpointConnectionNotificationsCommandInput} for command's `input` shape.
  * @see {@link DescribeVpcEndpointConnectionNotificationsCommandOutput} for command's `response` shape.
- * @see {@link EC2ClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeVpcEndpointConnectionNotificationsCommand extends $Command<
-  DescribeVpcEndpointConnectionNotificationsCommandInput,
-  DescribeVpcEndpointConnectionNotificationsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeVpcEndpointConnectionNotificationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeVpcEndpointConnectionNotificationsCommandInput,
-    DescribeVpcEndpointConnectionNotificationsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeVpcEndpointConnectionNotificationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeVpcEndpointConnectionNotificationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeVpcEndpointConnectionNotificationsResult.filterSensitiveLog,
+export class DescribeVpcEndpointConnectionNotificationsCommand extends command<DescribeVpcEndpointConnectionNotificationsCommandInput, DescribeVpcEndpointConnectionNotificationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeVpcEndpointConnectionNotifications",
+  DescribeVpcEndpointConnectionNotifications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVpcEndpointConnectionNotificationsRequest;
+      output: DescribeVpcEndpointConnectionNotificationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeVpcEndpointConnectionNotificationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeVpcEndpointConnectionNotificationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeVpcEndpointConnectionNotificationsCommandOutput> {
-    return deserializeAws_ec2DescribeVpcEndpointConnectionNotificationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeVpcEndpointConnectionNotificationsCommandInput;
+      output: DescribeVpcEndpointConnectionNotificationsCommandOutput;
+    };
+  };
 }

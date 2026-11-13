@@ -1,109 +1,117 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CognitoIdentityProviderClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../CognitoIdentityProviderClient";
-import { GetIdentityProviderByIdentifierRequest, GetIdentityProviderByIdentifierResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1GetIdentityProviderByIdentifierCommand,
-  serializeAws_json1_1GetIdentityProviderByIdentifierCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface GetIdentityProviderByIdentifierCommandInput extends GetIdentityProviderByIdentifierRequest {}
-export interface GetIdentityProviderByIdentifierCommandOutput
-  extends GetIdentityProviderByIdentifierResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  GetIdentityProviderByIdentifierRequest,
+  GetIdentityProviderByIdentifierResponse,
+} from "../models/models_0";
+import { GetIdentityProviderByIdentifier$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets the specified identity provider.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIdentityProviderByIdentifierCommand}.
+ */
+export interface GetIdentityProviderByIdentifierCommandInput extends GetIdentityProviderByIdentifierRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIdentityProviderByIdentifierCommand}.
+ */
+export interface GetIdentityProviderByIdentifierCommandOutput extends GetIdentityProviderByIdentifierResponse, __MetadataBearer {}
+
+/**
+ * <p>Given the identifier of an identity provider (IdP), for example
+ *                 <code>examplecorp</code>, returns information about the user pool configuration for
+ *             that IdP. For more information about IdPs, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html">Third-party IdP sign-in</a>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CognitoIdentityProviderClient, GetIdentityProviderByIdentifierCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
  * // const { CognitoIdentityProviderClient, GetIdentityProviderByIdentifierCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * // import type { CognitoIdentityProviderClientConfig } from "@aws-sdk/client-cognito-identity-provider";
+ * const config = {}; // type is CognitoIdentityProviderClientConfig
  * const client = new CognitoIdentityProviderClient(config);
+ * const input = { // GetIdentityProviderByIdentifierRequest
+ *   UserPoolId: "STRING_VALUE", // required
+ *   IdpIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new GetIdentityProviderByIdentifierCommand(input);
  * const response = await client.send(command);
+ * // { // GetIdentityProviderByIdentifierResponse
+ * //   IdentityProvider: { // IdentityProviderType
+ * //     UserPoolId: "STRING_VALUE",
+ * //     ProviderName: "STRING_VALUE",
+ * //     ProviderType: "SAML" || "Facebook" || "Google" || "LoginWithAmazon" || "SignInWithApple" || "OIDC",
+ * //     ProviderDetails: { // ProviderDetailsType
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     AttributeMapping: { // AttributeMappingType
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     IdpIdentifiers: [ // IdpIdentifiersListType
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     AcrMapping: { // AcrMappingType
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     LastModifiedDate: new Date("TIMESTAMP"),
+ * //     CreationDate: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetIdentityProviderByIdentifierCommandInput - {@link GetIdentityProviderByIdentifierCommandInput}
+ * @returns {@link GetIdentityProviderByIdentifierCommandOutput}
  * @see {@link GetIdentityProviderByIdentifierCommandInput} for command's `input` shape.
  * @see {@link GetIdentityProviderByIdentifierCommandOutput} for command's `response` shape.
- * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for CognitoIdentityProviderClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service encounters an invalid
+ *             parameter.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>This exception is thrown when a user isn't authorized.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when the Amazon Cognito service can't find the requested
+ *             resource.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>This exception is thrown when the user has made too many requests for a given
+ *             operation.</p>
+ *
+ * @throws {@link CognitoIdentityProviderServiceException}
+ * <p>Base exception class for all service exceptions from CognitoIdentityProvider service.</p>
+ *
+ *
+ * @public
  */
-export class GetIdentityProviderByIdentifierCommand extends $Command<
-  GetIdentityProviderByIdentifierCommandInput,
-  GetIdentityProviderByIdentifierCommandOutput,
-  CognitoIdentityProviderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIdentityProviderByIdentifierCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CognitoIdentityProviderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIdentityProviderByIdentifierCommandInput, GetIdentityProviderByIdentifierCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getAwsAuthPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CognitoIdentityProviderClient";
-    const commandName = "GetIdentityProviderByIdentifierCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIdentityProviderByIdentifierRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetIdentityProviderByIdentifierResponse.filterSensitiveLog,
+export class GetIdentityProviderByIdentifierCommand extends command<GetIdentityProviderByIdentifierCommandInput, GetIdentityProviderByIdentifierCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIdentityProviderByIdentifier",
+  GetIdentityProviderByIdentifier$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIdentityProviderByIdentifierRequest;
+      output: GetIdentityProviderByIdentifierResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetIdentityProviderByIdentifierCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetIdentityProviderByIdentifierCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetIdentityProviderByIdentifierCommandOutput> {
-    return deserializeAws_json1_1GetIdentityProviderByIdentifierCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIdentityProviderByIdentifierCommandInput;
+      output: GetIdentityProviderByIdentifierCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudHSMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudHSMClient";
-import { ListAvailableZonesRequest, ListAvailableZonesResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListAvailableZonesCommand,
-  serializeAws_json1_1ListAvailableZonesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAvailableZonesRequest, ListAvailableZonesResponse } from "../models/models_0";
+import { ListAvailableZones$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAvailableZonesCommand}.
+ */
 export interface ListAvailableZonesCommandInput extends ListAvailableZonesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAvailableZonesCommand}.
+ */
 export interface ListAvailableZonesCommandOutput extends ListAvailableZonesResponse, __MetadataBearer {}
 
 /**
@@ -33,73 +34,63 @@ export interface ListAvailableZonesCommandOutput extends ListAvailableZonesRespo
  *       and the <a href="https://docs.aws.amazon.com/cloudhsm/latest/APIReference/">AWS CloudHSM API
  *       Reference</a>.</p>
  *          <p>Lists the Availability Zones that have available AWS CloudHSM capacity.</p>
+ *
+ * @deprecated This API is deprecated.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudHSMClient, ListAvailableZonesCommand } from "@aws-sdk/client-cloudhsm"; // ES Modules import
  * // const { CloudHSMClient, ListAvailableZonesCommand } = require("@aws-sdk/client-cloudhsm"); // CommonJS import
+ * // import type { CloudHSMClientConfig } from "@aws-sdk/client-cloudhsm";
+ * const config = {}; // type is CloudHSMClientConfig
  * const client = new CloudHSMClient(config);
+ * const input = {};
  * const command = new ListAvailableZonesCommand(input);
  * const response = await client.send(command);
+ * // { // ListAvailableZonesResponse
+ * //   AZList: [ // AZList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListAvailableZonesCommandInput - {@link ListAvailableZonesCommandInput}
+ * @returns {@link ListAvailableZonesCommandOutput}
  * @see {@link ListAvailableZonesCommandInput} for command's `input` shape.
  * @see {@link ListAvailableZonesCommandOutput} for command's `response` shape.
- * @see {@link CloudHSMClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link CloudHSMClientResolvedConfig | config} for CloudHSMClient's `config` shape.
  *
+ * @throws {@link CloudHsmInternalException} (server fault)
+ *  <p>Indicates that an internal error occurred.</p>
+ *
+ * @throws {@link CloudHsmServiceException} (client fault)
+ *  <p>Indicates that an exception occurred in the AWS CloudHSM service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that one or more of the request parameters are not valid.</p>
+ *
+ * @throws {@link CloudHSMServiceException}
+ * <p>Base exception class for all service exceptions from CloudHSM service.</p>
+ *
+ *
+ * @public
  */
-export class ListAvailableZonesCommand extends $Command<
-  ListAvailableZonesCommandInput,
-  ListAvailableZonesCommandOutput,
-  CloudHSMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAvailableZonesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudHSMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAvailableZonesCommandInput, ListAvailableZonesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudHSMClient";
-    const commandName = "ListAvailableZonesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAvailableZonesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListAvailableZonesResponse.filterSensitiveLog,
+export class ListAvailableZonesCommand extends command<ListAvailableZonesCommandInput, ListAvailableZonesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAvailableZones",
+  ListAvailableZones$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: ListAvailableZonesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAvailableZonesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAvailableZonesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAvailableZonesCommandOutput> {
-    return deserializeAws_json1_1ListAvailableZonesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAvailableZonesCommandInput;
+      output: ListAvailableZonesCommandOutput;
+    };
+  };
 }

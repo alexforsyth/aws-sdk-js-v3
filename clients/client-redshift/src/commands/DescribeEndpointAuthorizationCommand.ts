@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeEndpointAuthorizationMessage, EndpointAuthorizationList } from "../models/models_0";
-import {
-  deserializeAws_queryDescribeEndpointAuthorizationCommand,
-  serializeAws_queryDescribeEndpointAuthorizationCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEndpointAuthorizationMessage, EndpointAuthorizationList } from "../models/models_0";
+import { DescribeEndpointAuthorization$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEndpointAuthorizationCommand}.
+ */
 export interface DescribeEndpointAuthorizationCommandInput extends DescribeEndpointAuthorizationMessage {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEndpointAuthorizationCommand}.
+ */
 export interface DescribeEndpointAuthorizationCommandOutput extends EndpointAuthorizationList, __MetadataBearer {}
 
 /**
@@ -28,71 +29,73 @@ export interface DescribeEndpointAuthorizationCommandOutput extends EndpointAuth
  * ```javascript
  * import { RedshiftClient, DescribeEndpointAuthorizationCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, DescribeEndpointAuthorizationCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // DescribeEndpointAuthorizationMessage
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   Account: "STRING_VALUE",
+ *   Grantee: true || false,
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new DescribeEndpointAuthorizationCommand(input);
  * const response = await client.send(command);
+ * // { // EndpointAuthorizationList
+ * //   EndpointAuthorizationList: [ // EndpointAuthorizations
+ * //     { // EndpointAuthorization
+ * //       Grantor: "STRING_VALUE",
+ * //       Grantee: "STRING_VALUE",
+ * //       ClusterIdentifier: "STRING_VALUE",
+ * //       AuthorizeTime: new Date("TIMESTAMP"),
+ * //       ClusterStatus: "STRING_VALUE",
+ * //       Status: "Authorized" || "Revoking",
+ * //       AllowedAllVPCs: true || false,
+ * //       AllowedVPCs: [ // VpcIdentifierList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       EndpointCount: Number("int"),
+ * //     },
+ * //   ],
+ * //   Marker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEndpointAuthorizationCommandInput - {@link DescribeEndpointAuthorizationCommandInput}
+ * @returns {@link DescribeEndpointAuthorizationCommandOutput}
  * @see {@link DescribeEndpointAuthorizationCommandInput} for command's `input` shape.
  * @see {@link DescribeEndpointAuthorizationCommandOutput} for command's `response` shape.
- * @see {@link RedshiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEndpointAuthorizationCommand extends $Command<
-  DescribeEndpointAuthorizationCommandInput,
-  DescribeEndpointAuthorizationCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEndpointAuthorizationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEndpointAuthorizationCommandInput, DescribeEndpointAuthorizationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "DescribeEndpointAuthorizationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEndpointAuthorizationMessage.filterSensitiveLog,
-      outputFilterSensitiveLog: EndpointAuthorizationList.filterSensitiveLog,
+export class DescribeEndpointAuthorizationCommand extends command<DescribeEndpointAuthorizationCommandInput, DescribeEndpointAuthorizationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEndpointAuthorization",
+  DescribeEndpointAuthorization$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEndpointAuthorizationMessage;
+      output: EndpointAuthorizationList;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEndpointAuthorizationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryDescribeEndpointAuthorizationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEndpointAuthorizationCommandOutput> {
-    return deserializeAws_queryDescribeEndpointAuthorizationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEndpointAuthorizationCommandInput;
+      output: DescribeEndpointAuthorizationCommandOutput;
+    };
+  };
 }

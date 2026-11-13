@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRClient";
-import { ModifyClusterInput, ModifyClusterOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifyClusterCommand,
-  serializeAws_json1_1ModifyClusterCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyClusterInput, ModifyClusterOutput } from "../models/models_0";
+import { ModifyCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyClusterCommand}.
+ */
 export interface ModifyClusterCommandInput extends ModifyClusterInput {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyClusterCommand}.
+ */
 export interface ModifyClusterCommandOutput extends ModifyClusterOutput, __MetadataBearer {}
 
 /**
@@ -29,68 +30,57 @@ export interface ModifyClusterCommandOutput extends ModifyClusterOutput, __Metad
  * ```javascript
  * import { EMRClient, ModifyClusterCommand } from "@aws-sdk/client-emr"; // ES Modules import
  * // const { EMRClient, ModifyClusterCommand } = require("@aws-sdk/client-emr"); // CommonJS import
+ * // import type { EMRClientConfig } from "@aws-sdk/client-emr";
+ * const config = {}; // type is EMRClientConfig
  * const client = new EMRClient(config);
+ * const input = { // ModifyClusterInput
+ *   ClusterId: "STRING_VALUE", // required
+ *   StepConcurrencyLevel: Number("int"),
+ *   ExtendedSupport: true || false,
+ * };
  * const command = new ModifyClusterCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyClusterOutput
+ * //   StepConcurrencyLevel: Number("int"),
+ * //   ExtendedSupport: true || false,
+ * // };
+ *
  * ```
  *
+ * @param ModifyClusterCommandInput - {@link ModifyClusterCommandInput}
+ * @returns {@link ModifyClusterCommandOutput}
  * @see {@link ModifyClusterCommandInput} for command's `input` shape.
  * @see {@link ModifyClusterCommandOutput} for command's `response` shape.
- * @see {@link EMRClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link EMRClientResolvedConfig | config} for EMRClient's `config` shape.
  *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Indicates that an error occurred while processing the request and that the request was
+ *          not completed.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception occurs when there is something wrong with user input.</p>
+ *
+ * @throws {@link EMRServiceException}
+ * <p>Base exception class for all service exceptions from EMR service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyClusterCommand extends $Command<
-  ModifyClusterCommandInput,
-  ModifyClusterCommandOutput,
-  EMRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyClusterCommandInput, ModifyClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRClient";
-    const commandName = "ModifyClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyClusterInput.filterSensitiveLog,
-      outputFilterSensitiveLog: ModifyClusterOutput.filterSensitiveLog,
+export class ModifyClusterCommand extends command<ModifyClusterCommandInput, ModifyClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyCluster",
+  ModifyCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyClusterInput;
+      output: ModifyClusterOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifyClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyClusterCommandOutput> {
-    return deserializeAws_json1_1ModifyClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyClusterCommandInput;
+      output: ModifyClusterCommandOutput;
+    };
+  };
 }

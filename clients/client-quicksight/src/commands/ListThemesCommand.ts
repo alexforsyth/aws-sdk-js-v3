@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ListThemesRequest, ListThemesResponse } from "../models/models_1";
-import {
-  deserializeAws_restJson1ListThemesCommand,
-  serializeAws_restJson1ListThemesCommand,
-} from "../protocols/Aws_restJson1";
-import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListThemesRequest, ListThemesResponse } from "../models/models_5";
+import { ListThemes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListThemesCommand}.
+ */
 export interface ListThemesCommandInput extends ListThemesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListThemesCommand}.
+ */
 export interface ListThemesCommandOutput extends ListThemesResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface ListThemesCommandOutput extends ListThemesResponse, __MetadataB
  * ```javascript
  * import { QuickSightClient, ListThemesCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
  * // const { QuickSightClient, ListThemesCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * // import type { QuickSightClientConfig } from "@aws-sdk/client-quicksight";
+ * const config = {}; // type is QuickSightClientConfig
  * const client = new QuickSightClient(config);
+ * const input = { // ListThemesRequest
+ *   AwsAccountId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Type: "QUICKSIGHT" || "CUSTOM" || "ALL",
+ * };
  * const command = new ListThemesCommand(input);
  * const response = await client.send(command);
+ * // { // ListThemesResponse
+ * //   ThemeSummaryList: [ // ThemeSummaryList
+ * //     { // ThemeSummary
+ * //       Arn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       ThemeId: "STRING_VALUE",
+ * //       LatestVersionNumber: Number("long"),
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastUpdatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   Status: Number("int"),
+ * //   RequestId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListThemesCommandInput - {@link ListThemesCommandInput}
+ * @returns {@link ListThemesCommandOutput}
  * @see {@link ListThemesCommandInput} for command's `input` shape.
  * @see {@link ListThemesCommandOutput} for command's `response` shape.
- * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for QuickSightClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to this item. The provided credentials couldn't be
+ * 			validated. You might not be authorized to carry out the request. Make sure that your
+ * 			account is authorized to use the Amazon Quick Sight service, that your policies have the
+ * 			correct permissions, and that you are using the correct credentials.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal failure occurred.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value isn't valid.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One or more parameters has a value that isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Access is throttled.</p>
+ *
+ * @throws {@link UnsupportedUserEditionException} (client fault)
+ *  <p>This error indicates that you are calling an operation on an Amazon Quick Suite
+ * 			subscription where the edition doesn't include support for that operation. Amazon
+ * 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
+ * 			capability is available in every edition.</p>
+ *
+ * @throws {@link QuickSightServiceException}
+ * <p>Base exception class for all service exceptions from QuickSight service.</p>
+ *
+ *
+ * @public
  */
-export class ListThemesCommand extends $Command<
-  ListThemesCommandInput,
-  ListThemesCommandOutput,
-  QuickSightClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListThemesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: QuickSightClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListThemesCommandInput, ListThemesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "QuickSightClient";
-    const commandName = "ListThemesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListThemesRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: ListThemesResponse.filterSensitiveLog,
+export class ListThemesCommand extends command<ListThemesCommandInput, ListThemesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListThemes",
+  ListThemes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListThemesRequest;
+      output: ListThemesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListThemesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListThemesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListThemesCommandOutput> {
-    return deserializeAws_restJson1ListThemesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListThemesCommandInput;
+      output: ListThemesCommandOutput;
+    };
+  };
 }

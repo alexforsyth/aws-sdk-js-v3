@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListSentimentDetectionJobsCommand,
   ListSentimentDetectionJobsCommandInput,
   ListSentimentDetectionJobsCommandOutput,
 } from "../commands/ListSentimentDetectionJobsCommand";
-import { Comprehend } from "../Comprehend";
 import { ComprehendClient } from "../ComprehendClient";
-import { ComprehendPaginationConfiguration } from "./Interfaces";
+import type { ComprehendPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: ComprehendClient,
-  input: ListSentimentDetectionJobsCommandInput,
-  ...args: any
-): Promise<ListSentimentDetectionJobsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListSentimentDetectionJobsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Comprehend,
-  input: ListSentimentDetectionJobsCommandInput,
-  ...args: any
-): Promise<ListSentimentDetectionJobsCommandOutput> => {
-  // @ts-ignore
-  return await client.listSentimentDetectionJobs(input, ...args);
-};
-export async function* paginateListSentimentDetectionJobs(
+export const paginateListSentimentDetectionJobs: (
   config: ComprehendPaginationConfiguration,
   input: ListSentimentDetectionJobsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListSentimentDetectionJobsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListSentimentDetectionJobsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof Comprehend) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof ComprehendClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Comprehend | ComprehendClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListSentimentDetectionJobsCommandOutput> = createPaginator<
+  ComprehendPaginationConfiguration,
+  ListSentimentDetectionJobsCommandInput,
+  ListSentimentDetectionJobsCommandOutput
+>(ComprehendClient, ListSentimentDetectionJobsCommand, "NextToken", "NextToken", "MaxResults");

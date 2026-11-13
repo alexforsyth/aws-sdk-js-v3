@@ -1,438 +1,413 @@
-import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
-
-/**
- * <p>You already have a DAX cluster with the given identifier.</p>
- */
-export interface ClusterAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have attempted to exceed the maximum number of DAX clusters for your AWS
- *             account.</p>
- */
-export interface ClusterQuotaForCustomerExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterQuotaForCustomerExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterQuotaForCustomerExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterQuotaForCustomerExceededFault): any => ({
-    ...obj,
-  });
-}
-
-export enum ClusterEndpointEncryptionType {
-  NONE = "NONE",
-  TLS = "TLS",
-}
+// smithy-typescript generated code
+import type {
+  ChangeType,
+  ClusterEndpointEncryptionType,
+  IsModifiable,
+  NetworkType,
+  ParameterType,
+  SourceType,
+  SSEStatus,
+} from "./enums";
 
 /**
  * <p>Represents the settings used to enable server-side encryption.</p>
+ * @public
  */
 export interface SSESpecification {
   /**
-   * <p>Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.</p>
+   * <p>Indicates whether server-side encryption is enabled (true) or disabled (false) on
+   *             the cluster.</p>
+   * @public
    */
   Enabled: boolean | undefined;
 }
 
-export namespace SSESpecification {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SSESpecification): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>A description of a tag.  Every tag is a key-value pair. You can add up to 50 tags to a single
- *             DAX cluster.</p>
- *         <p>AWS-assigned tag names and values are automatically assigned the <code>aws:</code>
- *             prefix, which the user cannot assign. AWS-assigned tag names do not count towards the
- *             tag limit of 50. User-assigned tag names have the prefix <code>user:</code>.</p>
- *         <p>You cannot backdate the application of a tag.</p>
+ * <p>A description of a tag. Every tag is a key-value pair. You can add up to 50 tags to
+ *             a single DAX cluster.</p>
+ *          <p>Amazon Web Services-assigned tag names and values are automatically assigned the
+ *                 <code>aws:</code> prefix, which the user cannot assign. Amazon Web Services-assigned
+ *             tag names do not count towards the tag limit of 50. User-assigned tag names have the
+ *             prefix <code>user:</code>.</p>
+ *          <p>You cannot backdate the application of a tag.</p>
+ * @public
  */
 export interface Tag {
   /**
-   * <p>The key for the tag.  Tag keys are case sensitive. Every DAX cluster can only have
-   *             one tag with the same key. If you try to add an existing tag (same key), the
-   *             existing tag value will be updated to the new value.</p>
+   * <p>The key for the tag. Tag keys are case sensitive. Every DAX cluster
+   *             can only have one tag with the same key. If you try to add an existing tag (same key),
+   *             the existing tag value will be updated to the new value.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
-   * <p>The value of the tag. Tag values are case-sensitive and can be null. </p>
+   * <p>The value of the tag. Tag values are case-sensitive and can be null.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
 
-export namespace Tag {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Tag): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateClusterRequest {
   /**
-   * <p>The cluster identifier. This parameter is stored as a lowercase
-   *             string.</p>
-   *         <p>
+   * <p>The cluster identifier. This parameter is stored as a lowercase string.</p>
+   *          <p>
    *             <b>Constraints:</b>
-   *         </p>
-   *         <ul>
+   *          </p>
+   *          <ul>
    *             <li>
-   *                 <p>A name must contain from 1 to 20 alphanumeric characters or
+   *                <p>A name must contain from 1 to 20 alphanumeric characters or
    *                     hyphens.</p>
    *             </li>
    *             <li>
-   *                 <p>The first character must be a letter.</p>
+   *                <p>The first character must be a letter.</p>
    *             </li>
    *             <li>
-   *                 <p>A name cannot end with a hyphen or contain two consecutive
+   *                <p>A name cannot end with a hyphen or contain two consecutive
    *                     hyphens.</p>
    *             </li>
    *          </ul>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>The compute and memory capacity of the nodes in the cluster.</p>
+   * @public
    */
   NodeType: string | undefined;
 
   /**
    * <p>A description of the cluster.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>The number of nodes in the DAX cluster. A replication factor of 1 will
-   *             create a single-node cluster, without any read replicas. For additional fault tolerance,
-   *             you can create a multiple node cluster with one or more read replicas. To do this, set
-   *                 <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas).
-   *                  <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p>
-   *         <note>
-   *             <p>AWS recommends that you have at least two read replicas per cluster.</p>
+   * <p>The number of nodes in the DAX cluster. A replication factor of 1
+   *             will create a single-node cluster, without any read replicas. For additional fault
+   *             tolerance, you can create a multiple node cluster with one or more read replicas. To do
+   *             this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read
+   *             replicas) and 10 (one primary and nine read replicas). <code>If the
+   *                 AvailabilityZones</code> parameter is provided, its length must equal the
+   *                 <code>ReplicationFactor</code>.</p>
+   *          <note>
+   *             <p>Amazon Web Services recommends that you have at least two read replicas per
+   *                 cluster.</p>
    *          </note>
+   * @public
    */
   ReplicationFactor: number | undefined;
 
   /**
-   * <p>The Availability Zones (AZs) in which the cluster nodes will reside after the cluster
-   *          has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter.
-   *          If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.</p>
+   * <p>The Availability Zones (AZs) in which the cluster nodes will reside after the
+   *             cluster has been created or updated. If provided, the length of this list must equal the
+   *                 <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest
+   *             availability.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
+  AvailabilityZones?: string[] | undefined;
 
   /**
    * <p>The name of the subnet group to be used for the replication group.</p>
-   *         <important>
-   *             <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets
-   *                 that you specify in a subnet group must exist in the same VPC.</p>
-   *         </important>
+   *          <important>
+   *             <p>DAX clusters can only run in an Amazon VPC environment.
+   *                 All of the subnets that you specify in a subnet group must exist in the same
+   *                 VPC.</p>
+   *          </important>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
-   * <p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the
-   *              security group ID is system-generated.)</p>
-   *         <p>If this parameter is not specified, DAX assigns the default VPC security group to
-   *             each node.</p>
+   * <p>A list of security group IDs to be assigned to each node in the DAX
+   *             cluster. (Each of the security group ID is system-generated.)</p>
+   *          <p>If this parameter is not specified, DAX assigns the default VPC
+   *             security group to each node.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 
   /**
    * <p>Specifies the weekly time range during which maintenance on the DAX cluster is
    *             performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock
    *             UTC). The minimum maintenance window is a 60 minute period. Valid values for
    *                 <code>ddd</code> are:</p>
-   *         <ul>
+   *          <ul>
    *             <li>
-   *                 <p>
-   *                     <code>sun</code>
-   *                 </p>
+   *                <p>
+   *                   <code>sun</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>mon</code>
-   *                 </p>
+   *                <p>
+   *                   <code>mon</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>tue</code>
-   *                 </p>
+   *                <p>
+   *                   <code>tue</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>wed</code>
-   *                 </p>
+   *                <p>
+   *                   <code>wed</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>thu</code>
-   *                 </p>
+   *                <p>
+   *                   <code>thu</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>fri</code>
-   *                 </p>
+   *                <p>
+   *                   <code>fri</code>
+   *                </p>
    *             </li>
    *             <li>
-   *                 <p>
-   *                     <code>sat</code>
-   *                 </p>
+   *                <p>
+   *                   <code>sat</code>
+   *                </p>
    *             </li>
    *          </ul>
-   *         <p>Example: <code>sun:05:00-sun:09:00</code>
-   *         </p>
-   *         <note>
+   *          <p>Example: <code>sun:05:00-sun:09:00</code>
+   *          </p>
+   *          <note>
    *             <p>If you don't specify a preferred maintenance window when you create or modify a
-   *                 cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day
-   *                 of the week.</p>
+   *                 cache cluster, DAX assigns a 60-minute maintenance window on a
+   *                 randomly selected day of the week.</p>
    *          </note>
+   * @public
    */
-  PreferredMaintenanceWindow?: string;
+  PreferredMaintenanceWindow?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will
-   *             be sent.</p>
-   *         <note>
-   *             <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p>
-   *         </note>
+   * <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which
+   *             notifications will be sent.</p>
+   *          <note>
+   *             <p>The Amazon SNS topic owner must be same as the DAX
+   *                 cluster owner.</p>
+   *          </note>
+   * @public
    */
-  NotificationTopicArn?: string;
+  NotificationTopicArn?: string | undefined;
 
   /**
-   * <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
-   *             will assume this role and use the role's permissions to access DynamoDB on your
-   *             behalf.</p>
+   * <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At
+   *             runtime, DAX will assume this role and use the role's permissions to
+   *             access DynamoDB on your behalf.</p>
+   * @public
    */
   IamRoleArn: string | undefined;
 
   /**
    * <p>The parameter group to be associated with the DAX cluster.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
-   * <p>A set of tags to associate with the DAX cluster.  </p>
+   * <p>A set of tags to associate with the DAX cluster.
+   *             </p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
-   * <p>Represents the settings used to enable server-side encryption on the cluster.</p>
+   * <p>Represents the settings used to enable server-side encryption on the
+   *             cluster.</p>
+   * @public
    */
-  SSESpecification?: SSESpecification;
+  SSESpecification?: SSESpecification | undefined;
 
   /**
    * <p>The type of encryption the cluster's endpoint should support. Values are:</p>
-   *         <ul>
+   *          <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>NONE</code> for no encryption</p>
    *             </li>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>TLS</code> for Transport Layer Security</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType | string;
-}
+  ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType | undefined;
 
-export namespace CreateClusterRequest {
   /**
-   * @internal
+   * <p>Specifies the IP protocol(s) the cluster uses for network communications. Values
+   *             are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ipv4</code> - The cluster is accessible only through IPv4
+   *                     addresses</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ipv6</code> - The cluster is accessible only through IPv6
+   *                     addresses</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dual_stack</code> - The cluster is accessible through both IPv4 and
+   *                     IPv6 addresses.</p>
+   *             </li>
+   *          </ul>
+   *          <note>
+   *             <p>If no explicit <code>NetworkType</code> is provided, the network type is
+   *                 derived based on the subnet group's configuration.</p>
+   *          </note>
+   * @public
    */
-  export const filterSensitiveLog = (obj: CreateClusterRequest): any => ({
-    ...obj,
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
 /**
- * <p>Represents the information required for client programs to connect to the
- *             endpoint for a DAX cluster.</p>
+ * <p>Represents the information required for client programs to connect to the endpoint
+ *             for a DAX cluster.</p>
+ * @public
  */
 export interface Endpoint {
   /**
    * <p>The DNS hostname of the endpoint.</p>
+   * @public
    */
-  Address?: string;
+  Address?: string | undefined;
 
   /**
    * <p>The port number that applications should use to connect to the endpoint.</p>
+   * @public
    */
-  Port?: number;
+  Port?: number | undefined;
 
   /**
-   * <p>The URL that applications should use to connect to the endpoint. The default
-   *             ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.</p>
+   * <p>The URL that applications should use to connect to the endpoint. The default ports
+   *             are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.</p>
+   * @public
    */
-  URL?: string;
-}
-
-export namespace Endpoint {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Endpoint): any => ({
-    ...obj,
-  });
+  URL?: string | undefined;
 }
 
 /**
  * <p>Represents an individual node within a DAX cluster.</p>
+ * @public
  */
 export interface Node {
   /**
    * <p>A system-generated identifier for the node.</p>
+   * @public
    */
-  NodeId?: string;
+  NodeId?: string | undefined;
 
   /**
    * <p>The endpoint for the node, consisting of a DNS name and a port number. Client
    *             applications can connect directly to a node endpoint, if desired (as an alternative to
-   *             allowing DAX client software to intelligently route requests and responses to nodes in
-   *             the DAX cluster.</p>
+   *             allowing DAX client software to intelligently route requests and
+   *             responses to nodes in the DAX cluster.</p>
+   * @public
    */
-  Endpoint?: Endpoint;
+  Endpoint?: Endpoint | undefined;
 
   /**
    * <p>The date and time (in UNIX epoch format) when the node was launched.</p>
+   * @public
    */
-  NodeCreateTime?: Date;
+  NodeCreateTime?: Date | undefined;
 
   /**
    * <p>The Availability Zone (AZ) in which the node has been deployed.</p>
+   * @public
    */
-  AvailabilityZone?: string;
+  AvailabilityZone?: string | undefined;
 
   /**
    * <p>The current status of the node. For example: <code>available</code>.</p>
+   * @public
    */
-  NodeStatus?: string;
+  NodeStatus?: string | undefined;
 
   /**
    * <p>The status of the parameter group associated with this node. For example,
    *                 <code>in-sync</code>.</p>
+   * @public
    */
-  ParameterGroupStatus?: string;
-}
-
-export namespace Node {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Node): any => ({
-    ...obj,
-  });
+  ParameterGroupStatus?: string | undefined;
 }
 
 /**
  * <p>Describes a notification topic and its status. Notification topics are used for
  *             publishing DAX events to subscribers using Amazon Simple Notification Service
  *             (SNS).</p>
+ * @public
  */
 export interface NotificationConfiguration {
   /**
-   * <p>The Amazon Resource Name (ARN) that identifies the topic. </p>
+   * <p>The Amazon Resource Name (ARN) that identifies the topic.</p>
+   * @public
    */
-  TopicArn?: string;
+  TopicArn?: string | undefined;
 
   /**
    * <p>The current state of the topic. A value of “active” means that notifications will
-   *         be sent to the topic. A value of “inactive” means that notifications will not be sent to the
-   *         topic.</p>
+   *             be sent to the topic. A value of “inactive” means that notifications will not be sent to
+   *             the topic.</p>
+   * @public
    */
-  TopicStatus?: string;
-}
-
-export namespace NotificationConfiguration {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NotificationConfiguration): any => ({
-    ...obj,
-  });
+  TopicStatus?: string | undefined;
 }
 
 /**
  * <p>The status of a parameter group.</p>
+ * @public
  */
 export interface ParameterGroupStatus {
   /**
    * <p>The name of the parameter group.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>The status of parameter updates. </p>
+   * @public
    */
-  ParameterApplyStatus?: string;
+  ParameterApplyStatus?: string | undefined;
 
   /**
    * <p>The node IDs of one or more nodes to be rebooted.</p>
+   * @public
    */
-  NodeIdsToReboot?: string[];
-}
-
-export namespace ParameterGroupStatus {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupStatus): any => ({
-    ...obj,
-  });
+  NodeIdsToReboot?: string[] | undefined;
 }
 
 /**
  * <p>An individual VPC security group and its status.</p>
+ * @public
  */
 export interface SecurityGroupMembership {
   /**
    * <p>The unique ID for this security group.</p>
+   * @public
    */
-  SecurityGroupIdentifier?: string;
+  SecurityGroupIdentifier?: string | undefined;
 
   /**
    * <p>The status of this security group.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 }
-
-export namespace SecurityGroupMembership {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SecurityGroupMembership): any => ({
-    ...obj,
-  });
-}
-
-export type SSEStatus = "DISABLED" | "DISABLING" | "ENABLED" | "ENABLING";
 
 /**
- * <p>The description of the server-side encryption status on the specified DAX cluster.</p>
+ * <p>The description of the server-side encryption status on the specified DAX
+ *             cluster.</p>
+ * @public
  */
 export interface SSEDescription {
   /**
@@ -455,1436 +430,923 @@ export interface SSEDescription {
    *                   <code>DISABLED</code> - Server-side encryption is disabled.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Status?: SSEStatus | string;
-}
-
-export namespace SSEDescription {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SSEDescription): any => ({
-    ...obj,
-  });
+  Status?: SSEStatus | undefined;
 }
 
 /**
  * <p>Contains all of the attributes of a specific DAX cluster.</p>
+ * @public
  */
 export interface Cluster {
   /**
    * <p>The name of the DAX cluster.</p>
+   * @public
    */
-  ClusterName?: string;
+  ClusterName?: string | undefined;
 
   /**
    * <p>The description of the cluster.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-   *         </p>
+   * <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster. </p>
+   * @public
    */
-  ClusterArn?: string;
+  ClusterArn?: string | undefined;
 
   /**
    * <p>The total number of nodes in the cluster.</p>
+   * @public
    */
-  TotalNodes?: number;
+  TotalNodes?: number | undefined;
 
   /**
    * <p>The number of nodes in the cluster that are active (i.e., capable of serving
    *             requests).</p>
+   * @public
    */
-  ActiveNodes?: number;
+  ActiveNodes?: number | undefined;
 
   /**
-   * <p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of
-   *             the same type.)</p>
+   * <p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the
+   *             same type.)</p>
+   * @public
    */
-  NodeType?: string;
+  NodeType?: string | undefined;
 
   /**
    * <p>The current status of the cluster.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
-   * <p>The endpoint for this DAX cluster, consisting of a DNS name, a port number,
-   *              and a URL. Applications should use the URL to configure the DAX client to find
-   *              their cluster.</p>
+   * <p>The endpoint for this DAX cluster, consisting of a DNS name, a port
+   *             number, and a URL. Applications should use the URL to configure the DAX
+   *             client to find their cluster.</p>
+   * @public
    */
-  ClusterDiscoveryEndpoint?: Endpoint;
+  ClusterDiscoveryEndpoint?: Endpoint | undefined;
 
   /**
    * <p>A list of nodes to be removed from the cluster.</p>
+   * @public
    */
-  NodeIdsToRemove?: string[];
+  NodeIdsToRemove?: string[] | undefined;
 
   /**
    * <p>A list of nodes that are currently in the cluster.</p>
+   * @public
    */
-  Nodes?: Node[];
+  Nodes?: Node[] | undefined;
 
   /**
    * <p>A range of time when maintenance of DAX cluster software will be performed. For
    *             example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than
    *             30 minutes, and is performed automatically within the maintenance window.</p>
+   * @public
    */
-  PreferredMaintenanceWindow?: string;
+  PreferredMaintenanceWindow?: string | undefined;
 
   /**
    * <p>Describes a notification topic and its status. Notification topics are used for
    *             publishing DAX events to subscribers using Amazon Simple Notification Service
    *             (SNS).</p>
+   * @public
    */
-  NotificationConfiguration?: NotificationConfiguration;
+  NotificationConfiguration?: NotificationConfiguration | undefined;
 
   /**
    * <p>The subnet group where the DAX cluster is running.</p>
+   * @public
    */
-  SubnetGroup?: string;
+  SubnetGroup?: string | undefined;
 
   /**
-   * <p>A list of security groups, and the status of each, for the nodes in the cluster.</p>
+   * <p>A list of security groups, and the status of each, for the nodes in the
+   *             cluster.</p>
+   * @public
    */
-  SecurityGroups?: SecurityGroupMembership[];
+  SecurityGroups?: SecurityGroupMembership[] | undefined;
 
   /**
-   * <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
-   *             will assume this role and use the role's permissions to access DynamoDB on your
-   *             behalf.</p>
+   * <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At
+   *             runtime, DAX will assume this role and use the role's permissions to
+   *             access DynamoDB on your behalf.</p>
+   * @public
    */
-  IamRoleArn?: string;
+  IamRoleArn?: string | undefined;
 
   /**
    * <p>The parameter group being used by nodes in the cluster.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroupStatus;
+  ParameterGroup?: ParameterGroupStatus | undefined;
 
   /**
    * <p>The description of the server-side encryption status on the specified DAX cluster.</p>
+   * @public
    */
-  SSEDescription?: SSEDescription;
+  SSEDescription?: SSEDescription | undefined;
 
   /**
    * <p>The type of encryption supported by the cluster's endpoint. Values are:</p>
-   *         <ul>
+   *          <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>NONE</code> for no encryption</p>
-   *                 <p>
+   *                <p>
    *                   <code>TLS</code> for Transport Layer Security</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType | string;
-}
+  ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType | undefined;
 
-export namespace Cluster {
   /**
-   * @internal
+   * <p>The IP address type of the cluster. Values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ipv4</code> - IPv4 addresses only</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ipv6</code> - IPv6 addresses only</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>dual_stack</code> - Both IPv4 and IPv6 addresses</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Cluster): any => ({
-    ...obj,
-  });
+  NetworkType?: NetworkType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateClusterResponse {
   /**
    * <p>A description of the DAX cluster that you have created.</p>
+   * @public
    */
-  Cluster?: Cluster;
-}
-
-export namespace CreateClusterResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateClusterResponse): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
 /**
- * <p>There are not enough system resources to create the cluster you requested (or to
- *             resize an already-existing cluster). </p>
+ * @public
  */
-export interface InsufficientClusterCapacityFault extends __SmithyException, $MetadataBearer {
-  name: "InsufficientClusterCapacityFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InsufficientClusterCapacityFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InsufficientClusterCapacityFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested DAX cluster is not in the <i>available</i>
- *             state.</p>
- */
-export interface InvalidClusterStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidClusterStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidClusterStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidClusterStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Two or more incompatible parameters were specified.</p>
- */
-export interface InvalidParameterCombinationException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterCombinationException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterCombinationException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterCombinationException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>One or more parameters in a parameter group are in an invalid state.</p>
- */
-export interface InvalidParameterGroupStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterGroupStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterGroupStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterGroupStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The value for a parameter is invalid.</p>
- */
-export interface InvalidParameterValueException extends __SmithyException, $MetadataBearer {
-  name: "InvalidParameterValueException";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidParameterValueException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidParameterValueException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The VPC network is in an invalid state.</p>
- */
-export interface InvalidVPCNetworkStateFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidVPCNetworkStateFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidVPCNetworkStateFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidVPCNetworkStateFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have attempted to exceed the maximum number of nodes for a DAX
- *             cluster.</p>
- */
-export interface NodeQuotaForClusterExceededFault extends __SmithyException, $MetadataBearer {
-  name: "NodeQuotaForClusterExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NodeQuotaForClusterExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NodeQuotaForClusterExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have attempted to exceed the maximum number of nodes for your AWS
- *             account.</p>
- */
-export interface NodeQuotaForCustomerExceededFault extends __SmithyException, $MetadataBearer {
-  name: "NodeQuotaForCustomerExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NodeQuotaForCustomerExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NodeQuotaForCustomerExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified parameter group does not exist.</p>
- */
-export interface ParameterGroupNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified service linked role (SLR) was not found.</p>
- */
-export interface ServiceLinkedRoleNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ServiceLinkedRoleNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ServiceLinkedRoleNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceLinkedRoleNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have reached the maximum number of x509 certificates that can be created for
- *             encrypted clusters in a 30 day period. Contact AWS customer support to discuss options
- *             for continuing to create encrypted clusters.</p>
- */
-export interface ServiceQuotaExceededException extends __SmithyException, $MetadataBearer {
-  name: "ServiceQuotaExceededException";
-  $fault: "client";
-}
-
-export namespace ServiceQuotaExceededException {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ServiceQuotaExceededException): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested subnet group name does not refer to an existing subnet
- *             group.</p>
- */
-export interface SubnetGroupNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have exceeded the maximum number of tags for this DAX cluster.</p>
- */
-export interface TagQuotaPerResourceExceeded extends __SmithyException, $MetadataBearer {
-  name: "TagQuotaPerResourceExceeded";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TagQuotaPerResourceExceeded {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagQuotaPerResourceExceeded): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateParameterGroupRequest {
   /**
    * <p>The name of the parameter group to apply to all of the clusters in this replication
    *             group.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>A description of the parameter group.</p>
+   * @public
    */
-  Description?: string;
-}
-
-export namespace CreateParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateParameterGroupRequest): any => ({
-    ...obj,
-  });
+  Description?: string | undefined;
 }
 
 /**
- * <p>A named set of parameters that are applied to all of the nodes in a DAX
- *             cluster.</p>
+ * <p>A named set of parameters that are applied to all of the nodes in a DAX cluster.</p>
+ * @public
  */
 export interface ParameterGroup {
   /**
    * <p>The name of the parameter group.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
    * <p>A description of the parameter group.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
-export namespace ParameterGroup {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroup): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface CreateParameterGroupResponse {
   /**
    * <p>Represents the output of a <i>CreateParameterGroup</i>
    *             action.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
-}
-
-export namespace CreateParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateParameterGroupResponse): any => ({
-    ...obj,
-  });
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
 /**
- * <p>The specified parameter group already exists.</p>
+ * @public
  */
-export interface ParameterGroupAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have attempted to exceed the maximum number of parameter groups.</p>
- */
-export interface ParameterGroupQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "ParameterGroupQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ParameterGroupQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterGroupQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
 export interface CreateSubnetGroupRequest {
   /**
    * <p>A name for the subnet group. This value is stored as a lowercase string. </p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 
   /**
    * <p>A description for the subnet group</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A list of VPC subnet IDs for the subnet group.</p>
+   * @public
    */
   SubnetIds: string[] | undefined;
 }
 
-export namespace CreateSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubnetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
 /**
- * <p>Represents the subnet associated with a DAX cluster. This parameter refers to
- *             subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
- *             DAX.</p>
+ * <p>Represents the subnet associated with a DAX cluster. This parameter
+ *             refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
+ *                 DAX.</p>
+ * @public
  */
 export interface Subnet {
   /**
    * <p>The system-assigned identifier for the subnet.</p>
+   * @public
    */
-  SubnetIdentifier?: string;
+  SubnetIdentifier?: string | undefined;
 
   /**
    * <p>The Availability Zone (AZ) for the subnet.</p>
+   * @public
    */
-  SubnetAvailabilityZone?: string;
-}
+  SubnetAvailabilityZone?: string | undefined;
 
-export namespace Subnet {
   /**
-   * @internal
+   * <p>The network types supported by this subnet. Returns an array of strings that can
+   *             include <code>ipv4</code>, <code>ipv6</code>, or both, indicating whether the subnet
+   *             supports IPv4 only, IPv6 only, or dual-stack deployments.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: Subnet): any => ({
-    ...obj,
-  });
+  SupportedNetworkTypes?: NetworkType[] | undefined;
 }
 
 /**
  * <p>Represents the output of one of the following actions:</p>
- *         <ul>
+ *          <ul>
  *             <li>
- *                 <p>
- *                     <i>CreateSubnetGroup</i>
- *                 </p>
+ *                <p>
+ *                   <i>CreateSubnetGroup</i>
+ *                </p>
  *             </li>
  *             <li>
- *                 <p>
- *                     <i>ModifySubnetGroup</i>
- *                 </p>
+ *                <p>
+ *                   <i>ModifySubnetGroup</i>
+ *                </p>
  *             </li>
  *          </ul>
+ * @public
  */
 export interface SubnetGroup {
   /**
    * <p>The name of the subnet group.</p>
+   * @public
    */
-  SubnetGroupName?: string;
+  SubnetGroupName?: string | undefined;
 
   /**
    * <p>The description of the subnet group.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.</p>
+   * @public
    */
-  VpcId?: string;
+  VpcId?: string | undefined;
 
   /**
    * <p>A list of subnets associated with the subnet group. </p>
+   * @public
    */
-  Subnets?: Subnet[];
-}
+  Subnets?: Subnet[] | undefined;
 
-export namespace SubnetGroup {
   /**
-   * @internal
+   * <p>The network types supported by this subnet. Returns an array of strings that can
+   *             include <code>ipv4</code>, <code>ipv6</code>, or both, indicating whether the subnet
+   *             group supports IPv4 only, IPv6 only, or dual-stack deployments. </p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: SubnetGroup): any => ({
-    ...obj,
-  });
+  SupportedNetworkTypes?: NetworkType[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSubnetGroupResponse {
   /**
    * <p>Represents the output of a <i>CreateSubnetGroup</i>
    *             operation.</p>
+   * @public
    */
-  SubnetGroup?: SubnetGroup;
-}
-
-export namespace CreateSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: CreateSubnetGroupResponse): any => ({
-    ...obj,
-  });
+  SubnetGroup?: SubnetGroup | undefined;
 }
 
 /**
- * <p>An invalid subnet identifier was specified.</p>
+ * @public
  */
-export interface InvalidSubnet extends __SmithyException, $MetadataBearer {
-  name: "InvalidSubnet";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidSubnet {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: InvalidSubnet): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The specified subnet group already exists.</p>
- */
-export interface SubnetGroupAlreadyExistsFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupAlreadyExistsFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupAlreadyExistsFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupAlreadyExistsFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request cannot be processed because it would exceed the allowed number of
- *             subnets in a subnet group.</p>
- */
-export interface SubnetGroupQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The request cannot be processed because it would exceed the allowed number of
- *             subnets in a subnet group.</p>
- */
-export interface SubnetQuotaExceededFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetQuotaExceededFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetQuotaExceededFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetQuotaExceededFault): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The requested cluster ID does not refer to an existing DAX cluster.</p>
- */
-export interface ClusterNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "ClusterNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace ClusterNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ClusterNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
 export interface DecreaseReplicationFactorRequest {
   /**
-   * <p>The name of the DAX cluster from which you want to remove nodes.</p>
+   * <p>The name of the DAX cluster from which you want to remove
+   *             nodes.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>The new number of nodes for the DAX cluster.</p>
+   * @public
    */
   NewReplicationFactor: number | undefined;
 
   /**
    * <p>The Availability Zone(s) from which to remove nodes.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
+  AvailabilityZones?: string[] | undefined;
 
   /**
    * <p>The unique identifiers of the nodes to be removed from the cluster.</p>
+   * @public
    */
-  NodeIdsToRemove?: string[];
-}
-
-export namespace DecreaseReplicationFactorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DecreaseReplicationFactorRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DecreaseReplicationFactorResponse {
-  /**
-   * <p>A description of the DAX cluster, after you have decreased its replication
-   *             factor.</p>
-   */
-  Cluster?: Cluster;
-}
-
-export namespace DecreaseReplicationFactorResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DecreaseReplicationFactorResponse): any => ({
-    ...obj,
-  });
+  NodeIdsToRemove?: string[] | undefined;
 }
 
 /**
- * <p>None of the nodes in the cluster have the given node ID.</p>
+ * @public
  */
-export interface NodeNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "NodeNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace NodeNotFoundFault {
+export interface DecreaseReplicationFactorResponse {
   /**
-   * @internal
+   * <p>A description of the DAX cluster, after you have decreased its
+   *             replication factor.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: NodeNotFoundFault): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteClusterRequest {
   /**
    * <p>The name of the cluster to be deleted.</p>
+   * @public
    */
   ClusterName: string | undefined;
 }
 
-export namespace DeleteClusterRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteClusterRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteClusterResponse {
   /**
    * <p>A description of the DAX cluster that is being deleted.</p>
+   * @public
    */
-  Cluster?: Cluster;
+  Cluster?: Cluster | undefined;
 }
 
-export namespace DeleteClusterResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteClusterResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteParameterGroupRequest {
   /**
    * <p>The name of the parameter group to delete.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 }
 
-export namespace DeleteParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteParameterGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteParameterGroupResponse {
   /**
    * <p>A user-specified message for this action (i.e., a reason for deleting the parameter
    *             group).</p>
+   * @public
    */
-  DeletionMessage?: string;
+  DeletionMessage?: string | undefined;
 }
 
-export namespace DeleteParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteParameterGroupResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubnetGroupRequest {
   /**
    * <p>The name of the subnet group to delete.</p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 }
 
-export namespace DeleteSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubnetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DeleteSubnetGroupResponse {
   /**
    * <p>A user-specified message for this action (i.e., a reason for deleting the subnet
    *             group).</p>
+   * @public
    */
-  DeletionMessage?: string;
-}
-
-export namespace DeleteSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DeleteSubnetGroupResponse): any => ({
-    ...obj,
-  });
+  DeletionMessage?: string | undefined;
 }
 
 /**
- * <p>The specified subnet group is currently in use.</p>
+ * @public
  */
-export interface SubnetGroupInUseFault extends __SmithyException, $MetadataBearer {
-  name: "SubnetGroupInUseFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetGroupInUseFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetGroupInUseFault): any => ({
-    ...obj,
-  });
-}
-
 export interface DescribeClustersRequest {
   /**
    * <p>The names of the DAX clusters being described.</p>
+   * @public
    */
-  ClusterNames?: string[];
+  ClusterNames?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *         <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeClustersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClustersRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeClustersResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The descriptions of your DAX clusters, in response to a
-   *             <i>DescribeClusters</i> request.</p>
+   *                 <i>DescribeClusters</i> request.</p>
+   * @public
    */
-  Clusters?: Cluster[];
+  Clusters?: Cluster[] | undefined;
 }
 
-export namespace DescribeClustersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeClustersResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDefaultParametersRequest {
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *         <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-export namespace DescribeDefaultParametersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDefaultParametersRequest): any => ({
-    ...obj,
-  });
-}
-
-export type ChangeType = "IMMEDIATE" | "REQUIRES_REBOOT";
-
-export type IsModifiable = "CONDITIONAL" | "FALSE" | "TRUE";
 
 /**
  * <p>Represents a parameter value that is applicable to a particular node
  *             type.</p>
+ * @public
  */
 export interface NodeTypeSpecificValue {
   /**
    * <p>A node type to which the parameter value applies.</p>
+   * @public
    */
-  NodeType?: string;
+  NodeType?: string | undefined;
 
   /**
    * <p>The parameter value for this node type.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
-
-export namespace NodeTypeSpecificValue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: NodeTypeSpecificValue): any => ({
-    ...obj,
-  });
-}
-
-export type ParameterType = "DEFAULT" | "NODE_TYPE_SPECIFIC";
 
 /**
  * <p>Describes an individual setting that controls some aspect of DAX
  *             behavior.</p>
+ * @public
  */
 export interface Parameter {
   /**
    * <p>The name of the parameter.</p>
+   * @public
    */
-  ParameterName?: string;
+  ParameterName?: string | undefined;
 
   /**
    * <p>Determines whether the parameter can be applied to any nodes, or only nodes of a
    *             particular type.</p>
+   * @public
    */
-  ParameterType?: ParameterType | string;
+  ParameterType?: ParameterType | undefined;
 
   /**
    * <p>The value for the parameter.</p>
+   * @public
    */
-  ParameterValue?: string;
+  ParameterValue?: string | undefined;
 
   /**
    * <p>A list of node types, and specific parameter values for each node.</p>
+   * @public
    */
-  NodeTypeSpecificValues?: NodeTypeSpecificValue[];
+  NodeTypeSpecificValues?: NodeTypeSpecificValue[] | undefined;
 
   /**
    * <p>A description of the parameter</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>How the parameter is defined. For example, <code>system</code> denotes a
    *             system-defined parameter.</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>The data type of the parameter. For example, <code>integer</code>:</p>
+   * @public
    */
-  DataType?: string;
+  DataType?: string | undefined;
 
   /**
    * <p>A range of values within which the parameter can be set.</p>
+   * @public
    */
-  AllowedValues?: string;
+  AllowedValues?: string | undefined;
 
   /**
    * <p>Whether the customer is allowed to modify the parameter.</p>
+   * @public
    */
-  IsModifiable?: IsModifiable | string;
+  IsModifiable?: IsModifiable | undefined;
 
   /**
    * <p>The conditions under which changes to this parameter can be applied. For example,
    *                 <code>requires-reboot</code> indicates that a new value for this parameter will only
    *             take effect if a node is rebooted.</p>
+   * @public
    */
-  ChangeType?: ChangeType | string;
+  ChangeType?: ChangeType | undefined;
 }
 
-export namespace Parameter {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Parameter): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeDefaultParametersResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>A list of parameters.  Each element in the list represents one parameter.</p>
+   * <p>A list of parameters. Each element in the list represents one parameter.</p>
+   * @public
    */
-  Parameters?: Parameter[];
+  Parameters?: Parameter[] | undefined;
 }
 
-export namespace DescribeDefaultParametersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeDefaultParametersResponse): any => ({
-    ...obj,
-  });
-}
-
-export type SourceType = "CLUSTER" | "PARAMETER_GROUP" | "SUBNET_GROUP";
-
+/**
+ * @public
+ */
 export interface DescribeEventsRequest {
   /**
    * <p>The identifier of the event source for which events will be returned. If not
    *             specified, then all sources are included in the response.</p>
+   * @public
    */
-  SourceName?: string;
+  SourceName?: string | undefined;
 
   /**
    * <p>The event source to retrieve events for. If no value is specified, all events are
    *             returned.</p>
+   * @public
    */
-  SourceType?: SourceType | string;
+  SourceType?: SourceType | undefined;
 
   /**
    * <p>The beginning of the time interval to retrieve events for, specified in ISO 8601
    *             format.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The end of the time interval for which to retrieve events, specified in ISO 8601
    *             format.</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 
   /**
    * <p>The number of minutes' worth of events to retrieve.</p>
+   * @public
    */
-  Duration?: number;
+  Duration?: number | undefined;
 
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *         <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export namespace DescribeEventsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEventsRequest): any => ({
-    ...obj,
-  });
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Represents a single occurrence of something interesting within the system. Some
- *             examples of events are creating a DAX cluster, adding or removing a node, or rebooting
- *             a node.</p>
+ *             examples of events are creating a DAX cluster, adding or removing a node, or rebooting a
+ *             node.</p>
+ * @public
  */
 export interface Event {
   /**
    * <p>The source of the event. For example, if the event occurred at the node level, the
    *             source would be the node ID.</p>
+   * @public
    */
-  SourceName?: string;
+  SourceName?: string | undefined;
 
   /**
    * <p>Specifies the origin of this event - a cluster, a parameter group, a node ID,
    *             etc.</p>
+   * @public
    */
-  SourceType?: SourceType | string;
+  SourceType?: SourceType | undefined;
 
   /**
    * <p>A user-defined message associated with the event.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 
   /**
    * <p>The date and time when the event occurred.</p>
+   * @public
    */
-  Date?: Date;
+  Date?: Date | undefined;
 }
 
-export namespace Event {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: Event): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeEventsResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>An array of events.  Each element in the array represents one event.</p>
+   * <p>An array of events. Each element in the array represents one event.</p>
+   * @public
    */
-  Events?: Event[];
+  Events?: Event[] | undefined;
 }
 
-export namespace DescribeEventsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeEventsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParameterGroupsRequest {
   /**
    * <p>The names of the parameter groups.</p>
+   * @public
    */
-  ParameterGroupNames?: string[];
+  ParameterGroupNames?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *         <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeParameterGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParameterGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParameterGroupsResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>An array of parameter groups.  Each element in the array represents one parameter group.</p>
+   * <p>An array of parameter groups. Each element in the array represents one parameter
+   *             group.</p>
+   * @public
    */
-  ParameterGroups?: ParameterGroup[];
+  ParameterGroups?: ParameterGroup[] | undefined;
 }
 
-export namespace DescribeParameterGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParameterGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParametersRequest {
   /**
    * <p>The name of the parameter group.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>How the parameter is defined. For example, <code>system</code> denotes a
    *             system-defined parameter.</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *         <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeParametersRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParametersRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeParametersResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>A list of parameters within a parameter group.  Each element in the list represents one parameter.</p>
+   * <p>A list of parameters within a parameter group. Each element in the list represents
+   *             one parameter.</p>
+   * @public
    */
-  Parameters?: Parameter[];
+  Parameters?: Parameter[] | undefined;
 }
 
-export namespace DescribeParametersResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeParametersResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSubnetGroupsRequest {
   /**
    * <p>The name of the subnet group.</p>
+   * @public
    */
-  SubnetGroupNames?: string[];
+  SubnetGroupNames?: string[] | undefined;
 
   /**
    * <p>The maximum number of results to include in the response. If more results exist
    *             than the specified <code>MaxResults</code> value, a token is included in the response so
    *             that the remaining results can be retrieved.</p>
-   *             <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   *          <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token, up to the value specified by
    *             <code>MaxResults</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace DescribeSubnetGroupsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSubnetGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface DescribeSubnetGroupsResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>An array of subnet groups.  Each element in the array represents a single subnet group.</p>
+   * <p>An array of subnet groups. Each element in the array represents a single subnet
+   *             group.</p>
+   * @public
    */
-  SubnetGroups?: SubnetGroup[];
+  SubnetGroups?: SubnetGroup[] | undefined;
 }
 
-export namespace DescribeSubnetGroupsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: DescribeSubnetGroupsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface IncreaseReplicationFactorRequest {
   /**
    * <p>The name of the DAX cluster that will receive additional nodes.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>The new number of nodes for the DAX cluster.</p>
+   * @public
    */
   NewReplicationFactor: number | undefined;
 
   /**
    * <p>The Availability Zones (AZs) in which the cluster nodes will be created. All nodes
-   *             belonging to the cluster are placed in these Availability Zones. Use this parameter if you want
-   *             to distribute the nodes across multiple AZs.</p>
+   *             belonging to the cluster are placed in these Availability Zones. Use this parameter if
+   *             you want to distribute the nodes across multiple AZs.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
-}
-
-export namespace IncreaseReplicationFactorRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IncreaseReplicationFactorRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface IncreaseReplicationFactorResponse {
-  /**
-   * <p>A description of the DAX cluster. with its new replication factor.</p>
-   */
-  Cluster?: Cluster;
-}
-
-export namespace IncreaseReplicationFactorResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: IncreaseReplicationFactorResponse): any => ({
-    ...obj,
-  });
+  AvailabilityZones?: string[] | undefined;
 }
 
 /**
- * <p>The Amazon Resource Name (ARN) supplied in the request is not valid.</p>
+ * @public
  */
-export interface InvalidARNFault extends __SmithyException, $MetadataBearer {
-  name: "InvalidARNFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace InvalidARNFault {
+export interface IncreaseReplicationFactorResponse {
   /**
-   * @internal
+   * <p>A description of the DAX cluster, with its new replication
+   *             factor.</p>
+   * @public
    */
-  export const filterSensitiveLog = (obj: InvalidARNFault): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsRequest {
   /**
    * <p>The name of the DAX resource to which the tags belong.</p>
+   * @public
    */
   ResourceName: string | undefined;
 
@@ -1892,359 +1354,265 @@ export interface ListTagsRequest {
    * <p>An optional token returned from a prior request. Use this token for pagination of
    *             results from this action. If this parameter is specified, the response includes only
    *             results beyond the token.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListTagsRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface ListTagsResponse {
   /**
    * <p>A list of tags currently associated with the DAX cluster.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
-   * <p>If this value is present, there are additional results to be displayed.  To retrieve them, call
-   *             <code>ListTags</code> again, with <code>NextToken</code> set to this value.</p>
+   * <p>If this value is present, there are additional results to be displayed. To retrieve
+   *             them, call <code>ListTags</code> again, with <code>NextToken</code> set to this
+   *             value.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export namespace ListTagsResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ListTagsResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RebootNodeRequest {
   /**
-   * <p>The name of the DAX cluster containing the node to be rebooted.</p>
+   * <p>The name of the DAX cluster containing the node to be
+   *             rebooted.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>The system-assigned ID of the node to be rebooted.</p>
+   * @public
    */
   NodeId: string | undefined;
 }
 
-export namespace RebootNodeRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RebootNodeRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface RebootNodeResponse {
   /**
-   * <p>A description of the DAX cluster after a node has been rebooted.</p>
+   * <p>A description of the DAX cluster after a node has been
+   *             rebooted.</p>
+   * @public
    */
-  Cluster?: Cluster;
+  Cluster?: Cluster | undefined;
 }
 
-export namespace RebootNodeResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: RebootNodeResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
-   * <p>The name of the DAX resource to which tags should be added.</p>
+   * <p>The name of the DAX resource to which tags should be
+   *             added.</p>
+   * @public
    */
   ResourceName: string | undefined;
 
   /**
    * <p>The tags to be assigned to the DAX resource. </p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
-export namespace TagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface TagResourceResponse {
   /**
    * <p>The list of tags that are associated with the DAX resource.</p>
+   * @public
    */
-  Tags?: Tag[];
-}
-
-export namespace TagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagResourceResponse): any => ({
-    ...obj,
-  });
+  Tags?: Tag[] | undefined;
 }
 
 /**
- * <p>The tag does not exist.</p>
+ * @public
  */
-export interface TagNotFoundFault extends __SmithyException, $MetadataBearer {
-  name: "TagNotFoundFault";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace TagNotFoundFault {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: TagNotFoundFault): any => ({
-    ...obj,
-  });
-}
-
 export interface UntagResourceRequest {
   /**
-   * <p>The name of the DAX resource from which the tags should be removed.</p>
+   * <p>The name of the DAX resource from which the tags should be
+   *             removed.</p>
+   * @public
    */
   ResourceName: string | undefined;
 
   /**
-   * <p>A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.</p>
+   * <p>A list of tag keys. If the DAX cluster has any tags with these keys,
+   *             then the tags are removed from the cluster.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
-export namespace UntagResourceRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UntagResourceResponse {
   /**
    * <p>The tag keys that have been removed from the cluster.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
-export namespace UntagResourceResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateClusterRequest {
   /**
    * <p>The name of the DAX cluster to be modified.</p>
+   * @public
    */
   ClusterName: string | undefined;
 
   /**
    * <p>A description of the changes being made to the cluster.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A range of time when maintenance of DAX cluster software will be performed. For
    *             example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than
    *             30 minutes, and is performed automatically within the maintenance window.</p>
+   * @public
    */
-  PreferredMaintenanceWindow?: string;
+  PreferredMaintenanceWindow?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) that identifies the topic.</p>
+   * @public
    */
-  NotificationTopicArn?: string;
+  NotificationTopicArn?: string | undefined;
 
   /**
    * <p>The current state of the topic. A value of “active” means that notifications will
-   *         be sent to the topic. A value of “inactive” means that notifications will not be sent to the
-   *         topic.</p>
+   *             be sent to the topic. A value of “inactive” means that notifications will not be sent to
+   *             the topic.</p>
+   * @public
    */
-  NotificationTopicStatus?: string;
+  NotificationTopicStatus?: string | undefined;
 
   /**
    * <p>The name of a parameter group for this cluster.</p>
+   * @public
    */
-  ParameterGroupName?: string;
+  ParameterGroupName?: string | undefined;
 
   /**
-   * <p>A list of user-specified security group IDs to be assigned to each node in the DAX cluster.  If this parameter is not
-   *             specified, DAX assigns the default VPC security group to each node.</p>
+   * <p>A list of user-specified security group IDs to be assigned to each node in the DAX
+   *             cluster. If this parameter is not specified, DAX assigns the default VPC security group
+   *             to each node.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 }
 
-export namespace UpdateClusterRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateClusterRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateClusterResponse {
   /**
    * <p>A description of the DAX cluster, after it has been modified.</p>
+   * @public
    */
-  Cluster?: Cluster;
-}
-
-export namespace UpdateClusterResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateClusterResponse): any => ({
-    ...obj,
-  });
+  Cluster?: Cluster | undefined;
 }
 
 /**
  * <p>An individual DAX parameter.</p>
+ * @public
  */
 export interface ParameterNameValue {
   /**
    * <p>The name of the parameter.</p>
+   * @public
    */
-  ParameterName?: string;
+  ParameterName?: string | undefined;
 
   /**
    * <p>The value of the parameter.</p>
+   * @public
    */
-  ParameterValue?: string;
+  ParameterValue?: string | undefined;
 }
 
-export namespace ParameterNameValue {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: ParameterNameValue): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateParameterGroupRequest {
   /**
    * <p>The name of the parameter group.</p>
+   * @public
    */
   ParameterGroupName: string | undefined;
 
   /**
    * <p>An array of name-value pairs for the parameters in the group. Each element in the
    *             array represents a single parameter.</p>
-   *             <note>
+   *          <note>
    *             <p>
-   *                <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
-   *         </note>
+   *                <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only
+   *                 supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
+   *          </note>
+   * @public
    */
   ParameterNameValues: ParameterNameValue[] | undefined;
 }
 
-export namespace UpdateParameterGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateParameterGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateParameterGroupResponse {
   /**
    * <p>The parameter group that has been modified.</p>
+   * @public
    */
-  ParameterGroup?: ParameterGroup;
-}
-
-export namespace UpdateParameterGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateParameterGroupResponse): any => ({
-    ...obj,
-  });
+  ParameterGroup?: ParameterGroup | undefined;
 }
 
 /**
- * <p>The requested subnet is being used by another subnet group.</p>
+ * @public
  */
-export interface SubnetInUse extends __SmithyException, $MetadataBearer {
-  name: "SubnetInUse";
-  $fault: "client";
-  message?: string;
-}
-
-export namespace SubnetInUse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: SubnetInUse): any => ({
-    ...obj,
-  });
-}
-
 export interface UpdateSubnetGroupRequest {
   /**
    * <p>The name of the subnet group.</p>
+   * @public
    */
   SubnetGroupName: string | undefined;
 
   /**
    * <p>A description of the subnet group.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>A list of subnet IDs in the subnet group.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 }
 
-export namespace UpdateSubnetGroupRequest {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubnetGroupRequest): any => ({
-    ...obj,
-  });
-}
-
+/**
+ * @public
+ */
 export interface UpdateSubnetGroupResponse {
   /**
    * <p>The subnet group that has been modified.</p>
+   * @public
    */
-  SubnetGroup?: SubnetGroup;
-}
-
-export namespace UpdateSubnetGroupResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: UpdateSubnetGroupResponse): any => ({
-    ...obj,
-  });
+  SubnetGroup?: SubnetGroup | undefined;
 }

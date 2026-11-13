@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GetFolderRequest, GetFolderResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFolderCommand,
-  serializeAws_restJson1GetFolderCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFolderRequest, GetFolderResponse } from "../models/models_0";
+import { GetFolder$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFolderCommand}.
+ */
 export interface GetFolderCommandInput extends GetFolderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFolderCommand}.
+ */
 export interface GetFolderCommandOutput extends GetFolderResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,89 @@ export interface GetFolderCommandOutput extends GetFolderResponse, __MetadataBea
  * ```javascript
  * import { WorkDocsClient, GetFolderCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, GetFolderCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // GetFolderRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   FolderId: "STRING_VALUE", // required
+ *   IncludeCustomMetadata: true || false,
+ * };
  * const command = new GetFolderCommand(input);
  * const response = await client.send(command);
+ * // { // GetFolderResponse
+ * //   Metadata: { // FolderMetadata
+ * //     Id: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     CreatorId: "STRING_VALUE",
+ * //     ParentFolderId: "STRING_VALUE",
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //     ModifiedTimestamp: new Date("TIMESTAMP"),
+ * //     ResourceState: "ACTIVE" || "RESTORING" || "RECYCLING" || "RECYCLED",
+ * //     Signature: "STRING_VALUE",
+ * //     Labels: [ // SharedLabels
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Size: Number("long"),
+ * //     LatestVersionSize: Number("long"),
+ * //   },
+ * //   CustomMetadata: { // CustomMetadataMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetFolderCommandInput - {@link GetFolderCommandInput}
+ * @returns {@link GetFolderCommandOutput}
  * @see {@link GetFolderCommandInput} for command's `input` shape.
  * @see {@link GetFolderCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The pagination marker or limit fields are not valid.</p>
+ *
+ * @throws {@link ProhibitedStateException} (client fault)
+ *  <p>The specified document version is not in the INITIALIZED state.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class GetFolderCommand extends $Command<
-  GetFolderCommandInput,
-  GetFolderCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFolderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFolderCommandInput, GetFolderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "GetFolderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFolderRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: GetFolderResponse.filterSensitiveLog,
+export class GetFolderCommand extends command<GetFolderCommandInput, GetFolderCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFolder",
+  GetFolder$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFolderRequest;
+      output: GetFolderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFolderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFolderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFolderCommandOutput> {
-    return deserializeAws_restJson1GetFolderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFolderCommandInput;
+      output: GetFolderCommandOutput;
+    };
+  };
 }

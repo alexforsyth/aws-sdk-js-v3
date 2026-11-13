@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DeleteProvisioningArtifactInput, DeleteProvisioningArtifactOutput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteProvisioningArtifactCommand,
-  serializeAws_json1_1DeleteProvisioningArtifactCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceCatalogClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ServiceCatalogClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteProvisioningArtifactInput, DeleteProvisioningArtifactOutput } from "../models/models_0";
+import { DeleteProvisioningArtifact$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteProvisioningArtifactCommand}.
+ */
 export interface DeleteProvisioningArtifactCommandInput extends DeleteProvisioningArtifactInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteProvisioningArtifactCommand}.
+ */
 export interface DeleteProvisioningArtifactCommandOutput extends DeleteProvisioningArtifactOutput, __MetadataBearer {}
 
 /**
@@ -31,71 +32,56 @@ export interface DeleteProvisioningArtifactCommandOutput extends DeleteProvision
  * ```javascript
  * import { ServiceCatalogClient, DeleteProvisioningArtifactCommand } from "@aws-sdk/client-service-catalog"; // ES Modules import
  * // const { ServiceCatalogClient, DeleteProvisioningArtifactCommand } = require("@aws-sdk/client-service-catalog"); // CommonJS import
+ * // import type { ServiceCatalogClientConfig } from "@aws-sdk/client-service-catalog";
+ * const config = {}; // type is ServiceCatalogClientConfig
  * const client = new ServiceCatalogClient(config);
+ * const input = { // DeleteProvisioningArtifactInput
+ *   AcceptLanguage: "STRING_VALUE",
+ *   ProductId: "STRING_VALUE", // required
+ *   ProvisioningArtifactId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteProvisioningArtifactCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteProvisioningArtifactCommandInput - {@link DeleteProvisioningArtifactCommandInput}
+ * @returns {@link DeleteProvisioningArtifactCommandOutput}
  * @see {@link DeleteProvisioningArtifactCommandInput} for command's `input` shape.
  * @see {@link DeleteProvisioningArtifactCommandOutput} for command's `response` shape.
- * @see {@link ServiceCatalogClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link ServiceCatalogClientResolvedConfig | config} for ServiceCatalogClient's `config` shape.
  *
+ * @throws {@link InvalidParametersException} (client fault)
+ *  <p>One or more parameters provided to the operation are not valid.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>A resource that is currently in use. Ensure that the resource is not in use and retry the operation.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ServiceCatalogServiceException}
+ * <p>Base exception class for all service exceptions from ServiceCatalog service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteProvisioningArtifactCommand extends $Command<
-  DeleteProvisioningArtifactCommandInput,
-  DeleteProvisioningArtifactCommandOutput,
-  ServiceCatalogClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteProvisioningArtifactCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ServiceCatalogClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteProvisioningArtifactCommandInput, DeleteProvisioningArtifactCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ServiceCatalogClient";
-    const commandName = "DeleteProvisioningArtifactCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteProvisioningArtifactInput.filterSensitiveLog,
-      outputFilterSensitiveLog: DeleteProvisioningArtifactOutput.filterSensitiveLog,
+export class DeleteProvisioningArtifactCommand extends command<DeleteProvisioningArtifactCommandInput, DeleteProvisioningArtifactCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteProvisioningArtifact",
+  DeleteProvisioningArtifact$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteProvisioningArtifactInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteProvisioningArtifactCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteProvisioningArtifactCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteProvisioningArtifactCommandOutput> {
-    return deserializeAws_json1_1DeleteProvisioningArtifactCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteProvisioningArtifactCommandInput;
+      output: DeleteProvisioningArtifactCommandOutput;
+    };
+  };
 }

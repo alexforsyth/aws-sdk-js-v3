@@ -1,0 +1,25 @@
+// smithy-typescript generated code
+import {
+  type ServiceExceptionOptions as __ServiceExceptionOptions,
+  ServiceException as __ServiceException,
+} from "@smithy/core/client";
+
+export type { __ServiceExceptionOptions };
+
+export { __ServiceException };
+
+/**
+ * @public
+ *
+ * Base exception class for all service exceptions from IoTWireless service.
+ */
+export class IoTWirelessServiceException extends __ServiceException {
+  public static readonly shapeId: string = "smithy.ts.sdk.synthetic.com.amazonaws.iotwireless#IoTWirelessServiceException";
+  /**
+   * @internal
+   */
+  constructor(options: __ServiceExceptionOptions) {
+    super(options);
+    Object.setPrototypeOf(this, IoTWirelessServiceException.prototype);
+  }
+}

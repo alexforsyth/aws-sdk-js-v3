@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DescribeAccountModificationsRequest, DescribeAccountModificationsResult } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAccountModificationsCommand,
-  serializeAws_json1_1DescribeAccountModificationsCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAccountModificationsRequest, DescribeAccountModificationsResult } from "../models/models_0";
+import { DescribeAccountModifications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAccountModificationsCommand}.
+ */
 export interface DescribeAccountModificationsCommandInput extends DescribeAccountModificationsRequest {}
-export interface DescribeAccountModificationsCommandOutput
-  extends DescribeAccountModificationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAccountModificationsCommand}.
+ */
+export interface DescribeAccountModificationsCommandOutput extends DescribeAccountModificationsResult, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list that describes modifications to the configuration of Bring Your Own
@@ -31,71 +30,60 @@ export interface DescribeAccountModificationsCommandOutput
  * ```javascript
  * import { WorkSpacesClient, DescribeAccountModificationsCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeAccountModificationsCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeAccountModificationsRequest
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeAccountModificationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAccountModificationsResult
+ * //   AccountModifications: [ // AccountModificationList
+ * //     { // AccountModification
+ * //       ModificationState: "PENDING" || "COMPLETED" || "FAILED",
+ * //       DedicatedTenancySupport: "ENABLED" || "DISABLED",
+ * //       DedicatedTenancyManagementCidrRange: "STRING_VALUE",
+ * //       StartTime: new Date("TIMESTAMP"),
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAccountModificationsCommandInput - {@link DescribeAccountModificationsCommandInput}
+ * @returns {@link DescribeAccountModificationsCommandOutput}
  * @see {@link DescribeAccountModificationsCommandInput} for command's `input` shape.
  * @see {@link DescribeAccountModificationsCommandOutput} for command's `response` shape.
- * @see {@link WorkSpacesClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAccountModificationsCommand extends $Command<
-  DescribeAccountModificationsCommandInput,
-  DescribeAccountModificationsCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAccountModificationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAccountModificationsCommandInput, DescribeAccountModificationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeAccountModificationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAccountModificationsRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAccountModificationsResult.filterSensitiveLog,
+export class DescribeAccountModificationsCommand extends command<DescribeAccountModificationsCommandInput, DescribeAccountModificationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAccountModifications",
+  DescribeAccountModifications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAccountModificationsRequest;
+      output: DescribeAccountModificationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAccountModificationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAccountModificationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAccountModificationsCommandOutput> {
-    return deserializeAws_json1_1DescribeAccountModificationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAccountModificationsCommandInput;
+      output: DescribeAccountModificationsCommandOutput;
+    };
+  };
 }

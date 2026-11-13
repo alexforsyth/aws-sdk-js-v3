@@ -1,24 +1,25 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CreateCommentRequest, CreateCommentResponse } from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateCommentCommand,
-  serializeAws_restJson1CreateCommentCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkDocsClientResolvedConfig } from "../WorkDocsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateCommentRequest, CreateCommentResponse } from "../models/models_0";
+import { CreateComment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateCommentCommand}.
+ */
 export interface CreateCommentCommandInput extends CreateCommentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateCommentCommand}.
+ */
 export interface CreateCommentCommandOutput extends CreateCommentResponse, __MetadataBearer {}
 
 /**
@@ -28,68 +29,113 @@ export interface CreateCommentCommandOutput extends CreateCommentResponse, __Met
  * ```javascript
  * import { WorkDocsClient, CreateCommentCommand } from "@aws-sdk/client-workdocs"; // ES Modules import
  * // const { WorkDocsClient, CreateCommentCommand } = require("@aws-sdk/client-workdocs"); // CommonJS import
+ * // import type { WorkDocsClientConfig } from "@aws-sdk/client-workdocs";
+ * const config = {}; // type is WorkDocsClientConfig
  * const client = new WorkDocsClient(config);
+ * const input = { // CreateCommentRequest
+ *   AuthenticationToken: "STRING_VALUE",
+ *   DocumentId: "STRING_VALUE", // required
+ *   VersionId: "STRING_VALUE", // required
+ *   ParentId: "STRING_VALUE",
+ *   ThreadId: "STRING_VALUE",
+ *   Text: "STRING_VALUE", // required
+ *   Visibility: "PUBLIC" || "PRIVATE",
+ *   NotifyCollaborators: true || false,
+ * };
  * const command = new CreateCommentCommand(input);
  * const response = await client.send(command);
+ * // { // CreateCommentResponse
+ * //   Comment: { // Comment
+ * //     CommentId: "STRING_VALUE", // required
+ * //     ParentId: "STRING_VALUE",
+ * //     ThreadId: "STRING_VALUE",
+ * //     Text: "STRING_VALUE",
+ * //     Contributor: { // User
+ * //       Id: "STRING_VALUE",
+ * //       Username: "STRING_VALUE",
+ * //       EmailAddress: "STRING_VALUE",
+ * //       GivenName: "STRING_VALUE",
+ * //       Surname: "STRING_VALUE",
+ * //       OrganizationId: "STRING_VALUE",
+ * //       RootFolderId: "STRING_VALUE",
+ * //       RecycleBinFolderId: "STRING_VALUE",
+ * //       Status: "ACTIVE" || "INACTIVE" || "PENDING",
+ * //       Type: "USER" || "ADMIN" || "POWERUSER" || "MINIMALUSER" || "WORKSPACESUSER",
+ * //       CreatedTimestamp: new Date("TIMESTAMP"),
+ * //       ModifiedTimestamp: new Date("TIMESTAMP"),
+ * //       TimeZoneId: "STRING_VALUE",
+ * //       Locale: "en" || "fr" || "ko" || "de" || "es" || "ja" || "ru" || "zh_CN" || "zh_TW" || "pt_BR" || "default",
+ * //       Storage: { // UserStorageMetadata
+ * //         StorageUtilizedInBytes: Number("long"),
+ * //         StorageRule: { // StorageRuleType
+ * //           StorageAllocatedInBytes: Number("long"),
+ * //           StorageType: "UNLIMITED" || "QUOTA",
+ * //         },
+ * //       },
+ * //     },
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //     Status: "DRAFT" || "PUBLISHED" || "DELETED",
+ * //     Visibility: "PUBLIC" || "PRIVATE",
+ * //     RecipientId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateCommentCommandInput - {@link CreateCommentCommandInput}
+ * @returns {@link CreateCommentCommandOutput}
  * @see {@link CreateCommentCommandInput} for command's `input` shape.
  * @see {@link CreateCommentCommandOutput} for command's `response` shape.
- * @see {@link WorkDocsClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link WorkDocsClientResolvedConfig | config} for WorkDocsClient's `config` shape.
  *
+ * @throws {@link DocumentLockedForCommentsException} (client fault)
+ *  <p>This exception is thrown when the document is locked for comments and user tries to
+ *             create or delete a comment on that document.</p>
+ *
+ * @throws {@link EntityNotExistsException} (client fault)
+ *  <p>The resource does not exist.</p>
+ *
+ * @throws {@link FailedDependencyException} (client fault)
+ *  <p>The Directory Service cannot reach an on-premises instance. Or a dependency
+ *             under the control of the organization is failing, such as a connected Active
+ *             Directory.</p>
+ *
+ * @throws {@link InvalidCommentOperationException} (client fault)
+ *  <p>The requested operation is not allowed on the specified comment object.</p>
+ *
+ * @throws {@link ProhibitedStateException} (client fault)
+ *  <p>The specified document version is not in the INITIALIZED state.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>One or more of the dependencies is unavailable.</p>
+ *
+ * @throws {@link UnauthorizedOperationException} (client fault)
+ *  <p>The operation is not permitted.</p>
+ *
+ * @throws {@link UnauthorizedResourceAccessException} (client fault)
+ *  <p>The caller does not have access to perform the action on the resource.</p>
+ *
+ * @throws {@link WorkDocsServiceException}
+ * <p>Base exception class for all service exceptions from WorkDocs service.</p>
+ *
+ *
+ * @public
  */
-export class CreateCommentCommand extends $Command<
-  CreateCommentCommandInput,
-  CreateCommentCommandOutput,
-  WorkDocsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateCommentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkDocsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateCommentCommandInput, CreateCommentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkDocsClient";
-    const commandName = "CreateCommentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateCommentRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateCommentResponse.filterSensitiveLog,
+export class CreateCommentCommand extends command<CreateCommentCommandInput, CreateCommentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateComment",
+  CreateComment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateCommentRequest;
+      output: CreateCommentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateCommentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateCommentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateCommentCommandOutput> {
-    return deserializeAws_restJson1CreateCommentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateCommentCommandInput;
+      output: CreateCommentCommandOutput;
+    };
+  };
 }

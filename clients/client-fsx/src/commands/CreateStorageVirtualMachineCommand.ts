@@ -1,27 +1,26 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FSxClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FSxClient";
-import { CreateStorageVirtualMachineRequest, CreateStorageVirtualMachineResponse } from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateStorageVirtualMachineCommand,
-  serializeAws_json1_1CreateStorageVirtualMachineCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateStorageVirtualMachineRequest, CreateStorageVirtualMachineResponse } from "../models/models_0";
+import { CreateStorageVirtualMachine$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateStorageVirtualMachineCommand}.
+ */
 export interface CreateStorageVirtualMachineCommandInput extends CreateStorageVirtualMachineRequest {}
-export interface CreateStorageVirtualMachineCommandOutput
-  extends CreateStorageVirtualMachineResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateStorageVirtualMachineCommand}.
+ */
+export interface CreateStorageVirtualMachineCommandOutput extends CreateStorageVirtualMachineResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file system.</p>
@@ -30,71 +29,159 @@ export interface CreateStorageVirtualMachineCommandOutput
  * ```javascript
  * import { FSxClient, CreateStorageVirtualMachineCommand } from "@aws-sdk/client-fsx"; // ES Modules import
  * // const { FSxClient, CreateStorageVirtualMachineCommand } = require("@aws-sdk/client-fsx"); // CommonJS import
+ * // import type { FSxClientConfig } from "@aws-sdk/client-fsx";
+ * const config = {}; // type is FSxClientConfig
  * const client = new FSxClient(config);
+ * const input = { // CreateStorageVirtualMachineRequest
+ *   ActiveDirectoryConfiguration: { // CreateSvmActiveDirectoryConfiguration
+ *     NetBiosName: "STRING_VALUE", // required
+ *     SelfManagedActiveDirectoryConfiguration: { // SelfManagedActiveDirectoryConfiguration
+ *       DomainName: "STRING_VALUE", // required
+ *       OrganizationalUnitDistinguishedName: "STRING_VALUE",
+ *       FileSystemAdministratorsGroup: "STRING_VALUE",
+ *       UserName: "STRING_VALUE",
+ *       Password: "STRING_VALUE",
+ *       DnsIps: [ // DnsIps // required
+ *         "STRING_VALUE",
+ *       ],
+ *       DomainJoinServiceAccountSecret: "STRING_VALUE",
+ *     },
+ *   },
+ *   ClientRequestToken: "STRING_VALUE",
+ *   FileSystemId: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE", // required
+ *   SvmAdminPassword: "STRING_VALUE",
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   RootVolumeSecurityStyle: "UNIX" || "NTFS" || "MIXED",
+ * };
  * const command = new CreateStorageVirtualMachineCommand(input);
  * const response = await client.send(command);
+ * // { // CreateStorageVirtualMachineResponse
+ * //   StorageVirtualMachine: { // StorageVirtualMachine
+ * //     ActiveDirectoryConfiguration: { // SvmActiveDirectoryConfiguration
+ * //       NetBiosName: "STRING_VALUE",
+ * //       SelfManagedActiveDirectoryConfiguration: { // SelfManagedActiveDirectoryAttributes
+ * //         DomainName: "STRING_VALUE",
+ * //         OrganizationalUnitDistinguishedName: "STRING_VALUE",
+ * //         FileSystemAdministratorsGroup: "STRING_VALUE",
+ * //         UserName: "STRING_VALUE",
+ * //         DnsIps: [ // DnsIps
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         DomainJoinServiceAccountSecret: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Endpoints: { // SvmEndpoints
+ * //       Iscsi: { // SvmEndpoint
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [ // OntapEndpointIpAddresses
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Management: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Nfs: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //       },
+ * //       Smb: {
+ * //         DNSName: "STRING_VALUE",
+ * //         IpAddresses: "<OntapEndpointIpAddresses>",
+ * //         Ipv6Addresses: "<OntapEndpointIpAddresses>",
+ * //       },
+ * //     },
+ * //     FileSystemId: "STRING_VALUE",
+ * //     Lifecycle: "CREATED" || "CREATING" || "DELETING" || "FAILED" || "MISCONFIGURED" || "PENDING",
+ * //     Name: "STRING_VALUE",
+ * //     ResourceARN: "STRING_VALUE",
+ * //     StorageVirtualMachineId: "STRING_VALUE",
+ * //     Subtype: "DEFAULT" || "DP_DESTINATION" || "SYNC_DESTINATION" || "SYNC_SOURCE",
+ * //     UUID: "STRING_VALUE",
+ * //     Tags: [ // Tags
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     LifecycleTransitionReason: { // LifecycleTransitionReason
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     RootVolumeSecurityStyle: "UNIX" || "NTFS" || "MIXED",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateStorageVirtualMachineCommandInput - {@link CreateStorageVirtualMachineCommandInput}
+ * @returns {@link CreateStorageVirtualMachineCommandOutput}
  * @see {@link CreateStorageVirtualMachineCommandInput} for command's `input` shape.
  * @see {@link CreateStorageVirtualMachineCommandOutput} for command's `response` shape.
- * @see {@link FSxClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link FSxClientResolvedConfig | config} for FSxClient's `config` shape.
  *
+ * @throws {@link ActiveDirectoryError} (client fault)
+ *  <p>An Active Directory error.</p>
+ *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>A generic error indicating a failure with a client request.</p>
+ *
+ * @throws {@link FileSystemNotFound} (client fault)
+ *  <p>No Amazon FSx file systems were found based upon supplied parameters.</p>
+ *
+ * @throws {@link IncompatibleParameterError} (client fault)
+ *  <p>The error returned when a second request is received with the same client request
+ *             token but different parameters settings. A client request token should always uniquely
+ *             identify a single request.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>A generic error indicating a server-side failure.</p>
+ *
+ * @throws {@link ServiceLimitExceeded} (client fault)
+ *  <p>An error indicating that a particular service limit was exceeded. You can increase
+ *             some service limits by contacting Amazon Web Services Support.</p>
+ *
+ * @throws {@link UnsupportedOperation} (client fault)
+ *  <p>The requested operation is not supported for this resource or API.</p>
+ *
+ * @throws {@link FSxServiceException}
+ * <p>Base exception class for all service exceptions from FSx service.</p>
+ *
+ *
+ * @public
  */
-export class CreateStorageVirtualMachineCommand extends $Command<
-  CreateStorageVirtualMachineCommandInput,
-  CreateStorageVirtualMachineCommandOutput,
-  FSxClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateStorageVirtualMachineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FSxClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateStorageVirtualMachineCommandInput, CreateStorageVirtualMachineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FSxClient";
-    const commandName = "CreateStorageVirtualMachineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateStorageVirtualMachineRequest.filterSensitiveLog,
-      outputFilterSensitiveLog: CreateStorageVirtualMachineResponse.filterSensitiveLog,
+export class CreateStorageVirtualMachineCommand extends command<CreateStorageVirtualMachineCommandInput, CreateStorageVirtualMachineCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateStorageVirtualMachine",
+  CreateStorageVirtualMachine$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateStorageVirtualMachineRequest;
+      output: CreateStorageVirtualMachineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateStorageVirtualMachineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateStorageVirtualMachineCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateStorageVirtualMachineCommandOutput> {
-    return deserializeAws_json1_1CreateStorageVirtualMachineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateStorageVirtualMachineCommandInput;
+      output: CreateStorageVirtualMachineCommandOutput;
+    };
+  };
 }

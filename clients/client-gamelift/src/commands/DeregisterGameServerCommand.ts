@@ -1,121 +1,102 @@
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GameLiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GameLiftClient";
-import { DeregisterGameServerInput } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeregisterGameServerCommand,
-  serializeAws_json1_1DeregisterGameServerCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeregisterGameServerInput } from "../models/models_0";
+import { DeregisterGameServer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterGameServerCommand}.
+ */
 export interface DeregisterGameServerCommandInput extends DeregisterGameServerInput {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterGameServerCommand}.
+ */
 export interface DeregisterGameServerCommandOutput extends __MetadataBearer {}
 
 /**
  * <p>
- *             <b>This operation is used with the GameLift FleetIQ solution and game server groups.</b>
- *          </p>
- *         <p>Removes the game server from a game server group. As a result of this operation, the
- *             deregistered game server can no longer be claimed and will not be returned in a list of
- *             active game servers. </p>
- *         <p>To deregister a game server, specify the game server group and game server ID. If
+ *             <b>This API works with the following fleet types:</b> EC2 (FleetIQ)</p>
+ *          <p>Removes the game server from a
+ *             game server group. As a result of this operation, the deregistered game server can no
+ *             longer be claimed and will not be returned in a list of active game servers. </p>
+ *          <p>To deregister a game server, specify the game server group and game server ID. If
  *             successful, this operation emits a CloudWatch event with termination timestamp and
  *             reason.</p>
- *         <p>
+ *          <p>
  *             <b>Learn more</b>
  *          </p>
- *         <p>
- *             <a href="https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html">GameLift FleetIQ Guide</a>
- *         </p>
- *         <p>
- *             <b>Related actions</b>
- *          </p>
- *                     <p>
- *             <a>RegisterGameServer</a> |
- *                     <a>ListGameServers</a> |
- *                     <a>ClaimGameServer</a> |
- *                     <a>DescribeGameServer</a> |
- *                     <a>UpdateGameServer</a> |
- *                     <a>DeregisterGameServer</a> |
- *                     <a href="https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html">All APIs by task</a>
+ *          <p>
+ *             <a href="https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html">Amazon GameLift Servers FleetIQ
+ *                 Guide</a>
  *          </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { GameLiftClient, DeregisterGameServerCommand } from "@aws-sdk/client-gamelift"; // ES Modules import
  * // const { GameLiftClient, DeregisterGameServerCommand } = require("@aws-sdk/client-gamelift"); // CommonJS import
+ * // import type { GameLiftClientConfig } from "@aws-sdk/client-gamelift";
+ * const config = {}; // type is GameLiftClientConfig
  * const client = new GameLiftClient(config);
+ * const input = { // DeregisterGameServerInput
+ *   GameServerGroupName: "STRING_VALUE", // required
+ *   GameServerId: "STRING_VALUE", // required
+ * };
  * const command = new DeregisterGameServerCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeregisterGameServerCommandInput - {@link DeregisterGameServerCommandInput}
+ * @returns {@link DeregisterGameServerCommandOutput}
  * @see {@link DeregisterGameServerCommandInput} for command's `input` shape.
  * @see {@link DeregisterGameServerCommandOutput} for command's `response` shape.
- * @see {@link GameLiftClientResolvedConfig | config} for command's `input` shape.
+ * @see {@link GameLiftClientResolvedConfig | config} for GameLiftClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>The service encountered an unrecoverable internal failure while processing the
+ *             request. Clients can retry such requests immediately or after a waiting period.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more parameter values in the request are invalid. Correct the invalid parameter
+ *             values before retrying.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The client failed authentication. Clients should not retry such requests.</p>
+ *
+ * @throws {@link GameLiftServiceException}
+ * <p>Base exception class for all service exceptions from GameLift service.</p>
+ *
+ *
+ * @public
  */
-export class DeregisterGameServerCommand extends $Command<
-  DeregisterGameServerCommandInput,
-  DeregisterGameServerCommandOutput,
-  GameLiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterGameServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GameLiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterGameServerCommandInput, DeregisterGameServerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GameLiftClient";
-    const commandName = "DeregisterGameServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterGameServerInput.filterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeregisterGameServerCommand extends command<DeregisterGameServerCommandInput, DeregisterGameServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterGameServer",
+  DeregisterGameServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeregisterGameServerInput;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeregisterGameServerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeregisterGameServerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeregisterGameServerCommandOutput> {
-    return deserializeAws_json1_1DeregisterGameServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterGameServerCommandInput;
+      output: DeregisterGameServerCommandOutput;
+    };
+  };
 }

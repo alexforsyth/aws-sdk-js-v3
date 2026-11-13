@@ -1,0 +1,110 @@
+// smithy-typescript generated code
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
+
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
+  ListCloudWatchAlarmTemplateGroupsRequest,
+  ListCloudWatchAlarmTemplateGroupsResponse,
+} from "../models/models_1";
+import { ListCloudWatchAlarmTemplateGroups$ } from "../schemas/schemas_0";
+
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCloudWatchAlarmTemplateGroupsCommand}.
+ */
+export interface ListCloudWatchAlarmTemplateGroupsCommandInput extends ListCloudWatchAlarmTemplateGroupsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCloudWatchAlarmTemplateGroupsCommand}.
+ */
+export interface ListCloudWatchAlarmTemplateGroupsCommandOutput extends ListCloudWatchAlarmTemplateGroupsResponse, __MetadataBearer {}
+
+/**
+ * Lists cloudwatch alarm template groups.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaLiveClient, ListCloudWatchAlarmTemplateGroupsCommand } from "@aws-sdk/client-medialive"; // ES Modules import
+ * // const { MediaLiveClient, ListCloudWatchAlarmTemplateGroupsCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
+ * const client = new MediaLiveClient(config);
+ * const input = { // ListCloudWatchAlarmTemplateGroupsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Scope: "STRING_VALUE",
+ *   SignalMapIdentifier: "STRING_VALUE",
+ * };
+ * const command = new ListCloudWatchAlarmTemplateGroupsCommand(input);
+ * const response = await client.send(command);
+ * // { // ListCloudWatchAlarmTemplateGroupsResponse
+ * //   CloudWatchAlarmTemplateGroups: [ // __listOfCloudWatchAlarmTemplateGroupSummary
+ * //     { // CloudWatchAlarmTemplateGroupSummary
+ * //       Arn: "STRING_VALUE", // required
+ * //       CreatedAt: new Date("TIMESTAMP"), // required
+ * //       Description: "STRING_VALUE",
+ * //       Id: "STRING_VALUE", // required
+ * //       ModifiedAt: new Date("TIMESTAMP"),
+ * //       Name: "STRING_VALUE", // required
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       TemplateCount: Number("int"), // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
+ * ```
+ *
+ * @param ListCloudWatchAlarmTemplateGroupsCommandInput - {@link ListCloudWatchAlarmTemplateGroupsCommandInput}
+ * @returns {@link ListCloudWatchAlarmTemplateGroupsCommandOutput}
+ * @see {@link ListCloudWatchAlarmTemplateGroupsCommandInput} for command's `input` shape.
+ * @see {@link ListCloudWatchAlarmTemplateGroupsCommandOutput} for command's `response` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
+ */
+export class ListCloudWatchAlarmTemplateGroupsCommand extends command<ListCloudWatchAlarmTemplateGroupsCommandInput, ListCloudWatchAlarmTemplateGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCloudWatchAlarmTemplateGroups",
+  ListCloudWatchAlarmTemplateGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCloudWatchAlarmTemplateGroupsRequest;
+      output: ListCloudWatchAlarmTemplateGroupsResponse;
+    };
+    sdk: {
+      input: ListCloudWatchAlarmTemplateGroupsCommandInput;
+      output: ListCloudWatchAlarmTemplateGroupsCommandOutput;
+    };
+  };
+}

@@ -1,50 +1,88 @@
+// smithy-typescript generated code
 // @ts-ignore: package.json will be imported from dist folders
 import packageInfo from "../package.json"; // eslint-disable-line
 
 import {
+  createDefaultUserAgentProvider,
+  emitWarningIfUnsupportedVersion as awsCheckVersion,
+  getDefaultSocketTimeout,
+  NODE_APP_ID_CONFIG_OPTIONS,
+} from "@aws-sdk/core/client";
+import { NODE_AUTH_SCHEME_PREFERENCE_OPTIONS } from "@aws-sdk/core/httpAuthSchemes";
+import { defaultProvider as credentialDefaultProvider } from "@aws-sdk/credential-provider-node";
+import { eventStreamPayloadHandlerProvider } from "@aws-sdk/eventstream-handler-node";
+import { fileStreamHasher as streamHasher } from "@smithy/core/checksum";
+import { emitWarningIfUnsupportedVersion, loadConfigsForDefaultMode } from "@smithy/core/client";
+import {
+  loadConfig as loadNodeConfig,
+  NODE_REGION_CONFIG_FILE_OPTIONS,
+  NODE_REGION_CONFIG_OPTIONS,
   NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS,
   NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS,
-} from "@aws-sdk/config-resolver";
-import { Hash } from "@aws-sdk/hash-node";
-import { fileStreamHasher as streamHasher } from "@aws-sdk/hash-stream-node";
-import { NODE_MAX_ATTEMPT_CONFIG_OPTIONS, NODE_RETRY_MODE_CONFIG_OPTIONS } from "@aws-sdk/middleware-retry";
-import { loadConfig as loadNodeConfig } from "@aws-sdk/node-config-provider";
-import { NodeHttpHandler, streamCollector } from "@aws-sdk/node-http-handler";
-import { HashConstructor as __HashConstructor } from "@aws-sdk/types";
-import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
-import { calculateBodyLength } from "@aws-sdk/util-body-length-node";
-import { defaultUserAgent } from "@aws-sdk/util-user-agent-node";
-import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-node";
-import { RestJsonProtocolClientConfig } from "./RestJsonProtocolClient";
+  resolveDefaultsModeConfig,
+} from "@smithy/core/config";
+import { eventStreamSerdeProvider } from "@smithy/core/event-streams";
+import {
+  DEFAULT_RETRY_MODE,
+  NODE_MAX_ATTEMPT_CONFIG_OPTIONS,
+  NODE_RETRY_MODE_CONFIG_OPTIONS,
+} from "@smithy/core/retry";
+import { calculateBodyLength } from "@smithy/core/serde";
+import {
+  NODE_DISABLE_REQUEST_COMPRESSION_CONFIG_OPTIONS,
+  NODE_REQUEST_MIN_COMPRESSION_SIZE_BYTES_CONFIG_OPTIONS,
+} from "@smithy/middleware-compression";
+import { NodeHttpHandler as RequestHandler, streamCollector } from "@smithy/node-http-handler";
+
+import type { RestJsonProtocolClientConfig } from "./RestJsonProtocolClient";
 import { getRuntimeConfig as getSharedRuntimeConfig } from "./runtimeConfig.shared";
-import { emitWarningIfUnsupportedVersion } from "@aws-sdk/smithy-client";
 
 /**
  * @internal
  */
 export const getRuntimeConfig = (config: RestJsonProtocolClientConfig) => {
   emitWarningIfUnsupportedVersion(process.version);
+  const defaultsMode = resolveDefaultsModeConfig(config);
+  const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
+  awsCheckVersion(process.version);
+  const loaderConfig = {
+    profile: config?.profile,
+    logger: clientSharedValues.logger,
+  };
   return {
     ...clientSharedValues,
     ...config,
     runtime: "node",
-    base64Decoder: config?.base64Decoder ?? fromBase64,
-    base64Encoder: config?.base64Encoder ?? toBase64,
+    defaultsMode,
+    authSchemePreference: config?.authSchemePreference ?? loadNodeConfig(NODE_AUTH_SCHEME_PREFERENCE_OPTIONS, loaderConfig),
     bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
-    defaultUserAgentProvider:
-      config?.defaultUserAgentProvider ??
-      defaultUserAgent({ serviceId: clientSharedValues.serviceId, clientVersion: packageInfo.version }),
-    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-    md5: config?.md5 ?? Hash.bind(null, "md5"),
-    requestHandler: config?.requestHandler ?? new NodeHttpHandler(),
-    retryMode: config?.retryMode ?? loadNodeConfig(NODE_RETRY_MODE_CONFIG_OPTIONS),
-    sha256: config?.sha256 ?? Hash.bind(null, "sha256"),
+    credentialDefaultProvider: config?.credentialDefaultProvider ?? credentialDefaultProvider,
+    defaultSocketTimeout: getDefaultSocketTimeout(config?.requestHandler, 300_000),
+    defaultUserAgentProvider: config?.defaultUserAgentProvider ?? createDefaultUserAgentProvider({serviceId: clientSharedValues.serviceId, clientVersion: packageInfo.version}),
+    disableRequestCompression: config?.disableRequestCompression ?? loadNodeConfig(NODE_DISABLE_REQUEST_COMPRESSION_CONFIG_OPTIONS, config),
+    eventStreamPayloadHandlerProvider: config?.eventStreamPayloadHandlerProvider ?? eventStreamPayloadHandlerProvider,
+    eventStreamSerdeProvider: config?.eventStreamSerdeProvider ?? eventStreamSerdeProvider,
+    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS, config),
+    region: config?.region ?? loadNodeConfig(
+        NODE_REGION_CONFIG_OPTIONS,
+        {...NODE_REGION_CONFIG_FILE_OPTIONS, ...loaderConfig}
+    ),
+    requestHandler: RequestHandler.create(config?.requestHandler ?? defaultConfigProvider),
+    requestMinCompressionSizeBytes: config?.requestMinCompressionSizeBytes ?? loadNodeConfig(NODE_REQUEST_MIN_COMPRESSION_SIZE_BYTES_CONFIG_OPTIONS, config),
+    retryMode:
+      config?.retryMode ??
+      loadNodeConfig(
+        {
+          ...NODE_RETRY_MODE_CONFIG_OPTIONS,
+          default: async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE,
+        },
+        config
+      ),
     streamCollector: config?.streamCollector ?? streamCollector,
     streamHasher: config?.streamHasher ?? streamHasher,
-    useDualstackEndpoint: config?.useDualstackEndpoint ?? loadNodeConfig(NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-    useFipsEndpoint: config?.useFipsEndpoint ?? loadNodeConfig(NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
-    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+    useDualstackEndpoint: config?.useDualstackEndpoint ?? loadNodeConfig(NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS, loaderConfig),
+    useFipsEndpoint: config?.useFipsEndpoint ?? loadNodeConfig(NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS, loaderConfig),
+    userAgentAppId: config?.userAgentAppId ?? loadNodeConfig(NODE_APP_ID_CONFIG_OPTIONS, loaderConfig),
   };
 };

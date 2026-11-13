@@ -1,59 +1,24 @@
-import { Paginator } from "@aws-sdk/types";
+// smithy-typescript generated code
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListConfigurationSetsCommand,
   ListConfigurationSetsCommandInput,
   ListConfigurationSetsCommandOutput,
 } from "../commands/ListConfigurationSetsCommand";
-import { PinpointEmail } from "../PinpointEmail";
 import { PinpointEmailClient } from "../PinpointEmailClient";
-import { PinpointEmailPaginationConfiguration } from "./Interfaces";
+import type { PinpointEmailPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: PinpointEmailClient,
-  input: ListConfigurationSetsCommandInput,
-  ...args: any
-): Promise<ListConfigurationSetsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListConfigurationSetsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: PinpointEmail,
-  input: ListConfigurationSetsCommandInput,
-  ...args: any
-): Promise<ListConfigurationSetsCommandOutput> => {
-  // @ts-ignore
-  return await client.listConfigurationSets(input, ...args);
-};
-export async function* paginateListConfigurationSets(
+export const paginateListConfigurationSets: (
   config: PinpointEmailPaginationConfiguration,
   input: ListConfigurationSetsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListConfigurationSetsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListConfigurationSetsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["PageSize"] = config.pageSize;
-    if (config.client instanceof PinpointEmail) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof PinpointEmailClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected PinpointEmail | PinpointEmailClient");
-    }
-    yield page;
-    token = page.NextToken;
-    hasNext = !!token;
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListConfigurationSetsCommandOutput> = createPaginator<
+  PinpointEmailPaginationConfiguration,
+  ListConfigurationSetsCommandInput,
+  ListConfigurationSetsCommandOutput
+>(PinpointEmailClient, ListConfigurationSetsCommand, "NextToken", "NextToken", "PageSize");
